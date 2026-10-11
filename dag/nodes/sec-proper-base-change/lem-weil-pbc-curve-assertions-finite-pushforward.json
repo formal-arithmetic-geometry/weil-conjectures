@@ -260,5 +260,24 @@
   "by": "L",
   "result": "pass",
   "note": "statement made precise per assertion (Stacks 0A5D with the parts Stacks leaves out); 4 new nodes (1 Mathlib leaf, 1 closed by Lean); the edge-map base-change node assumes theta is the composite of composition isomorphisms, which the Lean of def-weil-pbc-cartesian-square (squareUpperStarIso) confirms"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.Curve.FinitePushforwardAssertions",
+  "declaration": "AlgebraicGeometry.IsCurve.finite_pushforward_assertions",
+  "file": "lean/Sheaf/AlgebraicGeometry/Curve/FinitePushforwardAssertions.lean",
+  "statement": "theorem IsCurve.finite_pushforward_assertions {k : Type u} [Field k] [IsAlgClosed k] (P : CurveCoefficientPair k) {Y : Scheme.{u}} (g : Y ⟶ Spec (.of k)) [IsCurve g] (f : P.C ⟶ Y) [IsFinite f] (hf : f ≫ g = P.toSpec) : let E := (forget₂ (ModuleCat.{u + 1} ℤ) AddCommGrpCat.{u + 1}).inv ⋙ ModuleCat.restrictScalars (ULift.ringEquiv : ULift.{u + 1} ℤ ≃+* ℤ).toRingHom let FX := (sheafCompose P.C.smallEtaleTopology E).obj P.F let G := (Etale.lowerStar AddCommGrpCat.{u + 1} f).obj P.F let FY := (sheafCompose Y.smallEtaleTopology E).obj G Y.IsTorsionAbelianSheaf G ∧ (IsCurve.VanishingAboveTwo (ULift.{u + 1} ℤ) FX → IsCurve.VanishingAboveTwo (ULift.{u + 1} ℤ) FY) ∧ (IsCurve.VanishingAboveOneOfIsAffine (ULift.{u + 1} ℤ) FX → IsCurve.VanishingAboveOneOfIsAffine (ULift.{u + 1} ℤ) FY) ∧ (IsCurve.VanishingAboveOneOfIsPrimaryTorsionSheaf (ULift.{u + 1} ℤ) FX k → IsCurve.VanishingAboveOneOfIsPrimaryTorsionSheaf (ULift.{u + 1} ℤ) FY k) ∧ (IsCurve.FiniteOfInvertibleOrder (ULift.{u + 1} ℤ) FX k → IsCurve.FiniteOfInvertibleOrder (ULift.{u + 1} ℤ) FY k) ∧ (IsCurve.FiniteOfIsProper (ULift.{u + 1} ℤ) P.toSpec FX → IsCurve.FiniteOfIsProper (ULift.{u + 1} ℤ) g FY) ∧ (IsCurve.BaseChangeOfInvertibleOrder (ULift.{u + 1} ℤ) P.toSpec FX → IsCurve.BaseChangeOfInvertibleOrder (ULift.{u + 1} ℤ) g FY) ∧ (IsCurve.BaseChangeOfIsProper (ULift.{u + 1} ℤ) P.toSpec FX → IsCurve.BaseChangeOfIsProper (ULift.{u + 1} ℤ) g FY) ∧ (IsCurve.SurjectiveRestrictionTwo (ULift.{u + 1} ℤ) FX → IsCurve.SurjectiveRestrictionTwo (ULift.{u + 1} ℤ) FY) ∧ (IsCurve.Assertions (ULift.{u + 1} ℤ) P.toSpec FX → IsCurve.Assertions (ULift.{u + 1} ℤ) g FY)",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": false,
+  "note": "The input is the recorded abelian CurveCoefficientPair. The recorded C1-C8 module-sheaf predicates are applied through the standard equivalence Ab ≃ Mod(ULift ℤ), using sheafCompose, the inverse forgetful equivalence, and restriction along ULift.ringEquiv. No extra module structure is hypothesized."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-cfp0941",
+  "group": "E1",
+  "result": "pass",
+  "note": "k alg closed IsAlgClosed; X,F = recorded abelian CurveCoefficientPair (IsCurve toSpec, torsion F); Y IsCurve g; f IsFinite with f≫g=toSpec (k-morphism); f_*F = recorded Etale.lowerStar Ab; (a) Scheme.IsTorsionAbelianSheaf; C1-C8 and bundle via recorded upstream predicates on Ab≃Mod(ULift ℤ) image, proper/base-change with toSpec vs g"
  }
 }
