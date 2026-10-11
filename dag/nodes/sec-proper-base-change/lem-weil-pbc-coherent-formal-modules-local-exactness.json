@@ -170,5 +170,23 @@
   "group": "F1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of F1; spot-checked by L: L read the report: C3 repaired by citing the existing kernel node, C4 restriction arguments written out, circular citation removed, B5 source label 087X recorded."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CoherentFormalModulesLocalExactness",
+  "declaration": "AlgebraicGeometry.coherentFormalModules_local_exactness",
+  "file": "lean/Sheaf/AlgebraicGeometry/CoherentFormalModulesLocalExactness.lean",
+  "statement": "theorem coherentFormalModules_local_exactness (X : Scheme.{u}) [IsNoetherian X] (I : X.IdealSheafData) : ∃ (hN : ∀ U : X.Opens, IsNoetherian U.toScheme) (ρ : ∀ U : X.Opens, CoherentFormalModule X I ⥤ @CoherentFormalModule U.toScheme (hN U) (I.comap U.ι)) (hz : ∀ U : X.Opens, (ρ U).PreservesZeroMorphisms), (∀ U : X.Opens, (ρ U).Additive ∧ ρ U ⋙ (IsCoherentFormalModule (I.comap U.ι)).ι = (IsCoherentFormalModule I).ι ⋙ (Functor.whiskeringRight ℕᵒᵖ X.Modules U.toScheme.Modules).obj (Scheme.Modules.restrictFunctor U.ι) ∧ ∀ S : ShortComplex (CoherentFormalModule X I), S.ShortExact → (@ShortComplex.map _ _ _ _ _ _ S (ρ U) (hz U)).ShortExact) ∧ (∀ (J : Type v) (U : J → X.Opens), iSup U = ⊤ → ∀ S : ShortComplex (CoherentFormalModule X I), (S.Exact ↔ ∀ j : J, (@ShortComplex.map _ _ _ _ _ _ S (ρ (U j)) (hz (U j))).Exact) ∧ (S.ShortExact ↔ ∀ j : J, (@ShortComplex.map _ _ _ _ _ _ S (ρ (U j)) (hz (U j))).ShortExact))",
+  "branch": "sheaf-dag",
+  "by": "N1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "N1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }
