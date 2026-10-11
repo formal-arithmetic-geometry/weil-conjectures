@@ -517,6 +517,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.TorAmplitude
 public import WeilConjectures.CategoryTheory.Endofunctor.IsoAlgebra
 public import WeilConjectures.CategoryTheory.Endofunctor.IsoAlgebraTwist
 public import WeilConjectures.CategoryTheory.Endofunctor.Shift
+public import WeilConjectures.CategoryTheory.Functor.KanExtension.ProjectionFormula
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.AcyclicSwallowing
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.CardinalGenerated
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.CardinalGeneratedCover
