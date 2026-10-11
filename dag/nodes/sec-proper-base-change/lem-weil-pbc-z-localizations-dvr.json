@@ -150,5 +150,24 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of G1; spot-checked by L: 4 steps: Z a PID, integrally closed by the lowest-terms argument; primes (0) and (p), dimension one; Z_(p) local with maximal ideal p Z_(p), the only primes (0) and p Z_(p) by the prime correspondence node, normal and Noetherian by the localization nodes; DVR by lem-sc-normal-dim1-dvr (tool use recorded). Correct. L removed the Stacks tag references from the statement post-merge."
  },
- "lead_note": " L 2026-10-10: Stacks tag references removed from the statement after the merge (tags stay in the source field)."
+ "lead_note": " L 2026-10-10: Stacks tag references removed from the statement after the merge (tags stay in the source field).",
+ "lean": {
+  "module": "Sheaf.RingTheory.IntegerPrimeLocalizations",
+  "declaration": "Int.prime_localizations_dvr",
+  "file": "lean/Sheaf/RingTheory/IntegerPrimeLocalizations.lean",
+  "statement": "theorem prime_localizations_dvr : IsDedekindDomain ℤ ∧ ringKrullDim ℤ = 1 ∧ IsFractionRing ℤ ℚ ∧ (∀ P : Ideal ℤ, P.IsPrime ↔ P = ⊥ ∨ ∃ p : ℕ, p.Prime ∧ P = Ideal.span {(p : ℤ)}) ∧ Nonempty (Localization.AtPrime (⊥ : Ideal ℤ) ≃ₐ[ℤ] ℚ) ∧ (∀ (P : Ideal ℤ) [P.IsPrime], P ≠ ⊥ → IsNoetherianRing (Localization.AtPrime P) ∧ IsLocalRing (Localization.AtPrime P) ∧ IsDiscreteValuationRing (Localization.AtPrime P) ∧ ∃ p : ℕ, p.Prime ∧ P = Ideal.span {(p : ℤ)} ∧ IsLocalRing.maximalIdeal (Localization.AtPrime P) = Ideal.span {algebraMap ℤ (Localization.AtPrime P) (p : ℤ)})",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-zld"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-zld",
+  "group": "K1",
+  "result": "fix",
+  "note": "reverted the delivery's change of existing node(s) lem-sc-normal-dim1-dvr (--revert-nodes; kept as on sheaf-dag); left out new module(s) lean/Sheaf/RingTheory/NormalLocalDimOneDvr.lean (--drop-files, or a record fixed to existing: true)"
+ }
 }
