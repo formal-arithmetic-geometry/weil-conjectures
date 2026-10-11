@@ -4983,3 +4983,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 14:34 L: merged deliver/F1/lem-weil-pbc-spec-surjective-base-change (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.SpecSurjectiveBaseChange AlgebraicGeometry.Spec.map_surjective_baseChange)
 - 14:34 L: merged deliver/E1/lem-weil-pbc-finite-type-module-support-closed (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.FiniteTypeModuleSupportClosed AlgebraicGeometry.Scheme.Modules.finite_type_module_support_closed)
 - 14:35 L: merged deliver/H1/lem-weil-pbc-smooth-over-field-regular-local (stage 2; reviewer PASS; first push; Sheaf.RingTheory.SmoothOverFieldRegularLocal Algebra.smooth_over_field_regular_local)
+- 14:35 L: merged deliver/C1/lem-weil-pbc-smooth-over-product-ring (stage 2; reviewer PASS; first push; Sheaf.RingTheory.SmoothOverProductRing Algebra.smooth_over_product_ring)
