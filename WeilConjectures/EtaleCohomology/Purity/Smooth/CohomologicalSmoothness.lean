@@ -314,6 +314,28 @@ theorem isCohomologicallySmooth_of_etale {U X : Scheme.{u}} (u : U ⟶ X) [Etale
 
 variable {Λ}
 
+/-- Cohomological smoothness only depends on the morphism, not on the compactifications. -/
+theorem IsCohomologicallySmooth.of_eq {X Y : Scheme.{u}} {f g : X ⟶ Y} (e : f = g)
+    [HasCompactification f] [HasCompactification g] (h : IsCohomologicallySmooth Λ f) :
+    IsCohomologicallySmooth Λ g := by
+  subst e
+  exact h
+
+/-- Blueprint `lem-pur-co-smooth-etale-locality`: Source-étale locality, split case.
+
+If `u : U ⟶ X` has a section `s` which is an open and closed immersion (as is every section of a
+separated étale morphism) and `u ≫ f` is cohomologically smooth, then so is `f`: indeed
+`f = s ≫ (u ≫ f)`, `s` is étale, hence cohomologically smooth
+(`AlgebraicGeometry.Etale.isCohomologicallySmooth_of_etale`), and cohomologically smooth
+morphisms compose (`AlgebraicGeometry.Etale.IsCohomologicallySmooth.comp`). -/
+theorem IsCohomologicallySmooth.of_comp_of_section {U X Y : Scheme.{u}} (u : U ⟶ X)
+    (f : X ⟶ Y) (s : X ⟶ U) (hs : s ≫ u = 𝟙 X) [IsOpenImmersion s] [IsClosedImmersion s]
+    [HasCompactification f] [HasCompactification (u ≫ f)]
+    (h : IsCohomologicallySmooth Λ (u ≫ f)) : IsCohomologicallySmooth Λ f := by
+  have e : s ≫ u ≫ f = f := by rw [← Category.assoc, hs, Category.id_comp]
+  have : HasCompactification (s ≫ u ≫ f) := by rw [e]; infer_instance
+  exact ((isCohomologicallySmooth_of_etale Λ s).comp h).of_eq e
+
 /-- Blueprint `lem-pur-co-smooth-etale-locality`: Source-étale locality.
 
 Let `u : U ⟶ X` be a surjective étale morphism of separated schemes of finite type and
@@ -345,6 +367,10 @@ between the two sides that is defined on `X`. The routes that were tried:
   (compatible with evaluation by `ihomComparison_ev`): it is the mate of the tensorator and is
   invertible only if `Lu^*` satisfies a projection formula with a left adjoint `Ru_!`, known in
   the library only for open immersions, which are never surjective étale covers in general;
+* the split case is proved: if `u` has a section that is an open and closed immersion,
+  `f = s ≫ (u ≫ f)` is a composite of cohomologically smooth morphisms
+  (`AlgebraicGeometry.Etale.IsCohomologicallySmooth.of_comp_of_section`); a general étale
+  cover has no section, and the composite argument does not go down along `u`;
 * stating the definition with the canonical maps instead makes the composition law and the
   smooth case depend on the same missing coherences. -/
 theorem IsCohomologicallySmooth.of_comp_of_surjective {U X Y : Scheme.{u}} (u : U ⟶ X)
