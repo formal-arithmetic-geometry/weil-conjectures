@@ -9,6 +9,7 @@ public import Mathlib.AlgebraicGeometry.FunctionField
 public import Mathlib.CategoryTheory.Presentable.Finite
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
 public import WeilConjectures.ConstructibleSheaf.Defs
+public import WeilConjectures.ConstructibleSheaf.FinitePushforward.Generators
 public import WeilConjectures.ConstructibleSheaf.FinitePushforward.GenericPoint
 public import WeilConjectures.SixFunctors.Finite.BaseChange
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.FinitelyPresentable
@@ -229,8 +230,8 @@ theorem Etale.isFinitelyPresentable_of_isConstructibleSheaf [IsNoetherianRing Λ
     (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) [IsConstructibleSheaf F] :
     IsFinitelyPresentable.{u} F := by
   -- Stacks 095N: sections over affine étale `X`-schemes give an epimorphism from a possibly
-  -- infinite sum of `v_! Λ` (093C); the supports of the cokernels of its finite subsums are
-  -- constructible (`v_! Λ` is constructible, 03SA) with empty intersection, so one is empty by
+  -- infinite sum of `v_! Λ` (093C, `Etale.epi_sigmaDesc_sectionHom`); the supports of the
+  -- cokernels of its finite subsums are constructible (`v_! Λ` is constructible, 03SA) with empty intersection, so one is empty by
   -- compactness of the constructible topology; likewise for the constructible kernel.
   obtain ⟨m, n, V, v, hv, hV, U, w, hw, hU, φ, π, hφπ, ⟨hc⟩⟩ :
       ∃ (m n : ℕ) (V : Fin m → Scheme.{u}) (v : ∀ j, V j ⟶ X) (hv : ∀ j, Etale (v j))
