@@ -1,24 +1,21 @@
 # Work queue
 
-448 items; claim with `tools/claim.py next <group> [--stage N]`.
+443 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (448)
+## Stage 2: nodes to state (443)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
 | `cor-galois-lisse-representations` | 1 | state |
 | `lem-pc-affine-perfect-colimit-descent` | 1 | state |
 | `lem-pc-affine-perfect-cut-degree-zero` | 1 | state |
-| `lem-pc-derived-module-free-generation` | 1 | state |
 | `lem-pc-derived-pullback-tensor-product` | 1 | state |
-| `lem-pc-derived-pullback-tensor-qcoh` | 1 | state |
 | `lem-pc-derived-pullback-tor-independent-flat-complex` | 1 | state |
 | `lem-pc-derived-qcoh-perfect-generation` | 1 | state |
 | `lem-pc-derived-tensor-transitivity` | 1 | state |
-| `lem-pc-flat-complex-derived-pullback` | 1 | state |
 | `lem-pc-koszul-affine-detection` | 1 | state |
 | `lem-pc-module-pullback-identity-composition` | 1 | state |
 | `lem-pc-perfect-affine-bounded-projective` | 1 | state |
@@ -81,13 +78,11 @@
 | `lem-weil-pbc-popescu-enlarge-solution-modulo` | 1 | state |
 | `lem-weil-pbc-popescu-solution-modulo-choose` | 1 | state |
 | `lem-weil-pbc-power-series-parameter-quotient` | 1 | state |
-| `lem-weil-pbc-power-set-complex-contractible` | 1 | state |
 | `lem-weil-pbc-presheaf-module-stalk-filtered-colimit` | 1 | state |
 | `lem-weil-pbc-principal-localization-naive-cotangent` | 1 | state |
 | `lem-weil-pbc-principal-maximal-dim-one-regular` | 1 | state |
 | `lem-weil-pbc-proj-graded-module-sheaf-exists` | 1 | state |
 | `lem-weil-pbc-proj-polynomial-twist-chart` | 1 | state |
-| `lem-weil-pbc-proj-standard-open-inclusion` | 1 | state |
 | `lem-weil-pbc-projective-dimension-ext-characterization` | 1 | state |
 | `lem-weil-pbc-projective-dimension-ses-kernel` | 1 | state |
 | `lem-weil-pbc-projective-dimension-well-defined` | 1 | state |
