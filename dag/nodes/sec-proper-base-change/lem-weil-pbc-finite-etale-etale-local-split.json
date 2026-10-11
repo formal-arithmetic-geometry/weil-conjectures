@@ -194,5 +194,24 @@
   "by": "L",
   "result": "accepted",
   "note": "Split reviewed: 5 steps along Etale Morphisms 04HN via 04HJ (closed immersions V_j -> U, etale hence open immersions by the new Mathlib leaf; shrink U to the intersection of the images through u minus the others; base change to the open U' is the open preimage). Correct, with the shrinking Stacks leaves implicit written out."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FiniteEtaleEtaleLocalSplit",
+  "declaration": "AlgebraicGeometry.finite_etale_etale_local_split",
+  "file": "lean/Sheaf/Paper/FiniteEtaleEtaleLocalSplit.lean",
+  "statement": "theorem finite_etale_etale_local_split {X Y : Scheme.{u}} (f : Y ⟶ X) [IsFinite f] [Etale f] (x : X) : ∃ (U : Scheme.{u}) (g : U ⟶ X) (u : U), Etale g ∧ g.base u = x ∧ ∃ (J : Type u) (V : J → Scheme.{u}) (ι : ∀ j, V j ⟶ pullback f g), Finite J ∧ Nonempty (IsColimit (Cofan.mk (pullback f g) ι)) ∧ (∀ j, IsOpenImmersion (ι j) ∧ IsClosedImmersion (ι j)) ∧ (∀ j : J, ∃ e : V j ≅ U, e.hom = ι j ≫ pullback.snd f g)",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-fes1016"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-fes1016",
+  "group": "J1",
+  "result": "fix",
+  "note": "f:Y⟶X [IsFinite f][Etale f], x; ∃ U g u, Etale g ∧ g.base u = x; Finite J, ι j : V j ⟶ pullback f g; split cover as Nonempty (IsColimit (Cofan.mk (pullback f g) ι)) (E1 5d9bb8370 spelling) replacing hand-written disjoint+cover ranges; ι open∧closed immersions; each ι j ≫ pullback.snd an iso V j ≅ U; J=∅ allowed; docstring given the node's 5-step proof"
  }
 }
