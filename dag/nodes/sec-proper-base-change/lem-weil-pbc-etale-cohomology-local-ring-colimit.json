@@ -254,5 +254,25 @@
  "reviewed": "Reviewed by L 2026-10-10: faithful to Etale Cohomology 09AX/03Q6 with the gaps written out (restrictions = pullbacks along inclusions, step 2; compatibility of theta_U, step 3; colimit sheaf = g_x^{-1}F, step 5); the limit theorem lem-weil-pbc-etale-cohomology-limit-of-schemes is applied to the affine neighbourhoods (new node lem-weil-pbc-local-ring-spec-limit-affine-neighbourhoods, 0GWT/01YW) and cofinality moves to all open neighbourhoods. The statement gained citations only (open immersions etale: new Mathlib leaf 02GP). Associativity/units of the composition isomorphisms are taken from lem-weil-pbc-derived-inverse-image-composition (1) of unit sk-def-exchange as a tool. No Mathlib match (no etale cohomology in Mathlib).",
  "tool_uses": [
   "lem-weil-pbc-derived-inverse-image-composition"
- ]
+ ],
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleCohomologyLocalRingColimit",
+  "declaration": "AlgebraicGeometry.etaleCohomology_localRing_colimit",
+  "statement": "theorem etaleCohomology_localRing_colimit {X : Scheme.{u}} (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (x : X) (q : ℕ) (P : X.Etaleᵒᵖ ⥤ AddCommGrpCat.{u + 1}) (hP : P = (Functor.flip ((uliftYoneda.{u + 1} ⋙ (Functor.whiskeringRight _ _ _).obj AddCommGrpCat.free ⋙ presheafToSheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}).op ⋙ Abelian.extFunctor q)).obj F) (D : (OpenNhds (X := X.toLocallyRingedSpace.toTopCat) x)ᵒᵖ ⥤ AddCommGrpCat.{u + 1}) (d : ∀ U : OpenNhds (X := X.toLocallyRingedSpace.toTopCat) x, D.obj (op U) ≅ P.obj (op (Scheme.Etale.mk (Scheme.Opens.ι U.1)))) (hD : ∀ (U V : OpenNhds (X := X.toLocallyRingedSpace.toTopCat) x) (f : V ⟶ U), D.map f.op = (d U).hom ≫ P.map (MorphismProperty.Over.homMk (P := @Etale) (Q := ⊤) (X := X) (A := Scheme.Etale.mk (Scheme.Opens.ι V.1)) (B := Scheme.Etale.mk (Scheme.Opens.ι U.1)) (X.homOfLE f.le) (X.homOfLE_ι f.le) trivial).op ≫ (d V).inv) : ∃ e : ∀ U : X.Opens, P.obj (op (Scheme.Etale.mk U.ι)) ≅ AddCommGrpCat.of (Sheaf.H ((Etale.upperStar AddCommGrpCat.{u + 1} U.ι).obj F) q), (∀ (U V : X.Opens) (h : V ≤ U), P.map (MorphismProperty.Over.homMk (P := @Etale) (Q := ⊤) (X := X) (A := Scheme.Etale.mk V.ι) (B := Scheme.Etale.mk U.ι) (X.homOfLE h) (X.homOfLE_ι h) trivial).op ≫ (e V).hom = (e U).hom ≫ AddCommGrpCat.ofHom (Etale.cohomologyMap (X.homOfLE h) ((Etale.upperStar AddCommGrpCat.{u + 1} U.ι).obj F) q) ≫ AddCommGrpCat.ofHom (Sheaf.H.map ((Etale.upperStarComp AddCommGrpCat.{u + 1} (X.homOfLE h) U.ι V.ι (X.homOfLE_ι h).symm).inv.app F) q)) ∧ ∃ (g : ∀ U : OpenNhds (X := X.toLocallyRingedSpace.toTopCat) x, Spec (X.presheaf.stalk x) ⟶ (Scheme.Opens.toScheme U.1)) (hg : ∀ U, X.fromSpecStalk x = g U ≫ (Scheme.Opens.ι U.1)), (∀ U (g' : Spec (X.presheaf.stalk x) ⟶ (Scheme.Opens.toScheme U.1)), g' ≫ (Scheme.Opens.ι U.1) = X.fromSpecStalk x → g' = g U) ∧ ∃ (B : Cocone D) (b : B.pt ≅ AddCommGrpCat.of (Sheaf.H ((Etale.upperStar AddCommGrpCat.{u + 1} (X.fromSpecStalk x)).obj F) q)), (∀ U, B.ι.app (op U) ≫ b.hom = (d U).hom ≫ (e U.1).hom ≫ AddCommGrpCat.ofHom (Etale.cohomologyMap (g U) ((Etale.upperStar AddCommGrpCat.{u + 1} (Scheme.Opens.ι U.1)).obj F) q) ≫ AddCommGrpCat.ofHom (Sheaf.H.map ((Etale.upperStarComp AddCommGrpCat.{u + 1} (g U) (Scheme.Opens.ι U.1) (X.fromSpecStalk x) (hg U)).inv.app F) q)) ∧ Nonempty (IsColimit B) ∧ ∀ U (ξ : D.obj (op U)), (B.ι.app (op U) ≫ b.hom) ξ = 0 → ∃ (V : OpenNhds (X := X.toLocallyRingedSpace.toTopCat) x) (f : V ⟶ U), D.map f.op ξ = 0",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-12",
+  "existing": false,
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleCohomologyLocalRingColimit.lean",
+  "note": "Second reading: actual object-cohomology diagram with restriction arrows, open-restriction comparison, unique local-scheme factorizations, and colimit cocone with prescribed canonical pullback legs. Uses Sheaf.H as the established Ext encoding, with the K-injective comparison deferred to stage 3.",
+  "fixed_by": "R-elc"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-elc",
+  "group": "J1",
+  "result": "fix",
+  "note": "X, F in AddCommGrpCat.{u+1}, x, q:ℕ; P tied to object cohomology (inline uliftYoneda Ext, def-weil-pbc-sites-and-cohomology record kept as Sheaf.H'); D over (OpenNhds x)ᵒᵖ tied by d/hD; e natural w.r.t. restriction = cohomologyMap+upperStarComp; unique factorization g of fromSpecStalk; cocone legs tied, IsColimit, vanishing clause; reverted the delivery's change of existing node(s) def-weil-pbc-sites-and-cohomology (--revert-nodes; kept as on sheaf-dag)"
+ }
 }
