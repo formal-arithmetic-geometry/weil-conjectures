@@ -170,5 +170,24 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.DualityEquationBaseChangeMap",
+  "declaration": "AlgebraicGeometry.dualityEquationBaseChangeMap",
+  "file": "lean/Sheaf/AlgebraicGeometry/DualityEquationBaseChangeMap.lean",
+  "statement": "def dualityEquationBaseChangeMap [∀ Z : Scheme.{u}, HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))] {X Y Y' : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X] [CompactSpace Y] [QuasiSeparatedSpace Y] [CompactSpace Y'] [QuasiSeparatedSpace Y'] (f : X ⟶ Y) (g : Y' ⟶ Y) (a : schemeDerivedQCohCategory Y ⥤ schemeDerivedQCohCategory X) (a' : schemeDerivedQCohCategory Y' ⥤ schemeDerivedQCohCategory (pullback f g)) (adjf : (schemeDerivedQCohProperty Y).lift ((schemeDerivedQCohProperty X).ι ⋙ schemeDerivedDirectImage f) (fun E ↦ (schemeDerivedDirectImage_qcqs_hasRightAdjoint X Y f).fst E.obj E.property) ⊣ a) (adjf' : (schemeDerivedQCohProperty Y').lift ((schemeDerivedQCohProperty (pullback f g)).ι ⋙ schemeDerivedDirectImage (pullback.snd f g)) (fun E ↦ (@schemeDerivedDirectImage_qcqs_hasRightAdjoint _ _ _ (quasiSeparatedSpace_of_quasiSeparated (pullback.snd f g)) _ _ _ _ (pullback.snd f g) _ _).fst E.obj E.property) ⊣ a') (hβ : ∀ E : schemeDerivedQCohCategory X, IsIso (schemeDerivedBaseChangeMap f (pullback.snd f g) g (pullback.fst f g) pullback.condition E.obj)) (K : schemeDerivedQCohCategory Y) : ((schemeDerivedQCohProperty (pullback f g)).lift ((schemeDerivedQCohProperty X).ι ⋙ derivedPullback (pullback.fst f g)) (fun E ↦ (derivedPullback_tensor_preserve_QCoh (pullback.fst f g)).1 E.obj E.property)).obj (a.obj K) ⟶ a'.obj (((schemeDerivedQCohProperty Y').lift ((schemeDerivedQCohProperty Y).ι ⋙ derivedPullback g) (fun E ↦ (derivedPullback_tensor_preserve_QCoh g).1 E.obj E.property)).obj K)",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-12",
+  "existing": false,
+  "fixed_by": "R-dbm"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-dbm",
+  "group": "C1",
+  "result": "fix",
+  "note": "qcqs X,Y,Y'; X'=pullback f g, g_X=fst, f'=snd; a,a' right adjoints of D_QCoh-restricted Rf_*, Rf'_*; beta=schemeDerivedBaseChangeMap on D_QCoh iso; unit/conjugate-inverse/counit composite with pinned adjunctions"
  }
 }
