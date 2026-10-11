@@ -122,7 +122,8 @@ theorem Scheme.Hom.exists_lift_of_valuationSubring (u : U ⟶ X) [Etale u] {L : 
     [IsSepClosed L] (A : ValuationSubring L) (a : Spec (.of A) ⟶ X)
     (s : Spec (.of (ResidueField A)) ⟶ U)
     (hs : s ≫ u = Spec.map (CommRingCat.ofHom (IsLocalRing.residue A)) ≫ a) :
-    ∃ σ : Spec (.of A) ⟶ U, σ ≫ u = a ∧ Spec.map (CommRingCat.ofHom (IsLocalRing.residue A)) ≫ σ = s := by
+    ∃ σ : Spec (.of A) ⟶ U,
+      σ ≫ u = a ∧ Spec.map (CommRingCat.ofHom (IsLocalRing.residue A)) ≫ σ = s := by
   let v := pullback.snd u a
   let s' : Spec (.of (ResidueField A)) ⟶ pullback u a := pullback.lift s _ hs
   obtain ⟨b⟩ : Nonempty (Spec (.of (ResidueField A))) := inferInstance
