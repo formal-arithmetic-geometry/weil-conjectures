@@ -3706,3 +3706,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 07:51 L: returned deliver/K1/lem-sc-derived-hom-mayer-vietoris (reviewer RETURN: Reviewer R-dmv1022 (stage 2, head b81a92926). The statement correction (exactness at Hom(E,F) and at the direct sum, Tag)
 - 07:51 L: merged deliver/G1/def-weil-pbc-formal-glueing-data (stage 2; reviewer FIX; first push; Sheaf.RingTheory.FormalGlueingData FormalGlueing.Data)
 - 07:52 L: merged deliver/G1/lem-pod-lisse-tensor-and-scalar-extension (stage 2; reviewer FIX; first push; Sheaf.Paper.LisseTensorScalarExtension AlgebraicGeometry.Scheme.lisse_tensor_and_scalar_extension; new nodes: def-pod-ring-scalar-extension)
+- 07:52 L: merged deliver/M1/lem-sc-etale-at-prime-flat-unramified-criterion (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.EtaleAtPrimeFlatUnramifiedCriterion Algebra.isEtaleAt_iff_exists_away_etale_iff_flat_localized_kaehler)
