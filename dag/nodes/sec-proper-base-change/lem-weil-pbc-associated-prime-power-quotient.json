@@ -173,5 +173,23 @@
   "worker": "stage1",
   "summary": "Statement kept (checked against Stacks 0CN5 hypothesis by hypothesis, and against its only citer lem-weil-pbc-cm-local-maximal-chain-length step 4, which uses exactly the annihilator definition and minimality over p+(x)). Proof follows the proof of 0CN5 in six steps: R/p ≅ N = Rz ⊂ M (elementary); Artin–Rees [lem-weil-pbc-artin-rees] with I=(x), n=c+1, giving N ∩ x^nM ⊂ xN; reduction to the image N̄ of N in M/x^nM via 02M3 [new leaf lem-weil-pbc-associated-prime-submodule]; q ∈ Supp(N̄) through the surjection N̄ → R/(p+(x)) and Supp = V(Ann) [lem-weil-pbc-finite-module-support-annihilator] (the source says only 'hence q is in the support'); q minimal in Supp(N̄) since p + (x^n) kills N̄; conclusion by 05BV for finite modules [new leaf lem-weil-pbc-minimal-support-prime-associated]. Two new Mathlib leaves (associatedPrimes.subset_of_injective; Module.associatedPrimes.minimalPrimes_annihilator_subset_associatedPrimes with Module.mem_support_iff_of_finite). The item itself is not in Mathlib (searches recorded at creation; one grep added)."
  },
- "reviewed": "2026-10-10 L: 6 steps checked against the 0CN5 proof: N = Rz = R/p, Artin-Rees with I = (x) gives N cap x^n M subset xN for n = c+1, the image of N in M/x^n M surjects onto R/(p+(x)) so q is in its support (written out via the annihilator), q minimal in Supp(N-bar) since p + (x^n) kills it, minimal support primes are associated (new leaf), Ass of a submodule (new leaf); citer cm-local-maximal-chain-length step 4 matches"
+ "reviewed": "2026-10-10 L: 6 steps checked against the 0CN5 proof: N = Rz = R/p, Artin-Rees with I = (x) gives N cap x^n M subset xN for n = c+1, the image of N in M/x^n M surjects onto R/(p+(x)) so q is in its support (written out via the annihilator), q minimal in Supp(N-bar) since p + (x^n) kills it, minimal support primes are associated (new leaf), Ass of a submodule (new leaf); citer cm-local-maximal-chain-length step 4 matches",
+ "lean": {
+  "module": "Sheaf.RingTheory.AssociatedPrimePowerQuotient",
+  "declaration": "Module.exists_mem_associatedPrimes_quotient_pow",
+  "file": "lean/Sheaf/RingTheory/AssociatedPrimePowerQuotient.lean",
+  "statement": "theorem exists_mem_associatedPrimes_quotient_pow {R : Type u} [CommRing R] [IsNoetherianRing R] [IsLocalRing R] {M : Type v} [AddCommGroup M] [Module R M] [Module.Finite R M] (x : R) (hx : x ∈ IsLocalRing.maximalIdeal R) (p q : Ideal R) (hp : p ∈ associatedPrimes R M) (hq : q ∈ (p ⊔ Ideal.span {x}).minimalPrimes) : ∃ n : ℕ, 1 ≤ n ∧ q ∈ associatedPrimes R (QuotSMulTop (x ^ n) M)",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-app1335",
+  "group": "H1",
+  "result": "pass",
+  "note": "CommRing+IsNoetherianRing+IsLocalRing R; Module.Finite M; x in maximalIdeal; p in root associatedPrimes (prime colon ⊥ {z} under Noetherian); q in (p ⊔ span{x}).minimalPrimes; ∃ n ≥ 1, q in associatedPrimes (QuotSMulTop (x^n) M) = M ⧸ x^n•⊤ (as landed FiniteLengthGlobalSubmodule); names #check'd with pp.fullNames"
+ }
 }

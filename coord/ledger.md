@@ -3897,3 +3897,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 08:51 L: merged deliver/J1/def-weil-pbc-kinjective-resolutions (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.KInjectiveResolutions CochainComplex.IsKInjectiveResolution)
 - 08:52 L: merged deliver/K1/lem-weil-pbc-affine-basic-set-difference (stage 2; reviewer FIX; first push; Sheaf.RingTheory.AffineBasicSetDifference PrimeSpectrum.exists_disjoint_basicConstructibleSetData_diff; dropped files: lean/Sheaf/Paper/AffineBasicSetDifference.lean)
 - 08:52 L: merged deliver/H1/lem-sc-picard-locus-closed (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.PicardLocusClosed AlgebraicGeometry.Scheme.picard_locus_closed)
+- 08:52 L: merged deliver/H1/lem-weil-pbc-associated-prime-power-quotient (stage 2; reviewer PASS; first push; Sheaf.RingTheory.AssociatedPrimePowerQuotient Module.exists_mem_associatedPrimes_quotient_pow)
