@@ -137,5 +137,24 @@
   "group": "H1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ecc (reviewer sub-agent of L); spot-checked: Source: blueprint node lemma-weil-pbc-etale-cohomology-continuity (master, sk-prop-h2, ## Proof and detailed form) and Stacks 03Q6 (etale-cohomology-lemma-directed-colimit-cohomology, abelian sheaf, base change of a qcqs X/A along a directed system of A-algebras; a special case of the colimit theorem). Item statement unchanged by the delivery; its hypotheses (cofiltered qcqs system, affine transitions, sheaf from one stage) are those of the blueprint; 'torsion' is stronger than needed and harmless since every cited node holds for abelian sheaves. Delivery changes only same_as=[], the second step's uses, proof_deps (removal of lemma-weil-pbc-fibre-product-limit, which neither step uses; proof_deps now equals the union of uses), mathlib_searches, status, split_report; no new nodes, no maintainer field touched. Step 1 (surjectivity): thm-weil-pbc-hypercover-cohomology (qcqs X, abelian F, colimit over finite split hypercovers, representatives use finitely many degrees) gives the cocycle; lemma-weil-pbc-finite-hypercover-descent (same inverse-system hypotheses) descends the (q+1)-truncation with matching maps covers at a late stage; lem-weil-pbc-etale-section-continuity applies to the descended terms, which are finite unions of qcqs etale fp schemes per def-weil-pbc-finite-split-hypercover, and gives descent of the degree-q components and (by injectivity of the colimit) of the finitely many equalities delta z=0. Step 2 (injectivity): same theorem for X_j and for X; vanishing gives a refinement of the pulled-back hypercover with primitive, lem-weil-pbc-hypercover-refinement makes it finite through degree q+1; the descent lemma covers morphisms between truncations, section continuity the primitive and boundary equations; q=0 is direct section continuity. All cited nodes in unit sk-prop-h2, no C7/C8 tool use. Mathlib searches recorded (leansearch, loogle, grep); the source declaration Scheme.H_map_isColimit_of_isFiltered (Reductions.lean:78, @[stacks 03Q6], blueprint tag lemma-weil-pbc-curve-filtered-cohomology) verified to be a fixed-scheme filtered colimit of sheaves, not this statement, so B10 does not apply. No new statement to test. 14:45-14:52 UTC"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleCohomologyContinuity",
+  "declaration": "AlgebraicGeometry.Etale.cohomology_continuity_of_isLimit",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleCohomologyContinuity.lean",
+  "statement": "theorem cohomology_continuity_of_isLimit {J : Type u} [SmallCategory J] [IsCofiltered J] (D : J ⥤ Scheme.{u}) [∀ j : J, CompactSpace (D.obj j)] [∀ j : J, QuasiSeparatedSpace (D.obj j)] [∀ {j k : J} (f : j ⟶ k), IsAffineHom (D.map f)] (c : Cone D) (hc : IsLimit c) (i : J) (F : Sheaf (D.obj i).smallEtaleTopology AddCommGrpCat.{u + 1}) (hF : F.IsTorsion) (q : ℕ) : (∀ x : Sheaf.H (((c.π.app i)^*[AddCommGrpCat.{u + 1}]).obj F) q, ∃ (j : J) (f : j ⟶ i) (y : Sheaf.H (((D.map f)^*[AddCommGrpCat.{u + 1}]).obj F) q), Sheaf.H.map ((upperStarComp AddCommGrpCat.{u + 1} (c.π.app j) (D.map f) (c.π.app i) (c.w f).symm).inv.app F) q (cohomologyMap (c.π.app j) _ q y) = x) ∧ (∀ (j : J) (f : j ⟶ i) (y : Sheaf.H (((D.map f)^*[AddCommGrpCat.{u + 1}]).obj F) q), Sheaf.H.map ((upperStarComp AddCommGrpCat.{u + 1} (c.π.app j) (D.map f) (c.π.app i) (c.w f).symm).inv.app F) q (cohomologyMap (c.π.app j) _ q y) = 0 → ∃ (k : J) (g : k ⟶ j), Sheaf.H.map ((upperStarComp AddCommGrpCat.{u + 1} (D.map g) (D.map f) (D.map (g ≫ f)) (D.map_comp g f)).inv.app F) q (cohomologyMap (D.map g) _ q y) = 0)",
+  "branch": "sheaf-dag",
+  "by": "Q1",
+  "date": "2026-10-11",
+  "existing": false,
+  "note": "The canonical filtered-colimit isomorphism is expressed by the equivalent elementwise surjectivity and eventual-zero criterion, over the cofiltered category of arrows j → i. All maps are the existing Etale.cohomologyMap followed by Sheaf.H.map of the canonical upperStarComp inverse."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "Q1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }
