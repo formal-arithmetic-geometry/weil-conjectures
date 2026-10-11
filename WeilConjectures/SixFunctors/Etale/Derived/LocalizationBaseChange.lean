@@ -129,6 +129,82 @@ theorem supportedLocalizationBoundary_baseChange (e : U ⟶ X) (i : Z ⟶ X) (j 
   simp only [Category.assoc] at h
   exact h
 
+variable {V₀ V₀' U₀ U₀' : Scheme.{u}} {e₁ : V₀' ⟶ V₀} {j₀' : V₀' ⟶ U₀'} {j₀ : V₀ ⟶ U₀}
+  {e₀ : U₀' ⟶ U₀}
+
+omit [HasSmallSiteSheafify A] in
+/-- **Base change of the adjoint of a degree-one class on an open.** For a commutative square
+`e₁ ≫ j = j' ≫ e` with `j`, `j'` arbitrary, the pullback along `e` of the adjoint
+`K ⟶ Rj_* (M[1]) ≅ (Rj_* M)[1]` of a class `y : Lj^* K ⟶ M[1]`, followed by the derived base
+change map `Ex_*`, is the adjoint of the pulled back class: this combines the compatibility of
+`Ex_*` with the units, its naturality and its compatibility with the shifts. -/
+lemma leftDerivedUpperStar_map_adjoint_comp_derivedBaseChangeMap (sq : CommSq e₁ j₀' j₀ e₀)
+    (K : DerivedCategory (Sheaf U₀.smallEtaleTopology A))
+    (M : DerivedCategory (Sheaf V₀.smallEtaleTopology A))
+    (y : (L((j₀)^*[A])).obj K ⟶ M⟦(1 : ℤ)⟧) :
+    (L((e₀)^*[A])).map ((derivedUpperStarLowerStarAdjunction A j₀).unit.app K ≫
+        (R((j₀)_*[A])).map y ≫ ((R((j₀)_*[A])).commShiftIso (1 : ℤ)).hom.app M) ≫
+        ((L((e₀)^*[A])).commShiftIso (1 : ℤ)).hom.app _ ≫
+          ((derivedBaseChangeMap A sq).app M)⟦(1 : ℤ)⟧' =
+      (derivedUpperStarLowerStarAdjunction A j₀').unit.app ((L((e₀)^*[A])).obj K) ≫
+        (R((j₀')_*[A])).map ((derivedSquareUpperStarIso A sq).hom.app K ≫
+          (L((e₁)^*[A])).map y ≫ ((L((e₁)^*[A])).commShiftIso (1 : ℤ)).hom.app M) ≫
+          ((R((j₀')_*[A])).commShiftIso (1 : ℤ)).hom.app _ := by
+  have h₁ := NatTrans.shift_app_comm (derivedBaseChangeMap A sq) (1 : ℤ) M
+  simp only [Functor.commShiftIso_comp_hom_app, Functor.comp_obj, Category.assoc] at h₁
+  have h₂ := (derivedBaseChangeMap A sq).naturality y
+  have h₃ := map_unit_derivedBaseChangeMap_app A sq K
+  simp only [Functor.map_comp, Category.assoc]
+  rw [h₁]
+  erw [reassoc_of% h₂]
+  rw [reassoc_of% h₃]
+
+omit [HasSmallSiteSheafify A] in
+/-- `AlgebraicGeometry.Etale.leftDerivedUpperStar_map_adjoint_comp_derivedBaseChangeMap`,
+precomposed with a map `σ : K' ⟶ Le^* K` and followed by a map `ρ : Le₁^* M ⟶ N`. -/
+lemma comp_leftDerivedUpperStar_map_adjoint_comp_derivedBaseChangeMap
+    (sq : CommSq e₁ j₀' j₀ e₀)
+    (K : DerivedCategory (Sheaf U₀.smallEtaleTopology A))
+    (K' : DerivedCategory (Sheaf U₀'.smallEtaleTopology A)) (σ : K' ⟶ (L((e₀)^*[A])).obj K)
+    (M : DerivedCategory (Sheaf V₀.smallEtaleTopology A))
+    (y : (L((j₀)^*[A])).obj K ⟶ M⟦(1 : ℤ)⟧)
+    (N : DerivedCategory (Sheaf V₀'.smallEtaleTopology A)) (ρ : (L((e₁)^*[A])).obj M ⟶ N) :
+    σ ≫ (L((e₀)^*[A])).map ((derivedUpperStarLowerStarAdjunction A j₀).unit.app K ≫
+        (R((j₀)_*[A])).map y ≫ ((R((j₀)_*[A])).commShiftIso (1 : ℤ)).hom.app M) ≫
+        ((L((e₀)^*[A])).commShiftIso (1 : ℤ)).hom.app _ ≫
+          ((derivedBaseChangeMap A sq).app M ≫ (R((j₀')_*[A])).map ρ)⟦(1 : ℤ)⟧' =
+      (derivedUpperStarLowerStarAdjunction A j₀').unit.app K' ≫
+        (R((j₀')_*[A])).map ((L((j₀')^*[A])).map σ ≫
+          (derivedSquareUpperStarIso A sq).hom.app K ≫ (L((e₁)^*[A])).map y ≫
+            ((L((e₁)^*[A])).commShiftIso (1 : ℤ)).hom.app M ≫ ρ⟦(1 : ℤ)⟧') ≫
+          ((R((j₀')_*[A])).commShiftIso (1 : ℤ)).hom.app N := by
+  rw [Functor.map_comp (shiftFunctor (DerivedCategory (Sheaf U₀'.smallEtaleTopology A)) (1 : ℤ)),
+    reassoc_of% leftDerivedUpperStar_map_adjoint_comp_derivedBaseChangeMap,
+    ← Functor.commShiftIso_hom_naturality, ← Adjunction.unit_naturality_assoc]
+  simp only [Functor.map_comp, Category.assoc]
+
 end Etale
 
 end AlgebraicGeometry
+
+namespace CategoryTheory.Functor
+
+variable {C D : Type*} [Category* C] [Category* D] [HasShift C ℤ] [HasShift D ℤ]
+
+/-- A degree-two composite `X⟦1⟧ ⟶ Y⟦1⟧⟦1⟧ ≅ Y⟦2⟧` pushed through a functor commuting with
+shifts, followed by a map on the target, is the degree-one composite shifted by one. -/
+lemma map_shift_comp_shiftFunctorAdd'_inv (F : C ⥤ D) [F.CommShift ℤ] {X Y : C} {Z : D}
+    (δ : X ⟶ Y⟦(1 : ℤ)⟧) (ψ : F.obj Y ⟶ Z) :
+    F.map (δ⟦(1 : ℤ)⟧' ≫ (shiftFunctorAdd' C (1 : ℤ) 1 2 rfl).inv.app Y) ≫
+        (F.commShiftIso (2 : ℤ)).hom.app Y ≫ ψ⟦(2 : ℤ)⟧' =
+      (F.commShiftIso (1 : ℤ)).hom.app X ≫
+        (F.map δ ≫ (F.commShiftIso (1 : ℤ)).hom.app Y ≫ ψ⟦(1 : ℤ)⟧')⟦(1 : ℤ)⟧' ≫
+          (shiftFunctorAdd' D (1 : ℤ) 1 2 rfl).inv.app Z := by
+  rw [F.commShiftIso_add' (show (1 : ℤ) + 1 = 2 from rfl)]
+  simp only [CommShift.isoAdd'_hom_app, Functor.map_comp, Category.assoc]
+  rw [← F.map_comp_assoc ((shiftFunctorAdd' C 1 1 2 _).inv.app Y), Iso.inv_hom_id_app,
+    CategoryTheory.Functor.map_id, Category.id_comp, F.commShiftIso_hom_naturality_assoc,
+    ← NatTrans.naturality]
+  rfl
+
+end CategoryTheory.Functor
