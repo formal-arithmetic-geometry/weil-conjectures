@@ -123,5 +123,23 @@
   "group": "K1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-rpv0148 (reviewer sub-agent of L); spot-checked: Statement = Stacks 064D (bounded projective P, P^i=0 for i<n, H^i(K)=0 for i>=n) incl. abelian generality; steps follow the 064D proof; cited representative node (Qh_map_bijective + isKProjective_of_projective) is for arbitrary abelian C; new leaf read at KProjective.lean:48 and :113 (Abelian C, IsStrictlyLE + projective terms), one-line specialization; vs lem-sc-bounded-above-projective-kprojective: different formulation (Hom-complex acyclicity), new leaf states Mathlib's defining null-homotopy form, kept; citer lem-pc-ring-derived-map-lift uses exactly these hypotheses. No repairs."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.PreciseVanishing",
+  "declaration": "CategoryTheory.precise_vanishing",
+  "file": "lean/Sheaf/Algebra/Homology/PreciseVanishing.lean",
+  "statement": "theorem precise_vanishing (A : Type u) [Category.{v} A] [Abelian A] [HasDerivedCategory.{w} A] (P K : CochainComplex A ℤ) (n : ℤ) (hPbounded : ∃ a b : ℤ, (∀ i : ℤ, i < a → IsZero (P.X i)) ∧ (∀ i : ℤ, b < i → IsZero (P.X i))) (hPprojective : ∀ i : ℤ, Projective (P.X i)) (hPtruncated : ∀ i : ℤ, i < n → IsZero (P.X i)) (hKvanishing : ∀ i : ℤ, n ≤ i → IsZero (K.homology i)) : ∀ f : (DerivedCategory.Q.obj P ⟶ DerivedCategory.Q.obj K), f = 0",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-rpv0833",
+  "group": "G1",
+  "result": "pass",
+  "note": "Stacks 064D in arbitrary Abelian A: P,K : CochainComplex A ℤ; bounded = termwise IsZero outside [a,b]; ∀i Projective (P.X i); IsZero (P.X i) for i<n (strict); IsZero (K.homology i) for n≤i (boundary incl.); conclusion every Q.obj P ⟶ Q.obj K is 0 (Mathlib DerivedCategory.Q = recorded mathlib_match of def-weil-abstract-derived-category); HasDerivedCategory.{w} = size convention; no dup in Mathlib (subsingleton_hom_of_isStrictlyLE_of_isStrictlyGE is the reverse direction; from_singleFunctor_obj_eq_zero_of_projective single object) or WeilConjectures; docstring carries 3 proof steps; header, tag, no Sheaf. prefix, lines ≤100, import used, proof sorry"
  }
 }
