@@ -207,7 +207,7 @@ private lemma prop_homologySheaf_obj_aux
       exact (P n).prop_of_iso ((homologySheafShiftIso _ (-b) n (n - b) (neg_add_eq_sub b n)).symm ≪≫
         (homologySheaf n).mapIso ((Φ.commShiftIso (-b)).app _).symm ≪≫
         (homologySheaf n).mapIso (Φ.mapIso e₃').symm) h'
-    have hP₂ := (P n).prop_X₂_of_exact
+    have hP₂ := (P n).prop_X₂_of_exact_of_isClosedUnderExtensions
       (homologySheaf_exact₂ _ (Φ.map_distinguished T hT) n) hP₁ hP₃
     exact (P n).prop_of_iso ((homologySheaf n).mapIso (Φ.mapIso eK)) hP₂
 
