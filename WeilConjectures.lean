@@ -1453,8 +1453,10 @@ public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.CurveTestDatum
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Defs
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.DegreeZero
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.FailureOverField
+public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.FailureOverField.ClosedOpen
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.FailureOverField.Detection
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.FailureOverField.FieldFailure
+public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.FailureOverField.Limit
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.FailureOverField.Survival
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.FailureOverField.Transition
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.FailureOverField.TransitionComposition
