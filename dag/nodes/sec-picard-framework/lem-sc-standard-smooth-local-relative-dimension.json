@@ -148,5 +148,23 @@
   "group": "C1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ssl1919 (reviewer sub-agent of L); spot-checked: Checked statement vs Tags 02G2/054L and def-sbc-smooth-morphisms (relative dimension = fibre dimension at every point); no cycle (lem-sc-smooth-omega-finite-locally-free created from another item, does not cite this one). FIX more, RETURN less: (1) C1 fault missed by the second reading: old Step 2/3 asserted without citation that Omega_{A/R} on the refined chart V (affine open of W_1, over a smaller base T in T_1) is a localization of Omega_{A_1/R_1}, which is neither a cited statement nor literally true (V need not be a principal open); repaired by citing lem-sc-smooth-omega-finite-locally-free (Omega^1_{X/S} locally free of constant rank d, restricting to Omega_{A/R}~ on affine pairs) and comparing ranks at kappa(x), proof now two steps, lem-weil-pbc-smooth-differentials-free-rank-fibre-dimension no longer used; (2) E7 statement change: dropped the unproved parenthetical 'equivalently, locally it factors through an etale map to A^d_R' (neither direction was proved and the dependent lem-sc-smooth-diagonal-regular-immersion does not use it) and spelled out 'relative dimension d' as a presentation with n-c=d; (3) tool_uses: kept local-standard-smooth, added standard-smooth Kaehler basis (generic tools), dropped differential-rank lemma.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Mathlib.AlgebraicGeometry.Morphisms.Smooth",
+  "declaration": "AlgebraicGeometry.SmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension",
+  "statement": "exists_isStandardSmoothOfRelativeDimension : ∀ (x : X), ∃ (U : Y.Opens) (_ : IsAffineOpen U)\n    (V : X.Opens) (_ : IsAffineOpen V) (_ : x ∈ V) (e : V ≤ f ⁻¹ᵁ U),\n    IsStandardSmoothOfRelativeDimension n (f.appLE U V e).hom",
+  "branch": "mathlib",
+  "by": "J1",
+  "date": "2026-10-11",
+  "existing": true,
+  "note": "Class projection, Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean:136–138. Ambient parameters: {n : ℕ} {X Y : Scheme.{u}} {f : X ⟶ Y} [SmoothOfRelativeDimension n f]. The dependency def-sbc-smooth-morphisms now explicitly records SmoothOfRelativeDimension as its accepted notion (K1, reviewed R-dsm1444). This changes the premise of the older no-match searches: using that recorded notion, the projection is exactly this item. Affineness supplies V ≅ Spec Γ(X,V) and U ≅ Spec Γ(Y,U); x ∈ V and V ≤ f ⁻¹ᵁ U imply f(x) ∈ U. No statement correction or new predicate."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-ssr0929",
+  "group": "J1",
+  "result": "pass",
+  "note": "#check of the class field: {n:ℕ}{X Y}{f}[SmoothOfRelativeDimension n f] = node's smooth of pure rel dim d via def-sbc-smooth-morphisms' recorded declarations list (R-dsm1444); ∀x, affine U (T=Spec Γ(Y,U)), affine V∋x, e:V≤f⁻¹ᵁU (f(V)⊆T, f(x)∈T), RingHom.IsStandardSmoothOfRelativeDimension n (f.appLE U V e).hom = submersive presentation with dimension n−c=d; n=0, empty X ok; axioms standard"
  }
 }
