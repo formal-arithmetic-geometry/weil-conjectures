@@ -293,6 +293,107 @@ lemma injective_crossι_app (x : 𝟙_ _ ⟶ X) (y : 𝟙_ _ ⟶ Y) {O : ((X ⊗
   obtain ⟨wb, rfl⟩ := e.surjective b
   exact congrArg e (hμ ((hcomp wa).symm.trans ((congrArg _ hab).trans (hcomp wb))))
 
+
+omit [IsProper X.hom] [GeometricallyIntegral X.hom] [IsProper Y.hom]
+  [GeometricallyIntegral Y.hom] in
+/-- The section `pr^* m` of `pr^* J` maps to the function `pr^♯ m`. -/
+lemma crossι_app_pullbackSection (x : 𝟙_ _ ⟶ X) (y : 𝟙_ _ ⟶ Y) {O : ((X ⊗ Y) ⊗ Z).left.Opens}
+    {U : (X ⊗ Y).left.Opens} (hle : O ≤ (fst (X ⊗ Y) Z).left ⁻¹ᵁ U)
+    (m : Γ((crossIdeal X Y x y).toModules, U)) :
+    (Scheme.Modules.unitSectionsEquiv O).symm ((crossι X Y Z x y).app O
+      (((Scheme.Modules.pullback (fst (X ⊗ Y) Z).left).obj
+        (crossIdeal X Y x y).toModules).presheaf.map (homOfLE hle).op
+        (Scheme.Modules.pullbackSection _ m))) =
+      (fst (X ⊗ Y) Z).left.appLE U O hle ((crossIdeal X Y x y).toModulesι.app U m) := by
+  rw [Scheme.Modules.Hom.app_presheaf_map, Scheme.Modules.Hom.comp_app,
+    ConcreteCategory.comp_apply, Scheme.Modules.pullback_map_app_pullbackSection]
+  erw [Scheme.Modules.pullbackObjUnitIso_hom_app_pullbackSection]
+  rfl
+
+omit [IsProper X.hom] [GeometricallyIntegral X.hom] [IsProper Y.hom]
+  [GeometricallyIntegral Y.hom] in
+set_option backward.isDefEq.respectTransparency false in
+/-- **Sections vanishing on both slices come from `𝒢`.** Let `O` be an affine open lying over
+an affine open `U` of `X × Y`, on which `L` has a free generator `ℓ`. A section of `L` over `O`
+vanishing on the slices `{x} × Y × Z` and `X × {y} × Z` lies in the image of `𝒢(O)`. -/
+lemma mem_range_twistι_app (x : 𝟙_ _ ⟶ X) (y : 𝟙_ _ ⟶ Y) (L : ((X ⊗ Y) ⊗ Z).left.Modules)
+    {O : ((X ⊗ Y) ⊗ Z).left.Opens} (hO : IsAffineOpen O) {U : (X ⊗ Y).left.Opens}
+    (hU : IsAffineOpen U) (hle : O ≤ (fst (X ⊗ Y) Z).left ⁻¹ᵁ U) {ℓ : Γ(L, O)}
+    (hℓ : Scheme.Modules.IsFreeGenerator ℓ) {h : Γ(L, O)}
+    (hx : Scheme.Modules.pullbackSection (lift (lift (toUnit _ ≫ x) (fst Y Z)) (snd Y Z)).left h = 0)
+    (hy : Scheme.Modules.pullbackSection (lift (lift (fst X Z) (toUnit _ ≫ y)) (snd X Z)).left h = 0) :
+    h ∈ Set.range ((twistι X Y Z x y L).app O) := by
+  obtain ⟨a, rfl⟩ := hℓ.exists_smul_eq h
+  have : IsClosedImmersion x.left := isClosedImmersion_of_comp_eq_id X.hom x.left (Over.w x)
+  have : IsClosedImmersion y.left := isClosedImmersion_of_comp_eq_id Y.hom y.left (Over.w y)
+  have hpx := isPullback_slice_left X Y Z x
+  have hpy := isPullback_slice_right X Y Z y
+  have : IsClosedImmersion (lift (lift (toUnit _ ≫ x) (fst Y Z)) (snd Y Z)).left :=
+    MorphismProperty.of_isPullback hpx.flip ‹_›
+  have : IsClosedImmersion (lift (lift (fst X Z) (toUnit _ ≫ y)) (snd X Z)).left :=
+    MorphismProperty.of_isPullback hpy.flip ‹_›
+  have hker {A : Scheme.{u}} (σ : A ⟶ ((X ⊗ Y) ⊗ Z).left) [IsClosedImmersion σ]
+      (hσ : Scheme.Modules.pullbackSection σ (a • ℓ) = 0) : a ∈ σ.ker.ideal ⟨O, hO⟩ := by
+    rw [Scheme.Hom.ker_apply, RingHom.mem_ker]
+    rw [Scheme.Modules.pullbackSection_smul] at hσ
+    refine (hℓ.pullback_unit_app σ).smul_left_injective ?_
+    change _ = (0 : Γ(A, σ ⁻¹ᵁ O)) • _
+    rw [zero_smul]
+    exact hσ
+  have hax := hker _ hx
+  have hay := hker _ hy
+  rw [hpx.ker_fst_eq_comap, Over.comp_left, Scheme.IdealSheafData.comap_comp,
+    Scheme.IdealSheafData.ideal_comap_appLE _ _ ⟨U, hU⟩ ⟨O, hO⟩ hle] at hax
+  rw [hpy.ker_fst_eq_comap, Over.comp_left, Scheme.IdealSheafData.comap_comp,
+    Scheme.IdealSheafData.ideal_comap_appLE _ _ ⟨U, hU⟩ ⟨O, hO⟩ hle] at hay
+  letI := ((fst (X ⊗ Y) Z).left.appLE U O hle).hom.toAlgebra
+  have : Flat (fst (X ⊗ Y) Z).left := inferInstanceAs (Flat (Limits.pullback.fst (X ⊗ Y).hom Z.hom))
+  have : Module.Flat Γ((X ⊗ Y).left, U) Γ(((X ⊗ Y) ⊗ Z).left, O) :=
+    (fst (X ⊗ Y) Z).left.flat_appLE hU hO hle
+  have hmem : a ∈ ((crossIdeal X Y x y).ideal ⟨U, hU⟩).map
+      ((fst (X ⊗ Y) Z).left.appLE U O hle).hom := by
+    change a ∈ ((x.left.ker.comap (fst X Y).left).ideal ⟨U, hU⟩ ⊓
+      (y.left.ker.comap (snd X Y).left).ideal ⟨U, hU⟩).map (algebraMap _ _)
+    rw [Ideal.map_inf_of_flat]
+    exact ⟨hax, hay⟩
+  clear hax hay hx hy hker
+  induction hmem using Submodule.span_induction with
+  | mem b hb =>
+    obtain ⟨j, hj, rfl⟩ := hb
+    obtain ⟨m, rfl⟩ : j ∈ Set.range ((crossIdeal X Y x y).toModulesι.app U) := by
+      rw [Scheme.IdealSheafData.range_toModulesι_app _ ⟨U, hU⟩]
+      exact hj
+    refine ⟨Scheme.Modules.tmulSection (((Scheme.Modules.pullback (fst (X ⊗ Y) Z).left).obj
+      (crossIdeal X Y x y).toModules).presheaf.map (homOfLE hle).op
+        (Scheme.Modules.pullbackSection _ m)) ℓ, ?_⟩
+    rw [twistι_app_tmulSection, crossι_app_pullbackSection]
+  | zero => exact ⟨0, by rw [map_zero, zero_smul]⟩
+  | add b c _ _ hb hc =>
+    obtain ⟨g₁, hg₁⟩ := hb
+    obtain ⟨g₂, hg₂⟩ := hc
+    exact ⟨g₁ + g₂, by rw [map_add, hg₁, hg₂, add_smul]⟩
+  | smul r b _ hb =>
+    obtain ⟨g, hg⟩ := hb
+    exact ⟨r • g, by rw [Scheme.Modules.Hom.app_smul, hg, smul_eq_mul, mul_smul]⟩
+
+
+omit [IsProper X.hom] [GeometricallyIntegral X.hom] [IsProper Y.hom]
+  [GeometricallyIntegral Y.hom] in
+/-- Over an affine open lying over an affine open of `X × Y` on which `L` is trivial, the map
+`𝒢 ⟶ L` is injective. -/
+lemma injective_twistι_app (x : 𝟙_ _ ⟶ X) (y : 𝟙_ _ ⟶ Y) (L : ((X ⊗ Y) ⊗ Z).left.Modules)
+    {O : ((X ⊗ Y) ⊗ Z).left.Opens} (hO : IsAffineOpen O) {U : (X ⊗ Y).left.Opens}
+    (hU : IsAffineOpen U) (hle : O ≤ (fst (X ⊗ Y) Z).left ⁻¹ᵁ U) {ℓ : Γ(L, O)}
+    (hℓ : Scheme.Modules.IsFreeGenerator ℓ) :
+    Function.Injective ((twistι X Y Z x y L).app O) := by
+  intro g₁ g₂ h
+  obtain ⟨a₁, rfl⟩ := (hℓ.bijective_tmulSection_right le_rfl).2 g₁
+  obtain ⟨a₂, rfl⟩ := (hℓ.bijective_tmulSection_right le_rfl).2 g₂
+  rw [twistι_app_tmulSection, twistι_app_tmulSection] at h
+  have h' := (hℓ.map le_rfl).smul_left_injective h
+  rw [(Scheme.Modules.unitSectionsEquiv O).symm.injective.eq_iff] at h'
+  rw [injective_crossι_app X Y Z x y hO hU hle h']
+
 end TheoremOfCube
 
 end AlgebraicGeometry
