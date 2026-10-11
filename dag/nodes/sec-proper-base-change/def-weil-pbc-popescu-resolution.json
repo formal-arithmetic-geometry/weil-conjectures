@@ -151,5 +151,29 @@
   "by": "L",
   "result": "pass",
   "note": "Reviewed by the lead (opus-relaunch6). Definition node (Situation 07F7) split: three elementary steps (h_A is a well-defined radical ideal since H_{A/R} is intrinsic by def-weil-pbc-singular-ideal; the two conditions of a resolution make sense in Lambda; nothing beyond the definition is asserted). 'Finite presentation' spelled out in the statement. No new nodes; the brief's guesses 07F8/07F9 are lemmas about resolutions used by 07FE/07FJ, correctly left to those splits."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.PopescuResolution",
+  "declaration": "Algebra.IsPopescuResolution",
+  "declarations": [
+   "Algebra.popescuIdeal",
+   "Algebra.IsPopescuResolution",
+   "Algebra.CanBePopescuResolved"
+  ],
+  "file": "lean/Sheaf/RingTheory/PopescuResolution.lean",
+  "statement": "def IsPopescuResolution {R : Type u} {A : Type v} {B : Type w} {Λ : Type t} [CommRing R] [CommRing A] [CommRing B] [CommRing Λ] [Algebra R A] [Algebra R B] [Algebra R Λ] [IsNoetherianRing R] [FinitePresentation R A] (α : A →ₐ[R] Λ) (q : PrimeSpectrum Λ) (β : A →ₐ[R] B) (γ : B →ₐ[R] Λ) : Prop",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-pop0905"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-pop0905",
+  "group": "K1",
+  "result": "fix",
+  "note": "Situation 07F7 + following paragraph (smoothing.tex 2074-2089): Noetherian R, FP A, R-alg map alpha, prime q as PrimeSpectrum, h_A = radical of Ideal.map alpha (singularIdeal R A); resolution = FP B, gamma.comp beta = alpha, h_A <= h_B, not h_B <= q; can be resolved = existential. Fix: CanBePopescuResolved carrier Type (max u v w) -> Type (max u v), removing a universe parameter undetermined by the arguments."
  }
 }
