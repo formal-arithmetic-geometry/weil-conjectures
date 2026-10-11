@@ -303,8 +303,13 @@ scoped notation "(" j ")_!open[" A "]" =>
 
 end ProEtale
 
-/-- The adjunction `j_! ⊣ j^*` between the extension by zero and the restriction along an
-open immersion. -/
+/-- Blueprint `lem-weil-extension-by-zero-adjunction`: the extension by zero `j_!` along an
+open immersion `j` is left adjoint to the restriction `j^*` on pro-étale sheaves.
+
+A morphism from the presheaf-level extension by zero of `M` to a sheaf `N` is a compatible
+family `M(V) ⟶ N(V)` over the objects factoring through `U`, i.e. a morphism `M ⟶ j^* N`, and
+sheafification preserves maps to sheaves. The form with the pullback `ProEtale.upperStar` in
+place of the restriction is `ProEtale.openImmersionLowerShriekUpperStarAdjunction`. -/
 noncomputable def ProEtale.openImmersionLowerShriekAdjunction :
     (j)_!open[A] ⊣ ProEtale.openImmersionRestriction A j :=
   ProEtale.localizationLowerShriekAdjunction A j inferInstance

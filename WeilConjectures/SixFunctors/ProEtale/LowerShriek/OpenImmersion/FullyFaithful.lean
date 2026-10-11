@@ -71,8 +71,8 @@ variable {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
 
 open ProEtale
 
-/-- **The unit of `j_! ⊣ j^*` is an isomorphism for an open immersion `j`**, i.e.
-`j^* j_! F ≅ F` naturally in `F`.
+/-- Blueprint `lem-exc-proetale-open-unit`: **the unit of `j_! ⊣ j^*` is an isomorphism for an
+open immersion `j`**, i.e. `j^* j_! F ≅ F` naturally in `F`.
 
 In the adjoint triple `j_! ⊣ j^* ⊣ j_*` the unit of the left adjunction is invertible
 exactly when the counit of the right one is, and the latter is
@@ -92,6 +92,13 @@ instance ProEtale.full_openImmersionLowerShriek : (j)_!open[A].Full :=
 
 instance ProEtale.faithful_openImmersionLowerShriek : (j)_!open[A].Faithful :=
   (ProEtale.fullyFaithfulOpenImmersionLowerShriek A j).faithful
+
+/-- The unit of `j_! ⊣ j^*` is an isomorphism, in the form of the adjunction
+`ProEtale.openImmersionLowerShriekUpperStarAdjunction` to `ProEtale.upperStar` rather than to
+`ProEtale.openImmersionRestriction`. -/
+instance ProEtale.isIso_openImmersionLowerShriekUpperStarAdjunction_unit :
+    IsIso (ProEtale.openImmersionLowerShriekUpperStarAdjunction A j).unit :=
+  (ProEtale.openImmersionLowerShriekUpperStarAdjunction A j).unit_isIso_of_L_fully_faithful
 
 set_option backward.isDefEq.respectTransparency false in
 /-- `j^*` of the counit of `j_! ⊣ j^*` is an isomorphism at every sheaf `G` on `X`.

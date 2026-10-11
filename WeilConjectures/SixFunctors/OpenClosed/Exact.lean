@@ -128,7 +128,8 @@ variable [hJX : X.smallEtaleTopology.HasSheafCompose (CategoryTheory.forget A)]
 
 include hJX hJZ in
 omit [HasSmallSiteSheafify A] in
-/-- **The open–closed short complex is short exact**: for an open immersion `j : U ⟶ X`, a
+/-- Blueprint `sk-prop-sf-open-closed-triangle`: **the open–closed short complex is short
+exact**: for an open immersion `j : U ⟶ X`, a
 closed immersion `i : Z ⟶ X` whose range is the complement of the range of `j`, and a sheaf
 `F` on the small étale site of `X`, the sequence
 

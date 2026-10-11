@@ -95,8 +95,9 @@ variable (hji : Disjoint (Set.range j.base) (Set.range i.base))
 
 variable (F : Sheaf X.smallEtaleTopology A)
 
-/-- **The open–closed short complex** `j_! j^* F ⟶ F ⟶ i_* i^* F` attached to an open
-immersion `j` and a morphism `i` whose range is disjoint from the range of `j`.
+/-- Blueprint `sk-prop-sf-open-closed-triangle`: **the open–closed short complex**
+`j_! j^* F ⟶ F ⟶ i_* i^* F` attached to an open immersion `j` and a morphism `i` whose range is
+disjoint from the range of `j`.
 
 The first map is the counit of `j_! ⊣ j^*` at `F` and the second is the unit of `i^* ⊣ i_*` at
 `F`. Their composite is zero because `Hom(j_! j^* F, i_* i^* F) ≃ Hom(j^* F, j^* i_* i^* F)` is

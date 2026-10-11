@@ -63,6 +63,7 @@ variable (Λ : Type (u + 1)) [CommRing Λ] {U Z X : Scheme.{u}} (j : U ⟶ X) (i
   [IsOpenImmersion j]
 
 variable {Λ} in
+omit [IsOpenImmersion j] in
 /-- The restrictions to a closed immersion and to its quasi-compact open complement jointly
 reflect isomorphisms of pro-étale sheaves of modules
 (`AlgebraicGeometry.ProEtale.isIso_of_isIso_upperStar_of_isCompl`), in the
@@ -96,13 +97,31 @@ abbrev IsOpenClosedRecollementTriangle
 
 instance isIso_derivedOpenImmersionLowerShriekUpperStarAdjunction_unit :
     IsIso (derivedOpenImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} Λ) j).unit :=
-  have : IsIso (openImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} Λ) j).unit :=
-    (openImmersionLowerShriekUpperStarAdjunction _ j).unit_isIso_of_L_fully_faithful
   Adjunction.isIso_unit_of_mapDerivedCategory (openImmersionLowerShriekUpperStarAdjunction _ j) _
 
 instance isIso_mapDerivedUpperStarLowerStarAdjunction_counit :
     IsIso (mapDerivedUpperStarLowerStarAdjunction i (ModuleCat.{u + 1} Λ)).counit :=
   inferInstance
+
+omit [QuasiCompact j] in
+/-- Blueprint `prop-weil-open-closed-recollement-adjunctions`: Adjunctions of the open-closed
+recollement.
+
+For an open immersion `j : U ⟶ X` and a closed immersion `i : Z ⟶ X`, on the unbounded derived
+categories of pro-étale sheaves of `Λ`-modules one has the adjunctions `j_! ⊣ j^*`
+(`AlgebraicGeometry.ProEtale.derivedOpenImmersionLowerShriekUpperStarAdjunction`) and
+`i^* ⊣ Ri_*` (`AlgebraicGeometry.ProEtale.mapDerivedUpperStarLowerStarAdjunction`), and the open
+unit `𝟭 ⟶ j^* j_!` and the closed counit `i^* Ri_* ⟶ 𝟭` are isomorphisms.
+
+Both `j_!` and `j^*` are exact, so the sheaf-level adjunction passes to the derived categories
+and its unit is invertible since it is so termwise (blueprint `lem-exc-proetale-open-unit`). The
+pullback `i^*` is exact, so `i_*` preserves K-injective complexes and the derived counit is
+computed termwise by the sheaf-level counit, an isomorphism by blueprint
+`lem-exc-proetale-closed-fully-faithful`. -/
+theorem isIso_openClosedRecollement_unit_and_counit :
+    IsIso (derivedOpenImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} Λ) j).unit ∧
+      IsIso (mapDerivedUpperStarLowerStarAdjunction i (ModuleCat.{u + 1} Λ)).counit :=
+  ⟨inferInstance, inferInstance⟩
 
 /-- Blueprint `prop-sf-open-closed-triangle-all-stages`, finite stage. -/
 theorem existsUnique_isOpenClosedRecollementTriangle
@@ -148,6 +167,7 @@ instance isIso_derivedAdicUpperStarLowerStarAdjunction_counit :
 
 variable [QuasiCompact j]
 
+omit [IsOpenImmersion j] in
 /-- The restrictions to a closed immersion and to its quasi-compact open complement jointly
 reflect isomorphisms of sheaves of modules over the constant `ℓ`-adic sheaf: the underlying
 sheaves are those of `ℚ̄_ℓ`-modules, where this is
