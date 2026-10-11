@@ -1,11 +1,11 @@
 # Work queue
 
-712 items; claim with `tools/claim.py next <group> [--stage N]`.
+708 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (712)
+## Stage 2: nodes to state (708)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -15,7 +15,6 @@
 | `lem-pc-derived-tensor-transitivity` | 1 | state |
 | `lem-pc-module-pullback-identity-composition` | 1 | state |
 | `lem-pur-essential-constant-cofinal-0a1s` | 1 | state |
-| `lem-pur-left-derived-defined-pointwise-kan-bridge` | 1 | state |
 | `lem-sc-base-change-curve` | 1 | state |
 | `lem-sc-hilb-dominating-power` | 1 | state |
 | `lem-sc-product-tangent-space-direct-sum` | 1 | state |
@@ -31,16 +30,13 @@
 | `lem-weil-pbc-etale-restriction-pullback-unit` | 1 | state |
 | `lem-weil-pbc-etale-retraction-finite-product-local` | 1 | state |
 | `lem-weil-pbc-etale-retraction-finite-type-splitting` | 1 | state |
-| `lem-weil-pbc-etale-ring-map-prescribed-residue-field` | 1 | state |
 | `lem-weil-pbc-etale-separated-stratified-finite` | 1 | state |
-| `lem-weil-pbc-etale-stratification-local-gluing` | 1 | state |
 | `lem-weil-pbc-exact-free-complex-last-minors-regular-sequence` | 1 | state |
 | `lem-weil-pbc-exact-sequence-ml` | 1 | state |
 | `lem-weil-pbc-ext-one-direct-sum` | 1 | state |
 | `lem-weil-pbc-fibre-degree-bound-field-points` | 1 | state |
 | `lem-weil-pbc-fibre-dimension-bounded-open-upstairs` | 1 | state |
 | `lem-weil-pbc-fibre-dimension-neighborhood` | 1 | state |
-| `lem-weil-pbc-fibre-product-affine-transition` | 1 | state |
 | `lem-weil-pbc-fibre-product-point-residue-field` | 1 | state |
 | `lem-weil-pbc-fibre-ring-local-ring-natural-iso` | 1 | state |
 | `lem-weil-pbc-fibre-ring-noetherian` | 1 | state |
