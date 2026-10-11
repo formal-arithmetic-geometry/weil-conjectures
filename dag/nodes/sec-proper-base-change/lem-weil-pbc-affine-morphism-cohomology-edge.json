@@ -163,5 +163,24 @@
   "by": "L",
   "result": "accepted",
   "note": "4 steps following Stacks 089W with the Leray step by hand: R^p h_* F = 0 (imported 01XC node lem-pc-affine-morphism-hi, tool use), h_* I^bullet a Gamma-acyclic resolution of h_* F (new unsplit 01EX (2) node), a lift gamma to an injective resolution and Leray's acyclicity lemma (imported lemma-weil-pbc-leray-acyclicity, tool use) make H^p(Gamma(S, gamma)) an isomorphism, and the edge map is that isomorphism by independence of choices (fmap-functorial (1))."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AffineMorphismCohomologyEdge",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.affine_morphism_cohomology_edge",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineMorphismCohomologyEdge.lean",
+  "statement": "theorem affine_morphism_cohomology_edge {X S : Scheme.{v}} (h : X ⟶ S) [IsAffineHom h] (F : X.Modules) [F.IsQuasicoherent] : (∀ (p : ℕ), 0 < p → IsZero (((RingedSpace.moduleDirectImage h.toLRSHom.toShHom).rightDerived p).obj F)) ∧ (∀ (p : ℕ), IsIso (moduleCohomologyEdgeMap h F p) ∧ ∀ (r : Γ(S, ⊤)) (x : (RingedSpace.moduleCohomology S.toRingedSpace p).obj ((pushforward h).obj F)), moduleCohomologyEdgeMap h F p (r • x) = h.appTop r • @id ((RingedSpace.moduleCohomology X.toRingedSpace p).obj F) (moduleCohomologyEdgeMap h F p x))",
+  "branch": "sheaf-dag",
+  "by": "R1",
+  "date": "2026-10-12",
+  "existing": false,
+  "note": "Positive right-derived module direct images vanish; the recorded identity h-map edge map is invertible and compatible with global-section scalars through h.appTop. No derived-category choices are required."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "R1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }

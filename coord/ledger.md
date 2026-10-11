@@ -5433,3 +5433,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 16:37 L: merged deliver/R1/lem-sc-smooth-proper-diagonal-koszul-dual (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.KoszulRegularImmersionDualizing AlgebraicGeometry.koszulRegularImmersion_dualizing; new nodes: def-sc-locally-ranked-exterior-complex)
 - 16:38 L: merged deliver/R1/def-pc-upper-shriek-right-adjoint (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.UpperShriekRightAdjoint AlgebraicGeometry.IsProperUpperShriek)
 - 16:38 L: merged deliver/U1/lem-sc-boundary-derivation-square-zero (stage 2; reviewer FIX; first push; Sheaf.Paper.BoundaryDerivationSquareZero AlgebraicGeometry.boundary_derivation_square_zero)
+- 16:38 L: merged deliver/R1/lem-weil-pbc-affine-morphism-cohomology-edge (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.AffineMorphismCohomologyEdge AlgebraicGeometry.Scheme.Modules.affine_morphism_cohomology_edge)
