@@ -18,13 +18,16 @@ If a homological complex `K` is exact at `j`, then `K.toCycles i j` is an epimor
 
 A natural endomorphism of the identity functor induces itself on homology
 (`HomologicalComplex.homologyMap_eq_app_homology`).
+
+For a projective object `P`, there are no nonzero morphisms `P ⟶ H_j(K)` if and only if every
+cycle `P ⟶ K_j` is a boundary (`HomologicalComplex.subsingleton_hom_homology_iff_of_projective`).
 -/
 
 @[expose] public section
 
 universe v₁ v₂ u₁ u₂
 
-open CategoryTheory
+open CategoryTheory Limits
 
 namespace CategoryTheory
 
@@ -70,7 +73,6 @@ lemma homologyMap_eq_app_homology (β : 𝟭 C ⟶ 𝟭 C) {K : HomologicalCompl
   rw [← cancel_epi (K.homologyπ i), homologyπ_naturality, hc]
   exact (β.naturality (K.homologyπ i)).symm
 
-
 section CyclesMap
 
 variable {K L : HomologicalComplex C c} (φ : K ⟶ L)
@@ -91,5 +93,30 @@ lemma eqToHom_comp_cyclesMap {a b : ι}
   simp
 
 end CyclesMap
+
+/-- For a projective object `P`, there are no nonzero morphisms `P ⟶ H_j(K)` if and only if
+every morphism `P ⟶ K_j` killed by the differential factors through the incoming
+differential. -/
+lemma subsingleton_hom_homology_iff_of_projective (K : HomologicalComplex C c) {i j k : ι}
+    (hi : c.prev j = i) (hk : c.next j = k) (P : C) [Projective P] :
+    Subsingleton (P ⟶ K.homology j) ↔
+      ∀ f : P ⟶ K.X j, f ≫ K.d j k = 0 → ∃ g : P ⟶ K.X i, g ≫ K.d i j = f := by
+  have hT : (ShortComplex.mk (K.toCycles i j) (K.homologyπ j) (by simp)).Exact :=
+    ShortComplex.exact_of_g_is_cokernel _ (K.homologyIsCokernel i j hi)
+  refine ⟨fun h f hf ↦ ?_, fun h ↦ ⟨fun φ ψ ↦ ?_⟩⟩
+  · refine ⟨hT.liftFromProjective (K.liftCycles f k hk hf) (Subsingleton.elim _ _), ?_⟩
+    rw [← K.toCycles_i, ← Category.assoc]
+    erw [hT.liftFromProjective_comp]
+    exact K.liftCycles_i f k hk hf
+  · suffices H : ∀ φ : P ⟶ K.homology j, φ = 0 by rw [H φ, H ψ]
+    intro φ
+    obtain ⟨g, hg⟩ := h (Projective.factorThru φ (K.homologyπ j) ≫ K.iCycles j)
+      (by rw [Category.assoc, K.iCycles_d, comp_zero])
+    have : Projective.factorThru φ (K.homologyπ j) = K.liftCycles
+        (Projective.factorThru φ (K.homologyπ j) ≫ K.iCycles j) k hk
+          (by rw [Category.assoc, K.iCycles_d, comp_zero]) := by
+      rw [← cancel_mono (K.iCycles j), liftCycles_i]
+    rw [← Projective.factorThru_comp φ (K.homologyπ j), this]
+    exact K.liftCycles_homologyπ_eq_zero_of_boundary _ k hk g hg.symm
 
 end HomologicalComplex

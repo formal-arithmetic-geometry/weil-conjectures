@@ -8,6 +8,7 @@ module
 public import Mathlib.CategoryTheory.Adjunction.Unique
 public import Mathlib.CategoryTheory.Monoidal.Closed.Basic
 public import Mathlib.CategoryTheory.Monoidal.Rigid.Braided
+public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Closed.Basic
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Closed.InternalCurrying
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.Basic
 
@@ -40,6 +41,10 @@ and `End (𝟙_ C) = R`.
 
 - `CategoryTheory.IsDualizable.ihom_unit`: in a braided monoidal closed category, the internal
   dual of a dualizable object is dualizable.
+
+- `CategoryTheory.MonoidalClosed.IsPerfectPairing.braiding_hom_comp`,
+  `CategoryTheory.MonoidalClosed.isPerfectPairing_braiding_hom_comp_iff`: perfectness of a
+  pairing of dualizable objects is symmetric in the two variables.
 
 ## Implementation notes
 
@@ -124,6 +129,58 @@ theorem isIso_toIhomIhomUnit (X : C) [HasRightDual X] : IsIso (toIhomIhomUnit X)
     rw [h]
     infer_instance
   exact IsIso.of_isIso_comp_right _ ((pre e.inv).app (𝟙_ C))
+
+/-- A perfect pairing `b : X ⊗ Y ⟶ 𝟙_ C` of a dualizable object `X` is the evaluation of an
+exact pairing of `Y` and `X` (`IsPerfectPairing.evaluation_exactPairing`): `Y` is a
+left dual of `X`. -/
+@[instance_reducible]
+noncomputable def IsPerfectPairing.exactPairing {X Y : C} (hX : IsDualizable X)
+    {b : X ⊗ Y ⟶ 𝟙_ C} (h : IsPerfectPairing b) : ExactPairing Y X :=
+  have := h.isIso
+  have : IsIso (ihomUnitTensorToIhom X X) := by
+    obtain ⟨_⟩ := hX
+    let := BraidedCategory.exactPairing_swap X Xᘁ
+    exact isIso_ihomUnitTensorToIhom Xᘁ X X
+  let := exactPairingOfIsIso X
+  exactPairingCongrLeft (asIso (curry b))
+
+/-- The evaluation of the exact pairing `IsPerfectPairing.exactPairing` of a perfect pairing
+`b` is `b`. -/
+lemma IsPerfectPairing.evaluation_exactPairing {X Y : C} (hX : IsDualizable X)
+    {b : X ⊗ Y ⟶ 𝟙_ C}
+    (h : IsPerfectPairing b) :
+    letI := h.exactPairing hX
+    ε_ Y X = b :=
+  uncurry_curry b
+
+/-- Blueprint `rem-ptr-pod-perfect-derived-pairing-6` (pointer to the properties of
+`def-pod-perfect-derived-pairing`): perfectness of a pairing is symmetric in the two variables.
+
+If `X` is dualizable and the pairing `b : X ⊗ Y ⟶ 𝟙_ C` is perfect, `Y ≅ [X, 𝟙_ C]`, then the
+swapped pairing `Y ⊗ X ⟶ X ⊗ Y ⟶ 𝟙_ C` is perfect as well, `X ≅ [Y, 𝟙_ C]`: `b` is the
+evaluation of an exact pairing of `Y` and `X`, and the braiding turns it into an exact pairing
+of `X` and `Y` whose evaluation is the swapped pairing. -/
+theorem IsPerfectPairing.braiding_hom_comp {X Y : C} (hX : IsDualizable X)
+    {b : X ⊗ Y ⟶ 𝟙_ C} (h : IsPerfectPairing b) : IsPerfectPairing ((β_ Y X).hom ≫ b) := by
+  let := h.exactPairing hX
+  let := BraidedCategory.exactPairing_swap Y X
+  have hε : ε_ X Y = (β_ Y X).hom ≫ b := by
+    rw [← h.evaluation_exactPairing hX]
+    rfl
+  exact ⟨hε ▸ isIso_curry_evaluation X Y⟩
+
+/-- Blueprint `rem-ptr-pod-perfect-derived-pairing-6` (pointer to the properties of
+`def-pod-perfect-derived-pairing`): perfectness of a pairing is symmetric in the two variables.
+
+In a symmetric monoidal closed category, a pairing `b : X ⊗ Y ⟶ 𝟙_ C` of dualizable objects
+(for instance perfect point complexes) is perfect, `Y ≅ [X, 𝟙_ C]`, if and only if the swapped
+pairing `Y ⊗ X ⟶ X ⊗ Y ⟶ 𝟙_ C` is perfect, `X ≅ [Y, 𝟙_ C]`. -/
+theorem isPerfectPairing_braiding_hom_comp_iff {C : Type*} [Category C] [MonoidalCategory C]
+    [SymmetricCategory C] [MonoidalClosed C] {X Y : C} (hX : IsDualizable X)
+    (hY : IsDualizable Y) {b : X ⊗ Y ⟶ 𝟙_ C} :
+    IsPerfectPairing ((β_ Y X).hom ≫ b) ↔ IsPerfectPairing b := by
+  refine ⟨fun h ↦ ?_, fun h ↦ h.braiding_hom_comp hX⟩
+  simpa using h.braiding_hom_comp hY
 
 section
 
