@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.CategoryTheory.Adjunction.ProjectionMapAssoc
 public import WeilConjectures.SixFunctors.Etale.Derived.OpenImmersionLowerShriekProjection
-public import WeilConjectures.SixFunctors.Etale.Derived.LowerStarProjection
+public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekProjection
 
 /-!
 # Associativity of the projection formula
@@ -103,6 +103,33 @@ lemma derivedOpenImmersionLowerShriekProjectionMap_assoc
   (derivedOpenImmersionLowerShriekUpperStarAdjunction A j).projectionMap_assoc L((j)^*[A])
     (mapDerivedCategoryUpperStarDerivedTensorIso A j).hom
     (mapDerivedCategoryUpperStarDerivedTensorIso_assoc A j) K M M'
+
+section Compactification
+
+variable {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)
+  {FC : A → A → Type*} {CC : A → Type (u + 1)}
+  [∀ (P Q : A), FunLike (FC P Q) (CC P) (CC Q)] [ConcreteCategory.{u + 1} A FC]
+  [(CategoryTheory.forget A).ReflectsIsomorphisms]
+  [PreservesFilteredColimitsOfSize.{u + 1, u + 1} (CategoryTheory.forget A)]
+  [∀ Z : Scheme.{u}, Z.smallEtaleTopology.HasSheafCompose (CategoryTheory.forget A)]
+
+/-- The projection map `Rf_!(c) M ⊗ᴸ L ⟶ Rf_!(c)(M ⊗ᴸ Lf^* L)` is compatible with the
+associators. -/
+theorem projectionMapOfCompactification_assoc (M : DerivedCategory (Sheaf X.smallEtaleTopology A))
+    (L L' : DerivedCategory (Sheaf Y.smallEtaleTopology A)) :
+    letI := leftDerivedUpperStarOplaxMonoidal A f
+    ((projectionMapOfCompactification A c).app M).app (L ⊗ L') ≫
+        (Rf_!(c)[A]).map (M ◁ Functor.OplaxMonoidal.δ L((f)^*[A]) L L') ≫
+          (Rf_!(c)[A]).map (α_ M (L((f)^*[A]).obj L) (L((f)^*[A]).obj L')).inv =
+      (α_ ((Rf_!(c)[A]).obj M) L L').inv ≫
+        (((projectionMapOfCompactification A c).app M).app L ▷ L') ≫
+          ((projectionMapOfCompactification A c).app (M ⊗ L((f)^*[A]).obj L)).app L' := by
+  letI := leftDerivedUpperStarOplaxMonoidal A f
+  simp only [projectionMapOfCompactification_app_app]
+  trace_state
+  sorry
+
+end Compactification
 
 end Etale
 
