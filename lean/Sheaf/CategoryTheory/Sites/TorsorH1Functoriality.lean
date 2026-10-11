@@ -1,6 +1,8 @@
-import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
-import WeilConjectures.CategoryTheory.Sites.Torsor
-import Sheaf.Topology.ClosedImmersionPushforwardCohomology
+module
+
+public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
+public import WeilConjectures.CategoryTheory.Sites.Torsor
+public import Sheaf.Topology.ClosedImmersionPushforwardCohomology
 
 /-! # Functoriality of the torsor description of H¹
 
@@ -12,6 +14,8 @@ Source: literature/stacks-project/cohomology.tex, Lemmas 02FQ and 02UV
 * `torsor_h1_functoriality` records the two naturality assertions for the
   canonical torsor description of first cohomology.
 -/
+
+@[expose] public section
 
 open CategoryTheory CategoryTheory.Limits
 open TopologicalSpace

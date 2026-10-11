@@ -3,13 +3,15 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import Sheaf.RingTheory.GRing
-import WeilConjectures.Mathlib.RingTheory.Henselian
-import Mathlib.AlgebraicGeometry.Morphisms.Proper
-import Mathlib.AlgebraicGeometry.Morphisms.Finite
-import Mathlib.AlgebraicGeometry.Morphisms.Etale
-import Mathlib.AlgebraicGeometry.Pullbacks
-import Mathlib.CategoryTheory.MorphismProperty.Comma
+module
+
+public import Sheaf.RingTheory.GRing
+public import WeilConjectures.Mathlib.RingTheory.Henselian
+public import Mathlib.AlgebraicGeometry.Morphisms.Proper
+public import Mathlib.AlgebraicGeometry.Morphisms.Finite
+public import Mathlib.AlgebraicGeometry.Morphisms.Etale
+public import Mathlib.AlgebraicGeometry.Pullbacks
+public import Mathlib.CategoryTheory.MorphismProperty.Comma
 
 /-!
 # Finite étale lifting by henselian G-ring approximation
@@ -17,6 +19,8 @@ import Mathlib.CategoryTheory.MorphismProperty.Comma
 Source: Stacks Project, Fundamental Groups, proof of Lemma 0GS2, the essential-surjectivity
 paragraph for a Noetherian G-ring (blueprint: lem-weil-pbc-finite-etale-lifting-approximation).
 -/
+
+@[expose] public section
 
 universe u
 

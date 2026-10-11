@@ -3,13 +3,17 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group Q1
 -/
-import Sheaf.Algebra.Homology.PerfectRHomBaseChangeMap
+module
+
+public import Sheaf.Algebra.Homology.PerfectRHomBaseChangeMap
 
 /-! # RHom base change for a perfect complex
 
 Source: Stacks Project, more-algebra.tex, Lemma 0A6A, lemma-base-change-RHom, clause (1)
 (blueprint: lem-pc-base-change-rhom-perfect).
 -/
+
+@[expose] public section
 
 universe u₁ w₁
 

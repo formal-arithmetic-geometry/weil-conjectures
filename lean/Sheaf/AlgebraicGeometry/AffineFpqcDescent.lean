@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Mathlib.AlgebraicGeometry.Morphisms.Affine
-import Mathlib.AlgebraicGeometry.Sites.Fpqc
-import WeilConjectures.CategoryTheory.Comma.Over.DescentDatum
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.Affine
+public import Mathlib.AlgebraicGeometry.Sites.Fpqc
+public import WeilConjectures.CategoryTheory.Comma.Over.DescentDatum
 
 /-!
 # Effective fpqc descent of affine morphisms
@@ -13,6 +15,8 @@ import WeilConjectures.CategoryTheory.Comma.Over.DescentDatum
 Source: Stacks Project, Descent, Lemma 35.37.1 (Tag 0245)
 (blueprint: lem-galois-fpqc-affine-descent-effective).
 -/
+
+@[expose] public section
 
 universe u
 

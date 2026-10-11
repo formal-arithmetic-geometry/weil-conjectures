@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import Sheaf.AlgebraicGeometry.DiagonalConormal
-import WeilConjectures.AlgebraicGeometry.Modules.Differentials
+module
+
+public import Sheaf.AlgebraicGeometry.DiagonalConormal
+public import WeilConjectures.AlgebraicGeometry.Modules.Differentials
 
 /-!
 # Conormal sheaf of the diagonal and relative differentials
@@ -12,6 +14,8 @@ import WeilConjectures.AlgebraicGeometry.Modules.Differentials
 Source: Stacks Project, Tag 08S2
 (blueprint: lem-sc-smooth-proper-diagonal-conormal-differentials).
 -/
+
+@[expose] public section
 
 universe v
 

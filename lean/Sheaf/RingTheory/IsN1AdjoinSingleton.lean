@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Sheaf.RingTheory.NagataRing
-import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
-import Mathlib.RingTheory.Localization.AsSubring
+module
+
+public import Sheaf.RingTheory.NagataRing
+public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
+public import Mathlib.RingTheory.Localization.AsSubring
 
 /-!
 # Normalization of a monogenic subalgebra of a normal Nagata domain's fraction field
@@ -13,6 +15,8 @@ import Mathlib.RingTheory.Localization.AsSubring
 Source: Stacks Project, Algebra, Proposition 10.162.15 (Tag 0334), statement (***) at the
 end of Step 4 and its proof in Step 5 (blueprint: lem-weil-pbc-normal-nagata-monogenic-n1).
 -/
+
+@[expose] public section
 
 universe u v
 

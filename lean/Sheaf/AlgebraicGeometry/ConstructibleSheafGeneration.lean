@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Mathlib.CategoryTheory.Limits.Shapes.Products
-import Sheaf.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
+module
+
+public import Mathlib.CategoryTheory.Limits.Shapes.Products
+public import Sheaf.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 
 /-!
 # Constructible module sheaves generate the small etale topos
@@ -12,6 +14,8 @@ import Sheaf.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 Source: Stacks Project, Tags 093B(2), 03EW(3), 03SA(3) and 03S8(3)
 (blueprint: lem-weil-pbc-constructible-generation).
 -/
+
+@[expose] public section
 
 universe u
 

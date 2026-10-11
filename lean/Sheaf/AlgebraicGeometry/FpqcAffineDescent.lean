@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import Mathlib.AlgebraicGeometry.Sites.Fpqc
+module
+
+public import Mathlib.AlgebraicGeometry.Sites.Fpqc
 
 /-!
 # Descent of affine morphisms along fpqc coverings
@@ -11,6 +13,8 @@ import Mathlib.AlgebraicGeometry.Sites.Fpqc
 Source: Stacks Project, Descent, Lemma Tag 02L5, descent direction
 (blueprint: lem-weil-pbc-fpqc-descend-affine).
 -/
+
+@[expose] public section
 
 universe u v
 

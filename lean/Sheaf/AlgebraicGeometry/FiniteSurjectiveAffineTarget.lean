@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF contributors
 -/
-import Mathlib.AlgebraicGeometry.Morphisms.Finite
-import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
-import Mathlib.AlgebraicGeometry.AffineScheme
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.Finite
+public import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
+public import Mathlib.AlgebraicGeometry.AffineScheme
 
 /-!
 # Affineness of a finite surjective image
@@ -13,6 +15,8 @@ import Mathlib.AlgebraicGeometry.AffineScheme
 Source: literature/stacks-project/limits.tex, Limits, Lemma 01ZT (label lemma-affine)
 (blueprint: lem-weil-pbc-finite-surjective-affine-target).
 -/
+
+@[expose] public section
 
 universe u
 

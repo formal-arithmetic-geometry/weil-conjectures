@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import Mathlib.RingTheory.Etale.Basic
-import Mathlib.RingTheory.FiniteType
-import Mathlib.RingTheory.LocalRing.ResidueField.Basic
-import Sheaf.RingTheory.QuasiFiniteAtPrime
+module
+
+public import Mathlib.RingTheory.Etale.Basic
+public import Mathlib.RingTheory.FiniteType
+public import Mathlib.RingTheory.LocalRing.ResidueField.Basic
+public import Sheaf.RingTheory.QuasiFiniteAtPrime
 
 /-!
 # Finite-type splitting from étale retractions
@@ -14,6 +16,8 @@ import Sheaf.RingTheory.QuasiFiniteAtPrime
 Source: Stacks Project, Algebra, Lemma Tag 04GG, proof of (8) ⇒ (11), using Tag 00UK
 (blueprint: lem-weil-pbc-etale-retraction-finite-type-splitting).
 -/
+
+@[expose] public section
 
 universe u v
 

@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import Mathlib.Algebra.Homology.HomotopyCategory
-import Mathlib.Algebra.Homology.HomologicalComplexAbelian
-import Mathlib.Algebra.Homology.ShortComplex.ShortExact
-import Mathlib.Algebra.Exact.Basic
+module
+
+public import Mathlib.Algebra.Homology.HomotopyCategory
+public import Mathlib.Algebra.Homology.HomologicalComplexAbelian
+public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
+public import Mathlib.Algebra.Exact.Basic
 
 /-!
 # Exactness of homotopy morphisms into a termwise injective complex
@@ -14,6 +16,8 @@ import Mathlib.Algebra.Exact.Basic
 Source: Stacks Project, injectives.tex, Lemma lemma-characterize-K-injective,
 successor step (blueprint: lem-pur-kinjective-homotopy-exact-injective-target).
 -/
+
+@[expose] public section
 
 universe v u
 

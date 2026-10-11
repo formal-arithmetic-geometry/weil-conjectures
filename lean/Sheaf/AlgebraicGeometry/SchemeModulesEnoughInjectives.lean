@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Mathlib.CategoryTheory.Preadditive.Injective.Basic
+module
+
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Mathlib.CategoryTheory.Preadditive.Injective.Basic
 
 /-!
 # Enough injectives for sheaves of modules on a scheme
@@ -12,6 +14,8 @@ import Mathlib.CategoryTheory.Preadditive.Injective.Basic
 Source: Stacks Project, Injectives, Lemma 01DI
 (blueprint: lem-weil-pbc-scheme-modules-enough-injectives).
 -/
+
+@[expose] public section
 
 universe u
 

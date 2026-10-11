@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Mathlib.RingTheory.RingHom.Smooth
-import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
-import Mathlib.RingTheory.Localization.AtPrime.Basic
+module
+
+public import Mathlib.RingTheory.RingHom.Smooth
+public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
+public import Mathlib.RingTheory.Localization.AtPrime.Basic
 
 /-!
 # Smooth algebras over normal rings
@@ -13,6 +15,8 @@ import Mathlib.RingTheory.Localization.AtPrime.Basic
 Source: Stacks Project, Algebra, Lemma Tag 033C
 (blueprint: lem-weil-pbc-smooth-over-normal-ring-normal).
 -/
+
+@[expose] public section
 
 universe uR uS
 

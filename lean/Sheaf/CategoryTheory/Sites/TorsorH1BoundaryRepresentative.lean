@@ -3,13 +3,15 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import WeilConjectures.CategoryTheory.Sites.Torsor
-import Mathlib.AlgebraicGeometry.Scheme
-import Mathlib.CategoryTheory.Sites.Spaces
-import Mathlib.CategoryTheory.Sites.LeftExact
-import Mathlib.Algebra.Category.Grp.AB
-import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Sheaf
-import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.HasExt
+module
+
+public import WeilConjectures.CategoryTheory.Sites.Torsor
+public import Mathlib.AlgebraicGeometry.Scheme
+public import Mathlib.CategoryTheory.Sites.Spaces
+public import Mathlib.CategoryTheory.Sites.LeftExact
+public import Mathlib.Algebra.Category.Grp.AB
+public import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Sheaf
+public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.HasExt
 
 /-!
 # Torsor classes as boundaries of the representative extension
@@ -18,6 +20,8 @@ Source: literature/stacks-project/cohomology.tex, Lemma 02FQ
 (cohomology-lemma-torsors-h1), construction of the extension and its boundary of one
 (blueprint: lem-sc-torsor-h1-boundary-representative).
 -/
+
+@[expose] public section
 
 universe u
 

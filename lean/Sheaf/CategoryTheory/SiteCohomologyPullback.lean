@@ -3,14 +3,16 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group U1
 -/
-import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
-import Mathlib.CategoryTheory.Sites.Pullback
-import Sheaf.CategoryTheory.SitePullbackAbelianExact
-import Sheaf.CategoryTheory.Abelian.HorseshoeDeltaFunctor
-import Sheaf.CategoryTheory.Abelian.RightDerived.FullLongExactSequence
-import Sheaf.CategoryTheory.DeltaFunctor
-import Sheaf.CategoryTheory.RightDerivedUniversalDeltaFunctor
-import Sheaf.CategoryTheory.SiteMorphismComposition
+module
+
+public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
+public import Mathlib.CategoryTheory.Sites.Pullback
+public import Sheaf.CategoryTheory.SitePullbackAbelianExact
+public import Sheaf.CategoryTheory.Abelian.HorseshoeDeltaFunctor
+public import Sheaf.CategoryTheory.Abelian.RightDerived.FullLongExactSequence
+public import Sheaf.CategoryTheory.DeltaFunctor
+public import Sheaf.CategoryTheory.RightDerivedUniversalDeltaFunctor
+public import Sheaf.CategoryTheory.SiteMorphismComposition
 
 /-!
 # Pullback on cohomology over objects of sites
@@ -19,6 +21,8 @@ Source: Stacks Project, Cohomology, Tags 01F7, 01F8 and 01FB; Sites, Tag 08J6;
 Derived Categories, Tag 015B
 (blueprint: lem-weil-pbc-site-cohomology-pullback).
 -/
+
+@[expose] public section
 
 universe u
 

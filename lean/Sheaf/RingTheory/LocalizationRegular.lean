@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group G1
 -/
-import Sheaf.RingTheory.GRing
+module
+
+public import Sheaf.RingTheory.GRing
 
 /-!
 # Localization maps are regular
@@ -12,6 +14,8 @@ Source: Stacks Project, More on Algebra, proof of Lemma 07PT and Definition 07BZ
 Algebra, Lemmas 00HT, 00DK and 00CQ, Proposition 00CP
 (blueprint: lem-weil-pbc-localization-regular).
 -/
+
+@[expose] public section
 
 universe u v
 

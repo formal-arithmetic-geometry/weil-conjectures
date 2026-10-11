@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group G1
 -/
-import Sheaf.Algebra.Homology.KFlat
-import Sheaf.Algebra.Homology.HomComplex
-import Mathlib.Algebra.Homology.HomotopyCategory.KInjective
+module
+
+public import Sheaf.Algebra.Homology.KFlat
+public import Sheaf.Algebra.Homology.HomComplex
+public import Mathlib.Algebra.Homology.HomotopyCategory.KInjective
 
 /-!
 # K-injectivity of the sheaf Hom complex
@@ -14,6 +16,8 @@ Source: Stacks Project, Cohomology on Sites, Lemma 21.34.8 (Tag 0A96),
 `sites-cohomology-lemma-RHom-from-K-flat-into-K-injective`
 (blueprint: lem-pur-hom-kflat-into-kinjective).
 -/
+
+@[expose] public section
 
 universe u v
 

@@ -3,11 +3,13 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group N1
 -/
-import Mathlib.Topology.Sheaves.Sheaf
-import Mathlib.Topology.Spectral.Basic
-import Mathlib.Topology.Constructible
-import Mathlib.Topology.LocallyConstant.Basic
-import Mathlib.CategoryTheory.Limits.HasLimits
+module
+
+public import Mathlib.Topology.Sheaves.Sheaf
+public import Mathlib.Topology.Spectral.Basic
+public import Mathlib.Topology.Constructible
+public import Mathlib.Topology.LocallyConstant.Basic
+public import Mathlib.CategoryTheory.Limits.HasLimits
 
 /-!
 # Directed presentations of sheaves on spectral spaces
@@ -16,6 +18,8 @@ Source: Stacks Project, Modules, Tags 0CAI and 0CAL, combined in the proof of
 Étale Cohomology, Tag 09ZG.
 (blueprint: lem-weil-pbc-spectral-sheaf-colimit-constant-embeddings)
 -/
+
+@[expose] public section
 
 universe u
 

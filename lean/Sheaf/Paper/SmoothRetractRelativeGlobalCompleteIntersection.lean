@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group J1
 -/
-import Mathlib.Algebra.MvPolynomial.Basic
-import Mathlib.RingTheory.Ideal.Cotangent
-import Mathlib.RingTheory.Smooth.Basic
-import Sheaf.Paper.RelativeGlobalCompleteIntersectionPresentation
+module
+
+public import Mathlib.Algebra.MvPolynomial.Basic
+public import Mathlib.RingTheory.Ideal.Cotangent
+public import Mathlib.RingTheory.Smooth.Basic
+public import Sheaf.Paper.RelativeGlobalCompleteIntersectionPresentation
 
 /-!
 # Smooth retract by a relative global complete intersection
@@ -15,6 +17,8 @@ Source: Stacks Project, Smoothing Ring Maps, Lemma 07CG (lemma-syntomic-complete
 line 567 and proof lines 580--588 (blueprint:
 lem-weil-pbc-smooth-retract-relative-global-complete-intersection).
 -/
+
+@[expose] public section
 
 universe u v
 

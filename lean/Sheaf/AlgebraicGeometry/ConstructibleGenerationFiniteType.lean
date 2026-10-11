@@ -3,16 +3,20 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
-import Mathlib.CategoryTheory.Filtered.Basic
-import Sheaf.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
+public import Mathlib.CategoryTheory.Filtered.Basic
+public import Sheaf.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 
 /-!
 # Constructible generation on a finite-type scheme
 
 Source: Stacks Project, Tag 03SA, part (3) (blueprint: lem-kun-03sa).
 -/
+
+@[expose] public section
 
 universe u
 

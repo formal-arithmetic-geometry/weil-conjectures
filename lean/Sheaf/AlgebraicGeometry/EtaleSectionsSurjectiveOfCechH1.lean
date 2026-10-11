@@ -3,11 +3,13 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Mathlib.AlgebraicGeometry.Sites.AffineEtale
-import Mathlib.Algebra.Homology.ShortComplex.ShortExact
-import Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
-import Mathlib.CategoryTheory.Limits.Constructions.Over.Products
-import Mathlib.CategoryTheory.Sites.SheafCohomology.Cech
+module
+
+public import Mathlib.AlgebraicGeometry.Sites.AffineEtale
+public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
+public import Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
+public import Mathlib.CategoryTheory.Limits.Constructions.Over.Products
+public import Mathlib.CategoryTheory.Sites.SheafCohomology.Cech
 
 /-!
 # Surjectivity of étale sections from vanishing Čech H¹
@@ -15,6 +17,8 @@ import Mathlib.CategoryTheory.Sites.SheafCohomology.Cech
 Source: Stacks Project, Cohomology on Sites, Lemma 03F8 (lemma-ses-cech-h1)
 (blueprint: lem-weil-pbc-ses-cech-h1-surjective).
 -/
+
+@[expose] public section
 
 universe u
 

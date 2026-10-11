@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import Sheaf.AlgebraicGeometry.MeromorphicModule
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
-import Mathlib.Topology.GDelta.Basic
+module
+
+public import Sheaf.AlgebraicGeometry.MeromorphicModule
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
+public import Mathlib.Topology.GDelta.Basic
 
 /-!
 # The denominator ideal of a regular meromorphic section
@@ -13,6 +15,8 @@ import Mathlib.Topology.GDelta.Basic
 Source: Stacks Project, Divisors, Tag 02P0, Lemma 31.24.9
 (blueprint: lem-sc-hilbert-denominator-ideal-nowhere-dense).
 -/
+
+@[expose] public section
 
 universe v
 

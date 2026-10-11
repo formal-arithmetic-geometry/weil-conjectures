@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group T1
 -/
-import Mathlib.AlgebraicGeometry.Morphisms.Proper
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 
 /-!
 # Descent of separatedness along a surjective universally closed morphism
@@ -11,6 +13,8 @@ import Mathlib.AlgebraicGeometry.Morphisms.Proper
 Source: Stacks Project, Morphisms, Lemma 09MQ, part (4)
 (blueprint: lem-weil-pbc-surjective-universally-closed-separated).
 -/
+
+@[expose] public section
 
 universe u
 

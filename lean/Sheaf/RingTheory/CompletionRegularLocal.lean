@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import Mathlib.RingTheory.AdicCompletion.LocalRing
-import Mathlib.RingTheory.RegularLocalRing.Defs
+module
+
+public import Mathlib.RingTheory.AdicCompletion.LocalRing
+public import Mathlib.RingTheory.RegularLocalRing.Defs
 
 /-!
 # Regularity and completion of Noetherian local rings
@@ -12,6 +14,8 @@ import Mathlib.RingTheory.RegularLocalRing.Defs
 Source: Stacks Project, More on Algebra, Lemma Tag 07NY
 (blueprint: lem-weil-pbc-completion-regular-local).
 -/
+
+@[expose] public section
 
 universe u
 

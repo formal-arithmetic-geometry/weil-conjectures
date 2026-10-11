@@ -3,11 +3,13 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import Sheaf.AlgebraicGeometry.Coherent
-import Sheaf.AlgebraicGeometry.IdealModuleProductStalk
-import Mathlib.AlgebraicGeometry.Noetherian
-import Mathlib.Algebra.Homology.ShortComplex.ShortExact
-import Mathlib.CategoryTheory.Preadditive.Biproducts
+module
+
+public import Sheaf.AlgebraicGeometry.Coherent
+public import Sheaf.AlgebraicGeometry.IdealModuleProductStalk
+public import Mathlib.AlgebraicGeometry.Noetherian
+public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
+public import Mathlib.CategoryTheory.Preadditive.Biproducts
 
 /-!
 # Devissage of a property of coherent modules
@@ -15,6 +17,8 @@ import Mathlib.CategoryTheory.Preadditive.Biproducts
 Source: literature/stacks-project/coherent.tex, Lemma 01YM
 (blueprint: lem-weil-pbc-coherent-property-devissage-integral-subschemes).
 -/
+
+@[expose] public section
 
 universe u
 

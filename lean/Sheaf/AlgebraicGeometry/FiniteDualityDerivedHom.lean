@@ -1,10 +1,12 @@
-import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
-import Sheaf.AlgebraicGeometry.DirectImageAlgebraDerivedCategory
-import Sheaf.Algebra.Homology.DerivedInternalHom
-import Mathlib.AlgebraicGeometry.Morphisms.Finite
-import Mathlib.AlgebraicGeometry.Noetherian
-import Mathlib.Algebra.Homology.DerivedCategory.TStructure
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackFree
+module
+
+public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
+public import Sheaf.AlgebraicGeometry.DirectImageAlgebraDerivedCategory
+public import Sheaf.Algebra.Homology.DerivedInternalHom
+public import Mathlib.AlgebraicGeometry.Morphisms.Finite
+public import Mathlib.AlgebraicGeometry.Noetherian
+public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackFree
 
 /-!
 # Finite Grothendieck duality as derived internal Hom
@@ -12,6 +14,8 @@ import Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackFree
 Source: literature/stacks-project/duality.tex, Tags 0AX2 and 0AX3
 (blueprint: lem-sc-finite-duality-derived-hom).
 -/
+
+@[expose] public section
 
 universe u wX wY wA
 

@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import WeilConjectures.AlgebraicGeometry.Modules.FreeGenerator
-import WeilConjectures.AlgebraicGeometry.Modules.Invertible
-import Sheaf.AlgebraicGeometry.TensorPullback
+module
+
+public import WeilConjectures.AlgebraicGeometry.Modules.FreeGenerator
+public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
+public import Sheaf.AlgebraicGeometry.TensorPullback
 
 /-!
 # Local coefficients of pullback morphisms on affine opens
@@ -17,6 +19,8 @@ Source: `WeilConjectures/AlgebraicGeometry/Modules/ZeroLocus.lean`,
 The pullback of modules is the recorded `Scheme.Modules.tensorPullback`
 of `def-pc-module-pullback`, not Mathlib's abstract left adjoint `Scheme.Modules.pullback`.
 -/
+
+@[expose] public section
 
 universe u
 

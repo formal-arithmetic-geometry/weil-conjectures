@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import Mathlib.Algebra.MvPolynomial.Eval
-import Mathlib.RingTheory.FiniteType
-import Mathlib.RingTheory.Localization.Away.Basic
+module
+
+public import Mathlib.Algebra.MvPolynomial.Eval
+public import Mathlib.RingTheory.FiniteType
+public import Mathlib.RingTheory.Localization.Away.Basic
 
 /-!
 # Noether normalization over a domain
@@ -13,6 +15,8 @@ import Mathlib.RingTheory.Localization.Away.Basic
 Source: Stacks Project, Algebra, Lemma 07NA (`lemma-Noether-normalization-over-a-domain`)
 (blueprint: lem-weil-pbc-noether-normalization-over-domain).
 -/
+
+@[expose] public section
 
 set_option autoImplicit false
 

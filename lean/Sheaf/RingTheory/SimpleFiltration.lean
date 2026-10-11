@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group G1
 -/
-import Mathlib.RingTheory.Length
+module
+
+public import Mathlib.RingTheory.Length
 
 /-!
 # Simple filtrations of finite-length modules
@@ -11,6 +13,8 @@ import Mathlib.RingTheory.Length
 Source: Stacks Project, Algebra, Tags 02LY, 00J1 and 00J3, part (2)
 (blueprint: lem-weil-pbc-finite-length-module-simple-filtration).
 -/
+
+@[expose] public section
 
 universe u v
 

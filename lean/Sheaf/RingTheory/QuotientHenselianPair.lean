@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group N1
 -/
-import WeilConjectures.Mathlib.RingTheory.Henselian
+module
+
+public import WeilConjectures.Mathlib.RingTheory.Henselian
 
 /-!
 # Henselian maximal-ideal pairs descend to quotients
@@ -11,6 +13,8 @@ import WeilConjectures.Mathlib.RingTheory.Henselian
 Source: Stacks Project, More on Algebra, Tags 09XK and 0DYD, with the finite-algebra
 criterion of Tag 09XI (3) (blueprint: lem-weil-pbc-quotient-henselian-pair).
 -/
+
+@[expose] public section
 
 universe u
 

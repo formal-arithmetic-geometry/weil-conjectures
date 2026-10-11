@@ -1,5 +1,7 @@
-import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
-import Mathlib.Geometry.RingedSpace.LocallyRingedSpace
+module
+
+public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
+public import Mathlib.Geometry.RingedSpace.LocallyRingedSpace
 
 /-!
 # Sheaf of modules associated to a module over global sections
@@ -7,6 +9,8 @@ import Mathlib.Geometry.RingedSpace.LocallyRingedSpace
 Source: Stacks Project, Modules, Lemma 01BH construction (3) and Definition 01BI
 (blueprint: def-weil-pbc-associated-module).
 -/
+
+@[expose] public section
 
 universe u
 
@@ -19,20 +23,20 @@ variable (X : SheafedSpace CommRingCat.{u})
 
 /-- The structure sheaf `O_X` regarded as a sheaf of rings (Stacks, Modules, Lemma 01BH (3))
 (blueprint: def-weil-pbc-associated-module). -/
-private abbrev associatedRingSheaf :
+abbrev associatedRingSheaf :
     Sheaf (Opens.grothendieckTopology (X : Type u)) RingCat.{u} :=
   (sheafCompose (Opens.grothendieckTopology (X : Type u))
     (forget₂ CommRingCat RingCat)).obj X.sheaf
 
 /-- The restriction map `R = O_X(X) → O_X(U)` making `O_X(U)` an `R`-algebra
 (Stacks, Modules, Lemma 01BH (3)) (blueprint: def-weil-pbc-associated-module). -/
-private abbrev associatedRestriction (U : (Opens (X : Type u))ᵒᵖ) :
+abbrev associatedRestriction (U : (Opens (X : Type u))ᵒᵖ) :
     X.presheaf.obj (op (⊤ : Opens (X : Type u))) ⟶ X.presheaf.obj U :=
   X.presheaf.map (homOfLE le_top).op
 
 /-- The base change `O_X(U) ⊗_R M` of `M` along the restriction map
 (Stacks, Modules, Lemma 01BH (3)) (blueprint: def-weil-pbc-associated-module). -/
-private noncomputable abbrev associatedExtension
+noncomputable abbrev associatedExtension
     (M : ModuleCat (X.presheaf.obj (op (⊤ : Opens (X : Type u)))))
     (U : (Opens (X : Type u))ᵒᵖ) : ModuleCat (X.presheaf.obj U) :=
   (ModuleCat.extendScalars (associatedRestriction X U).hom).obj M
@@ -57,7 +61,7 @@ theorem associatedExtension_restriction_existsUnique
 /-- The restriction `ρ^U_V ⊗ id_M` of the tensor presheaf, the unique map of
 `associatedExtension_restriction_existsUnique` (Stacks, Modules, Lemma 01BH (3))
 (blueprint: def-weil-pbc-associated-module). -/
-private noncomputable def associatedExtensionRestriction
+noncomputable def associatedExtensionRestriction
     (M : ModuleCat (X.presheaf.obj (op (⊤ : Opens (X : Type u)))))
     {U V : (Opens (X : Type u))ᵒᵖ} (f : U ⟶ V) :=
   Classical.choose (associatedExtension_restriction_existsUnique X M f)
@@ -92,7 +96,7 @@ noncomputable def associatedModulePresheaf
 
 /-- The component `id ⊗ f : O_X(U) ⊗_R M → O_X(U) ⊗_R N` of the map induced by `f`
 (Stacks, Modules, Lemma 01BH (2), (3)) (blueprint: def-weil-pbc-associated-module). -/
-private noncomputable def associatedModulePresheafMapApp
+noncomputable def associatedModulePresheafMapApp
     {M N : ModuleCat (X.presheaf.obj (op (⊤ : Opens (X : Type u))))}
     (f : M ⟶ N) (U : (Opens (X : Type u))ᵒᵖ) :
     (associatedModulePresheaf X M).obj U ⟶

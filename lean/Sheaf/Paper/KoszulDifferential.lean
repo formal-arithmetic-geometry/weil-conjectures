@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import Mathlib.LinearAlgebra.CliffordAlgebra.Contraction
-import Mathlib.LinearAlgebra.ExteriorAlgebra.Grading
+module
+
+public import Mathlib.LinearAlgebra.CliffordAlgebra.Contraction
+public import Mathlib.LinearAlgebra.ExteriorAlgebra.Grading
 
 /-!
 # Existence, uniqueness, degree and formula of the Koszul differential
@@ -12,6 +14,8 @@ import Mathlib.LinearAlgebra.ExteriorAlgebra.Grading
 Source: literature/stacks-project/more-algebra.tex, More on Algebra, Definition
 Tag 0622 and the paragraph after it (blueprint: lem-weil-pbc-koszul-differential).
 -/
+
+@[expose] public section
 
 universe u v
 

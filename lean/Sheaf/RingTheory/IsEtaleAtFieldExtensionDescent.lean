@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Mathlib.RingTheory.Etale.Locus
-import Mathlib.RingTheory.TensorProduct.Maps
+module
+
+public import Mathlib.RingTheory.Etale.Locus
+public import Mathlib.RingTheory.TensorProduct.Maps
 
 /-!
 # Descent of etaleness at a prime under field extension
@@ -12,6 +14,8 @@ import Mathlib.RingTheory.TensorProduct.Maps
 Source: Stacks Project, Tags 0C4Y, 02L2, 02KY and 02VM, packaged in primewise affine form
 (blueprint: lem-sc-etale-local-ring-faithfully-flat-descent).
 -/
+
+@[expose] public section
 
 universe u v w z
 

@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Mathlib.LinearAlgebra.Matrix.Determinant.Basic
-import Mathlib.Data.Finset.Sort
-import Mathlib.Data.Fintype.Powerset
+module
+
+public import Mathlib.LinearAlgebra.Matrix.Determinant.Basic
+public import Mathlib.Data.Finset.Sort
+public import Mathlib.Data.Fintype.Powerset
 
 /-!
 # The Cauchy–Binet formula
@@ -13,6 +15,8 @@ import Mathlib.Data.Fintype.Powerset
 Source: Stacks Project, Algebra, Section 00AR, item 0F0K
 (blueprint: lem-weil-pbc-cauchy-binet).
 -/
+
+@[expose] public section
 
 universe u
 

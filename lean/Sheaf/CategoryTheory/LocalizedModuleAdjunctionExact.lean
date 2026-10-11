@@ -3,11 +3,13 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Mathlib.Algebra.Category.Grp.FilteredColimits
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
-import Mathlib.Algebra.Category.Ring.Limits
-import Mathlib.CategoryTheory.Sites.PrecoverageToGrothendieck
-import Sheaf.CategoryTheory.ExtensionByZeroPresheaf
+module
+
+public import Mathlib.Algebra.Category.Grp.FilteredColimits
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
+public import Mathlib.Algebra.Category.Ring.Limits
+public import Mathlib.CategoryTheory.Sites.PrecoverageToGrothendieck
+public import Sheaf.CategoryTheory.ExtensionByZeroPresheaf
 
 /-!
 # Exact restriction and extension by zero on a localized ringed site
@@ -15,6 +17,8 @@ import Sheaf.CategoryTheory.ExtensionByZeroPresheaf
 Source: Stacks Project, Modules on Sites, Section 03DH and Lemmas 03DI, 03DJ
 (blueprint: lem-pur-site-restriction-module-adjunction-exact).
 -/
+
+@[expose] public section
 
 universe u
 

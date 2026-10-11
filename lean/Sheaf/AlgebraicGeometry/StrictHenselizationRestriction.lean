@@ -3,12 +3,14 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group Q1
 -/
-import Sheaf.AlgebraicGeometry.StrictHenselizationStructuralMap
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.GlobalSections
-import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.MorphismDefs
-import WeilConjectures.SixFunctors.Etale.Derived.GlobalSections
-import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStarCoherence
-import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusExact
+module
+
+public import Sheaf.AlgebraicGeometry.StrictHenselizationStructuralMap
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.GlobalSections
+public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.MorphismDefs
+public import WeilConjectures.SixFunctors.Etale.Derived.GlobalSections
+public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStarCoherence
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusExact
 
 /-!
 # Canonical restriction to a strict henselization
@@ -23,6 +25,8 @@ for that unique `r`.
 Source: Stacks, Tag 03Q9, theorem-higher-direct-images, its restriction construction
 (blueprint: def-weil-pbc-strict-henselization-restriction).
 -/
+
+@[expose] public section
 
 universe v
 

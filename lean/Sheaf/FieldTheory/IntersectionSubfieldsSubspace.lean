@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import Mathlib.FieldTheory.IntermediateField.Adjoin.Defs
-import Mathlib.LinearAlgebra.Pi
+module
+
+public import Mathlib.FieldTheory.IntermediateField.Adjoin.Defs
+public import Mathlib.LinearAlgebra.Pi
 
 /-!
 # Nonzero intersections of a subspace with a directed family of subfields
@@ -12,6 +14,8 @@ import Mathlib.LinearAlgebra.Pi
 Source: Stacks Project, More on Algebra, Lemma 15.47.3, Tag 07P3
 (blueprint: lem-weil-pbc-intersection-subfields-subspace).
 -/
+
+@[expose] public section
 
 universe u v w
 

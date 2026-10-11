@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group N1
 -/
-import Mathlib.RingTheory.RingHom.Flat
-import Mathlib.RingTheory.Ideal.Quotient.Operations
-import Mathlib.LinearAlgebra.TensorProduct.Tower
+module
+
+public import Mathlib.RingTheory.RingHom.Flat
+public import Mathlib.RingTheory.Ideal.Quotient.Operations
+public import Mathlib.LinearAlgebra.TensorProduct.Tower
 
 /-!
 # Hom comparison for a torsion source along a flat neighbourhood
@@ -16,6 +18,8 @@ Source: Stacks Project, More on Algebra, Lemma 05EC, part (2), torsion-source ca
 Mathlib writes scalar extension as `S ⊗[R] K`; tensor symmetry identifies this with
 `K ⊗[R] S` in the source. The algebra structure encodes the arbitrary ring map.
 -/
+
+@[expose] public section
 
 universe u v w x
 

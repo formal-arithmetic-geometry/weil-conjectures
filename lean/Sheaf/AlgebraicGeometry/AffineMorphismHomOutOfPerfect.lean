@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import Sheaf.AlgebraicGeometry.AffineGlobalHomBaseChangeMap
-import Sheaf.AlgebraicGeometry.PullbackStalkTensorComparison
+module
+
+public import Sheaf.AlgebraicGeometry.AffineGlobalHomBaseChangeMap
+public import Sheaf.AlgebraicGeometry.PullbackStalkTensorComparison
 
 /-!
 # Affine base change for global Hom out of a perfect complex
@@ -12,6 +14,8 @@ import Sheaf.AlgebraicGeometry.PullbackStalkTensorComparison
 Source: Stacks Project, perfect.tex, lemma-affine-morphism-and-hom-out-of-perfect,
 case (1) (blueprint: lem-pc-affine-morphism-hom-out-of-perfect).
 -/
+
+@[expose] public section
 
 set_option autoImplicit false
 universe uAH wAH

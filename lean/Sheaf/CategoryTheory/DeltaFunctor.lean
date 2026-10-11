@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group G1
 -/
-import Mathlib.CategoryTheory.Abelian.Basic
-import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
-import Mathlib.Algebra.Homology.ShortComplex.ShortExact
+module
+
+public import Mathlib.CategoryTheory.Abelian.Basic
+public import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
+public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 
 /-!
 # Cohomological delta-functors
@@ -20,6 +22,8 @@ Source: Stacks Project, Homology, Definitions 010Q, 010R, 010S
 * `CategoryTheory.CohomologicalDeltaFunctor.Hom`: compatible natural transformations.
 * `CategoryTheory.CohomologicalDeltaFunctor.IsUniversal`: unique extension from degree zero.
 -/
+
+@[expose] public section
 
 universe v₁ v₂ u₁ u₂
 

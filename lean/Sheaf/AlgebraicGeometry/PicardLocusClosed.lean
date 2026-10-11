@@ -3,14 +3,16 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-import Mathlib.AlgebraicGeometry.Morphisms.Flat
-import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
-import Mathlib.AlgebraicGeometry.Morphisms.Proper
-import Mathlib.AlgebraicGeometry.Morphisms.Immersion
-import Mathlib.AlgebraicGeometry.Geometrically.Integral
-import Sheaf.AlgebraicGeometry.PicardDiagonalLocallyClosed
-import WeilConjectures.AlgebraicGeometry.Modules.Invertible
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+public import Mathlib.AlgebraicGeometry.Morphisms.Flat
+public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
+public import Mathlib.AlgebraicGeometry.Morphisms.Proper
+public import Mathlib.AlgebraicGeometry.Morphisms.Immersion
+public import Mathlib.AlgebraicGeometry.Geometrically.Integral
+public import Sheaf.AlgebraicGeometry.PicardDiagonalLocallyClosed
+public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 
 /-!
 # Closedness of the invertible-module pullback locus
@@ -18,6 +20,8 @@ import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 Source: Stacks Project, More on Morphisms, Lemma 37.33.4 (Tag 0BF0)
 (blueprint: lem-sc-picard-locus-closed).
 -/
+
+@[expose] public section
 
 universe u
 

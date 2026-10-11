@@ -3,16 +3,20 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
-import Mathlib.AlgebraicGeometry.Morphisms.Separated
-import Mathlib.Topology.KrullDimension
-import Sheaf.AlgebraicGeometry.Ample
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
+public import Mathlib.AlgebraicGeometry.Morphisms.Separated
+public import Mathlib.Topology.KrullDimension
+public import Sheaf.AlgebraicGeometry.Ample
 
 /-! # Ample invertible modules in dimension at most one
 
 Source: Stacks Project, Varieties, Lemma 0A25 and Proposition 09NZ
 (blueprint: lem-sc-dim-one-ample-invertible).
 -/
+
+@[expose] public section
 
 universe u
 

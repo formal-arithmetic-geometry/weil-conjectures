@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group G1
 -/
-import Mathlib.Topology.Sheaves.Module
-import Sheaf.Paper.DerivedHomMayerVietoris
+module
+
+public import Mathlib.Topology.Sheaves.Module
+public import Sheaf.Paper.DerivedHomMayerVietoris
 
 /-!
 # The sectionwise open-restriction adjunction for module sheaves
@@ -18,6 +20,8 @@ It is equivalent to the opens of the topological subspace by `U.overEquivalence`
 `U.sheafOfModulesEquivOver` identifies the module categories. No new restriction
 or direct-image functor is defined here.
 -/
+
+@[expose] public section
 
 universe u w
 

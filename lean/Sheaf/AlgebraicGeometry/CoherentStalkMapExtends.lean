@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Sheaf.AlgebraicGeometry.Coherent
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Mathlib.AlgebraicGeometry.Noetherian
-import Sheaf.Algebra.Homology.ModuleStalkFunctor
+module
+
+public import Sheaf.AlgebraicGeometry.Coherent
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Mathlib.AlgebraicGeometry.Noetherian
+public import Sheaf.Algebra.Homology.ModuleStalkFunctor
 
 /-!
 # A map of stalks of coherent modules comes from a map on a neighbourhood
@@ -15,6 +17,8 @@ Source: Stacks Project, Cohomology of Schemes, Lemma 01Y4 (label
 `lemma-map-stalks-local-map`), using Lemma 01XZ and Modules Lemma 01CP
 (blueprint: lem-weil-pbc-coherent-stalk-map-extends).
 -/
+
+@[expose] public section
 
 universe u
 

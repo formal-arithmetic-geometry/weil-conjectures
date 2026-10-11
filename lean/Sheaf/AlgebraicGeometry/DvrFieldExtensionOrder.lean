@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group J1
 -/
-import Mathlib.RingTheory.Valuation.Discrete.IsDiscreteValuationRing
-import Mathlib.RingTheory.TensorProduct.Maps
-import Mathlib.RingTheory.Localization.AtPrime.Basic
-import Mathlib.FieldTheory.IsAlgClosed.Basic
+module
+
+public import Mathlib.RingTheory.Valuation.Discrete.IsDiscreteValuationRing
+public import Mathlib.RingTheory.TensorProduct.Maps
+public import Mathlib.RingTheory.Localization.AtPrime.Basic
+public import Mathlib.FieldTheory.IsAlgClosed.Basic
 
 /-!
 # Preservation of normalized order under residue-field extension
@@ -14,6 +16,8 @@ import Mathlib.FieldTheory.IsAlgClosed.Basic
 Source: literature/stacks-project/algebra.tex, Lemma 00PD
 (blueprint: lem-sc-dvr-field-extension-order).
 -/
+
+@[expose] public section
 
 universe u v w x
 

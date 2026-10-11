@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Mathlib.RingTheory.AdjoinRoot
-import Mathlib.RingTheory.AdicCompletion.Algebra
-import Mathlib.RingTheory.LocalRing.MaximalIdeal.Defs
-import Mathlib.RingTheory.TensorProduct.Basic
+module
+
+public import Mathlib.RingTheory.AdjoinRoot
+public import Mathlib.RingTheory.AdicCompletion.Algebra
+public import Mathlib.RingTheory.LocalRing.MaximalIdeal.Defs
+public import Mathlib.RingTheory.TensorProduct.Basic
 
 /-!
 # Completion of a finite local polynomial quotient
@@ -14,6 +16,8 @@ import Mathlib.RingTheory.TensorProduct.Basic
 Source: Stacks Project, More on Algebra, Tag 07PR, degree-p step of the proof;
 Algebra, Tags 07N9 and 00MA (blueprint: lem-weil-pbc-completion-finite-quotient).
 -/
+
+@[expose] public section
 
 universe u
 

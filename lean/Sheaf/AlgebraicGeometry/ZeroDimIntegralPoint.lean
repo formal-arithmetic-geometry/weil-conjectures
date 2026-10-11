@@ -3,11 +3,13 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group P1
 -/
-import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
-import Mathlib.AlgebraicGeometry.Properties
-import Mathlib.FieldTheory.IsAlgClosed.Basic
-import Mathlib.Topology.KrullDimension
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
+public import Mathlib.AlgebraicGeometry.Properties
+public import Mathlib.FieldTheory.IsAlgClosed.Basic
+public import Mathlib.Topology.KrullDimension
 
 /-!# Integral zero-dimensional schemes over algebraically closed fields
 
@@ -15,6 +17,7 @@ Source: Stacks Project, Varieties, Lemma 06LH.
 (blueprint: lem-weil-pbc-zero-dim-integral-point)
 -/
 
+@[expose] public section
 
 universe u
 

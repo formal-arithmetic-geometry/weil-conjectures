@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import Sheaf.AlgebraicGeometry.ProjectiveSpaceHomOfGeneratingSections
-import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.OfInvertible
-import Sheaf.AlgebraicGeometry.Ample
+module
+
+public import Sheaf.AlgebraicGeometry.ProjectiveSpaceHomOfGeneratingSections
+public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.OfInvertible
+public import Sheaf.AlgebraicGeometry.Ample
 
 /-!
 # Chart preimages and coordinate ratios for generating sections
@@ -13,6 +15,8 @@ import Sheaf.AlgebraicGeometry.Ample
 Source: Stacks Project, Constructions, Lemmas 01NE and 01N8 via 01NA
 (blueprint: lem-weil-pbc-projective-morphism-chart-preimage).
 -/
+
+@[expose] public section
 
 universe u
 

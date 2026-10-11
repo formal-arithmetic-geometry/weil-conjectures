@@ -3,15 +3,19 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group R1
 -/
-import Sheaf.AlgebraicGeometry.Modules.ExteriorSheaf
-import Mathlib.Topology.LocallyConstant.Basic
-import Mathlib.Algebra.Homology.HomologicalComplex
+module
+
+public import Sheaf.AlgebraicGeometry.Modules.ExteriorSheaf
+public import Mathlib.Topology.LocallyConstant.Basic
+public import Mathlib.Algebra.Homology.HomologicalComplex
 
 /-! # Exterior powers shifted by a locally constant rank
 
 Source: Stacks Project, Duality for Schemes, Tag 0BR0, the expression wedge^r N[-r]
 for a locally constant function r (blueprint: def-sc-locally-ranked-exterior-complex).
 -/
+
+@[expose] public section
 
 universe uE
 

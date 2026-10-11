@@ -1,5 +1,7 @@
-import Mathlib.Algebra.Homology.SpectralSequence.Basic
-import Sheaf.CategoryTheory.ExactCoupleConvergence
+module
+
+public import Mathlib.Algebra.Homology.SpectralSequence.Basic
+public import Sheaf.CategoryTheory.ExactCoupleConvergence
 
 /-!
 # Page induction for morphisms of spectral sequences
@@ -18,6 +20,8 @@ homology projection and the structure isomorphism `H(E_r) ≅ E_{r+1}`. `E_∞ =
 cokernel of `Z_∞ ∩ B_∞ ⊆ Z_∞` (which is `B_∞ ⊆ Z_∞`), for a greatest lower bound `Z_∞` of the
 `Z_r` and a least upper bound `B_∞` of the `B_r`, when these exist.
 -/
+
+@[expose] public section
 
 universe u v
 

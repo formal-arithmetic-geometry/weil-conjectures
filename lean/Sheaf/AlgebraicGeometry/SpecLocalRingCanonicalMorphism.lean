@@ -3,11 +3,13 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import Mathlib.AlgebraicGeometry.Stalk
-import Mathlib.AlgebraicGeometry.Morphisms.Flat
-import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
-import Sheaf.Algebra.Homology.ModuleStalkFunctor
+module
+
+public import Mathlib.AlgebraicGeometry.Stalk
+public import Mathlib.AlgebraicGeometry.Morphisms.Flat
+public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+public import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
+public import Sheaf.Algebra.Homology.ModuleStalkFunctor
 
 /-!
 # The canonical morphism from the spectrum of a local ring
@@ -21,6 +23,8 @@ Sheaves, Tag 0098 (blueprint: lem-weil-pbc-spec-local-ring-canonical-morphism).
 * `Scheme.fromSpecStalk_module_stalk`: the unit induces an isomorphism at the closed point.
 * `Scheme.fromSpecStalk_quotient_factorization`: factorization for proper quotients.
 -/
+
+@[expose] public section
 
 universe u
 

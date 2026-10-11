@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group J1
 -/
-import Mathlib.RingTheory.Smooth.Basic
-import Mathlib.RingTheory.Kaehler.Basic
-import Sheaf.RingTheory.StrictlyStandardElement
+module
+
+public import Mathlib.RingTheory.Smooth.Basic
+public import Mathlib.RingTheory.Kaehler.Basic
+public import Sheaf.RingTheory.StrictlyStandardElement
 
 /-!
 # Powers of an element with smooth free localization are strictly standard
@@ -17,6 +19,8 @@ Source: Stacks Project, Smoothing Ring Maps, Lemma Tag 07EZ
 
 * `smooth_free_differentials_strictly_standard_power`.
 -/
+
+@[expose] public section
 
 universe u v
 

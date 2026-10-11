@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import Mathlib.AlgebraicGeometry.Modules.Tilde
-import Mathlib.Algebra.Category.ModuleCat.Monoidal.Basic
-import Sheaf.Algebra.Homology.KFlat
+module
+
+public import Mathlib.AlgebraicGeometry.Modules.Tilde
+public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Basic
+public import Sheaf.Algebra.Homology.KFlat
 
 /-!
 # Associated sheaves of K-flat complexes on affine schemes
@@ -13,6 +15,8 @@ import Sheaf.Algebra.Homology.KFlat
 Source: Stacks Project, Derived Categories of Schemes, Lemma 36.3.6 (Tag 08DV)
 (blueprint: lem-pc-affine-tilde-kflat).
 -/
+
+@[expose] public section
 
 universe u
 

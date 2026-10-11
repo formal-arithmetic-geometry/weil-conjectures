@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group T1
 -/
-import Sheaf.AlgebraicGeometry.EtaleGeometricFibreInverseImageConstant
+module
+
+public import Sheaf.AlgebraicGeometry.EtaleGeometricFibreInverseImageConstant
 
 /-!
 # Sections on a connected geometric fibre
@@ -12,6 +14,8 @@ Source: Stacks Project, Étale Cohomology, Lemma 59.39.3 (Tag 0A3H), final parag
 and Remark 59.23.2 (Tag 03P5), set-valued form
 (blueprint: lem-weil-pbc-etale-geometric-fibre-constant-sections).
 -/
+
+@[expose] public section
 
 universe u
 

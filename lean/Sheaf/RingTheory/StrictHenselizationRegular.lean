@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import Sheaf.RingTheory.IsStrictHenselization
-import Mathlib.RingTheory.Noetherian.Defs
-import Mathlib.RingTheory.RegularLocalRing.Defs
+module
+
+public import Sheaf.RingTheory.IsStrictHenselization
+public import Mathlib.RingTheory.Noetherian.Defs
+public import Mathlib.RingTheory.RegularLocalRing.Defs
 
 /-!
 # Regularity and strict henselization
@@ -13,6 +15,8 @@ import Mathlib.RingTheory.RegularLocalRing.Defs
 Source: Stacks Project, More on Algebra, Lemma 15.46.10 (Tag 06LN), the equivalence
 of its first and third conditions (blueprint: lem-sc-strict-henselization-regular).
 -/
+
+@[expose] public section
 
 universe v
 

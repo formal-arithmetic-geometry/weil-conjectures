@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group G1
 -/
-import Mathlib.RingTheory.Support
-import Mathlib.RingTheory.Ideal.AssociatedPrime.Basic
-import Mathlib.RingTheory.Spectrum.Prime.Topology
-import Mathlib.Topology.GDelta.Basic
+module
+
+public import Mathlib.RingTheory.Support
+public import Mathlib.RingTheory.Ideal.AssociatedPrime.Basic
+public import Mathlib.RingTheory.Spectrum.Prime.Topology
+public import Mathlib.Topology.GDelta.Basic
 
 /-!
 # Removing embedded associated primes
@@ -14,6 +16,8 @@ import Mathlib.Topology.GDelta.Basic
 Source: Stacks Project, Tag 02M6, `algebra-lemma-remove-embedded-primes`
 (blueprint: lem-sc-hilbert-embedded-points-affine-removal).
 -/
+
+@[expose] public section
 
 universe u v
 

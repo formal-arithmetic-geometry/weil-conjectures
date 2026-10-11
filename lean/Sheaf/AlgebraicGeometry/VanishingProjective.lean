@@ -3,18 +3,22 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group V1
 -/
-import Mathlib.AlgebraicGeometry.Morphisms.Proper
-import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
-import WeilConjectures.Mathlib.AlgebraicGeometry.Noetherian
-import Sheaf.AlgebraicGeometry.Ample
-import Sheaf.AlgebraicGeometry.CoherentFormalModule
-import Sheaf.Topology.RingedSpaceModuleCohomology
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.Proper
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Noetherian
+public import Sheaf.AlgebraicGeometry.Ample
+public import Sheaf.AlgebraicGeometry.CoherentFormalModule
+public import Sheaf.Topology.RingedSpaceModuleCohomology
 
 /-! # Uniform vanishing for kernels of coherent formal systems
 
 Source: Stacks Project, Cohomology of Schemes, Lemma 0884 (lemma-vanishing-projective)
 (blueprint: lem-weil-pbc-vanishing-projective).
 -/
+
+@[expose] public section
 
 set_option autoImplicit false
 

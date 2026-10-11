@@ -1,7 +1,9 @@
-import Sheaf.CategoryTheory.SiteExtensionByZeroPresheaf
-import Mathlib.CategoryTheory.Sites.Pullback
-import Mathlib.CategoryTheory.Sites.Over
-import Mathlib.CategoryTheory.Sites.PrecoverageToGrothendieck
+module
+
+public import Sheaf.CategoryTheory.SiteExtensionByZeroPresheaf
+public import Mathlib.CategoryTheory.Sites.Pullback
+public import Mathlib.CategoryTheory.Sites.Over
+public import Mathlib.CategoryTheory.Sites.PrecoverageToGrothendieck
 
 /-!
 # Adjunction for extension by zero on a localized site
@@ -9,6 +11,8 @@ import Mathlib.CategoryTheory.Sites.PrecoverageToGrothendieck
 Source: literature/stacks-project/sites-modules.tex, Modules on Sites, Lemma 03DI
 (blueprint: lem-weil-pbc-site-extension-by-zero-presheaf-adjoint).
 -/
+
+@[expose] public section
 
 set_option autoImplicit false
 

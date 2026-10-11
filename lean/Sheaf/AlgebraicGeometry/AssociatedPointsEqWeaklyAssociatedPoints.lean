@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import Mathlib.AlgebraicGeometry.Noetherian
-import Sheaf.RingTheory.WeaklyAssociated
+module
+
+public import Mathlib.AlgebraicGeometry.Noetherian
+public import Sheaf.RingTheory.WeaklyAssociated
 
 /-!
 # Associated and weakly associated points of the structure sheaf
@@ -12,6 +14,8 @@ import Sheaf.RingTheory.WeaklyAssociated
 Source: Stacks Project, Divisors, Lemma 31.5.8 (Tag 05AR)
 (blueprint: lem-sc-ass-weakass-locally-noetherian).
 -/
+
+@[expose] public section
 
 universe u
 

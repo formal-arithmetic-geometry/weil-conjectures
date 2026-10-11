@@ -3,13 +3,15 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Mathlib.Topology.Sheaves.Functors
-import Mathlib.Topology.Sheaves.Stalks
-import Mathlib.CategoryTheory.Sites.LeftExact
-import Mathlib.Algebra.Category.Grp.Colimits
-import Mathlib.Algebra.Category.Ring.Colimits
-import Mathlib.Algebra.Category.Ring.Limits
-import Mathlib.Algebra.Category.Ring.FilteredColimits
+module
+
+public import Mathlib.Topology.Sheaves.Functors
+public import Mathlib.Topology.Sheaves.Stalks
+public import Mathlib.CategoryTheory.Sites.LeftExact
+public import Mathlib.Algebra.Category.Grp.Colimits
+public import Mathlib.Algebra.Category.Ring.Colimits
+public import Mathlib.Algebra.Category.Ring.Limits
+public import Mathlib.Algebra.Category.Ring.FilteredColimits
 
 /-!
 # Stalks of topological inverse images
@@ -20,6 +22,8 @@ Source: Stacks Project, Sheaves, Tags 008H, 008O and Section 008P
 The two statements give the natural stalk isomorphism, its formula on germs using
 the sheaf-adjunction unit, and representation of every inverse-image stalk element.
 -/
+
+@[expose] public section
 
 universe u
 

@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Sheaf.AlgebraicGeometry.RationalSectionOrder
-import WeilConjectures.AlgebraicGeometry.Curve.Divisor
+module
+
+public import Sheaf.AlgebraicGeometry.RationalSectionOrder
+public import WeilConjectures.AlgebraicGeometry.Curve.Divisor
 
 /-!
 # Rational sections and their divisors on smooth connected curves
@@ -23,6 +25,8 @@ The coefficient exists because `invertible_module_generic_stalk` identifies the 
 any local generator with a basis of the generic stalk. `rational_section_order` makes its
 valuation independent of the generator and supplies the finite set used in the sum.
 -/
+
+@[expose] public section
 
 set_option autoImplicit false
 

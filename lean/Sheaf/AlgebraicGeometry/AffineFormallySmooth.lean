@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Sheaf.AlgebraicGeometry.FormallySmooth
-import Mathlib.RingTheory.RingHom.Smooth
+module
+
+public import Sheaf.AlgebraicGeometry.FormallySmooth
+public import Mathlib.RingTheory.RingHom.Smooth
 
 /-!
 # Affine formal smoothness and the square-zero lifting property
@@ -13,6 +15,8 @@ Source: Stacks Project, More on Morphisms, Lemma 37.11.5 (Tag 02H4),
 Algebra Definition 10.137.1 (Tag 00TI) (blueprint:
 lem-weil-pbc-affine-formally-smooth-iff-ring-lifting).
 -/
+
+@[expose] public section
 
 universe u
 

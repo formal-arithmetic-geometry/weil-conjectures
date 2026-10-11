@@ -3,17 +3,21 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group J1
 -/
-import Sheaf.AlgebraicGeometry.Coherent
-import Mathlib.AlgebraicGeometry.Noetherian
-import Mathlib.CategoryTheory.Preadditive.Injective.Basic
-import Mathlib.Topology.Sheaves.Flasque
-import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
+module
+
+public import Sheaf.AlgebraicGeometry.Coherent
+public import Mathlib.AlgebraicGeometry.Noetherian
+public import Mathlib.CategoryTheory.Preadditive.Injective.Basic
+public import Mathlib.Topology.Sheaves.Flasque
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
 
 /-! # Flasqueness of internal Hom into an injective module
 
 Source: Stacks Project, Cohomology, Tag 01EA, the extension-by-zero argument applied
  to the restricted source module (blueprint: lem-sc-ext-coherent-hom-injective-flasque).
 -/
+
+@[expose] public section
 
 universe u
 

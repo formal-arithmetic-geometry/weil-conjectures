@@ -2,17 +2,21 @@
 Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 -/
-import Mathlib.LinearAlgebra.Quotient.Basic
-import Mathlib.LinearAlgebra.Basis.Defs
-import Mathlib.LinearAlgebra.Prod
-import Mathlib.RingTheory.Ideal.Quotient.Operations
-import Mathlib.Algebra.Exact.Basic
+module
+
+public import Mathlib.LinearAlgebra.Quotient.Basic
+public import Mathlib.LinearAlgebra.Basis.Defs
+public import Mathlib.LinearAlgebra.Prod
+public import Mathlib.RingTheory.Ideal.Quotient.Operations
+public import Mathlib.Algebra.Exact.Basic
 
 /-! # Cyclic extensions and Koszul one-cocycles
 
 Source: Stacks Project, More on Algebra, Tags 05ED and 05EE, and Homology,
 Section 010I (blueprint: lem-weil-pbc-cyclic-extension-cocycle).
 -/
+
+@[expose] public section
 
 universe u v w z
 

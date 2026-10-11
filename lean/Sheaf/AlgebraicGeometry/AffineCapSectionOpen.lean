@@ -3,13 +3,17 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group J1
 -/
-import Sheaf.AlgebraicGeometry.Ample
+module
+
+public import Sheaf.AlgebraicGeometry.Ample
 
 /-! # Affine opens intersected with section nonvanishing loci
 
 Source: Stacks Project, Properties, Lemma 01PV (properties-lemma-affine-cap-s-open)
 (blueprint: lem-sc-affine-cap-section-open).
 -/
+
+@[expose] public section
 
 universe u
 

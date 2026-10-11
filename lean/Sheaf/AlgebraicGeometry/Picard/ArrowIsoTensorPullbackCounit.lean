@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import Sheaf.AlgebraicGeometry.Picard.InvertibleDirectImageClasses
-import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
-import Mathlib.AlgebraicGeometry.Geometrically.Integral
-import Mathlib.CategoryTheory.Comma.Arrow
+module
+
+public import Sheaf.AlgebraicGeometry.Picard.InvertibleDirectImageClasses
+public import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
+public import Mathlib.AlgebraicGeometry.Geometrically.Integral
+public import Mathlib.CategoryTheory.Comma.Arrow
 
 /-!
 # Base change compatibility of the direct-image counit
@@ -15,6 +17,8 @@ Source: WeilConjectures/AlgebraicGeometry/Picard/ZeroScheme.lean,
 `nonempty_arrowIso_pullback_directImageCounit`
 (blueprint: lem-pc-arrow-iso-pullback-counit).
 -/
+
+@[expose] public section
 
 universe u
 

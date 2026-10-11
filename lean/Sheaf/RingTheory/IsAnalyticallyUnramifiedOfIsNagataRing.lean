@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import Sheaf.RingTheory.NagataRing
-import Sheaf.RingTheory.AnalyticallyUnramified
+module
+
+public import Sheaf.RingTheory.NagataRing
+public import Sheaf.RingTheory.AnalyticallyUnramified
 
 /-!
 # Reduced completion of a local Nagata domain
@@ -12,6 +14,8 @@ import Sheaf.RingTheory.AnalyticallyUnramified
 Source: Stacks Project, Algebra, Lemma Tag 0331
 (blueprint: lem-weil-pbc-local-nagata-domain-analytically-unramified).
 -/
+
+@[expose] public section
 
 universe u
 

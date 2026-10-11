@@ -3,11 +3,13 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group S1
 -/
-import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
-import Mathlib.RingTheory.Valuation.ValuationRing
-import WeilConjectures.AlgebraicGeometry.Modules.Invertible
-import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
+public import Mathlib.RingTheory.Valuation.ValuationRing
+public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
+public import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
 
 /-!
 # Vanishing of sections on the closed fibre of a valuation ring
@@ -16,6 +18,8 @@ Source: Stacks Project, More on Morphisms, Tag 0EX8,
 Lemma `lemma-triviality-generic-fibre-valuation-ring`, closed-fibre section descent
 (blueprint: lem-sc-valuation-closed-fibre-section-vanishing).
 -/
+
+@[expose] public section
 
 universe u
 

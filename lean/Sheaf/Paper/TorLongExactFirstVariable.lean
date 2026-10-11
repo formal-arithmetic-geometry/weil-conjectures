@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import Mathlib.CategoryTheory.Monoidal.Tor
-import Mathlib.Algebra.Category.ModuleCat.Monoidal.Basic
-import Mathlib.Algebra.Category.ModuleCat.Abelian
-import Mathlib.Algebra.Category.ModuleCat.Projective
+module
+
+public import Mathlib.CategoryTheory.Monoidal.Tor
+public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Basic
+public import Mathlib.Algebra.Category.ModuleCat.Abelian
+public import Mathlib.Algebra.Category.ModuleCat.Projective
 
 /-!
 # Low-degree Tor exact sequence in the first variable
@@ -14,6 +16,8 @@ import Mathlib.Algebra.Category.ModuleCat.Projective
 Source: Stacks Project, Algebra, Tags 00M0 and 00M3; More on Algebra, proof of
 Tag 0912 (blueprint: lem-weil-pbc-tor-long-exact-first-variable).
 -/
+
+@[expose] public section
 
 universe u
 

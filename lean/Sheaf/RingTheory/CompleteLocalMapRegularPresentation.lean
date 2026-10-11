@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import Mathlib.RingTheory.RegularLocalRing.Defs
-import Mathlib.RingTheory.RingHom.Flat
-import Mathlib.RingTheory.AdicCompletion.Basic
-import Sheaf.RingTheory.IsRegularSystemOfParameters
+module
+
+public import Mathlib.RingTheory.RegularLocalRing.Defs
+public import Mathlib.RingTheory.RingHom.Flat
+public import Mathlib.RingTheory.AdicCompletion.Basic
+public import Sheaf.RingTheory.IsRegularSystemOfParameters
 
 /-!
 # Compatible regular presentations of a map of complete local rings
@@ -15,6 +17,8 @@ Source: Stacks Project, More on Algebra, Lemma 07NN
 (lemma-embed-map-Noetherian-complete-local-rings),
 statement and proof (blueprint: lem-weil-pbc-complete-local-map-regular-presentation).
 -/
+
+@[expose] public section
 
 universe u v
 

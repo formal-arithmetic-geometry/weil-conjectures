@@ -3,11 +3,13 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import WeilConjectures.AlgebraicGeometry.Curve
-import Mathlib.AlgebraicGeometry.Morphisms.Smooth
-import Mathlib.AlgebraicGeometry.Noetherian
-import Mathlib.RingTheory.DiscreteValuationRing.Basic
-import Sheaf.AlgebraicGeometry.FunctionField
+module
+
+public import WeilConjectures.AlgebraicGeometry.Curve
+public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
+public import Mathlib.AlgebraicGeometry.Noetherian
+public import Mathlib.RingTheory.DiscreteValuationRing.Basic
+public import Sheaf.AlgebraicGeometry.FunctionField
 
 /-!
 # Local rings and normalized valuations of a smooth connected curve
@@ -16,6 +18,8 @@ Source: Stacks Project, Properties, Tags 033M and 02IZ; Algebra, Tag 00PD;
 the standing setting of Divisors, Tag 0BE9
 (blueprint: lem-sc-smooth-connected-curve-local-rings).
 -/
+
+@[expose] public section
 
 universe u
 

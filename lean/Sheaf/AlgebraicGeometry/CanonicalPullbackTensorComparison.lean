@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under the Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group R1
 -/
-import Sheaf.AlgebraicGeometry.DerivedTensorStructure
-import Sheaf.AlgebraicGeometry.SingleComplexBaseChangeStalkCondition
-import Sheaf.AlgebraicGeometry.ModulePullbackTensor
-import Mathlib.Algebra.Homology.Monoidal
+module
+
+public import Sheaf.AlgebraicGeometry.DerivedTensorStructure
+public import Sheaf.AlgebraicGeometry.SingleComplexBaseChangeStalkCondition
+public import Sheaf.AlgebraicGeometry.ModulePullbackTensor
+public import Mathlib.Algebra.Homology.Monoidal
 
 /-! # Canonical tensor comparison for derived pullback
 
@@ -18,6 +20,8 @@ counit on K-flat representatives. Statements bind the comparison together with t
 uniquely characterising predicate; no monoidal structure on pullback is chosen
 arbitrarily and no data is chosen from a theorem.
 -/
+
+@[expose] public section
 
 universe uTC wTC
 open CategoryTheory CategoryTheory.Limits MonoidalCategory

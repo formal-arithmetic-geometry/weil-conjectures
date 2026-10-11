@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group G1
 -/
-import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
-import Mathlib.Algebra.Homology.DerivedCategory.TStructure
-import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Products
+module
+
+public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
+public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
+public import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Products
 
 /-!
 # Support criterion for restriction of a right adjoint to an open
@@ -15,6 +17,8 @@ Source: Stacks Project, Duality for Schemes, Section 48.4, Tag 0E4G,
 Lemma 48.4.3, parts (1)--(3)
 (blueprint: lem-sc-right-adjoint-open-support-criterion).
 -/
+
+@[expose] public section
 
 universe u w
 
@@ -25,6 +29,7 @@ noncomputable section
 namespace AlgebraicGeometry
 
 set_option backward.isDefEq.respectTransparency false in
+set_option maxHeartbeats 1600000 in
 /-- Restriction of the right adjoint is compatible with the open square precisely when
 it preserves complexes supported on the closed complements.
 Source: Stacks Project, Tag 0E4G, Lemma 48.4.3, parts (1)--(3)

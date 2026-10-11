@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import Mathlib.AlgebraicGeometry.Morphisms.Etale
-import Mathlib.AlgebraicGeometry.ResidueField
-import Mathlib.RingTheory.Henselian
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.Etale
+public import Mathlib.AlgebraicGeometry.ResidueField
+public import Mathlib.RingTheory.Henselian
 
 /-!
 # Étale retractions from simple-root lifting
@@ -13,6 +15,8 @@ import Mathlib.RingTheory.Henselian
 Source: Stacks Project, Algebra, Lemma Tag 04GG, implication (1) ⇒ (8)
 (blueprint: lem-weil-pbc-root-lifting-etale-retraction).
 -/
+
+@[expose] public section
 
 universe u
 

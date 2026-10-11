@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Mathlib.Algebra.MvPolynomial.Eval
-import Mathlib.RingTheory.Ideal.Quotient.Operations
-import Mathlib.RingTheory.Localization.Away.Basic
-import Mathlib.RingTheory.Localization.Algebra
+module
+
+public import Mathlib.Algebra.MvPolynomial.Eval
+public import Mathlib.RingTheory.Ideal.Quotient.Operations
+public import Mathlib.RingTheory.Localization.Away.Basic
+public import Mathlib.RingTheory.Localization.Algebra
 
 /-!
 # Localizations of the auxiliary algebra in height-zero delocalization
@@ -14,6 +16,8 @@ import Mathlib.RingTheory.Localization.Algebra
 Source: Stacks Project, Smoothing Ring Maps, proof of Lemma 16.9.4, Tag 07FA
 (blueprint: lem-weil-pbc-popescu-height-zero-auxiliary-algebra-localizations).
 -/
+
+@[expose] public section
 
 universe u
 

@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Mathlib.CategoryTheory.Filtered.Basic
-import Sheaf.Algebra.Homology.ModuleStalkFunctor
+module
+
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Mathlib.CategoryTheory.Filtered.Basic
+public import Sheaf.Algebra.Homology.ModuleStalkFunctor
 
 /-!
 # Filtered colimits and ordinary module stalks
@@ -13,6 +15,8 @@ import Sheaf.Algebra.Homology.ModuleStalkFunctor
 Source: Stacks Project, Sheaves, Section 009E, item (5), and Modules, Lemma 01AH (2)
 (blueprint: lem-weil-pbc-module-stalk-filtered-colimit).
 -/
+
+@[expose] public section
 
 universe u
 

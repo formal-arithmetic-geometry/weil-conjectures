@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import Mathlib.AlgebraicGeometry.FunctionField
+module
+
+public import Mathlib.AlgebraicGeometry.FunctionField
 
 /-!
 # Function fields of curves
@@ -26,6 +28,8 @@ open. The product below has just the whole space as its component in this case, 
 at that component identifies it with the same generic stalk. These identifications are ring
 isomorphisms, rather than definitional equalities between differently indexed carriers.
 -/
+
+@[expose] public section
 
 universe u
 

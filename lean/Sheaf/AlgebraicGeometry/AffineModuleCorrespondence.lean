@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import Mathlib.AlgebraicGeometry.Morphisms.Affine
-import Sheaf.AlgebraicGeometry.Coherent
-import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
-import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Defs
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.Affine
+public import Sheaf.AlgebraicGeometry.Coherent
+public import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
+public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Defs
 
 /-! # Quasi-coherent modules along an affine morphism
 
@@ -21,6 +23,8 @@ Thus the action is `(b ⊗ a)(b' ⊗ g) = bb' ⊗ ag`. The functor `H` is extens
 scalars along the multiplication counit `ε : B → O_U`, with the target scalar first
 in the tensor notation. No alternative pullback or tensor product is defined here.
 -/
+
+@[expose] public section
 
 universe u
 

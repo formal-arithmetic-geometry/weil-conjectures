@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import WeilConjectures.Mathlib.RingTheory.Henselian
-import Mathlib.RingTheory.Spectrum.Prime.Topology
-import Mathlib.Topology.Connected.Basic
+module
+
+public import WeilConjectures.Mathlib.RingTheory.Henselian
+public import Mathlib.RingTheory.Spectrum.Prime.Topology
+public import Mathlib.Topology.Connected.Basic
 
 /-!
 # Connected zero loci over a henselian pair
@@ -13,6 +15,8 @@ import Mathlib.Topology.Connected.Basic
 Source: Stacks Project, More on Algebra, Lemma 15.11.16 (Tag 09Y6)
 (blueprint: lem-weil-pbc-henselian-pair-prime-connected).
 -/
+
+@[expose] public section
 
 universe u
 

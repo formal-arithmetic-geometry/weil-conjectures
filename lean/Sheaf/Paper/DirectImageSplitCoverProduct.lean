@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.AB
-import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
+module
+
+public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.AB
+public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 
 /-!
 # Direct image for a split finite cover
@@ -12,6 +14,8 @@ import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 Source: literature/stacks-project/etale-cohomology.tex, proof of Lemma 095B
 (blueprint: lem-weil-pbc-direct-image-split-cover-product).
 -/
+
+@[expose] public section
 
 universe u w
 

@@ -3,14 +3,18 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import Sheaf.AlgebraicGeometry.Coherent
-import Mathlib.Algebra.Homology.ShortComplex.ShortExact
+module
+
+public import Sheaf.AlgebraicGeometry.Coherent
+public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 
 /-! # Extensions of quasi-coherent modules
 
 Source: Stacks Project, Schemes, Lemma 01IE, applied on an affine open cover
 (blueprint: lem-pc-quasi-coherent-extension).
 -/
+
+@[expose] public section
 
 universe u
 

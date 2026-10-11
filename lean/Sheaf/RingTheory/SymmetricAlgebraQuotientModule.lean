@@ -2,8 +2,10 @@
 Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Authors: SHEAF contributors
 -/
-import Mathlib.LinearAlgebra.SymmetricAlgebra.Basic
-import Mathlib.RingTheory.Ideal.Quotient.Operations
+module
+
+public import Mathlib.LinearAlgebra.SymmetricAlgebra.Basic
+public import Mathlib.RingTheory.Ideal.Quotient.Operations
 
 /-!
 # Symmetric algebra of a quotient module
@@ -12,6 +14,8 @@ Source: literature/stacks-project/algebra.tex, Algebra, Lemma 00DO
 (lemma-presentation-sym-exterior, line 2241)
 (blueprint: lem-weil-pbc-symmetric-algebra-quotient-module).
 -/
+
+@[expose] public section
 
 universe u v w
 

@@ -2,12 +2,14 @@
 Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Authors: SHEAF group T1
 -/
-import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
-import WeilConjectures.AlgebraicGeometry.Modules.Invertible
-import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
-import Mathlib.AlgebraicGeometry.Morphisms.Finite
-import Mathlib.AlgebraicGeometry.Morphisms.Flat
-import Mathlib.AlgebraicGeometry.Noetherian
+module
+
+public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
+public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
+public import Mathlib.AlgebraicGeometry.Morphisms.Finite
+public import Mathlib.AlgebraicGeometry.Morphisms.Flat
+public import Mathlib.AlgebraicGeometry.Noetherian
 
 /-! # Finite flat duality with an invertible target
 
@@ -15,6 +17,8 @@ Source: Stacks Project, Duality for Schemes, Tag 0AX2, Remark 0AX3, and
 Discriminants and Differents, Tags 0BVI and 0FKW
 (blueprint: lem-sc-finite-flat-duality-evaluation).
 -/
+
+@[expose] public section
 
 universe u wX wY
 

@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group Q1
 -/
-import Mathlib.RingTheory.Extension.Presentation.Submersive
-import Mathlib.AlgebraicGeometry.Scheme
-import WeilConjectures.Mathlib.Topology.KrullDimension
+module
+
+public import Mathlib.RingTheory.Extension.Presentation.Submersive
+public import Mathlib.AlgebraicGeometry.Scheme
+public import WeilConjectures.Mathlib.Topology.KrullDimension
 
 /-!
 # Dimension at points of a standard smooth algebra over a field
@@ -13,6 +15,8 @@ import WeilConjectures.Mathlib.Topology.KrullDimension
 Source: Stacks Project, Algebra, Tags 00T7 (7), 00SC and 00OT
 (blueprint: lem-weil-pbc-standard-smooth-over-field-dimension-at-points).
 -/
+
+@[expose] public section
 
 universe u v
 

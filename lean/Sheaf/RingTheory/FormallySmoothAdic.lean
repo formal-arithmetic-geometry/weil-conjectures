@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Mathlib.RingTheory.Ideal.Quotient.Operations
+module
+
+public import Mathlib.RingTheory.Ideal.Quotient.Operations
 
 /-!
 # Formal smoothness for an adic topology
@@ -12,6 +14,8 @@ Source: Stacks Project, More on Algebra, Definition 15.38.1 (Tag 07EB),
 Lemma 15.38.2 (Tag 07EC), and Definition 15.38.3 (Tag 07NI)
 (blueprint: def-weil-pbc-formally-smooth-adic).
 -/
+
+@[expose] public section
 
 universe u v
 

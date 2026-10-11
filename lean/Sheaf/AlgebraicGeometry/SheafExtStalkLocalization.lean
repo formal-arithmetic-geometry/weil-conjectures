@@ -3,11 +3,13 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import Sheaf.AlgebraicGeometry.Coherent
-import Sheaf.AlgebraicGeometry.SheafExt
-import Sheaf.Algebra.Homology.ModuleStalkFunctor
-import Mathlib.AlgebraicGeometry.Noetherian
-import Mathlib.Algebra.Category.ModuleCat.Ext.Basic
+module
+
+public import Sheaf.AlgebraicGeometry.Coherent
+public import Sheaf.AlgebraicGeometry.SheafExt
+public import Sheaf.Algebra.Homology.ModuleStalkFunctor
+public import Mathlib.AlgebraicGeometry.Noetherian
+public import Mathlib.Algebra.Category.ModuleCat.Ext.Basic
 
 /-!
 # Stalk localization of sheaf Ext
@@ -15,6 +17,8 @@ import Mathlib.Algebra.Category.ModuleCat.Ext.Basic
 Source: Stacks Project, Tag 0FZ3, proof of (1), using Tags 0GM8, 08E8 and 0A64
 (blueprint: lem-sc-ext-stalk-localization).
 -/
+
+@[expose] public section
 
 universe u w
 

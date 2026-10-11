@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import Sheaf.RepresentationTheory.DiscreteContinuousRep
-import Mathlib.Topology.Separation.Profinite
-import Mathlib.CategoryTheory.Abelian.Exact
+module
+
+public import Sheaf.RepresentationTheory.DiscreteContinuousRep
+public import Mathlib.Topology.Separation.Profinite
+public import Mathlib.CategoryTheory.Abelian.Exact
 
 /-!
 # Abelian structure on discrete modules with a continuous group action
@@ -13,6 +15,8 @@ import Mathlib.CategoryTheory.Abelian.Exact
 Source: Stacks Project, Etale Cohomology, Definition 04JP and the following paragraph,
 in Section 0A2H (blueprint: lem-exc-discrete-modules-abelian-structure).
 -/
+
+@[expose] public section
 
 universe u v w
 

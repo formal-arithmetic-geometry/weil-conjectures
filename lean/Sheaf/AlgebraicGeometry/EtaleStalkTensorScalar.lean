@@ -3,13 +3,15 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import Mathlib.Algebra.Category.ModuleCat.Monoidal.Closed
-import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
-import Mathlib.CategoryTheory.Sites.Point.Monoidal
-import Mathlib.CategoryTheory.Sites.ConstantSheaf
-import Mathlib.AlgebraicGeometry.Sites.EtalePoint
-import WeilConjectures.Mathlib.CategoryTheory.Sites.Point.Basic
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.StalkMonoidal
+module
+
+public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Closed
+public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
+public import Mathlib.CategoryTheory.Sites.Point.Monoidal
+public import Mathlib.CategoryTheory.Sites.ConstantSheaf
+public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
+public import WeilConjectures.Mathlib.CategoryTheory.Sites.Point.Basic
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.StalkMonoidal
 
 /-!
 # Tensor products and scalar extension at geometric étale stalks
@@ -21,6 +23,8 @@ Scalar extension is expressed by its universal property: a left adjoint to restr
 of scalars. Its adjunction unit sends `m` to `1 ⊗ m`; consequently `a • unit m`
 is `a ⊗ m`. This formulation includes noncommutative coefficient rings.
 -/
+
+@[expose] public section
 
 set_option autoImplicit false
 set_option backward.isDefEq.respectTransparency false

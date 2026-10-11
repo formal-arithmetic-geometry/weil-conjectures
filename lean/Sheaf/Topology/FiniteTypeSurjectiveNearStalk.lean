@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Sheaf.Paper.DerivedHomMayerVietoris
-import Sheaf.Algebra.Homology.ModuleStalkFunctor
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.Generators
+module
+
+public import Sheaf.Paper.DerivedHomMayerVietoris
+public import Sheaf.Algebra.Homology.ModuleStalkFunctor
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Generators
 
 /-!
 # Surjectivity near a stalk for a finite type target
@@ -13,6 +15,8 @@ import Mathlib.Algebra.Category.ModuleCat.Sheaf.Generators
 Source: Stacks Project, Sheaves of Modules, Lemma 17.9.4, Tag 01B8
 (blueprint: lem-weil-pbc-module-finite-type-surjective-on-stalk).
 -/
+
+@[expose] public section
 
 universe u
 

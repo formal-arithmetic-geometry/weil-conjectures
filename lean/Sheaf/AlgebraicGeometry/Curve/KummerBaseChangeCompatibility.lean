@@ -2,12 +2,14 @@
 Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Authors: SHEAF group V1
 -/
-import WeilConjectures.AlgebraicGeometry.Curve.Kummer
-import WeilConjectures.AlgebraicGeometry.Curve.Affine
-import WeilConjectures.AlgebraicGeometry.Picard.Jacobian
-import WeilConjectures.AlgebraicGeometry.AbelianVariety.Final
-import Sheaf.AlgebraicGeometry.GmPicardPullback
-import Sheaf.AlgebraicGeometry.EtaleCohomologyPullbackDegreeZero
+module
+
+public import WeilConjectures.AlgebraicGeometry.Curve.Kummer
+public import WeilConjectures.AlgebraicGeometry.Curve.Affine
+public import WeilConjectures.AlgebraicGeometry.Picard.Jacobian
+public import WeilConjectures.AlgebraicGeometry.AbelianVariety.Final
+public import Sheaf.AlgebraicGeometry.GmPicardPullback
+public import Sheaf.AlgebraicGeometry.EtaleCohomologyPullbackDegreeZero
 
 /-!
 # Kummer compatibility under algebraically closed base change
@@ -16,6 +18,8 @@ Source: Weil conjectures blueprint, sec-curve-estimates/sk-prop-ext-invariance,
 proper-case Kummer naturality sentence and affine-case Picard-torsion paragraph
 (blueprint: lem-sc-kummer-base-change-compatibility).
 -/
+
+@[expose] public section
 
 universe u
 

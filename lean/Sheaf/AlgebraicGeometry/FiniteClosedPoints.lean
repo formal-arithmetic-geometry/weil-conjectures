@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 
 /-!
 # Closed subsets consisting of closed points
@@ -14,6 +16,8 @@ Source: the blueprint of the Weil conjectures, chapter `sec-smooth-purity`, unit
 Stacks Project, Morphisms of Schemes, Lemma 29.15.6 (Tag 01T6), and
 Properties of Schemes, Lemma 28.5.7 (Tag 0BA8).
 -/
+
+@[expose] public section
 
 universe u
 

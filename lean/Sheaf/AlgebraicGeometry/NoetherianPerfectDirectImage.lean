@@ -3,18 +3,22 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group Q1
 -/
-import Mathlib.AlgebraicGeometry.Noetherian
-import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Basic
-import Sheaf.AlgebraicGeometry.PerfectComplex
-import Sheaf.AlgebraicGeometry.ClosedSubsetProperOverBase
-import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
-import Sheaf.AlgebraicGeometry.DerivedTensorStructure
+module
+
+public import Mathlib.AlgebraicGeometry.Noetherian
+public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Basic
+public import Sheaf.AlgebraicGeometry.PerfectComplex
+public import Sheaf.AlgebraicGeometry.ClosedSubsetProperOverBase
+public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
+public import Sheaf.AlgebraicGeometry.DerivedTensorStructure
 
 /-! # Perfect direct image over a Noetherian base
 
 Source: Stacks Project, Derived Categories of Schemes, Lemma 36.27.2, Tag 0DJQ
 (blueprint: lem-pc-noetherian-perfect-direct-image).
 -/
+
+@[expose] public section
 
 universe u w
 

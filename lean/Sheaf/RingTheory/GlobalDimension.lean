@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Mathlib.Algebra.Category.ModuleCat.Projective
-import Mathlib.CategoryTheory.Preadditive.Projective.Resolution
+module
+
+public import Mathlib.Algebra.Category.ModuleCat.Projective
+public import Mathlib.CategoryTheory.Preadditive.Projective.Resolution
 
 /-!
 # Finite projective and global dimension
@@ -12,6 +14,8 @@ import Mathlib.CategoryTheory.Preadditive.Projective.Resolution
 Source: Stacks Project, Algebra, Definitions 00O4 and 00O6
 (blueprint: def-weil-pbc-finite-global-dimension).
 -/
+
+@[expose] public section
 
 universe u v
 

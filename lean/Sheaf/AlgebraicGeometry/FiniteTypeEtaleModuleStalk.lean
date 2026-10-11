@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Sheaf.AlgebraicGeometry.IsFiniteTypeEtaleModuleSheaf
-import Mathlib.AlgebraicGeometry.Sites.EtalePoint
-import Mathlib.RingTheory.Finiteness.Defs
+module
+
+public import Sheaf.AlgebraicGeometry.IsFiniteTypeEtaleModuleSheaf
+public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
+public import Mathlib.RingTheory.Finiteness.Defs
 
 /-!
 # Finite generation of geometric stalks of finite type module sheaves
@@ -14,6 +16,8 @@ Source: Stacks Project, Tags 03DL (5), 03DE (4), (5), compared with 01B8 and 093
 the geometric-stalk argument is agent-formulated
 (blueprint: lem-weil-pbc-finite-type-module-sheaf-stalk-finitely-generated).
 -/
+
+@[expose] public section
 
 universe u
 

@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Sheaf.AlgebraicGeometry.SnapperNumericalPolynomial
-import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+module
+
+public import Sheaf.AlgebraicGeometry.SnapperNumericalPolynomial
+public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 
 /-! # Intersection numbers of invertible modules
 
@@ -17,6 +19,8 @@ Source: Stacks Project, Varieties, Definition 33.45.3, Tag 0BEP
   of the variables in the Euler-characteristic polynomial.
 - `AlgebraicGeometry.Scheme.Modules.selfIntersectionNumber`: the repeated-bundle notation.
 -/
+
+@[expose] public section
 
 universe u
 

@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import Sheaf.CategoryTheory.SiteContinuousPushforwardSheaf
-import Mathlib.CategoryTheory.Sites.Pullback
-import Mathlib.Algebra.Category.Grp.Colimits
-import Mathlib.Algebra.Category.Grp.FilteredColimits
+module
+
+public import Sheaf.CategoryTheory.SiteContinuousPushforwardSheaf
+public import Mathlib.CategoryTheory.Sites.Pullback
+public import Mathlib.Algebra.Category.Grp.Colimits
+public import Mathlib.Algebra.Category.Grp.FilteredColimits
 
 /-!
 # Composition of morphisms of sites
@@ -14,6 +16,8 @@ import Mathlib.Algebra.Category.Grp.FilteredColimits
 Source: Stacks Project, Lemma 03CB and Definition 03CC
 (blueprint: lem-weil-pbc-site-morphism-composition).
 -/
+
+@[expose] public section
 
 universe u
 

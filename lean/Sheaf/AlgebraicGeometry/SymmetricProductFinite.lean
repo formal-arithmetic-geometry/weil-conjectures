@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group U1
 -/
-import Sheaf.AlgebraicGeometry.SymmetricProductProperties
-import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.OfInvertible
-import Mathlib.AlgebraicGeometry.Morphisms.Finite
-import Mathlib.RingTheory.MvPolynomial.Symmetric.Defs
+module
+
+public import Sheaf.AlgebraicGeometry.SymmetricProductProperties
+public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.OfInvertible
+public import Mathlib.AlgebraicGeometry.Morphisms.Finite
+public import Mathlib.RingTheory.MvPolynomial.Symmetric.Defs
 
 /-!
 # Finiteness of the symmetric-product morphism
@@ -19,6 +21,8 @@ The endpoint b = 0 denotes D_+(T_0), with denominator y_i; b = 1 denotes D_+(T_n
 with denominator x_i. Polynomial variable i on the target denotes T_(i+1)/T_0
 at the first endpoint and T_i/T_n at the second endpoint.
 -/
+
+@[expose] public section
 
 universe u
 

@@ -3,11 +3,13 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import Mathlib.AlgebraicGeometry.Morphisms.Finite
-import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
-import Mathlib.Topology.KrullDimension
-import Mathlib.LinearAlgebra.FiniteDimensional.Defs
-import WeilConjectures.AlgebraicGeometry.Morphisms.FiberDegree
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.Finite
+public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
+public import Mathlib.Topology.KrullDimension
+public import Mathlib.LinearAlgebra.FiniteDimensional.Defs
+public import WeilConjectures.AlgebraicGeometry.Morphisms.FiberDegree
 
 /-!
 # Zero-dimensional closed subschemes are finite over the base field
@@ -16,6 +18,8 @@ Source: Stacks Project, Varieties, Tag 06LH (Lemma algebraic-scheme-dim-0), alge
 Morphisms, Tag 03J3, opening paragraph
 (blueprint: lem-pc-zero-dimensional-closed-subscheme-finite).
 -/
+
+@[expose] public section
 
 universe u
 

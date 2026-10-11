@@ -3,11 +3,13 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import WeilConjectures.ZetaSeries
-import Mathlib.RingTheory.AlgebraicIndependent.Basic
-import Mathlib.AlgebraicGeometry.Sites.EtalePoint
-import Sheaf.AlgebraicGeometry.EtaleSheaves
-import Sheaf.AlgebraicGeometry.DerivedCategories
+module
+
+public import WeilConjectures.ZetaSeries
+public import Mathlib.RingTheory.AlgebraicIndependent.Basic
+public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
+public import Sheaf.AlgebraicGeometry.EtaleSheaves
+public import Sheaf.AlgebraicGeometry.DerivedCategories
 
 /-!
 # Transcendence-degree strata and support on the small etale site
@@ -28,6 +30,8 @@ structure morphism through `Scheme.Hom.residueFieldAlgebraMap`.
 The support constructions do not require a base field or finite-type hypotheses, and
 in particular apply to the finite-type schemes over a field considered in the source.
 -/
+
+@[expose] public section
 
 universe u
 

@@ -3,14 +3,18 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Sheaf.AlgebraicGeometry.FiniteTypeQuasiCoherentSubalgebras
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
+module
+
+public import Sheaf.AlgebraicGeometry.FiniteTypeQuasiCoherentSubalgebras
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 
 /-! # Quasi-coherent algebras as directed colimits of finite type subalgebras
 
 Source: Stacks Project, Properties, Lemma 05JT
 (blueprint: lem-weil-pbc-algebra-directed-colimit-finite-type).
 -/
+
+@[expose] public section
 
 universe uC
 

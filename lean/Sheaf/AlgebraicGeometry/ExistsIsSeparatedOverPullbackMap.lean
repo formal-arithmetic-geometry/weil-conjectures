@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import Sheaf.AlgebraicGeometry.LimitAffineTransition
-import Mathlib.AlgebraicGeometry.Morphisms.Separated
-import Mathlib.CategoryTheory.Comma.Over.Pullback
+module
+
+public import Sheaf.AlgebraicGeometry.LimitAffineTransition
+public import Mathlib.AlgebraicGeometry.Morphisms.Separated
+public import Mathlib.CategoryTheory.Comma.Over.Pullback
 
 /-!
 # Separatedness descends to a finite stage
@@ -13,6 +15,8 @@ import Mathlib.CategoryTheory.Comma.Over.Pullback
 Source: Stacks Project, Limits, Lemma 01ZQ in Situation 081D
 (blueprint: lem-weil-pbc-descend-separated).
 -/
+
+@[expose] public section
 
 universe u
 

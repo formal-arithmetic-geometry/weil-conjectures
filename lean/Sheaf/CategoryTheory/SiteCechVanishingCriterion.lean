@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import Mathlib.CategoryTheory.Sites.PrecoverageToGrothendieck
-import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
-import Sheaf.CategoryTheory.SiteCechComplex
+module
+
+public import Mathlib.CategoryTheory.Sites.PrecoverageToGrothendieck
+public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
+public import Sheaf.CategoryTheory.SiteCechComplex
 
 /-!
 # The Čech vanishing criterion for a general site
@@ -13,6 +15,8 @@ import Sheaf.CategoryTheory.SiteCechComplex
 Source: Stacks Project, Cohomology on Sites, Lemma 03F9
 (blueprint: lem-weil-pbc-site-cech-vanishing-criterion).
 -/
+
+@[expose] public section
 
 universe u r
 

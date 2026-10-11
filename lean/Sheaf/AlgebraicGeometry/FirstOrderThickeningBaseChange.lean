@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import Sheaf.AlgebraicGeometry.Thickening
-import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
+module
+
+public import Sheaf.AlgebraicGeometry.Thickening
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 
 /-!
 # Base change of a first order thickening
@@ -13,6 +15,8 @@ Source: Stacks Project, More on Morphisms, Lemma 37.2.4 (Tag 09ZU), and
 Schemes, Lemma 26.17.6 (Tag 01JU), part (1)
 (blueprint: lem-weil-pbc-first-order-thickening-base-change).
 -/
+
+@[expose] public section
 
 universe u
 

@@ -3,14 +3,18 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import Mathlib.AlgebraicGeometry.Morphisms.Separated
-import Sheaf.AlgebraicGeometry.Ample
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.Separated
+public import Sheaf.AlgebraicGeometry.Ample
 
 /-! # Separatedness from an ample invertible module
 
 Source: Stacks Project, Properties, Lemma 09MP (label lemma-ample-separated)
 (blueprint: lem-weil-pbc-ample-scheme-separated).
 -/
+
+@[expose] public section
 
 open CategoryTheory
 open AlgebraicGeometry

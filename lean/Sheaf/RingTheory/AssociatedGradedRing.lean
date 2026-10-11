@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Mathlib.Algebra.DirectSum.Ring
-import Mathlib.LinearAlgebra.Quotient.Bilinear
-import Mathlib.RingTheory.Ideal.Quotient.Operations
+module
+
+public import Mathlib.Algebra.DirectSum.Ring
+public import Mathlib.LinearAlgebra.Quotient.Bilinear
+public import Mathlib.RingTheory.Ideal.Quotient.Operations
 
 /-!
 # The associated graded ring of an ideal
@@ -17,6 +19,8 @@ The ring structure is the one of Mathlib's `DirectSum.commRing` for the graded
 multiplication `associatedGradedMul`, so its addition and zero are those of the
 direct sum by definition.
 -/
+
+@[expose] public section
 
 universe u
 

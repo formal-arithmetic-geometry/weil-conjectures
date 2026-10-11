@@ -3,11 +3,13 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Mathlib.RingTheory.Ideal.Cotangent
-import Mathlib.RingTheory.Localization.AtPrime.Basic
-import Mathlib.RingTheory.Spectrum.Prime.Topology
-import WeilConjectures.Mathlib.Topology.KrullDimension
-import Sheaf.RingTheory.CompleteIntersectionOverField
+module
+
+public import Mathlib.RingTheory.Ideal.Cotangent
+public import Mathlib.RingTheory.Localization.AtPrime.Basic
+public import Mathlib.RingTheory.Spectrum.Prime.Topology
+public import WeilConjectures.Mathlib.Topology.KrullDimension
+public import Sheaf.RingTheory.CompleteIntersectionOverField
 
 /-!
 # Conormal generators and global complete intersections
@@ -15,6 +17,8 @@ import Sheaf.RingTheory.CompleteIntersectionOverField
 Source: Stacks Project, Algebra, Lemma 00SC (lemma-lci), implication (3) => (1)
 (blueprint: lem-weil-pbc-lci-conormal-generators-global-complete-intersection).
 -/
+
+@[expose] public section
 
 universe u
 

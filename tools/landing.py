@@ -93,7 +93,7 @@ def drop_mirror(group: str, rels: list[str]):
     mirror = LOCAL / "build" / group
     shared = li.LEAN / ".lake" / "build" / "lib" / "lean"
     for rel in rels:
-        for ext in (".olean", ".ilean"):
+        for ext in (".olean", ".ilean", ".olean.server", ".olean.private", ".ir", ".ir.sig"):  # the parts of a `module`
             m = mirror / (rel[:-5] + ext)
             if m.exists() or m.is_symlink():
                 m.unlink()

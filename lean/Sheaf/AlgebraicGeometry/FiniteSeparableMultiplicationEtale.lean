@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group J1
 -/
-import Mathlib.AlgebraicGeometry.Morphisms.Etale
-import Mathlib.RingTheory.Etale.Field
-import Mathlib.RingTheory.TensorProduct.Maps
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.Etale
+public import Mathlib.RingTheory.Etale.Field
+public import Mathlib.RingTheory.TensorProduct.Maps
 
 /-!
 # Multiplication of a finite separable field extension
@@ -14,6 +16,8 @@ Source: Stacks Project, Algebra, Lemma Tag 07QH, proof, second paragraph;
 Lemma Tags 00U3, 00U2, 00U7 and Definition Tag 00U1
 (blueprint: lem-weil-pbc-finite-separable-multiplication-etale).
 -/
+
+@[expose] public section
 
 universe u v
 

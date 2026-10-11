@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group U1
 -/
-import Sheaf.AlgebraicGeometry.TorsionAbelianBaseChange
-import Mathlib.AlgebraicGeometry.Morphisms.Proper
+module
+
+public import Sheaf.AlgebraicGeometry.TorsionAbelianBaseChange
+public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 
 /-!
 # Target locality of proper base change
@@ -22,6 +24,8 @@ Source: Stacks Project, Tags 0EZR, 0D6G and the first paragraph of Tag 0A4F
 Fibre products are specified by their projections and universal properties. This allows
 any chosen fibre product, including `Limits.pullback`, without choosing new definitions.
 -/
+
+@[expose] public section
 
 universe u w
 

@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group J1
 -/
-import Mathlib.RingTheory.Noetherian.Defs
-import Mathlib.LinearAlgebra.Pi
+module
+
+public import Mathlib.RingTheory.Noetherian.Defs
+public import Mathlib.LinearAlgebra.Pi
 
 /-!
 # Finite free resolutions over Noetherian rings
@@ -12,6 +14,8 @@ import Mathlib.LinearAlgebra.Pi
 Source: Stacks Project, Algebra, Lemma 10.71.1 (Tag 00LP), part (2)
 (blueprint: lem-weil-pbc-finite-free-resolution-noetherian).
 -/
+
+@[expose] public section
 
 universe u v
 

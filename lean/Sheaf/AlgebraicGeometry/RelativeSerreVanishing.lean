@@ -3,12 +3,14 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import Mathlib.AlgebraicGeometry.Noetherian
-import Mathlib.AlgebraicGeometry.Morphisms.Proper
-import Sheaf.AlgebraicGeometry.Coherent
-import Sheaf.AlgebraicGeometry.Ample
-import Sheaf.Topology.RingedSpaceModuleEnoughInjectives
-import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage
+module
+
+public import Mathlib.AlgebraicGeometry.Noetherian
+public import Mathlib.AlgebraicGeometry.Morphisms.Proper
+public import Sheaf.AlgebraicGeometry.Coherent
+public import Sheaf.AlgebraicGeometry.Ample
+public import Sheaf.Topology.RingedSpaceModuleEnoughInjectives
+public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage
 
 /-!
 # Relative Serre vanishing
@@ -16,6 +18,8 @@ import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage
 Source: Stacks Project, Cohomology of Schemes, Tag 02O1, lemma-kill-by-twisting
 (blueprint: lem-pc-relative-kill-by-twisting).
 -/
+
+@[expose] public section
 
 universe u
 

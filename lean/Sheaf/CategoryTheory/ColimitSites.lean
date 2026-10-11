@@ -3,19 +3,23 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Sheaf.CategoryTheory.FilteredColimitCategories
-import Mathlib.CategoryTheory.Sites.PrecoverageToGrothendieck
-import Mathlib.CategoryTheory.Sites.Pullback
-import Mathlib.Algebra.Category.Grp.Limits
-import Mathlib.Algebra.Category.Grp.Colimits
-import Mathlib.Algebra.Category.Grp.FilteredColimits
-import Mathlib.CategoryTheory.Comma.Over.Basic
+module
+
+public import Sheaf.CategoryTheory.FilteredColimitCategories
+public import Mathlib.CategoryTheory.Sites.PrecoverageToGrothendieck
+public import Mathlib.CategoryTheory.Sites.Pullback
+public import Mathlib.Algebra.Category.Grp.Limits
+public import Mathlib.Algebra.Category.Grp.Colimits
+public import Mathlib.Algebra.Category.Grp.FilteredColimits
+public import Mathlib.CategoryTheory.Comma.Over.Basic
 
 /-! # Filtered colimits of sites
 
 Source: Stacks Project, Sites, Situation 0A34 and Lemmas 09YL, 0A35
 (blueprint: lem-weil-pbc-colimit-of-sites).
 -/
+
+@[expose] public section
 
 universe u
 

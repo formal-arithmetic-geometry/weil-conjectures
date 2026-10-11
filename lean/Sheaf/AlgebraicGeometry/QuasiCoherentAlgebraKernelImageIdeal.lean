@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import Sheaf.AlgebraicGeometry.CommAlgebraSheaf
-import Sheaf.AlgebraicGeometry.Coherent
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
-import Mathlib.RingTheory.Ideal.Maps
+module
+
+public import Sheaf.AlgebraicGeometry.CommAlgebraSheaf
+public import Sheaf.AlgebraicGeometry.Coherent
+public import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
+public import Mathlib.RingTheory.Ideal.Maps
 
 /-! # Kernels, images, generated ideals and quotients of quasi-coherent algebras
 
@@ -19,6 +21,8 @@ and the local-preimage condition. The quotient presheaf is identified by section
 surjective ring maps with the specified ideals as kernels; its sheafification and the
 quotient algebra map are explicitly tied together by the sheafification unit.
 -/
+
+@[expose] public section
 
 universe u
 

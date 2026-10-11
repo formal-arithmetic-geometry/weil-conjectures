@@ -1,11 +1,15 @@
-import Mathlib.RingTheory.FiniteType
-import Mathlib.RingTheory.Ideal.Quotient.Operations
+module
+
+public import Mathlib.RingTheory.FiniteType
+public import Mathlib.RingTheory.Ideal.Quotient.Operations
 
 /-! # Finite type lifts along a nilpotent ideal
 
 Source: More on Morphisms, Lemma 09ZW, proof, “The translation of (2) into algebra”
 (blueprint: lem-weil-pbc-finite-type-lift-nilpotent)
 -/
+
+@[expose] public section
 
 open scoped Polynomial
 

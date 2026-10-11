@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
-import Mathlib.CategoryTheory.Sites.PrecoverageToGrothendieck
-import Mathlib.CategoryTheory.Sites.Continuous
+module
+
+public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
+public import Mathlib.CategoryTheory.Sites.PrecoverageToGrothendieck
+public import Mathlib.CategoryTheory.Sites.Continuous
 
 /-!
 # Cohomology over corresponding objects of equivalent sites
@@ -14,6 +16,8 @@ Source: Stacks Project, Cohomology on Sites, Section 01FT and Lemmas 03F3, 03YU,
 with the equivalence-of-sites specialization described in the DAG
 (blueprint: lem-weil-pbc-etale-cohomology-invariance-under-site-equivalence).
 -/
+
+@[expose] public section
 
 universe u
 

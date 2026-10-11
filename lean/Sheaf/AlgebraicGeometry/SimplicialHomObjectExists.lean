@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group V1
 -/
-import Sheaf.AlgebraicGeometry.SemiRepresentableObject
-import Mathlib.AlgebraicTopology.SimplicialSet.Finite
+module
+
+public import Sheaf.AlgebraicGeometry.SemiRepresentableObject
+public import Mathlib.AlgebraicTopology.SimplicialSet.Finite
 
 /-!
 # Objects of compatible simplicial maps in semi-representable objects
@@ -12,6 +14,8 @@ import Mathlib.AlgebraicTopology.SimplicialSet.Finite
 Source: Stacks Project, Tags 017J and 017K, applied to the category of formal étale
 families using Tag 01G2 (blueprint: lem-weil-pbc-simplicial-hom-object-exists).
 -/
+
+@[expose] public section
 
 universe u w t
 

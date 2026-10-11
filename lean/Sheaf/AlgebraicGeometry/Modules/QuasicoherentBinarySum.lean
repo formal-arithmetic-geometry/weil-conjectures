@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
-import Mathlib.CategoryTheory.Preadditive.Biproducts
+module
+
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
+public import Mathlib.CategoryTheory.Preadditive.Biproducts
 
 /-!
 # Binary direct sums of quasi-coherent modules
@@ -13,6 +15,8 @@ import Mathlib.CategoryTheory.Preadditive.Biproducts
 Source: Stacks Project, Modules, Lemma 01BF; Schemes, Lemma 01ID and Section 01LA
 (blueprint: lem-weil-pbc-quasi-coherent-module-direct-sum).
 -/
+
+@[expose] public section
 
 universe u
 

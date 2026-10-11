@@ -3,13 +3,17 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group T1
 -/
-import Sheaf.AlgebraicGeometry.KoszulCechComparisonConstruction
+module
+
+public import Sheaf.AlgebraicGeometry.KoszulCechComparisonConstruction
 
 /-! # Koszul Hom colimits compute derived sections on a principal-open union
 
 Source: Stacks Project, Tags 08D1 and 08D2
 (blueprint: lem-sc-affine-koszul-cech-derived-comparison).
 -/
+
+@[expose] public section
 
 universe uT wT vT
 

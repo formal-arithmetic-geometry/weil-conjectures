@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Sheaf.Paper.RelativeGlobalCompleteIntersectionPresentation
-import Mathlib.RingTheory.RingHom.Flat
+module
+
+public import Sheaf.Paper.RelativeGlobalCompleteIntersectionPresentation
+public import Mathlib.RingTheory.RingHom.Flat
 
 /-!
 # Flatness of successive localized complete-intersection quotients
@@ -12,6 +14,8 @@ import Mathlib.RingTheory.RingHom.Flat
 Source: Stacks Project, Algebra, Lemma 00SV (2)
 (blueprint: lem-weil-pbc-relative-global-complete-intersection-partial-local-flat).
 -/
+
+@[expose] public section
 
 universe v
 

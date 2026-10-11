@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group U1
 -/
-import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
-import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Twist
-import Sheaf.AlgebraicGeometry.PositiveTensorFamily
-import WeilConjectures.AlgebraicGeometry.Modules.PullbackFreeGenerator
+module
+
+public import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
+public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Twist
+public import Sheaf.AlgebraicGeometry.PositiveTensorFamily
+public import WeilConjectures.AlgebraicGeometry.Modules.PullbackFreeGenerator
 
 /-!
 # The line bundle and sections of the symmetric product
@@ -15,6 +17,8 @@ Source: Weil conjectures blueprint, symmetric-product-properties, sections parag
 Stacks Project, Etale Cohomology, proof of Tag 0A4F
 (blueprint: def-weil-pbc-symmetric-product-sections).
 -/
+
+@[expose] public section
 
 universe u
 

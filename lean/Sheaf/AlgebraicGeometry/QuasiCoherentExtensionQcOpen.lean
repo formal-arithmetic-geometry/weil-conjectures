@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
-import Sheaf.AlgebraicGeometry.Coherent
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
+public import Sheaf.AlgebraicGeometry.Coherent
 
 /-! # Extension of a quasi-coherent module across a quasi-compact open
 
@@ -15,6 +17,8 @@ and its proof (properties.tex, lines 2787--2843).
 Restriction to an open is expressed on the localized site with `SheafOfModules.over`,
 on the `moduleRings` carrier, as in the sibling extension lemmas.
 -/
+
+@[expose] public section
 
 universe u
 

@@ -3,14 +3,18 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import Sheaf.AlgebraicGeometry.Coherent
-import Mathlib.Topology.Sets.Closeds
+module
+
+public import Sheaf.AlgebraicGeometry.Coherent
+public import Mathlib.Topology.Sets.Closeds
 
 /-! # Coherent pushforward from an open with closed ambient support
 
 Source: Stacks Project, Cohomology of Schemes, Lemma 30.9.11 (Tag 0CYJ)
 (blueprint: lem-weil-pbc-pushforward-coherent-on-open).
 -/
+
+@[expose] public section
 
 universe u
 

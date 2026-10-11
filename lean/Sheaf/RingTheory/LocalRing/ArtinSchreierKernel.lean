@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import Mathlib.Data.ZMod.Basic
-import Mathlib.RingTheory.LocalRing.Defs
+module
+
+public import Mathlib.Data.ZMod.Basic
+public import Mathlib.RingTheory.LocalRing.Defs
 
 /-!
 # The Artin–Schreier kernel in a local ring
@@ -13,6 +15,8 @@ Source: blueprint sec-curve-estimates/sk-prop-h2/lem-sc-as-sequence.md, proof, f
 Stacks Project, Étale Cohomology, Section 59.63 (Tag 0A3J).
 (blueprint: lem-sc-local-ring-artin-schreier-kernel)
 -/
+
+@[expose] public section
 
 universe u
 

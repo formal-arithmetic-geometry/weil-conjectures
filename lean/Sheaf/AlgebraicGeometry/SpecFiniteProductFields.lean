@@ -3,9 +3,13 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import Mathlib.AlgebraicGeometry.Limits
-import Mathlib.RingTheory.Spectrum.Prime.RingHom
-import Mathlib.RingTheory.Spectrum.Prime.Topology
+module
+
+public import Mathlib.AlgebraicGeometry.Limits
+public import Mathlib.RingTheory.Spectrum.Prime.RingHom
+public import Mathlib.RingTheory.Spectrum.Prime.Topology
+
+@[expose] public section
 
 open CategoryTheory AlgebraicGeometry
 

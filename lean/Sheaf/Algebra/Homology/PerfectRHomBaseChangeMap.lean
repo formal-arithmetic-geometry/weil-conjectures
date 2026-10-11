@@ -3,12 +3,14 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group Q1
 -/
-import Sheaf.Algebra.Homology.DerivedInternalHom
-import Sheaf.Algebra.Homology.DerivedChangeOfRings
-import Sheaf.Algebra.Homology.KFlatTensorQuasiIso
-import Sheaf.Algebra.Homology.KFlatResolution
-import Mathlib.Algebra.Module.Projective
-import Mathlib.Algebra.Module.FinitePresentation
+module
+
+public import Sheaf.Algebra.Homology.DerivedInternalHom
+public import Sheaf.Algebra.Homology.DerivedChangeOfRings
+public import Sheaf.Algebra.Homology.KFlatTensorQuasiIso
+public import Sheaf.Algebra.Homology.KFlatResolution
+public import Mathlib.Algebra.Module.Projective
+public import Mathlib.Algebra.Module.FinitePresentation
 
 /-! # The RHom scalar-extension comparison on perfect representatives
 
@@ -19,6 +21,8 @@ The scalar-extension functor is specified on objects and maps and by its left-de
 universal property. The Hom-complex map is specified on pure tensors and every product
 projection. In particular, neither the functor nor the comparison is an arbitrary choice.
 -/
+
+@[expose] public section
 
 universe u w
 

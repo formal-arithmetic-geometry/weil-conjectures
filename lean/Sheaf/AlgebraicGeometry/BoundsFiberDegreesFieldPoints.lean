@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import Sheaf.AlgebraicGeometry.FiberDegreeBound
+module
+
+public import Sheaf.AlgebraicGeometry.FiberDegreeBound
 
 /-!
 # Testing fibre degree bounds on field-valued points
@@ -11,6 +13,8 @@ import Sheaf.AlgebraicGeometry.FiberDegreeBound
 Source: Stacks Project, Morphisms, Lemma Tag 03J5, equivalence of (1) and (2)
 (blueprint: lem-weil-pbc-fibre-degree-bound-field-points).
 -/
+
+@[expose] public section
 
 universe u
 

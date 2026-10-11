@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group Q1
 -/
-import Sheaf.AlgebraicGeometry.DerivedCategory
-import Sheaf.Algebra.Homology.DerivedInternalHom
-import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
+module
+
+public import Sheaf.AlgebraicGeometry.DerivedCategory
+public import Sheaf.Algebra.Homology.DerivedInternalHom
+public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 
 /-!
 # Derived internal Hom from a finite locally free sheaf
@@ -14,6 +16,8 @@ Source: Stacks Project, Cohomology of Sheaves, Tag 08DQ, Lemma 20.50.5,
 specialized to a finite locally free module in degree zero
 (blueprint: lem-sc-finite-locally-free-derived-hom).
 -/
+
+@[expose] public section
 
 universe u w
 

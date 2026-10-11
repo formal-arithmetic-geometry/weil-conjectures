@@ -3,15 +3,17 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
-import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-import Mathlib.LinearAlgebra.FiniteDimensional.Basic
-import Mathlib.Topology.KrullDimension
-import WeilConjectures.AlgebraicGeometry.Modules.Invertible
-import Sheaf.AlgebraicGeometry.Coherent
-import Sheaf.AlgebraicGeometry.TensorPullback
-import Sheaf.Topology.RingedSpaceModuleCohomology
-import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
+public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+public import Mathlib.LinearAlgebra.FiniteDimensional.Basic
+public import Mathlib.Topology.KrullDimension
+public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
+public import Sheaf.AlgebraicGeometry.Coherent
+public import Sheaf.AlgebraicGeometry.TensorPullback
+public import Sheaf.Topology.RingedSpaceModuleCohomology
+public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 
 /-! # Finite scheme supporting a coherent module
 
@@ -22,6 +24,8 @@ Cohomology is computed in modules over the structure sheaf. The comparison is ex
 in modules over the global functions on `X`, restricting scalars along `i.appTop` on the
 finite scheme. Thus it retains the scalar action, including the induced `k`-action.
 -/
+
+@[expose] public section
 
 universe v
 

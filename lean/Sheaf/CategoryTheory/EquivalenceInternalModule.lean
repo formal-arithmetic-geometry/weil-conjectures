@@ -3,11 +3,13 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import Sheaf.CategoryTheory.InternalModule
-import Sheaf.CategoryTheory.FiniteContinuousModule
-import Mathlib.CategoryTheory.Adjunction.Limits
-import Mathlib.CategoryTheory.Limits.Preserves.Shapes.BinaryProducts
-import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Terminal
+module
+
+public import Sheaf.CategoryTheory.InternalModule
+public import Sheaf.CategoryTheory.FiniteContinuousModule
+public import Mathlib.CategoryTheory.Adjunction.Limits
+public import Mathlib.CategoryTheory.Limits.Preserves.Shapes.BinaryProducts
+public import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Terminal
 
 /-!
 # Equivalences of module objects and finite continuous linear actions
@@ -15,6 +17,8 @@ import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Terminal
 Source: Stacks Project, Tag 0DV5, proof of (2)-(3)
 (blueprint: lem-pod-equivalence-induces-module-objects).
 -/
+
+@[expose] public section
 
 section
 

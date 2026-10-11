@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import Sheaf.RingTheory.PairHenselization
-import WeilConjectures.Mathlib.RingTheory.Henselian
+module
+
+public import Sheaf.RingTheory.PairHenselization
+public import WeilConjectures.Mathlib.RingTheory.Henselian
 
 /-!
 # Universal property of the henselization of a pair
@@ -12,6 +14,8 @@ import WeilConjectures.Mathlib.RingTheory.Henselian
 Source: Stacks Project, More on Algebra, Tag 0A02, last paragraph of the proof
 (blueprint: lem-weil-pbc-henselization-universal-property).
 -/
+
+@[expose] public section
 
 universe u
 

@@ -3,13 +3,15 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import Mathlib.Algebra.Homology.HomotopyCategory.ShortExact
-import Mathlib.Algebra.Homology.HomotopyCategory.HomComplex
-import Mathlib.Algebra.Homology.HomologicalComplexLimits
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.Colimits
-import Mathlib.Algebra.Category.Grp.FilteredColimits
-import Mathlib.Algebra.Category.Ring.Limits
+module
+
+public import Mathlib.Algebra.Homology.HomotopyCategory.ShortExact
+public import Mathlib.Algebra.Homology.HomotopyCategory.HomComplex
+public import Mathlib.Algebra.Homology.HomologicalComplexLimits
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Colimits
+public import Mathlib.Algebra.Category.Grp.FilteredColimits
+public import Mathlib.Algebra.Category.Ring.Limits
 
 /-!
 # Telescope comparison for complexes of sheaves of modules
@@ -17,6 +19,8 @@ import Mathlib.Algebra.Category.Ring.Limits
 Source: Stacks Project, Derived Categories, Lemma 0949, and Cohomology on Sites,
 Section 21.17 (blueprint: lem-pc-complex-hocolim-colimit).
 -/
+
+@[expose] public section
 
 universe u
 

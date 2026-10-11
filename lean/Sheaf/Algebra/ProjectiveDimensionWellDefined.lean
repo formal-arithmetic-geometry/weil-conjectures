@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Sheaf.RingTheory.GlobalDimension
+module
+
+public import Sheaf.RingTheory.GlobalDimension
 
 /-!
 # Projective and global dimension are well defined
@@ -11,6 +13,8 @@ import Sheaf.RingTheory.GlobalDimension
 Source: Stacks Project, Algebra, Definitions 00O4 and 00O6
 (blueprint: lem-weil-pbc-projective-dimension-well-defined).
 -/
+
+@[expose] public section
 
 universe u v
 

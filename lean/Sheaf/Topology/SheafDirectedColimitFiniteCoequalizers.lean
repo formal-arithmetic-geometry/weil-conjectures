@@ -3,12 +3,14 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group G1
 -/
-import Sheaf.Topology.SetsExtensionByEmpty
-import Mathlib.Topology.Sheaves.Limits
-import Mathlib.CategoryTheory.Limits.Shapes.Equalizers
-import Mathlib.CategoryTheory.Limits.Types.Colimits
-import Mathlib.Topology.Bases
-import Mathlib.Order.Directed
+module
+
+public import Sheaf.Topology.SetsExtensionByEmpty
+public import Mathlib.Topology.Sheaves.Limits
+public import Mathlib.CategoryTheory.Limits.Shapes.Equalizers
+public import Mathlib.CategoryTheory.Limits.Types.Colimits
+public import Mathlib.Topology.Bases
+public import Mathlib.Order.Directed
 
 /-!
 # Directed presentations of sheaves by finite coequalizers
@@ -16,6 +18,8 @@ import Mathlib.Order.Directed
 Source: Stacks Project, Modules, Lemma 0CAI and Equation 17.19.2.1
 (blueprint: lem-weil-pbc-sheaf-directed-colimit-finite-coequalizers).
 -/
+
+@[expose] public section
 
 universe u
 

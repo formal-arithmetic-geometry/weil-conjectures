@@ -3,11 +3,13 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group N1
 -/
-import Sheaf.Algebra.Homology.FilteredComplexSubquotients
-import Sheaf.CategoryTheory.ExactCoupleConvergence
-import Mathlib.Algebra.Homology.HomologySequence
-import Mathlib.Algebra.Homology.SpectralSequence.Basic
-import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
+module
+
+public import Sheaf.Algebra.Homology.FilteredComplexSubquotients
+public import Sheaf.CategoryTheory.ExactCoupleConvergence
+public import Mathlib.Algebra.Homology.HomologySequence
+public import Mathlib.Algebra.Homology.SpectralSequence.Basic
+public import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
 
 /-!
 # Spectral sequences of bounded filtered complexes
@@ -19,6 +21,8 @@ Homology, Section 12.24 (Tag 012K), Lemmas 12.24.2--12.24.4 and 12.24.11
 The domain is the full subcategory of filtered cochain complexes with finite filtration.
 The exact-couple coordinates are `(P,Q) = (2*p+q,-p)`; its page `s+2` is filtered page `s+1`.
 -/
+
+@[expose] public section
 
 universe u v
 

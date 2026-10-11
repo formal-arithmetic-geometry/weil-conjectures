@@ -3,17 +3,21 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group G1
 -/
-import Mathlib.AlgebraicGeometry.Noetherian
-import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-import Mathlib.Topology.KrullDimension
-import WeilConjectures.AlgebraicGeometry.Modules.Invertible
-import Sheaf.AlgebraicGeometry.TensorPullback
+module
+
+public import Mathlib.AlgebraicGeometry.Noetherian
+public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+public import Mathlib.Topology.KrullDimension
+public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
+public import Sheaf.AlgebraicGeometry.TensorPullback
 
 /-! # Lifting invertible modules along closed immersions in dimension at most one
 
 Source: Stacks Project, Varieties, Lemma 09NY
 (blueprint: lem-sc-pic-lift-closed-immersion-dim-le-one).
 -/
+
+@[expose] public section
 
 universe u
 

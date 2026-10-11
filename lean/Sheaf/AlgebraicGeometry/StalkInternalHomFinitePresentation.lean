@@ -3,11 +3,13 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group P1
 -/
-import Mathlib.Geometry.RingedSpace.Basic
-import Mathlib.Algebra.Category.ModuleCat.Stalk
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
-import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
-import Sheaf.Algebra.Homology.ModuleStalkFunctor
+module
+
+public import Mathlib.Geometry.RingedSpace.Basic
+public import Mathlib.Algebra.Category.ModuleCat.Stalk
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
+public import Sheaf.Algebra.Homology.ModuleStalkFunctor
 
 /-!
 # Stalk of internal Hom with finitely presented source
@@ -15,6 +17,8 @@ import Sheaf.Algebra.Homology.ModuleStalkFunctor
 Source: Stacks Project, Modules, Lemma 01CP (`lemma-stalk-internal-hom`),
 finitely presented case (blueprint: lem-weil-pbc-stalk-internal-hom-finite-presentation).
 -/
+
+@[expose] public section
 
 universe u
 

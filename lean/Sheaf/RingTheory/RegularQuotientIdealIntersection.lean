@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Mathlib.RingTheory.Regular.RegularSequence
+module
+
+public import Mathlib.RingTheory.Regular.RegularSequence
 
 /-!
 # Ideal intersection for a sequence regular modulo an ideal
@@ -11,6 +13,8 @@ import Mathlib.RingTheory.Regular.RegularSequence
 Source: Stacks Project, More on Algebra, Tag 0665, specialized using Tags 062F and 0CEM
 (blueprint: lem-weil-pbc-regular-quotient-ideal-intersection).
 -/
+
+@[expose] public section
 
 universe u
 

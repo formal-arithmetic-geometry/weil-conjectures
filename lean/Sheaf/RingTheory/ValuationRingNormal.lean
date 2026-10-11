@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
+module
+
+public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
 
 /-!
 # Valuation rings are normal domains
@@ -11,6 +13,8 @@ import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
 Source: Stacks Project, Algebra, Lemma 10.50.3 (Tag 00IC)
 (blueprint: lem-weil-pbc-valuation-ring-normal).
 -/
+
+@[expose] public section
 
 universe u v
 

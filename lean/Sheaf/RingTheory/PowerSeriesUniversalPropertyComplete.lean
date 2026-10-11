@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Mathlib.RingTheory.AdicCompletion.Basic
-import Mathlib.RingTheory.MvPowerSeries.Trunc
-import Mathlib.Algebra.MvPolynomial.Eval
+module
+
+public import Mathlib.RingTheory.AdicCompletion.Basic
+public import Mathlib.RingTheory.MvPowerSeries.Trunc
+public import Mathlib.Algebra.MvPolynomial.Eval
 
 /-!
 # Universal property of power series over an adically complete ring
@@ -13,6 +15,8 @@ import Mathlib.Algebra.MvPolynomial.Eval
 Source: Stacks Project, proofs of Tags 07NL, 07NN and 032A; agent-formulated lemma
 (blueprint: lem-weil-pbc-power-series-universal-property-complete).
 -/
+
+@[expose] public section
 
 universe u v
 

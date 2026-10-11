@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group J1
 -/
-import Mathlib.RingTheory.Localization.FractionRing
-import Mathlib.RingTheory.LocalRing.MaximalIdeal.Basic
-import Mathlib.RingTheory.KrullDimension.Basic
-import Mathlib.RingTheory.Localization.Away.Basic
+module
+
+public import Mathlib.RingTheory.Localization.FractionRing
+public import Mathlib.RingTheory.LocalRing.MaximalIdeal.Basic
+public import Mathlib.RingTheory.KrullDimension.Basic
+public import Mathlib.RingTheory.Localization.Away.Basic
 
 /-!
 # A principal localization of a one-dimensional local domain is its fraction field
@@ -14,6 +16,8 @@ import Mathlib.RingTheory.Localization.Away.Basic
 Source: Stacks Project, Algebra, Lemmas Tags 00CM and 00C8
 (blueprint: lem-sc-local-domain-dim-one-principal-localization-fraction-field).
 -/
+
+@[expose] public section
 
 universe u v
 

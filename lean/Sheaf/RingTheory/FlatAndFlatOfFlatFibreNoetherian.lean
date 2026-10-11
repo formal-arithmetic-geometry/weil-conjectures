@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import Mathlib.RingTheory.RingHom.Flat
-import Mathlib.RingTheory.LocalRing.MaximalIdeal.Defs
-import Mathlib.RingTheory.Noetherian.Defs
-import Mathlib.RingTheory.TensorProduct.Basic
+module
+
+public import Mathlib.RingTheory.RingHom.Flat
+public import Mathlib.RingTheory.LocalRing.MaximalIdeal.Defs
+public import Mathlib.RingTheory.Noetherian.Defs
+public import Mathlib.RingTheory.TensorProduct.Basic
 
 /-!
 # The Noetherian fibre criterion for flatness
@@ -14,6 +16,8 @@ import Mathlib.RingTheory.TensorProduct.Basic
 Source: Stacks Project, Algebra, Tag 00MP, lemma-criterion-flatness-fibre-Noetherian
 (blueprint: lem-weil-pbc-criterion-flatness-fibre-noetherian).
 -/
+
+@[expose] public section
 
 open scoped TensorProduct
 set_option autoImplicit false

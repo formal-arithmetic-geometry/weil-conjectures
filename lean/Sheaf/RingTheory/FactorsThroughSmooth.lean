@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group G1
 -/
-import Sheaf.RingTheory.EssentiallySmooth
+module
+
+public import Sheaf.RingTheory.EssentiallySmooth
 
 /-!
 # Maps from finitely presented algebras factor through smooth algebras
@@ -11,6 +13,8 @@ import Sheaf.RingTheory.EssentiallySmooth
 Source: Stacks Project, Smoothing Ring Maps, proof of Lemma Tag 07FJ, item-eighth-resolve,
 lines 3062-3074 (blueprint: lem-weil-pbc-essentially-smooth-factors-through-smooth).
 -/
+
+@[expose] public section
 
 universe u₁ v₁ w
 

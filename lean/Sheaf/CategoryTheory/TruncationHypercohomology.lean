@@ -3,11 +3,13 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group G1
 -/
-import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
-import Sheaf.CategoryTheory.TruncationCouple
-import Sheaf.CategoryTheory.ExactCoupleConvergence
-import Sheaf.CategoryTheory.ImageFiltration
-import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCompatibility
+module
+
+public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
+public import Sheaf.CategoryTheory.TruncationCouple
+public import Sheaf.CategoryTheory.ExactCoupleConvergence
+public import Sheaf.CategoryTheory.ImageFiltration
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCompatibility
 
 /-!
 # The truncation hypercohomology spectral sequence
@@ -19,6 +21,8 @@ node thm-sp-truncation-e2, order 1212; Stacks Project, Tags 015J, 05TC, 011Q,
 The integer `a` is a cohomological lower bound, not a bound on the terms of `K`.
 The natural index of `pageCouple` and of the cycle/boundary tower is the page minus two.
 -/
+
+@[expose] public section
 
 universe u₁ u₂ v₁ v₂ w₁ w₂
 

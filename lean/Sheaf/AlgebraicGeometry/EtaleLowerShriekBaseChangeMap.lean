@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group U1
 -/
-import WeilConjectures.SixFunctors.Etale.LowerShriek.EtaleMap
-import WeilConjectures.SixFunctors.BaseChange.Square
+module
+
+public import WeilConjectures.SixFunctors.Etale.LowerShriek.EtaleMap
+public import WeilConjectures.SixFunctors.BaseChange.Square
 
 /-!
 # Base change morphism for etale extension by zero
@@ -12,6 +14,8 @@ import WeilConjectures.SixFunctors.BaseChange.Square
 Source: Stacks Project, Etale Cohomology, Tags 03S6 (proof) and 03S3(3)
 (blueprint: def-weil-pbc-etale-shriek-base-change-map).
 -/
+
+@[expose] public section
 
 universe u
 

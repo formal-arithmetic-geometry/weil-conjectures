@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group G1
 -/
-import WeilConjectures.Mathlib.RingTheory.Extension.Presentation.Submersive
+module
+
+public import WeilConjectures.Mathlib.RingTheory.Extension.Presentation.Submersive
 
 /-!
 # Lifting a square Jacobian presentation
@@ -11,6 +13,8 @@ import WeilConjectures.Mathlib.RingTheory.Extension.Presentation.Submersive
 Source: the Weil conjectures blueprint, sec-smooth-purity, sk-prop-sf-open-closed-triangle,
 node def-exc-etale-algebra-lift (blueprint: def-exc-etale-algebra-lift).
 -/
+
+@[expose] public section
 
 universe u v
 

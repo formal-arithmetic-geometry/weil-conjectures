@@ -2,14 +2,18 @@
 Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 -/
-import Mathlib.AlgebraicGeometry.Morphisms.Finite
-import WeilConjectures.AlgebraicGeometry.Morphisms.FiberDegree
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.Finite
+public import WeilConjectures.AlgebraicGeometry.Morphisms.FiberDegree
 
 /-! # Degree bound from a finite open cover
 
 Source: literature/stacks-project/morphisms.tex, proof of Lemma Tag 03JA,
 lines 15507--15518 (blueprint: lem-weil-pbc-finite-open-cover-degree-sum).
 -/
+
+@[expose] public section
 
 universe u
 

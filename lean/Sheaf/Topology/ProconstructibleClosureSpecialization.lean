@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group N1
 -/
-import Mathlib.Topology.Spectral.Basic
-import Mathlib.Topology.Constructible
+module
+
+public import Mathlib.Topology.Spectral.Basic
+public import Mathlib.Topology.Constructible
 
 /-!
 # Specializations in the closure of an intersection of constructible sets
@@ -12,6 +14,8 @@ import Mathlib.Topology.Constructible
 Source: Stacks Project, Topology, Tag 0903, part (1)
 (blueprint: lem-weil-pbc-spectral-proconstructible-closure-specialization).
 -/
+
+@[expose] public section
 
 universe u v
 

@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import Sheaf.AlgebraicGeometry.FullAffineEtaleSite
-import Sheaf.CategoryTheory.SpecialCocontinuousCoverings
-import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
+module
+
+public import Sheaf.AlgebraicGeometry.FullAffineEtaleSite
+public import Sheaf.CategoryTheory.SpecialCocontinuousCoverings
+public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 
 /-!
 # Affine étale restriction and cohomology
@@ -13,6 +15,8 @@ import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 Source: Stacks Project, Topologies 04HR, Definitions 0219 and 021B(4), and
 Cohomology on Sites 03YU (blueprint: lem-weil-pbc-affine-etale-site-topos).
 -/
+
+@[expose] public section
 
 universe u w
 

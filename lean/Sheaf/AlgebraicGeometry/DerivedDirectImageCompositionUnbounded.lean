@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group S1
 -/
-import Sheaf.AlgebraicGeometry.DerivedCategory
-import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
+module
+
+public import Sheaf.AlgebraicGeometry.DerivedCategory
+public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
 
 /-!
 # Composition of derived direct images
@@ -15,6 +17,8 @@ Cohomology of unbounded complexes (blueprint: lem-pc-derived-direct-image-compos
 This module states the canonical composition comparison for the unbounded derived direct
 image of morphisms of schemes.
 -/
+
+@[expose] public section
 
 universe u₂ wX₂ wY₂ wZ₂
 

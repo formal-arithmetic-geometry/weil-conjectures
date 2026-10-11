@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group P1
 -/
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
-import Sheaf.Topology.PresheafModuleStalkFunctor
+module
+
+public import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
+public import Sheaf.Topology.PresheafModuleStalkFunctor
 
 /-!
 # Stalks of change of rings
@@ -12,6 +14,8 @@ import Sheaf.Topology.PresheafModuleStalkFunctor
 Source: Stacks Project, Sheaves, Lemma 008B, from Lemmas 007K and 007Z
 (blueprint: lem-weil-pbc-stalk-change-of-rings-tensor).
 -/
+
+@[expose] public section
 
 universe u
 

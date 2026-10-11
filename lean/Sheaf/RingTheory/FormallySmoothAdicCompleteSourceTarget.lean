@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Mathlib.RingTheory.AdicCompletion.Algebra
-import Mathlib.RingTheory.Noetherian.Defs
-import Mathlib.RingTheory.LocalRing.MaximalIdeal.Defs
-import Sheaf.RingTheory.FormallySmoothAdic
+module
+
+public import Mathlib.RingTheory.AdicCompletion.Algebra
+public import Mathlib.RingTheory.Noetherian.Defs
+public import Mathlib.RingTheory.LocalRing.MaximalIdeal.Defs
+public import Sheaf.RingTheory.FormallySmoothAdic
 
 /-!
 # Adic formal smoothness after completing source and target
@@ -14,6 +16,8 @@ import Sheaf.RingTheory.FormallySmoothAdic
 Source: Stacks Project, More on Algebra, Lemma 15.38.4 (Tag 07ED), (1) implies (3)
 (blueprint: lem-weil-pbc-fs-adic-complete-source-target).
 -/
+
+@[expose] public section
 
 universe u v
 

@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import WeilConjectures.SixFunctors.Etale.LowerShriek.EtaleMap
-import Sheaf.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
+module
+
+public import WeilConjectures.SixFunctors.Etale.LowerShriek.EtaleMap
+public import Sheaf.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 
 /-!
 # Constructibility of extension by zero of a finite constant module sheaf
@@ -12,6 +14,8 @@ import Sheaf.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 Source: Stacks Project, Tag 03S8, Lemma 59.73.1(3)
 (blueprint: lem-weil-pbc-etale-free-sheaf-constructible).
 -/
+
+@[expose] public section
 
 universe u
 

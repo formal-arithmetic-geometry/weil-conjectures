@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import Mathlib.RingTheory.RingHom.FaithfullyFlat
-import Mathlib.RingTheory.FinitePresentation
-import Mathlib.RingTheory.TensorProduct.Basic
+module
+
+public import Mathlib.RingTheory.RingHom.FaithfullyFlat
+public import Mathlib.RingTheory.FinitePresentation
+public import Mathlib.RingTheory.TensorProduct.Basic
 
 /-!
 # Faithful flatness of localized field extension base change
@@ -13,6 +15,8 @@ import Mathlib.RingTheory.TensorProduct.Basic
 Source: Stacks Project, Varieties, Tag 0C4Y, Lemma `lemma-change-fields-flat`, part (1)
 (blueprint: lem-sc-etale-local-ring-stalk-faithfully-flat).
 -/
+
+@[expose] public section
 
 set_option autoImplicit false
 

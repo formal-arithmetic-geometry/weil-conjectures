@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import Sheaf.AlgebraicGeometry.Coherent
-import Mathlib.AlgebraicGeometry.Noetherian
-import Sheaf.Algebra.Homology.ModuleStalkFunctor
-import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
+module
+
+public import Sheaf.AlgebraicGeometry.Coherent
+public import Mathlib.AlgebraicGeometry.Noetherian
+public import Sheaf.Algebra.Homology.ModuleStalkFunctor
+public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 
 /-!
 # Coherent modules with finite free stalks are finite locally free
@@ -15,6 +17,8 @@ Source: Stacks Project, Algebra, Tag 0GWM, applied on Noetherian affine opens;
 Cohomology of Schemes, Tag 01XZ; Divisors, Tag 0CC4
 (blueprint: lem-sc-coherent-free-stalks-locally-free).
 -/
+
+@[expose] public section
 
 universe u
 

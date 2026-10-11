@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import Sheaf.AlgebraicGeometry.Coherent
-import Sheaf.Topology.RingedSpaceModuleCohomology
-import Mathlib.AlgebraicGeometry.Morphisms.Affine
-import Mathlib.AlgebraicGeometry.Over
+module
+
+public import Sheaf.AlgebraicGeometry.Coherent
+public import Sheaf.Topology.RingedSpaceModuleCohomology
+public import Mathlib.AlgebraicGeometry.Morphisms.Affine
+public import Mathlib.AlgebraicGeometry.Over
 
 /-!
 # Embedding a quasi-coherent module into an acyclic quasi-coherent module
@@ -14,6 +16,8 @@ import Mathlib.AlgebraicGeometry.Over
 Source: Stacks Project, Cohomology of Schemes, Tag 0BDY, Lemma 30.4.3 (1)
 (blueprint: lem-sc-picard-qcoh-universal-delta-embedding).
 -/
+
+@[expose] public section
 
 universe u
 

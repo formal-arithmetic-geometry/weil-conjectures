@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
-import Mathlib.CategoryTheory.Preadditive.Injective.Basic
-import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
+module
+
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
+public import Mathlib.CategoryTheory.Preadditive.Injective.Basic
+public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 
 /-!
 # Injective module sheaves are acyclic after forgetting to abelian sheaves
@@ -18,6 +20,8 @@ The proof uses `lem-weil-pbc-ringed-site-injective-module-cech-acyclic` for vani
 Čech cohomology for every covering, and `lem-weil-pbc-site-cech-vanishing-criterion` to
 pass from Čech vanishing to derived cohomology.
 -/
+
+@[expose] public section
 
 universe u v w'
 

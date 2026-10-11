@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group J1
 -/
-import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
-import Mathlib.CategoryTheory.Sites.ConstantSheaf
-import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+module
+
+public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
+public import Mathlib.CategoryTheory.Sites.ConstantSheaf
+public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 
 /-! # Gabber vanishing for absolutely algebraically closed normal domains
 
@@ -13,6 +15,8 @@ Source: literature/stacks-project/etale-cohomology.tex, Lemma 09ZC
 (label lemma-gabber-for-absolutely-algebraically-closed) (blueprint:
 lem-weil-pbc-gabber-absolutely-algebraically-closed).
 -/
+
+@[expose] public section
 
 open CategoryTheory AlgebraicGeometry
 open CategoryTheory.Limits

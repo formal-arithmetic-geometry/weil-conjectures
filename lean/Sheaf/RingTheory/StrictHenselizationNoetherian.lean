@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Sheaf.RingTheory.IsStrictHenselization
-import Mathlib.RingTheory.Noetherian.Defs
-import Mathlib.FieldTheory.IsSepClosed
+module
+
+public import Sheaf.RingTheory.IsStrictHenselization
+public import Mathlib.RingTheory.Noetherian.Defs
+public import Mathlib.FieldTheory.IsSepClosed
 
 /-!
 # Noetherianity and strict henselization
@@ -13,6 +15,8 @@ import Mathlib.FieldTheory.IsSepClosed
 Source: Stacks Project, More on Algebra, Lemma 15.46.3 (Tag 06LJ), conditions (1) and (3)
 (blueprint: lem-sc-strict-henselization-noetherian).
 -/
+
+@[expose] public section
 
 universe u
 

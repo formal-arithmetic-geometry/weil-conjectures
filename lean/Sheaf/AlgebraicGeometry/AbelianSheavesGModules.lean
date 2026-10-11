@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF worker J1
 -/
-import Mathlib.AlgebraicGeometry.Sites.EtalePoint
-import Mathlib.FieldTheory.KrullTopology
-import Sheaf.AlgebraicGeometry.EtaleFieldGsets
-import Sheaf.RepresentationTheory.DiscreteContinuousRep
+module
+
+public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
+public import Mathlib.FieldTheory.KrullTopology
+public import Sheaf.AlgebraicGeometry.EtaleFieldGsets
+public import Sheaf.RepresentationTheory.DiscreteContinuousRep
 
 /-!
 # Abelian etale sheaves on a field and discrete Galois modules
@@ -15,6 +17,8 @@ Source: Stacks Project, Etale Cohomology, Tag 04JQ,
 `lemma-equivalence-abelian-sheaves-point`, deduced from Tag 03QT
 (blueprint: lem-exc-abelian-sheaves-gmodules).
 -/
+
+@[expose] public section
 
 universe u v
 

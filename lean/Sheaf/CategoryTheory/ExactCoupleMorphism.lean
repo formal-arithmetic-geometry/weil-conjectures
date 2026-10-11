@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import Sheaf.CategoryTheory.HalfPlaneConvergence
+module
+
+public import Sheaf.CategoryTheory.HalfPlaneConvergence
 
 /-!
 # Morphisms of exact couples and their abutments
@@ -16,6 +18,8 @@ The index `r` of `pageCouple` denotes the actual page `r + 2`. Compatibility wit
 page cohomology is expressed using its kernel inclusion and quotient projection.
 All induced maps are characterized by their defining commutative squares.
 -/
+
+@[expose] public section
 
 universe u v
 

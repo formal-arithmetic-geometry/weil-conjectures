@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group S1
 -/
-import Sheaf.RingTheory.StrictlyStandardElement
-import Mathlib.RingTheory.Smooth.Basic
+module
+
+public import Sheaf.RingTheory.StrictlyStandardElement
+public import Mathlib.RingTheory.Smooth.Basic
 
 /-!
 # Smooth localization at a strictly standard element
@@ -12,6 +14,8 @@ import Mathlib.RingTheory.Smooth.Basic
 Source: Stacks Project, Smoothing Ring Maps, Lemma Tag 07CA, first paragraph of the proof
 (blueprint: lem-weil-pbc-strictly-standard-localization-smooth).
 -/
+
+@[expose] public section
 
 universe u v
 

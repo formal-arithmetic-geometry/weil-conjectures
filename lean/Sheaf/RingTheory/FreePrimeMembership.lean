@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group G1
 -/
-import Mathlib.Algebra.Module.LocalizedModule.Basic
-import Mathlib.RingTheory.Localization.AtPrime.Basic
+module
+
+public import Mathlib.Algebra.Module.LocalizedModule.Basic
+public import Mathlib.RingTheory.Localization.AtPrime.Basic
 
 /-!
 # Prime membership in a finite free module after localization
@@ -13,6 +15,8 @@ Source: Stacks Project, Algebra, Definition Tag 00CO and the localization at a p
 the coordinate calculation underlying Lemma Tag 00NX
 (blueprint: lem-sc-free-prime-membership).
 -/
+
+@[expose] public section
 
 universe u
 

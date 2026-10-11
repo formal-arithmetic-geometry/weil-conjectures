@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF lead L
 -/
-import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
-import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
+public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
 
 /-!
 # Projective morphisms of schemes
@@ -23,6 +25,8 @@ that is, `IsProjective (X ↘ Spec (.of k))`; no separate declaration is needed 
   followed by the structure morphism.
 - `AlgebraicGeometry.IsProjective`: `f` is H-projective and quasi-compact.
 -/
+
+@[expose] public section
 
 universe u
 

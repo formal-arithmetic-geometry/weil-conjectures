@@ -1,5 +1,7 @@
-import Sheaf.Topology.SetsExtensionByEmpty
-import Mathlib.Topology.Sheaves.Functors
+module
+
+public import Sheaf.Topology.SetsExtensionByEmpty
+public import Mathlib.Topology.Sheaves.Functors
 
 /-!
 # Extension by the empty set: adjunction and stalks
@@ -7,6 +9,8 @@ import Mathlib.Topology.Sheaves.Functors
 Source: `literature/stacks-project/sheaves.tex`, Lemmas 00A0 and 00A3
 (blueprint: `lem-weil-pbc-sets-extension-by-empty-adjunction`).
 -/
+
+@[expose] public section
 
 universe u
 

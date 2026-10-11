@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 
 /-!
 # The coordinate algebra of an affine finite-type scheme over a field
@@ -12,6 +14,8 @@ import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 Source: Stacks Project, Morphisms, Lemma 29.15.2 (Tag 01T2), (1) implies (2)
 (blueprint: lem-pc-affine-finite-type-algebra).
 -/
+
+@[expose] public section
 
 universe u
 

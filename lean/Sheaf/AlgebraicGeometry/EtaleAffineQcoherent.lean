@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group U1
 -/
-import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
-import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
-import Sheaf.AlgebraicGeometry.EtaleTensorSectionsSheaf
+module
+
+public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
+public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
+public import Sheaf.AlgebraicGeometry.EtaleTensorSectionsSheaf
 
 /-!
 # Étale acyclicity of a quasi-coherent module on an affine scheme
@@ -15,6 +17,8 @@ Source: blueprint `lem-sc-etale-affine-qcoherent`, order 959;
 Stacks Project, Étale Cohomology, Theorem 03P2 (affine case)
 (blueprint: lem-sc-etale-affine-qcoherent).
 -/
+
+@[expose] public section
 
 universe u
 

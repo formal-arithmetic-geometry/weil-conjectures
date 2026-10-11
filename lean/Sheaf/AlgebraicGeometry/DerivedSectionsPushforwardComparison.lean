@@ -3,14 +3,18 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group P1
 -/
-import Sheaf.AlgebraicGeometry.DerivedOpenRestrictionMaps
-import Sheaf.Topology.OpenModuleDerivedSections
+module
+
+public import Sheaf.AlgebraicGeometry.DerivedOpenRestrictionMaps
+public import Sheaf.Topology.OpenModuleDerivedSections
 
 /-! # Derived sections of a derived direct image
 
 Source: Stacks Project, Derived Categories of Schemes, Tag 08D5, proof of (2), and
 Cohomology, Tag 0D5T (blueprint: lem-pc-derived-sections-pushforward-comparison).
 -/
+
+@[expose] public section
 
 universe u wX wV wU wAb
 

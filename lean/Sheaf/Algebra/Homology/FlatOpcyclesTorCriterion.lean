@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Mathlib.RingTheory.Flat.CategoryTheory
-import Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
-import Mathlib.Algebra.Homology.Additive
+module
+
+public import Mathlib.RingTheory.Flat.CategoryTheory
+public import Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
+public import Mathlib.Algebra.Homology.Additive
 
 /-!
 # Flatness of opcycles from exactness after tensoring
@@ -13,6 +15,8 @@ import Mathlib.Algebra.Homology.Additive
 Source: Stacks Project, More on Algebra, Lemma 15.59.2 (Tag 0653), Tor argument
 (blueprint: lem-pc-module-flat-opcycles-tor-criterion).
 -/
+
+@[expose] public section
 
 universe u
 

@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Mathlib.AlgebraicGeometry.Sites.Fpqc
-import Mathlib.AlgebraicGeometry.Morphisms.Etale
+module
+
+public import Mathlib.AlgebraicGeometry.Sites.Fpqc
+public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 
 /-!
 # Descent of opens in an etale base change of an fpqc covering
@@ -12,6 +14,8 @@ import Mathlib.AlgebraicGeometry.Morphisms.Etale
 Source: Stacks Project, Descent, Tag 03N0, applied as in Etale Cohomology, Tag 09XN
 (blueprint: lem-weil-pbc-etale-open-fpqc-descent).
 -/
+
+@[expose] public section
 
 universe u v
 

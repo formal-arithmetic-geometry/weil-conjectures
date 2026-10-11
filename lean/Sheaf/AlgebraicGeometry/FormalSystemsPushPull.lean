@@ -3,15 +3,19 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group Q1
 -/
-import Sheaf.AlgebraicGeometry.FormalSystemsPullback
-import Sheaf.AlgebraicGeometry.CoherentFormalModulesAbelian
-import Mathlib.AlgebraicGeometry.Morphisms.Proper
+module
+
+public import Sheaf.AlgebraicGeometry.FormalSystemsPullback
+public import Sheaf.AlgebraicGeometry.CoherentFormalModulesAbelian
+public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 
 /-! # Comparison of a formal system with a proper pushforward
 
 Source: Stacks Project, Cohomology of Schemes, Lemma 088B and Remark 0888
 (blueprint: lem-weil-pbc-formal-systems-push-pull).
 -/
+
+@[expose] public section
 
 universe u
 

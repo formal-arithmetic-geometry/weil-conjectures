@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import WeilConjectures.Algebra.Homology.HomotopyCategory.Products
-import Sheaf.CategoryTheory.Triangulated.DerivedLimit
+module
+
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import WeilConjectures.Algebra.Homology.HomotopyCategory.Products
+public import Sheaf.CategoryTheory.Triangulated.DerivedLimit
 
 /-!
 # Right derived functors and countable derived limits
@@ -13,6 +15,8 @@ import Sheaf.CategoryTheory.Triangulated.DerivedLimit
 Source: Stacks Project, Injectives, Lemma Tag 08U1
 (blueprint: lem-pc-derived-functor-commutes-derived-limit).
 -/
+
+@[expose] public section
 
 universe u
 

@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group J1
 -/
-import Mathlib.CategoryTheory.Triangulated.Pretriangulated
-import Sheaf.CategoryTheory.Limits.TowerTransitionEndomorphism
+module
+
+public import Mathlib.CategoryTheory.Triangulated.Pretriangulated
+public import Sheaf.CategoryTheory.Limits.TowerTransitionEndomorphism
 
 /-!
 # Derived limits of inverse systems
@@ -17,6 +19,8 @@ Source: Stacks Project, Derived Categories, Definition 13.34.1 (Tag 08TC)
 - `CategoryTheory.IsDerivedLimitTriangle`: a specified Roos triangle is distinguished.
 - `CategoryTheory.IsDerivedLimit`: an object admits a Roos triangle.
 -/
+
+@[expose] public section
 
 universe u v
 

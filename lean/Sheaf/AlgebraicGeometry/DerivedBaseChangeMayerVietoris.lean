@@ -3,15 +3,19 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group V1
 -/
-import Sheaf.AlgebraicGeometry.DerivedMayerVietorisTriangle
-import Sheaf.AlgebraicGeometry.SchemeDerivedBaseChangeMap
-import Sheaf.AlgebraicGeometry.AffineDerivedPullbackTensorTilde
+module
+
+public import Sheaf.AlgebraicGeometry.DerivedMayerVietorisTriangle
+public import Sheaf.AlgebraicGeometry.SchemeDerivedBaseChangeMap
+public import Sheaf.AlgebraicGeometry.AffineDerivedPullbackTensorTilde
 
 /-! # Base change and the relative Mayer--Vietoris triangle
 
 Source: Stacks Project, Tag 0DJ9, induction step, and Tag 08BV
 (blueprint: lem-pc-rf-mv-triangle-naturality).
 -/
+
+@[expose] public section
 
 universe u w
 

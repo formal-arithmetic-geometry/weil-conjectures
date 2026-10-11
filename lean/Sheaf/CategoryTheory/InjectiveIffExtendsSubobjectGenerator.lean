@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.Basic
-import Mathlib.CategoryTheory.Preadditive.Injective.Basic
+module
+
+public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.Basic
+public import Mathlib.CategoryTheory.Preadditive.Injective.Basic
 
 /-!
 # The injectivity criterion using subobjects of a generator
@@ -12,6 +14,8 @@ import Mathlib.CategoryTheory.Preadditive.Injective.Basic
 Source: Stacks Project, Injectives, Lemma 19.11.6 (Tag 079G)
 (blueprint: lem-pur-kinjective-characterize-injective).
 -/
+
+@[expose] public section
 
 universe v u
 

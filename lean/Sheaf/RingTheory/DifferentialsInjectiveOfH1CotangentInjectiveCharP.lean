@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF contributors
 -/
-import Mathlib.Algebra.Algebra.ZMod
-import Mathlib.RingTheory.Extension.ExtendScalars
-import Mathlib.RingTheory.LocalRing.ResidueField.Basic
-import Mathlib.RingTheory.Noetherian.Defs
+module
+
+public import Mathlib.Algebra.Algebra.ZMod
+public import Mathlib.RingTheory.Extension.ExtendScalars
+public import Mathlib.RingTheory.LocalRing.ResidueField.Basic
+public import Mathlib.RingTheory.Noetherian.Defs
 
 /-!
 # Residue-field differential injectivity in positive characteristic
@@ -14,6 +16,8 @@ import Mathlib.RingTheory.Noetherian.Defs
 Source: Stacks Project, More on Algebra, Proposition Tag 07E5, proof of (3) ⇔ (4)
 (blueprint: lem-weil-pbc-h1-injective-differentials-injective-char-p).
 -/
+
+@[expose] public section
 
 universe u v
 

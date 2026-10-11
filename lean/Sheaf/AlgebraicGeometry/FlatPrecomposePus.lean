@@ -2,9 +2,11 @@
 Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 -/
-import Sheaf.AlgebraicGeometry.DualityEquationBaseChangeMap
-import Sheaf.AlgebraicGeometry.GlobalHomPullbackComparison
-import Sheaf.AlgebraicGeometry.GlobalHomAdjunctionIso
+module
+
+public import Sheaf.AlgebraicGeometry.DualityEquationBaseChangeMap
+public import Sheaf.AlgebraicGeometry.GlobalHomPullbackComparison
+public import Sheaf.AlgebraicGeometry.GlobalHomAdjunctionIso
 
 /-!
 # Flat precomposition transformation for right-adjoint base change
@@ -13,6 +15,8 @@ Source: Stacks Project, `duality.tex`, Tag 0AA8 (Lemma 48.6.2),
 case (1), final compatibility sentence
 (blueprint: lem-sc-flat-precompose-pus).
 -/
+
+@[expose] public section
 
 set_option autoImplicit false
 set_option backward.isDefEq.respectTransparency false

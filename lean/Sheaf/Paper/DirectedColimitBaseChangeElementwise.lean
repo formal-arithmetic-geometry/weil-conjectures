@@ -3,12 +3,14 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group G1
 -/
-import Mathlib.Algebra.Algebra.Hom
-import Mathlib.Algebra.Category.Ring.Basic
-import Mathlib.CategoryTheory.Category.Preorder
-import Mathlib.CategoryTheory.Limits.HasLimits
-import Mathlib.LinearAlgebra.TensorProduct.Map
-import Mathlib.Order.Directed
+module
+
+public import Mathlib.Algebra.Algebra.Hom
+public import Mathlib.Algebra.Category.Ring.Basic
+public import Mathlib.CategoryTheory.Category.Preorder
+public import Mathlib.CategoryTheory.Limits.HasLimits
+public import Mathlib.LinearAlgebra.TensorProduct.Map
+public import Mathlib.Order.Directed
 
 /-!
 # Elements in tensor products over directed ring colimits
@@ -16,6 +18,8 @@ import Mathlib.Order.Directed
 Source: Stacks Project, Algebra, Tags 00D6, 00D7, 00DD, as used in Tag 07RI
 (blueprint: lem-weil-pbc-directed-colimit-base-change-elementwise).
 -/
+
+@[expose] public section
 
 universe v w
 

@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import Sheaf.CategoryTheory.CompactObject
-import Sheaf.CategoryTheory.WeakTriangulatedGenerator
+module
+
+public import Sheaf.CategoryTheory.CompactObject
+public import Sheaf.CategoryTheory.WeakTriangulatedGenerator
 
 /-!
 # Compactly generated triangulated categories
@@ -12,6 +14,8 @@ import Sheaf.CategoryTheory.WeakTriangulatedGenerator
 Source: Stacks Project, Derived Categories, Definition 13.37.5 (Tag 09SQ)
 (blueprint: def-pc-compactly-generated).
 -/
+
+@[expose] public section
 
 universe w v u
 

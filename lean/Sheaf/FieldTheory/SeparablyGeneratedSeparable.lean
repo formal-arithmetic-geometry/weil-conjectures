@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import Sheaf.FieldTheory.SeparableExtension
+module
+
+public import Sheaf.FieldTheory.SeparableExtension
 
 /-!
 # Separably generated field extensions are separable
@@ -11,6 +13,8 @@ import Sheaf.FieldTheory.SeparableExtension
 Source: Stacks Project, Algebra, Lemma 10.44.3 (Tag 030X)
 (blueprint: lem-weil-pbc-separably-generated-separable).
 -/
+
+@[expose] public section
 
 universe u v
 

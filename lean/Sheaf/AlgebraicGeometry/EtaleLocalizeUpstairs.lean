@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import Mathlib.AlgebraicGeometry.Morphisms.Etale
-import Mathlib.RingTheory.Localization.Away.Basic
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.Etale
+public import Mathlib.RingTheory.Localization.Away.Basic
 
 /-!
 # Étale localization upstairs
@@ -12,6 +14,8 @@ import Mathlib.RingTheory.Localization.Away.Basic
 Source: literature/stacks-project/more-algebra.tex, Lemma Tag 07M0
 (blueprint: lem-weil-pbc-etale-localize-upstairs).
 -/
+
+@[expose] public section
 
 universe u
 

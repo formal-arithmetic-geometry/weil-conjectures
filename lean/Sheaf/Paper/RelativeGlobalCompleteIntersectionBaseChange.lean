@@ -1,6 +1,8 @@
-import Mathlib.Algebra.MvPolynomial.Eval
-import Mathlib.RingTheory.TensorProduct.Basic
-import Sheaf.Paper.RelativeGlobalCompleteIntersectionPresentation
+module
+
+public import Mathlib.Algebra.MvPolynomial.Eval
+public import Mathlib.RingTheory.TensorProduct.Basic
+public import Sheaf.Paper.RelativeGlobalCompleteIntersectionPresentation
 
 /-!
 # Base change of a relative global complete intersection
@@ -8,6 +10,8 @@ import Sheaf.Paper.RelativeGlobalCompleteIntersectionPresentation
 Source: Stacks Project, Algebra, Lemma Tag 00SS, part (1)
 (blueprint: lem-weil-pbc-relative-global-complete-intersection-base-change).
 -/
+
+@[expose] public section
 
 universe u v
 

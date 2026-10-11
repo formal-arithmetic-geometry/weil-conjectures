@@ -1,6 +1,8 @@
-import Mathlib.RingTheory.Localization.FractionRing
-import Mathlib.RingTheory.FiniteType
-import Mathlib.RingTheory.IntegralClosure.Algebra.Basic
+module
+
+public import Mathlib.RingTheory.Localization.FractionRing
+public import Mathlib.RingTheory.FiniteType
+public import Mathlib.RingTheory.IntegralClosure.Algebra.Basic
 
 /-!
 # Finiteness of the normalization of a finite type domain over ℤ
@@ -9,6 +11,8 @@ Source: literature/stacks-project/algebra.tex, Algebra, Proposition Tag 0335,
 items (3) and (5), together with Definitions Tags 032R and 032F
 (blueprint: lem-weil-pbc-finite-type-z-domain-normalization-finite).
 -/
+
+@[expose] public section
 
 universe u v
 

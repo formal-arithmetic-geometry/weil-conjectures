@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group J1
 -/
-import Sheaf.RingTheory.Depth
-import Mathlib.RingTheory.KrullDimension.Module
-import Mathlib.RingTheory.Noetherian.Defs
-import Mathlib.RingTheory.Regular.IsSMulRegular
+module
+
+public import Sheaf.RingTheory.Depth
+public import Mathlib.RingTheory.KrullDimension.Module
+public import Mathlib.RingTheory.Noetherian.Defs
+public import Mathlib.RingTheory.Regular.IsSMulRegular
 
 /-!
 # A dimension-cutting element on a Cohen–Macaulay module
@@ -14,6 +16,8 @@ import Mathlib.RingTheory.Regular.IsSMulRegular
 Source: Stacks Project, Algebra, Lemma 10.103.3 (Tag 00N5), and Definition 10.103.1
 (Tag 00N3) (blueprint: lem-weil-pbc-cm-module-good-element-nonzerodivisor).
 -/
+
+@[expose] public section
 
 universe u v
 

@@ -3,15 +3,19 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group V1
 -/
-import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
+module
+
+public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 
 /-! # Cohomology of acyclic quasi-coherent derived pushforward
 
 Source: Stacks Project, Tags 08D4 and 08D5, and the cohomology display in the proof
 of Tag 0AVW (blueprint: lem-sc-qcoh-acyclic-derived-pushforward-cohomology).
 -/
+
+@[expose] public section
 
 universe u wX wY
 

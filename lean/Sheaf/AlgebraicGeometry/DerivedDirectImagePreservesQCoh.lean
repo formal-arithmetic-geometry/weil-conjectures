@@ -3,15 +3,19 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under the Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group S1
 -/
-import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
+module
+
+public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 
 /-! # Derived direct image preserves quasi-coherent cohomology
 
 Source: literature/stacks-project/perfect.tex, Tag 08D5,
 part (1) (blueprint: lem-pc-derived-direct-image-preserves-qcoh).
 -/
+
+@[expose] public section
 
 universe u wX wY
 

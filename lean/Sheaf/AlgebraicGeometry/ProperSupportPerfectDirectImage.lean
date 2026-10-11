@@ -1,17 +1,21 @@
-import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Basic
-import Sheaf.AlgebraicGeometry.DerivedCategory
-import Sheaf.AlgebraicGeometry.PerfectComplex
-import Sheaf.AlgebraicGeometry.ClosedSubsetProperOverBase
-import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
-import Sheaf.AlgebraicGeometry.DerivedPullback
-import Sheaf.AlgebraicGeometry.DerivedTensorStructure
-import Sheaf.AlgebraicGeometry.BaseChangeConventions
+module
+
+public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Basic
+public import Sheaf.AlgebraicGeometry.DerivedCategory
+public import Sheaf.AlgebraicGeometry.PerfectComplex
+public import Sheaf.AlgebraicGeometry.ClosedSubsetProperOverBase
+public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
+public import Sheaf.AlgebraicGeometry.DerivedPullback
+public import Sheaf.AlgebraicGeometry.DerivedTensorStructure
+public import Sheaf.AlgebraicGeometry.BaseChangeConventions
 
 /-! # Perfect direct image with proper support
 
 Source: literature/stacks-project/perfect.tex, Lemma 36.30.1, Tag 0A1H
 (blueprint: lem-pc-proper-support-perfect-direct-image).
 -/
+
+@[expose] public section
 
 universe u w
 

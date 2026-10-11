@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group T1
 -/
-import Sheaf.Algebra.Homology.ModuleHomComplex
-import Sheaf.AlgebraicGeometry.PrincipalOpenCechTotal
-import Sheaf.AlgebraicGeometry.KoszulOpenSystem
-import Mathlib.Algebra.Homology.HomologicalComplexLimits
+module
+
+public import Sheaf.Algebra.Homology.ModuleHomComplex
+public import Sheaf.AlgebraicGeometry.PrincipalOpenCechTotal
+public import Sheaf.AlgebraicGeometry.KoszulOpenSystem
+public import Mathlib.Algebra.Homology.HomologicalComplexLimits
 
 /-! # The canonical Koszul-to-Čech comparison
 
@@ -15,6 +17,8 @@ Source: Stacks Project, Tags 08CX, 08D0 and 08D1
 The power system, its colimit, and its comparison map retain the explicit basis formula
 and the totalization sign of Tag 08D1. Existence proofs supply only verification data.
 -/
+
+@[expose] public section
 
 universe uK wK vK
 

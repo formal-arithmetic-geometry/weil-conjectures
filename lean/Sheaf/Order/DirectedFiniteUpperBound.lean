@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF lead L
 -/
-import Mathlib.Data.Finset.Sort
+module
+
+public import Mathlib.Data.Finset.Sort
 
 /-!
 # The selected upper bound of a finite subset of a directed set
@@ -29,6 +31,8 @@ from `i₀`. The definition uses neither `≤` nor the upper-bound property of `
 * `directedFiniteUpperBound_insert`: adjoining an `r`-largest new element `i` applies `d · i`.
 * `le_directedFiniteUpperBound`: if `d i j` bounds `i` and `j`, then `u F` bounds `F`.
 -/
+
+@[expose] public section
 
 universe u
 

@@ -2,7 +2,9 @@
 Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 -/
-import Mathlib.RingTheory.KrullDimension.Polynomial
+module
+
+public import Mathlib.RingTheory.KrullDimension.Polynomial
 
 /-!
 # Dimension of a localized polynomial ring at a maximal ideal
@@ -11,6 +13,8 @@ Source: literature/stacks-project/algebra.tex, Algebra, Lemma Tag 00OP
 (lemma-dim-affine-space, line 27660) (blueprint:
 lem-weil-pbc-polynomial-ring-maximal-localization-dimension).
 -/
+
+@[expose] public section
 
 universe u
 

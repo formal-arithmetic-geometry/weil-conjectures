@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import Sheaf.AlgebraicGeometry.KInjectiveResolutions
+module
+
+public import Sheaf.AlgebraicGeometry.KInjectiveResolutions
 
 /-!
 # Existence and uniqueness of K-injective resolutions on the small étale site
@@ -12,6 +14,8 @@ Source: blueprint `sec-curve-estimates/sk-prop-cd`,
 proposition `prop-weil-pbc-kinjective-resolutions-exist`; Stacks Project, Tags 079P and 070I
 (blueprint: prop-weil-pbc-kinjective-resolutions-exist).
 -/
+
+@[expose] public section
 
 universe u
 

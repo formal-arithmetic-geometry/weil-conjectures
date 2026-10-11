@@ -3,11 +3,13 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group P1
 -/
-import Sheaf.AlgebraicGeometry.Coherent
-import WeilConjectures.AlgebraicGeometry.ProjectiveSpectrum.Twist
-import WeilConjectures.Mathlib.RingTheory.MvPolynomial.Homogeneous
-import Mathlib.Algebra.DirectSum.Module
-import Mathlib.RingTheory.Finiteness.Defs
+module
+
+public import Sheaf.AlgebraicGeometry.Coherent
+public import WeilConjectures.AlgebraicGeometry.ProjectiveSpectrum.Twist
+public import WeilConjectures.Mathlib.RingTheory.MvPolynomial.Homogeneous
+public import Mathlib.Algebra.DirectSum.Module
+public import Mathlib.RingTheory.Finiteness.Defs
 
 /-!
 # Finite generation of the graded section module
@@ -25,6 +27,8 @@ multiplication by a homogeneous `a ∈ S_e` on `M` is the map `G ◁ Proj.twistM
 sections. These identifications assemble to an `S`-linear isomorphism `M ≅ M_{≥0}`, so the
 existence of `M` is exactly the finite generation of `M_{≥0}` with the induced action.
 -/
+
+@[expose] public section
 
 universe u
 

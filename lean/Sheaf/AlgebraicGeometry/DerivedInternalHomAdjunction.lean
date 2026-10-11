@@ -3,14 +3,18 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group P1
 -/
-import Sheaf.AlgebraicGeometry.DerivedTensorStructure
-import Sheaf.Algebra.Homology.DerivedInternalHom
+module
+
+public import Sheaf.AlgebraicGeometry.DerivedTensorStructure
+public import Sheaf.Algebra.Homology.DerivedInternalHom
 
 /-! # Derived internal-Hom adjunction on a scheme
 
 Source: Stacks Project, Cohomology, Tags 08DJ and 0FPB
 (blueprint: lem-sc-derived-internal-hom-adjunction).
 -/
+
+@[expose] public section
 
 universe u w
 

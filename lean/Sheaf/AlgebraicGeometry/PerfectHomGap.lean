@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group G1
 -/
-import Sheaf.AlgebraicGeometry.PerfectComplex
-import Mathlib.Topology.QuasiSeparated
+module
+
+public import Sheaf.AlgebraicGeometry.PerfectComplex
+public import Mathlib.Topology.QuasiSeparated
 
 /-! # Vanishing of maps from a perfect complex across a cohomology gap
 
@@ -12,6 +14,8 @@ Source: Stacks Project, Derived Categories of Schemes, Lemma 36.13.5(1), Tag 09M
 label `lemma-ext-from-perfect-into-bounded-QCoh`
 (blueprint: lem-sc-perfect-ext-bounded-qcoh-vanishing).
 -/
+
+@[expose] public section
 
 universe u w
 

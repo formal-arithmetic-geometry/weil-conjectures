@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import Mathlib.CategoryTheory.Abelian.Exact
+module
+
+public import Mathlib.CategoryTheory.Abelian.Exact
 
 /-!
 # Bigraded exact couples and their spectral sequences
@@ -12,6 +14,8 @@ Source: Stacks Project, Homological Algebra, Definitions 12.21.1 and 12.21.3,
 Lemma 12.21.2 and Remark 12.21.5 (Tags 011Q, 011S, 011R, 0AMJ), in the
 bigraded convention of the blueprint (blueprint: def-sp-exact-couple).
 -/
+
+@[expose] public section
 
 universe u v
 

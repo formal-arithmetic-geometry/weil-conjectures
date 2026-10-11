@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group Q1
 -/
-import Sheaf.Paper.LisseAdicSheaves
+module
+
+public import Sheaf.Paper.LisseAdicSheaves
 
 /-!
 # The fibre functors of lisse adic sheaves
@@ -12,6 +14,8 @@ Source: Deligne, Weil II (1.1.1) b)-d), SGA 5 VI
 (blueprint: def-pod-lisse-adic-fibre-functors).
 The objects are the recorded integral, rational and algebraic fibres.
 -/
+
+@[expose] public section
 
 universe d
 open CategoryTheory CategoryTheory.Limits Opposite

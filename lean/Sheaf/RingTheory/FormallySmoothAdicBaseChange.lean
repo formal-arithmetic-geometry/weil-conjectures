@@ -3,14 +3,18 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import Mathlib.RingTheory.TensorProduct.Basic
-import Sheaf.RingTheory.FormallySmoothAdic
+module
+
+public import Mathlib.RingTheory.TensorProduct.Basic
+public import Sheaf.RingTheory.FormallySmoothAdic
 
 /-!
 # Base change of formal smoothness for an adic topology
 
 Source: Stacks Project, More on Algebra, Lemma 07EG (blueprint: lem-weil-pbc-fs-adic-base-change).
 -/
+
+@[expose] public section
 
 open scoped TensorProduct
 

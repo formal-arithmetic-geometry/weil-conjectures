@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import Sheaf.FieldTheory.SeparableExtension
-import Mathlib.RingTheory.TensorProduct.Basic
-import Mathlib.RingTheory.Nilpotent.Defs
+module
+
+public import Sheaf.FieldTheory.SeparableExtension
+public import Mathlib.RingTheory.TensorProduct.Basic
+public import Mathlib.RingTheory.Nilpotent.Defs
 
 /-!
 # Tensoring a reduced algebra with a separably generated field extension
@@ -13,6 +15,8 @@ import Mathlib.RingTheory.Nilpotent.Defs
 Source: Stacks Project, Algebra, Lemma 10.43.6 (Tag 030U), separably generated case
 (blueprint: lem-weil-pbc-separably-generated-tensor-reduced).
 -/
+
+@[expose] public section
 
 universe u v w
 

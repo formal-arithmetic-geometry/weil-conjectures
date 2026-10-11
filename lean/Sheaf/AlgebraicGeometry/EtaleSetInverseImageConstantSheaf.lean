@@ -3,13 +3,17 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group G1
 -/
-import Sheaf.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
+module
+
+public import Sheaf.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
 
 /-! # Inverse image of a set-valued constant étale sheaf is constant
 
 Source: literature/stacks-project/sites-modules.tex, Section 18.43 (Tag 093I)
 and Lemma 093R (blueprint: lem-weil-pbc-sets-etale-inverse-image-constant-sheaf).
 -/
+
+@[expose] public section
 
 universe u
 

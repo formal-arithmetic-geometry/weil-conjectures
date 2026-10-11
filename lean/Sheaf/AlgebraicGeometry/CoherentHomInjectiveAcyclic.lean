@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group V1
 -/
-import Sheaf.AlgebraicGeometry.IsFlasqueHomObjOfInjective
-import Sheaf.Topology.RingedSpaceModuleCohomology
+module
+
+public import Sheaf.AlgebraicGeometry.IsFlasqueHomObjOfInjective
+public import Sheaf.Topology.RingedSpaceModuleCohomology
 
 /-! # Acyclicity of internal Hom into an injective module
 
@@ -12,6 +14,8 @@ Source: Stacks Project, Derived Categories of Varieties, Tag 0FZ3, proof of (1),
 the local-to-global Ext spectral sequence input; Cohomology, Section 20.43,
 and Tag 01EA (blueprint: lem-sc-ext-coherent-hom-injective-acyclic).
 -/
+
+@[expose] public section
 
 universe u
 

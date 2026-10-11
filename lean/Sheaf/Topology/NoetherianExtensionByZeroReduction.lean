@@ -1,8 +1,12 @@
-import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
-import Mathlib.Topology.Sheaves.Abelian
-import Mathlib.Topology.Compactness.Compact
-import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.HasExt
-import Sheaf.Topology.AbelianOpenExtensionByZeroStalks
+module
+
+public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
+public import Mathlib.Topology.Sheaves.Abelian
+public import Mathlib.Topology.Compactness.Compact
+public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.HasExt
+public import Sheaf.Topology.AbelianOpenExtensionByZeroStalks
+
+@[expose] public section
 
 universe u
 

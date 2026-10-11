@@ -1,12 +1,16 @@
-import Mathlib.AlgebraicGeometry.Morphisms.Finite
-import Mathlib.AlgebraicGeometry.Morphisms.Proper
-import Mathlib.AlgebraicGeometry.Noetherian
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.Finite
+public import Mathlib.AlgebraicGeometry.Morphisms.Proper
+public import Mathlib.AlgebraicGeometry.Noetherian
 
 /-!
 # Proper morphisms with finite fibres are finite near a point
 
 Source: Stacks Project, Tag 02OH (blueprint: thm-sc-proper-finite-fibre-finite-neighbourhood).
 -/
+
+@[expose] public section
 
 universe u
 

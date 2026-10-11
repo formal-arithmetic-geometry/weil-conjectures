@@ -3,17 +3,21 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Sheaf.AlgebraicGeometry.CommAlgebraSheaf
-import Sheaf.CategoryTheory.CommAlgebraSheafModule
-import Sheaf.AlgebraicGeometry.CechH1MapNatural
-import Sheaf.AlgebraicGeometry.ModuleCohomologyBoundary
-import Sheaf.Paper.PQFCohomology
+module
+
+public import Sheaf.AlgebraicGeometry.CommAlgebraSheaf
+public import Sheaf.CategoryTheory.CommAlgebraSheafModule
+public import Sheaf.AlgebraicGeometry.CechH1MapNatural
+public import Sheaf.AlgebraicGeometry.ModuleCohomologyBoundary
+public import Sheaf.Paper.PQFCohomology
 
 /-! # Boundary classes represented by differences of local lifts
 
 Source: Stacks Project, Cohomology, Tags 0B8R and 0B8S, local-lift paragraph
 (blueprint: lem-sc-boundary-cech-local-lifts).
 -/
+
+@[expose] public section
 
 universe u wC wD
 

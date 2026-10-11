@@ -3,17 +3,21 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import Sheaf.AlgebraicGeometry.DerivedPullback
-import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
-import Sheaf.AlgebraicGeometry.DerivedInternalHomAdjunction
-import Sheaf.AlgebraicGeometry.DerivedTensorStructure
-import Sheaf.Algebra.Homology.RhomGlobalSections
+module
+
+public import Sheaf.AlgebraicGeometry.DerivedPullback
+public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
+public import Sheaf.AlgebraicGeometry.DerivedInternalHomAdjunction
+public import Sheaf.AlgebraicGeometry.DerivedTensorStructure
+public import Sheaf.Algebra.Homology.RhomGlobalSections
 
 /-! # Derived internal Hom adjunction for pullback and direct image
 
 Source: Stacks Project, Cohomology, Remark 08I3 and Lemmas 079W, 08DJ
 (blueprint: lem-pc-derived-internal-hom-pullback-adjunction).
 -/
+
+@[expose] public section
 
 universe u w
 

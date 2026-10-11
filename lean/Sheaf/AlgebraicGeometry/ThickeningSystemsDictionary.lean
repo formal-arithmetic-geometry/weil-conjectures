@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import Sheaf.AlgebraicGeometry.CoherentThickeningSystem
-import Sheaf.AlgebraicGeometry.CoherentFormalModule
-import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
-import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
+module
+
+public import Sheaf.AlgebraicGeometry.CoherentThickeningSystem
+public import Sheaf.AlgebraicGeometry.CoherentFormalModule
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
+public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 
 /-! # The dictionary for coherent systems on infinitesimal thickenings
 
@@ -21,6 +23,8 @@ j_n its `pullback.fst`, and I O_X `(Scheme.IdealSheafData.ofIdealTop (I.map
 (Scheme.ΓSpecIso (CommRingCat.of A)).inv.hom)).comap f`, as in the landed
 `quotientBaseChange_closedImmersion_ideal` and `grothendieck_existence`.
 -/
+
+@[expose] public section
 
 universe v
 

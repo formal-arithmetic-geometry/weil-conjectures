@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group J1
 -/
-import Sheaf.AlgebraicGeometry.TensorPullback
+module
+
+public import Sheaf.AlgebraicGeometry.TensorPullback
 
 /-!
 # The tensor-formula pullback of modules is left adjoint to pushforward
@@ -11,6 +13,8 @@ import Sheaf.AlgebraicGeometry.TensorPullback
 Source: Stacks Project, Tags 008X, 0095, 0096
 (blueprint: lem-pc-module-pullback-adjunction).
 -/
+
+@[expose] public section
 
 universe w
 

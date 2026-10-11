@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Mathlib.AlgebraicGeometry.Fiber
-import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
-import Sheaf.RingTheory.QuasiFiniteAtPrime
+module
+
+public import Mathlib.AlgebraicGeometry.Fiber
+public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
+public import Sheaf.RingTheory.QuasiFiniteAtPrime
 
 /-!
 # Isolated fibre points and quasi-finiteness on affine pairs
@@ -13,6 +15,8 @@ import Sheaf.RingTheory.QuasiFiniteAtPrime
 Source: Stacks Project, Morphisms, Tag 01TH, (2) implies (4), and Tag 01T2
 (blueprint: lem-weil-pbc-isolated-fibre-point-quasi-finite-affine-pairs).
 -/
+
+@[expose] public section
 
 universe u
 

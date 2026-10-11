@@ -3,13 +3,17 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Sheaf.CategoryTheory.LeftDerivedValueMorphism
+module
+
+public import Sheaf.CategoryTheory.LeftDerivedValueMorphism
 
 /-! # Left derived values invert the multiplicative system
 
 Source: Stacks Project, Derived Categories, Lemma 05SB(2)
 (blueprint: lem-pur-derived-functor-inverts-05sb).
 -/
+
+@[expose] public section
 
 universe u v uD vD
 

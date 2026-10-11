@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import WeilConjectures.CategoryTheory.GrothendieckAbelian.ConcreteCoefficients
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
-import Mathlib.FieldTheory.IsSepClosed
+module
+
+public import WeilConjectures.CategoryTheory.GrothendieckAbelian.ConcreteCoefficients
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+public import Mathlib.FieldTheory.IsSepClosed
 
 /-!
 # Étale sections after extension of a separably closed base field
@@ -14,6 +16,8 @@ Source: Stacks Project, Etale Cohomology, Lemma 0A3I
 (etale-cohomology-lemma-sections-base-field-extension)
 (blueprint: lem-weil-pbc-sections-base-field-extension).
 -/
+
+@[expose] public section
 
 universe u
 

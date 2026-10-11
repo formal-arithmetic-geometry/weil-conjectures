@@ -3,14 +3,18 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group G1
 -/
-import Sheaf.AlgebraicGeometry.PseudoCoherentComplex
-import Mathlib.AlgebraicGeometry.AffineScheme
+module
+
+public import Sheaf.AlgebraicGeometry.PseudoCoherentComplex
+public import Mathlib.AlgebraicGeometry.AffineScheme
 
 /-! # Lifting pseudo-coherent objects from quasi-compact opens of affine schemes
 
 Source: Stacks Project, Derived Categories of Schemes, Tag 08EE,
 Lemma 36.13.6, lemma-lift-pseudo-coherent (blueprint: lem-sc-affine-pseudo-coherent-lift).
 -/
+
+@[expose] public section
 
 set_option autoImplicit false
 

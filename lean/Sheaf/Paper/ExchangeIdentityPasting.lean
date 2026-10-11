@@ -3,14 +3,18 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import Sheaf.AlgebraicGeometry.DerivedDirectImageComposition
-import WeilConjectures.SixFunctors.BaseChange.Derived
+module
+
+public import Sheaf.AlgebraicGeometry.DerivedDirectImageComposition
+public import WeilConjectures.SixFunctors.BaseChange.Derived
 
 /-! # Identity and pasting equations for exchange
 
 Source: Stacks Project, Remarks 07A7, 0E46, 0E47 and Lemma 0D6E;
 blueprint node order 1044 (blueprint: lem-weil-pbc-exchange-identity-pasting).
 -/
+
+@[expose] public section
 
 universe u
 

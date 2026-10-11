@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import Sheaf.RingTheory.JacobiZariskiHomologySequence
-import Mathlib.RingTheory.Extension.ExtendScalars
+module
+
+public import Sheaf.RingTheory.JacobiZariskiHomologySequence
+public import Mathlib.RingTheory.Extension.ExtendScalars
 
 /-!
 # Naturality of the Jacobi–Zariski connecting map for a quotient
@@ -12,6 +14,8 @@ import Mathlib.RingTheory.Extension.ExtendScalars
 Source: Stacks Project, Algebra, Tag 00S2, and More on Algebra, Tags 07E4 and 07E5
 (blueprint: lem-weil-pbc-jacobi-zariski-connecting-map-naturality).
 -/
+
+@[expose] public section
 
 universe u v w
 

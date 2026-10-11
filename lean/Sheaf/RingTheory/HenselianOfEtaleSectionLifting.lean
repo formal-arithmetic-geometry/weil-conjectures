@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group J1
 -/
-import Mathlib.RingTheory.Etale.Basic
-import Mathlib.RingTheory.Henselian
+module
+
+public import Mathlib.RingTheory.Etale.Basic
+public import Mathlib.RingTheory.Henselian
 
 /-!
 # Henselian pairs from lifting sections of étale algebras
@@ -12,6 +14,8 @@ import Mathlib.RingTheory.Henselian
 Source: Stacks Project, More on Algebra, Lemma Tag 09XI, (2) ⇒ (4) ⇒ (3)
 (blueprint: lem-weil-pbc-etale-section-lifting-henselian-pair).
 -/
+
+@[expose] public section
 
 universe u v
 

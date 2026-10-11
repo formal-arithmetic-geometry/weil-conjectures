@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import Mathlib.Algebra.Homology.DerivedCategory.TStructure
-import Mathlib.Algebra.Category.ModuleCat.Free
+module
+
+public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
+public import Mathlib.Algebra.Category.ModuleCat.Free
 
 /-!
 # Pseudo-coherent objects of the derived category of a ring
@@ -19,6 +21,8 @@ The fixed-degree notion is `DerivedCategory.IsMPseudoCoherent`
 
 * `DerivedCategory.IsPseudoCoherent`: a bounded above finite free representative.
 -/
+
+@[expose] public section
 
 universe w v u
 

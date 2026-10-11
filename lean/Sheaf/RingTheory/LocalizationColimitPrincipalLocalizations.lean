@@ -3,12 +3,14 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group G1
 -/
-import Mathlib.Algebra.Module.LocalizedModule.Basic
-import Mathlib.RingTheory.Localization.Away.Basic
-import Mathlib.Algebra.Category.Ring.Colimits
-import Mathlib.CategoryTheory.Category.Preorder
-import Mathlib.CategoryTheory.Filtered.Basic
-import Mathlib.CategoryTheory.Limits.HasLimits
+module
+
+public import Mathlib.Algebra.Module.LocalizedModule.Basic
+public import Mathlib.RingTheory.Localization.Away.Basic
+public import Mathlib.Algebra.Category.Ring.Colimits
+public import Mathlib.CategoryTheory.Category.Preorder
+public import Mathlib.CategoryTheory.Filtered.Basic
+public import Mathlib.CategoryTheory.Limits.HasLimits
 
 /-!
 # A localization as a filtered colimit of principal localizations
@@ -16,6 +18,8 @@ import Mathlib.CategoryTheory.Limits.HasLimits
 Source: Stacks Project, Algebra, Lemma 10.9.9, Tag 00CR, specialized to the ring itself
 (blueprint: lem-weil-pbc-localization-colimit-principal-localizations).
 -/
+
+@[expose] public section
 
 universe u
 

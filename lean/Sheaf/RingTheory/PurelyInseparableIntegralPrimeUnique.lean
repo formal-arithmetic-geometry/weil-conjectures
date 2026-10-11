@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import Mathlib.FieldTheory.PurelyInseparable.Basic
-import Mathlib.RingTheory.Localization.FractionRing
-import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
-import Mathlib.RingTheory.Ideal.Prime
+module
+
+public import Mathlib.FieldTheory.PurelyInseparable.Basic
+public import Mathlib.RingTheory.Localization.FractionRing
+public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
+public import Mathlib.RingTheory.Ideal.Prime
 
 /-!
 # Unique primes in a finite purely inseparable integral extension
@@ -14,6 +16,8 @@ import Mathlib.RingTheory.Ideal.Prime
 Source: literature/stacks-project/more-algebra.tex, Lemma Tag 07PR
 (blueprint: lem-weil-pbc-purely-inseparable-integral-prime-unique).
 -/
+
+@[expose] public section
 
 universe u v w x
 

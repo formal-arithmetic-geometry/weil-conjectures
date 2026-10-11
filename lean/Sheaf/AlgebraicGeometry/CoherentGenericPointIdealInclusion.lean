@@ -3,11 +3,13 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group G1
 -/
-import Sheaf.AlgebraicGeometry.Coherent
-import Sheaf.Algebra.Homology.ModuleStalkFunctor
-import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
-import Mathlib.AlgebraicGeometry.FunctionField
-import Mathlib.AlgebraicGeometry.Noetherian
+module
+
+public import Sheaf.AlgebraicGeometry.Coherent
+public import Sheaf.Algebra.Homology.ModuleStalkFunctor
+public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
+public import Mathlib.AlgebraicGeometry.FunctionField
+public import Mathlib.AlgebraicGeometry.Noetherian
 
 /-! # A coherent ideal inclusion near a generic point
 
@@ -15,6 +17,8 @@ Source: Stacks Project, Cohomology of Schemes, Lemma 01YE
 (`coherent.tex`, label `lemma-prepare-filter-irreducible`)
 (blueprint: lem-weil-pbc-coherent-generic-point-ideal-inclusion).
 -/
+
+@[expose] public section
 
 universe w
 open CategoryTheory CategoryTheory.Limits AlgebraicGeometry TopologicalSpace

@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Mathlib.RingTheory.EssentialFiniteness
-import Mathlib.RingTheory.FinitePresentation
+module
+
+public import Mathlib.RingTheory.EssentialFiniteness
+public import Mathlib.RingTheory.FinitePresentation
 
 /-!
 # Essential finite presentation over an intermediate algebra
@@ -12,6 +14,8 @@ import Mathlib.RingTheory.FinitePresentation
 Source: Stacks Project, Algebra, proof of Tag 00R7, first paragraph; Definition 00QM and
 Lemma 00F4 (4) (blueprint: lem-weil-pbc-essentially-finite-presentation-over-intermediate).
 -/
+
+@[expose] public section
 
 universe u v w p
 

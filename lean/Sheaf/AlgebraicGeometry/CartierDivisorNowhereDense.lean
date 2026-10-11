@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Invertible
-import Mathlib.AlgebraicGeometry.Morphisms.SchemeTheoreticallyDominant
+module
+
+public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Invertible
+public import Mathlib.AlgebraicGeometry.Morphisms.SchemeTheoreticallyDominant
 
 /-!
 # The complement of an effective Cartier divisor is dense
@@ -12,6 +14,8 @@ import Mathlib.AlgebraicGeometry.Morphisms.SchemeTheoreticallyDominant
 Source: Stacks Project, Divisors, Tag 07ZU, Lemma
 `complement-effective-Cartier-divisor` (blueprint: lem-pc-cartier-divisor-nowhere-dense).
 -/
+
+@[expose] public section
 
 universe u
 

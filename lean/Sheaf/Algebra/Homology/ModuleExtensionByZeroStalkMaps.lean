@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import Sheaf.Algebra.Homology.OpenRestrictionAdjunctionExact
-import Sheaf.Algebra.Homology.ModuleStalkFunctor
-import Mathlib.Topology.Sheaves.Module
+module
+
+public import Sheaf.Algebra.Homology.OpenRestrictionAdjunctionExact
+public import Sheaf.Algebra.Homology.ModuleStalkFunctor
+public import Mathlib.Topology.Sheaves.Module
 
 /-! # Stalks and maps for extension by zero of modules
 
@@ -13,6 +15,8 @@ Source: literature/stacks-project/sheaves.tex, Tag 00A7, clauses (2)--(4),
 and the presheaf construction preceding it.
 (blueprint: lem-sc-module-extension-by-zero-stalk-maps)
 -/
+
+@[expose] public section
 
 open CategoryTheory CategoryTheory.Limits TopologicalSpace Opposite
 

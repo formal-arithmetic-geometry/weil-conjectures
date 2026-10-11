@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import Mathlib.AlgebraicGeometry.Morphisms.Etale
-import Mathlib.Algebra.Polynomial.Monic
-import Mathlib.RingTheory.Coprime.Basic
-import Mathlib.RingTheory.Ideal.Quotient.Operations
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.Etale
+public import Mathlib.Algebra.Polynomial.Monic
+public import Mathlib.RingTheory.Coprime.Basic
+public import Mathlib.RingTheory.Ideal.Quotient.Operations
 
 /-!
 # Lifting a coprime factorization after an étale extension
@@ -14,6 +16,8 @@ import Mathlib.RingTheory.Ideal.Quotient.Operations
 Source: Stacks Project, More on Algebra, Tag 07M1, lemma-lift-factorization-easy
 (blueprint: lem-weil-pbc-lift-coprime-factorization-etale).
 -/
+
+@[expose] public section
 
 universe u
 

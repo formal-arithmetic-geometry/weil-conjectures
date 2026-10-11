@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Sheaf.AlgebraicGeometry.DerivedCategory
-import Mathlib.CategoryTheory.Abelian.RightDerived
-import Mathlib.CategoryTheory.Triangulated.TStructure.TruncLTGE
-import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Defs
+module
+
+public import Sheaf.AlgebraicGeometry.DerivedCategory
+public import Mathlib.CategoryTheory.Abelian.RightDerived
+public import Mathlib.CategoryTheory.Triangulated.TStructure.TruncLTGE
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Defs
 
 /-!
 # Stabilization of derived cohomology on the lower truncation tower
@@ -14,6 +16,8 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Defs
 Source: Stacks Project, Derived Categories of Schemes, Tag 08D4, proof of (2)
 (blueprint: lem-pc-derived-functor-truncation-stabilization).
 -/
+
+@[expose] public section
 
 universe u w₁ w₂
 

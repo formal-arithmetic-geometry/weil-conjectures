@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import WeilConjectures.CategoryTheory.GrothendieckAbelian.ConcreteCoefficients
-import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify
-import WeilConjectures.CategoryTheory.Sites.Torsor
+module
+
+public import WeilConjectures.CategoryTheory.GrothendieckAbelian.ConcreteCoefficients
+public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify
+public import WeilConjectures.CategoryTheory.Sites.Torsor
 
 /-!
 # The canonical extension presentation of an étale torsor
@@ -13,6 +15,8 @@ import WeilConjectures.CategoryTheory.Sites.Torsor
 Source: Stacks Project, Cohomology on Sites, Lemma 03AJ, construction from the free abelian
 sheaf (blueprint: def-sc-torsor-extension-presentation).
 -/
+
+@[expose] public section
 
 universe uE wE
 

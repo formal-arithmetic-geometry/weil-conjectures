@@ -1,5 +1,7 @@
-import Mathlib.Algebra.Homology.ShortComplex.PreservesHomology
-import Mathlib.Algebra.Homology.HomotopyCategory.Shift
+module
+
+public import Mathlib.Algebra.Homology.ShortComplex.PreservesHomology
+public import Mathlib.Algebra.Homology.HomotopyCategory.Shift
 
 /-! # Left exact functors and cohomology
 
@@ -7,6 +9,8 @@ Source: literature/stacks-project/derived.tex, Lemma 015I (lemma-cartan-eilenber
 split short exact sequences from injectivity
 (blueprint: lem-sp-cart-eilenberg-left-exact-cohomology)
 -/
+
+@[expose] public section
 
 open CategoryTheory CategoryTheory.Limits
 

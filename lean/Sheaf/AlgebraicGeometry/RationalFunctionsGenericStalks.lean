@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import Sheaf.AlgebraicGeometry.RationalFunctionRing
-import Mathlib.AlgebraicGeometry.Properties
+module
+
+public import Sheaf.AlgebraicGeometry.RationalFunctionRing
+public import Mathlib.AlgebraicGeometry.Properties
 
 /-!
 # Rational functions and generic stalks
@@ -12,6 +14,8 @@ import Mathlib.AlgebraicGeometry.Properties
 Source: Stacks Project, Morphisms, Lemma 01RV, first and third assertions
 (blueprint: lem-sc-rational-functions-generic-stalks).
 -/
+
+@[expose] public section
 
 universe u
 

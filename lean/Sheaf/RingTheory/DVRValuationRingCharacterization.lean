@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: F1
 -/
-import Mathlib.RingTheory.Valuation.Discrete.IsDiscreteValuationRing
+module
+
+public import Mathlib.RingTheory.Valuation.Discrete.IsDiscreteValuationRing
 
 /-!
 # The values of ring elements and uniformizers in a DVR
@@ -11,6 +13,8 @@ import Mathlib.RingTheory.Valuation.Discrete.IsDiscreteValuationRing
 Source: Stacks Project, Algebra, Definition 00IE
 (blueprint: lem-sc-dvr-valuation-ring-characterization).
 -/
+
+@[expose] public section
 
 universe u₁ v₁
 

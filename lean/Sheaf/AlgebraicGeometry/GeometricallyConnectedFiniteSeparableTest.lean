@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group J1
 -/
-import Mathlib.AlgebraicGeometry.Geometrically.Connected
-import Mathlib.FieldTheory.Separable
-import Sheaf.AlgebraicGeometry.BaseChangeConventions
+module
+
+public import Mathlib.AlgebraicGeometry.Geometrically.Connected
+public import Mathlib.FieldTheory.Separable
+public import Sheaf.AlgebraicGeometry.BaseChangeConventions
 
 /-!
 # Testing geometric connectedness by finite separable extensions
@@ -13,6 +15,8 @@ import Sheaf.AlgebraicGeometry.BaseChangeConventions
 Source: Stacks Project, Varieties, Lemma Tag 0389
 (blueprint: lem-weil-pbc-geometrically-connected-finite-separable-test).
 -/
+
+@[expose] public section
 
 universe u
 

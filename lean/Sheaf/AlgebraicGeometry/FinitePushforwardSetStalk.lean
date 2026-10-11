@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group G1
 -/
-import WeilConjectures.SixFunctors.Finite.Stalk
+module
+
+public import WeilConjectures.SixFunctors.Finite.Stalk
 
 /-!
 # Stalks of finite direct images of étale sheaves of sets
@@ -11,6 +13,8 @@ import WeilConjectures.SixFunctors.Finite.Stalk
 Source: Stacks Project, Proposition 59.55.2, Tag 03QP (1), first display
 (blueprint: lem-weil-pbc-sets-finite-pushforward-stalk).
 -/
+
+@[expose] public section
 
 universe u
 

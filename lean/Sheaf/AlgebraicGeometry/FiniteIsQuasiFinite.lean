@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import Mathlib.AlgebraicGeometry.Morphisms.Finite
-import Sheaf.AlgebraicGeometry.QuasiFiniteMorphism
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.Finite
+public import Sheaf.AlgebraicGeometry.QuasiFiniteMorphism
 
 /-!
 # Finite morphisms are quasi-finite
@@ -12,6 +14,8 @@ import Sheaf.AlgebraicGeometry.QuasiFiniteMorphism
 Source: the Weil conjectures blueprint, chapter `sec-abelian-varieties`, unit
 `sk-prop-av-pqf-finite`, node `pqf-lem-finite-qf` (blueprint: pqf-lem-finite-qf).
 -/
+
+@[expose] public section
 
 universe u
 

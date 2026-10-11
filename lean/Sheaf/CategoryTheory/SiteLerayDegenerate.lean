@@ -1,5 +1,7 @@
-import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
-import Sheaf.CategoryTheory.SiteCohomologyPullback
+module
+
+public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
+public import Sheaf.CategoryTheory.SiteCohomologyPullback
 
 /-! # Degeneration of the Leray comparison for a morphism of sites
 
@@ -18,6 +20,8 @@ cohomology groups from these resolutions, the pullback map followed by the
 counit is identified with the identity by the triangle identity, hence is an
 isomorphism in every degree (and is the identity in degree zero).
 -/
+
+@[expose] public section
 
 universe u
 

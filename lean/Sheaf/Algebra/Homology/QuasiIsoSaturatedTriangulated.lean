@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group J1
 -/
-import Mathlib.Algebra.Homology.DerivedCategory.Basic
-import Mathlib.CategoryTheory.Localization.CalculusOfFractions
-import Mathlib.CategoryTheory.Localization.Triangulated
-import Mathlib.CategoryTheory.MorphismProperty.Retract
+module
+
+public import Mathlib.Algebra.Homology.DerivedCategory.Basic
+public import Mathlib.CategoryTheory.Localization.CalculusOfFractions
+public import Mathlib.CategoryTheory.Localization.Triangulated
+public import Mathlib.CategoryTheory.MorphismProperty.Retract
 
 /-!
 # Quasi-isomorphisms as a saturated triangulated multiplicative system
@@ -14,6 +16,8 @@ import Mathlib.CategoryTheory.MorphismProperty.Retract
 Source: Stacks Project, Lemma 05RT and Situation 05S8
 (blueprint: lem-pur-quasi-isos-saturated-triangulated).
 -/
+
+@[expose] public section
 
 universe w v u
 

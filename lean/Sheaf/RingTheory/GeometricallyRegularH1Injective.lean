@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group J1
 -/
-import Sheaf.RingTheory.GRing
-import Mathlib.RingTheory.Extension.ExtendScalars
-import Mathlib.RingTheory.LocalRing.ResidueField.Basic
+module
+
+public import Sheaf.RingTheory.GRing
+public import Mathlib.RingTheory.Extension.ExtendScalars
+public import Mathlib.RingTheory.LocalRing.ResidueField.Basic
 
 /-!
 # Geometric regularity and the first cotangent homology of the residue field
@@ -13,6 +15,8 @@ import Mathlib.RingTheory.LocalRing.ResidueField.Basic
 Source: Stacks Project, More on Algebra, Proposition Tag 07E5, implication (1) ⇒ (3)
 (blueprint: lem-weil-pbc-geometrically-regular-h1-injective).
 -/
+
+@[expose] public section
 
 universe u v
 

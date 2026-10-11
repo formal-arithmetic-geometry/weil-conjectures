@@ -3,11 +3,13 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Sheaf.AlgebraicGeometry.FinitelyGeneratedEtaleSubsheaf
-import Sheaf.AlgebraicGeometry.EtaleClosedImmersionEssentialImage
-import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
-import Mathlib.CategoryTheory.Filtered.Basic
-import Mathlib.AlgebraicGeometry.Properties
+module
+
+public import Sheaf.AlgebraicGeometry.FinitelyGeneratedEtaleSubsheaf
+public import Sheaf.AlgebraicGeometry.EtaleClosedImmersionEssentialImage
+public import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
+public import Mathlib.CategoryTheory.Filtered.Basic
+public import Mathlib.AlgebraicGeometry.Properties
 
 /-!
 # Approximation of sheaves supported at closed points
@@ -15,6 +17,8 @@ import Mathlib.AlgebraicGeometry.Properties
 Source: blueprint `sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-cp-approximation.md`
 (blueprint: lem-kun-cp-approximation); Stacks Project, Tags 0F0N and 03SA.
 -/
+
+@[expose] public section
 
 universe v
 

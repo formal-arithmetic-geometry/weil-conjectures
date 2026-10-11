@@ -3,13 +3,15 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Mathlib.AlgebraicGeometry.Morphisms.Finite
-import Mathlib.AlgebraicGeometry.Morphisms.Separated
-import Mathlib.AlgebraicGeometry.Morphisms.Smooth
-import Mathlib.AlgebraicGeometry.Properties
-import Mathlib.AlgebraicGeometry.Restrict
-import Mathlib.FieldTheory.IsAlgClosed.Basic
-import Mathlib.Topology.KrullDimension
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.Finite
+public import Mathlib.AlgebraicGeometry.Morphisms.Separated
+public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
+public import Mathlib.AlgebraicGeometry.Properties
+public import Mathlib.AlgebraicGeometry.Restrict
+public import Mathlib.FieldTheory.IsAlgClosed.Basic
+public import Mathlib.Topology.KrullDimension
 
 /-!
 # A finite smooth modification of a reduced curve
@@ -17,6 +19,8 @@ import Mathlib.Topology.KrullDimension
 Source: Stacks Project, Varieties, Tags 0BXR and 0B8Y, as used in the proof of
 Etale Cohomology, Tag 0A3Q (blueprint: lem-weil-pbc-reduced-curve-normalization).
 -/
+
+@[expose] public section
 
 universe u
 

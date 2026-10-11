@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import Sheaf.Algebra.Homology.KFlat
+module
+
+public import Sheaf.Algebra.Homology.KFlat
 
 /-!
 # Tensoring a K-flat quasi-isomorphism with an arbitrary complex
@@ -14,6 +16,8 @@ Source: Stacks Project, Lemma 15.60.12, Tag 064L
 The ring is regarded as a constant sheaf on the one-point site with the bottom topology.
 K-flatness is the landed `CochainComplex.IsKFlat` for sheaves of modules on this site.
 -/
+
+@[expose] public section
 
 universe u
 

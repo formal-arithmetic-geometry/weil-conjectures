@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group G1
 -/
-import Sheaf.RingTheory.PopescuResolution
-import Sheaf.FieldTheory.SeparableExtension
-import Mathlib.RingTheory.RegularLocalRing.Defs
-import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
+module
+
+public import Sheaf.RingTheory.PopescuResolution
+public import Sheaf.FieldTheory.SeparableExtension
+public import Mathlib.RingTheory.RegularLocalRing.Defs
+public import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
 
 /-!
 # Resolving Popescu's local problem with separable residue field
@@ -14,6 +16,8 @@ import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
 Source: Stacks Project, Smoothing Ring Maps, Lemma 07FE (lemma-resolve-special),
 Section 07FB (blueprint: lem-weil-pbc-popescu-resolve-separable).
 -/
+
+@[expose] public section
 
 universe u v w
 

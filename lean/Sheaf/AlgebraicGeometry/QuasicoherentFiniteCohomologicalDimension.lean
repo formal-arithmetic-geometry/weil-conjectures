@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Sheaf.AlgebraicGeometry.Coherent
-import Sheaf.Topology.RingedSpaceModuleCohomology
-import Mathlib.AlgebraicGeometry.Morphisms.Affine
+module
+
+public import Sheaf.AlgebraicGeometry.Coherent
+public import Sheaf.Topology.RingedSpaceModuleCohomology
+public import Mathlib.AlgebraicGeometry.Morphisms.Affine
 
 /-!
 # Finite cohomological dimension for quasi-coherent modules
@@ -13,6 +15,8 @@ import Mathlib.AlgebraicGeometry.Morphisms.Affine
 Source: Stacks Project, Cohomology of Schemes, Lemma 30.4.2, Tag 01XI
 (blueprint: lem-sc-picard-qcoh-finite-cd).
 -/
+
+@[expose] public section
 
 universe u
 

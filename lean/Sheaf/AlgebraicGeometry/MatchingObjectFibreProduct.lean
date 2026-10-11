@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import Mathlib.AlgebraicGeometry.Pullbacks
-import Sheaf.CategoryTheory.ProperFaceMatchingObject
+module
+
+public import Mathlib.AlgebraicGeometry.Pullbacks
+public import Sheaf.CategoryTheory.ProperFaceMatchingObject
 
 /-!
 # Matching schemes of termwise fibre products
@@ -17,6 +19,8 @@ Augmented simplicial schemes are simplicial objects in `Over X`. Products in `Ov
 are fibre products of schemes over `X`. Arbitrary limiting cones specify matching schemes,
 including in degree zero, where the proper-face category is empty.
 -/
+
+@[expose] public section
 
 universe u
 

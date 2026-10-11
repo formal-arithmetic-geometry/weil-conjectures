@@ -3,12 +3,14 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Mathlib.Algebra.Category.ModuleCat.Monoidal.Closed
-import Mathlib.Algebra.Category.ModuleCat.Abelian
-import Mathlib.Algebra.Category.ModuleCat.Colimits
-import Mathlib.Algebra.Category.ModuleCat.Projective
-import Mathlib.CategoryTheory.Monoidal.Tor
-import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.KFlat
+module
+
+public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Closed
+public import Mathlib.Algebra.Category.ModuleCat.Abelian
+public import Mathlib.Algebra.Category.ModuleCat.Colimits
+public import Mathlib.Algebra.Category.ModuleCat.Projective
+public import Mathlib.CategoryTheory.Monoidal.Tor
+public import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.KFlat
 
 /-!
 # Termwise Tor acyclicity computes derived tensor
@@ -21,6 +23,8 @@ The canonical comparison is represented by `f ⊗ B`, with `B` in degree zero. A
 `tensoringRight B` termwise gives exactly this tensor complex and comparison map, as
 complexes of R-modules, as in the node. The choice of resolution is universally quantified.
 -/
+
+@[expose] public section
 
 universe u
 

@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import Mathlib.CategoryTheory.Preadditive.Injective.Basic
+module
+
+public import Mathlib.CategoryTheory.Preadditive.Injective.Basic
 
 /-!
 # Transfer of functorial injective embeddings along an adjunction
@@ -11,6 +13,8 @@ import Mathlib.CategoryTheory.Preadditive.Injective.Basic
 Source: Stacks Project, Homology, Lemma 0161
 (blueprint: lem-exc-rg-adjoint-transfer-functorial-injectives).
 -/
+
+@[expose] public section
 
 universe v₁ v₂ u₁ u₂
 

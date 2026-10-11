@@ -3,13 +3,15 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Mathlib.Algebra.Category.Grp.AB
-import Mathlib.CategoryTheory.Abelian.RightDerived
-import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCategory
-import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
-import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStarCoherence
-import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusSingle
-import Mathlib.CategoryTheory.Sites.Sheafification
+module
+
+public import Mathlib.Algebra.Category.Grp.AB
+public import Mathlib.CategoryTheory.Abelian.RightDerived
+public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCategory
+public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
+public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStarCoherence
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusSingle
+public import Mathlib.CategoryTheory.Sites.Sheafification
 
 /-!
 # Higher direct images as sheafified cohomology presheaves
@@ -18,6 +20,8 @@ Source: Stacks Project, Lemma Tag 072W (lemma-higher-direct-images), and Section
 (equation-cohomology-object-site)
 (blueprint: lem-weil-pbc-higher-direct-image-sheafified-presheaf).
 -/
+
+@[expose] public section
 
 universe u
 

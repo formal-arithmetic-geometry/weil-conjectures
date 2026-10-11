@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import Sheaf.AlgebraicGeometry.DivisorModule
-import Sheaf.AlgebraicGeometry.BaseChangeConventions
+module
+
+public import Sheaf.AlgebraicGeometry.DivisorModule
+public import Sheaf.AlgebraicGeometry.BaseChangeConventions
 
 /-!
 # Local orders at rational points after extension of algebraically closed fields
@@ -13,6 +15,8 @@ Source: blueprint sec-curve-estimates/sk-prop-ext-invariance,
 thm-sc-constant-invariance, affine-case unit quotient paragraph
 (blueprint: lem-sc-local-dvr-base-change).
 -/
+
+@[expose] public section
 
 set_option autoImplicit false
 

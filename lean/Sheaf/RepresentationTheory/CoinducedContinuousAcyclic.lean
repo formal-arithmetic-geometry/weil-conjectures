@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF worker F1
 -/
-import Sheaf.RepresentationTheory.CoinducedDiscreteEmbedding
-import Mathlib.CategoryTheory.Abelian.RightDerived
-import Mathlib.Algebra.Homology.HomotopyCategory.ShortExact
-import Mathlib.Data.Fin.Tuple.Basic
+module
+
+public import Sheaf.RepresentationTheory.CoinducedDiscreteEmbedding
+public import Mathlib.CategoryTheory.Abelian.RightDerived
+public import Mathlib.Algebra.Homology.HomotopyCategory.ShortExact
+public import Mathlib.Data.Fin.Tuple.Basic
 
 /-!
 # Acyclicity of discrete continuous coinduction
@@ -15,6 +17,8 @@ Source: Stacks Project, Etale Cohomology, Tag 0DVG, final profinite comparison;
 the coinduced contraction is an agent-written ingredient
 (blueprint: lem-exc-coinduced-continuous-acyclic).
 -/
+
+@[expose] public section
 
 universe u v w
 

@@ -3,22 +3,26 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group J1
 -/
-import Sheaf.AlgebraicGeometry.PerfectComplex
-import Sheaf.AlgebraicGeometry.DerivedPullback
-import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
-import Sheaf.AlgebraicGeometry.DerivedTensorStructure
-import Mathlib.AlgebraicGeometry.Morphisms.Proper
-import Mathlib.AlgebraicGeometry.Noetherian
-import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
-import Mathlib.Algebra.Category.ModuleCat.Monoidal.Basic
-import Mathlib.Algebra.Category.ModuleCat.Projective
-import Mathlib.CategoryTheory.Monoidal.Tor
+module
+
+public import Sheaf.AlgebraicGeometry.PerfectComplex
+public import Sheaf.AlgebraicGeometry.DerivedPullback
+public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
+public import Sheaf.AlgebraicGeometry.DerivedTensorStructure
+public import Mathlib.AlgebraicGeometry.Morphisms.Proper
+public import Mathlib.AlgebraicGeometry.Noetherian
+public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
+public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Basic
+public import Mathlib.Algebra.Category.ModuleCat.Projective
+public import Mathlib.CategoryTheory.Monoidal.Tor
 
 /-! # Projection comparison for perfect complexes
 
 Source: Stacks Project, Duality for Schemes, Tag 0A9T
 (blueprint: lem-sc-smooth-proper-tensor-perfect-case).
 -/
+
+@[expose] public section
 
 set_option autoImplicit false
 universe u w

@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import Sheaf.AlgebraicGeometry.ClosedSubsetProperOverBase
+module
+
+public import Sheaf.AlgebraicGeometry.ClosedSubsetProperOverBase
 
 /-!
 # Images of closed subsets proper over a base
@@ -11,6 +13,8 @@ import Sheaf.AlgebraicGeometry.ClosedSubsetProperOverBase
 Source: Stacks Project, Cohomology of Schemes, Lemma 30.26.5 (Tag 0CYQ), part (2).
 (blueprint: lem-weil-pbc-closed-subset-proper-over-base-universally-closed-image)
 -/
+
+@[expose] public section
 
 universe u
 

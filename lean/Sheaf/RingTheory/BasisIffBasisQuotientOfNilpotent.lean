@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import Mathlib.RingTheory.LocalRing.Module
+module
+
+public import Mathlib.RingTheory.LocalRing.Module
 
 /-!
 # Lifting bases over a local ring with nilpotent maximal ideal
@@ -11,6 +13,8 @@ import Mathlib.RingTheory.LocalRing.Module
 Source: Stacks Project, Algebra, Lemma 10.101.1, Tag 051F
 (blueprint: lem-weil-pbc-local-artinian-basis-when-flat).
 -/
+
+@[expose] public section
 
 universe u v w
 

@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group S1
 -/
-import Mathlib.LinearAlgebra.FreeModule.Basic
+module
+
+public import Mathlib.LinearAlgebra.FreeModule.Basic
 
 /-!
 # Triangular changes of basis with unit diagonal
@@ -11,6 +13,8 @@ import Mathlib.LinearAlgebra.FreeModule.Basic
 Source: Stacks Project, Algebra, Lemma Tag 00MT (`lemma-add-trivial-complex`),
 proof, the two changes of basis (blueprint: lem-weil-pbc-triangular-change-of-basis).
 -/
+
+@[expose] public section
 
 universe u v
 

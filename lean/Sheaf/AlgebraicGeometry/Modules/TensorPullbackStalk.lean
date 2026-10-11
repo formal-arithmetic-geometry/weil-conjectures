@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group J1
 -/
-import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
-import Sheaf.Algebra.Homology.ModuleStalkFunctor
+module
+
+public import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
+public import Sheaf.Algebra.Homology.ModuleStalkFunctor
 
 /-!
 # Stalks and germs of the tensor pullback of modules
@@ -17,6 +19,8 @@ Stalks of module sheaves are taken with the recorded stalk functor
 scalars as `O_{X,x} ⊗ G_{f(x)}`. This is the tensor product in the node via its canonical
 symmetry; the corresponding pure tensor is `1 ⊗ s_{f(x)}`.
 -/
+
+@[expose] public section
 
 universe u
 

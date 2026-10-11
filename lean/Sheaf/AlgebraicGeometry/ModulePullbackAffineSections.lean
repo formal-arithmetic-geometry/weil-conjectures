@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
-import Sheaf.AlgebraicGeometry.Coherent
-import Mathlib.LinearAlgebra.TensorProduct.Map
+module
+
+public import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
+public import Sheaf.AlgebraicGeometry.Coherent
+public import Mathlib.LinearAlgebra.TensorProduct.Map
 
 /-!
 # Sections of module pullback on affine opens
@@ -13,6 +15,8 @@ import Mathlib.LinearAlgebra.TensorProduct.Map
 Source: Stacks Project, Schemes, Tags 01I9, 01IA, 01HV; Sheaves, Tags 00A0, 0097
 (blueprint: lem-weil-pbc-module-pullback-affine-sections).
 -/
+
+@[expose] public section
 
 universe u
 

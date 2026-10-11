@@ -3,11 +3,13 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Sheaf.RingTheory.Depth
-import Mathlib.RingTheory.Noetherian.Defs
-import Mathlib.Algebra.Category.ModuleCat.Ext.HasExt
-import Mathlib.Algebra.Module.ULift
-import Mathlib.RingTheory.Ideal.Quotient.Defs
+module
+
+public import Sheaf.RingTheory.Depth
+public import Mathlib.RingTheory.Noetherian.Defs
+public import Mathlib.Algebra.Category.ModuleCat.Ext.HasExt
+public import Mathlib.Algebra.Module.ULift
+public import Mathlib.RingTheory.Ideal.Quotient.Defs
 
 /-!
 # Depth via Ext from the residue field
@@ -15,6 +17,8 @@ import Mathlib.RingTheory.Ideal.Quotient.Defs
 Source: Stacks Project, Algebra, Lemma 10.72.5 (Tag 00LW)
 (blueprint: lem-weil-pbc-depth-ext).
 -/
+
+@[expose] public section
 
 universe u v
 

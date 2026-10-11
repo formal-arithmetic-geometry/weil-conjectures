@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group J1
 -/
-import Mathlib.AlgebraicGeometry.Fiber
-import Mathlib.AlgebraicGeometry.Morphisms.Etale
-import Mathlib.FieldTheory.PurelyInseparable.Basic
+module
+
+public import Mathlib.AlgebraicGeometry.Fiber
+public import Mathlib.AlgebraicGeometry.Morphisms.Etale
+public import Mathlib.FieldTheory.PurelyInseparable.Basic
 
 /-!
 # Finite neighborhoods of multiple isolated fiber points after etale localization
@@ -13,6 +15,8 @@ import Mathlib.FieldTheory.PurelyInseparable.Basic
 Source: Stacks Project, More on Morphisms, Lemma 02LM
 (blueprint: lem-weil-pbc-etale-local-finite-multiple-points).
 -/
+
+@[expose] public section
 
 universe u
 

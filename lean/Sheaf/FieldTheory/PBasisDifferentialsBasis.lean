@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import Mathlib.FieldTheory.IntermediateField.Adjoin.Defs
-import Mathlib.LinearAlgebra.Basis.Defs
-import Mathlib.RingTheory.Kaehler.Basic
+module
+
+public import Mathlib.FieldTheory.IntermediateField.Adjoin.Defs
+public import Mathlib.LinearAlgebra.Basis.Defs
+public import Mathlib.RingTheory.Kaehler.Basic
 
 /-!
 # Differentials of a p-basis
@@ -13,6 +15,8 @@ import Mathlib.RingTheory.Kaehler.Basic
 Source: Stacks Project, More on Algebra, Definition 07P1 and Lemma 07P2, implication
 (a) implies (b) (blueprint: lem-weil-pbc-p-basis-differentials-basis).
 -/
+
+@[expose] public section
 
 universe u v w
 

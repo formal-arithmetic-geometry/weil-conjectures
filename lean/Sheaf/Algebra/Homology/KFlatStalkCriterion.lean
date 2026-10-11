@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import Sheaf.Algebra.Homology.KFlat
-import Sheaf.Algebra.Homology.ModuleStalkFunctor
-import Mathlib.Algebra.Category.ModuleCat.Monoidal.Basic
-import Mathlib.Algebra.Homology.Additive
+module
+
+public import Sheaf.Algebra.Homology.KFlat
+public import Sheaf.Algebra.Homology.ModuleStalkFunctor
+public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Basic
+public import Mathlib.Algebra.Homology.Additive
 
 /-!
 # K-flatness detected on stalks
@@ -14,6 +16,8 @@ import Mathlib.Algebra.Homology.Additive
 Source: Stacks Project, Cohomology, Lemma 06YB, label `lemma-check-K-flat-stalks`
 (blueprint: lem-pc-kflat-stalk-criterion).
 -/
+
+@[expose] public section
 
 universe v
 

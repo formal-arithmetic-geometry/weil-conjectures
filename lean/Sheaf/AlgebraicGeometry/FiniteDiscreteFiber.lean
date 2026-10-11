@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Sheaf.AlgebraicGeometry.QuasiFiniteMorphism
+module
+
+public import Sheaf.AlgebraicGeometry.QuasiFiniteMorphism
 
 /-!
 # Finite fibres of locally finite type morphisms
@@ -12,6 +14,8 @@ Source: the Weil conjectures blueprint, chapter `sec-abelian-varieties`, unit
 `sk-prop-av-pqf-finite` (blueprint: pqf-lem-locqf-fibre-discrete).
 The isolated-point criterion is Stacks Project, Tag 01TH.
 -/
+
+@[expose] public section
 
 universe u
 

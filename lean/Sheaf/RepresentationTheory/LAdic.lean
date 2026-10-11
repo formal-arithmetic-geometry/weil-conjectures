@@ -3,15 +3,17 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Sheaf.NumberTheory.Padics.CoefficientExtension
-import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
-import Mathlib.FieldTheory.IntermediateField.Adjoin.Basic
-import Mathlib.Topology.Algebra.Category.ProfiniteGrp.Basic
-import Mathlib.Topology.Algebra.Nonarchimedean.AdicTopology
-import Mathlib.Topology.Algebra.Module.ModuleTopology
-import Mathlib.RepresentationTheory.Basic
-import Mathlib.LinearAlgebra.GeneralLinearGroup.Basic
-import Mathlib.LinearAlgebra.TensorProduct.Tower
+module
+
+public import Sheaf.NumberTheory.Padics.CoefficientExtension
+public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
+public import Mathlib.FieldTheory.IntermediateField.Adjoin.Basic
+public import Mathlib.Topology.Algebra.Category.ProfiniteGrp.Basic
+public import Mathlib.Topology.Algebra.Nonarchimedean.AdicTopology
+public import Mathlib.Topology.Algebra.Module.ModuleTopology
+public import Mathlib.RepresentationTheory.Basic
+public import Mathlib.LinearAlgebra.GeneralLinearGroup.Basic
+public import Mathlib.LinearAlgebra.TensorProduct.Tower
 
 /-!
 # Integral, finite-coefficient, and algebraic-closure l-adic representations
@@ -27,6 +29,8 @@ Morphisms are the `R`-linear maps `f` with `f (ρ g v) = σ g (f v)` (`IsEquivar
 products carry the diagonal action (`tensorDiagonal`); the unit is `R` with the trivial action
 `1 : G →* (R ≃ₗ[R] R)`.
 -/
+
+@[expose] public section
 
 universe u v w z
 open scoped TensorProduct

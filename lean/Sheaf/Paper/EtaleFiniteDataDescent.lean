@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group G1
 -/
-import Mathlib.AlgebraicGeometry.AffineTransitionLimit
-import Mathlib.AlgebraicGeometry.Sites.Etale
-import Mathlib.CategoryTheory.Comma.Over.Pullback
-import Mathlib.CategoryTheory.PathCategory.Basic
+module
+
+public import Mathlib.AlgebraicGeometry.AffineTransitionLimit
+public import Mathlib.AlgebraicGeometry.Sites.Etale
+public import Mathlib.CategoryTheory.Comma.Over.Pullback
+public import Mathlib.CategoryTheory.PathCategory.Basic
 
 /-!
 # Finite-presentation data at an inverse limit
@@ -14,6 +16,8 @@ import Mathlib.CategoryTheory.PathCategory.Basic
 Source: Stacks Project, Limits, Tags 01ZM, 07RP and 07RR
 (blueprint: lem-weil-pbc-etale-finite-data-descent).
 -/
+
+@[expose] public section
 
 universe u v
 

@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import Mathlib.RingTheory.AdicCompletion.LocalRing
-import Mathlib.RingTheory.DiscreteValuationRing.Basic
+module
+
+public import Mathlib.RingTheory.AdicCompletion.LocalRing
+public import Mathlib.RingTheory.DiscreteValuationRing.Basic
 
 /-!
 # Completion of a discrete valuation ring
@@ -12,6 +14,8 @@ import Mathlib.RingTheory.DiscreteValuationRing.Basic
 Source: Stacks Project, More on Algebra, Lemma Tag 0AP1, the forward direction, with
 Algebra, Lemma Tag 00PD (4) (blueprint: lem-weil-pbc-completion-of-dvr-is-dvr).
 -/
+
+@[expose] public section
 
 universe u
 

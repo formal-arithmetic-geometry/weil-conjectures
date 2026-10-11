@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import Sheaf.RingTheory.GlobalDimension
-import Mathlib.RingTheory.KrullDimension.Basic
-import Mathlib.RingTheory.LocalRing.ResidueField.Basic
+module
+
+public import Sheaf.RingTheory.GlobalDimension
+public import Mathlib.RingTheory.KrullDimension.Basic
+public import Mathlib.RingTheory.LocalRing.ResidueField.Basic
 
 /-!
 # Projective dimension of the residue field
@@ -13,6 +15,8 @@ import Mathlib.RingTheory.LocalRing.ResidueField.Basic
 Source: Stacks Project, Algebra, Lemma Tag 00OB (lemma-dim-gl-dim)
 (blueprint: lem-weil-pbc-residue-field-pd-le-krull-dimension).
 -/
+
+@[expose] public section
 
 universe u
 

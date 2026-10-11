@@ -1,5 +1,9 @@
-import Sheaf.RingTheory.GlobalDimension
-import Mathlib.Algebra.Homology.ShortComplex.ShortExact
+module
+
+public import Sheaf.RingTheory.GlobalDimension
+public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
+
+@[expose] public section
 
 universe u v
 

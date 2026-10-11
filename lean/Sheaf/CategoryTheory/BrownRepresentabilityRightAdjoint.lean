@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import Sheaf.CategoryTheory.CompactlyGenerated
-import Mathlib.CategoryTheory.Triangulated.Functor
-import Mathlib.CategoryTheory.Adjunction.Basic
+module
+
+public import Sheaf.CategoryTheory.CompactlyGenerated
+public import Mathlib.CategoryTheory.Triangulated.Functor
+public import Mathlib.CategoryTheory.Adjunction.Basic
 
 /-!
 # Brown representability criterion for a right adjoint
@@ -13,6 +15,8 @@ import Mathlib.CategoryTheory.Adjunction.Basic
 Source: Stacks Project, Derived Categories, Tag 0A8G, Proposition `proposition-brown`
 (blueprint: lem-pc-brown-representability-right-adjoint).
 -/
+
+@[expose] public section
 
 universe w u₁ u₂ v₁ v₂
 

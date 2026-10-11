@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import Mathlib.RingTheory.RingHom.Flat
-import Mathlib.RingTheory.Ideal.Quotient.Operations
-import Mathlib.LinearAlgebra.TensorProduct.Tower
+module
+
+public import Mathlib.RingTheory.RingHom.Flat
+public import Mathlib.RingTheory.Ideal.Quotient.Operations
+public import Mathlib.LinearAlgebra.TensorProduct.Tower
 
 /-!
 # Descent of extensions with an ideal-power torsion quotient
@@ -17,6 +19,8 @@ Base change is written `S ⊗[R] M`, as in Mathlib's tensor product API; this is
 canonically the source's `M ⊗[R] S`. Exactness is expressed by injectivity,
 `Function.Exact`, and surjectivity of the two linear maps.
 -/
+
+@[expose] public section
 
 universe u v w x y
 

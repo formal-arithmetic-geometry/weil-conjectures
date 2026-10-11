@@ -3,14 +3,18 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import Sheaf.AlgebraicGeometry.Ample
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.Generators
+module
+
+public import Sheaf.AlgebraicGeometry.Ample
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Generators
 
 /-! # Enough globally generated invertible modules give an ample module
 
 Source: Stacks Project, Varieties, Lemma 09NC
 (blueprint: lem-sc-enough-globally-generated-ample).
 -/
+
+@[expose] public section
 
 universe u
 

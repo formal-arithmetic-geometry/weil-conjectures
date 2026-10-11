@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
-import Mathlib.CategoryTheory.Limits.ExactFunctor
+module
+
+public import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
+public import Mathlib.CategoryTheory.Limits.ExactFunctor
 
 /-!
 # Flat sheaves of modules
@@ -19,6 +21,8 @@ universe of the rings and modules, as for the K-flat complexes (`CochainComplex.
 The source's `CategoryTheory.ObjectProperty.flat` asks both `tensorLeft` and `tensorRight` to
 be exact; the node asks it of `G ↦ G ⊗ F` only.
 -/
+
+@[expose] public section
 
 universe u
 

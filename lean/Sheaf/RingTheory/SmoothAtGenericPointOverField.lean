@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import Mathlib.RingTheory.FiniteType
-import Mathlib.RingTheory.Localization.FractionRing
-import Sheaf.FieldTheory.SeparableExtension
-import Sheaf.RingTheory.SingularIdeal
+module
+
+public import Mathlib.RingTheory.FiniteType
+public import Mathlib.RingTheory.Localization.FractionRing
+public import Sheaf.FieldTheory.SeparableExtension
+public import Sheaf.RingTheory.SingularIdeal
 
 /-!
 # Smoothness at the generic point over a field
@@ -15,6 +17,8 @@ Source: Stacks Project, Algebra, Lemma 07ND, separable fraction field implies sm
 specialized to a field base; Lemma 00TV and Definition 00TB
 (blueprint: lem-weil-pbc-smooth-at-generic-point-over-field).
 -/
+
+@[expose] public section
 
 universe u v w
 

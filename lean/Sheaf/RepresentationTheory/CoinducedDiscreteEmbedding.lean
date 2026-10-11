@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF worker H1
 -/
-import Sheaf.CategoryTheory.DiscreteModulesAbelian
-import Mathlib.Topology.LocallyConstant.Algebra
+module
+
+public import Sheaf.CategoryTheory.DiscreteModulesAbelian
+public import Mathlib.Topology.LocallyConstant.Algebra
 
 /-!
 # Coinduced embeddings of discrete continuous modules
@@ -14,6 +16,8 @@ label definition-G-module-continuous; Tag 0DVG, label section-continuous-group-c
 The coinduced embedding is the agent-written comparison ingredient
 (blueprint: lem-exc-coinduced-discrete-embedding).
 -/
+
+@[expose] public section
 
 universe u v w
 

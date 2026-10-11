@@ -2,9 +2,11 @@
 Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 -/
-import Mathlib.AlgebraicGeometry.Sites.Fpqc
-import Mathlib.CategoryTheory.Sites.Over
-import Mathlib.CategoryTheory.Sites.DenseSubsite.SheafEquiv
+module
+
+public import Mathlib.AlgebraicGeometry.Sites.Fpqc
+public import Mathlib.CategoryTheory.Sites.Over
+public import Mathlib.CategoryTheory.Sites.DenseSubsite.SheafEquiv
 
 /-!
 # Equivalence of the affine and big fppf sites
@@ -12,6 +14,8 @@ import Mathlib.CategoryTheory.Sites.DenseSubsite.SheafEquiv
 Source: Stacks Project, Tag 021V, Topologies Lemma 34.7.11
 (blueprint: lem-pc-fppf-affine-site-topos-equivalence).
 -/
+
+@[expose] public section
 
 universe u v
 

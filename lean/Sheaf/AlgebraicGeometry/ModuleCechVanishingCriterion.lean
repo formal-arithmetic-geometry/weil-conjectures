@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group G1
 -/
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Sheaf.Paper.PQFCohomology
-import Sheaf.CategoryTheory.SiteCechComplex
+module
+
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Sheaf.Paper.PQFCohomology
+public import Sheaf.CategoryTheory.SiteCechComplex
 
 /-!
 # The Čech vanishing criterion for module sheaves
@@ -13,6 +15,8 @@ import Sheaf.CategoryTheory.SiteCechComplex
 Source: Stacks Project, Cohomology of Sheaves, Tags 01EV and 01E1 (2)
 (blueprint: lem-weil-pbc-module-cech-vanishing-criterion).
 -/
+
+@[expose] public section
 
 universe u w
 

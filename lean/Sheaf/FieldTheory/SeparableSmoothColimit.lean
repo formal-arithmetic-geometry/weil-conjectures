@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import Sheaf.FieldTheory.FgSeparableSmooth
-import Mathlib.AlgebraicGeometry.Morphisms.Affine
+module
+
+public import Sheaf.FieldTheory.FgSeparableSmooth
+public import Mathlib.AlgebraicGeometry.Morphisms.Affine
 
 /-!
 # Separable extensions as colimits of smooth subalgebras
@@ -12,6 +14,8 @@ import Mathlib.AlgebraicGeometry.Morphisms.Affine
 Source: Stacks Project, Algebra, Lemma 10.158.11, Tag 07BV
 (blueprint: lem-kun-separable-smooth-colimit).
 -/
+
+@[expose] public section
 
 universe u v
 

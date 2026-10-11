@@ -3,13 +3,15 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import Sheaf.Topology.OpenModuleDerivedSections
-import Sheaf.CategoryTheory.DerivedLimitRoosAbelianGroups
-import WeilConjectures.Algebra.Homology.HomotopyCategory.Products
-import Sheaf.CategoryTheory.Triangulated.DerivedLimit
-import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
-import Mathlib.CategoryTheory.Abelian.RightDerived
-import Mathlib.Algebra.Homology.ShortComplex.ShortExact
+module
+
+public import Sheaf.Topology.OpenModuleDerivedSections
+public import Sheaf.CategoryTheory.DerivedLimitRoosAbelianGroups
+public import WeilConjectures.Algebra.Homology.HomotopyCategory.Products
+public import Sheaf.CategoryTheory.Triangulated.DerivedLimit
+public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
+public import Mathlib.CategoryTheory.Abelian.RightDerived
+public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 
 /-!
 # Cohomology over an open and derived inverse limits
@@ -17,6 +19,8 @@ import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 Source: literature/stacks-project/cohomology.tex, Tag 0D60, label
 lemma-RGamma-commutes-with-Rlim (blueprint: lem-pc-ringed-space-rgamma-derived-limit).
 -/
+
+@[expose] public section
 
 universe u v w
 

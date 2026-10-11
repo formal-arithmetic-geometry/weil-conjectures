@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group J1
 -/
-import Sheaf.Topology.ClosedPushforwardConstantPresheaf
-import Mathlib.Topology.Sheaves.Stalks
+module
+
+public import Sheaf.Topology.ClosedPushforwardConstantPresheaf
+public import Mathlib.Topology.Sheaves.Stalks
 
 /-!
 # Stalks of a constant sheaf pushed forward from a closed subset
@@ -12,6 +14,8 @@ import Mathlib.Topology.Sheaves.Stalks
 Source: Stacks Project, Sheaves on Spaces, Tags 006W, 007B and 00AE
 (blueprint: lem-weil-pbc-closed-pushforward-constant-stalks).
 -/
+
+@[expose] public section
 
 set_option autoImplicit false
 

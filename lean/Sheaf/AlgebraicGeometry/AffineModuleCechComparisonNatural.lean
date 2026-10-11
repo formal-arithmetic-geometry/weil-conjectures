@@ -3,13 +3,17 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import Sheaf.AlgebraicGeometry.ModuleCechComparison
+module
+
+public import Sheaf.AlgebraicGeometry.ModuleCechComparison
 
 /-! # Naturality of the affine-cover Čech comparison isomorphisms
 
 Source: Stacks Project, Cohomology of Sheaves, Tag 01EQ; Cohomology of Schemes, Tag 01XD
 (blueprint: lem-sc-cech-comparison-natural).
 -/
+
+@[expose] public section
 
 open CategoryTheory CategoryTheory.Limits Opposite TopologicalSpace
 

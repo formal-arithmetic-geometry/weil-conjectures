@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Sheaf.AlgebraicGeometry.SmoothConnectedCurveLocalRings
-import Sheaf.AlgebraicGeometry.InvertibleModuleGenericStalk
+module
+
+public import Sheaf.AlgebraicGeometry.SmoothConnectedCurveLocalRings
+public import Sheaf.AlgebraicGeometry.InvertibleModuleGenericStalk
 
 /-!
 # Orders of a rational section of an invertible module
@@ -12,6 +14,8 @@ import Sheaf.AlgebraicGeometry.InvertibleModuleGenericStalk
 Source: Stacks Project, Divisors, Section 02SE before Definition 02SF and Lemma 02SG
 (blueprint: lem-sc-rational-section-order).
 -/
+
+@[expose] public section
 
 universe u
 

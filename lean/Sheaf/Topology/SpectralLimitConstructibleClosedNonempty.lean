@@ -1,6 +1,8 @@
-import Mathlib.Topology.Spectral.Basic
-import Mathlib.Topology.Spectral.ConstructibleTopology
-import Mathlib.Topology.Spectral.Hom
+module
+
+public import Mathlib.Topology.Spectral.Basic
+public import Mathlib.Topology.Spectral.ConstructibleTopology
+public import Mathlib.Topology.Spectral.Hom
 
 /-!
 # Compatible points in constructibly closed subsets of spectral spaces
@@ -9,6 +11,7 @@ Source: literature/stacks-project/topology.tex, Topology, Lemma Tag 0A2W
 (blueprint: lem-weil-pbc-spectral-limit-constructible-closed-nonempty)
 -/
 
+@[expose] public section
 
 universe u
 

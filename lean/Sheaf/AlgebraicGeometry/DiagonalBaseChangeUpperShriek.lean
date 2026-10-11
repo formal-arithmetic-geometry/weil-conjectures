@@ -3,14 +3,16 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group V1
 -/
-import Sheaf.AlgebraicGeometry.BaseChangeConventions
-import Sheaf.AlgebraicGeometry.DerivedPullback
-import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
-import Mathlib.AlgebraicGeometry.Morphisms.Proper
-import Mathlib.AlgebraicGeometry.Morphisms.Flat
-import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
-import Mathlib.AlgebraicGeometry.Noetherian
-import Mathlib.CategoryTheory.Adjunction.Basic
+module
+
+public import Sheaf.AlgebraicGeometry.BaseChangeConventions
+public import Sheaf.AlgebraicGeometry.DerivedPullback
+public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
+public import Mathlib.AlgebraicGeometry.Morphisms.Proper
+public import Mathlib.AlgebraicGeometry.Morphisms.Flat
+public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
+public import Mathlib.AlgebraicGeometry.Noetherian
+public import Mathlib.CategoryTheory.Adjunction.Basic
 
 /-!
 # Base change of a right adjoint on the self-product
@@ -19,6 +21,8 @@ Source: Stacks Project, Tag 0E2P, proof of Lemma 48.12.8, third equality,
 using Lemma 48.12.4 (Tag 0AAB)
 (blueprint: lem-sc-smooth-proper-diagonal-basechange-upper-shriek).
 -/
+
+@[expose] public section
 
 universe u w
 

@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under the Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Sheaf.AlgebraicGeometry.DerivedPullbackComposition
-import Sheaf.AlgebraicGeometry.Modules.TensorPullbackStalk
-import Sheaf.Algebra.Homology.BaseDerivedTensorCohomologyModel
+module
+
+public import Sheaf.AlgebraicGeometry.DerivedPullbackComposition
+public import Sheaf.AlgebraicGeometry.Modules.TensorPullbackStalk
+public import Sheaf.Algebra.Homology.BaseDerivedTensorCohomologyModel
 
 /-! # The single-complex stalkwise base-change condition
 
@@ -16,6 +18,8 @@ K-flat coordinates express the canonical tensor-cohomology comparison, followed 
 the given derived map. Every choice is tied to the actual stalk maps or to a
 localization equation. Invertibility is independent of representative coordinates.
 -/
+
+@[expose] public section
 
 universe uSC wSC
 open CategoryTheory CategoryTheory.Limits

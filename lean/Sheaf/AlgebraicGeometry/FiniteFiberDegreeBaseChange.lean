@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import Sheaf.AlgebraicGeometry.FiberDegreeBound
+module
+
+public import Sheaf.AlgebraicGeometry.FiberDegreeBound
 
 /-!
 # Finite fibre degrees under base change
@@ -18,6 +20,8 @@ Source: Stacks Project, Morphisms, proof of Tag 03J5 and Tag 03J7
 * `AlgebraicGeometry.Scheme.Hom.boundsFiberDegrees_pullback_snd`: the same bound works after
   base change.
 -/
+
+@[expose] public section
 
 universe u
 

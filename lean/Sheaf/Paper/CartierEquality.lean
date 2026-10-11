@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF contributors
 -/
-import Mathlib.RingTheory.Kaehler.Basic
-import Mathlib.RingTheory.Extension.Cotangent.Basic
-import Mathlib.RingTheory.AlgebraicIndependent.Basic
-import Mathlib.LinearAlgebra.Dimension.Finrank
+module
+
+public import Mathlib.RingTheory.Kaehler.Basic
+public import Mathlib.RingTheory.Extension.Cotangent.Basic
+public import Mathlib.RingTheory.AlgebraicIndependent.Basic
+public import Mathlib.LinearAlgebra.Dimension.Finrank
 
 /-!
 # Cartier equality
@@ -14,6 +16,8 @@ import Mathlib.LinearAlgebra.Dimension.Finrank
 Source: Stacks Project, More on Algebra, Lemma Tag 07E1 (blueprint:
 lem-weil-pbc-cartier-equality).
 -/
+
+@[expose] public section
 
 universe u v
 

@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group S1
 -/
-import Mathlib.AlgebraicGeometry.ValuativeCriterion
+module
+
+public import Mathlib.AlgebraicGeometry.ValuativeCriterion
 
 /-!
 # Valuation probes at closure points of a quasi-compact immersion
@@ -11,6 +13,8 @@ import Mathlib.AlgebraicGeometry.ValuativeCriterion
 Source: Stacks Project, Morphisms, Lemma 29.6.5, Tag 02JQ
 (blueprint: lem-sc-picard-valuation-probe-closure).
 -/
+
+@[expose] public section
 
 universe u
 

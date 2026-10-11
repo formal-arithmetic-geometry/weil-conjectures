@@ -3,17 +3,21 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF contributors
 -/
-import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
-import Mathlib.Algebra.Category.Grp.FilteredColimits
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
-import Mathlib.CategoryTheory.Abelian.ShortExact
+module
+
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
+public import Mathlib.Algebra.Category.Grp.FilteredColimits
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
+public import Mathlib.CategoryTheory.Abelian.ShortExact
 
 /-! # Exactness of internal Hom from finite free sheaves
 
 Source: literature/stacks-project/cohomology.tex, Tag 0GM8, finite locally free Hom
 calculation used in case (2) (blueprint: lem-sc-finite-free-internal-hom-exact).
 -/
+
+@[expose] public section
 
 universe u
 

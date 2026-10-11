@@ -2,9 +2,11 @@
 Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under the Apache 2.0 license as described in the file LICENSE.
 -/
-import Mathlib.Algebra.Category.ModuleCat.Abelian
-import Mathlib.Algebra.Homology.DerivedCategory.Basic
-import Mathlib.CategoryTheory.Retract
+module
+
+public import Mathlib.Algebra.Category.ModuleCat.Abelian
+public import Mathlib.Algebra.Homology.DerivedCategory.Basic
+public import Mathlib.CategoryTheory.Retract
 
 /-! # Generation of a module derived category by shifts of the ring
 
@@ -15,6 +17,8 @@ The property in the conclusion is the semantic description of the smallest full
 subcategory containing the shifts of the free rank-one module and closed under
 set-indexed coproducts, distinguished triangles, and retracts.
 -/
+
+@[expose] public section
 
 universe u v w
 

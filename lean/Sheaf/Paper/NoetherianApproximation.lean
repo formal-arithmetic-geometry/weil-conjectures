@@ -3,15 +3,19 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Sheaf.Paper.RelativeGlobalCompleteIntersectionPresentation
-import Mathlib.RingTheory.FiniteType
-import Mathlib.Algebra.MvPolynomial.Basic
+module
+
+public import Sheaf.Paper.RelativeGlobalCompleteIntersectionPresentation
+public import Mathlib.RingTheory.FiniteType
+public import Mathlib.Algebra.MvPolynomial.Basic
 
 /-! # Noetherian approximation of a relative global complete intersection
 
 Source: Stacks Project, Algebra, Lemma Tag 00SU
 (blueprint: lem-weil-pbc-relative-global-complete-intersection-noetherian-approximation).
 -/
+
+@[expose] public section
 
 universe u
 

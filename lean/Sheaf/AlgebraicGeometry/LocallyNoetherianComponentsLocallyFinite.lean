@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import Mathlib.AlgebraicGeometry.Noetherian
+module
+
+public import Mathlib.AlgebraicGeometry.Noetherian
 
 /-!
 # Local finiteness of irreducible components of locally Noetherian schemes
@@ -11,6 +13,8 @@ import Mathlib.AlgebraicGeometry.Noetherian
 Source: Stacks Project, Topology, Lemma 5.9.2, Tag 0052, applied on affine Noetherian
 open neighbourhoods (blueprint: lem-sc-locnoeth-components-locally-finite).
 -/
+
+@[expose] public section
 
 universe u
 

@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group Q1
 -/
-import Sheaf.AlgebraicGeometry.CoherentFormalModule
-import Sheaf.AlgebraicGeometry.CoherentFormalModulesAbelian
+module
+
+public import Sheaf.AlgebraicGeometry.CoherentFormalModule
+public import Sheaf.AlgebraicGeometry.CoherentFormalModulesAbelian
 
 /-!
 # Grothendieck existence by devissage
@@ -12,6 +14,8 @@ import Sheaf.AlgebraicGeometry.CoherentFormalModulesAbelian
 Source: Stacks Project, Cohomology of Schemes, Lemma 088A (blueprint:
 lem-weil-pbc-grothendieck-existence-devissage).
 -/
+
+@[expose] public section
 
 universe u
 

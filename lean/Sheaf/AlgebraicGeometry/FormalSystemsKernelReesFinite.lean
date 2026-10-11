@@ -3,14 +3,18 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group T1
 -/
-import Sheaf.AlgebraicGeometry.FormalKernelGradedPieces
-import Sheaf.AlgebraicGeometry.GradedSheafStructures
+module
+
+public import Sheaf.AlgebraicGeometry.FormalKernelGradedPieces
+public import Sheaf.AlgebraicGeometry.GradedSheafStructures
 
 /-! # Finite graded kernel module of a coherent formal system
 
 Source: Stacks Project, Cohomology of Schemes, Lemma 087Z, statement and affine proof;
 Section 0EHN (blueprint: lem-weil-pbc-formal-systems-kernel-rees-finite).
 -/
+
+@[expose] public section
 
 universe ut
 

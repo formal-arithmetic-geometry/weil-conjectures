@@ -1,11 +1,15 @@
-import Mathlib.CategoryTheory.Abelian.Exact
-import Mathlib.Algebra.Category.ModuleCat.Basic
-import Mathlib.LinearAlgebra.FreeModule.Basic
+module
+
+public import Mathlib.CategoryTheory.Abelian.Exact
+public import Mathlib.Algebra.Category.ModuleCat.Basic
+public import Mathlib.LinearAlgebra.FreeModule.Basic
 
 /-! # A complex of free modules maps to a resolution
 Source: literature/stacks-project/algebra.tex, Tag 00LS
 (blueprint: lem-weil-pbc-free-complex-maps-to-resolution).
 -/
+
+@[expose] public section
 
 universe u v w
 

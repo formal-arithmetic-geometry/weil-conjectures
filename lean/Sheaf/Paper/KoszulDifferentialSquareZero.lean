@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Sheaf.Paper.KoszulDifferential
-import Mathlib.LinearAlgebra.ExteriorAlgebra.Grading
+module
+
+public import Sheaf.Paper.KoszulDifferential
+public import Mathlib.LinearAlgebra.ExteriorAlgebra.Grading
 
 /-!
 # The Koszul differential squares to zero
@@ -17,6 +19,8 @@ The Koszul differential `D_φ` is the one named map
 (STATE line KOSZUL); by the proof of `ExteriorAlgebra.koszul_differential`
 (lem-weil-pbc-koszul-differential, step 1) it is the unique map of that node.
 -/
+
+@[expose] public section
 
 universe u v
 

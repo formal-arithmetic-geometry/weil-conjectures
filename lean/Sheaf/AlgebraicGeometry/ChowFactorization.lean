@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group T1
 -/
-import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
-import Mathlib.AlgebraicGeometry.Morphisms.Proper
+module
+
+public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
+public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 
 /-!
 # Chow factorization over an affine base
@@ -12,6 +14,8 @@ import Mathlib.AlgebraicGeometry.Morphisms.Proper
 Source: Weil conjectures blueprint, `sec-proper-base-change`, `sk-thm-chow`,
 `lemma-weil-pbc-chow-factorization` (blueprint: lemma-weil-pbc-chow-factorization).
 -/
+
+@[expose] public section
 
 universe u
 

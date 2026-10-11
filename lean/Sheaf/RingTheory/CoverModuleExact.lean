@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import Mathlib.Algebra.Module.LocalizedModule.Basic
-import Mathlib.RingTheory.Ideal.Basic
+module
+
+public import Mathlib.Algebra.Module.LocalizedModule.Basic
+public import Mathlib.RingTheory.Ideal.Basic
 
 /-!
 # Exactness of the Cech sequence for a module localization cover
@@ -12,6 +14,8 @@ import Mathlib.RingTheory.Ideal.Basic
 Source: Stacks Project, Algebra, Lemma 00EK (label `lemma-cover-module`)
 (blueprint: lem-weil-pbc-cover-module-exact).
 -/
+
+@[expose] public section
 
 universe u v
 

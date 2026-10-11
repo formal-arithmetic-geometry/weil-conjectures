@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF contributors
 -/
-import Mathlib.RingTheory.FinitePresentation
-import Mathlib.Algebra.Module.FinitePresentation
-import Mathlib.RingTheory.Flat.Basic
-import Mathlib.Algebra.Module.Projective
+module
+
+public import Mathlib.RingTheory.FinitePresentation
+public import Mathlib.Algebra.Module.FinitePresentation
+public import Mathlib.RingTheory.Flat.Basic
+public import Mathlib.Algebra.Module.Projective
 
 /-!
 # Restriction of scalars preserves finite projectivity
@@ -15,6 +17,8 @@ Source: `WeilConjectures/AlgebraicGeometry/Modules/FinitePushforward.lean`,
 theorem `isFiniteLocallyFree_pushforward`, lines 228-242
 (blueprint: lem-pc-finite-flat-restriction-projective).
 -/
+
+@[expose] public section
 
 universe u v w
 

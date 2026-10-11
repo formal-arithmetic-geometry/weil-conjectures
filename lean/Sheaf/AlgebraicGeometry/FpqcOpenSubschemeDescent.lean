@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import Mathlib.AlgebraicGeometry.Sites.Fpqc
-import Mathlib.AlgebraicGeometry.Restrict
-import Mathlib.AlgebraicGeometry.Pullbacks
+module
+
+public import Mathlib.AlgebraicGeometry.Sites.Fpqc
+public import Mathlib.AlgebraicGeometry.Restrict
+public import Mathlib.AlgebraicGeometry.Pullbacks
 
 /-!
 # Fpqc descent of compatible open subschemes
@@ -13,6 +15,8 @@ import Mathlib.AlgebraicGeometry.Pullbacks
 Source: literature/stacks-project/descent.tex, Lemma Tag 03N0
 (blueprint: lem-weil-pbc-open-subscheme-fpqc-descent).
 -/
+
+@[expose] public section
 
 open CategoryTheory CategoryTheory.Limits
 open AlgebraicGeometry

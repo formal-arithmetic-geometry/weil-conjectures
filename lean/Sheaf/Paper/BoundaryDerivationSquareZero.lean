@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group U1
 -/
-import Sheaf.Paper.PQFCohomology
-import Sheaf.AlgebraicGeometry.CommAlgebraSheaf
-import Sheaf.CategoryTheory.CommAlgebraSheafModule
-import Mathlib.Algebra.Homology.HomologySequence
+module
+
+public import Sheaf.Paper.PQFCohomology
+public import Sheaf.AlgebraicGeometry.CommAlgebraSheaf
+public import Sheaf.CategoryTheory.CommAlgebraSheafModule
+public import Mathlib.Algebra.Homology.HomologySequence
 
 /-!
 # Boundary maps for square-zero extensions
@@ -21,6 +23,8 @@ The connecting map is the snake boundary of any compatible injective resolutions
 transported to the recorded module cohomology (independent of the choice by
 lem-weil-pbc-horseshoe-delta-functor). No boundary is an arbitrary function.
 -/
+
+@[expose] public section
 
 set_option autoImplicit false
 

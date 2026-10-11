@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Mathlib.AlgebraicGeometry.Morphisms.Affine
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.Affine
 
 /-!
 # Affine transitions between fibre products
@@ -11,6 +13,8 @@ import Mathlib.AlgebraicGeometry.Morphisms.Affine
 Source: Stacks Project, Morphisms, Tags 01SD and 01SC, and Schemes, Tag 01KR
 (blueprint: lem-weil-pbc-fibre-product-affine-transition).
 -/
+
+@[expose] public section
 
 universe u
 

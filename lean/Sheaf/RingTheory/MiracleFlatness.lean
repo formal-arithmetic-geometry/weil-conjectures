@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group J1
 -/
-import Sheaf.RingTheory.Depth
-import Mathlib.RingTheory.RegularLocalRing.Defs
-import Mathlib.RingTheory.RingHom.Flat
-import Mathlib.RingTheory.LocalRing.RingHom.Basic
+module
+
+public import Sheaf.RingTheory.Depth
+public import Mathlib.RingTheory.RegularLocalRing.Defs
+public import Mathlib.RingTheory.RingHom.Flat
+public import Mathlib.RingTheory.LocalRing.RingHom.Basic
 
 /-!
 # Miracle flatness
@@ -14,6 +16,8 @@ import Mathlib.RingTheory.LocalRing.RingHom.Basic
 Source: Stacks Project, Algebra, Lemma 10.128.1 (Tag 00R4)
 (blueprint: lem-weil-pbc-miracle-flatness).
 -/
+
+@[expose] public section
 
 universe u v
 

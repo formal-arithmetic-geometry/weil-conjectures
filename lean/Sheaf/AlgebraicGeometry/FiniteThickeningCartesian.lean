@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import Mathlib.AlgebraicGeometry.Morphisms.Finite
-import Sheaf.AlgebraicGeometry.Thickening
-import Sheaf.AlgebraicGeometry.BaseChangeConventions
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.Finite
+public import Sheaf.AlgebraicGeometry.Thickening
+public import Sheaf.AlgebraicGeometry.BaseChangeConventions
 
 /-!
 # Finiteness across a cartesian finite order thickening
@@ -13,6 +15,8 @@ import Sheaf.AlgebraicGeometry.BaseChangeConventions
 Source: Stacks Project, More on Morphisms, Lemma 37.3.3 (Tag 09ZW), part (8)
 (blueprint: lem-weil-pbc-thickening-finite-cartesian).
 -/
+
+@[expose] public section
 
 universe u
 

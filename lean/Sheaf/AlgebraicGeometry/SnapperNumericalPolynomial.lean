@@ -3,19 +3,23 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Sheaf.AlgebraicGeometry.Coherent
-import WeilConjectures.AlgebraicGeometry.Cohomology.Defs
-import WeilConjectures.AlgebraicGeometry.Modules.Dual
-import Mathlib.AlgebraicGeometry.Morphisms.Proper
-import Mathlib.Algebra.MvPolynomial.Degrees
-import Mathlib.Algebra.MvPolynomial.Eval
-import Mathlib.Topology.KrullDimension
+module
+
+public import Sheaf.AlgebraicGeometry.Coherent
+public import WeilConjectures.AlgebraicGeometry.Cohomology.Defs
+public import WeilConjectures.AlgebraicGeometry.Modules.Dual
+public import Mathlib.AlgebraicGeometry.Morphisms.Proper
+public import Mathlib.Algebra.MvPolynomial.Degrees
+public import Mathlib.Algebra.MvPolynomial.Eval
+public import Mathlib.Topology.KrullDimension
 
 /-! # Snapper's numerical polynomial for several invertible twists
 
 Source: Stacks Project, Varieties, Lemma 33.45.1, Tag 0BEM, in Section 0BEL
 (blueprint: lem-sc-snapper-numerical-polynomial).
 -/
+
+@[expose] public section
 
 universe u
 

@@ -3,12 +3,14 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF worker M1
 -/
-import Mathlib.Algebra.Category.ModuleCat.Basic
-import Mathlib.CategoryTheory.Preadditive.Injective.Basic
-import Mathlib.Algebra.Homology.ShortComplex.Exact
-import Mathlib.Topology.Connected.TotallyDisconnected
-import Mathlib.Topology.Separation.Hausdorff
-import Sheaf.RepresentationTheory.DiscreteContinuousRep
+module
+
+public import Mathlib.Algebra.Category.ModuleCat.Basic
+public import Mathlib.CategoryTheory.Preadditive.Injective.Basic
+public import Mathlib.Algebra.Homology.ShortComplex.Exact
+public import Mathlib.Topology.Connected.TotallyDisconnected
+public import Mathlib.Topology.Separation.Hausdorff
+public import Sheaf.RepresentationTheory.DiscreteContinuousRep
 
 /-!
 # Discrete modules with profinite group action
@@ -16,6 +18,8 @@ import Sheaf.RepresentationTheory.DiscreteContinuousRep
 Source: Stacks Project, etale-cohomology.tex, Tag 0A2H and Definition 04JP;
 injectives.tex, Tag 04JF (blueprint: lem-exc-discrete-modules-abelian).
 -/
+
+@[expose] public section
 
 universe u v w
 

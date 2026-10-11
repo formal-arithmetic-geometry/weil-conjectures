@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group J1
 -/
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
-import Sheaf.Algebra.Homology.KFlat
-import Mathlib.Algebra.Homology.DerivedCategory.Basic
-import Mathlib.CategoryTheory.Functor.Derived.PointwiseLeftDerived
+module
+
+public import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
+public import Sheaf.Algebra.Homology.KFlat
+public import Mathlib.Algebra.Homology.DerivedCategory.Basic
+public import Mathlib.CategoryTheory.Functor.Derived.PointwiseLeftDerived
 
 /-!
 # Derived change of rings on a ringed site
@@ -21,6 +23,8 @@ statement asserts an additive functor `E` with exactly these objects and maps, a
 `E.mapHomologicalComplex` (termwise change of rings of complexes) and
 `E.mapHomotopyCategory ⋙ DerivedCategory.Qh` (the functor `K(O) → D(O')`).
 -/
+
+@[expose] public section
 
 universe w u
 

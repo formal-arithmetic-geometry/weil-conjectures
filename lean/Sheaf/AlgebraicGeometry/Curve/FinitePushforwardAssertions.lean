@@ -3,12 +3,14 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import Sheaf.AlgebraicGeometry.CurveCoefficientPair
-import WeilConjectures.AlgebraicGeometry.Curve.Assertions
-import Mathlib.Algebra.Category.Grp.ZModuleEquivalence
-import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
-import Mathlib.Algebra.Ring.ULift
-import Mathlib.AlgebraicGeometry.Morphisms.Finite
+module
+
+public import Sheaf.AlgebraicGeometry.CurveCoefficientPair
+public import WeilConjectures.AlgebraicGeometry.Curve.Assertions
+public import Mathlib.Algebra.Category.Grp.ZModuleEquivalence
+public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
+public import Mathlib.Algebra.Ring.ULift
+public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 
 /-!
 # Finite pushforward of the eight curve assertions
@@ -16,6 +18,8 @@ import Mathlib.AlgebraicGeometry.Morphisms.Finite
 Source: Stacks Project, Etale Cohomology, Lemma 0A5D (59.83.5)
 (blueprint: lem-weil-pbc-curve-assertions-finite-pushforward).
 -/
+
+@[expose] public section
 
 universe u
 

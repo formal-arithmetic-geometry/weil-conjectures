@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import Sheaf.AlgebraicGeometry.TangentVectorsVectorSpace
-import WeilConjectures.AlgebraicGeometry.DualNumbers
+module
+
+public import Sheaf.AlgebraicGeometry.TangentVectorsVectorSpace
+public import WeilConjectures.AlgebraicGeometry.DualNumbers
 
 /-!
 # Linearity of the map on dual-number tangent vectors
@@ -12,6 +14,8 @@ import WeilConjectures.AlgebraicGeometry.DualNumbers
 Source: Stacks Project, Tag 0B2F, with base `Spec k`
 (blueprint: lem-sc-tangent-map-linear).
 -/
+
+@[expose] public section
 
 universe u
 

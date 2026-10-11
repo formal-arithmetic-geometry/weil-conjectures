@@ -3,17 +3,21 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import Sheaf.AlgebraicGeometry.PerfectComplex
-import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
-import Sheaf.AlgebraicGeometry.PerfectMorphism
-import Mathlib.AlgebraicGeometry.Noetherian
-import Mathlib.AlgebraicGeometry.Morphisms.Proper
+module
+
+public import Sheaf.AlgebraicGeometry.PerfectComplex
+public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
+public import Sheaf.AlgebraicGeometry.PerfectMorphism
+public import Mathlib.AlgebraicGeometry.Noetherian
+public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 
 /-! # Perfect direct image along a proper perfect morphism
 
 Source: literature/stacks-project/more-morphisms.tex, Lemma 37.61.13, Tag 0B6G
 (blueprint: lem-pc-proper-perfect-direct-image-perfect).
 -/
+
+@[expose] public section
 
 universe u w
 

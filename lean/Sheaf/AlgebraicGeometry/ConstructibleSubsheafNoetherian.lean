@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import Mathlib.AlgebraicGeometry.Noetherian
-import Sheaf.AlgebraicGeometry.BoundedConstructibleComplexes
+module
+
+public import Mathlib.AlgebraicGeometry.Noetherian
+public import Sheaf.AlgebraicGeometry.BoundedConstructibleComplexes
 
 /-!
 # Subsheaves of constructible module sheaves on Noetherian schemes
@@ -13,6 +15,8 @@ Source: blueprint `sec-smooth-purity/sk-prop-sf-cbc`, and Stacks Project,
 Proposition 59.74.1(3), Tag 03RY
 (blueprint: lem-weil-pbc-constructible-subobjects-noetherian).
 -/
+
+@[expose] public section
 
 universe u
 

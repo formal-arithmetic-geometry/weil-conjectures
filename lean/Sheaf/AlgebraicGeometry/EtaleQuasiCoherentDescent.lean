@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import Sheaf.AlgebraicGeometry.EtaleTensorSections
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
+module
+
+public import Sheaf.AlgebraicGeometry.EtaleTensorSections
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 
 /-!
 # Étale descent for sections of quasi-coherent modules
@@ -12,6 +14,8 @@ import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 Source: Stacks Project, Descent, Section 35.8, Tags 03DR and 03DT
 (blueprint: lem-sc-etale-qcoherent-descent).
 -/
+
+@[expose] public section
 
 universe u
 

@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import Mathlib.AlgebraicGeometry.Sites.EtalePoint
-import Mathlib.CategoryTheory.Sites.ConstantSheaf
-import WeilConjectures.ConstructibleSheaf.Defs
+module
+
+public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
+public import Mathlib.CategoryTheory.Sites.ConstantSheaf
+public import WeilConjectures.ConstructibleSheaf.Defs
 
 /-!
 # Finite geometric stalks of finite locally constant sheaves of sets
@@ -13,6 +15,8 @@ import WeilConjectures.ConstructibleSheaf.Defs
 Source: Stacks Project, Etale Cohomology, Definition 03RU (4), Lemma 03Q1 (3),
 and Remark 03P5 (blueprint: lem-galois-flc-set-stalk-finite).
 -/
+
+@[expose] public section
 
 universe u
 

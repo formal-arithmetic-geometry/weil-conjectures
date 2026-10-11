@@ -3,22 +3,26 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group J1
 -/
-import Sheaf.AlgebraicGeometry.Coherent
-import WeilConjectures.AlgebraicGeometry.Cohomology.Defs
-import WeilConjectures.AlgebraicGeometry.Modules.Dual
-import WeilConjectures.AlgebraicGeometry.Modules.FlatPullbackStalk
-import Mathlib.AlgebraicGeometry.Morphisms.Proper
-import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-import Mathlib.Algebra.MvPolynomial.Degrees
-import Mathlib.Algebra.MvPolynomial.Eval
-import Mathlib.RingTheory.Length
-import Mathlib.Topology.KrullDimension
+module
+
+public import Sheaf.AlgebraicGeometry.Coherent
+public import WeilConjectures.AlgebraicGeometry.Cohomology.Defs
+public import WeilConjectures.AlgebraicGeometry.Modules.Dual
+public import WeilConjectures.AlgebraicGeometry.Modules.FlatPullbackStalk
+public import Mathlib.AlgebraicGeometry.Morphisms.Proper
+public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+public import Mathlib.Algebra.MvPolynomial.Degrees
+public import Mathlib.Algebra.MvPolynomial.Eval
+public import Mathlib.RingTheory.Length
+public import Mathlib.Topology.KrullDimension
 
 /-! # Generic lengths determine the leading Euler-characteristic terms
 
 Source: Stacks Project, Varieties, Tag 0BEN (Lemma 33.45.2)
 (blueprint: lem-sc-numerical-polynomial-leading-term).
 -/
+
+@[expose] public section
 
 universe u
 

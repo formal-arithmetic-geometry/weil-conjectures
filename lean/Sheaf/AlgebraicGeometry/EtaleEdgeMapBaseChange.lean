@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group J1
 -/
-import WeilConjectures.SixFunctors.BaseChange.Square
-import Mathlib.AlgebraicGeometry.Morphisms.Finite
+module
+
+public import WeilConjectures.SixFunctors.BaseChange.Square
+public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 
 /-!
 # Compatibility of the étale cohomology edge map with base change
@@ -16,6 +18,8 @@ The edge map is written as pullback on cohomology followed by the counit. In the
 case, its bijectivity and that of the exchange followed by the base-changed edge map give
 the two isomorphisms identifying the horizontal pullback maps.
 -/
+
+@[expose] public section
 
 universe u
 

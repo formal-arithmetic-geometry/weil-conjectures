@@ -3,11 +3,13 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF worker M1
 -/
-import Mathlib.RepresentationTheory.Rep.Basic
-import Mathlib.CategoryTheory.Preadditive.Injective.Basic
-import Mathlib.Topology.Algebra.Group.Defs
-import Mathlib.Topology.Separation.Profinite
-import Sheaf.RepresentationTheory.DiscreteContinuousRep
+module
+
+public import Mathlib.RepresentationTheory.Rep.Basic
+public import Mathlib.CategoryTheory.Preadditive.Injective.Basic
+public import Mathlib.Topology.Algebra.Group.Defs
+public import Mathlib.Topology.Separation.Profinite
+public import Sheaf.RepresentationTheory.DiscreteContinuousRep
 
 /-!
 # Injective embeddings of discrete continuous representations
@@ -20,6 +22,8 @@ lem-exc-discrete-modules-abelian-injective-embeddings).
 - `Rep.discreteContinuousRep_functorialInjectiveEmbeddings`: functorial injective
   embeddings over a finite ring for a profinite group.
 -/
+
+@[expose] public section
 
 universe u v w
 

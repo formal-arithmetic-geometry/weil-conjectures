@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import Sheaf.AlgebraicGeometry.NormalScheme
-import Mathlib.AlgebraicGeometry.Noetherian
-import Mathlib.AlgebraicGeometry.Restrict
+module
+
+public import Sheaf.AlgebraicGeometry.NormalScheme
+public import Mathlib.AlgebraicGeometry.Noetherian
+public import Mathlib.AlgebraicGeometry.Restrict
 
 /-!
 # Normal integral components of a Noetherian etale scheme
@@ -14,6 +16,8 @@ Source: smooth purity blueprint, unit `sk-prop-sf-cbc`, node
 `lem-fin-etale-normal-components`, order 1605; Stacks Project, Tag 033C
 (blueprint: lem-fin-etale-normal-components).
 -/
+
+@[expose] public section
 
 universe u
 

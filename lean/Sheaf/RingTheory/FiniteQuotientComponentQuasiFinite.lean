@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import Sheaf.RingTheory.QuasiFiniteAtPrime
-import Mathlib.RingTheory.Ideal.Quotient.Operations
-import Mathlib.Algebra.Algebra.Prod
+module
+
+public import Sheaf.RingTheory.QuasiFiniteAtPrime
+public import Mathlib.RingTheory.Ideal.Quotient.Operations
+public import Mathlib.Algebra.Algebra.Prod
 
 /-!
 # Quasi-finiteness along a finite quotient component
@@ -13,6 +15,8 @@ import Mathlib.Algebra.Algebra.Prod
 Source: Stacks Project, More on Algebra, proof of Lemma 15.11.5 (Tag 09XH), first sentence
 (blueprint: lem-weil-pbc-integral-closure-finite-fibre-quasi-finite).
 -/
+
+@[expose] public section
 
 universe u v w z
 

@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import Mathlib.RingTheory.Extension.Cotangent.LocalizationAway
+module
+
+public import Mathlib.RingTheory.Extension.Cotangent.LocalizationAway
 
 /-!
 # Principal localization and the naive cotangent complex
@@ -11,6 +13,8 @@ import Mathlib.RingTheory.Extension.Cotangent.LocalizationAway
 Source: Stacks Project, Algebra, Lemma 08JZ, statement and proof
 (blueprint: lem-weil-pbc-principal-localization-naive-cotangent).
 -/
+
+@[expose] public section
 
 universe u v w z
 

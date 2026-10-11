@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Mathlib.AlgebraicGeometry.Morphisms.Proper
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Sheaf.AlgebraicGeometry.ReducedInducedClosedSubscheme
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.Proper
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Sheaf.AlgebraicGeometry.ReducedInducedClosedSubscheme
 
 /-!
 # Closed subsets and module supports proper over a base
@@ -20,6 +22,8 @@ condition (1) of Lemma 30.26.1 (Tag 0CYL), and the paragraph before Lemma 30.26.
 * `Scheme.IsClosedSubsetProperOver`: properness of the reduced induced closed subscheme.
 * `Scheme.Modules.HasSupportProperOver`: closedness and properness of the nonzero-stalk locus.
 -/
+
+@[expose] public section
 
 universe u
 

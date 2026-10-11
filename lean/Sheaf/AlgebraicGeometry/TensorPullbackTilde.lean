@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Mathlib.AlgebraicGeometry.Modules.Tilde
-import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
+module
+
+public import Mathlib.AlgebraicGeometry.Modules.Tilde
+public import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
 
 /-!
 # Pullback of associated modules on affine schemes
@@ -12,6 +14,8 @@ import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
 Source: Stacks Project, Schemes, Tag 01I9 (1), using Tags 01I7 and 01BJ
 (blueprint: lem-weil-pbc-tilde-pullback-base-change).
 -/
+
+@[expose] public section
 
 universe u
 

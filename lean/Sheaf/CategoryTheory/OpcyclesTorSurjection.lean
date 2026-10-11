@@ -3,14 +3,16 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group G1
 -/
-import Mathlib.Algebra.Homology.Bifunctor
-import Mathlib.Algebra.Homology.HomotopyCategory.SingleFunctors
-import Mathlib.CategoryTheory.Monoidal.Tor
-import Mathlib.Algebra.Category.ModuleCat.Monoidal.Basic
-import Mathlib.Algebra.Category.ModuleCat.Colimits
-import Mathlib.Algebra.Category.ModuleCat.Abelian
-import Mathlib.Algebra.Category.ModuleCat.Projective
-import Mathlib.RingTheory.Flat.Basic
+module
+
+public import Mathlib.Algebra.Homology.Bifunctor
+public import Mathlib.Algebra.Homology.HomotopyCategory.SingleFunctors
+public import Mathlib.CategoryTheory.Monoidal.Tor
+public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Basic
+public import Mathlib.Algebra.Category.ModuleCat.Colimits
+public import Mathlib.Algebra.Category.ModuleCat.Abelian
+public import Mathlib.Algebra.Category.ModuleCat.Projective
+public import Mathlib.RingTheory.Flat.Basic
 
 /-!
 # Tor of an opcycle cokernel
@@ -18,6 +20,8 @@ import Mathlib.RingTheory.Flat.Basic
 Source: Stacks Project, More on Algebra, Lemma 15.59.2 (Tag 0653), Tor argument
 (blueprint: lem-pc-module-opcycles-tor-surjection).
 -/
+
+@[expose] public section
 
 universe u
 

@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF contributors
 -/
-import Mathlib.RingTheory.Artinian.Module
-import Mathlib.RingTheory.EssentialFiniteness
-import Mathlib.RingTheory.LocalRing.ResidueField.Defs
+module
+
+public import Mathlib.RingTheory.Artinian.Module
+public import Mathlib.RingTheory.EssentialFiniteness
+public import Mathlib.RingTheory.LocalRing.ResidueField.Defs
 
 /-!
 # Essential finite type for Artinian local algebras
@@ -13,6 +15,8 @@ import Mathlib.RingTheory.LocalRing.ResidueField.Defs
 Source: literature/stacks-project/algebra.tex, Algebra, Lemma Tag 07DT (blueprint:
 lem-weil-pbc-artinian-local-essentially-finite-type-residue).
 -/
+
+@[expose] public section
 
 namespace RingHom
 

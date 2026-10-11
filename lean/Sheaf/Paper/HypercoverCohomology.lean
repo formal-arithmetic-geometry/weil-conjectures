@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import Sheaf.Paper.HypercoverCohomologyColimit
-import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
+module
+
+public import Sheaf.Paper.HypercoverCohomologyColimit
+public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 
 /-!
 # Derived étale cohomology computed by finite split hypercovers
@@ -15,6 +17,8 @@ Source: blueprint `sec-curve-estimates/sk-prop-h2`, order 949; Stacks Project, T
 The natural comparison is expressed as a colimit universal property with vertex the derived
 cohomology functor. This specifies the natural isomorphism without choosing a colimit object.
 -/
+
+@[expose] public section
 
 universe u₁
 

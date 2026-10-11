@@ -3,11 +3,13 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF worker K1
 -/
-import Sheaf.RepresentationTheory.DiscreteContinuousRep
-import Mathlib.GroupTheory.PGroup
-import Mathlib.GroupTheory.Index
-import Mathlib.Topology.Algebra.OpenSubgroup
-import Mathlib.Topology.Connected.TotallyDisconnected
+module
+
+public import Sheaf.RepresentationTheory.DiscreteContinuousRep
+public import Mathlib.GroupTheory.PGroup
+public import Mathlib.GroupTheory.Index
+public import Mathlib.Topology.Algebra.OpenSubgroup
+public import Mathlib.Topology.Connected.TotallyDisconnected
 
 /-!
 # Sylow reduction of finite primary discrete modules
@@ -15,6 +17,8 @@ import Mathlib.Topology.Connected.TotallyDisconnected
 Source: blueprint `sec-curve-estimates/sk-prop-h2/lem-sc-sylow-module-filtration`;
 Stacks Project, Tags 0A3R, 0GIZ and 0GJ0 (blueprint: lem-sc-sylow-module-filtration).
 -/
+
+@[expose] public section
 
 universe u v
 

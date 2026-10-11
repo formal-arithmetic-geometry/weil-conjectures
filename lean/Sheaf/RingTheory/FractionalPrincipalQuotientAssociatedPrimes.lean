@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
-import Mathlib.RingTheory.Ideal.AssociatedPrime.Basic
-import Mathlib.RingTheory.Ideal.Height
+module
+
+public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
+public import Mathlib.RingTheory.Ideal.AssociatedPrime.Basic
+public import Mathlib.RingTheory.Ideal.Height
 
 /-!
 # Associated primes of a fractional principal quotient of a normal domain
@@ -13,6 +15,8 @@ import Mathlib.RingTheory.Ideal.Height
 Source: Stacks Project, Algebra, Lemma 10.157.6, Tag 031T, clause (3)
 (blueprint: lem-weil-pbc-normal-domain-fractional-principal-quotient-ass).
 -/
+
+@[expose] public section
 
 universe u v
 

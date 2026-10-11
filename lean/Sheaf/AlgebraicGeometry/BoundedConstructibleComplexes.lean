@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Sheaf.AlgebraicGeometry.DerivedCategories
-import Sheaf.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
+module
+
+public import Sheaf.AlgebraicGeometry.DerivedCategories
+public import Sheaf.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 
 /-!
 # Bounded constructible complexes of etale sheaves of modules
@@ -24,6 +26,8 @@ it is stated with the source's `Scheme.IsConstructibleSheaf` (finitely generated
 stalks), not with the project's recorded constructibility of
 `def-weil-pbc-etale-constructible-sheaf` (finite constant module values).
 -/
+
+@[expose] public section
 
 universe u
 

@@ -2,10 +2,14 @@
 Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 -/
-import Sheaf.AlgebraicGeometry.DualityEquationBaseChangeMap
-import Mathlib.AlgebraicGeometry.Morphisms.Proper
-import Mathlib.AlgebraicGeometry.Morphisms.Flat
-import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
+module
+
+public import Sheaf.AlgebraicGeometry.DualityEquationBaseChangeMap
+public import Mathlib.AlgebraicGeometry.Morphisms.Proper
+public import Mathlib.AlgebraicGeometry.Morphisms.Flat
+public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
+
+@[expose] public section
 
 set_option autoImplicit false
 

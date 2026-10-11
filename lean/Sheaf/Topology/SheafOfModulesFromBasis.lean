@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import Mathlib.Algebra.Category.ModuleCat.Sheaf
-import Sheaf.Topology.PresheafModuleStalkFunctor
+module
+
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf
+public import Sheaf.Topology.PresheafModuleStalkFunctor
 
 /-!
 # Extending modules from a basis
@@ -12,6 +14,8 @@ import Sheaf.Topology.PresheafModuleStalkFunctor
 Source: Stacks Project, Sheaves on Spaces, Section 009H, Tags 009L, 009N, 009T and 009U
 (blueprint: lem-weil-pbc-sheaf-of-modules-from-basis).
 -/
+
+@[expose] public section
 
 universe u
 

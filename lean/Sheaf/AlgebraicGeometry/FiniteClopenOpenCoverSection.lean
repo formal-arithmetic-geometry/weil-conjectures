@@ -3,11 +3,13 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import Mathlib.AlgebraicGeometry.Morphisms.Finite
-import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
-import Mathlib.AlgebraicGeometry.Morphisms.OpenImmersion
-import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-import Mathlib.AlgebraicGeometry.Limits
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.Finite
+public import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
+public import Mathlib.AlgebraicGeometry.Morphisms.OpenImmersion
+public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+public import Mathlib.AlgebraicGeometry.Limits
 
 /-!
 # A finite surjective disjoint union of open immersions has a section
@@ -15,6 +17,8 @@ import Mathlib.AlgebraicGeometry.Limits
 Source: literature/stacks-project/etale-cohomology.tex, Lemma 59.80.6 (Tag 09ZA),
 proof, final paragraph (blueprint: lem-weil-pbc-clopen-open-cover-section).
 -/
+
+@[expose] public section
 
 universe u
 

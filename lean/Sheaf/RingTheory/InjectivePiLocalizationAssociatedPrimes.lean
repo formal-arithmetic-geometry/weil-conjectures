@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Mathlib.RingTheory.Ideal.AssociatedPrime.Basic
-import Mathlib.Algebra.Module.LocalizedModule.AtPrime
-import Mathlib.LinearAlgebra.Pi
+module
+
+public import Mathlib.RingTheory.Ideal.AssociatedPrime.Basic
+public import Mathlib.Algebra.Module.LocalizedModule.AtPrime
+public import Mathlib.LinearAlgebra.Pi
 
 /-!
 # Injectivity of localization at associated primes
@@ -13,6 +15,8 @@ import Mathlib.LinearAlgebra.Pi
 Source: Stacks Project, Algebra, Lemma 10.63.19, Tag 0311
 (blueprint: lem-weil-pbc-module-injects-localizations-associated-primes).
 -/
+
+@[expose] public section
 
 universe u v
 

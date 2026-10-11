@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Mathlib.Algebra.Category.Grp.AB
-import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStarCoherence
+module
+
+public import Mathlib.Algebra.Category.Grp.AB
+public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStarCoherence
 
 /-!
 # Composition isomorphisms of derived direct images
@@ -15,6 +17,8 @@ Source: Stacks Project, `sites-cohomology.tex`, Lemma 0D6E and its proof;
 The comparisons are conjugates of the derived inverse-image comparisons, using the
 composite and identity adjunctions.
 -/
+
+@[expose] public section
 
 universe u
 

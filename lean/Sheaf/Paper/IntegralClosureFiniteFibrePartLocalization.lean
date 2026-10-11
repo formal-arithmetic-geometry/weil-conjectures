@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Mathlib.RingTheory.IntegralClosure.Algebra.Basic
-import Mathlib.RingTheory.Localization.Away.Basic
-import Mathlib.RingTheory.FiniteType
+module
+
+public import Mathlib.RingTheory.IntegralClosure.Algebra.Basic
+public import Mathlib.RingTheory.Localization.Away.Basic
+public import Mathlib.RingTheory.FiniteType
 
 /-!
 # Integral-closure localization of a finite fibre component
@@ -13,6 +15,8 @@ import Mathlib.RingTheory.FiniteType
 Source: Stacks Project, `more-algebra.tex`, Lemma 09XH;
 blueprint: `lem-weil-pbc-integral-closure-finite-fibre-part-localization`.
 -/
+
+@[expose] public section
 
 universe u v w z
 

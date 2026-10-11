@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Sheaf.AlgebraicGeometry.CoherentFormalModule
+module
+
+public import Sheaf.AlgebraicGeometry.CoherentFormalModule
 
 /-! # Artin-Rees for coherent modules on a Noetherian scheme
 
@@ -15,6 +17,8 @@ and inclusions of subsheaves are expressed by their images in the sections of `F
 open. Powers and multiplication images use the shared definitions from the formal-module
 node, including the zeroth power of the ideal.
 -/
+
+@[expose] public section
 
 universe u
 

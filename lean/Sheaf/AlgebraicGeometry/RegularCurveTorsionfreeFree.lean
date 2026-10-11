@@ -3,11 +3,13 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group J1
 -/
-import Sheaf.AlgebraicGeometry.Coherent
-import Sheaf.AlgebraicGeometry.TorsionSubsheafQuotient
-import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
-import Mathlib.RingTheory.RegularLocalRing.Defs
-import Mathlib.Topology.KrullDimension
+module
+
+public import Sheaf.AlgebraicGeometry.Coherent
+public import Sheaf.AlgebraicGeometry.TorsionSubsheafQuotient
+public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
+public import Mathlib.RingTheory.RegularLocalRing.Defs
+public import Mathlib.Topology.KrullDimension
 
 /-!
 # Torsion-free coherent modules on regular curves
@@ -15,6 +17,8 @@ import Mathlib.Topology.KrullDimension
 Source: Stacks Project, Divisors, Tag 0CC4; constant rank on connected schemes
 (blueprint: lem-sc-regular-curve-torsionfree-free).
 -/
+
+@[expose] public section
 
 universe u
 

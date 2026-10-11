@@ -3,13 +3,17 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group V1
 -/
-import Mathlib.Algebra.DirectSum.Module
+module
+
+public import Mathlib.Algebra.DirectSum.Module
 
 /-! # Direct sums of the terms of homotopy equivalent two-term complexes
 
 Source: Stacks Project, Algebra, Lemma 00S3 (lemma-sum-two-terms)
 (blueprint: lem-weil-pbc-two-term-homotopy-equivalence-direct-sum).
 -/
+
+@[expose] public section
 
 universe u v₁ v₀ w₁ w₀
 

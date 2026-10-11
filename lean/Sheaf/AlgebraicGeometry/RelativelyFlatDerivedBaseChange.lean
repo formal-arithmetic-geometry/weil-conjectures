@@ -3,16 +3,20 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import Sheaf.AlgebraicGeometry.BaseChangeConventions
-import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
-import Sheaf.AlgebraicGeometry.DerivedPullback
-import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage
+module
+
+public import Sheaf.AlgebraicGeometry.BaseChangeConventions
+public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
+public import Sheaf.AlgebraicGeometry.DerivedPullback
+public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage
 
 /-! # Derived base change for a relatively flat module
 
 Source: Weil conjectures blueprint, sec-picard-framework/sk-thm-picard-semicon,
 lemma lem-pc-rf-base-change-flat-module (blueprint: lem-pc-rf-base-change-flat-module).
 -/
+
+@[expose] public section
 
 set_option autoImplicit false
 

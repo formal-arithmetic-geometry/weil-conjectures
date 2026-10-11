@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Mathlib.AlgebraicGeometry.Morphisms.Smooth
-import Mathlib.RingTheory.RingHom.FiniteType
-import Mathlib.RingTheory.Length
-import Mathlib.RingTheory.LocalRing.Basic
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
+public import Mathlib.RingTheory.RingHom.FiniteType
+public import Mathlib.RingTheory.Length
+public import Mathlib.RingTheory.LocalRing.Basic
 
 /-!
 # Smoothness near a prime and lifting along Artinian small extensions
@@ -14,6 +16,8 @@ import Mathlib.RingTheory.LocalRing.Basic
 Source: Stacks Project, Algebra, Lemma 02HT, (1) iff (3), and Definition 02HS
 (blueprint: lem-weil-pbc-smooth-at-prime-artinian-lifting).
 -/
+
+@[expose] public section
 
 universe u v
 

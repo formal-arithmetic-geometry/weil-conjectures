@@ -3,14 +3,18 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under the Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import Sheaf.AlgebraicGeometry.PerfectComplex
-import Mathlib.AlgebraicGeometry.Modules.Tilde
+module
+
+public import Sheaf.AlgebraicGeometry.PerfectComplex
+public import Mathlib.AlgebraicGeometry.Modules.Tilde
 
 /-! # Perfect objects on affine schemes
 
 Source: literature/stacks-project/perfect.tex, Lemma perfect-lemma-perfect-affine
 (Tag 08EB) (blueprint: lem-pc-perfect-affine-bounded-projective).
 -/
+
+@[expose] public section
 
 universe u w
 

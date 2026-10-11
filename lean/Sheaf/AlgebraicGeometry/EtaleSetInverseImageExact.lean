@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
-import Mathlib.CategoryTheory.Sites.Pullback
+module
+
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+public import Mathlib.CategoryTheory.Sites.Pullback
 
 /-!
 # Exact inverse image of set-valued small etale sheaves
@@ -13,6 +15,8 @@ Source: Stacks Project, Lemma 59.36.2 (Tag 03Q1), assertion (2), and Definition
 59.36.1 (Tag 03PZ); Sites, Definition 00X1
 (blueprint: lem-weil-pbc-sets-etale-inverse-image-exact).
 -/
+
+@[expose] public section
 
 universe u
 

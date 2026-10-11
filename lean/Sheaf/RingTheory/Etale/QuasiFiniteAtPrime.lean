@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import Mathlib.AlgebraicGeometry.Morphisms.Etale
-import Sheaf.RingTheory.QuasiFiniteAtPrime
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.Etale
+public import Sheaf.RingTheory.QuasiFiniteAtPrime
 
 /-!
 # Étale ring maps are quasi-finite at every prime
@@ -12,6 +14,8 @@ import Sheaf.RingTheory.QuasiFiniteAtPrime
 Source: Stacks Project, Algebra, Lemma 10.143.6 (Tag 00U5)
 (blueprint: lem-weil-pbc-etale-ring-map-quasi-finite).
 -/
+
+@[expose] public section
 
 universe u
 

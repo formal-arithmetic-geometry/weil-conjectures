@@ -3,11 +3,13 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Mathlib.Algebra.Category.CommAlgCat.Basic
-import Mathlib.CategoryTheory.ObjectProperty.Ind
-import Mathlib.RingTheory.Ideal.Over
-import Mathlib.RingTheory.RingHom.Flat
-import Mathlib.RingTheory.Smooth.Basic
+module
+
+public import Mathlib.Algebra.Category.CommAlgCat.Basic
+public import Mathlib.CategoryTheory.ObjectProperty.Ind
+public import Mathlib.RingTheory.Ideal.Over
+public import Mathlib.RingTheory.RingHom.Flat
+public import Mathlib.RingTheory.Smooth.Basic
 
 /-!
 # Killing an ideal through a smooth algebra over a square-zero base
@@ -15,6 +17,8 @@ import Mathlib.RingTheory.Smooth.Basic
 Source: Stacks Project, Smoothing Ring Maps, Lemma 16.5.2, Tag 07CL
 (blueprint: lem-weil-pbc-popescu-lift-twice).
 -/
+
+@[expose] public section
 
 universe u v w
 

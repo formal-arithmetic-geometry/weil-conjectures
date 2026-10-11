@@ -3,17 +3,21 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group J1
 -/
-import Mathlib.AlgebraicGeometry.Morphisms.Proper
-import Mathlib.Topology.KrullDimension
-import Sheaf.AlgebraicGeometry.Coherent
-import WeilConjectures.AlgebraicGeometry.Cohomology.Defs
-import WeilConjectures.AlgebraicGeometry.Modules.Invertible
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.Proper
+public import Mathlib.Topology.KrullDimension
+public import Sheaf.AlgebraicGeometry.Coherent
+public import WeilConjectures.AlgebraicGeometry.Cohomology.Defs
+public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 
 /-! # Euler characteristic of modules with zero-dimensional support
 
 Source: Stacks Project, Varieties, Tag 0AYT, parts (3)--(5), with rank one
 (blueprint: lem-pc-chi-zero-dim-support).
 -/
+
+@[expose] public section
 
 universe u
 

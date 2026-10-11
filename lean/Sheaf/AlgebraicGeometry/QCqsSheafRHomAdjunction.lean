@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group R1
 -/
-import Sheaf.AlgebraicGeometry.DerivedDirectImageInternalHom
-import Sheaf.AlgebraicGeometry.QCqsDerivedDirectImageRightAdjoint
-import Sheaf.AlgebraicGeometry.DQCoheratorAdjunction
+module
+
+public import Sheaf.AlgebraicGeometry.DerivedDirectImageInternalHom
+public import Sheaf.AlgebraicGeometry.QCqsDerivedDirectImageRightAdjoint
+public import Sheaf.AlgebraicGeometry.DQCoheratorAdjunction
 
 /-! # Coherated sheaf derived Hom adjunction
 
@@ -13,6 +15,8 @@ Source: Stacks Project, Duality for Schemes, Lemma 48.3.6 (Tag 0A9Q), with
 equation-sheafy-trace (48.3.5.1) defining the sheafy trace
 (blueprint: lem-pc-qcqs-sheaf-rhom-adjunction).
 -/
+
+@[expose] public section
 
 universe u₁ w₁
 

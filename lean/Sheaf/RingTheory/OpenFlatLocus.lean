@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import Mathlib.RingTheory.FinitePresentation
-import Mathlib.Algebra.Module.FinitePresentation
-import Mathlib.RingTheory.Flat.Localization
-import Mathlib.RingTheory.Spectrum.Prime.Topology
+module
+
+public import Mathlib.RingTheory.FinitePresentation
+public import Mathlib.Algebra.Module.FinitePresentation
+public import Mathlib.RingTheory.Flat.Localization
+public import Mathlib.RingTheory.Spectrum.Prime.Topology
 
 /-!
 # Openness of the flat locus of a finitely presented module
@@ -14,6 +16,8 @@ import Mathlib.RingTheory.Spectrum.Prime.Topology
 Source: Stacks Project, Algebra, Theorem 10.129.4 (Tag 00RC)
 (blueprint: lem-weil-pbc-openness-of-flatness).
 -/
+
+@[expose] public section
 
 universe u v w
 

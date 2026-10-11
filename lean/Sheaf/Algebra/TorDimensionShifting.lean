@@ -3,12 +3,14 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Mathlib.Algebra.Category.ModuleCat.Abelian
-import Mathlib.Algebra.Category.ModuleCat.Projective
-import Mathlib.Algebra.Category.ModuleCat.Monoidal.Basic
-import Mathlib.Algebra.Homology.ShortComplex.ShortExact
-import Mathlib.CategoryTheory.Abelian.Projective.Dimension
-import Mathlib.CategoryTheory.Monoidal.Tor
+module
+
+public import Mathlib.Algebra.Category.ModuleCat.Abelian
+public import Mathlib.Algebra.Category.ModuleCat.Projective
+public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Basic
+public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
+public import Mathlib.CategoryTheory.Abelian.Projective.Dimension
+public import Mathlib.CategoryTheory.Monoidal.Tor
 
 /-!
 # Two-step dimension shifting for Tor
@@ -17,6 +19,8 @@ Source: blueprint, `lem-sc-p1-graded-resolution`, proof; Stacks Project,
 Algebra, proof of Lemma Tag 00S2 and Section Tag 00LY
 (blueprint: lem-sc-p1-tor-dimension-shifting).
 -/
+
+@[expose] public section
 
 universe u
 

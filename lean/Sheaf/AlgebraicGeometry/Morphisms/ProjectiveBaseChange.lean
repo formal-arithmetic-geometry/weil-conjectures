@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import Mathlib.AlgebraicGeometry.Pullbacks
-import Sheaf.AlgebraicGeometry.BaseChangeConventions
-import Sheaf.AlgebraicGeometry.Morphisms.Projective
+module
+
+public import Mathlib.AlgebraicGeometry.Pullbacks
+public import Sheaf.AlgebraicGeometry.BaseChangeConventions
+public import Sheaf.AlgebraicGeometry.Morphisms.Projective
 
 /-!
 # Projective morphisms are stable under base change
@@ -13,6 +15,8 @@ import Sheaf.AlgebraicGeometry.Morphisms.Projective
 Source: Stacks Project, Morphisms of Schemes, Lemmas 01WF and 01K5
 (blueprint: lem-pc-projective-base-change).
 -/
+
+@[expose] public section
 
 universe u
 

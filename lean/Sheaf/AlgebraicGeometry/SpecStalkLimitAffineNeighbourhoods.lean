@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group T1
 -/
-import Sheaf.AlgebraicGeometry.SpecLocalRingCanonicalMorphism
-import Mathlib.AlgebraicGeometry.Morphisms.Affine
+module
+
+public import Sheaf.AlgebraicGeometry.SpecLocalRingCanonicalMorphism
+public import Mathlib.AlgebraicGeometry.Morphisms.Affine
 
 /-!
 # The spectrum of a stalk as a limit of affine neighbourhoods
@@ -15,6 +17,8 @@ Source: Stacks Project, Limits of Schemes, proof of Tag 0GWT and Tag 01YW
 The inverse system is written with its objects and inclusion maps. Its limit property
 is the unique-factorization property for every compatible family, in the category of schemes.
 -/
+
+@[expose] public section
 
 universe u
 

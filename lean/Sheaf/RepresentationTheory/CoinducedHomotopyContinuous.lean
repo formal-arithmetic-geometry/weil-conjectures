@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF worker F1
 -/
-import Sheaf.RepresentationTheory.CoinducedDiscreteEmbedding
-import Mathlib.Data.Fin.Tuple.Basic
+module
+
+public import Sheaf.RepresentationTheory.CoinducedDiscreteEmbedding
+public import Mathlib.Data.Fin.Tuple.Basic
 
 /-!
 # Continuity of the coinduced contracting operator
@@ -14,6 +16,8 @@ label section-continuous-group-cohomology, final profinite comparison.
 The explicit contraction is an agent-written proof ingredient
 (blueprint: lem-exc-coinduced-homotopy-continuous).
 -/
+
+@[expose] public section
 
 universe u v w
 

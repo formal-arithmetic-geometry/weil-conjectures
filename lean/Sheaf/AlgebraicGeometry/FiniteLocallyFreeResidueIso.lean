@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group G1
 -/
-import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Sheaf.AlgebraicGeometry.Modules.ResidueFiber
+module
+
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Sheaf.AlgebraicGeometry.Modules.ResidueFiber
 
 /-!
 # Residue-field criterion for finite locally free modules
@@ -12,6 +14,8 @@ import Sheaf.AlgebraicGeometry.Modules.ResidueFiber
 Source: Stacks Project, Tag 00O0, Lemma cokernel-flat, part (3), applied locally on a scheme
 (blueprint: lem-sc-finite-locally-free-residue-isomorphism).
 -/
+
+@[expose] public section
 
 universe u
 

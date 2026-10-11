@@ -3,16 +3,18 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF contributors
 -/
-import Mathlib.AlgebraicTopology.CechNerve
-import Mathlib.AlgebraicTopology.AlternatingFaceMapComplex
-import Mathlib.Algebra.Category.ModuleCat.Adjunctions
-import Mathlib.Algebra.Category.ModuleCat.Abelian
-import Mathlib.Algebra.Category.ModuleCat.FilteredColimits
-import Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
-import Mathlib.CategoryTheory.Sites.LeftExact
-import Mathlib.CategoryTheory.Sites.Abelian
-import Mathlib.CategoryTheory.Sites.LocallySurjective
-import Mathlib.CategoryTheory.Sites.PrecoverageToGrothendieck
+module
+
+public import Mathlib.AlgebraicTopology.CechNerve
+public import Mathlib.AlgebraicTopology.AlternatingFaceMapComplex
+public import Mathlib.Algebra.Category.ModuleCat.Adjunctions
+public import Mathlib.Algebra.Category.ModuleCat.Abelian
+public import Mathlib.Algebra.Category.ModuleCat.FilteredColimits
+public import Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
+public import Mathlib.CategoryTheory.Sites.LeftExact
+public import Mathlib.CategoryTheory.Sites.Abelian
+public import Mathlib.CategoryTheory.Sites.LocallySurjective
+public import Mathlib.CategoryTheory.Sites.PrecoverageToGrothendieck
 
 /-!
 # Free-module homology of a Čech nerve
@@ -21,6 +23,8 @@ Source: Stacks Project, Hypercoverings, Lemma 01GC (lemma-compare-cosk0),
 with the same contraction over a commutative ring instead of ℤ
 (blueprint: lem-weil-pbc-cech-nerve-free-homology).
 -/
+
+@[expose] public section
 
 universe u
 

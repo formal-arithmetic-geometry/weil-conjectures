@@ -3,17 +3,21 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group V1
 -/
-import Mathlib.AlgebraicGeometry.Noetherian
-import Mathlib.AlgebraicGeometry.Morphisms.Proper
-import WeilConjectures.AlgebraicGeometry.Modules.Differentials
-import Sheaf.AlgebraicGeometry.Modules.ExteriorSheaf
-import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
+module
+
+public import Mathlib.AlgebraicGeometry.Noetherian
+public import Mathlib.AlgebraicGeometry.Morphisms.Proper
+public import WeilConjectures.AlgebraicGeometry.Modules.Differentials
+public import Sheaf.AlgebraicGeometry.Modules.ExteriorSheaf
+public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
 
 /-! # The dualizing complex of a smooth proper morphism
 
 Source: Stacks Project, Tag 0BRT, Lemma 48.15.7
 (blueprint: lem-sc-smooth-proper-relative-dualizing-general).
 -/
+
+@[expose] public section
 
 universe u wX wS
 

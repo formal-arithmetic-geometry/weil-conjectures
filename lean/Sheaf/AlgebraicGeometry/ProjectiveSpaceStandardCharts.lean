@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Twist
-import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Charts
-import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
-import Sheaf.AlgebraicGeometry.Ample
+module
+
+public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Twist
+public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Charts
+public import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
+public import Sheaf.AlgebraicGeometry.Ample
 
 /-!
 # Standard charts and coordinate sections of projective space
@@ -14,6 +16,8 @@ import Sheaf.AlgebraicGeometry.Ample
 Source: Stacks Project, Tags 01NG, 01MV, 01MS, 01ND, 01JR and 01I4
 (blueprint: lem-weil-pbc-projective-space-standard-charts).
 -/
+
+@[expose] public section
 
 universe u
 

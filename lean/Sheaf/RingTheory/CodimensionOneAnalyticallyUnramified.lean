@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Sheaf.RingTheory.AnalyticallyUnramified
-import Mathlib.RingTheory.Localization.AtPrime.Basic
-import Mathlib.RingTheory.DiscreteValuationRing.Basic
-import Mathlib.RingTheory.Ideal.Colon
+module
+
+public import Sheaf.RingTheory.AnalyticallyUnramified
+public import Mathlib.RingTheory.Localization.AtPrime.Basic
+public import Mathlib.RingTheory.DiscreteValuationRing.Basic
+public import Mathlib.RingTheory.Ideal.Colon
 
 /-!
 # DVR localizations of the completion at associated primes
@@ -14,6 +16,8 @@ import Mathlib.RingTheory.Ideal.Colon
 Source: Stacks Project, Algebra, Lemma Tag 032Z
 (blueprint: lem-weil-pbc-codimension-one-analytically-unramified).
 -/
+
+@[expose] public section
 
 universe u
 

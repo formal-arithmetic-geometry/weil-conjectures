@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group J1
 -/
-import Mathlib.RingTheory.IntegralClosure.Algebra.Basic
-import Mathlib.RingTheory.Localization.FractionRing
-import Mathlib.LinearAlgebra.FiniteDimensional.Defs
+module
+
+public import Mathlib.RingTheory.IntegralClosure.Algebra.Basic
+public import Mathlib.RingTheory.Localization.FractionRing
+public import Mathlib.LinearAlgebra.FiniteDimensional.Defs
 
 /-!
 # N-1 and Japanese domains
@@ -13,6 +15,8 @@ import Mathlib.LinearAlgebra.FiniteDimensional.Defs
 Source: Stacks Project, Algebra, Definition 10.161.1 (Tag 032F)
 (blueprint: def-weil-pbc-japanese-domain).
 -/
+
+@[expose] public section
 
 universe u v
 

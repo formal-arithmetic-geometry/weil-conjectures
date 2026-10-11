@@ -3,12 +3,14 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group J1
 -/
-import Sheaf.RingTheory.Depth
-import Mathlib.RingTheory.Noetherian.Defs
-import Mathlib.RingTheory.KrullDimension.Basic
-import Mathlib.LinearAlgebra.FreeModule.Basic
-import Mathlib.Algebra.Category.ModuleCat.Abelian
-import Mathlib.Algebra.Homology.ExactSequence
+module
+
+public import Sheaf.RingTheory.Depth
+public import Mathlib.RingTheory.Noetherian.Defs
+public import Mathlib.RingTheory.KrullDimension.Basic
+public import Mathlib.LinearAlgebra.FreeModule.Basic
+public import Mathlib.Algebra.Category.ModuleCat.Abelian
+public import Mathlib.Algebra.Homology.ExactSequence
 
 /-!
 # Finite free resolutions ending in maximal Cohen–Macaulay modules
@@ -16,6 +18,8 @@ import Mathlib.Algebra.Homology.ExactSequence
 Source: Stacks Project, Algebra, Tags 00NG, 00NE, 00NF and 00LK
 (blueprint: lem-weil-pbc-cm-local-free-resolution-to-mcm).
 -/
+
+@[expose] public section
 
 universe u v
 

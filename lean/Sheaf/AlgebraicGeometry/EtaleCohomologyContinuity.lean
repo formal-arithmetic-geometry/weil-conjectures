@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group Q1
 -/
-import Sheaf.AlgebraicGeometry.EtaleSheaves
-import Mathlib.AlgebraicGeometry.Morphisms.Affine
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
+module
+
+public import Sheaf.AlgebraicGeometry.EtaleSheaves
+public import Mathlib.AlgebraicGeometry.Morphisms.Affine
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 
 /-!
 # Continuity of etale cohomology at inverse limits
@@ -16,6 +18,8 @@ Source: blueprint `sec-curve-estimates/sk-prop-h2`, lemma Etale cohomology conti
 The canonical filtered-colimit isomorphism is stated by its elementwise criterion:
 every limit class descends, and every stage class in the kernel eventually vanishes.
 -/
+
+@[expose] public section
 
 universe u
 

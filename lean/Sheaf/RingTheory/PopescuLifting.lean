@@ -3,14 +3,18 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Sheaf.RingTheory.SingularIdeal
-import Mathlib.RingTheory.FinitePresentation
+module
+
+public import Sheaf.RingTheory.SingularIdeal
+public import Mathlib.RingTheory.FinitePresentation
 
 /-! # Popescu lifting lemma
 
 Source: Stacks Project, Smoothing Ring Maps, Lemma 07CP
 (blueprint: lem-weil-pbc-popescu-lifting).
 -/
+
+@[expose] public section
 
 universe a b c
 

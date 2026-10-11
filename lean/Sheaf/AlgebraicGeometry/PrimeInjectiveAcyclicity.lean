@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import WeilConjectures.SixFunctors.BaseChange.Derived
-import Mathlib.Data.ZMod.Basic
+module
+
+public import WeilConjectures.SixFunctors.BaseChange.Derived
+public import Mathlib.Data.ZMod.Basic
 
 /-!
 # Injective acyclicity for prime-field sheaves
@@ -12,6 +14,8 @@ import Mathlib.Data.ZMod.Basic
 Source: Stacks Project, Tag 0A4B, property (2)
 (blueprint: def-weil-pbc-injective-acyclicity-property).
 -/
+
+@[expose] public section
 
 universe u_ia
 

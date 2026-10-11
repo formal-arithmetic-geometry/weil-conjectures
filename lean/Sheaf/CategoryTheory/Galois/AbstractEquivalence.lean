@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF contributors
 -/
-import Sheaf.CategoryTheory.Galois.StacksGaloisCategory
-import Mathlib.CategoryTheory.Galois.Equivalence
+module
+
+public import Sheaf.CategoryTheory.Galois.StacksGaloisCategory
+public import Mathlib.CategoryTheory.Galois.Equivalence
 
 /-!
 # The abstract equivalence theorem for Stacks Galois categories
@@ -13,6 +15,8 @@ Source: Stacks Project, Fundamental Groups of Schemes, Proposition 0BN4;
 the blueprint, `sec-curve-estimates/sk-prop-h2`
 (blueprint: thm-galois-abstract-equivalence).
 -/
+
+@[expose] public section
 
 universe w v u
 

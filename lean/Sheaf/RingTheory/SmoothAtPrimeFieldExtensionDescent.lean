@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Mathlib.RingTheory.TensorProduct.Basic
-import Sheaf.RingTheory.SingularIdeal
+module
+
+public import Mathlib.RingTheory.TensorProduct.Basic
+public import Sheaf.RingTheory.SingularIdeal
 
 /-!
 # Descent of smoothness at a prime along a field extension
@@ -12,6 +14,8 @@ import Sheaf.RingTheory.SingularIdeal
 Source: Stacks Project, Algebra, Lemma 02UQ, descent implication, via Lemma 00TG
 (blueprint: lem-weil-pbc-smooth-at-prime-field-extension-descent).
 -/
+
+@[expose] public section
 
 universe u v w
 

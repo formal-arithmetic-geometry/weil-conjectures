@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group G1
 -/
-import Sheaf.AlgebraicGeometry.PositiveTensorFamily
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.Generators
+module
+
+public import Sheaf.AlgebraicGeometry.PositiveTensorFamily
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Generators
 
 /-!
 # Tensor products of generating sections
@@ -12,6 +14,8 @@ import Mathlib.Algebra.Category.ModuleCat.Sheaf.Generators
 Source: literature/stacks-project/modules.tex, Modules, Lemma 01AO
 (blueprint: lem-sc-tensor-generating-sections).
 -/
+
+@[expose] public section
 
 universe u
 

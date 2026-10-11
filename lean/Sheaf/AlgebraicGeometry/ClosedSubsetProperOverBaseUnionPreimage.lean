@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import Sheaf.AlgebraicGeometry.ClosedSubsetProperOverBase
+module
+
+public import Sheaf.AlgebraicGeometry.ClosedSubsetProperOverBase
 
 /-!
 # Finite unions and proper preimages of closed subsets proper over a base
@@ -12,6 +14,8 @@ Source: Stacks Project, Cohomology of Schemes, Lemma 30.26.6 (Tag 0CYR)
 and Lemma 30.26.5 (Tag 0CYQ), part (3)
 (blueprint: lem-weil-pbc-closed-subset-proper-over-base-union-preimage).
 -/
+
+@[expose] public section
 
 universe u
 

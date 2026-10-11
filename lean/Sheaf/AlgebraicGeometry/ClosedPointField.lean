@@ -3,13 +3,15 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
-import Mathlib.AlgebraicGeometry.ResidueField
-import Mathlib.FieldTheory.PurelyInseparable.Basic
-import Mathlib.RingTheory.AlgebraicIndependent.Basic
-import Mathlib.Topology.JacobsonSpace
-import WeilConjectures.ZetaSeries
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
+public import Mathlib.AlgebraicGeometry.ResidueField
+public import Mathlib.FieldTheory.PurelyInseparable.Basic
+public import Mathlib.RingTheory.AlgebraicIndependent.Basic
+public import Mathlib.Topology.JacobsonSpace
+public import WeilConjectures.ZetaSeries
 
 /-!
 # Residue fields of closed points
@@ -17,6 +19,8 @@ import WeilConjectures.ZetaSeries
 Source: the blueprint of the Weil conjectures, chapter `sec-smooth-purity`, unit
 `sk-prop-sf-kunneth-ordinary` (blueprint: lem-kun-closed-point-field).
 -/
+
+@[expose] public section
 
 universe u
 

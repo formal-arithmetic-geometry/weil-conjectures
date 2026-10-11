@@ -1,8 +1,10 @@
-import WeilConjectures.Mathlib.RingTheory.Henselian
-import Mathlib.AlgebraicGeometry.Sites.Etale
-import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
-import Mathlib.CategoryTheory.Sites.Continuous
-import Mathlib.CategoryTheory.Sites.Pullback
+module
+
+public import WeilConjectures.Mathlib.RingTheory.Henselian
+public import Mathlib.AlgebraicGeometry.Sites.Etale
+public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
+public import Mathlib.CategoryTheory.Sites.Continuous
+public import Mathlib.CategoryTheory.Sites.Pullback
 
 /-!
 # Étale and Zariski cohomology over strictly henselian schemes
@@ -10,6 +12,8 @@ import Mathlib.CategoryTheory.Sites.Pullback
 Source: literature/stacks-project/etale-cohomology.tex, Lemma 09AX
 (blueprint: lem-weil-pbc-gabber-strict-henselian-zariski-comparison)
 -/
+
+@[expose] public section
 
 universe u
 open CategoryTheory CategoryTheory.Limits

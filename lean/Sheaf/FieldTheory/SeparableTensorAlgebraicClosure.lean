@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import Mathlib.FieldTheory.IsAlgClosed.Basic
-import Mathlib.RingTheory.TensorProduct.Basic
-import Sheaf.FieldTheory.SeparableExtension
-import Sheaf.FieldTheory.FieldTower
+module
+
+public import Mathlib.FieldTheory.IsAlgClosed.Basic
+public import Mathlib.RingTheory.TensorProduct.Basic
+public import Sheaf.FieldTheory.SeparableExtension
+public import Sheaf.FieldTheory.FieldTower
 
 /-!
 # A finite separable field tensored with an algebraically closed field
@@ -15,6 +17,8 @@ Source: Stacks Project, Tag 0FD1, proof, residue-field base change; Tags 030U, 0
 030N, and 09GU for the polynomial presentation and splitting argument
 (blueprint: lem-pc-separable-tensor-algebraic-closure).
 -/
+
+@[expose] public section
 
 universe u v w
 

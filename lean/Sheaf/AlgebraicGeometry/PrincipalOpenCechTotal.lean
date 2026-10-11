@@ -3,11 +3,13 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group T1
 -/
-import Sheaf.AlgebraicGeometry.DerivedCategory
-import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImage
-import Mathlib.AlgebraicGeometry.Modules.Tilde
-import Mathlib.Data.Finset.Sort
-import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.KInjective
+module
+
+public import Sheaf.AlgebraicGeometry.DerivedCategory
+public import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImage
+public import Mathlib.AlgebraicGeometry.Modules.Tilde
+public import Mathlib.Data.Finset.Sort
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.KInjective
 
 /-! # Alternating total Čech complexes on finite principal covers
 
@@ -15,6 +17,8 @@ Source: Stacks Project, Cohomology, Sections 20.25 and 20.40, and Tag 08D2
 (blueprint: def-sc-principal-open-alternating-total).
 Nonempty subsets index the alternating rows; the empty cover gives the zero complex.
 -/
+
+@[expose] public section
 
 set_option backward.isDefEq.respectTransparency false
 

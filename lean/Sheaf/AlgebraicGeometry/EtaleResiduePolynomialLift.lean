@@ -1,8 +1,12 @@
-import Mathlib.FieldTheory.Separable
-import Mathlib.LinearAlgebra.Dimension.Finite
-import Mathlib.FieldTheory.Minpoly.Basic
-import Mathlib.RingTheory.Localization.AtPrime.Basic
-import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
+module
+
+public import Mathlib.FieldTheory.Separable
+public import Mathlib.LinearAlgebra.Dimension.Finite
+public import Mathlib.FieldTheory.Minpoly.Basic
+public import Mathlib.RingTheory.Localization.AtPrime.Basic
+public import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
+
+@[expose] public section
 
 universe u v
 

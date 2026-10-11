@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group J1
 -/
-import Mathlib.RingTheory.Smooth.Basic
-import Mathlib.RingTheory.Smooth.StandardSmooth
+module
+
+public import Mathlib.RingTheory.Smooth.Basic
+public import Mathlib.RingTheory.Smooth.StandardSmooth
 
 /-!
 # Smooth retracts of standard smooth algebras
@@ -12,6 +14,8 @@ import Mathlib.RingTheory.Smooth.StandardSmooth
 Source: Stacks Project, Smoothing Ring Maps, Lemma 07CH
 (blueprint: lem-weil-pbc-smooth-retract-standard-smooth).
 -/
+
+@[expose] public section
 
 universe u v
 

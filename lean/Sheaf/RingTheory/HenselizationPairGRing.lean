@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import Sheaf.RingTheory.GRing
-import Sheaf.RingTheory.PairHenselization
+module
+
+public import Sheaf.RingTheory.GRing
+public import Sheaf.RingTheory.PairHenselization
 
 /-!
 # G-rings and henselizations of pairs
@@ -12,6 +14,8 @@ import Sheaf.RingTheory.PairHenselization
 Source: Stacks Project, More on Algebra, Lemma Tag 0AH3 (blueprint:
 lem-weil-pbc-henselization-pair-g-ring).
 -/
+
+@[expose] public section
 
 universe u
 

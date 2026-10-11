@@ -3,12 +3,14 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Sheaf.Algebra.Homology.KFlat
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.Colimits
-import Mathlib.Algebra.Homology.HomologicalComplexLimits
-import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Sheaf
+module
+
+public import Sheaf.Algebra.Homology.KFlat
+public import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Colimits
+public import Mathlib.Algebra.Homology.HomologicalComplexLimits
+public import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Sheaf
 
 /-!
 # Filtered colimits and tensor complexes of sheaves of modules
@@ -16,6 +18,8 @@ import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Sheaf
 Source: Stacks Project, Modules on Sites, Lemmas 03DB and 03EP
 (blueprint: lem-pc-module-filtered-colimits-tensor).
 -/
+
+@[expose] public section
 
 universe u
 

@@ -3,11 +3,13 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import Mathlib.Algebra.Category.ModuleCat.Basic
-import Mathlib.Algebra.DirectSum.Decomposition
-import Mathlib.LinearAlgebra.Basis.Defs
-import Mathlib.RingTheory.Finiteness.Defs
-import Mathlib.RingTheory.MvPolynomial.Homogeneous
+module
+
+public import Mathlib.Algebra.Category.ModuleCat.Basic
+public import Mathlib.Algebra.DirectSum.Decomposition
+public import Mathlib.LinearAlgebra.Basis.Defs
+public import Mathlib.RingTheory.Finiteness.Defs
+public import Mathlib.RingTheory.MvPolynomial.Homogeneous
 
 /-!
 # Graded syzygies over the two-variable polynomial ring
@@ -15,6 +17,8 @@ import Mathlib.RingTheory.MvPolynomial.Homogeneous
 Source: Weil conjectures blueprint, `sec-picard-framework/sk-thm-picard-duality`,
 `lem-sc-p1-graded-resolution`, proof, first sentence (blueprint: lem-sc-p1-graded-syzygy).
 -/
+
+@[expose] public section
 
 universe u v
 

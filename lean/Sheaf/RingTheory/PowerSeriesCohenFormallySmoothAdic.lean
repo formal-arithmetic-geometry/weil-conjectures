@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import Sheaf.RingTheory.CohenRing
-import Sheaf.RingTheory.FormallySmoothAdic
-import Mathlib.RingTheory.MvPowerSeries.Basic
-import Mathlib.Algebra.Algebra.Rat
+module
+
+public import Sheaf.RingTheory.CohenRing
+public import Sheaf.RingTheory.FormallySmoothAdic
+public import Mathlib.RingTheory.MvPowerSeries.Basic
+public import Mathlib.Algebra.Algebra.Rat
 
 /-!
 # Adic formal smoothness of power series over fields and Cohen rings
@@ -14,6 +16,8 @@ import Mathlib.Algebra.Algebra.Rat
 Source: Stacks Project, More on Algebra, Lemma Tag 07NL, parts (1) and (3)
 (blueprint: lem-weil-pbc-power-series-cohen-formally-smooth-adic).
 -/
+
+@[expose] public section
 
 universe u
 

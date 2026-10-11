@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group R1
 -/
-import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
-import Mathlib.AlgebraicGeometry.Morphisms.Affine
+module
+
+public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
+public import Mathlib.AlgebraicGeometry.Morphisms.Affine
 
 /-!
 # Cohomology of affine derived direct image
@@ -12,6 +14,8 @@ import Mathlib.AlgebraicGeometry.Morphisms.Affine
 Source: Stacks Project, Derived Categories of Schemes, Tag 0AVW,
 Lemma 36.5.4, proof (blueprint: lem-sc-affine-derived-cohomology).
 -/
+
+@[expose] public section
 
 universe u wX wY
 

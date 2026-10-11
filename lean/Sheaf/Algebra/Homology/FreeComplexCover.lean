@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import Mathlib.Algebra.Category.ModuleCat.Colimits
-import Mathlib.Algebra.Homology.HomologicalComplexAbelian
-import Mathlib.Algebra.Homology.Single
+module
+
+public import Mathlib.Algebra.Category.ModuleCat.Colimits
+public import Mathlib.Algebra.Homology.HomologicalComplexAbelian
+public import Mathlib.Algebra.Homology.Single
 
 /-!
 # A free two-term cover of a cochain complex
@@ -13,6 +15,8 @@ import Mathlib.Algebra.Homology.Single
 Source: Stacks Project, Differential Graded Algebra, Lemma 15.60.8 (Tag 09KN),
 proof (blueprint: lem-pc-derived-free-complex-cover).
 -/
+
+@[expose] public section
 
 universe u
 

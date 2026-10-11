@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import WeilConjectures.Mathlib.RingTheory.Henselian
-import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
-import Mathlib.CategoryTheory.Limits.ExactFunctor
+module
+
+public import WeilConjectures.Mathlib.RingTheory.Henselian
+public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
+public import Mathlib.CategoryTheory.Limits.ExactFunctor
 
 /-!
 # Etale acyclicity of a strictly henselian local scheme
@@ -13,6 +15,8 @@ import Mathlib.CategoryTheory.Limits.ExactFunctor
 Source: Stacks Project, etale-cohomology.tex, Lemma Tag 03QO
 (blueprint: lem-weil-pbc-strictly-henselian-etale-acyclic).
 -/
+
+@[expose] public section
 
 universe u
 

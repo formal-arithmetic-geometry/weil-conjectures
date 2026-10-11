@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group U1
 -/
-import Mathlib.Algebra.Category.Grp.Abelian
-import Mathlib.Topology.Sheaves.Stalks
-import Mathlib.Topology.Sheaves.Functors
+module
+
+public import Mathlib.Algebra.Category.Grp.Abelian
+public import Mathlib.Topology.Sheaves.Stalks
+public import Mathlib.Topology.Sheaves.Functors
 
 /-!
 # Stalks of closed-subset pushforward for abelian sheaves
@@ -13,6 +15,8 @@ import Mathlib.Topology.Sheaves.Functors
 Source: Stacks Project, Sheaves, Lemma 00AE (lemma-stalks-closed-pushforward),
 abelian-sheaf clause (blueprint: lem-sc-closed-pushforward-abelian-stalks).
 -/
+
+@[expose] public section
 
 set_option autoImplicit false
 

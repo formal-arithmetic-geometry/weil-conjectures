@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import Mathlib.RingTheory.Finiteness.Defs
-import Mathlib.RingTheory.Jacobson.Ideal
-import Mathlib.RingTheory.Ideal.Quotient.Operations
-import Mathlib.Algebra.Polynomial.AlgebraMap
+module
+
+public import Mathlib.RingTheory.Finiteness.Defs
+public import Mathlib.RingTheory.Jacobson.Ideal
+public import Mathlib.RingTheory.Ideal.Quotient.Operations
+public import Mathlib.Algebra.Polynomial.AlgebraMap
 
 /-!
 # Gabber's polynomial for a finite algebra over a Zariski pair
@@ -14,6 +16,8 @@ import Mathlib.Algebra.Polynomial.AlgebraMap
 Source: Stacks Project, More on Algebra, Lemma Tag 0EM0 (lemma-helper-finite)
 (blueprint: lem-weil-pbc-zariski-pair-finite-gabber-polynomial).
 -/
+
+@[expose] public section
 
 universe u v w z
 

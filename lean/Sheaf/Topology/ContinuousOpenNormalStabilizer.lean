@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import Mathlib.Topology.Algebra.Category.ProfiniteGrp.Basic
-import Mathlib.Topology.Algebra.OpenSubgroup
+module
+
+public import Mathlib.Topology.Algebra.Category.ProfiniteGrp.Basic
+public import Mathlib.Topology.Algebra.OpenSubgroup
 
 /-!
 # Open normal stabilizers of continuous functions on profinite groups
@@ -13,6 +15,8 @@ Source: Stacks Project, etale-cohomology.tex, Tag 04JP,
 definition-G-module-continuous; the profinite compactness argument is supplied in the DAG
 (blueprint: lem-exc-coinduced-functions-open-stabilizer).
 -/
+
+@[expose] public section
 
 universe u v
 

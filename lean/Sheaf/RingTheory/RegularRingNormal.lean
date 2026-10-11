@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import Mathlib.RingTheory.RegularLocalRing.Defs
-import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
+module
+
+public import Mathlib.RingTheory.RegularLocalRing.Defs
+public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
 
 /-!
 # A regular ring is normal
@@ -12,6 +14,8 @@ import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
 Source: Stacks Project, Algebra, Lemma Tag 0567
 (blueprint: lem-weil-pbc-regular-ring-normal).
 -/
+
+@[expose] public section
 
 universe u
 

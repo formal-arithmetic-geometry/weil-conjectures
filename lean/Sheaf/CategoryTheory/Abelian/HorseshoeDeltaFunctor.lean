@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license.
 Authors: SHEAF group K1
 -/
-import Mathlib.CategoryTheory.Abelian.RightDerived
-import Mathlib.Algebra.Homology.HomologySequence
-import Sheaf.CategoryTheory.DeltaFunctor
+module
+
+public import Mathlib.CategoryTheory.Abelian.RightDerived
+public import Mathlib.Algebra.Homology.HomologySequence
+public import Sheaf.CategoryTheory.DeltaFunctor
 
 /-!
 # Horseshoe connecting morphisms for right derived functors
@@ -14,6 +16,8 @@ Source: Weibel, *An Introduction to Homological Algebra*, Theorem 2.4.6 and
 Lemma 2.2.8; Stacks Project, Derived Categories, Tags 013T and 0117
 (blueprint: lem-weil-pbc-horseshoe-delta-functor).
 -/
+
+@[expose] public section
 
 universe v₁ v₂ u₁ u₂
 

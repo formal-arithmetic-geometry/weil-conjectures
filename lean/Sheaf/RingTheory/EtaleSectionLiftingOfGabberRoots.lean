@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Mathlib.RingTheory.Etale.Basic
-import Mathlib.RingTheory.Jacobson.Ideal
+module
+
+public import Mathlib.RingTheory.Etale.Basic
+public import Mathlib.RingTheory.Jacobson.Ideal
 
 /-!
 # Étale section lifting from Gabber's root condition
@@ -12,6 +14,8 @@ import Mathlib.RingTheory.Jacobson.Ideal
 Source: Stacks Project, More on Algebra, Lemma Tag 09XI, implication (5) ⇒ (2)
 (blueprint: lem-weil-pbc-gabber-root-criterion-etale-section-lifting).
 -/
+
+@[expose] public section
 
 universe u v
 

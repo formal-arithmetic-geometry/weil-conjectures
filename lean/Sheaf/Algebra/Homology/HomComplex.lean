@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import Mathlib.Algebra.Homology.HomologicalComplex
-import Mathlib.Algebra.Ring.NegOnePow
-import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
+module
+
+public import Mathlib.Algebra.Homology.HomologicalComplex
+public import Mathlib.Algebra.Ring.NegOnePow
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
 
 /-!
 # Hom complexes of sheaves of modules
@@ -17,6 +19,8 @@ The chosen bifunctor has product terms, differential `d_M f - (-1)^n f d_L`,
 and componentwise pre- and post-composition. Its existence proof is postponed;
 its data are selected from that named theorem, never supplied by `sorry`.
 -/
+
+@[expose] public section
 
 open CategoryTheory CategoryTheory.Limits Opposite
 

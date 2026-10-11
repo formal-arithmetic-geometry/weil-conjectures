@@ -3,16 +3,20 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group U1
 -/
-import Mathlib.AlgebraicGeometry.Sites.AffineEtale
-import Sheaf.AlgebraicGeometry.EtaleTensorSectionsSheaf
-import Sheaf.Topology.RingedSpaceModuleCohomology
-import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
+module
+
+public import Mathlib.AlgebraicGeometry.Sites.AffineEtale
+public import Sheaf.AlgebraicGeometry.EtaleTensorSectionsSheaf
+public import Sheaf.Topology.RingedSpaceModuleCohomology
+public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 
 /-! # Étale and Zariski cohomology of quasi-coherent modules
 
 Source: Stacks Project, Descent, Proposition 03DW (2), and Étale Cohomology,
 Theorem 03P2 (blueprint: lem-sc-etale-zariski-qcoh-comparison).
 -/
+
+@[expose] public section
 
 universe u
 

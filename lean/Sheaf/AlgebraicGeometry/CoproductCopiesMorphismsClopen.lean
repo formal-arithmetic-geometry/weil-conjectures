@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Mathlib.AlgebraicGeometry.Limits
-import Mathlib.AlgebraicGeometry.OpenImmersion
-import Mathlib.Topology.LocallyConstant.Basic
+module
+
+public import Mathlib.AlgebraicGeometry.Limits
+public import Mathlib.AlgebraicGeometry.OpenImmersion
+public import Mathlib.Topology.LocallyConstant.Basic
 
 /-!
 # Morphisms into a coproduct of copies of a scheme
@@ -13,6 +15,8 @@ import Mathlib.Topology.LocallyConstant.Basic
 Source: Stacks Project, Groupoids, Example 03YW and Schemes, Lemmas 01JB and 01HI
 (blueprint: lem-galois-coproduct-copies-morphisms-clopen).
 -/
+
+@[expose] public section
 
 universe u v
 

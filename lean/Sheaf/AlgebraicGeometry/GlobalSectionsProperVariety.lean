@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF stage-2 worker K1
 -/
-import Mathlib.AlgebraicGeometry.Morphisms.Proper
-import Sheaf.AlgebraicGeometry.Variety
-import WeilConjectures.AlgebraicGeometry.Cohomology.Defs
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.Proper
+public import Sheaf.AlgebraicGeometry.Variety
+public import WeilConjectures.AlgebraicGeometry.Cohomology.Defs
 
 /-!
 # Global sections of a proper variety
@@ -22,6 +24,8 @@ stated by the source as `AlgebraicGeometry.Scheme.GlobalSectionsBijective.of_geo
 (`WeilConjectures.AlgebraicGeometry.GlobalSectionsBijective`), recorded next to this module's
 declaration and not stated again here.
 -/
+
+@[expose] public section
 
 universe u
 

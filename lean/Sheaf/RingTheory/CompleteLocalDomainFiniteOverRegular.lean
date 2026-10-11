@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group J1
 -/
-import Mathlib.RingTheory.AdicCompletion.Basic
-import Sheaf.RingTheory.CohenRing
-import Mathlib.RingTheory.RegularLocalRing.Defs
-import Mathlib.RingTheory.MvPowerSeries.Basic
+module
+
+public import Mathlib.RingTheory.AdicCompletion.Basic
+public import Sheaf.RingTheory.CohenRing
+public import Mathlib.RingTheory.RegularLocalRing.Defs
+public import Mathlib.RingTheory.MvPowerSeries.Basic
 
 /-!
 # Complete local domains finite over regular subrings
@@ -14,6 +16,8 @@ import Mathlib.RingTheory.MvPowerSeries.Basic
 Source: Stacks Project, Algebra, Lemma Tag 032D and Definition Tag 0327
 (blueprint: lem-weil-pbc-complete-local-domain-finite-over-regular).
 -/
+
+@[expose] public section
 
 universe u
 

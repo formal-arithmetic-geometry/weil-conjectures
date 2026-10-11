@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group R1
 -/
-import Sheaf.AlgebraicGeometry.EtaleResidueTriples
-import WeilConjectures.Mathlib.RingTheory.Henselian
-import Mathlib.CategoryTheory.Filtered.Basic
-import Mathlib.CategoryTheory.Limits.HasLimits
+module
+
+public import Sheaf.AlgebraicGeometry.EtaleResidueTriples
+public import WeilConjectures.Mathlib.RingTheory.Henselian
+public import Mathlib.CategoryTheory.Filtered.Basic
+public import Mathlib.CategoryTheory.Limits.HasLimits
 
 /-!
 # Strict henselization from etale triples
@@ -14,6 +16,8 @@ import Mathlib.CategoryTheory.Limits.HasLimits
 Source: Stacks Project, Algebra, Lemmas Tags 04GW and 04GP
 (blueprint: lem-weil-pbc-strict-henselization-triples).
 -/
+
+@[expose] public section
 
 universe u
 

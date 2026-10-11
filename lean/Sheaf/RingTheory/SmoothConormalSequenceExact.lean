@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Mathlib.RingTheory.Smooth.Basic
+module
+
+public import Mathlib.RingTheory.Smooth.Basic
 
 /-!
 # Exactness of the conormal sequence for a smooth ring map
@@ -11,6 +13,8 @@ import Mathlib.RingTheory.Smooth.Basic
 Source: Stacks Project, Algebra, Tags 06A9 and 065V
 (blueprint: lem-weil-pbc-smooth-conormal-sequence-exact).
 -/
+
+@[expose] public section
 
 universe u v w
 

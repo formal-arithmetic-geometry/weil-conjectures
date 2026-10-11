@@ -3,13 +3,17 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group R1
 -/
-import Sheaf.AlgebraicGeometry.CoherentFormalModulesAbelian
+module
+
+public import Sheaf.AlgebraicGeometry.CoherentFormalModulesAbelian
 
 /-! # Epimorphisms of coherent formal modules
 
 Source: Stacks Project, Cohomology of Schemes, Lemma 087Y
 (blueprint: lem-weil-pbc-formal-systems-surjective).
 -/
+
+@[expose] public section
 
 universe u
 

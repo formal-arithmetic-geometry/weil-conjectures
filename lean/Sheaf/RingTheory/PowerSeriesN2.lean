@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import Sheaf.RingTheory.JapaneseDomain
-import Mathlib.RingTheory.Noetherian.Defs
-import Mathlib.RingTheory.PowerSeries.NoZeroDivisors
+module
+
+public import Sheaf.RingTheory.JapaneseDomain
+public import Mathlib.RingTheory.Noetherian.Defs
+public import Mathlib.RingTheory.PowerSeries.NoZeroDivisors
 
 /-!
 # Power series over a Japanese domain
@@ -13,6 +15,8 @@ import Mathlib.RingTheory.PowerSeries.NoZeroDivisors
 Source: Stacks Project, Algebra, Lemma Tag 032Q (lemma-power-series-over-N-2)
 (blueprint: lem-weil-pbc-power-series-n2).
 -/
+
+@[expose] public section
 
 universe u
 

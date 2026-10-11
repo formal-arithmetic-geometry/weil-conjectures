@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group G1
 -/
-import Mathlib.Algebra.Category.Grp.Colimits
-import Mathlib.Algebra.Category.ModuleCat.Presheaf.Pushforward
-import Mathlib.Algebra.Category.Ring.Colimits
-import Mathlib.Topology.Sheaves.Presheaf
+module
+
+public import Mathlib.Algebra.Category.Grp.Colimits
+public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Pushforward
+public import Mathlib.Algebra.Category.Ring.Colimits
+public import Mathlib.Topology.Sheaves.Presheaf
 
 /-!
 # Pullback of presheaves of modules along a continuous map
@@ -14,6 +16,8 @@ import Mathlib.Topology.Sheaves.Presheaf
 Source: Stacks Project, Sheaves, Tags 008T, 008S and 008U
 (blueprint: lem-pc-presheaf-module-inverse-image-adjunction).
 -/
+
+@[expose] public section
 
 universe u
 

@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import Mathlib.Algebra.Homology.HomotopyCategory.Shift
-import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.Basic
-import Mathlib.CategoryTheory.Limits.Shapes.Preorder.WellOrderContinuous
-import Mathlib.SetTheory.Ordinal.Basic
+module
+
+public import Mathlib.Algebra.Homology.HomotopyCategory.Shift
+public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.Basic
+public import Mathlib.CategoryTheory.Limits.Shapes.Preorder.WellOrderContinuous
+public import Mathlib.SetTheory.Ordinal.Basic
 
 /-!
 # Vanishing of Hom in a transfinite union of subcomplexes
@@ -15,6 +17,8 @@ Source: Stacks Project, `injectives.tex`, Lemma `lemma-characterize-K-injective`
 (Homology Lemma `lemma-ML-over-ordinals`, Tag 0AAT)
 (blueprint: lem-pur-kinjective-homotopy-limit-vanishing).
 -/
+
+@[expose] public section
 
 universe w v u
 

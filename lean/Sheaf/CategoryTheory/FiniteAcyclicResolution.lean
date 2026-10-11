@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import WeilConjectures.CategoryTheory.Abelian.RightDerived.Acyclic
+module
+
+public import WeilConjectures.CategoryTheory.Abelian.RightDerived.Acyclic
 
 /-!
 # Finite acyclic resolutions and right derived functors
@@ -11,6 +13,8 @@ import WeilConjectures.CategoryTheory.Abelian.RightDerived.Acyclic
 Source: Stacks Project, Derived Categories, Proposition 13.16.8 (Tag 05TA)
 (blueprint: lem-pc-derived-acyclic-resolution).
 -/
+
+@[expose] public section
 
 universe v₁ v₂ u₁ u₂
 

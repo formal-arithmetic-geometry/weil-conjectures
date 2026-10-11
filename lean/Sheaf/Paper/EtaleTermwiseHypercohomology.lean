@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group S1
 -/
-import Sheaf.CategoryTheory.HypercohomologyFirstPage
-import WeilConjectures.SixFunctors.Etale.Derived.GlobalSections
-import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.KInjective
+module
+
+public import Sheaf.CategoryTheory.HypercohomologyFirstPage
+public import WeilConjectures.SixFunctors.Etale.Derived.GlobalSections
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.KInjective
 
 /-! # Cartan--Eilenberg presentations of termwise étale hypercohomology
 
@@ -15,6 +17,8 @@ Source: Stacks Project, Tags 015H, 015J and 015K
 This packages witnesses of `Functor.exists_hypercohomology_firstPage`. Bidegrees are
 (filtration degree, resolution degree), so the paper's E₁^{p,q} is the term at (q,p).
 -/
+
+@[expose] public section
 
 universe uHyper
 

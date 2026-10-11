@@ -3,15 +3,19 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under the Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Sheaf.AlgebraicGeometry.SchemeDerivedBaseChangeMap
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
+module
+
+public import Sheaf.AlgebraicGeometry.SchemeDerivedBaseChangeMap
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 
 /-! # Relative Mayer--Vietoris gluing for one complex
 
 Source: Stacks Project, Derived Categories of Schemes, Lemma 36.26.2 (Tag 0DJ9)
 (blueprint: lem-pc-rf-single-complex-relative-mayer-vietoris).
 -/
+
+@[expose] public section
 
 universe um wm
 

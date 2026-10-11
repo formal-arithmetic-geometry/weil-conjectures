@@ -3,14 +3,16 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Mathlib.Algebra.Category.Ring.Basic
-import Mathlib.Algebra.Category.Grp.Basic
-import Mathlib.CategoryTheory.Category.Preorder
-import Mathlib.CategoryTheory.Limits.HasLimits
-import Mathlib.RingTheory.TensorProduct.Basic
-import Mathlib.RingTheory.Finiteness.Defs
-import Mathlib.Algebra.Module.FinitePresentation
-import Mathlib.RingTheory.FinitePresentation
+module
+
+public import Mathlib.Algebra.Category.Ring.Basic
+public import Mathlib.Algebra.Category.Grp.Basic
+public import Mathlib.CategoryTheory.Category.Preorder
+public import Mathlib.CategoryTheory.Limits.HasLimits
+public import Mathlib.RingTheory.TensorProduct.Basic
+public import Mathlib.RingTheory.Finiteness.Defs
+public import Mathlib.Algebra.Module.FinitePresentation
+public import Mathlib.RingTheory.FinitePresentation
 
 /-!
 # Finite-presentation approximation of modules
@@ -18,6 +20,8 @@ import Mathlib.RingTheory.FinitePresentation
 Source: literature/stacks-project/algebra.tex, Algebra, Lemma Tag 00R1
 (blueprint: lem-weil-pbc-limit-module-finite-presentation).
 -/
+
+@[expose] public section
 
 universe u v
 

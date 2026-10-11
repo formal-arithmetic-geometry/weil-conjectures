@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import Mathlib.AlgebraicGeometry.Morphisms.Affine
-import Mathlib.CategoryTheory.Limits.HasLimits
-import Mathlib.CategoryTheory.Category.Preorder
-import Mathlib.Topology.Constructible
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.Affine
+public import Mathlib.CategoryTheory.Limits.HasLimits
+public import Mathlib.CategoryTheory.Category.Preorder
+public import Mathlib.Topology.Constructible
 
 /-!
 # Images of inverse limits in constructible subsets
@@ -15,6 +17,8 @@ Source: Stacks Project, Limits of Schemes, Lemma 05F4 in Situation 086P,
 restricted to constructible subsets
 (blueprint: lem-weil-pbc-limit-contained-in-constructible).
 -/
+
+@[expose] public section
 
 universe u
 

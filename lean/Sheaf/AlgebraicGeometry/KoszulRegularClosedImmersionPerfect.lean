@@ -3,12 +3,14 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import Sheaf.RingTheory.KoszulRegularSequence
-import Sheaf.AlgebraicGeometry.PerfectClosedImmersion
-import Sheaf.AlgebraicGeometry.PerfectComplex
-import Mathlib.AlgebraicGeometry.Modules.Tilde
-import Mathlib.Algebra.Homology.QuasiIso
-import Mathlib.Algebra.Homology.Single
+module
+
+public import Sheaf.RingTheory.KoszulRegularSequence
+public import Sheaf.AlgebraicGeometry.PerfectClosedImmersion
+public import Sheaf.AlgebraicGeometry.PerfectComplex
+public import Mathlib.AlgebraicGeometry.Modules.Tilde
+public import Mathlib.Algebra.Homology.QuasiIso
+public import Mathlib.Algebra.Homology.Single
 
 /-!
 # Koszul-regular closed immersions are perfect
@@ -16,6 +18,8 @@ import Mathlib.Algebra.Homology.Single
 Source: Stacks Project, More on Morphisms, Lemma 37.61.7, Tag 068C
 (blueprint: lem-sc-koszul-regular-closed-immersion-perfect).
 -/
+
+@[expose] public section
 
 universe u w
 

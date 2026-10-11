@@ -3,11 +3,13 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import Mathlib.Algebra.Homology.ShortComplex.ShortExact
-import Mathlib.Algebra.Homology.HomologicalComplexAbelian
-import Mathlib.Algebra.Homology.QuasiIso
-import Mathlib.CategoryTheory.Abelian.Basic
-import Mathlib.CategoryTheory.Preadditive.Injective.Basic
+module
+
+public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
+public import Mathlib.Algebra.Homology.HomologicalComplexAbelian
+public import Mathlib.Algebra.Homology.QuasiIso
+public import Mathlib.CategoryTheory.Abelian.Basic
+public import Mathlib.CategoryTheory.Preadditive.Injective.Basic
 
 /-!
 # Injective resolutions of short exact sequences of bounded-below complexes
@@ -15,6 +17,8 @@ import Mathlib.CategoryTheory.Preadditive.Injective.Basic
 Source: Stacks Project, `derived.tex`, Lemma Tag 013T (lemma-injective-resolution-ses)
 (blueprint: lem-weil-pbc-injective-resolution-ses-complexes).
 -/
+
+@[expose] public section
 
 universe v u
 

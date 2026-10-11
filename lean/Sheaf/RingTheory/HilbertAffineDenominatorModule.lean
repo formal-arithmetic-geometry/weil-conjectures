@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import Mathlib.RingTheory.Support
-import Mathlib.RingTheory.Regular.IsSMulRegular
-import Mathlib.RingTheory.Ideal.MinimalPrime.Basic
-import Mathlib.RingTheory.Localization.Basic
+module
+
+public import Mathlib.RingTheory.Support
+public import Mathlib.RingTheory.Regular.IsSMulRegular
+public import Mathlib.RingTheory.Ideal.MinimalPrime.Basic
+public import Mathlib.RingTheory.Localization.Basic
 
 /-!
 # Affine denominator maps on a finite module
@@ -14,6 +16,8 @@ import Mathlib.RingTheory.Localization.Basic
 Source: Stacks Project, Divisors, Tag 02P2, Lemma 31.25.5, affine proof
 (blueprint: lem-sc-hilbert-affine-denominator-module).
 -/
+
+@[expose] public section
 
 universe u v
 

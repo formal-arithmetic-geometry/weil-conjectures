@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Mathlib.Algebra.Module.LocalizedModule.Basic
-import Sheaf.RingTheory.FormalGlueingData
+module
+
+public import Mathlib.Algebra.Module.LocalizedModule.Basic
+public import Sheaf.RingTheory.FormalGlueingData
 
 /-!
 # Canonical maps for formal glueing
@@ -18,6 +20,8 @@ Source: Stacks Project, More on Algebra, Remark 05EL; Algebra, Lemmas 07K0 and 0
 * `FormalGlueing.swap_properties`: interchange of iterated localizations.
 * `FormalGlueing.compare_properties`: localization commutes with extension of scalars.
 -/
+
+@[expose] public section
 
 universe u v w v₁ v₂ v₃
 

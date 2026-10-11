@@ -3,12 +3,14 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group T1
 -/
-import Sheaf.Paper.CechComparisonMapNaturality
-import Sheaf.Paper.CechRefinementCochainMap
-import Sheaf.Paper.CechCupProduct
-import Sheaf.AlgebraicGeometry.ModulePullbackTensor
-import Sheaf.AlgebraicGeometry.Coherent
-import Sheaf.AlgebraicGeometry.EtaleTensorSections
+module
+
+public import Sheaf.Paper.CechComparisonMapNaturality
+public import Sheaf.Paper.CechRefinementCochainMap
+public import Sheaf.Paper.CechCupProduct
+public import Sheaf.AlgebraicGeometry.ModulePullbackTensor
+public import Sheaf.AlgebraicGeometry.Coherent
+public import Sheaf.AlgebraicGeometry.EtaleTensorSections
 
 /-! # Cech cup products and pullback
 
@@ -18,6 +20,8 @@ The comparison maps, refinement cochain map and both bilinear cup products are
 characterized by their constructions. The equalities hold for every covering;
 isomorphisms are required only to identify the products through inverse comparisons.
 -/
+
+@[expose] public section
 
 universe v
 set_option autoImplicit false

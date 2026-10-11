@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group U1
 -/
-import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImage
+module
+
+public import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImage
 
 /-!
 # Composition of derived direct images of modules on ringed spaces
@@ -11,6 +13,8 @@ import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImage
 Source: Stacks Project, Cohomology, Lemma 20.28.2 (Tag 0D5T)
 (blueprint: lem-pc-ringed-spaces-derived-direct-image-composition).
 -/
+
+@[expose] public section
 
 universe u wX wY wZ
 

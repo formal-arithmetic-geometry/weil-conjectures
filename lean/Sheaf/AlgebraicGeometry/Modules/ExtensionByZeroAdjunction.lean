@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group G1
 -/
-import Sheaf.CategoryTheory.ExtensionByZeroPresheaf
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Mathlib.Algebra.Category.ModuleCat.Stalk
+module
+
+public import Sheaf.CategoryTheory.ExtensionByZeroPresheaf
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Mathlib.Algebra.Category.ModuleCat.Stalk
 
 /-!
 # Extension by zero of modules on an open subscheme
@@ -13,6 +15,8 @@ import Mathlib.Algebra.Category.ModuleCat.Stalk
 Source: Stacks Project, Definition 00A4 and Lemma 00A7
 (blueprint: lem-weil-pbc-module-extension-by-zero-adjunction).
 -/
+
+@[expose] public section
 
 universe u
 

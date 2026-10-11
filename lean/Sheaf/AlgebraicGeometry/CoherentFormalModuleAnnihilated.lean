@@ -3,17 +3,21 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import Sheaf.AlgebraicGeometry.CoherentFormalModulesAffine
-import Sheaf.AlgebraicGeometry.CoherentFormalModulesAbelian
-import Mathlib.Algebra.Category.ModuleCat.Limits
-import Mathlib.Data.List.TFAE
-import Mathlib.RingTheory.Ideal.Operations
+module
+
+public import Sheaf.AlgebraicGeometry.CoherentFormalModulesAffine
+public import Sheaf.AlgebraicGeometry.CoherentFormalModulesAbelian
+public import Mathlib.Algebra.Category.ModuleCat.Limits
+public import Mathlib.Data.List.TFAE
+public import Mathlib.RingTheory.Ideal.Operations
 
 /-! # Annihilation of kernels and cokernels of coherent formal module maps
 
 Source: Stacks Project, Cohomology of Schemes, Remark 0888; Lemmas 087W and 087X
 (blueprint: lem-weil-pbc-formal-systems-annihilated-by-power).
 -/
+
+@[expose] public section
 
 universe u v w
 

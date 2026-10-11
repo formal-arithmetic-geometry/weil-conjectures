@@ -3,15 +3,19 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Sheaf.AlgebraicGeometry.PseudoCoherentComplex
-import Sheaf.AlgebraicGeometry.PerfectComplex
-import Sheaf.AlgebraicGeometry.FiniteTorDimension
+module
+
+public import Sheaf.AlgebraicGeometry.PseudoCoherentComplex
+public import Sheaf.AlgebraicGeometry.PerfectComplex
+public import Sheaf.AlgebraicGeometry.FiniteTorDimension
 
 /-! # Pseudo-coherent complexes of finite Tor dimension are perfect
 
 Source: Stacks Project, Cohomology of Sheaves, Lemma 20.49.5, Tag 08CQ
 (blueprint: lem-pc-pseudo-coherent-finite-tor-perfect).
 -/
+
+@[expose] public section
 
 universe uP wP
 

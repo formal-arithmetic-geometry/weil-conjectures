@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import Sheaf.AlgebraicGeometry.TorsionAbelianBaseChange
-import Sheaf.AlgebraicGeometry.PrimeInjectiveAcyclicity
-import Mathlib.AlgebraicGeometry.Morphisms.Proper
+module
+
+public import Sheaf.AlgebraicGeometry.TorsionAbelianBaseChange
+public import Sheaf.AlgebraicGeometry.PrimeInjectiveAcyclicity
+public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 
 /-!
 # Proper base change implies injective acyclicity
@@ -13,6 +15,8 @@ import Mathlib.AlgebraicGeometry.Morphisms.Proper
 Source: Stacks Project, Tag 0A4B, direction (1) implies (2)
 (blueprint: lem-weil-pbc-property-implies-acyclicity).
 -/
+
+@[expose] public section
 
 universe u_forward
 

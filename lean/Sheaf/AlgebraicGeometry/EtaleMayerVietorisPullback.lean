@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group V1
 -/
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
-import Mathlib.AlgebraicGeometry.Restrict
+module
+
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
+public import Mathlib.AlgebraicGeometry.Restrict
 
 /-!
 # Pullback compatibility of the étale Mayer–Vietoris sequence
@@ -13,6 +15,8 @@ Source: Stacks Project, Étale Cohomology, Tag 0A50, construction in its proof.
 Pullback naturality is the agent-identified consequence of that construction.
 (blueprint: lem-weil-pbc-etale-mayer-vietoris-pullback).
 -/
+
+@[expose] public section
 
 universe u
 

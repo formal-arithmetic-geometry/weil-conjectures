@@ -3,11 +3,13 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Mathlib.Algebra.Homology.QuasiIso
-import Mathlib.Algebra.Homology.HomologicalComplexAbelian
-import Mathlib.Algebra.Homology.Single
-import Mathlib.Algebra.Category.ModuleCat.Abelian
-import Mathlib.Algebra.Category.ModuleCat.Colimits
+module
+
+public import Mathlib.Algebra.Homology.QuasiIso
+public import Mathlib.Algebra.Homology.HomologicalComplexAbelian
+public import Mathlib.Algebra.Homology.Single
+public import Mathlib.Algebra.Category.ModuleCat.Abelian
+public import Mathlib.Algebra.Category.ModuleCat.Colimits
 
 /-!
 # Filtered free resolutions of cochain complexes
@@ -16,6 +18,8 @@ Source: Stacks Project, Differential Graded Algebra, Lemma 15.60.9 (Tag 09KP),
 specialized in More on Algebra, Remark 15.60.11 (Tag 09PB)
 (blueprint: lem-pc-derived-filtered-free-resolution).
 -/
+
+@[expose] public section
 
 universe u
 

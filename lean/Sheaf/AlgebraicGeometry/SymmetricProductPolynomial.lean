@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import Mathlib.Algebra.MvPolynomial.Basic
-import Mathlib.Algebra.Polynomial.Basic
-import Mathlib.Algebra.BigOperators.Ring.Finset
+module
+
+public import Mathlib.Algebra.MvPolynomial.Basic
+public import Mathlib.Algebra.Polynomial.Basic
+public import Mathlib.Algebra.BigOperators.Ring.Finset
 
 /-!
 # Symmetric-product coordinate polynomials
@@ -14,6 +16,8 @@ Source: Stacks Project, Etale Cohomology, proof of Lemma 59.91.10 (Tag 0A4F);
 the Weil conjectures blueprint, `sec-proper-base-change`, `sk-thm-reduction`
 (blueprint: def-weil-pbc-symmetric-product-morphism).
 -/
+
+@[expose] public section
 
 namespace AlgebraicGeometry
 

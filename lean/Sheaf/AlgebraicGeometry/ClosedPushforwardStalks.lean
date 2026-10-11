@@ -2,9 +2,11 @@
 Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 -/
-import Sheaf.AlgebraicGeometry.TensorPullback
-import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-import Mathlib.Algebra.Category.ModuleCat.Stalk
+module
+
+public import Sheaf.AlgebraicGeometry.TensorPullback
+public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+public import Mathlib.Algebra.Category.ModuleCat.Stalk
 
 /-!
 # Stalks of pushforward along a closed immersion
@@ -12,6 +14,8 @@ import Mathlib.Algebra.Category.ModuleCat.Stalk
 Source: Stacks Project, Sheaves, Lemma 00AE and Modules, Lemma 08KS
 (blueprint: lem-weil-pbc-closed-pushforward-stalks).
 -/
+
+@[expose] public section
 
 universe w
 

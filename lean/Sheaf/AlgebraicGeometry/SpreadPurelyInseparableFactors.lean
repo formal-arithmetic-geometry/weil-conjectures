@@ -3,11 +3,13 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group P1
 -/
-import Mathlib.AlgebraicGeometry.Morphisms.Etale
-import Mathlib.AlgebraicGeometry.Morphisms.UniversallyInjective
-import Mathlib.FieldTheory.PurelyInseparable.Basic
-import Mathlib.RingTheory.Localization.FractionRing
-import Mathlib.RingTheory.TensorProduct.Maps
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.Etale
+public import Mathlib.AlgebraicGeometry.Morphisms.UniversallyInjective
+public import Mathlib.FieldTheory.PurelyInseparable.Basic
+public import Mathlib.RingTheory.Localization.FractionRing
+public import Mathlib.RingTheory.TensorProduct.Maps
 
 /-!
 # Spreading purely inseparable factors
@@ -17,6 +19,8 @@ Source: smooth purity blueprint, `sk-prop-sf-cbc`, proof of
 Stacks Project, Tags 00GQ, 0BR5, 01S4 and 04DF
 (blueprint: lem-weil-pbc-spread-purely-inseparable-factors).
 -/
+
+@[expose] public section
 
 set_option autoImplicit false
 

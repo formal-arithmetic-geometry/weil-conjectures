@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group P1
 -/
-import Sheaf.AlgebraicGeometry.StrictHenselization
-import Mathlib.RingTheory.DiscreteValuationRing.Basic
-import Mathlib.RingTheory.RingHom.Flat
+module
+
+public import Sheaf.AlgebraicGeometry.StrictHenselization
+public import Mathlib.RingTheory.DiscreteValuationRing.Basic
+public import Mathlib.RingTheory.RingHom.Flat
 
 /-!
 # DVR property of strict henselizations
@@ -13,6 +15,8 @@ import Mathlib.RingTheory.RingHom.Flat
 Source: Stacks Project, More on Algebra, Tags 0AP3 and 07QM; Étale Cohomology, Tag 04HX
 (blueprint: lem-sc-strict-henselization-dvr).
 -/
+
+@[expose] public section
 
 universe v
 

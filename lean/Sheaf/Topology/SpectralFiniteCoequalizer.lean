@@ -1,8 +1,10 @@
-import Mathlib.Topology.Spectral.Basic
-import Mathlib.Topology.Sheaves.Limits
-import Mathlib.Topology.Sheaves.Functors
-import Mathlib.Topology.Sheaves.Stalks
-import Sheaf.Topology.SetsExtensionByEmpty
+module
+
+public import Mathlib.Topology.Spectral.Basic
+public import Mathlib.Topology.Sheaves.Limits
+public import Mathlib.Topology.Sheaves.Functors
+public import Mathlib.Topology.Sheaves.Stalks
+public import Sheaf.Topology.SetsExtensionByEmpty
 
 /-!
 # Finite-space descent of spectral coequalizers
@@ -10,6 +12,8 @@ import Sheaf.Topology.SetsExtensionByEmpty
 Source: literature/stacks-project/modules.tex, Lemma 0CAK (blueprint:
 `lem-weil-pbc-spectral-finite-coequalizer-from-finite-space`).
 -/
+
+@[expose] public section
 
 set_option autoImplicit false
 

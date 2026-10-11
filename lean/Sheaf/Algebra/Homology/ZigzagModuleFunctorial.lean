@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF worker F1
 -/
-import Sheaf.Algebra.Homology.ZigzagModule
+module
+
+public import Sheaf.Algebra.Homology.ZigzagModule
 
 /-!
 # Functoriality of zig-zag modules
@@ -11,6 +13,8 @@ import Sheaf.Algebra.Homology.ZigzagModule
 Source: Stacks Project, Algebra, Tag 00M1, proof and preceding functoriality paragraph
 (blueprint: lem-weil-pbc-double-complex-zigzag-module-functorial).
 -/
+
+@[expose] public section
 
 universe u v
 

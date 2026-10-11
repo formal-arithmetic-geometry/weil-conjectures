@@ -3,13 +3,17 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import Sheaf.AlgebraicGeometry.Ample
+module
+
+public import Sheaf.AlgebraicGeometry.Ample
 
 /-! # A finite affine cover from an ample invertible module
 
 Source: Stacks Project, Properties, Definition 01PS and the first paragraph of
 Lemma 01Q1's proof (blueprint: lem-sc-ample-finite-affine-cover).
 -/
+
+@[expose] public section
 
 universe u
 

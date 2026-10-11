@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Sheaf.Paper.SitePlusSeparated
+module
+
+public import Sheaf.Paper.SitePlusSeparated
 
 /-!
 # The plus construction computes sheafification
@@ -11,6 +13,8 @@ import Sheaf.Paper.SitePlusSeparated
 Source: Stacks Project, Sites, Theorem 00WB and Proposition 00WH.
 (blueprint: lem-weil-pbc-sheafification-plus-theorem)
 -/
+
+@[expose] public section
 
 universe u w
 

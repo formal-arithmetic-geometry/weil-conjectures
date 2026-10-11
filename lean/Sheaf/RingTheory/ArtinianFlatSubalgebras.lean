@@ -3,12 +3,14 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Mathlib.RingTheory.Smooth.Basic
-import Mathlib.RingTheory.RingHom.Flat
-import Mathlib.RingTheory.EssentialFiniteness
-import Mathlib.RingTheory.Artinian.Defs
-import Mathlib.RingTheory.LocalRing.ResidueField.Basic
-import Mathlib.Order.Directed
+module
+
+public import Mathlib.RingTheory.Smooth.Basic
+public import Mathlib.RingTheory.RingHom.Flat
+public import Mathlib.RingTheory.EssentialFiniteness
+public import Mathlib.RingTheory.Artinian.Defs
+public import Mathlib.RingTheory.LocalRing.ResidueField.Basic
+public import Mathlib.Order.Directed
 
 /-!
 # Flat Artinian subalgebras essentially of finite type
@@ -16,6 +18,8 @@ import Mathlib.Order.Directed
 Source: Stacks Project, Smoothing Ring Maps, Lemma 16.11.1 (Tag 07FG)
 (blueprint: lem-weil-pbc-popescu-artinian-flat-subalgebras).
 -/
+
+@[expose] public section
 
 universe u v w
 

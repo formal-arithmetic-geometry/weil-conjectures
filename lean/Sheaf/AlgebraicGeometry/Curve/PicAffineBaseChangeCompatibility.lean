@@ -2,19 +2,23 @@
 Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 -/
-import Sheaf.AlgebraicGeometry.BaseChangeCurve
-import Sheaf.AlgebraicGeometry.GenusInvariant
-import Sheaf.AlgebraicGeometry.Curve.PicRestrictionBoundary
-import WeilConjectures.AlgebraicGeometry.Curve.Compactification
-import WeilConjectures.AlgebraicGeometry.Curve.Picard
-import WeilConjectures.AlgebraicGeometry.Picard.Jacobian
-import Mathlib.GroupTheory.QuotientGroup.Basic
+module
+
+public import Sheaf.AlgebraicGeometry.BaseChangeCurve
+public import Sheaf.AlgebraicGeometry.GenusInvariant
+public import Sheaf.AlgebraicGeometry.Curve.PicRestrictionBoundary
+public import WeilConjectures.AlgebraicGeometry.Curve.Compactification
+public import WeilConjectures.AlgebraicGeometry.Curve.Picard
+public import WeilConjectures.AlgebraicGeometry.Picard.Jacobian
+public import Mathlib.GroupTheory.QuotientGroup.Basic
 
 /-! # Compatibility of the affine Picard quotient with field extension
 
 Source: `literature/stacks-project/etale-cohomology.tex`, Tags 03RQ and 01JF
 (blueprint: lem-sc-pic-affine-base-change-compatibility).
 -/
+
+@[expose] public section
 
 universe u
 

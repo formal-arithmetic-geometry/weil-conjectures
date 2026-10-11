@@ -3,13 +3,17 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import Sheaf.CategoryTheory.IsSaturatedTriangulatedMultiplicativeSystem
+module
+
+public import Sheaf.CategoryTheory.IsSaturatedTriangulatedMultiplicativeSystem
 
 /-! # Common refinements of denominator triangles
 
 Source: Stacks Project, Derived Categories, Tag 05R9, with arrows reversed
 (blueprint: lem-pur-triangle-common-refinement-ms3-05r9).
 -/
+
+@[expose] public section
 
 universe w v u
 

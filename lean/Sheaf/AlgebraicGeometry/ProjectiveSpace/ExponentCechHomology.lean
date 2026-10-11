@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF worker H1
 -/
-import Sheaf.AlgebraicGeometry.ProjectiveSpace.ExponentCechComplex
-import WeilConjectures.Mathlib.Algebra.Homology.ShortComplex.ModuleCat
+module
+
+public import Sheaf.AlgebraicGeometry.ProjectiveSpace.ExponentCechComplex
+public import WeilConjectures.Mathlib.Algebra.Homology.ShortComplex.ModuleCat
 
 /-!
 # Homology of a fixed-exponent monomial Cech complex
@@ -12,6 +14,8 @@ import WeilConjectures.Mathlib.Algebra.Homology.ShortComplex.ModuleCat
 Source: Stacks Project, Cohomology of Schemes, Tag 01XS, proof of projective-space
 cohomology (blueprint: lem-pc-monomial-cech-complex-homology).
 -/
+
+@[expose] public section
 
 open CategoryTheory
 

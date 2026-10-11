@@ -1,6 +1,10 @@
-import Mathlib.LinearAlgebra.FreeModule.Basic
-import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
-import Mathlib.RingTheory.Localization.Away.Basic
+module
+
+public import Mathlib.LinearAlgebra.FreeModule.Basic
+public import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
+public import Mathlib.RingTheory.Localization.Away.Basic
+
+@[expose] public section
 
 universe u v w
 

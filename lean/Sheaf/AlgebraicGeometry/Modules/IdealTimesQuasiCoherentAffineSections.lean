@@ -3,12 +3,14 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import Sheaf.AlgebraicGeometry.Coherent
-import Sheaf.AlgebraicGeometry.IdealModuleProductStalk
-import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
-import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
-import Mathlib.CategoryTheory.Subobject.Basic
-import Mathlib.RingTheory.Ideal.Operations
+module
+
+public import Sheaf.AlgebraicGeometry.Coherent
+public import Sheaf.AlgebraicGeometry.IdealModuleProductStalk
+public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
+public import Mathlib.CategoryTheory.Subobject.Basic
+public import Mathlib.RingTheory.Ideal.Operations
 
 /-!
 # Products of quasi-coherent ideals and modules
@@ -25,6 +27,8 @@ open `V` is `Scheme.Modules.restrictFunctor V.ι` on modules and `IdealSheafData
 on ideals. Subsheaves of `𝓕|_V` are compared as the subobjects `Subobject.mk (image.ι _)`
 of their inclusions, as in lem-weil-pbc-affine-pushforward-ideal-product.
 -/
+
+@[expose] public section
 
 universe u
 

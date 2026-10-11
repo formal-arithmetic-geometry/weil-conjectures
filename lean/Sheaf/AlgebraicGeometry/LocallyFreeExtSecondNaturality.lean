@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import Sheaf.AlgebraicGeometry.LocallyFreeExtCohomology
+module
+
+public import Sheaf.AlgebraicGeometry.LocallyFreeExtCohomology
 
 /-!
 # Second-variable naturality of the locally free Ext comparison
@@ -11,6 +13,8 @@ import Sheaf.AlgebraicGeometry.LocallyFreeExtCohomology
 Source: Stacks Project, Derived Categories, Tag 06XR, and Cohomology, Tag 01DZ
 (blueprint: lem-sc-ext-locally-free-second-naturality).
 -/
+
+@[expose] public section
 
 universe u
 

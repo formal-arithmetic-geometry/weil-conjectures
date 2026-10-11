@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group V1
 -/
-import Mathlib.AlgebraicGeometry.Modules.Tilde
-import Mathlib.RingTheory.Localization.BaseChange
+module
+
+public import Mathlib.AlgebraicGeometry.Modules.Tilde
+public import Mathlib.RingTheory.Localization.BaseChange
 
 /-! # Principal localization of an associated module sheaf
 
@@ -15,6 +17,8 @@ The spectrum of `B ⊗[A] Localization.Away a` is canonically the principal open
 `D(φ a)` of `Spec B`, by `IsLocalization.tensor`. We express sections on that spectrum
 as sections of the original associated sheaf on this principal open.
 -/
+
+@[expose] public section
 
 universe u v
 

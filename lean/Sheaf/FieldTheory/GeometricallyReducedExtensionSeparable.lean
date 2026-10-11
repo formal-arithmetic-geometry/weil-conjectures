@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import Mathlib.Algebra.CharP.Basic
-import Mathlib.RingTheory.TensorProduct.Basic
-import Mathlib.RingTheory.Nilpotent.Defs
-import Sheaf.FieldTheory.SeparableExtension
+module
+
+public import Mathlib.Algebra.CharP.Basic
+public import Mathlib.RingTheory.TensorProduct.Basic
+public import Mathlib.RingTheory.Nilpotent.Defs
+public import Sheaf.FieldTheory.SeparableExtension
 
 /-!
 # Geometrically reduced field extensions are separable in positive characteristic
@@ -15,6 +17,8 @@ Source: Stacks Project, Algebra, Lemma Tag 030W, implication (4) => (1),
 with Definition Tag 030S
 (blueprint: lem-weil-pbc-geometrically-reduced-extension-separable).
 -/
+
+@[expose] public section
 
 universe u v
 

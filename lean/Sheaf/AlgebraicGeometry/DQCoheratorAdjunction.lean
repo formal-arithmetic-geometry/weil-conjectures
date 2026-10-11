@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import Sheaf.AlgebraicGeometry.DerivedCategory
-import Sheaf.Topology.RingedSpaceModuleCohomology
-import Mathlib.Algebra.Homology.DerivedCategory.KInjective
-import Mathlib.CategoryTheory.Adjunction.Basic
+module
+
+public import Sheaf.AlgebraicGeometry.DerivedCategory
+public import Sheaf.Topology.RingedSpaceModuleCohomology
+public import Mathlib.Algebra.Homology.DerivedCategory.KInjective
+public import Mathlib.CategoryTheory.Adjunction.Basic
 
 /-! # Coherator adjunction and detection by global sections
 
@@ -17,6 +19,8 @@ of Schemes, `perfect-lemma-better-coherator`
 Derived global sections are expressed by their K-injective representatives: applying
 `RingedSpace.globalSectionsFunctor` termwise to a K-injective complex represents RΓ.
 -/
+
+@[expose] public section
 
 universe u w
 

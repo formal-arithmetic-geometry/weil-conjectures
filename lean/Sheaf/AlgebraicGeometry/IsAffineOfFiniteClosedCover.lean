@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 
 /-!
 # Affineness from a finite closed cover
@@ -11,6 +13,8 @@ import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 Source: Stacks Project, Limits, Lemma 32.11.3 (Tag 09NL)
 (blueprint: lem-sc-closed-affine-union-affine).
 -/
+
+@[expose] public section
 
 universe u
 

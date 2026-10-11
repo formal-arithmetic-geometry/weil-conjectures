@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group J1
 -/
-import WeilConjectures.AlgebraicGeometry.Sites.Hilbert90
-import WeilConjectures.Mathlib.RingTheory.Etale.Field
-import Mathlib.FieldTheory.Galois.Basic
+module
+
+public import WeilConjectures.AlgebraicGeometry.Sites.Hilbert90
+public import WeilConjectures.Mathlib.RingTheory.Etale.Field
+public import Mathlib.FieldTheory.Galois.Basic
 
 /-!
 # Finite Galois descent for sections of an etale sheaf
@@ -14,6 +16,8 @@ Source: Stacks Project, Etale Cohomology, Tag 04JM, Lemma
 `lemma-global-sections-point`, finite Galois descent argument
 (blueprint: lem-exc-finite-galois-sections-descent).
 -/
+
+@[expose] public section
 
 universe u v
 

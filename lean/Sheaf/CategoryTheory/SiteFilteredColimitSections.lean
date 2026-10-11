@@ -3,12 +3,14 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Mathlib.CategoryTheory.Filtered.Basic
-import Mathlib.CategoryTheory.Sites.Sheaf
-import Mathlib.CategoryTheory.Sites.Finite
-import Mathlib.CategoryTheory.Sites.PrecoverageToGrothendieck
-import Mathlib.CategoryTheory.Limits.Types.Colimits
-import Mathlib.Algebra.Category.Grp.Colimits
+module
+
+public import Mathlib.CategoryTheory.Filtered.Basic
+public import Mathlib.CategoryTheory.Sites.Sheaf
+public import Mathlib.CategoryTheory.Sites.Finite
+public import Mathlib.CategoryTheory.Sites.PrecoverageToGrothendieck
+public import Mathlib.CategoryTheory.Limits.Types.Colimits
+public import Mathlib.Algebra.Category.Grp.Colimits
 
 /-!
 # Sections of filtered colimits on sites with finite coverings
@@ -16,6 +18,8 @@ import Mathlib.Algebra.Category.Grp.Colimits
 Source: Stacks Project, Sites, Lemma 0738(4), and Modules on Sites, Lemma 03CO
 (blueprint: lem-weil-pbc-site-filtered-colimit-sections-finite-coverings).
 -/
+
+@[expose] public section
 
 universe u
 

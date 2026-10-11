@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import Mathlib.AlgebraicGeometry.AffineScheme
-import Mathlib.RingTheory.Smooth.StandardSmooth
-import Mathlib.RingTheory.TensorProduct.Maps
-import Mathlib.RingTheory.Regular.RegularSequence
+module
+
+public import Mathlib.AlgebraicGeometry.AffineScheme
+public import Mathlib.RingTheory.Smooth.StandardSmooth
+public import Mathlib.RingTheory.TensorProduct.Maps
+public import Mathlib.RingTheory.Regular.RegularSequence
 
 /-!
 # Regular generators for a standard smooth affine diagonal
@@ -15,6 +17,8 @@ Source: Stacks Project, Tag 067R; the affine diagonal calculation in
 WeilConjectures/AlgebraicGeometry/Morphisms/RegularImmersion.lean:336-375
 (blueprint: lem-sc-standard-smooth-affine-diagonal-generators).
 -/
+
+@[expose] public section
 
 universe u v
 

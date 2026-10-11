@@ -3,11 +3,13 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import Mathlib.RingTheory.RingHom.Flat
-import Mathlib.RingTheory.IntegralClosure.IsIntegral.Defs
-import Mathlib.RingTheory.FinitePresentation
-import Mathlib.RingTheory.Jacobson.Ideal
-import Mathlib.RingTheory.Ideal.Quotient.Operations
+module
+
+public import Mathlib.RingTheory.RingHom.Flat
+public import Mathlib.RingTheory.IntegralClosure.IsIntegral.Defs
+public import Mathlib.RingTheory.FinitePresentation
+public import Mathlib.RingTheory.Jacobson.Ideal
+public import Mathlib.RingTheory.Ideal.Quotient.Operations
 
 /-! # Flat integral finitely presented algebra over a Zariski pair
 
@@ -21,6 +23,8 @@ induces an isomorphism modulo an ideal in the Jacobson radical is itself an
 isomorphism.  Its proof follows the finite-module reduction, rank-one propagation,
 and rank-one algebra-map criterion recorded in the blueprint node.
 -/
+
+@[expose] public section
 
 universe u v
 

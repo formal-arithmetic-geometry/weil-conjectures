@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import Mathlib.AlgebraicGeometry.Morphisms.Etale
-import Sheaf.AlgebraicGeometry.BaseChangeConventions
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.Etale
+public import Sheaf.AlgebraicGeometry.BaseChangeConventions
 
 /-!
 # Pointwise étaleness under extension of the base field
@@ -15,6 +17,8 @@ Tag 02VN (blueprint: lem-sc-etale-base-change-geometric).
 The neighbourhood formulation uses open subschemes and the existing `Etale` predicate.
 Base change is the map of `Over.pullback`, as in `def-pc-base-change`.
 -/
+
+@[expose] public section
 
 universe u
 

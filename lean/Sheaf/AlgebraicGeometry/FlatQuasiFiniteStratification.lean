@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group J1
 -/
-import WeilConjectures.AlgebraicGeometry.Morphisms.FiberDegree
-import Sheaf.AlgebraicGeometry.QuasiFiniteMorphism
+module
+
+public import WeilConjectures.AlgebraicGeometry.Morphisms.FiberDegree
+public import Sheaf.AlgebraicGeometry.QuasiFiniteMorphism
 
 /-!
 # Stratifying flat quasi-finite separated morphisms by degree
@@ -15,6 +17,8 @@ Source: Stacks Project, More on Morphisms, Tag 07RZ
 We index the closed filtration starting at zero: `Z 0` denotes the paper's `Z_{-1}`,
 so the degree-`r` stratum is `Z (r + 1) \ Z r`, written out in place.
 -/
+
+@[expose] public section
 
 universe u
 

@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import Sheaf.AlgebraicGeometry.Thickening
+module
+
+public import Sheaf.AlgebraicGeometry.Thickening
 
 /-!
 # Universal first order thickenings of schemes
@@ -20,6 +22,8 @@ and Definition 37.7.2 (Tag 04F4) (blueprint: def-weil-pbc-universal-first-order-
 * `AlgebraicGeometry.IsUniversalFirstOrderThickening.unique`: uniqueness up to unique
   isomorphism over the base.
 -/
+
+@[expose] public section
 
 universe u
 

@@ -3,13 +3,17 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import Sheaf.AlgebraicGeometry.Ample
+module
+
+public import Sheaf.AlgebraicGeometry.Ample
 
 /-! # Affine neighbourhoods of finite sets on schemes with an ample invertible module
 
 Source: Stacks Project, Properties, Lemma 01ZY, case (3)
 (blueprint: lem-sc-ample-finite-set-affine).
 -/
+
+@[expose] public section
 
 universe u
 

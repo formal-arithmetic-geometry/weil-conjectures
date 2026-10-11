@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Mathlib.AlgebraicGeometry.AffineTransitionLimit
+module
+
+public import Mathlib.AlgebraicGeometry.AffineTransitionLimit
 
 /-!
 # Eventually affine stages in an inverse system
@@ -11,6 +13,8 @@ import Mathlib.AlgebraicGeometry.AffineTransitionLimit
 Source: Stacks Project, Limits, Lemma 09ZM (limits.tex, lines 891--911)
 (blueprint: lem-weil-pbc-eventually-affine).
 -/
+
+@[expose] public section
 
 universe u
 

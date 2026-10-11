@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import Mathlib.AlgebraicGeometry.Sites.EtalePoint
-import Mathlib.FieldTheory.IsAlgClosed.Basic
+module
+
+public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
+public import Mathlib.FieldTheory.IsAlgClosed.Basic
 
 /-!
 # Morphisms of geometric points and étale stalks
@@ -12,6 +14,8 @@ import Mathlib.FieldTheory.IsAlgClosed.Basic
 Source: Stacks Project, Étale Cohomology, Remark 59.29.8, Tag 04FN
 (blueprint: lem-weil-pbc-geometric-point-morphism-stalk-bijection).
 -/
+
+@[expose] public section
 
 universe u v
 

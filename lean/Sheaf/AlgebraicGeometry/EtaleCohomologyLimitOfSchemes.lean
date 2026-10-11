@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group J1
 -/
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
-import Mathlib.AlgebraicGeometry.AffineTransitionLimit
+module
+
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
+public import Mathlib.AlgebraicGeometry.AffineTransitionLimit
 
 /-! # Etale cohomology of limits of schemes
 
@@ -18,6 +20,8 @@ Its being a colimit cocone says that the induced comparison from the colimit is 
 isomorphism. We use `Sheaf.H` and `cohomologyMap`, the recorded abelian-sheaf cohomology
 and pullback encoding; its comparison with K-injective cohomology is a stage-3 bridge.
 -/
+
+@[expose] public section
 
 universe u
 

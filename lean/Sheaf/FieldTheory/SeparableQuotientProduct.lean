@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group G1
 -/
-import Mathlib.FieldTheory.IsAlgClosed.Basic
-import Mathlib.RingTheory.Ideal.Quotient.Operations
+module
+
+public import Mathlib.FieldTheory.IsAlgClosed.Basic
+public import Mathlib.RingTheory.Ideal.Quotient.Operations
 
 /-!
 # Evaluation decomposition of a separable polynomial quotient
@@ -13,6 +15,8 @@ Source: Stacks Project, Algebra, Tag 00U3 (lemma-etale-over-field), separable po
 case and Chinese remainder factorization
 (blueprint: lem-pc-separable-polynomial-alg-closed-quotient-product).
 -/
+
+@[expose] public section
 
 universe u v
 

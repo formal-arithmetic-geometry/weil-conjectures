@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license.
 Authors: SHEAF group F1
 -/
-import Sheaf.CategoryTheory.Abelian.HorseshoeDeltaFunctor
-import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusSingle
-import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.SingleTriangle
+module
+
+public import Sheaf.CategoryTheory.Abelian.HorseshoeDeltaFunctor
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusSingle
+public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.SingleTriangle
 
 /-!
 # Right-derived connecting maps and the derived triangle
@@ -13,6 +15,8 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.SingleTriangle
 Source: Stacks Project, Derived Categories, Tags 05TE and 015B
 (blueprint: lem-sc-p1-right-derived-triangle-connecting).
 -/
+
+@[expose] public section
 
 universe v₁ v₂ u₁ u₂ w₁ w₂
 

@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group Q1
 -/
-import Mathlib.AlgebraicGeometry.Fiber
-import Mathlib.AlgebraicGeometry.Morphisms.Proper
+module
+
+public import Mathlib.AlgebraicGeometry.Fiber
+public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 
 /-!
 # Idempotents on a proper fibre come from a neighbourhood
@@ -15,6 +17,8 @@ Source: Stacks Project, Tag 0G7X, Lemma 36.32.7
 Image membership in the pushforward stalk is expressed by a representative section on
 an open neighbourhood of the base point. No idempotence is required of the representative.
 -/
+
+@[expose] public section
 
 universe u
 

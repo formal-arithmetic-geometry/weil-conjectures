@@ -2,16 +2,20 @@
 Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 -/
-import Sheaf.RingTheory.RingPseudoCoherent
-import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
-import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolution
-import Mathlib.RingTheory.Flat.CategoryTheory
+module
+
+public import Sheaf.RingTheory.RingPseudoCoherent
+public import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
+public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolution
+public import Mathlib.RingTheory.Flat.CategoryTheory
 
 /-! # Pseudo-coherent complexes of finite Tor dimension are perfect
 
 Source: literature/stacks-project/more-algebra.tex, More on Algebra, Lemma 15.76.2
 (Tag 0658) (blueprint: lem-pc-ring-pseudo-coherent-finite-tor-perfect).
 -/
+
+@[expose] public section
 
 universe w u
 

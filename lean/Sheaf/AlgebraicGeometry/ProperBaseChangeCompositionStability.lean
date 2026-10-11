@@ -1,6 +1,10 @@
-import Mathlib.AlgebraicGeometry.Morphisms.Proper
-import Sheaf.AlgebraicGeometry.PrimeInjectiveAcyclicity
-import Sheaf.AlgebraicGeometry.TorsionAbelianBaseChange
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.Proper
+public import Sheaf.AlgebraicGeometry.PrimeInjectiveAcyclicity
+public import Sheaf.AlgebraicGeometry.TorsionAbelianBaseChange
+
+@[expose] public section
 
 universe u_comp
 

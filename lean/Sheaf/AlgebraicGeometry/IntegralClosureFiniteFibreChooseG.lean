@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group J1
 -/
-import Mathlib.AlgebraicGeometry.Restrict
-import Mathlib.RingTheory.IntegralClosure.Algebra.Basic
-import Mathlib.RingTheory.Localization.Away.Basic
-import Mathlib.RingTheory.Ideal.Quotient.Operations
+module
+
+public import Mathlib.AlgebraicGeometry.Restrict
+public import Mathlib.RingTheory.IntegralClosure.Algebra.Basic
+public import Mathlib.RingTheory.Localization.Away.Basic
+public import Mathlib.RingTheory.Ideal.Quotient.Operations
 
 /-!
 # A lift of the fibre idempotent gives the localization isomorphism
@@ -14,6 +16,8 @@ import Mathlib.RingTheory.Ideal.Quotient.Operations
 Source: literature/stacks-project/more-algebra.tex:2542-2549, proof of Lemma Tag 09XH
 (blueprint: lem-weil-pbc-integral-closure-finite-fibre-choose-g)
 -/
+
+@[expose] public section
 
 open CategoryTheory AlgebraicGeometry
 

@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Sheaf.RingTheory.GRing
-import Mathlib.RingTheory.DiscreteValuationRing.Basic
-import Mathlib.RingTheory.Localization.FractionRing
+module
+
+public import Sheaf.RingTheory.GRing
+public import Mathlib.RingTheory.DiscreteValuationRing.Basic
+public import Mathlib.RingTheory.Localization.FractionRing
 
 /-!
 # Regularity of completion maps for characteristic-zero discrete valuation rings
@@ -13,6 +15,8 @@ import Mathlib.RingTheory.Localization.FractionRing
 Source: Stacks Project, More on Algebra, Proposition Tag 07PX, proof of (3) and (4);
 Algebra, Lemma Tag 00PD (blueprint: lem-weil-pbc-dvr-completion-regular).
 -/
+
+@[expose] public section
 
 universe u v
 

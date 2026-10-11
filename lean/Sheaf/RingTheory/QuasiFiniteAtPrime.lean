@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group J1
 -/
-import Mathlib.RingTheory.LocalRing.ResidueField.Fiber
-import Mathlib.RingTheory.FiniteType
+module
+
+public import Mathlib.RingTheory.LocalRing.ResidueField.Fiber
+public import Mathlib.RingTheory.FiniteType
 
 /-!
 # Quasi-finiteness of a ring map at a prime
@@ -12,6 +14,8 @@ import Mathlib.RingTheory.FiniteType
 Source: Stacks Project, Algebra, Definition 10.122.3 (Tag 00PL), using condition (1) of
 Lemma 10.122.2 (Tag 00PK) (blueprint: def-weil-pbc-ring-map-quasi-finite-at-prime).
 -/
+
+@[expose] public section
 
 universe u v
 

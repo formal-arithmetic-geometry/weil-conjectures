@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group J1
 -/
-import WeilConjectures.SixFunctors.BaseChange.Derived
-import Mathlib.AlgebraicGeometry.Morphisms.Proper
-import Mathlib.RingTheory.Ideal.Quotient.Defs
-import Sheaf.AlgebraicGeometry.TorsionEtaleSheaf
+module
+
+public import WeilConjectures.SixFunctors.BaseChange.Derived
+public import Mathlib.AlgebraicGeometry.Morphisms.Proper
+public import Mathlib.RingTheory.Ideal.Quotient.Defs
+public import Sheaf.AlgebraicGeometry.TorsionEtaleSheaf
 
 /-!
 # Sheaf-level proper base change for arbitrary coefficient rings
@@ -14,6 +16,8 @@ import Sheaf.AlgebraicGeometry.TorsionEtaleSheaf
 Source: Stacks Project, Etale Cohomology, Lemma 0A4B, proof paragraphs 2–3
 (blueprint: lem-weil-pbc-arbitrary-ring-torsion-sheaf-base-change).
 -/
+
+@[expose] public section
 
 universe u
 

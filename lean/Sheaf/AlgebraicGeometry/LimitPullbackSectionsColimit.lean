@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import Mathlib.AlgebraicGeometry.AffineTransitionLimit
-import Mathlib.Algebra.Category.ModuleCat.Abelian
-import Sheaf.AlgebraicGeometry.EtaleSheaves
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+module
+
+public import Mathlib.AlgebraicGeometry.AffineTransitionLimit
+public import Mathlib.Algebra.Category.ModuleCat.Abelian
+public import Sheaf.AlgebraicGeometry.EtaleSheaves
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-!
 # Sections of a pulled-back module sheaf over a descended affine etale object
@@ -15,6 +17,8 @@ Source: Stacks Project, Etale Cohomology, Lemma 09YU, proof, paragraph 'Fully fa
 a special case of Theorem 09YQ in degree 0
 (blueprint: lem-weil-pbc-limit-pullback-sections-colimit).
 -/
+
+@[expose] public section
 
 universe u
 

@@ -3,11 +3,13 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import Mathlib.RingTheory.DedekindDomain.Basic
-import Mathlib.RingTheory.DiscreteValuationRing.Basic
-import Mathlib.RingTheory.KrullDimension.Basic
-import Mathlib.RingTheory.Localization.AtPrime.Basic
-import Mathlib.Algebra.Algebra.Rat
+module
+
+public import Mathlib.RingTheory.DedekindDomain.Basic
+public import Mathlib.RingTheory.DiscreteValuationRing.Basic
+public import Mathlib.RingTheory.KrullDimension.Basic
+public import Mathlib.RingTheory.Localization.AtPrime.Basic
+public import Mathlib.Algebra.Algebra.Rat
 
 /-!
 # Prime localizations of the integers
@@ -15,6 +17,8 @@ import Mathlib.Algebra.Algebra.Rat
 Source: Stacks Project, Algebra, Tags 034W, 034X, 0AUQ and 00PD
 (blueprint: lem-weil-pbc-z-localizations-dvr).
 -/
+
+@[expose] public section
 
 namespace Int
 

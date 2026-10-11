@@ -3,12 +3,14 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group J1
 -/
-import Mathlib.Algebra.Category.Grp.AB
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.Colimits
-import Mathlib.Algebra.Category.Ring.Limits
-import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.Basic
-import Sheaf.CategoryTheory.ExtensionByZeroPresheaf
+module
+
+public import Mathlib.Algebra.Category.Grp.AB
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Colimits
+public import Mathlib.Algebra.Category.Ring.Limits
+public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.Basic
+public import Sheaf.CategoryTheory.ExtensionByZeroPresheaf
 
 /-!
 # Sheaves of modules on a small ringed site
@@ -16,6 +18,8 @@ import Sheaf.CategoryTheory.ExtensionByZeroPresheaf
 Source: Stacks Project, Cohomology on Sites, Section 07A5; Modules on Sites,
 Lemmas 03DA, 03DB and 03EW (blueprint: lem-pur-ringed-site-grothendieck-abelian).
 -/
+
+@[expose] public section
 
 universe u
 

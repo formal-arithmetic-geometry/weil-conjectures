@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import Sheaf.AlgebraicGeometry.CommAlgebraSheaf
-import Sheaf.AlgebraicGeometry.Coherent
-import Mathlib.LinearAlgebra.SymmetricAlgebra.Basic
+module
+
+public import Sheaf.AlgebraicGeometry.CommAlgebraSheaf
+public import Sheaf.AlgebraicGeometry.Coherent
+public import Mathlib.LinearAlgebra.SymmetricAlgebra.Basic
 
 /-! # The symmetric algebra of a quasi-coherent module
 
@@ -16,6 +18,8 @@ The algebra is a commutative ring sheaf under the structure sheaf. The affine co
 is a ring equivalence commuting with the structure homomorphism and the degree-one map;
 this is precisely the canonical algebra isomorphism, without choosing algebra instances.
 -/
+
+@[expose] public section
 
 universe u
 

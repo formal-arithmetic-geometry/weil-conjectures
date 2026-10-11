@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import Mathlib.AlgebraicGeometry.Geometrically.Irreducible
-import Mathlib.AlgebraicGeometry.Over
-import Sheaf.AlgebraicGeometry.BaseChangeConventions
+module
+
+public import Mathlib.AlgebraicGeometry.Geometrically.Irreducible
+public import Mathlib.AlgebraicGeometry.Over
+public import Sheaf.AlgebraicGeometry.BaseChangeConventions
 
 /-!
 # Products of geometrically irreducible schemes over a field
@@ -13,6 +15,8 @@ import Sheaf.AlgebraicGeometry.BaseChangeConventions
 Source: Stacks Project, Tags 038F and 054P; Tag 0B9I, proof of (1)
 (blueprint: lem-sc-geometrically-irreducible-product).
 -/
+
+@[expose] public section
 
 universe u
 

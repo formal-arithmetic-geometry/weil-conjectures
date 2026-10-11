@@ -3,15 +3,19 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Mathlib.Algebra.Category.Ring.Colimits
-import Mathlib.AlgebraicGeometry.Morphisms.Etale
-import Mathlib.RingTheory.TensorProduct.Maps
+module
+
+public import Mathlib.Algebra.Category.Ring.Colimits
+public import Mathlib.AlgebraicGeometry.Morphisms.Etale
+public import Mathlib.RingTheory.TensorProduct.Maps
 
 /-! # Etale algebras over a filtered colimit descend to a finite stage
 
 Source: Stacks Project, Algebra, Lemma Tag 00U2 (9), and more-algebra.tex,
 proof of Lemma Tag 0A02 (blueprint: lem-weil-pbc-etale-algebra-filtered-colimit-descent).
 -/
+
+@[expose] public section
 
 universe u
 

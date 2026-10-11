@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group P1
 -/
-import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Twist
-import WeilConjectures.AlgebraicGeometry.Modules.Dual
-import Sheaf.AlgebraicGeometry.Ample
+module
+
+public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Twist
+public import WeilConjectures.AlgebraicGeometry.Modules.Dual
+public import Sheaf.AlgebraicGeometry.Ample
 
 /-!
 # Multiplication and coordinate loci of twists on the projective line
@@ -13,6 +15,8 @@ import Sheaf.AlgebraicGeometry.Ample
 Source: Stacks Project, Constructions, Tags 01MS, 01MU, 01MV and 01NG
 (blueprint: lem-sc-p1-twist-multiplication).
 -/
+
+@[expose] public section
 
 universe u
 

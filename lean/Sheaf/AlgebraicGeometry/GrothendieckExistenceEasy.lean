@@ -1,5 +1,7 @@
-import Sheaf.AlgebraicGeometry.CoherentFormalModule
-import Sheaf.AlgebraicGeometry.CoherentFormalModuleAnnihilated
+module
+
+public import Sheaf.AlgebraicGeometry.CoherentFormalModule
+public import Sheaf.AlgebraicGeometry.CoherentFormalModuleAnnihilated
 
 /-!
 # Easy algebraization of formal coherent modules
@@ -7,6 +9,8 @@ import Sheaf.AlgebraicGeometry.CoherentFormalModuleAnnihilated
 Source: Stacks Project, Cohomology of Schemes, Lemma 0889 (blueprint:
 lem-weil-pbc-grothendieck-existence-easy).
 -/
+
+@[expose] public section
 
 universe u
 

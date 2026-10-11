@@ -1,4 +1,6 @@
-import Sheaf.RingTheory.GRing
+module
+
+public import Sheaf.RingTheory.GRing
 
 /-!
 # Permanence of regular ring maps
@@ -6,6 +8,8 @@ import Sheaf.RingTheory.GRing
 Source: Stacks Project, More on Algebra, Lemma Tag 07NT
 (blueprint: lem-weil-pbc-regular-permanence).
 -/
+
+@[expose] public section
 
 universe u v w
 

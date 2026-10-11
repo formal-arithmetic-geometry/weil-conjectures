@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import Mathlib.AlgebraicGeometry.Scheme
-import Mathlib.CategoryTheory.Sites.Spaces
-import WeilConjectures.CategoryTheory.Sites.Torsor
+module
+
+public import Mathlib.AlgebraicGeometry.Scheme
+public import Mathlib.CategoryTheory.Sites.Spaces
+public import WeilConjectures.CategoryTheory.Sites.Torsor
 
 /-!
 # The contracted product of a torsor under change of coefficients
@@ -14,6 +16,8 @@ Source: Stacks Project, Cohomology of Sheaves, Lemma 02FQ;
 blueprint pushout-fibre quotient argument
 (blueprint: def-sc-zariski-contracted-product-presentation).
 -/
+
+@[expose] public section
 
 universe u w
 

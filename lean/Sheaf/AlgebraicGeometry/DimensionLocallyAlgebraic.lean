@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
-import WeilConjectures.Mathlib.Topology.KrullDimension
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
+public import WeilConjectures.Mathlib.Topology.KrullDimension
 
 /-!
 # Dimension of an irreducible locally algebraic scheme
@@ -12,6 +14,8 @@ import WeilConjectures.Mathlib.Topology.KrullDimension
 Source: Stacks Project, Varieties, Lemma 33.20.3, Tag 0A21, part (3)
 (blueprint: lem-sc-dimension-locally-algebraic).
 -/
+
+@[expose] public section
 
 universe u
 

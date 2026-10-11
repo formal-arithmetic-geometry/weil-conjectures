@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
-import Mathlib.AlgebraicGeometry.ResidueField
-import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+module
+
+public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
+public import Mathlib.AlgebraicGeometry.ResidueField
+public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 
 /-!
 # The reduced induced closed subscheme
@@ -16,6 +18,8 @@ Source: Stacks Project, Schemes, Lemma 26.12.4 (Tag 01J3) and Definition 26.12.5
 Quasi-coherent ideal sheaves are represented by `Scheme.IdealSheafData`: their affine
 ideals localize on basic opens. `idealOfOpens` gives their sections on arbitrary opens.
 -/
+
+@[expose] public section
 
 universe u
 

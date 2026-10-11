@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import Sheaf.AlgebraicGeometry.QuasiFiniteMorphism
-import Sheaf.AlgebraicGeometry.FiberDegreeBound
+module
+
+public import Sheaf.AlgebraicGeometry.QuasiFiniteMorphism
+public import Sheaf.AlgebraicGeometry.FiberDegreeBound
 
 /-!
 # Universally bounded fibres from a quasi-compact source
@@ -12,6 +14,8 @@ import Sheaf.AlgebraicGeometry.FiberDegreeBound
 Source: Stacks Project, Morphisms, Lemma Tag 03JA and Definition Tag 03J4
 (blueprint: lem-weil-pbc-lqf-qc-source-bounded-fibres).
 -/
+
+@[expose] public section
 
 universe u
 

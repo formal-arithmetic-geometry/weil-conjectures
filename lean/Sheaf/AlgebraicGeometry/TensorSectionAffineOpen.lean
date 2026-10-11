@@ -3,14 +3,18 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group J1
 -/
-import Sheaf.AlgebraicGeometry.Ample
-import Sheaf.AlgebraicGeometry.PositiveTensorFamily
+module
+
+public import Sheaf.AlgebraicGeometry.Ample
+public import Sheaf.AlgebraicGeometry.PositiveTensorFamily
 
 /-! # Tensor sections and affine nonvanishing loci
 
 Source: Stacks Project, Varieties Lemma 09NC, proof, invoking Properties Lemma 01PV
 (blueprint: lem-sc-tensor-section-affine-open).
 -/
+
+@[expose] public section
 
 open CategoryTheory AlgebraicGeometry MonoidalCategory
 

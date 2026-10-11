@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group G1
 -/
-import Sheaf.AlgebraicGeometry.Thickening
-import Mathlib.AlgebraicGeometry.Morphisms.Integral
+module
+
+public import Sheaf.AlgebraicGeometry.Thickening
+public import Mathlib.AlgebraicGeometry.Morphisms.Integral
 
 /-!
 # Integrality is insensitive to thickenings
@@ -12,6 +14,8 @@ import Mathlib.AlgebraicGeometry.Morphisms.Integral
 Source: Stacks Project, More on Morphisms, Lemma 37.3.1 (Tag 09ZV), part (5)
 (blueprint: lem-weil-pbc-thickening-integral).
 -/
+
+@[expose] public section
 
 universe u
 

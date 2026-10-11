@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import Sheaf.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
-import Mathlib.CategoryTheory.Sites.ConstantSheaf
-import Mathlib.AlgebraicGeometry.Sites.EtalePoint
+module
+
+public import Sheaf.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
+public import Mathlib.CategoryTheory.Sites.ConstantSheaf
+public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
 
 /-!
 # Inverse image over a geometric point is constant
@@ -13,6 +15,8 @@ import Mathlib.AlgebraicGeometry.Sites.EtalePoint
 Source: Stacks Project, Étale Cohomology, Lemma 59.39.3 (Tag 0A3H), final paragraph
 (blueprint: lem-weil-pbc-etale-geometric-fibre-inverse-image-constant).
 -/
+
+@[expose] public section
 
 universe u
 

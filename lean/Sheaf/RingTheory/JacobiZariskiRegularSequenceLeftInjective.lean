@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import Mathlib.RingTheory.Extension.Cotangent.Basic
-import Mathlib.RingTheory.Regular.RegularSequence
+module
+
+public import Mathlib.RingTheory.Extension.Cotangent.Basic
+public import Mathlib.RingTheory.Regular.RegularSequence
 
 /-!
 # Left injectivity in Jacobi–Zariski for a regular-sequence presentation
@@ -13,6 +15,8 @@ Source: Stacks Project, More on Algebra, Tag 07D4, the “in particular” claus
 using Tags 062F and 07CX, and Algebra, Tags 00S1 and 00S2
 (blueprint: lem-weil-pbc-jacobi-zariski-regular-sequence-left-injective).
 -/
+
+@[expose] public section
 
 universe u v w
 

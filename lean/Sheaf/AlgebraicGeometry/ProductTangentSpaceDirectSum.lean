@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group G1
 -/
-import Sheaf.AlgebraicGeometry.SchemeTangentSpace
-import WeilConjectures.PointCount
-import Mathlib.AlgebraicGeometry.Pullbacks
+module
+
+public import Sheaf.AlgebraicGeometry.SchemeTangentSpace
+public import WeilConjectures.PointCount
+public import Mathlib.AlgebraicGeometry.Pullbacks
 
 /-!
 # Tangent space of a product
@@ -13,6 +15,8 @@ import Mathlib.AlgebraicGeometry.Pullbacks
 Source: Stacks Project, Tag 0BEB, varieties-lemma-tangent-space-product, specialized to `Spec k`
 (blueprint: lem-sc-product-tangent-space-direct-sum).
 -/
+
+@[expose] public section
 
 universe u
 

@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group G1
 -/
-import Mathlib.RingTheory.RingHom.Flat
-import Mathlib.RingTheory.Ideal.Quotient.Operations
-import Mathlib.LinearAlgebra.TensorProduct.Tower
-import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
+module
+
+public import Mathlib.RingTheory.RingHom.Flat
+public import Mathlib.RingTheory.Ideal.Quotient.Operations
+public import Mathlib.LinearAlgebra.TensorProduct.Tower
+public import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
 
 /-!
 # Descent of extensions of cyclic ideal-power quotients
@@ -19,6 +21,8 @@ this with the source's `M ⊗[R] S`. Short exactness is expressed by injectivity
 and surjectivity, the module interpretation of `CategoryTheory.ShortComplex.ShortExact`
 via `ShortExact.moduleCat_exact_iff_function_exact` and its injective/surjective lemmas.
 -/
+
+@[expose] public section
 
 universe u v w x
 

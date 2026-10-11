@@ -3,15 +3,19 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import Sheaf.AlgebraicGeometry.Coherent
-import Mathlib.Algebra.Homology.ShortComplex.ShortExact
-import Mathlib.CategoryTheory.Preadditive.Biproducts
+module
+
+public import Sheaf.AlgebraicGeometry.Coherent
+public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
+public import Mathlib.CategoryTheory.Preadditive.Biproducts
 
 /-! # Closure properties of coherent modules
 
 Source: Stacks Project, Modules, Tag 01BY, parts (3) and (4)
 (blueprint: lem-weil-pbc-coherent-modules-kernel-cokernel-sum).
 -/
+
+@[expose] public section
 
 universe u
 

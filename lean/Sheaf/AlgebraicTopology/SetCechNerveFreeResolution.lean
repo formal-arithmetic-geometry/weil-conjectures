@@ -1,9 +1,13 @@
-import Mathlib.Algebra.Category.ModuleCat.Adjunctions
+module
+
+public import Mathlib.Algebra.Category.ModuleCat.Adjunctions
 
 /-! # Free-module resolution of a set Cech nerve
 Source: literature/stacks-project/hypercovering.tex, Tag 01GC (blueprint:
 lem-weil-pbc-set-cech-nerve-free-resolution).
 -/
+
+@[expose] public section
 
 open scoped BigOperators
 

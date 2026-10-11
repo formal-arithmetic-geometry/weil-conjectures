@@ -3,14 +3,18 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import Mathlib.RingTheory.RegularLocalRing.Defs
-import Mathlib.RingTheory.Localization.AtPrime.Basic
+module
+
+public import Mathlib.RingTheory.RegularLocalRing.Defs
+public import Mathlib.RingTheory.Localization.AtPrime.Basic
 
 /-! # Localization of a regular local ring
 
 Source: literature/stacks-project/algebra.tex, Lemma Tag 0AFS and Definition Tag 00OD
 (blueprint: lem-weil-pbc-regular-local-localization)
 -/
+
+@[expose] public section
 
 universe u
 

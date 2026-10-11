@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import Mathlib.AlgebraicGeometry.Geometrically.Connected
-import Mathlib.AlgebraicGeometry.Over
+module
+
+public import Mathlib.AlgebraicGeometry.Geometrically.Connected
+public import Mathlib.AlgebraicGeometry.Over
 
 /-!
 # Geometric connectedness after a field extension
@@ -12,6 +14,8 @@ import Mathlib.AlgebraicGeometry.Over
 Source: Stacks Project, `varieties.tex`, Lemma 33.7.3, tag 054N
 (blueprint: lem-weil-geometrically-connected-check-after-extension).
 -/
+
+@[expose] public section
 
 universe u
 

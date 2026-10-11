@@ -1,4 +1,6 @@
-import Mathlib.CategoryTheory.Sites.Plus
+module
+
+public import Mathlib.CategoryTheory.Sites.Plus
 
 /-!
 # Functoriality of the plus construction
@@ -6,6 +8,8 @@ import Mathlib.CategoryTheory.Sites.Plus
 Source: Stacks Project, Sites, Lemma 00W5 (blueprint:
 `lem-weil-pbc-site-plus-construction-functorial`).
 -/
+
+@[expose] public section
 
 open CategoryTheory
 open CategoryTheory.Limits

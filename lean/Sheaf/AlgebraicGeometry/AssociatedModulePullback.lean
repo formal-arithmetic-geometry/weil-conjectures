@@ -1,6 +1,8 @@
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Sheaf.AlgebraicGeometry.AssociatedModule
-import Sheaf.AlgebraicGeometry.TensorPullback
+module
+
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Sheaf.AlgebraicGeometry.AssociatedModule
+public import Sheaf.AlgebraicGeometry.TensorPullback
 
 /-!
 # Pullback of an associated module sheaf
@@ -8,6 +10,8 @@ import Sheaf.AlgebraicGeometry.TensorPullback
 Source: Stacks Project, Modules, Lemma 01BJ (lemma-restrict-quasi-coherent)
 (blueprint: lem-weil-pbc-associated-module-pullback).
 -/
+
+@[expose] public section
 
 universe w
 

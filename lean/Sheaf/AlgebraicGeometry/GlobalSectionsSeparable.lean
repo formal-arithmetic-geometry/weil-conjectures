@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Sheaf.AlgebraicGeometry.SmoothProjectiveCurve
-import Sheaf.AlgebraicGeometry.ProperGeometricallyReducedGlobalSectionsSeparable
+module
+
+public import Sheaf.AlgebraicGeometry.SmoothProjectiveCurve
+public import Sheaf.AlgebraicGeometry.ProperGeometricallyReducedGlobalSectionsSeparable
 
 /-!
 # Separability of global sections of a smooth projective curve
@@ -12,6 +14,8 @@ import Sheaf.AlgebraicGeometry.ProperGeometricallyReducedGlobalSectionsSeparable
 Source: Stacks Project, Varieties, Lemma 0BUG (clause (4))
 (blueprint: lem-pc-global-sections-separable).
 -/
+
+@[expose] public section
 
 universe u
 

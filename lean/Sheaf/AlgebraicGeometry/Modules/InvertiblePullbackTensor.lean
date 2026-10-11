@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
-import Sheaf.AlgebraicGeometry.Modules.ResidueFiber
-import WeilConjectures.AlgebraicGeometry.Modules.TensorSection
+module
+
+public import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
+public import Sheaf.AlgebraicGeometry.Modules.ResidueFiber
+public import WeilConjectures.AlgebraicGeometry.Modules.TensorSection
 
 /-!
 # Pullback, tensor products and fibres of invertible modules
@@ -14,6 +16,8 @@ Source: Stacks Project, Modules, Tags 01CD, 0B8L, 01C8, 01CT, 01CA, 01CB;
 Sheaves, Tags 0096, 0097, 0098; Algebra, Tags 00D0, 00CY, 00D2
 (blueprint: lem-weil-pbc-invertible-pullback-tensor).
 -/
+
+@[expose] public section
 
 universe v
 

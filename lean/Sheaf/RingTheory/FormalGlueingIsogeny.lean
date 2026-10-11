@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import Mathlib.RingTheory.RingHom.Flat
-import Mathlib.RingTheory.Ideal.Quotient.Operations
-import Mathlib.LinearAlgebra.TensorProduct.Tower
-import Mathlib.Algebra.Category.ModuleCat.Basic
+module
+
+public import Mathlib.RingTheory.RingHom.Flat
+public import Mathlib.RingTheory.Ideal.Quotient.Operations
+public import Mathlib.LinearAlgebra.TensorProduct.Tower
+public import Mathlib.Algebra.Category.ModuleCat.Basic
 
 /-!
 # Formal glueing of maps with ideal-power torsion kernel and cokernel
@@ -18,6 +20,8 @@ The tensor factors follow Mathlib's convention `S ⊗[R] M`. Ideal-power torsion
 is expressed elementwise, and the comparison equivalences are specified on
 kernel elements and on representatives of the cokernel.
 -/
+
+@[expose] public section
 
 universe u v w
 

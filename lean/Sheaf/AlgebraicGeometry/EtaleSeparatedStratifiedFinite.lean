@@ -3,11 +3,13 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF project, group H1
 -/
-import Sheaf.AlgebraicGeometry.LocallyClosedStratification
-import Mathlib.AlgebraicGeometry.Morphisms.Etale
-import Mathlib.AlgebraicGeometry.Morphisms.Finite
-import Mathlib.AlgebraicGeometry.Morphisms.Separated
-import Mathlib.Topology.Constructible
+module
+
+public import Sheaf.AlgebraicGeometry.LocallyClosedStratification
+public import Mathlib.AlgebraicGeometry.Morphisms.Etale
+public import Mathlib.AlgebraicGeometry.Morphisms.Finite
+public import Mathlib.AlgebraicGeometry.Morphisms.Separated
+public import Mathlib.Topology.Constructible
 
 /-!
 # Finite étale strata of a separated étale morphism
@@ -15,6 +17,8 @@ import Mathlib.Topology.Constructible
 Source: More on Morphisms, Lemma Tag 07RZ, together with Etale Cohomology, Lemma Tag 03S9
 (blueprint: lem-weil-pbc-etale-separated-stratified-finite).
 -/
+
+@[expose] public section
 
 universe u
 

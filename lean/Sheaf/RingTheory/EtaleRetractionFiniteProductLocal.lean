@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import Mathlib.RingTheory.Etale.QuasiFinite
-import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
+module
+
+public import Mathlib.RingTheory.Etale.QuasiFinite
+public import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
 
 /-!
 # Finite algebras over a local ring with étale retractions
@@ -12,6 +14,8 @@ import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
 Source: `literature/stacks-project/algebra.tex`, Lemma Tag 04GG (proof of 8 => 10)
 (blueprint: lem-weil-pbc-etale-retraction-finite-product-local).
 -/
+
+@[expose] public section
 
 universe u v
 

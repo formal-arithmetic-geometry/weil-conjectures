@@ -3,14 +3,18 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF contributors
 -/
-import Mathlib.AlgebraicGeometry.Sites.Fpqc
-import Mathlib.AlgebraicGeometry.Pullbacks
+module
+
+public import Mathlib.AlgebraicGeometry.Sites.Fpqc
+public import Mathlib.AlgebraicGeometry.Pullbacks
 
 /-!
 # Descent of morphisms along an fpqc covering
 
 Source: Stacks Project, Descent, Lemma Tag 02W0 (blueprint: lem-galois-fpqc-morphisms-descend).
 -/
+
+@[expose] public section
 
 universe u
 

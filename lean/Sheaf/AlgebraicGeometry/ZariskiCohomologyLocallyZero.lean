@@ -1,5 +1,7 @@
-import Sheaf.AlgebraicGeometry.ZariskiOpenRestrictionInjectives
-import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
+module
+
+public import Sheaf.AlgebraicGeometry.ZariskiOpenRestrictionInjectives
+public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 
 /-!
 # Positive-degree Zariski cohomology classes vanish locally
@@ -7,6 +9,8 @@ import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 Source: Stacks Project, Etale Cohomology, Lemma 0GY0 (label `lemma-gabber-criterion`),
 line 14228, proof (blueprint: lem-weil-pbc-zariski-cohomology-locally-zero).
 -/
+
+@[expose] public section
 
 universe u v
 

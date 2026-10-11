@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import Mathlib.AlgebraicGeometry.Restrict
-import Mathlib.RingTheory.Localization.AtPrime.Basic
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
-import WeilConjectures.Mathlib.RingTheory.Henselian
+module
+
+public import Mathlib.AlgebraicGeometry.Restrict
+public import Mathlib.RingTheory.Localization.AtPrime.Basic
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
+public import WeilConjectures.Mathlib.RingTheory.Henselian
 
 /-!
 # Gabber's criterion for vanishing of higher etale cohomology
@@ -14,6 +16,8 @@ import WeilConjectures.Mathlib.RingTheory.Henselian
 Source: Stacks Project, Etale Cohomology, Lemma 0GY0, label `lemma-gabber-criterion`
 (blueprint: lem-weil-pbc-gabber-criterion).
 -/
+
+@[expose] public section
 
 universe u
 

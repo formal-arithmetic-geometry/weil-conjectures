@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group J1
 -/
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
-import Mathlib.CategoryTheory.Filtered.Basic
-import Sheaf.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
+public import Mathlib.CategoryTheory.Filtered.Basic
+public import Sheaf.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 
 /-!
 # Constructible filtered presentations of etale module sheaves
@@ -13,6 +15,8 @@ import Sheaf.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 Source: Stacks Project, Tag 03SA, part (3)
 (blueprint: lem-weil-pbc-module-sheaf-colimit-constructible).
 -/
+
+@[expose] public section
 
 universe u
 

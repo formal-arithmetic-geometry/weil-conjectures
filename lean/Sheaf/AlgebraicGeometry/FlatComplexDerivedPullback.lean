@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group G1
 -/
-import Sheaf.AlgebraicGeometry.DerivedPullback
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.Flat
+module
+
+public import Sheaf.AlgebraicGeometry.DerivedPullback
+public import Sheaf.Algebra.Category.ModuleCat.Sheaf.Flat
 
 /-!
 # Termwise derived pullback of a bounded-above flat complex
@@ -12,6 +14,8 @@ import Sheaf.Algebra.Category.ModuleCat.Sheaf.Flat
 Source: Stacks Project, Cohomology, Tags 06YD and 06YJ
 (blueprint: lem-pc-flat-complex-derived-pullback).
 -/
+
+@[expose] public section
 
 universe u w
 

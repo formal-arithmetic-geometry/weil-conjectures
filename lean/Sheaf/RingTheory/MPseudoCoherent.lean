@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF worker C1
 -/
-import Mathlib.Algebra.Homology.DerivedCategory.TStructure
-import Mathlib.Algebra.Category.ModuleCat.Free
+module
+
+public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
+public import Mathlib.Algebra.Category.ModuleCat.Free
 
 /-!
 # Pseudo-coherence through degree m over a ring
@@ -12,6 +14,8 @@ import Mathlib.Algebra.Category.ModuleCat.Free
 Source: Stacks Project, More on Algebra, Definition 15.66.1 (Tag 064Q)
 (blueprint: def-pc-ring-m-pseudo-coherent).
 -/
+
+@[expose] public section
 
 universe w v u
 

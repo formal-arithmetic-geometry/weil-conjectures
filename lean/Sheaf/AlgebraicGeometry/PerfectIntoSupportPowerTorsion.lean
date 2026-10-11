@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group J1
 -/
-import Sheaf.AlgebraicGeometry.PerfectComplex
-import Sheaf.AlgebraicGeometry.DerivedGlobalScalar
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
+module
+
+public import Sheaf.AlgebraicGeometry.PerfectComplex
+public import Sheaf.AlgebraicGeometry.DerivedGlobalScalar
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 
 /-! # Maps from perfect complexes into principal support
 
@@ -16,6 +18,8 @@ Global functions are encoded as compatible families of local sections. On the Za
 site, evaluation at the top open identifies this ring with the usual global section ring.
 The action on derived morphisms is the localization of the sectionwise scalar action.
 -/
+
+@[expose] public section
 
 universe u w
 

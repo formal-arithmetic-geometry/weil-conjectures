@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import Sheaf.AlgebraicGeometry.Coherent
-import Sheaf.Algebra.Homology.ModuleStalkFunctor
-import Mathlib.AlgebraicGeometry.Noetherian
+module
+
+public import Sheaf.AlgebraicGeometry.Coherent
+public import Sheaf.Algebra.Homology.ModuleStalkFunctor
+public import Mathlib.AlgebraicGeometry.Noetherian
 
 /-!
 # Local isomorphism criterion for coherent modules
@@ -13,6 +15,8 @@ import Mathlib.AlgebraicGeometry.Noetherian
 Source: Stacks Project, Cohomology of Schemes, Lemma 01Y3
 (blueprint: lem-weil-pbc-coherent-local-isomorphism).
 -/
+
+@[expose] public section
 
 open CategoryTheory CategoryTheory.Limits TopologicalSpace
 open AlgebraicGeometry

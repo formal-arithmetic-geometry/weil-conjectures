@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group G1
 -/
-import Sheaf.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
-import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
+module
+
+public import Sheaf.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
+public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 
 /-!
 # Inverse image of étale sheaves of sets along an étale morphism
@@ -12,6 +14,8 @@ import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 Source: Stacks Project, Étale Cohomology, Tag 03S2, paragraph after Definition 03S3;
 Sites, Tag 00XZ (blueprint: lem-weil-pbc-sets-etale-inverse-image-restriction).
 -/
+
+@[expose] public section
 
 universe u
 

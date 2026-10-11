@@ -3,15 +3,17 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Sheaf.Algebra.Homology.HomComplex
-import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutions
-import Sheaf.Algebra.Homology.QuasiIsoHomComplexMap
-import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution
-import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
-import Mathlib.Algebra.Homology.DerivedCategory.Basic
-import Mathlib.CategoryTheory.Localization.Prod
-import Mathlib.CategoryTheory.Localization.Opposite
-import Mathlib.CategoryTheory.Functor.Currying
+module
+
+public import Sheaf.Algebra.Homology.HomComplex
+public import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutions
+public import Sheaf.Algebra.Homology.QuasiIsoHomComplexMap
+public import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution
+public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
+public import Mathlib.Algebra.Homology.DerivedCategory.Basic
+public import Mathlib.CategoryTheory.Localization.Prod
+public import Mathlib.CategoryTheory.Localization.Opposite
+public import Mathlib.CategoryTheory.Functor.Currying
 
 /-!
 # Derived internal Hom on a ringed site
@@ -24,6 +26,8 @@ product localization `Q.op.prod Q`, by `(L, M) ↦ Q (Hom^•(L, I(M)))`, where 
 functorial K-injective resolution `CochainComplex.kInjectiveResolutionFunctor` of the
 Grothendieck abelian category of `O`-modules (`SheafOfModules.isGrothendieckAbelian`).
 -/
+
+@[expose] public section
 
 open CategoryTheory CategoryTheory.Limits Opposite
 

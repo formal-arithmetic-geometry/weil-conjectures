@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import Sheaf.AlgebraicGeometry.DerivedCategory
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
+module
+
+public import Sheaf.AlgebraicGeometry.DerivedCategory
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
 
 /-! # Pseudo-coherent complexes on schemes
 
@@ -15,6 +17,8 @@ We use the scheme-local characterization by bounded-above complexes of finite fr
 Restriction is to the localized site of an open, using the same module category and derived
 category as `schemeDerivedCategory`.
 -/
+
+@[expose] public section
 
 universe u w
 

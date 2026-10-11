@@ -3,13 +3,15 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group V1
 -/
-import Mathlib.Topology.KrullDimension
-import Mathlib.Topology.NoetherianSpace
-import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
-import Mathlib.CategoryTheory.Sites.Spaces
-import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Sheaf
-import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.HasExt
-import Mathlib.Algebra.Category.Grp.AB
+module
+
+public import Mathlib.Topology.KrullDimension
+public import Mathlib.Topology.NoetherianSpace
+public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
+public import Mathlib.CategoryTheory.Sites.Spaces
+public import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Sheaf
+public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.HasExt
+public import Mathlib.Algebra.Category.Grp.AB
 
 /-!
 # Second cohomology on Noetherian spaces of dimension at most one
@@ -17,6 +19,8 @@ import Mathlib.Algebra.Category.Grp.AB
 Source: Stacks Project, Cohomology, Proposition 02UZ, specialized to `d = 1` and `p = 2`
 (blueprint: lem-sc-noetherian-cohomology-vanishing-abelian-dim-one).
 -/
+
+@[expose] public section
 
 universe u
 

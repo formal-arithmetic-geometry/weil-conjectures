@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE
 Authors: SHEAF contributors
 -/
-import Mathlib.Topology.KrullDimension
-import WeilConjectures.Mathlib.Topology.KrullDimension
+module
+
+public import Mathlib.Topology.KrullDimension
+public import WeilConjectures.Mathlib.Topology.KrullDimension
 
 /-!
 # Dimension as the supremum of local dimensions
@@ -12,6 +14,8 @@ import WeilConjectures.Mathlib.Topology.KrullDimension
 Source: Stacks Project, Topology, Lemma Tag 0B7I
 (blueprint: lem-weil-pbc-dimension-supremum-local-dimensions).
 -/
+
+@[expose] public section
 
 universe u
 

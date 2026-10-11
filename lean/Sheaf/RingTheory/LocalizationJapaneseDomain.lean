@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Sheaf.RingTheory.JapaneseDomain
+module
+
+public import Sheaf.RingTheory.JapaneseDomain
 
 /-!
 # Localization of N-1 and Japanese domains
@@ -11,6 +13,8 @@ import Sheaf.RingTheory.JapaneseDomain
 Source: Stacks Project, Algebra, Lemma 10.161.3 (Tag 032G), using Lemma 10.36.11
 (Tag 0307) (blueprint: lem-weil-pbc-localization-n2-domain).
 -/
+
+@[expose] public section
 
 universe u v w
 

@@ -1,5 +1,9 @@
-import Sheaf.Algebra.Homology.DerivedOpenShriekAdjunction
-import Mathlib.Algebra.Homology.DerivedCategory.ShortExact
+module
+
+public import Sheaf.Algebra.Homology.DerivedOpenShriekAdjunction
+public import Mathlib.Algebra.Homology.DerivedCategory.ShortExact
+
+@[expose] public section
 
 open CategoryTheory CategoryTheory.Limits TopologicalSpace Pretriangulated
 
@@ -15,6 +19,7 @@ Source: literature/stacks-project/cohomology.tex, Tag 08BU
 (blueprint: lem-sc-derived-mayer-vietoris-triangle).
 -/
 
+set_option maxHeartbeats 1600000 in
 /-- The distinguished Mayer–Vietoris triangle for a two-open cover `X = U ∪ V` of a ringed
 space, `j_{UV,!}(E|_{U∩V}) → j_{U,!}(E|_U) ⊞ j_{V,!}(E|_V) → E → j_{UV,!}(E|_{U∩V})[1]`.
 Here `j_! = extensionByZeroPresheaf ⋙ sheafification` and restriction is

@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import Sheaf.AlgebraicGeometry.TangentMapLinear
+module
+
+public import Sheaf.AlgebraicGeometry.TangentMapLinear
 
 /-!
 # Tangent spaces at arbitrary points of schemes over a field
@@ -19,6 +21,8 @@ Source: Stacks Project, Tags 0B2B, 0B2C and 0B2F, with base `Spec k`
 * `schemeTangentMap`: the linear map supplied by `exists_tangentMap_linear`, given by
   postcomposition after the residue fields are identified.
 -/
+
+@[expose] public section
 
 universe u
 

@@ -3,11 +3,13 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group G1
 -/
-import Sheaf.Paper.KoszulDifferential
-import Sheaf.Paper.KoszulDifferentialSquareZero
-import Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
-import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
-import Mathlib.LinearAlgebra.TensorProduct.Map
+module
+
+public import Sheaf.Paper.KoszulDifferential
+public import Sheaf.Paper.KoszulDifferentialSquareZero
+public import Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
+public import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
+public import Mathlib.LinearAlgebra.TensorProduct.Map
 
 /-!
 # Koszul complex of a finite sequence
@@ -31,6 +33,8 @@ The bases and degree-zero/one identifications are Mathlib's
 `Module.Basis.exteriorPower`, `exteriorPower.zeroEquiv`, and `exteriorPower.oneEquiv`
 (lem-weil-pbc-exterior-power-free-basis).
 -/
+
+@[expose] public section
 
 universe u v
 

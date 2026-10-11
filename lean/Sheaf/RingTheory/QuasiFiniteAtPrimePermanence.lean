@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import Sheaf.RingTheory.QuasiFiniteAtPrime
+module
+
+public import Sheaf.RingTheory.QuasiFiniteAtPrime
 
 /-!
 # Quasi-finiteness at a prime over an intermediate ring
@@ -11,6 +13,8 @@ import Sheaf.RingTheory.QuasiFiniteAtPrime
 Source: Stacks Project, Algebra, Lemma 10.122.10 (Tag 0C6H)
 (blueprint: lem-weil-pbc-quasi-finite-at-prime-permanence).
 -/
+
+@[expose] public section
 
 universe u v w
 

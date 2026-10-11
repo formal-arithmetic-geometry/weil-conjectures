@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Mathlib.Algebra.Homology.Embedding.CochainComplex
+module
+
+public import Mathlib.Algebra.Homology.Embedding.CochainComplex
 
 /-!
 # Successive canonical lower truncations
@@ -11,6 +13,8 @@ import Mathlib.Algebra.Homology.Embedding.CochainComplex
 Source: Stacks Project, Homology, Section 12.15 (Tag 0118), and Derived Categories,
 Remark 13.12.4 (Tag 08J5) (blueprint: lem-pc-derived-lower-truncation-step-ses).
 -/
+
+@[expose] public section
 
 universe v u
 

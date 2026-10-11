@@ -1,11 +1,15 @@
-import Sheaf.AlgebraicGeometry.EtaleGraphSectionExtensionMap
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FiniteEtale
+module
+
+public import Sheaf.AlgebraicGeometry.EtaleGraphSectionExtensionMap
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FiniteEtale
 
 /-! # Injectivity of extension by zero into direct image
 
 Source: Stacks Project, `etale-cohomology.tex`, Lemma 0F4L (lemma-shriek-into-star-separated-etale),
 second paragraph of the proof (blueprint: lem-weil-pbc-etale-shriek-to-star-injective).
 -/
+
+@[expose] public section
 
 universe u
 

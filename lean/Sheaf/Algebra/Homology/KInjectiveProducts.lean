@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Mathlib.Algebra.Homology.HomologicalComplexLimits
-import Mathlib.Algebra.Homology.DerivedCategory.Basic
-import Sheaf.CategoryTheory.KInjectiveBridge
+module
+
+public import Mathlib.Algebra.Homology.HomologicalComplexLimits
+public import Mathlib.Algebra.Homology.DerivedCategory.Basic
+public import Sheaf.CategoryTheory.KInjectiveBridge
 
 /-!
 # Termwise products of K-injective complexes
@@ -13,6 +15,8 @@ import Sheaf.CategoryTheory.KInjectiveBridge
 Source: Stacks Project, Derived Categories, Lemma 13.31.5, Tag 0BK6
 (blueprint: lem-pc-ringed-space-product-kinjective).
 -/
+
+@[expose] public section
 
 universe w v u t
 

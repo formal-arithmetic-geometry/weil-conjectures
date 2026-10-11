@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group Q1
 -/
-import Mathlib.RingTheory.Smooth.StandardSmooth
+module
+
+public import Mathlib.RingTheory.Smooth.StandardSmooth
 
 /-!
 # Standard smooth presentations containing prescribed generators
@@ -11,6 +13,8 @@ import Mathlib.RingTheory.Smooth.StandardSmooth
 Source: Stacks Project, Smoothing Ring Maps, Lemma Tag 07EY
 (blueprint: lem-weil-pbc-standard-smooth-include-generators).
 -/
+
+@[expose] public section
 
 universe u v
 

@@ -3,12 +3,14 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import Mathlib.RingTheory.Noetherian.Defs
-import Mathlib.RingTheory.KrullDimension.Basic
-import Mathlib.RingTheory.Length
-import Mathlib.RingTheory.Localization.FractionRing
-import Mathlib.RingTheory.QuotSMulTop
-import Mathlib.RingTheory.LocalRing.Defs
+module
+
+public import Mathlib.RingTheory.Noetherian.Defs
+public import Mathlib.RingTheory.KrullDimension.Basic
+public import Mathlib.RingTheory.Length
+public import Mathlib.RingTheory.Localization.FractionRing
+public import Mathlib.RingTheory.QuotSMulTop
+public import Mathlib.RingTheory.LocalRing.Defs
 
 /-!
 # Bounded length for a fraction-field submodule modulo a scalar
@@ -16,6 +18,8 @@ import Mathlib.RingTheory.LocalRing.Defs
 Source: Stacks Project, Algebra, Tag 00PE, `lemma-finite-length`
 (blueprint: lem-weil-pbc-dim-one-submodule-quotient-finite-length).
 -/
+
+@[expose] public section
 
 universe u v
 

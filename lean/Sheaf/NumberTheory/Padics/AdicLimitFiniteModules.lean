@@ -3,11 +3,13 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import Sheaf.NumberTheory.Padics.CoefficientExtension
-import Mathlib.Algebra.Category.ModuleCat.Limits
-import Mathlib.RingTheory.AdicCompletion.Functoriality
-import Mathlib.Topology.Algebra.Nonarchimedean.AdicTopology
-import Mathlib.LinearAlgebra.TensorProduct.Quotient
+module
+
+public import Sheaf.NumberTheory.Padics.CoefficientExtension
+public import Mathlib.Algebra.Category.ModuleCat.Limits
+public import Mathlib.RingTheory.AdicCompletion.Functoriality
+public import Mathlib.Topology.Algebra.Nonarchimedean.AdicTopology
+public import Mathlib.LinearAlgebra.TensorProduct.Quotient
 
 /-!
 # Adic systems of finite modules over p-adic coefficient rings
@@ -21,6 +23,8 @@ quotient is represented by its underlying module over the valuation ring, annihi
 by the corresponding ideal. Surjectivity and the specified kernel say that the
 transition induces the required quotient isomorphism.
 -/
+
+@[expose] public section
 
 universe u v w z
 

@@ -3,11 +3,13 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group U1
 -/
-import Mathlib.Algebra.Category.ModuleCat.Abelian
-import Mathlib.Algebra.Category.ModuleCat.Monoidal.Basic
-import Mathlib.Algebra.Category.ModuleCat.Projective
-import Mathlib.CategoryTheory.Monoidal.Tor
-import Mathlib.RingTheory.Flat.Equalizer
+module
+
+public import Mathlib.Algebra.Category.ModuleCat.Abelian
+public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Basic
+public import Mathlib.Algebra.Category.ModuleCat.Projective
+public import Mathlib.CategoryTheory.Monoidal.Tor
+public import Mathlib.RingTheory.Flat.Equalizer
 
 /-!
 # Kernel base change for a two-term complex
@@ -18,6 +20,8 @@ Source: Stacks Project, Algebra, proof of Tag 00S2, final paragraph
 The algebra clause uses tensor symmetry to place the algebra factor first, where Mathlib's
 `LinearMap.tensorKer` is already linear over that algebra.
 -/
+
+@[expose] public section
 
 universe u
 

@@ -2,9 +2,11 @@
 Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under the Apache 2.0 license as described in the file LICENSE.
 -/
-import Sheaf.Algebra.Homology.BaseDerivedTensorCohomologyModel
-import Sheaf.Algebra.Homology.RingTensorCohomology
-import Mathlib.RingTheory.Localization.AtPrime.Basic
+module
+
+public import Sheaf.Algebra.Homology.BaseDerivedTensorCohomologyModel
+public import Sheaf.Algebra.Homology.RingTensorCohomology
+public import Mathlib.RingTheory.Localization.AtPrime.Basic
 
 /-! # Localization of cohomology of a derived tensor
 
@@ -20,6 +22,8 @@ and after localization. Naturality is expressed using maps between cohomology mo
 their equations identify them with the maps induced by a complex morphism and the unique
 counit-compatible comparison between the two derived functors.
 -/
+
+@[expose] public section
 
 set_option autoImplicit false
 

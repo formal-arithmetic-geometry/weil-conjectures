@@ -3,14 +3,18 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import Sheaf.Algebra.Homology.FilteredComplexSubquotients
-import Mathlib.Algebra.Homology.SpectralSequence.Basic
+module
+
+public import Sheaf.Algebra.Homology.FilteredComplexSubquotients
+public import Mathlib.Algebra.Homology.SpectralSequence.Basic
 
 /-! # The functorial second page of a filtered complex
 
 Source: Stacks Project, Homology, Tag 012K, quotient-complex image description;
 Derived Categories, Tag 015K (blueprint: def-sp-filtered-page-two-model).
 -/
+
+@[expose] public section
 
 universe uM vM
 

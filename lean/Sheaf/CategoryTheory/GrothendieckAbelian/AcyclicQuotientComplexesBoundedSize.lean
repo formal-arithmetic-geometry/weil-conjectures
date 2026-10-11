@@ -3,11 +3,13 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import Sheaf.CategoryTheory.BoundedSubobjectSize
-import Mathlib.Algebra.Homology.Embedding.CochainComplex
-import Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
-import Mathlib.Algebra.Homology.HomologicalComplexLimits
-import Mathlib.Algebra.Homology.HomologicalComplexAbelian
+module
+
+public import Sheaf.CategoryTheory.BoundedSubobjectSize
+public import Mathlib.Algebra.Homology.Embedding.CochainComplex
+public import Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
+public import Mathlib.Algebra.Homology.HomologicalComplexLimits
+public import Mathlib.Algebra.Homology.HomologicalComplexAbelian
 
 /-!
 # Bounded-size generators for acyclic complexes
@@ -16,6 +18,8 @@ Source: Stacks Project, `injectives.tex`, Lemma
 `lemma-acyclic-quotient-complexes-bounded-size`
 (blueprint: lem-pur-kinjective-acyclic-quotient-complexes-bounded-size).
 -/
+
+@[expose] public section
 
 universe v u
 

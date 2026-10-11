@@ -1,6 +1,8 @@
-import Mathlib.RingTheory.Smooth.Basic
-import Mathlib.RingTheory.Ideal.Cotangent
-import Mathlib.Algebra.MvPolynomial.Basic
+module
+
+public import Mathlib.RingTheory.Smooth.Basic
+public import Mathlib.RingTheory.Ideal.Cotangent
+public import Mathlib.Algebra.MvPolynomial.Basic
 
 /-!
 # Smooth presentation with free conormal module
@@ -8,6 +10,8 @@ import Mathlib.Algebra.MvPolynomial.Basic
 Source: Stacks Project, Smoothing Ring Maps, Lemma 07CE, clause (1) for `a = 1`, smooth case
 (blueprint: lem-weil-pbc-improve-presentation-smooth-conormal-free).
 -/
+
+@[expose] public section
 
 universe u v
 

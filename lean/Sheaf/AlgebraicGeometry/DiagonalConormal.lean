@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import Mathlib.AlgebraicGeometry.Pullbacks
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackFree
-import Sheaf.AlgebraicGeometry.TensorPullback
+module
+
+public import Mathlib.AlgebraicGeometry.Pullbacks
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackFree
+public import Sheaf.AlgebraicGeometry.TensorPullback
 
 /-!
 # Conormal module of the diagonal
@@ -14,6 +16,8 @@ import Sheaf.AlgebraicGeometry.TensorPullback
 Source: Stacks Project, Tags 01R2, 01KJ and 08S2
 (blueprint: def-sc-diagonal-conormal).
 -/
+
+@[expose] public section
 
 universe u
 

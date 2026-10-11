@@ -3,12 +3,14 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group U1
 -/
-import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
-import Mathlib.AlgebraicGeometry.Morphisms.Proper
-import Mathlib.AlgebraicGeometry.Morphisms.Flat
-import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
-import Mathlib.CategoryTheory.Adjunction.Basic
-import Mathlib.CategoryTheory.Limits.Preserves.Basic
+module
+
+public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
+public import Mathlib.AlgebraicGeometry.Morphisms.Proper
+public import Mathlib.AlgebraicGeometry.Morphisms.Flat
+public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
+public import Mathlib.CategoryTheory.Adjunction.Basic
+public import Mathlib.CategoryTheory.Limits.Preserves.Basic
 
 /-!
 # The right adjoint of proper flat derived direct image preserves direct sums
@@ -16,6 +18,8 @@ import Mathlib.CategoryTheory.Limits.Preserves.Basic
 Source: Stacks Project, Duality for Schemes, Lemma 48.12.1, Section Tag 0E4H
 (blueprint: lem-sc-proper-flat-right-adjoint-direct-sums).
 -/
+
+@[expose] public section
 
 set_option autoImplicit false
 

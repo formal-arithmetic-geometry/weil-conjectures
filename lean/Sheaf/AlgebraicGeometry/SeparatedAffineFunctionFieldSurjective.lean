@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import Mathlib.AlgebraicGeometry.FunctionField
-import Mathlib.AlgebraicGeometry.Morphisms.Separated
-import Mathlib.RingTheory.KrullDimension.Basic
-import Mathlib.RingTheory.TensorProduct.Maps
+module
+
+public import Mathlib.AlgebraicGeometry.FunctionField
+public import Mathlib.AlgebraicGeometry.Morphisms.Separated
+public import Mathlib.RingTheory.KrullDimension.Basic
+public import Mathlib.RingTheory.TensorProduct.Maps
 
 /-!
 # Separated affine and local charts surject onto the function field
@@ -14,6 +16,8 @@ import Mathlib.RingTheory.TensorProduct.Maps
 Source: literature/stacks-project/varieties.tex, Varieties Lemma 09NB,
 proof, separatedness paragraph (blueprint: lem-sc-separated-affine-function-field-surjective)
 -/
+
+@[expose] public section
 
 open scoped TensorProduct
 open AlgebraicGeometry

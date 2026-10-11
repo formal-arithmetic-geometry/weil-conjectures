@@ -3,13 +3,17 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group U1
 -/
-import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
+module
+
+public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
 
 /-! # Canonical derived restriction and its adjoint maps on opens
 
 Source: Stacks Project, Cohomology, Tag 08BV
 (blueprint: def-pc-derived-open-restriction-maps).
 -/
+
+@[expose] public section
 
 universe u w
 

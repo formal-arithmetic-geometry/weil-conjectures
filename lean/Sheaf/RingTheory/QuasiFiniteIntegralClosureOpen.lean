@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import Sheaf.RingTheory.QuasiFiniteAtPrime
-import Mathlib.RingTheory.IntegralClosure.Algebra.Basic
-import Mathlib.RingTheory.Localization.Away.Basic
-import Mathlib.AlgebraicGeometry.OpenImmersion
+module
+
+public import Sheaf.RingTheory.QuasiFiniteAtPrime
+public import Mathlib.RingTheory.IntegralClosure.Algebra.Basic
+public import Mathlib.RingTheory.Localization.Away.Basic
+public import Mathlib.AlgebraicGeometry.OpenImmersion
 
 /-!
 # Global affine Zariski main theorem
@@ -14,6 +16,8 @@ import Mathlib.AlgebraicGeometry.OpenImmersion
 Source: Stacks Project, Algebra, Tag 00QB; Morphisms, Tag 03GU
 (blueprint: lem-weil-pbc-quasi-finite-ring-map-integral-closure-open).
 -/
+
+@[expose] public section
 
 universe u v
 

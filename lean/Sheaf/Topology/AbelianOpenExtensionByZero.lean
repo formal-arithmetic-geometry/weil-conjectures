@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group T1
 -/
-import Sheaf.CategoryTheory.SiteExtensionByZeroPresheaf
-import Mathlib.Topology.Sheaves.Sheafify
+module
+
+public import Sheaf.CategoryTheory.SiteExtensionByZeroPresheaf
+public import Mathlib.Topology.Sheaves.Sheafify
 
 /-! # Extension by zero of abelian sheaves on an open subspace
 
@@ -14,6 +16,8 @@ Source: Stacks Project, Sheaves, Definition 00A4 and Lemma 00A5
 The direct sum over inclusions is the existing slice-site construction: it has one
 summand on opens contained in U and no summands on the other opens.
 -/
+
+@[expose] public section
 
 universe u
 

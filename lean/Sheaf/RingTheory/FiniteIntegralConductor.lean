@@ -3,12 +3,14 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Mathlib.RingTheory.Noetherian.Defs
-import Mathlib.RingTheory.KrullDimension.Basic
-import Mathlib.RingTheory.Jacobson.Ideal
-import Mathlib.RingTheory.Localization.FractionRing
-import Mathlib.RingTheory.Spectrum.Maximal.Defs
-import Mathlib.RingTheory.Finiteness.Defs
+module
+
+public import Mathlib.RingTheory.Noetherian.Defs
+public import Mathlib.RingTheory.KrullDimension.Basic
+public import Mathlib.RingTheory.Jacobson.Ideal
+public import Mathlib.RingTheory.Localization.FractionRing
+public import Mathlib.RingTheory.Spectrum.Maximal.Defs
+public import Mathlib.RingTheory.Finiteness.Defs
 
 /-!
 # A conductor power for a finite intermediate ring
@@ -16,6 +18,8 @@ import Mathlib.RingTheory.Finiteness.Defs
 Source: Stacks Project, Varieties, Lemma 33.37.5 (Tag 09N2), finite-conductor paragraph
 (blueprint: lem-sc-finite-integral-conductor).
 -/
+
+@[expose] public section
 
 universe u v
 

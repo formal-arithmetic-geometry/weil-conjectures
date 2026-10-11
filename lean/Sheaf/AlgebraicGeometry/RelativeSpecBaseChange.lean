@@ -3,18 +3,22 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import Sheaf.AlgebraicGeometry.AffineMorphismRelativeSpec
-import Sheaf.AlgebraicGeometry.ModulePullbackTensor
-import Sheaf.AlgebraicGeometry.TensorPullbackStructureSheaf
-import Mathlib.AlgebraicGeometry.Pullbacks
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
-import WeilConjectures.AlgebraicGeometry.Modules.TensorSection
+module
+
+public import Sheaf.AlgebraicGeometry.AffineMorphismRelativeSpec
+public import Sheaf.AlgebraicGeometry.ModulePullbackTensor
+public import Sheaf.AlgebraicGeometry.TensorPullbackStructureSheaf
+public import Mathlib.AlgebraicGeometry.Pullbacks
+public import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
+public import WeilConjectures.AlgebraicGeometry.Modules.TensorSection
 
 /-! # Relative Spec commutes with base change
 
 Source: Stacks Project, Constructions, Lemma 01LX (spec-properties), clause (2),
 and Section 01LQ (blueprint: lem-weil-pbc-relative-spec-base-change).
 -/
+
+@[expose] public section
 
 universe u
 

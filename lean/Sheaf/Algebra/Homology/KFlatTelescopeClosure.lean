@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group V1
 -/
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.Flat
-import Sheaf.Algebra.Homology.KFlat
-import Mathlib.Algebra.Homology.HomologicalComplexLimits
-import Mathlib.Algebra.Homology.HomotopyCategory.MappingCone
+module
+
+public import Sheaf.Algebra.Category.ModuleCat.Sheaf.Flat
+public import Sheaf.Algebra.Homology.KFlat
+public import Mathlib.Algebra.Homology.HomologicalComplexLimits
+public import Mathlib.Algebra.Homology.HomotopyCategory.MappingCone
 
 /-!
 # K-flatness and flatness under the telescope construction
@@ -17,6 +19,8 @@ Source: Stacks Project, Cohomology on Sites, proof of Lemma 06YS, with Lemmas 06
 The site and module universes are those of the landed `SheafOfModules.IsFlat`
 (`C : Type u`, `Category.{u} C`, rings and modules in `u`).
 -/
+
+@[expose] public section
 
 universe u
 

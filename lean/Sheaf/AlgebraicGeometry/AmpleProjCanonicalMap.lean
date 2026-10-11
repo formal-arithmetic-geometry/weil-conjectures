@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import Sheaf.AlgebraicGeometry.InvertibleSectionRing
-import Sheaf.AlgebraicGeometry.Ample
-import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic
+module
+
+public import Sheaf.AlgebraicGeometry.InvertibleSectionRing
+public import Sheaf.AlgebraicGeometry.Ample
+public import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic
 
 /-!
 # The canonical morphism to Proj of the section ring
@@ -13,6 +15,8 @@ import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic
 Source: Stacks Project, Properties, Tag 01PZ, existence and clause (1), and Constructions,
 Tag 01N8, the localized chart formula (blueprint: lem-sc-ample-proj-canonical-map).
 -/
+
+@[expose] public section
 
 universe v
 

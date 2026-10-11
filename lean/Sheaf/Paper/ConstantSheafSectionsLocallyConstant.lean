@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Mathlib.CategoryTheory.Sites.ConstantSheaf
-import Mathlib.Topology.LocallyConstant.Algebra
-import Mathlib.AlgebraicGeometry.Sites.AffineEtale
+module
+
+public import Mathlib.CategoryTheory.Sites.ConstantSheaf
+public import Mathlib.Topology.LocallyConstant.Algebra
+public import Mathlib.AlgebraicGeometry.Sites.AffineEtale
 
 /-!
 # Sections of a constant étale sheaf
@@ -14,6 +16,8 @@ Source: Stacks Project, Etale Cohomology, Remark 59.23.2 (Tag 03P5), using
 Lemma 59.15.8 (Tag 03O3) and Groupoids, Example 39.5.6 (Tag 03YW).
 (blueprint: lem-weil-pbc-constant-sheaf-sections-locally-constant)
 -/
+
+@[expose] public section
 
 open CategoryTheory
 

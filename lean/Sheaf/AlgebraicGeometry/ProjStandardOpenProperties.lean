@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group J1
 -/
-import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic
+module
+
+public import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic
 
 /-!
 # Basis, inclusions and finite coverings of standard opens of Proj
@@ -11,6 +13,8 @@ import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic
 Source: Stacks Project, Constructions, Section 01M3 and Lemma 01M4;
 Algebra, Lemma 00JP (blueprint: lem-weil-pbc-proj-standard-open-inclusion).
 -/
+
+@[expose] public section
 
 universe u v w
 

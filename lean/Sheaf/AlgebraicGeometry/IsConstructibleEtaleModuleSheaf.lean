@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import WeilConjectures.ConstructibleSheaf.Defs
-import WeilConjectures.CategoryTheory.GrothendieckAbelian.ConcreteCoefficients
-import Sheaf.AlgebraicGeometry.LocallyClosedStratification
+module
+
+public import WeilConjectures.ConstructibleSheaf.Defs
+public import WeilConjectures.CategoryTheory.GrothendieckAbelian.ConcreteCoefficients
+public import Sheaf.AlgebraicGeometry.LocallyClosedStratification
 
 /-!
 # Constructible etale sheaves of modules with finite constant values
@@ -13,6 +15,8 @@ import Sheaf.AlgebraicGeometry.LocallyClosedStratification
 Source: Stacks Project, Tags 095E(3), 03RU and 09XZ, and the blueprint's global
 constructibility clause (blueprint: def-weil-pbc-etale-constructible-sheaf).
 -/
+
+@[expose] public section
 
 universe u
 

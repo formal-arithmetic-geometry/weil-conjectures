@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Mathlib.Algebra.MvPolynomial.Basic
-import Mathlib.AlgebraicGeometry.Scheme
-import Mathlib.Topology.KrullDimension
-import WeilConjectures.Mathlib.Topology.KrullDimension
+module
+
+public import Mathlib.Algebra.MvPolynomial.Basic
+public import Mathlib.AlgebraicGeometry.Scheme
+public import Mathlib.Topology.KrullDimension
+public import WeilConjectures.Mathlib.Topology.KrullDimension
 
 /-!
 # A global complete intersection has the expected dimension at every point
@@ -14,6 +16,8 @@ import WeilConjectures.Mathlib.Topology.KrullDimension
 Source: literature/stacks-project/algebra.tex, Algebra, Section 00S8
 (blueprint: lem-weil-pbc-global-complete-intersection-equidimensional).
 -/
+
+@[expose] public section
 
 universe u
 

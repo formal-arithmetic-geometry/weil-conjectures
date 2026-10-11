@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import Sheaf.CategoryTheory.IsSaturatedTriangulatedMultiplicativeSystem
+module
+
+public import Sheaf.CategoryTheory.IsSaturatedTriangulatedMultiplicativeSystem
 
 /-! # Completing denominators to morphisms of distinguished triangles
 
@@ -11,6 +13,8 @@ Source: Stacks Project, Derived Categories, Tag 05R9 (lemma-limit-triangles),
 construction over a prescribed denominator, in its incoming-arrow form
 (blueprint: lem-pur-triangle-completion-ms6-05r9).
 -/
+
+@[expose] public section
 
 universe u v
 

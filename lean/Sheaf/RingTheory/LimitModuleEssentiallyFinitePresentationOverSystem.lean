@@ -3,16 +3,18 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group G1
 -/
-import Mathlib.Algebra.Category.Ring.Basic
-import Mathlib.Algebra.Category.Grp.Basic
-import Mathlib.CategoryTheory.Category.Preorder
-import Mathlib.CategoryTheory.Limits.HasLimits
-import Mathlib.RingTheory.LocalRing.Basic
-import Mathlib.RingTheory.EssentialFiniteness
-import Mathlib.RingTheory.FinitePresentation
-import Mathlib.RingTheory.TensorProduct.Basic
-import Mathlib.LinearAlgebra.TensorProduct.Basic
-import Mathlib.LinearAlgebra.Quotient.Basic
+module
+
+public import Mathlib.Algebra.Category.Ring.Basic
+public import Mathlib.Algebra.Category.Grp.Basic
+public import Mathlib.CategoryTheory.Category.Preorder
+public import Mathlib.CategoryTheory.Limits.HasLimits
+public import Mathlib.RingTheory.LocalRing.Basic
+public import Mathlib.RingTheory.EssentialFiniteness
+public import Mathlib.RingTheory.FinitePresentation
+public import Mathlib.RingTheory.TensorProduct.Basic
+public import Mathlib.LinearAlgebra.TensorProduct.Basic
+public import Mathlib.LinearAlgebra.Quotient.Basic
 
 /-!
 # Descent of a local algebra and a presented module along a given local-ring system
@@ -20,6 +22,8 @@ import Mathlib.LinearAlgebra.Quotient.Basic
 Source: Stacks Project, Algebra, Tags 00QV, 00QX and 00R1
 (blueprint: lem-weil-pbc-limit-module-essentially-finite-presentation-over-system).
 -/
+
+@[expose] public section
 
 universe u v p
 

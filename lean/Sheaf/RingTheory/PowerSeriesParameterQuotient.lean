@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import Mathlib.RingTheory.MvPowerSeries.Equiv
-import Mathlib.RingTheory.MvPowerSeries.Inverse
-import Sheaf.RingTheory.CohenRing
-import Sheaf.RingTheory.IsRegularSystemOfParameters
+module
+
+public import Mathlib.RingTheory.MvPowerSeries.Equiv
+public import Mathlib.RingTheory.MvPowerSeries.Inverse
+public import Sheaf.RingTheory.CohenRing
+public import Sheaf.RingTheory.IsRegularSystemOfParameters
 
 /-!
 # Quotients of power series rings by partial parameter systems
@@ -14,6 +16,8 @@ import Sheaf.RingTheory.IsRegularSystemOfParameters
 Source: Stacks Project, More on Algebra, Lemma Tag 07NM, clauses (2) and (4)
 (blueprint: lem-weil-pbc-power-series-parameter-quotient).
 -/
+
+@[expose] public section
 
 universe u
 

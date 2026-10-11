@@ -1,6 +1,8 @@
-import Sheaf.AlgebraicGeometry.DivisorModule
-import Sheaf.AlgebraicGeometry.LocalDvrBaseChange
-import WeilConjectures.AlgebraicGeometry.Curve.Compactification
+module
+
+public import Sheaf.AlgebraicGeometry.DivisorModule
+public import Sheaf.AlgebraicGeometry.LocalDvrBaseChange
+public import WeilConjectures.AlgebraicGeometry.Curve.Compactification
 
 /-!
 # Boundary principal divisors and algebraically closed base change
@@ -8,6 +10,8 @@ import WeilConjectures.AlgebraicGeometry.Curve.Compactification
 Source: blueprint sec-curve-estimates/sk-prop-ext-invariance,
   affine-case proof, unit quotient paragraph (blueprint: lem-sc-affine-unit-divisor-base-change).
 -/
+
+@[expose] public section
 
 set_option autoImplicit false
 

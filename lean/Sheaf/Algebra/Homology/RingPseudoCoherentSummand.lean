@@ -1,7 +1,11 @@
-import Mathlib.Algebra.Category.ModuleCat.Biproducts
+module
 
-import Sheaf.RingTheory.MPseudoCoherent
-import Sheaf.RingTheory.RingPseudoCoherent
+public import Mathlib.Algebra.Category.ModuleCat.Biproducts
+
+public import Sheaf.RingTheory.MPseudoCoherent
+public import Sheaf.RingTheory.RingPseudoCoherent
+
+@[expose] public section
 
 universe w v u
 

@@ -3,13 +3,15 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import Mathlib.RingTheory.RingHom.Flat
-import Mathlib.RingTheory.Noetherian.Defs
-import Mathlib.RingTheory.Finiteness.Defs
-import Mathlib.RingTheory.LocalRing.Basic
-import Mathlib.RingTheory.TensorProduct.Basic
-import Mathlib.RingTheory.Localization.Defs
-import Mathlib.LinearAlgebra.TensorProduct.Quotient
+module
+
+public import Mathlib.RingTheory.RingHom.Flat
+public import Mathlib.RingTheory.Noetherian.Defs
+public import Mathlib.RingTheory.Finiteness.Defs
+public import Mathlib.RingTheory.LocalRing.Basic
+public import Mathlib.RingTheory.TensorProduct.Basic
+public import Mathlib.RingTheory.Localization.Defs
+public import Mathlib.LinearAlgebra.TensorProduct.Quotient
 
 /-!
 # Another variant of the local criterion of flatness
@@ -17,6 +19,8 @@ import Mathlib.LinearAlgebra.TensorProduct.Quotient
 Source: Stacks Project, Algebra, Tag 00MO, with the ideal-tensor description of Tor
 in Tag 00M6 (blueprint: lem-weil-pbc-flat-another-variant-local-criterion).
 -/
+
+@[expose] public section
 
 universe u v w z t
 

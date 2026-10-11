@@ -1,10 +1,14 @@
-import Mathlib.CategoryTheory.Sites.Hypercover.Homotopy
+module
+
+public import Mathlib.CategoryTheory.Sites.Hypercover.Homotopy
 
 /-! # Two covering morphisms induce the same zeroth Cech map
 
 Source: literature/stacks-project/sites.tex, Sites, Lemma 00W7 and Remark 00W8
 (blueprint: lem-weil-pbc-site-covering-morphisms-same-h0-map).
 -/
+
+@[expose] public section
 
 universe w v u
 

@@ -3,13 +3,15 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group P1
 -/
-import Mathlib.FieldTheory.Separable
-import Mathlib.LinearAlgebra.Dimension.Finrank
-import Mathlib.RingTheory.Localization.Away.Basic
-import Mathlib.RingTheory.Localization.FractionRing
-import Mathlib.RingTheory.Noetherian.Defs
-import Mathlib.AlgebraicGeometry.Morphisms.Etale
-import Mathlib.AlgebraicGeometry.Morphisms.Finite
+module
+
+public import Mathlib.FieldTheory.Separable
+public import Mathlib.LinearAlgebra.Dimension.Finrank
+public import Mathlib.RingTheory.Localization.Away.Basic
+public import Mathlib.RingTheory.Localization.FractionRing
+public import Mathlib.RingTheory.Noetherian.Defs
+public import Mathlib.AlgebraicGeometry.Morphisms.Etale
+public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 
 /-!
 # Spreading a finite separable extension
@@ -18,6 +20,8 @@ Source: smooth purity blueprint, `sk-prop-sf-cbc`, finite-algebra calculation in
 `lem-weil-pbc-finite-pushforward-generic-constructible`
 (blueprint: lem-weil-pbc-spread-finite-separable-extension).
 -/
+
+@[expose] public section
 
 set_option autoImplicit false
 

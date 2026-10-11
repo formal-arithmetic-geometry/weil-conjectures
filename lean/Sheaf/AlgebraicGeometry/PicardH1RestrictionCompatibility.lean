@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group U1
 -/
-import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-import WeilConjectures.AlgebraicGeometry.Sites.GmPicard
-import Sheaf.AlgebraicGeometry.TensorPullback
-import Sheaf.AlgebraicGeometry.ZariskiUnitsRestriction
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+public import WeilConjectures.AlgebraicGeometry.Sites.GmPicard
+public import Sheaf.AlgebraicGeometry.TensorPullback
+public import Sheaf.AlgebraicGeometry.ZariskiUnitsRestriction
 
 /-!
 # Picard restriction and first cohomology of units
@@ -14,6 +16,8 @@ import Sheaf.AlgebraicGeometry.ZariskiUnitsRestriction
 Source: Stacks Project, Tag 09NY, final sentence of the proof, with Tags 02UV and 09NU
 (blueprint: lem-sc-picard-h1-restriction-compatibility).
 -/
+
+@[expose] public section
 
 universe v
 

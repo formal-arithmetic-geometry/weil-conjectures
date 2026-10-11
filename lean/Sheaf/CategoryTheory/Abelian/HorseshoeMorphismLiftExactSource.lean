@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Sheaf.CategoryTheory.Abelian.HorseshoeMorphismLift
+module
+
+public import Sheaf.CategoryTheory.Abelian.HorseshoeMorphismLift
 
 /-!
 # Horseshoe morphism lifts from exact augmented source complexes
@@ -12,6 +14,8 @@ Source: the classical horseshoe comparison argument, using Stacks Project, Tags 
 013R; the Cartan--Eilenberg construction of Tag 015I motivates its application
 (blueprint: lem-weil-pbc-horseshoe-morphism-lift-exact-source).
 -/
+
+@[expose] public section
 
 universe v u
 

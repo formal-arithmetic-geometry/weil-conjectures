@@ -3,19 +3,21 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group G1
 -/
-import Mathlib.AlgebraicGeometry.Pullbacks
-import Mathlib.Algebra.Category.ModuleCat.Abelian
-import Mathlib.Algebra.Category.ModuleCat.Limits
-import Mathlib.Algebra.Category.ModuleCat.FilteredColimits
-import Sheaf.AlgebraicGeometry.ModulePullbackTensor
-import Sheaf.Topology.RingedSpaceModuleCohomology
-import WeilConjectures.Mathlib.CategoryTheory.Sites.Monoidal
-import Mathlib.CategoryTheory.Abelian.Injective.Ext
-import Mathlib.Algebra.Homology.DerivedCategory.Ext.Map
-import Mathlib.Algebra.Homology.DerivedCategory.Ext.EnoughInjectives
-import Mathlib.Algebra.Category.ModuleCat.Monoidal.Closed
-import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheaf
-import Mathlib.Topology.Sheaves.Functors
+module
+
+public import Mathlib.AlgebraicGeometry.Pullbacks
+public import Mathlib.Algebra.Category.ModuleCat.Abelian
+public import Mathlib.Algebra.Category.ModuleCat.Limits
+public import Mathlib.Algebra.Category.ModuleCat.FilteredColimits
+public import Sheaf.AlgebraicGeometry.ModulePullbackTensor
+public import Sheaf.Topology.RingedSpaceModuleCohomology
+public import WeilConjectures.Mathlib.CategoryTheory.Sites.Monoidal
+public import Mathlib.CategoryTheory.Abelian.Injective.Ext
+public import Mathlib.Algebra.Homology.DerivedCategory.Ext.Map
+public import Mathlib.Algebra.Homology.DerivedCategory.Ext.EnoughInjectives
+public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Closed
+public import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheaf
+public import Mathlib.Topology.Sheaves.Functors
 
 /-! # Field-linear cohomology, pullback and cup product of scheme modules
 
@@ -27,6 +29,8 @@ Cohomology is the recorded right derived functor on O-modules, with scalars rest
 along the structure map. Its canonical comparison with Ext transports exact inverse-image
 and tensor operations on sheaves of k-vector spaces back to these cohomology modules.
 -/
+
+@[expose] public section
 
 universe u
 open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory Opposite

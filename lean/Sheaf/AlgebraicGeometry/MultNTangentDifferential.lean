@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group N1
 -/
-import Sheaf.AlgebraicGeometry.SchemeTangentSpace
-import WeilConjectures.AlgebraicGeometry.GroupScheme.Basic
-import WeilConjectures.AlgebraicGeometry.GroupScheme.Defs
+module
+
+public import Sheaf.AlgebraicGeometry.SchemeTangentSpace
+public import WeilConjectures.AlgebraicGeometry.GroupScheme.Basic
+public import WeilConjectures.AlgebraicGeometry.GroupScheme.Defs
 
 /-!
 # Differential of multiplication by d
@@ -14,6 +16,8 @@ Source: literature/stacks-project/groupoids.tex, proof of lemma-group-scheme-add
  tangent-vectors
 (blueprint: lem-sc-mult-n-tangent-differential).
 -/
+
+@[expose] public section
 
 universe u
 

@@ -3,12 +3,14 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import Sheaf.AlgebraicGeometry.Coherent
-import Sheaf.AlgebraicGeometry.DerivedCategory
-import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
-import Sheaf.AlgebraicGeometry.ClosedSubsetProperOverBase
-import Mathlib.AlgebraicGeometry.Morphisms.Immersion
-import Mathlib.AlgebraicGeometry.Noetherian
+module
+
+public import Sheaf.AlgebraicGeometry.Coherent
+public import Sheaf.AlgebraicGeometry.DerivedCategory
+public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
+public import Sheaf.AlgebraicGeometry.ClosedSubsetProperOverBase
+public import Mathlib.AlgebraicGeometry.Morphisms.Immersion
+public import Mathlib.AlgebraicGeometry.Noetherian
 
 /-!
 # Quasi-compact reduction for a proper-support complex
@@ -17,6 +19,8 @@ Source: literature/stacks-project/perfect.tex, Tag 08EV, label
 `perfect-lemma-perfect-direct-image`, proof from “Let T be the union...” through
 “Thus we may replace X by X'' (blueprint: lem-pc-direct-image-qc-support-reduction).
 -/
+
+@[expose] public section
 
 universe u w
 

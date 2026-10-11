@@ -3,12 +3,14 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import Sheaf.AlgebraicGeometry.MeromorphicDenominatorIdeal
-import WeilConjectures.AlgebraicGeometry.Modules.Dual
-import Mathlib.RingTheory.Lasker
-import Sheaf.AlgebraicGeometry.Coherent
-import WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar
-import Sheaf.AlgebraicGeometry.IdealModuleProductStalk
+module
+
+public import Sheaf.AlgebraicGeometry.MeromorphicDenominatorIdeal
+public import WeilConjectures.AlgebraicGeometry.Modules.Dual
+public import Mathlib.RingTheory.Lasker
+public import Sheaf.AlgebraicGeometry.Coherent
+public import WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar
+public import Sheaf.AlgebraicGeometry.IdealModuleProductStalk
 
 /-! # Regular-section exact sequences give lower-dimensional differences
 
@@ -16,6 +18,8 @@ Source: Stacks Project, Divisors, Tag 02P2 (Lemma 31.25.5, label
 `divisors-lemma-make-maps-regular-section`); Varieties, Tag 0BEM (blueprint:
 lem-sc-hilbert-difference).
 -/
+
+@[expose] public section
 
 universe u
 

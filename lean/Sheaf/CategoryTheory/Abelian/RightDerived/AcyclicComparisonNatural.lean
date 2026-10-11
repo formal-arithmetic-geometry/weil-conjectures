@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import WeilConjectures.CategoryTheory.Abelian.RightDerived.Acyclic
+module
+
+public import WeilConjectures.CategoryTheory.Abelian.RightDerived.Acyclic
 
 /-!
 # Naturality of acyclic-resolution comparisons
@@ -12,6 +14,7 @@ Source: literature/stacks-project/derived.tex, Tag 015E (blueprint:
 `lem-sc-acyclic-comparison-natural`).
 -/
 
+@[expose] public section
 
 universe u v u' v'
 

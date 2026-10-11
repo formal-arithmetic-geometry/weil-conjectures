@@ -3,17 +3,21 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Mathlib.CategoryTheory.Monoidal.Tor
-import Mathlib.Algebra.Category.ModuleCat.Monoidal.Basic
-import Mathlib.Algebra.Category.ModuleCat.Projective
-import Mathlib.Algebra.Category.ModuleCat.Abelian
-import Mathlib.Algebra.Homology.ShortComplex.ShortExact
+module
+
+public import Mathlib.CategoryTheory.Monoidal.Tor
+public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Basic
+public import Mathlib.Algebra.Category.ModuleCat.Projective
+public import Mathlib.Algebra.Category.ModuleCat.Abelian
+public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 
 /-! # Dimension shifting for Tor
 
 Source: literature/stacks-project/algebra.tex, Tags 00LY, 00LZ, 00M0, 00S2
 (blueprint: lem-sc-p1-tor-dimension-shift-natural).
 -/
+
+@[expose] public section
 
 universe u
 

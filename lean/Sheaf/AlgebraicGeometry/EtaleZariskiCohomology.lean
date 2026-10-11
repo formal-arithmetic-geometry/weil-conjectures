@@ -3,11 +3,13 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group U1
 -/
-import WeilConjectures.AlgebraicGeometry.Curve
-import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
-import Sheaf.AlgebraicGeometry.EtaleTensorSectionsSheaf
-import Sheaf.Topology.RingedSpaceModuleCohomology
+module
+
+public import WeilConjectures.AlgebraicGeometry.Curve
+public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
+public import Sheaf.AlgebraicGeometry.EtaleTensorSectionsSheaf
+public import Sheaf.Topology.RingedSpaceModuleCohomology
 
 /-!
 # Étale and Zariski cohomology of quasi-coherent modules on curves
@@ -21,6 +23,8 @@ derived functors `RingedSpace.moduleCohomology`, with their underlying additive 
 The comparison with the derived-global-sections encoding of étale cohomology is a
 stage-3 bridge, as specified by `def-weil-pbc-etale-cohomology`.
 -/
+
+@[expose] public section
 
 universe u
 

@@ -3,14 +3,18 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import WeilConjectures.Mathlib.RingTheory.Filtration
-import Mathlib.RingTheory.QuotSMulTop
+module
+
+public import WeilConjectures.Mathlib.RingTheory.Filtration
+public import Mathlib.RingTheory.QuotSMulTop
 
 /-! # Local criterion of flatness modulo a nonzerodivisor
 
 Source: literature/stacks-project/algebra.tex, Algebra, Lemma Tag 00ML and the remark
 following it (blueprint: lem-weil-pbc-flat-local-criterion-nonzerodivisor).
 -/
+
+@[expose] public section
 
 universe u v w
 

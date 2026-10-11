@@ -2,7 +2,9 @@
 Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 -/
-import Sheaf.Algebra.Homology.KFlatDerivedTensorAssociator
+module
+
+public import Sheaf.Algebra.Homology.KFlatDerivedTensorAssociator
 
 /-!
 # Transitivity of derived tensor products under base change
@@ -17,6 +19,8 @@ expressions are objects of `D(A)`, and the coefficient ring `B` acts through the
 second factor.  The proof is the K-flat triple-tensor construction, followed by the
 usual cohomology and flat base-change argument described in the DAG proof.
 -/
+
+@[expose] public section
 
 universe u wA wR
 

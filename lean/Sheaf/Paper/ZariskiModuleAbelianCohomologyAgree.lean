@@ -3,19 +3,23 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import Mathlib.AlgebraicGeometry.Scheme
-import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
-import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
-import WeilConjectures.Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Sheaf
-import Mathlib.Algebra.Category.Grp.AB
-import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImage
-import Sheaf.Topology.RingedSpaceModuleCohomology
+module
+
+public import Mathlib.AlgebraicGeometry.Scheme
+public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
+public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
+public import WeilConjectures.Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Sheaf
+public import Mathlib.Algebra.Category.Grp.AB
+public import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImage
+public import Sheaf.Topology.RingedSpaceModuleCohomology
 
 /-! # Cohomology of a Zariski module and its underlying abelian sheaf
 
 Source: Stacks Project, `sites-cohomology.tex`, Lemma Tag 03FD
 (blueprint: lem-sc-zariski-module-abelian-cohomology-agree).
 -/
+
+@[expose] public section
 
 universe u
 

@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group N1
 -/
-import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
-import Mathlib.AlgebraicGeometry.AffineTransitionLimit
-import Mathlib.Algebra.Homology.HomologicalComplexLimits
+module
+
+public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
+public import Mathlib.AlgebraicGeometry.AffineTransitionLimit
+public import Mathlib.Algebra.Homology.HomologicalComplexLimits
 
 /-! # Continuity of etale cohomology for systems of complexes
 
@@ -17,6 +19,8 @@ The diagrams and their object isomorphisms below present the varying-site system
 limit site and its cohomology diagram. The parameter `P` is fixed by an explicit equation
 with the derived adjunction unit, so the conclusion concerns the canonical map.
 -/
+
+@[expose] public section
 
 universe u
 

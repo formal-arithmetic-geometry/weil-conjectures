@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group G1
 -/
-import Sheaf.AlgebraicGeometry.EtaleSheaves
-import Mathlib.AlgebraicGeometry.Noetherian
-import Mathlib.CategoryTheory.Limits.Shapes.Biproducts
+module
+
+public import Sheaf.AlgebraicGeometry.EtaleSheaves
+public import Mathlib.AlgebraicGeometry.Noetherian
+public import Mathlib.CategoryTheory.Limits.Shapes.Biproducts
 
 /-!
 # Finite selection of geometric stalk tests
@@ -14,6 +16,8 @@ Source: smooth purity blueprint, unit `sk-prop-sf-cbc`, order 1604;
 Stacks Project, Tag 09Z6, partition argument
 (blueprint: lem-weil-pbc-constructible-noetherian-finite-selection).
 -/
+
+@[expose] public section
 
 universe u w
 

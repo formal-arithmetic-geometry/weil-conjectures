@@ -1,5 +1,9 @@
-import Mathlib.RingTheory.Ideal.GoingUp
-import Mathlib.RingTheory.KrullDimension.Basic
+module
+
+public import Mathlib.RingTheory.Ideal.GoingUp
+public import Mathlib.RingTheory.KrullDimension.Basic
+
+@[expose] public section
 
 universe u v
 

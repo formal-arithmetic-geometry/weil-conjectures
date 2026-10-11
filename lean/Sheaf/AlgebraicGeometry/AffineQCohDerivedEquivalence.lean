@@ -3,11 +3,13 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group S1
 -/
-import Sheaf.AlgebraicGeometry.DerivedCategory
-import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImage
-import Sheaf.Topology.RingedSpaceModuleCohomology
-import Mathlib.AlgebraicGeometry.Modules.Tilde
-import Mathlib.CategoryTheory.Triangulated.Functor
+module
+
+public import Sheaf.AlgebraicGeometry.DerivedCategory
+public import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImage
+public import Sheaf.Topology.RingedSpaceModuleCohomology
+public import Mathlib.AlgebraicGeometry.Modules.Tilde
+public import Mathlib.CategoryTheory.Triangulated.Functor
 
 /-!
 # The affine quasi-coherent derived equivalence
@@ -15,6 +17,8 @@ import Mathlib.CategoryTheory.Triangulated.Functor
 Source: Stacks Project, Derived Categories of Schemes, Lemma 36.3.5, Tag 06Z0
 (blueprint: lem-pc-affine-qcoh-derived-equivalence).
 -/
+
+@[expose] public section
 
 universe u wA wY
 

@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import Sheaf.AlgebraicGeometry.EtaleInverseImageModulesExact
+module
+
+public import Sheaf.AlgebraicGeometry.EtaleInverseImageModulesExact
 
 /-!
 # Linearity of the composition comparisons on constant-ring etale modules
@@ -11,6 +13,8 @@ import Sheaf.AlgebraicGeometry.EtaleInverseImageModulesExact
 Source: Stacks Project, Modules on Sites, Tags 03D8 and 03D7
 (blueprint: lem-weil-pbc-inverse-image-composition-module-linear).
 -/
+
+@[expose] public section
 
 universe u
 

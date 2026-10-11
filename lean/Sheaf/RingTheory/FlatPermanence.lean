@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group J1
 -/
-import Mathlib.RingTheory.RingHom.Flat
-import Mathlib.RingTheory.Flat.FaithfullyFlat.Basic
+module
+
+public import Mathlib.RingTheory.RingHom.Flat
+public import Mathlib.RingTheory.Flat.FaithfullyFlat.Basic
 
 /-!
 # Flatness descends through a faithfully flat module
@@ -12,6 +14,8 @@ import Mathlib.RingTheory.Flat.FaithfullyFlat.Basic
 Source: literature/stacks-project/algebra.tex, Algebra, Lemma Tag 039V (lemma-flat-permanence),
 line 8958 (blueprint: lem-weil-pbc-flat-permanence).
 -/
+
+@[expose] public section
 
 universe u v w
 

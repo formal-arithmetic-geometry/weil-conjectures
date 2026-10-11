@@ -3,18 +3,22 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
-import Mathlib.Algebra.Category.Ring.Colimits
-import Mathlib.Algebra.Homology.Additive
-import Mathlib.Algebra.Module.Projective
-import Mathlib.CategoryTheory.Category.Preorder
-import Mathlib.RingTheory.Finiteness.Defs
+module
+
+public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
+public import Mathlib.Algebra.Category.Ring.Colimits
+public import Mathlib.Algebra.Homology.Additive
+public import Mathlib.Algebra.Module.Projective
+public import Mathlib.CategoryTheory.Category.Preorder
+public import Mathlib.RingTheory.Finiteness.Defs
 
 /-! # Affine descent of bounded finite projective complexes
 
 Source: Stacks Project, More on Algebra, Lemma 15.76.18 (Tag 0BC7), affine complex case
 (blueprint: lem-pc-affine-perfect-colimit-descent).
 -/
+
+@[expose] public section
 
 universe u
 

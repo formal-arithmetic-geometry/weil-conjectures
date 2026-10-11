@@ -1,4 +1,6 @@
-import Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified
 
 /-!
 # Base change and restriction of unramified morphisms
@@ -6,6 +8,8 @@ import Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified
 Source: Stacks Project, Morphisms, Lemma 02GA and the final clause of Lemma 02G6
 (blueprint: lem-weil-pbc-unramified-base-change-open).
 -/
+
+@[expose] public section
 
 open CategoryTheory CategoryTheory.Limits
 

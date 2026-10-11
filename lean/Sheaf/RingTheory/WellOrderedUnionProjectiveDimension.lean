@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group J1
 -/
-import Sheaf.RingTheory.GlobalDimension
-import Mathlib.Order.RelClasses
-import Mathlib.LinearAlgebra.Quotient.Defs
+module
+
+public import Sheaf.RingTheory.GlobalDimension
+public import Mathlib.Order.RelClasses
+public import Mathlib.LinearAlgebra.Quotient.Defs
 
 /-!
 # Projective dimension of a well-ordered union of submodules
@@ -13,6 +15,8 @@ import Mathlib.LinearAlgebra.Quotient.Defs
 Source: Stacks Project, Algebra, Lemma 0D1U
 (blueprint: lem-weil-pbc-well-ordered-union-projective-dimension).
 -/
+
+@[expose] public section
 
 universe u v w
 

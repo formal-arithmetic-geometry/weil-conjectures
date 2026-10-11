@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Monoidal
+module
+
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Monoidal
 
 /-!
 # Tensor product of sheaves of modules
@@ -23,6 +25,8 @@ This module adds what neither Mathlib nor the source has: the change of rings
 `F ⊗_{O₁} O₂` along a morphism of sheaves of rings (for a site in arbitrary universes) and
 the positive tensor powers.
 -/
+
+@[expose] public section
 
 universe v₀ u₀ u
 

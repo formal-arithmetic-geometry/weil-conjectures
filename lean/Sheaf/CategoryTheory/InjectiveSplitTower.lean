@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Mathlib.Algebra.Category.Grp.Abelian
-import Mathlib.CategoryTheory.Preadditive.Injective.Basic
+module
+
+public import Mathlib.Algebra.Category.Grp.Abelian
+public import Mathlib.CategoryTheory.Preadditive.Injective.Basic
 
 /-!
 # Injectivity of split towers of injective abelian groups
@@ -12,6 +14,8 @@ import Mathlib.CategoryTheory.Preadditive.Injective.Basic
 Source: Stacks Project, More on Algebra, Tag 07KW, Lemma 15.88.1 proof footnote
 (blueprint: lem-pc-injective-split-tower-injective).
 -/
+
+@[expose] public section
 
 universe u
 

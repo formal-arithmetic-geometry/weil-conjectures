@@ -3,13 +3,15 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF contributors
 -/
-import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
-import Mathlib.Algebra.Category.ModuleCat.Projective
-import Mathlib.Algebra.Category.ModuleCat.Abelian
-import Mathlib.Algebra.Homology.DerivedCategory.Basic
-import Mathlib.Algebra.Homology.Embedding.CochainComplex
-import Mathlib.Algebra.Homology.Additive
-import Mathlib.RingTheory.Ideal.Quotient.Defs
+module
+
+public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
+public import Mathlib.Algebra.Category.ModuleCat.Projective
+public import Mathlib.Algebra.Category.ModuleCat.Abelian
+public import Mathlib.Algebra.Homology.DerivedCategory.Basic
+public import Mathlib.Algebra.Homology.Embedding.CochainComplex
+public import Mathlib.Algebra.Homology.Additive
+public import Mathlib.RingTheory.Ideal.Quotient.Defs
 
 /-!
 # Lifting a derived complex for a projective class
@@ -17,6 +19,8 @@ import Mathlib.RingTheory.Ideal.Quotient.Defs
 Source: Stacks Project, More on Algebra, Lemma 15.75.2 (Tag 0BCA)
 (blueprint: lem-sc-complex-lift-class-projective).
 -/
+
+@[expose] public section
 
 universe u v w w'
 

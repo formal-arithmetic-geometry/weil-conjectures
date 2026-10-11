@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import Mathlib.RingTheory.AdicCompletion.Algebra
-import Mathlib.RingTheory.LocalRing.MaximalIdeal.Defs
-import Mathlib.RingTheory.Noetherian.Defs
-import Mathlib.RingTheory.RingHom.Flat
+module
+
+public import Mathlib.RingTheory.AdicCompletion.Algebra
+public import Mathlib.RingTheory.LocalRing.MaximalIdeal.Defs
+public import Mathlib.RingTheory.Noetherian.Defs
+public import Mathlib.RingTheory.RingHom.Flat
 
 /-!
 # Flatness of completion along a flat local map
@@ -15,6 +17,8 @@ Source: Stacks Project, More on Algebra, Lemma 0C4G (more-algebra-lemma-flat-com
 line 10731, the implication from flatness of a local map to flatness of its completions
 (blueprint: lem-weil-pbc-flat-completion).
 -/
+
+@[expose] public section
 
 universe u v
 

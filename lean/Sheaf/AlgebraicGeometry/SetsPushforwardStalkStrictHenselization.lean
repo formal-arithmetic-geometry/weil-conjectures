@@ -3,15 +3,19 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group Q1
 -/
-import Sheaf.AlgebraicGeometry.StrictHenselizationStructuralMap
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
-import Sheaf.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
+module
+
+public import Sheaf.AlgebraicGeometry.StrictHenselizationStructuralMap
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
+public import Sheaf.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
 
 /-! # Stalk of a direct image over the strict henselization
 
 Source: Stacks Project, Tag 03Q9, degree zero for sets, with Tags 09YQ and 09YU
 (blueprint: lem-weil-pbc-sets-pushforward-stalk-strict-henselization).
 -/
+
+@[expose] public section
 
 universe v
 

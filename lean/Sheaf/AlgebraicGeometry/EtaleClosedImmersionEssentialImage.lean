@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
-import Sheaf.AlgebraicGeometry.EtaleSupport
-import Mathlib.CategoryTheory.EssentialImage
+module
+
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+public import Sheaf.AlgebraicGeometry.EtaleSupport
+public import Mathlib.CategoryTheory.EssentialImage
 
 /-!
 # Direct image along a closed immersion on abelian etale sheaves
@@ -13,6 +15,8 @@ import Mathlib.CategoryTheory.EssentialImage
 Source: Stacks Project, Proposition 59.46.4 (Tag 04CA); blueprint
 `sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-04ca.md` (blueprint: lem-kun-04ca).
 -/
+
+@[expose] public section
 
 universe u
 

@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import Mathlib.RingTheory.AdicCompletion.Algebra
-import Mathlib.RingTheory.Noetherian.Defs
-import Mathlib.RingTheory.Finiteness.Defs
-import Sheaf.RingTheory.AssociatedGradedRing
+module
+
+public import Mathlib.RingTheory.AdicCompletion.Algebra
+public import Mathlib.RingTheory.Noetherian.Defs
+public import Mathlib.RingTheory.Finiteness.Defs
+public import Sheaf.RingTheory.AssociatedGradedRing
 
 /-!
 # Degree-zero generators for the associated graded of a completed module
@@ -23,6 +25,8 @@ these formulas over the finite support of a graded element gives generation over
 `gr_I(A)`. Conversely, taking the degree `n`
 component of a graded expression gives precisely this congruence.
 -/
+
+@[expose] public section
 
 universe u v
 

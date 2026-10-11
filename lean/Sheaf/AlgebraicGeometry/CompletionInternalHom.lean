@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group Q1
 -/
-import Sheaf.AlgebraicGeometry.CoherentFormalModule
-import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
+module
+
+public import Sheaf.AlgebraicGeometry.CoherentFormalModule
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
 
 /-! # Internal Hom and coherent formal completion
 
@@ -16,6 +18,8 @@ maps are specified by quotient factorization and by their components, so the bij
 is the canonical map in the node, rather than an unspecified equivalence of sets.
 As in `formalCompletionSystem`, `op n` denotes the positive level `n + 1`.
 -/
+
+@[expose] public section
 
 universe u
 

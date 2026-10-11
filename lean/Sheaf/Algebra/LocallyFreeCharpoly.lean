@@ -3,13 +3,17 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group J1
 -/
-import Sheaf.Algebra.CharpolyLocallyFree
+module
+
+public import Sheaf.Algebra.CharpolyLocallyFree
 
 /-! # Characteristic polynomial of a finite locally free module of constant rank
 
 Source: Stacks Project, Tag 09XI, proof of (3)⇒(1), characteristic-polynomial paragraph
 (blueprint: def-weil-pbc-charpoly-locally-free).
 -/
+
+@[expose] public section
 
 universe u v w
 

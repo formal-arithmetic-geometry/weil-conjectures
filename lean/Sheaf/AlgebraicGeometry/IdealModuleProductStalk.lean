@@ -1,7 +1,9 @@
-import Sheaf.Algebra.Homology.ModuleStalkFunctor
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Mathlib.CategoryTheory.Abelian.Images
+module
+
+public import Sheaf.Algebra.Homology.ModuleStalkFunctor
+public import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Mathlib.CategoryTheory.Abelian.Images
 
 /-!
 # Stalks of ideal-module products, quotients, and powers
@@ -10,6 +12,8 @@ Source: literature/stacks-project/modules.tex, Lemmas 01AG and 01CB, as used in
 Cohomology of Schemes, proof of Lemma 0CYV
 (blueprint: lem-weil-pbc-ideal-module-product-stalk).
 -/
+
+@[expose] public section
 
 universe u
 

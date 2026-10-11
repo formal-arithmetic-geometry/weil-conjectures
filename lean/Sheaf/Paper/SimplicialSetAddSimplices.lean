@@ -1,4 +1,6 @@
-import Mathlib.AlgebraicTopology.SimplicialSet.Finite
+module
+
+public import Mathlib.AlgebraicTopology.SimplicialSet.Finite
 
 /-!
 # An inclusion of finite simplicial sets is a chain of one-simplex extensions
@@ -6,6 +8,8 @@ import Mathlib.AlgebraicTopology.SimplicialSet.Finite
 Source: literature/stacks-project/simplicial.tex, Lemma 018S (blueprint:
 lem-weil-pbc-simplicial-set-add-simplices)
 -/
+
+@[expose] public section
 
 open CategoryTheory Simplicial Limits
 open Opposite

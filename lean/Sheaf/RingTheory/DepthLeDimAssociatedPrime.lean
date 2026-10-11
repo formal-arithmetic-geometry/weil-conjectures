@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import Sheaf.RingTheory.Depth
-import Mathlib.RingTheory.Noetherian.Defs
-import Mathlib.RingTheory.KrullDimension.Basic
-import Mathlib.RingTheory.Ideal.AssociatedPrime.Basic
+module
+
+public import Sheaf.RingTheory.Depth
+public import Mathlib.RingTheory.Noetherian.Defs
+public import Mathlib.RingTheory.KrullDimension.Basic
+public import Mathlib.RingTheory.Ideal.AssociatedPrime.Basic
 
 /-!
 # Depth is bounded by the dimension at an associated prime
@@ -15,6 +17,8 @@ Source: Stacks Project, Algebra, Lemma Tag 0BK4 (lemma-depth-dim-associated-prim
 lines 17985-18020; associated primes Definition Tag 00LA (blueprint:
 lem-weil-pbc-depth-le-dim-associated-prime).
 -/
+
+@[expose] public section
 
 universe u v
 

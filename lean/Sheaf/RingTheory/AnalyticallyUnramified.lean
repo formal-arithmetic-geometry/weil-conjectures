@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Mathlib.RingTheory.AdicCompletion.Algebra
-import Mathlib.RingTheory.LocalRing.MaximalIdeal.Defs
-import Mathlib.RingTheory.Noetherian.Defs
+module
+
+public import Mathlib.RingTheory.AdicCompletion.Algebra
+public import Mathlib.RingTheory.LocalRing.MaximalIdeal.Defs
+public import Mathlib.RingTheory.Noetherian.Defs
 
 /-!
 # Analytically unramified local rings and prime ideals
@@ -18,6 +20,8 @@ Source: Stacks Project, Algebra, Definition 032X
 * `IsAnalyticallyUnramified`: the maximal-ideal-adic completion is reduced.
 * `Ideal.IsAnalyticallyUnramified`: the quotient by a prime ideal is analytically unramified.
 -/
+
+@[expose] public section
 
 universe u
 

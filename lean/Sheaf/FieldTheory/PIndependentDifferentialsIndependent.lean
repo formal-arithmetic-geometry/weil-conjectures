@@ -3,14 +3,18 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import Mathlib.RingTheory.Kaehler.Basic
-import Mathlib.FieldTheory.IntermediateField.Adjoin.Defs
+module
+
+public import Mathlib.RingTheory.Kaehler.Basic
+public import Mathlib.FieldTheory.IntermediateField.Adjoin.Defs
 
 /-! # The differentials of a p-independent family are linearly independent
 
 Source: literature/stacks-project/more-algebra.tex, Definition Tag 07P1 and
 Lemma Tag 07P2 (blueprint: lem-weil-pbc-p-independent-differentials-independent).
 -/
+
+@[expose] public section
 
 set_option autoImplicit false
 set_option relaxedAutoImplicit false

@@ -1,7 +1,9 @@
-import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
-import Mathlib.AlgebraicGeometry.Morphisms.Proper
-import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
+module
+
+public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
+public import Mathlib.AlgebraicGeometry.Morphisms.Proper
+public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 
 /-!
 # Chow's lemma over a quasi-compact quasi-separated base
@@ -13,6 +15,8 @@ Source: Stacks Project, Lemma Tag 0202 (blueprint: `lem-weil-pbc-chow-finite-typ
 * `exists_chow_finite_type` states Chow's lemma for a separated finite type
   morphism over a quasi-compact quasi-separated scheme.
 -/
+
+@[expose] public section
 
 open CategoryTheory Limits
 

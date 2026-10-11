@@ -3,15 +3,19 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group R1
 -/
-import Sheaf.AlgebraicGeometry.CoherentFormalModule
-import Mathlib.CategoryTheory.Abelian.Basic
-import Mathlib.CategoryTheory.Preadditive.FunctorCategory
+module
+
+public import Sheaf.AlgebraicGeometry.CoherentFormalModule
+public import Mathlib.CategoryTheory.Abelian.Basic
+public import Mathlib.CategoryTheory.Preadditive.FunctorCategory
 
 /-! # Coherent formal modules form an abelian category
 
 Source: Stacks Project, Cohomology of Schemes, Lemma 087X, part (1), and the description
 of cokernels in its proof (blueprint: lem-weil-pbc-coherent-formal-modules-abelian).
 -/
+
+@[expose] public section
 
 universe u
 

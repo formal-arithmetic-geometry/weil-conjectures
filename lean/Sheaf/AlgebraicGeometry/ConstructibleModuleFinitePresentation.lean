@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import Sheaf.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
-import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasColimitsOfShape
-import Mathlib.Algebra.Category.ModuleCat.Adjunctions
-import Mathlib.CategoryTheory.Limits.Shapes.Kernels
+module
+
+public import Sheaf.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
+public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasColimitsOfShape
+public import Mathlib.Algebra.Category.ModuleCat.Adjunctions
+public import Mathlib.CategoryTheory.Limits.Shapes.Kernels
 
 /-!
 # Finite presentations of constructible etale module sheaves
@@ -14,6 +16,8 @@ import Mathlib.CategoryTheory.Limits.Shapes.Kernels
 Source: Stacks Project, Etale Cohomology, Lemma 59.73.6, Tag 095N
 (blueprint: lem-weil-pbc-constructible-module-finite-presentation).
 -/
+
+@[expose] public section
 
 universe u
 

@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group J1
 -/
-import Sheaf.Paper.RelativeGlobalCompleteIntersectionPresentation
-import Mathlib.RingTheory.Ideal.Cotangent
-import Mathlib.LinearAlgebra.FreeModule.Basic
+module
+
+public import Sheaf.Paper.RelativeGlobalCompleteIntersectionPresentation
+public import Mathlib.RingTheory.Ideal.Cotangent
+public import Mathlib.LinearAlgebra.FreeModule.Basic
 
 /-!
 # Conormal basis of a relative global complete intersection
@@ -13,6 +15,8 @@ import Mathlib.LinearAlgebra.FreeModule.Basic
 Source: Stacks Project, Algebra, Lemma 00SV (3)
 (blueprint: lem-weil-pbc-relative-global-complete-intersection-conormal-free).
 -/
+
+@[expose] public section
 
 universe v
 

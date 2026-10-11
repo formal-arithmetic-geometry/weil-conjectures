@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Mathlib.RingTheory.Kaehler.Basic
-import Mathlib.Algebra.MvPolynomial.Basic
-import Mathlib.LinearAlgebra.Basis.Defs
+module
+
+public import Mathlib.RingTheory.Kaehler.Basic
+public import Mathlib.Algebra.MvPolynomial.Basic
+public import Mathlib.LinearAlgebra.Basis.Defs
 
 /-!
 # Kähler differentials of a polynomial algebra over an algebra
@@ -13,6 +15,8 @@ import Mathlib.LinearAlgebra.Basis.Defs
 Source: Stacks Project, Algebra, Tags 00RS, 00RV and 00RX
 (blueprint: lem-weil-pbc-kahler-differentials-polynomial-extension).
 -/
+
+@[expose] public section
 
 set_option autoImplicit false
 

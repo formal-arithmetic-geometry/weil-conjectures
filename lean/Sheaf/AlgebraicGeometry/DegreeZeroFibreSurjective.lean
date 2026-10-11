@@ -3,17 +3,21 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import Sheaf.AlgebraicGeometry.DerivedCategory
-import Sheaf.Algebra.Homology.ModuleStalkFunctor
-import Sheaf.Algebra.Homology.KFlat
-import Sheaf.Algebra.Homology.ModuleCohomologyBaseChange
-import Mathlib.AlgebraicGeometry.ResidueField
+module
+
+public import Sheaf.AlgebraicGeometry.DerivedCategory
+public import Sheaf.Algebra.Homology.ModuleStalkFunctor
+public import Sheaf.Algebra.Homology.KFlat
+public import Sheaf.Algebra.Homology.ModuleCohomologyBaseChange
+public import Mathlib.AlgebraicGeometry.ResidueField
 
 /-! # Surjectivity of degree-zero cohomology on a derived fibre
 
 Source: Stacks Project, More on Algebra, Lemma 15.78.2, Tag 0A1U
 (blueprint: def-sc-degree-zero-fibre-surjective).
 -/
+
+@[expose] public section
 
 set_option autoImplicit false
 

@@ -3,28 +3,30 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group G1
 -/
-import Sheaf.NumberTheory.Padics.CoefficientExtension
-import Sheaf.NumberTheory.Padics.FiniteCoefficientFields
-import WeilConjectures.ConstructibleSheaf.Defs
-import WeilConjectures.Mathlib.CategoryTheory.Sites.Point.Basic
-import WeilConjectures.CategoryTheory.GrothendieckAbelian.ConcreteCoefficients
-import Mathlib.CategoryTheory.Linear.FunctorCategory
-import WeilConjectures.Mathlib.CategoryTheory.Sites.Abelian
-import Mathlib.Algebra.Category.ModuleCat.Limits
-import Mathlib.LinearAlgebra.TensorProduct.Basic
-import Mathlib.Algebra.Category.ModuleCat.Monoidal.Symmetric
-import Mathlib.Algebra.Category.ModuleCat.Monoidal.Closed
-import Mathlib.CategoryTheory.Sites.Monoidal
-import Mathlib.CategoryTheory.Monoidal.FunctorCategory
-import Mathlib.RingTheory.Ideal.Quotient.Operations
-import Sheaf.Algebra.Category.ModuleCat.RingScalarExtension
-import Mathlib.CategoryTheory.Sites.Point.Basic
-import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
-import Mathlib.FieldTheory.IntermediateField.Adjoin.Basic
-import Mathlib.CategoryTheory.Bicategory.Grothendieck
-import Mathlib.CategoryTheory.Localization.Construction
-import Mathlib.AlgebraicGeometry.Noetherian
-import Mathlib.AlgebraicGeometry.Morphisms.Separated
+module
+
+public import Sheaf.NumberTheory.Padics.CoefficientExtension
+public import Sheaf.NumberTheory.Padics.FiniteCoefficientFields
+public import WeilConjectures.ConstructibleSheaf.Defs
+public import WeilConjectures.Mathlib.CategoryTheory.Sites.Point.Basic
+public import WeilConjectures.CategoryTheory.GrothendieckAbelian.ConcreteCoefficients
+public import Mathlib.CategoryTheory.Linear.FunctorCategory
+public import WeilConjectures.Mathlib.CategoryTheory.Sites.Abelian
+public import Mathlib.Algebra.Category.ModuleCat.Limits
+public import Mathlib.LinearAlgebra.TensorProduct.Basic
+public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Symmetric
+public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Closed
+public import Mathlib.CategoryTheory.Sites.Monoidal
+public import Mathlib.CategoryTheory.Monoidal.FunctorCategory
+public import Mathlib.RingTheory.Ideal.Quotient.Operations
+public import Sheaf.Algebra.Category.ModuleCat.RingScalarExtension
+public import Mathlib.CategoryTheory.Sites.Point.Basic
+public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
+public import Mathlib.FieldTheory.IntermediateField.Adjoin.Basic
+public import Mathlib.CategoryTheory.Bicategory.Grothendieck
+public import Mathlib.CategoryTheory.Localization.Construction
+public import Mathlib.AlgebraicGeometry.Noetherian
+public import Mathlib.AlgebraicGeometry.Morphisms.Separated
 
 /-! # Lisse adic sheaves
 
@@ -39,6 +41,8 @@ Source: Deligne, Weil II, (0.1), (1.1.1) b)-d), pp. 144, 146-147
 * `LisseAlgebraicSheaf`: the coefficient-category 2-colimit.
 * The `lisseIntegral`, `lisseRational` and `lisseAlgebraic` fibre, tensor and unit constructions.
 -/
+
+@[expose] public section
 
 universe u
 

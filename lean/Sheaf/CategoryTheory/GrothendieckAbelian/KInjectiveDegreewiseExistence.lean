@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.Basic
-import Mathlib.Algebra.Homology.HomotopyCategory.KInjective
+module
+
+public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.Basic
+public import Mathlib.Algebra.Homology.HomotopyCategory.KInjective
 
 /-!
 # Functorial K-injective resolutions with injective terms
@@ -12,6 +14,8 @@ import Mathlib.Algebra.Homology.HomotopyCategory.KInjective
 Source: Stacks Project, Theorem 19.12.6 (Tag 079P), including the injective-term clause
 (blueprint: lem-pur-kinjective-degreewise-existence).
 -/
+
+@[expose] public section
 
 universe w v u
 

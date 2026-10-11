@@ -3,14 +3,18 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import Sheaf.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
-import Mathlib.AlgebraicGeometry.Sites.EtalePoint
+module
+
+public import Sheaf.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
+public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
 
 /-! # Stalks of inverse images of étale sheaves of sets, with germs
 
 Source: Stacks Project, Étale Cohomology, Tag 03Q1 (3)
 (blueprint: lem-weil-pbc-sets-etale-inverse-image-stalk-germ).
 -/
+
+@[expose] public section
 
 universe u
 

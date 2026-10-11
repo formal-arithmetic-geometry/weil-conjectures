@@ -3,12 +3,14 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group G1
 -/
-import Mathlib.AlgebraicGeometry.Scheme
-import Mathlib.RingTheory.FiniteType
-import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
-import Mathlib.RingTheory.AlgebraicIndependent.Basic
-import Mathlib.RingTheory.KrullDimension.Basic
-import WeilConjectures.Mathlib.Topology.KrullDimension
+module
+
+public import Mathlib.AlgebraicGeometry.Scheme
+public import Mathlib.RingTheory.FiniteType
+public import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
+public import Mathlib.RingTheory.AlgebraicIndependent.Basic
+public import Mathlib.RingTheory.KrullDimension.Basic
+public import WeilConjectures.Mathlib.Topology.KrullDimension
 
 /-!
 # Dimension at a point of a finite type algebra over a field
@@ -17,6 +19,8 @@ Source: Stacks Project, Algebra, Lemma 00P1
 (`lemma-dimension-at-a-point-finite-type-field`)
 (blueprint: lem-weil-pbc-dimension-at-point-local-ring-trdeg).
 -/
+
+@[expose] public section
 
 universe u v
 

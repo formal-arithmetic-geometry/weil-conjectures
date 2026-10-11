@@ -3,11 +3,13 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import Mathlib.RingTheory.FiniteType
-import Mathlib.RingTheory.Localization.AtPrime.Basic
-import Mathlib.RingTheory.KrullDimension.Basic
-import Mathlib.Order.Preorder.Chain
-import Mathlib.Order.RelSeries
+module
+
+public import Mathlib.RingTheory.FiniteType
+public import Mathlib.RingTheory.Localization.AtPrime.Basic
+public import Mathlib.RingTheory.KrullDimension.Basic
+public import Mathlib.Order.Preorder.Chain
+public import Mathlib.Order.RelSeries
 
 /-!
 # Dimension of local rings of finite type domains over fields
@@ -15,6 +17,8 @@ import Mathlib.Order.RelSeries
 Source: Stacks Project, Algebra, Lemma Tag 00OS (label lemma-dimension-spell-it-out,
 line 27763) (blueprint: lem-weil-pbc-finite-type-domain-dimension-local-ring).
 -/
+
+@[expose] public section
 
 universe u v
 

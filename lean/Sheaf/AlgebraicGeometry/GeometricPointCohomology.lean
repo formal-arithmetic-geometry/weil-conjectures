@@ -1,5 +1,7 @@
-import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
-import Mathlib.AlgebraicGeometry.Sites.EtalePoint
+module
+
+public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
+public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
 
 /-!
 # Étale cohomology of one geometric point
@@ -8,6 +10,8 @@ Source: Stacks Project, Étale Cohomology, Theorem 03QT, Lemmas 03QU and 04JM,
 Section 03QQ (specialized to an algebraically closed field)
 (blueprint: lem-weil-pbc-geometric-point-cohomology).
 -/
+
+@[expose] public section
 
 universe u
 

@@ -1,7 +1,11 @@
-import Mathlib.AlgebraicGeometry.Noetherian
-import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
-import Mathlib.Topology.KrullDimension
-import Mathlib.Topology.Sheaves.Sheaf
+module
+
+public import Mathlib.AlgebraicGeometry.Noetherian
+public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
+public import Mathlib.Topology.KrullDimension
+public import Mathlib.Topology.Sheaves.Sheaf
+
+@[expose] public section
 
 universe u
 

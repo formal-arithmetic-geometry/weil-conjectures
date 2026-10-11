@@ -1,13 +1,17 @@
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import WeilConjectures.AlgebraicGeometry.Modules.Invertible
-import WeilConjectures.AlgebraicGeometry.Modules.PullbackFreeGenerator
-import Sheaf.AlgebraicGeometry.Ample
+module
+
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
+public import WeilConjectures.AlgebraicGeometry.Modules.PullbackFreeGenerator
+public import Sheaf.AlgebraicGeometry.Ample
 
 /-! # A nonvanishing section trivializes an invertible module
 
 Source: literature/stacks-project/modules.tex, Lemma (Tag 01CY).
 (blueprint: lem-weil-pbc-nonvanishing-section-trivializes)
 -/
+
+@[expose] public section
 
 open CategoryTheory
 open AlgebraicGeometry

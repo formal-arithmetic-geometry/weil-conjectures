@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import Mathlib.AlgebraicGeometry.Sites.AffineEtale
-import Mathlib.CategoryTheory.Sites.ConstantSheaf
-import Mathlib.Algebra.Category.ModuleCat.Sheaf
-import Mathlib.Data.ZMod.Basic
+module
+
+public import Mathlib.AlgebraicGeometry.Sites.AffineEtale
+public import Mathlib.CategoryTheory.Sites.ConstantSheaf
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf
+public import Mathlib.Data.ZMod.Basic
 
 /-!
 # Abelian sheaves killed by n are sheaves of Z/n-modules
@@ -14,6 +16,8 @@ import Mathlib.Data.ZMod.Basic
 Source: literature/stacks-project/etale-cohomology.tex, Definition 03RW and
 Theorem 03SC (blueprint: lem-weil-pbc-sheaves-killed-by-n-zmod-modules).
 -/
+
+@[expose] public section
 
 universe u
 

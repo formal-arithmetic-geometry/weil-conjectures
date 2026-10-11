@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import Sheaf.Paper.RelativeGlobalCompleteIntersection
-import WeilConjectures.Mathlib.Topology.KrullDimension
-import Mathlib.RingTheory.Localization.Away.Basic
-import Mathlib.Algebra.MvPolynomial.Rename
+module
+
+public import Sheaf.Paper.RelativeGlobalCompleteIntersection
+public import WeilConjectures.Mathlib.Topology.KrullDimension
+public import Mathlib.RingTheory.Localization.Away.Basic
+public import Mathlib.Algebra.MvPolynomial.Rename
 
 /-!
 # Localizing an equation-count presentation
@@ -14,6 +16,8 @@ import Mathlib.Algebra.MvPolynomial.Rename
 Source: Stacks Project, Algebra, Lemma 00ST (3)
 (blueprint: lem-weil-pbc-equation-count-localize-relative-global-complete-intersection).
 -/
+
+@[expose] public section
 
 universe u
 

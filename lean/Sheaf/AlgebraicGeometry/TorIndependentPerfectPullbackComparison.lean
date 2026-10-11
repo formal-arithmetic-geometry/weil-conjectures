@@ -3,14 +3,18 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Sheaf.AlgebraicGeometry.PerfectComplex
-import Sheaf.AlgebraicGeometry.PullbackStalkTensorComparison
+module
+
+public import Sheaf.AlgebraicGeometry.PerfectComplex
+public import Sheaf.AlgebraicGeometry.PullbackStalkTensorComparison
 
 /-! # Tor-independent perfect pullback comparison at a stalk
 
 Source: Stacks Project, Tag 08IB, local affine Tor-independent tensor comparison
 (blueprint: lem-pc-tor-independent-perfect-pullback-comparison).
 -/
+
+@[expose] public section
 
 set_option autoImplicit false
 universe u₁ w₁

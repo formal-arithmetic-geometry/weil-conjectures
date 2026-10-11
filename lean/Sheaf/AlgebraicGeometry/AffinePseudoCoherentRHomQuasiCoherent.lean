@@ -2,17 +2,21 @@
 Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 -/
-import Sheaf.AlgebraicGeometry.DerivedCategory
-import Sheaf.Algebra.Homology.DerivedInternalHom
-import Mathlib.AlgebraicGeometry.Modules.Tilde
-import Mathlib.Algebra.Homology.DerivedCategory.TStructure
-import Mathlib.Algebra.Homology.HomotopyCategory.HomComplex
+module
+
+public import Sheaf.AlgebraicGeometry.DerivedCategory
+public import Sheaf.Algebra.Homology.DerivedInternalHom
+public import Mathlib.AlgebraicGeometry.Modules.Tilde
+public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
+public import Mathlib.Algebra.Homology.HomotopyCategory.HomComplex
 
 /-! # Affine RHom of a pseudo-coherent complex is quasi-coherent
 
 Source: Stacks Project, Tag 0A6H, clauses (1) and (3)(a)
 (blueprint: lem-sc-affine-pseudo-coherent-rhom-qcoherent).
 -/
+
+@[expose] public section
 
 universe u w
 

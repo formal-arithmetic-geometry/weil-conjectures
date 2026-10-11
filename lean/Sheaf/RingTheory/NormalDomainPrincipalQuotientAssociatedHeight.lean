@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Mathlib.RingTheory.Noetherian.Defs
-import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
-import Mathlib.RingTheory.Ideal.AssociatedPrime.Basic
-import Mathlib.RingTheory.Ideal.Height
+module
+
+public import Mathlib.RingTheory.Noetherian.Defs
+public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
+public import Mathlib.RingTheory.Ideal.AssociatedPrime.Basic
+public import Mathlib.RingTheory.Ideal.Height
 
 /-!
 # Associated primes of principal quotients of normal domains
@@ -14,6 +16,8 @@ import Mathlib.RingTheory.Ideal.Height
 Source: Stacks Project, Algebra, Tag 031T, Lemma 10.157.6 (1)
 (blueprint: lem-weil-pbc-normal-domain-principal-quotient-associated-height).
 -/
+
+@[expose] public section
 
 universe u
 

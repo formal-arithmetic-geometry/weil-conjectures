@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import Sheaf.RingTheory.JapaneseDomain
-import Mathlib.Algebra.Polynomial.Basic
-import Mathlib.RingTheory.Noetherian.Defs
+module
+
+public import Sheaf.RingTheory.JapaneseDomain
+public import Mathlib.Algebra.Polynomial.Basic
+public import Mathlib.RingTheory.Noetherian.Defs
 
 /-!
 # Polynomial rings over Noetherian Japanese domains
@@ -13,6 +15,8 @@ import Mathlib.RingTheory.Noetherian.Defs
 Source: Stacks Project, Algebra, Lemma 10.161.13 (Tag 032O), second assertion
 (blueprint: lem-weil-pbc-polynomial-ring-n2).
 -/
+
+@[expose] public section
 
 universe u
 

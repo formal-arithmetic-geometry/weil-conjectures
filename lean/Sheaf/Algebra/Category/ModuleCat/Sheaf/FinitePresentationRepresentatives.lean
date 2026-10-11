@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group G1
 -/
-import Sheaf.Paper.DerivedHomMayerVietoris
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
+module
+
+public import Sheaf.Paper.DerivedHomMayerVietoris
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 
 /-!
 # A set of representatives of finite-presentation module sheaves
@@ -12,6 +14,8 @@ import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 Source: Stacks Project, Modules, Lemma 01BC and Definition 01BN
 (blueprint: lem-weil-pbc-module-finite-presentation-representatives).
 -/
+
+@[expose] public section
 
 universe u
 

@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group G1
 -/
-import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
-import Mathlib.AlgebraicGeometry.Morphisms.Separated
-import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
-import Sheaf.AlgebraicGeometry.Dimension
+module
+
+public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
+public import Mathlib.AlgebraicGeometry.Morphisms.Separated
+public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
+public import Sheaf.AlgebraicGeometry.Dimension
 
 /-!
 # Quasi-projectivity in dimension at most one
@@ -14,6 +16,8 @@ import Sheaf.AlgebraicGeometry.Dimension
 Source: Stacks Project, Varieties, Lemma 0A25
 (blueprint: lem-sc-dim-one-quasi-projective).
 -/
+
+@[expose] public section
 
 universe u
 

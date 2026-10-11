@@ -1,13 +1,17 @@
-import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
-import Sheaf.AlgebraicGeometry.EtaleTensorSectionsSheaf
-import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtaleOver
-import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
+module
+
+public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
+public import Sheaf.AlgebraicGeometry.EtaleTensorSectionsSheaf
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtaleOver
+public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 
 /-! # Étale cohomology over an open object
 
 Source: Stacks Project, Cohomology on Sites, Lemma 03F3 and Sites, Section 00XZ
 (blueprint: lem-weil-pbc-etale-cohomology-over-open).
 -/
+
+@[expose] public section
 
 universe u
 

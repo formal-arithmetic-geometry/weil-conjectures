@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.Generators
-import Sheaf.AlgebraicGeometry.Ample
+module
+
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Generators
+public import Sheaf.AlgebraicGeometry.Ample
 
 /-!
 # Finite nonvanishing covers from global generation
@@ -12,6 +14,8 @@ import Sheaf.AlgebraicGeometry.Ample
 Source: Stacks Project, Varieties, Lemma 09NC, proof, the second quasi-compactness step
 (blueprint: lem-sc-finite-sections-cover-qc).
 -/
+
+@[expose] public section
 
 universe u
 

@@ -91,10 +91,11 @@ def mask(text: str) -> str:
 
 
 HEAD = re.compile(
-    r"^(?P<pre>[ \t]*(?:@\[[^\]\n]*\][ \t\n]*)*(?:(?:private|protected|noncomputable|partial|unsafe|nonrec)[ \t]+)*)"
+    r"^(?P<pre>[ \t]*(?:@\[[^\]\n]*\][ \t\n]*)*(?:(?:private|public|protected|noncomputable|partial|unsafe|nonrec|meta)[ \t]+)*)"
     r"(?P<kw>theorem|lemma|def|abbrev|structure|class(?:[ \t]+inductive)?|instance|inductive|opaque|axiom)\b[ \t]*"
     r"(?:\(priority[^)]*\)[ \t]*)?(?P<name>«[^»]*»|[^\s:(\[{⦃]+)?", re.M)
-SCOPE = re.compile(r"^(?:noncomputable[ \t]+)?(?P<k>namespace|section|end)\b[ \t]*(?P<n>[^\s]*)", re.M)
+# module system (stage 3): `@[expose] public section`, `public section`, `private section`, `meta section` open a section too
+SCOPE = re.compile(r"^(?:@\[expose\][ \t]+)?(?:(?:public|private|noncomputable|meta)[ \t]+)*(?P<k>namespace|section|end)\b[ \t]*(?P<n>[^\s]*)", re.M)
 STARTER = re.compile(r"^(?:[A-Za-z_@#«]|/-)", re.M)
 NOT_STARTER = re.compile(r"^(?:where|deriving|with|termination_by|decreasing_by)\b")
 OPEN = re.compile(r"^[ \t]*open[ \t]+([^\n]*)", re.M)
@@ -181,7 +182,25 @@ def declarations(text: str) -> list[dict]:
 
 
 def imports(text: str) -> list[str]:
-    return re.findall(r"^import[ \t]+(\S+)", mask(text), re.M)
+    # module-system forms too: `public import X`, `meta import X`, `import all X` (stage 3)
+    return re.findall(r"^(?:public[ \t]+)?(?:meta[ \t]+)?import[ \t]+(?:all[ \t]+)?(\S+)", mask(text), re.M)
+
+
+def public_imports(text: str) -> list[str]:
+    """The imports the modules importing this one see: in a `module` file only `public import`, else every import."""
+    if not is_module(text):
+        return imports(text)
+    return re.findall(r"^public[ \t]+(?:meta[ \t]+)?import[ \t]+(?:all[ \t]+)?(\S+)", mask(text), re.M)
+
+
+def is_module(text: str) -> bool:
+    """Whether the file is in Lean's module system: `module` is its first command."""
+    for line in mask(text or "").split("\n"):
+        t = line.strip()
+        if not t or t.startswith(("--", "/-", "-/")) or not line[:1].strip():
+            continue
+        return t == "module"
+    return False
 
 
 def opens(text: str) -> list[str]:

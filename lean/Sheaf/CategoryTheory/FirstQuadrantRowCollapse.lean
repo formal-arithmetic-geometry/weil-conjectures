@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import Mathlib.Algebra.Homology.SpectralSequence.Basic
-import Sheaf.CategoryTheory.Filtration
+module
+
+public import Mathlib.Algebra.Homology.SpectralSequence.Basic
+public import Sheaf.CategoryTheory.Filtration
 
 /-!
 # Collapse of a first-quadrant spectral sequence supported in its bottom row
@@ -18,6 +20,8 @@ canonical cycle inclusions and homology projections, so these are the stationary
 page identifications, rather than unspecified isomorphisms. The last displayed
 composite is the edge map to the abutment. No separate convergence convention is used.
 -/
+
+@[expose] public section
 
 universe v u
 

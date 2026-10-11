@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import Sheaf.RingTheory.IsStrictHenselization
-import Mathlib.RingTheory.AdicCompletion.Algebra
-import Mathlib.RingTheory.Noetherian.Defs
-import Mathlib.LinearAlgebra.Finsupp.Defs
+module
+
+public import Sheaf.RingTheory.IsStrictHenselization
+public import Mathlib.RingTheory.AdicCompletion.Algebra
+public import Mathlib.RingTheory.Noetherian.Defs
+public import Mathlib.LinearAlgebra.Finsupp.Defs
 
 /-!
 # Fixed bases for strict henselization quotients and their completed comparison
@@ -14,6 +16,8 @@ import Mathlib.LinearAlgebra.Finsupp.Defs
 Source: Stacks Project, More on Algebra, Tag 07QM(4) and the proof of Tag 06LJ(c)
 (blueprint: lem-sc-strict-henselization-mod-power-free).
 -/
+
+@[expose] public section
 
 universe u
 

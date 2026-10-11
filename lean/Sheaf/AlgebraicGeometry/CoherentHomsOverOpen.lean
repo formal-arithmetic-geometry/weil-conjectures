@@ -3,17 +3,21 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import Sheaf.AlgebraicGeometry.Coherent
-import Sheaf.AlgebraicGeometry.IdealModuleProductStalk
-import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
-import Mathlib.AlgebraicGeometry.Noetherian
-import Mathlib.Algebra.Category.Grp.Colimits
+module
+
+public import Sheaf.AlgebraicGeometry.Coherent
+public import Sheaf.AlgebraicGeometry.IdealModuleProductStalk
+public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
+public import Mathlib.AlgebraicGeometry.Noetherian
+public import Mathlib.Algebra.Category.Grp.Colimits
 
 /-! # Coherent homomorphisms over an open complement
 
 Source: Stacks Project, Cohomology of Schemes, Lemma 01YB (blueprint:
 lem-weil-pbc-coherent-homs-over-open).
 -/
+
+@[expose] public section
 
 universe u
 

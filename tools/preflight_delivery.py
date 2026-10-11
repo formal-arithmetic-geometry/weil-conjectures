@@ -64,6 +64,39 @@ checks the branch <ref> (default HEAD; the lead passes deliver/<group>/<item>) a
      a module importing a sibling module not yet in the library prints "compile: deferred"; on the server only
      (SHEAF_COMPILE_ROOT names another project directory to compile in).
 Prints "preflight OK (stage 2)" or every failure with its letter, exit code 1.
+
+Stage 3 (stages/3-proving-and-pruning.md; the format is in tools/stage3_delivery.py):
+
+    python3 tools/preflight_delivery.py <group> <module> --stage 3 [--base origin/sheaf-dag] [--branch <ref>]
+
+checks the branch (default HEAD) against the base, the item being a MODULE of the library (Sheaf.<...> or
+WeilConjectures.<...>):
+  a. one commit; only modules of the library (the item's module changed; adapted modules; new modules, which go under
+     lean/Sheaf/), node files,
+     coord/changes/*.md and coord/reports/<group>/<module>.md; nothing deleted or renamed;
+  b. new nodes by the rules of stage 1 plus a `lean` record (created.item = the module, three kinds of search, proof
+     steps, proof_deps = union of uses, blueprint.is null); an existing node changed only in lean, proof, proof_deps,
+     proof_origin, and in statement / stmt_deps / statement_change only with a valid statement_change (citers);
+  c. each module: a file of Lean's module system (`module` first); imports Mathlib.*/WeilConjectures.*/Sheaf.* only,
+     lines <= 100; no new axiom, unsafe, extern,
+     implemented_by, opaque, sorryAx, debug.skipKernelTC; a `sorry` the delivery leaves (in a declaration it adds or
+     whose body it changes) only as the whole proof `:= by sorry` of a public named theorem recorded by a node (base or
+     delivery) whose docstring carries `(blueprint: <id>)` (AGENTS.md §5); no `sorry` in a definition; no target
+     statement of lean/Challenge.lean changed;
+  d. a delivery that changes what other modules see (leanindex.interface_changes: a statement, a definition, an
+     instance or attribute, a removed import or declaration, variable/open/notation) or a node's statement has a
+     change record coord/changes/<name>.md with `## Reason`, `## Old`, `## New`, `## Users`, `## Status` (`open`), whose
+     Users name every downstream module that mentions a changed name (tools/downstream.py --uses); every adapted
+     module is claimed by the group or named with the group that holds it (stage 3 §3.1);
+  e. the report: `## What changed`, `## Proved and sorry left` (every sorry left in the item's module by name, and
+     every sorry the delivery leaves elsewhere), `## No longer needed`, `## Where the brief, the DAG or earlier work
+     was wrong` (roles/worker.md §3), `## Second reading by <group>`, `## New nodes` naming each new node, and the
+     path of each change record;
+  f. on the server: each module compiled with tools/lean_file.sh (120 s) with a probe appended that lists, for every
+     constant the file adds, its axioms beyond propext, Classical.choice, Quot.sound, sorryAx (any is a failure) and
+     the constants whose own term uses sorryAx (each must be one the text check allowed).
+Prints the review class (AUTO: landed by a script; CODEX: <reasons>: read by the independent Codex reviewer) and
+"preflight OK (stage 3)".
 """
 from __future__ import annotations
 import json, pathlib, re, subprocess, sys
@@ -176,6 +209,49 @@ def main_stage2(argv: list[str]) -> int:
     return 1
 
 
+def main_stage3(argv: list[str]) -> int:
+    import stage2_delivery as s2
+    import stage3_delivery as s3
+    base, branch, args, i = default_base(), None, [], 0
+    while i < len(argv):
+        a = argv[i]
+        if a in ("--base", "--branch", "--stage") and i + 1 < len(argv):
+            if a == "--base":
+                base = argv[i + 1]
+            elif a == "--branch":
+                branch = argv[i + 1]
+            i += 2; continue
+        if not a.startswith("--"):
+            args.append(a)
+        i += 1
+    if len(args) != 2:
+        print(__doc__); return 2
+    group, item = args
+    G = s2.Git(ROOT)
+    D = s3.read_delivery(G, branch or "HEAD", base, group, item)
+    fails = list(D["fails"])
+    if branch is None and G.run("status", "--porcelain"):
+        fails.insert(0, ("a", "uncommitted changes in the working tree"))
+    print(f"stage-3 delivery of {item} by {group}")
+    for r in D["roles"]:
+        print(f"   {r}")
+    for n in D["notes"]:
+        print(f" ! {n}")
+    res = s3.probe(D, group) if not fails else []
+    for r in res:
+        print(f"{r['file']}: compile+probe: {r['status']}" + (f" ({len(r['sorry'])} declaration(s) with sorry)" if r["status"] == "ok" else ""))
+    fails += s3.probe_fails(D, res)
+    why = s3.classify(D, group, item)
+    print("review class: " + ("AUTO" if not why else "CODEX: " + "; ".join(why)))
+    if not fails:
+        print("preflight OK (stage 3)"); return 0
+    fails.sort(key=lambda x: "abcdef".index(x[0]))
+    print(f"preflight FAILED (stage 3), {len(fails)} reason(s); do not push:")
+    for L, x in fails:
+        print(f" ({L}) {x}")
+    return 1
+
+
 def main() -> int:
     if "--stage" in sys.argv[1:] or any(a.startswith("--stage=") for a in sys.argv[1:]):
         argv = sys.argv[1:]
@@ -185,8 +261,10 @@ def main() -> int:
             st = argv[k + 1] if k + 1 < len(argv) else ""
         if st == "2":
             return main_stage2(argv)
+        if st == "3":
+            return main_stage3(argv)
         if st != "1":
-            print(f"--stage {st!r}: 1 or 2"); return 2
+            print(f"--stage {st!r}: 1, 2 or 3"); return 2
         sys.argv = [sys.argv[0]] + [a for k, a in enumerate(argv) if not (a.startswith("--stage") or (k > 0 and argv[k - 1] == "--stage"))]
     args: list[str] = []
     base = default_base()

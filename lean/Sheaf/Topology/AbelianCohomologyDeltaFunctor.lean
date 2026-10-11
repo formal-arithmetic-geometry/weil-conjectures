@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group U1
 -/
-import Mathlib.Topology.Sheaves.Abelian
-import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
-import Mathlib.Algebra.Homology.DerivedCategory.Ext.ExactSequences
-import Sheaf.CategoryTheory.DeltaFunctor
+module
+
+public import Mathlib.Topology.Sheaves.Abelian
+public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
+public import Mathlib.Algebra.Homology.DerivedCategory.Ext.ExactSequences
+public import Sheaf.CategoryTheory.DeltaFunctor
 
 /-!
 # The canonical delta-functor of topological abelian sheaf cohomology
@@ -14,6 +16,8 @@ import Sheaf.CategoryTheory.DeltaFunctor
 Source: Stacks Project, Cohomology of Sheaves, Sections 20.2 and 20.3
 (blueprint: def-sc-topological-abelian-cohomology-delta-functor).
 -/
+
+@[expose] public section
 
 set_option autoImplicit false
 universe uC

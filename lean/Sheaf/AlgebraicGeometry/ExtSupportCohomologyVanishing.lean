@@ -3,13 +3,15 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import Sheaf.AlgebraicGeometry.Coherent
-import Sheaf.AlgebraicGeometry.Dimension
-import Sheaf.AlgebraicGeometry.SheafExt
-import Mathlib.AlgebraicGeometry.Noetherian
-import Mathlib.RingTheory.RegularLocalRing.Defs
-import Mathlib.Topology.KrullDimension
-import Sheaf.Paper.PQFCohomology
+module
+
+public import Sheaf.AlgebraicGeometry.Coherent
+public import Sheaf.AlgebraicGeometry.Dimension
+public import Sheaf.AlgebraicGeometry.SheafExt
+public import Mathlib.AlgebraicGeometry.Noetherian
+public import Mathlib.RingTheory.RegularLocalRing.Defs
+public import Mathlib.Topology.KrullDimension
+public import Sheaf.Paper.PQFCohomology
 
 /-!
 # Support-dimension vanishing for sheaf Ext
@@ -18,6 +20,7 @@ Source: literature/stacks-project/equiv.tex, Lemma 0FZ3 and Proposition 02UZ
 (blueprint: lem-sc-ext-support-cohomology-vanishing).
 -/
 
+@[expose] public section
 
 universe u w
 

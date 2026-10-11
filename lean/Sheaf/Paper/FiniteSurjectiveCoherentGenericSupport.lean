@@ -3,19 +3,23 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import Sheaf.AlgebraicGeometry.Coherent
-import Sheaf.Algebra.Homology.ModuleStalkFunctor
-import Mathlib.AlgebraicGeometry.Morphisms.Finite
-import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
-import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-import Mathlib.AlgebraicGeometry.Noetherian
-import Mathlib.AlgebraicGeometry.Properties
+module
+
+public import Sheaf.AlgebraicGeometry.Coherent
+public import Sheaf.Algebra.Homology.ModuleStalkFunctor
+public import Mathlib.AlgebraicGeometry.Morphisms.Finite
+public import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
+public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+public import Mathlib.AlgebraicGeometry.Noetherian
+public import Mathlib.AlgebraicGeometry.Properties
 
 /-! # Coherent sheaf with prescribed generic support
 
 Source: Stacks Project, Cohomology of Schemes, Lemma 01YO (blueprint:
 lem-weil-pbc-finite-surjective-coherent-generic-support).
 -/
+
+@[expose] public section
 
 universe u
 

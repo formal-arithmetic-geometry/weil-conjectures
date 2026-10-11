@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Mathlib.AlgebraicGeometry.Morphisms.Etale
-import Mathlib.RingTheory.Henselian
-import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.Etale
+public import Mathlib.RingTheory.Henselian
+public import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
 
 /-!
 # Retractions of étale algebras over henselian local rings
@@ -13,6 +15,8 @@ import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
 Source: literature/stacks-project/algebra.tex, Lemma Tag 04GG (implication (1) ⇒ (8))
 (blueprint: lem-weil-pbc-henselian-etale-retraction).
 -/
+
+@[expose] public section
 
 universe u
 

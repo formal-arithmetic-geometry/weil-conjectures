@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import Sheaf.RingTheory.AnnihilatorAssociatedPrimes
-import Mathlib.RingTheory.Localization.AtPrime.Basic
-import Mathlib.Algebra.Module.LocalizedModule.AtPrime
+module
+
+public import Sheaf.RingTheory.AnnihilatorAssociatedPrimes
+public import Mathlib.RingTheory.Localization.AtPrime.Basic
+public import Mathlib.Algebra.Module.LocalizedModule.AtPrime
 
 /-!
 # Localization at an associated prime
@@ -13,6 +15,8 @@ import Mathlib.Algebra.Module.LocalizedModule.AtPrime
 Source: Stacks Project, Algebra, Lemma 0310 (1), `lemma-associated-primes-localize`
 (blueprint: lem-weil-pbc-associated-prime-localize-at-prime).
 -/
+
+@[expose] public section
 
 universe u v
 

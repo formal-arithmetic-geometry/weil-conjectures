@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group J1
 -/
-import Mathlib.RingTheory.Algebraic.StronglyTranscendental
-import Sheaf.RingTheory.QuasiFiniteAtPrime
+module
+
+public import Mathlib.RingTheory.Algebraic.StronglyTranscendental
+public import Sheaf.RingTheory.QuasiFiniteAtPrime
 
 /-!
 # A transcendental generator prevents quasi-finiteness for domains
@@ -12,6 +14,8 @@ import Sheaf.RingTheory.QuasiFiniteAtPrime
 Source: Stacks Project, Algebra, Lemma 10.123.9 (Tag 00Q1)
 (blueprint: lem-weil-pbc-domains-strongly-transcendental-not-quasi-finite).
 -/
+
+@[expose] public section
 
 universe u v
 

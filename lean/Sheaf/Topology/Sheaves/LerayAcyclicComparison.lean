@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group U1
 -/
-import WeilConjectures.Topology.Sheaves.PushforwardCohomology
-import Mathlib.CategoryTheory.Abelian.Injective.Ext
-import Mathlib.CategoryTheory.Abelian.RightDerived
+module
+
+public import WeilConjectures.Topology.Sheaves.PushforwardCohomology
+public import Mathlib.CategoryTheory.Abelian.Injective.Ext
+public import Mathlib.CategoryTheory.Abelian.RightDerived
 
 /-!
 # Leray comparison for an acyclic abelian sheaf
@@ -13,6 +15,8 @@ import Mathlib.CategoryTheory.Abelian.RightDerived
 Source: Stacks Project, Cohomology of Sheaves, Tags 01F2 and 01F4 (1)
 (blueprint: lem-sc-leray-closed-pushforward-cohomology).
 -/
+
+@[expose] public section
 
 universe u
 

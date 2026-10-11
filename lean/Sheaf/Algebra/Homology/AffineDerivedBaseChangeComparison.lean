@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import Sheaf.Algebra.Homology.RingTensorCohomology
-import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
-import Mathlib.RingTheory.Localization.AtPrime.Basic
-import Mathlib.RingTheory.TensorProduct.Basic
+module
+
+public import Sheaf.Algebra.Homology.RingTensorCohomology
+public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
+public import Mathlib.RingTheory.Localization.AtPrime.Basic
+public import Mathlib.RingTheory.TensorProduct.Basic
 
 /-!
 # Affine derived base change and localization
@@ -20,6 +22,8 @@ derived category is specified by its K-flat span. Lifts of the cohomology functo
 modules over the tensor algebra specify the scalar actions explicitly. All localization
 isomorphisms are natural transformations of functors on unbounded complexes.
 -/
+
+@[expose] public section
 
 set_option autoImplicit false
 

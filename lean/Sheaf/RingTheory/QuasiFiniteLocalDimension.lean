@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import Sheaf.RingTheory.QuasiFiniteAtPrime
-import Mathlib.RingTheory.KrullDimension.Basic
+module
+
+public import Sheaf.RingTheory.QuasiFiniteAtPrime
+public import Mathlib.RingTheory.KrullDimension.Basic
 
 /-!
 # Local dimension inequality for quasi-finite ring maps
@@ -12,6 +14,8 @@ import Mathlib.RingTheory.KrullDimension.Basic
 Source: Stacks Project, Algebra, Lemma 10.125.4, Tag 00QF
 (blueprint: lem-weil-pbc-dimension-inequality-quasi-finite).
 -/
+
+@[expose] public section
 
 universe u v
 

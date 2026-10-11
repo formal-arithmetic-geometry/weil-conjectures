@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import Mathlib.Algebra.Category.ModuleCat.Stalk
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
-import Mathlib.Geometry.RingedSpace.Basic
+module
+
+public import Mathlib.Algebra.Category.ModuleCat.Stalk
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
+public import Mathlib.Geometry.RingedSpace.Basic
 
 /-!
 # Stalk functor for modules on a ringed space
@@ -13,6 +15,8 @@ import Mathlib.Geometry.RingedSpace.Basic
 Source: Stacks Project, Cohomology, Lemma 06YB, label `lemma-check-K-flat-stalks`
 (blueprint: def-pc-module-stalk-functor).
 -/
+
+@[expose] public section
 
 universe u
 
@@ -26,13 +30,13 @@ variable (X : RingedSpace.{u}) (x : X)
 
 /-- (blueprint: def-pc-module-stalk-functor) The category of sheaves of modules over the structure
 sheaf of the ringed space `X`; Stacks, Cohomology, Lemma 06YB. -/
-private abbrev Modules := SheafOfModules.{u}
+abbrev Modules := SheafOfModules.{u}
   ((sheafCompose (Opens.grothendieckTopology X)
     (forget₂ CommRingCat.{u} RingCat.{u})).obj X.sheaf)
 
 /-- (blueprint: def-pc-module-stalk-functor) The additive map on stalks at `x` induced by a
 morphism of sheaves of modules; Stacks, Cohomology, Lemma 06YB. -/
-private def stalkAddMap {M N : Modules X} (f : M ⟶ N) :
+def stalkAddMap {M N : Modules X} (f : M ⟶ N) :
     TopCat.Presheaf.stalk (C := Ab.{u}) (X := X.carrier) M.val.presheaf x →+
       TopCat.Presheaf.stalk (C := Ab.{u}) (X := X.carrier) N.val.presheaf x :=
   ConcreteCategory.hom ((TopCat.Presheaf.stalkFunctor AddCommGrpCat.{u} x).map

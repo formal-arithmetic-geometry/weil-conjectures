@@ -2,8 +2,10 @@
 Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 -/
-import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
-import WeilConjectures.AlgebraicGeometry.Modules.TensorSection
+module
+
+public import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
+public import WeilConjectures.AlgebraicGeometry.Modules.TensorSection
 
 /-!
 # Pullback of modules and tensor products
@@ -16,6 +18,8 @@ Source: Stacks Project, Modules, Lemma 17.16.4 (Tag 01CD), label
 The tensor-formula pullback commutes naturally with tensor products and carries pure tensor
 sections to pure tensor sections, as in the source statement.
 -/
+
+@[expose] public section
 
 universe v
 

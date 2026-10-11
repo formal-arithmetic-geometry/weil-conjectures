@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group N1
 -/
-import WeilConjectures.AlgebraicGeometry.Curve.Kummer
-import WeilConjectures.AlgebraicGeometry.Sites.GmPicard
+module
+
+public import WeilConjectures.AlgebraicGeometry.Curve.Kummer
+public import WeilConjectures.AlgebraicGeometry.Sites.GmPicard
 
 /-!
 # Second Kummer cohomology of a curve
@@ -13,6 +15,8 @@ Source: blueprint sec-curve-estimates, sk-prop-h2, lem-sc-second-kummer-divisors
 Stacks Project, Tags 03PK and 03RQ, the long exact Kummer sequence
 (blueprint: lem-sc-second-kummer-divisors).
 -/
+
+@[expose] public section
 
 universe u
 

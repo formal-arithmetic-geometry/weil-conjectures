@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group J1
 -/
-import Sheaf.AlgebraicGeometry.Coherent
-import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
+module
+
+public import Sheaf.AlgebraicGeometry.Coherent
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
 
 /-!
 # Sheaf Hom of coherent modules
@@ -12,6 +14,8 @@ import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
 Source: Stacks Project, Modules, Lemma 01CQ, the coherent case
 (blueprint: lem-weil-pbc-coherent-sheaf-hom-coherent).
 -/
+
+@[expose] public section
 
 universe u
 

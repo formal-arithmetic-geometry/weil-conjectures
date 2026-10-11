@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group G1
 -/
-import Sheaf.RingTheory.Depth
-import Mathlib.RingTheory.KrullDimension.Regular
+module
+
+public import Sheaf.RingTheory.Depth
+public import Mathlib.RingTheory.KrullDimension.Regular
 
 /-!
 # Cohen–Macaulay quotients by a nonzerodivisor
@@ -12,6 +14,8 @@ import Mathlib.RingTheory.KrullDimension.Regular
 Source: Stacks Project, Algebra, Lemma 10.104.2 (Tag 02JN), last assertion for one
 regular element (blueprint: lem-weil-pbc-cm-local-quotient-nonzerodivisor-cm).
 -/
+
+@[expose] public section
 
 universe u
 

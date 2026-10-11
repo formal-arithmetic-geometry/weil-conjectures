@@ -3,13 +3,17 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Sheaf.AlgebraicGeometry.DerivedCategory
+module
+
+public import Sheaf.AlgebraicGeometry.DerivedCategory
 
 /-! # Gluing derived complexes and compatible morphisms on two opens
 
 Source: literature/stacks-project/cohomology.tex, Tag 08DG (Lemma 20.45.1)
 (blueprint: lem-sc-derived-open-gluing).
 -/
+
+@[expose] public section
 
 set_option autoImplicit false
 

@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import Sheaf.RingTheory.PairHenselization
-import Mathlib.RingTheory.AdicCompletion.Algebra
-import Mathlib.RingTheory.Noetherian.Defs
-import Mathlib.RingTheory.RingHom.FaithfullyFlat
+module
+
+public import Sheaf.RingTheory.PairHenselization
+public import Mathlib.RingTheory.AdicCompletion.Algebra
+public import Mathlib.RingTheory.Noetherian.Defs
+public import Mathlib.RingTheory.RingHom.FaithfullyFlat
 
 /-!
 # Noetherian henselization of a pair and its completion
@@ -14,6 +16,8 @@ import Mathlib.RingTheory.RingHom.FaithfullyFlat
 Source: Stacks Project, More on Algebra, Lemma 15.12.4, Tag 0AGV
 (blueprint: lem-weil-pbc-henselization-noetherian-completion).
 -/
+
+@[expose] public section
 
 universe u
 

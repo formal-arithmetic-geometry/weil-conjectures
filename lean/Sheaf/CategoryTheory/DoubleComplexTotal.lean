@@ -3,11 +3,13 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import Mathlib.Algebra.Homology.TotalComplex
-import Mathlib.CategoryTheory.Abelian.Basic
-import Mathlib.CategoryTheory.Subobject.Limits
-import Mathlib.Data.Int.Interval
-import Sheaf.CategoryTheory.Filtration
+module
+
+public import Mathlib.Algebra.Homology.TotalComplex
+public import Mathlib.CategoryTheory.Abelian.Basic
+public import Mathlib.CategoryTheory.Subobject.Limits
+public import Mathlib.Data.Int.Interval
+public import Sheaf.CategoryTheory.Filtration
 
 /-!
 # The two filtrations of a first-quadrant total complex
@@ -19,6 +21,8 @@ The bicomplex and total complex are Mathlib's `HomologicalComplex₂` and `total
 First-quadrant vanishing is a hypothesis, not extra structure. Only the two finite
 supremum filtrations are new definitions. The remaining clauses are theorem statements.
 -/
+
+@[expose] public section
 
 universe v u
 

@@ -3,12 +3,14 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group J1
 -/
-import Mathlib.Topology.Sheaves.Module
-import Mathlib.CategoryTheory.Sites.LeftExact
-import Mathlib.Algebra.Category.Grp.FilteredColimits
-import Mathlib.Algebra.Category.ModuleCat.Presheaf.Colimits
-import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
-import Sheaf.Paper.DerivedHomMayerVietoris
+module
+
+public import Mathlib.Topology.Sheaves.Module
+public import Mathlib.CategoryTheory.Sites.LeftExact
+public import Mathlib.Algebra.Category.Grp.FilteredColimits
+public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Colimits
+public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
+public import Sheaf.Paper.DerivedHomMayerVietoris
 
 /-!
 # Restriction of colimits of sheaves of modules to an open
@@ -21,6 +23,8 @@ The ringed space `(X, 𝒪_X)` is `X : RingedSpace`, its modules live on the lan
 `SheafOfModules.overFunctor (moduleRings X) U` into `SheafOfModules ((moduleRings X).over U)`
 (the site `Over U` has exactly the opens `W ⊆ U` as objects).
 -/
+
+@[expose] public section
 
 noncomputable section
 

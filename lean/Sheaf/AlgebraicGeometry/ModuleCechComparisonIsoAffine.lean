@@ -3,14 +3,18 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group T1
 -/
-import Sheaf.AlgebraicGeometry.ModuleCechComparison
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
+module
+
+public import Sheaf.AlgebraicGeometry.ModuleCechComparison
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 
 /-! # The canonical Čech comparison for affine-intersection covers
 
 Source: Stacks Project, Cohomology of Schemes, Tag 01XD, via Cohomology of Sheaves,
 Tags 01ET and 01EQ (blueprint: lem-sc-cech-comparison-map-iso-affine).
 -/
+
+@[expose] public section
 
 universe u
 

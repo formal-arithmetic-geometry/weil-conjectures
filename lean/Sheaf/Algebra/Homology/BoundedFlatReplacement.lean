@@ -3,12 +3,14 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.Flat
-import Mathlib.Algebra.Homology.QuasiIso
-import Mathlib.Algebra.Homology.ShortComplex.Abelian
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
-import Mathlib.Algebra.Category.Grp.FilteredColimits
-import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
+module
+
+public import Sheaf.Algebra.Category.ModuleCat.Sheaf.Flat
+public import Mathlib.Algebra.Homology.QuasiIso
+public import Mathlib.Algebra.Homology.ShortComplex.Abelian
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
+public import Mathlib.Algebra.Category.Grp.FilteredColimits
+public import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
 
 /-!
 # Functorial bounded-above flat replacements on a ringed site
@@ -17,6 +19,8 @@ Source: Stacks Project, Cohomology on Sites, Lemma 06YS, via Lemma 077J;
 Derived Categories, Lemma 05T7 (1); Modules on Sites, Lemma 03EW (3), (4)
 (blueprint: lem-pc-kflat-bounded-flat-replacement).
 -/
+
+@[expose] public section
 
 universe u
 

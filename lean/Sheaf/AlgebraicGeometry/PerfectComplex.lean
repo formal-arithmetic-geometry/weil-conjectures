@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import Sheaf.AlgebraicGeometry.DerivedCategory
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
+module
+
+public import Sheaf.AlgebraicGeometry.DerivedCategory
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
 
 /-! # Perfect complexes on schemes
 
@@ -16,6 +18,8 @@ Restriction to an open is `SheafOfModules.overFunctor` on the localized site, wi
 module category and derived category as `schemeDerivedCategory`, in the shape of
 `AlgebraicGeometry.Scheme.IsPseudoCoherent` (blueprint: def-pur-pseudo-coherent-complex).
 -/
+
+@[expose] public section
 
 universe u w
 

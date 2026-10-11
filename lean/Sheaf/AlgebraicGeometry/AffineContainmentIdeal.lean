@@ -3,11 +3,13 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import Mathlib.RingTheory.TensorProduct.Basic
-import Mathlib.Algebra.Module.Projective
-import Mathlib.RingTheory.Ideal.Maps
-import Mathlib.RingTheory.Finiteness.Defs
-import WeilConjectures.RingTheory.DualContent
+module
+
+public import Mathlib.RingTheory.TensorProduct.Basic
+public import Mathlib.Algebra.Module.Projective
+public import Mathlib.RingTheory.Ideal.Maps
+public import Mathlib.RingTheory.Finiteness.Defs
+public import WeilConjectures.RingTheory.DualContent
 
 /-!
 # Affine coefficient ideal for containment
@@ -15,6 +17,8 @@ import WeilConjectures.RingTheory.DualContent
 Source: Stacks Project, Picard Schemes of Curves, Lemma 44.2.7, Tag 0B97
 (blueprint: lem-pc-affine-containment-ideal).
 -/
+
+@[expose] public section
 
 universe u v w
 

@@ -1,4 +1,6 @@
-import Sheaf.CategoryTheory.Sites.ZariskiContractedPowerExtensionPresentation
+module
+
+public import Sheaf.CategoryTheory.Sites.ZariskiContractedPowerExtensionPresentation
 
 /-!
 # Extension theorem
@@ -7,6 +9,8 @@ Source: the worker's contracted-power construction developing blueprint `lem-sc-
 Stacks Project, Lemma 02FQ constructs the corresponding extension by pushout.
 (blueprint: lem-sc-zariski-contracted-power-extension)
 -/
+
+@[expose] public section
 
 universe uT
 

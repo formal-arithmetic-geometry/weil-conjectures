@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import Sheaf.CategoryTheory.Filtration
-import Sheaf.Algebra.Homology.FilteredComplexSubquotients
-import Sheaf.CategoryTheory.FilteredPageTwoModel
-import Mathlib.Algebra.Homology.Homotopy
+module
+
+public import Sheaf.CategoryTheory.Filtration
+public import Sheaf.Algebra.Homology.FilteredComplexSubquotients
+public import Sheaf.CategoryTheory.FilteredPageTwoModel
+public import Mathlib.Algebra.Homology.Homotopy
 
 /-!
 # Filtered homotopies and spectral sequences
@@ -14,6 +16,8 @@ import Mathlib.Algebra.Homology.Homotopy
 Source: Stacks Project, Homology, Lemma 012O and Definition 012U
 (blueprint: lem-sp-filtered-homotopy-spectral-sequence).
 -/
+
+@[expose] public section
 
 universe v u
 

@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Sheaf.AlgebraicGeometry.Coherent
-import Mathlib.CategoryTheory.Abelian.Images
-import Mathlib.LinearAlgebra.Quotient.Basic
+module
+
+public import Sheaf.AlgebraicGeometry.Coherent
+public import Mathlib.CategoryTheory.Abelian.Images
+public import Mathlib.LinearAlgebra.Quotient.Basic
 
 /-! # Cokernels and images of quasi-coherent modules
 
@@ -16,6 +18,8 @@ The categorical cokernel is the sheafified presheaf quotient (Mathlib's module
 sheafification adjunction and colimit construction). The abelian image is its kernel;
 the local-image formula below identifies it with the subsheaf in the node.
 -/
+
+@[expose] public section
 
 universe u
 

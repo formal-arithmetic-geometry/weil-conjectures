@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import Sheaf.Algebra.Homology.DerivedInternalHom
-import Sheaf.Paper.DerivedHomMayerVietoris
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
+module
+
+public import Sheaf.Algebra.Homology.DerivedInternalHom
+public import Sheaf.Paper.DerivedHomMayerVietoris
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 
 /-! # Sheaf Ext on a scheme
 
@@ -17,6 +19,8 @@ Sheaf Ext is the cohomology sheaf of the derived internal Hom. For modules, both
 are embedded in the derived category in degree zero. The bifunctors retain contravariance
 in the first argument and covariance in the second.
 -/
+
+@[expose] public section
 
 universe u w
 

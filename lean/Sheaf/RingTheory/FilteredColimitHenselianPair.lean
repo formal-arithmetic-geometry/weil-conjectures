@@ -3,11 +3,13 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import Mathlib.RingTheory.Henselian
-import Mathlib.Algebra.Category.Ring.Basic
-import Mathlib.CategoryTheory.Filtered.Basic
-import Mathlib.CategoryTheory.Limits.HasLimits
-import WeilConjectures.Mathlib.RingTheory.Henselian
+module
+
+public import Mathlib.RingTheory.Henselian
+public import Mathlib.Algebra.Category.Ring.Basic
+public import Mathlib.CategoryTheory.Filtered.Basic
+public import Mathlib.CategoryTheory.Limits.HasLimits
+public import WeilConjectures.Mathlib.RingTheory.Henselian
 
 /-!
 # Filtered colimits of henselian pairs
@@ -15,6 +17,8 @@ import WeilConjectures.Mathlib.RingTheory.Henselian
 Source: Stacks Project, More on Algebra, Lemma 0FWT (blueprint:
 lem-weil-pbc-filtered-colimit-henselian-pair).
 -/
+
+@[expose] public section
 
 universe u
 

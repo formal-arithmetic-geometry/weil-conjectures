@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Sheaf.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
+module
+
+public import Sheaf.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 
 /-!
 # Descent of constructible module sheaves along inverse limits
@@ -12,6 +14,8 @@ Source: Stacks Project, Etale Cohomology, Lemma 59.73.10, Tag 09YU (3),
 essential surjectivity for finite commutative coefficients
 (blueprint: lem-weil-pbc-constructible-module-limit-descent).
 -/
+
+@[expose] public section
 
 universe u
 

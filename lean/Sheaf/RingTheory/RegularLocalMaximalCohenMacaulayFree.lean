@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import Mathlib.RingTheory.RegularLocalRing.Defs
-import Mathlib.LinearAlgebra.FreeModule.Basic
-import Sheaf.RingTheory.Depth
+module
+
+public import Mathlib.RingTheory.RegularLocalRing.Defs
+public import Mathlib.LinearAlgebra.FreeModule.Basic
+public import Sheaf.RingTheory.Depth
 
 /-!
 # Maximal Cohen–Macaulay modules over regular local rings
@@ -13,6 +15,8 @@ import Sheaf.RingTheory.Depth
 Source: Stacks Project, Algebra, Lemma 10.106.6 (Tag 00NT) and Definition 10.103.8
 (Tag 00NF) (blueprint: lem-weil-pbc-regular-local-mcm-free).
 -/
+
+@[expose] public section
 
 universe u v
 

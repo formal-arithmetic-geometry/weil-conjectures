@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Mathlib.AlgebraicGeometry.Morphisms.Etale
-import Sheaf.AlgebraicGeometry.BaseChangeConventions
-import WeilConjectures.Mathlib.Topology.KrullDimension
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.Etale
+public import Sheaf.AlgebraicGeometry.BaseChangeConventions
+public import WeilConjectures.Mathlib.Topology.KrullDimension
 
 /-!
 # An étale morphism is smooth with zero-dimensional fibres
@@ -13,6 +15,8 @@ import WeilConjectures.Mathlib.Topology.KrullDimension
 Source: Stacks Project, remark after Definition 02GI, Lemmas 02GK, 02GL and 02H6
 (blueprint: lem-weil-pbc-etale-smooth-zero-dimensional-fibres).
 -/
+
+@[expose] public section
 
 universe u
 

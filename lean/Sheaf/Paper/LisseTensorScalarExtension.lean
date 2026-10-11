@@ -2,13 +2,15 @@
 Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 -/
-import WeilConjectures.ConstructibleSheaf.Defs
-import WeilConjectures.Mathlib.CategoryTheory.Sites.Point.Basic
-import Mathlib.CategoryTheory.Sites.Monoidal
-import Mathlib.CategoryTheory.Sites.Point.Monoidal
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.StalkMonoidal
-import Mathlib.Algebra.Category.ModuleCat.Monoidal.Closed
-import Sheaf.Algebra.Category.ModuleCat.RingScalarExtension
+module
+
+public import WeilConjectures.ConstructibleSheaf.Defs
+public import WeilConjectures.Mathlib.CategoryTheory.Sites.Point.Basic
+public import Mathlib.CategoryTheory.Sites.Monoidal
+public import Mathlib.CategoryTheory.Sites.Point.Monoidal
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.StalkMonoidal
+public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Closed
+public import Sheaf.Algebra.Category.ModuleCat.RingScalarExtension
 
 /-! # Tensor products, scalar extension and stalks of lisse sheaves
 
@@ -20,6 +22,8 @@ Lisse sheaves of `Λ`-modules are the sheaves satisfying the source predicate
 algebraically closed fields. Stalks are the fibres of the lifted point
 `(pointSmallEtale y).ulift`, as in lem-pod-etale-stalk-tensor-scalar.
 -/
+
+@[expose] public section
 
 universe u
 

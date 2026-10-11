@@ -3,13 +3,15 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group S1
 -/
-import Sheaf.AlgebraicGeometry.DerivedTensorStructure
-import Sheaf.AlgebraicGeometry.DerivedPullback
-import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
-import Sheaf.AlgebraicGeometry.PerfectComplex
-import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-import Mathlib.AlgebraicGeometry.Morphisms.Proper
-import Mathlib.AlgebraicGeometry.Noetherian
+module
+
+public import Sheaf.AlgebraicGeometry.DerivedTensorStructure
+public import Sheaf.AlgebraicGeometry.DerivedPullback
+public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
+public import Sheaf.AlgebraicGeometry.PerfectComplex
+public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+public import Mathlib.AlgebraicGeometry.Morphisms.Proper
+public import Mathlib.AlgebraicGeometry.Noetherian
 
 /-!
 # Tensor formula for the right adjoint of a perfect proper immersion
@@ -18,6 +20,8 @@ Source: literature/stacks-project/duality.tex, Tag 0A9U
 (projection formula for a perfect proper morphism and its right adjoint)
 (blueprint: lem-sc-smooth-proper-diagonal-tensor-formula).
 -/
+
+@[expose] public section
 
 set_option autoImplicit false
 

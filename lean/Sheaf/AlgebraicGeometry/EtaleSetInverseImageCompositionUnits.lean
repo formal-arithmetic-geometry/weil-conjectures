@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import Sheaf.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
+module
+
+public import Sheaf.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
 
 /-! # Composition of inverse images of étale sheaves of sets, with units
 
@@ -11,6 +13,8 @@ Source: Stacks Project, Sites, Tags 03CB and 03CC, and Étale Cohomology, Tag 09
 third paragraph of the proof
 (blueprint: lem-weil-pbc-sets-etale-inverse-image-composition-units).
 -/
+
+@[expose] public section
 
 universe u
 

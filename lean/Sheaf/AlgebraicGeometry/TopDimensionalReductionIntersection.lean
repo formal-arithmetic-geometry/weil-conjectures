@@ -3,16 +3,20 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Sheaf.AlgebraicGeometry.IntersectionNumber
-import WeilConjectures.AlgebraicGeometry.Modules.Ample
-import Mathlib.RingTheory.Length
-import Mathlib.Topology.Sober
+module
+
+public import Sheaf.AlgebraicGeometry.IntersectionNumber
+public import WeilConjectures.AlgebraicGeometry.Modules.Ample
+public import Mathlib.RingTheory.Length
+public import Mathlib.Topology.Sober
 
 /-! # Reduction of intersection numbers to top-dimensional components
 
 Source: Stacks Project, Varieties, Lemma 33.45.6, Tag 0BES, used in Tag 0BEV
 (blueprint: lem-sc-top-dimensional-reduction-intersection).
 -/
+
+@[expose] public section
 
 universe u
 

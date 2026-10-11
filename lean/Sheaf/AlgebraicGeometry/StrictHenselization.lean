@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group G1
 -/
-import Mathlib.AlgebraicGeometry.Sites.EtalePoint
-import Mathlib.AlgebraicGeometry.GammaSpecAdjunction
-import Mathlib.Algebra.Category.Ring.Colimits
-import Sheaf.AlgebraicGeometry.AffinePointedNeighbourhoodCofinal
+module
+
+public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
+public import Mathlib.AlgebraicGeometry.GammaSpecAdjunction
+public import Mathlib.Algebra.Category.Ring.Colimits
+public import Sheaf.AlgebraicGeometry.AffinePointedNeighbourhoodCofinal
 
 /-!
 # Strict henselization from affine pointed neighbourhoods
@@ -14,6 +16,8 @@ import Sheaf.AlgebraicGeometry.AffinePointedNeighbourhoodCofinal
 Source: Weil conjectures blueprint, `sec-curve-estimates/sk-prop-h2`, definition
 `def-weil-pbc-strict-henselization-limit` (blueprint: def-weil-pbc-strict-henselization-limit).
 -/
+
+@[expose] public section
 
 universe u
 

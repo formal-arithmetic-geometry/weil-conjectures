@@ -3,13 +3,17 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Sheaf.AlgebraicGeometry.DerivedTensorCohomologyVanishes
+module
+
+public import Sheaf.AlgebraicGeometry.DerivedTensorCohomologyVanishes
 
 /-! # Finite Tor dimension on a scheme
 
 Source: Stacks Project, Cohomology of Sheaves, Definition 20.48.1, Tag 08CG
 (blueprint: def-pc-finite-tor-dimension).
 -/
+
+@[expose] public section
 
 universe u w
 

@@ -3,12 +3,14 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group J1
 -/
-import Sheaf.AlgebraicGeometry.CoherentFormalModule
-import Sheaf.Topology.RingedSpaceModuleCohomology
-import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
-import Mathlib.AlgebraicGeometry.Morphisms.Proper
-import Mathlib.RingTheory.ReesAlgebra
-import Mathlib.Algebra.DirectSum.Basic
+module
+
+public import Sheaf.AlgebraicGeometry.CoherentFormalModule
+public import Sheaf.Topology.RingedSpaceModuleCohomology
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
+public import Mathlib.AlgebraicGeometry.Morphisms.Proper
+public import Mathlib.RingTheory.ReesAlgebra
+public import Mathlib.Algebra.DirectSum.Basic
 
 /-! # Finiteness of cohomology of ideal powers over the Rees algebra
 
@@ -20,6 +22,8 @@ J.toModulesι n).2 F` (at `n = 0` the power is `O_X` with identity inclusion, so
 is canonically `F`), and `H^q(X, -)` is an `A`-module by restriction of scalars along
 `A ≅ Γ(Spec A, O) → Γ(X, O_X)`, as in the landed statements.
 -/
+
+@[expose] public section
 
 universe v
 

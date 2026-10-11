@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import Sheaf.RingTheory.FormallySmoothAdic
-import Mathlib.RingTheory.AdicCompletion.Basic
+module
+
+public import Sheaf.RingTheory.FormallySmoothAdic
+public import Mathlib.RingTheory.AdicCompletion.Basic
 
 /-!
 # Lifting adically formally smooth algebras into complete rings
@@ -12,6 +14,8 @@ import Mathlib.RingTheory.AdicCompletion.Basic
 Source: Stacks Project, More on Algebra, Lemma 15.38.5 (Tag 07NJ), with the base
 ring discrete (blueprint: lem-weil-pbc-fs-adic-lift-into-complete).
 -/
+
+@[expose] public section
 
 universe u v w
 

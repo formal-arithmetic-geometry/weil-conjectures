@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import Sheaf.AlgebraicGeometry.FormallyUnramifiedConormal
-import Sheaf.AlgebraicGeometry.ClosedImmersionConormalFunctorial
-import Mathlib.AlgebraicGeometry.Morphisms.Flat
+module
+
+public import Sheaf.AlgebraicGeometry.FormallyUnramifiedConormal
+public import Sheaf.AlgebraicGeometry.ClosedImmersionConormalFunctorial
+public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 
 /-!
 # Universal first order thickenings under flat base change
@@ -13,6 +15,8 @@ import Mathlib.AlgebraicGeometry.Morphisms.Flat
 Source: Stacks Project, More on Morphisms, Lemmas 04F8 and 04F9; Morphisms,
 Lemmas 01R4 and 0473 (blueprint: lem-weil-pbc-universal-thickening-flat-base-change).
 -/
+
+@[expose] public section
 
 universe u
 

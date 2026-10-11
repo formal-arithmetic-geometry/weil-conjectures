@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
-import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
-import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
+module
+
+public import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
+public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
+public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 
 /-!
 # Quasi-coherent modules annihilated by a closed subscheme's ideal
@@ -14,6 +16,8 @@ import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 Source: Stacks Project, Morphisms, Lemma 01QY, and Modules, Lemmas 08KS,
 01BG, and 01B6 (blueprint: lem-weil-pbc-closed-immersion-pushforward-annihilated).
 -/
+
+@[expose] public section
 
 universe u
 

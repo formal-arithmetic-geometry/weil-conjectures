@@ -2,15 +2,19 @@
 Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 -/
-import Sheaf.CategoryTheory.ExactCouple
-import Sheaf.CategoryTheory.ExactCoupleConvergence
-import Sheaf.CategoryTheory.Filtration
+module
+
+public import Sheaf.CategoryTheory.ExactCouple
+public import Sheaf.CategoryTheory.ExactCoupleConvergence
+public import Sheaf.CategoryTheory.Filtration
 
 /-!
 # Edge collapse and edge maps
 
 Source: blueprint node `lem-sp-edge-collapse` (blueprint: lem-sp-edge-collapse).
 -/
+
+@[expose] public section
 
 universe u v
 

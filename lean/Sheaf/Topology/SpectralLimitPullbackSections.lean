@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Mathlib.Topology.Spectral.Basic
-import Mathlib.Topology.Spectral.Hom
-import Sheaf.Topology.SetsInverseImageComposition
+module
+
+public import Mathlib.Topology.Spectral.Basic
+public import Mathlib.Topology.Spectral.Hom
+public import Sheaf.Topology.SetsInverseImageComposition
 
 /-!
 # Sections of inverse images on spectral limits
@@ -13,6 +15,8 @@ import Sheaf.Topology.SetsInverseImageComposition
 Source: Stacks Project, Sheaves on Spaces, Tag 0A32, with the composition maps of Tag 008I
 (blueprint: lem-weil-pbc-spectral-limit-pullback-sections).
 -/
+
+@[expose] public section
 
 universe u
 

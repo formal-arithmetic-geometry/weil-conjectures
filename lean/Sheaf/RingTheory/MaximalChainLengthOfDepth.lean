@@ -3,11 +3,13 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import Sheaf.RingTheory.Depth
-import Mathlib.RingTheory.KrullDimension.Basic
-import Mathlib.RingTheory.Noetherian.Defs
-import Mathlib.Order.Preorder.Chain
-import Mathlib.Order.RelSeries
+module
+
+public import Sheaf.RingTheory.Depth
+public import Mathlib.RingTheory.KrullDimension.Basic
+public import Mathlib.RingTheory.Noetherian.Defs
+public import Mathlib.Order.Preorder.Chain
+public import Mathlib.Order.RelSeries
 
 /-!
 # Length of maximal prime chains in a Cohen–Macaulay local ring
@@ -15,6 +17,8 @@ import Mathlib.Order.RelSeries
 Source: Stacks Project, Algebra, Lemma 10.104.3 (Tag 00N9), via Lemma 10.103.9
 (Tag 0AAE) for the module `S` (blueprint: lem-weil-pbc-cm-local-maximal-chain-length).
 -/
+
+@[expose] public section
 
 universe u
 

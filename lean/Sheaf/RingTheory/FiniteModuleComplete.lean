@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import Mathlib.RingTheory.AdicCompletion.Basic
-import Mathlib.RingTheory.Noetherian.Defs
-import Mathlib.RingTheory.Finiteness.Defs
+module
+
+public import Mathlib.RingTheory.AdicCompletion.Basic
+public import Mathlib.RingTheory.Noetherian.Defs
+public import Mathlib.RingTheory.Finiteness.Defs
 
 /-!
 # Completeness of finite modules over complete Noetherian rings
@@ -13,6 +15,8 @@ import Mathlib.RingTheory.Finiteness.Defs
 Source: Stacks Project, Algebra, Lemmas 031B and 00MA (3)
 (blueprint: lem-weil-pbc-finite-module-complete-over-complete-noetherian).
 -/
+
+@[expose] public section
 
 universe u v
 

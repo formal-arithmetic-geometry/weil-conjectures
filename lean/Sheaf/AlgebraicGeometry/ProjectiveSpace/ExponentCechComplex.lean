@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF worker H1
 -/
-import Mathlib.Algebra.Homology.HomologicalComplex
-import Mathlib.Algebra.Category.ModuleCat.Basic
-import Mathlib.LinearAlgebra.Finsupp.LinearCombination
+module
+
+public import Mathlib.Algebra.Homology.HomologicalComplex
+public import Mathlib.Algebra.Category.ModuleCat.Basic
+public import Mathlib.LinearAlgebra.Finsupp.LinearCombination
 
 /-!
 # The fixed-exponent monomial Cech complex
@@ -13,6 +15,8 @@ import Mathlib.LinearAlgebra.Finsupp.LinearCombination
 Source: Stacks Project, Cohomology of Schemes, Tag 01XS, proof of projective-space
 cohomology (blueprint: def-pc-exponent-cech-complex).
 -/
+
+@[expose] public section
 
 open CategoryTheory
 

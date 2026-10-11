@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Mathlib.AlgebraicGeometry.Noetherian
-import Mathlib.AlgebraicGeometry.Properties
-import Mathlib.Topology.KrullDimension
+module
+
+public import Mathlib.AlgebraicGeometry.Noetherian
+public import Mathlib.AlgebraicGeometry.Properties
+public import Mathlib.Topology.KrullDimension
 
 /-!
 # Finite complements of affine opens on integral curves
@@ -14,6 +16,8 @@ Source: Stacks Project, Varieties, Tag 09ND, proof of
 `lemma-dim-1-noetherian-integral-separated-has-ample`, second sentence
 (blueprint: lem-sc-affine-complement-finite-on-integral-curve).
 -/
+
+@[expose] public section
 
 universe u
 

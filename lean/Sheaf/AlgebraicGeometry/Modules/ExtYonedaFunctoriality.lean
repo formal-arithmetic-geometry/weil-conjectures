@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import Sheaf.AlgebraicGeometry.LocallyFreeExtCohomology
+module
+
+public import Sheaf.AlgebraicGeometry.LocallyFreeExtCohomology
 
 /-!
 # Functoriality of Ext and the structure-sheaf cohomology comparison
@@ -11,6 +13,8 @@ import Sheaf.AlgebraicGeometry.LocallyFreeExtCohomology
 Source: Stacks Project, Derived Categories, Tag 06XP; Cohomology, Tag 01DZ
 (blueprint: lem-sc-p1-ext-yoneda-functoriality).
 -/
+
+@[expose] public section
 
 universe u₁
 

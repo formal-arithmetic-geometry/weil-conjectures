@@ -1,8 +1,10 @@
-import Mathlib.RingTheory.LocalRing.ResidueField.Fiber
-import Mathlib.RingTheory.Localization.AtPrime.Basic
-import Mathlib.RingTheory.FinitePresentation
-import Mathlib.RingTheory.RingHom.Flat
-import Sheaf.RingTheory.SingularIdeal
+module
+
+public import Mathlib.RingTheory.LocalRing.ResidueField.Fiber
+public import Mathlib.RingTheory.Localization.AtPrime.Basic
+public import Mathlib.RingTheory.FinitePresentation
+public import Mathlib.RingTheory.RingHom.Flat
+public import Sheaf.RingTheory.SingularIdeal
 
 /-!
 # Flat with smooth fibre implies smooth at a prime
@@ -10,6 +12,8 @@ import Sheaf.RingTheory.SingularIdeal
 Source: Stacks Project, Algebra, Lemma 00TF (lemma-flat-fibre-smooth)
 (blueprint: lem-weil-pbc-flat-smooth-fibre-smooth-at-prime).
 -/
+
+@[expose] public section
 
 universe u v
 

@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Sheaf.AlgebraicGeometry.ProjectiveSpaceHomOfGeneratingSections
-import WeilConjectures.AlgebraicGeometry.Cohomology.Defs
-import Mathlib.AlgebraicGeometry.Morphisms.Proper
-import Mathlib.LinearAlgebra.LinearIndependent.Defs
+module
+
+public import Sheaf.AlgebraicGeometry.ProjectiveSpaceHomOfGeneratingSections
+public import WeilConjectures.AlgebraicGeometry.Cohomology.Defs
+public import Mathlib.AlgebraicGeometry.Morphisms.Proper
+public import Mathlib.LinearAlgebra.LinearIndependent.Defs
 
 /-!
 # The complete linear system of a closed-immersion subsystem
@@ -15,6 +17,8 @@ Source: Stacks Project, Constructions, Lemma 01NE and Definition 01NF; Morphisms
 and 01W6; the projection argument in `lem-pc-very-ample-ample`
 (blueprint: lem-pc-complete-linear-system-closed).
 -/
+
+@[expose] public section
 
 universe u
 

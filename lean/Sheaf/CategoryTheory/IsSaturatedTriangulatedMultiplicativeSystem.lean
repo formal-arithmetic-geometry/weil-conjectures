@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import Mathlib.CategoryTheory.Localization.Triangulated
-import Mathlib.CategoryTheory.MorphismProperty.Comma
-import Sheaf.CategoryTheory.DerivedCategory.EssentiallyConstantPro
+module
+
+public import Mathlib.CategoryTheory.Localization.Triangulated
+public import Mathlib.CategoryTheory.MorphismProperty.Comma
+public import Sheaf.CategoryTheory.DerivedCategory.EssentiallyConstantPro
 
 /-! # Saturated multiplicative systems and pointwise left-derived values
 
@@ -21,6 +23,8 @@ Tags 05R2, 05S8, 05S9 (blueprint: def-pur-saturated-triangulated-localization).
 * `Functor.IsTriangulatedLeftDerivedValue`: a value of the essentially constant pro-diagram.
 * `Functor.IsTriangulatedLeftDerivedDefinedAt`: existence of such a value.
 -/
+
+@[expose] public section
 
 universe u v uD vD uE vE
 

@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF contributors
 -/
-import Sheaf.RingTheory.GRing
-import Mathlib.RingTheory.Localization.Basic
+module
+
+public import Sheaf.RingTheory.GRing
+public import Mathlib.RingTheory.Localization.Basic
 
 /-!
 # Regularity through localization
@@ -12,6 +14,8 @@ import Mathlib.RingTheory.Localization.Basic
 Source: Stacks Project, More on Algebra, proof of Lemma Tag 07PT, line 12392
 (blueprint: lem-weil-pbc-regular-through-localization).
 -/
+
+@[expose] public section
 
 universe u v w
 

@@ -3,11 +3,13 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
-import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
-import Mathlib.RingTheory.Noetherian.Basic
-import Sheaf.AlgebraicGeometry.BaseChangeConventions
-import Sheaf.AlgebraicGeometry.ClosedSubsetProperOverBase
+module
+
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
+public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
+public import Mathlib.RingTheory.Noetherian.Basic
+public import Sheaf.AlgebraicGeometry.BaseChangeConventions
+public import Sheaf.AlgebraicGeometry.ClosedSubsetProperOverBase
 
 /-!
 # Descent of proper module support
@@ -16,6 +18,8 @@ Source: Stacks Project, Limits of Schemes, Lemma 32.13.5 (Tag 081G), together wi
 Cohomology of Schemes, Lemma 30.26.7 (Tag 0CYS)
 (blueprint: lem-pc-proper-support-descent).
 -/
+
+@[expose] public section
 
 universe u
 

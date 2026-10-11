@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group J1
 -/
-import Mathlib.Algebra.Module.LocalizedModule.Basic
-import Mathlib.RingTheory.Finiteness.Defs
+module
+
+public import Mathlib.Algebra.Module.LocalizedModule.Basic
+public import Mathlib.RingTheory.Finiteness.Defs
 
 /-!
 # A uniform annihilator for a finite module with zero localization
@@ -12,6 +14,8 @@ import Mathlib.RingTheory.Finiteness.Defs
 Source: Stacks Project, Exercise 076A and the proof of Lemma 07FC
 (blueprint: lem-weil-pbc-finite-module-localization-zero-annihilator).
 -/
+
+@[expose] public section
 
 universe u v
 

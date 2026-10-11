@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 
 /-!
 # Closed immersions under composition and fibre products
@@ -13,6 +15,8 @@ Source: Weil conjectures blueprint, `sec-curve-estimates/sk-thm-br`,
 (blueprint: lem-weil-pbc-closed-immersion-products); Stacks Project, Tags 01QS, 01QR,
 01T0 and 01T2.
 -/
+
+@[expose] public section
 
 universe u
 

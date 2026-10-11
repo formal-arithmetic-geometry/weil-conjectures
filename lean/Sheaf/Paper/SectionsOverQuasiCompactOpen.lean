@@ -1,6 +1,11 @@
-import Mathlib.AlgebraicGeometry.Modules.Tilde
-import Mathlib.AlgebraicGeometry.Scheme
-import Mathlib.CategoryTheory.Limits.HasLimits
+module
+
+public import Mathlib.AlgebraicGeometry.Modules.Tilde
+public import Mathlib.AlgebraicGeometry.Scheme
+public import Mathlib.CategoryTheory.Limits.HasLimits
+
+@[expose] public section
+
 open CategoryTheory CategoryTheory.Limits
 open AlgebraicGeometry
 namespace AlgebraicGeometry

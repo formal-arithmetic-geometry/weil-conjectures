@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import Mathlib.AlgebraicGeometry.OpenImmersion
-import Mathlib.LinearAlgebra.SymmetricAlgebra.Basic
-import Mathlib.RingTheory.Spectrum.Prime.FreeLocus
-import Mathlib.RingTheory.Ideal.Operations
+module
+
+public import Mathlib.AlgebraicGeometry.OpenImmersion
+public import Mathlib.LinearAlgebra.SymmetricAlgebra.Basic
+public import Mathlib.RingTheory.Spectrum.Prime.FreeLocus
+public import Mathlib.RingTheory.Ideal.Operations
 
 /-!
 # The affine nonvanishing locus of a section of an invertible module
@@ -14,6 +16,8 @@ import Mathlib.RingTheory.Ideal.Operations
 Source: Stacks Project, Properties, Lemma 01PV (`properties-lemma-affine-cap-s-open`),
 algebra argument in the proof (blueprint: lem-sc-affine-cap-section-open-algebra).
 -/
+
+@[expose] public section
 
 universe u v
 

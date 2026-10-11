@@ -1,6 +1,8 @@
-import Mathlib.RingTheory.Smooth.Basic
-import Mathlib.RingTheory.Localization.AtPrime.Basic
-import Mathlib.RingTheory.RegularLocalRing.Defs
+module
+
+public import Mathlib.RingTheory.Smooth.Basic
+public import Mathlib.RingTheory.Localization.AtPrime.Basic
+public import Mathlib.RingTheory.RegularLocalRing.Defs
 
 /-!
 # Smooth algebras over fields have regular local rings
@@ -8,6 +10,8 @@ import Mathlib.RingTheory.RegularLocalRing.Defs
 Source: Stacks Project, Algebra, Lemma Tag 00TT (blueprint:
 lem-weil-pbc-smooth-over-field-regular-local).
 -/
+
+@[expose] public section
 
 universe u v
 

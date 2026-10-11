@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group J1
 -/
-import Mathlib.RingTheory.RegularLocalRing.Defs
-import Mathlib.RingTheory.KrullDimension.Basic
+module
+
+public import Mathlib.RingTheory.RegularLocalRing.Defs
+public import Mathlib.RingTheory.KrullDimension.Basic
 
 /-!
 # A principal maximal ideal in dimension one gives regularity
@@ -13,6 +15,8 @@ Source: literature/stacks-project/algebra.tex, Algebra, Lemma Tag 00PD
 (condition (4) implies the regular-local assertion in condition (3))
 (blueprint: lem-weil-pbc-principal-maximal-dim-one-regular)
 -/
+
+@[expose] public section
 
 universe u
 

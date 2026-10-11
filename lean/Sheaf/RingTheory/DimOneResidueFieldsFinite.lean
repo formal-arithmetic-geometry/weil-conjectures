@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import Mathlib.RingTheory.KrullDimension.Basic
-import Mathlib.RingTheory.Noetherian.Defs
-import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
-import Mathlib.LinearAlgebra.FiniteDimensional.Defs
+module
+
+public import Mathlib.RingTheory.KrullDimension.Basic
+public import Mathlib.RingTheory.Noetherian.Defs
+public import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
+public import Mathlib.LinearAlgebra.FiniteDimensional.Defs
 
 /-!
 # Residue fields above a one-dimensional local domain
@@ -14,6 +16,8 @@ import Mathlib.LinearAlgebra.FiniteDimensional.Defs
 Source: Stacks Project, Algebra, Tag 031F, Lemma 10.119.10
 (blueprint: lem-weil-pbc-dim-one-residue-field-extensions-finite).
 -/
+
+@[expose] public section
 
 set_option autoImplicit false
 

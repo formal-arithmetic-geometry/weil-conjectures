@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import Mathlib.CategoryTheory.Abelian.Basic
-import Mathlib.CategoryTheory.Subobject.Lattice
+module
+
+public import Mathlib.CategoryTheory.Abelian.Basic
+public import Mathlib.CategoryTheory.Subobject.Lattice
 
 /-!
 # Filtrations of objects in an abelian category
@@ -12,6 +14,8 @@ import Mathlib.CategoryTheory.Subobject.Lattice
 Source: Stacks Project, Homology, Definition 12.19.1 (Tag 0121)
 (blueprint: def-sp-filtration).
 -/
+
+@[expose] public section
 
 universe v u
 

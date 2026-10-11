@@ -3,14 +3,18 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Sheaf.AlgebraicGeometry.LimitAffineTransition
-import Sheaf.AlgebraicGeometry.AffinePushforwardColimit
+module
+
+public import Sheaf.AlgebraicGeometry.LimitAffineTransition
+public import Sheaf.AlgebraicGeometry.AffinePushforwardColimit
 
 /-! # Quasi-coherent sections descend along affine inverse limits
 
 Source: Stacks Project, Limits, Lemma 01Z0 (lemma-descend-section)
 (blueprint: lem-sc-valuation-limit-qcoh-section-descent).
 -/
+
+@[expose] public section
 
 universe u
 

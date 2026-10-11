@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group G1
 -/
-import Mathlib.FieldTheory.Separable
+module
+
+public import Mathlib.FieldTheory.Separable
 
 /-!
 # Reduced quotient by a separable polynomial
@@ -11,6 +13,8 @@ import Mathlib.FieldTheory.Separable
 Source: Stacks Project, Algebra, proof of Lemma Tag 030U, first paragraph,
 line 10182 (blueprint: lem-weil-pbc-separable-polynomial-quotient-reduced).
 -/
+
+@[expose] public section
 
 universe u
 

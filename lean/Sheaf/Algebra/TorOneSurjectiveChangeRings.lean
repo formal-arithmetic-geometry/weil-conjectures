@@ -1,10 +1,12 @@
-import Mathlib.CategoryTheory.Monoidal.Tor
-import Mathlib.Algebra.Category.ModuleCat.Monoidal.Basic
-import Mathlib.Algebra.Category.ModuleCat.Abelian
-import Mathlib.Algebra.Category.ModuleCat.Projective
-import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
-import Mathlib.RingTheory.Ideal.Quotient.Defs
-import Mathlib.RingTheory.Ideal.Maps
+module
+
+public import Mathlib.CategoryTheory.Monoidal.Tor
+public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Basic
+public import Mathlib.Algebra.Category.ModuleCat.Abelian
+public import Mathlib.Algebra.Category.ModuleCat.Projective
+public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
+public import Mathlib.RingTheory.Ideal.Quotient.Defs
+public import Mathlib.RingTheory.Ideal.Maps
 
 /-!
 # Surjectivity of the change-of-rings map on first Tor
@@ -19,6 +21,8 @@ Tensor associativity identifies `(A ⊗[R] F) ⊗[A] (A/J)` with
 `F ⊗[R] (A/J)`, with symmetry exchanging the tensor factors. Thus the
 homology map below is precisely the node's resolution-induced change-of-rings map.
 -/
+
+@[expose] public section
 
 universe u
 

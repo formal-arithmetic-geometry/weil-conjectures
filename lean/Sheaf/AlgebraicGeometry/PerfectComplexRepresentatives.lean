@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import Sheaf.AlgebraicGeometry.PerfectComplex
-import Mathlib.Topology.QuasiSeparated
+module
+
+public import Sheaf.AlgebraicGeometry.PerfectComplex
+public import Mathlib.Topology.QuasiSeparated
 
 /-! # A set of representatives for perfect complexes
 
@@ -12,6 +14,8 @@ Source: Stacks Project, Derived Categories of Schemes,
 Theorem perfect-theorem-bondal-van-den-Bergh, set-of-representatives input
 (blueprint: lem-pc-perfect-complexes-compact-set).
 -/
+
+@[expose] public section
 
 universe u w
 

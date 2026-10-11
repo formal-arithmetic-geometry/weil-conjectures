@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 
 /-!
 # Induction principle for quasi-compact opens
@@ -12,6 +14,8 @@ import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 Source: literature/stacks-project/coherent.tex, Cohomology of Schemes, Lemma 08DR
 (coherent-lemma-induction-principle) (blueprint: lem-sc-invert-s-cohomology-induction).
 -/
+
+@[expose] public section
 
 universe u
 

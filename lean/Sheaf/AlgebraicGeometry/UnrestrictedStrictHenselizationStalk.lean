@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group V1
 -/
-import Sheaf.AlgebraicGeometry.StrictHenselizationRestriction
+module
+
+public import Sheaf.AlgebraicGeometry.StrictHenselizationRestriction
 
 /-!
 # Unrestricted strict-henselization stalk formula
@@ -11,6 +13,8 @@ import Sheaf.AlgebraicGeometry.StrictHenselizationRestriction
 Source: Stacks Project, Theorem 59.53.1, Tag 03Q9, first assertion
 (blueprint: lem-weil-pbc-unrestricted-strict-henselization-stalk).
 -/
+
+@[expose] public section
 
 universe w
 

@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Sheaf.AlgebraicGeometry.LimitAffineTransition
-import Mathlib.CategoryTheory.Comma.Over.Pullback
+module
+
+public import Sheaf.AlgebraicGeometry.LimitAffineTransition
+public import Mathlib.CategoryTheory.Comma.Over.Pullback
 
 /-!
 # Descent of closed immersions to a stage of an inverse limit
@@ -12,6 +14,8 @@ import Mathlib.CategoryTheory.Comma.Over.Pullback
 Source: Stacks Project, Limits, Tag 01ZP, in Situation 081D
 (blueprint: lem-weil-pbc-descend-closed-immersion).
 -/
+
+@[expose] public section
 
 universe u
 

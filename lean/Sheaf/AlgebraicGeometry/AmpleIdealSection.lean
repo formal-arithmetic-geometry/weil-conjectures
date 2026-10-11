@@ -1,11 +1,15 @@
-import Sheaf.AlgebraicGeometry.Ample
-import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
+module
+
+public import Sheaf.AlgebraicGeometry.Ample
+public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 
 /-! # Sections of ample powers in an ideal sheaf
 
 Source: Stacks Project, Properties, Proposition 01Q3, equivalence of (1) and (6)
 (blueprint: lem-sc-ample-ideal-section).
 -/
+
+@[expose] public section
 
 universe u
 

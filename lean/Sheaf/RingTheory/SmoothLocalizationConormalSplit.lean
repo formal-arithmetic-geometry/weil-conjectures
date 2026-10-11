@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import Mathlib.Algebra.MvPolynomial.PDeriv
-import Mathlib.Algebra.Module.LocalizedModule.Basic
-import Mathlib.RingTheory.Smooth.Basic
+module
+
+public import Mathlib.Algebra.MvPolynomial.PDeriv
+public import Mathlib.Algebra.Module.LocalizedModule.Basic
+public import Mathlib.RingTheory.Smooth.Basic
 
 /-!
 # Split conormal sequence of a smooth principal localization
@@ -13,6 +15,8 @@ import Mathlib.RingTheory.Smooth.Basic
 Source: Stacks Project, Smoothing Ring Maps, proofs of Tags 07EZ (part (e)) and 07C6
 (blueprint: lem-weil-pbc-smooth-localization-conormal-split).
 -/
+
+@[expose] public section
 
 set_option autoImplicit false
 

@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import Mathlib.Algebra.Category.ModuleCat.AB
-import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify
-import Mathlib.CategoryTheory.Sites.Abelian
-import Mathlib.Algebra.Homology.ShortComplex.ShortExact
+module
+
+public import Mathlib.Algebra.Category.ModuleCat.AB
+public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify
+public import Mathlib.CategoryTheory.Sites.Abelian
+public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 
 /-!
 # Short exact sequences of finite constant etale sheaves
@@ -15,6 +17,8 @@ Source: Stacks Project, Etale Cohomology, Tag 03RX (3), via Modules on Sites,
 Tag 093U, extension argument; Tag 03EI, exactness of module sheafification
 (blueprint: lem-constructible-constant-exact).
 -/
+
+@[expose] public section
 
 universe u
 

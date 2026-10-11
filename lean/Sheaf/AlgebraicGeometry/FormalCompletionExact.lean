@@ -3,15 +3,19 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group Q1
 -/
-import Sheaf.AlgebraicGeometry.CoherentFormalModulesAbelian
-import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
-import Mathlib.Algebra.Homology.ShortComplex.ShortExact
+module
+
+public import Sheaf.AlgebraicGeometry.CoherentFormalModulesAbelian
+public import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
+public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 
 /-! # Exactness of coherent formal completion
 
 Source: Stacks Project, Cohomology of Schemes, Lemma 0881 and equation 0880
 (blueprint: lem-weil-pbc-formal-completion-exact).
 -/
+
+@[expose] public section
 
 universe u
 

@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1, reviewer R-taf1249
 -/
-import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
-import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolution
-import Mathlib.RingTheory.Flat.CategoryTheory
+module
+
+public import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
+public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolution
+public import Mathlib.RingTheory.Flat.CategoryTheory
 
 /-!
 # Bounded flat models of complexes of modules of finite Tor amplitude
@@ -13,6 +15,8 @@ import Mathlib.RingTheory.Flat.CategoryTheory
 Source: Stacks Project, More on Algebra, Lemma 15.59.3 (Tag 0654)
 (blueprint: lem-pc-module-tor-amplitude-flat-model).
 -/
+
+@[expose] public section
 
 universe w u
 

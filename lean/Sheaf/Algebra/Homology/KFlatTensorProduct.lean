@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group G1
 -/
-import Sheaf.Algebra.Homology.KFlat
-import Mathlib.Geometry.RingedSpace.SheafedSpace
+module
+
+public import Sheaf.Algebra.Homology.KFlat
+public import Mathlib.Geometry.RingedSpace.SheafedSpace
 
 /-!
 # Tensor products of K-flat complexes
@@ -12,6 +14,8 @@ import Mathlib.Geometry.RingedSpace.SheafedSpace
 Source: Stacks Project, Cohomology, Lemma 079R
 (blueprint: lem-pc-kflat-tensor-product).
 -/
+
+@[expose] public section
 
 universe u
 

@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group J1
 -/
-import Sheaf.RingTheory.AnalyticallyUnramified
-import Mathlib.RingTheory.Ideal.AssociatedPrime.Basic
-import Mathlib.RingTheory.RegularLocalRing.Defs
+module
+
+public import Sheaf.RingTheory.AnalyticallyUnramified
+public import Mathlib.RingTheory.Ideal.AssociatedPrime.Basic
+public import Mathlib.RingTheory.RegularLocalRing.Defs
 
 /-!
 # A principal-quotient criterion for an analytically unramified local domain
@@ -13,6 +15,8 @@ import Mathlib.RingTheory.RegularLocalRing.Defs
 Source: Stacks Project, Algebra, Lemma Tag 0330
 (blueprint: lem-weil-pbc-analytic-unramified-principal-criterion).
 -/
+
+@[expose] public section
 
 universe u
 

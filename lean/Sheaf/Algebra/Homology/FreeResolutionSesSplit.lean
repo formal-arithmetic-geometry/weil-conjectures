@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import Mathlib.Algebra.Exact.Basic
-import Mathlib.LinearAlgebra.FreeModule.Basic
+module
+
+public import Mathlib.Algebra.Exact.Basic
+public import Mathlib.LinearAlgebra.FreeModule.Basic
 
 /-!
 # Degreewise split free resolutions of a short exact sequence
@@ -12,6 +14,8 @@ import Mathlib.LinearAlgebra.FreeModule.Basic
 Source: Stacks Project, Algebra, proof of Tag 065P
 (blueprint: lem-weil-pbc-free-resolution-ses-split).
 -/
+
+@[expose] public section
 
 universe u v₁ v₂ v₃
 

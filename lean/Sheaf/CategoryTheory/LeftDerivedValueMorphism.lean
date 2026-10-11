@@ -3,13 +3,17 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group J1
 -/
-import Sheaf.CategoryTheory.IsSaturatedTriangulatedMultiplicativeSystem
+module
+
+public import Sheaf.CategoryTheory.IsSaturatedTriangulatedMultiplicativeSystem
 
 /-! # Morphisms between pointwise left-derived values
 
 Source: Stacks Project, Derived Categories, Lemma 05SA(2)
 (blueprint: lem-pur-derived-functor-morphisms-05sa).
 -/
+
+@[expose] public section
 
 universe u v uD vD
 

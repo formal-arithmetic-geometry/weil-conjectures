@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import Sheaf.CategoryTheory.CartanEilenbergExists
-import Sheaf.CategoryTheory.DoubleComplexTotal
-import Mathlib.Algebra.Homology.Embedding.Extend
-import Mathlib.Algebra.Homology.Homotopy
+module
+
+public import Sheaf.CategoryTheory.CartanEilenbergExists
+public import Sheaf.CategoryTheory.DoubleComplexTotal
+public import Mathlib.Algebra.Homology.Embedding.Extend
+public import Mathlib.Algebra.Homology.Homotopy
 
 /-!
 # Horizontal and vertical components of a Cartan--Eilenberg comparison homotopy
@@ -18,6 +20,8 @@ Homological Algebra, Lemma 5.7.10
 The vertical natural index is extended by zero using Mathlib's extension functor
 before forming the integer-indexed total complex and its second filtration.
 -/
+
+@[expose] public section
 
 universe u v
 

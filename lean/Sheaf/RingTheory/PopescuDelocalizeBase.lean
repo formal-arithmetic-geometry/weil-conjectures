@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import Mathlib.RingTheory.Localization.Algebra
-import Mathlib.RingTheory.Smooth.Basic
-import Sheaf.RingTheory.StrictlyStandardElement
+module
+
+public import Mathlib.RingTheory.Localization.Algebra
+public import Mathlib.RingTheory.Smooth.Basic
+public import Sheaf.RingTheory.StrictlyStandardElement
 
 /-!
 # Delocalizing a smooth factorization
@@ -13,6 +15,8 @@ import Sheaf.RingTheory.StrictlyStandardElement
 Source: Stacks Project, Smoothing Ring Maps, Lemma Tag 07F4
 (blueprint: lem-weil-pbc-popescu-delocalize-base).
 -/
+
+@[expose] public section
 
 universe u v w x
 

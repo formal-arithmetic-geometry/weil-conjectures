@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group G1
 -/
-import Sheaf.Paper.DerivedHomMayerVietoris
+module
+
+public import Sheaf.Paper.DerivedHomMayerVietoris
 
 /-!
 # Isomorphisms of sheaf modules are local on an open cover
@@ -11,6 +13,8 @@ import Sheaf.Paper.DerivedHomMayerVietoris
 Source: Stacks Project, Sheaves, Section 00AK, Lemma 04TN
 (blueprint: lem-weil-pbc-sheaf-isomorphism-local-open-cover).
 -/
+
+@[expose] public section
 
 universe u₂ v₂ w₂
 

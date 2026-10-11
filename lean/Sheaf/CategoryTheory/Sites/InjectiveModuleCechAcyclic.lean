@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group G1
 -/
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
-import Mathlib.CategoryTheory.Preadditive.Injective.Basic
-import Mathlib.CategoryTheory.Sites.PrecoverageToGrothendieck
-import Sheaf.CategoryTheory.SiteCechComplex
+module
+
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
+public import Mathlib.CategoryTheory.Preadditive.Injective.Basic
+public import Mathlib.CategoryTheory.Sites.PrecoverageToGrothendieck
+public import Sheaf.CategoryTheory.SiteCechComplex
 
 /-!
 # Čech acyclicity of injective module sheaves on a ringed site
@@ -15,6 +17,8 @@ Source: Stacks Project, Cohomology on Sites, Tag 03FC
 (lemma-injective-module-trivial-cech), and Tag 03FD
 (blueprint: lem-weil-pbc-ringed-site-injective-module-cech-acyclic).
 -/
+
+@[expose] public section
 
 universe u v w r s
 

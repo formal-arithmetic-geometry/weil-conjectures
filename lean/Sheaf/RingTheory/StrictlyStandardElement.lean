@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import Mathlib.RingTheory.Extension.Presentation.Basic
-import Mathlib.Algebra.MvPolynomial.PDeriv
-import Mathlib.Data.Finset.Sort
-import Mathlib.LinearAlgebra.Matrix.Determinant.Basic
+module
+
+public import Mathlib.RingTheory.Extension.Presentation.Basic
+public import Mathlib.Algebra.MvPolynomial.PDeriv
+public import Mathlib.Data.Finset.Sort
+public import Mathlib.LinearAlgebra.Matrix.Determinant.Basic
 
 /-!
 # Elementary standard and strictly standard elements
@@ -19,6 +21,8 @@ Source: Stacks Project, Smoothing Ring Maps, Definition Tag 07C7
 * `Algebra.IsElementaryStandardElement`: one initial Jacobian minor divides the element.
 * `Algebra.IsStrictlyStandardElement`: the element is a linear combination of all minors.
 -/
+
+@[expose] public section
 
 universe u v
 

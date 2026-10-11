@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import Sheaf.AlgebraicGeometry.DerivedInverseImageComposition
-import WeilConjectures.SixFunctors.BaseChange.DerivedComparison
+module
+
+public import Sheaf.AlgebraicGeometry.DerivedInverseImageComposition
+public import WeilConjectures.SixFunctors.BaseChange.DerivedComparison
 
 /-!
 # Identity and pasting laws of derived square isomorphisms
@@ -18,6 +20,8 @@ The node's closing sentence (the same three identities for the sheaf-level squar
 `squareUpperStarIso_paste_vert_hom` (`WeilConjectures.SixFunctors.BaseChange.Pasting`,
 `.DerivedPasting`; node lem-weil-pbc-square-iso-pasting) and is not restated here.
 -/
+
+@[expose] public section
 
 universe u
 

@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group G1
 -/
-import Mathlib.RingTheory.Ideal.Cotangent
-import Mathlib.RingTheory.Kaehler.Basic
-import Sheaf.FieldTheory.SeparableExtension
+module
+
+public import Mathlib.RingTheory.Ideal.Cotangent
+public import Mathlib.RingTheory.Kaehler.Basic
+public import Sheaf.FieldTheory.SeparableExtension
 
 /-!
 # Separable residue field: the cotangent space injects into the differentials
@@ -13,6 +15,8 @@ import Sheaf.FieldTheory.SeparableExtension
 Source: Stacks Project, Algebra, Lemma Tag 00TU (blueprint:
 lem-weil-pbc-separable-residue-cotangent-injective).
 -/
+
+@[expose] public section
 
 universe u v
 

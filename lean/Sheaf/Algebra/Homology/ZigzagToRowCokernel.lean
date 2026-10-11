@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF worker G1
 -/
-import Sheaf.Algebra.Homology.ZigzagModule
-import Mathlib.Algebra.Homology.HomologicalComplexAbelian
-import Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
-import Mathlib.Algebra.Category.ModuleCat.Abelian
+module
+
+public import Sheaf.Algebra.Homology.ZigzagModule
+public import Mathlib.Algebra.Homology.HomologicalComplexAbelian
+public import Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
+public import Mathlib.Algebra.Category.ModuleCat.Abelian
 
 /-!
 # The canonical map from zig-zags to row-cokernel homology
@@ -14,6 +16,8 @@ import Mathlib.Algebra.Category.ModuleCat.Abelian
 Source: Stacks Project, Algebra, Tag 00M1, proof and functoriality paragraph
 (blueprint: lem-weil-pbc-double-complex-zigzag-to-row-cokernel-map).
 -/
+
+@[expose] public section
 
 universe u v
 

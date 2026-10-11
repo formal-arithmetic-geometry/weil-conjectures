@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import Sheaf.RingTheory.Depth
-import Mathlib.RingTheory.KrullDimension.Module
-import Mathlib.RingTheory.QuotSMulTop
+module
+
+public import Sheaf.RingTheory.Depth
+public import Mathlib.RingTheory.KrullDimension.Module
+public import Mathlib.RingTheory.QuotSMulTop
 
 /-!
 # Good elements for a maximal regular sequence
@@ -14,6 +16,8 @@ Source: Stacks Project, Algebra, Lemma 10.103.2 (Tag 00N4), the preceding
 notation in Section 10.103 (Tag 00N2), and Definition 10.103.1 (Tag 00N3)
 (blueprint: lem-weil-pbc-cm-module-good-sequence-element-nonzerodivisor).
 -/
+
+@[expose] public section
 
 universe u v
 

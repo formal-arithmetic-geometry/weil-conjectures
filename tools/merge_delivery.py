@@ -70,6 +70,22 @@ Usage (from the project root; by the lead, or by a reviewer sub-agent of the lea
                         module, declaration, branch, statement verbatim, no `file` or "file": null) is checked as an
                         existing record (declaration found, statement verbatim, `#check @decl` where Lean runs) and its
                         delivered module is left out as by --drop-files (refused if a kept module imports it).
+  tools/merge_delivery.py <group> <module> --stage 3 --reviewer ID --head SHA [--apply-fixes DIR] [--spot-checked NOTE]
+                        [--verdict PASS|FIX] [--dry-run]
+                        a stage-3 delivery (tools/stage3_delivery.py): the static checks a-e again (on the fixed files
+                        when DIR holds <basename>.lean, <new node id>.json, <name>.change.md or <module>.report.md); the
+                        compile of every module with the probe in lean/.sandbox/L/ (an axiom or an unexpected sorry
+                        refuses; nothing landed); with --reviewer AUTO also the AUTO class again (refused if CODEX).
+                        Then one module alone with SHEAF_GROUP=L tools/land.sh, several modules (item, adapted, new) as
+                        ONE set with SHEAF_GROUP=L tools/land_set.sh lean/.sandbox/L/<module>-set/ (stage 3 §3.4, lead.md
+                        §4); with --reviewer AUTO the landing must be of kind `proof`, else it is reverted
+                        (tools/landing.py revert) and refused. Then: new nodes written whole with `reviewed` and
+                        `reviewed_proof`; existing nodes changed only in the stage-3 fields, with `reviewed_proof`; the
+                        node(s) whose lean.file is the item's module get `reviewed_proof` = {date, by L, reviewer, group,
+                        result, landing, kind, sorry_before, sorry_after}; each change record's `## Status` becomes
+                        `landed <landing id> <date>` (the lead closes it when the global build has verified the set:
+                        `closed <commit>`); the report; claim done, return entry dropped, ledger line, deliveries.log;
+                        one commit "Prove <module> (<group>, reviewed by <ID>)"; branch deleted; queue rewritten.
   tools/merge_delivery.py return <group> <item> REASONS write the reasons into coord/returns/<group>.md, the ledger
                                                         line, and commit; the claim and the branch stay with the group
 
@@ -1021,6 +1037,173 @@ def cmd_merge2(o):
     return 0
 
 
+def cmd_merge3(o):
+    """A stage-3 delivery (called by ~/cc1/autoland.py for AUTO, by the script that executes the Codex reviewer's
+    verdict otherwise; non-interactive, SHEAF_LEAD=L-only). Static checks, compile with the probe, landing (land.sh or land_set.sh as one
+    set), node records, change records, bookkeeping as stage 2."""
+    import shutil
+    import stage2_delivery as s2
+    import stage3_delivery as s3
+    group, item, dry = o.group, o.item, o.dry_run
+    br = branch_of(group, item)
+    if not o.head:
+        raise Fail("--stage 3 needs --head SHA (the commit the reviewer read)")
+    if git("symbolic-ref", "-q", "--short", "HEAD", check=False) != MAIN:
+        raise Fail(f"the working tree is not on {MAIN}")
+    with merge_lock():
+        if not has_ref(f"refs/heads/{br}"):
+            raise Fail(f"no branch {br}")
+        if not git("rev-parse", br).startswith(o.head):
+            raise Fail(f"the branch head is {git('rev-parse', '--short', br)}, not {o.head}: review the new head")
+        base = git("merge-base", MAIN, br)
+        if time.time() - int(git("show", "-s", "--format=%ct", base)) > MAX_AGE:
+            raise Fail(f"base {base[:7]} is too far behind {MAIN}: pull, rebase, push again")
+        G = s2.Git(ROOT)
+        D = s3.read_delivery(G, br, base, group, item)
+        nfix = 0
+        if o.apply_fixes:
+            fixdir, over = pathlib.Path(o.apply_fixes).resolve(), {}
+            by = {pathlib.PurePosixPath(m["file"]).name: m["file"] for m in D["modules"]}
+            by.update({f"{n}.json": x["path"] for n, x in D["nodes"].items()})
+            by.update({pathlib.PurePosixPath(p).stem + ".change.md": p for p in D["changes"]})
+            by[f"{item}.report.md"] = D["report_path"]
+            for fp in sorted(fixdir.iterdir()):
+                if fp.name not in by:
+                    raise Fail(f"--apply-fixes: {fp.name} is not a file of the delivery")
+                over[by[fp.name]] = fp.read_text(); nfix += 1
+            D = s3.read_delivery(G, br, base, group, item, overrides=over)
+        if D["fails"]:
+            raise Fail("; ".join(f"({L}) {x}" for L, x in D["fails"][:6]))
+        why = s3.classify(D, group, item)
+        if o.reviewer == "AUTO" and why:
+            raise Fail("not AUTO: " + "; ".join(why))
+        res = [] if dry else s3.probe(D, "L", ROOT)
+        pf = s3.probe_fails(D, res)
+        if pf:
+            raise Fail("; ".join(x for _, x in pf[:4]))
+        mods = D["modules"]
+        say = (lambda m: print(f"  would {m}")) if dry else (lambda m: None)
+        tree, book, landing, kind = Tree(), {"group": group, "item": item}, None, None
+        try:
+            if len(mods) == 1:
+                m = mods[0]
+                sand = ROOT / "lean" / ".sandbox" / "L" / (item.replace(".", "_") + ".lean")
+                cmd = ["bash", str(ROOT / "tools" / "land.sh"), str(sand), str(ROOT / m["file"])]
+                say(f"write {sand.relative_to(ROOT)} and run SHEAF_GROUP=L tools/land.sh {sand.relative_to(ROOT)} {m['file']}")
+                if not dry:
+                    sand.parent.mkdir(parents=True, exist_ok=True); sand.write_text(m["text"])
+            else:
+                setdir = ROOT / "lean" / ".sandbox" / "L" / (item.replace(".", "_") + "-set")
+                cmd = ["bash", str(ROOT / "tools" / "land_set.sh"), str(setdir)]
+                say(f"write the set {setdir.relative_to(ROOT)} ({len(mods)} modules) and run SHEAF_GROUP=L tools/land_set.sh")
+                if not dry:
+                    shutil.rmtree(setdir, ignore_errors=True)
+                    for m in mods:
+                        p = setdir / m["file"][len("lean/"):]
+                        p.parent.mkdir(parents=True, exist_ok=True); p.write_text(m["text"])
+            if dry:
+                print(f"DRY RUN {item} (stage 3): class {'AUTO' if not why else 'CODEX: ' + '; '.join(why)}; nothing changed")
+                return 0
+            r = subprocess.run(cmd, cwd=ROOT, env=dict(_os.environ, SHEAF_GROUP="L"), text=True, capture_output=True)
+            if r.returncode != 0:
+                raise Fail(f"landing exit {r.returncode}: " + " | ".join((r.stdout + r.stderr).strip().splitlines()[-25:]))
+            mm = re.search(r"as landing ([\w-]+)(?: \((\w+)\))?", r.stdout)
+            landing = mm.group(1) if mm else "?"
+            kind = (mm.group(2) if mm and mm.group(2) else "interface")
+            if o.reviewer == "AUTO" and kind != "proof":
+                # a removed public import in a module nobody imports is the one interface landing AUTO allows
+                try:
+                    ch = json.loads((ROOT / "local" / "builds" / "requests" / f"{landing}.json").read_text()).get("changed") or []
+                except (OSError, ValueError):
+                    ch = ["?"]
+                if len(mods) == 1 and ch and set(ch) <= {"(imports removed)"}:
+                    kind = "proof"
+            if o.reviewer == "AUTO" and kind != "proof":
+                subprocess.run([sys.executable, "tools/landing.py", "revert", landing, "AUTO landing was not a proof landing"],
+                               cwd=ROOT, capture_output=True)
+                landing = None
+                raise Fail(f"the landing is of kind {kind}, not proof: reverted; the delivery is CODEX")
+            # a module whose compile was deferred (it imports a sibling of the set) is probed now that the set is in
+            # the library: the same axiom and sorry check as for the others; a failure reverts the landing
+            late = [m for m, r in zip(mods, res) if r["status"] == "deferred"]
+            if late:
+                D2 = dict(D, modules=late)
+                res2 = s3.probe(D2, "L", ROOT)
+                pf = s3.probe_fails(D2, res2)
+                if pf or any(r["status"] != "ok" for r in res2):
+                    subprocess.run([sys.executable, "tools/landing.py", "revert", landing, "the probe of a module of the set failed"],
+                                   cwd=ROOT, capture_output=True)
+                    landing = None
+                    raise Fail("after the landing, the probe failed for a module compiled late (reverted): "
+                               + ("; ".join(x for _, x in pf[:4]) or "it does not compile with the probe"))
+            verdict = (o.verdict or ("FIX" if nfix else "PASS")).upper()
+            rv = {"date": today(), "by": "L", "reviewer": o.reviewer, "group": group, "result": verdict.lower(),
+                  "landing": landing, "kind": kind}
+            if o.spot_checked:
+                rv["note"] = o.spot_checked
+            paths = []
+            for nid, x in D["nodes"].items():
+                if x["role"] == "new":
+                    nd = dict(x["node"])
+                    nd["reviewed"] = dict(rv, note="new node of a stage-3 delivery, read against its source by the reviewer")
+                else:
+                    nd = json.loads((ROOT / x["path"]).read_text())
+                    for k in s3.STAGE3_OWNS + s3.STAGE3_STATEMENT:   # only what the delivery changed against its base
+                        if (x["base_node"] or {}).get(k) == x["node"].get(k):
+                            continue
+                        if k in x["node"]:
+                            nd[k] = x["node"][k]
+                        else:
+                            nd.pop(k, None)
+                nd["reviewed_proof"] = rv
+                tree.write(x["path"], dump(nd)); paths.append(x["path"])
+            for nid, d in s2.nodes_at(G, MAIN).items():   # the node(s) of the item's module
+                l = d.get("lean") if isinstance(d.get("lean"), dict) else {}
+                if l.get("module") == item and nid not in D["nodes"]:
+                    p = G.node_path(MAIN, nid)
+                    nd = json.loads((ROOT / p).read_text())
+                    m0 = next(m for m in mods if m["role"] == "item")
+                    nd["reviewed_proof"] = dict(rv, sorry_before=m0["diff"]["sorry_before"], sorry_after=m0["diff"]["sorry_after"])
+                    tree.write(p, dump(nd)); paths.append(p)
+            for p, t in D["changes"].items():
+                t2 = re.sub(r"(?m)^(## Status\n+)open\b.*$", f"\\1landed {landing} {today()} (merge of {br})", t)
+                tree.write(p, t2); paths.append(p)
+            tree.write(D["report_path"], D["report"]); paths.append(D["report_path"])
+            rp, rtext, parts = return_entries(group, item)
+            keep = [x for x in parts if not x.startswith(f"## {item} (")]
+            returned = rtext is not None and len(keep) != len(parts)
+            book["returns"] = (rp, rtext)
+            if returned:
+                rp.write_text("".join(keep)); paths.append(rp.relative_to(ROOT).as_posix())
+            claim = ROOT / "coord" / "claims" / (item.replace("/", "__") + ".lock")
+            book["claim"] = (claim, claim.read_text() if claim.exists() else None)
+            dlog = ROOT / "coord" / "deliveries.log"
+            book["dlog"] = (dlog, dlog.read_text() if dlog.exists() else "")
+            subprocess.run([sys.executable, "tools/claim.py", "done", group, item,
+                            f"delivered by {group} on {br}, merged by L (reviewer {o.reviewer})"], cwd=ROOT, capture_output=True)
+            book["ledger"] = ledger_line(f"merged {br} (stage 3; reviewer {verdict}; {'after a return' if returned else 'first push'}; "
+                                         f"landing {landing} ({kind}); modules {len(mods)}; new nodes {sum(1 for x in D['nodes'].values() if x['role'] == 'new')}"
+                                         + (f"; change records: {', '.join(D['changes'])}" if D["changes"] else "") + ")")
+            paths += [m["file"] for m in mods] + ["coord/ledger.md", "coord/deliveries.log"]
+            if book["claim"][1] is not None and exists_at("HEAD", claim.relative_to(ROOT).as_posix()):
+                paths.append(claim.relative_to(ROOT).as_posix())
+            author = git("show", "-s", "--format=%an <%ae>", D["commits"][-1]) if D["commits"] else "L"
+            git_retry("add", "-A", "--", *paths)
+            git_retry("commit", "-q", f"--author={author}", "-m",
+                      f"Prove {item} ({group}, reviewed by {o.reviewer})\n\nDelivered by group {group} ({br}); landing "
+                      f"{landing} ({kind}); merged by tools/merge_delivery.py --stage 3 for L.", "--", *paths)
+        except BaseException as e:
+            tree.restore(); unbook(book)
+            if landing and isinstance(e, Fail):
+                raise Fail(f"{e}. LANDED BUT NOTHING COMMITTED: revert with tools/landing.py revert {landing} <reason>")
+            raise
+        sha = git("rev-parse", "--short", "HEAD")
+        git("branch", "-D", br, check=False)
+        refresh_queue(item)
+    print(f"MERGED {item} {sha}")
+    return 0
+
+
 def main():
     a = sys.argv[1:]
     if not a or a[0] in ("-h", "--help"):
@@ -1049,16 +1232,18 @@ def main():
     ap.add_argument("--revert-nodes"); ap.add_argument("--drop-files"); ap.add_argument("--revert-statement", action="store_true")
     ap.add_argument("--lead-note"); ap.add_argument("--verdict", choices=["PASS", "FIX", "pass", "fix"])
     ap.add_argument("--head")
-    ap.add_argument("--stage", choices=["1", "2"], default="1"); ap.add_argument("--dry-run", action="store_true")
+    ap.add_argument("--stage", choices=["1", "2", "3"], default="1"); ap.add_argument("--dry-run", action="store_true")
     try:
         o = ap.parse_args(a)
     except SystemExit:
         print(f"NOT MERGED {a[1] if len(a) > 1 else '?'}: bad arguments (see --help)"); return 1
-    if o.dry_run and o.stage != "2":
-        print(f"NOT MERGED {o.item}: --dry-run is for --stage 2 only"); return 1
+    if o.dry_run and o.stage not in ("2", "3"):
+        print(f"NOT MERGED {o.item}: --dry-run is for --stage 2 or 3 only"); return 1
     if (o.revert_nodes or o.drop_files or o.revert_statement) and o.stage != "2":
         print(f"NOT MERGED {o.item}: --revert-nodes / --drop-files / --revert-statement are for --stage 2 only"); return 1
     try:
+        if o.stage == "3":
+            return cmd_merge3(o)
         return cmd_merge2(o) if o.stage == "2" else cmd_merge(o)
     except Exception as e:  # noqa: BLE001
         print(f"NOT MERGED {o.item}: {e}")

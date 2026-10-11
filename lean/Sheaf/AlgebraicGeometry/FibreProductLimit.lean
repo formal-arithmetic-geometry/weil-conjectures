@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import Mathlib.AlgebraicGeometry.Pullbacks
+module
+
+public import Mathlib.AlgebraicGeometry.Pullbacks
 
 /-!
 # Fibre products commute with inverse limits of schemes
@@ -11,6 +13,8 @@ import Mathlib.AlgebraicGeometry.Pullbacks
 Source: Stacks Project, Categories, Lemma 4.14.10 (Tag 002M), limit clause;
 blueprint node `lem-kun-fibre-product-limits` (blueprint: lem-kun-fibre-product-limits).
 -/
+
+@[expose] public section
 
 universe w v u
 

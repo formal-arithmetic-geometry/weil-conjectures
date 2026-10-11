@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Sheaf.RingTheory.FormallySmoothAdic
-import Sheaf.RingTheory.GRing
+module
+
+public import Sheaf.RingTheory.FormallySmoothAdic
+public import Sheaf.RingTheory.GRing
 
 /-!
 # Geometric regularity from maximal-ideal-adic formal smoothness
@@ -12,6 +14,8 @@ import Sheaf.RingTheory.GRing
 Source: Stacks Project, More on Algebra, Theorem Tag 07EL, implication (2) to (1)
 (blueprint: lem-weil-pbc-fs-adic-field-geometrically-regular).
 -/
+
+@[expose] public section
 
 universe u v
 

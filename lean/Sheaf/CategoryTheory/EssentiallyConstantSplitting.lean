@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import Sheaf.CategoryTheory.EssentiallyConstantSystem
-import Mathlib.Algebra.Group.Subgroup.Ker
+module
+
+public import Sheaf.CategoryTheory.EssentiallyConstantSystem
+public import Mathlib.Algebra.Group.Subgroup.Ker
 
 /-!
 # Splitting an essentially constant inverse system
@@ -13,6 +15,8 @@ Source: Stacks Project, Homology, Lemma 12.31.5, Tag 070C, forward implication,
 with the cone value of Categories, Tags 05PU(2) and 05PV
 (blueprint: lem-weil-pbc-essentially-constant-splitting).
 -/
+
+@[expose] public section
 
 universe u
 

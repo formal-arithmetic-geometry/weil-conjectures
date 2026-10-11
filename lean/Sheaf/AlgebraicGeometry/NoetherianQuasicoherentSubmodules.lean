@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group J1
 -/
-import Sheaf.AlgebraicGeometry.Coherent
-import Mathlib.AlgebraicGeometry.Noetherian
-import Mathlib.AlgebraicGeometry.IdealSheaf.Basic
-import Mathlib.CategoryTheory.Subobject.Basic
+module
+
+public import Sheaf.AlgebraicGeometry.Coherent
+public import Mathlib.AlgebraicGeometry.Noetherian
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Basic
+public import Mathlib.CategoryTheory.Subobject.Basic
 
 /-! # Ascending chains of quasi-coherent submodules
 
@@ -14,6 +16,8 @@ Source: Stacks Project, Cohomology of Schemes, Lemma 30.10.1 (Tag 01Y8), and the
 maximal-element form used in Tags 088C and 088E
 (blueprint: lem-weil-pbc-noetherian-acc-quasi-coherent).
 -/
+
+@[expose] public section
 
 universe u
 

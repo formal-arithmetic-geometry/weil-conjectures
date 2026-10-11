@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import Sheaf.RingTheory.GRing
-import Mathlib.RingTheory.Ideal.Quotient.Defs
+module
+
+public import Sheaf.RingTheory.GRing
+public import Mathlib.RingTheory.Ideal.Quotient.Defs
 
 /-!
 # Quotients of G-rings
@@ -12,6 +14,8 @@ import Mathlib.RingTheory.Ideal.Quotient.Defs
 Source: Stacks Project, More on Algebra, Lemma 07PP, item (3), specialized to a quotient
 map (blueprint: lem-weil-pbc-g-ring-quotient).
 -/
+
+@[expose] public section
 
 universe u
 

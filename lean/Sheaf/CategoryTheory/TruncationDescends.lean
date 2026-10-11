@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Mathlib.Algebra.Homology.DerivedCategory.Basic
-import Mathlib.Algebra.Homology.Embedding.CochainComplex
-import Mathlib.Algebra.Homology.Single
+module
+
+public import Mathlib.Algebra.Homology.DerivedCategory.Basic
+public import Mathlib.Algebra.Homology.Embedding.CochainComplex
+public import Mathlib.Algebra.Homology.Single
 
 /-!
 # Descent of canonical truncations to the derived category
@@ -13,6 +15,8 @@ import Mathlib.Algebra.Homology.Single
 Source: Stacks Project, Tags 08J5, 0118, 05RU and 04VG
 (blueprint: lem-weil-pbc-truncation-descends).
 -/
+
+@[expose] public section
 
 universe w v u
 

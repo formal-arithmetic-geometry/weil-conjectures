@@ -2,8 +2,10 @@
 Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 -/
-import Sheaf.AlgebraicGeometry.Thickening
-import Mathlib.AlgebraicGeometry.AffineScheme
+module
+
+public import Sheaf.AlgebraicGeometry.Thickening
+public import Mathlib.AlgebraicGeometry.AffineScheme
 
 /-!
 # Affineness of a thickening
@@ -11,6 +13,8 @@ import Mathlib.AlgebraicGeometry.AffineScheme
 Source: Stacks Project, More on Morphisms, Lemma 06AD (label
 `lemma-thickening-affine-scheme`) (blueprint: lem-weil-pbc-thickening-affine-scheme).
 -/
+
+@[expose] public section
 
 universe u
 

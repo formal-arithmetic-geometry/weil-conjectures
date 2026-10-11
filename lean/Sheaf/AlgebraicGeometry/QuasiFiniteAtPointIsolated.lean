@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Mathlib.AlgebraicGeometry.Fiber
-import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
-import Sheaf.AlgebraicGeometry.QuasiFiniteMorphism
+module
+
+public import Mathlib.AlgebraicGeometry.Fiber
+public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
+public import Sheaf.AlgebraicGeometry.QuasiFiniteMorphism
 
 /-!
 # Quasi-finite at a point implies isolated in the fibre
@@ -13,6 +15,8 @@ import Sheaf.AlgebraicGeometry.QuasiFiniteMorphism
 Source: Stacks Project, Morphisms, Lemma 01TH
 (blueprint: lem-weil-pbc-quasi-finite-at-point-isolated).
 -/
+
+@[expose] public section
 
 universe u
 

@@ -3,11 +3,13 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Mathlib.RingTheory.KrullDimension.Basic
-import Mathlib.RingTheory.TensorProduct.Basic
-import Mathlib.AlgebraicGeometry.Fiber
-import Sheaf.AlgebraicGeometry.Dimension
-import Sheaf.AlgebraicGeometry.Variety
+module
+
+public import Mathlib.RingTheory.KrullDimension.Basic
+public import Mathlib.RingTheory.TensorProduct.Basic
+public import Mathlib.AlgebraicGeometry.Fiber
+public import Sheaf.AlgebraicGeometry.Dimension
+public import Sheaf.AlgebraicGeometry.Variety
 
 /-!
 # Dimension under field extension and base change
@@ -15,6 +17,8 @@ import Sheaf.AlgebraicGeometry.Variety
 Source: blueprint `sec-picard-framework/sk-thm-picard-rr/lem-pc-dim-base-change.md`,
 node order 733; Stacks Project, Tag 00P3 (blueprint: lem-pc-dim-base-change).
 -/
+
+@[expose] public section
 
 universe u v w z
 

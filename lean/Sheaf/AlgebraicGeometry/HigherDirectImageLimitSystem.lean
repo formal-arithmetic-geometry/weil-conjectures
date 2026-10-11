@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import Sheaf.AlgebraicGeometry.AbelianHigherDirectImageMap
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
+module
+
+public import Sheaf.AlgebraicGeometry.AbelianHigherDirectImageMap
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
 
 /-!
 # Higher direct images and inverse limits of schemes
@@ -12,6 +14,8 @@ import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
 Source: Stacks Project, Lemma 59.51.7, Tag 09Z1
 (blueprint: sbc-lem-higher-direct-image-limit).
 -/
+
+@[expose] public section
 
 universe v
 

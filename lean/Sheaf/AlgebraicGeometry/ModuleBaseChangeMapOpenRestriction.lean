@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
-import Mathlib.CategoryTheory.Adjunction.Mates
+module
+
+public import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
+public import Mathlib.CategoryTheory.Adjunction.Mates
 
 /-!
 # Module base change maps and open restriction
@@ -12,6 +14,8 @@ import Mathlib.CategoryTheory.Adjunction.Mates
 Source: Stacks Project, Tags 02KG, 0ATL, 0ATM, 00A0 and 08HY
 (blueprint: lem-weil-pbc-module-base-change-map-open-restriction).
 -/
+
+@[expose] public section
 
 universe u
 

@@ -2,12 +2,14 @@
 Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 -/
-import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-import Mathlib.AlgebraicGeometry.AffineScheme
-import Mathlib.AlgebraicGeometry.Restrict
-import Mathlib.Algebra.Category.ModuleCat.Projective
-import Mathlib.CategoryTheory.Abelian.Projective.Resolution
-import Mathlib.RingTheory.Finiteness.Projective
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+public import Mathlib.AlgebraicGeometry.AffineScheme
+public import Mathlib.AlgebraicGeometry.Restrict
+public import Mathlib.Algebra.Category.ModuleCat.Projective
+public import Mathlib.CategoryTheory.Abelian.Projective.Resolution
+public import Mathlib.RingTheory.Finiteness.Projective
 
 /-!
 # Perfect closed immersions
@@ -15,6 +17,8 @@ import Mathlib.RingTheory.Finiteness.Projective
 Source: Stacks Project, More on Morphisms, Tag 0687, Definition 37.61.2,
 and More on Algebra, Tag 068Y, Lemma 15.84.2 (blueprint: def-sc-perfect-closed-immersion).
 -/
+
+@[expose] public section
 
 universe u
 

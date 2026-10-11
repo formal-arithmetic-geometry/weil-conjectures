@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import Mathlib.Algebra.Category.ModuleCat.Sheaf
-import Mathlib.CategoryTheory.Filtered.Basic
-import Mathlib.CategoryTheory.Sites.Limits
-import Mathlib.Topology.Sheaves.SheafCondition.Sites
+module
+
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf
+public import Mathlib.CategoryTheory.Filtered.Basic
+public import Mathlib.CategoryTheory.Sites.Limits
+public import Mathlib.Topology.Sheaves.SheafCondition.Sites
 
 /-!
 # Underlying sheaves of sets and directed colimits of module sheaves
@@ -15,6 +17,8 @@ Source: Stacks Project, modules.tex, Lemma 01AH (line 204), together with
 Sheaves Lemmas 007O and 0087 and Section 009E (blueprint:
 lem-weil-pbc-module-directed-colimit-underlying-sets).
 -/
+
+@[expose] public section
 
 universe u r
 

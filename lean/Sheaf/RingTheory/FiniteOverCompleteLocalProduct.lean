@@ -3,16 +3,20 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Mathlib.Algebra.Algebra.Pi
-import Mathlib.RingTheory.AdicCompletion.LocalRing
-import Mathlib.RingTheory.Finiteness.Defs
-import Mathlib.RingTheory.Noetherian.Defs
+module
+
+public import Mathlib.Algebra.Algebra.Pi
+public import Mathlib.RingTheory.AdicCompletion.LocalRing
+public import Mathlib.RingTheory.Finiteness.Defs
+public import Mathlib.RingTheory.Noetherian.Defs
 
 /-! # Finite algebras over complete local rings
 
 Source: literature/stacks-project/algebra.tex, Lemma Tag 0325
 (blueprint: lem-weil-pbc-finite-over-complete-local-product)
 -/
+
+@[expose] public section
 
 universe u v
 

@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import WeilConjectures.AlgebraicGeometry.Modules.ZeroLocus
-import Sheaf.AlgebraicGeometry.TensorPullback
+module
+
+public import WeilConjectures.AlgebraicGeometry.Modules.ZeroLocus
+public import Sheaf.AlgebraicGeometry.TensorPullback
 
 /-!
 # Pullback compatibility of the zero locus
@@ -17,6 +19,8 @@ The pullback of modules is the recorded `Scheme.Modules.tensorPullback` of
 used by the source theorem; invertibility is `Scheme.Modules.IsInvertible` of
 `def-sc-invertible-module`, not the source's `SheafOfModules.IsInvertible`.
 -/
+
+@[expose] public section
 
 universe u
 

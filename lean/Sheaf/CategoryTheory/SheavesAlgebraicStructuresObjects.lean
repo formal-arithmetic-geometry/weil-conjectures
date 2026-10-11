@@ -3,12 +3,14 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Mathlib.CategoryTheory.Sites.CartesianMonoidal
-import Mathlib.CategoryTheory.Sites.Whiskering
-import Mathlib.CategoryTheory.Monoidal.CommGrp_
-import Mathlib.CategoryTheory.Monoidal.Ring
-import Mathlib.Algebra.Category.Grp.Limits
-import Mathlib.Algebra.Category.Ring.Limits
+module
+
+public import Mathlib.CategoryTheory.Sites.CartesianMonoidal
+public import Mathlib.CategoryTheory.Sites.Whiskering
+public import Mathlib.CategoryTheory.Monoidal.CommGrp_
+public import Mathlib.CategoryTheory.Monoidal.Ring
+public import Mathlib.Algebra.Category.Grp.Limits
+public import Mathlib.Algebra.Category.Ring.Limits
 
 /-!
 # Algebraic sheaves as internal algebraic objects
@@ -17,6 +19,8 @@ Source: Stacks Project, Section 00YR, quadruples before Proposition 00YV and its
 sextuple description of rings; Lemmas 006J and 00W2
 (blueprint: lem-weil-pbc-sheaf-algebraic-structures-objects).
 -/
+
+@[expose] public section
 
 universe u v w
 

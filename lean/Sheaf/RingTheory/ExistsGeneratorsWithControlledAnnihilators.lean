@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: E1
 -/
-import Mathlib.RingTheory.RegularLocalRing.Defs
-import Mathlib.RingTheory.Ideal.Quotient.Operations
+module
+
+public import Mathlib.RingTheory.RegularLocalRing.Defs
+public import Mathlib.RingTheory.Ideal.Quotient.Operations
 
 /-!
 # Generators of a regular prime with controlled annihilators
@@ -12,6 +14,8 @@ import Mathlib.RingTheory.Ideal.Quotient.Operations
 Source: Stacks Project, Smoothing Ring Maps, Lemma 07FD
 (blueprint: lem-weil-pbc-popescu-find-sequence).
 -/
+
+@[expose] public section
 
 universe u
 

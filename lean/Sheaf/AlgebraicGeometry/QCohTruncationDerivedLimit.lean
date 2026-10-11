@@ -3,11 +3,13 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group J1
 -/
-import Sheaf.AlgebraicGeometry.DerivedCategory
-import Sheaf.CategoryTheory.Triangulated.DerivedLimit
-import Mathlib.Algebra.Homology.DerivedCategory.TStructure
-import Mathlib.CategoryTheory.Triangulated.TStructure.TruncLTGE
-import WeilConjectures.Algebra.Homology.HomotopyCategory.Products
+module
+
+public import Sheaf.AlgebraicGeometry.DerivedCategory
+public import Sheaf.CategoryTheory.Triangulated.DerivedLimit
+public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
+public import Mathlib.CategoryTheory.Triangulated.TStructure.TruncLTGE
+public import WeilConjectures.Algebra.Homology.HomotopyCategory.Products
 
 /-! # Reconstruction of quasi-coherent complexes by lower truncations
 
@@ -18,6 +20,8 @@ Both conclusions use specified Roos triangles: the map to the product is fixed t
 induced by the canonical truncation projections. Products are in the ambient derived
 categories, rather than in the full subcategory of quasi-coherent complexes.
 -/
+
+@[expose] public section
 
 universe u w w'
 

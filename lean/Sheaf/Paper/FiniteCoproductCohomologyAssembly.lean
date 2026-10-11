@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Mathlib.AlgebraicGeometry.Limits
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.CohomologyMap
+module
+
+public import Mathlib.AlgebraicGeometry.Limits
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.CohomologyMap
 
 /-! # Cohomology of a finite coproduct is the product of component cohomologies
 
@@ -14,6 +16,8 @@ Lemma 0A5B (blueprint: lem-weil-pbc-finite-coproduct-cohomology-assembly)
 The restriction maps along the coprojections of a finite disjoint coproduct identify
 étale cohomology with the product of the component cohomology groups.
 -/
+
+@[expose] public section
 
 universe u
 

@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
-import Mathlib.Algebra.Category.ModuleCat.Ulift
+module
+
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
+public import Mathlib.Algebra.Category.ModuleCat.Ulift
 
 /-!
 # The extension-by-zero presheaf on a localized ringed site
@@ -12,6 +14,8 @@ import Mathlib.Algebra.Category.ModuleCat.Ulift
 Source: Stacks Project, Modules on Sites, Lemma 03DI, first paragraph of proof
 (blueprint: def-weil-extension-by-zero-presheaf).
 -/
+
+@[expose] public section
 
 universe v v₁ u₁ u
 

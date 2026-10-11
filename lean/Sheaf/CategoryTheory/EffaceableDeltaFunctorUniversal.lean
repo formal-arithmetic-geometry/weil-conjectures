@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import Sheaf.CategoryTheory.DeltaFunctor
+module
+
+public import Sheaf.CategoryTheory.DeltaFunctor
 
 /-!
 # Effaceable delta-functors are universal
@@ -11,6 +13,8 @@ import Sheaf.CategoryTheory.DeltaFunctor
 Source: Stacks Project, Homology, Lemma 010T (lemma-efface-implies-universal)
 (blueprint: lem-weil-pbc-effaceable-delta-functor-universal).
 -/
+
+@[expose] public section
 
 universe v₁ v₂ u₁ u₂
 

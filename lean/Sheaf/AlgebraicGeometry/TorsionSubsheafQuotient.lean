@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import WeilConjectures.AlgebraicGeometry.Modules.FlatPullbackStalk
-import Mathlib.AlgebraicGeometry.FunctionField
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
+module
+
+public import WeilConjectures.AlgebraicGeometry.Modules.FlatPullbackStalk
+public import Mathlib.AlgebraicGeometry.FunctionField
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 
 /-!
 # The torsion subsheaf and its torsion-free quotient
@@ -17,6 +19,8 @@ Source: Stacks Project, Divisors, Tags 0AXR and 0AXT
 The generic skyscraper has sections `F_eta` on opens containing the generic point and zero
 on the empty open. It therefore realizes `j_* F_eta` for `j : Spec k(X) → X`.
 -/
+
+@[expose] public section
 
 universe u
 

@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Mathlib.LinearAlgebra.Matrix.Determinant.Basic
+module
+
+public import Mathlib.LinearAlgebra.Matrix.Determinant.Basic
 
 /-!
 # Nonzero maximal minors of injective matrices over fields
@@ -11,6 +13,8 @@ import Mathlib.LinearAlgebra.Matrix.Determinant.Basic
 Source: Stacks Project, Algebra, Tags 00MY, 00MW (1), (3), and 00MV, specialized to a field
 (blueprint: lem-weil-pbc-field-injective-matrix-nonzero-maximal-minor).
 -/
+
+@[expose] public section
 
 universe u
 

@@ -3,15 +3,19 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group P1
 -/
-import Mathlib.AlgebraicGeometry.Morphisms.Proper
-import WeilConjectures.AlgebraicGeometry.Modules.Differentials
-import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.Proper
+public import WeilConjectures.AlgebraicGeometry.Modules.Differentials
+public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
 
 /-! # The dualizing complex of a smooth proper curve
 
 Source: Stacks Project, Tag 0BRT, Lemma 48.15.7, specialized to a field and relative
  dimension one (blueprint: lem-sc-smooth-proper-curve-dualizing).
 -/
+
+@[expose] public section
 
 universe u wC wk
 

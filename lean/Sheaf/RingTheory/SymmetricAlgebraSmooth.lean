@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group U1
 -/
-import Mathlib.LinearAlgebra.SymmetricAlgebra.Basic
-import Mathlib.RingTheory.Smooth.Basic
+module
+
+public import Mathlib.LinearAlgebra.SymmetricAlgebra.Basic
+public import Mathlib.RingTheory.Smooth.Basic
 
 /-!
 # Smoothness of the symmetric algebra of a finite projective module
@@ -12,6 +14,8 @@ import Mathlib.RingTheory.Smooth.Basic
 Source: Stacks Project, More on Algebra, Lemma Tag 07M6, the finite-projective-to-smooth
 implication (blueprint: lem-weil-pbc-symmetric-algebra-finite-projective-smooth).
 -/
+
+@[expose] public section
 
 universe u v
 

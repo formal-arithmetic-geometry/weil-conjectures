@@ -3,16 +3,20 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import Mathlib.Algebra.Category.Ring.Colimits
-import Mathlib.CategoryTheory.Filtered.Basic
-import Mathlib.RingTheory.Smooth.Basic
-import Mathlib.RingTheory.TensorProduct.Maps
+module
+
+public import Mathlib.Algebra.Category.Ring.Colimits
+public import Mathlib.CategoryTheory.Filtered.Basic
+public import Mathlib.RingTheory.Smooth.Basic
+public import Mathlib.RingTheory.TensorProduct.Maps
 
 /-! # Smooth algebras over a filtered colimit descend to a finite stage
 
 Source: Stacks Project, Algebra, Lemma Tag 0CAQ
 (blueprint: lem-weil-pbc-smooth-algebra-filtered-colimit-descent).
 -/
+
+@[expose] public section
 
 universe u
 

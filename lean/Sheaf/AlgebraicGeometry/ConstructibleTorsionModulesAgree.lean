@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group G1
 -/
-import Sheaf.AlgebraicGeometry.ConstructibleTorsionCurveSheaf
-import Sheaf.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
-import Mathlib.Data.ZMod.Basic
+module
+
+public import Sheaf.AlgebraicGeometry.ConstructibleTorsionCurveSheaf
+public import Sheaf.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
+public import Mathlib.Data.ZMod.Basic
 
 /-!
 # Constructibility of torsion abelian sheaves and of cyclic-coefficient module sheaves
@@ -13,6 +15,8 @@ import Mathlib.Data.ZMod.Basic
 Source: Stacks Project, Tags 03RW(2),(3), 095E and 03RU; the comparison is agent-formulated
 (blueprint: lem-weil-pbc-constructible-torsion-modules-agree).
 -/
+
+@[expose] public section
 
 universe v
 

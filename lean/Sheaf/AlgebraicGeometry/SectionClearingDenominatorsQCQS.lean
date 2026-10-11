@@ -3,17 +3,21 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
-import WeilConjectures.AlgebraicGeometry.Modules.ClearDenominators
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import WeilConjectures.AlgebraicGeometry.Modules.PullbackFreeGenerator
-import Sheaf.AlgebraicGeometry.Ample
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
+public import WeilConjectures.AlgebraicGeometry.Modules.ClearDenominators
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import WeilConjectures.AlgebraicGeometry.Modules.PullbackFreeGenerator
+public import Sheaf.AlgebraicGeometry.Ample
 
 /-! # Clearing denominators of sections on a nonvanishing locus
 
 Source: Stacks Project, Properties, Lemma 01PW, proof of part (2)
 (blueprint: lem-sc-p1-section-clearing-denominators-qcqs).
 -/
+
+@[expose] public section
 
 universe u
 

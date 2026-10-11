@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
-import Mathlib.Topology.KrullDimension
-import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Invertible
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
+public import Mathlib.Topology.KrullDimension
+public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Invertible
 
 /-!
 # Dimension of an effective Cartier divisor
@@ -13,6 +15,8 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Invertible
 Source: Stacks Project, Varieties, Tag 0BEV, the dimension assertion in the proof
 (blueprint: lem-sc-effective-cartier-dimension-drop).
 -/
+
+@[expose] public section
 
 universe u
 

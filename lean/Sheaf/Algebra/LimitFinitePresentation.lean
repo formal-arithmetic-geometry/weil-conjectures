@@ -3,14 +3,18 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import Mathlib.RingTheory.FinitePresentation
-import Mathlib.Algebra.Category.Ring.Constructions
-import Mathlib.CategoryTheory.Filtered.Basic
+module
+
+public import Mathlib.RingTheory.FinitePresentation
+public import Mathlib.Algebra.Category.Ring.Constructions
+public import Mathlib.CategoryTheory.Filtered.Basic
 
 /-! # Noetherian approximation of a finitely presented ring map
 Source: literature/stacks-project/algebra.tex, Lemma Tag 00R0
 (blueprint: lem-weil-pbc-limit-finite-presentation).
 -/
+
+@[expose] public section
 
 open CategoryTheory CategoryTheory.Limits
 

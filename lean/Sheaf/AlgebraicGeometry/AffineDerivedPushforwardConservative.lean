@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group G1
 -/
-import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
-import Mathlib.AlgebraicGeometry.Morphisms.Affine
+module
+
+public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
+public import Mathlib.AlgebraicGeometry.Morphisms.Affine
 
 /-!
 # Affine derived direct image reflects isomorphisms
@@ -12,6 +14,8 @@ import Mathlib.AlgebraicGeometry.Morphisms.Affine
 Source: Stacks Project, Derived Categories of Schemes, Tag 08I8,
 Lemma 36.5.2 (blueprint: lem-sc-affine-derived-pushforward-conservative).
 -/
+
+@[expose] public section
 
 universe u wX wY
 

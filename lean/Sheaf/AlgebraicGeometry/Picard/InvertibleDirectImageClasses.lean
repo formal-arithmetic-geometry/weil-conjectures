@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import WeilConjectures.AlgebraicGeometry.Picard.Representability
-import Sheaf.AlgebraicGeometry.SmoothProjectiveCurve
+module
+
+public import WeilConjectures.AlgebraicGeometry.Picard.Representability
+public import Sheaf.AlgebraicGeometry.SmoothProjectiveCurve
 
 /-!
 # The pointwise invertible-direct-image locus in the normalized Picard functor
@@ -12,6 +14,8 @@ import Sheaf.AlgebraicGeometry.SmoothProjectiveCurve
 Source: Stacks Project, Picard Schemes of Curves, Tag 0B9V
 (blueprint: def-pc-f-subfunctor).
 -/
+
+@[expose] public section
 
 universe v
 

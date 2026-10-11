@@ -3,15 +3,19 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Sheaf.CategoryTheory.ArrowsFunctor
-import Mathlib.CategoryTheory.Limits.Types.Filtered
-import Mathlib.CategoryTheory.FinCategory.Basic
+module
+
+public import Sheaf.CategoryTheory.ArrowsFunctor
+public import Mathlib.CategoryTheory.Limits.Types.Filtered
+public import Mathlib.CategoryTheory.FinCategory.Basic
 
 /-! # Filtered colimits of categories
 
 Source: Stacks Project, Sites, proof of Tag 09YL; Categories, Section Tag 04AX
 (blueprint: lem-weil-pbc-filtered-colimit-categories).
 -/
+
+@[expose] public section
 
 universe z
 

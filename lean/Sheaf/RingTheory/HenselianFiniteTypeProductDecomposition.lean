@@ -3,11 +3,13 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import WeilConjectures.Mathlib.RingTheory.Henselian
-import Sheaf.RingTheory.QuasiFiniteAtPrime
-import Mathlib.Algebra.Category.CommAlgCat.Basic
-import Mathlib.Algebra.Algebra.Pi
-import Mathlib.Algebra.Algebra.Prod
+module
+
+public import WeilConjectures.Mathlib.RingTheory.Henselian
+public import Sheaf.RingTheory.QuasiFiniteAtPrime
+public import Mathlib.Algebra.Category.CommAlgCat.Basic
+public import Mathlib.Algebra.Algebra.Pi
+public import Mathlib.Algebra.Algebra.Prod
 
 /-!
 # Finite-type algebras over henselian local rings
@@ -15,6 +17,8 @@ import Mathlib.Algebra.Algebra.Prod
 Source: Stacks Project, Algebra, Lemma 10.153.5 (Tag 04GJ)
 (blueprint: lem-weil-pbc-henselian-finite-type-product-decomposition).
 -/
+
+@[expose] public section
 
 universe u v
 

@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Mathlib.RingTheory.Regular.RegularSequence
-import Mathlib.Algebra.MvPolynomial.Basic
-import Mathlib.Data.List.OfFn
+module
+
+public import Mathlib.RingTheory.Regular.RegularSequence
+public import Mathlib.Algebra.MvPolynomial.Basic
+public import Mathlib.Data.List.OfFn
 
 /-!
 # Regular sequences multiplied by polynomial variables
@@ -13,6 +15,8 @@ import Mathlib.Data.List.OfFn
 Source: Stacks Project, Algebra, Lemma 10.68.10, Tag 07DW
 (blueprint: lem-weil-pbc-regular-sequence-polynomial-variables).
 -/
+
+@[expose] public section
 
 universe u
 

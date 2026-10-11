@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group U1
 -/
-import Mathlib.LinearAlgebra.SymmetricAlgebra.Basic
-import Mathlib.Algebra.DirectSum.Module
+module
+
+public import Mathlib.LinearAlgebra.SymmetricAlgebra.Basic
+public import Mathlib.Algebra.DirectSum.Module
 
 /-!
 # The grading of the symmetric algebra
@@ -12,6 +14,8 @@ import Mathlib.Algebra.DirectSum.Module
 Source: Stacks Project, Algebra, Section 00DM, tensor algebra
 (blueprint: lem-weil-pbc-symmetric-algebra-graded).
 -/
+
+@[expose] public section
 
 universe u v
 

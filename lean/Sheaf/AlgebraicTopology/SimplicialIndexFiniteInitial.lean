@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import Mathlib.AlgebraicTopology.SimplicialSet.Finite
-import Mathlib.CategoryTheory.Elements
-import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
-import Mathlib.CategoryTheory.Limits.Final
+module
+
+public import Mathlib.AlgebraicTopology.SimplicialSet.Finite
+public import Mathlib.CategoryTheory.Elements
+public import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
+public import Mathlib.CategoryTheory.Limits.Final
 
 /-!
 # Finite initial truncation of the simplicial indexing category
@@ -18,6 +20,8 @@ Source: Stacks Project, Tag 017K, proof, and Tag 002R
 `(n,s) ⟶ (m,t)` lies over `[m] ⟶ [n]` and satisfies `S(φ)(s) = t`.
 The degree predicate selects the full subcategory directly, without a new definition.
 -/
+
+@[expose] public section
 
 universe u v w
 

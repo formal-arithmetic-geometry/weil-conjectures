@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Mathlib.RingTheory.RegularLocalRing.Defs
-import Mathlib.RingTheory.Derivation.Basic
-import Mathlib.Algebra.Polynomial.Basic
+module
+
+public import Mathlib.RingTheory.RegularLocalRing.Defs
+public import Mathlib.RingTheory.Derivation.Basic
+public import Mathlib.Algebra.Polynomial.Basic
 
 /-!
 # Regularity of a degree-p polynomial extension
@@ -13,6 +15,8 @@ import Mathlib.Algebra.Polynomial.Basic
 Source: literature/stacks-project/more-algebra.tex, Lemma Tag 07PG
 (blueprint: lem-weil-pbc-degree-p-extension-regular)
 -/
+
+@[expose] public section
 
 universe u
 

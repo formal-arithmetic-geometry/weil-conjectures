@@ -3,16 +3,20 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group N1
 -/
-import WeilConjectures.AlgebraicGeometry.Modules.Invertible
-import WeilConjectures.AlgebraicGeometry.Cohomology.Defs
-import Sheaf.AlgebraicGeometry.Coherent
-import Sheaf.Topology.RingedSpaceModuleCohomology
+module
+
+public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
+public import WeilConjectures.AlgebraicGeometry.Cohomology.Defs
+public import Sheaf.AlgebraicGeometry.Coherent
+public import Sheaf.Topology.RingedSpaceModuleCohomology
 
 /-! # Cohomology and tensor invariance on a finite scheme
 
 Source: Stacks Project, varieties.tex, Tag 0AYT, parts (3)--(5), rank one
 (blueprint: lem-pc-finite-scheme-cohomology-tensor).
 -/
+
+@[expose] public section
 
 universe u
 

@@ -3,13 +3,18 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF contributors
 -/
-import Sheaf.CategoryTheory.ColimitSites
-import Sheaf.CategoryTheory.SiteFilteredColimitSections
+module
+
+public import Sheaf.CategoryTheory.ColimitSites
+public import Sheaf.CategoryTheory.SiteFilteredColimitSections
 
 /-! # Sections of the colimit sheaf on a colimit of sites
 Source: Stacks Project, Sites, Lemma 09YN and Modules on Sites, Lemma 03CO
 (blueprint: lem-weil-pbc-colimit-of-sites-sections).
 -/
+
+@[expose] public section
+
 universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace CategoryTheory

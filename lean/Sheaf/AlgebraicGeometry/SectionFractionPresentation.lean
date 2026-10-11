@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import WeilConjectures.AlgebraicGeometry.Modules.ClearDenominators
-import WeilConjectures.AlgebraicGeometry.Modules.PullbackFreeGenerator
-import Mathlib.Algebra.DirectSum.Module
-import Mathlib.LinearAlgebra.Quotient.Defs
+module
+
+public import WeilConjectures.AlgebraicGeometry.Modules.ClearDenominators
+public import WeilConjectures.AlgebraicGeometry.Modules.PullbackFreeGenerator
+public import Mathlib.Algebra.DirectSum.Module
+public import Mathlib.LinearAlgebra.Quotient.Defs
 
 /-! # Fractions of tensor-power sections
 
@@ -18,6 +20,8 @@ This is the generators-and-relations presentation of the degree-zero localizatio
 Only nonnegative twists occur in degree-zero fractions, even when the numerator module
 is graded by all integers. Addition and scalar multiplication are the quotient operations.
 -/
+
+@[expose] public section
 
 universe u
 

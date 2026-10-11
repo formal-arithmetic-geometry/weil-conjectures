@@ -3,12 +3,14 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group J1
 -/
-import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
-import Mathlib.CategoryTheory.Preadditive.Projective.Basic
-import Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
-import Mathlib.Algebra.Homology.Embedding.CochainComplex
-import Mathlib.Algebra.Homology.Additive
-import Mathlib.RingTheory.Ideal.Quotient.Defs
+module
+
+public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
+public import Mathlib.CategoryTheory.Preadditive.Projective.Basic
+public import Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
+public import Mathlib.Algebra.Homology.Embedding.CochainComplex
+public import Mathlib.Algebra.Homology.Additive
+public import Mathlib.RingTheory.Ideal.Quotient.Defs
 
 /-!
 # Lifting bounded-above acyclic complexes modulo an ideal
@@ -16,6 +18,8 @@ import Mathlib.RingTheory.Ideal.Quotient.Defs
 Source: Stacks Project, More on Algebra, Tag 0BC9, lemma-lift-acyclic-complex
 (blueprint: lem-sc-complex-lift-acyclic-projective).
 -/
+
+@[expose] public section
 
 universe u v
 

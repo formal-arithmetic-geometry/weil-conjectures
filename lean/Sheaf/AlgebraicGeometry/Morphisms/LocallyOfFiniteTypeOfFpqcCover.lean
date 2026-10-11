@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group J1
 -/
-import Mathlib.AlgebraicGeometry.Sites.Fpqc
+module
+
+public import Mathlib.AlgebraicGeometry.Sites.Fpqc
 
 /-!
 # Fpqc descent of local finite type
@@ -11,6 +13,8 @@ import Mathlib.AlgebraicGeometry.Sites.Fpqc
 Source: Stacks Project, Descent, Lemma 02KX, the descent direction of Definition 02KO
 (blueprint: lem-weil-pbc-fpqc-descend-locally-finite-type).
 -/
+
+@[expose] public section
 
 universe u v
 

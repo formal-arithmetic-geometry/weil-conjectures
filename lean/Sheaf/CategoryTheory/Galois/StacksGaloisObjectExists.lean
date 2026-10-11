@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import Sheaf.CategoryTheory.Galois.StacksGaloisAxioms
+module
+
+public import Sheaf.CategoryTheory.Galois.StacksGaloisAxioms
 
 /-!
 # Galois objects above connected objects
@@ -11,6 +13,8 @@ import Sheaf.CategoryTheory.Galois.StacksGaloisAxioms
 Source: Stacks Project, Fundamental Groups of Schemes, Lemma 0BN2
 (blueprint: lem-galois-object-exists).
 -/
+
+@[expose] public section
 
 universe w v u
 

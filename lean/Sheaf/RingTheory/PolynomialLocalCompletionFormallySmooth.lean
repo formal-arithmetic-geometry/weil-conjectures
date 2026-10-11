@@ -3,11 +3,13 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group J1
 -/
-import Mathlib.Algebra.Polynomial.AlgebraMap
-import Mathlib.RingTheory.Noetherian.Defs
-import Mathlib.RingTheory.Localization.AtPrime.Basic
-import Mathlib.RingTheory.AdicCompletion.Algebra
-import Sheaf.RingTheory.FormallySmoothAdic
+module
+
+public import Mathlib.Algebra.Polynomial.AlgebraMap
+public import Mathlib.RingTheory.Noetherian.Defs
+public import Mathlib.RingTheory.Localization.AtPrime.Basic
+public import Mathlib.RingTheory.AdicCompletion.Algebra
+public import Sheaf.RingTheory.FormallySmoothAdic
 
 /-!
 # Adic formal smoothness of a completed polynomial local ring
@@ -16,6 +18,8 @@ Source: Stacks Project, More on Algebra, proof of Lemma 15.51.9 (Tag 07PU),
 via Lemmas 15.38.2 (Tag 07EC) and 15.38.4 (Tag 07ED)
 (blueprint: lem-weil-pbc-polynomial-local-completion-formally-smooth).
 -/
+
+@[expose] public section
 
 universe u
 

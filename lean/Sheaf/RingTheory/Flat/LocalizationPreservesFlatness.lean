@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import Mathlib.RingTheory.Flat.Localization
+module
+
+public import Mathlib.RingTheory.Flat.Localization
 
 /-!
 # Flatness over a base ring survives algebra-module localization
@@ -11,6 +13,8 @@ import Mathlib.RingTheory.Flat.Localization
 Source: Stacks Project, Algebra, Lemma 10.39.18 (Tag 00HT), part (6), localization
 argument (blueprint: lem-pc-affine-flat-module-localization-preserves-flatness).
 -/
+
+@[expose] public section
 
 namespace Module.Flat
 

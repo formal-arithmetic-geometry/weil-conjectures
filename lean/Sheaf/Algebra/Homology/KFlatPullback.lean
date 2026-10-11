@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Sheaf.Algebra.Homology.KFlat
-import Sheaf.Topology.InverseImageModule
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
+module
+
+public import Sheaf.Algebra.Homology.KFlat
+public import Sheaf.Topology.InverseImageModule
+public import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 
 /-!
 # Pullback preserves K-flat complexes
@@ -18,6 +20,8 @@ followed by sheafified sectionwise change of rings along the adjoint structure m
 Its differentials are inverse images of the original differentials followed by
 `changeOfRingsHom`. No comparison with an abstract module pullback is used.
 -/
+
+@[expose] public section
 
 universe w
 

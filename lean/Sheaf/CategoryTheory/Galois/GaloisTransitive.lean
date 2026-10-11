@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF contributors
 -/
-import Sheaf.CategoryTheory.Galois.StacksGaloisCategory
+module
+
+public import Sheaf.CategoryTheory.Galois.StacksGaloisCategory
 
 /-!
 # Transitivity of the automorphism action
@@ -11,6 +13,8 @@ import Sheaf.CategoryTheory.Galois.StacksGaloisCategory
 Source: Stacks Project, Fundamental Groups of Schemes, Lemma 0BN3
 (blueprint: lem-galois-transitive).
 -/
+
+@[expose] public section
 
 universe w v u
 

@@ -1,11 +1,15 @@
-import WeilConjectures.AlgebraicGeometry.Modules.ProjectionFormula
-import WeilConjectures.AlgebraicGeometry.Modules.Dual
+module
+
+public import WeilConjectures.AlgebraicGeometry.Modules.ProjectionFormula
+public import WeilConjectures.AlgebraicGeometry.Modules.Dual
 
 /-! # Tensoring a quasi-coherent module by an invertible module
 
 Source: literature/stacks-project/coherent.tex, Cohomology of Schemes, Lemma 09MR
 (blueprint: lem-sc-invertible-tensor-qcoherent).
 -/
+
+@[expose] public section
 
 universe u
 

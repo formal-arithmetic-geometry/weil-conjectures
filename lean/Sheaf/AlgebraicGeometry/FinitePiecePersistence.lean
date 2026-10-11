@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Mathlib.AlgebraicGeometry.Morphisms.Finite
-import Mathlib.AlgebraicGeometry.ResidueField
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.Finite
+public import Mathlib.AlgebraicGeometry.ResidueField
 
 /-!
 # Persistence of a finite open piece under residue-field-preserving base change
@@ -12,6 +14,8 @@ import Mathlib.AlgebraicGeometry.ResidueField
 Source: Stacks Project, More on Morphisms, Tag 02LK, final assertion
 (blueprint: lem-weil-pbc-elementary-etale-finite-piece-persistence).
 -/
+
+@[expose] public section
 
 universe u
 

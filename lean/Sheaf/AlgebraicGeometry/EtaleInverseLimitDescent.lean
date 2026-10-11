@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group J1
 -/
-import Sheaf.AlgebraicGeometry.LimitAffineTransition
-import Mathlib.AlgebraicGeometry.Morphisms.Etale
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
-import Mathlib.CategoryTheory.Comma.Over.Pullback
+module
+
+public import Sheaf.AlgebraicGeometry.LimitAffineTransition
+public import Mathlib.AlgebraicGeometry.Morphisms.Etale
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
+public import Mathlib.CategoryTheory.Comma.Over.Pullback
 
 /-!
 # Descent of étaleness to a stage of an inverse limit
@@ -14,6 +16,8 @@ import Mathlib.CategoryTheory.Comma.Over.Pullback
 Source: Stacks Project, Limits, Lemma 07RP in Situation 081D
 (blueprint: lem-weil-pbc-descend-etale).
 -/
+
+@[expose] public section
 
 universe u
 

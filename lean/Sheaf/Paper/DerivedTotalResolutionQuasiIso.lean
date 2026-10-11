@@ -1,10 +1,12 @@
 /-
 Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 -/
-import Mathlib.Algebra.Homology.QuasiIso
-import Mathlib.Algebra.Homology.TotalComplex
-import Mathlib.Algebra.Category.ModuleCat.Basic
-import Mathlib.Algebra.Exact.Basic
+module
+
+public import Mathlib.Algebra.Homology.QuasiIso
+public import Mathlib.Algebra.Homology.TotalComplex
+public import Mathlib.Algebra.Category.ModuleCat.Basic
+public import Mathlib.Algebra.Exact.Basic
 
 /-!
 # Quasi-isomorphism from a good total resolution
@@ -12,6 +14,8 @@ import Mathlib.Algebra.Exact.Basic
 Source: Stacks Project, `literature/stacks-project/homology.tex`,
 Lemma 12.19.4 (Tag 09IZ), statement (blueprint: lem-pc-derived-total-resolution-quasi-iso).
 -/
+
+@[expose] public section
 
 open CategoryTheory
 open CategoryTheory.Limits

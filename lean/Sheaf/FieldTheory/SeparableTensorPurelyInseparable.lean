@@ -1,6 +1,8 @@
-import Mathlib.FieldTheory.LinearDisjoint
-import Mathlib.FieldTheory.PurelyInseparable.Basic
-import Mathlib.LinearAlgebra.Dimension.Constructions
+module
+
+public import Mathlib.FieldTheory.LinearDisjoint
+public import Mathlib.FieldTheory.PurelyInseparable.Basic
+public import Mathlib.LinearAlgebra.Dimension.Constructions
 
 /-!
 # Separable tensor purely inseparable field extensions
@@ -8,6 +10,8 @@ import Mathlib.LinearAlgebra.Dimension.Constructions
 Source: literature/stacks-project/algebra.tex, Lemma Tag 07QH (blueprint:
 lem-weil-pbc-separable-tensor-purely-inseparable-field)
 -/
+
+@[expose] public section
 
 set_option autoImplicit false
 

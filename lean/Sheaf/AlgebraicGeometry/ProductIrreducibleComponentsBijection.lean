@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import Mathlib.AlgebraicGeometry.Geometrically.Irreducible
-import Mathlib.AlgebraicGeometry.Over
+module
+
+public import Mathlib.AlgebraicGeometry.Geometrically.Irreducible
+public import Mathlib.AlgebraicGeometry.Over
 
 /-!
 # Irreducible components of a product over a field
@@ -12,6 +14,8 @@ import Mathlib.AlgebraicGeometry.Over
 Source: Stacks Project, Varieties, Lemma 33.8.4, Tag 038F
 (blueprint: lem-sc-product-irreducible-components-bijection).
 -/
+
+@[expose] public section
 
 universe u
 

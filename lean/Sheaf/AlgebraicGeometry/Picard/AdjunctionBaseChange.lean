@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import Sheaf.AlgebraicGeometry.Picard.InvertibleDirectImageClasses
-import Sheaf.AlgebraicGeometry.BaseChangeConventions
-import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
-import Mathlib.FieldTheory.IsSepClosed
+module
+
+public import Sheaf.AlgebraicGeometry.Picard.InvertibleDirectImageClasses
+public import Sheaf.AlgebraicGeometry.BaseChangeConventions
+public import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
+public import Mathlib.FieldTheory.IsSepClosed
 
 /-!
 # Compatibility of the Picard adjunction morphism with base change
@@ -15,6 +17,8 @@ Source: `WeilConjectures/AlgebraicGeometry/Picard/ZeroScheme.lean`,
 `nonempty_arrowIso_pullback_directImageCounit`, lines 143–175
 (blueprint: lem-pc-zero-scheme-adjunction-base-change).
 -/
+
+@[expose] public section
 
 universe u
 

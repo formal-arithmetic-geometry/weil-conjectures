@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group T1
 -/
-import Mathlib.Algebra.Homology.HomotopyCategory.HomComplex
-import Mathlib.Algebra.Category.ModuleCat.Basic
+module
+
+public import Mathlib.Algebra.Homology.HomotopyCategory.HomComplex
+public import Mathlib.Algebra.Category.ModuleCat.Basic
 
 /-! # The module-valued total Hom complex
 
@@ -12,6 +14,8 @@ Source: Stacks Project, More on Algebra, Section 15.73, Tag 0A8H
 (blueprint: def-sc-module-total-hom-complex).
 The terms and differential are Mathlib's existing linear cochains and `δ_hom`.
 -/
+
+@[expose] public section
 
 universe uH
 

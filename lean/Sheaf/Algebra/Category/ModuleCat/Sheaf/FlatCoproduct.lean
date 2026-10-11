@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.Flat
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.Colimits
+module
+
+public import Sheaf.Algebra.Category.ModuleCat.Sheaf.Flat
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Colimits
 
 /-!
 # Coproducts of flat sheaves of modules
@@ -12,6 +14,8 @@ import Mathlib.Algebra.Category.ModuleCat.Sheaf.Colimits
 Source: Stacks Project, Modules on Sites, Lemma 18.28.5, Tag 03EU, clause (2)
 (blueprint: lem-pc-sites-modules-coproduct-flat).
 -/
+
+@[expose] public section
 
 universe u
 

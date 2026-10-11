@@ -3,11 +3,13 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Mathlib.Algebra.Category.Ring.Basic
-import Mathlib.CategoryTheory.Category.Preorder
-import Mathlib.CategoryTheory.Limits.HasLimits
-import Mathlib.RingTheory.EssentialFiniteness
-import Mathlib.RingTheory.LocalRing.RingHom.Basic
+module
+
+public import Mathlib.Algebra.Category.Ring.Basic
+public import Mathlib.CategoryTheory.Category.Preorder
+public import Mathlib.CategoryTheory.Limits.HasLimits
+public import Mathlib.RingTheory.EssentialFiniteness
+public import Mathlib.RingTheory.LocalRing.RingHom.Basic
 
 /-!
 # Local rings as directed colimits of essentially finite type rings
@@ -15,6 +17,8 @@ import Mathlib.RingTheory.LocalRing.RingHom.Basic
 Source: Stacks Project, Tag 00QU, proof (construction of the base-ring system).
 (blueprint: lem-weil-pbc-local-ring-colimit-essentially-finite-type-over-z)
 -/
+
+@[expose] public section
 
 universe u
 

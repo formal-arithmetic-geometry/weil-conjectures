@@ -3,11 +3,13 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group J1
 -/
-import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolution
-import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.KFlat
-import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
-import Mathlib.CategoryTheory.Adjunction.Additive
-import Mathlib.Algebra.Category.ModuleCat.Descent
+module
+
+public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolution
+public import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.KFlat
+public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
+public import Mathlib.CategoryTheory.Adjunction.Additive
+public import Mathlib.Algebra.Category.ModuleCat.Descent
 
 /-!
 # Ring tensor cohomology and its comparison map
@@ -25,6 +27,8 @@ uses the common model obtained by resolving the restricted A-resolution over R.
 * `comparison`: cohomology of the canonical comparison map.
 * `baseChangeMap`: flat extension of scalars on cohomology.
 -/
+
+@[expose] public section
 
 set_option autoImplicit false
 

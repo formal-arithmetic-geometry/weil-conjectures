@@ -3,11 +3,13 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group J1
 -/
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
-import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
-import Mathlib.RingTheory.Noetherian.Basic
-import Sheaf.AlgebraicGeometry.BaseChangeConventions
-import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
+module
+
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
+public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
+public import Mathlib.RingTheory.Noetherian.Basic
+public import Sheaf.AlgebraicGeometry.BaseChangeConventions
+public import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
 
 /-!
 # Descent of finitely presented quasi-coherent modules and maps
@@ -15,6 +17,8 @@ import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
 Source: Stacks Project, Limits, Lemma 32.10.2, Tag 01ZR
 (blueprint: lem-pc-fp-module-map-descent).
 -/
+
+@[expose] public section
 
 universe u
 

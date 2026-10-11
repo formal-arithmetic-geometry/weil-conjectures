@@ -3,21 +3,25 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group J1
 -/
-import Mathlib.Algebra.Category.Ring.Basic
-import Mathlib.Algebra.Category.Grp.Basic
-import Mathlib.CategoryTheory.Category.Preorder
-import Mathlib.CategoryTheory.Limits.HasLimits
-import Mathlib.RingTheory.LocalRing.Basic
-import Mathlib.RingTheory.EssentialFiniteness
-import Mathlib.RingTheory.FinitePresentation
-import Mathlib.RingTheory.TensorProduct.Basic
-import Mathlib.LinearAlgebra.TensorProduct.Basic
-import Mathlib.LinearAlgebra.Quotient.Basic
+module
+
+public import Mathlib.Algebra.Category.Ring.Basic
+public import Mathlib.Algebra.Category.Grp.Basic
+public import Mathlib.CategoryTheory.Category.Preorder
+public import Mathlib.CategoryTheory.Limits.HasLimits
+public import Mathlib.RingTheory.LocalRing.Basic
+public import Mathlib.RingTheory.EssentialFiniteness
+public import Mathlib.RingTheory.FinitePresentation
+public import Mathlib.RingTheory.TensorProduct.Basic
+public import Mathlib.LinearAlgebra.TensorProduct.Basic
+public import Mathlib.LinearAlgebra.Quotient.Basic
 
 /-! # Limit presentation of an essentially finitely presented local tower
 Source: literature/stacks-project/algebra.tex, proof of Lemma Tag 00R7
 (blueprint: lem-weil-pbc-limit-tower-essentially-finite-presentation).
 -/
+
+@[expose] public section
 
 universe u v p q
 

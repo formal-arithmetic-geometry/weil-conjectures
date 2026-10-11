@@ -1,8 +1,10 @@
-import Sheaf.AlgebraicGeometry.StrictHenselizationRestriction
-import Sheaf.AlgebraicGeometry.EtaleSheaves
-import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStarCoherence
-import WeilConjectures.SixFunctors.Etale.Derived.GlobalSections
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+module
+
+public import Sheaf.AlgebraicGeometry.StrictHenselizationRestriction
+public import Sheaf.AlgebraicGeometry.EtaleSheaves
+public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStarCoherence
+public import WeilConjectures.SixFunctors.Etale.Derived.GlobalSections
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-!
 # Strict-henselization stalk formula
@@ -10,6 +12,8 @@ import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 Source: the blueprint of the Weil conjectures, chapter `sec-curve-estimates`, node
 `prop-weil-pbc-strict-henselization-stalk-formula` (Stacks Project, Tag 03Q9).
 -/
+
+@[expose] public section
 
 universe v
 

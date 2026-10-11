@@ -3,16 +3,20 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import Mathlib.AlgebraicGeometry.Morphisms.Proper
-import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
-import Mathlib.AlgebraicGeometry.Limits
-import Sheaf.AlgebraicGeometry.LimitAffineTransition
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.Proper
+public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
+public import Mathlib.AlgebraicGeometry.Limits
+public import Sheaf.AlgebraicGeometry.LimitAffineTransition
 
 /-! # Proper morphisms as limits of proper finite-type models
 
 Source: Stacks limits.tex, Tag 0A0P (proper-limit-of-proper-finite-presentation-noetherian)
 (blueprint: lem-weil-pbc-proper-limit-noetherian).
 -/
+
+@[expose] public section
 
 open CategoryTheory CategoryTheory.Limits
 

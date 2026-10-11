@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF worker T1
 -/
-import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.TwistSections
-import Sheaf.AlgebraicGeometry.AlternatingCechComputes
-import Sheaf.AlgebraicGeometry.ProjectiveSpace.ExponentCechComplex
+module
+
+public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.TwistSections
+public import Sheaf.AlgebraicGeometry.AlternatingCechComputes
+public import Sheaf.AlgebraicGeometry.ProjectiveSpace.ExponentCechComplex
 
 /-!
 # Laurent monomial decomposition of the alternating twist Čech complex
@@ -13,6 +15,8 @@ import Sheaf.AlgebraicGeometry.ProjectiveSpace.ExponentCechComplex
 Source: Stacks Project, Tag 01XS, proof of Lemma 30.8.1
 (blueprint: lem-pc-twist-cech-monomial-decomposition).
 -/
+
+@[expose] public section
 
 set_option autoImplicit false
 

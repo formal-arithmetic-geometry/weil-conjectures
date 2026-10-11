@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF contributors
 -/
-import Mathlib.CategoryTheory.Sites.LocallyBijective
-import Mathlib.CategoryTheory.Sites.Sheafification
-import Mathlib.CategoryTheory.Subfunctor.Image
+module
+
+public import Mathlib.CategoryTheory.Sites.LocallyBijective
+public import Mathlib.CategoryTheory.Sites.Sheafification
+public import Mathlib.CategoryTheory.Subfunctor.Image
 
 /-!
 # Image presheaf and sheafification
@@ -13,6 +15,8 @@ import Mathlib.CategoryTheory.Subfunctor.Image
 Source: Stacks Project, Sites, Definition 00WM and Lemmas 00WJ, 00WK, 00WN
 (blueprint: lem-weil-pbc-image-presheaf-sheafification-iso).
 -/
+
+@[expose] public section
 
 universe u v w
 

@@ -3,16 +3,20 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import Sheaf.RingTheory.QuasiFiniteAtPrime
-import WeilConjectures.Mathlib.Topology.KrullDimension
-import Mathlib.Algebra.MvPolynomial.Basic
-import Mathlib.RingTheory.Localization.Away.Basic
+module
+
+public import Sheaf.RingTheory.QuasiFiniteAtPrime
+public import WeilConjectures.Mathlib.Topology.KrullDimension
+public import Mathlib.Algebra.MvPolynomial.Basic
+public import Mathlib.RingTheory.Localization.Away.Basic
 
 /-! # Quasi-finite over a polynomial algebra
 
 Source: literature/stacks-project/algebra.tex, Algebra, Lemma Tag 00QE
 (blueprint: lem-weil-pbc-quasi-finite-over-polynomial-algebra).
 -/
+
+@[expose] public section
 
 universe u v
 

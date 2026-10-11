@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Mathlib.Algebra.Category.Grp.AB
-import Mathlib.AlgebraicGeometry.Limits
-import Mathlib.CategoryTheory.Pi.Basic
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+module
+
+public import Mathlib.Algebra.Category.Grp.AB
+public import Mathlib.AlgebraicGeometry.Limits
+public import Mathlib.CategoryTheory.Pi.Basic
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-!
 # Abelian etale sheaves on a finite coproduct
@@ -14,6 +16,8 @@ import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 Source: Stacks Project, Etale Cohomology, proof of Lemma 0A5B, first paragraph,
 finite disjoint-union reduction (blueprint: lem-weil-pbc-etale-sheaf-clopen-product).
 -/
+
+@[expose] public section
 
 universe u v
 

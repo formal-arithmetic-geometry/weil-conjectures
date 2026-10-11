@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group J1
 -/
-import Sheaf.AlgebraicGeometry.FiniteEtaleLiftingApproximation
+module
+
+public import Sheaf.AlgebraicGeometry.FiniteEtaleLiftingApproximation
 
 /-!
 # Reduction of finite étale lifting to henselian G-rings
@@ -11,6 +13,8 @@ import Sheaf.AlgebraicGeometry.FiniteEtaleLiftingApproximation
 Source: Stacks Project, Fundamental Groups, Lemma 0GS2, proof, "General case"
 (blueprint: lem-weil-pbc-finite-etale-lifting-limit-descent).
 -/
+
+@[expose] public section
 
 universe u
 

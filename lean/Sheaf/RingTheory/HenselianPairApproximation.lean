@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group J1
 -/
-import Mathlib.RingTheory.Henselian
-import Mathlib.RingTheory.AdicCompletion.Algebra
-import Sheaf.RingTheory.GRing
+module
+
+public import Mathlib.RingTheory.Henselian
+public import Mathlib.RingTheory.AdicCompletion.Algebra
+public import Sheaf.RingTheory.GRing
 
 /-!
 # Approximation for henselian pairs with a Noetherian G-ring
@@ -13,6 +15,8 @@ import Sheaf.RingTheory.GRing
 Source: Stacks Project, Smoothing Ring Maps, Lemma 0AH5 (case (2))
 (blueprint: lem-weil-pbc-henselian-pair-approximation).
 -/
+
+@[expose] public section
 
 universe u
 

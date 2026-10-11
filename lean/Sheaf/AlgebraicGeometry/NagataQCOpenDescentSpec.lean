@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group P1
 -/
-import Sheaf.AlgebraicGeometry.NagataQCOpenDescent
+module
+
+public import Sheaf.AlgebraicGeometry.NagataQCOpenDescent
 
 /-!
 # Properties of the descended quasi-compact open
@@ -11,6 +13,8 @@ import Sheaf.AlgebraicGeometry.NagataQCOpenDescent
 Source: blueprint, sec-nagata-compactification, sk-prop-nagata-sketch-approximation,
 node order 348 (blueprint: lemma-nagata-qc-open-descends).
 -/
+
+@[expose] public section
 
 universe u
 

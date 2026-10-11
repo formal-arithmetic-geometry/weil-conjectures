@@ -3,13 +3,15 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import Mathlib.Algebra.Homology.DerivedCategory.Basic
-import Mathlib.CategoryTheory.MorphismProperty.Comma
-import Mathlib.CategoryTheory.Functor.Derived.LeftDerived
-import Mathlib.CategoryTheory.Functor.Derived.RightDerived
-import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
-import Sheaf.CategoryTheory.DerivedCategory.EssentiallyConstantInd
-import Sheaf.CategoryTheory.DerivedCategory.EssentiallyConstantPro
+module
+
+public import Mathlib.Algebra.Homology.DerivedCategory.Basic
+public import Mathlib.CategoryTheory.MorphismProperty.Comma
+public import Mathlib.CategoryTheory.Functor.Derived.LeftDerived
+public import Mathlib.CategoryTheory.Functor.Derived.RightDerived
+public import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
+public import Sheaf.CategoryTheory.DerivedCategory.EssentiallyConstantInd
+public import Sheaf.CategoryTheory.DerivedCategory.EssentiallyConstantPro
 
 /-!
 # Everywhere defined derived functors of an adjoint pair
@@ -17,6 +19,8 @@ import Sheaf.CategoryTheory.DerivedCategory.EssentiallyConstantPro
 Source: Stacks Project, Derived Categories, Lemma 09T5, Lemma 0DVC and Definition 05S9
 (blueprint: lem-pc-derived-adjoint-functors).
 -/
+
+@[expose] public section
 
 universe wA wB vA vB uA uB
 

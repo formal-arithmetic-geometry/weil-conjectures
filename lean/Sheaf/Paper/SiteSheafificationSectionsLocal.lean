@@ -1,5 +1,9 @@
-import Mathlib.CategoryTheory.Sites.Sheafification
-import Mathlib.CategoryTheory.Sites.PrecoverageToGrothendieck
+module
+
+public import Mathlib.CategoryTheory.Sites.Sheafification
+public import Mathlib.CategoryTheory.Sites.PrecoverageToGrothendieck
+
+@[expose] public section
 
 open CategoryTheory CategoryTheory.Limits Opposite
 

@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import Sheaf.RingTheory.Depth
-import Mathlib.RingTheory.KrullDimension.Module
-import Mathlib.RingTheory.Noetherian.Defs
+module
+
+public import Sheaf.RingTheory.Depth
+public import Mathlib.RingTheory.KrullDimension.Module
+public import Mathlib.RingTheory.Noetherian.Defs
 
 /-!
 # Depth is bounded by support dimension
@@ -13,6 +15,8 @@ import Mathlib.RingTheory.Noetherian.Defs
 Source: Stacks Project, Algebra, Lemma 00LK (lemma-bound-depth)
 (blueprint: lem-weil-pbc-depth-le-support-dimension).
 -/
+
+@[expose] public section
 
 universe u v
 

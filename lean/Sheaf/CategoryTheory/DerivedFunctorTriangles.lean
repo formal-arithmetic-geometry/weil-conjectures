@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group G1
 -/
-import Sheaf.CategoryTheory.IsSaturatedTriangulatedMultiplicativeSystem
+module
+
+public import Sheaf.CategoryTheory.IsSaturatedTriangulatedMultiplicativeSystem
 
 /-!
 # Left derived functors preserve distinguished triangles
@@ -11,6 +13,8 @@ import Sheaf.CategoryTheory.IsSaturatedTriangulatedMultiplicativeSystem
 Source: Stacks Project, Derived Categories, Lemma 05SC, LF clause
 (blueprint: lem-pur-derived-functor-triangles-05sc).
 -/
+
+@[expose] public section
 
 universe u v uD vD
 

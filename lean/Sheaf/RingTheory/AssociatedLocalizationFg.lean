@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group J1
 -/
-import Mathlib.Algebra.Module.LocalizedModule.AtPrime
-import Mathlib.RingTheory.Localization.AtPrime.Basic
-import Mathlib.RingTheory.Ideal.Colon
-import Mathlib.RingTheory.Finiteness.Defs
+module
+
+public import Mathlib.Algebra.Module.LocalizedModule.AtPrime
+public import Mathlib.RingTheory.Localization.AtPrime.Basic
+public import Mathlib.RingTheory.Ideal.Colon
+public import Mathlib.RingTheory.Finiteness.Defs
 
 /-!
 # Descent of an annihilator from localization at a finitely generated prime
@@ -14,6 +16,8 @@ import Mathlib.RingTheory.Finiteness.Defs
 Source: Stacks Project, Algebra, Tag 0310 (2), used in Tag 058A
 (blueprint: lem-sc-associated-localization-fg).
 -/
+
+@[expose] public section
 
 universe u v
 

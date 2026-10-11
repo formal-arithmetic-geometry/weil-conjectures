@@ -3,11 +3,13 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import Mathlib.AlgebraicGeometry.Sites.Etale
-import Mathlib.AlgebraicGeometry.Pullbacks
-import Mathlib.CategoryTheory.Sites.Sheaf
-import Mathlib.FieldTheory.Galois.Basic
-import Mathlib.RingTheory.TensorProduct.Maps
+module
+
+public import Mathlib.AlgebraicGeometry.Sites.Etale
+public import Mathlib.AlgebraicGeometry.Pullbacks
+public import Mathlib.CategoryTheory.Sites.Sheaf
+public import Mathlib.FieldTheory.Galois.Basic
+public import Mathlib.RingTheory.TensorProduct.Maps
 
 /-!
 # Tensor decomposition of a finite Galois field extension
@@ -15,6 +17,8 @@ import Mathlib.RingTheory.TensorProduct.Maps
 Source: Stacks Project, Fundamental Groups, Tag 03SF
 (blueprint: lem-exc-finite-galois-tensor-decomposition).
 -/
+
+@[expose] public section
 
 universe v u
 

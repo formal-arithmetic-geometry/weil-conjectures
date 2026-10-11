@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group N1
 -/
-import Sheaf.Algebra.Homology.ModuleStalkFunctor
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
+module
+
+public import Sheaf.Algebra.Homology.ModuleStalkFunctor
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 
 /-!
 # A sheaf with vanishing stalks is zero
@@ -13,6 +15,8 @@ Source: literature/blueprint/master/blueprint/sec-abelian-varieties/
 sk-prop-av-pqf-finite/pqf-lem-sheaf-zero-stalks.md
 (blueprint: pqf-lem-sheaf-zero-stalks)
 -/
+
+@[expose] public section
 
 universe u
 

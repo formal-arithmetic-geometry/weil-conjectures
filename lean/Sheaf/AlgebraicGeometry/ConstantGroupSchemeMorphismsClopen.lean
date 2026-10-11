@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import Sheaf.AlgebraicGeometry.ConstantGroupScheme
-import Sheaf.AlgebraicGeometry.CoproductCopiesMorphismsClopen
-import Mathlib.Topology.LocallyConstant.Algebra
+module
+
+public import Sheaf.AlgebraicGeometry.ConstantGroupScheme
+public import Sheaf.AlgebraicGeometry.CoproductCopiesMorphismsClopen
+public import Mathlib.Topology.LocallyConstant.Algebra
 
 /-!
 # Constant group scheme morphisms and clopen decompositions
@@ -14,6 +16,8 @@ Source: Stacks Project, Etale Cohomology, Remark 59.23.2 (Tag 03P5), and Groupoi
 Example 39.5.6 (Tag 03YW)
 (blueprint: lem-weil-pbc-constant-group-scheme-morphism-clopen).
 -/
+
+@[expose] public section
 
 universe u v
 

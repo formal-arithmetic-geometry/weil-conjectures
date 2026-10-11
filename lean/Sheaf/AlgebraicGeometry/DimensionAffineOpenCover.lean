@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group J1
 -/
-import Sheaf.AlgebraicGeometry.Dimension
-import Mathlib.AlgebraicGeometry.Restrict
+module
+
+public import Sheaf.AlgebraicGeometry.Dimension
+public import Mathlib.AlgebraicGeometry.Restrict
 
 /-!
 # Dimension from an affine open cover
@@ -12,6 +14,8 @@ import Mathlib.AlgebraicGeometry.Restrict
 Source: Stacks Project, Properties, Lemma 04MU; Schemes, Lemma 01HV;
 Algebra, Lemma 00KG (blueprint: lem-pc-dimension-affine-open-cover).
 -/
+
+@[expose] public section
 
 universe u v
 

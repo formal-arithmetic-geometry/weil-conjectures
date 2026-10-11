@@ -3,11 +3,13 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import Mathlib.Algebra.Category.Grp.Abelian
-import Mathlib.CategoryTheory.Limits.Shapes.Products
-import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Biproducts
-import Mathlib.CategoryTheory.Limits.Preserves.Finite
-import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
+module
+
+public import Mathlib.Algebra.Category.Grp.Abelian
+public import Mathlib.CategoryTheory.Limits.Shapes.Products
+public import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Biproducts
+public import Mathlib.CategoryTheory.Limits.Preserves.Finite
+public import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 
 /-!
 # Left exactness of a finite product of functors
@@ -15,6 +17,8 @@ import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 Source: Stacks Project, Homology, Lemma 060K, together with the componentwise universal
 properties in a product category (blueprint: lem-weil-pbc-finite-product-functor-left-exact).
 -/
+
+@[expose] public section
 
 universe u v w z
 

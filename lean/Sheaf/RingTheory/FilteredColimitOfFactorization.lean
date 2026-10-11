@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group J1
 -/
-import Mathlib.Algebra.Category.CommAlgCat.Basic
-import Mathlib.CategoryTheory.Filtered.Basic
-import Mathlib.RingTheory.FinitePresentation
+module
+
+public import Mathlib.Algebra.Category.CommAlgCat.Basic
+public import Mathlib.CategoryTheory.Filtered.Basic
+public import Mathlib.RingTheory.FinitePresentation
 
 /-!
 # Filtered colimits from a factorization criterion
@@ -13,6 +15,8 @@ import Mathlib.RingTheory.FinitePresentation
 Source: Stacks Project, Algebra, Lemma 10.127.4, Tag 07C3, implication (2) ⇒ (1)
 (blueprint: lem-weil-pbc-factorization-criterion-filtered-colimit).
 -/
+
+@[expose] public section
 
 universe u v
 

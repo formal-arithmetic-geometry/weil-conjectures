@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group G1
 -/
-import Sheaf.RingTheory.CompleteIntersectionOverField
-import Mathlib.RingTheory.TensorProduct.Basic
+module
+
+public import Sheaf.RingTheory.CompleteIntersectionOverField
+public import Mathlib.RingTheory.TensorProduct.Basic
 
 /-!
 # Local complete intersections and extension of the base field
@@ -12,6 +14,8 @@ import Mathlib.RingTheory.TensorProduct.Basic
 Source: Stacks Project, Algebra, Lemma 10.135.11 (Tag 00SJ)
 (blueprint: lem-weil-pbc-lci-field-change).
 -/
+
+@[expose] public section
 
 universe u v w
 

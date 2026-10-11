@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import Sheaf.AlgebraicGeometry.QCqsDerivedDirectImageRightAdjoint
-import Sheaf.AlgebraicGeometry.GlobalDerivedHom
-import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
-import Mathlib.CategoryTheory.Products.Basic
+module
+
+public import Sheaf.AlgebraicGeometry.QCqsDerivedDirectImageRightAdjoint
+public import Sheaf.AlgebraicGeometry.GlobalDerivedHom
+public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
+public import Mathlib.CategoryTheory.Products.Basic
 
 /-!
 # Global derived Hom adjunction
@@ -14,6 +16,8 @@ import Mathlib.CategoryTheory.Products.Basic
 Source: Stacks Project, Duality for Schemes, Tag 0B6I, lemma-iso-global-hom
 (blueprint: lem-pc-global-hom-adjunction).
 -/
+
+@[expose] public section
 
 universe u wX wY wAX wAY
 

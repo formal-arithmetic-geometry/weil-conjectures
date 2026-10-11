@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import Sheaf.AlgebraicGeometry.FiberDegreeBound
+module
+
+public import Sheaf.AlgebraicGeometry.FiberDegreeBound
 
 /-!
 # Fibre degree bounds under composition
@@ -16,6 +18,8 @@ Source: Stacks Project, Morphisms, Lemma Tag 03J6
 * `AlgebraicGeometry.Scheme.Hom.boundsFiberDegrees_comp`: fibre degree bounds multiply.
 * `AlgebraicGeometry.Scheme.Hom.hasUniversallyBoundedFibers_comp`: uniform bounds compose.
 -/
+
+@[expose] public section
 
 universe u
 

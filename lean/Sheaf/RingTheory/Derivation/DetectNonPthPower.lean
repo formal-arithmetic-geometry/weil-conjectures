@@ -3,12 +3,14 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import Mathlib.RingTheory.AdicCompletion.Basic
-import Mathlib.RingTheory.Derivation.Basic
-import Mathlib.RingTheory.FiniteType
-import Mathlib.RingTheory.Localization.FractionRing
-import Mathlib.RingTheory.Noetherian.Defs
-import Mathlib.RingTheory.LocalRing.MaximalIdeal.Basic
+module
+
+public import Mathlib.RingTheory.AdicCompletion.Basic
+public import Mathlib.RingTheory.Derivation.Basic
+public import Mathlib.RingTheory.FiniteType
+public import Mathlib.RingTheory.Localization.FractionRing
+public import Mathlib.RingTheory.Noetherian.Defs
+public import Mathlib.RingTheory.LocalRing.MaximalIdeal.Basic
 
 /-!
 # Detecting non-pth-powers by absolute derivations
@@ -16,6 +18,8 @@ import Mathlib.RingTheory.LocalRing.MaximalIdeal.Basic
 Source: Stacks Project, More on Algebra, Lemma 07PH (`lemma-find-D`)
 (blueprint: lem-weil-pbc-derivation-nonzero-on-non-pth-power).
 -/
+
+@[expose] public section
 
 set_option autoImplicit false
 

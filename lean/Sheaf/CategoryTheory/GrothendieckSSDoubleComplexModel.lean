@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import Sheaf.CategoryTheory.GrothendieckSpectralSequence
-import Mathlib.Algebra.Homology.Embedding.ExtendHomology
+module
+
+public import Sheaf.CategoryTheory.GrothendieckSpectralSequence
+public import Mathlib.Algebra.Homology.Embedding.ExtendHomology
 
 /-! # The filtered double-complex model and its left edge
 
@@ -12,6 +14,8 @@ Source: Stacks Project, Derived Categories, Lemma 015N (proof), Lemma 015J,
 and Homology, the first-quadrant image filtration
 (blueprint: lem-pc-grothendieck-ss-double-complex-model).
 -/
+
+@[expose] public section
 
 universe uA vA uB vB uC vC
 

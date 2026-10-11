@@ -3,12 +3,14 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import Sheaf.AlgebraicGeometry.Coherent
-import Sheaf.AlgebraicGeometry.ClosedSubsetProperOverBase
-import Sheaf.Topology.PresheafModuleStalkFunctor
-import Sheaf.Algebra.Homology.ModuleStalkFunctor
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Mathlib.RingTheory.Support
+module
+
+public import Sheaf.AlgebraicGeometry.Coherent
+public import Sheaf.AlgebraicGeometry.ClosedSubsetProperOverBase
+public import Sheaf.Topology.PresheafModuleStalkFunctor
+public import Sheaf.Algebra.Homology.ModuleStalkFunctor
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Mathlib.RingTheory.Support
 
 /-!
 # Closed support of a finite type module
@@ -17,6 +19,8 @@ Source: Stacks Project, Morphisms, Lemma 056J (part (1)), via Lemma 056I,
 Properties Lemma 01PB and Algebra Lemma 00L2 (blueprint:
 lem-weil-pbc-finite-type-module-support-closed).
 -/
+
+@[expose] public section
 
 universe u
 

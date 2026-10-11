@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group P1
 -/
-import Sheaf.AlgebraicGeometry.CoherentFormalModule
-import Sheaf.AlgebraicGeometry.QuasiCoherentIdealZeroSetAffine
+module
+
+public import Sheaf.AlgebraicGeometry.CoherentFormalModule
+public import Sheaf.AlgebraicGeometry.QuasiCoherentIdealZeroSetAffine
 
 /-! # An ideal power kills a coherent module exactly when its support lies in the zero set
 
@@ -12,6 +14,8 @@ Source: Stacks Project, Cohomology of Schemes, Lemma 30.10.2 (Tag 01Y9),
 using Algebra, Lemma 10.62.4 (Tag 00L6)
 (blueprint: lem-weil-pbc-coherent-support-power-ideal-kills).
 -/
+
+@[expose] public section
 
 universe u
 

@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Mathlib.Algebra.Category.Grp.AB
-import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStarCoherence
+module
+
+public import Mathlib.Algebra.Category.Grp.AB
+public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStarCoherence
 
 /-!
 # Composition and coherence of derived inverse images
@@ -15,6 +17,8 @@ Source: Stacks Project, Tag 0D6D, with Tags 03CB and 04VG.
 The source's composition isomorphisms point from the pullback of the composite to the
 composite of the pullbacks; their inverses are the `c` and `cᴰ` of the node.
 -/
+
+@[expose] public section
 
 universe u
 

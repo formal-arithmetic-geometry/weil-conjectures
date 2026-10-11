@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Sheaf.RingTheory.GRing
-import Mathlib.FieldTheory.IntermediateField.Basic
+module
+
+public import Sheaf.RingTheory.GRing
+public import Mathlib.FieldTheory.IntermediateField.Basic
 
 /-!
 # Geometric regularity over a directed union of subfields
@@ -12,6 +14,8 @@ import Mathlib.FieldTheory.IntermediateField.Basic
 Source: Stacks Project, Algebra, Lemma 07QG (blueprint:
 lem-weil-pbc-geometrically-regular-over-subfields).
 -/
+
+@[expose] public section
 
 universe u v w
 

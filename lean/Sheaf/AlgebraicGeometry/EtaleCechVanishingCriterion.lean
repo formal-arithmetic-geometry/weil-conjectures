@@ -3,11 +3,13 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import Mathlib.AlgebraicGeometry.Sites.AffineEtale
-import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
-import Mathlib.CategoryTheory.Abelian.RightDerived
-import Mathlib.CategoryTheory.Limits.Constructions.Over.Products
-import Mathlib.CategoryTheory.Sites.SheafCohomology.Cech
+module
+
+public import Mathlib.AlgebraicGeometry.Sites.AffineEtale
+public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
+public import Mathlib.CategoryTheory.Abelian.RightDerived
+public import Mathlib.CategoryTheory.Limits.Constructions.Over.Products
+public import Mathlib.CategoryTheory.Sites.SheafCohomology.Cech
 
 /-!
 # The étale Čech vanishing criterion
@@ -15,6 +17,8 @@ import Mathlib.CategoryTheory.Sites.SheafCohomology.Cech
 Source: Stacks Project, Cohomology on Sites, Lemma 03F9
 (blueprint: lem-weil-pbc-cech-vanishing-criterion).
 -/
+
+@[expose] public section
 
 universe u
 

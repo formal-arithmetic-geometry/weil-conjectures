@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group G1
 -/
-import Sheaf.RingTheory.GRing
-import Mathlib.FieldTheory.Separable
+module
+
+public import Sheaf.RingTheory.GRing
+public import Mathlib.FieldTheory.Separable
 
 /-!
 # Geometric regularity over a separable algebraic extension
@@ -12,6 +14,8 @@ import Mathlib.FieldTheory.Separable
 Source: Stacks Project, Algebra, Lemma 07QH and Definition 0382
 (blueprint: lem-weil-pbc-geometric-regularity-separable-extension).
 -/
+
+@[expose] public section
 
 universe u v w
 

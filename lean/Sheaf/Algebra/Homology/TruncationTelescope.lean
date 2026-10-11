@@ -3,13 +3,15 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group J1
 -/
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.Colimits
-import Mathlib.Algebra.Category.Grp.FilteredColimits
-import Mathlib.Algebra.Category.Ring.Limits
-import Mathlib.Algebra.Homology.Embedding.CochainComplex
-import Mathlib.Algebra.Homology.HomologicalComplexLimits
-import Mathlib.Algebra.Homology.HomotopyCategory.MappingCone
+module
+
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Colimits
+public import Mathlib.Algebra.Category.Grp.FilteredColimits
+public import Mathlib.Algebra.Category.Ring.Limits
+public import Mathlib.Algebra.Homology.Embedding.CochainComplex
+public import Mathlib.Algebra.Homology.HomologicalComplexLimits
+public import Mathlib.Algebra.Homology.HomotopyCategory.MappingCone
 
 /-!
 # Homotopy colimit of good truncations
@@ -18,6 +20,8 @@ Source: Stacks Project, Cohomology on Sites, Lemmas 06YS and 077J;
 Derived Categories, Lemma 0949
 (blueprint: lem-pc-kflat-hocolim-truncations).
 -/
+
+@[expose] public section
 
 universe u
 

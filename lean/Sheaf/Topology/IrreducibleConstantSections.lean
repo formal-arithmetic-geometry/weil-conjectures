@@ -1,6 +1,10 @@
-import Mathlib.Topology.Sheaves.Sheaf
-import Mathlib.CategoryTheory.Sites.ConstantSheaf
-import Mathlib.Algebra.Category.Grp.Basic
+module
+
+public import Mathlib.Topology.Sheaves.Sheaf
+public import Mathlib.CategoryTheory.Sites.ConstantSheaf
+public import Mathlib.Algebra.Category.Grp.Basic
+
+@[expose] public section
 
 open CategoryTheory TopologicalSpace Opposite
 

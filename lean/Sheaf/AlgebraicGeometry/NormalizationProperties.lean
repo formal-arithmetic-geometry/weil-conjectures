@@ -1,6 +1,8 @@
-import Mathlib.AlgebraicGeometry.Birational.Birational
-import WeilConjectures.Mathlib.AlgebraicGeometry.Normalization
-import WeilConjectures.AlgebraicGeometry.Regular
+module
+
+public import Mathlib.AlgebraicGeometry.Birational.Birational
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Normalization
+public import WeilConjectures.AlgebraicGeometry.Regular
 
 /-!
 # Properties of the normalization
@@ -8,6 +10,8 @@ import WeilConjectures.AlgebraicGeometry.Regular
 Source: blueprint sec-curve-estimates/sk-thm-br/lem-sc-normalization-properties.md,
 node lem-sc-normalization-properties, order 919.
 -/
+
+@[expose] public section
 
 universe u
 

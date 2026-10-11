@@ -3,14 +3,18 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group U1
 -/
-import Sheaf.CategoryTheory.FlatFilteredScalarExtension
-import Sheaf.CategoryTheory.FilteredPageTwoModel
+module
+
+public import Sheaf.CategoryTheory.FlatFilteredScalarExtension
+public import Sheaf.CategoryTheory.FilteredPageTwoModel
 
 /-! # Flat comparison of filtered cochain complexes
 
 Source: Stacks Project, Homology, Tag 0BDU and the filtered-complex functoriality lemma;
 Cohomology of Schemes, Tag 02KH (blueprint: lem-pc-flat-filtered-complex-comparison).
 -/
+
+@[expose] public section
 
 universe u v w
 

@@ -3,20 +3,24 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import Sheaf.AlgebraicGeometry.Coherent
-import Sheaf.Algebra.Homology.ModuleStalkFunctor
-import Mathlib.Algebra.Homology.ShortComplex.ShortExact
-import Mathlib.AlgebraicGeometry.Noetherian
-import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
-import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-import Mathlib.AlgebraicGeometry.ResidueField
-import Mathlib.LinearAlgebra.Dimension.Finite
+module
+
+public import Sheaf.AlgebraicGeometry.Coherent
+public import Sheaf.Algebra.Homology.ModuleStalkFunctor
+public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
+public import Mathlib.AlgebraicGeometry.Noetherian
+public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
+public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+public import Mathlib.AlgebraicGeometry.ResidueField
+public import Mathlib.LinearAlgebra.Dimension.Finite
 
 /-! # Property devissage on an irreducible closed support
 
 Source: Stacks Project, Cohomology of Schemes, Lemma 30.12.5, Tag 01YH,
 label `lemma-property-irreducible` (blueprint: lem-pc-coherent-property-irreducible).
 -/
+
+@[expose] public section
 
 universe u
 

@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import Mathlib.Algebra.DirectSum.Decomposition
-import Mathlib.RingTheory.MvPolynomial.Homogeneous
-import Mathlib.RingTheory.GradedAlgebra.Homogeneous.Submodule
+module
+
+public import Mathlib.Algebra.DirectSum.Decomposition
+public import Mathlib.RingTheory.MvPolynomial.Homogeneous
+public import Mathlib.RingTheory.GradedAlgebra.Homogeneous.Submodule
 
 /-!
 # Finite graded kernels over the two-variable polynomial ring
@@ -13,6 +15,8 @@ import Mathlib.RingTheory.GradedAlgebra.Homogeneous.Submodule
 Source: blueprint `sec-picard-framework/sk-thm-picard-duality/lem-sc-p1-graded-resolution.md`,
 proof, Noetherianity of successive graded kernels (blueprint: lem-sc-p1-graded-kernel-finite).
 -/
+
+@[expose] public section
 
 universe u v w
 

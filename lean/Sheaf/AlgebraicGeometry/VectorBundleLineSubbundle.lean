@@ -3,15 +3,19 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group G1
 -/
-import Mathlib.AlgebraicGeometry.Properties
-import Mathlib.AlgebraicGeometry.Noetherian
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Mathlib.AlgebraicGeometry.FunctionField
-import Mathlib.RingTheory.RegularLocalRing.Defs
-import Mathlib.Algebra.Homology.ShortComplex.ShortExact
-import WeilConjectures.AlgebraicGeometry.Modules.Invertible
-import Mathlib.Algebra.Category.ModuleCat.Stalk
-import Mathlib.Topology.KrullDimension
+module
+
+public import Mathlib.AlgebraicGeometry.Properties
+public import Mathlib.AlgebraicGeometry.Noetherian
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Mathlib.AlgebraicGeometry.FunctionField
+public import Mathlib.RingTheory.RegularLocalRing.Defs
+public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
+public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
+public import Mathlib.Algebra.Category.ModuleCat.Stalk
+public import Mathlib.Topology.KrullDimension
+
+@[expose] public section
 
 universe u
 

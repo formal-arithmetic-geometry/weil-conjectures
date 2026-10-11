@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import WeilConjectures.AlgebraicGeometry.Modules.Invertible
-import WeilConjectures.AlgebraicGeometry.Modules.FreeGenerator
+module
+
+public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
+public import WeilConjectures.AlgebraicGeometry.Modules.FreeGenerator
 
 /-!
 # Čech transition functions glue local trivial line bundles
@@ -13,6 +15,8 @@ Source: Stacks Project, Sheaves Lemma 00AM (lemma-glue-sheaves-structures),
 with uniqueness from Lemma 04TN (lemma-glue-maps).
 (blueprint: lem-sc-glue-component-transition-cocycle)
 -/
+
+@[expose] public section
 
 open CategoryTheory AlgebraicGeometry
 open AlgebraicGeometry.Scheme.Modules

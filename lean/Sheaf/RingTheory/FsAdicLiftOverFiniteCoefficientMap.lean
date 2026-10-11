@@ -3,12 +3,14 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Mathlib.RingTheory.Noetherian.Defs
-import Mathlib.RingTheory.TensorProduct.Basic
-import Mathlib.RingTheory.AdicCompletion.Basic
-import Mathlib.RingTheory.LocalRing.ResidueField.Basic
-import Mathlib.RingTheory.RingHom.Flat
-import Sheaf.RingTheory.FormallySmoothAdic
+module
+
+public import Mathlib.RingTheory.Noetherian.Defs
+public import Mathlib.RingTheory.TensorProduct.Basic
+public import Mathlib.RingTheory.AdicCompletion.Basic
+public import Mathlib.RingTheory.LocalRing.ResidueField.Basic
+public import Mathlib.RingTheory.RingHom.Flat
+public import Sheaf.RingTheory.FormallySmoothAdic
 
 /-!
 # Lifting over a finite coefficient map
@@ -18,6 +20,7 @@ Lemmas 07NR and 07NJ, and Proposition 07PM.
 (blueprint: lem-weil-pbc-fs-adic-lift-over-finite-coefficient-map)
 -/
 
+@[expose] public section
 
 universe u v w
 

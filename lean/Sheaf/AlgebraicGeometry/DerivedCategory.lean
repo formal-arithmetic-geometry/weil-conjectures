@@ -3,11 +3,13 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under the Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import Sheaf.Paper.DerivedHomMayerVietoris
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
-import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
-import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
+module
+
+public import Sheaf.Paper.DerivedHomMayerVietoris
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
+public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
+public import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
 
 /-! # The derived category of sheaves of modules on a scheme
 
@@ -28,6 +30,8 @@ shared `[HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace
 * `schemeDerivedQCohProperty` says every cohomology sheaf is quasi-coherent.
 * `schemeDerivedQCohCategory` is the full subcategory `D_QCoh(𝒪_X)`.
 -/
+
+@[expose] public section
 
 universe u w
 

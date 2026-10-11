@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group G1
 -/
-import Sheaf.CategoryTheory.GrothendieckSSDoubleComplexModel
+module
+
+public import Sheaf.CategoryTheory.GrothendieckSSDoubleComplexModel
 
 /-!
 # Cocycle description of the Grothendieck left edge
@@ -11,6 +13,8 @@ import Sheaf.CategoryTheory.GrothendieckSSDoubleComplexModel
 Source: Stacks Project, Derived Categories, Lemma 015N and the second spectral sequence
 of Lemma 015K (blueprint: lem-pc-grothendieck-edge-cocycle).
 -/
+
+@[expose] public section
 
 universe uA vA uB vB uC vC
 

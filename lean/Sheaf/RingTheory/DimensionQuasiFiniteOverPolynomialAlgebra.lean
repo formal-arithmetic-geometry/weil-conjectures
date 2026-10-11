@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import Mathlib.AlgebraicGeometry.Scheme
-import Mathlib.Algebra.MvPolynomial.Basic
-import Mathlib.Topology.KrullDimension
-import Sheaf.RingTheory.QuasiFiniteAtPrime
+module
+
+public import Mathlib.AlgebraicGeometry.Scheme
+public import Mathlib.Algebra.MvPolynomial.Basic
+public import Mathlib.Topology.KrullDimension
+public import Sheaf.RingTheory.QuasiFiniteAtPrime
 
 /-!
 # Dimension of a quasi-finite algebra over affine space
@@ -14,6 +16,8 @@ import Sheaf.RingTheory.QuasiFiniteAtPrime
 Source: Stacks Project, Algebra, Lemma Tag 00QG
 (blueprint: lem-weil-pbc-dimension-quasi-finite-over-polynomial-algebra).
 -/
+
+@[expose] public section
 
 universe u v
 

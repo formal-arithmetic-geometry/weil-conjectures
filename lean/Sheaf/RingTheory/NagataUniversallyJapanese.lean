@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Sheaf.RingTheory.NagataRing
+module
+
+public import Sheaf.RingTheory.NagataRing
 
 /-!
 # Nagata rings are universally Japanese
@@ -11,6 +13,8 @@ import Sheaf.RingTheory.NagataRing
 Source: Stacks Project, Algebra, Proposition 10.162.4 (Tag 0334), implication
 (1) ⇒ (3) (blueprint: lem-weil-pbc-nagata-universally-japanese).
 -/
+
+@[expose] public section
 
 universe u
 

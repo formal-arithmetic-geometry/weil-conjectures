@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group T1
 -/
-import Sheaf.AlgebraicGeometry.SingleComplexBaseChangeStalkCondition
-import Sheaf.AlgebraicGeometry.SchemeDerivedBaseChangeMap
+module
+
+public import Sheaf.AlgebraicGeometry.SingleComplexBaseChangeStalkCondition
+public import Sheaf.AlgebraicGeometry.SchemeDerivedBaseChangeMap
 
 /-! # The affine single-complex base-change criterion
 
@@ -19,6 +21,8 @@ A'-modules under the affine equivalence), a derived morphism L(g')^*K -> K', the
 stalkwise condition `SingleComplexBaseChange.StalkCondition`, and the derived
 base-change comparison map followed by Rf'_* of the given morphism.
 -/
+
+@[expose] public section
 
 set_option autoImplicit false
 

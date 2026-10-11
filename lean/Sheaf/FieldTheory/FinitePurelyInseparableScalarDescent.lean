@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import Mathlib.FieldTheory.PurelyInseparable.Basic
-import Mathlib.Algebra.Field.IsField
-import Mathlib.LinearAlgebra.Dimension.Finrank
+module
+
+public import Mathlib.FieldTheory.PurelyInseparable.Basic
+public import Mathlib.Algebra.Field.IsField
+public import Mathlib.LinearAlgebra.Dimension.Finrank
 
 /-!
 # Descent of finite purely inseparable field extensions
@@ -14,6 +16,8 @@ Source: Stacks Project, Tag 07QG, the finite purely inseparable extension assert
 Tag 09HE for purely inseparable extensions
 (blueprint: lem-weil-pbc-finite-purely-inseparable-scalar-descent).
 -/
+
+@[expose] public section
 
 set_option autoImplicit false
 

@@ -3,15 +3,19 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Sheaf.CategoryTheory.DerivedCategory.EssentiallyConstantPro
-import Mathlib.CategoryTheory.Limits.Types.ColimitType
-import Mathlib.CategoryTheory.Yoneda
+module
+
+public import Sheaf.CategoryTheory.DerivedCategory.EssentiallyConstantPro
+public import Mathlib.CategoryTheory.Limits.Types.ColimitType
+public import Mathlib.CategoryTheory.Yoneda
 
 /-! # Hom-colimit criterion for an essentially constant pro-diagram
 
 Source: Stacks Project, Categories, Lemma 05PY (implication (4) => (1))
 (blueprint: lem-pur-essential-constant-pro-criterion-05py).
 -/
+
+@[expose] public section
 
 universe uJp vJp uCp vCp
 

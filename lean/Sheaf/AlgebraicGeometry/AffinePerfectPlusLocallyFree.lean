@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under the Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import Sheaf.AlgebraicGeometry.PerfectComplex
-import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
-import Mathlib.AlgebraicGeometry.AffineScheme
+module
+
+public import Sheaf.AlgebraicGeometry.PerfectComplex
+public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
+public import Mathlib.AlgebraicGeometry.AffineScheme
 
 /-! # Extending perfect complexes after adjoining a shifted locally free sheaf
 
@@ -13,6 +15,8 @@ Source: Stacks Project, Derived Categories of Schemes, Tag 08EG, Lemma 36.13.6,
 lemma-lift-perfect-complex-plus-locally-free
 (blueprint: lem-sc-affine-perfect-plus-locally-free).
 -/
+
+@[expose] public section
 
 set_option autoImplicit false
 

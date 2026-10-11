@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group R1
 -/
-import Sheaf.AlgebraicGeometry.TruncationExchangeCouple
-import Sheaf.CategoryTheory.ExactCoupleMorphism
-import Sheaf.CategoryTheory.ImageFiltration
+module
+
+public import Sheaf.AlgebraicGeometry.TruncationExchangeCouple
+public import Sheaf.CategoryTheory.ExactCoupleMorphism
+public import Sheaf.CategoryTheory.ImageFiltration
 
 /-!
 # The abutment of the truncation exchange couples
@@ -14,6 +16,8 @@ Source: blueprint sec-proper-base-change/sk-thm-properbasechange,
 lemma-weil-pbc-exact-couple-abutment, Detailed form; Stacks Tags 0DDE and 05TC
 (blueprint: lemma-weil-pbc-exact-couple-abutment).
 -/
+
+@[expose] public section
 
 set_option autoImplicit false
 

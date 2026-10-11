@@ -3,15 +3,19 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import Sheaf.Algebra.LocallyFreeCharpoly
-import Mathlib.Logic.Equiv.Fin.Basic
-import Mathlib.Algebra.Module.LinearMap.Prod
+module
+
+public import Sheaf.Algebra.LocallyFreeCharpoly
+public import Mathlib.Logic.Equiv.Fin.Basic
+public import Mathlib.Algebra.Module.LinearMap.Prod
 
 /-! # Characteristic polynomials on locally free direct sums
 
 Source: Stacks Project, Tag 09XI, proof of (3)⇒(1), the characteristic-polynomial
 factorization for eB and (1-e)B (blueprint: lem-weil-pbc-charpoly-locally-free-direct-sum).
 -/
+
+@[expose] public section
 
 universe u v₁ v₂
 

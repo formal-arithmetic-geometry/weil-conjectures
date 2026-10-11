@@ -3,11 +3,13 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group Q1
 -/
-import Mathlib.AlgebraicGeometry.ResidueField
-import Mathlib.FieldTheory.IsAlgClosed.Basic
-import Mathlib.Topology.KrullDimension
-import Mathlib.Topology.Instances.Discrete
-import Sheaf.AlgebraicGeometry.BaseChangeConventions
+module
+
+public import Mathlib.AlgebraicGeometry.ResidueField
+public import Mathlib.FieldTheory.IsAlgClosed.Basic
+public import Mathlib.Topology.KrullDimension
+public import Mathlib.Topology.Instances.Discrete
+public import Sheaf.AlgebraicGeometry.BaseChangeConventions
 
 /-!
 # Points of a zero-dimensional scheme after field extension
@@ -15,6 +17,8 @@ import Sheaf.AlgebraicGeometry.BaseChangeConventions
 Source: Stacks Project, algebra.tex, Lemmas 00KH and 00P4, Theorem 00FV;
 Schemes Lemma 01JT (blueprint: lem-weil-pbc-zero-dimensional-base-change-points).
 -/
+
+@[expose] public section
 
 universe v
 

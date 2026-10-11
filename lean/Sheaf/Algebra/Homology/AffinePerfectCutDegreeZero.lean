@@ -3,16 +3,20 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group J1
 -/
-import Sheaf.Algebra.Homology.ModuleCohomologyBaseChange
-import WeilConjectures.CategoryTheory.DerivedCategory.Perfect
-import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
-import Mathlib.RingTheory.Localization.Away.Basic
+module
+
+public import Sheaf.Algebra.Homology.ModuleCohomologyBaseChange
+public import WeilConjectures.CategoryTheory.DerivedCategory.Perfect
+public import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
+public import Mathlib.RingTheory.Localization.Away.Basic
 
 /-! # Affine perfect-complex cut in degree zero
 
 Source: Stacks Project, More on Algebra, Tag 0A1U, Lemma better-cut-complex-in-two
 (blueprint: lem-pc-affine-perfect-cut-degree-zero).
 -/
+
+@[expose] public section
 
 set_option autoImplicit false
 

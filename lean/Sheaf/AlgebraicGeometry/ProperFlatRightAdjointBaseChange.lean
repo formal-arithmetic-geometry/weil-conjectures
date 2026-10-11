@@ -3,16 +3,20 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under the Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group U1
 -/
-import Sheaf.AlgebraicGeometry.DualityEquationBaseChangeMap
-import Mathlib.AlgebraicGeometry.Morphisms.Proper
-import Mathlib.AlgebraicGeometry.Morphisms.Flat
-import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
+module
+
+public import Sheaf.AlgebraicGeometry.DualityEquationBaseChangeMap
+public import Mathlib.AlgebraicGeometry.Morphisms.Proper
+public import Mathlib.AlgebraicGeometry.Morphisms.Flat
+public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 
 /-! # Base change for the right adjoint of proper flat direct image
 
 Source: Stacks Project, Duality for Schemes, Lemma 48.12.4, Tag 0AAB
 (blueprint: lem-sc-proper-flat-right-adjoint-basechange).
 -/
+
+@[expose] public section
 
 set_option autoImplicit false
 universe u w

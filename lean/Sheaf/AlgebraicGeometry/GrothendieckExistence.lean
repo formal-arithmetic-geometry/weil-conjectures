@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group Q1
 -/
-import Mathlib.RingTheory.AdicCompletion.Basic
-import Sheaf.AlgebraicGeometry.Coherent
-import Sheaf.AlgebraicGeometry.ClosedSubsetProperOverBase
-import Sheaf.AlgebraicGeometry.TensorPullback
+module
+
+public import Mathlib.RingTheory.AdicCompletion.Basic
+public import Sheaf.AlgebraicGeometry.Coherent
+public import Sheaf.AlgebraicGeometry.ClosedSubsetProperOverBase
+public import Sheaf.AlgebraicGeometry.TensorPullback
 
 /-!
 # Grothendieck existence with proper support
@@ -14,6 +16,8 @@ import Sheaf.AlgebraicGeometry.TensorPullback
 Source: Stacks Project, Cohomology of Schemes, Theorem 088E and Remark 088F,
 with indices shifted by one (blueprint: prop-weil-pbc-grothendieck-existence).
 -/
+
+@[expose] public section
 
 universe u
 

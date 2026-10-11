@@ -3,13 +3,15 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
-import WeilConjectures.AlgebraicGeometry.ProjectiveSpectrum.Twist
-import Sheaf.AlgebraicGeometry.TensorPullback
-import Sheaf.AlgebraicGeometry.Morphisms.Projective
-import Sheaf.AlgebraicGeometry.Ample
-import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-import Mathlib.AlgebraicGeometry.Morphisms.Proper
+module
+
+public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
+public import WeilConjectures.AlgebraicGeometry.ProjectiveSpectrum.Twist
+public import Sheaf.AlgebraicGeometry.TensorPullback
+public import Sheaf.AlgebraicGeometry.Morphisms.Projective
+public import Sheaf.AlgebraicGeometry.Ample
+public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 
 /-!
 # Chow immersion and relative ampleness
@@ -17,6 +19,8 @@ import Mathlib.AlgebraicGeometry.Morphisms.Proper
 Source: Stacks Project, Cohomology of Schemes, Remark 30.18.2 and
 Proposition 30.19.1, Tag 02O5 (blueprint: lem-pc-chow-relative-ample).
 -/
+
+@[expose] public section
 
 universe u
 

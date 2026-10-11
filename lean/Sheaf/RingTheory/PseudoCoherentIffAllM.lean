@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import Sheaf.RingTheory.MPseudoCoherent
-import Sheaf.RingTheory.RingPseudoCoherent
+module
+
+public import Sheaf.RingTheory.MPseudoCoherent
+public import Sheaf.RingTheory.RingPseudoCoherent
 
 /-!
 # Pseudo-coherence and degreewise pseudo-coherence
@@ -12,6 +14,8 @@ import Sheaf.RingTheory.RingPseudoCoherent
 Source: Stacks Project, More on Algebra, Lemma 15.66.5, Tag 064U
 (blueprint: lem-pc-ring-pseudo-coherent-iff-all-m).
 -/
+
+@[expose] public section
 
 universe w v u
 

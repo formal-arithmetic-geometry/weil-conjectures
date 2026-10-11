@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import Sheaf.AlgebraicGeometry.StructureSheafCohomologyPullback
-import WeilConjectures.AlgebraicGeometry.DensePoints
+module
+
+public import Sheaf.AlgebraicGeometry.StructureSheafCohomologyPullback
+public import WeilConjectures.AlgebraicGeometry.DensePoints
 
 /-!
 # Injectivity of the two slice pullbacks in degree one
@@ -12,6 +14,8 @@ import WeilConjectures.AlgebraicGeometry.DensePoints
 Source: Stacks Project, Varieties, Tag 0BED, applied in degree one to the structure sheaves
 (blueprint: lem-sc-picard-h1-product-injective).
 -/
+
+@[expose] public section
 
 universe u
 

@@ -3,12 +3,14 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import Mathlib.AlgebraicGeometry.Morphisms.Proper
-import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Sheaf.AlgebraicGeometry.ClosedSubsetProperOverBase
-import Sheaf.AlgebraicGeometry.ClosedImmersionPushforwardAnnihilated
-import Sheaf.AlgebraicGeometry.Coherent
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.Proper
+public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Sheaf.AlgebraicGeometry.ClosedSubsetProperOverBase
+public import Sheaf.AlgebraicGeometry.ClosedImmersionPushforwardAnnihilated
+public import Sheaf.AlgebraicGeometry.Coherent
 
 /-! # Support of a finite type module proper over a base
 
@@ -22,6 +24,8 @@ Morphisms Lemmas 056J, 05JU, Definition 05JV, and Lemma 01QY
   characterization of proper support by a proper closed subscheme annihilating
   the module.
 -/
+
+@[expose] public section
 
 universe u
 

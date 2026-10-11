@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Mathlib.RingTheory.MvPolynomial.Homogeneous
-import Mathlib.Algebra.Exact.Basic
-import Mathlib.RingTheory.Ideal.Quotient.Basic
+module
+
+public import Mathlib.RingTheory.MvPolynomial.Homogeneous
+public import Mathlib.Algebra.Exact.Basic
+public import Mathlib.RingTheory.Ideal.Quotient.Basic
 
 /-!
 # The graded Koszul resolution on two polynomial variables
@@ -23,6 +25,8 @@ part of `S(-2)` is `S_n` and the degree `n + 1` part of `S(-1)` is `S_n`; all lo
 parts are zero. The quotient `k = S/(x₀,x₁)` has the quotient grading, concentrated
 in degree zero.
 -/
+
+@[expose] public section
 
 universe u
 

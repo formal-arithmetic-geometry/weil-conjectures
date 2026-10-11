@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF worker H1
 -/
-import Mathlib.AlgebraicGeometry.Limits
-import Mathlib.AlgebraicGeometry.Sites.Etale
-import Mathlib.CategoryTheory.Sites.ConstantSheaf
-import Mathlib.CategoryTheory.Sites.LeftExact
+module
+
+public import Mathlib.AlgebraicGeometry.Limits
+public import Mathlib.AlgebraicGeometry.Sites.Etale
+public import Mathlib.CategoryTheory.Sites.ConstantSheaf
+public import Mathlib.CategoryTheory.Sites.LeftExact
 
 /-!
 # Constant sheaves of sets represented by disjoint unions
@@ -15,6 +17,8 @@ Source: Stacks Project, Etale Cohomology, Remark 59.23.2 (Tag 03P5), Groupoid Sc
 Example 39.5.6 (Tag 03YW), and Lemma 59.15.8 (Tag 03O3)
 (blueprint: lem-galois-constant-sheaf-sets-representable).
 -/
+
+@[expose] public section
 
 universe u
 

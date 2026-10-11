@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Sheaf.AlgebraicGeometry.Dimension
-import Mathlib.AlgebraicGeometry.Morphisms.Finite
+module
+
+public import Sheaf.AlgebraicGeometry.Dimension
+public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 
 /-!
 # Zero-dimensional schemes of finite type over a field
@@ -12,6 +14,8 @@ import Mathlib.AlgebraicGeometry.Morphisms.Finite
 Source: Stacks Project, Varieties, Lemma 33.20.2 (Tag 06LH), algebraic case
 (blueprint: lem-pc-algebraic-dim-zero-affine-finite).
 -/
+
+@[expose] public section
 
 universe u
 

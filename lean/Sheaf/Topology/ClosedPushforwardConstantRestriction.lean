@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import Mathlib.Topology.Sheaves.Sheaf
-import Mathlib.CategoryTheory.Sites.LeftExact
-import Mathlib.Topology.LocallyConstant.Basic
+module
+
+public import Mathlib.Topology.Sheaves.Sheaf
+public import Mathlib.CategoryTheory.Sites.LeftExact
+public import Mathlib.Topology.LocallyConstant.Basic
 
 /-!
 # Restricting a constant sheaf pushed forward from a closed subset
@@ -14,6 +16,8 @@ Source: Stacks Project, Etale Cohomology, proof of Lemma 59.82.1 (Tag 09ZG),
 the displayed global-section identifications
 (blueprint: lem-weil-pbc-closed-pushforward-constant-restriction).
 -/
+
+@[expose] public section
 
 universe u
 

@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import Mathlib.AlgebraicGeometry.Scheme
+module
+
+public import Mathlib.AlgebraicGeometry.Scheme
 
 /-! # Clopen subsets and idempotent global functions of schemes
 
@@ -16,6 +18,8 @@ property, as in Schemes, Tag 01I5, proof of `lemma-disjoint-union-affines`.
 
 * `scheme_clopen_idempotent`: the clopen correspondence and its pullback compatibility.
 -/
+
+@[expose] public section
 
 universe u
 

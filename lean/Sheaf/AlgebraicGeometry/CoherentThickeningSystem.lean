@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import Sheaf.AlgebraicGeometry.TensorPullback
-import Sheaf.AlgebraicGeometry.Coherent
+module
+
+public import Sheaf.AlgebraicGeometry.TensorPullback
+public import Sheaf.AlgebraicGeometry.Coherent
 
 /-! # Coherent systems on a tower of schemes
 
@@ -14,6 +16,8 @@ Source: Stacks Project, Cohomology of Schemes, Remark 088F
 The tower is indexed starting at zero. Its objects have coherent terms and pullback
 isomorphisms; its arrows are precisely compatible families of linear maps.
 -/
+
+@[expose] public section
 
 universe u
 

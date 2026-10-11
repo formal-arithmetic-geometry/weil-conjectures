@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group P1
 -/
-import Sheaf.AlgebraicGeometry.DerivedCategory
-import WeilConjectures.AlgebraicGeometry.Modules.Invertible
-import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
+module
+
+public import Sheaf.AlgebraicGeometry.DerivedCategory
+public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
+public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 
 /-!
 # Cohomology of a sheaf placed in one degree
@@ -20,6 +22,8 @@ node lem-pc-degree-zero-properties, order 820 (blueprint: lem-pc-degree-zero-pro
 * `cohomology_of_iso_locallyFree_shift` computes the cohomology of a finite locally free
   sheaf shifted by `-i`.
 -/
+
+@[expose] public section
 
 universe u w
 

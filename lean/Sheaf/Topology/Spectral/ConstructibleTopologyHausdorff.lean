@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Mathlib.Topology.Spectral.ConstructibleTopology
+module
+
+public import Mathlib.Topology.Spectral.ConstructibleTopology
 
 /-!
 # The constructible topology of a spectral space is Hausdorff
@@ -11,6 +13,8 @@ import Mathlib.Topology.Spectral.ConstructibleTopology
 Source: Stacks Project, Topology, Lemma 5.23.2 (Tag 0901), Hausdorff part
 (blueprint: lem-weil-pbc-spectral-constructible-topology-hausdorff).
 -/
+
+@[expose] public section
 
 universe u
 

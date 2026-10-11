@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group T1
 -/
-import Mathlib.Topology.Sheaves.Abelian
-import Mathlib.Algebra.Homology.ShortComplex.ShortExact
-import Sheaf.Topology.PresheafModuleStalkFunctor
+module
+
+public import Mathlib.Topology.Sheaves.Abelian
+public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
+public import Sheaf.Topology.PresheafModuleStalkFunctor
 
 /-!
 # Short exactness of abelian sheaves is detected on stalks
@@ -14,6 +16,8 @@ Source: literature/stacks-project/modules.tex, Modules, Lemma 01AG (lemma-abelia
 specialized to the constant sheaf of integers; Sheaves, Section 007S
 (section-exactness-points) (blueprint: lem-sc-abelian-sheaf-short-exact-stalkwise).
 -/
+
+@[expose] public section
 
 universe u
 

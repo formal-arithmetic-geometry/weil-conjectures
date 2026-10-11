@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Sheaf.Topology.RingedSpaceModuleCohomology
-import Sheaf.CategoryTheory.SiteCechComplex
+module
+
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Sheaf.Topology.RingedSpaceModuleCohomology
+public import Sheaf.CategoryTheory.SiteCechComplex
 
 /-!
 # Module cohomology vanishing from cofinal basis Čech coverings
@@ -14,6 +16,8 @@ Source: Stacks Project, Cohomology of Sheaves, Lemma 20.11.9, Tag 01EW,
 with restriction to open subschemes as in Tag 01E1
 (blueprint: lem-weil-pbc-module-cech-vanishing-basis).
 -/
+
+@[expose] public section
 
 universe u v w
 

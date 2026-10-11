@@ -1,8 +1,10 @@
-import Mathlib.Algebra.Homology.HomotopyCategory.KInjective
-import Mathlib.Algebra.Homology.QuasiIso
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
-import Mathlib.AlgebraicGeometry.Sites.Etale
-import Sheaf.AlgebraicGeometry.DerivedCategories
+module
+
+public import Mathlib.Algebra.Homology.HomotopyCategory.KInjective
+public import Mathlib.Algebra.Homology.QuasiIso
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
+public import Mathlib.AlgebraicGeometry.Sites.Etale
+public import Sheaf.AlgebraicGeometry.DerivedCategories
 
 /-!
 # K-injective resolutions
@@ -20,6 +22,8 @@ complexes are closed under shifts). Quasi-isomorphisms are Mathlib's `QuasiIso`.
 * `CochainComplex.IsKInjectiveResolution`: a quasi-isomorphism into a K-injective complex of
   sheaves of `R`-modules on the small étale site.
 -/
+
+@[expose] public section
 
 universe u
 

@@ -3,16 +3,20 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group J1
 -/
-import Mathlib.AlgebraicGeometry.Noetherian
-import Mathlib.AlgebraicGeometry.Morphisms.Separated
-import Mathlib.Topology.KrullDimension
-import Sheaf.AlgebraicGeometry.Ample
+module
+
+public import Mathlib.AlgebraicGeometry.Noetherian
+public import Mathlib.AlgebraicGeometry.Morphisms.Separated
+public import Mathlib.Topology.KrullDimension
+public import Sheaf.AlgebraicGeometry.Ample
 
 /-! # Affineness and ampleness in dimension zero
 
 Source: Stacks Project, Properties, Lemmas 0AAX and 0CKV, and Definition 01PS
 (blueprint: lem-sc-zero-dim-noetherian-affine).
 -/
+
+@[expose] public section
 
 universe u
 

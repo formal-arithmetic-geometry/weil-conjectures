@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import Mathlib.RingTheory.Ideal.Cotangent
-import Mathlib.RingTheory.Finiteness.Defs
+module
+
+public import Mathlib.RingTheory.Ideal.Cotangent
+public import Mathlib.RingTheory.Finiteness.Defs
 
 /-!
 # Surjectivity of a finite local homomorphism from its cotangent map
@@ -12,6 +14,8 @@ import Mathlib.RingTheory.Finiteness.Defs
 Source: Stacks Project, Algebra, Tag 0E8M, with the finite-generation refinement in the DAG
 (blueprint: lem-sc-point-tangent-finite-local-cotangent-surjective).
 -/
+
+@[expose] public section
 
 universe u v w
 

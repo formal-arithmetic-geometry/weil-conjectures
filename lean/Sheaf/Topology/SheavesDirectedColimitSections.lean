@@ -1,4 +1,6 @@
-import Mathlib.Topology.Sheaves.Sheaf
+module
+
+public import Mathlib.Topology.Sheaves.Sheaf
 
 /-!
 # Sections of directed colimits of sheaves over quasi-compact opens
@@ -6,6 +8,8 @@ import Mathlib.Topology.Sheaves.Sheaf
 Source: Stacks Project, Sheaves, Lemma 009F (parts (2) and (4));
 (blueprint: lem-weil-pbc-sheaves-directed-colimit-sections).
 -/
+
+@[expose] public section
 
 universe u
 

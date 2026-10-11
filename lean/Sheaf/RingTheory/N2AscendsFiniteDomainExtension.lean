@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license.
 Authors: SHEAF group M1
 -/
-import Sheaf.RingTheory.JapaneseDomain
-import Mathlib.RingTheory.Localization.FractionRing
-import Mathlib.RingTheory.Noetherian.Defs
-import Mathlib.RingTheory.Finiteness.Defs
+module
+
+public import Sheaf.RingTheory.JapaneseDomain
+public import Mathlib.RingTheory.Localization.FractionRing
+public import Mathlib.RingTheory.Noetherian.Defs
+public import Mathlib.RingTheory.Finiteness.Defs
 
 /-!
 # N-2 ascends along a finite extension of Noetherian domains
@@ -14,6 +16,8 @@ import Mathlib.RingTheory.Finiteness.Defs
 Source: Stacks Project, Algebra, Lemma Tag 032I, lines 45202-45232
 (blueprint: lem-weil-pbc-n2-ascends-finite-domain-extension).
 -/
+
+@[expose] public section
 
 universe uA uB uK uE
 

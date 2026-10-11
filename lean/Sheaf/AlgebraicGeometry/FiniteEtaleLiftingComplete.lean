@@ -3,12 +3,14 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import Mathlib.AlgebraicGeometry.Morphisms.Proper
-import Mathlib.AlgebraicGeometry.Morphisms.Finite
-import Mathlib.AlgebraicGeometry.Morphisms.Etale
-import Mathlib.AlgebraicGeometry.Pullbacks
-import Mathlib.CategoryTheory.MorphismProperty.Comma
-import Mathlib.RingTheory.AdicCompletion.Basic
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.Proper
+public import Mathlib.AlgebraicGeometry.Morphisms.Finite
+public import Mathlib.AlgebraicGeometry.Morphisms.Etale
+public import Mathlib.AlgebraicGeometry.Pullbacks
+public import Mathlib.CategoryTheory.MorphismProperty.Comma
+public import Mathlib.RingTheory.AdicCompletion.Basic
 
 /-!
 # Lifting finite étale covers over a complete Noetherian base
@@ -16,6 +18,8 @@ import Mathlib.RingTheory.AdicCompletion.Basic
 Source: Stacks Project, Fundamental Groups, Tag 0GS2, essential-surjectivity proof,
 complete Noetherian case (blueprint: lem-weil-pbc-finite-etale-lifting-complete).
 -/
+
+@[expose] public section
 
 universe u
 

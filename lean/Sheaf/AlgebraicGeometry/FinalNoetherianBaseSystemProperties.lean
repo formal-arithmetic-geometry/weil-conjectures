@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group J1
 -/
-import Sheaf.AlgebraicGeometry.GluedLimitComparison
+module
+
+public import Sheaf.AlgebraicGeometry.GluedLimitComparison
 
 /-!
 # Properties of the final Noetherian base system
@@ -12,6 +14,8 @@ Source: Weil conjectures blueprint, chapter `sec-nagata-compactification`, unit
 `sk-cor-nagata-sketch-fp`, lemma "Properties of the final Noetherian base system"
 (blueprint: lemma-nagata-final-noetherian-base-system).
 -/
+
+@[expose] public section
 
 universe u
 

@@ -1,5 +1,7 @@
-import Mathlib.AlgebraicGeometry.Fiber
-import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
+module
+
+public import Mathlib.AlgebraicGeometry.Fiber
+public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 
 /-!
 # Points isolated in their fibre stay isolated after base change
@@ -7,6 +9,8 @@ import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 Source: literature/stacks-project/morphisms.tex, Lemma 01TM (1)
 (blueprint: lem-weil-pbc-isolated-fibre-point-base-change).
 -/
+
+@[expose] public section
 
 universe u
 

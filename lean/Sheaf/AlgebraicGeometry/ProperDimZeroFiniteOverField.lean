@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF contributors
 -/
-import Mathlib.AlgebraicGeometry.Morphisms.Proper
-import Mathlib.AlgebraicGeometry.Morphisms.Finite
-import Sheaf.AlgebraicGeometry.Dimension
-import WeilConjectures.AlgebraicGeometry.Morphisms.FiberDegree
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.Proper
+public import Mathlib.AlgebraicGeometry.Morphisms.Finite
+public import Sheaf.AlgebraicGeometry.Dimension
+public import WeilConjectures.AlgebraicGeometry.Morphisms.FiberDegree
 
 /-!
 # Proper zero-dimensional schemes over a field
@@ -14,6 +16,8 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.FiberDegree
 Source: Stacks Project, Varieties, Tag 06LH (Lemma algebraic-scheme-dim-0)
 (blueprint: lem-pc-dim-zero-finite-over-field)
 -/
+
+@[expose] public section
 
 universe u
 

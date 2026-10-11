@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import Mathlib.RingTheory.Artinian.Defs
-import Mathlib.RingTheory.RegularLocalRing.Defs
-import Mathlib.RingTheory.Ideal.Maps
-import Sheaf.RingTheory.Depth
+module
+
+public import Mathlib.RingTheory.Artinian.Defs
+public import Mathlib.RingTheory.RegularLocalRing.Defs
+public import Mathlib.RingTheory.Ideal.Maps
+public import Sheaf.RingTheory.Depth
 
 /-!
 # Kollár's local ring dichotomy
@@ -15,6 +17,8 @@ Source: Stacks Project, Algebra, Lemma 10.119.2 (Tag 0BHZ), the existence of the
 cases and the exclusion of case (4) by case (3)
 (blueprint: lem-weil-pbc-kollar-local-dichotomy).
 -/
+
+@[expose] public section
 
 universe u v
 

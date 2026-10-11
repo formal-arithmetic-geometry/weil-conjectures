@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Mathlib.RingTheory.Ideal.AssociatedPrime.Basic
-import Mathlib.RingTheory.LocalRing.MaximalIdeal.Defs
-import Mathlib.RingTheory.QuotSMulTop
+module
+
+public import Mathlib.RingTheory.Ideal.AssociatedPrime.Basic
+public import Mathlib.RingTheory.LocalRing.MaximalIdeal.Defs
+public import Mathlib.RingTheory.QuotSMulTop
 
 /-!
 # Associated primes of quotients by powers of an element
@@ -13,6 +15,8 @@ import Mathlib.RingTheory.QuotSMulTop
 Source: Stacks Project, Algebra, Lemma 0CN5 (lemma-inherit-minimal-primes)
 (blueprint: lem-weil-pbc-associated-prime-power-quotient).
 -/
+
+@[expose] public section
 
 universe u v
 

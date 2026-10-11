@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
-import Mathlib.AlgebraicGeometry.Properties
-import Mathlib.RingTheory.LocalProperties.IntegrallyClosed
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
+public import Mathlib.AlgebraicGeometry.Properties
+public import Mathlib.RingTheory.LocalProperties.IntegrallyClosed
 
 /-!
 # A finite-type integral scheme contains a normal open
@@ -14,6 +16,8 @@ import Mathlib.RingTheory.LocalProperties.IntegrallyClosed
 Source: Blueprint, `sec-smooth-purity/sk-prop-a1-kummer/lem-fin-dense-normal-open`
 (blueprint: lem-fin-dense-normal-open).
 -/
+
+@[expose] public section
 
 universe u
 

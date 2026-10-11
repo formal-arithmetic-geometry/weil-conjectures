@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Mathlib.AlgebraicGeometry.Fiber
-import Mathlib.FieldTheory.IsAlgClosed.Basic
-import WeilConjectures.AlgebraicGeometry.Picard.Defs
-import Sheaf.AlgebraicGeometry.TensorPullback
+module
+
+public import Mathlib.AlgebraicGeometry.Fiber
+public import Mathlib.FieldTheory.IsAlgClosed.Basic
+public import WeilConjectures.AlgebraicGeometry.Picard.Defs
+public import Sheaf.AlgebraicGeometry.TensorPullback
 
 /-!
 # Base change, fibres and induced sections
@@ -28,6 +30,8 @@ induced section. Geometric points use the recorded unbundled description
 - `Scheme.Hom.geometricFiberAt`: the fibre over a chosen algebraic closure of `κ(t)`.
 - The remaining statements record the comparison and section clauses of the node.
 -/
+
+@[expose] public section
 
 universe u
 

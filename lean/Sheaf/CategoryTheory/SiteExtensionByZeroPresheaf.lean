@@ -3,11 +3,13 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Sheaf.CategoryTheory.ExtensionByZeroPresheaf
-import Mathlib.CategoryTheory.Sites.Sheafification
-import Mathlib.CategoryTheory.Sites.Over
-import Mathlib.CategoryTheory.Sites.PrecoverageToGrothendieck
-import Mathlib.Algebra.Category.Grp.FilteredColimits
+module
+
+public import Sheaf.CategoryTheory.ExtensionByZeroPresheaf
+public import Mathlib.CategoryTheory.Sites.Sheafification
+public import Mathlib.CategoryTheory.Sites.Over
+public import Mathlib.CategoryTheory.Sites.PrecoverageToGrothendieck
+public import Mathlib.Algebra.Category.Grp.FilteredColimits
 
 /-!
 # Extension by zero of abelian presheaves on a slice category
@@ -15,6 +17,8 @@ import Mathlib.Algebra.Category.Grp.FilteredColimits
 Source: Stacks Project, Modules on Sites, Lemma 03DI and Remark 03EJ
 (blueprint: def-weil-pbc-site-extension-by-zero-presheaf).
 -/
+
+@[expose] public section
 
 set_option autoImplicit false
 

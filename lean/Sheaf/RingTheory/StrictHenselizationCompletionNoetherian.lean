@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group R1
 -/
-import Sheaf.RingTheory.IsStrictHenselization
-import Mathlib.RingTheory.AdicCompletion.Algebra
-import Mathlib.RingTheory.Noetherian.Defs
-import Mathlib.RingTheory.Flat.FaithfullyFlat.Basic
+module
+
+public import Sheaf.RingTheory.IsStrictHenselization
+public import Mathlib.RingTheory.AdicCompletion.Algebra
+public import Mathlib.RingTheory.Noetherian.Defs
+public import Mathlib.RingTheory.Flat.FaithfullyFlat.Basic
 
 /-!
 # Noetherianity and faithful flatness of the completed strict henselization
@@ -14,6 +16,8 @@ import Mathlib.RingTheory.Flat.FaithfullyFlat.Basic
 Source: Stacks Project, More on Algebra, Lemma Tag 06LJ, parts (a) and (c), and
 Algebra, Lemma Tag 00HR (blueprint: lem-sc-strict-henselization-completion-noetherian).
 -/
+
+@[expose] public section
 
 universe u
 

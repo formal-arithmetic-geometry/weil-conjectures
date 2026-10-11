@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group P1
 -/
-import Sheaf.Paper.PQFCohomology
+module
+
+public import Sheaf.Paper.PQFCohomology
 
 /-!
 # The canonical Leray edge and its degeneration
@@ -11,6 +13,8 @@ import Sheaf.Paper.PQFCohomology
 Source: Stacks Project, Cohomology, Tag 01F4 (2), with Tags 01F2 and 01EX
 (blueprint: lem-pc-leray-degenerate-sections).
 -/
+
+@[expose] public section
 
 universe u
 

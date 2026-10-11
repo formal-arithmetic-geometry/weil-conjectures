@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import Sheaf.Algebra.Homology.ModuleStalkFunctor
-import Sheaf.Algebra.Homology.KFlat
-import Mathlib.Algebra.Category.ModuleCat.Monoidal.Basic
+module
+
+public import Sheaf.Algebra.Homology.ModuleStalkFunctor
+public import Sheaf.Algebra.Homology.KFlat
+public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Basic
 
 /-!
 # Stalks commute with total tensor complexes
@@ -13,6 +15,8 @@ import Mathlib.Algebra.Category.ModuleCat.Monoidal.Basic
 Source: Stacks Project, Cohomology, Lemma 06YB, tensor-stalk identification
 (blueprint: lem-pc-stalk-tensor-complex).
 -/
+
+@[expose] public section
 
 universe u₁
 

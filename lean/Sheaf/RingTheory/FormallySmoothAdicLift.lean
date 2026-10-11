@@ -3,13 +3,15 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import Mathlib.RingTheory.Noetherian.Defs
-import Mathlib.RingTheory.LocalRing.MaximalIdeal.Defs
-import Mathlib.RingTheory.AdicCompletion.Basic
-import Mathlib.RingTheory.LocalRing.Basic
-import Mathlib.RingTheory.LocalRing.ResidueField.Basic
-import Mathlib.RingTheory.Ideal.Quotient.Operations
-import Sheaf.RingTheory.FormallySmoothAdic
+module
+
+public import Mathlib.RingTheory.Noetherian.Defs
+public import Mathlib.RingTheory.LocalRing.MaximalIdeal.Defs
+public import Mathlib.RingTheory.AdicCompletion.Basic
+public import Mathlib.RingTheory.LocalRing.Basic
+public import Mathlib.RingTheory.LocalRing.ResidueField.Basic
+public import Mathlib.RingTheory.Ideal.Quotient.Operations
+public import Sheaf.RingTheory.FormallySmoothAdic
 
 /-!
 # Lifting formally smooth complete local algebras from a residue field
@@ -17,6 +19,8 @@ import Sheaf.RingTheory.FormallySmoothAdic
 Source: Stacks Project, More on Algebra, Lemma 07NR (lemma-lift-fs).
 (blueprint: lem-weil-pbc-fs-adic-lift-from-residue-field)
 -/
+
+@[expose] public section
 
 universe u v
 

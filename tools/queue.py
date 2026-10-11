@@ -88,6 +88,9 @@ def main() -> int:
         if dist:
             print(f"stage 3: library modules {len(lib)}; needed by the targets {len(dist)}; outside {len(lib - set(dist))}")
             print(f"stage 3: {len(items3)} items (" + ", ".join(f"{k} {sum(1 for x in items3 if x[4] == k)}" for k in ("repair", "disputed", "proof")) + f"); {len(held)} modules waiting for a statement")
+            ns = sum(x[3] for x in items3) + sum(x[2] for x in held)
+            print(f"stage 3: sorries left in the targets' closure {ns}, in {len(items3) + len(held)} modules (text count; "
+                  "tools/target_types.sh check prints each target's axioms: a target is closed when sorryAx is not among them)")
         else:
             print("stage 3: not open (lean/TargetsCheck.lean imports no target module yet)")
         return 0

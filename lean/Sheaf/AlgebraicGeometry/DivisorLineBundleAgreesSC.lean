@@ -1,5 +1,7 @@
-import Sheaf.AlgebraicGeometry.DivisorModule
-import WeilConjectures.AlgebraicGeometry.EffectiveCartier
+module
+
+public import Sheaf.AlgebraicGeometry.DivisorModule
+public import WeilConjectures.AlgebraicGeometry.EffectiveCartier
 
 /-!
 # Agreement of divisor modules and effective-Cartier line bundles
@@ -15,6 +17,8 @@ subscheme `D` has ideal sheaf `∏_P I_P ^ n_P`, the product (in the semiring
 dual `Scheme.Modules.dual` (the module of def-pc-divisor-line-bundle) is isomorphic to the
 divisor module `Divisor.moduleOfSmoothConnectedCurve` (the module of def-sc-divisor).
 -/
+
+@[expose] public section
 
 set_option autoImplicit false
 

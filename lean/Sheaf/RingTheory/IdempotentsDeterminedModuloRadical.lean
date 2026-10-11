@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group G1
 -/
-import Mathlib.Algebra.Group.Idempotent
-import Mathlib.RingTheory.Jacobson.Ideal
+module
+
+public import Mathlib.Algebra.Group.Idempotent
+public import Mathlib.RingTheory.Jacobson.Ideal
 
 /-!
 # Idempotents determined modulo an ideal in the Jacobson radical
@@ -12,6 +14,8 @@ import Mathlib.RingTheory.Jacobson.Ideal
 Source: Stacks Project, More on Algebra, Lemma 15.10.2 (Tag 09XF), with Definition
 15.10.1 (Tag 0ELY) (blueprint: lem-weil-pbc-idempotents-determined-modulo-radical).
 -/
+
+@[expose] public section
 
 universe u
 

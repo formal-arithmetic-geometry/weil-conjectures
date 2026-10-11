@@ -3,11 +3,13 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group Q1
 -/
-import Mathlib.AlgebraicGeometry.Sites.EtalePoint
-import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
-import Mathlib.AlgebraicGeometry.Morphisms.Separated
-import Mathlib.Topology.KrullDimension
-import Mathlib.Algebra.Category.Grp.Limits
+module
+
+public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
+public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
+public import Mathlib.AlgebraicGeometry.Morphisms.Separated
+public import Mathlib.Topology.KrullDimension
+public import Mathlib.Algebra.Category.Grp.Limits
 
 /-!
 # Sections on a zero-dimensional scheme and geometric stalks
@@ -15,6 +17,8 @@ import Mathlib.Algebra.Category.Grp.Limits
 Source: Stacks Project, Étale Cohomology, Tag 03QO; Algebra, Tags 00KH and 06RS
 (blueprint: lem-weil-pbc-zero-dimensional-sections-stalks).
 -/
+
+@[expose] public section
 
 universe u v
 

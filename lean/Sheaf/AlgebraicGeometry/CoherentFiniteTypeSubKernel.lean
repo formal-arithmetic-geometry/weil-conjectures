@@ -3,13 +3,17 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group G1
 -/
-import Sheaf.AlgebraicGeometry.Coherent
+module
+
+public import Sheaf.AlgebraicGeometry.Coherent
 
 /-! # Finite type submodules and kernels of coherent modules
 
 Source: Stacks Project, Modules, Lemma 01BY
 (blueprint: lem-weil-pbc-coherent-finite-type-sub-kernel).
 -/
+
+@[expose] public section
 
 universe u
 

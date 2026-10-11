@@ -1,7 +1,9 @@
-import Sheaf.AlgebraicGeometry.PerfectComplex
-import Sheaf.AlgebraicGeometry.DerivedPullback
-import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
-import WeilConjectures.AlgebraicGeometry.Picard.TwistedDescent
+module
+
+public import Sheaf.AlgebraicGeometry.PerfectComplex
+public import Sheaf.AlgebraicGeometry.DerivedPullback
+public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
+public import WeilConjectures.AlgebraicGeometry.Picard.TwistedDescent
 
 /-! # Descent of a perfect complex
 
@@ -14,6 +16,8 @@ Source: Stacks Project, Derived Categories of Schemes, Lemma 36.29.3 (Tag 09RF)
 The base change from `X_j` to `X` is the derived pullback along the canonical
 base-change map `X ⟶ X_j` (`baseChangeMap` along `Spec R ⟶ Spec R_j`).
 -/
+
+@[expose] public section
 
 universe u w
 

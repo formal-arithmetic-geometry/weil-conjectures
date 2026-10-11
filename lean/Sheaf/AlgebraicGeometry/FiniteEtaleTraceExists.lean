@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
-import Mathlib.AlgebraicGeometry.Morphisms.Finite
-import Mathlib.Algebra.Category.Grp.AB
+module
+
+public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
+public import Mathlib.AlgebraicGeometry.Morphisms.Finite
+public import Mathlib.Algebra.Category.Grp.AB
 
 /-!
 # Existence and uniqueness of the finite étale trace
@@ -13,6 +15,8 @@ import Mathlib.Algebra.Category.Grp.AB
 Source: Stacks Project, Section 03SH, following Definition 03SE
 (blueprint: lem-weil-pbc-finite-etale-trace-exists).
 -/
+
+@[expose] public section
 
 universe u
 

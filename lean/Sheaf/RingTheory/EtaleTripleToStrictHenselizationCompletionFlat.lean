@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group P1
 -/
-import Sheaf.RingTheory.StrictHenselizationTriples
-import Mathlib.RingTheory.AdicCompletion.Algebra
-import Mathlib.RingTheory.Noetherian.Defs
-import Mathlib.RingTheory.RingHom.Flat
+module
+
+public import Sheaf.RingTheory.StrictHenselizationTriples
+public import Mathlib.RingTheory.AdicCompletion.Algebra
+public import Mathlib.RingTheory.Noetherian.Defs
+public import Mathlib.RingTheory.RingHom.Flat
 
 /-!
 # Flatness of etale triple maps to the completed strict henselization
@@ -14,6 +16,8 @@ import Mathlib.RingTheory.RingHom.Flat
 Source: Stacks Project, More on Algebra, Tag 06LJ, proof of (c)
 (blueprint: lem-sc-etale-triple-to-sh-completion-flat).
 -/
+
+@[expose] public section
 
 universe u
 

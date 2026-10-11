@@ -23,4 +23,16 @@ if [ -f "$SHEAF_LEAN/lakefile.toml" ]; then
       line=$0; sub(/#.*/, "", line); split(line, kv, "="); k=kv[1]; v=kv[2]; gsub(/[ \t]/, "", k); gsub(/^[ \t]+|[ \t]+$/, "", v);
       gsub(/"/, "", v); print k "=" v }' "$SHEAF_LEAN/lakefile.toml")
 fi
+# The options of the project's own library, `leanOptions = { ... }` of the lean_lib named Sheaf (stage 3: one package
+# with the source root WeilConjectures and the project root Sheaf; autoImplicit = false holds for Sheaf only).
+# lean_file.sh adds them for every file that is not the source library's.
+SHEAF_PROJECT_OPTS=()
+if [ -f "$SHEAF_LEAN/lakefile.toml" ]; then
+  while IFS= read -r _l; do [ -n "$_l" ] && SHEAF_PROJECT_OPTS+=("-D$_l"); done < <(awk '
+    /^\[\[lean_lib\]\]/ {lib=1; name=""; next} /^\[/ {lib=0}
+    lib && /^name *= *"/ {name=$0; gsub(/^name *= *"|".*$/, "", name)}
+    lib && name=="Sheaf" && /^leanOptions *= *\{/ {
+      line=$0; sub(/^leanOptions *= *\{/, "", line); sub(/\}.*$/, "", line); n=split(line, parts, ",")
+      for (i=1; i<=n; i++) { split(parts[i], kv, "="); k=kv[1]; v=kv[2]; gsub(/[ \t"]/, "", k); gsub(/[ \t"]/, "", v); if (k != "") print k "=" v } }' "$SHEAF_LEAN/lakefile.toml")
+fi
 export SHEAF_ROOT SHEAF_LEAN SHEAF_LIB SHEAF_BUILD PATH

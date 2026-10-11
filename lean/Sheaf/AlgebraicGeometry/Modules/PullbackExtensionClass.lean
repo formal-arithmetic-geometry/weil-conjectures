@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import WeilConjectures.AlgebraicGeometry.Modules.Ext
-import Sheaf.AlgebraicGeometry.Modules.ExtYonedaFunctoriality
-import Mathlib.Algebra.Homology.DerivedCategory.Ext.ExtClass
+module
+
+public import WeilConjectures.AlgebraicGeometry.Modules.Ext
+public import Sheaf.AlgebraicGeometry.Modules.ExtYonedaFunctoriality
+public import Mathlib.Algebra.Homology.DerivedCategory.Ext.ExtClass
 
 /-!
 # Yoneda class of a pulled-back extension
@@ -13,6 +15,8 @@ import Mathlib.Algebra.Homology.DerivedCategory.Ext.ExtClass
 Source: Stacks Project, Homology, Tag 010I; Derived Categories, Tag 06XP
 (blueprint: lem-sc-p1-pullback-extension-class).
 -/
+
+@[expose] public section
 
 set_option autoImplicit false
 

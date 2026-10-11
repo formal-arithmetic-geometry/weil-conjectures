@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group J1
 -/
-import Mathlib.AlgebraicGeometry.Restrict
-import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
+module
+
+public import Mathlib.AlgebraicGeometry.Restrict
+public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 
 /-! # Étale cohomology over a local ring as a colimit
 
@@ -23,6 +25,8 @@ the unique factorizations of the local-scheme morphism, and a colimit cocone who
 are the pullbacks followed by inverse-image composition. `Sheaf.H` is the recorded Ext
 encoding of abelian-sheaf cohomology; its K-injective comparison is a stage-3 bridge.
 -/
+
+@[expose] public section
 
 universe u
 

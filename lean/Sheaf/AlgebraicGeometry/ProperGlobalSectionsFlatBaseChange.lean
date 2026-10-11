@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group R1
 -/
-import Mathlib.AlgebraicGeometry.Morphisms.Proper
-import Mathlib.AlgebraicGeometry.Pullbacks
-import Mathlib.RingTheory.Flat.Basic
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.Proper
+public import Mathlib.AlgebraicGeometry.Pullbacks
+public import Mathlib.RingTheory.Flat.Basic
 
 /-!
 # Flat base change for global sections of a proper scheme
@@ -14,6 +16,8 @@ Source: Stacks Project, Cohomology of Schemes, Lemma 30.5.2, Tag 02KH,
 with the structure sheaf in degree zero
 (blueprint: lem-weil-pbc-stein-flat-base-change-global-sections).
 -/
+
+@[expose] public section
 
 universe u
 

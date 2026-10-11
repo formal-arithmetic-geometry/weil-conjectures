@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import Sheaf.AlgebraicGeometry.FullAffineEtaleTopos
-import Sheaf.AlgebraicGeometry.LimitAffineTransition
-import Sheaf.CategoryTheory.SiteSystemStrictification
+module
+
+public import Sheaf.AlgebraicGeometry.FullAffineEtaleTopos
+public import Sheaf.AlgebraicGeometry.LimitAffineTransition
+public import Sheaf.CategoryTheory.SiteSystemStrictification
 
 /-!
 # The affine étale site of an inverse limit
@@ -13,6 +15,8 @@ import Sheaf.CategoryTheory.SiteSystemStrictification
 Source: Stacks Project, Étale Cohomology, Lemma 0EYL (qcqs case), and Sites, Lemma 09YL
 (blueprint: lem-weil-pbc-affine-etale-site-colimit).
 -/
+
+@[expose] public section
 
 universe u
 

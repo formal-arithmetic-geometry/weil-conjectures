@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import Mathlib.AlgebraicGeometry.Noetherian
-import Mathlib.AlgebraicGeometry.Morphisms.Finite
+module
+
+public import Mathlib.AlgebraicGeometry.Noetherian
+public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 
 /-!
 # Finite morphisms over locally Noetherian schemes are of finite presentation
@@ -13,6 +15,8 @@ Source: the Weil conjectures blueprint, `sec-nagata-compactification`,
 `sk-prop-nagata-sketch-zmt`, node of order 198 (blueprint: pqf-lem-finite-fp-locnoeth).
 Finite presentation uses the convention of Stacks Project, Tag 01TP.
 -/
+
+@[expose] public section
 
 universe u
 

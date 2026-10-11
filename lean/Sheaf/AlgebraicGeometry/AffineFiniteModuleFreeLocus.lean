@@ -2,10 +2,12 @@
 Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 -/
-import Mathlib.RingTheory.Localization.Free
-import Mathlib.RingTheory.Spectrum.Prime.FreeLocus
-import Mathlib.AlgebraicGeometry.Modules.Tilde
-import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
+module
+
+public import Mathlib.RingTheory.Localization.Free
+public import Mathlib.RingTheory.Spectrum.Prime.FreeLocus
+public import Mathlib.AlgebraicGeometry.Modules.Tilde
+public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 
 /-!
 # Finite modules free at all primes are locally free on an affine cover
@@ -18,6 +20,8 @@ Source: Stacks Project, Algebra, Tag 0GWM, together with Tag 01XZ
 - `Module.finite_free_at_primes_localized_cover`: the finite principal-open cover.
 - `AlgebraicGeometry.isFiniteLocallyFree_tilde_of_free_at_primes`: its sheaf formulation.
 -/
+
+@[expose] public section
 
 universe u v
 

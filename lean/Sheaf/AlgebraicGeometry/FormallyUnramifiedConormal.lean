@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group J1
 -/
-import Sheaf.AlgebraicGeometry.UniversalFirstOrderThickeningExists
-import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
-import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
+module
+
+public import Sheaf.AlgebraicGeometry.UniversalFirstOrderThickeningExists
+public import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
+public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 
 /-!
 # Conormal sheaf of a formally unramified morphism
@@ -13,6 +15,8 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 Source: Stacks Project, More on Morphisms, Definition 04F4 (2), and Morphisms,
 Definition 01R2 (blueprint: def-weil-pbc-conormal-sheaf-formally-unramified).
 -/
+
+@[expose] public section
 
 universe u
 

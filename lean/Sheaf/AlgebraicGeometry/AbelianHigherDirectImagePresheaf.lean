@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group N1
 -/
-import WeilConjectures.CategoryTheory.GrothendieckAbelian.ConcreteCoefficients
-import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStarCoherence
-import Sheaf.AlgebraicGeometry.DerivedCategories
+module
+
+public import WeilConjectures.CategoryTheory.GrothendieckAbelian.ConcreteCoefficients
+public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStarCoherence
+public import Sheaf.AlgebraicGeometry.DerivedCategories
 
 /-!
 # Higher direct images as sheafified cohomology presheaves
@@ -15,6 +17,8 @@ The presheaf is written using derived Hom from the free abelian sheaf of an etal
 representable. This is the standard representation of restricted hypercohomology:
 Hom(Z[U ×_X Y][0], K[q]) = H^q(U ×_X Y, K|). Its restriction maps are precomposition.
 -/
+
+@[expose] public section
 
 universe u
 

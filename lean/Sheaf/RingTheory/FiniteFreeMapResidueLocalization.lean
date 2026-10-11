@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Mathlib.LinearAlgebra.FreeModule.Basic
-import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
-import Mathlib.RingTheory.Localization.Away.Basic
+module
+
+public import Mathlib.LinearAlgebra.FreeModule.Basic
+public import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
+public import Mathlib.RingTheory.Localization.Away.Basic
 
 /-!
 # Residue-field rank criterion for maps of finite free modules
@@ -13,6 +15,8 @@ import Mathlib.RingTheory.Localization.Away.Basic
 Source: Stacks Project, Algebra, Tag 00O0, Lemma cokernel-flat, parts (1) and (3)
 (blueprint: lem-pc-finite-free-map-residue-localization).
 -/
+
+@[expose] public section
 
 namespace Module
 

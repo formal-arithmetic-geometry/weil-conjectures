@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import WeilConjectures.AlgebraicGeometry.Curve
-import Mathlib.GroupTheory.QuotientGroup.Defs
+module
+
+public import WeilConjectures.AlgebraicGeometry.Curve
+public import Mathlib.GroupTheory.QuotientGroup.Defs
 
 /-!
 # Units modulo powers under algebraically closed base change
@@ -12,6 +14,8 @@ import Mathlib.GroupTheory.QuotientGroup.Defs
 Source: blueprint sec-curve-estimates/sk-prop-ext-invariance/thm-sc-constant-invariance,
 affine-case proof, unit quotient paragraph (blueprint: lem-sc-units-quotient-base-change).
 -/
+
+@[expose] public section
 
 set_option autoImplicit false
 

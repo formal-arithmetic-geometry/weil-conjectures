@@ -3,18 +3,22 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import Sheaf.AlgebraicGeometry.PerfectComplex
-import Sheaf.AlgebraicGeometry.DerivedPullback
-import Sheaf.AlgebraicGeometry.DerivedTensorCohomologyVanishes
-import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
-import Mathlib.AlgebraicGeometry.Morphisms.Immersion
-import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
+module
+
+public import Sheaf.AlgebraicGeometry.PerfectComplex
+public import Sheaf.AlgebraicGeometry.DerivedPullback
+public import Sheaf.AlgebraicGeometry.DerivedTensorCohomologyVanishes
+public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
+public import Mathlib.AlgebraicGeometry.Morphisms.Immersion
+public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 
 /-! # The locally closed locus of free lowest cohomology of a perfect complex
 
 Source: Stacks Project, Derived Categories of Schemes, Lemma 36.31.4, Tag 0BDL
 (blueprint: lem-sc-perfect-h0-locally-closed).
 -/
+
+@[expose] public section
 
 universe u w
 

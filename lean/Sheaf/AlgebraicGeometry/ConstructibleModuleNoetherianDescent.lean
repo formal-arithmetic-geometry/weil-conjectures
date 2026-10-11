@@ -1,5 +1,7 @@
-import Sheaf.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+module
+
+public import Sheaf.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-!
 # Noetherian descent of constructible module sheaves
@@ -7,6 +9,8 @@ import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 Source: Stacks Project, Etale Cohomology, Lemma 09Z7 (proof, first paragraph)
 (blueprint: lem-weil-pbc-constructible-module-noetherian-descent).
 -/
+
+@[expose] public section
 
 universe u
 

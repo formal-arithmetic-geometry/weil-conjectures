@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group J1
 -/
-import Mathlib.Algebra.Category.Ring.Colimits
-import Mathlib.RingTheory.FiniteType
-import Mathlib.RingTheory.TensorProduct.Maps
+module
+
+public import Mathlib.Algebra.Category.Ring.Colimits
+public import Mathlib.RingTheory.FiniteType
+public import Mathlib.RingTheory.TensorProduct.Maps
 
 /-!
 # Descent of finiteness of an algebra map along a directed ring colimit
@@ -13,6 +15,8 @@ import Mathlib.RingTheory.TensorProduct.Maps
 Source: Stacks Project, Algebra, Lemma 10.168.3 (Tag 07RG)
 (blueprint: lem-weil-pbc-colimit-finite-ring-map).
 -/
+
+@[expose] public section
 
 universe u v t
 

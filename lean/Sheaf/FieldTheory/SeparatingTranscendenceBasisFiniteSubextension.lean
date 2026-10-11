@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group J1
 -/
-import Mathlib.FieldTheory.Separable
-import Mathlib.RingTheory.AlgebraicIndependent.TranscendenceBasis
-import Mathlib.LinearAlgebra.FiniteDimensional.Basic
+module
+
+public import Mathlib.FieldTheory.Separable
+public import Mathlib.RingTheory.AlgebraicIndependent.TranscendenceBasis
+public import Mathlib.LinearAlgebra.FiniteDimensional.Basic
 
 /-!
 # Finite separable subextensions from a transcendence basis
@@ -13,6 +15,8 @@ import Mathlib.LinearAlgebra.FiniteDimensional.Basic
 Source: literature/stacks-project/algebra.tex, proof of Lemma Tag 030U,
 lines 10187--10191 (blueprint: lem-weil-pbc-separating-transcendence-basis-finite-subextension).
 -/
+
+@[expose] public section
 
 universe u v w
 

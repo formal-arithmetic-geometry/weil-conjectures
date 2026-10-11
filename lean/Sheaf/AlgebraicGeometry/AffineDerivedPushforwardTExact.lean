@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group R1
 -/
-import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
-import Mathlib.AlgebraicGeometry.Morphisms.Affine
-import Mathlib.Algebra.Homology.DerivedCategory.TStructure
+module
+
+public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
+public import Mathlib.AlgebraicGeometry.Morphisms.Affine
+public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 
 /-!
 # Affine derived direct image preserves and reflects standard cohomological bounds
@@ -13,6 +15,8 @@ import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 Source: Stacks Project, Derived Categories of Schemes, Tags 0AVW and 08I8
 (blueprint: lem-sc-affine-derived-pushforward-t-exact).
 -/
+
+@[expose] public section
 
 universe u wX wY
 

@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF worker J1
 -/
-import Mathlib.AlgebraicGeometry.Sites.EtalePoint
+module
+
+public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
 
 /-!
 # Independence of the geometric point in étale sheaf support
@@ -11,6 +13,8 @@ import Mathlib.AlgebraicGeometry.Sites.EtalePoint
 Source: the Weil conjectures blueprint, `sec-smooth-purity`,
 `sk-prop-sf-kunneth-ordinary` (blueprint: lem-kun-support-geometric-point-independent).
 -/
+
+@[expose] public section
 
 universe u
 

@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Mathlib.Topology.Spectral.ConstructibleTopology
-import Mathlib.Topology.Spectral.Hom
+module
+
+public import Mathlib.Topology.Spectral.ConstructibleTopology
+public import Mathlib.Topology.Spectral.Hom
 
 /-!
 # Spectral maps are continuous for the constructible topologies
@@ -12,6 +14,8 @@ import Mathlib.Topology.Spectral.Hom
 Source: Stacks Project, Topology, Lemma 5.23.3, Tag 0A2S, part (1)
 (blueprint: lem-weil-pbc-spectral-map-constructible-continuous).
 -/
+
+@[expose] public section
 
 universe u v
 

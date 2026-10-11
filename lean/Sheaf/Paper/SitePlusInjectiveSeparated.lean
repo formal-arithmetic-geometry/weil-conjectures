@@ -1,5 +1,7 @@
-import Mathlib.CategoryTheory.Sites.Plus
-import Mathlib.CategoryTheory.Sites.PrecoverageToGrothendieck
+module
+
+public import Mathlib.CategoryTheory.Sites.Plus
+public import Mathlib.CategoryTheory.Sites.PrecoverageToGrothendieck
 
 /-!
 # Injectivity into the plus construction for a separated presheaf
@@ -8,6 +10,8 @@ Source: `literature/stacks-project/sites.tex`, Definition 00WA and
 Theorem 00WB, part (2), proof of item-sheaf
 (blueprint: lem-weil-pbc-site-plus-injective-separated).
 -/
+
+@[expose] public section
 
 universe u
 

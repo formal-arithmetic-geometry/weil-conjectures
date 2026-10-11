@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import WeilConjectures.Mathlib.RingTheory.Henselian
-import Mathlib.RingTheory.IntegralClosure.Algebra.Defs
+module
+
+public import WeilConjectures.Mathlib.RingTheory.Henselian
+public import Mathlib.RingTheory.IntegralClosure.Algebra.Defs
 
 /-!
 # Integral algebras over henselian pairs
@@ -17,6 +19,8 @@ Source: Stacks Project, More on Algebra, Lemma 15.11.8 (Tag 09XK, label
 * `henselianRing_of_isIntegral`: an integral algebra over a henselian pair is
   henselian for the extended ideal.
 -/
+
+@[expose] public section
 
 universe u v
 

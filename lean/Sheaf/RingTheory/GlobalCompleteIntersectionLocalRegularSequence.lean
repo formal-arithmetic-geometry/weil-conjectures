@@ -3,11 +3,13 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import Mathlib.Algebra.MvPolynomial.Basic
-import Mathlib.AlgebraicGeometry.Scheme
-import Mathlib.Topology.KrullDimension
-import Mathlib.RingTheory.Localization.AtPrime.Basic
-import Mathlib.RingTheory.Regular.RegularSequence
+module
+
+public import Mathlib.Algebra.MvPolynomial.Basic
+public import Mathlib.AlgebraicGeometry.Scheme
+public import Mathlib.Topology.KrullDimension
+public import Mathlib.RingTheory.Localization.AtPrime.Basic
+public import Mathlib.RingTheory.Regular.RegularSequence
 
 /-!
 # Equations of a global complete intersection at a prime
@@ -15,6 +17,8 @@ import Mathlib.RingTheory.Regular.RegularSequence
 Source: Stacks Project, Algebra, proofs of Lemmas 10.135.3 and 10.135.4 (Tags 00SB, 00SC)
 (blueprint: lem-weil-pbc-global-complete-intersection-local-regular-sequence).
 -/
+
+@[expose] public section
 
 universe u
 

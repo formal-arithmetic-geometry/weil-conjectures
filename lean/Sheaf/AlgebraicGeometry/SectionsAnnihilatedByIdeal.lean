@@ -3,16 +3,20 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group G1
 -/
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
-import Sheaf.Algebra.Homology.ModuleStalkFunctor
-import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
+module
+
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
+public import Sheaf.Algebra.Homology.ModuleStalkFunctor
+public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 
 /-! # The subsheaf of sections annihilated by an ideal
 
 Source: Stacks Project, Properties, Lemma 01PO and Definition 01PP
 (blueprint: lem-weil-pbc-sections-annihilated-by-ideal).
 -/
+
+@[expose] public section
 
 universe u
 

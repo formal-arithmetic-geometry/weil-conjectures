@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group T1
 -/
-import Mathlib.AlgebraicGeometry.Noetherian
-import Mathlib.AlgebraicGeometry.Morphisms.Proper
-import Sheaf.AlgebraicGeometry.QuasiFiniteMorphism
+module
+
+public import Mathlib.AlgebraicGeometry.Noetherian
+public import Mathlib.AlgebraicGeometry.Morphisms.Proper
+public import Sheaf.AlgebraicGeometry.QuasiFiniteMorphism
 
 /-!
 # Finite morphisms and proper morphisms with finite fibres
@@ -13,6 +15,8 @@ import Sheaf.AlgebraicGeometry.QuasiFiniteMorphism
 Source: Stacks Project, Cohomology of Schemes, Lemma 30.21.1, Tag 02OG
 (blueprint: thm-pqf-finite-iff-proper-finite-fibres).
 -/
+
+@[expose] public section
 
 universe u
 

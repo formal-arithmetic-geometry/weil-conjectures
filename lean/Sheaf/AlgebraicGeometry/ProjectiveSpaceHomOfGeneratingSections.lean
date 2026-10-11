@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import Sheaf.AlgebraicGeometry.ProjectiveSpaceFunctorOfPoints
-import Sheaf.AlgebraicGeometry.InvertibleGeneratingSectionsFibre
+module
+
+public import Sheaf.AlgebraicGeometry.ProjectiveSpaceFunctorOfPoints
+public import Sheaf.AlgebraicGeometry.InvertibleGeneratingSectionsFibre
 
 /-!
 # Morphisms into projective space from generating sections
@@ -16,6 +18,8 @@ The integral projective space used by the functor-of-points declaration is the b
 of the raw integral Proj to `Spec ℤ`. Its second projection identifies it with that Proj.
 Thus the second component of the defining pairing below is `ψ ≫ toProjInt`.
 -/
+
+@[expose] public section
 
 universe u
 

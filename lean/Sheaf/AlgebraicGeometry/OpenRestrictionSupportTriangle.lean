@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group U1
 -/
-import Sheaf.AlgebraicGeometry.DerivedOpenRestrictionMaps
-import Mathlib.Algebra.Homology.DerivedCategory.TStructure
-import Mathlib.Topology.QuasiSeparated
+module
+
+public import Sheaf.AlgebraicGeometry.DerivedOpenRestrictionMaps
+public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
+public import Mathlib.Topology.QuasiSeparated
 
 /-! # The support triangle for restriction to an open subscheme
 
@@ -13,6 +15,8 @@ Source: Stacks Project, Duality for Schemes, Tag 0E4G, proof of Lemma 48.4.3;
 Derived Categories of Schemes, Lemma 36.4.1 and Definition 36.6.1
 (blueprint: lem-sc-open-restriction-support-triangle).
 -/
+
+@[expose] public section
 
 universe u w
 

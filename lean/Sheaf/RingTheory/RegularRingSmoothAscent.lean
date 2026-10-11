@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import Mathlib.RingTheory.Smooth.Basic
-import Mathlib.RingTheory.RegularLocalRing.Defs
+module
+
+public import Mathlib.RingTheory.Smooth.Basic
+public import Mathlib.RingTheory.RegularLocalRing.Defs
 
 /-!
 # Regularity ascends along smooth ring maps
@@ -12,6 +14,8 @@ import Mathlib.RingTheory.RegularLocalRing.Defs
 Source: Stacks Project, Algebra, Lemma 07NF
 (blueprint: lem-weil-pbc-regular-ring-smooth-ascent).
 -/
+
+@[expose] public section
 
 universe u v
 

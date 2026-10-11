@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
+module
+
+public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
 
 /-!
 # Comparison with the limit of a Noetherian approximation
@@ -12,6 +14,8 @@ Source: the Weil conjectures blueprint, chapter `sec-nagata-compactification`, u
 `sk-prop-nagata-sketch-approximation`, definition "Comparison from the original scheme to the
 inverse limit" (blueprint: def-nagata-glued-limit-comparison).
 -/
+
+@[expose] public section
 
 universe u
 

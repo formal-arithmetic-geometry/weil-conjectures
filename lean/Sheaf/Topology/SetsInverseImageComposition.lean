@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import Mathlib.Topology.Sheaves.Functors
-import Mathlib.CategoryTheory.Sites.LeftExact
+module
+
+public import Mathlib.Topology.Sheaves.Functors
+public import Mathlib.CategoryTheory.Sites.LeftExact
 
 /-!
 # Composition of inverse images of sheaves of sets
@@ -13,6 +15,8 @@ Source: Stacks Project, Sheaves on Spaces, Lemma 6.21.6 (Tag 008I), with
 Lemma 6.21.2 (Tag 008E).
 (blueprint: lem-weil-pbc-sets-inverse-image-composition)
 -/
+
+@[expose] public section
 
 universe u
 

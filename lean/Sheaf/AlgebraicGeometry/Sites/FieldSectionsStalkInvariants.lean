@@ -3,11 +3,13 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import WeilConjectures.AlgebraicGeometry.Sites.Hilbert90
-import Mathlib.FieldTheory.IsSepClosed
-import WeilConjectures.Mathlib.RingTheory.Etale.Field
-import Mathlib.AlgebraicGeometry.Sites.EtalePoint
-import Mathlib.FieldTheory.KrullTopology
+module
+
+public import WeilConjectures.AlgebraicGeometry.Sites.Hilbert90
+public import Mathlib.FieldTheory.IsSepClosed
+public import WeilConjectures.Mathlib.RingTheory.Etale.Field
+public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
+public import Mathlib.FieldTheory.KrullTopology
 
 /-!
 # Sections over finite separable fields and geometric stalk invariants
@@ -15,6 +17,8 @@ import Mathlib.FieldTheory.KrullTopology
 Source: Stacks Project, Etale Cohomology, Tags 04JM and 03QW
 (blueprint: lem-exc-field-sections-stalk-invariants).
 -/
+
+@[expose] public section
 
 universe u v
 

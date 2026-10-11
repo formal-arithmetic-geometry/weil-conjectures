@@ -3,18 +3,22 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group Q1
 -/
-import Sheaf.AlgebraicGeometry.FiniteTorDimensionOver
-import Sheaf.AlgebraicGeometry.PerfectComplex
-import Sheaf.AlgebraicGeometry.ClosedSubsetProperOverBase
-import Sheaf.AlgebraicGeometry.Coherent
-import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
-import Mathlib.AlgebraicGeometry.Noetherian
+module
+
+public import Sheaf.AlgebraicGeometry.FiniteTorDimensionOver
+public import Sheaf.AlgebraicGeometry.PerfectComplex
+public import Sheaf.AlgebraicGeometry.ClosedSubsetProperOverBase
+public import Sheaf.AlgebraicGeometry.Coherent
+public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
+public import Mathlib.AlgebraicGeometry.Noetherian
 
 /-! # Perfect direct image of a bounded coherent finite-Tor complex
 
 Source: Stacks Project, Derived Categories of Schemes, Lemma 36.27.1 (Tag 08EV)
 (blueprint: lem-pc-bounded-coherent-finite-tor-proper-pushforward-perfect).
 -/
+
+@[expose] public section
 
 universe u wX wS
 

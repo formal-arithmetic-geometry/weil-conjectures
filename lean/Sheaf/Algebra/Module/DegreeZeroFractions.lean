@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import Mathlib.Algebra.Module.LocalizedModule.Basic
+module
+
+public import Mathlib.Algebra.Module.LocalizedModule.Basic
 
 /-!
 # Equal-degree fractions in a localized graded module
@@ -11,6 +13,8 @@ import Mathlib.Algebra.Module.LocalizedModule.Basic
 Source: Stacks Project, Algebra, Section 00JM, homogeneous localization at a prime
 (blueprint: def-sc-degree-zero-module-fractions).
 -/
+
+@[expose] public section
 
 universe uF vF wF
 

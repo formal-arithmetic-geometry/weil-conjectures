@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Mathlib.AlgebraicGeometry.Sites.Fpqc
-import Sheaf.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
+module
+
+public import Mathlib.AlgebraicGeometry.Sites.Fpqc
+public import Sheaf.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
 
 /-!
 # Fpqc descent of sections of an etale sheaf of sets
@@ -12,6 +14,8 @@ import Sheaf.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
 Source: Stacks Project, Etale Cohomology, Lemma 59.39.2, Tag 09XN
 (blueprint: lem-weil-pbc-etale-sections-fpqc-descent).
 -/
+
+@[expose] public section
 
 universe u v
 

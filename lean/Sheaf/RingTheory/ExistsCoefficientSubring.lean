@@ -3,11 +3,13 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group G1
 -/
-import Mathlib.RingTheory.AdicCompletion.Basic
-import Mathlib.RingTheory.LocalRing.ResidueField.Defs
-import Mathlib.RingTheory.Ideal.Quotient.Operations
-import Mathlib.Algebra.Ring.Subring.Defs
-import Mathlib.Algebra.CharP.Defs
+module
+
+public import Mathlib.RingTheory.AdicCompletion.Basic
+public import Mathlib.RingTheory.LocalRing.ResidueField.Defs
+public import Mathlib.RingTheory.Ideal.Quotient.Operations
+public import Mathlib.Algebra.Ring.Subring.Defs
+public import Mathlib.Algebra.CharP.Defs
 
 /-!
 # Existence of a coefficient subring
@@ -15,6 +17,8 @@ import Mathlib.Algebra.CharP.Defs
 Source: Stacks Project, Algebra, Theorem 032A(1) and Definition 0326
 (blueprint: lem-weil-pbc-cohen-coefficient-ring-exists).
 -/
+
+@[expose] public section
 
 universe u
 

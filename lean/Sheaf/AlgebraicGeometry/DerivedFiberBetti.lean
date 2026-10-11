@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Sheaf.AlgebraicGeometry.DerivedPullback
-import Mathlib.AlgebraicGeometry.ResidueField
-import Mathlib.LinearAlgebra.Dimension.Finrank
+module
+
+public import Sheaf.AlgebraicGeometry.DerivedPullback
+public import Mathlib.AlgebraicGeometry.ResidueField
+public import Mathlib.LinearAlgebra.Dimension.Finrank
 
 /-! # Betti numbers of derived residue-field fibres
 
@@ -15,6 +17,8 @@ Source: Stacks Project, Derived Categories of Schemes, Lemma 36.31.1, Tag 0BDI
 On the one-point scheme `Spec κ(x)`, evaluation of the cohomology sheaf on the whole
 space gives its cohomology vector space. Scalars are transported along `ΓSpecIso`.
 -/
+
+@[expose] public section
 
 universe u w
 

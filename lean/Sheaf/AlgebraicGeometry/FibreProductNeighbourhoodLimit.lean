@@ -2,9 +2,11 @@
 Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 -/
-import Sheaf.AlgebraicGeometry.StrictHenselization
-import Mathlib.CategoryTheory.Comma.Over.Pullback
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
+module
+
+public import Sheaf.AlgebraicGeometry.StrictHenselization
+public import Mathlib.CategoryTheory.Comma.Over.Pullback
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 
 /-!
 # Base change and the neighbourhood limit
@@ -12,6 +14,8 @@ import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 Source: Weil conjectures blueprint, `sec-curve-estimates/sk-prop-h2`,
 (blueprint: lemma-weil-pbc-fibre-product-limit).
 -/
+
+@[expose] public section
 
 universe u
 

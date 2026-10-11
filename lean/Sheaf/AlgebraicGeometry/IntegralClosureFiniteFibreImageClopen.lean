@@ -3,14 +3,18 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group J1
 -/
-import Mathlib.AlgebraicGeometry.Restrict
-import Mathlib.RingTheory.IntegralClosure.Algebra.Basic
+module
+
+public import Mathlib.AlgebraicGeometry.Restrict
+public import Mathlib.RingTheory.IntegralClosure.Algebra.Basic
 
 /-! # The finite fibre component has a clopen image in the integral closure
 
 Source: literature/stacks-project/more-algebra.tex:2529-2541, proof of Lemma Tag 09XH
 (blueprint: lem-weil-pbc-integral-closure-finite-fibre-image-clopen)
 -/
+
+@[expose] public section
 
 universe u v w z
 

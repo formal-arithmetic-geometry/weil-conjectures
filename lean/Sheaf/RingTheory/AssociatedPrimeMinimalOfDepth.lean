@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Sheaf.RingTheory.Depth
-import Mathlib.RingTheory.Noetherian.Defs
-import Mathlib.RingTheory.KrullDimension.Basic
-import Mathlib.RingTheory.Ideal.AssociatedPrime.Basic
+module
+
+public import Sheaf.RingTheory.Depth
+public import Mathlib.RingTheory.Noetherian.Defs
+public import Mathlib.RingTheory.KrullDimension.Basic
+public import Mathlib.RingTheory.Ideal.AssociatedPrime.Basic
 
 /-!
 # Associated primes of a Cohen–Macaulay local ring are minimal
@@ -15,6 +17,8 @@ Source: Stacks Project, Algebra, Lemma 10.103.7 (Tag 0BUS), specialized to the r
 as a module over itself; Definition 10.104.1 (Tag 00N8)
 (blueprint: lem-weil-pbc-cm-local-associated-prime-minimal).
 -/
+
+@[expose] public section
 
 universe u
 

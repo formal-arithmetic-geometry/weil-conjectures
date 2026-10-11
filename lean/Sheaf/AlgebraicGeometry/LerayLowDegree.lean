@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import Sheaf.AlgebraicGeometry.LeraySpectralSequence
-import Sheaf.AlgebraicGeometry.ModuleCohomologyFMap
-import Mathlib.Algebra.Homology.ExactSequence
+module
+
+public import Sheaf.AlgebraicGeometry.LeraySpectralSequence
+public import Sheaf.AlgebraicGeometry.ModuleCohomologyFMap
+public import Mathlib.Algebra.Homology.ExactSequence
 
 /-!
 # Low degree terms of the Leray spectral sequence
@@ -13,6 +15,8 @@ import Mathlib.Algebra.Homology.ExactSequence
 Source: blueprint node `pqf-lem-leray-lowdegree`; Stacks Project, Cohomology of Sheaves,
 Lemma 20.13.4, Tag 01F2 (blueprint: pqf-lem-leray-lowdegree).
 -/
+
+@[expose] public section
 
 universe v
 

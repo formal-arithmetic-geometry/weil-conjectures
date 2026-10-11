@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF contributors
 -/
-import WeilConjectures.SixFunctors.BaseChange.Derived
+module
+
+public import WeilConjectures.SixFunctors.BaseChange.Derived
 
 /-!
 # Termwise construction of the derived exchange morphism
@@ -17,6 +19,8 @@ is the blueprint's agent-written argument (blueprint: lem-weil-pbc-derived-excha
 * `AlgebraicGeometry.derivedExchangeTermwise`: computation on arbitrary K-injective
   resolutions, including resolutions that are not bounded below as complexes.
 -/
+
+@[expose] public section
 
 universe u
 

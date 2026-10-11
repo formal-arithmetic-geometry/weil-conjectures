@@ -3,15 +3,19 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group R1
 -/
-import Sheaf.AlgebraicGeometry.CoherentFormalModule
-import Mathlib.AlgebraicGeometry.Modules.Tilde
-import Mathlib.RingTheory.AdicCompletion.Algebra
+module
+
+public import Sheaf.AlgebraicGeometry.CoherentFormalModule
+public import Mathlib.AlgebraicGeometry.Modules.Tilde
+public import Mathlib.RingTheory.AdicCompletion.Algebra
 
 /-! # Coherent formal modules on an affine scheme
 
 Source: Stacks Project, Cohomology of Schemes, Lemma 087W and its proof
 (blueprint: lem-weil-pbc-coherent-formal-modules-affine).
 -/
+
+@[expose] public section
 
 universe u
 

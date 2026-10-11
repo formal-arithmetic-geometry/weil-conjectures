@@ -1,5 +1,9 @@
-import Mathlib.AlgebraicGeometry.Noetherian
-import Mathlib.RingTheory.Ideal.AssociatedPrime.Basic
+module
+
+public import Mathlib.AlgebraicGeometry.Noetherian
+public import Mathlib.RingTheory.Ideal.AssociatedPrime.Basic
+
+@[expose] public section
 
 universe w
 

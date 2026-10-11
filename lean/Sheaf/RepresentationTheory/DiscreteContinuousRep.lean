@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF worker M1
 -/
-import Mathlib.RepresentationTheory.Rep.Basic
-import Mathlib.Topology.Algebra.Group.Defs
+module
+
+public import Mathlib.RepresentationTheory.Rep.Basic
+public import Mathlib.Topology.Algebra.Group.Defs
 
 /-!
 # Discrete modules with continuous group action
@@ -12,6 +14,8 @@ import Mathlib.Topology.Algebra.Group.Defs
 Source: Stacks Project, Etale Cohomology, Tag 04JP, and Injectives, Tag 04JF
 (blueprint: def-exc-discrete-modules-category).
 -/
+
+@[expose] public section
 
 universe u₁ v₁ w₁
 

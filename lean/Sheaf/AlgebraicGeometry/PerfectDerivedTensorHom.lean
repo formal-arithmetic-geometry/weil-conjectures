@@ -3,15 +3,19 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group S1
 -/
-import Sheaf.AlgebraicGeometry.PerfectComplex
-import Sheaf.AlgebraicGeometry.DerivedTensorStructure
-import Sheaf.Algebra.Homology.DerivedInternalHom
+module
+
+public import Sheaf.AlgebraicGeometry.PerfectComplex
+public import Sheaf.AlgebraicGeometry.DerivedTensorStructure
+public import Sheaf.Algebra.Homology.DerivedInternalHom
 
 /-! # Derived tensor-Hom adjunction for perfect complexes
 
 Source: Stacks Project, perfect.tex, Section RHom; cohomology.tex, Tag 08DJ,
 equation (1), and Tag 0FPB (blueprint: lem-sc-affine-perfect-derived-tensor-hom).
 -/
+
+@[expose] public section
 
 universe u w
 

@@ -3,17 +3,21 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group R1
 -/
-import Mathlib.AlgebraicGeometry.Morphisms.Proper
-import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
-import Mathlib.RingTheory.AdicCompletion.Basic
-import WeilConjectures.Mathlib.AlgebraicGeometry.Noetherian
-import Sheaf.AlgebraicGeometry.CoherentFormalModule
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.Proper
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
+public import Mathlib.RingTheory.AdicCompletion.Basic
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Noetherian
+public import Sheaf.AlgebraicGeometry.CoherentFormalModule
 
 /-! # Fully faithful completion over a complete proper base
 
 Source: Stacks Project, Cohomology of Schemes, Lemma 0883 (lemma-fully-faithful)
 (blueprint: lem-weil-pbc-formal-completion-fully-faithful-proper).
 -/
+
+@[expose] public section
 
 set_option autoImplicit false
 

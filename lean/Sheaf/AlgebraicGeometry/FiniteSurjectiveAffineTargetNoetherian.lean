@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF contributors
 -/
-import Mathlib.AlgebraicGeometry.Morphisms.Finite
-import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
-import Mathlib.AlgebraicGeometry.Noetherian
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.Finite
+public import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
+public import Mathlib.AlgebraicGeometry.Noetherian
 
 /-!
 # Affineness of a Noetherian finite surjective image
@@ -13,6 +15,8 @@ import Mathlib.AlgebraicGeometry.Noetherian
 Source: Stacks Project, Cohomology of Schemes, Lemma 01YQ
 (blueprint: lem-weil-pbc-finite-surjective-affine-target-noetherian).
 -/
+
+@[expose] public section
 
 universe u
 

@@ -3,17 +3,21 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group U1
 -/
-import Mathlib.AlgebraicGeometry.Scheme
-import Mathlib.CategoryTheory.Category.Preorder
-import Mathlib.Topology.Bases
-import Mathlib.Topology.QuasiSeparated
-import Sheaf.Topology.OpenModuleCohomology
+module
+
+public import Mathlib.AlgebraicGeometry.Scheme
+public import Mathlib.CategoryTheory.Category.Preorder
+public import Mathlib.Topology.Bases
+public import Mathlib.Topology.QuasiSeparated
+public import Sheaf.Topology.OpenModuleCohomology
 
 /-! # Directed colimits and module cohomology on quasi-compact opens
 
 Source: Stacks Project, Cohomology, Lemma 20.19.1, Tag 01FF
 (blueprint: lem-weil-pbc-qs-scheme-cohomology-directed-colimit).
 -/
+
+@[expose] public section
 
 universe u
 

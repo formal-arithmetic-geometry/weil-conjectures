@@ -1,7 +1,9 @@
-import Mathlib.Algebra.Category.CommAlgCat.Basic
-import Mathlib.CategoryTheory.ObjectProperty.Ind
-import Mathlib.RingTheory.Smooth.Basic
-import Sheaf.RingTheory.GRing
+module
+
+public import Mathlib.Algebra.Category.CommAlgCat.Basic
+public import Mathlib.CategoryTheory.ObjectProperty.Ind
+public import Mathlib.RingTheory.Smooth.Basic
+public import Sheaf.RingTheory.GRing
 
 /-!
 # Popescu's theorem reduces to a field as base
@@ -9,6 +11,8 @@ import Sheaf.RingTheory.GRing
 Source: literature/stacks-project/smoothing.tex, Lemma Tag 07F5 (blueprint:
 lem-weil-pbc-popescu-reduce-to-field).
 -/
+
+@[expose] public section
 
 universe u v
 

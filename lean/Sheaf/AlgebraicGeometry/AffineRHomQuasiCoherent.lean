@@ -3,17 +3,21 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under the Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import Sheaf.Algebra.Homology.DerivedInternalHom
-import Sheaf.Paper.DerivedHomMayerVietoris
-import Mathlib.AlgebraicGeometry.Modules.Tilde
-import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
-import Mathlib.Algebra.Category.ModuleCat.Ext.Basic
+module
+
+public import Sheaf.Algebra.Homology.DerivedInternalHom
+public import Sheaf.Paper.DerivedHomMayerVietoris
+public import Mathlib.AlgebraicGeometry.Modules.Tilde
+public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
+public import Mathlib.Algebra.Category.ModuleCat.Ext.Basic
 
 /-! # Affine derived Hom of finite modules has quasi-coherent cohomology
 
 Source: Stacks Project, Perfect Complexes, Tag 0A6H (3), using Tags 08DL, 00LP,
 0A64 and 06XR (blueprint: lem-sc-affine-rhom-qcoherent).
 -/
+
+@[expose] public section
 
 universe u w
 open CategoryTheory CategoryTheory.Limits Opposite

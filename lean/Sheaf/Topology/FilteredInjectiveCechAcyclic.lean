@@ -1,6 +1,10 @@
-import Mathlib.CategoryTheory.Sites.Spaces
-import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
-import Sheaf.CategoryTheory.SiteCechComplex
+module
+
+public import Mathlib.CategoryTheory.Sites.Spaces
+public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
+public import Sheaf.CategoryTheory.SiteCechComplex
+
+@[expose] public section
 
 universe u v w
 

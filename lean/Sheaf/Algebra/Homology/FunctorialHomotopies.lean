@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group G1
 -/
-import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.Basic
-import Mathlib.Algebra.Homology.QuasiIso
+module
+
+public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.Basic
+public import Mathlib.Algebra.Homology.QuasiIso
 
 /-!
 # Functorial quasi-isomorphisms killing maps from a set of acyclic complexes
@@ -12,6 +14,8 @@ import Mathlib.Algebra.Homology.QuasiIso
 Source: Stacks Project, `injectives.tex`, Lemma `lemma-functorial-homotopies`
 (blueprint: lem-pur-kinjective-functorial-homotopies).
 -/
+
+@[expose] public section
 
 universe v u
 

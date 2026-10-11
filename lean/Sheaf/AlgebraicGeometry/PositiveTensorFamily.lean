@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import WeilConjectures.AlgebraicGeometry.Modules.TensorSection
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
+module
+
+public import WeilConjectures.AlgebraicGeometry.Modules.TensorSection
+public import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 
 /-!
 # Positive tensor products of families and their sections
@@ -12,6 +14,8 @@ import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 Source: Stacks Project, Varieties, Tag 09NC, displayed tensor construction
 (blueprint: def-sc-positive-tensor-family).
 -/
+
+@[expose] public section
 
 universe u
 

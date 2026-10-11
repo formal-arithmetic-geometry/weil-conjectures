@@ -1,5 +1,9 @@
-import Sheaf.CategoryTheory.DerivedCategory.EssentiallyConstantPro
-import Mathlib.CategoryTheory.Filtered.Final
+module
+
+public import Sheaf.CategoryTheory.DerivedCategory.EssentiallyConstantPro
+public import Mathlib.CategoryTheory.Filtered.Final
+
+@[expose] public section
 
 universe uI vI uJ vJ uC vC
 

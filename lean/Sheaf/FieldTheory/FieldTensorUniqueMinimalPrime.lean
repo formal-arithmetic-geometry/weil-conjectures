@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group G1
 -/
-import Mathlib.FieldTheory.IsSepClosed
-import Mathlib.RingTheory.TensorProduct.Basic
-import Mathlib.RingTheory.Ideal.MinimalPrime.Basic
-import Mathlib.AlgebraicGeometry.Scheme
+module
+
+public import Mathlib.FieldTheory.IsSepClosed
+public import Mathlib.RingTheory.TensorProduct.Basic
+public import Mathlib.RingTheory.Ideal.MinimalPrime.Basic
+public import Mathlib.AlgebraicGeometry.Scheme
 
 /-!
 # Tensor products of fields over a separably closed field
@@ -14,6 +16,8 @@ import Mathlib.AlgebraicGeometry.Scheme
 Source: Stacks Project, Algebra, Lemma 00I7 (lemma-separably-closed-irreducible),
 specialized to field extensions (blueprint: lem-weil-pbc-field-tensor-irreducible).
 -/
+
+@[expose] public section
 
 universe u v w
 

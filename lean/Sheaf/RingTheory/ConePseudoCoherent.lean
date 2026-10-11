@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import Sheaf.RingTheory.MPseudoCoherent
-import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
+module
+
+public import Sheaf.RingTheory.MPseudoCoherent
+public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 
 /-!
 # Pseudo-coherence in a distinguished triangle
@@ -12,6 +14,8 @@ import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 Source: Stacks Project, `more-algebra.tex`, Tag 064R, label
 `lemma-cone-pseudo-coherent` (blueprint: lem-sc-cone-pseudo-coherent).
 -/
+
+@[expose] public section
 
 universe u v w
 

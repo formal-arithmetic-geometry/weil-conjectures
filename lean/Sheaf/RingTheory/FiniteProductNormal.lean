@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import Mathlib.Algebra.Ring.Pi
-import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
-import Mathlib.RingTheory.Localization.AtPrime.Basic
+module
+
+public import Mathlib.Algebra.Ring.Pi
+public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
+public import Mathlib.RingTheory.Localization.AtPrime.Basic
 
 /-!
 # Finite products of normal rings
@@ -16,6 +18,8 @@ Source: Stacks Project, Algebra, Lemma Tag 0CYA
 Normality is the prime-localization condition of `def-weil-pbc-normal-ring`, expressed
 using its Mathlib match `IsDomain`, `IsIntegrallyClosed`, and `Localization.AtPrime`.
 -/
+
+@[expose] public section
 
 universe u v
 

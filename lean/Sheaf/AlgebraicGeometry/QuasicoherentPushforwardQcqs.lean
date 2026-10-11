@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
+module
+
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 
 /-!
 # Quasi-coherence of pushforward along a qcqs morphism
@@ -13,6 +15,8 @@ import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 Source: Stacks Project, Schemes, Lemma 26.24.1, Tag 01LC
 (blueprint: pqf-lem-pushforward-qcoh).
 -/
+
+@[expose] public section
 
 universe u
 

@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import WeilConjectures.AlgebraicGeometry.Morphisms.FiberDegree
+module
+
+public import WeilConjectures.AlgebraicGeometry.Morphisms.FiberDegree
 
 /-!
 # Bounds on the degrees of scheme-theoretic fibres
@@ -16,6 +18,8 @@ Source: Stacks Project, Morphisms, Section 29.56 and Definition Tag 03J4
 * `AlgebraicGeometry.Scheme.Hom.BoundsFiberDegrees`: a bound for all fibre degrees.
 * `AlgebraicGeometry.Scheme.Hom.HasUniversallyBoundedFibers`: existence of such a bound.
 -/
+
+@[expose] public section
 
 universe u
 

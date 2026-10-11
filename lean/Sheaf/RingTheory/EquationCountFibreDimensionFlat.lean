@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import Mathlib.RingTheory.MvPolynomial.Basic
-import Mathlib.RingTheory.LocalRing.ResidueField.Fiber
-import Mathlib.RingTheory.RingHom.Flat
-import WeilConjectures.Mathlib.Topology.KrullDimension
+module
+
+public import Mathlib.RingTheory.MvPolynomial.Basic
+public import Mathlib.RingTheory.LocalRing.ResidueField.Fiber
+public import Mathlib.RingTheory.RingHom.Flat
+public import WeilConjectures.Mathlib.Topology.KrullDimension
 
 /-!
 # Flatness from the number of equations and fibre dimension
@@ -14,6 +16,8 @@ import WeilConjectures.Mathlib.Topology.KrullDimension
 Source: Stacks Project, Algebra, Tags 00ST (3), 00SW, 00QD and 00HT
 (blueprint: lem-weil-pbc-equation-count-fibre-dimension-flat).
 -/
+
+@[expose] public section
 
 universe u
 

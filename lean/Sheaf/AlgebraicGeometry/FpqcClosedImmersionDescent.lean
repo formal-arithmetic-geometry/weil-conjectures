@@ -2,9 +2,11 @@
 Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 -/
-import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-import Mathlib.AlgebraicGeometry.Sites.Fpqc
-import Mathlib.AlgebraicGeometry.Pullbacks
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+public import Mathlib.AlgebraicGeometry.Sites.Fpqc
+public import Mathlib.AlgebraicGeometry.Pullbacks
 
 /-!
 # Descent of closed immersions along fpqc coverings
@@ -12,6 +14,8 @@ import Mathlib.AlgebraicGeometry.Pullbacks
 Source: literature/stacks-project/descent.tex, Descent, Lemma Tag 02L6
 (blueprint: lem-pc-fpqc-descend-closed-immersion).
 -/
+
+@[expose] public section
 
 universe u v
 

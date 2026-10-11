@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group J1
 -/
-import WeilConjectures.Mathlib.RingTheory.Henselian
-import Mathlib.RingTheory.IntegralClosure.Algebra.Defs
-import Mathlib.Algebra.Group.Idempotent
+module
+
+public import WeilConjectures.Mathlib.RingTheory.Henselian
+public import Mathlib.RingTheory.IntegralClosure.Algebra.Defs
+public import Mathlib.Algebra.Group.Idempotent
 
 /-!
 # Idempotent lifting in integral algebras over henselian pairs
@@ -13,6 +15,8 @@ import Mathlib.Algebra.Group.Idempotent
 Source: Stacks Project, More on Algebra, Lemma 15.11.6 (Tag 09XI), (3) ⇒ (4)
 (blueprint: lem-weil-pbc-henselian-pair-integral-idempotent-lifting).
 -/
+
+@[expose] public section
 
 universe u v
 

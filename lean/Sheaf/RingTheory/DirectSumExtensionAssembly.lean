@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import Mathlib.RingTheory.RingHom.Flat
-import Mathlib.Algebra.DirectSum.Module
-import Mathlib.LinearAlgebra.TensorProduct.Tower
+module
+
+public import Mathlib.RingTheory.RingHom.Flat
+public import Mathlib.Algebra.DirectSum.Module
+public import Mathlib.LinearAlgebra.TensorProduct.Tower
 
 /-!
 # Descent of extensions with direct-sum quotient
@@ -19,6 +21,8 @@ and surjectivity, the module interpretation of `CategoryTheory.ShortComplex.Shor
 via `ShortExact.moduleCat_exact_iff_function_exact` and its injective/surjective lemmas,
 as in `LinearMap.exists_cyclic_extension_flat_descent`.
 -/
+
+@[expose] public section
 
 universe u v w x y z
 

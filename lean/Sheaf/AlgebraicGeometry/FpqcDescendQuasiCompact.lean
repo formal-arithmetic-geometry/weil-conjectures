@@ -1,6 +1,8 @@
-import Mathlib.AlgebraicGeometry.Morphisms.FlatDescent
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
-import Mathlib.AlgebraicGeometry.Pullbacks
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.FlatDescent
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
+public import Mathlib.AlgebraicGeometry.Pullbacks
 
 /-!
 # Quasi-compactness descends along flat surjective quasi-compact morphisms
@@ -8,6 +10,8 @@ import Mathlib.AlgebraicGeometry.Pullbacks
 Source: literature/stacks-project/descent.tex, Descent, Lemma Tag 02KQ
 (lemma-descending-property-quasi-compact) (blueprint: lem-weil-pbc-fpqc-descend-quasi-compact).
 -/
+
+@[expose] public section
 
 universe u
 

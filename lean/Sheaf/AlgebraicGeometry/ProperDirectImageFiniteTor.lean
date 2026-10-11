@@ -3,13 +3,15 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under the Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import Sheaf.AlgebraicGeometry.FiniteTorDimensionOver
-import Sheaf.AlgebraicGeometry.FiniteTorDimension
-import Sheaf.AlgebraicGeometry.ClosedSubsetProperOverBase
-import Sheaf.AlgebraicGeometry.Coherent
-import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
-import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
-import Mathlib.AlgebraicGeometry.Noetherian
+module
+
+public import Sheaf.AlgebraicGeometry.FiniteTorDimensionOver
+public import Sheaf.AlgebraicGeometry.FiniteTorDimension
+public import Sheaf.AlgebraicGeometry.ClosedSubsetProperOverBase
+public import Sheaf.AlgebraicGeometry.Coherent
+public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
+public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
+public import Mathlib.AlgebraicGeometry.Noetherian
 
 /-! # Proper-support direct image of a finite-Tor complex
 
@@ -17,6 +19,8 @@ Source: Stacks Project, Derived Categories of Schemes, Lemma 36.27.1 (Tag 08EV),
 proof from “Hence it suffices to show that Rf_*E has finite tor dimension” to the end
 (blueprint: lem-pc-proper-direct-image-finite-tor).
 -/
+
+@[expose] public section
 
 universe u₁ v₁
 universe w₁

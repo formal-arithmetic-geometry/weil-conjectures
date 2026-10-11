@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group S1
 -/
-import Sheaf.Paper.PQFCohomology
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import WeilConjectures.CategoryTheory.Abelian.RightDerived.Acyclic
+module
+
+public import Sheaf.Paper.PQFCohomology
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import WeilConjectures.CategoryTheory.Abelian.RightDerived.Acyclic
 
 /-!
 # Direct images of injective modules are acyclic on every open
@@ -13,6 +15,8 @@ import WeilConjectures.CategoryTheory.Abelian.RightDerived.Acyclic
 Source: Stacks Project, Cohomology of Sheaves, Tag 01EX (2), and Tag 01E1 (2)
 (blueprint: lem-weil-pbc-module-pushforward-injective-acyclic).
 -/
+
+@[expose] public section
 
 universe u
 

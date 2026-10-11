@@ -3,13 +3,15 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under the Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group J1
 -/
-import Mathlib.Algebra.Category.ModuleCat.Abelian
-import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
-import Mathlib.Algebra.Homology.Embedding.CochainComplex
-import Mathlib.LinearAlgebra.FreeModule.Finite.Basic
-import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
-import Mathlib.RingTheory.Spectrum.Prime.Topology
-import Mathlib.Topology.Semicontinuity.Basic
+module
+
+public import Mathlib.Algebra.Category.ModuleCat.Abelian
+public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
+public import Mathlib.Algebra.Homology.Embedding.CochainComplex
+public import Mathlib.LinearAlgebra.FreeModule.Finite.Basic
+public import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
+public import Mathlib.RingTheory.Spectrum.Prime.Topology
+public import Mathlib.Topology.Semicontinuity.Basic
 
 /-! # Upper semicontinuity of fibre homology of finite free complexes
 
@@ -17,6 +19,8 @@ Source: Stacks Project, Derived Categories of Schemes, Lemma jump-loci, Tag 0BDI
 `literature/stacks-project/perfect.tex` (affine finite-free specialization).
 (blueprint: lem-sc-finite-free-complex-homology-upper-semicontinuous).
 -/
+
+@[expose] public section
 
 universe u v
 

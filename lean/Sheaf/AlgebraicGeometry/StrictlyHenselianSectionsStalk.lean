@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group S1
 -/
-import Mathlib.AlgebraicGeometry.Sites.EtalePoint
-import WeilConjectures.Mathlib.RingTheory.Henselian
+module
+
+public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
+public import WeilConjectures.Mathlib.RingTheory.Henselian
 
 /-!
 # Sections over a strictly henselian local scheme and the geometric stalk
@@ -12,6 +14,8 @@ import WeilConjectures.Mathlib.RingTheory.Henselian
 Source: literature/stacks-project/etale-cohomology.tex, Lemma Tag 03QO
 (blueprint: lem-weil-pbc-strictly-henselian-sections-stalk).
 -/
+
+@[expose] public section
 
 universe u v
 

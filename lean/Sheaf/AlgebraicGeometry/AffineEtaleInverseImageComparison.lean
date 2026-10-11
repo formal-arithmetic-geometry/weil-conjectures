@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import Sheaf.AlgebraicGeometry.FullAffineEtaleTopos
-import Sheaf.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
-import Mathlib.AlgebraicGeometry.Morphisms.Affine
+module
+
+public import Sheaf.AlgebraicGeometry.FullAffineEtaleTopos
+public import Sheaf.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
+public import Mathlib.AlgebraicGeometry.Morphisms.Affine
 
 /-!
 # Comparison of inverse images on the full and affine étale sites
@@ -13,6 +15,8 @@ import Mathlib.AlgebraicGeometry.Morphisms.Affine
 Source: Stacks Project, Étale Cohomology 09YQ, Topologies 04HR
 (blueprint: lem-weil-pbc-sets-affine-etale-inverse-image-comparison).
 -/
+
+@[expose] public section
 
 universe u
 

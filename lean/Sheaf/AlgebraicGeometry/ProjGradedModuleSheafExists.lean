@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import Sheaf.Algebra.Module.DegreeZeroFractions
-import Sheaf.AlgebraicGeometry.Coherent
-import Sheaf.Algebra.Homology.ModuleStalkFunctor
-import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic
+module
+
+public import Sheaf.Algebra.Module.DegreeZeroFractions
+public import Sheaf.AlgebraicGeometry.Coherent
+public import Sheaf.Algebra.Homology.ModuleStalkFunctor
+public import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic
 
 /-!
 # The module sheaf associated to a graded module on Proj
@@ -18,6 +20,8 @@ The degree-zero modules are submodules with the already defined `degreeZeroFract
 as carriers. All choices of fraction representatives occur in the restriction formula.
 The section identifications are additive equivalences with explicit scalar compatibility.
 -/
+
+@[expose] public section
 
 universe u
 

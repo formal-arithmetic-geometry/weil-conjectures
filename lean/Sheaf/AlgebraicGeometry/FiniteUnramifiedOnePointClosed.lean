@@ -3,11 +3,13 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import Mathlib.AlgebraicGeometry.Morphisms.Finite
-import Mathlib.AlgebraicGeometry.Morphisms.OpenImmersion
-import Mathlib.AlgebraicGeometry.Restrict
-import Mathlib.AlgebraicGeometry.ResidueField
-import Mathlib.FieldTheory.PurelyInseparable.Basic
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.Finite
+public import Mathlib.AlgebraicGeometry.Morphisms.OpenImmersion
+public import Mathlib.AlgebraicGeometry.Restrict
+public import Mathlib.AlgebraicGeometry.ResidueField
+public import Mathlib.FieldTheory.PurelyInseparable.Basic
 
 /-!
 # A finite unramified morphism with one purely inseparable fibre point is locally a closed immersion
@@ -15,6 +17,8 @@ import Mathlib.FieldTheory.PurelyInseparable.Basic
 Source: Stacks Project, Etale Morphisms, Lemma 04DG
 (blueprint: lem-weil-pbc-finite-unramified-one-point-closed).
 -/
+
+@[expose] public section
 
 universe u
 

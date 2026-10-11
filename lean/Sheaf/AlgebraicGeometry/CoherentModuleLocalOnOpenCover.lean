@@ -3,15 +3,19 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group J1
 -/
-import Sheaf.AlgebraicGeometry.Coherent
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Mathlib.AlgebraicGeometry.Restrict
+module
+
+public import Sheaf.AlgebraicGeometry.Coherent
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Mathlib.AlgebraicGeometry.Restrict
 
 /-! # Coherence of a module is local on an open covering
 
 Source: Stacks Project, Modules, Definitions 01BV and 01B5; locality used in
 Cohomology of Schemes, Lemma 0CYJ (blueprint: lem-weil-pbc-coherent-module-local-on-open-cover).
 -/
+
+@[expose] public section
 
 universe u
 

@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic
+module
+
+public import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic
 
 /-!
 # Positive-degree standard opens of Proj form an affine basis
@@ -11,6 +13,8 @@ import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic
 Source: Stacks Project, Algebra Lemma 00JP (5), and Constructions Lemma 01MB
 (blueprint: lem-sc-proj-standard-open-basis).
 -/
+
+@[expose] public section
 
 universe u v
 

@@ -3,14 +3,19 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group V1
 -/
-import Sheaf.AlgebraicGeometry.GlobalHomAdjunctionIso
-import Sheaf.AlgebraicGeometry.CanonicalDerivedTensorHom
+module
+
+public import Sheaf.AlgebraicGeometry.GlobalHomAdjunctionIso
+public import Sheaf.AlgebraicGeometry.CanonicalDerivedTensorHom
 
 
 /-! # Canonical pullback comparison on global derived Hom
 Source: Stacks Project, Cohomology, Remark 08I3 and Section 0B6A;
 Duality, Tag 0AA8 (blueprint: def-pc-global-hom-pullback-comparison).
 -/
+
+@[expose] public section
+
 set_option autoImplicit false
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false

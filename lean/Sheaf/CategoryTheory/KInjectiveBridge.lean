@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Mathlib.Algebra.Homology.CochainComplexPlus
-import Mathlib.Algebra.Homology.Additive
-import Mathlib.CategoryTheory.Preadditive.LeftExact
-import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution
+module
+
+public import Mathlib.Algebra.Homology.CochainComplexPlus
+public import Mathlib.Algebra.Homology.Additive
+public import Mathlib.CategoryTheory.Preadditive.LeftExact
+public import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution
 
 /-!
 # The K-injective bridge
@@ -30,6 +32,8 @@ The Hom-complex formulation follows by applying this in every shifted degree.
 Independence of the choice and agreement with `Functor.rightDerived` on objects in degree zero
 are deferred to `lem-sp-kinjective-computes`; the definitions retain the chosen resolution.
 -/
+
+@[expose] public section
 
 universe w v₁ v₂ u₁ u₂
 

@@ -3,14 +3,18 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group J1
 -/
-import Sheaf.Algebra.Homology.RingTensorCohomology
-import Mathlib.Algebra.Category.ModuleCat.ChangeOfRingsExact
+module
+
+public import Sheaf.Algebra.Homology.RingTensorCohomology
+public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRingsExact
 
 /-! # Cohomology base change for module complexes
 
 Source: Stacks Project, More on Algebra, Tag 0A1U, Lemma better-cut-complex-in-two
 (blueprint: def-pc-module-cohomology-base-change).
 -/
+
+@[expose] public section
 
 set_option autoImplicit false
 

@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Mathlib.AlgebraicGeometry.Morphisms.Smooth
-import Mathlib.AlgebraicGeometry.Morphisms.Proper
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
+public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 
 /-!
 # Open and closed pieces of smooth proper schemes
@@ -12,6 +14,8 @@ import Mathlib.AlgebraicGeometry.Morphisms.Proper
 Source: Stacks Project, Morphisms, Tags 01VC, 01VA, 01W5 and 01W3
 (blueprint: lem-pc-clopen-smooth-proper-curve).
 -/
+
+@[expose] public section
 
 universe u
 

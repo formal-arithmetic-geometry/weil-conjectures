@@ -1,6 +1,8 @@
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
-import Mathlib.Algebra.Homology.ShortComplex.ShortExact
+module
+
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
+public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 
 /-!
 # Local sections of finite locally free quotients
@@ -9,6 +11,8 @@ Source: literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard
 lem-sc-riemann-roch.md, Proof of (*), determinant paragraph: local splitting
 (blueprint: lem-sc-local-section-quotient-finite-free)
 -/
+
+@[expose] public section
 
 open CategoryTheory CategoryTheory.Limits
 open AlgebraicGeometry

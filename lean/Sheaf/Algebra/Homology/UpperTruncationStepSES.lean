@@ -2,8 +2,10 @@
 Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 -/
-import Mathlib.Algebra.Homology.Embedding.CochainComplex
-import Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
+module
+
+public import Mathlib.Algebra.Homology.Embedding.CochainComplex
+public import Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
 
 /-!
 # Successive canonical upper truncations
@@ -11,6 +13,8 @@ import Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
 Source: Stacks Project, Homology, Section 12.15 (Tag 0118), and Derived Categories,
 Remark 13.12.4 (Tag 08J5) (blueprint: lem-weil-pbc-truncation-step-ses).
 -/
+
+@[expose] public section
 
 universe u v
 

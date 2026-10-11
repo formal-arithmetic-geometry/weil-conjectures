@@ -2,13 +2,17 @@
 Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 -/
-import Sheaf.AlgebraicGeometry.SimplicialHomObject
-import Mathlib.CategoryTheory.Limits.Shapes.Pullback.Square
+module
+
+public import Sheaf.AlgebraicGeometry.SimplicialHomObject
+public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.Square
 
 /-! # Hom objects and simplicial pushouts
 
 Source: Stacks Project, Lemma 017N (blueprint: lem-weil-pbc-simplicial-hom-object-pushout).
 -/
+
+@[expose] public section
 
 universe u₁ w₁ t₁
 

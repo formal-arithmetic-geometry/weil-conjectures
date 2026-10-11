@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Mathlib.Algebra.MvPolynomial.Basic
-import Mathlib.RingTheory.Ideal.Quotient.Defs
-import Mathlib.AlgebraicGeometry.Scheme
-import Mathlib.Topology.KrullDimension
+module
+
+public import Mathlib.Algebra.MvPolynomial.Basic
+public import Mathlib.RingTheory.Ideal.Quotient.Defs
+public import Mathlib.AlgebraicGeometry.Scheme
+public import Mathlib.Topology.KrullDimension
 
 /-!
 # Dimension lower bound for a polynomial quotient over a field
@@ -14,6 +16,8 @@ import Mathlib.Topology.KrullDimension
 Source: Stacks Project, Algebra, paragraph following Definition Tag 00S9, using
 Tags 00OP and 00KW (blueprint: lem-weil-pbc-polynomial-quotient-dimension-lower-bound).
 -/
+
+@[expose] public section
 
 universe u
 

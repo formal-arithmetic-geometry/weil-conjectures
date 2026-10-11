@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import Mathlib.Topology.Sheaves.Sheaf
-import Mathlib.CategoryTheory.Limits.Types.Colimits
-import Mathlib.Topology.Compactness.Compact
+module
+
+public import Mathlib.Topology.Sheaves.Sheaf
+public import Mathlib.CategoryTheory.Limits.Types.Colimits
+public import Mathlib.Topology.Compactness.Compact
 
 /-!
 # Sections of directed colimits with injective transition maps
@@ -13,6 +15,8 @@ import Mathlib.Topology.Compactness.Compact
 Source: Stacks Project, Sheaves, Lemma 009F, parts (1) and (3)
 (blueprint: lem-weil-pbc-sheaves-injective-directed-colimit-qc-sections).
 -/
+
+@[expose] public section
 
 universe u
 

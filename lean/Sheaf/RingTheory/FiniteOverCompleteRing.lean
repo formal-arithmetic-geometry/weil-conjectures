@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Mathlib.RingTheory.AdicCompletion.Basic
-import Mathlib.RingTheory.Finiteness.Defs
-import Mathlib.Algebra.Module.Torsion.Basic
+module
+
+public import Mathlib.RingTheory.AdicCompletion.Basic
+public import Mathlib.RingTheory.Finiteness.Defs
+public import Mathlib.Algebra.Module.Torsion.Basic
 
 /-!
 # Finite modules over adically complete rings
@@ -14,6 +16,8 @@ Source: Stacks Project, Algebra, Lemma 10.96.12 (Tag 031D), including the
 lifting-of-generators assertion in its proof
 (blueprint: lem-weil-pbc-finite-over-complete-ring).
 -/
+
+@[expose] public section
 
 universe u v
 

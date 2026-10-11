@@ -3,12 +3,14 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Sheaf.AlgebraicGeometry.FiberDegreeBound
-import Sheaf.AlgebraicGeometry.QuasiFiniteMorphism
-import Mathlib.AlgebraicGeometry.Morphisms.Separated
-import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
-import Mathlib.AlgebraicGeometry.Morphisms.Flat
-import Mathlib.Topology.Basic
+module
+
+public import Sheaf.AlgebraicGeometry.FiberDegreeBound
+public import Sheaf.AlgebraicGeometry.QuasiFiniteMorphism
+public import Mathlib.AlgebraicGeometry.Morphisms.Separated
+public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
+public import Mathlib.AlgebraicGeometry.Morphisms.Flat
+public import Mathlib.Topology.Basic
 
 /-!
 # Stratification of flat finitely presented locally quasi-finite morphisms
@@ -21,6 +23,8 @@ indexed from zero: `Z 0` is the paper's `Z_{-1} = ∅` and `Z (r + 1)` is the pa
 so the degree-`r` stratum is `Z (r + 1) \ Z r`, written out in place. The bound `n` is the
 one supplied by the hypothesis `BoundsFiberDegrees f n`, and `Z (n + 1) = Set.univ`.
 -/
+
+@[expose] public section
 
 universe u
 

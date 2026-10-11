@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import Mathlib.AlgebraicGeometry.Sites.Etale
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
-import Mathlib.Algebra.Category.ModuleCat.FilteredColimits
-import Mathlib.CategoryTheory.Sites.Sheaf
+module
+
+public import Mathlib.AlgebraicGeometry.Sites.Etale
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
+public import Mathlib.Algebra.Category.ModuleCat.FilteredColimits
+public import Mathlib.CategoryTheory.Sites.Sheaf
 
 /-!
 # Filtered colimits of sections on quasi-compact quasi-separated etale objects
@@ -14,6 +16,8 @@ import Mathlib.CategoryTheory.Sites.Sheaf
 Source: Sites, Lemma 7.17.7, Tag 0738, part (4), applied using Etale Cohomology,
 Section 59.51, Tag 03Q4 (blueprint: lem-weil-pbc-etale-qcqs-sections-filtered-colimit).
 -/
+
+@[expose] public section
 
 universe u v w
 

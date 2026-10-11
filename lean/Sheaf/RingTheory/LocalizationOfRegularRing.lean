@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF contributors
 -/
-import Mathlib.RingTheory.RegularLocalRing.Defs
+module
+
+public import Mathlib.RingTheory.RegularLocalRing.Defs
 
 /-!
 # A localization of a regular ring is regular
@@ -11,6 +13,8 @@ import Mathlib.RingTheory.RegularLocalRing.Defs
 Source: Stacks Project, Algebra, proof of Lemma Tag 0381, Step 3
 (blueprint: lem-weil-pbc-localization-of-regular-ring).
 -/
+
+@[expose] public section
 
 universe u v
 

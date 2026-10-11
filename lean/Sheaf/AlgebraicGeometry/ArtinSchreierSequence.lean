@@ -2,11 +2,13 @@
 Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE
 -/
-import Sheaf.AlgebraicGeometry.EtaleTensorSectionsSheaf
-import WeilConjectures.AlgebraicGeometry.Sites.Kummer
-import Mathlib.Algebra.Category.Grp.Ulift
-import WeilConjectures.AlgebraicGeometry.Curve
-import Mathlib.Algebra.Homology.ShortComplex.ShortExact
+module
+
+public import Sheaf.AlgebraicGeometry.EtaleTensorSectionsSheaf
+public import WeilConjectures.AlgebraicGeometry.Sites.Kummer
+public import Mathlib.Algebra.Category.Grp.Ulift
+public import WeilConjectures.AlgebraicGeometry.Curve
+public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 
 /-!
 # The Artin–Schreier sequence
@@ -14,6 +16,8 @@ import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 Source: literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lem-sc-as-sequence.md,
 node `lem-sc-as-sequence` (blueprint: lem-sc-as-sequence).
 -/
+
+@[expose] public section
 
 universe u
 

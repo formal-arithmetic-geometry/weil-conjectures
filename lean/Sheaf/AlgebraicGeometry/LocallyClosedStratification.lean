@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import WeilConjectures.Topology.Stratification
-import Mathlib.AlgebraicGeometry.Morphisms.Immersion
+module
+
+public import WeilConjectures.Topology.Stratification
+public import Mathlib.AlgebraicGeometry.Morphisms.Immersion
 
 /-!
 # Finite locally closed stratifications of schemes
@@ -12,6 +14,8 @@ import Mathlib.AlgebraicGeometry.Morphisms.Immersion
 Source: Stacks Project, Topology, Definition 09XZ, with finiteness added and scheme
 immersions realizing the parts (blueprint: def-constructible-stratification).
 -/
+
+@[expose] public section
 
 universe w
 

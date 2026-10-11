@@ -3,14 +3,16 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import Sheaf.CategoryTheory.Triangulated.DerivedLimit
-import Mathlib.CategoryTheory.Functor.OfSequence
-import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Basic
-import Mathlib.CategoryTheory.Preadditive.Injective.Basic
-import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
-import Mathlib.Algebra.Homology.HomotopyCategory.KInjective
-import Mathlib.Algebra.Homology.HomologicalComplexLimits
-import Mathlib.Algebra.Homology.Functor
+module
+
+public import Sheaf.CategoryTheory.Triangulated.DerivedLimit
+public import Mathlib.CategoryTheory.Functor.OfSequence
+public import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Basic
+public import Mathlib.CategoryTheory.Preadditive.Injective.Basic
+public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
+public import Mathlib.Algebra.Homology.HomotopyCategory.KInjective
+public import Mathlib.Algebra.Homology.HomologicalComplexLimits
+public import Mathlib.Algebra.Homology.Functor
 
 /-!
 # Existence and computation of derived limits
@@ -24,6 +26,8 @@ Source: Stacks Project, Derived Categories, Tags 08TC, 07KC, 0BK6, 0BK7 and 070M
 - `derivedCategory_countableProducts_and_towerLimit`: termwise products, their cohomology,
   and the inverse-limit computation for a K-injective representative of a tower.
 -/
+
+@[expose] public section
 
 universe t w v u
 

@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group Q1
 -/
-import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
-import Sheaf.Algebra.Homology.DerivedInternalHom
-import Sheaf.AlgebraicGeometry.DerivedPullback
-import Sheaf.AlgebraicGeometry.DerivedTensorStructure
+module
+
+public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
+public import Sheaf.Algebra.Homology.DerivedInternalHom
+public import Sheaf.AlgebraicGeometry.DerivedPullback
+public import Sheaf.AlgebraicGeometry.DerivedTensorStructure
 
 /-!
 # Internal-Hom comparison for derived direct image
@@ -14,6 +16,8 @@ import Sheaf.AlgebraicGeometry.DerivedTensorStructure
 Source: Stacks Project, cohomology.tex, Remark remark-projection-formula-for-internal-hom
 (blueprint: lem-pc-sheaf-rhom-projection-formula).
 -/
+
+@[expose] public section
 
 universe u w
 

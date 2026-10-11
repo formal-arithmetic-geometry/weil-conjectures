@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group G1
 -/
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Mathlib.CategoryTheory.Adjunction.Basic
-import Sheaf.Topology.RingedModuleSkyscraper
+module
+
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Mathlib.CategoryTheory.Adjunction.Basic
+public import Sheaf.Topology.RingedModuleSkyscraper
 
 /-!
 # The module stalk–skyscraper adjunction on a scheme
@@ -13,6 +15,8 @@ import Sheaf.Topology.RingedModuleSkyscraper
 Source: Stacks Project, Sheaves, Definition 009A (4) and Lemma 009C
 (blueprint: lem-weil-pbc-module-skyscraper-stalk-adjunction).
 -/
+
+@[expose] public section
 
 universe u
 

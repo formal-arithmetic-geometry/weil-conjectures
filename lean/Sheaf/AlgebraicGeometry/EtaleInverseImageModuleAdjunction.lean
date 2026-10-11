@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import Sheaf.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
+module
+
+public import Sheaf.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
 
 /-!
 # Inverse image of modules on small étale sites
@@ -12,6 +14,8 @@ import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
 Source: Stacks Project, Modules on Sites, Tags 03D1, 03D2 and 03D3
 (blueprint: lem-weil-pbc-inverse-image-module-adjunction).
 -/
+
+@[expose] public section
 
 universe u
 

@@ -3,11 +3,13 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group J1
 -/
-import Sheaf.CategoryTheory.DoubleComplexTotal
-import Mathlib.Algebra.Homology.Embedding.Restriction
-import Mathlib.Algebra.Homology.HomologicalComplexAbelian
-import Mathlib.CategoryTheory.Abelian.RightDerived
-import Mathlib.CategoryTheory.Preadditive.LeftExact
+module
+
+public import Sheaf.CategoryTheory.DoubleComplexTotal
+public import Mathlib.Algebra.Homology.Embedding.Restriction
+public import Mathlib.Algebra.Homology.HomologicalComplexAbelian
+public import Mathlib.CategoryTheory.Abelian.RightDerived
+public import Mathlib.CategoryTheory.Preadditive.LeftExact
 
 /-!
 # Cartan--Eilenberg resolution properties
@@ -19,6 +21,8 @@ The first index is the resolution degree. Negative resolution degrees vanish;
 restriction to natural degrees lets us use Mathlib's `InjectiveResolution` directly.
 Kernel and image complexes are taken in the abelian category of cochain complexes.
 -/
+
+@[expose] public section
 
 universe v u v' u'
 

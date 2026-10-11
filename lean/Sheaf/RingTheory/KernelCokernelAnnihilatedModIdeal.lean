@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group J1
 -/
-import Mathlib.RingTheory.Ideal.Operations
-import Mathlib.RingTheory.Ideal.Maps
-import Mathlib.Algebra.Category.ModuleCat.Abelian
-import Mathlib.Algebra.Homology.ExactSequence
+module
+
+public import Mathlib.RingTheory.Ideal.Operations
+public import Mathlib.RingTheory.Ideal.Maps
+public import Mathlib.Algebra.Category.ModuleCat.Abelian
+public import Mathlib.Algebra.Homology.ExactSequence
 
 /-!
 # Scalar quasi-inverses and reduction modulo an ideal
@@ -15,6 +17,8 @@ Source: Stacks Project, Cohomology of Schemes, Remark 0888, the commutative alge
 argument and its limit argument
 (blueprint: lem-weil-pbc-kernel-cokernel-annihilated-mod-ideal).
 -/
+
+@[expose] public section
 
 universe u v v' w w' z z'
 

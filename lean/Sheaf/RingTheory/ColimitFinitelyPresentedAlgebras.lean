@@ -3,12 +3,14 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import Mathlib.Algebra.Category.CommAlgCat.Basic
-import Mathlib.RingTheory.FinitePresentation
-import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
-import Mathlib.CategoryTheory.ObjectProperty.Small
-import Mathlib.CategoryTheory.Filtered.Basic
-import Mathlib.CategoryTheory.Limits.ConeCategory
+module
+
+public import Mathlib.Algebra.Category.CommAlgCat.Basic
+public import Mathlib.RingTheory.FinitePresentation
+public import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
+public import Mathlib.CategoryTheory.ObjectProperty.Small
+public import Mathlib.CategoryTheory.Filtered.Basic
+public import Mathlib.CategoryTheory.Limits.ConeCategory
 
 /-!
 # An algebra as the filtered colimit of finitely presented algebras over it
@@ -16,6 +18,8 @@ import Mathlib.CategoryTheory.Limits.ConeCategory
 Source: Stacks Project, Tag 0BUF, Lemma `lemma-ring-colimit-fp-category` and its footnote
 (blueprint: lem-weil-pbc-algebra-colimit-fp-algebras-over-it).
 -/
+
+@[expose] public section
 
 universe u v
 

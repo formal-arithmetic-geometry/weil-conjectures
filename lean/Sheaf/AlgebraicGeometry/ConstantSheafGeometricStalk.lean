@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import Mathlib.AlgebraicGeometry.Sites.EtalePoint
-import Mathlib.CategoryTheory.Sites.ConstantSheaf
-import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify
+module
+
+public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
+public import Mathlib.CategoryTheory.Sites.ConstantSheaf
+public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify
 
 /-!
 # The canonical map to the geometric stalk of a constant étale sheaf
@@ -13,6 +15,8 @@ import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify
 Source: Stacks Project, Étale Cohomology, Tags 03PT (2), 040R and 03PQ
 (blueprint: lem-weil-pbc-constant-sheaf-geometric-stalk).
 -/
+
+@[expose] public section
 
 universe u v
 

@@ -3,11 +3,13 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import Mathlib.Algebra.Exact.Basic
-import Mathlib.LinearAlgebra.Matrix.Defs
-import Mathlib.LinearAlgebra.Matrix.ToLin
-import Mathlib.RingTheory.LocalRing.MaximalIdeal.Basic
-import Mathlib.Algebra.GroupWithZero.NonZeroDivisors
+module
+
+public import Mathlib.Algebra.Exact.Basic
+public import Mathlib.LinearAlgebra.Matrix.Defs
+public import Mathlib.LinearAlgebra.Matrix.ToLin
+public import Mathlib.RingTheory.LocalRing.MaximalIdeal.Basic
+public import Mathlib.Algebra.GroupWithZero.NonZeroDivisors
 
 /-!
 # Exactness after reduction by a nonzerodivisor
@@ -15,6 +17,8 @@ import Mathlib.Algebra.GroupWithZero.NonZeroDivisors
 Source: literature/stacks-project/algebra.tex, Lemma Tag 00MZ
 (blueprint: lem-weil-pbc-free-complex-mod-nonzerodivisor-exact).
 -/
+
+@[expose] public section
 
 universe u
 

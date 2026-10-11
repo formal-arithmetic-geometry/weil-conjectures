@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import Mathlib.Topology.Spectral.Basic
+module
+
+public import Mathlib.Topology.Spectral.Basic
 
 /-!
 # Closed subspaces of spectral spaces
@@ -11,6 +13,8 @@ import Mathlib.Topology.Spectral.Basic
 Source: Stacks Project, Topology, Tag 0902, the closed-subset case
 (blueprint: lem-weil-pbc-spectral-closed-subspace).
 -/
+
+@[expose] public section
 
 universe u
 

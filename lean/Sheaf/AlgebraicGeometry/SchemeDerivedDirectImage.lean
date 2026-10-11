@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group S1
 -/
-import Sheaf.AlgebraicGeometry.DerivedCategory
-import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImage
+module
+
+public import Sheaf.AlgebraicGeometry.DerivedCategory
+public import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImage
 
 /-!
 # Derived direct image on schemes
@@ -19,6 +21,8 @@ construction of Tag 079V (blueprint: def-pc-derived-direct-image).
 * `schemeHigherDirectImage` takes its cohomology sheaf in any integer degree.
 * `schemeModuleHigherDirectImage` first places a module in degree zero.
 -/
+
+@[expose] public section
 
 universe u wX wS
 

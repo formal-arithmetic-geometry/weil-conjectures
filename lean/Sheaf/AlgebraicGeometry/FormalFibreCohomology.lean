@@ -3,14 +3,16 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group R1
 -/
-import Sheaf.AlgebraicGeometry.FlatBaseChangeOpenChoices
-import Sheaf.AlgebraicGeometry.ModuleCohomologyFMap
-import Sheaf.AlgebraicGeometry.SchemeModulesEnoughInjectives
-import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImage
-import Sheaf.Algebra.Homology.ModuleStalkFunctor
-import Mathlib.AlgebraicGeometry.Stalk
-import Mathlib.RingTheory.AdicCompletion.Algebra
-import Mathlib.CategoryTheory.Functor.OfSequence
+module
+
+public import Sheaf.AlgebraicGeometry.FlatBaseChangeOpenChoices
+public import Sheaf.AlgebraicGeometry.ModuleCohomologyFMap
+public import Sheaf.AlgebraicGeometry.SchemeModulesEnoughInjectives
+public import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImage
+public import Sheaf.Algebra.Homology.ModuleStalkFunctor
+public import Mathlib.AlgebraicGeometry.Stalk
+public import Mathlib.RingTheory.AdicCompletion.Algebra
+public import Mathlib.CategoryTheory.Functor.OfSequence
 
 /-! # Infinitesimal fibre cohomology and its canonical stalk maps
 
@@ -21,6 +23,8 @@ Natural index n denotes the positive infinitesimal level n+1. The cohomology mod
 retain the action of the quotient of the base local ring, and of its completion.
 The canonical stalk maps are characterized by the predicate `IsFormalFunctionsTheta`.
 -/
+
+@[expose] public section
 
 universe uF
 

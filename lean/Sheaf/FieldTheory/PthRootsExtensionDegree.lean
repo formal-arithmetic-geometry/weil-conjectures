@@ -3,11 +3,13 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import Mathlib.RingTheory.Kaehler.Basic
-import Mathlib.FieldTheory.IsAlgClosed.Basic
-import Mathlib.FieldTheory.IntermediateField.Adjoin.Defs
-import Mathlib.LinearAlgebra.Dimension.Finrank
-import Mathlib.Algebra.Algebra.ZMod
+module
+
+public import Mathlib.RingTheory.Kaehler.Basic
+public import Mathlib.FieldTheory.IsAlgClosed.Basic
+public import Mathlib.FieldTheory.IntermediateField.Adjoin.Defs
+public import Mathlib.LinearAlgebra.Dimension.Finrank
+public import Mathlib.Algebra.Algebra.ZMod
 
 /-!
 # Degree of adjoining roots of elements with independent differentials
@@ -15,6 +17,8 @@ import Mathlib.Algebra.Algebra.ZMod
 Source: Stacks Project, Algebra, Lemma 10.158.3 (Tag 07DZ)
 (blueprint: lem-weil-pbc-pth-roots-extension-degree).
 -/
+
+@[expose] public section
 
 universe u v
 

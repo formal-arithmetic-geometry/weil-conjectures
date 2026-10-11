@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Mathlib.Topology.Spectral.Basic
-import Mathlib.Topology.Spectral.Hom
-import Mathlib.Topology.Spectral.ConstructibleTopology
-import Mathlib.Topology.Constructions
+module
+
+public import Mathlib.Topology.Spectral.Basic
+public import Mathlib.Topology.Spectral.Hom
+public import Mathlib.Topology.Spectral.ConstructibleTopology
+public import Mathlib.Topology.Constructions
 
 /-!
 # Quasi-compact limits of constructibly closed subsets
@@ -14,6 +16,8 @@ import Mathlib.Topology.Constructions
 Source: Stacks Project, Topology, Tag 0A2V, parts (1) and (2)
 (blueprint: lem-weil-pbc-spectral-limit-constructible-closed-quasi-compact).
 -/
+
+@[expose] public section
 
 universe u v w
 

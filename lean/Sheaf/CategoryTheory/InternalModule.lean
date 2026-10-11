@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import Mathlib.CategoryTheory.Limits.Shapes.BinaryProducts
-import Mathlib.CategoryTheory.Limits.Shapes.Terminal
-import Mathlib.Algebra.Module.Basic
-import Mathlib.CategoryTheory.Limits.Shapes.FiniteProducts
+module
+
+public import Mathlib.CategoryTheory.Limits.Shapes.BinaryProducts
+public import Mathlib.CategoryTheory.Limits.Shapes.Terminal
+public import Mathlib.Algebra.Module.Basic
+public import Mathlib.CategoryTheory.Limits.Shapes.FiniteProducts
 
 /-!
 # Internal left modules over an external ring
@@ -14,6 +16,8 @@ import Mathlib.CategoryTheory.Limits.Shapes.FiniteProducts
 Source: Stacks Project, Tag 0DV5, proof of (2)-(3)
 (blueprint: def-pod-internal-module).
 -/
+
+@[expose] public section
 
 section
 

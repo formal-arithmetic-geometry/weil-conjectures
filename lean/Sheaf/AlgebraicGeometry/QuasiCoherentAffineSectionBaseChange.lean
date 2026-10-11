@@ -1,11 +1,15 @@
-import Sheaf.AlgebraicGeometry.Coherent
-import Mathlib.LinearAlgebra.TensorProduct.Map
+module
+
+public import Sheaf.AlgebraicGeometry.Coherent
+public import Mathlib.LinearAlgebra.TensorProduct.Map
 
 /-! # Affine section base change for quasi-coherent modules
 
 Source: Stacks Project, Constructions, Lemma 01LN, using Schemes Lemmas 01I9 and 01IA
 (blueprint: lem-weil-pbc-quasi-coherent-affine-section-base-change).
 -/
+
+@[expose] public section
 
 universe u
 

@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group T1
 -/
-import Mathlib.AlgebraicTopology.SimplicialSet.CategoryWithFibrations
-import Mathlib.AlgebraicTopology.SimplicialSet.Homotopy
+module
+
+public import Mathlib.AlgebraicTopology.SimplicialSet.CategoryWithFibrations
+public import Mathlib.AlgebraicTopology.SimplicialSet.Homotopy
 
 /-!
 # A trivial Kan fibration is a homotopy equivalence
@@ -13,6 +15,8 @@ Source: Stacks Project, Simplicial, Lemma 08NS (label `lemma-trivial-kan-homotop
 using Lemma 08NM (label `lemma-trivial-kan`), and Definition 019K (label
 `definition-homotopy`) (blueprint: lem-weil-pbc-trivial-kan-homotopy-equivalence).
 -/
+
+@[expose] public section
 
 universe u
 

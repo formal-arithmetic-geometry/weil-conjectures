@@ -3,13 +3,15 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Mathlib.CategoryTheory.Sites.PrecoverageToGrothendieck
-import Mathlib.CategoryTheory.Sites.Pullback
-import Mathlib.CategoryTheory.Sites.Abelian
-import Mathlib.Algebra.Category.Grp.Limits
-import Mathlib.Algebra.Category.Grp.Colimits
-import Mathlib.Algebra.Category.Grp.FilteredColimits
-import Mathlib.Algebra.Homology.ShortComplex.ShortExact
+module
+
+public import Mathlib.CategoryTheory.Sites.PrecoverageToGrothendieck
+public import Mathlib.CategoryTheory.Sites.Pullback
+public import Mathlib.CategoryTheory.Sites.Abelian
+public import Mathlib.Algebra.Category.Grp.Limits
+public import Mathlib.Algebra.Category.Grp.Colimits
+public import Mathlib.Algebra.Category.Grp.FilteredColimits
+public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 
 /-!
 # Exact inverse image on abelian sheaves
@@ -18,6 +20,8 @@ Source: Stacks Project, Modules on Sites, Lemma 04JC, first assertion;
 Sites, Definition 00X1 and Section 00YR; Modules on Sites, Lemma 03DC
 (blueprint: lem-weil-pbc-site-pullback-abelian-exact).
 -/
+
+@[expose] public section
 
 universe u
 

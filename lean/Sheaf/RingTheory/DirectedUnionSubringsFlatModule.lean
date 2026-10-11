@@ -3,13 +3,17 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group J1
 -/
-import Mathlib.RingTheory.Flat.Basic
+module
+
+public import Mathlib.RingTheory.Flat.Basic
 
 /-! # Flat modules over directed unions of subrings
 
 Source: literature/stacks-project/algebra.tex, Lemma Tag 05UU (blueprint:
 lem-weil-pbc-directed-union-subrings-flat-module)
 -/
+
+@[expose] public section
 
 universe u v w x
 

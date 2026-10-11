@@ -3,17 +3,21 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Sheaf.AlgebraicGeometry.Coherent
-import Mathlib.AlgebraicGeometry.Noetherian
-import Mathlib.AlgebraicGeometry.Modules.Tilde
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
-import Mathlib.Algebra.Homology.QuasiIso
+module
+
+public import Sheaf.AlgebraicGeometry.Coherent
+public import Mathlib.AlgebraicGeometry.Noetherian
+public import Mathlib.AlgebraicGeometry.Modules.Tilde
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
+public import Mathlib.Algebra.Homology.QuasiIso
 
 /-! # Finite free resolutions on affine neighbourhoods
 
 Source: Stacks Project, Coherent Modules, Lemma 01XZ and Algebra, Lemma 00LP
 (blueprint: lem-sc-coherent-affine-free-resolution).
 -/
+
+@[expose] public section
 
 universe u
 

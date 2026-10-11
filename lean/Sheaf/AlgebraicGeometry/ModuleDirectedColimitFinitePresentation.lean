@@ -3,15 +3,19 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group J1
 -/
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
-import Mathlib.CategoryTheory.Filtered.Basic
+module
+
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
+public import Mathlib.CategoryTheory.Filtered.Basic
 
 /-! # Directed colimit by finite-presentation modules
 
 Source: Stacks Project, Properties, Lemma 01PK (blueprint:
 lem-weil-pbc-module-directed-colimit-finite-presentation).
 -/
+
+@[expose] public section
 
 universe u
 

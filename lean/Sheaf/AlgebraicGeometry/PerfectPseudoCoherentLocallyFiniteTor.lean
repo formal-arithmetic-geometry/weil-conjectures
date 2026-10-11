@@ -3,14 +3,19 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under the Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group J1
 -/
-import Sheaf.AlgebraicGeometry.PerfectComplex
-import Sheaf.AlgebraicGeometry.PseudoCoherentComplex
-import Sheaf.AlgebraicGeometry.LocallyFiniteTorDimension
+module
+
+public import Sheaf.AlgebraicGeometry.PerfectComplex
+public import Sheaf.AlgebraicGeometry.PseudoCoherentComplex
+public import Sheaf.AlgebraicGeometry.LocallyFiniteTorDimension
 
 /-! # Perfect complexes are pseudo-coherent and locally of finite Tor dimension
 Source: literature/stacks-project/cohomology.tex, Lemma 08CQ, implication (1) => (2)
 (blueprint: lem-pc-perfect-pseudo-coherent-locally-finite-tor).
 -/
+
+@[expose] public section
+
 universe uP wP
 open CategoryTheory
 namespace AlgebraicGeometry.Scheme

@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group J1
 -/
-import Mathlib.RingTheory.Noetherian.Defs
-import Mathlib.RingTheory.LocalRing.ResidueField.Fiber
+module
+
+public import Mathlib.RingTheory.Noetherian.Defs
+public import Mathlib.RingTheory.LocalRing.ResidueField.Fiber
 
 /-!
 # Noetherian fibre rings
@@ -15,6 +17,8 @@ Source: Stacks Project, Algebra, Remark 00E6 and Lemma 00FN
 The fibre ring `B ⊗_A κ(p)` of the node is Mathlib's `p.Fiber B = κ(p) ⊗[A] B`
 (the two tensor-factor orders are identified by `Algebra.TensorProduct.comm`).
 -/
+
+@[expose] public section
 
 universe u v
 

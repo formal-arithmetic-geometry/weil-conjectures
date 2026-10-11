@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import Sheaf.RingTheory.QuasiFiniteAtPrime
-import Mathlib.Algebra.BigOperators.Ring.Finset
+module
+
+public import Sheaf.RingTheory.QuasiFiniteAtPrime
+public import Mathlib.Algebra.BigOperators.Ring.Finset
 
 /-!
 # Quasi-finiteness along a four-ring square
@@ -12,6 +14,8 @@ import Mathlib.Algebra.BigOperators.Ring.Finset
 Source: Stacks Project, Algebra, Lemma 10.122.7 (Tag 00PN)
 (blueprint: lem-weil-pbc-quasi-finite-four-rings).
 -/
+
+@[expose] public section
 
 universe u v w z
 

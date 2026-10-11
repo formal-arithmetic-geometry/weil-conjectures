@@ -3,12 +3,14 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import Mathlib.Algebra.Category.Grp.Abelian
-import Mathlib.Algebra.Category.Grp.Limits
-import Mathlib.Algebra.Homology.HomologicalComplexLimits
-import Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
-import Mathlib.CategoryTheory.CofilteredSystem
-import Sheaf.CategoryTheory.EssentiallyConstantSystem
+module
+
+public import Mathlib.Algebra.Category.Grp.Abelian
+public import Mathlib.Algebra.Category.Grp.Limits
+public import Mathlib.Algebra.Homology.HomologicalComplexLimits
+public import Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
+public import Mathlib.CategoryTheory.CofilteredSystem
+public import Sheaf.CategoryTheory.EssentiallyConstantSystem
 
 /-!
 # Homology of the limit of a Mittag-Leffler system of four-term complexes
@@ -16,6 +18,8 @@ import Sheaf.CategoryTheory.EssentiallyConstantSystem
 Source: Stacks Project, Homology, Lemma 12.31.7, Tag 070E
 (blueprint: lem-weil-pbc-mittag-leffler-complex-limit-homology).
 -/
+
+@[expose] public section
 
 universe u
 

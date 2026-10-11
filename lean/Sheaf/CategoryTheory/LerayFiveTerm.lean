@@ -2,8 +2,10 @@
 Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 -/
-import Sheaf.CategoryTheory.ExactCoupleConvergence
-import Mathlib.Algebra.Homology.ExactSequence
+module
+
+public import Sheaf.CategoryTheory.ExactCoupleConvergence
+public import Mathlib.Algebra.Homology.ExactSequence
 
 /-!
 # Five-term exact sequence of a first-quadrant spectral sequence
@@ -15,6 +17,8 @@ from the convergence data: the quotient `E₂ → E_∞` (resp. inclusion `E_∞
 canonical comparison `E_∞^{p,q} ≅ grᵖ H^{p+q}` of weak convergence, and the inclusion
 `grᵖ Hᵖ = Fᵖ Hᵖ ⊆ Hᵖ` (resp. the quotient `H^q = F⁰ H^q → gr⁰ H^q`).
 -/
+
+@[expose] public section
 
 universe u v
 

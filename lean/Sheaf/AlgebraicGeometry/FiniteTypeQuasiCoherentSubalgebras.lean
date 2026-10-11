@@ -3,17 +3,21 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Sheaf.AlgebraicGeometry.CommAlgebraSheaf
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
-import Mathlib.AlgebraicGeometry.AffineScheme
-import Mathlib.RingTheory.RingHom.FiniteType
-import Mathlib.CategoryTheory.Subobject.Basic
+module
+
+public import Sheaf.AlgebraicGeometry.CommAlgebraSheaf
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
+public import Mathlib.AlgebraicGeometry.AffineScheme
+public import Mathlib.RingTheory.RingHom.FiniteType
+public import Mathlib.CategoryTheory.Subobject.Basic
 
 /-! # Finite type quasi-coherent subalgebras
 
 Source: Stacks Project, Properties, Tag 05JT and the definition preceding it
 (blueprint: def-weil-pbc-finite-type-quasi-coherent-subalgebras).
 -/
+
+@[expose] public section
 
 universe uB
 

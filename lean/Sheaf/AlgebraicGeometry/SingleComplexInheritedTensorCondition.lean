@@ -2,14 +2,18 @@
 Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 -/
-import Sheaf.AlgebraicGeometry.SingleComplexBaseChangeStalkCondition
-import Sheaf.AlgebraicGeometry.DerivedTensorStructure
+module
+
+public import Sheaf.AlgebraicGeometry.SingleComplexBaseChangeStalkCondition
+public import Sheaf.AlgebraicGeometry.DerivedTensorStructure
 
 /-! # Tensor inheritance of the single-complex base-change condition
 
 Source: Stacks Project, perfect.tex, Tag 0DJA, part (1)
 (blueprint: lem-pc-rf-single-complex-inherited-tensor-condition).
 -/
+
+@[expose] public section
 
 universe u w
 

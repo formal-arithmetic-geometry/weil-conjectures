@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Sheaf.RingTheory.FormalGlueingH0
-import Mathlib.RingTheory.RingHom.Flat
+module
+
+public import Sheaf.RingTheory.FormalGlueingH0
+public import Mathlib.RingTheory.RingHom.Flat
 
 /-!
 # Localization of compatible sections of formal glueing data
@@ -12,6 +14,8 @@ import Mathlib.RingTheory.RingHom.Flat
 Source: Stacks Project, More on Algebra, proof of Proposition 05ER, second paragraph,
 using Lemmas 05EQ and 05EP (blueprint: lem-weil-pbc-formal-glueing-H0-localization).
 -/
+
+@[expose] public section
 
 universe uL vL wL
 

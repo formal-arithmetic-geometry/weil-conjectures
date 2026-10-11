@@ -1,6 +1,8 @@
-import Sheaf.Paper.ShiftedKoszulAugmentation
-import Mathlib.Algebra.Homology.HomotopyCategory.HomComplex
-import Mathlib.RingTheory.Localization.Away.Basic
+module
+
+public import Sheaf.Paper.ShiftedKoszulAugmentation
+public import Mathlib.Algebra.Homology.HomotopyCategory.HomComplex
+public import Mathlib.RingTheory.Localization.Away.Basic
 
 /-!
 # The affine Koszul Hom colimit and the alternating Čech complex
@@ -14,6 +16,8 @@ Koszul complexes.  The target is the total alternating Čech complex, with
 localized module terms indexed by strictly increasing tuples.  The proof is
 left to the later proving stage.
 -/
+
+@[expose] public section
 
 set_option autoImplicit false
 set_option relaxedAutoImplicit false

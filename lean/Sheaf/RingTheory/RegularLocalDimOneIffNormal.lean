@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import Mathlib.RingTheory.RegularLocalRing.Defs
-import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
+module
+
+public import Mathlib.RingTheory.RegularLocalRing.Defs
+public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
 
 /-!
 # Regularity and normality for one-dimensional Noetherian local rings
@@ -12,6 +14,8 @@ import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
 Source: Stacks Project, Algebra, Lemma 10.119.7 (Tag 00PD), equivalence of (3) and (5)
 (blueprint: lem-weil-pbc-regular-local-dim-one-iff-normal).
 -/
+
+@[expose] public section
 
 universe u
 

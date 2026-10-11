@@ -3,15 +3,19 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group U1
 -/
-import Sheaf.CategoryTheory.Sites.TorsorExtensionPresentation
-import Sheaf.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
-import Mathlib.Algebra.Homology.ShortComplex.ShortExact
+module
+
+public import Sheaf.CategoryTheory.Sites.TorsorExtensionPresentation
+public import Sheaf.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
+public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 
 /-! # Inverse image of the canonical étale torsor extension
 
 Source: Stacks Project, Cohomology on Sites, Lemma 03AJ
 (blueprint: lem-sc-etale-torsor-inverse-image-extension).
 -/
+
+@[expose] public section
 
 universe u
 

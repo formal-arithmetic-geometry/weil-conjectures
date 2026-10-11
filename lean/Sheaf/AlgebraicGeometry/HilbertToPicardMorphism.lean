@@ -3,12 +3,14 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import Sheaf.AlgebraicGeometry.SmoothProjectiveCurve
-import WeilConjectures.AlgebraicGeometry.Hilbert.Defs
-import WeilConjectures.AlgebraicGeometry.Picard.Jacobian
-import WeilConjectures.AlgebraicGeometry.RelativeEffectiveCartier
-import Mathlib.AlgebraicGeometry.Geometrically.Integral
-import Mathlib.FieldTheory.IsSepClosed
+module
+
+public import Sheaf.AlgebraicGeometry.SmoothProjectiveCurve
+public import WeilConjectures.AlgebraicGeometry.Hilbert.Defs
+public import WeilConjectures.AlgebraicGeometry.Picard.Jacobian
+public import WeilConjectures.AlgebraicGeometry.RelativeEffectiveCartier
+public import Mathlib.AlgebraicGeometry.Geometrically.Integral
+public import Mathlib.FieldTheory.IsSepClosed
 
 /-!
 # The morphism from the Hilbert scheme to the degree component of the Picard scheme
@@ -16,6 +18,8 @@ import Mathlib.FieldTheory.IsSepClosed
 Source: Stacks Project, Tag 0BA0 (4) and its proof, and Remark 0B9J
 (blueprint: lem-sc-hilb-to-pic-morphism).
 -/
+
+@[expose] public section
 
 universe u
 

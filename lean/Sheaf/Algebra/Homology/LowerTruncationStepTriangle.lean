@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group G1
 -/
-import Mathlib.Algebra.Homology.DerivedCategory.TStructure
-import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
-import Mathlib.CategoryTheory.Triangulated.TStructure.TruncLTGE
+module
+
+public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
+public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
+public import Mathlib.CategoryTheory.Triangulated.TStructure.TruncLTGE
 
 /-!
 # Successive lower truncation triangle
@@ -13,6 +15,8 @@ import Mathlib.CategoryTheory.Triangulated.TStructure.TruncLTGE
 Source: literature/stacks-project/perfect.tex, Tag 08D4 proof of part (2)
 (blueprint: lem-pc-derived-lower-truncation-step-triangle).
 -/
+
+@[expose] public section
 
 universe u v w
 

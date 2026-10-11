@@ -3,15 +3,19 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Sheaf.AlgebraicGeometry.DerivedCategory
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.Colimits
-import Mathlib.Algebra.Homology.HomologicalComplexLimits
+module
+
+public import Sheaf.AlgebraicGeometry.DerivedCategory
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Colimits
+public import Mathlib.Algebra.Homology.HomologicalComplexLimits
 
 /-! # Direct sums in the derived category of module sheaves
 
 Source: Stacks Project, Injectives, Lemma 07D9 (1)-(2), and Derived Categories of Schemes,
 proof of Lemma 08DT (blueprint: lem-pc-derived-ambient-direct-sums).
 -/
+
+@[expose] public section
 
 universe u w
 

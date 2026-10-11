@@ -2,12 +2,16 @@
 Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 -/
-import Sheaf.AlgebraicGeometry.CechH1MapNatural
+module
+
+public import Sheaf.AlgebraicGeometry.CechH1MapNatural
 
 /-! # Injectivity of the first Čech cohomology map
 
 Source: Stacks Project, Cohomology, Lemma 0B8R (blueprint: lem-sc-cech-h1-injective).
 -/
+
+@[expose] public section
 
 universe u
 

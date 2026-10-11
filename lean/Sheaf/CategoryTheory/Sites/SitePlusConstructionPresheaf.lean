@@ -3,15 +3,19 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group T1
 -/
-import Mathlib.CategoryTheory.Sites.ConcreteSheafification
-import Mathlib.CategoryTheory.Sites.Hypercover.Zero
-import Mathlib.CategoryTheory.Sites.PrecoverageToGrothendieck
+module
+
+public import Mathlib.CategoryTheory.Sites.ConcreteSheafification
+public import Mathlib.CategoryTheory.Sites.Hypercover.Zero
+public import Mathlib.CategoryTheory.Sites.PrecoverageToGrothendieck
 
 /-! # The plus construction is a presheaf
 
 Source: Stacks, Sites, Section 00W1, Lemmas 00W4, 00W6, 00W7, and 00W9
 (blueprint: lem-weil-pbc-site-plus-construction-presheaf).
 -/
+
+@[expose] public section
 
 universe u w
 

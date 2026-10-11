@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Mathlib.AlgebraicGeometry.Morphisms.Etale
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.Etale
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 
 /-!
 # Etale morphisms and finite type over a field
@@ -13,6 +15,8 @@ Source: the Weil conjectures blueprint, chapter `sec-smooth-purity`, unit
 `sk-prop-sf-kunneth-ordinary`, lemma `lem-kun-etale-lfp`
 (blueprint: lem-kun-etale-lfp).
 -/
+
+@[expose] public section
 
 universe u
 

@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import Sheaf.AlgebraicGeometry.PerfectComplex
-import Sheaf.AlgebraicGeometry.AffineTorAmplitudeCriterion
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.Flat
-import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
+module
+
+public import Sheaf.AlgebraicGeometry.PerfectComplex
+public import Sheaf.AlgebraicGeometry.AffineTorAmplitudeCriterion
+public import Sheaf.Algebra.Category.ModuleCat.Sheaf.Flat
+public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 
 /-! # Finite local freeness of an affine truncation kernel
 
@@ -14,6 +16,8 @@ Source: Stacks Project, Derived Categories of Schemes, Tag 08EG, proof of Lemma 
 (the DAG source calls this Tag 08ED)
 (blueprint: lem-sc-affine-truncation-kernel-finite-locally-free).
 -/
+
+@[expose] public section
 
 set_option autoImplicit false
 

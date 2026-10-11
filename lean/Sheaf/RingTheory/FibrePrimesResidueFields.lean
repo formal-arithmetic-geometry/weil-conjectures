@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import Mathlib.RingTheory.LocalRing.ResidueField.Fiber
+module
+
+public import Mathlib.RingTheory.LocalRing.ResidueField.Fiber
 
 /-!
 # Primes and residue fields of a fibre ring
@@ -11,6 +13,8 @@ import Mathlib.RingTheory.LocalRing.ResidueField.Fiber
 Source: Stacks Project, Tags 00E6 and 0H9M
 (blueprint: lem-weil-pbc-fibre-ring-primes-residue-fields).
 -/
+
+@[expose] public section
 
 universe u v
 

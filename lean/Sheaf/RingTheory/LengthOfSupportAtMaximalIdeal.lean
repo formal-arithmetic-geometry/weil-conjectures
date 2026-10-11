@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group G1
 -/
-import Mathlib.RingTheory.Support
-import Mathlib.RingTheory.Length
-import Mathlib.RingTheory.LocalRing.MaximalIdeal.Basic
+module
+
+public import Mathlib.RingTheory.Support
+public import Mathlib.RingTheory.Length
+public import Mathlib.RingTheory.LocalRing.MaximalIdeal.Basic
 
 /-!
 # Positive finite length for a module supported at the maximal ideal
@@ -13,6 +15,8 @@ import Mathlib.RingTheory.LocalRing.MaximalIdeal.Basic
 Source: Stacks Project, Algebra, Lemma 10.62.3 (Tag 00L5)
 (blueprint: lem-sc-generic-stalk-finite-length).
 -/
+
+@[expose] public section
 
 universe u v
 

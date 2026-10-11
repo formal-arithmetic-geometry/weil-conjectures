@@ -3,11 +3,13 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import Sheaf.RingTheory.KoszulConormalComparison
-import Sheaf.RingTheory.KoszulRegularSequence
-import Mathlib.Algebra.Homology.DerivedCategory.Ext.Linear
-import Mathlib.Algebra.Category.ModuleCat.Ext.HasExt
-import Mathlib.RingTheory.Localization.Defs
+module
+
+public import Sheaf.RingTheory.KoszulConormalComparison
+public import Sheaf.RingTheory.KoszulRegularSequence
+public import Mathlib.Algebra.Homology.DerivedCategory.Ext.Linear
+public import Mathlib.Algebra.Category.ModuleCat.Ext.HasExt
+public import Mathlib.RingTheory.Localization.Defs
 
 /-!
 # Duality for a Koszul-regular quotient
@@ -29,6 +31,8 @@ specified on roofs from the Koszul resolution, so it is independent of generator
 * `koszul_conormal_comparison_change_generators`: change-of-resolution compatibility.
 * `koszul_conormal_comparison_localization`: compatibility with arbitrary localization.
 -/
+
+@[expose] public section
 
 universe uT
 

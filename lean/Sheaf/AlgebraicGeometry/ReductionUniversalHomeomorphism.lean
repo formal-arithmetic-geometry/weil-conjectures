@@ -3,12 +3,14 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
-import Mathlib.AlgebraicGeometry.Morphisms.Constructors
-import Mathlib.CategoryTheory.MorphismProperty.Limits
-import Mathlib.AlgebraicGeometry.Properties
-import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
+module
+
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
+public import Mathlib.AlgebraicGeometry.Morphisms.Constructors
+public import Mathlib.CategoryTheory.MorphismProperty.Limits
+public import Mathlib.AlgebraicGeometry.Properties
+public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+public import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
 
 /-!
 # The reduction is a universal homeomorphism
@@ -16,6 +18,8 @@ import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
 Source: literature/stacks-project/morphisms.tex, Lemma 054M.
 (blueprint: lem-weil-pbc-reduction-universal-homeomorphism).
 -/
+
+@[expose] public section
 
 universe u
 

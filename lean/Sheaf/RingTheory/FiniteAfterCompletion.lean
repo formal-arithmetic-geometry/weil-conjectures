@@ -1,7 +1,9 @@
-import Mathlib.RingTheory.LocalRing.Basic
-import Mathlib.RingTheory.LocalRing.MaximalIdeal.Defs
-import Mathlib.RingTheory.AdicCompletion.Algebra
-import Mathlib.RingTheory.Finiteness.Defs
+module
+
+public import Mathlib.RingTheory.LocalRing.Basic
+public import Mathlib.RingTheory.LocalRing.MaximalIdeal.Defs
+public import Mathlib.RingTheory.AdicCompletion.Algebra
+public import Mathlib.RingTheory.Finiteness.Defs
 
 /-!
 # Finite modules after completion
@@ -9,6 +11,8 @@ import Mathlib.RingTheory.Finiteness.Defs
 Source: literature/stacks-project/algebra.tex, Algebra, Lemma Tag 0394
 (blueprint: lem-weil-pbc-finite-after-completion).
 -/
+
+@[expose] public section
 
 universe u v
 

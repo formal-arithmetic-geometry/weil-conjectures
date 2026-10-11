@@ -3,16 +3,20 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import Sheaf.AlgebraicGeometry.PerfectComplex
-import Sheaf.AlgebraicGeometry.DerivedGlobalScalar
-import Mathlib.AlgebraicGeometry.AffineScheme
-import Mathlib.Data.Nat.Choose.Basic
+module
+
+public import Sheaf.AlgebraicGeometry.PerfectComplex
+public import Sheaf.AlgebraicGeometry.DerivedGlobalScalar
+public import Mathlib.AlgebraicGeometry.AffineScheme
+public import Mathlib.Data.Nat.Choose.Basic
 
 /-! # Affine support from successive cones
 
 Source: Stacks Project, Tag 08EK (Lemma 36.13.10), proof, cone construction
 (blueprint: lem-sc-affine-support-iterated-cones).
 -/
+
+@[expose] public section
 
 universe u w
 

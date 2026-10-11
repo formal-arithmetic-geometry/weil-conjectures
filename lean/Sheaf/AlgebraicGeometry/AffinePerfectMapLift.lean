@@ -3,15 +3,19 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under the Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Sheaf.AlgebraicGeometry.PerfectComplex
-import Sheaf.AlgebraicGeometry.DerivedTensorAugmentation
-import Mathlib.AlgebraicGeometry.AffineScheme
+module
+
+public import Sheaf.AlgebraicGeometry.PerfectComplex
+public import Sheaf.AlgebraicGeometry.DerivedTensorAugmentation
+public import Mathlib.AlgebraicGeometry.AffineScheme
 
 /-! # Affine lifting of maps from perfect complexes
 
 Source: Stacks Project, Tag 08EH, Lemma 36.13.7
 (blueprint: lem-sc-affine-perfect-map-lift).
 -/
+
+@[expose] public section
 
 set_option autoImplicit false
 

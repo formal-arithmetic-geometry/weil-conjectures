@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group N1
 -/
-import Sheaf.RingTheory.StrictHenselizationTriples
-import Mathlib.RingTheory.AdicCompletion.Algebra
-import Mathlib.RingTheory.Localization.AtPrime.Basic
+module
+
+public import Sheaf.RingTheory.StrictHenselizationTriples
+public import Mathlib.RingTheory.AdicCompletion.Algebra
+public import Mathlib.RingTheory.Localization.AtPrime.Basic
 
 /-!
 # Strict henselization at an etale triple
@@ -13,6 +15,8 @@ import Mathlib.RingTheory.Localization.AtPrime.Basic
 Source: Stacks Project, Tags 06LJ, 04GW and 04GP
 (blueprint: lem-sc-etale-triple-strict-henselization-identification).
 -/
+
+@[expose] public section
 
 universe u
 

@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import Sheaf.AlgebraicGeometry.HilbertToPicardMorphism
-import WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar
-import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
+module
+
+public import Sheaf.AlgebraicGeometry.HilbertToPicardMorphism
+public import WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar
+public import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
 
 /-!
 # Surjectivity of the Hilbert-to-Picard morphism
@@ -13,6 +15,8 @@ import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
 Source: Stacks Project, Tag 0BA0, clause (5) and proof, fourth paragraph
 (blueprint: lem-sc-hilb-to-pic-surjective).
 -/
+
+@[expose] public section
 
 universe u
 

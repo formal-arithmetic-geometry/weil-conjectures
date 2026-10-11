@@ -3,11 +3,15 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import Mathlib.RingTheory.TensorProduct.Basic
-import Mathlib.RingTheory.AdicCompletion.Algebra
-import Mathlib.RingTheory.Localization.AtPrime.Basic
-import Mathlib.RingTheory.FiniteType
-import Sheaf.RingTheory.QuasiFiniteAtPrime
+module
+
+public import Mathlib.RingTheory.TensorProduct.Basic
+public import Mathlib.RingTheory.AdicCompletion.Algebra
+public import Mathlib.RingTheory.Localization.AtPrime.Basic
+public import Mathlib.RingTheory.FiniteType
+public import Sheaf.RingTheory.QuasiFiniteAtPrime
+
+@[expose] public section
 
 universe u v
 

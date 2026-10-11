@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
-import Mathlib.RingTheory.TensorProduct.Basic
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
+public import Mathlib.RingTheory.TensorProduct.Basic
 
 /-!
 # Surjectivity of spectra after base change
@@ -12,6 +14,8 @@ import Mathlib.RingTheory.TensorProduct.Basic
 Source: Stacks Project, Algebra, Lemma 10.30.3 (Tag 00FI), final assertion
 (blueprint: lem-weil-pbc-spec-surjective-base-change).
 -/
+
+@[expose] public section
 
 universe u
 

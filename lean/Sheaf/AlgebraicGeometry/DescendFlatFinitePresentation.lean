@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group J1
 -/
-import Sheaf.AlgebraicGeometry.LimitAffineTransition
-import Mathlib.AlgebraicGeometry.Morphisms.Flat
-import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
-import Mathlib.CategoryTheory.Comma.Over.Pullback
+module
+
+public import Sheaf.AlgebraicGeometry.LimitAffineTransition
+public import Mathlib.AlgebraicGeometry.Morphisms.Flat
+public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
+public import Mathlib.CategoryTheory.Comma.Over.Pullback
 
 /-!
 # Descent of flatness to a finite stage
@@ -14,6 +16,8 @@ import Mathlib.CategoryTheory.Comma.Over.Pullback
 Source: Stacks Project, Limits of Schemes, Tag 04AI in Situation 081D
 (blueprint: lem-weil-pbc-descend-flat-finite-presentation).
 -/
+
+@[expose] public section
 
 universe u
 

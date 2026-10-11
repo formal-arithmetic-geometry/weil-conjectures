@@ -3,14 +3,18 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under the Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group J1
 -/
-import Sheaf.AlgebraicGeometry.DerivedTensorCohomologyVanishes
-import Sheaf.AlgebraicGeometry.DerivedPullback
+module
+
+public import Sheaf.AlgebraicGeometry.DerivedTensorCohomologyVanishes
+public import Sheaf.AlgebraicGeometry.DerivedPullback
 
 /-! # Locally finite Tor dimension on schemes
 
 Source: Stacks Project, Cohomology of Sheaves, Definition 08CG
 (cohomology-definition-tor-amplitude) (blueprint: def-pc-locally-finite-tor-dimension).
 -/
+
+@[expose] public section
 
 universe u w
 

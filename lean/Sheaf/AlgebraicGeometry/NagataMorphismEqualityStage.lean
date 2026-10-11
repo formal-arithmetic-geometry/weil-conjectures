@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group T1
 -/
-import Sheaf.AlgebraicGeometry.NagataQCOpenEqualityStage
+module
+
+public import Sheaf.AlgebraicGeometry.NagataQCOpenEqualityStage
 
 /-!
 # Stage of equality for two descended morphisms
@@ -18,6 +20,8 @@ exactly the finite upper bound prescribed by the node, without assuming eventual
 morphism equality. Finite presentation means locally of finite presentation,
 quasi-compact and quasi-separated, as in Stacks.
 -/
+
+@[expose] public section
 
 universe u
 

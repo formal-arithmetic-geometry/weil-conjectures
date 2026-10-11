@@ -3,17 +3,21 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group R1
 -/
-import Sheaf.AlgebraicGeometry.FlatBaseChangeOpenChoices
-import Sheaf.AlgebraicGeometry.FlatModulePullbackExact
-import Sheaf.AlgebraicGeometry.SchemeModulesEnoughInjectives
-import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
-import Mathlib.AlgebraicGeometry.Pullbacks
+module
+
+public import Sheaf.AlgebraicGeometry.FlatBaseChangeOpenChoices
+public import Sheaf.AlgebraicGeometry.FlatModulePullbackExact
+public import Sheaf.AlgebraicGeometry.SchemeModulesEnoughInjectives
+public import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
+public import Mathlib.AlgebraicGeometry.Pullbacks
 
 /-! # The flat base-change map on sections
 
 Source: Stacks Project, Cohomology, Tags 02N7, 01E4 and 01FB
 (blueprint: lem-weil-pbc-flat-base-change-map-sections).
 -/
+
+@[expose] public section
 
 universe uBC
 set_option autoImplicit false

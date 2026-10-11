@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group J1
 -/
-import Mathlib.CategoryTheory.Sites.PrecoverageToGrothendieck
-import Sheaf.CategoryTheory.SheavesAlgebraicStructuresObjects
+module
+
+public import Mathlib.CategoryTheory.Sites.PrecoverageToGrothendieck
+public import Sheaf.CategoryTheory.SheavesAlgebraicStructuresObjects
 
 /-!
 # Precomposition with a continuous functor of sites
@@ -12,6 +14,8 @@ import Sheaf.CategoryTheory.SheavesAlgebraicStructuresObjects
 Source: Stacks Project, Definition 00WV and Lemma 00WW
 (blueprint: lem-weil-pbc-site-continuous-pushforward-sheaf).
 -/
+
+@[expose] public section
 
 universe u₁ v₁ u₂ v₂ w
 

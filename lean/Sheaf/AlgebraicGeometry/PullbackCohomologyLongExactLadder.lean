@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group J1
 -/
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
-import Mathlib.Algebra.Homology.DerivedCategory.Ext.ExtClass
+module
+
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
+public import Mathlib.Algebra.Homology.DerivedCategory.Ext.ExtClass
 
 /-!
 # Pullback and the long exact sequence of etale cohomology
@@ -19,6 +21,8 @@ Its derived morphism is exactly `hS.singleδ` (`ShortExact.extClass_hom`), not a
 arbitrary choice of a connecting morphism. Identifying Ext cohomology with derived
 global sections identifies this boundary with cohomology of the shifted `RΓ(singleδ)`.
 -/
+
+@[expose] public section
 
 universe u
 

@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group J1
 -/
-import Mathlib.AlgebraicGeometry.Morphisms.Proper
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.Proper
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 
 /-! # Basic consequences of properness
 
@@ -13,6 +15,8 @@ Source: literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-p
 pqf-lem-proper-basic.md,
 node pqf-lem-proper-basic, order 528 (blueprint: pqf-lem-proper-basic).
 -/
+
+@[expose] public section
 
 open CategoryTheory
 open AlgebraicGeometry

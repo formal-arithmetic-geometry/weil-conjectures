@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group J1
 -/
-import Sheaf.Paper.KoszulComplex
+module
+
+public import Sheaf.Paper.KoszulComplex
 
 /-!
 # Koszul-regular and H₁-regular sequences
@@ -17,6 +19,8 @@ integer degrees therefore means vanishing in all nonzero natural degrees.
 The module-valued homology is Mathlib's kernel-modulo-image homology; `IsZero`
 expresses that this module is zero, without requiring a chosen equality to a zero object.
 -/
+
+@[expose] public section
 
 universe u v
 

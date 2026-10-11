@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group G1
 -/
-import Mathlib.AlgebraicGeometry.Scheme
-import Mathlib.RingTheory.FiniteType
+module
+
+public import Mathlib.AlgebraicGeometry.Scheme
+public import Mathlib.RingTheory.FiniteType
 
 /-!
 # Finitely many isolated points of a finite type algebra over a field
@@ -13,6 +15,8 @@ Source: Stacks Project, Algebra, Lemma 10.145.3 (Tag 00UK), proof, and the
 Noetherian finite-minimal-prime argument
 (blueprint: lem-weil-pbc-finite-type-field-finite-isolated-points).
 -/
+
+@[expose] public section
 
 universe u v
 

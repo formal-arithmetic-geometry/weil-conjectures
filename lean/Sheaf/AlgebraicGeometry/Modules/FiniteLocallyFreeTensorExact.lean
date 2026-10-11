@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
-import WeilConjectures.AlgebraicGeometry.Modules.Invertible
-import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
-import Mathlib.CategoryTheory.Limits.Preserves.Finite
+module
+
+public import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
+public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
+public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
+public import Mathlib.CategoryTheory.Limits.Preserves.Finite
 
 /-!
 # Exactness of tensoring by a finite locally free module
@@ -14,6 +16,8 @@ import Mathlib.CategoryTheory.Limits.Preserves.Finite
 Source: the Picard-duality blueprint, proof of `lem-sc-ext-locally-free`; Stacks Project,
 Tags 01C6 and 05NE (blueprint: lem-sc-ext-tensor-exact).
 -/
+
+@[expose] public section
 
 universe u
 

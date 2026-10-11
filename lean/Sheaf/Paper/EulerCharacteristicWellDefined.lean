@@ -3,12 +3,14 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group N1
 -/
-import Sheaf.AlgebraicGeometry.Coherent
-import Sheaf.Topology.RingedSpaceModuleCohomology
-import Mathlib.AlgebraicGeometry.Morphisms.Proper
-import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
-import Mathlib.LinearAlgebra.Dimension.Finrank
-import Mathlib.Algebra.BigOperators.Finprod
+module
+
+public import Sheaf.AlgebraicGeometry.Coherent
+public import Sheaf.Topology.RingedSpaceModuleCohomology
+public import Mathlib.AlgebraicGeometry.Morphisms.Proper
+public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
+public import Mathlib.LinearAlgebra.Dimension.Finrank
+public import Mathlib.Algebra.BigOperators.Finprod
 
 /-! # Well-definedness of the Euler characteristic
 
@@ -19,6 +21,8 @@ Cohomology is the right derived functor of module-valued global sections. Scalar
 restricted along the structure map `k → Γ(X, ⊤)`. The final clause expresses the integer
 Euler sum as a finite sum, in addition to finite dimensionality and finite nonzero support.
 -/
+
+@[expose] public section
 
 universe u
 

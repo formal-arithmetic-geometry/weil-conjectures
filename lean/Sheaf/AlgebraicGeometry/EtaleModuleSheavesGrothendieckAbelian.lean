@@ -3,11 +3,13 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import Mathlib.AlgebraicGeometry.Sites.AffineEtale
-import Mathlib.CategoryTheory.Sites.ConstantSheaf
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
-import Mathlib.Algebra.Category.ModuleCat.Presheaf.Free
-import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
+module
+
+public import Mathlib.AlgebraicGeometry.Sites.AffineEtale
+public import Mathlib.CategoryTheory.Sites.ConstantSheaf
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
+public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Free
+public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
 
 /-!
 # Grothendieck abelianness of constant-coefficient etale module sheaves
@@ -16,6 +18,8 @@ Source: Stacks Project, Modules on Sites, Tags 03DA, 03DB, 03DI and 03EW;
 Topologies, Tags 021A, 021B and 04HR
 (blueprint: lem-weil-pbc-module-sheaves-grothendieck-abelian).
 -/
+
+@[expose] public section
 
 universe u
 

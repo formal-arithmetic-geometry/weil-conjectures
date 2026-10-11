@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group G1
 -/
-import Mathlib.RingTheory.RingHom.Flat
-import Mathlib.RingTheory.Ideal.Maps
+module
+
+public import Mathlib.RingTheory.RingHom.Flat
+public import Mathlib.RingTheory.Ideal.Maps
 
 /-! # Annihilator of an element under flat base change
 
@@ -12,6 +14,8 @@ Source: Stacks Project, Algebra, Lemma Tag 07T8 (`lemma-annihilator-flat-base-ch
 first assertion with `M = R` and `m = x`
 (blueprint: lem-weil-pbc-annihilator-element-flat-base-change).
 -/
+
+@[expose] public section
 
 universe u v
 

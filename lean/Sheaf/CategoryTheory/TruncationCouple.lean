@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import Sheaf.CategoryTheory.KInjectiveBridge
-import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.KInjective
-import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triangulated
-import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
+module
+
+public import Sheaf.CategoryTheory.KInjectiveBridge
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.KInjective
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triangulated
+public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 
 /-!
 # The truncation couple
@@ -19,6 +21,8 @@ The maps are transported from the image of the canonical truncation triangle
 under the K-injective right derived functor. Exactness is a separate statement,
 `lem-sp-truncation-couple-exact`; it is not a field of the construction here.
 -/
+
+@[expose] public section
 
 universe u₁ u₂ v₁ v₂
 

@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group G1
 -/
-import Mathlib.RingTheory.Regular.RegularSequence
-import Mathlib.RingTheory.Finiteness.Defs
-import Mathlib.RingTheory.LocalRing.MaximalIdeal.Defs
+module
+
+public import Mathlib.RingTheory.Regular.RegularSequence
+public import Mathlib.RingTheory.Finiteness.Defs
+public import Mathlib.RingTheory.LocalRing.MaximalIdeal.Defs
 
 /-!
 # Depth of a finite module
@@ -19,6 +21,8 @@ Source: Stacks Project, Algebra, Definition 10.72.1 (Tag 00LI), Section 10.72
 - `Ideal.depth`: depth with respect to an ideal.
 - `IsLocalRing.depth`: depth with respect to the maximal ideal of a local ring.
 -/
+
+@[expose] public section
 
 universe v u
 

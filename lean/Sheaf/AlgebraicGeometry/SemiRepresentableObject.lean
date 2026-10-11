@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import Mathlib.AlgebraicGeometry.Sites.Etale
-import Mathlib.CategoryTheory.Limits.FormalCoproducts.Basic
-import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Terminal
-import Sheaf.CategoryTheory.MatchingObjectCoskeleton
+module
+
+public import Mathlib.AlgebraicGeometry.Sites.Etale
+public import Mathlib.CategoryTheory.Limits.FormalCoproducts.Basic
+public import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Terminal
+public import Sheaf.CategoryTheory.MatchingObjectCoskeleton
 
 /-!
 # Semi-representable étale objects and hypercovers
@@ -18,6 +20,8 @@ The category is Mathlib's `FormalCoproduct X.Etale`, without a second category d
 Matching objects are the canonical limits of the recorded boundary diagrams;
 the coskeleton comparison is the recorded `matching_object_coskeleton` theorem.
 -/
+
+@[expose] public section
 
 universe w u
 

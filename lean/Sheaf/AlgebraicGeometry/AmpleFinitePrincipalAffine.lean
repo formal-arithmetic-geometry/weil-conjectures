@@ -3,13 +3,17 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import Sheaf.AlgebraicGeometry.Ample
+module
+
+public import Sheaf.AlgebraicGeometry.Ample
 
 /-! # Affine section neighbourhoods of finite sets
 
 Source: Stacks Project, Properties, Lemma 09NV
 (blueprint: lem-sc-ample-finite-principal-affine).
 -/
+
+@[expose] public section
 
 universe u
 

@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF lead L
 -/
-import Mathlib.CategoryTheory.Galois.Basic
+module
+
+public import Mathlib.CategoryTheory.Galois.Basic
 
 /-!
 # Galois categories in the sense of the Stacks Project
@@ -18,6 +20,8 @@ fewer colimits and a weaker exactness of the fibre functor, but assumes G3, and 
 decomposition into connected objects as `has_decomp_connected_components`); the two notions
 agree only through the main theorem. This file states Stacks' axioms as they stand.
 -/
+
+@[expose] public section
 
 universe w v u
 

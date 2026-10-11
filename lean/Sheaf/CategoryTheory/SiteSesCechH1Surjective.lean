@@ -2,9 +2,11 @@
 Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 -/
-import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
-import Mathlib.Algebra.Homology.ShortComplex.ShortExact
-import Sheaf.CategoryTheory.SiteCechComplex
+module
+
+public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
+public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
+public import Sheaf.CategoryTheory.SiteCechComplex
 
 /-!
 # Surjectivity of sections from vanishing Čech H¹
@@ -16,6 +18,8 @@ Covering indices and coefficient groups live in universes containing the site's 
 and morphism universes. This includes all presieve-indexed coverings and permits larger
 index and coefficient universes through `w` and `r`.
 -/
+
+@[expose] public section
 
 universe u v w r
 

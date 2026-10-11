@@ -3,15 +3,19 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Sheaf.Algebra.Homology.ModuleStalkFunctor
-import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
-import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+module
+
+public import Sheaf.Algebra.Homology.ModuleStalkFunctor
+public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
+public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 
 /-! # Zero sets of quasi-coherent ideal sheaves on affine opens
 
 Source: Stacks Project, Schemes, Example 01HM and Lemma 01IN
 (blueprint: lem-weil-pbc-quasi-coherent-ideal-zero-set-affine).
 -/
+
+@[expose] public section
 
 universe u
 

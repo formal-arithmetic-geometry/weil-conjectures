@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Sheaf.CategoryTheory.CompactObject
-import Sheaf.CategoryTheory.WeakTriangulatedGenerator
+module
+
+public import Sheaf.CategoryTheory.CompactObject
+public import Sheaf.CategoryTheory.WeakTriangulatedGenerator
 
 /-!
 # Building objects from compact generators
@@ -12,6 +14,8 @@ import Sheaf.CategoryTheory.WeakTriangulatedGenerator
 Source: Stacks Project, Derived Categories, Lemma 13.37.4 (Tag 09SN)
 (blueprint: lem-pc-compact-generators-build-objects).
 -/
+
+@[expose] public section
 
 universe w v u
 

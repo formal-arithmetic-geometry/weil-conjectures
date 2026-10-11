@@ -3,11 +3,13 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import Sheaf.Paper.DerivedHomMayerVietoris
-import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
-import Mathlib.Topology.Sheaves.Sheaf
-import Mathlib.CategoryTheory.Sites.LeftExact
-import Mathlib.Algebra.Category.Grp.FilteredColimits
+module
+
+public import Sheaf.Paper.DerivedHomMayerVietoris
+public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
+public import Mathlib.Topology.Sheaves.Sheaf
+public import Mathlib.CategoryTheory.Sites.LeftExact
+public import Mathlib.Algebra.Category.Grp.FilteredColimits
 
 /-!
 # Kernel of the sheafified sectionwise quotient
@@ -15,6 +17,8 @@ import Mathlib.Algebra.Category.Grp.FilteredColimits
 Source: Stacks Project, Sheaves of Modules, Tag 01AH; Sites, Tags 00WB and 00WK
 (blueprint: lem-weil-pbc-sheaf-cokernel-local-image).
 -/
+
+@[expose] public section
 
 universe u
 

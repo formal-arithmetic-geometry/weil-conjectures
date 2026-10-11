@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group G1
 -/
-import Mathlib.NumberTheory.Padics.PadicNumbers
-import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
-import Mathlib.FieldTheory.IntermediateField.Adjoin.Basic
+module
+
+public import Mathlib.NumberTheory.Padics.PadicNumbers
+public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
+public import Mathlib.FieldTheory.IntermediateField.Adjoin.Basic
 
 /-! # Finite coefficient fields inside an algebraic closure
 
@@ -19,6 +21,8 @@ Source: Deligne, Weil II, (0.2), (1.1.1) d), pp. 144, 147
 * `finiteCoefficientBase`: the least coefficient field.
 * `finiteCoefficientFields_properties`: directedness, exhaustion and finite inclusions.
 -/
+
+@[expose] public section
 
 universe vCoeff
 

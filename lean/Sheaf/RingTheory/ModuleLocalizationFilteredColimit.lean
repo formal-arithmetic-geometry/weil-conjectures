@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import Mathlib.Algebra.Category.ModuleCat.Colimits
-import Mathlib.Algebra.Module.LocalizedModule.Basic
-import Mathlib.CategoryTheory.Functor.OfSequence
+module
+
+public import Mathlib.Algebra.Category.ModuleCat.Colimits
+public import Mathlib.Algebra.Module.LocalizedModule.Basic
+public import Mathlib.CategoryTheory.Functor.OfSequence
 
 /-!
 # Module localization as the colimit of multiplication by one element
@@ -13,6 +15,8 @@ import Mathlib.CategoryTheory.Functor.OfSequence
 Source: Stacks Project, Section 10.9 (Tag 00CM), module localization at the powers of an
 element (blueprint: lem-sc-module-localization-filtered-colimit).
 -/
+
+@[expose] public section
 
 universe u v
 

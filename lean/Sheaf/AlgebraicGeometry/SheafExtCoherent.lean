@@ -3,15 +3,19 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group P1
 -/
-import Sheaf.AlgebraicGeometry.Coherent
-import Sheaf.AlgebraicGeometry.SheafExt
-import Mathlib.AlgebraicGeometry.Noetherian
+module
+
+public import Sheaf.AlgebraicGeometry.Coherent
+public import Sheaf.AlgebraicGeometry.SheafExt
+public import Mathlib.AlgebraicGeometry.Noetherian
 
 /-! # Coherence of sheaf Ext
 
 Source: Stacks Project, Derived Categories of Schemes, Lemma 36.11.5 (Tag 0D0C)
 (blueprint: lem-sc-sheaf-ext-coherent).
 -/
+
+@[expose] public section
 
 universe u₁ w₁
 

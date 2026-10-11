@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Sheaf.AlgebraicGeometry.HypercohomologyFiltrations
+module
+
+public import Sheaf.AlgebraicGeometry.HypercohomologyFiltrations
 
 /-!
 # Half-plane convergence of the three hypercohomology couples
@@ -16,6 +18,8 @@ Natural-number
 page index `r` in `pageCouple` and the cycle/boundary tower means actual page `r + 2`.
 Thus the first available stabilized index is `(max (q-a) (p-1)).toNat`.
 -/
+
+@[expose] public section
 
 set_option synthInstance.maxSize 2048
 

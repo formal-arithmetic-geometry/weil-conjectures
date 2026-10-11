@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group V1
 -/
-import Sheaf.AlgebraicGeometry.EtaleSheaves
-import Sheaf.AlgebraicGeometry.TorsionEtaleSheaf
+module
+
+public import Sheaf.AlgebraicGeometry.EtaleSheaves
+public import Sheaf.AlgebraicGeometry.TorsionEtaleSheaf
 
 /-!
 # The filtered union of the torsion kernels of an étale sheaf
@@ -12,6 +14,8 @@ import Sheaf.AlgebraicGeometry.TorsionEtaleSheaf
 Source: blueprint `sec-curve-estimates/sk-prop-h2`, lemma-weil-pbc-torsion-filtered-union
 (blueprint: lemma-weil-pbc-torsion-filtered-union).
 -/
+
+@[expose] public section
 
 universe u
 

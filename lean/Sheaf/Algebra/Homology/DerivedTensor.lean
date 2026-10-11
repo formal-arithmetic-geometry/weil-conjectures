@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Sheaf.AlgebraicGeometry.ProEtaleDerivedCategory
-import Sheaf.Algebra.Homology.KFlat
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings
-import Mathlib.Algebra.Homology.Single
+module
+
+public import Sheaf.AlgebraicGeometry.ProEtaleDerivedCategory
+public import Sheaf.Algebra.Homology.KFlat
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings
+public import Mathlib.Algebra.Homology.Single
 
 /-!
 # Derived tensor product on the small pro-etale site
@@ -18,6 +20,8 @@ Stacks Project, Cohomology on Sites, Tags 06YN, 06YS and 06YU
 The constant sheaf is formed in commutative rings before forgetting to rings,
 so the recorded K-flat predicate and sheaf tensor product apply directly.
 -/
+
+@[expose] public section
 
 universe w
 

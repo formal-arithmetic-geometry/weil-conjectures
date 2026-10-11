@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Sheaf.AlgebraicGeometry.LocallyFreeExtCohomology
-import WeilConjectures.AlgebraicGeometry.Cohomology.ProjectiveLine
-import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.TransitionUnits
+module
+
+public import Sheaf.AlgebraicGeometry.LocallyFreeExtCohomology
+public import WeilConjectures.AlgebraicGeometry.Cohomology.ProjectiveLine
+public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.TransitionUnits
 
 /-!
 # Naturality of the locally free Ext comparison
@@ -13,6 +15,8 @@ import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.TransitionUnits
 Source: Weil conjectures blueprint, `thm-sc-p1-duality`, proof, Step 1
 (blueprint: lem-sc-p1-ext-locally-free-naturality).
 -/
+
+@[expose] public section
 
 universe v
 

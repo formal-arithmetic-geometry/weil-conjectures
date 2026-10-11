@@ -1,4 +1,6 @@
-import Mathlib.CategoryTheory.Sites.Precoverage
+module
+
+public import Mathlib.CategoryTheory.Sites.Precoverage
 
 /-!
 # A family isomorphic to a covering is a covering
@@ -6,6 +8,8 @@ import Mathlib.CategoryTheory.Sites.Precoverage
 Source: literature/stacks-project/sites.tex, Definition 00VH and Definition 00VU
 (blueprint: lem-weil-pbc-site-covering-isomorphic-family)
 -/
+
+@[expose] public section
 
 open CategoryTheory
 

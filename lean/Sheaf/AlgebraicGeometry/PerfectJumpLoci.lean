@@ -3,16 +3,20 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Sheaf.AlgebraicGeometry.PseudoCoherentComplex
-import Sheaf.AlgebraicGeometry.DerivedFiberBetti
-import Mathlib.Topology.Constructible
-import Mathlib.Topology.Semicontinuity.Basic
+module
+
+public import Sheaf.AlgebraicGeometry.PseudoCoherentComplex
+public import Sheaf.AlgebraicGeometry.DerivedFiberBetti
+public import Mathlib.Topology.Constructible
+public import Mathlib.Topology.Semicontinuity.Basic
 
 /-! # Jump loci of pseudo-coherent complexes
 
 Source: Stacks Project, Derived Categories of Schemes, Lemma 36.31.1, Tag 0BDI
 (blueprint: lem-sc-perfect-jump-loci).
 -/
+
+@[expose] public section
 
 universe uX wX
 

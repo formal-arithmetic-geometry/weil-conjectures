@@ -3,11 +3,13 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group S1
 -/
-import Mathlib.CategoryTheory.Monoidal.Tor
-import Mathlib.Algebra.Category.ModuleCat.Monoidal.Basic
-import Mathlib.Algebra.Category.ModuleCat.Projective
-import Mathlib.Algebra.Category.ModuleCat.Abelian
-import Mathlib.Algebra.Homology.ShortComplex.ShortExact
+module
+
+public import Mathlib.CategoryTheory.Monoidal.Tor
+public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Basic
+public import Mathlib.Algebra.Category.ModuleCat.Projective
+public import Mathlib.Algebra.Category.ModuleCat.Abelian
+public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 
 /-!
 # Dimension shifting for Tor along a free presentation
@@ -15,6 +17,8 @@ import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 Source: Stacks Project, Algebra, proof of Tag 00S2, and Tags 00LY and 00LZ
 (blueprint: lem-weil-pbc-tor-dimension-shift-free).
 -/
+
+@[expose] public section
 
 universe u
 

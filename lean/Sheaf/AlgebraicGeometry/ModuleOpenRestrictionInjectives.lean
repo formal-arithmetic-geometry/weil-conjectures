@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import Sheaf.Paper.DerivedHomMayerVietoris
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Mathlib.Algebra.Homology.ExactSequence
-import Mathlib.CategoryTheory.Preadditive.Injective.Resolution
+module
+
+public import Sheaf.Paper.DerivedHomMayerVietoris
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Mathlib.Algebra.Homology.ExactSequence
+public import Mathlib.CategoryTheory.Preadditive.Injective.Resolution
 
 /-!
 # Exact restriction of module sheaves and injective objects
@@ -14,6 +16,8 @@ import Mathlib.CategoryTheory.Preadditive.Injective.Resolution
 Source: Stacks Project, Cohomology, Tags 01E1 and 02N5; Modules, Tags 01AJ and 01AK
 (blueprint: lem-weil-pbc-module-open-restriction-injectives).
 -/
+
+@[expose] public section
 
 universe u
 

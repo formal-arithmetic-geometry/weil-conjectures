@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Sheaf.AlgebraicGeometry.FpqcSingletonFullyFaithful
+module
+
+public import Sheaf.AlgebraicGeometry.FpqcSingletonFullyFaithful
 
 /-!
 # Canonical comparisons of pullback functors on scheme descent data
@@ -11,6 +13,8 @@ import Sheaf.AlgebraicGeometry.FpqcSingletonFullyFaithful
 Source: Stacks Project, Descent, Tags 02VS(3) and 023Y(1)--(2)
 (blueprint: lem-galois-fpqc-pullback-canonical-iso).
 -/
+
+@[expose] public section
 
 universe v
 

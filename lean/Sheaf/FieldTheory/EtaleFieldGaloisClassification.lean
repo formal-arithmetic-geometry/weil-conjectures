@@ -2,16 +2,20 @@
 Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 -/
-import Mathlib.FieldTheory.Galois.Infinite
-import Mathlib.FieldTheory.IsSepClosed
-import Mathlib.FieldTheory.SeparableClosure
-import Mathlib.Topology.Algebra.Group.Basic
+module
+
+public import Mathlib.FieldTheory.Galois.Infinite
+public import Mathlib.FieldTheory.IsSepClosed
+public import Mathlib.FieldTheory.SeparableClosure
+public import Mathlib.Topology.Algebra.Group.Basic
 
 /-!
 # Finite separable extensions and finite continuous Galois sets
 
 Source: Stacks Project, Tags 03SF and 03QR (blueprint: lem-exc-etale-field-galois-classification).
 -/
+
+@[expose] public section
 
 universe u v w w' z
 

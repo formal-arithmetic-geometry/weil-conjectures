@@ -1,6 +1,8 @@
-import Mathlib.RingTheory.AdicCompletion.Algebra
-import Mathlib.RingTheory.Noetherian.Defs
-import Mathlib.RingTheory.Flat.Basic
+module
+
+public import Mathlib.RingTheory.AdicCompletion.Algebra
+public import Mathlib.RingTheory.Noetherian.Defs
+public import Mathlib.RingTheory.Flat.Basic
 
 /-!
 # Flatness of completed flat modules
@@ -8,6 +10,8 @@ import Mathlib.RingTheory.Flat.Basic
 Source: literature/stacks-project/more-algebra.tex, Lemma Tag 0AGW (lemma-flat-after-completion).
 (blueprint: lem-weil-pbc-flat-module-completion-flat)
 -/
+
+@[expose] public section
 
 universe u v
 

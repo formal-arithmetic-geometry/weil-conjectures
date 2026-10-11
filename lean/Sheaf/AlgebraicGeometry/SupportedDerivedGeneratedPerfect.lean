@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group S1
 -/
-import Sheaf.AlgebraicGeometry.PerfectComplex
-import Mathlib.CategoryTheory.Limits.Shapes.Products
-import Mathlib.Topology.QuasiSeparated
+module
+
+public import Sheaf.AlgebraicGeometry.PerfectComplex
+public import Mathlib.CategoryTheory.Limits.Shapes.Products
+public import Mathlib.Topology.QuasiSeparated
 
 /-! # Building supported derived objects from a perfect complex
 
@@ -17,6 +19,8 @@ Coproducts are specified by colimiting cofans, so the statement does not require
 coproduct instance. Distinguished triangles are taken in the ambient derived category;
 the sequence objects lie in its full quasi-coherent subcategory.
 -/
+
+@[expose] public section
 
 universe u w
 

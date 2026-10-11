@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group G1
 -/
-import Mathlib.RingTheory.Noetherian.Defs
-import Mathlib.RingTheory.KrullDimension.Basic
-import Mathlib.RingTheory.Localization.FractionRing
-import Mathlib.FieldTheory.Finite.Basic
+module
+
+public import Mathlib.RingTheory.Noetherian.Defs
+public import Mathlib.RingTheory.KrullDimension.Basic
+public import Mathlib.RingTheory.Localization.FractionRing
+public import Mathlib.FieldTheory.Finite.Basic
 
 /-!
 # Krull–Akizuki Noetherianity for intermediate rings
@@ -14,6 +16,8 @@ import Mathlib.FieldTheory.Finite.Basic
 Source: Stacks Project, Algebra, Lemma 10.119.12 (Tag 00PG)
 (blueprint: lem-sc-krull-akizuki-noetherian).
 -/
+
+@[expose] public section
 
 universe uR uD uK uL
 

@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Mathlib.Algebra.DirectSum.Module
-import Mathlib.Algebra.Module.LocalizedModule.Exact
-import Sheaf.Algebra.Module.LocalizedHomogeneousPiece
+module
+
+public import Mathlib.Algebra.DirectSum.Module
+public import Mathlib.Algebra.Module.LocalizedModule.Exact
+public import Sheaf.Algebra.Module.LocalizedHomogeneousPiece
 
 /-!
 # Exactness of homogeneous module localization and degree-zero parts
@@ -13,6 +15,8 @@ import Sheaf.Algebra.Module.LocalizedHomogeneousPiece
 Source: Stacks Project, Cohomology of Schemes, Tag 09MR, Mayer–Vietoris paragraph
 (blueprint: lem-sc-graded-localization-exact).
 -/
+
+@[expose] public section
 
 universe u v₀ v₁ v₂ w
 

@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group G1
 -/
-import Mathlib.Algebra.Category.Ring.Colimits
-import Mathlib.AlgebraicGeometry.Morphisms.Etale
-import Mathlib.RingTheory.TensorProduct.Maps
+module
+
+public import Mathlib.Algebra.Category.Ring.Colimits
+public import Mathlib.AlgebraicGeometry.Morphisms.Etale
+public import Mathlib.RingTheory.TensorProduct.Maps
 
 /-!
 # Descent of etaleness along a directed colimit of rings
@@ -13,6 +15,8 @@ import Mathlib.RingTheory.TensorProduct.Maps
 Source: Stacks Project, Algebra, Lemma 10.168.7 (Tag 07RI)
 (blueprint: lem-weil-pbc-colimit-etale-ring-map).
 -/
+
+@[expose] public section
 
 universe u v
 

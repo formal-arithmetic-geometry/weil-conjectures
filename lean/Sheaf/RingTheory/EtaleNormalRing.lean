@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Mathlib.RingTheory.RingHom.Etale
-import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
-import Mathlib.RingTheory.Localization.AtPrime.Basic
+module
+
+public import Mathlib.RingTheory.RingHom.Etale
+public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
+public import Mathlib.RingTheory.Localization.AtPrime.Basic
 
 /-!
 # Normality ascends along etale ring maps
@@ -17,6 +19,8 @@ A normal ring (`def-weil-pbc-normal-ring`, Stacks Tags 0309 and 00GV) is written
 as in the landed `CommAlgCat.isDomain_isIntegrallyClosed_injective_of_etale_colimit`:
 every localization at a prime ideal is an integrally closed domain.
 -/
+
+@[expose] public section
 
 universe uA uB
 

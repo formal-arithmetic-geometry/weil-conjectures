@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Sheaf.AlgebraicGeometry.LocallyFreeExtCohomology
-import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Defs
+module
+
+public import Sheaf.AlgebraicGeometry.LocallyFreeExtCohomology
+public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Defs
 
 /-!
 # Naturality of the degree-zero boundary under pullback
@@ -12,6 +14,8 @@ import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Defs
 Source: Stacks Project, Cohomology Tag 0B3A, Derived Categories Tag 05TE, and
 Cohomology Section Tag 01DZ (blueprint: lem-sc-p1-boundary-connecting-naturality).
 -/
+
+@[expose] public section
 
 set_option autoImplicit false
 

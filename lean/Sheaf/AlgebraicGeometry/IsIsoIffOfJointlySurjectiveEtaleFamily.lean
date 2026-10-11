@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import Mathlib.Algebra.Category.Grp.AB
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+module
+
+public import Mathlib.Algebra.Category.Grp.AB
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-!
 # Isomorphisms of abelian étale sheaves are detected on an étale covering
@@ -12,6 +14,8 @@ import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 Source: Stacks Project, Étale Cohomology, Tag 0EZR, proof of (1), with Tags 03PU and 03Q1
 (blueprint: lem-weil-pbc-etale-cover-detects-iso).
 -/
+
+@[expose] public section
 
 universe u w
 

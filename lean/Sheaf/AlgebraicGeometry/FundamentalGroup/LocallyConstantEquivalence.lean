@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group S1
 -/
-import Sheaf.AlgebraicGeometry.GaloisCategories
-import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Restriction
-import WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsorDescent
+module
+
+public import Sheaf.AlgebraicGeometry.GaloisCategories
+public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Restriction
+public import WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsorDescent
 
 /-!
 # Finite étale covers as finite locally constant sheaves
@@ -16,6 +18,8 @@ The torsor construction and its converse are the existing `EtaleTorsor.toSheafTo
 and `EtaleTorsor.exists_toSheafTorsor_equiv_of_iso`; the theorem supplies the missing
 categorical equivalence and its natural compatibilities.
 -/
+
+@[expose] public section
 
 universe v
 

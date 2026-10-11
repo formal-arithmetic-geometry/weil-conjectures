@@ -1,7 +1,11 @@
-import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
-import Mathlib.Topology.Sheaves.Abelian
-import Mathlib.Topology.Sheaves.Sheaf
-import Mathlib.Topology.Compactness.Compact
+module
+
+public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
+public import Mathlib.Topology.Sheaves.Abelian
+public import Mathlib.Topology.Sheaves.Sheaf
+public import Mathlib.Topology.Compactness.Compact
+
+@[expose] public section
 
 universe u
 open CategoryTheory CategoryTheory.Limits Opposite TopologicalSpace

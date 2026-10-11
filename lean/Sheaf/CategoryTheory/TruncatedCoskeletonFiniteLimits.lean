@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group T1
 -/
-import Mathlib.AlgebraicTopology.SimplicialObject.Basic
-import Mathlib.CategoryTheory.Functor.KanExtension.Pointwise
-import Mathlib.CategoryTheory.Limits.Shapes.FiniteLimits
-import Mathlib.CategoryTheory.Limits.Preserves.Finite
+module
+
+public import Mathlib.AlgebraicTopology.SimplicialObject.Basic
+public import Mathlib.CategoryTheory.Functor.KanExtension.Pointwise
+public import Mathlib.CategoryTheory.Limits.Shapes.FiniteLimits
+public import Mathlib.CategoryTheory.Limits.Preserves.Finite
 
 /-!
 # Coskeleta of truncated simplicial objects as finite limits
@@ -14,6 +16,8 @@ import Mathlib.CategoryTheory.Limits.Preserves.Finite
 Source: literature/stacks-project/simplicial.tex, Lemmas 0183--0185 and
 hypercovering.tex, Lemma 01GD (blueprint: lem-weil-pbc-truncated-coskeleton-finite-limits)
 -/
+
+@[expose] public section
 
 universe u v w v'
 

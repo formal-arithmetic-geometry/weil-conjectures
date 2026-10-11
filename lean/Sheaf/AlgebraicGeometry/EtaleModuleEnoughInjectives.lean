@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import Mathlib.AlgebraicGeometry.Sites.AffineEtale
-import Mathlib.CategoryTheory.Sites.ConstantSheaf
-import Mathlib.Algebra.Category.ModuleCat.Sheaf
-import Mathlib.CategoryTheory.Preadditive.Injective.Basic
+module
+
+public import Mathlib.AlgebraicGeometry.Sites.AffineEtale
+public import Mathlib.CategoryTheory.Sites.ConstantSheaf
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf
+public import Mathlib.CategoryTheory.Preadditive.Injective.Basic
 
 /-!
 # Enough injectives for constant-coefficient etale module sheaves
@@ -15,6 +17,8 @@ Source: Stacks Project, Injectives, Theorems 01DU and 079H; used in Etale Cohomo
 Lemma 0A4C, first paragraph of the proof
 (blueprint: lem-weil-pbc-module-sheaves-enough-injectives).
 -/
+
+@[expose] public section
 
 universe u
 

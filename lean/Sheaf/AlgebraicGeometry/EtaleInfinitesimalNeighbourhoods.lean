@@ -3,11 +3,13 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group G1
 -/
-import Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
-import Mathlib.AlgebraicGeometry.Morphisms.Etale
-import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
-import Mathlib.AlgebraicGeometry.Noetherian
-import Mathlib.AlgebraicGeometry.Pullbacks
+module
+
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
+public import Mathlib.AlgebraicGeometry.Morphisms.Etale
+public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
+public import Mathlib.AlgebraicGeometry.Noetherian
+public import Mathlib.AlgebraicGeometry.Pullbacks
 
 /-!
 # Étaleness along a closed subscheme from its infinitesimal neighbourhoods
@@ -15,6 +17,8 @@ import Mathlib.AlgebraicGeometry.Pullbacks
 Source: More on Morphisms, Lemma 0A43 (part (2))
 (blueprint: lem-weil-pbc-etale-infinitesimal-neighbourhoods).
 -/
+
+@[expose] public section
 
 universe u
 

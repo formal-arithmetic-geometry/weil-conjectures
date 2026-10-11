@@ -3,11 +3,13 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group J1
 -/
-import Sheaf.AlgebraicGeometry.CommAlgebraSheaf
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
-import Mathlib.Algebra.Category.Ring.Constructions
-import Mathlib.AlgebraicGeometry.AffineScheme
-import Mathlib.AlgebraicGeometry.Pullbacks
+module
+
+public import Sheaf.AlgebraicGeometry.CommAlgebraSheaf
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
+public import Mathlib.Algebra.Category.Ring.Constructions
+public import Mathlib.AlgebraicGeometry.AffineScheme
+public import Mathlib.AlgebraicGeometry.Pullbacks
 
 /-!
 # Quasi-coherent algebras on nested affine opens
@@ -20,6 +22,8 @@ By `CommRingCat.isPushout_tensorProduct`, this says exactly that the canonical m
 `A(V) ⊗[𝒪(V)] 𝒪(U) → A(U)` is an isomorphism; its pure-tensor formula is
 `a ⊗ r ↦ res(a) * σ_U(r)`. This avoids choosing extra algebra instances for sections.
 -/
+
+@[expose] public section
 
 universe u
 

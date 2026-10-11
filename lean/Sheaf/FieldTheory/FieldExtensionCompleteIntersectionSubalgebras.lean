@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF lead L
 -/
-import Mathlib.Algebra.MvPolynomial.Basic
-import Mathlib.RingTheory.Ideal.Quotient.Operations
-import Mathlib.RingTheory.Regular.RegularSequence
+module
+
+public import Mathlib.Algebra.MvPolynomial.Basic
+public import Mathlib.RingTheory.Ideal.Quotient.Operations
+public import Mathlib.RingTheory.Regular.RegularSequence
 
 /-!
 # Complete-intersection subalgebras in field extensions
@@ -13,6 +15,8 @@ import Mathlib.RingTheory.Regular.RegularSequence
 Source: Stacks Project, Algebra, Lemma 07BV (blueprint:
 `lem-weil-pbc-field-extension-complete-intersection-subalgebras`).
 -/
+
+@[expose] public section
 
 universe u v
 

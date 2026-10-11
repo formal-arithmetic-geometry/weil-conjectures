@@ -2,7 +2,9 @@
 Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 -/
-import Mathlib.Topology.Spectral.Basic
+module
+
+public import Mathlib.Topology.Spectral.Basic
 
 /-!
 # Generalizations of quasi-compact subsets in spectral spaces
@@ -11,6 +13,8 @@ Source: Stacks Project, Topology, Lemma 0A31 (label `lemma-make-spectral-space`,
 implication (3) => (4) and the quasi-compactness of `W`.
 (blueprint: lem-weil-pbc-spectral-generalizations-of-quasi-compact)
 -/
+
+@[expose] public section
 
 universe u
 

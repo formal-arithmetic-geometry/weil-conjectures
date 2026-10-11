@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import Sheaf.AlgebraicGeometry.DerivedCategory
-import Sheaf.CategoryTheory.CompactlyGenerated
-import Mathlib.CategoryTheory.Triangulated.Subcategory
-import Mathlib.Topology.QuasiSeparated
+module
+
+public import Sheaf.AlgebraicGeometry.DerivedCategory
+public import Sheaf.CategoryTheory.CompactlyGenerated
+public import Mathlib.CategoryTheory.Triangulated.Subcategory
+public import Mathlib.Topology.QuasiSeparated
 
 /-! # Compact generation of the quasi-coherent derived category
 
@@ -14,6 +16,8 @@ Source: Stacks Project, Derived Categories of Schemes, Theorem 36.15.3 (Tag 09IS
 and Derived Categories, Definition 13.37.5 (Tag 09SQ)
 (blueprint: lem-pc-derived-qcoh-compact-generation).
 -/
+
+@[expose] public section
 
 universe u w
 

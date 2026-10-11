@@ -3,14 +3,18 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Mathlib.Algebra.Category.ModuleCat.Presheaf.ChangeOfRings
-import Mathlib.Topology.Sheaves.Sheaf
+module
+
+public import Mathlib.Algebra.Category.ModuleCat.Presheaf.ChangeOfRings
+public import Mathlib.Topology.Sheaves.Sheaf
 
 /-!
 # Change of rings for presheaves of modules
 
 Source: Stacks Project, Sheaves, Tag 006R (blueprint: lem-pc-presheaf-change-of-rings-adjunction)
 -/
+
+@[expose] public section
 
 universe u v w
 

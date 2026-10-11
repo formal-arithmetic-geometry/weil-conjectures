@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import Sheaf.AlgebraicGeometry.ProjectiveLinePower
-import Sheaf.AlgebraicGeometry.TorsionAbelianBaseChange
+module
+
+public import Sheaf.AlgebraicGeometry.ProjectiveLinePower
+public import Sheaf.AlgebraicGeometry.TorsionAbelianBaseChange
 
 /-!
 # Reduction of projective-space base change to the projective line
@@ -12,6 +14,8 @@ import Sheaf.AlgebraicGeometry.TorsionAbelianBaseChange
 Source: Stacks Project, Tag 0A4F, last paragraph
 (blueprint: lem-weil-pbc-reduction-projective-space).
 -/
+
+@[expose] public section
 
 universe u_reduction
 

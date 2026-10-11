@@ -3,18 +3,22 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import Mathlib.AlgebraicGeometry.Scheme
-import Mathlib.Algebra.Category.ModuleCat.Abelian
-import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
-import Mathlib.Algebra.Category.ModuleCat.Monoidal.Basic
-import Mathlib.Algebra.Category.ModuleCat.Projective
-import Mathlib.CategoryTheory.Monoidal.Tor
+module
+
+public import Mathlib.AlgebraicGeometry.Scheme
+public import Mathlib.Algebra.Category.ModuleCat.Abelian
+public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
+public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Basic
+public import Mathlib.Algebra.Category.ModuleCat.Projective
+public import Mathlib.CategoryTheory.Monoidal.Tor
 
 /-! # Stalkwise finite Tor dimension of scheme morphisms
 
 Source: Stacks Project, More on Morphisms, Lemma 37.61.11, condition (3), and
 Lemma 37.61.13, Tag 0B6G (blueprint: def-pc-perfect-morphism).
 -/
+
+@[expose] public section
 
 universe uTor
 

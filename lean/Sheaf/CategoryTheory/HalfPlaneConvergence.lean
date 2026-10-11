@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import Sheaf.CategoryTheory.ExactCoupleConvergence
+module
+
+public import Sheaf.CategoryTheory.ExactCoupleConvergence
 
 /-!
 # Half-plane convergence of an exact couple
@@ -11,6 +13,8 @@ import Sheaf.CategoryTheory.ExactCoupleConvergence
 Source: blueprint node thm-sp-half-plane-convergence, order 511; Stacks Project,
 Tags 011T and 012F (blueprint: thm-sp-half-plane-convergence).
 -/
+
+@[expose] public section
 
 universe u v
 

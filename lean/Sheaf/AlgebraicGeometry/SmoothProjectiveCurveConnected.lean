@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Sheaf.AlgebraicGeometry.SmoothProjectiveCurve
-import WeilConjectures.AlgebraicGeometry.Curve
+module
+
+public import Sheaf.AlgebraicGeometry.SmoothProjectiveCurve
+public import WeilConjectures.AlgebraicGeometry.Curve
 
 /-!
 # Smooth projective curves are smooth connected curves
@@ -12,6 +14,8 @@ import WeilConjectures.AlgebraicGeometry.Curve
 Source: the blueprint of the Weil conjectures, chapter `sec-abelian-varieties`, unit
 `sk-def-av-jacobian`, node order 455 (blueprint: lem-pc-curves-are-sc).
 -/
+
+@[expose] public section
 
 universe u
 

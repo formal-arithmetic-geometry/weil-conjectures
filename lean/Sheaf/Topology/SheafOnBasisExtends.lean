@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: E1
 -/
-import Mathlib.Topology.Sheaves.Sheaf
-import Mathlib.Algebra.Category.Grp.Basic
+module
+
+public import Mathlib.Topology.Sheaves.Sheaf
+public import Mathlib.Algebra.Category.Grp.Basic
 
 /-!
 # Extending a sheaf of abelian groups from a basis
@@ -12,6 +14,8 @@ import Mathlib.Algebra.Category.Grp.Basic
 Source: Stacks Project, Sheaves on Spaces, Section 009H, Tags 009N and 009Q
 (blueprint: lem-weil-pbc-sheaf-on-basis-extends).
 -/
+
+@[expose] public section
 
 set_option autoImplicit false
 

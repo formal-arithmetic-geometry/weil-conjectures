@@ -1,8 +1,10 @@
-import Mathlib.AlgebraicGeometry.Sites.Etale
-import Mathlib.AlgebraicGeometry.Restrict
-import Mathlib.CategoryTheory.Sites.CoverPreserving
-import Mathlib.CategoryTheory.Sites.Pullback
-import Mathlib.Topology.Sheaves.Sheaf
+module
+
+public import Mathlib.AlgebraicGeometry.Sites.Etale
+public import Mathlib.AlgebraicGeometry.Restrict
+public import Mathlib.CategoryTheory.Sites.CoverPreserving
+public import Mathlib.CategoryTheory.Sites.Pullback
+public import Mathlib.Topology.Sheaves.Sheaf
 
 /-!
 # The inclusion of the Zariski site into the small étale site
@@ -15,6 +17,8 @@ Lemma Tag 00X5 (blueprint: lem-weil-pbc-zariski-etale-inclusion-morphism-of-site
 * `zariski_to_etale_is_morphism` records the inclusion functor, its continuity,
   preservation of finite limits, and exact sheaf inverse image.
 -/
+
+@[expose] public section
 
 open CategoryTheory CategoryTheory.Limits
 open AlgebraicGeometry

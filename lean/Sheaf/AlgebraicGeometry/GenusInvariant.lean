@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import WeilConjectures.AlgebraicGeometry.AbelianVariety.Jacobian
-import Mathlib.FieldTheory.IsAlgClosed.Basic
-import Mathlib.CategoryTheory.Limits.Shapes.Pullback.Pasting
+module
+
+public import WeilConjectures.AlgebraicGeometry.AbelianVariety.Jacobian
+public import Mathlib.FieldTheory.IsAlgClosed.Basic
+public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.Pasting
 
 /-!
 # Genus and Jacobians under algebraically closed extension
@@ -13,6 +15,8 @@ import Mathlib.CategoryTheory.Limits.Shapes.Pullback.Pasting
 Source: blueprint, `sec-curve-estimates/sk-prop-ext-invariance`, order 1030
 (blueprint: lem-sc-genus-invariant).
 -/
+
+@[expose] public section
 
 universe u
 

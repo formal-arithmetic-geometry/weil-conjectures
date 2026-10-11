@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group J1
 -/
-import Sheaf.RingTheory.FormallySmoothAdic
-import Sheaf.RingTheory.GRing
+module
+
+public import Sheaf.RingTheory.FormallySmoothAdic
+public import Sheaf.RingTheory.GRing
 
 /-!
 # Flatness and geometric regularity of the closed fibre of an adically formally smooth map
@@ -12,6 +14,8 @@ import Sheaf.RingTheory.GRing
 Source: Stacks Project, More on Algebra, Proposition 15.41.5 (Tag 07NQ), implication
 (3) ⇒ (1) (blueprint: lem-weil-pbc-fs-adic-flat-geometrically-regular-closed-fibre).
 -/
+
+@[expose] public section
 
 universe u v
 

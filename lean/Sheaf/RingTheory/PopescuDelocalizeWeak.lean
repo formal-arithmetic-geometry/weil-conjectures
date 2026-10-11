@@ -3,11 +3,13 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group G1
 -/
-import Sheaf.RingTheory.PopescuResolution
-import Mathlib.RingTheory.Localization.AtPrime.Basic
-import Mathlib.RingTheory.Ideal.MinimalPrime.Basic
-import Mathlib.RingTheory.FiniteStability
-import Mathlib.RingTheory.Localization.Submodule
+module
+
+public import Sheaf.RingTheory.PopescuResolution
+public import Mathlib.RingTheory.Localization.AtPrime.Basic
+public import Mathlib.RingTheory.Ideal.MinimalPrime.Basic
+public import Mathlib.RingTheory.FiniteStability
+public import Mathlib.RingTheory.Localization.Submodule
 
 /-!
 # Weak delocalization of a Popescu resolution
@@ -15,6 +17,8 @@ import Mathlib.RingTheory.Localization.Submodule
 Source: Stacks Project, Smoothing Ring Maps, Lemma 07F9
 (blueprint: lem-weil-pbc-popescu-delocalize-weak).
 -/
+
+@[expose] public section
 
 universe u v t
 

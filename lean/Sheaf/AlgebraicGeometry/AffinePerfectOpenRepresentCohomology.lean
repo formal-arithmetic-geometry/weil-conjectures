@@ -3,14 +3,18 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import Sheaf.AlgebraicGeometry.KoszulOpenSystem
-import Sheaf.AlgebraicGeometry.PerfectComplex
+module
+
+public import Sheaf.AlgebraicGeometry.KoszulOpenSystem
+public import Sheaf.AlgebraicGeometry.PerfectComplex
 
 /-! # Koszul perfect objects represent cohomology classes on a principal open
 
 Source: Stacks Project, Section 36.9, Tags 08CX, 08DC, and 08DD
 (blueprint: lem-sc-affine-perfect-open-represent-cohomology).
 -/
+
+@[expose] public section
 
 universe uMain wMain
 

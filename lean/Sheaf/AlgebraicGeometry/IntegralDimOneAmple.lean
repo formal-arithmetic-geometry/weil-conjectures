@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Mathlib.AlgebraicGeometry.Morphisms.Separated
-import Mathlib.AlgebraicGeometry.Noetherian
-import Mathlib.Topology.KrullDimension
-import Sheaf.AlgebraicGeometry.Ample
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.Separated
+public import Mathlib.AlgebraicGeometry.Noetherian
+public import Mathlib.Topology.KrullDimension
+public import Sheaf.AlgebraicGeometry.Ample
 
 /-! # Ample invertible modules on integral curves
 
@@ -14,6 +16,8 @@ Source: Stacks Project, Varieties, Lemma 09ND
 (varieties-lemma-dim-1-noetherian-integral-separated-has-ample).
 (blueprint: lem-sc-integral-dim-one-ample).
 -/
+
+@[expose] public section
 
 universe u
 

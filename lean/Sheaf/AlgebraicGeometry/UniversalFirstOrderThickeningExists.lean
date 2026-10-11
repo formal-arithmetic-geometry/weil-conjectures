@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified
-import Sheaf.AlgebraicGeometry.UniversalFirstOrderThickening
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified
+public import Sheaf.AlgebraicGeometry.UniversalFirstOrderThickening
 
 /-!
 # Existence and uniqueness of universal first order thickenings
@@ -13,6 +15,8 @@ Source: Stacks Project, More on Morphisms, Lemma 37.7.1 (Tag 04F3), and the open
 paragraph of Section 37.7 (Tag 04F2)
 (blueprint: lem-weil-pbc-universal-first-order-thickening-exists).
 -/
+
+@[expose] public section
 
 universe u
 

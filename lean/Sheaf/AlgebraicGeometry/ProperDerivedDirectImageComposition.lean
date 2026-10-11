@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group R1
 -/
-import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
-import Mathlib.AlgebraicGeometry.Noetherian
-import Mathlib.AlgebraicGeometry.Morphisms.Proper
+module
+
+public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
+public import Mathlib.AlgebraicGeometry.Noetherian
+public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 
 /-!
 # Coherent composition of proper derived direct images
@@ -13,6 +15,8 @@ import Mathlib.AlgebraicGeometry.Morphisms.Proper
 Source: Stacks Project, Cohomology, Tag 0D5T, and Duality for Schemes, Tag 0ATX
 (blueprint: lem-pc-proper-derived-direct-image-composition).
 -/
+
+@[expose] public section
 
 universe u w
 

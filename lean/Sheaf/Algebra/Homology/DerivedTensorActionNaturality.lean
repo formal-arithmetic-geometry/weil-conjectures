@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import Sheaf.Algebra.Homology.BalancedDerivedTensorModel
+module
+
+public import Sheaf.Algebra.Homology.BalancedDerivedTensorModel
 
 /-!
 # Scalar actions and the balanced derived tensor comparison
@@ -15,6 +17,8 @@ The target of `c` is the K-flat model `P ⊗_A (A ⊗_R R')` of the second deriv
 The mixed tensor definition already incorporates the associativity identification.
 Module structures are passed explicitly, so the signature has no local notation or instances.
 -/
+
+@[expose] public section
 
 set_option autoImplicit false
 

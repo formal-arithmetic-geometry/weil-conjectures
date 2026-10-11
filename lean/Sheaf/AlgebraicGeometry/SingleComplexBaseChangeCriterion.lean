@@ -3,16 +3,20 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under the Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group R1
 -/
-import Sheaf.AlgebraicGeometry.CanonicalPullbackTensorComparison
-import Sheaf.AlgebraicGeometry.SchemeDerivedBaseChangeMap
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
+module
+
+public import Sheaf.AlgebraicGeometry.CanonicalPullbackTensorComparison
+public import Sheaf.AlgebraicGeometry.SchemeDerivedBaseChangeMap
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 
 /-! # Single-complex criterion for derived direct-image base change
 
 Source: Stacks Project, perfect.tex, Tags 0DJ8, 0DJ9 and 0DJA(1)
 (blueprint: lem-pc-rf-base-change-single-complex-criterion).
 -/
+
+@[expose] public section
 
 universe u w
 open CategoryTheory CategoryTheory.Limits MonoidalCategory

@@ -3,16 +3,20 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Mathlib.Algebra.Category.CommAlgCat.Basic
-import Mathlib.AlgebraicGeometry.Morphisms.Smooth
-import Mathlib.AlgebraicGeometry.Morphisms.Etale
-import Mathlib.RingTheory.Ideal.Quotient.Defs
+module
+
+public import Mathlib.Algebra.Category.CommAlgCat.Basic
+public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
+public import Mathlib.AlgebraicGeometry.Morphisms.Etale
+public import Mathlib.RingTheory.Ideal.Quotient.Defs
 
 /-! # Sections of smooth algebras modulo an ideal lift over an étale neighbourhood
 
 Source: Stacks Project, More on Algebra, Lemma Tag 07M7
 (blueprint: lem-weil-pbc-smooth-section-etale-lift).
 -/
+
+@[expose] public section
 
 universe u
 

@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import Mathlib.CategoryTheory.Abelian.Injective.Resolution
+module
+
+public import Mathlib.CategoryTheory.Abelian.Injective.Resolution
 
 /-!
 # Horseshoe lemma with prescribed end resolutions
@@ -11,6 +13,8 @@ import Mathlib.CategoryTheory.Abelian.Injective.Resolution
 Source: Stacks Project, Derived Categories, Tag 013T, proof Step 2, specialized to objects
 (blueprint: lem-sp-horseshoe-prescribed-resolutions).
 -/
+
+@[expose] public section
 
 universe v u
 

@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import Sheaf.AlgebraicGeometry.EtaleSheaves
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
-import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
-import Mathlib.CategoryTheory.Abelian.RightDerived
+module
+
+public import Sheaf.AlgebraicGeometry.EtaleSheaves
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
+public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
+public import Mathlib.CategoryTheory.Abelian.RightDerived
 
 /-!
 # Abelian cohomology of injective etale module sheaves
@@ -14,6 +16,8 @@ import Mathlib.CategoryTheory.Abelian.RightDerived
 Source: Stacks Project, Cohomology on Sites, Lemma 03FD, second paragraph of the proof
 (blueprint: lem-weil-pbc-injective-module-abelian-acyclic).
 -/
+
+@[expose] public section
 
 universe u
 

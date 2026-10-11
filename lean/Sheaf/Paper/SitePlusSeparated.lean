@@ -3,13 +3,17 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group T1
 -/
-import Sheaf.CategoryTheory.Sites.SitePlusConstructionPresheaf
+module
+
+public import Sheaf.CategoryTheory.Sites.SitePlusConstructionPresheaf
 
 /-! # The plus construction is separated and injects into its double plus.
 
 Source: Stacks Project, Sites, Theorem 00WB (parts (1) and (2)).
 (blueprint: lem-weil-pbc-sheafification-plus-separated).
 -/
+
+@[expose] public section
 
 universe u w
 

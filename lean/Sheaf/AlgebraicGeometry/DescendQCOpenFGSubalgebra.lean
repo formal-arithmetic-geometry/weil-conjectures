@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
-import WeilConjectures.AlgebraicGeometry.PicardFunctor
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
+public import WeilConjectures.AlgebraicGeometry.PicardFunctor
 
 /-!
 # Descent of quasi-compact opens to finitely generated subalgebras
@@ -12,6 +14,8 @@ import WeilConjectures.AlgebraicGeometry.PicardFunctor
 Source: Stacks Project, Varieties, Tag 0388 (`lemma-descend-open`)
 (blueprint: lem-weil-pbc-descend-qc-open-fg-subalgebra).
 -/
+
+@[expose] public section
 
 universe u
 

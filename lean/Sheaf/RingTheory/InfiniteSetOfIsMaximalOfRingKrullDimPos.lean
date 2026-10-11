@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Mathlib.RingTheory.FiniteType
-import Mathlib.RingTheory.KrullDimension.Basic
+module
+
+public import Mathlib.RingTheory.FiniteType
+public import Mathlib.RingTheory.KrullDimension.Basic
 
 /-!
 # Infinitely many maximal ideals in a positive-dimensional finite type domain
@@ -12,6 +14,8 @@ import Mathlib.RingTheory.KrullDimension.Basic
 Source: Stacks Project, Algebra, Tags 00G1 and 00FV, affine positive-dimension argument
 (blueprint: lem-sc-fg-domain-positive-dimension-infinite-maximals).
 -/
+
+@[expose] public section
 
 universe u v
 

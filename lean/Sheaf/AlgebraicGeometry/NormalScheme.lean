@@ -3,11 +3,13 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group J1
 -/
-import Mathlib.AlgebraicGeometry.Properties
-import Mathlib.AlgebraicGeometry.Morphisms.Etale
-import Mathlib.AlgebraicGeometry.Morphisms.Finite
-import Mathlib.FieldTheory.IsAlgClosed.Basic
-import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
+module
+
+public import Mathlib.AlgebraicGeometry.Properties
+public import Mathlib.AlgebraicGeometry.Morphisms.Etale
+public import Mathlib.AlgebraicGeometry.Morphisms.Finite
+public import Mathlib.FieldTheory.IsAlgClosed.Basic
+public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
 
 /-!
 # Normal schemes, Galois covers and deck groups
@@ -20,6 +22,8 @@ The other notions in this node already exist as `AlgebraicGeometry.IsIntegral`,
 `AlgebraicGeometry.GeometricallyReduced`. The existing `Scheme.GaloisCover` requires a finite
 group, so `Scheme.GaloisCoverAction` covers the unrestricted group in the source.
 -/
+
+@[expose] public section
 
 universe u v
 

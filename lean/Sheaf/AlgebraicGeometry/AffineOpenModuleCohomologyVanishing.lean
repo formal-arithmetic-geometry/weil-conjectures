@@ -3,16 +3,20 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group J1
 -/
-import Sheaf.AlgebraicGeometry.Coherent
-import Sheaf.Paper.PQFCohomology
-import Sheaf.Topology.OpenModuleCohomology
-import Mathlib.AlgebraicGeometry.AffineScheme
+module
+
+public import Sheaf.AlgebraicGeometry.Coherent
+public import Sheaf.Paper.PQFCohomology
+public import Sheaf.Topology.OpenModuleCohomology
+public import Mathlib.AlgebraicGeometry.AffineScheme
 
 /-! # Vanishing of higher module cohomology on affine opens
 
 Source: Stacks Project, Cohomology of Schemes, Lemma 30.2.2, Tag 01XB
 (blueprint: pqf-lem-affine-vanishing).
 -/
+
+@[expose] public section
 
 universe u
 

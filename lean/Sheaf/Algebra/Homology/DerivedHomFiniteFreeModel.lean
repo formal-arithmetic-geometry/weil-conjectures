@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import Sheaf.Algebra.Homology.DerivedInternalHom
-import Sheaf.Paper.DerivedHomMayerVietoris
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
+module
+
+public import Sheaf.Algebra.Homology.DerivedInternalHom
+public import Sheaf.Paper.DerivedHomMayerVietoris
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
 
 /-!
 # Derived internal Hom from a bounded-above finite free model
@@ -13,6 +15,8 @@ import Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
 Source: Stacks Project, Cohomology, Tag 0GM8, case (2), and Cohomology on Sites,
 Section 08J7 (blueprint: lem-sc-derived-hom-finite-free-model).
 -/
+
+@[expose] public section
 
 universe u w
 

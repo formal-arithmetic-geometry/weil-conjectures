@@ -1,6 +1,10 @@
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Mathlib.CategoryTheory.Preadditive.Injective.Basic
-import Sheaf.CategoryTheory.SiteCechComplex
+module
+
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Mathlib.CategoryTheory.Preadditive.Injective.Basic
+public import Sheaf.CategoryTheory.SiteCechComplex
+
+@[expose] public section
 
 universe u w
 

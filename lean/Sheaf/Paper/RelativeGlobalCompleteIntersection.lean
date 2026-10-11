@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group J1
 -/
-import Mathlib.Algebra.MvPolynomial.Basic
-import Mathlib.RingTheory.LocalRing.ResidueField.Fiber
-import Mathlib.RingTheory.Ideal.Quotient.Operations
-import Mathlib.Topology.KrullDimension
+module
+
+public import Mathlib.Algebra.MvPolynomial.Basic
+public import Mathlib.RingTheory.LocalRing.ResidueField.Fiber
+public import Mathlib.RingTheory.Ideal.Quotient.Operations
+public import Mathlib.Topology.KrullDimension
 
 /-!
 # Relative global complete intersections
@@ -14,6 +16,8 @@ import Mathlib.Topology.KrullDimension
 Source: Stacks Project, Algebra, Definition Tag 00SP
 (blueprint: def-weil-pbc-relative-global-complete-intersection).
 -/
+
+@[expose] public section
 
 namespace Algebra
 

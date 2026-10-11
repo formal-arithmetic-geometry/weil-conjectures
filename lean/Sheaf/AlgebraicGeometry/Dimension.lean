@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF lead L
 -/
-import Mathlib.AlgebraicGeometry.Fiber
-import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
-import Mathlib.RingTheory.KrullDimension.Basic
-import Mathlib.Topology.KrullDimension
+module
+
+public import Mathlib.AlgebraicGeometry.Fiber
+public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
+public import Mathlib.RingTheory.KrullDimension.Basic
+public import Mathlib.Topology.KrullDimension
 
 /-!
 # Dimension and relative dimension of schemes
@@ -29,6 +31,8 @@ Tags 04MT and 04MU (dimension of a scheme via its local rings).
 * `AlgebraicGeometry.Scheme.dim_eq_topologicalKrullDim`: `Scheme.dim X` is the Krull dimension
   of the underlying topological space.
 -/
+
+@[expose] public section
 
 universe u
 

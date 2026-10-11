@@ -3,19 +3,23 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group U1
 -/
-import Sheaf.Algebra.Homology.FilteredComplexSubquotients
-import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
-import Mathlib.Algebra.Category.ModuleCat.Abelian
-import Mathlib.RingTheory.RingHom.Flat
-import Mathlib.Algebra.Homology.ShortComplex.ExactFunctor
-import Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
-import Mathlib.CategoryTheory.Adjunction.Additive
+module
+
+public import Sheaf.Algebra.Homology.FilteredComplexSubquotients
+public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
+public import Mathlib.Algebra.Category.ModuleCat.Abelian
+public import Mathlib.RingTheory.RingHom.Flat
+public import Mathlib.Algebra.Homology.ShortComplex.ExactFunctor
+public import Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
+public import Mathlib.CategoryTheory.Adjunction.Additive
 
 /-! # Scalar extension of filtered complexes
 
 Source: Stacks Project, Homology, Tag 012K; Cohomology of Schemes, Tag 02KH
 (blueprint: def-pc-flat-filtered-scalar-extension).
 -/
+
+@[expose] public section
 
 universe uS vS wS
 

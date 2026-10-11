@@ -3,13 +3,15 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import Sheaf.RingTheory.MinimalGradedPresentation
-import Mathlib.Algebra.Category.ModuleCat.Abelian
-import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
-import Mathlib.Algebra.Category.ModuleCat.Monoidal.Basic
-import Mathlib.Algebra.Category.ModuleCat.Projective
-import Mathlib.CategoryTheory.Monoidal.Tor
-import Mathlib.LinearAlgebra.Quotient.Basic
+module
+
+public import Sheaf.RingTheory.MinimalGradedPresentation
+public import Mathlib.Algebra.Category.ModuleCat.Abelian
+public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
+public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Basic
+public import Mathlib.Algebra.Category.ModuleCat.Projective
+public import Mathlib.CategoryTheory.Monoidal.Tor
+public import Mathlib.LinearAlgebra.Quotient.Basic
 
 /-!
 # Tor one of a minimal finite graded free presentation
@@ -19,6 +21,8 @@ blueprint `lem-sc-p1-graded-resolution`, proof;
 Stacks Project, Algebra, Tag 00M0 and Section 00LY
 (blueprint: lem-sc-p1-minimal-presentation-tor).
 -/
+
+@[expose] public section
 
 universe v
 

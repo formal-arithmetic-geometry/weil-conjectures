@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group J1
 -/
-import Mathlib.AlgebraicGeometry.Sites.EtalePoint
-import Mathlib.CategoryTheory.Sites.Point.Skyscraper
-import Mathlib.Algebra.Homology.HomologicalComplexAbelian
+module
+
+public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
+public import Mathlib.CategoryTheory.Sites.Point.Skyscraper
+public import Mathlib.Algebra.Homology.HomologicalComplexAbelian
 
 /-!
 # Colimits and geometric stalks
@@ -13,6 +15,8 @@ import Mathlib.Algebra.Homology.HomologicalComplexAbelian
 Source: Stacks Project, Tags 03PN and 04K1; blueprint node
 `lem-kun-stalks-commute-colimits` (blueprint: lem-kun-stalks-commute-colimits).
 -/
+
+@[expose] public section
 
 universe u
 

@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import Mathlib.FieldTheory.IsAlgClosed.Basic
-import Mathlib.Data.ZMod.Basic
+module
+
+public import Mathlib.FieldTheory.IsAlgClosed.Basic
+public import Mathlib.Data.ZMod.Basic
 
 /-!
 # Artin–Schreier map over an algebraically closed field
@@ -12,6 +14,8 @@ import Mathlib.Data.ZMod.Basic
 Source: blueprint sec-abelian-varieties/sk-prop-av-lang-steinberg/lem-sc-artin-schreier-k.md
 (blueprint: lem-sc-artin-schreier-k)
 -/
+
+@[expose] public section
 
 namespace IsAlgClosed
 

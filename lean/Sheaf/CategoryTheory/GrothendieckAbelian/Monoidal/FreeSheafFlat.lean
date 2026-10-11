@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import Mathlib.CategoryTheory.Generator.Sheaf
-import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolution
+module
+
+public import Mathlib.CategoryTheory.Generator.Sheaf
+public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolution
 
 /-!
 # Flatness of the sheafified free presheaf
@@ -17,6 +19,8 @@ lem-weil-pbc-free-sheaf-flat).
 The sheaf associated to the free presheaf on a representable, with a flat
 coefficient object, is flat.
 -/
+
+@[expose] public section
 
 universe u' u
 

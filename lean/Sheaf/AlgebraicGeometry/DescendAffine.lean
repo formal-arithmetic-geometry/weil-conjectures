@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Sheaf.AlgebraicGeometry.LimitAffineTransition
+module
+
+public import Sheaf.AlgebraicGeometry.LimitAffineTransition
 
 /-!
 # Affineness descends to a finite stage
@@ -11,6 +13,8 @@ import Sheaf.AlgebraicGeometry.LimitAffineTransition
 Source: Stacks Project, Limits, Lemma 01ZN in Situation 081D
 (blueprint: lem-weil-pbc-descend-affine).
 -/
+
+@[expose] public section
 
 universe u
 

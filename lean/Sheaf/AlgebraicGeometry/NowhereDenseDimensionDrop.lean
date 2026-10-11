@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group G1
 -/
-import Mathlib.AlgebraicGeometry.Noetherian
-import Mathlib.Topology.KrullDimension
-import Mathlib.Topology.GDelta.Basic
+module
+
+public import Mathlib.AlgebraicGeometry.Noetherian
+public import Mathlib.Topology.KrullDimension
+public import Mathlib.Topology.GDelta.Basic
 
 /-!
 # Dimension drop for nowhere-dense closed subsets
@@ -13,6 +15,8 @@ import Mathlib.Topology.GDelta.Basic
 Source: Stacks Project, Tag 02P2, the nowhere-dense closed support and the finite-dimensional
 Noetherian dimension argument (blueprint: lem-sc-hilbert-nowhere-dense-dimension-drop).
 -/
+
+@[expose] public section
 
 universe u
 

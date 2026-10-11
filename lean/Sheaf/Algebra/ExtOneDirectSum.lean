@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import Mathlib.Algebra.DirectSum.Module
-import Mathlib.Algebra.Exact.Basic
+module
+
+public import Mathlib.Algebra.DirectSum.Module
+public import Mathlib.Algebra.Exact.Basic
 
 /-!
 # Ext one of a direct sum is the product of Ext one
@@ -21,6 +23,8 @@ surjectivity clause and its injectivity clause, with classes compared by endpoin
 linear isomorphisms. The pullback `E ×_P C_j` is the submodule
 `{(e, c) | v e = ι_j c}` of `E × C_j`, with the maps `n ↦ (u n, 0)` and `(e, c) ↦ c`.
 -/
+
+@[expose] public section
 
 universe u w x y z z'
 

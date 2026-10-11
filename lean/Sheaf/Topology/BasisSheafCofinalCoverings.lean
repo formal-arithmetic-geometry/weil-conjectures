@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: G1
 -/
-import Mathlib.Topology.Sets.Opens
-import Mathlib.CategoryTheory.Category.Preorder
-import Mathlib.CategoryTheory.Types.Basic
+module
+
+public import Mathlib.Topology.Sets.Opens
+public import Mathlib.CategoryTheory.Category.Preorder
+public import Mathlib.CategoryTheory.Types.Basic
 
 /-!
 # Gluing on cofinal coverings of a basis
@@ -13,6 +15,8 @@ import Mathlib.CategoryTheory.Types.Basic
 Source: Stacks Project, Sheaves on Spaces, Tags 009J, 009K and 009L
 (blueprint: lem-weil-pbc-basis-sheaf-cofinal-coverings).
 -/
+
+@[expose] public section
 
 set_option autoImplicit false
 

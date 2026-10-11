@@ -3,12 +3,14 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import Sheaf.RingTheory.CompleteIntersectionOverField
-import WeilConjectures.Mathlib.Topology.KrullDimension
-import Mathlib.RingTheory.Ideal.Cotangent
-import Mathlib.RingTheory.Localization.AtPrime.Basic
-import Mathlib.Algebra.Module.LocalizedModule.Basic
-import Mathlib.LinearAlgebra.Basis.Defs
+module
+
+public import Sheaf.RingTheory.CompleteIntersectionOverField
+public import WeilConjectures.Mathlib.Topology.KrullDimension
+public import Mathlib.RingTheory.Ideal.Cotangent
+public import Mathlib.RingTheory.Localization.AtPrime.Basic
+public import Mathlib.Algebra.Module.LocalizedModule.Basic
+public import Mathlib.LinearAlgebra.Basis.Defs
 
 /-!
 # Rank of the conormal module at a complete intersection point
@@ -16,6 +18,8 @@ import Mathlib.LinearAlgebra.Basis.Defs
 Source: Stacks Project, Algebra, Lemma 00SC, implication (1) implies (4)
 (blueprint: lem-weil-pbc-lci-conormal-free-rank-codimension).
 -/
+
+@[expose] public section
 
 universe u
 

@@ -2,10 +2,12 @@
 Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 -/
-import Sheaf.AlgebraicGeometry.FpqcSingletonFullyFaithful
-import Mathlib.AlgebraicGeometry.Morphisms.Finite
-import Mathlib.AlgebraicGeometry.Morphisms.Etale
-import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
+module
+
+public import Sheaf.AlgebraicGeometry.FpqcSingletonFullyFaithful
+public import Mathlib.AlgebraicGeometry.Morphisms.Finite
+public import Mathlib.AlgebraicGeometry.Morphisms.Etale
+public import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
 
 /-!
 # Finite etale descent data
@@ -14,6 +16,8 @@ Source: Stacks Project, Descent, Definition 35.34.1 (Tag 023V), and the
 finite-etale specialization in the blueprint's `lem-galois-descent`
 (blueprint: def-galois-finite-etale-descent-data).
 -/
+
+@[expose] public section
 
 universe u
 

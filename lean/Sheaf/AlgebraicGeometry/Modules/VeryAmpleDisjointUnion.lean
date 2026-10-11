@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group J1
 -/
-import WeilConjectures.AlgebraicGeometry.Modules.Ample
-import Sheaf.AlgebraicGeometry.TensorPullback
+module
+
+public import WeilConjectures.AlgebraicGeometry.Modules.Ample
+public import Sheaf.AlgebraicGeometry.TensorPullback
 
 /-!
 # Very ampleness on a finite disjoint union
@@ -12,6 +14,8 @@ import Sheaf.AlgebraicGeometry.TensorPullback
 Source: blueprint `sec-picard-framework/sk-thm-picard-rr/lem-pc-ample-positive-degree.md`,
 proof, part (⇐) (blueprint: lem-pc-very-ample-disjoint-union).
 -/
+
+@[expose] public section
 
 universe w v
 

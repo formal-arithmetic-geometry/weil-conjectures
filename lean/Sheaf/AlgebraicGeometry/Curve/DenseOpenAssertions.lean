@@ -3,12 +3,14 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Sheaf.AlgebraicGeometry.ConstructibleTorsionCurveSheaf
-import WeilConjectures.AlgebraicGeometry.Curve.Assertions
-import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
-import Mathlib.Algebra.Category.Grp.ZModuleEquivalence
-import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
-import Mathlib.Algebra.Ring.ULift
+module
+
+public import Sheaf.AlgebraicGeometry.ConstructibleTorsionCurveSheaf
+public import WeilConjectures.AlgebraicGeometry.Curve.Assertions
+public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
+public import Mathlib.Algebra.Category.Grp.ZModuleEquivalence
+public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
+public import Mathlib.Algebra.Ring.ULift
 
 /-!
 # The eight curve assertions on a dense open
@@ -16,6 +18,8 @@ import Mathlib.Algebra.Ring.ULift
 Source: Stacks Project, Etale Cohomology, Lemma 0GJA, Situation 0A52
 (blueprint: lem-weil-pbc-curve-assertions-dense-open).
 -/
+
+@[expose] public section
 
 universe u
 

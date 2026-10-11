@@ -3,11 +3,13 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import WeilConjectures.ConstructibleSheaf.Defs
-import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
-import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCategory
-import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
-import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
+module
+
+public import WeilConjectures.ConstructibleSheaf.Defs
+public import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
+public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCategory
+public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
+public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 
 /-!
 # Sheaves on the small etale site
@@ -22,6 +24,8 @@ Source: the blueprint of the Weil conjectures, chapter `sec-abelian-varieties`, 
 * `IsConstructibleEtaleSheafOfSets`: finite locally constant on constructible strata.
 * `HasTorsionEtaleCohomology`: derived objects with torsion cohomology sheaves.
 -/
+
+@[expose] public section
 
 universe u
 

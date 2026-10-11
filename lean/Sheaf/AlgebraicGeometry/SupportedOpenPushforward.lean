@@ -3,15 +3,19 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group G1
 -/
-import Sheaf.AlgebraicGeometry.PerfectComplex
-import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
-import Sheaf.Algebra.Homology.OpenRestrictionAdjunctionExact
+module
+
+public import Sheaf.AlgebraicGeometry.PerfectComplex
+public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
+public import Sheaf.Algebra.Homology.OpenRestrictionAdjunctionExact
 
 /-! # Perfect pushforward and canonical maps for supported open inclusions
 
 Source: Stacks Project, Tags 08DP and 08DF
 (blueprint: lem-pc-supported-open-pushforward).
 -/
+
+@[expose] public section
 
 set_option autoImplicit false
 

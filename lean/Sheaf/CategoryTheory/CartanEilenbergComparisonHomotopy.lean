@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import Sheaf.CategoryTheory.CartanEilenbergDoubleComplexHomotopy
+module
+
+public import Sheaf.CategoryTheory.CartanEilenbergDoubleComplexHomotopy
 
 /-!
 # Homotopy uniqueness of Cartan--Eilenberg comparison lifts
@@ -15,6 +17,8 @@ Resolutions use the augmentation and resolution fields of
 `exists_cartanEilenberg_resolution`. Extend the natural resolution index by zero
 before forming total complexes. The filtration is by the second, resolution index.
 -/
+
+@[expose] public section
 
 universe v₁ v₂ u₁ u₂
 

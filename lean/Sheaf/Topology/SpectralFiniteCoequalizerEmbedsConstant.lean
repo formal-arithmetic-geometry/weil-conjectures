@@ -3,11 +3,13 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Sheaf.Topology.SetsExtensionByEmpty
-import Mathlib.CategoryTheory.Limits.Shapes.Products
-import Mathlib.Topology.Spectral.Basic
-import Mathlib.Topology.Constructible
-import Mathlib.CategoryTheory.Limits.Shapes.Equalizers
+module
+
+public import Sheaf.Topology.SetsExtensionByEmpty
+public import Mathlib.CategoryTheory.Limits.Shapes.Products
+public import Mathlib.Topology.Spectral.Basic
+public import Mathlib.Topology.Constructible
+public import Mathlib.CategoryTheory.Limits.Shapes.Equalizers
 
 /-!
 # Embedding finitely presented sheaves on spectral spaces
@@ -16,6 +18,8 @@ Source: Stacks Project, Modules, Lemma Tag 0CAL, with the presentation of Equati
 and the reduction of Lemma Tag 0CAK.
 (blueprint: lem-weil-pbc-spectral-finite-coequalizer-embeds-constant)
 -/
+
+@[expose] public section
 
 universe u
 

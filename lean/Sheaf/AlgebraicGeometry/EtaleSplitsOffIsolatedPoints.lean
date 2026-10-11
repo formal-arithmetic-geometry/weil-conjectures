@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Mathlib.AlgebraicGeometry.Fiber
-import Mathlib.AlgebraicGeometry.Morphisms.Etale
-import Mathlib.AlgebraicGeometry.Morphisms.Finite
-import Mathlib.AlgebraicGeometry.Morphisms.Separated
+module
+
+public import Mathlib.AlgebraicGeometry.Fiber
+public import Mathlib.AlgebraicGeometry.Morphisms.Etale
+public import Mathlib.AlgebraicGeometry.Morphisms.Finite
+public import Mathlib.AlgebraicGeometry.Morphisms.Separated
 
 /-!
 # Splitting off isolated fibre points in an elementary étale neighbourhood
@@ -14,6 +16,8 @@ import Mathlib.AlgebraicGeometry.Morphisms.Separated
 Source: Stacks Project, More on Morphisms, Lemma 37.41.4, Tag 02LN
 (blueprint: lem-weil-pbc-etale-splits-off-isolated-points-technical).
 -/
+
+@[expose] public section
 
 universe u
 

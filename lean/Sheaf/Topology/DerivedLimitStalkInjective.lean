@@ -3,12 +3,14 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group R1
 -/
-import Sheaf.Topology.OpenModuleDerivedSections
-import Sheaf.Algebra.Homology.ModuleStalkFunctor
-import Sheaf.CategoryTheory.DerivedLimitRoosAbelianGroups
-import Sheaf.CategoryTheory.Triangulated.DerivedLimit
-import WeilConjectures.Algebra.Homology.HomotopyCategory.Products
-import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
+module
+
+public import Sheaf.Topology.OpenModuleDerivedSections
+public import Sheaf.Algebra.Homology.ModuleStalkFunctor
+public import Sheaf.CategoryTheory.DerivedLimitRoosAbelianGroups
+public import Sheaf.CategoryTheory.Triangulated.DerivedLimit
+public import WeilConjectures.Algebra.Homology.HomotopyCategory.Products
+public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 
 /-!
 # Stalk injectivity for a derived inverse limit
@@ -17,6 +19,8 @@ Source: Stacks Project, Cohomology of Sheaves, Tag 0D61,
 lemma-cohomology-derived-limit-injective
 (blueprint: lem-pc-ringed-space-derived-limit-stalk-injective).
 -/
+
+@[expose] public section
 
 universe u v w
 

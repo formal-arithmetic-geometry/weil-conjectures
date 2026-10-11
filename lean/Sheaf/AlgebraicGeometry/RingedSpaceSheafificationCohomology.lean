@@ -3,16 +3,20 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group U1
 -/
-import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImage
-import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
-import Mathlib.Topology.Sheaves.Stalks
-import Mathlib.CategoryTheory.Sites.LeftExact
+module
+
+public import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImage
+public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
+public import Mathlib.Topology.Sheaves.Stalks
+public import Mathlib.CategoryTheory.Sites.LeftExact
 
 /-! # Sheafification of cohomology over open subsets
 
 Source: Stacks Project, Cohomology, Lemma 20.32.3, Tag 0BKJ
 (blueprint: lem-pc-ringed-space-sheafification-cohomology).
 -/
+
+@[expose] public section
 
 universe u w
 

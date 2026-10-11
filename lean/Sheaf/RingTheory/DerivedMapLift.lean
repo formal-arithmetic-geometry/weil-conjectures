@@ -3,16 +3,20 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF contributors
 -/
-import Mathlib.Algebra.Homology.DerivedCategory.Basic
-import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
-import Mathlib.Algebra.Homology.Embedding.CochainComplex
-import Mathlib.Algebra.Category.ModuleCat.Abelian
+module
+
+public import Mathlib.Algebra.Homology.DerivedCategory.Basic
+public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
+public import Mathlib.Algebra.Homology.Embedding.CochainComplex
+public import Mathlib.Algebra.Category.ModuleCat.Abelian
 
 /-!
 # Lifting maps from bounded projective complexes
 
 Source: Stacks Project, derived.tex, Tag 064E (blueprint: lem-pc-ring-derived-map-lift).
 -/
+
+@[expose] public section
 
 universe u v w
 

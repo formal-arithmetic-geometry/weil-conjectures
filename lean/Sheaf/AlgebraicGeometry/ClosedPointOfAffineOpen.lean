@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 
 /-!
 # Closed points of affine opens in schemes locally of finite type over a field
@@ -11,6 +13,8 @@ import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 Source: Stacks Project, Tag 0478, Lemma 33.14.1
 (blueprint: lem-sc-affine-maximal-points-closed-in-lft-scheme).
 -/
+
+@[expose] public section
 
 universe u
 

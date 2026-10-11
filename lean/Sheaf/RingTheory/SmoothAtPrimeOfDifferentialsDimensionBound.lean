@@ -3,12 +3,14 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import Mathlib.RingTheory.FiniteType
-import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
-import Mathlib.RingTheory.Kaehler.Basic
-import Mathlib.LinearAlgebra.Dimension.Finrank
-import WeilConjectures.Mathlib.Topology.KrullDimension
-import Sheaf.RingTheory.SingularIdeal
+module
+
+public import Mathlib.RingTheory.FiniteType
+public import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
+public import Mathlib.RingTheory.Kaehler.Basic
+public import Mathlib.LinearAlgebra.Dimension.Finrank
+public import WeilConjectures.Mathlib.Topology.KrullDimension
+public import Sheaf.RingTheory.SingularIdeal
 
 /-!
 # A dimension bound on differentials implies smoothness at a prime
@@ -16,6 +18,8 @@ import Sheaf.RingTheory.SingularIdeal
 Source: Stacks Project, Algebra, Lemma 00TT, implication (2) implies (1)
 (blueprint: lem-weil-pbc-differentials-dimension-bound-smooth-at-prime).
 -/
+
+@[expose] public section
 
 universe u v
 

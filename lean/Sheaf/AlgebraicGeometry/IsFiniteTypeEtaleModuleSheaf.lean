@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import WeilConjectures.ConstructibleSheaf.Defs
-import WeilConjectures.CategoryTheory.GrothendieckAbelian.ConcreteCoefficients
+module
+
+public import WeilConjectures.ConstructibleSheaf.Defs
+public import WeilConjectures.CategoryTheory.GrothendieckAbelian.ConcreteCoefficients
 
 /-!
 # Finite type sheaves of modules on the small etale site
@@ -12,6 +14,8 @@ import WeilConjectures.CategoryTheory.GrothendieckAbelian.ConcreteCoefficients
 Source: Stacks Project, Tags 03DE(4), 03DL(5), and 03DF
 (blueprint: def-weil-pbc-etale-module-finite-type).
 -/
+
+@[expose] public section
 
 universe v
 

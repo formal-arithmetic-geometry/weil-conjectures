@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Mathlib.RingTheory.AdicCompletion.Algebra
-import Mathlib.RingTheory.Derivation.Basic
-import Mathlib.RingTheory.Localization.Basic
+module
+
+public import Mathlib.RingTheory.AdicCompletion.Algebra
+public import Mathlib.RingTheory.Derivation.Basic
+public import Mathlib.RingTheory.Localization.Basic
 
 /-!
 # Extension of derivations to completions and localizations
@@ -13,6 +15,8 @@ import Mathlib.RingTheory.Localization.Basic
 Source: Stacks Project, More on Algebra, Lemma 07PE, parts (1) and (2)
 (blueprint: lem-weil-pbc-derivation-extends).
 -/
+
+@[expose] public section
 
 universe u
 

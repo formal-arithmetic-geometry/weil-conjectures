@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group R1
 -/
-import Sheaf.AlgebraicGeometry.ModuleCohomologyFMap
+module
+
+public import Sheaf.AlgebraicGeometry.ModuleCohomologyFMap
 
 /-! # Functoriality of cohomology maps induced by scheme maps
 
@@ -14,6 +16,8 @@ The comparison maps below account for the canonical identifications of successiv
 pushforwards. The unit equations specify the pullback comparison and the restricted
 module map without choosing another implementation of either notion.
 -/
+
+@[expose] public section
 
 universe u
 

@@ -3,14 +3,16 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import Mathlib.AlgebraicTopology.SimplicialObject.Basic
-import Mathlib.AlgebraicTopology.AlternatingFaceMapComplex
-import Mathlib.Algebra.Category.ModuleCat.Adjunctions
-import Mathlib.Algebra.Category.ModuleCat.Abelian
-import Mathlib.Algebra.Category.ModuleCat.FilteredColimits
-import Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
-import Mathlib.CategoryTheory.Sites.Abelian
-import Mathlib.CategoryTheory.Sites.LeftExact
+module
+
+public import Mathlib.AlgebraicTopology.SimplicialObject.Basic
+public import Mathlib.AlgebraicTopology.AlternatingFaceMapComplex
+public import Mathlib.Algebra.Category.ModuleCat.Adjunctions
+public import Mathlib.Algebra.Category.ModuleCat.Abelian
+public import Mathlib.Algebra.Category.ModuleCat.FilteredColimits
+public import Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
+public import Mathlib.CategoryTheory.Sites.Abelian
+public import Mathlib.CategoryTheory.Sites.LeftExact
 
 /-!
 # Homology comparison for coskeletal simplicial presheaves
@@ -18,6 +20,8 @@ import Mathlib.CategoryTheory.Sites.LeftExact
 Source: Stacks Project, Hypercoverings, Lemma 01GD
 (blueprint: lem-weil-pbc-coskeleton-free-homology-comparison).
 -/
+
+@[expose] public section
 
 universe u v w
 

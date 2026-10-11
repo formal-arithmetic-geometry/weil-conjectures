@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group Q1
 -/
-import Mathlib.Algebra.Category.ModuleCat.Limits
-import Mathlib.CategoryTheory.Functor.OfSequence
-import Mathlib.Algebra.Exact.Basic
+module
+
+public import Mathlib.Algebra.Category.ModuleCat.Limits
+public import Mathlib.CategoryTheory.Functor.OfSequence
+public import Mathlib.Algebra.Exact.Basic
 
 /-!
 # Inverse limits of towers and exact sequences
@@ -20,6 +22,8 @@ Source: Stacks Project, Algebra Lemma 03CA and Homology Lemma 02N1
 
 The natural index `n` denotes the paper's positive index `n + 1`.
 -/
+
+@[expose] public section
 
 open CategoryTheory CategoryTheory.Limits
 

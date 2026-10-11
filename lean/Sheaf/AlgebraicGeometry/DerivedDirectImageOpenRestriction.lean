@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group T1
 -/
-import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
-import Mathlib.AlgebraicGeometry.Restrict
+module
+
+public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
+public import Mathlib.AlgebraicGeometry.Restrict
 
 /-!
 # Derived direct image commutes with restriction to an open
@@ -12,6 +14,8 @@ import Mathlib.AlgebraicGeometry.Restrict
 Source: Stacks Project, Cohomology, Lemma 20.32.4, Tag 08FE
 (blueprint: lem-pc-restrict-derived-direct-image-open).
 -/
+
+@[expose] public section
 
 universe u wX wY wU wV
 

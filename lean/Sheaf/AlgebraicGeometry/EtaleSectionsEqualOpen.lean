@@ -3,14 +3,18 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Sheaf.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+module
+
+public import Sheaf.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-! # The open locus where two étale sheaf sections agree
 
 Source: Stacks Project, Étale Cohomology, Lemma 59.39.1 (Tag 09XM), applied over an
 étale object of the base scheme (blueprint: lem-weil-pbc-etale-sections-equal-open).
 -/
+
+@[expose] public section
 
 universe u
 

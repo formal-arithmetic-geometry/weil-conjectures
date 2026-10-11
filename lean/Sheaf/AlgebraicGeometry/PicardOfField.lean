@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group J1
 -/
-import WeilConjectures.AlgebraicGeometry.Picard.Group
-import WeilConjectures.AlgebraicGeometry.Modules.Invertible
+module
+
+public import WeilConjectures.AlgebraicGeometry.Picard.Group
+public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 
 /-!
 # The Picard group of a field
@@ -12,6 +14,8 @@ import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 Source: the blueprint of the Weil conjectures, chapter `sec-picard-framework`, unit
 `sk-def-picard-pic`, node 802 (blueprint: lem-pc-pic-of-field).
 -/
+
+@[expose] public section
 
 universe u
 

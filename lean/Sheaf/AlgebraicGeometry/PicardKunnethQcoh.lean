@@ -3,16 +3,20 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group G1
 -/
-import Sheaf.AlgebraicGeometry.FieldLinearModuleCohomologyOperations
-import Sheaf.AlgebraicGeometry.Coherent
-import Mathlib.AlgebraicGeometry.Morphisms.Affine
-import Mathlib.Algebra.DirectSum.Module
+module
+
+public import Sheaf.AlgebraicGeometry.FieldLinearModuleCohomologyOperations
+public import Sheaf.AlgebraicGeometry.Coherent
+public import Mathlib.AlgebraicGeometry.Morphisms.Affine
+public import Mathlib.Algebra.DirectSum.Module
 
 /-! # Kunneth for quasi-coherent cohomology over a field
 
 Source: Stacks Project, Varieties, Tag 0BED, `lemma-kunneth`
 (blueprint: lem-sc-picard-kunneth-qcoh).
 -/
+
+@[expose] public section
 
 universe w
 

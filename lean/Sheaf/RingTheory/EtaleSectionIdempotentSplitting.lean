@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import Mathlib.RingTheory.Etale.Basic
-import Mathlib.RingTheory.Idempotents
-import Mathlib.RingTheory.Localization.Away.Basic
+module
+
+public import Mathlib.RingTheory.Etale.Basic
+public import Mathlib.RingTheory.Idempotents
+public import Mathlib.RingTheory.Localization.Away.Basic
 
 /-!
 # Idempotent splitting of an étale algebra with a section
@@ -13,6 +15,8 @@ import Mathlib.RingTheory.Localization.Away.Basic
 Source: Stacks Project, Tag 09XI, proof of (5) implies (2), first paragraph, with Tags
 00U7, 00U8 and 00EH (blueprint: lem-weil-pbc-etale-section-idempotent-splitting).
 -/
+
+@[expose] public section
 
 universe u v
 

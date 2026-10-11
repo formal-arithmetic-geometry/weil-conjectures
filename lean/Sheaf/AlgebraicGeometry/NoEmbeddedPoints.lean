@@ -1,6 +1,10 @@
-import Mathlib.AlgebraicGeometry.Noetherian
-import WeilConjectures.Mathlib.Topology.Sober
-import Sheaf.AlgebraicGeometry.AssociatedPoints
+module
+
+public import Mathlib.AlgebraicGeometry.Noetherian
+public import WeilConjectures.Mathlib.Topology.Sober
+public import Sheaf.AlgebraicGeometry.AssociatedPoints
+
+@[expose] public section
 
 universe u
 

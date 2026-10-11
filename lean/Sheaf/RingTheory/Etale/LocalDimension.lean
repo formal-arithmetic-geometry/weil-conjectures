@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Mathlib.RingTheory.RingHom.Etale
-import Mathlib.RingTheory.Localization.AtPrime.Basic
-import Mathlib.RingTheory.KrullDimension.Basic
+module
+
+public import Mathlib.RingTheory.RingHom.Etale
+public import Mathlib.RingTheory.Localization.AtPrime.Basic
+public import Mathlib.RingTheory.KrullDimension.Basic
 
 /-!
 # Local dimension under an étale ring map
@@ -13,6 +15,8 @@ import Mathlib.RingTheory.KrullDimension.Basic
 Source: Stacks Project, More on Algebra, Lemma Tag 07QP
 (blueprint: lem-sc-etale-local-dimension).
 -/
+
+@[expose] public section
 
 universe u v
 

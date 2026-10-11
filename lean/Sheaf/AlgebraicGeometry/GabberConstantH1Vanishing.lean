@@ -3,11 +3,13 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group J1
 -/
-import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
-import Mathlib.FieldTheory.IsSepClosed
-import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-import Mathlib.CategoryTheory.Sites.ConstantSheaf
-import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
+module
+
+public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
+public import Mathlib.FieldTheory.IsSepClosed
+public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+public import Mathlib.CategoryTheory.Sites.ConstantSheaf
+public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 
 /-!
 # Gabber's vanishing of first constant étale cohomology
@@ -15,6 +17,8 @@ import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 Source: Stacks Project, Étale Cohomology, Lemma 09ZB
 (blueprint: lem-weil-pbc-gabber-h1-absolutely-algebraically-closed).
 -/
+
+@[expose] public section
 
 universe u
 

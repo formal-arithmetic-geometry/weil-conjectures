@@ -1,8 +1,10 @@
-import Mathlib.RingTheory.RegularLocalRing.Defs
-import Mathlib.RingTheory.FiniteType
-import Mathlib.RingTheory.Localization.AtPrime.Basic
-import Sheaf.FieldTheory.SeparableExtension
-import Sheaf.RingTheory.SingularIdeal
+module
+
+public import Mathlib.RingTheory.RegularLocalRing.Defs
+public import Mathlib.RingTheory.FiniteType
+public import Mathlib.RingTheory.Localization.AtPrime.Basic
+public import Sheaf.FieldTheory.SeparableExtension
+public import Sheaf.RingTheory.SingularIdeal
 
 /-!
 # Regularity with separable residue field characterizes smoothness over a field
@@ -10,6 +12,8 @@ import Sheaf.RingTheory.SingularIdeal
 Source: Stacks Project, Algebra, Lemma Tag 00TV (lemma-separable-smooth, line 38740)
 (blueprint: lem-weil-pbc-regular-local-separable-residue-smooth).
 -/
+
+@[expose] public section
 
 universe u v
 

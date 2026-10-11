@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF worker K1
 -/
-import Sheaf.RingTheory.MPseudoCoherent
+module
+
+public import Sheaf.RingTheory.MPseudoCoherent
 
 /-!
 # Finite top cohomology of an m-pseudo-coherent complex
@@ -11,6 +13,8 @@ import Sheaf.RingTheory.MPseudoCoherent
 Source: Stacks Project, More on Algebra, Lemma 15.66.3 (1), Tag 064S
 (blueprint: lem-sc-finite-cohomology).
 -/
+
+@[expose] public section
 
 universe w v u
 

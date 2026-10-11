@@ -3,11 +3,13 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF contributors
 -/
-import Mathlib.AlgebraicGeometry.Sites.EtalePoint
-import Mathlib.FieldTheory.KrullTopology
-import Mathlib.FieldTheory.IsSepClosed
-import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Proetale
-import Sheaf.AlgebraicGeometry.EtaleFieldGsets
+module
+
+public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
+public import Mathlib.FieldTheory.KrullTopology
+public import Mathlib.FieldTheory.IsSepClosed
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Proetale
+public import Sheaf.AlgebraicGeometry.EtaleFieldGsets
 
 /-!
 # Étale sheaves and discrete Galois sets
@@ -15,6 +17,8 @@ import Sheaf.AlgebraicGeometry.EtaleFieldGsets
 Source: Stacks Project, Tag 03QT and the Galois action on stalks in Tag 03QW
 (blueprint: lem-exc-etale-sheaves-gsets-point).
 -/
+
+@[expose] public section
 
 universe u v
 

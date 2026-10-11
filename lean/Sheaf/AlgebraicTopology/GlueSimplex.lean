@@ -3,14 +3,19 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group J1
 -/
-import Mathlib.AlgebraicTopology.SimplicialSet.Boundary
-import Mathlib.AlgebraicTopology.SimplicialSet.Degenerate
-import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Defs
+module
+
+public import Mathlib.AlgebraicTopology.SimplicialSet.Boundary
+public import Mathlib.AlgebraicTopology.SimplicialSet.Degenerate
+public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Defs
 
 /-! # Gluing a simplex to a simplicial subset
 Source: literature/stacks-project/simplicial.tex,
 Lemma 018R (blueprint: lem-weil-pbc-simplicial-set-glue-simplex)
 -/
+
+@[expose] public section
+
 open CategoryTheory CategoryTheory.Limits
 open Simplicial
 universe u

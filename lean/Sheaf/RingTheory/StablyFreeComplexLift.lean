@@ -3,11 +3,13 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group S1
 -/
-import Sheaf.RingTheory.RingPseudoCoherent
-import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
-import Mathlib.Algebra.Module.StablyFree.Basic
-import Mathlib.Algebra.Homology.Additive
-import Mathlib.RingTheory.Ideal.Quotient.Defs
+module
+
+public import Sheaf.RingTheory.RingPseudoCoherent
+public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
+public import Mathlib.Algebra.Module.StablyFree.Basic
+public import Mathlib.Algebra.Homology.Additive
+public import Mathlib.RingTheory.Ideal.Quotient.Defs
 
 /-!
 # Lifting finite stably free complexes modulo an ideal
@@ -15,6 +17,8 @@ import Mathlib.RingTheory.Ideal.Quotient.Defs
 Source: Stacks Project, More on Algebra, Tag 0BCB, lemma-lift-complex-stably-frees
 (blueprint: lem-sc-pseudo-coherent-lift-stably-free-complex).
 -/
+
+@[expose] public section
 
 universe u v w w'
 

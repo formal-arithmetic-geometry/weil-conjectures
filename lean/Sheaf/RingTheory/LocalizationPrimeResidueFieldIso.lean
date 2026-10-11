@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
+module
+
+public import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
 
 /-!
 # Prime ideals, local rings and residue fields of a localization
@@ -11,6 +13,8 @@ import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
 Source: Stacks Project, Algebra, Tags 00E3, 00C9 and 07BH
 (blueprint: lem-weil-pbc-localization-prime-residue-field-iso).
 -/
+
+@[expose] public section
 
 universe u v
 

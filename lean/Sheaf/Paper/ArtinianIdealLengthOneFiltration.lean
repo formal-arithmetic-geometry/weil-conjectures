@@ -1,5 +1,7 @@
-import Mathlib.RingTheory.FiniteLength
-import Mathlib.RingTheory.Length
+module
+
+public import Mathlib.RingTheory.FiniteLength
+public import Mathlib.RingTheory.Length
 
 /-!
 # Length-one filtrations of ideals in Artinian rings
@@ -7,6 +9,8 @@ import Mathlib.RingTheory.Length
 Source: literature/stacks-project/algebra.tex, Algebra, proof of Lemma Tag 02HT
 (blueprint: lem-weil-pbc-artinian-ideal-length-one-filtration).
 -/
+
+@[expose] public section
 
 universe u
 

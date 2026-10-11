@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Mathlib.RingTheory.Noetherian.Defs
-import Mathlib.RingTheory.LocalRing.MaximalIdeal.Defs
-import Mathlib.LinearAlgebra.Matrix.Determinant.Basic
+module
+
+public import Mathlib.RingTheory.Noetherian.Defs
+public import Mathlib.RingTheory.LocalRing.MaximalIdeal.Defs
+public import Mathlib.LinearAlgebra.Matrix.Determinant.Basic
 
 /-!
 # Unit maximal minors over a local ring of depth zero
@@ -13,6 +15,8 @@ import Mathlib.LinearAlgebra.Matrix.Determinant.Basic
 Source: Stacks Project, Algebra, Tags 00MY, 00MW, 00MV and 00MT
 (blueprint: lem-weil-pbc-depth-zero-injective-free-map-unit-minor).
 -/
+
+@[expose] public section
 
 universe u
 

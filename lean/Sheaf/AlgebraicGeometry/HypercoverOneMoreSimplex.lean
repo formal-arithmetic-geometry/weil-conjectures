@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import Sheaf.AlgebraicGeometry.SimplicialHomObject
-import Mathlib.AlgebraicTopology.SimplicialSet.Finite
+module
+
+public import Sheaf.AlgebraicGeometry.SimplicialHomObject
+public import Mathlib.AlgebraicTopology.SimplicialSet.Finite
 
 /-!
 # Adding one simplex to a hypercover Hom object
@@ -12,6 +14,8 @@ import Mathlib.AlgebraicTopology.SimplicialSet.Finite
 Source: Stacks Project, Tag 01GM, Lemma `lemma-one-more-simplex`
 (blueprint: lem-weil-pbc-hypercover-one-more-simplex).
 -/
+
+@[expose] public section
 
 universe u w t
 

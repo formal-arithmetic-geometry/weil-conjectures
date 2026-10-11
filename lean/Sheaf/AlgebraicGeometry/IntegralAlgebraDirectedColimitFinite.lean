@@ -3,14 +3,18 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Sheaf.AlgebraicGeometry.QuasiCoherentAlgebra
-import Mathlib.CategoryTheory.Limits.HasLimits
+module
+
+public import Sheaf.AlgebraicGeometry.QuasiCoherentAlgebra
+public import Mathlib.CategoryTheory.Limits.HasLimits
 
 /-! # Integral quasi-coherent algebras as directed colimits
 
 Source: Stacks Project, Properties, Lemma 28.23.13, Tag 0817
 (blueprint: lem-weil-pbc-integral-algebra-directed-colimit-finite).
 -/
+
+@[expose] public section
 
 universe v
 

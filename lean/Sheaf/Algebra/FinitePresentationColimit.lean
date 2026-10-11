@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
-import Mathlib.Algebra.Category.Ring.Colimits
-import Mathlib.Algebra.Module.FinitePresentation
+module
+
+public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
+public import Mathlib.Algebra.Category.Ring.Colimits
+public import Mathlib.Algebra.Module.FinitePresentation
 
 /-!
 # Finitely presented modules over a directed ring colimit
@@ -14,6 +16,8 @@ Source: Stacks Project, Algebra, Lemma 10.127.6 (Tag 05N7), used in Limits,
 Lemma 32.10.2 (Tag 01ZR), affine case
 (blueprint: lem-pc-fp-module-map-descent-affine).
 -/
+
+@[expose] public section
 
 universe u
 

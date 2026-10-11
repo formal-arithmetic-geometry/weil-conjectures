@@ -3,14 +3,18 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group T1
 -/
-import Mathlib.LinearAlgebra.SymmetricAlgebra.Basic
-import Mathlib.RingTheory.Localization.BaseChange
+module
+
+public import Mathlib.LinearAlgebra.SymmetricAlgebra.Basic
+public import Mathlib.RingTheory.Localization.BaseChange
 
 /-! # Symmetric algebras and base change
 
 Source: Stacks Project, Algebra, Lemma 0C6F and the universal properties of symmetric
 algebras and extension of scalars (blueprint: lem-weil-pbc-symmetric-algebra-base-change).
 -/
+
+@[expose] public section
 
 universe u v w
 

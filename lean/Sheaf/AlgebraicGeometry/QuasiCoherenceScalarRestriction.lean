@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group G1
 -/
-import Sheaf.AlgebraicGeometry.CommAlgebraSheaf
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
+module
+
+public import Sheaf.AlgebraicGeometry.CommAlgebraSheaf
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 
 /-! # Quasi-coherence and restriction of scalars
 
@@ -19,6 +21,8 @@ The quasi-coherent `𝒪_S`-algebra is the shared form `A : S.CommAlgebraSheaf`
 `𝒪_S`-modules are obtained by scalar restriction along `A.hom`, as in
 `lem-weil-pbc-quasi-coherent-algebra-change-of-rings`.
 -/
+
+@[expose] public section
 
 universe u
 

@@ -3,12 +3,14 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import Sheaf.CategoryTheory.KInjectiveBridge
-import Mathlib.CategoryTheory.Preadditive.Yoneda.Limits
-import Mathlib.Algebra.Homology.ShortComplex.Ab
-import Mathlib.Algebra.Homology.HomotopyCategory.HomComplexSingle
-import Mathlib.Algebra.Homology.HomotopyCategory.HomComplexShift
-import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusSingle
+module
+
+public import Sheaf.CategoryTheory.KInjectiveBridge
+public import Mathlib.CategoryTheory.Preadditive.Yoneda.Limits
+public import Mathlib.Algebra.Homology.ShortComplex.Ab
+public import Mathlib.Algebra.Homology.HomotopyCategory.HomComplexSingle
+public import Mathlib.Algebra.Homology.HomotopyCategory.HomComplexShift
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusSingle
 
 /-!
 # Derived Hom and connecting morphisms
@@ -16,6 +18,8 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusSi
 Source: Stacks Project, Derived Categories, Tags 06XR (part 1), 070I and 05TE
 (blueprint: lem-sc-p1-rhom-hom-derived-connecting).
 -/
+
+@[expose] public section
 
 universe w w₂ v u
 

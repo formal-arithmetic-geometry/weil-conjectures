@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Mathlib.RingTheory.RingHom.Flat
-import Mathlib.RingTheory.Ideal.Quotient.Operations
-import Mathlib.LinearAlgebra.TensorProduct.Tower
-import Sheaf.RingTheory.CoverModuleExact
+module
+
+public import Mathlib.RingTheory.RingHom.Flat
+public import Mathlib.RingTheory.Ideal.Quotient.Operations
+public import Mathlib.LinearAlgebra.TensorProduct.Tower
+public import Sheaf.RingTheory.CoverModuleExact
 
 /-!
 # Exactness of the formal glueing complex
@@ -14,6 +16,8 @@ import Sheaf.RingTheory.CoverModuleExact
 Source: Stacks Project, More on Algebra, Lemma 05EK and equation `glueing-complex`
 (blueprint: lem-weil-pbc-formal-glueing-complex-exact).
 -/
+
+@[expose] public section
 
 universe u v w
 

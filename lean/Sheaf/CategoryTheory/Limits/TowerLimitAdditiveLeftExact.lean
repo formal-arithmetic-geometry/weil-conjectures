@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group J1
 -/
-import Mathlib.CategoryTheory.Abelian.FunctorCategory
-import Mathlib.Algebra.Category.Grp.Abelian
+module
+
+public import Mathlib.CategoryTheory.Abelian.FunctorCategory
+public import Mathlib.Algebra.Category.Grp.Abelian
 
 /-!
 # Additivity and left exactness of inverse limits of towers
@@ -12,6 +14,8 @@ import Mathlib.Algebra.Category.Grp.Abelian
 Source: Stacks Project, More on Algebra, Tag 07KW, Lemma 15.88.1 setup for the
 inverse-limit functor (blueprint: lem-pc-tower-limit-left-exact).
 -/
+
+@[expose] public section
 
 universe u
 

@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import WeilConjectures.AlgebraicGeometry.Modules.Invertible
-import Mathlib.AlgebraicGeometry.FunctionField
-import Mathlib.Algebra.Category.ModuleCat.Stalk
-import Mathlib.LinearAlgebra.Dimension.Free
+module
+
+public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
+public import Mathlib.AlgebraicGeometry.FunctionField
+public import Mathlib.Algebra.Category.ModuleCat.Stalk
+public import Mathlib.LinearAlgebra.Dimension.Free
 
 /-!
 # Invertible modules and their generic stalk
@@ -14,6 +16,8 @@ import Mathlib.LinearAlgebra.Dimension.Free
 Source: Stacks Project, Divisors, Tags 01X5 (2) and 02OZ (1)
 (blueprint: lem-sc-invertible-module-generic-stalk).
 -/
+
+@[expose] public section
 
 universe u
 

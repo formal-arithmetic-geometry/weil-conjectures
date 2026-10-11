@@ -3,14 +3,18 @@ Copyright (c) 2026 SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Sheaf.CategoryTheory.ColimitSites
-import Mathlib.CategoryTheory.Preadditive.Injective.Basic
+module
+
+public import Sheaf.CategoryTheory.ColimitSites
+public import Mathlib.CategoryTheory.Preadditive.Injective.Basic
 
 /-! # Injective systems on a filtered colimit of sites
 
 Source: Stacks Project, Sites, Lemma 0EXZ (lemma-colim-sites-injective).
 (blueprint: lem-weil-pbc-colimit-of-sites-injective-system)
 -/
+
+@[expose] public section
 
 universe u
 

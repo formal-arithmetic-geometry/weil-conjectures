@@ -3,17 +3,21 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group J1
 -/
-import Mathlib.RingTheory.Localization.AtPrime.Basic
-import Mathlib.RingTheory.Localization.Away.Basic
-import Mathlib.RingTheory.Noetherian.Defs
-import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
-import Mathlib.RingTheory.Spectrum.Prime.Topology
+module
+
+public import Mathlib.RingTheory.Localization.AtPrime.Basic
+public import Mathlib.RingTheory.Localization.Away.Basic
+public import Mathlib.RingTheory.Noetherian.Defs
+public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
+public import Mathlib.RingTheory.Spectrum.Prime.Topology
 
 /-! # Openness of the normal locus
 
 Source: literature/stacks-project/algebra.tex, Algebra, Lemma Tag 0332
 (blueprint: lem-weil-pbc-normal-locus-open)
 -/
+
+@[expose] public section
 
 universe u
 namespace AlgebraicGeometry

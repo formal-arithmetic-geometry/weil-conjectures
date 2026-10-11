@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import Mathlib.AlgebraicGeometry.Sites.EtalePoint
-import Mathlib.CategoryTheory.Limits.Final
+module
+
+public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
+public import Mathlib.CategoryTheory.Limits.Final
 
 /-!
 # Cofinality of affine pointed étale neighbourhoods
@@ -12,6 +14,8 @@ import Mathlib.CategoryTheory.Limits.Final
 Source: Weil conjectures blueprint, chapter `sec-curve-estimates`, unit `sk-prop-h2`
 (blueprint: lemma-weil-pbc-affine-neighbourhood-cofinal); Stacks Project, Tags 04HX and 0BUC.
 -/
+
+@[expose] public section
 
 universe u
 

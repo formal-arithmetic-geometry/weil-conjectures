@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group Q1
 -/
-import WeilConjectures.Mathlib.AlgebraicGeometry.GammaSpecAdjunction
-import Mathlib.AlgebraicGeometry.Morphisms.Proper
-import Mathlib.AlgebraicGeometry.Geometrically.Connected
+module
+
+public import WeilConjectures.Mathlib.AlgebraicGeometry.GammaSpecAdjunction
+public import Mathlib.AlgebraicGeometry.Morphisms.Proper
+public import Mathlib.AlgebraicGeometry.Geometrically.Connected
 
 /-!
 # Stein factorization over an affine base
@@ -13,6 +15,8 @@ import Mathlib.AlgebraicGeometry.Geometrically.Connected
 Source: Stacks Project, More on Morphisms, Theorem 37.53.5, Tag 03H2
 (blueprint: lem-weil-pbc-stein-factorization-affine).
 -/
+
+@[expose] public section
 
 universe u
 

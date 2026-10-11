@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group G1
 -/
-import Mathlib.Algebra.Category.Grp.AB
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+module
+
+public import Mathlib.Algebra.Category.Grp.AB
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-!
 # Colimits and inverse image of abelian étale sheaves
@@ -13,6 +15,8 @@ Source: Stacks Project, Categories, Lemma 0038(1), applied to the inverse-image
 adjunction of Étale Cohomology, Definition 03Q0; Étale Cohomology, proof of Lemma 0A4B
 (blueprint: lem-weil-pbc-inverse-image-preserves-colimits).
 -/
+
+@[expose] public section
 
 universe u w
 

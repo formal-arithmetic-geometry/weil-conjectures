@@ -3,17 +3,21 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group R1
 -/
-import Mathlib.AlgebraicGeometry.Morphisms.Flat
-import Mathlib.AlgebraicGeometry.Morphisms.UniversallyClosed
-import Mathlib.AlgebraicGeometry.Pullbacks
-import Mathlib.AlgebraicGeometry.Morphisms.Integral
-import WeilConjectures.Mathlib.AlgebraicGeometry.GammaSpecAdjunction
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.Flat
+public import Mathlib.AlgebraicGeometry.Morphisms.UniversallyClosed
+public import Mathlib.AlgebraicGeometry.Pullbacks
+public import Mathlib.AlgebraicGeometry.Morphisms.Integral
+public import WeilConjectures.Mathlib.AlgebraicGeometry.GammaSpecAdjunction
 
 /-! # Universal factorization before Stein connectedness
 
 Source: Stacks Project, More on Morphisms, Lemma 37.53.4 (Tag 03GY)
 (blueprint: `lem-weil-pbc-stein-universally-closed-factor`).
 -/
+
+@[expose] public section
 
 universe u
 

@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group G1
 -/
-import Sheaf.CategoryTheory.CartanEilenbergPresentation
-import Sheaf.CategoryTheory.FilteredComplexSpectralSequence
-import Sheaf.CategoryTheory.KInjectiveComputes
+module
+
+public import Sheaf.CategoryTheory.CartanEilenbergPresentation
+public import Sheaf.CategoryTheory.FilteredComplexSpectralSequence
+public import Sheaf.CategoryTheory.KInjectiveComputes
 
 /-! # The first hypercohomology spectral sequence
 
@@ -18,6 +20,8 @@ The spectral sequence uses Mathlib's order (filtration degree, complementary deg
 Thus the blueprint term E₁^{r,s} is `(E.page 1).X (s,r)` here. Signed identifications
 with the derived functors absorb the second-filtration sign in Tag 0130.
 -/
+
+@[expose] public section
 
 universe uA vA uB vB
 

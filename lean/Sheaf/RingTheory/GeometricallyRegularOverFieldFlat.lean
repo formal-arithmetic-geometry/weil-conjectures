@@ -3,11 +3,13 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import Sheaf.RingTheory.GRing
-import Mathlib.FieldTheory.IntermediateField.Adjoin.Defs
-import Mathlib.Algebra.MvPolynomial.Basic
-import Mathlib.RingTheory.Kaehler.Basic
-import Mathlib.LinearAlgebra.Basis.Defs
+module
+
+public import Sheaf.RingTheory.GRing
+public import Mathlib.FieldTheory.IntermediateField.Adjoin.Defs
+public import Mathlib.Algebra.MvPolynomial.Basic
+public import Mathlib.RingTheory.Kaehler.Basic
+public import Mathlib.LinearAlgebra.Basis.Defs
 
 /-!
 # Flatness over a polynomial localization from a differential basis
@@ -15,6 +17,8 @@ import Mathlib.LinearAlgebra.Basis.Defs
 Source: Stacks Project, More on Algebra, Lemma 07E6 and its proof
 (blueprint: lem-weil-pbc-geometrically-regular-over-field-flat).
 -/
+
+@[expose] public section
 
 universe u v
 

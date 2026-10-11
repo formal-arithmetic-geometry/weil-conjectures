@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Etale
-import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Proetale
+module
+
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Etale
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Proetale
 
 /-!
 # Inverse image of representable sheaves on the small étale site
@@ -12,6 +14,8 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Proetale
 Source: Stacks Project, Étale Cohomology, Tag 03Q1, part (4), and Sites, Tag 04D3
 (blueprint: lem-galois-inverse-image-representable).
 -/
+
+@[expose] public section
 
 universe u v
 

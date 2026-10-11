@@ -3,11 +3,13 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF worker F1
 -/
-import Mathlib.AlgebraicGeometry.Sites.EtalePoint
-import Mathlib.FieldTheory.KrullTopology
-import Mathlib.RepresentationTheory.Invariants
-import Sheaf.AlgebraicGeometry.AbelianSheavesGModules
-import Sheaf.RepresentationTheory.DiscreteContinuousRep
+module
+
+public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
+public import Mathlib.FieldTheory.KrullTopology
+public import Mathlib.RepresentationTheory.Invariants
+public import Sheaf.AlgebraicGeometry.AbelianSheavesGModules
+public import Sheaf.RepresentationTheory.DiscreteContinuousRep
 
 /-!
 # Etale modules on a field and discrete Galois modules
@@ -15,6 +17,8 @@ import Sheaf.RepresentationTheory.DiscreteContinuousRep
 Source: blueprint `sec-curve-estimates/sk-prop-h2/lem-exc-field-discrete-modules.md`,
 node `lem-exc-field-discrete-modules` (blueprint: lem-exc-field-discrete-modules).
 -/
+
+@[expose] public section
 
 universe u v
 

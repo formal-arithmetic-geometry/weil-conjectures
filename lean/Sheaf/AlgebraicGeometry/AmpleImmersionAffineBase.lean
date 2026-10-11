@@ -3,11 +3,13 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
-import Mathlib.AlgebraicGeometry.Morphisms.Immersion
-import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Twist
-import Sheaf.AlgebraicGeometry.Ample
-import Sheaf.AlgebraicGeometry.TensorPullback
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
+public import Mathlib.AlgebraicGeometry.Morphisms.Immersion
+public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Twist
+public import Sheaf.AlgebraicGeometry.Ample
+public import Sheaf.AlgebraicGeometry.TensorPullback
 
 /-! # An ample module gives an immersion into projective space over an affine base
 
@@ -20,6 +22,8 @@ Constructions, Lemma 01O3), with structure morphism `ℙ(…; Spec A) ↘ Spec A
 module `ProjectiveSpace.twist` (the recorded declaration of `def-pc-projective-space-twist`),
 as in `IsHProjective` and `IsVeryAmple`.
 -/
+
+@[expose] public section
 
 universe u
 

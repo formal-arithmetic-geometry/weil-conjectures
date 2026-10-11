@@ -3,11 +3,13 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import Sheaf.RingTheory.PopescuResolution
-import Mathlib.RingTheory.Localization.AtPrime.Basic
-import Mathlib.RingTheory.FiniteStability
-import Mathlib.RingTheory.Localization.Submodule
-import Mathlib.RingTheory.Ideal.MinimalPrime.Basic
+module
+
+public import Sheaf.RingTheory.PopescuResolution
+public import Mathlib.RingTheory.Localization.AtPrime.Basic
+public import Mathlib.RingTheory.FiniteStability
+public import Mathlib.RingTheory.Localization.Submodule
+public import Mathlib.RingTheory.Ideal.MinimalPrime.Basic
 
 /-!
 # Delocalizing a Popescu resolution at a prime of height zero
@@ -15,6 +17,8 @@ import Mathlib.RingTheory.Ideal.MinimalPrime.Basic
 Source: Stacks Project, Smoothing Ring Maps, Lemma 07FA, Section 07F6
 (blueprint: lem-weil-pbc-popescu-delocalize-height-zero).
 -/
+
+@[expose] public section
 
 universe u v t
 

@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Sheaf.AlgebraicGeometry.SchemeTangentSpace
-import Sheaf.AlgebraicGeometry.ProjectiveSpaceHomOfGeneratingSections
-import WeilConjectures.AlgebraicGeometry.Modules.Ample
-import Mathlib.FieldTheory.IsAlgClosed.Basic
+module
+
+public import Sheaf.AlgebraicGeometry.SchemeTangentSpace
+public import Sheaf.AlgebraicGeometry.ProjectiveSpaceHomOfGeneratingSections
+public import WeilConjectures.AlgebraicGeometry.Modules.Ample
+public import Mathlib.FieldTheory.IsAlgClosed.Basic
 
 /-!
 # Sections separating points and tangent vectors give a closed immersion
@@ -15,6 +17,8 @@ Source: Stacks Project, varieties.tex, Tag 0E8S, Lemma 33.23.1; coherent.tex,
 Tag 02O5, Proposition 30.19.1
 (blueprint: lem-sc-point-tangent-separation-closed-immersion).
 -/
+
+@[expose] public section
 
 universe u
 

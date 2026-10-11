@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import Mathlib.AlgebraicGeometry.ResidueField
-import Mathlib.AlgebraicGeometry.Morphisms.Etale
-import Mathlib.CategoryTheory.Comma.Over.Basic
-import Mathlib.CategoryTheory.InducedCategory
+module
+
+public import Mathlib.AlgebraicGeometry.ResidueField
+public import Mathlib.AlgebraicGeometry.Morphisms.Etale
+public import Mathlib.CategoryTheory.Comma.Over.Basic
+public import Mathlib.CategoryTheory.InducedCategory
 
 /-!
 # Étale algebras with a prime and a residue-field embedding
@@ -14,6 +16,8 @@ import Mathlib.CategoryTheory.InducedCategory
 Source: Stacks Project, Tag 04HX, first paragraph of the proof
 (blueprint: def-weil-pbc-etale-residue-triples).
 -/
+
+@[expose] public section
 
 noncomputable section
 

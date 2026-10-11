@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import Mathlib.AlgebraicGeometry.Scheme
-import Mathlib.RingTheory.Ideal.Quotient.Operations
+module
+
+public import Mathlib.AlgebraicGeometry.Scheme
+public import Mathlib.RingTheory.Ideal.Quotient.Operations
 
 /-!
 # Ideals covering the spectrum of a reduced ring
@@ -12,6 +14,8 @@ import Mathlib.RingTheory.Ideal.Quotient.Operations
 Source: Stacks Project, Varieties Remark 09NW (varieties-remark-conductor)
 (blueprint: lem-sc-reduced-ideals-zero-intersection).
 -/
+
+@[expose] public section
 
 universe u
 

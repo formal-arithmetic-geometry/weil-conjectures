@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import Sheaf.AlgebraicGeometry.Coherent
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
+module
+
+public import Sheaf.AlgebraicGeometry.Coherent
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 
 /-!
 # Finite type of kernels of finite free surjections
@@ -12,6 +14,8 @@ import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 Source: Stacks Project, Modules, Lemma 01BP(1)
 (blueprint: lem-weil-pbc-finite-presentation-kernel-surjection-finite-type).
 -/
+
+@[expose] public section
 
 universe u
 

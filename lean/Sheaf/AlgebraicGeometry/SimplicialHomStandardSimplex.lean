@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import Sheaf.AlgebraicGeometry.SimplicialHomObject
-import Mathlib.AlgebraicTopology.SimplicialSet.Boundary
+module
+
+public import Sheaf.AlgebraicGeometry.SimplicialHomObject
+public import Mathlib.AlgebraicTopology.SimplicialSet.Boundary
 
 /-!
 # Hom objects of standard simplices and their boundaries
@@ -12,6 +14,8 @@ import Mathlib.AlgebraicTopology.SimplicialSet.Boundary
 Source: Stacks Project, Tags 0177, 018V and 0186
 (blueprint: lem-weil-pbc-simplicial-hom-object-standard-simplex).
 -/
+
+@[expose] public section
 
 universe u w t
 

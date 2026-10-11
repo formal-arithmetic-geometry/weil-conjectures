@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import Mathlib.RingTheory.Regular.RegularSequence
+module
+
+public import Mathlib.RingTheory.Regular.RegularSequence
 
 /-!
 # Regular sequences and short exact sequences
@@ -11,6 +13,8 @@ import Mathlib.RingTheory.Regular.RegularSequence
 Source: literature/stacks-project/algebra.tex, Algebra, Lemma Tag 0F1T
 (blueprint: lem-weil-pbc-regular-sequence-short-exact-sequence).
 -/
+
+@[expose] public section
 
 universe u v₁ v₂ v₃
 

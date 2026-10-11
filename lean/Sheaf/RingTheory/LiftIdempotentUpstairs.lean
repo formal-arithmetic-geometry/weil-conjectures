@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group G1
 -/
-import Mathlib.AlgebraicGeometry.Morphisms.Etale
-import Mathlib.RingTheory.TensorProduct.Basic
-import Mathlib.RingTheory.Ideal.Quotient.Operations
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.Etale
+public import Mathlib.RingTheory.TensorProduct.Basic
+public import Mathlib.RingTheory.Ideal.Quotient.Operations
 
 /-!
 # Lifting an idempotent upstairs after an étale neighbourhood
@@ -13,6 +15,8 @@ import Mathlib.RingTheory.Ideal.Quotient.Operations
 Source: literature/stacks-project/more-algebra.tex, Lemma Tag 07M4
 (blueprint: lem-weil-pbc-lift-idempotent-upstairs).
 -/
+
+@[expose] public section
 
 universe u v
 

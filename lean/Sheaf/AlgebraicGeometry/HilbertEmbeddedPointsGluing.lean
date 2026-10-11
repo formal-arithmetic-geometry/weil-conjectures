@@ -1,11 +1,15 @@
-import Sheaf.AlgebraicGeometry.Coherent
-import Mathlib.AlgebraicGeometry.Noetherian
+module
+
+public import Sheaf.AlgebraicGeometry.Coherent
+public import Mathlib.AlgebraicGeometry.Noetherian
 
 /-! # Gluing the affine embedded-point submodules
 
 Source: Stacks Project, Divisors, Tag 02OL, proof of Lemma 31.5.8
 (blueprint: lem-sc-hilbert-embedded-points-gluing).
 -/
+
+@[expose] public section
 
 universe u
 

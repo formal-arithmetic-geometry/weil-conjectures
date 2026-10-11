@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import Sheaf.AlgebraicGeometry.NagataMorphismDescent
+module
+
+public import Sheaf.AlgebraicGeometry.NagataMorphismDescent
 
 /-!
 # The selected finite-stage morphism recovers the original morphism
@@ -12,6 +14,8 @@ Source: Weil conjectures blueprint, sec-nagata-compactification,
 sk-prop-nagata-sketch-approximation, node order 354
 (blueprint: lemma-nagata-morphism-descends).
 -/
+
+@[expose] public section
 
 universe u
 

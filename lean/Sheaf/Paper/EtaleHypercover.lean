@@ -2,8 +2,10 @@
 Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 -/
-import Mathlib.AlgebraicGeometry.Sites.Etale
-import Mathlib.AlgebraicTopology.SimplicialObject.Basic
+module
+
+public import Mathlib.AlgebraicGeometry.Sites.Etale
+public import Mathlib.AlgebraicTopology.SimplicialObject.Basic
 
 /-!
 # Étale hypercovers without finiteness or splitting
@@ -12,6 +14,8 @@ Source: Stacks Project, Hypercoverings, Definition 01G5 and Lemma 01GI;
 matching schemes as in blueprint `def-weil-pbc-finite-split-hypercover`.
 (blueprint: def-weil-pbc-etale-hypercover)
 -/
+
+@[expose] public section
 
 universe u
 

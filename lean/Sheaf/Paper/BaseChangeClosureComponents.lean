@@ -1,9 +1,11 @@
-import Sheaf.AlgebraicGeometry.BaseChangeConventions
-import Sheaf.AlgebraicGeometry.SmoothProjectiveCurve
-import WeilConjectures.AlgebraicGeometry.Curve
-import WeilConjectures.AlgebraicGeometry.Modules.Invertible
-import WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar
-import Sheaf.FieldTheory.SeparableExtension
+module
+
+public import Sheaf.AlgebraicGeometry.BaseChangeConventions
+public import Sheaf.AlgebraicGeometry.SmoothProjectiveCurve
+public import WeilConjectures.AlgebraicGeometry.Curve
+public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
+public import WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar
+public import Sheaf.FieldTheory.SeparableExtension
 
 /-!
 # Components after base change to an algebraic closure
@@ -12,6 +14,8 @@ Source: `literature/stacks-project/varieties.tex`, Lemmas 0BUG and 0FD1,
 with the degree calculation from Cohomology of Schemes, Lemma 02KH
 (blueprint: lem-pc-base-change-closure-components).
 -/
+
+@[expose] public section
 
 universe u
 

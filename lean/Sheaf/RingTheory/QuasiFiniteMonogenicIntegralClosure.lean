@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import Mathlib.RingTheory.IntegralClosure.Algebra.Basic
-import Mathlib.RingTheory.Localization.Away.Basic
-import Sheaf.RingTheory.QuasiFiniteAtPrime
+module
+
+public import Mathlib.RingTheory.IntegralClosure.Algebra.Basic
+public import Mathlib.RingTheory.Localization.Away.Basic
+public import Sheaf.RingTheory.QuasiFiniteAtPrime
 
 /-!
 # Integral closure of a monogenic algebra near a quasi-finite prime
@@ -13,6 +15,8 @@ import Sheaf.RingTheory.QuasiFiniteAtPrime
 Source: Stacks Project, Algebra, Lemma Tag 00Q8
 (blueprint: lem-weil-pbc-quasi-finite-monogenic-integral-closure).
 -/
+
+@[expose] public section
 
 universe u
 

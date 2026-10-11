@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import Sheaf.AlgebraicGeometry.FullAffineEtaleTopos
-import Mathlib.CategoryTheory.Sites.Pullback
-import Mathlib.AlgebraicGeometry.Morphisms.Affine
+module
+
+public import Sheaf.AlgebraicGeometry.FullAffineEtaleTopos
+public import Mathlib.CategoryTheory.Sites.Pullback
+public import Mathlib.AlgebraicGeometry.Morphisms.Affine
 
 /-!
 # Base change on the full affine étale sites
@@ -13,6 +15,8 @@ import Mathlib.AlgebraicGeometry.Morphisms.Affine
 Source: Stacks Project, Étale Cohomology, Lemma 0EYL and Topologies, Lemma 04HR
 (blueprint: lem-weil-pbc-affine-etale-site-base-change).
 -/
+
+@[expose] public section
 
 universe u
 

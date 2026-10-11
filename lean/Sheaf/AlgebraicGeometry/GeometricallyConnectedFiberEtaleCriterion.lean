@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group R1
 -/
-import Mathlib.AlgebraicGeometry.Geometrically.Connected
-import Mathlib.AlgebraicGeometry.Morphisms.Etale
+module
+
+public import Mathlib.AlgebraicGeometry.Geometrically.Connected
+public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 
 /-!
 # Geometric connectedness of a fibre tested on étale neighbourhoods
@@ -12,6 +14,8 @@ import Mathlib.AlgebraicGeometry.Morphisms.Etale
 Source: Stacks Project, More on Morphisms, Tag 03GZ
 (blueprint: lem-weil-pbc-stein-geometric-fibre-etale-criterion).
 -/
+
+@[expose] public section
 
 universe u
 

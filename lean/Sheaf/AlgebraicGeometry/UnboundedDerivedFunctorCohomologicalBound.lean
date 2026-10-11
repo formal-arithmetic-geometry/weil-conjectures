@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Sheaf.AlgebraicGeometry.DerivedCategory
-import Mathlib.CategoryTheory.Abelian.RightDerived
-import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Defs
+module
+
+public import Sheaf.AlgebraicGeometry.DerivedCategory
+public import Mathlib.CategoryTheory.Abelian.RightDerived
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Defs
 
 /-!
 # An upper cohomological bound for an unbounded derived functor
@@ -13,6 +15,8 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Defs
 Source: Stacks Project, Derived Categories of Schemes, Tag 08D4, part (3), upper-bound
 clause (blueprint: lem-pc-unbounded-derived-functor-cohomological-bound).
 -/
+
+@[expose] public section
 
 universe u w w'
 

@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group U1
 -/
-import WeilConjectures.SixFunctors.BaseChange.Square
-import Sheaf.AlgebraicGeometry.EtaleInverseImageModulesExact
+module
+
+public import WeilConjectures.SixFunctors.BaseChange.Square
+public import Sheaf.AlgebraicGeometry.EtaleInverseImageModulesExact
 
 /-!
 # Linearity of the underived exchange morphism
@@ -12,6 +14,8 @@ import Sheaf.AlgebraicGeometry.EtaleInverseImageModulesExact
 Source: Stacks Project, Etale Cohomology, Tag 03S6, proof; Modules on Sites,
 Tags 03D3, 03D7, 03D8 (blueprint: lem-weil-pbc-underived-exchange-module-linear).
 -/
+
+@[expose] public section
 
 universe u
 

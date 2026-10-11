@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import Sheaf.AlgebraicGeometry.ConstructibleTorsionCurveSheaf
-import Mathlib.Algebra.Homology.ShortComplex.ShortExact
+module
+
+public import Sheaf.AlgebraicGeometry.ConstructibleTorsionCurveSheaf
+public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 
 /-!
 # Subobjects and quotients of constructible torsion sheaves on curves
@@ -12,6 +14,8 @@ import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 Source: Stacks Project, Etale Cohomology, Proposition 09BH (2), with Definition 03RW
 and Lemma 095E (blueprint: lem-weil-pbc-curve-constructible-sub-quotient).
 -/
+
+@[expose] public section
 
 universe u
 

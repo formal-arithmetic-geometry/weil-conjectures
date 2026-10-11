@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group G1
 -/
-import Sheaf.RingTheory.QuasiFiniteAtPrime
+module
+
+public import Sheaf.RingTheory.QuasiFiniteAtPrime
 
 /-!
 # Finite ring maps are quasi-finite at every prime
@@ -11,6 +13,8 @@ import Sheaf.RingTheory.QuasiFiniteAtPrime
 Source: Stacks Project, Algebra, Tags 00PM and 0H8X
 (blueprint: lem-weil-pbc-finite-ring-map-quasi-finite).
 -/
+
+@[expose] public section
 
 universe u v
 

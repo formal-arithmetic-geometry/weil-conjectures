@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF contributors
 -/
-import Mathlib.Algebra.Algebra.ZMod
-import Mathlib.RingTheory.Extension.Cotangent.Basic
+module
+
+public import Mathlib.Algebra.Algebra.ZMod
+public import Mathlib.RingTheory.Extension.Cotangent.Basic
 
 /-!
 # Vanishing of the first cotangent homology of a field over its positive prime field
@@ -13,6 +15,8 @@ Source: Stacks Project, Algebra, Proposition Tag 0322, characteristic `p`, (1) �
 with base field `𝔽_p`; More on Algebra, Proposition Tag 07E5, proof of (3) ⇔ (4)
 (blueprint: lem-weil-pbc-field-char-p-h1-cotangent-vanishing).
 -/
+
+@[expose] public section
 
 universe u
 

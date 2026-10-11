@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import Mathlib.Algebra.Category.CommAlgCat.Basic
-import Mathlib.CategoryTheory.Limits.HasLimits
-import Mathlib.CategoryTheory.Filtered.Basic
-import Mathlib.RingTheory.TensorProduct.Maps
+module
+
+public import Mathlib.Algebra.Category.CommAlgCat.Basic
+public import Mathlib.CategoryTheory.Limits.HasLimits
+public import Mathlib.CategoryTheory.Filtered.Basic
+public import Mathlib.RingTheory.TensorProduct.Maps
 
 /-!
 # Base change of a filtered colimit of algebras, elementwise
@@ -14,6 +16,8 @@ import Mathlib.RingTheory.TensorProduct.Maps
 Source: Stacks Project, Algebra, Tags 00DD, 00D6 and 00D7
 (blueprint: lem-weil-pbc-filtered-colimit-algebras-tensor-elementwise).
 -/
+
+@[expose] public section
 
 universe uR uI vA uN uM
 

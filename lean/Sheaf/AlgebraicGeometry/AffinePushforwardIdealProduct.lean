@@ -3,11 +3,13 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import Sheaf.AlgebraicGeometry.TensorPullbackStructureSheaf
-import Sheaf.AlgebraicGeometry.IdealModuleProductStalk
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
-import Mathlib.AlgebraicGeometry.Morphisms.Affine
-import Mathlib.CategoryTheory.Subobject.Basic
+module
+
+public import Sheaf.AlgebraicGeometry.TensorPullbackStructureSheaf
+public import Sheaf.AlgebraicGeometry.IdealModuleProductStalk
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
+public import Mathlib.AlgebraicGeometry.Morphisms.Affine
+public import Mathlib.CategoryTheory.Subobject.Basic
 
 /-!
 # Affine pushforward and ideal-module products
@@ -15,6 +17,8 @@ import Mathlib.CategoryTheory.Subobject.Basic
 Source: Stacks Project, Cohomology of Schemes, Lemma 01YP
 (blueprint: lem-weil-pbc-affine-pushforward-ideal-product).
 -/
+
+@[expose] public section
 
 universe v
 

@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group S1
 -/
-import WeilConjectures.AlgebraicGeometry.Curve.Compactification
-import WeilConjectures.AlgebraicGeometry.Curve.Picard
-import Mathlib.GroupTheory.QuotientGroup.Basic
+module
+
+public import WeilConjectures.AlgebraicGeometry.Curve.Compactification
+public import WeilConjectures.AlgebraicGeometry.Curve.Picard
+public import Mathlib.GroupTheory.QuotientGroup.Basic
 
 /-!
 # Restriction of Picard groups across a finite boundary
@@ -14,6 +16,8 @@ Source: blueprint, sec-curve-estimates/sk-prop-cd-affine/lem-sc-pic-affine,
 restriction and boundary divisors, followed by degree splitting
 (blueprint: lem-sc-pic-restriction-boundary).
 -/
+
+@[expose] public section
 
 universe u
 

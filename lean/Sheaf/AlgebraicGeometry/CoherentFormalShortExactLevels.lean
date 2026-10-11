@@ -3,14 +3,18 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group P1
 -/
-import Sheaf.AlgebraicGeometry.CoherentFormalModulesAbelian
-import Mathlib.Algebra.Homology.ShortComplex.ShortExact
+module
+
+public import Sheaf.AlgebraicGeometry.CoherentFormalModulesAbelian
+public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 
 /-! # Levels of a short exact sequence of coherent formal modules
 
 Source: Stacks Project, Cohomology of Schemes, proof of Lemma 0CYV, remarks (a) and (b),
 and proof of Lemma 087X (blueprint: lem-weil-pbc-coherent-formal-short-exact-levels).
 -/
+
+@[expose] public section
 
 universe u
 

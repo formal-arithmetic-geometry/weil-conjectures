@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import Mathlib.RingTheory.Noetherian.Defs
-import Mathlib.RingTheory.RingHom.Flat
-import Mathlib.RingTheory.Regular.RegularSequence
-import Mathlib.RingTheory.LocalRing.RingHom.Basic
+module
+
+public import Mathlib.RingTheory.Noetherian.Defs
+public import Mathlib.RingTheory.RingHom.Flat
+public import Mathlib.RingTheory.Regular.RegularSequence
+public import Mathlib.RingTheory.LocalRing.RingHom.Basic
 
 /-!
 # Lifting a regular sequence from a closed fibre
@@ -14,6 +16,8 @@ import Mathlib.RingTheory.LocalRing.RingHom.Basic
 Source: Stacks Project, Algebra, Lemma 10.99.3 (Tag 00MG)
 (blueprint: lem-weil-pbc-grothendieck-regular-sequence-flat).
 -/
+
+@[expose] public section
 
 universe u v
 

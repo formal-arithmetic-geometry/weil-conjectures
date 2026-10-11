@@ -1,5 +1,7 @@
-import Mathlib.AlgebraicGeometry.Geometrically.Irreducible
-import Mathlib.AlgebraicGeometry.Pullbacks
+module
+
+public import Mathlib.AlgebraicGeometry.Geometrically.Irreducible
+public import Mathlib.AlgebraicGeometry.Pullbacks
 
 /-!
 # Product of geometrically irreducible schemes over a field
@@ -7,6 +9,8 @@ import Mathlib.AlgebraicGeometry.Pullbacks
 Source: literature/stacks-project/varieties.tex, Tag 038F
 (blueprint: lem-sc-irreducible-product-over-field).
 -/
+
+@[expose] public section
 
 universe u
 

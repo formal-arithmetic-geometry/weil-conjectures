@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under the Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Sheaf.AlgebraicGeometry.CommAlgebraSheaf
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
-import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
-import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
+module
+
+public import Sheaf.AlgebraicGeometry.CommAlgebraSheaf
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
+public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
+public import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
 
 /-! # Derived categories of modules over a quasi-coherent algebra
 
@@ -23,6 +25,8 @@ the restriction of scalars along `(sheafCompose _ (forget₂ CommRingCat RingCat
 as in `Scheme.CommAlgebraSheaf.toModule`. The localization is the shared
 `[HasDerivedCategory.{w} (SheafOfModules.{u} _)]` binder, as for `schemeDerivedCategory`.
 -/
+
+@[expose] public section
 
 universe u w
 

@@ -1,5 +1,7 @@
-import Mathlib.AlgebraicGeometry.Sites.Etale
-import Mathlib.CategoryTheory.Sites.IsSheafFor
+module
+
+public import Mathlib.AlgebraicGeometry.Sites.Etale
+public import Mathlib.CategoryTheory.Sites.IsSheafFor
 
 /-!
 # Representable presheaves are sheaves on the small étale site
@@ -7,6 +9,9 @@ import Mathlib.CategoryTheory.Sites.IsSheafFor
 Source: literature/stacks-project/etale-cohomology.tex, Tags 03O3 and 03O4
 (blueprint: lem-weil-pbc-small-etale-representable-presheaf-sheaf).
 -/
+
+@[expose] public section
+
 universe u
 
 open CategoryTheory

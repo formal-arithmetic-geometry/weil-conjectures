@@ -3,15 +3,17 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Sheaf.Algebra.Homology.HomComplex
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
-import Mathlib.Algebra.Category.Grp.Abelian
-import Mathlib.Algebra.Homology.DerivedCategory.Basic
-import Mathlib.Algebra.Homology.HomotopyCategory.KInjective
-import Mathlib.CategoryTheory.Sites.LeftExact
-import Mathlib.CategoryTheory.Sites.LocallyBijective
-import Mathlib.Algebra.Category.Grp.FilteredColimits
+module
+
+public import Sheaf.Algebra.Homology.HomComplex
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
+public import Mathlib.Algebra.Category.Grp.Abelian
+public import Mathlib.Algebra.Homology.DerivedCategory.Basic
+public import Mathlib.Algebra.Homology.HomotopyCategory.KInjective
+public import Mathlib.CategoryTheory.Sites.LeftExact
+public import Mathlib.CategoryTheory.Sites.LocallyBijective
+public import Mathlib.Algebra.Category.Grp.FilteredColimits
 
 /-!
 # Localized derived morphisms into a K-injective complex
@@ -24,6 +26,8 @@ Source: Stacks Project, Lemma 21.34.6, Tag 0A94
 * `module_overFunctor_preservesZero`: the zero-morphism compatibility needed to restrict complexes.
 * `rhom_into_kinjective_local`: the canonical localized derived-morphism bijection.
 -/
+
+@[expose] public section
 
 universe u v w r t
 

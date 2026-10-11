@@ -3,19 +3,23 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Sheaf.AlgebraicGeometry.DerivedPullback
-import Sheaf.Algebra.Homology.ModuleStalkFunctor
-import Sheaf.Algebra.Homology.BaseDerivedTensorCohomologyModel
-import Mathlib.AlgebraicGeometry.Pullbacks
-import Mathlib.Algebra.Category.ModuleCat.Monoidal.Basic
-import Mathlib.CategoryTheory.Monoidal.Tor
-import Mathlib.Algebra.Category.ModuleCat.Projective
+module
+
+public import Sheaf.AlgebraicGeometry.DerivedPullback
+public import Sheaf.Algebra.Homology.ModuleStalkFunctor
+public import Sheaf.Algebra.Homology.BaseDerivedTensorCohomologyModel
+public import Mathlib.AlgebraicGeometry.Pullbacks
+public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Basic
+public import Mathlib.CategoryTheory.Monoidal.Tor
+public import Mathlib.Algebra.Category.ModuleCat.Projective
 
 /-! # Stalk tensor coordinates for a scheme pullback comparison
 
 Source: Stacks Project, Tag 08IB, local affine tensor comparison, and Tag 0098,
 stalks of module pullback (blueprint: def-pc-pullback-stalk-tensor-comparison).
 -/
+
+@[expose] public section
 
 set_option autoImplicit false
 universe u w

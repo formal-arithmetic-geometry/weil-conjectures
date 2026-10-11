@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group J1
 -/
-import Mathlib.AlgebraicGeometry.Fiber
-import Mathlib.AlgebraicGeometry.Morphisms.Etale
-import Mathlib.AlgebraicGeometry.Morphisms.Finite
+module
+
+public import Mathlib.AlgebraicGeometry.Fiber
+public import Mathlib.AlgebraicGeometry.Morphisms.Etale
+public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 
 /-!
 # Finitely many isolated fibre points become finite pieces after an elementary étale base change
@@ -13,6 +15,8 @@ import Mathlib.AlgebraicGeometry.Morphisms.Finite
 Source: Stacks Project, More on Morphisms, Lemma 02LL, lines 11974--12011.
 (blueprint: lem-weil-pbc-etale-local-finite-multiple-points-elementary)
 -/
+
+@[expose] public section
 
 universe u
 

@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import Mathlib.Algebra.Homology.Factorizations.CM5a
+module
+
+public import Mathlib.Algebra.Homology.Factorizations.CM5a
 
 /-!
 # Bounded-below complexes embed into complexes of injectives
@@ -11,6 +13,8 @@ import Mathlib.Algebra.Homology.Factorizations.CM5a
 Source: Stacks Project, Derived Categories, Lemma Tag 013K (part (3)),
 using Lemma Tag 05T6 (blueprint: lem-weil-pbc-complex-injective-resolution-mono).
 -/
+
+@[expose] public section
 
 universe u v
 

@@ -3,15 +3,19 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings
-import Mathlib.CategoryTheory.Comma.Over.Basic
+module
+
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings
+public import Mathlib.CategoryTheory.Comma.Over.Basic
 
 /-! # Sheaves of commutative algebras on a scheme
 
 Source: Stacks Project, Properties, Tag 05JT; Modules, algebras on ringed spaces
 (blueprint: def-weil-pbc-comm-algebra-sheaf).
 -/
+
+@[expose] public section
 
 universe uA
 

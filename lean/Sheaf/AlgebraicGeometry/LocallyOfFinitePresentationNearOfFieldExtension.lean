@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
-import Sheaf.AlgebraicGeometry.BaseChangeConventions
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
+public import Sheaf.AlgebraicGeometry.BaseChangeConventions
 
 /-!
 # Pointwise descent of local finite presentation along a field extension
@@ -12,6 +14,8 @@ import Sheaf.AlgebraicGeometry.BaseChangeConventions
 Source: Stacks Project, Varieties, Tag 0C4Y, and the affine-local definition of local
 finite presentation (blueprint: lem-sc-lfp-field-extension-pointwise-descent).
 -/
+
+@[expose] public section
 
 universe u
 

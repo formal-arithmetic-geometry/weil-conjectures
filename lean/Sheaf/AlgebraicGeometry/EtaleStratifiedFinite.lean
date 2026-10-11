@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Sheaf.AlgebraicGeometry.LocallyClosedStratification
-import Mathlib.AlgebraicGeometry.Morphisms.Etale
-import Mathlib.AlgebraicGeometry.Morphisms.Finite
-import Mathlib.Topology.Constructible
+module
+
+public import Sheaf.AlgebraicGeometry.LocallyClosedStratification
+public import Mathlib.AlgebraicGeometry.Morphisms.Etale
+public import Mathlib.AlgebraicGeometry.Morphisms.Finite
+public import Mathlib.Topology.Constructible
 
 /-!
 # Etale morphisms become finite etale on constructible strata
@@ -14,6 +16,8 @@ import Mathlib.Topology.Constructible
 Source: Stacks Project, Etale Cohomology, Lemma 59.72.1, Tag 03S0
 (blueprint: lem-weil-pbc-etale-stratified-finite).
 -/
+
+@[expose] public section
 
 universe u
 

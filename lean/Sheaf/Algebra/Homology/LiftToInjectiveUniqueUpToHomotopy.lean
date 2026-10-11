@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import Mathlib.CategoryTheory.Abelian.Basic
-import Mathlib.CategoryTheory.Preadditive.Injective.Basic
-import Mathlib.Algebra.Homology.QuasiIso
+module
+
+public import Mathlib.CategoryTheory.Abelian.Basic
+public import Mathlib.CategoryTheory.Preadditive.Injective.Basic
+public import Mathlib.Algebra.Homology.QuasiIso
 
 /-! # Uniqueness up to homotopy of lifts into an injective complex
 
@@ -13,6 +15,8 @@ Source: Stacks Project, Derived Categories, Lemma 13.18.7 (Tag 013S),
 `lemma-morphisms-equal-up-to-homotopy`
 (blueprint: lem-weil-pbc-lift-to-injective-unique-up-to-homotopy).
 -/
+
+@[expose] public section
 
 universe v u
 

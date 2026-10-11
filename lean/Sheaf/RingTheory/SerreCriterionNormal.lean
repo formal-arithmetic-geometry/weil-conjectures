@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import Sheaf.RingTheory.SerreConditions
-import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
+module
+
+public import Sheaf.RingTheory.SerreConditions
+public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
 
 /-!
 # Serre's criterion for normality
@@ -12,6 +14,8 @@ import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
 Source: Stacks Project, Algebra, Lemma 10.157.4 (Tag 031S)
 (blueprint: lem-weil-pbc-serre-criterion-normal).
 -/
+
+@[expose] public section
 
 universe u
 

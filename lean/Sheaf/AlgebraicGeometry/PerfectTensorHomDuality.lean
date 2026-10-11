@@ -3,16 +3,20 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import Sheaf.AlgebraicGeometry.PerfectComplex
-import Sheaf.AlgebraicGeometry.DerivedPullback
-import Sheaf.AlgebraicGeometry.DerivedTensorStructure
-import Mathlib.CategoryTheory.Monoidal.Rigid.Basic
+module
+
+public import Sheaf.AlgebraicGeometry.PerfectComplex
+public import Sheaf.AlgebraicGeometry.DerivedPullback
+public import Sheaf.AlgebraicGeometry.DerivedTensorStructure
+public import Mathlib.CategoryTheory.Monoidal.Rigid.Basic
 
 /-! # Tensor-Hom duality for perfect complexes
 
 Source: Stacks Project, duality.tex, Tag 0A9T; cohomology.tex, Tags 08DQ,
 0FPC and 0GM7 (blueprint: lem-pc-perfect-tensor-hom-duality).
 -/
+
+@[expose] public section
 
 universe u₁ w₁
 

@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import Mathlib.RingTheory.Spectrum.Prime.ConstructibleSet
+module
+
+public import Mathlib.RingTheory.Spectrum.Prime.ConstructibleSet
 
 /-!
 # Disjoint refinement of basic constructible subsets of an affine spectrum
@@ -12,6 +14,8 @@ Source: Stacks Project, Algebra, Lemma 10.29.3 (Tag 0G1P), and the refinement st
 in Étale Cohomology, Lemma 59.72.1 (Tag 03S0) (blueprint:
 lem-weil-pbc-affine-basic-sets-disjoint-refinement).
 -/
+
+@[expose] public section
 
 universe u
 

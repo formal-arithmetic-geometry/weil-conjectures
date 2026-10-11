@@ -3,16 +3,20 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import Mathlib.RingTheory.DiscreteValuationRing.Basic
-import Mathlib.RingTheory.Localization.FractionRing
-import Mathlib.LinearAlgebra.FreeModule.PID
-import Mathlib.LinearAlgebra.TensorProduct.Basic
+module
+
+public import Mathlib.RingTheory.DiscreteValuationRing.Basic
+public import Mathlib.RingTheory.Localization.FractionRing
+public import Mathlib.LinearAlgebra.FreeModule.PID
+public import Mathlib.LinearAlgebra.TensorProduct.Basic
 
 /-! # Saturation of a line in a free module over a DVR
 
 Source: Stacks Project, divisors.tex, Tag 0CC4, and the rank-induction paragraph of
 `lem-sc-riemann-roch` (blueprint: lem-sc-dvr-saturation-line).
 -/
+
+@[expose] public section
 
 open scoped TensorProduct
 

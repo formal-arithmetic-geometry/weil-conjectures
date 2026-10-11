@@ -3,11 +3,13 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Mathlib.AlgebraicGeometry.AffineScheme
-import Mathlib.AlgebraicGeometry.Fiber
-import Mathlib.AlgebraicGeometry.Morphisms.Smooth
-import Mathlib.Algebra.Category.ModuleCat.Differentials.Basic
-import WeilConjectures.Mathlib.Topology.KrullDimension
+module
+
+public import Mathlib.AlgebraicGeometry.AffineScheme
+public import Mathlib.AlgebraicGeometry.Fiber
+public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
+public import Mathlib.Algebra.Category.ModuleCat.Differentials.Basic
+public import WeilConjectures.Mathlib.Topology.KrullDimension
 
 /-!
 # Differentials of a smooth morphism and fibre dimension
@@ -15,6 +17,8 @@ import WeilConjectures.Mathlib.Topology.KrullDimension
 Source: Stacks Project, Morphisms, Lemma 02G1 (label lemma-smooth-omega-finite-locally-free).
 (blueprint: lem-weil-pbc-smooth-differentials-free-rank-fibre-dimension)
 -/
+
+@[expose] public section
 
 universe u
 

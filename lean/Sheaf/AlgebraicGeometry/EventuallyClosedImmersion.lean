@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import Sheaf.AlgebraicGeometry.LimitAffineTransition
-import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
+module
+
+public import Sheaf.AlgebraicGeometry.LimitAffineTransition
+public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 
 /-!
 # Eventual closed immersions in inverse systems
@@ -14,6 +16,8 @@ import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 Source: Stacks Project, Limits, Lemma 0A0N
 (blueprint: lem-weil-pbc-eventually-closed-immersion).
 -/
+
+@[expose] public section
 
 universe u
 

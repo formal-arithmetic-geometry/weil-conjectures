@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import Sheaf.CategoryTheory.Filtration
+module
+
+public import Sheaf.CategoryTheory.Filtration
 
 /-!
 # Image filtrations
@@ -11,6 +13,8 @@ import Sheaf.CategoryTheory.Filtration
 Source: blueprint node `def-sp-image-filtration`, order 508
 (blueprint: def-sp-image-filtration).
 -/
+
+@[expose] public section
 
 universe v u
 

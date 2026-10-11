@@ -3,12 +3,14 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group V1
 -/
-import Sheaf.AlgebraicGeometry.DerivedCategory
-import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
-import Sheaf.AlgebraicGeometry.ClosedSubsetProperOverBase
-import Sheaf.AlgebraicGeometry.Coherent
-import Mathlib.AlgebraicGeometry.Noetherian
-import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
+module
+
+public import Sheaf.AlgebraicGeometry.DerivedCategory
+public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
+public import Sheaf.AlgebraicGeometry.ClosedSubsetProperOverBase
+public import Sheaf.AlgebraicGeometry.Coherent
+public import Mathlib.AlgebraicGeometry.Noetherian
+public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 
 /-! # Proper-support direct image preserves bounded coherent complexes
 
@@ -16,6 +18,8 @@ Source: literature/stacks-project/perfect.tex, Derived Categories of Schemes,
 Lemma 36.11.3 (Tag 08E2; label lemma-direct-image-coherent)
 (blueprint: lem-pc-direct-image-bounded-coherent).
 -/
+
+@[expose] public section
 
 universe u wX wS
 

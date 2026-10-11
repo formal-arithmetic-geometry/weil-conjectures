@@ -3,11 +3,13 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Mathlib.CategoryTheory.Limits.HasLimits
-import Mathlib.CategoryTheory.Category.Preorder
-import Mathlib.Algebra.Category.Ring.Basic
-import Mathlib.Algebra.Category.Grp.Basic
-import Mathlib.LinearAlgebra.TensorProduct.Map
+module
+
+public import Mathlib.CategoryTheory.Limits.HasLimits
+public import Mathlib.CategoryTheory.Category.Preorder
+public import Mathlib.Algebra.Category.Ring.Basic
+public import Mathlib.Algebra.Category.Grp.Basic
+public import Mathlib.LinearAlgebra.TensorProduct.Map
 
 /-!
 # Tensor products and directed colimits with varying coefficient rings
@@ -15,6 +17,8 @@ import Mathlib.LinearAlgebra.TensorProduct.Map
 Source: Stacks Project, Sheaves, Tag 007K, algebraic content; Algebra, Tag 00DD,
 second direct proof (blueprint: lem-weil-pbc-filtered-colimit-tensor-varying-rings).
 -/
+
+@[expose] public section
 
 universe z u v w v' w'
 

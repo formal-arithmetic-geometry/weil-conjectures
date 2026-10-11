@@ -1,6 +1,8 @@
-import Sheaf.Paper.RelativeGlobalCompleteIntersectionPresentation
-import Mathlib.RingTheory.Localization.Away.Basic
-import Mathlib.Algebra.MvPolynomial.Rename
+module
+
+public import Sheaf.Paper.RelativeGlobalCompleteIntersectionPresentation
+public import Mathlib.RingTheory.Localization.Away.Basic
+public import Mathlib.Algebra.MvPolynomial.Rename
 
 /-!
 # Principal localization of a relative global complete intersection
@@ -8,6 +10,8 @@ import Mathlib.Algebra.MvPolynomial.Rename
 Source: Stacks Project, Algebra, Lemma Tag 00SS, part (2)
 (blueprint: lem-weil-pbc-relative-global-complete-intersection-principal-localization).
 -/
+
+@[expose] public section
 
 universe u
 

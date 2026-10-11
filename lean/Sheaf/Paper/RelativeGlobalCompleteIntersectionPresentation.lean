@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group J1
 -/
-import Sheaf.Paper.RelativeGlobalCompleteIntersection
+module
+
+public import Sheaf.Paper.RelativeGlobalCompleteIntersection
 
 /-!
 # The relative global complete intersection condition for specified equations
@@ -13,6 +15,8 @@ Source: Stacks Project, Algebra, Definition 00SP
 The ring-map notion is `Algebra.IsRelativeGlobalCompleteIntersection` in the imported module;
 this module supplies the specified-presentation notion in the same definition.
 -/
+
+@[expose] public section
 
 universe u
 

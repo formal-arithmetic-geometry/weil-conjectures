@@ -1,10 +1,14 @@
-import Mathlib.AlgebraicGeometry.Scheme
-import Mathlib.CategoryTheory.Abelian.RightDerived
-import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
-import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImage
-import Sheaf.AlgebraicGeometry.FlatBaseChangeOpenChoices
-import Sheaf.Topology.OpenModuleCohomology
-import Sheaf.Topology.PresheafModuleStalkFunctor
+module
+
+public import Mathlib.AlgebraicGeometry.Scheme
+public import Mathlib.CategoryTheory.Abelian.RightDerived
+public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
+public import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImage
+public import Sheaf.AlgebraicGeometry.FlatBaseChangeOpenChoices
+public import Sheaf.Topology.OpenModuleCohomology
+public import Sheaf.Topology.PresheafModuleStalkFunctor
+
+@[expose] public section
 
 universe u
 set_option autoImplicit false

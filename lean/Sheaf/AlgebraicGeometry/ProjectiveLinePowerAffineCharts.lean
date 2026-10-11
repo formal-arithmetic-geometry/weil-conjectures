@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Twist
-import Sheaf.AlgebraicGeometry.Ample
-import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
-import Mathlib.CategoryTheory.Limits.Shapes.Products
+module
+
+public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Twist
+public import Sheaf.AlgebraicGeometry.Ample
+public import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
+public import Mathlib.CategoryTheory.Limits.Shapes.Products
 
 /-!
 # Standard affine charts of a fibre power of the projective line
@@ -14,6 +16,8 @@ import Mathlib.CategoryTheory.Limits.Shapes.Products
 Source: Stacks Project, Constructions, Section 27.13 (Tag 01ND), and Schemes,
 Tags 01JR and 01JQ (blueprint: lem-weil-pbc-p1-power-affine-charts).
 -/
+
+@[expose] public section
 
 universe u
 

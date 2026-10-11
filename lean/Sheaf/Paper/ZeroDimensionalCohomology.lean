@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group N1
 -/
-import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
-import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCompatibility
-import Mathlib.AlgebraicGeometry.Sites.EtalePoint
-import Mathlib.Topology.KrullDimension
+module
+
+public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCompatibility
+public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
+public import Mathlib.Topology.KrullDimension
 
 /-! # Étale cohomology in dimension zero
 
@@ -14,6 +16,8 @@ Source: literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-cd/
 lem-weil-pbc-zero-dimensional-cohomology.md
 (blueprint: lem-weil-pbc-zero-dimensional-cohomology).
 -/
+
+@[expose] public section
 
 universe u
 

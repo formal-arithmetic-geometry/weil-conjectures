@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import Mathlib.Analysis.Normed.Unbundled.SpectralNorm
-import Sheaf.NumberTheory.Padics.ExtensionIntegersDvr
-import Mathlib.RingTheory.Ideal.Quotient.Defs
+module
+
+public import Mathlib.Analysis.Normed.Unbundled.SpectralNorm
+public import Sheaf.NumberTheory.Padics.ExtensionIntegersDvr
+public import Mathlib.RingTheory.Ideal.Quotient.Defs
 
 /-!
 # Finite p-adic coefficient extensions
@@ -18,6 +20,8 @@ The absolute value is the spectral absolute value. The ring of integers, its max
 ideal, and one uniformizer are selected from `Padic.extension_integers_dvr`.
 The claims about these data are the separately cited dependency theorems.
 -/
+
+@[expose] public section
 
 universe u
 

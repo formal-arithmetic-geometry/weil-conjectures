@@ -3,11 +3,13 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import Mathlib.Algebra.MvPolynomial.Basic
-import Mathlib.AlgebraicGeometry.Scheme
-import Mathlib.RingTheory.Localization.AtPrime.Basic
-import Mathlib.RingTheory.KrullDimension.Basic
-import WeilConjectures.Mathlib.Topology.KrullDimension
+module
+
+public import Mathlib.Algebra.MvPolynomial.Basic
+public import Mathlib.AlgebraicGeometry.Scheme
+public import Mathlib.RingTheory.Localization.AtPrime.Basic
+public import Mathlib.RingTheory.KrullDimension.Basic
+public import WeilConjectures.Mathlib.Topology.KrullDimension
 
 /-!
 # Dimension at a closed point of an affine scheme over a field
@@ -15,6 +17,8 @@ import WeilConjectures.Mathlib.Topology.KrullDimension
 Source: Stacks Project, Algebra, Lemma 00OU, a specialization of Lemma 00OT
 (blueprint: lem-weil-pbc-closed-point-dimension-local-ring).
 -/
+
+@[expose] public section
 
 universe u v
 

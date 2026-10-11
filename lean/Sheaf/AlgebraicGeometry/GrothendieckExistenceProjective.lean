@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group T1
 -/
-import Mathlib.RingTheory.AdicCompletion.Basic
-import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
-import Sheaf.AlgebraicGeometry.CoherentFormalModule
+module
+
+public import Mathlib.RingTheory.AdicCompletion.Basic
+public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
+public import Sheaf.AlgebraicGeometry.CoherentFormalModule
 
 /-!
 # Grothendieck existence for closed subschemes of projective space
@@ -13,6 +15,8 @@ import Sheaf.AlgebraicGeometry.CoherentFormalModule
 Source: Stacks Project, Cohomology of Schemes, Lemma 0885
 (blueprint: lem-weil-pbc-grothendieck-existence-projective).
 -/
+
+@[expose] public section
 
 universe u
 

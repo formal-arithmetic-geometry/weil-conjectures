@@ -3,13 +3,15 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group U1
 -/
-import Mathlib.CategoryTheory.Monoidal.Tor
-import Mathlib.Algebra.Category.ModuleCat.Monoidal.Basic
-import Mathlib.Algebra.Category.ModuleCat.Abelian
-import Mathlib.Algebra.Category.ModuleCat.Projective
-import Mathlib.LinearAlgebra.FreeModule.Basic
-import Mathlib.RingTheory.Ideal.Quotient.Defs
-import Mathlib.RingTheory.Ideal.Maps
+module
+
+public import Mathlib.CategoryTheory.Monoidal.Tor
+public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Basic
+public import Mathlib.Algebra.Category.ModuleCat.Abelian
+public import Mathlib.Algebra.Category.ModuleCat.Projective
+public import Mathlib.LinearAlgebra.FreeModule.Basic
+public import Mathlib.RingTheory.Ideal.Quotient.Defs
+public import Mathlib.RingTheory.Ideal.Maps
 
 /-!
 # Naturality of the ideal-kernel description of first Tor
@@ -17,6 +19,8 @@ import Mathlib.RingTheory.Ideal.Maps
 Source: Stacks Project, Algebra, Tags 00M6, 00M5, 00MO and 00LS
 (blueprint: lem-weil-pbc-tor-ideal-kernel-naturality).
 -/
+
+@[expose] public section
 
 universe u
 

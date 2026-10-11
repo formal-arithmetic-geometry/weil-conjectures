@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.Flat
+module
+
+public import Sheaf.Algebra.Category.ModuleCat.Sheaf.Flat
 
 /-!
 # Sheafification preserves flatness of module presheaves
@@ -11,6 +13,8 @@ import Sheaf.Algebra.Category.ModuleCat.Sheaf.Flat
 Source: Stacks Project, Modules on Sites, Lemma 18.28.3, Tag 03ET
 (blueprint: lem-pc-sites-modules-sheafification-flat).
 -/
+
+@[expose] public section
 
 universe u
 

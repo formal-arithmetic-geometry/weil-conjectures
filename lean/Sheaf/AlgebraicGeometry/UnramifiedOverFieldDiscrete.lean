@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group G1
 -/
-import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
-import Mathlib.AlgebraicGeometry.Limits
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
+public import Mathlib.AlgebraicGeometry.Limits
 
 /-!
 # Discreteness of a scheme unramified over a field
@@ -13,6 +15,8 @@ Source: Stacks Project, Morphisms, Lemma 02G7 (lemma-unramified-over-field),
 part (1), topological part of the only-if direction
 (blueprint: lem-weil-pbc-unramified-over-field-discrete).
 -/
+
+@[expose] public section
 
 universe u
 

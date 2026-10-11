@@ -3,13 +3,15 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import Mathlib.Algebra.Category.ModuleCat.Basic
-import Mathlib.Algebra.DirectSum.Decomposition
-import Mathlib.LinearAlgebra.Basis.Defs
-import Mathlib.RingTheory.Finiteness.Defs
-import Mathlib.RingTheory.GradedAlgebra.Homogeneous.Submodule
-import Mathlib.RingTheory.Ideal.Operations
-import Mathlib.RingTheory.MvPolynomial.Homogeneous
+module
+
+public import Mathlib.Algebra.Category.ModuleCat.Basic
+public import Mathlib.Algebra.DirectSum.Decomposition
+public import Mathlib.LinearAlgebra.Basis.Defs
+public import Mathlib.RingTheory.Finiteness.Defs
+public import Mathlib.RingTheory.GradedAlgebra.Homogeneous.Submodule
+public import Mathlib.RingTheory.Ideal.Operations
+public import Mathlib.RingTheory.MvPolynomial.Homogeneous
 
 /-!
 # Minimal finite graded free presentations over a two-variable polynomial ring
@@ -17,6 +19,8 @@ import Mathlib.RingTheory.MvPolynomial.Homogeneous
 Source: the blueprint, `lem-sc-p1-graded-resolution`, graded free resolutions;
 Stacks Project, Algebra, Section 00JL (blueprint: def-sc-p1-minimal-graded-presentation).
 -/
+
+@[expose] public section
 
 universe u
 

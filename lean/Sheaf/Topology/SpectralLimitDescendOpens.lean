@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import Mathlib.Topology.Spectral.Basic
-import Mathlib.Topology.Spectral.Hom
+module
+
+public import Mathlib.Topology.Spectral.Basic
+public import Mathlib.Topology.Spectral.Hom
 
 /-!
 # Descent of compact opens in directed limits of spectral spaces
@@ -12,6 +14,8 @@ import Mathlib.Topology.Spectral.Hom
 Source: Stacks Project, Topology, Lemma 0A30 (`lemma-descend-opens`), specialized to a
 nonempty directed set (blueprint: lem-weil-pbc-spectral-limit-descend-opens).
 -/
+
+@[expose] public section
 
 universe u v
 

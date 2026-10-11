@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group J1
 -/
-import Sheaf.AlgebraicGeometry.Ample
-import Sheaf.AlgebraicGeometry.Coherent
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
+module
+
+public import Sheaf.AlgebraicGeometry.Ample
+public import Sheaf.AlgebraicGeometry.Coherent
+public import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 
 /-! # Global generation after a sufficiently positive ample twist
 
@@ -13,6 +15,8 @@ Source: EGA II, Proposition 4.5.5, implication ample ⇒ d); Stacks Project,
 Properties, Proposition 01Q3, (1) ⇒ (7)
 (blueprint: lem-weil-pbc-coherent-twist-global-generation).
 -/
+
+@[expose] public section
 
 universe u
 

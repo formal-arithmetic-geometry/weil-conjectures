@@ -3,15 +3,19 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group G1
 -/
-import WeilConjectures.SixFunctors.Etale.Derived.GlobalSections
-import Mathlib.AlgebraicGeometry.AffineTransitionLimit
-import Mathlib.CategoryTheory.Filtered.Basic
+module
+
+public import WeilConjectures.SixFunctors.Etale.Derived.GlobalSections
+public import Mathlib.AlgebraicGeometry.AffineTransitionLimit
+public import Mathlib.CategoryTheory.Filtered.Basic
 
 /-! # Derived étale cohomology over an inverse limit
 
 Source: literature/stacks-project/etale-cohomology.tex, Lemma Tag 0GIT
 (blueprint: lem-weil-pbc-derived-etale-cohomology-limit).
 -/
+
+@[expose] public section
 
 universe u
 

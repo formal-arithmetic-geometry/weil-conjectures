@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import Sheaf.AlgebraicGeometry.Modules.ExteriorSheaf
-import WeilConjectures.AlgebraicGeometry.Modules.TensorSection
-import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
-import Mathlib.Algebra.Homology.ShortComplex.ShortExact
+module
+
+public import Sheaf.AlgebraicGeometry.Modules.ExteriorSheaf
+public import WeilConjectures.AlgebraicGeometry.Modules.TensorSection
+public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
+public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 
 /-!
 # Determinants in short exact sequences
@@ -14,6 +16,8 @@ import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 Source: blueprint, `sec-picard-framework/sk-thm-picard-rr/lem-sc-riemann-roch.md`,
 proof of (*), determinant paragraph (blueprint: lem-sc-determinant-short-exact).
 -/
+
+@[expose] public section
 
 universe v
 

@@ -2,9 +2,11 @@
 Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 -/
-import Sheaf.RingTheory.IsStrictHenselization
-import Mathlib.RingTheory.Ideal.Cotangent
-import Mathlib.LinearAlgebra.TensorProduct.Tower
+module
+
+public import Sheaf.RingTheory.IsStrictHenselization
+public import Mathlib.RingTheory.Ideal.Cotangent
+public import Mathlib.LinearAlgebra.TensorProduct.Tower
 
 /-!
 # Cotangent dimension and strict henselization
@@ -12,6 +14,8 @@ import Mathlib.LinearAlgebra.TensorProduct.Tower
 Source: Stacks Project, `more-algebra.tex`, Tag 06LN and Tag 07QM
 (blueprint: lem-sc-strict-henselization-cotangent-dimension).
 -/
+
+@[expose] public section
 
 universe u
 

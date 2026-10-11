@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.Flat
-import Sheaf.CategoryTheory.ExtensionByZeroPresheaf
+module
+
+public import Sheaf.Algebra.Category.ModuleCat.Sheaf.Flat
+public import Sheaf.CategoryTheory.ExtensionByZeroPresheaf
 
 /-!
 # Flatness of the localized unit extended by zero
@@ -12,6 +14,8 @@ import Sheaf.CategoryTheory.ExtensionByZeroPresheaf
 Source: Stacks Project, Modules on Sites, Lemma 18.28.7, Tag 03EV, clause (2)
 (blueprint: lem-pc-sites-modules-j-shriek-flat).
 -/
+
+@[expose] public section
 
 universe u
 

@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import Sheaf.Algebra.Homology.ModuleStalkFunctor
-import Mathlib.AlgebraicGeometry.FunctionField
-import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
+module
+
+public import Sheaf.Algebra.Homology.ModuleStalkFunctor
+public import Mathlib.AlgebraicGeometry.FunctionField
+public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 
 /-!
 # Nonzero ideals on integral schemes and their generic stalks
@@ -13,6 +15,8 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 Source: Stacks Project, Cohomology of Schemes, proof of Lemma 01YL
 (blueprint: lem-weil-pbc-integral-scheme-ideal-generic-stalk).
 -/
+
+@[expose] public section
 
 universe u
 

@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import Sheaf.RingTheory.PairHenselization
-import Mathlib.RingTheory.RingHom.Flat
+module
+
+public import Sheaf.RingTheory.PairHenselization
+public import Mathlib.RingTheory.RingHom.Flat
 
 /-!
 # Flatness and ideal-power quotients of a pair henselization
@@ -12,6 +14,8 @@ import Mathlib.RingTheory.RingHom.Flat
 Source: Stacks Project, More on Algebra, Lemma 15.12.2, Tag 0AGU
 (blueprint: lem-weil-pbc-henselization-flat-quotients).
 -/
+
+@[expose] public section
 
 universe u
 

@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import Mathlib.FieldTheory.Separable
-import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
+module
+
+public import Mathlib.FieldTheory.Separable
+public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
 
 /-!
 # Roots of polynomials with p-th-power coefficients
@@ -12,6 +14,8 @@ import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
 Source: Stacks Project, Fields, Lemma Tag 031V, part (2)
 (blueprint: lem-weil-pbc-separable-root-pth-power).
 -/
+
+@[expose] public section
 
 set_option autoImplicit false
 

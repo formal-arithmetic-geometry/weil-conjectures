@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group R1
 -/
-import Mathlib.AlgebraicGeometry.Morphisms.Proper
-import Mathlib.AlgebraicGeometry.Fiber
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.Proper
+public import Mathlib.AlgebraicGeometry.Fiber
 
 /-!
 # Connected fibres of a normalized proper morphism to an affine scheme
@@ -12,6 +14,8 @@ import Mathlib.AlgebraicGeometry.Fiber
 Source: Stacks Project, More on Morphisms, Theorem 37.53.5 (Tag 03H2), normalized
  affine reduction (blueprint: lem-weil-pbc-stein-normalized-fibre-idempotent).
 -/
+
+@[expose] public section
 
 universe u
 

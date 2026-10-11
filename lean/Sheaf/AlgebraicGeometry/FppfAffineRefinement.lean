@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import Mathlib.AlgebraicGeometry.Sites.Fpqc
-import Mathlib.AlgebraicGeometry.AffineScheme
+module
+
+public import Mathlib.AlgebraicGeometry.Sites.Fpqc
+public import Mathlib.AlgebraicGeometry.AffineScheme
 
 /-!
 # Finite affine refinement of an fppf covering
@@ -12,6 +14,8 @@ import Mathlib.AlgebraicGeometry.AffineScheme
 Source: Stacks Project, Topologies, Lemma 34.7.4 (Tag 021P)
 (blueprint: lem-pc-fppf-affine-refinement).
 -/
+
+@[expose] public section
 
 universe v u
 

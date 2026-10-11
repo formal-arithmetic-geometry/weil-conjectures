@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import Sheaf.RingTheory.SerreConditions
+module
+
+public import Sheaf.RingTheory.SerreConditions
 
 /-!
 # Serre's criterion for reducedness
@@ -11,6 +13,8 @@ import Sheaf.RingTheory.SerreConditions
 Source: Stacks Project, Algebra, Lemma 10.157.3 (Tag 031R)
 (blueprint: lem-weil-pbc-serre-criterion-reduced).
 -/
+
+@[expose] public section
 
 universe u
 

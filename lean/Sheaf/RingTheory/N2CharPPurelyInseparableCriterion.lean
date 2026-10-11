@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import Sheaf.RingTheory.JapaneseDomain
-import Mathlib.FieldTheory.PurelyInseparable.Basic
-import Mathlib.Algebra.CharP.Basic
+module
+
+public import Sheaf.RingTheory.JapaneseDomain
+public import Mathlib.FieldTheory.PurelyInseparable.Basic
+public import Mathlib.Algebra.CharP.Basic
 
 /-!
 # In characteristic p, N-2 is tested on finite purely inseparable extensions
@@ -18,6 +20,8 @@ Source: literature/stacks-project/algebra.tex, Algebra, Lemma Tag 032N
 * `isN2_of_finite_purelyInseparable_integralClosure`: in positive characteristic,
   finiteness of integral closures in finite purely inseparable extensions implies N-2.
 -/
+
+@[expose] public section
 
 universe u v
 

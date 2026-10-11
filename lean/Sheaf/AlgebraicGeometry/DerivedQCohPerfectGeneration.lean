@@ -3,13 +3,17 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Sheaf.AlgebraicGeometry.PerfectLocalizingClosure
+module
+
+public import Sheaf.AlgebraicGeometry.PerfectLocalizingClosure
 
 /-! # Perfect complexes generate the quasi-coherent derived category
 
 Source: literature/stacks-project/derived-categories-of-schemes.tex, Theorem
 perfect-theorem-bondal-van-den-Bergh (blueprint: lem-pc-derived-qcoh-perfect-generation).
 -/
+
+@[expose] public section
 
 universe u1 w1
 

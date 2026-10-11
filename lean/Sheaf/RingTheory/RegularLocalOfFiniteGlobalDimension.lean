@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import Mathlib.RingTheory.RegularLocalRing.Defs
-import Sheaf.RingTheory.GlobalDimension
+module
+
+public import Mathlib.RingTheory.RegularLocalRing.Defs
+public import Sheaf.RingTheory.GlobalDimension
 
 /-!
 # Regularity from finite global dimension
@@ -12,6 +14,8 @@ import Sheaf.RingTheory.GlobalDimension
 Source: Stacks Project, Algebra, Proposition 00OC, implication (2) ⇒ (3)
 (blueprint: lem-weil-pbc-finite-gl-dim-regular-local).
 -/
+
+@[expose] public section
 
 universe u v
 

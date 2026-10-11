@@ -3,12 +3,14 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group G1
 -/
-import Mathlib.Algebra.Homology.Bifunctor
-import Mathlib.Algebra.Category.ModuleCat.Colimits
-import Mathlib.Algebra.Category.ModuleCat.Monoidal.Basic
-import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
-import Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
-import Mathlib.Algebra.DirectSum.Module
+module
+
+public import Mathlib.Algebra.Homology.Bifunctor
+public import Mathlib.Algebra.Category.ModuleCat.Colimits
+public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Basic
+public import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
+public import Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
+public import Mathlib.Algebra.DirectSum.Module
 
 /-!
 # The field-linear Kunneth isomorphism
@@ -16,6 +18,8 @@ import Mathlib.Algebra.DirectSum.Module
 Source: Stacks Project, Varieties, Tag 0BED, `lemma-kunneth`, the tensor-total Cech
 step `equation-kunneth-on-cech` (blueprint: lem-sc-qcoh-cech-total-tensor-iso).
 -/
+
+@[expose] public section
 
 universe u
 

@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import Mathlib.RingTheory.DiscreteValuationRing.Basic
-import Mathlib.RingTheory.AdicCompletion.Basic
+module
+
+public import Mathlib.RingTheory.DiscreteValuationRing.Basic
+public import Mathlib.RingTheory.AdicCompletion.Basic
 
 /-!
 # Cohen rings
@@ -12,6 +14,8 @@ import Mathlib.RingTheory.AdicCompletion.Basic
 Source: Stacks Project, Algebra, Definition Tag 0327
 (blueprint: def-weil-pbc-cohen-ring).
 -/
+
+@[expose] public section
 
 universe v
 

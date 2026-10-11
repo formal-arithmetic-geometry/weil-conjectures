@@ -2,8 +2,10 @@
 Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 -/
-import Sheaf.RingTheory.GRing
-import Mathlib.RingTheory.FiniteType
+module
+
+public import Sheaf.RingTheory.GRing
+public import Mathlib.RingTheory.FiniteType
 
 /-!
 # Finite type algebras over G-rings
@@ -11,6 +13,8 @@ import Mathlib.RingTheory.FiniteType
 Source: Stacks Project, More on Algebra, Proposition 07PV (blueprint:
 lem-weil-pbc-finite-type-over-g-ring).
 -/
+
+@[expose] public section
 
 universe u v
 

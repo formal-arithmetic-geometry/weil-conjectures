@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF lead L
 -/
-import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
-import Mathlib.AlgebraicGeometry.Morphisms.Separated
-import Mathlib.AlgebraicGeometry.Properties
-import Sheaf.AlgebraicGeometry.Dimension
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
+public import Mathlib.AlgebraicGeometry.Morphisms.Separated
+public import Mathlib.AlgebraicGeometry.Properties
+public import Sheaf.AlgebraicGeometry.Dimension
 
 /-!
 # Varieties and curves over a field
@@ -26,6 +28,8 @@ with `QuasiCompact f`, Mathlib having no bundled class for the conjunction.
 * `AlgebraicGeometry.Scheme.Hom.IsCurveOverField`: a variety over `k` of dimension exactly one
   (Stacks, Tag 0A23).
 -/
+
+@[expose] public section
 
 universe u
 

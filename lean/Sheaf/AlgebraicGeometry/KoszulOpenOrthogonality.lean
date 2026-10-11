@@ -3,17 +3,21 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import Sheaf.AlgebraicGeometry.DerivedCategory
-import Sheaf.Paper.KoszulComplex
-import Mathlib.AlgebraicGeometry.Modules.Tilde
-import Mathlib.Algebra.Homology.Embedding.CochainComplex
-import Mathlib.AlgebraicGeometry.Morphisms.OpenImmersion
+module
+
+public import Sheaf.AlgebraicGeometry.DerivedCategory
+public import Sheaf.Paper.KoszulComplex
+public import Mathlib.AlgebraicGeometry.Modules.Tilde
+public import Mathlib.Algebra.Homology.Embedding.CochainComplex
+public import Mathlib.AlgebraicGeometry.Morphisms.OpenImmersion
 
 /-! # Koszul orthogonality detects extension from an open
 
 Source: Stacks Project, Lemma 36.15.2, Tag 09IR
 (blueprint: lem-pc-perfect-generation-koszul-orthogonal).
 -/
+
+@[expose] public section
 
 universe u₁ w₁
 

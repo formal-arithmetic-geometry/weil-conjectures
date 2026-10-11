@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import Mathlib.RingTheory.AdicCompletion.Algebra
-import Mathlib.RingTheory.RingHom.Flat
+module
+
+public import Mathlib.RingTheory.AdicCompletion.Algebra
+public import Mathlib.RingTheory.RingHom.Flat
 
 /-!
 # Flat local maps induce isomorphisms on adic completions
@@ -12,6 +14,8 @@ import Mathlib.RingTheory.RingHom.Flat
 Source: literature/stacks-project/more-algebra.tex, More on Algebra, Lemma Tag 0AGX
 (blueprint: lem-weil-pbc-flat-local-completion-iso)
 -/
+
+@[expose] public section
 
 universe u v
 

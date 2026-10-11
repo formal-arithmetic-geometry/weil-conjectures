@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Mathlib.RingTheory.Localization.AtPrime.Basic
-import Mathlib.RingTheory.Regular.RegularSequence
-import Mathlib.Algebra.MvPolynomial.Basic
-import Sheaf.RingTheory.CompleteIntersectionOverField
+module
+
+public import Mathlib.RingTheory.Localization.AtPrime.Basic
+public import Mathlib.RingTheory.Regular.RegularSequence
+public import Mathlib.Algebra.MvPolynomial.Basic
+public import Sheaf.RingTheory.CompleteIntersectionOverField
 
 /-!
 # Local regular sequences give global complete intersections
@@ -14,6 +16,8 @@ import Sheaf.RingTheory.CompleteIntersectionOverField
 Source: literature/stacks-project/algebra.tex, Algebra, Lemma 00SC
 (blueprint: lem-weil-pbc-lci-regular-sequence-global-complete-intersection).
 -/
+
+@[expose] public section
 
 universe u
 

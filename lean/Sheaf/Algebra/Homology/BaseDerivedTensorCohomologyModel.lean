@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group J1
 -/
-import Mathlib.Algebra.Category.ModuleCat.ChangeOfRingsExact
-import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
-import Mathlib.CategoryTheory.Functor.Derived.LeftDerived
-import Mathlib.RingTheory.TensorProduct.Basic
+module
+
+public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRingsExact
+public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
+public import Mathlib.CategoryTheory.Functor.Derived.LeftDerived
+public import Mathlib.RingTheory.TensorProduct.Basic
 /-!
 # Models of base-derived tensor cohomology and its localization comparison
 
@@ -17,6 +19,8 @@ The model records a total left derived functor with its universal counit, actual
 cohomology objects with their tensor-algebra action, and the comparison maps.
 Commuting squares fix the maps; no isomorphism of comparison maps is assumed.
 -/
+
+@[expose] public section
 
 set_option autoImplicit false
 

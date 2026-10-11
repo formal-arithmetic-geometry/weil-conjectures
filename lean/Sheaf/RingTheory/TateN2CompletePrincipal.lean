@@ -2,11 +2,13 @@
 Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 -/
-import Sheaf.RingTheory.JapaneseDomain
-import Mathlib.RingTheory.AdicCompletion.Basic
-import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
-import Mathlib.RingTheory.Localization.FractionRing
-import Mathlib.RingTheory.Noetherian.Defs
+module
+
+public import Sheaf.RingTheory.JapaneseDomain
+public import Mathlib.RingTheory.AdicCompletion.Basic
+public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
+public import Mathlib.RingTheory.Localization.FractionRing
+public import Mathlib.RingTheory.Noetherian.Defs
 
 /-!
 # Tate's criterion for an N-2 complete principal domain
@@ -14,6 +16,8 @@ import Mathlib.RingTheory.Noetherian.Defs
 Source: Stacks Project, Algebra, Lemma Tag 032P (lemma-tate-japanese),
 lines 45534--45589 (blueprint: lem-weil-pbc-tate-n2-complete-principal).
 -/
+
+@[expose] public section
 
 universe u v
 

@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import Mathlib.AlgebraicGeometry.Restrict
-import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+module
+
+public import Mathlib.AlgebraicGeometry.Restrict
+public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 
 /-!
 # Structure sections on a reduced scheme away from component intersections
@@ -12,6 +14,8 @@ import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 Source: Stacks Project, Varieties Lemma 09NE, proof, first paragraph after setting T
 (blueprint: lem-sc-glue-component-reduced-cover-sections).
 -/
+
+@[expose] public section
 
 universe u v
 

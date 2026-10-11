@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import Mathlib.LinearAlgebra.Matrix.ToLin
-import Mathlib.Algebra.Module.Projective
-import Mathlib.RingTheory.Finiteness.Basic
+module
+
+public import Mathlib.LinearAlgebra.Matrix.ToLin
+public import Mathlib.Algebra.Module.Projective
+public import Mathlib.RingTheory.Finiteness.Basic
 
 /-!
 # Images of finite free projectors under base change
@@ -13,6 +15,8 @@ import Mathlib.RingTheory.Finiteness.Basic
 Source: Stacks Project, More on Algebra, proof of Lemma Tag 07M5, final projector argument
 (blueprint: lem-weil-pbc-idempotent-endomorphism-image-base-change).
 -/
+
+@[expose] public section
 
 universe u v
 

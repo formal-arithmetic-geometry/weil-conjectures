@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import Mathlib.AlgebraicGeometry.Morphisms.Proper
-import Sheaf.AlgebraicGeometry.Dimension
-import Sheaf.AlgebraicGeometry.Morphisms.Projective
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.Proper
+public import Sheaf.AlgebraicGeometry.Dimension
+public import Sheaf.AlgebraicGeometry.Morphisms.Projective
 
 /-!
 # Projectivity of proper schemes of dimension at most one
@@ -13,6 +15,8 @@ import Sheaf.AlgebraicGeometry.Morphisms.Projective
 Source: Stacks Project, Varieties, Lemma 33.43.4 (Tag 0A26)
 (blueprint: lem-sc-proper-dim-one-projective).
 -/
+
+@[expose] public section
 
 universe u
 

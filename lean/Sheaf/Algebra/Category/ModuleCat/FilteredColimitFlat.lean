@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Mathlib.Algebra.Category.ModuleCat.FilteredColimits
-import Mathlib.RingTheory.Flat.Basic
+module
+
+public import Mathlib.Algebra.Category.ModuleCat.FilteredColimits
+public import Mathlib.RingTheory.Flat.Basic
 
 /-!
 # Filtered colimits of flat modules
@@ -12,6 +14,8 @@ import Mathlib.RingTheory.Flat.Basic
 Source: literature/stacks-project/algebra.tex, Algebra, Lemma Tag 05UT
 (blueprint: lem-weil-pbc-filtered-colimit-flat-modules).
 -/
+
+@[expose] public section
 
 universe u v
 

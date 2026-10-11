@@ -143,11 +143,23 @@ def sorry_count(s: str) -> int:
 _DECL = re.compile(
     r"^\s*(?:@\[[^\]]*\]\s*)*(?!.*\bprivate\b)(?:protected\s+|noncomputable\s+|local\s+|scoped\s+|unsafe\s+|partial\s+)*"
     r"(?:def|theorem|lemma|instance|abbrev|structure|class|inductive|opaque)\s+([^\s({\[:⦃]+)", re.M)
-_IMPORT = re.compile(r"^import\s+([\w.']+)", re.M)
+_IMPORT = re.compile(r"^(?:public\s+)?(?:meta\s+)?import\s+(?:all\s+)?([\w.']+)", re.M)  # module-system forms (stage3-prep)
 
 
 def imports_of(text: str) -> set[str]:
     return set(_IMPORT.findall(strip(text)))
+
+
+_PUBLIC_IMPORT = re.compile(r"^public\s+(?:meta\s+)?import\s+(?:all\s+)?([\w.']+)", re.M)
+
+
+def public_imports_of(text: str) -> set[str]:
+    """The imports that the modules importing this one see. In a file of Lean's module system (first command
+    `module`) these are the `public import` lines; a plain `import` there serves the file's own proofs only, so adding
+    or removing one changes nothing for other modules. In any other file every import is visible."""
+    code = strip(text)
+    first = next((l.strip() for l in code.split("\n") if l.strip()), "")
+    return set(_PUBLIC_IMPORT.findall(code)) if first == "module" else set(_IMPORT.findall(code))
 
 
 def decls_in_text(text: str) -> set[str]:
@@ -262,10 +274,10 @@ def interface(text: str) -> dict[str, str]:
     """What the modules importing this one can see: for a theorem its head and statement, for any other declaration
     its whole text, plus the imports and the other commands. Proof bodies, private declarations and comments are not
     part of it."""
-    out, other = {"#imports": " ".join(sorted(imports_of(text)))}, []
+    out, other = {"#imports": " ".join(sorted(public_imports_of(text)))}, []
     for c in commands(text):
         if c["kind"] == "other":
-            if not c["text"].startswith("import "):
+            if not _IMPORT.match(c["text"]) and c["text"] != "module":
                 other.append(c["text"])
         elif c["private"] or c["kind"] == "example":
             continue

@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF contributors
 -/
-import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 
 /-!
 # Field-valued points factor through closed immersions
@@ -12,6 +14,8 @@ Source: literature/stacks-project/schemes.tex, Schemes, Lemma Tag 0356
 (applied to `Spec K`), with Definition Tag 01HK and Lemma Tag 01L7
 (blueprint: lem-weil-pbc-field-point-factors-through-closed-immersion).
 -/
+
+@[expose] public section
 
 universe u
 

@@ -1,6 +1,10 @@
-import Mathlib.RingTheory.RingHom.Flat
-import Mathlib.LinearAlgebra.TensorProduct.Basic
-import Mathlib.RingTheory.Ideal.Quotient.Operations
+module
+
+public import Mathlib.RingTheory.RingHom.Flat
+public import Mathlib.LinearAlgebra.TensorProduct.Basic
+public import Mathlib.RingTheory.Ideal.Quotient.Operations
+
+@[expose] public section
 
 set_option autoImplicit false
 

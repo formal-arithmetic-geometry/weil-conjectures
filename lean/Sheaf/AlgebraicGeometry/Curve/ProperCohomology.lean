@@ -3,11 +3,13 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import Mathlib.AlgebraicGeometry.Morphisms.Proper
-import Mathlib.AlgebraicGeometry.Morphisms.Smooth
-import Mathlib.FieldTheory.IsAlgClosed.Basic
-import WeilConjectures.AlgebraicGeometry.Curve
-import WeilConjectures.AlgebraicGeometry.Sites.RootsOfUnity
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.Proper
+public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
+public import Mathlib.FieldTheory.IsAlgClosed.Basic
+public import WeilConjectures.AlgebraicGeometry.Curve
+public import WeilConjectures.AlgebraicGeometry.Sites.RootsOfUnity
 
 /-!
 # Étale cohomology of a smooth proper connected curve
@@ -15,6 +17,8 @@ import WeilConjectures.AlgebraicGeometry.Sites.RootsOfUnity
 Source: Stacks Project, Tag 03RQ, Lemma 59.69.1, with higher vanishing from Tag 03RT;
 blueprint sec-curve-estimates/sk-thm-curveestimate (blueprint: thm-sc-proper-cohomology).
 -/
+
+@[expose] public section
 
 universe u
 

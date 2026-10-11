@@ -3,11 +3,13 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group U1
 -/
-import Mathlib.LinearAlgebra.SymmetricAlgebra.Basic
-import Mathlib.Algebra.MvPolynomial.Eval
-import Mathlib.Algebra.Module.Projective
-import Mathlib.RingTheory.Extension.Basic
-import Mathlib.Algebra.Exact.Basic
+module
+
+public import Mathlib.LinearAlgebra.SymmetricAlgebra.Basic
+public import Mathlib.Algebra.MvPolynomial.Eval
+public import Mathlib.Algebra.Module.Projective
+public import Mathlib.RingTheory.Extension.Basic
+public import Mathlib.Algebra.Exact.Basic
 
 /-!
 # Conormal sequence of a projective symmetric-algebra presentation
@@ -16,6 +18,8 @@ Source: Stacks Project, Smoothing Ring Maps, proof of Lemma 07CE, equation-seque
 and its splitting; the projective case of More on Algebra, Lemma 07EV
 (blueprint: lem-weil-pbc-symmetric-projective-presentation-conormal).
 -/
+
+@[expose] public section
 
 universe u
 

@@ -3,13 +3,15 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group T1
 -/
-import Mathlib.RingTheory.Valuation.ValuationRing
-import Mathlib.AlgebraicGeometry.Morphisms.Proper
-import Mathlib.AlgebraicGeometry.Morphisms.Flat
-import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
-import Mathlib.Algebra.Module.FinitePresentation
-import Sheaf.Topology.RingedSpaceModuleCohomology
-import WeilConjectures.AlgebraicGeometry.Modules.Invertible
+module
+
+public import Mathlib.RingTheory.Valuation.ValuationRing
+public import Mathlib.AlgebraicGeometry.Morphisms.Proper
+public import Mathlib.AlgebraicGeometry.Morphisms.Flat
+public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
+public import Mathlib.Algebra.Module.FinitePresentation
+public import Sheaf.Topology.RingedSpaceModuleCohomology
+public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 
 /-!
 # Global sections of an invertible module over a valuation ring
@@ -18,6 +20,8 @@ Source: Stacks Project, More on Morphisms, Tag 0EX8, proof of
 Lemma `lemma-triviality-generic-fibre-valuation-ring`
 (blueprint: lem-sc-valuation-proper-coherent-sections).
 -/
+
+@[expose] public section
 
 universe u
 

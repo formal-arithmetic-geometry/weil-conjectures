@@ -1,5 +1,9 @@
-import Mathlib.AlgebraicGeometry.Scheme
-import Mathlib.RingTheory.Flat.FaithfullyFlat.Basic
+module
+
+public import Mathlib.AlgebraicGeometry.Scheme
+public import Mathlib.RingTheory.Flat.FaithfullyFlat.Basic
+
+@[expose] public section
 
 universe u v
 

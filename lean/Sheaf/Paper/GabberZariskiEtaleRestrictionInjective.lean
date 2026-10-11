@@ -3,16 +3,20 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group N1
 -/
-import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-import Mathlib.AlgebraicGeometry.Restrict
-import Mathlib.Topology.Sheaves.Functors
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+public import Mathlib.AlgebraicGeometry.Restrict
+public import Mathlib.Topology.Sheaves.Functors
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-! # Gabber's Zariski--étale restriction injectivity
 
 Source: Stacks Project, Étale Cohomology, Tag 09ZF, first two proof paragraphs
 (blueprint: lem-weil-pbc-gabber-zariski-etale-restriction-injective).
 -/
+
+@[expose] public section
 
 universe u v
 

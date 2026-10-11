@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group P1
 -/
-import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
-import Sheaf.Order.DirectedFiniteUpperBound
+module
+
+public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
+public import Sheaf.Order.DirectedFiniteUpperBound
 
 /-!
 # Finite-stage model of a quasi-compact open
@@ -15,6 +17,8 @@ node order 347 (blueprint: def-nagata-qc-open-descent).
 The choices of affine charts, basic-open presentations, and finite-stage lifts are inputs.
 The output computes the selected common stage and the union of transported basic opens.
 -/
+
+@[expose] public section
 
 universe u
 

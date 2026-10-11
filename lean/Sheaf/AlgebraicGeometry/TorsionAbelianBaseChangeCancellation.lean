@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group S1
 -/
-import Mathlib.AlgebraicGeometry.Morphisms.Proper
-import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
-import Sheaf.AlgebraicGeometry.TorsionAbelianBaseChange
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.Proper
+public import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
+public import Sheaf.AlgebraicGeometry.TorsionAbelianBaseChange
 
 /-!
 # Cancellation of proper base change along a proper surjection
@@ -13,6 +15,8 @@ import Sheaf.AlgebraicGeometry.TorsionAbelianBaseChange
 Source: Stacks Project, Tag 0A4C, Lemma 59.91.7
 (blueprint: lemma-weil-pbc-cancellation).
 -/
+
+@[expose] public section
 
 universe u
 

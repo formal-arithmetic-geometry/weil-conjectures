@@ -3,12 +3,14 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group J1
 -/
-import Mathlib.RingTheory.Kaehler.JacobiZariski
-import Mathlib.CategoryTheory.Monoidal.Tor
-import Mathlib.Algebra.Category.ModuleCat.Monoidal.Basic
-import Mathlib.Algebra.Category.ModuleCat.Abelian
-import Mathlib.Algebra.Category.ModuleCat.Projective
-import Mathlib.Algebra.Module.ULift
+module
+
+public import Mathlib.RingTheory.Kaehler.JacobiZariski
+public import Mathlib.CategoryTheory.Monoidal.Tor
+public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Basic
+public import Mathlib.Algebra.Category.ModuleCat.Abelian
+public import Mathlib.Algebra.Category.ModuleCat.Projective
+public import Mathlib.Algebra.Module.ULift
 
 /-!
 # The full Jacobi–Zariski homology sequence
@@ -16,6 +18,8 @@ import Mathlib.Algebra.Module.ULift
 Source: Stacks Project, Algebra, Tag 00S2, `lemma-exact-sequence-NL`
 (blueprint: lem-weil-pbc-jacobi-zariski-homology-sequence).
 -/
+
+@[expose] public section
 
 universe u v w
 

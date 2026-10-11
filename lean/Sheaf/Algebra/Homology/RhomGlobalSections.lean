@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Sheaf.Algebra.Homology.DerivedInternalHom
-import Sheaf.Algebra.Homology.RingedSiteZerothHypercohomology
+module
+
+public import Sheaf.Algebra.Homology.DerivedInternalHom
+public import Sheaf.Algebra.Homology.RingedSiteZerothHypercohomology
 
 /-!
 # Global sections of derived internal Hom
@@ -12,6 +14,8 @@ import Sheaf.Algebra.Homology.RingedSiteZerothHypercohomology
 Source: Stacks Project, Lemma 21.35.1, Tag 08JA, global statement
 (blueprint: lem-pur-rhom-global-sections).
 -/
+
+@[expose] public section
 
 universe u₁ w₁
 

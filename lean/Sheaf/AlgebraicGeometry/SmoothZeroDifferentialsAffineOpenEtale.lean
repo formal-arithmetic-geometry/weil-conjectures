@@ -3,14 +3,19 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group J1
 -/
-import Mathlib.AlgebraicGeometry.Morphisms.Smooth
-import Mathlib.AlgebraicGeometry.Morphisms.Etale
-import Mathlib.RingTheory.Kaehler.Basic
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
+public import Mathlib.AlgebraicGeometry.Morphisms.Etale
+public import Mathlib.RingTheory.Kaehler.Basic
 
 /-! # Smooth affine opens with vanishing differentials are étale
 Source: Stacks Project, Morphisms, Section 02GH, Definition 02GI and Lemma 01V6
 (blueprint: lem-weil-pbc-smooth-zero-differentials-affine-open-etale).
 -/
+
+@[expose] public section
+
 universe u
 open CategoryTheory
 namespace AlgebraicGeometry

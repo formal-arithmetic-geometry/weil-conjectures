@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Mathlib.AlgebraicGeometry.Sites.EtalePoint
-import WeilConjectures.Mathlib.RingTheory.Henselian
+module
+
+public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
+public import WeilConjectures.Mathlib.RingTheory.Henselian
 
 /-!
 # Sections over a strictly henselian local open and geometric stalks
@@ -12,6 +14,8 @@ import WeilConjectures.Mathlib.RingTheory.Henselian
 Source: Stacks Project, Lemma 59.55.1 (Tag 03QO), applied inside an open subscheme
 (blueprint: lem-weil-pbc-sets-strictly-henselian-open-sections-stalk).
 -/
+
+@[expose] public section
 
 universe u v
 

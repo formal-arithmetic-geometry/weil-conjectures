@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import Sheaf.RingTheory.SerreConditions
-import Mathlib.RingTheory.RingHom.Flat
-import Mathlib.RingTheory.LocalRing.ResidueField.Fiber
+module
+
+public import Sheaf.RingTheory.SerreConditions
+public import Mathlib.RingTheory.RingHom.Flat
+public import Mathlib.RingTheory.LocalRing.ResidueField.Fiber
 
 /-!
 # Ascent of Serre's condition (S_k) along flat maps
@@ -18,6 +20,8 @@ Source: Stacks Project, Algebra, Lemma Tag 0339 (lemma-Sk-goes-up)
 - `RingHom.isSerreS_of_flat`: property (S_k) ascends along a flat map with
   Noetherian source and target and (S_k) fibres.
 -/
+
+@[expose] public section
 
 universe u v
 

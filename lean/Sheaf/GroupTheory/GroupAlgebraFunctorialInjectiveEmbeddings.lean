@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF contributors
 -/
-import Mathlib.Algebra.MonoidAlgebra.Defs
-import Mathlib.Algebra.Category.ModuleCat.EnoughInjectives
+module
+
+public import Mathlib.Algebra.MonoidAlgebra.Defs
+public import Mathlib.Algebra.Category.ModuleCat.EnoughInjectives
 
 /-!
 # Functorial injective embeddings for group-ring modules
@@ -12,6 +14,8 @@ import Mathlib.Algebra.Category.ModuleCat.EnoughInjectives
 Source: Stacks Project, Injectives, Section G-modules, paragraph before Tag 04JF
 (blueprint: lem-exc-rg-group-algebra-functorial-injective-embeddings).
 -/
+
+@[expose] public section
 
 universe u v
 

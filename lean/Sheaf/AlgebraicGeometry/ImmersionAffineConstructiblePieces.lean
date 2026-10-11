@@ -3,15 +3,19 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import Mathlib.AlgebraicGeometry.AffineScheme
-import Mathlib.AlgebraicGeometry.Morphisms.Immersion
-import Mathlib.Topology.Constructible
+module
+
+public import Mathlib.AlgebraicGeometry.AffineScheme
+public import Mathlib.AlgebraicGeometry.Morphisms.Immersion
+public import Mathlib.Topology.Constructible
 
 /-! # Affine constructible pieces of an immersed scheme
 
 Source: literature/stacks-project/etale-cohomology.tex, Etale Cohomology, Lemma Tag 03S0,
 proof, line 12049 (blueprint: lem-weil-pbc-immersion-affine-constructible-pieces).
 -/
+
+@[expose] public section
 
 open CategoryTheory
 open Topology

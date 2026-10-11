@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Mathlib.AlgebraicGeometry.Sites.Fpqc
+module
+
+public import Mathlib.AlgebraicGeometry.Sites.Fpqc
 
 /-!
 # Descent of open immersions along an fpqc covering
@@ -11,6 +13,8 @@ import Mathlib.AlgebraicGeometry.Sites.Fpqc
 Source: Stacks Project, Descent, Lemma 35.23.18 (Tag 02L3)
 (blueprint: lem-galois-fpqc-descend-open-immersion).
 -/
+
+@[expose] public section
 
 universe u v
 

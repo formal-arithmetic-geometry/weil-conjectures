@@ -3,13 +3,15 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Scheme
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Twist
-import Sheaf.AlgebraicGeometry.TensorPullback
-import Sheaf.AlgebraicGeometry.Ample
-import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
-import WeilConjectures.AlgebraicGeometry.Modules.Invertible
+module
+
+public import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Scheme
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Twist
+public import Sheaf.AlgebraicGeometry.TensorPullback
+public import Sheaf.AlgebraicGeometry.Ample
+public import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
+public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 
 /-!
 # Projective space as a functor of points
@@ -17,6 +19,8 @@ import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 Source: literature/stacks-project/constructions.tex, Lemma 27.13.1 (Tag 01NE)
 (blueprint: lem-weil-pbc-projective-space-functor-of-points)
 -/
+
+@[expose] public section
 
 universe u
 

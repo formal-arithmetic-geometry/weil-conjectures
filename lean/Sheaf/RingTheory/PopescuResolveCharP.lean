@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import Sheaf.RingTheory.GRing
-import Sheaf.RingTheory.PopescuResolution
+module
+
+public import Sheaf.RingTheory.GRing
+public import Sheaf.RingTheory.PopescuResolution
 
 /-!
 # Resolving Popescu's local problem in positive characteristic
@@ -12,6 +14,8 @@ import Sheaf.RingTheory.PopescuResolution
 Source: Stacks Project, Smoothing Ring Maps, Lemma 07FJ, in Section 07FF
 (blueprint: lem-weil-pbc-popescu-resolve-char-p).
 -/
+
+@[expose] public section
 
 universe u v w
 

@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Sheaf.AlgebraicGeometry.Coherent
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
+module
+
+public import Sheaf.AlgebraicGeometry.Coherent
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 
 /-! # Extension of finitely presented modules and their morphisms
 
@@ -13,6 +15,8 @@ Source: Stacks Project, Properties of Schemes, Lemma 28.23.4, Tag 01PI
 
 Restriction to an open is expressed on the localized site with `SheafOfModules.over`.
 -/
+
+@[expose] public section
 
 universe u
 

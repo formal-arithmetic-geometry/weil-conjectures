@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF contributors
 -/
-import Mathlib.AlgebraicGeometry.Morphisms.Etale
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
-import Mathlib.AlgebraicGeometry.Morphisms.Separated
-import Mathlib.FieldTheory.IsAlgClosed.Basic
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.Etale
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
+public import Mathlib.AlgebraicGeometry.Morphisms.Separated
+public import Mathlib.FieldTheory.IsAlgClosed.Basic
 
 /-!
 # Specialization bound for geometric fibres of separated étale morphisms
@@ -18,6 +20,8 @@ The geometric fibre of `f : X ⟶ Y` over a geometric point `ȳ : Spec Ω ⟶ Y`
 product `pullback f ȳ` (def-weil-geometric-fibre); its cardinality is the number of points of
 its underlying space.
 -/
+
+@[expose] public section
 
 universe u
 

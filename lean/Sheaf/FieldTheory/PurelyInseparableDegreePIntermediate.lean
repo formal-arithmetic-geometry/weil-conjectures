@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Mathlib.FieldTheory.PurelyInseparable.Basic
+module
+
+public import Mathlib.FieldTheory.PurelyInseparable.Basic
 
 /-!
 # A degree-p final step in a finite purely inseparable extension
@@ -12,6 +14,8 @@ Source: Stacks Project, More on Algebra, Tag 07PR, proof, induction paragraph;
 Fields, Tags 09HI and 09G9.
 (blueprint: lem-weil-pbc-finite-purely-inseparable-degree-p-intermediate)
 -/
+
+@[expose] public section
 
 universe u v
 

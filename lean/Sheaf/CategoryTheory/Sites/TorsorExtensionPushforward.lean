@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group S1
 -/
-import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-import Sheaf.Topology.ClosedImmersionPushforwardExact
-import WeilConjectures.CategoryTheory.Sites.Torsor
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+public import Sheaf.Topology.ClosedImmersionPushforwardExact
+public import WeilConjectures.CategoryTheory.Sites.Torsor
 
 /-!
 # Direct image of an extension and its fibre torsor
@@ -13,6 +15,8 @@ import WeilConjectures.CategoryTheory.Sites.Torsor
 Source: Stacks Project, Cohomology of Sheaves, Tags 02UV and 02FQ, and Sheaves of Modules,
 Tag 01AX (blueprint: lem-sc-torsor-h1-ext-pushforward).
 -/
+
+@[expose] public section
 
 set_option autoImplicit false
 

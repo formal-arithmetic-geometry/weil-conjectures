@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import Sheaf.NumberTheory.Padics.CoefficientExtension
-import Mathlib.Topology.Algebra.Module.Equiv
-import Mathlib.Topology.CompactOpen
-import Mathlib.LinearAlgebra.Basis.Defs
+module
+
+public import Sheaf.NumberTheory.Padics.CoefficientExtension
+public import Mathlib.Topology.Algebra.Module.Equiv
+public import Mathlib.Topology.CompactOpen
+public import Mathlib.LinearAlgebra.Basis.Defs
 
 /-!
 # Openness of a p-adic lattice stabilizer
@@ -16,6 +18,8 @@ Source: Stanford Weil II seminar, Lecture 19, Proposition 1.1.9, second bullet
 - The topology on the coefficient field is its spectral norm topology.
 - The topology on the automorphisms is induced from compact-open continuous maps.
 -/
+
+@[expose] public section
 
 universe u v
 

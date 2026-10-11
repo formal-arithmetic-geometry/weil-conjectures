@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import Sheaf.AlgebraicGeometry.PseudoCoherentComplex
-import Sheaf.AlgebraicGeometry.PerfectComplex
-import Sheaf.Paper.DerivedInternalHomRestrictOpen
-import Mathlib.Algebra.Homology.DerivedCategory.TStructure
+module
+
+public import Sheaf.AlgebraicGeometry.PseudoCoherentComplex
+public import Sheaf.AlgebraicGeometry.PerfectComplex
+public import Sheaf.Paper.DerivedInternalHomRestrictOpen
+public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 
 /-! # Quasi-coherence and support of derived internal Hom
 
@@ -14,6 +16,8 @@ Source: Stacks Project, Derived Categories of Schemes, Tag 0A6H (1), (2),
 and the support observation in the proof of Tag 0A9C
 (blueprint: lem-sc-rhom-supported-qcoherent).
 -/
+
+@[expose] public section
 
 universe u w
 

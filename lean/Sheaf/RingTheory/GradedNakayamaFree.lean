@@ -3,17 +3,19 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import Mathlib.Algebra.Category.ModuleCat.Abelian
-import Mathlib.Algebra.Category.ModuleCat.Basic
-import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
-import Mathlib.Algebra.Category.ModuleCat.Monoidal.Basic
-import Mathlib.Algebra.Category.ModuleCat.Projective
-import Mathlib.CategoryTheory.Monoidal.Tor
-import Mathlib.Algebra.DirectSum.Decomposition
-import Mathlib.LinearAlgebra.Quotient.Basic
-import Sheaf.RingTheory.MinimalPresentationTor
-import Mathlib.LinearAlgebra.Basis.Defs
-import Mathlib.RingTheory.MvPolynomial.Homogeneous
+module
+
+public import Mathlib.Algebra.Category.ModuleCat.Abelian
+public import Mathlib.Algebra.Category.ModuleCat.Basic
+public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
+public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Basic
+public import Mathlib.Algebra.Category.ModuleCat.Projective
+public import Mathlib.CategoryTheory.Monoidal.Tor
+public import Mathlib.Algebra.DirectSum.Decomposition
+public import Mathlib.LinearAlgebra.Quotient.Basic
+public import Sheaf.RingTheory.MinimalPresentationTor
+public import Mathlib.LinearAlgebra.Basis.Defs
+public import Mathlib.RingTheory.MvPolynomial.Homogeneous
 
 /-!
 # Graded Nakayama freeness criterion
@@ -21,6 +23,8 @@ import Mathlib.RingTheory.MvPolynomial.Homogeneous
 Source: blueprint `lem-sc-p1-graded-resolution`, proof, graded Nakayama criterion applied to
 `K_2` (blueprint: lem-sc-p1-graded-nakayama-free).
 -/
+
+@[expose] public section
 
 universe u
 

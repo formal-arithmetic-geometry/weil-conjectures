@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import Mathlib.RingTheory.Extension.Cotangent.Basic
+module
+
+public import Mathlib.RingTheory.Extension.Cotangent.Basic
 
 /-!
 # Homotopy equivalence of naive cotangent complexes of polynomial presentations
@@ -11,6 +13,8 @@ import Mathlib.RingTheory.Extension.Cotangent.Basic
 Source: Stacks Project, Algebra, Tag 00S1, specialized to identity maps on the base and
 quotient rings (blueprint: lem-weil-pbc-nl-presentations-homotopy-equivalent).
 -/
+
+@[expose] public section
 
 universe u v w w'
 

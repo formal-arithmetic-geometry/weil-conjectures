@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Sheaf.AlgebraicGeometry.IsFiniteTypeEtaleModuleSheaf
+module
+
+public import Sheaf.AlgebraicGeometry.IsFiniteTypeEtaleModuleSheaf
 
 /-!
 # Finite values of locally constant etale module sheaves
@@ -12,6 +14,8 @@ Source: Stacks Project, Tags 03RU, 03RW(3), and 093N(1); the equivalences are
 agent-formulated from these definitions
 (blueprint: lem-weil-pbc-finite-locally-constant-module-values).
 -/
+
+@[expose] public section
 
 universe u
 

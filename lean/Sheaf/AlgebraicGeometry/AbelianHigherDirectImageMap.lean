@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.MorphismDefs
+module
+
+public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.MorphismDefs
 
 /-!
 # Transition maps of higher direct images of abelian sheaves
@@ -11,6 +13,8 @@ import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.MorphismDefs
 Source: Stacks Project, Lemma 59.51.7, Tag 09Z1, canonical comparison
 (blueprint: def-sbc-abelian-higher-direct-image-map).
 -/
+
+@[expose] public section
 
 universe u
 

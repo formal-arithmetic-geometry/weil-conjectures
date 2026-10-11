@@ -3,19 +3,23 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group V1
 -/
-import WeilConjectures.Mathlib.Algebra.Homology.SpectralSequence.Basic
-import Sheaf.AlgebraicGeometry.SheafExt
-import Sheaf.AlgebraicGeometry.Coherent
-import Sheaf.Paper.PQFCohomology
-import WeilConjectures.AlgebraicGeometry.Modules.Ext
-import Mathlib.AlgebraicGeometry.Noetherian
-import Mathlib.Algebra.Category.Grp.Basic
+module
+
+public import WeilConjectures.Mathlib.Algebra.Homology.SpectralSequence.Basic
+public import Sheaf.AlgebraicGeometry.SheafExt
+public import Sheaf.AlgebraicGeometry.Coherent
+public import Sheaf.Paper.PQFCohomology
+public import WeilConjectures.AlgebraicGeometry.Modules.Ext
+public import Mathlib.AlgebraicGeometry.Noetherian
+public import Mathlib.Algebra.Category.Grp.Basic
 
 /-! # The local-to-global spectral sequence for sheaf Ext
 
 Source: literature/stacks-project/equiv.tex, Lemma 0FZ3 and Cohomology Tag 0BQP
 (blueprint: lem-sc-ext-sheaf-to-global-spectral-sequence).
 -/
+
+@[expose] public section
 
 universe u w
 

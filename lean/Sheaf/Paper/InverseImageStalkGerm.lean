@@ -1,10 +1,14 @@
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Stalk
+module
+
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Stalk
 
 /-! # Stalk of an inverse image, compatible with germs of pulled-back sections
 
 Source: literature/stacks-project/etale-cohomology.tex, Lemma Tag 03Q1 (3)
 (blueprint: lem-weil-pbc-inverse-image-stalk-germ).
 -/
+
+@[expose] public section
 
 universe u
 

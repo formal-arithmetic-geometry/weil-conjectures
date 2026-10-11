@@ -3,11 +3,13 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Sheaf.AlgebraicGeometry.DerivedCategoryQCoherentAlgebra
-import Sheaf.Algebra.Homology.DerivedInternalHom
-import Mathlib.Algebra.Homology.Single
-import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
-import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolutionInjective
+module
+
+public import Sheaf.AlgebraicGeometry.DerivedCategoryQCoherentAlgebra
+public import Sheaf.Algebra.Homology.DerivedInternalHom
+public import Mathlib.Algebra.Homology.Single
+public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+public import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolutionInjective
 
 /-!
 # Derived internal Hom with its algebra module structure
@@ -19,6 +21,8 @@ The natural algebra action is precomposition with multiplication. The derived fu
 is the localization of termwise Hom after a functorial, degreewise injective K-injective
 resolution. Its underlying object is the shared derived internal Hom.
 -/
+
+@[expose] public section
 
 universe u w wB
 

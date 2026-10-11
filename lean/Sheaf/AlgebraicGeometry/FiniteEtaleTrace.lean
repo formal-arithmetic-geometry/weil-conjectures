@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import Sheaf.AlgebraicGeometry.FiniteEtaleTraceExists
+module
+
+public import Sheaf.AlgebraicGeometry.FiniteEtaleTraceExists
 
 /-!
 # Restriction and trace for finite étale morphisms
@@ -21,6 +23,8 @@ Inverse and direct image are additive, so they preserve annihilation by `n`. Eve
 map between groups killed by `n` is `ℤ/n`-linear for their unique `ℤ/n`-module structures;
 thus the same maps are used with these coefficients, including `n = 1`.
 -/
+
+@[expose] public section
 
 universe u
 

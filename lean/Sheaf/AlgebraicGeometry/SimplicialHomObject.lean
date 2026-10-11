@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group N1
 -/
-import Sheaf.AlgebraicGeometry.SimplicialHomObjectExists
-import Mathlib.CategoryTheory.RepresentedBy
+module
+
+public import Sheaf.AlgebraicGeometry.SimplicialHomObjectExists
+public import Mathlib.CategoryTheory.RepresentedBy
 
 /-!
 # Degree-zero Hom objects for finite simplicial sets
@@ -12,6 +14,8 @@ import Mathlib.CategoryTheory.RepresentedBy
 Source: Stacks Project, Tags 017I, 017J, 017K and 001Q
 (blueprint: def-weil-pbc-simplicial-hom-object).
 -/
+
+@[expose] public section
 
 universe u w t
 

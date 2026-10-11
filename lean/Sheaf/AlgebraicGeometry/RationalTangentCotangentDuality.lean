@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import Sheaf.AlgebraicGeometry.SchemeTangentSpace
-import Mathlib.AlgebraicGeometry.Stalk
-import Mathlib.RingTheory.Ideal.Cotangent
+module
+
+public import Sheaf.AlgebraicGeometry.SchemeTangentSpace
+public import Mathlib.AlgebraicGeometry.Stalk
+public import Mathlib.RingTheory.Ideal.Cotangent
 
 /-!
 # Rational tangent spaces and cotangent duality
@@ -13,6 +15,8 @@ import Mathlib.RingTheory.Ideal.Cotangent
 Source: Stacks Project, Tags 0B2E, 0B2C and 0B2F
 (blueprint: lem-sc-rational-tangent-cotangent-duality).
 -/
+
+@[expose] public section
 
 noncomputable section
 

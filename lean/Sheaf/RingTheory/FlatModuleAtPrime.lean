@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Mathlib.RingTheory.Flat.Localization
+module
+
+public import Mathlib.RingTheory.Flat.Localization
 
 /-!
 # Flat modules localized at a prime of an algebra
@@ -11,6 +13,8 @@ import Mathlib.RingTheory.Flat.Localization
 Source: Stacks Project, Algebra, Lemma 10.39.18 (Tag 00HT), part (6), only-if direction
 (blueprint: lem-pc-affine-flat-module-local-criterion).
 -/
+
+@[expose] public section
 
 namespace Module.Flat
 

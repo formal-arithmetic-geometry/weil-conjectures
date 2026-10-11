@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group N1
 -/
-import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
-import Mathlib.AlgebraicGeometry.Sites.Etale
-import Mathlib.CategoryTheory.Adjunction.Mates
+module
+
+public import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
+public import Mathlib.AlgebraicGeometry.Sites.Etale
+public import Mathlib.CategoryTheory.Adjunction.Mates
 
 /-!
 # Sections of tensor pullbacks on the small étale site
@@ -13,6 +15,8 @@ import Mathlib.CategoryTheory.Adjunction.Mates
 Source: Stacks Project, Descent, Tag 03DR, equation (35.8.1), restricted to the small
 étale site as in Tag 03DU (blueprint: lem-sc-etale-qcoherent-presheaf-functorial).
 -/
+
+@[expose] public section
 
 universe u
 

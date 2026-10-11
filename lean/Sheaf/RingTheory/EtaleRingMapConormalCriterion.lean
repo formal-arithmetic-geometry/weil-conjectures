@@ -3,15 +3,19 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group G1
 -/
-import Mathlib.AlgebraicGeometry.Morphisms.Etale
-import Mathlib.RingTheory.Ideal.Cotangent
-import Mathlib.Algebra.MvPolynomial.PDeriv
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.Etale
+public import Mathlib.RingTheory.Ideal.Cotangent
+public import Mathlib.Algebra.MvPolynomial.PDeriv
 
 /-! # Etale ring maps and the conormal criterion
 
 Source: literature/stacks-project/algebra.tex, Definition Tag 00U1 and Lemma Tag 00U9
 (blueprint: lem-weil-pbc-etale-ring-map-conormal-criterion)
 -/
+
+@[expose] public section
 
 universe u
 

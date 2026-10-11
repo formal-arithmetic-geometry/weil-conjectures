@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import Sheaf.AlgebraicGeometry.Thickening
-import Mathlib.AlgebraicGeometry.Pullbacks
-import Mathlib.Algebra.Ring.Idempotent
+module
+
+public import Sheaf.AlgebraicGeometry.Thickening
+public import Mathlib.AlgebraicGeometry.Pullbacks
+public import Mathlib.Algebra.Ring.Idempotent
 
 /-!
 # Idempotents under nilpotent base change
@@ -14,6 +16,8 @@ Source: Stacks Project, More on Morphisms, Tags 09ZU and 04EX; Derived Categorie
 proof of Tag 0G7X, using Algebra, Tag 00EE
 (blueprint: lem-weil-pbc-base-change-nilpotent-thickening-idempotents).
 -/
+
+@[expose] public section
 
 universe u
 

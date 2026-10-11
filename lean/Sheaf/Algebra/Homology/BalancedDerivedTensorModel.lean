@@ -3,15 +3,17 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.KFlat
-import Mathlib.Algebra.Category.ModuleCat.Monoidal.Closed
-import Mathlib.Algebra.Category.ModuleCat.Abelian
-import Sheaf.Algebra.Homology.MixedTotalTensor
-import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
-import Mathlib.Algebra.Homology.Linear
-import Mathlib.CategoryTheory.Functor.Derived.LeftDerived
-import Mathlib.Algebra.Homology.Embedding.CochainComplex
-import Mathlib.RingTheory.TensorProduct.Basic
+module
+
+public import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.KFlat
+public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Closed
+public import Mathlib.Algebra.Category.ModuleCat.Abelian
+public import Sheaf.Algebra.Homology.MixedTotalTensor
+public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
+public import Mathlib.Algebra.Homology.Linear
+public import Mathlib.CategoryTheory.Functor.Derived.LeftDerived
+public import Mathlib.Algebra.Homology.Embedding.CochainComplex
+public import Mathlib.RingTheory.TensorProduct.Basic
 
 /-!
 # Balanced K-flat models and the action of the second coefficient ring
@@ -26,6 +28,8 @@ of an unspecified isomorphism. Comparing any two models through this common valu
 canonical comparison and its cocycle identity. The bifunctor and the naturality equation for
 `α` express functoriality in `M`, including morphisms in `D(A)`.
 -/
+
+@[expose] public section
 
 universe uB wA wR
 

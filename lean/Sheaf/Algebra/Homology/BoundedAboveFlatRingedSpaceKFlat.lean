@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group J1
 -/
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.Flat
-import Sheaf.Algebra.Homology.KFlat
-import Sheaf.Paper.DerivedHomMayerVietoris
-import Mathlib.Geometry.RingedSpace.Basic
+module
+
+public import Sheaf.Algebra.Category.ModuleCat.Sheaf.Flat
+public import Sheaf.Algebra.Homology.KFlat
+public import Sheaf.Paper.DerivedHomMayerVietoris
+public import Mathlib.Geometry.RingedSpace.Basic
 
 /-!
 # Bounded-above flat complexes on a ringed space are K-flat
@@ -14,6 +16,8 @@ import Mathlib.Geometry.RingedSpace.Basic
 Source: Stacks Project, Cohomology, Lemma 20.26.9 (Tag 06YD),
 label `lemma-bounded-flat-K-flat` (blueprint: lem-pc-bounded-above-flat-kflat).
 -/
+
+@[expose] public section
 
 universe u
 

@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Sheaf.Algebra.Homology.ModuleStalkFunctor
-import Sheaf.Paper.DerivedHomMayerVietoris
-import Mathlib.Algebra.Homology.ShortComplex.Exact
+module
+
+public import Sheaf.Algebra.Homology.ModuleStalkFunctor
+public import Sheaf.Paper.DerivedHomMayerVietoris
+public import Mathlib.Algebra.Homology.ShortComplex.Exact
 
 /-!
 # Exactness of stalks of sheaves of modules
@@ -13,6 +15,8 @@ import Mathlib.Algebra.Homology.ShortComplex.Exact
 Source: Stacks Project, Modules, Section 17.3 (Tag 01AF, `section-kernels`)
 and Lemma 01AG (`lemma-abelian`) (blueprint: lem-weil-pbc-module-stalk-exact).
 -/
+
+@[expose] public section
 
 universe u
 open CategoryTheory CategoryTheory.Limits TopologicalSpace TopCat.Presheaf Opposite

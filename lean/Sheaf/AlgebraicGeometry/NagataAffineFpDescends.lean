@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group P1
 -/
-import Sheaf.AlgebraicGeometry.NagataAffineFpDescent
+module
+
+public import Sheaf.AlgebraicGeometry.NagataAffineFpDescent
 
 /-!
 # Affine finite-presentation descent
@@ -12,6 +14,8 @@ Source: the Weil conjectures blueprint, `sec-nagata-compactification`,
 `sk-prop-nagata-sketch-approximation`, node order 352
 (blueprint: lemma-nagata-affine-fp-descends).
 -/
+
+@[expose] public section
 
 universe v
 

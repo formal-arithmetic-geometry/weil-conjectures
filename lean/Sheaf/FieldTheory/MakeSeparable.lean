@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import Sheaf.FieldTheory.SeparableExtension
-import Mathlib.FieldTheory.PurelyInseparable.Basic
-import Mathlib.FieldTheory.IntermediateField.Adjoin.Defs
+module
+
+public import Sheaf.FieldTheory.SeparableExtension
+public import Mathlib.FieldTheory.PurelyInseparable.Basic
+public import Mathlib.FieldTheory.IntermediateField.Adjoin.Defs
 
 /-!
 # Making a finitely generated field extension separable
@@ -13,6 +15,8 @@ import Mathlib.FieldTheory.IntermediateField.Adjoin.Defs
 Source: Stacks Project, Algebra, Lemma 030R (lemma-make-separable), first assertion
 (blueprint: lem-weil-pbc-make-separable).
 -/
+
+@[expose] public section
 
 universe u v
 

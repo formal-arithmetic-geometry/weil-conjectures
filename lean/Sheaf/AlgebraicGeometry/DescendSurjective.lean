@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import Sheaf.AlgebraicGeometry.LimitAffineTransition
-import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
-import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
-import Mathlib.CategoryTheory.Comma.Over.Pullback
+module
+
+public import Sheaf.AlgebraicGeometry.LimitAffineTransition
+public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
+public import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
+public import Mathlib.CategoryTheory.Comma.Over.Pullback
 
 /-!
 # Surjectivity descends to a finite stage of an inverse limit
@@ -14,6 +16,8 @@ import Mathlib.CategoryTheory.Comma.Over.Pullback
 Source: Stacks Project, Limits, Lemma 07RR in Situation 081D
 (blueprint: lem-weil-pbc-descend-surjective).
 -/
+
+@[expose] public section
 
 universe u
 

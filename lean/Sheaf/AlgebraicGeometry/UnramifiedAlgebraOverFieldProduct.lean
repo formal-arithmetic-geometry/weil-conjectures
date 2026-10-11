@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
-import Mathlib.AlgebraicGeometry.Morphisms.Separated
-import Mathlib.FieldTheory.Separable
-import Mathlib.RingTheory.Finiteness.Defs
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
+public import Mathlib.AlgebraicGeometry.Morphisms.Separated
+public import Mathlib.FieldTheory.Separable
+public import Mathlib.RingTheory.Finiteness.Defs
 
 /-!
 # Unramified algebras over a field
@@ -14,6 +16,8 @@ import Mathlib.RingTheory.Finiteness.Defs
 Source: Stacks Project, Morphisms, Lemma 02G7 (1), affine case; Algebra, proof of Lemma 00UW
 (blueprint: lem-weil-pbc-unramified-algebra-over-field-product).
 -/
+
+@[expose] public section
 
 universe u
 

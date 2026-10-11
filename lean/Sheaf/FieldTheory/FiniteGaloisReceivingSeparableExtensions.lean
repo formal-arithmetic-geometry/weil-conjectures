@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import Mathlib.FieldTheory.Separable
-import Mathlib.FieldTheory.Minpoly.Basic
-import Mathlib.LinearAlgebra.FiniteDimensional.Basic
+module
+
+public import Mathlib.FieldTheory.Separable
+public import Mathlib.FieldTheory.Minpoly.Basic
+public import Mathlib.LinearAlgebra.FiniteDimensional.Basic
 
 /-!
 # Finitely many finite separable extensions embed into one finite Galois extension
@@ -13,6 +15,8 @@ import Mathlib.LinearAlgebra.FiniteDimensional.Basic
 Source: literature/stacks-project/fields.tex, Lemmas 09DT and 0EXM and Definition 09I0
 (blueprint: lem-weil-pbc-finite-galois-receiving-separable-extensions)
 -/
+
+@[expose] public section
 
 open scoped Polynomial
 

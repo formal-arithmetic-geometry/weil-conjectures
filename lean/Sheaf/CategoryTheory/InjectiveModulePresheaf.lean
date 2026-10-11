@@ -1,5 +1,7 @@
-import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
-import Mathlib.CategoryTheory.Preadditive.Injective.Preserves
+module
+
+public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
+public import Mathlib.CategoryTheory.Preadditive.Injective.Preserves
 
 /-!
 # Injective module sheaves are injective presheaves
@@ -7,6 +9,8 @@ import Mathlib.CategoryTheory.Preadditive.Injective.Preserves
 Source: literature/stacks-project/sites-cohomology.tex, Lemma Tag 03FB
 (blueprint: lem-weil-pbc-ringed-site-injective-module-injective-presheaf).
 -/
+
+@[expose] public section
 
 universe u v w t
 

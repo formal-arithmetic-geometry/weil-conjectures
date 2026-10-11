@@ -1,0 +1,245 @@
+/-
+Copyright (c) 2026 Christian Merten. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Christian Merten
+-/
+module
+
+public import Mathlib.AlgebraicGeometry.PullbackCarrier
+public import Mathlib.AlgebraicGeometry.Sites.Etale
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Small
+public import WeilConjectures.Mathlib.CategoryTheory.Sites.Over
+
+/-!
+# Complements on the small étale site
+
+- `AlgebraicGeometry.Scheme.Hom.Etale`: the base change functor `Y.Etale ⥤ X.Etale`
+  along a morphism `f : X ⟶ Y`; it preserves finite limits, is representably flat
+  (`AlgebraicGeometry.Scheme.Hom.representablyFlat_etale`), is continuous for the small
+  étale topologies (`AlgebraicGeometry.Scheme.Hom.isContinuous_etale`), and it is
+  compatible with the projections `V ×_Y X ⟶ V` by
+  `AlgebraicGeometry.Scheme.Hom.etale_map_left_comp_fst`.
+- `AlgebraicGeometry.Scheme.Etale.isContinuous_forget_comp_overForget`: the functor from the
+  small étale site of `X` to schemes is continuous for the big étale topology.
+- `AlgebraicGeometry.Scheme.mem_smallEtaleTopology_iff`: a sieve on an object of the small
+  étale site is a covering exactly when the arrows in it are jointly surjective. This is the
+  sieve-level form of
+  `AlgebraicGeometry.Scheme.ofArrows_mem_smallEtaleTopology_iff`.
+- `AlgebraicGeometry.Scheme.Etale.baseChange` and
+  `AlgebraicGeometry.Scheme.Etale.baseChangeHom`: for an étale morphism `g : W ⟶ X`, the
+  base change `V ×_X W` of an étale `X`-scheme `V`, again as an étale `X`-scheme, and its
+  projection to `V`.
+- `AlgebraicGeometry.Scheme.Etale.ofArrows_baseChange_mem_smallEtaleTopology`: these base
+  changes cover `V` as soon as the étale morphisms are jointly surjective.
+- `AlgebraicGeometry.Scheme.Etale.isTerminalSectionsOfIsEmpty`: a sheaf on the small étale
+  site has terminal sections over an object whose underlying scheme is empty. This is the
+  sheaf condition for the empty covering. Hence every sheaf on the small étale site of an
+  empty scheme is zero (`AlgebraicGeometry.Scheme.Etale.isZero_sheaf_of_isEmpty`).
+- `AlgebraicGeometry.Scheme.hasWeakSheafify_smallEtaleTopology`: sheafification for the
+  localizations of the small étale site at all étale `U ⟶ X` gives sheafification for
+  the small étale site itself, by localizing at the terminal object `𝟙 X`.
+-/
+
+@[expose] public section
+
+universe v u u'
+
+open CategoryTheory Limits Opposite
+
+noncomputable section
+
+namespace AlgebraicGeometry.Scheme
+
+variable {A : Type u'} [Category.{v} A] {X Y : Scheme.{u}}
+
+section Functoriality
+
+/-- The base change functor `Y.Etale ⥤ X.Etale` along a morphism `f : X ⟶ Y`, sending an
+étale `V ⟶ Y` to the projection `V ×_Y X ⟶ X`. This is the functor along which the
+pushforward `AlgebraicGeometry.Etale.lowerStar` and the pullback
+`AlgebraicGeometry.Etale.upperStar` are defined. -/
+def Hom.Etale (f : X ⟶ Y) : Y.Etale ⥤ X.Etale :=
+  MorphismProperty.Over.pullback @AlgebraicGeometry.Etale ⊤ f
+
+instance (f : X ⟶ Y) : PreservesFiniteLimits f.Etale :=
+  inferInstanceAs <| PreservesFiniteLimits (MorphismProperty.Over.pullback @Etale ⊤ f)
+
+/-- The base change functor `f.Etale` is representably flat: the small étale site of `Y`
+has finite limits and base change preserves them. -/
+instance Hom.representablyFlat_etale (f : X ⟶ Y) : RepresentablyFlat f.Etale :=
+  MorphismProperty.Over.representablyFlat_pullback @AlgebraicGeometry.Etale f
+
+/-- The base change functor `f.Etale` preserves the covering sieves of the small étale
+topologies: étale covers are stable under base change. -/
+lemma Hom.coverPreserving_etale (f : X ⟶ Y) :
+    CoverPreserving (smallEtaleTopology Y) (smallEtaleTopology X) f.Etale :=
+  coverPreserving_overPullback @AlgebraicGeometry.Etale @AlgebraicGeometry.Etale le_rfl f
+
+/-- The base change functor `f.Etale` is continuous for the small étale topologies: it
+preserves covers by `AlgebraicGeometry.Scheme.Hom.coverPreserving_etale`, and compatible
+families since it is representably flat. -/
+instance Hom.isContinuous_etale (f : X ⟶ Y) :
+    f.Etale.IsContinuous (smallEtaleTopology Y) (smallEtaleTopology X) :=
+  isContinuous_overPullback @AlgebraicGeometry.Etale @AlgebraicGeometry.Etale le_rfl f
+
+set_option backward.isDefEq.respectTransparency false in
+/-- Base change along `f : X ⟶ Y` is compatible with the projections from the base changes
+to the original étale `Y`-schemes:
+
+```
+   V ×_Y X ──(f.Etale.map g).left──→ U ×_Y X
+      │                                 │
+      │ pullback.fst V.hom f            │ pullback.fst U.hom f
+      ↓                                 ↓
+      V ────────────g.left────────────→  U
+```
+-/
+lemma Hom.etale_map_left_comp_fst (f : X ⟶ Y) {U V : Y.Etale} (g : V ⟶ U) :
+    (f.Etale.map g).left ≫ pullback.fst U.hom f = pullback.fst V.hom f ≫ g.left :=
+  pullback.lift_fst _ _ _
+
+/-- Base change along `f : X ⟶ Y` is compatible with the projections to `X`. -/
+lemma Hom.etale_map_left_comp_snd (f : X ⟶ Y) {U V : Y.Etale} (g : V ⟶ U) :
+    (f.Etale.map g).left ≫ pullback.snd U.hom f = pullback.snd V.hom f :=
+  pullback.lift_snd _ _ _
+
+/-- The forgetful functor from the small étale site of `X` to `X`-schemes is continuous for
+the étale topology on `Over X`. -/
+instance Etale.isContinuous_forget :
+    (Etale.forget X).IsContinuous X.smallEtaleTopology (etaleTopology.over X) :=
+  inferInstanceAs ((MorphismProperty.Over.forget @AlgebraicGeometry.Etale ⊤ X).IsContinuous
+    (X.smallGrothendieckTopology _) (X.overGrothendieckTopology _))
+
+/-- The functor from the small étale site of `X` to schemes is continuous for the big étale
+topology. -/
+instance Etale.isContinuous_forget_comp_overForget :
+    (Etale.forget X ⋙ Over.forget X).IsContinuous X.smallEtaleTopology etaleTopology :=
+  Functor.isContinuous_comp _ _ _ (etaleTopology.over X) _
+
+end Functoriality
+
+section Sieves
+
+/-- A sieve on an object of the small étale site is a covering exactly when the arrows in it
+are jointly surjective. This is the sieve-level form of
+`AlgebraicGeometry.Scheme.ofArrows_mem_smallEtaleTopology_iff`, a sieve being generated by
+the family of all its arrows. -/
+lemma mem_smallEtaleTopology_iff {U : X.Etale} (S : Sieve U) :
+    S ∈ X.smallEtaleTopology U ↔
+      ∀ x : U.left, ∃ (V : X.Etale) (g : V ⟶ U), S g ∧ x ∈ Set.range g.left := by
+  let ι := Σ V : X.Etale, { g : V ⟶ U // S g }
+  have hS : Sieve.ofArrows (fun i : ι ↦ i.1) (fun i ↦ i.2.1) = S := by
+    apply le_antisymm
+    · rw [Sieve.ofArrows, Sieve.generate_le_iff]
+      rintro V g ⟨i⟩
+      exact i.2.2
+    · intro V g hg
+      exact ⟨V, 𝟙 V, g, Presieve.ofArrows.mk (⟨V, g, hg⟩ : ι), by simp⟩
+  conv_lhs => rw [← hS, ofArrows_mem_smallEtaleTopology_iff]
+  simp only [Set.eq_univ_iff_forall, Set.mem_iUnion]
+  constructor
+  · intro h x
+    obtain ⟨i, hi⟩ := h x
+    exact ⟨i.1, i.2.1, i.2.2, hi⟩
+  · intro h x
+    obtain ⟨V, g, hg, hx⟩ := h x
+    exact ⟨⟨V, g, hg⟩, hx⟩
+
+end Sieves
+
+section BaseChange
+
+variable {W : Scheme.{u}} (g : W ⟶ X) [AlgebraicGeometry.Etale g] (V : X.Etale)
+
+set_option backward.isDefEq.respectTransparency false in
+/-- The base change `V ×_X W` of an étale `X`-scheme `V` along an étale morphism
+`g : W ⟶ X`, viewed again as an étale `X`-scheme rather than as an étale `W`-scheme; it is
+the image of `g.Etale.obj V` under the localization functor along `g`.
+
+```
+   V ×_X W ────→ W
+      │          │ g
+      ↓          ↓
+      V ──V.hom─→ X
+```
+-/
+def Etale.baseChange : X.Etale :=
+  Etale.mk (pullback.fst V.hom g ≫ V.hom)
+
+set_option backward.isDefEq.respectTransparency false in
+/-- The projection `V ×_X W ⟶ V`, a morphism of étale `X`-schemes. -/
+def Etale.baseChangeHom : Etale.baseChange g V ⟶ V :=
+  MorphismProperty.Over.homMk (pullback.fst V.hom g) rfl
+
+set_option backward.isDefEq.respectTransparency false in
+/-- The image of `V ×_X W` in `V` is the preimage of the range of `g`. -/
+lemma Etale.range_baseChangeHom_left :
+    Set.range (Etale.baseChangeHom g V).left.base = V.hom.base ⁻¹' Set.range g.base :=
+  Pullback.range_fst V.hom g
+
+end BaseChange
+
+section Cover
+
+variable (V : X.Etale) {ι : Type*} {W : ι → Scheme.{u}} (g : ∀ i, W i ⟶ X)
+  [∀ i, AlgebraicGeometry.Etale (g i)]
+
+set_option backward.isDefEq.respectTransparency false in
+/-- For a jointly surjective family of étale morphisms `g i : W i ⟶ X`, the base changes
+`V ×_X W i` cover `V` in the small étale topology, for every étale `X`-scheme `V`. -/
+lemma Etale.ofArrows_baseChange_mem_smallEtaleTopology
+    (hg : ⋃ i, Set.range (g i).base = Set.univ) :
+    Sieve.ofArrows (fun i => Etale.baseChange (g i) V)
+        (fun i => Etale.baseChangeHom (g i) V) ∈ X.smallEtaleTopology V := by
+  rw [ofArrows_mem_smallEtaleTopology_iff]
+  have hrange : ∀ i, Set.range (Etale.baseChangeHom (g i) V).left.base =
+      V.hom.base ⁻¹' Set.range (g i).base := fun i => Etale.range_baseChangeHom_left _ _
+  simp only [hrange]
+  rw [← Set.preimage_iUnion, hg, Set.preimage_univ]
+
+end Cover
+
+section EmptyObject
+
+/-- The empty sieve on an object of the small étale site whose underlying scheme is empty is
+a covering: the empty family of morphisms is (vacuously) jointly surjective. -/
+lemma Etale.bot_mem_smallEtaleTopology (T : X.Etale) [IsEmpty T.left] :
+    (⊥ : Sieve T) ∈ X.smallEtaleTopology T := by
+  have hbot : (⊥ : Sieve T) = Sieve.ofArrows (Empty.elim : Empty → X.Etale) (fun i ↦ i.elim) := by
+    simp [Sieve.ofArrows, Presieve.ofArrows_of_isEmpty]
+  rw [hbot, ofArrows_mem_smallEtaleTopology_iff]
+  simp [Set.eq_univ_iff_forall, IsEmpty.forall_iff]
+
+/-- A sheaf on the small étale site has terminal sections over an object whose underlying
+scheme is empty. -/
+def Etale.isTerminalSectionsOfIsEmpty
+    (G : Sheaf X.smallEtaleTopology A) (T : X.Etale) [IsEmpty T.left] :
+    IsTerminal (G.obj.obj (op T)) :=
+  G.isTerminalOfBotCover T (Etale.bot_mem_smallEtaleTopology T)
+
+/-- On the small étale site of an empty scheme every sheaf with values in a category with a
+zero object is zero: its sections over every object are terminal. -/
+lemma Etale.isZero_sheaf_of_isEmpty [Preadditive A] [HasZeroObject A] [IsEmpty X]
+    (G : Sheaf X.smallEtaleTopology A) : IsZero G := by
+  rw [IsZero.iff_id_eq_zero]
+  ext T
+  have : IsEmpty T.unop.left := ⟨fun x ↦ isEmptyElim (show X from T.unop.hom.base x)⟩
+  exact (Etale.isTerminalSectionsOfIsEmpty G T.unop).isZero.eq_of_src _ _
+
+end EmptyObject
+
+section Sheafify
+
+variable [∀ U : X.Etale, HasWeakSheafify (X.smallEtaleTopology.over U) A]
+
+/-- Sheafification for the localizations of the small étale site at all étale `U ⟶ X`
+gives sheafification for the small étale site itself, by localizing at the terminal
+object `𝟙 X`. -/
+instance hasWeakSheafify_smallEtaleTopology : HasWeakSheafify X.smallEtaleTopology A :=
+  X.smallEtaleTopology.hasWeakSheafify_of_over_isTerminal A terminalIsTerminal
+
+end Sheafify
+
+end Scheme
+
+end AlgebraicGeometry

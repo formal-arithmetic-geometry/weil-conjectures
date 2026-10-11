@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group G1
 -/
-import Sheaf.AlgebraicGeometry.ModuleBaseChangeMapOpenRestriction
-import Sheaf.AlgebraicGeometry.TensorPullbackStructureSheaf
-import Sheaf.AlgebraicGeometry.ModulePullbackTensor
+module
+
+public import Sheaf.AlgebraicGeometry.ModuleBaseChangeMapOpenRestriction
+public import Sheaf.AlgebraicGeometry.TensorPullbackStructureSheaf
+public import Sheaf.AlgebraicGeometry.ModulePullbackTensor
 
 /-!
 # Algebra compatibility of the structure-sheaf base change map
@@ -15,6 +17,8 @@ Modules, Tag 01CD. The algebra compatibility is the agent-written argument in th
 not a separately stated Stacks lemma
 (blueprint: lem-weil-pbc-module-base-change-map-algebra).
 -/
+
+@[expose] public section
 
 universe v
 

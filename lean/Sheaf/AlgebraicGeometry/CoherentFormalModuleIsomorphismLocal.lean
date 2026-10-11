@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import Sheaf.AlgebraicGeometry.CoherentFormalModule
+module
+
+public import Sheaf.AlgebraicGeometry.CoherentFormalModule
 
 /-!
 # Isomorphisms of coherent formal modules are local
@@ -12,6 +14,8 @@ Source: Stacks Project, Cohomology of Schemes, Lemma 30.23.2 (Tag 087X),
 the locality assertion following the construction of kernels and cokernels
 (blueprint: lem-weil-pbc-coherent-formal-modules-isomorphism-local).
 -/
+
+@[expose] public section
 
 universe u v
 

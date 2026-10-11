@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Mathlib.AlgebraicGeometry.Limits
-import Mathlib.AlgebraicGeometry.Morphisms.Proper
+module
+
+public import Mathlib.AlgebraicGeometry.Limits
+public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 
 /-!
 # Properness of a coproduct of two schemes
@@ -12,6 +14,8 @@ import Mathlib.AlgebraicGeometry.Morphisms.Proper
 Source: literature/stacks-project/coherent.tex, proof of Lemma 0CYR; Schemes,
 Section 01JA (blueprint: lem-weil-pbc-proper-coproduct).
 -/
+
+@[expose] public section
 
 open CategoryTheory CategoryTheory.Limits
 

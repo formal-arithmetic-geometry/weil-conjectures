@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group J1
 -/
-import Mathlib.RingTheory.Noetherian.Defs
-import Mathlib.RingTheory.KrullDimension.Basic
-import Mathlib.RingTheory.Ideal.Quotient.Defs
-import Sheaf.RingTheory.Depth
+module
+
+public import Mathlib.RingTheory.Noetherian.Defs
+public import Mathlib.RingTheory.KrullDimension.Basic
+public import Mathlib.RingTheory.Ideal.Quotient.Defs
+public import Sheaf.RingTheory.Depth
 
 /-!
 # Dimension drop gives a regular sequence in a Cohen-Macaulay local ring
@@ -15,6 +17,8 @@ Source: Stacks Project, Algebra, Proposition 10.103.4 (Tag 00N6), first assertio
 `M = R`; Definition 10.103.1 (Tag 00N3)
 (blueprint: lem-weil-pbc-cm-local-dimension-drop-regular-sequence).
 -/
+
+@[expose] public section
 
 universe u
 

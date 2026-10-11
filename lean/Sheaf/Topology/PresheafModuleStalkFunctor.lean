@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import Mathlib.Algebra.Category.ModuleCat.Stalk
+module
+
+public import Mathlib.Algebra.Category.ModuleCat.Stalk
 
 /-!
 # Stalk functor for presheaves of modules
@@ -13,6 +15,8 @@ Source: Stacks Project, Sheaves, Section 007I and Lemma 007J
 
 The objects and scalar action are Mathlib's stalks, not a second germ construction.
 -/
+
+@[expose] public section
 
 universe u
 

@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import Mathlib.RingTheory.Regular.RegularSequence
+module
+
+public import Mathlib.RingTheory.Regular.RegularSequence
 
 /-!
 # Swapping a regular sequence of length two
@@ -11,6 +13,8 @@ import Mathlib.RingTheory.Regular.RegularSequence
 Source: Stacks Project, Algebra, proof of Lemma Tag 07DW, case `r = 2`
 (blueprint: lem-weil-pbc-regular-sequence-swap-two).
 -/
+
+@[expose] public section
 
 universe u
 

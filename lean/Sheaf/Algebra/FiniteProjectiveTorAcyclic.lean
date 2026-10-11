@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Mathlib.CategoryTheory.Monoidal.Tor
-import Mathlib.Algebra.Category.ModuleCat.Monoidal.Basic
-import Mathlib.Algebra.Category.ModuleCat.Abelian
-import Mathlib.Algebra.Category.ModuleCat.Projective
+module
+
+public import Mathlib.CategoryTheory.Monoidal.Tor
+public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Basic
+public import Mathlib.Algebra.Category.ModuleCat.Abelian
+public import Mathlib.Algebra.Category.ModuleCat.Projective
 
 /-!
 # Finite projective summands inherit Tor acyclicity
@@ -14,6 +16,8 @@ import Mathlib.Algebra.Category.ModuleCat.Projective
 Source: Stacks Project, `perfect.tex`, Tag 08IB, `lemma-compare-base-change`
 (blueprint: lem-pc-finite-projective-tor-acyclic).
 -/
+
+@[expose] public section
 
 universe u
 

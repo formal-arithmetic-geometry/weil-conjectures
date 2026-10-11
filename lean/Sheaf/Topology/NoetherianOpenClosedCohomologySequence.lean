@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group U1
 -/
-import Sheaf.CategoryTheory.SiteExtensionByZeroPresheaf
-import Sheaf.Topology.ClosedImmersionPushforwardCohomology
-import Mathlib.Topology.NoetherianSpace
-import Mathlib.Algebra.Homology.ShortComplex.ShortExact
+module
+
+public import Sheaf.CategoryTheory.SiteExtensionByZeroPresheaf
+public import Sheaf.Topology.ClosedImmersionPushforwardCohomology
+public import Mathlib.Topology.NoetherianSpace
+public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 
 /-!
 # The open-closed exact sequence on a Noetherian space
@@ -14,6 +16,8 @@ import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 Source: Stacks Project, Modules, Lemma 02UT; Cohomology, Lemma 02UV and
 Proposition 02UZ (blueprint: lem-sc-noetherian-open-closed-cohomology-sequence).
 -/
+
+@[expose] public section
 
 set_option autoImplicit false
 

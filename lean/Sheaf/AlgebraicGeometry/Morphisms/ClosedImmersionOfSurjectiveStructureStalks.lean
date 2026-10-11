@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group G1
 -/
-import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 
 /-!
 # Closed immersions from surjective structure-sheaf stalk maps
@@ -11,6 +13,8 @@ import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 Source: Stacks Project, Morphisms, Lemmas 01QO and 01SA
 (blueprint: lem-pc-affine-surjective-structure-map-closed-immersion).
 -/
+
+@[expose] public section
 
 universe u
 

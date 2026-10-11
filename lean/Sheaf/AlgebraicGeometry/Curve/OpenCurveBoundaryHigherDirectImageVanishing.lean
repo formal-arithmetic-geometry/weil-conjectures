@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import WeilConjectures.AlgebraicGeometry.Curve
-import WeilConjectures.AlgebraicGeometry.Sites.Gm
-import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStarCoherence
-import Mathlib.AlgebraicGeometry.Sites.EtalePoint
+module
+
+public import WeilConjectures.AlgebraicGeometry.Curve
+public import WeilConjectures.AlgebraicGeometry.Sites.Gm
+public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStarCoherence
+public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
 
 /-!
 # Higher direct images of the multiplicative group across a curve boundary
@@ -15,6 +17,8 @@ Source: Stacks Project, discussion preceding Tag 03RM and the geometric-stalk ca
 of Tag 03RJ, adapted to the complement of finitely many closed points
 (blueprint: lem-sc-open-curve-boundary-higher-direct-image-vanishing).
 -/
+
+@[expose] public section
 
 set_option autoImplicit false
 

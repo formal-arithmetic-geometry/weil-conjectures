@@ -3,11 +3,13 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group V1
 -/
-import WeilConjectures.Topology.Sheaves.PushforwardCohomology
-import Mathlib.CategoryTheory.Abelian.RightDerived
-import Mathlib.CategoryTheory.Abelian.Injective.Ext
-import WeilConjectures.Mathlib.Algebra.Homology.SpectralSequence.Basic
-import Sheaf.CategoryTheory.Filtration
+module
+
+public import WeilConjectures.Topology.Sheaves.PushforwardCohomology
+public import Mathlib.CategoryTheory.Abelian.RightDerived
+public import Mathlib.CategoryTheory.Abelian.Injective.Ext
+public import WeilConjectures.Mathlib.Algebra.Homology.SpectralSequence.Basic
+public import Sheaf.CategoryTheory.Filtration
 
 /-! # Leray spectral sequence for a continuous map of spaces
 
@@ -19,6 +21,8 @@ The spectral sequence lives in the abelian category of functors from abelian she
 on the source to abelian groups. Thus its differentials, page identifications, filtration
 subobjects, graded isomorphisms and edge maps are all natural in the sheaf.
 -/
+
+@[expose] public section
 
 universe u
 

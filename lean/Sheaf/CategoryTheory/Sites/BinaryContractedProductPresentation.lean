@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import Mathlib.AlgebraicGeometry.Scheme
-import Mathlib.CategoryTheory.Sites.Spaces
-import WeilConjectures.CategoryTheory.Sites.Torsor
+module
+
+public import Mathlib.AlgebraicGeometry.Scheme
+public import Mathlib.CategoryTheory.Sites.Spaces
+public import WeilConjectures.CategoryTheory.Sites.Torsor
 
 /-!
 # Binary contracted products of Zariski torsors
@@ -13,6 +15,8 @@ import WeilConjectures.CategoryTheory.Sites.Torsor
 Source: blueprint `sec-curve-estimates/sk-prop-hilbert90/lem-sc-torsor-h1.md`,
 contracted-product group law (blueprint: def-sc-binary-contracted-product-presentation).
 -/
+
+@[expose] public section
 
 universe u w
 

@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group J1
 -/
-import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
-import Mathlib.AlgebraicGeometry.Sites.Fpqc
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
+public import Mathlib.AlgebraicGeometry.Sites.Fpqc
 
 /-!
 # Descent of local finite presentation along fpqc coverings
@@ -12,6 +14,8 @@ import Mathlib.AlgebraicGeometry.Sites.Fpqc
 Source: Stacks Project, Descent, Lemma Tag 02KY, descent direction
 (blueprint: lem-weil-pbc-fpqc-descend-locally-finite-presentation).
 -/
+
+@[expose] public section
 
 universe u v
 

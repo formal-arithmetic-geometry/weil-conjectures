@@ -1,8 +1,10 @@
-import Mathlib.RingTheory.FiniteType
-import Mathlib.RingTheory.KrullDimension.Basic
-import Mathlib.RingTheory.AlgebraicIndependent.Basic
-import Mathlib.RingTheory.Localization.FractionRing
-import Mathlib.RingTheory.Localization.AtPrime.Basic
+module
+
+public import Mathlib.RingTheory.FiniteType
+public import Mathlib.RingTheory.KrullDimension.Basic
+public import Mathlib.RingTheory.AlgebraicIndependent.Basic
+public import Mathlib.RingTheory.Localization.FractionRing
+public import Mathlib.RingTheory.Localization.AtPrime.Basic
 
 /-!
 # Dimension of a finite type domain over a field
@@ -16,6 +18,8 @@ The Krull dimension of a finite type domain `S` over a field `k` equals the
 transcendence degree of its fraction field, and localization at a maximal
 ideal has the same dimension.
 -/
+
+@[expose] public section
 
 universe u v
 

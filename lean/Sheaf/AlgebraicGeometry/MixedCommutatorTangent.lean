@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group R1
 -/
-import WeilConjectures.AlgebraicGeometry.GroupScheme.Defs
-import WeilConjectures.AlgebraicGeometry.GroupScheme.GeneralLinear.Lie
+module
+
+public import WeilConjectures.AlgebraicGeometry.GroupScheme.Defs
+public import WeilConjectures.AlgebraicGeometry.GroupScheme.GeneralLinear.Lie
 
 /-!
 # Mixed commutators of infinitesimal matrix points
@@ -15,6 +17,8 @@ commutator (blueprint: lem-wf-mixed-commutator-tangent).
 An arbitrary finite basis identifies GL(V) with the general linear group scheme. The ring
 `DualNumber (DualNumber k)` is k[ε,δ]/(ε²,δ²), with coordinates 1, ε, δ, εδ.
 -/
+
+@[expose] public section
 
 universe u v
 

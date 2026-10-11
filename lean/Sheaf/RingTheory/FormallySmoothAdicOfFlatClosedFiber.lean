@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Sheaf.RingTheory.FormallySmoothAdic
-import Mathlib.RingTheory.RingHom.Flat
-import Mathlib.RingTheory.LocalRing.Basic
-import Mathlib.RingTheory.Noetherian.Defs
+module
+
+public import Sheaf.RingTheory.FormallySmoothAdic
+public import Mathlib.RingTheory.RingHom.Flat
+public import Mathlib.RingTheory.LocalRing.Basic
+public import Mathlib.RingTheory.Noetherian.Defs
 
 /-!
 # Adic formal smoothness from flatness and the closed fibre
@@ -14,6 +16,8 @@ import Mathlib.RingTheory.Noetherian.Defs
 Source: Stacks Project, More on Algebra, Proposition 15.41.5 (Tag 07NQ), (2) => (3)
 (blueprint: lem-weil-pbc-flat-formally-smooth-closed-fibre-adic).
 -/
+
+@[expose] public section
 
 universe u v
 

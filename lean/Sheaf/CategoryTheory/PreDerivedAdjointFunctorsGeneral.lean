@@ -3,11 +3,13 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group J1
 -/
-import Mathlib.Algebra.Homology.DerivedCategory.Fractions
-import Mathlib.CategoryTheory.MorphismProperty.Comma
-import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
-import Sheaf.CategoryTheory.DerivedCategory.EssentiallyConstantInd
-import Sheaf.CategoryTheory.DerivedCategory.EssentiallyConstantPro
+module
+
+public import Mathlib.Algebra.Homology.DerivedCategory.Fractions
+public import Mathlib.CategoryTheory.MorphismProperty.Comma
+public import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
+public import Sheaf.CategoryTheory.DerivedCategory.EssentiallyConstantInd
+public import Sheaf.CategoryTheory.DerivedCategory.EssentiallyConstantPro
 
 /-!
 # Pre-derived adjunction from essentially constant derived systems
@@ -15,6 +17,8 @@ import Sheaf.CategoryTheory.DerivedCategory.EssentiallyConstantPro
 Source: Stacks Project, Derived Categories, Lemma 0DVC, specialized from Lemma 0FND
 (blueprint: lem-pc-pre-derived-adjoint-functors-general).
 -/
+
+@[expose] public section
 
 universe uA vA wA uB vB wB
 

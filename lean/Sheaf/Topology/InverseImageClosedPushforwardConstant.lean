@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import Mathlib.Topology.Sheaves.Functors
-import Mathlib.CategoryTheory.Sites.LeftExact
-import Mathlib.Topology.LocallyConstant.Basic
+module
+
+public import Mathlib.Topology.Sheaves.Functors
+public import Mathlib.CategoryTheory.Sites.LeftExact
+public import Mathlib.Topology.LocallyConstant.Basic
 
 /-!
 # Inverse image of a constant sheaf pushed forward from a closed subset
@@ -14,6 +16,8 @@ Source: Stacks Project, Modules, proof of Tag 0CAL (reduction by Tag 0CAK);
 Sheaves, Tags 008H, 00AE and 007T, for the proof on stalks.
 (blueprint: lem-weil-pbc-inverse-image-closed-pushforward-constant).
 -/
+
+@[expose] public section
 
 universe u
 

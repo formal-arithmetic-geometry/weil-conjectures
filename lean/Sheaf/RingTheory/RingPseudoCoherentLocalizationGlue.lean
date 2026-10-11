@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import Sheaf.RingTheory.MPseudoCoherent
-import Sheaf.RingTheory.RingPseudoCoherent
-import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
-import Mathlib.RingTheory.Localization.Away.Basic
+module
+
+public import Sheaf.RingTheory.MPseudoCoherent
+public import Sheaf.RingTheory.RingPseudoCoherent
+public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
+public import Mathlib.RingTheory.Localization.Away.Basic
 
 /-!
 # Gluing pseudo-coherence over a finite standard-open cover
@@ -14,6 +16,8 @@ import Mathlib.RingTheory.Localization.Away.Basic
 Source: Stacks Project, More on Algebra, Lemma 15.66.14 (Tag 066D), with Definition 064P
 and Lemma 064U (blueprint: lem-pc-ring-pseudo-coherent-localization-glue).
 -/
+
+@[expose] public section
 
 universe w₁ w₂ v₁ u₁
 

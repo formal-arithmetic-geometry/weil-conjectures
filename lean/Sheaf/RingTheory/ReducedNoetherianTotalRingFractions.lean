@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group J1
 -/
-import Mathlib.RingTheory.Localization.FractionRing
-import Mathlib.RingTheory.Localization.AtPrime.Basic
-import Mathlib.RingTheory.Ideal.MinimalPrime.Noetherian
-import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
+module
+
+public import Mathlib.RingTheory.Localization.FractionRing
+public import Mathlib.RingTheory.Localization.AtPrime.Basic
+public import Mathlib.RingTheory.Ideal.MinimalPrime.Noetherian
+public import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
 
 /-!
 # Total ring of fractions of a reduced Noetherian ring
@@ -14,6 +16,8 @@ import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
 Source: literature/stacks-project/algebra.tex, Lemma Tag 02LX (blueprint:
 lem-weil-pbc-reduced-noetherian-total-ring-fractions).
 -/
+
+@[expose] public section
 
 universe u
 

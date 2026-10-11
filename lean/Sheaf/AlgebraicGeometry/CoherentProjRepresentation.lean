@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import Sheaf.AlgebraicGeometry.ProjGradedModuleSheafExists
-import Mathlib.RingTheory.MvPolynomial.Homogeneous
+module
+
+public import Sheaf.AlgebraicGeometry.ProjGradedModuleSheafExists
+public import Mathlib.RingTheory.MvPolynomial.Homogeneous
 
 /-!
 # Coherent modules on the projective line have graded representations
@@ -17,6 +19,8 @@ The associated sheaf is specified by its degree-zero localization sections, scal
 compatibility and canonical restrictions, using the encoding of
 `Proj.gradedModuleSheaf_exists`. No second associated-sheaf construction is made.
 -/
+
+@[expose] public section
 
 universe u
 

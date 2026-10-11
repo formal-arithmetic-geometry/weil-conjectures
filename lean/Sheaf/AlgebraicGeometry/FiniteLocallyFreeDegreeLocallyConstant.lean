@@ -1,4 +1,6 @@
-import WeilConjectures.AlgebraicGeometry.Morphisms.FiberDegree
+module
+
+public import WeilConjectures.AlgebraicGeometry.Morphisms.FiberDegree
 
 /-!
 # Locally constant fibre degree of a finite locally free morphism
@@ -6,6 +8,8 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.FiberDegree
 Source: literature/stacks-project/morphisms.tex, Section 02K9, Definition 02KA
 and Lemma 04MH (blueprint: lem-weil-pbc-finite-locally-free-degree-locally-constant).
 -/
+
+@[expose] public section
 
 universe u
 

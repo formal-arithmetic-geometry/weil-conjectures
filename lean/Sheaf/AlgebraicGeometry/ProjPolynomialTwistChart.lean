@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import WeilConjectures.AlgebraicGeometry.ProjectiveSpectrum.Twist
-import WeilConjectures.Mathlib.RingTheory.MvPolynomial.Homogeneous
+module
+
+public import WeilConjectures.AlgebraicGeometry.ProjectiveSpectrum.Twist
+public import WeilConjectures.Mathlib.RingTheory.MvPolynomial.Homogeneous
 
 /-!
 # Standard charts and twisting module on a polynomial Proj
@@ -19,6 +21,8 @@ record of def-pc-projective-space-twist, is the pullback), with local basis
 `e_k = Proj.twistPowSection 1 (isHomogeneous_X A k)` (the fraction `x_k / 1`).
 The ratio `x_l / x_k ∈ S_(x_k)` is the source's `MvPolynomial.awayXRatio A k l`.
 -/
+
+@[expose] public section
 
 universe u
 

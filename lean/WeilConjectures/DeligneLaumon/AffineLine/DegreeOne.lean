@@ -1,0 +1,168 @@
+/-
+Copyright (c) 2026 Claude. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Claude
+-/
+module
+
+public import WeilConjectures.DeligneLaumon.AffineLine.FourierWeight
+public import WeilConjectures.DeligneLaumon.AffineLine.Purity
+
+/-!
+# The degree-one estimate for an irreducible factor
+
+Semicontinuity bounds the weights of `j'_*M'` by `v ≤ w + 1` even at the singular points of
+the dual line. At the origin the Fourier kernel is trivial, so the stalk formula, taking both
+shifts into account, gives
+
+`(FT_ψ(j_*M[1]))_0̄ ≃ RΓ_c(A, j_*M)[2]` and `(j'_*M')_0̄ ≃ H_c^1(A, j_*M)`,
+
+Frobenius-equivariantly. Hence `H_c^1(A, j_*M)` has weights at most `w + 1`. By the
+nonexceptionality test `AlgebraicGeometry.isNonexceptional_of_isUnramifiedAtInfinity` the same
+bound holds for every irreducible, non-geometrically-constant `M` unramified at infinity.
+
+## Main definitions
+
+- `AlgebraicGeometry.affineLine.origin`: the origin of the affine line, as a closed point.
+
+## Main statements
+
+- `AlgebraicGeometry.nonempty_equiv_stalk_homologySheaf_fourierTransform_origin`: the stalk of
+  `FT_ψ(K)` at the origin of the dual line is `RΓ_c(A, K)[1]`.
+- `AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.hasWeightsAtMost_directImage`: boundary
+  semicontinuity of weights for the direct image `j_*M` on the affine line.
+- `AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.nonempty_equiv_stalk_origin_of_isFourierPartner`:
+  the stationary-phase identification `H_c^1(A, j_*M) ≃ (j'_*M')_{0'}` and the vanishing of
+  `H_c^2(A, j_*M)`.
+- `AlgebraicGeometry.hasWeightsAtMost_compactlySupportedCohomology_one`: the degree-one bound
+  for an irreducible nonexceptional sheaf pure of weight `w`.
+
+## Implementation notes
+
+The degree-one bound is derived along the blueprint argument from the boundary semicontinuity
+`AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.hasWeightsAtMost_directImage` and the stationary
+phase
+`AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.nonempty_equiv_stalk_origin_of_isFourierPartner`.
+
+## TODO
+
+Prove the two inputs of the degree-one bound:
+- the boundary semicontinuity
+  `AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.hasWeightsAtMost_directImage`;
+- the stationary phase
+  `AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.nonempty_equiv_stalk_origin_of_isFourierPartner`.
+-/
+
+@[expose] public section
+
+universe u
+
+open CategoryTheory
+
+namespace AlgebraicGeometry
+
+variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]
+
+/-- The origin `0` of the affine line `𝔸¹_{k₀}`, as a closed point: the image of the
+`k₀`-rational point `x = 0`. -/
+noncomputable def affineLine.origin (k₀ : Type u) [Field k₀] [Finite k₀] :
+    (affineLine k₀).finitePoints :=
+  ⟨(AffineSpace.homOfVector (𝟙 (Spec (CommRingCat.of k₀))) 0).base
+      (IsLocalRing.closedPoint k₀),
+    Scheme.Hom.mem_finitePoints_of_comp_eq_id (affineLine k₀ ↘ Spec (CommRingCat.of k₀)) _
+      (AffineSpace.homOfVector_over _ _) _⟩
+
+/-- The origin of the affine line is `k₀`-rational: its residue cardinality is `q = #k₀`. -/
+theorem affineLine.residueCard_origin :
+    (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).residueCard (affineLine.origin k₀).1 =
+      Nat.card k₀ := by
+  rw [Scheme.Hom.residueCard]
+  exact (congrArg (Nat.card k₀ ^ ·) (Scheme.Hom.degreeOver_eq_one_of_comp_eq_id _ _
+    (AffineSpace.homOfVector_over (𝟙 _) 0) (IsLocalRing.closedPoint k₀))).trans (pow_one _)
+
+variable (ψ : AddChar k₀ (PadicAlgCl l))
+
+/-- **Stalk of the transform at the origin of the dual line.** At the origin `0'` the Fourier
+kernel `ℒ_{ψ(x · 0)}` is constant, so the stalk formula identifies the fibre of `FT_ψ(K)` at
+`0'` with `RΓ_c(𝔸¹, K)[1]`: in each degree `r`, the stalk of `𝓗^r FT_ψ(K)` at `0'` is
+`H_c^{r+1}(𝔸¹ ⊗ k̄, K)`, Frobenius-equivariantly. (blueprint: `lem-fd-stalk-at-origin`) -/
+theorem nonempty_equiv_stalk_homologySheaf_fourierTransform_origin
+    (K : WeilComplex k₀ l (affineLine k₀)) (r : ℤ) :
+    Nonempty ((((WeilComplex.homologySheaf r).obj ((fourierTransform ψ).obj K)).stalk
+      (affineLine.origin k₀)).Equiv (K.compactlySupportedCohomology (r + 1))) :=
+  -- TODO(adic): the stalk formula `lem-fd-stalk-formula` at the origin
+  sorry
+
+/-- **Stalk of the transform at the origin of the dual line**, for a middle extension: the
+fibre of `FT_ψ((j_*M)[1])` at the origin has cohomology only in degrees `-1` and `0`, namely
+`H_c^1(𝔸¹ ⊗ k̄, j_*M)` and `H_c^2(𝔸¹ ⊗ k̄, j_*M)`; the group `H_c^0` vanishes.
+(blueprint: `lem-fd-stalk-at-origin`) -/
+theorem WeilSheaf.LisseOnDenseOpen.nonempty_equiv_stalk_fourierTransform_middleExtension_origin
+    (D : WeilSheaf.LisseOnDenseOpen k₀ l) :
+    Nonempty ((((WeilComplex.homologySheaf (-1)).obj
+      ((fourierTransform ψ).obj D.middleExtension)).stalk (affineLine.origin k₀)).Equiv
+        (D.directImage.compactlySupportedCohomology 1)) ∧
+    Nonempty ((((WeilComplex.homologySheaf 0).obj
+      ((fourierTransform ψ).obj D.middleExtension)).stalk (affineLine.origin k₀)).Equiv
+        (D.directImage.compactlySupportedCohomology 2)) ∧
+    ∀ r : ℤ, r ∉ ({-1, 0} : Set ℤ) → Subsingleton ((((WeilComplex.homologySheaf r).obj
+      ((fourierTransform ψ).obj D.middleExtension)).stalk (affineLine.origin k₀)).carrier) :=
+  -- TODO(adic): the case of `nonempty_equiv_stalk_homologySheaf_fourierTransform_origin` for
+  -- `K = (j_*M)[1]`, and `H_c^0(𝔸¹, j_*M) = 0`
+  sorry
+
+namespace WeilSheaf.LisseOnDenseOpen
+
+/-- *Boundary semicontinuity of weights* on the affine line: if the lisse sheaf `M` on the
+dense open `U₀` has punctual weights at most `β`, then so has its direct image `j_*M` at every
+closed point of the line, including the finitely many points outside `U₀`, where it may be
+singular. This is the case of the affine line of the blueprint lemma, which holds on every
+smooth geometrically connected curve. (blueprint: `lem-wf-boundary-semicontinuity`) -/
+theorem hasWeightsAtMost_directImage (D : LisseOnDenseOpen k₀ l) {ι : PadicAlgCl l →+* ℂ}
+    {β : ℝ} (hβ : D.sheaf.HasWeightsAtMost ι β) : D.directImage.HasWeightsAtMost ι β :=
+  sorry
+
+/-- *The origin fibre is the stationary-phase contribution.* If the Fourier transform of the
+middle extension `(j_*M)[1]` is the middle extension `(j'_*M')[1]` of `D'`, then the fibre of
+the transform at the origin `0'` of the dual line identifies `H_c^1(𝔸¹, j_*M)` with the stalk
+`(j'_*M')_{0'}`, Frobenius-equivariantly: the geometric Frobenius of `k₀` on the left
+corresponds to the local Frobenius `F_{0'}` at the `k₀`-rational point `0'` on the right.
+Moreover `H_c^2(𝔸¹, j_*M) = 0`.
+
+Indeed the fibre of `FT_ψ(K)` at `0'` is `RΓ_c(𝔸¹, K)[1]`, the kernel being trivial there, so
+the fibre of `FT_ψ((j_*M)[1])` has `H_c^1` in degree `-1` and `H_c^2` in degree `0`, while the
+fibre of `(j'_*M')[1]` is the stalk `(j'_*M')_{0'}` placed in degree `-1`.
+(blueprint: `cor-fd-origin-stationary-phase`) -/
+theorem nonempty_equiv_stalk_origin_of_isFourierPartner (ψ : AddChar k₀ (PadicAlgCl l))
+    (D D' : LisseOnDenseOpen k₀ l) (hFT : D.IsFourierPartner ψ D') :
+    Nonempty ((D.directImage.compactlySupportedCohomology 1).Equiv
+        (D'.directImage.stalk (affineLine.origin k₀))) ∧
+      Subsingleton (D.directImage.compactlySupportedCohomology 2).carrier := by
+  sorry
+
+end WeilSheaf.LisseOnDenseOpen
+
+/-- If `M` is irreducible, nonexceptional for a nontrivial `ψ` and punctually `ι`-pure of
+weight `w` on a dense open `U₀` of the affine line, then `H_c^1(A, j_*M)` has weights at most
+`w + 1`. (blueprint: `sk-c-dl-a1-hc1`, `cor-a1-fourier-middle-hc1`) -/
+theorem hasWeightsAtMost_compactlySupportedCohomology_one (ι : PadicAlgCl l →+* ℂ)
+    (hψ : ψ ≠ 1) (D : WeilSheaf.LisseOnDenseOpen k₀ l)
+    (hD : D.sheaf.IsIrreducibleLisse)
+    (hne : D.sheaf.IsNonexceptional ψ D.j) {w : ℝ}
+    (hw : D.sheaf.IsPunctuallyPureOfWeight ι w) :
+    (D.directImage.compactlySupportedCohomology 1).HasWeightsAtMostOver k₀ ι (w + 1) := by
+  -- Step 1: the transform of `(j_*M)[1]` is a middle extension `(j'_*M')[1]`
+  obtain ⟨D', _, hFT⟩ := exists_middleExtension_fourierTransform ψ hψ D hD hne
+  -- Step 2: `M'` is pure of a weight `v ≤ w + 1`
+  obtain ⟨v, hv⟩ := exists_isPunctuallyPureOfWeight_of_isFourierPartner ψ ι hψ D D' hD hne hw hFT
+  have hvw : v ≤ w + 1 := le_add_one_of_isFourierPartner ψ ι hψ D D' hD hne hw hFT hv
+  -- Step 3: `j'_*M'` has weights at most `w + 1` on the whole dual line
+  have hM' : D'.directImage.HasWeightsAtMost ι (w + 1) :=
+    D'.hasWeightsAtMost_directImage (hv.hasWeightsAtMost.mono hvw)
+  -- Step 4: the stationary-phase identification at the rational origin `0'`
+  obtain ⟨⟨e⟩, -⟩ := D.nonempty_equiv_stalk_origin_of_isFourierPartner ψ D' hFT
+  have h0 := hM' (affineLine.origin k₀)
+  rw [affineLine.residueCard_origin] at h0
+  exact h0.of_equiv e
+
+end AlgebraicGeometry

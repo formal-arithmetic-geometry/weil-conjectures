@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import WeilConjectures.Algebra.Category.ModuleCat.Presheaf.InternalHom
-import Mathlib.Algebra.Category.ModuleCat.Sheaf
-import Mathlib.Algebra.Module.TransferInstance
-import Mathlib.CategoryTheory.Linear.Basic
+module
+
+public import WeilConjectures.Algebra.Category.ModuleCat.Presheaf.InternalHom
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf
+public import Mathlib.Algebra.Module.TransferInstance
+public import Mathlib.CategoryTheory.Linear.Basic
 
 /-!
 # Global sections acting on morphisms of sheaves of modules
@@ -14,6 +16,8 @@ import Mathlib.CategoryTheory.Linear.Basic
 Source: Stacks Project, Modules on Sites, Sections 03DD and 04TT
 (blueprint: def-pur-sheaf-modules-hom-module).
 -/
+
+@[expose] public section
 
 universe v v₁ u₁ u
 

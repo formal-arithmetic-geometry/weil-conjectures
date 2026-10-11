@@ -3,13 +3,15 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import Sheaf.AlgebraicGeometry.EtaleSheaves
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
-import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-import Mathlib.AlgebraicGeometry.Morphisms.Finite
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
-import Mathlib.Topology.Sheaves.Functors
-import Mathlib.CategoryTheory.Limits.Types.Colimits
+module
+
+public import Sheaf.AlgebraicGeometry.EtaleSheaves
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+public import Mathlib.AlgebraicGeometry.Morphisms.Finite
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
+public import Mathlib.Topology.Sheaves.Functors
+public import Mathlib.CategoryTheory.Limits.Types.Colimits
 
 /-!
 # Gabber's degree-zero criterion for etale sheaves of sets
@@ -17,6 +19,8 @@ import Mathlib.CategoryTheory.Limits.Types.Colimits
 Source: Stacks Project, Lemma 59.82.2 (Tag 09ZF)
 (blueprint: lem-weil-pbc-gabber-h0-etale-criterion).
 -/
+
+@[expose] public section
 
 universe u
 

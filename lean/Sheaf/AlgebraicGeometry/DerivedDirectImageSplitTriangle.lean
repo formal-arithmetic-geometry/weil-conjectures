@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group T1
 -/
-import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImage
-import Mathlib.Algebra.Homology.DerivedCategory.ShortExact
+module
+
+public import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImage
+public import Mathlib.Algebra.Homology.DerivedCategory.ShortExact
 
 /-!
 # Derived direct image of a degreewise split sequence of K-injectives
@@ -12,6 +14,8 @@ import Mathlib.Algebra.Homology.DerivedCategory.ShortExact
 Source: Stacks Project, Tags 0152 and 079V
 (blueprint: lem-pc-derived-functor-termwise-split-ses-triangle).
 -/
+
+@[expose] public section
 
 universe u wX wY
 

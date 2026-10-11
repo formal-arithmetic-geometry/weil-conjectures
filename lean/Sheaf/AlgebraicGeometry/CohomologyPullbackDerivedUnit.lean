@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group J1
 -/
-import WeilConjectures.SixFunctors.Etale.Derived.GlobalSections
-import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusComp
-import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusAdjunction
+module
+
+public import WeilConjectures.SixFunctors.Etale.Derived.GlobalSections
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusComp
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusAdjunction
 
 /-!
 # Cohomology pullback and the derived unit
@@ -25,6 +27,8 @@ derived comparison (`Functor.rightDerivedDesc`) of the section map `Γ(X, I) ⟶
 by the underived unit, followed by the unit of `RΓ(Y, -)`: on resolutions `I` and `u⁻¹I → J`
 it is the class of `a ↦ r(η(a))`.
 -/
+
+@[expose] public section
 
 universe v
 

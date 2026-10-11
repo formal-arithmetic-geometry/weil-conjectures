@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import Mathlib.Algebra.MvPolynomial.Basic
+module
+
+public import Mathlib.Algebra.MvPolynomial.Basic
 
 /-!
 # The syzygies of two polynomial variables
@@ -12,6 +14,8 @@ Source: the Weil conjectures blueprint, `lem-sc-p1-graded-resolution`, expanded 
 of exactness at the middle term of the Koszul resolution on `x₀, x₁`
 (blueprint: lem-sc-p1-linear-syzygy).
 -/
+
+@[expose] public section
 
 universe u
 

@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import Mathlib.Algebra.MvPolynomial.Basic
-import Mathlib.RingTheory.Ideal.Height
-import Mathlib.RingTheory.Spectrum.Prime.Basic
+module
+
+public import Mathlib.Algebra.MvPolynomial.Basic
+public import Mathlib.RingTheory.Ideal.Height
+public import Mathlib.RingTheory.Spectrum.Prime.Basic
 
 /-!
 # Maximal chains in polynomial rings over fields
@@ -14,6 +16,8 @@ Source: Stacks Project, Algebra, Lemma Tag 00OR (label
 `lemma-dimension-height-polynomial-ring`)
 (blueprint: lem-weil-pbc-polynomial-ring-maximal-chain-height-difference).
 -/
+
+@[expose] public section
 
 universe u
 

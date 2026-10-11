@@ -3,11 +3,13 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import Mathlib.RingTheory.FinitePresentation
-import Mathlib.Algebra.Module.FinitePresentation
-import Mathlib.RingTheory.RingHom.Flat
-import Mathlib.RingTheory.LocalRing.ResidueField.Defs
-import Mathlib.LinearAlgebra.TensorProduct.Quotient
+module
+
+public import Mathlib.RingTheory.FinitePresentation
+public import Mathlib.Algebra.Module.FinitePresentation
+public import Mathlib.RingTheory.RingHom.Flat
+public import Mathlib.RingTheory.LocalRing.ResidueField.Defs
+public import Mathlib.LinearAlgebra.TensorProduct.Quotient
 
 /-!
 # Flatness from flatness over the base and on the closed fibre
@@ -15,6 +17,8 @@ import Mathlib.LinearAlgebra.TensorProduct.Quotient
 Source: Stacks Project, Algebra, Tag 00R7, lemma-criterion-flatness-fibre
 (blueprint: lem-weil-pbc-criterion-flatness-fibre).
 -/
+
+@[expose] public section
 
 universe u v w t p q
 

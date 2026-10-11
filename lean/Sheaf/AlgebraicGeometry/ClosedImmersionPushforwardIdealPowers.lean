@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group V1
 -/
-import Sheaf.AlgebraicGeometry.CoherentFormalModule
-import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+module
+
+public import Sheaf.AlgebraicGeometry.CoherentFormalModule
+public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 
 /-!
 # Pushforward of ideal powers along a closed immersion
@@ -13,6 +15,8 @@ Source: Stacks Project, Cohomology of Schemes, proof of Lemma 088A, lines 6961--
 Morphisms, Lemmas 01QO and 01QY 
 (blueprint: lem-weil-pbc-closed-immersion-pushforward-ideal-powers).
 -/
+
+@[expose] public section
 
 universe u
 

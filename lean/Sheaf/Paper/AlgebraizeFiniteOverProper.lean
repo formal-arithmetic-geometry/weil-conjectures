@@ -1,8 +1,10 @@
-import Mathlib.AlgebraicGeometry.Morphisms.Proper
-import Mathlib.AlgebraicGeometry.Morphisms.Finite
-import Mathlib.AlgebraicGeometry.Pullbacks
-import Mathlib.RingTheory.AdicCompletion.Basic
-import Mathlib.RingTheory.Noetherian.Defs
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.Proper
+public import Mathlib.AlgebraicGeometry.Morphisms.Finite
+public import Mathlib.AlgebraicGeometry.Pullbacks
+public import Mathlib.RingTheory.AdicCompletion.Basic
+public import Mathlib.RingTheory.Noetherian.Defs
 
 /-!
 # Algebraization of finite schemes over thickenings of a proper scheme
@@ -11,6 +13,8 @@ Source: Cohomology of Schemes, Stacks Project, Lemma 09ZT (the proof via
 Grothendieck existence, Theorem 088C and Remark 088F)
 (blueprint: lem-weil-pbc-algebraize-finite-over-proper).
 -/
+
+@[expose] public section
 
 universe u
 

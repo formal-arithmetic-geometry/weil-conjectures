@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: F1
 -/
-import Mathlib.AlgebraicGeometry.Noetherian
+module
+
+public import Mathlib.AlgebraicGeometry.Noetherian
 
 /-!
 # Finiteness of closed subsets consisting of closed points
@@ -12,6 +14,8 @@ Source: Stacks Project, Properties Lemma 28.5.7 (Tag 0BA8), together with
 Schemes Lemma 26.11.1 (Tag 01IS).
 (blueprint: lem-sc-noetherian-closed-points-finite)
 -/
+
+@[expose] public section
 
 universe u
 

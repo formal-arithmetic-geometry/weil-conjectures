@@ -1,6 +1,8 @@
-import Mathlib.RingTheory.Localization.InvSubmonoid
-import Mathlib.RingTheory.Localization.Away.Basic
-import Sheaf.RingTheory.QuasiFiniteAtPrime
+module
+
+public import Mathlib.RingTheory.Localization.InvSubmonoid
+public import Mathlib.RingTheory.Localization.Away.Basic
+public import Sheaf.RingTheory.QuasiFiniteAtPrime
 
 /-!
 # Openness of the quasi-finite locus for a finite-type ring map
@@ -8,6 +10,8 @@ import Sheaf.RingTheory.QuasiFiniteAtPrime
 Source: Stacks Project, Algebra, Lemma Tag 00QA, label `lemma-quasi-finite-open`
 (blueprint: lem-weil-pbc-ring-quasi-finite-locus-open).
 -/
+
+@[expose] public section
 
 universe u v
 

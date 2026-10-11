@@ -2,10 +2,12 @@
 Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 -/
-import Sheaf.AlgebraicGeometry.FormallySmooth
-import Mathlib.AlgebraicGeometry.Morphisms.Flat
-import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
-import Mathlib.AlgebraicGeometry.OpenImmersion
+module
+
+public import Sheaf.AlgebraicGeometry.FormallySmooth
+public import Mathlib.AlgebraicGeometry.Morphisms.Flat
+public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
+public import Mathlib.AlgebraicGeometry.OpenImmersion
 
 /-!
 # Flat unramified morphisms are formally étale
@@ -13,6 +15,8 @@ import Mathlib.AlgebraicGeometry.OpenImmersion
 Source: Stacks Project, More on Morphisms, Lemma 04FF and Definitions 02HG, 02H0
 (blueprint: lem-weil-pbc-flat-unramified-formally-etale).
 -/
+
+@[expose] public section
 
 universe u
 

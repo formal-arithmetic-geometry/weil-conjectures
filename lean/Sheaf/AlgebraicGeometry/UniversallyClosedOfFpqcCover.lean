@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Mathlib.AlgebraicGeometry.Morphisms.Proper
-import Mathlib.AlgebraicGeometry.Sites.Fpqc
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.Proper
+public import Mathlib.AlgebraicGeometry.Sites.Fpqc
 
 /-!
 # Descent of universal closedness along fpqc coverings
@@ -12,6 +14,8 @@ import Mathlib.AlgebraicGeometry.Sites.Fpqc
 Source: Stacks Project, Descent, Lemma Tag 02KS, descent direction of Definition Tag 02KO
 (blueprint: lem-weil-pbc-fpqc-descend-universally-closed).
 -/
+
+@[expose] public section
 
 universe u v
 

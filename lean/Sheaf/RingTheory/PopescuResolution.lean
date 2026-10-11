@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import Sheaf.RingTheory.SingularIdeal
-import Mathlib.RingTheory.FinitePresentation
+module
+
+public import Sheaf.RingTheory.SingularIdeal
+public import Mathlib.RingTheory.FinitePresentation
 
 /-!
 # Resolutions of Popescu's local problem
@@ -18,6 +20,8 @@ in Section 07F6 (blueprint: def-weil-pbc-popescu-resolution).
 * `Algebra.IsPopescuResolution`: the conditions on a factorization resolving the local problem.
 * `Algebra.CanBePopescuResolved`: existence of such a factorization.
 -/
+
+@[expose] public section
 
 universe u v w t
 

@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group Q1
 -/
-import Sheaf.AlgebraicGeometry.StrictHenselizationRestriction
-import WeilConjectures.AlgebraicGeometry.Sites.Gm
+module
+
+public import Sheaf.AlgebraicGeometry.StrictHenselizationRestriction
+public import WeilConjectures.AlgebraicGeometry.Sites.Gm
 
 /-!
 # Strict-henselization stalk formula for the multiplicative sheaf
@@ -13,6 +15,8 @@ Source: literature/stacks-project/etale-cohomology.tex, Theorem Tag 03Q9
 (theorem-higher-direct-images), first assertion (blueprint:
 lem-weil-pbc-gm-strict-henselization-stalk-formula).
 -/
+
+@[expose] public section
 
 universe w
 

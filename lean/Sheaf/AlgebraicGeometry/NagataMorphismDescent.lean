@@ -3,11 +3,13 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Sheaf.AlgebraicGeometry.NagataQCOpenDescentSpec
-import Sheaf.AlgebraicGeometry.NagataQCOpenEqEventually
-import Sheaf.AlgebraicGeometry.NagataMorphismEqEventually
-import Mathlib.RingTheory.Extension.Presentation.Basic
-import Mathlib.AlgebraicGeometry.Gluing
+module
+
+public import Sheaf.AlgebraicGeometry.NagataQCOpenDescentSpec
+public import Sheaf.AlgebraicGeometry.NagataQCOpenEqEventually
+public import Sheaf.AlgebraicGeometry.NagataMorphismEqEventually
+public import Mathlib.RingTheory.Extension.Presentation.Basic
+public import Mathlib.AlgebraicGeometry.Gluing
 
 /-!
 # A selected finite-stage model of a morphism
@@ -20,6 +22,8 @@ The record retains the choices of affine charts, open descent, coefficient lifts
 relations, and overlap witnesses. The resulting morphism is the gluing at the prescribed
 finite upper bound. Only the proofs needed for that gluing are postponed.
 -/
+
+@[expose] public section
 
 universe u
 

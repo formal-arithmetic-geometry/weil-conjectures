@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
+module
+
+public import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 
 /-!
 # Module sheafification commutes with tensor products
@@ -11,6 +13,8 @@ import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 Source: Stacks Project, Modules on Sites, Tag 0GMW, lemma-sheafification-tensor
 (blueprint: lem-pc-sites-module-sheafification-tensor).
 -/
+
+@[expose] public section
 
 universe u
 

@@ -3,12 +3,14 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import Sheaf.RingTheory.Depth
-import Mathlib.RingTheory.Noetherian.Defs
-import Mathlib.RingTheory.LocalRing.MaximalIdeal.Defs
-import Mathlib.RingTheory.LocalRing.RingHom.Basic
-import Mathlib.Algebra.Module.Torsion.Basic
-import Mathlib.RingTheory.Finiteness.Basic
+module
+
+public import Sheaf.RingTheory.Depth
+public import Mathlib.RingTheory.Noetherian.Defs
+public import Mathlib.RingTheory.LocalRing.MaximalIdeal.Defs
+public import Mathlib.RingTheory.LocalRing.RingHom.Basic
+public import Mathlib.Algebra.Module.Torsion.Basic
+public import Mathlib.RingTheory.Finiteness.Basic
 
 /-!
 # Depth over a quotient ring
@@ -17,6 +19,8 @@ Source: Stacks Project, Algebra, Lemma Tag 0AUK (lemma-depth-goes-down-finite),
 applied to the finite ring map `R → R ⧸ I`
 (blueprint: lem-weil-pbc-depth-over-quotient-ring).
 -/
+
+@[expose] public section
 
 universe u v
 

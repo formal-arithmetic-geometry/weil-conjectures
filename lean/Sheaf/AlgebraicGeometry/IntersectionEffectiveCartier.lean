@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Sheaf.AlgebraicGeometry.IntersectionNumber
-import WeilConjectures.AlgebraicGeometry.EffectiveCartier
-import WeilConjectures.AlgebraicGeometry.Modules.Ample
-import Sheaf.AlgebraicGeometry.TensorPullback
+module
+
+public import Sheaf.AlgebraicGeometry.IntersectionNumber
+public import WeilConjectures.AlgebraicGeometry.EffectiveCartier
+public import WeilConjectures.AlgebraicGeometry.Modules.Ample
+public import Sheaf.AlgebraicGeometry.TensorPullback
 
 /-!
 # Intersection with an effective Cartier divisor
@@ -14,6 +16,8 @@ import Sheaf.AlgebraicGeometry.TensorPullback
 Source: Stacks Project, Varieties, Tags 0BEU and 0BEV
 (blueprint: lem-sc-intersection-effective-cartier).
 -/
+
+@[expose] public section
 
 universe u
 

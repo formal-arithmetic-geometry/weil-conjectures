@@ -3,14 +3,18 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group G1
 -/
-import Sheaf.AlgebraicGeometry.Coherent
-import WeilConjectures.AlgebraicGeometry.Modules.Ample
+module
+
+public import Sheaf.AlgebraicGeometry.Coherent
+public import WeilConjectures.AlgebraicGeometry.Modules.Ample
 
 /-! # Generic rank and the top Hilbert coefficient
 
 Source: Stacks Project, Varieties, Lemma 33.45.2, Tag 0BEN, specialized to an integral
 proper scheme and one ample invertible module (blueprint: lem-sc-generic-rank-leading-degree).
 -/
+
+@[expose] public section
 
 universe u
 

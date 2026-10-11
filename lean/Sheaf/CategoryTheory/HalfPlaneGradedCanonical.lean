@@ -2,7 +2,9 @@
 Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 -/
-import Sheaf.CategoryTheory.HalfPlaneConvergence
+module
+
+public import Sheaf.CategoryTheory.HalfPlaneConvergence
 
 /-!
 # Canonical half-plane graded identification
@@ -10,6 +12,8 @@ import Sheaf.CategoryTheory.HalfPlaneConvergence
 Source: Stacks Project, Homology, Lemmas 12.21.4 (Tag 011T) and 12.23.5
 (Tag 012F) (blueprint: lem-sp-half-plane-graded-canonical).
 -/
+
+@[expose] public section
 
 universe u v
 

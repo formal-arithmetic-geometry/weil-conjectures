@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import Sheaf.Topology.PresheafModuleStalkFunctor
-import Mathlib.CategoryTheory.Filtered.Basic
+module
+
+public import Sheaf.Topology.PresheafModuleStalkFunctor
+public import Mathlib.CategoryTheory.Filtered.Basic
 
 /-!
 # Stalks and filtered colimits of presheaves of modules
@@ -12,6 +14,8 @@ import Mathlib.CategoryTheory.Filtered.Basic
 Source: Stacks Project, Sheaves, Section 009D, item (4)
 (blueprint: lem-weil-pbc-presheaf-module-stalk-filtered-colimit).
 -/
+
+@[expose] public section
 
 universe v
 

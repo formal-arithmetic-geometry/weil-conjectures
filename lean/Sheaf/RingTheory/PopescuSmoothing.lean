@@ -3,11 +3,13 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group G1
 -/
-import Sheaf.RingTheory.GRing
-import Mathlib.Algebra.Category.CommAlgCat.Basic
-import Mathlib.AlgebraicGeometry.Morphisms.Smooth
-import Mathlib.CategoryTheory.Filtered.Basic
-import Mathlib.CategoryTheory.Limits.IsLimit
+module
+
+public import Sheaf.RingTheory.GRing
+public import Mathlib.Algebra.Category.CommAlgCat.Basic
+public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
+public import Mathlib.CategoryTheory.Filtered.Basic
+public import Mathlib.CategoryTheory.Limits.IsLimit
 
 /-!
 # Popescu smoothing
@@ -15,6 +17,8 @@ import Mathlib.CategoryTheory.Limits.IsLimit
 Source: Stacks Project, Smoothing Ring Maps, Theorem 07GC; Morphisms, Lemma 01V6
 (blueprint: lem-weil-pbc-popescu-smoothing).
 -/
+
+@[expose] public section
 
 universe u
 

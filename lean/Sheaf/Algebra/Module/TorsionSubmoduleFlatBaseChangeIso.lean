@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF contributors
 -/
-import Mathlib.RingTheory.RingHom.Flat
-import Mathlib.Algebra.Module.Torsion.PrimaryComponent
-import Mathlib.LinearAlgebra.TensorProduct.Tower
-import Mathlib.RingTheory.Ideal.Quotient.Operations
+module
+
+public import Mathlib.RingTheory.RingHom.Flat
+public import Mathlib.Algebra.Module.Torsion.PrimaryComponent
+public import Mathlib.LinearAlgebra.TensorProduct.Tower
+public import Mathlib.RingTheory.Ideal.Quotient.Operations
 
 /-!
 # Flat base change of an ideal-power torsion submodule
@@ -14,6 +16,8 @@ import Mathlib.RingTheory.Ideal.Quotient.Operations
 Source: More on Algebra, Lemma 05EC, part (1)
 (blueprint: lem-weil-pbc-torsion-submodule-flat-base-change-iso).
 -/
+
+@[expose] public section
 
 universe u v w
 

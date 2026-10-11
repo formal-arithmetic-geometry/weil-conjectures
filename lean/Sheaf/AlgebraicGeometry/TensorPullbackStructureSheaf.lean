@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackFree
+module
+
+public import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackFree
 
 /-!
 # Tensor pullback of the structure sheaf
@@ -12,6 +14,8 @@ import Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackFree
 Source: Stacks Project, Modules, pullback and tensor product, Tags 0096 and 01CA
 (blueprint: lem-weil-pbc-module-pullback-structure-sheaf).
 -/
+
+@[expose] public section
 
 universe u
 

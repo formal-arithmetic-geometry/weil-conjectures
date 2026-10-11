@@ -2,12 +2,14 @@
 Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 -/
-import Mathlib.AlgebraicGeometry.Sites.Etale
-import Mathlib.AlgebraicTopology.SimplicialObject.Split
-import Mathlib.AlgebraicTopology.SimplicialObject.Homotopy
-import Mathlib.AlgebraicTopology.AlternatingFaceMapComplex
-import Mathlib.Algebra.Category.Grp.Abelian
-import Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
+module
+
+public import Mathlib.AlgebraicGeometry.Sites.Etale
+public import Mathlib.AlgebraicTopology.SimplicialObject.Split
+public import Mathlib.AlgebraicTopology.SimplicialObject.Homotopy
+public import Mathlib.AlgebraicTopology.AlternatingFaceMapComplex
+public import Mathlib.Algebra.Category.Grp.Abelian
+public import Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
 
 /-!
 # Finite split étale hypercovers
@@ -20,6 +22,8 @@ Simplicial Methods, definitions `definition-split` and `definition-homotopy`.
 The matching universal property is tested on all schemes over the base, not just étale
 ones. Mathlib's splitting uses the canonical degeneracy maps in its coproduct cofan.
 -/
+
+@[expose] public section
 
 universe u v
 

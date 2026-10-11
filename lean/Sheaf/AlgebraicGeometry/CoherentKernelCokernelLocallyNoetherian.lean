@@ -3,14 +3,18 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group G1
 -/
-import Sheaf.AlgebraicGeometry.Coherent
-import Mathlib.AlgebraicGeometry.Noetherian
+module
+
+public import Sheaf.AlgebraicGeometry.Coherent
+public import Mathlib.AlgebraicGeometry.Noetherian
 
 /-! # Coherent kernels, cokernels, sums and quasi-coherent submodules
 
 Source: Stacks Project, Cohomology of Schemes, Tags 01Y0 and 01Y1
 (blueprint: lem-weil-pbc-coherent-kernel-cokernel-locnoeth).
 -/
+
+@[expose] public section
 
 universe u
 

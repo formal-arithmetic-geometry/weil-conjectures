@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import Mathlib.RingTheory.Etale.Locus
-import Mathlib.RingTheory.RingHom.Flat
+module
+
+public import Mathlib.RingTheory.Etale.Locus
+public import Mathlib.RingTheory.RingHom.Flat
 
 /-!
 # Étale at a prime and flat unramifiedness
@@ -13,6 +15,8 @@ Source: Stacks Project, Lemma 00U6 (lemma-characterize-etale),
 lemma-unramified-at-prime, and Lemma 08WD
 (blueprint: lem-sc-etale-at-prime-flat-unramified-criterion).
 -/
+
+@[expose] public section
 
 namespace Algebra
 

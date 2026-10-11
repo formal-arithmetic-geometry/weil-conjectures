@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Mathlib.AlgebraicGeometry.Fiber
-import Sheaf.AlgebraicGeometry.LimitAffineTransition
-import Sheaf.AlgebraicGeometry.LimitResidueField
-import Sheaf.AlgebraicGeometry.FibreProductLimit
+module
+
+public import Mathlib.AlgebraicGeometry.Fiber
+public import Sheaf.AlgebraicGeometry.LimitAffineTransition
+public import Sheaf.AlgebraicGeometry.LimitResidueField
+public import Sheaf.AlgebraicGeometry.FibreProductLimit
 
 /-!
 # Fibre products commute with limits along affine transition morphisms
@@ -15,6 +17,8 @@ Source: Stacks Project, Derived Categories, proof of Lemma 0G7X (line 8166),
 with Categories Lemma 002M and Morphisms Lemmas 01SD, 01SC, 01SG
 (blueprint: lem-weil-pbc-limit-fibre-products).
 -/
+
+@[expose] public section
 
 universe u
 

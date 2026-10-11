@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
-import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
-import Mathlib.Algebra.Homology.DerivedCategory.TStructure
-import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
+module
+
+public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
+public import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
+public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
+public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 
 /-!
 # Derived categories of etale sheaves of modules
@@ -34,6 +36,8 @@ The notions of the node are existing declarations, in the encoding of etale shea
   (`WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.TorsionSheaf`, stalkwise; the two
   agree by `AlgebraicGeometry.Scheme.isTorsionSheaf_iff_isTorsion`).
 -/
+
+@[expose] public section
 
 universe u
 

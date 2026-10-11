@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Sheaf.AlgebraicGeometry.Coherent
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Sheaf.AlgebraicGeometry.Coherent
 
 /-!
 # Extension of finite-type quasi-coherent submodules
@@ -13,6 +15,8 @@ import Sheaf.AlgebraicGeometry.Coherent
 Source: Stacks Project, Properties, Lemma 01PF.
 (blueprint: lem-weil-pbc-module-finite-type-submodule-extension).
 -/
+
+@[expose] public section
 
 universe u
 

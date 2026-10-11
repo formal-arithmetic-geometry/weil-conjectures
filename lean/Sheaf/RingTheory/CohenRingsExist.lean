@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import Sheaf.RingTheory.CohenRing
+module
+
+public import Sheaf.RingTheory.CohenRing
 
 /-!
 # Existence of Cohen rings
@@ -11,6 +13,8 @@ import Sheaf.RingTheory.CohenRing
 Source: Stacks Project, Algebra, Lemma Tag 0328
 (blueprint: lem-weil-pbc-cohen-rings-exist).
 -/
+
+@[expose] public section
 
 universe u
 

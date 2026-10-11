@@ -3,19 +3,23 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import Sheaf.AlgebraicGeometry.Coherent
-import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImage
-import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
-import Sheaf.Algebra.Homology.ModuleStalkFunctor
-import Mathlib.AlgebraicGeometry.Morphisms.Proper
-import Mathlib.CategoryTheory.Abelian.RightDerived
-import Mathlib.AlgebraicGeometry.Noetherian
+module
+
+public import Sheaf.AlgebraicGeometry.Coherent
+public import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImage
+public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
+public import Sheaf.Algebra.Homology.ModuleStalkFunctor
+public import Mathlib.AlgebraicGeometry.Morphisms.Proper
+public import Mathlib.CategoryTheory.Abelian.RightDerived
+public import Mathlib.AlgebraicGeometry.Noetherian
 
 /-! # Formal functions vanishing over finite fibres
 
 Source: Stacks Project, Cohomology of Schemes, Lemma 30.20.8 (Tag 02OE)
 (blueprint: pqf-lem-fff-vanishing).
 -/
+
+@[expose] public section
 
 universe u
 

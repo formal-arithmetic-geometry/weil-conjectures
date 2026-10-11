@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group J1
 -/
-import WeilConjectures.CategoryTheory.Sites.Torsor
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
-import Sheaf.AlgebraicGeometry.EtaleSheaves
-import Sheaf.CategoryTheory.Sites.ContractedProductPresentation
+module
+
+public import WeilConjectures.CategoryTheory.Sites.Torsor
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
+public import Sheaf.AlgebraicGeometry.EtaleSheaves
+public import Sheaf.CategoryTheory.Sites.ContractedProductPresentation
 
 /-!
 # Functoriality of the étale torsor classification of H¹
@@ -14,6 +16,8 @@ import Sheaf.CategoryTheory.Sites.ContractedProductPresentation
 Source: Stacks Project, Cohomology on Sites, Lemma 03AJ and functoriality of its torsor
 extension (blueprint: lem-sc-etale-torsor-h1-functoriality).
 -/
+
+@[expose] public section
 
 universe u
 

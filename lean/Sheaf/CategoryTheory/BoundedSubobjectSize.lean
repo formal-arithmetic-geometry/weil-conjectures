@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.Basic
-import Mathlib.CategoryTheory.EssentiallySmall
-import Mathlib.SetTheory.Cardinal.Basic
+module
+
+public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.Basic
+public import Mathlib.CategoryTheory.EssentiallySmall
+public import Mathlib.SetTheory.Cardinal.Basic
 
 /-!
 # Objects with bounded subobject size
@@ -13,6 +15,8 @@ import Mathlib.SetTheory.Cardinal.Basic
 Source: Stacks Project, `injectives.tex`, Lemma `lemma-set-iso-classes-bounded-size`
 (blueprint: lem-pur-kinjective-set-iso-classes-bounded-size).
 -/
+
+@[expose] public section
 
 universe v u
 

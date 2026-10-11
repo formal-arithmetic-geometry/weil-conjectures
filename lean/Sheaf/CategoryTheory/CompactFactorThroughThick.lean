@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Sheaf.CategoryTheory.CompactObject
-import Mathlib.CategoryTheory.Triangulated.Generators
+module
+
+public import Sheaf.CategoryTheory.CompactObject
+public import Mathlib.CategoryTheory.Triangulated.Generators
 
 /-!
 # Compact maps into generator stages factor through finite thick closure
@@ -12,6 +14,8 @@ import Mathlib.CategoryTheory.Triangulated.Generators
 Source: Stacks Project, Derived Categories, Tag 09SP, with the stage notation of
 Tag 09SN (blueprint: lem-sc-supported-factor-through-thick).
 -/
+
+@[expose] public section
 
 universe w v u
 

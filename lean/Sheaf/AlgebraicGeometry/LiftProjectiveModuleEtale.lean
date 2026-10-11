@@ -1,6 +1,10 @@
-import Mathlib.AlgebraicGeometry.Morphisms.Etale
-import Mathlib.RingTheory.Ideal.Quotient.Defs
-import Mathlib.LinearAlgebra.TensorProduct.Quotient
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.Etale
+public import Mathlib.RingTheory.Ideal.Quotient.Defs
+public import Mathlib.LinearAlgebra.TensorProduct.Quotient
+
+@[expose] public section
 
 universe u v
 

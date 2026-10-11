@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group R1
 -/
-import Mathlib.AlgebraicGeometry.Morphisms.Affine
-import Sheaf.AlgebraicGeometry.Coherent
-import Sheaf.Paper.PQFCohomology
-import Sheaf.AlgebraicGeometry.ModuleCohomologyFMap
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.Affine
+public import Sheaf.AlgebraicGeometry.Coherent
+public import Sheaf.Paper.PQFCohomology
+public import Sheaf.AlgebraicGeometry.ModuleCohomologyFMap
 
 /-! # Cohomology along an affine morphism
 
@@ -14,6 +16,8 @@ Source: Stacks Project, Cohomology of Schemes, Lemma 089W and Lemma 01XC;
 Cohomology, Lemma 01F4 and Equation 01FA
 (blueprint: lem-weil-pbc-affine-morphism-cohomology-edge).
 -/
+
+@[expose] public section
 
 universe v
 

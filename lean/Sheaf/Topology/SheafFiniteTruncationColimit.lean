@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Sheaf.Topology.SheafFiniteRelationTruncations
-import Mathlib.CategoryTheory.Limits.Shapes.Equalizers
+module
+
+public import Sheaf.Topology.SheafFiniteRelationTruncations
+public import Mathlib.CategoryTheory.Limits.Shapes.Equalizers
 
 /-!
 # Finite truncations of a sheaf coequalizer presentation
@@ -12,6 +14,8 @@ import Mathlib.CategoryTheory.Limits.Shapes.Equalizers
 Source: Stacks Project, Modules, proof of Lemma 17.19.2 (Tag 0CAI), final sentence
 (blueprint: lem-weil-pbc-sheaf-finite-truncation-colimit).
 -/
+
+@[expose] public section
 
 universe u
 

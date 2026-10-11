@@ -2,10 +2,12 @@
 Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 -/
-import Sheaf.AlgebraicGeometry.BaseChangeConventions
-import Sheaf.AlgebraicGeometry.Modules.TensorPullbackStalk
-import Sheaf.Algebra.Homology.BaseDerivedTensorCohomologyModel
-import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage
+module
+
+public import Sheaf.AlgebraicGeometry.BaseChangeConventions
+public import Sheaf.AlgebraicGeometry.Modules.TensorPullbackStalk
+public import Sheaf.Algebra.Homology.BaseDerivedTensorCohomologyModel
+public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage
 
 /-! # Stalkwise Tor-independence of base-flat complexes
 
@@ -18,6 +20,8 @@ is the ordinary tensor stalk complex, canonically the stalk of tensor pullback
 by `Scheme.Modules.exists_tensorPullback_stalk_iso`, applied degreewise.
 The algebra-map equations specify the actual structure maps of the cartesian square.
 -/
+
+@[expose] public section
 
 set_option autoImplicit false
 

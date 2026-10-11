@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import Mathlib.CategoryTheory.Abelian.Injective.Resolution
+module
+
+public import Mathlib.CategoryTheory.Abelian.Injective.Resolution
 
 /-!
 # Compatible injective resolutions of a short exact sequence
@@ -12,6 +14,8 @@ Source: Stacks Project, Derived Categories, Lemma 13.18.9 (Tag 013T), parts (2)-
 applied to objects concentrated in degree zero, and proof Steps 1-2
 (blueprint: lem-weil-pbc-injective-resolution-ses).
 -/
+
+@[expose] public section
 
 universe v u
 

@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group V1
 -/
-import Sheaf.AlgebraicGeometry.UniversalFirstOrderThickening
-import Mathlib.RingTheory.Ideal.Quotient.Operations
+module
+
+public import Sheaf.AlgebraicGeometry.UniversalFirstOrderThickening
+public import Mathlib.RingTheory.Ideal.Quotient.Operations
 
 /-!
 # Spectra of universal square-zero algebra extensions
@@ -12,6 +14,8 @@ import Mathlib.RingTheory.Ideal.Quotient.Operations
 Source: Stacks Project, More on Morphisms, proof of Lemma 04F3, affine-case paragraph,
 using Algebra, Lemma 04EB (blueprint: lem-weil-pbc-universal-thickening-affine-case).
 -/
+
+@[expose] public section
 
 universe u
 

@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import Mathlib.Algebra.Category.Grp.AB
-import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
+module
+
+public import Mathlib.Algebra.Category.Grp.AB
+public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 
 /-!
 # Étale restriction and pullback units
@@ -12,6 +14,8 @@ import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 Source: Stacks Project, Sites, Tags 03CF and 03EF (unit-side counterpart).
 (blueprint: lem-weil-pbc-etale-restriction-pullback-unit)
 -/
+
+@[expose] public section
 
 universe u
 

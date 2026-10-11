@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
-import Mathlib.AlgebraicGeometry.AffineScheme
-import Mathlib.RingTheory.Extension.Presentation.Basic
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
+public import Mathlib.AlgebraicGeometry.AffineScheme
+public import Mathlib.RingTheory.Extension.Presentation.Basic
 
 /-!
 # Selected finite relative affine presentations
@@ -14,6 +16,8 @@ Source: the blueprint of the Weil conjectures, Nagata compactification,
 `sk-prop-nagata-sketch-approximation`
 (blueprint: def-nagata-relative-finite-affine-presentation).
 -/
+
+@[expose] public section
 
 universe u
 

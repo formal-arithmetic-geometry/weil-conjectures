@@ -3,14 +3,18 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Sheaf.CategoryTheory.IsSaturatedTriangulatedMultiplicativeSystem
-import Mathlib.CategoryTheory.Limits.Final
+module
+
+public import Sheaf.CategoryTheory.IsSaturatedTriangulatedMultiplicativeSystem
+public import Mathlib.CategoryTheory.Limits.Final
 
 /-! # Incoming morphisms of distinguished triangles
 
 Source: Stacks Project, Derived Categories, Tag 05R9, dual cofiltered form
 (blueprint: lem-pur-triangle-morphism-category-05r9).
 -/
+
+@[expose] public section
 
 universe u v
 

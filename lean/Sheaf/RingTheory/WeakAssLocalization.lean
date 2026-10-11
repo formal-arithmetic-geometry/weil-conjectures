@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Mathlib.Algebra.Module.LocalizedModule.AtPrime
-import Mathlib.RingTheory.Localization.AtPrime.Basic
-import Mathlib.RingTheory.Ideal.MinimalPrime.Basic
-import Mathlib.RingTheory.Ideal.Colon
+module
+
+public import Mathlib.Algebra.Module.LocalizedModule.AtPrime
+public import Mathlib.RingTheory.Localization.AtPrime.Basic
+public import Mathlib.RingTheory.Ideal.MinimalPrime.Basic
+public import Mathlib.RingTheory.Ideal.Colon
 
 /-!
 # Weak association detected by localization at a prime
@@ -14,6 +16,8 @@ import Mathlib.RingTheory.Ideal.Colon
 Source: Stacks Project, Algebra, Lemma 10.66.2, Tag 0566
 (blueprint: lem-sc-weakass-localization).
 -/
+
+@[expose] public section
 
 universe u v
 

@@ -2,10 +2,12 @@
 Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 -/
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
-import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
-import Mathlib.CategoryTheory.Monoidal.Closed.Basic
-import Mathlib.CategoryTheory.Monoidal.Preadditive
+module
+
+public import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
+public import Mathlib.CategoryTheory.Monoidal.Closed.Basic
+public import Mathlib.CategoryTheory.Monoidal.Preadditive
 
 /-!
 # Tensor closed structure on sheaves of modules
@@ -13,6 +15,8 @@ import Mathlib.CategoryTheory.Monoidal.Preadditive
 Source: Stacks Project, Modules on Sites, Section 03EK and Lemma 03EO
 (blueprint: lem-pc-sheaf-modules-tensor-closed).
 -/
+
+@[expose] public section
 
 universe u
 

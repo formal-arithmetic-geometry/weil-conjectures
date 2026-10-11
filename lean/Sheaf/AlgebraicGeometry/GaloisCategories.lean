@@ -2,9 +2,11 @@
 Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 -/
-import Sheaf.AlgebraicGeometry.EtaleSheaves
-import WeilConjectures.AlgebraicGeometry.FundamentalGroup.FiniteEtale
-import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
+module
+
+public import Sheaf.AlgebraicGeometry.EtaleSheaves
+public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.FiniteEtale
+public import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
 
 /-!
 # Finite étale covers and finite locally constant sheaves
@@ -17,6 +19,8 @@ The category of finite étale covers is `Scheme.FiniteEtale`, supplied by the
 source library.  This file supplies the corresponding category of finite locally
 constant sheaves of finite sets.
 -/
+
+@[expose] public section
 
 universe u
 

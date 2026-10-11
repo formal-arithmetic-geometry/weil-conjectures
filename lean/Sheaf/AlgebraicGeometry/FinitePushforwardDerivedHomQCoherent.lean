@@ -3,17 +3,21 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Sheaf.AlgebraicGeometry.DerivedRHomAlgebraModule
-import Sheaf.AlgebraicGeometry.PseudoCoherentComplex
-import Mathlib.AlgebraicGeometry.Morphisms.Finite
-import Mathlib.AlgebraicGeometry.Noetherian
-import Mathlib.Algebra.Homology.DerivedCategory.TStructure
+module
+
+public import Sheaf.AlgebraicGeometry.DerivedRHomAlgebraModule
+public import Sheaf.AlgebraicGeometry.PseudoCoherentComplex
+public import Mathlib.AlgebraicGeometry.Morphisms.Finite
+public import Mathlib.AlgebraicGeometry.Noetherian
+public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 
 /-! # Quasi-coherence of derived Hom from a finite pushforward algebra
 
 Source: Stacks Project, Duality for Schemes, Tag 0AX2, with Tags 0AUC, 0AUP and 0A6H
 (blueprint: lem-sc-finite-pushforward-derived-hom-qcoherent).
 -/
+
+@[expose] public section
 
 universe u w wB
 

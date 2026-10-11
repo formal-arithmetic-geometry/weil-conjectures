@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import Mathlib.AlgebraicGeometry.Sites.Proetale
-import Mathlib.CategoryTheory.Sites.ConstantSheaf
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
-import Mathlib.Algebra.Homology.DerivedCategory.Basic
+module
+
+public import Mathlib.AlgebraicGeometry.Sites.Proetale
+public import Mathlib.CategoryTheory.Sites.ConstantSheaf
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
+public import Mathlib.Algebra.Homology.DerivedCategory.Basic
 
 /-!
 # Derived category of modules on the small pro-etale site
@@ -14,6 +16,8 @@ import Mathlib.Algebra.Homology.DerivedCategory.Basic
 Source: the Weil conjectures blueprint, `def-weil-pbc-proetale-site`, order 662
 (blueprint: def-weil-pbc-proetale-site).
 -/
+
+@[expose] public section
 
 universe t
 

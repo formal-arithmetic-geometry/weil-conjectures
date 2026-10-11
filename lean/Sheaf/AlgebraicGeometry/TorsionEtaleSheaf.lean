@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import Mathlib.AlgebraicGeometry.Sites.AffineEtale
-import Mathlib.CategoryTheory.Abelian.Basic
-import Mathlib.CategoryTheory.Limits.Shapes.Kernels
+module
+
+public import Mathlib.AlgebraicGeometry.Sites.AffineEtale
+public import Mathlib.CategoryTheory.Abelian.Basic
+public import Mathlib.CategoryTheory.Limits.Shapes.Kernels
 
 /-!
 # Torsion abelian sheaves on the small étale site
@@ -14,6 +16,8 @@ Source: the blueprint of the Weil conjectures, chapter `sec-proper-base-change`,
 `sk-def-pbc` (blueprint: def-weil-pbc-torsion-etale-sheaf); Stacks Project, Etale cohomology,
 Section 0DDB.
 -/
+
+@[expose] public section
 
 universe u
 

@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Mathlib.CategoryTheory.Abelian.RightDerived
-import Mathlib.Algebra.Category.Grp.Abelian
-import Mathlib.CategoryTheory.Limits.Preserves.Finite
-import Mathlib.CategoryTheory.Limits.Shapes.Products
+module
+
+public import Mathlib.CategoryTheory.Abelian.RightDerived
+public import Mathlib.Algebra.Category.Grp.Abelian
+public import Mathlib.CategoryTheory.Limits.Preserves.Finite
+public import Mathlib.CategoryTheory.Limits.Shapes.Products
 
 /-!
 # Right derived functors and finite products
@@ -15,6 +17,8 @@ Source: `literature/stacks-project/etale-cohomology.tex`, first paragraph of
 Lemma 0A5B (finite-product assembly; derived-functor formulation supplied
 explicitly) (blueprint: lem-weil-pbc-derived-finite-product).
 -/
+
+@[expose] public section
 
 universe u v w z
 

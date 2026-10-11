@@ -1,5 +1,7 @@
-import Sheaf.CategoryTheory.PushoutShortExactSequence
-import WeilConjectures.AlgebraicGeometry.Modules.Ext
+module
+
+public import Sheaf.CategoryTheory.PushoutShortExactSequence
+public import WeilConjectures.AlgebraicGeometry.Modules.Ext
 
 /-!
 # Pushout of an extension and postcomposition in Ext
@@ -7,6 +9,8 @@ import WeilConjectures.AlgebraicGeometry.Modules.Ext
 Source: Stacks Project, Homology Tag 010I and Derived Tag 06XP
 (blueprint: lem-sc-p1-ext-pushout-postcompose).
 -/
+
+@[expose] public section
 
 set_option autoImplicit false
 

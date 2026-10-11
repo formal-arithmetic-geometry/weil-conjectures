@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Mathlib.Algebra.MvPolynomial.Basic
-import Mathlib.RingTheory.Localization.AtPrime.Basic
-import Mathlib.RingTheory.RegularLocalRing.Defs
-import Mathlib.RingTheory.Ideal.Quotient.Operations
+module
+
+public import Mathlib.Algebra.MvPolynomial.Basic
+public import Mathlib.RingTheory.Localization.AtPrime.Basic
+public import Mathlib.RingTheory.RegularLocalRing.Defs
+public import Mathlib.RingTheory.Ideal.Quotient.Operations
 
 /-!
 # The polynomial ring localized at the origin
@@ -14,6 +16,8 @@ import Mathlib.RingTheory.Ideal.Quotient.Operations
 Source: Stacks Project, Algebra, Tag 00OP, specialized to the ideal of all variables
 (blueprint: lem-weil-pbc-polynomial-ring-origin-regular-local).
 -/
+
+@[expose] public section
 
 universe u
 

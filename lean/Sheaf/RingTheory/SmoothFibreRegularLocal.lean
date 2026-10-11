@@ -2,9 +2,11 @@
 Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 -/
-import Mathlib.RingTheory.Smooth.Basic
-import Mathlib.RingTheory.LocalRing.ResidueField.Fiber
-import Mathlib.RingTheory.RegularLocalRing.Defs
+module
+
+public import Mathlib.RingTheory.Smooth.Basic
+public import Mathlib.RingTheory.LocalRing.ResidueField.Fiber
+public import Mathlib.RingTheory.RegularLocalRing.Defs
 
 /-!
 # Smooth fibres have regular local rings
@@ -12,6 +14,8 @@ import Mathlib.RingTheory.RegularLocalRing.Defs
 Source: literature/stacks-project/algebra.tex, Algebra, Lemmas Tags 00T4 and 00TT
 (blueprint: lem-weil-pbc-smooth-fibre-regular-local).
 -/
+
+@[expose] public section
 
 universe u v
 

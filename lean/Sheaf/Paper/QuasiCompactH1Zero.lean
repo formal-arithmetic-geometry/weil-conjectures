@@ -1,12 +1,16 @@
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
-import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
-import Sheaf.Paper.PQFCohomology
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
+public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
+public import Sheaf.Paper.PQFCohomology
 
 /-! # Serre's quasi-compact vanishing criterion
 
 Source: Stacks Project, Cohomology of Schemes, Lemma Tag 01XF
 (blueprint: lem-pqf-quasicompact-h1-zero).
 -/
+
+@[expose] public section
 
 universe u
 

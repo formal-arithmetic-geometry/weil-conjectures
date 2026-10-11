@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group G1
 -/
-import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
+module
+
+public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 
 /-!
 # Filtered colimits of etale cohomology
@@ -15,6 +17,8 @@ The image cocone has legs induced by the original coprojections. Its colimit pro
 expresses that the canonical comparison map is an isomorphism, rather than merely asserting
 an unspecified isomorphism between the two cohomology objects.
 -/
+
+@[expose] public section
 
 universe u
 

@@ -3,21 +3,25 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group J1
 -/
-import Mathlib.FieldTheory.PurelyInseparable.Basic
-import Mathlib.RingTheory.LocalRing.Basic
-import Mathlib.RingTheory.Ideal.Quotient.Operations
-import Mathlib.RingTheory.LocalRing.ResidueField.Basic
-import Mathlib.RingTheory.Noetherian.Defs
-import Mathlib.RingTheory.Finiteness.Defs
-import Mathlib.LinearAlgebra.FreeModule.Basic
-import Mathlib.RingTheory.RingHom.Flat
-import Mathlib.LinearAlgebra.Dimension.Finite
+module
+
+public import Mathlib.FieldTheory.PurelyInseparable.Basic
+public import Mathlib.RingTheory.LocalRing.Basic
+public import Mathlib.RingTheory.Ideal.Quotient.Operations
+public import Mathlib.RingTheory.LocalRing.ResidueField.Basic
+public import Mathlib.RingTheory.Noetherian.Defs
+public import Mathlib.RingTheory.Finiteness.Defs
+public import Mathlib.LinearAlgebra.FreeModule.Basic
+public import Mathlib.RingTheory.RingHom.Flat
+public import Mathlib.LinearAlgebra.Dimension.Finite
 
 /-! # Purely inseparable base change of a Noetherian local algebra
 
 Source: Stacks Project, More on Algebra, proof of Proposition Tag 07E5, (3) => (1)
 (blueprint: lem-weil-pbc-purely-inseparable-base-change-local-ring).
 -/
+
+@[expose] public section
 
 set_option autoImplicit false
 

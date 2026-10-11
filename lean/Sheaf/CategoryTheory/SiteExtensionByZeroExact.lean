@@ -3,11 +3,13 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group G1
 -/
-import Mathlib.CategoryTheory.Sites.Pullback
-import Mathlib.CategoryTheory.Sites.Over
-import Mathlib.CategoryTheory.Sites.PrecoverageToGrothendieck
-import Mathlib.Algebra.Category.Grp.AB
-import Mathlib.Algebra.Homology.ShortComplex.ShortExact
+module
+
+public import Mathlib.CategoryTheory.Sites.Pullback
+public import Mathlib.CategoryTheory.Sites.Over
+public import Mathlib.CategoryTheory.Sites.PrecoverageToGrothendieck
+public import Mathlib.Algebra.Category.Grp.AB
+public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 
 /-! # Exactness of extension by zero on a localized site
 
@@ -20,6 +22,8 @@ The proof follows the direct-sum
 presheaf construction of 03DH--03DJ, sectionwise injectivity, exact sheafification,
 and right exactness from the adjunction.
 -/
+
+@[expose] public section
 
 universe u
 

@@ -3,12 +3,14 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import Mathlib.AlgebraicGeometry.Noetherian
-import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
-import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
-import Sheaf.AlgebraicGeometry.Coherent
-import Sheaf.AlgebraicGeometry.IdealModuleProductStalk
-import Sheaf.AlgebraicGeometry.ClosedSubsetProperOverBase
+module
+
+public import Mathlib.AlgebraicGeometry.Noetherian
+public import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
+public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
+public import Sheaf.AlgebraicGeometry.Coherent
+public import Sheaf.AlgebraicGeometry.IdealModuleProductStalk
+public import Sheaf.AlgebraicGeometry.ClosedSubsetProperOverBase
 
 /-! # Coherent formal modules and completion
 
@@ -25,6 +27,8 @@ the paragraph before Lemma 0889, proof of Theorem 088E, and Section 0CYW, equati
 The index `op n` represents level `n + 1`, so no level zero is imposed.
 Products and powers are the shared `Scheme.idealModuleProduct` and `Scheme.idealSheafPower`.
 -/
+
+@[expose] public section
 
 universe u
 

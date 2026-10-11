@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Sheaf.Algebra.Homology.DerivedInternalHom
-import Sheaf.Paper.DerivedHomMayerVietoris
+module
+
+public import Sheaf.Algebra.Homology.DerivedInternalHom
+public import Sheaf.Paper.DerivedHomMayerVietoris
 
 /-!
 # Derived internal Hom commutes with restriction to opens
@@ -12,6 +14,8 @@ import Sheaf.Paper.DerivedHomMayerVietoris
 Source: literature/stacks-project/cohomology.tex, Lemma 08DL
 (blueprint: lem-sc-derived-internal-hom-restrict-open).
 -/
+
+@[expose] public section
 
 open CategoryTheory CategoryTheory.Limits TopologicalSpace Opposite
 open AlgebraicGeometry

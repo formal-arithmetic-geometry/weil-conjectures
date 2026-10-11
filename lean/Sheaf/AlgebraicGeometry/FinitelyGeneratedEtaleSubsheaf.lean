@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Sheaf.AlgebraicGeometry.EtaleSheaves
-import Mathlib.CategoryTheory.Subobject.Basic
+module
+
+public import Sheaf.AlgebraicGeometry.EtaleSheaves
+public import Mathlib.CategoryTheory.Subobject.Basic
 
 /-!
 # Finite generation by sections on affine etale charts
@@ -12,6 +14,8 @@ import Mathlib.CategoryTheory.Subobject.Basic
 Source: Stacks Project, Tag 03SA, finite extension-by-zero generators; blueprint
 `lem-kun-cp-approximation` (blueprint: def-kun-finitely-generated-etale-subsheaf).
 -/
+
+@[expose] public section
 
 universe u
 

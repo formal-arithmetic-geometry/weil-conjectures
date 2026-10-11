@@ -3,14 +3,18 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import Sheaf.AlgebraicGeometry.DerivedTensorStructure
-import Sheaf.AlgebraicGeometry.DerivedPullbackTensorProduct
+module
+
+public import Sheaf.AlgebraicGeometry.DerivedTensorStructure
+public import Sheaf.AlgebraicGeometry.DerivedPullbackTensorProduct
 
 /-! # The canonical monoidal model of derived pullback
 
 Source: Stacks Project, Cohomology, Tag 079U and Section 20.27
 (blueprint: def-pc-derived-pullback-monoidal-model).
 -/
+
+@[expose] public section
 
 universe uModel wModel
 

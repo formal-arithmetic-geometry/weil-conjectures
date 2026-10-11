@@ -1,5 +1,9 @@
-import Mathlib.RingTheory.ZariskisMainTheorem
-import Sheaf.RingTheory.QuasiFiniteAtPrime
+module
+
+public import Mathlib.RingTheory.ZariskisMainTheorem
+public import Sheaf.RingTheory.QuasiFiniteAtPrime
+
+@[expose] public section
 
 universe u v
 

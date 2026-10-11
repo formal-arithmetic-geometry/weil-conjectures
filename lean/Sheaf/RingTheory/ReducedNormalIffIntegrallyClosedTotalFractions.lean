@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import Mathlib.Algebra.Category.Ring.Basic
-import Mathlib.RingTheory.Ideal.MinimalPrime.Basic
-import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
-import Mathlib.RingTheory.Localization.AtPrime.Basic
+module
+
+public import Mathlib.Algebra.Category.Ring.Basic
+public import Mathlib.RingTheory.Ideal.MinimalPrime.Basic
+public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
+public import Mathlib.RingTheory.Localization.AtPrime.Basic
 
 /-!
 # Normality and total fractions of a reduced ring
@@ -18,6 +20,8 @@ Source: Stacks Project, Algebra, Lemma Tag 030C
 `def-weil-pbc-module-localization`. Normality uses the inline prime-localization
 condition recorded by `def-weil-pbc-normal-ring`. The empty finite product is allowed.
 -/
+
+@[expose] public section
 
 universe u
 

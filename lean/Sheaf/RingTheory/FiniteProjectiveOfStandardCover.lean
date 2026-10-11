@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import Mathlib.Algebra.Module.LocalizedModule.Basic
-import Mathlib.Algebra.Module.Projective
-import Mathlib.RingTheory.Finiteness.Defs
-import Mathlib.RingTheory.Localization.Away.Basic
+module
+
+public import Mathlib.Algebra.Module.LocalizedModule.Basic
+public import Mathlib.Algebra.Module.Projective
+public import Mathlib.RingTheory.Finiteness.Defs
+public import Mathlib.RingTheory.Localization.Away.Basic
 
 /-!
 # Finite projectivity from a finite standard-open free cover
@@ -14,6 +16,8 @@ import Mathlib.RingTheory.Localization.Away.Basic
 Source: Stacks Project, Algebra, Lemma 10.78.2, Tag 00NX, implication (7) ⇒ (2)
 (blueprint: lem-sc-affine-standard-cover-finite-projective).
 -/
+
+@[expose] public section
 
 universe u v
 

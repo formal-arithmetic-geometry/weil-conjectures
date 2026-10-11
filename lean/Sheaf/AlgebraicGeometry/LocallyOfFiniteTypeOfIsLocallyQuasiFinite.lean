@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import Sheaf.AlgebraicGeometry.QuasiFiniteMorphism
+module
+
+public import Sheaf.AlgebraicGeometry.QuasiFiniteMorphism
 
 /-!
 # Locally quasi-finite morphisms are locally of finite type
@@ -11,6 +13,8 @@ import Sheaf.AlgebraicGeometry.QuasiFiniteMorphism
 Source: Stacks Project, Morphisms of Schemes, remark after Definition Tag 01TD,
 and Lemma Tag 01T2 (blueprint: lem-weil-pbc-lqf-locally-finite-type).
 -/
+
+@[expose] public section
 
 universe u
 

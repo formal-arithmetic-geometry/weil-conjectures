@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Sheaf.Topology.InverseImageModule
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
+module
+
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Sheaf.Topology.InverseImageModule
+public import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 
 /-!
 # Pullback of scheme modules by the tensor formula
@@ -14,6 +16,8 @@ Source: Stacks Project, Tags 0095, 0096, 0097; blueprint module base change in
 `sec-abelian-varieties/sk-def-av-jacobian/def-pc-base-change.md`
 (blueprint: def-pc-module-pullback).
 -/
+
+@[expose] public section
 
 universe w
 

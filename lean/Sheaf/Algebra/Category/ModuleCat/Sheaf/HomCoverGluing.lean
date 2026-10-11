@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
+module
+
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
 
 /-!
 # Gluing morphisms of sheaves of modules on a covering family
@@ -11,6 +13,8 @@ import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
 Source: Stacks Project, Modules on Sites, Lemma 03EM, using Sites Lemma 04TQ
 (blueprint: lem-pur-sheaf-hom-cover-gluing).
 -/
+
+@[expose] public section
 
 universe w v v₁ u₁ u
 

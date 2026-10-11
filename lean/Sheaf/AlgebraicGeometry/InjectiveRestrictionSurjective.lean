@@ -1,11 +1,15 @@
-import Sheaf.Paper.DerivedHomMayerVietoris
-import Mathlib.CategoryTheory.Preadditive.Injective.Basic
+module
+
+public import Sheaf.Paper.DerivedHomMayerVietoris
+public import Mathlib.CategoryTheory.Preadditive.Injective.Basic
 
 /-! # Injective sheaves have surjective restriction maps
 
 Source: Stacks Project, Cohomology, Lemma 01EA
 (blueprint: lem-sc-ringed-space-injective-restriction-surjective).
 -/
+
+@[expose] public section
 
 universe u
 

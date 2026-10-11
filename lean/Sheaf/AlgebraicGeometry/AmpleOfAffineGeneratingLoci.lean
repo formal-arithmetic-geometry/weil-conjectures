@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group J1
 -/
-import WeilConjectures.AlgebraicGeometry.Modules.Ample
-import WeilConjectures.AlgebraicGeometry.Modules.GeneratingLocus
+module
+
+public import WeilConjectures.AlgebraicGeometry.Modules.Ample
+public import WeilConjectures.AlgebraicGeometry.Modules.GeneratingLocus
 
 /-!
 # Ampleness from affine nonvanishing loci
@@ -12,6 +14,8 @@ import WeilConjectures.AlgebraicGeometry.Modules.GeneratingLocus
 Source: Stacks Project, Properties, Definition 28.27.1 (Tag 01PS), and Morphisms,
 Lemma 29.40.4 (Tag 01VT) (blueprint: lem-pc-ample-affine-loci-criterion).
 -/
+
+@[expose] public section
 
 universe u
 

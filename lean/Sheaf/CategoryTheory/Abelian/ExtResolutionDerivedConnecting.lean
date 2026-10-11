@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Mathlib.CategoryTheory.Abelian.Injective.Ext
-import Mathlib.Algebra.Homology.DerivedCategory.Ext.ExactSequences
+module
+
+public import Mathlib.CategoryTheory.Abelian.Injective.Ext
+public import Mathlib.Algebra.Homology.DerivedCategory.Ext.ExactSequences
 
 /-!
 # Injective-resolution and derived connecting morphisms agree
@@ -12,6 +14,8 @@ import Mathlib.Algebra.Homology.DerivedCategory.Ext.ExactSequences
 Source: Stacks Project, Derived Categories, Tags 05TE and 06XR
 (blueprint: lem-sc-p1-ext-resolution-derived-connecting).
 -/
+
+@[expose] public section
 
 universe v u
 

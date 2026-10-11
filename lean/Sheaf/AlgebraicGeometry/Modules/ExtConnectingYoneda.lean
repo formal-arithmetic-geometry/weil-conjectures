@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Sheaf.AlgebraicGeometry.Modules.ExtYonedaFunctoriality
+module
+
+public import Sheaf.AlgebraicGeometry.Modules.ExtYonedaFunctoriality
 
 /-!
 # The degree-zero Ext boundary and Yoneda composition
@@ -12,6 +14,8 @@ Source: Stacks Project, Cohomology, Tag 0B3A, in the general form for an arbitra
 argument; Derived Categories, Tags 06XP, 06XQ and 06XR
 (blueprint: lem-sc-p1-ext-connecting-yoneda).
 -/
+
+@[expose] public section
 
 universe u
 

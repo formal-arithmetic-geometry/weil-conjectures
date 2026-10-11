@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import Mathlib.RingTheory.Localization.Free
-import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
-import Mathlib.LinearAlgebra.TensorProduct.Tower
+module
+
+public import Mathlib.RingTheory.Localization.Free
+public import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
+public import Mathlib.LinearAlgebra.TensorProduct.Tower
 
 /-!
 # Spreading a prescribed residue basis
@@ -14,6 +16,8 @@ Source: Stacks Project, Algebra, proof of Tag 0GWM, with prescribed lifts;
 Tags 00DV (8) and 05G8 establish the local isomorphism
 (blueprint: lem-weil-pbc-prescribed-residue-basis-spreads).
 -/
+
+@[expose] public section
 
 universe u v
 

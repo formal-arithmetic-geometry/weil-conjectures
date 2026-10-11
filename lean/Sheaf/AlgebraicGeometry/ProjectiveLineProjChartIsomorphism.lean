@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.LinearProjection
+module
+
+public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.LinearProjection
 
 /-!
 # Chart-compatible comparison of the two models of the projective line
@@ -11,6 +13,8 @@ import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.LinearProjection
 Source: Stacks Project, Constructions, Tag 01NG; blueprint proof of
 `lem-sc-p1-graded-resolution` (blueprint: def-sc-p1-proj-chart-isomorphism).
 -/
+
+@[expose] public section
 
 universe u
 

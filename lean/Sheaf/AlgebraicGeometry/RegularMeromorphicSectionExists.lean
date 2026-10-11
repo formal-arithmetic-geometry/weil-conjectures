@@ -1,8 +1,12 @@
-import Mathlib.AlgebraicGeometry.Morphisms.Proper
-import Mathlib.Topology.KrullDimension
-import WeilConjectures.AlgebraicGeometry.Modules.Invertible
-import Sheaf.AlgebraicGeometry.MeromorphicModule
-import Sheaf.AlgebraicGeometry.NoEmbeddedPoints
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.Proper
+public import Mathlib.Topology.KrullDimension
+public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
+public import Sheaf.AlgebraicGeometry.MeromorphicModule
+public import Sheaf.AlgebraicGeometry.NoEmbeddedPoints
+
+@[expose] public section
 
 universe v
 

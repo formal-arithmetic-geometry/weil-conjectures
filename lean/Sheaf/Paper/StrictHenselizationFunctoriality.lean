@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group R1
 -/
-import Sheaf.AlgebraicGeometry.StrictHenselizationStructuralMap
-import WeilConjectures.Mathlib.RingTheory.Henselian
-import Mathlib.AlgebraicGeometry.ResidueField
+module
+
+public import Sheaf.AlgebraicGeometry.StrictHenselizationStructuralMap
+public import WeilConjectures.Mathlib.RingTheory.Henselian
+public import Mathlib.AlgebraicGeometry.ResidueField
 
 /-! # Strict henselization functoriality
 
@@ -20,6 +22,8 @@ over the chosen representatives of the affine pointed neighbourhoods. The functo
 takes the residue identifications of clause (1) as data tied by their characterizing equations.
 The algebra structures on Ω are required to be exactly the geometric-point embeddings.
 -/
+
+@[expose] public section
 
 universe v
 open CategoryTheory CategoryTheory.Limits

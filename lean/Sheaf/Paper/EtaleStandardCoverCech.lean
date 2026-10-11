@@ -2,10 +2,12 @@
 Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 -/
-import Sheaf.CategoryTheory.SiteCechComplex
-import Mathlib.AlgebraicGeometry.Sites.Etale
-import Mathlib.AlgebraicGeometry.Limits
-import Mathlib.RingTheory.Flat.FaithfullyFlat.Basic
+module
+
+public import Sheaf.CategoryTheory.SiteCechComplex
+public import Mathlib.AlgebraicGeometry.Sites.Etale
+public import Mathlib.AlgebraicGeometry.Limits
+public import Mathlib.RingTheory.Flat.FaithfullyFlat.Basic
 
 /-!
 # Čech complex of a finite affine étale covering and its disjoint union
@@ -13,6 +15,8 @@ import Mathlib.RingTheory.Flat.FaithfullyFlat.Basic
 Source: Stacks Project, `literature/stacks-project/etale-cohomology.tex`,
 Lemma Tag 03OZ (blueprint: lem-sc-etale-standard-cover-cech).
 -/
+
+@[expose] public section
 
 universe u
 

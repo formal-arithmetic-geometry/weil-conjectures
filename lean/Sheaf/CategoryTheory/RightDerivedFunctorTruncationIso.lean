@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
-import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
-import Mathlib.CategoryTheory.Preadditive.LeftExact
+module
+
+public import Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
+public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
+public import Mathlib.CategoryTheory.Preadditive.LeftExact
 
 /-!
 # Low-degree cohomology of a right derived functor
@@ -26,6 +28,8 @@ categories. It can be computed on bounded-below complexes of injectives, which a
 K-injective; thus it realizes the resolution convention of `def-sp-kinjective-bridge`.
 `TStructure.t.onPlus` is the induced standard t-structure on the bounded-below subcategory.
 -/
+
+@[expose] public section
 
 universe u₁ u₂ v₁ v₂ w₁ w₂
 

@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group V1
 -/
-import Sheaf.CategoryTheory.ExactCoupleConvergence
+module
+
+public import Sheaf.CategoryTheory.ExactCoupleConvergence
 
 /-!
 # Functoriality of derived exact couples
@@ -12,6 +14,8 @@ Source: Stacks Project, Homological Algebra, Definitions 12.21.1 and 12.21.3,
 Lemmas 12.21.2 and 12.21.4 (Tags 011Q, 011R, 011S, 011T)
 (blueprint: lem-sp-derived-couple-functoriality).
 -/
+
+@[expose] public section
 
 universe u v
 

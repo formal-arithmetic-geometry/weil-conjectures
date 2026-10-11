@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under the Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import Sheaf.AlgebraicGeometry.DerivedCategory
-import Sheaf.AlgebraicGeometry.TensorPullback
-import Mathlib.CategoryTheory.Functor.Derived.LeftDerived
-import Sheaf.Algebra.Homology.KFlat
+module
+
+public import Sheaf.AlgebraicGeometry.DerivedCategory
+public import Sheaf.AlgebraicGeometry.TensorPullback
+public import Mathlib.CategoryTheory.Functor.Derived.LeftDerived
+public import Sheaf.Algebra.Homology.KFlat
 
 /-! # Derived pullback of modules on schemes
 
@@ -19,6 +21,8 @@ termwise inverse image along the morphism of schemes.  Its K-flat representative
 are the termwise tensor pullbacks of K-flat resolutions; the comparison maps are
 canonical and independent of the chosen resolution.
 -/
+
+@[expose] public section
 
 universe u w
 

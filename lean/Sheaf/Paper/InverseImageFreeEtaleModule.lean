@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import Sheaf.AlgebraicGeometry.EtaleInverseImageModulesExact
-import Mathlib.Algebra.Category.ModuleCat.Presheaf.Generator
-import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
-import Mathlib.CategoryTheory.Sites.ConstantSheaf
+module
+
+public import Sheaf.AlgebraicGeometry.EtaleInverseImageModulesExact
+public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Generator
+public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
+public import Mathlib.CategoryTheory.Sites.ConstantSheaf
 
 /-!
 # Inverse image of a free etale module sheaf
@@ -14,6 +16,8 @@ import Mathlib.CategoryTheory.Sites.ConstantSheaf
 Source: Stacks Project, Etale Cohomology, Lemma 03S6
 (blueprint: lem-weil-pbc-inverse-image-free-etale-module).
 -/
+
+@[expose] public section
 
 universe u
 

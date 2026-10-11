@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: H1
 -/
-import Mathlib.Topology.Sets.Opens
-import Mathlib.CategoryTheory.Category.Preorder
-import Mathlib.Algebra.Category.Grp.Colimits
+module
+
+public import Mathlib.Topology.Sets.Opens
+public import Mathlib.CategoryTheory.Category.Preorder
+public import Mathlib.Algebra.Category.Grp.Colimits
 
 /-!
 # Sections of a sheaf on a basis are the locally represented families of germs
@@ -13,6 +15,8 @@ import Mathlib.Algebra.Category.Grp.Colimits
 Source: Stacks Project, Sheaves on Spaces, Section 009H, Lemma 009M
 (blueprint: lem-weil-pbc-basis-sheaf-sections-germs).
 -/
+
+@[expose] public section
 
 set_option autoImplicit false
 

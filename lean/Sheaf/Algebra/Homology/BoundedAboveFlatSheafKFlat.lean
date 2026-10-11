@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.Flat
-import Sheaf.Algebra.Homology.KFlat
+module
+
+public import Sheaf.Algebra.Category.ModuleCat.Sheaf.Flat
+public import Sheaf.Algebra.Homology.KFlat
 
 /-!
 # Bounded-above flat complexes on a ringed site are K-flat
@@ -12,6 +14,8 @@ import Sheaf.Algebra.Homology.KFlat
 Source: Stacks Project, Cohomology on Sites, Lemma 21.17.8 (Tag 06YQ), also used in the
 proof of Lemma 06YS (blueprint: lem-pc-bounded-above-flat-kflat-site).
 -/
+
+@[expose] public section
 
 universe u
 

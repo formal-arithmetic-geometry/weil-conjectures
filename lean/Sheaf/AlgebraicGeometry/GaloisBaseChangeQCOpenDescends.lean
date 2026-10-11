@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Mathlib.FieldTheory.Galois.Basic
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
-import Sheaf.AlgebraicGeometry.BaseChangeConventions
-import WeilConjectures.AlgebraicGeometry.Picard.Jacobian
+module
+
+public import Mathlib.FieldTheory.Galois.Basic
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
+public import Sheaf.AlgebraicGeometry.BaseChangeConventions
+public import WeilConjectures.AlgebraicGeometry.Picard.Jacobian
 
 /-!
 # Quasi-compact opens under Galois base change
@@ -15,6 +17,8 @@ Source: Stacks Project, Varieties, Tag 04KU, using Tag 0388 and the preceding eq
 `equation-galois-action-base-change-kbar`
 (blueprint: lem-weil-pbc-galois-base-change-qc-open-descends).
 -/
+
+@[expose] public section
 
 universe u
 

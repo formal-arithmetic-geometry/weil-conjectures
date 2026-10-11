@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group J1
 -/
-import Mathlib.RingTheory.Noetherian.Defs
-import Mathlib.RingTheory.RingHom.Flat
-import Mathlib.RingTheory.LocalRing.ResidueField.Fiber
-import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
+module
+
+public import Mathlib.RingTheory.Noetherian.Defs
+public import Mathlib.RingTheory.RingHom.Flat
+public import Mathlib.RingTheory.LocalRing.ResidueField.Fiber
+public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
 
 /-!
 # Normality ascends along flat maps with normal fibres
@@ -14,6 +16,8 @@ import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
 Source: Stacks Project, Algebra, Lemma 10.163.8, Tag 0C22
 (blueprint: lem-weil-pbc-flat-normal-fibres-noetherian-normal).
 -/
+
+@[expose] public section
 
 universe u v
 

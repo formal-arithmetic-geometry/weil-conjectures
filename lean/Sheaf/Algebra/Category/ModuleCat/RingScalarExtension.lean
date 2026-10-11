@@ -2,8 +2,10 @@
 Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 -/
-import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
-import Mathlib.CategoryTheory.Sites.Sheafification
+module
+
+public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
+public import Mathlib.CategoryTheory.Sites.Sheafification
 
 /-! # Scalar extension for left modules over arbitrary rings
 
@@ -11,6 +13,8 @@ Source: Stacks Project, Modules on Sites, Section 6.3, scalar extension construc
 its balanced-tensor universal property
 (blueprint: def-pod-ring-scalar-extension).
 -/
+
+@[expose] public section
 
 universe uR vC
 

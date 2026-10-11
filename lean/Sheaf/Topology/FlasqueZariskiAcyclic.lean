@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
-import Mathlib.Topology.Sheaves.Flasque
+module
+
+public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
+public import Mathlib.Topology.Sheaves.Flasque
 
 /-!
 # Flasque sheaves are acyclic
@@ -12,6 +14,8 @@ import Mathlib.Topology.Sheaves.Flasque
 Source: literature/stacks-project/cohomology.tex, Lemma Tag 09SY (lemma-flasque-acyclic)
 (blueprint: lem-sc-zariski-flasque-acyclic).
 -/
+
+@[expose] public section
 
 universe u
 

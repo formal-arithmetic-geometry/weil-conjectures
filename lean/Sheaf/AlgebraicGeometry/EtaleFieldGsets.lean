@@ -3,18 +3,22 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF contributors
 -/
-import Mathlib.AlgebraicGeometry.Morphisms.Etale
-import Mathlib.AlgebraicGeometry.Sites.Etale
-import Mathlib.CategoryTheory.Action.Continuous
-import Mathlib.CategoryTheory.Action.Concrete
-import Mathlib.CategoryTheory.Types.Basic
-import Mathlib.FieldTheory.KrullTopology
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.Etale
+public import Mathlib.AlgebraicGeometry.Sites.Etale
+public import Mathlib.CategoryTheory.Action.Continuous
+public import Mathlib.CategoryTheory.Action.Concrete
+public import Mathlib.CategoryTheory.Types.Basic
+public import Mathlib.FieldTheory.KrullTopology
 
 /-!
 # Étale schemes over a field and continuous G-sets
 
 Source: Stacks Project, Tags 03QR and 03QS (blueprint: lem-exc-etale-field-gsets).
 -/
+
+@[expose] public section
 
 universe u w
 

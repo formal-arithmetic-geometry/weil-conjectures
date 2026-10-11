@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group G1
 -/
-import WeilConjectures.AlgebraicGeometry.Curve
-import WeilConjectures.AlgebraicGeometry.Sites.Gm
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
+module
+
+public import WeilConjectures.AlgebraicGeometry.Curve
+public import WeilConjectures.AlgebraicGeometry.Sites.Gm
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 
 /-!
 # Direct-image cohomology of the multiplicative group on an open curve
@@ -13,6 +15,8 @@ import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 Source: Stacks Project, Section 59.68, discussion preceding Tag 03RM
 (blueprint: lem-sc-open-curve-gm-direct-image-cohomology).
 -/
+
+@[expose] public section
 
 universe u
 

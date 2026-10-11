@@ -3,11 +3,13 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group G1
 -/
-import Sheaf.CategoryTheory.CompactObject
-import Mathlib.CategoryTheory.Triangulated.Triangulated
-import Mathlib.CategoryTheory.Limits.Types.Colimits
-import Mathlib.CategoryTheory.Yoneda
-import Mathlib.CategoryTheory.Category.Preorder
+module
+
+public import Sheaf.CategoryTheory.CompactObject
+public import Mathlib.CategoryTheory.Triangulated.Triangulated
+public import Mathlib.CategoryTheory.Limits.Types.Colimits
+public import Mathlib.CategoryTheory.Yoneda
+public import Mathlib.CategoryTheory.Category.Preorder
 
 /-!
 # Compact Hom commutes with sequential homotopy colimits
@@ -15,6 +17,8 @@ import Mathlib.CategoryTheory.Category.Preorder
 Source: Stacks Project, Derived Categories, Lemma 13.33.9 (Tag 094A)
 (blueprint: lem-pc-compact-hom-hocolim).
 -/
+
+@[expose] public section
 
 universe w v u
 

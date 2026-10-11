@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Mathlib.RingTheory.Kaehler.Basic
-import Mathlib.FieldTheory.Perfect
+module
+
+public import Mathlib.RingTheory.Kaehler.Basic
+public import Mathlib.FieldTheory.Perfect
 
 /-!
 # Vanishing differentials over a perfect field
@@ -12,6 +14,8 @@ import Mathlib.FieldTheory.Perfect
 Source: Stacks Project, Algebra, Lemma 10.158.2 (Tag 031W)
 (blueprint: lem-weil-pbc-differential-zero-iff-pth-power).
 -/
+
+@[expose] public section
 
 universe u v
 

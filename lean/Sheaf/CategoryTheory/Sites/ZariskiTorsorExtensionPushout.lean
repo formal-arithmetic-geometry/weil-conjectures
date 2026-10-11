@@ -3,13 +3,15 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import Mathlib.AlgebraicGeometry.Scheme
-import Mathlib.CategoryTheory.Sites.Spaces
-import Mathlib.CategoryTheory.Sites.Abelian
-import Mathlib.CategoryTheory.Sites.LeftExact
-import Mathlib.Algebra.Category.Grp.FilteredColimits
-import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
-import Sheaf.CategoryTheory.Sites.ZariskiContractedProductPresentation
+module
+
+public import Mathlib.AlgebraicGeometry.Scheme
+public import Mathlib.CategoryTheory.Sites.Spaces
+public import Mathlib.CategoryTheory.Sites.Abelian
+public import Mathlib.CategoryTheory.Sites.LeftExact
+public import Mathlib.Algebra.Category.Grp.FilteredColimits
+public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
+public import Sheaf.CategoryTheory.Sites.ZariskiContractedProductPresentation
 
 /-!
 # The fibre of a pushed-out Zariski extension
@@ -17,6 +19,8 @@ import Sheaf.CategoryTheory.Sites.ZariskiContractedProductPresentation
 Source: Stacks Project, Cohomology of Sheaves, Lemma 02FQ, pushout and fibre construction
 (blueprint: lem-sc-torsor-h1-ext-pushout).
 -/
+
+@[expose] public section
 
 universe uE
 

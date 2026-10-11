@@ -3,11 +3,13 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import Sheaf.NumberTheory.Padics.CoefficientExtension
-import Mathlib.Topology.Algebra.Module.FiniteDimension
-import Mathlib.Topology.Algebra.Nonarchimedean.AdicTopology
-import Mathlib.LinearAlgebra.Dimension.Free
-import Mathlib.Topology.Algebra.Group.Basic
+module
+
+public import Sheaf.NumberTheory.Padics.CoefficientExtension
+public import Mathlib.Topology.Algebra.Module.FiniteDimension
+public import Mathlib.Topology.Algebra.Nonarchimedean.AdicTopology
+public import Mathlib.LinearAlgebra.Dimension.Free
+public import Mathlib.Topology.Algebra.Group.Basic
 
 /-!
 # Stable lattices for compact groups
@@ -15,6 +17,8 @@ import Mathlib.Topology.Algebra.Group.Basic
 Source: Stanford Weil II seminar, lecture 19 (D. Dore), Proposition 1.1.9, pp. 2–3
 (blueprint: lem-pod-profinite-stable-lattice).
 -/
+
+@[expose] public section
 
 universe u v w
 

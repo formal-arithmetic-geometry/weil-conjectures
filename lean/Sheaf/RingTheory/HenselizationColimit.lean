@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import Sheaf.RingTheory.PairHenselization
-import Mathlib.CategoryTheory.Limits.HasLimits
+module
+
+public import Sheaf.RingTheory.PairHenselization
+public import Mathlib.CategoryTheory.Limits.HasLimits
 
 /-!
 # Henselization of pairs commutes with filtered colimits
@@ -12,6 +14,8 @@ import Mathlib.CategoryTheory.Limits.HasLimits
 Source: Stacks Project, More on Algebra, Tags 0A04 and 0A02
 (blueprint: lem-weil-pbc-henselization-colimit).
 -/
+
+@[expose] public section
 
 universe u
 

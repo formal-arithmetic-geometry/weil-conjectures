@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import Mathlib.CategoryTheory.Abelian.Basic
-import Mathlib.CategoryTheory.Pi.Basic
-import Mathlib.CategoryTheory.Preadditive.Injective.Resolution
+module
+
+public import Mathlib.CategoryTheory.Abelian.Basic
+public import Mathlib.CategoryTheory.Pi.Basic
+public import Mathlib.CategoryTheory.Preadditive.Injective.Resolution
 
 /-!
 # Injective resolutions in finite products of abelian categories
@@ -14,6 +16,8 @@ Source: Stacks Project, Derived Categories, Section 13.20 (Tag 0156), and the
 componentwise product-category argument recorded in the DAG
 (blueprint: lem-weil-pbc-finite-product-injective-resolutions).
 -/
+
+@[expose] public section
 
 universe w v u
 

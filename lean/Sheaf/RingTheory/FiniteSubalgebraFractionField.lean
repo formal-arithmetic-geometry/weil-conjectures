@@ -3,11 +3,13 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import Mathlib.Algebra.CharP.Defs
-import Mathlib.Algebra.MvPolynomial.Basic
-import Mathlib.RingTheory.MvPowerSeries.NoZeroDivisors
-import Mathlib.RingTheory.Localization.AtPrime.Basic
-import Mathlib.RingTheory.Finiteness.Defs
+module
+
+public import Mathlib.Algebra.CharP.Defs
+public import Mathlib.Algebra.MvPolynomial.Basic
+public import Mathlib.RingTheory.MvPowerSeries.NoZeroDivisors
+public import Mathlib.RingTheory.Localization.AtPrime.Basic
+public import Mathlib.RingTheory.Finiteness.Defs
 
 /-!
 # Finite subalgebras with prescribed fraction field
@@ -15,6 +17,8 @@ import Mathlib.RingTheory.Finiteness.Defs
 Source: Stacks Project, More on Algebra, Tag 07PR, proof, finite algebra model paragraph
 (blueprint: lem-weil-pbc-finite-subalgebra-fraction-field).
 -/
+
+@[expose] public section
 
 universe u v w
 

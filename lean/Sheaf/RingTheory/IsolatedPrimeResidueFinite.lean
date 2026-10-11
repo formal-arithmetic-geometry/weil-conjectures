@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import Mathlib.RingTheory.FiniteType
-import Mathlib.RingTheory.Spectrum.Prime.Topology
-import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
+module
+
+public import Mathlib.RingTheory.FiniteType
+public import Mathlib.RingTheory.Spectrum.Prime.Topology
+public import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
 
 /-!
 # Isolated primes in finite type algebras have finite residue fields
@@ -14,6 +16,8 @@ Source: Stacks Project, Algebra, Lemma 00PJ (algebra-lemma-isolated-point,
 line 30106), implication (1) => (6)
 (blueprint: lem-weil-pbc-isolated-prime-finite-type-algebra-residue-finite).
 -/
+
+@[expose] public section
 
 universe u v
 

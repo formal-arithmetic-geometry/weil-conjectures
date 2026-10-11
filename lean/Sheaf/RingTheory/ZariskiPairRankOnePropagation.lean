@@ -1,6 +1,8 @@
-import Mathlib.RingTheory.Spectrum.Prime.FreeLocus
-import Mathlib.RingTheory.Ideal.Quotient.Operations
-import Mathlib.RingTheory.RingHom.Flat
+module
+
+public import Mathlib.RingTheory.Spectrum.Prime.FreeLocus
+public import Mathlib.RingTheory.Ideal.Quotient.Operations
+public import Mathlib.RingTheory.RingHom.Flat
 
 /-!
 # Rank-one propagation for a Zariski pair
@@ -8,6 +10,8 @@ import Mathlib.RingTheory.RingHom.Flat
 Source: literature/stacks-project/more-algebra.tex, Lemma Tag 0ELZ
 (blueprint: lem-weil-pbc-zariski-pair-rank-one-propagation)
 -/
+
+@[expose] public section
 
 universe u v
 

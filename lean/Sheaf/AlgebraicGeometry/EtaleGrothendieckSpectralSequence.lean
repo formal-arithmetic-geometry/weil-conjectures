@@ -3,12 +3,14 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import Mathlib.Algebra.Homology.SpectralSequence.Basic
-import Mathlib.CategoryTheory.Abelian.FunctorCategory
-import Mathlib.CategoryTheory.Abelian.RightDerived
-import WeilConjectures.CategoryTheory.GrothendieckAbelian.ConcreteCoefficients
-import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStarCoherence
-import Sheaf.CategoryTheory.Filtration
+module
+
+public import Mathlib.Algebra.Homology.SpectralSequence.Basic
+public import Mathlib.CategoryTheory.Abelian.FunctorCategory
+public import Mathlib.CategoryTheory.Abelian.RightDerived
+public import WeilConjectures.CategoryTheory.GrothendieckAbelian.ConcreteCoefficients
+public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStarCoherence
+public import Sheaf.CategoryTheory.Filtration
 
 /-!
 # Relative Leray spectral sequences on small etale sites
@@ -22,6 +24,8 @@ all page identifications, filtration subobjects and graded identifications are n
 Module-valued sheaves encode modules over the constant sheaf of rings: constant scalars
 extend uniquely to locally constant scalars by the sheaf condition.
 -/
+
+@[expose] public section
 
 universe u
 

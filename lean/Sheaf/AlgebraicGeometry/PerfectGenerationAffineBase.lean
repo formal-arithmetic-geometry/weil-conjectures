@@ -3,15 +3,19 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under the Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import Sheaf.AlgebraicGeometry.PerfectComplex
-import Sheaf.AlgebraicGeometry.DerivedCategory
-import Sheaf.CategoryTheory.WeakTriangulatedGenerator
+module
+
+public import Sheaf.AlgebraicGeometry.PerfectComplex
+public import Sheaf.AlgebraicGeometry.DerivedCategory
+public import Sheaf.CategoryTheory.WeakTriangulatedGenerator
 
 /-! # Perfect generation over an affine base
 
 Source: literature/stacks-project/perfect.tex, Tags 06Z0 and 09IS
 (blueprint: lem-pc-perfect-generation-affine-base).
 -/
+
+@[expose] public section
 
 universe u w
 

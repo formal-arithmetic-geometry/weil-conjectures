@@ -3,12 +3,14 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import Mathlib.RingTheory.AdicCompletion.Basic
-import Mathlib.RingTheory.LocalRing.ResidueField.Basic
-import Mathlib.RingTheory.MvPowerSeries.Basic
-import Mathlib.RingTheory.RingHom.Flat
-import Sheaf.RingTheory.CohenRing
-import Sheaf.RingTheory.IsRegularSystemOfParameters
+module
+
+public import Mathlib.RingTheory.AdicCompletion.Basic
+public import Mathlib.RingTheory.LocalRing.ResidueField.Basic
+public import Mathlib.RingTheory.MvPowerSeries.Basic
+public import Mathlib.RingTheory.RingHom.Flat
+public import Sheaf.RingTheory.CohenRing
+public import Sheaf.RingTheory.IsRegularSystemOfParameters
 
 /-!
 # Compatible Cohen presentations of complete local homomorphisms
@@ -16,6 +18,8 @@ import Sheaf.RingTheory.IsRegularSystemOfParameters
 Source: Stacks Project, Lemma 07NN and the proof of Proposition 07NQ
 (blueprint: lem-weil-pbc-complete-local-map-cohen-presentation).
 -/
+
+@[expose] public section
 
 universe u v
 

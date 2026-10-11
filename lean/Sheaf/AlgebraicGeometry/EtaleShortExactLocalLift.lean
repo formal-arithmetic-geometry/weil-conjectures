@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Sheaf.AlgebraicGeometry.EtaleSheaves
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
-import Mathlib.Algebra.Homology.ShortComplex.ShortExact
+module
+
+public import Sheaf.AlgebraicGeometry.EtaleSheaves
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
+public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 
 /-!
 # Local lifts in a short exact sequence of etale module sheaves
@@ -14,6 +16,8 @@ Source: the Weil conjectures blueprint, `sec-proper-base-change/sk-thm-properbas
 `lemma-constructible-flc-serre`, extension paragraph, the assertion that a surjection of
 sheaves is locally surjective on sections (blueprint: lem-constructible-shortexact-local-lift).
 -/
+
+@[expose] public section
 
 universe u
 

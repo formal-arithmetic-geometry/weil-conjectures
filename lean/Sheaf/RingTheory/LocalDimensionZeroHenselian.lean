@@ -1,7 +1,9 @@
-import WeilConjectures.Mathlib.RingTheory.Henselian
-import Mathlib.RingTheory.Finiteness.Defs
-import Mathlib.RingTheory.Idempotents
-import Mathlib.RingTheory.KrullDimension.Basic
+module
+
+public import WeilConjectures.Mathlib.RingTheory.Henselian
+public import Mathlib.RingTheory.Finiteness.Defs
+public import Mathlib.RingTheory.Idempotents
+public import Mathlib.RingTheory.KrullDimension.Basic
 
 /-!
 # Local rings of dimension zero are henselian
@@ -14,6 +16,8 @@ A local ring whose Krull dimension is zero is henselian: Mathlib's `HenselianLoc
 node's idempotent-lifting condition written inline, as in the landed sibling
 `isStrictlyHenselianLocalRing_of_ringKrullDim_eq_zero`.
 -/
+
+@[expose] public section
 
 universe u v
 

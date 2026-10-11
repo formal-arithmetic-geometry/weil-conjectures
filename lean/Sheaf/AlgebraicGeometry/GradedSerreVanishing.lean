@@ -3,20 +3,24 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import Mathlib.AlgebraicGeometry.Morphisms.Proper
-import Mathlib.Algebra.DirectSum.Module
-import Mathlib.RingTheory.FiniteType
-import Mathlib.RingTheory.Noetherian.Defs
-import WeilConjectures.AlgebraicGeometry.Modules.Invertible
-import Sheaf.AlgebraicGeometry.Coherent
-import Sheaf.AlgebraicGeometry.Ample
-import Sheaf.Paper.PQFCohomology
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.Proper
+public import Mathlib.Algebra.DirectSum.Module
+public import Mathlib.RingTheory.FiniteType
+public import Mathlib.RingTheory.Noetherian.Defs
+public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
+public import Sheaf.AlgebraicGeometry.Coherent
+public import Sheaf.AlgebraicGeometry.Ample
+public import Sheaf.Paper.PQFCohomology
 
 /-! # Serre vanishing for finite graded modules
 
 Source: Stacks Project, Cohomology of Schemes, Lemma 0897 (2)
 (blueprint: lem-weil-pbc-formal-systems-graded-vanishing).
 -/
+
+@[expose] public section
 
 set_option autoImplicit false
 

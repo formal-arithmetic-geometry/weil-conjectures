@@ -1,0 +1,45 @@
+name: Lean Action CI
+
+on:
+  # Only the default branch: a push to a branch with an open PR is already
+  # covered by the `pull_request` trigger, and building it twice ties up the
+  # shared self-hosted runner pool for no benefit.
+  push:
+    branches:
+      - master
+  # Only pull requests into `master`. Agent pull requests into the integration branch
+  # `slopmaster2` are built in full with `--wfail` by the maintainer's merge pipeline before
+  # they land, so building every push to them here only queued the shared runner for hours
+  # in front of `master` pull requests.
+  pull_request:
+    branches:
+      - master
+  workflow_dispatch:
+
+# This workflow only checks out and builds the project; it deploys nothing.
+permissions:
+  contents: read # Read access to repository contents
+
+# One in-flight build per PR (and one per branch for pushes): a superseded
+# build is cancelled instead of queueing ahead of everything else on the
+# shared runners. Keyed on the PR number when there is one; `github.ref`
+# covers `push` and `workflow_dispatch`.
+concurrency:
+  group: ${{ github.repository }}-lean-ci-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: self-hosted
+
+    steps:
+      - uses: actions/checkout@v5
+      - uses: leanprover/lean-action@v1
+
+      # Same check as `.orchestra/validation.sh`: every tracked `.lean` file
+      # under `WeilConjectures/` must be imported by `WeilConjectures.lean`,
+      # otherwise it is silently never built. Runs after `lean-action` so that
+      # the toolchain and mathlib (which provides `mk_all`) are already in
+      # place; `--check` only reports, it does not rewrite the file.
+      - name: Check all files are imported
+        run: lake exe mk_all --lib WeilConjectures --git --check

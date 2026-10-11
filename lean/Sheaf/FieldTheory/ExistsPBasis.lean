@@ -3,11 +3,13 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group G1
 -/
-import Mathlib.Algebra.Algebra.ZMod
-import Mathlib.Algebra.Field.ZMod
-import Mathlib.FieldTheory.IntermediateField.Adjoin.Defs
-import Mathlib.LinearAlgebra.Basis.Defs
-import Mathlib.Algebra.BigOperators.Finsupp.Basic
+module
+
+public import Mathlib.Algebra.Algebra.ZMod
+public import Mathlib.Algebra.Field.ZMod
+public import Mathlib.FieldTheory.IntermediateField.Adjoin.Defs
+public import Mathlib.LinearAlgebra.Basis.Defs
+public import Mathlib.Algebra.BigOperators.Finsupp.Basic
 
 /-!
 # Existence of a p-basis
@@ -21,6 +23,8 @@ field `ZMod p`: `k^p = (ZMod p) k^p` is `IntermediateField.adjoin (ZMod p) (Set.
 The prime-field algebra structure is Mathlib's `ZMod.algebra`, registered locally as in
 `Sheaf.FieldTheory.IntersectionSubfieldsDifferentials`.
 -/
+
+@[expose] public section
 
 universe u
 

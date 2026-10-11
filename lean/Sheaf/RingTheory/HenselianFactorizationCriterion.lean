@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group G1
 -/
-import WeilConjectures.Mathlib.RingTheory.Henselian
-import Mathlib.RingTheory.Coprime.Basic
-import Mathlib.RingTheory.Ideal.Quotient.Defs
+module
+
+public import WeilConjectures.Mathlib.RingTheory.Henselian
+public import Mathlib.RingTheory.Coprime.Basic
+public import Mathlib.RingTheory.Ideal.Quotient.Defs
 
 /-!
 # Factorization criterion for henselian pairs
@@ -17,6 +19,8 @@ condition (3) iff condition (1), with Definition Tag 09XE
 The henselian pair `(A, I)` is the recorded notion of `def-weil-pbc-henselian-terminology`,
 Mathlib's `HenselianRing A I`.
 -/
+
+@[expose] public section
 
 universe u
 

@@ -1,15 +1,19 @@
-import Mathlib.RingTheory.Noetherian.Defs
-import Mathlib.RingTheory.Spectrum.Maximal.Defs
-import Mathlib.RingTheory.DedekindDomain.Basic
-import Mathlib.RingTheory.IntegralClosure.Algebra.Basic
-import Mathlib.RingTheory.Jacobson.Ideal
-import Mathlib.RingTheory.KrullDimension.Basic
+module
+
+public import Mathlib.RingTheory.Noetherian.Defs
+public import Mathlib.RingTheory.Spectrum.Maximal.Defs
+public import Mathlib.RingTheory.DedekindDomain.Basic
+public import Mathlib.RingTheory.IntegralClosure.Algebra.Basic
+public import Mathlib.RingTheory.Jacobson.Ideal
+public import Mathlib.RingTheory.KrullDimension.Basic
 
 /-! # Conductor control for a one-dimensional semilocal domain
 
 Source: literature/stacks-project/varieties.tex, Varieties Lemma 09N2
 (blueprint: lem-sc-semilocal-dim-one-conductor)
 -/
+
+@[expose] public section
 
 universe u v
 

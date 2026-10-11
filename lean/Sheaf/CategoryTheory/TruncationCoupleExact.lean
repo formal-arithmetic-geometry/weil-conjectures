@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group J1
 -/
-import Sheaf.CategoryTheory.TruncationCouple
-import Mathlib.Algebra.Homology.ShortComplex.Exact
+module
+
+public import Sheaf.CategoryTheory.TruncationCouple
+public import Mathlib.Algebra.Homology.ShortComplex.Exact
 
 /-!
 # Exactness of the truncation couple
@@ -13,6 +15,8 @@ Source: Weil conjectures blueprint, sec-proper-base-change, sk-thm-properbasecha
 node lem-sp-truncation-couple-exact, order 1210; Stacks Project, Tags 08J5, 05SE,
 0148 and 011Q (blueprint: lem-sp-truncation-couple-exact).
 -/
+
+@[expose] public section
 
 universe u₁ u₂ v₁ v₂
 

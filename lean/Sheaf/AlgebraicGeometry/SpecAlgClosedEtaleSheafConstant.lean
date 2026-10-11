@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import Mathlib.AlgebraicGeometry.Sites.EtalePoint
-import Mathlib.CategoryTheory.Sites.ConstantSheaf
-import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify
+module
+
+public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
+public import Mathlib.CategoryTheory.Sites.ConstantSheaf
+public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify
 
 /-!
 # Etale sheaves on an algebraically closed spectrum are constant
@@ -14,6 +16,8 @@ Source: literature/stacks-project/etale-cohomology.tex, Remark 59.23.2 (Tag 03P5
 together with Lemma 59.39.3 (Tag 0A3H)
 (blueprint: lem-weil-pbc-spec-algebraically-closed-etale-sheaf-constant).
 -/
+
+@[expose] public section
 
 universe u
 

@@ -3,11 +3,13 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import Sheaf.Topology.OpenModuleCohomology
-import WeilConjectures.AlgebraicGeometry.Modules.ClearDenominators
-import WeilConjectures.AlgebraicGeometry.Modules.PullbackFreeGenerator
-import Mathlib.Algebra.DirectSum.Basic
-import Mathlib.GroupTheory.QuotientGroup.Basic
+module
+
+public import Sheaf.Topology.OpenModuleCohomology
+public import WeilConjectures.AlgebraicGeometry.Modules.ClearDenominators
+public import WeilConjectures.AlgebraicGeometry.Modules.PullbackFreeGenerator
+public import Mathlib.Algebra.DirectSum.Basic
+public import Mathlib.GroupTheory.QuotientGroup.Basic
 
 /-! # Degree-zero fractions of twisted module cohomology
 
@@ -19,6 +21,8 @@ presentation with generators `[n, ξ]` and relations `[n, ξ] = [n+b, s^b ξ]`.
 Only nonnegative numerator degrees enter degree-zero fractions, even though the full
 cohomology module is graded by integers. The quotient retains all torsion relations.
 -/
+
+@[expose] public section
 
 universe uCF
 

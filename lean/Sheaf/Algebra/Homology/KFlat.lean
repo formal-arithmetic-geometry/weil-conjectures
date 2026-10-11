@@ -3,12 +3,14 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF lead L
 -/
-import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Monoidal
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.Colimits
-import Mathlib.Algebra.Category.Grp.FilteredColimits
-import Mathlib.Algebra.Homology.BifunctorShift
-import Mathlib.Algebra.Homology.QuasiIso
+module
+
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Monoidal
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Colimits
+public import Mathlib.Algebra.Category.Grp.FilteredColimits
+public import Mathlib.Algebra.Homology.BifunctorShift
+public import Mathlib.Algebra.Homology.QuasiIso
 
 /-!
 # K-flat complexes of modules on a ringed site
@@ -37,6 +39,8 @@ of the tensor product of presheaves of modules); it is not an instance and is us
   `SheafOfModules.preservesZeroMorphisms_curriedTensor_obj`: the tensor product of sheaves of
   modules preserves zero morphisms in each variable (needed to form the total tensor complex).
 -/
+
+@[expose] public section
 
 universe u v
 

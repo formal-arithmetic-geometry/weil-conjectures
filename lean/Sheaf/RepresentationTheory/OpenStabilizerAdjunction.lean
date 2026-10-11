@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Mathlib.CategoryTheory.Adjunction.Basic
-import Sheaf.RepresentationTheory.DiscreteContinuousRep
+module
+
+public import Mathlib.CategoryTheory.Adjunction.Basic
+public import Sheaf.RepresentationTheory.DiscreteContinuousRep
 
 /-!
 # The open-stabilizer right adjoint
@@ -12,6 +14,8 @@ import Sheaf.RepresentationTheory.DiscreteContinuousRep
 Source: Stacks Project, Injectives, Tag 04JF, proof of Lemma 19.3.1
 (blueprint: lem-exc-rg-open-stabilizer-adjoint).
 -/
+
+@[expose] public section
 
 universe u v w
 

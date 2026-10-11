@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group V1
 -/
-import Sheaf.AlgebraicGeometry.SymmetricProductProperties
+module
+
+public import Sheaf.AlgebraicGeometry.SymmetricProductProperties
 
 /-!
 # Surjectivity of the symmetric-product morphism
@@ -17,6 +19,8 @@ represented by an object `X : Over S` together with its limiting cone `hprod`; t
 coordinate morphism is the morphism classified by the line bundle and its generating
 coordinate sections in `symmetricProduct_properties`.
 -/
+
+@[expose] public section
 
 universe v
 

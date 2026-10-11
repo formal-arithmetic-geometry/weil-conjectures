@@ -1,6 +1,8 @@
-import Mathlib.RingTheory.Derivation.Basic
-import Mathlib.RingTheory.Localization.Away.Basic
-import Mathlib.RingTheory.FiniteType
+module
+
+public import Mathlib.RingTheory.Derivation.Basic
+public import Mathlib.RingTheory.Localization.Away.Basic
+public import Mathlib.RingTheory.FiniteType
 
 /-!
 # Derivations after finite type localization extensions
@@ -8,6 +10,8 @@ import Mathlib.RingTheory.FiniteType
 Source: literature/stacks-project/more-algebra.tex, Lemma Tag 07PE, final statement
 (blueprint: lem-weil-pbc-derivation-extends-finite-type-extension).
 -/
+
+@[expose] public section
 
 universe u v
 

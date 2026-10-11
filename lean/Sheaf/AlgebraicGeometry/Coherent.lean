@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import Sheaf.Paper.DerivedHomMayerVietoris
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
+module
+
+public import Sheaf.Paper.DerivedHomMayerVietoris
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 
 /-! # Coherent modules on a ringed space
 
@@ -23,6 +25,8 @@ with the finite-presentation siblings (for a scheme `X`, `X.Modules` and
   finitely many sections, i.e. locally a quotient of `O_U^{⊕ n}`);
 - coherent is `AlgebraicGeometry.RingedSpace.IsCoherent` below (Stacks 01BV).
 -/
+
+@[expose] public section
 
 universe u
 

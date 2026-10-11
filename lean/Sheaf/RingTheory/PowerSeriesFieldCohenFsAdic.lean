@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import Sheaf.RingTheory.PowerSeriesCohenFormallySmoothAdic
-import Mathlib.Algebra.Algebra.ZMod
+module
+
+public import Sheaf.RingTheory.PowerSeriesCohenFormallySmoothAdic
+public import Mathlib.Algebra.Algebra.ZMod
 
 /-!
 # Adic formal smoothness of power series over fields and Cohen rings
@@ -24,6 +26,8 @@ Source: Stacks Project, More on Algebra, Lemma Tag 07NL
 Clauses (1) and (3) are word for word the two landed declarations of
 `Sheaf.RingTheory.PowerSeriesCohenFormallySmoothAdic`, imported here and not restated.
 -/
+
+@[expose] public section
 
 universe u
 

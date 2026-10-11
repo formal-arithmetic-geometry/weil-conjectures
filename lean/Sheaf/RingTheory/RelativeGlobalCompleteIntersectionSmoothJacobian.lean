@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import Sheaf.Paper.RelativeGlobalCompleteIntersectionPresentation
-import Sheaf.RingTheory.SingularIdeal
-import Mathlib.Algebra.MvPolynomial.PDeriv
-import Mathlib.LinearAlgebra.Matrix.Determinant.Basic
+module
+
+public import Sheaf.Paper.RelativeGlobalCompleteIntersectionPresentation
+public import Sheaf.RingTheory.SingularIdeal
+public import Mathlib.Algebra.MvPolynomial.PDeriv
+public import Mathlib.LinearAlgebra.Matrix.Determinant.Basic
 
 /-!
 # The Jacobian criterion for a relative global complete intersection
@@ -14,6 +16,8 @@ import Mathlib.LinearAlgebra.Matrix.Determinant.Basic
 Source: Stacks Project, Algebra, Lemma 00TE
 (blueprint: lem-weil-pbc-relative-global-complete-intersection-smooth-jacobian).
 -/
+
+@[expose] public section
 
 universe v
 

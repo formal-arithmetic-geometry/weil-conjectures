@@ -3,13 +3,15 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group V1
 -/
-import Sheaf.Topology.RingedSpaceModuleCohomology
-import Sheaf.AlgebraicGeometry.CoherentFormalModule
-import Mathlib.AlgebraicGeometry.Morphisms.Proper
-import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
-import Mathlib.RingTheory.AdicCompletion.Basic
-import Mathlib.AlgebraicGeometry.GammaSpecAdjunction
-import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
+module
+
+public import Sheaf.Topology.RingedSpaceModuleCohomology
+public import Sheaf.AlgebraicGeometry.CoherentFormalModule
+public import Mathlib.AlgebraicGeometry.Morphisms.Proper
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
+public import Mathlib.RingTheory.AdicCompletion.Basic
+public import Mathlib.AlgebraicGeometry.GammaSpecAdjunction
+public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 
 /-! # The theorem on formal functions
 
@@ -21,6 +23,8 @@ limit projection, so the asserted isomorphism is the canonical one, not an arbit
 isomorphism of the two modules. The degree-zero assertion uses actual global sections.
 H^p and Γ are A-modules by restriction of scalars along (ΓSpecIso A).inv ≫ f.appTop.
 -/
+
+@[expose] public section
 
 universe v
 

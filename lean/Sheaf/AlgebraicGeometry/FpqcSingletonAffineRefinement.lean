@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import Mathlib.AlgebraicGeometry.Sites.Fpqc
-import Mathlib.AlgebraicGeometry.Limits
+module
+
+public import Mathlib.AlgebraicGeometry.Sites.Fpqc
+public import Mathlib.AlgebraicGeometry.Limits
 
 /-!
 # Affine refinement of a singleton fpqc covering
@@ -12,6 +14,8 @@ import Mathlib.AlgebraicGeometry.Limits
 Source: Stacks Project, Topologies, Definition 022B and Lemma 022E, with the finite
 coproduct construction (blueprint: lem-galois-fpqc-singleton-affine-refinement).
 -/
+
+@[expose] public section
 
 universe u
 

@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Mathlib.AlgebraicGeometry.Fiber
-import Mathlib.LinearAlgebra.FiniteDimensional.Defs
+module
+
+public import Mathlib.AlgebraicGeometry.Fiber
+public import Mathlib.LinearAlgebra.FiniteDimensional.Defs
 
 /-!
 # Residue fields at isolated points of fibres
@@ -12,6 +14,8 @@ import Mathlib.LinearAlgebra.FiniteDimensional.Defs
 Source: Stacks Project, Morphisms, Lemmas 01TH and 01TG
 (blueprint: lem-weil-pbc-isolated-fibre-point-residue-finite).
 -/
+
+@[expose] public section
 
 universe u
 

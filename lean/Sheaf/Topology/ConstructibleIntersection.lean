@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group G1
 -/
-import Mathlib.Topology.Constructible
+module
+
+public import Mathlib.Topology.Constructible
 
 /-!
 # Constructible intersections in a constructible subspace
@@ -12,6 +14,8 @@ Source: literature/stacks-project/topology.tex, Topology, Lemma Tag 09YI
 (Lemma 5.15.11, line 2750; proof combines Tags 09YF and 09YH)
 (blueprint: lem-weil-pbc-constructible-intersection-in-constructible)
 -/
+
+@[expose] public section
 
 universe u
 

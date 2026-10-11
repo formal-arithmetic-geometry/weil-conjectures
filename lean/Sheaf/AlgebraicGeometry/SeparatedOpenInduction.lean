@@ -1,6 +1,8 @@
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
-import Mathlib.AlgebraicGeometry.Morphisms.Separated
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
+public import Mathlib.AlgebraicGeometry.Morphisms.Separated
 
 /-!
 # Induction principle for separated quasi-compact opens
@@ -9,6 +11,8 @@ Source: Stacks Project, Cohomology of Schemes, Lemma 08DR (coherent-lemma-induct
 proof, first induction for separated quasi-compact opens
 (blueprint: lem-sc-invert-s-cohomology-separated-induction).
 -/
+
+@[expose] public section
 
 universe u
 

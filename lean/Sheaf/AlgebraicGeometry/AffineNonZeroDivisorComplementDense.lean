@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group G1
 -/
-import Mathlib.AlgebraicGeometry.Restrict
+module
+
+public import Mathlib.AlgebraicGeometry.Restrict
 
 /-!
 # Density of a principal nonzerodivisor complement
@@ -11,6 +13,8 @@ import Mathlib.AlgebraicGeometry.Restrict
 Source: Stacks Project, Divisors, Lemma 31.14.4 (Tag 07ZU), affine-local calculation
 (blueprint: lem-pc-affine-nonzerodivisor-complement-dense).
 -/
+
+@[expose] public section
 
 universe u
 

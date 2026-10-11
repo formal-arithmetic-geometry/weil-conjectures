@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Sheaf.AlgebraicGeometry.EtaleLowerShriekBaseChangeMap
+module
+
+public import Sheaf.AlgebraicGeometry.EtaleLowerShriekBaseChangeMap
 
 /-!
 # Etale extension by zero commutes with base change for module sheaves
@@ -11,6 +13,8 @@ import Sheaf.AlgebraicGeometry.EtaleLowerShriekBaseChangeMap
 Source: Stacks Project, Etale Cohomology, Lemma 59.70.5, Tag 03S6
 (blueprint: lem-weil-pbc-etale-shriek-base-change-modules).
 -/
+
+@[expose] public section
 
 universe u
 

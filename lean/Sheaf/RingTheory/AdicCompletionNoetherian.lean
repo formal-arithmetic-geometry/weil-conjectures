@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group G1
 -/
-import Mathlib.RingTheory.AdicCompletion.Algebra
-import Mathlib.RingTheory.Noetherian.Defs
+module
+
+public import Mathlib.RingTheory.AdicCompletion.Algebra
+public import Mathlib.RingTheory.Noetherian.Defs
 
 /-!
 # Noetherianity of adic completion
@@ -12,6 +14,8 @@ import Mathlib.RingTheory.Noetherian.Defs
 Source: Stacks Project, Commutative Algebra, Lemma 10.97.6 (Tag 0316), second proof
 (blueprint: lem-weil-pbc-adic-completion-noetherian).
 -/
+
+@[expose] public section
 
 universe u
 

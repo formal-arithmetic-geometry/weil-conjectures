@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import WeilConjectures.AlgebraicGeometry.Modules.HomTensor
+module
+
+public import WeilConjectures.AlgebraicGeometry.Modules.HomTensor
 
 /-!
 # Evaluation for finite locally free module sheaves
@@ -11,6 +13,8 @@ import WeilConjectures.AlgebraicGeometry.Modules.HomTensor
 Source: blueprint `lem-sc-ext-locally-free.md`, Proof, first sentence
 (blueprint: lem-sc-ext-evaluation).
 -/
+
+@[expose] public section
 
 universe u
 

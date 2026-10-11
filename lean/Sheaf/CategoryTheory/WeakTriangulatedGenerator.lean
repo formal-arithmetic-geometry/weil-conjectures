@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import Mathlib.CategoryTheory.Triangulated.Triangulated
-import Mathlib.CategoryTheory.Limits.Shapes.Products
+module
+
+public import Mathlib.CategoryTheory.Triangulated.Triangulated
+public import Mathlib.CategoryTheory.Limits.Shapes.Products
 
 /-!
 # Weak generators of a triangulated category
@@ -17,6 +19,8 @@ set-indexed generating-family convention (blueprint: def-pc-generators).
 - `CategoryTheory.IsWeakTriangulatedGenerator`: a generator detected by maps into shifts.
 - `CategoryTheory.IsTriangulatedGeneratingFamily`: a family whose coproduct is a generator.
 -/
+
+@[expose] public section
 
 universe w v u
 

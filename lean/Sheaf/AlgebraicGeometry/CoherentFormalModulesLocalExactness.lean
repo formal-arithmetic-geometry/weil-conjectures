@@ -3,14 +3,18 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group N1
 -/
-import Sheaf.AlgebraicGeometry.CoherentFormalModulesAbelian
-import Mathlib.Algebra.Homology.ShortComplex.ShortExact
+module
+
+public import Sheaf.AlgebraicGeometry.CoherentFormalModulesAbelian
+public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 
 /-! # Restriction and local exactness of coherent formal modules
 
 Source: Stacks Project, Cohomology of Schemes, Lemma 087X, parts (2) and (3)
 (blueprint: lem-weil-pbc-coherent-formal-modules-local-exactness).
 -/
+
+@[expose] public section
 
 universe u v
 

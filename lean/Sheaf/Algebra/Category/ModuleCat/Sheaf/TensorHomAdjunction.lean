@@ -3,14 +3,16 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Mathlib.Algebra.Category.ModuleCat.Presheaf.Monoidal
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
-import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.HomModule
-import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
-import Mathlib.Topology.Sheaves.Sheaf
-import Mathlib.CategoryTheory.Sites.PreservesSheafification
-import Mathlib.Algebra.Category.Grp.FilteredColimits
+module
+
+public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Monoidal
+public import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
+public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
+public import Sheaf.Algebra.Category.ModuleCat.Sheaf.HomModule
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
+public import Mathlib.Topology.Sheaves.Sheaf
+public import Mathlib.CategoryTheory.Sites.PreservesSheafification
+public import Mathlib.Algebra.Category.Grp.FilteredColimits
 
 /-!
 # Tensor-Hom adjunction on a ringed space
@@ -18,6 +20,8 @@ import Mathlib.Algebra.Category.Grp.FilteredColimits
 Source: Stacks Project, Modules, Lemma 01CN, the morphism correspondence
 (blueprint: lem-weil-pbc-module-tensor-hom-adjunction).
 -/
+
+@[expose] public section
 
 universe u
 

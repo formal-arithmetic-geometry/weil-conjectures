@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import Mathlib.RingTheory.Kaehler.Basic
-import Mathlib.Algebra.Algebra.ZMod
-import Mathlib.Algebra.Field.ZMod
-import Mathlib.FieldTheory.IntermediateField.Adjoin.Defs
+module
+
+public import Mathlib.RingTheory.Kaehler.Basic
+public import Mathlib.Algebra.Algebra.ZMod
+public import Mathlib.Algebra.Field.ZMod
+public import Mathlib.FieldTheory.IntermediateField.Adjoin.Defs
 
 /-! # Intersection of subfields and differentials
 
@@ -14,6 +16,8 @@ Source: Stacks Project, More on Algebra, Tag 07P4 (`lemma-intersection-subfields
 `literature/stacks-project/more-algebra.tex`.
 (blueprint: lem-weil-pbc-intersection-subfields-differentials)
 -/
+
+@[expose] public section
 
 set_option autoImplicit false
 set_option relaxedAutoImplicit false

@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group S1
 -/
-import Mathlib.Algebra.Homology.QuasiIso
-import Mathlib.Algebra.Homology.ShortComplex.Abelian
+module
+
+public import Mathlib.Algebra.Homology.QuasiIso
+public import Mathlib.Algebra.Homology.ShortComplex.Abelian
 
 /-!
 # Right resolutions with terms in a prescribed subset
@@ -12,6 +14,8 @@ import Mathlib.Algebra.Homology.ShortComplex.Abelian
 Source: Stacks Project, Derived Categories, Lemma Tag 05T6, part (1)
 (blueprint: lem-weil-pbc-subcategory-right-resolution-05T6).
 -/
+
+@[expose] public section
 
 universe u v
 

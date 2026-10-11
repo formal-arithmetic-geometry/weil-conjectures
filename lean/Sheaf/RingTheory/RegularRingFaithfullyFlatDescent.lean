@@ -1,8 +1,10 @@
 /-
 Copyright (c) 2026 The SHEAF contributors.
 -/
-import Mathlib.RingTheory.RegularLocalRing.Defs
-import Mathlib.RingTheory.Flat.FaithfullyFlat.Basic
+module
+
+public import Mathlib.RingTheory.RegularLocalRing.Defs
+public import Mathlib.RingTheory.Flat.FaithfullyFlat.Basic
 
 /-!
 # Regularity descends along faithfully flat ring maps
@@ -10,6 +12,8 @@ import Mathlib.RingTheory.Flat.FaithfullyFlat.Basic
 Source: literature/stacks-project/algebra.tex, Algebra, Lemma Tag 07NG
 (blueprint: lem-weil-pbc-regular-ring-faithfully-flat-descent).
 -/
+
+@[expose] public section
 
 universe u v
 

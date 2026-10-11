@@ -3,12 +3,14 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import Sheaf.RingTheory.CohenRing
-import Mathlib.RingTheory.MvPowerSeries.Basic
-import Mathlib.RingTheory.Noetherian.Defs
-import Mathlib.RingTheory.RegularLocalRing.Defs
-import Mathlib.RingTheory.AdicCompletion.Basic
-import Mathlib.RingTheory.KrullDimension.Basic
+module
+
+public import Sheaf.RingTheory.CohenRing
+public import Mathlib.RingTheory.MvPowerSeries.Basic
+public import Mathlib.RingTheory.Noetherian.Defs
+public import Mathlib.RingTheory.RegularLocalRing.Defs
+public import Mathlib.RingTheory.AdicCompletion.Basic
+public import Mathlib.RingTheory.KrullDimension.Basic
 
 /-!
 # Power series over a field or Cohen ring
@@ -16,6 +18,8 @@ import Mathlib.RingTheory.KrullDimension.Basic
 Source: Stacks Project, Algebra, Remark Tag 032C and Definition Tag 0327
 (blueprint: lem-weil-pbc-power-series-field-cohen-regular-complete).
 -/
+
+@[expose] public section
 
 universe u
 

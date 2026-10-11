@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Sheaf.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
-import Sheaf.AlgebraicGeometry.EtaleSupport
+module
+
+public import Sheaf.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
+public import Sheaf.AlgebraicGeometry.EtaleSupport
 
 /-!
 # Support of a constructible etale module sheaf
@@ -12,6 +14,8 @@ import Sheaf.AlgebraicGeometry.EtaleSupport
 Source: Stacks Project, Etale Cohomology, Tags 09YS(3), 04FS and 04FN
 (blueprint: lem-weil-pbc-constructible-module-support-constructible).
 -/
+
+@[expose] public section
 
 universe u
 

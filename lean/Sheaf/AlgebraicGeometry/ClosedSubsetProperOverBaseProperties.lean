@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import Sheaf.AlgebraicGeometry.ClosedSubsetProperOverBase
-import Mathlib.AlgebraicGeometry.Morphisms.Proper
+module
+
+public import Sheaf.AlgebraicGeometry.ClosedSubsetProperOverBase
+public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 
 /-!
 # Closed subsets proper over a base: structures, subsets, and images
@@ -12,6 +14,8 @@ import Mathlib.AlgebraicGeometry.Morphisms.Proper
 Source: Stacks Project, Cohomology of Schemes, Lemmas 0CYL, 0CYN, and 0CYQ
 (blueprint: lem-weil-pbc-closed-subset-proper-over-base-properties).
 -/
+
+@[expose] public section
 
 universe u
 

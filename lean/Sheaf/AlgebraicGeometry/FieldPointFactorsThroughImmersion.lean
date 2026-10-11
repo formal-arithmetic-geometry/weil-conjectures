@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Mathlib.AlgebraicGeometry.ResidueField
-import Mathlib.AlgebraicGeometry.Morphisms.Immersion
+module
+
+public import Mathlib.AlgebraicGeometry.ResidueField
+public import Mathlib.AlgebraicGeometry.Morphisms.Immersion
 
 /-!
 # Field-valued points factor through immersions
@@ -13,6 +15,8 @@ Source: literature/stacks-project/schemes.tex, Definitions 01IO and 01HK,
 Lemmas 01HI, 0356, and 01L7, and the discussion before Lemma 01J9
 (blueprint: lem-weil-pbc-field-point-factors-through-immersion).
 -/
+
+@[expose] public section
 
 universe u
 

@@ -3,14 +3,16 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group Q1
 -/
-import Sheaf.Paper.LisseModuleSheaves
-import Sheaf.Paper.LisseAdicFiberFunctors
-import Sheaf.RepresentationTheory.LAdic
-import Sheaf.AlgebraicGeometry.FundamentalGroup.FiberEquivalence
-import Mathlib.CategoryTheory.ObjectProperty.Kernels
-import Mathlib.CategoryTheory.Abelian.Basic
-import Mathlib.RepresentationTheory.Rep.Basic
-import Sheaf.Paper.LisseTensorScalarExtension
+module
+
+public import Sheaf.Paper.LisseModuleSheaves
+public import Sheaf.Paper.LisseAdicFiberFunctors
+public import Sheaf.RepresentationTheory.LAdic
+public import Sheaf.AlgebraicGeometry.FundamentalGroup.FiberEquivalence
+public import Mathlib.CategoryTheory.ObjectProperty.Kernels
+public import Mathlib.CategoryTheory.Abelian.Basic
+public import Mathlib.RepresentationTheory.Rep.Basic
+public import Sheaf.Paper.LisseTensorScalarExtension
 
 /-!
 # Galois representations attached to lisse sheaves
@@ -19,6 +21,8 @@ Source: Stacks Project, Tag 0DV5; the blueprint, `sec-poincare-duality`,
 `sk-lem-finite` (blueprint: cor-galois-lisse-representations);
 Deligne, Weil II (1.1.1), (1.1.6).
 -/
+
+@[expose] public section
 
 universe u
 

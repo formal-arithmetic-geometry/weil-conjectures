@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Sheaf.RingTheory.NagataRing
-import Mathlib.RingTheory.AdicCompletion.Basic
-import Mathlib.RingTheory.LocalRing.MaximalIdeal.Basic
+module
+
+public import Sheaf.RingTheory.NagataRing
+public import Mathlib.RingTheory.AdicCompletion.Basic
+public import Mathlib.RingTheory.LocalRing.MaximalIdeal.Basic
 
 /-!
 # Complete Noetherian local rings are Nagata
@@ -13,6 +15,8 @@ import Mathlib.RingTheory.LocalRing.MaximalIdeal.Basic
 Source: Stacks Project, Algebra, Lemma 10.162.8 (Tag 032W)
 (blueprint: lem-weil-pbc-complete-local-nagata).
 -/
+
+@[expose] public section
 
 universe u
 

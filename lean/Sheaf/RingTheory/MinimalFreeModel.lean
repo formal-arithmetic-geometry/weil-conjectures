@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Sheaf.RingTheory.RingPseudoCoherent
-import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
-import Mathlib.RingTheory.LocalRing.ResidueField.Defs
-import Mathlib.LinearAlgebra.Dimension.Finrank
+module
+
+public import Sheaf.RingTheory.RingPseudoCoherent
+public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
+public import Mathlib.RingTheory.LocalRing.ResidueField.Defs
+public import Mathlib.LinearAlgebra.Dimension.Finrank
 
 /-!
 # Minimal finite free models over local rings
@@ -14,6 +16,8 @@ import Mathlib.LinearAlgebra.Dimension.Finrank
 Source: Stacks Project, More on Algebra, Tag 0BCC, lemma-lift-pseudo-coherent-from-residue-field
 (blueprint: lem-sc-perfect-local-pseudocoherent-free-model).
 -/
+
+@[expose] public section
 
 universe u v w
 

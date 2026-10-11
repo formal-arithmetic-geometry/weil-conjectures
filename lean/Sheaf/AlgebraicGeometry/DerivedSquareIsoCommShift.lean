@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Defs
-import Mathlib.CategoryTheory.Shift.CommShift
-import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.MorphismDefs
+module
+
+public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Defs
+public import Mathlib.CategoryTheory.Shift.CommShift
+public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.MorphismDefs
 
 /-!
 # Shift compatibility of the derived square isomorphism
@@ -13,6 +15,8 @@ import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.MorphismDefs
 Source: literature/stacks-project/derived.tex, Definition 014V and Lemma 05SU
 (blueprint: lem-weil-pbc-derived-square-iso-commshift).
 -/
+
+@[expose] public section
 
 universe u
 

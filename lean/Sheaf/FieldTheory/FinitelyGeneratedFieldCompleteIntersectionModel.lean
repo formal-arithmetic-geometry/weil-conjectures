@@ -3,12 +3,14 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import Mathlib.RingTheory.AlgebraicIndependent.TranscendenceBasis
-import Mathlib.FieldTheory.IntermediateField.Adjoin.Defs
-import Mathlib.RingTheory.Ideal.Quotient.Operations
-import Mathlib.RingTheory.Regular.RegularSequence
-import Mathlib.RingTheory.Localization.FractionRing
-import Mathlib.Algebra.Module.LocalizedModule.Basic
+module
+
+public import Mathlib.RingTheory.AlgebraicIndependent.TranscendenceBasis
+public import Mathlib.FieldTheory.IntermediateField.Adjoin.Defs
+public import Mathlib.RingTheory.Ideal.Quotient.Operations
+public import Mathlib.RingTheory.Regular.RegularSequence
+public import Mathlib.RingTheory.Localization.FractionRing
+public import Mathlib.Algebra.Module.LocalizedModule.Basic
 
 /-!
 # Complete-intersection models of finitely generated fields
@@ -16,6 +18,8 @@ import Mathlib.Algebra.Module.LocalizedModule.Basic
 Source: Stacks Project, Algebra, proof of Tag 07BV, and More on Algebra, proof of Tag 07E1
 (blueprint: lem-weil-pbc-finitely-generated-field-complete-intersection-model).
 -/
+
+@[expose] public section
 
 universe u v
 

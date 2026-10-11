@@ -3,20 +3,24 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
-import Mathlib.AlgebraicGeometry.Morphisms.Proper
-import Mathlib.AlgebraicGeometry.Noetherian
-import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
-import Mathlib.Algebra.Category.ModuleCat.Projective
-import Mathlib.Algebra.Category.ModuleCat.Monoidal.Basic
-import Mathlib.CategoryTheory.Monoidal.Tor
-import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Products
+module
+
+public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
+public import Mathlib.AlgebraicGeometry.Morphisms.Proper
+public import Mathlib.AlgebraicGeometry.Noetherian
+public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
+public import Mathlib.Algebra.Category.ModuleCat.Projective
+public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Basic
+public import Mathlib.CategoryTheory.Monoidal.Tor
+public import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Products
 
 /-! # Right adjoints of proper perfect pushforward preserve coproducts
 
 Source: Stacks Project, Duality for Schemes, Lemma 48.13.1, Tag 0A9R
 (blueprint: lem-sc-smooth-proper-tensor-direct-sums).
 -/
+
+@[expose] public section
 
 universe u wX wY v
 

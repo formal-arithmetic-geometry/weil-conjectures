@@ -3,22 +3,27 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import Sheaf.AlgebraicGeometry.GlobalDerivedHom
-import Sheaf.AlgebraicGeometry.PerfectComplex
-import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDerivedCategory
-import Sheaf.AlgebraicGeometry.CanonicalDerivedTensorHom
-import Sheaf.AlgebraicGeometry.CanonicalPullbackTensorComparison
-import Sheaf.AlgebraicGeometry.SchemeDerivedBaseChangeMap
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorHomAdjunction
-import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution
-import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.AB
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
-import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
+module
+
+public import Sheaf.AlgebraicGeometry.GlobalDerivedHom
+public import Sheaf.AlgebraicGeometry.PerfectComplex
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDerivedCategory
+public import Sheaf.AlgebraicGeometry.CanonicalDerivedTensorHom
+public import Sheaf.AlgebraicGeometry.CanonicalPullbackTensorComparison
+public import Sheaf.AlgebraicGeometry.SchemeDerivedBaseChangeMap
+public import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorHomAdjunction
+public import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution
+public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.AB
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
+public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 
 /-! # The affine global derived Hom base-change comparison
 Source: Stacks Project, perfect.tex, Tag 0AA7 (blueprint:
 def-pc-affine-global-hom-base-change-map).
 -/
+
+@[expose] public section
+
 set_option autoImplicit false
 set_option synthInstance.maxSize 2048
 set_option backward.isDefEq.respectTransparency false

@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group G1
 -/
-import Mathlib.AlgebraicGeometry.Over
-import Mathlib.FieldTheory.PurelyInseparable.Basic
-import Sheaf.AlgebraicGeometry.BaseChangeConventions
+module
+
+public import Mathlib.AlgebraicGeometry.Over
+public import Mathlib.FieldTheory.PurelyInseparable.Basic
+public import Sheaf.AlgebraicGeometry.BaseChangeConventions
 
 /-!
 # Base change along a purely inseparable field extension
@@ -13,6 +15,8 @@ import Sheaf.AlgebraicGeometry.BaseChangeConventions
 Source: blueprint `sec-picard-framework/sk-thm-picard-rr/lem-pc-homeo-pure-insep.md`
 (blueprint: lem-pc-homeo-pure-insep); Stacks Project, Tags 0BR5 and 04DF.
 -/
+
+@[expose] public section
 
 universe u
 

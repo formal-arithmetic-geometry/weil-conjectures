@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group J1
 -/
-import Sheaf.AlgebraicGeometry.ConstantSheafSetsRepresentable
-import Sheaf.AlgebraicGeometry.EtaleSheaves
+module
+
+public import Sheaf.AlgebraicGeometry.ConstantSheafSetsRepresentable
+public import Sheaf.AlgebraicGeometry.EtaleSheaves
 
 /-!
 # Constant etale sheaf sections on a connected scheme
@@ -13,6 +15,8 @@ Source: Stacks Project, Remark 59.23.2 (Tag 03P5), set-valued form, and
 Modules on Sites, Section 18.43 (Tags 093I and 093R)
 (blueprint: lem-weil-pbc-constant-sheaf-set-sections-connected-natural).
 -/
+
+@[expose] public section
 
 universe u
 

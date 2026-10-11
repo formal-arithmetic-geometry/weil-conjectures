@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Mathlib.RingTheory.AdjoinRoot
-import Mathlib.RingTheory.IntegralClosure.Algebra.Basic
+module
+
+public import Mathlib.RingTheory.AdjoinRoot
+public import Mathlib.RingTheory.IntegralClosure.Algebra.Basic
 
 /-!
 # Powers and unique primes in a degree-p root extension
@@ -12,6 +14,8 @@ import Mathlib.RingTheory.IntegralClosure.Algebra.Basic
 Source: Stacks Project, More on Algebra, Tag 07PR, proof; Algebra, Tags 0BR8 and 00GQ
 (blueprint: lem-weil-pbc-radicial-prime-unique-degree-p).
 -/
+
+@[expose] public section
 
 universe u
 

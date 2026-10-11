@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Sheaf.RingTheory.IsStrictHenselization
-import Mathlib.RingTheory.AdicCompletion.Algebra
-import Mathlib.RingTheory.Noetherian.Defs
-import Mathlib.RingTheory.RingHom.Flat
+module
+
+public import Sheaf.RingTheory.IsStrictHenselization
+public import Mathlib.RingTheory.AdicCompletion.Algebra
+public import Mathlib.RingTheory.Noetherian.Defs
+public import Mathlib.RingTheory.RingHom.Flat
 
 /-!
 # Flatness over the base of the completed strict henselization
@@ -15,6 +17,8 @@ Source: Stacks Project, More on Algebra, Lemma Tag 06LJ, proof of (c), paragraph
 “To finish the proof of (c)”
 (blueprint: lem-sc-strict-henselization-completion-flat-over-base).
 -/
+
+@[expose] public section
 
 universe v
 

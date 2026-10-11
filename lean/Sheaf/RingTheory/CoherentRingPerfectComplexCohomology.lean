@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group G1
 -/
-import Mathlib.Algebra.Module.FinitePresentation
-import Mathlib.Algebra.Category.ModuleCat.Abelian
-import Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
+module
+
+public import Mathlib.Algebra.Module.FinitePresentation
+public import Mathlib.Algebra.Category.ModuleCat.Abelian
+public import Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
 
 /-! # Cohomology of finite projective complexes over coherent rings
 
@@ -16,6 +18,8 @@ The complex here is the affine module complex mentioned in `def-pc-perfect-compl
 not its associated complex of sheaves. Coherence is expressed by the defining ideal
 condition of Stacks, Algebra, Definition 10.90.1 (section Tag 05CU).
 -/
+
+@[expose] public section
 
 universe u v
 

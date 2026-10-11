@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import Sheaf.AlgebraicGeometry.PerfectComplex
-import Sheaf.AlgebraicGeometry.DerivedFiberBetti
+module
+
+public import Sheaf.AlgebraicGeometry.PerfectComplex
+public import Sheaf.AlgebraicGeometry.DerivedFiberBetti
 
 
 /-! # Finite free local models with prescribed residue cohomology ranks
@@ -16,6 +18,8 @@ The derived fibre is `derivedPullback (X.fromSpecResidueField x)`; its degree-`i
 cohomology vector space over `κ(x)` is `derivedFiberCohomology X E i x` and its dimension
 `d_i` is `derivedFiberBetti X E i x` (def-sc-derived-fiber-betti).
 -/
+
+@[expose] public section
 
 universe u w
 open CategoryTheory CategoryTheory.Limits

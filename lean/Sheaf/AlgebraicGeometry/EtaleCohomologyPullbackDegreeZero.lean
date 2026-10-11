@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group J1
 -/
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.GlobalSections
-import WeilConjectures.Mathlib.CategoryTheory.Sites.GlobalSections
-import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.KInjective
-import Mathlib.Algebra.Homology.Single
+module
+
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.GlobalSections
+public import WeilConjectures.Mathlib.CategoryTheory.Sites.GlobalSections
+public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.KInjective
+public import Mathlib.Algebra.Homology.Single
 
 /-!
 # Degree-zero étale cohomology and pullback
@@ -14,6 +16,8 @@ import Mathlib.Algebra.Homology.Single
 Source: Stacks Project, Tags 05TD and 01FA
 (blueprint: lem-weil-pbc-cohomology-pullback-degree-zero).
 -/
+
+@[expose] public section
 
 universe u
 

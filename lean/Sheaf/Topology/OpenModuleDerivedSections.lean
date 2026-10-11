@@ -3,17 +3,21 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import Sheaf.Topology.OpenModuleCohomology
-import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImage
-import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution
-import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.KInjective
-import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triangulated
+module
+
+public import Sheaf.Topology.OpenModuleCohomology
+public import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImage
+public import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.KInjective
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triangulated
 
 /-! # Unbounded derived sections of modules over an open
 
 Source: Stacks Project, Cohomology, Tag 0D60 and Injectives, Tag 079P
 (blueprint: def-pc-open-module-derived-sections).
 -/
+
+@[expose] public section
 
 universe a b c
 

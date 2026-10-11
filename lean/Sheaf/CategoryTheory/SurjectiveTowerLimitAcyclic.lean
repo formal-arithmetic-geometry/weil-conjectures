@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Sheaf.CategoryTheory.DerivedLimitRoosAbelianGroups
-import Sheaf.CategoryTheory.Limits.TowerLimitAdditiveLeftExact
+module
+
+public import Sheaf.CategoryTheory.DerivedLimitRoosAbelianGroups
+public import Sheaf.CategoryTheory.Limits.TowerLimitAdditiveLeftExact
 
 /-!
 # Acyclicity of inverse limits for surjective towers
@@ -12,6 +14,8 @@ import Sheaf.CategoryTheory.Limits.TowerLimitAdditiveLeftExact
 Source: Stacks Project, More on Algebra, Lemma 15.88.1 (3), Tag 07KW
 (blueprint: lem-pc-tower-surjective-lim-acyclic).
 -/
+
+@[expose] public section
 
 universe u
 

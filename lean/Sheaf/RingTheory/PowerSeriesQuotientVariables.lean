@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Mathlib.RingTheory.MvPowerSeries.Rename
-import Mathlib.RingTheory.Ideal.Quotient.Operations
+module
+
+public import Mathlib.RingTheory.MvPowerSeries.Rename
+public import Mathlib.RingTheory.Ideal.Quotient.Operations
 
 /-!
 # Killing the first variables of a formal power series ring
@@ -13,6 +15,8 @@ Source: Stacks Project, Remark Tag 032C, where this elementary fact is used impl
 the DAG supplies its coefficientwise proof
 (blueprint: lem-weil-pbc-power-series-quotient-variables).
 -/
+
+@[expose] public section
 
 universe u
 

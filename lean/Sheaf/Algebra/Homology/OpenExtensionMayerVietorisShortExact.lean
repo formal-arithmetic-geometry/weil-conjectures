@@ -3,14 +3,18 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import Sheaf.Algebra.Homology.OpenRestrictionAdjunctionExact
-import Mathlib.Algebra.Homology.ShortComplex.ShortExact
+module
+
+public import Sheaf.Algebra.Homology.OpenRestrictionAdjunctionExact
+public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 
 /-! # Short exact Mayer--Vietoris sequence for extension by zero
 
 Source: Stacks Project, Cohomology, Tag 08BU, the short exact sequence in the proof
 (blueprint: lem-sc-derived-open-mayer-vietoris-ses).
 -/
+
+@[expose] public section
 
 universe u
 

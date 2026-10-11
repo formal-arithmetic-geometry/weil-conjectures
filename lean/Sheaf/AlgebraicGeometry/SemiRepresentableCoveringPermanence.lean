@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group G1
 -/
-import Sheaf.AlgebraicGeometry.SemiRepresentableObject
+module
+
+public import Sheaf.AlgebraicGeometry.SemiRepresentableObject
 
 /-!
 # Permanence of coverings of semi-representable étale objects
@@ -11,6 +13,8 @@ import Sheaf.AlgebraicGeometry.SemiRepresentableObject
 Source: Stacks Project, Tag 01G4, Lemma 25.3.2
 (blueprint: lem-weil-pbc-semi-representable-covering-permanence).
 -/
+
+@[expose] public section
 
 universe w u
 

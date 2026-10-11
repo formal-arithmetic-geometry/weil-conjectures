@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import Mathlib.AlgebraicGeometry.Morphisms.Proper
-import Mathlib.RingTheory.Henselian
-import Mathlib.Topology.Sheaves.Functors
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.Proper
+public import Mathlib.RingTheory.Henselian
+public import Mathlib.Topology.Sheaves.Functors
 
 /-!
 # Zariski degree-zero comparison for a proper scheme over a henselian pair
@@ -13,6 +15,8 @@ import Mathlib.Topology.Sheaves.Functors
 Source: Stacks Project, Etale Cohomology, Lemma 59.91.1, Tag 0A0B
 (blueprint: lem-weil-pbc-zariski-h0-proper-henselian-pair).
 -/
+
+@[expose] public section
 
 universe u
 

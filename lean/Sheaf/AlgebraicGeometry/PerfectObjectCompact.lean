@@ -1,12 +1,16 @@
-import Sheaf.AlgebraicGeometry.PerfectComplex
-import Sheaf.AlgebraicGeometry.DerivedQCohDirectSums
-import Sheaf.CategoryTheory.CompactObject
+module
+
+public import Sheaf.AlgebraicGeometry.PerfectComplex
+public import Sheaf.AlgebraicGeometry.DerivedQCohDirectSums
+public import Sheaf.CategoryTheory.CompactObject
 
 /-! # Compactness of perfect complexes
 
 Source: Stacks Project, Proposition perfect-proposition-compact-is-perfect (Tag 09M1)
 (blueprint: lem-pc-perfect-object-compact).
 -/
+
+@[expose] public section
 
 universe u w
 

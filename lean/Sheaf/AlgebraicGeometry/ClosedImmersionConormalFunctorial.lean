@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group J1
 -/
-import Sheaf.AlgebraicGeometry.AffineConormalSections
-import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
+module
+
+public import Sheaf.AlgebraicGeometry.AffineConormalSections
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 
 /-!
 # Functoriality of conormal sheaves of closed immersions
@@ -12,6 +14,8 @@ import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 Source: Stacks Project, Morphisms, Lemma 01R4, Definition 01R2 and Lemma 01R3
 (blueprint: lem-weil-pbc-closed-immersion-conormal-functorial).
 -/
+
+@[expose] public section
 
 universe uc
 

@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group T1
 -/
-import Sheaf.RingTheory.StrictHenselizationTriples
-import Mathlib.RingTheory.RingHom.FaithfullyFlat
+module
+
+public import Sheaf.RingTheory.StrictHenselizationTriples
+public import Mathlib.RingTheory.RingHom.FaithfullyFlat
 
 /-!
 # Faithful flatness of strict henselization
@@ -13,6 +15,8 @@ Source: Stacks Project, More on Algebra, Lemma Tag 07QM, part (1), using the
 strict henselization of Algebra, Lemma Tag 04GP
 (blueprint: lem-sc-strict-henselization-faithfully-flat).
 -/
+
+@[expose] public section
 
 universe u
 

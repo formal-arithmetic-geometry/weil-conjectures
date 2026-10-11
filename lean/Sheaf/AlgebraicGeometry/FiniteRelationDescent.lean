@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group J1
 -/
-import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
-import Mathlib.RingTheory.Noetherian.Basic
-import Sheaf.AlgebraicGeometry.BaseChangeConventions
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
+public import Mathlib.RingTheory.Noetherian.Basic
+public import Sheaf.AlgebraicGeometry.BaseChangeConventions
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 
 /-!
 # Descent of finite relations among module maps
@@ -14,6 +16,8 @@ import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 Source: Stacks Project, Limits, Lemma 32.10.2 (Tag 01ZR)
 (blueprint: lem-pc-fp-relation-descent).
 -/
+
+@[expose] public section
 
 universe u
 

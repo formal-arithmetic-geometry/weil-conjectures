@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import Sheaf.AlgebraicGeometry.NagataMorphismEqualityStage
+module
+
+public import Sheaf.AlgebraicGeometry.NagataMorphismEqualityStage
 
 /-!
 # Eventual equality of descended morphisms
@@ -12,6 +14,8 @@ Source: literature/blueprint/master/blueprint/sec-nagata-compactification/
 sk-prop-nagata-sketch-approximation/lemma-nagata-morphism-eq-eventually.md,
 node order 356 (blueprint: lemma-nagata-morphism-eq-eventually).
 -/
+
+@[expose] public section
 
 universe u
 

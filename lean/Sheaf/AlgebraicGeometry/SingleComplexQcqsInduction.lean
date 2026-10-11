@@ -3,16 +3,20 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under the Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Sheaf.AlgebraicGeometry.SingleComplexBaseChangeStalkCondition
-import Sheaf.AlgebraicGeometry.SchemeDerivedBaseChangeMap
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
+module
+
+public import Sheaf.AlgebraicGeometry.SingleComplexBaseChangeStalkCondition
+public import Sheaf.AlgebraicGeometry.SchemeDerivedBaseChangeMap
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 
 /-! # Quasi-compact quasi-separated base change for one complex
 
 Source: Stacks Project, perfect.tex, Tag 0DJ9, lemma-single-complex-base-change
 (blueprint: lem-pc-rf-single-complex-qcqs-induction).
 -/
+
+@[expose] public section
 
 universe u w
 open CategoryTheory CategoryTheory.Limits

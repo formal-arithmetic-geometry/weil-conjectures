@@ -1,9 +1,11 @@
-import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-import Mathlib.AlgebraicGeometry.Noetherian
-import Sheaf.AlgebraicGeometry.Ample
-import Sheaf.AlgebraicGeometry.TensorPullback
-import Sheaf.AlgebraicGeometry.Modules.InvertiblePullbackTensor
-import WeilConjectures.AlgebraicGeometry.Modules.Invertible
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+public import Mathlib.AlgebraicGeometry.Noetherian
+public import Sheaf.AlgebraicGeometry.Ample
+public import Sheaf.AlgebraicGeometry.TensorPullback
+public import Sheaf.AlgebraicGeometry.Modules.InvertiblePullbackTensor
+public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 
 /-! # Ampleness on a Noetherian reduction
 
@@ -14,6 +16,8 @@ The invertibility of the pullback `i^*L` (the node's parenthetical) is the first
 the landed `Scheme.Modules.invertible_pullback_tensor`
 (lem-weil-pbc-invertible-pullback-tensor); it is not restated here.
 -/
+
+@[expose] public section
 
 open CategoryTheory
 open AlgebraicGeometry

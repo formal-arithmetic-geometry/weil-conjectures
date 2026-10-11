@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group G1
 -/
-import Sheaf.AlgebraicGeometry.SectionFractionPresentation
-import Sheaf.AlgebraicGeometry.Ample
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
+module
+
+public import Sheaf.AlgebraicGeometry.SectionFractionPresentation
+public import Sheaf.AlgebraicGeometry.Ample
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 
 /-!
 # Degree-zero localization of sections on an affine scheme
@@ -13,6 +15,8 @@ import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 Source: Stacks Project, Properties, Lemma 01PW, equation module-invert-s; Cohomology of
 Schemes, Lemma 09MR, affine case (blueprint: lem-sc-affine-section-localization).
 -/
+
+@[expose] public section
 
 universe u
 

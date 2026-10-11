@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import Mathlib.RingTheory.AdicCompletion.Algebra
-import Mathlib.RingTheory.Noetherian.Defs
-import Mathlib.RingTheory.LocalRing.MaximalIdeal.Defs
+module
+
+public import Mathlib.RingTheory.AdicCompletion.Algebra
+public import Mathlib.RingTheory.Noetherian.Defs
+public import Mathlib.RingTheory.LocalRing.MaximalIdeal.Defs
 
 /-!
 # Completion of a quotient of a Noetherian local ring
@@ -14,6 +16,8 @@ Source: Stacks Project, Algebra, Tag 00MA, parts (2) and (3), and the proof of
 Tag 00MB; the module/ring completion identification used in Tag 0325
 (blueprint: lem-weil-pbc-local-completion-quotient).
 -/
+
+@[expose] public section
 
 universe u v
 

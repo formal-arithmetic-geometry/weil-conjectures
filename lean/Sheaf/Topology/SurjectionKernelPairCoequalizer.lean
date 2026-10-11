@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import Mathlib.Topology.Sheaves.Limits
-import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
+module
+
+public import Mathlib.Topology.Sheaves.Limits
+public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
 
 /-!
 # Surjections as coequalizers of kernel-pair covers
@@ -12,6 +14,8 @@ import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
 Source: literature/stacks-project/modules.tex, Lemma Tag 0CAI, proof at lines 3038--3046
 (blueprint: lem-weil-pbc-sheaf-surjection-kernel-pair-coequalizer)
 -/
+
+@[expose] public section
 
 universe u v
 

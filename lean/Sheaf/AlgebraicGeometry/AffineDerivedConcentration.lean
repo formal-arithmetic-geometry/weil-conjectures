@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group G1
 -/
-import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
-import Mathlib.AlgebraicGeometry.Morphisms.Affine
+module
+
+public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
+public import Mathlib.AlgebraicGeometry.Morphisms.Affine
 
 /-!
 # Affine pushforward detects degree-zero concentration
@@ -12,6 +14,8 @@ import Mathlib.AlgebraicGeometry.Morphisms.Affine
 Source: Stacks Project, Tags 0AVW, 08I8, and 01XC
 (blueprint: lem-sc-affine-derived-concentration).
 -/
+
+@[expose] public section
 
 universe uA wXA wYA
 

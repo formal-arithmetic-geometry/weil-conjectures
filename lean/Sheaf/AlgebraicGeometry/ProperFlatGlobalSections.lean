@@ -3,13 +3,15 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group G1
 -/
-import Mathlib.AlgebraicGeometry.Morphisms.Proper
-import Mathlib.AlgebraicGeometry.Morphisms.Flat
-import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
-import Mathlib.AlgebraicGeometry.Geometrically.Reduced
-import Mathlib.AlgebraicGeometry.Geometrically.Connected
-import Sheaf.AlgebraicGeometry.BaseChangeConventions
-import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.Proper
+public import Mathlib.AlgebraicGeometry.Morphisms.Flat
+public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
+public import Mathlib.AlgebraicGeometry.Geometrically.Reduced
+public import Mathlib.AlgebraicGeometry.Geometrically.Connected
+public import Sheaf.AlgebraicGeometry.BaseChangeConventions
+public import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
 
 /-!
 # Universal structure-sheaf pushforward for proper flat morphisms
@@ -17,6 +19,8 @@ import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
 Source: Stacks Project, Derived Categories of Schemes, Tag 0E0L
 (blueprint: lem-sc-proper-flat-global-sections).
 -/
+
+@[expose] public section
 
 universe u
 

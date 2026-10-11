@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Mathlib.Algebra.Module.LocalizedModule.Basic
+module
+
+public import Mathlib.Algebra.Module.LocalizedModule.Basic
 
 /-!
 # Homogeneous pieces of a module localized at one element
@@ -11,6 +13,8 @@ import Mathlib.Algebra.Module.LocalizedModule.Basic
 Source: Stacks Project, Cohomology of Schemes, Tag 09MR, Mayer–Vietoris paragraph
 (blueprint: def-sc-localized-homogeneous-piece).
 -/
+
+@[expose] public section
 
 universe uHP vHP
 

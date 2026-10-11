@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.Generators
-import Sheaf.AlgebraicGeometry.Ample
+module
+
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Generators
+public import Sheaf.AlgebraicGeometry.Ample
 
 /-!
 # The fibre criterion for generating an invertible module
@@ -12,6 +14,8 @@ import Sheaf.AlgebraicGeometry.Ample
 Source: Stacks Project, Modules, Definition 01AM and Lemma 01CY; Sheaves, Lemma 0H7H(2)
 (blueprint: lem-weil-pbc-invertible-generating-sections-fibre).
 -/
+
+@[expose] public section
 
 universe u
 

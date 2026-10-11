@@ -3,17 +3,21 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in file LICENSE.
 Authors: SHEAF group F1
 -/
-import Mathlib.AlgebraicGeometry.Morphisms.Affine
-import Sheaf.AlgebraicGeometry.Ample
-import Sheaf.AlgebraicGeometry.TensorPullback
-import Sheaf.AlgebraicGeometry.Modules.InvertiblePullbackTensor
-import WeilConjectures.AlgebraicGeometry.Modules.Invertible
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.Affine
+public import Sheaf.AlgebraicGeometry.Ample
+public import Sheaf.AlgebraicGeometry.TensorPullback
+public import Sheaf.AlgebraicGeometry.Modules.InvertiblePullbackTensor
+public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 
 /-! # Pullback of an ample invertible module
 
 Source: Stacks Project, Morphisms, Lemma 0892, part (2)
 (blueprint: lem-weil-pbc-pullback-ample-invertible).
 -/
+
+@[expose] public section
 
 open CategoryTheory
 open AlgebraicGeometry

@@ -2,8 +2,10 @@
 Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 -/
-import Sheaf.Paper.EtaleHypercover
-import Mathlib.CategoryTheory.Limits.FunctorCategory.Basic
+module
+
+public import Sheaf.Paper.EtaleHypercover
+public import Mathlib.CategoryTheory.Limits.FunctorCategory.Basic
 
 /-!
 # Products of étale hypercovers
@@ -12,6 +14,8 @@ Source: Stacks Project, Hypercoverings, Lemma 01GI (lemma-product-hypercoverings
 with the covering argument of Lemma 01GH (lemma-funny-gamma).
 (blueprint: lem-weil-pbc-hypercover-product)
 -/
+
+@[expose] public section
 
 universe uP
 

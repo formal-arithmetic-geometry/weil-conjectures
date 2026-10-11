@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import Mathlib.RingTheory.Smooth.Basic
-import Mathlib.Data.ZMod.Basic
-import Sheaf.RingTheory.CohenRing
+module
+
+public import Mathlib.RingTheory.Smooth.Basic
+public import Mathlib.Data.ZMod.Basic
+public import Sheaf.RingTheory.CohenRing
 
 /-!
 # Formal smoothness of a Cohen ring modulo a prime power
@@ -13,6 +15,8 @@ import Sheaf.RingTheory.CohenRing
 Source: Stacks Project, Algebra, Lemma Tag 0329 and Definition Tag 0327
 (blueprint: lem-weil-pbc-cohen-ring-mod-pn-formally-smooth).
 -/
+
+@[expose] public section
 
 universe u v
 

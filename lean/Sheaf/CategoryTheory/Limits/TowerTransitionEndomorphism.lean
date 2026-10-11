@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import Mathlib.CategoryTheory.Preadditive.Basic
-import Mathlib.CategoryTheory.Limits.Shapes.Products
+module
+
+public import Mathlib.CategoryTheory.Preadditive.Basic
+public import Mathlib.CategoryTheory.Limits.Shapes.Products
 
 /-!
 # The transition endomorphism of a tower product
@@ -12,6 +14,8 @@ import Mathlib.CategoryTheory.Limits.Shapes.Products
 Source: Stacks Project, Derived Categories, Definition 13.34.1 (Tag 08TC)
 (blueprint: def-weil-tower-transition-endomorphism).
 -/
+
+@[expose] public section
 
 universe u v
 

@@ -3,16 +3,20 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import Sheaf.CategoryTheory.CartanEilenbergExists
-import Mathlib.Algebra.Homology.Embedding.CochainComplex
-import Sheaf.CategoryTheory.DoubleComplexTotal
-import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.Basic
+module
+
+public import Sheaf.CategoryTheory.CartanEilenbergExists
+public import Mathlib.Algebra.Homology.Embedding.CochainComplex
+public import Sheaf.CategoryTheory.DoubleComplexTotal
+public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.Basic
 
 /-! # Presentations by injective and Cartan--Eilenberg resolutions
 
 Source: Stacks Project, Derived Categories, Tags 015H and 015K
 (blueprint: def-sp-cartan-eilenberg-presentation).
 -/
+
+@[expose] public section
 
 universe uA vA uB vB uC vC
 

@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import Sheaf.Paper.FiniteSplitEtaleHypercover
+module
+
+public import Sheaf.Paper.FiniteSplitEtaleHypercover
 
 /-!
 # The universal property of hypercover cohomology
@@ -15,6 +17,8 @@ The colimit is specified by its universal property, without choosing a skeleton 
 category of hypercovers. Homotopy invariance makes this exactly the colimit over refinements
 modulo simplicial homotopy. The coefficient category may be abelian groups or modules.
 -/
+
+@[expose] public section
 
 universe u v w
 

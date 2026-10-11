@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Mathlib.AlgebraicGeometry.Fiber
-import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
-import Mathlib.AlgebraicGeometry.Morphisms.OpenImmersion
+module
+
+public import Mathlib.AlgebraicGeometry.Fiber
+public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
+public import Mathlib.AlgebraicGeometry.Morphisms.OpenImmersion
 
 /-!
 # Isolated points in fibres of unramified morphisms
@@ -14,6 +16,7 @@ Source: Stacks Project, Morphisms, Definition 02G4 and Lemma 02G7
 (blueprint: lem-weil-pbc-unramified-fibre-point-isolated)
 -/
 
+@[expose] public section
 
 universe u
 

@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import Sheaf.Algebra.Homology.KFlat
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.Flat
+module
+
+public import Sheaf.Algebra.Homology.KFlat
+public import Sheaf.Algebra.Category.ModuleCat.Sheaf.Flat
 
 /-!
 # K-flat resolutions on a ringed site
@@ -12,6 +14,8 @@ import Sheaf.Algebra.Category.ModuleCat.Sheaf.Flat
 Source: Stacks Project, Cohomology on Sites, Lemma 06YS
 (`sites-cohomology-lemma-K-flat-resolution`) (blueprint: lem-pc-kflat-resolution).
 -/
+
+@[expose] public section
 
 universe u
 

@@ -1,8 +1,12 @@
-import Mathlib.RingTheory.Ideal.Operations
-import Mathlib.Algebra.Quotient
-import Mathlib.RingTheory.Ideal.Quotient.Operations
-import Mathlib.Algebra.MvPolynomial.Basic
-import Mathlib.LinearAlgebra.Quotient.Basic
+module
+
+public import Mathlib.RingTheory.Ideal.Operations
+public import Mathlib.Algebra.Quotient
+public import Mathlib.RingTheory.Ideal.Quotient.Operations
+public import Mathlib.Algebra.MvPolynomial.Basic
+public import Mathlib.LinearAlgebra.Quotient.Basic
+
+@[expose] public section
 
 universe u
 

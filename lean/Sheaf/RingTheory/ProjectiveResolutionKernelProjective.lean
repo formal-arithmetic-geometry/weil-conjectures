@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import Sheaf.RingTheory.GlobalDimension
-import Mathlib.Algebra.Homology.ExactSequence
-import Mathlib.Algebra.Category.ModuleCat.Abelian
+module
+
+public import Sheaf.RingTheory.GlobalDimension
+public import Mathlib.Algebra.Homology.ExactSequence
+public import Mathlib.Algebra.Category.ModuleCat.Abelian
 
 /-!
 # Projective kernels in partial projective resolutions
@@ -13,6 +15,8 @@ import Mathlib.Algebra.Category.ModuleCat.Abelian
 Source: Stacks Project, Algebra, Lemma 00O5 and its proof using Schanuel's Lemma 00O3
 (blueprint: lem-weil-pbc-projective-resolution-kernel-projective).
 -/
+
+@[expose] public section
 
 universe u v
 

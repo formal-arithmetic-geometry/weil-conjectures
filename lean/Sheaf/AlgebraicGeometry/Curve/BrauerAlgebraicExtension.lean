@@ -3,11 +3,13 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import WeilConjectures.AlgebraicGeometry.Curve
-import Mathlib.AlgebraicGeometry.FunctionField
-import Mathlib.FieldTheory.Separable
-import WeilConjectures.AlgebraicGeometry.Sites.Gm
-import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
+module
+
+public import WeilConjectures.AlgebraicGeometry.Curve
+public import Mathlib.AlgebraicGeometry.FunctionField
+public import Mathlib.FieldTheory.Separable
+public import WeilConjectures.AlgebraicGeometry.Sites.Gm
+public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 
 /-!
 # Brauer vanishing over algebraic extensions of curve function fields
@@ -16,6 +18,8 @@ Source: literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/
 lem-sc-function-field-cd-one.md, Proof, third paragraph
 (blueprint: lem-sc-brauer-algebraic-function-field-zero).
 -/
+
+@[expose] public section
 
 universe u v w
 

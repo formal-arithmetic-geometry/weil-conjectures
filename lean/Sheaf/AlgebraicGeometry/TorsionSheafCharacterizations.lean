@@ -3,13 +3,15 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group P1
 -/
-import Sheaf.AlgebraicGeometry.TorsionEtaleSheaf
-import Mathlib.AlgebraicGeometry.Sites.EtalePoint
-import Mathlib.CategoryTheory.Sites.ConstantSheaf
-import Mathlib.GroupTheory.QuotientGroup.Basic
-import Mathlib.Data.Rat.Defs
-import Mathlib.GroupTheory.Torsion
-import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
+module
+
+public import Sheaf.AlgebraicGeometry.TorsionEtaleSheaf
+public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
+public import Mathlib.CategoryTheory.Sites.ConstantSheaf
+public import Mathlib.GroupTheory.QuotientGroup.Basic
+public import Mathlib.Data.Rat.Defs
+public import Mathlib.GroupTheory.Torsion
+public import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 
 /-!
 # Characterizations of torsion abelian étale sheaves
@@ -18,6 +20,8 @@ Source: blueprint `sec-proper-base-change/sk-def-pbc`, statement, and
 `sec-abelian-varieties/def-weil-pbc-etale-sheaves`
 (blueprint: lem-weil-pbc-torsion-sheaf-characterizations).
 -/
+
+@[expose] public section
 
 universe u
 

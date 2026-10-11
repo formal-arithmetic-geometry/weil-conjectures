@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF contributors
 -/
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Mathlib.CategoryTheory.Preadditive.Injective.Basic
-import Mathlib.CategoryTheory.Category.Preorder
+module
+
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Mathlib.CategoryTheory.Preadditive.Injective.Basic
+public import Mathlib.CategoryTheory.Category.Preorder
 
 /-!
 # Functorial injective embeddings of modules on a scheme
@@ -13,6 +15,8 @@ import Mathlib.CategoryTheory.Category.Preorder
 Source: Stacks Project, Injectives, Lemma 01DI, and Cohomology, proof of Lemma 01FF
 (blueprint: lem-weil-pbc-scheme-modules-functorial-injective-embeddings).
 -/
+
+@[expose] public section
 
 universe u v
 

@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group J1
 -/
-import Mathlib.RingTheory.Unramified.Basic
+module
+
+public import Mathlib.RingTheory.Unramified.Basic
 
 /-!
 # Universal first order thickenings of formally unramified algebras
@@ -11,6 +13,8 @@ import Mathlib.RingTheory.Unramified.Basic
 Source: Stacks Project, Algebra, Lemma 04EB and the uniqueness remark in Section 04EA
 (blueprint: lem-weil-pbc-ring-universal-first-order-thickening).
 -/
+
+@[expose] public section
 
 universe u
 

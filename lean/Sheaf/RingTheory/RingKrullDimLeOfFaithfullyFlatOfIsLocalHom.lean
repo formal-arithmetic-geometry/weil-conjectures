@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import Mathlib.RingTheory.KrullDimension.Basic
-import Mathlib.RingTheory.LocalRing.Defs
-import Mathlib.RingTheory.RingHom.FaithfullyFlat
+module
+
+public import Mathlib.RingTheory.KrullDimension.Basic
+public import Mathlib.RingTheory.LocalRing.Defs
+public import Mathlib.RingTheory.RingHom.FaithfullyFlat
 
 /-!
 # Faithfully flat local maps do not lower Krull dimension
@@ -13,6 +15,8 @@ import Mathlib.RingTheory.RingHom.FaithfullyFlat
 Source: Stacks Project, Algebra, Tags 00OH, 00HS and 00HQ
 (blueprint: lem-sc-faithfully-flat-local-dimension).
 -/
+
+@[expose] public section
 
 universe u v
 

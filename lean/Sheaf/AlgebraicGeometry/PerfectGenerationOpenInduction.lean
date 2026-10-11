@@ -3,16 +3,20 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group G1
 -/
-import Sheaf.AlgebraicGeometry.PerfectComplex
-import Sheaf.AlgebraicGeometry.DerivedCategory
-import Mathlib.AlgebraicGeometry.AffineScheme
-import Mathlib.Topology.QuasiSeparated
+module
+
+public import Sheaf.AlgebraicGeometry.PerfectComplex
+public import Sheaf.AlgebraicGeometry.DerivedCategory
+public import Mathlib.AlgebraicGeometry.AffineScheme
+public import Mathlib.Topology.QuasiSeparated
 
 /-! # Extending perfect generators across an affine open
 
 Source: Stacks Project, Tag 09IS, induction step using Tags 09IQ and 09IR
 (blueprint: lem-pc-perfect-generation-open-induction-step).
 -/
+
+@[expose] public section
 
 set_option autoImplicit false
 

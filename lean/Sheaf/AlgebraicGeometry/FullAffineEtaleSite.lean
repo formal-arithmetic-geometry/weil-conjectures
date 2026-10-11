@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import Mathlib.AlgebraicGeometry.Sites.AffineEtale
-import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
-import Mathlib.CategoryTheory.Sites.PrecoverageToGrothendieck
+module
+
+public import Mathlib.AlgebraicGeometry.Sites.AffineEtale
+public import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
+public import Mathlib.CategoryTheory.Sites.PrecoverageToGrothendieck
 
 /-!
 # The full small affine étale site
@@ -13,6 +15,8 @@ import Mathlib.CategoryTheory.Sites.PrecoverageToGrothendieck
 Source: Stacks Project, Topologies, Definitions 0219 and 021B(4)
 (blueprint: def-weil-pbc-full-affine-etale-site).
 -/
+
+@[expose] public section
 
 universe uS
 

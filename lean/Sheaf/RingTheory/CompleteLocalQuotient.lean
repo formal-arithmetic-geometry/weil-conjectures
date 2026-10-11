@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group G1
 -/
-import Mathlib.RingTheory.LocalRing.MaximalIdeal.Basic
-import Mathlib.RingTheory.AdicCompletion.Basic
-import Mathlib.RingTheory.Noetherian.Basic
+module
+
+public import Mathlib.RingTheory.LocalRing.MaximalIdeal.Basic
+public import Mathlib.RingTheory.AdicCompletion.Basic
+public import Mathlib.RingTheory.Noetherian.Basic
 
 /-!
 # Quotients of complete Noetherian local rings
@@ -13,6 +15,8 @@ import Mathlib.RingTheory.Noetherian.Basic
 Source: Stacks Project, Algebra, Lemma Tag 0325 (lemma-quotient-complete-local),
 first sentence and proof (blueprint: lem-weil-pbc-complete-local-quotient).
 -/
+
+@[expose] public section
 
 universe u
 

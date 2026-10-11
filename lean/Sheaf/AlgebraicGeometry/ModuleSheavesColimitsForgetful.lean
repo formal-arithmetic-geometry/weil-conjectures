@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF contributors
 -/
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.Colimits
+module
+
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Colimits
 
 /-!
 # Colimits of sheaves of modules and the forgetful functor
@@ -11,6 +13,8 @@ import Mathlib.Algebra.Category.ModuleCat.Sheaf.Colimits
 Source: Stacks Project, Modules on Sites, Lemmas 03DA, 03DB, 03CO and 03CY
 (blueprint: lem-weil-pbc-module-sheaves-colimits-forgetful).
 -/
+
+@[expose] public section
 
 universe u v u' v'
 

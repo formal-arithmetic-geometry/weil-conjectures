@@ -3,18 +3,22 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group R1
 -/
-import Sheaf.AlgebraicGeometry.ModuleCohomologyFMap
-import Sheaf.AlgebraicGeometry.SchemeModulesEnoughInjectives
-import Sheaf.Topology.OpenModuleCohomology
-import Mathlib.Algebra.Category.ModuleCat.Presheaf.Abelian
-import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
-import Mathlib.AlgebraicGeometry.Pullbacks
+module
+
+public import Sheaf.AlgebraicGeometry.ModuleCohomologyFMap
+public import Sheaf.AlgebraicGeometry.SchemeModulesEnoughInjectives
+public import Sheaf.Topology.OpenModuleCohomology
+public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Abelian
+public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
+public import Mathlib.AlgebraicGeometry.Pullbacks
 
 /-! # Restricted resolution choices for the section formula
 
 Source: Stacks Project, Cohomology, Tags 01FB and 01E4
 (blueprint: def-weil-pbc-flat-base-change-open-choices).
 -/
+
+@[expose] public section
 
 universe uOpen
 set_option autoImplicit false

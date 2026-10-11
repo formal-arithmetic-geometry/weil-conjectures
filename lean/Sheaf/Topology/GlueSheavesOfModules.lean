@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
-import Sheaf.Paper.DerivedHomMayerVietoris
+module
+
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
+public import Sheaf.Paper.DerivedHomMayerVietoris
 
 /-!
 # Glueing morphisms and sheaves of modules along an open covering
@@ -12,6 +14,8 @@ import Sheaf.Paper.DerivedHomMayerVietoris
 Source: Stacks Project, Sheaves, Section 00AK, Lemmas 04TN, 00AL and 00AM
 (blueprint: lem-weil-pbc-glue-sheaves-of-modules).
 -/
+
+@[expose] public section
 
 universe u v w
 

@@ -1,9 +1,11 @@
-import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
-import WeilConjectures.AlgebraicGeometry.RelativeEffectiveCartier
-import WeilConjectures.AlgebraicGeometry.Modules.ZeroLocus
-import WeilConjectures.AlgebraicGeometry.Modules.Invertible
-import Mathlib.AlgebraicGeometry.Properties
-import Mathlib.RingTheory.Valuation.ValuationRing
+module
+
+public import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
+public import WeilConjectures.AlgebraicGeometry.RelativeEffectiveCartier
+public import WeilConjectures.AlgebraicGeometry.Modules.ZeroLocus
+public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
+public import Mathlib.AlgebraicGeometry.Properties
+public import Mathlib.RingTheory.Valuation.ValuationRing
 
 /-!
 # Zero locus over a valuation base
@@ -11,6 +13,8 @@ import Mathlib.RingTheory.Valuation.ValuationRing
 Source: More on Morphisms, Lemma 37.33.3 (Tag 0EX8), with Divisors Lemma 31.19.9
 (Tag 062Y) (blueprint: lem-sc-valuation-zero-section-relative-cartier).
 -/
+
+@[expose] public section
 
 universe u
 

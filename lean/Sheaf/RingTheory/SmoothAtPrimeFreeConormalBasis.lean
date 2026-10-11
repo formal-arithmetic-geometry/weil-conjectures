@@ -3,13 +3,15 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group J1
 -/
-import Sheaf.RingTheory.SingularIdeal
-import Mathlib.Algebra.MvPolynomial.Basic
-import Mathlib.RingTheory.Ideal.Cotangent
-import Mathlib.RingTheory.Localization.Away.Basic
-import Mathlib.Algebra.Module.LocalizedModule.Basic
-import Mathlib.RingTheory.Kaehler.Basic
-import Mathlib.LinearAlgebra.Basis.Defs
+module
+
+public import Sheaf.RingTheory.SingularIdeal
+public import Mathlib.Algebra.MvPolynomial.Basic
+public import Mathlib.RingTheory.Ideal.Cotangent
+public import Mathlib.RingTheory.Localization.Away.Basic
+public import Mathlib.Algebra.Module.LocalizedModule.Basic
+public import Mathlib.RingTheory.Kaehler.Basic
+public import Mathlib.LinearAlgebra.Basis.Defs
 
 /-!
 # Free conormal basis near a smooth prime
@@ -17,6 +19,8 @@ import Mathlib.LinearAlgebra.Basis.Defs
 Source: literature/stacks-project/smoothing.tex, Lemma Tag 07C6
 (blueprint: lem-weil-pbc-smooth-at-prime-free-conormal-basis).
 -/
+
+@[expose] public section
 
 universe u
 

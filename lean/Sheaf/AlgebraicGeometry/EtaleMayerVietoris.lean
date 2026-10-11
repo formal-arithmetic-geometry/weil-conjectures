@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
-import Mathlib.CategoryTheory.Abelian.RightDerived
+module
+
+public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
+public import Mathlib.CategoryTheory.Abelian.RightDerived
 
 /-!
 # Mayer-Vietoris for étale cohomology
@@ -12,6 +14,8 @@ import Mathlib.CategoryTheory.Abelian.RightDerived
 Source: Stacks Project, Étale Cohomology, Tag 0A50, and Cohomology on Sites,
 Tag 03F3 (2) (blueprint: lem-weil-pbc-etale-mayer-vietoris).
 -/
+
+@[expose] public section
 
 universe u
 

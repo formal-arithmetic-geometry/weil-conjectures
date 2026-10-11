@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Mathlib.RingTheory.Noetherian.Defs
-import Mathlib.RingTheory.AdicCompletion.Basic
-import Mathlib.RingTheory.LocalRing.RingHom.Basic
-import Mathlib.RingTheory.RingHom.Flat
+module
+
+public import Mathlib.RingTheory.Noetherian.Defs
+public import Mathlib.RingTheory.AdicCompletion.Basic
+public import Mathlib.RingTheory.LocalRing.RingHom.Basic
+public import Mathlib.RingTheory.RingHom.Flat
 
 /-!
 # Flat presentations of maps of complete Noetherian local rings
@@ -14,6 +16,8 @@ import Mathlib.RingTheory.RingHom.Flat
 Source: Stacks Project, More on Algebra, Lemma 15.40.3 (Tag 07NN), its flat-presentation
 consequence (blueprint: lem-weil-pbc-complete-local-flat-presentation).
 -/
+
+@[expose] public section
 
 universe u v
 

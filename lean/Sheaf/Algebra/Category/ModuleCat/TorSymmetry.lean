@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import Mathlib.Algebra.Category.ModuleCat.Abelian
-import Mathlib.Algebra.Category.ModuleCat.Monoidal.Basic
-import Mathlib.Algebra.Category.ModuleCat.Projective
-import Mathlib.CategoryTheory.Monoidal.Tor
+module
+
+public import Mathlib.Algebra.Category.ModuleCat.Abelian
+public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Basic
+public import Mathlib.Algebra.Category.ModuleCat.Projective
+public import Mathlib.CategoryTheory.Monoidal.Tor
 
 /-!
 # Symmetry of Tor for modules over a commutative ring
@@ -14,6 +16,8 @@ import Mathlib.CategoryTheory.Monoidal.Tor
 Source: Stacks Project, Algebra, Lemma Tag 00M3, including its functoriality paragraph
 (blueprint: lem-weil-pbc-tor-symmetry).
 -/
+
+@[expose] public section
 
 universe u
 

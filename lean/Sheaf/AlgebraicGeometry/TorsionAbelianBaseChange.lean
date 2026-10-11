@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import WeilConjectures.SixFunctors.BaseChange.Derived
-import Sheaf.AlgebraicGeometry.TorsionEtaleSheaf
+module
+
+public import WeilConjectures.SixFunctors.BaseChange.Derived
+public import Sheaf.AlgebraicGeometry.TorsionEtaleSheaf
 
 /-!
 # Proper base change for torsion abelian sheaves
@@ -12,6 +14,8 @@ import Sheaf.AlgebraicGeometry.TorsionEtaleSheaf
 Source: Stacks Project, Tag 0A4B, and the blueprint's derived-exchange formulation
 (blueprint: def-weil-pbc-property).
 -/
+
+@[expose] public section
 
 universe u_pbc
 

@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group J1
 -/
-import Mathlib.RingTheory.GradedAlgebra.Homogeneous.Ideal
-import Mathlib.RingTheory.Ideal.Prime
+module
+
+public import Mathlib.RingTheory.GradedAlgebra.Homogeneous.Ideal
+public import Mathlib.RingTheory.Ideal.Prime
 
 /-!
 # Graded prime avoidance
@@ -12,6 +14,8 @@ import Mathlib.RingTheory.Ideal.Prime
 Source: Stacks Project, Algebra, Lemma 10.57.6 (Tag 00JS, `algebra-lemma-graded-silly`)
 (blueprint: lem-sc-graded-prime-avoidance).
 -/
+
+@[expose] public section
 
 universe u v
 

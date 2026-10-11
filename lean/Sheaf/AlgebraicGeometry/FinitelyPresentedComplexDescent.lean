@@ -3,11 +3,13 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group G1
 -/
-import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
-import Mathlib.Algebra.Homology.HomologicalComplex
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
-import Mathlib.RingTheory.Noetherian.Basic
-import Sheaf.AlgebraicGeometry.BaseChangeConventions
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
+public import Mathlib.Algebra.Homology.HomologicalComplex
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
+public import Mathlib.RingTheory.Noetherian.Basic
+public import Sheaf.AlgebraicGeometry.BaseChangeConventions
 
 /-!
 # Descent of bounded finitely presented complexes
@@ -16,6 +18,8 @@ Source: Stacks Project, Limits of Schemes, Lemma 32.10.2 (Tag 01ZR), in the
 Noetherian approximation setting of Lemma 32.10.4 (Tag 05LY)
 (blueprint: lem-pc-fp-complex-descent).
 -/
+
+@[expose] public section
 
 universe u
 

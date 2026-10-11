@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group J1
 -/
-import Mathlib.RingTheory.Spectrum.Prime.Topology
+module
+
+public import Mathlib.RingTheory.Spectrum.Prime.Topology
 
 /-!
 # Density of a principal open defined by a nonzerodivisor
@@ -11,6 +13,8 @@ import Mathlib.RingTheory.Spectrum.Prime.Topology
 Source: Stacks Project, Divisors, Lemma 31.14.4 (Tag 07ZU), affine-local calculation
 (blueprint: lem-pc-principal-open-dense-of-nonzerodivisor).
 -/
+
+@[expose] public section
 
 universe u
 

@@ -2,9 +2,11 @@
 Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 -/
-import Sheaf.RingTheory.SerreConditions
-import Mathlib.RingTheory.RingHom.Flat
-import Mathlib.RingTheory.LocalRing.ResidueField.Fiber
+module
+
+public import Sheaf.RingTheory.SerreConditions
+public import Mathlib.RingTheory.RingHom.Flat
+public import Mathlib.RingTheory.LocalRing.ResidueField.Fiber
 
 /-!
 # Ascent of Serre regularity in codimension
@@ -17,6 +19,8 @@ Source: Stacks Project, Algebra, Lemma Tag 033A (lemma-Rk-goes-up)
 - `regularity_rk_goes_up`: property `(R_k)` ascends along a flat map with
   Noetherian fibres satisfying `(R_k)`.
 -/
+
+@[expose] public section
 
 universe u v
 

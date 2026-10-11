@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group G1
 -/
-import Mathlib.CategoryTheory.Abelian.Injective.Resolution
+module
+
+public import Mathlib.CategoryTheory.Abelian.Injective.Resolution
 
 /-!
 # Lifting a morphism between horseshoe resolutions
@@ -12,6 +14,8 @@ Source: the classical horseshoe naturality argument of Weibel, Theorem 2.4.6,
 using Stacks Project, Tags 0136, 013R, 013P and 013T
 (blueprint: lem-weil-pbc-horseshoe-morphism-lift).
 -/
+
+@[expose] public section
 
 universe v u
 

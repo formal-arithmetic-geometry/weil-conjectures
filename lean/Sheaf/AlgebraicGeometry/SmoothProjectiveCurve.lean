@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Mathlib.AlgebraicGeometry.Morphisms.Smooth
-import Sheaf.AlgebraicGeometry.Variety
-import Sheaf.AlgebraicGeometry.Morphisms.Projective
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
+public import Sheaf.AlgebraicGeometry.Variety
+public import Sheaf.AlgebraicGeometry.Morphisms.Projective
 
 /-!
 # Smooth projective curves over a field
@@ -20,6 +22,8 @@ Varieties, Tags 020D and 0A23.
 * `AlgebraicGeometry.Scheme.Hom.IsSmoothProjectiveCurve`: a curve over a field whose
   structure morphism is smooth and projective.
 -/
+
+@[expose] public section
 
 universe u
 

@@ -3,11 +3,13 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF contributors
 -/
-import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
-import Mathlib.Algebra.Category.ModuleCat.Basic
-import Mathlib.Algebra.Category.ModuleCat.Abelian
-import Mathlib.CategoryTheory.Preadditive.Projective.Basic
-import Mathlib.CategoryTheory.Triangulated.Pretriangulated
+module
+
+public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
+public import Mathlib.Algebra.Category.ModuleCat.Basic
+public import Mathlib.Algebra.Category.ModuleCat.Abelian
+public import Mathlib.CategoryTheory.Preadditive.Projective.Basic
+public import Mathlib.CategoryTheory.Triangulated.Pretriangulated
 
 /-!
 # Splitting and uniqueness for a derived triangle with separated degrees
@@ -15,6 +17,8 @@ import Mathlib.CategoryTheory.Triangulated.Pretriangulated
 Source: Stacks Project, More on Algebra, Tag 0BCG (blueprint:
 lem-pc-derived-splitting-unique).
 -/
+
+@[expose] public section
 
 universe u v w
 

@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import Sheaf.CategoryTheory.ColimitSites
-import Mathlib.CategoryTheory.Category.Preorder
+module
+
+public import Sheaf.CategoryTheory.ColimitSites
+public import Mathlib.CategoryTheory.Category.Preorder
 
 /-!
 # Strictification of a directed system of sites
@@ -12,6 +14,8 @@ import Mathlib.CategoryTheory.Category.Preorder
 Source: Stacks Project, Categories, Lemma 004A, applied fibrewise; Sites, Situation 0A34
 (blueprint: lem-weil-pbc-site-system-strictification).
 -/
+
+@[expose] public section
 
 universe u v w
 

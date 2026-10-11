@@ -3,11 +3,13 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group J1
 -/
-import Mathlib.Algebra.Category.Grp.Abelian
-import Mathlib.Algebra.Homology.HomologicalComplexLimits
-import Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
-import Mathlib.CategoryTheory.Category.Preorder
-import Mathlib.SetTheory.Ordinal.Basic
+module
+
+public import Mathlib.Algebra.Category.Grp.Abelian
+public import Mathlib.Algebra.Homology.HomologicalComplexLimits
+public import Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
+public import Mathlib.CategoryTheory.Category.Preorder
+public import Mathlib.SetTheory.Ordinal.Basic
 
 /-!
 # Acyclicity of ordinal inverse limits
@@ -15,6 +17,8 @@ import Mathlib.SetTheory.Ordinal.Basic
 Source: Stacks Project, Homology, Lemma 12.31.8, Tag 0AAT
 (blueprint: lem-pur-kinjective-ML-ordinals).
 -/
+
+@[expose] public section
 
 universe u v
 

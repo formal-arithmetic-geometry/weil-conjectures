@@ -3,15 +3,19 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group J1
 -/
-import Sheaf.AlgebraicGeometry.LocallyFreeExtCohomology
-import WeilConjectures.AlgebraicGeometry.Cohomology.LongExact
-import WeilConjectures.AlgebraicGeometry.Modules.TensorSection
+module
+
+public import Sheaf.AlgebraicGeometry.LocallyFreeExtCohomology
+public import WeilConjectures.AlgebraicGeometry.Cohomology.LongExact
+public import WeilConjectures.AlgebraicGeometry.Modules.TensorSection
 
 /-! # The boundary of the unit section is the extension class
 
 Source: Stacks Project, Cohomology, Tag 0B3A, Lemma `lemma-h1-extensions`
 (blueprint: lem-sc-p1-boundary-one-extension-class).
 -/
+
+@[expose] public section
 
 universe u
 

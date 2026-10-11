@@ -3,14 +3,18 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group U1
 -/
-import Sheaf.AlgebraicGeometry.DerivedOpenRestrictionMaps
-import Sheaf.AlgebraicGeometry.DerivedDirectImagePreservesQCoh
+module
+
+public import Sheaf.AlgebraicGeometry.DerivedOpenRestrictionMaps
+public import Sheaf.AlgebraicGeometry.DerivedDirectImagePreservesQCoh
 
 /-! # Derived Mayer--Vietoris for a qcqs scheme
 
 Source: Stacks Project, Cohomology, Tag 08BV; Derived Categories of Schemes, Tag 08D5
 (blueprint: lem-pc-derived-mayer-vietoris-triangle).
 -/
+
+@[expose] public section
 
 universe u₁ w₁
 

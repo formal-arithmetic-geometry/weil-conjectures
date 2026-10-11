@@ -3,14 +3,18 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group J1
 -/
-import Mathlib.RingTheory.Finiteness.Projective
-import Mathlib.RingTheory.Localization.Finiteness
+module
+
+public import Mathlib.RingTheory.Finiteness.Projective
+public import Mathlib.RingTheory.Localization.Finiteness
 
 /-! # A finite standard free cover for a finite projective module
 
 Source: Stacks Project, Lemma Tag 00NX, (3)⇒(7), and Definition Tag 00NW
 in Section Tag 00NV (blueprint: lem-weil-pbc-finite-projective-standard-free-cover).
 -/
+
+@[expose] public section
 
 universe u v
 

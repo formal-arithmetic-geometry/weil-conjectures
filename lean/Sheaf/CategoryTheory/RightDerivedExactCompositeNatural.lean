@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import Sheaf.CategoryTheory.RightDerivedExactComposite
+module
+
+public import Sheaf.CategoryTheory.RightDerivedExactComposite
 
 /-!
 # Naturality of the exact-composite comparison
@@ -11,6 +13,8 @@ import Sheaf.CategoryTheory.RightDerivedExactComposite
 Source: Stacks Project, Tag 015E, applied to the resolutions in Tag 015M
 (blueprint: lem-sc-ext-derived-composite-natural).
 -/
+
+@[expose] public section
 
 universe u₁ u₂ u₃ v₁ v₂ v₃
 

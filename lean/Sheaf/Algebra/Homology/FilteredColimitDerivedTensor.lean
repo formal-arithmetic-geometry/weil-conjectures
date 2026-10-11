@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Sheaf.Algebra.Homology.DerivedTensorSecondFactorFunctor
-import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
-import Mathlib.Algebra.Homology.HomologicalComplexLimits
-import Mathlib.Algebra.Category.ModuleCat.Colimits
+module
+
+public import Sheaf.Algebra.Homology.DerivedTensorSecondFactorFunctor
+public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
+public import Mathlib.Algebra.Homology.HomologicalComplexLimits
+public import Mathlib.Algebra.Category.ModuleCat.Colimits
 
 /-!
 # Filtered colimits and cohomology of derived tensor products
@@ -14,6 +16,8 @@ import Mathlib.Algebra.Category.ModuleCat.Colimits
 Source: Stacks Project, Tags 06Y6, 06YR and 00DB
 (blueprint: lem-pc-filtered-colimit-derived-tensor).
 -/
+
+@[expose] public section
 
 set_option autoImplicit false
 

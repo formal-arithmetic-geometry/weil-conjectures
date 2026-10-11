@@ -1,4 +1,6 @@
-import Mathlib.CategoryTheory.CofilteredSystem
+module
+
+public import Mathlib.CategoryTheory.CofilteredSystem
 
 /-!
 # Nonempty limit of a Mittag-Leffler tower of sets
@@ -6,6 +8,8 @@ import Mathlib.CategoryTheory.CofilteredSystem
 Source: Stacks Project, Algebra, Lemma 0597, with Definition 0595 and Example 0596
 (blueprint: lem-weil-pbc-ml-sets-tower-limit-nonempty).
 -/
+
+@[expose] public section
 
 universe u
 

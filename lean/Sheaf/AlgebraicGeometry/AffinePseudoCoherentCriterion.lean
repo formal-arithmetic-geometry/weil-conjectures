@@ -3,15 +3,19 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Sheaf.AlgebraicGeometry.PseudoCoherentComplex
-import Sheaf.RingTheory.RingPseudoCoherent
-import Mathlib.AlgebraicGeometry.Modules.Tilde
+module
+
+public import Sheaf.AlgebraicGeometry.PseudoCoherentComplex
+public import Sheaf.RingTheory.RingPseudoCoherent
+public import Mathlib.AlgebraicGeometry.Modules.Tilde
 
 /-! # Pseudo-coherence on an affine scheme
 
 Source: Stacks Project, Derived Categories of Schemes, Lemma 36.10.2, Tag 08E7,
 pseudo-coherent clause (blueprint: lem-pc-affine-pseudo-coherent-criterion).
 -/
+
+@[expose] public section
 
 universe u wA wX
 

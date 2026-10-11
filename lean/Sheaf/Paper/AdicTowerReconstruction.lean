@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Mathlib.RingTheory.AdicCompletion.Basic
-import Mathlib.Topology.Algebra.Nonarchimedean.AdicTopology
+module
+
+public import Mathlib.RingTheory.AdicCompletion.Basic
+public import Mathlib.Topology.Algebra.Nonarchimedean.AdicTopology
 
 /-!
 # Reconstruction from an adic tower
@@ -12,6 +14,8 @@ import Mathlib.Topology.Algebra.Nonarchimedean.AdicTopology
 Source: Stacks Project, Algebra, Lemma 09B8 (lemma-limit-complete)
 (blueprint: lem-pod-adic-tower-reconstruction).
 -/
+
+@[expose] public section
 
 universe u v w
 

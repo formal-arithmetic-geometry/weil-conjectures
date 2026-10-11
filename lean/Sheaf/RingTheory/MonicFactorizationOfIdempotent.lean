@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import Mathlib.RingTheory.AdjoinRoot
-import Mathlib.RingTheory.Jacobson.Ideal
-import Mathlib.RingTheory.Coprime.Basic
-import Mathlib.Algebra.Group.Idempotent
+module
+
+public import Mathlib.RingTheory.AdjoinRoot
+public import Mathlib.RingTheory.Jacobson.Ideal
+public import Mathlib.RingTheory.Coprime.Basic
+public import Mathlib.Algebra.Group.Idempotent
 
 /-!
 # Monic factorization from a lifted idempotent
@@ -14,6 +16,8 @@ import Mathlib.Algebra.Group.Idempotent
 Source: Stacks Project, Tag 09XI, proof of (3) implies (1)
 (blueprint: lem-weil-pbc-idempotent-splitting-monic-factorization).
 -/
+
+@[expose] public section
 
 universe u
 

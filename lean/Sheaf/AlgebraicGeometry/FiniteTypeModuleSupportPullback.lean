@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group T1
 -/
-import Sheaf.AlgebraicGeometry.Coherent
-import Sheaf.AlgebraicGeometry.TensorPullback
-import Sheaf.AlgebraicGeometry.Modules.ResidueFiber
-import Mathlib.AlgebraicGeometry.ResidueField
+module
+
+public import Sheaf.AlgebraicGeometry.Coherent
+public import Sheaf.AlgebraicGeometry.TensorPullback
+public import Sheaf.AlgebraicGeometry.Modules.ResidueFiber
+public import Mathlib.AlgebraicGeometry.ResidueField
 
 /-!
 # Support and pullback of finite type quasi-coherent modules
@@ -14,6 +16,8 @@ import Mathlib.AlgebraicGeometry.ResidueField
 Source: Stacks Project, Morphisms of Schemes, Lemma 056J (lemma-support-finite-type)
 (blueprint: lem-weil-pbc-support-pullback-finite-type).
 -/
+
+@[expose] public section
 
 universe u
 

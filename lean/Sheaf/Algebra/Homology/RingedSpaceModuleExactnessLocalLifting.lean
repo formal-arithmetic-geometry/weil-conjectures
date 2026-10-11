@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group G1
 -/
-import Sheaf.Paper.DerivedHomMayerVietoris
-import Mathlib.Algebra.Homology.ShortComplex.Exact
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
+module
+
+public import Sheaf.Paper.DerivedHomMayerVietoris
+public import Mathlib.Algebra.Homology.ShortComplex.Exact
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 
 /-!
 # Local lifting for epimorphisms and exact complexes of module sheaves
@@ -13,6 +15,8 @@ import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 Source: Stacks Project, Modules, Section 01AF and Lemma 01AG; Sheaves, Definition
 007U and Lemma 0H7H (blueprint: lem-weil-pbc-ringed-space-module-exactness-local-lifting).
 -/
+
+@[expose] public section
 
 universe u
 

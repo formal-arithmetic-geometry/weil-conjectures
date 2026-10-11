@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group J1
 -/
-import Mathlib.RingTheory.Extension.Cotangent.Basic
-import Mathlib.LinearAlgebra.TensorProduct.Map
+module
+
+public import Mathlib.RingTheory.Extension.Cotangent.Basic
+public import Mathlib.LinearAlgebra.TensorProduct.Map
 
 /-!
 # Vanishing of the left base-change term of the Jacobi-Zariski sequence
@@ -12,6 +14,8 @@ import Mathlib.LinearAlgebra.TensorProduct.Map
 Source: Stacks Project, Algebra, Lemma 00S2, final assertion and its proof
 (blueprint: lem-weil-pbc-jacobi-zariski-left-term-vanishing).
 -/
+
+@[expose] public section
 
 universe u v
 

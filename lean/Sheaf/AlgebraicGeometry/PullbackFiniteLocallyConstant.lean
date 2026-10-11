@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group G1
 -/
-import Sheaf.AlgebraicGeometry.EtaleSheaves
+module
+
+public import Sheaf.AlgebraicGeometry.EtaleSheaves
 
 /-!
 # Pullback of finite locally constant abelian etale sheaves
@@ -11,6 +13,8 @@ import Sheaf.AlgebraicGeometry.EtaleSheaves
 Source: Stacks Project, Tags 095A, 03Q1 (3), and 03CB
 (blueprint: lem-weil-pbc-pullback-finite-locally-constant).
 -/
+
+@[expose] public section
 
 universe u
 

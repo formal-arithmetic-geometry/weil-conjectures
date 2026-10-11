@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under the Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import Sheaf.AlgebraicGeometry.DerivedCategory
-import Sheaf.AlgebraicGeometry.PerfectComplex
-import Mathlib.CategoryTheory.Triangulated.Subcategory
-import Mathlib.Topology.QuasiSeparated
+module
+
+public import Sheaf.AlgebraicGeometry.DerivedCategory
+public import Sheaf.AlgebraicGeometry.PerfectComplex
+public import Mathlib.CategoryTheory.Triangulated.Subcategory
+public import Mathlib.Topology.QuasiSeparated
 
 /-! # Perfect generators with support
 
@@ -20,6 +22,8 @@ condition (`def-pc-generators`) is expressed by the shifted-Hom vanishing criter
 `AlgebraicGeometry.perfect_generator_pullback`; Hom groups and shifts of the full
 subcategory are those of the ambient derived category.
 -/
+
+@[expose] public section
 
 universe u w
 

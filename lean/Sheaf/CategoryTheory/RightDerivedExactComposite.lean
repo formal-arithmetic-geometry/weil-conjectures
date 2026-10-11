@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import WeilConjectures.CategoryTheory.Abelian.RightDerived.Acyclic
+module
+
+public import WeilConjectures.CategoryTheory.Abelian.RightDerived.Acyclic
 
 /-!
 # Right derived functors after an exact functor
@@ -11,6 +13,8 @@ import WeilConjectures.CategoryTheory.Abelian.RightDerived.Acyclic
 Source: Weil conjectures blueprint, `lem-sc-ext-locally-free`, standard homological algebra
 parenthetical; Stacks Project, Tag 015M (blueprint: lem-sc-ext-derived-composite).
 -/
+
+@[expose] public section
 
 universe u₁ u₂ u₃ v₁ v₂ v₃
 

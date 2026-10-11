@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group U1
 -/
-import Sheaf.AlgebraicGeometry.SymmetricProductSections
-import Sheaf.AlgebraicGeometry.SymmetricProductPolynomial
-import Sheaf.AlgebraicGeometry.ProjectiveSpaceHomOfGeneratingSections
-import Mathlib.CategoryTheory.Limits.Shapes.Products
+module
+
+public import Sheaf.AlgebraicGeometry.SymmetricProductSections
+public import Sheaf.AlgebraicGeometry.SymmetricProductPolynomial
+public import Sheaf.AlgebraicGeometry.ProjectiveSpaceHomOfGeneratingSections
+public import Mathlib.CategoryTheory.Limits.Shapes.Products
 
 /-!
 # No common zero and permutation invariance
@@ -18,6 +20,8 @@ Stacks Project, Etale Cohomology, proof of Tag 0A4F, and Constructions, Tags 01N
 The positive integer n is written m + 1. The product is described by its universal
 cone in schemes over S; this applies in particular to the inductively formed fibre product.
 -/
+
+@[expose] public section
 
 universe v
 

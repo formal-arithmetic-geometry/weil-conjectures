@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF worker H1
 -/
-import Sheaf.RepresentationTheory.CoinducedHomotopyContinuous
+module
+
+public import Sheaf.RepresentationTheory.CoinducedHomotopyContinuous
 
 /-!
 # The coinduced contraction satisfies the homotopy identity
@@ -12,6 +14,8 @@ Source: Stacks Project, etale-cohomology.tex, Tag 0DVG,
 label section-continuous-group-cohomology, final profinite comparison
 (blueprint: lem-exc-coinduced-homotopy-identity).
 -/
+
+@[expose] public section
 
 universe u v w
 

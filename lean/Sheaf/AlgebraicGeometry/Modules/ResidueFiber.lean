@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import WeilConjectures.AlgebraicGeometry.Modules.FlatPullbackStalk
-import Mathlib.AlgebraicGeometry.ResidueField
+module
+
+public import WeilConjectures.AlgebraicGeometry.Modules.FlatPullbackStalk
+public import Mathlib.AlgebraicGeometry.ResidueField
 
 /-!
 # Residue-field fibres of scheme modules
@@ -17,6 +19,8 @@ Source: Stacks Project, Modules, Tags 01C5 and 01CB; Sheaves, Tag 0098
 - `AlgebraicGeometry.Scheme.Modules.residueFiber`: the stalk extended to the residue field.
 - `AlgebraicGeometry.Scheme.Modules.residueValue`: the value of a section in that fibre.
 -/
+
+@[expose] public section
 
 universe u
 

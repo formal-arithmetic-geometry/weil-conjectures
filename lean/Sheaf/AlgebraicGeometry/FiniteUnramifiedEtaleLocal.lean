@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Mathlib.AlgebraicGeometry.Morphisms.Finite
-import Mathlib.AlgebraicGeometry.Morphisms.Etale
-import Mathlib.AlgebraicGeometry.Pullbacks
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.Finite
+public import Mathlib.AlgebraicGeometry.Morphisms.Etale
+public import Mathlib.AlgebraicGeometry.Pullbacks
 
 /-!
 # Étale-local decomposition of finite unramified morphisms
@@ -13,6 +15,8 @@ import Mathlib.AlgebraicGeometry.Pullbacks
 Source: Stacks Project, Étale Morphisms, Lemma 04HJ
 (blueprint: lem-weil-pbc-finite-unramified-etale-local).
 -/
+
+@[expose] public section
 
 universe u
 

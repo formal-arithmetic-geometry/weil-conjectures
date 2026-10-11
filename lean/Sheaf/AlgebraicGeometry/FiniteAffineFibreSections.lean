@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group G1
 -/
-import Mathlib.AlgebraicGeometry.Fiber
-import Mathlib.AlgebraicGeometry.Spec
+module
+
+public import Mathlib.AlgebraicGeometry.Fiber
+public import Mathlib.AlgebraicGeometry.Spec
 
 /-!
 # Sections of an affine finite fibre
@@ -12,6 +14,8 @@ import Mathlib.AlgebraicGeometry.Spec
 Source: Stacks Project, Morphisms, affine calculation associated with Tag 02KB
 (blueprint: lem-pc-finite-affine-fibre-sections).
 -/
+
+@[expose] public section
 
 universe u
 

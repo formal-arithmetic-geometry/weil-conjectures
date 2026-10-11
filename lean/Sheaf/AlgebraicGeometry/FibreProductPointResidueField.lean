@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Mathlib.AlgebraicGeometry.PullbackCarrier
+module
+
+public import Mathlib.AlgebraicGeometry.PullbackCarrier
 
 /-!
 # Residue field of a point of a fibre product
@@ -11,6 +13,8 @@ import Mathlib.AlgebraicGeometry.PullbackCarrier
 Source: Stacks Project, Schemes, Lemma 26.17.5 (Tag 01JT)
 (blueprint: lem-weil-pbc-fibre-product-point-residue-field).
 -/
+
+@[expose] public section
 
 universe u
 

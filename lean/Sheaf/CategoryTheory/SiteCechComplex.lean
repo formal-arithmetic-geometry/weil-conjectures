@@ -2,11 +2,13 @@
 Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 -/
-import Mathlib.CategoryTheory.Sites.Precoverage
-import Mathlib.CategoryTheory.Abelian.FunctorCategory
-import Mathlib.Algebra.Homology.Embedding.CochainComplex
-import Mathlib.Algebra.Homology.ShortComplex.ExactFunctor
-import Mathlib.Algebra.Category.Grp.AB
+module
+
+public import Mathlib.CategoryTheory.Sites.Precoverage
+public import Mathlib.CategoryTheory.Abelian.FunctorCategory
+public import Mathlib.Algebra.Homology.Embedding.CochainComplex
+public import Mathlib.Algebra.Homology.ShortComplex.ExactFunctor
+public import Mathlib.Algebra.Category.Grp.AB
 
 /-!
 # Čech complexes of coverings on a site
@@ -18,6 +20,8 @@ Source: Stacks Project, Cohomology on Sites, Tags 03AK, 03AM, 03AO, 03AQ
 Its `complexFunctor` constructs the alternating restriction complex; `cohomologyFunctor`
 is its cohomology. Only verification proofs are postponed, never the differential or maps.
 -/
+
+@[expose] public section
 
 universe u v w r
 

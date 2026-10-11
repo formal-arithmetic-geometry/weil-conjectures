@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import Sheaf.RingTheory.GlobalDimension
-import Mathlib.Algebra.Module.LocalizedModule.Basic
+module
+
+public import Sheaf.RingTheory.GlobalDimension
+public import Mathlib.Algebra.Module.LocalizedModule.Basic
 
 /-!
 # Localization and finite global dimension
@@ -12,6 +14,8 @@ import Mathlib.Algebra.Module.LocalizedModule.Basic
 Source: Stacks Project, Algebra, Lemma 00O8
 (blueprint: lem-weil-pbc-localization-finite-gl-dim).
 -/
+
+@[expose] public section
 
 universe u v
 

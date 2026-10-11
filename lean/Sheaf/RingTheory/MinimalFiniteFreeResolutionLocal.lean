@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Sheaf.RingTheory.GlobalDimension
-import Mathlib.RingTheory.Noetherian.Defs
-import Mathlib.RingTheory.LocalRing.Module
+module
+
+public import Sheaf.RingTheory.GlobalDimension
+public import Mathlib.RingTheory.Noetherian.Defs
+public import Mathlib.RingTheory.LocalRing.Module
 
 /-!
 # Minimal finite free resolutions over a Noetherian local ring
@@ -13,6 +15,8 @@ import Mathlib.RingTheory.LocalRing.Module
 Source: Stacks Project, Algebra, Tags 0CXF and 00MT, as used in the proof of Tag 00OA
 (blueprint: lem-weil-pbc-minimal-finite-free-resolution-local).
 -/
+
+@[expose] public section
 
 universe u v
 

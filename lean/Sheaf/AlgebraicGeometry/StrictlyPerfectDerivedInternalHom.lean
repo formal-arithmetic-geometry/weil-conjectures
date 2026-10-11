@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import Sheaf.AlgebraicGeometry.PerfectComplex
-import Sheaf.Algebra.Homology.DerivedInternalHom
+module
+
+public import Sheaf.AlgebraicGeometry.PerfectComplex
+public import Sheaf.Algebra.Homology.DerivedInternalHom
 
 /-! # Internal Hom from a strictly perfect complex
 
@@ -16,6 +18,8 @@ category is the recorded localized-site carrier of `Scheme.IsStrictlyPerfect`.
 The comparison is computed with any functorial K-injective replacement, as in
 `derivedInternalHom_comparison`. No boundedness is imposed on the second complex.
 -/
+
+@[expose] public section
 
 universe u w
 

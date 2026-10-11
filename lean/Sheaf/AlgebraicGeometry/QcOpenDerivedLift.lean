@@ -3,14 +3,18 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group G1
 -/
-import Sheaf.AlgebraicGeometry.DerivedCategory
-import Mathlib.AlgebraicGeometry.AffineScheme
+module
+
+public import Sheaf.AlgebraicGeometry.DerivedCategory
+public import Mathlib.AlgebraicGeometry.AffineScheme
 
 /-! # Lifting quasi-coherent derived objects from a quasi-compact open
 
 Source: Stacks Project, Tag 08EE, proof invoking Tag 08ED, lemma-lift-quasi-coherent
 (blueprint: lem-sc-qc-open-derived-lift).
 -/
+
+@[expose] public section
 
 set_option autoImplicit false
 

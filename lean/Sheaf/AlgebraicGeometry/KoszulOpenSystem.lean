@@ -3,17 +3,21 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import Sheaf.Paper.KoszulComplex
-import Mathlib.LinearAlgebra.ExteriorPower.Basic
-import Sheaf.AlgebraicGeometry.DerivedCategory
-import Mathlib.AlgebraicGeometry.Modules.Tilde
-import Mathlib.Algebra.Homology.Embedding.Extend
-import Mathlib.Algebra.Homology.Single
+module
+
+public import Sheaf.Paper.KoszulComplex
+public import Mathlib.LinearAlgebra.ExteriorPower.Basic
+public import Sheaf.AlgebraicGeometry.DerivedCategory
+public import Mathlib.AlgebraicGeometry.Modules.Tilde
+public import Mathlib.Algebra.Homology.Embedding.Extend
+public import Mathlib.Algebra.Homology.Single
 
 /-! # The truncated Koszul system on a finite principal open
 
 Source: Stacks Project, Tags 08CX and 08DC (blueprint: def-sc-koszul-open-system).
 -/
+
+@[expose] public section
 
 universe u w
 

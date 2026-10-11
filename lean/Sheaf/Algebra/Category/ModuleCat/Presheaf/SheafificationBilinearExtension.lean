@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
-import Mathlib.Algebra.Category.Ring.Limits
+module
+
+public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
+public import Mathlib.Algebra.Category.Ring.Limits
 
 /-!
 # Extension of bilinear maps through module sheafification
@@ -12,6 +14,8 @@ import Mathlib.Algebra.Category.Ring.Limits
 Source: Stacks Project, Modules on Sites, Lemma 18.26.1 (Tag 0GMW), proof hint
 (blueprint: lem-pc-sites-module-sheafification-bilinear-extension).
 -/
+
+@[expose] public section
 
 universe u v w
 

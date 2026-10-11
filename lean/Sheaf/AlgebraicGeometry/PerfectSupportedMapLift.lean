@@ -3,13 +3,17 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import Sheaf.AlgebraicGeometry.PerfectComplex
+module
+
+public import Sheaf.AlgebraicGeometry.PerfectComplex
 
 /-! # Lifting maps from perfect complexes with support
 
 Source: Stacks Project, Derived Categories of Schemes, Tag 09IM, Lemma 36.13.11
 (blueprint: lem-sc-perfect-support-map-lift).
 -/
+
+@[expose] public section
 
 set_option autoImplicit false
 

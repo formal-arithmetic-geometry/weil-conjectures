@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF contributors
 -/
-import WeilConjectures.AlgebraicGeometry.Modules.PullbackFreeGenerator
-import WeilConjectures.AlgebraicGeometry.Modules.ZeroLocus
-import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Invertible
-import Mathlib.AlgebraicGeometry.Properties
+module
+
+public import WeilConjectures.AlgebraicGeometry.Modules.PullbackFreeGenerator
+public import WeilConjectures.AlgebraicGeometry.Modules.ZeroLocus
+public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Invertible
+public import Mathlib.AlgebraicGeometry.Properties
 
 /-!
 # Nonzero sections on integral schemes
@@ -14,6 +16,8 @@ import Mathlib.AlgebraicGeometry.Properties
 Source: `literature/stacks-project/divisors.tex`, Lemma 02OR (blueprint:
 `lem-pc-nonzero-section-integral-cartier`).
 -/
+
+@[expose] public section
 
 universe u
 

@@ -3,9 +3,13 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group T1
 -/
-import Mathlib.CategoryTheory.Sites.ConstantSheaf
-import Mathlib.Topology.Sheaves.Abelian
-import Sheaf.Topology.AbelianOpenExtensionByZeroStalks
+module
+
+public import Mathlib.CategoryTheory.Sites.ConstantSheaf
+public import Mathlib.Topology.Sheaves.Abelian
+public import Sheaf.Topology.AbelianOpenExtensionByZeroStalks
+
+@[expose] public section
 
 open CategoryTheory CategoryTheory.Limits TopologicalSpace Opposite
 

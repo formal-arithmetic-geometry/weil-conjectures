@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group J1
 -/
-import Sheaf.AlgebraicGeometry.PerfectComplex
-import Sheaf.AlgebraicGeometry.DerivedPullbackComposition
-import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
-import WeilConjectures.AlgebraicGeometry.Picard.TwistedDescent
+module
+
+public import Sheaf.AlgebraicGeometry.PerfectComplex
+public import Sheaf.AlgebraicGeometry.DerivedPullbackComposition
+public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
+public import WeilConjectures.AlgebraicGeometry.Picard.TwistedDescent
 
 /-! # Descent of morphisms between perfect complexes
 
@@ -17,6 +19,8 @@ The shared coherent derived-pullback composition comparisons transport the stage
 to the direct pullbacks of both objects. The equality clause uses a common starting stage for the
 finite list of morphisms; directedness puts any finite list of starting stages in this form.
 -/
+
+@[expose] public section
 
 universe u w
 

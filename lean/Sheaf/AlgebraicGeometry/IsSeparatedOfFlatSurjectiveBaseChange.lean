@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import Mathlib.AlgebraicGeometry.Morphisms.Flat
-import Mathlib.AlgebraicGeometry.Morphisms.Separated
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.Flat
+public import Mathlib.AlgebraicGeometry.Morphisms.Separated
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 
 /-!
 # Descent of separatedness along a flat surjective quasi-compact morphism
@@ -14,6 +16,8 @@ Source: Stacks Project, Descent, Lemma Tag 02KU (lemma-descending-property-separ
 the descent direction for a one-member fpqc covering
 (blueprint: lem-weil-pbc-fpqc-descend-separated).
 -/
+
+@[expose] public section
 
 universe u
 

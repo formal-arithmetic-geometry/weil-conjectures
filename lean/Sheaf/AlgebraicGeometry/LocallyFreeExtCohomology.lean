@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import WeilConjectures.AlgebraicGeometry.Modules.Ext
-import WeilConjectures.AlgebraicGeometry.Modules.HomTensor
-import Mathlib.Algebra.Homology.DerivedCategory.Ext.Map
+module
+
+public import WeilConjectures.AlgebraicGeometry.Modules.Ext
+public import WeilConjectures.AlgebraicGeometry.Modules.HomTensor
+public import Mathlib.Algebra.Homology.DerivedCategory.Ext.Map
 
 /-!
 # The canonical locally free Ext comparison
@@ -17,6 +19,8 @@ That `dualTensorHom F G` is an isomorphism for a finite locally free `F` is the 
 instance `AlgebraicGeometry.Scheme.Modules.isIso_dualTensorHom_of_isFiniteLocallyFree`
 (`WeilConjectures.AlgebraicGeometry.Modules.HomTensor.LocallyFree`), used below.
 -/
+
+@[expose] public section
 
 universe u
 

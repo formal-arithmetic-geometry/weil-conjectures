@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group G1
 -/
-import WeilConjectures.Mathlib.FieldTheory.IsSepClosed
-import Mathlib.FieldTheory.KrullTopology
-import Mathlib.Topology.Algebra.Group.Quotient
+module
+
+public import WeilConjectures.Mathlib.FieldTheory.IsSepClosed
+public import Mathlib.FieldTheory.KrullTopology
+public import Mathlib.Topology.Algebra.Group.Quotient
 
 /-!
 # Open subgroups and finite separable fixed fields
@@ -13,6 +15,8 @@ import Mathlib.Topology.Algebra.Group.Quotient
 Source: Stacks Project, Tags 03QR and 03SF, with the Galois correspondence in Tag 0BML
 (blueprint: lem-exc-etale-open-subgroup-fixed-field).
 -/
+
+@[expose] public section
 
 universe u v w
 

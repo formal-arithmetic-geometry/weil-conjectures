@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusSingle
+module
+
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusSingle
 
 /-!
 # Shift identification for bounded below right derived functors
@@ -17,6 +19,8 @@ right-derived-functor comparison in nonnegative degrees, and vanishing in negati
 The shift of the single complex in degree zero is used literally, so that `X[-q]` means
 `X` in degree `q`. Natural isomorphisms have domain `CochainComplex.Plus C`.
 -/
+
+@[expose] public section
 
 universe w₁ w₂ v₁ v₂ u₁ u₂
 

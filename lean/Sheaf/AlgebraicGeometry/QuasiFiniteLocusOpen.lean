@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group J1
 -/
-import Sheaf.AlgebraicGeometry.QuasiFiniteMorphism
+module
+
+public import Sheaf.AlgebraicGeometry.QuasiFiniteMorphism
 
 /-!
 # Openness of the quasi-finite locus
@@ -11,6 +13,8 @@ import Sheaf.AlgebraicGeometry.QuasiFiniteMorphism
 Source: Stacks Project, Morphisms of Schemes, Tag 01TI
 (blueprint: lem-sc-quasi-finite-points-open).
 -/
+
+@[expose] public section
 
 universe u
 

@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
+module
+
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 
 /-!
 # Quotient base change and its ideal sheaf
@@ -15,6 +17,8 @@ The four statements give closedness and the affine description, products and pow
 the transition for nested ideals, and compatibility of extended ideals with base change.
 The statements write out the existing Mathlib constructions; no new notion is defined.
 -/
+
+@[expose] public section
 
 universe u
 

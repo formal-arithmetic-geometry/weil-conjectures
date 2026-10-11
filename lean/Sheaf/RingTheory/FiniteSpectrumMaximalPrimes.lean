@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group G1
 -/
-import Mathlib.RingTheory.FiniteType
-import Mathlib.RingTheory.Spectrum.Prime.Basic
+module
+
+public import Mathlib.RingTheory.FiniteType
+public import Mathlib.RingTheory.Spectrum.Prime.Basic
 
 /-!
 # Maximality of primes in a finite-spectrum finite-type field algebra
@@ -12,6 +14,8 @@ import Mathlib.RingTheory.Spectrum.Prime.Basic
 Source: Stacks Project, Algebra, Lemma 10.61.3 (Tag 0ALW), implication (2) to (1)
 (blueprint: lem-pqf-finite-spectrum-maximal-primes).
 -/
+
+@[expose] public section
 
 universe u v
 

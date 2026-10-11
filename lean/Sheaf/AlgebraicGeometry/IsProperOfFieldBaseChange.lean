@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import Mathlib.AlgebraicGeometry.Morphisms.Proper
-import Sheaf.AlgebraicGeometry.BaseChangeConventions
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.Proper
+public import Sheaf.AlgebraicGeometry.BaseChangeConventions
 
 /-!
 # Properness descends along a field extension
@@ -12,6 +14,8 @@ import Sheaf.AlgebraicGeometry.BaseChangeConventions
 Source: Stacks Project, Descent, Lemma 35.23.16 (Tag 02L1), specialized to a field extension
 (blueprint: lem-pc-proper-descends-field).
 -/
+
+@[expose] public section
 
 universe u
 

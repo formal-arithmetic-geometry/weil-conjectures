@@ -3,16 +3,20 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import Sheaf.AlgebraicGeometry.SectionFractionPresentation
-import WeilConjectures.AlgebraicGeometry.Modules.PullbackFreeGenerator
-import Sheaf.AlgebraicGeometry.Ample
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
+module
+
+public import Sheaf.AlgebraicGeometry.SectionFractionPresentation
+public import WeilConjectures.AlgebraicGeometry.Modules.PullbackFreeGenerator
+public import Sheaf.AlgebraicGeometry.Ample
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 
 /-! # Localization of sections at a section of an invertible module
 
 Source: Stacks Project, Properties, Lemma 01PW (lemma-invert-s-sections), part (2),
 equation module-invert-s (blueprint: lem-sc-p1-invertible-section-localization).
 -/
+
+@[expose] public section
 
 universe uL
 

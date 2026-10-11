@@ -3,16 +3,20 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group V1
 -/
-import Sheaf.AlgebraicGeometry.DerivedMayerVietorisTriangle
-import Sheaf.AlgebraicGeometry.DerivedDirectImageCompositionUnbounded
-import Sheaf.AlgebraicGeometry.DerivedDirectImageOpenRestriction
-import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triangulated
+module
+
+public import Sheaf.AlgebraicGeometry.DerivedMayerVietorisTriangle
+public import Sheaf.AlgebraicGeometry.DerivedDirectImageCompositionUnbounded
+public import Sheaf.AlgebraicGeometry.DerivedDirectImageOpenRestriction
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triangulated
 
 /-! # Functoriality of derived Mayer--Vietoris triangles
 
 Source: Stacks Project, Cohomology, Tags 08BV and 0D5T; Derived Categories of Schemes,
 Tag 0DJ9 (blueprint: lem-pc-derived-mayer-vietoris-functorial).
 -/
+
+@[expose] public section
 
 universe u w
 

@@ -3,11 +3,13 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group Q1
 -/
-import Mathlib.Algebra.Category.Ring.Colimits
-import Mathlib.Algebra.MvPolynomial.Eval
-import Mathlib.RingTheory.TensorProduct.Basic
-import Sheaf.Order.DirectedFiniteUpperBound
-import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
+module
+
+public import Mathlib.Algebra.Category.Ring.Colimits
+public import Mathlib.Algebra.MvPolynomial.Eval
+public import Mathlib.RingTheory.TensorProduct.Basic
+public import Sheaf.Order.DirectedFiniteUpperBound
+public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
 
 /-!
 # Finite-stage model of a finitely presented affine algebra
@@ -22,6 +24,8 @@ The tensor factors are written in the order `A ⊗ B_stage`, canonically equival
 source's `B_stage ⊗ A`, so that the colimit algebra structure is Mathlib's left structure.
 The scheme diagram and cone use the existing base-change construction, including its maps.
 -/
+
+@[expose] public section
 
 universe u
 

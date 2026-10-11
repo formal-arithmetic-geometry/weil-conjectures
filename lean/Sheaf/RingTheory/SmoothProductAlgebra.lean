@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Mathlib.RingTheory.Smooth.Basic
-import Mathlib.Algebra.Algebra.Prod
+module
+
+public import Mathlib.RingTheory.Smooth.Basic
+public import Mathlib.Algebra.Algebra.Prod
 
 /-!
 # A product of two smooth algebras over one base is smooth
@@ -12,6 +14,8 @@ import Mathlib.Algebra.Algebra.Prod
 Source: Stacks Project, Algebra, Lemma Tag 0GIF (lemma-product-smooth), the forward construction
 from smooth factors (blueprint: lem-weil-pbc-smooth-product-algebra).
 -/
+
+@[expose] public section
 
 universe u v w
 

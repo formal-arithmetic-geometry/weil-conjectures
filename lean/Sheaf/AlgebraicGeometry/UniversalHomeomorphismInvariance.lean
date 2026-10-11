@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
-import Sheaf.AlgebraicGeometry.EtaleSheaves
+module
+
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
+public import Sheaf.AlgebraicGeometry.EtaleSheaves
 
 /-!
 # Universal-homeomorphism invariance, with functorial compatibility
@@ -12,6 +14,8 @@ import Sheaf.AlgebraicGeometry.EtaleSheaves
 Source: Stacks Project, Tags 04DZ and 03SI; blueprint `sec-curve-estimates/sk-prop-cd`
 (blueprint: thm-weil-pbc-universal-homeomorphism-invariance).
 -/
+
+@[expose] public section
 
 universe u w
 

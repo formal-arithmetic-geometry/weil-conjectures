@@ -3,12 +3,14 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import Mathlib.AlgebraicGeometry.FunctionField
-import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-import Mathlib.AlgebraicGeometry.Morphisms.Etale
-import Mathlib.AlgebraicGeometry.Morphisms.Finite
-import Mathlib.FieldTheory.IsSepClosed
-import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
+module
+
+public import Mathlib.AlgebraicGeometry.FunctionField
+public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+public import Mathlib.AlgebraicGeometry.Morphisms.Etale
+public import Mathlib.AlgebraicGeometry.Morphisms.Finite
+public import Mathlib.FieldTheory.IsSepClosed
+public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
 
 /-!
 # Étale covers of closed subschemes of an affine normal scheme
@@ -16,6 +18,8 @@ import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
 Source: Stacks Project, Étale Cohomology, Lemma 59.80.6 (Tag 09ZA)
 (blueprint: lem-weil-pbc-gabber-finite-etale-section).
 -/
+
+@[expose] public section
 
 set_option autoImplicit false
 

@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group U1
 -/
-import WeilConjectures.AlgebraicGeometry.Morphisms.Integral.FiniteApproximation
-import WeilConjectures.Mathlib.AlgebraicGeometry.ZariskisMainTheorem
-import Sheaf.AlgebraicGeometry.QuasiFiniteMorphism
+module
+
+public import WeilConjectures.AlgebraicGeometry.Morphisms.Integral.FiniteApproximation
+public import WeilConjectures.Mathlib.AlgebraicGeometry.ZariskisMainTheorem
+public import Sheaf.AlgebraicGeometry.QuasiFiniteMorphism
 
 /-!
 # Descent of the normalization immersion to a finite stage
@@ -14,6 +16,8 @@ Source: the blueprint, sec-nagata-compactification, sk-prop-nagata-sketch-zmt,
 node thm-pqf-immersion-descent; Stacks Project, Tags 01Z4, 081B, 01QV, 05K0
 (blueprint: thm-pqf-immersion-descent).
 -/
+
+@[expose] public section
 
 universe u
 

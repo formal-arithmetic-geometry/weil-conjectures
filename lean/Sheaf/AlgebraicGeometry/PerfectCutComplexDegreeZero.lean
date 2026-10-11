@@ -3,15 +3,19 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import Sheaf.AlgebraicGeometry.PerfectComplex
-import Sheaf.AlgebraicGeometry.DegreeZeroFibreSurjective
-import Sheaf.AlgebraicGeometry.DerivedTensorCohomologyVanishes
+module
+
+public import Sheaf.AlgebraicGeometry.PerfectComplex
+public import Sheaf.AlgebraicGeometry.DegreeZeroFibreSurjective
+public import Sheaf.AlgebraicGeometry.DerivedTensorCohomologyVanishes
 
 /-! # Splitting a perfect complex at degree zero near a point
 
 Source: Stacks Project, More on Algebra, Lemma 15.78.2, Tag 0A1U
 (blueprint: lem-sc-perfect-cut-complex-degree-zero).
 -/
+
+@[expose] public section
 
 set_option autoImplicit false
 

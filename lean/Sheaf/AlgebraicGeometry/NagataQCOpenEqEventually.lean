@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group T1
 -/
-import Sheaf.AlgebraicGeometry.NagataQCOpenEqualityStage
+module
+
+public import Sheaf.AlgebraicGeometry.NagataQCOpenEqualityStage
 
 /-!
 # Eventual equality of descended quasi-compact opens
@@ -12,6 +14,8 @@ Source: literature/blueprint/master/blueprint/sec-nagata-compactification/
 sk-prop-nagata-sketch-approximation/lemma-nagata-qc-open-eq-eventually.md
 (blueprint: lemma-nagata-qc-open-eq-eventually).
 -/
+
+@[expose] public section
 
 universe u
 

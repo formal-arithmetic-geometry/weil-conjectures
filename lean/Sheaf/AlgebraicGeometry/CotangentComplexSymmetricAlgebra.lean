@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import Mathlib.LinearAlgebra.SymmetricAlgebra.Basic
-import Mathlib.RingTheory.Kaehler.Basic
-import Mathlib.RingTheory.Kaehler.Polynomial
-import Mathlib.RingTheory.Extension.Cotangent.Basic
+module
+
+public import Mathlib.LinearAlgebra.SymmetricAlgebra.Basic
+public import Mathlib.RingTheory.Kaehler.Basic
+public import Mathlib.RingTheory.Kaehler.Polynomial
+public import Mathlib.RingTheory.Extension.Cotangent.Basic
 
 /-!
 # Naive cotangent complex of a symmetric algebra
@@ -15,6 +17,8 @@ Source: literature/stacks-project/more-algebra.tex, Lemma Tag 07EV (corrected: t
 conormal map is only surjective)
 (blueprint: lem-weil-pbc-cotangent-complex-symmetric-algebra)
 -/
+
+@[expose] public section
 
 universe u v
 

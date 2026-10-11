@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import Sheaf.RingTheory.QuasiFiniteAtPrime
-import Mathlib.RingTheory.Localization.Away.Basic
+module
+
+public import Sheaf.RingTheory.QuasiFiniteAtPrime
+public import Mathlib.RingTheory.Localization.Away.Basic
 
 /-!
 # A finite subalgebra agreeing near a quasi-finite prime
@@ -13,6 +15,8 @@ Source: Stacks Project, Algebra, Theorem Tag 00Q9 and the finite-subalgebra cons
 in the proof of Lemma Tag 00QA, also used in Lemma Tag 00QB (3).
 (blueprint: lem-weil-pbc-quasi-finite-at-finite-subalgebra-away)
 -/
+
+@[expose] public section
 
 universe u v
 

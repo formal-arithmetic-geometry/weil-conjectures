@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Sheaf.AlgebraicGeometry.FiniteEtaleTrace
-import WeilConjectures.AlgebraicGeometry.Morphisms.FiberDegree
-import Mathlib.FieldTheory.IsAlgClosed.Basic
+module
+
+public import Sheaf.AlgebraicGeometry.FiniteEtaleTrace
+public import WeilConjectures.AlgebraicGeometry.Morphisms.FiberDegree
+public import Mathlib.FieldTheory.IsAlgClosed.Basic
 
 /-!
 # Degree and trace of a finite étale cover
@@ -13,6 +15,8 @@ import Mathlib.FieldTheory.IsAlgClosed.Basic
 Source: Stacks Project, Section 03SH, after Definition 03SE
 (blueprint: lem-weil-pbc-finite-etale-trace-degree).
 -/
+
+@[expose] public section
 
 set_option autoImplicit false
 

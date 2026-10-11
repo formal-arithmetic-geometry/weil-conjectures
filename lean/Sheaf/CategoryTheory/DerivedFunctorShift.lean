@@ -3,13 +3,17 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Sheaf.CategoryTheory.IsSaturatedTriangulatedMultiplicativeSystem
+module
+
+public import Sheaf.CategoryTheory.IsSaturatedTriangulatedMultiplicativeSystem
 
 /-! # Left derived values commute with shifts
 
 Source: Stacks Project, Derived Categories, Lemma 05SU(2)
 (blueprint: lem-pur-derived-functor-shift-05su).
 -/
+
+@[expose] public section
 
 universe u v uD vD
 

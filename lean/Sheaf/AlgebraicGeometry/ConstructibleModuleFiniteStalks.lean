@@ -1,5 +1,7 @@
-import Sheaf.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
-import Mathlib.Algebra.Category.ModuleCat.Sheaf
+module
+
+public import Sheaf.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf
 
 /-!
 # Finite geometric stalks of constructible module sheaves
@@ -7,6 +9,8 @@ import Mathlib.Algebra.Category.ModuleCat.Sheaf
 Source: Stacks Project, proof of Lemma 095N (line 12412 ff.), using Definitions 03RU and
 03RW and Lemma 03Q1 (blueprint: lem-weil-pbc-constructible-module-finite-stalks).
 -/
+
+@[expose] public section
 
 universe u
 

@@ -1,7 +1,11 @@
-import Mathlib.Algebra.Polynomial.Basic
-import Mathlib.RingTheory.Localization.AtPrime.Basic
-import Mathlib.RingTheory.AdicCompletion.Algebra
-import Sheaf.RingTheory.GRing
+module
+
+public import Mathlib.Algebra.Polynomial.Basic
+public import Mathlib.RingTheory.Localization.AtPrime.Basic
+public import Mathlib.RingTheory.AdicCompletion.Algebra
+public import Sheaf.RingTheory.GRing
+
+@[expose] public section
 
 universe u
 

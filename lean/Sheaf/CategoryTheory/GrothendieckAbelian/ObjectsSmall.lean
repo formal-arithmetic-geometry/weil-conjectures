@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group N1
 -/
-import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.Basic
-import Mathlib.CategoryTheory.Category.Preorder
-import Mathlib.SetTheory.Cardinal.HasCardinalLT
-import Mathlib.SetTheory.Cardinal.Cofinality.Ordinal
+module
+
+public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.Basic
+public import Mathlib.CategoryTheory.Category.Preorder
+public import Mathlib.SetTheory.Cardinal.HasCardinalLT
+public import Mathlib.SetTheory.Cardinal.Cofinality.Ordinal
 
 /-!
 # Smallness of objects with respect to ordinal chains of monomorphisms
@@ -14,6 +16,8 @@ import Mathlib.SetTheory.Cardinal.Cofinality.Ordinal
 Source: Stacks Project, Injectives, Proposition 19.11.5 (Tag 079F),
 `proposition-objects-are-small` (blueprint: prop-pur-kinjective-objects-small).
 -/
+
+@[expose] public section
 
 universe w v u
 

@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group J1
 -/
-import Mathlib.RingTheory.RegularLocalRing.Defs
-import Mathlib.RingTheory.Regular.RegularSequence
-import Sheaf.RingTheory.IsRegularSystemOfParameters
+module
+
+public import Mathlib.RingTheory.RegularLocalRing.Defs
+public import Mathlib.RingTheory.Regular.RegularSequence
+public import Sheaf.RingTheory.IsRegularSystemOfParameters
 
 /-!
 # Regular systems of parameters and regular sequences
@@ -20,6 +22,8 @@ Source: Stacks Project, Algebra, Lemma 00NQ and Definition 00KU
 * `IsRegularLocalRing.minimal_generators_iff_card_eq_dimension`: the parenthetical
   characterization of minimal generating sets in the node.
 -/
+
+@[expose] public section
 
 universe u
 

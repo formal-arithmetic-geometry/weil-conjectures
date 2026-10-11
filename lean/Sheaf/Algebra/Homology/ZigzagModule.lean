@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF worker G1
 -/
-import Mathlib.Algebra.Homology.HomologicalBicomplex
-import Mathlib.Algebra.Category.ModuleCat.Basic
-import Mathlib.Algebra.DirectSum.Module
-import Mathlib.LinearAlgebra.Quotient.Basic
+module
+
+public import Mathlib.Algebra.Homology.HomologicalBicomplex
+public import Mathlib.Algebra.Category.ModuleCat.Basic
+public import Mathlib.Algebra.DirectSum.Module
+public import Mathlib.LinearAlgebra.Quotient.Basic
 
 /-!
 # Zig-zag modules of homological double complexes
@@ -14,6 +16,8 @@ import Mathlib.LinearAlgebra.Quotient.Basic
 Source: Stacks Project, Algebra, Lemma Tag 00M1, proof
 (blueprint: def-weil-pbc-double-complex-zigzag-module).
 -/
+
+@[expose] public section
 
 open CategoryTheory DirectSum
 

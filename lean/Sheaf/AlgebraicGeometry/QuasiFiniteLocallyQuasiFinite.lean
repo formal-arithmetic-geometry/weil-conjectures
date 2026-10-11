@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import Sheaf.AlgebraicGeometry.QuasiFiniteMorphism
+module
+
+public import Sheaf.AlgebraicGeometry.QuasiFiniteMorphism
 
 /-!
 # Quasi-finite morphisms are locally quasi-finite and quasi-compact
@@ -12,6 +14,8 @@ Source: literature/blueprint/master/blueprint/sec-nagata-compactification/
 sk-prop-nagata-sketch-zmt/pqf-lem-qf-locqf-qc.md, node pqf-lem-qf-locqf-qc,
 order 200 (blueprint: pqf-lem-qf-locqf-qc).
 -/
+
+@[expose] public section
 
 universe v
 

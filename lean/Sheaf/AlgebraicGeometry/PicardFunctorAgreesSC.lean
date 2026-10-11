@@ -1,8 +1,12 @@
-import Mathlib.AlgebraicGeometry.Geometrically.Integral
-import WeilConjectures.AlgebraicGeometry.Picard.Defs
-import WeilConjectures.AlgebraicGeometry.PicardFunctor
-import Sheaf.AlgebraicGeometry.FppfAffineSheafificationRestriction
-import Sheaf.AlgebraicGeometry.SmoothProjectiveCurve
+module
+
+public import Mathlib.AlgebraicGeometry.Geometrically.Integral
+public import WeilConjectures.AlgebraicGeometry.Picard.Defs
+public import WeilConjectures.AlgebraicGeometry.PicardFunctor
+public import Sheaf.AlgebraicGeometry.FppfAffineSheafificationRestriction
+public import Sheaf.AlgebraicGeometry.SmoothProjectiveCurve
+
+@[expose] public section
 
 universe u
 

@@ -3,11 +3,13 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import Mathlib.Algebra.Category.CommAlgCat.Basic
-import Mathlib.CategoryTheory.Filtered.Basic
-import Mathlib.RingTheory.Etale.Basic
-import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
-import Mathlib.RingTheory.Localization.AtPrime.Basic
+module
+
+public import Mathlib.Algebra.Category.CommAlgCat.Basic
+public import Mathlib.CategoryTheory.Filtered.Basic
+public import Mathlib.RingTheory.Etale.Basic
+public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
+public import Mathlib.RingTheory.Localization.AtPrime.Basic
 
 /-!
 # Local filtered colimits of etale algebras over normal domains
@@ -16,6 +18,8 @@ Source: Stacks Project, Tag 06DI, proof of normality of strict henselizations,
 with Tags 033C, 037D, 00GV, 00U2 and 00D7
 (blueprint: lem-weil-pbc-etale-colimit-normal-local-domain).
 -/
+
+@[expose] public section
 
 universe u v
 

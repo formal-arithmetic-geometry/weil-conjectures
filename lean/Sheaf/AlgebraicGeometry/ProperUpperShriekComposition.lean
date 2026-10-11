@@ -3,16 +3,20 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
-import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImageComposition
-import Mathlib.AlgebraicGeometry.Morphisms.Proper
-import Mathlib.AlgebraicGeometry.Noetherian
+module
+
+public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
+public import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImageComposition
+public import Mathlib.AlgebraicGeometry.Morphisms.Proper
+public import Mathlib.AlgebraicGeometry.Noetherian
 
 /-! # Composition of coherent upper shriek for proper morphisms
 
 Source: Stacks Project, Duality for Schemes, Lemma 48.16.3 (Tag 0ATX), proper case
 (blueprint: lem-sc-proper-upper-shriek-composition).
 -/
+
+@[expose] public section
 
 universe uS wXS wYS wZS
 

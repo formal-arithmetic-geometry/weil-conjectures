@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import WeilConjectures.SixFunctors.BaseChange.Derived
-import Sheaf.CategoryTheory.ExactCouple
+module
+
+public import WeilConjectures.SixFunctors.BaseChange.Derived
+public import Sheaf.CategoryTheory.ExactCouple
 
 /-!
 # Exchange on truncation exact couples
@@ -12,6 +14,8 @@ import Sheaf.CategoryTheory.ExactCouple
 Source: Stacks Project, Tag 0DDE, proof, with the truncation construction of Tags
 08J5, 0148 and 011Q (blueprint: lem-weil-pbc-truncation-couple-morphism).
 -/
+
+@[expose] public section
 
 set_option autoImplicit false
 

@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group G1
 -/
-import Sheaf.Topology.SetsExtensionByEmpty
-import Mathlib.CategoryTheory.Limits.Shapes.Products
-import Mathlib.Topology.Bases
+module
+
+public import Sheaf.Topology.SetsExtensionByEmpty
+public import Mathlib.CategoryTheory.Limits.Shapes.Products
+public import Mathlib.Topology.Bases
 
 /-!
 # Covering a sheaf of sets by constant sheaves on basis opens
@@ -13,6 +15,8 @@ import Mathlib.Topology.Bases
 Source: Stacks Project, Modules, Lemma 17.19.1 (Tag 0CAH)
 (blueprint: lem-weil-pbc-sheaf-basis-surjection).
 -/
+
+@[expose] public section
 
 universe u
 

@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group G1
 -/
-import Sheaf.AlgebraicGeometry.TensorPullback
-import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
-import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-import Mathlib.CategoryTheory.Abelian.Images
+module
+
+public import Sheaf.AlgebraicGeometry.TensorPullback
+public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
+public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+public import Mathlib.CategoryTheory.Abelian.Images
 
 /-!
 # Restriction of the ideal of the complementary components
@@ -14,6 +16,8 @@ import Mathlib.CategoryTheory.Abelian.Images
 Source: Stacks Project, Varieties, Remark 33.38.9 (Tag 09NW), applied to the reduced
 component cover (blueprint: lem-sc-conductor-ideal-restriction).
 -/
+
+@[expose] public section
 
 universe u v
 

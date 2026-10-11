@@ -3,17 +3,21 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import Sheaf.AlgebraicGeometry.CoherentFormalModule
-import Mathlib.AlgebraicGeometry.Morphisms.Proper
-import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
-import Mathlib.RingTheory.AdicCompletion.Basic
-import WeilConjectures.Mathlib.AlgebraicGeometry.Noetherian
+module
+
+public import Sheaf.AlgebraicGeometry.CoherentFormalModule
+public import Mathlib.AlgebraicGeometry.Morphisms.Proper
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
+public import Mathlib.RingTheory.AdicCompletion.Basic
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Noetherian
 
 /-! # Grothendieck existence for proper schemes
 
 Source: Stacks Project, Cohomology of Schemes, Proposition 088C; EGA III_1, Theorem 5.1.4
 (blueprint: prop-weil-pbc-grothendieck-existence-proper).
 -/
+
+@[expose] public section
 
 universe u
 

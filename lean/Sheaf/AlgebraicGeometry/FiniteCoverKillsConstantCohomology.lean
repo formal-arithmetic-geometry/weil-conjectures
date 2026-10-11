@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group S1
 -/
-import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-import Mathlib.AlgebraicGeometry.Morphisms.Finite
-import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+public import Mathlib.AlgebraicGeometry.Morphisms.Finite
+public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 
 /-!
 # Finite covers kill classes with finite constant coefficients
@@ -14,6 +16,8 @@ import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 Source: Stacks Project, Lemma 59.80.9 (Tag 09ZD), part (2)
 (blueprint: lem-weil-pbc-integral-cover-kills-constant-cohomology).
 -/
+
+@[expose] public section
 
 universe u
 

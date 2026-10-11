@@ -3,20 +3,24 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group U1
 -/
-import Sheaf.AlgebraicGeometry.DerivedCategory
-import Sheaf.AlgebraicGeometry.DirectImageAlgebraDerivedCategory
-import Sheaf.Algebra.Homology.DerivedInternalHom
-import Mathlib.AlgebraicGeometry.Morphisms.Affine
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings
-import Mathlib.Algebra.Homology.Additive
-import Mathlib.CategoryTheory.Functor.Derived.RightDerived
-import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
+module
+
+public import Sheaf.AlgebraicGeometry.DerivedCategory
+public import Sheaf.AlgebraicGeometry.DirectImageAlgebraDerivedCategory
+public import Sheaf.Algebra.Homology.DerivedInternalHom
+public import Mathlib.AlgebraicGeometry.Morphisms.Affine
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings
+public import Mathlib.Algebra.Homology.Additive
+public import Mathlib.CategoryTheory.Functor.Derived.RightDerived
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
 
 /-! # The affine derived sheaf-Hom adjunction
 
 Source: Stacks Project, Duality for Schemes, Tags 0BV0, 0BUZ and 0AX3
 (blueprint: lem-sc-finite-sheafhom-affine-adjoint).
 -/
+
+@[expose] public section
 
 universe u w wA
 

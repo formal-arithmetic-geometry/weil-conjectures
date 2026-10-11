@@ -3,11 +3,13 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Mathlib.RingTheory.RingHom.Flat
-import Mathlib.RingTheory.Finiteness.Defs
-import Mathlib.LinearAlgebra.TensorProduct.Tower
-import Mathlib.Algebra.Module.LocalizedModule.Basic
-import Mathlib.RingTheory.Ideal.Quotient.Operations
+module
+
+public import Mathlib.RingTheory.RingHom.Flat
+public import Mathlib.RingTheory.Finiteness.Defs
+public import Mathlib.LinearAlgebra.TensorProduct.Tower
+public import Mathlib.Algebra.Module.LocalizedModule.Basic
+public import Mathlib.RingTheory.Ideal.Quotient.Operations
 
 /-!
 # Finiteness detected by formal glueing
@@ -15,6 +17,8 @@ import Mathlib.RingTheory.Ideal.Quotient.Operations
 Source: Stacks Project, More on Algebra, Remark 05EU, case finite, with the hypotheses
 of Lemma 05EK (blueprint: lem-weil-pbc-formal-glueing-finite-modules).
 -/
+
+@[expose] public section
 
 universe u v w
 

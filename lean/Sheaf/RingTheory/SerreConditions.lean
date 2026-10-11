@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import Sheaf.RingTheory.Depth
-import Mathlib.RingTheory.RegularLocalRing.Defs
-import Mathlib.RingTheory.Ideal.Height
+module
+
+public import Sheaf.RingTheory.Depth
+public import Mathlib.RingTheory.RegularLocalRing.Defs
+public import Mathlib.RingTheory.Ideal.Height
 
 /-!
 # Serre's conditions for Noetherian rings
@@ -19,6 +21,8 @@ height as local dimension, Definition 10.60.3 (Tag 00KF)
 - `Ring.IsSerreR`: regularity in codimension at most `k`.
 - `Ring.IsSerreS`: depth at least the minimum of `k` and local dimension.
 -/
+
+@[expose] public section
 
 universe u
 

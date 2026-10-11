@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import Sheaf.AlgebraicGeometry.SemiRepresentableObject
-import Sheaf.CategoryTheory.ProperFaceMatchingObject
+module
+
+public import Sheaf.AlgebraicGeometry.SemiRepresentableObject
+public import Sheaf.CategoryTheory.ProperFaceMatchingObject
 
 /-!
 # Matching schemes and one-member semi-representable families
@@ -12,6 +14,8 @@ import Sheaf.CategoryTheory.ProperFaceMatchingObject
 Source: Stacks Project, Hypercoverings, Tags 01G2, 01G3, 01G5; Simplicial Methods,
 Tag 0186 (blueprint: lem-weil-pbc-sr-matching-object-one-member).
 -/
+
+@[expose] public section
 
 universe w u
 

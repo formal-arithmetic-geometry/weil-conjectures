@@ -3,14 +3,16 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import Mathlib.AlgebraicGeometry.Morphisms.Proper
-import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
-import Mathlib.AlgebraicGeometry.GammaSpecAdjunction
-import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
-import Mathlib.RingTheory.AdicCompletion.Basic
-import Sheaf.AlgebraicGeometry.CoherentFormalModule
-import Sheaf.Topology.RingedSpaceModuleCohomology
-import Sheaf.Paper.PQFCohomology
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.Proper
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
+public import Mathlib.AlgebraicGeometry.GammaSpecAdjunction
+public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
+public import Mathlib.RingTheory.AdicCompletion.Basic
+public import Sheaf.AlgebraicGeometry.CoherentFormalModule
+public import Sheaf.Topology.RingedSpaceModuleCohomology
+public import Sheaf.Paper.PQFCohomology
 
 /-!
 # Theorem on formal functions over a complete Noetherian base ring
@@ -23,6 +25,8 @@ scalars along (ΓSpecIso A).inv ≫ f.appTop, as in lem-weil-pbc-theorem-formal-
 The isomorphism is specified on every limit projection, so it is the canonical map.
 The degree-zero assertion uses actual global sections.
 -/
+
+@[expose] public section
 
 set_option autoImplicit false
 

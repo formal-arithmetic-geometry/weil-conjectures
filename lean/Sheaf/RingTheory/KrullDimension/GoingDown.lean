@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Mathlib.RingTheory.Spectrum.Prime.RingHom
-import Mathlib.RingTheory.KrullDimension.Basic
-import Mathlib.RingTheory.Ideal.GoingDown
+module
+
+public import Mathlib.RingTheory.Spectrum.Prime.RingHom
+public import Mathlib.RingTheory.KrullDimension.Basic
+public import Mathlib.RingTheory.Ideal.GoingDown
 
 /-!
 # Going down and surjective spectra bound Krull dimension
@@ -13,6 +15,8 @@ import Mathlib.RingTheory.Ideal.GoingDown
 Source: Stacks Project, Algebra, Lemma Tag 00OH (blueprint:
 lem-sc-going-down-surjective-dimension).
 -/
+
+@[expose] public section
 
 universe u v
 

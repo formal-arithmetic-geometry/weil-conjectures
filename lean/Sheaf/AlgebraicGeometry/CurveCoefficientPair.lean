@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import WeilConjectures.AlgebraicGeometry.Curve
-import Sheaf.AlgebraicGeometry.TorsionEtaleSheaf
+module
+
+public import WeilConjectures.AlgebraicGeometry.Curve
+public import Sheaf.AlgebraicGeometry.TorsionEtaleSheaf
 
 /-!
 # Curve coefficient pairs
@@ -12,6 +14,8 @@ import Sheaf.AlgebraicGeometry.TorsionEtaleSheaf
 Source: the blueprint of the Weil conjectures, chapter `sec-curve-estimates`, unit
 `sk-prop-cd`, node def-weil-pbc-curve-setting (blueprint: def-weil-pbc-curve-setting).
 -/
+
+@[expose] public section
 
 universe u
 

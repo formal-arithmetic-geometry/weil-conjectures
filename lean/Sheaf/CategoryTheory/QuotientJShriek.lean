@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group J1
 -/
-import Mathlib.Algebra.Category.ModuleCat.Presheaf.Generator
-import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
-import Mathlib.Algebra.Category.Grp.FilteredColimits
+module
+
+public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Generator
+public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
+public import Mathlib.Algebra.Category.Grp.FilteredColimits
 
 /-!
 # The canonical extension-by-zero generator epimorphism
@@ -13,6 +15,8 @@ import Mathlib.Algebra.Category.Grp.FilteredColimits
 Source: Stacks Project, Modules on Sites, Lemma 18.28.8, Tag 03EW, clause (3)
 (blueprint: lem-pc-sites-modules-quotient-j-shriek).
 -/
+
+@[expose] public section
 
 universe u
 

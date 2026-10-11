@@ -1,7 +1,9 @@
-import Mathlib.RingTheory.RegularLocalRing.Defs
-import Mathlib.RingTheory.Ideal.Quotient.Operations
-import Mathlib.RingTheory.Regular.RegularSequence
-import Sheaf.RingTheory.IsRegularSystemOfParameters
+module
+
+public import Mathlib.RingTheory.RegularLocalRing.Defs
+public import Mathlib.RingTheory.Ideal.Quotient.Operations
+public import Mathlib.RingTheory.Regular.RegularSequence
+public import Sheaf.RingTheory.IsRegularSystemOfParameters
 
 /-!
 # Parameters for a regular local quotient
@@ -9,6 +11,8 @@ import Sheaf.RingTheory.IsRegularSystemOfParameters
 Source: Stacks Project, Algebra, Tag 00NR, lemma-regular-quotient-regular
 (blueprint: lem-weil-pbc-regular-local-quotient-kernel-parameters).
 -/
+
+@[expose] public section
 
 universe u
 

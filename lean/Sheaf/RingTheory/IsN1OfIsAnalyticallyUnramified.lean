@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import Sheaf.RingTheory.AnalyticallyUnramified
-import Sheaf.RingTheory.JapaneseDomain
+module
+
+public import Sheaf.RingTheory.AnalyticallyUnramified
+public import Sheaf.RingTheory.JapaneseDomain
 
 /-!
 # Analytically unramified local domains are N-1
@@ -12,6 +14,8 @@ import Sheaf.RingTheory.JapaneseDomain
 Source: Stacks Project, Algebra, Lemma Tag 032Y, clause (5)
 (blueprint: lem-weil-pbc-analytically-unramified-n1).
 -/
+
+@[expose] public section
 
 universe u v
 

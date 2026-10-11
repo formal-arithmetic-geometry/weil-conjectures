@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Restriction
-import Mathlib.GroupTheory.Index
+module
+
+public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Restriction
+public import Mathlib.GroupTheory.Index
 
 /-!
 # The image of the fundamental group of a finite étale cover
@@ -16,6 +18,8 @@ SGA 1 §7 treats locally Noetherian schemes. The same specialization of V.6.13 a
 to arbitrary connected schemes using Stacks Tags 0BNB and 0BND for their Galois category
 and fibre functor; no locally Noetherian hypothesis is needed here.
 -/
+
+@[expose] public section
 
 universe u
 

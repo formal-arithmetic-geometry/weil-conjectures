@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import WeilConjectures.AlgebraicGeometry.Cohomology.Defs
-import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheaf
-import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
-import Mathlib.Topology.Sheaves.Functors
+module
+
+public import WeilConjectures.AlgebraicGeometry.Cohomology.Defs
+public import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheaf
+public import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
+public import Mathlib.Topology.Sheaves.Functors
 
 /-!
 # Pullback on structure sheaf cohomology
@@ -19,6 +21,8 @@ Source: Stacks Project, Varieties, Tag 0BED, the functoriality maps in the proof
 - `AlgebraicGeometry.Scheme.structureSheafAb`: the structure sheaf with its additive groups.
 - `AlgebraicGeometry.Scheme.structureSheafCohomologyPullback`: canonical pullback on cohomology.
 -/
+
+@[expose] public section
 
 universe v
 

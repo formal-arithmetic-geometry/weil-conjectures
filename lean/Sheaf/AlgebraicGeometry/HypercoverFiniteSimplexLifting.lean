@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import Sheaf.AlgebraicGeometry.SimplicialHomObject
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
+module
+
+public import Sheaf.AlgebraicGeometry.SimplicialHomObject
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 
 /-!
 # Local lifting along finite simplicial inclusions in a hypercover
@@ -12,6 +14,8 @@ import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 Source: Stacks Project, Tag 01GN (Lemma 25.8.2), using Tag 01GM and unpacking Tag 01G3
 (blueprint: lem-weil-pbc-hypercover-finite-simplex-lifting).
 -/
+
+@[expose] public section
 
 universe u w t
 

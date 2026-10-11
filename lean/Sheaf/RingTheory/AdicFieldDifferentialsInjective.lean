@@ -3,12 +3,14 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group G1
 -/
-import Sheaf.RingTheory.FormallySmoothAdic
-import Mathlib.RingTheory.Noetherian.Defs
-import Mathlib.RingTheory.Kaehler.Basic
-import Mathlib.RingTheory.LocalRing.ResidueField.Basic
-import Mathlib.Algebra.Algebra.ZMod
-import Mathlib.Algebra.CharP.Algebra
+module
+
+public import Sheaf.RingTheory.FormallySmoothAdic
+public import Mathlib.RingTheory.Noetherian.Defs
+public import Mathlib.RingTheory.Kaehler.Basic
+public import Mathlib.RingTheory.LocalRing.ResidueField.Basic
+public import Mathlib.Algebra.Algebra.ZMod
+public import Mathlib.Algebra.CharP.Algebra
 
 /-!
 # Base-field differentials of an adically formally smooth local algebra
@@ -17,6 +19,8 @@ Source: Stacks Project, More on Algebra, Theorem Tag 07EL, (2) implies (5),
 and Proposition Tag 07NQ, final proof paragraph; Algebra, Proposition Tag 0322
 (blueprint: lem-weil-pbc-fs-adic-field-differentials-injective).
 -/
+
+@[expose] public section
 
 universe u v
 

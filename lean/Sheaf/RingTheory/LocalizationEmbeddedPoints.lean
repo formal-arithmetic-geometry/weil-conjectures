@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import Mathlib.RingTheory.Localization.Module
-import Sheaf.RingTheory.RemoveEmbeddedPrimes
+module
+
+public import Mathlib.RingTheory.Localization.Module
+public import Sheaf.RingTheory.RemoveEmbeddedPrimes
 
 /-!
 # Localization and removal of embedded associated points
@@ -12,6 +14,8 @@ import Sheaf.RingTheory.RemoveEmbeddedPrimes
 Source: Stacks Project, Tag 02M7
 (blueprint: lem-sc-hilbert-embedded-points-affine-localization).
 -/
+
+@[expose] public section
 
 universe u v
 

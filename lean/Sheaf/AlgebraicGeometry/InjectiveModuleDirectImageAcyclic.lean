@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import Sheaf.AlgebraicGeometry.EtaleSheaves
-import Mathlib.Algebra.Category.ModuleCat.Sheaf
-import Mathlib.CategoryTheory.Preadditive.Injective.Basic
-import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStarCoherence
+module
+
+public import Sheaf.AlgebraicGeometry.EtaleSheaves
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf
+public import Mathlib.CategoryTheory.Preadditive.Injective.Basic
+public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStarCoherence
 
 /-!
 # Higher direct images of an injective module sheaf
@@ -14,6 +16,8 @@ import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStarCoherence
 Source: Stacks Project, Tags 03FD and 072W
 (blueprint: lem-weil-pbc-injective-module-direct-image-acyclic).
 -/
+
+@[expose] public section
 
 universe u
 

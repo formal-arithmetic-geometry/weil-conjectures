@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Mathlib.Algebra.DualNumber
-import Mathlib.LinearAlgebra.Pi
-import Mathlib.AlgebraicGeometry.Scheme
+module
+
+public import Mathlib.Algebra.DualNumber
+public import Mathlib.LinearAlgebra.Pi
+public import Mathlib.AlgebraicGeometry.Scheme
 
 /-!
 # The finite pushout of dual-number schemes
@@ -14,6 +16,8 @@ Source: Stacks Project, Tag 0B2B, proof of Lemma 33.16.2, with the same local-ri
 argument for any positive finite number of copies
 (blueprint: lem-sc-dual-number-scheme-pushout).
 -/
+
+@[expose] public section
 
 universe u
 

@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under the Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import Sheaf.AlgebraicGeometry.DerivedPullback
-import Sheaf.AlgebraicGeometry.PerfectComplex
-import Mathlib.AlgebraicGeometry.Morphisms.Affine
+module
+
+public import Sheaf.AlgebraicGeometry.DerivedPullback
+public import Sheaf.AlgebraicGeometry.PerfectComplex
+public import Mathlib.AlgebraicGeometry.Morphisms.Affine
 
 /-! # Affine pullback of a perfect generator
 
@@ -16,6 +18,8 @@ The weak generator condition is expressed by the shifted-Hom vanishing criterion
 just as in `AlgebraicGeometry.exists_perfect_generator`. All test objects belong to
 `D_QCoh`, while the Hom groups and shifts are computed in the ambient derived category.
 -/
+
+@[expose] public section
 
 universe u w
 

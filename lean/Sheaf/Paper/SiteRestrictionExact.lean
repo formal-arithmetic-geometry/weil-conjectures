@@ -3,13 +3,15 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group G1
 -/
-import Mathlib.CategoryTheory.Sites.Over
-import Mathlib.CategoryTheory.Abelian.ShortExact
-import Mathlib.Algebra.Category.Grp.Abelian
-import Mathlib.CategoryTheory.Sites.Abelian
-import Mathlib.CategoryTheory.Sites.LeftExact
-import Mathlib.Algebra.Category.Grp.FilteredColimits
-import WeilConjectures.Mathlib.CategoryTheory.Sites.Continuous
+module
+
+public import Mathlib.CategoryTheory.Sites.Over
+public import Mathlib.CategoryTheory.Abelian.ShortExact
+public import Mathlib.Algebra.Category.Grp.Abelian
+public import Mathlib.CategoryTheory.Sites.Abelian
+public import Mathlib.CategoryTheory.Sites.LeftExact
+public import Mathlib.Algebra.Category.Grp.FilteredColimits
+public import WeilConjectures.Mathlib.CategoryTheory.Sites.Continuous
 
 /-!
 # Exactness of restriction to a localized site
@@ -18,6 +20,8 @@ Source: Stacks Project, Sites, Section 00XZ (localized site and restriction);
 Modules on Sites, localization section, surrounding Lemma 03DJ
 (blueprint: lem-weil-pbc-site-restriction-exact).
 -/
+
+@[expose] public section
 
 universe u
 

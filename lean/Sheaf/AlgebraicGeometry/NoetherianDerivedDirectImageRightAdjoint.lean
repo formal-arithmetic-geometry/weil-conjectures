@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group T1
 -/
-import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
-import Mathlib.AlgebraicGeometry.Noetherian
-import Mathlib.CategoryTheory.Adjunction.Basic
+module
+
+public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
+public import Mathlib.AlgebraicGeometry.Noetherian
+public import Mathlib.CategoryTheory.Adjunction.Basic
 
 /-! # A right adjoint to derived direct image for Noetherian schemes
 
@@ -13,6 +15,8 @@ Source: Stacks Project, Duality for Schemes, Lemma 48.3.1, Tag 0A9E, and Derived
 of Schemes, Lemma 36.4.1 (1), Tag 08D5
 (blueprint: lem-pc-noetherian-derived-direct-image-right-adjoint).
 -/
+
+@[expose] public section
 
 universe u wX wY
 

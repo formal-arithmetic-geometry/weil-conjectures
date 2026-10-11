@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group G1
 -/
-import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-import Mathlib.AlgebraicGeometry.ResidueField
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+public import Mathlib.AlgebraicGeometry.ResidueField
 
 /-!
 # Residue fields under a closed immersion
@@ -12,6 +14,8 @@ import Mathlib.AlgebraicGeometry.ResidueField
 Source: Stacks Project, Schemes, Section 26.4 (Tag 01HJ), and Morphisms,
 Lemma 29.2.1 (Tag 01QO) (blueprint: lem-weil-pbc-closed-immersion-residue-field-iso).
 -/
+
+@[expose] public section
 
 universe u
 

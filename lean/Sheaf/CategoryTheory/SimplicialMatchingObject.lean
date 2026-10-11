@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group G1
 -/
-import Mathlib.AlgebraicTopology.SimplicialObject.Basic
-import Mathlib.CategoryTheory.Limits.Shapes.FiniteMultiequalizer
-import Mathlib.CategoryTheory.Limits.Shapes.Terminal
+module
+
+public import Mathlib.AlgebraicTopology.SimplicialObject.Basic
+public import Mathlib.CategoryTheory.Limits.Shapes.FiniteMultiequalizer
+public import Mathlib.CategoryTheory.Limits.Shapes.Terminal
 
 /-!
 # Matching objects of simplicial objects
@@ -15,6 +17,8 @@ Source: Stacks Project, Tags 0186, 0167, 002O
 The boundary diagrams in degrees zero and one are empty and discrete, respectively.
 The multicospan below is the boundary diagram in degree `n + 2`.
 -/
+
+@[expose] public section
 
 universe v u
 

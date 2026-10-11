@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import Sheaf.Algebra.Homology.FilteredComplexSubquotients
-import Mathlib.Algebra.Homology.SpectralSequence.Basic
+module
+
+public import Sheaf.Algebra.Homology.FilteredComplexSubquotients
+public import Mathlib.Algebra.Homology.SpectralSequence.Basic
 
 /-!
 # Cycles and boundaries of a filtered complex
@@ -12,6 +14,8 @@ import Mathlib.Algebra.Homology.SpectralSequence.Basic
 Source: Stacks Project, Homology, Tag 012K, Lemma on the filtered-complex spectral sequence
 and its displayed cycle-boundary formulas (blueprint: lem-sp-filtered-complex-ZB-description).
 -/
+
+@[expose] public section
 
 universe vZ uZ
 

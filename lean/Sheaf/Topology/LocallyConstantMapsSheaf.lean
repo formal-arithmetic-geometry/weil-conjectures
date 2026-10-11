@@ -1,5 +1,7 @@
-import Sheaf.Topology.LocallyConstantMapsPresheaf
-import Mathlib.Topology.Sheaves.Sheaf
+module
+
+public import Sheaf.Topology.LocallyConstantMapsPresheaf
+public import Mathlib.Topology.Sheaves.Sheaf
 
 /-!
 # Locally constant maps form a sheaf
@@ -7,6 +9,8 @@ import Mathlib.Topology.Sheaves.Sheaf
 Source: Stacks Project, Sheaves, Example 6.4 and Definition 6.5 (Tag 006W)
 (blueprint: lem-weil-pbc-locally-constant-maps-sheaf).
 -/
+
+@[expose] public section
 
 set_option autoImplicit false
 

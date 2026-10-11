@@ -3,11 +3,13 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import Mathlib.CategoryTheory.Abelian.RightDerived
-import Sheaf.CategoryTheory.TruncationCouple
-import Sheaf.CategoryTheory.ExactCoupleConvergence
-import Sheaf.AlgebraicGeometry.DerivedCategories
-import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStarCoherence
+module
+
+public import Mathlib.CategoryTheory.Abelian.RightDerived
+public import Sheaf.CategoryTheory.TruncationCouple
+public import Sheaf.CategoryTheory.ExactCoupleConvergence
+public import Sheaf.AlgebraicGeometry.DerivedCategories
+public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStarCoherence
 
 /-!
 # Hypercohomology filtrations for an étale base-change square
@@ -20,6 +22,8 @@ The three functors are Rf_*, g^{-1}Rf_*, and Rf'_*g'^{-1}. The generic construct
 below applies cohomology to their images of the canonical truncation triangles.
 The index of `pageCouple` is the actual page minus two.
 -/
+
+@[expose] public section
 
 set_option synthInstance.maxSize 2048
 

@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group V1
 -/
-import Mathlib.RingTheory.FinitePresentation
-import Mathlib.RingTheory.RingHom.Flat
-import Sheaf.RingTheory.CompleteIntersectionOverField
-import Sheaf.Paper.RelativeGlobalCompleteIntersectionPresentation
+module
+
+public import Mathlib.RingTheory.FinitePresentation
+public import Mathlib.RingTheory.RingHom.Flat
+public import Sheaf.RingTheory.CompleteIntersectionOverField
+public import Sheaf.Paper.RelativeGlobalCompleteIntersectionPresentation
 
 /-!
 # Syntomic at a prime: a relative global complete intersection neighbourhood
@@ -15,6 +17,8 @@ Source: Stacks Project, Algebra, Lemma 00SY, implication (3) ⇒ (2), with Lemma
 for the complete-intersection fibre condition
 (blueprint: lem-weil-pbc-syntomic-at-prime-relative-global-complete-intersection).
 -/
+
+@[expose] public section
 
 universe u v
 

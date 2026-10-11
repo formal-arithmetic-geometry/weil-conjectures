@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under the Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group S1
 -/
-import Sheaf.AlgebraicGeometry.DerivedCategory
-import Sheaf.AlgebraicGeometry.AffineModuleCorrespondence
+module
+
+public import Sheaf.AlgebraicGeometry.DerivedCategory
+public import Sheaf.AlgebraicGeometry.AffineModuleCorrespondence
 
 /-! # The direct-image algebra and its quasi-coherent derived category
 
@@ -18,6 +20,8 @@ Source: Stacks Project, Derived Categories of Schemes, Tag 0AVW
 * `directImageAlgebraDerivedQCohProperty` and `directImageAlgebraDerivedQCohCategory`
   specify quasi-coherent cohomology over the direct-image algebra.
 -/
+
+@[expose] public section
 
 universe u w
 

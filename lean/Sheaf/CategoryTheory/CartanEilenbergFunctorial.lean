@@ -3,11 +3,13 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import Sheaf.CategoryTheory.DoubleComplexTotal
-import Mathlib.Algebra.Homology.Additive
-import Mathlib.Algebra.Homology.Embedding.Extend
-import Mathlib.Algebra.Homology.HomologicalComplexAbelian
-import Mathlib.CategoryTheory.Preadditive.Injective.Resolution
+module
+
+public import Sheaf.CategoryTheory.DoubleComplexTotal
+public import Mathlib.Algebra.Homology.Additive
+public import Mathlib.Algebra.Homology.Embedding.Extend
+public import Mathlib.Algebra.Homology.HomologicalComplexAbelian
+public import Mathlib.CategoryTheory.Preadditive.Injective.Resolution
 
 /-!
 # Comparison maps of Cartan–Eilenberg resolutions
@@ -29,6 +31,8 @@ after extending the natural resolution degree by zero to `ℤ`, so that the land
 of def-sp-double-complex-total apply; the filtration by the complex degree is then
 `firstFiltration`.
 -/
+
+@[expose] public section
 
 universe v₁ v₂ u₁ u₂
 

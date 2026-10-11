@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import Sheaf.RingTheory.GlobalDimension
-import Mathlib.Algebra.Category.ModuleCat.Abelian
-import Mathlib.Algebra.Homology.DerivedCategory.Ext.Basic
+module
+
+public import Sheaf.RingTheory.GlobalDimension
+public import Mathlib.Algebra.Category.ModuleCat.Abelian
+public import Mathlib.Algebra.Homology.DerivedCategory.Ext.Basic
 
 /-!
 # Bounded projective resolutions and Ext vanishing
@@ -13,6 +15,8 @@ import Mathlib.Algebra.Homology.DerivedCategory.Ext.Basic
 Source: Stacks Project, Algebra, Lemma 065R, parts (1)--(3)
 (blueprint: lem-weil-pbc-projective-dimension-ext-characterization).
 -/
+
+@[expose] public section
 
 universe u v
 

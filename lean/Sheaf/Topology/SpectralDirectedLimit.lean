@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group J1
 -/
-import Mathlib.Topology.Spectral.Basic
-import Mathlib.Topology.Spectral.Hom
-import Mathlib.Order.Directed
+module
+
+public import Mathlib.Topology.Spectral.Basic
+public import Mathlib.Topology.Spectral.Hom
+public import Mathlib.Order.Directed
 
 /-!
 # Directed inverse limits of spectral spaces
@@ -13,6 +15,8 @@ import Mathlib.Order.Directed
 Source: Stacks Project, Topology, Tag 0A2Z, in the directed-set case
 (blueprint: lem-weil-pbc-spectral-directed-limit-spectral).
 -/
+
+@[expose] public section
 
 universe u v
 

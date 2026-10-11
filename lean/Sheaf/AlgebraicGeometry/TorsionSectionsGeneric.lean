@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import WeilConjectures.AlgebraicGeometry.Modules.FlatPullbackStalk
-import Mathlib.AlgebraicGeometry.FunctionField
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
-import Mathlib.Data.List.TFAE
+module
+
+public import WeilConjectures.AlgebraicGeometry.Modules.FlatPullbackStalk
+public import Mathlib.AlgebraicGeometry.FunctionField
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
+public import Mathlib.Data.List.TFAE
 
 /-!
 # Torsion sections detected at the generic point
@@ -17,6 +19,8 @@ Source: Stacks Project, Divisors, Tag 0AXR, lemma-torsion-sections
 The generic skyscraper realizes `j_* F_eta`: its sections are the generic stalk on any
 nonempty open, and zero on the empty open. Its canonical map is `toSkyscraper` of the identity.
 -/
+
+@[expose] public section
 
 set_option autoImplicit false
 

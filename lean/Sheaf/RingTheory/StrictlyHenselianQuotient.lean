@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group S1
 -/
-import WeilConjectures.Mathlib.RingTheory.Henselian
-import Mathlib.RingTheory.Finiteness.Defs
-import Mathlib.RingTheory.Idempotents
+module
+
+public import WeilConjectures.Mathlib.RingTheory.Henselian
+public import Mathlib.RingTheory.Finiteness.Defs
+public import Mathlib.RingTheory.Idempotents
 
 /-!
 # Quotients of strictly henselian local rings
@@ -13,6 +15,8 @@ import Mathlib.RingTheory.Idempotents
 Source: Stacks Project, Algebra, Tag 05WS, specialized to a strictly henselian ring;
 Tags 04GF and 09XI (3) (blueprint: lem-weil-pbc-strictly-henselian-quotient).
 -/
+
+@[expose] public section
 
 universe u v
 

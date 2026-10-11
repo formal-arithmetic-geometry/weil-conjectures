@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Sheaf.RingTheory.GRing
-import Mathlib.FieldTheory.IntermediateField.Adjoin.Defs
+module
+
+public import Sheaf.RingTheory.GRing
+public import Mathlib.FieldTheory.IntermediateField.Adjoin.Defs
 
 /-!
 # Geometric regularity under finitely generated field extensions
@@ -12,6 +14,8 @@ import Mathlib.FieldTheory.IntermediateField.Adjoin.Defs
 Source: Stacks Project, Algebra, Lemma 0381, implication (2) ⇒ (1)
 (blueprint: lem-weil-pbc-geometrically-regular-finitely-generated-extensions).
 -/
+
+@[expose] public section
 
 universe u v w
 

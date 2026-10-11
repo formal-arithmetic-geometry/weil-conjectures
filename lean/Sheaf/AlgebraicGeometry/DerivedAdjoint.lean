@@ -3,15 +3,19 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under the Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group S1
 -/
-import Sheaf.AlgebraicGeometry.DerivedCategory
-import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
-import Sheaf.AlgebraicGeometry.DerivedPullback
+module
+
+public import Sheaf.AlgebraicGeometry.DerivedCategory
+public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
+public import Sheaf.AlgebraicGeometry.DerivedPullback
 
 /-! # Derived pullback/direct image adjunction for schemes
 
 Source: literature/stacks-project/cohomology.tex, Tag 079W, Cohomology Lemma
 cohomology-lemma-adjoint (blueprint: lem-pc-ringed-spaces-derived-adjoint).
 -/
+
+@[expose] public section
 
 universe u w
 

@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import Sheaf.AlgebraicGeometry.SchemeTangentSpace
-import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
-import Mathlib.RingTheory.Ideal.Cotangent
+module
+
+public import Sheaf.AlgebraicGeometry.SchemeTangentSpace
+public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
+public import Mathlib.RingTheory.Ideal.Cotangent
 
 /-!
 # Injectivity of the differential implies surjectivity on cotangent spaces
@@ -13,6 +15,8 @@ import Mathlib.RingTheory.Ideal.Cotangent
 Source: Stacks Project, Tags 0B2E and 0B2F
 (blueprint: lem-sc-point-tangent-cotangent-surjective).
 -/
+
+@[expose] public section
 
 universe u
 

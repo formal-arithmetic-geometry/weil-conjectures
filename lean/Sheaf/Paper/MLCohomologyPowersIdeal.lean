@@ -3,17 +3,21 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group S1
 -/
-import Mathlib.AlgebraicGeometry.Morphisms.Proper
-import Mathlib.CategoryTheory.CofilteredSystem
-import Mathlib.RingTheory.Ideal.Operations
-import Sheaf.AlgebraicGeometry.CoherentFormalModule
-import Sheaf.Paper.PQFCohomology
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.Proper
+public import Mathlib.CategoryTheory.CofilteredSystem
+public import Mathlib.RingTheory.Ideal.Operations
+public import Sheaf.AlgebraicGeometry.CoherentFormalModule
+public import Sheaf.Paper.PQFCohomology
 
 /-! # Mittag-Leffler and Artin-Rees bounds for cohomology of ideal-power quotients
 
 Source: Stacks Project, Cohomology of Schemes, Lemma 02OB, parts (1) and (3)
 (blueprint: lem-weil-pbc-ml-cohomology-powers-ideal).
 -/
+
+@[expose] public section
 
 universe u
 

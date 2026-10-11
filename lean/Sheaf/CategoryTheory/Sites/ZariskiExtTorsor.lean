@@ -1,6 +1,8 @@
-import WeilConjectures.CategoryTheory.Sites.Torsor
-import Mathlib.AlgebraicGeometry.Scheme
-import Mathlib.CategoryTheory.Sites.Spaces
+module
+
+public import WeilConjectures.CategoryTheory.Sites.Torsor
+public import Mathlib.AlgebraicGeometry.Scheme
+public import Mathlib.CategoryTheory.Sites.Spaces
 
 /-!
 # Extensions and torsors on the Zariski site
@@ -13,6 +15,8 @@ Source: literature/stacks-project/cohomology.tex, Lemma 02FQ (cohomology-lemma-t
 * `zariskiExtTorsor`: isomorphism classes of torsors are canonically in bijection
   with equivalence classes of extensions of the constant integer sheaf.
 -/
+
+@[expose] public section
 
 universe w v u
 

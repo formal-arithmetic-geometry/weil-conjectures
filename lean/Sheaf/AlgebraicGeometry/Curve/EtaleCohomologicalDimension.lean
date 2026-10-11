@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import WeilConjectures.AlgebraicGeometry.Curve
-import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
-import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
+module
+
+public import WeilConjectures.AlgebraicGeometry.Curve
+public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
+public import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 
 /-!
 # Etale cohomological dimension of a smooth connected curve
@@ -13,6 +15,8 @@ import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 Source: blueprint sec-curve-estimates/sk-prop-cd/lem-sc-cohomological-dimension.md;
 Stacks Project, Tag 03SC (1) (blueprint: lem-sc-cohomological-dimension).
 -/
+
+@[expose] public section
 
 universe u
 

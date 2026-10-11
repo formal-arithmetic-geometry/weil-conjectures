@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Mathlib.AlgebraicGeometry.Scheme
-import Mathlib.RingTheory.FiniteType
-import Mathlib.RingTheory.TensorProduct.Basic
-import WeilConjectures.Mathlib.Topology.KrullDimension
+module
+
+public import Mathlib.AlgebraicGeometry.Scheme
+public import Mathlib.RingTheory.FiniteType
+public import Mathlib.RingTheory.TensorProduct.Basic
+public import WeilConjectures.Mathlib.Topology.KrullDimension
 
 /-!
 # Dimension at a point under extension of the ground field
@@ -14,6 +16,8 @@ import WeilConjectures.Mathlib.Topology.KrullDimension
 Source: Stacks Project, Algebra, Lemma 10.116.6, Tag 00P4
 (blueprint: lem-weil-pbc-dimension-at-point-field-extension).
 -/
+
+@[expose] public section
 
 universe u v w
 

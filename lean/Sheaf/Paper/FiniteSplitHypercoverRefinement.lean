@@ -2,8 +2,10 @@
 Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 -/
-import Sheaf.Paper.FiniteSplitEtaleHypercover
-import Sheaf.AlgebraicGeometry.SemiRepresentableObject
+module
+
+public import Sheaf.Paper.FiniteSplitEtaleHypercover
+public import Sheaf.AlgebraicGeometry.SemiRepresentableObject
 
 /-!
 # Finite refinements and local lifting
@@ -16,6 +18,8 @@ Cofilteredness is stated by its three defining conditions. Covering sieves encod
 restriction-stable local lifting requirements; lifts are on the finite constituent
 pieces, as in the semi-representable interpretation of hypercovers.
 -/
+
+@[expose] public section
 
 universe u
 

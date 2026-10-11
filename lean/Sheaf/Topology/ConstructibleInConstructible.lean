@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group G1
 -/
-import Mathlib.Topology.Constructible
+module
+
+public import Mathlib.Topology.Constructible
 
 /-!
 # Constructible subsets of constructible subspaces
@@ -11,6 +13,8 @@ import Mathlib.Topology.Constructible
 Source: Stacks Project, Topology, Lemma 5.15.12, Tag 09YJ
 (blueprint: lem-weil-pbc-constructible-in-retrocompact-open).
 -/
+
+@[expose] public section
 
 universe u
 

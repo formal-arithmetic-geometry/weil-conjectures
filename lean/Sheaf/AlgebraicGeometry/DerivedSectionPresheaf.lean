@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under the Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group N1
 -/
-import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
-import Mathlib.Algebra.Category.ModuleCat.Presheaf.Abelian
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.Colimits
+module
+
+public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
+public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Abelian
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Colimits
 
 /-! # The unbounded derived section cohomology presheaf
 
@@ -17,6 +19,8 @@ cohomology. Evaluation on an open is exact in the presheaf category, so this is
 precisely the presheaf of cohomology of derived sections, including its restriction
 maps and its module structure. It does not take cohomology in the sheaf category.
 -/
+
+@[expose] public section
 
 universe a b
 

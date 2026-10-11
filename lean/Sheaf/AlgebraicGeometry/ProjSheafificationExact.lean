@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group V1
 -/
-import Sheaf.AlgebraicGeometry.ProjTildeFunctorial
-import Mathlib.RingTheory.MvPolynomial.Homogeneous
-import Mathlib.Algebra.Homology.ShortComplex.ShortExact
+module
+
+public import Sheaf.AlgebraicGeometry.ProjTildeFunctorial
+public import Mathlib.RingTheory.MvPolynomial.Homogeneous
+public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 
 /-!
 # Exactness of associated sheaves on the projective line
@@ -20,6 +22,8 @@ total-degree grading `MvPolynomial.gradedAlgebra`, as in the landed sibling
 The associated sheaves and induced maps are specified using the chart identifications
 of `gradedModuleSheaf_exists` and the fraction formula of `tilde_functorial`.
 -/
+
+@[expose] public section
 
 universe u
 

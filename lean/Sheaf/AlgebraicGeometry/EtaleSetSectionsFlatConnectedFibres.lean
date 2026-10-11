@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Sheaf.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
-import Mathlib.AlgebraicGeometry.Morphisms.Flat
-import Mathlib.AlgebraicGeometry.Fiber
-import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
+module
+
+public import Sheaf.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
+public import Mathlib.AlgebraicGeometry.Morphisms.Flat
+public import Mathlib.AlgebraicGeometry.Fiber
+public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
 
 /-!
 # Sections of etale sheaves under flat maps with connected geometric fibres
@@ -14,6 +16,8 @@ import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
 Source: Stacks Project, Etale Cohomology, Lemma 59.39.3 (Tag 0A3H)
 (blueprint: lem-weil-pbc-etale-sections-flat-qc-connected-fibres).
 -/
+
+@[expose] public section
 
 universe u
 

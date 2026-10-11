@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group R1
 -/
-import Sheaf.AlgebraicGeometry.FormalFibreCohomology
-import Sheaf.AlgebraicGeometry.Coherent
-import Mathlib.AlgebraicGeometry.Noetherian
-import Mathlib.AlgebraicGeometry.Morphisms.Proper
+module
+
+public import Sheaf.AlgebraicGeometry.FormalFibreCohomology
+public import Sheaf.AlgebraicGeometry.Coherent
+public import Mathlib.AlgebraicGeometry.Noetherian
+public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 
 /-! # The theorem on formal functions at a point of the base
 
@@ -18,6 +20,8 @@ The index n represents the positive level n+1. The maps theta_n are the canonica
 maps, tied by `IsFormalFunctionsTheta`; the isomorphism is specified on every limit
 projection, so it is the canonical one.
 -/
+
+@[expose] public section
 
 universe uS
 

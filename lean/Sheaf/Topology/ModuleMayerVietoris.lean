@@ -3,14 +3,18 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import Sheaf.Topology.OpenModuleCohomology
-import Mathlib.Algebra.Exact.Basic
+module
+
+public import Sheaf.Topology.OpenModuleCohomology
+public import Mathlib.Algebra.Exact.Basic
 
 /-! # Mayer--Vietoris for modules on a ringed space
 
 Source: Stacks Project, Cohomology, Lemma 20.8.2, Tag 01EB
 (blueprint: lem-sc-mayer-vietoris-ringed-space).
 -/
+
+@[expose] public section
 
 universe v
 

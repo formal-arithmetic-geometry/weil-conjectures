@@ -3,13 +3,17 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import Mathlib.RingTheory.Kaehler.JacobiZariski
+module
+
+public import Mathlib.RingTheory.Kaehler.JacobiZariski
 
 /-! # Jacobi–Zariski sequence for a quotient of a smooth algebra
 
 Source: Stacks Project, Algebra, Lemma Tags 00S2, 07BP and 00RU
 (blueprint: lem-weil-pbc-jacobi-zariski-quotient-smooth).
 -/
+
+@[expose] public section
 
 universe u v
 open scoped TensorProduct

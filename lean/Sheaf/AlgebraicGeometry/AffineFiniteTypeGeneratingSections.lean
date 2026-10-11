@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Sheaf.AlgebraicGeometry.Coherent
-import Mathlib.AlgebraicGeometry.AffineScheme
-import Mathlib.RingTheory.Finiteness.Basic
+module
+
+public import Sheaf.AlgebraicGeometry.Coherent
+public import Mathlib.AlgebraicGeometry.AffineScheme
+public import Mathlib.RingTheory.Finiteness.Basic
 
 /-!
 # Finite global generators on an affine scheme
@@ -13,6 +15,8 @@ import Mathlib.RingTheory.Finiteness.Basic
 Source: Stacks Project, Properties, Tag 01PB, and Schemes, Tags 01IA and 01HV
 (blueprint: lem-weil-pbc-affine-finite-type-generating-sections).
 -/
+
+@[expose] public section
 
 universe u
 

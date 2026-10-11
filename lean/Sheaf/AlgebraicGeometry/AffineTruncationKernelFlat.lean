@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import Sheaf.AlgebraicGeometry.AffineTorAmplitudeCriterion
-import Mathlib.AlgebraicGeometry.AffineScheme
-import Mathlib.Algebra.Module.FinitePresentation
-import Mathlib.Algebra.Module.LocalizedModule.Away
+module
+
+public import Sheaf.AlgebraicGeometry.AffineTorAmplitudeCriterion
+public import Mathlib.AlgebraicGeometry.AffineScheme
+public import Mathlib.Algebra.Module.FinitePresentation
+public import Mathlib.Algebra.Module.LocalizedModule.Away
 
 /-! # Flatness of the lower truncation image on principal opens
 
@@ -14,6 +16,8 @@ Source: Stacks Project, Derived Categories of Schemes, Tag 08EG, proof paragraph
 invoking Cohomology, Lemma cohomology-lemma-last-one-flat
 (blueprint: lem-sc-affine-truncation-kernel-flat).
 -/
+
+@[expose] public section
 
 set_option autoImplicit false
 

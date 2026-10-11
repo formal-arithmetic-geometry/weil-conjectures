@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import Sheaf.AlgebraicGeometry.LimitAffineTransition
-import Mathlib.AlgebraicGeometry.ResidueField
+module
+
+public import Sheaf.AlgebraicGeometry.LimitAffineTransition
+public import Mathlib.AlgebraicGeometry.ResidueField
 
 /-!
 # Residue fields at points of inverse limits
@@ -12,6 +14,8 @@ import Mathlib.AlgebraicGeometry.ResidueField
 Source: Stacks Project, Limits, Lemma 0CUG (1)
 (blueprint: lem-weil-pbc-limit-residue-field).
 -/
+
+@[expose] public section
 
 universe u
 

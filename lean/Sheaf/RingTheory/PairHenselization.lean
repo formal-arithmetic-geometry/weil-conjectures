@@ -3,11 +3,13 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group N1
 -/
-import Mathlib.AlgebraicGeometry.Morphisms.Etale
-import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
-import Mathlib.CategoryTheory.EssentiallySmall
-import Mathlib.CategoryTheory.Filtered.Basic
-import WeilConjectures.Mathlib.RingTheory.Henselian
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.Etale
+public import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
+public import Mathlib.CategoryTheory.EssentiallySmall
+public import Mathlib.CategoryTheory.Filtered.Basic
+public import WeilConjectures.Mathlib.RingTheory.Henselian
 
 /-!
 # Henselization of a pair
@@ -15,6 +17,8 @@ import WeilConjectures.Mathlib.RingTheory.Henselian
 Source: Stacks Project, More on Algebra, Tag 0A02, proof of Lemma 15.12.1
 (blueprint: lem-weil-pbc-pair-henselization).
 -/
+
+@[expose] public section
 
 universe u
 

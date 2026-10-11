@@ -3,13 +3,17 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group J1
 -/
-import Sheaf.AlgebraicGeometry.AffineModuleCorrespondence
+module
+
+public import Sheaf.AlgebraicGeometry.AffineModuleCorrespondence
 
 /-! # Finite type under the affine module correspondence
 
 Source: Stacks Project, Cohomology of Schemes, Tag 0897, proof; Morphisms, Tag 01SB;
 Properties, Tag 01PB (blueprint: lem-weil-pbc-affine-module-finite-type).
 -/
+
+@[expose] public section
 
 universe u
 

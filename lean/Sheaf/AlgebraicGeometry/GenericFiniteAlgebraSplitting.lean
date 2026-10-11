@@ -1,10 +1,12 @@
-import Mathlib.RingTheory.TensorProduct.Basic
-import Mathlib.RingTheory.Etale.Basic
-import Mathlib.RingTheory.Ideal.Quotient.Defs
-import Mathlib.RingTheory.Nilpotent.Lemmas
-import Mathlib.RingTheory.Localization.Basic
-import Mathlib.AlgebraicGeometry.Morphisms.Finite
-import Mathlib.AlgebraicGeometry.Spec
+module
+
+public import Mathlib.RingTheory.TensorProduct.Basic
+public import Mathlib.RingTheory.Etale.Basic
+public import Mathlib.RingTheory.Ideal.Quotient.Defs
+public import Mathlib.RingTheory.Nilpotent.Lemmas
+public import Mathlib.RingTheory.Localization.Basic
+public import Mathlib.AlgebraicGeometry.Morphisms.Finite
+public import Mathlib.AlgebraicGeometry.Spec
 
 /-!
 # Generic splitting of a finite algebra after an étale base change
@@ -13,6 +15,8 @@ Source: smooth purity blueprint, `sk-prop-sf-cbc`, proof of
 `lem-weil-pbc-finite-pushforward-generic-constructible`, steps 4--9
 (blueprint: lem-weil-pbc-generic-finite-algebra-splitting).
 -/
+
+@[expose] public section
 
 set_option autoImplicit false
 

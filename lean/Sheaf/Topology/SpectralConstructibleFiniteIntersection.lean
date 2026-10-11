@@ -1,5 +1,7 @@
-import Mathlib.Topology.Constructible
-import Mathlib.Topology.Spectral.Basic
+module
+
+public import Mathlib.Topology.Constructible
+public import Mathlib.Topology.Spectral.Basic
 
 /-!
 # Finite intersections of constructible subsets of a spectral space
@@ -12,6 +14,8 @@ paragraph before it (blueprint: lem-weil-pbc-spectral-constructible-finite-inter
 - `finite_subfamily_iInter_eq_empty_of_isConstructible`: a family of constructible
   subsets with empty intersection has a finite subfamily with empty intersection.
 -/
+
+@[expose] public section
 
 universe u v
 

@@ -3,11 +3,13 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import WeilConjectures.AlgebraicGeometry.Curve.Compactification
-import WeilConjectures.AlgebraicGeometry.Curve.Affine
-import WeilConjectures.AlgebraicGeometry.Sites.RootsOfUnity
-import Sheaf.AlgebraicGeometry.Curve.PicProperNTorsion
-import Sheaf.AlgebraicGeometry.GenusInvariant
+module
+
+public import WeilConjectures.AlgebraicGeometry.Curve.Compactification
+public import WeilConjectures.AlgebraicGeometry.Curve.Affine
+public import WeilConjectures.AlgebraicGeometry.Sites.RootsOfUnity
+public import Sheaf.AlgebraicGeometry.Curve.PicProperNTorsion
+public import Sheaf.AlgebraicGeometry.GenusInvariant
 
 /-!
 # Constant coefficients under algebraically closed field extension
@@ -15,6 +17,8 @@ import Sheaf.AlgebraicGeometry.GenusInvariant
 Source: Weil conjectures blueprint, sec-curve-estimates/sk-prop-ext-invariance,
 thm-sc-constant-invariance (blueprint: thm-sc-constant-invariance).
 -/
+
+@[expose] public section
 
 universe u
 

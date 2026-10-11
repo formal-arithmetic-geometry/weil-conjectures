@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import Mathlib.AlgebraicTopology.SimplicialSet.CategoryWithFibrations
+module
+
+public import Mathlib.AlgebraicTopology.SimplicialSet.CategoryWithFibrations
 
 /-!
 # Trivial Kan fibrations between coskeletal simplicial sets
@@ -11,6 +13,8 @@ import Mathlib.AlgebraicTopology.SimplicialSet.CategoryWithFibrations
 Source: Stacks Project, Simplicial Methods, Lemma 14.32.1, Tag 01A6
 (blueprint: lem-weil-pbc-coskeletal-map-trivial-kan).
 -/
+
+@[expose] public section
 
 universe u
 

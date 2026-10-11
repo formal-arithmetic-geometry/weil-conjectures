@@ -3,11 +3,13 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import Mathlib.AlgebraicGeometry.Geometrically.Integral
-import Mathlib.AlgebraicGeometry.Morphisms.Proper
-import Mathlib.AlgebraicGeometry.Fiber
-import WeilConjectures.AlgebraicGeometry.Modules.Invertible
-import Sheaf.AlgebraicGeometry.TensorPullback
+module
+
+public import Mathlib.AlgebraicGeometry.Geometrically.Integral
+public import Mathlib.AlgebraicGeometry.Morphisms.Proper
+public import Mathlib.AlgebraicGeometry.Fiber
+public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
+public import Sheaf.AlgebraicGeometry.TensorPullback
 
 /-!
 # The theorem of the cube over a field, with an arbitrary residue-field fibre
@@ -15,6 +17,8 @@ import Sheaf.AlgebraicGeometry.TensorPullback
 Source: Stacks Project, More on Morphisms, Theorem 37.33.8, Tag 0BF4,
 specialised to a field (blueprint: lem-sc-general-theorem-of-cube).
 -/
+
+@[expose] public section
 
 universe u
 

@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
-import Sheaf.AlgebraicGeometry.TensorPullback
-import Mathlib.CategoryTheory.Subobject.Limits
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
+public import Sheaf.AlgebraicGeometry.TensorPullback
+public import Mathlib.CategoryTheory.Subobject.Limits
 
 /-!
 # The ideal sheaf of a base-changed closed subscheme
@@ -14,6 +16,8 @@ import Mathlib.CategoryTheory.Subobject.Limits
 Source: Stacks Project, Schemes, Lemma 26.17.6, Tag 01JU (1)
 (blueprint: lem-pc-closed-subscheme-base-change-ideal-image).
 -/
+
+@[expose] public section
 
 universe u
 

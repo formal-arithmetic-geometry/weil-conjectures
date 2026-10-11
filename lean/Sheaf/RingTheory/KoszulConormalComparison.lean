@@ -3,11 +3,13 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import Sheaf.RingTheory.KoszulDualComplex
-import Mathlib.RingTheory.Ideal.Cotangent
-import Mathlib.LinearAlgebra.ExteriorPower.Pairing
-import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
-import Mathlib.Algebra.Homology.Single
+module
+
+public import Sheaf.RingTheory.KoszulDualComplex
+public import Mathlib.RingTheory.Ideal.Cotangent
+public import Mathlib.LinearAlgebra.ExteriorPower.Pairing
+public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
+public import Mathlib.Algebra.Homology.Single
 
 /-!
 # Determinant normalization of the Koszul dual comparison
@@ -21,6 +23,8 @@ comparison induced by the quotient map (blueprint: def-sc-koszul-conormal-compar
 * `koszulConormalVector`: the class of a free-module vector in the conormal module.
 * `IsKoszulConormalComparison`: determinant normalization of the top comparison.
 -/
+
+@[expose] public section
 
 universe uC
 

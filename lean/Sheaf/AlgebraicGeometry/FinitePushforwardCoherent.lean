@@ -3,15 +3,19 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import Mathlib.AlgebraicGeometry.Morphisms.Finite
-import Mathlib.AlgebraicGeometry.Noetherian
-import Sheaf.AlgebraicGeometry.Coherent
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.Finite
+public import Mathlib.AlgebraicGeometry.Noetherian
+public import Sheaf.AlgebraicGeometry.Coherent
 
 /-! # Coherence of finite direct images
 
 Source: Stacks Project, Cohomology of Schemes, Tags 01Y6 and 01XZ
 (blueprint: lem-weil-pbc-finite-pushforward-coherent).
 -/
+
+@[expose] public section
 
 universe u
 

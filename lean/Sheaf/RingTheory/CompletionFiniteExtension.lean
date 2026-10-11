@@ -3,11 +3,13 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Mathlib.RingTheory.AdicCompletion.Algebra
-import Mathlib.RingTheory.Localization.AtPrime.Basic
-import Mathlib.RingTheory.Noetherian.Defs
-import Mathlib.RingTheory.Finiteness.Defs
-import Mathlib.RingTheory.TensorProduct.Basic
+module
+
+public import Mathlib.RingTheory.AdicCompletion.Algebra
+public import Mathlib.RingTheory.Localization.AtPrime.Basic
+public import Mathlib.RingTheory.Noetherian.Defs
+public import Mathlib.RingTheory.Finiteness.Defs
+public import Mathlib.RingTheory.TensorProduct.Basic
 
 /-!
 # Completion of a finite algebra over a prime
@@ -15,6 +17,8 @@ import Mathlib.RingTheory.TensorProduct.Basic
 Source: Stacks Project, Algebra, Lemma 10.97.8 (Tag 07N9)
 (blueprint: lem-weil-pbc-completion-finite-extension).
 -/
+
+@[expose] public section
 
 universe u v
 

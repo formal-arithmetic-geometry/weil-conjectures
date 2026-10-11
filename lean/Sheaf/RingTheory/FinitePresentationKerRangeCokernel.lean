@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group G1
 -/
-import Mathlib.Algebra.Module.FinitePresentation
-import Mathlib.RingTheory.Ideal.Defs
+module
+
+public import Mathlib.Algebra.Module.FinitePresentation
+public import Mathlib.RingTheory.Ideal.Defs
 
 /-!
 # Kernels, images, and cokernels of finitely presented modules over a coherent ring
@@ -12,6 +14,8 @@ import Mathlib.RingTheory.Ideal.Defs
 Source: Stacks Project, Algebra, Lemmas 05CW and 05CX
 (blueprint: lem-sc-coherent-ring-fp-kernel-cokernel).
 -/
+
+@[expose] public section
 
 universe u v w
 

@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.Basic
-import Sheaf.CategoryTheory.BoundedSubobjectSize
+module
+
+public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.Basic
+public import Sheaf.CategoryTheory.BoundedSubobjectSize
 
 /-!
 # Bounded-size subobjects surjecting onto a quotient
@@ -12,6 +14,8 @@ import Sheaf.CategoryTheory.BoundedSubobjectSize
 Source: Stacks Project, `injectives.tex`, Lemma `lemma-surjection-bounded-size`
 (blueprint: lem-pur-kinjective-surjection-bounded-size).
 -/
+
+@[expose] public section
 
 universe v u
 

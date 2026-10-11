@@ -3,14 +3,18 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import Mathlib.CategoryTheory.Filtered.Basic
-import Mathlib.CategoryTheory.Limits.Cones
+module
+
+public import Mathlib.CategoryTheory.Filtered.Basic
+public import Mathlib.CategoryTheory.Limits.Cones
 
 /-! # Essentially constant filtered diagrams
 
 Source: Stacks Project, Categories, Definition 05PU
 (blueprint: def-pc-essentially-constant-ind-diagram).
 -/
+
+@[expose] public section
 
 universe uJ vJ uC vC
 

@@ -3,19 +3,23 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Sheaf.CategoryTheory.CommAlgebraSheafModule
-import Mathlib.CategoryTheory.Sites.Limits
-import Mathlib.CategoryTheory.Sites.Equivalence
-import Mathlib.CategoryTheory.Sites.LeftExact
-import Mathlib.Algebra.Category.Ring.FilteredColimits
-import Mathlib.Algebra.Category.Ring.Colimits
-import Mathlib.CategoryTheory.Filtered.Basic
+module
+
+public import Sheaf.CategoryTheory.CommAlgebraSheafModule
+public import Mathlib.CategoryTheory.Sites.Limits
+public import Mathlib.CategoryTheory.Sites.Equivalence
+public import Mathlib.CategoryTheory.Sites.LeftExact
+public import Mathlib.Algebra.Category.Ring.FilteredColimits
+public import Mathlib.Algebra.Category.Ring.Colimits
+public import Mathlib.CategoryTheory.Filtered.Basic
 
 /-! # Directed colimits of sheaves of commutative algebras
 
 Source: Stacks Project, Sheaves, Sections 009D and 009E, Lemmas 0087 and 0089;
 Modules, Lemma 01AH (blueprint: lem-weil-pbc-sheaf-algebras-directed-colimit).
 -/
+
+@[expose] public section
 
 universe u
 

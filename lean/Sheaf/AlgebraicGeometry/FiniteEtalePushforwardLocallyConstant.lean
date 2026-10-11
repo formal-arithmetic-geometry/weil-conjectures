@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Mathlib.AlgebraicGeometry.Morphisms.Finite
-import Sheaf.AlgebraicGeometry.FiniteLocallyConstantModuleValues
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.Finite
+public import Sheaf.AlgebraicGeometry.FiniteLocallyConstantModuleValues
 
 /-!
 # Finite etale pushforward of finite locally constant module sheaves
@@ -12,6 +14,8 @@ import Sheaf.AlgebraicGeometry.FiniteLocallyConstantModuleValues
 Source: Stacks Project, Tag 095B, Lemma 59.64.3, module clause
 (blueprint: lem-weil-pbc-etale-finite-pushforward-locally-constant).
 -/
+
+@[expose] public section
 
 universe u
 

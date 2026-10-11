@@ -2,9 +2,11 @@
 Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 -/
-import Mathlib.AlgebraicGeometry.Scheme
-import Mathlib.Algebra.Homology.HomologicalComplex
-import Sheaf.CategoryTheory.SiteCechComplex
+module
+
+public import Mathlib.AlgebraicGeometry.Scheme
+public import Mathlib.Algebra.Homology.HomologicalComplex
+public import Sheaf.CategoryTheory.SiteCechComplex
 
 /-!
 # The alternating Čech complex computes Čech cohomology
@@ -17,6 +19,8 @@ related by restriction.  The signed extension from increasing tuples and the exp
 repeated-index homotopies of Tags 01FJ, 01FK, and 01FM show that this restriction
 induces an isomorphism on every Čech cohomology group.
 -/
+
+@[expose] public section
 
 set_option autoImplicit false
 

@@ -1,11 +1,13 @@
-import Mathlib.Algebra.Category.Grp.Abelian
-import Mathlib.Algebra.Homology.ShortComplex.Abelian
-import Mathlib.Algebra.Homology.HomologicalComplexAbelian
-import Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
-import Mathlib.AlgebraicGeometry.Sites.Etale
-import Mathlib.CategoryTheory.Limits.Constructions.Over.Products
-import Mathlib.CategoryTheory.Sites.SheafCohomology.Cech
-import Mathlib.CategoryTheory.Preadditive.Injective.Basic
+module
+
+public import Mathlib.Algebra.Category.Grp.Abelian
+public import Mathlib.Algebra.Homology.ShortComplex.Abelian
+public import Mathlib.Algebra.Homology.HomologicalComplexAbelian
+public import Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
+public import Mathlib.AlgebraicGeometry.Sites.Etale
+public import Mathlib.CategoryTheory.Limits.Constructions.Over.Products
+public import Mathlib.CategoryTheory.Sites.SheafCohomology.Cech
+public import Mathlib.CategoryTheory.Preadditive.Injective.Basic
 
 /-!
 # Injective abelian étale sheaves are Čech-acyclic
@@ -13,6 +15,8 @@ import Mathlib.CategoryTheory.Preadditive.Injective.Basic
 Source: Stacks Project, sites-cohomology.tex, Lemma 03AW
 (blueprint: lem-weil-pbc-injective-sheaf-cech-acyclic).
 -/
+
+@[expose] public section
 
 universe u
 

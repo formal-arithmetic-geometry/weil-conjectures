@@ -3,11 +3,13 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import Mathlib.AlgebraicGeometry.Morphisms.Affine
-import Mathlib.AlgebraicGeometry.Restrict
-import Mathlib.Topology.Sheaves.Functors
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
-import Sheaf.AlgebraicGeometry.CommAlgebraSheaf
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.Affine
+public import Mathlib.AlgebraicGeometry.Restrict
+public import Mathlib.Topology.Sheaves.Functors
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
+public import Sheaf.AlgebraicGeometry.CommAlgebraSheaf
 
 /-! # Affine morphisms and quasi-coherent algebras (relative spectrum)
 
@@ -20,6 +22,8 @@ def-weil-pbc-comm-algebra-sheaf) whose `toModule` is quasi-coherent. For `f : X 
 subcategory of `Over S` on `IsAffineHom`. The restriction `𝒜|_V` to an open `V` is Mathlib's
 naive sheaf pullback along the open embedding `V.ι`, whose sections over `W` are `𝒜(V.ι ''ᵁ W)`.
 -/
+
+@[expose] public section
 
 universe u
 

@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group T1
 -/
-import Mathlib.LinearAlgebra.SymmetricAlgebra.Basic
-import Mathlib.Algebra.Module.FinitePresentation
-import Mathlib.RingTheory.FinitePresentation
-import Mathlib.RingTheory.Extension.Presentation.Basic
+module
+
+public import Mathlib.LinearAlgebra.SymmetricAlgebra.Basic
+public import Mathlib.Algebra.Module.FinitePresentation
+public import Mathlib.RingTheory.FinitePresentation
+public import Mathlib.RingTheory.Extension.Presentation.Basic
 
 /-!
 # Generators and finite presentation of symmetric algebras
@@ -14,6 +16,8 @@ import Mathlib.RingTheory.Extension.Presentation.Basic
 Source: Stacks Project, Algebra, Section 00DM, Lemma 00DO, and Definitions 0518 and 00F3
 (blueprint: lem-weil-pbc-symmetric-algebra-finite-presentation).
 -/
+
+@[expose] public section
 
 universe u v
 

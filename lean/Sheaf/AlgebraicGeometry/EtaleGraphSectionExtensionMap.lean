@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import WeilConjectures.SixFunctors.Etale.LowerShriek.EtaleMap
+module
+
+public import WeilConjectures.SixFunctors.Etale.LowerShriek.EtaleMap
 
 /-! # Sections over graphs extend by zero
 
@@ -13,6 +15,8 @@ Source: Stacks Project, Tag 0F4L, first paragraph of the proof, and Tag 01KT
 The sum presheaf is the left Kan extension used by `Etale.etaleLowerShriek` before
 sheafification. Its Kan-extension unit is the inclusion of the graph-indexed summand.
 -/
+
+@[expose] public section
 
 universe u
 

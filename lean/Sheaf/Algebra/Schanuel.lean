@@ -3,14 +3,18 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import Mathlib.Algebra.Exact.Basic
-import Mathlib.Algebra.Module.Projective
+module
+
+public import Mathlib.Algebra.Exact.Basic
+public import Mathlib.Algebra.Module.Projective
 
 /-! # Schanuel's lemma
 
 Source: literature/stacks-project/algebra.tex, Algebra, Lemma Tag 00O3
 (blueprint: lem-weil-pbc-schanuel)
 -/
+
+@[expose] public section
 
 namespace Module
 

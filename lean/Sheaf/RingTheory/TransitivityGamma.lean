@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group Q1
 -/
-import Sheaf.RingTheory.JacobiZariskiHomologySequence
+module
+
+public import Sheaf.RingTheory.JacobiZariskiHomologySequence
 
 /-!
 # Left exactness of the Jacobi–Zariski sequence for fields
@@ -11,6 +13,8 @@ import Sheaf.RingTheory.JacobiZariskiHomologySequence
 Source: Stacks Project, More on Algebra, Tag 07E2, `lemma-transitivity-gamma`
 (blueprint: lem-weil-pbc-transitivity-gamma).
 -/
+
+@[expose] public section
 
 universe u v w
 

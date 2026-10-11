@@ -3,15 +3,19 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import Sheaf.AlgebraicGeometry.ProjPolynomialTwistChart
-import Sheaf.Paper.NonvanishingSectionTrivializes
-import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
+module
+
+public import Sheaf.AlgebraicGeometry.ProjPolynomialTwistChart
+public import Sheaf.Paper.NonvanishingSectionTrivializes
+public import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
 
 /-! # Morphism to polynomial Proj from generating sections
 
 Source: literature/stacks-project/constructions.tex, Lemma 01N8
 (blueprint: lem-weil-pbc-sections-morphism-to-proj-polynomial-ring).
 -/
+
+@[expose] public section
 
 universe u
 

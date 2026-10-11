@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import Sheaf.AlgebraicGeometry.SchemeDerivedBaseChangeMap
-import Sheaf.AlgebraicGeometry.QCqsDerivedDirectImageRightAdjoint
-import Sheaf.AlgebraicGeometry.DerivedPullbackTensorQCoh
-import Mathlib.CategoryTheory.Adjunction.Restrict
+module
+
+public import Sheaf.AlgebraicGeometry.SchemeDerivedBaseChangeMap
+public import Sheaf.AlgebraicGeometry.QCqsDerivedDirectImageRightAdjoint
+public import Sheaf.AlgebraicGeometry.DerivedPullbackTensorQCoh
+public import Mathlib.CategoryTheory.Adjunction.Restrict
 
 /-!
 # Canonical base-change map for a right adjoint
@@ -14,6 +16,8 @@ import Mathlib.CategoryTheory.Adjunction.Restrict
 Source: literature/stacks-project/duality.tex, Tag 0AA8 (Lemma 48.6.2),
 equation-base-change-map (blueprint: def-sc-duality-equation-base-change-map).
 -/
+
+@[expose] public section
 
 set_option autoImplicit false
 universe u w

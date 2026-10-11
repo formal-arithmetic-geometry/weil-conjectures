@@ -1,6 +1,8 @@
-import Sheaf.AlgebraicGeometry.SchemeTangentSpace
-import Mathlib.AlgebraicGeometry.Morphisms.Etale
-import WeilConjectures.AlgebraicGeometry.Morphisms.FiberDegree
+module
+
+public import Sheaf.AlgebraicGeometry.SchemeTangentSpace
+public import Mathlib.AlgebraicGeometry.Morphisms.Etale
+public import WeilConjectures.AlgebraicGeometry.Morphisms.FiberDegree
 
 /-!
 # Tangent criterion for etaleness of a finite locally free morphism
@@ -8,6 +10,8 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.FiberDegree
 Source: literature/stacks-project/varieties.tex, lemma-injective-tangent-spaces-unramified
 (blueprint: lem-sc-finite-flat-unramified-tangent-criterion).
 -/
+
+@[expose] public section
 
 universe u
 

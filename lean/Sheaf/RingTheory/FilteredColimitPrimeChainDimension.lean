@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group J1
 -/
-import Mathlib.Algebra.Category.Ring.Colimits
-import Mathlib.CategoryTheory.Filtered.Basic
-import Mathlib.CategoryTheory.Limits.HasLimits
-import Mathlib.RingTheory.KrullDimension.Basic
+module
+
+public import Mathlib.Algebra.Category.Ring.Colimits
+public import Mathlib.CategoryTheory.Filtered.Basic
+public import Mathlib.CategoryTheory.Limits.HasLimits
+public import Mathlib.RingTheory.KrullDimension.Basic
 
 /-!
 # Prime chains and dimension of filtered ring colimits
@@ -14,6 +16,8 @@ import Mathlib.RingTheory.KrullDimension.Basic
 Source: Stacks Project, More on Algebra, Tag 06LK, converse inequality in the proof
 (blueprint: lem-sc-filtered-colimit-prime-chain-dimension).
 -/
+
+@[expose] public section
 
 universe u
 

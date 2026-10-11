@@ -3,12 +3,14 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import Mathlib.AlgebraicGeometry.Sites.Etale
-import Mathlib.Algebra.Category.ModuleCat.Presheaf.Free
-import Mathlib.Algebra.Category.ModuleCat.Presheaf.Colimits
-import Mathlib.CategoryTheory.Limits.FormalCoproducts.Cech
-import Mathlib.AlgebraicTopology.AlternatingFaceMapComplex
-import Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
+module
+
+public import Mathlib.AlgebraicGeometry.Sites.Etale
+public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Free
+public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Colimits
+public import Mathlib.CategoryTheory.Limits.FormalCoproducts.Cech
+public import Mathlib.AlgebraicTopology.AlternatingFaceMapComplex
+public import Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
 
 /-!
 # Exactness of the free Čech complex on the small étale site
@@ -16,6 +18,8 @@ import Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
 Source: Stacks Project, sites-cohomology.tex, Lemma 03F5
 (blueprint: lem-weil-pbc-free-cech-complex-exact).
 -/
+
+@[expose] public section
 
 universe u
 

@@ -1,10 +1,15 @@
-import Mathlib.CategoryTheory.Sites.ConcreteSheafification
-import Mathlib.CategoryTheory.Sites.Coverage
+module
+
+public import Mathlib.CategoryTheory.Sites.ConcreteSheafification
+public import Mathlib.CategoryTheory.Sites.Coverage
 /-! # The plus construction of a separated presheaf is a sheaf
 Source: literature/stacks-project/sites.tex, Sites, Definition 00WA and
 Theorem 00WB, part (2).
 Blueprint: lem-weil-pbc-site-plus-of-separated-is-sheaf.
 -/
+
+@[expose] public section
+
 open CategoryTheory
 universe u1 v1
 namespace CategoryTheory

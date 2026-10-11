@@ -3,15 +3,19 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Mathlib.AlgebraicGeometry.Morphisms.Etale
-import Mathlib.AlgebraicGeometry.Limits
-import Mathlib.FieldTheory.Separable
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.Etale
+public import Mathlib.AlgebraicGeometry.Limits
+public import Mathlib.FieldTheory.Separable
 
 /-!
 # Etale coproducts of spectra of finite separable field extensions
 
 Source: Stacks Project, Morphisms, Lemma 02GL (blueprint: lem-exc-etale-coproduct-etale).
 -/
+
+@[expose] public section
 
 universe u
 

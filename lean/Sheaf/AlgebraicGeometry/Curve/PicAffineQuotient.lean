@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group R1
 -/
-import WeilConjectures.AlgebraicGeometry.Curve.Compactification
-import WeilConjectures.AlgebraicGeometry.AbelianVariety.Jacobian
-import Mathlib.GroupTheory.QuotientGroup.Basic
+module
+
+public import WeilConjectures.AlgebraicGeometry.Curve.Compactification
+public import WeilConjectures.AlgebraicGeometry.AbelianVariety.Jacobian
+public import Mathlib.GroupTheory.QuotientGroup.Basic
 
 /-!
 # The Picard group of an affine curve as a Jacobian quotient
@@ -13,6 +15,8 @@ import Mathlib.GroupTheory.QuotientGroup.Basic
 Source: blueprint, sec-curve-estimates/sk-prop-cd-affine/lem-sc-pic-affine,
 first proof paragraph (blueprint: lem-sc-pic-affine-quotient).
 -/
+
+@[expose] public section
 
 universe u
 

@@ -3,17 +3,21 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import Sheaf.AlgebraicGeometry.DerivedCategory
-import Sheaf.AlgebraicGeometry.TensorPullback
-import Sheaf.Algebra.Homology.KFlat
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings
-import Mathlib.Algebra.Homology.Single
+module
+
+public import Sheaf.AlgebraicGeometry.DerivedCategory
+public import Sheaf.AlgebraicGeometry.TensorPullback
+public import Sheaf.Algebra.Homology.KFlat
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings
+public import Mathlib.Algebra.Homology.Single
 
 /-! # Finite Tor dimension over the inverse-image structure sheaf
 
 Source: Stacks Project, Tags 08CG and 08EV, hypothesis (3)
 (blueprint: def-pc-finite-tor-dimension-over).
 -/
+
+@[expose] public section
 
 universe u₀ w₀
 

@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import Mathlib.Algebra.Homology.DerivedCategory.Basic
-import Mathlib.Algebra.Homology.HomologicalComplexLimits
+module
+
+public import Mathlib.Algebra.Homology.DerivedCategory.Basic
+public import Mathlib.Algebra.Homology.HomologicalComplexLimits
 
 /-!
 # The kernel of a degreewise epimorphism and its shifted mapping cone
@@ -13,6 +15,8 @@ Source: Stacks Project, Derived Categories, Tags 070M and 014Q; the chain-level
 comparison implicit in the proof of Tag 070M
 (blueprint: lem-weil-degreewise-epi-kernel-cocone-qis).
 -/
+
+@[expose] public section
 
 universe w v u
 

@@ -3,11 +3,13 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group G1
 -/
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.EdgeMap
-import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStarCoherence
-import Mathlib.AlgebraicGeometry.OpenImmersion
-import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
-import Mathlib.CategoryTheory.Sites.Point.Basic
+module
+
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.EdgeMap
+public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStarCoherence
+public import Mathlib.AlgebraicGeometry.OpenImmersion
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
+public import Mathlib.CategoryTheory.Sites.Point.Basic
 
 /-!
 # Low-degree Leray comparison for an open immersion
@@ -15,6 +17,8 @@ import Mathlib.CategoryTheory.Sites.Point.Basic
 Source: literature/stacks-project/etale-cohomology.tex, discussion preceding Tag 03RM
 (blueprint: lem-sc-open-curve-etale-leray-low-degree).
 -/
+
+@[expose] public section
 
 universe u
 

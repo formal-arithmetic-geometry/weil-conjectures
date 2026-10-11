@@ -1,5 +1,7 @@
-import Sheaf.CategoryTheory.ColimitSites
-import Sheaf.CategoryTheory.SiteCechComplex
+module
+
+public import Sheaf.CategoryTheory.ColimitSites
+public import Sheaf.CategoryTheory.SiteCechComplex
 
 /-! # Čech complexes and filtered colimits of sites
 
@@ -11,6 +13,8 @@ The maps `θ` are the adjoints of the inverse-image transition maps. The diagram
 is the diagram of inverse images on the colimit site, with its maps specified by `hH`.
 All equations involving strict cocone identities are expressed in the arrow category.
 -/
+
+@[expose] public section
 
 universe u
 

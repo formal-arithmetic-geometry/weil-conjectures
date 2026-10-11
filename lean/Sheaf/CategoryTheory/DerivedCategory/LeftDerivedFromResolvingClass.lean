@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Mathlib.Algebra.Homology.DerivedCategory.Basic
-import Mathlib.CategoryTheory.Functor.Derived.PointwiseLeftDerived
+module
+
+public import Mathlib.Algebra.Homology.DerivedCategory.Basic
+public import Mathlib.CategoryTheory.Functor.Derived.PointwiseLeftDerived
 
 /-!
 # Left derived functors computed by a resolving class
@@ -12,6 +14,8 @@ import Mathlib.CategoryTheory.Functor.Derived.PointwiseLeftDerived
 Source: Stacks Project, Tags 06XN and 05SE, in Situation 05S8
 (blueprint: lem-pur-left-derived-from-kflat-class).
 -/
+
+@[expose] public section
 
 universe w v u v' u'
 

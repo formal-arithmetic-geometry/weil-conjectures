@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group J1
 -/
-import Mathlib.FieldTheory.Separable
-import Mathlib.LinearAlgebra.FiniteDimensional.Defs
-import Mathlib.RingTheory.TensorProduct.Basic
-import Mathlib.Algebra.GroupWithZero.Basic
+module
+
+public import Mathlib.FieldTheory.Separable
+public import Mathlib.LinearAlgebra.FiniteDimensional.Defs
+public import Mathlib.RingTheory.TensorProduct.Basic
+public import Mathlib.Algebra.GroupWithZero.Basic
 
 /-!
 # Reducedness of a finite separable extension tensored with a field
@@ -15,6 +17,8 @@ Source: Stacks Project, Algebra, Tag 030U, first paragraph of the proof, with
 Fields, Tag 030N (primitive element theorem).
 (blueprint: lem-weil-pbc-finite-separable-tensor-field-reduced).
 -/
+
+@[expose] public section
 
 universe u v w
 

@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import Mathlib.AlgebraicGeometry.Noetherian
-import Mathlib.Algebra.Category.ModuleCat.Stalk
-import Sheaf.AlgebraicGeometry.MeromorphicModule
+module
+
+public import Mathlib.AlgebraicGeometry.Noetherian
+public import Mathlib.Algebra.Category.ModuleCat.Stalk
+public import Sheaf.AlgebraicGeometry.MeromorphicModule
 
 /-!
 # Meromorphic sections and generic-point products
@@ -17,6 +19,8 @@ The stalk identifications are normalized on ordinary sections. Multiplication of
 sections is characterized by the local fraction formula, so the final clause concerns the
 canonical meromorphic action, not an arbitrary action transported from a product.
 -/
+
+@[expose] public section
 
 set_option backward.isDefEq.respectTransparency false
 

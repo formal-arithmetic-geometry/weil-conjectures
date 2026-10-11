@@ -3,11 +3,13 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Mathlib.Algebra.Category.ModuleCat.Limits
-import Mathlib.RingTheory.Noetherian.Defs
-import Mathlib.RingTheory.RingHom.Flat
-import Mathlib.RingTheory.Finiteness.Defs
-import Mathlib.RingTheory.Ideal.Quotient.Defs
+module
+
+public import Mathlib.Algebra.Category.ModuleCat.Limits
+public import Mathlib.RingTheory.Noetherian.Defs
+public import Mathlib.RingTheory.RingHom.Flat
+public import Mathlib.RingTheory.Finiteness.Defs
+public import Mathlib.RingTheory.Ideal.Quotient.Defs
 
 /-!
 # Inverse limits of flat modules over ideal-power quotients
@@ -15,6 +17,8 @@ import Mathlib.RingTheory.Ideal.Quotient.Defs
 Source: Stacks Project, More on Algebra, Lemma Tag 0912 (lemma-limit-flat).
 (blueprint: lem-weil-pbc-limit-flat-modules)
 -/
+
+@[expose] public section
 
 universe u v w
 

@@ -3,14 +3,18 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import Sheaf.AlgebraicGeometry.PerfectComplex
-import Sheaf.Paper.ShiftedKoszulAugmentation
+module
+
+public import Sheaf.AlgebraicGeometry.PerfectComplex
+public import Sheaf.Paper.ShiftedKoszulAugmentation
 
 /-! # Powers Koszul complexes are perfect on a principal-open cover
 
 Source: Stacks Project, Tag 08CX, Section 36.9
 (blueprint: lem-sc-affine-perfect-koszul-principal-unit).
 -/
+
+@[expose] public section
 
 universe a b
 

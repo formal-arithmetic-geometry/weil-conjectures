@@ -3,15 +3,19 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group Q1
 -/
-import Sheaf.Algebra.Homology.DerivedTensorSecondFactorFunctor
-import Mathlib.Algebra.Module.Projective
-import Mathlib.RingTheory.Finiteness.Basic
+module
+
+public import Sheaf.Algebra.Homology.DerivedTensorSecondFactorFunctor
+public import Mathlib.Algebra.Module.Projective
+public import Mathlib.RingTheory.Finiteness.Basic
 
 /-! # Derived scalar extension preserves perfect complexes
 
 Source: Stacks Project, More on Algebra, Lemma 15.76.9, Tag 066W
 (blueprint: lem-sc-perfect-pullback-perfect-residue).
 -/
+
+@[expose] public section
 
 universe wA wB u
 

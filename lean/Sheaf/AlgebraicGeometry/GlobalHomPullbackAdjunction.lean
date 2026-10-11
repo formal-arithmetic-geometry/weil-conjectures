@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import Sheaf.AlgebraicGeometry.GlobalHomPullbackComparison
-import Sheaf.Algebra.Homology.RhomGlobalSections
+module
+
+public import Sheaf.AlgebraicGeometry.GlobalHomPullbackComparison
+public import Sheaf.Algebra.Homology.RhomGlobalSections
 
 /-!
 # Global derived Hom and pullback/direct-image adjunction
@@ -12,6 +14,8 @@ import Sheaf.Algebra.Homology.RhomGlobalSections
 Source: Stacks Project, Cohomology, Tags 079W, 08I3 and 0B6A; Duality, Tag 0AA8,
 case (1), final compatibility (blueprint: lem-pc-global-hom-pullback-adjunction).
 -/
+
+@[expose] public section
 
 universe u w
 

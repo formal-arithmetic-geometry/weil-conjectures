@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group T1
 -/
-import Sheaf.Paper.ModuleCohomologyCupProduct
+module
+
+public import Sheaf.Paper.ModuleCohomologyCupProduct
 
 /-! # The Cech cup product
 
@@ -12,6 +14,8 @@ Source: Stacks Project, Cohomology, Tag 07MB
 For coefficient sheaves in degree zero the total-complex sign is +1 on each
 Alexander--Whitney component; the differential still has the signed Leibniz rule.
 -/
+
+@[expose] public section
 
 universe uC
 set_option autoImplicit false

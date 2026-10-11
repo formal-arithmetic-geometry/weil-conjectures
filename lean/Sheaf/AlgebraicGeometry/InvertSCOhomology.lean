@@ -3,14 +3,18 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import Sheaf.AlgebraicGeometry.Ample
-import Sheaf.AlgebraicGeometry.CohomologyFractionPresentation
+module
+
+public import Sheaf.AlgebraicGeometry.Ample
+public import Sheaf.AlgebraicGeometry.CohomologyFractionPresentation
 
 /-! # Localization of graded cohomology at a section
 
 Source: Stacks Project, Cohomology of Schemes, Lemma 09MR
 (blueprint: lem-sc-invert-s-cohomology).
 -/
+
+@[expose] public section
 
 universe u
 

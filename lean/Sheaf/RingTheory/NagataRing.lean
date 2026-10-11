@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Sheaf.RingTheory.JapaneseDomain
-import Mathlib.RingTheory.FiniteType
-import Mathlib.RingTheory.Noetherian.Defs
-import Mathlib.RingTheory.Ideal.Quotient.Basic
+module
+
+public import Sheaf.RingTheory.JapaneseDomain
+public import Mathlib.RingTheory.FiniteType
+public import Mathlib.RingTheory.Noetherian.Defs
+public import Mathlib.RingTheory.Ideal.Quotient.Basic
 
 /-!
 # Universally Japanese and Nagata rings
@@ -14,6 +16,8 @@ import Mathlib.RingTheory.Ideal.Quotient.Basic
 Source: Stacks Project, Algebra, Definition 10.162.1 (Tag 032R)
 (blueprint: def-weil-pbc-nagata-ring).
 -/
+
+@[expose] public section
 
 universe u
 

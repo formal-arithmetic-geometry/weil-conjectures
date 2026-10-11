@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group J1
 -/
-import WeilConjectures.AlgebraicGeometry.Curve.GenericComparison
+module
+
+public import WeilConjectures.AlgebraicGeometry.Curve.GenericComparison
 
 /-!
 # Generic-vanishing sheaves as filtered colimits of affine-open kernels
@@ -13,6 +15,8 @@ Source: the blueprint of the Weil conjectures, `sec-curve-estimates/sk-prop-cd`,
 `WeilConjectures/AlgebraicGeometry/Curve/GenericComparison.lean`, lines 156–201
 (blueprint: lem-sc-generic-vanishing-kernel-colimit).
 -/
+
+@[expose] public section
 
 universe u
 

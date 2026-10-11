@@ -1,7 +1,9 @@
-import Sheaf.AlgebraicGeometry.CoherentFormalModule
-import Sheaf.AlgebraicGeometry.CoherentFormalModulesAbelian
-import Mathlib.CategoryTheory.Abelian.SerreClass.Basic
-import WeilConjectures.Mathlib.AlgebraicGeometry.Noetherian
+module
+
+public import Sheaf.AlgebraicGeometry.CoherentFormalModule
+public import Sheaf.AlgebraicGeometry.CoherentFormalModulesAbelian
+public import Mathlib.CategoryTheory.Abelian.SerreClass.Basic
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Noetherian
 
 /-!
 # Serre subcategories of coherent formal modules with proper support
@@ -9,6 +11,8 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Noetherian
 Source: Stacks Project, Cohomology of Schemes, Lemma 0CYV
 (blueprint: lem-weil-pbc-formal-systems-proper-support-serre).
 -/
+
+@[expose] public section
 
 universe u
 

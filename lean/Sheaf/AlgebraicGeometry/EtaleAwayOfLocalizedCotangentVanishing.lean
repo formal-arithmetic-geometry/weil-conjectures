@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import Mathlib.RingTheory.Etale.Locus
-import Mathlib.AlgebraicGeometry.Morphisms.Etale
+module
+
+public import Mathlib.RingTheory.Etale.Locus
+public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 
 /-!
 # An étale basic neighbourhood from vanishing of the naive cotangent complex
@@ -13,6 +15,8 @@ Source: Stacks Project, Algebra, Tags 07BU, 00TB, 00U1; Morphisms, Tag 02GJ;
 More on Algebra, proof of Tag 07M7
 (blueprint: lem-weil-pbc-etale-near-prime-naive-cotangent-vanishing).
 -/
+
+@[expose] public section
 
 universe u
 

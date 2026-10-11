@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
-import Mathlib.RingTheory.Noetherian.Basic
-import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage
-import Sheaf.AlgebraicGeometry.BaseChangeConventions
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
+public import Mathlib.RingTheory.Noetherian.Basic
+public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage
+public import Sheaf.AlgebraicGeometry.BaseChangeConventions
 
 /-!
 # Eventual descent of flatness for finitely presented scheme modules
@@ -14,6 +16,8 @@ import Sheaf.AlgebraicGeometry.BaseChangeConventions
 Source: Stacks Project, Lemma 32.10.4 (Tag 05LY), with the target equal to the base
 (blueprint: lem-pc-flat-module-descent).
 -/
+
+@[expose] public section
 
 universe u
 

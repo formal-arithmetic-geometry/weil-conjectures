@@ -3,11 +3,13 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Mathlib.FieldTheory.PurelyInseparable.Basic
-import Mathlib.RingTheory.RegularLocalRing.Defs
-import Mathlib.RingTheory.RingHom.Flat
-import Mathlib.RingTheory.LocalRing.ResidueField.Fiber
-import Mathlib.RingTheory.AdicCompletion.Algebra
+module
+
+public import Mathlib.FieldTheory.PurelyInseparable.Basic
+public import Mathlib.RingTheory.RegularLocalRing.Defs
+public import Mathlib.RingTheory.RingHom.Flat
+public import Mathlib.RingTheory.LocalRing.ResidueField.Fiber
+public import Mathlib.RingTheory.AdicCompletion.Algebra
 
 /-!
 # G-rings and regular ring maps
@@ -21,6 +23,8 @@ Definitions 07BZ and 07GH (blueprint: def-weil-pbc-g-ring).
 * `RingHom.IsRegular`: flat maps with geometrically regular fibres.
 * `IsGRing`: Noetherian rings with regular local completion maps.
 -/
+
+@[expose] public section
 
 universe u v
 

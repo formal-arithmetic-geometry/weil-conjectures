@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import Mathlib.AlgebraicGeometry.Sites.Etale
-import WeilConjectures.CategoryTheory.Sites.Torsor
+module
+
+public import Mathlib.AlgebraicGeometry.Sites.Etale
+public import WeilConjectures.CategoryTheory.Sites.Torsor
 
 /-!
 # The contracted product of a torsor under change of coefficients
@@ -12,6 +14,8 @@ import WeilConjectures.CategoryTheory.Sites.Torsor
 Source: Stacks Project, Cohomology on Sites, Tag 03AH (torsors);
 blueprint pushout-fibre argument (blueprint: def-sc-contracted-product-presentation).
 -/
+
+@[expose] public section
 
 universe uQ wQ
 

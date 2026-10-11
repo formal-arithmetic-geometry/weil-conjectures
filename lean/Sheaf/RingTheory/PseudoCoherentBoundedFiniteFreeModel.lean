@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import Sheaf.RingTheory.RingPseudoCoherent
+module
+
+public import Sheaf.RingTheory.RingPseudoCoherent
 
 /-!
 # Finite free models at a cohomological upper bound
@@ -11,6 +13,8 @@ import Sheaf.RingTheory.RingPseudoCoherent
 Source: Stacks Project, More on Algebra, Lemma 15.66.5, Tag 064U
 (blueprint: lem-pc-pseudo-coherent-bounded-finite-free-model).
 -/
+
+@[expose] public section
 
 universe w v u
 

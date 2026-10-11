@@ -3,17 +3,21 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group U1
 -/
-import Sheaf.AlgebraicGeometry.DerivedCategory
-import Sheaf.Topology.OpenModuleCohomology
-import Sheaf.CategoryTheory.Triangulated.DerivedLimit
-import Mathlib.Algebra.Homology.DerivedCategory.TStructure
-import Mathlib.CategoryTheory.Triangulated.TStructure.TruncLTGE
+module
+
+public import Sheaf.AlgebraicGeometry.DerivedCategory
+public import Sheaf.Topology.OpenModuleCohomology
+public import Sheaf.CategoryTheory.Triangulated.DerivedLimit
+public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
+public import Mathlib.CategoryTheory.Triangulated.TStructure.TruncLTGE
 
 /-! # Reconstruction from lower truncations under a local cohomological bound
 
 Source: Stacks Project, Cohomology of Sheaves, Tag 0D64, specialized to a scheme
 (blueprint: lem-pc-ringed-space-truncation-derived-limit).
 -/
+
+@[expose] public section
 
 universe u w
 

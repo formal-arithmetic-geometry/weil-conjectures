@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Sheaf.CategoryTheory.CartanEilenbergExists
-import Mathlib.Algebra.Homology.Homotopy
+module
+
+public import Sheaf.CategoryTheory.CartanEilenbergExists
+public import Mathlib.Algebra.Homology.Homotopy
 
 /-! # Vertical null-homotopy of a Cartan--Eilenberg defect
 
@@ -18,6 +20,8 @@ induced by the same bicomplex augmentation. Exactness of these augmented rows is
 expressed by quasi-isomorphisms from complexes concentrated in vertical degree zero.
 The canonical cycle-column-boundary sequences are short exact in any abelian category.
 -/
+
+@[expose] public section
 
 universe u v
 

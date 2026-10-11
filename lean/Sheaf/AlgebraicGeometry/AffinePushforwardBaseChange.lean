@@ -3,14 +3,16 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Sheaf.AlgebraicGeometry.ModuleBaseChangeMapOpenRestriction
-import Sheaf.AlgebraicGeometry.ModulePullbackTensor
-import Sheaf.AlgebraicGeometry.TensorPullbackStructureSheaf
-import Mathlib.AlgebraicGeometry.Morphisms.Affine
-import Mathlib.AlgebraicGeometry.Pullbacks
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
-import Mathlib.AlgebraicGeometry.Modules.Tilde
-import Mathlib.RingTheory.TensorProduct.Basic
+module
+
+public import Sheaf.AlgebraicGeometry.ModuleBaseChangeMapOpenRestriction
+public import Sheaf.AlgebraicGeometry.ModulePullbackTensor
+public import Sheaf.AlgebraicGeometry.TensorPullbackStructureSheaf
+public import Mathlib.AlgebraicGeometry.Morphisms.Affine
+public import Mathlib.AlgebraicGeometry.Pullbacks
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
+public import Mathlib.AlgebraicGeometry.Modules.Tilde
+public import Mathlib.RingTheory.TensorProduct.Basic
 
 /-! # Affine pushforward and arbitrary base change
 
@@ -18,6 +20,8 @@ Source: Stacks Project, Cohomology of Schemes, Lemma 02KG; the algebra and compo
 clauses are the affine-local consequences specified by the DAG node
 (blueprint: lem-weil-pbc-affine-pushforward-base-change).
 -/
+
+@[expose] public section
 
 universe u
 open CategoryTheory CategoryTheory.Limits MonoidalCategory Opposite TensorProduct

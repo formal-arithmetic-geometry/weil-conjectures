@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Mathlib.RingTheory.Regular.RegularSequence
-import Mathlib.Data.List.OfFn
+module
+
+public import Mathlib.RingTheory.Regular.RegularSequence
+public import Mathlib.Data.List.OfFn
 
 /-!
 # Positive powers of a regular sequence
@@ -12,6 +14,8 @@ import Mathlib.Data.List.OfFn
 Source: Stacks Project, Algebra, Lemma 10.68.9, Tag 07DV
 (blueprint: lem-weil-pbc-regular-sequence-powers).
 -/
+
+@[expose] public section
 
 universe u v
 

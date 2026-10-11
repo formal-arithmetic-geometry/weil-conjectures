@@ -1,4 +1,6 @@
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
+module
+
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 
 /-!
 # Functoriality of pullback on étale cohomology
@@ -6,6 +8,8 @@ import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 Source: literature/stacks-project/cohomology.tex, Section Tag 01F7 (blueprint:
 lem-weil-pbc-cohomology-pullback-functorial)
 -/
+
+@[expose] public section
 
 universe u
 

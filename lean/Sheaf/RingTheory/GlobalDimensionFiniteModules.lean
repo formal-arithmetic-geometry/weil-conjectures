@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import Sheaf.RingTheory.GlobalDimension
-import Mathlib.RingTheory.Finiteness.Defs
-import Mathlib.RingTheory.Ideal.Quotient.Defs
-import Mathlib.Algebra.Module.ULift
+module
+
+public import Sheaf.RingTheory.GlobalDimension
+public import Mathlib.RingTheory.Finiteness.Defs
+public import Mathlib.RingTheory.Ideal.Quotient.Defs
+public import Mathlib.Algebra.Module.ULift
 
 /-!
 # Testing global dimension on finite and cyclic modules
@@ -14,6 +16,8 @@ import Mathlib.Algebra.Module.ULift
 Source: Stacks Project, Algebra, Lemma 065T
 (blueprint: lem-weil-pbc-global-dimension-finite-modules-suffice).
 -/
+
+@[expose] public section
 
 universe u v
 

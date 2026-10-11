@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import Mathlib.RingTheory.Ideal.Colon
-import Mathlib.RingTheory.Ideal.Prime
+module
+
+public import Mathlib.RingTheory.Ideal.Colon
+public import Mathlib.RingTheory.Ideal.Prime
 
 /-!
 # Associated primes defined by element annihilators
@@ -12,6 +14,8 @@ import Mathlib.RingTheory.Ideal.Prime
 Source: Stacks Project, Algebra, Definition 00LA (definition-associated)
 (blueprint: def-weil-pbc-annihilator-associated-primes).
 -/
+
+@[expose] public section
 
 universe u v
 

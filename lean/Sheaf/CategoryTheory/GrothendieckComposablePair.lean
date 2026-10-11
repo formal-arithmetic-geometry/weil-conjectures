@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import WeilConjectures.CategoryTheory.SpectralSequence.Grothendieck
+module
+
+public import WeilConjectures.CategoryTheory.SpectralSequence.Grothendieck
 
 /-!
 # Composable pairs and acyclicity
@@ -17,6 +19,8 @@ Section 13.22, Lemma 13.22.1 (Tag 015M) (blueprint: def-sp-composite-acyclicity)
 - `CategoryTheory.GrothendieckComposablePair.SendsInjectivesToAcyclics`: its acyclicity
   condition.
 -/
+
+@[expose] public section
 
 universe v₁ v₂ v₃ u₁ u₂ u₃
 

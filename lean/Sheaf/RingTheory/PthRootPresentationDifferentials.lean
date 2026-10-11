@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import Mathlib.RingTheory.Kaehler.Basic
-import Mathlib.Algebra.MvPolynomial.CommRing
-import Mathlib.Algebra.Algebra.ZMod
+module
+
+public import Mathlib.RingTheory.Kaehler.Basic
+public import Mathlib.Algebra.MvPolynomial.CommRing
+public import Mathlib.Algebra.Algebra.ZMod
 
 /-!
 # Differentials of a presentation adjoining p-th roots
@@ -13,6 +15,8 @@ import Mathlib.Algebra.Algebra.ZMod
 Source: Stacks Project, More on Algebra, proof of Proposition Tag 07E5, (2) => (4)
 (blueprint: lem-weil-pbc-pth-root-presentation-differentials).
 -/
+
+@[expose] public section
 
 universe u
 

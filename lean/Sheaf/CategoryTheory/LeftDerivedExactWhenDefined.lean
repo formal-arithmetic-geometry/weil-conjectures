@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group G1
 -/
-import Sheaf.CategoryTheory.IsSaturatedTriangulatedMultiplicativeSystem
-import Mathlib.CategoryTheory.Functor.KanExtension.Basic
+module
+
+public import Sheaf.CategoryTheory.IsSaturatedTriangulatedMultiplicativeSystem
+public import Mathlib.CategoryTheory.Functor.KanExtension.Basic
 
 /-!
 # Exactness of everywhere-defined left derived functors
@@ -12,6 +14,8 @@ import Mathlib.CategoryTheory.Functor.KanExtension.Basic
 Source: Stacks Project, Derived Categories, Definition 05S9 and Proposition 05SE
 (blueprint: lem-pur-left-derived-exact-when-defined).
 -/
+
+@[expose] public section
 
 universe u v u' v' u'' v''
 

@@ -3,12 +3,14 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Mathlib.RingTheory.Smooth.Basic
-import Mathlib.Algebra.MvPolynomial.PDeriv
-import Mathlib.Algebra.MvPolynomial.Rename
-import Mathlib.LinearAlgebra.Matrix.Determinant.Basic
-import Mathlib.RingTheory.Localization.Away.Basic
-import Mathlib.RingTheory.Ideal.Quotient.Operations
+module
+
+public import Mathlib.RingTheory.Smooth.Basic
+public import Mathlib.Algebra.MvPolynomial.PDeriv
+public import Mathlib.Algebra.MvPolynomial.Rename
+public import Mathlib.LinearAlgebra.Matrix.Determinant.Basic
+public import Mathlib.RingTheory.Localization.Away.Basic
+public import Mathlib.RingTheory.Ideal.Quotient.Operations
 
 /-!
 # Smoothness of the localized auxiliary algebra in weak delocalization
@@ -17,6 +19,8 @@ Source: Stacks Project, Smoothing Ring Maps, proof of Lemma Tag 07F9
 (`smoothing.tex`, lemma-delocalize-weak), and Algebra, Definition Tag 00T6.
 (blueprint: lem-weil-pbc-popescu-delocalize-weak-localization-smooth).
 -/
+
+@[expose] public section
 
 universe u
 

@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import Mathlib.CategoryTheory.Action.Continuous
-import Mathlib.Topology.Category.FinTopCat
-import Sheaf.RepresentationTheory.DiscreteContinuousRep
-import Mathlib.CategoryTheory.Limits.Shapes.FiniteProducts
+module
+
+public import Mathlib.CategoryTheory.Action.Continuous
+public import Mathlib.Topology.Category.FinTopCat
+public import Sheaf.RepresentationTheory.DiscreteContinuousRep
+public import Mathlib.CategoryTheory.Limits.Shapes.FiniteProducts
 
 /-!
 # Finite modules with continuous linear group actions
@@ -14,6 +16,8 @@ import Mathlib.CategoryTheory.Limits.Shapes.FiniteProducts
 Source: Stacks Project, Tag 0DV5, proof of (3)
 (blueprint: def-pod-finite-continuous-module).
 -/
+
+@[expose] public section
 
 section
 

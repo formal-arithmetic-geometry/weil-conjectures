@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import Mathlib.Algebra.Category.Grp.AB
-import Mathlib.CategoryTheory.Abelian.RightDerived
-import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStarCoherence
+module
+
+public import Mathlib.Algebra.Category.Grp.AB
+public import Mathlib.CategoryTheory.Abelian.RightDerived
+public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStarCoherence
 
 /-!
 # Higher direct images for quasi-compact quasi-separated morphisms
@@ -17,6 +19,8 @@ The cohomology of a complex of presheaves is sectionwise. Thus the presheaf in t
 clause below evaluates at `W` to `H^q(I(W ×_V U))`, with the induced restriction maps.
 For a K-injective representative `I` of `K`, this is `H^q(W ×_V U, K|)`.
 -/
+
+@[expose] public section
 
 universe u
 

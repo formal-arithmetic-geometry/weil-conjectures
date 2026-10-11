@@ -3,11 +3,13 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import Sheaf.AlgebraicGeometry.DerivedCategory
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorClosed
-import WeilConjectures.CategoryTheory.DerivedCategory.HasMonoidalDerivedCategory
-import WeilConjectures.CategoryTheory.Monoidal.Instances.DerivedCategory
-import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
+module
+
+public import Sheaf.AlgebraicGeometry.DerivedCategory
+public import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorClosed
+public import WeilConjectures.CategoryTheory.DerivedCategory.HasMonoidalDerivedCategory
+public import WeilConjectures.CategoryTheory.Monoidal.Instances.DerivedCategory
+public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 
 /-! # Derived tensor structure on O_X-modules
 
@@ -16,6 +18,8 @@ Source: Stacks Project, Cohomology, Tags 06Y7, 06YH and 03EO
 The tensor is the upstream K-flat derived monoidal construction, specialized to the
 shared category of O_X-modules, rather than an arbitrary monoidal structure.
 -/
+
+@[expose] public section
 
 universe u w
 

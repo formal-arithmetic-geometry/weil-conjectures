@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group T1
 -/
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
-import Sheaf.AlgebraicGeometry.TorsionEtaleSheaf
+module
+
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
+public import Sheaf.AlgebraicGeometry.TorsionEtaleSheaf
 
 /-!
 # Pullback isomorphisms on cohomology: prime-torsion dévissage
@@ -12,6 +14,8 @@ import Sheaf.AlgebraicGeometry.TorsionEtaleSheaf
 Source: literature/stacks-project/etale-cohomology.tex, proof of Lemma 0A4B,
 paragraphs 2--3 (blueprint: lem-weil-pbc-pullback-iso-prime-torsion-devissage).
 -/
+
+@[expose] public section
 
 universe u
 

@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Mathlib.RingTheory.AdicCompletion.Algebra
-import Mathlib.RingTheory.Noetherian.Defs
-import Mathlib.RingTheory.LocalRing.MaximalIdeal.Defs
-import Mathlib.RingTheory.KrullDimension.Basic
+module
+
+public import Mathlib.RingTheory.AdicCompletion.Algebra
+public import Mathlib.RingTheory.Noetherian.Defs
+public import Mathlib.RingTheory.LocalRing.MaximalIdeal.Defs
+public import Mathlib.RingTheory.KrullDimension.Basic
 
 /-!
 # Dimension of the completion of a Noetherian local ring
@@ -14,6 +16,8 @@ import Mathlib.RingTheory.KrullDimension.Basic
 Source: literature/stacks-project/more-algebra.tex, Lemma Tag 07NV
 (blueprint: lem-weil-pbc-completion-dimension).
 -/
+
+@[expose] public section
 
 set_option autoImplicit false
 

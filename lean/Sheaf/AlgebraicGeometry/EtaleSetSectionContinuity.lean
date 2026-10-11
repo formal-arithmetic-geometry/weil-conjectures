@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Sheaf.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
-import Sheaf.AlgebraicGeometry.LimitAffineTransition
-import Mathlib.CategoryTheory.Limits.Types.Colimits
+module
+
+public import Sheaf.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
+public import Sheaf.AlgebraicGeometry.LimitAffineTransition
+public import Mathlib.CategoryTheory.Limits.Types.Colimits
 
 /-!
 # Continuity of sections of étale sheaves of sets
@@ -14,6 +16,8 @@ Source: Stacks Project, Étale Cohomology, Tag 09YQ, degree-zero argument via Ta
 04HR and 09YN; restriction along an étale morphism, Tag 03S2
 (blueprint: lem-weil-pbc-sets-etale-section-continuity).
 -/
+
+@[expose] public section
 
 universe u
 

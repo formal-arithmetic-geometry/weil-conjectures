@@ -3,11 +3,13 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group G1
 -/
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
-import Mathlib.CategoryTheory.Category.Preorder
-import Mathlib.Order.Directed
-import Mathlib.Topology.QuasiSeparated
+module
+
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
+public import Mathlib.CategoryTheory.Category.Preorder
+public import Mathlib.Order.Directed
+public import Mathlib.Topology.QuasiSeparated
 
 /-!
 # Maps from finitely presented module sheaves into directed colimits
@@ -15,6 +17,8 @@ import Mathlib.Topology.QuasiSeparated
 Source: Stacks Project, Modules, Lemma 01BS, specialized to qcqs schemes
 (blueprint: lem-weil-pbc-finite-presentation-hom-directed-colimit).
 -/
+
+@[expose] public section
 
 universe u
 

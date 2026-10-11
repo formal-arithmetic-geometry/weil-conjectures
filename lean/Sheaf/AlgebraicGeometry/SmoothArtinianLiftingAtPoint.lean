@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import Mathlib.AlgebraicGeometry.Morphisms.Smooth
-import Mathlib.AlgebraicGeometry.Noetherian
-import Mathlib.RingTheory.Length
-import Mathlib.RingTheory.Artinian.Module
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
+public import Mathlib.AlgebraicGeometry.Noetherian
+public import Mathlib.RingTheory.Length
+public import Mathlib.RingTheory.Artinian.Module
 
 /-!
 # Artinian lifting criterion for smoothness at a point
@@ -14,6 +16,8 @@ import Mathlib.RingTheory.Artinian.Module
 Source: Stacks Project, More on Morphisms, Lemma 02HX, (1) iff (3), and Algebra,
 Definition 02HS (blueprint: lem-weil-pbc-smooth-artinian-lifting-at-point).
 -/
+
+@[expose] public section
 
 universe u
 

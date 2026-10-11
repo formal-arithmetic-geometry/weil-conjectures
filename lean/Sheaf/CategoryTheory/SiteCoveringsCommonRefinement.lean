@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Mathlib.CategoryTheory.Sites.Hypercover.Zero
+module
+
+public import Mathlib.CategoryTheory.Sites.Hypercover.Zero
 
 /-!
 # Common refinements of coverings of a site
@@ -11,6 +13,8 @@ import Mathlib.CategoryTheory.Sites.Hypercover.Zero
 Source: Stacks Project, Sites, Lemma 7.10.5 (Tag 00W6) and its proof
 (blueprint: lem-weil-pbc-site-coverings-common-refinement).
 -/
+
+@[expose] public section
 
 universe u w w' t
 

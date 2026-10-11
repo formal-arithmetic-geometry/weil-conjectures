@@ -3,12 +3,14 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
-import Mathlib.Algebra.Homology.HomologicalComplex
-import Mathlib.RingTheory.Noetherian.Basic
-import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage
-import Sheaf.AlgebraicGeometry.BaseChangeConventions
-import Sheaf.AlgebraicGeometry.ClosedSubsetProperOverBase
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
+public import Mathlib.Algebra.Homology.HomologicalComplex
+public import Mathlib.RingTheory.Noetherian.Basic
+public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage
+public import Sheaf.AlgebraicGeometry.BaseChangeConventions
+public import Sheaf.AlgebraicGeometry.ClosedSubsetProperOverBase
 
 /-!
 # Descent of bounded flat complexes with proper support
@@ -17,6 +19,8 @@ Source: Stacks Project, Limits of Schemes, Tags 01ZR, 05LY and 081G;
 Cohomology of Schemes, Lemma 30.26.7 (Tag 0CYS)
 (blueprint: lem-pc-finite-flat-proper-support-descent).
 -/
+
+@[expose] public section
 
 universe u
 

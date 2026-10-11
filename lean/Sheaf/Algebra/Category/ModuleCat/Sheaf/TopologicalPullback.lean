@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
-import Sheaf.Topology.InverseImageModule
+module
+
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
+public import Sheaf.Topology.InverseImageModule
 
 /-!
 # Inverse image of sheaf modules and direct image
@@ -15,6 +17,8 @@ The inverse-image module is the landed `TopCat.Sheaf.inverseImageModule`
 (the 008X structure on the explicit abelian inverse image), not Mathlib's
 abstract `SheafOfModules.pullback`.
 -/
+
+@[expose] public section
 
 universe u
 

@@ -3,12 +3,14 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import Sheaf.Algebra.Module.DegreeZeroFractions
-import Mathlib.Algebra.Module.GradedModule
-import Mathlib.Algebra.DirectSum.Module
-import Mathlib.Algebra.Module.LocalizedModule.Exact
-import Mathlib.RingTheory.MvPolynomial.Homogeneous
-import Mathlib.RingTheory.GradedAlgebra.HomogeneousLocalization
+module
+
+public import Sheaf.Algebra.Module.DegreeZeroFractions
+public import Mathlib.Algebra.Module.GradedModule
+public import Mathlib.Algebra.DirectSum.Module
+public import Mathlib.Algebra.Module.LocalizedModule.Exact
+public import Mathlib.RingTheory.MvPolynomial.Homogeneous
+public import Mathlib.RingTheory.GradedAlgebra.HomogeneousLocalization
 
 /-!
 # Exactness of degree-zero localization on the projective line
@@ -16,6 +18,8 @@ import Mathlib.RingTheory.GradedAlgebra.HomogeneousLocalization
 Source: Stacks Project, Constructions, Lemma 01M7 (5), and Algebra, Section 00JM
 (blueprint: lem-sc-p1-proj-degreezero-localization-exact).
 -/
+
+@[expose] public section
 
 universe u v₀ v₁ v₂
 

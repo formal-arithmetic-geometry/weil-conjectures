@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Mathlib.CategoryTheory.Abelian.RightDerived
-import Mathlib.CategoryTheory.Limits.Preserves.Finite
+module
+
+public import Mathlib.CategoryTheory.Abelian.RightDerived
+public import Mathlib.CategoryTheory.Limits.Preserves.Finite
 
 /-!
 # Higher right derived functors of exact functors
@@ -12,6 +14,8 @@ import Mathlib.CategoryTheory.Limits.Preserves.Finite
 Source: Stacks Project, Derived Categories, Lemma 13.16.9, Tag 015F, part (5)
 (blueprint: lem-sc-exact-functor-higher-derived-vanishing).
 -/
+
+@[expose] public section
 
 universe v₁ v₂ u₁ u₂
 

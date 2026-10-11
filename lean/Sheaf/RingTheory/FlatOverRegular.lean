@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import Mathlib.RingTheory.RegularLocalRing.Defs
-import Mathlib.RingTheory.Regular.RegularSequence
-import Mathlib.RingTheory.RingHom.Flat
+module
+
+public import Mathlib.RingTheory.RegularLocalRing.Defs
+public import Mathlib.RingTheory.Regular.RegularSequence
+public import Mathlib.RingTheory.RingHom.Flat
 
 /-!
 # Flatness over a regular local ring
@@ -13,6 +15,8 @@ import Mathlib.RingTheory.RingHom.Flat
 Source: Stacks Project, Algebra, Lemma 10.128.2 (Tag 07DY)
 (blueprint: lem-weil-pbc-flat-over-regular).
 -/
+
+@[expose] public section
 
 universe u v
 

@@ -3,17 +3,21 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Sheaf.AlgebraicGeometry.AffineQCohDerivedEquivalence
-import Sheaf.AlgebraicGeometry.DerivedTensorCohomologyVanishes
-import WeilConjectures.CategoryTheory.DerivedCategory.TorAmplitude
-import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolution
-import Mathlib.RingTheory.Flat.CategoryTheory
+module
+
+public import Sheaf.AlgebraicGeometry.AffineQCohDerivedEquivalence
+public import Sheaf.AlgebraicGeometry.DerivedTensorCohomologyVanishes
+public import WeilConjectures.CategoryTheory.DerivedCategory.TorAmplitude
+public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolution
+public import Mathlib.RingTheory.Flat.CategoryTheory
 
 /-! # Tor amplitude under the affine associated-sheaf correspondence
 
 Source: Stacks Project, Derived Categories of Schemes, Lemma 36.10.4, Tag 08E9,
 part (1) (blueprint: lem-pc-affine-tor-amplitude-criterion).
 -/
+
+@[expose] public section
 
 universe u wA wX
 

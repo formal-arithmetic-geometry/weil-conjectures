@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Sheaf.RingTheory.GRing
-import Mathlib.RingTheory.Flat.FaithfullyFlat.Basic
+module
+
+public import Sheaf.RingTheory.GRing
+public import Mathlib.RingTheory.Flat.FaithfullyFlat.Basic
 
 /-!
 # Geometric regularity descends along faithfully flat algebra maps
@@ -12,6 +14,8 @@ import Mathlib.RingTheory.Flat.FaithfullyFlat.Basic
 Source: Stacks Project, Algebra, Lemma Tag 07NH
 (blueprint: lem-weil-pbc-geometrically-regular-descent).
 -/
+
+@[expose] public section
 
 universe u v w
 

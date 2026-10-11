@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import Mathlib.AlgebraicGeometry.Fiber
-import WeilConjectures.Mathlib.Topology.KrullDimension
-import Sheaf.AlgebraicGeometry.BaseChangeConventions
+module
+
+public import Mathlib.AlgebraicGeometry.Fiber
+public import WeilConjectures.Mathlib.Topology.KrullDimension
+public import Sheaf.AlgebraicGeometry.BaseChangeConventions
 
 /-!
 # Fibre dimension after base change
@@ -13,6 +15,8 @@ import Sheaf.AlgebraicGeometry.BaseChangeConventions
 Source: Stacks Project, Tag 02FY (lemma-dimension-fibre-after-base-change), part (1)
 (blueprint: lem-sc-fibre-dimension-after-base-change).
 -/
+
+@[expose] public section
 
 universe u
 

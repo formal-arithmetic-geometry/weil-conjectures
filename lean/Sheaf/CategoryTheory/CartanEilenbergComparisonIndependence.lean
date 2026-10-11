@@ -3,16 +3,20 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import Sheaf.CategoryTheory.CartanEilenbergPresentation
-import Sheaf.CategoryTheory.FilteredPageTwoModel
-import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
-import Mathlib.CategoryTheory.Abelian.RightDerived
+module
+
+public import Sheaf.CategoryTheory.CartanEilenbergPresentation
+public import Sheaf.CategoryTheory.FilteredPageTwoModel
+public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
+public import Mathlib.CategoryTheory.Abelian.RightDerived
 
 /-! # Independence of Cartan--Eilenberg comparison maps
 
 Source: Stacks Project, Derived Categories, Remarks and Lemmas 015K and 015N
 (blueprint: lem-sp-cartan-eilenberg-comparison-independence).
 -/
+
+@[expose] public section
 
 universe uAT vAT uBT vBT uCT vCT
 

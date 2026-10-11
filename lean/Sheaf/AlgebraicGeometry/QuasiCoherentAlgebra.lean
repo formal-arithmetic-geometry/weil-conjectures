@@ -3,12 +3,14 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Sheaf.AlgebraicGeometry.CommAlgebraSheaf
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
-import Mathlib.AlgebraicGeometry.AffineScheme
-import Mathlib.CategoryTheory.Subobject.Basic
-import Mathlib.RingTheory.FinitePresentation
-import Mathlib.RingTheory.IntegralClosure.IsIntegral.Defs
+module
+
+public import Sheaf.AlgebraicGeometry.CommAlgebraSheaf
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
+public import Mathlib.AlgebraicGeometry.AffineScheme
+public import Mathlib.CategoryTheory.Subobject.Basic
+public import Mathlib.RingTheory.FinitePresentation
+public import Mathlib.RingTheory.IntegralClosure.IsIntegral.Defs
 
 /-! # Quasi-coherent algebras and their affine-local properties
 
@@ -20,6 +22,8 @@ and `Scheme.CommAlgebraSheaf.toModule`. Quasi-coherence uses Mathlib's existing
 module-sheaf predicate. Finiteness, integrality and finite presentation are tested
 on every affine open using the existing ring-homomorphism predicates.
 -/
+
+@[expose] public section
 
 universe u
 

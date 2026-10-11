@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Sheaf.Algebra.Module.DegreeZeroFractions
-import Mathlib.RingTheory.GradedAlgebra.HomogeneousLocalization
+module
+
+public import Sheaf.Algebra.Module.DegreeZeroFractions
+public import Mathlib.RingTheory.GradedAlgebra.HomogeneousLocalization
 
 /-!
 # Restriction maps between degree-zero graded module localizations
@@ -13,6 +15,8 @@ Source: Stacks Project, Constructions, Lemma 01M4 (lemma-standard-open),
 parts (1)(a),(c),(d),(e),(g),(h); Algebra, Section 00JM
 (blueprint: lem-weil-pbc-graded-module-away-restriction).
 -/
+
+@[expose] public section
 
 universe u v
 

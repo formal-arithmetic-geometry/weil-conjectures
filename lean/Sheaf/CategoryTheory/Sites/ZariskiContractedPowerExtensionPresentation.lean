@@ -1,7 +1,9 @@
-import Sheaf.CategoryTheory.Sites.ZariskiContractedPowerTorsor
-import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify
-import WeilConjectures.CategoryTheory.GrothendieckAbelian.ConcreteCoefficients
-import Mathlib.Algebra.Homology.ShortComplex.ShortExact
+module
+
+public import Sheaf.CategoryTheory.Sites.ZariskiContractedPowerTorsor
+public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify
+public import WeilConjectures.CategoryTheory.GrothendieckAbelian.ConcreteCoefficients
+public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 
 /-!
 # Extension from contracted powers of a Zariski torsor
@@ -10,6 +12,8 @@ Source: the worker's contracted-power construction developing blueprint `lem-sc-
 the extension corresponds to Stacks Lemma 02FQ, constructed there by pushout.
 (blueprint: def-sc-zariski-contracted-power-extension-presentation)
 -/
+
+@[expose] public section
 
 universe uE
 

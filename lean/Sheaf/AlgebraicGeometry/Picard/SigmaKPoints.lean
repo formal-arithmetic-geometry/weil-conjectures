@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import WeilConjectures.AlgebraicGeometry.Picard.Defs
+module
+
+public import WeilConjectures.AlgebraicGeometry.Picard.Defs
 
 /-!
 # The normalized Picard functor at the base field
@@ -11,6 +13,8 @@ import WeilConjectures.AlgebraicGeometry.Picard.Defs
 Source: blueprint `sec-picard-framework/sk-def-picard-pic/lem-pc-sigma-k-points.md`
 (blueprint: lem-pc-sigma-k-points).
 -/
+
+@[expose] public section
 
 universe u
 

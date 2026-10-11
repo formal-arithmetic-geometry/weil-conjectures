@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group G1
 -/
-import Mathlib.RingTheory.Smooth.Basic
+module
+
+public import Mathlib.RingTheory.Smooth.Basic
 
 /-!
 # Essentially smooth ring maps
@@ -12,6 +14,8 @@ Source: Stacks Project, Smoothing Ring Maps, Section 07FF, where the term is use
 Lemmas 07FH and 07FI; modelled on Algebra, Definition 00QM
 (blueprint: def-weil-pbc-essentially-smooth-ring-map).
 -/
+
+@[expose] public section
 
 universe u v
 

@@ -1,4 +1,6 @@
-import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
+module
+
+public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 
 /-! # A locally injective map into a sheaf induces an injective map on sheafification
 
@@ -6,6 +8,8 @@ Source: literature/stacks-project/sites.tex, Theorem 00WB and Lemma 00WK,
 with sites-modules.tex Lemma 03CY
 (blueprint: lem-weil-pbc-site-module-sheafification-lift-injective).
 -/
+
+@[expose] public section
 
 universe v u₁ v₁ u
 

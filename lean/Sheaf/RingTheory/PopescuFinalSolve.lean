@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import Sheaf.RingTheory.SingularIdeal
+module
+
+public import Sheaf.RingTheory.SingularIdeal
 
 /-!
 # Factoring through a smooth algebra when the extended singular ideal is the unit ideal
@@ -11,6 +13,8 @@ import Sheaf.RingTheory.SingularIdeal
 Source: Stacks Project, Smoothing Ring Maps, Lemma 16.2.8, Tag 07EU (`lemma-final-solve`)
 (blueprint: lem-weil-pbc-popescu-final-solve).
 -/
+
+@[expose] public section
 
 universe u v w
 

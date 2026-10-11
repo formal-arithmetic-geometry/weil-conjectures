@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import Sheaf.AlgebraicGeometry.Coherent
-import Sheaf.Paper.PQFCohomology
-import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
+module
+
+public import Sheaf.AlgebraicGeometry.Coherent
+public import Sheaf.Paper.PQFCohomology
+public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 
 /-!
 # Serre's criterion for affineness
@@ -14,6 +16,8 @@ import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 Source: Stacks Project, Cohomology of Schemes, Lemma 30.3.2, Tag 01XG
 (blueprint: pqf-lem-serre-criterion).
 -/
+
+@[expose] public section
 
 universe u
 

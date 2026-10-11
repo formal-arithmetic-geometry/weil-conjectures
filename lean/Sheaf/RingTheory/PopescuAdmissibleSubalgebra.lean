@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group J1
 -/
-import Mathlib.RingTheory.Artinian.Ring
-import Mathlib.RingTheory.EssentialFiniteness
-import Mathlib.RingTheory.RingHom.Flat
-import Mathlib.RingTheory.LocalRing.MaximalIdeal.Basic
+module
+
+public import Mathlib.RingTheory.Artinian.Ring
+public import Mathlib.RingTheory.EssentialFiniteness
+public import Mathlib.RingTheory.RingHom.Flat
+public import Mathlib.RingTheory.LocalRing.MaximalIdeal.Basic
 
 /-!
 # Admissible subalgebras in the Popescu construction
@@ -14,6 +16,8 @@ import Mathlib.RingTheory.LocalRing.MaximalIdeal.Basic
 Source: Stacks Project, proof of Tag 07FH
 (blueprint: def-weil-pbc-popescu-admissible-subalgebra).
 -/
+
+@[expose] public section
 
 universe uA vA
 

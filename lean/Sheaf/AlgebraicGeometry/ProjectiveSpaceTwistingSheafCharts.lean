@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group V1
 -/
-import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Twist
-import WeilConjectures.Mathlib.RingTheory.MvPolynomial.Homogeneous
-import Sheaf.AlgebraicGeometry.Ample
+module
+
+public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Twist
+public import WeilConjectures.Mathlib.RingTheory.MvPolynomial.Homogeneous
+public import Sheaf.AlgebraicGeometry.Ample
 
 /-!
 # The twisting sheaf on the standard charts of integral projective space
@@ -13,6 +15,9 @@ import Sheaf.AlgebraicGeometry.Ample
 Source: Stacks Project, Constructions, Tags 01MN, 01M7, 01MS, 01MB, 01NG, 01MV
 (blueprint: lem-weil-pbc-projective-space-twisting-sheaf-charts).
 -/
+
+@[expose] public section
+
 open CategoryTheory Opposite
 open scoped AlgebraicGeometry.Scheme.Modules
 namespace AlgebraicGeometry

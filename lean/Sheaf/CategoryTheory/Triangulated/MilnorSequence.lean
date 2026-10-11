@@ -3,11 +3,13 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import Sheaf.CategoryTheory.Triangulated.DerivedLimit
-import Sheaf.CategoryTheory.DerivedLimitRoosAbelianGroups
-import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
-import Mathlib.Algebra.Homology.ShortComplex.ShortExact
-import Mathlib.CategoryTheory.Whiskering
+module
+
+public import Sheaf.CategoryTheory.Triangulated.DerivedLimit
+public import Sheaf.CategoryTheory.DerivedLimitRoosAbelianGroups
+public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
+public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
+public import Mathlib.CategoryTheory.Whiskering
 
 /-!
 # Milnor exact sequence for a derived inverse limit
@@ -19,6 +21,8 @@ Derived Categories of Schemes, Tag 08D4, proof of (2)
 The maps are chosen simultaneously for all specified Roos triangles and are natural
 for morphisms of these triangles. No functorial choice of a derived-limit object is assumed.
 -/
+
+@[expose] public section
 
 universe u v
 

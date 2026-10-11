@@ -3,14 +3,18 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group V1
 -/
-import Mathlib.RingTheory.TensorProduct.Basic
-import Mathlib.RingTheory.FiniteType
+module
+
+public import Mathlib.RingTheory.TensorProduct.Basic
+public import Mathlib.RingTheory.FiniteType
 
 /-! # Finite-type reduction for tensor products
 
 Source: literature/stacks-project/algebra.tex, Algebra, Lemma 00I3
 (algebra-lemma-limit-argument) (blueprint: lem-weil-pbc-tensor-finite-type-limit)
 -/
+
+@[expose] public section
 
 open scoped TensorProduct
 

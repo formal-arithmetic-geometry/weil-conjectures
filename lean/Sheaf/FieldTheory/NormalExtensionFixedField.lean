@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Mathlib.FieldTheory.Galois.Basic
-import Mathlib.FieldTheory.PurelyInseparable.Basic
+module
+
+public import Mathlib.FieldTheory.Galois.Basic
+public import Mathlib.FieldTheory.PurelyInseparable.Basic
 
 /-!
 # The fixed field of all automorphisms of a normal extension
@@ -12,6 +14,8 @@ import Mathlib.FieldTheory.PurelyInseparable.Basic
 Source: Stacks Project, Fields, Lemma 030M (2), `lemma-normal-case`
 (blueprint: lem-weil-pbc-normal-extension-purely-inseparable-then-galois).
 -/
+
+@[expose] public section
 
 universe u v
 

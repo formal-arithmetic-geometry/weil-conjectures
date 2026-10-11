@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import Mathlib.Algebra.Category.CommAlgCat.Basic
-import Mathlib.CategoryTheory.ObjectProperty.Ind
-import Mathlib.RingTheory.Smooth.Basic
-import Mathlib.RingTheory.Smooth.StandardSmooth
+module
+
+public import Mathlib.Algebra.Category.CommAlgCat.Basic
+public import Mathlib.CategoryTheory.ObjectProperty.Ind
+public import Mathlib.RingTheory.Smooth.Basic
+public import Mathlib.RingTheory.Smooth.StandardSmooth
 
 /-!
 # Filtered colimits of standard smooth algebras
@@ -14,6 +16,8 @@ import Mathlib.RingTheory.Smooth.StandardSmooth
 Source: Stacks Project, Smoothing Ring Maps, Lemma 16.3.5, Tag 07CI
 (blueprint: lem-weil-pbc-colimit-standard-smooth-algebras).
 -/
+
+@[expose] public section
 
 universe u v
 

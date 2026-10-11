@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import Sheaf.AlgebraicGeometry.TensorPullback
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.Generators
+module
+
+public import Sheaf.AlgebraicGeometry.TensorPullback
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Generators
 
 /-!
 # Finite type is preserved by module pullback
@@ -12,6 +14,8 @@ import Mathlib.Algebra.Category.ModuleCat.Sheaf.Generators
 Source: Stacks Project, Modules, Lemma 01B6 (lemma-pullback-finite-type),
 (blueprint: lem-weil-pbc-module-pullback-finite-type).
 -/
+
+@[expose] public section
 
 universe u
 

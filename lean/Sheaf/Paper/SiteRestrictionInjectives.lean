@@ -3,13 +3,15 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group N1
 -/
-import Mathlib.CategoryTheory.Sites.Pullback
-import Mathlib.CategoryTheory.Sites.Over
-import Mathlib.CategoryTheory.Sites.PrecoverageToGrothendieck
-import Mathlib.Algebra.Category.Grp.AB
-import Mathlib.Algebra.Homology.ShortComplex.ShortExact
-import Sheaf.CategoryTheory.SiteExtensionByZeroExact
-import Sheaf.Paper.SiteRestrictionExact
+module
+
+public import Mathlib.CategoryTheory.Sites.Pullback
+public import Mathlib.CategoryTheory.Sites.Over
+public import Mathlib.CategoryTheory.Sites.PrecoverageToGrothendieck
+public import Mathlib.Algebra.Category.Grp.AB
+public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
+public import Sheaf.CategoryTheory.SiteExtensionByZeroExact
+public import Sheaf.Paper.SiteRestrictionExact
 
 /-!
 # Extension by zero and restriction on a localized site
@@ -17,6 +19,8 @@ import Sheaf.Paper.SiteRestrictionExact
 Source: literature/stacks-project/sites-modules.tex, Modules on Sites, Section 03DH
 and Lemmas 03DI--03DJ (blueprint: lem-weil-pbc-site-restriction-injectives).
 -/
+
+@[expose] public section
 
 universe w
 

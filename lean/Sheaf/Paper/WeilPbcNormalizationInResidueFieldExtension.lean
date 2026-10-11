@@ -1,6 +1,10 @@
-import Mathlib.AlgebraicGeometry.ResidueField
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
-import WeilConjectures.Mathlib.AlgebraicGeometry.Normalization
+module
+
+public import Mathlib.AlgebraicGeometry.ResidueField
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Normalization
+
+@[expose] public section
 
 universe u
 

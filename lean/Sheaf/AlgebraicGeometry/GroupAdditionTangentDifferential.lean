@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import Sheaf.AlgebraicGeometry.SchemeTangentSpace
-import WeilConjectures.AlgebraicGeometry.GroupScheme.Basic
+module
+
+public import Sheaf.AlgebraicGeometry.SchemeTangentSpace
+public import WeilConjectures.AlgebraicGeometry.GroupScheme.Basic
 
 /-!
 # Differential of group addition at the identity
@@ -12,6 +14,8 @@ import WeilConjectures.AlgebraicGeometry.GroupScheme.Basic
 Source: Stacks Project, `groupoids.tex`, lemma-group-scheme-addition-tangent-vectors
 (blueprint: lem-sc-group-addition-tangent-differential).
 -/
+
+@[expose] public section
 
 universe u
 

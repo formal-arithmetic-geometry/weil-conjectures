@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
+module
+
+public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
 
 /-!
 # Selected stage for fixed-base separatedness
@@ -12,6 +14,8 @@ Source: literature/blueprint/master/blueprint/sec-nagata-compactification/
 `sk-prop-nagata-sketch-envelope/def-nagata-fixed-base-separated-stage.md`
 (blueprint: def-nagata-fixed-base-separated-stage).
 -/
+
+@[expose] public section
 
 universe u
 

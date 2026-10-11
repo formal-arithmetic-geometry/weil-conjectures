@@ -3,13 +3,17 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF contributors
 -/
-import Mathlib.AlgebraicGeometry.Morphisms.Integral
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.Integral
 
 /-! # Affine target of a surjective universally closed morphism
 
 Source: literature/stacks-project/limits.tex, Limits, Proposition 05YU
 (label proposition-affine) (blueprint: lem-weil-pbc-surjective-universally-closed-affine-target).
 -/
+
+@[expose] public section
 
 universe u
 

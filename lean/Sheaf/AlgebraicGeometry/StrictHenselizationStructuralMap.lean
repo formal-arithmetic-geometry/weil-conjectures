@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group P1
 -/
-import Sheaf.AlgebraicGeometry.StrictHenselization
+module
+
+public import Sheaf.AlgebraicGeometry.StrictHenselization
 
 /-!
 # The structural morphism of the strict henselization
@@ -14,6 +16,8 @@ every affine pointed étale neighbourhood; this module names that canonical morp
 Source: Stacks Project, Tag 03Q9, proof
 (blueprint: def-weil-pbc-strict-henselization-structural-map).
 -/
+
+@[expose] public section
 
 universe u
 

@@ -3,11 +3,13 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import Mathlib.Algebra.Homology.HomologicalBicomplex
-import Mathlib.Algebra.Homology.HomologicalComplexAbelian
-import Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
-import Mathlib.Algebra.Homology.ShortComplex.Exact
-import Mathlib.Algebra.Category.ModuleCat.Abelian
+module
+
+public import Mathlib.Algebra.Homology.HomologicalBicomplex
+public import Mathlib.Algebra.Homology.HomologicalComplexAbelian
+public import Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
+public import Mathlib.Algebra.Homology.ShortComplex.Exact
+public import Mathlib.Algebra.Category.ModuleCat.Abelian
 
 /-!
 # Homology of cokernel complexes of an exact double complex
@@ -16,6 +18,8 @@ Source: Stacks Project, Algebra, Lemma Tag 00M1 (lemma-no-spectral-sequence),
 including its preceding cokernel-complex construction and functoriality paragraph
 (blueprint: lem-weil-pbc-double-complex-cokernel-homology-iso).
 -/
+
+@[expose] public section
 
 universe u v
 

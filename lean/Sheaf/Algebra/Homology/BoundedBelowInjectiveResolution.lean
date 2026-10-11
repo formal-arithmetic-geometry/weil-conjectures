@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
-import Mathlib.Algebra.Category.Grp.FilteredColimits
-import Mathlib.Algebra.Category.Ring.Limits
-import Mathlib.Algebra.Homology.HomotopyCategory.KInjective
+module
+
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
+public import Mathlib.Algebra.Category.Grp.FilteredColimits
+public import Mathlib.Algebra.Category.Ring.Limits
+public import Mathlib.Algebra.Homology.HomotopyCategory.KInjective
 
 /-!
 # Bounded-below injective resolutions on a small ringed site
@@ -15,6 +17,8 @@ Source: Stacks Project, Cohomology on Sites, Section 21.19 (Tag 07A5), using
 Injectives, Theorem 19.12.6 (Tag 079P)
 (blueprint: lem-sc-bounded-below-injective-resolution).
 -/
+
+@[expose] public section
 
 universe u
 

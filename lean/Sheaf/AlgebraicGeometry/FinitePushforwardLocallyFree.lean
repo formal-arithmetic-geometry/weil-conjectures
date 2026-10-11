@@ -3,12 +3,14 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group G1
 -/
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Mathlib.AlgebraicGeometry.Morphisms.Finite
-import Mathlib.AlgebraicGeometry.Morphisms.Flat
-import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
-import Mathlib.Topology.LocallyConstant.Basic
-import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
+module
+
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Mathlib.AlgebraicGeometry.Morphisms.Finite
+public import Mathlib.AlgebraicGeometry.Morphisms.Flat
+public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
+public import Mathlib.Topology.LocallyConstant.Basic
+public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 
 /-!
 # Finite flat pushforwards are locally free of locally constant rank
@@ -16,6 +18,8 @@ import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 Source: Stacks Project, Morphisms of Schemes, Tags 02KB and 04MH
 (blueprint: lem-sc-finite-pushforward-locally-free).
 -/
+
+@[expose] public section
 
 universe u
 

@@ -3,11 +3,13 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group R1
 -/
-import Sheaf.AlgebraicGeometry.DerivedCategory
-import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
-import Mathlib.CategoryTheory.Adjunction.Basic
-import Mathlib.AlgebraicGeometry.Morphisms.Proper
-import Mathlib.AlgebraicGeometry.Noetherian
+module
+
+public import Sheaf.AlgebraicGeometry.DerivedCategory
+public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
+public import Mathlib.CategoryTheory.Adjunction.Basic
+public import Mathlib.AlgebraicGeometry.Morphisms.Proper
+public import Mathlib.AlgebraicGeometry.Noetherian
 
 /-! # Upper shriek as the right adjoint to proper direct image
 
@@ -24,6 +26,8 @@ about "the" `h^!` is a statement about any `u` with `IsProperUpperShriek h u`; t
 landed binder forms `(R, eR : R ⋙ ι ≅ ι ⋙ Rh_*, u, adj : R ⊣ u)` give
 `⟨R, ⟨eR⟩, ⟨adj⟩⟩ : IsProperUpperShriek h u`.
 -/
+
+@[expose] public section
 
 universe u wX wY
 

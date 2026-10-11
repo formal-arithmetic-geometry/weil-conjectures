@@ -3,18 +3,22 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import Mathlib.AlgebraicGeometry.Modules.Tilde
-import Sheaf.AlgebraicGeometry.Ample
-import Mathlib.Algebra.Module.Projective
-import Mathlib.Algebra.Module.LocalizedModule.Basic
-import Mathlib.RingTheory.Localization.AtPrime.Basic
-import WeilConjectures.AlgebraicGeometry.Modules.Invertible
+module
+
+public import Mathlib.AlgebraicGeometry.Modules.Tilde
+public import Sheaf.AlgebraicGeometry.Ample
+public import Mathlib.Algebra.Module.Projective
+public import Mathlib.Algebra.Module.LocalizedModule.Basic
+public import Mathlib.RingTheory.Localization.AtPrime.Basic
+public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 
 /-! # Affine dictionary for an invertible module and its section
 
 Source: literature/stacks-project/schemes.tex, Schemes, Lemmas 01IA and 01IB,
 together with Modules, Lemma 01CY (blueprint: lem-sc-affine-cap-section-open-dictionary).
 -/
+
+@[expose] public section
 
 universe u
 

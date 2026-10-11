@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group V1
 -/
-import Sheaf.CategoryTheory.HalfPlaneConvergence
+module
+
+public import Sheaf.CategoryTheory.HalfPlaneConvergence
 
 /-!
 # Exact functors transport exact couples
@@ -13,6 +15,8 @@ and the transport argument of the blueprint (blueprint: lem-sp-exact-functor-cou
 The index `r` denotes the actual page `r + 2`. Object equalities identify the initial
 mapped datum; subsequent identifications of subobjects are commuting isomorphisms.
 -/
+
+@[expose] public section
 
 set_option autoImplicit false
 

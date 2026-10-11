@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import Sheaf.AlgebraicGeometry.Coherent
+module
+
+public import Sheaf.AlgebraicGeometry.Coherent
 
 /-!
 # Isomorphisms of quasi-coherent modules detected on an affine open cover
@@ -12,6 +14,8 @@ Source: Stacks Project, Schemes, Tags 01IA and 01IB, and Sheaves, Tag 04TN;
 used in Morphisms, Tag 01SB
 (blueprint: lem-weil-pbc-quasi-coherent-iso-on-affine-cover).
 -/
+
+@[expose] public section
 
 universe u
 

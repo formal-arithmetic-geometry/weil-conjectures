@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Mathlib.AlgebraicGeometry.Sites.Fpqc
-import Mathlib.RingTheory.RingHom.FaithfullyFlat
+module
+
+public import Mathlib.AlgebraicGeometry.Sites.Fpqc
+public import Mathlib.RingTheory.RingHom.FaithfullyFlat
 
 /-!
 # Finite standard affine refinements of fpqc coverings
@@ -12,6 +14,8 @@ import Mathlib.RingTheory.RingHom.FaithfullyFlat
 Source: Stacks Project, Topologies, Definition 022B, and Descent, Lemma 03N0
 (blueprint: lem-weil-pbc-fpqc-affine-standard-refinement).
 -/
+
+@[expose] public section
 
 universe u v
 

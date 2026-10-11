@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import WeilConjectures.AlgebraicGeometry.Modules.TensorSection
-import Mathlib.RingTheory.GradedAlgebra.Basic
+module
+
+public import WeilConjectures.AlgebraicGeometry.Modules.TensorSection
+public import Mathlib.RingTheory.GradedAlgebra.Basic
 
 /-!
 # The graded section ring of an invertible module
@@ -21,6 +23,8 @@ All operations are specified; only their algebraic laws remain to be proved.
 - `sectionRingGCommRing`: tensor multiplication and the degree-zero unit.
 - `sectionRingGrade`, `sectionRingGradedRing`: homogeneous components and their grading.
 -/
+
+@[expose] public section
 
 universe u
 

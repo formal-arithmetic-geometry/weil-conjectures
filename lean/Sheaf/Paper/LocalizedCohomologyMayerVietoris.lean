@@ -3,16 +3,20 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group G1
 -/
-import Sheaf.AlgebraicGeometry.CohomologyFractionPresentation
-import Sheaf.AlgebraicGeometry.Ample
-import Sheaf.AlgebraicGeometry.Coherent
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
+module
+
+public import Sheaf.AlgebraicGeometry.CohomologyFractionPresentation
+public import Sheaf.AlgebraicGeometry.Ample
+public import Sheaf.AlgebraicGeometry.Coherent
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 
 /-! # Mayer--Vietoris diagram for localized twisted cohomology
 
 Source: Stacks Project, Cohomology of Schemes, Tag 09MR, Mayer--Vietoris paragraph
 (blueprint: lem-sc-invert-s-cohomology-mayer-vietoris-diagram).
 -/
+
+@[expose] public section
 
 universe uMV
 

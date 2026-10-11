@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import WeilConjectures.AlgebraicGeometry.RelativeEffectiveCartier
+module
+
+public import WeilConjectures.AlgebraicGeometry.RelativeEffectiveCartier
 
 /-!
 # Local fibre criterion for relative effective Cartier divisors
@@ -11,6 +13,8 @@ import WeilConjectures.AlgebraicGeometry.RelativeEffectiveCartier
 Source: Stacks Project, Divisors, Lemma 31.19.9 (Tag 062Y), part (3)
 (blueprint: lem-pc-recd-fibre-cartier-local).
 -/
+
+@[expose] public section
 
 universe u
 

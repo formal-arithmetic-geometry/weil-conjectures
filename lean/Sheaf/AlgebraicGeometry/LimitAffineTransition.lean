@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import Mathlib.AlgebraicGeometry.AffineTransitionLimit
+module
+
+public import Mathlib.AlgebraicGeometry.AffineTransitionLimit
 
 /-!
 # Existence of inverse limits with affine transition morphisms
@@ -11,6 +13,8 @@ import Mathlib.AlgebraicGeometry.AffineTransitionLimit
 Source: Stacks Project, Limits, Lemmas 01YX and 01YW
 (blueprint: lem-weil-pbc-limit-affine-transition).
 -/
+
+@[expose] public section
 
 universe u
 

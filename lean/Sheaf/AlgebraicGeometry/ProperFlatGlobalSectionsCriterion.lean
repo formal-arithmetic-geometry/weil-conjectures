@@ -3,11 +3,13 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import Mathlib.AlgebraicGeometry.Morphisms.Proper
-import Mathlib.AlgebraicGeometry.Morphisms.Flat
-import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
-import Mathlib.AlgebraicGeometry.Fiber
-import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.Proper
+public import Mathlib.AlgebraicGeometry.Morphisms.Flat
+public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
+public import Mathlib.AlgebraicGeometry.Fiber
+public import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
 
 /-!
 # Proper flat morphisms with fibrewise constant functions
@@ -15,6 +17,8 @@ import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
 Source: Stacks Project, Tag 0E62, Lemma 36.32.5 (a), `perfect-lemma-proper-flat-h0`
 (blueprint: lem-sc-proper-flat-global-sections-criterion).
 -/
+
+@[expose] public section
 
 universe u
 

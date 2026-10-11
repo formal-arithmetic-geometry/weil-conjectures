@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import WeilConjectures.AlgebraicGeometry.Modules.Ext
-import Mathlib.Algebra.Homology.DerivedCategory.Ext.ExtClass
+module
+
+public import WeilConjectures.AlgebraicGeometry.Modules.Ext
+public import Mathlib.Algebra.Homology.DerivedCategory.Ext.ExtClass
 
 /-!
 # Associativity and the pushout description of Yoneda Ext composition
@@ -12,6 +14,8 @@ import Mathlib.Algebra.Homology.DerivedCategory.Ext.ExtClass
 Source: Stacks Project, Homology, Tag 010I, and Derived Categories, Tag 06XP
 (blueprint: lem-sc-p1-ext-yoneda-associativity).
 -/
+
+@[expose] public section
 
 universe u
 

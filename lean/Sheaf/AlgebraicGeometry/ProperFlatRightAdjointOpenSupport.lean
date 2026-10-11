@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
-import Mathlib.AlgebraicGeometry.Morphisms.Proper
-import Mathlib.AlgebraicGeometry.Morphisms.Flat
-import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
+module
+
+public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
+public import Mathlib.AlgebraicGeometry.Morphisms.Proper
+public import Mathlib.AlgebraicGeometry.Morphisms.Flat
+public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 
 /-!
 # Support preservation by the right adjoint of proper flat direct image
@@ -15,6 +17,8 @@ Source: Stacks Project, duality.tex, Lemma 48.4.4, case (1), Tag 0E4G, using
 perfect.tex, Tags 0A1H and 0A9C(i) for the unbounded strengthening in the node
 (blueprint: lem-sc-proper-flat-right-adjoint-open-support).
 -/
+
+@[expose] public section
 
 universe uT wXT wYT
 

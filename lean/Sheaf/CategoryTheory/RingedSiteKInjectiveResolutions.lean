@@ -3,13 +3,15 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group J1
 -/
-import Mathlib.Algebra.Category.Grp.AB
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.Colimits
-import Mathlib.Algebra.Category.Ring.Limits
-import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.Basic
-import Mathlib.Algebra.Homology.HomotopyCategory.KInjective
-import Sheaf.CategoryTheory.ExtensionByZeroPresheaf
+module
+
+public import Mathlib.Algebra.Category.Grp.AB
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Colimits
+public import Mathlib.Algebra.Category.Ring.Limits
+public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.Basic
+public import Mathlib.Algebra.Homology.HomotopyCategory.KInjective
+public import Sheaf.CategoryTheory.ExtensionByZeroPresheaf
 
 /-!
 # Functorial K-injective resolutions on small ringed sites
@@ -17,6 +19,8 @@ import Sheaf.CategoryTheory.ExtensionByZeroPresheaf
 Source: Stacks Project, Cohomology on Sites, Section 07A5, first paragraph,
 and Injectives, Theorem 079P (blueprint: prop-pur-kinjective-resolutions-exist).
 -/
+
+@[expose] public section
 
 universe u
 

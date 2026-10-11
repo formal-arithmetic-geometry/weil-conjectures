@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import Sheaf.AlgebraicGeometry.Coherent
-import WeilConjectures.AlgebraicGeometry.ProjectiveSpectrum.Twist
-import WeilConjectures.Mathlib.RingTheory.MvPolynomial.Homogeneous
+module
+
+public import Sheaf.AlgebraicGeometry.Coherent
+public import WeilConjectures.AlgebraicGeometry.ProjectiveSpectrum.Twist
+public import WeilConjectures.Mathlib.RingTheory.MvPolynomial.Homogeneous
 
 /-!
 # Serre comparison for the graded section module
@@ -27,6 +29,8 @@ graded module, associated-sheaf or comparison-morphism declaration on `Proj` exi
 the library (the TODO of `WeilConjectures.AlgebraicGeometry.ProjectiveSpectrum.Twist`),
 so the statement is written through these section-level maps.
 -/
+
+@[expose] public section
 
 universe u
 

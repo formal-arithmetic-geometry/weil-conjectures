@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Sheaf.RingTheory.GlobalDimension
-import Mathlib.RingTheory.Ideal.Cotangent
+module
+
+public import Sheaf.RingTheory.GlobalDimension
+public import Mathlib.RingTheory.Ideal.Cotangent
 
 /-!
 # Embedding dimension bounds the length of a residue-field resolution
@@ -12,6 +14,8 @@ import Mathlib.RingTheory.Ideal.Cotangent
 Source: Stacks Project, Algebra, Lemma 00OA
 (blueprint: lem-weil-pbc-residue-field-pd-ge-embedding-dimension).
 -/
+
+@[expose] public section
 
 universe u
 

@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import Mathlib.CategoryTheory.Abelian.Basic
-import Mathlib.CategoryTheory.Preadditive.Injective.Resolution
-import Mathlib.Algebra.Homology.Homotopy
-import Mathlib.Algebra.Homology.ShortComplex.ShortExact
+module
+
+public import Mathlib.CategoryTheory.Abelian.Basic
+public import Mathlib.CategoryTheory.Preadditive.Injective.Resolution
+public import Mathlib.Algebra.Homology.Homotopy
+public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 
 /-!
 # Assembly of compatible null-homotopies
@@ -15,6 +17,8 @@ Source: Stacks Project, Derived Categories, Tag 015I, boundary/cycle exact seque
 Weibel, Homological Algebra, Lemma 5.7.10
 (blueprint: lem-sp-ce-compatible-homotopy-assembly).
 -/
+
+@[expose] public section
 
 universe v u
 

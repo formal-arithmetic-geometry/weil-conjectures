@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group G1
 -/
-import Sheaf.RingTheory.JapaneseDomain
-import Mathlib.RingTheory.Noetherian.Defs
+module
+
+public import Sheaf.RingTheory.JapaneseDomain
+public import Mathlib.RingTheory.Noetherian.Defs
 
 /-!
 # Descent of the Japanese condition along a finite extension of domains
@@ -12,6 +14,8 @@ import Mathlib.RingTheory.Noetherian.Defs
 Source: Stacks Project, Algebra, Lemma 10.161.7 (Tag 032K), N-2 clause
 (blueprint: lem-weil-pbc-n2-descends-finite-domain-extension).
 -/
+
+@[expose] public section
 
 universe uA uB uK uE
 

@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import Mathlib.AlgebraicGeometry.ValuativeCriterion
+module
+
+public import Mathlib.AlgebraicGeometry.ValuativeCriterion
 
 /-!
 # Closedness of an immersion from valuative factorization
@@ -11,6 +13,8 @@ import Mathlib.AlgebraicGeometry.ValuativeCriterion
 Source: Stacks Project, Morphisms, Tags 02JQ and 01R8, and Schemes, Tag 01IQ
 (blueprint: lem-sc-picard-locus-closed-valuation-criterion).
 -/
+
+@[expose] public section
 
 universe u
 

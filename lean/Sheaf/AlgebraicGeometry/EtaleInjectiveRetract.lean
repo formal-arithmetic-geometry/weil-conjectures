@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import Sheaf.AlgebraicGeometry.EtaleInverseImageModulesExact
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
-import Mathlib.CategoryTheory.Preadditive.Injective.Basic
+module
+
+public import Sheaf.AlgebraicGeometry.EtaleInverseImageModulesExact
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
+public import Mathlib.CategoryTheory.Preadditive.Injective.Basic
 
 /-!
 # The retract supplied by a surjective scheme morphism
@@ -13,6 +15,8 @@ import Mathlib.CategoryTheory.Preadditive.Injective.Basic
 Source: Stacks Project, Etale Cohomology, Tag 0A4C, proof, first paragraph
 (blueprint: lem-weil-pbc-retract-supplied).
 -/
+
+@[expose] public section
 
 universe u
 

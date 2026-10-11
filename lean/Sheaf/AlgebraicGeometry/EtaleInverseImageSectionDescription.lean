@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import Sheaf.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
+module
+
+public import Sheaf.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
 
 /-!
 # Local representatives of sections of an étale inverse image
@@ -12,6 +14,8 @@ Source: Stacks Project, Étale Cohomology, Tag 09XN, proof of lemma-describe-pul
 paragraph beginning “By construction”
 (blueprint: lem-weil-pbc-etale-inverse-image-section-description).
 -/
+
+@[expose] public section
 
 universe u
 

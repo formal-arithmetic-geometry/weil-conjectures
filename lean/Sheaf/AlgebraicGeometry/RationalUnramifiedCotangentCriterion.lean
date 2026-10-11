@@ -1,8 +1,10 @@
-import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
-import Mathlib.AlgebraicGeometry.OpenImmersion
-import Mathlib.AlgebraicGeometry.Pullbacks
-import Mathlib.AlgebraicGeometry.ResidueField
-import Mathlib.RingTheory.Ideal.Cotangent
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
+public import Mathlib.AlgebraicGeometry.OpenImmersion
+public import Mathlib.AlgebraicGeometry.Pullbacks
+public import Mathlib.AlgebraicGeometry.ResidueField
+public import Mathlib.RingTheory.Ideal.Cotangent
 
 /-!
 # Rational-point cotangent criterion for unramified morphisms
@@ -11,6 +13,8 @@ Source: `literature/stacks-project/varieties.tex`, lemma-injective-tangent-space
 together with the local characterization by vanishing relative differentials
 (blueprint: lem-sc-rational-unramified-cotangent-criterion).
 -/
+
+@[expose] public section
 
 universe u
 

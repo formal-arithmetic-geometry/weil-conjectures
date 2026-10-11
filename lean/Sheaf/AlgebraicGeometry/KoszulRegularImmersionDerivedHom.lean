@@ -1,13 +1,15 @@
-import Sheaf.AlgebraicGeometry.LocallyRankedExteriorComplex
-import Sheaf.RingTheory.KoszulRegularSequence
-import Sheaf.AlgebraicGeometry.TensorPullback
-import Sheaf.AlgebraicGeometry.DerivedCategory
-import Sheaf.Algebra.Homology.DerivedInternalHom
-import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
-import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
-import Sheaf.Algebra.Homology.ModuleStalkFunctor
-import Mathlib.LinearAlgebra.Dimension.Finrank
+module
+
+public import Sheaf.AlgebraicGeometry.LocallyRankedExteriorComplex
+public import Sheaf.RingTheory.KoszulRegularSequence
+public import Sheaf.AlgebraicGeometry.TensorPullback
+public import Sheaf.AlgebraicGeometry.DerivedCategory
+public import Sheaf.Algebra.Homology.DerivedInternalHom
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
+public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
+public import Sheaf.Algebra.Homology.ModuleStalkFunctor
+public import Mathlib.LinearAlgebra.Dimension.Finrank
 
 /-!
 # Derived Hom for a Koszul-regular closed immersion
@@ -15,6 +17,8 @@ import Mathlib.LinearAlgebra.Dimension.Finrank
 Source: Stacks Project, Duality for Schemes, Tag 0BQZ
 (blueprint: lem-sc-koszul-regular-immersion-derived-hom).
 -/
+
+@[expose] public section
 
 universe u w
 

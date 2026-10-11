@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import Mathlib.AlgebraicGeometry.Sites.Etale
-import Mathlib.CategoryTheory.Sites.Sheaf
+module
+
+public import Mathlib.AlgebraicGeometry.Sites.Etale
+public import Mathlib.CategoryTheory.Sites.Sheaf
 
 /-!
 # Sections on a finite coproduct in a small étale site
@@ -13,6 +15,8 @@ Source: literature/stacks-project/pione.tex, Tag 03SF, finite Galois descent
 calculation (sections on the finite disjoint union)
 (blueprint: lem-exc-finite-galois-sheaf-sections-coproduct).
 -/
+
+@[expose] public section
 
 universe u v w
 

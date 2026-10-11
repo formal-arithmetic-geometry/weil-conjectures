@@ -1,12 +1,16 @@
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
-import Mathlib.CategoryTheory.Filtered.Basic
+module
+
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
+public import Mathlib.CategoryTheory.Filtered.Basic
 
 /-! # Directed colimits of quasi-coherent modules
 
 Source: Stacks Project, Schemes, Lemma 01ID and Section 26.24, item (4)
 (blueprint: lem-weil-pbc-quasi-coherent-module-colimit-affine-sections).
 -/
+
+@[expose] public section
 
 universe u
 

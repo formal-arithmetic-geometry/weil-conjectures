@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group T1
 -/
-import Sheaf.AlgebraicGeometry.CoherentFormalModule
+module
+
+public import Sheaf.AlgebraicGeometry.CoherentFormalModule
 
 /-! # The homogeneous pieces of a formal system's kernel module
 
@@ -13,6 +15,8 @@ Source: Stacks Project, Cohomology of Schemes, Lemma 087Z and Section 0EHN
 `op n` represents F_(n+1). The degree-zero kernel is F_1 (the convention F_0 = 0).
 The algebra's degree n is I^n / I I^n = I^n / I^(n+1).
 -/
+
+@[expose] public section
 
 universe uk
 

@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import Sheaf.Topology.RingedSpaceModuleEnoughInjectives
-import Mathlib.CategoryTheory.Preadditive.Injective.Resolution
+module
+
+public import Sheaf.Topology.RingedSpaceModuleEnoughInjectives
+public import Mathlib.CategoryTheory.Preadditive.Injective.Resolution
 
 /-!
 # Open restriction of injective module resolutions
@@ -12,6 +14,8 @@ import Mathlib.CategoryTheory.Preadditive.Injective.Resolution
 Source: Stacks Project, Cohomology, Lemma 01E1, part (1) and proof
 (blueprint: lem-sc-ringed-space-restrict-injective-resolution).
 -/
+
+@[expose] public section
 
 universe u
 

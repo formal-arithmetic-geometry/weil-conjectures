@@ -1,11 +1,15 @@
-import Mathlib.RingTheory.Valuation.ValuationRing
-import Mathlib.AlgebraicGeometry.Morphisms.Proper
-import Mathlib.AlgebraicGeometry.Morphisms.Flat
-import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Mathlib.Algebra.Module.FinitePresentation
-import Sheaf.Topology.RingedSpaceModuleCohomology
-import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
+module
+
+public import Mathlib.RingTheory.Valuation.ValuationRing
+public import Mathlib.AlgebraicGeometry.Morphisms.Proper
+public import Mathlib.AlgebraicGeometry.Morphisms.Flat
+public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Mathlib.Algebra.Module.FinitePresentation
+public import Sheaf.Topology.RingedSpaceModuleCohomology
+public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
+
+@[expose] public section
 
 universe u
 

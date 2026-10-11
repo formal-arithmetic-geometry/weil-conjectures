@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import Sheaf.AlgebraicGeometry.DivisorModule
-import Sheaf.AlgebraicGeometry.SmoothConnectedCurveLocalRings
-import WeilConjectures.AlgebraicGeometry.Modules.Invertible
-import WeilConjectures.AlgebraicGeometry.Modules.FlatPullbackStalk
+module
+
+public import Sheaf.AlgebraicGeometry.DivisorModule
+public import Sheaf.AlgebraicGeometry.SmoothConnectedCurveLocalRings
+public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
+public import WeilConjectures.AlgebraicGeometry.Modules.FlatPullbackStalk
 
 /-!
 # Local generators of the divisor module on a smooth connected curve
@@ -14,6 +16,8 @@ import WeilConjectures.AlgebraicGeometry.Modules.FlatPullbackStalk
 Source: Stacks Project, Divisors, Tags 0BE9 and 0AGA; Algebra, Tag 031T;
 blueprint lem-sc-divisor-class-curve (blueprint: lem-sc-divisor-module-local).
 -/
+
+@[expose] public section
 
 set_option autoImplicit false
 

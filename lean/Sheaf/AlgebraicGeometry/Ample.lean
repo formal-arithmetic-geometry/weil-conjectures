@@ -3,16 +3,20 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import Mathlib.Algebra.Category.ModuleCat.Stalk
-import Mathlib.AlgebraicGeometry.AffineScheme
-import Mathlib.RingTheory.Ideal.Operations
-import WeilConjectures.AlgebraicGeometry.Modules.Invertible
+module
+
+public import Mathlib.Algebra.Category.ModuleCat.Stalk
+public import Mathlib.AlgebraicGeometry.AffineScheme
+public import Mathlib.RingTheory.Ideal.Operations
+public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 
 /-! # Ample invertible modules on schemes
 
 Source: Stacks Project, Properties, Section 01PR and Definition 01PS
 (blueprint: def-weil-pbc-ample-invertible-module).
 -/
+
+@[expose] public section
 
 open CategoryTheory
 open AlgebraicGeometry

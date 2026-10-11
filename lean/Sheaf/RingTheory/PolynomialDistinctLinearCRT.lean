@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import Mathlib.Algebra.Polynomial.RingDivision
-import Mathlib.RingTheory.Polynomial.Quotient
-import Mathlib.RingTheory.Ideal.Quotient.Operations
+module
+
+public import Mathlib.Algebra.Polynomial.RingDivision
+public import Mathlib.RingTheory.Polynomial.Quotient
+public import Mathlib.RingTheory.Ideal.Quotient.Operations
 
 /-!
 # Quotient by distinct linear factors
@@ -14,6 +16,8 @@ Source: Stacks Project, Algebra, Lemma Tag 00U3, the separable-polynomial case a
 Chinese-remainder decomposition into linear factors
 (blueprint: lem-pc-polynomial-quotient-distinct-linear-crt).
 -/
+
+@[expose] public section
 
 universe u
 

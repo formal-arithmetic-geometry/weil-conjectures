@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import WeilConjectures.Mathlib.RingTheory.Henselian
-import Mathlib.Algebra.Algebra.Pi
-import Mathlib.RingTheory.LocalRing.ResidueField.Basic
+module
+
+public import WeilConjectures.Mathlib.RingTheory.Henselian
+public import Mathlib.Algebra.Algebra.Pi
+public import Mathlib.RingTheory.LocalRing.ResidueField.Basic
 
 /-!
 # Finite algebras over henselian local rings
@@ -13,6 +15,8 @@ import Mathlib.RingTheory.LocalRing.ResidueField.Basic
 Source: Stacks Project, Algebra, Lemma 10.153.4, Tag 04GH, parts (1) and (2)
 (blueprint: lem-weil-pbc-finite-over-henselian-local-product).
 -/
+
+@[expose] public section
 
 universe u v
 

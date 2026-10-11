@@ -3,13 +3,15 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group J1
 -/
-import Sheaf.AlgebraicGeometry.MeromorphicModule
-import Sheaf.RingTheory.WeaklyAssociated
-import Mathlib.AlgebraicGeometry.Modules.Tilde
-import Mathlib.AlgebraicGeometry.Stalk
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackFree
-import WeilConjectures.AlgebraicGeometry.Modules.FlatPullbackStalk
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
+module
+
+public import Sheaf.AlgebraicGeometry.MeromorphicModule
+public import Sheaf.RingTheory.WeaklyAssociated
+public import Mathlib.AlgebraicGeometry.Modules.Tilde
+public import Mathlib.AlgebraicGeometry.Stalk
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackFree
+public import WeilConjectures.AlgebraicGeometry.Modules.FlatPullbackStalk
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 
 /-!
 # Meromorphic modules as products at generic points
@@ -17,6 +19,8 @@ import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 Source: Stacks Project, Divisors, Lemma 31.24.6 (Tag 0EMF)
 (blueprint: lem-sc-meromorphic-weakass-generic-product).
 -/
+
+@[expose] public section
 
 universe u
 

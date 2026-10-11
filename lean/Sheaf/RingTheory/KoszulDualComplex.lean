@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import Sheaf.Paper.KoszulComplex
-import Mathlib.CategoryTheory.Linear.Yoneda
-import Mathlib.Algebra.Homology.Embedding.Extend
+module
+
+public import Sheaf.Paper.KoszulComplex
+public import Mathlib.CategoryTheory.Linear.Yoneda
+public import Mathlib.Algebra.Homology.Embedding.Extend
 
 /-!
 # The total dual Koszul complex
@@ -18,6 +20,8 @@ Source: Stacks Project, duality.tex, Tag 0BQZ, lemma-regular-immersion-ext
 * `koszulDualComplex`: signed total Hom of the recorded Koszul complex.
 * `koszulDualCochainComplex`: its extension by zero to integer degrees.
 -/
+
+@[expose] public section
 
 universe uD
 

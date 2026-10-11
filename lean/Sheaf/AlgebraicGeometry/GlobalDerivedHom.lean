@@ -3,11 +3,13 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group N1
 -/
-import Sheaf.AlgebraicGeometry.DerivedCategory
-import Sheaf.Algebra.Homology.DerivedInternalHom
-import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImage
-import Sheaf.Topology.RingedSpaceModuleCohomology
-import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+module
+
+public import Sheaf.AlgebraicGeometry.DerivedCategory
+public import Sheaf.Algebra.Homology.DerivedInternalHom
+public import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImage
+public import Sheaf.Topology.RingedSpaceModuleCohomology
+public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
 /-!
 # Global derived Hom on a scheme
@@ -28,6 +30,8 @@ that equivalence. Global derived Hom is its composite with the shared internal H
 * `schemeDerivedGlobalSections`: unbounded RΓ, with its point and resolution comparisons.
 * `schemeGlobalDerivedHom`: RΓ composed with derived internal Hom.
 -/
+
+@[expose] public section
 
 universe u w wA wPt
 

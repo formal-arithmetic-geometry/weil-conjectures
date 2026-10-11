@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import Mathlib.AlgebraicGeometry.Sites.Fpqc
-import WeilConjectures.CategoryTheory.Comma.Over.DescentDatum
+module
+
+public import Mathlib.AlgebraicGeometry.Sites.Fpqc
+public import WeilConjectures.CategoryTheory.Comma.Over.DescentDatum
 
 /-!
 # Full faithfulness of refinement for fpqc descent data
@@ -12,6 +14,8 @@ import WeilConjectures.CategoryTheory.Comma.Over.DescentDatum
 Source: Stacks Project, Descent, Lemma 35.35.11 (Tag 02W0), specialized to singleton
 fpqc coverings (blueprint: lem-galois-fpqc-refinement-fully-faithful).
 -/
+
+@[expose] public section
 
 universe u
 

@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Mathlib.FieldTheory.Galois.Basic
-import Sheaf.AlgebraicGeometry.BaseChangeConventions
-import WeilConjectures.AlgebraicGeometry.Picard.Jacobian
+module
+
+public import Mathlib.FieldTheory.Galois.Basic
+public import Sheaf.AlgebraicGeometry.BaseChangeConventions
+public import WeilConjectures.AlgebraicGeometry.Picard.Jacobian
 
 /-!
 # Descent of Galois-invariant closed subsets
@@ -17,6 +19,8 @@ and equation `equation-galois-action-base-change-kbar`
 The base change is the chosen fibre product, with `pullback.fst` as its projection to `X`.
 The existing `specAlgEquivOver` and `baseChangeMap` give the contravariant Galois action.
 -/
+
+@[expose] public section
 
 universe u
 

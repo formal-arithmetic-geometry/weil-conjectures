@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group G1
 -/
-import Sheaf.RingTheory.FormallySmoothAdic
-import Mathlib.RingTheory.AdicCompletion.Algebra
+module
+
+public import Sheaf.RingTheory.FormallySmoothAdic
+public import Mathlib.RingTheory.AdicCompletion.Algebra
 
 /-!
 # Adic formal smoothness of the completion
@@ -12,6 +14,8 @@ import Mathlib.RingTheory.AdicCompletion.Algebra
 Source: Stacks Project, More on Algebra, Lemma 15.38.4 (Tag 07ED), (1) implies (2)
 with the base ring discrete (blueprint: lem-weil-pbc-fs-adic-completion).
 -/
+
+@[expose] public section
 
 universe u v
 

@@ -1,7 +1,9 @@
-import Sheaf.AlgebraicGeometry.PseudoCoherentComplex
-import Sheaf.AlgebraicGeometry.Coherent
-import Mathlib.AlgebraicGeometry.Noetherian
-import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
+module
+
+public import Sheaf.AlgebraicGeometry.PseudoCoherentComplex
+public import Sheaf.AlgebraicGeometry.Coherent
+public import Mathlib.AlgebraicGeometry.Noetherian
+public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 
 /-! # Bounded coherent complexes on Noetherian schemes are pseudo-coherent
 
@@ -9,6 +11,8 @@ Source: Stacks Project, Derived Categories of Schemes, Lemma 36.10.3 (Tag 08E8;
 label lemma-identify-pseudo-coherent-noetherian)
 (blueprint: lem-pc-noetherian-bounded-coherent-pseudo-coherent).
 -/
+
+@[expose] public section
 
 universe u w
 

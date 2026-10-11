@@ -3,14 +3,18 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Sheaf.AlgebraicGeometry.DerivedModuleBaseChangeMap
-import Sheaf.AlgebraicGeometry.PerfectComplex
-import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Basic
+module
+
+public import Sheaf.AlgebraicGeometry.DerivedModuleBaseChangeMap
+public import Sheaf.AlgebraicGeometry.PerfectComplex
+public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Basic
 
 /-! # Perfect direct image and arbitrary base change
 
 Source: Stacks Project, Tags 0B91 and 0A1H (blueprint: lem-pc-rf-perfect-base-change).
 -/
+
+@[expose] public section
 
 set_option autoImplicit false
 universe uPF wPF

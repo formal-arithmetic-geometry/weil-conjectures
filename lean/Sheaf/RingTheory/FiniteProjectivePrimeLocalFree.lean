@@ -3,11 +3,13 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import Mathlib.Algebra.Module.Projective
-import Mathlib.Algebra.Module.LocalizedModule.Basic
-import Mathlib.RingTheory.Finiteness.Defs
-import Mathlib.RingTheory.Ideal.Prime
-import Mathlib.RingTheory.Localization.Away.Basic
+module
+
+public import Mathlib.Algebra.Module.Projective
+public import Mathlib.Algebra.Module.LocalizedModule.Basic
+public import Mathlib.RingTheory.Finiteness.Defs
+public import Mathlib.RingTheory.Ideal.Prime
+public import Mathlib.RingTheory.Localization.Away.Basic
 
 /-!
 # Finite projective modules are free on a neighbourhood of each prime
@@ -16,6 +18,8 @@ Source: Stacks Project, Algebra, Tag 00NX, Lemma 10.78.2, (2) ⇒ (3) ⇒ (1) �
 and Tag 0GWM, Lemma 10.79.3
 (blueprint: lem-weil-pbc-finite-projective-prime-local-free).
 -/
+
+@[expose] public section
 
 universe u v
 

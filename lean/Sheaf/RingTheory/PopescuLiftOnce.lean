@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import Mathlib.Algebra.Category.CommAlgCat.Basic
-import Mathlib.CategoryTheory.ObjectProperty.Ind
-import Mathlib.RingTheory.Ideal.Over
-import Mathlib.RingTheory.Smooth.Basic
+module
+
+public import Mathlib.Algebra.Category.CommAlgCat.Basic
+public import Mathlib.CategoryTheory.ObjectProperty.Ind
+public import Mathlib.RingTheory.Ideal.Over
+public import Mathlib.RingTheory.Smooth.Basic
 
 /-!
 # Factoring through a quotient of a smooth algebra over a square-zero base
@@ -14,6 +16,8 @@ import Mathlib.RingTheory.Smooth.Basic
 Source: Stacks Project, Smoothing Ring Maps, Lemma 16.5.1, Tag 07CK
 (blueprint: lem-weil-pbc-popescu-lift-once).
 -/
+
+@[expose] public section
 
 universe u v w
 

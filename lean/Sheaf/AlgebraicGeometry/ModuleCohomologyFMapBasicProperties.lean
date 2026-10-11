@@ -2,14 +2,18 @@
 Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 -/
-import Sheaf.AlgebraicGeometry.ModuleCohomologyFMap
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
+module
+
+public import Sheaf.AlgebraicGeometry.ModuleCohomologyFMap
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 
 /-! # Basic properties of maps on module cohomology
 
 Source: Stacks Project, Cohomology of Sheaves, Section 01F7, Tags 01F8--01FB
 (blueprint: lem-weil-pbc-module-cohomology-fmap-basic-properties).
 -/
+
+@[expose] public section
 
 universe u
 

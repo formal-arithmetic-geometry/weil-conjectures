@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import Sheaf.FieldTheory.SeparableExtension
-import Mathlib.RingTheory.AlgebraicIndependent.Basic
-import Mathlib.RingTheory.Kaehler.Basic
-import Mathlib.LinearAlgebra.FiniteDimensional.Defs
+module
+
+public import Sheaf.FieldTheory.SeparableExtension
+public import Mathlib.RingTheory.AlgebraicIndependent.Basic
+public import Mathlib.RingTheory.Kaehler.Basic
+public import Mathlib.LinearAlgebra.FiniteDimensional.Defs
 
 /-!
 # Differentials of a separably generated field extension
@@ -14,6 +16,8 @@ import Mathlib.LinearAlgebra.FiniteDimensional.Defs
 Source: Stacks Project, Algebra, proof of Tag 031W and the dimension assertion in the
 proof of Tag 00TV (blueprint: lem-weil-pbc-separably-generated-differentials-dimension).
 -/
+
+@[expose] public section
 
 universe u v
 

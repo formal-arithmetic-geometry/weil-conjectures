@@ -3,17 +3,21 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF worker H1
 -/
-import Sheaf.Algebra.Homology.ZigzagModule
-import Mathlib.Algebra.Homology.HomologicalComplexAbelian
-import Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
-import Mathlib.Algebra.Homology.ShortComplex.Exact
-import Mathlib.Algebra.Category.ModuleCat.Abelian
+module
+
+public import Sheaf.Algebra.Homology.ZigzagModule
+public import Mathlib.Algebra.Homology.HomologicalComplexAbelian
+public import Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
+public import Mathlib.Algebra.Homology.ShortComplex.Exact
+public import Mathlib.Algebra.Category.ModuleCat.Abelian
 
 /-! # Exact-row zig-zags are trivial
 
 Source: Stacks Project, Algebra, Lemma Tag 00M1, injectivity argument
 (blueprint: lem-weil-pbc-double-complex-zigzag-trivial-if-row-boundary).
 -/
+
+@[expose] public section
 
 open CategoryTheory
 

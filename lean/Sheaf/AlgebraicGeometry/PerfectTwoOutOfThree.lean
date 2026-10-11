@@ -3,13 +3,17 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group G1
 -/
-import Sheaf.AlgebraicGeometry.PerfectComplex
+module
+
+public import Sheaf.AlgebraicGeometry.PerfectComplex
 
 /-! # Two out of three for perfect complexes on a scheme
 
 Source: Stacks Project, Cohomology of Sheaves, Lemma 20.49.7, Tag 08CR
 (blueprint: lem-pc-perfect-two-out-of-three).
 -/
+
+@[expose] public section
 
 universe u w
 

@@ -3,15 +3,19 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
-import WeilConjectures.AlgebraicGeometry.Modules.ClearDenominators
-import Sheaf.AlgebraicGeometry.Ample
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
+public import WeilConjectures.AlgebraicGeometry.Modules.ClearDenominators
+public import Sheaf.AlgebraicGeometry.Ample
 
 /-! # Restriction-zero sections are killed by a power of an invertible section
 
 Source: Stacks Project, Properties, Lemma 01PW (lemma-invert-s-sections), injectivity.
 (blueprint: lem-sc-p1-section-restriction-s-torsion)
 -/
+
+@[expose] public section
 
 universe u
 

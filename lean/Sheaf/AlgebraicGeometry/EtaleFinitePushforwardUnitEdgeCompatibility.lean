@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group P1
 -/
-import WeilConjectures.SixFunctors.BaseChange.Square
+module
+
+public import WeilConjectures.SixFunctors.BaseChange.Square
 
 /-!
 # Compatibility of base-changed edge maps with the pushforward of a unit
@@ -12,6 +14,8 @@ Source: Stacks Project, Etale Cohomology, Lemma 09ZE
 (`lemma-efface-cohomology-on-closed-by-finite-cover`), proof, second paragraph
 (blueprint: lem-weil-pbc-finite-pushforward-unit-edge-compatibility).
 -/
+
+@[expose] public section
 
 universe u
 

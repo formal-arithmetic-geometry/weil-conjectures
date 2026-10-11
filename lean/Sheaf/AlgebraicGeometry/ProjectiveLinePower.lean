@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
+module
+
+public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
 
 /-!
 # Recursive fibre powers of the projective line
@@ -11,6 +13,8 @@ import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
 Source: Stacks Project, Tag 0A4F, last paragraph, and the recursive convention in
 lem-weil-pbc-reduction-projective-space (blueprint: def-weil-pbc-projective-line-power).
 -/
+
+@[expose] public section
 
 universe u
 

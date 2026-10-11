@@ -3,15 +3,19 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group G1
 -/
-import Sheaf.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
-import Mathlib.AlgebraicGeometry.Morphisms.Finite
-import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
+module
+
+public import Sheaf.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
+public import Mathlib.AlgebraicGeometry.Morphisms.Finite
+public import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
 
 /-! # Finite surjective descent of global sections for étale sheaves of sets
 
 Source: literature/stacks-project/etale-cohomology.tex, Remark 09Z3
 (blueprint: lem-weil-pbc-sets-finite-surjective-descent).
 -/
+
+@[expose] public section
 
 universe u
 open CategoryTheory CategoryTheory.Limits Opposite

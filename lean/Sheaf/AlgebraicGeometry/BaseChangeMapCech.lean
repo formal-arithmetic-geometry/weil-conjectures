@@ -1,11 +1,13 @@
-import Sheaf.AlgebraicGeometry.CechResolution
-import Sheaf.AlgebraicGeometry.BaseChangeConventions
-import Sheaf.AlgebraicGeometry.DerivedPullback
-import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
-import Sheaf.AlgebraicGeometry.DerivedAdjoint
-import Sheaf.AlgebraicGeometry.DerivedDirectImageCompositionUnbounded
-import Sheaf.AlgebraicGeometry.DerivedModuleBaseChangeMap
-import Mathlib.Algebra.Homology.Homotopy
+module
+
+public import Sheaf.AlgebraicGeometry.CechResolution
+public import Sheaf.AlgebraicGeometry.BaseChangeConventions
+public import Sheaf.AlgebraicGeometry.DerivedPullback
+public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
+public import Sheaf.AlgebraicGeometry.DerivedAdjoint
+public import Sheaf.AlgebraicGeometry.DerivedDirectImageCompositionUnbounded
+public import Sheaf.AlgebraicGeometry.DerivedModuleBaseChangeMap
+public import Mathlib.Algebra.Homology.Homotopy
 
 /-!
 # Čech computation of the derived base change map
@@ -14,6 +16,8 @@ Source: literature/blueprint/master/blueprint/sec-picard-framework/
   sk-thm-picard-semicon/lem-pc-rf-base-change-flat-module.md,
   final comparison (cf. Stacks Tag 08IB) (blueprint: lem-pc-base-change-map-cech).
 -/
+
+@[expose] public section
 
 set_option autoImplicit false
 

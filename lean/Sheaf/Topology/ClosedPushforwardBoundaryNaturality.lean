@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group U1
 -/
-import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-import Mathlib.Topology.Sheaves.Functors
-import Sheaf.Topology.AbelianCohomologyDeltaFunctor
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+public import Mathlib.Topology.Sheaves.Functors
+public import Sheaf.Topology.AbelianCohomologyDeltaFunctor
 
 /-!
 # Closed-pushforward cohomology comparison and boundaries
@@ -13,6 +15,8 @@ import Sheaf.Topology.AbelianCohomologyDeltaFunctor
 Source: Stacks Project, Cohomology of Sheaves, Lemma 02UV and naturality of
 cohomological delta-functors (blueprint: lem-sc-closed-pushforward-boundary-naturality).
 -/
+
+@[expose] public section
 
 set_option autoImplicit false
 universe u

@@ -1,0 +1,453 @@
+/-
+Copyright (c) 2026 Christian Merten. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Christian Merten
+-/
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+public import Mathlib.AlgebraicGeometry.FunctionField
+public import Mathlib.AlgebraicGeometry.Morphisms.Etale
+public import Mathlib.AlgebraicGeometry.Morphisms.Separated
+public import Mathlib.AlgebraicGeometry.Pullbacks
+public import Mathlib.RingTheory.Unramified.LocalStructure
+public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineOpenAlgebra
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Fiber
+public import WeilConjectures.Mathlib.AlgebraicGeometry.FunctionField
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.LocalIso
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite
+public import WeilConjectures.Mathlib.RingTheory.Etale.QuasiFinite
+public import WeilConjectures.Mathlib.RingTheory.Etale.StandardEtale
+public import WeilConjectures.Mathlib.RingTheory.Unramified.LocalStructure
+public import WeilConjectures.Mathlib.Topology.Sets.Opens
+
+/-!
+# Four facts about étale morphisms
+
+## Lifting along a closed immersion
+
+Let `i : Z ⟶ X` be a closed immersion of schemes and `p : W ⟶ Z` an étale morphism. Then `W` is,
+in a neighbourhood of any of its points, the base change along `i` of a scheme étale over `X`.
+
+This is the geometric counterpart of the ring theoretic statement that a standard étale algebra
+over a quotient `R ⧸ I` is the base change of a standard étale algebra over `R`
+(`Algebra.IsStandardEtale.exists_algEquiv_quotient_tensor`): everything is local on `X` and on
+`W`, so the lift is produced inside a single affine chart and no gluing is involved.
+
+## Local structure
+
+An étale morphism `q : W ⟶ Spec B` is, around every point of `W`, dominated by `Spec` of a
+standard étale `B`-algebra (`AlgebraicGeometry.Etale.exists_standardEtalePair`).
+
+## Étale covers of a normal scheme with separably closed function field
+
+Let `S` be an integral normal scheme whose function field is separably closed, and let
+`p : V ⟶ S` be separated and étale. Then `V` is a disjoint union of open subschemes of `S`. This
+is rendered as: there is an index type `ι` and a family of opens `U : ι → V.Opens` which are
+pairwise disjoint, cover `V`, and are such that each composite `(U i).ι ≫ p` is an open
+immersion. Normality of `S` is not a notion available in Mathlib at the level of schemes, so it
+is taken as the explicit hypothesis that every stalk of `S` is integrally closed; together with
+`[IsIntegral S]` this says exactly that `S` is an integral normal scheme.
+
+## Connected components of fibres along an étale base change
+
+Let `f : X ⟶ S` be locally of finite type and `r : Z ⟶ S` étale. For `z : Z`, the projection
+from the fibre of `X ×_S Z` over `z` to the fibre of `X` over `r z` is open and closed, so it maps
+connected components onto connected components.
+
+## Étale schemes over reduced schemes
+
+A scheme étale over a reduced scheme is reduced, by the corresponding statement
+`Algebra.Etale.isReduced` for rings.
+
+## Main results
+
+- `AlgebraicGeometry.Etale.exists_isPullback_of_isClosedImmersion`: for every point `w` of `W`
+  there is an open neighbourhood `W₀` of `w` in `W` and an étale morphism `q : V ⟶ X` such that
+  `W₀` is the fibre product `V ×[X] Z`, compatibly with `p`.
+- `AlgebraicGeometry.Etale.exists_pullback_hom_of_isClosedImmersion`: the pointed form. Given a
+  morphism `s : Spec Ω ⟶ W` with `Ω` a field — in the application a geometric point of `W` — there
+  is an étale `q : V ⟶ X` and a morphism `V ×[X] Z ⟶ W` over `Z` through which `s` factors.
+- `AlgebraicGeometry.Etale.exists_standardEtalePair`: an étale morphism to `Spec B` is locally
+  dominated by `Spec` of a standard étale `B`-algebra.
+- `AlgebraicGeometry.Etale.exists_opens_isOpenImmersion_of_isSepClosed_functionField`: a
+  separated étale scheme over an integral normal base with separably closed function field is a
+  disjoint union of opens of the base.
+- `AlgebraicGeometry.Etale.exists_finite_opens_isOpenImmersion_of_isSepClosed_functionField`: the
+  same statement with finitely many pieces when the source is quasi-compact.
+- `AlgebraicGeometry.connectedComponentIn_subset_image_pullback_fst`: the first projection maps
+  a connected component of a fibre of `X ×_S Z ⟶ Z` onto a connected component of a fibre of `X`.
+- `AlgebraicGeometry.isReduced_of_etale`: a scheme étale over a reduced scheme is reduced.
+-/
+
+@[expose] public section
+
+universe u
+
+open CategoryTheory Limits TensorProduct Topology
+
+namespace AlgebraicGeometry
+
+/-- **Étale morphisms lift locally along a closed immersion.** If `i : Z ⟶ X` is a closed
+immersion and `p : W ⟶ Z` is étale, then every point `w` of `W` has an open neighbourhood `W₀`
+which is the base change along `i` of a scheme `V` étale over `X`, in a way compatible with `p`:
+the square
+```
+W₀ ------- a -------> V
+|                     |
+W₀.ι ≫ p              q
+↓                     ↓
+Z ------- i --------> X
+```
+is cartesian. -/
+theorem Etale.exists_isPullback_of_isClosedImmersion {X Z W : Scheme.{u}} (i : Z ⟶ X)
+    [IsClosedImmersion i] (p : W ⟶ Z) [Etale p] (w : W) :
+    ∃ W₀ : W.Opens, w ∈ W₀ ∧ ∃ (V : Scheme.{u}) (q : V ⟶ X) (_ : Etale q)
+      (a : W₀.toScheme ⟶ V), IsPullback a (W₀.ι ≫ p) q i := by
+  -- an affine chart `U` of `X` around the image of `w`
+  obtain ⟨U, hU, hxU, -⟩ :=
+    exists_isAffineOpen_mem_and_subset (X := X) (x := i.base (p.base w)) (U := ⊤) trivial
+  -- an affine chart `W'` of `W` around `w`, mapping into the preimage of `U`
+  obtain ⟨W', hW', hwW', hW'le⟩ :=
+    exists_isAffineOpen_mem_and_subset (X := W) (x := w) (U := p ⁻¹ᵁ (i ⁻¹ᵁ U)) hxU
+  replace hW'le : W' ≤ p ⁻¹ᵁ (i ⁻¹ᵁ U) := hW'le
+  -- the closed immersion `i ⁻¹ᵁ U ⟶ U ≅ Spec Γ(X, U)` presents `i ⁻¹ᵁ U` as `Spec (Γ(X, U) ⧸ I)`
+  obtain ⟨I, e, he⟩ := (IsClosedImmersion.Spec_iff (f := (i ∣_ U) ≫ hU.isoSpec.hom)).mp
+    inferInstance
+  -- the restriction of `p` to the two charts, read as a homomorphism `Γ(X, U) ⧸ I ⟶ Γ(W, W')`
+  let ψ : CommRingCat.of (↥Γ(X, U) ⧸ I) ⟶ Γ(W, W') :=
+    Spec.preimage (hW'.isoSpec.inv ≫ p.resLE (i ⁻¹ᵁ U) W' hW'le ≫ e.hom)
+  have hψ : Spec.map ψ = hW'.isoSpec.inv ≫ p.resLE (i ⁻¹ᵁ U) W' hW'le ≫ e.hom :=
+    Spec.map_preimage _
+  have hψet : Etale (Spec.map ψ) := by
+    rw [hψ]
+    infer_instance
+  let _ : Algebra (↥Γ(X, U) ⧸ I) ↥Γ(W, W') := ψ.hom.toAlgebra
+  have : Algebra.Etale (↥Γ(X, U) ⧸ I) ↥Γ(W, W') := HasRingHomProperty.Spec_iff.mp hψet
+  -- shrink `W'` to a basic open on which `Γ(W, -)` is standard étale over `Γ(X, U) ⧸ I`, and
+  -- lift that standard étale algebra to `Γ(X, U)`
+  obtain ⟨a, ha, hst⟩ := Algebra.IsEtaleAt.exists_isStandardEtale
+    (R := ↥Γ(X, U) ⧸ I) (hW'.primeIdealOf ⟨w, hwW'⟩).asIdeal
+  obtain ⟨T, _, _, hT, ⟨E⟩⟩ := Algebra.IsStandardEtale.exists_algEquiv_quotient_tensor
+    (R := ↥Γ(X, U)) (Localization.Away a) I
+  have hw₀ : w ∈ W.basicOpen a := by
+    have : hW'.primeIdealOf ⟨w, hwW'⟩ ∈ hW'.fromSpec ⁻¹ᵁ W.basicOpen a := by
+      rwa [hW'.fromSpec_preimage_basicOpen a]
+    rwa [Scheme.Hom.mem_preimage, hW'.fromSpec_primeIdealOf ⟨w, hwW'⟩] at this
+  have hloc : IsLocalization.Away a ↥Γ(W, W.basicOpen a) := hW'.isLocalization_basicOpen a
+  -- `Γ(W, W.basicOpen a)` is the base change of `T` along `Γ(X, U) ⟶ Γ(X, U) ⧸ I`
+  let ε : ((↥Γ(X, U) ⧸ I) ⊗[↥Γ(X, U)] T) ≃+* ↥Γ(W, W.basicOpen a) :=
+    E.toRingEquiv.trans
+      (IsLocalization.algEquiv (Submonoid.powers a) (Localization.Away a)
+        ↥Γ(W, W.basicOpen a)).toRingEquiv
+  have hε : ∀ x : ↥Γ(X, U) ⧸ I, ε (algebraMap _ _ x) =
+      (W.presheaf.map (homOfLE (W.basicOpen_le a)).op).hom (ψ.hom x) := by
+    intro x
+    change (IsLocalization.algEquiv (Submonoid.powers a) (Localization.Away a)
+        ↥Γ(W, W.basicOpen a)) (E (algebraMap _ _ x)) = _
+    rw [E.commutes, IsScalarTower.algebraMap_apply (↥Γ(X, U) ⧸ I) ↥Γ(W, W') (Localization.Away a),
+      AlgEquiv.commutes]
+    rfl
+  have hpo : IsPushout (CommRingCat.ofHom (algebraMap ↥Γ(X, U) (↥Γ(X, U) ⧸ I)))
+      (CommRingCat.ofHom (algebraMap ↥Γ(X, U) T))
+      (ψ ≫ W.presheaf.map (homOfLE (W.basicOpen_le a)).op)
+      (CommRingCat.ofHom
+        (ε.toRingHom.comp (Algebra.TensorProduct.includeRight (R := ↥Γ(X, U))
+          (A := ↥Γ(X, U) ⧸ I) (B := T)).toRingHom)) := by
+    refine (CommRingCat.isPushout_tensorProduct ↥Γ(X, U) (↥Γ(X, U) ⧸ I) T).of_iso
+      (Iso.refl _) (Iso.refl _) (Iso.refl _) ε.toCommRingCatIso ?_ ?_ ?_ ?_
+    · simp
+    · simp
+    · ext x
+      simpa using hε x
+    · ext x
+      simp
+  have hW₀ : IsAffineOpen (W.basicOpen a) := hW'.basicOpen a
+  have hle : W.basicOpen a ≤ p ⁻¹ᵁ (i ⁻¹ᵁ U) := (W.basicOpen_le a).trans hW'le
+  -- passing to `Spec` turns the restriction `Γ(W, W') ⟶ Γ(W, W.basicOpen a)` into the inclusion
+  have h1 : Spec.map (W.presheaf.map (homOfLE (W.basicOpen_le a)).op) ≫ hW'.isoSpec.inv
+      = hW₀.isoSpec.inv ≫ W.homOfLE (W.basicOpen_le a) := by
+    rw [← cancel_epi hW₀.isoSpec.hom, ← Category.assoc, IsAffineOpen.isoSpec_hom,
+      Scheme.Opens.toSpecΓ_SpecMap_presheaf_map]
+    simp
+  -- hence the left hand vertical map of the affine square is the restriction of `p`
+  have hkey : Spec.map (ψ ≫ W.presheaf.map (homOfLE (W.basicOpen_le a)).op)
+      = hW₀.isoSpec.inv ≫ p.resLE (i ⁻¹ᵁ U) (W.basicOpen a) hle ≫ e.hom := by
+    have h2 : W.homOfLE (W.basicOpen_le a) ≫ p.resLE (i ⁻¹ᵁ U) W' hW'le
+        = p.resLE (i ⁻¹ᵁ U) (W.basicOpen a) hle := Scheme.Hom.map_resLE _ _ _
+    rw [Spec.map_comp, hψ, ← Category.assoc, h1, Category.assoc, ← Category.assoc _ _ e.hom, h2]
+  have hqet : Etale (Spec.map (CommRingCat.ofHom (algebraMap ↥Γ(X, U) T))) :=
+    HasRingHomProperty.Spec_iff.mpr (RingHom.etale_algebraMap.mpr inferInstance)
+  -- the affine square, transported along the charts
+  have hsq : IsPullback
+      (hW₀.isoSpec.hom ≫ Spec.map (CommRingCat.ofHom
+        (ε.toRingHom.comp (Algebra.TensorProduct.includeRight (R := ↥Γ(X, U))
+          (A := ↥Γ(X, U) ⧸ I) (B := T)).toRingHom)))
+      (p.resLE (i ⁻¹ᵁ U) (W.basicOpen a) hle)
+      (Spec.map (CommRingCat.ofHom (algebraMap ↥Γ(X, U) T)) ≫ hU.isoSpec.inv)
+      (i ∣_ U) := by
+    refine ((isPullback_SpecMap_of_isPushout _ _ _ _ hpo).flip).of_iso
+      hW₀.isoSpec.symm (Iso.refl _) e.symm hU.isoSpec.symm ?_ ?_ ?_ ?_
+    · simp
+    · rw [hkey]
+      simp
+    · simp
+    · simp only [Iso.symm_hom, Ideal.Quotient.algebraMap_eq]
+      rw [eq_comm, Iso.inv_comp_eq, ← Category.assoc, ← he, Category.assoc, Iso.hom_inv_id,
+        Category.comp_id]
+  -- paste with the cartesian square expressing `i ⁻¹ᵁ U = Z ×[X] U`
+  have hpaste := hsq.paste_vert (isPullback_morphismRestrict i U)
+  rw [Scheme.Hom.resLE_comp_ι] at hpaste
+  exact ⟨W.basicOpen a, hw₀, Spec (CommRingCat.of T), _, inferInstance, _, hpaste⟩
+
+/-- The pointed form of `AlgebraicGeometry.Etale.exists_isPullback_of_isClosedImmersion`: if
+`i : Z ⟶ X` is a closed immersion, `p : W ⟶ Z` is étale and `s : Spec Ω ⟶ W` is a point of `W`
+with values in a field `Ω`, then there is an étale morphism `q : V ⟶ X` together with a morphism
+`g : V ×[X] Z ⟶ W` over `Z` through which `s` factors. -/
+theorem Etale.exists_pullback_hom_of_isClosedImmersion {X Z W : Scheme.{u}} (i : Z ⟶ X)
+    [IsClosedImmersion i] (p : W ⟶ Z) [Etale p] {Ω : Type u} [Field Ω]
+    (s : Spec (CommRingCat.of Ω) ⟶ W) :
+    ∃ (V : Scheme.{u}) (q : V ⟶ X) (_ : Etale q) (g : pullback q i ⟶ W),
+      g ≫ p = pullback.snd q i ∧
+        ∃ t : Spec (CommRingCat.of Ω) ⟶ pullback q i, t ≫ g = s := by
+  obtain ⟨W₀, hw₀, V, q, hq, α, hpb⟩ :=
+    Etale.exists_isPullback_of_isClosedImmersion i p (s.base default)
+  have hrange : Set.range s.base ⊆ Set.range W₀.ι.base := by
+    rw [Scheme.Opens.range_ι]
+    rintro - ⟨x, rfl⟩
+    rw [Subsingleton.elim x default]
+    exact hw₀
+  refine ⟨V, q, hq, hpb.isoPullback.inv ≫ W₀.ι, ?_,
+    IsOpenImmersion.lift W₀.ι s hrange ≫ hpb.isoPullback.hom, ?_⟩
+  · rw [Category.assoc, Iso.inv_comp_eq]
+    exact hpb.isoPullback_hom_snd.symm
+  · rw [Category.assoc, Iso.hom_inv_id_assoc, IsOpenImmersion.lift_fac]
+
+/-- **Étale morphisms are locally standard étale.** For an étale morphism `q : W ⟶ Spec B` and a
+point `w` of `W`, there is a standard étale `B`-algebra `P.Ring` and a morphism
+`Spec P.Ring ⟶ W` over `Spec B` whose image contains `w`: the restriction of `q` to an affine
+open `Spec C` around `w` is given by an étale `B`-algebra `C`, which is standard étale after
+inverting an element not in the prime of `w` (`Algebra.IsEtaleAt.exists_isStandardEtale`). -/
+theorem Etale.exists_standardEtalePair {B : CommRingCat.{u}} {W : Scheme.{u}} (q : W ⟶ Spec B)
+    [Etale q] (w : W) :
+    ∃ (P : StandardEtalePair B) (e : Spec (.of P.Ring) ⟶ W),
+      e ≫ q = Spec.map (CommRingCat.ofHom (algebraMap B P.Ring)) ∧ w ∈ Set.range e := by
+  obtain ⟨W', hW', hwW', -⟩ := exists_isAffineOpen_mem_and_subset (X := W) (x := w) (U := ⊤) trivial
+  let _ : Algebra B Γ(W, W') := (hW'.ringHomOfSpec q).toAlgebra
+  have : Algebra.Etale B Γ(W, W') := RingHom.etale_algebraMap.mp (hW'.etale_ringHomOfSpec q)
+  obtain ⟨a, ha, hst⟩ := Algebra.IsEtaleAt.exists_isStandardEtale
+    (R := B) (hW'.primeIdealOf ⟨w, hwW'⟩).asIdeal
+  let Pr := hst.nonempty_standardEtalePresentation.some
+  let φ : Γ(W, W') →+* Pr.P.Ring :=
+    Pr.equivRing.toRingEquiv.toRingHom.comp (algebraMap Γ(W, W') (Localization.Away a))
+  refine ⟨Pr.P, Spec.map (CommRingCat.ofHom φ) ≫ hW'.fromSpec, ?_, ?_⟩
+  · rw [Category.assoc, ← hW'.SpecMap_ringHomOfSpec q, ← Spec.map_comp, ← CommRingCat.ofHom_comp]
+    congr 2
+    ext b
+    change Pr.equivRing (algebraMap Γ(W, W') (Localization.Away a) (algebraMap B Γ(W, W') b)) = _
+    rw [← IsScalarTower.algebraMap_apply, AlgEquiv.commutes]
+  · obtain ⟨r, hr⟩ : hW'.primeIdealOf ⟨w, hwW'⟩ ∈
+        Set.range (PrimeSpectrum.comap (algebraMap Γ(W, W') (Localization.Away a))) := by
+      rw [PrimeSpectrum.localization_away_comap_range (Localization.Away a) a]
+      exact ha
+    refine ⟨PrimeSpectrum.comap Pr.equivRing.symm.toRingEquiv.toRingHom r, ?_⟩
+    rw [Scheme.Hom.comp_apply, Spec.map_apply]
+    refine (congrArg hW'.fromSpec ?_).trans (hW'.fromSpec_primeIdealOf ⟨w, hwW'⟩)
+    rw [← hr]
+    refine PrimeSpectrum.ext (Ideal.ext fun x ↦ ?_)
+    simp [φ]
+
+/-- An étale morphism `p : V ⟶ S` into an integral normal scheme `S` with separably closed
+function field is a local isomorphism: every point of `V` has an open neighbourhood mapping
+isomorphically onto an open of `S`. Normality of `S` is the hypothesis `hS` that every stalk of
+`S` is integrally closed.
+
+Over affine charts `Spec A ⊆ S` and `Spec B ⊆ V` this is
+`Algebra.Etale.exists_algHom_localizationAway_comap_eq`: every point of `Spec B` lies on a
+section of `Spec B → Spec A` over a basic open of `Spec A`, and a section of an étale morphism
+over an open is an open immersion (`AlgebraicGeometry.FormallyUnramified.isOpenImmersion_of_comp`).
+-/
+theorem Etale.isLocalIso_of_isSepClosed_functionField {V S : Scheme.{u}} [IsIntegral S]
+    (hS : ∀ x : S, IsIntegrallyClosed (S.presheaf.stalk x))
+    [IsSepClosed S.functionField] (p : V ⟶ S) [Etale p] : IsLocalIso p := by
+  refine ⟨fun x ↦ ?_⟩
+  -- affine charts `U ∋ p x` of `S` and `W ∋ x` of `V` with `W ⊆ p ⁻¹ U`
+  obtain ⟨U, hU, hxU, -⟩ :=
+    exists_isAffineOpen_mem_and_subset (X := S) (x := p.base x) (U := ⊤) trivial
+  obtain ⟨W, hW, hxW, hWle⟩ :=
+    exists_isAffineOpen_mem_and_subset (X := V) (x := x) (U := p ⁻¹ᵁ U) hxU
+  replace hWle : W ≤ p ⁻¹ᵁ U := hWle
+  have : Nonempty U := ⟨⟨_, hxU⟩⟩
+  have : IsIntegrallyClosed Γ(S, U) :=
+    Scheme.isIntegrallyClosed_of_isIntegrallyClosed_stalk hS U
+  have : IsFractionRing Γ(S, U) S.functionField :=
+    functionField_isFractionRing_of_isAffineOpen S U hU
+  let _ : Algebra Γ(S, U) Γ(V, W) := (p.appLE U W hWle).hom.toAlgebra
+  have : Algebra.Etale Γ(S, U) Γ(V, W) :=
+    RingHom.etale_algebraMap.mp (HasRingHomProperty.appLE @Etale p ‹_› ⟨U, hU⟩ ⟨W, hW⟩ hWle)
+  -- the point `x` lies on a section `σ` of `p` over a basic open of `U`
+  obtain ⟨a, ψ, P, hP, hPq⟩ := Algebra.Etale.exists_algHom_localizationAway_comap_eq
+    (A := Γ(S, U)) S.functionField (hW.primeIdealOf ⟨x, hxW⟩).asIdeal
+  let j : Spec (.of (Localization.Away a)) ⟶ S :=
+    Spec.map (CommRingCat.ofHom (algebraMap Γ(S, U) (Localization.Away a))) ≫ hU.fromSpec
+  let σ : Spec (.of (Localization.Away a)) ⟶ V :=
+    Spec.map (CommRingCat.ofHom ψ.toRingHom) ≫ hW.fromSpec
+  have hσ : σ ≫ p = j := by
+    simp only [σ, j, Category.assoc, ← IsAffineOpen.SpecMap_appLE_fromSpec p hU hW hWle,
+      ← Spec.map_comp_assoc]
+    congr 2
+    ext y
+    exact ψ.commutes y
+  have : IsOpenImmersion (σ ≫ p) := by
+    rw [hσ]
+    infer_instance
+  have : IsOpenImmersion σ := FormallyUnramified.isOpenImmersion_of_comp p σ
+  refine ⟨σ.opensRange, ⟨⟨P, hP⟩, ?_⟩, ?_⟩
+  · have h1 : (Spec.map (CommRingCat.ofHom ψ.toRingHom)).base ⟨P, hP⟩ =
+        hW.primeIdealOf ⟨x, hxW⟩ := PrimeSpectrum.ext hPq
+    simp only [σ, Scheme.Hom.comp_base, TopCat.comp_app, h1]
+    exact hW.fromSpec_primeIdealOf ⟨x, hxW⟩
+  · rw [← σ.isoOpensRange_inv_comp, Category.assoc, hσ]
+    infer_instance
+
+/-- **Étale covers of a normal scheme with separably closed function field**
+(blueprint `sbc-lem-etale-over-normal`). Let `S` be an integral normal scheme — normality being
+the hypothesis `hS` that every stalk of `S` is integrally closed — with separably closed function
+field. Then
+
+1. every separated étale morphism `p : V ⟶ S` is a disjoint union of open immersions: there are
+  nonempty, pairwise disjoint opens `U i` covering `V` with every `(U i).ι ≫ p` an open
+  immersion;
+2. every local ring of `S` is strictly henselian: it is henselian with separably closed residue
+  field. -/
+@[stacks 09Z9]
+theorem Etale.exists_opens_isOpenImmersion_and_henselianLocalRing_stalk {S : Scheme.{u}}
+    [IsIntegral S] (hS : ∀ x : S, IsIntegrallyClosed (S.presheaf.stalk x))
+    [IsSepClosed S.functionField] :
+    (∀ (V : Scheme.{u}) (p : V ⟶ S) [IsSeparated p] [Etale p],
+      ∃ (ι : Type u) (U : ι → V.Opens), (∀ i, (U i : Set V).Nonempty) ∧
+        (∀ i j, i ≠ j → Disjoint (U i) (U j)) ∧ (⨆ i, U i) = ⊤ ∧
+        ∀ i, IsOpenImmersion ((U i).ι ≫ p)) ∧
+      ∀ x : S, HenselianLocalRing (S.presheaf.stalk x) ∧ IsSepClosed (S.residueField x) := by
+  refine ⟨fun V p _ _ ↦ ?_, fun x ↦ ⟨Scheme.henselianLocalRing_stalk_of_isSepClosed_functionField
+    hS x, Scheme.isSepClosed_residueField_of_isSepClosed_functionField hS x⟩⟩
+  have := Etale.isLocalIso_of_isSepClosed_functionField hS p
+  exact IsLocalIso.exists_opens_isOpenImmersion p
+
+/-- **Étale covers of a normal scheme with separably closed function field.** Let `S` be an
+integral normal scheme — normality being spelled out as the hypothesis `hS` that every stalk of
+`S` is integrally closed — whose function field `S.functionField` is separably closed, and let
+`p : V ⟶ S` be separated and étale. Then `V` is the disjoint union of a family of opens `U i`
+each of which maps isomorphically onto an open of `S`. -/
+@[stacks 09Z9]
+theorem Etale.exists_opens_isOpenImmersion_of_isSepClosed_functionField
+    {V S : Scheme.{u}} [IsIntegral S]
+    (hS : ∀ x : S, IsIntegrallyClosed (S.presheaf.stalk x))
+    [IsSepClosed S.functionField] (p : V ⟶ S) [IsSeparated p] [Etale p] :
+    ∃ (ι : Type u) (U : ι → V.Opens), (∀ i j, i ≠ j → Disjoint (U i) (U j)) ∧
+      (⨆ i, U i) = ⊤ ∧ ∀ i, IsOpenImmersion ((U i).ι ≫ p) := by
+  obtain ⟨ι, U, -, hU⟩ :=
+    (Etale.exists_opens_isOpenImmersion_and_henselianLocalRing_stalk hS).1 V p
+  exact ⟨ι, U, hU⟩
+
+/-- The quasi-compact refinement of
+`AlgebraicGeometry.Etale.exists_opens_isOpenImmersion_of_isSepClosed_functionField`: if `V` is
+in addition quasi-compact, then finitely many opens suffice. -/
+@[stacks 09Z9]
+theorem Etale.exists_finite_opens_isOpenImmersion_of_isSepClosed_functionField
+    {V S : Scheme.{u}} [IsIntegral S]
+    (hS : ∀ x : S, IsIntegrallyClosed (S.presheaf.stalk x))
+    [IsSepClosed S.functionField] (p : V ⟶ S) [IsSeparated p] [Etale p] [CompactSpace V] :
+    ∃ (ι : Type u) (_ : Finite ι) (U : ι → V.Opens), (∀ i j, i ≠ j → Disjoint (U i) (U j)) ∧
+      (⨆ i, U i) = ⊤ ∧ ∀ i, IsOpenImmersion ((U i).ι ≫ p) := by
+  obtain ⟨ι, U, hne, hdisj, hcov, hU⟩ :=
+    (Etale.exists_opens_isOpenImmersion_and_henselianLocalRing_stalk hS).1 V p
+  exact ⟨ι, TopologicalSpace.Opens.finite_of_compactSpace_of_pairwiseDisjoint U hne hdisj hcov,
+    U, hdisj, hcov, hU⟩
+
+/-- Let `f : X ⟶ S` be locally of finite type, `r : Z ⟶ S` étale and `p` a point of `X ×_S Z`
+over `z : Z`. The first projection maps the connected component of `p` in the fibre over `z`
+onto the connected component of its image in the fibre of `f` over `r z`: the map between these
+fibres is open, the fibre of `r` being discrete, and closed, being the base change of the finite
+morphism `Spec κ(z) ⟶ Spec κ(r z)`. -/
+theorem connectedComponentIn_subset_image_pullback_fst {X S Z : Scheme.{u}} (f : X ⟶ S)
+    [LocallyOfFiniteType f] (r : Z ⟶ S) [Etale r] {z : Z} (p : ↑(pullback f r))
+    (hp : pullback.snd f r p = z) :
+    connectedComponentIn (f ⁻¹' {r z}) (pullback.fst f r p) ⊆
+      pullback.fst f r '' connectedComponentIn (pullback.snd f r ⁻¹' {z}) p := by
+  set F := pullback.snd f r ⁻¹' {z}
+  set E := f ⁻¹' {r z}
+  have hc (q : ↑(pullback f r)) : f (pullback.fst f r q) = r (pullback.snd f r q) := by
+    rw [← Scheme.Hom.comp_apply, pullback.condition, Scheme.Hom.comp_apply]
+  have hpF : p ∈ F := hp
+  let φ : F → E := fun q ↦ ⟨pullback.fst f r q, by simp [E, hc, show _ = z from q.2]⟩
+  -- `φ` is an open map, since `z` is isolated in its fibre under `r`
+  obtain ⟨N, hN, hNz⟩ := isDiscrete_iff_forall_mem_exists_isOpen.mp
+    (r.isDiscrete_preimage_singleton (r z)) z rfl
+  have hφo : IsOpenMap φ := by
+    intro O hO
+    obtain ⟨O', hO', rfl⟩ := isOpen_induced_iff.mp hO
+    have : φ '' (Subtype.val ⁻¹' O') =
+        Subtype.val ⁻¹' (pullback.fst f r '' (O' ∩ pullback.snd f r ⁻¹' N)) := by
+      ext ⟨y, hy⟩
+      constructor
+      · rintro ⟨⟨q, hq⟩, hqO, hqy⟩
+        refine ⟨q, ⟨hqO, ?_⟩, congrArg Subtype.val hqy⟩
+        rw [Set.mem_preimage, show pullback.snd f r q = z from hq]
+        exact ((Set.ext_iff.mp hNz z).mpr rfl).1
+      · rintro ⟨q, ⟨hqO, hqN⟩, rfl⟩
+        have hqz : pullback.snd f r q = z := by
+          have : pullback.snd f r q ∈ N ∩ r ⁻¹' {r z} := ⟨hqN, by
+            change r _ = r z
+            rw [← hc]
+            exact hy⟩
+          rwa [hNz] at this
+        exact ⟨⟨q, hqz⟩, hqO, rfl⟩
+    rw [this]
+    exact ((pullback.fst f r).isOpenMap _
+      (hO'.inter (hN.preimage (pullback.snd f r).continuous))).preimage continuous_subtype_val
+  -- `φ` is a closed map, being the base change of `Spec κ(z) ⟶ Spec κ(r z)` on fibres
+  have H := isPullback_fiberToSpecResidueField_of_isPullback (IsPullback.of_hasPullback f r) z
+  have : IsFinite (Spec.map (r.residueFieldMap z)) :=
+    (IsFinite.SpecMap_iff _).mpr (r.finite_residueFieldMap z)
+  obtain ⟨Φ, hΦ, hUC⟩ : ∃ Φ : (pullback.snd f r).fiber z ⟶ f.fiber (r z),
+      Φ ≫ f.fiberι (r z) = (pullback.snd f r).fiberι z ≫ pullback.fst f r ∧
+        UniversallyClosed Φ :=
+    ⟨_, pullback.lift_fst _ _ _, MorphismProperty.of_isPullback H.flip inferInstance⟩
+  have hφc : IsClosedMap φ := by
+    convert (f.fiberHomeo (r z)).isClosedMap.comp
+      (Φ.isClosedMap.comp ((pullback.snd f r).fiberHomeo z).symm.isClosedMap)
+    funext q
+    refine Subtype.ext ?_
+    change _ = f.fiberι (r z) (Φ (((pullback.snd f r).fiberHomeo z).symm q))
+    rw [← Scheme.Hom.comp_apply, hΦ, Scheme.Hom.comp_apply, Scheme.Hom.fiberι_fiberHomeo_symm]
+  -- the image of the connected component of `p` is clopen, hence contains that of `φ p`
+  have hK : IsClopen (φ '' connectedComponent ⟨p, hpF⟩) :=
+    ⟨hφc _ isClopen_connectedComponent.1, hφo _ isClopen_connectedComponent.2⟩
+  have hpE : pullback.fst f r p ∈ E := (φ ⟨p, hpF⟩).2
+  rw [connectedComponentIn_eq_image hpE, connectedComponentIn_eq_image hpF, Set.image_image]
+  intro y ⟨y', hy', hy⟩
+  obtain ⟨q, hq, hqy⟩ := hK.connectedComponent_subset (x := φ ⟨p, hpF⟩)
+    (Set.mem_image_of_mem _ mem_connectedComponent) hy'
+  exact ⟨q, hq, by rw [← hy, ← hqy]⟩
+
+/-- A scheme `X` étale over a reduced scheme `Y` is reduced: every point of `X` has an affine
+neighbourhood `U` mapping into an affine open `V` of `Y` with `Γ(Y, V) ⟶ Γ(X, U)` étale, so
+`Γ(X, U)` is reduced by `Algebra.Etale.isReduced`, and so is its localisation, the stalk. -/
+theorem isReduced_of_etale {X Y : Scheme.{u}} (f : X ⟶ Y) [Etale f] [IsReduced Y] :
+    IsReduced X := by
+  have (x : X) : _root_.IsReduced (X.presheaf.stalk x) := by
+    obtain ⟨_, ⟨V, hV, rfl⟩, hxV, -⟩ :=
+      Y.isBasis_affineOpens.exists_subset_of_mem_open (Set.mem_univ (f.base x)) isOpen_univ
+    obtain ⟨_, ⟨U, hU, rfl⟩, hxU, hUV⟩ := X.isBasis_affineOpens.exists_subset_of_mem_open
+      (show x ∈ f ⁻¹ᵁ V from hxV) (f ⁻¹ᵁ V).isOpen
+    have he := HasRingHomProperty.appLE @Etale f ‹_› ⟨V, hV⟩ ⟨U, hU⟩ hUV
+    algebraize [(f.appLE V U hUV).hom]
+    have : _root_.IsReduced Γ(X, U) := Algebra.Etale.isReduced Γ(Y, V) Γ(X, U)
+    have := hU.isLocalization_stalk ⟨x, hxU⟩
+    exact @isReduced_localizationPreserves _ _ _ _ _ (X.presheaf.algebra_section_stalk ⟨x, hxU⟩)
+      this ‹_›
+  exact isReduced_of_isReduced_stalk X
+
+end AlgebraicGeometry

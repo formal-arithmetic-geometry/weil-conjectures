@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF contributors
 -/
-import Mathlib.AlgebraicGeometry.Morphisms.Etale
-import Mathlib.AlgebraicGeometry.Morphisms.Finite
-import Mathlib.AlgebraicGeometry.Pullbacks
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.Etale
+public import Mathlib.AlgebraicGeometry.Morphisms.Finite
+public import Mathlib.AlgebraicGeometry.Pullbacks
 
 /-!
 # Finite étale morphisms split étale locally
@@ -13,6 +15,8 @@ import Mathlib.AlgebraicGeometry.Pullbacks
 Source: Stacks Project, Etale Morphisms, Lemma 04HN (lemma-finite-etale-etale-local)
 (blueprint: lem-weil-pbc-finite-etale-etale-local-split)
 -/
+
+@[expose] public section
 
 universe u
 

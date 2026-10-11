@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import WeilConjectures.AlgebraicGeometry.Morphisms.FiberDegree
-import Mathlib.CategoryTheory.Comma.Over.Pullback
+module
+
+public import WeilConjectures.AlgebraicGeometry.Morphisms.FiberDegree
+public import Mathlib.CategoryTheory.Comma.Over.Pullback
 
 /-!
 # Descent of finite locally free morphisms
@@ -12,6 +14,8 @@ import Mathlib.CategoryTheory.Comma.Over.Pullback
 Source: Stacks Project, Limits, Lemma Tag 06AC, in Situation Tag 081D
 (blueprint: lem-weil-pbc-descend-finite-locally-free).
 -/
+
+@[expose] public section
 
 universe u
 

@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import Sheaf.CategoryTheory.Sites.CoherentContractedPowers
+module
+
+public import Sheaf.CategoryTheory.Sites.CoherentContractedPowers
 
 /-!
 # Existence of coherent contracted powers of a torsor
@@ -11,6 +13,8 @@ import Sheaf.CategoryTheory.Sites.CoherentContractedPowers
 Source: blueprint `sec-curve-estimates/sk-prop-hilbert90/lem-sc-torsor-h1.md`,
 contracted-product group law (blueprint: lem-sc-zariski-contracted-power-torsor).
 -/
+
+@[expose] public section
 
 universe uCT wCT
 

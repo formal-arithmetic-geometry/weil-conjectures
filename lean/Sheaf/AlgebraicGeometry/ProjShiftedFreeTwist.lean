@@ -3,11 +3,13 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import WeilConjectures.AlgebraicGeometry.ProjectiveSpectrum.Twist.Modules
-import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.TransitionUnits
-import Sheaf.AlgebraicGeometry.TensorPullback
-import Sheaf.Algebra.Module.DegreeZeroFractions
-import Sheaf.AlgebraicGeometry.ProjectiveLineProjChartIsomorphism
+module
+
+public import WeilConjectures.AlgebraicGeometry.ProjectiveSpectrum.Twist.Modules
+public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.TransitionUnits
+public import Sheaf.AlgebraicGeometry.TensorPullback
+public import Sheaf.Algebra.Module.DegreeZeroFractions
+public import Sheaf.AlgebraicGeometry.ProjectiveLineProjChartIsomorphism
 
 /-!
 # Shifted free graded modules and the glued twists on the projective line
@@ -23,6 +25,8 @@ section maps onto degree-zero fractions, respecting scalars and canonical restri
 The finite direct sum is represented by `Fin r → S`. Its degree-`n` part consists of
 vectors whose `i`th component has polynomial degree `a i + n`, with negative parts zero.
 -/
+
+@[expose] public section
 
 universe v
 

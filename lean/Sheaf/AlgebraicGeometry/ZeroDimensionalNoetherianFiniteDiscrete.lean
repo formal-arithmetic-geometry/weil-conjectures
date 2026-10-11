@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import Mathlib.AlgebraicGeometry.Noetherian
-import Mathlib.Topology.KrullDimension
+module
+
+public import Mathlib.AlgebraicGeometry.Noetherian
+public import Mathlib.Topology.KrullDimension
 
 /-!
 # A Noetherian scheme of dimension at most zero is finite and discrete
@@ -12,6 +14,8 @@ import Mathlib.Topology.KrullDimension
 Source: Stacks Project, Properties, Lemma 28.10.5 (Tag 0AAX), proof and conclusion
 (blueprint: lem-sc-zero-dim-noetherian-finite-discrete).
 -/
+
+@[expose] public section
 
 universe u
 

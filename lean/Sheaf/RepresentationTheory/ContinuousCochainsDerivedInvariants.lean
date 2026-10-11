@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF worker C1
 -/
-import Sheaf.CategoryTheory.DiscreteModulesAbelian
-import Mathlib.CategoryTheory.Abelian.RightDerived
-import Mathlib.Topology.ContinuousMap.Algebra
-import Mathlib.Data.Fin.Tuple.Basic
+module
+
+public import Sheaf.CategoryTheory.DiscreteModulesAbelian
+public import Mathlib.CategoryTheory.Abelian.RightDerived
+public import Mathlib.Topology.ContinuousMap.Algebra
+public import Mathlib.Data.Fin.Tuple.Basic
 
 /-!
 # Continuous inhomogeneous cochains compute derived invariants
@@ -14,6 +16,8 @@ import Mathlib.Data.Fin.Tuple.Basic
 Source: Stacks Project, Etale Cohomology, Section 59.58, Tag 0DVG
 (blueprint: lem-exc-cochains-derived-invariants).
 -/
+
+@[expose] public section
 
 universe u v w
 

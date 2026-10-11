@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import Sheaf.RingTheory.QuasiFiniteAtPrime
-import Mathlib.RingTheory.Localization.Away.Basic
+module
+
+public import Sheaf.RingTheory.QuasiFiniteAtPrime
+public import Mathlib.RingTheory.Localization.Away.Basic
 
 /-!
 # Quasi-finiteness at a prime and principal localization
@@ -12,6 +14,8 @@ import Mathlib.RingTheory.Localization.Away.Basic
 Source: Stacks Project, Algebra, Lemma 10.122.6 (Tag 077H)
 (blueprint: lem-weil-pbc-quasi-finite-at-prime-principal-localization).
 -/
+
+@[expose] public section
 
 universe u v
 

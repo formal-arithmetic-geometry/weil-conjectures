@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import WeilConjectures.CategoryTheory.Comma.Over.DescentDatum
-import Mathlib.AlgebraicGeometry.Sites.Fpqc
-import Mathlib.AlgebraicGeometry.Limits
+module
+
+public import WeilConjectures.CategoryTheory.Comma.Over.DescentDatum
+public import Mathlib.AlgebraicGeometry.Sites.Fpqc
+public import Mathlib.AlgebraicGeometry.Limits
 
 /-!
 # Effective fpqc descent reduced to affine faithfully flat morphisms
@@ -13,6 +15,8 @@ import Mathlib.AlgebraicGeometry.Limits
 Source: Stacks Project, Descent, Lemma 35.36.2 (Tag 02W3), specialized to a
 one-member fpqc covering (blueprint: lem-galois-fpqc-descending-types-morphisms).
 -/
+
+@[expose] public section
 
 universe u
 

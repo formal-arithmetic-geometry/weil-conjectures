@@ -2,8 +2,10 @@
 Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 -/
-import Sheaf.CategoryTheory.CompactlyGenerated
-import Mathlib.CategoryTheory.Triangulated.Yoneda
+module
+
+public import Sheaf.CategoryTheory.CompactlyGenerated
+public import Mathlib.CategoryTheory.Triangulated.Yoneda
 
 /-!
 # Brown representability for cohomological functors
@@ -11,6 +13,8 @@ import Mathlib.CategoryTheory.Triangulated.Yoneda
 Source: Stacks Project, Derived Categories, Tag 0A8F, Lemma `lemma-brown`
 (blueprint: lem-pc-brown-cohomological-representability).
 -/
+
+@[expose] public section
 
 universe v u
 

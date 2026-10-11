@@ -3,11 +3,13 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group J1
 -/
-import Sheaf.RingTheory.GRing
-import Sheaf.RingTheory.PopescuAdmissibleSubalgebra
-import Mathlib.RingTheory.Kaehler.Basic
-import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
-import Mathlib.LinearAlgebra.Basis.Defs
+module
+
+public import Sheaf.RingTheory.GRing
+public import Sheaf.RingTheory.PopescuAdmissibleSubalgebra
+public import Mathlib.RingTheory.Kaehler.Basic
+public import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
+public import Mathlib.LinearAlgebra.Basis.Defs
 
 /-!
 # Choosing elements in an admissible Popescu subalgebra
@@ -15,6 +17,8 @@ import Mathlib.LinearAlgebra.Basis.Defs
 Source: Stacks Project, proofs of Tags 07FH and 07FI; the enlargement argument recorded
 in the DAG (blueprint: lem-weil-pbc-popescu-solution-modulo-choose).
 -/
+
+@[expose] public section
 
 set_option autoImplicit false
 

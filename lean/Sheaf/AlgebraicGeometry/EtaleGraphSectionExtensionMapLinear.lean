@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group P1
 -/
-import Sheaf.AlgebraicGeometry.EtaleGraphSectionExtensionMap
-import Sheaf.AlgebraicGeometry.EtaleInverseImageModulesExact
-import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
+module
+
+public import Sheaf.AlgebraicGeometry.EtaleGraphSectionExtensionMap
+public import Sheaf.AlgebraicGeometry.EtaleInverseImageModulesExact
+public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 
 /-!
 # Linearity of extension of graph sections over the constant ring sheaf
@@ -13,6 +15,8 @@ import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 Source: Stacks Project, Tags 03DI and 0F4L
 (blueprint: lem-weil-pbc-etale-graph-section-extension-map-linear).
 -/
+
+@[expose] public section
 
 universe u
 

@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Mathlib.RingTheory.FiniteType
-import Mathlib.RingTheory.LocalRing.ResidueField.Fiber
-import Mathlib.RingTheory.Localization.Away.Basic
-import WeilConjectures.Mathlib.Topology.KrullDimension
+module
+
+public import Mathlib.RingTheory.FiniteType
+public import Mathlib.RingTheory.LocalRing.ResidueField.Fiber
+public import Mathlib.RingTheory.Localization.Away.Basic
+public import WeilConjectures.Mathlib.Topology.KrullDimension
 
 /-!
 # A principal neighbourhood bounding all fibre dimensions
@@ -14,6 +16,8 @@ import WeilConjectures.Mathlib.Topology.KrullDimension
 Source: Stacks Project, Algebra, Tag 00QH and Tag 00ST, proof (3)
 (blueprint: lem-weil-pbc-fibre-dimension-neighborhood).
 -/
+
+@[expose] public section
 
 universe u v
 

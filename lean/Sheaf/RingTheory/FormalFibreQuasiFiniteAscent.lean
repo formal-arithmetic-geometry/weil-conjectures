@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import Sheaf.RingTheory.GRing
-import Sheaf.RingTheory.QuasiFiniteAtPrime
+module
+
+public import Sheaf.RingTheory.GRing
+public import Sheaf.RingTheory.QuasiFiniteAtPrime
 
 /-!
 # Geometric regularity ascends along quasi-finite maps
@@ -12,6 +14,8 @@ import Sheaf.RingTheory.QuasiFiniteAtPrime
 Source: Stacks Project, More on Algebra, Lemma 07PP (blueprint:
 lem-weil-pbc-formal-fibre-quasi-finite-ascent).
 -/
+
+@[expose] public section
 
 universe u v
 

@@ -3,11 +3,13 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group G1
 -/
-import Sheaf.RingTheory.CohenRing
-import Mathlib.RingTheory.LocalRing.ResidueField.Defs
-import Mathlib.RingTheory.MvPowerSeries.Basic
-import Mathlib.RingTheory.RegularLocalRing.Defs
-import Sheaf.RingTheory.IsRegularSystemOfParameters
+module
+
+public import Sheaf.RingTheory.CohenRing
+public import Mathlib.RingTheory.LocalRing.ResidueField.Defs
+public import Mathlib.RingTheory.MvPowerSeries.Basic
+public import Mathlib.RingTheory.RegularLocalRing.Defs
+public import Sheaf.RingTheory.IsRegularSystemOfParameters
 
 /-!
 # Cohen power series presentations
@@ -15,6 +17,8 @@ import Sheaf.RingTheory.IsRegularSystemOfParameters
 Source: Stacks Project, Algebra, Theorem Tag 032A and Remark Tag 032C
 (blueprint: lem-weil-pbc-cohen-power-series-presentation).
 -/
+
+@[expose] public section
 
 universe u
 

@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Sheaf.RingTheory.EssentiallySmooth
+module
+
+public import Sheaf.RingTheory.EssentiallySmooth
 
 /-!
 # Composition of essentially smooth ring maps
@@ -12,6 +14,8 @@ Source: Stacks Project, Smoothing Ring Maps, Lemmas 07FI and 07FJ (step 13), whe
 composition is used without a separate statement; the node's agent-written proof uses
 Algebra, Lemmas 00CR and 0CAQ (blueprint: lem-weil-pbc-essentially-smooth-composition).
 -/
+
+@[expose] public section
 
 universe u v w
 

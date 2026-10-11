@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import Sheaf.AlgebraicGeometry.LocallyFreeExtCohomology
-import WeilConjectures.AlgebraicGeometry.Cohomology.DualityPairing
-import WeilConjectures.AlgebraicGeometry.Cohomology.ProjectiveLine
+module
+
+public import Sheaf.AlgebraicGeometry.LocallyFreeExtCohomology
+public import WeilConjectures.AlgebraicGeometry.Cohomology.DualityPairing
+public import WeilConjectures.AlgebraicGeometry.Cohomology.ProjectiveLine
 
 /-!
 # Naturality and connecting-square compatibility of projective-line duality
@@ -13,6 +15,8 @@ import WeilConjectures.AlgebraicGeometry.Cohomology.ProjectiveLine
 Source: Weil conjectures blueprint, `thm-sc-p1-duality`, proof, Step 2
 (blueprint: lem-sc-p1-duality-pairing-naturality).
 -/
+
+@[expose] public section
 
 universe u
 

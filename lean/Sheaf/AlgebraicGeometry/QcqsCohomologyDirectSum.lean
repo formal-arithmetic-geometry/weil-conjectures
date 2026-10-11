@@ -3,16 +3,20 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group T1
 -/
-import Sheaf.Paper.PQFCohomology
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
-import Mathlib.Algebra.DirectSum.Module
-import Mathlib.CategoryTheory.Limits.Shapes.Products
+module
+
+public import Sheaf.Paper.PQFCohomology
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
+public import Mathlib.Algebra.DirectSum.Module
+public import Mathlib.CategoryTheory.Limits.Shapes.Products
 
 /-! # Cohomology commutes with direct sums on qcqs schemes
 
 Source: Stacks Project, Cohomology, Tag 01FF, applied as in Tag 09J7
 (blueprint: lem-weil-pbc-qcqs-cohomology-direct-sum).
 -/
+
+@[expose] public section
 
 universe u v
 

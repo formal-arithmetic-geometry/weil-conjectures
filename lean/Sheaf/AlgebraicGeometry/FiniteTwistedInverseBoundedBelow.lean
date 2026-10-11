@@ -3,16 +3,20 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group T1
 -/
-import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
-import Mathlib.AlgebraicGeometry.Morphisms.Finite
-import Mathlib.AlgebraicGeometry.Noetherian
-import Mathlib.Algebra.Homology.DerivedCategory.TStructure
+module
+
+public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
+public import Mathlib.AlgebraicGeometry.Morphisms.Finite
+public import Mathlib.AlgebraicGeometry.Noetherian
+public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 
 /-! # Boundedness below of finite twisted inverse image
 
 Source: Stacks Project, Duality for Schemes, Tag 0A9I (finite case, Tag 0AX2)
 (blueprint: lem-sc-finite-twisted-inverse-bounded-below).
 -/
+
+@[expose] public section
 
 universe u wX wY
 

@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import Sheaf.AlgebraicGeometry.EtaleSheaves
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
-import Mathlib.AlgebraicGeometry.Noetherian
-import Mathlib.AlgebraicGeometry.Morphisms.Finite
+module
+
+public import Sheaf.AlgebraicGeometry.EtaleSheaves
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+public import Mathlib.AlgebraicGeometry.Noetherian
+public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 
 /-!
 # Finite pushforward preserves constructibility over a Noetherian scheme
@@ -15,6 +17,8 @@ Source: smooth purity blueprint, unit `sk-prop-sf-cbc`, order 1579;
 Stacks Project, Lemma 59.73.9 (Tag 095R)
 (blueprint: lem-weil-pbc-finite-pushforward-constructible-noetherian).
 -/
+
+@[expose] public section
 
 universe u
 

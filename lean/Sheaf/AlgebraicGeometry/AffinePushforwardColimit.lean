@@ -3,16 +3,20 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import Mathlib.AlgebraicGeometry.AffineTransitionLimit
-import Sheaf.AlgebraicGeometry.AffineMorphismRelativeSpec
-import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
-import WeilConjectures.AlgebraicGeometry.Modules.TensorSection
+module
+
+public import Mathlib.AlgebraicGeometry.AffineTransitionLimit
+public import Sheaf.AlgebraicGeometry.AffineMorphismRelativeSpec
+public import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
+public import WeilConjectures.AlgebraicGeometry.Modules.TensorSection
 
 /-! # Affine pushforward and tensor modules commute with directed limits
 
 Source: Stacks Project, Limits, Tags 01Z0 and 01YX
 (blueprint: lem-sc-valuation-limit-affine-pushforward-colimit).
 -/
+
+@[expose] public section
 
 universe u
 

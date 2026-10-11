@@ -1,7 +1,11 @@
-import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
-import Mathlib.AlgebraicGeometry.ResidueField
-import Mathlib.LinearAlgebra.FiniteDimensional.Basic
-import WeilConjectures.ZetaSeries
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
+public import Mathlib.AlgebraicGeometry.ResidueField
+public import Mathlib.LinearAlgebra.FiniteDimensional.Basic
+public import WeilConjectures.ZetaSeries
+
+@[expose] public section
 
 universe u
 

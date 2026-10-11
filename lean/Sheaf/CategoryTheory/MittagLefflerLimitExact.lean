@@ -3,11 +3,13 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import Mathlib.Algebra.Category.Grp.Limits
-import Mathlib.Algebra.Category.Grp.Preadditive
-import Mathlib.Algebra.Homology.ShortComplex.ShortExact
-import Mathlib.CategoryTheory.CofilteredSystem
-import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
+module
+
+public import Mathlib.Algebra.Category.Grp.Limits
+public import Mathlib.Algebra.Category.Grp.Preadditive
+public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
+public import Mathlib.CategoryTheory.CofilteredSystem
+public import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 
 /-!
 # Mittag-Leffler quotients and exact inverse limits
@@ -15,6 +17,8 @@ import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 Source: Stacks Project, Homology, Lemma Tag 02N1, parts (2) and (3)
 (blueprint: lem-weil-pbc-mittag-leffler-limit-exact).
 -/
+
+@[expose] public section
 
 universe u
 

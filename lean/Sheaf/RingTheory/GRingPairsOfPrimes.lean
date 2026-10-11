@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Sheaf.RingTheory.GRing
-import Mathlib.RingTheory.Ideal.Quotient.Operations
+module
+
+public import Sheaf.RingTheory.GRing
+public import Mathlib.RingTheory.Ideal.Quotient.Operations
 
 /-!
 # The G-ring criterion using pairs of prime ideals
@@ -12,6 +14,8 @@ import Mathlib.RingTheory.Ideal.Quotient.Operations
 Source: Stacks Project, More on Algebra, Lemma 07PN and Definition 07GH
 (blueprint: lem-weil-pbc-g-ring-check-pairs-of-primes).
 -/
+
+@[expose] public section
 
 universe u
 

@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group J1
 -/
-import Sheaf.CategoryTheory.ExactCouple
-import Sheaf.CategoryTheory.Filtration
+module
+
+public import Sheaf.CategoryTheory.ExactCouple
+public import Sheaf.CategoryTheory.Filtration
 
 /-!
 # Convergence of bigraded exact couples
@@ -16,6 +18,8 @@ The natural-number index `r` below represents page `r + 2`. Colimits and inverse
 are expressed by their universal properties on the consecutive arrows of the integer chain.
 No infinite (co)limits or complete lattice of subobjects are assumed in the ambient category.
 -/
+
+@[expose] public section
 
 universe u v
 

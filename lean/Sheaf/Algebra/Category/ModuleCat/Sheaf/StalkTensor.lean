@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
-import Sheaf.Algebra.Homology.ModuleStalkFunctor
+module
+
+public import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
+public import Sheaf.Algebra.Homology.ModuleStalkFunctor
 
 /-!
 # Stalk of a tensor product of modules on a ringed space
@@ -12,6 +14,8 @@ import Sheaf.Algebra.Homology.ModuleStalkFunctor
 Source: Stacks Project, Modules, Lemma 17.16.1 (Tag 01CB,
 label lemma-stalk-tensor-product) (blueprint: lem-pc-ringed-space-module-stalk-tensor).
 -/
+
+@[expose] public section
 
 open CategoryTheory MonoidalCategory TopologicalSpace Opposite
 

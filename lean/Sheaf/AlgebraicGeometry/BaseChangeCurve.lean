@@ -3,12 +3,14 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group N1
 -/
-import Mathlib.AlgebraicGeometry.Morphisms.Smooth
-import Mathlib.AlgebraicGeometry.Morphisms.Proper
-import Mathlib.AlgebraicGeometry.Morphisms.Basic
-import Mathlib.FieldTheory.IsAlgClosed.Basic
-import WeilConjectures.AlgebraicGeometry.Curve
-import Sheaf.AlgebraicGeometry.BaseChangeConventions
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
+public import Mathlib.AlgebraicGeometry.Morphisms.Proper
+public import Mathlib.AlgebraicGeometry.Morphisms.Basic
+public import Mathlib.FieldTheory.IsAlgClosed.Basic
+public import WeilConjectures.AlgebraicGeometry.Curve
+public import Sheaf.AlgebraicGeometry.BaseChangeConventions
 
 /-!
 # Base change of a curve
@@ -16,6 +18,8 @@ import Sheaf.AlgebraicGeometry.BaseChangeConventions
 Source: blueprint sec-curve-estimates/sk-prop-ext-invariance/lem-sc-base-change-curve.md
 (blueprint: lem-sc-base-change-curve).
 -/
+
+@[expose] public section
 
 universe u
 

@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import Sheaf.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
+module
+
+public import Sheaf.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
+public import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
 
 /-!
 # Exact inverse image of constant-ring modules on the small etale site
@@ -14,6 +16,8 @@ Source: Stacks Project, Modules on Sites, Tags 03D2, 03D3, 03D6, 03D7, 04JC;
 Sites and Sheaves, Example 0H7J
 (blueprint: prop-weil-pbc-inverse-image-modules-exact).
 -/
+
+@[expose] public section
 
 universe u
 

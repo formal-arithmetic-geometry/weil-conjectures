@@ -3,18 +3,23 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import Mathlib.AlgebraicGeometry.Sites.AffineEtale
-import Mathlib.Algebra.Category.Ring.FilteredColimits
-import Mathlib.CategoryTheory.Sites.Adjunction
-import Mathlib.CategoryTheory.Limits.Preserves.Shapes.BinaryProducts
-import WeilConjectures.CategoryTheory.GrothendieckAbelian.ConcreteCoefficients
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
-import Sheaf.AlgebraicGeometry.EtaleSheaves
+module
+
+public import Mathlib.AlgebraicGeometry.Sites.AffineEtale
+public import Mathlib.Algebra.Category.Ring.FilteredColimits
+public import Mathlib.CategoryTheory.Sites.Adjunction
+public import Mathlib.CategoryTheory.Limits.Preserves.Shapes.BinaryProducts
+public import WeilConjectures.CategoryTheory.GrothendieckAbelian.ConcreteCoefficients
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+public import Sheaf.AlgebraicGeometry.EtaleSheaves
 /-!
 # Inverse image on small étale sites and algebraic structures
 Source: Stacks Project, Sites and Sheaves, Tags 00X6, 00X1, and 00YV
 (blueprint: lem-weil-pbc-etale-inverse-image-algebraic-structures).
 -/
+
+@[expose] public section
+
 universe u
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry

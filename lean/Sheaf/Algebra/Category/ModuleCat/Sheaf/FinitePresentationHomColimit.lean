@@ -3,11 +3,13 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
-import Mathlib.CategoryTheory.Filtered.Basic
-import Mathlib.Topology.Sheaves.Module
-import Mathlib.Algebra.Category.Grp.FilteredColimits
+module
+
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
+public import Mathlib.CategoryTheory.Filtered.Basic
+public import Mathlib.Topology.Sheaves.Module
+public import Mathlib.Algebra.Category.Grp.FilteredColimits
 
 /-!
 # Sheaf Hom out of a module of finite presentation commutes with directed colimits
@@ -15,6 +17,8 @@ import Mathlib.Algebra.Category.Grp.FilteredColimits
 Source: literature/stacks-project/modules.tex, Modules, Lemma 0GMV (blueprint:
 lem-weil-pbc-sheaf-hom-finite-presentation-colimit).
 -/
+
+@[expose] public section
 
 universe u
 

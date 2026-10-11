@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group G1
 -/
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite
-import Mathlib.AlgebraicGeometry.Morphisms.OpenImmersion
-import Sheaf.AlgebraicGeometry.QuasiFiniteMorphism
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite
+public import Mathlib.AlgebraicGeometry.Morphisms.OpenImmersion
+public import Sheaf.AlgebraicGeometry.QuasiFiniteMorphism
 
 /-!
 # Unramified morphisms are locally quasi-finite
@@ -13,6 +15,8 @@ import Sheaf.AlgebraicGeometry.QuasiFiniteMorphism
 Source: Stacks Project, Morphisms, Lemma 02V5 and Algebra, Lemma 02UR
 (blueprint: lem-weil-pbc-unramified-quasi-finite-at-points).
 -/
+
+@[expose] public section
 
 universe u
 

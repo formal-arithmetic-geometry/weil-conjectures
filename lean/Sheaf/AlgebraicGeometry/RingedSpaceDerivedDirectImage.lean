@@ -3,11 +3,13 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group G1
 -/
-import Sheaf.Paper.DerivedHomMayerVietoris
-import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutions
-import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution
-import Mathlib.Algebra.Homology.DerivedCategory.KInjective
-import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Defs
+module
+
+public import Sheaf.Paper.DerivedHomMayerVietoris
+public import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutions
+public import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution
+public import Mathlib.Algebra.Homology.DerivedCategory.KInjective
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Defs
 
 /-!
 # Unbounded derived direct image on ringed spaces
@@ -15,6 +17,8 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Defs
 Source: Stacks Project, Cohomology, Section 20.28 (Tag 079V), construction preceding
 Tag 079W (blueprint: def-pc-ringed-spaces-derived-direct-image).
 -/
+
+@[expose] public section
 
 universe u wX wY
 

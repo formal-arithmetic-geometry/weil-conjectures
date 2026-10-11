@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group S1
 -/
-import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
-import Mathlib.CategoryTheory.Adjunction.Basic
+module
+
+public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
+public import Mathlib.CategoryTheory.Adjunction.Basic
 
 /-!
 # Right adjoint to derived direct image on quasi-coherent complexes
@@ -13,6 +15,8 @@ import Mathlib.CategoryTheory.Adjunction.Basic
 Source: Stacks Project, Duality for Schemes, Lemma 48.3.1 (Tag 0A9E)
 (blueprint: lem-pc-qcqs-derived-direct-image-right-adjoint).
 -/
+
+@[expose] public section
 
 universe u wX wY
 

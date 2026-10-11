@@ -3,12 +3,14 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Sheaf.AlgebraicGeometry.DerivedPullback
-import Sheaf.AlgebraicGeometry.DerivedTensorStructure
-import Sheaf.Algebra.Homology.BaseDerivedTensorCohomologyModel
-import Mathlib.AlgebraicGeometry.Modules.Tilde
-import Mathlib.Algebra.Category.ModuleCat.Monoidal.Symmetric
-import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.KFlat
+module
+
+public import Sheaf.AlgebraicGeometry.DerivedPullback
+public import Sheaf.AlgebraicGeometry.DerivedTensorStructure
+public import Sheaf.Algebra.Homology.BaseDerivedTensorCohomologyModel
+public import Mathlib.AlgebraicGeometry.Modules.Tilde
+public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Symmetric
+public import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.KFlat
 
 /-! # Affine computations of derived pullback and tensor
 
@@ -29,6 +31,8 @@ with no boundedness, flatness of the ring map, or quasi-coherence hypothesis add
 - `derivedPullback_tilde_kFlat_natIso`: natural affine pullback comparison on K-flat models.
 - `derivedTensor_tilde_kFlat_natIso`: natural affine tensor comparison on K-flat models.
 -/
+
+@[expose] public section
 
 universe u w
 

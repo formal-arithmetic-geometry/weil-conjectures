@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Mathlib.CategoryTheory.Limits.HasLimits
-import Mathlib.CategoryTheory.Filtered.Basic
-import Mathlib.RingTheory.RingHom.Flat
+module
+
+public import Mathlib.CategoryTheory.Limits.HasLimits
+public import Mathlib.CategoryTheory.Filtered.Basic
+public import Mathlib.RingTheory.RingHom.Flat
 
 /-!
 # Flatness over a filtered colimit of commutative rings
@@ -13,6 +15,8 @@ import Mathlib.RingTheory.RingHom.Flat
 Source: Stacks Project, Algebra, Tag 05UU (1), with the module equal to the target ring;
 Categories, Tag 0032, for filtered reindexing (blueprint: lem-weil-pbc-colimit-rings-flat).
 -/
+
+@[expose] public section
 
 universe u v
 

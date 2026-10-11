@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import Mathlib.RingTheory.Valuation.Discrete.IsDiscreteValuationRing
-import Mathlib.RingTheory.TensorProduct.Maps
+module
+
+public import Mathlib.RingTheory.Valuation.Discrete.IsDiscreteValuationRing
+public import Mathlib.RingTheory.TensorProduct.Maps
 
 /-!
 # Tensor surjectivity detects a negative discrete valuation
@@ -12,6 +14,8 @@ import Mathlib.RingTheory.TensorProduct.Maps
 Source: Stacks Project, Varieties, Lemma 09N5, induction base case
 (blueprint: lem-sc-dvr-tensor-surjective-negative-valuation).
 -/
+
+@[expose] public section
 
 universe u
 

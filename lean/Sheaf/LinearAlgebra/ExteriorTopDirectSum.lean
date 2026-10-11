@@ -3,11 +3,13 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Mathlib.LinearAlgebra.ExteriorPower.Basic
-import Mathlib.LinearAlgebra.Basis.Defs
-import Mathlib.LinearAlgebra.TensorProduct.Map
-import Mathlib.LinearAlgebra.Prod
-import Mathlib.Data.Fin.Tuple.Basic
+module
+
+public import Mathlib.LinearAlgebra.ExteriorPower.Basic
+public import Mathlib.LinearAlgebra.Basis.Defs
+public import Mathlib.LinearAlgebra.TensorProduct.Map
+public import Mathlib.LinearAlgebra.Prod
+public import Mathlib.Data.Fin.Tuple.Basic
 
 /-!
 # Top exterior power of a direct sum
@@ -20,6 +22,8 @@ proof of (*), determinant paragraph (blueprint: lem-sc-exterior-top-direct-sum).
 * `exteriorPower.existsUnique_topDirectSum`: the canonical isomorphism characterized on wedges.
 * `exteriorPower.topDirectSum_natural`: its compatibility with isomorphisms of the two modules.
 -/
+
+@[expose] public section
 
 universe u v w v' w'
 

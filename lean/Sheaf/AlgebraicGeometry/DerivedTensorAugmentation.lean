@@ -3,16 +3,20 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under the Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Sheaf.AlgebraicGeometry.DerivedCategory
-import Sheaf.Algebra.Homology.KFlat
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorClosed
-import Mathlib.Algebra.Homology.Monoidal
+module
+
+public import Sheaf.AlgebraicGeometry.DerivedCategory
+public import Sheaf.Algebra.Homology.KFlat
+public import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorClosed
+public import Mathlib.Algebra.Homology.Monoidal
 
 /-! # Derived tensor augmentations on schemes
 
 Source: Stacks Project, Cohomology on Sites, Tags 06YS and 06YU; Derived Categories
 of Schemes, Tag 08EH (blueprint: def-sc-derived-tensor-augmentation).
 -/
+
+@[expose] public section
 
 set_option autoImplicit false
 

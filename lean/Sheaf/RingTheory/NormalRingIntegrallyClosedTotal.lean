@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group J1
 -/
-import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
-import Mathlib.RingTheory.Localization.AtPrime.Basic
+module
+
+public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
+public import Mathlib.RingTheory.Localization.AtPrime.Basic
 
 /-!
 # A normal ring is integrally closed in its total ring of fractions
@@ -17,6 +19,8 @@ This is the ring specialization of the module localization in
 `def-weil-pbc-module-localization`: `Localization S` and `LocalizedModule S R` are
 reducibly the same fraction construction. No domain assumption on `R` is made.
 -/
+
+@[expose] public section
 
 universe u
 

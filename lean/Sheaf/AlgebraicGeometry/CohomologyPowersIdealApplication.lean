@@ -3,11 +3,13 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group J1
 -/
-import Sheaf.AlgebraicGeometry.CoherentFormalModule
-import Sheaf.Topology.RingedSpaceModuleCohomology
-import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
-import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
-import Mathlib.AlgebraicGeometry.Morphisms.Proper
+module
+
+public import Sheaf.AlgebraicGeometry.CoherentFormalModule
+public import Sheaf.Topology.RingedSpaceModuleCohomology
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
+public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
+public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 
 /-! # Image and kernel bounds for cohomology of ideal powers
 
@@ -20,6 +22,8 @@ ideal sheaf of `I` (hypothesis `hJ`); `H^q(X, -)` as an `A`-module is
 `RingedSpace.moduleCohomology` restricted along `(ΓSpecIso A).inv ≫ f.appTop`; the transition
 maps `I^k F ⟶ I^n F` are the unique maps over the inclusions into `F`, stated to exist.
 -/
+
+@[expose] public section
 
 universe v
 

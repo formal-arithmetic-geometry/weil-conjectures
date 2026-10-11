@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 
 /-!
 # Intersections of quasi-compact open subschemes
@@ -12,6 +14,8 @@ Source: Weil conjectures blueprint, `sec-nagata-compactification`,
 `sk-prop-nagata-sketch-zmt`, lemma `pqf-lem-qs-intersection-qc`
 (blueprint: pqf-lem-qs-intersection-qc).
 -/
+
+@[expose] public section
 
 universe u
 

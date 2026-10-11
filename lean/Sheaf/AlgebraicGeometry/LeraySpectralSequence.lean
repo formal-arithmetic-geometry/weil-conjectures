@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import Sheaf.Paper.PQFCohomology
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
-import WeilConjectures.Mathlib.Algebra.Homology.SpectralSequence.Basic
+module
+
+public import Sheaf.Paper.PQFCohomology
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
+public import WeilConjectures.Mathlib.Algebra.Homology.SpectralSequence.Basic
 
 /-!
 # Leray spectral sequence for a quasi-coherent module on a scheme
@@ -13,6 +15,8 @@ import WeilConjectures.Mathlib.Algebra.Homology.SpectralSequence.Basic
 Source: Stacks Project, Cohomology of Sheaves, Lemma 20.13.4, Tag 01F2,
 specialized to a module in degree zero (blueprint: pqf-lem-leray).
 -/
+
+@[expose] public section
 
 universe v
 

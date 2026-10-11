@@ -1,18 +1,20 @@
-import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
-import Mathlib.CategoryTheory.Sites.Sheafification
-import Mathlib.CategoryTheory.Sites.Abelian
-import Mathlib.CategoryTheory.Sites.Continuous
-import Mathlib.CategoryTheory.Sites.Pullback
-import Mathlib.CategoryTheory.Sites.PrecoverageToGrothendieck
-import Mathlib.CategoryTheory.Abelian.RightDerived
-import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Sheaf
-import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
-import Mathlib.Algebra.Homology.Additive
-import Mathlib.CategoryTheory.Sites.LeftExact
-import Mathlib.Algebra.Category.Grp.Colimits
-import Mathlib.Algebra.Category.Grp.FilteredColimits
-import Mathlib.Algebra.Category.Grp.AB
-import Mathlib.CategoryTheory.Abelian.Injective.Resolution
+module
+
+public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
+public import Mathlib.CategoryTheory.Sites.Sheafification
+public import Mathlib.CategoryTheory.Sites.Abelian
+public import Mathlib.CategoryTheory.Sites.Continuous
+public import Mathlib.CategoryTheory.Sites.Pullback
+public import Mathlib.CategoryTheory.Sites.PrecoverageToGrothendieck
+public import Mathlib.CategoryTheory.Abelian.RightDerived
+public import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Sheaf
+public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
+public import Mathlib.Algebra.Homology.Additive
+public import Mathlib.CategoryTheory.Sites.LeftExact
+public import Mathlib.Algebra.Category.Grp.Colimits
+public import Mathlib.Algebra.Category.Grp.FilteredColimits
+public import Mathlib.Algebra.Category.Grp.AB
+public import Mathlib.CategoryTheory.Abelian.Injective.Resolution
 
 /-!
 # Higher direct images along a morphism of sites are sheafified cohomology presheaves
@@ -20,6 +22,8 @@ import Mathlib.CategoryTheory.Abelian.Injective.Resolution
 Source: literature/stacks-project/sites-cohomology.tex, Lemma Tag 072W
 (blueprint: lem-weil-pbc-site-higher-direct-image-sheafified-presheaf).
 -/
+
+@[expose] public section
 
 universe u
 

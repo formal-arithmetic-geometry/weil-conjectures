@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import Sheaf.Topology.RingedModuleSkyscraper
-import Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
+module
+
+public import Sheaf.Topology.RingedModuleSkyscraper
+public import Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
 
 /-!
 # Skyscraper complexes and stalks
@@ -12,6 +14,8 @@ import Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
 Source: Stacks Project, Sheaves, Definition Tag 009A (4) and Lemma Tag 009C, applied
 termwise (blueprint: lem-pc-skyscraper-complex).
 -/
+
+@[expose] public section
 
 universe u_complex
 

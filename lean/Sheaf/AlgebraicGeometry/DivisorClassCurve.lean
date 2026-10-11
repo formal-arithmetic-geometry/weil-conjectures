@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import Sheaf.AlgebraicGeometry.DivisorModuleLocal
-import WeilConjectures.AlgebraicGeometry.Picard.Group
+module
+
+public import Sheaf.AlgebraicGeometry.DivisorModuleLocal
+public import WeilConjectures.AlgebraicGeometry.Picard.Group
 
 /-!
 # Divisor classes and the Picard group of a smooth connected curve
@@ -12,6 +14,8 @@ import WeilConjectures.AlgebraicGeometry.Picard.Group
 Source: blueprint, sec-curve-estimates, sk-def-pic, lem-sc-divisor-class-curve;
 Stacks Project, Divisors, Tags 0BE9 and 0BE8 (blueprint: lem-sc-divisor-class-curve).
 -/
+
+@[expose] public section
 
 set_option autoImplicit false
 

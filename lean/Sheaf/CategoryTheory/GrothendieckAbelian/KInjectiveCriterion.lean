@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import Mathlib.Algebra.Homology.HomotopyCategory.KInjective
-import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.Basic
-import Mathlib.Algebra.Homology.HomologicalComplexLimits
+module
+
+public import Mathlib.Algebra.Homology.HomotopyCategory.KInjective
+public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.Basic
+public import Mathlib.Algebra.Homology.HomologicalComplexLimits
 
 /-!
 # A bounded-size criterion for K-injectivity
@@ -13,6 +15,8 @@ import Mathlib.Algebra.Homology.HomologicalComplexLimits
 Source: Stacks Project, `injectives.tex`, Lemma `lemma-characterize-K-injective`
 (blueprint: lem-pur-kinjective-characterize-K-injective).
 -/
+
+@[expose] public section
 
 universe v u
 

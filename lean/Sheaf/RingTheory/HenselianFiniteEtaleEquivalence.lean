@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Mathlib.RingTheory.Henselian
-import Mathlib.RingTheory.Etale.Finite
+module
+
+public import Mathlib.RingTheory.Henselian
+public import Mathlib.RingTheory.Etale.Finite
 
 /-!
 # Finite étale algebras over a henselian local ring
@@ -15,6 +17,8 @@ Source: Stacks Project, Algebra, Lemma 10.153.7, Tag 04GK
 Mathlib's finite étale algebra category has algebra homomorphisms as its morphisms.
 Its base-change functor sends `S` to `κ ⊗[R] S`, canonically isomorphic to `S / 𝔪S`.
 -/
+
+@[expose] public section
 
 universe u v
 

@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import Mathlib.AlgebraicGeometry.Sites.Fpqc
+module
+
+public import Mathlib.AlgebraicGeometry.Sites.Fpqc
 
 /-!
 # Fpqc cover from a field extension
@@ -12,6 +14,8 @@ Source: Stacks Project, Topologies, Definition 34.9.1 (Tag 022B) and Lemma 34.9.
 (Tag 03L7); Algebra, Definition 10.39.1 (Tag 00HB)
 (blueprint: lem-pc-field-extension-fpqc-cover).
 -/
+
+@[expose] public section
 
 universe u
 

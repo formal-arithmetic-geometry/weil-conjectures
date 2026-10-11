@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group J1
 -/
-import Mathlib.AlgebraicGeometry.Limits
-import Mathlib.CategoryTheory.Limits.Constructions.Over.Basic
-import Mathlib.CategoryTheory.Limits.Over
+module
+
+public import Mathlib.AlgebraicGeometry.Limits
+public import Mathlib.CategoryTheory.Limits.Constructions.Over.Basic
+public import Mathlib.CategoryTheory.Limits.Over
 
 /-!
 # Iterated fibre products of a finite coproduct
@@ -13,6 +15,8 @@ import Mathlib.CategoryTheory.Limits.Over
 Source: Stacks Project, Schemes, Tags 01JB and 01JC, and Section 26.17
 (blueprint: lem-sc-etale-fibre-product-coproduct).
 -/
+
+@[expose] public section
 
 universe u v
 

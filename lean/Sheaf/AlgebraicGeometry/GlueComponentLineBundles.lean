@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-import Sheaf.AlgebraicGeometry.Ample
-import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+public import Sheaf.AlgebraicGeometry.Ample
+public import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
 
 /-!
 # Gluing invertible modules and sections across components
@@ -13,6 +15,8 @@ import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
 Source: literature/stacks-project/varieties.tex, Varieties Lemma 09NE
 (varieties-lemma-glue-invertible-sheaves) (blueprint: lem-sc-glue-component-line-bundles).
 -/
+
+@[expose] public section
 
 universe u v
 

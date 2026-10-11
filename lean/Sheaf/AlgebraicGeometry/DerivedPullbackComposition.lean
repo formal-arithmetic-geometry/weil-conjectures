@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group G1
 -/
-import Sheaf.AlgebraicGeometry.DerivedPullback
-import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
+module
+
+public import Sheaf.AlgebraicGeometry.DerivedPullback
+public import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
 
 /-!
 # Composition and coherence of derived pullbacks
@@ -12,6 +14,8 @@ import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
 Source: Stacks Project, Cohomology, Lemma 20.27.2, Tag 0D5S
 (blueprint: lem-pc-ringed-spaces-derived-pullback-composition).
 -/
+
+@[expose] public section
 
 universe u₁ w₁
 

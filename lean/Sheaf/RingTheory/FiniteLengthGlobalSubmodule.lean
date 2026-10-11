@@ -3,11 +3,13 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group G1
 -/
-import Mathlib.RingTheory.Noetherian.Defs
-import Mathlib.RingTheory.KrullDimension.Basic
-import Mathlib.RingTheory.Length
-import Mathlib.RingTheory.Localization.FractionRing
-import Mathlib.RingTheory.QuotSMulTop
+module
+
+public import Mathlib.RingTheory.Noetherian.Defs
+public import Mathlib.RingTheory.KrullDimension.Basic
+public import Mathlib.RingTheory.Length
+public import Mathlib.RingTheory.Localization.FractionRing
+public import Mathlib.RingTheory.QuotSMulTop
 
 /-!
 # Global finite length for a fraction-field submodule
@@ -15,6 +17,8 @@ import Mathlib.RingTheory.QuotSMulTop
 Source: Stacks Project, Algebra, Tag 00PF, `lemma-finite-length-global`
 (blueprint: lem-sc-finite-length-global-submodule).
 -/
+
+@[expose] public section
 
 universe u v
 

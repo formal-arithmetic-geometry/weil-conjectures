@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import Mathlib.AlgebraicGeometry.Morphisms.Etale
-import Sheaf.AlgebraicGeometry.BaseChangeConventions
-import WeilConjectures.Mathlib.Topology.KrullDimension
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.Etale
+public import Sheaf.AlgebraicGeometry.BaseChangeConventions
+public import WeilConjectures.Mathlib.Topology.KrullDimension
 
 /-!
 # Étale near a point smooth of fibre dimension zero
@@ -13,6 +15,8 @@ import WeilConjectures.Mathlib.Topology.KrullDimension
 Source: Stacks Project, Tag 0A43, final sentence of the proof; Tags 02G1, 02G2 and
 02GI (blueprint: lem-weil-pbc-etale-near-point-smooth-zero-fibre-dimension).
 -/
+
+@[expose] public section
 
 universe u
 

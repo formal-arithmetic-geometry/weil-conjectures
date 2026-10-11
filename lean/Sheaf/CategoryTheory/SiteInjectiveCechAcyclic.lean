@@ -2,8 +2,10 @@
 Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license.
 -/
-import Sheaf.CategoryTheory.SiteCechComplex
-import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
+module
+
+public import Sheaf.CategoryTheory.SiteCechComplex
+public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 
 /-!
 # Čech acyclicity of injective sheaves on a site
@@ -11,6 +13,8 @@ import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 Source: Stacks Project, Cohomology on Sites, Tags 03AW, 03F6, 03AS, 03AT, 03AU,
 03AN (blueprint: lem-weil-pbc-site-injective-cech-acyclic).
 -/
+
+@[expose] public section
 
 universe u v w
 

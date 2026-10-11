@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group G1
 -/
-import Sheaf.CategoryTheory.DerivedCategory.EssentiallyConstantPro
-import Mathlib.CategoryTheory.Limits.Types.ColimitType
+module
+
+public import Sheaf.CategoryTheory.DerivedCategory.EssentiallyConstantPro
+public import Mathlib.CategoryTheory.Limits.Types.ColimitType
 
 /-! # Hom out of an essentially constant pro-diagram
 
@@ -12,6 +14,8 @@ Source: Stacks Project, Categories, Definition 05PU(2), Lemma 05PZ;
 Derived Categories, Lemma 0FND, sixth equality
 (blueprint: lem-pc-essentially-constant-pro-hom-colimit).
 -/
+
+@[expose] public section
 
 universe uJ vJ uC vC
 

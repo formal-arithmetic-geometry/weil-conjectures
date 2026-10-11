@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+public import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
 
 /-!
 # Thickenings of schemes
@@ -16,6 +18,8 @@ For any of the predicates below, a thickening over `S` additionally has
 `[T.Over S]`, `[T'.Over S]`, and `[i.IsOver S]`. A thickening of affine
 schemes additionally has `[IsAffine T]` and `[IsAffine T']`.
 -/
+
+@[expose] public section
 
 universe u
 

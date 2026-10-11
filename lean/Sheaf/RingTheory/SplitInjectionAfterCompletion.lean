@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group P1
 -/
-import Mathlib.RingTheory.Noetherian.Defs
-import Mathlib.RingTheory.Jacobson.Ideal
-import Mathlib.LinearAlgebra.Quotient.Basic
-import Mathlib.RingTheory.Ideal.Operations
+module
+
+public import Mathlib.RingTheory.Noetherian.Defs
+public import Mathlib.RingTheory.Jacobson.Ideal
+public import Mathlib.LinearAlgebra.Quotient.Basic
+public import Mathlib.RingTheory.Ideal.Operations
 
 /-!
 # Split injections detected modulo arbitrarily high ideal powers
@@ -14,6 +16,8 @@ import Mathlib.RingTheory.Ideal.Operations
 Source: Stacks Project, Algebra, Lemma 10.74.1, Tag 02HO
 (blueprint: lem-weil-pbc-split-injection-after-completion).
 -/
+
+@[expose] public section
 
 universe u v w
 

@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import WeilConjectures.ConstructibleSheaf.Defs
-import Mathlib.CategoryTheory.Sites.ConstantSheaf
+module
+
+public import WeilConjectures.ConstructibleSheaf.Defs
+public import Mathlib.CategoryTheory.Sites.ConstantSheaf
 
 /-!
 # Generic constancy of a subsheaf of a constant finite sheaf
@@ -12,6 +14,8 @@ import Mathlib.CategoryTheory.Sites.ConstantSheaf
 Source: Stacks Project, Tag 03RY, Proposition 59.74.1(3), with Tag 03RZ,
 Lemma 59.71.6 (blueprint: lem-weil-pbc-constant-subsheaf-generic).
 -/
+
+@[expose] public section
 
 universe u
 

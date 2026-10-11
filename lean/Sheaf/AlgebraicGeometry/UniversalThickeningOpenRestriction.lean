@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import Sheaf.AlgebraicGeometry.FormallyUnramifiedConormal
+module
+
+public import Sheaf.AlgebraicGeometry.FormallyUnramifiedConormal
 
 /-!
 # Universal thickenings and conormal sheaves on open subschemes
@@ -11,6 +13,8 @@ import Sheaf.AlgebraicGeometry.FormallyUnramifiedConormal
 Source: Stacks Project, More on Morphisms, Lemma 04FA and Lemma 02HC
 (blueprint: lem-weil-pbc-universal-thickening-open-restriction).
 -/
+
+@[expose] public section
 
 universe u
 

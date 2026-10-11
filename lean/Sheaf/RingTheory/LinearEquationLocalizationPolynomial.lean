@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: J1
 -/
-import Mathlib.Algebra.MvPolynomial.Eval
-import Mathlib.RingTheory.Ideal.Quotient.Operations
-import Mathlib.RingTheory.Localization.Away.Basic
+module
+
+public import Mathlib.Algebra.MvPolynomial.Eval
+public import Mathlib.RingTheory.Ideal.Quotient.Operations
+public import Mathlib.RingTheory.Localization.Away.Basic
 
 /-!
 # Localizing a polynomial algebra with one linear relation
@@ -13,6 +15,8 @@ import Mathlib.RingTheory.Localization.Away.Basic
 Source: Stacks Project, Smoothing Ring Maps, proof of Lemma 16.2.8, Tag 07EU,
 `lemma-final-solve` (blueprint: lem-weil-pbc-linear-equation-localization-polynomial).
 -/
+
+@[expose] public section
 
 universe u
 

@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import WeilConjectures.AlgebraicGeometry.Modules.Invertible
-import Mathlib.Algebra.Module.LocalizedModule.Basic
-import Mathlib.Topology.Sheaves.CommRingCat
+module
+
+public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
+public import Mathlib.Algebra.Module.LocalizedModule.Basic
+public import Mathlib.Topology.Sheaves.CommRingCat
 
 /-!
 # Meromorphic modules
@@ -16,6 +18,8 @@ Source: Stacks Project, Divisors, Tags 01X2 and 01X4
 We sheafify the localizations of module sections at sections regular at every stalk.
 For an invertible module this is canonically the tensor product with the meromorphic sheaf.
 -/
+
+@[expose] public section
 
 set_option backward.isDefEq.respectTransparency false
 

@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import Mathlib.AlgebraicGeometry.ResidueField
-import Mathlib.AlgebraicGeometry.AffineScheme
-import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
+module
+
+public import Mathlib.AlgebraicGeometry.ResidueField
+public import Mathlib.AlgebraicGeometry.AffineScheme
+public import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
 
 /-! # Morphisms from a field spectrum and residue fields
 
@@ -19,6 +21,8 @@ Local rings and Proposition 00CT (blueprint: lem-weil-pbc-spec-field-point-resid
 * `spec_field_point_residue_field_map`: the kernel point and unique residue-field extension.
 * `spec_field_point_residue_field_generic`: the generic-point fraction-field case.
 -/
+
+@[expose] public section
 
 open CategoryTheory
 

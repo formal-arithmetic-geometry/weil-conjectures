@@ -3,12 +3,14 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
-import Mathlib.Algebra.Category.Grp.FilteredColimits
-import Mathlib.Algebra.Homology.ExactSequence
-import Mathlib.CategoryTheory.Sites.Spaces
+module
+
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
+public import Mathlib.Algebra.Category.Grp.FilteredColimits
+public import Mathlib.Algebra.Homology.ExactSequence
+public import Mathlib.CategoryTheory.Sites.Spaces
 
 /-!
 # Internal Hom and a finite free presentation
@@ -25,6 +27,8 @@ Finite sums are represented by finite products, whose evaluations are the compon
 modules of tuples. Their projections specify both coordinate formulas without choosing
 an additional model of the internal Hom or the finite sum.
 -/
+
+@[expose] public section
 
 universe u
 

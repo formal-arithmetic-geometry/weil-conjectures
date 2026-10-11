@@ -3,13 +3,18 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group G1
 -/
-import Sheaf.AlgebraicGeometry.ClosedImmersionConormalFunctorial
-import Mathlib.AlgebraicGeometry.Morphisms.Flat
+module
+
+public import Sheaf.AlgebraicGeometry.ClosedImmersionConormalFunctorial
+public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 
 /-! # Conormal sheaves under flat base change
 Source: Stacks Project, Morphisms, Lemma 0473 (morphisms-lemma-conormal-functorial-flat),
 case of closed immersions (blueprint: lem-weil-pbc-closed-immersion-conormal-flat-base-change).
 -/
+
+@[expose] public section
+
 universe uc
 open CategoryTheory CategoryTheory.Limits Opposite TopologicalSpace
 namespace AlgebraicGeometry.Scheme.Modules

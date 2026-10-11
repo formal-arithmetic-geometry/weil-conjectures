@@ -3,11 +3,13 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group N1
 -/
-import Mathlib.Algebra.Homology.HomotopyCategory.KInjective
-import Mathlib.Algebra.Homology.DerivedCategory.Basic
-import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Basic
-import Mathlib.CategoryTheory.Abelian.FunctorCategory
-import Sheaf.CategoryTheory.Limits.TowerTransitionEndomorphism
+module
+
+public import Mathlib.Algebra.Homology.HomotopyCategory.KInjective
+public import Mathlib.Algebra.Homology.DerivedCategory.Basic
+public import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Basic
+public import Mathlib.CategoryTheory.Abelian.FunctorCategory
+public import Sheaf.CategoryTheory.Limits.TowerTransitionEndomorphism
 
 /-! # Roos complexes for inverse limits
 
@@ -15,6 +17,8 @@ Source: Stacks Project, derived.tex, Tag 070M (lemma-difficulty-K-injectives),
 extended to arbitrary K-injective towers by the node's split-envelope argument
 (blueprint: lem-weil-derived-limit-roos-complex).
 -/
+
+@[expose] public section
 
 universe u v w
 

@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group G1
 -/
-import Mathlib.Algebra.Module.Torsion.PrimaryComponent
+module
+
+public import Mathlib.Algebra.Module.Torsion.PrimaryComponent
 
 /-!
 # The quotient by ideal-power torsion has no ideal torsion
@@ -11,6 +13,8 @@ import Mathlib.Algebra.Module.Torsion.PrimaryComponent
 Source: Stacks Project, More on Algebra, Lemma 05EB (lemma-divide-by-torsion), part (1)
 (blueprint: lem-weil-pbc-quotient-by-power-torsion-no-torsion).
 -/
+
+@[expose] public section
 
 universe u v
 

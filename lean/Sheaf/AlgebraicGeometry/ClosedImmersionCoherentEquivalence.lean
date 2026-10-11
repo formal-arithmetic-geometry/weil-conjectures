@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group U1
 -/
-import Sheaf.AlgebraicGeometry.CoherentFormalModule
-import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
-import Mathlib.CategoryTheory.Whiskering
-import WeilConjectures.Mathlib.AlgebraicGeometry.Noetherian
+module
+
+public import Sheaf.AlgebraicGeometry.CoherentFormalModule
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
+public import Mathlib.CategoryTheory.Whiskering
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Noetherian
 
 /-! # Coherent modules and adic systems on a closed subscheme
 
@@ -20,6 +22,8 @@ Source: Stacks Project, Cohomology of Schemes, Tags 087T, 088A, 088C, and 088E
 * `closedImmersion_coherentFormal_equivalence`: the termwise equivalence and its natural
   compatibility with completion, including the canonical quotient projections.
 -/
+
+@[expose] public section
 
 universe u
 

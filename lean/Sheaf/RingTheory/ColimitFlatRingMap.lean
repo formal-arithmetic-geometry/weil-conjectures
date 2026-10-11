@@ -1,13 +1,17 @@
-import Mathlib.RingTheory.RingHom.Flat
-import Mathlib.RingTheory.FinitePresentation
-import Mathlib.RingTheory.TensorProduct.Basic
-import Mathlib.Algebra.Category.Ring.Colimits
+module
+
+public import Mathlib.RingTheory.RingHom.Flat
+public import Mathlib.RingTheory.FinitePresentation
+public import Mathlib.RingTheory.TensorProduct.Basic
+public import Mathlib.Algebra.Category.Ring.Colimits
 
 /-! # Flatness at a stage of a directed colimit
 
 Source: literature/stacks-project/algebra.tex; literature/stacks-project/limits.tex,
 Lemma Tags 02JO and 04AI (blueprint: lem-weil-pbc-colimit-flat-ring-map).
 -/
+
+@[expose] public section
 
 open CategoryTheory CategoryTheory.Limits
 

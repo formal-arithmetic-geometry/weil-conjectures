@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import Mathlib.LinearAlgebra.Matrix.Determinant.Basic
-import Mathlib.Data.Finset.Sort
-import Mathlib.Data.Fintype.Powerset
-import Mathlib.RingTheory.Ideal.Span
+module
+
+public import Mathlib.LinearAlgebra.Matrix.Determinant.Basic
+public import Mathlib.Data.Finset.Sort
+public import Mathlib.Data.Fintype.Powerset
+public import Mathlib.RingTheory.Ideal.Span
 
 /-!
 # Scalar left inverses and maximal minors
@@ -14,6 +16,8 @@ import Mathlib.RingTheory.Ideal.Span
 Source: Stacks Project, Algebra, Lemma 07DQ and the Cauchy–Binet formula 0F0K
 (blueprint: lem-weil-pbc-matrix-left-inverse-minors).
 -/
+
+@[expose] public section
 
 universe u
 

@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar
-import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusAdjunction
-import Mathlib.CategoryTheory.Shift.Adjunction
+module
+
+public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusAdjunction
+public import Mathlib.CategoryTheory.Shift.Adjunction
 
 /-!
 # Shift compatibility of the bounded below derived étale adjunction
@@ -18,6 +20,8 @@ resolution-comparison structure on `rightDerivedFunctorPlus`, not structures tra
 from an abstract adjunction. `Adjunction.CommShift ℤ` asserts compatibility of both the
 unit and counit, including all iterated integer shifts.
 -/
+
+@[expose] public section
 
 universe u
 

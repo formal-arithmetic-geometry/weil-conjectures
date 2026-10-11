@@ -1,6 +1,8 @@
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Mathlib.Algebra.Homology.ShortComplex.ShortExact
-import Sheaf.CategoryTheory.SiteCechComplex
+module
+
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
+public import Sheaf.CategoryTheory.SiteCechComplex
 
 /-!
 # Surjectivity of module sections from vanishing Čech H¹
@@ -8,6 +10,8 @@ import Sheaf.CategoryTheory.SiteCechComplex
 Source: Stacks Project, Cohomology of Sheaves, Lemma 01EU (lemma-ses-cech-h1).
 (blueprint: lem-weil-pbc-module-ses-cech-h1-surjective).
 -/
+
+@[expose] public section
 
 universe u v
 

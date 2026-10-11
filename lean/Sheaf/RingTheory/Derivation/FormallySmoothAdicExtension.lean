@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import Mathlib.RingTheory.AdicCompletion.Basic
-import Mathlib.RingTheory.Derivation.Basic
-import Sheaf.RingTheory.FormallySmoothAdic
+module
+
+public import Mathlib.RingTheory.AdicCompletion.Basic
+public import Mathlib.RingTheory.Derivation.Basic
+public import Sheaf.RingTheory.FormallySmoothAdic
 
 /-!
 # Extending derivations along formally smooth adic maps
@@ -14,6 +16,8 @@ Source: Stacks Project, More on Algebra, Lemma 15.50.1 (Tag 07PL), using
 Lemma 15.38.5 (Tag 07NJ), in the generality of its dual-number proof
 (blueprint: lem-weil-pbc-fs-adic-lift-derivation).
 -/
+
+@[expose] public section
 
 universe u v
 

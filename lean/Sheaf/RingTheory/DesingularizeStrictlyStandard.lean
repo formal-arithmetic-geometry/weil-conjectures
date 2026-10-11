@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Sheaf.RingTheory.StrictlyStandardElement
-import Sheaf.RingTheory.SingularIdeal
-import Mathlib.RingTheory.Noetherian.Defs
-import Mathlib.RingTheory.Ideal.Quotient.Operations
+module
+
+public import Sheaf.RingTheory.StrictlyStandardElement
+public import Sheaf.RingTheory.SingularIdeal
+public import Mathlib.RingTheory.Noetherian.Defs
+public import Mathlib.RingTheory.Ideal.Quotient.Operations
 
 /-!
 # Desingularization along a strictly standard element
@@ -14,6 +16,8 @@ import Mathlib.RingTheory.Ideal.Quotient.Operations
 Source: Stacks Project, Smoothing Ring Maps, Lemma Tag 07CT
 (blueprint: lem-weil-pbc-popescu-desingularize-strictly-standard).
 -/
+
+@[expose] public section
 
 universe u v w z
 

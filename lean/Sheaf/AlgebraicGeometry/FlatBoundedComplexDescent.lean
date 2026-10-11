@@ -3,11 +3,13 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
-import Mathlib.Algebra.Homology.HomologicalComplex
-import Mathlib.RingTheory.Noetherian.Basic
-import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage
-import Sheaf.AlgebraicGeometry.BaseChangeConventions
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
+public import Mathlib.Algebra.Homology.HomologicalComplex
+public import Mathlib.RingTheory.Noetherian.Basic
+public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage
+public import Sheaf.AlgebraicGeometry.BaseChangeConventions
 
 /-!
 # Descent of bounded finitely presented flat complexes
@@ -15,6 +17,8 @@ import Sheaf.AlgebraicGeometry.BaseChangeConventions
 Source: Stacks Project, `literature/stacks-project/limits.tex`, Lemmas 32.10.2
 and 32.10.4 (Tags 01ZR and 05LY) (blueprint: lem-pc-flat-bounded-complex-descent).
 -/
+
+@[expose] public section
 
 universe u
 

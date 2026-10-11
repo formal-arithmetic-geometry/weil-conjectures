@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group J1
 -/
-import Sheaf.AlgebraicGeometry.PseudoCoherentComplex
+module
+
+public import Sheaf.AlgebraicGeometry.PseudoCoherentComplex
 
 /-! # Quasi-coherent cohomology of pseudo-coherent complexes
 
@@ -11,6 +13,8 @@ Source: Stacks Project, Derived Categories of Schemes, Tag 08E5 (lemma-pseudo-co
 invoked in the first sentence of the proof of Tag 08EE
 (blueprint: lem-sc-pseudo-coherent-qcoh).
 -/
+
+@[expose] public section
 
 universe u w
 

@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import Mathlib.RingTheory.Ideal.Colon
-import Mathlib.RingTheory.Ideal.MinimalPrime.Basic
-import Mathlib.RingTheory.Finiteness.Defs
+module
+
+public import Mathlib.RingTheory.Ideal.Colon
+public import Mathlib.RingTheory.Ideal.MinimalPrime.Basic
+public import Mathlib.RingTheory.Finiteness.Defs
 
 /-!
 # Associated and weakly associated finitely generated primes
@@ -17,6 +19,8 @@ Association here means equality with an element's annihilator, rather than equal
 radical as in Mathlib's `IsAssociatedPrime`. Weak association means membership in the minimal
 primes over that annihilator. Both notions are written using Mathlib's existing ideal operations.
 -/
+
+@[expose] public section
 
 universe u v
 

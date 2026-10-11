@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group G1
 -/
-import Mathlib.AlgebraicGeometry.Modules.Tilde
-import WeilConjectures.AlgebraicGeometry.Modules.TensorSection
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
+module
+
+public import Mathlib.AlgebraicGeometry.Modules.Tilde
+public import WeilConjectures.AlgebraicGeometry.Modules.TensorSection
+public import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 
 /-!
 # Tensor products of tilde modules on an affine scheme
@@ -13,6 +15,8 @@ import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 Source: Stacks Project, Schemes, Tags 01I7 and 01I8(1), second proof
 (blueprint: lem-weil-pbc-affine-tilde-tensor).
 -/
+
+@[expose] public section
 
 universe u
 

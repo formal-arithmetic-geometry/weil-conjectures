@@ -1,6 +1,8 @@
-import Mathlib.RingTheory.FiniteType
-import Mathlib.RingTheory.LocalRing.ResidueField.Fiber
-import WeilConjectures.Mathlib.Topology.KrullDimension
+module
+
+public import Mathlib.RingTheory.FiniteType
+public import Mathlib.RingTheory.LocalRing.ResidueField.Fiber
+public import WeilConjectures.Mathlib.Topology.KrullDimension
 
 /-!
 # Fibre dimension is bounded on a neighbourhood
@@ -8,6 +10,8 @@ import WeilConjectures.Mathlib.Topology.KrullDimension
 Source: Stacks Project, Algebra, Lemma Tag 00QH (lemma-dimension-fibres-bounded-open-upstairs)
 (blueprint: lem-weil-pbc-fibre-dimension-bounded-open-upstairs).
 -/
+
+@[expose] public section
 
 universe u v
 

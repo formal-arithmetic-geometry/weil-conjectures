@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Mathlib.Topology.Sheaves.Stalks
-import Mathlib.Topology.LocallyConstant.Basic
+module
+
+public import Mathlib.Topology.Sheaves.Stalks
+public import Mathlib.Topology.LocallyConstant.Basic
 
 /-!
 # Evaluation of germs of locally constant maps
@@ -12,6 +14,8 @@ import Mathlib.Topology.LocallyConstant.Basic
 Source: Stacks Project, Sheaves on Spaces, Definition 6.7.4 (Tag 006W) and
 Example 6.11.3 (Tag 007B) (blueprint: lem-weil-pbc-locally-constant-germ-evaluation).
 -/
+
+@[expose] public section
 
 set_option autoImplicit false
 

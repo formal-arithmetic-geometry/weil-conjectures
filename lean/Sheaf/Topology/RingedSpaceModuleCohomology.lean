@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import Sheaf.Topology.RingedSpaceModuleEnoughInjectives
-import Mathlib.CategoryTheory.Abelian.RightDerived
+module
+
+public import Sheaf.Topology.RingedSpaceModuleEnoughInjectives
+public import Mathlib.CategoryTheory.Abelian.RightDerived
 
 /-! # Cohomology of modules on a ringed space
 
@@ -37,6 +39,8 @@ a scheme. Both agree with `moduleCohomology` only through the theorem that injec
 `O_X`-modules are `Γ`-acyclic as abelian sheaves (Stacks, Tag 01E3); here the definition is
 the source's, in `Mod(O_X)`.
 -/
+
+@[expose] public section
 
 universe u
 

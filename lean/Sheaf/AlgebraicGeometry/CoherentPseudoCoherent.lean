@@ -3,15 +3,19 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Sheaf.AlgebraicGeometry.Coherent
-import Sheaf.AlgebraicGeometry.PseudoCoherentComplex
-import Mathlib.AlgebraicGeometry.Noetherian
+module
+
+public import Sheaf.AlgebraicGeometry.Coherent
+public import Sheaf.AlgebraicGeometry.PseudoCoherentComplex
+public import Mathlib.AlgebraicGeometry.Noetherian
 
 /-! # Coherent modules are pseudo-coherent on Noetherian schemes
 
 Source: Stacks Project, Derived Categories of Schemes, Tag 08E8,
 `lemma-identify-pseudo-coherent-noetherian` (blueprint: lem-sc-coherent-pseudo-coherent).
 -/
+
+@[expose] public section
 
 universe u w
 

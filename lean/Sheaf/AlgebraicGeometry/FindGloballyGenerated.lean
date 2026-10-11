@@ -3,11 +3,13 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import Mathlib.AlgebraicGeometry.Noetherian
-import Mathlib.AlgebraicGeometry.Morphisms.Separated
-import Mathlib.Topology.KrullDimension
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.Generators
-import Sheaf.AlgebraicGeometry.Ample
+module
+
+public import Mathlib.AlgebraicGeometry.Noetherian
+public import Mathlib.AlgebraicGeometry.Morphisms.Separated
+public import Mathlib.Topology.KrullDimension
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Generators
+public import Sheaf.AlgebraicGeometry.Ample
 
 /-! # Globally generated invertible modules with a prescribed affine section locus
 
@@ -15,6 +17,8 @@ Source: Stacks Project, Varieties Lemma 09NB (varieties-lemma-find-globally-gene
 specialized to Noetherian integral separated schemes of dimension one
 (blueprint: lem-sc-find-globally-generated).
 -/
+
+@[expose] public section
 
 universe u
 

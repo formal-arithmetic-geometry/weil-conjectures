@@ -3,16 +3,20 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group G1
 -/
-import Mathlib.RingTheory.RingHom.Flat
-import Mathlib.RingTheory.FinitePresentation
-import Mathlib.RingTheory.LocalRing.ResidueField.Fiber
-import Mathlib.Topology.Irreducible
+module
+
+public import Mathlib.RingTheory.RingHom.Flat
+public import Mathlib.RingTheory.FinitePresentation
+public import Mathlib.RingTheory.LocalRing.ResidueField.Fiber
+public import Mathlib.Topology.Irreducible
 
 /-! # Flat finite-presentation maps with dense irreducible fibres
 
 Source: Stacks Project, Algebra, Lemma 00I6 (algebra-lemma-flat-fibres-irreducible)
 (blueprint: lem-weil-pbc-flat-fibres-irreducible)
 -/
+
+@[expose] public section
 
 /--
 For a flat finitely presented algebra over an irreducible ring, irreducibility of

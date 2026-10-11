@@ -1,5 +1,7 @@
-import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
-import Mathlib.CategoryTheory.Sites.ConstantSheaf
+module
+
+public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
+public import Mathlib.CategoryTheory.Sites.ConstantSheaf
 
 /-!
 # Integral covers with trivial étale cohomology
@@ -8,6 +10,8 @@ Source: Stacks Project, Lemma 09ZD (label `lemma-integral-cover-trivial-cohomolo
 part (1), etale-cohomology.tex line 14467
 (blueprint: lem-weil-pbc-integral-cover-trivial-cohomology).
 -/
+
+@[expose] public section
 
 universe u
 

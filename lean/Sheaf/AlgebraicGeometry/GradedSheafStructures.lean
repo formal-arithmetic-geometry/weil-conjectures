@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group T1
 -/
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Mathlib.Algebra.BigOperators.Group.Finset.Basic
+module
+
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Mathlib.Algebra.BigOperators.Group.Finset.Basic
 
 /-! # Homogeneous algebra and module operations on sheaves
 
@@ -16,6 +18,8 @@ by the sheaf coproduct universal property gives the algebra and module on the di
 `HEq` expresses equality of homogeneous sections when their degrees differ only by an
 associativity or unit identity in the natural numbers.
 -/
+
+@[expose] public section
 
 universe ug
 

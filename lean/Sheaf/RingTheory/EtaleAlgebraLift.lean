@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Sheaf.RingTheory.JacobianPresentationLift
-import Mathlib.RingTheory.Etale.Basic
+module
+
+public import Sheaf.RingTheory.JacobianPresentationLift
+public import Mathlib.RingTheory.Etale.Basic
 
 /-!
 # Étale algebras lift across arbitrary quotients
@@ -18,6 +20,8 @@ sk-prop-sf-open-closed-triangle (blueprint: lem-exc-etale-algebra-lift).
   lifted quotient is étale of finite presentation, and its specified reduction is an isomorphism.
 - `Algebra.exists_etale_coefficientLift`: every étale quotient algebra admits such a lift.
 -/
+
+@[expose] public section
 
 universe u v
 

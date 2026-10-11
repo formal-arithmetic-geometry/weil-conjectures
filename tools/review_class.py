@@ -4,6 +4,21 @@
 Usage:  tools/review_class.py <group> <item>      prints "AUTO" or "FULL: <reason>"
         tools/review_class.py list                every delivery branch with its class
 
+Stage 3 (decision of the human, 2026-10-12: no Claude reviewer in stage 3). An item that is a module of the library
+(Sheaf.<...> or WeilConjectures.<...>) is classified by tools/stage3_delivery.py and gets one of two classes:
+  AUTO   the delivery changes only proofs of the item's module: one module, no node file, no change record, nothing
+         other modules see changed (leanindex.interface_changes), no declaration added (public), removed or restated,
+         no public import changed in a module with importers, no removed import of a unit-route module, no `sorry`
+         left in a declaration it adds or rewrites, no axiom/unsafe/extern/opaque, no STATEMENT-DISPUTED, not the
+         repair of a return, no failed automatic landing of this head. Landed by ~/cc1/autoland.py with
+         tools/merge_delivery.py <G> <module> --stage 3 --reviewer AUTO --head <sha> --verdict PASS, which compiles
+         every module with the axiom/sorry probe and lands with land.sh; the landing must be a proof landing.
+  CODEX  everything else, with the reasons (a statement, a definition, an import other modules see, nodes, a change
+         record, several modules, a failed static check, ...): read by the independent Codex reviewer on the other
+         machine, whose verdict a script executes with tools/merge_delivery.py <G> <module> --stage 3 --reviewer <ID>
+         --head <sha> or tools/merge_delivery.py return <G> <module> <reasons> (both with SHEAF_LEAD=L-only).
+`FULL` is not used for a stage-3 delivery. Stage 2, below, is unchanged.
+
 FULL (read by a reviewer sub-agent of the lead before it lands), when any of these holds:
   the item is a definition; the delivery adds a node (a new definition node) or changes another existing node (a
   dependency module); the item's statement is corrected (statement differs from sheaf-dag, or statement_change added);
@@ -28,6 +43,20 @@ def show(ref, path):
 def classify(g: str, item: str):
     br = f"deliver/{g}/{item}"; head = git("rev-parse", br).strip()
     if not head: return "NONE", "no such branch", ""
+    if "." in item:   # a stage-3 item is a module; a stage-1/2 item is a node id (no dot)
+        f3 = ROOT / "local" / "autoland-failed.tsv"
+        if f3.exists():
+            for l in f3.read_text().split("\n"):
+                p = l.split("\t")
+                if len(p) >= 3 and p[0] == g and p[1] == item and head.startswith(p[2]):
+                    return "CODEX", "automatic landing failed: " + (p[3] if len(p) > 3 else ""), head
+        sys.path.insert(0, str(ROOT / "tools")); import stage2_delivery as s2, stage3_delivery as s3
+        try:
+            D = s3.read_delivery(s2.Git(ROOT), br, "sheaf-dag", g, item)
+            why = s3.classify(D, g, item)
+        except Exception as e:   # a delivery the tool cannot read needs a reader
+            return "CODEX", "the delivery could not be read: " + repr(e)[:200], head
+        return ("AUTO", "", head) if not why else ("CODEX", "; ".join(why), head)
     base = git("merge-base", "sheaf-dag", br).strip()
     ch = [l.split("\t") for l in git("diff", "--name-status", f"{base}..{br}").strip().split("\n") if l]
     nodes = [(c[0], c[-1]) for c in ch if c[-1].startswith("dag/nodes/") and c[-1].endswith(".json")]

@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import Sheaf.FieldTheory.SeparableExtension
-import Mathlib.RingTheory.Smooth.Basic
-import Mathlib.RingTheory.Localization.FractionRing
+module
+
+public import Sheaf.FieldTheory.SeparableExtension
+public import Mathlib.RingTheory.Smooth.Basic
+public import Mathlib.RingTheory.Localization.FractionRing
 
 /-!
 # A separable extension as the fraction field of a smooth algebra
@@ -14,6 +16,8 @@ Source: Stacks Project, Algebra, Lemma Tag 037X (lemma-localization-smooth-separ
 implication “separable => localization of a smooth k-algebra” (blueprint:
 lem-weil-pbc-separable-extension-fraction-field-of-smooth-algebra).
 -/
+
+@[expose] public section
 
 universe u v
 

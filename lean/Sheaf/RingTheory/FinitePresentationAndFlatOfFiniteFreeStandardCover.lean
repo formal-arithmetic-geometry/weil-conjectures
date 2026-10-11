@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group G1
 -/
-import Mathlib.Algebra.Module.LocalizedModule.Basic
-import Mathlib.Algebra.Module.FinitePresentation
-import Mathlib.RingTheory.Flat.Basic
+module
+
+public import Mathlib.Algebra.Module.LocalizedModule.Basic
+public import Mathlib.Algebra.Module.FinitePresentation
+public import Mathlib.RingTheory.Flat.Basic
 
 /-!
 # Finite presentation and flatness from a finite standard-open free cover
@@ -14,6 +16,8 @@ Source: Stacks Project, Algebra, Lemma Tag 00NX, implications (7) → (4) → (5
 using Tags 00EO (3) and 00HT (5)
 (blueprint: lem-sc-affine-standard-cover-finite-presentation-flat).
 -/
+
+@[expose] public section
 
 universe u v
 

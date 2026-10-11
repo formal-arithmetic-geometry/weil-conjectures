@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group G1
 -/
-import Mathlib.RingTheory.Regular.RegularSequence
+module
+
+public import Mathlib.RingTheory.Regular.RegularSequence
 
 /-!
 # Conormal intersection for a regular ideal quotient
@@ -11,6 +13,8 @@ import Mathlib.RingTheory.Regular.RegularSequence
 Source: Stacks Project, More on Algebra, Tags 07CX and 0666, specialized using Tags 062F
 and 0CEM (blueprint: lem-weil-pbc-conormal-intersection-regular-quotient).
 -/
+
+@[expose] public section
 
 universe u
 

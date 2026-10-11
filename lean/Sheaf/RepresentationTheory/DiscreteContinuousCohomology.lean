@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF worker C1
 -/
-import Sheaf.RepresentationTheory.ContinuousCochainsDerivedInvariants
+module
+
+public import Sheaf.RepresentationTheory.ContinuousCochainsDerivedInvariants
 
 /-!
 # Continuous cohomology of discrete profinite modules
@@ -11,6 +13,8 @@ import Sheaf.RepresentationTheory.ContinuousCochainsDerivedInvariants
 Source: the blueprint, chapter `sec-curve-estimates`, unit `sk-prop-h2`,
 (blueprint: def-exc-continuous-cohomology); Stacks Project, Tags 04JP, 04JR and 0DVG.
 -/
+
+@[expose] public section
 
 universe u v w
 

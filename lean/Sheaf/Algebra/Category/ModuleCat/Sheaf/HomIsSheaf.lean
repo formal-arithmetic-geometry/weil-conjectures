@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.HomModule
+module
+
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
+public import Sheaf.Algebra.Category.ModuleCat.Sheaf.HomModule
 
 /-!
 # The internal Hom is a sheaf of modules
@@ -13,6 +15,8 @@ import Sheaf.Algebra.Category.ModuleCat.Sheaf.HomModule
 Source: Stacks Project, Modules on Sites, Sections 04TT and 03DD, Lemma 03EM
 and the internal-Hom restriction lemma (blueprint: lem-pur-sheaf-hom-is-sheaf).
 -/
+
+@[expose] public section
 
 universe v v₁ u₁ u
 

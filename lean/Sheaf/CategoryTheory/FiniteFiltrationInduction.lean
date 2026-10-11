@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import Sheaf.CategoryTheory.Filtration
+module
+
+public import Sheaf.CategoryTheory.Filtration
 
 /-!
 # Finite filtration induction
@@ -14,6 +16,8 @@ unit `sk-thm-properbasechange`, node `lem-sp-finite-filtration-induction`
 Definition 0121 (`definition-filtered`), the paragraph defining `gr` before Lemma 05SP,
 and Lemma 0127 (`lemma-characterize-strict`).
 -/
+
+@[expose] public section
 
 universe v u
 

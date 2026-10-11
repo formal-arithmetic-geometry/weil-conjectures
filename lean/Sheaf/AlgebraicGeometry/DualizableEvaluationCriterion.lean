@@ -1,11 +1,15 @@
-import Sheaf.AlgebraicGeometry.DerivedTensorStructure
-import Sheaf.AlgebraicGeometry.DerivedInternalHomAdjunction
+module
+
+public import Sheaf.AlgebraicGeometry.DerivedTensorStructure
+public import Sheaf.AlgebraicGeometry.DerivedInternalHomAdjunction
 
 /-! # Closed symmetric monoidal dualizability criterion
 
 Source: Stacks Project, Cohomology, Tag 0FPC
 (blueprint: lem-pc-dualizable-evaluation-criterion).
 -/
+
+@[expose] public section
 
 universe u w
 

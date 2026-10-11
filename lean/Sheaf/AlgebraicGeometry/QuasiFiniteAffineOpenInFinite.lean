@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import Sheaf.AlgebraicGeometry.QuasiFiniteMorphism
-import Mathlib.AlgebraicGeometry.Morphisms.Finite
-import Mathlib.AlgebraicGeometry.OpenImmersion
+module
+
+public import Sheaf.AlgebraicGeometry.QuasiFiniteMorphism
+public import Mathlib.AlgebraicGeometry.Morphisms.Finite
+public import Mathlib.AlgebraicGeometry.OpenImmersion
 
 /-!
 # A quasi-finite affine morphism embeds in a finite affine morphism
@@ -13,6 +15,8 @@ import Mathlib.AlgebraicGeometry.OpenImmersion
 Source: Stacks Project, Morphisms of Schemes, Lemma Tag 03GU, via Algebra, Lemma Tag 00QB
 (blueprint: lem-weil-pbc-quasi-finite-affine-open-in-finite).
 -/
+
+@[expose] public section
 
 universe u
 

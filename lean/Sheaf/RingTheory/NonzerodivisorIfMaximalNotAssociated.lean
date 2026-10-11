@@ -3,11 +3,13 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF contributors
 -/
-import Mathlib.RingTheory.LocalRing.MaximalIdeal.Basic
-import Mathlib.RingTheory.Noetherian.Defs
-import Mathlib.RingTheory.Finiteness.Defs
-import Mathlib.RingTheory.Ideal.AssociatedPrime.Basic
-import Mathlib.Algebra.Regular.SMul
+module
+
+public import Mathlib.RingTheory.LocalRing.MaximalIdeal.Basic
+public import Mathlib.RingTheory.Noetherian.Defs
+public import Mathlib.RingTheory.Finiteness.Defs
+public import Mathlib.RingTheory.Ideal.AssociatedPrime.Basic
+public import Mathlib.Algebra.Regular.SMul
 
 /-!
 # A nonzerodivisor in the maximal ideal
@@ -15,6 +17,8 @@ import Mathlib.Algebra.Regular.SMul
 Source: literature/stacks-project/algebra.tex, Algebra, Lemma Tag 00LL
 (blueprint: lem-weil-pbc-nonzerodivisor-if-maximal-not-associated).
 -/
+
+@[expose] public section
 
 universe u v
 

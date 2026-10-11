@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Mathlib.AlgebraicGeometry.Pullbacks
+module
+
+public import Mathlib.AlgebraicGeometry.Pullbacks
 
 /-!
 # Base change commutes with a fibre product
@@ -14,6 +16,8 @@ Tag 054P (blueprint: lem-pc-base-change-product).
 The statement records the canonical projection-compatible isomorphism between the base change
 of a fibre product of schemes over a field and the fibre product of the two base changed schemes.
 -/
+
+@[expose] public section
 
 universe u
 

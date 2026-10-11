@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import Mathlib.LinearAlgebra.Charpoly.ToMatrix
+module
+
+public import Mathlib.LinearAlgebra.Charpoly.ToMatrix
 
 /-!
 # Characteristic polynomial of an idempotent endomorphism over a field
@@ -11,6 +13,8 @@ import Mathlib.LinearAlgebra.Charpoly.ToMatrix
 Source: Stacks Project, More on Algebra, proof of Lemma 07M5
 (blueprint: lem-weil-pbc-idempotent-endomorphism-charpoly-field).
 -/
+
+@[expose] public section
 
 universe u
 

@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import Mathlib.Algebra.Category.Ring.FilteredColimits
-import Mathlib.RingTheory.Localization.AtPrime.Basic
+module
+
+public import Mathlib.Algebra.Category.Ring.FilteredColimits
+public import Mathlib.RingTheory.Localization.AtPrime.Basic
 
 
 /-!
@@ -13,6 +15,8 @@ import Mathlib.RingTheory.Localization.AtPrime.Basic
 Source: Stacks Project, Algebra, proof of Lemma Tag 037D (blueprint:
 lem-weil-pbc-filtered-colimit-localization-at-prime).
 -/
+
+@[expose] public section
 
 universe v
 

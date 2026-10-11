@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group G1
 -/
-import Mathlib.CategoryTheory.Localization.CalculusOfFractions
-import Mathlib.CategoryTheory.MorphismProperty.Comma
-import Mathlib.CategoryTheory.Yoneda
-import Mathlib.CategoryTheory.Limits.Types.Colimits
+module
+
+public import Mathlib.CategoryTheory.Localization.CalculusOfFractions
+public import Mathlib.CategoryTheory.MorphismProperty.Comma
+public import Mathlib.CategoryTheory.Yoneda
+public import Mathlib.CategoryTheory.Limits.Types.Colimits
 
 /-!
 # Hom sets in a left localization
@@ -14,6 +16,8 @@ import Mathlib.CategoryTheory.Limits.Types.Colimits
 Source: Stacks Project, Categories Tag 05Q0 and Derived Categories Tag 0FND
 (blueprint: lem-pc-left-localization-hom-colimit).
 -/
+
+@[expose] public section
 
 universe u v u' v'
 

@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Mathlib.Algebra.Category.CommAlgCat.Basic
-import Mathlib.CategoryTheory.Filtered.Basic
+module
+
+public import Mathlib.Algebra.Category.CommAlgCat.Basic
+public import Mathlib.CategoryTheory.Filtered.Basic
 
 /-!
 # Underlying modules of filtered colimits of commutative algebras
@@ -13,6 +15,8 @@ Source: Stacks Project, Algebra, Tag 00D6 (lemma-directed-colimit); the algebra 
 used implicitly in Tag 07RI (lemma-colimit-etale).
 (blueprint: lem-weil-pbc-filtered-colimit-algebras-underlying-module)
 -/
+
+@[expose] public section
 
 universe u v w
 

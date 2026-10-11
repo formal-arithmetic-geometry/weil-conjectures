@@ -1,6 +1,8 @@
-import Sheaf.AlgebraicGeometry.EtaleSheaves
-import Mathlib.Algebra.Category.ModuleCat.Basic
-import Mathlib.CategoryTheory.Sites.Adjunction
+module
+
+public import Sheaf.AlgebraicGeometry.EtaleSheaves
+public import Mathlib.Algebra.Category.ModuleCat.Basic
+public import Mathlib.CategoryTheory.Sites.Adjunction
 
 /-!
 # Lisse sheaves of finite modules and module objects
@@ -13,6 +15,8 @@ Sheaves of left `Λ`-modules on `Y_et` are `Sheaf Y.smallEtaleTopology (ModuleCa
 with `Λ : Type (u + 1)` (STATE: the encoding of the six-functor and constructible chapters).
 `FLC(Y)` is `IsFiniteLocallyConstantEtaleSheafOfSets` (def-weil-pbc-etale-sheaves).
 -/
+
+@[expose] public section
 
 universe u
 

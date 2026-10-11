@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group G1
 -/
-import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.TransitionUnits
-import Mathlib.AlgebraicGeometry.Noetherian
-import Mathlib.RingTheory.RegularLocalRing.Defs
-import Sheaf.AlgebraicGeometry.Dimension
+module
+
+public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.TransitionUnits
+public import Mathlib.AlgebraicGeometry.Noetherian
+public import Mathlib.RingTheory.RegularLocalRing.Defs
+public import Sheaf.AlgebraicGeometry.Dimension
 
 /-!
 # Regularity, Noetherianity and dimension of the projective line
@@ -15,6 +17,8 @@ Source: Stacks Project, Schemes, Example 01JE (`schemes-example-projective-line`
 with the standard polynomial-ring regularity and dimension assertions
 (blueprint: lem-sc-p1-regular-dimension-one).
 -/
+
+@[expose] public section
 
 universe u
 

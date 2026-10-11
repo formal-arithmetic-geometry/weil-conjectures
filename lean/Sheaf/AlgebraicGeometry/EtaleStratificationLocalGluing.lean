@@ -3,11 +3,13 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import Sheaf.AlgebraicGeometry.LocallyClosedStratification
-import Mathlib.AlgebraicGeometry.Morphisms.Etale
-import Mathlib.AlgebraicGeometry.Morphisms.Finite
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
-import Mathlib.Topology.Constructible
+module
+
+public import Sheaf.AlgebraicGeometry.LocallyClosedStratification
+public import Mathlib.AlgebraicGeometry.Morphisms.Etale
+public import Mathlib.AlgebraicGeometry.Morphisms.Finite
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
+public import Mathlib.Topology.Constructible
 
 /-!
 # Gluing finite étale constructible stratifications
@@ -16,6 +18,8 @@ Source: Stacks Project, Etale Cohomology, `lemma-etale-stratified-finite`, the r
 "In general, we may assume X is affine"
 (blueprint: lem-weil-pbc-etale-stratification-local-gluing).
 -/
+
+@[expose] public section
 
 universe u
 

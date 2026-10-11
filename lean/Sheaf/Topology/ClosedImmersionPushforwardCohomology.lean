@@ -1,6 +1,8 @@
-import Mathlib.Topology.Sheaves.Abelian
-import Mathlib.Topology.Sheaves.Functors
-import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
+module
+
+public import Mathlib.Topology.Sheaves.Abelian
+public import Mathlib.Topology.Sheaves.Functors
+public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 
 /-! # Cohomology and closed immersion pushforward
 
@@ -12,6 +14,8 @@ Source: literature/stacks-project/cohomology.tex, Lemma 02UV
 * `cohomology_closed_immersion_pushforward`: cohomology is invariant under
   pushforward along a closed embedding.
 -/
+
+@[expose] public section
 
 open CategoryTheory
 open TopologicalSpace

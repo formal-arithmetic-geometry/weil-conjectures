@@ -3,13 +3,17 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under the Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import Sheaf.AlgebraicGeometry.PseudoCoherentComplex
+module
+
+public import Sheaf.AlgebraicGeometry.PseudoCoherentComplex
 
 /-! # Pseudo-coherence is preserved by direct summands
 
 Source: literature/stacks-project/cohomology.tex, Tag 08CE
 (blueprint: lem-pc-pseudo-coherent-summand).
 -/
+
+@[expose] public section
 
 universe u w
 

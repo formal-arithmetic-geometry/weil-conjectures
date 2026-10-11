@@ -3,12 +3,14 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import Mathlib.CategoryTheory.Abelian.RightDerived
-import Mathlib.CategoryTheory.Abelian.FunctorCategory
-import Mathlib.CategoryTheory.Functor.OfSequence
-import Mathlib.CategoryTheory.Limits.Shapes.Products
-import Mathlib.Algebra.Category.Grp.Abelian
-import Sheaf.CategoryTheory.Limits.TowerTransitionEndomorphism
+module
+
+public import Mathlib.CategoryTheory.Abelian.RightDerived
+public import Mathlib.CategoryTheory.Abelian.FunctorCategory
+public import Mathlib.CategoryTheory.Functor.OfSequence
+public import Mathlib.CategoryTheory.Limits.Shapes.Products
+public import Mathlib.Algebra.Category.Grp.Abelian
+public import Sheaf.CategoryTheory.Limits.TowerTransitionEndomorphism
 
 /-!
 # Roos computation of derived limits of abelian groups
@@ -27,6 +29,8 @@ Source: Stacks Project, More on Algebra, Lemma 15.88.1, Tag 07KW
 We use the Mathlib functor category for towers, reindexing positive integers by `n + 1`.
 All groups lie in an arbitrary universe `u`.
 -/
+
+@[expose] public section
 
 universe u
 

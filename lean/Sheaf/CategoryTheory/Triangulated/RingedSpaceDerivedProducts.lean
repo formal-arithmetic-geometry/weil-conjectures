@@ -3,14 +3,18 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import Sheaf.Paper.DerivedHomMayerVietoris
-import Mathlib.Algebra.Homology.DerivedCategory.Basic
+module
+
+public import Sheaf.Paper.DerivedHomMayerVietoris
+public import Mathlib.Algebra.Homology.DerivedCategory.Basic
 
 /-!
 # Products in the derived category of a ringed space
 
 Source: Stacks Project, Injectives, Tag 07D9 (blueprint: lem-pc-ringed-space-derived-products).
 -/
+
+@[expose] public section
 
 universe u w
 

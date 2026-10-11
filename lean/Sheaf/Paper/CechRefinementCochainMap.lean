@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group T1
 -/
-import Sheaf.AlgebraicGeometry.ModuleCohomologyFMap
-import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
-import WeilConjectures.Topology.Sheaves.CechComparison
+module
+
+public import Sheaf.AlgebraicGeometry.ModuleCohomologyFMap
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import WeilConjectures.Topology.Sheaves.CechComparison
 
 /-! # Refinement of module Cech complexes along a scheme morphism
 
@@ -14,6 +16,8 @@ Source: Stacks Project, Cohomology, Tag 01FD
 The component formula fixes the map to pullback of sections followed by restriction;
 it is not an unconstrained map assumed to commute with cohomology comparisons.
 -/
+
+@[expose] public section
 
 universe uR
 set_option autoImplicit false

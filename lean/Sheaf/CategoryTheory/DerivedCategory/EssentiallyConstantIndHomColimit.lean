@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Sheaf.CategoryTheory.DerivedCategory.EssentiallyConstantInd
-import Mathlib.CategoryTheory.Yoneda
-import Mathlib.CategoryTheory.Limits.Types.Colimits
+module
+
+public import Sheaf.CategoryTheory.DerivedCategory.EssentiallyConstantInd
+public import Mathlib.CategoryTheory.Yoneda
+public import Mathlib.CategoryTheory.Limits.Types.Colimits
 
 /-!
 # Hom into an essentially constant ind-diagram
@@ -13,6 +15,8 @@ import Mathlib.CategoryTheory.Limits.Types.Colimits
 Source: Stacks Project, Categories, Tag 05PY; Derived Categories, Tag 0FND,
 first equality in the proof (blueprint: lem-pc-essentially-constant-ind-hom-colimit).
 -/
+
+@[expose] public section
 
 universe uJ vJ uC vC
 

@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Mathlib.RingTheory.Ideal.Colon
-import Mathlib.RingTheory.Ideal.MinimalPrime.Basic
+module
+
+public import Mathlib.RingTheory.Ideal.Colon
+public import Mathlib.RingTheory.Ideal.MinimalPrime.Basic
 
 /-!
 # Weakly associated prime ideals
@@ -16,6 +18,8 @@ The annihilator of `x` is the colon ideal `(⊥ : Submodule A A).colon {x}`, and
 association is membership in its minimal primes, as in
 `Ideal.annihilator_eq_iff_mem_minimalPrimes_of_fg`.
 -/
+
+@[expose] public section
 
 universe u
 

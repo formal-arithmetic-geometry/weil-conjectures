@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group J1
 -/
-import Mathlib.AlgebraicGeometry.Morphisms.Etale
-import WeilConjectures.AlgebraicGeometry.Morphisms.FiberDegree
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.Etale
+public import WeilConjectures.AlgebraicGeometry.Morphisms.FiberDegree
 
 /-!
 # Descent of finite local freeness of fixed degree along an étale covering
@@ -12,6 +14,8 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.FiberDegree
 Source: Stacks Project, Descent, Lemma 02VO, and Topologies, Lemma 022C
 (blueprint: lem-weil-pbc-finite-locally-free-degree-etale-descent).
 -/
+
+@[expose] public section
 
 universe u w
 

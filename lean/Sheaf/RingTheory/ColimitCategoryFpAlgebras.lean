@@ -3,17 +3,21 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group G1
 -/
-import Mathlib.Algebra.Category.Ring.Basic
-import Mathlib.RingTheory.FinitePresentation
-import Mathlib.RingTheory.TensorProduct.Maps
-import Mathlib.CategoryTheory.Limits.HasLimits
-import Mathlib.Order.Directed
+module
+
+public import Mathlib.Algebra.Category.Ring.Basic
+public import Mathlib.RingTheory.FinitePresentation
+public import Mathlib.RingTheory.TensorProduct.Maps
+public import Mathlib.CategoryTheory.Limits.HasLimits
+public import Mathlib.Order.Directed
 
 /-! # Maps of finitely presented algebras over a directed colimit
 
 Source: Stacks Project, Algebra, Lemma Tag 05N9, parts (2) and (3)
 (blueprint: lem-weil-pbc-colimit-category-fp-algebras).
 -/
+
+@[expose] public section
 
 universe v w z
 

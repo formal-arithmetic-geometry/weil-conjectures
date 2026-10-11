@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF contributors
 -/
-import Sheaf.CategoryTheory.Galois.StacksGaloisCategory
-import Mathlib.CategoryTheory.Limits.Shapes.Products
+module
+
+public import Sheaf.CategoryTheory.Galois.StacksGaloisCategory
+public import Mathlib.CategoryTheory.Limits.Shapes.Products
 
 /-!
 # Morphisms between finite coproducts of connected objects
@@ -12,6 +14,8 @@ import Mathlib.CategoryTheory.Limits.Shapes.Products
 Source: Stacks Project, Fundamental Groups of Schemes, Lemma 0BN0, item (8) and proof
 (blueprint: lem-galois-coproduct-morphism-components).
 -/
+
+@[expose] public section
 
 universe u v w x y
 

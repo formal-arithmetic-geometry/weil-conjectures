@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Mathlib.AlgebraicGeometry.Morphisms.Integral
-import Mathlib.AlgebraicGeometry.Sites.Fpqc
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.Integral
+public import Mathlib.AlgebraicGeometry.Sites.Fpqc
 
 /-!
 # Descent of integral morphisms along fpqc covering families
@@ -12,6 +14,8 @@ import Mathlib.AlgebraicGeometry.Sites.Fpqc
 Source: Stacks Project, Descent, Lemma 35.23.24 (Tag 02L9), descent direction
 (blueprint: lem-weil-pbc-fpqc-descend-integral).
 -/
+
+@[expose] public section
 
 universe u v
 

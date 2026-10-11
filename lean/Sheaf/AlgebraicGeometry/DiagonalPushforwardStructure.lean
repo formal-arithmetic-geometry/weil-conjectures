@@ -3,12 +3,14 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under the Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group T1
 -/
-import Sheaf.AlgebraicGeometry.DerivedPullback
-import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
-import Mathlib.AlgebraicGeometry.Morphisms.Proper
-import Mathlib.AlgebraicGeometry.Morphisms.Flat
-import Mathlib.CategoryTheory.Adjunction.Basic
-import Mathlib.AlgebraicGeometry.Noetherian
+module
+
+public import Sheaf.AlgebraicGeometry.DerivedPullback
+public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
+public import Mathlib.AlgebraicGeometry.Morphisms.Proper
+public import Mathlib.AlgebraicGeometry.Morphisms.Flat
+public import Mathlib.CategoryTheory.Adjunction.Basic
+public import Mathlib.AlgebraicGeometry.Noetherian
 
 /-!
 # Diagonal counit identity for a flat proper morphism
@@ -17,6 +19,8 @@ Source: literature/stacks-project/duality.tex, Equation 48.12.8.1
 (Tag 0E2P), used in Tag 0E2Q
 (blueprint: lem-sc-smooth-proper-diagonal-pushforward-structure).
 -/
+
+@[expose] public section
 
 universe u w
 

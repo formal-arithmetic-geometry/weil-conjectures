@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF worker C1
 -/
-import Sheaf.RingTheory.MPseudoCoherent
+module
+
+public import Sheaf.RingTheory.MPseudoCoherent
 
 /-!
 # Vanishing above m gives the m-pseudo-coherent base case
@@ -11,6 +13,8 @@ import Sheaf.RingTheory.MPseudoCoherent
 Source: Stacks Project, More on Algebra, Lemma 15.66.7 (Tag 064W), part (1)
 (blueprint: lem-pc-ring-m-pseudo-coherent-vanishing-base).
 -/
+
+@[expose] public section
 
 universe w₁ v₁ u₁
 

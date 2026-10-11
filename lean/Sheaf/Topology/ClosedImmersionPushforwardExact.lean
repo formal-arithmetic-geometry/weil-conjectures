@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group T1
 -/
-import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
-import Mathlib.Topology.Sheaves.Functors
-import Mathlib.Topology.Sheaves.Abelian
-import Mathlib.Algebra.Homology.ShortComplex.ShortExact
+module
+
+public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
+public import Mathlib.Topology.Sheaves.Functors
+public import Mathlib.Topology.Sheaves.Abelian
+public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 
 /-!
 # Exactness of closed-subset pushforward for abelian sheaves
@@ -14,6 +16,8 @@ import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 Source: Stacks Project, Sheaves of Modules, Lemma 17.6.1 (Tag 01AX), exactness assertion
 (blueprint: lem-sc-closed-immersion-pushforward-exact).
 -/
+
+@[expose] public section
 
 set_option autoImplicit false
 

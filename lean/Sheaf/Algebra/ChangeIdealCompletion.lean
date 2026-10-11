@@ -1,8 +1,12 @@
-import Mathlib.RingTheory.AdicCompletion.Algebra
+module
+
+public import Mathlib.RingTheory.AdicCompletion.Algebra
 
 /-! # Change of ideal for adic completion
 Source: literature/stacks-project/algebra.tex, Algebra Lemma Tag 0319
 (blueprint: lem-weil-pbc-change-ideal-completion) -/
+
+@[expose] public section
 
 open scoped Pointwise
 

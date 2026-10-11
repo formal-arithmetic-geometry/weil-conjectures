@@ -1,14 +1,18 @@
-import Mathlib.RingTheory.Flat.Basic
-import Mathlib.RingTheory.LocalRing.MaximalIdeal.Defs
-import Mathlib.RingTheory.LocalRing.Basic
-import Mathlib.RingTheory.Finiteness.Defs
-import Mathlib.RingTheory.Ideal.Operations
+module
+
+public import Mathlib.RingTheory.Flat.Basic
+public import Mathlib.RingTheory.LocalRing.MaximalIdeal.Defs
+public import Mathlib.RingTheory.LocalRing.Basic
+public import Mathlib.RingTheory.Finiteness.Defs
+public import Mathlib.RingTheory.Ideal.Operations
 
 /-! # Injectivity modulo the maximal ideal into a flat module (Noetherian local)
 
 Source: literature/stacks-project/algebra.tex, Lemma Tag 00ME
 (blueprint: lem-weil-pbc-flat-mod-injective)
 -/
+
+@[expose] public section
 
 /--
 The local injectivity criterion for a map from a finite module into a flat module.

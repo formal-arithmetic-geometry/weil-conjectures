@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import Sheaf.RingTheory.AnnihilatorAssociatedPrimes
-import Mathlib.Algebra.Exact.Basic
+module
+
+public import Sheaf.RingTheory.AnnihilatorAssociatedPrimes
+public import Mathlib.Algebra.Exact.Basic
 
 /-!
 # Associated primes in a short exact sequence over an arbitrary ring
@@ -12,6 +14,8 @@ import Mathlib.Algebra.Exact.Basic
 Source: Stacks Project, Algebra, Lemma 02M3 (lemma-ass), first two assertions
 (blueprint: lem-weil-pbc-associated-primes-exact-sequence).
 -/
+
+@[expose] public section
 
 universe uR uSub uMid uQuot
 

@@ -3,11 +3,13 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Mathlib.Algebra.Category.ModuleCat.Abelian
-import Mathlib.Algebra.Category.ModuleCat.Colimits
-import Mathlib.Algebra.Homology.DerivedCategory.Basic
-import Mathlib.Algebra.Homology.HomologicalComplexLimits
-import Mathlib.CategoryTheory.Limits.Shapes.Products
+module
+
+public import Mathlib.Algebra.Category.ModuleCat.Abelian
+public import Mathlib.Algebra.Category.ModuleCat.Colimits
+public import Mathlib.Algebra.Homology.DerivedCategory.Basic
+public import Mathlib.Algebra.Homology.HomologicalComplexLimits
+public import Mathlib.CategoryTheory.Limits.Shapes.Products
 
 /-!
 # Direct sums of module complexes in the derived category
@@ -15,6 +17,8 @@ import Mathlib.CategoryTheory.Limits.Shapes.Products
 Source: Stacks Project, Injectives, Lemma 07D9 (clauses (1)-(2)) (blueprint:
 lem-pc-derived-module-direct-sums).
 -/
+
+@[expose] public section
 
 universe u v
 

@@ -1,5 +1,9 @@
-import Mathlib.Topology.Spectral.Basic
-import Mathlib.Topology.Sheaves.Functors
+module
+
+public import Mathlib.Topology.Spectral.Basic
+public import Mathlib.Topology.Sheaves.Functors
+
+@[expose] public section
 
 universe u
 

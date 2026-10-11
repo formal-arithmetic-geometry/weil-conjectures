@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import WeilConjectures.AlgebraicGeometry.Morphisms.FiberDegree
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
+module
+
+public import WeilConjectures.AlgebraicGeometry.Morphisms.FiberDegree
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 
 /-!
 # Structure sheaves of finite locally free morphisms
@@ -14,6 +16,8 @@ Source: blueprint `sec-picard-framework/sk-the-hilbert-functor--definition-1`,
 lemma `lem-pc-flf-properties`; Stacks Project, Tag 02KB
 (blueprint: lem-pc-flf-properties).
 -/
+
+@[expose] public section
 
 universe u
 

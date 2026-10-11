@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Mathlib.AlgebraicGeometry.Limits
-import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
+module
+
+public import Mathlib.AlgebraicGeometry.Limits
+public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 
 /-!
 # Quasi-compactness, quasi-separatedness and local finite presentation of finite coproducts
@@ -12,6 +14,8 @@ import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 Source: Stacks Project, Tags 01KO and 01TQ, applied to the disjoint open summands of a
 coproduct of schemes (blueprint: lem-weil-pbc-finite-coproduct-lfp-qcqs).
 -/
+
+@[expose] public section
 
 universe u v
 

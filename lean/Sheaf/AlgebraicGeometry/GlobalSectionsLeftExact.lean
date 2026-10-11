@@ -1,8 +1,10 @@
 /-
 Copyright (c) 2026 The SHEAF contributors.
 -/
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Mathlib.CategoryTheory.Preadditive.LeftExact
+module
+
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Mathlib.CategoryTheory.Preadditive.LeftExact
 
 /-!
 # Left exactness of global sections on scheme modules
@@ -10,6 +12,8 @@ import Mathlib.CategoryTheory.Preadditive.LeftExact
 Source: literature/stacks-project/cohomology.tex, Cohomology of Sheaves, Lemma Tag 01EZ
 (blueprint: lem-sc-global-sections-left-exact).
 -/
+
+@[expose] public section
 
 universe u
 

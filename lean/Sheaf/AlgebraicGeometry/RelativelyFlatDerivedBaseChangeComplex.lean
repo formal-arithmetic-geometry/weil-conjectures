@@ -2,22 +2,26 @@
 Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 -/
-import Sheaf.AlgebraicGeometry.DerivedCategory
-import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
-import Sheaf.AlgebraicGeometry.DerivedPullback
-import Sheaf.AlgebraicGeometry.DerivedTensorStructure
-import Sheaf.AlgebraicGeometry.SchemeDerivedBaseChangeMap
-import Sheaf.AlgebraicGeometry.DerivedPullbackTensorProduct
-import Sheaf.AlgebraicGeometry.SingleComplexBaseChangeStalkCondition
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
-import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage
+module
+
+public import Sheaf.AlgebraicGeometry.DerivedCategory
+public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
+public import Sheaf.AlgebraicGeometry.DerivedPullback
+public import Sheaf.AlgebraicGeometry.DerivedTensorStructure
+public import Sheaf.AlgebraicGeometry.SchemeDerivedBaseChangeMap
+public import Sheaf.AlgebraicGeometry.DerivedPullbackTensorProduct
+public import Sheaf.AlgebraicGeometry.SingleComplexBaseChangeStalkCondition
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
+public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage
 
 /-! # Derived base change for a bounded relatively flat complex
 
 Source: Stacks Project, perfect.tex, Lemma 36.26.4, Tag 0A1D
 (blueprint: lem-pc-rf-base-change-complex).
 -/
+
+@[expose] public section
 
 universe u w
 

@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import Sheaf.AlgebraicGeometry.ModuleCechComparison
+module
+
+public import Sheaf.AlgebraicGeometry.ModuleCechComparison
 
 /-! # Naturality of the first Čech-to-cohomology comparison
 
@@ -13,6 +15,8 @@ Source: Stacks Project, Cohomology of Sheaves, Lemma 01EQ
 The canonical comparison is characterized by the existing `IsModuleCechComparison`
 predicate, so its existence cannot be witnessed by an arbitrary natural homomorphism.
 -/
+
+@[expose] public section
 
 universe u
 

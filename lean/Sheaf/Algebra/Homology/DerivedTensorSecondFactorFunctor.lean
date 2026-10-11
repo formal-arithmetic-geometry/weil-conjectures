@@ -3,12 +3,14 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Sheaf.Algebra.Homology.MixedTotalTensor
-import Mathlib.Algebra.Category.ModuleCat.Abelian
-import Mathlib.Algebra.Category.ModuleCat.Monoidal.Closed
-import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.KFlat
-import Mathlib.Algebra.Homology.DerivedCategory.Basic
-import Mathlib.CategoryTheory.Functor.Derived.LeftDerived
+module
+
+public import Sheaf.Algebra.Homology.MixedTotalTensor
+public import Mathlib.Algebra.Category.ModuleCat.Abelian
+public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Closed
+public import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.KFlat
+public import Mathlib.Algebra.Homology.DerivedCategory.Basic
+public import Mathlib.CategoryTheory.Functor.Derived.LeftDerived
 
 /-!
 # Derived tensor with a fixed complex in the second factor
@@ -20,6 +22,8 @@ The tensor bifunctor is the landed mixed module tensor, totalized in the order `
 Thus the differential is `d_E ⊗ 1 + (-1)^p 1 ⊗ d_N`, and the `A`-action comes from `N`.
 K-flatness uses the landed ordinary-module specialization of the ringed-site notion.
 -/
+
+@[expose] public section
 
 universe u wR wA
 

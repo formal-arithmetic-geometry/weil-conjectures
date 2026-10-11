@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import Mathlib.AlgebraicGeometry.Limits
-import Mathlib.AlgebraicGeometry.Morphisms.Separated
+module
+
+public import Mathlib.AlgebraicGeometry.Limits
+public import Mathlib.AlgebraicGeometry.Morphisms.Separated
 
 /-!
 # Affineness of a finite discrete separated scheme
@@ -12,6 +14,8 @@ import Mathlib.AlgebraicGeometry.Morphisms.Separated
 Source: Stacks Project, Properties of Schemes, Lemma 28.10.6 (Tag 0CKV), final assertion
 (blueprint: lem-sc-finite-discrete-separated-affine).
 -/
+
+@[expose] public section
 
 universe u
 

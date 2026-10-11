@@ -3,13 +3,15 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import Mathlib.Algebra.Category.CommAlgCat.Basic
-import Mathlib.CategoryTheory.Limits.HasLimits
-import Mathlib.CategoryTheory.Filtered.Basic
-import Mathlib.RingTheory.Etale.Basic
-import Mathlib.RingTheory.LocalRing.ResidueField.Fiber
-import Mathlib.RingTheory.Noetherian.Defs
-import Mathlib.FieldTheory.Separable
+module
+
+public import Mathlib.Algebra.Category.CommAlgCat.Basic
+public import Mathlib.CategoryTheory.Limits.HasLimits
+public import Mathlib.CategoryTheory.Filtered.Basic
+public import Mathlib.RingTheory.Etale.Basic
+public import Mathlib.RingTheory.LocalRing.ResidueField.Fiber
+public import Mathlib.RingTheory.Noetherian.Defs
+public import Mathlib.FieldTheory.Separable
 
 /-!
 # Finite separable fibres of a Noetherian filtered colimit of etale algebras
@@ -17,6 +19,8 @@ import Mathlib.FieldTheory.Separable
 Source: Stacks Project, More on Algebra, Lemma Tag 0AH1
 (blueprint: lem-weil-pbc-henselization-finite-separable-fibres).
 -/
+
+@[expose] public section
 
 universe u v
 

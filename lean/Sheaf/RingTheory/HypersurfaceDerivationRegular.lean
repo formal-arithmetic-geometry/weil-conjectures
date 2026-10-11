@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Mathlib.RingTheory.Derivation.Basic
-import Mathlib.RingTheory.RegularLocalRing.Defs
-import Mathlib.RingTheory.Ideal.Quotient.Defs
+module
+
+public import Mathlib.RingTheory.Derivation.Basic
+public import Mathlib.RingTheory.RegularLocalRing.Defs
+public import Mathlib.RingTheory.Ideal.Quotient.Defs
 
 /-!
 # Regular hypersurfaces with a unit derivative
@@ -13,6 +15,8 @@ import Mathlib.RingTheory.Ideal.Quotient.Defs
 Source: Stacks Project, More on Algebra, Lemma Tag 07PF
 (blueprint: lem-weil-pbc-hypersurface-derivation-regular).
 -/
+
+@[expose] public section
 
 universe u
 

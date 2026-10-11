@@ -3,12 +3,14 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group J1, reviewer R-pnt1212
 -/
-import Mathlib.AlgebraicGeometry.Morphisms.Proper
-import Mathlib.AlgebraicGeometry.Morphisms.Smooth
-import Mathlib.FieldTheory.IsAlgClosed.Basic
-import Mathlib.GroupTheory.QuotientGroup.Basic
-import WeilConjectures.AlgebraicGeometry.Curve
-import WeilConjectures.AlgebraicGeometry.Picard.Group
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.Proper
+public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
+public import Mathlib.FieldTheory.IsAlgClosed.Basic
+public import Mathlib.GroupTheory.QuotientGroup.Basic
+public import WeilConjectures.AlgebraicGeometry.Curve
+public import WeilConjectures.AlgebraicGeometry.Picard.Group
 
 /-!
 # Torsion and divisibility of the Picard group of a proper curve
@@ -16,6 +18,8 @@ import WeilConjectures.AlgebraicGeometry.Picard.Group
 Source: Weil-conjectures blueprint, sec-curve-estimates/sk-thm-curveestimate,
 lem-sc-pic-proper-ntorsion (blueprint: lem-sc-pic-proper-ntorsion).
 -/
+
+@[expose] public section
 
 universe u
 

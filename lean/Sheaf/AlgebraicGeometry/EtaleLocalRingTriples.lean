@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import Mathlib.AlgebraicGeometry.Sites.EtalePoint
-import Mathlib.AlgebraicGeometry.GammaSpecAdjunction
-import Mathlib.CategoryTheory.Limits.Final
-import Sheaf.AlgebraicGeometry.EtaleResidueTriples
+module
+
+public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
+public import Mathlib.AlgebraicGeometry.GammaSpecAdjunction
+public import Mathlib.CategoryTheory.Limits.Final
+public import Sheaf.AlgebraicGeometry.EtaleResidueTriples
 
 /-!
 # Affine pointed étale neighbourhoods and residue-field triples
@@ -14,6 +16,8 @@ import Sheaf.AlgebraicGeometry.EtaleResidueTriples
 Source: Stacks Project, Tags 03PQ, 04HT and 04HX
 (blueprint: lem-weil-pbc-etale-local-ring-triples).
 -/
+
+@[expose] public section
 
 noncomputable section
 

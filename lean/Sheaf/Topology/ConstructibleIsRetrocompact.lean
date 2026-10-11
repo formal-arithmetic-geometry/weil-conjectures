@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import Mathlib.Topology.Constructible
+module
+
+public import Mathlib.Topology.Constructible
 
 /-!
 # Constructible subsets are retrocompact
@@ -11,6 +13,8 @@ import Mathlib.Topology.Constructible
 Source: Stacks Project, Topology, Lemma 5.15.10 (Tag 09YH)
 (blueprint: lem-weil-pbc-constructible-is-retrocompact).
 -/
+
+@[expose] public section
 
 universe u
 

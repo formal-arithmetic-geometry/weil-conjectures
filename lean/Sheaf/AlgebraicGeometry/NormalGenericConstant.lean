@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import Mathlib.AlgebraicGeometry.Noetherian
-import Mathlib.AlgebraicGeometry.ResidueField
-import Sheaf.AlgebraicGeometry.NormalScheme
-import WeilConjectures.ConstructibleSheaf.Defs
+module
+
+public import Mathlib.AlgebraicGeometry.Noetherian
+public import Mathlib.AlgebraicGeometry.ResidueField
+public import Sheaf.AlgebraicGeometry.NormalScheme
+public import WeilConjectures.ConstructibleSheaf.Defs
 
 /-!
 # Constant abelian sheaves at the generic point of a normal scheme
@@ -14,6 +16,8 @@ import WeilConjectures.ConstructibleSheaf.Defs
 Source: smooth purity blueprint, unit `sk-prop-sf-cbc`, node
 `lem-fin-normal-generic-constant`, order 1606 (blueprint: lem-fin-normal-generic-constant).
 -/
+
+@[expose] public section
 
 universe u
 

@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Mathlib.RingTheory.Ideal.Colon
-import Mathlib.RingTheory.Localization.FractionRing
-import Mathlib.RingTheory.Localization.AtPrime.Basic
-import Mathlib.RingTheory.Ideal.MinimalPrime.Basic
+module
+
+public import Mathlib.RingTheory.Ideal.Colon
+public import Mathlib.RingTheory.Localization.FractionRing
+public import Mathlib.RingTheory.Localization.AtPrime.Basic
+public import Mathlib.RingTheory.Ideal.MinimalPrime.Basic
 
 /-! # Total quotient ring as a product over minimal primes
 
@@ -14,6 +16,8 @@ Source: literature/stacks-project/algebra.tex, Algebra Lemma 10.25.4, tag 02LX,
 with Definition 10.66.1, tag 0547, and Lemma 10.66.7, tag 05C3
 (blueprint: lem-sc-affine-totalquotient-minimal-product)
 -/
+
+@[expose] public section
 
 universe u
 

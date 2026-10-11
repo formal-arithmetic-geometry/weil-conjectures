@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group R1
 -/
-import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.TransitionUnits
-import WeilConjectures.AlgebraicGeometry.Modules.Invertible
+module
+
+public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.TransitionUnits
+public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 
 /-!
 # Existence and uniqueness of twists on the projective line
@@ -12,6 +14,8 @@ import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 Source: Weil conjectures blueprint, `sec-picard-framework`, `sk-thm-picard-coherence`,
 node `lem-sc-p1-twist-exists`, order 636 (blueprint: lem-sc-p1-twist-exists).
 -/
+
+@[expose] public section
 
 universe u
 

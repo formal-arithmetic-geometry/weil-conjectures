@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: G1
 -/
-import Mathlib.AlgebraicGeometry.Morphisms.Finite
-import Mathlib.AlgebraicGeometry.Sites.Fpqc
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.Finite
+public import Mathlib.AlgebraicGeometry.Sites.Fpqc
 
 /-!
 # Finiteness descends along fpqc covering families
@@ -12,6 +14,8 @@ import Mathlib.AlgebraicGeometry.Sites.Fpqc
 Source: Stacks Project, Descent, Lemma Tag 02LA, descent direction of Definition Tag 02KO
 (blueprint: lem-weil-pbc-fpqc-descend-finite).
 -/
+
+@[expose] public section
 
 universe u v
 

@@ -267,6 +267,62 @@ def main_stage2(g, item) -> int:
     return 0
 
 
+def main_stage3(g, item) -> int:
+    """What the reviewer of a stage-3 delivery reads (roles/lead.md §3 point by point)."""
+    import stage2_delivery as s2
+    import stage3_delivery as s3
+    br = f"deliver/{g}/{item}"
+    G = s2.Git(ROOT)
+    if not git("rev-parse", "--short", br).strip(): print(f"no branch {br}"); return 1
+    base = git("merge-base", "sheaf-dag", br).strip()
+    D = s3.read_delivery(G, br, base, g, item)
+    nodes = s2.nodes_at(G, "sheaf-dag")
+    o = []; w = o.append
+    w(f"# Review packet (stage 3): {item} (group {g})\n")
+    w("Files:\n\n```\n" + git("diff", "--name-status", f"{base}..{br}").strip() + "\n```\n")
+    why = s3.classify(D, g, item)
+    w("Class: " + ("AUTO" if not why else "CODEX: " + "; ".join(why)) + "\n")
+    w("## 1. Mechanical findings (a-e)\n\n" + ("\n".join(f"- ({L}) {x}" for L, x in D["fails"]) or "none") + "\n")
+    w("## 2. The node(s) of the item's module (lead.md §3: the DAG nodes agree with the Lean code)\n")
+    for nid, d in nodes.items():
+        l = d.get("lean") if isinstance(d.get("lean"), dict) else {}
+        if l.get("module") == item:
+            w(f"### {nid} ({d.get('kind')}, unit {d.get('unit')})\n\n{d.get('statement')}\n\nProof steps (the plan):")
+            for k, s in enumerate(d.get("proof") or [], 1):
+                w(f"{k}. {s.get('text', '')[:600]}  uses: {', '.join(s.get('uses') or []) or '-'}")
+            for dep in d.get("proof_deps") or []:
+                dl = (nodes.get(dep) or {}).get("lean") or {}
+                w(f"- proof dep {dep}: {dl.get('module', '-')} {dl.get('declaration', '-')}")
+            w("")
+    for m in D["modules"]:
+        d = m["diff"]
+        w(f"## 3. Module {m['file']} ({m['role']})\n")
+        w(f"- imports added: {d['added_imports'] or '-'}; removed: {d['removed_imports'] or '-'}; importers: "
+          f"{len(s3.importers(m['module']))}")
+        w(f"- interface changes: {d['interface'] or '-'}; statements changed: {d['statement_changed'] or '-'}")
+        w(f"- declarations added: {d['added'] or '-'}; removed: {d['removed'] or '-'}; bodies changed: {len(d['body_changed'])}")
+        w(f"- sorry before: {d['sorry_before'] or '-'}; after: {d['sorry_after'] or '-'}; left by the delivery: {d['new_sorry'] or '-'}")
+        dd = git("diff", f"{base}..{br}", "--", m["file"])
+        w(f"\n```diff\n{dd[-20000:]}\n```\n")
+    for nid, x in D["nodes"].items():
+        w(f"## 4. Node {nid} ({x['role']})\n\n```json\n{json.dumps(x['node'], ensure_ascii=False, indent=1)[:12000]}\n```\n")
+    for p, t in D["changes"].items():
+        w(f"## 5. Change record {p}\n\n{t}\n")
+    if D["users"]:
+        w("Computed users (downstream modules mentioning a changed name; claim holder):\n")
+        for u, ns in D["users"].items():
+            w(f"- {u}: {', '.join(ns)} (claimed by {s3.claim_holder(u) or 'nobody'})")
+    w("\n## 6. The group's report\n\n" + (D["report"] or "**no report**") + "\n")
+    ret = ROOT / "coord" / "returns" / f"{g}.md"
+    if ret.exists():
+        ent = [e for e in re.split(r"\n(?=## )", ret.read_text()) if item in e.split("\n")[0]]
+        if ent: w("## 7. Earlier returns of this item\n\n" + "\n\n".join(ent)[-8000:] + "\n")
+    out = pathlib.Path(sys.argv[sys.argv.index("--out") + 1]) if "--out" in sys.argv else pathlib.Path("/tmp/review-packets") / f"{g}__{item}.md"
+    out.parent.mkdir(parents=True, exist_ok=True); out.write_text("\n".join(o))
+    print(out, f"({len(out.read_text())} characters)")
+    return 0
+
+
 def main() -> int:
     if "--stage" in sys.argv:
         k = sys.argv.index("--stage"); st = sys.argv[k + 1] if k + 1 < len(sys.argv) else ""
@@ -275,7 +331,10 @@ def main() -> int:
         if st == "2":
             if len(rest) < 2: print(__doc__); return 2
             return main_stage2(rest[0], rest[1])
-        if st != "1": print(f"--stage {st!r}: 1 or 2"); return 2
+        if st == "3":
+            if len(rest) < 2: print(__doc__); return 2
+            return main_stage3(rest[0], rest[1])
+        if st != "1": print(f"--stage {st!r}: 1, 2 or 3"); return 2
         sys.argv = [x for j, x in enumerate(sys.argv) if j not in (k, k + 1)]
     args = [a for a in sys.argv[1:] if not a.startswith("--")]
     if len(args) < 2: print(__doc__); return 2

@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Twist
+module
+
+public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Twist
 
 /-!
 # Identification of the glued twist with the Serre twist
@@ -21,6 +23,8 @@ coordinate sections are `T^gl_k = ProjectiveSpace.twistOneSection n (Spec ℤ) k
 the transition rule `e_i = (T_i/T_j) e_j` and `T^gl_k|_{U_i} = (T_k/T_i) e_i`
 (`ProjectiveSpace.pullbackSection_twistOneSection_map_eq_smul`).
 -/
+
+@[expose] public section
 
 universe u
 

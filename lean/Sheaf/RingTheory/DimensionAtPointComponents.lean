@@ -1,8 +1,12 @@
-import Mathlib.AlgebraicGeometry.Scheme
-import Mathlib.RingTheory.FiniteType
-import Mathlib.RingTheory.KrullDimension.Basic
-import WeilConjectures.Mathlib.Topology.KrullDimension
-import Mathlib.Topology.Irreducible
+module
+
+public import Mathlib.AlgebraicGeometry.Scheme
+public import Mathlib.RingTheory.FiniteType
+public import Mathlib.RingTheory.KrullDimension.Basic
+public import WeilConjectures.Mathlib.Topology.KrullDimension
+public import Mathlib.Topology.Irreducible
+
+@[expose] public section
 
 universe u v
 

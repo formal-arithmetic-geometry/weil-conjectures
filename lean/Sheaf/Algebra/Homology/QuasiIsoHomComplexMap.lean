@@ -3,11 +3,13 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group J1
 -/
-import Sheaf.Algebra.Homology.HomComplex
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
-import Mathlib.Algebra.Category.Ring.Limits
-import Mathlib.Algebra.Category.Grp.FilteredColimits
-import Mathlib.Algebra.Homology.HomotopyCategory.KInjective
+module
+
+public import Sheaf.Algebra.Homology.HomComplex
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
+public import Mathlib.Algebra.Category.Ring.Limits
+public import Mathlib.Algebra.Category.Grp.FilteredColimits
+public import Mathlib.Algebra.Homology.HomotopyCategory.KInjective
 
 /-!
 # Quasi-isomorphisms of sheaf Hom complexes into K-injectives
@@ -16,6 +18,8 @@ Source: Stacks Project, sites-cohomology.tex, Lemma 0A95
 (sites-cohomology-lemma-RHom-well-defined), using Lemma 0A94
 (blueprint: lem-pur-rhom-well-defined).
 -/
+
+@[expose] public section
 
 universe u v
 

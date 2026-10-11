@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group G1
 -/
-import Mathlib.AlgebraicGeometry.Scheme
-import Mathlib.Topology.Sheaves.SheafCondition.Sites
-import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
-import Mathlib.CategoryTheory.Preadditive.Injective.Resolution
+module
+
+public import Mathlib.AlgebraicGeometry.Scheme
+public import Mathlib.Topology.Sheaves.SheafCondition.Sites
+public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
+public import Mathlib.CategoryTheory.Preadditive.Injective.Resolution
 
 /-!
 # Restriction of abelian Zariski sheaves to an open
@@ -14,6 +16,8 @@ import Mathlib.CategoryTheory.Preadditive.Injective.Resolution
 Source: Stacks Project, Cohomology on Sites, Lemma 03F3 and its proof; Cohomology of
 Sheaves, Lemma 01E1 (blueprint: lem-weil-pbc-zariski-open-restriction-injectives).
 -/
+
+@[expose] public section
 
 universe u
 

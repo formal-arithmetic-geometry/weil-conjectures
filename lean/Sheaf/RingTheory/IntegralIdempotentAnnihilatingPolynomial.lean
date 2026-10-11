@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group G1
 -/
-import Mathlib.RingTheory.IntegralClosure.Algebra.Ideal
-import Mathlib.RingTheory.Ideal.Quotient.Defs
-import Mathlib.Algebra.Group.Idempotent
+module
+
+public import Mathlib.RingTheory.IntegralClosure.Algebra.Ideal
+public import Mathlib.RingTheory.Ideal.Quotient.Defs
+public import Mathlib.Algebra.Group.Idempotent
 
 /-!
 # An annihilating polynomial for an integral lift of an idempotent
@@ -13,6 +15,8 @@ import Mathlib.Algebra.Group.Idempotent
 Source: Stacks Project, More on Algebra, Lemma Tag 09XG (lemma-helper-integral)
 (blueprint: lem-weil-pbc-integral-idempotent-annihilating-polynomial).
 -/
+
+@[expose] public section
 
 universe u v
 

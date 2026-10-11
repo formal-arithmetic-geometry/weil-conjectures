@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group P1
 -/
-import Mathlib.AlgebraicGeometry.Geometrically.Irreducible
-import Sheaf.AlgebraicGeometry.SmoothProjectiveCurve
-import Sheaf.AlgebraicGeometry.FieldLinearModuleCohomologyOperations
-import Mathlib.LinearAlgebra.FiniteDimensional.Basic
+module
+
+public import Mathlib.AlgebraicGeometry.Geometrically.Irreducible
+public import Sheaf.AlgebraicGeometry.SmoothProjectiveCurve
+public import Sheaf.AlgebraicGeometry.FieldLinearModuleCohomologyOperations
+public import Mathlib.LinearAlgebra.FiniteDimensional.Basic
 
 /-!
 # Well-definedness of the genus
@@ -20,6 +22,8 @@ node `lem-pc-genus-well-defined`; Stacks Project, Morphisms, Tags 02H2, 01WF,
 * `genus_well_defined`: the first cohomology of the structure sheaf of a smooth
   projective geometrically irreducible curve is finite-dimensional over its base field.
 -/
+
+@[expose] public section
 
 universe u
 

@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF contributors
 -/
-import Mathlib.Algebra.DirectSum.Decomposition
-import Mathlib.RingTheory.MvPolynomial.Homogeneous
-import Mathlib.RingTheory.Finiteness.Defs
+module
+
+public import Mathlib.Algebra.DirectSum.Decomposition
+public import Mathlib.RingTheory.MvPolynomial.Homogeneous
+public import Mathlib.RingTheory.Finiteness.Defs
 
 /-!
 # Finite homogeneous generators of a graded module
@@ -14,6 +16,8 @@ Source: Weil conjectures blueprint, `sec-picard-framework/sk-thm-picard-duality`
 proof, construction of the initial graded free module from homogeneous generators
 (blueprint: lem-sc-p1-finite-homogeneous-generators).
 -/
+
+@[expose] public section
 
 universe u v
 

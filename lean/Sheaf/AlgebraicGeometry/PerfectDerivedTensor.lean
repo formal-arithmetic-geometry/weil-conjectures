@@ -1,12 +1,16 @@
-import Sheaf.AlgebraicGeometry.PerfectComplex
-import Sheaf.AlgebraicGeometry.DerivedCategory
-import Sheaf.AlgebraicGeometry.DerivedPullbackTensorProduct
+module
+
+public import Sheaf.AlgebraicGeometry.PerfectComplex
+public import Sheaf.AlgebraicGeometry.DerivedCategory
+public import Sheaf.AlgebraicGeometry.DerivedPullbackTensorProduct
 
 /-! # Derived tensor products of perfect complexes
 
 Source: literature/stacks-project/cohomology.tex, Lemma 09J5
 (blueprint: lem-sc-perfect-derived-tensor-perfect).
 -/
+
+@[expose] public section
 
 universe uT wT
 

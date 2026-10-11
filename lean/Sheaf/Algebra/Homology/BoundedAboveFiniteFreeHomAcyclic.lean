@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group J1
 -/
-import Sheaf.Algebra.Homology.HomComplex
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
-import Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
+module
+
+public import Sheaf.Algebra.Homology.HomComplex
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
+public import Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
 
 /-! # Hom from bounded-above finite free complexes preserves bounded-below acyclicity
 
@@ -14,6 +16,8 @@ Source: Stacks Project, cohomology.tex, Tag 0GM8 (Lemma 20.51.4), case (2),
 bounded-above finite free Hom calculation
 (blueprint: lem-sc-bounded-above-finite-free-hom-acyclic).
 -/
+
+@[expose] public section
 
 universe u v w
 

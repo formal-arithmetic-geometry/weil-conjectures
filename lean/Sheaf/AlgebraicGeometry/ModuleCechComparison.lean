@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Mathlib.CategoryTheory.Sites.SheafCohomology.Cech
-import WeilConjectures.Mathlib.Algebra.Homology.TotalComplex
-import Sheaf.Topology.RingedSpaceModuleCohomology
+module
+
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Mathlib.CategoryTheory.Sites.SheafCohomology.Cech
+public import WeilConjectures.Mathlib.Algebra.Homology.TotalComplex
+public import Sheaf.Topology.RingedSpaceModuleCohomology
 
 /-! # The canonical module-valued Čech comparison
 
@@ -33,6 +35,8 @@ The comparison is characterized by `c ≫ (resolution identification) ≫ H^p(α
 than defined as `H^p(β) ≫ inv H^p(α) ≫ …`: `inv` of a morphism whose invertibility is not yet
 proved would be data chosen from an unproved statement.
 -/
+
+@[expose] public section
 
 open CategoryTheory CategoryTheory.Limits Opposite TopologicalSpace
 

@@ -3,11 +3,13 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Mathlib.Algebra.Category.CommAlgCat.Basic
-import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
-import Mathlib.RingTheory.Etale.Basic
-import Mathlib.RingTheory.LocalRing.ResidueField.Basic
-import Mathlib.FieldTheory.IsSepClosed
+module
+
+public import Mathlib.Algebra.Category.CommAlgCat.Basic
+public import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
+public import Mathlib.RingTheory.Etale.Basic
+public import Mathlib.RingTheory.LocalRing.ResidueField.Basic
+public import Mathlib.FieldTheory.IsSepClosed
 
 /-!
 # Ring strict henselization
@@ -19,6 +21,8 @@ The predicate specifies the colimit by an actual universal cocone, rather than c
 its underlying ring. The large category of pointed etale algebras is essentially small:
 finite presentation gives a set of representatives. No large-colimit instance is assumed.
 -/
+
+@[expose] public section
 
 universe u
 

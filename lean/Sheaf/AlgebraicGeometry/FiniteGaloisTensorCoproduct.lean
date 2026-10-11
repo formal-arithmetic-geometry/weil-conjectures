@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF worker J1
 -/
-import Mathlib.AlgebraicGeometry.Pullbacks
-import Mathlib.AlgebraicGeometry.Limits
-import Mathlib.FieldTheory.Galois.Basic
+module
+
+public import Mathlib.AlgebraicGeometry.Pullbacks
+public import Mathlib.AlgebraicGeometry.Limits
+public import Mathlib.FieldTheory.Galois.Basic
 
 /-!
 # Fibre product of a finite Galois field extension
@@ -13,6 +15,8 @@ import Mathlib.FieldTheory.Galois.Basic
 Source: Stacks Project, `pione.tex`, Tag 03SF (blueprint:
 lem-exc-finite-galois-algebra-tensor-decomposition).
 -/
+
+@[expose] public section
 
 universe u
 

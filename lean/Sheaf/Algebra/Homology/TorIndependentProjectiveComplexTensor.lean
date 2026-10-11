@@ -3,19 +3,23 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group J1
 -/
-import Sheaf.Algebra.Homology.BaseDerivedTensorCohomologyModel
-import Mathlib.Algebra.Category.ModuleCat.Projective
-import Mathlib.Algebra.Category.ModuleCat.Monoidal.Basic
-import Mathlib.Algebra.Module.Projective
-import Mathlib.Algebra.Module.FinitePresentation
-import Mathlib.CategoryTheory.Monoidal.Tor
-import Mathlib.RingTheory.Localization.Basic
+module
+
+public import Sheaf.Algebra.Homology.BaseDerivedTensorCohomologyModel
+public import Mathlib.Algebra.Category.ModuleCat.Projective
+public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Basic
+public import Mathlib.Algebra.Module.Projective
+public import Mathlib.Algebra.Module.FinitePresentation
+public import Mathlib.CategoryTheory.Monoidal.Tor
+public import Mathlib.RingTheory.Localization.Basic
 /-!
 # Tor-independent tensor comparison for a bounded projective complex
 
 Source: Stacks Project, perfect.tex, Tag 08IB, lemma-compare-base-change
 (blueprint: lem-pc-tor-independent-projective-complex-tensor).
 -/
+
+@[expose] public section
 
 set_option autoImplicit false
 

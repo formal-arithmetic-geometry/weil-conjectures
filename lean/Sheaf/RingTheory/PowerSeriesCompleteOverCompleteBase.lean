@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group J1
 -/
-import Mathlib.RingTheory.AdicCompletion.Basic
-import Mathlib.RingTheory.MvPowerSeries.Basic
-import Mathlib.RingTheory.Noetherian.Defs
+module
+
+public import Mathlib.RingTheory.AdicCompletion.Basic
+public import Mathlib.RingTheory.MvPowerSeries.Basic
+public import Mathlib.RingTheory.Noetherian.Defs
 
 /-!
 # Completeness of power series over a complete base
@@ -13,6 +15,8 @@ import Mathlib.RingTheory.Noetherian.Defs
 Source: literature/stacks-project/algebra.tex, used in Remark Tag 032C
 (blueprint: lem-weil-pbc-power-series-complete-over-complete-base).
 -/
+
+@[expose] public section
 
 universe u
 

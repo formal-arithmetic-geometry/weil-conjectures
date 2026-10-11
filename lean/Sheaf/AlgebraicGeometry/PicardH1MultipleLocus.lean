@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import Sheaf.AlgebraicGeometry.PicardDiagonalLocallyClosed
-import Sheaf.AlgebraicGeometry.BaseChangeConventions
-import Sheaf.AlgebraicGeometry.StructureSheafCohomologyPullback
-import WeilConjectures.AlgebraicGeometry.Modules.Invertible
+module
+
+public import Sheaf.AlgebraicGeometry.PicardDiagonalLocallyClosed
+public import Sheaf.AlgebraicGeometry.BaseChangeConventions
+public import Sheaf.AlgebraicGeometry.StructureSheafCohomologyPullback
+public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 
 /-!
 # H¹ injectivity and the multiple Picard triviality locus
@@ -14,6 +16,8 @@ import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 Source: Stacks Project, More on Morphisms, Lemma H1-O-multiple-picard-flat-proper,
 Tag 0BF2 (blueprint: lem-sc-picard-h1-multiple-locus).
 -/
+
+@[expose] public section
 
 universe v
 

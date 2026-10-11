@@ -3,11 +3,13 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import Sheaf.RingTheory.AnnihilatorAssociatedPrimes
-import Mathlib.RingTheory.Flat.Basic
-import Mathlib.RingTheory.Noetherian.Defs
-import Mathlib.Algebra.Module.Submodule.Pointwise
-import Mathlib.Algebra.Module.TransferInstance
+module
+
+public import Sheaf.RingTheory.AnnihilatorAssociatedPrimes
+public import Mathlib.RingTheory.Flat.Basic
+public import Mathlib.RingTheory.Noetherian.Defs
+public import Mathlib.Algebra.Module.Submodule.Pointwise
+public import Mathlib.Algebra.Module.TransferInstance
 
 /-!
 # Associated primes under flat base change
@@ -15,6 +17,8 @@ import Mathlib.Algebra.Module.TransferInstance
 Source: Stacks Project, Algebra, Lemma Tag 0312 (Bourbaki)
 (blueprint: lem-weil-pbc-associated-primes-flat-base-change).
 -/
+
+@[expose] public section
 
 universe r s m n
 

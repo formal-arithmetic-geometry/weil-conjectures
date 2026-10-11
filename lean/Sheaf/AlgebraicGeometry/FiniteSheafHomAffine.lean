@@ -3,10 +3,12 @@ Copyright (c) 2026 M1. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: M1
 -/
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Mathlib.AlgebraicGeometry.Morphisms.Affine
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings
-import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
+module
+
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Mathlib.AlgebraicGeometry.Morphisms.Affine
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
 
 /-!
 # Affine sheaf-Hom is right adjoint to restriction
@@ -14,6 +16,8 @@ import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
 Source: Stacks Project, duality.tex, Tag 0BUZ, lemma-compute-sheafhom-affine
 (blueprint: lem-sc-finite-sheafhom-affine).
 -/
+
+@[expose] public section
 
 universe u
 

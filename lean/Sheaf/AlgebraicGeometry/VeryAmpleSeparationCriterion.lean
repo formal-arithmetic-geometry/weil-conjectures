@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group U1
 -/
-import Sheaf.AlgebraicGeometry.DivisorModule
-import Sheaf.AlgebraicGeometry.ProjectiveSpaceHomOfGeneratingSections
-import WeilConjectures.AlgebraicGeometry.Modules.Ample
-import Mathlib.LinearAlgebra.Basis.Defs
+module
+
+public import Sheaf.AlgebraicGeometry.DivisorModule
+public import Sheaf.AlgebraicGeometry.ProjectiveSpaceHomOfGeneratingSections
+public import WeilConjectures.AlgebraicGeometry.Modules.Ample
+public import Mathlib.LinearAlgebra.Basis.Defs
 
 /-!
 # The dimension-drop criterion for very ampleness on a curve
@@ -14,6 +16,8 @@ import Mathlib.LinearAlgebra.Basis.Defs
 Source: Stacks Project, Varieties, Tag 0E8S; blueprint proof of
 `lem-sc-degree-2g1-very-ample` (blueprint: lem-sc-very-ample-separation-criterion).
 -/
+
+@[expose] public section
 
 set_option autoImplicit false
 

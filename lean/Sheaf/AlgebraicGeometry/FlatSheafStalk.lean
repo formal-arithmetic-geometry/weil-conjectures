@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group U1
 -/
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.Flat
-import Sheaf.Algebra.Homology.ModuleStalkFunctor
-import Mathlib.RingTheory.Flat.Basic
-import Sheaf.Paper.DerivedHomMayerVietoris
+module
+
+public import Sheaf.Algebra.Category.ModuleCat.Sheaf.Flat
+public import Sheaf.Algebra.Homology.ModuleStalkFunctor
+public import Mathlib.RingTheory.Flat.Basic
+public import Sheaf.Paper.DerivedHomMayerVietoris
 
 /-!
 # Stalks of flat sheaves of modules
@@ -14,6 +16,8 @@ import Sheaf.Paper.DerivedHomMayerVietoris
 Source: Stacks Project, Modules, Lemma 17.17.2 (Tag 05NE), flat sheaf implies flat stalks
 (blueprint: lem-pc-flat-sheaf-stalk-flat).
 -/
+
+@[expose] public section
 
 universe u
 

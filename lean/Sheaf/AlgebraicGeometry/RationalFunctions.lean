@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import Mathlib.AlgebraicGeometry.Scheme
-import Mathlib.Algebra.Category.Ring.Colimits
+module
+
+public import Mathlib.AlgebraicGeometry.Scheme
+public import Mathlib.Algebra.Category.Ring.Colimits
 
 /-!
 # Dense opens and their section diagram
@@ -15,6 +17,8 @@ The colimit ring itself is `Scheme.rationalFunctionRing` in
 Source: Stacks Project, Morphisms, Definitions 01RS, 01RT, 01RU and Lemma 01RV
 (blueprint: def-sc-rational-functions).
 -/
+
+@[expose] public section
 
 open CategoryTheory CategoryTheory.Limits TopologicalSpace
 

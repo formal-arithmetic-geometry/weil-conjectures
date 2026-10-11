@@ -1,5 +1,9 @@
-import Mathlib.CategoryTheory.Sites.Pullback
-import Sheaf.CategoryTheory.SiteContinuousPushforwardSheaf
+module
+
+public import Mathlib.CategoryTheory.Sites.Pullback
+public import Sheaf.CategoryTheory.SiteContinuousPushforwardSheaf
+
+@[expose] public section
 
 universe u
 

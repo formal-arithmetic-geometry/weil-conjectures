@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group G1
 -/
-import Mathlib.RingTheory.LocalRing.ResidueField.Fiber
+module
+
+public import Mathlib.RingTheory.LocalRing.ResidueField.Fiber
 
 /-!
 # The natural local-ring map of a fibre
@@ -11,6 +13,8 @@ import Mathlib.RingTheory.LocalRing.ResidueField.Fiber
 Source: Stacks Project, Algebra, Remarks 0H9M and 00E6
 (blueprint: lem-weil-pbc-fibre-ring-local-ring-natural-iso).
 -/
+
+@[expose] public section
 
 universe u v
 

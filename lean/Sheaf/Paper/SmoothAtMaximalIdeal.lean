@@ -1,10 +1,12 @@
-import Mathlib.FieldTheory.IsAlgClosed.Basic
-import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
-import Mathlib.RingTheory.FiniteType
-import Mathlib.RingTheory.Kaehler.Basic
-import Mathlib.RingTheory.Localization.AtPrime.Basic
-import Mathlib.RingTheory.KrullDimension.Basic
-import Mathlib.RingTheory.Smooth.Basic
+module
+
+public import Mathlib.FieldTheory.IsAlgClosed.Basic
+public import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
+public import Mathlib.RingTheory.FiniteType
+public import Mathlib.RingTheory.Kaehler.Basic
+public import Mathlib.RingTheory.Localization.AtPrime.Basic
+public import Mathlib.RingTheory.KrullDimension.Basic
+public import Mathlib.RingTheory.Smooth.Basic
 
 /-!
 # Smoothness at a maximal ideal from a differential dimension bound
@@ -12,6 +14,8 @@ import Mathlib.RingTheory.Smooth.Basic
 Source: literature/stacks-project/algebra.tex, Algebra, Lemma Tag 00TS
 (blueprint: lem-weil-pbc-smooth-at-maximal-ideal-alg-closed-differentials-bound).
 -/
+
+@[expose] public section
 
 universe u v
 

@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Sheaf.Paper.DerivedHomMayerVietoris
-import Mathlib.CategoryTheory.Preadditive.Injective.Basic
+module
+
+public import Sheaf.Paper.DerivedHomMayerVietoris
+public import Mathlib.CategoryTheory.Preadditive.Injective.Basic
 
 /-!
 # Enough injectives for modules on a ringed space
@@ -12,6 +14,8 @@ import Mathlib.CategoryTheory.Preadditive.Injective.Basic
 Source: Stacks Project, Injectives, Lemma 01DI; Modules on Sites, Lemma 03DA
 (blueprint: lem-sc-ringed-space-module-sheaves-enough-injectives).
 -/
+
+@[expose] public section
 
 universe u
 

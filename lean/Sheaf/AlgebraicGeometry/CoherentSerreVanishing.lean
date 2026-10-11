@@ -3,12 +3,14 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group J1
 -/
-import Mathlib.AlgebraicGeometry.Morphisms.Proper
-import Mathlib.RingTheory.Noetherian.Defs
-import Sheaf.AlgebraicGeometry.Coherent
-import Sheaf.AlgebraicGeometry.Ample
-import Sheaf.Paper.PQFCohomology
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.Proper
+public import Mathlib.RingTheory.Noetherian.Defs
+public import Sheaf.AlgebraicGeometry.Coherent
+public import Sheaf.AlgebraicGeometry.Ample
+public import Sheaf.Paper.PQFCohomology
+public import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 
 /-!
 # Serre vanishing over a Noetherian affine base
@@ -16,6 +18,8 @@ import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 Source: Stacks Project, Cohomology of Schemes, Tags 02O1 and 0B5T (4);
 Morphisms, Tag 01VK (blueprint: lem-weil-pbc-coherent-serre-vanishing).
 -/
+
+@[expose] public section
 
 universe u
 

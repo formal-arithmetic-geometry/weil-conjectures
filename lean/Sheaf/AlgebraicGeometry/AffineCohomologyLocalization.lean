@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import Sheaf.AlgebraicGeometry.CohomologyFractionPresentation
-import Sheaf.AlgebraicGeometry.Ample
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
+module
+
+public import Sheaf.AlgebraicGeometry.CohomologyFractionPresentation
+public import Sheaf.AlgebraicGeometry.Ample
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 
 /-! # Localization of cohomology on an affine scheme
 
@@ -13,6 +15,8 @@ Source: Stacks Project, Cohomology of Schemes, Lemma 09MR, affine-open paragraph
 its proof; Properties, Tags 01PV and 01PW; Cohomology of Schemes, Tag 01XB
 (blueprint: lem-sc-invert-s-cohomology-affine-case).
 -/
+
+@[expose] public section
 
 universe uAffine
 

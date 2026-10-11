@@ -1,5 +1,7 @@
-import Sheaf.Topology.SetsExtensionByEmpty
-import Mathlib.Topology.Sheaves.Functors
+module
+
+public import Sheaf.Topology.SetsExtensionByEmpty
+public import Mathlib.Topology.Sheaves.Functors
 
 /-!
 # Inverse image of extension by the empty set of a constant sheaf
@@ -7,6 +9,8 @@ import Mathlib.Topology.Sheaves.Functors
 Source: `literature/stacks-project/modules.tex`, proof of Lemma 0CAK
 (blueprint: `lem-weil-pbc-sets-inverse-image-extension-by-empty-constant`).
 -/
+
+@[expose] public section
 
 set_option autoImplicit false
 

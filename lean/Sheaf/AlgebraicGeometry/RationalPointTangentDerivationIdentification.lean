@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Sheaf.AlgebraicGeometry.SchemeTangentSpace
-import Mathlib.AlgebraicGeometry.Stalk
-import Mathlib.RingTheory.Ideal.Cotangent
+module
+
+public import Sheaf.AlgebraicGeometry.SchemeTangentSpace
+public import Mathlib.AlgebraicGeometry.Stalk
+public import Mathlib.RingTheory.Ideal.Cotangent
 
 /-!
 # Rational tangent vectors and cotangent functionals
@@ -13,6 +15,8 @@ import Mathlib.RingTheory.Ideal.Cotangent
 Source: Stacks Project, Tags 0B2D and 0B2E, with base `Spec k`
 (blueprint: lem-sc-rational-point-tangent-derivation-identification).
 -/
+
+@[expose] public section
 
 noncomputable section
 

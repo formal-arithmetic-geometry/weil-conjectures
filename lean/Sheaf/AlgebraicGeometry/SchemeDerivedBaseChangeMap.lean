@@ -3,15 +3,19 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Sheaf.AlgebraicGeometry.DerivedAdjoint
-import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
-import Sheaf.AlgebraicGeometry.DerivedPullbackComposition
+module
+
+public import Sheaf.AlgebraicGeometry.DerivedAdjoint
+public import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
+public import Sheaf.AlgebraicGeometry.DerivedPullbackComposition
 
 /-! # The derived base-change morphism of O-modules
 
 Source: Stacks Project, Cohomology, Remark 08HY; equivalently the unit construction
 of Lemma 02N7 (blueprint: def-pc-derived-base-change-map).
 -/
+
+@[expose] public section
 
 set_option autoImplicit false
 universe uBC wBC uAdj wAdj

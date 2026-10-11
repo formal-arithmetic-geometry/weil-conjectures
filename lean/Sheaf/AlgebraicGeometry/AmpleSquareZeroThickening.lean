@@ -1,9 +1,11 @@
-import Sheaf.AlgebraicGeometry.Ample
-import Sheaf.AlgebraicGeometry.TensorPullback
-import Sheaf.AlgebraicGeometry.Modules.InvertiblePullbackTensor
-import WeilConjectures.AlgebraicGeometry.Modules.Invertible
-import Mathlib.AlgebraicGeometry.Noetherian
-import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+module
+
+public import Sheaf.AlgebraicGeometry.Ample
+public import Sheaf.AlgebraicGeometry.TensorPullback
+public import Sheaf.AlgebraicGeometry.Modules.InvertiblePullbackTensor
+public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
+public import Mathlib.AlgebraicGeometry.Noetherian
+public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 
 /-! # Ampleness lifts along a square-zero thickening
 
@@ -14,6 +16,8 @@ The invertibility of the pullback `j^*L` is the first clause of the landed
 `Scheme.Modules.invertible_pullback_tensor` (lem-weil-pbc-invertible-pullback-tensor);
 it is not restated here.
 -/
+
+@[expose] public section
 
 open CategoryTheory
 open AlgebraicGeometry

@@ -3,13 +3,17 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import Sheaf.Topology.RingedSpaceModuleCohomology
+module
+
+public import Sheaf.Topology.RingedSpaceModuleCohomology
 
 /-! # Module cohomology on open subsets and its restriction maps
 
 Source: Stacks Project, Cohomology, Tags 01DZ, 01E1 and 01EB
 (blueprint: def-sc-open-module-cohomology).
 -/
+
+@[expose] public section
 
 universe u
 

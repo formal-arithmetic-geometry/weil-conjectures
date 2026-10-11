@@ -3,11 +3,13 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Sheaf.AlgebraicGeometry.Coherent
-import Mathlib.AlgebraicGeometry.Noetherian
-import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
-import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-import Mathlib.CategoryTheory.Subobject.Limits
+module
+
+public import Sheaf.AlgebraicGeometry.Coherent
+public import Mathlib.AlgebraicGeometry.Noetherian
+public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
+public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+public import Mathlib.CategoryTheory.Subobject.Limits
 
 /-!
 # A coherent filtration supported on integral closed subschemes
@@ -15,6 +17,8 @@ import Mathlib.CategoryTheory.Subobject.Limits
 Source: Stacks Project, Cohomology of Schemes, Lemma 30.12.3, Tag 01YF
 (blueprint: lem-weil-pbc-coherent-filtration-integral-subschemes).
 -/
+
+@[expose] public section
 
 universe u
 

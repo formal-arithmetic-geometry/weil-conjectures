@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group S1
 -/
-import Sheaf.RingTheory.StrictlyStandardElement
-import Mathlib.RingTheory.FiniteStability
+module
+
+public import Sheaf.RingTheory.StrictlyStandardElement
+public import Mathlib.RingTheory.FiniteStability
 
 /-!
 # Base change of elementary and strictly standard elements
@@ -16,6 +18,8 @@ Mathlib writes the base change as `R' ⊗[R] A`, with its canonical left `R'`-al
 structure. Tensor commutativity identifies `1 ⊗ a` with the source's `a ⊗ 1`
 in `A ⊗[R] R'` as an `R'`-algebra.
 -/
+
+@[expose] public section
 
 universe u v w
 

@@ -3,18 +3,22 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group G1
 -/
-import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage
-import Sheaf.AlgebraicGeometry.PerfectComplex
-import Sheaf.AlgebraicGeometry.ClosedSubsetProperOverBase
-import Sheaf.AlgebraicGeometry.DerivedPullback
-import Mathlib.CategoryTheory.Filtered.Basic
-import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Defs
+module
+
+public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage
+public import Sheaf.AlgebraicGeometry.PerfectComplex
+public import Sheaf.AlgebraicGeometry.ClosedSubsetProperOverBase
+public import Sheaf.AlgebraicGeometry.DerivedPullback
+public import Mathlib.CategoryTheory.Filtered.Basic
+public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Defs
 
 /-! # Noetherian approximation of tensor data
 
 Source: Stacks Project, Tags 01ZR, 05LY, 081G, 09RF and Cohomology Lemma 30.26.7
 (blueprint: lem-pc-noetherian-approximation-data).
 -/
+
+@[expose] public section
 
 universe u w
 

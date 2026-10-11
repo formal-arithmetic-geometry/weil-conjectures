@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Mathlib.LinearAlgebra.ExteriorPower.Basic
+module
+
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Mathlib.LinearAlgebra.ExteriorPower.Basic
 
 /-!
 # Exterior powers of sheaves of modules
@@ -17,6 +19,8 @@ determinant paragraph (blueprint: def-sc-sheaf-exterior-power).
 - `AlgebraicGeometry.Scheme.Modules.exteriorSheaf`: sheafification of sectionwise exterior powers.
 - `AlgebraicGeometry.Scheme.Modules.exteriorSheafSection`: the wedge of local sections.
 -/
+
+@[expose] public section
 
 universe u
 

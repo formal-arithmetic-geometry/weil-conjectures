@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF contributors
 -/
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite
-import Mathlib.RingTheory.DedekindDomain.IntegralClosure
-import Mathlib.RingTheory.KrullDimension.Basic
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite
+public import Mathlib.RingTheory.DedekindDomain.IntegralClosure
+public import Mathlib.RingTheory.KrullDimension.Basic
 
 /-!
 # Integral closure of a one-dimensional Noetherian domain
@@ -13,6 +15,8 @@ import Mathlib.RingTheory.KrullDimension.Basic
 Source: literature/stacks-project/algebra.tex, Algebra Lemma 09IG
 (blueprint: lem-sc-integral-closure-dedekind-surjective-fibres).
 -/
+
+@[expose] public section
 
 universe u v
 

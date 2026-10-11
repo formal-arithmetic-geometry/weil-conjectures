@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import Sheaf.CategoryTheory.KInjectiveBridge
-import Mathlib.CategoryTheory.Abelian.RightDerived
-import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
+module
+
+public import Sheaf.CategoryTheory.KInjectiveBridge
+public import Mathlib.CategoryTheory.Abelian.RightDerived
+public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
 
 /-!
 # K-injective resolutions compute derived functors
@@ -13,6 +15,8 @@ import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
 Source: Weil conjectures blueprint, sec-abelian-varieties, sk-prop-av-pqf-finite,
 lemma lem-sp-kinjective-computes (blueprint: lem-sp-kinjective-computes).
 -/
+
+@[expose] public section
 
 universe w₁ w₂ v₁ v₂ u₁ u₂
 

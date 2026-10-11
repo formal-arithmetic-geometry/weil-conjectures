@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group J1
 -/
-import Sheaf.AlgebraicGeometry.LocallyFreeExtCohomology
-import WeilConjectures.AlgebraicGeometry.Cohomology.LongExact
+module
+
+public import Sheaf.AlgebraicGeometry.LocallyFreeExtCohomology
+public import WeilConjectures.AlgebraicGeometry.Cohomology.LongExact
 
 /-!
 # Cohomology boundary as composition with an extension class
@@ -12,6 +14,8 @@ import WeilConjectures.AlgebraicGeometry.Cohomology.LongExact
 Source: literature/stacks-project/cohomology.tex, Lemma Tag 0B3A and Derived Section Tag 06XP
 (blueprint: lem-sc-p1-boundary-extension-composition).
 -/
+
+@[expose] public section
 
 universe u
 

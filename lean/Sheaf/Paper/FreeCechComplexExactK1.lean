@@ -3,12 +3,14 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import Mathlib.Algebra.Category.ModuleCat.Presheaf.Free
-import Mathlib.Algebra.Category.ModuleCat.Presheaf.Colimits
-import Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
-import Mathlib.CategoryTheory.Sites.PrecoverageToGrothendieck
-import Mathlib.CategoryTheory.Sites.Sheaf
-import Mathlib.CategoryTheory.Limits.Shapes.WidePullbacks
+module
+
+public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Free
+public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Colimits
+public import Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
+public import Mathlib.CategoryTheory.Sites.PrecoverageToGrothendieck
+public import Mathlib.CategoryTheory.Sites.Sheaf
+public import Mathlib.CategoryTheory.Limits.Shapes.WidePullbacks
 
 /-!
 # Exactness of the free presheaf Čech complex
@@ -16,6 +18,8 @@ import Mathlib.CategoryTheory.Limits.Shapes.WidePullbacks
 Source: Stacks Project, `sites-cohomology.tex`, Lemmas 03F5 and 03AT
 (blueprint: lem-weil-pbc-ringed-site-free-cech-complex-exact).
 -/
+
+@[expose] public section
 
 universe u w r
 

@@ -3,14 +3,19 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group Q1
 -/
-import Sheaf.CategoryTheory.ColimitSites
-import Sheaf.CategoryTheory.SiteCohomologyPullback
+module
+
+public import Sheaf.CategoryTheory.ColimitSites
+public import Sheaf.CategoryTheory.SiteCohomologyPullback
 
 /-! # Cohomology on a colimit of sites
 
 Source: Stacks Project, Cohomology on Sites, Lemma 09YP, in Situation 0A34.
 (blueprint: lem-weil-pbc-cohomology-colimit-of-sites).
 -/
+
+@[expose] public section
+
 universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 open CategoryTheory.Functor.sheafPullbackConstruction

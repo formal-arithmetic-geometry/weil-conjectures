@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group P1
 -/
-import Sheaf.AlgebraicGeometry.StrictHenselizationStructuralMap
-import WeilConjectures.AlgebraicGeometry.Sites.Gm
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
+module
+
+public import Sheaf.AlgebraicGeometry.StrictHenselizationStructuralMap
+public import WeilConjectures.AlgebraicGeometry.Sites.Gm
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 
 /-!
 # Pullback of the units sheaf to a strict henselization
@@ -13,6 +15,8 @@ import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 Source: Stacks Project, Tag 03Q9, proof, and Tag 09YQ, continuity on inverse limits
 (blueprint: lem-weil-pbc-gm-pullback-strict-henselization).
 -/
+
+@[expose] public section
 
 universe u
 

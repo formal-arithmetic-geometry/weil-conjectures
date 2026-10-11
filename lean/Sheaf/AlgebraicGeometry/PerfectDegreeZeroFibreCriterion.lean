@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import Sheaf.AlgebraicGeometry.PerfectComplex
-import Sheaf.AlgebraicGeometry.DerivedPullback
-import Sheaf.AlgebraicGeometry.TorAmplitudeQCohTest
-import Mathlib.AlgebraicGeometry.ResidueField
+module
+
+public import Sheaf.AlgebraicGeometry.PerfectComplex
+public import Sheaf.AlgebraicGeometry.DerivedPullback
+public import Sheaf.AlgebraicGeometry.TorAmplitudeQCohTest
+public import Mathlib.AlgebraicGeometry.ResidueField
 
 /-! # The degree-zero residue-field criterion for a perfect complex
 
@@ -18,6 +20,8 @@ is a sheaf on `Spec κ(s)`, equivalently a `κ(s)`-module. Restriction to an ope
 is derived pullback along its inclusion. The structure sheaf is `SheafOfModules.unit`
 placed in degree zero. The positive Tor-amplitude condition tests every module sheaf.
 -/
+
+@[expose] public section
 
 universe u w
 

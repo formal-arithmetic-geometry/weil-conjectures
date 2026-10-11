@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group U1
 -/
-import Sheaf.AlgebraicGeometry.SymmetricProductProperties
+module
+
+public import Sheaf.AlgebraicGeometry.SymmetricProductProperties
 
 /-!
 # The symmetric-product morphism is over the base
@@ -12,6 +14,8 @@ Source: Stacks Project, Etale Cohomology, proof of Tag 0A4F, last paragraph;
 Constructions, paragraph following Definition 01NF
 (blueprint: lem-weil-pbc-symmetric-product-over-base).
 -/
+
+@[expose] public section
 
 universe v
 

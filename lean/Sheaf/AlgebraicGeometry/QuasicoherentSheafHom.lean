@@ -3,15 +3,19 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
-import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
+module
+
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
 
 /-! # Quasi-coherence of sheaf Hom from a finitely presented module
 
 Source: Stacks Project, Schemes, Section 01LA, item (10), using Modules, Lemma 01CQ
 (blueprint: lem-weil-pbc-sheaf-hom-finite-presentation-quasi-coherent).
 -/
+
+@[expose] public section
 
 universe u
 

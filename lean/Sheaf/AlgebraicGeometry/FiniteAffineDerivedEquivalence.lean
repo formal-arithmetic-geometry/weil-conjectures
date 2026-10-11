@@ -3,14 +3,18 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under the Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group S1
 -/
-import Sheaf.AlgebraicGeometry.DirectImageAlgebraDerivedCategory
-import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
+module
+
+public import Sheaf.AlgebraicGeometry.DirectImageAlgebraDerivedCategory
+public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
 
 /-! # Derived quasi-coherent equivalence for an affine morphism
 
 Source: Stacks Project, Derived Categories of Schemes, Lemma 36.5.4, Tag 0AVW
 (blueprint: lem-sc-finite-affine-derived-equivalence).
 -/
+
+@[expose] public section
 
 universe v wX wY wA
 

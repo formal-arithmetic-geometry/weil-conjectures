@@ -3,12 +3,14 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import Mathlib.FieldTheory.Galois.Basic
-import Mathlib.FieldTheory.PurelyInseparable.Basic
-import Mathlib.RingTheory.TensorProduct.Basic
-import Mathlib.RingTheory.Ideal.Quotient.Basic
-import Mathlib.RingTheory.Spectrum.Prime.Basic
-import Mathlib.Algebra.Field.IsField
+module
+
+public import Mathlib.FieldTheory.Galois.Basic
+public import Mathlib.FieldTheory.PurelyInseparable.Basic
+public import Mathlib.RingTheory.TensorProduct.Basic
+public import Mathlib.RingTheory.Ideal.Quotient.Basic
+public import Mathlib.RingTheory.Spectrum.Prime.Basic
+public import Mathlib.Algebra.Field.IsField
 
 /-!
 # Separable splitting with purely inseparable residue fields
@@ -16,6 +18,8 @@ import Mathlib.Algebra.Field.IsField
 Source: Stacks Project, More on Morphisms, proof of Lemma 02LM; Fields, Lemmas 030K,
 09DT and 0EXM (blueprint: lem-weil-pbc-separable-split-purely-inseparable-residue-fields).
 -/
+
+@[expose] public section
 
 set_option autoImplicit false
 

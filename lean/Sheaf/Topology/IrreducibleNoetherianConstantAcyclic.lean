@@ -1,9 +1,13 @@
-import Mathlib.Topology.Sheaves.Sheaf
-import Mathlib.Topology.NoetherianSpace
-import Mathlib.CategoryTheory.Sites.ConstantSheaf
-import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
-import Mathlib.Topology.Sheaves.Flasque
-import Sheaf.Topology.IrreducibleConstantSections
+module
+
+public import Mathlib.Topology.Sheaves.Sheaf
+public import Mathlib.Topology.NoetherianSpace
+public import Mathlib.CategoryTheory.Sites.ConstantSheaf
+public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
+public import Mathlib.Topology.Sheaves.Flasque
+public import Sheaf.Topology.IrreducibleConstantSections
+
+@[expose] public section
 
 open CategoryTheory TopologicalSpace Opposite
 

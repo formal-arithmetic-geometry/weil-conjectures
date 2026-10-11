@@ -1,10 +1,14 @@
-import Mathlib.Algebra.Module.LocalizedModule.Basic
-import Mathlib.RingTheory.Noetherian.Basic
+module
+
+public import Mathlib.Algebra.Module.LocalizedModule.Basic
+public import Mathlib.RingTheory.Noetherian.Basic
 
 /-! # Ogoma's lemma
 Source: literature/stacks-project/smoothing.tex, Smoothing Ring Maps, Lemma Tag 07FC
 (blueprint: lem-weil-pbc-ogoma)
 -/
+
+@[expose] public section
 
 universe u v
 

@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import Sheaf.AlgebraicGeometry.Thickening
-import Mathlib.AlgebraicGeometry.AffineScheme
-import Mathlib.AlgebraicGeometry.Over
+module
+
+public import Sheaf.AlgebraicGeometry.Thickening
+public import Mathlib.AlgebraicGeometry.AffineScheme
+public import Mathlib.AlgebraicGeometry.Over
 
 /-!
 # Formally smooth morphisms of schemes
@@ -13,6 +15,8 @@ import Mathlib.AlgebraicGeometry.Over
 Source: Stacks Project, More on Morphisms, Definition 37.11.1 (Tag 02H0)
 (blueprint: def-sbc-formally-smooth).
 -/
+
+@[expose] public section
 
 universe u
 

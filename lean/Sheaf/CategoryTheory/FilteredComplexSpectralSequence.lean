@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Mathlib.Algebra.Homology.SpectralSequence.Basic
-import Sheaf.Algebra.Homology.FilteredComplexSubquotients
+module
+
+public import Mathlib.Algebra.Homology.SpectralSequence.Basic
+public import Sheaf.Algebra.Homology.FilteredComplexSubquotients
 
 /-!
 # Spectral sequence of a filtered complex
@@ -13,6 +15,8 @@ Source: Stacks Project, Homology, Definition 12.18.1 and Remark 12.18.2,
 used in the proof of Lemma 12.19.2 (Tag 012K) (blueprint:
 lem-sp-filtered-complex-associated-spectral-sequence-construction).
 -/
+
+@[expose] public section
 
 universe v u
 

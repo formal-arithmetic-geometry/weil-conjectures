@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import Sheaf.CategoryTheory.Filtration
-import Mathlib.Algebra.Homology.HomologicalComplexAbelian
-import Mathlib.CategoryTheory.Subobject.Limits
+module
+
+public import Sheaf.CategoryTheory.Filtration
+public import Mathlib.Algebra.Homology.HomologicalComplexAbelian
+public import Mathlib.CategoryTheory.Subobject.Limits
 
 /-!
 # Subquotients and cycle notation for filtered cochain complexes
@@ -13,6 +15,8 @@ import Mathlib.CategoryTheory.Subobject.Limits
 Source: Stacks Project, Homology, Section 12.24 (Tag 012K), displayed cycle and boundary
 formulas (blueprint: def-sp-filtered-complex-subquotients).
 -/
+
+@[expose] public section
 
 universe v u
 

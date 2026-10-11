@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import Mathlib.RingTheory.AdicCompletion.Basic
-import Sheaf.RingTheory.CohenRing
-import Mathlib.RingTheory.LocalRing.ResidueField.Defs
-import Mathlib.RingTheory.MvPowerSeries.Basic
+module
+
+public import Mathlib.RingTheory.AdicCompletion.Basic
+public import Sheaf.RingTheory.CohenRing
+public import Mathlib.RingTheory.LocalRing.ResidueField.Defs
+public import Mathlib.RingTheory.MvPowerSeries.Basic
 
 /-!
 # Power series presentations of complete local rings
@@ -14,6 +16,8 @@ import Mathlib.RingTheory.MvPowerSeries.Basic
 Source: Stacks Project, Algebra, Theorem 032A, part (2) and its proof
 (blueprint: lem-weil-pbc-cohen-structure-power-series-surjection).
 -/
+
+@[expose] public section
 
 universe u
 

@@ -3,14 +3,18 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Mathlib.AlgebraicGeometry.Morphisms.Separated
-import Mathlib.AlgebraicGeometry.AffineScheme
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.Separated
+public import Mathlib.AlgebraicGeometry.AffineScheme
 
 /-! # Separatedness from an affine open cover with affine overlaps
 
 Source: literature/stacks-project/schemes.tex, Schemes, Lemma Tag 01KP (2)
 (blueprint: lem-weil-pbc-separated-affine-cover-criterion)
 -/
+
+@[expose] public section
 
 open CategoryTheory
 open CategoryTheory.Limits

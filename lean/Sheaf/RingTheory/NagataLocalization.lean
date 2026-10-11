@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group G1
 -/
-import Sheaf.RingTheory.NagataRing
-import Mathlib.RingTheory.Localization.AtPrime.Basic
-import Mathlib.RingTheory.Localization.Away.Basic
+module
+
+public import Sheaf.RingTheory.NagataRing
+public import Mathlib.RingTheory.Localization.AtPrime.Basic
+public import Mathlib.RingTheory.Localization.Away.Basic
 
 /-!
 # Localizations of Nagata rings
@@ -13,6 +15,8 @@ import Mathlib.RingTheory.Localization.Away.Basic
 Source: Stacks Project, Algebra, Lemma 10.162.6 (Tag 032U), `lemma-nagata-localize`
 (blueprint: lem-weil-pbc-nagata-localization).
 -/
+
+@[expose] public section
 
 universe u
 

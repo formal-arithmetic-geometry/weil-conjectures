@@ -2,13 +2,18 @@
 Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under the Apache 2.0 license as described in the file LICENSE.
 -/
-import Sheaf.AlgebraicGeometry.PerfectComplex
+module
+
+public import Sheaf.AlgebraicGeometry.PerfectComplex
 
 /-! # Affine perfect extension after adjoining a shift
 
 Source: literature/stacks-project/perfect.tex, Tag 08EI (Lemma 36.13.8)
 (blueprint: lem-sc-affine-perfect-plus-shift).
 -/
+
+@[expose] public section
+
 set_option autoImplicit false
 universe u w
 open CategoryTheory CategoryTheory.Limits

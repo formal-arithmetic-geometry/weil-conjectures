@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF worker J1
 -/
-import Mathlib.AlgebraicGeometry.Sites.Fpqc
-import Mathlib.CategoryTheory.Sites.Over
+module
+
+public import Mathlib.AlgebraicGeometry.Sites.Fpqc
+public import Mathlib.CategoryTheory.Sites.Over
 
 /-!
 # Restriction of fppf sheafification to affine schemes
@@ -12,6 +14,8 @@ import Mathlib.CategoryTheory.Sites.Over
 Source: Stacks Project, Topologies, Lemma 34.7.11 (Tag 021V)
 (blueprint: lem-pc-fppf-affine-sheafification-restriction).
 -/
+
+@[expose] public section
 
 universe u
 

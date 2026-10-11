@@ -1,7 +1,9 @@
-import Mathlib.Algebra.Homology.DerivedCategory.Basic
-import Mathlib.Algebra.Homology.Embedding.CochainComplex
-import Mathlib.Algebra.Homology.Single
-import Mathlib.CategoryTheory.Triangulated.Triangulated
+module
+
+public import Mathlib.Algebra.Homology.DerivedCategory.Basic
+public import Mathlib.Algebra.Homology.Embedding.CochainComplex
+public import Mathlib.Algebra.Homology.Single
+public import Mathlib.CategoryTheory.Triangulated.Triangulated
 
 /-!
 # Distinguished triangle for canonical truncations
@@ -9,6 +11,8 @@ import Mathlib.CategoryTheory.Triangulated.Triangulated
 Source: literature/stacks-project/derived.tex, Remark 08J5 (line 4076)
 (blueprint: lem-weil-pbc-truncation-triangle).
 -/
+
+@[expose] public section
 
 universe w v u
 

@@ -1,10 +1,12 @@
-import Mathlib.AlgebraicGeometry.Morphisms.Proper
-import Mathlib.AlgebraicGeometry.Morphisms.Flat
-import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
-import Mathlib.AlgebraicGeometry.Morphisms.Immersion
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.Proper
+public import Mathlib.AlgebraicGeometry.Morphisms.Flat
+public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
+public import Mathlib.AlgebraicGeometry.Morphisms.Immersion
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
 
 /-!
 # Universal locally closed pullback locus for a finite locally free module
@@ -12,6 +14,8 @@ import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
 Source: Stacks Project, More on Morphisms, Lemma diagonal-picard-flat-proper, Tag 0BDP
 (blueprint: lem-sc-picard-diagonal-locally-closed).
 -/
+
+@[expose] public section
 
 universe u
 

@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import Sheaf.RingTheory.IsStrictHenselization
-import Mathlib.RingTheory.KrullDimension.Basic
+module
+
+public import Sheaf.RingTheory.IsStrictHenselization
+public import Mathlib.RingTheory.KrullDimension.Basic
 
 /-!
 # Krull dimension of a strict henselization
@@ -12,6 +14,8 @@ import Mathlib.RingTheory.KrullDimension.Basic
 Source: Stacks Project, More on Algebra, Tag 06LK
 (blueprint: lem-sc-strict-henselization-dimension).
 -/
+
+@[expose] public section
 
 universe u
 

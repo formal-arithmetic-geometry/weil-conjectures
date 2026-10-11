@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Sheaf.CategoryTheory.GrothendieckComposablePair
-import Sheaf.CategoryTheory.CartanEilenbergPresentation
-import Sheaf.CategoryTheory.FilteredPageTwoModel
-import Mathlib.Algebra.Homology.Embedding.ExtendHomology
+module
+
+public import Sheaf.CategoryTheory.GrothendieckComposablePair
+public import Sheaf.CategoryTheory.CartanEilenbergPresentation
+public import Sheaf.CategoryTheory.FilteredPageTwoModel
+public import Mathlib.Algebra.Homology.Embedding.ExtendHomology
 
 /-! # The Cartan--Eilenberg construction of the Grothendieck spectral sequence
 
@@ -17,6 +19,8 @@ The integer indexing extends the first quadrant by zero. The comparison with the
 existing truncation spectral object fixes the usual edge maps, while the filtered
 page model specifies the Cartan--Eilenberg construction from page two onward.
 -/
+
+@[expose] public section
 
 universe uA vA uB vB uC vC
 

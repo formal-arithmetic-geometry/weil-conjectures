@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Mathlib.AlgebraicGeometry.Morphisms.Etale
-import Mathlib.AlgebraicGeometry.Morphisms.Separated
-import Mathlib.AlgebraicGeometry.Pullbacks
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.Etale
+public import Mathlib.AlgebraicGeometry.Morphisms.Separated
+public import Mathlib.AlgebraicGeometry.Pullbacks
 
 /-!
 # Étale-local decomposition near unramified fibre points
@@ -13,6 +15,8 @@ import Mathlib.AlgebraicGeometry.Pullbacks
 Source: Stacks Project, Étale Morphisms, Lemma 41.17.2, Tag 04HI
 (blueprint: lem-weil-pbc-unramified-etale-local-decomposition).
 -/
+
+@[expose] public section
 
 universe u
 

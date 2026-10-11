@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
-import Mathlib.Algebra.Category.ModuleCat.Monoidal.Symmetric
-import Mathlib.Algebra.Homology.Bifunctor
+module
+
+public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
+public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Symmetric
+public import Mathlib.Algebra.Homology.Bifunctor
 
 /-!
 # Total tensor with two coefficient rings
@@ -23,6 +25,8 @@ Source: Stacks Project, More on Algebra, Section 06Y5 preceding Lemma 06Y6
 - `ModuleCat.mixedTensor_preservesZeroMorphisms`: zero preservation in the first variable.
 - `ModuleCat.mixedTensor_obj_preservesZeroMorphisms`: zero preservation in the second variable.
 -/
+
+@[expose] public section
 
 universe u
 

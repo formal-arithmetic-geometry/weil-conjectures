@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Mathlib.RingTheory.Smooth.Basic
-import Mathlib.RingTheory.Localization.Away.Basic
-import Mathlib.RingTheory.Extension.Presentation.Basic
-import Mathlib.LinearAlgebra.SymmetricAlgebra.Basic
+module
+
+public import Mathlib.RingTheory.Smooth.Basic
+public import Mathlib.RingTheory.Localization.Away.Basic
+public import Mathlib.RingTheory.Extension.Presentation.Basic
+public import Mathlib.LinearAlgebra.SymmetricAlgebra.Basic
 
 /-!
 # Improving a presentation by a symmetric algebra
@@ -19,6 +21,8 @@ smooth localizations (blueprint: lem-weil-pbc-improve-presentation).
 * `Algebra.exists_finiteType_retract_smooth_free_differentials`: the finite type retract.
 * `Algebra.Presentation.symmetricAlgebra_improves`: the specified conormal construction.
 -/
+
+@[expose] public section
 
 universe u v
 

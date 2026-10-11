@@ -1,5 +1,7 @@
-import Sheaf.CategoryTheory.SiteMorphismComposition
-import Mathlib.CategoryTheory.Sites.Pullback
+module
+
+public import Sheaf.CategoryTheory.SiteMorphismComposition
+public import Mathlib.CategoryTheory.Sites.Pullback
 
 /-!
 # Transport of morphisms of sites across equivalences
@@ -7,6 +9,8 @@ import Mathlib.CategoryTheory.Sites.Pullback
 Source: literature/stacks-project/sites.tex, Definitions 00VH, 00WV, 00X1 and
 Lemma 03CB (blueprint: lem-weil-pbc-site-equivalence-morphism-transport).
 -/
+
+@[expose] public section
 
 universe u
 

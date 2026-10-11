@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import Mathlib.FieldTheory.PurelyInseparable.Basic
-import Sheaf.FieldTheory.SeparableExtension
+module
+
+public import Mathlib.FieldTheory.PurelyInseparable.Basic
+public import Sheaf.FieldTheory.SeparableExtension
 
 /-!
 # Making a finitely generated field extension separably generated
@@ -16,6 +18,8 @@ Source: Stacks Project, Algebra, Lemma Tag 04KM (lemma-make-separably-generated)
 
 * `FieldExtension.exists_finitePurelyInseparable_separablyGenerated`.
 -/
+
+@[expose] public section
 
 set_option autoImplicit false
 

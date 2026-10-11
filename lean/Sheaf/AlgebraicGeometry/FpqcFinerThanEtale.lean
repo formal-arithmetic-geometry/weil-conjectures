@@ -1,5 +1,7 @@
-import Mathlib.AlgebraicGeometry.Sites.Etale
-import Mathlib.AlgebraicGeometry.Sites.Fpqc
+module
+
+public import Mathlib.AlgebraicGeometry.Sites.Etale
+public import Mathlib.AlgebraicGeometry.Sites.Fpqc
 
 /-!
 # Every small étale covering family is an fpqc covering
@@ -7,6 +9,8 @@ import Mathlib.AlgebraicGeometry.Sites.Fpqc
 Source: Stacks Project, Topologies, Tag 022C, lines 3043--3077;
 (blueprint: lem-weil-pbc-fpqc-finer-than-etale).
 -/
+
+@[expose] public section
 
 universe v u
 

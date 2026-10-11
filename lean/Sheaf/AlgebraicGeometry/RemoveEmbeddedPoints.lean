@@ -3,17 +3,21 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Sheaf.AlgebraicGeometry.Coherent
-import Mathlib.AlgebraicGeometry.Noetherian
-import Mathlib.RingTheory.Ideal.AssociatedPrime.Basic
-import Mathlib.Topology.GDelta.Basic
-import Mathlib.Topology.KrullDimension
+module
+
+public import Sheaf.AlgebraicGeometry.Coherent
+public import Mathlib.AlgebraicGeometry.Noetherian
+public import Mathlib.RingTheory.Ideal.AssociatedPrime.Basic
+public import Mathlib.Topology.GDelta.Basic
+public import Mathlib.Topology.KrullDimension
 
 /-! # Removing embedded associated points of a coherent module
 
 Source: Stacks Project, Divisors, Tag 02OL (blueprint: lem-sc-hilbert-embedded-points).
 The dimension clause is the additional support-dimension argument recorded in the DAG.
 -/
+
+@[expose] public section
 
 universe u
 

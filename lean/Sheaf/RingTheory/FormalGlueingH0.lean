@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Sheaf.RingTheory.FormalGlueingData
+module
+
+public import Sheaf.RingTheory.FormalGlueingData
 
 /-!
 # The zeroth module of formal glueing data
@@ -11,6 +13,8 @@ import Sheaf.RingTheory.FormalGlueingData
 Source: Stacks Project, More on Algebra, Remark 05EL
 (blueprint: def-weil-pbc-formal-glueing-H0).
 -/
+
+@[expose] public section
 
 universe u v w
 

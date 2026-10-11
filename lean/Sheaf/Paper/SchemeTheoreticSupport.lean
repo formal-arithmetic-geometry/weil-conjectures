@@ -3,15 +3,19 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group G1
 -/
-import Sheaf.AlgebraicGeometry.Coherent
-import Sheaf.AlgebraicGeometry.ClosedSubsetProperOverBase
-import Mathlib.AlgebraicGeometry.IdealSheaf.Basic
+module
+
+public import Sheaf.AlgebraicGeometry.Coherent
+public import Sheaf.AlgebraicGeometry.ClosedSubsetProperOverBase
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Basic
 
 /-! # Scheme-theoretic support
 
 Source: Stacks Project, Morphisms, Lemma 05JU and Definition 05JV
 (blueprint: lem-weil-pbc-scheme-theoretic-support).
 -/
+
+@[expose] public section
 
 universe u
 

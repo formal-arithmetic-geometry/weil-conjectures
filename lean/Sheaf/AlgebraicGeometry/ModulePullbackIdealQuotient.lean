@@ -1,6 +1,8 @@
-import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
-import Sheaf.AlgebraicGeometry.TensorPullback
-import Sheaf.AlgebraicGeometry.CoherentFormalModule
+module
+
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
+public import Sheaf.AlgebraicGeometry.TensorPullback
+public import Sheaf.AlgebraicGeometry.CoherentFormalModule
 
 /-! # Pullback and quotients by extended ideals
 
@@ -9,6 +11,8 @@ lem-weil-pbc-module-pullback-ideal-quotient). The extended ideal `𝒥𝒪_X` is
 `Scheme.IdealSheafData.comap` (def-nagata-extended-ideal); products and quotients are the
 shared `Scheme.idealModuleProduct` and `formalModuleQuotient`.
 -/
+
+@[expose] public section
 
 universe v
 

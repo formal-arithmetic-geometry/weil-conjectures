@@ -3,12 +3,14 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import Sheaf.AlgebraicGeometry.Coherent
-import Sheaf.AlgebraicGeometry.Dimension
-import Mathlib.AlgebraicGeometry.Noetherian
-import Mathlib.RingTheory.RegularLocalRing.Defs
-import WeilConjectures.AlgebraicGeometry.Modules.Ext
-import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.TransitionUnits
+module
+
+public import Sheaf.AlgebraicGeometry.Coherent
+public import Sheaf.AlgebraicGeometry.Dimension
+public import Mathlib.AlgebraicGeometry.Noetherian
+public import Mathlib.RingTheory.RegularLocalRing.Defs
+public import WeilConjectures.AlgebraicGeometry.Modules.Ext
+public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.TransitionUnits
 
 /-!
 # Higher Ext vanishing for coherent modules on regular schemes
@@ -21,6 +23,8 @@ Source: Stacks Project, Derived Categories of Varieties, Lemma 57.9.4 (Tag 0FZ3)
 * `Scheme.Modules.coherent_ext_subsingleton_of_regular`: vanishing above finite dimension.
 * `Scheme.Modules.projectiveLine_coherent_ext_subsingleton`: vanishing in degrees at least two.
 -/
+
+@[expose] public section
 
 universe u
 

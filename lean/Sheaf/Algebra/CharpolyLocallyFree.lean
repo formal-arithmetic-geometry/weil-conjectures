@@ -3,15 +3,19 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group G1
 -/
-import Mathlib.LinearAlgebra.Matrix.Charpoly.Basic
-import Mathlib.Algebra.Module.LocalizedModule.Basic
-import Mathlib.RingTheory.Localization.Away.Basic
-import Mathlib.LinearAlgebra.TensorProduct.Tower
+module
+
+public import Mathlib.LinearAlgebra.Matrix.Charpoly.Basic
+public import Mathlib.Algebra.Module.LocalizedModule.Basic
+public import Mathlib.RingTheory.Localization.Away.Basic
+public import Mathlib.LinearAlgebra.TensorProduct.Tower
 
 /-! # Characteristic polynomial of a locally free module
 Source: literature/stacks-project/more-algebra.tex, Lemma Tag 09XI
 (blueprint: lem-weil-pbc-charpoly-locally-free-existence)
 -/
+
+@[expose] public section
 
 universe u v w
 

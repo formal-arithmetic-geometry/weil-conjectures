@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import Sheaf.CategoryTheory.Sites.TorsorExtensionPresentation
-import Sheaf.CategoryTheory.Sites.ContractedProductPresentation
-import Mathlib.CategoryTheory.Sites.Abelian
-import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
+module
+
+public import Sheaf.CategoryTheory.Sites.TorsorExtensionPresentation
+public import Sheaf.CategoryTheory.Sites.ContractedProductPresentation
+public import Mathlib.CategoryTheory.Sites.Abelian
+public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
 
 /-!
 # Pushout of the canonical étale torsor extension
@@ -14,6 +16,8 @@ import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
 Source: Stacks Project, Cohomology on Sites, Lemma 03AJ, and the blueprint's pushout-fibre
 argument (blueprint: lem-sc-etale-torsor-pushout-extension).
 -/
+
+@[expose] public section
 
 universe uP wP
 

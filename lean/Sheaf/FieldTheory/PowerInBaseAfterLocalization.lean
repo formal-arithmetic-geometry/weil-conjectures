@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import Mathlib.FieldTheory.PurelyInseparable.Basic
-import Mathlib.RingTheory.Localization.FractionRing
-import Mathlib.RingTheory.TensorProduct.Basic
+module
+
+public import Mathlib.FieldTheory.PurelyInseparable.Basic
+public import Mathlib.RingTheory.Localization.FractionRing
+public import Mathlib.RingTheory.TensorProduct.Basic
 
 /-!
 # Powers in the base after localization
@@ -15,6 +17,8 @@ Source: literature/stacks-project/algebra.tex, Algebra, Section 0BR5
 (lemma-powers) for a finite purely inseparable extension
 (blueprint: lem-weil-pbc-power-in-base-after-localization).
 -/
+
+@[expose] public section
 
 set_option autoImplicit false
 

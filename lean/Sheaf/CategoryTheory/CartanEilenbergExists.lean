@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import Mathlib.Algebra.Homology.HomologicalBicomplex
-import Mathlib.Algebra.Homology.HomologicalComplexAbelian
-import Mathlib.CategoryTheory.Preadditive.Injective.Resolution
+module
+
+public import Mathlib.Algebra.Homology.HomologicalBicomplex
+public import Mathlib.Algebra.Homology.HomologicalComplexAbelian
+public import Mathlib.CategoryTheory.Preadditive.Injective.Resolution
 
 /-! # Existence of Cartan--Eilenberg injective resolutions
 
@@ -19,6 +21,8 @@ are computed degreewise. Quasi-isomorphisms from these single-degree complexes,
 together with injectivity of every target term, express injective resolutions
 using exactly the data of `CategoryTheory.InjectiveResolution`.
 -/
+
+@[expose] public section
 
 open CategoryTheory CategoryTheory.Limits
 

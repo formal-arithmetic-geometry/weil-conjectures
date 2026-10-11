@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group J1
 -/
-import Mathlib.Topology.Sheaves.Presheaf
-import Mathlib.Topology.LocallyConstant.Basic
+module
+
+public import Mathlib.Topology.Sheaves.Presheaf
+public import Mathlib.Topology.LocallyConstant.Basic
 
 /-!
 # The section presheaf of a constant sheaf pushed forward from a closed subset
@@ -12,6 +14,8 @@ import Mathlib.Topology.LocallyConstant.Basic
 Source: Stacks Project, Sheaves on Spaces, Tags 006W and 00AE
 (blueprint: def-weil-pbc-closed-pushforward-constant-presheaf).
 -/
+
+@[expose] public section
 
 set_option autoImplicit false
 

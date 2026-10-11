@@ -3,12 +3,16 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group G1
 -/
-import Mathlib.Algebra.Homology.DerivedCategory.Basic
+module
+
+public import Mathlib.Algebra.Homology.DerivedCategory.Basic
 
 /-! # Precise vanishing for truncated bounded projective complexes
 
 Source: Stacks Project, Tag 064D (blueprint: lem-pc-ring-precise-vanishing).
 -/
+
+@[expose] public section
 
 open CategoryTheory
 open CategoryTheory.Limits

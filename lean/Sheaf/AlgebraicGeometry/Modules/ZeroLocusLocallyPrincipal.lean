@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import WeilConjectures.AlgebraicGeometry.Modules.ZeroLocus
+module
+
+public import WeilConjectures.AlgebraicGeometry.Modules.ZeroLocus
 
 /-!
 # The zero locus of a morphism of invertible modules is locally principal
@@ -12,6 +14,8 @@ Source: `WeilConjectures/AlgebraicGeometry/Modules/ZeroLocus.lean`, theorem
 `Hom.isLocallyPrincipal_zeroLocus`, lines 570–576
 (blueprint: lem-pc-zero-scheme-locally-principal).
 -/
+
+@[expose] public section
 
 universe u
 

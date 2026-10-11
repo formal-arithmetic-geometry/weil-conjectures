@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import Mathlib.CategoryTheory.Abelian.RightDerived
-import Sheaf.CategoryTheory.DeltaFunctor
+module
+
+public import Mathlib.CategoryTheory.Abelian.RightDerived
+public import Sheaf.CategoryTheory.DeltaFunctor
 
 /-!
 # Right derived functors form a universal delta-functor
@@ -12,6 +14,8 @@ import Sheaf.CategoryTheory.DeltaFunctor
 Source: Stacks Project, Derived Categories, Lemmas 015B (2), (4) and 05TE;
 Homology, Lemma 010T (blueprint: lem-weil-pbc-right-derived-universal-delta-functor).
 -/
+
+@[expose] public section
 
 universe v₁ v₂ u₁ u₂
 

@@ -3,17 +3,22 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group V1
 -/
-import Sheaf.AlgebraicGeometry.GlobalDerivedHom
-import Sheaf.AlgebraicGeometry.QCqsDerivedDirectImageRightAdjoint
-import Sheaf.AlgebraicGeometry.SchemeDerivedBaseChangeMap
-import Sheaf.AlgebraicGeometry.CanonicalPullbackTensorComparison
-import Sheaf.AlgebraicGeometry.CanonicalDerivedTensorHom
-import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+module
+
+public import Sheaf.AlgebraicGeometry.GlobalDerivedHom
+public import Sheaf.AlgebraicGeometry.QCqsDerivedDirectImageRightAdjoint
+public import Sheaf.AlgebraicGeometry.SchemeDerivedBaseChangeMap
+public import Sheaf.AlgebraicGeometry.CanonicalPullbackTensorComparison
+public import Sheaf.AlgebraicGeometry.CanonicalDerivedTensorHom
+public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
 /-! # Canonical global Hom adjunction
 Source: Stacks Project, duality.tex, Tag 0B6I (lemma-iso-global-hom).
 (blueprint: lem-pc-global-hom-adjunction).
 -/
+
+@[expose] public section
+
 set_option autoImplicit false
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false

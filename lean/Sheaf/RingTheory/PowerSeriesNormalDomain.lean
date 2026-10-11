@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import Mathlib.RingTheory.PowerSeries.NoZeroDivisors
-import Mathlib.RingTheory.Noetherian.Defs
-import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
+module
+
+public import Mathlib.RingTheory.PowerSeries.NoZeroDivisors
+public import Mathlib.RingTheory.Noetherian.Defs
+public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
 
 /-!
 # Power series over a Noetherian normal domain
@@ -17,6 +19,8 @@ The one-variable ring is Mathlib's `PowerSeries R`, the one-variable case of the
 recorded power series notion.
 Normality for a domain is `IsIntegrallyClosed`, integrality in its fraction field.
 -/
+
+@[expose] public section
 
 universe u
 

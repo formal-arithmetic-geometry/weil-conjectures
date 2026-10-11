@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import Mathlib.RingTheory.Smooth.Basic
+module
+
+public import Mathlib.RingTheory.Smooth.Basic
 
 /-!
 # Smoothness over a product ring
@@ -11,6 +13,8 @@ import Mathlib.RingTheory.Smooth.Basic
 Source: literature/stacks-project/algebra.tex, implicit in Lemma Tags 0GIF and 00TD
 (blueprint: lem-weil-pbc-smooth-over-product-ring).
 -/
+
+@[expose] public section
 
 universe u₁ u₂ v₁ v₂
 

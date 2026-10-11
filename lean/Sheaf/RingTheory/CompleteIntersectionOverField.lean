@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Mathlib.RingTheory.FiniteType
-import Mathlib.RingTheory.Spectrum.Prime.Topology
+module
+
+public import Mathlib.RingTheory.FiniteType
+public import Mathlib.RingTheory.Spectrum.Prime.Topology
 
 /-!
 # Complete intersections over a field
@@ -19,6 +21,8 @@ Source: Stacks Project, Algebra, Definition 10.135.1 (Tag 00S9)
 * `Algebra.IsLocalCompleteIntersection`: a cover by principal opens whose localizations are
   global complete intersections.
 -/
+
+@[expose] public section
 
 universe u v
 

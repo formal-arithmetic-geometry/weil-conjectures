@@ -1,9 +1,11 @@
-import Mathlib.RingTheory.Noetherian.Defs
-import Mathlib.RingTheory.Ideal.Quotient.Operations
-import Mathlib.RingTheory.Smooth.Basic
-import Mathlib.RingTheory.Localization.Away.Basic
-import Sheaf.RingTheory.StrictlyStandardElement
-import Sheaf.RingTheory.SingularIdeal
+module
+
+public import Mathlib.RingTheory.Noetherian.Defs
+public import Mathlib.RingTheory.Ideal.Quotient.Operations
+public import Mathlib.RingTheory.Smooth.Basic
+public import Mathlib.RingTheory.Localization.Away.Basic
+public import Sheaf.RingTheory.StrictlyStandardElement
+public import Sheaf.RingTheory.SingularIdeal
 
 /-!
 # Lifting a factorization modulo pi^8 (Popescu)
@@ -15,6 +17,8 @@ Source: Stacks Project, Smoothing Ring Maps, Lemma Tag 07F0 (blueprint:
 
 * `popescu_desingularize_lifting_apply`.
 -/
+
+@[expose] public section
 
 universe u v w z
 

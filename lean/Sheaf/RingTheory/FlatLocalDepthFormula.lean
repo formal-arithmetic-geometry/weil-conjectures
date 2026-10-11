@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import Sheaf.RingTheory.Depth
-import Mathlib.RingTheory.RingHom.Flat
-import Mathlib.RingTheory.Noetherian.Defs
-import Mathlib.RingTheory.LocalRing.RingHom.Basic
+module
+
+public import Sheaf.RingTheory.Depth
+public import Mathlib.RingTheory.RingHom.Flat
+public import Mathlib.RingTheory.Noetherian.Defs
+public import Mathlib.RingTheory.LocalRing.RingHom.Basic
 
 /-!
 # Depth formula for a flat local homomorphism
@@ -15,6 +17,8 @@ Source: Stacks Project, Algebra, Lemma 10.163.2 (Tag 0337), the ring case of
 Lemma 10.163.1 (Tag 0338; EGA IV, Proposition 6.3.1)
 (blueprint: lem-weil-pbc-flat-local-depth-formula).
 -/
+
+@[expose] public section
 
 universe u v
 

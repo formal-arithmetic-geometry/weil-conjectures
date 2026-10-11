@@ -1,9 +1,11 @@
-import Mathlib.AlgebraicGeometry.Morphisms.Separated
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
-import Mathlib.CategoryTheory.Sites.SheafCohomology.Cech
-import Mathlib.Algebra.Homology.Embedding.Extend
-import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.Separated
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
+public import Mathlib.CategoryTheory.Sites.SheafCohomology.Cech
+public import Mathlib.Algebra.Homology.Embedding.Extend
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
 
 /-!
 # Čech resolution and derived direct image
@@ -16,6 +18,8 @@ tied to Mathlib's `cechComplexFunctor`: its presheaf of sections `V ↦ D^p(V)` 
 complex of the cover `U` with coefficients in the presheaf `W ↦ (V ↦ F(W ⨯ V))`, that is
 `V ↦ Č(U ∩ V, F)`; the augmentation `F → D^0` is the restriction `F(V) → F(U_i ⨯ V)`.
 -/
+
+@[expose] public section
 
 universe u w
 

@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Sheaf.AlgebraicGeometry.SchemeDerivedBaseChangeMap
-import Sheaf.AlgebraicGeometry.BaseChangeConventions
+module
+
+public import Sheaf.AlgebraicGeometry.SchemeDerivedBaseChangeMap
+public import Sheaf.AlgebraicGeometry.BaseChangeConventions
 
 /-! # Canonical base change for a module in degree zero
 
@@ -18,6 +20,8 @@ Tag 0B91 (blueprint: def-pc-derived-module-base-change-map).
 * `IsDerivedModuleBaseChangeMap`: a map is the base change with the ordinary pulled-back
   module as target.
 -/
+
+@[expose] public section
 
 set_option autoImplicit false
 set_option backward.isDefEq.respectTransparency false

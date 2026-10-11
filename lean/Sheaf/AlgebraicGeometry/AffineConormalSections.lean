@@ -3,11 +3,13 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
-import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
-import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
-import Mathlib.RingTheory.Ideal.Cotangent
+module
+
+public import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
+public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
+public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
+public import Mathlib.RingTheory.Ideal.Cotangent
 
 /-!
 # Affine sections of the conormal sheaf
@@ -16,6 +18,8 @@ Source: Stacks Project, Morphisms, Definition 01R2 (definition-conormal-sheaf)
 and Lemma 01R3 (lemma-affine-conormal), assertion (2)
 (blueprint: lem-weil-pbc-affine-conormal-sections).
 -/
+
+@[expose] public section
 
 universe u v
 

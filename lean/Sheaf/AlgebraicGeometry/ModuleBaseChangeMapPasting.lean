@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import Sheaf.AlgebraicGeometry.ModuleBaseChangeMapOpenRestriction
+module
+
+public import Sheaf.AlgebraicGeometry.ModuleBaseChangeMapOpenRestriction
 
 /-!
 # Pasting of module base change maps
@@ -11,6 +13,8 @@ import Sheaf.AlgebraicGeometry.ModuleBaseChangeMapOpenRestriction
 Source: Stacks Project, Cohomology, Remarks 0ATM and 08HY; Sheaves, Lemmas 0096 and 0097
 (blueprint: lem-weil-pbc-module-base-change-map-pasting).
 -/
+
+@[expose] public section
 
 universe u
 

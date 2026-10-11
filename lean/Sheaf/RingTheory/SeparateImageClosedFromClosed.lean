@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import Mathlib.RingTheory.Spectrum.Prime.Topology
+module
+
+public import Mathlib.RingTheory.Spectrum.Prime.Topology
 
 /-!
 # Separating a closed set from the closure of an image in a prime spectrum
@@ -11,6 +13,8 @@ import Mathlib.RingTheory.Spectrum.Prime.Topology
 Source: Stacks Project, More on Algebra, Lemma Tag 07M3
 (blueprint: lem-weil-pbc-separate-image-closed-from-closed).
 -/
+
+@[expose] public section
 
 universe u v
 

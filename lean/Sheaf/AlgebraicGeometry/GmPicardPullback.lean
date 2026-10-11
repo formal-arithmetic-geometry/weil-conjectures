@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group V1
 -/
-import WeilConjectures.AlgebraicGeometry.Curve
-import WeilConjectures.AlgebraicGeometry.Sites.GmPicard
-import Sheaf.AlgebraicGeometry.TensorPullback
-import Sheaf.AlgebraicGeometry.EtaleCohomologyPullbackDegreeZero
+module
+
+public import WeilConjectures.AlgebraicGeometry.Curve
+public import WeilConjectures.AlgebraicGeometry.Sites.GmPicard
+public import Sheaf.AlgebraicGeometry.TensorPullback
+public import Sheaf.AlgebraicGeometry.EtaleCohomologyPullbackDegreeZero
 
 /-!
 # Naturality of the Picard identification with étale cohomology
@@ -14,6 +16,8 @@ import Sheaf.AlgebraicGeometry.EtaleCohomologyPullbackDegreeZero
 Source: Stacks Project, Cohomology on Sites, Tag 040E, Lemma 21.6.1, and functoriality
 of cohomology under pullback (blueprint: lem-sc-h1-gm-pic-pullback).
 -/
+
+@[expose] public section
 
 universe u
 

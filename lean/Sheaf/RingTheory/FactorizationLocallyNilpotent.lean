@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group G1
 -/
-import Mathlib.Algebra.Polynomial.Monic
-import Mathlib.RingTheory.Coprime.Basic
-import Mathlib.RingTheory.Ideal.Quotient.Defs
+module
+
+public import Mathlib.Algebra.Polynomial.Monic
+public import Mathlib.RingTheory.Coprime.Basic
+public import Mathlib.RingTheory.Ideal.Quotient.Defs
 
 /-!
 # Unique lifting of coprime monic factorizations modulo locally nilpotent ideals
@@ -14,6 +16,8 @@ Source: Stacks Project, More on Algebra, Tag 0ALI, final factorization paragraph
 (blueprint: lem-weil-pbc-henselian-factorization-locally-nilpotent).
 Existence is the Stacks assertion; uniqueness is the agent-written argument of the DAG node.
 -/
+
+@[expose] public section
 
 universe u
 

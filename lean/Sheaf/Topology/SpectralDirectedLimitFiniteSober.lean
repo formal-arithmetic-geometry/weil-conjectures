@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group J1
 -/
-import Mathlib.Topology.Spectral.Basic
-import Mathlib.Topology.Category.TopCat.Basic
-import Mathlib.Order.Directed
+module
+
+public import Mathlib.Topology.Spectral.Basic
+public import Mathlib.Topology.Category.TopCat.Basic
+public import Mathlib.Order.Directed
 
 /-!
 # Spectral spaces as directed inverse limits of finite sober spaces
@@ -14,6 +16,8 @@ Source: Stacks Project, Topology, Tag 09XX, the direction from spectral spaces t
 using the finite images in the products of Tag 09XW
 (blueprint: lem-weil-pbc-spectral-directed-limit-finite-sober).
 -/
+
+@[expose] public section
 
 universe u
 

@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Mathlib.RingTheory.Smooth.Basic
-import Sheaf.RingTheory.CompleteIntersectionOverField
+module
+
+public import Mathlib.RingTheory.Smooth.Basic
+public import Sheaf.RingTheory.CompleteIntersectionOverField
 
 /-!
 # Smooth algebras over fields are local complete intersections
@@ -12,6 +14,8 @@ import Sheaf.RingTheory.CompleteIntersectionOverField
 Source: Stacks Project, Algebra, Lemma 10.137.4 (Tag 00T5)
 (blueprint: lem-weil-pbc-smooth-over-field-local-complete-intersection).
 -/
+
+@[expose] public section
 
 universe u v
 

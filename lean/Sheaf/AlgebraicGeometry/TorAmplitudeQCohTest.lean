@@ -3,14 +3,18 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import Sheaf.AlgebraicGeometry.DerivedTensorCohomologyVanishes
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
+module
+
+public import Sheaf.AlgebraicGeometry.DerivedTensorCohomologyVanishes
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 
 /-! # Testing Tor amplitude on quasi-coherent modules
 
 Source: Stacks Project, Derived Categories of Schemes, Lemma 36.10.6,
 Tag 08EA, implication (2) implies (1) (blueprint: lem-pc-tor-amplitude-qcoh-test).
 -/
+
+@[expose] public section
 
 universe uT wT
 

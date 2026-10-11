@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group J1
 -/
-import Mathlib.AlgebraicGeometry.Morphisms.Smooth
-import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-import Mathlib.AlgebraicGeometry.Pullbacks
-import Mathlib.RingTheory.Regular.RegularSequence
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
+public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+public import Mathlib.AlgebraicGeometry.Pullbacks
+public import Mathlib.RingTheory.Regular.RegularSequence
 
 /-!
 # Local regular generators for a smooth diagonal
@@ -14,6 +16,8 @@ import Mathlib.RingTheory.Regular.RegularSequence
 Source: Stacks Project, Tags 067U and 067R, applied to the diagonal as a section of the
 smooth first projection (blueprint: lem-sc-smooth-diagonal-regular-immersion).
 -/
+
+@[expose] public section
 
 set_option autoImplicit false
 

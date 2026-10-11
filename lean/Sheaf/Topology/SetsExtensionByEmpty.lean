@@ -1,7 +1,9 @@
-import Mathlib.CategoryTheory.Sites.Sheafification
-import Mathlib.Topology.Category.TopCat.Opens
-import Mathlib.Topology.Sheaves.LocalPredicate
-import Mathlib.Topology.LocallyConstant.Basic
+module
+
+public import Mathlib.CategoryTheory.Sites.Sheafification
+public import Mathlib.Topology.Category.TopCat.Opens
+public import Mathlib.Topology.Sheaves.LocalPredicate
+public import Mathlib.Topology.LocallyConstant.Basic
 
 /-!
 # Extension by the empty set
@@ -10,6 +12,8 @@ Source: `literature/stacks-project/sheaves.tex`, Definition 00A2 (blueprint:
 `def-weil-pbc-sets-extension-by-empty`); the sheaf of locally constant maps as in
 Definition 006W and Modules, Section 0CAG.
 -/
+
+@[expose] public section
 
 universe u
 

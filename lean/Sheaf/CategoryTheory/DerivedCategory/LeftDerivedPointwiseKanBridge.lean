@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Mathlib.CategoryTheory.Localization.CalculusOfFractions
-import Mathlib.CategoryTheory.MorphismProperty.Comma
-import Mathlib.CategoryTheory.Functor.KanExtension.Pointwise
-import Sheaf.CategoryTheory.DerivedCategory.EssentiallyConstantPro
+module
+
+public import Mathlib.CategoryTheory.Localization.CalculusOfFractions
+public import Mathlib.CategoryTheory.MorphismProperty.Comma
+public import Mathlib.CategoryTheory.Functor.KanExtension.Pointwise
+public import Sheaf.CategoryTheory.DerivedCategory.EssentiallyConstantPro
 
 /-!
 # Stacks-defined left derived values as pointwise Kan-extension values
@@ -14,6 +16,8 @@ import Sheaf.CategoryTheory.DerivedCategory.EssentiallyConstantPro
 Source: Stacks Project, Derived Categories, Tags 05S9 and 05SA, and Categories, Tags
 05PU, 05Q4 and 002R (blueprint: lem-pur-left-derived-defined-pointwise-kan-bridge).
 -/
+
+@[expose] public section
 
 universe u v uL vL uH vH
 

@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import Mathlib.AlgebraicGeometry.Sites.EtalePoint
-import Mathlib.CategoryTheory.Limits.Shapes.Terminal
+module
+
+public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
+public import Mathlib.CategoryTheory.Limits.Shapes.Terminal
 
 /-!
 # Subsheaves of the final étale sheaf are open subfunctors
@@ -12,6 +14,8 @@ import Mathlib.CategoryTheory.Limits.Shapes.Terminal
 Source: Stacks Project, Étale Cohomology, Tag 04HV, used in Tag 09XM
 (blueprint: lem-weil-pbc-etale-subsheaf-final-open).
 -/
+
+@[expose] public section
 
 universe u v
 

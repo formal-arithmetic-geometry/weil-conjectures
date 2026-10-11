@@ -3,16 +3,20 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under the Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Sheaf.AlgebraicGeometry.PseudoCoherentComplex
-import Sheaf.AlgebraicGeometry.DerivedRHomAlgebraModule
-import Mathlib.AlgebraicGeometry.Noetherian
-import Mathlib.Algebra.Homology.DerivedCategory.TStructure
+module
+
+public import Sheaf.AlgebraicGeometry.PseudoCoherentComplex
+public import Sheaf.AlgebraicGeometry.DerivedRHomAlgebraModule
+public import Mathlib.AlgebraicGeometry.Noetherian
+public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 
 /-! # Derived internal Hom from a pseudo-coherent algebra
 
 Source: Stacks Project, Tag 0A6H (1), and Tags 0BV0, 0BV1, 0AX2
 (blueprint: lem-sc-pseudo-coherent-rhom-qcoherent).
 -/
+
+@[expose] public section
 
 universe u w wA
 

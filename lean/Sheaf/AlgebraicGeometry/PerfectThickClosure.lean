@@ -3,14 +3,18 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under the Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Sheaf.AlgebraicGeometry.PerfectComplex
-import Mathlib.CategoryTheory.Triangulated.Pretriangulated
+module
+
+public import Sheaf.AlgebraicGeometry.PerfectComplex
+public import Mathlib.CategoryTheory.Triangulated.Pretriangulated
 
 /-! # Perfect complexes form a thick subcategory
 
 Source: literature/stacks-project/cohomology.tex, Tags 08CR (lemma-two-out-of-three-perfect)
 and 08CS (lemma-summands-perfect), and Definition 08CM (blueprint: lem-pc-perfect-thick-closure).
 -/
+
+@[expose] public section
 
 universe u w v
 

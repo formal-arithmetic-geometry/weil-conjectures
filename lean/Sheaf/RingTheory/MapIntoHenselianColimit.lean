@@ -3,17 +3,21 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group J1
 -/
-import Mathlib.Algebra.Category.CommAlgCat.Basic
-import Mathlib.CategoryTheory.Filtered.Basic
-import Mathlib.RingTheory.Etale.Basic
-import Mathlib.RingTheory.Henselian
-import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
+module
+
+public import Mathlib.Algebra.Category.CommAlgCat.Basic
+public import Mathlib.CategoryTheory.Filtered.Basic
+public import Mathlib.RingTheory.Etale.Basic
+public import Mathlib.RingTheory.Henselian
+public import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
 
 /-!
 # Maps from ind-étale algebras into henselian local rings
 Source: Stacks Project, Algebra, Lemmas Tags 08HQ and 08HR
 (blueprint: lem-weil-pbc-map-into-henselian-colimit).
 -/
+
+@[expose] public section
 
 universe u v w
 

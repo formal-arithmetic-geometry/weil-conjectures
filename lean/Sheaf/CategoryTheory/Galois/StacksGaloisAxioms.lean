@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group G1
 -/
-import Sheaf.CategoryTheory.Galois.StacksGaloisCategory
+module
+
+public import Sheaf.CategoryTheory.Galois.StacksGaloisCategory
 
 /-!
 # Consequences of the Stacks Galois category axioms
@@ -11,6 +13,8 @@ import Sheaf.CategoryTheory.Galois.StacksGaloisCategory
 Source: Stacks Project, Fundamental Groups of Schemes, Lemma 0BN0 and the paragraph
 following it (blueprint: lem-galois-axioms).
 -/
+
+@[expose] public section
 
 universe wI wJ w v u
 

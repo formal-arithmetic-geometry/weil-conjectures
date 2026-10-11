@@ -1,4 +1,6 @@
-import Sheaf.AlgebraicGeometry.AssociatedModule
+module
+
+public import Sheaf.AlgebraicGeometry.AssociatedModule
 
 /-!
 # Morphisms out of the sheaf associated to a module
@@ -6,6 +8,8 @@ import Sheaf.AlgebraicGeometry.AssociatedModule
 Source: Stacks Project, Modules, Lemma 01BH assertion (4)
 (blueprint: lem-weil-pbc-associated-module-hom).
 -/
+
+@[expose] public section
 
 universe u
 

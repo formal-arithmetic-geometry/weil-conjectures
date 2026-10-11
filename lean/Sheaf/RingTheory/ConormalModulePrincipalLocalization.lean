@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Mathlib.RingTheory.Extension.Basic
-import Mathlib.RingTheory.Localization.Away.Basic
-import Mathlib.Algebra.Module.LocalizedModule.Basic
+module
+
+public import Mathlib.RingTheory.Extension.Basic
+public import Mathlib.RingTheory.Localization.Away.Basic
+public import Mathlib.Algebra.Module.LocalizedModule.Basic
 
 /-!
 # Conormal modules under principal localization
@@ -13,6 +15,8 @@ import Mathlib.Algebra.Module.LocalizedModule.Basic
 Source: Stacks Project, Algebra, Lemma 00S6 (lemma-conormal-module-localize)
 (blueprint: lem-weil-pbc-conormal-module-principal-localization).
 -/
+
+@[expose] public section
 
 universe u v
 

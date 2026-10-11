@@ -3,11 +3,13 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Mathlib.CategoryTheory.Preadditive.Injective.Basic
-import Mathlib.Algebra.Homology.Additive
-import Mathlib.Algebra.Category.Grp.Abelian
-import Mathlib.Algebra.Homology.QuasiIso
+module
+
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Mathlib.CategoryTheory.Preadditive.Injective.Basic
+public import Mathlib.Algebra.Homology.Additive
+public import Mathlib.Algebra.Category.Grp.Abelian
+public import Mathlib.Algebra.Homology.QuasiIso
 
 /-! # Global sections of a resolution of the direct image of injectives
 
@@ -15,6 +17,8 @@ Source: Stacks Project, Cohomology of Sheaves, Tags 01FB, 01EZ, 01F0, 01EX;
 Derived Categories, Tag 015E
 (blueprint: lem-weil-pbc-module-pushforward-injectives-sections-quasi-iso).
 -/
+
+@[expose] public section
 
 universe u
 

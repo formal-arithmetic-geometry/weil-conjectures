@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import WeilConjectures.Mathlib.CategoryTheory.Abelian.RightDerived
-import Mathlib.Algebra.Homology.ShortComplex.ShortExact
+module
+
+public import WeilConjectures.Mathlib.CategoryTheory.Abelian.RightDerived
+public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 
 /-!
 # The full long exact sequence of right derived functors
@@ -12,6 +14,8 @@ import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 Source: Stacks Project, Derived Categories, Tag 015B, parts (1) and (2), specialized to
 objects in degree zero (blueprint: lem-weil-pbc-derived-functor-long-exact).
 -/
+
+@[expose] public section
 
 universe v₁ v₂ u₁ u₂
 

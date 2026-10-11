@@ -3,11 +3,13 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group T1
 -/
-import Mathlib.AlgebraicGeometry.Scheme
-import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
-import Sheaf.Topology.RingedSpaceModuleCohomology
-import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImage
-import Sheaf.CategoryTheory.RightDerivedUniversalDeltaFunctor
+module
+
+public import Mathlib.AlgebraicGeometry.Scheme
+public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
+public import Sheaf.Topology.RingedSpaceModuleCohomology
+public import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImage
+public import Sheaf.CategoryTheory.RightDerivedUniversalDeltaFunctor
 
 /-!
 # Sheaf cohomology and higher direct images
@@ -15,6 +17,8 @@ import Sheaf.CategoryTheory.RightDerivedUniversalDeltaFunctor
 Source: Stacks Project, Cohomology, Tag 01DZ, equations cohomology-modules and
 higher-direct-image-modules; Tag 079W (blueprint: pqf-def-cohomology).
 -/
+
+@[expose] public section
 
 universe u wX wS
 

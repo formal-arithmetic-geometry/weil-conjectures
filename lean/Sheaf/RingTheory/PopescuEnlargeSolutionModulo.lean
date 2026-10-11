@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Sheaf.RingTheory.PopescuSolutionModulo
+module
+
+public import Sheaf.RingTheory.PopescuSolutionModulo
 
 /-!
 # Enlarging a solution modulo a prime power
@@ -11,6 +13,8 @@ import Sheaf.RingTheory.PopescuSolutionModulo
 Source: Stacks Project, Smoothing Ring Maps, Lemma 07FI (lemma-enlarge-solution-modulo),
 Section 07FF (blueprint: lem-weil-pbc-popescu-enlarge-solution-modulo).
 -/
+
+@[expose] public section
 
 set_option autoImplicit false
 

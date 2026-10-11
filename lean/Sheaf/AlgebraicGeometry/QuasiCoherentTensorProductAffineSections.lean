@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group J1
 -/
-import Sheaf.AlgebraicGeometry.Coherent
-import WeilConjectures.AlgebraicGeometry.Modules.TensorSection
+module
+
+public import Sheaf.AlgebraicGeometry.Coherent
+public import WeilConjectures.AlgebraicGeometry.Modules.TensorSection
 
 /-!
 # Tensor products of quasi-coherent modules on affine opens
@@ -12,6 +14,8 @@ import WeilConjectures.AlgebraicGeometry.Modules.TensorSection
 Source: Stacks Project, Schemes, Lemma 01I8 and Section 01LA; Modules, Lemma 01CE
 (blueprint: lem-weil-pbc-quasi-coherent-tensor-product-affine-sections).
 -/
+
+@[expose] public section
 
 universe u
 

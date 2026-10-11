@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group G1
 -/
-import Sheaf.AlgebraicGeometry.EtaleSheaves
-import Mathlib.AlgebraicGeometry.Noetherian
+module
+
+public import Sheaf.AlgebraicGeometry.EtaleSheaves
+public import Mathlib.AlgebraicGeometry.Noetherian
 
 /-!
 # Irreducible lisse strata
@@ -12,6 +14,8 @@ import Mathlib.AlgebraicGeometry.Noetherian
 Source: the Weil conjectures blueprint, chapter `sec-smooth-purity`, unit `sk-prop-sf-cbc`,
 order 1602 (blueprint: lem-weil-pbc-irreducible-lisse-strata).
 -/
+
+@[expose] public section
 
 universe u
 

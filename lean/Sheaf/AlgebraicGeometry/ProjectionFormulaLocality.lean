@@ -1,9 +1,11 @@
-import Sheaf.AlgebraicGeometry.DerivedOpenRestrictionMaps
-import Sheaf.AlgebraicGeometry.DerivedTensorStructure
-import Sheaf.AlgebraicGeometry.DerivedPullback
-import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
+module
+
+public import Sheaf.AlgebraicGeometry.DerivedOpenRestrictionMaps
+public import Sheaf.AlgebraicGeometry.DerivedTensorStructure
+public import Sheaf.AlgebraicGeometry.DerivedPullback
+public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 
 /-! # Locality of the projection-formula isomorphism
 
@@ -14,6 +16,8 @@ and perfect.tex, Lemma 36.22.1 (Tag 08EU)
 The map `φ` below is the canonical projection-formula map for `f`, `E`, and
 `K`; the statement records that its being an isomorphism is local on an open
 cover of the target. -/
+
+@[expose] public section
 
 universe u w v
 

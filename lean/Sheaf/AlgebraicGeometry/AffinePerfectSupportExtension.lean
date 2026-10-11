@@ -3,13 +3,17 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under the Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group J1
 -/
-import Sheaf.AlgebraicGeometry.PerfectComplex
+module
+
+public import Sheaf.AlgebraicGeometry.PerfectComplex
 
 /-! # Affine perfect support extension
 
 Source: Stacks Project, Derived Categories of Schemes, Tag 08EK (Lemma 36.13.10)
 (blueprint: lem-sc-affine-perfect-support-extension).
 -/
+
+@[expose] public section
 
 set_option autoImplicit false
 

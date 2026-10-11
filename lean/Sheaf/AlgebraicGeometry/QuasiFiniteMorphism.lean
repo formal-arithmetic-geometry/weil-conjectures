@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import Mathlib.AlgebraicGeometry.Fiber
-import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
-import Sheaf.RingTheory.QuasiFiniteAtPrime
+module
+
+public import Mathlib.AlgebraicGeometry.Fiber
+public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
+public import Sheaf.RingTheory.QuasiFiniteAtPrime
 
 /-!
 # Quasi-finite morphisms in the Stacks sense
@@ -19,6 +21,8 @@ notion "of finite type and quasi-finite at a prime" (Stacks Tag 00PL) is the pro
 `Algebra.IsQuasiFiniteAtPrime` (blueprint: def-weil-pbc-ring-map-quasi-finite-at-prime).
 The scheme-theoretic fibre is the existing `Scheme.Hom.fiber`.
 -/
+
+@[expose] public section
 
 universe u
 

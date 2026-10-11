@@ -3,17 +3,21 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under the Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import Sheaf.AlgebraicGeometry.DerivedCategory
-import Sheaf.AlgebraicGeometry.PerfectComplex
-import Sheaf.CategoryTheory.WeakTriangulatedGenerator
-import Mathlib.CategoryTheory.Triangulated.Subcategory
-import Mathlib.CategoryTheory.ObjectProperty.ColimitsOfShape
+module
+
+public import Sheaf.AlgebraicGeometry.DerivedCategory
+public import Sheaf.AlgebraicGeometry.PerfectComplex
+public import Sheaf.CategoryTheory.WeakTriangulatedGenerator
+public import Mathlib.CategoryTheory.Triangulated.Subcategory
+public import Mathlib.CategoryTheory.ObjectProperty.ColimitsOfShape
 
 /-! # Existence of a single perfect generator
 
 Source: literature/stacks-project/derived-categories-of-schemes.tex, Tag 09IS
 (blueprint: lem-pc-perfect-generator-exists).
 -/
+
+@[expose] public section
 
 universe u w
 

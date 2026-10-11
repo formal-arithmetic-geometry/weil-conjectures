@@ -3,13 +3,15 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import Sheaf.Paper.FiniteSplitEtaleHypercover
-import Sheaf.AlgebraicGeometry.EtaleSheaves
-import Mathlib.Algebra.Category.ModuleCat.Adjunctions
-import Mathlib.Algebra.Category.ModuleCat.Abelian
-import Mathlib.Algebra.Category.ModuleCat.FilteredColimits
-import Mathlib.Algebra.Homology.QuasiIso
-import Mathlib.CategoryTheory.Preadditive.Injective.Basic
+module
+
+public import Sheaf.Paper.FiniteSplitEtaleHypercover
+public import Sheaf.AlgebraicGeometry.EtaleSheaves
+public import Mathlib.Algebra.Category.ModuleCat.Adjunctions
+public import Mathlib.Algebra.Category.ModuleCat.Abelian
+public import Mathlib.Algebra.Category.ModuleCat.FilteredColimits
+public import Mathlib.Algebra.Homology.QuasiIso
+public import Mathlib.CategoryTheory.Preadditive.Injective.Basic
 
 /-!
 # The augmented free complex of a split étale hypercover
@@ -23,6 +25,8 @@ object (the identity of the base). This is precisely exactness of the augmented
 complex, including surjectivity at its last term. Coefficients in a constant ring
 are expressed as module-valued sheaves, with sectionwise scalar action.
 -/
+
+@[expose] public section
 
 universe w
 

@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import Sheaf.RingTheory.NagataRing
-import Mathlib.RingTheory.Finiteness.Defs
+module
+
+public import Sheaf.RingTheory.NagataRing
+public import Mathlib.RingTheory.Finiteness.Defs
 
 /-!
 # Finite algebras over Nagata rings
@@ -12,6 +14,8 @@ import Mathlib.RingTheory.Finiteness.Defs
 Source: Stacks Project, Algebra, Lemma Tag 032T, finite case
 of the quasi-finite-over-Nagata lemma (blueprint: lem-weil-pbc-finite-over-nagata-nagata).
 -/
+
+@[expose] public section
 
 universe u v
 

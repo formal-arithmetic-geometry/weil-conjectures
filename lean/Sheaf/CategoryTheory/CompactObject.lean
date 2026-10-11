@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF lead L
 -/
-import Mathlib.CategoryTheory.Preadditive.Basic
-import Mathlib.CategoryTheory.Limits.Shapes.Products
-import Mathlib.Algebra.DirectSum.Basic
+module
+
+public import Mathlib.CategoryTheory.Preadditive.Basic
+public import Mathlib.CategoryTheory.Limits.Shapes.Products
+public import Mathlib.Algebra.DirectSum.Basic
 
 /-!
 # Compact objects of an additive category with coproducts
@@ -14,6 +16,8 @@ Source: the blueprint of the Weil conjectures, chapter `sec-picard-framework`, u
 `sk-thm-picard-duality` (blueprint: def-pc-compact-object); Stacks Project, Derived Categories,
 Definition 13.37.1 (Tag 09SM).
 -/
+
+@[expose] public section
 
 universe w v u
 

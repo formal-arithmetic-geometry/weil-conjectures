@@ -3,12 +3,14 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import WeilConjectures.AlgebraicGeometry.Curve.Divisor
-import WeilConjectures.AlgebraicGeometry.Regular
-import WeilConjectures.AlgebraicGeometry.Curve
-import Mathlib.CategoryTheory.Sites.ConstantSheaf
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Mathlib.Topology.LocallyConstant.Basic
+module
+
+public import WeilConjectures.AlgebraicGeometry.Curve.Divisor
+public import WeilConjectures.AlgebraicGeometry.Regular
+public import WeilConjectures.AlgebraicGeometry.Curve
+public import Mathlib.CategoryTheory.Sites.ConstantSheaf
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Mathlib.Topology.LocallyConstant.Basic
 
 /-!
 # The module associated to a divisor
@@ -34,6 +36,8 @@ The construction applies to regular integral Noetherian schemes, hence to the sm
 curves of the node. For disconnected smooth curves use it on each one-dimensional component;
 on zero-dimensional components the same formula uses the existing order with value zero.
 -/
+
+@[expose] public section
 
 set_option autoImplicit false
 

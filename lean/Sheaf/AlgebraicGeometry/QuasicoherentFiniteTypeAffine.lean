@@ -3,14 +3,18 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import Sheaf.AlgebraicGeometry.Coherent
-import Mathlib.Algebra.Module.FinitePresentation
+module
+
+public import Sheaf.AlgebraicGeometry.Coherent
+public import Mathlib.Algebra.Module.FinitePresentation
 
 /-! # Affine criteria for finite type and finite presentation of modules
 
 Source: Stacks Project, Modules, Tags 01BN and 01BO; Properties, Tags 01PB and 01PC
 (blueprint: lem-weil-pbc-quasi-coherent-finite-type-affine).
 -/
+
+@[expose] public section
 
 universe u v
 

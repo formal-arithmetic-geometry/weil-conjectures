@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import Mathlib.Algebra.MvPolynomial.Basic
-import Mathlib.AlgebraicGeometry.Scheme
-import Mathlib.RingTheory.Ideal.Height
-import WeilConjectures.Mathlib.Topology.KrullDimension
+module
+
+public import Mathlib.Algebra.MvPolynomial.Basic
+public import Mathlib.AlgebraicGeometry.Scheme
+public import Mathlib.RingTheory.Ideal.Height
+public import WeilConjectures.Mathlib.Topology.KrullDimension
 
 /-!
 # Dimension at a point of a polynomial quotient
@@ -14,6 +16,8 @@ import WeilConjectures.Mathlib.Topology.KrullDimension
 Source: Stacks Project, Algebra, Tags 00P2, 00P1, 00OP, and the opening of Tag 00SC
 (blueprint: lem-weil-pbc-polynomial-quotient-dimension-at-point-height-difference).
 -/
+
+@[expose] public section
 
 universe u
 

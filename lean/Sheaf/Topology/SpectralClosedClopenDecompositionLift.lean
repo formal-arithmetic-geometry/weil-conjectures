@@ -3,15 +3,19 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF contributors
 -/
-import Mathlib.Topology.Category.TopCat.Basic
-import Mathlib.Topology.Spectral.Basic
-import Mathlib.Topology.Connected.Basic
+module
+
+public import Mathlib.Topology.Category.TopCat.Basic
+public import Mathlib.Topology.Spectral.Basic
+public import Mathlib.Topology.Connected.Basic
 
 /-! # Lifting clopen decompositions from a closed spectral subspace
 
 Source: Stacks Project, Etale Cohomology, Tag 0CAM, `lemma-connected-topological`
 (blueprint: lem-weil-pbc-spectral-closed-clopen-decomposition-lift).
 -/
+
+@[expose] public section
 
 universe u
 

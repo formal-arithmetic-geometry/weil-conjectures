@@ -3,15 +3,19 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under the Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Sheaf.AlgebraicGeometry.PerfectComplex
-import Sheaf.AlgebraicGeometry.PseudoCoherentComplex
-import Sheaf.AlgebraicGeometry.DerivedTensorStructure
+module
+
+public import Sheaf.AlgebraicGeometry.PerfectComplex
+public import Sheaf.AlgebraicGeometry.PseudoCoherentComplex
+public import Sheaf.AlgebraicGeometry.DerivedTensorStructure
 
 /-! # Perfect annihilator for a map to a supported complex
 
 Source: Stacks Project, perfect.tex, Tag 0A9C
 (blueprint: lem-sc-pseudo-coherent-support-annihilation).
 -/
+
+@[expose] public section
 
 universe u w
 

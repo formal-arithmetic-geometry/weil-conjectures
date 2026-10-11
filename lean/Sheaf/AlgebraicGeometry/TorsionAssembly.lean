@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group V1
 -/
-import WeilConjectures.SixFunctors.BaseChange.Derived
-import Mathlib.AlgebraicGeometry.Morphisms.Proper
-import Sheaf.AlgebraicGeometry.TorsionEtaleSheaf
+module
+
+public import WeilConjectures.SixFunctors.BaseChange.Derived
+public import Mathlib.AlgebraicGeometry.Morphisms.Proper
+public import Sheaf.AlgebraicGeometry.TorsionEtaleSheaf
 
 /-!
 # Torsion coefficient assembly for proper base change
@@ -14,6 +16,8 @@ Source: Stacks Project, Tag 095T, and Tag 0A4B, proof paragraphs 1–3;
 blueprint `sec-proper-base-change/sk-thm-properbasechange`
 (blueprint: lemma-weil-pbc-torsion-assembly).
 -/
+
+@[expose] public section
 
 universe u
 

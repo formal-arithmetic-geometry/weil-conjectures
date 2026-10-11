@@ -3,16 +3,20 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under the Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group V1
 -/
-import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
-import Mathlib.Algebra.Homology.DerivedCategory.TStructure
-import Mathlib.CategoryTheory.Triangulated.TStructure.TruncLTGE
+module
+
+public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
+public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
+public import Mathlib.CategoryTheory.Triangulated.TStructure.TruncLTGE
 
 /-! # Uniform truncation bound for derived direct image
 
 Source: Stacks Project, Tag 08D5, part (2) and the final truncation argument
 (blueprint: lem-pc-derived-direct-image-uniform-truncation-bound).
 -/
+
+@[expose] public section
 
 universe u wX wS
 

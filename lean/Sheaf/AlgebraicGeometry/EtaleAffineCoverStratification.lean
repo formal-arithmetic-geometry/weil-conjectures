@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Mathlib.AlgebraicGeometry.Morphisms.Etale
-import Mathlib.AlgebraicGeometry.Morphisms.Finite
-import Mathlib.AlgebraicGeometry.Morphisms.Immersion
-import Mathlib.Topology.Constructible
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.Etale
+public import Mathlib.AlgebraicGeometry.Morphisms.Finite
+public import Mathlib.AlgebraicGeometry.Morphisms.Immersion
+public import Mathlib.Topology.Constructible
 
 /-!
 # Stratifying an etale affine cover and its overlaps
@@ -14,6 +16,8 @@ import Mathlib.Topology.Constructible
 Source: Stacks Project, Etale Cohomology, `lemma-etale-stratified-finite`, proof,
 second paragraph (blueprint: lem-weil-pbc-etale-affine-cover-gluing).
 -/
+
+@[expose] public section
 
 universe u
 

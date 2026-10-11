@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import Mathlib.FieldTheory.PurelyInseparable.Basic
-import Mathlib.RingTheory.TensorProduct.Basic
-import Mathlib.RingTheory.Ideal.Quotient.Defs
-import Mathlib.RingTheory.Nilpotent.Lemmas
+module
+
+public import Mathlib.FieldTheory.PurelyInseparable.Basic
+public import Mathlib.RingTheory.TensorProduct.Basic
+public import Mathlib.RingTheory.Ideal.Quotient.Defs
+public import Mathlib.RingTheory.Nilpotent.Lemmas
 
 /-!
 # Splitting the reduction of a finite algebra after a separable extension
@@ -15,6 +17,8 @@ Source: blueprint, `sec-smooth-purity/sk-prop-sf-cbc`, proof of
 `lem-weil-pbc-finite-pushforward-generic-constructible`; Stacks Project, More on Morphisms,
 proof of Tag 02LM (blueprint: lem-weil-pbc-generic-separable-algebra-splitting).
 -/
+
+@[expose] public section
 
 set_option autoImplicit false
 

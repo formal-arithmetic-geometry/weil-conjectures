@@ -3,15 +3,17 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Mathlib.RingTheory.MvPowerSeries.Basic
-import Mathlib.Algebra.MvPolynomial.Basic
-import Mathlib.RingTheory.Localization.FractionRing
-import Mathlib.RingTheory.Finiteness.Defs
-import Mathlib.FieldTheory.IntermediateField.Adjoin.Defs
-import Mathlib.LinearAlgebra.Basis.Defs
-import Mathlib.Algebra.Field.ZMod
-import Mathlib.Algebra.Algebra.ZMod
-import Mathlib.Data.Finset.Union
+module
+
+public import Mathlib.RingTheory.MvPowerSeries.Basic
+public import Mathlib.Algebra.MvPolynomial.Basic
+public import Mathlib.RingTheory.Localization.FractionRing
+public import Mathlib.RingTheory.Finiteness.Defs
+public import Mathlib.FieldTheory.IntermediateField.Adjoin.Defs
+public import Mathlib.LinearAlgebra.Basis.Defs
+public import Mathlib.Algebra.Field.ZMod
+public import Mathlib.Algebra.Algebra.ZMod
+public import Mathlib.Data.Finset.Union
 
 /-!
 # Subfields of the fraction field of a power-series polynomial ring
@@ -19,6 +21,8 @@ import Mathlib.Data.Finset.Union
 Source: Stacks Project, More on Algebra, Lemmas 07P5 and 07P4
 (blueprint: lem-weil-pbc-power-series-ring-subfields).
 -/
+
+@[expose] public section
 
 set_option autoImplicit false
 

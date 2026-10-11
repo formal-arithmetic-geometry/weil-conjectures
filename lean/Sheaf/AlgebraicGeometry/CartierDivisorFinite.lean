@@ -2,10 +2,12 @@
 Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 -/
-import Mathlib.AlgebraicGeometry.Morphisms.Proper
-import WeilConjectures.AlgebraicGeometry.Morphisms.FiberDegree
-import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Invertible
-import Sheaf.AlgebraicGeometry.Dimension
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.Proper
+public import WeilConjectures.AlgebraicGeometry.Morphisms.FiberDegree
+public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Invertible
+public import Sheaf.AlgebraicGeometry.Dimension
 
 /-!
 # Effective Cartier divisors on proper schemes of dimension at most one
@@ -13,6 +15,8 @@ import Sheaf.AlgebraicGeometry.Dimension
 Source: Stacks Project, Tag 0AYY (varieties-lemma-degree-effective-Cartier-divisor)
 (blueprint: lem-pc-cartier-divisor-finite-over-field)
 -/
+
+@[expose] public section
 
 universe u
 

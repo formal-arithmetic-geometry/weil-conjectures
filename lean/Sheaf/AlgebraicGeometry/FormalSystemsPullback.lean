@@ -3,15 +3,19 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group T1
 -/
-import Sheaf.AlgebraicGeometry.CoherentFormalModule
-import Sheaf.AlgebraicGeometry.TensorPullback
-import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
+module
+
+public import Sheaf.AlgebraicGeometry.CoherentFormalModule
+public import Sheaf.AlgebraicGeometry.TensorPullback
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 
 /-! # Pullback of coherent formal systems
 
 Source: Stacks Project, Cohomology of Schemes, Lemma 0887 and the completion identity
 in the proof of Lemma 088B (blueprint: lem-weil-pbc-formal-systems-pullback).
 -/
+
+@[expose] public section
 
 universe u
 

@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group J1
 -/
-import Mathlib.AlgebraicGeometry.Pullbacks
-import Mathlib.AlgebraicGeometry.Morphisms.Separated
-import Sheaf.AlgebraicGeometry.QuasiFiniteMorphism
+module
+
+public import Mathlib.AlgebraicGeometry.Pullbacks
+public import Mathlib.AlgebraicGeometry.Morphisms.Separated
+public import Sheaf.AlgebraicGeometry.QuasiFiniteMorphism
 
 /-!
 # Base change of separated and locally quasi-finite morphisms
@@ -13,6 +15,8 @@ import Sheaf.AlgebraicGeometry.QuasiFiniteMorphism
 Source: Stacks Project, Schemes, Lemma Tag 01KU (3), and Morphisms, Lemma Tag 01TM (2)
 (blueprint: lem-weil-pbc-separated-lqf-base-change).
 -/
+
+@[expose] public section
 
 universe u
 

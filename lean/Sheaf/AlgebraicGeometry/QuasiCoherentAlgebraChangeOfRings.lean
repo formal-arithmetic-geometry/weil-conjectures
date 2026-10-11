@@ -3,11 +3,13 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import Sheaf.AlgebraicGeometry.Coherent
-import Sheaf.AlgebraicGeometry.CommAlgebraSheaf
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings
-import Mathlib.AlgebraicGeometry.AffineScheme
+module
+
+public import Sheaf.AlgebraicGeometry.Coherent
+public import Sheaf.AlgebraicGeometry.CommAlgebraSheaf
+public import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings
+public import Mathlib.AlgebraicGeometry.AffineScheme
 
 /-! # Change of rings between quasi-coherent algebras
 
@@ -23,6 +25,8 @@ rings uses the recorded sheafification construction, whose section tensor produc
 have the scalar factor first (`C(W) ⊗[B(W)] P(W)`). This is the usual tensor product
 `P(W) ⊗[B(W)] C(W)` under the canonical symmetry, with the same sheafification map.
 -/
+
+@[expose] public section
 
 universe u
 

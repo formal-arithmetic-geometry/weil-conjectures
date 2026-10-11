@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group G1
 -/
-import Mathlib.RingTheory.Etale.Basic
-import Sheaf.RingTheory.QuasiFiniteAtPrime
+module
+
+public import Mathlib.RingTheory.Etale.Basic
+public import Sheaf.RingTheory.QuasiFiniteAtPrime
 
 /-!
 # A finite factor after an étale base change
@@ -12,6 +14,8 @@ import Sheaf.RingTheory.QuasiFiniteAtPrime
 Source: Stacks Project, Algebra, Lemma 10.145.3 (Tag 00UK), with the finite factors combined
 (blueprint: lem-weil-pbc-finite-type-etale-finite-factor-decomposition).
 -/
+
+@[expose] public section
 
 universe u v
 

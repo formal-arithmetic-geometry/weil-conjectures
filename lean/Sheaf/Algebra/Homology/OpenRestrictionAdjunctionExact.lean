@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import Sheaf.Paper.DerivedHomMayerVietoris
-import Sheaf.CategoryTheory.ExtensionByZeroPresheaf
+module
+
+public import Sheaf.Paper.DerivedHomMayerVietoris
+public import Sheaf.CategoryTheory.ExtensionByZeroPresheaf
 
 /-! # Exact extension by zero and restriction on a ringed space
 
@@ -13,6 +15,8 @@ literature/stacks-project/sheaves.tex, Lemma 00A7 and
 literature/stacks-project/modules.tex, Lemma 01AK
 (blueprint: lem-sc-derived-open-restriction-adjunction-exact).
 -/
+
+@[expose] public section
 
 open CategoryTheory CategoryTheory.Limits
 open TopologicalSpace

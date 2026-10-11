@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import Sheaf.AlgebraicGeometry.EtaleQuasiCoherentDescent
+module
+
+public import Sheaf.AlgebraicGeometry.EtaleQuasiCoherentDescent
 
 /-!
 # The étale sheaf associated to a quasi-coherent module
@@ -12,6 +14,8 @@ Source: Stacks Project, Descent, Definition 35.8.2, Tag 03DU, item 4;
 Section 35.8, equation (35.8.1), Tag 03DR
 (blueprint: def-sc-etale-qcoherent-module).
 -/
+
+@[expose] public section
 
 universe u
 

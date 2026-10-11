@@ -1,12 +1,16 @@
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
-import Sheaf.Topology.RingedSpaceModuleCohomology
+module
+
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
+public import Sheaf.Topology.RingedSpaceModuleCohomology
 
 /-! # Cohomology of a module sheaf agrees with that of its underlying abelian sheaf
 
 Source: Stacks Project, sites-cohomology.tex, Lemma Tag 03FD
 (blueprint: lem-sc-module-abelian-zariski-cohomology).
 -/
+
+@[expose] public section
 
 universe u
 

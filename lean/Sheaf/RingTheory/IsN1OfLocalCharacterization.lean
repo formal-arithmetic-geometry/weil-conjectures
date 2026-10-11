@@ -3,11 +3,13 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import Sheaf.RingTheory.JapaneseDomain
-import Mathlib.RingTheory.Noetherian.Defs
-import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
-import Mathlib.RingTheory.Localization.AtPrime.Basic
-import Mathlib.RingTheory.Localization.Away.Basic
+module
+
+public import Sheaf.RingTheory.JapaneseDomain
+public import Mathlib.RingTheory.Noetherian.Defs
+public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
+public import Mathlib.RingTheory.Localization.AtPrime.Basic
+public import Mathlib.RingTheory.Localization.Away.Basic
 
 /-!
 # A local criterion for N-1 domains
@@ -15,6 +17,8 @@ import Mathlib.RingTheory.Localization.Away.Basic
 Source: Stacks Project, Algebra, Lemma 10.161.15 (Tag 0333), implication (1)+(2) to N-1
 (blueprint: lem-weil-pbc-n1-local-characterization).
 -/
+
+@[expose] public section
 
 universe u v
 

@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import Sheaf.Algebra.Homology.HomComplex
-import Sheaf.Algebra.Homology.KFlat
+module
+
+public import Sheaf.Algebra.Homology.HomComplex
+public import Sheaf.Algebra.Homology.KFlat
 
 /-!
 # Hom complexes and the total tensor complex
@@ -12,6 +14,8 @@ import Sheaf.Algebra.Homology.KFlat
 Source: Stacks Project, Cohomology on Sites, Lemma 21.34.1 (Tag 0A90)
 (blueprint: lem-sc-derived-hom-tensor-total).
 -/
+
+@[expose] public section
 
 universe u v
 

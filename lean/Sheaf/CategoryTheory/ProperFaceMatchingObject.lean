@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import Mathlib.CategoryTheory.Comma.Over.Basic
-import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
-import Sheaf.CategoryTheory.SimplicialMatchingObject
+module
+
+public import Mathlib.CategoryTheory.Comma.Over.Basic
+public import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
+public import Sheaf.CategoryTheory.SimplicialMatchingObject
 
 /-!
 # Matching objects as limits over proper faces
@@ -13,6 +15,8 @@ import Sheaf.CategoryTheory.SimplicialMatchingObject
 Source: Stacks Project, simplicial.tex, Lemma 0186 (lemma-formula-limit), restricted to
 injective proper faces (blueprint: lem-weil-pbc-matching-object-proper-faces).
 -/
+
+@[expose] public section
 
 universe v u
 open CategoryTheory CategoryTheory.Limits Opposite

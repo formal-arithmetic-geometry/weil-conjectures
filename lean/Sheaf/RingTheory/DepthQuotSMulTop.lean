@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group J1
 -/
-import Sheaf.RingTheory.Depth
-import Mathlib.RingTheory.Noetherian.Defs
-import Mathlib.RingTheory.Finiteness.Basic
+module
+
+public import Sheaf.RingTheory.Depth
+public import Mathlib.RingTheory.Noetherian.Defs
+public import Mathlib.RingTheory.Finiteness.Basic
 
 /-!
 # Depth drops by one modulo a regular element
@@ -13,6 +15,8 @@ import Mathlib.RingTheory.Finiteness.Basic
 Source: Stacks Project, Algebra, Lemma 10.72.7, Tag 090R, part (1)
 (blueprint: lem-weil-pbc-depth-drops-by-one).
 -/
+
+@[expose] public section
 
 universe u v
 

@@ -3,11 +3,13 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import Mathlib.Algebra.Homology.HomologicalComplex
-import Mathlib.Algebra.Category.ModuleCat.Basic
-import Mathlib.LinearAlgebra.FreeModule.Basic
-import Mathlib.Algebra.DirectSum.Module
-import Mathlib.LinearAlgebra.Matrix.ToLin
+module
+
+public import Mathlib.Algebra.Homology.HomologicalComplex
+public import Mathlib.Algebra.Category.ModuleCat.Basic
+public import Mathlib.LinearAlgebra.FreeModule.Basic
+public import Mathlib.Algebra.DirectSum.Module
+public import Mathlib.LinearAlgebra.Matrix.ToLin
 
 /-!
 # Splitting off a unit entry in a finite free chain complex
@@ -15,6 +17,8 @@ import Mathlib.LinearAlgebra.Matrix.ToLin
 Source: Stacks Project, Algebra, Lemma 10.102.2, Tag 00MT
 (blueprint: lem-weil-pbc-free-complex-unit-entry-splits).
 -/
+
+@[expose] public section
 
 universe u v
 

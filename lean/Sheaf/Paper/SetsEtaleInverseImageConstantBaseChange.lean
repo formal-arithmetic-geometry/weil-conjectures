@@ -3,14 +3,18 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import Mathlib.AlgebraicGeometry.Limits
-import Mathlib.AlgebraicGeometry.Pullbacks
+module
+
+public import Mathlib.AlgebraicGeometry.Limits
+public import Mathlib.AlgebraicGeometry.Pullbacks
 
 /-! # Base change of an indexed coproduct of copies of a scheme
 
 Source: literature/stacks-project/schemes.tex, Tags 01JB and 01JC; Section 26.17
 (blueprint: lem-weil-pbc-sets-etale-inverse-image-constant-base-change)
 -/
+
+@[expose] public section
 
 open CategoryTheory CategoryTheory.Limits
 open AlgebraicGeometry

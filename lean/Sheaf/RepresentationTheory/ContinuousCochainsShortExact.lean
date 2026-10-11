@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF worker C1
 -/
-import Sheaf.CategoryTheory.DiscreteModulesAbelian
-import Mathlib.Topology.ContinuousMap.Algebra
-import Mathlib.Algebra.Homology.HomologicalComplexAbelian
-import Mathlib.Data.Fin.Tuple.Basic
+module
+
+public import Sheaf.CategoryTheory.DiscreteModulesAbelian
+public import Mathlib.Topology.ContinuousMap.Algebra
+public import Mathlib.Algebra.Homology.HomologicalComplexAbelian
+public import Mathlib.Data.Fin.Tuple.Basic
 
 /-!
 # Short exact sequences of continuous inhomogeneous cochains
@@ -14,6 +16,8 @@ import Mathlib.Data.Fin.Tuple.Basic
 Source: Stacks Project, Etale Cohomology, Tag 0DVG, section continuous-group-cohomology
 (blueprint: lem-exc-continuous-cochains-short-exact).
 -/
+
+@[expose] public section
 
 universe u v w
 

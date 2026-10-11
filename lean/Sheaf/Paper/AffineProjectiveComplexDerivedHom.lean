@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group S1
 -/
-import Sheaf.Algebra.Homology.DerivedInternalHom
-import Sheaf.Algebra.Homology.KFlatTensorQuasiIso
-import Mathlib.Algebra.Homology.HomotopyCategory.KProjective
+module
+
+public import Sheaf.Algebra.Homology.DerivedInternalHom
+public import Sheaf.Algebra.Homology.KFlatTensorQuasiIso
+public import Mathlib.Algebra.Homology.HomotopyCategory.KProjective
 
 /-!
 # Derived Hom from a bounded-above projective complex
@@ -16,6 +18,8 @@ Tag 06XR (blueprint: lem-sc-affine-projective-complex-derived-hom).
 The ring is a commutative ring with identity, as in the Stacks conventions.
 Modules are encoded on the one-point site using the shared `onePointRingSheaf`.
 -/
+
+@[expose] public section
 
 open CategoryTheory CategoryTheory.Limits Opposite
 

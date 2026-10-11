@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import Sheaf.RingTheory.PopescuResolution
-import Sheaf.RingTheory.StrictlyStandardElement
+module
+
+public import Sheaf.RingTheory.PopescuResolution
+public import Sheaf.RingTheory.StrictlyStandardElement
 
 /-!
 # Lifting a Popescu resolution modulo eighth powers
@@ -12,6 +14,8 @@ import Sheaf.RingTheory.StrictlyStandardElement
 Source: Stacks Project, Smoothing Ring Maps, Lemma 07F8, in Situation 07F7
 (blueprint: lem-weil-pbc-popescu-lift-solution).
 -/
+
+@[expose] public section
 
 universe u v w
 

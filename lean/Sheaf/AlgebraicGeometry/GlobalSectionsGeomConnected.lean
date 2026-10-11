@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import WeilConjectures.AlgebraicGeometry.GlobalSectionsBijective
+module
+
+public import WeilConjectures.AlgebraicGeometry.GlobalSectionsBijective
 
 /-!
 # Global sections and geometric connectedness
@@ -11,6 +13,8 @@ import WeilConjectures.AlgebraicGeometry.GlobalSectionsBijective
 Source: Stacks Project, Varieties, Lemma 0FD2; blueprint
 `lem-pc-h0-geom-connected` (blueprint: lem-pc-h0-geom-connected).
 -/
+
+@[expose] public section
 
 universe u
 

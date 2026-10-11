@@ -1,8 +1,13 @@
-import WeilConjectures.AlgebraicGeometry.Modules.Invertible
-import Sheaf.AlgebraicGeometry.TensorPullback
-import Mathlib.AlgebraicGeometry.ValuativeCriterion
-import Mathlib.AlgebraicGeometry.Morphisms.Flat
-import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
+module
+
+public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
+public import Sheaf.AlgebraicGeometry.TensorPullback
+public import Mathlib.AlgebraicGeometry.ValuativeCriterion
+public import Mathlib.AlgebraicGeometry.Morphisms.Flat
+public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
+
+@[expose] public section
+
 open scoped AlgebraicGeometry
 
 set_option autoImplicit false

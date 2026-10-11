@@ -2,9 +2,11 @@
 Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 -/
-import Mathlib.CategoryTheory.Abelian.FunctorCategory
-import Mathlib.CategoryTheory.Limits.Shapes.Products
-import Mathlib.CategoryTheory.Functor.OfSequence
+module
+
+public import Mathlib.CategoryTheory.Abelian.FunctorCategory
+public import Mathlib.CategoryTheory.Limits.Shapes.Products
+public import Mathlib.CategoryTheory.Functor.OfSequence
 
 /-!
 # Functorial split envelope of an inverse system
@@ -12,6 +14,8 @@ import Mathlib.CategoryTheory.Functor.OfSequence
 Source: literature/stacks-project/derived.tex, the agent-written replacement step
 for Lemma Tag 070M (blueprint: lem-weil-tower-split-envelope).
 -/
+
+@[expose] public section
 
 universe u v
 

@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Sheaf.RingTheory.WeaklyAssociated
-import Mathlib.Algebra.Ring.NonZeroDivisors
+module
+
+public import Sheaf.RingTheory.WeaklyAssociated
+public import Mathlib.Algebra.Ring.NonZeroDivisors
 
 /-!
 # Weakly associated primes and zero-divisors
@@ -12,6 +14,8 @@ import Mathlib.Algebra.Ring.NonZeroDivisors
 Source: Stacks Project, Algebra, Lemma 10.66.7 (Tag 05C3)
 (blueprint: lem-sc-affine-weakass-nonzerodivisors).
 -/
+
+@[expose] public section
 
 universe v
 

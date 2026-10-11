@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import Sheaf.Algebra.Homology.ModuleStalkFunctor
+module
+
+public import Sheaf.Algebra.Homology.ModuleStalkFunctor
 
 /-!
 # Skyscraper modules on a ringed space
@@ -15,6 +17,8 @@ Source: Stacks Project, Sheaves, Tag 009A, case (4)
 
 * `SheafOfModules.ringedModuleSkyscraperFunctor`: skyscraper modules, also applied termwise.
 -/
+
+@[expose] public section
 
 universe u_sky
 

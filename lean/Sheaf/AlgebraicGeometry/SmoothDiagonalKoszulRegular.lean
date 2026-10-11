@@ -3,12 +3,14 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Mathlib.AlgebraicGeometry.Morphisms.Smooth
-import Mathlib.AlgebraicGeometry.Morphisms.Proper
-import Mathlib.AlgebraicGeometry.Noetherian
-import Mathlib.AlgebraicGeometry.Pullbacks
-import Sheaf.RingTheory.KoszulRegularSequence
-import Sheaf.AlgebraicGeometry.PerfectComplex
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
+public import Mathlib.AlgebraicGeometry.Morphisms.Proper
+public import Mathlib.AlgebraicGeometry.Noetherian
+public import Mathlib.AlgebraicGeometry.Pullbacks
+public import Sheaf.RingTheory.KoszulRegularSequence
+public import Sheaf.AlgebraicGeometry.PerfectComplex
 
 /-!
 # The smooth diagonal is Koszul regular, perfect and proper
@@ -16,6 +18,8 @@ import Sheaf.AlgebraicGeometry.PerfectComplex
 Source: Stacks Project, Tag 067U, and More on Morphisms, Tag 068C
 (blueprint: lem-sc-smooth-proper-diagonal-koszul-regular).
 -/
+
+@[expose] public section
 
 set_option autoImplicit false
 

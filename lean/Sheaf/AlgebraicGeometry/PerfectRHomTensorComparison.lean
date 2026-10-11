@@ -3,17 +3,21 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import Sheaf.AlgebraicGeometry.PerfectComplex
-import Sheaf.AlgebraicGeometry.DerivedTensorStructure
-import Sheaf.AlgebraicGeometry.DerivedInternalHomAdjunction
-import Sheaf.AlgebraicGeometry.DerivedPullbackMonoidalModel
-import Mathlib.CategoryTheory.Monoidal.Rigid.Basic
+module
+
+public import Sheaf.AlgebraicGeometry.PerfectComplex
+public import Sheaf.AlgebraicGeometry.DerivedTensorStructure
+public import Sheaf.AlgebraicGeometry.DerivedInternalHomAdjunction
+public import Sheaf.AlgebraicGeometry.DerivedPullbackMonoidalModel
+public import Mathlib.CategoryTheory.Monoidal.Rigid.Basic
 
 /-! # Perfect RHom tensor comparison
 
 Source: Stacks Project, Cohomology, Tags 08DQ, 0FPC and 0GM7
 (blueprint: lem-pc-perfect-rhom-tensor-comparison).
 -/
+
+@[expose] public section
 
 universe u w
 

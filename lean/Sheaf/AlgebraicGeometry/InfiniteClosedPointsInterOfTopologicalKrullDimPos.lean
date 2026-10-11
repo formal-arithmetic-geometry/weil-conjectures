@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group J1
 -/
-import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
-import Mathlib.AlgebraicGeometry.Over
-import Mathlib.Topology.KrullDimension
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
+public import Mathlib.AlgebraicGeometry.Over
+public import Mathlib.Topology.KrullDimension
 
 /-!
 # Infinitely many closed points in a positive-dimensional irreducible closed subset
@@ -13,6 +15,8 @@ import Mathlib.Topology.KrullDimension
 Source: Stacks Project, Varieties, Tags 0478 and 0A21, with the affine positive-dimension
 argument in Algebra (blueprint: lem-sc-positive-dimensional-locally-algebraic-closed-points).
 -/
+
+@[expose] public section
 
 universe u
 

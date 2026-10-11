@@ -1,5 +1,7 @@
-import Mathlib.CategoryTheory.Sites.Plus
-import Mathlib.CategoryTheory.Sites.PrecoverageToGrothendieck
+module
+
+public import Mathlib.CategoryTheory.Sites.Plus
+public import Mathlib.CategoryTheory.Sites.PrecoverageToGrothendieck
 
 /-!
 # The plus construction of a sheaf is isomorphic to the sheaf
@@ -7,6 +9,8 @@ import Mathlib.CategoryTheory.Sites.PrecoverageToGrothendieck
 Source: literature/stacks-project/sites.tex, Theorem 00WB (part (3), item-plus-iso)
 (blueprint: lem-weil-pbc-site-plus-of-sheaf-iso)
 -/
+
+@[expose] public section
 
 open CategoryTheory
 

@@ -3,11 +3,13 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group G1
 -/
-import Mathlib.Algebra.Exact.Basic
-import Mathlib.LinearAlgebra.Matrix.Determinant.Basic
-import Mathlib.RingTheory.Regular.RegularSequence
-import Mathlib.RingTheory.Noetherian.Defs
-import Mathlib.RingTheory.LocalRing.MaximalIdeal.Defs
+module
+
+public import Mathlib.Algebra.Exact.Basic
+public import Mathlib.LinearAlgebra.Matrix.Determinant.Basic
+public import Mathlib.RingTheory.Regular.RegularSequence
+public import Mathlib.RingTheory.Noetherian.Defs
+public import Mathlib.RingTheory.LocalRing.MaximalIdeal.Defs
 
 /-!
 # Buchsbaum--Eisenbud regular sequence from an exact free complex
@@ -15,6 +17,8 @@ import Mathlib.RingTheory.LocalRing.MaximalIdeal.Defs
 Source: literature/stacks-project/algebra.tex, Proposition Tag 00N1 (blueprint:
 lem-weil-pbc-exact-free-complex-last-minors-regular-sequence).
 -/
+
+@[expose] public section
 
 universe u
 

@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group R1
 -/
-import Mathlib.CategoryTheory.Triangulated.Pretriangulated
+module
+
+public import Mathlib.CategoryTheory.Triangulated.Pretriangulated
 
 /-!
 # Extension of morphisms between distinguished triangles
@@ -17,6 +19,8 @@ and Corollaire 1.1.10 (ii), pp. 23–24
 - `triangle_morphism_extension` gives the extension, its equivalent square
   conditions, and the uniqueness assertions.
 -/
+
+@[expose] public section
 
 open CategoryTheory CategoryTheory.Limits CategoryTheory.Pretriangulated
 

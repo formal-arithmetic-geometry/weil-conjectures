@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import Mathlib.AlgebraicTopology.SimplicialObject.Basic
-import Mathlib.CategoryTheory.Limits.Shapes.FiniteLimits
+module
+
+public import Mathlib.AlgebraicTopology.SimplicialObject.Basic
+public import Mathlib.CategoryTheory.Limits.Shapes.FiniteLimits
 
 /-!
 # Compatible truncated simplex families in a coskeleton
@@ -12,6 +14,8 @@ import Mathlib.CategoryTheory.Limits.Shapes.FiniteLimits
 Source: Stacks Project, Simplicial Methods, Lemma 0183 (lemma-existence-cosk)
 (blueprint: lem-weil-pbc-coskeleton-matching-tuples).
 -/
+
+@[expose] public section
 
 universe v u
 

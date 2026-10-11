@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.Basic
-import Mathlib.Algebra.Homology.QuasiIso
-import Mathlib.CategoryTheory.Preadditive.Injective.Basic
+module
+
+public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.Basic
+public import Mathlib.Algebra.Homology.QuasiIso
+public import Mathlib.CategoryTheory.Preadditive.Injective.Basic
 
 /-!
 # Functorial complex embeddings through injective subobjects
@@ -13,6 +15,8 @@ import Mathlib.CategoryTheory.Preadditive.Injective.Basic
 Source: Stacks Project, Injectives, Lemma `lemma-functorial-injective`
 (blueprint: lem-pur-kinjective-functorial-injective).
 -/
+
+@[expose] public section
 
 universe v u
 

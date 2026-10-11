@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group G1
 -/
-import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
-import Mathlib.FieldTheory.IsAlgClosed.Basic
-import Mathlib.Topology.JacobsonSpace
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
+public import Mathlib.FieldTheory.IsAlgClosed.Basic
+public import Mathlib.Topology.JacobsonSpace
 
 /-!
 # Infinitely many closed specializations of a nonclosed point
@@ -13,6 +15,8 @@ import Mathlib.Topology.JacobsonSpace
 Source: Stacks Project, Tags 0478 and 0A21
 (blueprint: lem-sc-finite-type-nonclosed-closure-closed-points).
 -/
+
+@[expose] public section
 
 universe u
 

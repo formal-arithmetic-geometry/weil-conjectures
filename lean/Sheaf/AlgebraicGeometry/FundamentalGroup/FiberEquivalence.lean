@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group S1
 -/
-import Sheaf.AlgebraicGeometry.FundamentalGroup.LocallyConstantEquivalence
-import Sheaf.CategoryTheory.Galois.AutProfinite
-import Mathlib.GroupTheory.Index
+module
+
+public import Sheaf.AlgebraicGeometry.FundamentalGroup.LocallyConstantEquivalence
+public import Sheaf.CategoryTheory.Galois.AutProfinite
+public import Mathlib.GroupTheory.Index
 
 /-!
 # The fundamental-group equivalence and base change
@@ -13,6 +15,8 @@ import Mathlib.GroupTheory.Index
 Source: Stacks Project, Theorem 0BND and Remark 0DV6; SGA 1, Exposé V,
 Proposition 6.13 and §7 (blueprint: thm-galois-fundamental).
 -/
+
+@[expose] public section
 
 universe w
 

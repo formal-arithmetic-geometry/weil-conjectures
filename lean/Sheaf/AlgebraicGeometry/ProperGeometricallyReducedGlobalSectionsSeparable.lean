@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import Mathlib.AlgebraicGeometry.Morphisms.Proper
-import Mathlib.AlgebraicGeometry.Geometrically.Reduced
-import WeilConjectures.AlgebraicGeometry.Cohomology.Defs
-import Sheaf.FieldTheory.SeparableExtension
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.Proper
+public import Mathlib.AlgebraicGeometry.Geometrically.Reduced
+public import WeilConjectures.AlgebraicGeometry.Cohomology.Defs
+public import Sheaf.FieldTheory.SeparableExtension
 
 /-!
 # Separability of global sections of a proper geometrically reduced scheme
@@ -18,6 +20,8 @@ The `k`-algebra structure on `Γ(X, ⊤)` is the structure map
 `AlgebraicGeometry.Scheme.globalSectionsRingHom`, and the field structure is the one given by
 `IsField` on the ring `Γ(X, ⊤)`, so both agree with the scheme's own ring structure.
 -/
+
+@[expose] public section
 
 universe u
 

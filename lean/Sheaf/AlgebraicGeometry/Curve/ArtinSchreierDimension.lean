@@ -3,11 +3,13 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import Mathlib.AlgebraicGeometry.Morphisms.Smooth
-import Mathlib.FieldTheory.IsAlgClosed.Basic
-import WeilConjectures.AlgebraicGeometry.Curve
-import WeilConjectures.AlgebraicGeometry.Sites.Kummer
-import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
+public import Mathlib.FieldTheory.IsAlgClosed.Basic
+public import WeilConjectures.AlgebraicGeometry.Curve
+public import WeilConjectures.AlgebraicGeometry.Sites.Kummer
+public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 
 /-!
 # Artin–Schreier vanishing on a smooth connected curve
@@ -15,6 +17,8 @@ import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 Source: blueprint, `sec-curve-estimates/sk-prop-cd/lem-sc-artin-schreier-dimension`;
 Stacks Project, Tag 0A3N, dimension one (blueprint: lem-sc-artin-schreier-dimension).
 -/
+
+@[expose] public section
 
 universe u
 

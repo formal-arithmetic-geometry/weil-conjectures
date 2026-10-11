@@ -3,11 +3,13 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group J1
 -/
-import Sheaf.RingTheory.GRing
-import Sheaf.RingTheory.EssentiallySmooth
-import Mathlib.Algebra.MvPolynomial.Basic
-import Mathlib.RingTheory.Artinian.Defs
-import Mathlib.RingTheory.LocalRing.Defs
+module
+
+public import Sheaf.RingTheory.GRing
+public import Sheaf.RingTheory.EssentiallySmooth
+public import Mathlib.Algebra.MvPolynomial.Basic
+public import Mathlib.RingTheory.Artinian.Defs
+public import Mathlib.RingTheory.LocalRing.Defs
 
 /-!
 # Solving modulo a prime power through an essentially smooth Artinian algebra
@@ -15,6 +17,8 @@ import Mathlib.RingTheory.LocalRing.Defs
 Source: Stacks Project, Smoothing Ring Maps, Lemma 07FH (lemma-solution-modulo)
 (blueprint: lem-weil-pbc-popescu-solution-modulo).
 -/
+
+@[expose] public section
 
 set_option autoImplicit false
 

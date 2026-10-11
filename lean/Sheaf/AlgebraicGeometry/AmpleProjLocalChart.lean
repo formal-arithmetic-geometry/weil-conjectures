@@ -3,15 +3,19 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import Sheaf.AlgebraicGeometry.InvertibleSectionRing
-import Sheaf.AlgebraicGeometry.Ample
-import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic
+module
+
+public import Sheaf.AlgebraicGeometry.InvertibleSectionRing
+public import Sheaf.AlgebraicGeometry.Ample
+public import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic
 
 /-! # Affine charts of the canonical section-ring morphism
 
 Source: Stacks Project, Properties, Tags 01PZ and 01Q1, with the chart formula of
 Constructions Tag 01N8 (blueprint: lem-sc-ample-proj-local-chart).
 -/
+
+@[expose] public section
 
 universe u
 

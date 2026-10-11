@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import Sheaf.AlgebraicGeometry.NagataFixedBaseSeparatedStage
+module
+
+public import Sheaf.AlgebraicGeometry.NagataFixedBaseSeparatedStage
 
 /-!
 # Separated finite-presentation envelope
@@ -12,6 +14,8 @@ Source: blueprint `sec-nagata-compactification/sk-prop-nagata-sketch-envelope/`
 `def-nagata-finite-type-closed-in-fp.md`, order 396
 (blueprint: def-nagata-finite-type-closed-in-fp).
 -/
+
+@[expose] public section
 
 universe u
 

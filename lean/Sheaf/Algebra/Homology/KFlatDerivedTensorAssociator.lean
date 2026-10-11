@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import Sheaf.Algebra.Homology.BalancedDerivedTensorModel
-import Mathlib.CategoryTheory.Functor.Currying
+module
+
+public import Sheaf.Algebra.Homology.BalancedDerivedTensorModel
+public import Mathlib.CategoryTheory.Functor.Currying
 
 /-!
 # The mixed-ring K-flat tensor associator
@@ -17,6 +19,8 @@ isomorphism. The natural model comparisons on the full subcategories of K-flat c
 specify descent to the derived categories. Their compatibility with the derived associator
 expresses independence of all three resolutions, including roofs rather than just chain maps.
 -/
+
+@[expose] public section
 
 universe u wA wR
 

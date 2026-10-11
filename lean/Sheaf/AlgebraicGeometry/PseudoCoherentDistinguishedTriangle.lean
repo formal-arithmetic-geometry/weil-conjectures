@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import Sheaf.AlgebraicGeometry.PseudoCoherentComplex
+module
+
+public import Sheaf.AlgebraicGeometry.PseudoCoherentComplex
 
 /-! # Pseudo-coherence is closed under distinguished triangles
 
@@ -11,6 +13,8 @@ Source: Stacks Project, Cohomology of Sheaves, Tag 08CD,
 `lemma-cone-pseudo-coherent`, part (2) for every integer m
 (blueprint: lem-pc-pseudo-coherent-distinguished-triangle).
 -/
+
+@[expose] public section
 
 universe u w
 

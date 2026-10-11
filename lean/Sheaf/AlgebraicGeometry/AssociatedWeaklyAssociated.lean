@@ -1,8 +1,12 @@
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
-import Mathlib.RingTheory.Ideal.Colon
-import Mathlib.RingTheory.Ideal.MinimalPrime.Basic
-import Sheaf.Algebra.Homology.ModuleStalkFunctor
+module
+
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
+public import Mathlib.RingTheory.Ideal.Colon
+public import Mathlib.RingTheory.Ideal.MinimalPrime.Basic
+public import Sheaf.Algebra.Homology.ModuleStalkFunctor
+
+@[expose] public section
 
 universe u
 

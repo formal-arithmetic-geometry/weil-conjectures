@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import Sheaf.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+module
+
+public import Sheaf.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-!
 # Constructible sheaves over a field become constant after finite separable extension
@@ -12,6 +14,8 @@ import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 Source: Stacks Project, proof of Lemma 09Z6, lines 12969--12971, and
 Definition 03RU (blueprint: lem-weil-pbc-constructible-field-finite-separable-constant).
 -/
+
+@[expose] public section
 
 universe u
 

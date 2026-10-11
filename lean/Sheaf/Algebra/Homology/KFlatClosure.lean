@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Sheaf.Algebra.Homology.KFlat
-import Mathlib.Algebra.Homology.HomologicalComplexLimits
-import Mathlib.Algebra.Homology.HomotopyCategory.MappingCone
+module
+
+public import Sheaf.Algebra.Homology.KFlat
+public import Mathlib.Algebra.Homology.HomologicalComplexLimits
+public import Mathlib.Algebra.Homology.HomotopyCategory.MappingCone
 
 /-!
 # Closure of K-flat complexes under countable sums and cones
@@ -18,6 +20,8 @@ Source: Stacks Project, Cohomology on Sites, Lemmas 06YR and 07A3
 - `CochainComplex.isKFlat_coproduct_nat`: a countable direct sum of K-flat complexes is K-flat.
 - `CochainComplex.isKFlat_mappingCone`: the cone of a map of K-flat complexes is K-flat.
 -/
+
+@[expose] public section
 
 universe u
 

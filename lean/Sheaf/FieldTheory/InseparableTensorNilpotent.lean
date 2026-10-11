@@ -1,6 +1,8 @@
-import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
-import Mathlib.FieldTheory.Separable
-import Mathlib.LinearAlgebra.TensorProduct.Basic
+module
+
+public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
+public import Mathlib.FieldTheory.Separable
+public import Mathlib.LinearAlgebra.TensorProduct.Basic
 
 /-!
 # Inseparable elements and nilpotents after algebraic-closure base change
@@ -8,6 +10,8 @@ import Mathlib.LinearAlgebra.TensorProduct.Basic
 Source: Stacks Project, Algebra, Lemma Tags 030V and 030W
 (blueprint: lem-pc-inseparable-tensor-nilpotent).
 -/
+
+@[expose] public section
 
 open scoped TensorProduct
 

@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group G1
 -/
-import Sheaf.Paper.PQFCohomology
-import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
+module
+
+public import Sheaf.Paper.PQFCohomology
+public import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
 
 /-! # Maps on module cohomology induced by scheme maps
 
@@ -16,6 +18,8 @@ The choices in the resolution construction are bundled below; only their existen
 postponed. The map itself is the induced horizontal map followed by the inverse of the
 induced vertical map, transported through the standard resolution comparisons.
 -/
+
+@[expose] public section
 
 universe u
 

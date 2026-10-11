@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group J1
 -/
-import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.AB
-import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStarCoherence
+module
+
+public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.AB
+public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStarCoherence
 
 /-!
 # Vanishing descends to a retract
@@ -14,6 +16,8 @@ Source: blueprint `sec-proper-base-change/sk-thm-reduction/`
 Etale Cohomology, Tag 0A4C (lemma-sandwich), first paragraph of the proof
 (blueprint: lem-weil-pbc-vanishing-descends-retract).
 -/
+
+@[expose] public section
 
 universe u
 

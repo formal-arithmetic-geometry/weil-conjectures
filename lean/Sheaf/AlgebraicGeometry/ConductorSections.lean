@@ -3,19 +3,23 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Mathlib.AlgebraicGeometry.Properties
-import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
-import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-import WeilConjectures.AlgebraicGeometry.Modules.Invertible
-import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
-import Sheaf.AlgebraicGeometry.Ample
-import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
+module
+
+public import Mathlib.AlgebraicGeometry.Properties
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
+public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
+public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
+public import Sheaf.AlgebraicGeometry.Ample
+public import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
 
 /-! # Extending conductor-supported sections from one component
 
 Source: Stacks Project, Varieties, Remark 09NW and the conductor equality in the proof
 of Lemma 09NX (blueprint: lem-sc-conductor-sections).
 -/
+
+@[expose] public section
 
 universe u v
 

@@ -3,11 +3,13 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import Mathlib.Algebra.DirectSum.Decomposition
-import Mathlib.LinearAlgebra.Quotient.Basic
-import Mathlib.RingTheory.Finiteness.Defs
-import Mathlib.RingTheory.Ideal.Operations
-import Mathlib.RingTheory.MvPolynomial.Homogeneous
+module
+
+public import Mathlib.Algebra.DirectSum.Decomposition
+public import Mathlib.LinearAlgebra.Quotient.Basic
+public import Mathlib.RingTheory.Finiteness.Defs
+public import Mathlib.RingTheory.Ideal.Operations
+public import Mathlib.RingTheory.MvPolynomial.Homogeneous
 
 /-!
 # Graded Nakayama generation over the projective-line polynomial ring
@@ -15,6 +17,8 @@ import Mathlib.RingTheory.MvPolynomial.Homogeneous
 Source: blueprint `lem-sc-p1-graded-resolution`, graded-resolution proof, standard graded
 Nakayama argument expanded in the DAG (blueprint: lem-sc-p1-graded-nakayama-generation).
 -/
+
+@[expose] public section
 
 universe u v
 

@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Mathlib.Algebra.Algebra.Hom
-import Mathlib.Algebra.Field.Defs
+module
+
+public import Mathlib.Algebra.Algebra.Hom
+public import Mathlib.Algebra.Field.Defs
 
 /-!
 # A common extension of two fields
@@ -12,6 +14,8 @@ import Mathlib.Algebra.Field.Defs
 Source: Stacks Project, Fields, Tag 0H7K, `fields-lemma-common-extension-field`
 (blueprint: lem-weil-common-extension-fields).
 -/
+
+@[expose] public section
 
 set_option autoImplicit false
 

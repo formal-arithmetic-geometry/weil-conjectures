@@ -3,16 +3,20 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
-import Mathlib.Topology.GDelta.Basic
-import Sheaf.AlgebraicGeometry.Dimension
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
+public import Mathlib.Topology.GDelta.Basic
+public import Sheaf.AlgebraicGeometry.Dimension
 
 /-!
 # Nowhere-dense closed subschemes in dimension at most one
 
 Source: Stacks Project, Varieties, Tag 0AYY (blueprint: lem-pc-nowhere-dense-dim-zero).
 -/
+
+@[expose] public section
 
 universe u
 

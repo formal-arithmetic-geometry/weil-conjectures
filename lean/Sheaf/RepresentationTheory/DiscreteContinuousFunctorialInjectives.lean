@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF worker C1
 -/
-import Sheaf.RepresentationTheory.DiscreteContinuousRep
-import Mathlib.CategoryTheory.Preadditive.Injective.Basic
+module
+
+public import Sheaf.RepresentationTheory.DiscreteContinuousRep
+public import Mathlib.CategoryTheory.Preadditive.Injective.Basic
 
 /-!
 # Functorial injective embeddings of discrete continuous representations
@@ -12,6 +14,8 @@ import Mathlib.CategoryTheory.Preadditive.Injective.Basic
 Source: Stacks Project, Injectives, Tag 04JF, Lemma 19.3.1
 (blueprint: lem-exc-rg-discrete-modules-functorial-injective-embeddings).
 -/
+
+@[expose] public section
 
 universe u v w
 

@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import Sheaf.AlgebraicGeometry.EtaleTensorSections
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
-import Mathlib.AlgebraicGeometry.Sites.Fpqc
+module
+
+public import Sheaf.AlgebraicGeometry.EtaleTensorSections
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
+public import Mathlib.AlgebraicGeometry.Sites.Fpqc
 
 /-!
 # FPQC descent of sections of a tensor pullback
@@ -13,6 +15,8 @@ import Mathlib.AlgebraicGeometry.Sites.Fpqc
 Source: Stacks Project, Descent, Tag 03DT, Lemma 35.8.1, using Tag 023T,
 Proposition 35.5.2 (blueprint: lem-sc-etale-qcoherent-descent-fpqc-sections).
 -/
+
+@[expose] public section
 
 universe u v
 

@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import Mathlib.Algebra.CharP.Defs
-import Mathlib.Algebra.Field.Defs
-import Mathlib.RingTheory.Ideal.Operations
-import Mathlib.RingTheory.Ideal.Quotient.Defs
+module
+
+public import Mathlib.Algebra.CharP.Defs
+public import Mathlib.Algebra.Field.Defs
+public import Mathlib.RingTheory.Ideal.Operations
+public import Mathlib.RingTheory.Ideal.Quotient.Defs
 
 /-!
 # Lifting ring maps from fields of positive characteristic
@@ -14,6 +16,8 @@ import Mathlib.RingTheory.Ideal.Quotient.Defs
 Source: Stacks Project, Algebra, Tag 0320 (3), and the successive lifting argument of Tag 07K4
 (blueprint: lem-weil-pbc-field-char-p-nilpotent-lifting).
 -/
+
+@[expose] public section
 
 universe u v
 

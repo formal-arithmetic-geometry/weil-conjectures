@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import Sheaf.AlgebraicGeometry.Ample
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.Generators
+module
+
+public import Sheaf.AlgebraicGeometry.Ample
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Generators
 
 /-! # Global generation gives a cover by nonvanishing loci
 
@@ -12,6 +14,8 @@ Source: literature/stacks-project/modules.tex, Modules, Definition 01AM,
 Lemma 01CY, and Sheaves Lemma 0H7H(2)
 (blueprint: lem-sc-global-generation-nonvanishing-cover).
 -/
+
+@[expose] public section
 
 open CategoryTheory
 open AlgebraicGeometry

@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
-import Mathlib.AlgebraicGeometry.Over
-import Mathlib.FieldTheory.IsAlgClosed.Basic
-import Mathlib.Topology.JacobsonSpace
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
+public import Mathlib.AlgebraicGeometry.Over
+public import Mathlib.FieldTheory.IsAlgClosed.Basic
+public import Mathlib.Topology.JacobsonSpace
 
 /-!
 # Closed fibres under separation of closed points
@@ -14,6 +16,8 @@ import Mathlib.Topology.JacobsonSpace
 Source: Stacks Project, Tag 0E8S, proof after condition (1), with Tag 0478
 (blueprint: lem-sc-point-tangent-closed-fibre-singleton).
 -/
+
+@[expose] public section
 
 universe u
 

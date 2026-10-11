@@ -1,4 +1,6 @@
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
+module
+
+public import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 
 /-!
 # Universal property of the sheaf tensor product
@@ -6,6 +8,8 @@ import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 Source: literature/stacks-project/sites-modules.tex, Section 03EK, display after Tag 0GMW
 (blueprint: lem-pc-sites-sheaf-tensor-bilinear-universal)
 -/
+
+@[expose] public section
 
 universe u
 

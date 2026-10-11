@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Mathlib.LinearAlgebra.Quotient.Basic
-import Mathlib.RingTheory.Ideal.Operations
+module
+
+public import Mathlib.LinearAlgebra.Quotient.Basic
+public import Mathlib.RingTheory.Ideal.Operations
 
 /-!
 # Nakayama's lemma for a nilpotent ideal
@@ -12,6 +14,8 @@ import Mathlib.RingTheory.Ideal.Operations
 Source: Stacks Project, Algebra, Lemma 00DV (lemma-NAK), parts (9)--(11)
 (blueprint: lem-weil-pbc-nakayama-nilpotent).
 -/
+
+@[expose] public section
 
 universe u v w
 

@@ -3,11 +3,13 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Mathlib.CategoryTheory.Limits.HasLimits
-import Mathlib.Algebra.Category.Ring.Basic
-import Mathlib.CategoryTheory.Filtered.Basic
-import Mathlib.RingTheory.TensorProduct.Maps
-import Mathlib.RingTheory.FiniteType
+module
+
+public import Mathlib.CategoryTheory.Limits.HasLimits
+public import Mathlib.Algebra.Category.Ring.Basic
+public import Mathlib.CategoryTheory.Filtered.Basic
+public import Mathlib.RingTheory.TensorProduct.Maps
+public import Mathlib.RingTheory.FiniteType
 
 /-!
 # Descent of surjectivity along a directed colimit of rings
@@ -15,6 +17,8 @@ import Mathlib.RingTheory.FiniteType
 Source: Stacks Project, Algebra, Tag 07RH, Lemma `lemma-colimit-surjective`
 (blueprint: lem-weil-pbc-colimit-surjective-ring-map).
 -/
+
+@[expose] public section
 
 universe v w x
 

@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Mathlib.FieldTheory.IsAlgClosed.Basic
-import Mathlib.RingTheory.Nilpotent.GeometricallyReduced
-import Sheaf.FieldTheory.SeparableExtension
+module
+
+public import Mathlib.FieldTheory.IsAlgClosed.Basic
+public import Mathlib.RingTheory.Nilpotent.GeometricallyReduced
+public import Sheaf.FieldTheory.SeparableExtension
 
 /-!
 # Reduced tensor products and separability of finite field extensions
@@ -14,6 +16,8 @@ Source: Stacks Project, Algebra, Lemma Tag 030W (implication (4) => (1)),
 together with Lemma Tag 030V
 (blueprint: lem-pc-finite-extension-tensor-algebraic-closure-reduced-separable).
 -/
+
+@[expose] public section
 
 universe u v w
 

@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group J1
 -/
-import Mathlib.Topology.Sober
+module
+
+public import Mathlib.Topology.Sober
 
 /-!
 # Finite T₀ spaces are sober
@@ -11,6 +13,8 @@ import Mathlib.Topology.Sober
 Source: Stacks Project, Topology, the finite-space claim in the proof of Tag 09XX,
 with sobriety as in Definition Tag 004X (blueprint: lem-weil-pbc-finite-t0-space-sober).
 -/
+
+@[expose] public section
 
 universe u
 

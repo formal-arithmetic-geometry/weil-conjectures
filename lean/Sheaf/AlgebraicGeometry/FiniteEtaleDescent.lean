@@ -2,8 +2,10 @@
 Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 -/
-import Sheaf.AlgebraicGeometry.FiniteEtaleDescentData
-import WeilConjectures.AlgebraicGeometry.FundamentalGroup.FiniteEtale
+module
+
+public import Sheaf.AlgebraicGeometry.FiniteEtaleDescentData
+public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.FiniteEtale
 
 /-!
 # Effective etale descent for finite etale schemes
@@ -11,6 +13,8 @@ import WeilConjectures.AlgebraicGeometry.FundamentalGroup.FiniteEtale
 Source: Stacks Project, Descent, Tags 023V, 0245, 02LA, 02VN, and the
 blueprint's `lem-galois-descent` (blueprint: lem-galois-descent).
 -/
+
+@[expose] public section
 
 universe v
 

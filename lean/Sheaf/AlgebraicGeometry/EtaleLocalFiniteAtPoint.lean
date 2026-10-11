@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Mathlib.AlgebraicGeometry.Fiber
-import Mathlib.AlgebraicGeometry.Morphisms.Etale
+module
+
+public import Mathlib.AlgebraicGeometry.Fiber
+public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 
 /-!
 # An isolated fibre point becomes finite after elementary étale base change
@@ -12,6 +14,8 @@ import Mathlib.AlgebraicGeometry.Morphisms.Etale
 Source: Stacks Project, More on Morphisms, Lemma 02LK, clauses (a), (b), (i)-(iii)
 (blueprint: lem-weil-pbc-etale-local-finite-at-point-elementary).
 -/
+
+@[expose] public section
 
 universe u
 

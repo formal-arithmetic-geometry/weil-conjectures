@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group J1
 -/
-import Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
-import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+module
+
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
+public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 
 /-!
 # Scheme-theoretic union of two closed subschemes
@@ -13,6 +15,8 @@ Source: Stacks Project, Morphisms, Definition 0C4H and Lemma 0C4J,
 and Lemma 01QP; Algebra, Lemma 00E0 (9)
 (blueprint: lem-weil-pbc-scheme-theoretic-union).
 -/
+
+@[expose] public section
 
 set_option autoImplicit false
 

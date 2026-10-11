@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group G1
 -/
-import Mathlib.Topology.Algebra.Category.ProfiniteGrp.Basic
+module
+
+public import Mathlib.Topology.Algebra.Category.ProfiniteGrp.Basic
 
 /-!
 # Automorphisms of a set-valued functor
@@ -11,6 +13,8 @@ import Mathlib.Topology.Algebra.Category.ProfiniteGrp.Basic
 Source: Stacks Project, Lemma 58.3.1 (Tag 0BMR)
 (blueprint: lem-galois-aut-profinite).
 -/
+
+@[expose] public section
 
 universe u v w
 

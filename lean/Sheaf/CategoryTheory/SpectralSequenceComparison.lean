@@ -3,11 +3,13 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import Mathlib.Algebra.Category.Grp.Abelian
-import Mathlib.Algebra.Category.Grp.Colimits
-import Mathlib.Algebra.Homology.SpectralSequence.Basic
-import Sheaf.CategoryTheory.Filtration
-import Sheaf.CategoryTheory.FiniteFiltrationInduction
+module
+
+public import Mathlib.Algebra.Category.Grp.Abelian
+public import Mathlib.Algebra.Category.Grp.Colimits
+public import Mathlib.Algebra.Homology.SpectralSequence.Basic
+public import Sheaf.CategoryTheory.Filtration
+public import Sheaf.CategoryTheory.FiniteFiltrationInduction
 
 /-!
 # Uniformly bounded spectral-sequence comparison
@@ -20,6 +22,8 @@ starting at page `1`, with the node's indexing: `E_r^{p,q}` is `(E.page r).X ⟨
 `d_r : E_r^{p,q} → E_r^{p-r+1,q+r}`, i.e. the complex shape `ComplexShape.up' ⟨1 - r, r⟩`.
 Morphisms of spectral sequences are morphisms in Mathlib's category of spectral sequences.
 -/
+
+@[expose] public section
 
 universe u
 

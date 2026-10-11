@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group G1, reviewer R-ppd1203
 -/
-import WeilConjectures.AlgebraicGeometry.Curve
-import WeilConjectures.AlgebraicGeometry.Picard.Group
-import Mathlib.AlgebraicGeometry.Morphisms.Smooth
-import Mathlib.FieldTheory.IsAlgClosed.Basic
+module
+
+public import WeilConjectures.AlgebraicGeometry.Curve
+public import WeilConjectures.AlgebraicGeometry.Picard.Group
+public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
+public import Mathlib.FieldTheory.IsAlgClosed.Basic
 
 /-!
 # The Picard group of a proper curve splits as `ℤ × Pic⁰`
@@ -14,6 +16,8 @@ import Mathlib.FieldTheory.IsAlgClosed.Basic
 Source: blueprint, `sec-curve-estimates/sk-def-pic`, node lem-sc-pic-proper-decomposition,
 order 888 (blueprint: lem-sc-pic-proper-decomposition).
 -/
+
+@[expose] public section
 
 universe u
 

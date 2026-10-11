@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Mathlib.CategoryTheory.Monoidal.CommGrp_
-import Mathlib.CategoryTheory.Monoidal.Ring
+module
+
+public import Mathlib.CategoryTheory.Monoidal.CommGrp_
+public import Mathlib.CategoryTheory.Monoidal.Ring
 
 /-!
 # Lifting a product preserving adjunction to group and ring objects
@@ -12,6 +14,8 @@ import Mathlib.CategoryTheory.Monoidal.Ring
 Source: Stacks Project, Sites and Sheaves, Proposition 00YV, proof of (2) and the
 paragraph on rings as sextuples (blueprint: lem-weil-pbc-adjunction-lifts-group-ring-objects).
 -/
+
+@[expose] public section
 
 universe vA vB uA uB
 

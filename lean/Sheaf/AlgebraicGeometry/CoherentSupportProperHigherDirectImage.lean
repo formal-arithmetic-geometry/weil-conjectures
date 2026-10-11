@@ -3,11 +3,13 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group V1
 -/
-import Mathlib.AlgebraicGeometry.Noetherian
-import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
-import Sheaf.AlgebraicGeometry.Coherent
-import Sheaf.AlgebraicGeometry.ClosedSubsetProperOverBase
-import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
+module
+
+public import Mathlib.AlgebraicGeometry.Noetherian
+public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
+public import Sheaf.AlgebraicGeometry.Coherent
+public import Sheaf.AlgebraicGeometry.ClosedSubsetProperOverBase
+public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
 
 /-! # Coherent higher direct images with proper support
 
@@ -15,6 +17,8 @@ Source: Stacks Project, Cohomology of Schemes, Tag 08DS,
 Lemma `coherent-lemma-support-proper-over-base-pushforward`
 (blueprint: lem-pc-coherent-support-proper-higher-direct-image).
 -/
+
+@[expose] public section
 
 universe u wX wS
 

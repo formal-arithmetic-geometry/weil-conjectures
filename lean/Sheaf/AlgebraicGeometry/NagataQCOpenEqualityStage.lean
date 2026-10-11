@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group N1
 -/
-import Sheaf.Order.DirectedFiniteUpperBound
-import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
+module
+
+public import Sheaf.Order.DirectedFiniteUpperBound
+public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
 
 /-!
 # Stage of equality for descended quasi-compact opens
@@ -14,6 +16,8 @@ Source: Stacks Project, Tag 01Z4 (2), and blueprint node
 (blueprint: def-nagata-qc-open-equality-stage).
 The stage is selected geometrically by the proved compact-open equality descent theorem.
 -/
+
+@[expose] public section
 
 universe u
 

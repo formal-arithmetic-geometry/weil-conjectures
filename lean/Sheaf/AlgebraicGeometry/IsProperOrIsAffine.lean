@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import WeilConjectures.AlgebraicGeometry.Curve
-import Mathlib.AlgebraicGeometry.Morphisms.Proper
-import Mathlib.AlgebraicGeometry.Morphisms.Smooth
-import Mathlib.FieldTheory.IsAlgClosed.Basic
+module
+
+public import WeilConjectures.AlgebraicGeometry.Curve
+public import Mathlib.AlgebraicGeometry.Morphisms.Proper
+public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
+public import Mathlib.FieldTheory.IsAlgClosed.Basic
 
 /-!
 # A smooth separated connected curve is proper or affine
@@ -14,6 +16,8 @@ import Mathlib.FieldTheory.IsAlgClosed.Basic
 Source: Stacks Project, Varieties, Lemma 33.43.11 (Tag 0A28), and the blueprint
 compactification route for `thm-sc-constant-invariance` (blueprint: lem-sc-proper-or-affine).
 -/
+
+@[expose] public section
 
 universe u
 

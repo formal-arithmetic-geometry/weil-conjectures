@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under the Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import Sheaf.AlgebraicGeometry.DerivedPullback
-import Sheaf.AlgebraicGeometry.ModulePullbackTensor
+module
+
+public import Sheaf.AlgebraicGeometry.DerivedPullback
+public import Sheaf.AlgebraicGeometry.ModulePullbackTensor
 
 /-!
 # Derived pullback and derived tensor product
@@ -18,6 +20,8 @@ def-pc-derived-tensor-cohomology-vanishes and lem-pc-derived-pullback-tensor-qco
 `K ⊗^L L` is stated through K-flat representatives `K ≅ Q(P)`, `L ≅ Q(N)`, for which
 `K ⊗^L L ≅ Q(Tot(P ⊗_{𝒪_X} N))`.
 -/
+
+@[expose] public section
 
 universe uPull wPull
 

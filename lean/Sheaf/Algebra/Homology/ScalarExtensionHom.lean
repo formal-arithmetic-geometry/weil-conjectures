@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in file LICENSE.
 Authors: SHEAF group J1
 -/
-import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
-import Mathlib.Algebra.Homology.Additive
+module
+
+public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
+public import Mathlib.Algebra.Homology.Additive
 
 /-! # Scalar extension of maps between base-extended complexes
 
@@ -12,6 +14,8 @@ Source: Stacks Project, Derived Categories of Schemes, Tag 09RE, affine proof;
 Mathlib's `ModuleCat.extendScalarsComp`
 (blueprint: def-pc-complex-scalar-extension-hom).
 -/
+
+@[expose] public section
 
 universe u₁
 

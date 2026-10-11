@@ -3,13 +3,17 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group T1
 -/
-import Sheaf.Topology.AbelianOpenExtensionByZero
+module
+
+public import Sheaf.Topology.AbelianOpenExtensionByZero
 
 /-! # Stalks of extension by zero of an abelian sheaf
 
 Source: Stacks Project, Sheaves, Lemma 00A5, parts (2), (3), (5), and Modules,
 Lemma 02UT (blueprint: lem-sc-topological-extension-by-zero-stalks).
 -/
+
+@[expose] public section
 
 universe w
 

@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group S1
 -/
-import Sheaf.Paper.EtaleTermwiseHypercohomology
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
-import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar
+module
+
+public import Sheaf.Paper.EtaleTermwiseHypercohomology
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
+public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar
 
 /-! # Pullback naturality of the termwise hypercohomology spectral sequence
 
@@ -16,6 +18,8 @@ Mathlib orders bidegrees as (filtration degree, complementary degree). Thus the
 node's E₁^{p,q} is written `(q,p)`. Spectral sequence maps start at the intrinsic E₁
 page; page zero depends on the chosen resolution.
 -/
+
+@[expose] public section
 
 universe uNatural
 

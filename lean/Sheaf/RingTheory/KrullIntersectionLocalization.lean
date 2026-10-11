@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import Mathlib.RingTheory.Filtration
-import Mathlib.RingTheory.Noetherian.Defs
-import Mathlib.RingTheory.Finiteness.Defs
-import Mathlib.Algebra.Module.LocalizedModule.Basic
+module
+
+public import Mathlib.RingTheory.Filtration
+public import Mathlib.RingTheory.Noetherian.Defs
+public import Mathlib.RingTheory.Finiteness.Defs
+public import Mathlib.Algebra.Module.LocalizedModule.Basic
 
 /-!
 # Localization of intersections of powers
@@ -19,6 +21,8 @@ Source: Stacks Project, Algebra, Lemma Tag 00IQ, part (1)
 The intersection of the powers of an ideal in a finite module vanishes after
 localizing away from every prime containing that ideal.
 -/
+
+@[expose] public section
 
 universe u v
 

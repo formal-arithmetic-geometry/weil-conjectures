@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group T1
 -/
-import Sheaf.AlgebraicGeometry.ModuleCechComparison
-import WeilConjectures.AlgebraicGeometry.Modules.TensorSection
-import WeilConjectures.Topology.Sheaves.CechComparison
+module
+
+public import Sheaf.AlgebraicGeometry.ModuleCechComparison
+public import WeilConjectures.AlgebraicGeometry.Modules.TensorSection
+public import WeilConjectures.Topology.Sheaves.CechComparison
 
 /-! # Cup products computed by acyclic resolutions
 
@@ -14,6 +16,8 @@ Source: Stacks Project, Cohomology, section-cup-product and Tag 0FKV
 The characterization uses resolutions with a sectionwise bilinear chain pairing.
 It determines the derived cup product; Godement resolutions supply such pairings.
 -/
+
+@[expose] public section
 
 universe uM
 set_option autoImplicit false

@@ -3,16 +3,18 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Mathlib.Algebra.Category.Ring.Basic
-import Mathlib.Algebra.Category.Grp.Basic
-import Mathlib.CategoryTheory.Category.Preorder
-import Mathlib.CategoryTheory.Limits.HasLimits
-import Mathlib.RingTheory.Flat.Basic
-import Mathlib.RingTheory.LocalRing.Basic
-import Mathlib.RingTheory.Noetherian.Defs
-import Mathlib.RingTheory.Finiteness.Defs
-import Mathlib.RingTheory.TensorProduct.Basic
-import Mathlib.RingTheory.Localization.Defs
+module
+
+public import Mathlib.Algebra.Category.Ring.Basic
+public import Mathlib.Algebra.Category.Grp.Basic
+public import Mathlib.CategoryTheory.Category.Preorder
+public import Mathlib.CategoryTheory.Limits.HasLimits
+public import Mathlib.RingTheory.Flat.Basic
+public import Mathlib.RingTheory.LocalRing.Basic
+public import Mathlib.RingTheory.Noetherian.Defs
+public import Mathlib.RingTheory.Finiteness.Defs
+public import Mathlib.RingTheory.TensorProduct.Basic
+public import Mathlib.RingTheory.Localization.Defs
 
 /-!
 # Flatness at a stage of a directed colimit
@@ -21,6 +23,8 @@ Source: Stacks Project, Algebra, Tag 00R6 (lemma-colimit-eventually-flat), with 
 system of Tag 00QX and the hypotheses used by Tag 00MO.
 (blueprint: lem-weil-pbc-colimit-eventually-flat)
 -/
+
+@[expose] public section
 
 universe u v w z
 

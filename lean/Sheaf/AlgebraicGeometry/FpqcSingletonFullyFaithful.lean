@@ -2,8 +2,10 @@
 Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 -/
-import Mathlib.AlgebraicGeometry.Sites.Fpqc
-import WeilConjectures.CategoryTheory.Comma.Over.DescentDatum
+module
+
+public import Mathlib.AlgebraicGeometry.Sites.Fpqc
+public import WeilConjectures.CategoryTheory.Comma.Over.DescentDatum
 
 /-!
 # Fully faithful pullback of descent data along an fpqc singleton
@@ -21,6 +23,8 @@ Source: Stacks Project, Descent, Lemma 0241 (lemma-fully-faithful)
 - `CategoryTheory.fpqc_singleton_pullback_fullyFaithful`: pullback of descent data along a
   singleton fpqc covering `r : X' ⟶ X` is fully faithful.
 -/
+
+@[expose] public section
 
 universe u
 

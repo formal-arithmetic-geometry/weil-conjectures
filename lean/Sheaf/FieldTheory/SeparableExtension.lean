@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import Mathlib.FieldTheory.Separable
-import Mathlib.RingTheory.AlgebraicIndependent.Defs
-import Mathlib.FieldTheory.IntermediateField.Adjoin.Defs
+module
+
+public import Mathlib.FieldTheory.Separable
+public import Mathlib.RingTheory.AlgebraicIndependent.Defs
+public import Mathlib.FieldTheory.IntermediateField.Adjoin.Defs
 
 /-!
 # Separably generated and separable field extensions
@@ -18,6 +20,8 @@ Source: Stacks Project, Algebra, Definition 10.42.1 (Tag 030O)
 * `Algebra.IsSeparablyGenerated`: a transcendence basis with separable algebraic extension.
 * `Algebra.IsSeparableExtension`: every finitely generated subextension is separably generated.
 -/
+
+@[expose] public section
 
 universe u v
 

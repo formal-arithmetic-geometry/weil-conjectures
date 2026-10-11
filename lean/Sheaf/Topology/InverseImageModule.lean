@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Mathlib.Topology.Sheaves.Functors
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Mathlib.Algebra.Category.Ring.Colimits
+module
+
+public import Mathlib.Topology.Sheaves.Functors
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Mathlib.Algebra.Category.Ring.Colimits
 
 /-!
 # Module structure on the topological inverse image
@@ -14,6 +16,8 @@ Source: Stacks Project, Tags 008X and 008Y (blueprint: def-pc-topological-invers
 The underlying abelian sheaf and ring sheaf use the explicit left-Kan-extension followed
 by sheafification construction, rather than an abstract chosen left adjoint.
 -/
+
+@[expose] public section
 
 universe u
 

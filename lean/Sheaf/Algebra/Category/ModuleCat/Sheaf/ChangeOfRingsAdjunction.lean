@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group G1
 -/
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
-import Mathlib.Topology.Sheaves.Sheaf
-import Mathlib.Algebra.Category.Grp.FilteredColimits
+module
+
+public import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
+public import Mathlib.Topology.Sheaves.Sheaf
+public import Mathlib.Algebra.Category.Grp.FilteredColimits
 
 /-!
 # The tensor change-of-rings adjunction on sheaves of modules
@@ -13,6 +15,8 @@ import Mathlib.Algebra.Category.Grp.FilteredColimits
 Source: Stacks Project, Sheaves on Spaces, Lemma 6.20.2, Tag 008A
 (blueprint: lem-pc-module-change-of-rings-adjunction).
 -/
+
+@[expose] public section
 
 universe u
 

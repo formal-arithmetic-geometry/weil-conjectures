@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import Mathlib.Algebra.Category.Ring.Colimits
-import Mathlib.Algebra.MvPolynomial.Eval
-import Mathlib.CategoryTheory.Category.Preorder
-import Mathlib.Order.Directed
+module
+
+public import Mathlib.Algebra.Category.Ring.Colimits
+public import Mathlib.Algebra.MvPolynomial.Eval
+public import Mathlib.CategoryTheory.Category.Preorder
+public import Mathlib.Order.Directed
 
 /-!
 # Finite data and relations in a directed colimit of commutative rings
@@ -15,6 +17,8 @@ Source: the Weil conjectures blueprint, chapter `sec-nagata-compactification`, u
 `sk-prop-nagata-sketch-approximation`, node `lemma-nagata-filtered-colimit-finite-data`
 (blueprint: lemma-nagata-filtered-colimit-finite-data).
 -/
+
+@[expose] public section
 
 universe u
 

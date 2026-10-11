@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
-import Mathlib.CategoryTheory.Filtered.Basic
-import Mathlib.Topology.QuasiSeparated
+module
+
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
+public import Mathlib.CategoryTheory.Filtered.Basic
+public import Mathlib.Topology.QuasiSeparated
 
 /-!
 # Quasi-coherent modules as filtered colimits of finitely presented modules
@@ -14,6 +16,8 @@ import Mathlib.Topology.QuasiSeparated
 Source: Stacks Project, Properties, Lemma 01PJ
 (blueprint: lem-weil-pbc-module-filtered-colimit-finite-presentation).
 -/
+
+@[expose] public section
 
 universe u
 

@@ -3,12 +3,14 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
-import Mathlib.Algebra.Category.Grp.FilteredColimits
-import Mathlib.Algebra.Exact.Basic
-import Mathlib.Geometry.RingedSpace.Basic
+module
+
+public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
+public import Mathlib.Algebra.Category.Grp.FilteredColimits
+public import Mathlib.Algebra.Exact.Basic
+public import Mathlib.Geometry.RingedSpace.Basic
 
 /-! # Mayer--Vietoris sequence for derived Hom
 
@@ -20,6 +22,8 @@ Source: Stacks Project, Cohomology, Tag 08BW
 - `derived_hom_mayer_vietoris`: exactness at global and local derived Hom.
 - `derivedOpenHomRestriction`: the canonical restriction to a smaller open.
 -/
+
+@[expose] public section
 
 universe u w
 

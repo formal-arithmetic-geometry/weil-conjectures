@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group J1
 -/
-import Sheaf.CategoryTheory.SimplicialMatchingObject
+module
+
+public import Sheaf.CategoryTheory.SimplicialMatchingObject
 
 /-!
 # Matching object and coskeleton
@@ -13,6 +15,8 @@ Example 0182 (example-cosk0), for degree one.
 (blueprint: lem-weil-pbc-matching-object-coskeleton).
 The two statements cover degree one and every degree at least two, respectively.
 -/
+
+@[expose] public section
 
 open CategoryTheory CategoryTheory.Limits Opposite
 open scoped Simplicial

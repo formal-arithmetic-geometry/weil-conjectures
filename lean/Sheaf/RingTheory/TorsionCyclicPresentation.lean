@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import Mathlib.Algebra.DirectSum.Module
-import Mathlib.RingTheory.Ideal.Quotient.Defs
-import Mathlib.RingTheory.Ideal.Operations
-import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
+module
+
+public import Mathlib.Algebra.DirectSum.Module
+public import Mathlib.RingTheory.Ideal.Quotient.Defs
+public import Mathlib.RingTheory.Ideal.Operations
+public import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
 
 /-!
 # A cyclic presentation of an ideal-power torsion module
@@ -14,6 +16,8 @@ import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
 Source: Stacks Project, More on Algebra, Tag 05E8, proof, first two sentences
 (blueprint: lem-weil-pbc-torsion-cyclic-presentation).
 -/
+
+@[expose] public section
 
 universe u v
 

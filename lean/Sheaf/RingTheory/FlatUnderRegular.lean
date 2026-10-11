@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import Mathlib.RingTheory.RegularLocalRing.Defs
-import Mathlib.RingTheory.RingHom.Flat
+module
+
+public import Mathlib.RingTheory.RegularLocalRing.Defs
+public import Mathlib.RingTheory.RingHom.Flat
 
 /-!
 # Regularity descends along flat local homomorphisms
@@ -12,6 +14,8 @@ import Mathlib.RingTheory.RingHom.Flat
 Source: Stacks Project, Algebra, Lemma 10.110.9 (Tag 00OF)
 (blueprint: lem-weil-pbc-flat-under-regular).
 -/
+
+@[expose] public section
 
 universe u v
 

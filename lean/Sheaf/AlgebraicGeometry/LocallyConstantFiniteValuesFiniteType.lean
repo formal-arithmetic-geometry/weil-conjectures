@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Sheaf.AlgebraicGeometry.IsFiniteTypeEtaleModuleSheaf
-import WeilConjectures.ConstructibleSheaf.Defs
-import Mathlib.RingTheory.Finiteness.Defs
-import Mathlib.LinearAlgebra.Pi
+module
+
+public import Sheaf.AlgebraicGeometry.IsFiniteTypeEtaleModuleSheaf
+public import WeilConjectures.ConstructibleSheaf.Defs
+public import Mathlib.RingTheory.Finiteness.Defs
+public import Mathlib.LinearAlgebra.Pi
 
 /-!
 # Locally constant sheaves with finitely generated values are of finite type
@@ -14,6 +16,8 @@ import Mathlib.LinearAlgebra.Pi
 Source: Stacks Project, Lemma 093N (1), direction from finite values to finite type
 (blueprint: lem-weil-pbc-locally-constant-finite-values-finite-type).
 -/
+
+@[expose] public section
 
 universe u
 

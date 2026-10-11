@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Sheaf.AlgebraicGeometry.Ample
-import Sheaf.AlgebraicGeometry.Coherent
-import Sheaf.Paper.PQFCohomology
-import WeilConjectures.AlgebraicGeometry.Modules.ClearDenominators
+module
+
+public import Sheaf.AlgebraicGeometry.Ample
+public import Sheaf.AlgebraicGeometry.Coherent
+public import Sheaf.Paper.PQFCohomology
+public import WeilConjectures.AlgebraicGeometry.Modules.ClearDenominators
 
 /-!
 # A power of a section kills a positive cohomology class
@@ -14,6 +16,8 @@ import WeilConjectures.AlgebraicGeometry.Modules.ClearDenominators
 Source: Stacks Project, Cohomology of Schemes, Lemma 01XR
 (blueprint: lem-sc-section-affine-open-kills-cohomology).
 -/
+
+@[expose] public section
 
 universe u
 

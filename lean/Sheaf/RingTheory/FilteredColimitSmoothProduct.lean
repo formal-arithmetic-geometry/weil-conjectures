@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import Mathlib.Algebra.Category.CommAlgCat.Basic
-import Mathlib.CategoryTheory.ObjectProperty.Ind
-import Mathlib.RingTheory.Smooth.Basic
+module
+
+public import Mathlib.Algebra.Category.CommAlgCat.Basic
+public import Mathlib.CategoryTheory.ObjectProperty.Ind
+public import Mathlib.RingTheory.Smooth.Basic
 
 /-!
 # Filtered colimits of smooth algebras and products
@@ -13,6 +15,8 @@ import Mathlib.RingTheory.Smooth.Basic
 Source: literature/stacks-project/smoothing.tex, Lemma Tag 07F3 (lemma-product)
 (blueprint: lem-weil-pbc-popescu-product).
 -/
+
+@[expose] public section
 
 universe u v
 

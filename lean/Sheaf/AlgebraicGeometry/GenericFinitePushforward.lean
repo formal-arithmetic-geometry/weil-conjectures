@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import Sheaf.AlgebraicGeometry.EtaleSheaves
-import Mathlib.AlgebraicGeometry.Noetherian
-import Mathlib.AlgebraicGeometry.Morphisms.Finite
+module
+
+public import Sheaf.AlgebraicGeometry.EtaleSheaves
+public import Mathlib.AlgebraicGeometry.Noetherian
+public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 
 /-!
 # Generic lissity of finite direct images
@@ -13,6 +15,8 @@ import Mathlib.AlgebraicGeometry.Morphisms.Finite
 Source: smooth purity blueprint, unit `sk-prop-sf-cbc`, order 1578
 (blueprint: lem-weil-pbc-finite-pushforward-generic-constructible).
 -/
+
+@[expose] public section
 
 universe u
 

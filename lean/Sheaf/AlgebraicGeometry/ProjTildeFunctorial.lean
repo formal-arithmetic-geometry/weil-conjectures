@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group Q1
 -/
-import Sheaf.AlgebraicGeometry.ProjGradedModuleSheafExists
+module
+
+public import Sheaf.AlgebraicGeometry.ProjGradedModuleSheafExists
 
 /-!
 # Functoriality of associated module sheaves on Proj
@@ -16,6 +18,8 @@ written as injective additive maps into the ordinary localizations with prescrib
 These are precisely the inclusions composed with the equivalences supplied by
 `gradedModuleSheaf_exists`; no new associated sheaf is chosen or defined here.
 -/
+
+@[expose] public section
 
 universe u
 

@@ -3,13 +3,15 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in file LICENSE.
 Authors: SHEAF group J1
 -/
-import Sheaf.Algebra.Homology.ScalarExtensionHom
-import Mathlib.Algebra.Category.ModuleCat.Abelian
-import Mathlib.Algebra.Category.Ring.Colimits
-import Mathlib.Algebra.Homology.DerivedCategory.Basic
-import Mathlib.CategoryTheory.Category.Preorder
-import Mathlib.Algebra.Module.Projective
-import Mathlib.RingTheory.Finiteness.Defs
+module
+
+public import Sheaf.Algebra.Homology.ScalarExtensionHom
+public import Mathlib.Algebra.Category.ModuleCat.Abelian
+public import Mathlib.Algebra.Category.Ring.Colimits
+public import Mathlib.Algebra.Homology.DerivedCategory.Basic
+public import Mathlib.CategoryTheory.Category.Preorder
+public import Mathlib.Algebra.Module.Projective
+public import Mathlib.RingTheory.Finiteness.Defs
 
 /-! # Affine full faithfulness for perfect complexes over a filtered colimit
 
@@ -20,6 +22,8 @@ The equivalences `ident` identify a presentation `H` with the stage derived Hom 
 The equations `htransition` and `hcanonical` specify scalar extension on every chain-map
 representative, so neither the diagram nor its comparison map is arbitrary.
 -/
+
+@[expose] public section
 
 universe u w
 

@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group R1
 -/
-import Sheaf.AlgebraicGeometry.TruncationExchangeCouple
-import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
+module
+
+public import Sheaf.AlgebraicGeometry.TruncationExchangeCouple
+public import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 
 /-! # Compatibility of the exact-couple differential
 
@@ -12,6 +14,8 @@ Source: Stacks Project, Etale Cohomology, Tag 0DDE, proof; Homology, Tags 011Qâ€
 blueprint sec-proper-base-change/sk-thm-properbasechange.
 (blueprint: lem-weil-pbc-exact-couple-differential)
 -/
+
+@[expose] public section
 
 set_option autoImplicit false
 

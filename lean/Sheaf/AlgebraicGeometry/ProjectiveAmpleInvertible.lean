@@ -3,11 +3,13 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group J1
 -/
-import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
-import WeilConjectures.AlgebraicGeometry.ProjectiveSpectrum.Twist
-import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-import Sheaf.AlgebraicGeometry.Ample
-import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
+module
+
+public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
+public import WeilConjectures.AlgebraicGeometry.ProjectiveSpectrum.Twist
+public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+public import Sheaf.AlgebraicGeometry.Ample
+public import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
 
 /-!
 # An ample invertible module from a projective closed immersion
@@ -15,6 +17,8 @@ import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
 Source: Stacks Project, Properties, Definition 01PS and Lemma 01PU; Constructions,
 Definition 01MN and Lemma 01NG (blueprint: lem-weil-pbc-projective-ample-invertible).
 -/
+
+@[expose] public section
 
 universe u
 

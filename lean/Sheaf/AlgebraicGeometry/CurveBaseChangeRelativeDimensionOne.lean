@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group F1
 -/
-import Mathlib.AlgebraicGeometry.Morphisms.Smooth
-import Sheaf.AlgebraicGeometry.Variety
-import Sheaf.AlgebraicGeometry.BaseChangeConventions
-import WeilConjectures.Mathlib.Topology.KrullDimension
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
+public import Sheaf.AlgebraicGeometry.Variety
+public import Sheaf.AlgebraicGeometry.BaseChangeConventions
+public import WeilConjectures.Mathlib.Topology.KrullDimension
 
 /-!
 # Relative dimension of a base change of a smooth curve
@@ -18,6 +20,8 @@ The base change and its second projection follow `def-pc-base-change`:
 `pullback f g` and `pullback.snd f g`. "Smooth of relative dimension one" is the notion
 recorded on `def-sbc-smooth-morphisms`, Mathlib's `SmoothOfRelativeDimension 1`.
 -/
+
+@[expose] public section
 
 universe u
 

@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group J1
 -/
-import Mathlib.AlgebraicGeometry.Scheme
-import Mathlib.RingTheory.FiniteType
-import Mathlib.RingTheory.TensorProduct.Basic
-import Mathlib.Topology.KrullDimension
+module
+
+public import Mathlib.AlgebraicGeometry.Scheme
+public import Mathlib.RingTheory.FiniteType
+public import Mathlib.RingTheory.TensorProduct.Basic
+public import Mathlib.Topology.KrullDimension
 
 /-!
 # Dimension of an affine spectrum under field extension
@@ -14,6 +16,8 @@ import Mathlib.Topology.KrullDimension
 Source: Stacks Project, Algebra, Lemma 10.116.5 (Tag 00P3)
 (blueprint: lem-weil-pbc-dimension-preserved-field-extension).
 -/
+
+@[expose] public section
 
 universe u v w
 

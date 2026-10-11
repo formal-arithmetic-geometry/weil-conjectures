@@ -3,11 +3,13 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Mathlib.FieldTheory.IntermediateField.Adjoin.Defs
-import Mathlib.LinearAlgebra.Basis.Defs
-import Mathlib.LinearAlgebra.LinearIndependent.Defs
-import Mathlib.Algebra.BigOperators.Finsupp.Basic
-import Mathlib.Algebra.CharP.Defs
+module
+
+public import Mathlib.FieldTheory.IntermediateField.Adjoin.Defs
+public import Mathlib.LinearAlgebra.Basis.Defs
+public import Mathlib.LinearAlgebra.LinearIndependent.Defs
+public import Mathlib.Algebra.BigOperators.Finsupp.Basic
+public import Mathlib.Algebra.CharP.Defs
 
 /-!
 # Extension of p-independent families to p-bases
@@ -16,6 +18,8 @@ Source: Stacks Project, More on Algebra, Definition 15.47.1 (Tag 07P1) and
 Lemma 15.47.2 (Tag 07P2), the p-basis extension assertion
 (blueprint: lem-weil-pbc-p-independent-extends-to-p-basis).
 -/
+
+@[expose] public section
 
 universe u v w
 

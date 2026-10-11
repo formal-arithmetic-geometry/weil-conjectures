@@ -3,13 +3,15 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import Mathlib.AlgebraicGeometry.Noetherian
-import Mathlib.Topology.KrullDimension
-import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
-import Mathlib.CategoryTheory.Sites.Spaces
-import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Sheaf
-import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.HasExt
-import Mathlib.Algebra.Category.Grp.AB
+module
+
+public import Mathlib.AlgebraicGeometry.Noetherian
+public import Mathlib.Topology.KrullDimension
+public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
+public import Mathlib.CategoryTheory.Sites.Spaces
+public import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Sheaf
+public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.HasExt
+public import Mathlib.Algebra.Category.Grp.AB
 
 /-!
 # The Zariski dimension bound
@@ -18,6 +20,8 @@ Source: the Weil conjectures blueprint, `sec-smooth-purity`, unit `sk-prop-sf-cb
 lemma `lem-sc-zariski-dimension-bound` (blueprint: lem-sc-zariski-dimension-bound);
 Stacks Project, Cohomology, Proposition 02UZ.
 -/
+
+@[expose] public section
 
 universe u
 

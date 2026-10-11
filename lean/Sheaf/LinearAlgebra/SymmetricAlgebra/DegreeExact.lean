@@ -1,11 +1,15 @@
-import Mathlib.LinearAlgebra.SymmetricAlgebra.Basic
-import Sheaf.LinearAlgebra.SymmetricAlgebra.Graded
+module
+
+public import Mathlib.LinearAlgebra.SymmetricAlgebra.Basic
+public import Sheaf.LinearAlgebra.SymmetricAlgebra.Graded
 
 /-!
 # Exactness on a graded piece of a symmetric algebra
 
 Source: Stacks Project, Algebra, Lemma 00DO (blueprint: lem-weil-pbc-symmetric-degree-exact).
 -/
+
+@[expose] public section
 
 universe u v
 

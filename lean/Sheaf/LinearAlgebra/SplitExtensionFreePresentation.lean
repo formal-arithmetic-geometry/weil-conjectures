@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group N1
 -/
-import Mathlib.Algebra.Category.ModuleCat.Abelian
-import Mathlib.Algebra.Homology.ExactSequence
-import Mathlib.LinearAlgebra.FreeModule.Basic
-import Mathlib.LinearAlgebra.Quotient.Defs
+module
+
+public import Mathlib.Algebra.Category.ModuleCat.Abelian
+public import Mathlib.Algebra.Homology.ExactSequence
+public import Mathlib.LinearAlgebra.FreeModule.Basic
+public import Mathlib.LinearAlgebra.Quotient.Defs
 
 /-!
 # Splitting an extension using a free presentation of its cokernel
@@ -14,6 +16,8 @@ import Mathlib.LinearAlgebra.Quotient.Defs
 Source: Stacks Project, Algebra, proof of Tag 02HO, the splitting criterion for the
 lifted presentation (blueprint: lem-weil-pbc-split-extension-free-presentation).
 -/
+
+@[expose] public section
 
 universe u v
 

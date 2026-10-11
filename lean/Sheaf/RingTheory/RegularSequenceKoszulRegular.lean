@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import Sheaf.RingTheory.KoszulRegularSequence
-import Mathlib.RingTheory.Regular.RegularSequence
+module
+
+public import Sheaf.RingTheory.KoszulRegularSequence
+public import Mathlib.RingTheory.Regular.RegularSequence
 
 /-!
 # Regular sequences are Koszul-regular
@@ -17,6 +19,8 @@ quotient to be nonzero. `List.ofFn f` lists the given finite sequence in its ori
 The homology and Koszul complexes are those of the dependency modules, with negative
 terms zero by their extension convention.
 -/
+
+@[expose] public section
 
 universe u v
 

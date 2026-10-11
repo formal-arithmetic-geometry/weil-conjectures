@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group G1
 -/
-import Mathlib.AlgebraicGeometry.Morphisms.Flat
-import Mathlib.CategoryTheory.Limits.Preserves.Finite
-import Mathlib.CategoryTheory.Preadditive.Injective.Preserves
-import Sheaf.AlgebraicGeometry.TensorPullback
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.Flat
+public import Mathlib.CategoryTheory.Limits.Preserves.Finite
+public import Mathlib.CategoryTheory.Preadditive.Injective.Preserves
+public import Sheaf.AlgebraicGeometry.TensorPullback
 
 /-! # Flat module pullback is exact and direct image preserves injectives
 
@@ -14,6 +16,8 @@ Source: literature/stacks-project/modules.tex; literature/stacks-project/cohomol
 Modules 02N4 and Cohomology 02N5
 (blueprint: lem-weil-pbc-flat-module-pullback-exact-pushforward-injective).
 -/
+
+@[expose] public section
 
 open CategoryTheory CategoryTheory.Limits
 open AlgebraicGeometry

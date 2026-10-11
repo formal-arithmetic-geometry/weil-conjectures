@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import Mathlib.Algebra.Homology.BifunctorShift
-import Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
-import Mathlib.CategoryTheory.Limits.Shapes.ZeroObjects
-import Mathlib.RingTheory.Flat.CategoryTheory
+module
+
+public import Mathlib.Algebra.Homology.BifunctorShift
+public import Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
+public import Mathlib.CategoryTheory.Limits.Shapes.ZeroObjects
+public import Mathlib.RingTheory.Flat.CategoryTheory
 
 /-!
 # Bounded-above flat module complexes are K-flat
@@ -14,6 +16,8 @@ import Mathlib.RingTheory.Flat.CategoryTheory
 Source: Stacks Project, More on Algebra, Lemma 15.59.1 (Tag 064K)
 (blueprint: lem-pc-module-bounded-flat-kflat).
 -/
+
+@[expose] public section
 
 universe u
 

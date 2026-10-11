@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group J1
 -/
-import Mathlib.RingTheory.RegularLocalRing.Defs
-import Sheaf.RingTheory.FormallySmoothAdic
+module
+
+public import Mathlib.RingTheory.RegularLocalRing.Defs
+public import Sheaf.RingTheory.FormallySmoothAdic
 
 /-!
 # Adically formally smooth local algebras over fields are regular
@@ -12,6 +14,8 @@ import Sheaf.RingTheory.FormallySmoothAdic
 Source: Stacks Project, More on Algebra, Lemma Tag 07EI (lemma-fs-implies-regular)
 (blueprint: lem-weil-pbc-fs-adic-field-regular-local).
 -/
+
+@[expose] public section
 
 universe u v
 

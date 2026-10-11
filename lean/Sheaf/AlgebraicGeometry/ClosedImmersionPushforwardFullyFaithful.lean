@@ -1,5 +1,7 @@
-import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-import Sheaf.AlgebraicGeometry.TensorPullback
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+public import Sheaf.AlgebraicGeometry.TensorPullback
 
 /-!
 # Pushforward along a closed immersion is fully faithful
@@ -8,6 +10,8 @@ Source: Stacks Project, Modules, Lemma 08KS (modules-lemma-i-star-equivalence),
 quoted for schemes in Morphisms, Lemma 01QY
 (blueprint: lem-weil-pbc-closed-immersion-pushforward-fully-faithful).
 -/
+
+@[expose] public section
 
 universe w
 

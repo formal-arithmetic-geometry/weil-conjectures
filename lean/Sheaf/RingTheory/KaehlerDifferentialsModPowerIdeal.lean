@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import Mathlib.RingTheory.Kaehler.Basic
-import Mathlib.RingTheory.Ideal.Quotient.PowTransition
-import Mathlib.LinearAlgebra.TensorProduct.Tower
+module
+
+public import Mathlib.RingTheory.Kaehler.Basic
+public import Mathlib.RingTheory.Ideal.Quotient.PowTransition
+public import Mathlib.LinearAlgebra.TensorProduct.Tower
 
 /-!
 # Kähler differentials modulo a power of an ideal
@@ -17,6 +19,8 @@ with the conormal sequence of Tag 00RU
 The quotient factor is written first in the tensor products, using tensor symmetry,
 so that Mathlib supplies the canonical quotient-ring module structures.
 -/
+
+@[expose] public section
 
 universe u v
 

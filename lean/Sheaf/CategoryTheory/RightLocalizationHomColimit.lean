@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Mathlib.CategoryTheory.Localization.CalculusOfFractions
-import Mathlib.CategoryTheory.MorphismProperty.Comma
-import Mathlib.CategoryTheory.Yoneda
-import Mathlib.CategoryTheory.Limits.Types.ColimitType
+module
+
+public import Mathlib.CategoryTheory.Localization.CalculusOfFractions
+public import Mathlib.CategoryTheory.MorphismProperty.Comma
+public import Mathlib.CategoryTheory.Yoneda
+public import Mathlib.CategoryTheory.Limits.Types.ColimitType
 
 /-!
 # Morphisms in a right localization as a colimit
@@ -14,6 +16,8 @@ import Mathlib.CategoryTheory.Limits.Types.ColimitType
 Source: Stacks Project, Categories, Remark 4.27.15, Tag 05Q4; Derived Categories,
 Tag 0FND (blueprint: lem-pc-right-localization-hom-colimit).
 -/
+
+@[expose] public section
 
 universe v u v' u'
 

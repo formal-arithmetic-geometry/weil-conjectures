@@ -3,11 +3,13 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import Mathlib.Algebra.Category.Ring.Basic
-import Mathlib.CategoryTheory.Filtered.Basic
-import Mathlib.CategoryTheory.Limits.HasLimits
-import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
-import Mathlib.RingTheory.Localization.AtPrime.Basic
+module
+
+public import Mathlib.Algebra.Category.Ring.Basic
+public import Mathlib.CategoryTheory.Filtered.Basic
+public import Mathlib.CategoryTheory.Limits.HasLimits
+public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
+public import Mathlib.RingTheory.Localization.AtPrime.Basic
 
 /-!
 # A filtered colimit of normal rings is normal
@@ -15,6 +17,8 @@ import Mathlib.RingTheory.Localization.AtPrime.Basic
 Source: Stacks Project, Algebra, Lemma Tag 037D (lemma-colimit-normal-ring)
 (blueprint: lem-weil-pbc-filtered-colimit-normal-ring).
 -/
+
+@[expose] public section
 
 universe u
 

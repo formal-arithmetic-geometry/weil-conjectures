@@ -2,8 +2,10 @@
 Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 -/
-import Sheaf.Paper.FiniteSplitEtaleHypercover
-import Mathlib.CategoryTheory.Filtered.Basic
+module
+
+public import Sheaf.Paper.FiniteSplitEtaleHypercover
+public import Mathlib.CategoryTheory.Filtered.Basic
 
 /-!
 # Finite étale hypercover skeleta descend
@@ -11,6 +13,8 @@ import Mathlib.CategoryTheory.Filtered.Basic
 Source: literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/
 lemma-weil-pbc-finite-hypercover-descent.md (blueprint: lemma-weil-pbc-finite-hypercover-descent).
 -/
+
+@[expose] public section
 
 universe w
 

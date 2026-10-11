@@ -3,22 +3,26 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group R1
 -/
-import Sheaf.AlgebraicGeometry.LocallyRankedExteriorComplex
-import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
-import Sheaf.AlgebraicGeometry.TensorPullback
-import Sheaf.Algebra.Homology.ModuleStalkFunctor
-import Sheaf.RingTheory.KoszulRegularSequence
-import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
-import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
-import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-import Mathlib.AlgebraicGeometry.Noetherian
-import Mathlib.LinearAlgebra.Dimension.Finrank
+module
+
+public import Sheaf.AlgebraicGeometry.LocallyRankedExteriorComplex
+public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
+public import Sheaf.AlgebraicGeometry.TensorPullback
+public import Sheaf.Algebra.Homology.ModuleStalkFunctor
+public import Sheaf.RingTheory.KoszulRegularSequence
+public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
+public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+public import Mathlib.AlgebraicGeometry.Noetherian
+public import Mathlib.LinearAlgebra.Dimension.Finrank
 
 /-! # Dualizing object of a Koszul-regular closed immersion
 
 Source: Stacks Project, Duality for Schemes, Tag 0BR0, with Tag 0BQZ
 (blueprint: lem-sc-smooth-proper-diagonal-koszul-dual).
 -/
+
+@[expose] public section
 
 universe u wZ wY
 

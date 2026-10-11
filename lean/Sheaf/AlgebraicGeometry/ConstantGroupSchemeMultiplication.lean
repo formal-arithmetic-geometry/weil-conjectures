@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Sheaf.AlgebraicGeometry.ConstantGroupScheme
+module
+
+public import Sheaf.AlgebraicGeometry.ConstantGroupScheme
 
 /-!
 # Multiplication of the constant group scheme
@@ -11,6 +13,8 @@ import Sheaf.AlgebraicGeometry.ConstantGroupScheme
 Source: Stacks Project, Groupoids, Example 39.5.6 (Tag 03YW), and Schemes,
 Section 26.14 (Tag 01JA) (blueprint: lem-weil-pbc-constant-group-scheme-multiplication).
 -/
+
+@[expose] public section
 
 universe u v
 

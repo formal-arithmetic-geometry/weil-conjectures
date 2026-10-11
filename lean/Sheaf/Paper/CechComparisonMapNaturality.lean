@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
-import Sheaf.AlgebraicGeometry.ModuleCechComparison
+module
+
+public import Sheaf.AlgebraicGeometry.ModuleCechComparison
 
 /-!
 # Naturality of the canonical Cech-to-cohomology comparison map
@@ -11,6 +13,8 @@ import Sheaf.AlgebraicGeometry.ModuleCechComparison
 Source: Stacks Project, Cohomology of Sheaves, Lemma Tag 01EQ
 (blueprint: lem-sc-cech-comparison-map-naturality).
 -/
+
+@[expose] public section
 
 universe u
 

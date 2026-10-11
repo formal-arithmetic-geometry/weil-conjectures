@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group G1
 -/
-import Mathlib.Topology.Sheaves.Skyscraper
-import Mathlib.Topology.LocallyConstant.Basic
+module
+
+public import Mathlib.Topology.Sheaves.Skyscraper
+public import Mathlib.Topology.LocallyConstant.Basic
 
 /-!
 # Skyscraper sheaves and the closure of a point
@@ -12,6 +14,8 @@ import Mathlib.Topology.LocallyConstant.Basic
 Source: Stacks Project, Modules, proof of Tag 0CAL; Sheaves, Definition Tag 009A.
 (blueprint: lem-weil-pbc-skyscraper-constant-on-point-closure).
 -/
+
+@[expose] public section
 
 set_option autoImplicit false
 

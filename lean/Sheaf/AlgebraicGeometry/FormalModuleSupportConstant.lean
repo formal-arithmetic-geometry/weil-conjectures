@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group S1
 -/
-import Sheaf.AlgebraicGeometry.CoherentFormalModule
+module
+
+public import Sheaf.AlgebraicGeometry.CoherentFormalModule
 
 /-!
 # Constant support of a coherent formal module
@@ -12,6 +14,8 @@ Source: Stacks Project, Cohomology of Schemes, proof of Lemma 30.26.11 (Tag 0CYV
 first sentence of the proof of (1)
 (blueprint: lem-weil-pbc-formal-system-support-constant).
 -/
+
+@[expose] public section
 
 universe u
 

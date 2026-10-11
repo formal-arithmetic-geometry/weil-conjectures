@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Mathlib.Algebra.Module.LocalizedModule.Basic
-import Mathlib.RingTheory.Finiteness.Defs
-import Mathlib.RingTheory.Ideal.Maps
-import Mathlib.RingTheory.Localization.Away.Basic
+module
+
+public import Mathlib.Algebra.Module.LocalizedModule.Basic
+public import Mathlib.RingTheory.Finiteness.Defs
+public import Mathlib.RingTheory.Ideal.Maps
+public import Mathlib.RingTheory.Localization.Away.Basic
 
 /-!
 # Annihilators of finite modules localized away from an element
@@ -14,6 +16,8 @@ import Mathlib.RingTheory.Localization.Away.Basic
 Source: Stacks Project, Algebra, Lemma 07T8, second assertion specialized to localization
 (blueprint: lem-weil-pbc-annihilator-localization-finite).
 -/
+
+@[expose] public section
 
 universe u v
 

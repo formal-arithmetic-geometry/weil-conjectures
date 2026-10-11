@@ -3,10 +3,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group G1
 -/
-import Mathlib.Algebra.Module.LocalizedModule.Basic
-import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
-import Mathlib.GroupTheory.MonoidLocalization.Away
-import Mathlib.LinearAlgebra.TensorProduct.Tower
+module
+
+public import Mathlib.Algebra.Module.LocalizedModule.Basic
+public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
+public import Mathlib.GroupTheory.MonoidLocalization.Away
+public import Mathlib.LinearAlgebra.TensorProduct.Tower
 
 /-!
 # Formal glueing data for modules
@@ -14,6 +16,8 @@ import Mathlib.LinearAlgebra.TensorProduct.Tower
 Source: Stacks Project, More on Algebra, Remark 05EL, items (1) and (2)
 (blueprint: def-weil-pbc-formal-glueing-data).
 -/
+
+@[expose] public section
 
 universe u v w w₁ w₂
 

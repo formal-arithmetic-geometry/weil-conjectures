@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H1
 -/
-import Mathlib.RingTheory.Smooth.Basic
-import Sheaf.RingTheory.GRing
+module
+
+public import Mathlib.RingTheory.Smooth.Basic
+public import Sheaf.RingTheory.GRing
 
 /-!
 # Geometric regularity ascends along smooth algebra maps
@@ -12,6 +14,8 @@ import Sheaf.RingTheory.GRing
 Source: Stacks Project, Algebra, Lemma 07QF
 (blueprint: lem-weil-pbc-geometrically-regular-smooth-ascent).
 -/
+
+@[expose] public section
 
 universe u v w
 

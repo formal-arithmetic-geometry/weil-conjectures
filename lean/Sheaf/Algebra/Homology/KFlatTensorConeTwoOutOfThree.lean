@@ -3,8 +3,10 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import Sheaf.Algebra.Homology.KFlat
-import Mathlib.Algebra.Homology.HomotopyCategory.MappingCone
+module
+
+public import Sheaf.Algebra.Homology.KFlat
+public import Mathlib.Algebra.Homology.HomotopyCategory.MappingCone
 
 /-!
 # Acyclicity in a tensored cone sequence
@@ -12,6 +14,8 @@ import Mathlib.Algebra.Homology.HomotopyCategory.MappingCone
 Source: Stacks Project, sites-cohomology.tex, Lemma 07A3, with the cone of Definition 06YN
 (blueprint: lem-pc-kflat-tensor-cone-two-out-of-three).
 -/
+
+@[expose] public section
 
 universe u
 
@@ -23,7 +27,7 @@ variable {C : Type u} [Category.{u} C] {J : GrothendieckTopology C}
   (R : Sheaf J CommRingCat.{u})
 
 /-- A local abbreviation for the existing category of modules over the ring sheaf. -/
-private abbrev moduleCategory :=
+abbrev moduleCategory :=
   SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R)
 
 noncomputable local instance : MonoidalCategory (moduleCategory R) := monoidalCategory R

@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
-import Mathlib.FieldTheory.PurelyInseparable.Basic
-import Mathlib.FieldTheory.IntermediateField.Adjoin.Basic
-import Mathlib.Algebra.Polynomial.Basic
+module
+
+public import Mathlib.FieldTheory.PurelyInseparable.Basic
+public import Mathlib.FieldTheory.IntermediateField.Adjoin.Basic
+public import Mathlib.Algebra.Polynomial.Basic
 
 /-!
 # Towers of p-th roots in finite purely inseparable extensions
@@ -13,6 +15,8 @@ import Mathlib.Algebra.Polynomial.Basic
 Source: literature/stacks-project/fields.tex, Lemma Tag 09HI (blueprint:
 lem-weil-pbc-purely-inseparable-pth-root-tower).
 -/
+
+@[expose] public section
 
 universe u v
 

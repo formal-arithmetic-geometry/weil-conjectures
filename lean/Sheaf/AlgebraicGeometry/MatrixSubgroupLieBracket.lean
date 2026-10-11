@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group R1
 -/
-import WeilConjectures.AlgebraicGeometry.GroupScheme.GeneralLinear.ClosedSubgroup.Lie
+module
+
+public import WeilConjectures.AlgebraicGeometry.GroupScheme.GeneralLinear.ClosedSubgroup.Lie
 
 /-!
 # Tangent matrices and the differential of a rational representation
@@ -11,6 +13,8 @@ import WeilConjectures.AlgebraicGeometry.GroupScheme.GeneralLinear.ClosedSubgrou
 Source: Milne, Algebraic Groups (2017), Chapter 10, Lie algebra of a closed matrix subgroup
 and differential of a representation (blueprint: lem-wf-lie-algebra-derivation-bracket).
 -/
+
+@[expose] public section
 
 universe u
 

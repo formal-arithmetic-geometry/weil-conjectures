@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group E1
 -/
-import Mathlib.Algebra.Homology.HomologicalBicomplex
-import Mathlib.Algebra.Homology.HomologicalComplexAbelian
-import Mathlib.CategoryTheory.Preadditive.Injective.Resolution
+module
+
+public import Mathlib.Algebra.Homology.HomologicalBicomplex
+public import Mathlib.Algebra.Homology.HomologicalComplexAbelian
+public import Mathlib.CategoryTheory.Preadditive.Injective.Resolution
 
 /-! # Horizontal comparison homotopy for Cartan--Eilenberg rows
 
@@ -16,6 +18,8 @@ As in `CategoryTheory.exists_cartanEilenberg_resolution`, vertical indices are n
 augmentations are bicomplex morphisms from the vertical single-degree complex, and
 exact augmented rows are expressed by quasi-isomorphisms from that complex.
 -/
+
+@[expose] public section
 
 open CategoryTheory CategoryTheory.Limits
 
