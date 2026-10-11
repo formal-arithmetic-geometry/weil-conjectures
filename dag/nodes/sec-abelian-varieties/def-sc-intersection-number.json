@@ -82,5 +82,28 @@
   "group": "F1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-din2248 (reviewer sub-agent of L); spot-checked: Read the packet whole; statement against Stacks 0BEP (varieties.tex 10388) and 0BEL (10195); citing node lem-sc-positive-ample-hilbert-degree step (Z=X, L_j=L, coefficient of n_1..n_g in Q(n_1+..+n_g)) matches the notation and degree bound; lem-sc-intersection-effective-cartier and lem-sc-top-dimensional-reduction-intersection use (L^d.X) consistently; grep dag/nodes for 'intersection number': no other defining node (class b clear); lem-sc-hilbert-polynomial (0BEM) covers only a single ample M and F=O_X, so does not supply the multivariate polynomial. FIX more, RETURN less: dag/nodes/sec-abelian-varieties/def-sc-intersection-number.json: polynomiality of chi(X, i_*O_Z tensor L_1^{n_1}...L_d^{n_d}) used without a cited node (C1), now cites new statement-only node [lem-sc-snapper-numerical-polynomial] (Tag 0BEL, total degree <= dim Supp F; one grep recorded) as not part of the definition, and chi cites [def-pc-euler-characteristic]; the uncited projection-formula equality with chi(Z, ...|_Z) dropped (C1, not used by any citing node); Z required nonempty so d=dim Z is a natural number; stale split_report summary (ample, dimension g) corrected. Second reading by F1 missed the C1 polynomiality citation. Start 'Sat Oct 10 08:19 PM UTC 2026', end 'Sat Oct 10 08:21:47 PM UTC 2026'.; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.IntersectionNumber",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.intersectionNumber",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.intersectionNumber",
+   "AlgebraicGeometry.Scheme.Modules.selfIntersectionNumber"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/IntersectionNumber.lean",
+  "statement": "def intersectionNumber (k : Type u) [Field k] (X : Scheme.{u}) [X.Over (Spec (.of k))] [IsProper (X ↘ Spec (.of k))] (Z : Scheme.{u}) [Nonempty Z] (i : Z ⟶ X) [IsClosedImmersion i] (d : ℕ) (_hd : topologicalKrullDim Z = ((d : ℕ∞) : WithBot ℕ∞)) (L : Fin d → X.Modules) [∀ j : Fin d, (L j).IsInvertible] : ℚ",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-din1247"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-din1247",
+  "group": "F1",
+  "result": "fix",
+  "note": "Read the packet and diff whole (only the item node lean record, report, one new module; no landed node re-recorded). Matched k field, X proper over k (X.Over + IsProper on X ↘ Spec k), Z nonempty with closed immersion i (IsClosedImmersion), d = topologicalKrullDim Z as ℕ, L : Fin d → X.Modules IsInvertible, i_*O_Z, integer twists in the exact H1 358cf2ff9 List.ofFn/if/dual.tensorPow fold, recorded eulerChar k cast to ℚ, coefficient of x_1⋯x_d via MvPolynomial.coeff of Classical.epsilon of the lattice-evaluation predicate (tied: unique since a rational polynomial vanishing on ℤ^d is zero; existence is Snapper on coherent i_*O_Z), no let, no sorry (#print axioms clean), d = 0 gives constant coefficient χ(i_*O_Z), single universe u as in Snapper; no other intersection-number definition in dag/lean. FIX: O_Z written as SheafOfModules.unit _ (J1 961ac8a26 form; rfl-equal to 𝟙_ Z.Modules) so consumers match syntactically."
  }
 }
