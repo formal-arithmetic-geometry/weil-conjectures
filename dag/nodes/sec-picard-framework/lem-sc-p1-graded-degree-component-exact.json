@@ -100,5 +100,23 @@
   "group": "K1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-gde (reviewer sub-agent of L); spot-checked: Source: Stacks Algebra 00JL (label section-graded, algebra.tex l.13200ff), which states 'A short exact sequence of graded modules is short exact in every degree' and leaves it to the reader; the item's statement (unchanged) agrees with that convention: graded ring with R_aR_b in R_{a+b} (Z-graded, more general than Stacks' nonnegative grading, harmless), graded modules as direct sums with R_aB_b in B_{a+b}, degree-preserving maps, conclusion exactness of 0->A_n->B_n->C_n->0 for every n. Steps: 1 injectivity on A_n from injectivity of i; 2 exactness at B_n by decomposing a preimage a into homogeneous parts, degree preservation and uniqueness of the decomposition of B give i(a_n)=b (the inclusion im in ker is p.i=0); 3 surjectivity onto C_n by the same argument in C. All three are correctly elementary (direct-sum uniqueness, no cited node needed), no new nodes, no D1 relabelling since the steps carry the argument. No Mathlib leaf; the three searches recorded; grep of slopmaster2 WeilConjectures/Comparator for the id and graded exactness found no declaration (B10). Blueprint: from = lem-sc-p1-graded-resolution via lem-sc-p1-proj-degreezero-localization-exact, same_as [] (my blueprint_refs search 'graded exact component' gave no graded match). Small cases: sequence concentrated in one degree gives ordinary exactness; 0->A->A->0->0. FIX: dag/nodes/sec-picard-framework/lem-sc-p1-graded-degree-component-exact.json: proof[0..2].source.place and proof_origin.place: Stacks label 'section-graded-modules' corrected to 'section-graded' (tag 00JL = algebra-section-graded); the item's own source.place (maintainer's field) carries the same wrong label and is left to the lead. Start Sat Oct 10 04:13:18 PM UTC 2026, end Sat Oct 10 04:13:58 PM UTC 2026.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.GradedAlgebra.ShortExactGradedComponent",
+  "declaration": "DirectSum.shortExact_graded_component",
+  "file": "lean/Sheaf/RingTheory/GradedAlgebra/ShortExactGradedComponent.lean",
+  "statement": "theorem shortExact_graded_component {R : Type u} [CommRing R] {A : Type v} [AddCommGroup A] [Module R A] {B : Type w} [AddCommGroup B] [Module R B] {C : Type x} [AddCommGroup C] [Module R C] (ℛ : ℤ → AddSubgroup R) (𝒜 : ℤ → AddSubgroup A) (ℬ : ℤ → AddSubgroup B) (𝒞 : ℤ → AddSubgroup C) (_hR : IsInternal ℛ) (_hA : IsInternal 𝒜) (_hB : IsInternal ℬ) (_hC : IsInternal 𝒞) (_hmul : ∀ (a b : ℤ) (r s : R), r ∈ ℛ a → s ∈ ℛ b → r * s ∈ ℛ (a + b)) (_hsmulA : ∀ (a b : ℤ) (r : R) (m : A), r ∈ ℛ a → m ∈ 𝒜 b → r • m ∈ 𝒜 (a + b)) (_hsmulB : ∀ (a b : ℤ) (r : R) (m : B), r ∈ ℛ a → m ∈ ℬ b → r • m ∈ ℬ (a + b)) (_hsmulC : ∀ (a b : ℤ) (r : R) (m : C), r ∈ ℛ a → m ∈ 𝒞 b → r • m ∈ 𝒞 (a + b)) (i : A →ₗ[R] B) (p : B →ₗ[R] C) (hi : ∀ (n : ℤ) (a : A), a ∈ 𝒜 n → i a ∈ ℬ n) (hp : ∀ (n : ℤ) (b : B), b ∈ ℬ n → p b ∈ 𝒞 n) (_hinj : Function.Injective i) (_hexact : Function.Exact i p) (_hsurj : Function.Surjective p) (n : ℤ) : let iₙ : 𝒜 n → ℬ n := fun a ↦ ⟨i a, hi n a a.property⟩ let pₙ : ℬ n → 𝒞 n := fun b ↦ ⟨p b, hp n b b.property⟩ Function.Injective iₙ ∧ Function.Exact iₙ pₙ ∧ Function.Surjective pₙ",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-pgd1153",
+  "group": "C1",
+  "result": "pass",
+  "note": "Z-graded comm ring R as ℛ : ℤ → AddSubgroup R + IsInternal + R_aR_b ⊆ R_{a+b} (no 1∈R_0/nonneg added); A,B,C R-modules with AddSubgroup gradings, IsInternal, R_aM_b ⊆ M_{a+b} each; i,p R-linear degree-preserving for all n; 0→A→B→C→0 as Injective/Exact/Surjective; conclusion for every n ∈ ℤ: restricted maps iₙ,pₙ injective, exact, surjective; IsInternal form matches landed InvertibleSectionRing; no Mathlib/Sheaf name collision"
  }
 }

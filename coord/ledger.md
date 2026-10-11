@@ -3775,3 +3775,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 08:11 L: merged deliver/H1/lem-sc-conductor-ideal-zero-intersection (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.ConductorIdealZeroIntersection AlgebraicGeometry.conductorIdealZeroIntersection)
 - 08:11 L: merged deliver/H1/lem-sc-conductor-sections (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.ConductorSections AlgebraicGeometry.Scheme.Modules.conductor_sections)
 - 08:11 L: merged deliver/G1/lem-sc-integral-overring-jacobson-power (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.IntegralOverringJacobsonPower integral_overring_jacobson_power)
+- 08:11 L: merged deliver/C1/lem-sc-p1-graded-degree-component-exact (stage 2; reviewer PASS; first push; Sheaf.RingTheory.GradedAlgebra.ShortExactGradedComponent DirectSum.shortExact_graded_component)
