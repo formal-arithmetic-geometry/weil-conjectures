@@ -3,32 +3,60 @@
  "blueprint": {
   "is": "lemma-weil-pbc-prime-torsion-devissage",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Prime-torsion devissage",
- "statement": "For a torsion sheaf $F$, write $F[n]=\\ker(n:F\\to F)$. Then\n$F=\\varinjlim_nF[n]$; for $m\\mid n$ the inclusion $F[m]\\subseteq F[n]$\nis monic, and if $n=\\prod_i\\ell_i^{e_i}$, repeated use of\n\n$$\n0\\longrightarrow F[\\ell_i]\\longrightarrow F[n]\n\\xrightarrow{\\ell_i}\\ell_iF[n]\\longrightarrow0\n$$\n\nreduces assertions about $F[n]$ to assertions about $\\ell_i$-torsion.",
+ "statement": "Let $X$ be a scheme [def-weil-pbc-scheme-conventions] and let $F$ be a torsion sheaf in $\\Ab(X_{\\Et})$ [def-weil-pbc-etale-sheaves]. For each positive integer $n$, write $F[n]=\\ker(n:F\\to F)$ [def-pur-abelian-sheaf-kernel]. Then, in the filtered colimit sense [def-weil-pbc-category-colimit],\n$F=\\varinjlim_{(\\mathbf N_{>0},\\mid)}F[n]$; for $m\\mid n$ the inclusion $F[m]\\subseteq F[n]$ is monic, and if $n=\\prod_i\\ell_i^{e_i}$ with $n>1$, repeated use of\n\n$$\n0\\longrightarrow F[\\ell_i]\\longrightarrow F[n]\n\\xrightarrow{\\ell_i}\\ell_iF[n]\\longrightarrow0,\n$$\n\nin which $F[\\ell_i]$ is killed by $\\ell_i$ and $\\ell_iF[n]$ is killed by $n/\\ell_i$ (that is, $\\ell_iF[n]\\subseteq F[n/\\ell_i]$), reduces assertions about $F[n]$ to assertions about sheaves killed by one prime.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-iff/lemma-weil-pbc-prime-torsion-devissage.md",
   "place": "node lemma-weil-pbc-prime-torsion-devissage, order 1090"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-etale-sheaves",
+  "def-pur-abelian-sheaf-kernel",
+  "def-weil-pbc-category-colimit"
+ ],
  "proof": [
   {
-   "text": "The filtered union is Lemma [lemma-weil-pbc-torsion-filtered-union].\nThe exact sequence is the kernel–image sequence for multiplication by\n$\\ell_i$, since the kernel in $F[n]$ is $F[\\ell_i]$. Lemma [lemma-weil-pbc-prime-factor-induction] and the\nfive-lemma transfer then prove the assertion for every $F[n]$, and\nLemma [lemma-weil-pbc-direct-image-filtered-colimit] passes to $F$.",
+   "text": "For the divisibility-ordered positive integers, the canonical inclusions of the kernels $F[m]$ into $F[n]$ are monomorphisms whenever $m\\mid n$, and the filtered colimit of these subsheaves is $F$ by [lemma-weil-pbc-torsion-filtered-union].",
    "uses": [
-    "lemma-weil-pbc-torsion-filtered-union",
-    "lemma-weil-pbc-prime-factor-induction",
-    "lemma-weil-pbc-direct-image-filtered-colimit"
+    "lemma-weil-pbc-torsion-filtered-union"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-iff/lemma-weil-pbc-prime-torsion-devissage.md",
+    "place": "## Proof, first sentence"
+   }
+  },
+  {
+   "text": "If $n=\\prod_i\\ell_i^{e_i}>1$ with the $\\ell_i$ prime, apply [lem-weil-pbc-prime-factor-devissage] with $r=\\ell_i$ to the sheaf $F[n]$, which is killed by $n$: it gives the short exact sequence $0\\to F[n][\\ell_i]\\to F[n]\\xrightarrow{\\ell_i}\\ell_iF[n]\\to0$ with kernel killed by $\\ell_i$ and image killed by $n/\\ell_i$, so $\\ell_iF[n]\\subseteq F[n/\\ell_i]$. Since $\\ell_i\\mid n$, a local section killed by $\\ell_i$ is killed by $n$, so $F[n][\\ell_i]=F[\\ell_i]$.",
+   "uses": [
+    "lem-weil-pbc-prime-factor-devissage"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-iff/lem-weil-pbc-prime-factor-devissage.md",
+    "place": "## Proof"
+   }
+  },
+  {
+   "text": "Any assertion about torsion sheaves that is stable under short exact sequences can therefore be proved for $F[n]$ by induction on the total number of prime factors of $n$, reducing to the cases of sheaves killed by one prime via [lemma-weil-pbc-prime-factor-induction].",
+   "uses": [
+    "lemma-weil-pbc-prime-factor-induction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-iff/lemma-weil-pbc-prime-torsion-devissage.md",
+    "place": "## Proof, induction and five-lemma sentence"
+   }
   }
  ],
  "proof_deps": [
-  "lemma-weil-pbc-torsion-filtered-union",
+  "lem-weil-pbc-prime-factor-devissage",
   "lemma-weil-pbc-prime-factor-induction",
-  "lemma-weil-pbc-direct-image-filtered-colimit",
-  "lemma-weil-pbc-five-lemma-transfer"
+  "lemma-weil-pbc-torsion-filtered-union"
  ],
  "proof_origin": {
   "by": "agent",
@@ -37,7 +65,7 @@
  },
  "mathlib_searches": [],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -89,5 +117,30 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-iff"
+ "unit": "sk-thm-iff",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lemma-weil-pbc-prime-torsion-devissage",
+  "worker": "stage1",
+  "summary": "Checked the tagged Lean declaration and found it is an application-specific exchange-isomorphism theorem, not an exact statement of this abstract decomposition node. Split the proof into the existing filtered-torsion-union lemma, the existing kernel-image prime-factor devissage, prime-factor induction plus five-lemma transfer, and filtered-colimit passage; created no duplicate nodes.",
+  "blueprint": "Steps 1-4 realize the imported proof paragraph: filtered union; kernel-image sequence; induction and five-lemma transfer; passage to the colimit.",
+  "tool_uses": [
+   {
+    "node": "lemma-weil-pbc-torsion-filtered-union",
+    "why": "The item needs the general filtered-union decomposition of torsion sheaves, supplied by the existing node from unit sk-prop-h2."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lemma-weil-pbc-torsion-filtered-union",
+  "lemma-weil-pbc-torsion-filtered-union"
+ ],
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-ptd0046",
+  "group": "C1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ptd0046 (reviewer sub-agent of L); spot-checked: Read all 4 cited statements, both citers (arbitrary-ring-torsion-sheaf-base-change steps 1-2), no duplicate among sec-proper-base-change torsion/devissage nodes; tool use torsion-filtered-union (sk-prop-h2) accepted as generic. FIX more, RETURN less: (1) C4/D: step 4 cited lemma-weil-pbc-direct-image-filtered-colimit (qcqs u, R^q u_*) to transfer an arbitrary assertion from F[n] to F; the statement claims no such transfer and the cited node does not give it; step and proof_dep removed (missed by the Second reading, which passed it). (2) C4: step 2 applied the killed-by-n sequence without identifying F[n][l]=F[l]; added the one-line elementary identification. (3) C4/E7: citer arbitrary-ring step 2 uses that lF[n] is killed by n/l, which the statement did not say; added 'F[l] killed by l and lF[n] killed by n/l (lF[n] in F[n/l])' to the statement, proved in step 2 by lem-weil-pbc-prime-factor-devissage.; 1 file(s) fixed by the reviewer"
+ }
 }
