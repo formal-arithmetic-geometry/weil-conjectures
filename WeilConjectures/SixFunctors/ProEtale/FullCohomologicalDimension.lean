@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.AlgebraicGeometry.ProEtale.WeaklyContractible
 public import WeilConjectures.SixFunctors.Etale.Derived.DirectImageVanishing
 public import WeilConjectures.SixFunctors.ProEtale.BaseChange.SmoothBaseChange
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.FullyFaithful
@@ -310,6 +311,37 @@ theorem hasCohomologicalDimensionLEOnEtaleOrigin :
       hp d hd F hF r (by exact_mod_cast hr)).2 V g' p' sq⟩
 
 end Bound
+
+section WeaklyContractible
+
+open Opposite
+
+variable (Λ : Type (u + 1)) [CommRing Λ]
+
+/-- Blueprint `cor-sf-fullcd-weakly-contractible-test`: FullCD tested on affine weakly
+contractible objects.
+
+`FullCD(p, Λ; c)` holds if and only if, for every base change `p'` of `p` along an object `V` of
+`Y_proét`, every pro-étale sheaf `F` of `Λ`-modules on the base-changed source and every `r > c`,
+the sections of `H^r(Rp'_* F)` over every affine weakly contractible object of `V_proét` vanish.
+No geometric-point stalks are used: the affine weakly contractible objects detect the vanishing
+of a pro-étale sheaf (`AlgebraicGeometry.ProEtale.isZero_iff_forall_isWeaklyContractible`). -/
+theorem hasUniformCohomologicalDimensionLE_iff_forall_isWeaklyContractible {X Y : Scheme.{u}}
+    (p : X ⟶ Y) (c : ℕ) :
+    HasUniformCohomologicalDimensionLE (ModuleCat.{u + 1} Λ) p c ↔
+      ∀ (V : Y.ProEt) ⦃X' : Scheme.{u}⦄ (g' : X' ⟶ X) (p' : X' ⟶ V.left),
+        IsPullback g' p' p V.hom →
+          ∀ (F : Sheaf (Scheme.ProEt.topology X') (ModuleCat.{u + 1} Λ)) (r : ℤ), (c : ℤ) < r →
+            ∀ W : V.left.ProEt, IsAffine W.left →
+              (Scheme.ProEt.topology V.left).IsWeaklyContractible.{u + 1} W →
+                Subsingleton ((((_root_.DerivedCategory.homologyFunctor _ r).obj
+                  ((R((p')_*[ModuleCat.{u + 1} Λ])).obj
+                    ((_root_.DerivedCategory.singleFunctor _ 0).obj F))).obj.obj (op W))) := by
+  refine forall_congr' fun V ↦ forall_congr' fun X' ↦ forall_congr' fun g' ↦
+    forall_congr' fun p' ↦ forall_congr' fun _ ↦ forall_congr' fun F ↦ forall_congr' fun r ↦
+      forall_congr' fun _ ↦ isZero_iff_forall_isWeaklyContractible _
+
+end WeaklyContractible
 
 end ProEtale
 
