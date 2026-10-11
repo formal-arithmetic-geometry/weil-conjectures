@@ -219,4 +219,50 @@ theorem exists_int_weilStratumPoly {C : ℤ[X]} (hC : C.coeff 0 = 1) :
   apply (algebraMap ℤ (AlgebraicClosure ℚ)).injective_int
   rw [← coeff_map, hQ, h2, map_one]
 
+section Products
+
+variable {q} {ι : Type*} (s : Finset ι) (P : ι → ℤ[X]) (w : ι → ℤ)
+
+/-- **Weight strata of a product.** Let `Pₖ`, `k ∈ s`, be integer polynomials with `Pₖ(0) = 1`
+all of whose complex reciprocal roots have absolute value `q^{wₖ/2}`, the weights `wₖ` being
+pairwise distinct. Then the weight-`wⱼ` stratum of `∏ₖ Pₖ` is the multiset of reciprocal roots
+of `Pⱼ` in `ℚ̄`: the reciprocal roots of `Pₖ` are `q`-Weil numbers of weight `wₖ`
+(`isWeilNumber_of_mem_roots`), and a Weil number has only one weight. -/
+theorem weilStratum_prod (hq : 1 < q) (hw : Set.InjOn w s) (h0 : ∀ k ∈ s, (P k).coeff 0 = 1)
+    (hpure : ∀ k ∈ s, ∀ y ∈ ((P k).reverse.map (Int.castRingHom ℂ)).roots,
+      ‖y‖ = (q : ℝ) ^ ((w k : ℝ) / 2)) {j : ι} (hj : j ∈ s) :
+    weilStratum q (w j) (∏ k ∈ s, P k) =
+      ((P j).reverse.map (algebraMap ℤ (AlgebraicClosure ℚ))).roots := by
+  classical
+  have hne (k : ι) (hk : k ∈ s) : (P k).reverse ≠ 0 :=
+    (monic_reverse_of_coeff_zero_eq_one (h0 k hk)).ne_zero
+  have hne' (k : ι) (hk : k ∈ s) :
+      (P k).reverse.map (algebraMap ℤ (AlgebraicClosure ℚ)) ≠ 0 :=
+    (Polynomial.map_ne_zero_iff (algebraMap ℤ (AlgebraicClosure ℚ)).injective_int).2 (hne k hk)
+  -- the reciprocal roots of `Pₖ` are Weil numbers of weight `wₖ`
+  have hweil (k : ι) (hk : k ∈ s) (α : AlgebraicClosure ℚ)
+      (hα : α ∈ ((P k).reverse.map (algebraMap ℤ (AlgebraicClosure ℚ))).roots) :
+      IsWeilNumber q (w k) α :=
+    isWeilNumber_of_mem_roots (hne k hk) (hpure k hk) hα
+  rw [weilStratum, reverse_prod_of_domain, Polynomial.map_prod,
+    roots_prod _ _ (Finset.prod_ne_zero_iff.2 hne'), Multiset.filter_bind]
+  change ∑ k ∈ s, _ = _
+  rw [Finset.sum_eq_single j (fun k hk hkj ↦ Multiset.filter_eq_nil.2 fun α hα hα' ↦
+    hkj (hw hk hj (by exact_mod_cast ((hweil k hk α hα).weight_eq hq hα')))) (fun h ↦ (h hj).elim),
+    Multiset.filter_eq_self.2 (hweil j hj)]
+
+/-- **Stratum polynomials of a product.** In the situation of `Polynomial.weilStratum_prod`, the
+weight-`wⱼ` stratum polynomial of `∏ₖ Pₖ` is `Pⱼ` itself. -/
+theorem weilStratumPoly_prod (hq : 1 < q) (hw : Set.InjOn w s) (h0 : ∀ k ∈ s, (P k).coeff 0 = 1)
+    (hpure : ∀ k ∈ s, ∀ y ∈ ((P k).reverse.map (Int.castRingHom ℂ)).roots,
+      ‖y‖ = (q : ℝ) ^ ((w k : ℝ) / 2)) {j : ι} (hj : j ∈ s) :
+    weilStratumPoly q (w j) (∏ k ∈ s, P k) = (P j).map (algebraMap ℤ (AlgebraicClosure ℚ)) := by
+  have h0' : ((P j).map (algebraMap ℤ (AlgebraicClosure ℚ))).coeff 0 = 1 := by
+    rw [coeff_map, h0 j hj, map_one]
+  rw [weilStratumPoly, weilStratum_prod s P w hq hw h0 hpure hj,
+    ← reverse_map (algebraMap ℤ (AlgebraicClosure ℚ)).injective_int]
+  exact ((ordinary_reciprocal_roots h0').2.2 (IsAlgClosed.splits _)).2.symm
+
+end Products
+
 end Polynomial

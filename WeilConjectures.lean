@@ -924,6 +924,7 @@ public import WeilConjectures.Mathlib.Algebra.Polynomial.BigOperators
 public import WeilConjectures.Mathlib.Algebra.Polynomial.FieldDivision
 public import WeilConjectures.Mathlib.Algebra.Polynomial.Laurent
 public import WeilConjectures.Mathlib.Algebra.Polynomial.Reverse
+public import WeilConjectures.Mathlib.Algebra.Polynomial.RingDivision
 public import WeilConjectures.Mathlib.Algebra.Polynomial.Splits
 public import WeilConjectures.Mathlib.Algebra.Ring.Idempotent
 public import WeilConjectures.Mathlib.Algebra.Ring.Subring.Basic
@@ -1428,9 +1429,6 @@ public import WeilConjectures.RingTheory.RelativeComponentGeneralization
 public import WeilConjectures.RingTheory.Spectrum.Prime.LocallyConstant
 public import WeilConjectures.RingTheory.TensorLocalizationAway
 public import WeilConjectures.RingTheory.TensorProduct.Hilbert90
-public import WeilConjectures.Scratch.Frontier
-public import WeilConjectures.Scratch.Q1
-public import WeilConjectures.Scratch.Q2
 public import WeilConjectures.SixFunctors.BaseChange.Derived
 public import WeilConjectures.SixFunctors.BaseChange.DerivedComparison
 public import WeilConjectures.SixFunctors.BaseChange.DerivedPasting
@@ -1850,6 +1848,7 @@ public import WeilConjectures.ZetaFunction.HasseWeil
 public import WeilConjectures.ZetaFunction.IntegralFactors
 public import WeilConjectures.ZetaFunction.IntegralFrobeniusFactors
 public import WeilConjectures.ZetaFunction.Rationality
+public import WeilConjectures.ZetaFunction.RealizationIndependence
 public import WeilConjectures.ZetaFunction.RelativePurity
 public import WeilConjectures.ZetaFunction.SmoothProper
 public import WeilConjectures.ZetaFunction.TraceFormula

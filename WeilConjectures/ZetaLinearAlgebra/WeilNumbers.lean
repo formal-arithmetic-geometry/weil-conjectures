@@ -93,26 +93,48 @@ private theorem forall_algHom_adjoin_inv {α β : K} (hαβ : α * β = 1) {P : 
 
 
 /-- If every complex root of a nonzero `Q ∈ ℤ[X]` has absolute value `q ^ (w / 2)`, then every
-complex root of `Q` is a `q`-Weil number of weight `w`: its conjugates are again roots of `Q`. -/
+root of `Q` in a field `K` of characteristic zero is a `q`-Weil number of weight `w`: its
+conjugates are complex roots of `Q`. -/
 theorem isWeilNumber_of_mem_roots {q : ℕ} {w : ℝ} {Q : ℤ[X]} (hQ : Q ≠ 0)
-    (h : ∀ y ∈ (Q.map (Int.castRingHom ℂ)).roots, ‖y‖ = (q : ℝ) ^ (w / 2)) {α : ℂ}
-    (hα : α ∈ (Q.map (Int.castRingHom ℂ)).roots) : IsWeilNumber q w α := by
-  have hcomp : (algebraMap ℚ ℂ).comp (Int.castRingHom ℚ) = Int.castRingHom ℂ :=
+    (h : ∀ y ∈ (Q.map (Int.castRingHom ℂ)).roots, ‖y‖ = (q : ℝ) ^ (w / 2)) {α : K}
+    (hα : α ∈ (Q.map (Int.castRingHom K)).roots) : IsWeilNumber q w α := by
+  have : CharZero K := algebraRat.charZero K
+  have hcomp : (algebraMap ℚ K).comp (Int.castRingHom ℚ) = Int.castRingHom K :=
+    RingHom.ext_int _ _
+  have hcompℂ : (algebraMap ℚ ℂ).comp (Int.castRingHom ℚ) = Int.castRingHom ℂ :=
     RingHom.ext_int _ _
   have hQℚ : Q.map (Int.castRingHom ℚ) ≠ 0 :=
     (Polynomial.map_ne_zero_iff (RingHom.injective_int _)).2 hQ
   have hQℂ : Q.map (Int.castRingHom ℂ) ≠ 0 :=
     (Polynomial.map_ne_zero_iff (RingHom.injective_int _)).2 hQ
+  have hQK : Q.map (Int.castRingHom K) ≠ 0 :=
+    (Polynomial.map_ne_zero_iff (RingHom.injective_int _)).2 hQ
   have haeval : aeval α (Q.map (Int.castRingHom ℚ)) = 0 := by
     rw [aeval_def, eval₂_map, hcomp, ← eval_map]
-    exact (mem_roots hQℂ).1 hα
+    exact (mem_roots hQK).1 hα
   have hint : IsIntegral ℚ α := ⟨_, (monic_normalize hQℚ), by
     rw [← aeval_def, normalize_apply, map_mul, haeval, zero_mul]⟩
   refine isWeilNumber_iff.2 ⟨hint, fun y hy ↦ h y ?_⟩
   have hdvd : (minpoly ℚ α).map (algebraMap ℚ ℂ) ∣ Q.map (Int.castRingHom ℂ) := by
-    rw [← hcomp, ← Polynomial.map_map]
+    rw [← hcompℂ, ← Polynomial.map_map]
     exact Polynomial.map_dvd _ (minpoly.dvd ℚ α haeval)
   exact Multiset.mem_of_le (Polynomial.roots.le_of_dvd hQℂ hdvd) hy
+
+/-- The weight of a `q`-Weil number is unique for `q > 1`: the absolute value of a complex
+conjugate determines it. -/
+theorem IsWeilNumber.weight_eq {q : ℕ} (hq : 1 < q) {w w' : ℝ} {α : K} (h : IsWeilNumber q w α)
+    (h' : IsWeilNumber q w' α) : w = w' := by
+  rw [isWeilNumber_iff] at h h'
+  have hne : (minpoly ℚ α).map (algebraMap ℚ ℂ) ≠ 0 :=
+    (Polynomial.map_ne_zero_iff (algebraMap ℚ ℂ).injective).2 (minpoly.ne_zero h.1)
+  obtain ⟨y, hy⟩ := IsAlgClosed.exists_root ((minpoly ℚ α).map (algebraMap ℚ ℂ))
+    (by rw [degree_map]; exact (minpoly.degree_pos h.1).ne')
+  have hy' : y ∈ ((minpoly ℚ α).map (algebraMap ℚ ℂ)).roots := (mem_roots hne).2 hy
+  have e := (h.2 y hy').symm.trans (h'.2 y hy')
+  have hq' : (1 : ℝ) < q := by exact_mod_cast hq
+  have := le_antisymm ((Real.rpow_le_rpow_left_iff hq').1 e.le)
+    ((Real.rpow_le_rpow_left_iff hq').1 e.ge)
+  linarith
 end Defs
 
 /-- The universal purity of `Weights.lean` versus Weil numbers (blueprint `def-weil-numbers`): a

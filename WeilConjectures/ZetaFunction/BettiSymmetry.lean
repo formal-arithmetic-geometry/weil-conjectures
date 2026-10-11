@@ -8,6 +8,7 @@ module
 public import WeilConjectures.ZetaFunction.BettiNumbers
 public import WeilConjectures.Mathlib.Algebra.Polynomial.RingDivision
 public import WeilConjectures.ZetaFunction.IntegralFrobeniusFactors
+public import WeilConjectures.ZetaLinearAlgebra.ReciprocalRoots
 
 /-!
 # Betti numbers of a smooth proper variety
@@ -53,6 +54,19 @@ theorem abs_eq_of_isRoot (hrh : WeilRiemannHypothesis q d P) (h0 : ∀ i, (P i).
     rwa [Polynomial.map_map, RingHom.ext_int ((Rat.castHom ℂ).comp (Int.castRingHom ℚ))
       (Int.castRingHom ℂ)] at this
   rw [← hrh i _ hz, Complex.norm_ratCast]
+
+/-- Under the Riemann hypothesis, the complex reciprocal roots of `Pᵢ` (the roots of the reversed
+polynomial) have absolute value `q^{i/2}`. -/
+theorem norm_eq_of_mem_roots_reverse (hrh : WeilRiemannHypothesis q d P)
+    (h0 : ∀ i, (P i).coeff 0 = 1) (i : Fin (2 * d + 1)) {y : ℂ}
+    (hy : y ∈ ((P i).reverse.map (Int.castRingHom ℂ)).roots) :
+    ‖y‖ = (q : ℝ) ^ ((i.1 : ℝ) / 2) := by
+  have hne : (P i).map (Int.castRingHom ℂ) ≠ 0 := fun h' ↦ by
+    simpa [h0 i] using congr(Polynomial.coeff $h' 0)
+  rw [← Polynomial.reverse_map (RingHom.injective_int _), Polynomial.mem_roots_reverse_iff hne]
+    at hy
+  have := hrh i _ ((Polynomial.mem_roots hne).2 hy.2)
+  rwa [norm_inv, neg_div, Real.rpow_neg (Nat.cast_nonneg q), inv_inj] at this
 
 /-- Under the Riemann hypothesis, a positive rational `x = q^{-j/2}` is a root of no factor `Pᵢ`
 with `i ≠ j`. -/

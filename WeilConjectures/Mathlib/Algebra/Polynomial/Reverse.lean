@@ -16,6 +16,8 @@ public import Mathlib.Algebra.Polynomial.Reverse
   coefficient.
 - `Polynomial.reverse_map` — reversal commutes with the coefficient map along an injective ring
   homomorphism.
+- `Polynomial.reverse_prod_of_domain` — over a domain, reversal is multiplicative on finite
+  products.
 - `Polynomial.reverse_multiset_prod_X_sub_C` — the reverse of a product `∏ (X - aᵢ)` of monic
   linear factors is `∏ (1 - aᵢ * X)`.
 -/
@@ -59,5 +61,13 @@ theorem reverse_multiset_prod_X_sub_C [NoZeroDivisors R] (s : Multiset R) :
   induction s using Multiset.induction with
   | empty => simpa using reverse_C (1 : R)
   | cons a s ih => simp [ih]
+
+/-- Over a domain, the reverse of a finite product is the product of the reverses. -/
+theorem reverse_prod_of_domain [NoZeroDivisors R] {ι : Type*} (s : Finset ι) (f : ι → R[X]) :
+    (∏ i ∈ s, f i).reverse = ∏ i ∈ s, (f i).reverse := by
+  classical
+  induction s using Finset.induction_on with
+  | empty => simpa using reverse_C (1 : R)
+  | insert a s ha ih => rw [Finset.prod_insert ha, Finset.prod_insert ha, reverse_mul_of_domain, ih]
 
 end Polynomial
