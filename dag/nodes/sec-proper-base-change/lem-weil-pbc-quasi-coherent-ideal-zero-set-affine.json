@@ -189,5 +189,23 @@
   "by": "L",
   "result": "accepted",
   "note": "5 steps (agent proof; Stacks 01HM/01HP/01IN leave the stalk computation out): transport to Spec A along the chart; stalks of a sub-ideal sheaf inject; the image of K_p is I O_p via the tilde counit and the stalk-localization leaf; K_p = O_p iff I not in p; V(K) = i(Z) for a closed immersion with ideal sheaf K (existing nodes), hence closed. No new nodes; statement made precise (the chart named, the closed-subscheme clause stated for every closed immersion with ideal sheaf K)."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.QuasiCoherentIdealZeroSetAffine",
+  "declaration": "AlgebraicGeometry.Scheme.quasi_coherent_ideal_zero_set_affine",
+  "file": "lean/Sheaf/AlgebraicGeometry/QuasiCoherentIdealZeroSetAffine.lean",
+  "statement": "theorem quasi_coherent_ideal_zero_set_affine (X : Scheme.{u}) (K : X.IdealSheafData) : (∀ x : X, Function.Injective ((RingedSpace.moduleStalkFunctor X.toRingedSpace x).map K.toModulesι).hom) ∧ (∀ (U : X.affineOpens) (x : U.1), Function.Surjective ((RingedSpace.moduleStalkFunctor X.toRingedSpace x.1).map K.toModulesι).hom ↔ ¬ K.ideal U ≤ (U.2.primeIdealOf x).asIdeal) ∧ (∀ U : X.affineOpens, {x : X | ¬ Function.Surjective ((RingedSpace.moduleStalkFunctor X.toRingedSpace x).map K.toModulesι).hom} ∩ U.1 = U.2.fromSpec '' {p : PrimeSpectrum Γ(X, U.1) | K.ideal U ≤ p.asIdeal}) ∧ IsClosed {x : X | ¬ Function.Surjective ((RingedSpace.moduleStalkFunctor X.toRingedSpace x).map K.toModulesι).hom} ∧ (∀ (Z : Scheme.{u}) (i : Z ⟶ X) [IsClosedImmersion i], i.ker = K → Set.range i = {x : X | ¬ Function.Surjective ((RingedSpace.moduleStalkFunctor X.toRingedSpace x).map K.toModulesι).hom})",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-qiz1527",
+  "group": "F1",
+  "result": "pass",
+  "note": "X:Scheme.{u}; K:X.IdealSheafData via K.toModulesι (as landed IntegralIdealGenericStalk); K_x ideal = injective moduleStalkFunctor map; K_x=O_x = surjective; U affineOpens, p_x = U.2.primeIdealOf x; V(K)∩U = fromSpec '' {p | K.ideal U ≤ p}; IsClosed; every closed immersion i with i.ker = K has range = V(K); no hollow hyps, no let, single universe"
  }
 }
