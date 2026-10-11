@@ -7,6 +7,8 @@ module
 
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.RestrictScalars
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar
+public import WeilConjectures.CategoryTheory.Sites.InjectiveSheafSmulEpi
+public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 
 /-!
 # Derived coextension of scalars commutes with the derived direct image
@@ -81,6 +83,56 @@ noncomputable def rightDerivedLowerStarCompCoextendScalarsIso :
         ((g)_*[ModuleCat.{u + 1} Λ']).rightDerivedFunctor :=
   Functor.rightDerivedFunctorCompIso' _ _ (lowerStarCompCoextendScalarsIso φ g) ≪≫
     (Functor.rightDerivedFunctorCompIso' _ _ (Iso.refl _)).symm
+
+section Detect
+
+variable {X : Scheme.{u}} (ϖ : Λ)
+
+/-- The short complex `Hom_Λ(Λ/ϖ, F) ⟶ F ⟶ F` of étale sheaves, the first map being the counit of
+restriction and coextension of scalars along `Λ → Λ/ϖ` and the second multiplication by `ϖ`. -/
+noncomputable def coextendQuotientSheafShortComplex
+    (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
+    ShortComplex (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :=
+  ShortComplex.mk
+    ((Sheaf.restrictCoextendScalarsAdj X.smallEtaleTopology
+      (Ideal.Quotient.mk (Ideal.span {ϖ}))).counit.app F)
+    (ϖ • 𝟙 F) (by
+      ext U : 3
+      exact (ModuleCat.coextendQuotientShortComplex ϖ (F.obj.obj U)).zero)
+
+lemma coextendQuotientSheafShortComplex_map_eval
+    (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (U : X.Etaleᵒᵖ) :
+    ((coextendQuotientSheafShortComplex ϖ F).map
+      (sheafToPresheaf _ _ ⋙ (CategoryTheory.evaluation _ _).obj U)) =
+      ModuleCat.coextendQuotientShortComplex ϖ (F.obj.obj U) :=
+  rfl
+
+variable {ϖ} in
+/-- For an injective étale sheaf `F` and a nonzerodivisor `ϖ`, the sequence
+`0 ⟶ Hom_Λ(Λ/ϖ, F) ⟶ F ⟶ F ⟶ 0` (multiplication by `ϖ`) is short exact. -/
+lemma shortExact_coextendQuotientSheafShortComplex (hϖ : ϖ ∈ nonZeroDivisors Λ)
+    (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) [Injective F] :
+    (coextendQuotientSheafShortComplex ϖ F).ShortExact := by
+  let S := coextendQuotientSheafShortComplex ϖ F
+  have hpre : (S.map (sheafToPresheaf _ _)).Exact := by
+    rw [ShortComplex.exact_iff_isZero_homology]
+    refine Functor.isZero _ fun U ↦ ?_
+    have h := ModuleCat.exact_coextendQuotientShortComplex ϖ (F.obj.obj U)
+    rw [ShortComplex.exact_iff_isZero_homology] at h
+    exact h.of_iso ((S.map (sheafToPresheaf _ _)).mapHomologyIso
+      ((CategoryTheory.evaluation _ _).obj U)).symm
+  have hmono : Mono (S.map (sheafToPresheaf _ _)).f := by
+    have (U : X.Etaleᵒᵖ) : Mono ((S.map (sheafToPresheaf _ _)).f.app U) :=
+      ModuleCat.mono_coextendQuotientShortComplex_f ϖ (F.obj.obj U)
+    exact NatTrans.mono_of_mono_app _
+  have : Mono S.f := (sheafToPresheaf _ _).mono_of_mono_map hmono
+  have : Epi S.g := Sheaf.epi_smul_id_of_injective.{u + 1} F hϖ
+  refine ⟨?_⟩
+  have e : S.map (sheafToPresheaf _ _ ⋙ presheafToSheaf _ _) ≅ S :=
+    S.mapNatIso (asIso (sheafificationAdjunction _ _).counit)
+  exact (ShortComplex.exact_iff_of_iso e).1 (hpre.map (presheafToSheaf _ _))
+
+end Detect
 
 end Etale
 
