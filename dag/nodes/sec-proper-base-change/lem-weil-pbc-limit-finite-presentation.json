@@ -193,5 +193,23 @@
   "group": "H1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of H1; spot-checked by L: 00R0: finitely generated Z-subalgebras containing the coefficients, the descended presentations, base change isomorphisms, colimit; uses the Lean-closed lemma-nagata-ring-finite-type-subalgebras"
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.LimitFinitePresentation",
+  "declaration": "Algebra.exists_limit_finite_presentation",
+  "file": "lean/Sheaf/Algebra/LimitFinitePresentation.lean",
+  "statement": "theorem exists_limit_finite_presentation {R S : Type u} [CommRing R] [CommRing S] (φ : R →+* S) (hφ : RingHom.FinitePresentation φ) : ∃ (Λ : Type u) (hpo : Preorder Λ) (hne : Nonempty Λ) (hdir : IsDirected Λ (fun a b => a ≤ b)) (Rfun : Λ ⥤ CommRingCat) (Sfun : Λ ⥤ CommRingCat) (η : Rfun ⟶ Sfun) (cR : Cocone Rfun) (cS : Cocone Sfun), cR.pt = CommRingCat.of R ∧ cS.pt = CommRingCat.of S ∧ (∀ l (hR : cR.pt = CommRingCat.of R) (hS : cS.pt = CommRingCat.of S), η.app l ≫ cS.ι.app l = cR.ι.app l ≫ (eqToHom hR ≫ CommRingCat.ofHom φ ≫ eqToHom hS.symm)) ∧ (∀ l, RingHom.FiniteType (η.app l).hom) ∧ (∀ l, RingHom.FiniteType (algebraMap ℤ (Rfun.obj l))) ∧ (∀ l m (h : l ≤ m), Nonempty (CategoryTheory.IsPushout (η.app l) (Rfun.map (homOfLE h)) (Sfun.map (homOfLE h)) (η.app m))) ∧ (∀ l (hR : cR.pt = CommRingCat.of R) (hS : cS.pt = CommRingCat.of S), Nonempty (CategoryTheory.IsPushout (η.app l) (cR.ι.app l) (cS.ι.app l) (eqToHom hR ≫ CommRingCat.ofHom φ ≫ eqToHom hS.symm))) ∧ Nonempty (IsColimit cR) ∧ Nonempty (IsColimit cS)",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-lfp1123",
+  "group": "E1",
+  "result": "pass",
+  "note": "R,S: Type u CommRing, φ with RingHom.FinitePresentation; ∃ Λ : Type u (pp.universes checked, CommRingCat.{u}) Preorder+Nonempty+IsDirected; Rfun,Sfun functors, η natural (ρ), cocones with points R,S and κρ=φπ; (1) IsColimit both; (2) FiniteType ℤ→R_λ; (3) FiniteType ρ_λ; (4) IsPushout ρ_l,R-trans,S-trans,ρ_m = S_l⊗R_m≅S_m (orientation checked vs isPushout_tensorProduct); (5) IsPushout ρ_l,π_l,κ_l,φ; no statement change"
  }
 }

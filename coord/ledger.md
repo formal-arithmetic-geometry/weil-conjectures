@@ -4437,3 +4437,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 11:24 L: merged deliver/K1/lem-weil-pbc-mittag-leffler-complex-limit-homology (stage 2; reviewer PASS; first push; Sheaf.Algebra.Homology.MittagLefflerLimitHomology HomologicalComplex.isIso_limitPost_homology_of_mittagLeffler)
 - 11:24 L: merged deliver/M1/def-nagata-fixed-base-separated-stage (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.NagataFixedBaseSeparatedStage AlgebraicGeometry.nagataSeparatedStage)
 - 11:24 L: merged deliver/M1/lem-sc-component-intersections-finite (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.ComponentIntersectionsFinite AlgebraicGeometry.component_intersections_finite)
+- 11:24 L: merged deliver/E1/lem-weil-pbc-limit-finite-presentation (stage 2; reviewer PASS; first push; Sheaf.Algebra.LimitFinitePresentation Algebra.exists_limit_finite_presentation)
