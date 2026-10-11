@@ -2,7 +2,7 @@
 
 861 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (23)
+## Stage 1: nodes to split (22)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -25,12 +25,11 @@
 | `lem-sc-coherent-ring-fp-kernel-cokernel` | 6017 | none |
 | `lem-sc-base-change-curve` | - | none |
 | `lem-sc-global-functions` | - | rests_on_sorry |
-| `lem-pur-kinjective-homotopy-exact-injective-target` | - | none |
 | `lem-pur-kinjective-homotopy-limit-vanishing` | - | none |
 | `lem-pur-left-derived-exact-when-defined` | - | none |
 | `lem-pc-finite-flat-restriction-projective` | - | none |
 
-## Stage 2: nodes to state (838)
+## Stage 2: nodes to state (839)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -216,6 +215,7 @@
 | `lem-pur-kinjective-degreewise-existence` | 1 | state |
 | `lem-pur-kinjective-functorial-homotopies` | 1 | state |
 | `lem-pur-kinjective-functorial-injective` | 1 | state |
+| `lem-pur-kinjective-homotopy-exact-injective-target` | 1 | state |
 | `lem-pur-kinjective-set-iso-classes-bounded-size` | 1 | state |
 | `lem-pur-left-derived-from-kflat-class` | 1 | state |
 | `lem-pur-quasi-isos-saturated-triangulated` | 1 | state |
@@ -873,7 +873,7 @@
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 1755 nodes that wait for a statement dependency, 64 nodes that wait for stage 1.
+Not open yet: 1755 nodes that wait for a statement dependency, 63 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
