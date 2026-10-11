@@ -3975,3 +3975,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 09:16 L: merged deliver/K1/lem-weil-pbc-completion-of-dvr-is-dvr (stage 2; reviewer FIX; first push; Sheaf.RingTheory.CompletionOfDVR AdicCompletion.isDiscreteValuationRing)
 - 09:16 L: merged deliver/M1/lem-sc-fibre-dimension-after-base-change (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.FibreDimensionAfterBaseChange AlgebraicGeometry.fibre_dimension_after_base_change)
 - 09:16 L: merged deliver/H1/lem-weil-pbc-colimit-eventually-flat (stage 2; reviewer FIX; first push; Sheaf.RingTheory.ColimitEventuallyFlat RingTheory.exists_flat_stage)
+- 09:17 L: merged deliver/K1/lem-weil-pbc-completion-regular-local (stage 2; reviewer PASS; first push; Sheaf.RingTheory.CompletionRegularLocal AdicCompletion.isRegularLocalRing_iff)
