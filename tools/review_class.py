@@ -41,6 +41,8 @@ def classify(g: str, item: str):
         for l in f.read_text().split("\n"):
             p = l.split("\t")
             if len(p) >= 3 and p[0] == g and p[1] == item and head.startswith(p[2]): return "FULL", "automatic landing failed: " + (p[3] if len(p) > 3 else ""), head
+    ret = ROOT / "coord" / "returns" / f"{g}.md"
+    if ret.exists() and f"## {item} (" in ret.read_text(): return "CODEX", "repair of a returned delivery (the return said exactly what to change)", head
     if d.get("kind") != "statement": return "FULL", f"the item is a {d.get('kind')}", head
     if any(s == "A" for s, p in nodes): return "FULL", "new definition node(s)", head
     if len(nodes) > 1: return "FULL", "another existing node is changed (dependency module)", head
@@ -53,8 +55,6 @@ def classify(g: str, item: str):
     import re
     if any(not re.match(r"\s*`?\s*(none|no\b|n/a|not applicable|nothing)", m, re.I) for m in re.findall(r"STATEMENT-DISPUTED:(.{0,40})", rep)):
         return "FULL", "STATEMENT-DISPUTED", head
-    ret = ROOT / "coord" / "returns" / f"{g}.md"
-    if ret.exists() and f"## {item} (" in ret.read_text(): return "CODEX", "repair of a returned delivery", head
     if int(hashlib.sha1(item.encode()).hexdigest(), 16) % SAMPLE == 0: return "FULL", f"sample (1 in {SAMPLE})", head
     return "AUTO", "", head
 def branches():
