@@ -15,6 +15,11 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.MonoidalFree
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.RestrictScalars
 public import WeilConjectures.Algebra.Central.ReducedNorm
 public import WeilConjectures.Algebra.Homology.BifunctorLinear
+public import WeilConjectures.Algebra.Homology.ExactCouple.Basic
+public import WeilConjectures.Algebra.Homology.ExactCouple.Convergence
+public import WeilConjectures.Algebra.Homology.ExactCouple.EdgeCollapse
+public import WeilConjectures.Algebra.Homology.ExactCouple.FilteredComplex
+public import WeilConjectures.Algebra.Homology.ExactCouple.Hom
 public import WeilConjectures.Algebra.Homology.HomotopyCategory.Braided
 public import WeilConjectures.Algebra.Homology.HomotopyCategory.DerivabilityStructure
 public import WeilConjectures.Algebra.Homology.HomotopyCategory.InternalHom
@@ -450,6 +455,7 @@ public import WeilConjectures.Blowup.QuasiAffineGeneralReduction
 public import WeilConjectures.Blowup.QuasiDomination
 public import WeilConjectures.Blowup.QuasiDominationExtension
 public import WeilConjectures.CategoryTheory.Abelian.DimensionShifting
+public import WeilConjectures.CategoryTheory.Abelian.Filtration
 public import WeilConjectures.CategoryTheory.Abelian.Flat.Basic
 public import WeilConjectures.CategoryTheory.Abelian.Flat.ModuleCat
 public import WeilConjectures.CategoryTheory.Abelian.Flat.PreservesFlat

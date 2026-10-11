@@ -72,8 +72,11 @@ theorem isCoherent_iff [IsLocallyNoetherian X] (ℱ : X.Modules) :
 
 (blueprint: `pqf-lem-sheaf-zero-stalks`) -/
 theorem isZero_of_isZero_stalk (ℱ : X.Modules) (h : ∀ x : X, IsZero (ℱ.presheaf.stalk x)) :
-    IsZero ℱ :=
-  sorry
+    IsZero ℱ := by
+  have h' : IsZero ((SheafOfModules.toSheaf X.ringCatSheaf).obj ℱ) :=
+    (TopCat.Sheaf.isZero_iff_stalkFunctor_obj_isZero _).2 h
+  rw [IsZero.iff_id_eq_zero]
+  exact (SheafOfModules.toSheaf X.ringCatSheaf).map_injective (h'.eq_of_src _ _)
 
 /-- **Vanishing of cohomology on affine opens.** For a quasi-coherent `𝒪_X`-module `ℱ` and an
 affine open `U ⊆ X`, `H^p(U, ℱ|_U) = 0` for `p > 0`.
@@ -82,7 +85,8 @@ affine open `U ⊆ X`, `H^p(U, ℱ|_U) = 0` for `p > 0`.
 theorem subsingleton_H_restrict_of_isAffineOpen (ℱ : X.Modules)
     [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) ℱ] {U : X.Opens} (hU : IsAffineOpen U)
     (p : ℕ) : Subsingleton ((ℱ.restrict U.ι).H (p + 1)) :=
-  sorry
+  have : IsAffine U := hU
+  subsingleton_H_succ_of_isAffine _ p
 
 /-- **Direct images of quasi-coherent modules.** For a quasi-compact quasi-separated morphism
 `f : X ⟶ S`, the direct image `f_* ℱ` of a quasi-coherent `𝒪_X`-module is quasi-coherent.
@@ -106,7 +110,18 @@ Stacks 02UP), so `(R^p f_* ℱ)|_V = R^p (f|_V)_* (ℱ|_{f⁻¹V})` vanishes, `f
 theorem isZero_stalk_higherDirectImage_of_finite_preimage {Y : Scheme.{u}} (f : X ⟶ Y)
     [IsProper f] [IsLocallyNoetherian Y] [HasInjectiveResolutions X.Modules] (y : Y)
     (hy : (f ⁻¹' {y}).Finite) (ℱ : X.Modules) [ℱ.IsCoherent] {p : ℕ} (hp : 0 < p) :
-    IsZero (((higherDirectImage f p).obj ℱ).presheaf.stalk y) :=
-  sorry
+    IsZero (((higherDirectImage f p).obj ℱ).presheaf.stalk y) := by
+  obtain ⟨p, rfl⟩ : ∃ p', p = p' + 1 := ⟨p - 1, by omega⟩
+  have := LocallyOfFiniteType.isLocallyNoetherian f
+  have := ((isCoherent_iff ℱ).1 inferInstance).1
+  obtain ⟨V, hyV, hV⟩ := exists_isFinite_morphismRestrict_of_finite_preimage_singleton f y hy
+  have := isGrothendieckAbelian (f ⁻¹ᵁ V).toScheme
+  obtain ⟨e⟩ := nonempty_higherDirectImage_iso_restrict f ℱ V.ι _ _
+    (isPullback_morphismRestrict f V).flip (p + 1)
+  have hz : IsZero (((higherDirectImage f (p + 1)).obj ℱ).restrict V.ι) :=
+    (isZero_higherDirectImage_of_isAffineHom (f ∣_ V) _ (Nat.succ_pos p)).of_iso e.symm
+  have hz' := (TopCat.Presheaf.stalkFunctor _ (⟨y, hyV⟩ : V)).map_isZero
+    ((toPresheaf _).map_isZero hz)
+  exact hz'.of_iso ((restrictStalkNatIso V.ι ⟨y, hyV⟩).app _).symm
 
 end AlgebraicGeometry.Scheme.Modules

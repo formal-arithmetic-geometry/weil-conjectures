@@ -605,8 +605,22 @@ theorem exists_addEquiv_tilde_sections_basicOpen_tensor (a : A) :
         (.op (PrimeSpectrum.basicOpen (algebraMap A B a)))) ≃+
       Localization.Away a ⊗[A] M,
       ∀ m : M, e ((tilde.toOpen (ModuleCat.of B M)
-        (PrimeSpectrum.basicOpen (algebraMap A B a))).hom m) = 1 ⊗ₜ m :=
-  sorry
+        (PrimeSpectrum.basicOpen (algebraMap A B a))).hom m) = 1 ⊗ₜ m := by
+  let N := (modulesSpecToSheaf.obj (tilde (ModuleCat.of B M))).presheaf.obj
+    (.op (PrimeSpectrum.basicOpen (algebraMap A B a)))
+  let : Module A N := Module.compHom N (algebraMap A B)
+  have : IsScalarTower A B N := ⟨fun x y z ↦ by
+    rw [Algebra.smul_def, mul_smul]
+    rfl⟩
+  let φ := (tilde.toOpen (ModuleCat.of B M) (PrimeSpectrum.basicOpen (algebraMap A B a))).hom
+  have key (P : ModuleCat B) (b : B) :
+      IsLocalizedModule (.powers b) (tilde.toOpen P (PrimeSpectrum.basicOpen b)).hom :=
+    inferInstance
+  have : IsLocalizedModule (.powers (algebraMap A B a)) φ := key (ModuleCat.of B M) _
+  have := IsLocalizedModule.restrictScalars_powers a φ
+  let e := IsLocalizedModule.linearEquiv (.powers a) (φ.restrictScalars A)
+    (TensorProduct.mk A (Localization.Away a) M 1)
+  exact ⟨e.toAddEquiv, fun m ↦ IsLocalizedModule.linearEquiv_apply _ _ _ m⟩
 
 end AssociatedSections
 
