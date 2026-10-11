@@ -1,35 +1,114 @@
-# Worker report: lem-weil-pbc-affine-basic-sets-disjoint-refinement
+## Worker report
 
-## Files written
+The module states `PrimeSpectrum.finite_disjoint_basic_constructible_refinement`.
+For a commutative ring `A`, `m : ℕ`, and a family `B : Fin m →
+BasicConstructibleSetData A`, it provides a natural number `p` and a family `C : Fin p →
+BasicConstructibleSetData A`. The `Fin m` binder represents the finite input family and
+allows `m = 0`; `Fin p` allows the empty output family. The first conclusion clause is
+`Pairwise (fun i j => Disjoint ((C i).toSet) ((C j).toSet))`, expressing pairwise
+disjointness. The second is `(⋃ i, (B i).toSet) = ⋃ j, (C j).toSet`, expressing equality
+of the input and output unions. `BasicConstructibleSetData.toSet` is Mathlib's
+`V(g₁, ..., gₙ) \\ V(f)`, equal to `D(f) ∩ V(g₁, ..., gₙ)`; `n = 0` is represented by
+`g : Fin 0 → A`.
 
-- `dag/nodes/sec-proper-base-change/lem-weil-pbc-affine-basic-set-difference.json` — statement node (unsplit): for two basic subsets of `Spec A`, the difference is a finite pairwise-disjoint union of basic subsets. It gives the explicit pieces `D(f) ∩ V(G,h)` and `D(f h k_j) ∩ V(G,k_1,…,k_{j-1})`, and records LeanSearch, LeanFinder, and Mathlib-source grep searches with no match.
-- `dag/nodes/sec-proper-base-change/lem-weil-pbc-affine-basic-sets-disjoint-refinement.json` — split the finite-family refinement statement by induction, using the difference node. The empty family is handled explicitly. Existing provenance (`created.item`) was preserved because this item node was created by the parent split.
+The only dependency notion is the affine spectrum / prime spectrum, recorded by the node
+`def-weil-affine-spectrum`; its Mathlib match is `AlgebraicGeometry.Spec` and the underlying
+prime spectrum is Mathlib's `PrimeSpectrum`. The module directly uses the Mathlib
+`PrimeSpectrum.BasicConstructibleSetData` and `BasicConstructibleSetData.toSet` declarations
+from `Mathlib.RingTheory.Spectrum.Prime.ConstructibleSet`.
 
-## Attachments
+Edge cases checked: `m = 0` and `p = 0` are allowed by `Fin`; `n = 0` is allowed by the
+Mathlib data structure; no field, reducedness, or nonemptiness hypothesis is added.
 
-None.
+Searches: `msearch.py leanfinder` for finite disjoint unions of basic constructible subsets
+returned no matching theorem; `msearch.py loogle PrimeSpectrum.BasicConstructibleSetData`
+returned the Mathlib data structure and `toSet`; `msearch.py grep` for constructible/disjoint
+refinements found only the general `MeasureTheory.IsSetSemiring.disjointOfUnion_props`.
+Repository and Mathlib grep found no existing theorem with this statement. The Stacks
+source checked was Algebra Lemma 10.29.3 (Tag 0G1P), with the refinement context in Etale
+Cohomology Lemma 59.72.1 (Tag 03S0).
 
-## WANTED
+## Earlier second reading (a previous round; superseded)
 
-WANTED: `literature/stacks-project/etale-cohomology.tex`, Stacks Tag 03S0 (the refinement sentence in the proof), and `literature/stacks-project/algebra.tex`, Tag 0G1P (basic constructible sets), because the source TeX files are not present in this clone. The proof is therefore marked `proof_origin.by = agent`; tag-to-file/label evidence is recorded in `literature/stacks-tags-cited.tsv` and the node source fields.
+The node says a finite family of basic subsets of `Spec A` has a finite pairwise-disjoint
+basic refinement with the same union. The Lean binders render `A` commutative, `B` as a
+finite family indexed by `Fin m`, and `C` as a finite family indexed by `Fin p`; `Fin 0`
+keeps both empty-family cases. The first conjunct renders pairwise disjointness of output
+sets and the equality conjunct renders the union clause. `toSet` renders exactly the
+Mathlib basic set `V(g) \\ V(f)`, i.e. `D(f) ∩ V(g)`. No mismatch was found.
 
-## Review against delivery-errors B–E
+## Second reading by C1
 
-- **B:** The new node is statement-only and self-contained: it introduces `A`, `Spec A`, `D`, `V`, and both basic sets, with an explicit `def-weil-affine-spectrum` dependency. TeX is escaped once in JSON. It is `unsplit`, has a source, and records all three required Mathlib search kinds. No duplicate node was found by searching `dag/nodes` for the item id and the basic-set/difference terminology.
-- **C:** The item’s two proof steps cite only the statement of the new difference node; the induction and set-disjointness bookkeeping are written directly. The support node’s two steps use only the affine-spectrum setting and spell out membership cases, rather than appealing to the source tag as a proof.
-- **D:** This is a genuine proof split: the support node is strictly smaller (difference of two basic sets), and the item performs finite disjointization by induction. No step is circular, and the empty case is included.
-- **E:** For the difference formula, a prime is partitioned by whether `h` lies in it and, when not, by the least `j` for which `k_j` does not lie in it; this checks both coverage and pairwise disjointness. The finite-family induction maintains the invariant that the current pieces are pairwise disjoint and have union of the processed inputs. Small cases checked conceptually: `m=0`, `s=0`, and a one-set family.
+Independent reading of the sandbox node and module, the recorded affine-spectrum
+Mathlib dependency, and Stacks sources at /home/ubuntu/c1-stacks-review/algebra.tex
+and etale-cohomology.tex (tags/tags confirms labels lemma-constructible = 0G1P
+and lemma-etale-stratified-finite = 03S0).
 
-## Checks
+Object/hypothesis/conclusion checklist:
 
-`python3 tools/check_dag.py` completed with no cycles (its existing reachability warnings are unrelated). `python3 tools/review_split.py lem-weil-pbc-affine-basic-sets-disjoint-refinement` passed: one new node, proof written by an agent.
+- Arbitrary commutative ring A: `{A : Type u} [CommRing A]`, with `universe u`;
+  exact, with no field, Noetherian, nontriviality, or characteristic assumption.
+- Underlying set of Spec A: `PrimeSpectrum A`. Read the dependency's
+  `AlgebraicGeometry.Spec (R : CommRingCat) : Scheme` in Scheme.lean and
+  `Spec.topObj (R : CommRingCat.{u}) : TopCat := TopCat.of (PrimeSpectrum R)`
+  in Spec.lean: this is the same underlying space, not another spectrum.
+- A basic subset D(f) intersect V(g_1,...,g_n), n >= 0: Mathlib's
+  `BasicConstructibleSetData A` has fields f : A, n : Nat, g : Fin n -> A.
+  Its `toSet` is `zeroLocus (Set.range C.g) \ zeroLocus {C.f}`.
+  Thus membership means all g_i lie in the prime and f does not: exact.
+  Representing input sets by chosen data is equivalent to assuming they are
+  basic; no canonical presentation or uniqueness is required.
+- Finite input family B_1,...,B_m, m >= 0: `(m : ℕ)` and
+  `(B : Fin m → BasicConstructibleSetData A)`; exact.
+- Existence of finite basic output family C_1,...,C_p, p >= 0:
+  `∃ (p : ℕ) (C : Fin p → BasicConstructibleSetData A)`; exact, after the
+  universal input binders, so the quantifier order matches.
+- Pairwise disjoint output subsets: `Pairwise fun i j =>
+  Disjoint ((C i).toSet) ((C j).toSet)`; compares distinct indices and
+  is precisely set disjointness, not disjointness of data presentations.
+- Equality of unions: `(⋃ i, (B i).toSet) = ⋃ j, (C j).toSet`; exact.
+  The node requires no additional subordinate-cover clause, nonempty pieces,
+  or bound on p; the signature adds none.
 
-## Unresolved
+Edge cases: m = 0 permits p = 0 and empty indexed unions. Each basic datum
+allows n = 0, whose zero locus is all of Spec A. Empty basic sets (f = 0),
+repeated inputs, and overlapping inputs are permitted. A zero ring has empty
+prime spectrum and remains allowed by CommRing; no scheme nonemptiness is
+assumed. The ring universe u is arbitrary; finite indices need no extra
+universe or finiteness instance. All variables and the universe are bound.
 
-The support node remains unsplit because Mathlib has no matching theorem or direct `IsSetSemiring` instance for these affine basic subsets. The source TeX must be supplied later to replace the agent-written proof origin if required.
+Source audit: 0G1P introduces precisely these basic sets over an arbitrary
+commutative ring, with no Noetherian hypothesis. 03S0 asserts further affine
+refinement of a partition; its etale/quasi-compact/quasi-separated hypotheses
+belong to its morphism and are not assumptions of this ring-theoretic set
+calculation. The node's two-step inductive proof supplies the disjoint basic
+refinement rather than claiming that 0G1P alone states disjointness.
 
-## Review by C1
+Independent searches (logged in searches.jsonl): LeanFinder query
+"partition finite collection of principal open intersect finitely generated
+closed subsets of prime spectrum into mutually disjoint pieces" returned
+basis/retrocompactness/spectral-space lemmas, no matching statement. Loogle
+`"BasicConstructibleSetData"` found the data structure and toSet/map operations,
+which were opened and checked directly. LeanSearch query "A finite collection
+of basic constructible subsets of a prime spectrum admits a disjoint
+decomposition into basic constructible subsets" was unavailable (Internal
+Server Error); no conclusion is drawn from that failed service. msearch grep
+`disjoint.*constructible|constructible.*disjoint|disjointOfUnion_props` found
+only the abstract set-semiring theorem. Opened `IsSetSemiring.disjointOfUnion_props`:
+it requires a set-semiring instance for the class of basic sets, absent here,
+so it does not already state the item. Independent rg searches with the same
+patterns and `basic.*refinement|refinement.*basic` in Mathlib, WeilConjectures,
+and repository lean/Sheaf found no equivalent declaration. Existing
+`exists_constructibleSetData_iff` gives finite unions without disjointness.
+No duplicate definition, new node, or dependency module is needed.
 
-The cited source locations are recorded as Stacks Tags 03S0 and 0G1P; the TeX files are absent in this clone, so I checked the node statement against the imported blueprint and the tag index and retained the worker's `WANTED` notice. The item states finite disjoint refinement of a finite family of affine basic sets, and the new difference node states the strictly smaller two-set difference used by the induction. Their hypotheses and objects are explicit, including the affine spectrum and basic-open/closed notation.
-
-For the item proof, the empty-family base case and induction step use only the difference node plus finite set partition bookkeeping; the worker spells out the invariant and the singleton edge case. The support node's membership partition is the least-index decomposition and is not cited as an unproved tag. No step uses a node for facts absent from its statement, and there is no cycle. The new node is statement-only, has `status: unsplit`, source provenance, and all three required Mathlib searches; the duplicate search found no existing node for this difference statement. I checked small cases `m=0`, `m=1`, and an empty generating list. No hypothesis was introduced or dropped. The worker's B-E review was accepted; this lead review supplies section F.
+Mismatch found and repaired: H8, the theorem docstring lacked its own source
+place and both proof steps. Added the Stacks citations and the complete
+induction: successively subtract old pieces from the new input using
+lem-weil-pbc-affine-basic-set-difference, then retain all old pieces and append
+the new disjoint pieces. This avoids the historical symmetric-difference
+mistake noted in the node. The Lean signature and node statement required no
+changes; lean.statement was checked equal to the signature after whitespace
+normalization. The only theorem remains `by sorry`, with no definitions or
+proved auxiliary declarations. The import is used, the namespace follows
+PrimeSpectrum, and all module lines fit 100 characters.

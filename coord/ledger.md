@@ -3878,3 +3878,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 08:46 L: merged deliver/E1/lem-sp-cart-eilenberg-left-exact-cohomology (stage 2; reviewer FIX; first push; Sheaf.Paper.CartanEilenbergLeftExactCohomology CategoryTheory.cartanEilenberg_leftExact_cohomology)
 - 08:47 L: merged deliver/E1/lem-sp-filtered-complex-ZB-description (stage 2; reviewer FIX; first push; Sheaf.Algebra.Homology.FilteredComplexZBDescription CategoryTheory.DecreasingFiltration.filteredComplex_ZB_description; new nodes: def-sp-filtered-complex-subquotients)
 - 08:47 L: merged deliver/C1/lem-weil-l-adic-extension-integers-dvr (stage 2; reviewer PASS; first push; Sheaf.NumberTheory.Padics.ExtensionIntegersDvr Padic.extension_integers_dvr)
+- 08:47 L: merged deliver/C1/lem-weil-pbc-affine-basic-sets-disjoint-refinement (stage 2; reviewer PASS; first push; Sheaf.RingTheory.AffineBasicSetsDisjointRefinement PrimeSpectrum.finite_disjoint_basic_constructible_refinement)

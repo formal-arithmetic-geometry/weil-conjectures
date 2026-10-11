@@ -113,5 +113,23 @@
   "result": "pass after repair by L",
   "note": "the delivered induction step was wrong (symmetric difference); repaired by L at 07:12 UTC: C_{t+1} = C_t ∪ (pieces of B_{t+1} \\ ∪C_t by the difference node)."
  },
- "lead_note": " L 2026-10-10 07:12: proof repaired (the delivered step 2 produced the symmetric difference ∪C_t △ B_{t+1} instead of the union); the fix keeps C_t and adds the pieces of B_{t+1} \\ ∪C_t."
+ "lead_note": " L 2026-10-10 07:12: proof repaired (the delivered step 2 produced the symmetric difference ∪C_t △ B_{t+1} instead of the union); the fix keeps C_t and adds the pieces of B_{t+1} \\ ∪C_t.",
+ "lean": {
+  "module": "Sheaf.RingTheory.AffineBasicSetsDisjointRefinement",
+  "declaration": "PrimeSpectrum.finite_disjoint_basic_constructible_refinement",
+  "file": "lean/Sheaf/RingTheory/AffineBasicSetsDisjointRefinement.lean",
+  "statement": "theorem finite_disjoint_basic_constructible_refinement {A : Type u} [CommRing A] (m : ℕ) (B : Fin m → BasicConstructibleSetData A) : ∃ (p : ℕ) (C : Fin p → BasicConstructibleSetData A), (Pairwise fun i j => Disjoint ((C i).toSet) ((C j).toSet)) ∧ (⋃ i, (B i).toSet) = ⋃ j, (C j).toSet",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-abd1322",
+  "group": "C1",
+  "result": "pass",
+  "note": "CommRing A any universe; basic set = BasicConstructibleSetData.toSet = V(range g)\\V{f} = D(f)∩V(g), n=0 allowed; inputs Fin m (m=0 ok); ∃ p, C : Fin p (p=0 ok); Pairwise Disjoint on toSet; iUnion equality; docstring carries the repaired induction (keep C_t, add pieces of B_{t+1}\\∪C_t)"
+ }
 }
