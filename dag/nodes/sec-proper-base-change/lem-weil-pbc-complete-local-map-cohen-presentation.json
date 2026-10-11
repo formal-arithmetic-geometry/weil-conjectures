@@ -33,7 +33,8 @@
   "def-weil-pbc-multivariate-power-series",
   "def-weil-pbc-cohen-ring",
   "def-weil-pbc-flat-ring-map",
-  "def-weil-regular-scheme"
+  "def-weil-regular-scheme",
+  "def-weil-pbc-regular-system-of-parameters"
  ],
  "proof": [
   {
@@ -189,5 +190,24 @@
   "summary": "Proof in 5 steps following Stacks 07NN (read with 07NL, 07NJ, 032A, 00R4, 00NU and the proof of 07NQ for t_1=p). The lead note asked to cite lem-weil-pbc-complete-local-map-regular-presentation for R, S; its statement does not say that R and S are power-series rings over fields or Cohen rings (that is only in its proof), and a regular complete local ring need not be such a power-series ring (ramified case: p in m^2), so its statement cannot give this node and is not cited (C3: no use of a proof). Instead the construction is done from statements: Cohen presentations of A and B (lem-weil-pbc-cohen-power-series-presentation, which gives t_1=p), the formal-smoothness lift, S = Lambda_B[[Y,Z]] with u(X_i)=phi(X_i)+Y_i, and flatness/fibre from the parameter nodes. Step 4 replaces the regular-presentation node's substitution automorphism by the direct observation that u(t), Z generate m_S and are dim S in number. No new nodes. No slopmaster2 Lean (grep by id, 07NN, Cohen, power series).",
   "blueprint": "Realizes the place recorded in blueprint.from.place of thm-weil-pbc-finite-etale-lifting: the compatible Cohen presentation used in the formal-smoothness input (Stacks 07NQ) of its step 7 (Lemma 0GS2 essential surjectivity); steps 1-4 give the presentation with t_1 = p, step 5 the flatness and regular closed fibre that 07NQ uses."
  },
- "reviewed": "2026-10-10 L: 5 steps rebuilding 07NN from the Cohen presentation node (the regular-presentation node states only regularity, not the power-series form: the worker was right not to cite it), the lift by formal smoothness, S = Lambda_B[[Y, Z]] with vu = fq by the universal property, the parameters, flatness and the regular fibre; 0 new nodes. 07NN is stated three times (flat, regular, power-series form), the stronger implying the weaker: a later merge."
+ "reviewed": "2026-10-10 L: 5 steps rebuilding 07NN from the Cohen presentation node (the regular-presentation node states only regularity, not the power-series form: the worker was right not to cite it), the lift by formal smoothness, S = Lambda_B[[Y, Z]] with vu = fq by the universal property, the parameters, flatness and the regular fibre; 0 new nodes. 07NN is stated three times (flat, regular, power-series form), the stronger implying the weaker: a later merge.",
+ "lean": {
+  "module": "Sheaf.RingTheory.CompleteLocalMapCohenPresentation",
+  "declaration": "RingHom.exists_complete_local_map_cohen_presentation",
+  "file": "lean/Sheaf/RingTheory/CompleteLocalMapCohenPresentation.lean",
+  "statement": "theorem exists_complete_local_map_cohen_presentation {A : Type u} {B : Type v} [CommRing A] [CommRing B] [IsLocalRing A] [IsLocalRing B] [IsNoetherianRing A] [IsNoetherianRing B] [IsAdicComplete (IsLocalRing.maximalIdeal A) A] [IsAdicComplete (IsLocalRing.maximalIdeal B) B] (f : A →+* B) [IsLocalHom f] : ∃ (ΛA ΛB : Type (max u v)) (_ : CommRing ΛA) (_ : CommRing ΛB) (n m : ℕ), let R := MvPowerSeries (Fin n) ΛA let S := MvPowerSeries (Fin m) ΛB ∃ (_ : IsRegularLocalRing R) (_ : IsRegularLocalRing S), IsAdicComplete (IsLocalRing.maximalIdeal R) R ∧ IsAdicComplete (IsLocalRing.maximalIdeal S) S ∧ (CharZero (IsLocalRing.ResidueField A) → IsField ΛA ∧ IsField ΛB) ∧ (∀ p : ℕ, p.Prime → CharP (IsLocalRing.ResidueField A) p → IsCohenRing p ΛA ∧ IsCohenRing p ΛB) ∧ ∃ (q : R →+* A) (v : S →+* B) (u : R →+* S), Function.Surjective q ∧ IsLocalHom q ∧ Function.Surjective v ∧ IsLocalHom v ∧ IsLocalHom u ∧ v.comp u = f.comp q ∧ u.Flat ∧ IsRegularLocalRing (S ⧸ (IsLocalRing.maximalIdeal R).map u) ∧ ∃ (t : List R) (z : List S), IsLocalRing.IsRegularSystemOfParameters t ∧ IsLocalRing.IsRegularSystemOfParameters (t.map u ++ z) ∧ (∀ p : ℕ, p.Prime → CharP (IsLocalRing.ResidueField A) p → t.head? = some (p : R))",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-cmc1511"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-cmc1511",
+  "group": "M1",
+  "result": "fix",
+  "note": "A,B CommRing/IsLocalRing/IsNoetherianRing/IsAdicComplete m-adic, f IsLocalHom; R,S = MvPowerSeries (Fin n/m) over ΛA,ΛB in Type (max u v), IsRegularLocalRing + IsAdicComplete maximalIdeal; char0 -> IsField; char p -> IsCohenRing p (fixed from written-out clauses); q,v surjective IsLocalHom, u IsLocalHom, vu=fq, u.Flat, IsRegularLocalRing (S/m_R S); t RSOP of R, t.map u ++ z RSOP of S, head t = p; new def node: span=m and length=ringKrullDim (Krull dep added)"
+ }
 }

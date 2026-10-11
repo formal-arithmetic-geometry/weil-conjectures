@@ -1,0 +1,113 @@
+{
+ "id": "def-weil-pbc-regular-system-of-parameters",
+ "kind": "definition",
+ "title": "Regular system of parameters",
+ "status": "split",
+ "statement": "Let $R$ be a commutative Noetherian local ring [def-weil-pbc-noetherian-ring] with maximal ideal $\\mathfrak m$ and Krull dimension $d$ [def-weil-pbc-krull-dimension-ring]. An ordered finite list $t=(t_1,\\ldots,t_r)$ is a regular system of parameters if $r=d$ and $(t_1,\\ldots,t_r)=\\mathfrak m$; thus $R$ is regular local in the sense of [def-weil-regular-scheme]. The empty list is permitted when $d=0$.",
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-regular-scheme",
+  "def-weil-pbc-krull-dimension-ring"
+ ],
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Definition Tag 00KU (definition-regular-local), clause (2)"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "IsRegularSystemOfParameters|regular system of parameters|IsCohenRing|Cohen ring",
+   "results": "0 hits: ",
+   "date": "2026-10-11",
+   "verdict": "no definition matching a regular system of parameters"
+  },
+  {
+   "tool": "leansearch",
+   "query": "regular system of parameters local ring finite family generates maximal ideal and length equals Krull dimension",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable; no conclusion from this search"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "regular system of parameters local ring finite family generates maximal ideal and length equals Krull dimension",
+   "results": "8 hits: ringKrullDim_add_length_eq_ringKrullDim_of_isRegular, ringKrullDim_quotient_span_singleton_succ_eq_ringKrullDim, ringKrullDim_quotSMulTop_succ_eq_ringKrullDim, ringKrullDim_le_ringKrullDim_add_card, ringKrullDim_quotient_span_singleton_succ_eq_ringKrullDim_of_mem_nonZeroDivisors, ringKrullDim_le_ringKrullDim_quotSMulTop_succ, ringKrullDim_le_ringKrullDim_add_spanFinrank, Module.supportDim_add_length_eq_supportDim_of_isRegular",
+   "date": "2026-10-11",
+   "verdict": "no definition matching a regular system of parameters"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'parameters|Parameters|Cohen|cohen' lean/Sheaf/RingTheory /home/ubuntu/weil-src-slopmaster2/WeilConjectures/RingTheory; rg -n 'Cohen|[Rr]egular[Ss]ystem|[Ss]ystemOfParameters' lean/Sheaf /home/ubuntu/weil-src-slopmaster2/WeilConjectures",
+   "results": "No matching declarations in project or source; DAG definition-node search gives no matching definition, and blueprint_refs.py search gives 0 blueprint nodes.",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-complete-local-map-cohen-presentation",
+  "date": "2026-10-11",
+  "group": "M1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Stacks 07NN compatible Cohen presentation: the chosen parameters of R and their extension to parameters of S",
+   "via": [
+    "lem-weil-pbc-complete-local-map-cohen-presentation",
+    "lem-weil-pbc-flat-formally-smooth-closed-fibre-adic",
+    "lem-weil-pbc-fs-adic-lift-from-residue-field",
+    "lem-weil-pbc-fs-adic-lift-over-finite-coefficient-map",
+    "lem-weil-pbc-formally-smooth-complete-local-regular",
+    "lem-weil-pbc-another-helper-g-ring",
+    "lem-weil-pbc-polynomial-complete-local-formal-fibres",
+    "lem-weil-pbc-finite-type-over-g-ring",
+    "lem-weil-pbc-finite-type-z-g-ring",
+    "lem-weil-pbc-finite-etale-lifting-limit-descent",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "module": "Sheaf.RingTheory.IsRegularSystemOfParameters",
+  "declaration": "IsLocalRing.IsRegularSystemOfParameters",
+  "file": "lean/Sheaf/RingTheory/IsRegularSystemOfParameters.lean",
+  "statement": "def IsRegularSystemOfParameters {R : Type w} [CommRing R] [IsLocalRing R] [IsNoetherianRing R] (t : List R) : Prop",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-cmc1511",
+  "group": "M1",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-cmc1511",
+  "group": "M1",
+  "result": "fix",
+  "note": "A,B CommRing/IsLocalRing/IsNoetherianRing/IsAdicComplete m-adic, f IsLocalHom; R,S = MvPowerSeries (Fin n/m) over ΛA,ΛB in Type (max u v), IsRegularLocalRing + IsAdicComplete maximalIdeal; char0 -> IsField; char p -> IsCohenRing p (fixed from written-out clauses); q,v surjective IsLocalHom, u IsLocalHom, vu=fq, u.Flat, IsRegularLocalRing (S/m_R S); t RSOP of R, t.map u ++ z RSOP of S, head t = p; new def node: span=m and length=ringKrullDim (Krull dep added)"
+ }
+}
