@@ -31,34 +31,6 @@ the product of the resolutions `∏ K j ⟶ ∏ I j` is a quasi-isomorphism.
 
 open CategoryTheory Limits Category
 
-namespace CategoryTheory.Limits
-
-variable {C : Type*} [Category* C] {β : Type*} {X Y : β → C}
-
-/-- A fan over `X` is a limit if it is isomorphic to a limit fan over a family `Y` isomorphic
-to `X`. -/
-noncomputable def Fan.IsLimit.ofIsos {s : Fan X} {t : Fan Y} (ht : IsLimit t)
-    (e : ∀ j, X j ≅ Y j) (a : s.pt ≅ t.pt) (w : ∀ j, a.hom ≫ t.proj j = s.proj j ≫ (e j).hom) :
-    IsLimit s :=
-  have w' (j : β) : a.inv ≫ s.proj j = t.proj j ≫ (e j).inv := by
-    rw [← cancel_epi a.hom, Iso.hom_inv_id_assoc, reassoc_of% (w j), Iso.hom_inv_id, comp_id]
-  Fan.IsLimit.mk _ (fun u ↦ Fan.IsLimit.lift ht (fun j ↦ u.proj j ≫ (e j).hom) ≫ a.inv)
-    (fun u j ↦ by simp [w'])
-    (fun u m hm ↦ by
-      rw [← cancel_mono a.hom, assoc, Iso.inv_hom_id, comp_id]
-      exact Fan.IsLimit.hom_ext ht _ _ fun j ↦ by simp [w, reassoc_of% (hm j)])
-
-/-- A morphism between the points of limit fans over isomorphic families which is compatible
-with the projections is an isomorphism. -/
-lemma Fan.IsLimit.isIso_of_isos {s : Fan X} {t : Fan Y} (hs : IsLimit s) (ht : IsLimit t)
-    (e : ∀ j, X j ≅ Y j) (f : s.pt ⟶ t.pt) (w : ∀ j, f ≫ t.proj j = s.proj j ≫ (e j).hom) :
-    IsIso f :=
-  ⟨Fan.IsLimit.lift hs fun j ↦ t.proj j ≫ (e j).inv,
-    Fan.IsLimit.hom_ext hs _ _ fun j ↦ by simp [reassoc_of% (w j)],
-    Fan.IsLimit.hom_ext ht _ _ fun j ↦ by simp [w]⟩
-
-end CategoryTheory.Limits
-
 namespace CochainComplex
 
 variable {C : Type*} [Category* C] [Abelian C]

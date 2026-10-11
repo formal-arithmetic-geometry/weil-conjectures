@@ -883,6 +883,7 @@ public import WeilConjectures.Mathlib.Algebra.Homology.Embedding.Extend
 public import WeilConjectures.Mathlib.Algebra.Homology.Embedding.HomEquiv
 public import WeilConjectures.Mathlib.Algebra.Homology.ExactSequence
 public import WeilConjectures.Mathlib.Algebra.Homology.GrothendieckAbelian
+public import WeilConjectures.Mathlib.Algebra.Homology.HomologicalComplexLimits
 public import WeilConjectures.Mathlib.Algebra.Homology.HomologySequence
 public import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory
 public import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
@@ -1065,6 +1066,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.Kernels
 public import WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.Multiequalizer
 public import WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.PiProd
 public import WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.Preorder.Basic
+public import WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.Products
 public import WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.Pullback.Assoc
 public import WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
 public import WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Basic
