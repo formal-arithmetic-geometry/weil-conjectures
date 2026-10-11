@@ -119,16 +119,58 @@ noncomputable abbrev baseChangeStageData (Y : Scheme.{u}) : TwoColimitData (Fini
   (algebraicClosureStageData l Y).transportIso (fun h ↦ rationalBaseChangeTransition Y h)
     (fun h ↦ rationalBaseChangeTransitionIso Y h)
 
-/-- Unfinished: the first clause of blueprint `prop-weil-pbc-scalar-extension` (proper base
-change subsection), that the scalar-extension functor `− ⊗_E L` maps `Dᵇc(Y, E)` into
-`Dᵇc(Y, L)`. See the pull request for the attempts made. -/
+/-- Unfinished (the remaining part of the first clause of blueprint
+`prop-weil-pbc-scalar-extension`): the reductions modulo `𝔪_Lⁿ⁺¹` of the derived base change
+`K ⊗_{𝒪_E} 𝒪_L` of an object of `Dᵇc(Y, 𝒪_E)` are bounded constructible of uniform Tor
+amplitude. See the pull request for the attempts made. -/
+theorem reductions_rightDerivedBaseChange (Y : Scheme.{u}) {E L : FiniteSubext l} (h : E ≤ L)
+    (K : _root_.DerivedCategory
+      (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} (Shrink.{u + 1} (integers l E.field)))))
+    (hK : DerivedCategory.boundedConstructibleIntegral (maximalIdealShrink l E.field) Y K) :
+    ∃ a b : ℤ, ∀ n : ℕ,
+      DerivedCategory.boundedConstructible (ModuleCat.{u + 1} (Shrink.{u + 1} (integers l L.field)))
+          Y ((reductionModIdeal _ Y (maximalIdealShrink l L.field ^ (n + 1))).obj
+            ((sheafBaseChangeTransition Y h).rightDerivedFunctor.obj K)) ∧
+        DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} (Shrink.{u + 1} (integers l L.field)))
+          Y a b ((reductionModIdeal _ Y (maximalIdealShrink l L.field ^ (n + 1))).obj
+            ((sheafBaseChangeTransition Y h).rightDerivedFunctor.obj K)) :=
+  sorry
+
+/-- Derived base change `− ⊗_{𝒪_E} 𝒪_L` maps `Dᵇc(Y, 𝒪_E)` into `Dᵇc(Y, 𝒪_L)`: derived
+completeness is preserved, the base change being isomorphic to the derived coextension of
+scalars, and the reductions are `reductions_rightDerivedBaseChange`. -/
+theorem boundedConstructibleIntegral_rightDerivedBaseChange (Y : Scheme.{u})
+    {E L : FiniteSubext l} (h : E ≤ L)
+    (K : _root_.DerivedCategory
+      (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} (Shrink.{u + 1} (integers l E.field)))))
+    (hK : DerivedCategory.boundedConstructibleIntegral (maximalIdealShrink l E.field) Y K) :
+    DerivedCategory.boundedConstructibleIntegral (maximalIdealShrink l L.field) Y
+      ((sheafBaseChangeTransition Y h).rightDerivedFunctor.obj K) :=
+  ⟨DerivedCategory.derivedComplete_of_iso ((derivedBaseChangeTransitionIso Y h).app K).symm
+    (derivedCompleteIntegral_rightDerivedFunctor_coextendScalars l (incl h) (incl_compat h) Y hK.1),
+    reductions_rightDerivedBaseChange l Y h K hK⟩
+
+/-- The first clause of blueprint `prop-weil-pbc-scalar-extension`: the scalar-extension functor
+`− ⊗_E L` maps `Dᵇc(Y, E)` into `Dᵇc(Y, L)`. An integral representative `K'` of `K` is carried
+to the integral representative `K' ⊗_{𝒪_E} 𝒪_L` of `K ⊗_E L`. -/
 theorem boundedConstructibleRational_rationalBaseChangeTransition (Y : Scheme.{u})
     {E L : FiniteSubext l} (h : E ≤ L)
     (K : DerivedCategoryDerivedCompleteRational Y.smallEtaleTopology l E.field)
     (hK : DerivedCategory.boundedConstructibleRational l E.field Y K) :
     DerivedCategory.boundedConstructibleRational l L.field Y
-      ((rationalBaseChangeTransition Y h).obj K) :=
-  sorry
+      ((rationalBaseChangeTransition Y h).obj K) := by
+  obtain ⟨K', hK', ⟨e⟩⟩ := hK
+  exact ⟨(integralBaseChangeTransition Y h).obj K',
+    boundedConstructibleIntegral_rightDerivedBaseChange l Y h _ hK',
+    ⟨((Localization.Lifting.iso
+      (Rationalization.Q (nonZeroDivisors (Shrink.{u + 1} (integers l E.field)))
+        (DerivedCategoryDerivedCompleteIntegral Y.smallEtaleTopology l E.field))
+      (Rationalization.W (nonZeroDivisors (Shrink.{u + 1} (integers l E.field)))
+        (DerivedCategoryDerivedCompleteIntegral Y.smallEtaleTopology l E.field))
+      (integralBaseChangeTransition Y h ⋙
+        Rationalization.Q (nonZeroDivisors (Shrink.{u + 1} (integers l L.field)))
+          (DerivedCategoryDerivedCompleteIntegral Y.smallEtaleTopology l L.field))
+      (rationalBaseChangeTransition Y h)).app K').symm ≪≫ (rationalBaseChangeTransition Y h).mapIso e⟩⟩
 
 /-- The directed system of the categories `Dᵇc(Y, E)`, `E ⊆ ℚ̄_ℓ` finite over `ℚ_ℓ`, with the
 transition functors `K ↦ K ⊗_E L` (`boundedConstructibleRational_rationalBaseChangeTransition`). -/
