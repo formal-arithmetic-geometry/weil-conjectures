@@ -4896,3 +4896,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 14:17 L: merged deliver/K1/lem-weil-pbc-separably-generated-separable (stage 2; reviewer PASS; first push; Sheaf.FieldTheory.SeparablyGeneratedSeparable Algebra.isSeparableExtension_of_isSeparablyGenerated)
 - 14:17 L: merged deliver/C1/lem-weil-pbc-sets-etale-inverse-image-composition-units (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits AlgebraicGeometry.etaleSetInverseImageCompositionUnits)
 - 14:17 L: merged deliver/C1/lem-weil-pbc-sets-inverse-image-composition (stage 2; reviewer PASS; first push; Sheaf.Topology.SetsInverseImageComposition TopCat.Sheaf.exists_sets_inverseImage_comp)
+- 14:18 L: merged deliver/E1/lem-weil-pbc-scheme-clopen-idempotent (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.SchemeClopenIdempotent AlgebraicGeometry.scheme_clopen_idempotent)

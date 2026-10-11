@@ -200,5 +200,23 @@
   "by": "L",
   "result": "accepted",
   "note": "Five steps through the stalks (agent proof from Stacks 0079, 006T/01I5, 0H78): e_x ∈ {0,1} so U_e = D(e), complement U_{1-e}, injectivity by germs, surjectivity by Γ(X) = O(U) × O(X∖U) for a clopen U, pullback by preimage_basicOpen. All checked. New Mathlib leaves verified: section_ext (Stalks.lean:520), isProductOfDisjoint (PairwiseIntersections.lean:428) with objSupIsoProdEqLocus (CommRingCat.lean:301), preimage_basicOpen/_top (Scheme.lean:679/685). The local-ring node closed by the sorry-free IsLocalRing.eq_zero_or_eq_one_of_isIdempotentElem of the source repository."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SchemeClopenIdempotent",
+  "declaration": "AlgebraicGeometry.scheme_clopen_idempotent",
+  "file": "lean/Sheaf/AlgebraicGeometry/SchemeClopenIdempotent.lean",
+  "statement": "theorem scheme_clopen_idempotent (X : Scheme.{u}) : (∀ (e : Γ(X, ⊤)), IsIdempotentElem e → idempotentOpen e = {x : X | X.presheaf.Γgerm x e = 1} ∧ IsOpen (idempotentOpen e) ∧ IsClosed (idempotentOpen e) ∧ idempotentOpen (1 - e) = (idempotentOpen e)ᶜ) ∧ (Function.Injective (fun (e : {e : Γ(X, ⊤) // IsIdempotentElem e}) ↦ idempotentOpen e.1) ∧ (∀ (U : Set X), IsOpen U ∧ IsClosed U → ∃ e : Γ(X, ⊤), IsIdempotentElem e ∧ idempotentOpen e = U)) ∧ (∀ (U : {U : Set X // IsOpen U ∧ IsClosed U}), ∃! (e : Γ(X, ⊤)), IsIdempotentElem e ∧ (∀ x : X, x ∈ U.1 → X.presheaf.Γgerm x e = 1) ∧ (∀ x : X, x ∉ U.1 → X.presheaf.Γgerm x e = 0)) ∧ (∀ {Y : Scheme.{u}} (g : Y ⟶ X) (e : Γ(X, ⊤)), IsIdempotentElem e → IsIdempotentElem (g.appTop e) ∧ idempotentOpen (g.appTop e) = g.base ⁻¹' idempotentOpen e)",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "E1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }
