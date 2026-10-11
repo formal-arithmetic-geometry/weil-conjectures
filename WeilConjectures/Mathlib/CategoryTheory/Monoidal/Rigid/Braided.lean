@@ -30,6 +30,8 @@ and `End (𝟙_ C) = R`.
 - `CategoryTheory.MonoidalCategory.ihomUnitIsoRightDual`: in a braided monoidal closed
   category, the internal dual `ihom X (𝟙_ C)` of an object with a right dual `Xᘁ` is `Xᘁ`.
 
+- `CategoryTheory.MonoidalClosed.toIhomIhom`: the double-dual map `X ⟶ [[X, W], W]` relative to
+  an object `W`, natural in `X` (`CategoryTheory.MonoidalClosed.toIhomIhomNatTrans`).
 - `CategoryTheory.MonoidalClosed.toIhomIhomUnit`: the canonical biduality map
   `X ⟶ [[X, 𝟙_ C], 𝟙_ C]` of a braided monoidal closed category.
 
