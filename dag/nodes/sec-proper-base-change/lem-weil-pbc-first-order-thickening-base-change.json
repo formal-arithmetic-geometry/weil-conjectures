@@ -221,5 +221,23 @@
   "by": "L",
   "result": "accepted",
   "note": "6 steps (agent proof; Stacks 09ZU omits it): base change of a closed immersion (01QR leaf); local picture over affine opens by the affine-cover criterion and pasting; the ideal on affines is KB (today's quotient-base-change node); equality with I.O_{Z'} via module-pullback-ideal-quotient (1); square zero via clause (2); conclusion. Does not cite the false imported node lem-pc-closed-imm-base-change."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FirstOrderThickeningBaseChange",
+  "declaration": "AlgebraicGeometry.IsFirstOrderThickening.baseChange",
+  "file": "lean/Sheaf/AlgebraicGeometry/FirstOrderThickeningBaseChange.lean",
+  "statement": "theorem IsFirstOrderThickening.baseChange {W W' Z' : Scheme.{u}} (i : W ⟶ W') (p : Z' ⟶ W') (hi : IsFirstOrderThickening i) : IsFirstOrderThickening (pullback.fst p i) ∧ (pullback.fst p i).ker = i.ker.comap p ∧ (i.ker.comap p) ^ 2 = ⊥ ∧ pullback.fst p i ≫ p = pullback.snd p i ≫ i",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-ftb1031",
+  "group": "M1",
+  "result": "pass",
+  "note": "W W' Z' : Scheme.{u}; i, p arbitrary; hi = IsFirstOrderThickening i (IsClosedImmersion ∧ ker^2=⊥); Z = pullback p i, j = fst, q = snd; concl: j first-order thickening, j.ker = i.ker.comap p (recorded def-nagata-extended-ideal, = Mathlib ker_fst_of_isClosedImmersion), (comap)^2=⊥, p∘j=i∘q; no hollow hyps, no Mathlib square-zero base-change lemma"
  }
 }
