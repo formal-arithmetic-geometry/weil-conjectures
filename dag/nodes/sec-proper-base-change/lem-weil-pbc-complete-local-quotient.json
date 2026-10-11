@@ -180,5 +180,23 @@
   "by": "L",
   "result": "pass",
   "note": "Four steps: quotient Noetherian (leaf), local with maximal ideal m/I (existing node), complete as a finite R-module over the complete Noetherian R (committed unsplit 00MA(3) node), passage from module to ring completeness (m^n(R/I) = (m/I)^n). Correct; 0 new nodes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.CompleteLocalQuotient",
+  "declaration": "quotient_complete_local",
+  "file": "lean/Sheaf/RingTheory/CompleteLocalQuotient.lean",
+  "statement": "theorem quotient_complete_local (R : Type u) [CommRing R] [IsNoetherianRing R] [IsLocalRing R] [IsAdicComplete (IsLocalRing.maximalIdeal R) R] (I : Ideal R) (hI : I ≠ ⊤) : letI : Nontrivial (R ⧸ I) := Ideal.Quotient.nontrivial_iff.mpr hI letI : IsLocalRing (R ⧸ I) := IsLocalRing.of_surjective' (Ideal.Quotient.mk I) Ideal.Quotient.mk_surjective IsNoetherianRing (R ⧸ I) ∧ IsLocalRing (R ⧸ I) ∧ IsLocalRing.maximalIdeal (R ⧸ I) = (IsLocalRing.maximalIdeal R).map (Ideal.Quotient.mk I) ∧ IsAdicComplete (IsLocalRing.maximalIdeal (R ⧸ I)) (R ⧸ I)",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-clq1521",
+  "group": "G1",
+  "result": "pass",
+  "note": "R CommRing+IsNoetherianRing+IsLocalRing+IsAdicComplete (maximalIdeal R) R (landed H1/F1/J1 form); I : Ideal R, I ≠ ⊤; letI nontrivial/local from properness via of_surjective'; conclusions Noetherian R⧸I, local, maximalIdeal (R⧸I) = m.map mk, IsAdicComplete at maximalIdeal (R⧸I); not dup of 71cf57338 (completion of R with Noetherian R⧸I) nor Mathlib (only AdicCompletion instance in LocalRing.lean)"
  }
 }
