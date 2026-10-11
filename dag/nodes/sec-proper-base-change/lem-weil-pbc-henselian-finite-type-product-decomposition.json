@@ -165,5 +165,23 @@
   "worker": "stage1",
   "summary": "Split along Stacks 04GJ (algebra.tex 42418, proof 'a combination of parts (11) and (10) of Lemma 04GG'), with 04GG (42115) read in full. Since the DAG defines henselian by idempotent lifting, step 1 gets 04GG (8) (etale retractions through rational points) from the existing node lem-weil-pbc-henselian-etale-retraction (04GG 1=>8); step 2 is 04GG (11) for that hypothesis, the new unsplit node lem-weil-pbc-etale-retraction-finite-type-splitting (source: 04GG proof of 8=>11, via 00UK for finite type algebras, which neither the DAG nor Mathlib has: Mathlib's 00UL is for finite algebras only); step 3 is 04GG (10), the existing reviewed node lem-weil-pbc-etale-retraction-finite-product-local (8=>10), applied to the finite factor, with finiteness of each local factor written out; step 4 assembles the isomorphism (elementary). Statement unchanged; stmt_deps unchanged. Mathlib: no finite type decomposition over henselian rings (searches recorded). Source remarks: 04GG's proof of 8=>11 writes the retraction condition reversed ('m = tau^{-1}(m')' for tau^{-1}(m) = m') and does not justify that B' tensor_{R',tau} R is not quasi-finite over m (it follows from kappa(m') = kappa through tau, so the fibres agree); 8=>10 writes A'_1 for A'_n in the last factor."
  },
- "reviewed": "Reviewed by L 2026-10-10: faithful to Algebra 04GJ = 04GG (11) + (10), routed through the etale-retraction property (8) which the DAG's definition gives (existing node 04GG 1=>8); (8)=>(11) is a new unsplit node, (8)=>(10) an existing split node; finiteness of the local factors written out. No Mathlib match."
+ "reviewed": "Reviewed by L 2026-10-10: faithful to Algebra 04GJ = 04GG (11) + (10), routed through the etale-retraction property (8) which the DAG's definition gives (existing node 04GG 1=>8); (8)=>(11) is a new unsplit node, (8)=>(10) an existing split node; finiteness of the local factors written out. No Mathlib match.",
+ "lean": {
+  "module": "Sheaf.RingTheory.HenselianFiniteTypeProductDecomposition",
+  "declaration": "HenselianLocalRing.finiteType_exists_algEquiv_pi_prod",
+  "file": "lean/Sheaf/RingTheory/HenselianFiniteTypeProductDecomposition.lean",
+  "statement": "theorem finiteType_exists_algEquiv_pi_prod (R : Type u) (S : Type v) [CommRing R] [CommRing S] [HenselianLocalRing R] [Algebra R S] [Algebra.FiniteType R S] : ∃ (n : ℕ) (A : Fin n → CommAlgCat.{v} R) (B : CommAlgCat.{v} R) (_ : Algebra.FiniteType R B), Nonempty (S ≃ₐ[R] (∀ i, A i) × B) ∧ (∀ i, IsLocalRing (A i) ∧ Module.Finite R (A i)) ∧ (∀ q : PrimeSpectrum B, q.asIdeal.comap (algebraMap R B) = IsLocalRing.maximalIdeal R → ¬ Algebra.IsQuasiFiniteAtPrime R B q)",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "H1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ }
 }
