@@ -63,6 +63,11 @@ class IsCoherent (ℱ : X.Modules) : Prop where
 
 /-- **Coherent = quasi-coherent of finite type on a locally noetherian scheme.**
 
+A coherent module is locally a quotient `𝒪_U^n ⟶ ℱ|_U` whose kernel is of finite type, hence
+locally has a presentation (`exists_presentation_restrict_of_epi`); this direction needs no
+noetherian hypothesis. Conversely the kernel of `𝒪_U^n ⟶ ℱ|_U` is of finite presentation by
+`isFinitePresentation_kernel`.
+
 (blueprint: `pqf-lem-coherent-ft-locnoeth`) -/
 theorem isCoherent_iff [IsLocallyNoetherian X] (ℱ : X.Modules) :
     ℱ.IsCoherent ↔ SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) ℱ ∧
@@ -110,6 +115,11 @@ theorem subsingleton_H_restrict_of_isAffineOpen (ℱ : X.Modules)
 
 /-- **Direct images of quasi-coherent modules.** For a quasi-compact quasi-separated morphism
 `f : X ⟶ S`, the direct image `f_* ℱ` of a quasi-coherent `𝒪_X`-module is quasi-coherent.
+
+For an affine open `W` of `S` and `g ∈ Γ(S, W)`, the preimage `f ⁻¹ᵁ W` is qcqs and
+`f ⁻¹ᵁ D(g) = D(f^♯ g)`, so the sections of `ℱ` over `D(f^♯ g)` are the localization at `g` of
+those over `f ⁻¹ᵁ W` (`exists_map_eq_pow_smul_of_isCompact_of_isQuasiSeparated` and
+`exists_pow_smul_eq_zero_of_isCompact`).
 
 (blueprint: `pqf-lem-pushforward-qcoh`) -/
 theorem isQuasicoherent_pushforward {S : Scheme.{u}} (f : X ⟶ S) [QuasiCompact f]
