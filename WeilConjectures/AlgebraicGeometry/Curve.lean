@@ -125,8 +125,13 @@ noncomputable def Scheme.Hom.genus (f : C ⟶ Spec (.of K)) : ℕ :=
 /-- The genus `dim_K Γ(C, Ω¹_{C/K})` is `h⁰(C, Ω¹_{C/K})`: the global sections of a sheaf of
 modules are its cohomology in degree `0`, compatibly with the `K`-module structures. -/
 theorem Scheme.Hom.genus_eq_finrankH_zero [C.Over (Spec (.of K))] :
-    (C ↘ Spec (.of K)).genus = Modules.finrankH K (C ↘ Spec (.of K)).relativeDifferentials 0 :=
-  sorry
+    (C ↘ Spec (.of K)).genus = Modules.finrankH K (C ↘ Spec (.of K)).relativeDifferentials 0 := by
+  let e := Modules.H.zeroLinearEquiv (C ↘ Spec (.of K)).relativeDifferentials
+  let := (C ↘ Spec (.of K)).ΓAlgebra
+  let : Module K Γ((C ↘ Spec (.of K)).relativeDifferentials, ⊤) :=
+    Module.compHom _ (algebraMap K Γ(C, ⊤))
+  exact (LinearEquiv.finrank_eq (R := K)
+    { e with map_smul' := fun c x ↦ e.map_smul (globalSectionsRingHom K c) x }).symm
 
 /-- Blueprint `sk-def-av-pic`: Pic, degree, Pic⁰
 
@@ -136,7 +141,9 @@ over `K` (Stacks 0AYQ), where `χ` is the Euler characteristic
 `AlgebraicGeometry.Scheme.Modules.degree` of a representative of `L`.
 
 On a smooth projective geometrically integral curve this is the degree of any associated Weil
-divisor, and the Riemann-Roch formula `χ(L) = deg L + 1 - g` holds. -/
+divisor, and the Riemann-Roch formula `χ(L) = deg L + 1 - g` holds.
+
+(blueprint: `def-sc-pic0`) -/
 noncomputable def Scheme.Hom.picDegree (f : C ⟶ Spec (.of K)) (L : C.Pic) : ℤ :=
   letI : C.Over (Spec (.of K)) := ⟨f⟩
   Modules.degree K ((fromSkeleton C.Modules).obj L.val)
@@ -165,7 +172,9 @@ of degree zero, recorded here as the subset `f.picZero` of `C.Pic`.
 
 For a smooth proper curve the degree is the group homomorphism
 `AlgebraicGeometry.Scheme.picDegreeHom`, whose kernel is `picZero`
-(`AlgebraicGeometry.Scheme.coe_ker_picDegreeHom`). -/
+(`AlgebraicGeometry.Scheme.coe_ker_picDegreeHom`).
+
+(blueprint: `def-sc-pic0`) -/
 def Scheme.Hom.picZero (f : C ⟶ Spec (.of K)) : Set C.Pic :=
   {L | f.picDegree L = 0}
 

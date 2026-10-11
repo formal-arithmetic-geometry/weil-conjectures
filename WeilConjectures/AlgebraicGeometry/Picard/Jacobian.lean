@@ -212,7 +212,7 @@ are among the fibres of `ℒ`.
 Over a base with no field-valued points every class satisfies the condition vacuously; see the
 implementation notes of this module.
 
-(blueprint: `sk-prop-picard-degree-decomposition`) -/
+(blueprint: `sk-prop-picard-degree-decomposition`, `def-sc-picard-functor`) -/
 noncomputable def picardSubfunctorDegree (f : X ⟶ Spec (.of k)) (d : ℤ) :
     Subfunctor (picardPresheaf f) where
   obj T := {L | ∀ (K : Type u) [Field K] [Algebra k K]
@@ -233,7 +233,7 @@ the degree-`d` subfunctor `AlgebraicGeometry.picardSubfunctorDegree` of the Pica
 the same way that `AlgebraicGeometry.picardFunctor` is the fppf sheafification of the whole
 Picard presheaf.
 
-(blueprint: `sk-prop-picard-degree-decomposition`) -/
+(blueprint: `sk-prop-picard-degree-decomposition`, `def-sc-picard-functor`) -/
 noncomputable def picardFunctorDegree (f : X ⟶ Spec (.of k)) (d : ℤ) :
     Sheaf (Scheme.fppfTopology.over (Spec (.of k))) (Type (u + 1)) :=
   (presheafToSheaf (Scheme.fppfTopology.over (Spec (.of k))) (Type (u + 1))).obj
@@ -1487,7 +1487,7 @@ proper curve `X` over `k`: the kernel of the degree homomorphism
 underlying set is `AlgebraicGeometry.Scheme.Hom.picZero`
 (`AlgebraicGeometry.Scheme.coe_ker_picDegreeHom`).
 
-(blueprint: `sk-prop-jacobian`, `sk-def-pic`) -/
+(blueprint: `sk-prop-jacobian`, `sk-def-pic`, `def-sc-pic0`) -/
 noncomputable abbrev picardZero [SmoothOfRelativeDimension 1 (X ↘ Spec (.of k))]
     [IsProper (X ↘ Spec (.of k))] : Subgroup X.Pic :=
   (picDegreeHom k X).ker
