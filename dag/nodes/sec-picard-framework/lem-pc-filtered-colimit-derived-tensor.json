@@ -167,5 +167,23 @@
   "group": "F1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-fcd0355 (reviewer sub-agent of L); spot-checked: C4/E per step: Step1 zigzag Tot(F(x)M)<-Tot(F(x)E)->Tot(T(x)E) is quasi-iso of underlying R-complexes via cone criterion (generic tool, accepted), lem-pc-tensor-mapping-cone-iso (first-factor fixed; symmetry stated for f(x)1_E), K-flat def (acyclic first slot; symmetry for F); second-factor clause (2) computes D(A) value via K-flat resolution of first factor; A-linearity not claimed of the resolution. Step2 lem-pc-module-filtered-colimits-tensor colimit in first factor with E fixed on small one-point site matches; naturality in T via canonical comparison of resolutions (Tot(-(x)E) descends to D(R) since E K-flat). Step3 exactness clause, every n. Step4 A-linearity from A-linear components of the canonical map (statement's own induced maps), naturality in M from clause (3) natural transformation commuting with coprojections; matches citer C4 use. Diff 2 files, no new nodes, no Mathlib leaf. No fault found beyond second reading."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.FilteredColimitDerivedTensor",
+  "declaration": "DerivedCategory.filteredColimit_derivedTensor_cohomology",
+  "file": "lean/Sheaf/Algebra/Homology/FilteredColimitDerivedTensor.lean",
+  "statement": "theorem filteredColimit_derivedTensor_cohomology (f : R →+* A) (I : Type u) [SmallCategory I] [IsFiltered I] (n : ℤ) : let QR := (Q : CochainComplex (ModuleCat.{u} R) ℤ ⥤ DerivedCategory (ModuleCat.{u} R)) let T := Classical.choose (exists_derivedTensor_second_factor_functor f).2 let H := fun M : CochainComplex (ModuleCat.{u} A) ℤ ↦ QR ⋙ T.obj M ⋙ homologyFunctor (ModuleCat.{u} A) n (∀ (M : CochainComplex (ModuleCat.{u} A) ℤ) (N : I ⥤ CochainComplex (ModuleCat.{u} R) ℤ), IsIso (colimit.post N (H M))) ∧ (∀ (M : CochainComplex (ModuleCat.{u} A) ℤ) (N : I ⥤ CochainComplex (ModuleCat.{u} R) ℤ) (j : I), colimit.ι (N ⋙ H M) j ≫ colimit.post N (H M) = (H M).map (colimit.ι N j)) ∧ (∀ (M M' : CochainComplex (ModuleCat.{u} A) ℤ) (g : M ⟶ M') (N : I ⥤ CochainComplex (ModuleCat.{u} R) ℤ), let η := whiskerRight (whiskerLeft QR (T.map g)) (homologyFunctor (ModuleCat.{u} A) n) colim.map (whiskerLeft N η) ≫ colimit.post N (H M') = colimit.post N (H M) ≫ η.app (colimit N)) ∧ (∀ (M : CochainComplex (ModuleCat.{u} A) ℤ) (N N' : I ⥤ CochainComplex (ModuleCat.{u} R) ℤ) (a : N ⟶ N'), colim.map (whiskerRight a (H M)) ≫ colimit.post N' (H M) = colimit.post N (H M) ≫ (H M).map (colim.map a))",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-fcd1401",
+  "group": "F1",
+  "result": "pass",
+  "note": "f:R→+*A for R-algebra A; arbitrary M : CochainComplex (ModuleCat A) ℤ; M⊗ᴸN = (Classical.choose dep.2).obj M applied to Q N, the landed H1 existential functor (T.map pinned by ε on K-flat models); I small IsFiltered, full diagram N, termwise colimit N with ι; all n:ℤ; canonical map colimit.post with ι-equation, IsIso in ModuleCat A; naturality in g:M⟶M' via T.map g and in a:N⟶N'"
  }
 }
