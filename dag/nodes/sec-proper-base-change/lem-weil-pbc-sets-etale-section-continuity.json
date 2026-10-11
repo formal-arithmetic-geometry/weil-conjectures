@@ -13,7 +13,7 @@
  },
  "kind": "statement",
  "title": "Continuity of etale sections for sheaves of sets",
- "statement": "Let $I$ be a nonempty directed set, let $(X_i,f_{i'i})_{i\\le i'}$ be an inverse system of quasi-compact and quasi-separated schemes with affine transition morphisms, and let $X=\\varprojlim_iX_i$ with projections $f_i:X\\to X_i$ [lem-weil-pbc-limit-affine-transition]. Let $G$ be a sheaf of sets on $(X_0)_{\\Et}$ [def-weil-pbc-etale-sheaf-of-sets]. Let $W_0\\to X_0$ be etale and of finite presentation, put $W_i=W_0\\times_{X_0}X_i$ and $W=W_0\\times_{X_0}X$, and write $\\rho_{i'i}:(f_{i0}^{-1}G)(W_i)\\to(f_{i'0}^{-1}G)(W_{i'})$ for the transition map obtained from the unit of inverse image, the composition isomorphism $c$ of [lem-weil-pbc-sets-etale-inverse-image-composition-units], and restriction along the canonical iterated-fibre-product isomorphism. Then $\\rho_{ii}=\\mathrm{id}$, $\\rho_{i''i'}\\circ\\rho_{i'i}=\\rho_{i''i}$, and the canonical map $$\\varinjlim_i(f_{i0}^{-1}G)(W_i)\\;\\longrightarrow\\;(f_0^{-1}G)(W)$$ is a bijection. In particular, for the etale projection $\\operatorname{pr}_i:W_i\\to X_i$, restriction identifies $(\\operatorname{pr}_i^{-1}f_{i0}^{-1}G)(W_i)$ with $(f_{i0}^{-1}G)(W_i)$.",
+ "statement": "Let $I$ be a nonempty directed set, let $(X_i,f_{i'i})_{i\\le i'}$ be an inverse system of quasi-compact and quasi-separated schemes with affine transition morphisms, and let $X=\\varprojlim_iX_i$ with projections $f_i:X\\to X_i$ [lem-weil-pbc-limit-affine-transition]. Fix a stage $0\\in I$ and index all subsequent stage objects and the section colimit by the cofinal upper tail $I_{\\ge0}=\\{i\\in I:0\\le i\\}$. Let $G$ be a sheaf of sets on $(X_0)_{\\Et}$ [def-weil-pbc-etale-sheaf-of-sets]. Let $W_0\\to X_0$ be etale and of finite presentation, put $W_i=W_0\\times_{X_0}X_i$ and $W=W_0\\times_{X_0}X$, and write $\\rho_{i'i}:(f_{i0}^{-1}G)(W_i)\\to(f_{i'0}^{-1}G)(W_{i'})$ for the transition map obtained from the unit of inverse image, the composition isomorphism $c$ of [lem-weil-pbc-sets-etale-inverse-image-composition-units], and restriction along the canonical iterated-fibre-product isomorphism. Then $\\rho_{ii}=\\mathrm{id}$, $\\rho_{i''i'}\\circ\\rho_{i'i}=\\rho_{i''i}$, and the canonical map $$\\varinjlim_i(f_{i0}^{-1}G)(W_i)\\;\\longrightarrow\\;(f_0^{-1}G)(W)$$ is a bijection. In particular, for the etale projection $\\operatorname{pr}_i:W_i\\to X_i$, restriction identifies $(\\operatorname{pr}_i^{-1}f_{i0}^{-1}G)(W_i)$ with $(f_{i0}^{-1}G)(W_i)$.",
  "source": {
   "document": "literature/stacks-project/etale-cohomology.tex",
   "place": "Theorem Tag 09YQ (theorem-colimit), degree zero for sheaves of sets; proof via Tags 0EYL, 04HR, 09YN and the finite affine-cover reduction for qcqs schemes"
@@ -185,5 +185,47 @@
   "group": "K1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-se3 (reviewer sub-agent of L); spot-checked: Re-push after the returns of 15:35 and 15:53; both points of the 15:53 return checked repaired. Point 1: the new node lem-weil-pbc-sets-affine-etale-inverse-image-comparison now assumes h:T'->T affine [pqf-def-affine-morphism] (in stmt_deps), says u is well defined (V affine etale over T gives V x_T T' affine, being affine over V; standard etale coverings stay standard) and defines a morphism of affine etale sites g as in clause (1) of lem-weil-pbc-affine-etale-site-colimit (read: clause (1) says exactly this for base change of affine etale objects along affine maps), the composite clause requires composable affine morphisms, and the formulas are in TeX math mode; the comparison (h^{-1}G)|_aff = g^{-1}(G|_aff) with units and composites is the sets version of the comparison in the proof of Stacks 09YQ via 04HR, true for affine h; created.item only, statement-only, three kinds of Mathlib search. Step 1 now says every use is for affine morphisms: f_{i'i}, f_{i0} affine by hypothesis, f_i and f_0 affine by lem-weil-pbc-limit-affine-transition (read: its statement says each projection is affine). Point 2: the item's stmt_deps no longer contain the comparison node (it stays in proof_deps); the item's statement is unchanged against sheaf-dag. Steps 2-4 as accepted at 15:53 (colimit-of-sites sections, unit clause and clauses (0)/(1)/(2) of lem-weil-pbc-sets-etale-inverse-image-composition-units read, finite affine refinements V_{bb'c} of the qcqs overlaps, finite equalizers and filtered colimits). Declared tool uses: the five sk-thm-p1 nodes (limit with affine transitions, affine etale site colimit 0EYL, affine etale site topos, colimit-of-sites sections 09YN, finite affine cofinal coverings) are generic statements used as black boxes, accepted. Start 16:06:20 UTC; end 16:06:58 UTC (date -u)."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleSetSectionContinuity",
+  "declaration": "AlgebraicGeometry.etaleSetSectionContinuity",
+  "declarations": [
+   "AlgebraicGeometry.etaleSetSectionComparison",
+   "AlgebraicGeometry.etaleSetRestrictionUnit",
+   "AlgebraicGeometry.etaleSetSectionContinuity"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleSetSectionContinuity.lean",
+  "statement": "theorem etaleSetSectionContinuity {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I] (D : Iᵒᵖ ⥤ Scheme.{u}) [∀ i : Iᵒᵖ, CompactSpace (D.obj i)] [∀ i : Iᵒᵖ, QuasiSeparatedSpace (D.obj i)] [∀ {i j : Iᵒᵖ} (a : i ⟶ j), IsAffineHom (D.map a)] (c : Cone D) (_hc : IsLimit c) (i₀ : I) (G : Sheaf (D.obj (op i₀)).smallEtaleTopology (Type (u + 1))) (W₀ : (D.obj (op i₀)).Etale) [QuasiCompact W₀.hom] [QuasiSeparated W₀.hom] : ∃ (E : (Over (op i₀))ᵒᵖ ⥤ Type (u + 1)) (e : ∀ j : Over (op i₀), E.obj (op j) ≅ ((Scheme.etaleSetPullback (D.map j.hom)).obj G).obj.obj (op ((MorphismProperty.Over.pullback @Etale ⊤ (D.map j.hom)).obj W₀))) (ν : E ⟶ (Functor.const (Over (op i₀))ᵒᵖ).obj (((Scheme.etaleSetPullback (c.π.app (op i₀))).obj G).obj.obj (op ((MorphismProperty.Over.pullback @Etale ⊤ (c.π.app (op i₀))).obj W₀)))), (∀ (j k : Over (op i₀)) (a : k ⟶ j), (e j).inv ≫ E.map a.op ≫ (e k).hom = etaleSetSectionComparison (D.map a.left) (D.map j.hom) (D.map k.hom) ((D.map_comp a.left j.hom).symm.trans (congrArg (fun t : k.left ⟶ op i₀ ↦ D.map t) a.w)) G W₀) ∧ (∀ j : Over (op i₀), (e j).inv ≫ ν.app (op j) = etaleSetSectionComparison (c.π.app j.left) (D.map j.hom) (c.π.app (op i₀)) (c.w j.hom) G W₀) ∧ Function.Bijective (colimit.desc E (Cocone.mk _ ν)) ∧ (∀ j : Over (op i₀), Function.Bijective (etaleSetRestrictionUnit ((MorphismProperty.Over.pullback @Etale ⊤ (D.map j.hom)).obj W₀) ((Scheme.etaleSetPullback (D.map j.hom)).obj G)))",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": false,
+  "note": "The comparison and restriction-unit definitions are the maps explicitly introduced by this node, using the dependency inverse-image functor and its chosen composition isomorphism. The section system is encoded by a functor with specified section-set identifications; its functor laws state the identity and composition laws. The canonical colimit.desc is bijective."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-ssc",
+  "group": "F1",
+  "result": "pass",
+  "note": "statement correction (explicit stage i0, upper tail Over (op i0)) kept: well-typing of f_{i0} as in Stacks 09YQ/0EYL, no weakening; I : Type u directed nonempty; qcqs stages, affine transitions; Cone+IsLimit; G sheaf of sets Type (u+1) on smallEtaleTopology at stage i0; W0 etale qc qs (=fp); W_i, W via Over.pullback; transitions and limit legs tied to etaleSetSectionComparison (unit, chosen unique c, pullbackComp); functor E encodes rho_ii=id and cocycle; colimit.desc bijective; restriction unit at Etale.mk (𝟙 W_i) bijective",
+  "statement_corrected": true
+ },
+ "statement_change": {
+  "date": "2026-10-11",
+  "by": "F1 stage 2",
+  "old_statement": "Let $I$ be a nonempty directed set, let $(X_i,f_{i'i})_{i\\le i'}$ be an inverse system of quasi-compact and quasi-separated schemes with affine transition morphisms, and let $X=\\varprojlim_iX_i$ with projections $f_i:X\\to X_i$ [lem-weil-pbc-limit-affine-transition]. Let $G$ be a sheaf of sets on $(X_0)_{\\Et}$ [def-weil-pbc-etale-sheaf-of-sets]. Let $W_0\\to X_0$ be etale and of finite presentation, put $W_i=W_0\\times_{X_0}X_i$ and $W=W_0\\times_{X_0}X$, and write $\\rho_{i'i}:(f_{i0}^{-1}G)(W_i)\\to(f_{i'0}^{-1}G)(W_{i'})$ for the transition map obtained from the unit of inverse image, the composition isomorphism $c$ of [lem-weil-pbc-sets-etale-inverse-image-composition-units], and restriction along the canonical iterated-fibre-product isomorphism. Then $\\rho_{ii}=\\mathrm{id}$, $\\rho_{i''i'}\\circ\\rho_{i'i}=\\rho_{i''i}$, and the canonical map $$\\varinjlim_i(f_{i0}^{-1}G)(W_i)\\;\\longrightarrow\\;(f_0^{-1}G)(W)$$ is a bijection. In particular, for the etale projection $\\operatorname{pr}_i:W_i\\to X_i$, restriction identifies $(\\operatorname{pr}_i^{-1}f_{i0}^{-1}G)(W_i)$ with $(f_{i0}^{-1}G)(W_i)$.",
+  "what": "The original statement uses a stage 0 and the morphisms f_{i0} for every i without choosing 0 in I or restricting to i >= 0. A general directed set has no distinguished least element; when i is not >= 0, f_{i0} is not defined. Choose a stage and use its cofinal upper tail, as in the source limit/base-change construction. This makes the intended objects well typed without requiring I to have a least element.",
+  "source": {
+   "document": "literature/stacks-project/etale-cohomology.tex",
+   "place": "Theorem Tag 09YQ (theorem-colimit), degree zero after restriction to the cofinal upper tail of the chosen descent stage; Lemma Tag 0EYL (lemma-colimit-affine-sites), proof, U_{i′} = U_i x_{X_i} X_{i′} for i′ >= i."
+  },
+  "citers": [
+   {
+    "id": "lem-weil-pbc-sets-pushforward-stalk-strict-henselization",
+    "holds": true,
+    "note": "Its proof chooses V_0 and applies continuity to later stages; passing to the cofinal upper tail preserves the limit and section colimit, and hence the stalk comparison."
+   }
+  ]
  }
 }
