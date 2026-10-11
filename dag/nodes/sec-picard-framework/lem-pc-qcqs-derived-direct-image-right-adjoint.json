@@ -170,5 +170,23 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-qra2758 (reviewer sub-agent of L); spot-checked: Return 21:56 (E) repaired: statement now assumes X and Y qcqs as in Tag 0A9E, named under E7. Step 3 compact generation (lem-pc-derived-qcoh-compact-generation) applied to qcqs X; Step 1 preserves-qcoh and Step 4 direct-sum preservation with f qcqs; Step 5 Brown (lem-pc-brown-representability-right-adjoint) with coproducts, compact generation, coproduct preservation and exactness all cited. No new nodes, so no duplicate of lem-pc-perfect-generator-exists. Citers: def-sc-duality-equation-base-change-map and lem-sc-flat-precompose-pus use it only for morphisms between qcqs schemes (including Rg_* preserving D_QCoh), satisfied; lem-pc-global-hom-adjunction (unsplit, not merged) still needs the hypothesis, noted for the lead. Second reading: no fault missed."
  },
- "lead_note": "2026-10-10 L (R-qra2758): Citer lem-pc-global-hom-adjunction (unsplit, returned 22:05) still assumes only f qcqs; its statement must add X and Y qcqs to use this item."
+ "lead_note": "2026-10-10 L (R-qra2758): Citer lem-pc-global-hom-adjunction (unsplit, returned 22:05) still assumes only f qcqs; its statement must add X and Y qcqs to use this item.",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.QCqsDerivedDirectImageRightAdjoint",
+  "declaration": "AlgebraicGeometry.schemeDerivedDirectImage_qcqs_hasRightAdjoint",
+  "file": "lean/Sheaf/AlgebraicGeometry/QCqsDerivedDirectImageRightAdjoint.lean",
+  "statement": "theorem schemeDerivedDirectImage_qcqs_hasRightAdjoint (X Y : Scheme.{u}) [CompactSpace X] [QuasiSeparatedSpace X] [CompactSpace Y] [QuasiSeparatedSpace Y] [HasDerivedCategory.{wX} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] [HasDerivedCategory.{wY} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))] (f : X ⟶ Y) [QuasiCompact f] [QuasiSeparated f] : ∃ hpres : ∀ E : schemeDerivedCategory X, schemeDerivedQCohProperty X E → schemeDerivedQCohProperty Y ((schemeDerivedDirectImage f).obj E), ((schemeDerivedQCohProperty Y).lift ((schemeDerivedQCohProperty X).ι ⋙ schemeDerivedDirectImage f) (fun E ↦ hpres E.obj E.property)).IsLeftAdjoint",
+  "branch": "sheaf-dag",
+  "by": "S1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "S1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ }
 }
