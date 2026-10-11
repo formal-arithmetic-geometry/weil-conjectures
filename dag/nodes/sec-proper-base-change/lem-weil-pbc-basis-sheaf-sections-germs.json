@@ -173,5 +173,25 @@
   "item": "lem-weil-pbc-basis-sheaf-sections-germs",
   "worker": "stage1",
   "summary": "Split along Stacks 009M (sheaves.tex, label lemma-condition-star-sections) and its proof, read in full, in three steps: (1) injectivity of gamma_W for every W in B, from the equality of germs in the directed colimit (def-weil-pbc-basis-presheaf-stalk, reviewed leaf) and the uniqueness half of the gluing hypothesis for the covering (V_x) of W (empty U covered by the empty family); (2) the image satisfies (*) with V = U (elementary); (3) a family with (*): choose V_x, sigma_x, show sigma_x and sigma_x' agree on V_x cap V_x' in B by step 1 applied there (Stacks uses (**) with the coverings V_ijy instead; with the single-overlap hypothesis of this node, the 009L form, step 1 is that argument), glue, and compare germs. No new nodes; statement unchanged. Mathlib searched three ways again: no API for sheaves on a basis (section_ext, germ_eq_of_isBasis, exists_mem_germ_eq_of_isBasis are for presheaves on all opens; the unique-gluing equivalence is TopCat.Presheaf.isSheaf_iff_isSheafUniqueGluing, not TopCat.Sheaf.). Source repository: no declaration combining IsBasis and germ (the 6 files mentioning both use isBasis_affineOpens inside proofs; no sorry-map name contains basis with germ/sheaf/stalk)."
+ },
+ "lean": {
+  "module": "Sheaf.Topology.BasisSheafSectionsGerms",
+  "declaration": "TopologicalSpace.Opens.sections_eq_locally_germ_families",
+  "file": "lean/Sheaf/Topology/BasisSheafSectionsGerms.lean",
+  "statement": "theorem sections_eq_locally_germ_families {X : Type u} [TopologicalSpace X] (B : Set (Opens X)) (hB : IsBasis B) (hcap : ∀ U V : B, U.val ⊓ V.val ∈ B) (F : Bᵒᵖ ⥤ AddCommGrpCat.{max u v}) : let meet : B → B → B := fun U V ↦ ⟨U.val ⊓ V.val, hcap U V⟩ let res : ∀ U V : B, V ≤ U → F.obj (op U) → F.obj (op V) := fun _ _ h s ↦ (F.map (homOfLE h).op).hom s let stalk : X → AddCommGrpCat.{max u v} := fun x ↦ colimit ((Subtype.mono_coe (fun U : B ↦ x ∈ U.val)).functor.op ⋙ F) let germ : ∀ (U : B) (x : X) (hx : x ∈ U.val), F.obj (op U) → stalk x := fun U x hx s ↦ (colimit.ι ((Subtype.mono_coe (fun U : B ↦ x ∈ U.val)).functor.op ⋙ F) (op ⟨U, hx⟩)).hom s (∀ (U : B) (I : Type w) (V : I → {W : B // W ≤ U}), (⨆ i, (V i).val.val) = U.val → ∀ s : ∀ i, F.obj (op (V i).val), (∀ i j, res (V i).val (meet (V i).val (V j).val) (inf_le_left (a := (V i).val.val) (b := (V j).val.val)) (s i) = res (V j).val (meet (V i).val (V j).val) (inf_le_right (a := (V i).val.val) (b := (V j).val.val)) (s j)) → ∃! t : F.obj (op U), ∀ i, res U (V i).val (V i).property t = s i) → ∀ U : B, Function.Injective (fun (s : F.obj (op U)) (x : X) (hx : x ∈ U.val) ↦ germ U x hx s) ∧ Set.range (fun (s : F.obj (op U)) (x : X) (hx : x ∈ U.val) ↦ germ U x hx s) = {t : ∀ x : X, x ∈ U.val → stalk x | ∀ (x : X) (hx : x ∈ U.val), ∃ (V : B) (hVU : V ≤ U), x ∈ V.val ∧ ∃ σ : F.obj (op V), ∀ (y : X) (hy : y ∈ V.val), germ V y hy σ = t y (hVU hy)}",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": false,
+  "note": "Reviewer fix (R-bsg1448): presheaf on a basis as G1's landed lem-weil-pbc-basis-sheaf-cofinal-coverings (B : Set (Opens X), IsBasis, F : B^op ⥤ AddCommGrpCat, restriction F.map (homOfLE h).op, coverings as families with union = U); stalk and germs as Mathlib's colimit / colimit.ι over the basis opens containing x (def-weil-pbc-basis-presheaf-stalk, mathlib_match colimit; no private stalk structure). AddCommGrpCat.{max u v} so that the colimit over a Type u index exists.",
+  "fixed_by": "R-bsg1448"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-bsg1448",
+  "group": "H1",
+  "result": "fix",
+  "note": "basis B IsBasis + hcap; F : B^op ⥤ AddCommGrpCat (r_id/r_comp by functoriality); gluing for every U in B, any I : Type w incl. empty, compat by restrictions to U_i∩U_j, ∃!; stalk = colimit over {U:B // x∈U}^op, germ = colimit.ι; conclusion ∀ U: injective ∧ range = (*) with x∈V≤U, ∀ y∈V germ = t_y; reverted the delivery's change of existing node(s) def-weil-pbc-basis-presheaf-stalk (--revert-nodes; kept as on sheaf-dag)"
  }
 }
