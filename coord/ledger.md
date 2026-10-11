@@ -5123,3 +5123,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 15:03 L: merged deliver/H1/lem-weil-pbc-valuation-ring-normal (stage 2; reviewer PASS; first push; Sheaf.RingTheory.ValuationRingNormal isDomain_isIntegrallyClosed_of_fractionField_element_or_inverse)
 - 15:04 L: merged deliver/J1/lem-weil-pbc-well-ordered-union-projective-dimension (stage 2; reviewer PASS; first push; Sheaf.RingTheory.WellOrderedUnionProjectiveDimension ModuleCat.hasProjectiveResolutionLE_of_wellOrderedUnion)
 - 15:04 L: merged deliver/J1/pqf-lem-proper-basic (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.ProperBasic AlgebraicGeometry.proper_basic)
+- 15:04 L: merged deliver/K1/pqf-lem-qf-finitefibres (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.QuasiFiniteIffFiniteFibres AlgebraicGeometry.Scheme.Hom.isQuasiFinite_iff_finiteFibres)
