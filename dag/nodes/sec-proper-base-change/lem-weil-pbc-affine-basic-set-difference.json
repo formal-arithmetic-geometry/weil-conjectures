@@ -165,5 +165,24 @@
   "worker": "stage1",
   "summary": "Statement kept (checked against the basic sets of Algebra 0G1P; the edge cases r=0, s=0 and empty pieces are covered). Wrote the proof in four elementary steps from the definitions of D and V on Spec A [def-weil-affine-spectrum]: intersections of D's and V's (D(a)∩D(b)=D(ab) by primality), membership in B\\C by cases h∈p or least j with k_j∉p, the pieces P_0=D(f)∩V(g,h) and P_j=D(fhk_j)∩V(g,k_1..k_{j-1}) with both inclusions checked, and pairwise disjointness. No new nodes. Mathlib re-searched with LeanSearch, LeanFinder, Loogle, grep and local_search: no statement of the difference; a composed leaf is not a one-line specialization. proof_origin by agent: 03S0 only asserts the refinement."
  },
- "reviewed": "Reviewed by L 2026-10-10: elementary proof by agent (least-index decomposition of B \\ C into basic pieces, both inclusions and disjointness checked). No new nodes; no Mathlib match."
+ "reviewed": "Reviewed by L 2026-10-10: elementary proof by agent (least-index decomposition of B \\ C into basic pieces, both inclusions and disjointness checked). No new nodes; no Mathlib match.",
+ "lean": {
+  "module": "Sheaf.RingTheory.AffineBasicSetDifference",
+  "declaration": "PrimeSpectrum.exists_disjoint_basicConstructibleSetData_diff",
+  "file": "lean/Sheaf/RingTheory/AffineBasicSetDifference.lean",
+  "statement": "theorem exists_disjoint_basicConstructibleSetData_diff {A : Type u} [CommRing A] (f h : A) (r s : ℕ) (g : Fin r → A) (k : Fin s → A) : ∃ (n : ℕ) (S : Fin n → BasicConstructibleSetData A), (Pairwise fun i j => Disjoint ((S i).toSet) ((S j).toSet)) ∧ (⟨f, r, g⟩ : BasicConstructibleSetData A).toSet \\ (⟨h, s, k⟩ : BasicConstructibleSetData A).toSet = ⋃ i, (S i).toSet",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-abs1331"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-abs1331",
+  "group": "K1",
+  "result": "fix",
+  "note": "A: {A : Type u} [CommRing A]; B=D(f)∩V(g_1..g_r), C=D(h)∩V(k_1..k_s) as BasicConstructibleSetData.toSet with r,s:ℕ incl. 0; conclusion ∃ n (incl. 0, empty union) S : Fin n → basic data, Pairwise Disjoint, B \\ C = ⋃ S; left out new module(s) lean/Sheaf/Paper/AffineBasicSetDifference.lean (--drop-files)"
+ }
 }
