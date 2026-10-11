@@ -1,17 +1,16 @@
 # Work queue
 
-92 items; claim with `tools/claim.py next <group> [--stage N]`.
+94 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (92)
+## Stage 2: nodes to state (94)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
 | `def-weil-pbc-sites-and-cohomology` | 1 | state | 136 |
 | `def-nagata-qc-open-equality-stage` | 1 | state | 13 |
-| `def-weil-pbc-module-cohomology-fmap` | 1 | state | 6 |
 | `def-pc-global-derived-rhom` | 1 | state | 4 |
 | `def-weil-pbc-simplicial-hom-object` | 1 | state | 4 |
 | `def-pc-derived-rhom-algebra-module` | 1 | state | 2 |
@@ -26,13 +25,14 @@
 | `lem-weil-pbc-etale-graph-section-extension-map-linear` | 1 | state | 3 |
 | `lem-pc-derived-mayer-vietoris-triangle` | 1 | state | 2 |
 | `lem-weil-pbc-cohomology-pullback-degree-zero` | 1 | state | 2 |
-| `lem-sc-local-dvr-base-change` | 2 | state | 2 |
+| `lem-weil-pbc-higher-direct-image-presheaf` | 1 | state | 2 |
 | `lem-pc-affine-derived-pullback-tensor-tilde` | 1 | state | 1 |
 | `lem-pc-cech-resolution` | 1 | state | 1 |
 | `lem-pc-derived-sections-pushforward-comparison` | 1 | state | 1 |
 | `lem-pc-derived-tensor-transitivity` | 1 | state | 1 |
 | `lem-sc-cech-comparison-natural` | 1 | state | 1 |
 | `lem-weil-pbc-edge-map-base-change` | 1 | state | 1 |
+| `lem-sc-affine-unit-divisor-base-change` | 2 | state | 1 |
 | `cor-galois-lisse-representations` | 1 | state | 0 |
 | `lem-pc-base-change-rhom-perfect` | 1 | state | 0 |
 | `lem-pc-bounded-coherent-finite-tor-proper-pushforward-perfect` | 1 | state | 0 |
@@ -78,16 +78,18 @@
 | `lem-sc-smooth-proper-diagonal-koszul-dual` | 1 | state | 0 |
 | `lem-sc-smooth-proper-diagonal-tensor-formula` | 1 | state | 0 |
 | `lem-sc-smooth-proper-relative-dualizing-general` | 1 | state | 0 |
+| `lem-weil-pbc-affine-morphism-cohomology-edge` | 1 | state | 0 |
 | `lem-weil-pbc-cohomology-pullback-derived-unit` | 1 | state | 0 |
 | `lem-weil-pbc-etale-mayer-vietoris-pullback` | 1 | state | 0 |
 | `lem-weil-pbc-formal-functions-complete-base` | 1 | state | 0 |
 | `lem-weil-pbc-formal-systems-graded-vanishing` | 1 | state | 0 |
 | `lem-weil-pbc-formal-systems-proper-support-serre` | 1 | state | 0 |
-| `lem-weil-pbc-gabber-criterion` | 1 | state | 0 |
 | `lem-weil-pbc-gm-strict-henselization-stalk-formula` | 1 | state | 0 |
 | `lem-weil-pbc-grothendieck-existence-devissage` | 1 | state | 0 |
 | `lem-weil-pbc-grothendieck-existence-easy` | 1 | state | 0 |
 | `lem-weil-pbc-hypercohomology-e1-pullback-functorial` | 1 | state | 0 |
+| `lem-weil-pbc-module-cohomology-fmap-basic-properties` | 1 | state | 0 |
+| `lem-weil-pbc-module-cohomology-fmap-functorial` | 1 | state | 0 |
 | `lem-weil-pbc-projective-space-twisting-sheaf-charts` | 1 | state | 0 |
 | `lem-weil-pbc-pullback-cohomology-long-exact-ladder` | 1 | state | 0 |
 | `lem-weil-pbc-sets-pushforward-stalk-strict-henselization` | 1 | state | 0 |
@@ -102,7 +104,7 @@
 | `lemma-weil-pbc-hypercohomology-convergence` | 2 | state | 0 |
 | `pqf-lem-leray-lowdegree` | 2 | state | 0 |
 
-Not open yet: 40 nodes that wait for stage 1, 194 nodes that wait for a statement dependency.
+Not open yet: 40 nodes that wait for stage 1, 189 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
