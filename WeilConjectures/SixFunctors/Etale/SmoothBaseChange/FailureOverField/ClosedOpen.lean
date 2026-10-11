@@ -361,4 +361,103 @@ lemma Etale.isIso_singleLowerStarComparison_of_isFinite {T' T₁ : Scheme.{u}} (
 
 end Comparison
 
+section TransitionFormula
+
+/-- The composition isomorphism `Ra_* ⋙ Rh_* ≅ Rh'_*` of derived pushforwards along a
+commutative triangle `a ≫ h = h'`. -/
+noncomputable def Etale.lowerStarPlusCompIso {X Y Y' : Scheme.{u}} (a : Y' ⟶ Y) (h : Y ⟶ X)
+    (h' : Y' ⟶ X) (w : a ≫ h = h') :
+    R+((a)_*[ModuleCat.{u + 1} Λ]) ⋙ R+((h)_*[ModuleCat.{u + 1} Λ]) ≅
+      R+((h')_*[ModuleCat.{u + 1} Λ]) :=
+  Functor.rightDerivedFunctorPlusCompIso' ((a)_*[ModuleCat.{u + 1} Λ])
+    ((h)_*[ModuleCat.{u + 1} Λ]) (Etale.lowerStarComp _ a h h' w.symm)
+
+/-- The transition map `Rh_* K ⟶ Rh'_*(a^* K)` followed by `Rh'_*` of a morphism
+`ψ : a^* K ⟶ L` is `Rh_*` of the adjoint `K ⟶ Ra_* L` of `ψ`, followed by the composition
+isomorphism `Rh_* Ra_* ≅ Rh'_*`. -/
+lemma Etale.lowerStarPlusTransition_comp_map {X Y Y' : Scheme.{u}} (a : Y' ⟶ Y) (h : Y ⟶ X)
+    (h' : Y' ⟶ X) (w : a ≫ h = h')
+    (K : DerivedCategory.Plus (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
+    (L : DerivedCategory.Plus (Sheaf Y'.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
+    (ψ : D+((a)^*[ModuleCat.{u + 1} Λ]).obj K ⟶ L) :
+    Etale.lowerStarPlusTransition Λ a h h' w K ≫ R+((h')_*[ModuleCat.{u + 1} Λ]).map ψ =
+      R+((h)_*[ModuleCat.{u + 1} Λ]).map
+          ((Etale.derivedUpperStarLowerStarAdjunctionPlus _ a).unit.app K ≫
+            R+((a)_*[ModuleCat.{u + 1} Λ]).map ψ) ≫
+        (Etale.lowerStarPlusCompIso Λ a h h' w).hom.app L := by
+  subst w
+  rw [Etale.lowerStarPlusTransition_eq_unit, Functor.map_comp, Category.assoc, Category.assoc]
+  exact congrArg (R+((h)_*[ModuleCat.{u + 1} Λ]).map
+    ((Etale.derivedUpperStarLowerStarAdjunctionPlus _ a).unit.app K) ≫ ·)
+    ((Etale.lowerStarPlusCompIso Λ a h (a ≫ h) rfl).hom.naturality ψ).symm
+
+/-- The composite `a^* e^* ≅ (a ≫ e)^* = (e' ≫ k)^* ≅ e'^* k^*` does not depend on the morphism
+through which the two composition isomorphisms are taken. -/
+lemma Etale.upperStarCompDerivedPlus_inv_app_comp_hom_app_congr {Y' Y T T' : Scheme.{u}}
+    (a : Y' ⟶ Y) (e : Y ⟶ T) (e' : Y' ⟶ T') (k : T' ⟶ T) (φ₁ φ₂ : Y' ⟶ T)
+    (h₁ : φ₁ = a ≫ e) (h₁' : φ₁ = e' ≫ k) (h₂ : φ₂ = a ≫ e) (h₂' : φ₂ = e' ≫ k)
+    (K : DerivedCategory.Plus (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
+    (Etale.upperStarCompDerivedPlus (ModuleCat.{u + 1} Λ) a e φ₁ h₁).inv.app K ≫
+        (Etale.upperStarCompDerivedPlus (ModuleCat.{u + 1} Λ) e' k φ₁ h₁').hom.app K =
+      (Etale.upperStarCompDerivedPlus (ModuleCat.{u + 1} Λ) a e φ₂ h₂).inv.app K ≫
+        (Etale.upperStarCompDerivedPlus (ModuleCat.{u + 1} Λ) e' k φ₂ h₂').hom.app K := by
+  subst h₁ h₂
+  rfl
+
+/-- The pullback comparison of the square `e' ≫ k = a ≫ e`, written with the composition
+isomorphisms through `a ≫ e`. -/
+lemma Etale.pullbackSquareComparison_hom_app_eq {T Y T' Y' : Scheme.{u}} (e : Y ⟶ T)
+    (k : T' ⟶ T) (a : Y' ⟶ Y) (e' : Y' ⟶ T') (wa : a ≫ e = e' ≫ k)
+    (K : DerivedCategory.Plus (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
+    (sqk : CommSq e' a k e) :
+    (Etale.pullbackSquareComparison (ModuleCat.{u + 1} Λ) sqk).hom.app K =
+      (Etale.upperStarCompDerivedPlus (ModuleCat.{u + 1} Λ) a e (a ≫ e) rfl).inv.app K ≫
+        (Etale.upperStarCompDerivedPlus (ModuleCat.{u + 1} Λ) e' k (a ≫ e) wa).hom.app K := by
+  rw [Etale.pullbackSquareComparison_eq, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app]
+  exact Etale.upperStarCompDerivedPlus_inv_app_comp_hom_app_congr Λ a e e' k _ _ _ _ _ _ K
+
+omit [CommRing Λ] in
+/-- An abstract form of the last step of
+`AlgebraicGeometry.Etale.targetTransitionPlus_comp_map`, stated for abstract functors so that
+its instance at the concrete derived functors is checked syntactically. -/
+lemma unit_comp_map_comp_map_eq_of_naturality {𝒞₁ 𝒞₂ 𝒟₁ 𝒟₂ : Type*} [Category* 𝒞₁]
+    [Category* 𝒞₂] [Category* 𝒟₁] [Category* 𝒟₂] (E : 𝒟₁ ⥤ 𝒟₂) (Rk : 𝒞₁ ⥤ 𝒟₁)
+    (Ra : 𝒞₂ ⥤ 𝒟₂) (E' : 𝒞₁ ⥤ 𝒞₂) (β : Rk ⋙ E ⟶ E' ⋙ Ra) {K₀ : 𝒟₁} {M L : 𝒞₁}
+    {P : 𝒞₂} (u : K₀ ⟶ Rk.obj M) (ψ : M ⟶ L) (ua : E.obj K₀ ⟶ Ra.obj P) (c : P ⟶ E'.obj M)
+    (hu : E.map u ≫ β.app M = ua ≫ Ra.map c) :
+    ua ≫ Ra.map c ≫ Ra.map (E'.map ψ) = E.map u ≫ E.map (Rk.map ψ) ≫ β.app L := by
+  have hn := β.naturality ψ
+  simp only [Functor.comp_map] at hn
+  rw [hn, reassoc_of% hu]
+
+/-- The transition map of the targets of the derived base-change maps along `k : T' ⟶ T`,
+followed by `Rh'_* e'^*` of a morphism `ψ : k^* K ⟶ L`, is `Rh_*` of `e^*` of the adjoint
+`K ⟶ Rk_* L` of `ψ` followed by the derived base-change map of the square `e' ≫ k = a ≫ e`,
+followed by the composition isomorphism `Rh_* Ra_* ≅ Rh'_*`. -/
+lemma Etale.targetTransitionPlus_comp_map {X T Y T' Y' : Scheme.{u}} (e : Y ⟶ T) (h : Y ⟶ X)
+    (k : T' ⟶ T) (a : Y' ⟶ Y) (e' : Y' ⟶ T') (h' : Y' ⟶ X) (wa : a ≫ e = e' ≫ k)
+    (wh : a ≫ h = h') (sqk : CommSq e' a k e)
+    (K : DerivedCategory.Plus (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
+    (L : DerivedCategory.Plus (Sheaf T'.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
+    (ψ : D+((k)^*[ModuleCat.{u + 1} Λ]).obj K ⟶ L) :
+    Etale.targetTransitionPlus Λ e h k a e' h' wa wh K ≫
+        R+((h')_*[ModuleCat.{u + 1} Λ]).map (D+((e')^*[ModuleCat.{u + 1} Λ]).map ψ) =
+      R+((h)_*[ModuleCat.{u + 1} Λ]).map
+          (D+((e)^*[ModuleCat.{u + 1} Λ]).map
+              ((Etale.derivedUpperStarLowerStarAdjunctionPlus _ k).unit.app K) ≫
+            D+((e)^*[ModuleCat.{u + 1} Λ]).map (R+((k)_*[ModuleCat.{u + 1} Λ]).map ψ) ≫
+            (Etale.baseChange (ModuleCat.{u + 1} Λ) sqk).app L) ≫
+        (Etale.lowerStarPlusCompIso Λ a h h' wh).hom.app (D+((e')^*[ModuleCat.{u + 1} Λ]).obj L) := by
+  have hpsc := Etale.pullbackSquareComparison_hom_app_eq Λ e k a e' wa K sqk
+  have hu := Etale.upperStar_map_unit_comp_baseChange_app Λ sqk K
+  rw [Etale.targetTransitionPlus, Category.assoc, ← Functor.map_comp, ← hpsc,
+    Etale.lowerStarPlusTransition_comp_map]
+  congr 2
+  rw [Functor.map_comp]
+  exact unit_comp_map_comp_map_eq_of_naturality D+((e)^*[ModuleCat.{u + 1} Λ])
+    R+((k)_*[ModuleCat.{u + 1} Λ]) R+((a)_*[ModuleCat.{u + 1} Λ]) D+((e')^*[ModuleCat.{u + 1} Λ])
+    (Etale.baseChange (ModuleCat.{u + 1} Λ) sqk) _ ψ _ _ hu
+
+end TransitionFormula
+
 end AlgebraicGeometry
