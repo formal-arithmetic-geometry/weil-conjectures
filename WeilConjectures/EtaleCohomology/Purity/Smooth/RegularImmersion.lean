@@ -354,8 +354,42 @@ theorem nonempty_iso_dualizingComplex_of_isRegularImmersion [Finite Λ] [HasTate
     [SmoothOfRelativeDimension m (i ≫ aX)] [HasCompactification (i ≫ aX)]
     [HasInvertibleExponent Λ X] [HasInvertibleExponent Λ Z] :
     Nonempty (dualizingComplex (ModuleCat.{u + 1} Λ) i ≅
-      (twistShift Λ Z (-c : ℤ)).obj (constantComplex Λ Z)) :=
-  sorry
+      (twistShift Λ Z (-c : ℤ)).obj (constantComplex Λ Z)) := by
+  -- Step 1: `ω_Z ≅ Ri^! ω_X`, `ω_X ≅ Λ_X(n)[2n]` and `ω_Z ≅ Λ_Z(m)[2m]`.
+  obtain ⟨eComp⟩ := nonempty_iso_rightDerivedUpperShriek_comp Λ i aX
+  obtain ⟨θX⟩ := nonempty_iso_dualizingComplex_twistShift Λ (d := n) aX (𝟙 (Spec (.of k)))
+  obtain ⟨θZ⟩ := nonempty_iso_dualizingComplex_twistShift Λ (d := m) (i ≫ aX) (𝟙 (Spec (.of k)))
+  -- Step 2: the co-projection with `K = Λ_X(0)` and the invertible `L = Λ_X(n)[2n]`.
+  obtain ⟨cop⟩ := nonempty_iso_rightDerivedUpperShriek_derivedTensor_of_isInvertible Λ i
+    (tateObject Λ X 0) ((tateObject Λ X n)⟦2 * (n : ℤ)⟧)
+    (boundedConstructibleFiniteTor_tateObject Λ X 0)
+    ((boundedConstructibleFiniteTor_tateObject Λ X n).shift _)
+    ((isInvertible_tateObject Λ X n).shift _)
+  let T : ℤ → _root_.DerivedCategory (Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :=
+    fun a ↦ (tateObject Λ Z a)⟦2 * a⟧
+  let R := (R(i)^![ModuleCat.{u + 1} Λ]).obj (constantComplex Λ X)
+  let tens := derivedTensor (ModuleCat.{u + 1} Λ) Z
+  -- `Ri^! Λ_X ⊗ Λ_Z(n)[2n] ≅ Λ_Z(m)[2m]`
+  let E : (tens.obj R).obj (T n) ≅ T m :=
+    ((tens.mapIso ((R(i)^![ModuleCat.{u + 1} Λ]).mapIso
+        (HasTateTwist.twistObjectZeroIso (Λ := Λ) X).symm)).app _ ≪≫
+      (tens.obj _).mapIso (leftDerivedUpperStarTateShiftIso Λ i n).symm ≪≫ cop.symm ≪≫
+      (R(i)^![ModuleCat.{u + 1} Λ]).mapIso
+        (((derivedTensor (ModuleCat.{u + 1} Λ) X).mapIso
+          (HasTateTwist.twistObjectZeroIso (Λ := Λ) X)).app _ ≪≫
+          derivedTensorLeftUnitor _ X _ ≪≫ (twistShiftConstantComplexIso Λ X n).symm ≪≫
+          θX.symm) ≪≫
+      (eComp.app _).symm ≪≫ θZ ≪≫ twistShiftConstantComplexIso Λ Z m)
+  -- cancel the invertible `Λ_Z(n)[2n]`
+  have hmn : (m : ℤ) + -(n : ℤ) = -(c : ℤ) := by lia
+  have h0 : (n : ℤ) + -(n : ℤ) = 0 := by lia
+  exact ⟨(derivedTensorRightUnitor _ Z R).symm ≪≫
+    (tens.obj R).mapIso ((HasTateTwist.twistObjectZeroIso (Λ := Λ) Z).symm ≪≫
+      (shiftFunctorZero' _ (2 * ((n : ℤ) + -(n : ℤ))) (by lia)).symm.app _ ≪≫
+      eqToIso (by rw [h0]; rfl) ≪≫ (shiftTateObjectAddIso Λ Z n (-(n : ℤ))).symm) ≪≫
+    (derivedTensorAssociator _ Z _ _ _).symm ≪≫ (tens.mapIso E).app _ ≪≫
+    shiftTateObjectAddIso Λ Z m (-(n : ℤ)) ≪≫ eqToIso (by rw [hmn]) ≪≫
+    (twistShiftConstantComplexIso Λ Z _).symm⟩
 
 end Etale
 
