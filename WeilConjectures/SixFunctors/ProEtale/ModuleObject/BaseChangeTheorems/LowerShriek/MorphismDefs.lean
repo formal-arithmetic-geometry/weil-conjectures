@@ -30,7 +30,8 @@ objects over `Λ_X = p_X^* Λ`, the compact-support base-change morphism
 
 where `c' = c.baseChange sq` is the base-changed compactification of `f'` and
 `Rf_!^c := i_! ⋙ Rp_*` is the lower shriek attached to `c`
-(`ProEtale.CondensedRing.boundedConstructibleLowerShriekOfCompactification`), exactly as
+(`ProEtale.CondensedRing.boundedConstructibleLowerShriekOfCompactification`, of
+`WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible`), exactly as
 the étale `Etale.lowerShriekBaseChange`. It is assembled from two exchange morphisms:
 
 - the *direct-image exchange* `Ex_* : Rp_* ⋙ Lg^* ⟶ Lḡ^* ⋙ Rp'_*` for the proper square of the
@@ -57,8 +58,6 @@ finite type over a field `k` of characteristic `p > 0` with `p ≠ ℓ`, and all
   base change for extension by zero, for a cartesian square;
   `ProEtale.CondensedRing.boundedConstructibleOpenImmersionLowerShriekBaseChangeIso` is the
   inverse isomorphism `j_! ⋙ Lg^* ≅ Lg'^* ⋙ j'_!`.
-- `ProEtale.CondensedRing.boundedConstructibleLowerShriekOfCompactification`: the lower
-  shriek `Rf_!^c = i_! ⋙ Rp_*` on `Dᵇc(-)⟦Λ⟧` attached to a compactification `c`.
 - `ProEtale.CondensedRing.boundedConstructibleLowerShriekBaseChange`: the compact-support
   base-change morphism `Ex_!^c`.
 
@@ -194,28 +193,6 @@ noncomputable def boundedConstructibleOpenImmersionLowerShriekBaseChangeIso
   (asIso (boundedConstructibleOpenImmersionLowerShriekBaseChange Λ ℓ k sq.toCommSq)).symm
 
 end OpenImmersion
-
-/-! ### The lower shriek attached to a compactification -/
-
-section Compactification
-
-variable {X Y : Scheme.{u}} [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))]
-  [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))]
-  [IsSeparated (X ↘ Spec (.of k))]
-  [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))]
-  [IsSeparated (Y ↘ Spec (.of k))]
-  {f : X ⟶ Y} [f.IsOver (Spec (.of k))] (c : Compactification f)
-
-/-- The lower shriek `Rf_!^c = i_! ⋙ Rp_* : Dᵇc(X)⟦Λ⟧ ⥤ Dᵇc(Y)⟦Λ⟧` on bounded constructible
-complexes attached to a compactification `c = (X ⟶[i] Z ⟶[p] Y)` of `f`: the extension by zero
-along the open immersion `i` followed by the derived pushforward along the proper morphism `p`,
-both restricted to bounded constructible complexes. It is the bounded constructible incarnation
-of `Rf_!(c)⟦Λ⟧` of
-`WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.LowerShriek`. -/
-noncomputable def boundedConstructibleLowerShriekOfCompactification : Dᵇc(X)⟦Λ⟧ ⥤ Dᵇc(Y)⟦Λ⟧ :=
-  boundedConstructibleOpenImmersionLowerShriek Λ ℓ k c.i ⋙ boundedConstructibleLowerStar Λ ℓ k c.g
-
-end Compactification
 
 /-! ### The compact-support base-change morphism -/
 
