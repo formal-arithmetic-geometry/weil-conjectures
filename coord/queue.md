@@ -1,11 +1,11 @@
 # Work queue
 
-934 items; claim with `tools/claim.py next <group> [--stage N]`.
+932 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (934)
+## Stage 2: nodes to state (932)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -24,7 +24,6 @@
 | `lem-pc-module-pullback-identity-composition` | 1 | state |
 | `lem-pc-pre-derived-adjoint-functors-general` | 1 | state |
 | `lem-pc-very-ample-disjoint-union` | 1 | state |
-| `lem-pur-derived-change-of-rings` | 1 | state |
 | `lem-sc-base-change-curve` | 1 | state |
 | `lem-sc-etale-faithfully-flat-local` | 1 | state |
 | `lem-sc-finite-free-internal-hom-exact` | 1 | state |
@@ -46,7 +45,6 @@
 | `lem-sc-semilocal-dim-one-conductor` | 1 | state |
 | `lem-sc-semilocal-dim-one-normalization` | 1 | state |
 | `lem-sc-smooth-proper-diagonal-conormal-differentials` | 1 | state |
-| `lem-sc-standard-smooth-affine-diagonal-generators` | 1 | state |
 | `lem-sc-strict-henselization-completion-flat-over-base` | 1 | state |
 | `lem-sc-strict-henselization-dimension` | 1 | state |
 | `lem-sc-strict-henselization-regular` | 1 | state |
