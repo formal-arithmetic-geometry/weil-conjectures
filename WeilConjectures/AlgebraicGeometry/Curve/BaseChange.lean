@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.AlgebraicGeometry.Curve.Estimate
+public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.GeometricFiber
 public import WeilConjectures.AlgebraicGeometry.GeometricallyConnected
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.CohomologyMap
 public import WeilConjectures.AlgebraicGeometry.Curve.RiemannRoch
@@ -74,33 +75,6 @@ theorem Scheme.Hom.baseChangeField_isCurve [SmoothOfRelativeDimension 1 f] [IsSe
   have : IsAffineHom f := isAffineHom_of_isAffine f
   exact isAffine_of_isAffineHom (f.baseChangeField k')
 
-/-- A nonempty scheme locally of finite type over an algebraically closed field `k` has a
-`k`-rational point: the residue field of a closed point is `k`. -/
-lemma Scheme.exists_comp_eq_id_of_isAlgClosed [IsAlgClosed k] [LocallyOfFiniteType f]
-    [Nonempty C] : ∃ s : Spec (.of k) ⟶ C, s ≫ f = 𝟙 _ := by
-  have : IsLocallyNoetherian C := LocallyOfFiniteType.isLocallyNoetherian f
-  have : JacobsonSpace C := LocallyOfFiniteType.jacobsonSpace f
-  obtain ⟨x, hx⟩ : (closedPoints C).Nonempty := by
-    by_contra h
-    rw [Set.not_nonempty_iff_eq_empty] at h
-    have := closure_closedPoints (X := C)
-    rw [h, closure_empty] at this
-    exact Set.empty_ne_univ this
-  have hx' : IsClosed ({x} : Set C) := hx
-  let := (f.residueFieldAlgebraMap x).toAlgebra
-  have := isClosed_singleton_iff_isClosedImmersion.mp hx'
-  have := (isFinite_iff_locallyOfFiniteType_of_jacobsonSpace
-    (f := C.fromSpecResidueField x ≫ f)).mpr inferInstance
-  rw [← f.specMap_residueFieldAlgebraMap, IsFinite.SpecMap_iff] at this
-  have : Module.Finite k (C.residueField x) := this
-  let φ := RingEquiv.ofBijective (algebraMap k (C.residueField x))
-    (IsAlgClosed.algebraMap_bijective_of_isIntegral (k := k))
-  refine ⟨Spec.map (CommRingCat.ofHom φ.symm.toRingHom) ≫ C.fromSpecResidueField x, ?_⟩
-  rw [Category.assoc, ← f.specMap_residueFieldAlgebraMap, ← Spec.map_comp, ← Spec.map_id]
-  congr 1
-  ext a
-  exact φ.symm_apply_apply a
-
 /-- **Base change of a proper connected curve.** Over an algebraically closed field `k`, the
 base change of a smooth proper connected curve to a field extension `k'` is a smooth proper
 connected curve over `k'`: the curve has a rational point, so it is geometrically connected.
@@ -110,7 +84,7 @@ theorem IsConnectedCurve.baseChangeField [IsAlgClosed k] [IsConnectedCurve f] [S
   have := IsConnectedCurve.connectedSpace' f
   have : SmoothOfRelativeDimension 1 f := IsConnectedCurve.smoothOfRelativeDimension_one f
   obtain ⟨hs, hc, -, -⟩ := f.baseChangeField_isCurve k'
-  obtain ⟨s, hs'⟩ := Scheme.exists_comp_eq_id_of_isAlgClosed f
+  obtain ⟨s, hs'⟩ := f.exists_comp_eq_id_of_isAlgClosed
   have := GeometricallyConnected.of_universallyClosed_of_section f s hs'
   have hconn : ConnectedSpace ↥(pullback f (Spec.map (CommRingCat.ofHom (algebraMap k k')))) :=
     GeometricallyConnected.connectedSpace_of_subsingleton (f := f.baseChangeField k')
@@ -124,7 +98,8 @@ theorem IsConnectedCurve.baseChangeField [IsAlgClosed k] [IsConnectedCurve f] [S
 /-- **The genus is invariant under base change.** For a smooth proper curve `C` over `k` and a
 field extension `k'`, `g(C_{k'}) = g(C)`: both genera are arithmetic genera
 (`AlgebraicGeometry.Scheme.genus_eq_arithmeticGenus`), and `H¹(C_{k'}, 𝒪) = H¹(C, 𝒪) ⊗_k k'`.
-(blueprint: `lem-sc-genus-invariant`) -/
+This is the genus part of blueprint `lem-sc-genus-invariant`; its compatibility of the Jacobian
+with base change, `J_{C_{k'}} ≅ (J_C)_{k'}`, is not formalised here. -/
 theorem Scheme.Hom.genus_baseChangeField [SmoothOfRelativeDimension 1 f] [IsProper f] :
     (f.baseChangeField k').genus = f.genus := by
   let : C.Over (Spec (.of k)) := ⟨f⟩

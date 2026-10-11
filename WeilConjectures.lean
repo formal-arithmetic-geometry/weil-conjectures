@@ -377,6 +377,7 @@ public import WeilConjectures.AlgebraicGeometry.Sites.EtaleTopologicalInvariance
 public import WeilConjectures.AlgebraicGeometry.Sites.EtaleTopologicalInvariance.Reduction
 public import WeilConjectures.AlgebraicGeometry.Sites.EtaleTopologicalInvariance.Section
 public import WeilConjectures.AlgebraicGeometry.Sites.EtaleTorsion
+public import WeilConjectures.AlgebraicGeometry.Sites.FieldExtensionInjective
 public import WeilConjectures.AlgebraicGeometry.Sites.FieldTrace
 public import WeilConjectures.AlgebraicGeometry.Sites.FiniteSupport
 public import WeilConjectures.AlgebraicGeometry.Sites.GaloisCech
