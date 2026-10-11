@@ -162,5 +162,23 @@
   "group": "C1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ft2 (reviewer sub-agent of L); spot-checked: Repaired re-push after the 16:27 return. Return points checked: 1 (false 0BRA node deleted, Step 1 cites lem-pc-homeo-pure-insep as a declared generic tool, accepted C8; minimal-prime bijection stated) repaired; 2 (duplicate Jacobson and Nullstellensatz nodes deleted, existing leaves lem-weil-pbc-finite-type-over-field-prime-intersection-maximal and lem-weil-pbc-closed-point-residue-field-base cited, statements read) repaired; 4 (finite-type-limit now states 00I3 (1),(2) exactly, checked against algebra.tex label lemma-limit-argument) repaired; 5 (a)-(d) repaired, f.p. via the existing leaf lem-weil-pbc-finite-type-noetherian-finite-presentation; 3 only partly repaired: the grep searches of the item, flat-fibres and perfect-reduced nodes still named /home/ubuntu/weil-src-slopmaster2 (the report says the path was removed). Sources: Stacks 00I7 (lemma-separably-closed-irreducible), 00I6 (lemma-flat-fibres-irreducible, statement agrees hypothesis by hypothesis (a)-(d)), 00I4 (lemma-perfect-reduced, second clause), 00I3; item statement (unique minimal prime of K tensor_k L for fields over separably closed k, hence irreducible and connected) is a special case of 00I7. FIX more, RETURN less: (i) all four nodes: mathlib_searches: I reran the three recorded greps on the pinned Mathlib (no output) and recorded the pinned path and result; (ii) B3: lem-weil-pbc-flat-fibres-irreducible: statement put in TeX and cites def-weil-pbc-flat-ring-map, def-weil-pbc-finitely-presented-algebra, def-weil-pbc-localization-at-prime (stmt_deps updated); lem-weil-pbc-perfect-reduced-tensor and lem-weil-pbc-tensor-finite-type-limit: TeX, perfect/reduced/finitely generated defined inline (no definition nodes exist); (iii) item proof: Step 1 now proves the perfect closure of a separably closed field is algebraically closed (two lines from def-kun-separably-closed, as Stacks says 'by assumption'); Step 2 says why passing to reductions keeps the spectrum (nil kernel); Step 4 writes the base-changed presentation and the fibre identification; Step 5 spells out reduced + irreducible => domain, then 00I3(2) via Step 3, then back by Steps 2 and 1; uses/proof_deps updated (adds def-kun-separably-closed, def-weil-pbc-flat-ring-map, def-weil-irreducible-components, def-weil-connected-scheme). Small cases: K=L=k; K=k(t), L=k(s) (tensor a localization of k[t,s], a domain); k=F_p^sep, K=k(t^{1/p}) over k(t)-type inseparable cases where K tensor L is non-reduced but has one minimal prime. Start Sat Oct 10 04:45:34 PM UTC 2026, end Sat Oct 10 04:47:28 PM UTC 2026.; 4 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.FieldTheory.FieldTensorUniqueMinimalPrime",
+  "declaration": "IsSepClosed.field_tensor_unique_minimalPrime",
+  "file": "lean/Sheaf/FieldTheory/FieldTensorUniqueMinimalPrime.lean",
+  "statement": "theorem field_tensor_unique_minimalPrime (k : Type u) [Field k] [IsSepClosed k] (K : Type v) [Field K] [Algebra k K] (L : Type w) [Field L] [Algebra k L] : (∃! p : Ideal (K ⊗[k] L), p ∈ minimalPrimes (K ⊗[k] L)) ∧ IrreducibleSpace (Spec (CommRingCat.of (K ⊗[k] L))) ∧ ConnectedSpace (Spec (CommRingCat.of (K ⊗[k] L)))",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-fti1012",
+  "group": "G1",
+  "result": "pass",
+  "note": "k Field+IsSepClosed; K,L Field+Algebra k (def-pc-field-extension), independent universes; K ⊗[k] L Algebra.TensorProduct; ∃! p ∈ minimalPrimes (existence+uniqueness); IrreducibleSpace/ConnectedSpace of AlgebraicGeometry.Spec (CommRingCat.of _) (#check resolved, carrier = PrimeSpectrum); no added hypotheses; no upstream Mathlib/WeilConjectures lemma states 00I7 for fields (only idempotent version), so existing:false correct; docstring 5 steps match node proof"
  }
 }

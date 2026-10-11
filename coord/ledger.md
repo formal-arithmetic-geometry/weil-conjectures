@@ -4171,3 +4171,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 10:10 L: merged deliver/F1/lem-weil-pbc-filtered-colimit-algebras-underlying-module (stage 2; reviewer FIX; first push; Sheaf.RingTheory.FilteredColimitAlgebrasUnderlyingModule CommAlgCat.filtered_colimit_algebras_underlying_module)
 - 10:10 L: merged deliver/J1/lem-weil-pbc-etale-fibre-specialization-bound (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.EtaleFibreSpecialization AlgebraicGeometry.etale_geometricFiber_card_le_of_specializes)
 - 10:10 L: merged deliver/H1/lem-weil-pbc-field-point-factors-through-immersion (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.FieldPointFactorsThroughImmersion AlgebraicGeometry.fieldPoint_factorsThrough_immersion)
+- 10:11 L: merged deliver/G1/lem-weil-pbc-field-tensor-irreducible (stage 2; reviewer PASS; first push; Sheaf.FieldTheory.FieldTensorUniqueMinimalPrime IsSepClosed.field_tensor_unique_minimalPrime)
