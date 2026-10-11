@@ -1,11 +1,11 @@
 # Work queue
 
-846 items; claim with `tools/claim.py next <group> [--stage N]`.
+841 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (846)
+## Stage 2: nodes to state (841)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -39,7 +39,6 @@
 | `lem-sc-rational-tangent-cotangent-duality` | 1 | state |
 | `lem-sc-rational-unramified-cotangent-criterion` | 1 | state |
 | `lem-sc-separated-affine-function-field-surjective` | 1 | state |
-| `lem-sc-smooth-connected-curve-local-rings` | 1 | state |
 | `lem-sc-smooth-diagonal-regular-immersion` | 1 | state |
 | `lem-sc-standard-smooth-local-relative-dimension` | 1 | state |
 | `lem-sc-vector-bundle-line-subbundle` | 1 | state |
@@ -53,7 +52,6 @@
 | `lem-weil-pbc-colimit-flat-ring-map` | 1 | state |
 | `lem-weil-pbc-colimit-surjective-ring-map` | 1 | state |
 | `lem-weil-pbc-complete-local-domain-finite-over-regular` | 1 | state |
-| `lem-weil-pbc-complete-local-map-regular-presentation` | 1 | state |
 | `lem-weil-pbc-completion-at-quasi-finite-prime` | 1 | state |
 | `lem-weil-pbc-complex-spectral-sequence-comparison` | 1 | state |
 | `lem-weil-pbc-constant-group-scheme-multiplication` | 1 | state |
@@ -61,10 +59,7 @@
 | `lem-weil-pbc-constant-sheaf-sections-locally-constant` | 1 | state |
 | `lem-weil-pbc-constant-sheaf-set-sections-connected-natural` | 1 | state |
 | `lem-weil-pbc-constant-subsheaf-generic` | 1 | state |
-| `lem-weil-pbc-constructible-field-finite-separable-constant` | 1 | state |
-| `lem-weil-pbc-constructible-generation` | 1 | state |
 | `lem-weil-pbc-constructible-intersection-in-constructible` | 1 | state |
-| `lem-weil-pbc-constructible-is-retrocompact` | 1 | state |
 | `lem-weil-pbc-constructible-module-finite-presentation` | 1 | state |
 | `lem-weil-pbc-constructible-module-finite-pushforward-embedding` | 1 | state |
 | `lem-weil-pbc-constructible-module-finite-stalks` | 1 | state |
