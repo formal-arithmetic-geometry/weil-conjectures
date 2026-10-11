@@ -13,23 +13,72 @@
  },
  "kind": "statement",
  "title": "Right derived functors identify triangles of termwise split K-injective sequences",
- "statement": "Let A and B be abelian categories [def-sp-abelian] with unbounded derived categories [def-weil-abstract-derived-category] and K-injective resolutions [def-pur-kinjective-complex], and let F:A\\to B be an additive functor [def-sp-left-exact-additive] with unbounded right derived functor RF constructed from K-injectives [def-pc-derived-direct-image]. Let 0\\to I_1\\to I_2\\to I_3\\to0 be a degreewise short exact sequence of cochain complexes [def-pc-cochain-complex-modules] in A which is split in every degree, with each I_i K-injective. Then the distinguished triangle in D(A) attached to this sequence by its canonical connecting morphism [lem-weil-pbc-complex-ses-triangle] is carried by RF to a distinguished triangle canonically isomorphic, through the maps induced on the represented complexes, to the triangle attached in D(B) to the degreewise short exact sequence 0\\to F(I_1)\\to F(I_2)\\to F(I_3)\\to0; in particular RF carries the connecting morphism of the first sequence to the connecting morphism of the image sequence under these identifications.",
+ "statement": "Let $g:(X,\\mathcal O_X)\\to(Y,\\mathcal B)$ be a morphism of ringed spaces with derived direct image $Rg_*:D(\\mathcal O_X)\\to D(\\mathcal B)$ and direct image of modules $g_*$, applied termwise to complexes [def-pc-ringed-spaces-derived-direct-image], and let $Q$ denote the localization functors [def-weil-abstract-derived-category]. Let $0\\to\\mathcal I_1^\\bullet\\xrightarrow{i}\\mathcal I_2^\\bullet\\xrightarrow{p}\\mathcal I_3^\\bullet\\to0$ be a degreewise short exact sequence of cochain complexes of $\\mathcal O_X$-modules [def-pc-cochain-complex-modules] which is split in every degree, with each $\\mathcal I_k^\\bullet$ K-injective [def-pur-kinjective-complex], and let $\\delta:\\mathcal I_3^\\bullet\\to\\mathcal I_1^\\bullet[1]$ be its connecting morphism in $D(\\mathcal O_X)$ [lem-weil-pbc-complex-ses-triangle]. For a K-injective complex $\\mathcal K^\\bullet$ of $\\mathcal O_X$-modules let $\\varphi_{\\mathcal K}:Rg_*(Q\\mathcal K^\\bullet)\\xrightarrow{\\sim}Q(g_*\\mathcal K^\\bullet)$ be the identification of [def-pc-ringed-spaces-derived-direct-image] given by the K-injective resolution $\\mathrm{id}_{\\mathcal K}$. Then $0\\to g_*\\mathcal I_1^\\bullet\\to g_*\\mathcal I_2^\\bullet\\to g_*\\mathcal I_3^\\bullet\\to0$ is a degreewise split short exact sequence of complexes of $\\mathcal B$-modules; $\\mathcal I_1^\\bullet[1]$ is K-injective and $g_*(\\mathcal I_1^\\bullet[1])=(g_*\\mathcal I_1^\\bullet)[1]$; and, writing $\\delta'$ for the connecting morphism of the image sequence [lem-weil-pbc-complex-ses-triangle], $\\varphi_{\\mathcal I_2}\\circ Rg_*(Qi)=Q(g_*i)\\circ\\varphi_{\\mathcal I_1}$, $\\varphi_{\\mathcal I_3}\\circ Rg_*(Qp)=Q(g_*p)\\circ\\varphi_{\\mathcal I_2}$ and $\\varphi_{\\mathcal I_1[1]}\\circ Rg_*(\\delta)=\\delta'\\circ\\varphi_{\\mathcal I_3}$. Consequently the triangle $Rg_*\\mathcal I_1^\\bullet\\to Rg_*\\mathcal I_2^\\bullet\\to Rg_*\\mathcal I_3^\\bullet\\to(Rg_*\\mathcal I_1^\\bullet)[1]$ with maps $Rg_*(Qi)$, $Rg_*(Qp)$ and $\\varphi_{\\mathcal I_1}[1]^{-1}\\circ\\varphi_{\\mathcal I_1[1]}\\circ Rg_*(\\delta)$ is isomorphic through $(\\varphi_{\\mathcal I_1},\\varphi_{\\mathcal I_2},\\varphi_{\\mathcal I_3})$ to the distinguished triangle of the image sequence, hence is distinguished [def-weil-triangulated-category]; in particular $Rg_*$ carries the connecting morphism of the first sequence to that of the image sequence under these identifications.",
  "source": {
   "document": "literature/stacks-project/derived.tex",
   "place": "Lemma 0152 (canonical delta-functor) together with the K-injective construction of right derived functors"
  },
  "stmt_deps": [
-  "def-sp-abelian",
+  "def-pc-ringed-spaces-derived-direct-image",
   "def-weil-abstract-derived-category",
-  "def-pur-kinjective-complex",
-  "def-sp-left-exact-additive",
-  "def-pc-derived-direct-image",
   "def-pc-cochain-complex-modules",
-  "lem-weil-pbc-complex-ses-triangle"
+  "def-pur-kinjective-complex",
+  "lem-weil-pbc-complex-ses-triangle",
+  "def-weil-triangulated-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose degreewise retractions $\\pi^n:\\mathcal I_2^n\\to\\mathcal I_1^n$ and sections $s^n:\\mathcal I_3^n\\to\\mathcal I_2^n$ with $\\pi^n i^n=\\mathrm{id}$, $p^n s^n=\\mathrm{id}$, $i^n\\pi^n+s^n p^n=\\mathrm{id}$. Since $g_*$ is additive [def-pc-ringed-spaces-derived-direct-image], applying it to these identities shows that $0\\to g_*\\mathcal I_1^\\bullet\\to g_*\\mathcal I_2^\\bullet\\to g_*\\mathcal I_3^\\bullet\\to0$ is degreewise split short exact with retractions $g_*\\pi^n$ and sections $g_*s^n$; and $g_*(-d)=-g_*(d)$ gives $g_*(\\mathcal I_1^\\bullet[1])=(g_*\\mathcal I_1^\\bullet)[1]$ (elementary). By [lem-weil-pbc-degreewise-split-connecting-morphism] and [lem-weil-pbc-degreewise-split-derived-triangle] the connecting morphism $\\delta$ of [lem-weil-pbc-complex-ses-triangle] is $Q$ of the chain map $\\pi^{n+1}d^n_{\\mathcal I_2}s^n$, with the sign fixed by the cone convention; applied in $\\Mod(\\mathcal B)$ to the image sequence with the splittings $g_*\\pi$, $g_*s$, the same nodes give $\\delta'=Q(g_*\\pi^{n+1}\\circ g_*d^n_{\\mathcal I_2}\\circ g_*s^n)=Q(g_*(\\pi^{n+1}d^n_{\\mathcal I_2}s^n))$, since $g_*$ preserves composition.",
+   "uses": [
+    "def-pc-ringed-spaces-derived-direct-image",
+    "lem-weil-pbc-degreewise-split-connecting-morphism",
+    "lem-weil-pbc-degreewise-split-derived-triangle",
+    "lem-weil-pbc-complex-ses-triangle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Lemma 0152, construction of the canonical delta-functor from a short exact sequence"
+   }
+  },
+  {
+   "text": "A shift of a K-injective complex is K-injective, since acyclic complexes are stable under shift and $\\operatorname{Hom}_{K}(\\mathcal N^\\bullet,\\mathcal I_1^\\bullet[1])=\\operatorname{Hom}_K(\\mathcal N^\\bullet[-1],\\mathcal I_1^\\bullet)$ [def-pur-kinjective-complex] (elementary). For a chain map $u:\\mathcal K^\\bullet\\to\\mathcal K'^\\bullet$ between K-injective complexes, the definition [def-pc-ringed-spaces-derived-direct-image] gives $Rg_*(Qu)=Q(g_*I(u))$ with the functorial K-injective resolutions $\\iota_{\\mathcal K}:\\mathcal K^\\bullet\\to I(\\mathcal K^\\bullet)$, which are homotopy equivalences between K-injective complexes and satisfy $I(u)\\iota_{\\mathcal K}=\\iota_{\\mathcal K'}u$; $g_*$ carries homotopies to homotopies, and $\\varphi_{\\mathcal K}$ is the inverse of $Q(g_*\\iota_{\\mathcal K})$. Hence $\\varphi_{\\mathcal K'}\\circ Rg_*(Qu)=Q(g_*u)\\circ\\varphi_{\\mathcal K}$. Applied to $u=i$, $u=p$ and to the chain map $\\pi d_{\\mathcal I_2}s:\\mathcal I_3^\\bullet\\to\\mathcal I_1^\\bullet[1]$ of Step 1 (whose $Q$ is $\\delta$), this gives the three asserted identities, the last because $Q(g_*(\\pi d_{\\mathcal I_2}s))=\\delta'$ by Step 1.",
+   "uses": [
+    "def-pur-kinjective-complex",
+    "def-pc-ringed-spaces-derived-direct-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "K-injective construction of right derived functors"
+   }
+  },
+  {
+   "text": "The triangle of the image sequence $g_*\\mathcal I_1^\\bullet\\to g_*\\mathcal I_2^\\bullet\\to g_*\\mathcal I_3^\\bullet\\xrightarrow{\\delta'}(g_*\\mathcal I_1^\\bullet)[1]$ is distinguished in $D(\\mathcal B)$ [lem-weil-pbc-complex-ses-triangle]. By Step 2 the isomorphisms $(\\varphi_{\\mathcal I_1},\\varphi_{\\mathcal I_2},\\varphi_{\\mathcal I_3})$ commute with the first two maps, and with the third map $\\varphi_{\\mathcal I_1}[1]^{-1}\\varphi_{\\mathcal I_1[1]}Rg_*(\\delta)$ because $\\varphi_{\\mathcal I_1}[1]\\circ(\\varphi_{\\mathcal I_1}[1]^{-1}\\varphi_{\\mathcal I_1[1]}Rg_*(\\delta))=\\varphi_{\\mathcal I_1[1]}Rg_*(\\delta)=\\delta'\\varphi_{\\mathcal I_3}$. A triangle isomorphic to a distinguished triangle is distinguished [def-weil-triangulated-category], which gives the conclusion.",
+   "uses": [
+    "lem-weil-pbc-complex-ses-triangle",
+    "def-weil-triangulated-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Lemma 0152, compatibility of the connecting morphism with additive functors"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-ringed-spaces-derived-direct-image",
+  "lem-weil-pbc-degreewise-split-connecting-morphism",
+  "lem-weil-pbc-degreewise-split-derived-triangle",
+  "lem-weil-pbc-complex-ses-triangle",
+  "def-pur-kinjective-complex",
+  "def-weil-triangulated-category"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Lemma 0152 (canonical delta-functor) together with the K-injective construction of right derived functors"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -68,12 +117,29 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pc-derived-mayer-vietoris-functorial",
   "by": "worker",
   "date": "2026-10-11"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-semicon"
+ "unit": "sk-thm-picard-semicon",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-derived-functor-termwise-split-ses-triangle",
+  "worker": "stage1",
+  "summary": "No matching project declaration exists in the Lean source, and Mathlib has no theorem identifying a right-derived functor's connecting morphism for a termwise split sequence of K-injectives. The item is split into preservation of the degreewise splitting under the additive functor, represented-complex computation and triangulated preservation by the K-injective right derived functor, and equality of connecting morphisms via the explicit splitting formula.",
+  "blueprint": "Realizes the parent blueprint proof clause 'naturality of the relative Mayer--Vietoris triangles, including the connecting map' from Tag 0DJ9 through the generic K-injective termwise-split triangle comparison.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-tst0107",
+  "group": "J1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-tst0107 (reviewer sub-agent of L); spot-checked: FIX more, RETURN less: (1) C4/B3: statement cited [def-pc-derived-direct-image] (schemes) while stmt_deps listed def-pc-ringed-spaces-derived-direct-image, and Step 2 cited the g_*-only definition for a general additive F; repaired by specializing the statement to g_* (E7, sufficient for the citer cab86b3fb step 3, F=h_*) citing def-pc-ringed-spaces-derived-direct-image. (2) C1: Step 3 asserted the RF triangle's third map equals delta' 'including the shift sign' with no cited statement about the unspecified shift isomorphism of lem-pc-right-derived-functor-triangulated; repaired by stating and proving the identification phi_{I_1[1]} Rg_*(delta) = delta' phi_{I_3} from the definition (functorial K-injective resolutions, g_* preserves homotopies; I_1[1] K-injective, elementary) and distinguishedness by TR1 isomorphism closure, dropping lem-pc-right-derived-functor-triangulated. (3) delta = Q(pi d s) from lem-weil-pbc-degreewise-split-derived-triangle (Mathlib homOfDegreewiseSplit, cone sign) and the image delta' = Q(g_*(pi d s)) since g_* is additive. Duplicates: lem-weil-pbc-right-derived-universal-delta-functor / lem-weil-pbc-exact-functor-ses-triangle-image are about R^n v / exact functors on objects, not this; no duplicate. Second reading missed (1) and (2); its claim of changing created.item is untrue (created.item stays the H1 item, correct).; 1 file(s) fixed by the reviewer"
+ },
+ "lead_note": "2026-10-11 L (R-tst0107): Statement specialized from a general additive F to g_* of a morphism of ringed spaces (E7: the only RF definition in the DAG is def-pc-ringed-spaces-derived-direct-image; the citer cab86b3fb step 3 uses F=h_*). Citer step 3 / lem-pc-right-derived-functor-triangulated leave the shift isomorphism sigma unspecified; this item now states the identification of Rg_*(delta) via phi_{I_1[1]} without sigma."
 }
