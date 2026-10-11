@@ -29,9 +29,87 @@
   "def-pc-module-pullback",
   "def-weil-residue-field"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Property $\\mathcal P$ is invariant under isomorphism, and if a coherent module with support in $T$ has a finite filtration whose successive quotients have $\\mathcal P$, then it has $\\mathcal P$, by induction using the two-out-of-three hypothesis (the zero module is handled by the same hypothesis applied to $0\\to0\\to0\\to0$).",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Lemma 01YH proof, first paragraph (coherent.tex line 3189)"
+   }
+  },
+  {
+   "text": "If $\\mathcal F$ is coherent with $\\operatorname{Supp}(\\mathcal F)\\subseteq T$ and $\\xi\\notin\\operatorname{Supp}(\\mathcal F)$, apply [lem-weil-pbc-coherent-filtration-integral-subschemes] to filter $\\mathcal F$ by quotients $(i_j)_*\\mathcal I_j$. For each short exact sequence in the filtration, exactness on stalks shows $\\operatorname{Supp}(\\mathcal F_j/\\mathcal F_{j-1})\\subseteq\\operatorname{Supp}(\\mathcal F)$; the nonzero ideal $\\mathcal I_j$ has nonzero generic stalk by [lem-weil-pbc-integral-scheme-ideal-generic-stalk], so its support is all of the integral $Z_j$, and the quotient support is the proper irreducible closed subset $i_j(Z_j)\\subsetneq T$. Hypothesis (2) gives $\\mathcal P$ for each quotient, and Step 1 gives $\\mathcal P(\\mathcal F)$.",
+   "uses": [
+    "lem-weil-pbc-coherent-filtration-integral-subschemes",
+    "lem-weil-pbc-integral-scheme-ideal-generic-stalk"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Lemma 01YH proof, second paragraph (coherent.tex lines 3198-3208)"
+   }
+  },
+  {
+   "text": "Let $i:Z=T_{\\mathrm{red}}\\to X$ be the reduced induced closed subscheme structure on $T$ from [lem-weil-pbc-reduced-induced-closed-subscheme](2); it is a closed immersion with $Z$ reduced and $i(Z)=T$, so $Z$ is homeomorphic to the nonempty irreducible $T$ and hence integral by the definition [def-pc-integral-scheme], with generic point $\\eta$ satisfying $i(\\eta)=\\xi$. Apply [lem-weil-pbc-coherent-generic-point-ideal-inclusion] to this $i$ and the sheaf $\\mathcal G$ in (3). It gives $r\\ge0$, a coherent ideal $\\mathcal I\\subseteq\\mathcal O_Z$, and an injection $\\alpha:i_*(\\mathcal I^{\\oplus r})\\to\\mathcal G$ which is an isomorphism near $\\xi$. Since $\\mathcal G_\\xi$ has dimension one over $\\kappa(\\xi)$ and a nonzero ideal on the integral $Z$ has generic stalk $\\mathcal O_{Z,\\eta}$ by [lem-weil-pbc-integral-scheme-ideal-generic-stalk], the generic stalk comparison forces $r=1$ and $\\mathcal I\\ne0$. Exactness on stalks gives $\\operatorname{Supp}(\\operatorname{coker}\\alpha)\\subseteq T$, while the local isomorphism gives zero stalk at $\\xi$; hence its support is a proper closed subset of $T$. Step 2 gives property $\\mathcal P$ for the cokernel.",
+   "uses": [
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "lem-weil-pbc-coherent-generic-point-ideal-inclusion",
+    "lem-weil-pbc-integral-scheme-ideal-generic-stalk"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Lemma 01YH proof, third paragraph (coherent.tex lines 3211-3229)"
+   }
+  },
+  {
+   "text": "For every nonzero quasi-coherent ideal $\\mathcal I'\\subseteq\\mathcal I$, form the composite $i_*\\mathcal I'\\to i_*\\mathcal I\\xrightarrow{\\alpha}\\mathcal G$ and let $\\mathcal Q'$ be its cokernel. At $\\xi$ the map is an isomorphism because both nonzero ideals have generic stalk $\\mathcal O_{Z,\\eta}$, so exactness on stalks gives $\\operatorname{Supp}(\\mathcal Q')\\subseteq T$ and $(\\mathcal Q')_\\xi=0$; thus its support is a proper closed subset of $T$, and Step 2 gives $\\mathcal P(\\mathcal Q')$. The short exact sequence then gives $\\mathcal P(i_*\\mathcal I')$ by (1) and the two-out-of-three property.",
+   "uses": [
+    "lem-weil-pbc-integral-scheme-ideal-generic-stalk"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Lemma 01YH proof, fourth paragraph (coherent.tex lines 3232-3254)"
+   }
+  },
+  {
+   "text": "For any quasi-coherent ideal $\\mathcal I''\\subseteq\\mathcal O_Z$, if it is zero then its pushforward is the zero module and has $\\mathcal P$. Otherwise $\\mathcal I''\\cap\\mathcal I$ has generic stalk $\\mathcal O_{Z,\\eta}$ (both factors do, by [lem-weil-pbc-integral-scheme-ideal-generic-stalk]), hence is nonzero on the integral scheme $Z$, so Step 4 gives property for its pushforward. The quotient of $i_*\\mathcal I''$ by this intersection has zero generic stalk, and exactness on stalks gives support missing $\\xi$; Step 2 gives property for the quotient and (1) gives property for $i_*\\mathcal I''$. Hence $\\mathcal P$ holds for $i_*\\mathcal I''$ for every quasi-coherent ideal $\\mathcal I''\\subseteq\\mathcal O_Z$.",
+   "uses": [
+    "lem-weil-pbc-integral-scheme-ideal-generic-stalk"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Lemma 01YH proof, fifth paragraph (coherent.tex lines 3257-3273)"
+   }
+  },
+  {
+   "text": "Finally, for an arbitrary coherent $\\mathcal F$ supported in $T$, use [lem-weil-pbc-coherent-filtration-integral-subschemes]. As in Step 2, each quotient $(i_j)_*\\mathcal I_j$ has support $i_j(Z_j)$, an irreducible closed subset of $T$. If $i_j(Z_j)\\subsetneq T$ this quotient has $\\mathcal P$ by hypothesis (2). If $i_j(Z_j)=T$, then $Z_j$ is integral, hence reduced, and the uniqueness clause [lem-weil-pbc-reduced-induced-closed-subscheme](3) gives an isomorphism $\\varphi:Z_j\\to Z$ with $i\\circ\\varphi=i_j$; transporting $\\mathcal I_j$ along $\\varphi$ gives a quasi-coherent ideal $\\mathcal I''\\subseteq\\mathcal O_Z$ with $(i_j)_*\\mathcal I_j\\cong i_*\\mathcal I''$, which has $\\mathcal P$ by Step 5. Thus every quotient has $\\mathcal P$, and Step 1 gives $\\mathcal P(\\mathcal F)$.",
+   "uses": [
+    "lem-weil-pbc-coherent-filtration-integral-subschemes",
+    "lem-weil-pbc-reduced-induced-closed-subscheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Lemma 01YH proof, final paragraph (coherent.tex lines 3275-3282)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-coherent-filtration-integral-subschemes",
+  "lem-weil-pbc-coherent-generic-point-ideal-inclusion",
+  "lem-weil-pbc-integral-scheme-ideal-generic-stalk",
+  "lem-weil-pbc-reduced-induced-closed-subscheme"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Cohomology of Schemes, Lemma 01YH (lemma-property-irreducible), coherent.tex line 3179 and proof"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -56,12 +134,55 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pc-coherent-property-devissage",
   "by": "worker",
   "date": "2026-10-11"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-coherence"
+ "unit": "sk-thm-picard-coherence",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-coherent-property-irreducible",
+  "worker": "stage1",
+  "summary": "Checked the exact Stacks Lemma 01YH statement and split its proof into filtration, strict-support, generic-stalk comparison, ideal intersection, contradiction, and final filtration steps. Reused the existing 01YF filtration, 01YE generic inclusion, and generic ideal stalk nodes; no duplicate node was created.",
+  "blueprint": "Realizes the property-irreducible comparison and proper-support quotient argument named in the blueprint ancestor lem-pc-coherent-hi.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-coherent-filtration-integral-subschemes",
+    "why": "The 01YH proof needs the general finite filtration of a coherent module by integral closed-subscheme ideal quotients."
+   },
+   {
+    "node": "lem-weil-pbc-coherent-generic-point-ideal-inclusion",
+    "why": "The 01YH proof needs the generic-stalk injection of an ideal pushforward into the distinguished coherent module."
+   },
+   {
+    "node": "lem-weil-pbc-integral-scheme-ideal-generic-stalk",
+    "why": "The 01YH proof needs the fact that a nonzero ideal on an integral scheme has full generic stalk, to compare dimensions and intersections."
+   },
+   {
+    "node": "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "why": "The 01YH proof needs the integral closed subscheme with underlying set T (Z_0 with its reduced induced structure) and its uniqueness to identify filtration quotients with full support T."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-coherent-filtration-integral-subschemes",
+  "lem-weil-pbc-coherent-generic-point-ideal-inclusion",
+  "lem-weil-pbc-integral-scheme-ideal-generic-stalk",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-weil-pbc-coherent-filtration-integral-subschemes",
+  "lem-weil-pbc-coherent-generic-point-ideal-inclusion",
+  "lem-weil-pbc-integral-scheme-ideal-generic-stalk",
+  "lem-weil-pbc-reduced-induced-closed-subscheme"
+ ],
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-cpi0035",
+  "group": "H1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-cpi0035 (reviewer sub-agent of L); spot-checked: Statement vs coherent.tex 01YH clause by clause (agrees; (2) as closed immersion of integral Z with i(Z) strictly in T); citer lem-pc-coherent-property-devissage step 4 uses exactly (1),(2),(3); no duplicate of 01YM node; cited statements checked for hypotheses. FIX more, RETURN less: (C1) Step 3 used an undefined integral Z with generic point over xi: now introduced as T_red via lem-weil-pbc-reduced-induced-closed-subscheme(2), integral by def-pc-integral-scheme; (C1) Step 6 'equality with T is covered by Step 5' needed that an integral Z_j with i_j(Z_j)=T is Z over X: now cites uniqueness clause (3) of the same node and transports the ideal; Step 5 dangling 'failure of goodness' sentence replaced by the conclusion for all ideals. Second reading by H1 missed both.; 1 file(s) fixed by the reviewer"
+ }
 }
