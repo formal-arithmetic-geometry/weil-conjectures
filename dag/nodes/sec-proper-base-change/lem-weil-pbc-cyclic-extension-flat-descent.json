@@ -226,5 +226,23 @@
   "summary": "Proof written from Stacks 05EG, second paragraph (the case M = R/I^n), read with 05ED, 05EE, 05EF, 05E9, 05EC; tags checked in tags/tags. The source's Ext_R(R/I^n,N) is the group of extension classes (Homology 010I), not the derived-category Ext of def-pc-ext, so the 05EE row 0 -> Ext -> H_1 -> Hom(K,N) is made explicit on extensions in one new node, lem-weil-pbc-cyclic-extension-cocycle (extension built from an admissible Koszul 1-cycle, every extension of that form, change of cycle by a boundary), and the diagram chase of 05EG is written out: surjectivity of H_1(N) -> H_1(N_S) (flat compatibility of H_1 plus 05EF and 05E9, via lem-weil-pbc-torsion-module-flat-base-change-iso) and injectivity of Hom(K,N) -> Hom(K_S,N_S) (lem-weil-pbc-torsion-hom-flat-comparison, 05EC). 05ED and 05EF are one-line computations, written out in steps 1 and 2. def-pc-ext and lem-weil-pbc-ext-long-exact-first-variable are not used (the sibling nodes of lem-weil-pbc-torsion-extension-flat-descent also work with explicit extensions). Statement unchanged. No Lean on slopmaster2 (grep by id, 05EG/05EE, Koszul).",
   "blueprint": "thm-weil-pbc-finite-etale-lifting, proof step (b) Essential surjectivity (formal glueing, the torsion-extension descent used in 05ER): steps 1-9 realize the cyclic case R/I^n of that descent, which lem-weil-pbc-torsion-extension-flat-descent cites in its step 2; no other place of the blueprint proof."
  },
- "reviewed": "2026-10-10 L: 9 steps following the 05EG diagram chase (05ED/05EF written out, H_1 of the Koszul complex and its base change by 05E9, the cocycle description of extensions of A/J as a new node, lifting the cycle, admissibility by 05EC, the base change of the extension); 1 new node"
+ "reviewed": "2026-10-10 L: 9 steps following the 05EG diagram chase (05ED/05EF written out, H_1 of the Koszul complex and its base change by 05E9, the cocycle description of extensions of A/J as a new node, lifting the cycle, admissibility by 05EC, the base change of the extension); 1 new node",
+ "lean": {
+  "module": "Sheaf.RingTheory.CyclicExtensionFlatDescent",
+  "declaration": "LinearMap.exists_cyclic_extension_flat_descent",
+  "file": "lean/Sheaf/RingTheory/CyclicExtensionFlatDescent.lean",
+  "statement": "theorem exists_cyclic_extension_flat_descent {R : Type u} {S : Type v} [CommRing R] [CommRing S] [Algebra R S] (_hflat : (algebraMap R S).Flat) (I : Ideal R) (_hI : I.FG) (_hquot : Function.Bijective (Ideal.quotientMap (I.map (algebraMap R S)) (algebraMap R S) Ideal.le_comap_map)) (n : ℕ) (_hn : 1 ≤ n) {N : Type w} [AddCommGroup N] [Module R N] {T : Type x} [AddCommGroup T] [Module S T] (a : S ⊗[R] N →ₗ[S] T) (b : T →ₗ[S] S ⊗[R] (R ⧸ I ^ n)) (_ha : Function.Injective a) (_hab : Function.Exact a b) (_hb : Function.Surjective b) : ∃ (E : Type (max u w)) (_ : AddCommGroup E) (_ : Module R E) (j : N →ₗ[R] E) (q : E →ₗ[R] (R ⧸ I ^ n)), Function.Injective j ∧ Function.Exact j q ∧ Function.Surjective q ∧ ∃ θ : S ⊗[R] E ≃ₗ[S] T, θ.toLinearMap.comp (j.baseChange S) = a ∧ b.comp θ.toLinearMap = q.baseChange S",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-cfd0937",
+  "group": "G1",
+  "result": "pass",
+  "note": "flat RingHom.Flat on algebraMap; I.FG; R/I->S/IS bijective Ideal.quotientMap of I.map; 1<=n; arbitrary N, T; SES as Injective/Function.Exact/Surjective; E in max u w with SES j,q; S-linear theta with theta∘j_S=a, b∘theta=q_S; tensor order S⊗[R] per baseChange"
+ }
 }
