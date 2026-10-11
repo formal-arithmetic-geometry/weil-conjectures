@@ -217,5 +217,23 @@
   "worker": "stage1",
   "summary": "Read Algebra 00OA (lemma-length-resolution-residue-field, algebra.tex 26966) and its proof (26974--27069) with the lemmas it cites: 0CXF what-kind-of-resolutions-Noetherian-local (26702), 00MT add-trivial-complex (24608), 00LS compare-resolutions (17500), 00DV NAK (3616). Statement kept (it agrees with 00OA and with the use in both citers). Proof written in 9 steps following the source: choice of x_i; the Koszul complex built explicitly as free modules on subsets with d^2 = 0 computed (the source's 'easy to see'), only pi o d_1 = 0 is needed (the source's remark that coker(K_1 -> K_0) = kappa by NAK is not used, so no Nakayama node is cited); minimal finite free resolution by a new node (0CXF + 00MT); comparison map by a new node (00LS (1), for a complex of free modules over M, not necessarily exact, which the Koszul complex needs); the reduction mod m and the identification m G/m^2 G = (G/mG)^n for free G written out (the source's tensor with m/m^2); the commutative square; the injectivity of wedge^i kappa^n -> wedge^{i-1} kappa^n tensor m/m^2 written out (source: 'can be done by hand'); the induction (the source's separate i = 1 case and the rank-1 remark on F_0 are not needed); conclusion F_n != 0 so d >= n. Two new unsplit nodes: lem-weil-pbc-minimal-finite-free-resolution-local, lem-weil-pbc-free-complex-maps-to-resolution (Mathlib candidate ProjectiveResolution.lift needs an exact source). Item searched again in Mathlib (LeanFinder, LeanSearch for Koszul, Loogle, grep): no projective-dimension lower bound and no Koszul complex in Mathlib."
  },
- "reviewed": "Reviewed by L 2026-10-10: faithful to Algebra 00OA: the Koszul complex written out with the sign check, a minimal finite free resolution (0CXF + 00MT, new unsplit node), the comparison map (00LS (1), new unsplit node), the reduction mod m and the injectivity of the Koszul differential mod m 'by hand' (steps 5-7), the induction and F_n ≠ 0. No Mathlib match (no Koszul complex in Mathlib)."
+ "reviewed": "Reviewed by L 2026-10-10: faithful to Algebra 00OA: the Koszul complex written out with the sign check, a minimal finite free resolution (0CXF + 00MT, new unsplit node), the comparison map (00LS (1), new unsplit node), the reduction mod m and the injectivity of the Koszul differential mod m 'by hand' (steps 5-7), the induction and F_n ≠ 0. No Mathlib match (no Koszul complex in Mathlib).",
+ "lean": {
+  "module": "Sheaf.RingTheory.ResidueFieldProjectiveDimensionLowerBound",
+  "declaration": "IsLocalRing.finrank_cotangentSpace_le_of_hasProjectiveResolutionLE",
+  "file": "lean/Sheaf/RingTheory/ResidueFieldProjectiveDimensionLowerBound.lean",
+  "statement": "theorem finrank_cotangentSpace_le_of_hasProjectiveResolutionLE (R : Type u) [CommRing R] [IsLocalRing R] [IsNoetherianRing R] (d : ℕ) (h : ModuleCat.HasProjectiveResolutionLE (ModuleCat.of R (ResidueField R)) d) : Module.finrank (ResidueField R) (CotangentSpace R) ≤ d",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-rpd",
+  "group": "H1",
+  "result": "pass",
+  "note": "CommRing+IsLocalRing+IsNoetherianRing R (Type u); kappa = ResidueField R in ModuleCat.{u}; resolution = landed ModuleCat.HasProjectiveResolutionLE kappa d, d:N; n = finrank kappa (CotangentSpace R) (finite by Noetherian); conclusion n <= d"
+ }
 }
