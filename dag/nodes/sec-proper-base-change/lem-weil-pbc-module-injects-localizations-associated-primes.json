@@ -141,5 +141,23 @@
   "worker": "stage1",
   "summary": "Read Stacks Algebra 0311 (lemma-zero-at-ass-zero) and its cited 02M3 and 0587. For nonzero m the cyclic submodule Rm has an associated prime by the reviewed 00LD zero-divisor node (0 kills m); the reviewed 02M3 node puts that prime in Ass(M), and the localization denominator criterion contradicts the annihilator of its witness. No new node is needed. The statement agrees with 0311, including arbitrary M and the empty-product case. The item's existing LeanSearch, LeanFinder, Loogle and grep records give no Mathlib match; the available alternate Mathlib checkout was not used to claim a new leaf.",
   "blueprint": "The steps supply a commutative-algebra input to the normality assertion in the second paragraph of lem-weil-pbc-normal-constant-generic's proof ('Now the strict henselization is a normal domain'), through the existing via chain. Search of the whole blueprint by 'associated primes localization injection', 'zero at associated primes', '0311', and 'module localizations associated' found no blueprint node with this statement."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.InjectivePiLocalizationAssociatedPrimes",
+  "declaration": "Module.injective_pi_localization_associatedPrimes",
+  "file": "lean/Sheaf/RingTheory/InjectivePiLocalizationAssociatedPrimes.lean",
+  "statement": "theorem injective_pi_localization_associatedPrimes (R : Type u) [CommRing R] [IsNoetherianRing R] (M : Type v) [AddCommGroup M] [Module R M] : Function.Injective (LinearMap.pi (fun p : associatedPrimes R M => (LocalizedModule.mkLinearMap p.1.primeCompl M : M →ₗ[R] LocalizedModule.AtPrime p.1 M))) ∧ (∀ m : M, (∀ p : associatedPrimes R M, ∃ s : R, s ∉ p.1 ∧ s • m = 0) → m = 0)",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-mil1145",
+  "group": "H1",
+  "result": "pass",
+  "note": "R CommRing+IsNoetherianRing (Noetherian dep); M arbitrary AddCommGroup/Module, no Module.Finite, independent universes; Ass = Mathlib associatedPrimes R M = node's annihilator set under Noetherian (isAssociatedPrime_iff, colon ⊥ {x}); M_p = LocalizedModule.AtPrime p.1 M = LocalizedModule p.1.primeCompl M; map = LinearMap.pi of mkLinearMap (m ↦ m/1), Injective; second conjunct = node's elementwise equivalent; empty Ass gives zero product; no Mathlib duplicate; no hollow hyps"
  }
 }
