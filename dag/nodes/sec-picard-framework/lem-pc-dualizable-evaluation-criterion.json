@@ -130,5 +130,24 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.DualizableEvaluationCriterion",
+  "declaration": "AlgebraicGeometry.dualizable_evaluation_criterion",
+  "statement": "theorem dualizable_evaluation_criterion (X : Scheme.{u}) [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] (K D : schemeDerivedCategory X) (adj : ∀ A B C : schemeDerivedCategory X, (A ⟶ (derivedInternalHom (Opens.grothendieckTopology X.toRingedSpace) X.toRingedSpace.sheaf).obj (op B, C)) ≃ (A ⊗ B ⟶ C)) (hadj : ∀ (A A' B B' C C' : schemeDerivedCategory X) (a : A' ⟶ A) (b : B' ⟶ B) (c : C ⟶ C') (f : A ⟶ (derivedInternalHom (Opens.grothendieckTopology X.toRingedSpace) X.toRingedSpace.sheaf).obj (op B, C)), adj A' B' C' (a ≫ f ≫ (derivedInternalHom (Opens.grothendieckTopology X.toRingedSpace) X.toRingedSpace.sheaf).map (b.op, c)) = (a ⊗ₘ b) ≫ adj A B C f ≫ c) (e : D ⊗ K ⟶ 𝟙_ (schemeDerivedCategory X)) (φ : ∀ M : schemeDerivedCategory X, M ⊗ D ⟶ (derivedInternalHom (Opens.grothendieckTopology X.toRingedSpace) X.toRingedSpace.sheaf).obj (op K, M)) (hφ : ∀ M : schemeDerivedCategory X, IsIso (φ M)) (hφ_def : ∀ M : schemeDerivedCategory X, φ M = (adj (M ⊗ D) K M).symm ((α_ M D K).hom ≫ (𝟙 M ⊗ₘ e) ≫ (ρ_ M).hom)) (η : 𝟙_ (schemeDerivedCategory X) ⟶ K ⊗ D) (hη : η ≫ φ K = (adj (𝟙_ (schemeDerivedCategory X)) K K).symm ((λ_ K).hom)) : 𝟙 K = (λ_ K).inv ≫ (η ⊗ₘ 𝟙 K) ≫ (α_ K D K).hom ≫ (𝟙 K ⊗ₘ e) ≫ (ρ_ K).hom ∧ 𝟙 D = (ρ_ D).inv ≫ (𝟙 D ⊗ₘ η) ≫ (α_ D K D).inv ≫ (e ⊗ₘ 𝟙 D) ≫ (λ_ D).hom",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-12",
+  "existing": false,
+  "file": "lean/Sheaf/AlgebraicGeometry/DualizableEvaluationCriterion.lean",
+  "fixed_by": "R-dec"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-dec",
+  "group": "C1",
+  "result": "fix",
+  "note": "X, K, D, e, phi_M (hphi_def adjunct of alpha;1⊗e;rho), hphi iso, eta via adjunct of lambda_K, both triangle identities; FIX: adj was a free bijection (statement false), tied by the landed naturality equation hadj; proof docstring added"
  }
 }
