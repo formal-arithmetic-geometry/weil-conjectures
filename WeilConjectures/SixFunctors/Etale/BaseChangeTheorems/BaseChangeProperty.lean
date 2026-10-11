@@ -55,9 +55,9 @@ The blueprint states `IA` for injective sheaves of `𝐅_r`-modules and one prim
 time, and reaches a general torsion coefficient ring by dévissage: `𝐅_r`-modules, then
 `n`-torsion sheaves by induction on the number of prime factors of `n`, then all torsion
 sheaves as a filtered colimit. The sheaf-level dévissage is
-`WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.Devissage`; its extension to complexes
-with torsion cohomology is not formalised. Accordingly the equivalence below is stated for a
-coefficient ring `Λ` which is torsion as an additive group — the case `Λ = ℤ/ℓⁿℤ` of the
+`WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.Devissage`, and the passage from the
+rings `Λ ⧸ pΛ` to `Λ` is in `WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.Coefficients`.
+The equivalence below is stated for a coefficient ring `Λ` which is torsion as an additive group — the case `Λ = ℤ/ℓⁿℤ` of the
 `ℓ`-adic formalism — where every sheaf of `Λ`-modules is torsion and no dévissage is needed.
 
 ## Proof of the equivalence
@@ -84,8 +84,6 @@ is the termwise underived base change map `g^* f_* I ⟶ f'_* g'^* I`, an isomor
   proper morphism `f` and a torsion coefficient ring.
 - `AlgebraicGeometry.Etale.hasTorsionBaseChange_iff_hasInjectiveAcyclicity`:
   `PBC(f) ↔ IA(f)` for a proper morphism `f` and a torsion coefficient ring.
-- `AlgebraicGeometry.Etale.hasTorsionBaseChange_of_hasInjectiveAcyclicity`:
-  `IA(f) ⇒ PBC(f)` for a proper morphism `f` and an arbitrary coefficient ring.
 
 ## References
 

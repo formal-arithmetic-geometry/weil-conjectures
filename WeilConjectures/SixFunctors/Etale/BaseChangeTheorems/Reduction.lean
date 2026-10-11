@@ -50,13 +50,21 @@ open Scheme Etale ProjectiveSpace
 
 variable (Λ : Type (u + 1)) [CommRing Λ]
 
+/-- A finite morphism satisfies the base change property for every coefficient ring: the derived
+base change map is an isomorphism on all of `D⁺`
+(`AlgebraicGeometry.Etale.isBaseChangeIso_of_isFinite`).
+(blueprint: `prop-weil-pbc-finite-morphism`) -/
+theorem Etale.hasTorsionBaseChange_of_isFinite {X Y : Scheme.{u}} (f : X ⟶ Y) [IsFinite f] :
+    Etale.HasTorsionBaseChange Λ f :=
+  Etale.hasTorsionBaseChange_of_isBaseChangeIso Λ f
+
 /-- The tower `(ℙ¹_S)ⁿ ⟶ S` satisfies the base change property if all projective lines do, the
 coefficient ring being torsion: it is a composite of projective lines over successive bases. -/
 theorem Etale.hasTorsionBaseChange_projectiveLinePowProj (hΛ : IsAddTorsion Λ)
     (h : ∀ S : Scheme.{u}, Etale.HasTorsionBaseChange Λ (ProjectiveLine S ↘ S)) (n : ℕ)
     (S : Scheme.{u}) : Etale.HasTorsionBaseChange Λ (projectiveLinePowProj n S) := by
   induction n with
-  | zero => sorry
+  | zero => exact Etale.hasTorsionBaseChange_of_isFinite Λ (𝟙 S)
   | succ n ih => exact Etale.HasTorsionBaseChange.comp Λ hΛ (h _) ih
 
 /-- **Reduction of projective space to products of lines.** For a torsion coefficient ring `Λ`,
@@ -67,18 +75,43 @@ change property cancels along the finite surjective symmetric product morphism.
 (blueprint: `lem-weil-pbc-reduction-projective-space`) -/
 theorem Etale.hasTorsionBaseChange_projectiveSpace (hΛ : IsAddTorsion Λ)
     (h : ∀ S : Scheme.{u}, Etale.HasTorsionBaseChange Λ (ProjectiveLine S ↘ S)) (n : Type u)
-    [Finite n] (S : Scheme.{u}) : Etale.HasTorsionBaseChange Λ (ℙ(n; S) ↘ S) :=
-  sorry
+    [Finite n] (S : Scheme.{u}) : Etale.HasTorsionBaseChange Λ (ℙ(n; S) ↘ S) := by
+  cases isEmpty_or_nonempty n with
+  | inl _ => exact Etale.hasTorsionBaseChange_of_isFinite Λ _
+  | inr _ =>
+    obtain ⟨k, σ, _, _, hσ⟩ := exists_isFinite_surjective_projectiveLinePow n S
+    refine Etale.HasTorsionBaseChange.of_comp Λ hΛ (f := σ)
+      (Etale.hasTorsionBaseChange_of_isFinite Λ σ) ?_
+    rw [hσ]
+    exact Etale.hasTorsionBaseChange_projectiveLinePowProj Λ hΛ h k S
 
 /-- **Reduction of proper base change to the projective line, torsion coefficients.** For a
 coefficient ring `Λ` which is torsion as an additive group, if `ℙ¹_S ⟶ S` satisfies the base
-change property for every scheme `S`, then so does every proper morphism.
+change property for every scheme `S`, then so does every proper morphism `f : X ⟶ Y`.
+
+By target locality we may assume `Y` affine. Chow's lemma gives a proper surjection
+`π : X̃ ⟶ X` and a closed immersion `i : X̃ ⟶ ℙⁿ_Y` over `Y`. The composite `π ≫ f = i ≫ pₙ`
+has the base change property, as `i` is finite and `pₙ : ℙⁿ_Y ⟶ Y` has it by
+`AlgebraicGeometry.Etale.hasTorsionBaseChange_projectiveSpace`; so does `π`, the composite of
+the closed immersion `(π, i) : X̃ ⟶ ℙⁿ_X` with the projection `ℙⁿ_X ⟶ X`. Cancellation along the
+proper surjection `π` gives the base change property for `f`.
 (blueprint: `prop-weil-pbc-reduction-to-projective-line`) -/
 theorem Etale.hasTorsionBaseChange_of_projectiveLine_of_isProper_of_isAddTorsion
     (hΛ : IsAddTorsion Λ)
     (h : ∀ S : Scheme.{u}, Etale.HasTorsionBaseChange Λ (ProjectiveLine S ↘ S))
-    {X Y : Scheme.{u}} (f : X ⟶ Y) [IsProper f] : Etale.HasTorsionBaseChange Λ f :=
-  sorry
+    {X Y : Scheme.{u}} (f : X ⟶ Y) [IsProper f] : Etale.HasTorsionBaseChange Λ f := by
+  refine Etale.hasTorsionBaseChange_of_affineOpens Λ f fun U ↦ ?_
+  have : IsAffine (U : Y.Opens) := U.2
+  obtain ⟨D⟩ := ProjectiveDomination.nonempty_of_isAffine (f := f ∣_ (U : Y.Opens))
+  have hp := Etale.hasTorsionBaseChange_projectiveSpace Λ hΛ h D.n
+  have hπ : Etale.HasTorsionBaseChange Λ D.π := by
+    have hw : D.π ≫ f ∣_ (U : Y.Opens) = D.i ≫ ℙ(D.n; _) ↘ _ := D.w.symm
+    rw [← ProjectiveSpace.liftBaseChange_over D.π D.i hw]
+    exact Etale.HasTorsionBaseChange.comp Λ hΛ (Etale.hasTorsionBaseChange_of_isFinite Λ _)
+      (hp _)
+  refine Etale.HasTorsionBaseChange.of_comp Λ hΛ hπ ?_
+  rw [← D.w]
+  exact Etale.HasTorsionBaseChange.comp Λ hΛ (Etale.hasTorsionBaseChange_of_isFinite Λ _) (hp _)
 
 /-- **Reduction of proper base change to the projective line**: if the projection
 `ℙ¹_S ⟶ S` satisfies `AlgebraicGeometry.Etale.HasTorsionBaseChange` for every scheme `S`,
@@ -106,7 +139,7 @@ theorem Etale.hasTorsionBaseChange_of_projectiveLine_of_isProper
     {X Y : Scheme.{u}} (f : X ⟶ Y) [IsProper f] :
     Etale.HasTorsionBaseChange Λ f :=
   Etale.hasTorsionBaseChange_of_forall_prime Λ f fun p hp ↦
-    Etale.hasTorsionBaseChange_of_projectiveLine_of_isProper_of_isAddTorsion _ sorry
-      (fun S ↦ (h S).quotient Λ p) f
+    Etale.hasTorsionBaseChange_of_projectiveLine_of_isProper_of_isAddTorsion _
+      (isAddTorsion_quotient_span_natCast Λ hp.pos) (fun S ↦ (h S).quotient Λ p) f
 
 end AlgebraicGeometry
