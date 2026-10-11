@@ -193,24 +193,12 @@ theorem nonempty_arrowIso_pullback_directImageCounit
   -- change morphism `i^* f_{T,*} ℒ ⟶ f_{T',*} i'^* ℒ`, the mate of `α`, is an isomorphism
   have : IsIso ((mateEquiv (Modules.pullbackPushforwardAdjunction sT)
       (Modules.pullbackPushforwardAdjunction sT') α).app d) := by
-    have := ℒ.1.1.isInvertible
-    have : SheafOfModules.IsFiniteLocallyFree.{u, u, u} d :=
-      SheafOfModules.IsInvertible.isFiniteLocallyFree.{u, u, u} _
-    have : d.IsFinitePresentation :=
-      SheafOfModules.IsFiniteLocallyFree.isFinitePresentation.{u, u, u} _
-    have hd := Modules.isFlatOver_of_isInvertible sT d
-    have hL' := IsInvertibleDirectImage.map_of_isProper (X ↘ Spec (.of k)) i ℒ.2
-    -- `ℒ_{T'}` satisfies the condition of `F`, so `i` maps into the perfect locus `U_{0,1}`
-    let e (q : ℕ) := ((Modules.pushforward sT').rightDerived q).mapIso
-      (fromSkeletonToSkeletonIso ((Modules.pullback i').obj d))
-    have h := (Modules.isFiniteLocallyFreeInDegree_zero_one_iff
-      fun q ↦ ((Modules.pushforward sT').rightDerived q).obj ((Modules.pullback i').obj d)).2
-      ⟨fun q hq ↦ (hL'.2 q (Nat.pos_of_ne_zero hq)).of_iso (e q).symm,
-        SheafOfModules.IsInvertible.of_iso.{u, u, u} (e 0) (h := hL'.1)⟩
-    have hg := (Modules.range_subset_perfectLocusOfRank_iff sT d hd 0 1 i.left i' sT'
-      (isPullback_baseChangeMap _ i)).2 ⟨h.isZero, h.isFiniteLocallyFreeOfRank⟩
-    exact Modules.isIso_mateEquiv_pullbackComp_app_of_isPullback sT d hd i.left i' sT'
-      (isPullback_baseChangeMap _ i) hg
+    -- Cohomology and base change in degree `0` for the canonical map: `ℒ` and `ℒ_{T'}` lie in
+    -- `F`, so `i` maps into the perfect locus `U_{0,1}` of `ℒ`
+    -- (`Modules.range_subset_perfectLocusOfRank_iff`). That the canonical base change map is then
+    -- invertible is the clause "the base-change maps are isomorphisms" of `sk-thm-picard-perfect`
+    -- for this specific map; the Lean statements of that node only give abstract isomorphisms.
+    sorry
   -- identify `i'^* ℒ` with the representative of its class
   let e : (Modules.pullback i').obj d ≅ (fromSkeleton _).obj (Pic.map i' ℒ.1.1).val :=
     (fromSkeletonToSkeletonIso _).symm

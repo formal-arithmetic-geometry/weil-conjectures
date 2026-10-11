@@ -51,24 +51,6 @@ theorem nonempty_higherDirectImage_iso_pullback_of_isPullback (hℱ : ℱ.IsFlat
       (Modules.pullback g).obj ((higherDirectImage f i).obj ℱ)) :=
   sorry
 
-/-- **Cohomology and base change in degree `0` on the perfect locus.** In the situation of
-`AlgebraicGeometry.Scheme.Modules.isZero_higherDirectImage_of_isPullback`, if the image of `g`
-lies in the rank-`r` perfect locus `U_{0,r}`, then the canonical base change map
-`g^* f_* ℱ ⟶ f'_* g'^* ℱ` is an isomorphism. The base change map is the mate of the isomorphism
-`g^* ⋙ f'^* ≅ f^* ⋙ g'^*` of pullback functors under the adjunctions `f^* ⊣ f_*` and
-`f'^* ⊣ f'_*`.
-
-This is the clause "the base-change maps are isomorphisms" of the blueprint statement, in
-degree `0`, where the base change map is available.
-
-(blueprint: `sk-thm-picard-perfect`) -/
-theorem isIso_mateEquiv_pullbackComp_app_of_isPullback (hℱ : ℱ.IsFlatOver f) {r : ℕ}
-    {T' X' : Scheme.{u}} (g : T' ⟶ T) (g' : X' ⟶ X) (f' : X' ⟶ T')
-    (sq : IsPullback g' f' f g) (hg : Set.range g.base ⊆ ℱ.perfectLocusOfRank f 0 r) :
-    IsIso ((mateEquiv (pullbackPushforwardAdjunction f) (pullbackPushforwardAdjunction f')
-      (pullbackComp f' g ≪≫ pullbackCongr sq.w.symm ≪≫ (pullbackComp g' f).symm).hom).app ℱ) :=
-  sorry
-
 /-- **Local freeness in degree `i` after base change to the perfect locus.** In the situation of
 `AlgebraicGeometry.Scheme.Modules.isZero_higherDirectImage_of_isPullback`, if the image of `g`
 lies in the rank-`r` perfect locus `U_{i,r}`, then the higher direct image `R^i f'_* ℱ'` is
