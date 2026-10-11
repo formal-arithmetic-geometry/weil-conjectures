@@ -1,11 +1,11 @@
 # Work queue
 
-547 items; claim with `tools/claim.py next <group> [--stage N]`.
+541 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (547)
+## Stage 2: nodes to state (541)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -78,19 +78,14 @@
 | `lem-weil-pbc-integral-closure-finite-fibre-image-clopen` | 1 | state |
 | `lem-weil-pbc-integral-closure-finite-fibre-quasi-finite` | 1 | state |
 | `lem-weil-pbc-inverse-image-stalk-germ` | 1 | state |
-| `lem-weil-pbc-invertible-pullback-tensor` | 1 | state |
 | `lem-weil-pbc-jacobi-zariski-connecting-map-naturality` | 1 | state |
 | `lem-weil-pbc-jacobi-zariski-quotient-smooth` | 1 | state |
 | `lem-weil-pbc-kahler-differentials-mod-power-ideal` | 1 | state |
 | `lem-weil-pbc-koszul-differential` | 1 | state |
 | `lem-weil-pbc-krull-intersection-localization` | 1 | state |
-| `lem-weil-pbc-lci-conormal-generators-global-complete-intersection` | 1 | state |
-| `lem-weil-pbc-lci-regular-sequence-global-complete-intersection` | 1 | state |
 | `lem-weil-pbc-lft-over-field-isolated-point-residue-finite` | 1 | state |
 | `lem-weil-pbc-lift-idempotent-upstairs` | 1 | state |
 | `lem-weil-pbc-lift-projective-module-etale` | 1 | state |
-| `lem-weil-pbc-lift-to-injective-unique-up-to-homotopy` | 1 | state |
-| `lem-weil-pbc-limit-contained-in-constructible` | 1 | state |
 | `lem-weil-pbc-limit-finite-presentation` | 1 | state |
 | `lem-weil-pbc-limit-flat-modules` | 1 | state |
 | `lem-weil-pbc-limit-module-essentially-finite-presentation-over-system` | 1 | state |
@@ -106,7 +101,6 @@
 | `lem-weil-pbc-local-ring-colimit-essentially-finite-type-over-z` | 1 | state |
 | `lem-weil-pbc-localization-colimit-principal-localizations` | 1 | state |
 | `lem-weil-pbc-localization-finite-gl-dim` | 1 | state |
-| `lem-weil-pbc-localization-n2-domain` | 1 | state |
 | `lem-weil-pbc-localization-of-regular-ring` | 1 | state |
 | `lem-weil-pbc-localization-prime-residue-field-iso` | 1 | state |
 | `lem-weil-pbc-localization-regular` | 1 | state |
