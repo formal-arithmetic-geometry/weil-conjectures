@@ -11,7 +11,7 @@ public import WeilConjectures.AlgebraicGeometry.GeometricallyConnected
 public import WeilConjectures.PointCount
 public import WeilConjectures.WeilSheaf.Curve
 public import WeilConjectures.WeilSheaf.TraceIsomorphism
-public import WeilConjectures.ZetaFunction.BettiNumbers
+public import WeilConjectures.ZetaFunction.BettiSymmetry
 public import WeilConjectures.ZetaFunction.TraceFormula
 public import WeilConjectures.ZetaLinearAlgebra.TraceDatum
 
@@ -408,6 +408,31 @@ theorem isWeilFactorization_projectiveLine :
   · simpa [weilBettiNumber] using h1
   · simp [weilBettiNumber]
   · simpa [weilBettiNumber] using h2
+
+open _root_.Polynomial in
+/-- The integral Frobenius factors of the projective line (blueprint
+`ex-weil-projective-line-endpoints`): `P₀ = 1 - T`, `P₁ = 1` and `P₂ = 1 - qT`, so that for every
+prime `ℓ ≠ p` the Betti numbers are `b₀ = dim H⁰(ℙ¹ ⊗ k̄, ℚ̄_ℓ) = 1`, `b₁ = 0` and
+`b₂ = dim H²(ℙ¹ ⊗ k̄, ℚ̄_ℓ) = 1`. The factors of the smooth proper geometrically connected curve
+`ℙ¹` form a Weil factorization of its zeta function, which in dimension one is unique
+(`AlgebraicGeometry.IsWeilFactorization.eq_of_one`). -/
+theorem isIntegralFrobeniusFactor_projectiveLine :
+    (∀ i : Fin (2 * 1 + 1), Scheme.IsIntegralFrobeniusFactor k (ProjectiveLine (Spec (.of k)))
+      (i : ℕ) (![1 - X, 1, 1 - C (Nat.card k : ℤ) * X] i)) ∧
+    ∀ (l : ℕ) [Fact l.Prime] [Fact (ringChar k ≠ l)],
+      Module.finrank (PadicAlgCl l)
+          ((WeilSheaf.adicConstant k l (ProjectiveLine (Spec (.of k)))).cohomology 0).carrier = 1 ∧
+        Module.finrank (PadicAlgCl l)
+          ((WeilSheaf.adicConstant k l (ProjectiveLine (Spec (.of k)))).cohomology 1).carrier = 0 ∧
+        Module.finrank (PadicAlgCl l)
+          ((WeilSheaf.adicConstant k l (ProjectiveLine (Spec (.of k)))).cohomology 2).carrier = 1 := by
+  obtain ⟨P, hfact, -, -, hP⟩ :=
+    Scheme.exists_isWeilFactorization_of_smoothProper k (ProjectiveLine (Spec (.of k))) 1
+  obtain ⟨h, h0, h1, h2⟩ := isWeilFactorization_projectiveLine k
+  obtain rfl := h.eq_of_one hfact
+  exact ⟨hP, fun l _ _ ↦ ⟨(Scheme.weilBettiNumber_eq_finrank k _ 1 hP l 0).symm.trans h0,
+    (Scheme.weilBettiNumber_eq_finrank k _ 1 hP l 1).symm.trans h1,
+    (Scheme.weilBettiNumber_eq_finrank k _ 1 hP l 2).symm.trans h2⟩⟩
 
 end Zeta
 

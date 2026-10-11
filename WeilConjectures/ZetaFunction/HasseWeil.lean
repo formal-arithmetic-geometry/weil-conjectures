@@ -36,8 +36,6 @@ roots `α` of the `P i`, the shadow of the Lefschetz trace formula.
 
 ## Main statements
 
-- `AlgebraicGeometry.IsWeilFactorization.eq_of_one`: in dimension one a Weil factorization is
-  determined by the zeta function.
 - `AlgebraicGeometry.Scheme.exists_linearEquiv_cohomology_endpoints`,
   `AlgebraicGeometry.Scheme.endpoints_of_isIntegralFrobeniusFactor`: the endpoint cohomology
   `H⁰ ≅ ℚ̄_ℓ`, `H^{2d} ≅ ℚ̄_ℓ(-d)` and the endpoint factors (`prop-endpoints`).
@@ -62,35 +60,6 @@ roots `α` of the `P i`, the shadow of the Lefschetz trace formula.
 @[expose] public section
 
 universe u
-
-namespace AlgebraicGeometry
-
-/-- In dimension `d = 1` a Weil factorization is determined by the power series it factors: the
-endpoint factors `P 0 = 1 - T` and `P 2 = 1 - q T` are prescribed, and then
-`P 1 = Z · (1 - T) (1 - q T)`. No Riemann hypothesis is needed (compare
-`AlgebraicGeometry.IsWeilFactorization.unique`). -/
-theorem IsWeilFactorization.eq_of_one {q : ℕ} {Z : PowerSeries ℚ}
-    {P P' : Fin (2 * 1 + 1) → Polynomial ℤ} (h : IsWeilFactorization q 1 Z P)
-    (h' : IsWeilFactorization q 1 Z P') : P = P' := by
-  have he : Finset.univ.filter (fun i : Fin (2 * 1 + 1) ↦ Even i.1) = {0, Fin.last (2 * 1)} := by
-    decide
-  have ho : Finset.univ.filter (fun i : Fin (2 * 1 + 1) ↦ Odd i.1) = {1} := by
-    decide
-  have h0 : P 0 = P' 0 := h.apply_zero.trans h'.apply_zero.symm
-  have h2 : P (Fin.last (2 * 1)) = P' (Fin.last (2 * 1)) :=
-    h.apply_last.trans h'.apply_last.symm
-  have h1 : P 1 = P' 1 := by
-    have e := h.factorization
-    have e' := h'.factorization
-    rw [he, ho, Finset.prod_singleton, Finset.prod_pair (by decide)] at e e'
-    rw [h0, h2, e'] at e
-    exact Polynomial.map_injective (Int.castRingHom ℚ) (RingHom.injective_int _)
-      (Polynomial.coe_inj.1 e.symm)
-  funext i
-  fin_cases i
-  exacts [h0, h1, h2]
-
-end AlgebraicGeometry
 
 namespace AlgebraicGeometry.Scheme
 
