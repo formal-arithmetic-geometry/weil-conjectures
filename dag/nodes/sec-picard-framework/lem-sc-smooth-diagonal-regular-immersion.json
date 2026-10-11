@@ -143,5 +143,23 @@
   "group": "C1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-sdr1851 (reviewer sub-agent of L); spot-checked: Steps 1-4 against cited statements; d=0 clopen-diagonal case via def-sbc/etale/unramified; affine diagonal node true (I/I^2=Omega free rank d, regular near diagonal), d>0 branch only; no cycle with K1 parent lem-sc-smooth-proper-diagonal-koszul-regular (item cites none of K1's deps; regular->Koszul is K1's own step via lem-weil-pbc-regular-sequence-koszul-regular, so def-weil-pbc-koszul-regular-sequence need not be cited here; lem-pc-smooth-characterization (flat + smooth fibres) not needed). FIX more, RETURN less: (1) B8/C4 lem-sc-standard-smooth-local-relative-dimension was a mathlib leaf on Smooth.lean:136, which is the defining field of Mathlib's SmoothOfRelativeDimension (chart-defined), not a statement starting from the fibre-dimension notion of def-sbc-smooth-morphisms; the bridge (Tags 02G1/02G2/054L) is a real lemma, so the node is now status unsplit, mathlib_match null, searches re-verdicted with a grep entry.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SmoothDiagonalRegularGenerators",
+  "declaration": "AlgebraicGeometry.exists_isRegular_smooth_diagonal_generators",
+  "file": "lean/Sheaf/AlgebraicGeometry/SmoothDiagonalRegularGenerators.lean",
+  "statement": "theorem exists_isRegular_smooth_diagonal_generators {X S : Scheme.{u}} (d : ℕ) (f : X ⟶ S) [SmoothOfRelativeDimension d f] [IsClosedImmersion (pullback.diagonal f)] : ∀ w : (pullback f f : Scheme.{u}), ∃ U : (pullback f f).affineOpens, w ∈ U.1 ∧ (RingHom.ker ((pullback.diagonal f).app U.1).hom = ⊤ ∨ ∃ r : List Γ(pullback f f, U.1), r.length = d ∧ RingTheory.Sequence.IsRegular Γ(pullback f f, U.1) r ∧ Ideal.ofList r = RingHom.ker ((pullback.diagonal f).app U.1).hom)",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-sdr0932",
+  "group": "J1",
+  "result": "pass",
+  "note": "S,X arbitrary Scheme.{u}; f smooth of pure rel. dim d = SmoothOfRelativeDimension d f (recorded def-sbc-smooth-morphisms notion, as 610f00ead); Delta = pullback.diagonal f with IsClosedImmersion (mathlib_match); every w : pullback f f has affine U∋w; ideal of Delta^-1(U) = ker of Delta.app U (closed immersion affine, surjective; empty preimage gives ⊤); alternative ⊤ or List of length d, RingTheory.Sequence.IsRegular (mathlib_match of def-weil-pbc-regular-sequence, incl. M≠IM) generating exactly via Ideal.ofList; d=0 clopen-diagonal case and off-image points checked; names #check'ed fully qualified; docstring carries the four node proof steps"
  }
 }
