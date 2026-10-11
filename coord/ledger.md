@@ -3206,3 +3206,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 01:09 UTC L: G1 coherent-ring-perfect-complex-cohomology FIX cc39d75af (R-crp0108).
 - 01:09 UTC L: M1 finite-flat-pushforward-locally-free FIX 4cfe4826b (R-ffp0108; TAB-corrupted TeX restored, two attached leaves verified).
 - 01:09 L: merged deliver/J1/lem-pc-derived-functor-termwise-split-ses-triangle (reviewer FIX; first push; new nodes: 0)
+- 01:10 UTC L: J1 derived-functor-termwise-split-ses-triangle FIX a90a2a882 (R-tst0107; narrowed to g_*, E7).
