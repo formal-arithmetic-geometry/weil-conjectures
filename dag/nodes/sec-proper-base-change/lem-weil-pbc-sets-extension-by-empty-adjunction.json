@@ -234,5 +234,23 @@
   "by": "L",
   "result": "accepted",
   "note": "8 steps following Stacks 00A3/00A0: restriction of a sheaf is a sheaf (same coverings); clause (1) and (j_{p!}G)|_U = G from the formula; clause (2) by the universal property of sheafification composed with (1), naturality from the defining identity of j_! beta; stalks of a restriction via cofinality (filtered-colimit leaf); clause (3) with a new leaf for 007Z (stalks unchanged by sheafification, sets version: stalkFunctor_map_unit_toSheafify_isIso, Sheafify.lean:137 verified by L); clause (4) through stalks and the 007T (3) leaf instead of the source's unavailable section description. Tags 007Z, 007T, 00A0, 00A3 verified."
+ },
+ "lean": {
+  "module": "Sheaf.Topology.SetsExtensionByEmptyAdjunction",
+  "declaration": "TopCat.extensionByEmpty_adjunction_stalks",
+  "file": "lean/Sheaf/Topology/SetsExtensionByEmptyAdjunction.lean",
+  "statement": "theorem extensionByEmpty_adjunction_stalks (G : TopCat.Sheaf (Type u) ((toTopCat X).obj U)) : Nonempty (extensionByEmptyPresheaf U ⊣ (Presheaf.pullback (Type u) (inclusion' U) ⋙ presheafToSheaf (Opens.grothendieckTopology ((toTopCat X).obj U)) (Type u))) ∧ Nonempty (extensionByEmpty U ⊣ Sheaf.pullback (Type u) (inclusion' U)) ∧ (∀ (x : X), x ∉ U → IsEmpty (ToType (((extensionByEmpty U).obj G).presheaf.stalk x))) ∧ (∀ (x : X) (hx : x ∈ U), Nonempty (G.presheaf.stalk ⟨x, hx⟩ ≃ ToType (((extensionByEmpty U).obj G).presheaf.stalk x))) ∧ Nonempty (G ≅ (Sheaf.pullback (Type u) (inclusion' U)).obj ((extensionByEmpty U).obj G))",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-12",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "F1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }

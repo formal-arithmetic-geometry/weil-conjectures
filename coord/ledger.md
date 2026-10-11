@@ -5618,3 +5618,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 18:52 L: merged deliver/U1/lem-sc-irreducible-noetherian-constant-acyclic (stage 2; reviewer PASS; first push; Sheaf.Topology.IrreducibleNoetherianConstantAcyclic TopCat.irreducible_noetherian_constant_acyclic)
 - 18:52 L: merged deliver/V1/lem-sc-topological-filtered-cohomology (stage 2; reviewer PASS; first push; Sheaf.Topology.TopologicalFilteredCohomology TopCat.topological_filtered_cohomology)
 - 18:53 L: merged deliver/T1/lem-sc-cohomology-closed-immersion-pushforward (stage 2; reviewer PASS; first push; Sheaf.Topology.ClosedImmersionPushforwardCohomology TopCat.cohomology_closed_immersion_pushforward)
+- 18:54 L: merged deliver/F1/lem-weil-pbc-sets-extension-by-empty-adjunction (stage 2; reviewer PASS; first push; Sheaf.Topology.SetsExtensionByEmptyAdjunction TopCat.extensionByEmpty_adjunction_stalks)
