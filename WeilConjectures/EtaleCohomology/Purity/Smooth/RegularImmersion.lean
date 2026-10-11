@@ -120,8 +120,9 @@ closed immersion `i : Z ⟶ X` of codimension `c` whose étale map is the inclus
 open `U ⊆ X`: the ideal of `Z` is generated on `U` by a regular sequence `f₁, …, f_c`. -/
 theorem exists_etaleFrame_isOpenImmersion (c : ℕ) (i : Z ⟶ X)
     [IsRegularImmersion c i] (z : Z) :
-    ∃ F : i.EtaleFrame c, IsOpenImmersion F.e ∧ z ∈ Set.range F.toZ := by
-  obtain ⟨U, hzU, r, hr, -, hI⟩ :=
+    ∃ F : i.EtaleFrame c, IsOpenImmersion F.e ∧ z ∈ Set.range F.toZ ∧ IsAffine F.U ∧
+      RingTheory.Sequence.IsWeaklyRegular Γ(F.U, ⊤) (List.ofFn F.f) := by
+  obtain ⟨U, hzU, r, hr, hreg, hI⟩ :=
     IsRegularImmersion.exists_isWeaklyRegular_generators (c := c) (i := i) (i z)
   have : IsAffine U.1.toScheme := U.2
   let f : Fin c → Γ(U.1.toScheme, ⊤) := fun a ↦ U.1.topIso.inv (r.get (a.cast hr.symm))
@@ -155,7 +156,14 @@ theorem exists_etaleFrame_isOpenImmersion (c : ℕ) (i : Z ⟶ X)
       isPullback := by
         refine IsPullback.of_iso (isPullback_morphismRestrict i U.1).flip (asIso φ) (Iso.refl _)
           (Iso.refl _) (Iso.refl _) ?_ ?_ ?_ ?_ <;> simp [hφ] }
-  refine ⟨F, inferInstanceAs (IsOpenImmersion U.1.ι), φ ⟨z, hzU⟩, ?_⟩
+  have hreg' : RingTheory.Sequence.IsWeaklyRegular Γ(U.1.toScheme, ⊤) (List.ofFn f) := by
+    have hf : List.ofFn f = r.map U.1.topIso.inv.hom := by
+      refine List.ext_get (by simp [hr]) fun n h₁ h₂ ↦ ?_
+      simp [f]
+    rw [hf]
+    exact hreg.map_of_flat (RingHom.Flat.of_bijective
+      (ConcreteCategory.bijective_of_isIso U.1.topIso.inv))
+  refine ⟨F, inferInstanceAs (IsOpenImmersion U.1.ι), ⟨φ ⟨z, hzU⟩, ?_⟩, ‹_›, hreg'⟩
   change (inv φ ≫ (i ⁻¹ᵁ U.1).ι) (φ ⟨z, hzU⟩) = z
   rw [← Scheme.Hom.comp_apply, ← Category.assoc, IsIso.hom_inv_id, Category.id_comp]
   rfl
@@ -173,6 +181,20 @@ noncomputable def EtaleFrame.ofIsPullback {c : ℕ} {i : Z ⟶ X} {X' Z' : Schem
   f := F.f
   toZ := F.toZ ≫ g
   isPullback := F.isPullback.paste_horiz hg
+
+/-- The frame of the closed subscheme `V(f₁, …, f_c) ⊂ U` cut out by functions on `U` given by an
+étale `j : W ⟶ U` and the pulled back functions `j^* f_a`. -/
+noncomputable def EtaleFrame.ofFunctions {c : ℕ} {U W : Scheme.{u}} (f : Fin c → Γ(U, ⊤))
+    (j : W ⟶ U) [AlgebraicGeometry.Etale j] :
+    (U.zeroLocusSubschemeι (Set.range f)).EtaleFrame c where
+  U := W
+  e := j
+  etale := inferInstance
+  f a := j.appTop (f a)
+  toZ := (AlgebraicGeometry.Etale.exists_isPullback_zeroLocusSubschemeι j (Set.range f)
+    (Set.range fun a ↦ j.appTop (f a)) (by rw [← Set.range_comp]; rfl)).choose
+  isPullback := (AlgebraicGeometry.Etale.exists_isPullback_zeroLocusSubschemeι j (Set.range f)
+    (Set.range fun a ↦ j.appTop (f a)) (by rw [← Set.range_comp]; rfl)).choose_spec
 end Scheme.Hom
 
 namespace Etale
@@ -357,6 +379,13 @@ noncomputable def frameRestriction [HasTateTwist Λ] [IsClosedImmersion i] (F : 
   restrictSupportedClass (ModuleCat.{u + 1} Λ) F.e i _ F.toZ F.isPullback
     (leftDerivedUpperStarConstantComplexIso Λ F.e).inv (leftDerivedUpperStarTateShiftIso Λ F.e c) γ
 
+/-- A frame class restricts to the frame class of the pulled back functions. -/
+lemma frameRestriction_kummerBoundaryProduct [HasKummerClass Λ] {U W : Scheme.{u}}
+    [HasInvertibleExponent Λ U] (f : Fin c → Γ(U, ⊤)) (j : W ⟶ U) [AlgebraicGeometry.Etale j] :
+    frameRestriction Λ (Scheme.Hom.EtaleFrame.ofFunctions f j) (kummerBoundaryProduct Λ f) =
+      frameClass Λ (Scheme.Hom.EtaleFrame.ofFunctions f j) :=
+  restrictSupportedClass_kummerBoundaryProduct Λ j f _ (fun _ ↦ rfl) _ _
+
 variable [HasKummerClass Λ] [HasKummerClass.IsNormalized Λ] [HasInvertibleExponent Λ X]
   {k : Type u} [Field k] [PerfectField k] (c) (i) [IsRegularImmersion c i]
 
@@ -455,18 +484,19 @@ theorem exists_iso_singleFunctor_rightDerivedLowerShriek_of_isRegularImmersion
 
 /-- Blueprint `sk-thm-regular`: Purity for regular closed immersions
 
-*Uniqueness of the fundamental class.* Two classes in `H^{2c}_Z(X, Λ(c))` whose restrictions to
-every Zariski frame agree are equal. The classes are sections of a sheaf
+*Uniqueness of the fundamental class.* Two classes in `H^{2c}_Z(X, Λ(c))` are equal if every
+point of `Z` lies in a Zariski frame on which their restrictions agree. The classes are sections
+of a sheaf
 (`AlgebraicGeometry.Etale.exists_iso_singleFunctor_rightDerivedLowerShriek_of_isRegularImmersion`),
 so they are determined by their pullbacks to the geometric points of `X`. A geometric point
 outside `Z` sees nothing; a geometric point of `Z` factors through a Zariski frame, and the
 restriction of supports along an open immersion is invertible
 (`AlgebraicGeometry.Etale.isIso_supportedRestriction_of_isOpenImmersion`). -/
-theorem eq_of_frameRestriction_eq (aX : X ⟶ Spec (.of k)) [Smooth aX]
+theorem eq_of_forall_exists_frameRestriction_eq (aX : X ⟶ Spec (.of k)) [Smooth aX]
     (hZ : ∀ z : Z, IsRegularLocalRing (Z.presheaf.stalk z))
     {γ γ' : constantComplex Λ X ⟶ (R(i)_![ModuleCat.{u + 1} Λ]).obj
       ((R(i)^![ModuleCat.{u + 1} Λ]).obj ((tateObject Λ X c)⟦2 * (c : ℤ)⟧))}
-    (h : ∀ F : i.EtaleFrame c, IsOpenImmersion F.e →
+    (h : ∀ z : Z, ∃ F : i.EtaleFrame c, IsOpenImmersion F.e ∧ z ∈ Set.range F.toZ ∧
       frameRestriction Λ F γ = frameRestriction Λ F γ') :
     γ = γ' := by
   obtain ⟨G, ⟨eM⟩⟩ :=
@@ -484,7 +514,7 @@ theorem eq_of_frameRestriction_eq (aX : X ⟶ Spec (.of k)) [Smooth aX]
     obtain ⟨_, ⟨y, rfl⟩, hy⟩ := Set.not_subset.mp hx
     rw [← Set.mem_compl_iff, ← i.range_eq_compl_range_openComplement_ι] at hy
     obtain ⟨z, hz⟩ := hy
-    obtain ⟨F, hF, w, rfl⟩ := i.exists_etaleFrame_isOpenImmersion c z
+    obtain ⟨F, hF, ⟨w, rfl⟩, hFγ⟩ := h z
     have hxe : Set.range x.base ⊆ Set.range F.e.base := by
       rintro _ ⟨y', rfl⟩
       refine ⟨(F.U.zeroLocusSubschemeι (Set.range F.f)) w, ?_⟩
@@ -494,7 +524,7 @@ theorem eq_of_frameRestriction_eq (aX : X ⟶ Spec (.of k)) [Smooth aX]
         (L((F.e)^*[ModuleCat.{u + 1} Λ])).map γ' := by
       have hψ := isIso_supportedRestriction_of_isOpenImmersion (ModuleCat.{u + 1} Λ) F.e i _ F.toZ
         F.isPullback _ _ (leftDerivedUpperStarTateShiftIso Λ F.e c)
-      have := h F hF
+      have := hFγ
       simp only [frameRestriction, restrictSupportedClass] at this
       rwa [cancel_epi, cancel_mono] at this
     have hx' := IsOpenImmersion.lift_fac F.e x hxe
@@ -502,6 +532,23 @@ theorem eq_of_frameRestriction_eq (aX : X ⟶ Spec (.of k)) [Smooth aX]
       F.e x hx'.symm
     rw [← NatIso.naturality_2 comp γ, ← NatIso.naturality_2 comp γ', Functor.comp_map,
       Functor.comp_map, he]
+
+/-- Blueprint `sk-thm-regular`: Purity for regular closed immersions
+
+*Uniqueness of the fundamental class.* Two classes in `H^{2c}_Z(X, Λ(c))` whose restrictions to
+every Zariski frame agree are equal
+(`AlgebraicGeometry.Etale.eq_of_forall_exists_frameRestriction_eq`): every point of `Z` lies in a
+Zariski frame (`AlgebraicGeometry.Scheme.Hom.exists_etaleFrame_isOpenImmersion`). -/
+theorem eq_of_frameRestriction_eq (aX : X ⟶ Spec (.of k)) [Smooth aX]
+    (hZ : ∀ z : Z, IsRegularLocalRing (Z.presheaf.stalk z))
+    {γ γ' : constantComplex Λ X ⟶ (R(i)_![ModuleCat.{u + 1} Λ]).obj
+      ((R(i)^![ModuleCat.{u + 1} Λ]).obj ((tateObject Λ X c)⟦2 * (c : ℤ)⟧))}
+    (h : ∀ F : i.EtaleFrame c, IsOpenImmersion F.e →
+      frameRestriction Λ F γ = frameRestriction Λ F γ') :
+    γ = γ' :=
+  eq_of_forall_exists_frameRestriction_eq Λ c i aX hZ fun z ↦
+    have ⟨F, hF, hz, _⟩ := i.exists_etaleFrame_isOpenImmersion c z
+    ⟨F, hF, hz, h F hF⟩
 
 
 /-- Blueprint `sk-thm-regular`: Purity for regular closed immersions
