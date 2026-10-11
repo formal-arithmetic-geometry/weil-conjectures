@@ -6,6 +6,9 @@ Authors: Claude
 module
 
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
+public import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
+public import Mathlib.RingTheory.Ideal.Quotient.Operations
+public import Mathlib.LinearAlgebra.Span.Basic
 
 /-!
 # Extension of scalars along an algebra map as a tensor product
@@ -75,3 +78,65 @@ lemma ModuleCat.tensorEquivExtendScalars_tmul (R S : Type u) [CommRing R] [CommR
         (M := (ModuleCat.restrictScalars (algebraMap R S)).obj (ModuleCat.of S S))
         s n :=
   rfl
+
+namespace ModuleCat
+
+variable {Λ : Type u} [CommRing Λ] (ϖ : Λ)
+
+/-- For `f : Λ → Λ/(ϖ)`, the counit `Hom_Λ(Λ/ϖ, M) ⟶ M` of restriction and coextension of
+scalars, evaluation at `1`, followed by multiplication by `ϖ`, as a short complex. -/
+noncomputable def coextendQuotientShortComplex (M : ModuleCat.{u} Λ) :
+    ShortComplex (ModuleCat.{u} Λ) :=
+  ShortComplex.mk
+    ((restrictCoextendScalarsAdj.{u} (Ideal.Quotient.mk (Ideal.span {ϖ}))).counit.app M)
+    (ϖ • 𝟙 M) (by
+      ext g
+      change ϖ • (CoextendScalars.equiv _ M g) (1 : Λ ⧸ Ideal.span {ϖ}) = 0
+      rw [← map_smul]
+      change (CoextendScalars.equiv _ M g) (Ideal.Quotient.mk (Ideal.span {ϖ}) ϖ * 1) = 0
+      rw [Ideal.Quotient.eq_zero_iff_mem.2 (Ideal.mem_span_singleton_self ϖ), zero_mul, map_zero])
+
+lemma mono_coextendQuotientShortComplex_f (M : ModuleCat.{u} Λ) :
+    Mono (coextendQuotientShortComplex ϖ M).f := by
+  rw [mono_iff_injective]
+  intro (g : (coextendScalars (Ideal.Quotient.mk (Ideal.span {ϖ}))).obj M)
+    (g' : (coextendScalars (Ideal.Quotient.mk (Ideal.span {ϖ}))).obj M) h
+  change g (1 : Λ ⧸ Ideal.span {ϖ}) = g' (1 : Λ ⧸ Ideal.span {ϖ}) at h
+  refine CoextendScalars.ext (LinearMap.ext fun (s : Λ ⧸ Ideal.span {ϖ}) ↦ ?_)
+  obtain ⟨r, rfl⟩ := Ideal.Quotient.mk_surjective s
+  have e : ∀ g : (coextendScalars (Ideal.Quotient.mk (Ideal.span {ϖ}))).obj M,
+      g (Ideal.Quotient.mk _ r) = r • g (1 : Λ ⧸ Ideal.span {ϖ}) :=
+    fun g ↦ by
+      rw [← map_smul]
+      congr 1
+      change _ = Ideal.Quotient.mk _ r * 1
+      rw [mul_one]
+  change g (Ideal.Quotient.mk _ r) = g' (Ideal.Quotient.mk _ r)
+  rw [e, e, h]
+
+lemma exact_coextendQuotientShortComplex (M : ModuleCat.{u} Λ) :
+    (coextendQuotientShortComplex ϖ M).Exact := by
+  rw [ShortComplex.moduleCat_exact_iff]
+  intro x hx
+  change ϖ • x = 0 at hx
+  have hle : Ideal.span {ϖ} ≤ LinearMap.ker (LinearMap.toSpanSingleton Λ M x) := by
+    rw [Ideal.span_le, Set.singleton_subset_iff]
+    exact hx
+  let φ : (restrictScalars (Ideal.Quotient.mk (Ideal.span {ϖ}))).obj
+      (of (Λ ⧸ Ideal.span {ϖ}) (Λ ⧸ Ideal.span {ϖ})) →ₗ[Λ] M :=
+    { toFun s := Submodule.liftQ _ (LinearMap.toSpanSingleton Λ M x) hle s
+      map_add' a b := map_add _ a b
+      map_smul' r s := by
+        obtain ⟨t, rfl⟩ := Ideal.Quotient.mk_surjective s
+        have h : Ideal.Quotient.mk (Ideal.span {ϖ}) r * Ideal.Quotient.mk _ t =
+            Submodule.Quotient.mk (p := Ideal.span {ϖ}) (r * t) := (map_mul _ r t).symm
+        change Submodule.liftQ _ _ hle (Ideal.Quotient.mk _ r * Ideal.Quotient.mk _ t) =
+          r • Submodule.liftQ _ _ hle (Submodule.Quotient.mk t)
+        rw [h, Submodule.liftQ_apply, Submodule.liftQ_apply, LinearMap.toSpanSingleton_apply,
+          LinearMap.toSpanSingleton_apply, mul_smul] }
+  refine ⟨(CoextendScalars.equiv _ M).symm φ, ?_⟩
+  change φ (show Λ ⧸ Ideal.span {ϖ} from 1) = x
+  change Submodule.liftQ _ _ hle (Submodule.Quotient.mk (1 : Λ)) = x
+  rw [Submodule.liftQ_apply, LinearMap.toSpanSingleton_apply, one_smul]
+
+end ModuleCat

@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.AlgebraicGeometry.InvertibleExponent
+public import WeilConjectures.ConstructibleSheaf.Defs
 public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
 public import WeilConjectures.SixFunctors.Etale.Derived.Dualizing
 public import WeilConjectures.SixFunctors.Etale.Derived.Shift
@@ -150,6 +151,15 @@ class HasTateTwist where
   which are stated on `D^b_{ctf}`. -/
   boundedConstructibleFiniteTor_twistObject (X : Scheme.{u}) (m : ℤ) :
     DerivedCategory.boundedConstructibleFiniteTor Λ X (twistObject X m)
+  /-- Every twisting object is locally constant of rank one (`def-coefficient-twists-detailed`):
+  `Λ_X(m)` is a locally constant sheaf `L` of `Λ`-modules placed in degree zero, every stalk of
+  which at a geometric point is free of rank one. In the concrete model
+  `L = (μ_{ℓ^N} ⊗ Λ)^{⊗ m}`, respectively its `Λ`-dual for `m < 0`. -/
+  exists_isLocallyConstantSheaf_twistObject (X : Scheme.{u}) (m : ℤ) :
+    ∃ L : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ), IsLocallyConstantSheaf L ∧
+      (∀ (Ω : Type u) [Field Ω] [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ X),
+        Nonempty ((pointSmallEtale s).sheafFiber.obj L ≅ ModuleCat.of Λ Λ)) ∧
+      Nonempty (twistObject X m ≅ (DerivedCategory.singleFunctor _ 0).obj L)
   /-- The left unit law: `Λ_X(0) ⊗ Λ_X(m) ≅ Λ_X(m)` is the left unitor, through
   `Λ_X(0) ≅ Λ_X`.
 
