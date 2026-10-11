@@ -213,5 +213,23 @@
   "by": "L",
   "result": "accepted",
   "note": "7 steps following Stacks 01E4 with 01E1 and 01E2 made explicit: injective resolution and R^p f_* = H^p(f_* I); restriction of an injective resolution to an open is one (new unsplit 01E1 node); the restriction maps of def-weil-pbc-module-cohomology-fmap (b) are induced by restricting the resolution; sections of f_* I over V; cohomology sheaf = sheafified presheaf cohomology (new composed Mathlib leaf: PresheafOfModules abelian with sectionwise (co)limits, sheafification exact and left adjoint with iso counit; lines Abelian.lean:38, Limits.lean:153, Colimits.lean:157, Sheafification.lean:157/161/190 verified by L); the universal map theta, independent of the resolution; stalks via 007Z leaf. Statement gained the explicit map theta and the O_Y(V)-action. The site version (072W node) was not used since R^p f_* is derived on modules."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.HigherDirectImagePresheaf",
+  "declaration": "AlgebraicGeometry.higherDirectImagePresheaf",
+  "file": "lean/Sheaf/Paper/HigherDirectImagePresheaf.lean",
+  "statement": "theorem higherDirectImagePresheaf {X Y : Scheme.{u}} (f : X ⟶ Y) (F : SheafOfModules.{u} (moduleRings X.toRingedSpace)) (p : ℕ) [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))] : ∃ (P : PresheafOfModules.{u} (moduleRings Y.toRingedSpace).obj), Nonempty ((PresheafOfModules.sheafification (𝟙 (moduleRings Y.toRingedSpace).obj)).obj P ≅ ((RingedSpace.moduleDirectImage f.toLRSHom.toShHom).rightDerived p).obj F) ∧ Nonempty (P ⟶ (SheafOfModules.forget (moduleRings Y.toRingedSpace)).obj (((RingedSpace.moduleDirectImage f.toLRSHom.toShHom).rightDerived p).obj F)) ∧ ∀ (Q : SheafOfModules.{u} (moduleRings Y.toRingedSpace)), Nonempty ((PresheafOfModules.sheafification (𝟙 (moduleRings Y.toRingedSpace).obj)).obj P ⟶ Q) ∧ ∀ (y : Y), Nonempty (PresheafOfModules.stalkObj (moduleRings Y.toRingedSpace).obj y P ≅ (PresheafOfModules.moduleStalkFunctor (moduleRings Y.toRingedSpace).obj y).obj (((RingedSpace.moduleDirectImage f.toLRSHom.toShHom).rightDerived p).obj F).val) ∧ (p = 0 → Nonempty (((RingedSpace.moduleDirectImage f.toLRSHom.toShHom).rightDerived 0).obj F ≅ (RingedSpace.moduleDirectImage f.toLRSHom.toShHom).obj F))",
+  "branch": "sheaf-dag",
+  "by": "R1",
+  "date": "2026-10-12",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "R1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }
