@@ -5169,3 +5169,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 15:12 L: merged deliver/G1/lem-weil-pbc-finite-type-z-g-ring (stage 2; reviewer PASS; first push; Sheaf.RingTheory.FiniteTypeIntGRing isGRing_of_finiteType_int)
 - 15:13 L: merged deliver/G1/def-pc-ringed-spaces-derived-direct-image (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImage AlgebraicGeometry.RingedSpace.derivedModuleDirectImage)
 - 15:13 L: merged deliver/G1/lem-weil-pbc-semi-representable-covering-permanence (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.SemiRepresentableCoveringPermanence AlgebraicGeometry.Scheme.semiRepresentableCovering_comp_baseChange)
+- 15:13 L: merged deliver/N1/thm-sp-spectral-object-yields (stage 2; reviewer FIX; first push; Sheaf.CategoryTheory.BoundedFilteredComplexSpectralSequence CategoryTheory.boundedFilteredComplex_spectralSequence)
