@@ -185,5 +185,23 @@
   "by": "L",
   "result": "pass",
   "note": "five steps (the open points as spectra of local rings with one prime and residue field k; strictly henselian by the new 06RS node; the sheaf condition for the disjoint cover written out; sections of each piece equal the stalk by the new 03QO node with the restriction and germ identifications; the composite and naturality); 2 new unsplit nodes (Stacks 03QO and 06RS); the brief's route through Artinian/complete rings replaced by 06RS, rightly"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ZeroDimensionalSectionsStalks",
+  "declaration": "AlgebraicGeometry.Scheme.zeroDimensional_sections_stalks",
+  "file": "lean/Sheaf/AlgebraicGeometry/ZeroDimensionalSectionsStalks.lean",
+  "statement": "theorem zeroDimensional_sections_stalks (k : Type u) [Field k] [IsAlgClosed k] (C : Scheme.{u}) [C.Over (Spec (.of k))] [IsSeparated (C ↘ Spec (.of k))] [LocallyOfFiniteType (C ↘ Spec (.of k))] [QuasiCompact (C ↘ Spec (.of k))] (hdim : topologicalKrullDim C ≤ 0) (Ω : C → Type u) [∀ c, Field (Ω c)] [∀ c, IsAlgClosed (Ω c)] (s : ∀ c, Spec (.of (Ω c)) ⟶ C) (hs : ∀ c, s c default = c) : Finite C ∧ (∀ F : Sheaf C.smallEtaleTopology AddCommGrpCat.{(max u v) + 1}, IsIso (Limits.Pi.lift (fun c : C => (pointSmallEtale (s c)).toPresheafFiber (Etale.mk (𝟙 C)) (Over.homMk (s c) (Category.comp_id (s c))) F.obj))) ∧ (∀ (F G : Sheaf C.smallEtaleTopology AddCommGrpCat.{(max u v) + 1}) (φ : F ⟶ G), φ.hom.app (op (Etale.mk (𝟙 C))) ≫ Limits.Pi.lift (fun c : C => (pointSmallEtale (s c)).toPresheafFiber (Etale.mk (𝟙 C)) (Over.homMk (s c) (Category.comp_id (s c))) G.obj) = Limits.Pi.lift (fun c : C => (pointSmallEtale (s c)).toPresheafFiber (Etale.mk (𝟙 C)) (Over.homMk (s c) (Category.comp_id (s c))) F.obj) ≫ Limits.Pi.map (fun c : C => (pointSmallEtale (s c)).sheafFiber.map φ))",
+  "branch": "sheaf-dag",
+  "by": "Q1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "Q1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }
