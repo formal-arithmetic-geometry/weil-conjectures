@@ -1,23 +1,22 @@
 # Work queue
 
-984 items; claim with `tools/claim.py next <group> [--stage N]`.
+988 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (984)
+## Stage 2: nodes to state (988)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
 | `def-pc-base-change` | 1 | state |
 | `def-pur-sheaf-hom` | 1 | state |
 | `def-weil-pbc-derived-categories` | 1 | state |
-| `def-weil-pbc-etale-constructible-sheaf` | 1 | state |
 | `def-weil-pbc-finite-torsors` | 1 | state |
 | `lem-constructible-constant-exact` | 1 | state |
-| `lem-constructible-shortexact-local-lift` | 1 | state |
 | `lem-exc-abelian-sheaves-gmodules` | 1 | state |
 | `lem-exc-cochains-derived-invariants` | 1 | state |
+| `lem-kun-03sa` | 1 | state |
 | `lem-pc-bounded-above-flat-kflat-site` | 1 | state |
 | `lem-pc-bounded-above-flat-tensor-acyclic` | 1 | state |
 | `lem-pc-closed-subscheme-base-change-ideal-image` | 1 | state |
@@ -52,15 +51,12 @@
 | `lem-sc-conductor-ideal-zero-intersection` | 1 | state |
 | `lem-sc-conductor-sections` | 1 | state |
 | `lem-sc-derived-hom-mayer-vietoris` | 1 | state |
-| `lem-sc-determinant-short-exact` | 1 | state |
 | `lem-sc-dim-one-ample-invertible` | 1 | state |
 | `lem-sc-dvr-field-extension-order` | 1 | state |
 | `lem-sc-dvr-valuation-ring-characterization` | 1 | state |
 | `lem-sc-enough-globally-generated-ample` | 1 | state |
-| `lem-sc-etale-at-prime-flat-unramified-criterion` | 1 | state |
 | `lem-sc-etale-torsor-pushout-extension` | 1 | state |
 | `lem-sc-ext-derived-composite-natural` | 1 | state |
-| `lem-sc-fg-domain-positive-dimension-infinite-maximals` | 1 | state |
 | `lem-sc-filtered-colimit-prime-chain-dimension` | 1 | state |
 | `lem-sc-finite-cohomology` | 1 | state |
 | `lem-sc-finite-discrete-separated-affine` | 1 | state |
@@ -244,9 +240,15 @@
 | `lem-weil-pbc-constant-sheaf-sections-locally-constant` | 1 | state |
 | `lem-weil-pbc-constant-sheaf-set-sections-connected-natural` | 1 | state |
 | `lem-weil-pbc-constant-subsheaf-generic` | 1 | state |
+| `lem-weil-pbc-constructible-field-finite-separable-constant` | 1 | state |
+| `lem-weil-pbc-constructible-generation` | 1 | state |
 | `lem-weil-pbc-constructible-in-retrocompact-open` | 1 | state |
 | `lem-weil-pbc-constructible-intersection-in-constructible` | 1 | state |
 | `lem-weil-pbc-constructible-is-retrocompact` | 1 | state |
+| `lem-weil-pbc-constructible-module-finite-presentation` | 1 | state |
+| `lem-weil-pbc-constructible-module-finite-pushforward-embedding` | 1 | state |
+| `lem-weil-pbc-constructible-module-finite-stalks` | 1 | state |
+| `lem-weil-pbc-constructible-module-support-constructible` | 1 | state |
 | `lem-weil-pbc-constructible-noetherian-finite-selection` | 1 | state |
 | `lem-weil-pbc-coskeletal-map-trivial-kan` | 1 | state |
 | `lem-weil-pbc-coskeleton-free-homology-comparison` | 1 | state |
@@ -310,6 +312,7 @@
 | `lem-weil-pbc-etale-cover-detects-iso` | 1 | state |
 | `lem-weil-pbc-etale-fibre-discrete-separable-points` | 1 | state |
 | `lem-weil-pbc-etale-fibre-specialization-bound` | 1 | state |
+| `lem-weil-pbc-etale-free-sheaf-constructible` | 1 | state |
 | `lem-weil-pbc-etale-graph-section-extension-map` | 1 | state |
 | `lem-weil-pbc-etale-inverse-image-algebraic-structures` | 1 | state |
 | `lem-weil-pbc-etale-local-finite-at-point-elementary` | 1 | state |
@@ -610,6 +613,7 @@
 | `lem-weil-pbc-module-open-restriction-injectives` | 1 | state |
 | `lem-weil-pbc-module-pullback-tensor` | 1 | state |
 | `lem-weil-pbc-module-pushforward-injectives-sections-quasi-iso` | 1 | state |
+| `lem-weil-pbc-module-sheaf-colimit-constructible` | 1 | state |
 | `lem-weil-pbc-module-sheaves-colimits-forgetful` | 1 | state |
 | `lem-weil-pbc-module-sheaves-enough-injectives` | 1 | state |
 | `lem-weil-pbc-module-sheaves-grothendieck-abelian` | 1 | state |
@@ -994,7 +998,7 @@
 | `lem-sc-normalization-properties` | 3 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 987 nodes that wait for a statement dependency, 40 nodes that wait for stage 1.
+Not open yet: 978 nodes that wait for a statement dependency, 40 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
