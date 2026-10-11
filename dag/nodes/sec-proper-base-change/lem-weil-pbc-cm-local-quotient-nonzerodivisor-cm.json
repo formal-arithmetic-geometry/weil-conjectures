@@ -207,5 +207,23 @@
   "item": "lem-weil-pbc-cm-local-quotient-nonzerodivisor-cm",
   "worker": "stage1",
   "summary": "Not a Mathlib leaf: the dimension clause is ringKrullDim_quotient_span_singleton_succ_eq_ringKrullDim_of_mem_nonZeroDivisors (Regular.lean:189, existing leaf lem-weil-pbc-dimension-quotient-nonzerodivisor), but Mathlib has no depth/Cohen-Macaulay (LeanSearch, Loogle, grep recorded). Split following Stacks 02JN (last assertion, c = 1) -> 00N6 proof -> 00N5, tags verified in tags/tags (02JN, 00N6, 00N5, 00N3 via label, 00LK, 00KW, 0AAD): (1) S/xS nonzero Noetherian local, dim S/xS = d - 1 by the 00KW leaf (so d >= 1); (2) Supp S = Spec S, Supp S ∩ V(x) = V(x) of dimension dim S/xS = d - 1 via the support-annihilator leaf and the prime correspondence, as the reviewed 00N6 node does; (3) depth S = d = dim Supp S by 00LK node, so S is a CM module; (4) 00N5 node clause (b): depth_m(S/xS) = d - 1 as S-module; (5) elementary change of rings: an S-regular sequence in m on S/xS maps to an S/xS-regular sequence in m/xS, so depth(S/xS) >= d - 1. Statement unchanged; stmt_deps unchanged. No new nodes. Matches the citer lem-weil-pbc-miracle-flatness step 7, which takes S/xS Noetherian local with depth(S/xS) >= dim(S/xS) = dim S - 1."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.DepthQuotientNonzerodivisor",
+  "declaration": "IsLocalRing.depth_quotient_nonzerodivisor",
+  "file": "lean/Sheaf/RingTheory/DepthQuotientNonzerodivisor.lean",
+  "statement": "theorem depth_quotient_nonzerodivisor (S : Type u) [CommRing S] [IsNoetherianRing S] [IsLocalRing S] (d : ℕ) (hd : ringKrullDim S = (d : WithBot ℕ∞)) (hdepth : (d : ℕ∞) ≤ depth (R := S) S) (x : S) (hx : x ∈ maximalIdeal S) (hregular : x ∈ nonZeroDivisors S) : ∃ hQ : IsLocalRing (S ⧸ Ideal.span {x}), letI := hQ IsNoetherianRing (S ⧸ Ideal.span {x}) ∧ ringKrullDim (S ⧸ Ideal.span {x}) = ((d - 1 : ℕ) : WithBot ℕ∞) ∧ maximalIdeal (S ⧸ Ideal.span {x}) = (maximalIdeal S).map (Ideal.Quotient.mk (Ideal.span {x})) ∧ ((d - 1 : ℕ) : ℕ∞) ≤ depth (R := S ⧸ Ideal.span {x}) (S ⧸ Ideal.span {x}) ∧ ∃ rs : List (S ⧸ Ideal.span {x}), RingTheory.Sequence.IsRegular (S ⧸ Ideal.span {x}) rs ∧ (∀ y ∈ rs, y ∈ maximalIdeal (S ⧸ Ideal.span {x})) ∧ rs.length = d - 1",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-cqn1433",
+  "group": "G1",
+  "result": "pass",
+  "note": "S CommRing+IsNoetherianRing+IsLocalRing; d with ringKrullDim S = d; CM inline (d ≤ IsLocalRing.depth (R:=S) S, as e10ccd492); x ∈ maximalIdeal ∧ x ∈ nonZeroDivisors; quotient S ⧸ Ideal.span {x}; concl ∃ IsLocalRing, Noetherian, dim = d-1, max ideal = image, d-1 ≤ depth over quotient, explicit regular list in max ideal of length d-1; #check confirms depth = IsLocalRing.depth; d=0 vacuous"
  }
 }
