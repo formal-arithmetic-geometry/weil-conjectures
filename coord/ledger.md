@@ -3255,3 +3255,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 01:46 UTC L: F1 finite-projective-cokernel-localization PASS 112103637 (R-pcl0145).
 - 01:48 L: merged deliver/K1/lem-pc-ring-precise-vanishing (reviewer PASS; first push; new nodes: 1)
 - 01:49 L: merged deliver/E1/def-pur-saturated-triangulated-localization (reviewer FIX; first push; new nodes: 0)
+- 01:49 UTC L: K1 ring-precise-vanishing PASS c04ea5495 (R-rpv0148).
