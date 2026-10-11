@@ -12,7 +12,8 @@ public import WeilConjectures.Mathlib.RingTheory.Smooth.StandardSmoothOfFree
 # Smooth algebras over a field are regular
 
 The localizations of a smooth algebra over a field at its primes are regular local rings
-(`Algebra.Smooth.isRegularLocalRing_localization`): locally the algebra is étale over a polynomial
+(`Algebra.Smooth.isRegularLocalRing_localization`), so that the algebra is a regular ring
+(`Algebra.Smooth.isRegularRing`): locally the algebra is étale over a polynomial
 ring, and étale maps preserve regularity.
 -/
 
@@ -50,5 +51,14 @@ theorem Smooth.isRegularLocalRing_localization (K A : Type*) [Field K] [CommRing
   subst hP'
   exact .of_ringEquiv (IsLocalization.localizationLocalizationAtPrimeIsoLocalization
     (Submonoid.powers x) P').toRingEquiv.symm
+
+
+/-- A smooth algebra over a field is a regular ring. -/
+theorem Smooth.isRegularRing (K A : Type*) [Field K] [CommRing A] [Algebra K A] [Smooth K A] :
+    IsRegularRing A := by
+  have := Algebra.FiniteType.isNoetherianRing K A
+  rw [isRegularRing_iff]
+  intro P _
+  exact Smooth.isRegularLocalRing_localization K A P
 
 end Algebra
