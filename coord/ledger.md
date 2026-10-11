@@ -5020,3 +5020,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 14:42 L: merged deliver/N1/lem-weil-pbc-split-extension-free-presentation (stage 2; reviewer PASS; first push; Sheaf.LinearAlgebra.SplitExtensionFreePresentation LinearMap.exists_retraction_iff_relation_factors)
 - 14:42 L: merged deliver/G1/lem-weil-pbc-thickening-lft-cartesian (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.LocallyOfFiniteTypeThickening AlgebraicGeometry.locallyOfFiniteType_iff_of_finiteOrderThickening)
 - 14:42 L: merged deliver/Q1/lem-weil-pbc-stein-factorization-affine (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.SteinFactorizationAffine AlgebraicGeometry.Scheme.Hom.steinFactorization_affine)
+- 14:42 L: merged deliver/U1/lem-weil-pbc-symmetric-algebra-finite-projective-smooth (stage 2; reviewer PASS; first push; Sheaf.RingTheory.SymmetricAlgebraSmooth SymmetricAlgebra.smooth_of_finite_projective)
