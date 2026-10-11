@@ -89,6 +89,22 @@ lemma integersShrinkMap_mem_nonZeroDivisors {x : Shrink.{u + 1} (integers l E)}
   refine mem_nonZeroDivisors_of_ne_zero ?_
   exact h0
 
+/-- `𝒪_L` is flat over `𝒪_E`: it is torsion-free over the principal ideal domain `𝒪_E`. -/
+lemma integersShrinkMap_flat [Algebra ℚ_[l] E] [IsScalarTower ℚ_[l] E (PadicAlgCl l)]
+    [FiniteDimensional ℚ_[l] E] : (integersShrinkMap.{w, u} l E L).Flat := by
+  let := (integersShrinkMap.{w, u} l E L).toAlgebra
+  change Module.Flat _ _
+  have : IsPrincipalIdealRing (Shrink.{u + 1} (integers l E)) :=
+    IsPrincipalIdealRing.of_surjective (shrinkRingEquiv l E).toRingHom
+      (shrinkRingEquiv l E).surjective
+  have : Module.IsTorsionFree (Shrink.{u + 1} (integers l E))
+      (Shrink.{u + 1} (integers l L)) := ⟨fun r hr x y hxy ↦ by
+    have hr0 : integersShrinkMap l E L r ≠ 0 := fun h ↦
+      hr.ne_zero (integersShrinkMap_injective l E L (h.trans (map_zero _).symm))
+    simp only [Algebra.smul_def] at hxy
+    exact mul_left_cancel₀ hr0 hxy⟩
+  infer_instance
+
 end PadicAlgCl
 
 namespace CategoryTheory.Rationalization
@@ -247,6 +263,78 @@ lemma map_smul (h₁ : IsDerivedBaseChange η₁) (r : Λ) (f : K₁ ⟶ K₂) :
 
 end IsDerivedBaseChange
 
+section ExtendScalars
+
+variable {Λ Λ' : Type (u + 1)} [CommRing Λ] [CommRing Λ'] (φ : Λ →+* Λ') (X : Scheme.{u})
+
+/- Mathlib's instance is stated for `extendScalars.{u₁, u₂, max u₂ w}`, and unifying
+`u + 1 =?= max (u + 1) ?w` gets stuck, so instance search does not find it here. -/
+instance : (ModuleCat.extendScalars.{u + 1, u + 1, u + 1} φ).IsLeftAdjoint :=
+  (ModuleCat.extendRestrictScalarsAdj.{u + 1} φ).isLeftAdjoint
+
+instance : (ModuleCat.restrictScalars.{u + 1, u + 1, u + 1} φ).IsRightAdjoint :=
+  (ModuleCat.extendRestrictScalarsAdj.{u + 1} φ).isRightAdjoint
+
+/-- Extension of scalars along `φ : Λ ⟶ Λ'`, from étale sheaves of `Λ`-modules to étale sheaves
+of `Λ'`-modules: objectwise extension of scalars followed by sheafification. -/
+noncomputable abbrev sheafExtendScalars :
+    Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ) ⥤
+      Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ') :=
+  Sheaf.composeAndSheafify X.smallEtaleTopology (ModuleCat.extendScalars.{u + 1, u + 1, u + 1} φ)
+
+/-- Extension of scalars of étale sheaves is left adjoint to restriction of scalars. -/
+noncomputable def sheafExtendRestrictScalarsAdj :
+    sheafExtendScalars φ X ⊣ Sheaf.restrictScalars X.smallEtaleTopology φ :=
+  Sheaf.adjunction _ (ModuleCat.extendRestrictScalarsAdj.{u + 1} φ)
+
+instance : (sheafExtendScalars φ X).Additive :=
+  (sheafExtendRestrictScalarsAdj φ X).left_adjoint_additive
+
+instance : PreservesFiniteColimits (sheafExtendScalars φ X) :=
+  have := (sheafExtendRestrictScalarsAdj φ X).leftAdjoint_preservesColimits
+  inferInstance
+
+/-- Extension of scalars of étale sheaves along a flat ring morphism is left exact. -/
+lemma preservesFiniteLimits_sheafExtendScalars (hφ : φ.Flat) :
+    PreservesFiniteLimits (sheafExtendScalars φ X) := by
+  have := ModuleCat.preservesFiniteLimits_extendScalars_of_flat hφ
+  have : PreservesFiniteLimits ((Functor.whiskeringRight X.Etaleᵒᵖ (ModuleCat.{u + 1} Λ)
+      (ModuleCat.{u + 1} Λ')).obj (ModuleCat.extendScalars.{u + 1, u + 1, u + 1} φ)) :=
+    ⟨fun _ _ _ ↦ inferInstance⟩
+  unfold sheafExtendScalars Sheaf.composeAndSheafify
+  infer_instance
+
+/-- Along a flat ring morphism, every object of `D(X_ét, Λ)` has a derived base change: the unit
+of the adjunction between the levelwise extension and restriction of scalars, which are exact. -/
+theorem exists_isDerivedBaseChange (hφ : φ.Flat) (K : 𝐃(X, Λ)) :
+    ∃ (K' : 𝐃(X, Λ')) (η : K ⟶ (derivedRestrictScalars φ X).obj K'), IsDerivedBaseChange η := by
+  have := preservesFiniteLimits_sheafExtendScalars φ X hφ
+  have : PreservesFiniteLimits (Sheaf.restrictScalars X.smallEtaleTopology φ) :=
+    have := (sheafExtendRestrictScalarsAdj φ X).rightAdjoint_preservesLimits
+    inferInstance
+  have : PreservesFiniteColimits (Sheaf.restrictScalars X.smallEtaleTopology φ) :=
+    have := (Sheaf.restrictCoextendScalarsAdj X.smallEtaleTopology φ).leftAdjoint_preservesColimits
+    inferInstance
+  let : CatCommSq ((sheafExtendScalars φ X).mapHomologicalComplex (ComplexShape.up ℤ))
+      _root_.DerivedCategory.Q _root_.DerivedCategory.Q
+      (sheafExtendScalars φ X).mapDerivedCategory :=
+    ⟨(sheafExtendScalars φ X).mapDerivedCategoryFactors.symm⟩
+  let : CatCommSq ((Sheaf.restrictScalars X.smallEtaleTopology φ).mapHomologicalComplex
+      (ComplexShape.up ℤ)) _root_.DerivedCategory.Q _root_.DerivedCategory.Q
+      (derivedRestrictScalars φ X) :=
+    ⟨(Sheaf.restrictScalars X.smallEtaleTopology φ).mapDerivedCategoryFactors.symm⟩
+  let adj : (sheafExtendScalars φ X).mapDerivedCategory ⊣ derivedRestrictScalars φ X :=
+    ((sheafExtendRestrictScalarsAdj φ X).mapHomologicalComplex (ComplexShape.up ℤ)).localization
+      _root_.DerivedCategory.Q (HomologicalComplex.quasiIso _ _) _root_.DerivedCategory.Q
+      (HomologicalComplex.quasiIso _ _) _ _
+  refine ⟨_, adj.unit.app K, fun N ↦ ?_⟩
+  have e : (fun g ↦ adj.unit.app K ≫ (derivedRestrictScalars φ X).map g) = adj.homEquiv K N :=
+    funext fun g ↦ (adj.homEquiv_unit K N g).symm
+  rw [e]
+  exact (adj.homEquiv K N).bijective
+
+end ExtendScalars
+
 section BaseChangeFunctor
 
 variable {Λ Λ' : Type (u + 1)} [CommRing Λ] [CommRing Λ'] (φ : Λ →+* Λ') (X : Scheme.{u})
@@ -315,6 +403,16 @@ lemma _root_.CategoryTheory.isIso_of_isIso_comp_of_isIso_comp {C : Type*} [Categ
   exact isIso_of_epi_of_isSplitMono a
 
 variable {Y : Scheme.{u}}
+
+variable (Y) in
+/-- Every object of `D(Y_ét, 𝒪_E)` has a derived base change along `𝒪_E ⟶ 𝒪_L`, the latter being
+flat (`PadicAlgCl.integersShrinkMap_flat`). -/
+theorem exists_isDerivedBaseChange_integers
+    (K : 𝐃(Y, Shrink.{u + 1} (PadicAlgCl.integers l E))) :
+    ∃ (K' : 𝐃(Y, Shrink.{u + 1} (PadicAlgCl.integers l L)))
+      (η : K ⟶ (derivedRestrictScalars (PadicAlgCl.integersShrinkMap l E L) Y).obj K'),
+      IsDerivedBaseChange η :=
+  exists_isDerivedBaseChange _ Y (PadicAlgCl.integersShrinkMap_flat l E L) K
 
 /-- Blueprint `lem-weil-scalar-extension-well-defined`: Well-definedness of scalar extension.
 
