@@ -3603,3 +3603,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 07:12 L: merged deliver/G1/lem-pc-stalk-direct-sums (stage 2; reviewer PASS; first push; Sheaf.Topology.StalkDirectSums SheafOfModules.exists_stalk_directSum_linearEquiv)
 - 07:12 L: merged deliver/E1/lem-pc-zero-scheme-locally-principal (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.Modules.ZeroLocusLocallyPrincipal AlgebraicGeometry.Scheme.Modules.Hom.isLocallyPrincipal_zeroLocus_of_isInvertible)
 - 07:12 L: merged deliver/G1/lem-pqf-finite-spectrum-maximal-primes (stage 2; reviewer PASS; first push; Sheaf.RingTheory.FiniteSpectrumMaximalPrimes Ideal.isMaximal_of_finite_primeSpectrum_of_finiteType)
+- 07:12 L: merged deliver/K1/lem-pc-zero-dimensional-closed-subscheme-finite (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.ZeroDimensionalClosedSubschemeFinite AlgebraicGeometry.closed_subscheme_finite_of_topologicalKrullDim_le_zero)
