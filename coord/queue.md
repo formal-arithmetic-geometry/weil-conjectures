@@ -1,15 +1,15 @@
 # Work queue
 
-806 items; claim with `tools/claim.py next <group> [--stage N]`.
+811 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (806)
+## Stage 2: nodes to state (811)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
-| `def-pc-dimension` | 1 | state |
+| `def-pc-curve` | 1 | state |
 | `def-pc-divisor-line-bundle` | 1 | state |
 | `def-pc-field-tower` | 1 | state |
 | `def-pc-generators` | 1 | state |
@@ -99,7 +99,9 @@
 | `lem-pc-affine-flat-module-localization-preserves-flatness` | 1 | state |
 | `lem-pc-affine-nonzerodivisor-complement-dense` | 1 | state |
 | `lem-pc-affine-surjective-structure-map-closed-immersion` | 1 | state |
+| `lem-pc-algebraic-dim-zero-affine-finite` | 1 | state |
 | `lem-pc-ample-affine-loci-criterion` | 1 | state |
+| `lem-pc-cartier-divisor-finite-over-field` | 1 | state |
 | `lem-pc-cartier-divisor-nowhere-dense` | 1 | state |
 | `lem-pc-compact-hom-hocolim` | 1 | state |
 | `lem-pc-complex-hocolim-colimit` | 1 | state |
@@ -113,6 +115,8 @@
 | `lem-pc-derived-splitting-unique` | 1 | state |
 | `lem-pc-derived-tensor-flat-second-localization` | 1 | state |
 | `lem-pc-derived-total-resolution-quasi-iso` | 1 | state |
+| `lem-pc-dim-zero-finite-over-field` | 1 | state |
+| `lem-pc-dimension-affine-open-cover` | 1 | state |
 | `lem-pc-field-extension-fpqc-cover` | 1 | state |
 | `lem-pc-finite-affine-fibre-sections` | 1 | state |
 | `lem-pc-finite-flat-restriction-projective` | 1 | state |
@@ -133,6 +137,7 @@
 | `lem-pc-module-flat-opcycles-tor-criterion` | 1 | state |
 | `lem-pc-module-opcycles-tor-surjection` | 1 | state |
 | `lem-pc-monomial-cech-complex-homology` | 1 | state |
+| `lem-pc-nowhere-dense-dim-zero` | 1 | state |
 | `lem-pc-pic-of-field` | 1 | state |
 | `lem-pc-polynomial-quotient-distinct-linear-crt` | 1 | state |
 | `lem-pc-pre-derived-adjoint-functors-general` | 1 | state |
@@ -146,7 +151,6 @@
 | `lem-pc-ring-pseudo-coherent-distinguished-triangle` | 1 | state |
 | `lem-pc-ring-pseudo-coherent-iff-all-m` | 1 | state |
 | `lem-pc-ring-pseudo-coherent-localization-glue` | 1 | state |
-| `lem-pc-scheme-dimension-local-rings` | 1 | state |
 | `lem-pc-separable-polynomial-alg-closed-quotient-product` | 1 | state |
 | `lem-pc-sites-modules-quotient-j-shriek` | 1 | state |
 | `lem-pc-skyscraper-complex` | 1 | state |
@@ -193,6 +197,7 @@
 | `lem-sc-cone-pseudo-coherent` | 1 | state |
 | `lem-sc-derived-hom-mayer-vietoris` | 1 | state |
 | `lem-sc-determinant-short-exact` | 1 | state |
+| `lem-sc-dim-one-quasi-projective` | 1 | state |
 | `lem-sc-dvr-field-extension-order` | 1 | state |
 | `lem-sc-dvr-saturation-line` | 1 | state |
 | `lem-sc-dvr-tensor-surjective-negative-valuation` | 1 | state |
@@ -816,7 +821,7 @@
 | `lem-sc-normalization-properties` | 3 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 1420 nodes that wait for a statement dependency, 40 nodes that wait for stage 1.
+Not open yet: 1413 nodes that wait for a statement dependency, 40 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 

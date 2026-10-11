@@ -3370,3 +3370,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 05:13 L: claimed def-nagata-directed-finite-upper-bound for L, worker W-dub0518 launched (no delivery waits)
 - 05:16 L: stated def-nagata-directed-finite-upper-bound (own item, W-dub0518, R-dub0522 FIX): lean/Sheaf/Order/DirectedFiniteUpperBound.lean (directedFiniteUpperBound + 3 sorry theorems); lemma-nagata-directed-finite-upper-bound recorded as existing (le_directedFiniteUpperBound in the same module); landed
 - 05:17 L: claimed def-pc-dimension for L, worker W-dimx0530 launched (no delivery waits); global build started for the DirectedFiniteUpperBound landing
+- 05:20 L: stated def-pc-dimension (own item, W-dimx0530, R-dimx0533 FIX): lean/Sheaf/AlgebraicGeometry/Dimension.lean (Scheme.dim, Scheme.Hom.relativeDimAt, Scheme.Hom.IsOfRelativeDimension); lem-pc-scheme-dimension-local-rings recorded as existing (Scheme.dim_eq_topologicalKrullDim, sorry); landed
