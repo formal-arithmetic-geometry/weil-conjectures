@@ -199,5 +199,23 @@
   "summary": "Split following the proof of Stacks 00PE exactly (checked 00PE, 00IV, 00KH in algebra.tex and the tags file). Nine steps: R/xR of finite length (new Mathlib leaf lem-weil-pbc-dim-le-one-principal-quotient-finite-length = isFiniteLength_quotient_span_singleton); the unit case; reduction to M spanning a K^{r'} with r' <= r; the finite case by clearing denominators, an integer c with x^c R^{r'} ⊂ M (Stacks' 'R^{⊕r}/M has finite length, in particular ...' written out via d R^{r'} ⊂ M and x ∈ sqrt(dR), citing lem-weil-pbc-zero-locus-eq-iff-radical-eq), length(N/x^nN) = n length(N/xN), length(F/xF) = r' length(R/xR), and the sandwich, all through the new Mathlib leaf lem-weil-pbc-length-additive-short-exact (00IV, Module.length_eq_add_of_exact); the general case by the chain argument of the last paragraph. Not 'induction on r' as the lead's prompt suggested: the Stacks proof uses the sandwich, and the split follows it. Statement unchanged. No slopmaster2 declaration states the item (grep of id and key words; WeilConjectures/RingTheory/DiscreteValuationRing/Dominating.lean has a related Krull-Akizuki-style length estimate for valuation subrings only). LeanSearch returned HTTP 500 throughout; Loogle/LeanFinder and grep recorded.",
   "blueprint": "No blueprint node states 00PE (blueprint_refs search 'finite length', 'length additive', 'R/xR', 'Krull Akizuki', 'fraction field submodule'). The steps realize, in lem-weil-pbc-normal-constant-generic's proof, the place recorded in blueprint.from.place: step 4 of its split, through Tate's lemma 032P and the first sentence of the proof of 031F, which invokes 00PE; steps 1-9 are the whole of 00PE's proof as used there (the bound length(M/xM) <= r length(R/xR) for submodules of K^{⊕r})."
  },
- "reviewed": "2026-10-10 L: 9 steps along 00PE checked (R/xR finite length by the new leaf isFiniteLength_quotient_span_singleton, Noetherian, KrullDimLE 1, nonzerodivisor, line 292 verified; unit case; reduction to spanning; clearing denominators; x^c F in M via the radical leaf; length(N/x^n N) = n length(N/xN) by additivity; length(F/xF) = r l; the sandwich; the general case by chains). New Mathlib leaves lem-weil-pbc-length-additive-short-exact (Module.length_eq_add_of_exact 171) and lem-weil-pbc-dim-le-one-principal-quotient-finite-length. LeanSearch down during the searches."
+ "reviewed": "2026-10-10 L: 9 steps along 00PE checked (R/xR finite length by the new leaf isFiniteLength_quotient_span_singleton, Noetherian, KrullDimLE 1, nonzerodivisor, line 292 verified; unit case; reduction to spanning; clearing denominators; x^c F in M via the radical leaf; length(N/x^n N) = n length(N/xN) by additivity; length(F/xF) = r l; the sandwich; the general case by chains). New Mathlib leaves lem-weil-pbc-length-additive-short-exact (Module.length_eq_add_of_exact 171) and lem-weil-pbc-dim-le-one-principal-quotient-finite-length. LeanSearch down during the searches.",
+ "lean": {
+  "module": "Sheaf.RingTheory.LengthQuotSMulTopFractionFieldSubmodule",
+  "declaration": "Submodule.length_quotSMulTop_le_of_ringKrullDim_eq_one_of_isLocalRing",
+  "file": "lean/Sheaf/RingTheory/LengthQuotSMulTopFractionFieldSubmodule.lean",
+  "statement": "theorem length_quotSMulTop_le_of_ringKrullDim_eq_one_of_isLocalRing {R : Type u} [CommRing R] [IsDomain R] [IsNoetherianRing R] [IsLocalRing R] {K : Type v} [Field K] [Algebra R K] [IsFractionRing R K] (r : ℕ) (M : Submodule R (Fin r → K)) (hdim : ringKrullDim R = 1) (x : R) (hx : x ≠ 0) : Module.length R (QuotSMulTop x R) < ⊤ ∧ Module.length R (QuotSMulTop x M) < ⊤ ∧ Module.length R (QuotSMulTop x M) ≤ (r : ℕ∞) * Module.length R (QuotSMulTop x R)",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-dsq0943",
+  "group": "M1",
+  "result": "pass",
+  "note": "R CommRing+IsDomain+IsNoetherianRing+IsLocalRing, ringKrullDim R = 1 (recorded), K IsFractionRing, r:ℕ incl 0, arbitrary M : Submodule R (Fin r → K) no fg, x ≠ 0; R/xR and M/xM = QuotSMulTop (quotient of ↥M itself), finiteness Module.length < ⊤ (recorded length node, status mathlib, = its 'finite length' clause), bound ≤ r * length(R/xR) in ℕ∞; #check ok"
+ }
 }
