@@ -336,3 +336,131 @@ theorem subsingleton_sheafH_two_lowerStar_of_isSplitBy_of_isGalois (L : Type u) 
 end IsConnectedCurve
 
 end AlgebraicGeometry
+/-- Multiples of a morphism of abelian sheaves act on sections by multiplication. -/
+lemma CategoryTheory.Sheaf.nsmul_hom_app_apply {C : Type*} [Category C]
+    {J : GrothendieckTopology C} {G G' : Sheaf J AddCommGrpCat.{u + 1}} (n : ℕ) (φ : G ⟶ G')
+    (W : Cᵒᵖ) (x : G.obj.obj W) : (n • φ).hom.app W x = n • φ.hom.app W x := by
+  induction n with
+  | zero => rfl
+  | succ n ih =>
+    rw [succ_nsmul, succ_nsmul, ← ih]
+    rfl
+
+namespace AlgebraicGeometry.Scheme
+
+variable {F : Type u} [Field F]
+  {N : Sheaf (Spec (.of F)).smallEtaleTopology AddCommGrpCat.{u + 1}}
+  {L : Type u} [Field L] [Algebra F L] [Algebra.Etale F L]
+
+/-- The kernel of multiplication by `n` on a split sheaf is split. -/
+lemma IsSplitBy.kernel (hN : IsSplitBy N L) (n : ℕ) : IsSplitBy (kernel (n • 𝟙 N)) L := by
+  intro Z _ _ t
+  have hι (W) : Function.Injective ((kernel.ι (n • 𝟙 N)).hom.app (op W)) :=
+    Etale.injective_app_of_mono _ W
+  have hk {W} (x : N.obj.obj (op W)) (hx : n • x = 0) :
+      ∃ y, (kernel.ι (n • 𝟙 N)).hom.app (op W) y = x :=
+    Etale.exists_kernel_ι_app_eq _ x (by rw [Sheaf.nsmul_hom_app_apply]; exact hx)
+  have hn {W} (y) : n • (kernel.ι (n • 𝟙 N)).hom.app (op W) y = 0 := by
+    have := congrArg (fun φ ↦ φ.hom.app (op W) y) (kernel.condition (n • 𝟙 N))
+    have h1 : (n • 𝟙 N).hom.app (op W) ((kernel.ι (n • 𝟙 N)).hom.app (op W) y) = 0 := this
+    rwa [Sheaf.nsmul_hom_app_apply] at h1
+  refine ⟨fun y y' h ↦ hι _ ((hN Z t).1 ?_), fun y ↦ ?_⟩
+  · rw [← NatTrans.naturality_apply, ← NatTrans.naturality_apply, h]
+  · obtain ⟨m, hm⟩ := (hN Z t).2 ((kernel.ι (n • 𝟙 N)).hom.app _ y)
+    have hm0 : n • m = 0 := (hN Z t).1 (by rw [map_nsmul, hm, hn, map_zero])
+    obtain ⟨y', rfl⟩ := hk m hm0
+    refine ⟨y', hι _ ?_⟩
+    rw [NatTrans.naturality_apply, hm]
+
+end AlgebraicGeometry.Scheme
+
+/-- Multiplication by `m` on a sheaf induces multiplication by `m` on cohomology. -/
+lemma CategoryTheory.Sheaf.H.map_nsmul_id_apply {C : Type*} [Category C]
+    {J : GrothendieckTopology C} [HasSheafify J AddCommGrpCat.{u + 1}]
+    [HasExt.{u + 1} (Sheaf J AddCommGrpCat.{u + 1})] (G : Sheaf J AddCommGrpCat.{u + 1})
+    (m n : ℕ) (x : Sheaf.H G n) : Sheaf.H.map (m • 𝟙 G) n x = m • x := by
+  induction m with
+  | zero => simp [Sheaf.H.map_apply, Abelian.Ext.mk₀_zero]
+  | succ m ih => rw [succ_nsmul, Sheaf.H.map_add_apply, ih, Sheaf.H.map_id_apply, succ_nsmul]
+
+namespace AlgebraicGeometry.IsConnectedCurve
+
+open Etale
+
+variable {k : Type u} [Field k] [IsAlgClosed k] {C : Scheme.{u}} (f : C ⟶ Spec (.of k))
+  [IsConnectedCurve f] [Smooth f] [IsAffine C] [IsIntegral C]
+
+include f in
+/-- **`H²` of a finite split sheaf.** Let `N` be a sheaf on the generic point `η` of a smooth
+affine connected curve `C`, split by a finite Galois extension `L` of the function field, with
+finite sections over `Spec L`. Then `H²(C, η_* N) = 0`: decompose by the primes dividing an
+exponent of `N`, using
+`AlgebraicGeometry.IsConnectedCurve.subsingleton_sheafH_two_lowerStar_of_isSplitBy_of_isGalois`.
+-/
+theorem subsingleton_sheafH_two_lowerStar_of_isSplitBy_of_finite (L : Type u) [Field L]
+    [Algebra C.functionField L] [Algebra.Etale C.functionField L] [IsGalois C.functionField L]
+    (N : Sheaf (Spec C.functionField).smallEtaleTopology AddCommGrpCat.{u + 1})
+    (hN : Scheme.IsSplitBy N L) [Finite (N.obj.obj (op (Scheme.etaleSpec C.functionField L)))] :
+    Subsingleton (Sheaf.H ((C.fromSpecFunctionField)_*[AddCommGrpCat.{u + 1}].obj N) 2) := by
+  set η := C.fromSpecFunctionField
+  suffices H : ∀ m, 0 < m → ∀ (N : Sheaf (Spec C.functionField).smallEtaleTopology
+      AddCommGrpCat.{u + 1}), Scheme.IsSplitBy N L →
+      Finite (N.obj.obj (op (Scheme.etaleSpec C.functionField L))) →
+      (∀ x : N.obj.obj (op (Scheme.etaleSpec C.functionField L)), m • x = 0) →
+        Subsingleton (Sheaf.H ((η)_*[AddCommGrpCat.{u + 1}].obj N) 2) from
+    H _ Nat.card_pos N hN inferInstance fun x ↦ card_nsmul_eq_zero'
+  intro m
+  induction m using Nat.strong_induction_on with
+  | _ m ih =>
+  intro hm N hN _ hNm
+  by_cases h1 : m = 1
+  · subst h1
+    exact Sheaf.H.subsingleton_of_isZero ((η)_*[AddCommGrpCat.{u + 1}].map_isZero
+      (Scheme.isZero_of_isSplitBy hN fun x ↦ by simpa using hNm x)) 2
+  set ℓ := m.minFac
+  have hℓ : ℓ.Prime := Nat.minFac_prime h1
+  have : Fact ℓ.Prime := ⟨hℓ⟩
+  obtain ⟨e, m', hm', hmeq⟩ := Nat.exists_eq_pow_mul_and_not_dvd hm.ne' ℓ hℓ.ne_one
+  have he : e ≠ 0 := by
+    rintro rfl
+    rw [pow_zero, one_mul] at hmeq
+    exact hm' (hmeq ▸ Nat.minFac_dvd m)
+  have hm'lt : m' < m := by
+    rw [hmeq]
+    have : 0 < m' := Nat.pos_of_ne_zero (fun h ↦ hm.ne' (by rw [hmeq, h, mul_zero]))
+    exact lt_mul_left this (Nat.one_lt_pow he hℓ.one_lt)
+  have hm'pos : 0 < m' := Nat.pos_of_ne_zero (fun h ↦ hm.ne' (by rw [hmeq, h, mul_zero]))
+  have hmN : m • 𝟙 N = 0 := Scheme.nsmul_id_eq_zero_of_isSplitBy hN m hNm
+  have hfin (a : ℕ) :
+      Finite ((kernel (a • 𝟙 N)).obj.obj (op (Scheme.etaleSpec C.functionField L))) :=
+    Finite.of_injective _ (Etale.injective_app_of_mono (kernel.ι (a • 𝟙 N)) _)
+  have hker (a : ℕ) (x : (kernel (a • 𝟙 N)).obj.obj (op (Scheme.etaleSpec C.functionField L))) :
+      a • x = 0 := by
+    refine Etale.injective_app_of_mono (kernel.ι (a • 𝟙 N)) _ ?_
+    have := congrArg (fun φ ↦ φ.hom.app (op (Scheme.etaleSpec C.functionField L)) x)
+      (kernel.condition (a • 𝟙 N))
+    have h1 : (a • 𝟙 N).hom.app _ ((kernel.ι (a • 𝟙 N)).hom.app _ x) = 0 := this
+    rw [Sheaf.nsmul_hom_app_apply] at h1
+    rw [map_nsmul, map_zero]
+    exact h1
+  have hA₁ := subsingleton_sheafH_two_lowerStar_of_isSplitBy_of_isGalois f L ℓ
+    (kernel (ℓ ^ e • 𝟙 N)) (hN.kernel _) (fun x ↦ ⟨e, hker _ x⟩)
+  have hA₂ := ih m' hm'lt hm'pos (kernel (m' • 𝟙 N)) (hN.kernel _) (hfin _) (hker _)
+  have hfac (a b : ℕ) (hab : a * b = m) (A : Subsingleton (Sheaf.H ((η)_*[AddCommGrpCat.{u + 1}].obj
+      (kernel (a • 𝟙 N))) 2)) (c : Sheaf.H ((η)_*[AddCommGrpCat.{u + 1}].obj N) 2) :
+      b • c = 0 := by
+    have hw : (b • 𝟙 N) ≫ (a • 𝟙 N) = 0 := by
+      rw [Preadditive.comp_nsmul, Category.comp_id, smul_smul, hab, hmN]
+    rw [← Sheaf.H.map_nsmul_id_apply, ← CategoryTheory.Functor.map_id, ← Functor.map_nsmul,
+      ← kernel.lift_ι (a • 𝟙 N) (b • 𝟙 N) hw, Functor.map_comp, Sheaf.H.map_comp_apply,
+      Subsingleton.elim (h := A) (Sheaf.H.map _ 2 c) 0, map_zero]
+  refine subsingleton_of_forall_eq 0 fun c ↦ ?_
+  have hc₁ := hfac _ _ hmeq.symm hA₁ c
+  have hc₂ := hfac _ _ ((mul_comm _ _).trans hmeq.symm) hA₂ c
+  have hcop : Nat.Coprime m' (ℓ ^ e) :=
+    Nat.Coprime.pow_right _ (Nat.coprime_comm.1 ((Nat.Prime.coprime_iff_not_dvd hℓ).2 hm'))
+  have : addOrderOf c = 1 := Nat.dvd_one.1 (hcop ▸ Nat.dvd_gcd
+    (addOrderOf_dvd_of_nsmul_eq_zero hc₁) (addOrderOf_dvd_of_nsmul_eq_zero hc₂))
+  exact AddMonoid.addOrderOf_eq_one_iff.1 this
+
+end AlgebraicGeometry.IsConnectedCurve
