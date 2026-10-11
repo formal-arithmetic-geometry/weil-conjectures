@@ -139,5 +139,23 @@
   "group": "E1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-mlc0119 (reviewer sub-agent of L); spot-checked: Statement vs Stacks 00CM and citer lem-sc-affine-koszul-hom-alternating-cech Step 2 (f=f_J, stage e m->m/f^e, cofinal from e=1): exact form used. Steps 1-4 checked: compatibility fm/f^{e+1}=m/f^e; surjectivity via fractions; injectivity E=e+d+r gives f^r(f^d m-f^e n)=0, colimit equality criterion of lem-weil-pbc-filtered-colimit-modules-elementwise. Statement change (module-localization -> -away) named in report (E7), fine. No duplicate (lem-weil-pbc-localization-colimit-principal-localizations is S^{-1}P=colim P_f; lem-kun-colim-of-localizations, lem-weil-pbc-filtered-colimit-localization-at-prime differ). Mathlib grep: no match. FIX more, RETURN less: (1) B4: Step 1 plain-text arrows/kappa/colim rewritten in TeX; (2) stmt_deps listed def-weil-pbc-module-localization while statement cites def-weil-pbc-module-localization-away -> stmt_deps corrected (missed by E1's second reading); (3) recorded my Mathlib grep in mathlib_searches.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.ModuleLocalizationFilteredColimit",
+  "declaration": "ModuleCat.localization_away_colimit",
+  "file": "lean/Sheaf/RingTheory/ModuleLocalizationFilteredColimit.lean",
+  "statement": "theorem localization_away_colimit {R : Type u} [CommRing R] (f : R) (M : Type v) [AddCommGroup M] [Module R M] : let D : ℕ ⥤ ModuleCat.{v} R := Functor.ofSequence (X := fun _ : ℕ ↦ ModuleCat.of R M) (fun _ : ℕ ↦ ModuleCat.ofHom (LinearMap.lsmul R M f)) ∃ κ : ↥(colimit D) ≃ₗ[R] LocalizedModule.Away f M, ∀ (e : ℕ) (m : M), κ ((colimit.ι D e) m) = LocalizedModule.mk (S := Submonoid.powers f) m ⟨f ^ e, ⟨e, rfl⟩⟩",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-mlf1153",
+  "group": "C1",
+  "result": "pass",
+  "note": "comm ring R (CommRing), f:R unrestricted, M R-module; D = Functor.ofSequence on ℕ (filtered poset) of copies of M with lsmul f transitions; colimit D in ModuleCat; ≃ₗ[R] to LocalizedModule.Away f M with ι_e m ↦ mk m f^e (determines the canonical map); universes u,v independent; no Mathlib/landed duplicate (grep ofSequence/LocalizedModule.Away/colimit)"
  }
 }
