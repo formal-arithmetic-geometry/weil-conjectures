@@ -3834,3 +3834,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 08:28 L: merged deliver/G1/lem-sc-proper-flat-global-sections (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.ProperFlatGlobalSections AlgebraicGeometry.isIso_structureSheafMap_of_proper_flat_geometricallyReduced_connected_fibers)
 - 08:29 L: merged deliver/E1/lem-sc-standard-smooth-affine-diagonal-generators (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.StandardSmoothAffineDiagonalGenerators AlgebraicGeometry.exists_isRegular_diagonal_generators_of_isStandardSmooth)
 - 08:29 L: merged deliver/J1/lem-pur-derived-change-of-rings (stage 2; reviewer FIX; first push; Sheaf.Algebra.Homology.DerivedChangeOfRings SheafOfModules.derivedChangeOfRings)
+- 08:29 L: returned deliver/J1/lem-sc-etale-faithfully-flat-local (reviewer RETURN: Reviewer R-ffl1249 on e4f0c0fd6. H7: the statement correction makes the node a different, trivial statement: e_X : X_K ≅)
