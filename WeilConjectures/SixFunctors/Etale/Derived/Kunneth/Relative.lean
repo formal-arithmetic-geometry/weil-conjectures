@@ -141,6 +141,69 @@ theorem nonempty_iso_rightDerivedLowerShriek_externalProduct (f : X ⟶ B) (g : 
   sorry
 
 omit [HasSmallSiteSheafify A] in
+/-- The assembly step of the relative product theorem `sk-thm-sf-kunneth-relative`: with
+`p`, `q` the projections of `X ×_B Y`, a composition isomorphism
+`R(f ×_B g)_! ≅ Rq_! ⋙ Rg_!`, the projection formula for `q` at `(Lp^*K, M)`, compact-support
+base change `Lg^* Rf_! K ≅ Rq_! Lp^* K` and the projection formula for `g` at `(M, Rf_! K)` give
+`R(f ×_B g)_! (K ⊠ M) ≅ Rf_! K ⊗ᴸ Rg_! M`. -/
+theorem nonempty_iso_rightDerivedLowerShriek_externalProduct_of_iso [UpperStarPreservesFlat A]
+    [(CategoryTheory.forget A).ReflectsIsomorphisms]
+    [PreservesFilteredColimitsOfSize.{u + 1, u + 1} (CategoryTheory.forget A)]
+    [∀ Z : Scheme.{u}, Z.smallEtaleTopology.HasSheafCompose (CategoryTheory.forget A)]
+    (f : X ⟶ B) (g : Y ⟶ B) [HasCompactification f] [HasCompactification g]
+    [HasCompactification (pullback.toBase f g)]
+    (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A))
+    (M : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology A))
+    (e₁ : R(pullback.toBase f g)_![A] ≅ R(pullback.snd f g)_![A] ⋙ R(g)_![A])
+    (h₂ : HasProjectionFormula A (pullback.snd f g)
+      ((L((pullback.fst f g)^*[A])).obj K) M)
+    (e₃ : (L((g)^*[A])).obj ((R(f)_![A]).obj K) ≅
+      (R(pullback.snd f g)_![A]).obj ((L((pullback.fst f g)^*[A])).obj K))
+    (h₄ : HasProjectionFormula A g M ((R(f)_![A]).obj K)) :
+    Nonempty ((R(pullback.toBase f g)_![A]).obj (externalProduct A f g K M) ≅
+      ((-⊗ᴸ-(B)[A]).obj ((R(f)_![A]).obj K)).obj ((R(g)_![A]).obj M)) := by
+  have : IsIso (((projectionMap A (pullback.snd f g)).app
+    ((L((pullback.fst f g)^*[A])).obj K)).app M) := h₂
+  have : IsIso (((projectionMap A g).app M).app ((R(f)_![A]).obj K)) := h₄
+  obtain ⟨βY⟩ := nonempty_iso_derivedTensor_flip A Y
+  obtain ⟨βB⟩ := nonempty_iso_derivedTensor_flip A B
+  exact ⟨e₁.app _ ≪≫ (R(g)_![A]).mapIso
+    ((asIso (((projectionMap A (pullback.snd f g)).app
+      ((L((pullback.fst f g)^*[A])).obj K)).app M)).symm ≪≫
+    ((-⊗ᴸ-(Y)[A]).mapIso e₃.symm).app M ≪≫ (βY.app _).app M) ≪≫
+    (asIso (((projectionMap A g).app M).app ((R(f)_![A]).obj K))).symm ≪≫ (βB.app _).app _⟩
+
+/-- The relative product theorem `sk-thm-sf-kunneth-relative` for a finite coefficient ring:
+`R(f ×_B g)_! (K ⊠ M) ≅ Rf_! K ⊗ᴸ Rg_! M` for every `K` and `M`. This is the case of
+`AlgebraicGeometry.Etale.nonempty_iso_rightDerivedLowerShriek_externalProduct` with
+coefficients `ModuleCat Λ`, by the four steps of the blueprint proof: the composition law for
+`f ×_B g = q ≫ g`, the projection formula for `q`, compact-support base change for the
+cartesian square of `f` and `g`, and the projection formula for `g`. -/
+theorem nonempty_iso_rightDerivedLowerShriek_externalProduct_of_finite (Λ : Type (u + 1))
+    [CommRing Λ] [Finite Λ] (f : X ⟶ B) (g : Y ⟶ B) [HasCompactification f]
+    [HasCompactification g] [QuasiCompact f] [HasCompactification (pullback.toBase f g)]
+    (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
+    (M : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
+    Nonempty ((R(pullback.toBase f g)_![ModuleCat.{u + 1} Λ]).obj
+        (externalProduct (ModuleCat.{u + 1} Λ) f g K M) ≅
+      ((-⊗ᴸ-(B)[ModuleCat.{u + 1} Λ]).obj ((R(f)_![ModuleCat.{u + 1} Λ]).obj K)).obj
+        ((R(g)_![ModuleCat.{u + 1} Λ]).obj M)) := by
+  have sq : IsPullback (pullback.fst f g) (pullback.snd f g) f g := IsPullback.of_hasPullback f g
+  have : QuasiCompact (pullback.snd f g) :=
+    MorphismProperty.of_isPullback (P := @QuasiCompact) sq inferInstance
+  have hcomp : ∀ (t : pullback f g ⟶ B) [HasCompactification t], pullback.snd f g ≫ g = t →
+      Nonempty (R(t)_![ModuleCat.{u + 1} Λ] ≅
+        R(pullback.snd f g)_![ModuleCat.{u + 1} Λ] ⋙ R(g)_![ModuleCat.{u + 1} Λ]) := by
+    rintro t _ rfl
+    exact nonempty_iso_rightDerivedLowerShriek_comp Λ (pullback.snd f g) g
+  obtain ⟨e₁⟩ := hcomp (pullback.toBase f g) (by simp)
+  have := isIso_rightDerivedLowerShriekBaseChangeMap Λ sq
+  exact nonempty_iso_rightDerivedLowerShriek_externalProduct_of_iso (ModuleCat.{u + 1} Λ) f g K M e₁
+    (hasProjectionFormula_of_finite Λ _ _ _)
+    ((asIso (rightDerivedLowerShriekBaseChangeMap Λ sq)).app K)
+    (hasProjectionFormula_of_finite Λ _ _ _)
+
+omit [HasSmallSiteSheafify A] in
 /-- The external product is compatible with pullback: for morphisms `i : Z ⟶ X`, `j : W ⟶ Y`
 over `B`, with product `i ×_B j : Z ×_B W ⟶ X ×_B Y`,
 
