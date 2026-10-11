@@ -78,15 +78,14 @@ isomorphisms. The `ℓⁿ`-torsion clause `J₀[ℓⁿ](k̄₀) ≅ Pic^0(C)[ℓ
 `sk-prop-jacobian-descent` is the restriction of the group isomorphism of
 `AlgebraicGeometry.exists_jacobian_descent` to `ℓⁿ`-torsion, and is not stated separately.
 
-That `P^0` is an open and closed **subgroup scheme** of `P` is not stated: `P^0` carries the
-group law of `Pic^0_{X/k}`, and `P` that of `Pic_{X/k}`
-(`AlgebraicGeometry.isRepresentable_picardFunctor`), but the compatibility of the open immersion
-`P^0 ⟶ P` with them is not recorded by `AlgebraicGeometry.exists_decomposition_picardFunctor`.
+That `P^0` is an open and closed **subgroup scheme** of `P`, the degree homomorphism
+`Pic (X_T) →* (T → ℤ)` with kernel `Pic^0`, and the description of `P^0 ≅ P^d` as tensoring with
+`𝒪_X(dx)` are proved in `WeilConjectures.AlgebraicGeometry.Picard.DegreeDecomposition`, from
+the compatible representations of
+`AlgebraicGeometry.exists_decomposition_picardFunctor_representableBy`.
 
 Several clauses of the blueprint statements cannot be expressed and are dropped:
 
-* there is no twisting sheaf `𝒪_X(D)`, so "tensoring with `𝒪_X(dP)` is an isomorphism
-  `P^0 ≅ P^d`" is stated as the bare existence of an isomorphism of `k`-schemes.
 * Mathlib has no tangent space of a scheme, so `AlgebraicGeometry.tangentSpaceAt` is defined
   here through the functor of points. It is given a `k`-vector space structure only at the
   unit of a group scheme, where it is the kernel `AlgebraicGeometry.tangentSubgroup` of
@@ -781,27 +780,33 @@ theorem picardFibreDegree_eq_of_connectedSpace (T : Over (Spec (.of k)))
   exact (isLocallyConstant_picardPresheafDegree _ L).apply_eq_of_preconnectedSpace _ _
 
 set_option linter.unusedSectionVars false in
-/-- **The degree decomposition of the Picard scheme.** Let `X` be a smooth projective curve over
-a separably closed field `k` and let `P` represent the Picard functor `Pic_{X/k}`.  Then `P` is
-the disjoint union `∐_{d ∈ ℤ} P^d` of a family of open and closed subschemes indexed by `ℤ`,
-and `P^d` represents the degree-`d` part `Pic^d_{X/k}`.
+/-- **The degree decomposition of the Picard scheme, with compatible representations.** Let `X`
+be a smooth projective curve over a separably closed field `k` and let `P` represent the Picard
+functor `Pic_{X/k}`, with universal class of degree `δ : P → ℤ`. Then `P` is the disjoint union
+of the open and closed subschemes `P^d = δ⁻¹(d)`, and `P^d` represents the degree-`d` part
+`Pic^d_{X/k}` through a representation `e d` compatible with the inclusions: the point of `P^d`
+classifying a class `ℒ` of fibrewise degree `d` is mapped by `j d : P^d ⟶ P` to the point of `P`
+classifying `ℒ`.
 
-The other parts of the detailed statement are `AlgebraicGeometry.picardSubgroupDegreeZero`
-(part (1)), `AlgebraicGeometry.exists_commGrpObj_isPicardZeroMul` (part (3)) and
-`AlgebraicGeometry.nonempty_iso_of_representableBy` (part (4)). The pointer remark
-`rem-ptr-sc-picard-functor-3` refers to this decomposition.
-
-(blueprint: `sk-prop-picard-degree-decomposition`, `prop-pd-picard-degree-decomposition`
-part (2), `rem-ptr-sc-picard-functor-3`) -/
-theorem exists_decomposition_picardFunctor (P : Over (Spec (.of k)))
+(blueprint: `prop-pd-picard-degree-decomposition`, part (2)) -/
+theorem exists_decomposition_picardFunctor_representableBy (P : Over (Spec (.of k)))
     (hP : (picardFunctor (X ↘ Spec (.of k))).obj.RepresentableBy P) :
-    ∃ (Pd : ℤ → Over (Spec (.of k))) (j : ∀ d, Pd d ⟶ P),
+    ∃ (Pd : ℤ → Over (Spec (.of k))) (j : ∀ d, Pd d ⟶ P)
+      (e : ∀ d, (picardFunctorDegree (X ↘ Spec (.of k)) d).obj.RepresentableBy (Pd d)),
       (∀ d, IsOpenImmersion (j d).left) ∧
+      (∀ d, Set.range (j d).left.base =
+        picardDegree (X ↘ Spec (.of k)) (hP.homEquiv (𝟙 P)) ⁻¹' {d}) ∧
       (∀ d, IsClopen (Set.range (j d).left.base)) ∧
       (∀ d d', d ≠ d' → Disjoint (Set.range (j d).left.base) (Set.range (j d').left.base)) ∧
       (⋃ d, Set.range (j d).left.base) = Set.univ ∧
-      ∀ d, Nonempty ((picardFunctorDegree (X ↘ Spec (.of k)) d).obj.RepresentableBy (Pd d)) := by
+      ∀ d {T : Over (Spec (.of k))} (L : (picardPresheaf (X ↘ Spec (.of k))).obj (.op T))
+        (hL : L ∈ (picardSubfunctorDegree (X ↘ Spec (.of k)) d).obj (.op T)),
+        (e d).homEquiv.symm ((toSheafify (fppfTopology.over (Spec (.of k)))
+            (picardSubfunctorDegree (X ↘ Spec (.of k)) d).toFunctor).app (.op T) ⟨L, hL⟩) ≫
+          j d = hP.homEquiv.symm ((toPicardFunctor (X ↘ Spec (.of k))).app (.op T) L) := by
+  revert hP
   set f := X ↘ Spec (.of k)
+  intro hP
   let J := Scheme.fppfTopology.over (Spec (.of k))
   -- the degree `δ : P → ℤ` of the universal class
   let δ := picardDegree f (hP.homEquiv (𝟙 P))
@@ -829,17 +834,24 @@ theorem exists_decomposition_picardFunctor (P : Over (Spec (.of k)))
     · simp [Pd, IsOpenImmersion.lift_fac_assoc]
     · ext1
       exact IsOpenImmersion.lift_fac _ _ _
-  refine ⟨Pd, j, fun d ↦ inferInstanceAs (IsOpenImmersion (U d).ι), fun d ↦ ?_, ?_, ?_,
-    fun d ↦ ⟨?_⟩⟩
-  · rw [hj]
-    exact hδ.isClopen_fiber d
-  · intro d d' hdd'
-    rw [hj, hj]
-    exact Disjoint.preimage _ (Set.disjoint_singleton.2 hdd')
-  · simp only [hj]
-    ext t
-    simp
   -- `P^d` represents `Pic^d_{X/k}`
+  suffices key : ∀ d : ℤ, ∃ e : (picardFunctorDegree f d).obj.RepresentableBy (Pd d),
+      ∀ (T : Over (Spec (.of k))) (L : (picardPresheaf f).obj (.op T))
+        (hL : L ∈ (picardSubfunctorDegree f d).obj (.op T)),
+        e.homEquiv.symm ((toSheafify J (picardSubfunctorDegree f d).toFunctor).app (.op T)
+          ⟨L, hL⟩) ≫ j d = hP.homEquiv.symm ((toPicardFunctor f).app (.op T) L) by
+    choose e he using key
+    refine ⟨Pd, j, e, fun d ↦ inferInstanceAs (IsOpenImmersion (U d).ι), hj, fun d ↦ ?_, ?_,
+      ?_, fun d T L hL ↦ he d T L hL⟩
+    · rw [hj]
+      exact hδ.isClopen_fiber d
+    · intro d d' hdd'
+      rw [hj, hj]
+      exact Disjoint.preimage _ (Set.disjoint_singleton.2 hdd')
+    · simp only [hj]
+      ext t
+      simp
+  intro d
   let S := picardSubfunctorDegree f d
   have hmem {T : Over (Spec (.of k))} (L : (picardPresheaf f).obj (.op T))
       (hL : L ∈ S.obj (.op T)) (t : T.left) :
@@ -893,12 +905,43 @@ theorem exists_decomposition_picardFunctor (P : Over (Spec (.of k)))
   have : Presheaf.IsLocallySurjective J β.hom :=
     Presheaf.isLocallySurjective_of_isLocallySurjective_fac J fac
   have : IsIso β := (Sheaf.isLocallyBijective_iff_isIso β).1 ⟨inferInstance, inferInstance⟩
-  exact (Functor.RepresentableBy.equivUliftYonedaIso _ (Pd d)).symm
-    ((sheafToPresheaf J _).mapIso (asIso β)).symm
+  refine ⟨(Functor.RepresentableBy.equivUliftYonedaIso _ (Pd d)).symm
+    ((sheafToPresheaf J _).mapIso (asIso β)).symm, fun T L hL ↦ ?_⟩
+  have h : (β.hom.app (.op T) ((toSheafify J S.toFunctor).app (.op T) ⟨L, hL⟩)).down =
+      lift ⟨L, hL⟩ :=
+    congr_arg (fun φ ↦ (φ.app (.op T) ⟨L, hL⟩).down) fac
+  exact (congr_arg (· ≫ j d) h).trans (lift_j ⟨L, hL⟩)
+
+set_option linter.unusedSectionVars false in
+/-- **The degree decomposition of the Picard scheme.** Let `X` be a smooth projective curve over
+a separably closed field `k` and let `P` represent the Picard functor `Pic_{X/k}`.  Then `P` is
+the disjoint union `∐_{d ∈ ℤ} P^d` of a family of open and closed subschemes indexed by `ℤ`,
+and `P^d` represents the degree-`d` part `Pic^d_{X/k}`.
+
+The other parts of the detailed statement are `AlgebraicGeometry.picardSubgroupDegreeZero`
+(part (1)), `AlgebraicGeometry.exists_commGrpObj_isPicardZeroMul` (part (3)) and
+`AlgebraicGeometry.nonempty_iso_of_representableBy` (part (4)), strengthened in
+`WeilConjectures.AlgebraicGeometry.Picard.DegreeDecomposition`. The pointer remark
+`rem-ptr-sc-picard-functor-3` refers to this decomposition.
+
+(blueprint: `sk-prop-picard-degree-decomposition`, `prop-pd-picard-degree-decomposition`
+part (2), `rem-ptr-sc-picard-functor-3`) -/
+theorem exists_decomposition_picardFunctor (P : Over (Spec (.of k)))
+    (hP : (picardFunctor (X ↘ Spec (.of k))).obj.RepresentableBy P) :
+    ∃ (Pd : ℤ → Over (Spec (.of k))) (j : ∀ d, Pd d ⟶ P),
+      (∀ d, IsOpenImmersion (j d).left) ∧
+      (∀ d, IsClopen (Set.range (j d).left.base)) ∧
+      (∀ d d', d ≠ d' → Disjoint (Set.range (j d).left.base) (Set.range (j d').left.base)) ∧
+      (⋃ d, Set.range (j d).left.base) = Set.univ ∧
+      ∀ d, Nonempty ((picardFunctorDegree (X ↘ Spec (.of k)) d).obj.RepresentableBy (Pd d)) := by
+  obtain ⟨Pd, j, e, h₁, -, h₂, h₃, h₄, -⟩ :=
+    exists_decomposition_picardFunctor_representableBy P hP
+  exact ⟨Pd, j, h₁, h₂, h₃, h₄, fun d ↦ ⟨e d⟩⟩
 
 /-- **All the degree components are isomorphic.** Schemes representing `Pic^0_{X/k}` and
-`Pic^d_{X/k}` are isomorphic as `k`-schemes; the isomorphism is tensoring with `𝒪_X(dP)` for a
-rational point `P`, which cannot be named for lack of the twisting sheaf.
+`Pic^d_{X/k}` are isomorphic as `k`-schemes; the isomorphism is tensoring with `𝒪_X(dx)` for a
+rational point `x`. That the isomorphism acts on points as this tensor product is
+`AlgebraicGeometry.exists_iso_representableBy_picardFunctorDegree_zero`.
 
 (blueprint: `sk-prop-picard-degree-decomposition`, `prop-pd-picard-degree-decomposition`
 part (4)) -/
