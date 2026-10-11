@@ -571,7 +571,7 @@ variable {X S T Y T' Y' : Scheme.{u}}
 omit [CommRing Λ] in
 /-- The naturality of a natural transformation between composites, evaluated at objects, stated
 for abstract functors so that its instances are checked syntactically. -/
-lemma natTrans_app_comp_map_map {𝒜 ℬ ℬ' 𝒞 : Type*} [Category* 𝒜] [Category* ℬ]
+lemma natTrans_app_comp_map_map_eq {𝒜 ℬ ℬ' 𝒞 : Type*} [Category* 𝒜] [Category* ℬ]
     [Category* ℬ'] [Category* 𝒞] {F₁ : 𝒜 ⥤ ℬ} {F₂ : ℬ ⥤ 𝒞} {G₁ : 𝒜 ⥤ ℬ'} {G₂ : ℬ' ⥤ 𝒞}
     (β : F₁ ⋙ F₂ ⟶ G₁ ⋙ G₂) {A A' : 𝒜} (f : A ⟶ A') :
     β.app A ≫ G₂.map (G₁.map f) = F₂.map (F₁.map f) ≫ β.app A' :=
@@ -601,7 +601,7 @@ theorem Etale.baseChange_app_comp_pushforward {p : X ⟶ S} {g : T ⟶ S}
         (Etale.baseChange (ModuleCat.{u + 1} Λ) sq').app L := by
   rw [← Etale.targetTransitionPlus_comp_map Λ e h k a e' h' wa wh sqk K L ψ,
     reassoc_of% (Etale.baseChange_app_comp_targetTransitionPlus Λ sq k g' hg sq' a wa wh K),
-    natTrans_app_comp_map_map (Etale.baseChange (ModuleCat.{u + 1} Λ) sq'),
+    natTrans_app_comp_map_map_eq (Etale.baseChange (ModuleCat.{u + 1} Λ) sq'),
     ← Functor.map_comp_assoc, Etale.lowerStarPlusTransition_comp_map]
 
 /-- The comparison `k_* N[0] ⟶ Rk_*(N[0])` is the unit followed by `Rk_*` of the counit. -/
@@ -720,7 +720,7 @@ lemma Etale.targetPushforward_naturality (e : Y ⟶ T) (h : Y ⟶ X) (k : T' ⟶
   rw [Category.assoc, natTrans_app_comp_map (Etale.lowerStarPlusCompIso Λ a h h' wh).hom,
     ← Functor.map_comp_assoc (R+((h)_*[ModuleCat.{u + 1} Λ])),
     ← Functor.map_comp_assoc (R+((h)_*[ModuleCat.{u + 1} Λ])), reassoc_of% h₁, Category.assoc,
-    natTrans_app_comp_map_map (Etale.baseChange (ModuleCat.{u + 1} Λ) sqk)]
+    natTrans_app_comp_map_map_eq (Etale.baseChange (ModuleCat.{u + 1} Λ) sqk)]
 
 /-- The comparison of the targets for a pushed forward sheaf is an isomorphism when the
 comparison `k_* N[0] ⟶ Rk_*(N[0])` and the derived base-change map at `N[0]` are. -/
@@ -940,6 +940,144 @@ lemma Etale.mono_biprod_lift {T' V Z : Scheme.{u}} (j : V ⟶ T') [IsOpenImmersi
       (Etale.upperStarLowerStarAdjunction _ i).counit.app N₂), ← Category.assoc,
       ← Functor.map_comp, h₂, Functor.map_zero, zero_comp, zero_comp]
 
+
+section Summands
+
+variable {X S T Y T₁ Y₁ : Scheme.{u}}
+
+omit [CommRing Λ] in
+/-- On modules: if `b` sends `y` outside the range of `bc₂`, and `bc₂` and `bc₁` are related by
+isomorphisms `τ` and `σ`, then `b ≫ τ` sends `y` outside the range of `bc₁`. -/
+lemma not_mem_range_of_isIso_comm {R : Type*} [Ring R] {M₂ M₂' S₂ S₁ M₁ : ModuleCat R}
+    (b : M₂ ⟶ M₂') (τ : M₂' ⟶ M₁) (bc₂ : S₂ ⟶ M₂') (σ : S₂ ⟶ S₁) (bc₁ : S₁ ⟶ M₁)
+    [IsIso τ] [IsIso σ] (w : bc₂ ≫ τ = σ ≫ bc₁) (y : M₂) (hB : b.hom y ∉ Set.range bc₂.hom) :
+    τ.hom (b.hom y) ∉ Set.range bc₁.hom := by
+  rintro ⟨s, hs⟩
+  apply hB
+  refine ⟨(inv σ).hom s, ((ConcreteCategory.isIso_iff_bijective τ).1 inferInstance).1 ?_⟩
+  rw [← hs, ← ModuleCat.comp_apply, w, ModuleCat.comp_apply, ← ModuleCat.comp_apply (inv σ),
+    IsIso.inv_hom_id, ModuleCat.id_apply]
+
+variable {X S T Y T₁ Y₁ : Scheme.{u}}
+
+/-- **The closed summand.** For a finite `k : T₁ ⟶ T` and a square over `T₁` obtained by base
+change, if the image of `y` under `R^q h_* e⁻¹ β` is not in the image of the base-change map for
+`k_* N`, then its image under the comparison of the targets is not in the image of the
+base-change map over `T₁` for `N`. -/
+theorem Etale.not_mem_range_of_isFinite {p : X ⟶ S} {g : T ⟶ S} {e : Y ⟶ T} {h : Y ⟶ X}
+    (sq : IsPullback e h g p) (k : T₁ ⟶ T) [IsFinite k] {e₁ : Y₁ ⟶ T₁} {h₁ : Y₁ ⟶ X}
+    (g₁ : T₁ ⟶ S) (hg : k ≫ g = g₁) (sq₁ : IsPullback e₁ h₁ g₁ p) (a : Y₁ ⟶ Y)
+    (wa : a ≫ e = e₁ ≫ k) (wh : a ≫ h = h₁) (sqk : IsPullback e₁ a k e) (q : ℤ)
+    {A : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)}
+    {N : Sheaf T₁.smallEtaleTopology (ModuleCat.{u + 1} Λ)}
+    (β : A ⟶ ((k)_*[ModuleCat.{u + 1} Λ]).obj N) (x : X)
+    (y : ((X.uliftPointSmallEtale x).sheafFiber.obj
+      ((Etale.baseChangeTargetFunctor Λ e h q).obj A) : ModuleCat.{u + 1} Λ))
+    (hy : ((X.uliftPointSmallEtale x).sheafFiber.map
+        ((Etale.baseChangeTargetFunctor Λ e h q).map β)).hom y ∉
+      Set.range ((X.uliftPointSmallEtale x).sheafFiber.map
+        (Etale.baseChangeHomologyMap Λ sq q (((k)_*[ModuleCat.{u + 1} Λ]).obj N))).hom) :
+    ((X.uliftPointSmallEtale x).sheafFiber.map
+        ((DerivedCategory.Plus.homologyFunctor _ q).map
+          (R+((h)_*[ModuleCat.{u + 1} Λ]).map
+              (D+((e)^*[ModuleCat.{u + 1} Λ]).map (Etale.singleLowerStarComparison Λ k N) ≫
+                (Etale.baseChange (ModuleCat.{u + 1} Λ) sqk.toCommSq).app
+                  ((DerivedCategory.Plus.singleFunctor _ 0).obj N)) ≫
+            (Etale.lowerStarPlusCompIso Λ a h h₁ wh).hom.app
+              (D+((e₁)^*[ModuleCat.{u + 1} Λ]).obj
+                ((DerivedCategory.Plus.singleFunctor _ 0).obj N))))).hom
+        (((X.uliftPointSmallEtale x).sheafFiber.map
+          ((Etale.baseChangeTargetFunctor Λ e h q).map β)).hom y) ∉
+      Set.range ((X.uliftPointSmallEtale x).sheafFiber.map
+        (Etale.baseChangeHomologyMap Λ sq₁ q N)).hom := by
+  have := Etale.isIso_singleLowerStarComparison_of_isFinite Λ k N
+  have : IsIso (Etale.baseChange (ModuleCat.{u + 1} Λ) sqk.toCommSq) := by
+    rw [Etale.baseChange_eq_derivedBaseChangeMapPlus]
+    exact Etale.IsBaseChangeIso.isIso _ _ _ sqk
+  have hτ := Etale.isIso_targetPushforward Λ e h k a e₁ h₁ wh sqk.toCommSq q N
+  have hσ := Etale.isIso_sourcePushforward Λ p g k g₁ hg q N
+  have w := congrArg (fun φ ↦ (X.uliftPointSmallEtale x).sheafFiber.map φ)
+    (Etale.baseChangeHomologyMap_comp_pushforward Λ sq k g₁ hg sq₁ a wa wh sqk.toCommSq q N)
+  rw [(X.uliftPointSmallEtale x).sheafFiber.map_comp,
+    (X.uliftPointSmallEtale x).sheafFiber.map_comp] at w
+  exact not_mem_range_of_isIso_comm _ _ _ _ _ w y hy
+
+omit [CommRing Λ] in
+/-- On modules: if `b ≫ jι` sends `y` outside the range of `bcJ`, `jι ≫ τJ = τ ≫ ι₁` with `τJ`
+injective and `bc₁ ≫ ι₁ = 0`, then `b ≫ τ` sends `y` outside the range of `bc₁`. -/
+lemma not_mem_range_of_mono_comm {R : Type*} [Ring R] {M₂ M₂' M₁ M₁' J₂ S₁ SJ : ModuleCat R}
+    (b : M₂ ⟶ M₂') (τ : M₂' ⟶ M₁) (ι₁ : M₁ ⟶ M₁') (jι : M₂' ⟶ J₂) (τJ : J₂ ⟶ M₁')
+    (bc₁ : S₁ ⟶ M₁) (bcJ : SJ ⟶ J₂) [Mono τJ] (wn : jι ≫ τJ = τ ≫ ι₁) (hz : bc₁ ≫ ι₁ = 0)
+    (y : M₂) (hA : jι.hom (b.hom y) ∉ Set.range bcJ.hom) :
+    τ.hom (b.hom y) ∉ Set.range bc₁.hom := by
+  rintro ⟨s, hs⟩
+  apply hA
+  refine ⟨0, ?_⟩
+  rw [map_zero]
+  symm
+  apply (ModuleCat.mono_iff_injective τJ).1 inferInstance
+  rw [map_zero, ← ModuleCat.comp_apply, wn, ModuleCat.comp_apply, ← hs, ← ModuleCat.comp_apply,
+    hz]
+  rfl
+
+/-- **The open summand.** For a quasi-compact quasi-separated `j : T₁ ⟶ T` such that the
+base-change maps of the squares along `j` over `e` are isomorphisms in degrees `< q`, if the
+image of `y` under `R^q h_* e⁻¹ (β ≫ j_* ι)`, `ι : N ⟶ J` an injective envelope, is not in the
+image of the base-change map for `j_* J`, then the image of `y` under the comparison of the
+targets is not in the image of the base-change map over `T₁` for `N`. -/
+theorem Etale.not_mem_range_of_baseChangeProperty {p : X ⟶ S} {g : T ⟶ S} {e : Y ⟶ T}
+    {h : Y ⟶ X} (sq : IsPullback e h g p) (j : T₁ ⟶ T) [QuasiCompact j] [QuasiSeparated j]
+    {e₁ : Y₁ ⟶ T₁} {h₁ : Y₁ ⟶ X} (g₁ : T₁ ⟶ S) (hg : j ≫ g = g₁) (sq₁ : IsPullback e₁ h₁ g₁ p)
+    (a : Y₁ ⟶ Y) (wh : a ≫ h = h₁) (sqk : IsPullback e₁ a j e) (q : ℤ) (hq : 1 ≤ q)
+    (hbc : ∀ i < q, Etale.BaseChangeProperty Λ e i)
+    {A : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)}
+    {N : Sheaf T₁.smallEtaleTopology (ModuleCat.{u + 1} Λ)}
+    (β : A ⟶ ((j)_*[ModuleCat.{u + 1} Λ]).obj N) (x : X)
+    (y : ((X.uliftPointSmallEtale x).sheafFiber.obj
+      ((Etale.baseChangeTargetFunctor Λ e h q).obj A) : ModuleCat.{u + 1} Λ))
+    (hy : ((X.uliftPointSmallEtale x).sheafFiber.map
+        ((Etale.baseChangeTargetFunctor Λ e h q).map
+          (((j)_*[ModuleCat.{u + 1} Λ]).map (Injective.ι N)))).hom
+        (((X.uliftPointSmallEtale x).sheafFiber.map
+          ((Etale.baseChangeTargetFunctor Λ e h q).map β)).hom y) ∉
+      Set.range ((X.uliftPointSmallEtale x).sheafFiber.map
+        (Etale.baseChangeHomologyMap Λ sq q
+          (((j)_*[ModuleCat.{u + 1} Λ]).obj (Injective.under N)))).hom) :
+    ((X.uliftPointSmallEtale x).sheafFiber.map
+        ((DerivedCategory.Plus.homologyFunctor _ q).map
+          (R+((h)_*[ModuleCat.{u + 1} Λ]).map
+              (D+((e)^*[ModuleCat.{u + 1} Λ]).map (Etale.singleLowerStarComparison Λ j N) ≫
+                (Etale.baseChange (ModuleCat.{u + 1} Λ) sqk.toCommSq).app
+                  ((DerivedCategory.Plus.singleFunctor _ 0).obj N)) ≫
+            (Etale.lowerStarPlusCompIso Λ a h h₁ wh).hom.app
+              (D+((e₁)^*[ModuleCat.{u + 1} Λ]).obj
+                ((DerivedCategory.Plus.singleFunctor _ 0).obj N))))).hom
+        (((X.uliftPointSmallEtale x).sheafFiber.map
+          ((Etale.baseChangeTargetFunctor Λ e h q).map β)).hom y) ∉
+      Set.range ((X.uliftPointSmallEtale x).sheafFiber.map
+        (Etale.baseChangeHomologyMap Λ sq₁ q N)).hom := by
+  have : LocallySmall.{u + 1} X.Etale := locallySmall_max.{u + 1, u}
+  have := Etale.isIso_singleLowerStarComparison_of_injective Λ j (Injective.under N)
+  have hm := Etale.mono_targetPushforward Λ e h j a e₁ h₁ wh sqk.toCommSq q (Injective.under N)
+    (fun i hi ↦ by
+      have := hbc i hi j e₁ a sqk (Injective.under N)
+      rwa [Etale.baseChangeHomologyMap_eq_homologyFunctor_map] at this)
+    (by
+      have := Etale.mono_baseChangeHomologyMap Λ q hq (hbc (q - 1) (by lia)) sqk
+        (Injective.under N)
+      rwa [Etale.baseChangeHomologyMap_eq_homologyFunctor_map] at this)
+  have wn := congrArg (fun φ ↦ (X.uliftPointSmallEtale x).sheafFiber.map φ)
+    (Etale.targetPushforward_naturality Λ e h j a e₁ h₁ wh sqk.toCommSq q (Injective.ι N))
+  rw [(X.uliftPointSmallEtale x).sheafFiber.map_comp,
+    (X.uliftPointSmallEtale x).sheafFiber.map_comp] at wn
+  have hz := congrArg (fun φ ↦ (X.uliftPointSmallEtale x).sheafFiber.map φ)
+    (Etale.baseChangeHomologyMap_comp_map_eq_zero_of_injective Λ sq₁ (q := q) (by lia)
+      (Injective.ι N))
+  rw [(X.uliftPointSmallEtale x).sheafFiber.map_comp, Functor.map_zero] at hz
+  exact not_mem_range_of_mono_comm _ _ _ _ _ _ _ wn hz y hy
+
+
+end Summands
 
 end Pushforward
 
