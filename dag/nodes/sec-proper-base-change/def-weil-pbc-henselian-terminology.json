@@ -86,5 +86,30 @@
   "group": "E1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of E1; spot-checked by L: L: definition checked against 09XI (3)/09XE/04GF"
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.HenselianTerminology",
+  "declaration": "IsStrictlyHenselianLocalRing",
+  "declarations": [
+   "HenselianRing",
+   "HenselianLocalRing",
+   "IsStrictlyHenselianLocalRing"
+  ],
+  "file": "lean/Sheaf/RingTheory/HenselianTerminology.lean",
+  "statement": "def IsStrictlyHenselianLocalRing (A : Type u) [CommRing A] [IsLocalRing A] : Prop",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": false,
+  "note": "Mixed record. The henselian pair (A, I) is Mathlib's HenselianRing A I (Mathlib.RingTheory.Henselian; Stacks 09XE, of which the node's idempotent wording is the equivalent condition 09XI (3)); a henselian local ring is Mathlib's HenselianLocalRing A; both are existing declarations, as the source module WeilConjectures.Mathlib.RingTheory.Henselian fixes for this node. The one new declaration is IsStrictlyHenselianLocalRing A := HenselianLocalRing A ∧ IsSepClosed (IsLocalRing.ResidueField A) (Stacks 04GF). The equivalence of the idempotent wording with Mathlib's root lifting is the content of lem-weil-pbc-henselian-factorization-criterion and lem-weil-pbc-henselian-local-root-lifting; citers stating the idempotent condition state it inline. T0 = Spec(A/I) is notation, no declaration: a citer writes Spec (.of (A ⧸ I)) with the closed immersion Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I)).",
+  "fixed_by": "R-hen0910"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-hen0910",
+  "group": "H1",
+  "result": "fix",
+  "note": "pair = Mathlib HenselianRing (09XE = 09XI (3), source docstring), local = HenselianLocalRing, strict = HenselianLocalRing A ∧ IsSepClosed (ResidueField A) (04GF); T0 notation; redefinitions dropped per return R-hen0715 (merge re-run by L without the outer flock, 07:16)"
  }
 }

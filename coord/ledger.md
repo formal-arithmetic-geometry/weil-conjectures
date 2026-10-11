@@ -3606,3 +3606,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 07:12 L: merged deliver/K1/lem-pc-zero-dimensional-closed-subscheme-finite (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.ZeroDimensionalClosedSubschemeFinite AlgebraicGeometry.closed_subscheme_finite_of_topologicalKrullDim_le_zero)
 - 07:12 L: returned deliver/K1/lem-pc-derived-adjoint-functors (reviewer RETURN: (reviewer R-daf0915, head 5d5d0b853) H7: this item was un-parked as a STAGE 2 STATEMENT CORRECTION (coord/stage2-parked.)
 - 07:13 L: merged deliver/K1/lem-pc-kflat-stalk-criterion (stage 2; reviewer FIX; first push; Sheaf.Algebra.Homology.KFlatStalkCriterion AlgebraicGeometry.RingedSpace.isKFlat_iff_stalk_isKFlat; new nodes: def-pc-module-stalk-functor)
+- 07:15 L: merged deliver/H1/def-weil-pbc-henselian-terminology (stage 2; reviewer FIX; first push; Sheaf.RingTheory.HenselianTerminology IsStrictlyHenselianLocalRing)
