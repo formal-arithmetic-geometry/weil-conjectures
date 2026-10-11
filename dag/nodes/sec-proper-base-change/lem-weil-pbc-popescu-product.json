@@ -152,5 +152,24 @@
   "by": "L",
   "result": "accepted",
   "note": "5 steps (Stacks 07F3 proof omitted; agent proof): product of filtered categories is filtered (002V), the product diagram of smooth algebras (new node: smoothness over a product ring, via 0GIF, 00TD, 00T7), the cocone, the colimit property written out via the idempotents e_1, e_2, conclusion by the definition. Tags 07F3, 07F2, 0GIF, 002V verified."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.FilteredColimitSmoothProduct",
+  "declaration": "Algebra.ind_smooth_prod",
+  "statement": "theorem ind_smooth_prod (R₁ R₂ : Type u) (Λ₁ Λ₂ : Type (max u v)) [CommRing R₁] [CommRing R₂] [CommRing Λ₁] [CommRing Λ₂] [Algebra R₁ Λ₁] [Algebra R₂ Λ₂] (h₁ : ObjectProperty.ind.{max u v} (fun B : CommAlgCat.{max u v} R₁ ↦ Algebra.Smooth R₁ B) (CommAlgCat.of R₁ Λ₁)) (h₂ : ObjectProperty.ind.{max u v} (fun B : CommAlgCat.{max u v} R₂ ↦ Algebra.Smooth R₂ B) (CommAlgCat.of R₂ Λ₂)) : letI : Algebra (R₁ × R₂) (Λ₁ × Λ₂) := RingHom.toAlgebra (RingHom.prodMap (algebraMap R₁ Λ₁) (algebraMap R₂ Λ₂)) ObjectProperty.ind.{max u v} (fun B : CommAlgCat.{max u v} (R₁ × R₂) ↦ Algebra.Smooth (R₁ × R₂) B) (CommAlgCat.of (R₁ × R₂) (Λ₁ × Λ₂))",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-11",
+  "existing": false,
+  "file": "lean/Sheaf/RingTheory/FilteredColimitSmoothProduct.lean",
+  "fixed_by": "R-ppr1304"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-ppr1304",
+  "group": "K1",
+  "result": "fix",
+  "note": "R1,R2,Λ1,Λ2 CommRing + two Algebra = the two ring maps; h1/h2 ObjectProperty.ind Smooth = def-weil-pbc-filtered-colimit-smooth-algebras; conclusion product algebra via RingHom.prodMap (inlined letI); FIX: single universe u -> sibling Popescu form R:Type u, Λ:Type (max u v), ind.{max u v}"
  }
 }
