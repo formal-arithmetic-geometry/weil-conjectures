@@ -100,11 +100,8 @@ lemma baseChangeMap_app_pullSection {W : Y.Etale} {V : Y'.Etale} (φ : V.left �
   apply Quiver.Hom.unop_inj
   simp only [unop_comp, Quiver.Hom.unop_op, Functor.op_map]
   apply hom_ext_pullback
-  simp only [Functor.op_obj, overPullback_obj_left, Functor.id_obj, Functor.const_obj_obj,
-    overPullback_obj_hom, Functor.comp_obj, Category.assoc, MorphismProperty.Comma.comp_hom,
-    Comma.comp_left, MorphismProperty.Over.pullback_map_left,
-    MorphismProperty.Over.pullbackComp_inv_app_left, MorphismProperty.Over.pullbackComp_hom_app_left,
-    pullback.map_id, Category.id_comp]
-  apply pullback.hom_ext <;> simp [pullback.condition]
+  refine (?_ : _ = baseChangeSectionMap sq φ hφ).trans
+    (homToPullback_left_fst g' (V := f'.Etale.obj V) (U := f.Etale.obj W) _ _).symm
+  apply pullback.hom_ext <;> simp [homToPullback]
 
 end AlgebraicGeometry.Etale
