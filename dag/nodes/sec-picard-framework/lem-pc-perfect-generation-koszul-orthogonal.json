@@ -125,5 +125,24 @@
   "group": "C1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-pko2720 (reviewer sub-agent of L); spot-checked: C4: statement (E in D_QCoh(O_V), canonical map to R(U∩V→V)_* iso iff Hom(K[n],E)=0) is exactly what open-induction-step step 3 and supported-perfect-generator steps 1,5 apply; matches Tag 09IR. No existing Koszul-detection node (grep koszul in sec-picard-framework/sec-sc; 08E3 has no node), so new lem-pc-koszul-affine-detection (08E3+affine-compare-bounded) is a real lemma, kept. FIX more, RETURN less: (1) B4 plain-text arrows in steps 1-3 rewritten as \\to; (2) C1 K|_{U∩V}=0 was unjustified: folded in as elementary with Stacks Tag 0663 (steps 1,3); (3) C1 Koszul multiplication triangles uncited: folded in as elementary with Tag 062C (step 2); (4) C|_{U∩V}=0 justified inline as elementary (restriction of Rj_* to the open itself). Second reading missed (1)-(3); its claimed created.item correction was not made but that field is the maintainer's.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.KoszulOpenOrthogonality",
+  "declaration": "AlgebraicGeometry.koszul_open_orthogonality",
+  "file": "lean/Sheaf/AlgebraicGeometry/KoszulOpenOrthogonality.lean",
+  "statement": "theorem koszul_open_orthogonality (X : Scheme.{u₁}) (U : X.Opens) (A : Type u₁) [CommRing A] (a : Spec (.of A) ⟶ X) [IsOpenImmersion a] (hcover : U ⊔ a ''ᵁ ⊤ = ⊤) (hqc : IsCompact (a ⁻¹ᵁ U : Set (Spec (.of A)))) (r : ℕ) (f : Fin r → A) (hZ : ∀ x : PrimeSpectrum A, x ∉ a ⁻¹ᵁ U ↔ ∀ i : Fin r, f i ∈ x.asIdeal) [HasDerivedCategory.{w₁} (SheafOfModules.{u₁} (moduleRings (Spec (.of A)).toRingedSpace))] [HasDerivedCategory.{w₁} (SheafOfModules.{u₁} ((moduleRings (Spec (.of A)).toRingedSpace).over (a ⁻¹ᵁ U)))] (R : DerivedCategory (SheafOfModules.{u₁} ((moduleRings (Spec (.of A)).toRingedSpace).over (a ⁻¹ᵁ U))) ⥤ schemeDerivedCategory (Spec (.of A))) (adj : (SheafOfModules.overFunctor.{u₁} (moduleRings (Spec (.of A)).toRingedSpace) (a ⁻¹ᵁ U)).mapDerivedCategory ⊣ R) (E : schemeDerivedCategory (Spec (.of A))) (hE : schemeDerivedQCohProperty (Spec (.of A)) E) : IsIso (adj.unit.app E) ↔ ∀ n : ℤ, Subsingleton (((DerivedCategory.Q.obj ((@Functor.mapHomologicalComplex ℤ (ModuleCat.{u₁} A) (SheafOfModules.{u₁} (moduleRings (Spec (.of A)).toRingedSpace)) _ _ _ _ (tilde.functor (.of A)) ⟨fun _ _ ↦ tilde.map_zero⟩ (ComplexShape.up ℤ)).obj ((ExteriorAlgebra.koszulComplex A r f).extend ComplexShape.embeddingDownNat)))⟦n⟧) ⟶ E)",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-pko1508"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-pko1508",
+  "group": "C1",
+  "result": "fix",
+  "note": "H4/H12: new node def-pc-affine-koszul-object dropped (second form of K1's inline Koszul object, private affineKoszulTilde functor duplicating tilde.functor with a sorried map_comp); item restated with K1 48463b8b9's inline Q.obj(tilde.functor.mapHomologicalComplex (koszulComplex A r f).extend embeddingDownNat). Matched: X, U, V=Spec A via open immersion a, X=U∪V, qc overlap, Z=V(f) pointwise, E in D_QCoh(O_V), (i) IsIso of the unit of overFunctor.mapDerivedCategory ⊣ R, (ii) Subsingleton (K⟦n⟧ ⟶ E) for all n:ℤ; r=0 and zero ring allowed; dropped duplicate new node(s) def-pc-affine-koszul-object (--drop-nodes; not merged, the item points at the landed declaration)"
  }
 }
