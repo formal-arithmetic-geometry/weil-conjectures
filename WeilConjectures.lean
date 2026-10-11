@@ -116,6 +116,7 @@ public import WeilConjectures.AlgebraicGeometry.EtaleFiniteRefinement.Induction
 public import WeilConjectures.AlgebraicGeometry.EtaleFiniteRefinement.Specialization
 public import WeilConjectures.AlgebraicGeometry.FieldBaseChangeSections
 public import WeilConjectures.AlgebraicGeometry.FiniteOverField
+public import WeilConjectures.AlgebraicGeometry.FinitePresentationModel
 public import WeilConjectures.AlgebraicGeometry.Frobenius
 public import WeilConjectures.AlgebraicGeometry.FrobeniusFixedPoints
 public import WeilConjectures.AlgebraicGeometry.FunctionFieldLimit
@@ -418,6 +419,7 @@ public import WeilConjectures.Blowup.Affine.Projective
 public import WeilConjectures.Blowup.Affine.Proper
 public import WeilConjectures.Blowup.Affine.ReesGrading
 public import WeilConjectures.Blowup.Affine.ReesPieceLocalization
+public import WeilConjectures.Blowup.Affine.StrictTransformChart
 public import WeilConjectures.Blowup.BaseChange
 public import WeilConjectures.Blowup.BlowupUniversal
 public import WeilConjectures.Blowup.Complement
@@ -962,6 +964,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Limits
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Presheaf
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Affine
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Basic
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Etale
