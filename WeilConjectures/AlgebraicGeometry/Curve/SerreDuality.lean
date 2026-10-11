@@ -509,11 +509,12 @@ theorem formallyUnramified_stalkMap_genericPoint_of_functionField [IsIntegral X]
 
 /-- **Finite flat morphisms to the projective line.** Every smooth proper curve `X` over `k` has
 a finite flat morphism `X ⟶ ℙ¹_k` over `k`, unramified at the generic points of `X`. Each
-connected component of `X` is integral
-(`AlgebraicGeometry.IsRegular.irreducibleSpace`) of dimension one, so its function field has a
-transcendental element `t`, and `π_t` is finite flat
-(`isFinite_flat_of_hom_projectiveLine_of_functionField`); there are finitely many components,
-and the morphisms on the components glue. -/
+connected component of `X` is integral (`AlgebraicGeometry.IsRegular.irreducibleSpace`) of
+dimension one, so its function field has a transcendental element `t` with `dt ≠ 0`
+(`exists_transcendental_and_D_ne_zero`), and `π_t` is finite flat
+(`isFinite_flat_of_hom_projectiveLine_of_functionField`) and generically unramified
+(`formallyUnramified_stalkMap_genericPoint_of_functionField`); there are finitely many
+components, and the morphisms on the components glue. -/
 theorem exists_isFinite_flat_hom_projectiveLine :
     ∃ f : X ⟶ ProjectiveLine (Spec (.of k)), f.IsOver (Spec (.of k)) ∧ IsFinite f ∧ Flat f ∧
       LocallyOfFinitePresentation f ∧
