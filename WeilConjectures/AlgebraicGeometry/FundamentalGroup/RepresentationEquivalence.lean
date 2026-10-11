@@ -596,4 +596,49 @@ theorem exists_iso_toRep (V : Rep.{u + 1} Λ G) (hV : Rep.IsFiniteContinuous V) 
   change ψ (smul s G g (stalkMap s p w)) = V.ρ g (ψ (stalkMap s p w))
   rw [← stalkMap_smul, hψ, hψ, hπ]
 
+section Equivalence
+
+variable (Λ)
+
+/-- Blueprint `sk-i-real-galois`: the geometric stalk functor from finite locally constant
+sheaves of `Λ`-modules to finite continuous `Λ`-linear representations of `G = π₁(Y, s)`. -/
+noncomputable def toRepFiniteContinuous : Y.FiniteLocallyConstantModule Λ ⥤
+    ObjectProperty.FullSubcategory (Rep.IsFiniteContinuous (Λ := Λ) (G := G)) :=
+  ObjectProperty.lift _ (toRep Λ s G) (isFiniteContinuous_toRep s G)
+
+instance : (toRepFiniteContinuous Λ s G).Faithful where
+  map_injective {F F'} _ _ h := hom_ext_of_stalkMap s fun x ↦
+    congrArg (fun φ : (toRepFiniteContinuous Λ s G).obj F ⟶ (toRepFiniteContinuous Λ s G).obj F' ↦
+      φ.hom.hom x) h
+
+instance : (toRepFiniteContinuous Λ s G).Full where
+  map_surjective {F F'} h := by
+    obtain ⟨f, hf⟩ := exists_stalkMap_eq s G h.hom.hom.toLinearMap fun g x ↦
+      Representation.IntertwiningMap.isIntertwining _ _ h.hom.hom g x
+    exact ⟨f, by ext x; exact hf x⟩
+
+instance : (toRepFiniteContinuous Λ s G).EssSurj where
+  mem_essImage V := by
+    obtain ⟨F, ⟨i⟩⟩ := exists_iso_toRep s G V.obj V.property
+    exact ⟨F, ⟨(ObjectProperty.fullyFaithfulι _).preimageIso i⟩⟩
+
+/-- Blueprint `sk-i-real-galois`: Galois correspondence for finite local systems.
+
+The geometric stalk at `s` is an equivalence between finite locally constant sheaves of
+`Λ`-modules on `Y_ét` and finite continuous `Λ`-linear representations of `G = π₁(Y, s)`. -/
+noncomputable def equivalenceRep : Y.FiniteLocallyConstantModule Λ ≌
+    ObjectProperty.FullSubcategory (Rep.IsFiniteContinuous (Λ := Λ) (G := G)) :=
+  have : (toRepFiniteContinuous Λ s G).IsEquivalence := { }
+  (toRepFiniteContinuous Λ s G).asEquivalence
+
+/-- Blueprint `sk-i-real-galois`: the underlying `Λ`-module of the representation attached to a
+finite locally constant sheaf is its stalk at `s`. -/
+noncomputable def equivalenceRepCompForgetIso :
+    (equivalenceRep Λ s G).functor ⋙ ObjectProperty.ι _ ⋙
+        forget₂ (Rep.{u + 1} Λ G) (ModuleCat.{u + 1} Λ) ≅
+      ObjectProperty.ι _ ⋙ (pointSmallEtale s).sheafFiber :=
+  NatIso.ofComponents (fun _ ↦ Iso.refl _) fun _ ↦ rfl
+
+end Equivalence
+
 end AlgebraicGeometry.Scheme.FiniteLocallyConstantModule
