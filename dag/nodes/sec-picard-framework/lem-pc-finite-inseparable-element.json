@@ -118,5 +118,23 @@
   "group": "H1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-fie1801 (reviewer sub-agent of L); spot-checked: Step 1 checked against def-weil-pbc-separable-field-extension (030O clauses 1,2), def-pc-field-tower, def-weil-pbc-separable-algebraic-extension: finite intermediate K' algebraic, same minimal polynomials over k, empty transcendence basis is elementary; Step 2 is the contrapositive; no cycle. Leaf considered: grep Mathlib/FieldTheory/Separable.lean:549 Algebra.IsSeparable is the per-element definition, while the project's separable field extension is the 030O (split) notion, so the item is the bridge, not an exact Mathlib match; kept split. No repairs needed (FIX more, RETURN less: none)."
+ },
+ "lean": {
+  "module": "Sheaf.FieldTheory.FiniteInseparableElement",
+  "declaration": "FieldExtension.exists_not_isSeparable_of_not_isSeparableExtension",
+  "file": "lean/Sheaf/FieldTheory/FiniteInseparableElement.lean",
+  "statement": "theorem exists_not_isSeparable_of_not_isSeparableExtension (k : Type u) (K : Type v) [Field k] [Field K] [Algebra k K] (hfinite : degree k K ≠ ⊤) (hnot : ¬ Algebra.IsSeparableExtension k K) : ∃ α : K, ¬ IsSeparable k α",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-fie0737",
+  "group": "M1",
+  "result": "pass",
+  "note": "k K Type u/v Field+Algebra = field extension; finite = degree k K ≠ ⊤ (degree is ⊤ iff not Module.Finite); not separable = ¬ Algebra.IsSeparableExtension (recorded 030O decl); conclusion ∃ α, ¬ IsSeparable k α = minpoly not Separable; no char hypothesis, uniform; no Mathlib/source exact match (IsSeparableExtension project-local); docstring carries node proof; proof sorry; lines ≤100"
  }
 }

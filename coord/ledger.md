@@ -3505,3 +3505,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 06:27 L: merged deliver/E1/lem-pc-brown-cohomological-representability (stage 2; reviewer FIX; first push; Sheaf.CategoryTheory.BrownCohomologicalRepresentability CategoryTheory.brownCohomologicalRepresentability)
 - 06:27 L: merged deliver/H1/lem-pc-compact-generators-build-objects (stage 2; reviewer FIX; first push; Sheaf.CategoryTheory.CompactGeneratorsBuildObjects CategoryTheory.compactGenerators_buildObjects)
 - 06:27 L: merged deliver/J1/lem-pc-dimension-affine-open-cover (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.DimensionAffineOpenCover AlgebraicGeometry.Scheme.dim_eq_iSup_ringKrullDim_of_affineOpenCover)
+- 06:28 L: merged deliver/M1/lem-pc-finite-inseparable-element (stage 2; reviewer PASS; first push; Sheaf.FieldTheory.FiniteInseparableElement FieldExtension.exists_not_isSeparable_of_not_isSeparableExtension)
