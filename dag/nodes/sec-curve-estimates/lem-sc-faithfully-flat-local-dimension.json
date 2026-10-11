@@ -121,5 +121,23 @@
   "group": "F1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ffd2307 (reviewer sub-agent of L); spot-checked: C4: strict-henselization-dimension step 1 uses only dim R <= dim R^sh, which the item states (no fibre-dimension/equality clause needed). C1: going down for flat maps cited via leaf lem-sc-flat-going-down = Algebra.HasGoingDown.of_flat GoingDown.lean:155 (read; Mathlib's strict p<Q.under R form is equivalent, equality case trivial), not reproved; spectrum surjectivity via existing leaf; 00OH as unsplit node, grep found no Mathlib declaration (only Noetherian 00ON). D: three steps prove the item, no cycle. FIX more, RETURN less: B3 lem-sc-going-down-surjective-dimension used 'going-down property' undefined (no DAG def node); spelled out in the statement; added grep search record.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.RingKrullDimLeOfFaithfullyFlatOfIsLocalHom",
+  "declaration": "RingHom.ringKrullDim_le_of_faithfullyFlat_of_isLocalHom",
+  "file": "lean/Sheaf/RingTheory/RingKrullDimLeOfFaithfullyFlatOfIsLocalHom.lean",
+  "statement": "theorem ringKrullDim_le_of_faithfullyFlat_of_isLocalHom {A : Type u} {B : Type v} [CommRing A] [CommRing B] [IsLocalRing A] [IsLocalRing B] (f : A →+* B) [IsLocalHom f] (hf : f.FaithfullyFlat) : ringKrullDim A ≤ ringKrullDim B",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-ffd1031",
+  "group": "E1",
+  "result": "pass",
+  "note": "CommRing A,B (indep. universes) <- commutative rings; IsLocalRing A,B <- local (nontrivial as in Stacks); f : A →+* B + IsLocalHom f <- local ring hom; f.FaithfullyFlat (= Module.FaithfullyFlat via f.toAlgebra) <- def-weil-pbc-faithfully-flat-ring-map; ringKrullDim A ≤ ringKrullDim B <- dim A ≤ dim B; forms match F1 927574473; no Mathlib flat-local dimension theorem in pinned Mathlib (grep ringKrullDim_le*/GoingDown/KrullsHeight), existing:false correct"
  }
 }

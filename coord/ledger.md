@@ -3702,3 +3702,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 07:50 L: merged deliver/H1/lem-sc-ext-derived-composite (stage 2; reviewer PASS; first push; Sheaf.CategoryTheory.RightDerivedExactComposite CategoryTheory.Functor.exists_rightDerived_exact_comp_iso)
 - 07:50 L: merged deliver/H1/lem-sc-exterior-top-direct-sum (stage 2; reviewer PASS; first push; Sheaf.LinearAlgebra.ExteriorTopDirectSum exteriorPower.existsUnique_topDirectSum)
 - 07:50 L: merged deliver/C1/lem-exc-continuous-cochains-short-exact (stage 2; reviewer PASS; first push; Sheaf.RepresentationTheory.ContinuousCochainsShortExact Rep.continuousCochains_shortExact)
+- 07:51 L: merged deliver/E1/lem-sc-faithfully-flat-local-dimension (stage 2; reviewer PASS; first push; Sheaf.RingTheory.RingKrullDimLeOfFaithfullyFlatOfIsLocalHom RingHom.ringKrullDim_le_of_faithfullyFlat_of_isLocalHom)
