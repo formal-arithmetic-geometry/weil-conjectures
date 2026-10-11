@@ -17,8 +17,10 @@ blueprint `sk-lem-geometry` (4).
 ## Main statements
 
 - `AlgebraicGeometry.Scheme.Hom.deformationSpaceToAffineSpace`: the morphism
-  `D_0 𝔸^n_B ⟶ 𝔸^n_{𝔸¹_B}`
-  given by the coordinates `u_k = x_k t⁻¹`.
+  `D_0 𝔸^n_B ⟶ 𝔸^n_{𝔸¹_B}` given by the coordinates `u_k = x_k t⁻¹`, with `x_k = t u_k`;
+- `AlgebraicGeometry.Scheme.Hom.isIso_deformationSpaceToAffineSpace`: it is an isomorphism;
+- `AlgebraicGeometry.Scheme.Hom.isPullback_deformationSpaceMap`: the deformation space of the
+  standard pair commutes with base change in `B` (blueprint `sk-lem-geometry` (5)).
 -/
 
 @[expose] public section
@@ -450,5 +452,44 @@ instance isIso_deformationSpaceToAffineSpace : IsIso (deformationSpaceToAffineSp
       rw [Iso.eq_inv_comp, sq.isoPullback_hom_snd]
     rw [MorphismProperty.isomorphisms.iff, e]
     infer_instance
+
+variable {n} in
+/-- The comparison of the deformation spaces of the standard pair over `B'` and over `B`, along a
+morphism `b : B' ⟶ B`. -/
+noncomputable def deformationSpaceMap {B' : Scheme.{u}} (b : B' ⟶ B) :
+    (AffineSpace.zeroSection n B').ker.deformationSpace ⟶
+      (AffineSpace.zeroSection n B).ker.deformationSpace :=
+  deformationSpaceToAffineSpace n B' ≫ AffineSpace.map n (AffineSpace.map _ b) ≫
+    inv (deformationSpaceToAffineSpace n B)
+
+/-- Blueprint `sk-lem-geometry` (5) for the standard pair: the deformation space of the zero
+section commutes with base change in `B`,
+`D_0 𝔸^n_{B'} = D_0 𝔸^n_B ×_{𝔸¹_B} 𝔸¹_{B'}`. -/
+lemma isPullback_deformationSpaceMap {B' : Scheme.{u}} (b : B' ⟶ B) :
+    IsPullback (deformationSpaceMap b)
+      (deformationSpaceProj (𝔸(n; B') ↘ B') (AffineSpace.zeroSection n B'))
+      (deformationSpaceProj (𝔸(n; B) ↘ B) (AffineSpace.zeroSection n B))
+      (AffineSpace.map _ b) := by
+  have P₁ := IsPullback.of_horiz_isIso (g := 𝟙 _)
+    ⟨(deformationSpaceToAffineSpace_over n B').trans (Category.comp_id _).symm⟩
+  have P₃ := IsPullback.of_horiz_isIso (fst := inv (deformationSpaceToAffineSpace n B))
+    (snd := 𝔸(n; 𝔸(ULift.{u} (Fin 1); B)) ↘ _)
+    (f := deformationSpaceProj (𝔸(n; B) ↘ B) (AffineSpace.zeroSection n B)) (g := 𝟙 _)
+    ⟨by rw [IsIso.inv_comp_eq, Category.comp_id, deformationSpaceToAffineSpace_over]⟩
+  have := (P₁.paste_horiz (AffineSpace.isPullback_map (n := n) (AffineSpace.map _ b))).paste_horiz
+    P₃
+  simpa [deformationSpaceMap] using this
+
+/-- Blueprint `sk-lem-geometry` (5) for the standard pair: the base change of the section `s̃` is
+the section `s̃` over `B'`. -/
+lemma deformationSpaceSection_comp_deformationSpaceMap {B' : Scheme.{u}} (b : B' ⟶ B) :
+    (AffineSpace.zeroSection n B').deformationSpaceSection ≫ deformationSpaceMap b =
+      AffineSpace.map _ b ≫ (AffineSpace.zeroSection n B).deformationSpaceSection := by
+  rw [deformationSpaceMap, reassoc_of% deformationSpaceSection_comp_deformationSpaceToAffineSpace,
+    ← Category.assoc (AffineSpace.zeroSection _ _), AffineSpace.zeroSection_comp_map,
+    Category.assoc]
+  congr 1
+  rw [IsIso.comp_inv_eq,
+    deformationSpaceSection_comp_deformationSpaceToAffineSpace]
 
 end AlgebraicGeometry.Scheme.Hom

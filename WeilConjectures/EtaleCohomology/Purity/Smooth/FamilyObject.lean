@@ -22,6 +22,8 @@ deformation.
 
 - `AlgebraicGeometry.Etale.nonempty_iso_leftDerivedUpperStar_oneSection_familyObject`
 - `AlgebraicGeometry.Etale.nonempty_iso_leftDerivedUpperStar_zeroSection_familyObject`
+- `AlgebraicGeometry.Etale.nonempty_iso_leftDerivedUpperStar_puncturedLine_familyObject`
+- `AlgebraicGeometry.Etale.nonempty_iso_familyObject_standardPair`
 -/
 
 @[expose] public section
