@@ -242,5 +242,27 @@
   "lem-weil-pbc-quasi-coherent-ideal-zero-set-affine",
   "pqf-lem-coherent-ft-locnoeth"
  ],
- "lead_note": "The new node lem-sc-ample-square-zero-thickening is the cohomological heart of 09MS (paragraphs 2-3); its split needs the sequence 0 -> I(x)L^n -> L^n -> i_*i^*L^n -> 0, 01QY, 0B8S (boundary is a derivation), 01XR via 09MR, and 01YQ (= lem-weil-pbc-finite-surjective-affine-target-noetherian)."
+ "lead_note": "The new node lem-sc-ample-square-zero-thickening is the cohomological heart of 09MS (paragraphs 2-3); its split needs the sequence 0 -> I(x)L^n -> L^n -> i_*i^*L^n -> 0, 01QY, 0B8S (boundary is a derivation), 01XR via 09MR, and 01YQ (= lem-weil-pbc-finite-surjective-affine-target-noetherian).",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AmpleOnReductionNoetherian",
+  "declaration": "AlgebraicGeometry.isAmple_iff_of_isClosedImmersion_of_isHomeomorph",
+  "declarations": [
+   "AlgebraicGeometry.isAmple_iff_of_isClosedImmersion_of_isHomeomorph"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/AmpleOnReductionNoetherian.lean",
+  "statement": "theorem isAmple_iff_of_isClosedImmersion_of_isHomeomorph {Z X : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i] [IsLocallyNoetherian Z] [IsLocallyNoetherian X] [CompactSpace Z] [CompactSpace X] (hi : IsHomeomorph i.base) (L : X.Modules) [L.IsInvertible] : letI : ((Scheme.Modules.tensorPullback i).obj L).IsInvertible := ((Scheme.Modules.invertible_pullback_tensor i).1 L).2 AlgebraicGeometry.Scheme.Modules.IsAmple Z ((Scheme.Modules.tensorPullback i).obj L) ↔ AlgebraicGeometry.Scheme.Modules.IsAmple X L",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-aor1127"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-aor1127",
+  "group": "G1",
+  "result": "fix",
+  "note": "i:Z->X [IsClosedImmersion i]; [IsLocallyNoetherian]+[CompactSpace] on Z and X (Noetherian); hi : IsHomeomorph i.base; L : X.Modules [L.IsInvertible]; i^*L = (tensorPullback i).obj L; IsAmple Z i^*L <-> IsAmple X L; FIX: private sorry'd tensorPullback_isInvertible removed, instance from landed invertible_pullback_tensor (F1 fd4f360fd)"
+ }
 }
