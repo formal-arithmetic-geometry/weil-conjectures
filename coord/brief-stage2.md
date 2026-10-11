@@ -23,7 +23,7 @@ Claim with `tools/claim.py next <G> --stage 2` (nearest to Mathlib first).
 
 - **(A) A missing notion** (the statement needs a notion that no node, no Mathlib declaration and no source declaration gives): add a NEW DEFINITION NODE in the same delivery, `dag/nodes/<chapter of the item>/<id>.json` with the fields of §5, with its own module (or an `existing: true` record when Mathlib or the source has the notion and no DAG node carries it), and cite it from the item: the item's `stmt_deps` gains its id (the one other field of the item you may change). Search first (three kinds) that the notion is not already a node (`tools/blueprint_refs.py search`, grep of `dag/nodes`), not in Mathlib, not in the source.
 - **(B) An unusable dependency** (a node in the item's `stmt_deps` whose recorded declaration or `mathlib_match` does not give the notion as the node states it, e.g. the general notion where the node means a specialization): write, in the same delivery, a module stating the dependency node's notion as the node says it, and set that dependency node's `lean` to its record with a `note` saying why the old record was unusable; nothing else of the dependency node changes (its `mathlib_match` stays).
-- **(C) Abandon only** when the item's own statement is wrong or cannot be typed even with (A) and (B): `tools/claim.py release <G> <item> "abandon: <the precise reason>"`, and report it.
+- **(C) A wrong statement is CORRECTED, not abandoned (STAGE 2 STATEMENT CORRECTION, decision of the human, 2026-10-11; `coord/STATE.md`).** When the item's own statement is wrong or cannot be written (false, ill-typed, ambiguous, or leaving out what is needed to state it: an object not introduced, an action or a structure not specified, a hypothesis the source assumes throughout), correct the node in the delivery and write the Lean for the corrected statement. The correction makes the node say what the SOURCE says (the Stacks tag, the blueprint unit's intent), never something easier. The item may then change in `statement`, and only as far as the correction forces it in `stmt_deps`, `proof` and `proof_deps`; it gains `statement_change` (§5) and the report gets `## Statement corrected` (§6). Find the citers with `grep -rl '"<item>"' dag/nodes`: every node whose `stmt_deps` or `proof_deps` name the item; read each and write one line per citer (does its use of the item still hold?). A citer that breaks is named (`holds: false`), never edited. A correction that would change a UNIT's own statement is written up for `coord/HUMAN.md` and that item alone is still released: `tools/claim.py release <G> <item> "abandon: unit statement: <the precise reason>"`.
 
 ## 2. The statement says exactly what the node says
 
@@ -32,8 +32,8 @@ Claim with `tools/claim.py next <G> --stage 2` (nearest to Mathlib first).
 - Check the edge cases before writing: empty index sets, zero objects, the empty scheme, `n = 0`, the characteristic. A universe or a `Type` choice must not exclude a case the node covers (as `I : Type w` in the example covers every set).
 - Use the dependency nodes' recorded declarations (import their `lean.module`) and Mathlib's definitions whenever they exist; never a private copy of a notion.
 - No hollow definition (`AGENTS.md` §5): a def's data is never `sorry`. A proof a definition needs (a well-definedness, an instance) is a named theorem with `sorry` of its own, in the same module, with its own docstring.
-- A statement you believe false: write it as the node says, mark `STATEMENT-DISPUTED: <reason, counterexample>` in the report. Never write it weaker.
-- If the node's statement is wrong or cannot be typed, do not change the node: report the fault; the lead decides.
+- A statement you find false or untypable: correct the node by (C) of §1, following the source, with `statement_change` and the report section. Never write it weaker, never change the statement silently (H7).
+- A statement you only doubt (no counterexample, the source agrees with it): write it as the node says, mark `STATEMENT-DISPUTED: <reason>` in the report.
 
 ## 3. Conventions (upstreamable by renaming module paths `Sheaf.X -> WeilConjectures.X`)
 
@@ -64,6 +64,20 @@ The delivery changes the item's node file ONLY in the field `lean` (and in `stmt
 
 `status` stays `split`; keep the JSON layout (`indent=1`, `ensure_ascii=False`, final newline).
 
+**A corrected item (C)** changes also in `statement`, and only as far as the correction forces it in `stmt_deps`, `proof`, `proof_deps`, and gains
+
+```
+"statement_change": {"date": "<date -u, YYYY-MM-DD>", "by": "<G> stage 2",
+  "old_statement": "<the old TeX, verbatim>",
+  "what": "<what was wrong: the counterexample, or what could not be typed and why>",
+  "source": {"document": "...", "place": "..."} <the source place the correction follows>,
+  "citers": [{"id": "<node>", "holds": true|false, "note": "<one line: does its use of the item still hold>"}, ...],
+  "old_stmt_deps": [...], "old_proof": [...], "old_proof_deps": [...]   <each present exactly when that field changed, verbatim from the base>,
+  "previous": {...}   <exactly when the node already had a statement_change: the old record, whole>}
+```
+
+`citers` names exactly the nodes on `sheaf-dag` whose `stmt_deps` or `proof_deps` contain the item (`grep -rl '"<item>"' dag/nodes`, then keep those). The corrected statement cites every `[id]` it names in `stmt_deps`. Nothing else of the item changes (`status`, `source`, `kind` stay). The preflight checks every key (`tools/node_fields.py check_statement_change`).
+
 **A dependency node of (B)** changes ONLY in `lean`: the record above for its module (`existing: false`, `by` = your group), with `note` required (why the recorded declaration or `mathlib_match` was unusable, what the module states). Its `mathlib_match` and every other field stay.
 
 **A new definition node of (A)** is written whole, with exactly these fields (the preflight checks each):
@@ -89,5 +103,6 @@ One commit on top of `sheaf-dag` with: the item's module and node file; for each
 - `## Second reading by <G>`: an independent reading by another worker of the group, with the node and the file open, answering above all: does the Lean say exactly what the node says? Name each mismatch found and what changed. It reads the new nodes and dependency modules too.
 - `## New nodes` (when there are new nodes): one paragraph per new node, naming its id: its statement, its source, its searches and why it is not an existing node or declaration.
 - `## Dependency modules` (when there are dependency modules): one paragraph per dependency node, naming its id: why its record was unusable, what the module states.
+- `## Statement corrected` (when the item is corrected, (C)): the old statement, what was wrong, the source place the correction follows, and one line per citer naming its id (holds or not, why): the content of `statement_change`.
 
-Before pushing: `python3 tools/preflight_delivery.py <G> <item> --stage 2` (shape, records, the new nodes' fields, docstrings, line width, sorry-only proofs) until it passes, and a clean compile on the server of each module. A module that imports another module of the same delivery cannot compile on the server before that one has landed (the preflight and the packet print `compile: deferred`; the merge lands the modules in dependency order): compile it as one temporary file, the sibling's body followed by the module's body without the sibling import, under a scratch name (`tools/compile_remote.sh <G> <item>-check`). Push to `deliver/<G>/<item>` as in stage 1 (`coord/delivery-errors.md` A1: one commit, based on `sheaf-dag`, never on another delivery). The lead's reviewer checks the statements against the nodes, reads each new node against its source, compiles and lands the modules with `tools/land.sh`; returns go to `coord/returns/<G>.md`, and are repaired point by point (section G of that file).
+Before pushing: `python3 tools/preflight_delivery.py <G> <item> --stage 2` (shape, records, the new nodes' fields, the `statement_change` of a corrected item, docstrings, line width, sorry-only proofs) until it passes; for a corrected item it prints `item corrected: <n> citers, <k> marked holds:false` (n must be the number of citers you found), and a clean compile on the server of each module. A module that imports another module of the same delivery cannot compile on the server before that one has landed (the preflight and the packet print `compile: deferred`; the merge lands the modules in dependency order): compile it as one temporary file, the sibling's body followed by the module's body without the sibling import, under a scratch name (`tools/compile_remote.sh <G> <item>-check`). Push to `deliver/<G>/<item>` as in stage 1 (`coord/delivery-errors.md` A1: one commit, based on `sheaf-dag`, never on another delivery). The lead's reviewer checks the statements against the nodes, reads each new node against its source, compiles and lands the modules with `tools/land.sh`; returns go to `coord/returns/<G>.md`, and are repaired point by point (section G of that file).
