@@ -4386,3 +4386,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 11:07 L: merged deliver/K1/def-nagata-glued-limit-comparison (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.GluedLimitComparison AlgebraicGeometry.Scheme.NoetherianApproximation.gluedLimitComparison)
 - 11:07 L: merged deliver/G1/lem-weil-pbc-lci-field-change (stage 2; reviewer PASS; first push; Sheaf.RingTheory.LocalCompleteIntersectionFieldChange Algebra.isLocalCompleteIntersection_fieldChange)
 - 11:07 L: merged deliver/E1/lem-weil-pbc-lci-conormal-free-rank-codimension (stage 2; reviewer FIX; first push; Sheaf.RingTheory.LciConormalFreeRankCodimension Ideal.exists_basis_cotangent_localization_of_completeIntersection)
+- 11:07 L: merged deliver/J1/lem-weil-pbc-kernel-cokernel-annihilated-mod-ideal (stage 2; reviewer FIX; first push; Sheaf.RingTheory.KernelCokernelAnnihilatedModIdeal LinearMap.ker_coker_annihilated_mod_ideal)

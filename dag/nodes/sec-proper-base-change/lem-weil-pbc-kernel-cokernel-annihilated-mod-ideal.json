@@ -208,5 +208,29 @@
   "by": "L",
   "result": "accepted",
   "note": "8 elementary steps writing out the algebra of Stacks 0888: exact-sequence form of the hypothesis; existence of x, independence of the choice, linearity, both composites of the maps 'fg'; naturality (b); the converse criterion (d) and K^{2t}; reduction modulo J (c). No new nodes. L removed the citation of def-weil-finitely-generated-module for 'A-module' (B3: that node defines finitely generated modules, which are not assumed)."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.KernelCokernelAnnihilatedModIdeal",
+  "declaration": "LinearMap.ker_coker_annihilated_mod_ideal",
+  "declarations": [
+   "LinearMap.ker_coker_annihilated_iff_exists_exact_sequence",
+   "LinearMap.ker_coker_annihilated_mod_ideal"
+  ],
+  "file": "lean/Sheaf/RingTheory/KernelCokernelAnnihilatedModIdeal.lean",
+  "statement": "theorem ker_coker_annihilated_mod_ideal {A : Type u} [CommRing A] {M : Type v} {N : Type v'} [AddCommGroup M] [Module A M] [AddCommGroup N] [Module A N] (K : Ideal A) (t : ℕ) (ht : 1 ≤ t) (u : M →ₗ[A] N) (hker : K ^ t ≤ Module.annihilator A (ker u)) (hcoker : K ^ t ≤ Module.annihilator A (N ⧸ range u)) : (∀ (f g : A), f ∈ K ^ t → g ∈ K ^ t → (∀ y : N, ∃ x : M, u x = f • y) ∧ (∀ (y : N) (x x' : M), u x = f • y → u x' = f • y → g • x = g • x') ∧ ∃ h : N →ₗ[A] M, (∀ (y : N) (x : M), u x = f • y → h y = g • x) ∧ h.comp u = (f * g) • LinearMap.id ∧ u.comp h = (f * g) • LinearMap.id ∧ ∀ (M' : Type w) (N' : Type w') [AddCommGroup M'] [Module A M'] [AddCommGroup N'] [Module A N'] (u' : M' →ₗ[A] N'), K ^ t ≤ Module.annihilator A (ker u') → K ^ t ≤ Module.annihilator A (N' ⧸ range u') → ∀ (a : M →ₗ[A] M') (b : N →ₗ[A] N') (h' : N' →ₗ[A] M'), u'.comp a = b.comp u → (∀ (y : N') (x : M'), u' x = f • y → h' y = g • x) → a.comp h = h'.comp b) ∧ (∀ J : Ideal A, let ū := (J • ⊤ : Submodule A M).mapQ (J • ⊤ : Submodule A N) u (Submodule.smul_top_le_comap_smul_top J u) K ^ (2 * t) ≤ Module.annihilator A (ker ū) ∧ K ^ (2 * t) ≤ Module.annihilator A ((N ⧸ (J • ⊤ : Submodule A N)) ⧸ range ū)) ∧ (∀ (P : Type z) (R : Type z') [AddCommGroup P] [Module A P] [AddCommGroup R] [Module A R] (v : P →ₗ[A] R), (∀ (f g : A), f ∈ K ^ t → g ∈ K ^ t → ∃ k : R →ₗ[A] P, k.comp v = (f * g) • LinearMap.id ∧ v.comp k = (f * g) • LinearMap.id) → K ^ (2 * t) ≤ Module.annihilator A (ker v) ∧ K ^ (2 * t) ≤ Module.annihilator A (R ⧸ range v))",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-11",
+  "existing": false,
+  "note": "The main statement renders (a)-(d), with the canonical map characterized by its lifting formula. The additional theorem renders the parenthetical equivalence with an exact sequence using the recorded ComposableArrows.Exact.",
+  "fixed_by": "R-kca1105"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-kca1105",
+  "group": "J1",
+  "result": "fix",
+  "note": "A comm ring, K ideal, t>=1, u A-linear, K^t kills ker u and N/range u; (a) lifts, choice-independence, h linear with lifting formula and both fg composites; (b) naturality over every u' with both hypotheses and h' by its lifting formula; (c) every J, mapQ M/JM->N/JN, K^(2t) kills ker and coker; (d) arbitrary v with fg quasi-inverses; exact-sequence parenthetical via ComposableArrows.Exact iff; fix: reduceModIdeal.restrictScalars -> Submodule.mapQ (rfl-equal), independent universes for M,N,M',N',P,R"
  }
 }
