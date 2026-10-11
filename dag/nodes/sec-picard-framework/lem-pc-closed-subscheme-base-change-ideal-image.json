@@ -126,5 +126,23 @@
   "group": "C1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-csb1806 (reviewer sub-agent of L); spot-checked: Packet read whole. Item = Stacks 01JU (1) image form (not pullback equality), matches source. Step 1 is an exact specialization (X:=S, X':=Y) of lem-pc-closed-imm-base-change, whose corrected statement gives both closed-immersion and image clauses for arbitrary g (C1/C4 ok). No cycle: cited node's proof_deps are lem-weil-pbc-* and defs only, not this item nor lem-pc-zero-scheme-properties; it only mentions this item in a lead_note. Right-exactness not needed here (image form, no flatness). Cross-unit tool use (picard-rr node in hilb-curves item): generic base-change lemma, no node of the unit gives it; accepted via --tool-uses. Mathlib grep Morphisms/ClosedImmersion.lean: only IsClosedImmersion instances (comp, iso, subschemeι), no image-ideal statement; not a leaf. Fault missed by second reading: it says the worker-written split_report.tool_uses was removed, but the delivered file still carries it (rule 8); recorded by the maintainer through --tool-uses instead, no math impact."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ClosedSubschemeBaseChangeIdealImage",
+  "declaration": "AlgebraicGeometry.closedSubscheme_baseChange_ideal_image",
+  "file": "lean/Sheaf/AlgebraicGeometry/ClosedSubschemeBaseChangeIdealImage.lean",
+  "statement": "theorem closedSubscheme_baseChange_ideal_image {S Z Y : Scheme.{u}} (i : Z ⟶ S) [IsClosedImmersion i] (g : Y ⟶ S) : IsClosedImmersion (pullback.snd i g) ∧ Subobject.mk (pullback.snd i g).ker.toModulesι = imageSubobject ((Scheme.Modules.tensorPullback g).map i.ker.toModulesι ≫ ((Classical.choice (Scheme.Modules.nonempty_tensorPullbackAdjunction g)).homEquiv (SheafOfModules.unit S.ringCatSheaf) (SheafOfModules.unit Y.ringCatSheaf)).symm (SheafOfModules.unitToPushforwardObjUnit g.toRingCatSheafHom))",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-cbi1114",
+  "group": "H1",
+  "result": "pass",
+  "note": "S,Z,Y arbitrary Scheme.{u}; i closed immersion = [IsClosedImmersion i]; I = i.ker.toModules (kernel of O_S -> subschemeι_* O, iso to i_*O_Z); q = pullback.snd i g; conj1 IsClosedImmersion q; conj2 Subobject of O_Y of q.ker.toModulesι = imageSubobject(tensorPullback g (I->O_S) ≫ adjoint of unitToPushforwardObjUnit g); adjunction by Classical.choice of dependency's Nonempty, image invariant under change of adjunction; Mathlib IdealSheafData.comap is defined as ker of base change (ker_fst_of_isClosedImmersion), so no Mathlib statement of the image form: existing false correct"
  }
 }
