@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-pc-vanishing-above-dim",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Vanishing above the dimension of a curve",
@@ -24,69 +24,88 @@
  ],
  "proof": [
   {
-   "text": "*Step 1: the point $P$ and the first affine open.* The curve $X$\nis proper (a projective morphism is proper,\n[lem-pc-projective-proper]), nonempty (an integral scheme,\n[def-pc-curve]) and of finite\ntype over $k$, hence has a closed point: any nonempty open affine\n$\\operatorname{Spec}(A)\\subseteq X$ has $A$ a nonzero\nfinite type $k$-algebra, so\n$A$ has a maximal ideal (the classical Nullstellensatz: a maximal\nideal exists in a nonzero finitely generated algebra over a field),\nand the closed points of $\\operatorname{Spec}(A)$ are exactly its maximal ideals.\nPick a closed point $P\\in X$.\n\nThe local ring $\\mathcal{O}_{X,P}$ is a regular local ring of dimension one\n([lem-sc-smooth-regular]: smooth over a field; the curve is\none-dimensional because $\\dim\\mathcal{O}_{X,P}=\\dim X=1$ for the closed point\n$P$, [def-pc-dimension]), hence a discrete valuation ring\n([lem-sc-regular-dim1-dvr]). By the argument of\n[lem-sc-point-cartier] (the same proof works over an arbitrary\nbase field: it only uses the two lemmas just cited) the closed point\n$P$ with its reduced structure is an effective Cartier divisor\n([def-sc-effective-cartier-divisor]); write\n$D:=[P]$ and $\\mathcal{L}:=\\mathcal{O}_X(D)$\n([def-pc-divisor-line-bundle]), so that the support of $D$ is\n$\\{P\\}$.\n\nThe exact sequence\n\n$$\n0\\to\\mathcal{O}_X\\to\\mathcal{O}_X(D)\\to\\mathcal{O}_X(D)\\otimes\\mathcal{O}_P\\to0\n$$\n\n(the first map is multiplication by the canonical section $1_D$;\n$\\mathcal{O}_X(D)\\otimes\\mathcal{O}_P\\cong k(P)$, the structure sheaf of the closed\npoint) is exact, $\\mathcal{O}_X(D)\\otimes\\mathcal{O}_P$ is the skyscraper $k(P)$,\nwhich is flasque, hence has no higher cohomology\n($H^i(X,k(P))=0$ for $i\\ge1$), and its $H^0$ is\n$k(P)$, a $[k(P):k]$-dimensional $k$-vector space. By the additivity\nof the Euler characteristic ([lem-pc-euler-additive]) and\n[def-pc-degree-line-bundle],\n\n$$\n\\deg\\mathcal{L}=\\deg[\\mathcal{O}_X(D)]=\\chi(\\mathcal{O}_X(D))-\\chi(\\mathcal{O}_X)\n=[k(P):k]\\ge1 .\n$$\n\nHence $\\mathcal{L}$ is ample ([lem-pc-ample-positive-degree]: positive\ndegree is equivalent to ampleness), and by\n[lem-sc-ample-complement-affine] (the complement of an ample\nCartier divisor is affine, [def-sc-ample] for the ampleness\nhypothesis) the open subscheme\n\n$$\nU_1:=X\\setminus\\{P\\}=X\\setminus D\n$$\n\nis affine.",
+   "text": "By [def-pc-smooth-projective-curve] and [def-pc-curve], the structure morphism $X\\to\\operatorname{Spec}(k)$ is of finite type. Since $k$ is a field, $\\operatorname{Spec}(k)$ is Noetherian; therefore [lem-weil-pbc-finite-type-over-noetherian] implies that $X$ is a Noetherian scheme.",
    "uses": [
-    "lem-pc-projective-proper",
+    "def-pc-smooth-projective-curve",
     "def-pc-curve",
-    "lem-sc-smooth-regular",
+    "lem-weil-pbc-finite-type-over-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Lemma 01T6 (finite type over a Noetherian scheme)"
+   }
+  },
+  {
+   "text": "The curve hypothesis gives $\\dim X=1$ as the supremum of the dimensions of its local rings [def-pc-curve, def-pc-dimension]. By [lem-pc-scheme-dimension-local-rings], this equals the topological Krull dimension of the underlying space, so $\\operatorname{topologicalKrullDim}(X)=1$.",
+   "uses": [
+    "def-pc-curve",
     "def-pc-dimension",
-    "lem-sc-regular-dim1-dvr",
-    "lem-sc-point-cartier",
-    "def-sc-effective-cartier-divisor",
-    "def-pc-divisor-line-bundle",
-    "lem-pc-euler-additive",
-    "def-pc-degree-line-bundle",
-    "lem-pc-ample-positive-degree",
-    "lem-sc-ample-complement-affine",
-    "def-sc-ample"
+    "lem-pc-scheme-dimension-local-rings"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Lemma 04MU (dimension of a scheme)"
+   }
   },
   {
-   "text": "*Step 2: the second affine open.* By the standard fact that\nevery point of a scheme has an affine open neighbourhood, choose an\naffine open $V\\subseteq X$ with $P\\in V$; write $V=\\operatorname{Spec}(A)$ with\n$A:=\\mathcal{O}_X(V)$. The ring $A$ is a finitely generated $k$-algebra and\nan integral domain (an affine chart of the integral scheme $X$,\n[def-pc-curve]), of Krull dimension one (a nonempty open\nsubscheme of the one-dimensional $X$; [def-pc-dimension]), and\n$P$ corresponds to a maximal ideal $\\mathfrak m\\subset A$ (the closed\npoints of $\\operatorname{Spec} A$ are the maximal ideals).",
+   "text": "For $q\\ge2$, the equality $\\operatorname{topologicalKrullDim}(X)=1$ gives $\\operatorname{topologicalKrullDim}(X)<q$. Applying [lem-sc-noetherian-cohomology-above-dimension] to the Noetherian scheme $X$ and the quasi-coherent module $\\mathcal F$ yields $H^q(X,\\mathcal F)=0$ for every $q\\ge2$.",
    "uses": [
-    "def-pc-curve",
-    "def-pc-dimension"
+    "lem-sc-noetherian-cohomology-above-dimension"
    ],
-   "elementary": false
-  },
-  {
-   "text": "*Claim: $V\\setminus\\{P\\}$ is affine.* We show\n$\\operatorname{Spec}(A)\\setminus\\{\\mathfrak m\\}$ is a principal open: since\n$\\dim A=1$, the ideal $\\mathfrak m$ is nonzero, so choose\n$0\\neq f\\in\\mathfrak m$. By Krull's principal ideal theorem every\nminimal prime over $(f)$ has height $\\le1$; it is nonzero because\n$(f)\\neq0$ and $A$ is a domain; hence it has height exactly $1$, so it\nis maximal ($\\dim A=1$). Let\n$\\mathfrak m_1,\\dots,\\mathfrak m_r$ be the finitely many (Noetherian\nring) minimal primes over $(f)$; they are maximal ideals and\n$\\mathfrak m\\in\\{\\mathfrak m_1,\\dots,\\mathfrak m_r\\}$ because\n$f\\in\\mathfrak m$. If $r=1$ put $g:=f$; otherwise\n$\\mathfrak m\\nsubseteq\\mathfrak m_1\\cup\\cdots\\cup\\mathfrak m_r$\n(a maximal ideal $\\neq\\mathfrak m_j$ is not contained in\n$\\mathfrak m_j$, and an ideal contained in a finite union of prime\nideals is contained in one of them: prime avoidance; this applies\nsince all $\\mathfrak m_j$ are prime), so there is\n$g\\in\\mathfrak m\\setminus(\\mathfrak m_1\\cup\\cdots\\cup\\mathfrak m_r)$.\nIn both cases $V(g)=\\{\\mathfrak m\\}$: a prime\n$\\mathfrak p\\supseteq(g)$ contains a minimal prime over $(g)$\n(Noetherianity), which has height one, hence is one of the maximal\nideals $\\mathfrak m_1,\\dots,\\mathfrak m_r$; among them only\n$\\mathfrak m$ contains $g$ (for $r\\ge2$ by the choice of $g$; for\n$r=1$ because $\\mathfrak m_1=\\mathfrak m$ since $f\\in\\mathfrak m$ with\n$V(f)=\\{\\mathfrak m_1\\}$), so $\\mathfrak p=\\mathfrak m$ as\n$\\mathfrak m$ is maximal. Therefore\n\n$$\nV\\setminus\\{P\\}=\\operatorname{Spec}(A)\\setminus\\{\\mathfrak m\\}=D(g)=\\operatorname{Spec}(A_g)\n$$\n\nis affine, as claimed.",
-   "uses": [],
-   "elementary": null
-  },
-  {
-   "text": "*Step 3: the two-member cover computes.* The open subschemes\n$U_1$ (Step 1) and $U_2:=V$ (Step 2) cover $X$: every point of $X$\ndifferent from $P$ lies in $U_1$, and $P\\in V$. The finite\nintersections of the members are affine: $U_1$ by Step 1, $U_2$ by\nconstruction, and $U_1\\cap U_2=V\\setminus\\{P\\}$ by the claim of Step\n2. By [lem-pc-cech-computes] (the Cech complex of an open\naffine covering computes sheaf cohomology of quasi-coherent modules\nwhenever all finite intersections are affine),\n\n$$\nH^i(X,\\mathcal{F})=\\check H^i(\\{U_1,U_2\\},\\mathcal{F})\\qquad\\text{for all }i\\ge0 .\n$$\n\nIn the alternating Cech complex of a two-member cover the $i$-th term\nis the product over the $(i+1)$-element subsets of $\\{1,2\\}$; there\nare none as soon as $i\\ge2$:\n\n$$\n\\check C^i(\\{U_1,U_2\\},\\mathcal{F})=0\\qquad\\text{for }i\\ge2 ,\n$$\n\nso $\\check H^i(\\{U_1,U_2\\},\\mathcal{F})=0$ for all $i\\ge2$, and hence\n$H^i(X,\\mathcal{F})=0$ for all $i\\ge2$.",
-   "uses": [
-    "lem-pc-cech-computes"
-   ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Proposition 02UZ, applied to a quasi-coherent module"
+   }
   }
  ],
  "proof_deps": [
-  "lem-pc-projective-proper",
+  "def-pc-smooth-projective-curve",
   "def-pc-curve",
-  "lem-sc-smooth-regular",
+  "lem-weil-pbc-finite-type-over-noetherian",
   "def-pc-dimension",
-  "lem-sc-regular-dim1-dvr",
-  "lem-sc-point-cartier",
-  "def-sc-effective-cartier-divisor",
-  "def-pc-divisor-line-bundle",
-  "lem-pc-euler-additive",
-  "def-pc-degree-line-bundle",
-  "lem-pc-ample-positive-degree",
-  "lem-sc-ample-complement-affine",
-  "def-sc-ample",
-  "lem-pc-cech-computes"
+  "lem-pc-scheme-dimension-local-rings",
+  "lem-sc-noetherian-cohomology-above-dimension"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-twist/lem-pc-vanishing-above-dim.md",
-  "place": "## Proof"
+  "by": "document",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Proposition 02UZ, specialized to a smooth projective curve"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a smooth projective curve over a field, quasi-coherent sheaf cohomology vanishes in all degrees at least two",
+   "results": "Ext and projective-object vanishing declarations; no scheme cohomology vanishing declaration",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Modules.subsingleton_H_of_two_le, AlgebraicGeometry.Scheme.Modules.subsingleton_H_of_topologicalKrullDim_lt",
+   "results": "0 hits; unknown identifier for project theorem",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "subsingleton_H_of_two_le|subsingleton_H_of_topologicalKrullDim_lt in Mathlib",
+   "results": "0 hits",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a smooth projective curve over a field, quasi-coherent sheaf cohomology vanishes in all degrees at least two",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -151,5 +170,30 @@
   }
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-twist"
+ "unit": "sk-thm-picard-twist",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-vanishing-above-dim",
+  "worker": "stage1",
+  "summary": "Replaced the imported affine-cover argument with the existing Stacks-based Noetherian cohomology vanishing node. The proof checks finite type over the Noetherian field spectrum, identifies topological dimension with the curve's local-ring dimension, and specializes the general vanishing theorem to q >= 2. The slopmaster2 theorem remains unattached because its proof depends on the sorried Grothendieck vanishing declaration.",
+  "blueprint": "Realizes the blueprint node's EGA III dimension-vanishing claim by Proposition 02UZ and the existing dimension comparison.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-noetherian-cohomology-above-dimension",
+    "why": "Generic Noetherian scheme cohomology vanishing above topological dimension; the Picard-twist unit does not restate this theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-noetherian-cohomology-above-dimension",
+  "lem-sc-noetherian-cohomology-above-dimension"
+ ],
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-vad0309",
+  "group": "K1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-vad0309 (reviewer sub-agent of L); spot-checked: Steps 1-3 against cited statements (finite type over Spec k Noetherian; def-pc-curve dim 1 = sup local rings = topologicalKrullDim by lem-pc-scheme-dimension-local-rings; lem-sc-noetherian-cohomology-above-dimension with q>=2, qcoh, no cycle); route is Grothendieck vanishing by dimension (02UZ), not two-affine Cech. Tool use accepted. Citers: statement unchanged. FIX more, RETURN less: B4 delivery broke TeX 'here $d=1.)' (unbalanced dollar, missed by Second reading) restored to 'here $d=1$.)' matching sheaf-dag; cleaned source.external.place of pasted proof text.; 1 file(s) fixed by the reviewer"
+ }
 }
