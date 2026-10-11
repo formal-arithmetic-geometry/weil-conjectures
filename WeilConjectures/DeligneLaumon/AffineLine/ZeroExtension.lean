@@ -7,6 +7,7 @@ module
 
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 public import WeilConjectures.DeligneLaumon.AffineLine.MiddleExtension
+public import WeilConjectures.DeligneLaumon.AffineLine.BoundaryTransform
 public import WeilConjectures.DeligneLaumon.AffineLine.BoundaryWeights
 
 /-!
@@ -154,7 +155,8 @@ theorem exists_isLisse_iso_fourierTransform_boundarySheaf (D : LisseOnDenseOpen 
     ∃ B' : WeilSheaf k₀ l (affineLine k₀), B'.IsLisse ∧
       Nonempty ((fourierTransform ψ).obj (WeilSheaf.toComplex.obj D.boundarySheaf) ≅
         WeilSheaf.toShiftedComplex.obj B') := by
-  sorry
+  exact WeilSheaf.exists_isLisse_iso_fourierTransform_of_isZero_upperStar ψ D.j D.boundarySheaf
+    D.isZero_upperStar_boundarySheaf
 
 section Construction
 
