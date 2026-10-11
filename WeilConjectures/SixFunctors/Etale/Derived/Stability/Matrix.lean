@@ -148,8 +148,8 @@ objects, `Rf^! : Dctf(Y) ⥤ Dctf(X)` for every such `f` (no admissibility hypot
 Verdier dual `𝔻_X : Dctf(X) ⥤ Dctf(X)`. The pro-étale internal-Hom cell is
 `AlgebraicGeometry.ProEtale.DerivedCategory.constructibleFiniteTor_derivedHom_mapDerivedCategory`.
 -/
-theorem constructibleFiniteTor_preservation [IsSeparated f] [QuasiCompact f]
-    [HasCompactification f] [IsSeparated aX] [HasCompactification aX] :
+theorem constructibleFiniteTor_preservation [QuasiCompact f] [HasCompactification f]
+    [IsSeparated aX] [HasCompactification aX] :
     (∀ K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)),
       constructibleFiniteTor (ModuleCat.{u + 1} Λ) Y K →
         constructibleFiniteTor (ModuleCat.{u + 1} Λ) X
@@ -181,6 +181,9 @@ theorem constructibleFiniteTor_preservation [IsSeparated f] [QuasiCompact f]
         constructibleFiniteTor (ModuleCat.{u + 1} Λ) X
           ((verdierDual (ModuleCat.{u + 1} Λ) aX).obj (op K))) := by
   have : HasInvertibleExponent Λ Y := .of_hom aY
+  have : IsSeparated f := by
+    have : IsSeparated (f ≫ aY) := hf ▸ inferInstance
+    exact IsSeparated.of_comp f aY
   exact ⟨fun K hK ↦ constructibleFiniteTor_leftDerivedUpperStar _ f hK,
     fun K M hK hM ↦ constructibleFiniteTor_tensor Λ X hK hM,
     fun K hK ↦ constructibleFiniteTor_rightDerivedLowerStar Λ aX aY f hf hK,
@@ -214,7 +217,7 @@ results come with these intervals:
 The pro-étale and boundary entries are
 `AlgebraicGeometry.ProEtale.DerivedCategory.preservationMatrix_of_isAlgClosure`, and the
 integral entries (item 5) are `AlgebraicGeometry.Etale.preservationMatrix_integral`. -/
-theorem torAmplitudeIn_preservation [IsSeparated f] [QuasiCompact f] [HasCompactification f]
+theorem torAmplitudeIn_preservation [QuasiCompact f] [HasCompactification f]
     [IsSeparated aX] [HasCompactification aX] :
     (∀ (a b : ℤ) (K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))),
       torAmplitudeIn (ModuleCat.{u + 1} Λ) Y a b K →
@@ -268,6 +271,9 @@ theorem torAmplitudeIn_preservation [IsSeparated f] [QuasiCompact f] [HasCompact
             (op ((verdierDual (ModuleCat.{u + 1} Λ) aX).obj (op K))))) := by
   have : HasInvertibleExponent Λ X := .of_hom aX
   have : HasInvertibleExponent Λ Y := .of_hom aY
+  have : IsSeparated f := by
+    have : IsSeparated (f ≫ aY) := hf ▸ inferInstance
+    exact IsSeparated.of_comp f aY
   have : LocallyOfFiniteType f := by
     have : LocallyOfFiniteType (f ≫ aY) := hf ▸ inferInstance
     exact locallyOfFiniteType_of_comp f aY
