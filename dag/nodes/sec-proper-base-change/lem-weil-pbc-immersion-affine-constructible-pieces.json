@@ -187,5 +187,23 @@
   "by": "L",
   "result": "accepted",
   "note": "6 steps (agent proof of the unproved refinement in Stacks 03S0): reduction to Spec A, basic sets (new 0G1P leaf, line added by L) refined to disjoint basic sets (new unsplit node), each basic set the image of an immersion of an affine scheme (new leaf, composed match noted), Z_k = Z x_X W_k affine since the surjective immersion Z_k -> W_k is a closed immersion. Source tag corrected 03S9 -> 03S0. Tags 0G1P, 03S0 verified."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ImmersionAffineConstructiblePieces",
+  "declaration": "AlgebraicGeometry.exists_finite_affine_immersion_constructible_pieces",
+  "file": "lean/Sheaf/AlgebraicGeometry/ImmersionAffineConstructiblePieces.lean",
+  "statement": "theorem exists_finite_affine_immersion_constructible_pieces {X Z : Scheme} (hX : IsAffine X) (ι : Z ⟶ X) [IsImmersion ι] (E : Set X) (hE : E = Set.range ι) (hEc : IsConstructible E) : ∃ (K : Type) (_ : Fintype K) (Zk : K → Scheme) (κ : ∀ k, Zk k ⟶ Z) (Ek : K → Set X), (∀ k, IsAffine (Zk k)) ∧ (∀ k, IsImmersion (κ k)) ∧ (∀ k, IsImmersion (κ k ≫ ι)) ∧ (∀ k, Set.range (κ k ≫ ι) = Ek k) ∧ (∀ k, IsLocallyClosed (Ek k)) ∧ (∀ k, IsConstructible (Ek k)) ∧ (Set.PairwiseDisjoint Set.univ Ek) ∧ E = ⋃ k, Ek k",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-iac1101",
+  "group": "K1",
+  "result": "pass",
+  "note": "X,Z Scheme; IsAffine X; [IsImmersion ι]; E = range ι, Topology.IsConstructible E (#check: resolves to Topology.IsConstructible, as landed modules); ∃ K Fintype (empty allowed), affine Zk, IsImmersion κk and κk≫ι, range = Ek, IsLocallyClosed, IsConstructible, PairwiseDisjoint univ, E = ⋃ Ek; hEc non-hollow (open non-qc subscheme); single universe"
  }
 }
