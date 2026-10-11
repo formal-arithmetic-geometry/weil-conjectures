@@ -175,6 +175,36 @@ theorem mapRingHom_fstHom_comp_mulRingHom :
     (mapRingHom (fstHom R R R).toRingHom).comp mulRingHom =
       (inlHom R R).comp (fstHom R R R).toRingHom := by
   ext x <;> simp [mulRingHom, algebraMap_eq_inl]
+/-- The ring homomorphism `R[ε][δ] → R[ε]`, `ε, δ ↦ ε`: it sends `x + yδ` to `x + y₀ε`, where `y₀`
+is the constant term of `y`. -/
+def foldRingHom : (R[ε])[ε] →+* R[ε] where
+  toFun x := x.fst + inr x.snd.fst
+  map_one' := by ext <;> simp
+  map_mul' x y := by ext <;> simp; ring
+  map_zero' := by ext <;> simp
+  map_add' x y := by ext <;> simp; ring
+
+@[simp]
+theorem fst_foldRingHom (x : (R[ε])[ε]) : (foldRingHom x).fst = x.fst.fst := by
+  simp [foldRingHom]
+
+@[simp]
+theorem snd_foldRingHom (x : (R[ε])[ε]) : (foldRingHom x).snd = x.fst.snd + x.snd.fst := by
+  simp [foldRingHom]
+
+/-- Folding the constants in `δ` is the identity: `R[ε] → R[ε][δ] → R[ε]`. -/
+theorem foldRingHom_comp_inlHom : foldRingHom.comp (inlHom R[ε] R[ε]) = RingHom.id R[ε] := by
+  ext x <;> simp
+
+/-- Folding the elements of `R[δ] ⊆ R[ε][δ]` sends `δ` to `ε`. -/
+theorem foldRingHom_comp_mapRingHom_inlHom :
+    foldRingHom.comp (mapRingHom (inlHom R R)) = RingHom.id R[ε] := by
+  ext x <;> simp
+
+theorem foldRingHom_comp_mapRingHom_mapRingHom (f : R →+* S) :
+    foldRingHom.comp (mapRingHom (mapRingHom f)) = (mapRingHom f).comp foldRingHom := by
+  ext x <;> simp
+
 
 end DualNumber
 
@@ -205,6 +235,12 @@ noncomputable def dualNumberFst : dualNumber ⟶ 𝟭 CommRingCat.{u} where
 noncomputable def dualNumberMul : dualNumber ⟶ dualNumber ⋙ dualNumber where
   app _ := ofHom DualNumber.mulRingHom
   naturality _ _ f := hom_ext (DualNumber.mapRingHom_mapRingHom_comp_mulRingHom f.hom).symm
+
+/-- The map `R[ε][δ] → R[ε]`, `ε, δ ↦ ε`, naturally in `R`. -/
+noncomputable def dualNumberFold : dualNumber ⋙ dualNumber ⟶ dualNumber where
+  app _ := ofHom DualNumber.foldRingHom
+  naturality _ _ f := hom_ext (DualNumber.foldRingHom_comp_mapRingHom_mapRingHom f.hom)
+
 
 theorem fst_dualNumber_map {R S : CommRingCat.{u}} (f : R ⟶ S) (x : DualNumber R) :
     (dualNumber.map f x).fst = f x.fst :=
@@ -468,6 +504,37 @@ theorem dualNumbersι_comp_proj : X.dualNumbersι ≫ X.dualNumbersProj = 𝟙 X
   erw [eqToHom_refl, Category.comp_id]
   rfl
 
+/-- The map `X[ε] ⟶ X[ε][δ]`, `ε, δ ↦ ε`: the identity on points, and `x + yδ ↦ x + y₀ε` on
+functions, where `y₀` is the constant term of `y`. Precomposing with it multiplies a point
+`S[ε] ⟶ G` depending on `ε` with one depending on `δ`. -/
+noncomputable def dualNumbersFold : X.dualNumbers ⟶ X.dualNumbers.dualNumbers where
+  base := 𝟙 _
+  c := Functor.whiskerLeft X.presheaf CommRingCat.dualNumberFold ≫
+    (TopCat.Presheaf.Pushforward.id _).inv
+  prop x := by
+    constructor
+    intro s hs
+    obtain ⟨U, hxU, g, rfl⟩ := X.dualNumbers.dualNumbers.presheaf.exists_germ_eq s
+    rw [PresheafedSpace.stalkMap_germ_apply] at hs
+    have h := (X.presheaf.isUnit_germ_dualNumber_iff x _ hxU _).mp hs
+    erw [DualNumber.fst_foldRingHom] at h
+    exact (X.dualNumbers.presheaf.isUnit_germ_dualNumber_iff x U hxU g).mpr
+      ((X.presheaf.isUnit_germ_dualNumber_iff x U hxU g.fst).mpr h)
+
+theorem dualNumbersFold_app (U : X.Opens) (a : Γ(X.dualNumbers.dualNumbers, U)) :
+    X.dualNumbersFold.app U a = DualNumber.foldRingHom a :=
+  rfl
+
+@[reassoc (attr := simp)]
+theorem dualNumbersFold_comp_proj : X.dualNumbersFold ≫ X.dualNumbers.dualNumbersProj = 𝟙 _ := by
+  refine Scheme.Hom.ext rfl fun U ↦ ?_
+  ext a : 2
+  simp only [eqToHom_op, eqToHom_map, Scheme.Hom.comp_app]
+  erw [eqToHom_refl, Category.comp_id]
+  change DualNumber.foldRingHom (inl a) = a
+  ext <;> simp
+
+
 variable {X} in
 /-- A morphism `X[ε] ⟶ Y` whose functions have no `ε`-part factors through the projection
 `X[ε] ⟶ X`. -/
@@ -565,6 +632,16 @@ theorem Hom.dualNumbers_comp {Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) :
   ext <;> simp
 
 @[reassoc (attr := simp)]
+theorem dualNumbersFold_comp_proj_dualNumbers (X : Scheme.{u}) :
+    X.dualNumbersFold ≫ X.dualNumbersProj.dualNumbers = 𝟙 _ := by
+  refine Scheme.Hom.ext rfl fun U ↦ ?_
+  ext a : 2
+  simp only [eqToHom_op, eqToHom_map, Scheme.Hom.comp_app]
+  erw [eqToHom_refl, Category.comp_id]
+  change DualNumber.foldRingHom (DualNumber.mapRingHom (TrivSqZeroExt.inlHom _ _) a) = a
+  ext <;> simp
+
+@[reassoc (attr := simp)]
 theorem dualNumbersMul_comp_proj (X : Scheme.{u}) :
     X.dualNumbersMul ≫ X.dualNumbersProj = X.dualNumbers.dualNumbersProj ≫ X.dualNumbersProj := by
   refine Scheme.Hom.ext rfl fun U ↦ ?_
@@ -602,6 +679,36 @@ theorem Hom.dualNumbers_dualNumbersι_comp_dualNumbersMul (X : Scheme.{u}) :
     Functor.id_obj, Hom.comp_app]
   ext1
   exact DualNumber.mapRingHom_fstHom_comp_mulRingHom
+
+/-- Setting `δ = 0` and then forgetting `ε`: `X[ε] ⟶ X[ε][δ] ⟶ X[δ]` factors through `X`. -/
+@[reassoc]
+theorem dualNumbersι_comp_proj_dualNumbers (X : Scheme.{u}) :
+    X.dualNumbers.dualNumbersι ≫ X.dualNumbersProj.dualNumbers =
+      X.dualNumbersProj ≫ X.dualNumbersι := by
+  refine Scheme.Hom.ext rfl fun U ↦ ?_
+  ext a : 2
+  simp only [eqToHom_op, eqToHom_map, Scheme.Hom.comp_app]
+  erw [eqToHom_refl, Category.comp_id]
+  change (DualNumber.mapRingHom (TrivSqZeroExt.inlHom Γ(X, U) Γ(X, U)) a).fst = inl a.fst
+  ext <;> simp
+
+/-- Setting `ε = 0` and then forgetting `δ`: `X[δ] ⟶ X[ε][δ] ⟶ X[ε]` factors through `X`. -/
+@[reassoc]
+theorem Hom.dualNumbers_dualNumbersι_comp_proj (X : Scheme.{u}) :
+    X.dualNumbersι.dualNumbers ≫ X.dualNumbers.dualNumbersProj =
+      X.dualNumbersProj ≫ X.dualNumbersι := by
+  refine Scheme.Hom.ext rfl fun U ↦ ?_
+  ext a : 2
+  simp only [eqToHom_op, eqToHom_map, Scheme.Hom.comp_app]
+  erw [eqToHom_refl, Category.comp_id]
+  change DualNumber.mapRingHom (TrivSqZeroExt.fstHom Γ(X, U) Γ(X, U) Γ(X, U)).toRingHom (inl a) =
+    inl a.fst
+  ext <;> simp
+
+@[reassoc (attr := simp)]
+theorem Hom.dualNumbers_dualNumbersι_comp_dualNumbers_proj (X : Scheme.{u}) :
+    X.dualNumbersι.dualNumbers ≫ X.dualNumbersProj.dualNumbers = 𝟙 _ := by
+  rw [← Hom.dualNumbers_comp, dualNumbersι_comp_proj, Hom.dualNumbers_id]
 
 /-! ### Scaling the infinitesimal -/
 
@@ -754,6 +861,52 @@ theorem dualNumbersιδOver_comp_dualNumbersMulOver :
   ext1
   simpa [dualNumbersιδOver, dualNumbersMulOver, Over.toUnit_left] using
     Hom.dualNumbers_dualNumbersι_comp_dualNumbersMul S
+
+@[reassoc (attr := simp)]
+theorem dualNumbersιεOver_comp_projεOver :
+    dualNumbersιεOver S ≫ dualNumbersProjεOver S = 𝟙 _ := by
+  ext1
+  simp [dualNumbersιεOver, dualNumbersProjεOver]
+
+@[reassoc (attr := simp)]
+theorem dualNumbersιδOver_comp_projδOver :
+    dualNumbersιδOver S ≫ dualNumbersProjδOver S = 𝟙 _ := by
+  ext1
+  simp [dualNumbersιδOver, dualNumbersProjδOver]
+
+/-- Setting `δ = 0` and then forgetting `ε` factors through the `S`-point `ε ↦ 0` of `S[δ]`. -/
+@[reassoc]
+theorem dualNumbersιεOver_comp_projδOver :
+    dualNumbersιεOver S ≫ dualNumbersProjδOver S =
+      CartesianMonoidalCategory.toUnit (dualNumbersOver S) ≫ dualNumbersιOver S := by
+  ext1
+  simp [dualNumbersιεOver, dualNumbersProjδOver, Over.toUnit_left,
+    S.dualNumbersι_comp_proj_dualNumbers]
+
+/-- Setting `ε = 0` and then forgetting `δ` factors through the `S`-point `ε ↦ 0` of `S[ε]`. -/
+@[reassoc]
+theorem dualNumbersιδOver_comp_projεOver :
+    dualNumbersιδOver S ≫ dualNumbersProjεOver S =
+      CartesianMonoidalCategory.toUnit (dualNumbersOver S) ≫ dualNumbersιOver S := by
+  ext1
+  simp [dualNumbersιδOver, dualNumbersProjεOver, Over.toUnit_left,
+    Hom.dualNumbers_dualNumbersι_comp_proj S]
+
+/-- The map `S[ε] ⟶ S[ε][δ]`, `ε, δ ↦ ε`, as a morphism over `S`. -/
+noncomputable def dualNumbersFoldOver : dualNumbersOver S ⟶ dualNumbers₂Over S :=
+  Over.homMk S.dualNumbersFold (by simp [dualNumbers₂Over, dualNumbersOver])
+
+@[reassoc (attr := simp)]
+theorem dualNumbersFoldOver_comp_projεOver :
+    dualNumbersFoldOver S ≫ dualNumbersProjεOver S = 𝟙 _ := by
+  ext1
+  simp [dualNumbersFoldOver, dualNumbersProjεOver]
+
+@[reassoc (attr := simp)]
+theorem dualNumbersFoldOver_comp_projδOver :
+    dualNumbersFoldOver S ≫ dualNumbersProjδOver S = 𝟙 _ := by
+  ext1
+  simp [dualNumbersFoldOver, dualNumbersProjδOver]
 
 /-- Scaling the infinitesimal by a global section `c` of `𝒪_S`, as an endomorphism of `S[ε]`
 over `S`. -/
