@@ -98,5 +98,52 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.DerivedRHomAlgebraModule",
+  "declaration": "AlgebraicGeometry.derivedRHomAlgebraModule",
+  "declarations": [
+   "AlgebraicGeometry.sheafAlgebraHomSections",
+   "AlgebraicGeometry.sheafAlgebraMul_linear",
+   "AlgebraicGeometry.sheafAlgebraMulApp",
+   "AlgebraicGeometry.sheafAlgebraMul_naturality",
+   "AlgebraicGeometry.sheafAlgebraMul",
+   "AlgebraicGeometry.sheafAlgebraHomSMul",
+   "AlgebraicGeometry.sheafAlgebraHom_smul",
+   "AlgebraicGeometry.sheafAlgebraHom_module_axioms",
+   "AlgebraicGeometry.sheafAlgebraHomModule",
+   "AlgebraicGeometry.sheafAlgebraHom_restrict_smul",
+   "AlgebraicGeometry.sheafAlgebraHomObj",
+   "AlgebraicGeometry.sheafAlgebraHom_map_smul",
+   "AlgebraicGeometry.sheafAlgebraHomMap",
+   "AlgebraicGeometry.sheafAlgebraHom_functor_axioms",
+   "AlgebraicGeometry.sheafAlgebraHom",
+   "AlgebraicGeometry.sheafAlgebraHom_additive",
+   "AlgebraicGeometry.sheafAlgebraHom_underlying_linear",
+   "AlgebraicGeometry.sheafAlgebraHomUnderlying_eq",
+   "AlgebraicGeometry.sheafAlgebraHomUnderlyingIso",
+   "AlgebraicGeometry.sheafAlgebraHomResolution",
+   "AlgebraicGeometry.toSheafAlgebraHomResolution",
+   "AlgebraicGeometry.sheafAlgebraHomResolution_inverts",
+   "AlgebraicGeometry.derivedRHomAlgebraModule",
+   "AlgebraicGeometry.derivedRHomAlgebraModule_comparison",
+   "AlgebraicGeometry.sheafAlgebraRestrictScalars_preservesFiniteLimits",
+   "AlgebraicGeometry.sheafAlgebraRestrictScalars_preservesFiniteColimits",
+   "AlgebraicGeometry.derivedRHomAlgebraModule_underlying"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/DerivedRHomAlgebraModule.lean",
+  "statement": "def derivedRHomAlgebraModule (Y : Scheme.{u}) (B : Y.CommAlgebraSheaf) (hB : B.toModule.IsQuasicoherent) [HasDerivedCategory.{w} (SheafOfModules.{u} ((sheafCompose (Opens.grothendieckTopology Y) (forget₂ CommRingCat RingCat)).obj Y.sheaf))] [HasDerivedCategory.{wB} (SheafOfModules.{u} ((sheafCompose (Opens.grothendieckTopology Y) (forget₂ CommRingCat RingCat)).obj B.right))] : DerivedCategory (SheafOfModules.{u} ((sheafCompose (Opens.grothendieckTopology Y) (forget₂ CommRingCat RingCat)).obj Y.sheaf)) ⥤ sheafAlgebraDerivedCategory Y B hB",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-haa6d8",
+  "group": "F1",
+  "result": "pass",
+  "note": "headless review: Y : Scheme.{u} (any scheme); B : Y.CommAlgebraSheaf + hB quasi-coherent (commutative qcoh O_Y-algebra); F arbitrary SheafOfModules over sheafCompose Y.sheaf; Hom(B,F) = shared PresheafOfModules.homObj with B-action b•φ = (mult by b|_W) ≫ φ as explicit data, additive functor sheafAlgebraHom Mod(O_Y)→Mod(B) with only Prop obligations sorried; functorial degreewise-injective K-injective resolution = proved kInjectiveResolutionFunctor/toKInjectiveResolution with SheafOfModules.isGrothendieckAbelian (same as derivedInternalHom; injective_kInjectiveResolutionFunctor_obj_X proved); RHom(B,K) = Localization.lift of resolution ⋙ termwise Hom(B,-) ⋙ Q into sheafAlgebraDerivedCategory Y B hB; descent via sheafAlgebraHomResolution_inverts (quasiIso_homComplex_map with L=B[0]); underlying object = derivedInternalHom at Q(B[0]) via restrictScalars(B.hom).mapDerivedCategory; all R-dra "
  }
 }

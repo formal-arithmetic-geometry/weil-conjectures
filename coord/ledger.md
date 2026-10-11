@@ -5642,3 +5642,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 19:28 L: returned deliver/C1/lem-sc-p1-proj-shifted-free-twist (reviewer RETURN: (reviewer R-hc8b61, head c8b61db6a) H13 (re-pointed definition record): the delivery rewrites the lean record of the EXI)
 - 19:29 L: merged deliver/C1/lem-sc-torsor-h1-ext-pushout (stage 2; reviewer PASS; first push; Sheaf.CategoryTheory.Sites.ZariskiTorsorExtensionPushout CategoryTheory.Sheaf.Torsor.zariski_torsor_extension_pushout; new nodes: def-sc-zariski-contracted-product-presentation)
 - 19:29 L: merged deliver/E1/lem-sc-cech-h1-map-natural (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.CechH1MapNatural AlgebraicGeometry.Scheme.Modules.cechH1Map_natural)
+- 19:30 L: merged deliver/F1/def-pc-derived-rhom-algebra-module (stage 2; reviewer PASS; after a return; Sheaf.AlgebraicGeometry.DerivedRHomAlgebraModule AlgebraicGeometry.derivedRHomAlgebraModule)
