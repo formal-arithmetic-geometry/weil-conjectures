@@ -207,5 +207,23 @@
   "summary": "Split along Stacks 0245 (descent.tex lines 9148-9205; tags 0245, 02W3, 023N, 023G, 023V, 01S8, 01SD, 01S6 verified in tags/tags). The reduction 'Lemma 02W3 applies' becomes the new node lem-galois-fpqc-descending-types-morphisms (02W3 for tau = fpqc, conclusion for one-member coverings; unsplit); its hypotheses (1) base change and (2) finite coproducts are checked for affine morphisms in Steps 1-2 (01SD via the Mathlib leaf lem-weil-pbc-affine-morphism-permanence; 01S8's locality on the base written out for a finite coproduct with the Mathlib leaves lem-weil-pbc-spec-clopen-idempotent, lem-weil-pbc-principal-localization-open-immersion and permanence (4), avoiding the unsplit pqf-lem-affine-local-target of another unit); hypothesis (3), the affine case, is written out in Steps 3-7: rings R -> A -> B, the descent datum as an A(x)A-algebra isomorphism theta, the cocycle in rings, the coaction delta(b) = theta(b (x) 1) with coassociativity from the cocycle and the counit from the identity Delta^*phi = id (Stacks leaves it as an exercise; written out), then the new node lem-galois-flat-algebra-descent (023N plus the source's 'C is closed under products'), which is exactly the sorry-free slopmaster2 declaration Algebra.DescentDatum.descendedEquiv / bijective_descendedMap (attached, lean_audit closed), and finally the compatibility of psi = Spec(kappa^{-1}) with the descent data checked on the generators c (x) 1. Only flatness of R -> A is used in the affine case (the Lean declaration needs only flatness). Statement unchanged.",
   "blueprint": "The item is not a blueprint node; its blueprint ancestor lem-galois-descent's proof, Step 2 (effectivity, originally 'By [lem-galois-glue] the P_i glue to a Y-scheme P', replaced by Stacks 0245 by the split of lem-galois-descent): Steps 1-2 and 8 realize 'reduce by 02W3', Steps 3-7 the affine case that produces P with P x_Y Y' = P' compatibly with the descent datum, which Step 4 of lem-galois-descent cites."
  },
- "reviewed": "2026-10-10 L: 8 steps along Stacks 0245 checked (hypotheses (1),(2) of 02W3 for affine morphisms via permanence and the clopen/localization leaves; affine case: descent datum as an A tensor A-algebra isomorphism theta, coaction delta(b) = theta(b tensor 1) with counit and coassociativity from the cocycle, the new algebra-descent node, compatibility of psi = Spec(kappa^-1); conclusion by the new 02W3 node). New nodes: lem-galois-fpqc-descending-types-morphisms (02W3 for fpqc, one-member coverings, unsplit) and lem-galois-flat-algebra-descent (023N in coalgebra form, finished on slopmaster2 by Algebra.DescentDatum.descended/bijective_descendedMap/descendedEquiv, verified sorry-free, statement matches the Lean structure DescentDatum with Module.Flat A A'). Off-unit citations are Mathlib leaves."
+ "reviewed": "2026-10-10 L: 8 steps along Stacks 0245 checked (hypotheses (1),(2) of 02W3 for affine morphisms via permanence and the clopen/localization leaves; affine case: descent datum as an A tensor A-algebra isomorphism theta, coaction delta(b) = theta(b tensor 1) with counit and coassociativity from the cocycle, the new algebra-descent node, compatibility of psi = Spec(kappa^-1); conclusion by the new 02W3 node). New nodes: lem-galois-fpqc-descending-types-morphisms (02W3 for fpqc, one-member coverings, unsplit) and lem-galois-flat-algebra-descent (023N in coalgebra form, finished on slopmaster2 by Algebra.DescentDatum.descended/bijective_descendedMap/descendedEquiv, verified sorry-free, statement matches the Lean structure DescentDatum with Module.Flat A A'). Off-unit citations are Mathlib leaves.",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AffineFpqcDescent",
+  "declaration": "CategoryTheory.Over.DescentDatum.isEffective_of_isAffineHom_fpqc",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineFpqcDescent.lean",
+  "statement": "theorem isEffective_of_isAffineHom_fpqc {X Y : Scheme.{u}} (p : X ⟶ Y) (hp : Presieve.singleton p ∈ Scheme.fpqcPrecoverage Y) {V : Over X} [IsAffineHom V.hom] (D : Over.DescentDatum p V) : D.IsEffective",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-fad0626",
+  "group": "F1",
+  "result": "pass",
+  "note": "X Y Scheme.{u}, p = f; singleton p in fpqcPrecoverage (propQC @Flat: flat + affine opens covered by finitely many qc opens) = node fpqc covering; V : Over X with IsAffineHom V.hom = affine V->X; Over.DescentDatum (recorded def-pd-descent-datum, transport form, unit follows from cocycle) = phi + cocycle; IsEffective (V0 over Y, IsPullback q, transport-invariant q) = U, psi, compatibility with can_U; docstring = node's 8 steps"
+ }
 }

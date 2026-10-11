@@ -3430,3 +3430,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 06:00 L: merged deliver/E1/def-sp-exact-couple (stage 2; reviewer FIX; first push; Sheaf.CategoryTheory.ExactCouple CategoryTheory.BigradedExactCouple)
 - 06:01 L: merged deliver/F1/def-weil-pbc-associated-graded-ring (stage 2; reviewer FIX; first push; Sheaf.RingTheory.AssociatedGradedRing Ideal.associatedGraded)
 - 06:01 L: merged deliver/J1/lem-exc-finite-galois-sections-descent (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.Sites.FiniteGaloisSectionsDescent AlgebraicGeometry.Scheme.finiteGaloisSectionsDescent)
+- 06:01 L: merged deliver/F1/lem-galois-fpqc-affine-descent-effective (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.AffineFpqcDescent CategoryTheory.Over.DescentDatum.isEffective_of_isAffineHom_fpqc)
