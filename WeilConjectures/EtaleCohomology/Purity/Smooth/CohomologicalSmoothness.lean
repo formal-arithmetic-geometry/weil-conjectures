@@ -339,9 +339,11 @@ identification needs the canonical étale localization `Lu^* Rf^! ≅ R(u ≫ f)
 `R(u ≫ f)_! ≅ Ru_! ⋙ Rf_!` under `Ru_! ⊣ Lu^*`, and its compatibility with the projection maps
 and with `Ex_!`. None of these is available in the library (see the module docstring), and
 the hypothesis on `u ≫ f` says nothing about `f` without such a comparison of `R(u ≫ f)^!` with
-`Rf^!`. Clause 1 alone could be descended through the evaluation `ω_f ⊗ᴸ RHom(ω_f, Λ) ⟶ Λ`, but
-this needs the *derived* internal hom to commute with `Lu^*`; only its sheaf-level form
-`AlgebraicGeometry.Etale.isIso_ihomComparison_upperStar` is available. -/
+`Rf^!`. Clause 1 alone descends for a dualizable `ω_f`
+(`AlgebraicGeometry.Etale.isInvertible_of_isInvertible_leftDerivedUpperStar`), but descending
+the dualizability of `ω_f`, or its invertibility through the evaluation
+`ω_f ⊗ᴸ RHom(ω_f, Λ) ⟶ Λ`, needs the *derived* internal hom to commute with `Lu^*`; only its
+sheaf-level form `AlgebraicGeometry.Etale.isIso_ihomComparison_upperStar` is available. -/
 theorem IsCohomologicallySmooth.of_comp_of_surjective {U X Y : Scheme.{u}} (u : U ⟶ X)
     [Etale u] [Surjective u] [IsSeparated u] [QuasiCompact u] (f : X ⟶ Y)
     [HasCompactification f] [HasCompactification (u ≫ f)]
