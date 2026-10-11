@@ -82,3 +82,16 @@ ampleness declarations.  Thus this module is not an existing declaration.
 
 The module compiles cleanly with `scompile.py`; its only proof obligations are
 `sorry`s for the stage-2 statement delivery.
+
+## Reviewer fix (R-aor1129, stage 2)
+
+The delivered module declared a second, sorry'd theorem `tensorPullback_isInvertible`
+restating that the tensor pullback of an invertible module is invertible. That fact is
+already the first clause of the landed `Scheme.Modules.invertible_pullback_tensor`
+(lem-weil-pbc-invertible-pullback-tensor, F1 fd4f360fd). The auxiliary theorem was
+removed and the `letI` now reads `((Scheme.Modules.invertible_pullback_tensor i).1 L).2`
+(H4/H12: one declaration per fact). The main statement is otherwise unchanged and matches
+the node clause by clause: closed immersion `[IsClosedImmersion i]`; Noetherian Z and X as
+`[IsLocallyNoetherian _] [CompactSpace _]`; `IsHomeomorph i.base` (not implied by the closed
+immersion instance); `L : X.Modules` with `[L.IsInvertible]`; conclusion
+`IsAmple Z (i^*L) ↔ IsAmple X L` with `tensorPullback` (def-pc-module-pullback).
