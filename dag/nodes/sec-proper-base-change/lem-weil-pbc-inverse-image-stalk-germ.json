@@ -239,5 +239,24 @@
   "by": "L",
   "result": "pass",
   "note": "eight steps along Stacks 03Q1 (3) with explicit inverse maps α, β instead of the cofinality argument (the model of f^{-1} and its unit; reduction to the presheaf pullback by the sheafification leaf; α and β on generators; c = β ∘ θ^{-1}; the germ formula; naturality; uniqueness remark); no new nodes; the source repository has the germ formula only as a local have inside sheafFiber_map_baseChangeMap_app_stalkRestrict (Finite/BaseChange.lean:241-250): a named 10-line declaration would close this node (stage 2)"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.InverseImageStalkGerm",
+  "declaration": "AlgebraicGeometry.inverseImage_stalk_germ",
+  "file": "lean/Sheaf/Paper/InverseImageStalkGerm.lean",
+  "statement": "theorem inverseImage_stalk_germ {X Y : Scheme.{u}} (f : Y ⟶ X) {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (y : Spec (.of Ω) ⟶ Y) : ∃ c : Etale.upperStar AddCommGrpCat.{u + 1} f ⋙ (pointSmallEtale y).sheafFiber ≅ (pointSmallEtale (y ≫ f)).sheafFiber, ∀ (G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (U : X.Etale) (ū : (pointSmallEtale (y ≫ f)).fiber.obj U), ((Etale.upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} f).unit.app G).hom.app (op U) ≫ (pointSmallEtale y).toPresheafFiber (f.Etale.obj U) ((pointSmallEtaleFiberEtaleIso f y).inv.app U ū) ((Etale.upperStar AddCommGrpCat.{u + 1} f).obj G).obj ≫ (c.app G).hom = (pointSmallEtale (y ≫ f)).toPresheafFiber U ū G.obj",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-isg1122"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-isg1122",
+  "group": "G1",
+  "result": "fix",
+  "note": "f:Y->X, geometric point y (Omega alg. closed, Type u), G abelian etale sheaf on X: natural iso (f^{-1}G)_y ~ G_{y f} as NatIso of upperStar ⋙ sheafFiber; germ formula for every (U,u) and a in G(U) via unit.app G and toPresheafFiber at (U x_X Y,(u,y)); reverted H7 statement correction that dropped the explicit germ clause and added equality with upperStarCompSheafFiberIso; reverted the delivery's statement correction of the item (statement, stmt_deps, proof, proof_deps, statement_change kept as on sheaf-dag; --revert-statement)"
  }
 }
