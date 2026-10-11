@@ -89,5 +89,28 @@
   "group": "E1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-dgc1815 (reviewer sub-agent of L); spot-checked: Statement reads correctly (FEt(Y), FLC(Y) on small etale site, geometric fibres, torsor convention); not a duplicate of def-galois-category (sec-curve-estimates, the abstract Galois-category axioms) nor of Mathlib GaloisCategory (this node defines no Galois category at all, so B8 is moot); cited ids def-pc-scheme, def-weil-geometric-point, def-weil-pbc-etale-site exist. FIX more, RETURN less: B3 the rewritten statement cites def-pc-scheme, def-weil-geometric-point, def-weil-pbc-etale-site but stmt_deps omitted them; added. Note: def-weil-pbc-etale-sheaves defines locally constant and lisse but says 'finite locally constant' only in its constructible clause, which matches lisse/Stacks 03RU.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GaloisCategories",
+  "declaration": "AlgebraicGeometry.Scheme.FLC",
+  "file": "lean/Sheaf/AlgebraicGeometry/GaloisCategories.lean",
+  "statement": "abbrev FLC (Y : Scheme.{u}) : Type (u + 2)",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-11",
+  "existing": false,
+  "declarations": [
+   "AlgebraicGeometry.Scheme.FLC"
+  ],
+  "note": "Only FLC(Y) is new here. The node's other clauses are existing declarations, cited not copied: FEt(Y) = AlgebraicGeometry.Scheme.FiniteEtale and |P_ybar| = AlgebraicGeometry.Scheme.FiniteEtale.fiber (WeilConjectures.AlgebraicGeometry.FundamentalGroup.FiniteEtale, slopmaster2); F_ybar = (Scheme.pointSmallEtale s).sheafFiber; M-torsor = CategoryTheory.Sheaf.Torsor. The node defines no Galois category: Mathlib's GaloisCategory/PreGaloisCategory/FiberFunctor are not its notion (that is def-galois-category).",
+  "fixed_by": "R-dgc1240"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-dgc1240",
+  "group": "M1",
+  "result": "fix",
+  "note": "FLC(Y) = FullSubcategory of IsFiniteLocallyConstantEtaleSheafOfSets (dep's declaration, Type (u+1) sheaves on Y.smallEtaleTopology), arrows = sheaf morphisms, Y arbitrary, universe free; FEt(Y)/fiber/sheafFiber/Torsor reused not copied; node defines no Galois category so Mathlib GaloisCategory is not its notion. FIX: record declarations listed FiniteEtale.fiber which the module does not declare; filtered to FLC, note added"
  }
 }
