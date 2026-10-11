@@ -45,9 +45,8 @@ on the base.
 
 That `Rf^!` preserves `Dᵇc`, which clause (2) needs, is
 `AlgebraicGeometry.Etale.boundedConstructible_rightDerivedUpperShriek`. Blueprint
-`rem-ptr-sf-datum-1` records that the datum of `def-sf-datum` has these adjunctions; on its
-finite-Tor categories they are
-`AlgebraicGeometry.Etale.DerivedCategoryFiniteTor.rightDerivedLowerShriekAdjunction`.
+`rem-ptr-sf-datum-1`, that the datum of `def-sf-datum` satisfies axiom (A1), is
+`AlgebraicGeometry.Etale.DerivedCategoryFiniteTor.nonempty_adjunctions_and_exists_comp_eq`.
 
 Clause (3) for the derived pullback is stated for `D(g^*)`, the functor induced on derived
 categories by the exact pullback `g^*`, which is the derived pullback
@@ -273,6 +272,50 @@ theorem DerivedCategoryFiniteTor.exists_rightDerivedLowerShriekAdjunction_comp_e
     (Functor.isoWhiskerLeft (DerivedCategoryFiniteTor.ι _ X) e),
     Adjunction.ofNatIsoLeft_ofNatIsoRight_conjugateIsoEquiv _ _ _⟩
 
+/-- Blueprint `fix-prop-adjunctions` (1), on the finite-Tor categories: the derived adjunction
+`Lf^* ⊣ Rf_*` restricts to an adjunction between `Dctf(Y, Λ)` and `Dctf(X, Λ)`, for a separated
+morphism of finite-type `k`-schemes and a finite `Λ` whose exponent is invertible on `Y`. -/
+noncomputable def DerivedCategoryFiniteTor.leftDerivedUpperStarAdjunction
+    (aX : X ⟶ Spec (.of k)) (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aX] [QuasiCompact aX]
+    [LocallyOfFiniteType aY] [QuasiCompact aY] (f : X ⟶ Y) (hf : f ≫ aY = aX) [IsSeparated f]
+    [HasInvertibleExponent Λ Y] :
+    DerivedCategoryFiniteTor.leftDerivedUpperStar _ f ⊣
+      DerivedCategoryFiniteTor.rightDerivedLowerStar Λ aX aY f hf :=
+  (derivedUpperStarLowerStarAdjunction _ f).restrictFullyFaithful
+    (ObjectProperty.fullyFaithfulι _) (ObjectProperty.fullyFaithfulι _)
+    (ObjectProperty.liftCompιIso _ _ _).symm (ObjectProperty.liftCompιIso _ _ _).symm
+
+/-- Blueprint `rem-ptr-sf-datum-1`: in the notation of `def-sf-datum`, the properties of
+`def-fix-six-functor-datum` and `fix-prop-adjunctions` hold, i.e. axiom (A1): for separated
+finite-type `X ⟶[f] Y ⟶[g] Z` of finite-type `k`-schemes and a finite `Λ` whose exponent is
+invertible on `Z`, there are adjunctions `Lf^* ⊣ Rf_*` and `Rf_! ⊣ Rf^!` on the finite-Tor
+categories, and the units and counits of the exceptional adjunction for `f ≫ g` are the pasted
+ones under the mate of a composition isomorphism `R(f ≫ g)_! ≅ Rf_! ⋙ Rg_!`. -/
+theorem DerivedCategoryFiniteTor.nonempty_adjunctions_and_exists_comp_eq
+    (aX : X ⟶ Spec (.of k)) (aY : Y ⟶ Spec (.of k)) (aZ : Z ⟶ Spec (.of k))
+    [LocallyOfFiniteType aX] [QuasiCompact aX] [LocallyOfFiniteType aY] [QuasiCompact aY]
+    [LocallyOfFiniteType aZ] [QuasiCompact aZ] [HasInvertibleExponent Λ Y]
+    [HasInvertibleExponent Λ Z] (f : X ⟶ Y) (hf : f ≫ aY = aX) (g : Y ⟶ Z) [IsSeparated f]
+    [HasCompactification f] [QuasiCompact f] [HasCompactification g] [QuasiCompact g]
+    [HasCompactification (f ≫ g)] :
+    Nonempty (DerivedCategoryFiniteTor.leftDerivedUpperStar _ f ⊣
+        DerivedCategoryFiniteTor.rightDerivedLowerStar Λ aX aY f hf) ∧
+      Nonempty (DerivedCategoryFiniteTor.rightDerivedLowerShriek Λ aY f ⊣
+        DerivedCategoryFiniteTor.rightDerivedUpperShriek Λ aY f) ∧
+      ∃ e : DerivedCategoryFiniteTor.rightDerivedLowerShriek Λ aZ (f ≫ g) ≅
+          DerivedCategoryFiniteTor.rightDerivedLowerShriek Λ aY f ⋙
+            DerivedCategoryFiniteTor.rightDerivedLowerShriek Λ aZ g,
+        ((DerivedCategoryFiniteTor.rightDerivedLowerShriekAdjunction Λ aZ (f ≫ g)).ofNatIsoLeft
+            e).ofNatIsoRight
+          (conjugateIsoEquiv
+            ((DerivedCategoryFiniteTor.rightDerivedLowerShriekAdjunction Λ aY f).comp
+              (DerivedCategoryFiniteTor.rightDerivedLowerShriekAdjunction Λ aZ g))
+            (DerivedCategoryFiniteTor.rightDerivedLowerShriekAdjunction Λ aZ (f ≫ g)) e).symm =
+          (DerivedCategoryFiniteTor.rightDerivedLowerShriekAdjunction Λ aY f).comp
+            (DerivedCategoryFiniteTor.rightDerivedLowerShriekAdjunction Λ aZ g) :=
+  ⟨⟨DerivedCategoryFiniteTor.leftDerivedUpperStarAdjunction Λ aX aY f hf⟩,
+    ⟨DerivedCategoryFiniteTor.rightDerivedLowerShriekAdjunction Λ aY f⟩,
+    DerivedCategoryFiniteTor.exists_rightDerivedLowerShriekAdjunction_comp_eq Λ aY aZ f g⟩
 end FiniteTor
 
 section Exchange

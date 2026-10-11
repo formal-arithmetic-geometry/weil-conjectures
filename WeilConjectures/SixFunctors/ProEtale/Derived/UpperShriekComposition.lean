@@ -44,6 +44,8 @@ adjunction is the restriction of any ambient one.of the pro-étale `Rf_!`.
   restriction to `Dctf`.
 - `HasAmbientExceptionalRightAdjoint.ofNatIsoLeft_ofNatIsoRight_conjugateIsoEquiv` (in the
   namespace `AlgebraicGeometry.ProEtale`): clause (a), the ambient form.
+- `HasAmbientExceptionalRightAdjoint.nonempty_iso_comp_yoneda_comp_whiskeringLeft`: clause (a)
+  with the composition law of `sk-thm-sf-comp-composition`.
 - `AlgebraicGeometry.ProEtale.exists_bijective_comp_and_homEquiv_symm_comp_eq`: under the ambient
   datum, the constructible adjunction is the restriction of the ambient one.
 
@@ -392,6 +394,41 @@ theorem exists_bijective_comp_and_homEquiv_symm_comp_eq {f : X ⟶ Y} [HasCompac
   rw [hc]
   exact (adj.homEquiv K L).bijective.comp (rightDerivedUpperShriekHomEquiv f hK hL).symm.bijective
 
+omit [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
+  [Abelian.HasFunctorialFlatResolution A] in
+/-- Blueprint `sk-lem-sf-mate`, clause (a), with the composition law of
+`sk-thm-sf-comp-composition`: if `f`, `g` and `f ≫ g` carry the ambient exceptional right adjoint
+datum, the mate of the composition isomorphism `R(f ≫ g)_! ≅ Rf_! ⋙ Rg_!` on the objects
+bounded below of étale origin (`nonempty_iso_ι_comp_rightDerivedLowerShriek_comp`, which is
+where blueprint `sk-thm-sf-comp-composition` provides it) under the ambient adjunctions is a
+natural isomorphism `Hom(K, R(f ≫ g)^× L) ≅ Hom(K, Rf^× Rg^× L)`, natural in `L ∈ D(Z_proét)` and
+in `K` bounded below of étale origin. It is the composite of the adjunction bijection of
+`R(f ≫ g)_! ⊣ R(f ≫ g)^×`, the composition isomorphism, and the adjunction bijection of the
+pasted adjunction `Rf_! ⋙ Rg_! ⊣ Rg^× ⋙ Rf^×`. -/
+theorem HasAmbientExceptionalRightAdjoint.nonempty_iso_comp_yoneda_comp_whiskeringLeft
+    {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ] (f : X ⟶ Y) (g : Y ⟶ Z)
+    [HasCompactification f] [HasCompactification g] [HasCompactification (f ≫ g)]
+    (hf : HasAmbientExceptionalRightAdjoint (ModuleCat.{u + 1} Λ) f)
+    (hg : HasAmbientExceptionalRightAdjoint (ModuleCat.{u + 1} Λ) g)
+    (hfg : HasAmbientExceptionalRightAdjoint (ModuleCat.{u + 1} Λ) (f ≫ g)) :
+    Nonempty ((@Functor.rightAdjoint _ _ _ _ (R(f ≫ g)_![ModuleCat.{u + 1} Λ])
+          hfg.isLeftAdjoint ⋙ yoneda) ⋙
+        (Functor.whiskeringLeft _ _ _).obj
+          (DerivedCategory.plusEtaleOrigin (ModuleCat.{u + 1} Λ) X).ι.op ≅
+      ((@Functor.rightAdjoint _ _ _ _ (R(g)_![ModuleCat.{u + 1} Λ]) hg.isLeftAdjoint ⋙
+          @Functor.rightAdjoint _ _ _ _ (R(f)_![ModuleCat.{u + 1} Λ]) hf.isLeftAdjoint) ⋙
+          yoneda) ⋙
+        (Functor.whiskeringLeft _ _ _).obj
+          (DerivedCategory.plusEtaleOrigin (ModuleCat.{u + 1} Λ) X).ι.op) := by
+  obtain ⟨e⟩ := nonempty_iso_ι_comp_rightDerivedLowerShriek_comp Λ f g
+  exact ⟨Functor.isoWhiskerRight hfg.adjunction.compYonedaIso _ ≪≫
+    NatIso.ofComponents (fun _ ↦ Iso.refl _) ≪≫
+    Functor.isoWhiskerLeft yoneda ((Functor.whiskeringLeft _ _ _).mapIso (NatIso.op e)).symm ≪≫
+    (NatIso.ofComponents (fun _ ↦ Iso.refl _) : _ ≅ (yoneda ⋙ (Functor.whiskeringLeft _ _ _).obj
+      (R(f)_![ModuleCat.{u + 1} Λ] ⋙ R(g)_![ModuleCat.{u + 1} Λ]).op) ⋙
+      (Functor.whiskeringLeft _ _ _).obj
+        (DerivedCategory.plusEtaleOrigin (ModuleCat.{u + 1} Λ) X).ι.op) ≪≫
+    (Functor.isoWhiskerRight (hf.adjunction.comp hg.adjunction).compYonedaIso _).symm⟩
 end Ambient
 
 end AlgebraicGeometry.ProEtale
