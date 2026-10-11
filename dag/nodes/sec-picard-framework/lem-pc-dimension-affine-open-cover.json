@@ -135,5 +135,23 @@
   "summary": "Split into four steps following Stacks 04MU/01HV/00KF/00KG: (1) U_i affine open with O_X(U_i) ≅ A_i and the bijection U_i ↔ Spec O_X(U_i) (Mathlib leaf lem-weil-pbc-affine-open-spec-points); (2) O_{X,x} ≅ (R_i)_{p_x} (Mathlib leaf lem-weil-pbc-affine-open-stalk-localization (c), the 01HV(6) stalk node) and dim (R_i)_p = ht p (Mathlib leaf lem-weil-pbc-localization-dimension-chains-below-prime, 00KF); (3) sup over the chart = sup of heights = dim A_i by the new Mathlib leaf lem-pc-ring-dimension-supremum-heights (00KG, Order.krullDim_eq_iSup_height); (4) regrouping of the supremum over the cover (elementary, def-pc-dimension). lem-pc-scheme-dimension-local-rings (04MU, topological dim X = sup of local dimensions) was compared and is not used: the item's dim X is def-pc-dimension, already the supremum of the local-ring dimensions, so the topological dimension never enters. lem-sc-scheme-stalk-dimension-generalization-chains (02IZ) is not needed either. No slopmaster2 declaration states the item (grep by id and by KrullDim/affine/iSup key words; IsAffineOpen.topologicalKrullDim_eq and topologicalKrullDim_le_of_iSup_eq_top are about the topological dimension, the latter only one inequality). Statement and stmt_deps unchanged.",
   "blueprint": "The steps realize the place of lem-pc-dim-base-change's proof recorded in from.place (last paragraph: 'dim X = max_i dim A_i' for the affine cover Spec(A_i) of X and the same computation for X_K with the cover Spec(A_i ⊗_k K)): steps 1-3 compute the contribution of one chart Spec(A_i), step 4 takes the maximum over the cover."
  },
- "reviewed": "2026-10-10 L: 4 steps checked (chart rings; local rings are localizations at primes with dimension the height, by existing leaves; supremum over a chart is dim A_i by the new 00KG leaf Order.krullDim_eq_iSup_height, line 849 verified; the supremum splits over the cover). No tool uses. LeanSearch down."
+ "reviewed": "2026-10-10 L: 4 steps checked (chart rings; local rings are localizations at primes with dimension the height, by existing leaves; supremum over a chart is dim A_i by the new 00KG leaf Order.krullDim_eq_iSup_height, line 849 verified; the supremum splits over the cover). No tool uses. LeanSearch down.",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.DimensionAffineOpenCover",
+  "declaration": "AlgebraicGeometry.Scheme.dim_eq_iSup_ringKrullDim_of_affineOpenCover",
+  "file": "lean/Sheaf/AlgebraicGeometry/DimensionAffineOpenCover.lean",
+  "statement": "theorem Scheme.dim_eq_iSup_ringKrullDim_of_affineOpenCover (X : Scheme.{u}) [Nonempty X] {I : Type v} (U : I → X.Opens) (hcover : ⨆ i, U i = ⊤) (A : I → CommRingCat.{u}) (hiso : ∀ i, (U i : Scheme.{u}) ≅ Spec (A i)) : X.dim = ⨆ i, ringKrullDim (A i)",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-dac0734",
+  "group": "J1",
+  "result": "pass",
+  "note": "X : Scheme.{u} [Nonempty X] = nonempty scheme; U : I → X.Opens, I : Type v arbitrary (empty allowed), hcover ⨆ U i = ⊤ = cover; A : I → CommRingCat.{u}, hiso (U i : Scheme) ≅ Spec (A i) = affine charts (empty chart forces A i = 0, summand ⊥); X.dim = Scheme.dim of def-pc-dimension; conclusion = ⨆ i ringKrullDim (A i) in WithBot ℕ∞; H4: Mathlib/source have only topologicalKrullDim_le_of_iSup_eq_top (topological, one inequality), not exact"
+ }
 }
