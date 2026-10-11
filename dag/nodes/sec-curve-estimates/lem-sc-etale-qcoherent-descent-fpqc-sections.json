@@ -150,5 +150,23 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FpqcTensorSections",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.existsUnique_tensorSections_of_fpqcCover",
+  "file": "lean/Sheaf/AlgebraicGeometry/FpqcTensorSections.lean",
+  "statement": "theorem existsUnique_tensorSections_of_fpqcCover {S T : Scheme.{u}} (f : T ⟶ S) (F : S.Modules) [F.IsQuasicoherent] {I : Type v} (Ti : I → Scheme.{u}) (g : ∀ i : I, Ti i ⟶ T) (hg : Presieve.ofArrows Ti g ∈ Scheme.fpqcPrecoverage T) (s : ∀ i : I, Γ((tensorPullback (g i ≫ f)).obj F, ⊤)) (hs : ∀ i j : I, ((tensorSectionsComp (pullback.fst (g i) (g j)) (g i ≫ f)).hom.app F).app ⊤ (tensorSectionsUnit (pullback.fst (g i) (g j)) ((tensorPullback (g i ≫ f)).obj F) (s i)) = (eqToHom (congrArg (fun k ↦ (tensorPullback k).obj F) (pullback.condition_assoc (f := g i) (g := g j) f).symm)).app ⊤ (((tensorSectionsComp (pullback.snd (g i) (g j)) (g j ≫ f)).hom.app F).app ⊤ (tensorSectionsUnit (pullback.snd (g i) (g j)) ((tensorPullback (g j ≫ f)).obj F) (s j)))) : ∃! t : Γ((tensorPullback f).obj F, ⊤), ∀ i : I, ((tensorSectionsComp (g i) f).hom.app F).app ⊤ (tensorSectionsUnit (g i) ((tensorPullback f).obj F) t) = s i",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "E1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }
