@@ -15,7 +15,7 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FlatModuleCat
 For torsion coefficients, the projection map `PF : Rf_!K ⊗ᴸ L ⟶ Rf_!(K ⊗ᴸ Lf^*L)`
 (`AlgebraicGeometry.Etale.projectionMap`) does not depend on the compactification: the
 comparison isomorphisms `Rf_!(c) ≅ Rf_!(d)` intertwine the projection maps
-(`AlgebraicGeometry.Etale.projectionMapOfCompactification_rightDerivedLowerShriekOfCompactificationIso`).
+(`Etale.projectionMapOfCompactification_rightDerivedLowerShriekOfCompactificationIso`).
 Consequently the projection map commutes with the compactly supported base change map
 `Ex_! : Lg^* Rf_! ⟶ Rf'_! Lg'^*` (`AlgebraicGeometry.Etale.rightDerivedLowerShriekBaseChangeMap`)
 and the tensor comparisons of the derived pullbacks
@@ -49,7 +49,8 @@ variable {X Y : Scheme.{u}} {f : X ⟶ Y} [QuasiCompact f]
 
 /-- The comparison isomorphisms `Rf_!(c) ≅ Rf_!(d)` intertwine the projection maps. -/
 lemma projectionMapOfCompactification_rightDerivedLowerShriekOfCompactificationIso
-    (c d : Compactification f) (K : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
+    (c d : Compactification f)
+    (K : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
     (L : DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
     ((projectionMapOfCompactification _ c).app K).app L ≫
         (rightDerivedLowerShriekOfCompactificationIso Λ c d).hom.app
@@ -80,6 +81,9 @@ lemma projectionMapOfCompactification_rightDerivedLowerShriekOfCompactificationI
 end Independence
 
 section Exchange
+
+attribute [-instance] CategoryTheory.sheafToPresheaf_isRightAdjoint ModuleCat.hasColimitsOfShape
+  ModuleCat.hasColimitsOfSize
 
 variable {X' X Y' Y : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'} {f : X ⟶ Y} {g : Y' ⟶ Y}
   (sq : CommSq g' f' f g) (c : Compactification f) (c' : Compactification f') (q : c'.Z ⟶ c.Z)
@@ -125,22 +129,11 @@ theorem projectionMapOfCompactification_rightDerivedLowerShriekBaseChangeMap'
             (L((g)^*[ModuleCat.{u + 1} Λ]).obj L) ≫
         ((projectionMap _ f').app (L((g')^*[ModuleCat.{u + 1} Λ]).obj K)).app
           (L((g)^*[ModuleCat.{u + 1} Λ]).obj L) := by
-  have thm := projectionMapOfCompactification_baseChange (ModuleCat.{u + 1} Λ) sq c c' q hi hp
-    K L
-  have hD' := projectionMapOfCompactification_comp_of_forall (ModuleCat.{u + 1} Λ) c'
-      (HasCompactification.compactification f')
-      (rightDerivedLowerShriekOfCompactificationIso Λ c' (HasCompactification.compactification f')).hom
-      (projectionMapOfCompactification_rightDerivedLowerShriekOfCompactificationIso Λ c'
-        (HasCompactification.compactification f')) (L((g')^*[ModuleCat.{u + 1} Λ]).obj K)
-      (L((g)^*[ModuleCat.{u + 1} Λ]).obj L)
-  simp only [rightDerivedLowerShriekBaseChangeMap', NatTrans.comp_app, Functor.whiskerLeft_app,
-    Functor.map_comp, Category.assoc]
-  rw [← NatTrans.naturality_assoc (rightDerivedLowerShriekIso Λ c').hom,
-    ← NatTrans.naturality (rightDerivedLowerShriekIso Λ c').hom]
-  erw [reassoc_of% thm]
-  rw [show rightDerivedLowerShriekIso Λ c' = rightDerivedLowerShriekOfCompactificationIso Λ c'
-      (HasCompactification.compactification f') from rfl]
-  sorry
+  have h := projectionMapOfCompactification_baseChange_comp' (ModuleCat.{u + 1} Λ) sq c c' q hi hp
+    (HasCompactification.compactification f') (rightDerivedLowerShriekIso Λ c').hom
+    (projectionMapOfCompactification_rightDerivedLowerShriekOfCompactificationIso Λ c'
+      (HasCompactification.compactification f')) K L
+  exact h
 
 /-- **The projection map commutes with the exchange map `Ex_!`**: for a cartesian square
 `g' ≫ f = f' ≫ g`, the square
@@ -172,7 +165,12 @@ theorem projectionMap_rightDerivedLowerShriekBaseChangeMap [HasCompactification 
             (L((g)^*[ModuleCat.{u + 1} Λ]).obj L) ≫
         ((projectionMap _ f').app (L((g')^*[ModuleCat.{u + 1} Λ]).obj K)).app
           (L((g)^*[ModuleCat.{u + 1} Λ]).obj L) := by
-  sorry
+  exact projectionMapOfCompactification_rightDerivedLowerShriekBaseChangeMap' Λ sq.toCommSq
+    (HasCompactification.compactification f)
+    ((HasCompactification.compactification f).ofIsPullback sq)
+    (pullback.fst (HasCompactification.compactification f).g g)
+    ((HasCompactification.compactification f).isPullback_i_ofIsPullback sq)
+    (IsPullback.of_hasPullback (HasCompactification.compactification f).g g).toCommSq K L
 
 end Exchange
 
