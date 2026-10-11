@@ -6,7 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.Compactification.Defs
-public import WeilConjectures.Mathlib.AlgebraicGeometry.ZariskisMainTheorem
+public import WeilConjectures.AlgebraicGeometry.Morphisms.QuasiFiniteFactorization
 
 /-!
 # Finite compactifications of quasi-finite morphisms
