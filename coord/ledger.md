@@ -4341,3 +4341,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 10:55 L: merged deliver/K1/lem-weil-pbc-g-ring-maximal-ideal-criterion (stage 2; reviewer PASS; first push; Sheaf.RingTheory.GRingMaximalIdealCriterion isGRing_iff_maximalIdeal)
 - 10:56 L: merged deliver/M1/lem-weil-pbc-henselization-finite-separable-fibres (stage 2; reviewer PASS; first push; Sheaf.RingTheory.FiniteSeparableFibersOfEtaleColimit CommAlgCat.finite_separable_fibers_of_etale_colimit)
 - 10:56 L: merged deliver/G1/lem-weil-pbc-horseshoe-morphism-lift (stage 2; reviewer FIX; first push; Sheaf.CategoryTheory.Abelian.HorseshoeMorphismLift CategoryTheory.InjectiveResolution.exists_horseshoe_morphism_lift)
+- 10:56 L: merged deliver/H1/lem-weil-pbc-hypersurface-derivation-regular (stage 2; reviewer PASS; first push; Sheaf.RingTheory.HypersurfaceDerivationRegular IsRegularRing.quotient_span_singleton_of_isUnit_derivation)
