@@ -7,6 +7,9 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Basic
 public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
+public import WeilConjectures.AlgebraicGeometry.Cohomology.AcyclicResolution
+public import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.Cech
+public import WeilConjectures.AlgebraicGeometry.Cohomology.InjectiveFlasque
 
 /-!
 # Sections of higher direct images over an affine base
@@ -27,6 +30,76 @@ namespace AlgebraicGeometry.Scheme.Modules
 
 variable {X T : Scheme.{u}}
 variable (f : X ⟶ T) (ℱ : X.Modules)
+
+section QuasiCoherence
+
+variable [QuasiCompact f] [QuasiSeparated f] [HasInjectiveResolutions X.Modules]
+  [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) ℱ]
+
+/-- **Quasi-coherence of the higher direct images.** For `f : X ⟶ T` quasi-compact and
+quasi-separated and `ℱ` a quasi-coherent `𝒪_X`-module, the higher direct image `R^q f_* ℱ` is a
+quasi-coherent `𝒪_T`-module for every `q` [Stacks, Tag 01XJ].
+
+(blueprint: `sk-thm-picard-coherence`) -/
+theorem isQuasicoherent_higherDirectImage (q : ℕ) :
+    ((higherDirectImage f q).obj ℱ).IsQuasicoherent :=
+  sorry
+
+end QuasiCoherence
+section Comparison
+
+/-- Global sections along an isomorphism of `𝒪_X`-modules. -/
+noncomputable def appTopAddEquiv {M N : X.Modules} (e : M ≅ N) : Γ(M, ⊤) ≃+ Γ(N, ⊤) :=
+  ((Modules.toPresheaf X).mapIso e).app (Opposite.op ⊤) |>.addCommGroupIsoToAddEquiv
+
+/-- The pushforward of an injective `𝒪_X`-module is acyclic, being flasque. -/
+lemma subsingleton_H_pushforward_of_injective (I : X.Modules) [Injective I] (m : ℕ) :
+    Subsingleton (((pushforward f).obj I).H (m + 1)) :=
+  have := isFlasque_of_injective I
+  have : TopCat.Presheaf.IsFlasque
+      ((SheafOfModules.toSheaf T.ringCatSheaf).obj ((pushforward f).obj I)).obj :=
+    inferInstanceAs (TopCat.Presheaf.IsFlasque
+      (f.base _* ((SheafOfModules.toSheaf X.ringCatSheaf).obj I).obj))
+  TopCat.Sheaf.IsFlasque.subsingleton_H m
+    ((SheafOfModules.toSheaf T.ringCatSheaf).obj ((pushforward f).obj I))
+
+/-- The module resolved by an injective resolution is its zeroth cycles. -/
+noncomputable def _root_.CategoryTheory.InjectiveResolution.isoCyclesZero {C : Type*}
+    [Category* C] [Abelian C] {Z : C} (I : InjectiveResolution Z) : Z ≅ I.cocomplex.cycles 0 :=
+  IsLimit.conePointUniqueUpToIso I.isLimitKernelFork (I.cocomplex.cyclesIsKernel 0 1 (by simp))
+
+variable [IsAffine T] [QuasiCompact f] [IsSeparated f] [HasInjectiveResolutions X.Modules]
+  [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) ℱ]
+
+/-- The cohomology sheaves of `f_* I`, for an injective resolution `I` of `ℱ`, are the higher
+direct images of `ℱ`; over the affine `T` they are acyclic, being quasi-coherent. -/
+lemma subsingleton_H_homology_pushforward (I : InjectiveResolution ℱ) (q m : ℕ) :
+    Subsingleton ((HomologicalComplex.homology
+      (((pushforward f).mapHomologicalComplex _).obj I.cocomplex) q).H (m + 1)) :=
+  have := isQuasicoherent_higherDirectImage f ℱ q
+  have : Subsingleton ((((pushforward f).rightDerived q).obj ℱ).H (m + 1)) :=
+    subsingleton_H_succ_of_isAffine ((higherDirectImage f q).obj ℱ) m
+  subsingleton_H_of_iso (I.isoRightDerivedObj (pushforward f) q) (m + 1)
+
+/-- **`Γ(T, R^{n+1} f_* ℱ) ≅ H^{n+1}(X, ℱ)`** computed with an injective resolution `I` of `ℱ`:
+`Γ(T, Hⁿ⁺¹(f_* I)) = Hⁿ⁺¹(Γ(X, I)) = Hⁿ⁺¹(X, ℱ)`, the first identification because the terms
+and the cohomology sheaves of `f_* I` are acyclic on the affine `T`, the second because the terms
+of `I` are acyclic. -/
+noncomputable def sectionsHigherDirectImageSuccAddEquiv (I : InjectiveResolution ℱ) (n : ℕ) :
+    Γ((higherDirectImage f (n + 1)).obj ℱ, ⊤) ≃+ ℱ.H (n + 1) :=
+  let L := ((pushforward f).mapHomologicalComplex _).obj I.cocomplex
+  have hL : ∀ j m, Subsingleton ((L.X j).H (m + 1)) := fun j m ↦
+    subsingleton_H_pushforward_of_injective f (I.cocomplex.X j) m
+  (appTopAddEquiv (I.isoRightDerivedObj (pushforward f) (n + 1))).trans <|
+  (homologySectionsAddEquiv L hL (subsingleton_H_homology_pushforward f ℱ I) n).trans <|
+  (cyclesQuotientAddEquiv L n).trans <|
+  (AddEquiv.refl (sectionsCycles I.cocomplex n ⧸ sectionsBoundaries I.cocomplex n)).trans <|
+  (cyclesQuotientAddEquiv I.cocomplex n).symm.trans <|
+  (H.cyclesZeroSuccAddEquiv I.cocomplex I.cocomplex_exactAt_succ
+    (fun _ m ↦ subsingleton_H_of_injective _ m) n).symm.trans <|
+  H.mapAddEquiv I.isoCyclesZero.symm (n + 1)
+
+end Comparison
 
 /-- **The sections of the higher direct images over an affine base, naturally.** Over an affine
 base, for `f` quasi-compact and separated, the global sections of `R^q f_* ℱ` are the sheaf
@@ -183,21 +256,6 @@ theorem nonempty_higherDirectImage_tensorObj_pullback_iso (𝒩 : T.Modules) [�
 
 end BaseChange
 
-section QuasiCoherence
-
-variable [QuasiCompact f] [QuasiSeparated f] [HasInjectiveResolutions X.Modules]
-  [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) ℱ]
-
-/-- **Quasi-coherence of the higher direct images.** For `f : X ⟶ T` quasi-compact and
-quasi-separated and `ℱ` a quasi-coherent `𝒪_X`-module, the higher direct image `R^q f_* ℱ` is a
-quasi-coherent `𝒪_T`-module for every `q` [Stacks, Tag 01XJ].
-
-(blueprint: `sk-thm-picard-coherence`) -/
-theorem isQuasicoherent_higherDirectImage (q : ℕ) :
-    ((higherDirectImage f q).obj ℱ).IsQuasicoherent :=
-  sorry
-
-end QuasiCoherence
 
 section Vanishing
 
