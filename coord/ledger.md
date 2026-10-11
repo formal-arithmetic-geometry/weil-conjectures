@@ -4314,3 +4314,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 10:49 L: merged deliver/M1/lem-weil-pbc-fs-adic-lift-from-residue-field (stage 2; reviewer FIX; first push; Sheaf.RingTheory.FormallySmoothAdicLift Algebra.exists_formallySmoothAdic_lift_residue_field)
 - 10:49 L: merged deliver/H1/lem-weil-pbc-galois-invariant-closed-subset-descends (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.GaloisInvariantClosedSubsetDescends AlgebraicGeometry.exists_closed_subset_of_galois_invariant)
 - 10:49 L: merged deliver/J1/lem-weil-pbc-geometrically-regular-h1-injective (stage 2; reviewer PASS; first push; Sheaf.RingTheory.GeometricallyRegularH1Injective Algebra.isRegularLocalRing_and_injective_h1Cotangent_of_isGeometricallyRegular)
+- 10:49 L: merged deliver/J1/lem-weil-pbc-flat-mod-injective (stage 2; reviewer FIX; first push; Sheaf.RingTheory.FlatModInjective flat_mod_injective)

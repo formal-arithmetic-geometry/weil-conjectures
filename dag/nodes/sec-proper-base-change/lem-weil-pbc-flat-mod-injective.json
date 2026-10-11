@@ -175,5 +175,24 @@
   "group": "K1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of K1; spot-checked by L: L: 00ME steps checked (graded induction, Krull intersection, Tor criterion 00M5 on quotients)"
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.FlatModInjective",
+  "declaration": "flat_mod_injective",
+  "file": "lean/Sheaf/RingTheory/FlatModInjective.lean",
+  "statement": "theorem flat_mod_injective {R S N M : Type*} [CommRing R] [CommRing S] [AddCommGroup N] [AddCommGroup M] [IsLocalRing R] [IsLocalRing S] [IsNoetherianRing S] (φ : R →+* S) (hφ : ∀ x : R, x ∈ IsLocalRing.maximalIdeal R → φ x ∈ IsLocalRing.maximalIdeal S) [Module S N] [Module R M] [Module.Finite S N] [Module.Flat R M] (u : (letI : Module R N := Module.compHom N φ; N →ₗ[R] M)) (hu : (letI : Module R N := Module.compHom N φ; Function.Injective ((IsLocalRing.maximalIdeal R • (⊤ : Submodule R N)).mapQ (IsLocalRing.maximalIdeal R • (⊤ : Submodule R M)) u (Submodule.smul_top_le_comap_smul_top (IsLocalRing.maximalIdeal R) u)))) : (letI : Module R N := Module.compHom N φ; Function.Injective u ∧ Module.Flat R (M ⧸ (LinearMap.range u)))",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-fmi1056"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-fmi1056",
+  "group": "J1",
+  "result": "fix",
+  "note": "local R,S with hφ φ(m)⊆m_S, Noetherian S, Module.Finite S N with R-action Module.compHom N φ, Module.Flat R M, u R-linear; hu restated as injectivity of mapQ N/(m•⊤)→M/(m•⊤); conclusion Injective u ∧ Module.Flat R (M ⧸ range u)"
  }
 }
