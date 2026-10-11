@@ -3740,3 +3740,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 08:00 L: merged deliver/E1/lem-pc-module-inverse-image-adjunction (stage 2; reviewer FIX; first push; Sheaf.Algebra.Category.ModuleCat.Sheaf.TopologicalPullback SheafOfModules.moduleInverseImageAdjunction)
 - 08:00 L: merged deliver/C1/lem-sc-ample-proj-open (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.AmpleProjOpen AlgebraicGeometry.exists_isOpenImmersion_proj_of_isAmple)
 - 08:00 L: returned deliver/C1/lem-pc-zero-scheme-pullback (reviewer RETURN: Reviewer R-zsp1117 (stage 2), head 536837eac. H3+H4: the existing:true record Hom.comap_zeroLocus states the theorem for)
+- 08:01 L: merged deliver/F1/lem-pc-sites-modules-j-shriek-flat (stage 2; reviewer PASS; first push; Sheaf.Algebra.Category.ModuleCat.Sheaf.ExtensionByZeroFlat SheafOfModules.isFlat_extensionByZero_unit)

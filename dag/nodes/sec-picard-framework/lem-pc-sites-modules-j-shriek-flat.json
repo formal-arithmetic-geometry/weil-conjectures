@@ -104,5 +104,23 @@
   "group": "E1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-jsf2400 (reviewer sub-agent of L); spot-checked: Proof follows Stacks 03EV (objectwise free presheaf via 03ES, then 03ET sheafification), not 03EW's j_! -| j^* argument; checked against packet text: step 1 elementary (free => flat, objectwise limits/tensor), step 2 uses new node lem-pc-sites-modules-sheafification-flat whose hypotheses match (O sheaf so O^#=O); flat is def-pc-flat-sheaf-modules (finite-limit form equivalent to exactness since tensor is right exact); new node not a duplicate of lem-weil-pbc-free-sheaf-flat (Grothendieck-abelian coefficient, constant P) nor in Mathlib (searches recorded); restates nothing. FIX more, RETURN less: C1 - j_{U!}O_U was undefined in the statement and step 1 took the formula P(V)=sum O(V) and step 2 the identification j_{U!}O_U=P^# from 'the source calculation' without a node; the statement now defines j_{U!}O_U as the sheafification [def-weil-presheaf-modules-sheafification] of the extension-by-zero presheaf [def-weil-extension-by-zero-presheaf] (E7: clarification of notation only, same object), steps 1/2 cite these nodes, uses/proof_deps/stmt_deps updated.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Category.ModuleCat.Sheaf.ExtensionByZeroFlat",
+  "declaration": "SheafOfModules.isFlat_extensionByZero_unit",
+  "file": "lean/Sheaf/Algebra/Category/ModuleCat/Sheaf/ExtensionByZeroFlat.lean",
+  "statement": "theorem isFlat_extensionByZero_unit {C : Type u} [Category.{u} C] {J : GrothendieckTopology C} [J.WEqualsLocallyBijective AddCommGrpCat.{u}] [HasWeakSheafify J AddCommGrpCat.{u}] (R : Sheaf J CommRingCat.{u}) (U : C) : IsFlat ((PresheafOfModules.sheafification.{u} (𝟙 ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R).obj)).obj ((extensionByZeroPresheaf.{u} ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R) U).obj (unit (((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R).over U))))",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-jsf1118",
+  "group": "F1",
+  "result": "pass",
+  "note": "site C,J (u-uniform, ambient infra instances as in IsFlat); R : Sheaf J CommRingCat forgotten to O; U : C unrestricted; O_U = O.over U, unit module; P = landed extensionByZeroPresheaf (same j_! form as RingedSiteGrothendieckAbelian); P^# = PresheafOfModules.sheafification (𝟙 O.obj) as in 29f5c23b8's sheafification α; conclusion landed SheafOfModules.IsFlat"
  }
 }
