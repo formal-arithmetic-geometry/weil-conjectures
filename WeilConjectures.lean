@@ -274,6 +274,7 @@ public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.OpenImmersion.Defs
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.OpenImmersion.FullyFaithful
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Proper
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Coherence
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Defs
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Monoidal
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.CompactlySupported

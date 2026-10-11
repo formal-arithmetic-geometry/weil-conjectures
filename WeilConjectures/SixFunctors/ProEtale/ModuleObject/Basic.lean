@@ -11,6 +11,7 @@ public import Mathlib.Topology.LocallyConstant.Algebra
 public import WeilConjectures.CategoryTheory.ModuleObjects.MapMod
 public import WeilConjectures.CategoryTheory.RingObjects.Condensed.ContinuousMap
 public import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.Basic
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Coherence
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Monoidal
 
 /-!
@@ -96,6 +97,14 @@ derived functors on module objects need.
 * `AlgebraicGeometry.ProEtale.condensedPullbackHom` and
   `AlgebraicGeometry.ProEtale.condensedPushforwardHom`: the coefficient morphisms `α_f` and `η_f`.
 
+## Main results
+
+* `AlgebraicGeometry.ProEtale.condensedPushforwardHom_id` and
+  `AlgebraicGeometry.ProEtale.condensedPushforwardHom_comp`: `η` is compatible with the identity
+  and composition isomorphisms of the pushforwards. These are the cases `F = p^* Λ` of the general
+  coherences `ProEtale.unitCompUpperStarComp_id` and `ProEtale.unitCompUpperStarComp_comp` of
+  `WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Coherence`.
+
 ## Sorried input
 
 * `AddCommGrpCat.hasFunctorialFlatResolution`: abelian groups admit functorial flat resolutions,
@@ -121,13 +130,6 @@ derived functors on module objects need.
 * `AlgebraicGeometry.ProEtale.isMonoidal_upperStarFromPointComp`: the comparison
   `f^* ∘ p_Y^* ≅ p_X^*` is a monoidal natural isomorphism. It is the mate of the composition
   isomorphism of pushforwards, which is monoidal by `ProEtale.isMonoidal_lowerStarComp`.
-
-## TODO
-
-* Compatibility of `η` with the identity and composition isomorphisms of the pushforwards:
-  `η_{𝟙 X} = (ProEtale.lowerStarId _ X).inv.app Λ_X` and
-  `η_{f ≫ g} = η_g ≫ g_* η_f ≫ (ProEtale.lowerStarComp _ f g).hom.app Λ_X`. The latter is needed by
-  `ProEtale.CondensedRing.lowerStarComp`, where it is currently `sorry`.
 
 -/
 
@@ -343,7 +345,7 @@ noncomputable def upperStarFromPointComp :
     upperStarFromPoint Y ⋙ (f)^*[Ab.{u + 1}] ≅ upperStarFromPoint X :=
   Functor.associator _ _ _ ≪≫ Functor.isoWhiskerLeft pointUpperStar
     ((upperStarComp Ab.{u + 1} f (toSpecZ Y)).symm ≪≫
-      eqToIso (by rw [comp_toSpecZ]))
+      eqToIso (congrArg (upperStar Ab.{u + 1}) (comp_toSpecZ f)))
 
 /-- The comparison `f^* ∘ p_Y^* ≅ p_X^*` is a monoidal natural isomorphism. See the module
 docstring. -/
@@ -432,6 +434,46 @@ lemma unitAlgHom_comp_map_condensedPullbackHom :
       (f)_*[Ab.{u + 1}].map (condensedPullbackHom Λ f) =
         condensedPushforwardHom Λ f :=
   rfl
+
+omit [MonObj Λ] in
+/-- The canonical coefficient morphism `α_f` is the composition isomorphism
+`f^* π_Y^* ≅ (f ≫ π_Y)^*` of the pullbacks, followed by `f ≫ π_Y = π_X`, at `p^* Λ`. -/
+lemma condensedPullbackHom_eq :
+    condensedPullbackHom Λ f =
+      (upperStarComp Ab.{u + 1} f (toSpecZ Y)).inv.app (pointUpperStar.obj Λ) ≫
+        (eqToHom (congrArg (upperStar Ab.{u + 1}) (comp_toSpecZ f))).app
+          (pointUpperStar.obj Λ) := by
+  have h₁ : condensedPullbackHom Λ f = (upperStarFromPointComp f).hom.app Λ := rfl
+  have h₂ : upperStarFromPointComp f =
+      Functor.associator pointUpperStar (toSpecZ Y)^*[Ab.{u + 1}] (f)^*[Ab.{u + 1}] ≪≫
+        Functor.isoWhiskerLeft pointUpperStar ((upperStarComp Ab.{u + 1} f (toSpecZ Y)).symm ≪≫
+          eqToIso (congrArg (upperStar Ab.{u + 1}) (comp_toSpecZ f))) := by
+    unfold upperStarFromPointComp
+    rfl
+  rw [h₁, h₂]
+  exact associator_isoWhiskerLeft_upperStarComp_hom_app Ab.{u + 1} pointUpperStar f _ _
+    (comp_toSpecZ f) Λ
+
+omit [MonObj Λ] in
+/-- `η` of the identity is the identification `Λ_X ≅ (𝟙 X)_* Λ_X`. -/
+lemma condensedPushforwardHom_id (X : Scheme.{u}) :
+    condensedPushforwardHom Λ (𝟙 X) =
+      (ProEtale.lowerStarId Ab.{u + 1} X).inv.app (condensedRingObj Λ X) := by
+  rw [condensedPushforwardHom, condensedPullbackHom_eq]
+  exact unitCompUpperStarComp_id Ab.{u + 1} (toSpecZ X) (comp_toSpecZ (𝟙 X))
+    (pointUpperStar.obj Λ)
+
+omit [MonObj Λ] in
+/-- `η` of a composition is the composition of the `η`'s, up to the composition isomorphism
+`g_* ∘ f_* ≅ (f ≫ g)_*`. -/
+lemma condensedPushforwardHom_comp {Z : Scheme.{u}} (g : Y ⟶ Z) :
+    condensedPushforwardHom Λ (f ≫ g) =
+      condensedPushforwardHom Λ g ≫ (g)_*[Ab.{u + 1}].map (condensedPushforwardHom Λ f) ≫
+        (ProEtale.lowerStarComp Ab.{u + 1} f g).hom.app (condensedRingObj Λ X) := by
+  rw [condensedPushforwardHom, condensedPushforwardHom, condensedPushforwardHom,
+    condensedPullbackHom_eq, condensedPullbackHom_eq, condensedPullbackHom_eq]
+  exact unitCompUpperStarComp_comp Ab.{u + 1} f g (toSpecZ X) (toSpecZ Y) (toSpecZ Z)
+    (comp_toSpecZ f) (comp_toSpecZ g) (comp_toSpecZ (f ≫ g)) (pointUpperStar.obj Λ)
 
 end CoefficientMorphisms
 

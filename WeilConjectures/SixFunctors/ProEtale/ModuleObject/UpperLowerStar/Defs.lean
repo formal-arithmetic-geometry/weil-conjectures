@@ -260,12 +260,27 @@ section Comp
 
 variable {Z : Scheme.{u}} (g : Y ⟶ Z)
 
+/-- The restriction of scalars along the two ways of letting `Λ_Z` act on `(f ≫ g)_* M`: through
+`η_g`, `g_* η_f` and the composition isomorphism `g_* f_* ≅ (f ≫ g)_*`, or through `η_{f ≫ g}`.
+This is the comparison of the actions entering `ProEtale.CondensedRing.lowerStarComp`. The two
+restrictions agree since `η_{f ≫ g} = η_g ≫ g_* η_f ≫ (g_* f_* ≅ (f ≫ g)_*)`
+(`ProEtale.condensedPushforwardHom_comp`). -/
+noncomputable def comapCondensedPushforwardHomComp :
+    (Mod.comap (Functor.compAlgHom (f)_*[Ab.{u + 1}] (g)_*[Ab.{u + 1}]
+        (ProEtale.lowerStarComp Ab.{u + 1} f g).hom (condensedRingObj Λ X)) :
+      Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1})
+        ((f ≫ g)_*[Ab.{u + 1}].obj (condensedRingObj Λ X)) ⥤ _) ⋙
+      Mod.comap (condensedPushforwardHom Λ g ≫
+        (g)_*[Ab.{u + 1}].map (condensedPushforwardHom Λ f)) ≅
+      Mod.comap (condensedPushforwardHom Λ (f ≫ g)) :=
+  (Mod.comapComp _ _).symm ≪≫
+    Mod.comapIsoOfEq (by rw [condensedPushforwardHom_comp, Category.assoc])
+
 /-- The composition isomorphism `f_* ⋙ g_* ≅ (f ≫ g)_*` of pushforwards on module objects over
 `Λ`: on underlying sheaves it is the composition isomorphism `ProEtale.lowerStarComp`,
 which is monoidal (`ProEtale.isMonoidal_lowerStarComp`), and the two actions of `Λ_Z`
-agree since `η_{f ≫ g}` is `η_g` followed by `g_* η_f` up to `ProEtale.lowerStarComp`. This
-last compatibility is `sorry` for now, see the TODO in
-`WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic`. -/
+agree since `η_{f ≫ g}` is `η_g` followed by `g_* η_f` up to `ProEtale.lowerStarComp`
+(`ProEtale.CondensedRing.comapCondensedPushforwardHomComp`). -/
 noncomputable def lowerStarComp : (f)_*⟦Λ⟧ ⋙ (g)_*⟦Λ⟧ ≅ (f ≫ g)_*⟦Λ⟧ :=
   Functor.associator _ _ _ ≪≫
     Functor.isoWhiskerLeft _ ((Functor.associator _ _ _).symm ≪≫
@@ -277,8 +292,7 @@ noncomputable def lowerStarComp : (f)_*⟦Λ⟧ ⋙ (g)_*⟦Λ⟧ ≅ (f ≫ g)_
     Functor.isoWhiskerRight (Functor.mapModCompIso (f)_*[Ab.{u + 1}] (g)_*[Ab.{u + 1}]
       (ProEtale.lowerStarComp Ab.{u + 1} f g).hom (condensedRingObj Λ X)) _ ≪≫
     Functor.associator _ _ _ ≪≫
-    Functor.isoWhiskerLeft _ ((Mod.comapComp _ _).symm ≪≫
-      Mod.comapIsoOfEq sorry)
+    Functor.isoWhiskerLeft _ (comapCondensedPushforwardHomComp Λ f g)
 
 /-- The composition isomorphism `(f ≫ g)^* ≅ g^* ⋙ f^*` of pullbacks on module objects over
 `Λ`, obtained from `ProEtale.CondensedRing.lowerStarComp` by uniqueness of left
