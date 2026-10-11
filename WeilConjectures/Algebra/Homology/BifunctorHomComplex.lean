@@ -198,6 +198,111 @@ lemma bifunctorHomMapLeft_f_π {K' : CochainComplex C ℤ} (f : K' ⟶ K) (n p q
       bifunctorHomπ H K Y n p q hpq ≫ (H.map (f.f p).op).app _ :=
   by simp [bifunctorHomMapLeft]
 
+lemma bifunctorHomMapRight_id : bifunctorHomMapRight (H := H) (K := K) (𝟙 Y) = 𝟙 _ := by
+  ext n p q hpq
+  simp
+
+lemma bifunctorHomMapRight_comp {Y' Y'' : CochainComplex D ℤ} (g : Y ⟶ Y') (g' : Y' ⟶ Y'') :
+    bifunctorHomMapRight (H := H) (K := K) (g ≫ g') =
+      bifunctorHomMapRight g ≫ bifunctorHomMapRight g' := by
+  ext n p q hpq
+  simp
+
+lemma bifunctorHomMapLeft_id : bifunctorHomMapLeft (H := H) (Y := Y) (𝟙 K) = 𝟙 _ := by
+  ext n p q hpq
+  simp
+
+lemma bifunctorHomMapLeft_comp {K' K'' : CochainComplex C ℤ} (f : K' ⟶ K) (f' : K'' ⟶ K') :
+    bifunctorHomMapLeft (H := H) (Y := Y) (f' ≫ f) =
+      bifunctorHomMapLeft f ≫ bifunctorHomMapLeft f' := by
+  ext n p q hpq
+  simp [← NatTrans.comp_app, ← Functor.map_comp]
+
+/-- The cochain of degree `a` between hom complexes induced by a cochain `c : Cochain K' K a` in
+the first variable, with the sign `(-1)^(p a)` on the factor indexed by `(p, q)`. -/
+noncomputable def bifunctorHomMapLeftCochain {K' : CochainComplex C ℤ} {a : ℤ}
+    (c : Cochain K' K a) : Cochain (bifunctorHomObj H K Y) (bifunctorHomObj H K' Y) a :=
+  Cochain.mk fun n n' _ ↦ bifunctorHomLift H K' Y n' fun p' q' _ ↦
+    (p' * a).negOnePow • (bifunctorHomπ H K Y n (p' + a) q' (by lia) ≫
+      (H.map (c.v p' (p' + a) rfl).op).app _)
+
+@[reassoc]
+lemma bifunctorHomMapLeftCochain_v_π {K' : CochainComplex C ℤ} {a : ℤ} (c : Cochain K' K a)
+    (n n' : ℤ) (hnn' : n + a = n') (p' q' : ℤ) (hpq' : p' + n' = q') (p : ℤ) (hp : p' + a = p)
+    (hpq : p + n = q') :
+    (bifunctorHomMapLeftCochain (H := H) (Y := Y) c).v n n' hnn' ≫
+        bifunctorHomπ H K' Y n' p' q' hpq' =
+      (p' * a).negOnePow • (bifunctorHomπ H K Y n p q' hpq ≫ (H.map (c.v p' p hp).op).app _) := by
+  subst hp
+  simp [bifunctorHomMapLeftCochain]
+
+lemma bifunctorHomMapLeftCochain_ofHom {K' : CochainComplex C ℤ} (f : K' ⟶ K) :
+    bifunctorHomMapLeftCochain (H := H) (Y := Y) (Cochain.ofHom f) =
+      Cochain.ofHom (bifunctorHomMapLeft f) := by
+  ext n p' q' hpq'
+  rw [bifunctorHomMapLeftCochain_v_π _ n n (add_zero n) p' q' hpq' p' (add_zero p') hpq',
+    Cochain.ofHom_v, Cochain.ofHom_v, bifunctorHomMapLeft_f_π, mul_zero, Int.negOnePow_zero,
+    one_smul]
+
+lemma bifunctorHomMapLeftCochain_add {K' : CochainComplex C ℤ} {a : ℤ} (c₁ c₂ : Cochain K' K a) :
+    bifunctorHomMapLeftCochain (H := H) (Y := Y) (c₁ + c₂) =
+      bifunctorHomMapLeftCochain c₁ + bifunctorHomMapLeftCochain c₂ := by
+  ext n n' hnn' p' q' hpq'
+  simp only [Cochain.add_v, Preadditive.add_comp,
+    bifunctorHomMapLeftCochain_v_π _ n n' hnn' p' q' hpq' (p' + a) rfl (by lia), op_add,
+    Functor.map_add, NatTrans.app_add, Preadditive.comp_add, smul_add]
+
+lemma δ_bifunctorHomMapLeftCochain {K' : CochainComplex C ℤ} (a b : ℤ) (hab : a + 1 = b)
+    (c : Cochain K' K a) :
+    δ a b (bifunctorHomMapLeftCochain (H := H) (Y := Y) c) =
+      bifunctorHomMapLeftCochain (δ a b c) := by
+  obtain rfl : b = a + 1 := hab.symm
+  ext n n' hnn' p' q' hpq'
+  have e1 := bifunctorHomObj_d_π H K' Y (n' - 1) n' p' q' hpq' (q' - 1) (p' + 1) (by lia) (by lia)
+  have e2 := bifunctorHomMapLeftCochain_v_π (H := H) (Y := Y) c (n + 1) n' (by lia) p' q' hpq'
+    (p' + a) rfl (by lia)
+  have e3 := bifunctorHomMapLeftCochain_v_π (H := H) (Y := Y) c n (n' - 1) (by lia) p'
+    (q' - 1) (by lia) (p' + a) rfl (by lia)
+  have e4 := bifunctorHomMapLeftCochain_v_π (H := H) (Y := Y) c n (n' - 1) (by lia)
+    (p' + 1) q' (by lia) (p' + a + 1) (by lia) (by lia)
+  have e5 := bifunctorHomObj_d_π H K Y n (n + 1) (p' + a) q' (by lia) (q' - 1) (p' + a + 1)
+    (by lia) (by lia)
+  have e6 := bifunctorHomMapLeftCochain_v_π (H := H) (Y := Y) (δ a (a + 1) c) n n' hnn' p' q'
+    hpq' (p' + a + 1) (by lia) (by lia)
+  have e7 := δ_v a (a + 1) rfl c p' (p' + a + 1) (by lia) (p' + a) (p' + 1) (by lia) rfl
+  rw [δ_v a (a + 1) rfl _ n n' hnn' (n' - 1) (n + 1) (by lia) rfl]
+  simp only [Preadditive.add_comp, assoc, e1, e2, e6, e7, Linear.units_smul_comp,
+    Linear.comp_units_smul, Preadditive.comp_sub, Preadditive.sub_comp, reassoc_of% e3,
+    reassoc_of% e4, reassoc_of% e5]
+  simp only [Units.smul_def, op_comp, op_add, Functor.map_comp, Functor.map_add,
+    NatTrans.comp_app, NatTrans.app_add, NatTrans.naturality, Preadditive.comp_add,
+    Preadditive.comp_zsmul, smul_sub, smul_add, smul_smul, op_zsmul, Functor.map_zsmul, NatTrans.app_zsmul, ← Units.val_mul,
+    ← Int.negOnePow_add]
+  have h₁ : (a + 1 + (p' * a + (p' + a))).negOnePow = -(p' + p' * a).negOnePow := by
+    rw [← Int.negOnePow_succ]
+    exact (Int.negOnePow_eq_iff _ _).2 ⟨a, by ring⟩
+  have h₂ : (a + 1 + (p' * a + (p' + a))).negOnePow = -(p' * (a + 1)).negOnePow := by
+    rw [← Int.negOnePow_succ]
+    exact (Int.negOnePow_eq_iff _ _).2 ⟨a, by ring⟩
+  have h₃ : (p' * (a + 1) + (a + 1)).negOnePow = -(p' + (p' + 1) * a).negOnePow := by
+    rw [← Int.negOnePow_succ]
+    exact (Int.negOnePow_eq_iff _ _).2 ⟨0, by ring⟩
+  rw [h₃]
+  nth_rw 1 [h₁]
+  rw [h₂]
+  simp only [Units.val_neg, neg_smul]
+  abel
+
+/-- A homotopy between `f, g : K' ⟶ K` induces a homotopy between the induced morphisms of hom
+complexes. -/
+noncomputable def bifunctorHomMapLeftHomotopy {K' : CochainComplex C ℤ} {f g : K' ⟶ K}
+    (h : Homotopy f g) :
+    Homotopy (bifunctorHomMapLeft (H := H) (Y := Y) f) (bifunctorHomMapLeft g) :=
+  (Cochain.equivHomotopy _ _).symm ⟨bifunctorHomMapLeftCochain (Cochain.ofHomotopy h), by
+    rw [← bifunctorHomMapLeftCochain_ofHom, ← bifunctorHomMapLeftCochain_ofHom,
+      δ_bifunctorHomMapLeftCochain (-1) 0 (by lia), ← bifunctorHomMapLeftCochain_add,
+      δ_ofHomotopy, sub_add_cancel]⟩
+
 end Functoriality
 
 section KInjective
