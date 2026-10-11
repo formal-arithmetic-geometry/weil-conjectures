@@ -128,5 +128,24 @@
   "group": "F1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ptt2744 (reviewer sub-agent of L); spot-checked: Statement matches Tag 08CR and lem-pc-perfect-thick-closure (1) verbatim (C4 ok). Direct 08CR second-proof route, no Tor-amplitude node needed. FIX more, RETURN less: (1) C1 step 2 'represent the first arrow by a chain map' was uncited: now cites lem-pc-affine-qcoh-derived-equivalence + lem-sc-affine-projective-complex-derived-hom; (2) C1/E step 2 rotation and cone-uniqueness uncited: now cites TR2/TR3 of def-weil-triangulated-category, cone triangles of def-weil-abstract-derived-category, lem-sf-triangle-morphism-iso, all three positions explicit; (3) C4 step 1 lem-pc-perfect-affine-bounded-projective needs E in D_QCoh, unchecked: replaced by the 08EB affine clause of def-pc-perfect-complex; B4 plain arrows rewritten in TeX. Second reading by F1 missed (1)-(3).; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.PerfectTwoOutOfThree",
+  "declaration": "AlgebraicGeometry.Scheme.isPerfect_two_out_of_three",
+  "file": "lean/Sheaf/AlgebraicGeometry/PerfectTwoOutOfThree.lean",
+  "statement": "theorem isPerfect_two_out_of_three (X : Scheme.{u}) [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] [∀ U : X.Opens, HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))] (T : Triangle (schemeDerivedCategory X)) (hT : T ∈ distTriang (schemeDerivedCategory X)) : (IsPerfect X T.obj₁ → IsPerfect X T.obj₂ → IsPerfect X T.obj₃) ∧ (IsPerfect X T.obj₂ → IsPerfect X T.obj₃ → IsPerfect X T.obj₁) ∧ (IsPerfect X T.obj₁ → IsPerfect X T.obj₃ → IsPerfect X T.obj₂)",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-ptt1438"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-ptt1438",
+  "group": "G1",
+  "result": "fix",
+  "note": "X : Scheme.{u} arbitrary; K,L,M = T.obj1..3 of T : Triangle (schemeDerivedCategory X) with hT : T ∈ distTriang; HasDerivedCategory.{w} binders word for word as M1 8905f8d2e IsPerfect; three conjuncts = all three two-of-three cases with Scheme.IsPerfect (#check resolved); FIX: distTriang _ -> distTriang (schemeDerivedCategory X) as C1 06a452bf0"
  }
 }
