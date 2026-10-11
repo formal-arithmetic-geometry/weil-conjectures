@@ -270,7 +270,7 @@ theorem Scheme.exists_galoisRepFunctor_obj_iso (M : Rep.{u + 1} Λ G)
   have hA {A : Sheaf Y.smallEtaleTopology (Type (u + 1))} (χ : A ⟶ 𝒮 ⨯ 𝒮) (w : St.obj A) :
       e (St.map (χ ≫ a) w) = e (St.map (χ ≫ prod.fst) w) + e (St.map (χ ≫ prod.snd) w) := by
     rw [Functor.map_comp_apply, ha, Functor.map_comp_apply, Functor.map_comp_apply]
-  have hM {A : Sheaf Y.smallEtaleTopology (Type (u + 1))} (χ : A ⟶ 𝒮) (c : Λ) (w : St.obj A) :
+  have hSm {A : Sheaf Y.smallEtaleTopology (Type (u + 1))} (χ : A ⟶ 𝒮) (c : Λ) (w : St.obj A) :
       e (St.map (χ ≫ m c) w) = c • e (St.map χ w) := by
     rw [Functor.map_comp_apply, hmc]
   have hZ {A : Sheaf Y.smallEtaleTopology (Type (u + 1))} (χ : A ⟶ ⊤_ _) (w : St.obj A) :
@@ -294,27 +294,140 @@ theorem Scheme.exists_galoisRepFunctor_obj_iso (M : Rep.{u + 1} Λ G)
       rw [hA, ha, prod.lift_fst, prod.lift_snd, add_comm]
   have L_neg : prod.lift (m (-1)) (𝟙 𝒮) ≫ a = terminal.from 𝒮 ≫ z :=
     ext3 (A := S) _ _ fun w ↦ by
-      rw [hA, hZ, prod.lift_fst, prod.lift_snd, ← Category.id_comp (m (-1)), hM,
+      rw [hA, hZ, prod.lift_fst, prod.lift_snd, ← Category.id_comp (m (-1)), hSm,
         neg_one_smul, neg_add_cancel]
   have L_one : m 1 = 𝟙 𝒮 :=
     ext3 (A := S) _ _ fun w ↦ by
-      rw [← Category.id_comp (m 1), hM, one_smul]
+      rw [← Category.id_comp (m 1), hSm, one_smul]
   have L_mul (c d : Λ) : m (c * d) = m d ≫ m c :=
     ext3 (A := S) _ _ fun w ↦ by
-      rw [← Category.id_comp (m (c * d)), hM, hM, ← Category.id_comp (m d), hM, mul_smul]
+      rw [← Category.id_comp (m (c * d)), hSm, hSm, ← Category.id_comp (m d), hSm, mul_smul]
   have L_smul_add (c : Λ) : a ≫ m c = prod.lift (prod.fst ≫ m c) (prod.snd ≫ m c) ≫ a :=
     ext3 (A := S2) _ _ fun w ↦ by
-      rw [hM, ha, hA, prod.lift_fst, prod.lift_snd, hM, hM, smul_add]
+      rw [hSm, ha, hA, prod.lift_fst, prod.lift_snd, hSm, hSm, smul_add]
   have L_add_smul (c d : Λ) : m (c + d) = prod.lift (m c) (m d) ≫ a :=
     ext3 (A := S) _ _ fun w ↦ by
-      rw [hA, prod.lift_fst, prod.lift_snd, ← Category.id_comp (m (c + d)), hM,
-        ← Category.id_comp (m c), hM, ← Category.id_comp (m d), hM, add_smul]
+      rw [hA, prod.lift_fst, prod.lift_snd, ← Category.id_comp (m (c + d)), hSm,
+        ← Category.id_comp (m c), hSm, ← Category.id_comp (m d), hSm, add_smul]
   have L_smul_zero (c : Λ) : z ≫ m c = z :=
     ext3 (A := S0) _ _ fun w ↦ by
-      rw [hM, ← Category.id_comp z, hZ, smul_zero]
+      rw [hSm, ← Category.id_comp z, hZ, smul_zero]
   have L_zero_smul : m 0 = terminal.from 𝒮 ≫ z :=
     ext3 (A := S) _ _ fun w ↦ by
-      rw [hZ, ← Category.id_comp (m 0), hM, zero_smul]
+      rw [hZ, ← Category.id_comp (m 0), hSm, zero_smul]
+  -- the module structure on the sections of `𝒮`
+  let Hv (V : (Y.Etale)ᵒᵖ) : Sheaf Y.smallEtaleTopology (Type (u + 1)) ⥤ Type (u + 1) :=
+    sheafToPresheaf _ _ ⋙ (CategoryTheory.evaluation _ _).obj V
+  let unitV (V : (Y.Etale)ᵒᵖ) : (Hv V).obj (⊤_ _) :=
+    (PreservesTerminal.iso (Hv V) ≪≫ Types.terminalIso).inv PUnit.unit
+  have hunit (V : (Y.Etale)ᵒᵖ) (t : (Hv V).obj (⊤_ _)) : t = unitV V :=
+    @Subsingleton.elim _ ((Hv V).subsingleton_obj_terminal) _ _
+  let addV (V : (Y.Etale)ᵒᵖ) (x y : (Hv V).obj 𝒮) : (Hv V).obj 𝒮 :=
+    (Hv V).map a (((Hv V).prodEquiv 𝒮 𝒮).symm (x, y))
+  let zeroV (V : (Y.Etale)ᵒᵖ) : (Hv V).obj 𝒮 := (Hv V).map z (unitV V)
+  let smulV (V : (Y.Etale)ᵒᵖ) (c : Λ) (x : (Hv V).obj 𝒮) : (Hv V).obj 𝒮 := (Hv V).map (m c) x
+  have s_assoc (V) (x y w : (Hv V).obj 𝒮) :
+      addV V (addV V x y) w = addV V x (addV V y w) := by
+    have := congrArg (fun φ ↦ (Hv V).map φ
+      (((Hv V).prodEquiv 𝒮 (𝒮 ⨯ 𝒮)).symm (x, ((Hv V).prodEquiv 𝒮 𝒮).symm (y, w)))) L_assoc
+    simpa only [Functor.map_comp_apply, Functor.map_prod_lift, Functor.map_fst_prodEquiv_symm,
+      Functor.map_snd_prodEquiv_symm] using this
+  have s_zero_add (V) (x : (Hv V).obj 𝒮) : addV V (zeroV V) x = x := by
+    have := congrArg (fun φ ↦ (Hv V).map φ x) L_zero_add
+    simp only [Functor.map_comp_apply, Functor.map_prod_lift, Functor.map_id_apply] at this
+    rwa [hunit V ((Hv V).map (terminal.from 𝒮) x)] at this
+  have s_add_comm (V) (x y : (Hv V).obj 𝒮) : addV V x y = addV V y x := by
+    have := congrArg (fun φ ↦ (Hv V).map φ (((Hv V).prodEquiv 𝒮 𝒮).symm (y, x))) L_add_comm
+    simpa only [Functor.map_comp_apply, Functor.map_prod_lift, Functor.map_fst_prodEquiv_symm,
+      Functor.map_snd_prodEquiv_symm] using this
+  have s_neg (V) (x : (Hv V).obj 𝒮) : addV V (smulV V (-1) x) x = zeroV V := by
+    have := congrArg (fun φ ↦ (Hv V).map φ x) L_neg
+    simp only [Functor.map_comp_apply, Functor.map_prod_lift, Functor.map_id_apply] at this
+    rwa [hunit V ((Hv V).map (terminal.from 𝒮) x)] at this
+  have s_one (V) (x : (Hv V).obj 𝒮) : smulV V 1 x = x := by
+    have := congrArg (fun φ ↦ (Hv V).map φ x) L_one
+    simpa only [Functor.map_id_apply] using this
+  have s_mul (V) (c d : Λ) (x : (Hv V).obj 𝒮) : smulV V (c * d) x = smulV V c (smulV V d x) := by
+    have := congrArg (fun φ ↦ (Hv V).map φ x) (L_mul c d)
+    simpa only [Functor.map_comp_apply] using this
+  have s_smul_add (V) (c : Λ) (x y : (Hv V).obj 𝒮) :
+      smulV V c (addV V x y) = addV V (smulV V c x) (smulV V c y) := by
+    have := congrArg (fun φ ↦ (Hv V).map φ (((Hv V).prodEquiv 𝒮 𝒮).symm (x, y))) (L_smul_add c)
+    simpa only [Functor.map_comp_apply, Functor.map_prod_lift, Functor.map_fst_prodEquiv_symm,
+      Functor.map_snd_prodEquiv_symm] using this
+  have s_add_smul (V) (c d : Λ) (x : (Hv V).obj 𝒮) :
+      smulV V (c + d) x = addV V (smulV V c x) (smulV V d x) := by
+    have := congrArg (fun φ ↦ (Hv V).map φ x) (L_add_smul c d)
+    simpa only [Functor.map_comp_apply, Functor.map_prod_lift] using this
+  have s_smul_zero (V) (c : Λ) : smulV V c (zeroV V) = zeroV V := by
+    have := congrArg (fun φ ↦ (Hv V).map φ (unitV V)) (L_smul_zero c)
+    simpa only [Functor.map_comp_apply] using this
+  have s_zero_smul (V) (x : (Hv V).obj 𝒮) : smulV V 0 x = zeroV V := by
+    have := congrArg (fun φ ↦ (Hv V).map φ x) L_zero_smul
+    simp only [Functor.map_comp_apply] at this
+    rwa [hunit V ((Hv V).map (terminal.from 𝒮) x)] at this
+  let grp (V : (Y.Etale)ᵒᵖ) : AddCommGroup ((Hv V).obj 𝒮) :=
+    letI : Add ((Hv V).obj 𝒮) := ⟨addV V⟩
+    letI : Zero ((Hv V).obj 𝒮) := ⟨zeroV V⟩
+    letI : Neg ((Hv V).obj 𝒮) := ⟨smulV V (-1)⟩
+    { add_assoc := s_assoc V
+      zero_add := s_zero_add V
+      add_zero x := (s_add_comm V x (zeroV V)).trans (s_zero_add V x)
+      add_comm := s_add_comm V
+      neg_add_cancel := s_neg V
+      nsmul := nsmulRec
+      zsmul := zsmulRec }
+  let modV (V : (Y.Etale)ᵒᵖ) : @Module Λ ((Hv V).obj 𝒮) _ (grp V).toAddCommMonoid :=
+    letI := grp V
+    { smul := smulV V
+      one_smul := s_one V
+      mul_smul := s_mul V
+      smul_zero := s_smul_zero V
+      smul_add := s_smul_add V
+      add_smul := s_add_smul V
+      zero_smul := s_zero_smul V }
+  -- the presheaf of modules
+  have nat_pair {V W : (Y.Etale)ᵒᵖ} (f : V ⟶ W) (x y : (Hv V).obj 𝒮) :
+      (𝒮 ⨯ 𝒮).obj.map f (((Hv V).prodEquiv 𝒮 𝒮).symm (x, y)) =
+        ((Hv W).prodEquiv 𝒮 𝒮).symm (𝒮.obj.map f x, 𝒮.obj.map f y) := by
+    apply ((Hv W).prodEquiv 𝒮 𝒮).injective
+    rw [Equiv.apply_symm_apply]
+    refine Prod.ext ?_ ?_
+    · change (prod.fst : 𝒮 ⨯ 𝒮 ⟶ 𝒮).hom.app W ((𝒮 ⨯ 𝒮).obj.map f _) = _
+      rw [NatTrans.naturality_apply]
+      exact congrArg (𝒮.obj.map f) ((Hv V).map_fst_prodEquiv_symm x y)
+    · change (prod.snd : 𝒮 ⨯ 𝒮 ⟶ 𝒮).hom.app W ((𝒮 ⨯ 𝒮).obj.map f _) = _
+      rw [NatTrans.naturality_apply]
+      exact congrArg (𝒮.obj.map f) ((Hv V).map_snd_prodEquiv_symm x y)
+  have nat_add {V W : (Y.Etale)ᵒᵖ} (f : V ⟶ W) (x y : (Hv V).obj 𝒮) :
+      𝒮.obj.map f (addV V x y) = addV W (𝒮.obj.map f x) (𝒮.obj.map f y) := by
+    change 𝒮.obj.map f (a.hom.app V _) = a.hom.app W _
+    rw [← NatTrans.naturality_apply a.hom f, nat_pair]
+  have nat_smul {V W : (Y.Etale)ᵒᵖ} (f : V ⟶ W) (c : Λ) (x : (Hv V).obj 𝒮) :
+      𝒮.obj.map f (smulV V c x) = smulV W c (𝒮.obj.map f x) :=
+    (NatTrans.naturality_apply (m c).hom f x).symm
+  let Fp : (Y.Etale)ᵒᵖ ⥤ ModuleCat.{u + 1} Λ :=
+    { obj V := letI := grp V; letI := modV V; ModuleCat.of Λ ((Hv V).obj 𝒮)
+      map {V W} f :=
+        letI := grp V; letI := modV V; letI := grp W; letI := modV W
+        ModuleCat.ofHom
+          { toFun := 𝒮.obj.map f
+            map_add' := nat_add f
+            map_smul' := nat_smul f }
+      map_id V := by
+        ext x
+        change 𝒮.obj.map (𝟙 V) x = x
+        simp
+      map_comp f g := by
+        ext x
+        exact 𝒮.obj.map_comp_apply f g x }
+  have hFp : Presheaf.IsSheaf Y.smallEtaleTopology Fp :=
+    (Presheaf.isSheaf_iff_isSheaf_forget _ Fp (CategoryTheory.forget _)).mpr 𝒮.property
+  let F : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ) := ⟨Fp, hFp⟩
+  have hFt : IsFiniteLocallyConstantSheafOfTypes
+      ((sheafCompose _ (CategoryTheory.forget (ModuleCat.{u + 1} Λ))).obj F) := S.property
+  have hF := IsFiniteLocallyConstantSheaf.of_forget F hFt
+  refine ⟨F, hF, ⟨?_⟩⟩
   sorry
 
 end Construction
