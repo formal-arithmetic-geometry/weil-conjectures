@@ -12,7 +12,21 @@ public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.Defs
 /-!
 # Lifting objects of the pro-étale site of a closed subscheme
 
-Let `i : Z ⟶ X` be a closed immersion and `u : X.ProEt ⥤ Z.ProEt` base change along `i`.
+Let `i : Z ⟶ X` be a closed immersion. Base change along `i` defines a functor
+`AlgebraicGeometry.ProEtale.closedBaseChange : X.AffineProEt ⥤ Z.ProEt` from the affine pro-étale
+site of `X` to the pro-étale site of `Z`. This file shows that it is cover dense and locally full,
+by lifting affine opens `Spec C̄` of objects of `Z.ProEt` lying over an affine open `Spec A` of `X`
+to `Spec H_A(C̄)` (`AlgebraicGeometry.ProEtale.exists_closedSiteLift`, a local form of blueprint
+`def-exc-closed-site-lift` and `lem-exc-closed-site-adjunction`, whose global affine form is
+`AlgebraicGeometry.Scheme.AffineProEt.closedLiftAdjunction`).
+
+Consequently the pushforward `i_*` on pro-étale sheaves is full and faithful for every coefficient
+category (`AlgebraicGeometry.ProEtale.full_lowerStar_of_isClosedImmersion`,
+`AlgebraicGeometry.ProEtale.faithful_lowerStar_of_isClosedImmersion`): restricted to the affine
+pro-étale site of `X`, it is the pushforward along `closedBaseChange`, which is full and faithful
+on sheaves by `CategoryTheory.Functor.IsCoverDense.full_sheafPushforwardContinuous`. This is the
+content of blueprint `lem-exc-proetale-closed-fully-faithful`; it replaces the blueprint's
+reduction to affine `X` by the localization of `lem-exc-closed-localization`.
 -/
 
 @[expose] public section
@@ -34,9 +48,9 @@ namespace ProEtale
 
 variable {X Z : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i]
 
-/-- Blueprint `def-exc-closed-site-lift`, `lem-exc-closed-site-adjunction`: let `U ⊆ X` be an
-affine open and `T` an affine weakly étale `Z`-scheme over `Z ∩ U` whose ring is ind-étale over
-`Γ(Z ∩ U)`. Then `Y = Spec H_A(Γ(T))`, with `A = Γ(U)`, is a pro-affine-étale `X`-scheme whose
+/-- A local form of blueprint `def-exc-closed-site-lift` and `lem-exc-closed-site-adjunction`:
+let `U ⊆ X` be an affine open and `T` an affine weakly étale `Z`-scheme over `Z ∩ U` whose ring
+is ind-étale over `Γ(Z ∩ U)`. Then `Y = Spec H_A(Γ(T))`, with `A = Γ(U)`, is a pro-affine-étale `X`-scheme whose
 base change to `Z` is `T`, and every morphism `T ⟶ W ×_X Z` to the base change of an affine
 `X`-scheme `W` over `U` with ind-étale ring comes from a morphism `Y ⟶ W`. -/
 theorem exists_closedSiteLift (U : X.affineOpens) (T : Z.ProEt) [IsAffine T.left]
@@ -201,7 +215,7 @@ lemma coverByImage_closedBaseChange_mem (c : Z.AffineProEt) :
   obtain ⟨Y, e, -⟩ := exists_closedSiteLift i U' (ProEt.ofOpenImmersion T (V p).ι) t ht hind
   exact ⟨⟨Y, e.inv, e.hom ≫ ProEt.ofOpenImmersionHom T (V p).ι, by simp⟩⟩
 
-/-- Blueprint `lem-exc-closed-site-adjunction`, the covering half: base change from the affine
+/-- The covering half of blueprint `lem-exc-closed-site-adjunction`: base change from the affine
 pro-étale site of `X` to the pro-étale site of `Z` is cover dense. -/
 instance isCoverDense_closedBaseChange :
     (closedBaseChange i).IsCoverDense (ProEt.topology Z) where
@@ -300,7 +314,7 @@ lemma closedBaseChange_functorPushforward_imageSieve {Y₁ Y₂ : X.AffineProEt}
       Category.assoc, hφ₁, Iso.inv_hom_id_assoc]
     rfl
 
-/-- Blueprint `lem-exc-closed-site-adjunction`, the morphism half: base change from the affine
+/-- The morphism half of blueprint `lem-exc-closed-site-adjunction`: base change from the affine
 pro-étale site of `X` to the pro-étale site of `Z` is locally full. A morphism
 `f : Y₁ ×_X Z ⟶ Y₂ ×_X Z` is, near every point, the base change of a morphism out of a lift
 `Spec H_A(C̄)` of a small affine open `Spec C̄` of `Y₁ ×_X Z`
@@ -339,6 +353,8 @@ instance isLocallyFull_closedBaseChange :
         closedBaseChange_functorPushforward_imageSieve i f ⟨U p, hU p⟩ (W₁ p) (hW₁ p) (hW₁U p)
           (W₂ p) (hW₂ p) (hW₂U p) (V p) (hV p) (hVW p)
 
+/-- Base change from the affine pro-étale site of `X` to the pro-étale site of `Z` is continuous,
+as the composite of the inclusion of the affine site and base change. -/
 instance isContinuous_closedBaseChange :
     (closedBaseChange i).IsContinuous (AffineProEt.topology X) (ProEt.topology Z) :=
   have := Scheme.ProEt.isContinuous_overPullback i
@@ -349,6 +365,9 @@ section FullyFaithful
 
 variable (A : Type*) [Category.{u + 1} A]
 
+/-- The pushforward along a closed immersion is full on pro-étale sheaves with values in any
+category: restricted to the affine pro-étale site of `X`, it is the pushforward along the cover
+dense and locally full functor `AlgebraicGeometry.ProEtale.closedBaseChange`. -/
 instance full_lowerStar_of_isClosedImmersion : ((i)_*[A]).Full := by
   have : ((i)_*[A] ⋙ (AffineProEt.toProEt X).sheafPushforwardContinuous A
       (AffineProEt.topology X) (ProEt.topology X)).Full :=
@@ -358,6 +377,8 @@ instance full_lowerStar_of_isClosedImmersion : ((i)_*[A]).Full := by
     ((AffineProEt.toProEt X).sheafPushforwardContinuous A (AffineProEt.topology X)
       (ProEt.topology X))
 
+/-- The pushforward along a closed immersion is faithful on pro-étale sheaves with values in any
+category (see `AlgebraicGeometry.ProEtale.full_lowerStar_of_isClosedImmersion`). -/
 instance faithful_lowerStar_of_isClosedImmersion : ((i)_*[A]).Faithful := by
   have : ((i)_*[A] ⋙ (AffineProEt.toProEt X).sheafPushforwardContinuous A
       (AffineProEt.topology X) (ProEt.topology X)).Faithful :=
