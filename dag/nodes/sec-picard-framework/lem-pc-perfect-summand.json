@@ -126,5 +126,23 @@
   "group": "C1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-psm2850 (reviewer sub-agent of L); spot-checked: Return of R-psm2744 repaired along 08CS route: Step1 cites existing lem-pc-perfect-pseudo-coherent-locally-finite-tor (08CQ (1)=>(2), no duplicate added); Step2 new node lem-pc-pseudo-coherent-summand states 08CE pseudo-coherent case exactly (scheme specialization), no other 08CE node on sheaf-dag, not class b/c/d (08CE proof uses cone lemma + induction), searches recorded; Step3 08CK elementary (tensor/H^i additive on the open U), naming its tag is allowed, so preflight note is fine; Step4 hypotheses of lem-pc-pseudo-coherent-finite-tor-perfect with S=U met (pseudo-coherence restricts by local def), locality by def-pc-perfect-complex. Statement matches lem-pc-perfect-thick-closure (2) (C4). No fault missed by the second reading."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.PerfectSummand",
+  "declaration": "AlgebraicGeometry.Scheme.perfect_of_directSum",
+  "file": "lean/Sheaf/AlgebraicGeometry/PerfectSummand.lean",
+  "statement": "theorem perfect_of_directSum (X : Scheme.{u}) [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] [∀ U : X.Opens, HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))] (K L M : schemeDerivedCategory X) (h : Nonempty (K ≅ L ⊞ M)) (hK : IsPerfect X K) : IsPerfect X L ∧ IsPerfect X M",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-psm1452",
+  "group": "K1",
+  "result": "pass",
+  "note": "X:Scheme.{u}=def-pc-scheme; two HasDerivedCategory.{w} binders exactly IsPerfect's (M1 shape); K L M : schemeDerivedCategory X; h : Nonempty (K ≅ L ⊞ M) word for word as E1 39f1ca604 pseudo-coherent-summand (M universally bound = 'for some M' in hypothesis); hK : IsPerfect X K; conclusion IsPerfect X L ∧ IsPerfect X M (both clauses); #check resolves IsPerfect to AlgebraicGeometry.Scheme.IsPerfect; no new defs, no let/show, no statement change; zero summands covered"
  }
 }
