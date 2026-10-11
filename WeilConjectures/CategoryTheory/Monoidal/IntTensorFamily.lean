@@ -111,7 +111,40 @@ noncomputable def map (F : C ⥤ D) [F.OplaxMonoidal] [IsIso (η F)]
       reassoc_of% ha, ← MonoidalCategory.whiskerLeft_comp_assoc,
       IsIso.hom_inv_id, MonoidalCategory.whiskerLeft_id, Category.id_comp,
       δ_natural_right_assoc, IsIso.hom_inv_id_assoc]
-    simp only [Functor.map_comp, eqToHom_map, Category.assoc]
+    simp only [Functor.map_comp, eqToHom_map]
+
+variable {E : Type u₃} [Category.{v₃} E] [MonoidalCategory E]
+
+/-- An isomorphism `c : H ≅ A ⋙ B` of functors with invertible oplax monoidal structures which is
+compatible with the comonoidal structures is compatible with the images of a coherent family:
+```
+B(A(P a) ⊗ A(P b)) ───B(addIso)───▶ B(A(P (a + b))) ───c⁻¹───▶ H(P (a + b))
+        │                                                          ‖
+        δ                                                          ‖
+        ▼                                                          ‖
+B(A(P a)) ⊗ B(A(P b)) ──c⁻¹ ⊗ c⁻¹──▶ H(P a) ⊗ H(P b) ──addIso──▶ H(P (a + b))
+``` -/
+lemma map_addIso_comp (A : C ⥤ D) (B : D ⥤ E) (H : C ⥤ E) [A.OplaxMonoidal] [B.OplaxMonoidal]
+    [H.OplaxMonoidal] [IsIso (η A)] [IsIso (η B)] [IsIso (η H)] [∀ X Y, IsIso (δ A X Y)]
+    [∀ X Y, IsIso (δ B X Y)] [∀ X Y, IsIso (δ H X Y)] (c : H ≅ A ⋙ B)
+    (hc : ∀ X Y, δ H X Y ≫ (c.hom.app X ⊗ₘ c.hom.app Y) =
+      c.hom.app (X ⊗ Y) ≫ B.map (δ A X Y) ≫ δ B _ _) (a b : ℤ) :
+    B.map ((P.map A).addIso a b).hom ≫ c.inv.app (P.obj (a + b)) =
+      δ B _ _ ≫ (c.inv.app (P.obj a) ⊗ₘ c.inv.app (P.obj b)) ≫ ((P.map H).addIso a b).hom := by
+  have hn := c.inv.naturality (P.addIso a b).hom
+  dsimp at hn
+  have h' : B.map (inv (δ A (P.obj a) (P.obj b))) ≫ c.inv.app (P.obj a ⊗ P.obj b) =
+      δ B _ _ ≫ (c.inv.app (P.obj a) ⊗ₘ c.inv.app (P.obj b)) ≫ inv (δ H _ _) := by
+    rw [← cancel_mono (δ H _ _), Category.assoc, Category.assoc, Category.assoc,
+      IsIso.inv_hom_id, Category.comp_id, ← cancel_epi (B.map (δ A (P.obj a) (P.obj b))),
+      ← B.map_comp_assoc, IsIso.hom_inv_id, B.map_id, Category.id_comp,
+      ← cancel_mono (c.hom.app (P.obj a) ⊗ₘ c.hom.app (P.obj b)), Category.assoc, hc,
+      Iso.inv_hom_id_app_assoc, Category.assoc, Category.assoc, tensorHom_comp_tensorHom,
+      Iso.inv_hom_id_app, Iso.inv_hom_id_app]
+    simp
+  simp only [map, Iso.trans_hom, Iso.symm_hom, asIso_inv, Functor.mapIso_hom, B.map_comp,
+    Category.assoc]
+  rw [hn, reassoc_of% h']
 
 end IntTensorFamily
 
