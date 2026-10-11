@@ -108,5 +108,23 @@
   "group": "E1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-sak (reviewer sub-agent of L); spot-checked: Source: Stacks coherent.tex Lemma 01XR (lemma-section-affine-open-kills-classes) and Lemma 09MR (lemma-invert-s-cohomology), read in literature/stacks-project; the item statement agrees with 01XR hypothesis by hypothesis (X qc+qs, L invertible, s in Gamma(X,L), X_s affine, F quasi-coherent, p>0, conclusion s^e xi=0); the new node lem-sc-invert-s-cohomology states 09MR with its hypotheses (X qc+qs, F quasi-coherent). Step 1 is carried by lem-sc-invert-s-cohomology (localization iso) and pqf-lem-affine-vanishing (H^p(U,F)=0 for p>0 on any affine open U, applied to U=X_s); step 2 is the definition of a localization (xi/1=0 in the degree-zero part iff s^e xi=0 for some e), elementary. No Mathlib leaf; no blueprint node found by blueprint_refs.py search (localization graded cohomology section; invert s cohomology); no slopmaster2 declaration for 09MR/01XR. Small case: X=P^1, L=O(1), s=x_0, X_s=A^1, H^1(P^1,O(-2))=k is killed by s since H^1(O(-1))=0. FIX more, RETURN less: dag/nodes/sec-curve-estimates/lem-sc-invert-s-cohomology.json: statement: (B3) X_s and L^{tensor n} for n>=0 now cited to def-weil-pbc-ample-invertible-module, L^{tensor n} for n<0 defined as a power of the dual of def-sc-invertible-module, quasi-compact cited to def-weil-pbc-quasi-compact-scheme (both added to stmt_deps); formula: the source of the map is now the degree-zero part H_*^p(X,L,F)_{(s)} of the localization (fractions xi/s^n with xi of degree n), as in 09MR, since the map xi/s^n -> s^{-n}xi is defined only there; created: by/date added; lean_audit: none/none added. Start 2026-10-10 Sat Oct 10 03:39:15 PM UTC 2026, end Sat Oct 10 03:40:25 PM UTC 2026.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SectionAffineOpenKillsCohomology",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_tensorPowSection_cohomology_eq_zero",
+  "file": "lean/Sheaf/AlgebraicGeometry/SectionAffineOpenKillsCohomology.lean",
+  "statement": "theorem exists_tensorPowSection_cohomology_eq_zero (X : Scheme.{u}) [CompactSpace X] [QuasiSeparatedSpace X] (L : X.Modules) [L.IsInvertible] (s : Γ(L, ⊤)) (U : X.Opens) (hU : (U : Set X) = nonvanishingLocus L s) (hAffine : IsAffineOpen U) (F : X.Modules) [F.IsQuasicoherent] (p : ℕ) (hp : 0 < p) (xi : (RingedSpace.moduleCohomology X.toRingedSpace p).obj F) : ∃ e : ℕ, (RingedSpace.moduleCohomology X.toRingedSpace p).map ((ρ_ F).inv ≫ F ◁ tensorPowSection (homOfGlobalSection L s) e) xi = 0",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "H1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }
