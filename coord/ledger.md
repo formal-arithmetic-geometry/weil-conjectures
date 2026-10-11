@@ -5160,3 +5160,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 15:11 L: merged deliver/E1/lem-weil-pbc-tor-one-surjective-change-rings (stage 2; reviewer PASS; first push; Sheaf.Algebra.TorOneSurjectiveChangeRings CategoryTheory.tor_one_change_of_rings_surjective)
 - 15:11 L: merged deliver/V1/lem-pc-kflat-closure (stage 2; reviewer FIX; first push; Sheaf.Algebra.Homology.KFlatTelescopeClosure CochainComplex.kFlat_closure; reverted nodes: def-pc-flat-sheaf-modules)
 - 15:11 L: merged deliver/E1/lem-weil-pbc-unramified-base-change-open (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.Morphisms.UnramifiedBaseChangeOpen AlgebraicGeometry.unramified_baseChange_restrict_open)
+- 15:12 L: merged deliver/F1/lem-exc-coinduced-homotopy-continuous (stage 2; reviewer PASS; first push; Sheaf.RepresentationTheory.CoinducedHomotopyContinuous Rep.exists_coinduced_continuous_contraction)

@@ -102,5 +102,23 @@
   "group": "E1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-chc (reviewer sub-agent of L); spot-checked: Source: Stacks Tag 0DVG (etale-cohomology-section-continuous-group-cohomology); the contraction itself is agent-written (proof_origin by agent), and the statement is unchanged from sheaf-dag, matching the clause the parent lem-exc-coinduced-continuous-acyclic cites (h_n(F)(g)(x)=F(x,g)(1) is a continuous (n-1)-cochain). Only the item's node and the report changed; the diff touches only split fields (proof, proof_deps, status, split_report); no new nodes. Step 1 takes the setup (profinite G, discrete M with open stabilizers; D(M)=Cont(G,M) discrete, pointwise A-module, action f(xh)) from the statements of lem-exc-discrete-modules-abelian and lem-exc-coinduced-discrete-embedding, which say exactly that; A-linearity of evaluation at 1 and substitution is elementary. Step 2 checked: (x,g)->F(x,g)(1) is continuous into discrete M (evaluation at 1 is continuous because D(M) is discrete), so each h_n(F)(g) lies in Cont(G,M); the tube-lemma argument (finite subcover of compact G, intersection of the V_{x_i}) gives F(x',g')(1)=F(x_i,g)(1)=F(x',g)(1) for g' near g, so h_n(F) is locally constant into discrete D(M). Small cases: n=1 (G^0 a point, h_1(F)=x->F(x)(1) continuous), G trivial. No Mathlib leaf; no tool_uses. Remark: the report lists a citations.json that is not on the branch (harmless). Start Sat Oct 10 03:13:48 PM UTC 2026, end Sat Oct 10 03:14:05 PM UTC 2026."
+ },
+ "lean": {
+  "module": "Sheaf.RepresentationTheory.CoinducedHomotopyContinuous",
+  "declaration": "Rep.exists_coinduced_continuous_contraction",
+  "file": "lean/Sheaf/RepresentationTheory/CoinducedHomotopyContinuous.lean",
+  "statement": "theorem exists_coinduced_continuous_contraction (G : Type u) [TopologicalSpace G] [Group G] [IsTopologicalGroup G] [CompactSpace G] [T2Space G] [TotallyDisconnectedSpace G] (A : Type v) [Ring A] [Finite A] (M : DiscreteContinuousRep.{v, u, w} A G) (n : ℕ) : ∃ h : LocallyConstant (Fin (n + 1) → G) (LocallyConstant G M.obj.V) →ₗ[A] LocallyConstant (Fin n → G) (LocallyConstant G M.obj.V), ∀ (F : LocallyConstant (Fin (n + 1) → G) (LocallyConstant G M.obj.V)) (g : Fin n → G) (x : G), h F g x = F (Fin.cons x g) 1",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "F1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }
