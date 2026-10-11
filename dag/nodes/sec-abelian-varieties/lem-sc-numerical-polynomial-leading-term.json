@@ -186,5 +186,24 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-npl2601 (reviewer sub-agent of L); spot-checked: Read packet whole; checked Tag 0BEN steps 1-5 against cited statements, citer lem-sc-top-dimensional-reduction-intersection, Mathlib grep for 00L5 (no match), no duplicate node for 00L5. FIX more, RETURN less: (1) C4/E7: the second reading dropped 'each m_i is a positive integer' from the item statement, but the citer lem-sc-top-dimensional-reduction-intersection step 2 cites exactly that (proof step 5 still proves it); restored it, and restored the d=0 zero-polynomial clause the citer needs when dim Z=0. (2) B3: new node lem-sc-generic-stalk-finite-length cited Tag 00IY (dimension-is-length); corrected source to Tag 00L5 (algebra-lemma-support-point) and recorded a Mathlib grep search.; 2 file(s) fixed by the reviewer"
  },
- "lead_note": "2026-10-10 L (R-npl2601): No numerical-polynomial definition node exists; the item (like lem-sc-snapper-numerical-polynomial) uses the term uncited."
+ "lead_note": "2026-10-10 L (R-npl2601): No numerical-polynomial definition node exists; the item (like lem-sc-snapper-numerical-polynomial) uses the term uncited.",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.NumericalPolynomialLeadingTerm",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.numericalPolynomial_leadingTerm",
+  "file": "lean/Sheaf/AlgebraicGeometry/NumericalPolynomialLeadingTerm.lean",
+  "statement": "theorem numericalPolynomial_leadingTerm (k : Type u) [Field k] (X : Scheme.{u}) [X.Over (Spec (.of k))] [IsProper (X ↘ Spec (.of k))] (F : X.Modules) (hF : RingedSpace.IsCoherent X.toRingedSpace F) (r : ℕ) (L : Fin r → X.Modules) [∀ i : Fin r, (L i).IsInvertible] (S : Set X) (hS : S = {x : X | ¬ Subsingleton ↑(TopCat.Presheaf.stalk F.val.presheaf x)}) (d : WithBot ℕ∞) (hd : d = topologicalKrullDim S) (s : ℕ) (components : Fin s ≃ {C : Set S // C ∈ irreducibleComponents S ∧ topologicalKrullDim C = d}) (Z : Fin s → Scheme.{u}) [∀ i, IsIntegral (Z i)] (ι : ∀ i, Z i ⟶ X) [∀ i, IsClosedImmersion (ι i)] (hι : ∀ i, Set.range (ι i) = Subtype.val '' (components i).val) (ξ : Fin s → X) (hξ : ∀ i, IsGenericPoint (ξ i) (Set.range (ι i))) : ∃ m : Fin s → ℕ, (∀ i, Module.length (X.presheaf.stalk (ξ i)) (F.presheaf.stalk (ξ i)) = (m i : ℕ∞) ∧ 0 < m i) ∧ ∃ P : MvPolynomial (Fin r) ℚ, (P = 0 ∨ ((P.totalDegree : ℕ∞) : WithBot ℕ∞) < d) ∧ ∀ n : Fin r → ℤ, MvPolynomial.eval (fun i => (n i : ℚ)) P = (((List.ofFn fun i : Fin r => if 0 ≤ n i then (L i).tensorPow (n i).toNat else (L i).dual.tensorPow (-n i).toNat).foldl (fun M N : X.Modules => M ⊗ N) F).eulerChar k : ℚ) - ∑ i : Fin s, (m i : ℚ) * (((List.ofFn fun j : Fin r => if 0 ≤ n j then (L j).tensorPow (n j).toNat else (L j).dual.tensorPow (-n j).toNat).foldl (fun M N : X.Modules => M ⊗ N) ((pushforward (ι i)).obj (SheafOfModules.unit _))).eulerChar k : ℚ)",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-npl1209"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-npl1209",
+  "group": "J1",
+  "result": "fix",
+  "note": "Read packet whole and Tag 0BEN; matched k, proper X/k, coherent F, invertible L_1..L_r, Supp F (nonzero stalks, H1's form), d=dim Supp in WithBot ENat, Fin s equiv onto exactly the d-dim irreducible components, integral closed immersions with those ranges, generic points, m_i = length and 0 < m_i, the multi-twist chi difference with iota_* O_Z on X; FIX (H4/H12): restated the twist and conclusion in H1's landed form (List.ofFn/if fold with dual.tensorPow, eulerChar cast to Q = MvPolynomial.eval, P = 0 or totalDegree < d, so zero at d = 0) and dropped the duplicate definition nodes def-sc-multi-tensor-twist and def-sc-numerical-polynomial-degree-lt with their modules; support set in H1's form; compiled with #check and IsIntegral resolves to AlgebraicGeometry.IsIntegral; dropped duplicate new node(s) def-sc-multi-tensor-twist, def-sc-numerical-polynomial-degree-lt (--drop-nodes; not merged, the item points at the landed declaration); left out new module(s) lean/Sheaf/AlgebraicGeometry/MultiTensorTwist.lean, lean/Sheaf/AlgebraicGeometry/NumericalPolynomialDegreeLT.lean (--drop-files, or a record fixed to existing: true)"
+ }
 }
