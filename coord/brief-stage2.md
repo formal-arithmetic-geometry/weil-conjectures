@@ -13,11 +13,17 @@ Written by the lead (rules: decision of the human, 2026-10-11). Your prompt name
 
 ## 1. Your item
 
-One DAG node that a target reaches, split in stage 1, with no Lean declaration yet, whose `stmt_deps` all have a recorded `lean` or are Mathlib leaves. You write ONE module `lean/Sheaf/<Topic>/<Name>.lean`: the definition (definition node) or the statement with `sorry` as its proof (statement node). Nothing else is proved in it.
+One DAG node that a target reaches, split in stage 1, with no Lean declaration yet, whose `stmt_deps` all have a recorded `lean` or are Mathlib leaves. You write its module `lean/Sheaf/<Topic>/<Name>.lean`: the definition (definition node) or the statement with `sorry` as its proof (statement node). Nothing else is proved in it.
 
 **One definition per notion.** Before writing, search whether Mathlib or the source repository (`~/weil-conjectures-slopmaster2/WeilConjectures/`) already defines the notion or states the statement: three kinds of search as in stage 1 (`coord/brief-stage1.md` §5: LeanSearch; Loogle or LeanFinder; grep of Mathlib and of `WeilConjectures/`), and the source's names in `dag/lean_names_upstream.json` (`tools/lean_names_upstream.py show`; `grep -rn "<id>" ~/weil-conjectures-slopmaster2/WeilConjectures`). If one exists and says exactly what the node says, record it as the node's `lean` with `"existing": true` and write no file.
 
-Claim with `tools/claim.py next <G> --stage 2` (nearest to Mathlib first). If a dependency's record is wrong (the recorded declaration does not exist, or does not say what the dependency node says), release: `tools/claim.py release <G> <item> "abandon: dependency <node>: <what is wrong>"`, and report it.
+Claim with `tools/claim.py next <G> --stage 2` (nearest to Mathlib first).
+
+**You add what is missing (STAGE 2 EXTRA NODES, decision of the human, 2026-10-11 05:55 UTC; `coord/STATE.md`).** You do not abandon for a missing or unusable dependency:
+
+- **(A) A missing notion** (the statement needs a notion that no node, no Mathlib declaration and no source declaration gives): add a NEW DEFINITION NODE in the same delivery, `dag/nodes/<chapter of the item>/<id>.json` with the fields of §5, with its own module (or an `existing: true` record when Mathlib or the source has the notion and no DAG node carries it), and cite it from the item: the item's `stmt_deps` gains its id (the one other field of the item you may change). Search first (three kinds) that the notion is not already a node (`tools/blueprint_refs.py search`, grep of `dag/nodes`), not in Mathlib, not in the source.
+- **(B) An unusable dependency** (a node in the item's `stmt_deps` whose recorded declaration or `mathlib_match` does not give the notion as the node states it, e.g. the general notion where the node means a specialization): write, in the same delivery, a module stating the dependency node's notion as the node says it, and set that dependency node's `lean` to its record with a `note` saying why the old record was unusable; nothing else of the dependency node changes (its `mathlib_match` stays).
+- **(C) Abandon only** when the item's own statement is wrong or cannot be typed even with (A) and (B): `tools/claim.py release <G> <item> "abandon: <the precise reason>"`, and report it.
 
 ## 2. The statement says exactly what the node says
 
@@ -44,24 +50,44 @@ You have no compiled Lean. Compile on the server:
 `ssh <server> 'cd ~/weil-conjectures-sheaf && tools/compile_remote.sh <G> <item>' < <file>.lean`
 (120 s limit; prints the errors; compiled against the last green global build plus your group's landed modules). Compile until the file is clean: no error, no warning (fix unused variables). A declaration you can read in `lean/` but that does not compile for you has landed since the last green build: wait, do not write it again. A timeout is a fault of a definition, not of the limit.
 
-## 5. The node record
+## 5. The node records
 
-The delivery changes the node file ONLY in the field `lean`:
+The delivery changes the item's node file ONLY in the field `lean` (and in `stmt_deps`, only by adding the new definition nodes of (A)):
 
 ```
 "lean": {"module": "Sheaf.<Topic>.<Name>", "declaration": "<full name>",
          "declarations": [...] (optional, when several), "file": "lean/Sheaf/<Topic>/<Name>.lean" (absent when existing),
          "statement": "<signature verbatim from the file, from the keyword to := or where>",
-         "branch": "sheaf-dag" | "mathlib" | "slopmaster2", "by": "<G>", "date": "<date -u>", "existing": true|false}
+         "branch": "sheaf-dag" | "mathlib" | "slopmaster2", "by": "<G>", "date": "<date -u>", "existing": true|false,
+         "note": "<free text>" (optional)}
 ```
 
-Nothing else changes: `status` stays `split`; no new nodes in stage 2; keep the JSON layout (`indent=1`, `ensure_ascii=False`, final newline).
+`status` stays `split`; keep the JSON layout (`indent=1`, `ensure_ascii=False`, final newline).
+
+**A dependency node of (B)** changes ONLY in `lean`: the record above for its module (`existing: false`, `by` = your group), with `note` required (why the recorded declaration or `mathlib_match` was unusable, what the module states). Its `mathlib_match` and every other field stay.
+
+**A new definition node of (A)** is written whole, with exactly these fields (the preflight checks each):
+
+- `id` = file name, `def-<chapter prefix>-<short-name>`, not existing on `sheaf-dag`; the file in the item's chapter directory;
+- `kind`: `"definition"`; `title`; `status`: `"split"`;
+- `statement`: self-contained TeX introducing its own objects and citing as `[id]` the definition node of every notion it is built from; `stmt_deps`: exactly the cited ids (existing nodes or other new nodes of the delivery);
+- `source`: `{document, place}` (the Stacks tag and label, or the document in `literature/`);
+- `proof`: `[]`, `proof_deps`: `[]`, `proof_origin`: `null`; `mathlib_match`: `null`;
+- `mathlib_searches`: at least the three kinds (LeanSearch; Loogle or LeanFinder; grep of Mathlib, of the source repository and of `lean/Sheaf`), each `{tool, query, results, date, verdict}`;
+- `created`: `{by: "worker", item: <the item>, date, group: <G>}`;
+- `blueprint`: `{is: null, from: {node: <python3 tools/blueprint_refs.py ancestor <item>>, place: <the place in that blueprint proof the notion serves>, via: <the item's via with the item in front>}, same_as: [...]}`;
+- `lean_audit`: `{"master": {"state": "none"}, "slopmaster2": {"state": "none"}}`; `chapter`, `unit`: the item's;
+- `lean`: the record above for its module (`existing: false`), or an existing declaration (`existing: true`, no module).
+
+No other field (`reviewed`, `reviewed_lean`, notes): the merge sets `reviewed` and `reviewed_lean`. The new node must be cited by the item (its `stmt_deps`), directly or through another new node.
 
 ## 6. Delivering
 
-One commit on top of `sheaf-dag` with exactly three files: the module, the node file, the report `coord/reports/<G>/<item>.md` (for `existing: true` only the node and the report). The report has:
+One commit on top of `sheaf-dag` with: the item's module and node file; for each new definition node (A) its node file and its module (none when `existing: true`); for each dependency module (B) the dependency node file and the module; the report `coord/reports/<G>/<item>.md` (for an item with `existing: true` and nothing else, only the node and the report). Every module is the `lean.file` of exactly one of these nodes, and its declarations carry `(blueprint: <that node's id>)`. The report has:
 
 - `## Worker report`: what the module defines or states; for each hypothesis and each clause of the node's statement, the Lean that renders it; the dependency declarations used (module, name); the edge cases checked; the searches for an existing definition (tool, query, result); `STATEMENT-DISPUTED:` or node faults, if any.
-- `## Second reading by <G>`: an independent reading by another worker of the group, with the node and the file open, answering above all: does the Lean say exactly what the node says? Name each mismatch found and what changed.
+- `## Second reading by <G>`: an independent reading by another worker of the group, with the node and the file open, answering above all: does the Lean say exactly what the node says? Name each mismatch found and what changed. It reads the new nodes and dependency modules too.
+- `## New nodes` (when there are new nodes): one paragraph per new node, naming its id: its statement, its source, its searches and why it is not an existing node or declaration.
+- `## Dependency modules` (when there are dependency modules): one paragraph per dependency node, naming its id: why its record was unusable, what the module states.
 
-Before pushing: `python3 tools/preflight_delivery.py <G> <item> --stage 2` (shape, record, docstrings, line width, sorry-only proofs) until it passes, and a clean compile on the server. Push to `deliver/<G>/<item>` as in stage 1 (`coord/delivery-errors.md` A1: one commit, based on `sheaf-dag`, never on another delivery). The lead's reviewer checks the statement against the node, compiles and lands the file with `tools/land.sh`; returns go to `coord/returns/<G>.md`, and are repaired point by point (section G of that file).
+Before pushing: `python3 tools/preflight_delivery.py <G> <item> --stage 2` (shape, records, the new nodes' fields, docstrings, line width, sorry-only proofs) until it passes, and a clean compile on the server of each module. A module that imports another module of the same delivery cannot compile on the server before that one has landed (the preflight and the packet print `compile: deferred`; the merge lands the modules in dependency order): compile it as one temporary file, the sibling's body followed by the module's body without the sibling import, under a scratch name (`tools/compile_remote.sh <G> <item>-check`). Push to `deliver/<G>/<item>` as in stage 1 (`coord/delivery-errors.md` A1: one commit, based on `sheaf-dag`, never on another delivery). The lead's reviewer checks the statements against the nodes, reads each new node against its source, compiles and lands the modules with `tools/land.sh`; returns go to `coord/returns/<G>.md`, and are repaired point by point (section G of that file).

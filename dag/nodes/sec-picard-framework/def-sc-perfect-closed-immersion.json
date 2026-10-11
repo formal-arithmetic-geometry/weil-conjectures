@@ -82,5 +82,23 @@
   "group": "C1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-pci1906 (reviewer sub-agent of L); spot-checked: Definition checked against Stacks 0687 (perfect morphism) and 068Y (with n=0, A->A/I perfect iff A/I has finite resolution by finite projective A-modules, i.e. a perfect A-module); covering-existential form agrees since perfectness is local; finite-free refinement elementary (finite projectives are locally free on standard opens, localization exact). Notion is precise via resolutions, not via undefined pseudo-coherent/finite Tor dimension. stmt_deps exist and define the terms. Duplicate check: grep dag/nodes for perfect morphism / finite Tor dimension: no other definition node; lem-sc-smooth-proper-tensor-* and diagonal-tensor-formula state 'perfect' inline (finite Tor dimension / i_*O_Z locally perfect), not as nodes; no cycle (only user lem-sc-koszul-regular-closed-immersion-perfect, which cites this as conclusion). No faults; no repairs."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.PerfectClosedImmersion",
+  "declaration": "AlgebraicGeometry.IsPerfectClosedImmersion",
+  "file": "lean/Sheaf/AlgebraicGeometry/PerfectClosedImmersion.lean",
+  "statement": "def IsPerfectClosedImmersion {Z Y : Scheme.{u}} (i : Z ⟶ Y) [IsClosedImmersion i] : Prop",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-pci0632",
+  "group": "C1",
+  "result": "pass",
+  "note": "Z Y : Scheme.{u}, i, [IsClosedImmersion i] = node's closed immersion; ∀ x ∃ affine open U = affine open covering with A = Γ(Y,U); ideal I with iso e : i⁻¹U ≅ Spec(A/I) and i∣_U ≫ U.toSpecΓ = e.hom ≫ Spec.map(mk I) = i^{-1}(U)=Spec(A/I) over U; ProjectiveResolution of A/I in ModuleCat A with each term Module.Finite and Module.Projective and IsZero for n ≥ N = bounded finite projective resolution; edge cases empty Y, I = A, N = 0 fine; universe u explicit; header, blueprint tag, lines ≤ 100, no sorry; recompiled clean"
  }
 }
