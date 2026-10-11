@@ -189,5 +189,23 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.Topology.FilteredInjectiveCechAcyclic",
+  "declaration": "CategoryTheory.Sheaf.topological_filtered_injective_cech_acyclic",
+  "file": "lean/Sheaf/Topology/FilteredInjectiveCechAcyclic.lean",
+  "statement": "theorem topological_filtered_injective_cech_acyclic {X : Type u} [TopologicalSpace X] [HasSheafify (Opens.grothendieckTopology X) AddCommGrpCat.{u}] [HasExt.{v} (Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u})] (hbasis : TopologicalSpace.Opens.IsBasis {U : TopologicalSpace.Opens X | IsCompact (U : Set X)}) (hpairs : ∀ U V : TopologicalSpace.Opens X, IsCompact (U : Set X) → IsCompact (V : Set X) → IsCompact ((U ⊓ V : TopologicalSpace.Opens X) : Set X)) {I : Type w} [Preorder I] [Nonempty I] [IsDirected I (· ≤ ·)] (F : Discrete I ⥤ Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}) [HasColimit F] (hI : ∀ i : I, Injective (F.obj (Discrete.mk i))) : (∀ (U : TopologicalSpace.Opens X), IsCompact (U : Set X) → ∀ (T : Type u) [Finite T] (f : T → TopologicalSpace.Opens X) (hom : ∀ t, f t ⟶ U) (hcompact : ∀ t, IsCompact ((f t : TopologicalSpace.Opens X) : Set X)) (hcover : Presieve.ofArrows f hom ∈ (Opens.pretopology X).toPrecoverage U) (S : SiteCechComplex f hom), ∀ p : ℕ, 0 < p → IsZero ((S.cohomologyFunctor p).obj (colimit F).obj)) ∧ (∀ (U : TopologicalSpace.Opens X), IsCompact (U : Set X) → ∀ q : ℕ, 0 < q → IsZero (H' (colimit F) q U))",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-12",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "F1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }
