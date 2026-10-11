@@ -248,10 +248,12 @@ def mulOfCommute (T H : Subgroup (GL n k)) (hTH : ∀ t ∈ T, ∀ h ∈ H, h * 
     rw [mul_inv_rev]
     exact (hTH _ (T.inv_mem ht) _ (H.inv_mem hh)).symm
 
+omit [IsAlgClosed k] [CharZero k] in
 theorem mem_mulOfCommute {T H : Subgroup (GL n k)} {hTH : ∀ t ∈ T, ∀ h ∈ H, h * t = t * h}
     {g : GL n k} : g ∈ mulOfCommute T H hTH ↔ ∃ t ∈ T, ∃ h ∈ H, t * h = g :=
   Iff.rfl
 
+omit [IsAlgClosed k] [CharZero k] in
 /-- The points of `V(I) × V(J)` with values in a field: a `k`-point of
 `(k[GL_n] ⧸ I) ⊗ (k[GL_n] ⧸ J)` is a pair of points `(t, h)`, and the product of the universal pair
 specializes to `t h`. -/
@@ -291,6 +293,7 @@ theorem exists_comp_evalAlgHom_mul_eq (I J : Ideal (CoordinateRing n k)) [I.IsHo
   · rw [← evalAlgHom_map, map_mul, hχ, map_liftQuotient_inlQuotient,
       map_liftQuotient_inrQuotient]
 
+omit [IsAlgClosed k] [CharZero k] in
 /-- Conversely, a pair of points `(t, h)` of `V(I) × V(J)` specializes the product of the
 universal pair to `t h`. -/
 theorem liftQuotient_comp_evalAlgHom_mul (I J : Ideal (CoordinateRing n k)) [I.IsHopfIdeal k]

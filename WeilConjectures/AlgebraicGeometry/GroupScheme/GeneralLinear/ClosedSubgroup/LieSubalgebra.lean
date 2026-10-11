@@ -117,14 +117,9 @@ is `1 + (uv - vu)`. -/
 theorem one_add_mul_one_add_mul_one_sub_mul_one_sub {A : Type*} [Ring A] {u v : A}
     (hu : u * u = 0) (hv : v * v = 0) (huvu : u * v * u = 0) (hvuv : v * u * v = 0) :
     (1 + u) * (1 + v) * (1 - u) * (1 - v) = 1 + (u * v - v * u) := by
-  have hu' (x : A) : x * u * u = 0 := by rw [mul_assoc, hu, mul_zero]
   have hv' (x : A) : x * v * v = 0 := by rw [mul_assoc, hv, mul_zero]
-  have huvu' (x : A) : x * u * v * u = 0 := by
-    rw [mul_assoc, mul_assoc, ← mul_assoc u, huvu, mul_zero]
-  have hvuv' (x : A) : x * v * u * v = 0 := by
-    rw [mul_assoc, mul_assoc, ← mul_assoc v, hvuv, mul_zero]
-  simp only [mul_add, add_mul, mul_sub, sub_mul, one_mul, mul_one, ← mul_assoc, hu, hv, huvu,
-    hvuv, hu', hv', huvu', hvuv', zero_mul, mul_zero, sub_zero, zero_sub, add_zero, zero_add]
+  simp only [mul_add, add_mul, mul_sub, sub_mul, one_mul, mul_one, hu, hv, huvu, hvuv, hv',
+    add_zero]
   noncomm_ring
 
 variable {k : Type*} [CommRing k] {A : Type*} [CommRing A] [Algebra k A]
@@ -215,8 +210,8 @@ theorem dualNumberLift_mixed_injective :
       inr DualNumber.eps := by
     simp only [DualNumber.eps, inl_mul_inr, smul_eq_mul, mul_one]
   simp only [hm, fst_add, snd_add, fst_smul, snd_smul, fst_inr, snd_inr, smul_zero, add_zero,
-    Algebra.algebraMap_eq_smul_one, fst_one, snd_one, DualNumber.fst_eps, DualNumber.snd_eps,
-    smul_eq_mul, mul_one, fst_zero, snd_zero, zero_add, mul_zero] at h1 h2
+    Algebra.algebraMap_eq_smul_one, fst_one, snd_one, DualNumber.snd_eps,
+    smul_eq_mul, mul_one, fst_zero, snd_zero, zero_add] at h1 h2
   exact ⟨h1, h2⟩
 
 end Commutator

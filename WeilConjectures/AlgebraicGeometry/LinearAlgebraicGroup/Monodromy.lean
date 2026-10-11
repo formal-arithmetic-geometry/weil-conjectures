@@ -904,6 +904,7 @@ theorem surjective_mul_center_geometricMonodromy (hD : D.IsSemisimple) :
   have := D.isSemisimpleRepresentation_standardRepresentation_identityComponent hD
   surjective_mulCenterIdentityComponent _
 
+omit [CharZero k] in
 /-- The `k`-points of the identity component `G°` of the arithmetic monodromy group act
 semisimply on `kⁿ`: this is `isSemisimpleRepresentation_standardRepresentation_identityComponent`
 for the matrices of the points. (blueprint: `sk-i-restriction`) -/

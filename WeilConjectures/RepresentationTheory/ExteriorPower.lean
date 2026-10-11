@@ -21,9 +21,10 @@ $$
 F_j / F_{j+1} \cong \textstyle\bigwedge^j U \otimes \bigwedge^{n-j} (V / U),
 $$
 
-via `u₁ ∧ ⋯ ∧ u_j ⊗ x̄₁ ∧ ⋯ ∧ x̄_l ↦ u₁ ∧ ⋯ ∧ u_j ∧ s(x̄₁) ∧ ⋯ ∧ s(x̄_l)` for a linear section `s` of
-`V → V / U`. When `U` is a subrepresentation, the `F_j` are subrepresentations and these
-isomorphisms are equivariant: changing the section changes the image by an element of `F_{j+1}`.
+via `u₁ ∧ ⋯ ∧ u_j ⊗ x̄₁ ∧ ⋯ ∧ x̄_l ↦ u₁ ∧ ⋯ ∧ u_j ∧ s(x̄₁) ∧ ⋯ ∧ s(x̄_l)` for a linear
+section `s` of `V → V / U`. When `U` is a subrepresentation, the `F_j` are
+subrepresentations and these isomorphisms are equivariant: changing the section changes the
+image by an element of `F_{j+1}`.
 
 ## Main definitions
 
@@ -38,12 +39,12 @@ isomorphisms are equivariant: changing the section changes the image by an eleme
 @[expose] public section
 
 open TensorProduct
-open scoped Classical
 
 namespace exteriorPower
 
 variable {k : Type*} [Field k] {V : Type*} [AddCommGroup V] [Module k V]
 
+open Classical in
 /-- The subspace of `⋀ⁿ V` spanned by the wedges `v₁ ∧ ⋯ ∧ vₙ` with at least `j` of the `vᵢ` in
 the subspace `P`. -/
 noncomputable def countSpan (P : Submodule k V) (n j : ℕ) : Submodule k (⋀[k]^n V) :=
@@ -52,6 +53,7 @@ noncomputable def countSpan (P : Submodule k V) (n j : ℕ) : Submodule k (⋀[k
 
 variable (P : Submodule k V) (n : ℕ)
 
+open Classical in
 theorem ιMulti_mem_countSpan {j : ℕ} (v : Fin n → V)
     (hv : j ≤ (Finset.univ.filter fun i ↦ v i ∈ P).card) : ιMulti k n v ∈ countSpan P n j :=
   Submodule.subset_span ⟨v, hv, rfl⟩
@@ -67,6 +69,7 @@ theorem countSpan_zero : countSpan P n 0 = ⊤ := by
   exact Submodule.span_le.2 fun _ ⟨v, hv⟩ ↦ Submodule.subset_span ⟨v, Nat.zero_le _, hv⟩
 
 theorem countSpan_eq_bot {j : ℕ} (h : n < j) : countSpan P n j = ⊥ := by
+  classical
   refine (Submodule.span_eq_bot).2 fun _ ⟨v, hv, _⟩ ↦ ?_
   have := (Finset.card_filter_le Finset.univ fun i ↦ v i ∈ P).trans_eq (Finset.card_fin n)
   omega
@@ -153,6 +156,7 @@ theorem wedgeSection_tmul_ιMulti {j l : ℕ} (u : Fin j → P) (x : Fin l → V
   rw [wedgeSection, TensorProduct.lift.tmul, LinearMap.compl₁₂_apply, map_apply_ιMulti,
     map_apply_ιMulti, wedge_ιMulti_ιMulti]
 
+open Classical in
 theorem card_le_filter_append {j l : ℕ} (u : Fin j → P) (x : Fin l → V) :
     j ≤ (Finset.univ.filter fun i ↦ Fin.append (P.subtype ∘ u) x i ∈ P).card := by
   calc j = (Finset.univ.map (Fin.castAddEmb l)).card := by simp
@@ -203,6 +207,7 @@ is, modulo `F_{j+1}`, the wedge of these entries with the sections of the classe
 up to a sign. -/
 theorem toGraded_surjective (hs : ∀ x, P.mkQ (s x) = x) {j l : ℕ} (h : j + l = n) :
     Function.Surjective (toGraded n s h) := by
+  classical
   subst h
   intro q
   obtain ⟨⟨z, hz⟩, rfl⟩ := Submodule.Quotient.mk_surjective _ q
@@ -320,3 +325,95 @@ theorem toGraded_bijective [FiniteDimensional k V] (hs : ∀ x, P.mkQ (s x) = x)
 end Graded
 
 end exteriorPower
+
+/-! ### The filtration of the exterior power of a representation -/
+
+namespace Subrepresentation
+
+variable {k : Type*} [Field k] {W : Type*} [Group W] {V : Type*} [AddCommGroup V] [Module k V]
+  {ρ : Representation k W V}
+
+/-- The filtration `F_j = span {v₁ ∧ ⋯ ∧ vₙ | at least j of the vᵢ lie in P}` of `⋀ⁿ V` by
+subrepresentations, for a subrepresentation `P` of `ρ`. -/
+noncomputable def exteriorPowerFiltration (P : Subrepresentation ρ) (n j : ℕ) :
+    Subrepresentation (ρ.exteriorPower n) where
+  toSubmodule := exteriorPower.countSpan P.toSubmodule n j
+  apply_mem_toSubmodule w _ hx :=
+    exteriorPower.map_mem_countSpan _ n (fun _ hy ↦ P.apply_mem_toSubmodule w hy) hx
+
+variable (P : Subrepresentation ρ) (n : ℕ)
+
+theorem exteriorPowerFiltration_succ_le (j : ℕ) :
+    P.exteriorPowerFiltration n (j + 1) ≤ P.exteriorPowerFiltration n j :=
+  exteriorPower.countSpan_succ_le _ n j
+
+theorem exteriorPowerFiltration_zero : P.exteriorPowerFiltration n 0 = ⊤ :=
+  toSubmodule_injective (exteriorPower.countSpan_zero _ n)
+
+theorem exteriorPowerFiltration_eq_bot {j : ℕ} (h : n < j) : P.exteriorPowerFiltration n j = ⊥ :=
+  toSubmodule_injective (exteriorPower.countSpan_eq_bot _ n h)
+
+/-- The quotient map `V → V ⧸ P` intertwines `ρ` with the quotient representation. -/
+theorem quotient_apply_mkQ (w : W) (x : V) :
+    P.quotient w (P.toSubmodule.mkQ x) = P.toSubmodule.mkQ (ρ w x) :=
+  rfl
+
+/-- The map `⋀ʲ P ⊗ ⋀ˡ (V ⧸ P) → F_j ⧸ F_{j+1}` is equivariant: changing `ρ(w) s(x̄)` into
+`s(ρ(w) x̄)` changes the wedge by an element of `F_{j+1}`. -/
+theorem toGraded_comp_map (s : V ⧸ P.toSubmodule →ₗ[k] V) (hs : ∀ x, P.toSubmodule.mkQ (s x) = x)
+    {j l : ℕ} (h : j + l = n) (w : W) :
+    exteriorPower.toGraded n s h ∘ₗ ((P.toRepresentation.exteriorPower j).tprod
+      (P.quotient.exteriorPower l) w) =
+      (P.exteriorPowerFiltration n j).subquotient (P.exteriorPowerFiltration n (j + 1)) w ∘ₗ
+        exteriorPower.toGraded n s h := by
+  subst h
+  refine TensorProduct.ext (exteriorPower.linearMap_ext (AlternatingMap.ext fun u ↦
+    exteriorPower.linearMap_ext (AlternatingMap.ext fun x ↦ ?_)))
+  simp only [LinearMap.compAlternatingMap_apply, Representation.tprod_apply]
+  change Submodule.Quotient.mk _ = Submodule.Quotient.mk _
+  rw [Submodule.Quotient.eq, Submodule.mem_comap]
+  change exteriorPower.wedgeSection (j + l) s rfl
+      (exteriorPower.map j (P.toRepresentation w) (exteriorPower.ιMulti k j u) ⊗ₜ
+        exteriorPower.map l (P.quotient w) (exteriorPower.ιMulti k l x)) -
+      exteriorPower.map (j + l) (ρ w) (exteriorPower.wedgeSection (j + l) s rfl
+        (exteriorPower.ιMulti k j u ⊗ₜ exteriorPower.ιMulti k l x)) ∈ _
+  rw [exteriorPower.map_apply_ιMulti, exteriorPower.map_apply_ιMulti,
+    exteriorPower.wedgeSection_tmul_ιMulti, exteriorPower.wedgeSection_tmul_ιMulti,
+    exteriorPower.map_apply_ιMulti]
+  -- the two wedges differ by vectors of `P` in the last `l` entries
+  set a : Fin (j + l) → V := ρ w ∘ Fin.append (P.toSubmodule.subtype ∘ u) (s ∘ x)
+  set y : Fin (j + l) → V := Fin.append (0 : Fin j → V)
+    (fun b ↦ s (P.quotient w (x b)) - ρ w (s (x b)))
+  have hay : Fin.append (P.toSubmodule.subtype ∘ (P.toRepresentation w ∘ u))
+      (s ∘ (P.quotient w ∘ x)) = a + y := by
+    funext i
+    refine Fin.addCases (fun c ↦ ?_) (fun b ↦ ?_) i
+    · simp [a, y]
+      rfl
+    · simp [a, y]
+  rw [hay]
+  refine exteriorPower.ιMulti_add_sub_ιMulti_mem_countSpan _ _ a y
+    (Finset.univ.map (Fin.castAddEmb l)) (by simp) (fun i hi ↦ ?_) (fun i hi ↦ ?_) fun i ↦ ?_
+  · obtain ⟨c, -, rfl⟩ := Finset.mem_map.1 hi
+    simpa [a] using P.apply_mem_toSubmodule w (u c).2
+  · obtain ⟨c, -, rfl⟩ := Finset.mem_map.1 hi
+    simp [y]
+  · refine Fin.addCases (fun c ↦ ?_) (fun b ↦ ?_) i
+    · simp [y]
+    · simp only [y, Fin.append_right]
+      rw [← Submodule.Quotient.mk_eq_zero, Submodule.Quotient.mk_sub]
+      rw [← Submodule.mkQ_apply, ← Submodule.mkQ_apply, hs, ← quotient_apply_mkQ, hs, sub_self]
+
+/-- **The graded pieces of the exterior power of a representation.** For a subrepresentation `P`
+of a finite-dimensional representation `ρ`, the `j`-th graded piece `F_j ⧸ F_{j+1}` of the
+filtration of `⋀ⁿ V` is equivalent to `⋀ʲ P ⊗ ⋀ˡ (V ⧸ P)`, `j + l = n`.
+(blueprint: `lem-mg-filtered-exterior-power`) -/
+noncomputable def exteriorPowerGradedEquiv [FiniteDimensional k V] {j l : ℕ} (h : j + l = n) :
+    ((P.toRepresentation.exteriorPower j).tprod (P.quotient.exteriorPower l)).Equiv
+      ((P.exteriorPowerFiltration n j).subquotient (P.exteriorPowerFiltration n (j + 1))) :=
+  have hs := P.toSubmodule.mkQ.exists_rightInverse_of_surjective P.toSubmodule.range_mkQ
+  .mk (.ofBijective _ (exteriorPower.toGraded_bijective n (s := hs.choose)
+      (fun x ↦ LinearMap.congr_fun hs.choose_spec x) h))
+    (P.toGraded_comp_map n hs.choose (fun x ↦ LinearMap.congr_fun hs.choose_spec x) h)
+
+end Subrepresentation
