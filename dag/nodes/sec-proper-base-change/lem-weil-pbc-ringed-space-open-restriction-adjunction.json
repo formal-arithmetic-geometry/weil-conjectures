@@ -210,5 +210,25 @@
   "worker": "stage1",
   "summary": "Read Sheaves 0096 (lemma-adjoint-pullback-pushforward-modules) with its proof, 00A0 (lemma-j-pullback), 00A1 (definition-restriction), 0095 (definition-pushforward), 008W (lemma-pushforward-module); tags verified in tags/tags. Statement kept (it is right against 0096 specialized to the open inclusion, where j^*M = j^{-1}M = M|_U because j^{-1}O_X = O_U). Mathlib re-judged with LeanSearch, Loogle, LeanFinder, local_search and grep: no declaration for ringed spaces; the closest are SheafOfModules.pushforwardPushforwardAdj with IsOpenMap.adjunction (needs the ring-map compatibilities H1, H2, about six lines as in Scheme.Modules.restrictAdjunction) and overPushforwardOverAdj composed with sheafOfModulesEquivOver (sections identified only by unfolding); not a leaf by B8, candidate updated. Proof in 6 elementary steps written out directly (Stacks proves 0096 through the tensor-restriction adjunctions, so proof_origin is by agent): (1) restriction is a functor (00A0 (2), coverings of opens of U are coverings in X); (2) j_*G is a sheaf of O_X-modules (direct image of an abelian sheaf, leaf def-weil-pbc-topological-inverse-image (1); module structure through the restriction O_X(V) -> O_X(V∩U), semilinearity checked) and a functor, with the identities (j_*G)(W) = G(W) for W ⊆ U and (j_*G)(V) -> (j_*G)(V∩U) = id; (3) Phi(alpha)_V(s) = alpha_{V∩U}(s|_{V∩U}) is O_X-linear and compatible with restrictions; (4) Psi(beta)_W = beta_W is O_U-linear; (5) Phi, Psi inverse; (6) naturality in both variables, hence the adjunction. No new nodes."
  },
- "reviewed": "pass (L, 2026-10-10): 6 elementary steps, the sectionwise adjunction between restriction to an open and j_* for sheaves of modules; both functors, the two maps, their inverseness and naturality checked. No leaf (B8: Mathlib's pushforwardPushforwardAdj needs ring-map data)."
+ "reviewed": "pass (L, 2026-10-10): 6 elementary steps, the sectionwise adjunction between restriction to an open and j_* for sheaves of modules; both functors, the two maps, their inverseness and naturality checked. No leaf (B8: Mathlib's pushforwardPushforwardAdj needs ring-map data).",
+ "lean": {
+  "module": "Sheaf.Topology.OpenRestrictionAdjunction",
+  "declaration": "TopologicalSpace.Opens.exists_openRestrictionAdjunction",
+  "file": "lean/Sheaf/Topology/OpenRestrictionAdjunction.lean",
+  "statement": "theorem exists_openRestrictionAdjunction (X : RingedSpace.{u}) (U : Opens X) : ∃ adj : SheafOfModules.overFunctor.{w} (moduleRings X) U ⊣ SheafOfModules.pushforward.{w} (SheafOfModules.pushforwardOver (R := moduleRings X) U), (∀ (M : SheafOfModules.{w} (moduleRings X)) (G : SheafOfModules.{w} ((moduleRings X).over U)) (α : M.over U ⟶ G) (V : Opens X) (s : M.val.obj (op V)), ((adj.homEquiv M G) α).val.app (op V) s = α.val.app (op ((Over.star U).obj V)) (M.val.map (prod.snd : U ⨯ V ⟶ V).op s)) ∧ (∀ (M : SheafOfModules.{w} (moduleRings X)) (G : SheafOfModules.{w} ((moduleRings X).over U)) (β : M ⟶ (SheafOfModules.pushforward (SheafOfModules.pushforwardOver U)).obj G) (W : Over U) (s : M.val.obj (op W.left)), ((adj.homEquiv M G).symm β).val.app (op W) s = G.val.map ((Over.forgetAdjStar U).unit.app W).op (β.val.app (op W.left) s))",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-11",
+  "existing": false,
+  "note": "The open subspace is encoded by the equivalent site Over U (opens of X contained in U). The existing overFunctor and pushforward along Over.star give the two sectionwise functors; the theorem specifies both directions of the natural hom-set equivalence, including canonical identification of U ∩ W with W.",
+  "fixed_by": "R-ora"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-ora",
+  "group": "G1",
+  "result": "fix",
+  "note": "X ringed space (moduleRings X per DERIVED RESTRICTION line, was inline sheafCompose on a free TopCat+ring sheaf), U open, restriction overFunctor ⊣ j_* = pushforward (pushforwardOver U); forward formula alpha_{V∩U}(s|_{V∩U}), inverse beta_W via forgetAdjStar unit; node unchanged (no H7); not a duplicate of open_restriction_adjunction_exact (that is j_! ⊣ j⁻¹)"
+ }
 }
