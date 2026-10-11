@@ -1,11 +1,11 @@
 # Work queue
 
-384 items; claim with `tools/claim.py next <group> [--stage N]`.
+380 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (384)
+## Stage 2: nodes to state (380)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -21,7 +21,6 @@
 | `lem-pc-perfect-tensor-hom-duality` | 1 | state |
 | `lem-pc-pseudo-coherent-finite-tor-perfect` | 1 | state |
 | `lem-pc-supported-perfect-generator` | 1 | state |
-| `lem-pc-tor-independent-perfect-pullback-comparison` | 1 | state |
 | `lem-sc-affine-koszul-cech-derived-comparison` | 1 | state |
 | `lem-sc-affine-perfect-koszul-principal-unit` | 1 | state |
 | `lem-sc-affine-perfect-map-lift` | 1 | state |
@@ -41,7 +40,6 @@
 | `lem-sc-p1-serre-section-module-comparison` | 1 | state |
 | `lem-sc-perfect-derived-tensor-perfect` | 1 | state |
 | `lem-sc-perfect-finite-free-residue-model` | 1 | state |
-| `lem-sc-perfect-into-support-on-T` | 1 | state |
 | `lem-sc-picard-kunneth-qcoh` | 1 | state |
 | `lem-sc-pseudo-coherent-support-annihilation` | 1 | state |
 | `lem-sc-valuation-limit-qcoh-section-descent` | 1 | state |
@@ -58,12 +56,10 @@
 | `lem-weil-pbc-quasi-finite-at-point-isolated` | 1 | state |
 | `lem-weil-pbc-quasi-finite-at-prime-principal-localization` | 1 | state |
 | `lem-weil-pbc-quasi-finite-four-rings` | 1 | state |
-| `lem-weil-pbc-quasi-finite-monogenic-integral-closure` | 1 | state |
 | `lem-weil-pbc-quasi-finite-over-polynomial-algebra` | 1 | state |
 | `lem-weil-pbc-quasi-finite-ring-map-integral-closure-open` | 1 | state |
 | `lem-weil-pbc-quotient-base-change-closed-immersion-ideal` | 1 | state |
 | `lem-weil-pbc-quotient-by-power-torsion-no-torsion` | 1 | state |
-| `lem-weil-pbc-radicial-prime-unique-degree-p` | 1 | state |
 | `lem-weil-pbc-reduced-curve-normalization` | 1 | state |
 | `lem-weil-pbc-reduced-induced-closed-subscheme` | 1 | state |
 | `lem-weil-pbc-reduced-noetherian-total-ring-fractions` | 1 | state |
