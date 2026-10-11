@@ -6,7 +6,9 @@ Authors: Claude
 module
 
 public import Mathlib.CategoryTheory.Monoidal.Rigid.Braided
+public import WeilConjectures.CategoryTheory.Monoidal.Instances.DerivedCategoryBraided
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.Basic
+public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.Braided
 public import WeilConjectures.SixFunctors.Etale.Derived.Hom
 
 /-!
@@ -215,6 +217,36 @@ theorem nonempty_iso_derivedHom_derivedTensor
     Nonempty ((RHom(X)[A].obj (op K)).obj M ≅
       ((derivedTensor A X).obj ((coefficientDual A X).obj (op K))).obj M) :=
   (nonempty_iso_coefficientDual_tensor hK M).map Iso.symm
+
+section Biduality
+
+variable (A X)
+
+attribute [local instance] _root_.DerivedCategory.braidedCategory
+
+/-- The coefficient biduality `K ⟶ K^∨∨`, natural in `K`: the double-dual map
+`CategoryTheory.MonoidalClosed.toIhomIhomUnit` of the braided monoidal closed category
+`D(X_ét)`, for the braiding `DerivedCategory.braidedCategory` of the derived tensor product. -/
+noncomputable def coefficientDualDoubleDual :
+    𝟭 _ ⟶ (coefficientDual A X).rightOp ⋙ coefficientDual A X :=
+  MonoidalClosed.toIhomIhomNatTrans (𝟙_ _)
+
+variable {A X}
+
+lemma coefficientDualDoubleDual_app (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) :
+    (coefficientDualDoubleDual A X).app K = MonoidalClosed.toIhomIhomUnit K :=
+  rfl
+
+/-- Blueprint `sk-prop-sf-dualizable-biduality`: Biduality of a perfect complex.
+
+For a dualizable `K` the coefficient biduality `K ⟶ K^∨∨` is an isomorphism. -/
+theorem isIso_coefficientDualDoubleDual_app
+    {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)} (hK : IsDualizable K) :
+    IsIso ((coefficientDualDoubleDual A X).app K) := by
+  obtain ⟨_⟩ := hK
+  exact MonoidalClosed.isIso_toIhomIhomUnit K
+
+end Biduality
 
 end Etale.DerivedCategory
 

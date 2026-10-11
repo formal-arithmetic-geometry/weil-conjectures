@@ -8,6 +8,9 @@ module
 public import WeilConjectures.SixFunctors.Etale.Derived.Perfect
 public import WeilConjectures.AlgebraicGeometry.InvertibleExponent
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperShriek
+public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.Braided
+public import WeilConjectures.CategoryTheory.Monoidal.Instances.DerivedCategoryBraided
+public import WeilConjectures.CategoryTheory.ObjectProperty.Duality
 
 /-!
 
@@ -90,6 +93,42 @@ noncomputable def verdierDual :
     (_root_.DerivedCategory (Sheaf X.smallEtaleTopology A))ᵒᵖ ⥤
       _root_.DerivedCategory (Sheaf X.smallEtaleTopology A) :=
   (RHom(X)[A]).flip.obj (dualizingComplex A a)
+
+/-- The braiding of the derived tensor product on `D(X_ét)`: the braiding of the sheaf category,
+with the Koszul sign rule on complexes, descended along K-flat resolutions
+(`CategoryTheory.DerivedMonoidal.braidedCategory`). It is the symmetry `K ⊗ᴸ M ≅ M ⊗ᴸ K` of
+`AlgebraicGeometry.Etale.nonempty_iso_derivedTensor_flip`, and is used as a local instance. -/
+noncomputable abbrev derivedBraidedCategory (X : Scheme.{u}) :
+    BraidedCategory (_root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) :=
+  _root_.DerivedCategory.braidedCategory _
+
+attribute [local instance] derivedBraidedCategory
+
+/-- Blueprint `lem-weil-duality-pairing`: The duality pairing and the double-dual morphism.
+
+The evaluation `ev_K : K ⊗ᴸ 𝔻_X K ⟶ ω_X` of the internal hom, a pairing natural in `K`. No
+finiteness of `K` or of `𝔻_X K` is needed. -/
+noncomputable def verdierDualEvaluation
+    (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) :
+    K ⊗ (verdierDual A a).obj (op K) ⟶ dualizingComplex A a :=
+  (ihom.ev K).app (dualizingComplex A a)
+
+/-- Blueprint `lem-weil-duality-pairing`: The duality pairing and the double-dual morphism.
+
+The double-dual morphism `δ_K : K ⟶ 𝔻_X 𝔻_X K`, natural in `K`: the transpose of the
+evaluation pairing `AlgebraicGeometry.Etale.verdierDualEvaluation` precomposed with the
+symmetry `𝔻_X K ⊗ᴸ K ≅ K ⊗ᴸ 𝔻_X K` (`AlgebraicGeometry.Etale.verdierDualDoubleDual_app`).
+It is `CategoryTheory.MonoidalClosed.toIhomIhom` for the dualizing complex. -/
+noncomputable def verdierDualDoubleDual :
+    𝟭 _ ⟶ (verdierDual A a).rightOp ⋙ verdierDual A a :=
+  MonoidalClosed.toIhomIhomNatTrans (dualizingComplex A a)
+
+/-- Blueprint `lem-weil-duality-pairing`: the double-dual morphism `δ_K` is the transpose of
+the evaluation `ev_K` composed with the symmetry, `CategoryTheory.MonoidalClosed.toIhomIhom`
+(see `CategoryTheory.MonoidalClosed.uncurry_toIhomIhom`). -/
+lemma verdierDualDoubleDual_app (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) :
+    (verdierDualDoubleDual A a).app K = MonoidalClosed.toIhomIhom (dualizingComplex A a) K :=
+  rfl
 
 section Field
 
