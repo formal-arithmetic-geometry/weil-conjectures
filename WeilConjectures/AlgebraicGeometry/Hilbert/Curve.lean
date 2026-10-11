@@ -994,7 +994,100 @@ theorem exists_transcendental_mem_range_stalk {X : Scheme.{u}} [X.Over (Spec (.o
     ∃ c : X.functionField,
       (letI := (Scheme.functionFieldRingHom k X).toAlgebra; Transcendental k c) ∧
       ∀ x ∈ t, c ∈ Set.range (algebraMap (X.presheaf.stalk x) X.functionField) := by
-  sorry
+  classical
+  let K := X.functionField
+  letI := (Scheme.functionFieldRingHom k X).toAlgebra
+  obtain ⟨a, ha⟩ := Scheme.exists_transcendental_functionField (k := k) x₀ hx₀
+  -- the structure maps `k → 𝒪_{X,x}` and `k → κ(x)`
+  let ι (x : X) : k →+* X.presheaf.stalk x :=
+    (X.presheaf.germ ⊤ x trivial).hom.comp (Scheme.globalSectionsRingHom k (X := X))
+  have hι (x : X) : (algebraMap (X.presheaf.stalk x) K).comp (ι x) =
+      Scheme.functionFieldRingHom k X := by
+    ext r
+    simp only [RingHom.algebraMap_toAlgebra, Scheme.functionFieldRingHom, ι, RingHom.coe_comp,
+      Function.comp_apply]
+    rw [← CommRingCat.comp_apply]
+    erw [TopCat.Presheaf.germ_stalkSpecializes]
+    rfl
+  let ψ (x : X) : k →+* IsLocalRing.ResidueField (X.presheaf.stalk x) :=
+    (IsLocalRing.residue _).comp (ι x)
+  -- the residue of `a` at the points where it is regular
+  let r (x : X) : IsLocalRing.ResidueField (X.presheaf.stalk x) :=
+    if h : IsLocalization.IsInteger (X.presheaf.stalk x) a then IsLocalRing.residue _ h.choose
+    else 0
+  -- a monic polynomial killing the residue, if it is algebraic
+  let g (x : X) : Polynomial k := if h : (ψ x).IsIntegralElem (r x) then h.choose else 1
+  have hg (x : X) : (g x).Monic := by
+    simp only [g]
+    split_ifs with h
+    · exact h.choose_spec.1
+    · exact Polynomial.monic_one
+  let P : Polynomial k := Polynomial.X * ∏ y ∈ t, g y + 1
+  have hPm : P.Monic := by
+    refine (Polynomial.monic_X.mul (Polynomial.monic_prod_of_monic _ _ fun y _ ↦ hg y)).add_of_left
+      ?_
+    have hq := Polynomial.monic_prod_of_monic t g fun y _ ↦ hg y
+    rw [Polynomial.degree_one, Polynomial.degree_mul, Polynomial.degree_X,
+      Polynomial.degree_eq_natDegree hq.ne_zero]
+    norm_cast
+    omega
+  have hPr (x : X) (hx : x ∈ t) : Polynomial.eval₂ (ψ x) (r x) P ≠ 0 := by
+    intro h0
+    by_cases hint : (ψ x).IsIntegralElem (r x)
+    · have hgx : Polynomial.eval₂ (ψ x) (r x) (g x) = 0 := by
+        simp only [g, dif_pos hint]
+        exact hint.choose_spec.2
+      have : Polynomial.eval₂ (ψ x) (r x) (∏ y ∈ t, g y) = 0 := by
+        rw [Polynomial.eval₂_finsetProd]
+        exact Finset.prod_eq_zero hx hgx
+      simp [P, Polynomial.eval₂_add, Polynomial.eval₂_mul, this] at h0
+    · exact hint ⟨P, hPm, h0⟩
+  have hPdeg : P.natDegree ≠ 0 := by
+    have hq := Polynomial.monic_prod_of_monic t g fun y _ ↦ hg y
+    have hdeg : 0 < (Polynomial.X * ∏ y ∈ t, g y).degree := by
+      rw [Polynomial.degree_mul, Polynomial.degree_X, Polynomial.degree_eq_natDegree hq.ne_zero]
+      norm_cast
+      omega
+    have h1 : (1 : Polynomial k).degree < (Polynomial.X * ∏ y ∈ t, g y).degree := by
+      rwa [Polynomial.degree_one]
+    rw [Polynomial.natDegree_add_eq_left_of_degree_lt h1]
+    exact (Polynomial.natDegree_pos_iff_degree_pos.mpr hdeg).ne'
+  have ha0 : a ≠ 0 := fun h ↦ ha (h ▸ isAlgebraic_zero)
+  have hval' (x : X) {v : X.presheaf.stalk x} (hv : IsUnit v) :
+      algebraMap (X.presheaf.stalk x) K ↑hv.unit⁻¹ = (algebraMap (X.presheaf.stalk x) K v)⁻¹ :=
+    eq_inv_of_mul_eq_one_right (by rw [← map_mul, IsUnit.mul_val_inv, map_one])
+  refine ⟨(Polynomial.aeval a P)⁻¹, fun hc ↦ ha ?_, fun x hx ↦ ?_⟩
+  · refine IsAlgebraic.of_aeval P hPdeg ?_ (IsAlgebraic.inv_iff.mp hc)
+    rw [hPm.leadingCoeff]
+    exact one_mem _
+  by_cases hint : IsLocalization.IsInteger (X.presheaf.stalk x) a
+  · -- `a` is regular at `x`, so `P(a)` is a unit there
+    have ha' : algebraMap _ K hint.choose = a := hint.choose_spec
+    have hr : r x = IsLocalRing.residue _ hint.choose := by simp [r, dif_pos hint]
+    have hv : IsUnit (Polynomial.eval₂ (ι x) hint.choose P) := by
+      rw [← IsLocalRing.residue_ne_zero_iff_isUnit, Polynomial.hom_eval₂, ← hr]
+      exact hPr x hx
+    refine ⟨↑hv.unit⁻¹, ?_⟩
+    rw [hval', Polynomial.hom_eval₂, hι, ha']
+    rfl
+  · -- `a` has a pole at `x`, so `a⁻¹` lies in the maximal ideal and `1 / P(a)` vanishes there
+    obtain ⟨b, hb⟩ := (ValuationRing.isInteger_or_isInteger (X.presheaf.stalk x) a).resolve_left
+      hint
+    have hbm : b ∈ IsLocalRing.maximalIdeal (X.presheaf.stalk x) := by
+      refine (IsLocalRing.mem_maximalIdeal _).mpr fun hbu ↦ hint ⟨↑hbu.unit⁻¹, ?_⟩
+      rw [hval', hb, inv_inv]
+    have hw : IsUnit (Polynomial.eval₂ (ι x) b P.reverse) := by
+      rw [← IsLocalRing.residue_ne_zero_iff_isUnit, Polynomial.hom_eval₂,
+        (IsLocalRing.residue_eq_zero_iff b).mpr hbm, Polynomial.eval₂_at_zero,
+        Polynomial.coeff_zero_reverse, hPm.leadingCoeff, map_one]
+      exact one_ne_zero
+    letI := invertibleOfNonzero ha0
+    have key : Polynomial.aeval a P =
+        algebraMap _ K (Polynomial.eval₂ (ι x) b P.reverse) * a ^ P.natDegree := by
+      rw [Polynomial.hom_eval₂, hι, hb, ← invOf_eq_inv, Polynomial.eval₂_reverse_mul_pow]
+      rfl
+    refine ⟨↑hw.unit⁻¹ * b ^ P.natDegree, ?_⟩
+    rw [map_mul, map_pow, hval', hb, key, mul_inv, inv_pow]
 
 /-- **Points where the coordinate is regular lie in the affine chart.** Let `π : X ⟶ ℙ¹_k` be the
 morphism of a rational function `c` (`exists_hom_projectiveLine_of_functionField`). If `c` is
@@ -1033,8 +1126,9 @@ theorem mem_opensRange_infinityChart_of_mem_range_stalk {X : Scheme.{u}} [X.Over
     · rfl
   -- the two lifts of the valuative square
   let l₁ : Spec R ⟶ ProjectiveLine (Spec (.of k)) := X.fromSpecStalk x ≫ π
-  let l₂ : Spec R ⟶ ProjectiveLine (Spec (.of k)) := AffineSpace.homOfVector i₂ (fun _ ↦ (Scheme.ΓSpecIso R).inv c') ≫
-    ProjectiveLine.infinityChart (Spec (.of k))
+  let l₂ : Spec R ⟶ ProjectiveLine (Spec (.of k)) :=
+    AffineSpace.homOfVector i₂ (fun _ ↦ (Scheme.ΓSpecIso R).inv c') ≫
+      ProjectiveLine.infinityChart (Spec (.of k))
   have hsq : CommSq (X.fromSpecFunctionField ≫ π)
       (Spec.map (CommRingCat.ofHom (algebraMap R K)))
       (ProjectiveLine (Spec (.of k)) ↘ Spec (.of k)) i₂ := ⟨by
