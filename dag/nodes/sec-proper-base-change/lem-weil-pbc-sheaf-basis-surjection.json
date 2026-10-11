@@ -173,5 +173,23 @@
   "by": "L",
   "result": "accepted",
   "note": "5 steps following Stacks 0CAH: a basis section for every germ, a section as a map from j_{U!}{*} by the adjunction node (2), the coproduct via the colimit-sheafification node, surjectivity on stalks, epimorphism by the new leaf (epi in sheaves of sets iff surjective on stalks; Mathlib lines verified by L). Statement sharpened (epimorphism in the category of sheaves of sets; S_i may be singletons)."
+ },
+ "lean": {
+  "module": "Sheaf.Topology.SheafBasisSurjection",
+  "declaration": "TopCat.exists_epi_extensionByEmptyConstant",
+  "file": "lean/Sheaf/Topology/SheafBasisSurjection.lean",
+  "statement": "theorem exists_epi_extensionByEmptyConstant (X : TopCat.{u}) (B : Set (Set X)) (hB : IsTopologicalBasis B) (F : X.Sheaf (Type u)) : ∃ (I : Type u) (U : I → Opens X) (S : I → Type u), (∀ i : I, (U i : Set X) ∈ B) ∧ (∀ i : I, Finite (S i)) ∧ (∀ i : I, Nonempty (Unique (S i))) ∧ ∃ c : Cofan (fun i : I ↦ extensionByEmptyConstant (U i) (S i)), Nonempty (IsColimit c) ∧ ∃ φ : c.pt ⟶ F, Epi φ",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "G1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }

@@ -5610,3 +5610,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 18:50 L: merged deliver/T1/lem-weil-pbc-site-plus-construction-presheaf (stage 2; reviewer PASS; first push; Sheaf.CategoryTheory.Sites.SitePlusConstructionPresheaf CategoryTheory.GrothendieckTopology.plus_construction_presheaf)
 - 18:50 L: merged deliver/C1/lem-pc-alternating-cech-computes (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.AlternatingCechComputes AlgebraicGeometry.Scheme.alternatingCechComputes)
 - 18:50 L: merged deliver/F1/lem-sc-topological-filtered-injective-cech-acyclic (stage 2; reviewer PASS; first push; Sheaf.Topology.FilteredInjectiveCechAcyclic CategoryTheory.Sheaf.topological_filtered_injective_cech_acyclic)
+- 18:50 L: merged deliver/G1/lem-weil-pbc-sheaf-basis-surjection (stage 2; reviewer PASS; first push; Sheaf.Topology.SheafBasisSurjection TopCat.exists_epi_extensionByEmptyConstant)
