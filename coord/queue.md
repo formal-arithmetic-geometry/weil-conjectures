@@ -19,7 +19,7 @@
 | `lem-pc-perfect-descend-morphisms` | 1 | state |
 | `lem-pc-perfect-generation-koszul-orthogonal` | 1 | state |
 | `lem-pc-perfect-generation-open-induction-step` | 1 | state |
-| `lem-pc-perfect-generator-exists` | 1 | state |
+| `lem-pc-perfect-generator-pullback` | 1 | state |
 | `lem-pc-perfect-pseudo-coherent-locally-finite-tor` | 1 | state |
 | `lem-pc-perfect-tensor-hom-duality` | 1 | state |
 | `lem-pc-pseudo-coherent-finite-tor-perfect` | 1 | state |
@@ -401,7 +401,7 @@
 | `lem-pc-essentially-constant-pro-hom-colimit` | 4 | state |
 | `lem-pur-essential-constant-pro-criterion-05py` | 4 | state |
 
-Not open yet: 40 nodes that wait for stage 1, 520 nodes that wait for a statement dependency.
+Not open yet: 40 nodes that wait for stage 1, 519 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
