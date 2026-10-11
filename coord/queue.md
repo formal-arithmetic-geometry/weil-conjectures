@@ -1,11 +1,11 @@
 # Work queue
 
-618 items; claim with `tools/claim.py next <group> [--stage N]`.
+614 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (618)
+## Stage 2: nodes to state (614)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -20,11 +20,7 @@
 | `lem-weil-pbc-etale-finite-pushforward-locally-constant` | 1 | state |
 | `lem-weil-pbc-exchange-identity-pasting` | 1 | state |
 | `lem-weil-pbc-ext-one-direct-sum` | 1 | state |
-| `lem-weil-pbc-finite-surjective-affine-target` | 1 | state |
 | `lem-weil-pbc-finite-type-domain-dimension-trdeg` | 1 | state |
-| `lem-weil-pbc-finite-type-module-sheaf-stalk-finitely-generated` | 1 | state |
-| `lem-weil-pbc-finite-unramified-one-point-closed` | 1 | state |
-| `lem-weil-pbc-first-order-thickening-base-change` | 1 | state |
 | `lem-weil-pbc-flat-completion` | 1 | state |
 | `lem-weil-pbc-flat-local-completion-iso` | 1 | state |
 | `lem-weil-pbc-flat-local-criterion-nonzerodivisor` | 1 | state |
