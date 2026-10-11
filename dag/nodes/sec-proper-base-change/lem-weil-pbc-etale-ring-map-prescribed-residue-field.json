@@ -135,5 +135,23 @@
   "group": "G1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of G1; spot-checked by L: second push: primitive element (Mathlib leaf Field.exists_primitive_element PrimitiveElement.lean:209, verified by L), denominator-clearing lift as a new unsplit node, standard etale A = R[T,1/f']/(f), kernel of A -> L is the prime p' with p' cap R = p and kappa(p') = L via the fibre ring C = A (x) kappa(p) = L (so the prime Q of the text is 0) and the fibre-ring correspondence nodes. Correct."
+ },
+ "lean": {
+  "module": "WeilConjectures.Mathlib.RingTheory.Etale.ResidueField",
+  "declaration": "Algebra.exists_etale_residueField_equiv",
+  "statement": "theorem exists_etale_residueField_equiv\n    (L : Type v) [Field L] [Algebra p.ResidueField L] [FiniteDimensional p.ResidueField L]\n    [Algebra.IsSeparable p.ResidueField L] :\n    ∃ (A' : Type u) (_ : CommRing A') (_ : Algebra A A') (_ : Algebra.Etale A A')\n      (P : Ideal A') (_ : P.IsPrime) (hP : p = P.comap (algebraMap A A')),\n      ∃ e : P.ResidueField ≃+* L,\n        ∀ x, e (Ideal.ResidueField.map p P (algebraMap A A') hP x) =\n          algebraMap p.ResidueField L x",
+  "branch": "slopmaster2",
+  "by": "K1",
+  "date": "2026-10-11",
+  "existing": true,
+  "note": "Exact existing statement: ambient A, CommRing A, p and p.IsPrime are section variables. Use iota.toAlgebra for the specified extension. Algebra.Etale agrees with affine Etale by the recorded dependency; pointwise compatibility is equality of ring homomorphisms. Independent universes u and v. Sorry map records s=false, ts=false."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-erf1006",
+  "group": "K1",
+  "result": "pass",
+  "note": "existing Algebra.exists_etale_residueField_equiv #check'd at 71d63dcf6, axioms std (no sorry): R=A CommRing, p prime ideal, kappa(p)=Ideal.ResidueField, L field with Algebra kappa(p) L (=iota), FiniteDimensional, Algebra.IsSeparable; exists A' in u, Algebra.Etale (node's equivalent ring-map clause via iff-etale-affine), P prime with p = P.comap, e : kappa(P) =+* L, e o ResidueField.map (= IsLocalRing.ResidueField.map of localRingHom) = algebraMap"
  }
 }
