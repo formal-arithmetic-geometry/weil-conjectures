@@ -150,5 +150,23 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-scc2439 (reviewer sub-agent of L); spot-checked: C1: steps 1-2 are statements of lem-weil-pbc-site-r-module-presheaf-sheafification-exact (R=Z, clause 2: # preserves all colimits) and lem-weil-pbc-sheafification-geometric-stalk (same def-weil-pbc-sheafification, same pointed-neighbourhood index as def-weil-pbc-geometric-stalks); step 3 colimit interchange elementary. C4: site T_Et and arbitrary colimits cover the citers (filtered colimits of abelian etale sheaves in lem-weil-pbc-torsion-sheaf-characterizations, lem-kun-invertible-orders-colimit). Class b: not a restatement of lem-pc-stalk-direct-sums (ringed space, Zariski, coproducts) nor of lem-weil-pbc-module-stalk-filtered-colimit / lem-weil-pbc-sets-sheaf-colimit-stalks (Zariski); same 009E route via sheafification-keeps-stalks, cannot cite the Zariski node on the etale site. tool_uses accepted as generic. No repairs."
  },
- "lead_note": "2026-10-10 L (R-scc2439): Statement says 'sheaves on T_Et' but proof (and all citers: torsion-sheaf-characterizations, invertible-orders-colimit) are abelian sheaves; consider 'sheaves of abelian groups'. Report claims blueprint.from filled but it is null."
+ "lead_note": "2026-10-10 L (R-scc2439): Statement says 'sheaves on T_Et' but proof (and all citers: torsion-sheaf-characterizations, invertible-orders-colimit) are abelian sheaves; consider 'sheaves of abelian groups'. Report claims blueprint.from filled but it is null.",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GeometricStalkColimits",
+  "declaration": "AlgebraicGeometry.Scheme.geometricStalk_preservesColimits",
+  "file": "lean/Sheaf/AlgebraicGeometry/GeometricStalkColimits.lean",
+  "statement": "theorem geometricStalk_preservesColimits {T : Scheme.{u}} {Ω : Type u} [Field Ω] [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ T) : PreservesColimits ((pointSmallEtale s).sheafFiber (A := ModuleCat.{u} ℤ)) ∧ PreservesColimits (((pointSmallEtale s).sheafFiber (A := ModuleCat.{u} ℤ)).mapHomologicalComplex (ComplexShape.up ℤ))",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-scc0753",
+  "group": "J1",
+  "result": "fix",
+  "note": "T : Scheme.{u}, geometric point s : Spec Ω ⟶ T with Ω sep. closed field (H12, recorded mathlib_match pointSmallEtale/sheafFiber of def-weil-pbc-geometric-stalks); arbitrary colimits = PreservesColimits of sheafFiber on Sheaf (smallEtale) (ModuleCat ℤ) (abelian, as proof and citers); complexes termwise = PreservesColimits of mapHomologicalComplex (up ℤ); conj. 1 is Mathlib inferInstance (IsLeftAdjoint) but no declaration states the node, existing false; report fixed (stale set-valued clause)"
+ }
 }
