@@ -98,5 +98,24 @@
   "group": "J1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-fcp2236 (reviewer sub-agent of L); spot-checked: Item vs Tag 06LK converse paragraph and vs M1 lem-sc-strict-henselization-dimension step 2 (needs exactly: some stage where contractions of a finite chain are strictly increasing; then lies in q and passes to S_q): matches. Step 1 vs lem-pc-filtered-colimit-commrings-elementwise (mathlib leaf, clause 1 representatives): correct; preimage of prime is prime is elementary, so the Spec-colimit leaves (lem-weil-pbc-spec-colimit-limit, lem-weil-pbc-spec-small-colimit-limit) are not needed (C1 ok). Class (b): grep of colimit nodes mentioning primes/dimension finds no node stating chain contraction or the dimension bound. FIX more, RETURN less: (1) B3/E: the second reading's statement said 'for some object i receiving maps from the finitely many stages used below', referring to the proof; restated self-contained with coprojections iota_i and 'there is an object i such that iota_i^{-1}(p_0) strictly in ... iota_i^{-1}(p_n)'; step 1 defines the contraction notation. (2) stmt_deps listed lem-pc-filtered-colimit-commrings-elementwise, which the statement does not use; removed (kept in proof_deps).; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.FilteredColimitPrimeChainDimension",
+  "declaration": "CommRingCat.filteredColimit_prime_chain_and_dimension",
+  "file": "lean/Sheaf/RingTheory/FilteredColimitPrimeChainDimension.lean",
+  "statement": "theorem filteredColimit_prime_chain_and_dimension {I : Type u} [SmallCategory I] [IsFiltered I] (R : I ⥤ CommRingCat.{u}) : (∀ (n : ℕ) (p : Fin (n + 1) → Ideal (colimit R : CommRingCat.{u})), (∀ j, (p j).IsPrime) → StrictMono p → ∃ i : I, (∀ j, (Ideal.comap (colimit.ι R i).hom (p j)).IsPrime) ∧ StrictMono (fun j ↦ Ideal.comap (colimit.ι R i).hom (p j))) ∧ ringKrullDim (colimit R : CommRingCat.{u}) ≤ ⨆ i : I, ringKrullDim (R.obj i)",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-fcp1043"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-fcp1043",
+  "group": "J1",
+  "result": "fix",
+  "note": "small filtered I = {I : Type u}[SmallCategory I][IsFiltered I] (sibling universe, colimit exists by instance; dropped [HasColimit R] and free v); R : I ⥤ CommRingCat.{u}; S = colimit R, ι_i = (colimit.ι R i).hom; chain = Fin (n+1) → Ideal, all prime, StrictMono; ∃ i, comaps prime ∧ StrictMono; ringKrullDim (colimit R) ≤ ⨆ i, ringKrullDim (R.obj i); n=0, zero rings, ⊥/⊤ covered"
  }
 }
