@@ -224,5 +224,23 @@
   "by": "L",
   "result": "pass",
   "note": "six steps along Stacks 09BH (3) (a single integer N kills F on the Noetherian C, written out; the sequence in Z/N-modules; the bridge to the general constructibility; subsheaves by 09BH (3), quotients by the weak Serre property 03RZ (closed node); back by the bridge); no new nodes; the generic lem-weil-pbc-constructible-subobjects-noetherian (sk-prop-sf-cbc) accepted as a tool use; the new bridge node now reached (flag removed)"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ConstructibleCurveSubQuotient",
+  "declaration": "AlgebraicGeometry.CurveCoefficientPair.constructible_sub_quotient",
+  "file": "lean/Sheaf/AlgebraicGeometry/ConstructibleCurveSubQuotient.lean",
+  "statement": "theorem constructible_sub_quotient {k : Type u} [Field k] [IsAlgClosed k] (P : AlgebraicGeometry.CurveCoefficientPair k) (F₁ F₂ : Sheaf P.C.smallEtaleTopology AddCommGrpCat.{u + 1}) (h₁ : P.C.IsTorsionAbelianSheaf F₁) (h₂ : P.C.IsTorsionAbelianSheaf F₂) (α : F₁ ⟶ P.F) (β : P.F ⟶ F₂) (w : α ≫ β = 0) (hS : (ShortComplex.mk α β w).ShortExact) (hF : P.IsConstructible) : (AlgebraicGeometry.CurveCoefficientPair.IsConstructible { P with F := F₁, isTorsion := h₁ }) ∧ (AlgebraicGeometry.CurveCoefficientPair.IsConstructible { P with F := F₂, isTorsion := h₂ })",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-csq1135",
+  "group": "E1",
+  "result": "pass",
+  "note": "k alg closed [IsAlgClosed]; C sep finite type dim<=1 via P.isCurve; F1,F,F2 in Sheaf P.C.smallEtaleTopology AddCommGrpCat.{u+1} (same category as P.F); torsion of outer terms via the pair's IsTorsionAbelianSheaf (needed to form pairs); SES = ShortComplex.mk α β w |>.ShortExact (mono/exact/epi); hF = P.IsConstructible; conclusion both outer pairs IsConstructible with P's curve data; #check with pp.fullNames: Sheaf=CategoryTheory.Sheaf, ShortComplex=CategoryTheory, IsTorsionAbelianSheaf=AlgebraicGeometry.Scheme"
  }
 }

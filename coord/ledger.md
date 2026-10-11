@@ -4472,3 +4472,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 11:35 L: merged deliver/C1/pqf-def-coherent (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.Coherent AlgebraicGeometry.RingedSpace.IsCoherent)
 - 11:36 L: merged deliver/J1/lem-weil-pbc-descend-etale (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.EtaleInverseLimitDescent AlgebraicGeometry.Etale.exists_stage_of_inverseLimit)
 - 11:36 L: merged deliver/E1/lem-pc-arrow-iso-pullback-counit (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.Picard.ArrowIsoTensorPullbackCounit AlgebraicGeometry.nonempty_arrowIso_tensorPullback_directImageCounit; dependency modules: def-pc-f-subfunctor)
+- 11:36 L: merged deliver/E1/lem-weil-pbc-curve-constructible-sub-quotient (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.ConstructibleCurveSubQuotient AlgebraicGeometry.CurveCoefficientPair.constructible_sub_quotient)
