@@ -415,6 +415,73 @@ noncomputable def normalConeToQuotient : I.normalConePresheaf ⟶ I.quotientAlge
     exact (congrArg (Polynomial.eval 0) (I.reesToQuotientPolynomial.naturality_apply i x)).trans
       (Polynomial.eval_zero_map _ _)
 
+/-! ### The fibres of the deformation space -/
+
+lemma toPolynomialPresheaf_comp_polynomialToLaurent :
+    X.toPolynomialPresheaf ≫ X.affineStructurePresheaf.whiskerLeft CommRingCat.polynomialToLaurent =
+      X.toLaurentPresheaf := by
+  ext U x
+  exact Polynomial.toLaurent_C x
+
+lemma toReesPresheaf_comp_reesToLaurent : I.toReesPresheaf ≫ I.reesToLaurent = X.toLaurentPresheaf := by
+  ext U x
+  exact Ideal.coe_algebraMap_extendedReesAlgebra (I := I.siteIdeal U.unop) x
+
+/-- **The punctured trivialisation.** Over the punctured line `𝔾_{m,X} ⊆ 𝔸¹_X` the deformation
+space is trivial: `D_I X ×_{𝔸¹_X} 𝔾_{m,X} = 𝔾_{m,X}`, since inverting `t` in `𝒪_X[t, I t⁻¹]` gives
+`𝒪_X[t, t⁻¹]`. -/
+theorem isPullback_puncturedToDeformationSpace :
+    IsPullback I.puncturedToDeformationSpace (𝟙 X.punctured) I.deformationSpaceToAffineLine
+      X.puncturedToAffineLine := by
+  have := isPullback_relativeGluingMap X.coequifibered_toPolynomialPresheaf
+    I.coequifibered_toReesPresheaf X.coequifibered_toLaurentPresheaf
+    X.coequifibered_toLaurentPresheaf I.polynomialToRees
+    (X.affineStructurePresheaf.whiskerLeft CommRingCat.polynomialToLaurent) I.reesToLaurent (𝟙 _)
+    toPolynomialPresheaf_comp_polynomialToLaurent I.toReesPresheaf_comp_reesToLaurent
+    fun U ↦ Ideal.isPushout_toExtendedReesAlgebra (I.siteIdeal U)
+  rwa [relativeGluingMap_id] at this
+
+lemma isPushout_polynomialToRees_toQuotientPresheaf (U : X.AffineZariskiSiteᵒᵖ) :
+    IsPushout (I.polynomialToRees.app U)
+      ((toQuotientPresheaf (F := X.polynomialPresheaf) (fun _ ↦ Ideal.span {Polynomial.X})
+        fun U V i ↦ by
+          rw [Ideal.map_span, Set.image_singleton]
+          exact congrArg (fun p ↦ Ideal.span {p}) (Polynomial.map_X _)).app U)
+      ((toQuotientPresheaf I.tIdeal I.map_tIdeal).app U) (I.polynomialZeroToNormalCone.app U) := by
+  have e : (Ideal.span {Polynomial.X}).map (I.polynomialToRees.app U).hom = I.tIdeal U := by
+    rw [Ideal.map_span, Set.image_singleton]
+    exact congrArg (fun t ↦ Ideal.span {t}) Ideal.toExtendedReesAlgebra_X
+  refine (CommRingCat.isPushout_quotient (I.polynomialToRees.app U)
+    (Ideal.span {Polynomial.X})).flip.of_iso (Iso.refl _) (Iso.refl _) (Iso.refl _)
+    (Ideal.quotEquivOfEq e).toCommRingCatIso ?_ ?_ ?_ ?_
+  · simp
+  · simp
+  · ext x; rfl
+  · ext x; rfl
+
+/-- The zero section `t = 0` of `𝔸¹_X`, as the relative spectrum of `𝒪_X[t] / t`. -/
+noncomputable abbrev _root_.AlgebraicGeometry.Scheme.affineLineZero : Scheme.{u} :=
+  (relativeGluingData X.coequifibered_toPolynomialZeroPresheaf).glued
+
+/-- The inclusion of the zero section `Spec_X (𝒪_X[t] / t) ⟶ 𝔸¹_X`. -/
+noncomputable def _root_.AlgebraicGeometry.Scheme.affineLineZeroToAffineLine :
+    X.affineLineZero ⟶ X.affineLine :=
+  relativeGluingMap _ _ (toQuotientPresheaf _ _)
+
+/-- The projection of the normal cone to the zero section of `𝔸¹_X`. -/
+noncomputable def normalConeToAffineLineZero : I.normalCone ⟶ X.affineLineZero :=
+  relativeGluingMap _ _ I.polynomialZeroToNormalCone
+
+/-- **The fibre over `t = 0`.** The normal cone is the fibre of the deformation space over the
+zero section of `𝔸¹_X`: `𝒪_X[t, I t⁻¹] ⊗_{𝒪_X[t]} 𝒪_X[t]/t = 𝒪_X[t, I t⁻¹] / t`. -/
+theorem isPullback_normalConeToDeformationSpace :
+    IsPullback I.normalConeToDeformationSpace I.normalConeToAffineLineZero
+      I.deformationSpaceToAffineLine X.affineLineZeroToAffineLine :=
+  isPullback_relativeGluingMap X.coequifibered_toPolynomialPresheaf
+    I.coequifibered_toReesPresheaf X.coequifibered_toPolynomialZeroPresheaf
+    I.coequifibered_toNormalConePresheaf I.polynomialToRees _ _ I.polynomialZeroToNormalCone
+    rfl rfl fun U ↦ I.isPushout_polynomialToRees_toQuotientPresheaf (.op U)
+
 end IdealSheafData
 
 end AlgebraicGeometry.Scheme
