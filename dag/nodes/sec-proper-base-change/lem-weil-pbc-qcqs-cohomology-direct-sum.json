@@ -200,5 +200,23 @@
   "summary": "Lean: no declaration of slopmaster2 states this (the qcqs direct-sum lemmas in WeilConjectures/AlgebraicGeometry/Sites/CohomologyColimit.lean are for etale cohomology and only for vanishing), so the node is split. Read Stacks 01FF and its proof, 09J7 (where Stacks applies 01FF to a direct sum), 07TB (hypotheses for a qcqs scheme), 0069, 009F, 00DB, 01DI, 01EW, 01EP (cited in 01FF's proof; they belong to the split of the new 01FF node). Seven steps: (1) qcqs => spectral => hypotheses of 01FF with U=X; (2) finite partial sums are biproducts in Mod(O_X), hence coproducts, and the direct sum is their directed colimit (new Mathlib leaf); (3) H^p(X,-) is additive (delta-functor node), so it commutes with finite direct sums, argued with the biproduct identities; (4) the canonical map restricted to finite supports factors through H^p(kappa_J); (5) surjectivity from 01FF(a); (6) injectivity from 01FF(b) and step 3; (7) graded case is an instance. New nodes: lem-weil-pbc-qs-scheme-cohomology-directed-colimit (01FF stated for the ringed space of a scheme with hypotheses (1),(2), conclusion in elementwise form; unsplit, no Mathlib match), lem-weil-pbc-scheme-modules-coproduct-finite-subsums (Mathlib leaf: Scheme.Modules.instHasColimits + isColimitFiniteSubproductsCocone). Statement made precise (not changed in meaning): the direct sum of O_X-modules is named as the coproduct in Mod(O_X) with inclusions iota_i, and the canonical map as the one restricting to H^p(X,iota_i); stmt_deps gained def-weil-pbc-category-colimit and def-weil-pbc-direct-sum-modules.",
   "blueprint": "The item serves thm-weil-pbc-finite-etale-lifting at its from.place (the identification of the graded H^p with the direct sum of H^p of the graded pieces in Stacks 0897(1), used in the essential-surjectivity argument of 0GS2); steps 2, 5 and 6 realize the passage from the finite partial sums to the whole direct sum (Stacks 01FF), step 3 the finite sums, step 7 the graded instance used there. The blueprint node's proof states this identification without argument; no blueprint node states the item (searched: 'cohomology colimit', 'direct sum', 'direct sums cohomology', 'commutes with colimits', 'filtered colimit', 'directed colimit cohomology', '01FF', '0739', '009F', 'coproduct', 'finite subsets')."
  },
- "reviewed": "2026-10-10 L: 7 steps: X spectral so 01FF applies (new node, scheme form), the direct sum as the directed colimit of finite partial sums (new Mathlib leaf), additivity of H^p on finite sums from the delta-functor nodes, surjectivity and injectivity from the two clauses of 01FF; statement made precise (coproduct and canonical map named); 2 new nodes"
+ "reviewed": "2026-10-10 L: 7 steps: X spectral so 01FF applies (new node, scheme form), the direct sum as the directed colimit of finite partial sums (new Mathlib leaf), additivity of H^p on finite sums from the delta-functor nodes, surjectivity and injectivity from the two clauses of 01FF; statement made precise (coproduct and canonical map named); 2 new nodes",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.QcqsCohomologyDirectSum",
+  "declaration": "AlgebraicGeometry.Scheme.moduleCohomology_directSum_bijective",
+  "file": "lean/Sheaf/AlgebraicGeometry/QcqsCohomologyDirectSum.lean",
+  "statement": "theorem moduleCohomology_directSum_bijective (X : Scheme.{u}) [CompactSpace X] [QuasiSeparatedSpace X] (I : Type v) (F : I → SheafOfModules.{u} (moduleRings X.toRingedSpace)) (S : SheafOfModules.{u} (moduleRings X.toRingedSpace)) (ι : ∀ i : I, F i ⟶ S) (_hS : IsColimit (Cofan.mk S ι)) (p : ℕ) : Function.Bijective (DirectSum.toModule ((moduleRings X.toRingedSpace).obj.obj (op ⊤)) I ((RingedSpace.moduleCohomology X.toRingedSpace p).obj S) (fun i ↦ ((RingedSpace.moduleCohomology X.toRingedSpace p).map (ι i)).hom))",
+  "branch": "sheaf-dag",
+  "by": "T1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "T1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ }
 }

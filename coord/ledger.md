@@ -5343,3 +5343,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 16:03 L: merged deliver/H1/lem-sc-smooth-proper-tensor-direct-sums (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.ProperPerfectRightAdjointCoproducts AlgebraicGeometry.properPerfect_rightAdjoint_preservesCoproducts)
 - 16:03 L: merged deliver/S1/lem-pc-derived-direct-image-preserves-qcoh (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.DerivedDirectImagePreservesQCoh AlgebraicGeometry.schemeDerivedDirectImage_preserves_QCoh)
 - 16:03 L: merged deliver/R1/lem-weil-pbc-formal-systems-surjective (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.CoherentFormalModuleEpi AlgebraicGeometry.coherentFormalModule_epi_iff_first_component)
+- 16:03 L: merged deliver/T1/lem-weil-pbc-qcqs-cohomology-direct-sum (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.QcqsCohomologyDirectSum AlgebraicGeometry.Scheme.moduleCohomology_directSum_bijective)
