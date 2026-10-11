@@ -121,6 +121,32 @@ namespace AlgebraicGeometry.Scheme.Hom
 
 open AffineZariskiSite
 
+section
+
+variable {V B' : Scheme.{u}} (g : V ⟶ B') (s : B' ⟶ V)
+
+/-- `g̃ : D_s V ⟶ 𝔸¹_B` lies over `D_s V ⟶ V ⟶ B`. -/
+@[reassoc]
+lemma deformationSpaceProj_over :
+    deformationSpaceProj g s ≫ 𝔸(ULift.{u} (Fin 1); B') ↘ B' =
+      (relativeGluingData s.ker.coequifibered_toReesPresheaf).toBase ≫ g := by
+  rw [deformationSpaceProj, Category.assoc, Category.assoc, AffineSpace.map_over,
+    polynomialSpecToAffineSpace_over_assoc, IdealSheafData.deformationSpaceToPolynomialSpec,
+    relativeGluingMap_toBase_assoc _ _ _ s.ker.toPolynomialPresheaf_comp_polynomialToRees]
+
+lemma opensRange_affineLineChart {W : B'.Opens} (hW : IsAffineOpen W) :
+    (affineLineChart hW).opensRange = (𝔸(ULift.{u} (Fin 1); B') ↘ B') ⁻¹ᵁ W := by
+  have := isIso_homOfVector_specPolynomial Γ(B', W)
+  have e : affineLineChart hW = AffineSpace.homOfVector (Spec.map (CommRingCat.ofHom Polynomial.C))
+      (fun _ ↦ (ΓSpecIso (.of (Polynomial Γ(B', W)))).inv Polynomial.X) ≫
+        AffineSpace.map _ hW.fromSpec := by
+    rw [affineLineChart, ← AffineSpace.homOfVector_map]
+  refine TopologicalSpace.Opens.ext ?_
+  rw [Scheme.Hom.coe_opensRange, e, ← Scheme.Hom.coe_opensRange, opensRange_comp_of_isIso,
+    AffineSpace.opensRange_map, hW.opensRange_fromSpec]
+
+end
+
 variable (n : Type u) (B : Scheme.{u})
 
 /-- The coordinate `x_k` of `𝔸^n_B`, restricted to an affine open. -/
@@ -385,5 +411,44 @@ instance : IsIso (Spec.map (CommRingCat.ofHom (reesEquiv n hW))) := by
     rw [ConcreteCategory.isIso_iff_bijective]
     exact bijective_reesEquiv n hW
   infer_instance
+
+/-- Over the chart `𝔸^n_{Γ(B, W)[t]}` of `𝔸^n_{𝔸¹_B}`, the comparison morphism is the chart of
+the deformation space over the affine open `𝔸^n_W`, followed by an isomorphism. -/
+lemma isPullback_deformationSpaceToAffineSpace :
+    IsPullback (Spec.map (CommRingCat.ofHom (reesEquiv n hW)) ≫
+        (AffineSpace.SpecIso n (.of (Polynomial Γ(B, W)))).inv)
+      (colimit.ι (relativeGluingData
+        (AffineSpace.zeroSection n B).ker.coequifibered_toReesPresheaf).functor (affineOpenOver hW))
+      (AffineSpace.map n (affineLineChart hW)) (deformationSpaceToAffineSpace n B) := by
+  refine IsOpenImmersion.isPullback _ _ _ _ ?_ ?_
+  · rw [ι_deformationSpaceToAffineSpace, deformationSpaceToAffineSpaceChart_eq, Category.assoc]
+  · rw [AffineSpace.opensRange_map, opensRange_affineLineChart, ← Scheme.Hom.comp_preimage,
+      ← Scheme.Hom.comp_preimage, deformationSpaceToAffineSpace_over,
+      deformationSpaceProj_over, Scheme.Hom.comp_preimage]
+    exact toBase_preimage _ (affineOpenOver hW)
+
+/-- Blueprint `sk-lem-geometry` (4), **the standard pair**: the deformation space of the zero
+section of `𝔸^n_B ⟶ B` is `𝔸^n_{𝔸¹_B} = 𝔸^n_B ×_B 𝔸¹_B`, with coordinates `u_k = x_k t⁻¹`. -/
+instance isIso_deformationSpaceToAffineSpace : IsIso (deformationSpaceToAffineSpace n B) := by
+  refine IsZariskiLocalAtTarget.of_iSup_eq_top (P := MorphismProperty.isomorphisms Scheme)
+    (fun W : B.affineOpens ↦ (AffineSpace.map n (affineLineChart W.2)).opensRange) ?_ fun W ↦ ?_
+  · rw [eq_top_iff]
+    rintro x -
+    obtain ⟨_, ⟨W, hW, rfl⟩, hxW, -⟩ := B.isBasis_affineOpens.exists_subset_of_mem_open
+      (Set.mem_univ ((𝔸(n; 𝔸(ULift.{u} (Fin 1); B)) ↘ _ ≫ 𝔸(ULift.{u} (Fin 1); B) ↘ B) x))
+      isOpen_univ
+    refine TopologicalSpace.Opens.mem_iSup.mpr ⟨⟨W, hW⟩, ?_⟩
+    rw [AffineSpace.opensRange_map, opensRange_affineLineChart]
+    exact hxW
+  · refine ((MorphismProperty.isomorphisms Scheme).arrow_mk_iso_iff
+      (morphismRestrictOpensRange _ _)).mpr ?_
+    have sq := (isPullback_deformationSpaceToAffineSpace n W.2).flip
+    have e : pullback.snd (deformationSpaceToAffineSpace n B)
+        (AffineSpace.map n (affineLineChart W.2)) = sq.isoPullback.inv ≫
+          Spec.map (CommRingCat.ofHom (reesEquiv n W.2)) ≫
+            (AffineSpace.SpecIso n (.of (Polynomial Γ(B, W)))).inv := by
+      rw [Iso.eq_inv_comp, sq.isoPullback_hom_snd]
+    rw [MorphismProperty.isomorphisms.iff, e]
+    infer_instance
 
 end AlgebraicGeometry.Scheme.Hom
