@@ -171,5 +171,22 @@
   "group": "G1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of G1; spot-checked by L: Repaired as asked at 19:xx: the induction now stays over R (P(i): for every h, H^q(D(h)) = 0 for q <= i) with the ideal I_h = {f : xi|D(hf) = 0}; step 1 identifies D(h) with Spec R_h and its local rings with the R_p (lem-weil-pbc-principal-localization-open-immersion, lem-weil-pbc-spec-domain-stalks-function-field); the degree-one step applies the hypothesis to hf, hg (D(h^2 f(f+g)) = D(hf(f+g))); the higher-degree step is Mayer-Vietoris on D(h(f+g)) = D(hf(f+g)) u D(hg(f+g)) with P(i-1) on the intersection; h in sqrt(I_h) by the local triviality of Zariski classes after the 09AX comparison. The 09AX node now defines the site morphism and cites lem-weil-pbc-site-cohomology-pullback. The source is cited by line (etale-cohomology.tex 14205, 14228), the review by G1 is a real review. Two commits (worker + repair) tolerated. To add at its split: the Stacks tag of the local-vanishing node lem-weil-pbc-zariski-cohomology-locally-zero."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.GabberCriterion",
+  "declaration": "AlgebraicGeometry.Etale.gabberCriterion",
+  "file": "lean/Sheaf/Paper/GabberCriterion.lean",
+  "statement": "theorem gabberCriterion (R : Type u) [CommRing R] (hR : ∀ (p : Ideal R) [p.IsPrime], IsStrictlyHenselianLocalRing (Localization.AtPrime p)) (F : Sheaf (Spec (CommRingCat.of R)).smallEtaleTopology AddCommGrpCat.{u + 1}) (hfg : ∀ (f g : R) (x : Sheaf.H (((Scheme.Opens.ι (X := Spec (CommRingCat.of R)) (PrimeSpectrum.basicOpen (f + g)))^*[AddCommGrpCat.{u + 1}]).obj F) 1), (AlgebraicGeometry.Etale.cohomologyMap (Scheme.homOfLE (X := Spec (CommRingCat.of R)) (PrimeSpectrum.basicOpen_mul_le_right f (f + g))) (((Scheme.Opens.ι (X := Spec (CommRingCat.of R)) (PrimeSpectrum.basicOpen (f + g)))^*[AddCommGrpCat.{u + 1}]).obj F) 1 x) = 0 → (AlgebraicGeometry.Etale.cohomologyMap (Scheme.homOfLE (X := Spec (CommRingCat.of R)) (PrimeSpectrum.basicOpen_mul_le_right g (f + g))) (((Scheme.Opens.ι (X := Spec (CommRingCat.of R)) (PrimeSpectrum.basicOpen (f + g)))^*[AddCommGrpCat.{u + 1}]).obj F) 1 x) = 0 → x = 0) : ∀ (q : ℕ), 0 < q → Subsingleton (Sheaf.H F q)",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-12",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-gbc",
+  "group": "K1",
+  "result": "pass"
  }
 }
