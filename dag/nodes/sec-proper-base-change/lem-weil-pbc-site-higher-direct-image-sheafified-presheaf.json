@@ -202,5 +202,24 @@
   "worker": "stage1",
   "summary": "Checked the statement against Stacks Cohomology on Sites Lemma 072W (sites-cohomology.tex line 747, tag verified in tags/tags) for O = Z and against the citer lem-weil-pbc-gabber-strict-henselian-zariski-comparison step 1, which uses exactly R^q eps_* F = (P^q)^# and the vanishing clause; statement kept. Not a Mathlib leaf: Mathlib has the pushforward of sheaves and Sheaf.cohomologyPresheaf but no right derived functors of pushforward and no sheafified-homology comparison (LeanSearch, LeanFinder, Loogle, grep recorded). Proof split in five steps following the proof of 072W: (1) f_* left exact additive, injective resolution, R^q f_* F = H^q(f_*I); (2) presheaf cohomology of f_*I is P^q, via sectionwise exactness of evaluation; (3) construction of the canonical map theta from the left exactness of the inclusion iota; (4) sheafification is exact and its counit is an isomorphism, so H^q(f_*I) = (P^q)^# and the adjunct of theta is this isomorphism (written out: the source's 'by definition of the abelian category structure'); (5) vanishing. All cited nodes exist (Mathlib leaves except def-weil-pbc-sites-and-cohomology, same unit); no new nodes."
  },
- "reviewed": "pass (L, 2026-10-10): 5 steps follow 072W for abelian sheaves; the canonical map theta is constructed from the cycle projections, and its adjunct is shown to be the isomorphism H^q(f_* I) = (P^q)^# via exactness of sheafification and the counit isomorphism, with the agreement checked on the epimorphism #p. No new nodes. The etale-specific node higher-direct-image-sheafified-presheaf (03Q8) is a special case and stays separate."
+ "reviewed": "pass (L, 2026-10-10): 5 steps follow 072W for abelian sheaves; the canonical map theta is constructed from the cycle projections, and its adjunct is shown to be the isomorphism H^q(f_* I) = (P^q)^# via exactness of sheafification and the counit isomorphism, with the agreement checked on the epimorphism #p. No new nodes. The etale-specific node higher-direct-image-sheafified-presheaf (03Q8) is a special case and stays separate.",
+ "lean": {
+  "module": "Sheaf.Paper.SiteHigherDirectImageSheafifiedPresheaf",
+  "declaration": "CategoryTheory.siteHigherDirectImageSheafifiedPresheaf",
+  "file": "lean/Sheaf/Paper/SiteHigherDirectImageSheafifiedPresheaf.lean",
+  "statement": "theorem siteHigherDirectImageSheafifiedPresheaf {C D : Type u} [SmallCategory C] [SmallCategory D] (J : Precoverage C) (K : Precoverage D) [J.HasIsos] [J.IsStableUnderComposition] [J.IsStableUnderBaseChange] [J.HasPullbacks] [K.HasIsos] [K.IsStableUnderComposition] [K.IsStableUnderBaseChange] [K.HasPullbacks] (u : D ⥤ C) (hcover : ∀ (X : D) (R : Presieve X), R ∈ K X → R.map u ∈ J (u.obj X)) (hpullback : ∀ (X Y Z : D) (R : Presieve X), R ∈ K X → ∀ (f : Y ⟶ X) (g : Z ⟶ X), R f → PreservesLimit (cospan f g) u) [u.IsContinuous K.toGrothendieck J.toGrothendieck] [PreservesFiniteLimits (sheafPullback u (Type u) K.toGrothendieck J.toGrothendieck)] [PreservesFiniteColimits (sheafPullback u (Type u) K.toGrothendieck J.toGrothendieck)] (F : Sheaf J.toGrothendieck AddCommGrpCat.{u}) (I : InjectiveResolution F) (q : ℕ) : IsIso ((((((sheafToPresheaf K.toGrothendieck AddCommGrpCat.{u}).mapHomologicalComplex (ComplexShape.up ℕ)).obj (((u.sheafPushforwardContinuous AddCommGrpCat.{u} K.toGrothendieck J.toGrothendieck).mapHomologicalComplex (ComplexShape.up ℕ)).obj I.cocomplex)).sc q).mapHomologyIso (presheafToSheaf K.toGrothendieck AddCommGrpCat.{u})).inv ≫ (HomologicalComplex.homologyFunctor (Sheaf K.toGrothendieck AddCommGrpCat.{u}) (ComplexShape.up ℕ) q).map ((NatTrans.mapHomologicalComplex (sheafificationAdjunction K.toGrothendieck AddCommGrpCat.{u}).counit (ComplexShape.up ℕ)).app (((u.sheafPushforwardContinuous AddCommGrpCat.{u} K.toGrothendieck J.toGrothendieck).mapHomologicalComplex (ComplexShape.up ℕ)).obj I.cocomplex)) ≫ (I.isoRightDerivedObj (u.sheafPushforwardContinuous AddCommGrpCat.{u} K.toGrothendieck J.toGrothendieck) q).inv)",
+  "branch": "sheaf-dag",
+  "by": "N1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-shd2"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-shd2",
+  "group": "N1",
+  "result": "fix",
+  "note": "Precoverage sites C,D small; continuity hcover/hpullback+IsContinuous; morphism of sites via exact sheafPullback; f_*=sheafPushforwardContinuous; I injective resolution of F; P^q = homology of sheafToPresheaf(f_*I), V↦H^q(I(uV)); conclusion IsIso of canonical (P^q)^#→H^q(f_*I)≅R^qf_*F; vanishing iff derivable. STATEMENT-DISPUTED rejected (R,P were free, statement false)."
+ }
 }
