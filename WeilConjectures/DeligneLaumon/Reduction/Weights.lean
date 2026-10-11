@@ -265,6 +265,33 @@ theorem IsMixedOfWeightsAtMost.of_filtration {n : ℕ} (G : Fin (n + 1) → Weil
 
 end WeilSheaf
 
+section Map
+
+variable {Y : Scheme.{u}} [Y.Over (Spec (CommRingCat.of k₀))]
+  [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))] {ι : PadicAlgCl l →+* ℂ}
+
+namespace WeilSheaf
+
+/-- An exact functor between Weil sheaves which preserves punctual purity of every weight
+preserves mixed upper weight bounds: it carries a mixed filtration to a mixed filtration. -/
+theorem IsMixedOfWeightsAtMost.map (Φ : WeilSheaf k₀ l X ⥤ WeilSheaf k₀ l Y) [Φ.Additive]
+    [PreservesFiniteLimits Φ] [PreservesFiniteColimits Φ]
+    (hΦ : ∀ (v : ℝ) (G : WeilSheaf k₀ l X), G.IsPunctuallyPureOfWeight ι v →
+      (Φ.obj G).IsPunctuallyPureOfWeight ι v)
+    {w : ℝ} {F : WeilSheaf k₀ l X} (hF : F.IsMixedOfWeightsAtMost ι w) :
+    (Φ.obj F).IsMixedOfWeightsAtMost ι w := by
+  obtain ⟨n, G, φ, h0, ⟨e⟩, hmono, hpure⟩ := hF
+  refine ⟨n, fun i ↦ Φ.obj (G i), fun i ↦ Φ.map (φ i), Φ.map_isZero h0, ⟨Φ.mapIso e⟩,
+    fun i ↦ ?_, fun i ↦ ?_⟩
+  · have := hmono i
+    infer_instance
+  · obtain ⟨v, hv, h⟩ := hpure i
+    exact ⟨v, hv, (hΦ v _ h).of_epi (PreservesCokernel.iso Φ (φ i)).hom⟩
+
+end WeilSheaf
+
+end Map
+
 /-! ### Mixed complexes -/
 
 /-- A bounded constructible Weil complex `K` is `ι`-*mixed of weights at most* `w` if its `b`-th
