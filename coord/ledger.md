@@ -3443,3 +3443,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 06:04 L: merged deliver/J1/lem-galois-coproduct-morphism-components (stage 2; reviewer PASS; first push; Sheaf.CategoryTheory.Galois.CoproductMorphismComponents CategoryTheory.morphism_coproduct_connected_components)
 - 06:04 L: merged deliver/E1/lem-galois-fpqc-descending-types-morphisms (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.FpqcDescendingTypesMorphisms AlgebraicGeometry.fpqcDescentEffective_of_affine)
 - 06:05 L: merged deliver/E1/lem-kun-finite-closed-subscheme (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.FiniteClosedPoints AlgebraicGeometry.IsClosed.finite_of_finiteType_over_field_of_closed_points)
+- 06:05 L: returned deliver/F1/lem-exc-rg-open-stabilizer-adjoint (reviewer RETURN: (reviewer R-osa0636, head 0f25f3909) H7/H2: the module defines a new notion inline, `ModuleCat.IsDiscreteGModule` / `Mod)
