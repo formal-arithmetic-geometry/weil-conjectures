@@ -31,7 +31,8 @@ from __future__ import annotations
 import gzip, json, os, pathlib, re, shutil, subprocess, sys
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
-from node_fields import changed_fields_except, STAGE2_OWNS, STAGE2_ITEM_ALSO  # noqa: E402
+from node_fields import (changed_fields_except, STAGE2_OWNS, STAGE2_ITEM_ALSO, STAGE2_ITEM_CORRECTION,  # noqa: E402
+                         check_statement_change, correction_fields)
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 SOURCE = pathlib.Path(os.environ.get("SHEAF_SOURCE_REPO", str(pathlib.Path.home() / "weil-conjectures-slopmaster2")))
@@ -643,27 +644,65 @@ def read_delivery(git: Git, ref: str, base: str, group: str, item: str, max_comm
         D["roles"].append(f"new definition node {nid} ({D['new'][nid]['path']})")
     for nid in D["deps"]:
         D["roles"].append(f"dependency node {nid} ({D['deps'][nid]['path']}), changed in `lean`")
-    ch = changed_fields_except(bnode, node, STAGE2_OWNS + STAGE2_ITEM_ALSO) if base_text is not None else []
+    # STAGE 2 STATEMENT CORRECTION (decision of the human, 2026-10-11 06:22 UTC): the item is "corrected" when its
+    # statement, proof, proof_deps or statement_change differ from the base; it may then change in
+    # STAGE2_ITEM_CORRECTION too, and node_fields.check_statement_change validates the record.
+    corrected = base_text is not None and bool(correction_fields(bnode, node))
+    D["corrected"] = corrected
+    D["citers"] = []
+    owns = STAGE2_OWNS + STAGE2_ITEM_ALSO + (STAGE2_ITEM_CORRECTION if corrected else ())
+    ch = changed_fields_except(bnode, node, owns) if base_text is not None else []
     if ch:
         f("b", f"the node changed in field(s) {', '.join(ch)}; a stage-2 delivery takes the node as it is on {base} and sets "
-               "only `lean` (and adds the new definition nodes to stmt_deps)")
+               "only `lean` (and adds the new definition nodes to stmt_deps)"
+               + ("; a statement correction changes statement, stmt_deps, proof, proof_deps and statement_change" if corrected else
+                  "; a statement correction (statement_change) may change statement, stmt_deps, proof, proof_deps"))
     hd = node.get("stmt_deps") if isinstance(node.get("stmt_deps"), list) else []
     gone = [x for x in base_deps if x not in hd]
     added = [x for x in hd if x not in base_deps]
-    if gone:
-        f("b", f"the item's stmt_deps lost {', '.join(gone)}: a delivery only adds the new definition nodes to it")
-    bad = [x for x in added if x not in new_ids]
-    if bad:
-        f("b", f"the item's stmt_deps gained {', '.join(bad)}, which are not new nodes of the delivery (only new definition "
-               "nodes may be added)")
-    D["added_deps"] = added
+    base_nodes = None
+    if corrected:
+        base_nodes = nodes_at(git, base)
+        cit = sorted(n for n, d in base_nodes.items() if n != item and
+                     (item in (d.get("stmt_deps") or []) or item in (d.get("proof_deps") or [])))
+        D["citers"] = cit
+        for x in check_statement_change(bnode, node, cit):
+            f("b", f"statement correction: {x}")
+        sc = node.get("statement_change") if isinstance(node.get("statement_change"), dict) else {}
+        D["citer_marks"] = [c for c in sc.get("citers") or [] if isinstance(c, dict)]
+        bad = [x for x in added if x not in new_ids and x not in base_paths]
+        if bad:
+            f("b", f"the corrected item's stmt_deps gained {', '.join(bad)}, which are neither nodes on the base nor new nodes "
+                   "of the delivery")
+        cited = set(CITE.findall(str(node.get("statement") or "")))
+        miss = sorted(c for c in cited if c not in hd)
+        if miss:
+            f("b", f"the corrected statement cites {', '.join('[' + c + ']' for c in miss)}, not in the item's stmt_deps")
+        for k in ("proof_deps",):
+            for x in node.get(k) or []:
+                if x not in base_paths and x not in new_ids:
+                    f("b", f"the corrected item's {k} names {x}, which is no node on the base nor of the delivery")
+        D["added_deps"] = [x for x in added if x in new_ids]
+    else:
+        if gone:
+            f("b", f"the item's stmt_deps lost {', '.join(gone)}: a delivery only adds the new definition nodes to it "
+                   "(or corrects the statement, with statement_change)")
+        bad = [x for x in added if x not in new_ids]
+        if bad:
+            f("b", f"the item's stmt_deps gained {', '.join(bad)}, which are not new nodes of the delivery (only new definition "
+                   "nodes may be added, or a statement correction with statement_change)")
+        D["added_deps"] = added
+    if corrected:
+        D["roles"].insert(0, f"the item is CORRECTED (statement_change): {len(D['citers'])} citer(s) on the base, "
+                             f"{sum(1 for c in D.get('citer_marks') or [] if c.get('holds') is False)} marked holds:false")
     rec = node.get("lean")
     D["rec"] = rec
     fails.extend(check_record(rec, group))
     if not isinstance(rec, dict):
         rec = {}
     # (b) the new nodes and the dependency nodes
-    base_nodes = nodes_at(git, base) if D["new"] else None
+    if base_nodes is None and D["new"]:
+        base_nodes = nodes_at(git, base)
     known = set(base_paths)
     for nid, x in D["new"].items():
         fails.extend(check_new_node(nid, x["node"], x["path"], item, node, item_dir, group, known, new_ids, base_nodes))
@@ -776,13 +815,15 @@ def read_delivery(git: Git, ref: str, base: str, group: str, item: str, max_comm
     # (e) the report
     rt = show(report)
     D["report"] = rt
-    fails.extend(check_report(rt, group, report, list(D["new"]), list(D["deps"])))
+    fails.extend(check_report(rt, group, report, list(D["new"]), list(D["deps"]), D["corrected"], D["citers"]))
     return D
 
 
-def check_report(rt: str | None, group: str, where: str, new_ids=(), dep_ids=()) -> list[tuple[str, str]]:
-    """Check (e) on the text of the report: the two sections, and `## New nodes` / `## Dependency modules` naming every
-    new node / dependency node of the delivery."""
+def check_report(rt: str | None, group: str, where: str, new_ids=(), dep_ids=(), corrected: bool = False,
+                 citers=()) -> list[tuple[str, str]]:
+    """Check (e) on the text of the report: the two sections, `## New nodes` / `## Dependency modules` naming every
+    new node / dependency node of the delivery, and `## Statement corrected` (naming every citer) when the item is
+    corrected."""
     if rt is None:
         return [("e", f"no report {where}")]
     out = []
@@ -801,6 +842,15 @@ def check_report(rt: str | None, group: str, where: str, new_ids=(), dep_ids=())
         for i in ids:
             if i not in body:
                 out.append(("e", f"the section '## {title}' does not name {i}"))
+    if corrected:
+        body = section_text(rt, "Statement corrected")
+        if not body:
+            out.append(("e", "the item's statement is corrected but the report has no non-empty section '## Statement "
+                             "corrected' (old statement, what was wrong, the source place, one line per citer)"))
+        else:
+            for i in citers:
+                if i not in body:
+                    out.append(("e", f"the section '## Statement corrected' does not name the citer {i}"))
     return out
 
 
