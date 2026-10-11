@@ -156,4 +156,21 @@ end
 
 end MonoidalClosed
 
+/-- **Duality into an invertible object.** In a braided monoidal closed category, for a
+dualizable `K` and an invertible `ω`, the double `ω`-dual of `K` is `K`:
+`[[K, ω], ω] ≅ K`. Indeed `[K, ω] ≅ Kᘁ ⊗ ω`, whose left dual is `M ⊗ K` for a tensor inverse `M`
+of `ω`, so `[[K, ω], ω] ≅ (M ⊗ K) ⊗ ω ≅ K ⊗ (M ⊗ ω) ≅ K`. -/
+theorem nonempty_iso_ihom_obj_ihom_obj_of_isInvertible {K ω : C} (hK : IsDualizable K)
+    (hω : IsInvertible ω) :
+    Nonempty ((ihom ((ihom K).obj ω)).obj ω ≅ K) := by
+  obtain ⟨_⟩ := hK
+  obtain ⟨M, ⟨e⟩, ⟨e'⟩⟩ := hω
+  let : ExactPairing M ω := exactPairingOfTensorIso e' e
+  let : ExactPairing Kᘁ K := BraidedCategory.exactPairing_swap K Kᘁ
+  let : ExactPairing (M ⊗ K) ((ihom K).obj ω) :=
+    exactPairingCongrRight (MonoidalClosed.ihomObjIsoTensor Kᘁ K ω)
+  exact ⟨MonoidalClosed.ihomObjIsoTensor (M ⊗ K) ((ihom K).obj ω) ω ≪≫
+    whiskerRightIso (β_ M K) ω ≪≫ α_ K M ω ≪≫ whiskerLeftIso K e' ≪≫ ρ_ K⟩
+
+
 end CategoryTheory
