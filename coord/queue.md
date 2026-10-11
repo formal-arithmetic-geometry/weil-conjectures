@@ -1,6 +1,6 @@
 # Work queue
 
-866 items; claim with `tools/claim.py next <group> [--stage N]`.
+867 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (52)
 
@@ -10,7 +10,6 @@
 | `lem-weil-pbc-arbitrary-ring-torsion-sheaf-base-change` | 2003 | none |
 | `lem-pc-ringed-space-module-stalk-tensor` | 3013 | none |
 | `lem-pc-ring-pseudo-coherent-localization-glue` | 3016 | none |
-| `lem-pc-module-opcycles-tor-surjection` | 3018 | none |
 | `lem-pc-ring-pseudo-coherent-distinguished-triangle` | 3018 | none |
 | `lem-sc-module-extension-by-zero-stalk-maps` | 3018 | none |
 | `lem-pc-tor-independent-projective-complex-tensor` | 3022 | none |
@@ -42,10 +41,11 @@
 | `lem-sc-perfect-cut-complex-degree-zero` | 6015 | none |
 | `lem-sc-base-change-curve` | - | none |
 | `lem-sc-global-functions` | - | rests_on_sorry |
-| `lem-pc-coherent-property-devissage` | - | none |
-| `lem-sc-etale-torsor-h1-functoriality` | - | none |
+| `lem-pc-coherent-property-irreducible` | - | none |
 | `lem-sc-local-dvr-base-change` | - | none |
 | `lem-sc-pic-restriction-boundary` | - | none |
+| `lem-sc-etale-torsor-inverse-image-extension` | - | none |
+| `lem-sc-etale-torsor-pushout-extension` | - | none |
 | `lem-pur-kinjective-acyclic-quotient-complexes-bounded-size` | - | none |
 | `lem-pur-kinjective-characterize-K-injective` | - | none |
 | `lem-pur-kinjective-characterize-injective` | - | none |
@@ -59,7 +59,7 @@
 | `lem-wf-mixed-commutator-tangent` | - | none |
 | `lem-pur-site-restriction-module-adjunction-exact` | - | none |
 
-## Stage 2: nodes to state (814)
+## Stage 2: nodes to state (815)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -196,6 +196,7 @@
 | `lem-pc-linear-pair-graded-finite` | 1 | state |
 | `lem-pc-linear-pair-morphism-finite` | 1 | state |
 | `lem-pc-module-flat-opcycles-tor-criterion` | 1 | state |
+| `lem-pc-module-opcycles-tor-surjection` | 1 | state |
 | `lem-pc-monomial-cech-complex-homology` | 1 | state |
 | `lem-pc-pic-exact` | 1 | state |
 | `lem-pc-pic-of-field` | 1 | state |
@@ -878,7 +879,7 @@
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 1715 nodes that wait for a statement dependency, 93 nodes that wait for stage 1.
+Not open yet: 1717 nodes that wait for a statement dependency, 93 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
