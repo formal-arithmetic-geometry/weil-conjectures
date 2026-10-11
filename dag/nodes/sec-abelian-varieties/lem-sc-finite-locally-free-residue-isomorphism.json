@@ -13,17 +13,50 @@
  },
  "kind": "statement",
  "title": "Residue-field criterion for a map of finite locally free modules",
- "statement": "Let $S$ be a scheme [def-pc-scheme] and let $v:\\mathcal E\\to\\mathcal F$ be a morphism of finite locally free $\\mathcal O_S$-modules. If for every point $s\\in S$ the induced map $\\mathcal E\\otimes_{\\mathcal O_S}\\kappa(s)\\to\\mathcal F\\otimes_{\\mathcal O_S}\\kappa(s)$ is an isomorphism, then $v$ is an isomorphism.",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] and let $v:\\mathcal E\\to\\mathcal F$ be a morphism of finite locally free $\\mathcal O_S$-modules (that is, $S$ has an open cover on each member of which $\\mathcal E$ and $\\mathcal F$ are locally free of some constant finite rank [def-amb-finite-locally-free-module]). For $s\\in S$, write $\\mathcal E\\otimes\\kappa(s)$ for the fibre $\\mathcal E_s\\otimes_{\\mathcal O_{S,s}}\\kappa(s)$, and similarly for $\\mathcal F$. If for every point $s\\in S$ the induced map $\\mathcal E_s\\otimes_{\\mathcal O_{S,s}}\\kappa(s)\\to\\mathcal F_s\\otimes_{\\mathcal O_{S,s}}\\kappa(s)$ is an isomorphism, then $v$ is an isomorphism.",
  "source": {
   "document": "literature/stacks-project/algebra.tex",
   "place": "Tag 00O0, Lemma cokernel-flat, part (3)"
  },
  "stmt_deps": [
-  "def-pc-scheme"
+  "def-pc-scheme",
+  "def-amb-finite-locally-free-module"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix s∈S and put R=O_{S,s}, with maximal ideal m and residue field kappa(s). On an open neighbourhood of s both modules are free of finite rank [def-amb-finite-locally-free-module], so E_s and F_s are finite free R-modules. Let C=coker(v_s), a finitely generated R-module (quotient of F_s). Right exactness of tensor product and surjectivity of the fibre map give C/mC=0, so C=0 by Nakayama [lem-weil-pbc-nakayama-local-generators] (with N=0); thus v_s is surjective. Since F_s is free, this surjection splits: E_s ≅ K ⊕ F_s with K=ker(v_s), so K is a direct summand of E_s, hence finitely generated, and the split exact sequence 0→K→E_s→F_s→0 stays exact after tensoring with kappa(s). Hence K⊗kappa(s) is the kernel of the fibre map E_s⊗kappa(s)→F_s⊗kappa(s), which is injective by hypothesis; so K/mK=0, and Nakayama [lem-weil-pbc-nakayama-local-generators] gives K=0. Hence v_s is bijective.",
+   "uses": [
+    "lem-weil-pbc-nakayama-local-generators",
+    "def-amb-finite-locally-free-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00O0, Lemma cokernel-flat, part (3), local criterion"
+   }
+  },
+  {
+   "text": "By step 1 the stalk map v_s is bijective for every s∈S, so v is an isomorphism of O_S-modules by [lem-weil-pbc-module-iso-on-stalks].",
+   "uses": [
+    "lem-weil-pbc-module-iso-on-stalks"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00O0, Lemma cokernel-flat, part (3), sheaf-local conclusion"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-nakayama-local-generators",
+  "def-amb-finite-locally-free-module",
+  "lem-weil-pbc-module-iso-on-stalks"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00O0, Lemma cokernel-flat, part (3)"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -62,12 +95,32 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-perfect-degree-zero-fibre-criterion",
   "by": "worker",
   "date": "2026-10-11"
  },
  "chapter": "sec-abelian-varieties",
- "unit": "sk-prop-av-cube"
+ "unit": "sk-prop-av-cube",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-finite-locally-free-residue-isomorphism",
+  "worker": "stage1",
+  "summary": "Split the residue-field criterion into the local algebra criterion for finite free modules over a local ring and the stalkwise sheaf conclusion. No existing Lean declaration or duplicate DAG node states the item.",
+  "blueprint": "Realizes the theorem-of-the-cube proof sentence concluding that a map of finite locally free modules is an isomorphism when all residue-field fibres are isomorphisms."
+ },
+ "tool_uses": [
+  "lem-weil-pbc-nakayama-local-generators",
+  "lem-weil-pbc-module-iso-on-stalks",
+  "def-amb-finite-locally-free-module"
+ ],
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-fri0045",
+  "group": "J1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-fri0045 (reviewer sub-agent of L); spot-checked: Statement vs Tag 00O0(3) correct; citer lem-sc-perfect-degree-zero-fibre-criterion step uses exactly this (O_S -> H^0(K), both finite locally free); math of both steps correct; no duplicate node; Mathlib has only ring-level ingredients (LocalRing/Module.lean, e.g. IsLocalRing.split_injective_iff_lTensor_residueField_injective), no scheme-level declaration. FIX more, RETURN less: (1) C1 step 1 Nakayama now cites lem-weil-pbc-nakayama-local-generators; (2) C1 step 2 stalkwise iso now cites lem-weil-pbc-module-iso-on-stalks (mathlib leaf); (3) C4/b finite locally free now cites def-amb-finite-locally-free-module (statement and stmt_deps, locally of constant rank); also made explicit in step 1 that K tensor kappa(s) injects into E_s tensor kappa(s) by the splitting (gap the second reading missed). Tool uses: the three generic nodes from other units.; 1 file(s) fixed by the reviewer"
+ }
 }
