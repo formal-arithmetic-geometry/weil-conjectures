@@ -6,6 +6,7 @@ Authors: Weil conjectures project
 module
 
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekFormalism
+public import WeilConjectures.SixFunctors.Etale.Derived.RefinementLowerShriekBaseChange
 
 /-!
 # The comparison isomorphisms of the compact support formalism on `D⁺(X_ét)`
@@ -88,11 +89,13 @@ lemma unit_map_refinementLowerShriekBaseChangeDerivedPlusIso_hom_app
   refine Localization.natTrans_ext DerivedCategory.Plus.Qh
     (HomotopyCategory.Plus.quasiIso (Sheaf X.smallEtaleTopology A)) (fun K₀ ↦ ?_)
   have := r.isIso_openImmersionLowerShriekBaseChange A hcart
+  have hunit := unit_map_openImmersionLowerShriekBaseChange_app A c.i r.hom d.i r.i_hom
+  rw [upperStarCompIso_eq] at hunit
   have hhot := Adjunction.mapHomotopyCategoryPlus_unit_app_comp_whisker
     (openImmersionLowerShriekUpperStarAdjunction A c.i)
     (openImmersionLowerShriekUpperStarAdjunction A d.i) (r.openImmersionLowerShriekBaseChange A)
     (upperStarComp A c.i r.hom d.i r.i_hom.symm).hom
-    (unit_map_openImmersionLowerShriekBaseChange_app A c.i r.hom d.i r.i_hom) K₀
+    hunit K₀
   rw [← cancel_mono (D+((c.i)^*[A]).map (D+((r.hom)^*[A]).map
       (((d.i)_!open[A]).mapDerivedCategoryPlusFactorsh.hom.app K₀)) ≫
     D+((c.i)^*[A]).map (((r.hom)^*[A]).mapDerivedCategoryPlusFactorsh.hom.app

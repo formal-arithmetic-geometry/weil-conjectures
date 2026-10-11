@@ -409,30 +409,6 @@ lemma Etale.upperStarBaseChange_app (j : X ⟶ C) (q : C ⟶ D) (k : X ⟶ D) (h
         ((j)^*[A]).map ((Etale.upperStarLowerStarAdjunction A q).counit.app F) := by
   simp [Etale.upperStarBaseChange, Etale.upperStarCompIso_eq_upperStarComp]
 
-omit [HasSmallSiteSheafify A] in
-/-- The transpose of the base change comparison `j_! ⟶ k_! ⋙ q^*` under `j_! ⊣ j^*` is the unit
-of `k_! ⊣ k^*` followed by the composition isomorphism `k^* ≅ q^* ⋙ j^*`. -/
-@[reassoc]
-lemma Etale.unit_map_openImmersionLowerShriekBaseChange_app (j : X ⟶ C) [IsOpenImmersion j]
-    (q : C ⟶ D) (k : X ⟶ D) [IsOpenImmersion k] (hk : j ≫ q = k)
-    (F : Sheaf X.smallEtaleTopology A) :
-    (Etale.openImmersionLowerShriekUpperStarAdjunction A j).unit.app F ≫
-        (j)^*[A].map ((Etale.openImmersionLowerShriekBaseChange A j q k hk).app F) =
-      (Etale.openImmersionLowerShriekUpperStarAdjunction A k).unit.app F ≫
-        (Etale.upperStarComp A j q k hk.symm).hom.app ((k)_!open[A].obj F) := by
-  have h := unit_conjugateEquiv_symm
-    ((Etale.openImmersionLowerShriekUpperStarAdjunction A k).comp
-      (Etale.upperStarLowerStarAdjunction A q))
-    (Etale.openImmersionLowerShriekUpperStarAdjunction A j) (Etale.upperStarBaseChange A j q k hk) F
-  rw [Etale.openImmersionLowerShriekBaseChange, ← h, Adjunction.comp_unit_app,
-    Etale.upperStarBaseChange_app]
-  simp only [Functor.comp_obj, Category.assoc]
-  congr 1
-  erw [(Etale.upperStarComp A j q k hk.symm).hom.naturality_assoc]
-  rw [Functor.comp_map, ← Functor.map_comp, Adjunction.left_triangle_components,
-    CategoryTheory.Functor.map_id]
-  exact Category.comp_id _
-
 /-- **Identity law for the base change map on pullbacks**: for `q = 𝟙 C` and `k = j` the
 base change map `(𝟙 C)_* ⋙ j^* ⟶ j^*` is the unitor built from `Etale.lowerStarId`. -/
 lemma Etale.upperStarBaseChange_id (j : X ⟶ C) (hj : j ≫ 𝟙 C = j) :

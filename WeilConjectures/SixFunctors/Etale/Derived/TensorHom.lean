@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Parametrized
 public import WeilConjectures.SixFunctors.Etale.Derived.Composition
 public import WeilConjectures.SixFunctors.Etale.Derived.Dualizing
 public import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula
@@ -30,9 +31,14 @@ and so does not depend on the duality theory itself.
 
 ## Implementation notes
 
-Canonical comparison maps are not constructed in this repository, so the isomorphisms are
-asserted as `Nonempty (_ ≅ _)`; the blueprint's naturality clauses and its compatibilities
-with finite reduction, scalar extension and shifts are consequently **not stated**.
+The tensor–Hom exchange is constructed as a natural isomorphism of bifunctors
+`D(X_ét)ᵒᵖ ⥤ D(Y_ét) ⥤ D(Y_ét)` (`AlgebraicGeometry.Etale.derivedHomRightDerivedLowerShriekIso`),
+for any coefficient category `A` for which the projection map is an isomorphism (axiom (A3) of
+`def-sf-datum`), by conjugating the projection formula along the two adjunctions with a
+parameter (`CategoryTheory.ParametrizedAdjunction.conjugateIso`). The other comparison maps are
+not constructed in this repository, so the remaining isomorphisms are asserted as
+`Nonempty (_ ≅ _)`. The blueprint's compatibilities with finite reduction, scalar extension and
+shifts are **not stated**.
 
 The tensor–Hom statement is made on `Dctf`, so applying it at `N = ω_Y` needs `ω_Y` to lie in
 `Dctf(Y, A)`. In the blueprint's setting (a finite-type scheme over a field, finite coefficient
@@ -43,6 +49,8 @@ discharges it over a Noetherian base whenever the unit `Λ_S` lies in `Dctf(S, A
 
 ## Main statements
 
+- `AlgebraicGeometry.Etale.derivedHomRightDerivedLowerShriekIso` (`lem-sf-tensor-hom`): the
+  natural isomorphism `Rf_* RHom_X(M, Rf^! N) ≅ RHom_Y(Rf_! M, N)`, given the projection formula.
 - `AlgebraicGeometry.Etale.nonempty_iso_derivedHom_rightDerivedLowerShriek`
   (`sk-thm-sf-tensor-hom`): `Rf_* RHom_X(M, Rf^! N) ≅ RHom_Y(Rf_! M, N)`.
 - `AlgebraicGeometry.Etale.nonempty_iso_rightDerivedUpperShriek_dualizingComplex`
@@ -76,6 +84,44 @@ variable {FA : A → A → Type (u + 1)} {CA : A → Type (u + 1)}
 
 namespace Etale
 
+section TensorHomIso
+
+variable [Etale.UpperStarPreservesFlat A]
+  [(CategoryTheory.forget A).ReflectsIsomorphisms]
+  [PreservesFilteredColimitsOfSize.{u + 1, u + 1} (CategoryTheory.forget A)]
+  [∀ Z : Scheme.{u}, Z.smallEtaleTopology.HasSheafCompose (CategoryTheory.forget A)]
+  {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f] [(R(f)_![A]).IsLeftAdjoint]
+
+/-- Blueprint `lem-sf-tensor-hom`: Tensor–Hom form of the exchange.
+
+Let `f : X ⟶ Y` admit a compactification, and assume the projection formula for `f`
+(axiom (A3) of the six-functor datum `def-sf-datum`): the projection map
+`PF : Rf_! M ⊗ᴸ L ⟶ Rf_!(M ⊗ᴸ Lf^* L)` (`AlgebraicGeometry.Etale.projectionMap`) is an
+isomorphism. Then there is an isomorphism
+
+`Rf_* RHom_X(M, Rf^! N) ≅ RHom_Y(Rf_! M, N)`,
+
+natural in `M` and `N`, i.e. an isomorphism of bifunctors `D(X_ét)ᵒᵖ ⥤ D(Y_ét) ⥤ D(Y_ét)`.
+
+As in the blueprint, it is the Yoneda consequence of the chain of adjunctions: the bifunctor
+`(M, L) ↦ Rf_!(M ⊗ᴸ Lf^* L)` is left adjoint, with the parameter `M`, to
+`(M, N) ↦ Rf_* RHom_X(M, Rf^! N)` (by `Lf^* ⊣ Rf_*`, `- ⊗ᴸ - ⊣₂ RHom` and `Rf_! ⊣ Rf^!`),
+the bifunctor `(M, L) ↦ Rf_! M ⊗ᴸ L` is left adjoint to `(M, N) ↦ RHom_Y(Rf_! M, N)`, and
+the inverse of the projection formula identifies the two left adjoints; the isomorphism is
+objectwise the conjugate of the projection formula
+(`CategoryTheory.ParametrizedAdjunction.conjugateIso`). The blueprint takes `M` and `N` in
+`Dᵇctf`; no such hypothesis is needed. For a finite coefficient ring `Λ` the projection
+formula holds (`AlgebraicGeometry.Etale.isIso_projectionMap_of_finite`). -/
+noncomputable def derivedHomRightDerivedLowerShriekIso [IsIso (projectionMap A f)] :
+    RHom(X)[A] ⋙ (Functor.whiskeringLeft _ _ _).obj R(f)^![A] ⋙
+        (Functor.whiskeringRight _ _ _).obj R((f)_*[A]) ≅
+      (R(f)_![A]).op ⋙ RHom(Y)[A] :=
+  ((derivedTensorHomAdjunction₂ A X).comp (derivedUpperStarLowerStarAdjunction A f)
+      (rightDerivedUpperShriekAdjunction A f)).conjugateIso
+    ((derivedTensorHomAdjunction₂ A Y).precomp R(f)_![A]) (asIso (projectionMap A f))
+
+end TensorHomIso
+
 section TensorHom
 
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {X Y : Scheme.{u}} (f : X ⟶ Y)
@@ -90,24 +136,20 @@ image of the internal hom from `M` into `Rf^! N` agrees with the internal hom on
 `Rf_* RHom_X(M, Rf^! N) ≅ RHom_Y(Rf_! M, N)`.
 
 As in the blueprint this is obtained from the chain of adjunctions `Rf_! ⊣ Rf^!`,
-`Lf^* ⊣ Rf_*` and `- ⊗ᴸ - ⊣ RHom`, together with the projection formula: the functor
-`N ↦ Rf_* RHom_X(M, Rf^! N)` is right adjoint to `L ↦ Rf_!(M ⊗ᴸ Lf^* L)`, the functor
-`N ↦ RHom_Y(Rf_! M, N)` is right adjoint to `L ↦ Rf_! M ⊗ᴸ L`, and the projection formula
-(`AlgebraicGeometry.Etale.hasProjectionFormula_of_finite`) identifies the two left adjoints.
-For torsion coefficients no finiteness hypothesis on `M` and `N` is needed. -/
+`Lf^* ⊣ Rf_*` and `- ⊗ᴸ - ⊣ RHom`, together with the projection formula: it is the component
+at `(M, N)` of the natural isomorphism
+`AlgebraicGeometry.Etale.derivedHomRightDerivedLowerShriekIso` (`lem-sf-tensor-hom`), the
+projection formula holding at finite coefficients
+(`AlgebraicGeometry.Etale.isIso_projectionMap_of_finite`). For torsion coefficients no
+finiteness hypothesis on `M` and `N` is needed. -/
 theorem nonempty_iso_derivedHom_rightDerivedLowerShriek
     (M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
     (N : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
     Nonempty ((R((f)_*[ModuleCat.{u + 1} Λ])).obj ((RHom(X)[ModuleCat.{u + 1} Λ].obj (op M)).obj
         ((R(f)^![ModuleCat.{u + 1} Λ]).obj N)) ≅
       (RHom(Y)[ModuleCat.{u + 1} Λ].obj (op ((R(f)_![ModuleCat.{u + 1} Λ]).obj M))).obj N) := by
-  obtain ⟨e⟩ := nonempty_iso_derivedTensor_obj_rightDerivedLowerShriek _ f M
-    (fun L ↦ hasProjectionFormula_of_finite Λ f M L)
-  exact ⟨(Adjunction.rightAdjointUniq
-    (((derivedUpperStarLowerStarAdjunction _ f).comp (derivedTensorHomAdjunction _ M)).comp
-      (rightDerivedUpperShriekAdjunction _ f))
-    ((derivedTensorHomAdjunction _ ((R(f)_![ModuleCat.{u + 1} Λ]).obj M)).ofNatIsoLeft
-      (e ≪≫ (Functor.associator _ _ _).symm))).app N⟩
+  have := isIso_projectionMap_of_finite Λ f
+  exact ⟨((derivedHomRightDerivedLowerShriekIso _ f).app (op M)).app N⟩
 
 end TensorHom
 
