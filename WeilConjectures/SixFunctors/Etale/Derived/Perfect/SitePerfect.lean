@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import Mathlib.Algebra.Category.ModuleCat.Biproducts
 public import WeilConjectures.ConstructibleSheaf.Defs
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar
 public import WeilConjectures.SixFunctors.Etale.Derived.Perfect.Dual
@@ -204,6 +205,58 @@ theorem DerivedCategory.isDualizable_of_cover (K : DerivedCategory (Sheaf Y.smal
 
 end Reduction
 
+/-- The constant sheaf `(Λ^m)_U` is dualizable: it is a finite biproduct of copies of the unit
+sheaf `Λ_U` (`CategoryTheory.IsDualizable.biprod`). -/
+theorem isDualizableSheaf_constantSheaf_pi {U : Scheme.{u}} (m : ℕ) :
+    IsDualizableSheaf ((constantSheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj
+      (ModuleCat.of Λ (Fin m → Λ))) := by
+  have := (constantSheafAdj U.smallEtaleTopology (ModuleCat.{u + 1} Λ)
+    terminalIsTerminal).isLeftAdjoint
+  have : PreservesColimitsOfSize.{0, 0}
+      (constantSheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :=
+    (constantSheafAdj U.smallEtaleTopology (ModuleCat.{u + 1} Λ)
+      terminalIsTerminal).leftAdjoint_preservesColimits
+  have : PreservesBinaryBiproducts (constantSheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :=
+    preservesBinaryBiproducts_of_preservesBinaryCoproducts _
+  induction m with
+  | zero =>
+    exact isDualizableSheaf_of_isZero (Functor.map_isZero _ (ModuleCat.isZero_of_subsingleton _))
+  | succ m ih =>
+    let e : ModuleCat.of Λ (Fin (m + 1) → Λ) ≅
+        ModuleCat.of Λ Λ ⊞ ModuleCat.of Λ (Fin m → Λ) :=
+      (Fin.consLinearEquiv Λ (fun _ : Fin (m + 1) ↦ Λ)).symm.toModuleIso ≪≫
+        (ModuleCat.biprodIsoProd (ModuleCat.of Λ Λ) (ModuleCat.of Λ (Fin m → Λ))).symm
+    refine IsDualizableSheaf.of_iso ((constantSheaf _ _).mapIso e ≪≫
+      Functor.mapBiprod (constantSheaf _ _) _ _).symm ?_
+    exact IsDualizableSheaf.biprod isDualizableSheaf_unit ih
+
+/-- An object of `D(U_ét, Λ)` isomorphic to a bounded complex of finite projective `Λ_U`-modules
+is dualizable (`CategoryTheory.IsDualizable.of_retract`,
+`AlgebraicGeometry.Etale.isDualizableSheaf_constantSheaf_pi`). -/
+theorem isDualizableEtale_of_trivialization {U : Scheme.{u}}
+    {M : DerivedCategory (Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
+    (P : CochainComplex (Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ)) ℤ) (a b : ℤ)
+    (ha : P.IsStrictlyGE a) (hb : P.IsStrictlyLE b)
+    (hP : ∀ n, ∃ m : ℕ, Nonempty (Retract (P.X n)
+      ((constantSheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj
+        (ModuleCat.of Λ (Fin m → Λ)))))
+    (e : M ≅ DerivedCategory.Q.obj P) : DerivedCategory.IsDualizableEtale M :=
+  (DerivedCategory.isDualizableEtale_Q_obj P a b fun n ↦
+    have h := hP n
+    IsDualizableSheaf.of_retract h.choose_spec.some
+      (isDualizableSheaf_constantSheaf_pi h.choose)).of_iso e.symm
+
+/-- For an étale morphism `u : U ⟶ X` and `K` whose derived pullback `Lu^*K` is dualizable, the
+derived pullback of the comparison `RHom(K, Λ_X) ⊗ᴸ K ⟶ RHom(K, K)` is an isomorphism: for
+étale `u` the derived pullback commutes with the internal hom, and the comparison for the
+dualizable `Lu^*K` is an isomorphism. -/
+theorem isIso_leftDerivedUpperStar_map_ihomUnitTensorToIhomEtale_of_isDualizableEtale
+    {U : Scheme.{u}} (f : U ⟶ X) [Etale f]
+    (K : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
+    (_hK : DerivedCategory.IsDualizableEtale ((L((f)^*[ModuleCat.{u + 1} Λ])).obj K)) :
+    IsIso ((L((f)^*[ModuleCat.{u + 1} Λ])).map (DerivedCategory.ihomUnitTensorToIhomEtale K)) :=
+  sorry
+
 /-- On a member `u : U ⟶ X` of an étale cover on which `K` is isomorphic to a bounded complex of
 finite projective `Λ_U`-modules, the derived pullback of the comparison
 `RHom(K, Λ_X) ⊗ᴸ K ⟶ RHom(K, K)` is an isomorphism. -/
@@ -211,13 +264,14 @@ theorem isIso_leftDerivedUpperStar_map_ihomUnitTensorToIhom_of_trivialization
     {U : Scheme.{u}} (f : U ⟶ X) [Etale f]
     (K : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
     (P : CochainComplex (Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ)) ℤ) (a b : ℤ)
-    (_ha : P.IsStrictlyGE a) (_hb : P.IsStrictlyLE b)
-    (_hP : ∀ n, ∃ m : ℕ, Nonempty (Retract (P.X n)
+    (ha : P.IsStrictlyGE a) (hb : P.IsStrictlyLE b)
+    (hP : ∀ n, ∃ m : ℕ, Nonempty (Retract (P.X n)
       ((constantSheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj
         (ModuleCat.of Λ (Fin m → Λ)))))
-    (_e : (L((f)^*[ModuleCat.{u + 1} Λ])).obj K ≅ DerivedCategory.Q.obj P) :
+    (e : (L((f)^*[ModuleCat.{u + 1} Λ])).obj K ≅ DerivedCategory.Q.obj P) :
     IsIso ((L((f)^*[ModuleCat.{u + 1} Λ])).map (DerivedCategory.ihomUnitTensorToIhomEtale K)) :=
-  sorry
+  isIso_leftDerivedUpperStar_map_ihomUnitTensorToIhomEtale_of_isDualizableEtale f K
+    (isDualizableEtale_of_trivialization P a b ha hb hP e)
 
 /-- A complex which is perfect on the coefficient site is dualizable for the derived tensor
 product: dualizability can be checked on an étale cover
