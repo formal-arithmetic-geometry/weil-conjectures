@@ -3343,3 +3343,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 03:10 L: merged deliver/J1/lem-sc-complex-lift-acyclic-projective (reviewer FIX; first push; new nodes: 0)
 - 03:10 L: merged by reviewers: K1 lem-pc-vanishing-above-dim (R-vad0309 FIX 51556b843: unclosed $ restored, source.external.place cleaned of pasted proof text; route via Grothendieck vanishing lem-sc-noetherian-cohomology-above-dimension), J1 lem-sc-complex-lift-acyclic-projective (R-cla0309 FIX 88f341811: statement and stmt_deps restored word for word, TeX, Z^n in P stated); J1's second readings keep claiming a created.item correction that does not happen (third time tonight)
 - 03:13 L: reviewer R-tcm0313 launched (E1 lem-pur-triangle-completion-ms6-05r9, head e6bac3d1d)
+- 03:13 L: merged deliver/E1/lem-pur-triangle-completion-ms6-05r9 (reviewer PASS; first push; new nodes: 0)
