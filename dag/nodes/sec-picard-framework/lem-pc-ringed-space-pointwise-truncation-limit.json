@@ -24,7 +24,8 @@
   "def-sbc-standard-tstructure-derived-category",
   "def-weil-derived-limit",
   "pqf-def-cohomology",
-  "def-sc-ringed-space-module-cohomology"
+  "def-sc-ringed-space-module-cohomology",
+  "def-sc-open-module-cohomology"
  ],
  "proof": [
   {
@@ -140,5 +141,23 @@
   "group": "F1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ptl2526 (reviewer sub-agent of L); spot-checked: Statement vs Tag 0D62+0H72 (existence and every-c iso both stated); n(x) bounds checked for m<0,=0,>0; Step 3 LES vanishings match Step 2; new nodes = Tags 0D60/0D61 exact, not duplicates (lem-pc-derived-functor-commutes-derived-limit is scheme-only, Milnor node is D(Ab)), real lemmas. FIX more, RETURN less: (1) C1 Step 4: R^1 lim H^{m-1}(U,K_n)=0 from eventual isomorphisms was uncited; now cites lem-pc-derived-limit-roos-abelian-groups (R^1 lim = coker(1-s)) with explicit surjectivity of 1-s; (2) C1 Step 1: 0H72 lift written out via Roos triangle and lem-weil-pbc-hom-into-triangle-exact (generic tool); (3) E Step 2: n(x) raised to max(0,...) since the tower is indexed by n>=0 and Tag 0D62's n(x) can be negative for m>0; Step 4 now says why the composite is H^m(c_{n(x)}) for every compatible c.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Topology.PointwiseTruncationLimit",
+  "declaration": "AlgebraicGeometry.RingedSpace.pointwise_truncation_limit",
+  "file": "lean/Sheaf/Topology/PointwiseTruncationLimit.lean",
+  "statement": "theorem pointwise_truncation_limit (X : RingedSpace.{u}) [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X))] (E : DerivedCategory (SheafOfModules.{u} (moduleRings X))) (hlocal : ∀ x : X, ∃ (b : ℤ → ℤ) (B : Set (Opens X)), (∀ U ∈ B, x ∈ U) ∧ (∀ V : Opens X, x ∈ V → ∃ U ∈ B, U ≤ V) ∧ (∀ (m : ℤ) (p : ℕ) (U : Opens X), U ∈ B → b m < (p : ℤ) → IsZero ((openModuleCohomology X p U).obj ((DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings X)) (m - (p : ℤ))).obj E)))) [HasProduct (fun n : ℕ => (DerivedCategory.TStructure.t.truncGE (-(n : ℤ))).obj E)] (K : DerivedCategory (SheafOfModules.{u} (moduleRings X))) (π : K ⟶ ∏ᶜ (fun n : ℕ => (DerivedCategory.TStructure.t.truncGE (-(n : ℤ))).obj E)) (δ : (∏ᶜ (fun n : ℕ => (DerivedCategory.TStructure.t.truncGE (-(n : ℤ))).obj E)) ⟶ K⟦(1 : ℤ)⟧) (hK : IsDerivedLimitTriangle (fun n : ℕ => (DerivedCategory.TStructure.t.natTransTruncGEOfLE (-((n + 1 : ℕ) : ℤ)) (-(n : ℤ)) (by omega)).app E) K π δ) : (∃ c : E ⟶ K, ∀ n : ℕ, c ≫ π ≫ Pi.π (fun n : ℕ => (DerivedCategory.TStructure.t.truncGE (-(n : ℤ))).obj E) n = (DerivedCategory.TStructure.t.truncGEπ (-(n : ℤ))).app E) ∧ (∀ c : E ⟶ K, (∀ n : ℕ, c ≫ π ≫ Pi.π (fun n : ℕ => (DerivedCategory.TStructure.t.truncGE (-(n : ℤ))).obj E) n = (DerivedCategory.TStructure.t.truncGEπ (-(n : ℤ))).app E) → IsIso c)",
+  "branch": "sheaf-dag",
+  "by": "T1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-ptl",
+  "group": "T1",
+  "result": "pass",
+  "note": "X:RingedSpace, E in D(O_X) via HasDerivedCategory.{w}; hlocal = per-x b:Z->Z and B tied (x in U, fundamental system, H^p(U,H^{m-p}E)=0 for p>b m via landed openModuleCohomology); tower truncGE(-n), transitions natTransTruncGEOfLE, c_n truncGEπ as landed TruncationDerivedLimit/QCohTruncationDerivedLimit; (K,π,δ) with IsDerivedLimitTriangle; conclusions exists compatible c and every compatible c IsIso, both real (no rfl/inferInstance); HasProduct binder needed (infer_instance fails); stmt_deps +def-sc-open-module-cohomology landed and justified, check_dag clean"
  }
 }
