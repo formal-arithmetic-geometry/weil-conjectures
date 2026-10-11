@@ -33,6 +33,73 @@ open CategoryTheory Limits Opposite
 
 namespace AlgebraicGeometry.Etale
 
+open Scheme
+
+section Germ
+
+variable {R T : Scheme.{u}} (t : T ⟶ R) (G : Sheaf R.smallEtaleTopology AddCommGrpCat.{u + 1})
+  {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
+
+/-- On stalks, the unit `G ⟶ t_* t^* G` followed by restriction to a geometric point `s` of `T`
+and the identification `(t^* G)_s ≅ G_{s ≫ t}` is the identity. -/
+lemma sheafFiber_map_unit_stalkRestrict_upperStarCompSheafFiberIso (s : Spec (.of Ω) ⟶ T) :
+    (pointSmallEtale (s ≫ t)).sheafFiber.map
+        ((upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} t).unit.app G) ≫
+      Etale.stalkRestrict AddCommGrpCat.{u + 1} t (s ≫ t) ⟨s, rfl⟩
+        ((t)^*[AddCommGrpCat.{u + 1}].obj G) ≫
+      (upperStarCompSheafFiberIso AddCommGrpCat.{u + 1} t s).hom.app G = 𝟙 _ := by
+  rw [Etale.stalkRestrict_eq_counit]
+  have h := (upperStarCompSheafFiberIso AddCommGrpCat.{u + 1} t s).inv.naturality
+    ((upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} t).unit.app G)
+  simp only [Category.assoc]
+  rw [reassoc_of% h]
+  rw [← Functor.map_comp_assoc, Adjunction.left_triangle_components, CategoryTheory.Functor.map_id,
+    Category.id_comp, Iso.inv_hom_id_app]
+  rfl
+
+/-- The germ of `φ^* g` at a geometric point `v` of `V` is the germ of `g` at `v ≫ φ`, through
+the identification `(t^* G)_s ≅ G_{s ≫ t}`. -/
+lemma upperStarCompSheafFiberIso_hom_toPresheafFiber_pullSection (s : Spec (.of Ω) ⟶ T)
+    {V : T.Etale} {U : R.Etale} (φ : V.left ⟶ U.left) (hφ : φ ≫ U.hom = V.hom ≫ t)
+    (g : G.obj.obj (op U)) (v : (pointSmallEtale s).fiber.obj V) :
+    (upperStarCompSheafFiberIso AddCommGrpCat.{u + 1} t s).hom.app G
+      ((pointSmallEtale s).toPresheafFiber V v ((t)^*[AddCommGrpCat.{u + 1}].obj G).obj
+        (pullSection t G φ hφ g)) =
+      (pointSmallEtale (s ≫ t)).toPresheafFiber U
+        (CategoryTheory.Over.homMk (U := CategoryTheory.Over.mk (s ≫ t))
+          (V := (Etale.forget R).obj U) (v.left ≫ φ)
+          (by
+            have hv : v.left ≫ V.hom = s := CategoryTheory.Over.w v
+            change (v.left ≫ φ) ≫ U.hom = s ≫ t
+            rw [Category.assoc, hφ, reassoc_of% hv])) G.obj g := by
+  set u : (pointSmallEtale (s ≫ t)).fiber.obj U := CategoryTheory.Over.homMk
+    (U := CategoryTheory.Over.mk (s ≫ t)) (V := (Etale.forget R).obj U) (v.left ≫ φ) (by
+      have hv : v.left ≫ V.hom = s := CategoryTheory.Over.w v
+      change (v.left ≫ φ) ≫ U.hom = s ≫ t
+      rw [Category.assoc, hφ, reassoc_of% hv])
+  have hv : v.left ≫ V.hom = s := CategoryTheory.Over.w v
+  have e : (pointSmallEtale s).fiber.map (homToPullback t φ hφ) v =
+      ((Etale.baseChangeNbhd t (s ≫ t) ⟨s, rfl⟩).obj ⟨U, u⟩).2 := by
+    refine CategoryTheory.Over.OverMorphism.ext (pullback.hom_ext ?_ ?_)
+    · change (v.left ≫ (homToPullback t φ hφ).left) ≫ _ = _
+      simp [u, Scheme.Hom.basePt]
+    · change (v.left ≫ (homToPullback t φ hφ).left) ≫ _ = _
+      simp [u, Scheme.Hom.basePt, hv]
+  rw [pullSection, GrothendieckTopology.Point.toPresheafFiber_w_apply, e]
+  have h1 := ConcreteCategory.congr_hom (Etale.toPresheafFiber_stalkRestrict AddCommGrpCat.{u + 1}
+    t (s ≫ t) ⟨s, rfl⟩ ((t)^*[AddCommGrpCat.{u + 1}].obj G) ⟨U, u⟩)
+    (((upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} t).unit.app G).hom.app (op U) g)
+  rw [ConcreteCategory.comp_apply] at h1
+  erw [← h1]
+  erw [← GrothendieckTopology.Point.toPresheafFiber_naturality_apply]
+  have h2 := ConcreteCategory.congr_hom
+    (sheafFiber_map_unit_stalkRestrict_upperStarCompSheafFiberIso t G s)
+    ((pointSmallEtale (s ≫ t)).toPresheafFiber U u G.obj g)
+  rw [ConcreteCategory.comp_apply, ConcreteCategory.comp_apply] at h2
+  exact h2
+
+end Germ
+
 /-- **Descent along a finite surjective morphism.** Let `r : Y' ⟶ Y` be finite and surjective,
 `G` an abelian étale sheaf on `Y` and `σ'` a global section of `r^* G` (a section over the
 terminal étale `Y'`-scheme `Y'`) whose two restrictions along the projections
