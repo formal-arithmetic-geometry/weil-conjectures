@@ -27,6 +27,83 @@ universe u
 
 open CategoryTheory Limits LaurentPolynomial
 
+namespace AlgebraicGeometry.AffineSpace
+
+variable (m : Type u) (S : Scheme.{u})
+
+/-- The coordinate `x_k` of `𝔸^m_S` restricted to an open. -/
+noncomputable def coordRes' (O : (𝔸(m; S)).Opens) (k : m) : Γ(𝔸(m; S), O) :=
+  (𝔸(m; S)).presheaf.map (homOfLE le_top).op (coord S k)
+
+lemma opensRange_map_ι (W : S.Opens) :
+    (map m W.ι).opensRange = (𝔸(m; S) ↘ S) ⁻¹ᵁ W := by
+  ext x
+  have := Scheme.Pullback.range_fst (𝔸(m; S) ↘ S) W.ι
+  have h : Set.range (map m W.ι) = Set.range (pullback.fst (𝔸(m; S) ↘ S) W.ι) := by
+    rw [← (isPullback_map (n := m) W.ι).isoPullback_hom_fst, Scheme.Hom.comp_base,
+      TopCat.coe_comp, Set.range_comp,
+      Set.range_eq_univ.mpr (ConcreteCategory.bijective_of_isIso
+        (isPullback_map (n := m) W.ι).isoPullback.hom.base).2, Set.image_univ]
+  change x ∈ Set.range _ ↔ _
+  rw [h, this, Scheme.Opens.range_ι]
+  rfl
+
+lemma preimage_preimage_map_ι (W : S.Opens) :
+    map m W.ι ⁻¹ᵁ ((𝔸(m; S) ↘ S) ⁻¹ᵁ W) = ⊤ := by
+  rw [← opensRange_map_ι, Scheme.Hom.preimage_opensRange]
+
+lemma bijective_appLE_map_ι (W : S.Opens) :
+    Function.Bijective ((map m W.ι).appLE ((𝔸(m; S) ↘ S) ⁻¹ᵁ W) ⊤
+      (preimage_preimage_map_ι m S W).ge) := by
+  have : IsIso ((map m W.ι).app ((𝔸(m; S) ↘ S) ⁻¹ᵁ W)) :=
+    Scheme.Hom.isIso_app _ _ (opensRange_map_ι m S W).ge
+  have : IsIso ((𝔸(m; W)).presheaf.map
+      (homOfLE (preimage_preimage_map_ι m S W).ge : (⊤ : (𝔸(m; W)).Opens) ⟶ _).op) := by
+    rw [show (homOfLE (preimage_preimage_map_ι m S W).ge : (⊤ : (𝔸(m; W)).Opens) ⟶ _) =
+      eqToHom (preimage_preimage_map_ι m S W).symm from rfl]
+    infer_instance
+  rw [Scheme.Hom.appLE]
+  exact ConcreteCategory.bijective_of_isIso _
+
+/-- **Sections of affine space over an affine open of the base.** For an affine open `W ⊆ S`,
+`Γ(𝔸^m_S, p⁻¹ W) = Γ(S, W)[x_1, …, x_m]`. -/
+theorem bijective_eval₂Hom_app_preimage {W : S.Opens} (hW : IsAffineOpen W) :
+    Function.Bijective (MvPolynomial.eval₂Hom ((𝔸(m; S) ↘ S).app W).hom
+      (coordRes' m S ((𝔸(m; S) ↘ S) ⁻¹ᵁ W))) := by
+  have : IsAffine W.toScheme := hW
+  set A := (map m W.ι).appLE ((𝔸(m; S) ↘ S) ⁻¹ᵁ W) ⊤ (preimage_preimage_map_ι m S W).ge
+  set θ := W.ι.appLE W ⊤ W.ι_preimage_self.ge
+  have hθ : Function.Bijective θ.hom := ConcreteCategory.bijective_of_isIso _
+  have hE : Function.Bijective (MvPolynomial.eval₂Hom (𝔸(m; W) ↘ W).appTop.hom (coord W)) := by
+    have h := isoOfIsAffine_hom_appTop (n := m) (S := W.toScheme)
+    have : MvPolynomial.eval₂Hom (𝔸(m; W) ↘ W).appTop.hom (coord W) =
+        ((Scheme.ΓSpecIso _).inv ≫ (isoOfIsAffine m W.toScheme).hom.appTop).hom := by
+      rw [h, Iso.inv_hom_id_assoc, CommRingCat.hom_ofHom]
+    rw [this]
+    exact ConcreteCategory.bijective_of_isIso _
+  have hmap : Function.Bijective (MvPolynomial.map (σ := m) θ.hom) :=
+    ⟨MvPolynomial.map_injective _ hθ.1, MvPolynomial.map_surjective _ hθ.2⟩
+  have key : A.hom.comp (MvPolynomial.eval₂Hom ((𝔸(m; S) ↘ S).app W).hom
+      (coordRes' m S ((𝔸(m; S) ↘ S) ⁻¹ᵁ W))) =
+      (MvPolynomial.eval₂Hom (𝔸(m; W) ↘ W).appTop.hom (coord W)).comp
+        (MvPolynomial.map θ.hom) := by
+    refine MvPolynomial.ringHom_ext (fun c ↦ ?_) fun k ↦ ?_
+    · simp only [RingHom.comp_apply, MvPolynomial.eval₂Hom_C, MvPolynomial.map_C]
+      rw [← CommRingCat.comp_apply, ← CommRingCat.comp_apply, Scheme.Hom.app_eq_appLE,
+        Scheme.Hom.appLE_comp_appLE, Scheme.Hom.appLE_congr_hom (map_over (n := m) W.ι) _ _ _
+          (by simp), ← Scheme.Hom.appLE_comp_appLE (𝔸(m; W.toScheme) ↘ W.toScheme) W.ι W ⊤ ⊤
+          W.ι_preimage_self.ge le_top, Scheme.Hom.appTop, Scheme.Hom.app_eq_appLE]
+      rfl
+    · simp only [RingHom.comp_apply, MvPolynomial.eval₂Hom_X', MvPolynomial.map_X, coordRes']
+      rw [← CommRingCat.comp_apply, Scheme.Hom.map_appLE]
+      have := map_appTop_coord (n := m) W.ι k
+      rw [Scheme.Hom.appTop, Scheme.Hom.app_eq_appLE] at this
+      exact this
+  have hA : Function.Bijective A.hom := bijective_appLE_map_ι m S W
+  rw [← Function.Bijective.of_comp_iff' hA, ← RingHom.coe_comp, key, RingHom.coe_comp]
+  exact hE.comp hmap
+end AlgebraicGeometry.AffineSpace
+
 namespace AlgebraicGeometry.Scheme.Hom
 
 open AffineZariskiSite
