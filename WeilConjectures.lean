@@ -397,6 +397,7 @@ public import WeilConjectures.AlgebraicGeometry.SpecAlgebraicClosure
 public import WeilConjectures.AlgebraicGeometry.TangentSpace
 public import WeilConjectures.AlgebraicGeometry.TheoremOfCube
 public import WeilConjectures.AlgebraicGeometry.VectorBundle
+public import WeilConjectures.AlgebraicGeometry.VectorBundle.Trivialization
 public import WeilConjectures.AnalyticAux
 public import WeilConjectures.Blowup.AdmissibleBlowup
 public import WeilConjectures.Blowup.Affine.BaseChange
