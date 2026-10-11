@@ -196,5 +196,23 @@
   "by": "L",
   "result": "accepted",
   "note": "5 steps (proof_origin agent; Stacks 0F0K states the formula): Leibniz expansion of det(AB) over maps f: [m] -> [n]; non-injective f give a repeated column (new leaf det_zero_of_column_eq, line 374); injective f = (S, tau); A_f is A^S with columns permuted (new leaf det_permute', line 218); regrouping gives det(B_S) by the new determinant definition leaf (Matrix.det / det_apply, lines 60/63). Lines verified by L. Statement: the product AB defined inline and the determinant definition cited. Not in Mathlib."
+ },
+ "lean": {
+  "module": "Sheaf.LinearAlgebra.Matrix.CauchyBinet",
+  "declaration": "Matrix.cauchy_binet",
+  "file": "lean/Sheaf/LinearAlgebra/Matrix/CauchyBinet.lean",
+  "statement": "theorem cauchy_binet {R : Type u} [CommRing R] (m n : ℕ) (A : Matrix (Fin m) (Fin n) R) (B : Matrix (Fin n) (Fin m) R) : let minors : R := ∑ S : {S : Finset (Fin n) // S.card = m}, (A.submatrix id (S.val.orderEmbOfFin S.property)).det * (B.submatrix (S.val.orderEmbOfFin S.property) id).det (A * B).det = minors ∧ (n < m → minors = 0 ∧ (A * B).det = 0) ∧ (m = 0 → (A * B).det = 1 ∧ minors = 1)",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-cbt1359",
+  "group": "F1",
+  "result": "pass",
+  "note": "CommRing R (Stacks ring); m n : ℕ unrestricted; A : Matrix (Fin m) (Fin n), B : Matrix (Fin n) (Fin m); AB = rectangular A * B; S over {S : Finset (Fin n) // card = m} once each; increasing order via orderEmbOfFin shared by A^S columns and B_S rows via Matrix.submatrix; Matrix.det; main equality + both parenthetical cases as conjuncts; no Mathlib Cauchy-Binet (grep binet in 3 Mathlib checkouts: only CrossProduct/GoldenRatio)"
  }
 }
