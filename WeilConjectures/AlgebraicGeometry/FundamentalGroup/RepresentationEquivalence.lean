@@ -402,4 +402,84 @@ lemma smul_freeBasis (P : Y.FiniteEtale) (g : G) (x : (FiniteEtale.fiber s).obj 
 
 end Free
 
+section Continuous
+
+variable {Ω : Type u} [Field Ω] [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ Y) [ConnectedSpace Y]
+  (G : Type u) [Group G] [TopologicalSpace G] [IsTopologicalGroup G] [CompactSpace G]
+  [∀ P, MulAction G ((FiniteEtale.fiber s).obj P)] [IsFundamentalGroup (FiniteEtale.fiber s) G]
+
+instance (F : Y.FiniteLocallyConstantModule Λ) : Finite (stalk s F) :=
+  have : Finite ((FiniteLocallyConstant.fiber s).obj ((forget Y Λ).obj F)) := inferInstance
+  @Finite.of_equiv _ _ this (forgetStalkEquiv s F)
+
+lemma isOpen_setOf_smul_eq {F : Y.FiniteLocallyConstantModule Λ} (x : stalk s F) :
+    IsOpen {g : G | smul s G g x = x} := by
+  have h : {g : G | smul s G g x = x} =
+      {g : G | FiniteLocallyConstant.smul s G g ((forgetStalkEquiv s F).symm x) =
+        (forgetStalkEquiv s F).symm x} := by
+    ext g
+    exact (Equiv.eq_symm_apply _).symm
+  rw [h]
+  exact FiniteLocallyConstant.isOpen_setOf_smul_eq s G _
+
+/-- Blueprint `sk-i-real-galois`: the representation of `π₁(Y, s)` on the stalk of a finite
+locally constant sheaf of `Λ`-modules is finite and continuous. -/
+lemma isFiniteContinuous_toRep (F : Y.FiniteLocallyConstantModule Λ) :
+    Rep.IsFiniteContinuous ((toRep Λ s G).obj F) :=
+  ⟨inferInstanceAs (Finite (stalk s F)), fun x ↦ isOpen_setOf_smul_eq s G x⟩
+
+end Continuous
+
 end AlgebraicGeometry.Scheme.FiniteLocallyConstantModule
+
+namespace AlgebraicGeometry.Scheme.FiniteEtale
+
+variable {Y : Scheme.{u}} [ConnectedSpace Y] {Ω : Type u} [Field Ω] [IsSepClosed Ω]
+  (s : Spec (.of Ω) ⟶ Y)
+  (G : Type u) [Group G] [TopologicalSpace G] [IsTopologicalGroup G] [CompactSpace G]
+  [∀ P, MulAction G ((FiniteEtale.fiber s).obj P)] [IsFundamentalGroup (FiniteEtale.fiber s) G]
+
+open scoped FintypeCatDiscrete in
+/-- Blueprint `thm-galois-fundamental`: every finite set with an action of `G = π₁(Y, s)` with
+open stabilizers is, `G`-equivariantly, the geometric fibre of a finite étale `Y`-scheme. -/
+lemma exists_fiber_equiv {X : Type*} [Finite X] [MulAction G X]
+    (hX : ∀ x : X, IsOpen {g : G | g • x = x}) :
+    ∃ (P : Y.FiniteEtale) (e : (fiber s).obj P ≃ X), ∀ (g : G) y, e (g • y) = g • e y := by
+  have : Small.{u} X := Countable.toSmall X
+  let eX : X ≃ Shrink.{u} X := equivShrink X
+  let _ : MulAction G (Shrink.{u} X) := eX.symm.mulAction G
+  have hsmul (g : G) (v : Shrink.{u} X) : g • v = eX (g • eX.symm v) := rfl
+  have : Fintype (Shrink.{u} X) := Fintype.ofFinite _
+  let Xc : ContAction FintypeCat.{u} G :=
+    ⟨Action.FintypeCat.ofMulAction G (FintypeCat.of (Shrink.{u} X)), by
+      rw [Action.isContinuous_def]
+      have : DiscreteTopology ((forget₂ (Action FintypeCat G) TopCat).obj
+        (Action.FintypeCat.ofMulAction G (FintypeCat.of (Shrink.{u} X)))) := ⟨rfl⟩
+      have : DiscreteTopology ((forget₂ FintypeCat TopCat).obj
+        (Action.FintypeCat.ofMulAction G (FintypeCat.of (Shrink.{u} X))).V) := ⟨rfl⟩
+      refine continuous_prod_of_discrete_right.mpr fun v ↦
+        continuous_discrete_rng.mpr fun w ↦ ?_
+      change IsOpen {k : G | k • v = w}
+      refine isOpen_iff_forall_mem_open.2 fun k hk ↦ ⟨(k * ·) '' {g : G | g • v = v}, ?_,
+        isOpenMap_mul_left k _ ?_, ⟨1, by simp, mul_one k⟩⟩
+      · rintro _ ⟨g, hg, rfl⟩
+        change (k * g) • v = w
+        rw [mul_smul, hg.out]
+        exact hk
+      · have hset : {g : G | g • v = v} = {g : G | g • eX.symm v = eX.symm v} := by
+          ext g
+          change eX (g • eX.symm v) = v ↔ _
+          exact (Equiv.eq_symm_apply _).symm
+        rw [hset]
+        exact hX _⟩
+  let E := equivalenceContAction s G
+  let c := E.counitIso.app Xc
+  let cV := (ObjectProperty.ι _ ⋙ Action.forget _ _).mapIso c
+  let β : (fiber s).obj (E.inverse.obj Xc) → Shrink.{u} X := fun y ↦ cV.hom y
+  have hβ (g : G) (y : (fiber s).obj (E.inverse.obj Xc)) : β (g • y) = g • β y :=
+    congrArg (fun f ↦ f.hom y) (c.hom.hom.comm g)
+  refine ⟨E.inverse.obj Xc, (FintypeCat.equivEquivIso.symm cV).trans eX.symm, fun g y ↦ ?_⟩
+  change eX.symm (β (g • y)) = g • eX.symm (β y)
+  rw [hβ, hsmul, Equiv.symm_apply_apply]
+
+end AlgebraicGeometry.Scheme.FiniteEtale
