@@ -24,6 +24,8 @@ sides are the sections of `M` over `f⁻¹(g(V)) = g'(f'⁻¹(V))`.
 
 ## Main definitions
 
+- `AlgebraicGeometry.Scheme.Modules.pushforwardRestrictHom`: the base change morphism
+  `(f_* M)|_{T'} ⟶ f'_* (M|_{X'})` of a commutative square of schemes.
 - `AlgebraicGeometry.Scheme.Modules.pushforwardRestrictIso`: the natural isomorphism
   `(f_* M)|_{T'} ≅ f'_* (M|_{X'})`.
 -/
@@ -39,7 +41,7 @@ namespace AlgebraicGeometry.Scheme.Modules
 variable {X T T' X' : Scheme.{u}} (f : X ⟶ T) (g : T' ⟶ T) [IsOpenImmersion g] (g' : X' ⟶ X)
   (f' : X' ⟶ T')
 
-/-- A restriction map of a presheaf between equal opens is an isomorphism. -/
+/-- A restriction map of an `𝒪`-module between equal opens is an isomorphism. -/
 lemma isIso_presheaf_map_of_le {Z : Scheme.{u}} (M : Z.Modules) {A B : Z.Opens} (h : A ⟶ B)
     (h' : B ≤ A) : IsIso (M.presheaf.map h.op) := by
   obtain rfl : A = B := le_antisymm (leOfHom h) h'
@@ -58,10 +60,19 @@ noncomputable def pushforwardRestrictHom (w : g' ≫ f = f' ≫ g) :
         (pushforwardCongr w).hom ≫ (pushforwardComp f' g).inv)) (restrictFunctor g) ≫
     Functor.whiskerLeft (restrictFunctor g' ⋙ pushforward f') (restrictAdjunction g).counit
 
+/-- On an open `V` of `T'` the base change morphism is the restriction map of `M` from
+`f⁻¹(g(V))` to `g'(g'⁻¹(f⁻¹(g(V))))` followed by isomorphisms, hence is an isomorphism as soon as
+`f⁻¹(g(V)) ⊆ g'(f'⁻¹(V))`. -/
 lemma isIso_pushforwardRestrictHom_app_app (w : g' ≫ f = f' ≫ g) (M : X.Modules) (V : T'.Opens)
     (hV : f ⁻¹ᵁ g ''ᵁ V ≤ g' ''ᵁ f' ⁻¹ᵁ V) :
     IsIso (((pushforwardRestrictHom f g g' f' w).app M).app V) := by
-  simp [pushforwardRestrictHom]
+  -- all the factors but the first are restriction maps along equalities of opens
+  simp only [Functor.comp_obj, pushforward_obj_obj, pushforwardRestrictHom,
+    Functor.whiskerLeft_comp, Functor.whiskerRight_comp, Functor.whiskerRight_twice,
+    Category.assoc, NatTrans.comp_app, Functor.id_obj, Functor.associator_hom_app,
+    Functor.whiskerRight_app, Functor.comp_map, Functor.associator_inv_app,
+    Functor.whiskerLeft_app, Category.id_comp, Hom.comp_app, restrictAdjunction_counit_app_app,
+    eqToHom_op, isIso_comp_right_iff]
   change IsIso (((restrictAdjunction g').unit.app M).app (f ⁻¹ᵁ g ''ᵁ V))
   rw [restrictAdjunction_unit_app_app]
   refine isIso_presheaf_map_of_le M _ ?_
