@@ -1,11 +1,11 @@
 # Work queue
 
-945 items; claim with `tools/claim.py next <group> [--stage N]`.
+984 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (945)
+## Stage 2: nodes to state (984)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -15,21 +15,18 @@
 | `def-sbc-first-order-thickening` | 1 | state |
 | `def-sbc-normal-dominant-galois` | 1 | state |
 | `def-sc-perfect-closed-immersion` | 1 | state |
-| `def-sc-rational-functions` | 1 | state |
 | `def-sp-exact-couple` | 1 | state |
 | `def-sp-filtration` | 1 | state |
 | `def-weil-extension-by-zero-presheaf` | 1 | state |
 | `def-weil-pbc-associated-graded-ring` | 1 | state |
 | `def-weil-pbc-associated-module` | 1 | state |
-| `def-weil-pbc-constant-group-scheme` | 1 | state |
 | `def-weil-pbc-double-complex-zigzag-module` | 1 | state |
 | `def-weil-pbc-etale-sheaves` | 1 | state |
 | `def-weil-pbc-finite-global-dimension` | 1 | state |
 | `def-weil-pbc-formal-glueing-data` | 1 | state |
-| `def-weil-pbc-g-ring` | 1 | state |
 | `def-weil-pbc-generating-sections` | 1 | state |
 | `def-weil-pbc-henselian-terminology` | 1 | state |
-| `def-weil-pbc-japanese-domain` | 1 | state |
+| `def-weil-pbc-nagata-ring` | 1 | state |
 | `def-weil-pbc-popescu-resolution` | 1 | state |
 | `def-weil-pbc-proetale-site` | 1 | state |
 | `def-weil-pbc-relative-global-complete-intersection` | 1 | state |
@@ -40,7 +37,6 @@
 | `lem-exc-discrete-modules-abelian` | 1 | state |
 | `lem-exc-discrete-modules-abelian-injective-embeddings` | 1 | state |
 | `lem-exc-discrete-modules-abelian-structure` | 1 | state |
-| `lem-exc-etale-coproduct-etale` | 1 | state |
 | `lem-exc-etale-field-galois-classification` | 1 | state |
 | `lem-exc-etale-field-gsets` | 1 | state |
 | `lem-exc-etale-open-subgroup-fixed-field` | 1 | state |
@@ -49,6 +45,7 @@
 | `lem-exc-finite-galois-algebra-tensor-decomposition` | 1 | state |
 | `lem-exc-finite-galois-sections-descent` | 1 | state |
 | `lem-exc-finite-galois-sheaf-sections-coproduct` | 1 | state |
+| `lem-exc-finite-galois-tensor-decomposition` | 1 | state |
 | `lem-exc-rg-adjoint-transfer-functorial-injectives` | 1 | state |
 | `lem-exc-rg-discrete-modules-functorial-injective-embeddings` | 1 | state |
 | `lem-exc-rg-group-algebra-functorial-injective-embeddings` | 1 | state |
@@ -281,6 +278,7 @@
 | `lem-sc-proper-dim-one-projective` | 1 | state |
 | `lem-sc-proper-or-affine` | 1 | state |
 | `lem-sc-qcoh-cech-total-tensor-iso` | 1 | state |
+| `lem-sc-rational-functions-generic-stalks` | 1 | state |
 | `lem-sc-reduced-ideals-zero-intersection` | 1 | state |
 | `lem-sc-regular-local-ext-vanishing` | 1 | state |
 | `lem-sc-ringed-space-injective-restriction-surjective` | 1 | state |
@@ -308,8 +306,10 @@
 | `lem-weil-pbc-affine-basic-sets-disjoint-refinement` | 1 | state |
 | `lem-weil-pbc-algebra-colimit-fp-algebras-over-it` | 1 | state |
 | `lem-weil-pbc-analytic-unramified-principal-criterion` | 1 | state |
+| `lem-weil-pbc-analytically-unramified-n1` | 1 | state |
 | `lem-weil-pbc-annihilator-element-flat-base-change` | 1 | state |
 | `lem-weil-pbc-annihilator-localization-finite` | 1 | state |
+| `lem-weil-pbc-another-helper-g-ring` | 1 | state |
 | `lem-weil-pbc-artinian-ideal-length-one-filtration` | 1 | state |
 | `lem-weil-pbc-artinian-local-essentially-finite-type-residue` | 1 | state |
 | `lem-weil-pbc-associated-prime-localize-at-prime` | 1 | state |
@@ -352,6 +352,7 @@
 | `lem-weil-pbc-colimit-surjective-ring-map` | 1 | state |
 | `lem-weil-pbc-complete-local-domain-finite-over-regular` | 1 | state |
 | `lem-weil-pbc-complete-local-flat-presentation` | 1 | state |
+| `lem-weil-pbc-complete-local-g-ring` | 1 | state |
 | `lem-weil-pbc-complete-local-map-cohen-presentation` | 1 | state |
 | `lem-weil-pbc-complete-local-map-regular-presentation` | 1 | state |
 | `lem-weil-pbc-complete-local-quotient` | 1 | state |
@@ -367,6 +368,7 @@
 | `lem-weil-pbc-composition-fibre-degree-bound` | 1 | state |
 | `lem-weil-pbc-conormal-intersection-regular-quotient` | 1 | state |
 | `lem-weil-pbc-conormal-module-principal-localization` | 1 | state |
+| `lem-weil-pbc-constant-group-scheme-morphism-clopen` | 1 | state |
 | `lem-weil-pbc-constant-group-scheme-multiplication` | 1 | state |
 | `lem-weil-pbc-constant-sheaf-geometric-stalk` | 1 | state |
 | `lem-weil-pbc-constant-sheaf-sections-connected` | 1 | state |
@@ -415,6 +417,7 @@
 | `lem-weil-pbc-directed-union-subrings-flat-module` | 1 | state |
 | `lem-weil-pbc-domains-strongly-transcendental-not-quasi-finite` | 1 | state |
 | `lem-weil-pbc-double-complex-cokernel-homology-iso` | 1 | state |
+| `lem-weil-pbc-dvr-completion-regular` | 1 | state |
 | `lem-weil-pbc-effaceable-delta-functor-universal` | 1 | state |
 | `lem-weil-pbc-elementary-etale-finite-piece-persistence` | 1 | state |
 | `lem-weil-pbc-equation-count-fibre-dimension-flat` | 1 | state |
@@ -516,6 +519,7 @@
 | `lem-weil-pbc-finite-type-domain-dimension-trdeg` | 1 | state |
 | `lem-weil-pbc-finite-type-etale-finite-factor-decomposition` | 1 | state |
 | `lem-weil-pbc-finite-type-field-finite-isolated-points` | 1 | state |
+| `lem-weil-pbc-finite-type-over-g-ring` | 1 | state |
 | `lem-weil-pbc-finite-type-z-domain-normalization-finite` | 1 | state |
 | `lem-weil-pbc-finite-unramified-etale-local` | 1 | state |
 | `lem-weil-pbc-finite-unramified-one-point-closed` | 1 | state |
@@ -543,6 +547,7 @@
 | `lem-weil-pbc-formal-glueing-complex-exact` | 1 | state |
 | `lem-weil-pbc-formal-glueing-finite-modules` | 1 | state |
 | `lem-weil-pbc-formal-glueing-isogeny` | 1 | state |
+| `lem-weil-pbc-formally-smooth-complete-local-regular` | 1 | state |
 | `lem-weil-pbc-fpqc-affine-standard-refinement` | 1 | state |
 | `lem-weil-pbc-fpqc-descend-affine` | 1 | state |
 | `lem-weil-pbc-fpqc-descend-finite` | 1 | state |
@@ -565,18 +570,30 @@
 | `lem-weil-pbc-fs-adic-complete-source-target` | 1 | state |
 | `lem-weil-pbc-fs-adic-completion` | 1 | state |
 | `lem-weil-pbc-fs-adic-field-differentials-injective` | 1 | state |
+| `lem-weil-pbc-fs-adic-field-geometrically-regular` | 1 | state |
 | `lem-weil-pbc-fs-adic-field-regular-local` | 1 | state |
+| `lem-weil-pbc-fs-adic-flat-geometrically-regular-closed-fibre` | 1 | state |
 | `lem-weil-pbc-fs-adic-lift-derivation` | 1 | state |
 | `lem-weil-pbc-fs-adic-lift-from-residue-field` | 1 | state |
 | `lem-weil-pbc-fs-adic-lift-into-complete` | 1 | state |
 | `lem-weil-pbc-fs-adic-lift-over-finite-coefficient-map` | 1 | state |
 | `lem-weil-pbc-fs-adic-local-flat` | 1 | state |
+| `lem-weil-pbc-g-ring-check-pairs-of-primes` | 1 | state |
+| `lem-weil-pbc-g-ring-completion-regular` | 1 | state |
+| `lem-weil-pbc-g-ring-maximal-ideal-criterion` | 1 | state |
+| `lem-weil-pbc-g-ring-quotient` | 1 | state |
 | `lem-weil-pbc-gabber-finite-etale-section` | 1 | state |
 | `lem-weil-pbc-gabber-h0-etale-criterion` | 1 | state |
 | `lem-weil-pbc-gabber-root-criterion-etale-section-lifting` | 1 | state |
 | `lem-weil-pbc-generic-finite-algebra-splitting` | 1 | state |
 | `lem-weil-pbc-generic-separable-algebra-splitting` | 1 | state |
+| `lem-weil-pbc-geometric-regularity-separable-extension` | 1 | state |
 | `lem-weil-pbc-geometrically-reduced-extension-separable` | 1 | state |
+| `lem-weil-pbc-geometrically-regular-finitely-generated-extensions` | 1 | state |
+| `lem-weil-pbc-geometrically-regular-h1-injective` | 1 | state |
+| `lem-weil-pbc-geometrically-regular-over-field-flat` | 1 | state |
+| `lem-weil-pbc-geometrically-regular-over-subfields` | 1 | state |
+| `lem-weil-pbc-geometrically-regular-smooth-ascent` | 1 | state |
 | `lem-weil-pbc-global-complete-intersection-equidimensional` | 1 | state |
 | `lem-weil-pbc-global-complete-intersection-local-regular-sequence` | 1 | state |
 | `lem-weil-pbc-global-complete-intersection-principal-localization` | 1 | state |
@@ -585,6 +602,7 @@
 | `lem-weil-pbc-grothendieck-regular-sequence-flat` | 1 | state |
 | `lem-weil-pbc-h0-spectral-closed-restriction` | 1 | state |
 | `lem-weil-pbc-h1-injective-differentials-injective-char-p` | 1 | state |
+| `lem-weil-pbc-helper-g-ring-char-p` | 1 | state |
 | `lem-weil-pbc-henselian-factorization-locally-nilpotent` | 1 | state |
 | `lem-weil-pbc-henselization-finite-separable-fibres` | 1 | state |
 | `lem-weil-pbc-higher-direct-image-sheafified-presheaf` | 1 | state |
@@ -647,8 +665,10 @@
 | `lem-weil-pbc-local-completion-quotient` | 1 | state |
 | `lem-weil-pbc-local-ring-colimit-essentially-finite-type-over-z` | 1 | state |
 | `lem-weil-pbc-localization-colimit-principal-localizations` | 1 | state |
+| `lem-weil-pbc-localization-n2-domain` | 1 | state |
 | `lem-weil-pbc-localization-of-regular-ring` | 1 | state |
 | `lem-weil-pbc-localization-prime-residue-field-iso` | 1 | state |
+| `lem-weil-pbc-localization-regular` | 1 | state |
 | `lem-weil-pbc-locally-constant-germ-evaluation` | 1 | state |
 | `lem-weil-pbc-make-separable` | 1 | state |
 | `lem-weil-pbc-make-separably-generated` | 1 | state |
@@ -671,6 +691,11 @@
 | `lem-weil-pbc-module-skyscraper-stalk-adjunction` | 1 | state |
 | `lem-weil-pbc-module-stalk-exact` | 1 | state |
 | `lem-weil-pbc-module-stalk-filtered-colimit` | 1 | state |
+| `lem-weil-pbc-n1-descends-finite-domain-extension` | 1 | state |
+| `lem-weil-pbc-n1-local-characterization` | 1 | state |
+| `lem-weil-pbc-n2-ascends-finite-domain-extension` | 1 | state |
+| `lem-weil-pbc-n2-char-p-purely-inseparable-criterion` | 1 | state |
+| `lem-weil-pbc-n2-descends-finite-domain-extension` | 1 | state |
 | `lem-weil-pbc-nakayama-nilpotent` | 1 | state |
 | `lem-weil-pbc-nl-presentations-homotopy-equivalent` | 1 | state |
 | `lem-weil-pbc-noether-normalization-over-domain` | 1 | state |
@@ -690,12 +715,14 @@
 | `lem-weil-pbc-p-basis-exists` | 1 | state |
 | `lem-weil-pbc-p-independent-differentials-independent` | 1 | state |
 | `lem-weil-pbc-p-independent-extends-to-p-basis` | 1 | state |
+| `lem-weil-pbc-polynomial-complete-local-formal-fibres` | 1 | state |
 | `lem-weil-pbc-polynomial-ideal-coefficients-monomial` | 1 | state |
 | `lem-weil-pbc-polynomial-local-completion-formally-smooth` | 1 | state |
 | `lem-weil-pbc-polynomial-quotient-dimension-at-point-height-difference` | 1 | state |
 | `lem-weil-pbc-polynomial-quotient-dimension-lower-bound` | 1 | state |
 | `lem-weil-pbc-polynomial-ring-maximal-chain-height-difference` | 1 | state |
 | `lem-weil-pbc-polynomial-ring-maximal-localization-dimension` | 1 | state |
+| `lem-weil-pbc-polynomial-ring-n2` | 1 | state |
 | `lem-weil-pbc-polynomial-ring-origin-regular-local` | 1 | state |
 | `lem-weil-pbc-popescu-artinian-flat-subalgebras` | 1 | state |
 | `lem-weil-pbc-popescu-delocalize-weak-localization-smooth` | 1 | state |
@@ -707,12 +734,16 @@
 | `lem-weil-pbc-popescu-lift-twice` | 1 | state |
 | `lem-weil-pbc-popescu-lifting` | 1 | state |
 | `lem-weil-pbc-popescu-product` | 1 | state |
+| `lem-weil-pbc-popescu-reduce-to-field` | 1 | state |
+| `lem-weil-pbc-popescu-solution-modulo` | 1 | state |
+| `lem-weil-pbc-popescu-solution-modulo-choose` | 1 | state |
 | `lem-weil-pbc-power-in-base-after-localization` | 1 | state |
 | `lem-weil-pbc-power-series-adic-evaluation` | 1 | state |
 | `lem-weil-pbc-power-series-cohen-formally-smooth-adic` | 1 | state |
 | `lem-weil-pbc-power-series-complete-over-complete-base` | 1 | state |
 | `lem-weil-pbc-power-series-field-cohen-fs-adic` | 1 | state |
 | `lem-weil-pbc-power-series-field-cohen-regular-complete` | 1 | state |
+| `lem-weil-pbc-power-series-n2` | 1 | state |
 | `lem-weil-pbc-power-series-normal-domain` | 1 | state |
 | `lem-weil-pbc-power-series-onto-completion` | 1 | state |
 | `lem-weil-pbc-power-series-parameter-quotient` | 1 | state |
@@ -752,12 +783,16 @@
 | `lem-weil-pbc-reduced-strongly-transcendental-not-quasi-finite` | 1 | state |
 | `lem-weil-pbc-reduction-projective-space` | 1 | state |
 | `lem-weil-pbc-reduction-universal-homeomorphism` | 1 | state |
+| `lem-weil-pbc-regular-base-change` | 1 | state |
+| `lem-weil-pbc-regular-composition` | 1 | state |
 | `lem-weil-pbc-regular-local-dim-one-iff-normal` | 1 | state |
 | `lem-weil-pbc-regular-local-generators-regular-sequence` | 1 | state |
 | `lem-weil-pbc-regular-local-localization` | 1 | state |
+| `lem-weil-pbc-regular-local-maximal` | 1 | state |
 | `lem-weil-pbc-regular-local-mcm-free` | 1 | state |
 | `lem-weil-pbc-regular-local-quotient-kernel-parameters` | 1 | state |
 | `lem-weil-pbc-regular-local-separable-residue-smooth` | 1 | state |
+| `lem-weil-pbc-regular-permanence` | 1 | state |
 | `lem-weil-pbc-regular-quotient-ideal-intersection` | 1 | state |
 | `lem-weil-pbc-regular-ring-faithfully-flat-descent` | 1 | state |
 | `lem-weil-pbc-regular-ring-local-criterion` | 1 | state |
@@ -768,6 +803,7 @@
 | `lem-weil-pbc-regular-sequence-powers` | 1 | state |
 | `lem-weil-pbc-regular-sequence-short-exact-sequence` | 1 | state |
 | `lem-weil-pbc-regular-sequence-swap-two` | 1 | state |
+| `lem-weil-pbc-regular-through-localization` | 1 | state |
 | `lem-weil-pbc-right-derived-universal-delta-functor` | 1 | state |
 | `lem-weil-pbc-ring-quasi-finite-locus-open` | 1 | state |
 | `lem-weil-pbc-ring-universal-first-order-thickening` | 1 | state |
@@ -868,6 +904,7 @@
 | `lem-weil-pbc-symmetric-algebra-graded` | 1 | state |
 | `lem-weil-pbc-symmetric-algebra-quotient-module` | 1 | state |
 | `lem-weil-pbc-symmetric-projective-presentation-conormal` | 1 | state |
+| `lem-weil-pbc-tate-n2-complete-principal` | 1 | state |
 | `lem-weil-pbc-tensor-field-extension-galois-invariants` | 1 | state |
 | `lem-weil-pbc-tensor-finite-type-limit` | 1 | state |
 | `lem-weil-pbc-topological-inverse-image-stalk` | 1 | state |
@@ -898,6 +935,7 @@
 | `lem-weil-pbc-unramified-fibre-point-isolated` | 1 | state |
 | `lem-weil-pbc-unramified-over-field-discrete` | 1 | state |
 | `lem-weil-pbc-valuation-ring-normal` | 1 | state |
+| `lem-weil-pbc-z-g-ring` | 1 | state |
 | `lem-weil-pbc-z-localizations-dvr` | 1 | state |
 | `lem-weil-pbc-zariski-pair-finite-gabber-polynomial` | 1 | state |
 | `lem-weil-pbc-zariski-pair-flat-integral-isomorphism` | 1 | state |
@@ -946,6 +984,7 @@
 | `lem-sc-valuation-closed-fibre-section-vanishing` | 2 | state |
 | `lem-sc-valuation-proper-coherent-sections` | 2 | state |
 | `lem-weil-pbc-finite-type-lift-nilpotent` | 2 | state |
+| `lem-weil-pbc-finite-type-z-g-ring` | 2 | state |
 | `lem-weil-pbc-integral-closure-finite-fibre-part-localization` | 2 | state |
 | `pqf-def-quasifinite` | 2 | state |
 | `pqf-lem-pushforward-qcoh` | 2 | state |
@@ -955,7 +994,7 @@
 | `lem-sc-normalization-properties` | 3 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 1252 nodes that wait for a statement dependency, 40 nodes that wait for stage 1.
+Not open yet: 1208 nodes that wait for a statement dependency, 40 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
