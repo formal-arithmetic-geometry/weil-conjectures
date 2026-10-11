@@ -21,9 +21,59 @@
  "stmt_deps": [
   "def-sp-abelian"
  ],
- "proof": [],
+ "proof": [
+  {
+   "text": "We argue by transfinite induction on the ordinal alpha, simultaneously for every inverse system satisfying the hypotheses. This strengthened induction hypothesis lets us use, at every proper initial segment beta<alpha, the acyclicity of the earlier inverse limit.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Homology, Lemma Tag 0AAT (lemma-ML-over-ordinals), proof: transfinite induction paragraph"
+   }
+  },
+  {
+   "text": "It is enough first to prove exactness at degree 0. Let x=(x_beta) be a degree-0 cocycle in the inverse limit, so each x_beta is a degree-0 cocycle in K_beta. At beta=0, acyclicity of K_0 supplies y_0 in K_0^{-1} with d(y_0)=x_0.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Homology, Lemma Tag 0AAT (lemma-ML-over-ordinals), proof: degree-zero cocycle and beta=0"
+   }
+  },
+  {
+   "text": "At a successor beta=gamma+1, choose y'_beta with d(y'_beta)=x_beta using acyclicity of K_beta. The difference y_gamma-f(y'_beta) is a degree-minus-one cocycle in K_gamma, hence equals d(z_gamma) for some z_gamma in K_gamma^{-2}. Surjectivity of K_beta^{-2}\\to K_gamma^{-2} lifts z_gamma to z_beta; replacing y'_beta by y_beta=y'_beta+d(z_beta) gives both d(y_beta)=x_beta and f(y_beta)=y_gamma.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Homology, Lemma Tag 0AAT (lemma-ML-over-ordinals), proof: successor step"
+   }
+  },
+  {
+   "text": "At a limit beta, let L^bullet=lim_{gamma<beta}K_gamma^bullet and let y_<beta=(y_gamma) be the compatible earlier elements. Its differential is the image of x_beta in L^0. By the induction hypothesis L^bullet is acyclic. Choose u_beta in K_beta^{-1} with d(u_beta)=x_beta using acyclicity of K_beta (x_beta is a degree-0 cocycle of K_beta). The defect y_<beta-f(u_beta) is a degree-minus-one cocycle in L^bullet, so choose w_<beta in L^{-2} with d(w_<beta)=y_<beta-f(u_beta). Surjectivity in degree -2 lifts w_<beta to w_beta in K_beta^{-2}. Then y_beta=u_beta+d(w_beta) satisfies d(y_beta)=x_beta and f(y_beta)=y_<beta, so it is compatible with every earlier y_gamma.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Homology, Lemma Tag 0AAT (lemma-ML-over-ordinals), proof: limit step"
+   }
+  },
+  {
+   "text": "The transfinite recursion therefore produces y=(y_beta) in the inverse limit with d(y)=x, proving exactness at degree 0. For any integer n, apply the degree-zero construction to the shifted complexes K_beta[n], whose degree-zero cocycles are precisely degree-n cocycles of K_beta and whose degree-minus-one boundaries are degree-n boundaries of K_beta; the transition maps and the stated degreewise surjectivity are unchanged by shifting. Thus every degree-n cocycle in the inverse-limit complex is a boundary, so the inverse-limit complex is acyclic.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Homology, Lemma Tag 0AAT (lemma-ML-over-ordinals), proof: conclusion"
+   }
+  }
+ ],
  "proof_deps": [],
- "proof_origin": null,
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Homology, Lemma Tag 0AAT (lemma-ML-over-ordinals)"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -45,15 +95,38 @@
    "results": "no matching declaration in Mathlib source",
    "date": "2026-10-11",
    "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "inverse limit acyclic complexes indexed by an ordinal",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pur-kinjective-homotopy-limit-vanishing",
   "by": "worker",
   "date": "2026-10-11"
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-def-sf-operations"
+ "unit": "sk-def-sf-operations",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pur-kinjective-ML-ordinals",
+  "worker": "stage1",
+  "summary": "Read Stacks Homology Lemma Tag 0AAT and split its transfinite proof into induction setup, base, successor, limit, and shift steps. No new node was needed: the only cited existing dependency is the abelian-group definition, and no Mathlib or project declaration states the ordinal inverse-limit acyclicity lemma.",
+  "blueprint": "Realizes the limit-step application of Homology Lemma homology-lemma-ML-over-ordinals in the blueprint ancestor def-weil-derived-pullback-tensor-hom.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-mlo0144",
+  "group": "M1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-mlo0144 (reviewer sub-agent of L); spot-checked: Statement vs Homology Tag 0AAT lines 7861-7872 clause by clause (ordinal index, acyclic stages, termwise surjectivity K_beta^n -> lim_{gamma<beta} K_gamma^n, acyclic limit): match. Steps 1-5 follow the Stacks transfinite proof (base, successor with degree -2 lift, limit with induction hypothesis on lim_{gamma<beta}, shift). Citer lem-pur-kinjective-homotopy-limit-vanishing uses exactly hypotheses and conclusion. No duplicate (pbc mittag-leffler nodes are N-indexed towers). FIX more, RETURN less: E/C step 4 justified d(u_beta)=x_beta by 'surjectivity in degree -1'; it follows from acyclicity of K_beta since x_beta is a degree-0 cocycle; text corrected (missed by the Second reading).; 1 file(s) fixed by the reviewer"
+ }
 }
