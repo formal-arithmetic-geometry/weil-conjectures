@@ -248,5 +248,28 @@
   "worker": "stage1",
   "summary": "Proof written from Stacks 00O5 (algebra.tex lines 26594-26627) in 9 steps: the inductive claim C(d) stated with 'resolution of length <= d' (the source's 'projective dimension d' with an induction hypothesis applied to a module of projective dimension <= d-1); d=0 by an inner induction D(e) on e over projective modules (splitting of 0 -> K_0 -> F_0 -> M -> 0, direct summand); d>=1 by Schanuel (00O3) giving K_0 (+) P_0 = L_0 (+) F_0, the case e=0 (d=1, L_0 = P_1), the explicit resolution of length <= d-1 of K_0 (+) P_0 transported along Schanuel's isomorphism with all exactness checks, the explicit exact sequence F_e -> ... -> F_2 -> F_1 (+) P_0 -> K_0 (+) P_0 -> 0 with its exactness, the induction hypothesis with e-1 >= max(0,d-2), and the identification of the resulting kernel with Ker(F_e -> F_{e-1}) for e>=3, e=2, e=1 (the source leaves e=1,2 to the reader and writes the e=1 target as F_0 (+) P_0); then the 'in particular' clauses. Statement and stmt_deps unchanged. New nodes: lem-weil-pbc-schanuel (unsplit, 00O3, not in Mathlib), lem-weil-pbc-projective-direct-sum (leaf Module.instProjectiveProd), lem-weil-pbc-projective-direct-summand (leaf Module.Projective.of_split / of_equiv'), lem-weil-pbc-ses-projective-quotient-splits (leaf LinearMap.exists_rightInverse_of_surjective + Function.Exact.split_tfae). Mathlib: no match for the item; candidate (Ext dimension shifting) recorded in mathlib_candidate."
  },
- "reviewed": "Reviewed by L 2026-10-10: faithful to Algebra 00O5 with the induction on d set up for 'length ≤ d', the d = 0 case by an inner induction on e, Schanuel's lemma (00O3, new unsplit node) for d ≥ 1, and the explicit resolutions/exact sequences over K_0 ⊕ P_0 written out with every exactness check (steps 6-8, where the source leaves the identifications to the reader). Three new Mathlib leaves (direct sum, direct summand/isomorphic, splitting of a sequence ending in a projective). No Mathlib match for the item (Ext-based dimension, B8)."
+ "reviewed": "Reviewed by L 2026-10-10: faithful to Algebra 00O5 with the induction on d set up for 'length ≤ d', the d = 0 case by an inner induction on e, Schanuel's lemma (00O3, new unsplit node) for d ≥ 1, and the explicit resolutions/exact sequences over K_0 ⊕ P_0 written out with every exactness check (steps 6-8, where the source leaves the identifications to the reader). Three new Mathlib leaves (direct sum, direct summand/isomorphic, splitting of a sequence ending in a projective). No Mathlib match for the item (Ext-based dimension, B8).",
+ "lean": {
+  "module": "Sheaf.RingTheory.ProjectiveResolutionKernelProjective",
+  "declaration": "ModuleCat.projective_kernel_of_partial_projective_resolution",
+  "declarations": [
+   "ModuleCat.projective_kernel_of_partial_projective_resolution",
+   "ModuleCat.projective_of_exact_partial_projective_resolution",
+   "ModuleCat.projective_of_projective_resolution_length_zero"
+  ],
+  "file": "lean/Sheaf/RingTheory/ProjectiveResolutionKernelProjective.lean",
+  "statement": "theorem projective_kernel_of_partial_projective_resolution {R : Type u} [CommRing R] (d e : ℕ) (S : ComposableArrows (ModuleCat.{max u v} R) (e + 1)) (hM : HasProjectiveResolutionLE S.right d) (he : d ≤ e + 1) (hS : S.Exact) [Epi (S.map' e (e + 1))] (hF : ∀ (i : ℕ) (hi : i < e + 1), Module.Projective R (S.obj' i (Nat.le_of_lt hi))) : Module.Projective R (kernel (C := ModuleCat.{max u v} R) (S.map' 0 1))",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-prk1347",
+  "group": "C1",
+  "result": "pass",
+  "note": "R CommRing; M=S.right via HasProjectiveResolutionLE (landed GlobalDimension, max u v as ExtCharacterization/MinimalFiniteFreeResolutionLocal); e with d<=e+1; S:ComposableArrows (e+1) F_e..F_0,M with S.Exact interior + Epi F_0->M; hF Module.Projective on all F_i; conclusion kernel of S.map' 0 1 (F_0->M at e=0); d>=1 case via Mono j + precomp exact; d=0 case separate; kernel = Limits.kernel by #check"
+ }
 }
