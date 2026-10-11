@@ -110,7 +110,24 @@ so the mixed term `⁅df(x), y⁆` of their commutator vanishes. (blueprint: `sk
 theorem range_differential_le_center (f : G ⟶ H) [IsMonHom f]
     (hf : ∀ (X : Over (Spec (.of R))) (a : X ⟶ G) (b : X ⟶ H), (a ≫ f) * b = b * (a ≫ f)) :
     (differential f).range ≤ (LieAlgebra.center R (Lie H) : LieSubalgebra R (Lie H)) := by
-  sorry
+  rintro _ ⟨y, rfl⟩
+  change differential f y ∈ LieAlgebra.center R (Lie H)
+  rw [LieAlgebra.center, LieModule.mem_maxTrivSubmodule]
+  intro z
+  set v := (lieEquiv G).symm y
+  set w := (lieEquiv H).symm z
+  have hδ : toδ H (infPointsMap f v) = toδ G v ≫ f := by
+    rw [toδ, toδ, coe_infPointsMap_apply, Category.assoc]
+  have hc : toε H w * toδ H (infPointsMap f v) * (toε H w)⁻¹ * (toδ H (infPointsMap f v))⁻¹ =
+      1 := by
+    rw [hδ, ← hf, mul_inv_cancel_right, mul_inv_cancel]
+  have h1 : infBracket H w (infPointsMap f v) = 1 := by
+    rw [infBracket, Equiv.symm_apply_eq]
+    refine Subtype.ext ?_
+    change toε H w * toδ H (infPointsMap f v) * (toε H w)⁻¹ * (toδ H (infPointsMap f v))⁻¹ =
+      Scheme.dualNumbersMulOver _ ≫ ((1 : infPoints H) : Scheme.dualNumbersOver _ ⟶ H)
+    rw [hc, OneMemClass.coe_one, MonObj.comp_one]
+  rw [lie_def, differential_apply, Equiv.symm_apply_apply, h1, lieEquiv_one]
 
 /-- The differential of an open immersion of group schemes `f : G ⟶ H` is bijective: every
 infinitesimal point of `H` has the same underlying map as the identity section, hence factors
@@ -213,6 +230,37 @@ theorem GrpObj.coe_infPointsEquivTangentGroup_apply (v : GrpObj.infPoints G) :
     (GrpObj.infPointsEquivTangentGroup G v : points G (DualNumber R)) =
       inv dualNumbersToSpecOver ≫ (v : Scheme.dualNumbersOver _ ⟶ G) :=
   rfl
+
+/-! ### Tangent points -/
+
+namespace GrpObj
+
+variable {G} {H : Over (Spec (.of R))} [GrpObj H]
+
+/-- The point of `G` with values in the dual numbers `R[ε]` of a tangent vector `x ∈ Lie(G)`: the
+infinitesimal point of `x`, through `(Spec R)[ε] ≅ Spec R[ε]`. (blueprint: `sk-d-tangent`) -/
+noncomputable def tangentPoint (x : Lie G) : points G (DualNumber R) :=
+  infPointsEquivTangentGroup G ((lieEquiv G).symm x)
+
+theorem tangentPoint_mem_tangentGroup (x : Lie G) : tangentPoint x ∈ tangentGroup G :=
+  (infPointsEquivTangentGroup G ((lieEquiv G).symm x)).2
+
+theorem tangentPoint_injective : Function.Injective (tangentPoint (G := G)) := fun x y h ↦
+  (lieEquiv G).symm.injective ((infPointsEquivTangentGroup G).injective (Subtype.ext h))
+
+theorem exists_tangentPoint_eq {p : points G (DualNumber R)} (hp : p ∈ tangentGroup G) :
+    ∃ x : Lie G, tangentPoint x = p :=
+  ⟨lieEquiv G ((infPointsEquivTangentGroup G).symm ⟨p, hp⟩), by
+    simp [tangentPoint]⟩
+
+/-- The tangent point of the image of a tangent vector under a homomorphism is the image of its
+tangent point. -/
+theorem tangentPoint_differential (f : G ⟶ H) [IsMonHom f] (x : Lie G) :
+    tangentPoint (differential f x) = tangentPoint x ≫ f := by
+  simp only [tangentPoint, differential_apply, Equiv.symm_apply_apply,
+    coe_infPointsEquivTangentGroup_apply, coe_infPointsMap_apply, Category.assoc]
+
+end GrpObj
 
 end Ring
 

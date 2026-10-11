@@ -164,8 +164,11 @@ public import WeilConjectures.AlgebraicGeometry.GroupScheme.Defs
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.Finite
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.GeneralLinear
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.GeneralLinear.ClosedSubgroup
+public import WeilConjectures.AlgebraicGeometry.GroupScheme.GeneralLinear.ClosedSubgroup.Comparison
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.GeneralLinear.ClosedSubgroup.Image
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.GeneralLinear.ClosedSubgroup.Lie
+public import WeilConjectures.AlgebraicGeometry.GroupScheme.GeneralLinear.ClosedSubgroup.LieSubalgebra
+public import WeilConjectures.AlgebraicGeometry.GroupScheme.GeneralLinear.ClosedSubgroup.Product
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.GeneralLinear.Lie
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.GeneralLinear.Representation
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.Image
@@ -1377,6 +1380,7 @@ public import WeilConjectures.RingTheory.HopfAlgebra.GeneralLinearGroup.Exterior
 public import WeilConjectures.RingTheory.HopfAlgebra.GeneralLinearGroup.HopfIdeal
 public import WeilConjectures.RingTheory.HopfAlgebra.GeneralLinearGroup.IdentityComponent
 public import WeilConjectures.RingTheory.HopfAlgebra.GeneralLinearGroup.Kronecker
+public import WeilConjectures.RingTheory.HopfAlgebra.GeneralLinearGroup.Stabilizer
 public import WeilConjectures.RingTheory.MvPolynomial.ArtinSchreier
 public import WeilConjectures.RingTheory.MvPolynomial.QuotientBasis
 public import WeilConjectures.RingTheory.MvPolynomial.QuotientSpan

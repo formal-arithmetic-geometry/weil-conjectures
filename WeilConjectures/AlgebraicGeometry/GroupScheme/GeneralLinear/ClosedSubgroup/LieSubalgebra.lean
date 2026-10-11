@@ -366,15 +366,50 @@ theorem forall_mem_lieSubalgebra_of_forall_mem_zeroLocus [IsAlgClosed k] (hI : I
   exact hX' e (vanishingIdeal_zeroLocus_le_of_isRadical I hI
     (mem_vanishingIdeal.2 fun g hg ↦ h g hg e he))
 
+/-- **The group–Lie comparison for closed subgroup functors.** Let `G = V(I)` be a connected closed
+subgroup of `GL_n` (`I` prime) over an algebraically closed field of characteristic zero, and let
+`P` be a property of the points of `G` cut out by equations `E` on `GL_n` and stable under the
+group law. Then every point of `G(k)` has `P` if and only if every tangent vector `1 + εX`,
+`X ∈ Lie G`, has `P`.
+
+The closed subgroup `V(I ⊔ span E)` of `G` has the Lie algebra of `G`, hence is `G`
+(`eq_of_le_of_lieSubalgebra_eq`). (blueprint: `lem-ag-lie-stable-subspace`) -/
+theorem forall_zeroLocus_iff_forall_lieSubalgebra [IsAlgClosed k] [CharZero k] [I.IsPrime]
+    (E : Set (CoordinateRing n k))
+    (P : (R : Type u) → [CommRing R] → [Algebra k R] → zeroLocus I R → Prop)
+    (hP : ∀ (R : Type u) [CommRing R] [Algebra k R] (g : GL n R) (hg : g ∈ zeroLocus I R),
+      (∀ e ∈ E, evalAlgHom g e = 0) ↔ P R ⟨g, hg⟩)
+    (hone : P k 1)
+    (hmul : ∀ (R : Type u) [CommRing R] [Algebra k R] (g g' : zeroLocus I R), P R g → P R g' →
+      P R (g * g'))
+    (hinv : ∀ (R : Type u) [CommRing R] [Algebra k R] (g : zeroLocus I R), P R g → P R g⁻¹) :
+    (∀ g : zeroLocus I k, P k g) ↔
+      ∀ (X : Matrix n n k) (hX : X ∈ lieSubalgebra I), P (DualNumber k) ⟨dualUnit X, hX⟩ := by
+  constructor
+  · intro h X hX
+    exact (hP _ _ hX).1 fun e he ↦ forall_mem_lieSubalgebra_of_forall_mem_zeroLocus
+      (Ideal.IsPrime.isRadical ‹_›) (fun g hg e he ↦ (hP k g hg).2 (h ⟨g, hg⟩) e he) hX he
+  · intro h
+    have := isHopfIdeal_sup_span_of_forall I E ((hP k 1 (one_mem _)).2 hone)
+      (fun R _ _ g g' hg hg' he he' ↦ (hP R (g * g') (mul_mem hg hg')).2
+        (hmul R _ _ ((hP R g hg).1 he) ((hP R g' hg').1 he')))
+      (fun R _ _ g hg he ↦ (hP R g⁻¹ (inv_mem hg)).2 (hinv R _ ((hP R g hg).1 he)))
+    have hle : I ≤ I ⊔ Ideal.span E := le_sup_left
+    have heq : lieSubalgebra (I ⊔ Ideal.span E) = lieSubalgebra I :=
+      le_antisymm (lieSubalgebra_anti hle) fun X hX ↦
+        evalAlgHom_eq_zero_sup_span_iff.2 ⟨hX, (hP _ _ hX).2 (h X hX)⟩
+    have hJ := eq_of_le_of_lieSubalgebra_eq hle heq
+    intro g
+    refine (hP k g g.2).1 fun e he ↦ g.2 e ?_
+    have : e ∈ I ⊔ Ideal.span E := Ideal.mem_sup_right (Ideal.subset_span he)
+    rwa [hJ] at this
+
 /-- **The group–Lie comparison for linear conditions.** Let `G = V(I)` be a connected closed
 subgroup of `GL_n` (`I` prime) over an algebraically closed field of characteristic zero, and let
 `S` be a family of subalgebras `S R ⊆ Matrix n n R`, cut out by equations `E` on `GL_n`. Then
 every point of `G(k)` lies in `S k` if and only if every tangent vector `1 + εX`, `X ∈ Lie G`,
-lies in `S k[ε]`.
-
-The closed subgroup `V(I ⊔ span E)` of `G` (a subgroup since invertible matrices of a subalgebra
-have their inverses in it) then has the Lie algebra of `G`, hence is `G`
-(`eq_of_le_of_lieSubalgebra_eq`). (blueprint: `lem-ag-lie-stable-subspace`) -/
+lies in `S k[ε]`: invertible matrices of a subalgebra have their inverses in it
+(`Matrix.inv_mem_of_mem_subalgebra`). (blueprint: `lem-ag-lie-stable-subspace`) -/
 theorem forall_mem_zeroLocus_iff_forall_mem_lieSubalgebra [IsAlgClosed k] [CharZero k]
     [I.IsPrime] (E : Set (CoordinateRing n k))
     (S : (R : Type u) → [CommRing R] → [Algebra k R] → Subalgebra R (Matrix n n R))
@@ -382,27 +417,16 @@ theorem forall_mem_zeroLocus_iff_forall_mem_lieSubalgebra [IsAlgClosed k] [CharZ
       (∀ e ∈ E, evalAlgHom g e = 0) ↔ (g : Matrix n n R) ∈ S R) :
     (∀ g ∈ zeroLocus I k, (g : Matrix n n k) ∈ S k) ↔
       ∀ X ∈ lieSubalgebra I, (dualUnit X : Matrix n n (DualNumber k)) ∈ S (DualNumber k) := by
-  constructor
-  · intro h X hX
-    exact (hS _ _).1 fun e he ↦ forall_mem_lieSubalgebra_of_forall_mem_zeroLocus
-      (Ideal.IsPrime.isRadical ‹_›) (fun g hg e he ↦ (hS k g).2 (h g hg) e he) hX he
-  · intro h
-    have := isHopfIdeal_sup_span_of_forall I E ((hS k 1).2 (Subalgebra.one_mem _))
-      (fun R _ _ g g' _ _ hg hg' ↦ (hS R _).2 (by
-        rw [Units.val_mul]
-        exact Subalgebra.mul_mem _ ((hS R g).1 hg) ((hS R g').1 hg')))
-      (fun R _ _ g _ hg ↦ (hS R _).2 (by
-        rw [Matrix.coe_units_inv]
-        exact Matrix.inv_mem_of_mem_subalgebra _ g.isUnit ((hS R g).1 hg)))
-    have hle : I ≤ I ⊔ Ideal.span E := le_sup_left
-    have heq : lieSubalgebra (I ⊔ Ideal.span E) = lieSubalgebra I :=
-      le_antisymm (lieSubalgebra_anti hle) fun X hX ↦
-        evalAlgHom_eq_zero_sup_span_iff.2 ⟨hX, (hS _ _).2 (h X hX)⟩
-    have hJ := eq_of_le_of_lieSubalgebra_eq hle heq
-    intro g hg
-    refine (hS k g).1 fun e he ↦ hg e ?_
-    have : e ∈ I ⊔ Ideal.span E := Ideal.mem_sup_right (Ideal.subset_span he)
-    rwa [hJ] at this
+  have key := forall_zeroLocus_iff_forall_lieSubalgebra (I := I) E
+    (fun R _ _ g ↦ ((g : GL n R) : Matrix n n R) ∈ S R) (fun R _ _ g _ ↦ hS R g)
+    (Subalgebra.one_mem _)
+    (fun R _ _ g g' hg hg' ↦ by
+      rw [Subgroup.coe_mul, Units.val_mul]
+      exact Subalgebra.mul_mem _ hg hg')
+    (fun R _ _ g hg ↦ by
+      rw [Subgroup.coe_inv, Matrix.coe_units_inv]
+      exact Matrix.inv_mem_of_mem_subalgebra _ (g : GL n R).isUnit hg)
+  exact ⟨fun h X hX ↦ key.1 (fun g ↦ h g g.2) X hX, fun h g hg ↦ key.2 h ⟨g, hg⟩⟩
 
 /-! #### Stable subspaces -/
 
@@ -442,6 +466,20 @@ theorem forall_mulVec_mem_iff_one_sub_mul_mul_eq_zero {U : Submodule k (n → k)
     rw [this]
     exact hP.1 _
 
+/-- A tangent vector `1 + εX` stabilizes the range of an idempotent matrix `P` if and only if `X`
+does: `(1 - P) X P = 0`. -/
+theorem one_add_eps_smul_mem_ofIsIdempotentElem_iff {P : Matrix n n k} (hPi : IsIdempotentElem P)
+    (X : Matrix n n k) :
+    1 + (DualNumber.eps : DualNumber k) • (algebraMap k (DualNumber k)).mapMatrix X ∈
+        Subalgebra.ofIsIdempotentElem (R := DualNumber k)
+          (hPi.map (algebraMap k (DualNumber k)).mapMatrix) ↔
+      (1 - P) * X * P = 0 := by
+  rw [Subalgebra.mem_ofIsIdempotentElem]
+  have h0 : (1 - P) * P = 0 := by rw [sub_mul, one_mul, hPi.eq, sub_self]
+  rw [mul_add, add_mul, mul_one, ← map_one (algebraMap k (DualNumber k)).mapMatrix, ← map_sub,
+    ← map_mul, h0, map_zero, zero_add, Matrix.mul_smul, Matrix.smul_mul, ← map_mul, ← map_mul,
+    eps_smul_mapMatrix_eq_zero_iff]
+
 /-- **Group-invariant and Lie-invariant subspaces agree.** Over an algebraically closed field of
 characteristic zero, a subspace `U ⊆ kⁿ` is stable under a connected closed subgroup `G = V(I)` of
 `GL_n` if and only if it is stable under its Lie algebra.
@@ -469,11 +507,8 @@ theorem forall_mulVec_mem_iff_forall_lieSubalgebra [IsAlgClosed k] [CharZero k] 
       RingHom.mapMatrix_id, RingHom.id_apply]
   have hε (X : Matrix n n k) : (dualUnit X : Matrix n n (DualNumber k)) ∈ S (DualNumber k) ↔
       (1 - P) * X * P = 0 := by
-    simp only [S, Subalgebra.mem_ofIsIdempotentElem, coe_dualUnit_eq_one_add_eps_smul]
-    have h0 : (1 - P) * P = 0 := by rw [sub_mul, one_mul, hPi.eq, sub_self]
-    rw [mul_add, add_mul, mul_one, ← map_one (algebraMap k (DualNumber k)).mapMatrix, ← map_sub,
-      ← map_mul, h0, map_zero, zero_add, Matrix.mul_smul, Matrix.smul_mul, ← map_mul, ← map_mul,
-      eps_smul_mapMatrix_eq_zero_iff]
+    rw [coe_dualUnit_eq_one_add_eps_smul]
+    exact one_add_eps_smul_mem_ofIsIdempotentElem_iff hPi X
   simp only [hk, hε] at key
   simp only [forall_mulVec_mem_iff_one_sub_mul_mul_eq_zero hP]
   exact key
@@ -574,6 +609,34 @@ theorem mem_lieSubalgebra_center_iff [IsAlgClosed k] [CharZero k] [I.IsPrime]
     commute_dualUnit_iff]
   refine and_congr Iff.rfl ⟨fun h Y hY ↦ (hc.1 fun g hg ↦ (h hg).symm) Y hY,
     fun h g hg ↦ (hc.2 h g hg).symm⟩
+
+/-- The tangent vectors of the centre of a reduced `G = V(I)` commute with the Lie algebra of `G`:
+they commute with `G(k)`, hence with `Lie G`. -/
+theorem commute_of_mem_lieSubalgebra_center [IsAlgClosed k] (hI : I.IsRadical) {X Y : Matrix n n k}
+    (hX : X ∈ lieSubalgebra (center I)) (hY : Y ∈ lieSubalgebra I) : X * Y = Y * X := by
+  -- `X` commutes with `G(k)`
+  have hXG (g : GL n k) (hg : g ∈ zeroLocus I k) : X * g = g * X := by
+    have hmem : ∀ e ∈ centralizerEquations {(g : Matrix n n k)}, e ∈ center I := fun e he ↦
+      mem_vanishingIdeal.2 fun z hz ↦ (forall_centralizerEquations_iff z).2 (by
+        simp only [Subalgebra.mem_centralizer_iff, Set.image_singleton, Set.mem_singleton_iff,
+          forall_eq, Algebra.algebraMap_self, RingHom.mapMatrix_id, RingHom.id_apply]
+        rw [← Units.val_mul, ← Units.val_mul, (mem_centerPoints_iff I).1 hz |>.2 g hg]) e he
+    have hX' : dualUnit X ∈ zeroLocus (center I) (DualNumber k) := hX
+    have := (forall_centralizerEquations_iff (R := DualNumber k) (dualUnit X)).1
+      fun e he ↦ hX' e (hmem e he)
+    simp only [Subalgebra.mem_centralizer_iff, Set.image_singleton, Set.mem_singleton_iff,
+      forall_eq, commute_dualUnit_iff] at this
+    exact this.symm
+  have hE : ∀ g ∈ zeroLocus I k, ∀ e ∈ centralizerEquations {X}, evalAlgHom g e = 0 :=
+    fun g hg ↦ (forall_centralizerEquations_iff g).2 (by
+      simp only [Subalgebra.mem_centralizer_iff, Set.image_singleton, Set.mem_singleton_iff,
+        forall_eq, Algebra.algebraMap_self, RingHom.mapMatrix_id, RingHom.id_apply]
+      exact hXG g hg)
+  have hc := (forall_centralizerEquations_iff (R := DualNumber k) (dualUnit Y)).1 fun e he ↦
+    forall_mem_lieSubalgebra_of_forall_mem_zeroLocus hI hE hY he
+  simp only [Subalgebra.mem_centralizer_iff, Set.image_singleton, Set.mem_singleton_iff,
+    forall_eq, commute_dualUnit_iff] at hc
+  exact hc
 
 end Comparison
 

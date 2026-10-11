@@ -432,7 +432,7 @@ end Product
 
 section Scheme
 
-open CategoryTheory MonoidalCategory
+open CategoryTheory MonoidalCategory CartesianMonoidalCategory
 open scoped MonObj
 
 variable {I J : Ideal (CoordinateRing n k)} [I.IsHopfIdeal k] [J.IsHopfIdeal k]
@@ -512,12 +512,61 @@ theorem exists_mul_eq_of_containsCommutators (h : I ≤ J)
 /-- **The central–geometric product.** Let `H = V(J) ⊆ G = V(I)` be closed subgroups of `GL_n` over
 an algebraically closed field of characteristic zero such that `H` contains the commutators of `G`
 and `G°` acts semisimply on `kⁿ`. Then `G° = Z(G°)° H°`: the multiplication morphism
-`Z(G°)° × H° ⟶ G°` is surjective. (blueprint: `sk-p-product`) -/
+`Z(G°)° × H° ⟶ G°` is surjective.
+
+Its image contains the closed points of `G°`, which are `k`-points
+(`exists_mul_eq_of_containsCommutators`), and it is constructible (Chevalley); a constructible
+subset of the Jacobson space `G°` containing all its closed points is everything.
+(blueprint: `sk-p-product`) -/
 theorem surjective_mulCenterIdentityComponent (h : I ≤ J)
     [IsMonHom.ContainsCommutators (subgroupSchemeHom h)]
     [Representation.IsSemisimpleRepresentation (standardRepresentation (identityComponent I))] :
     Function.Surjective (mulCenterIdentityComponent h).left.base := by
-  sorry
+  set G := subgroupScheme (identityComponent I)
+  have : IsNoetherianRing (CoordinateRing n k ⧸ identityComponent I) :=
+    Algebra.FiniteType.isNoetherianRing k _
+  have : IsNoetherian G.left :=
+    inferInstanceAs (IsNoetherian (Spec (.of (CoordinateRing n k ⧸ identityComponent I))))
+  have : JacobsonSpace G.left := LocallyOfFiniteType.jacobsonSpace G.hom
+  -- the image contains the closed points
+  let X := (Spec (.of k)).asOver (Spec (.of k))
+  let e : X ≅ 𝟙_ (Over (Spec (.of k))) := Over.isoMk (Iso.refl (Spec (.of k))) (by
+    simp [X, specOverSpec_over, Algebra.algebraMap_self])
+  have hclosed (y : G.left) (hy : IsClosed {y}) :
+      y ∈ Set.range (mulCenterIdentityComponent h).left.base := by
+    set s := GrpObj.sectionOfIsClosed G y hy
+    obtain ⟨t, x, htx⟩ := exists_mul_eq_of_containsCommutators h (e.hom ≫ s)
+    have hs : (e.inv ≫ lift t x) ≫ mulCenterIdentityComponent h = s := by
+      unfold mulCenterIdentityComponent
+      rw [Category.assoc, ← Category.assoc (lift t x), lift_map,
+        ← Hom.mul_def, htx, ← Category.assoc, e.inv_hom_id, Category.id_comp]
+    obtain ⟨a⟩ : Nonempty (Spec (.of k)) := inferInstance
+    refine ⟨(e.inv ≫ lift t x).left a, ?_⟩
+    rw [← Scheme.Hom.comp_apply, ← Over.comp_left, hs, GrpObj.sectionOfIsClosed_left_apply]
+  -- the image is constructible
+  set f := mulCenterIdentityComponent h
+  have : LocallyOfFiniteType f.left := by
+    have : LocallyOfFiniteType (f.left ≫ G.hom) := by rw [Over.w f]; infer_instance
+    exact locallyOfFiniteType_of_comp f.left G.hom
+  have : QuasiCompact (subgroupScheme (identityComponent (center (identityComponent I))) ⊗
+      subgroupScheme (identityComponent J)).hom := by
+    rw [Over.tensorObj_hom]
+    infer_instance
+  have : CompactSpace (subgroupScheme (identityComponent (center (identityComponent I))) ⊗
+      subgroupScheme (identityComponent J)).left :=
+    QuasiCompact.compactSpace_of_compactSpace (Over.hom _)
+  have : QuasiCompact f.left := quasiCompact_of_compactSpace _
+  have hc : IsConstructible (Set.range f.left.base) := by
+    rw [← Set.image_univ]
+    exact f.left.isConstructible_image .univ
+  intro y
+  by_contra hy
+  replace hy : y ∈ (Set.range f.left.base)ᶜ := hy
+  obtain ⟨u, hu, hne, hsub⟩ := exists_isOpen_inter_closure_subset_of_isConstructible
+    hc.compl ⟨y, hy⟩
+  obtain ⟨z, ⟨hzu, hzcl⟩, hz⟩ := nonempty_inter_closedPoints hne
+    (hu.isLocallyClosed.inter isClosed_closure.isLocallyClosed)
+  exact hsub ⟨hzu, hzcl⟩ (hclosed z hz)
 
 end Scheme
 

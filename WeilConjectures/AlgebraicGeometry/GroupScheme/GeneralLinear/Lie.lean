@@ -22,9 +22,10 @@ their group law is `(1 + εX)(1 + εY) = 1 + ε(X + Y)`, and the mixed term of t
 
 A *rational representation* of a group scheme `G` over `k` on `k^m` is a homomorphism of group
 schemes `r : G ⟶ GL_m`. Its differential `dr : Lie(G) → gl_m` is the differential of `r` read in
-`gl_m` through `Lie(GL_m) = gl_m`. Over an algebraically closed field of characteristic zero, a
-subspace of `k^m` is stable under a connected `G` acting through `r` if and only if it is stable
-under `dr(Lie G)`: the group–Lie comparison for invariant subspaces.
+`gl_m` through `Lie(GL_m) = gl_m`; it is the `ε`-part of `r(1 + εx)`
+(`AlgebraicGeometry.GeneralLinearGroup.RationalHom.differential_eq_map_snd`). The group–Lie
+comparison for invariant subspaces, for closed subgroups of `GL_n`, is
+`AlgebraicGeometry.GeneralLinearGroup.invariant_iff_differential_invariant`.
 
 ## Main definitions
 
@@ -38,8 +39,10 @@ under `dr(Lie G)`: the group–Lie comparison for invariant subspaces.
 
 ## Main results
 
-- `AlgebraicGeometry.GeneralLinearGroup.RationalHom.invariant_iff_differential_invariant`: the
-  group–Lie comparison for invariant subspaces.
+- `AlgebraicGeometry.GeneralLinearGroup.RationalHom.differential_eq_map_snd`: the differential of
+  a rational representation on tangent points.
+- `AlgebraicGeometry.GeneralLinearGroup.RationalHom.le_comap_toLin'_differential`: a subspace
+  stable under the dual-number points of `G` is stable under the differential.
 
 ## Implementation notes
 
@@ -52,7 +55,7 @@ only a commutative ring.
 
 - `sk-d-tangent`: the Lie algebra of `GL_n` as its tangent space at the identity, rational
   representations and their differentials.
-- `sk-p-comparison`: invariant subspaces for the group and for its Lie algebra.
+- `sk-p-comparison`: subspaces stable under the group are stable under its Lie algebra.
 -/
 
 @[expose] public section
@@ -182,6 +185,24 @@ theorem differential_apply (r : RationalHom G m) [IsMonHom r] (x : GrpObj.Lie G)
     r.differential x = lieAlgebraEquivMatrix m k (GrpObj.differential r x) :=
   rfl
 
+/-- The matrix of a tangent vector `x` of `GL_m` is the `ε`-part of the matrix of its tangent
+point. -/
+theorem _root_.AlgebraicGeometry.GeneralLinearGroup.toMatrix_eq_map_snd
+    (x : GrpObj.Lie 𝔾𝕃(m; k)) :
+    toMatrix m k x =
+      ((homMulEquiv m k (DualNumber k) (GrpObj.tangentPoint x) : GL m (DualNumber k)) :
+        Matrix m m (DualNumber k)).map snd :=
+  rfl
+
+/-- The differential `dr(x)` of a rational representation `r` is the `ε`-part of the matrix
+`r(1 + εx)`, the image under `r` of the tangent point of `x`. -/
+theorem differential_eq_map_snd (r : RationalHom G m) [IsMonHom r] (x : GrpObj.Lie G) :
+    r.differential x =
+      ((r.points (DualNumber k) (GrpObj.tangentPoint x) : GL m (DualNumber k)) :
+        Matrix m m (DualNumber k)).map snd := by
+  rw [differential_apply, lieAlgebraEquivMatrix_apply, toMatrix_eq_map_snd,
+    GrpObj.tangentPoint_differential, points_apply]
+
 /-- If a subspace `U ⊆ k^m` is stable under the dual-number points of `G` acting by `r`, that is
 the `ε`-part of `r(g) v` lies in `U` for `g ∈ G(k[ε])` and `v ∈ U`, then `U` is stable under the
 differential of `r`: `dr(X) v` is the `ε`-part of `r(1 + εX) v`. -/
@@ -190,65 +211,14 @@ theorem le_comap_toLin'_differential (r : RationalHom G m) [IsMonHom r]
     (hU : ∀ g : AlgebraicGeometry.points G (DualNumber k), ∀ v ∈ U,
       snd ∘ ((r.points (DualNumber k) g : Matrix m m (DualNumber k)) *ᵥ (inl ∘ v)) ∈ U)
     (X : GrpObj.Lie G) : U ≤ U.comap (Matrix.toLin' (r.differential X)) := by
-  sorry
+  intro v hv
+  rw [Submodule.mem_comap, Matrix.toLin'_apply, differential_eq_map_snd]
+  convert hU (GrpObj.tangentPoint X) v hv using 1
+  funext i
+  simp [Matrix.mulVec, dotProduct, TrivSqZeroExt.snd_sum, mul_comm]
 
 end RationalHom
 
 end RationalHom
-
-/-! ### The group–Lie comparison for invariant subspaces -/
-
-section Comparison
-
-variable {k : Type u} [Field k] {G : Over (Spec (.of k))} [GrpObj G]
-  {m : Type u} [Fintype m] [DecidableEq m]
-
-namespace RationalHom
-
-/-- For a reduced group scheme `G` locally of finite type over an algebraically closed field, a
-subspace stable under `G(k)` is stable under the points of `G` with values in the dual numbers.
-
-Proof sketch (not formalised): the condition `r(g) U ⊆ U` is cut out by equations on `G`; they
-vanish on `G(k)`, which is dense in the reduced `G`, hence they vanish on `G`, so `r(g)` preserves
-`U ⊗ k[ε]` for every `g ∈ G(k[ε])`. (blueprint: `sk-p-comparison`) -/
-theorem snd_mulVec_mem_of_le_comap [IsAlgClosed k] [IsReduced G.left]
-    [LocallyOfFiniteType G.hom] (r : RationalHom G m) [IsMonHom r] (U : Submodule k (m → k))
-    (hU : ∀ g : AlgebraicGeometry.points G k, U ≤ U.comap (Matrix.toLin' (r.points k g)))
-    (g : AlgebraicGeometry.points G (DualNumber k)) {v : m → k} (hv : v ∈ U) :
-    snd ∘ ((r.points (DualNumber k) g : Matrix m m (DualNumber k)) *ᵥ (inl ∘ v)) ∈ U := by
-  sorry
-
-/-- Over an algebraically closed field of characteristic zero, a subspace stable under the
-differential of a rational representation of a connected group scheme `G` locally of finite type
-is stable under `G(k)`.
-
-Proof sketch (not formalised): replacing `G` by its image `r(G) ⊆ GL_m`, which is closed
-(`AlgebraicGeometry.isClosed_range_of_isMonHom`), reduces this to the defining representation,
-using that `dr` is surjective onto `Lie(r(G))` in characteristic zero; the stabiliser of `U` in
-`r(G)` is a closed subgroup scheme whose Lie algebra is all of `Lie(r(G))`, so it has the dimension
-of `r(G)` by `AlgebraicGeometry.GrpObj.finrank_lie_eq_topologicalKrullDim` and is the whole
-connected group `r(G)` by `AlgebraicGeometry.isIso_left_of_topologicalKrullDim_eq`.
-(blueprint: `sk-p-comparison`) -/
-theorem le_comap_toLin'_points [IsAlgClosed k] [CharZero k] [ConnectedSpace G.left]
-    [LocallyOfFiniteType G.hom] (r : RationalHom G m) [IsMonHom r] (U : Submodule k (m → k))
-    (hU : ∀ X : GrpObj.Lie G, U ≤ U.comap (Matrix.toLin' (r.differential X)))
-    (g : AlgebraicGeometry.points G k) : U ≤ U.comap (Matrix.toLin' (r.points k g)) := by
-  sorry
-
-/-- The group–Lie comparison for invariant subspaces: over an algebraically closed field of
-characteristic zero, a subspace is stable under a connected group scheme locally of finite type
-acting by a rational representation if and only if it is stable under the differential of the
-representation. (blueprint: `sk-p-comparison`) -/
-theorem invariant_iff_differential_invariant [IsAlgClosed k] [CharZero k] [ConnectedSpace G.left]
-    [LocallyOfFiniteType G.hom] (r : RationalHom G m) [IsMonHom r] (U : Submodule k (m → k)) :
-    (∀ g : AlgebraicGeometry.points G k, U ≤ U.comap (Matrix.toLin' (r.points k g))) ↔
-      ∀ X : GrpObj.Lie G, U ≤ U.comap (Matrix.toLin' (r.differential X)) :=
-  haveI := GrpObj.isReduced_of_charZero G
-  ⟨fun h ↦ r.le_comap_toLin'_differential U fun g _ hv ↦ r.snd_mulVec_mem_of_le_comap U h g hv,
-    fun h ↦ r.le_comap_toLin'_points U h⟩
-
-end RationalHom
-
-end Comparison
 
 end AlgebraicGeometry.GeneralLinearGroup

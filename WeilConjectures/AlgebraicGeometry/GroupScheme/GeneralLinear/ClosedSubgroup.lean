@@ -510,18 +510,25 @@ identity component: `V(I)` is then the closure of the connected component of the
 `V(I)`, which is closed. -/
 theorem connectedSpace_subgroupScheme (h : IsConnected I) :
     ConnectedSpace (subgroupScheme I).left := by
-  sorry
-
-/-- The reduced centre `Z(G)` of a reduced `G = V(I)` over an algebraically closed field is
-central scheme-theoretically: its points commute with all points of `G`.
-
-Proof sketch (not formalised): the condition that a point `z` of `Z(G)` commutes with a point `g`
-of `G` is cut out by equations on `Z(G) × G`; they vanish on the rational points, which are dense
-in the reduced scheme `Z(G) × G`, hence everywhere. (blueprint: `sk-p-comparison`) -/
-theorem central_subgroupSchemeHom_le_center [IsAlgClosed k] (hI : I.IsRadical)
-    {X : Over (Spec (.of k))} (a : X ⟶ subgroupScheme (center I)) (b : X ⟶ subgroupScheme I) :
-    (a ≫ subgroupSchemeHom (le_center I)) * b = b * (a ≫ subgroupSchemeHom (le_center I)) := by
-  sorry
+  set C := connectedComponentIn (PrimeSpectrum.zeroLocus (I : Set (CoordinateRing n k)))
+    (toPrimeSpectrum 1)
+  have h1 : toPrimeSpectrum (1 : GL n k) ∈ PrimeSpectrum.zeroLocus (I : Set (CoordinateRing n k)) :=
+    fun a ha ↦ (zeroLocus I k).one_mem a ha
+  have hC : _root_.IsConnected (PrimeSpectrum.zeroLocus (I : Set (CoordinateRing n k))) := by
+    have hZ : PrimeSpectrum.zeroLocus (identityComponent I : Set (CoordinateRing n k)) =
+        closure C :=
+      PrimeSpectrum.zeroLocus_vanishingIdeal_eq_closure C
+    rw [h] at hZ
+    rw [hZ]
+    exact (isConnected_connectedComponentIn_iff.2 h1).closure
+  set f := PrimeSpectrum.comap (Ideal.Quotient.mk I)
+  have hf := PrimeSpectrum.isClosedEmbedding_comap_of_surjective _ _ (Ideal.Quotient.mk_surjective (I := I))
+  have hr : Set.range f = PrimeSpectrum.zeroLocus (I : Set (CoordinateRing n k)) := by
+    rw [range_comap_of_surjective _ _ (Ideal.Quotient.mk_surjective (I := I)), Ideal.mk_ker]
+  change ConnectedSpace (PrimeSpectrum (CoordinateRing n k ⧸ I))
+  rw [connectedSpace_iff_univ]
+  rw [← hr, ← Set.image_univ] at hC
+  exact ⟨hC.1.of_image, (hf.isInducing.isPreconnected_image).1 hC.2⟩
 
 end Geometry
 
