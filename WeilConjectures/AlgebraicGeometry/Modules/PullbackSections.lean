@@ -8,6 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.Modules.FreeGenerator
 public import WeilConjectures.AlgebraicGeometry.Modules.PullbackTilde
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
+public import WeilConjectures.AlgebraicGeometry.Modules.FiniteDescent
 
 /-!
 # Sections of the pullback of a quasi-coherent module over an affine open
@@ -20,8 +21,6 @@ pullback of `m`.
 ## Main statements
 
 - `AlgebraicGeometry.Scheme.Modules.exists_linearEquiv_pullback_sections`
-- `AlgebraicGeometry.Scheme.Modules.isFinitePresentation_pullback`: pullback along any morphism of
-  schemes preserves finite presentation.
 -/
 
 @[expose] public section
@@ -192,38 +191,6 @@ theorem exists_linearEquiv_pullback_sections (f : X ⟶ Y) (ℱ : Y.Modules) [�
       pullbackComp_congr_hom_app_pullbackSection' hsq ℱ m, pullbackSection_presheaf_map]
   simp only [← ConcreteCategory.comp_apply, ← Functor.map_comp]
   rfl
-
-set_option backward.isDefEq.respectTransparency false in
-/-- A module of finite presentation has finite presentations over the members of an open cover. -/
-lemma exists_isOpenCover_presentation_isFinite {X : Scheme.{u}} (M : X.Modules)
-    [M.IsFinitePresentation] :
-    ∃ (ι : Type u) (U : ι → X.Opens) (P : ∀ i, (M.restrict (U i).ι).Presentation),
-      IsOpenCover U ∧ ∀ i, (P i).IsFinite := by
-  obtain ⟨σ, hσ⟩ := SheafOfModules.IsFinitePresentation.exists_quasicoherentData.{u} M
-  have (i : σ.I) : PreservesColimitsOfSize.{u, u} (overEquiv (σ.X i)).functor :=
-    (overEquiv (σ.X i)).toAdjunction.leftAdjoint_preservesColimits
-  refine ⟨σ.I, σ.X, fun i ↦ SheafOfModules.Presentation.ofIsIso.{u, u, u}
-    ((overFunctorEquiv (σ.X i)).app M).hom ((σ.presentation i).map (overEquiv (σ.X i)).functor
-      ((σ.X i).sheafOfModulesEquivOverUnit X.ringCatSheaf).symm),
-    (Opens.coversTop_iff _ _).mp σ.coversTop, fun i ↦ inferInstance⟩
-
-/-- **The pullback of a module of finite presentation is of finite presentation.** -/
-instance isFinitePresentation_pullback {X Y : Scheme.{u}} (g : X ⟶ Y) (M : Y.Modules)
-    [M.IsFinitePresentation] : ((Modules.pullback g).obj M).IsFinitePresentation := by
-  obtain ⟨ι, U, pres, hU, hfin⟩ := exists_isOpenCover_presentation_isFinite M
-  have (i : ι) : PreservesColimitsOfSize.{u, u} (Modules.pullback (g ∣_ U i)) := inferInstance
-  let P (i : ι) : (((Modules.pullback g).obj M).restrict (g ⁻¹ᵁ U i).ι).Presentation :=
-    SheafOfModules.Presentation.ofIsIso.{u, u, u}
-      ((restrictFunctorIsoPullback _).app _ ≪≫ (Modules.pullbackComp (g ⁻¹ᵁ U i).ι g).app M ≪≫
-        (Modules.pullbackCongr (morphismRestrict_ι g (U i)).symm).app M ≪≫
-        ((Modules.pullbackComp (g ∣_ U i) (U i).ι).symm).app M ≪≫
-        (Modules.pullback (g ∣_ U i)).mapIso ((restrictFunctorIsoPullback _).app M).symm).inv
-      ((pres i).map (Modules.pullback (g ∣_ U i)) (pullbackObjUnitIso _).symm)
-  have (i : ι) : (P i).IsFinite := inferInstance
-  refine isFinitePresentation_of_isOpenCover _ (U := fun i ↦ g ⁻¹ᵁ U i) ?_ P
-  refine IsOpenCover.mk (eq_top_iff.mpr fun x _ ↦ ?_)
-  obtain ⟨i, hi⟩ := hU.exists_mem (g.base x)
-  exact Opens.mem_iSup.mpr ⟨i, hi⟩
 
 section PullbackSection
 
