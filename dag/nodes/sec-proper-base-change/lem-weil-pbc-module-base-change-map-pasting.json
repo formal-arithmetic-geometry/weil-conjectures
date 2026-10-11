@@ -24,7 +24,8 @@
  "stmt_deps": [
   "def-pc-scheme",
   "def-weil-sheaf-of-modules-category",
-  "def-pc-module-pullback"
+  "def-pc-module-pullback",
+  "lem-pc-module-pullback-adjunction"
  ],
  "proof": [
   {
@@ -152,5 +153,24 @@
   "item": "lem-weil-pbc-module-base-change-map-pasting",
   "worker": "stage1",
   "summary": "Split in four steps, no new node. Step 1 fixes the adjunction conventions as in the sibling lem-weil-pbc-module-base-change-map-algebra (hom bijection psi -> k_*(psi) o eta_k, naturality of units, (b o a)_* = b_* a_* on sections, Stacks 0096, 0097, 0093). Step 2 proves the claims inside the statement about beta: it is well defined (unique adjoint of f_*(eta_v)) and natural in F (adjoints compared). Step 3 proves that the composition isomorphisms c_{b,a} of the statement exist, are unique and invertible, from the composite adjunction a^*b^* -| b_*a_* (Mathlib leaf def-weil-pbc-composite-adjunction) and the Mathlib leaf lem-weil-pbc-conjugate-iso-unit-equation with delta = id, exactly as lem-weil-pbc-inverse-image-composition does for etale sheaves; def-pc-module-pullback only asserts (h o g)^* = g^*h^* without normalisation, so the statement's own unit characterisation is what is used. Step 4 is the diagram chase: the adjoint of the right-hand side under (gh)^* -| (gh)_* is computed with the defining equation of c_{g,h}, naturality of eta_h, the defining equations (*) of beta^2 and beta^1, and the defining equation of c_{g',h'}, and comes out as f_*(eta_{g'h'}), the adjoint of beta^{12}. Stacks Remark 0ATM (derived, verification omitted) checked: tag and label correct; the base change map of Remark 08HY is defined through the adjunction f'^* -| f'_* rather than g^* -| g_*, but the node defines beta through g^* -| g_* (as Cohomology Section 02N6 does in degree 0), and nothing here needs the comparison. The proof is agent-written. Mathlib: the abstract content is CategoryTheory.mateEquiv_hcomp with mateEquiv_conjugateEquiv_vcomp / conjugateEquiv_mateEquiv_vcomp (Mates.lean), i.e. the leaf lem-weil-pbc-mate-pasting, but a direct chase with units is shorter than setting up beta as a mate, so that leaf is not used; Mathlib has no base change map for Scheme.Modules (searches recorded on the node by its creator). Statement unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ModuleBaseChangeMapPasting",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.moduleBaseChangeMap_pasting",
+  "file": "lean/Sheaf/AlgebraicGeometry/ModuleBaseChangeMapPasting.lean",
+  "statement": "theorem moduleBaseChangeMap_pasting {X S X' S' X'' S'' : Scheme.{u}} (f : X ⟶ S) (f' : X' ⟶ S') (f'' : X'' ⟶ S'') (g : S' ⟶ S) (g' : X' ⟶ X) (h : S'' ⟶ S') (h' : X'' ⟶ X') (hsq₁ : g' ≫ f = f' ≫ g) (hsq₂ : h' ≫ f' = f'' ≫ h) (F : X.Modules) : moduleBaseChangeMap f f'' (h ≫ g) (h' ≫ g') ((Category.assoc h' g' f).trans ((congrArg (fun k ↦ h' ≫ k) hsq₁).trans ((Category.assoc h' f' g).symm.trans ((congrArg (fun k ↦ k ≫ g) hsq₂).trans (Category.assoc f'' h g))))) F = ((conjugateIsoEquiv ((Classical.choose (exists_tensorPullbackAdjunction g)).comp (Classical.choose (exists_tensorPullbackAdjunction h))) (Classical.choose (exists_tensorPullbackAdjunction (h ≫ g)))).symm (pushforwardComp h g)).hom.app ((pushforward f).obj F) ≫ (tensorPullback h).map (moduleBaseChangeMap f f' g g' hsq₁ F) ≫ moduleBaseChangeMap f' f'' h h' hsq₂ ((tensorPullback g').obj F) ≫ (pushforward f'').map (((conjugateIsoEquiv ((Classical.choose (exists_tensorPullbackAdjunction g')).comp (Classical.choose (exists_tensorPullbackAdjunction h'))) (Classical.choose (exists_tensorPullbackAdjunction (h' ≫ g')))).symm (pushforwardComp h' g')).inv.app F)",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-mbp1145"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-mbp1145",
+  "group": "C1",
+  "result": "fix",
+  "note": "6 schemes, 7 maps (g',h'), squares g'f=f'g and h'f'=f''h, F:X.Modules; beta^1,beta^2 at g'^*F, beta^12 on (h≫g,h'≫g') via landed moduleBaseChangeMap; naturality = landed moduleBaseChangeMap_naturality; c_{g,h}^{-1}=(conj ... pushforwardComp h g).hom at f_*F, c_{g',h'}=(... h' g').inv at F, directions checked; four-arrow composite and endpoints"
  }
 }

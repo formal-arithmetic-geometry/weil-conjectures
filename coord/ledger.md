@@ -4499,3 +4499,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 11:46 L: merged deliver/H1/lem-weil-pbc-module-injects-localizations-associated-primes (stage 2; reviewer PASS; first push; Sheaf.RingTheory.InjectivePiLocalizationAssociatedPrimes Module.injective_pi_localization_associatedPrimes)
 - 11:46 L: merged deliver/H1/lem-weil-pbc-eventually-affine (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.EventuallyAffine AlgebraicGeometry.eventually_affine)
 - 11:46 L: merged deliver/G1/lem-weil-pbc-constructible-module-noetherian-descent (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.ConstructibleModuleNoetherianDescent AlgebraicGeometry.Etale.exists_noetherian_descent)
+- 11:48 L: merged deliver/C1/lem-weil-pbc-module-base-change-map-pasting (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.ModuleBaseChangeMapPasting AlgebraicGeometry.Scheme.Modules.moduleBaseChangeMap_pasting)
