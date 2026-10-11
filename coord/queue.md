@@ -1,11 +1,11 @@
 # Work queue
 
-165 items; claim with `tools/claim.py next <group> [--stage N]`.
+158 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (165)
+## Stage 2: nodes to state (158)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
@@ -43,7 +43,6 @@
 | `lem-sc-affine-pseudo-coherent-rhom-qcoherent` | 1 | state | 1 |
 | `lem-sc-derived-internal-hom-restrict-open` | 1 | state | 1 |
 | `lem-weil-pbc-etale-mayer-vietoris` | 1 | state | 1 |
-| `lem-weil-pbc-formal-systems-pullback` | 1 | state | 1 |
 | `cor-galois-lisse-representations` | 1 | state | 0 |
 | `lem-pc-base-change-rhom-perfect` | 1 | state | 0 |
 | `lem-pc-bounded-coherent-finite-tor-proper-pushforward-perfect` | 1 | state | 0 |
@@ -90,11 +89,9 @@
 | `lem-sc-hilb-dominating-power` | 1 | state | 0 |
 | `lem-sc-hilbert-embedded-points-gluing` | 1 | state | 0 |
 | `lem-sc-koszul-regular-immersion-derived-hom` | 1 | state | 0 |
-| `lem-sc-open-curve-boundary-higher-direct-image-vanishing` | 1 | state | 0 |
 | `lem-sc-open-curve-etale-leray-low-degree` | 1 | state | 0 |
 | `lem-sc-open-curve-gm-direct-image-cohomology` | 1 | state | 0 |
 | `lem-sc-open-restriction-support-triangle` | 1 | state | 0 |
-| `lem-sc-p1-ext-connecting-yoneda` | 1 | state | 0 |
 | `lem-sc-p1-proj-sheafification-exact` | 1 | state | 0 |
 | `lem-sc-p1-pullback-extension-class` | 1 | state | 0 |
 | `lem-sc-proper-flat-right-adjoint-basechange` | 1 | state | 0 |
@@ -114,7 +111,6 @@
 | `lem-sc-strict-henselization-cotangent-dimension` | 1 | state | 0 |
 | `lem-sc-strict-henselization-dvr` | 1 | state | 0 |
 | `lem-weil-pbc-closed-immersion-pushforward-ideal-powers` | 1 | state | 0 |
-| `lem-weil-pbc-cohomology-filtered-colimit` | 1 | state | 0 |
 | `lem-weil-pbc-derived-etale-cohomology-limit` | 1 | state | 0 |
 | `lem-weil-pbc-finite-coproduct-cohomology-assembly` | 1 | state | 0 |
 | `lem-weil-pbc-finite-geometric-point-coproduct-cohomology` | 1 | state | 0 |
@@ -166,13 +162,10 @@
 | `lem-sc-valuation-proper-coherent-sections` | 2 | state | 0 |
 | `lem-sc-very-ample-separation-criterion` | 2 | state | 0 |
 | `lem-sp-derived-couple-functoriality` | 2 | state | 0 |
-| `lem-sp-half-plane-graded-canonical` | 2 | state | 0 |
 | `lem-weil-pbc-etale-cohomology-limit-complex-systems` | 2 | state | 0 |
 | `lem-weil-pbc-henselian-finite-type-product-decomposition` | 2 | state | 0 |
 | `lem-weil-pbc-integral-closure-finite-fibre-part-localization` | 2 | state | 0 |
 | `lemma-weil-pbc-etale-cohomology-continuity` | 2 | state | 0 |
-| `lem-sc-normalization-properties` | 3 | state | 0 |
-| `lem-pc-essentially-constant-pro-hom-colimit` | 4 | state | 0 |
 | `lem-pur-essential-constant-pro-criterion-05py` | 4 | state | 0 |
 
 Not open yet: 40 nodes that wait for stage 1, 276 nodes that wait for a statement dependency.
