@@ -57,6 +57,7 @@ namespace Etale
 variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
   [HasSmallSiteSheafify A] {X Y S : Scheme.{u}}
 
+omit [HasSmallSiteSheafify A] in
 /-- Blueprint `sk-prop-sf-comp-proper`: Proper coincidence
 
 **Proper coincidence.** For `f : X ⟶ Y` proper the identity is a compactification of `f`, and
@@ -72,8 +73,18 @@ map has not been constructed, so only the existence of the derived isomorphism i
 here. -/
 theorem nonempty_iso_rightDerivedLowerShriek_rightDerivedLowerStar (f : X ⟶ Y)
     [HasCompactification f] [IsProper f] :
-    Nonempty (R(f)_![A] ≅ R((f)_*[A])) :=
-  sorry
+    Nonempty (R(f)_![A] ≅ R((f)_*[A])) := by
+  let c := HasCompactification.compactification f
+  -- the open immersion of the compactification is proper, so it has closed range and `j_! ≅ j_*`
+  have := Etale.isIso_openImmersionLowerShriekToLowerStar_of_isClosed_range A c.i
+    (c.isClopen_range_openImmersion inferInstance).isClosed
+  let ι := asIso (Etale.openImmersionLowerShriekToLowerStar A c.i)
+  have : PreservesFiniteColimits (c.i)_*[A] := preservesFiniteColimits_of_natIso ι
+  have : PreservesFiniteLimits (c.i)_*[A] := preservesFiniteLimits_of_natIso ι
+  exact ⟨Functor.isoWhiskerRight (Functor.mapDerivedCategoryNatIso ι) R((c.g)_*[A]) ≪≫
+    Functor.isoWhiskerRight ((c.i)_*[A].rightDerivedFunctorIsoMapDerivedCategory).symm
+      R((c.g)_*[A]) ≪≫ rightDerivedLowerStarComp A c.i c.g ≪≫
+    rightDerivedLowerStarCongr A c.comm.symm⟩
 
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] in
 /-- Blueprint `sk-lem-sf-mate`: Mate calculus for a pasted adjunction

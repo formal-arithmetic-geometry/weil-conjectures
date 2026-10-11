@@ -148,8 +148,8 @@ finite-type `f` between finite-type `k`-schemes and a finite `Λ` whose exponent
 `Y` (finiteness theorem, `AlgebraicGeometry.Etale.boundedConstructible_rightDerivedLowerShriek`). -/
 noncomputable def DerivedCategoryBoundedConstructible.rightDerivedLowerShriek
     (aX : X ⟶ Spec (.of k)) (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aX]
-    [LocallyOfFiniteType aY] [HasInvertibleExponent Λ Y] (f : X ⟶ Y) (hf : f ≫ aY = aX)
-    [HasCompactification f] :
+    [LocallyOfFiniteType aY] [QuasiCompact aY] [HasInvertibleExponent Λ Y] (f : X ⟶ Y)
+    (hf : f ≫ aY = aX) [HasCompactification f] :
     DerivedCategoryBoundedConstructible (ModuleCat.{u + 1} Λ) X ⥤
       DerivedCategoryBoundedConstructible (ModuleCat.{u + 1} Λ) Y :=
   have : HasInvertibleExponent Λ X := HasInvertibleExponent.of_hom f
