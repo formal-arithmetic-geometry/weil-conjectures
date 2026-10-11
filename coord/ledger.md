@@ -4498,3 +4498,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 11:45 L: merged deliver/F1/lem-weil-pbc-lqf-restriction-to-opens (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.IsLocallyQuasiFiniteResLE AlgebraicGeometry.Scheme.Hom.isLocallyQuasiFinite_resLE)
 - 11:46 L: merged deliver/H1/lem-weil-pbc-module-injects-localizations-associated-primes (stage 2; reviewer PASS; first push; Sheaf.RingTheory.InjectivePiLocalizationAssociatedPrimes Module.injective_pi_localization_associatedPrimes)
 - 11:46 L: merged deliver/H1/lem-weil-pbc-eventually-affine (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.EventuallyAffine AlgebraicGeometry.eventually_affine)
+- 11:46 L: merged deliver/G1/lem-weil-pbc-constructible-module-noetherian-descent (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.ConstructibleModuleNoetherianDescent AlgebraicGeometry.Etale.exists_noetherian_descent)

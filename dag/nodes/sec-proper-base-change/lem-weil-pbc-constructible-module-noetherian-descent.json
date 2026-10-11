@@ -206,5 +206,23 @@
   "by": "L",
   "result": "pass",
   "note": "Five steps along the first paragraph of the proof of Stacks 09Z7: Noetherian approximation (prop-nagata-noetherian-inverse-system, closed by Lean nonempty_noetherianApproximation), reindexing the cofiltered system by a directed set (new Mathlib leaf lem-weil-pbc-cofiltered-limit-directed-reindex: IsFiltered.exists_directed Presentable/Directed.lean, @[stacks 0032], with initial_op_of_final and Initial.isLimitWhiskerEquiv Limits/Final.lean:656, verified), the stages Noetherian and qcqs (pqf-lem-locnoeth-lft, 01T6, imported; new Mathlib leaf lem-weil-pbc-locally-noetherian-quasi-separated: IsLocallyNoetherian.quasiSeparatedSpace Noetherian.lean:220, verified), descent of F to a stage (new node lem-weil-pbc-constructible-module-limit-descent: the essential surjectivity of 09YU (3), whose module case Stacks leaves as 'details omitted'), assembly. Worker notes: the brief's guess that 09YU uses 09YT was wrong (09Y9/095N, 09YQ, 01ZM, 07RP); pqf-lem-locnoeth-lft is a Mathlib leaf candidate (LocallyOfFiniteType.isLocallyNoetherian Noetherian.lean:239); lem-weil-pbc-constructible-finite-pushforward-approximation (imported) repeats this argument for torsion abelian sheaves (stage-3 merge candidate); Scheme.NoetherianApproximation.isNoetherian_obj (closed) belongs to no node."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ConstructibleModuleNoetherianDescent",
+  "declaration": "AlgebraicGeometry.Etale.exists_noetherian_descent",
+  "file": "lean/Sheaf/AlgebraicGeometry/ConstructibleModuleNoetherianDescent.lean",
+  "statement": "theorem exists_noetherian_descent (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {X : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X] (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (hF : Scheme.IsConstructibleEtaleModuleSheaf F) : ∃ (X' : Scheme.{u}), IsNoetherian X' ∧ ∃ (ν : X ⟶ X') (F' : Sheaf X'.smallEtaleTopology (ModuleCat.{u + 1} Λ)), Scheme.IsConstructibleEtaleModuleSheaf F' ∧ Nonempty (((ν)^*[ModuleCat.{u + 1} Λ]).obj F' ≅ F)",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-cmn1145",
+  "group": "G1",
+  "result": "pass",
+  "note": "qcqs X = [CompactSpace X][QuasiSeparatedSpace X]; Λ : Type (u+1) finite comm ring; F : Sheaf X.smallEtaleTopology (ModuleCat.{u+1} Λ) with landed IsConstructibleEtaleModuleSheaf; ∃ X' : Scheme.{u} with AlgebraicGeometry.IsNoetherian (#print: IsLocallyNoetherian + CompactSpace), ν : X ⟶ X', constructible F', Nonempty ((ν)^*[ModuleCat Λ]).obj F' ≅ F, notation rfl to Etale.upperStar"
  }
 }
