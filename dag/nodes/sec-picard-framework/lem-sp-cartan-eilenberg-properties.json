@@ -145,5 +145,24 @@
   "group": "K1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-cep1802 (reviewer sub-agent of L); spot-checked: Return of 17:36 repaired: (1) item now states CE resolution inline with Stacks 015H (1)-(6), index exchange checked clause by clause (I^{p,q}=C^{q,p}: bound q<i, p<0 zero, rows resolve K^q, Ker/Im d_II rows resolve Z^q/B^{q+1}, H^q_II resolves H^q), E7 change named; (2) no citation of lem-weil-pbc-cartesian-eilenberg-functorial or thm-sp-if-e1 in steps/proof_deps. Step 2 hypotheses (Z,B injective, column bounded below) from (4),(5),(1); Step 3 from (6). FIX more, RETURN less: B3 closed unterminated TeX math at end of item statement and of new node lem-sp-cart-eilenberg-left-exact-cohomology; stmt_deps of item corrected (dropped stale thm-sp-if-e1 and proof-only lem-sp-cart-eilenberg-left-exact-cohomology).; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.CartanEilenbergProperties",
+  "declaration": "HomologicalComplex₂.cartanEilenberg_properties",
+  "file": "lean/Sheaf/CategoryTheory/CartanEilenbergProperties.lean",
+  "statement": "theorem cartanEilenberg_properties {B : Type u} [Category.{v} B] [Abelian B] [EnoughInjectives B] {A : Type u'} [Category.{v'} A] [Abelian A] (K : CochainComplex B ℤ) (C : HomologicalComplex₂ B (ComplexShape.up ℤ) (ComplexShape.up ℤ)) (a : K ⟶ C.X 0) (hK : ∃ i : ℤ, ∀ q : ℤ, q < i → IsZero (K.X q)) (hbelow : ∃ i : ℤ, ∀ p q : ℤ, q < i → IsZero ((C.X p).X q)) (hnegative : ∀ p q : ℤ, p < 0 → IsZero ((C.X p).X q)) (G : B ⥤ A) [G.Additive] [PreservesFiniteLimits G] : let P := C.restriction ComplexShape.embeddingUpNat let R := HomologicalComplex₂.flip P ∀ (hrows : ∀ q : ℤ, ∃ (I : InjectiveResolution (K.X q)) (e : I.cocomplex ≅ R.X q), (singleObjXSelf (ComplexShape.up ℕ) 0 (K.X q)).inv ≫ I.ι.f 0 ≫ e.hom.f 0 = a.f q) (hcycles : ∀ q : ℤ, ∃ (I : InjectiveResolution (K.cycles q)) (e : I.cocomplex ≅ kernel (R.d q (q + 1))), (singleObjXSelf (ComplexShape.up ℕ) 0 (K.cycles q)).inv ≫ I.ι.f 0 ≫ e.hom.f 0 ≫ (kernel.ι (R.d q (q + 1))).f 0 = K.iCycles q ≫ a.f q) (hboundaries : ∀ q : ℤ, ∃ (I : InjectiveResolution (image (K.d q (q + 1)))) (e : I.cocomplex ≅ image (R.d q (q + 1))), (singleObjXSelf (ComplexShape.up ℕ) 0 (image (K.d q (q + 1)))).inv ≫ I.ι.f 0 ≫ e.hom.f 0 ≫ (image.ι (R.d q (q + 1))).f 0 = image.ι (K.d q (q + 1)) ≫ a.f (q + 1)) (hhomology : ∀ q : ℤ, ∃ (I : InjectiveResolution (K.homology q)) (e : I.cocomplex ≅ ((homologyFunctor B (ComplexShape.up ℤ) q).mapHomologicalComplex (ComplexShape.up ℕ)).obj P), (singleObjXSelf (ComplexShape.up ℕ) 0 (K.homology q)).inv ≫ I.ι.f 0 ≫ e.hom.f 0 = homologyMap a q), (∀ p q : ℤ, Nonempty ((((G.mapHomologicalComplex (ComplexShape.up ℤ)).obj (C.X p)).homology q) ≅ G.obj ((C.X p).homology q))) ∧ (∀ q : ℤ, ∃ (I : InjectiveResolution (K.homology q)) (e : I.cocomplex ≅ ((homologyFunctor B (ComplexShape.up ℤ) q).mapHomologicalComplex (ComplexShape.up ℕ)).obj P), (singleObjXSelf (ComplexShape.up ℕ) 0 (K.homology q)).inv ≫ I.ι.f 0 ≫ e.hom.f 0 = homologyMap a q)",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-11",
+  "existing": false,
+  "note": "Integer-indexed commuting bicomplex. Its nonnegative first-degree restriction uses Mathlib InjectiveResolution; kernel and image are computed in the abelian category of natural-indexed cochain complexes. The equality of cohomology objects is rendered as existence of an isomorphism, as usual for categorical objects defined by universal properties."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-cep1314",
+  "group": "J1",
+  "result": "pass",
+  "note": "B abelian+EnoughInjectives; K bounded below (hK); C HomologicalComplex₂ up ℤ × up ℤ, outer=d_I, inner=d_II; a : K ⟶ C.X 0; (1) uniform q-bound; (2) p<0 zero; (3) rows of flip(restriction) ≅ InjectiveResolution of K^q with aug a.f q; (4) kernel(R.d q (q+1)) resolves K.cycles q with aug iCycles≫a; (5) image row resolves image(K.d q (q+1))=B^{q+1} with aug via a.f(q+1); (6) homologyFunctor q mapped over P resolves K.homology q, aug homologyMap a q; G additive+PreservesFiniteLimits into abelian A, independent universes; concl 1 ∀p q Nonempty iso, concl 2 = (6). No CE def node exists; E1 (unmerged) states CE inline in Stacks index convention as its node does, no duplicate definition"
  }
 }
