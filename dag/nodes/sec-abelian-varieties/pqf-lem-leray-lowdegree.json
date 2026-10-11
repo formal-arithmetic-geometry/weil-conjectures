@@ -88,5 +88,23 @@
   "group": "M1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-pll2339 (reviewer sub-agent of L); spot-checked: C1: five-term sequence cited to new node lem-pqf-leray-five-term (no existing low-degree/five-term/transgression node in dag/nodes; not a duplicate of lem-weil-pbc-first-quadrant-row-collapse or lem-sp-edge-collapse, which need row/column vanishing); pqf-lem-leray cited, not restated (no class b); C4: maps are the bottom/left edge maps and d2 per the new node, Leray naming via generic tool lem-sp-grothendieck-edge-maps (accepted); new node statement mathematically correct, unsplit, searches recorded; my grep of Mathlib (Algebra/Homology/SpectralSequence, SpectralObject) finds no five-term/low-degree theorem (verdict: no match); R^1=0 corollary is exactness. Second reading: no fault missed. No repairs."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.LerayLowDegree",
+  "declaration": "AlgebraicGeometry.lerayLowDegree",
+  "file": "lean/Sheaf/AlgebraicGeometry/LerayLowDegree.lean",
+  "statement": "theorem lerayLowDegree {X Y : Scheme.{v}} (f : X ⟶ Y) (F : SheafOfModules.{v} (moduleRings X.toRingedSpace)) [F.IsQuasicoherent] : ∃ (c : (forget₂ (ModuleCat.{v} ((moduleRings X.toRingedSpace).obj.obj (op ⊤))) AddCommGrpCat.{v}).obj ((RingedSpace.moduleCohomology X.toRingedSpace 1).obj F) ⟶ (forget₂ (ModuleCat.{v} ((moduleRings Y.toRingedSpace).obj.obj (op ⊤))) AddCommGrpCat.{v}).obj ((RingedSpace.moduleCohomology Y.toRingedSpace 0).obj (((RingedSpace.moduleDirectImage f.toLRSHom.toShHom).rightDerived 1).obj F))) (d : (forget₂ (ModuleCat.{v} ((moduleRings Y.toRingedSpace).obj.obj (op ⊤))) AddCommGrpCat.{v}).obj ((RingedSpace.moduleCohomology Y.toRingedSpace 0).obj (((RingedSpace.moduleDirectImage f.toLRSHom.toShHom).rightDerived 1).obj F)) ⟶ (forget₂ (ModuleCat.{v} ((moduleRings Y.toRingedSpace).obj.obj (op ⊤))) AddCommGrpCat.{v}).obj ((RingedSpace.moduleCohomology Y.toRingedSpace 2).obj ((RingedSpace.moduleDirectImage f.toLRSHom.toShHom).obj F))), (ComposableArrows.mk₄ (0 : (0 : AddCommGrpCat.{v}) ⟶ _) (Scheme.Modules.moduleCohomologyEdgeMap f F 1) c d).Exact ∧ ∀ (_hzero : IsZero (((RingedSpace.moduleDirectImage f.toLRSHom.toShHom).rightDerived 1).obj F)), Nonempty (( (forget₂ (ModuleCat.{v} ((moduleRings Y.toRingedSpace).obj.obj (op ⊤))) AddCommGrpCat.{v}).obj ((RingedSpace.moduleCohomology Y.toRingedSpace 1).obj ((RingedSpace.moduleDirectImage f.toLRSHom.toShHom).obj F))) ≅ (forget₂ (ModuleCat.{v} ((moduleRings X.toRingedSpace).obj.obj (op ⊤))) AddCommGrpCat.{v}).obj ((RingedSpace.moduleCohomology X.toRingedSpace 1).obj F))",
+  "by": "C1",
+  "date": "2026-10-12",
+  "existing": false,
+  "branch": "sheaf-dag"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "C1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }
