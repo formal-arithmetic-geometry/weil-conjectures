@@ -212,5 +212,22 @@
   "by": "L",
   "result": "pass",
   "note": "Reviewed by the lead (opus-relaunch6). Seven steps along Stacks 0CYV: supports in a short exact sequence of Coh(X,I) (on stalks, via two new unsplit nodes: levelwise exactness remarks (a),(b) from the proof of 087X, and Supp(F_n) = Supp(F_1), which Stacks asserts without proof; the proof sketch the worker wrote into the latter's statement was moved to its lead_note by L), supports closed (056J node), the empty subscheme proper, part (1) from 0CYN/0CYR nodes, annihilator facts, part (2) for subobjects and quotients, extensions via the closed subscheme cut out by I_Z I_Y (new leaf of a few Mathlib lemmas: IdealSheafData.support_mul Basic.lean:423, ker_subschemeι :576, range_subschemeι :493, the closed-immersion instance ClosedImmersion.lean:94; lines verified). Statement: two citations added, content unchanged. Brief error: exactness in Coh(X,I) is termwise only for cokernels (lem-weil-pbc-coherent-formal-modules-abelian). pqf-lem-coherent-ft-locnoeth already on the route via the definition node. Tags verified by the worker (0CYV, 087X, 02MP, 0CYN, 0CYR, 0CYM, 01QQ, 01IN, 00E0)."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FormalSystemsProperSupportSerre",
+  "declaration": "AlgebraicGeometry.formalSystems_properSupport_serre",
+  "file": "lean/Sheaf/AlgebraicGeometry/FormalSystemsProperSupportSerre.lean",
+  "statement": "theorem formalSystems_properSupport_serre {X S : Scheme.{u}} (f : X ⟶ S) [IsNoetherian S] [LocallyOfFiniteType f] [QuasiCompact f] (I : X.IdealSheafData) : Nonempty (Abelian (@CoherentFormalModule X (isNoetherian_of_locallyOfFiniteType f) I)) ∧ ∀ [Ab : Abelian (@CoherentFormalModule X (isNoetherian_of_locallyOfFiniteType f) I)], ObjectProperty.IsSerreClass (fun M : @CoherentFormalModule X (isNoetherian_of_locallyOfFiniteType f) I ↦ Scheme.Modules.HasSupportProperOver f (M.obj.obj (op 0))) ∧ ObjectProperty.IsSerreClass (fun M : @CoherentFormalModule X (isNoetherian_of_locallyOfFiniteType f) I ↦ ∃ (Z : Scheme.{u}) (i : Z ⟶ X) (_ : IsClosedImmersion i), IsProper (i ≫ f) ∧ ∀ n : ℕ, IsZero (Scheme.idealModuleProduct i.ker.toModulesι (M.obj.obj (op n))))",
+  "branch": "sheaf-dag",
+  "by": "Q1",
+  "date": "2026-10-12",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-fss",
+  "group": "Q1",
+  "result": "pass"
  }
 }
