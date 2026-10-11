@@ -552,6 +552,27 @@ lemma grothendieckSpectralObjectBaseChange_app_hom_app (eF : F ⋙ β ≅ α ⋙
     mapTriangulatedSpectralObjectCompIso_hom_app_hom, NatTrans.id_app]
   erw [Category.id_comp, Category.id_comp, Category.id_comp]
   rfl
+lemma grothendieckSpectralObjectBaseChange_app_hom_app_mk₁ (eF : F ⋙ β ≅ α ⋙ F')
+    (eG : G ⋙ γ ≅ β ⋙ G') (X : A) (n : ℤ) (a b : EInt) (hab : a ≤ b) :
+    (((grothendieckSpectralObjectBaseChange F G F' G' eF eG).app X).hom n).app
+        (mk₁ (homOfLE hab)) =
+      (γ.mapDerivedCategoryPlusHomologyFunctorIso n).hom.app
+          (G.rightDerivedFunctorPlus.obj
+            ((DerivedCategory.Plus.TStructure.t.eTruncGE.obj a).obj
+              ((DerivedCategory.Plus.TStructure.t.eTruncLT.obj b).obj
+                (F.rightDerivedFunctorPlus.obj
+                  ((DerivedCategory.Plus.singleFunctor A 0).obj X))))) ≫
+        (DerivedCategory.Plus.homologyFunctor C' n).map
+          ((rightDerivedFunctorPlusBaseChange eG.hom).app _) ≫
+        (DerivedCategory.Plus.homologyFunctor C' n).map (G'.rightDerivedFunctorPlus.map
+          (β.mapDerivedCategoryPlus.eTruncGELTIsoApp DerivedCategory.Plus.TStructure.t
+            DerivedCategory.Plus.TStructure.t a b _).hom) ≫
+        (DerivedCategory.Plus.homologyFunctor C' n).map (G'.rightDerivedFunctorPlus.map
+          ((DerivedCategory.Plus.TStructure.t.eTruncGE.obj a).map
+            ((DerivedCategory.Plus.TStructure.t.eTruncLT.obj b).map
+              ((rightDerivedFunctorPlusSingleBaseChange F F' eF).app X)))) :=
+  grothendieckSpectralObjectBaseChange_app_hom_app F G F' G' eF eG X n (mk₁ (homOfLE hab))
+
 
 lemma grothendieckSpectralObjectBaseChange_E₂ (eF : F ⋙ β ≅ α ⋙ F') (eG : G ⋙ γ ≅ β ⋙ G')
     (p q : ℕ) (X : A) :
@@ -561,11 +582,114 @@ lemma grothendieckSpectralObjectBaseChange_E₂ (eF : F ⋙ β ≅ α ⋙ F') (e
         rfl).hom.app (α.obj X) =
     γ.map ((F.grothendieckSpectralObjectHIso G p q (p + q : ℕ) q (q + 1) (by push_cast; rfl) rfl
         rfl).hom.app X) ≫ (grothendieckE₂BaseChange F G F' G' eF eG p q).app X := by
-  rw [grothendieckSpectralObjectBaseChange_app_hom_app, grothendieckSpectralObjectHIso_hom_app,
+  rw [grothendieckSpectralObjectBaseChange_app_hom_app_mk₁, grothendieckSpectralObjectHIso_hom_app,
     grothendieckSpectralObjectHIso_hom_app]
   simp only [grothendieckE₂BaseChange, NatTrans.comp_app, Functor.whiskerLeft_app,
-    Functor.whiskerRight_app, rightDerivedBaseChange_app, Functor.map_comp, Category.assoc]
-  done
+    Functor.whiskerRight_app, Functor.map_comp, Category.assoc]
+  have hB := β.mapDerivedCategoryPlus_eTruncGELTIsoApp_eTruncLTCompETruncGEIso q
+    (F.rightDerivedFunctorPlus.obj ((DerivedCategory.Plus.singleFunctor A 0).obj X))
+    ((rightDerivedFunctorPlusSingleBaseChange F F' eF).app X)
+  have hB' := congrArg (fun f ↦ (DerivedCategory.Plus.homologyFunctor C' (p + q : ℕ)).map
+    (G'.rightDerivedFunctorPlus.map f)) hB
+  simp only [Functor.map_comp] at hB'
+  rw [reassoc_of% hB']
+  have hd {Z₁ Z₂ : DerivedCategory.Plus B} (x : Z₁ ⟶ Z₂) (n : ℤ) {W : C'}
+      (w : (DerivedCategory.Plus.homologyFunctor C' n).obj
+        (G'.rightDerivedFunctorPlus.obj (β.mapDerivedCategoryPlus.obj Z₂)) ⟶ W) :
+      (γ.mapDerivedCategoryPlusHomologyFunctorIso n).hom.app (G.rightDerivedFunctorPlus.obj Z₁) ≫
+        (DerivedCategory.Plus.homologyFunctor C' n).map
+          ((rightDerivedFunctorPlusBaseChange eG.hom).app Z₁) ≫
+        (DerivedCategory.Plus.homologyFunctor C' n).map
+          (G'.rightDerivedFunctorPlus.map (β.mapDerivedCategoryPlus.map x)) ≫ w =
+      γ.map ((DerivedCategory.Plus.homologyFunctor C n).map (G.rightDerivedFunctorPlus.map x)) ≫
+        (γ.mapDerivedCategoryPlusHomologyFunctorIso n).hom.app (G.rightDerivedFunctorPlus.obj Z₂) ≫
+        (DerivedCategory.Plus.homologyFunctor C' n).map
+          ((rightDerivedFunctorPlusBaseChange eG.hom).app Z₂) ≫ w := by
+    have h₁ := (rightDerivedFunctorPlusBaseChange eG.hom).naturality x
+    have h₂ := (γ.mapDerivedCategoryPlusHomologyFunctorIso n).hom.naturality
+      (G.rightDerivedFunctorPlus.map x)
+    simp only [Functor.comp_obj, Functor.comp_map] at h₁ h₂
+    rw [← Functor.map_comp_assoc, ← h₁, Functor.map_comp_assoc, reassoc_of% h₂]
+  rw [hd, hd]
+  have hb {Y₀ Y₁ Y₂ Y₃ : DerivedCategory.Plus B'} (x : Y₀ ⟶ Y₁) (y : Y₁ ⟶ Y₂) (z : Y₂ ⟶ Y₃)
+      (m a a' : ℤ) (h : m + a = a') {W : C'}
+      (w : (DerivedCategory.Plus.homologyFunctor C' a').obj (G'.rightDerivedFunctorPlus.obj Y₃) ⟶
+        W) :
+      (DerivedCategory.Plus.homologyFunctor C' a).map
+          (G'.rightDerivedFunctorPlus.map ((shiftFunctor _ m).map x)) ≫
+        (DerivedCategory.Plus.homologyFunctor C' a).map
+          (G'.rightDerivedFunctorPlus.map ((shiftFunctor _ m).map y)) ≫
+        (DerivedCategory.Plus.homologyFunctor C' a).map
+          (G'.rightDerivedFunctorPlus.map ((shiftFunctor _ m).map z)) ≫
+        (DerivedCategory.Plus.homologyFunctor C' a).map
+          ((G'.rightDerivedFunctorPlus.commShiftIso m).hom.app Y₃) ≫
+        ((DerivedCategory.Plus.homologyFunctor C' 0).shiftIso m a a' h).hom.app
+          (G'.rightDerivedFunctorPlus.obj Y₃) ≫ w =
+      (DerivedCategory.Plus.homologyFunctor C' a).map
+          ((G'.rightDerivedFunctorPlus.commShiftIso m).hom.app Y₀) ≫
+        ((DerivedCategory.Plus.homologyFunctor C' 0).shiftIso m a a' h).hom.app
+          (G'.rightDerivedFunctorPlus.obj Y₀) ≫
+        (DerivedCategory.Plus.homologyFunctor C' a').map
+          (G'.rightDerivedFunctorPlus.map (x ≫ y ≫ z)) ≫ w := by
+    have h₁ := G'.rightDerivedFunctorPlus.commShiftIso_hom_naturality (x ≫ y ≫ z) m
+    have h₂ := (DerivedCategory.Plus.homologyFunctor C' 0).shiftIso_hom_naturality m a a' h
+      (G'.rightDerivedFunctorPlus.map (x ≫ y ≫ z))
+    simp only [← Functor.map_comp_assoc, ← Functor.map_comp]
+    rw [h₁, Functor.map_comp_assoc]
+    erw [reassoc_of% h₂]
+    rfl
+  rw [hb, ← rightDerivedFunctorPlusBaseChange_homologyFunctor_shiftIso_assoc]
+  have hψ : (rightDerivedFunctorPlusSingleBaseChange F F' eF).app X =
+      (rightDerivedFunctorPlusBaseChange eF.hom).app ((DerivedCategory.Plus.singleFunctor A 0).obj X) ≫
+        F'.rightDerivedFunctorPlus.map ((α.mapDerivedCategoryPlusSingleFunctor 0).hom.app X) := by
+    simp [rightDerivedFunctorPlusSingleBaseChange]
+  have hend : γ.map ((G.singleFunctorCompRightDerivedFunctorPlusCompHomologyFunctorIso p).hom.app
+        ((DerivedCategory.Plus.homologyFunctor B q).obj
+          (F.rightDerivedFunctorPlus.obj ((DerivedCategory.Plus.singleFunctor A 0).obj X)))) ≫
+      γ.map ((G.rightDerived p).map
+        ((F.singleFunctorCompRightDerivedFunctorPlusCompHomologyFunctorIso q).hom.app X)) ≫
+      (rightDerivedBaseChange eG.hom p).app ((F.rightDerived q).obj X) ≫
+      (G'.rightDerived p).map ((rightDerivedBaseChange eF.hom q).app X) =
+      (γ.mapDerivedCategoryPlusHomologyFunctorIso p).hom.app
+          (G.rightDerivedFunctorPlus.obj ((DerivedCategory.Plus.singleFunctor B 0).obj
+            ((DerivedCategory.Plus.homologyFunctor B q).obj
+              (F.rightDerivedFunctorPlus.obj ((DerivedCategory.Plus.singleFunctor A 0).obj X))))) ≫
+        (DerivedCategory.Plus.homologyFunctor C' p).map ((rightDerivedFunctorPlusBaseChange eG.hom).app
+          ((DerivedCategory.Plus.singleFunctor B 0).obj
+            ((DerivedCategory.Plus.homologyFunctor B q).obj
+              (F.rightDerivedFunctorPlus.obj ((DerivedCategory.Plus.singleFunctor A 0).obj X))))) ≫
+        (DerivedCategory.Plus.homologyFunctor C' p).map (G'.rightDerivedFunctorPlus.map
+          ((β.mapDerivedCategoryPlusSingleFunctor 0).hom.app
+            ((DerivedCategory.Plus.homologyFunctor B q).obj
+              (F.rightDerivedFunctorPlus.obj ((DerivedCategory.Plus.singleFunctor A 0).obj X))))) ≫
+        (DerivedCategory.Plus.homologyFunctor C' p).map (G'.rightDerivedFunctorPlus.map
+          ((DerivedCategory.Plus.singleFunctor B' 0).map
+            ((β.mapDerivedCategoryPlusHomologyFunctorIso q).hom.app
+              (F.rightDerivedFunctorPlus.obj ((DerivedCategory.Plus.singleFunctor A 0).obj X))))) ≫
+        (DerivedCategory.Plus.homologyFunctor C' p).map (G'.rightDerivedFunctorPlus.map
+          ((DerivedCategory.Plus.singleFunctor B' 0).map
+            ((DerivedCategory.Plus.homologyFunctor B' q).map
+              ((rightDerivedFunctorPlusSingleBaseChange F F' eF).app X)))) ≫
+        (G'.singleFunctorCompRightDerivedFunctorPlusCompHomologyFunctorIso p).hom.app
+          ((DerivedCategory.Plus.homologyFunctor B' q).obj
+            (F'.rightDerivedFunctorPlus.obj ((DerivedCategory.Plus.singleFunctor A' 0).obj
+              (α.obj X)))) ≫
+        (G'.rightDerived p).map
+          ((F'.singleFunctorCompRightDerivedFunctorPlusCompHomologyFunctorIso q).hom.app
+            (α.obj X)) := by
+    have hnat := (rightDerivedBaseChange eG.hom p).naturality
+      ((F.singleFunctorCompRightDerivedFunctorPlusCompHomologyFunctorIso q).hom.app X)
+    have hρ := (G'.singleFunctorCompRightDerivedFunctorPlusCompHomologyFunctorIso p).hom.naturality
+      ((β.mapDerivedCategoryPlusHomologyFunctorIso q).hom.app
+          (F.rightDerivedFunctorPlus.obj ((DerivedCategory.Plus.singleFunctor A 0).obj X)) ≫
+        (DerivedCategory.Plus.homologyFunctor B' q).map
+          ((rightDerivedFunctorPlusSingleBaseChange F F' eF).app X))
+    simp only [Functor.comp_obj, Functor.comp_map] at hnat hρ
+    rw [reassoc_of% hnat, rightDerivedBaseChange_app, rightDerivedBaseChange_app]
+    simp only [Functor.map_comp, Category.assoc] at hρ ⊢
+    rw [← γ.map_comp_assoc, Iso.hom_inv_id_app, γ.map_id, Category.id_comp]
+    sorry
+  sorry
 
 /-- **Base change for the Grothendieck spectral sequence.** Let `(F, G)` and `(F', G')` be
 composable pairs with acyclicity, related by exact functors `α : A ⥤ A'`, `β : B ⥤ B'`,

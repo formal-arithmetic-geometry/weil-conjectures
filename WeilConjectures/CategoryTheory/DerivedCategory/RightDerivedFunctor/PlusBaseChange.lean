@@ -180,6 +180,7 @@ lemma rightDerivedBaseChange_app (e : G ⋙ γ ⟶ β ⋙ G') (p : ℕ) (Y : B) 
 /-- The base change morphism is compatible with the shifts on homology: through the
 isomorphisms `H^a(K⟦m⟧) ≅ H^{a'}(K)`, the base change morphism on `H^a(R⁺G(Y⟦m⟧))` is the one on
 `H^{a'}(R⁺G(Y))`. -/
+@[reassoc]
 lemma rightDerivedFunctorPlusBaseChange_homologyFunctor_shiftIso (e : G ⋙ γ ⟶ β ⋙ G')
     (Y : DerivedCategory.Plus B) (m a a' : ℤ) (h : m + a = a') :
     γ.map ((DerivedCategory.Plus.homologyFunctor C a).map
