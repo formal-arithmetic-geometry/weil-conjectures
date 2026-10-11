@@ -214,5 +214,24 @@
   "by": "L",
   "result": "accepted",
   "note": "6 steps following Stacks 033A: flat local map R_p -> S_q (leaf), dimension formula 00ON (leaf), R_p regular by (R_k), the fibre's local ring C_Q = S_q/pS_q (new composed leaf for Remark 0H9M: algEquivAux_2 with Algebra.TensorProduct.comm and Localization.localRingEquiv, lines 111, 380, 292 verified by L) is regular by (R_k) of the fibre, closed fibre identified, then 031E (split node). Statement now cites def-weil-pbc-serre-conditions-rk-sk; the source line number was corrected by the worker (46460). Stage-3 note: citer lem-weil-pbc-regular-ring-smooth-ascent should cite that definition too and say the fibres are Noetherian."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.RegularityRkGoesUp",
+  "declaration": "RingHom.regularity_rk_goes_up",
+  "file": "lean/Sheaf/RingTheory/RegularityRkGoesUp.lean",
+  "statement": "theorem regularity_rk_goes_up {R : Type u} {S : Type v} [CommRing R] [CommRing S] [IsNoetherianRing R] [IsNoetherianRing S] [Algebra R S] (k : ℕ) (hflat : (algebraMap R S).Flat) (hfibres : ∀ (p : Ideal R) [p.IsPrime], ∃ (_ : IsNoetherianRing (p.Fiber S)), Ring.IsSerreR (p.Fiber S) k) (hR : Ring.IsSerreR R k) : Ring.IsSerreR S k",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-rku"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-rku",
+  "group": "M1",
+  "result": "fix",
+  "note": "statement read clause by clause against node and Stacks 033A; fix: the hfibres lambda applied to φ.toAlgebra (a disguised inline instance) replaced by [Algebra R S] with hflat on algebraMap R S (FLAT RING MAPS / algebraMap convention); fibre Noetherianity kept as a Prop existential"
  }
 }
