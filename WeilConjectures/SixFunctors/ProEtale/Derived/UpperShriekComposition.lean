@@ -356,6 +356,39 @@ theorem HasAmbientExceptionalRightAdjoint.ofNatIsoLeft_ofNatIsoRight_conjugateIs
       hf.adjunction.comp hg.adjunction :=
   Adjunction.ofNatIsoLeft_ofNatIsoRight_conjugateIsoEquiv _ _ e
 
+/-- The composition law `R(f ≫ g)_! ≅ Rf_! ⋙ Rg_!` of the pro-étale derived lower shriek on the
+*unbounded* derived categories, for morphisms carrying the ambient exceptional right adjoint datum
+of blueprint `sk-def-sf-admissible` (1). This is the composition isomorphism that clause (a) of
+`sk-lem-sf-mate` takes the mate of. The blueprint only proves the composition law on bounded below
+objects of étale origin (`sk-thm-sf-comp-composition`, here
+`AlgebraicGeometry.ProEtale.nonempty_iso_ι_comp_rightDerivedLowerShriek_comp`); the unbounded form
+needs proper base change on unbounded complexes for the proper maps of the compactifications.
+
+TODO: unfinished; see the pull request introducing it. -/
+theorem HasAmbientExceptionalRightAdjoint.nonempty_iso_rightDerivedLowerShriek_comp
+    (f : X ⟶ Y) (g : Y ⟶ Z) [HasCompactification f] [HasCompactification g]
+    [HasCompactification (f ≫ g)] (_hf : HasAmbientExceptionalRightAdjoint A f)
+    (_hg : HasAmbientExceptionalRightAdjoint A g)
+    (_hfg : HasAmbientExceptionalRightAdjoint A (f ≫ g)) :
+    Nonempty (R(f ≫ g)_![A] ≅ R(f)_![A] ⋙ R(g)_![A]) :=
+  sorry
+
+/-- Blueprint `sk-lem-sf-mate`, clause (a), the ambient form: if `f`, `g` and `f ≫ g` carry the
+ambient exceptional right adjoint datum, the mate of the ambient composition isomorphism
+`R(f ≫ g)_! ≅ Rf_! ⋙ Rg_!` is an isomorphism of ambient functors `Rg^× ⋙ Rf^× ≅ R(f ≫ g)^×`, and
+it carries the adjunction `R(f ≫ g)_! ⊣ R(f ≫ g)^×` to the composite adjunction
+`Rf_! ⋙ Rg_! ⊣ Rg^× ⋙ Rf^×`: the unit and counit of the composite adjunction are the pasted ones. -/
+theorem HasAmbientExceptionalRightAdjoint.exists_adjunction_comp_eq (f : X ⟶ Y) (g : Y ⟶ Z)
+    [HasCompactification f] [HasCompactification g] [HasCompactification (f ≫ g)]
+    (hf : HasAmbientExceptionalRightAdjoint A f) (hg : HasAmbientExceptionalRightAdjoint A g)
+    (hfg : HasAmbientExceptionalRightAdjoint A (f ≫ g)) :
+    ∃ e : R(f ≫ g)_![A] ≅ R(f)_![A] ⋙ R(g)_![A],
+      (hfg.adjunction.ofNatIsoLeft e).ofNatIsoRight
+          (conjugateIsoEquiv (hf.adjunction.comp hg.adjunction) hfg.adjunction e).symm =
+        hf.adjunction.comp hg.adjunction := by
+  obtain ⟨e⟩ := nonempty_iso_rightDerivedLowerShriek_comp f g hf hg hfg
+  exact ⟨e, ofNatIsoLeft_ofNatIsoRight_conjugateIsoEquiv f g hf hg hfg e⟩
+
 variable [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
   [Abelian.HasFunctorialFlatResolution A]
 
