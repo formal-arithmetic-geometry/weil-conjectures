@@ -1,11 +1,11 @@
 # Work queue
 
-861 items; claim with `tools/claim.py next <group> [--stage N]`.
+859 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (861)
+## Stage 2: nodes to state (859)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -42,13 +42,11 @@
 | `lem-weil-pbc-change-ideal-completion` | 1 | state |
 | `lem-weil-pbc-closed-immersion-unit-quotient` | 1 | state |
 | `lem-weil-pbc-closed-pushforward-stalks` | 1 | state |
-| `lem-weil-pbc-cm-local-quotient-nonzerodivisor-cm` | 1 | state |
 | `lem-weil-pbc-cm-module-good-sequence-element-nonzerodivisor` | 1 | state |
 | `lem-weil-pbc-codimension-one-analytically-unramified` | 1 | state |
 | `lem-weil-pbc-cohen-coefficient-ring-exists` | 1 | state |
 | `lem-weil-pbc-cohen-power-series-presentation` | 1 | state |
 | `lem-weil-pbc-cohen-ring-mod-pn-formally-smooth` | 1 | state |
-| `lem-weil-pbc-cohen-rings-exist` | 1 | state |
 | `lem-weil-pbc-cohen-structure-power-series-surjection` | 1 | state |
 | `lem-weil-pbc-colimit-category-fp-algebras` | 1 | state |
 | `lem-weil-pbc-colimit-etale-ring-map` | 1 | state |
