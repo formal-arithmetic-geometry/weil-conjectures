@@ -1,11 +1,11 @@
 # Work queue
 
-232 items; claim with `tools/claim.py next <group> [--stage N]`.
+225 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (232)
+## Stage 2: nodes to state (225)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
@@ -46,7 +46,6 @@
 | `lem-sc-pic-restriction-boundary` | 2 | state | 1 |
 | `lem-sp-edge-collapse` | 2 | state | 1 |
 | `cor-galois-lisse-representations` | 1 | state | 0 |
-| `lem-pc-chow-relative-ample` | 1 | state | 0 |
 | `lem-pc-coherent-property-devissage` | 1 | state | 0 |
 | `lem-sc-affine-koszul-cech-derived-comparison` | 1 | state | 0 |
 | `lem-sc-ext-locally-free-second-naturality` | 1 | state | 0 |
@@ -55,17 +54,14 @@
 | `lem-sc-p1-right-derived-triangle-connecting` | 1 | state | 0 |
 | `lem-sc-point-tangent-separation-closed-immersion` | 1 | state | 0 |
 | `lem-weil-derived-limit-roos-complex` | 1 | state | 0 |
-| `lem-weil-pbc-closed-subset-proper-over-base-properties` | 1 | state | 0 |
 | `lem-weil-pbc-closed-subset-proper-over-base-union-preimage` | 1 | state | 0 |
 | `lem-weil-pbc-coherent-property-devissage-integral-subschemes` | 1 | state | 0 |
 | `lem-weil-pbc-etale-geometric-fibre-constant-sections` | 1 | state | 0 |
 | `lem-weil-pbc-finite-surjective-coherent-generic-support` | 1 | state | 0 |
-| `lem-weil-pbc-matching-object-proper-faces` | 1 | state | 0 |
 | `lem-weil-pbc-projective-space-twisting-sheaf-charts` | 1 | state | 0 |
 | `lem-weil-pbc-pushforward-coherent-on-open` | 1 | state | 0 |
 | `lem-weil-pbc-scheme-theoretic-support` | 1 | state | 0 |
 | `lem-weil-pbc-sets-etale-section-continuity` | 1 | state | 0 |
-| `lem-weil-pbc-smooth-differentials-free-rank-fibre-dimension` | 1 | state | 0 |
 | `lem-weil-pbc-smooth-retract-relative-global-complete-intersection` | 1 | state | 0 |
 | `lem-weil-pbc-smooth-section-etale-lift` | 1 | state | 0 |
 | `lem-weil-pbc-smooth-zero-differentials-affine-open-etale` | 1 | state | 0 |
@@ -73,7 +69,6 @@
 | `lem-weil-pbc-spec-field-point-residue-field` | 1 | state | 0 |
 | `lem-weil-pbc-spec-finite-product-fields` | 1 | state | 0 |
 | `lem-weil-pbc-spec-map-residue-field-naturality` | 1 | state | 0 |
-| `lem-weil-pbc-spectral-generalizations-of-quasi-compact` | 1 | state | 0 |
 | `lem-weil-pbc-spectral-limit-constructible-closed-nonempty` | 1 | state | 0 |
 | `lem-weil-pbc-spectral-limit-constructible-closed-quasi-compact` | 1 | state | 0 |
 | `lem-weil-pbc-spectral-limit-descend-opens` | 1 | state | 0 |
@@ -95,9 +90,7 @@
 | `lem-weil-pbc-stein-geometric-fibre-etale-criterion` | 1 | state | 0 |
 | `lem-weil-pbc-stein-normalized-fibre-idempotent` | 1 | state | 0 |
 | `lem-weil-pbc-stein-universally-closed-factor` | 1 | state | 0 |
-| `lem-weil-pbc-strictly-henselian-quotient` | 1 | state | 0 |
 | `lem-weil-pbc-strictly-henselian-sections-stalk` | 1 | state | 0 |
-| `lem-weil-pbc-strictly-standard-base-change` | 1 | state | 0 |
 | `lem-weil-pbc-strictly-standard-localization-smooth` | 1 | state | 0 |
 | `lem-weil-pbc-subcategory-right-resolution-05T6` | 1 | state | 0 |
 | `lem-weil-pbc-support-pullback-finite-type` | 1 | state | 0 |
