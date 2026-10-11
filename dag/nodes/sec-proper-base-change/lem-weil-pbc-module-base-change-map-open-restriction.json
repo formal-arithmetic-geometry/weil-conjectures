@@ -25,7 +25,8 @@
   "def-pc-scheme",
   "def-weil-sheaf-of-modules-category",
   "def-pc-module-pullback",
-  "def-weil-open-immersion"
+  "def-weil-open-immersion",
+  "lem-pc-module-pullback-adjunction"
  ],
  "proof": [
   {
@@ -164,5 +165,23 @@
   "item": "lem-weil-pbc-module-base-change-map-open-restriction",
   "worker": "stage1",
   "summary": "Checked the module restriction statement against Stacks Sheaves Lemma 00A0 and the base-change pasting remarks 0ATL/0ATM. The proof has four steps: sectionwise restriction identifies both open base-change maps with isomorphisms; pasting the original square with the restricted target square gives the outer base-change map as b after j_V^* beta; pasting the restricted source square with the restricted square gives the same outer map as beta° after a; and the isomorphism criterion follows because a and b are composites of pullback composition isomorphisms and the restriction isomorphisms. Existing nodes supply restriction/pullback compatibility and the module pasting lemma; no new DAG node was needed."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ModuleBaseChangeMapOpenRestriction",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.moduleBaseChangeMap_open_restriction",
+  "file": "lean/Sheaf/AlgebraicGeometry/ModuleBaseChangeMapOpenRestriction.lean",
+  "statement": "theorem moduleBaseChangeMap_open_restriction {X S X' S' U V XU X'V : Scheme.{u}} (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (g' : X' ⟶ X) (h : g' ≫ f = f' ≫ g) (jU : U ⟶ S) (jV : V ⟶ S') (jX : XU ⟶ X) (jX' : X'V ⟶ X') [IsOpenImmersion jU] [IsOpenImmersion jV] [IsOpenImmersion jX] [IsOpenImmersion jX'] (fU : XU ⟶ U) (fV' : X'V ⟶ V) (gV : V ⟶ U) (gV' : X'V ⟶ XU) (hf : jX ≫ f = fU ≫ jU) (hf' : jX' ≫ f' = fV' ≫ jV) (hg : jV ≫ g = gV ≫ jU) (hg' : jX' ≫ g' = gV' ≫ jX) (hV : gV' ≫ fU = fV' ≫ gV) (hX : Set.range jX = f ⁻¹' Set.range jU) (hX' : Set.range jX' = f' ⁻¹' Set.range jV) : let adj : ∀ {A B : Scheme.{u}} (k : A ⟶ B), tensorPullback k ⊣ pushforward k := fun {A B : Scheme.{u}} (k : A ⟶ B) ↦ Classical.choose (exists_tensorPullbackAdjunction k) let c : ∀ {A B C : Scheme.{u}} (k : A ⟶ B) (l : B ⟶ C), tensorPullback (k ≫ l) ≅ tensorPullback l ⋙ tensorPullback k := fun {A B C : Scheme.{u}} (k : A ⟶ B) (l : B ⟶ C) ↦ (conjugateIsoEquiv ((adj l).comp (adj k)) (adj (k ≫ l))).symm (pushforwardComp k l) let rho := fun F : X.Modules ↦ moduleBaseChangeMap f fU jU jX hf F let rho' := fun G : X'.Modules ↦ moduleBaseChangeMap f' fV' jV jX' hf' G (∀ F : X.Modules, IsIso (rho F)) ∧ (∀ G : X'.Modules, IsIso (rho' G)) ∧ ∀ F : X.Modules, let a := (c jV g).inv.app ((pushforward f).obj F) ≫ (eqToIso (congrArg (fun k ↦ (tensorPullback k).obj ((pushforward f).obj F)) hg)).hom ≫ (c gV jU).hom.app ((pushforward f).obj F) ≫ (tensorPullback gV).map (rho F) let b := rho' ((tensorPullback g').obj F) ≫ (pushforward fV').map ((c jX' g').inv.app F) ≫ (pushforward fV').map (eqToIso (congrArg (fun k ↦ (tensorPullback k).obj F) hg')).hom ≫ (pushforward fV').map ((c gV' jX).hom.app F) let beta := moduleBaseChangeMap f f' g g' h F let betaV := moduleBaseChangeMap fU fV' gV gV' hV ((tensorPullback jX).obj F) IsIso a ∧ IsIso b ∧ (tensorPullback jV).map beta ≫ b = a ≫ betaV ∧ (IsIso ((tensorPullback jV).map beta) ↔ IsIso betaV)",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-mbc1133",
+  "group": "C1",
+  "result": "pass",
+  "note": "beta = homEquiv.symm of f_*(eta_v) then pushforwardComp/Congr (node's sectionwise equality); squares (f,f',g,g',h), rho=(f,fU,jU,jX,hf), rho'=(f',fV',jV,jX',hf'), beta°=(fU,fV',gV,gV',hV) at jX^*F; 4 IsOpenImmersion instances; hX/hX' via Set.range = base range (rfl checked); c = conjugateIsoEquiv mate of pushforwardComp, directions of a,b checked against node's c/c^{-1}; equation and iff; naturality theorem; #check of pushforward/pushforwardComp/conjugateIsoEquiv"
  }
 }
