@@ -171,5 +171,24 @@
   "by": "L",
   "result": "accepted",
   "note": "5 steps following the proof of Modules 01AH (2): the sectionwise presheaf colimit (existing leaf); sheafification preserves colimits and is the identity on sheaves (today's leaf), giving P^# = F; stalks and 007Z; stalks of a sectionwise filtered colimit of presheaves of modules are the colimit of the stalks (new unsplit node, Sheaves 009D (5), Mathlib candidate recorded); transport along the isomorphism. Tools of other units are Mathlib leaves."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ModuleStalkFilteredColimit",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.module_stalk_filtered_colimit",
+  "file": "lean/Sheaf/AlgebraicGeometry/ModuleStalkFilteredColimit.lean",
+  "statement": "theorem module_stalk_filtered_colimit (X : Scheme.{u}) (x : X) {I : Type u} [SmallCategory I] [IsFiltered I] (D : I ⥤ X.Modules) (c : Cocone D) (hc : IsColimit c) : Nonempty (IsColimit ((RingedSpace.moduleStalkFunctor X.toRingedSpace x).mapCocone c))",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-msf1151"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-msf1151",
+  "group": "K1",
+  "result": "fix",
+  "note": "X : Scheme.{u}, x : X, I : Type u (was independent w; INDEX UNIVERSES) SmallCategory+IsFiltered, D : I ⥤ X.Modules, c : Cocone D, hc : IsColimit c; conclusion Nonempty (IsColimit (moduleStalkFunctor X.toRingedSpace x).mapCocone c) via landed def-pc-module-stalk-functor instead of upstream stalkLinearMap + hand-written universal property"
  }
 }
