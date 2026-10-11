@@ -129,5 +129,24 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteSheafHomAffineAdjoint",
+  "declaration": "AlgebraicGeometry.exists_affine_derivedSheafHom_adjunction",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteSheafHomAffineAdjoint.lean",
+  "statement": "theorem exists_affine_derivedSheafHom_adjunction {X Y : Scheme.{u}} (f : Y ⟶ X) [IsAffineHom f] [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] [HasDerivedCategory.{wA} (SheafOfModules.{u} (moduleRings (directImageAlgebraSpace f)))] : ∃ (H : SheafOfModules.{u} (moduleRings X.toRingedSpace) ⥤ SheafOfModules.{u} (moduleRings (directImageAlgebraSpace f))) (_ : H.Additive) (iH : H ⋙ SheafOfModules.restrictScalars (R := moduleRings X.toRingedSpace) (R' := moduleRings (directImageAlgebraSpace f)) ⟨Functor.whiskerRight f.c (forget₂ CommRingCat RingCat)⟩ ≅ (SheafOfModules.homFunctor X.sheaf).obj (op ((SheafOfModules.restrictScalars (R := moduleRings X.toRingedSpace) (R' := moduleRings (directImageAlgebraSpace f)) ⟨Functor.whiskerRight f.c (forget₂ CommRingCat RingCat)⟩).obj (SheafOfModules.unit (moduleRings (directImageAlgebraSpace f)))))) (adj₀ : SheafOfModules.restrictScalars (R := moduleRings X.toRingedSpace) (R' := moduleRings (directImageAlgebraSpace f)) ⟨Functor.whiskerRight f.c (forget₂ CommRingCat RingCat)⟩ ⊣ H), (∀ (F : SheafOfModules.{u} (moduleRings X.toRingedSpace)) (U : X.Opens) (φ : (H.obj F).val.obj (op U)), ((adj₀.counit.app F).val.app (op U)).hom φ = ((((iH.hom.app F).val.app (op U)).hom φ).app (op (Over.mk (𝟙 U)))).hom (1 : (moduleRings (directImageAlgebraSpace f)).obj.obj (op U))) ∧ ∃ (R : schemeDerivedCategory X ⥤ DerivedCategory (SheafOfModules.{u} (moduleRings (directImageAlgebraSpace f)))) (β : H.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q ⟶ DerivedCategory.Q ⋙ R) (L : DerivedCategory (SheafOfModules.{u} (moduleRings (directImageAlgebraSpace f))) ⥤ schemeDerivedCategory X) (t : DerivedCategory.Q ⋙ L ≅ (SheafOfModules.restrictScalars (R := moduleRings X.toRingedSpace) (R' := moduleRings (directImageAlgebraSpace f)) ⟨Functor.whiskerRight f.c (forget₂ CommRingCat RingCat)⟩).mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q) (adj : L ⊣ R), R.IsRightDerivedFunctor β (HomologicalComplex.quasiIso _ (.up ℤ)) ∧ (R ⋙ L).IsRightDerivedFunctor (Functor.whiskerRight β L ≫ (Functor.associator _ _ _).hom) (HomologicalComplex.quasiIso _ (.up ℤ)) ∧ Nonempty (R ⋙ L ≅ (Functor.curry.obj (derivedInternalHom (Opens.grothendieckTopology X) X.sheaf)).obj (op ((DerivedCategory.singleFunctor _ 0).obj ((SheafOfModules.restrictScalars (R := moduleRings X.toRingedSpace) (R' := moduleRings (directImageAlgebraSpace f)) ⟨Functor.whiskerRight f.c (forget₂ CommRingCat RingCat)⟩).obj (SheafOfModules.unit (moduleRings (directImageAlgebraSpace f))))))) ∧ ∀ K : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ, L.map (β.app K) ≫ adj.counit.app (DerivedCategory.Q.obj K) = t.hom.app ((H.mapHomologicalComplex (.up ℤ)).obj K) ≫ DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex adj₀.counit (.up ℤ)).app K)",
+  "branch": "sheaf-dag",
+  "by": "U1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-fsa"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-fsa",
+  "group": "U1",
+  "result": "fix",
+  "note": "f:Y->X affine = IsAffineHom; A = f_*O_Y as landed moduleRings (directImageAlgebraSpace f) with landed map whiskerRight f.c (was bare RingCat sheaf tied by =/HEq + existential HasDerivedCategory); restriction = SheafOfModules.restrictScalars, L tied by t; RHom = derivedInternalHom (Opens X, X.sheaf) of single A, via Nonempty iso R⋙L; counit tied as derivedε_fac_app form through underived adj₀ (counit = evaluation at 1 via iH to homObj), R right derived of H with β, R⋙L absolute; removed untied free iso b (counit was only determined up to it) and redundant T/M/B/ε binders; diffed node JSON (only lean record added) and module (new, absent on sheaf-dag)"
  }
 }
