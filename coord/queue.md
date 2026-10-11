@@ -1,11 +1,11 @@
 # Work queue
 
-277 items; claim with `tools/claim.py next <group> [--stage N]`.
+272 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (277)
+## Stage 2: nodes to state (272)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -24,6 +24,7 @@
 | `lem-sc-base-change-curve` | 1 | state |
 | `lem-sc-hilb-dominating-power` | 1 | state |
 | `lem-sc-hilbert-embedded-points-gluing` | 1 | state |
+| `lem-sc-p1-right-derived-triangle-connecting` | 1 | state |
 | `lem-sc-point-tangent-separation-closed-immersion` | 1 | state |
 | `lem-weil-derived-limit-roos-complex` | 1 | state |
 | `lem-weil-pbc-closed-subset-proper-over-base-properties` | 1 | state |
@@ -38,7 +39,6 @@
 | `lem-weil-pbc-etale-sections-fpqc-descent` | 1 | state |
 | `lem-weil-pbc-finite-surjective-coherent-generic-support` | 1 | state |
 | `lem-weil-pbc-finite-type-module-support-closed` | 1 | state |
-| `lem-weil-pbc-horseshoe-delta-functor` | 1 | state |
 | `lem-weil-pbc-matching-object-coskeleton` | 1 | state |
 | `lem-weil-pbc-matching-object-proper-faces` | 1 | state |
 | `lem-weil-pbc-module-support-proper-over-base` | 1 | state |
@@ -54,15 +54,10 @@
 | `lem-weil-pbc-sets-etale-inverse-image-stalk-germ` | 1 | state |
 | `lem-weil-pbc-sets-etale-section-continuity` | 1 | state |
 | `lem-weil-pbc-sets-finite-surjective-descent` | 1 | state |
-| `lem-weil-pbc-sheaf-algebras-directed-colimit` | 1 | state |
 | `lem-weil-pbc-sheaf-isomorphism-local-open-cover` | 1 | state |
 | `lem-weil-pbc-sheaves-directed-colimit-sections` | 1 | state |
 | `lem-weil-pbc-simplicial-set-glue-simplex` | 1 | state |
-| `lem-weil-pbc-smooth-at-maximal-ideal-alg-closed-differentials-bound` | 1 | state |
-| `lem-weil-pbc-smooth-at-prime-artinian-lifting` | 1 | state |
-| `lem-weil-pbc-smooth-at-prime-field-extension-descent` | 1 | state |
 | `lem-weil-pbc-smooth-at-prime-free-conormal-basis` | 1 | state |
-| `lem-weil-pbc-smooth-conormal-sequence-exact` | 1 | state |
 | `lem-weil-pbc-smooth-differentials-free-rank-fibre-dimension` | 1 | state |
 | `lem-weil-pbc-smooth-fibre-regular-local` | 1 | state |
 | `lem-weil-pbc-smooth-free-differentials-strictly-standard-power` | 1 | state |
@@ -287,7 +282,7 @@
 | `lem-pc-essentially-constant-pro-hom-colimit` | 4 | state |
 | `lem-pur-essential-constant-pro-criterion-05py` | 4 | state |
 
-Not open yet: 40 nodes that wait for stage 1, 463 nodes that wait for a statement dependency.
+Not open yet: 40 nodes that wait for stage 1, 462 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
