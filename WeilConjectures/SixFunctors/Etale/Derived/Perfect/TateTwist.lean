@@ -22,6 +22,7 @@ hom commutes with the Tate twist: the canonical map
 
 ## Main statements
 
+- `AlgebraicGeometry.Etale.exists_isLocallyConstantSheaf_tateObject` (`lem-sf-twist-interchange`)
 - `AlgebraicGeometry.Etale.isIso_derivedHomTensorMap_tateObject` (`lem-sf-twist-interchange`)
 - `AlgebraicGeometry.Etale.nonempty_iso_derivedHom_tateObject_shift` (`lem-sf-twist-interchange`)
 -/
@@ -39,6 +40,19 @@ open Scheme
 namespace Etale
 
 variable (Λ : Type (u + 1)) [CommRing Λ] [HasTateTwist Λ] (X : Scheme.{u})
+
+/-- Blueprint `lem-sf-twist-interchange`: Internal Hom with an invertible twist.
+
+Every Tate twisting object `Λ_X(m)` is invertible locally constant of rank one: it is a locally
+constant sheaf `L` of `Λ`-modules placed in degree zero whose stalks at geometric points are free
+of rank one, and it has the tensor inverse `Λ_X(-m)`. -/
+theorem exists_isLocallyConstantSheaf_tateObject (m : ℤ) :
+    DerivedCategory.isInvertible Λ X (tateObject Λ X m) ∧
+      ∃ L : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ), IsLocallyConstantSheaf L ∧
+        (∀ (Ω : Type u) [Field Ω] [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ X),
+          Nonempty ((pointSmallEtale s).sheafFiber.obj L ≅ ModuleCat.of Λ Λ)) ∧
+        Nonempty (tateObject Λ X m ≅ (_root_.DerivedCategory.singleFunctor _ 0).obj L) :=
+  ⟨isInvertible_tateObject Λ X m, HasTateTwist.exists_isLocallyConstantSheaf_twistObject X m⟩
 
 /-- Blueprint `lem-sf-twist-interchange`: Internal Hom with an invertible twist.
 
