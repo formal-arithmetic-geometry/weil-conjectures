@@ -198,5 +198,23 @@
   "summary": "Split following Stacks 031T, proof of (1). Statement kept (it is clause (1) without the 'no embedded primes' part, which the citer does not need). Steps: a lies in every associated prime, so height >= 1; A has (S_2) by Serre's criterion (031S) after noting a normal domain is a normal ring; the sequence 0 -> A -> A -> A/aA -> 0 localized at p together with 00LX(2) gives depth((A/aA)_p) >= 1 if dim A_p >= 2 (the source's (S_1) for R/aR); p A_p is associated to (A/aA)_p (0310), so depth((A/aA)_p) = 0 (via the existing node for 0BK4, which gives depth <= dim(A_p/pA_p) = 0, in place of 00LD); hence dim A_p <= 1, and height = dim A_p by the existing chain node. This inlines the direction of 031Q the source uses and reads the height bound directly at p, so the source's detour through minimal primes over (a) and 00KV is not needed. All cited nodes exist in unit sk-thm-p1; no new nodes. The prompt's description of the source proof (localize and use that a depth-one Noetherian normal local domain is a DVR, 0AVL) does not match the source: 031T's proof uses (S_2) and depth, and 0AVL is Divisors lemma-check-injective-on-ass. No slopmaster2 declaration states the item.",
   "blueprint": "The item is not a blueprint node; its ancestor lem-weil-pbc-normal-constant-generic's proof (step 4 of its split, Tag 09Z5 proof of (1)) uses it only through lem-weil-pbc-normal-domain-fractional-principal-quotient-ass, step 3 ('principal quotient associated-height auxiliary'); steps 1-6 realize that auxiliary fact entirely. Blueprint search (tools/blueprint_refs.py search: 'associated primes height normal', '031T', 'embedded primes', 'associated prime', 'height one', 'normal domain height', 'Noetherian normal', 'principal ideal height', 'codimension one') found no blueprint node stating it."
  },
- "reviewed": "2026-10-10 L: 6 steps with the ingredients of 031T (1): (S2) from Serre, the localized sequence, depth of (A/aA)_p at least 1 if dim A_p >= 2 (00LX), pA_p associated to it (0310) so depth 0 (0BK4), hence dim A_p <= 1; the detour through 031Q/00KV inlined, accepted; 0 new nodes. The brief had the wrong proof sketch (DVR route): the worker corrected it."
+ "reviewed": "2026-10-10 L: 6 steps with the ingredients of 031T (1): (S2) from Serre, the localized sequence, depth of (A/aA)_p at least 1 if dim A_p >= 2 (00LX), pA_p associated to it (0310) so depth 0 (0BK4), hence dim A_p <= 1; the detour through 031Q/00KV inlined, accepted; 0 new nodes. The brief had the wrong proof sketch (DVR route): the worker corrected it.",
+ "lean": {
+  "module": "Sheaf.RingTheory.NormalDomainPrincipalQuotientAssociatedHeight",
+  "declaration": "Ideal.height_eq_one_of_mem_associatedPrimes_quotient_span",
+  "file": "lean/Sheaf/RingTheory/NormalDomainPrincipalQuotientAssociatedHeight.lean",
+  "statement": "theorem height_eq_one_of_mem_associatedPrimes_quotient_span {A : Type u} [CommRing A] [IsDomain A] [IsNoetherianRing A] [IsIntegrallyClosed A] {a : A} (ha : a ≠ 0) {p : Ideal A} (hp : p ∈ associatedPrimes A (A ⧸ Ideal.span {a})) : p.height = 1",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-npq1156",
+  "group": "F1",
+  "result": "pass",
+  "note": "A: CommRing+IsDomain+IsIntegrallyClosed (NORMAL RING domain form)+IsNoetherianRing; a≠0; A/aA = A ⧸ Ideal.span {a}; associated prime = associatedPrimes (isAssociatedPrime_iff under Noetherian = prime colon ⊥ {x}, x≠0 forced by primality); p.height = 1 ⇔ (0)⊊p and no longer chain (height_eq_primeHeight=Order.height); spellings match landed AnalyticallyUnramifiedPrincipalCriterion and the parallel fractional sibling"
+ }
 }

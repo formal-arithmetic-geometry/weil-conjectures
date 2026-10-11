@@ -4530,3 +4530,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 11:56 L: merged deliver/F1/lem-weil-pbc-koszul-differential-square-zero (stage 2; reviewer FIX; first push; Sheaf.Paper.KoszulDifferentialSquareZero ExteriorAlgebra.koszul_differential_square_zero)
 - 11:56 L: merged deliver/G1/lem-weil-pbc-nagata-localization (stage 2; reviewer PASS; first push; Sheaf.RingTheory.NagataLocalization isNagataRing_localization)
 - 11:56 L: merged deliver/G1/lem-weil-pbc-module-finite-presentation-representatives (stage 2; reviewer FIX; first push; Sheaf.Algebra.Category.ModuleCat.Sheaf.FinitePresentationRepresentatives AlgebraicGeometry.RingedSpace.exists_finitePresentation_representatives)
+- 11:57 L: merged deliver/F1/lem-weil-pbc-normal-domain-principal-quotient-associated-height (stage 2; reviewer PASS; first push; Sheaf.RingTheory.NormalDomainPrincipalQuotientAssociatedHeight Ideal.height_eq_one_of_mem_associatedPrimes_quotient_span)
