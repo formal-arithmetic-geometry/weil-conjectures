@@ -141,8 +141,7 @@ admitting a compactification and `L` invertible in `D(Y_ét, Λ)`,
 
 `Rf^!(K ⊗ᴸ L) ≅ Rf^! K ⊗ᴸ Lf^* L`,
 
-(`…_comp_derivedTensorRight_of_isInvertible`)
-`AlgebraicGeometry.Etale.nonempty_iso_rightDerivedUpperShriek_comp_derivedTensorRight_of_isInvertible`
+naturally in `K`: the general statement for coefficients satisfying the projection formula,
 together with the projection formula at finite coefficients
 (`AlgebraicGeometry.Etale.hasProjectionFormula_of_finite`). -/
 theorem nonempty_iso_rightDerivedUpperShriek_comp_derivedTensorRight
