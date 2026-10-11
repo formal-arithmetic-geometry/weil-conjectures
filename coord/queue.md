@@ -1,15 +1,14 @@
 # Work queue
 
-451 items; claim with `tools/claim.py next <group> [--stage N]`.
+450 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (451)
+## Stage 2: nodes to state (450)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
-| `def-weil-pbc-koszul-regular-sequence` | 1 | state |
 | `cor-galois-lisse-representations` | 1 | state |
 | `lem-pc-affine-perfect-colimit-descent` | 1 | state |
 | `lem-pc-affine-perfect-cut-degree-zero` | 1 | state |
@@ -22,7 +21,6 @@
 | `lem-pc-flat-complex-derived-pullback` | 1 | state |
 | `lem-pc-koszul-affine-detection` | 1 | state |
 | `lem-pc-module-pullback-identity-composition` | 1 | state |
-| `lem-pc-noetherian-bounded-coherent-pseudo-coherent` | 1 | state |
 | `lem-pc-perfect-affine-bounded-projective` | 1 | state |
 | `lem-pc-perfect-complex-descent` | 1 | state |
 | `lem-pc-perfect-complexes-compact-set` | 1 | state |
@@ -60,6 +58,8 @@
 | `lem-sc-hilb-dominating-power` | 1 | state |
 | `lem-sc-hilbert-embedded-points-gluing` | 1 | state |
 | `lem-sc-intersection-effective-cartier` | 1 | state |
+| `lem-sc-koszul-regular-closed-immersion-perfect` | 1 | state |
+| `lem-sc-koszul-regular-sequence-dual-complex` | 1 | state |
 | `lem-sc-module-extension-by-zero-stalk-maps` | 1 | state |
 | `lem-sc-perfect-cut-complex-degree-zero` | 1 | state |
 | `lem-sc-perfect-degree-zero-fibre-criterion` | 1 | state |
@@ -73,6 +73,7 @@
 | `lem-sc-perfect-support-map-lift` | 1 | state |
 | `lem-sc-picard-kunneth-qcoh` | 1 | state |
 | `lem-sc-pseudo-coherent-support-annihilation` | 1 | state |
+| `lem-sc-smooth-proper-diagonal-koszul-regular` | 1 | state |
 | `lem-sc-valuation-limit-affine-pushforward-colimit` | 1 | state |
 | `lem-sc-valuation-proper-coherent-higher-direct-images` | 1 | state |
 | `lem-weil-derived-limit-roos-complex` | 1 | state |
@@ -81,11 +82,8 @@
 | `lem-weil-pbc-popescu-desingularize-lifting-apply` | 1 | state |
 | `lem-weil-pbc-popescu-enlarge-solution-modulo` | 1 | state |
 | `lem-weil-pbc-popescu-solution-modulo-choose` | 1 | state |
-| `lem-weil-pbc-power-series-field-cohen-regular-complete` | 1 | state |
 | `lem-weil-pbc-power-series-parameter-quotient` | 1 | state |
-| `lem-weil-pbc-power-series-ring-subfields` | 1 | state |
 | `lem-weil-pbc-power-set-complex-contractible` | 1 | state |
-| `lem-weil-pbc-prescribed-residue-basis-spreads` | 1 | state |
 | `lem-weil-pbc-presheaf-module-stalk-filtered-colimit` | 1 | state |
 | `lem-weil-pbc-principal-localization-naive-cotangent` | 1 | state |
 | `lem-weil-pbc-principal-maximal-dim-one-regular` | 1 | state |
@@ -164,6 +162,7 @@
 | `lem-weil-pbc-regular-ring-normal` | 1 | state |
 | `lem-weil-pbc-regular-ring-smooth-ascent` | 1 | state |
 | `lem-weil-pbc-regular-sequence-conormal-free` | 1 | state |
+| `lem-weil-pbc-regular-sequence-koszul-regular` | 1 | state |
 | `lem-weil-pbc-regular-sequence-polynomial-variables` | 1 | state |
 | `lem-weil-pbc-regular-sequence-powers` | 1 | state |
 | `lem-weil-pbc-regular-sequence-short-exact-sequence` | 1 | state |
@@ -461,7 +460,7 @@
 | `lem-pc-essentially-constant-pro-hom-colimit` | 4 | state |
 | `lem-pur-essential-constant-pro-criterion-05py` | 4 | state |
 
-Not open yet: 40 nodes that wait for stage 1, 529 nodes that wait for a statement dependency.
+Not open yet: 40 nodes that wait for stage 1, 525 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
