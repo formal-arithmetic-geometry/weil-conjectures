@@ -9,6 +9,7 @@ public import WeilConjectures.CategoryTheory.Adjunction.ProjectionMapMonoidal
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Functor
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekProjection
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekToLowerStar
+public import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormulaAssoc
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerStarProjectionComp
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStarAdjunctionCompat
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Unit
@@ -29,9 +30,6 @@ mixed-support cup product is deduced from these facts in
 - `AlgebraicGeometry.Etale.leftDerivedUpperStarTensorComparison_associativity`,
   `AlgebraicGeometry.Etale.leftDerivedUpperStarTensorComparison_rightUnitor_hom`: the
   associativity and right unitality of the tensor comparison of `Lg^*`.
-- `AlgebraicGeometry.Etale.rightDerivedLowerStarProjectionMap_associativity`,
-  `AlgebraicGeometry.Etale.rightDerivedLowerStarProjectionMap_rightUnitality`: associativity and
-  unitality of the projection map of `Rp_*`.
 - `AlgebraicGeometry.Etale.derivedOpenImmersionLowerShriekProjectionIso_inv_associativity`,
   `AlgebraicGeometry.Etale.derivedOpenImmersionLowerShriekProjectionIso_inv_rightUnitality`:
   associativity and unitality of the projection formula `j_!K ⊗ᴸ M ≅ j_!(K ⊗ᴸ Lj^*M)`.
@@ -107,26 +105,6 @@ lemma leftDerivedUpperStarTensorComparison_rightUnitor_hom
   rw [← h]
   exact Functor.OplaxMonoidal.right_unitality_hom L((g)^*[A]) K
 
-/-- The associativity of the inverse `Lg^*K ⊗ᴸ Lg^*M ⟶ Lg^*(K ⊗ᴸ M)` of the tensor comparison
-of `Lg^*`: the associativity axiom of a lax monoidal functor. -/
-@[reassoc]
-lemma inv_leftDerivedUpperStarTensorComparison_associativity
-    (K L M : DerivedCategory (Sheaf Y.smallEtaleTopology A)) :
-    inv (((leftDerivedUpperStarTensorComparison A g).app K).app L) ▷ L((g)^*[A]).obj M ≫
-        inv (((leftDerivedUpperStarTensorComparison A g).app (K ⊗ L)).app M) ≫
-        L((g)^*[A]).map (α_ K L M).hom =
-      (α_ _ _ _).hom ≫
-        L((g)^*[A]).obj K ◁ inv (((leftDerivedUpperStarTensorComparison A g).app L).app M) ≫
-        inv (((leftDerivedUpperStarTensorComparison A g).app K).app (L ⊗ M)) := by
-  have h := leftDerivedUpperStarTensorComparison_associativity A g K L M
-  rw [← cancel_epi (((leftDerivedUpperStarTensorComparison A g).app K).app L ▷ _),
-    ← cancel_epi (((leftDerivedUpperStarTensorComparison A g).app (K ⊗ L)).app M)]
-  simp only [← comp_whiskerRight_assoc, IsIso.hom_inv_id, id_whiskerRight, Category.id_comp,
-    IsIso.hom_inv_id_assoc]
-  rw [reassoc_of% h]
-  simp only [← whiskerLeft_comp_assoc, IsIso.hom_inv_id, whiskerLeft_id, Category.id_comp,
-    IsIso.hom_inv_id, Category.comp_id]
-
 /-- The right unitality of the inverse of the tensor comparison of `Lg^*`. -/
 @[reassoc]
 lemma inv_leftDerivedUpperStarTensorComparison_rightUnitality
@@ -139,6 +117,7 @@ lemma inv_leftDerivedUpperStarTensorComparison_rightUnitality
     ← whiskerLeft_comp_assoc, Iso.inv_hom_id, whiskerLeft_id, Category.id_comp]
 
 end UpperStar
+
 section OpenImmersion
 
 variable {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
@@ -159,26 +138,6 @@ lemma mapDerivedCategoryUpperStarDerivedTensorIso_hom_app_app
   rw [← h]
   rfl
 
-/-- The associativity of `j^*M ⊗ᴸ Lj^*N ≅ j^*(M ⊗ᴸ N)` with respect to the inverse of the
-tensor comparison of `Lj^*`. -/
-lemma mapDerivedCategoryUpperStarDerivedTensorIso_associativity
-    (M N P : DerivedCategory (Sheaf X.smallEtaleTopology A)) :
-    ((mapDerivedCategoryUpperStarDerivedTensorIso A j).hom.app M).app N ▷
-          L((j)^*[A]).obj P ≫
-        ((mapDerivedCategoryUpperStarDerivedTensorIso A j).hom.app (M ⊗ N)).app P ≫
-        D((j)^*[A]).map (α_ M N P).hom =
-      (α_ _ _ _).hom ≫
-        D((j)^*[A]).obj M ◁ inv (((leftDerivedUpperStarTensorComparison A j).app N).app P) ≫
-        ((mapDerivedCategoryUpperStarDerivedTensorIso A j).hom.app M).app (N ⊗ P) := by
-  simp only [mapDerivedCategoryUpperStarDerivedTensorIso_hom_app_app, Category.assoc]
-  rw [comp_whiskerRight, comp_whiskerRight, Category.assoc, Category.assoc,
-    ← comp_whiskerRight_assoc ((leftDerivedUpperStarIsoMapDerivedCategory A j).hom.app (M ⊗ N)),
-    Iso.hom_inv_id_app, id_whiskerRight, Category.id_comp,
-    ← (leftDerivedUpperStarIsoMapDerivedCategory A j).hom.naturality,
-    inv_leftDerivedUpperStarTensorComparison_associativity_assoc,
-    associator_naturality_left_assoc]
-  erw [whisker_exchange_assoc]
-
 /-- The right unitality of `j^*M ⊗ᴸ Lj^*N ≅ j^*(M ⊗ᴸ N)` with respect to the inverse of the
 unit comparison of `Lj^*`. -/
 lemma mapDerivedCategoryUpperStarDerivedTensorIso_rightUnitality
@@ -193,23 +152,6 @@ lemma mapDerivedCategoryUpperStarDerivedTensorIso_rightUnitality
   erw [inv_leftDerivedUpperStarTensorComparison_rightUnitality_assoc]
   rw [rightUnitor_naturality_assoc, Iso.inv_hom_id_app, Category.comp_id]
 
-/-- **Associativity of the projection map of `j_!`**: the projection map
-`p : j_!(K ⊗ᴸ Lj^*N) ⟶ j_!K ⊗ᴸ N` satisfies `p ≫ (p ▷ N') ≫ α = j_!(α ≫ K ◁ μ) ≫ p`, for the
-inverse `μ` of the tensor comparison of `Lj^*`. -/
-@[reassoc]
-lemma derivedOpenImmersionLowerShriekProjectionMap_associativity
-    (K : DerivedCategory (Sheaf U.smallEtaleTopology A))
-    (N N' : DerivedCategory (Sheaf X.smallEtaleTopology A)) :
-    ((derivedOpenImmersionLowerShriekProjectionMap A j).app (K ⊗ L((j)^*[A]).obj N)).app N' ≫
-        ((derivedOpenImmersionLowerShriekProjectionMap A j).app K).app N ▷ N' ≫
-        (α_ _ _ _).hom =
-      D((j)_!open[A]).map ((α_ _ _ _).hom ≫
-          K ◁ inv (((leftDerivedUpperStarTensorComparison A j).app N).app N')) ≫
-        ((derivedOpenImmersionLowerShriekProjectionMap A j).app K).app (N ⊗ N') :=
-  (derivedOpenImmersionLowerShriekUpperStarAdjunction A j).projectionMap_associativity _ _
-    (fun N N' ↦ inv (((leftDerivedUpperStarTensorComparison A j).app N).app N'))
-    (mapDerivedCategoryUpperStarDerivedTensorIso_associativity A j) K N N'
-
 /-- **Right unitality of the projection map of `j_!`**:
 `j_!(ρ⁻¹ ≫ K ◁ ε⁻¹) ≫ p = ρ⁻¹` for the projection map `p : j_!(K ⊗ᴸ Lj^*Λ) ⟶ j_!K ⊗ᴸ Λ` and the
 unit comparison `ε : Lj^* Λ_X ≅ Λ_U`. -/
@@ -222,38 +164,6 @@ lemma derivedOpenImmersionLowerShriekProjectionMap_rightUnitality
     (mapDerivedCategoryUpperStarDerivedTensorIso_rightUnitality A j) K
 
 end OpenImmersion
-section LowerStar
-
-variable {X Y : Scheme.{u}} (p : X ⟶ Y)
-
-/-- **Associativity of the projection map of `Rp_*`**: the projection map
-`π : Rp_*M ⊗ᴸ L ⟶ Rp_*(M ⊗ᴸ Lp^*L)` satisfies `(π ▷ L') ≫ π ≫ Rp_*(α) = α ≫ π ≫ Rp_*(M ◁ μ)`,
-for the tensor comparison `μ` of `Lp^*`. -/
-@[reassoc]
-lemma rightDerivedLowerStarProjectionMap_associativity
-    (M : DerivedCategory (Sheaf X.smallEtaleTopology A))
-    (L L' : DerivedCategory (Sheaf Y.smallEtaleTopology A)) :
-    ((rightDerivedLowerStarProjectionMap A p).app M).app L ▷ L' ≫
-        ((rightDerivedLowerStarProjectionMap A p).app (M ⊗ L((p)^*[A]).obj L)).app L' ≫
-        R((p)_*[A]).map (α_ _ _ _).hom =
-      (α_ _ _ _).hom ≫ ((rightDerivedLowerStarProjectionMap A p).app M).app (L ⊗ L') ≫
-        R((p)_*[A]).map (M ◁ ((leftDerivedUpperStarTensorComparison A p).app L).app L') :=
-  (derivedUpperStarLowerStarAdjunction A p).rightAdjointProjectionMap_associativity _
-    (leftDerivedUpperStarTensorComparison_associativity A p) M L L'
-
-/-- **Right unitality of the projection map of `Rp_*`**:
-`π ≫ Rp_*(M ◁ ε) ≫ Rp_*(ρ) = ρ` for the projection map `π : Rp_*M ⊗ᴸ Λ ⟶ Rp_*(M ⊗ᴸ Lp^*Λ)` and
-the unit comparison `ε : Lp^* Λ_Y ≅ Λ_X`. -/
-lemma rightDerivedLowerStarProjectionMap_rightUnitality
-    (M : DerivedCategory (Sheaf X.smallEtaleTopology A)) :
-    ((rightDerivedLowerStarProjectionMap A p).app M).app (𝟙_ _) ≫
-        R((p)_*[A]).map (M ◁ (leftDerivedUpperStarUnitIso A p).hom) ≫
-        R((p)_*[A]).map (ρ_ M).hom =
-      (ρ_ _).hom :=
-  (derivedUpperStarLowerStarAdjunction A p).rightAdjointProjectionMap_rightUnitality _ _
-    (leftDerivedUpperStarTensorComparison_rightUnitor_hom A p) M
-
-end LowerStar
 
 section Compactification
 
@@ -342,6 +252,7 @@ lemma leftDerivedUpperStarCompactificationIso_hom_app_unit :
   erw [h₄, h₅, Iso.inv_hom_id_app_assoc]
 
 end Compactification
+
 section OpenImmersionInverse
 variable {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
   {FC : A → A → Type*} {CC : A → Type (u + 1)}
@@ -381,7 +292,22 @@ lemma derivedOpenImmersionLowerShriekProjectionIso_inv_associativity
           (N ⊗ N') ≫
         D((j)_!open[A]).map (K ◁ ((leftDerivedUpperStarTensorComparison A j).app N).app N' ≫
           (α_ _ _ _).inv) := by
-  have h := derivedOpenImmersionLowerShriekProjectionMap_associativity A j K N N'
+  have hμ : ∀ N N' : DerivedCategory (Sheaf X.smallEtaleTopology A),
+      (letI := leftDerivedUpperStarMonoidal A j
+      Functor.LaxMonoidal.μ L((j)^*[A]) N N') =
+        inv (((leftDerivedUpperStarTensorComparison A j).app N).app N') := fun N N' ↦ by
+    let := leftDerivedUpperStarMonoidal A j
+    exact IsIso.eq_inv_of_hom_inv_id (Functor.Monoidal.δ_μ L((j)^*[A]) N N')
+  have h₀ := derivedOpenImmersionLowerShriekProjectionMap_assoc A j K N N'
+  simp only [hμ] at h₀
+  have h : ((derivedOpenImmersionLowerShriekProjectionMap A j).app
+        (K ⊗ L((j)^*[A]).obj N)).app N' ≫
+        ((derivedOpenImmersionLowerShriekProjectionMap A j).app K).app N ▷ N' ≫
+        (α_ _ _ _).hom =
+      D((j)_!open[A]).map ((α_ _ _ _).hom ≫
+          K ◁ inv (((leftDerivedUpperStarTensorComparison A j).app N).app N')) ≫
+        ((derivedOpenImmersionLowerShriekProjectionMap A j).app K).app (N ⊗ N') := by
+    rw [← reassoc_of% h₀, Iso.inv_hom_id, Category.comp_id, Functor.map_comp, Category.assoc]
   rw [← derivedOpenImmersionLowerShriekProjectionIso_hom] at h
   rw [← cancel_mono (((derivedOpenImmersionLowerShriekProjectionIso A j).hom.app
       (K ⊗ L((j)^*[A]).obj N)).app N' ≫

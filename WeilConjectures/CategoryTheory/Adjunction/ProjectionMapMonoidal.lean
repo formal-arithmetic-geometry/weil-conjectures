@@ -24,19 +24,24 @@ oplax monoidal functor, the right adjoint projection map `π : G M ⊗ L ⟶ G (
 G M ⊗ (L ⊗ L') --π--> G (M ⊗ F (L ⊗ L')) --G(M ◁ φ)--> G (M ⊗ (F L ⊗ F L'))
 ```
 
-Dually, for an adjunction `adj : F ⊣ G` with `F : C ⥤ D`, a functor `G' : D ⥤ C` with a
-comparison `μ : G' a ⊗ G' b ⟶ G' (a ⊗ b)` and a comparison `δ : G X ⊗ G' Y ⟶ G (X ⊗ Y)`
-compatible with `μ`, the projection map `F (K ⊗ G' M) ⟶ F K ⊗ M`
-(`CategoryTheory.Adjunction.projectionMap`) is associative and unital.
+Unlike `CategoryTheory.Adjunction.rightAdjointProjectionMap_assoc`, which is stated for the
+comonoidal structure `δ` of an oplax monoidal left adjoint, the comparison `φ` here is an
+arbitrary natural transformation satisfying the associativity axiom, so that the result applies
+to comparisons that are not packaged as an instance.
+
+Dually, for an adjunction `adj : F ⊣ G` with `F : C ⥤ D`, a functor `G' : D ⥤ C` with a unit
+comparison `ε : 𝟙_ ⟶ G' 𝟙_` and a comparison `δ : G X ⊗ G' Y ⟶ G (X ⊗ Y)` satisfying the right
+unitality axiom, the projection map `F (K ⊗ G' M) ⟶ F K ⊗ M`
+(`CategoryTheory.Adjunction.projectionMap`) is unital. Its associativity is
+`CategoryTheory.Adjunction.projectionMap_assoc`.
 
 ## Main statements
 
 - `CategoryTheory.Adjunction.rightAdjointProjectionMap_associativity`,
   `CategoryTheory.Adjunction.rightAdjointProjectionMap_rightUnitality`: associativity and
   unitality of the right adjoint projection map.
-- `CategoryTheory.Adjunction.projectionMap_associativity`,
-  `CategoryTheory.Adjunction.projectionMap_rightUnitality`: associativity and unitality of the
-  projection map of a left adjoint.
+- `CategoryTheory.Adjunction.projectionMap_rightUnitality`: unitality of the projection map of a
+  left adjoint.
 -/
 
 @[expose] public section
@@ -119,35 +124,6 @@ lemma unit_app_comp_map_projectionMap (K : C) (M : D) :
         G.map (((adj.projectionMap G' (curriedTensor C) (curriedTensor D) δ).app K).app M) =
       adj.unit.app K ▷ G'.obj M ≫ (δ.app (F.obj K)).app M :=
   adj.unit_app_comp_map_projectionMap_app_app G' _ _ δ K M
-
-/-- **Associativity of the projection map of a left adjoint.** If `δ` is compatible with a
-comparison `μ : G' Y ⊗ G' Z ⟶ G' (Y ⊗ Z)` (hypothesis `hδ`), then
-`p ≫ (p ▷ N') ≫ α = F (α ≫ K ◁ μ) ≫ p` for the projection map `p : F (K ⊗ G' N) ⟶ F K ⊗ N`. -/
-@[reassoc]
-lemma projectionMap_associativity (μ : ∀ Y Z : D, G'.obj Y ⊗ G'.obj Z ⟶ G'.obj (Y ⊗ Z))
-    (hδ : ∀ X Y Z : D, (δ.app X).app Y ▷ G'.obj Z ≫ (δ.app (X ⊗ Y)).app Z ≫
-      G.map (α_ X Y Z).hom =
-        (α_ (G.obj X) (G'.obj Y) (G'.obj Z)).hom ≫ G.obj X ◁ μ Y Z ≫ (δ.app X).app (Y ⊗ Z))
-    (K : C) (N N' : D) :
-    ((adj.projectionMap G' (curriedTensor C) (curriedTensor D) δ).app
-        (K ⊗ G'.obj N)).app N' ≫
-        ((adj.projectionMap G' (curriedTensor C) (curriedTensor D) δ).app K).app N ▷ N' ≫
-        (α_ (F.obj K) N N').hom =
-      F.map ((α_ K (G'.obj N) (G'.obj N')).hom ≫ K ◁ μ N N') ≫
-        ((adj.projectionMap G' (curriedTensor C) (curriedTensor D) δ).app K).app (N ⊗ N') := by
-  apply (adj.homEquiv _ _).injective
-  simp only [homEquiv_unit, Functor.map_comp, Category.assoc]
-  erw [unit_app_comp_map_projectionMap_assoc, adj.unit_naturality_assoc,
-    adj.unit_naturality_assoc, unit_app_comp_map_projectionMap]
-  have h₁ := NatTrans.congr_app (δ.naturality
-    (((adj.projectionMap G' (curriedTensor C) (curriedTensor D) δ).app K).app N)) N'
-  dsimp at h₁ ⊢
-  erw [← reassoc_of% h₁]
-  rw [← comp_whiskerRight_assoc]
-  erw [unit_app_comp_map_projectionMap]
-  rw [comp_whiskerRight_assoc]
-  erw [hδ, associator_naturality_left_assoc, whisker_exchange_assoc]
-  rfl
 
 /-- **Unitality of the projection map of a left adjoint.** If `δ` and a comparison
 `ε : 𝟙_ C ⟶ G' (𝟙_ D)` satisfy the right unitality axiom (hypothesis `hε`), then
