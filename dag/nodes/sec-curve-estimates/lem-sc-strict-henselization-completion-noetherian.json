@@ -23,7 +23,8 @@
   "def-weil-pbc-noetherian-ring",
   "lem-weil-pbc-strict-henselization-triples",
   "def-weil-pbc-adic-completion",
-  "def-weil-pbc-faithfully-flat-ring-map"
+  "def-weil-pbc-faithfully-flat-ring-map",
+  "def-sc-ring-strict-henselization"
  ],
  "proof": [
   {
@@ -155,5 +156,24 @@
   "group": "C1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-shn2249 (reviewer sub-agent of L); spot-checked: No cycle: item cites none of the 06LJ siblings (lem-sc-strict-henselization-noetherian cites the item, so citing it or the Noetherian-hypothesis completion leaf lem-weil-pbc-local-completion-local-ring would be circular); mR^sh maximal ideal and residue field cited from triples clause 2; 05GH criterion hypotheses (C/I Noetherian, I f.g.) checked; new flat node is a real lemma (06LJ(c)), not a duplicate of siblings or lem-weil-pbc-henselization-noetherian-completion, and Mathlib AdicCompletion.flat_of_isNoetherian needs C Noetherian (circular) so not class c/d; grep RingTheory/AdicCompletion: LocalRing.lean has isLocalRing_of_fg/algebraMap_isLocalHom_of_fg but no node states them for f.g. maximal ideal. FIX more, RETURN less: C1 Step 3 asserted uncited that the completion is local with maximal ideal I\\widehat C; split into new elementary Step 3 (inverse-limit unit argument: completion local with maximal ideal ker(pi), iota local) and Step 4 (00HR faithful flatness), proof_deps unchanged. Note: second reading claims citations.json quotes were added but the branch diff touches no citations.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.StrictHenselizationCompletionNoetherian",
+  "declaration": "Algebra.strictHenselization_completion_noetherian_faithfullyFlat",
+  "file": "lean/Sheaf/RingTheory/StrictHenselizationCompletionNoetherian.lean",
+  "statement": "theorem strictHenselization_completion_noetherian_faithfullyFlat (A K C : Type u) [CommRing A] [IsLocalRing A] [IsNoetherianRing A] [Field K] [Algebra (IsLocalRing.ResidueField A) K] [IsSepClosure (IsLocalRing.ResidueField A) K] [Algebra A K] [IsScalarTower A (IsLocalRing.ResidueField A) K] [CommRing C] [Algebra A C] (hC : IsStrictHenselization A K C) : IsNoetherianRing (AdicCompletion ((IsLocalRing.maximalIdeal A).map (algebraMap A C)) C) ∧ IsLocalHom (algebraMap C (AdicCompletion ((IsLocalRing.maximalIdeal A).map (algebraMap A C)) C)) ∧ Module.FaithfullyFlat C (AdicCompletion ((IsLocalRing.maximalIdeal A).map (algebraMap A C)) C)",
+  "branch": "sheaf-dag",
+  "by": "R1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-shc"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-shc",
+  "group": "R1",
+  "result": "fix",
+  "note": "node statement unchanged; added stmt_dep def-sc-ring-strict-henselization is used (hC : IsStrictHenselization A K C, same form as landed siblings mod-power-free, completion-flat-over-base, dimension); m^sh = (maximalIdeal A).map (algebraMap A C), completion AdicCompletion of C at it; no inline instances, no notation, no vacuous clause. FIX: third conjunct (algebraMap C _).FaithfullyFlat replaced by Module.FaithfullyFlat C (AdicCompletion _ C) per STATE FAITHFULLY FLAT RING MAPS (14:18) and the recorded declaration of def-weil-pbc-faithfully-flat-ring-map (checked Iff.rfl with the RingHom form); import Mathlib.RingTheory.Flat.FaithfullyFlat.Basic"
  }
 }
