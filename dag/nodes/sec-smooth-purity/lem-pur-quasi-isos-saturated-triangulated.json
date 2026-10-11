@@ -14,7 +14,7 @@
  },
  "kind": "statement",
  "title": "Quasi-isomorphisms are saturated and triangulation-compatible",
- "statement": "Let $\\mathcal A$ be an abelian category [def-sp-abelian]. In the homotopy category $K(\\mathcal A)$ of cochain complexes, the quasi-isomorphisms form a saturated multiplicative system compatible with the triangulated structure: they satisfy two-out-of-three (including closure under retracts), and a morphism is a quasi-isomorphism exactly when its cone is acyclic. Consequently the localization $Q:K(\\mathcal A)\\to D(\\mathcal A)$ is the localization required in Situation Tag 05S8 [def-weil-abstract-derived-category], with $K(\\mathcal A)$ and $D(\\mathcal A)$ triangulated [def-weil-triangulated-category].",
+ "statement": "Let $\\mathcal A$ be an abelian category [def-sp-abelian], let $K(\\mathcal A)$ be the homotopy category of $\\mathbf Z$-indexed cochain complexes of $\\mathcal A$ with its triangulated structure [lem-pur-homotopy-category-triangulated], and let $S$ be the class of morphisms of $K(\\mathcal A)$ represented by quasi-isomorphisms [def-weil-abstract-derived-category]. Then $S$ is a saturated multiplicative system compatible with the triangulated structure (Stacks Categories Definitions 04VB, 04VC, 04VD and Derived Categories Definition 05R2), that is: (MS1) every identity lies in $S$ and $S$ is closed under composition; (MS2) for $t:X\\to Z$ in $S$ and $g:X\\to Y$ there are $s:Y\\to W$ in $S$ and $f:Z\\to W$ with $s\\circ g=f\\circ t$, and for $s:Y\\to W$ in $S$ and $f:Z\\to W$ there are $t:V\\to Z$ in $S$ and $g:V\\to Y$ with $f\\circ t=s\\circ g$; (MS3) if $f,g:X\\to Y$ and $s:X'\\to X$ in $S$ satisfy $f\\circ s=g\\circ s$, then $t\\circ f=t\\circ g$ for some $t:Y\\to Y'$ in $S$, and if $s:Y\\to Y'$ in $S$ satisfies $s\\circ f=s\\circ g$, then $f\\circ t=g\\circ t$ for some $t:X'\\to X$ in $S$; (MS4) if $s\\in S$ then $s[n]\\in S$ for every $n\\in\\mathbf Z$; (MS5) given distinguished triangles $X\\xrightarrow{u}Y\\xrightarrow{v}Z\\xrightarrow{w}X[1]$ and $X'\\xrightarrow{u'}Y'\\xrightarrow{v'}Z'\\xrightarrow{w'}X'[1]$ and $s:X\\to X'$, $s':Y\\to Y'$ in $S$ with $s'\\circ u=u'\\circ s$, there is $s'':Z\\to Z'$ in $S$ with $s''\\circ v=v'\\circ s'$ and $s[1]\\circ w=w'\\circ s''$; (MS6) if $f:X\\to Y$, $g:W\\to X$, $h:Y\\to Z$ are morphisms with $h\\circ f\\in S$ and $f\\circ g\\in S$, then $f\\in S$. Moreover $S$ satisfies two-out-of-three and is closed under retracts, and a morphism lies in $S$ exactly when its mapping cone is acyclic. Consequently the localization $Q:K(\\mathcal A)\\to D(\\mathcal A)$ is the localization $S^{-1}K(\\mathcal A)$, $Q$ is an exact functor of triangulated categories [def-weil-triangulated-category], and $(K(\\mathcal A),S)$ satisfies the hypotheses of Situation Tag 05S8.",
  "source": {
   "document": "literature/stacks-project/derived.tex",
   "place": "Lemma Tag 05RT (lemma-acyclic) and Situation Tag 05S8 preceding Proposition Tag 05SE"
@@ -22,11 +22,106 @@
  "stmt_deps": [
   "def-sp-abelian",
   "def-weil-abstract-derived-category",
-  "def-weil-triangulated-category"
+  "def-weil-triangulated-category",
+  "lem-pur-homotopy-category-triangulated"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The class $S$ is well defined, since homotopic morphisms induce the same maps on every $H^r$. By the existing multiplicative-system result, $S$ admits both a left and a right calculus of fractions, which comprises (MS1), (MS2) and (MS3), and $D(\\mathcal A)$ with $Q$ is the localization $S^{-1}K(\\mathcal A)$.",
+   "uses": [
+    "lem-pc-quasi-isomorphisms-multiplicative-system"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Lemma Tag 05RT"
+   }
+  },
+  {
+   "text": "$K(\\mathcal A)$, with the shift and with the distinguished triangles those isomorphic to cone triangles, is a triangulated category, and $Q:K(\\mathcal A)\\to D(\\mathcal A)$ commutes with the shifts and carries distinguished triangles to distinguished triangles, i.e. is exact.",
+   "uses": [
+    "lem-pur-homotopy-category-triangulated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Lemma Tag 05RT and Section 13.9"
+   }
+  },
+  {
+   "text": "(MS4): by the definition of the shift, $(K[n])^r=K^{r+n}$ with differential $(-1)^nd_K$, so $H^r(K[n])=H^{r+n}(K)$ functorially and $H^r(s[n])=H^{r+n}(s)$; hence $s[n]\\in S$ whenever $s\\in S$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Lemma Tag 05RT"
+   }
+  },
+  {
+   "text": "(MS5): by (TR3) in the triangulated category $K(\\mathcal A)$ (Step 2) there is $c:Z\\to Z'$ with $c\\circ v=v'\\circ s'$ and $s[1]\\circ w=w'\\circ c$. Applying the exact functor $Q$ (Step 2) gives a morphism $(Q s,Qs',Qc)$ of distinguished triangles of $D(\\mathcal A)$; since $H^n\\circ Q\\cong H^n$ [def-weil-abstract-derived-category], the cohomology ladder of this morphism is a morphism of the long exact cohomology sequences, with $H^n(s),H^n(s'),H^{n+1}(s),H^{n+1}(s')$ isomorphisms in the four positions around $H^n(c)$. By the five lemma $H^n(c)$ is an isomorphism for every $n$, so $s''=c\\in S$.",
+   "uses": [
+    "lem-pur-homotopy-category-triangulated",
+    "def-weil-triangulated-category",
+    "def-weil-abstract-derived-category",
+    "lem-sf-derived-homology-long-exact",
+    "lem-weil-pbc-derived-cohomology-ladder",
+    "lem-weil-pbc-five-lemma"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Lemma Tag 05RT (via Lemma 05RS and lemma-operations)"
+   }
+  },
+  {
+   "text": "(MS6), two-out-of-three and retracts, by applying each $H^r$: if $H^r(h\\circ f)$ and $H^r(f\\circ g)$ are isomorphisms then $H^r(f)$ has the left inverse $H^r(h\\circ f)^{-1}H^r(h)$ and the right inverse $H^r(g)H^r(f\\circ g)^{-1}$, so it is an isomorphism; two-out-of-three for $S$ is two-out-of-three for isomorphisms applied to each $H^r$; and a retract of a quasi-isomorphism induces on each $H^r$ a retract of an isomorphism, which is an isomorphism.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Lemma Tag 05RT (lemma-acyclic)"
+   }
+  },
+  {
+   "text": "For every morphism of complexes, the morphism is a quasi-isomorphism exactly when its mapping cone is acyclic; hence a morphism of $K(\\mathcal A)$ lies in $S$ exactly when its cone is acyclic.",
+   "uses": [
+    "lem-pur-quasi-iso-cone-acyclic"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Lemma Tag 05RT"
+   }
+  },
+  {
+   "text": "Steps 1 to 5 show that $S$ is a saturated multiplicative system on the triangulated category $K(\\mathcal A)$ compatible with the triangulated structure, with localization $Q:K(\\mathcal A)\\to D(\\mathcal A)$ exact by Step 2; taking $\\mathcal D=K(\\mathcal A)$ and this $S$ gives exactly the hypotheses of Situation 05S8 on $\\mathcal D$ and $S$.",
+   "uses": [
+    "lem-pc-quasi-isomorphisms-multiplicative-system",
+    "lem-pur-homotopy-category-triangulated",
+    "def-weil-triangulated-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Situation Tag 05S8 preceding Proposition Tag 05SE"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-quasi-isomorphisms-multiplicative-system",
+  "lem-pur-homotopy-category-triangulated",
+  "def-weil-triangulated-category",
+  "def-weil-abstract-derived-category",
+  "lem-sf-derived-homology-long-exact",
+  "lem-weil-pbc-derived-cohomology-ladder",
+  "lem-weil-pbc-five-lemma",
+  "lem-pur-quasi-iso-cone-acyclic"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Lemma Tag 05RT and Situation Tag 05S8 preceding Proposition Tag 05SE"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -58,12 +153,29 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pur-left-derived-from-kflat-class",
   "by": "worker",
   "date": "2026-10-11"
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-def-sf-operations"
+ "unit": "sk-def-sf-operations",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pur-quasi-isos-saturated-triangulated",
+  "worker": "stage1",
+  "summary": "Split the Stacks 05RT/Situation 05S8 input into the existing multiplicative-system localization result and two generic acyclicity facts. The cone criterion is supplied by a sorry-free project declaration; the triangulated acyclic-subcategory result is a Mathlib leaf. The remaining saturation argument is written explicitly as an elementary cohomology and retract argument.",
+  "blueprint": "Realizes the hypotheses of Situation 05S8 needed to apply Proposition 05SE to K(A) and its quasi-isomorphism localization.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-qst0105",
+  "group": "C1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-qst0105 (reviewer sub-agent of L); spot-checked: Read packet whole; Stacks 05RT/05S8; citers 1b8c1d0bb step 4 (needs full 05S8 hypotheses) and Kan bridge (RMS1-3 only); lem-pc-quasi-isomorphisms-multiplicative-system (gives MS1-MS3 only, item strictly stronger, no duplicate); Mathlib Acyclic.lean 35-46, Triangulated.lean 208, Pretriangulated.lean 479/579, DerivedCategory/Basic.lean 155/173 by sed, names from .ilean. FIX more, RETURN less: (1) B3/C4 'saturated multiplicative system compatible with the triangulated structure' undefined in DAG and the gloss omitted MS4/MS5 and replaced MS6: statement now states MS1-MS6 inline (E7); (2) C1 Step 3 claimed MS5 (morphism-of-triangles completion) from 2-of-3 on cone objects, which no cited statement gives: MS5 now via TR3 in K(A), exactness of Q, lem-sf-derived-homology-long-exact, lem-weil-pbc-derived-cohomology-ladder and lem-weil-pbc-five-lemma; MS4 and MS6 elementary via H^r; lem-pur-acyclic-subcategory-triangulated no longer used, dropped; (3) C1 K(A) triangulated and Q exact were cited to definitions that only make D(A) triangulated: new statement node lem-pur-homotopy-category-triangulated (Mathlib match recorded). Second reading by C1 missed (1)-(3).; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+ },
+ "lead_note": "2026-10-11 L (R-qst0105): E7: item statement rewritten to define inline the Stacks clauses MS1-MS6 of a saturated multiplicative system compatible with the triangulated structure (04VB/04VC/04VD/05R2), which the DAG defines nowhere and which citer lem-pur-left-derived-from-kflat-class step 4 needs in full for Prop 05SE; old gloss kept. New unsplit node lem-pur-homotopy-category-triangulated is an exact Mathlib match (Triangulated.lean:208, DerivedCategory/Basic.lean:173): make it a leaf."
 }

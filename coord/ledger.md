@@ -3198,3 +3198,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 01:06 UTC L: K1 kinjective-characterize-K-injective PASS 7e61b05ae re-push (R-cki0105).
 - 01:06 L: merged deliver/E1/lem-pc-termwise-tor-acyclic-derived-tensor (reviewer FIX; after a return; new nodes: 0)
 - 01:06 UTC L: E1 termwise-tor-acyclic-derived-tensor FIX 5971d132a re-push (R-tta0103; derived tensor via lem-pur-derived-change-of-rings on the one-point site).
+- 01:08 L: merged deliver/C1/lem-pur-quasi-isos-saturated-triangulated (reviewer FIX+NODE(1); first push; new nodes: 2)
