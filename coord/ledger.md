@@ -3158,3 +3158,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 00:48 UTC L: H1 qcoh-complex-alternating-cech-derived-sections FIX 8b2851f79 third push (R-qcs0046; K-injective zigzag present, three citation faults repaired).
 - 00:48 UTC L: C1 etale-triple-strict-henselization-identification PASS d26dc1c3a re-push (R-shi0047).
 - 00:48 L: merged deliver/G1/lem-pc-ring-m-pseudo-coherent-vanishing-base (reviewer PASS; first push; new nodes: 0)
+- 00:49 L: merged deliver/E1/lem-pc-ring-pseudo-coherent-distinguished-triangle (reviewer FIX+NODE(1); first push; new nodes: 2)
