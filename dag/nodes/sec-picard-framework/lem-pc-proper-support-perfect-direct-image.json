@@ -127,5 +127,23 @@
   "group": "J1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-psp2009 (reviewer sub-agent of L); spot-checked: Return 19:04 points 1-4 repaired: step 1 now cites lem-pc-rf-base-change-complex (Tag 0A1D, f qcqs, E in D_QCoh, G bounded-above qcoh S-flat; statement matches Stacks text); step 2 cites thm-pd-spreading-out (01ZM) and combined node lem-pc-noetherian-approximation-data (01ZR/05LY/081G/09RF, true as stated); step 3 cites lem-pc-noetherian-perfect-direct-image (Tag 0DJQ, fp is a specialization of locally finite type, fp modules coherent over Noetherian); pullback/locality of perfectness argued from the definition (accepted as elementary). No duplicate nodes for these tags in dag/nodes; no cycle. FIX more, RETURN less: (1) E4 step 1: hypotheses of the base-change node checked in text (fp => qcqs by def-pc-morphism-conventions, perfect => D_QCoh, fp terms quasi-coherent, bounded => bounded above); (2) C4 step 2: wrong tags 0C0C (descend smooth) and 09RK (factor regular immersion) corrected to 05LY, 081G (+30.26.7), 09RF; (3) C1 step 3: base change for X_i -> Spec R_i now cites lem-pc-rf-base-change-complex in uses; stale split_report summary tags corrected. Second reading by J1 missed the wrong tags left in step 2 text.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProperSupportPerfectDirectImage",
+  "declaration": "AlgebraicGeometry.properSupport_perfect_directImage",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProperSupportPerfectDirectImage.lean",
+  "statement": "theorem properSupport_perfect_directImage {X S : Scheme.{u}} (f : X ⟶ S) [LocallyOfFinitePresentation f] [QuasiCompact f] [QuasiSeparated f] [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings S.toRingedSpace))] [∀ Z : Scheme.{u}, HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))] [∀ (Z : Scheme.{u}) (U : Z.Opens), HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings Z.toRingedSpace).over U))] (E : schemeDerivedCategory X) (hE : Scheme.IsPerfect X E) (G : CochainComplex X.Modules ℤ) (hGb : ∃ a b : ℤ, ∀ n : ℤ, n < a ∨ b < n → IsZero (G.X n)) [∀ n : ℤ, (G.X n).IsFinitePresentation] (hGflat : ∀ n : ℤ, (G.X n).IsFlatOver f) (hGproper : ∀ n : ℤ, Scheme.Modules.HasSupportProperOver f (G.X n)) : Scheme.IsPerfect S ((schemeDerivedDirectImage f).obj (E ⊗ (DerivedCategory.Q.obj G))) ∧ ∀ {T : Scheme.{u}} (g : T ⟶ S), Nonempty ((derivedPullback g).obj ((schemeDerivedDirectImage f).obj (E ⊗ (DerivedCategory.Q.obj G))) ≅ (schemeDerivedDirectImage (pullback.snd f g)).obj ((derivedPullback (pullback.fst f g)).obj E ⊗ (derivedPullback (pullback.fst f g)).obj (DerivedCategory.Q.obj G)))",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-12",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "E1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }
