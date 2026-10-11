@@ -1,11 +1,11 @@
 # Work queue
 
-513 items; claim with `tools/claim.py next <group> [--stage N]`.
+509 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (513)
+## Stage 2: nodes to state (509)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -54,20 +54,16 @@
 | `lem-weil-pbc-integral-closure-finite-fibre-image-clopen` | 1 | state |
 | `lem-weil-pbc-inverse-image-stalk-germ` | 1 | state |
 | `lem-weil-pbc-invertible-pullback-tensor` | 1 | state |
-| `lem-weil-pbc-irreducible-lisse-strata` | 1 | state |
 | `lem-weil-pbc-jacobi-zariski-homology-sequence` | 1 | state |
 | `lem-weil-pbc-jacobi-zariski-quotient-smooth` | 1 | state |
 | `lem-weil-pbc-kahler-differentials-mod-power-ideal` | 1 | state |
-| `lem-weil-pbc-kernel-cokernel-annihilated-mod-ideal` | 1 | state |
 | `lem-weil-pbc-koszul-differential` | 1 | state |
 | `lem-weil-pbc-krull-intersection-localization` | 1 | state |
-| `lem-weil-pbc-lci-conormal-free-rank-codimension` | 1 | state |
 | `lem-weil-pbc-lci-conormal-generators-global-complete-intersection` | 1 | state |
 | `lem-weil-pbc-lci-regular-sequence-global-complete-intersection` | 1 | state |
 | `lem-weil-pbc-lft-over-field-isolated-point-residue-finite` | 1 | state |
 | `lem-weil-pbc-lift-coprime-factorization-etale` | 1 | state |
 | `lem-weil-pbc-lift-idempotent-upstairs` | 1 | state |
-| `lem-weil-pbc-lift-monic-coprime-factorization-etale` | 1 | state |
 | `lem-weil-pbc-lift-projective-module-etale` | 1 | state |
 | `lem-weil-pbc-lift-to-injective-unique-up-to-homotopy` | 1 | state |
 | `lem-weil-pbc-limit-affine-transition` | 1 | state |
