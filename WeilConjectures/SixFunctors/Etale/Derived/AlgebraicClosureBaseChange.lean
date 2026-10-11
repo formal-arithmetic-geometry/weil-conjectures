@@ -153,3 +153,94 @@ noncomputable def derivedBaseChangeTransitionIso {E L : FiniteSubext l} (h : E �
   Functor.rightDerivedFunctorNatIso (sheafBaseChangeTransitionIso X h)
 
 end AlgebraicGeometry.Etale
+
+namespace DerivedCategory
+
+open CategoryTheory Limits MonoidalCategory Opposite
+
+variable {C : Type (u + 1)} [Category.{u} C] [EssentiallySmall.{u + 1} C]
+  {J : GrothendieckTopology C} {R : Type (u + 1)} [CommRing R] {I : Ideal R}
+
+/-- Derived completeness is invariant under isomorphisms. -/
+lemma derivedComplete_of_iso {K K' : DerivedCategory (Sheaf J (ModuleCat.{u + 1} R))}
+    (φ : K ≅ K') (hK : derivedComplete J I K) : derivedComplete J I K' := by
+  let := (DerivedCategory.sheafTensorStructure J R).monoidalCategory
+  refine Pretriangulated.IsHomotopyLimit.of_iso
+    (Functor.isoWhiskerLeft (quotPowFunctor J I) ((tensoringLeft _).mapIso φ)) hK _ φ
+    fun n ↦ ?_
+  simp [derivedCompletionCone, whisker_exchange]
+
+end DerivedCategory
+
+namespace AlgebraicGeometry.Etale
+
+open PadicAlgCl PadicAlgCl.FiniteSubext
+
+variable {l : ℕ} [Fact l.Prime] (X : Scheme.{u})
+
+/-- The small étale site of a scheme is essentially small. Instance search does not find this
+in the presence of the imports of this file. -/
+local instance (X : Scheme.{u}) : EssentiallySmall.{u + 1} X.Etale :=
+  have : LocallySmall.{u + 1} X.Etale :=
+    @locallySmall_of_univLE X.Etale _ (@univLE_of_max.{u, u + 1} UnivLE.self)
+  essentiallySmall_of_small_of_locallySmall _
+
+/-- The integral transition functor `K ↦ K ⊗_{𝒪_E} 𝒪_L` of the derived complete categories:
+derived base change, which preserves derived completeness, being isomorphic to the derived
+coextension of scalars. -/
+noncomputable def integralBaseChangeTransition {E L : FiniteSubext l} (h : E ≤ L) :
+    DerivedCategoryDerivedCompleteIntegral X.smallEtaleTopology l E.field ⥤
+      DerivedCategoryDerivedCompleteIntegral X.smallEtaleTopology l L.field :=
+  (DerivedCategory.derivedCompleteIntegral X.smallEtaleTopology l L.field).lift
+    ((DerivedCategory.derivedCompleteIntegral X.smallEtaleTopology l E.field).ι ⋙
+      (sheafBaseChangeTransition X h).rightDerivedFunctor)
+    (fun K ↦ DerivedCategory.derivedComplete_of_iso
+      ((derivedBaseChangeTransitionIso X h).app K.1).symm ((integralStageTransition X h).obj K).2)
+
+/-- The integral base change transition is isomorphic to the integral transition functor. -/
+noncomputable def integralBaseChangeTransitionIso {E L : FiniteSubext l} (h : E ≤ L) :
+    integralBaseChangeTransition X h ≅ integralStageTransition X h :=
+  NatIso.ofComponents
+    (fun K ↦ (ObjectProperty.fullyFaithfulι _).preimageIso
+      ((derivedBaseChangeTransitionIso X h).app K.1))
+    (fun f ↦ (ObjectProperty.fullyFaithfulι _).map_injective
+      ((derivedBaseChangeTransitionIso X h).hom.naturality
+        ((DerivedCategory.derivedCompleteIntegral X.smallEtaleTopology l E.field).ι.map f)))
+
+noncomputable instance {E L : FiniteSubext l} (h : E ≤ L) :
+    (integralBaseChangeTransition X h).CommShift ℤ :=
+  inferInstanceAs (((DerivedCategory.derivedCompleteIntegral X.smallEtaleTopology l L.field).lift
+    ((DerivedCategory.derivedCompleteIntegral X.smallEtaleTopology l E.field).ι ⋙
+      (sheafBaseChangeTransition X h).rightDerivedFunctor) _).CommShift ℤ)
+
+instance {E L : FiniteSubext l} (h : E ≤ L) : (integralBaseChangeTransition X h).IsTriangulated :=
+  inferInstanceAs (((DerivedCategory.derivedCompleteIntegral X.smallEtaleTopology l L.field).lift
+    ((DerivedCategory.derivedCompleteIntegral X.smallEtaleTopology l E.field).ι ⋙
+      (sheafBaseChangeTransition X h).rightDerivedFunctor) _).IsTriangulated)
+
+/-- Blueprint `def-weil-rationalization-karoubi`: the scalar-extension functor
+`− ⊗_E L : D_comp(X_ét, E) ⥤ D_comp(X_ét, L)`, induced on rationalizations by the derived base
+change `− ⊗_{𝒪_E} 𝒪_L` of integral representatives. -/
+noncomputable abbrev rationalBaseChangeTransition {E L : FiniteSubext l} (h : E ≤ L) :
+    DerivedCategoryDerivedCompleteRational X.smallEtaleTopology l E.field ⥤
+      DerivedCategoryDerivedCompleteRational X.smallEtaleTopology l L.field :=
+  Rationalization.mapOfTorsion (nonZeroDivisors (Shrink.{u + 1} (integers l E.field)))
+    (nonZeroDivisors (Shrink.{u + 1} (integers l L.field))) (integralBaseChangeTransition X h)
+    (fun K hK ↦
+    ObjectProperty.prop_of_iso _ ((integralBaseChangeTransitionIso X h).app K).symm
+      (torsion_integralStageTransition_obj X h K hK))
+
+/-- The scalar-extension functor `− ⊗_E L` is isomorphic to the transition functor
+`rationalStageTransition`. -/
+noncomputable def rationalBaseChangeTransitionIso {E L : FiniteSubext l} (h : E ≤ L) :
+    rationalBaseChangeTransition X h ≅ rationalStageTransition X h :=
+  Localization.liftNatIso
+    (Rationalization.Q (nonZeroDivisors (Shrink.{u + 1} (integers l E.field)))
+      (DerivedCategoryDerivedCompleteIntegral X.smallEtaleTopology l E.field))
+    (Rationalization.W (nonZeroDivisors (Shrink.{u + 1} (integers l E.field)))
+      (DerivedCategoryDerivedCompleteIntegral X.smallEtaleTopology l E.field)) _ _ _ _
+    (Functor.isoWhiskerRight (integralBaseChangeTransitionIso X h)
+      (Rationalization.Q (nonZeroDivisors (Shrink.{u + 1} (integers l L.field)))
+        (DerivedCategoryDerivedCompleteIntegral X.smallEtaleTopology l L.field)))
+
+end AlgebraicGeometry.Etale

@@ -20,16 +20,17 @@ whose objects are pairs `(E, K)` with `E ⊆ ℚ̄_ℓ` a finite extension of `�
 `Hom((E, K), (E', K')) = colim_{L ⊇ E, E'} Hom_{Dᵇc(Y, L)}(K ⊗_E L, K' ⊗_{E'} L)`.
 
 This is `AlgebraicGeometry.Etale.DerivedCategoryBoundedConstructibleAlgebraicClosure`, the
-common-stage category (`CategoryTheory.TwoColimitData.Obj`) of the directed system of the
-categories `Dᵇc(Y, E)` (`AlgebraicGeometry.Etale.boundedConstructibleAlgebraicClosureStageData`):
-the full subcategories `Dᵇc(Y, E)` of the rational stages `D_comp(Y_ét, E)`, with the transition
-functors `K ↦ K ⊗_E L`. That these transition functors preserve `Dᵇc` is the first clause of
-blueprint `prop-weil-pbc-scalar-extension`
-(`AlgebraicGeometry.Etale.boundedConstructibleRational_rationalStageTransition`). The
-transition functors are induced by derived coextension of scalars along `𝒪_E → 𝒪_L`
-(`AlgebraicGeometry.Etale.rationalStageTransition`), which is isomorphic to the derived base
-change `− ⊗_{𝒪_E} 𝒪_L` (`AlgebraicGeometry.Etale.derivedBaseChangeTransitionIso`): `𝒪_L` is
-finite free over `𝒪_E`, so no completion is needed, and `Hom_{𝒪_E}(𝒪_L, 𝒪_E) ≅ 𝒪_L`.
+common-stage category (`CategoryTheory.TwoColimitData.Obj`) of the directed system
+`AlgebraicGeometry.Etale.boundedConstructibleAlgebraicClosureStageData`: the full subcategories
+`Dᵇc(Y, E)` of the rational stages `D_comp(Y_ét, E)`, with the scalar-extension functors
+`− ⊗_E L` of blueprint `def-weil-rationalization-karoubi` as transition functors
+(`AlgebraicGeometry.Etale.rationalBaseChangeTransition`: derived base change `− ⊗_{𝒪_E} 𝒪_L` of
+integral representatives, followed by rationalization; no completion is needed, `𝒪_L` being finite
+free over `𝒪_E`). Their composition isomorphisms are transported
+(`CategoryTheory.TwoColimitData.transportIso`) from those of the isomorphic functors induced by
+derived coextension of scalars (`AlgebraicGeometry.Etale.rationalBaseChangeTransitionIso`), for
+which the coherence is proved by mate calculus. That `− ⊗_E L` preserves `Dᵇc` is
+`AlgebraicGeometry.Etale.boundedConstructibleRational_rationalBaseChangeTransition`.
 
 For a closed immersion `i : Z ⟶ X`, `Ri_*` commutes with the transition functors compatibly with
 their composition (`AlgebraicGeometry.Etale.rationalLowerStarTransitionIso_hexagon`) and preserves
@@ -109,26 +110,33 @@ noncomputable def algebraicClosureStageData (Y : Scheme.{u}) : TwoColimitData (F
   comp h h' := rationalStageTransitionComp Y h h'
   cocycle h h' h'' := rationalStageTransitionComp_cocycle Y h h' h''
 
-/-- Blueprint `prop-weil-pbc-scalar-extension` (its first clause, from the proper base change
-subsection): derived scalar extension `K ↦ K ⊗_E L` is a functor `Dᵇc(Y, E) ⥤ Dᵇc(Y, L)`. The
-transition functor `AlgebraicGeometry.Etale.rationalStageTransition` is induced by the derived
-transition `derivedStageTransition`, which is isomorphic to the derived base change
-`− ⊗_{𝒪_E} 𝒪_L` (`AlgebraicGeometry.Etale.derivedBaseChangeTransitionIso`). -/
-theorem boundedConstructibleRational_rationalStageTransition (Y : Scheme.{u})
+/-- The directed system of the rational stages `D_comp(Y_ét, E)` with the blueprint's
+scalar-extension functors `− ⊗_E L` (`AlgebraicGeometry.Etale.rationalBaseChangeTransition`,
+induced by derived base change `− ⊗_{𝒪_E} 𝒪_L` of integral representatives) as transition
+functors, the composition isomorphisms being transported along
+`AlgebraicGeometry.Etale.rationalBaseChangeTransitionIso`. -/
+noncomputable abbrev baseChangeStageData (Y : Scheme.{u}) : TwoColimitData (FiniteSubext l) :=
+  (algebraicClosureStageData l Y).transportIso (fun h ↦ rationalBaseChangeTransition Y h)
+    (fun h ↦ rationalBaseChangeTransitionIso Y h)
+
+/-- Unfinished: the first clause of blueprint `prop-weil-pbc-scalar-extension` (proper base
+change subsection), that the scalar-extension functor `− ⊗_E L` maps `Dᵇc(Y, E)` into
+`Dᵇc(Y, L)`. See the pull request for the attempts made. -/
+theorem boundedConstructibleRational_rationalBaseChangeTransition (Y : Scheme.{u})
     {E L : FiniteSubext l} (h : E ≤ L)
     (K : DerivedCategoryDerivedCompleteRational Y.smallEtaleTopology l E.field)
     (hK : DerivedCategory.boundedConstructibleRational l E.field Y K) :
     DerivedCategory.boundedConstructibleRational l L.field Y
-      ((rationalStageTransition Y h).obj K) :=
+      ((rationalBaseChangeTransition Y h).obj K) :=
   sorry
 
 /-- The directed system of the categories `Dᵇc(Y, E)`, `E ⊆ ℚ̄_ℓ` finite over `ℚ_ℓ`, with the
-transition functors `K ↦ K ⊗_E L` (`boundedConstructibleRational_rationalStageTransition`). -/
+transition functors `K ↦ K ⊗_E L` (`boundedConstructibleRational_rationalBaseChangeTransition`). -/
 noncomputable def boundedConstructibleAlgebraicClosureStageData (Y : Scheme.{u}) :
     TwoColimitData (FiniteSubext l) :=
-  (algebraicClosureStageData l Y).restrict
+  (baseChangeStageData l Y).restrict
     (fun E ↦ DerivedCategory.boundedConstructibleRational l E.field Y)
-    (fun h K hK ↦ boundedConstructibleRational_rationalStageTransition l Y h K hK)
+    (fun h K hK ↦ boundedConstructibleRational_rationalBaseChangeTransition l Y h K hK)
 
 /-- Blueprint `def-weil-algebraically-closed-coefficients`: the coefficient stage
 `Dᵇc(Y, ℚ̄_ℓ) = 𝒞_Y`, the category of pairs `(E, K)` with `K ∈ Dᵇc(Y, E)`, whose morphisms
@@ -159,13 +167,15 @@ include i aX hl in
 noncomputable def boundedConstructibleAlgebraicClosureLowerStarMorphism :
     (boundedConstructibleAlgebraicClosureStageData l Z).Morphism
       (boundedConstructibleAlgebraicClosureStageData l X) :=
-  TwoColimitData.Morphism.restrict (D := algebraicClosureStageData l Z)
-    (D' := algebraicClosureStageData l X)
+  TwoColimitData.Morphism.restrict (D := baseChangeStageData l Z)
+    (D' := baseChangeStageData l X)
     (Q := fun E ↦ DerivedCategory.boundedConstructibleRational l E.field Z)
-    (hT := fun h K hK ↦ boundedConstructibleRational_rationalStageTransition l Z h K hK)
-    (Φ := algebraicClosureLowerStarMorphism i)
+    (hT := fun h K hK ↦ boundedConstructibleRational_rationalBaseChangeTransition l Z h K hK)
+    (Φ := TwoColimitData.Morphism.transportIso (fun h ↦ rationalBaseChangeTransition Z h)
+      (fun h ↦ rationalBaseChangeTransitionIso Z h) (algebraicClosureLowerStarMorphism (l := l) i)
+      (fun h ↦ rationalBaseChangeTransition X h) (fun h ↦ rationalBaseChangeTransitionIso X h))
     (Q' := fun E ↦ DerivedCategory.boundedConstructibleRational l E.field X)
-    (hT' := fun h K hK ↦ boundedConstructibleRational_rationalStageTransition l X h K hK)
+    (hT' := fun h K hK ↦ boundedConstructibleRational_rationalBaseChangeTransition l X h K hK)
     (hF := fun E _ hK ↦
     have := hasInvertibleExponent_residueField l hl E
     Etale.boundedConstructibleRational_rightDerivedLowerStar_of_isClosedImmersion i aX l
@@ -174,12 +184,14 @@ noncomputable def boundedConstructibleAlgebraicClosureLowerStarMorphism :
 instance (E : FiniteSubext l) :
     ((boundedConstructibleAlgebraicClosureLowerStarMorphism i aX hl).F E).Full := by
   unfold boundedConstructibleAlgebraicClosureLowerStarMorphism
-  exact @TwoColimitData.Morphism.full_restrict_F _ _ _ _ _ _ _ _ _ _ (fun _ ↦ inferInstance) E
+  exact @TwoColimitData.Morphism.full_restrict_F _ _ _ _ _ _ _ _ _ _
+    (fun E ↦ inferInstanceAs ((algebraicClosureLowerStarMorphism (l := l) i).F E).Full) E
 
 instance (E : FiniteSubext l) :
     ((boundedConstructibleAlgebraicClosureLowerStarMorphism i aX hl).F E).Faithful := by
   unfold boundedConstructibleAlgebraicClosureLowerStarMorphism
-  exact @TwoColimitData.Morphism.faithful_restrict_F _ _ _ _ _ _ _ _ _ _ (fun _ ↦ inferInstance) E
+  exact @TwoColimitData.Morphism.faithful_restrict_F _ _ _ _ _ _ _ _ _ _
+    (fun E ↦ inferInstanceAs ((algebraicClosureLowerStarMorphism (l := l) i).F E).Faithful) E
 
 /-- Blueprint `prop-sf-closed-unit-all-stages`, stage `ℚ̄_ℓ`: the direct image
 `i_* : Dᵇc(Z, ℚ̄_ℓ) ⥤ Dᵇc(X, ℚ̄_ℓ)` along a closed immersion, induced by the direct images

@@ -374,6 +374,63 @@ instance Morphism.faithful_restrict_F [∀ E, (Φ.F E).Faithful] (E : S) :
 
 end Restrict
 
+section Transport
+
+variable (T' : ∀ {E L : S}, E ≤ L → D.C E ⥤ D.C L) (e : ∀ {E L : S} (h : E ≤ L), T' h ≅ D.T h)
+
+/-- The directed system with transition functors replaced by isomorphic ones `T'`, the
+composition isomorphisms being transported along `e`. -/
+noncomputable def transportIso : TwoColimitData.{w, v, u} S where
+  C := D.C
+  T := T'
+  comp h h' := Functor.isoWhiskerRight (e h) _ ≪≫ Functor.isoWhiskerLeft _ (e h') ≪≫
+    D.comp h h' ≪≫ (e (h.trans h')).symm
+  cocycle h h' h'' := by
+    ext K
+    have := congr_app (D.cocycle h h' h'') K
+    simp only [Functor.comp_obj, NatTrans.comp_app, Functor.whiskerRight_app,
+      Functor.whiskerLeft_app] at this
+    simp only [Functor.comp_obj, Iso.trans_hom, Functor.isoWhiskerRight_hom,
+      Functor.isoWhiskerLeft_hom, Iso.symm_hom, NatTrans.comp_app, Functor.whiskerRight_app,
+      Functor.whiskerLeft_app, Functor.map_comp, Category.assoc]
+    rw [← Functor.map_comp_assoc (T' h'') ((e (h.trans h')).inv.app K), Iso.inv_hom_id_app,
+      Functor.map_id, Category.id_comp, (e h'').hom.naturality_assoc, reassoc_of% this,
+      ← (e (h'.trans h'')).inv.naturality_assoc, Iso.inv_hom_id_app_assoc,
+      ← (D.comp h' h'').hom.naturality_assoc, Functor.comp_map,
+      ← (e h'').hom.naturality_assoc, ← Functor.map_comp_assoc,
+      ← Functor.map_comp_assoc, (e h').hom.naturality]
+
+variable {D} {D' : TwoColimitData.{w, v, u} S} (Φ : D.Morphism D')
+  (T'' : ∀ {E L : S}, E ≤ L → D'.C E ⥤ D'.C L) (e' : ∀ {E L : S} (h : E ≤ L), T'' h ≅ D'.T h)
+
+/-- A morphism of directed systems, transported to the systems with isomorphic transition
+functors. -/
+noncomputable def Morphism.transportIso :
+    (D.transportIso T' e).Morphism (D'.transportIso T'' e') where
+  F := Φ.F
+  κ h := Functor.isoWhiskerLeft (Φ.F _) (e' h) ≪≫ Φ.κ h ≪≫ Functor.isoWhiskerRight (e h).symm _
+  hexagon h h' := by
+    ext K
+    have := congr_app (Φ.hexagon h h') K
+    simp only [Functor.comp_obj, NatTrans.comp_app, Functor.whiskerRight_app,
+      Functor.whiskerLeft_app] at this
+    change _ = _
+    simp only [TwoColimitData.transportIso, Functor.comp_obj, Iso.trans_hom,
+      Functor.isoWhiskerRight_hom, Functor.isoWhiskerLeft_hom, Iso.symm_hom, NatTrans.comp_app,
+      Functor.whiskerRight_app, Functor.whiskerLeft_app, Functor.map_comp, Category.assoc]
+    rw [Iso.inv_hom_id_app_assoc, reassoc_of% this]
+    have n1 := (e' h').hom.naturality
+    have n2 := (Φ.κ h').hom.naturality
+    have n3 := (e h').hom.naturality
+    simp only [Functor.comp_obj, Functor.comp_map] at n1 n2 n3
+    simp only [← Functor.map_comp_assoc, reassoc_of% n3, Iso.inv_hom_id_app_assoc]
+    simp only [Functor.map_comp, Category.assoc, ← reassoc_of% n2, ← reassoc_of% n1]
+    simp only [← Functor.map_comp_assoc, ← Functor.map_comp, Iso.inv_hom_id_app,
+      CategoryTheory.Functor.map_id]
+    erw [Category.id_comp]
+
+end Transport
+
 end TwoColimitData
 
 end CategoryTheory
