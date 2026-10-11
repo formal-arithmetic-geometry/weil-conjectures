@@ -1,11 +1,11 @@
 # Work queue
 
-1021 items; claim with `tools/claim.py next <group> [--stage N]`.
+1017 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (1021)
+## Stage 2: nodes to state (1017)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -33,7 +33,6 @@
 | `lem-exc-discrete-modules-abelian-structure` | 1 | state |
 | `lem-exc-etale-field-galois-classification` | 1 | state |
 | `lem-exc-etale-field-gsets` | 1 | state |
-| `lem-exc-etale-open-subgroup-fixed-field` | 1 | state |
 | `lem-exc-etale-sheaves-gsets-point` | 1 | state |
 | `lem-exc-field-sections-stalk-invariants` | 1 | state |
 | `lem-exc-finite-galois-sheaf-sections-coproduct` | 1 | state |
@@ -46,14 +45,11 @@
 | `lem-galois-aut-profinite` | 1 | state |
 | `lem-galois-axioms` | 1 | state |
 | `lem-galois-constant-sheaf-sets-representable` | 1 | state |
-| `lem-galois-coproduct-copies-morphisms-clopen` | 1 | state |
-| `lem-galois-coproduct-morphism-components` | 1 | state |
 | `lem-galois-descent` | 1 | state |
 | `lem-galois-descent-datum-diagonal-identity` | 1 | state |
 | `lem-galois-flc-set-stalk-finite` | 1 | state |
 | `lem-galois-fpqc-descend-etale` | 1 | state |
 | `lem-galois-fpqc-descend-open-immersion` | 1 | state |
-| `lem-galois-fpqc-descend-unramified` | 1 | state |
 | `lem-galois-fpqc-descending-types-morphisms` | 1 | state |
 | `lem-galois-fpqc-morphisms-descend` | 1 | state |
 | `lem-galois-fpqc-pullback-canonical-iso` | 1 | state |
