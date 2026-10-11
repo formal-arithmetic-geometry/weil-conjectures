@@ -354,6 +354,7 @@ public import WeilConjectures.AlgebraicGeometry.Sites.DerivedStalk
 public import WeilConjectures.AlgebraicGeometry.Sites.DivisorLocal
 public import WeilConjectures.AlgebraicGeometry.Sites.DivisorMap
 public import WeilConjectures.AlgebraicGeometry.Sites.DivisorSequence
+public import WeilConjectures.AlgebraicGeometry.Sites.EtaleEssentiallySmall
 public import WeilConjectures.AlgebraicGeometry.Sites.EtaleHom
 public import WeilConjectures.AlgebraicGeometry.Sites.EtaleIsoTorsor
 public import WeilConjectures.AlgebraicGeometry.Sites.EtalePicard

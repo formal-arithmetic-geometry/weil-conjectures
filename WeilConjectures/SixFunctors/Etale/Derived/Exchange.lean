@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.AlgebraicGeometry.InvertibleExponent
+public import WeilConjectures.AlgebraicGeometry.Sites.EtaleEssentiallySmall
 public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.Proper
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekBaseChange
@@ -240,13 +241,6 @@ theorem nonempty_iso_reductionModIdeal_leftDerivedUpperStar (J : Ideal Λ) :
 end Projection
 
 section LowerStar
-
-/-- The small étale site of a scheme is essentially small. Instance search does not find this
-in the presence of the imports of this file. -/
-local instance (Z : Scheme.{u}) : EssentiallySmall.{u + 1} Z.Etale :=
-  have : LocallySmall.{u + 1} Z.Etale :=
-    @locallySmall_of_univLE Z.Etale _ (@univLE_of_max.{u, u + 1} UnivLE.self)
-  essentiallySmall_of_small_of_locallySmall _
 
 variable {Λ}
 
