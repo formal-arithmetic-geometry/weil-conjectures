@@ -3887,3 +3887,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 08:49 L: merged deliver/K1/lem-weil-pbc-analytically-unramified-n1 (stage 2; reviewer PASS; first push; Sheaf.RingTheory.IsN1OfIsAnalyticallyUnramified isN1_of_isAnalyticallyUnramified)
 - 08:49 L: merged deliver/M1/lem-weil-geometrically-connected-check-after-extension (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.GeometricallyConnectedCheckAfterExtension AlgebraicGeometry.geometricallyConnected_iff_of_fieldExtension)
 - 08:49 L: merged deliver/E1/lem-galois-pi1-finite-etale-image-stabilizer (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.FundamentalGroup.ImageStabilizer AlgebraicGeometry.Scheme.FiniteEtale.fundamentalGroupMap_range_eq_stabilizer)
+- 08:50 L: merged deliver/J1/lem-sc-tensor-section-affine-open (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.TensorSectionAffineOpen AlgebraicGeometry.Scheme.Modules.tensor_section_affine_open)
