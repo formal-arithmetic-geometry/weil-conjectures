@@ -55,11 +55,11 @@ The six-functor input — composition, base change and the open–closed triangl
   `AlgebraicGeometry.WeilSheaf.isMixedOfWeightsAtMost_higherLowerShriek_of_shortExact`: blueprint
   `lem-zl-morphism-open-closed-reduction`, the open–closed reductions on the source and on the
   target and the reduction along short exact sequences of coefficients.
-- `AlgebraicGeometry.isZero_higherLowerShriek_of_quasiFinite`,
-  `AlgebraicGeometry.WeilSheaf.IsMixedOfWeightsAtMost.higherLowerShriek_zero_of_quasiFinite` and
-  `AlgebraicGeometry.WeilSheaf.HasWeightsAtMost.higherLowerShriek_zero_of_quasiFinite`: blueprint
-  `sk-l-dl-general-quasifinite`, and its consequence
-  `AlgebraicGeometry.HasDirectImageWeightBound.of_locallyQuasiFinite`.
+- `AlgebraicGeometry.isZero_higherLowerShriek_of_quasiFinite` and
+  `AlgebraicGeometry.WeilSheaf.IsMixedOfWeightsAtMost.higherLowerShriek_zero_of_quasiFinite`:
+  blueprint `sk-l-dl-general-quasifinite`, parts 1 and 2, and their consequence
+  `AlgebraicGeometry.HasDirectImageWeightBound.of_locallyQuasiFinite`; part 3 is
+  `WeilConjectures.DeligneLaumon.Reduction.QuasiFiniteWeights`.
 
 ## References
 
@@ -705,16 +705,6 @@ theorem WeilSheaf.IsMixedOfWeightsAtMost.higherLowerShriek_zero_of_quasiFinite {
   have := (WeilSheaf.isZero_higherLowerShriek_and_isMixedOfWeightsAtMost_of_quasiFinite f
     F).2 ι w h 0
   exact this.mono_weight (by simp)
-
-/-- For a separated quasi-finite morphism `f : X ⟶ Y` of `k₀`-schemes the exact functor `f₀!`
-preserves punctual upper weight bounds (blueprint: `sk-l-dl-general-quasifinite`). -/
-theorem WeilSheaf.HasWeightsAtMost.higherLowerShriek_zero_of_quasiFinite {w : ℝ}
-    {F : WeilSheaf k₀ l X} (h : F.HasWeightsAtMost ι w) :
-    ((WeilSheaf.higherLowerShriek k₀ l f 0).obj F).HasWeightsAtMost ι w :=
-  -- At a closed point `y` Frobenius permutes the stalk summands; on an orbit of length `e` an
-  -- eigenvalue `α` upstairs contributes eigenvalues `β` with `βᵉ = α` downstairs, whose
-  -- normalized weights agree because `q_x = q_yᵉ`.
-  sorry
 
 omit [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] in
 /-- The direct-image weight assertion holds for a separated quasi-finite morphism `f`: `Rʳf₀!`

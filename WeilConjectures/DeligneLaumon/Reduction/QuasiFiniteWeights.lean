@@ -11,6 +11,7 @@ public import WeilConjectures.WeilSheaf.Finiteness
 public import WeilConjectures.WeilSheaf.GrothendieckLefschetz
 public import WeilConjectures.WeilSheaf.StalkUpperStarCharpoly
 public import WeilConjectures.ZetaLinearAlgebra.CharpolyRevExpand
+public import WeilConjectures.ConstructibleSheaf.UniversalHomeomorphism
 
 /-!
 # Upper weight bounds for quasi-finite direct images
@@ -86,7 +87,7 @@ end QuasiFiniteCohomology
 section Helpers
 
 /-- Equivalent Frobenius modules have the same traces of powers of the Frobenius. -/
-theorem FrobeniusModule.Equiv.trace_frobeniusEnd_pow {K : Type} [Field K]
+theorem _root_.FrobeniusModule.Equiv.trace_frobeniusEnd_pow {K : Type} [Field K]
     {M N : FrobeniusModule.{u + 1, 0} K} (e : M.Equiv N) (m : ℕ) :
     LinearMap.trace K N.carrier (N.frobeniusEnd ^ m) =
       LinearMap.trace K M.carrier (M.frobeniusEnd ^ m) := by
@@ -101,7 +102,7 @@ theorem FrobeniusModule.Equiv.trace_frobeniusEnd_pow {K : Type} [Field K]
 
 /-- Over an algebraically closed field, endomorphisms with the same characteristic polynomial
 have the same traces of powers. -/
-theorem LinearMap.trace_pow_eq_of_charpoly_eq {K V W : Type*} [Field K] [IsAlgClosed K]
+theorem _root_.LinearMap.trace_pow_eq_of_charpoly_eq {K V W : Type*} [Field K] [IsAlgClosed K]
     [AddCommGroup V] [Module K V] [FiniteDimensional K V] [AddCommGroup W] [Module K W]
     [FiniteDimensional K W] {A : Module.End K V} {B : Module.End K W}
     (h : A.charpoly = B.charpoly) (m : ℕ) :
@@ -112,6 +113,34 @@ theorem LinearMap.trace_pow_eq_of_charpoly_eq {K V W : Type*} [Field K] [IsAlgCl
     ← LinearMap.toMatrix_pow, Matrix.trace_pow_eq_sum_pow_roots_charpoly,
     Matrix.trace_pow_eq_sum_pow_roots_charpoly, LinearMap.charpoly_toMatrix,
     LinearMap.charpoly_toMatrix, h]
+
+/-- The trace bookkeeping behind the Frobenius at a point of a quasi-finite direct image: if the
+traces of the powers of `H₁ ≃ H₂` are `d tr (A^{m / d})` (for `d ∣ m`) on the one hand and
+`∑ₓ dₓ tr (Bₓ^{m / dₓ})` (for `dₓ ∣ m`) on the other, with `dₓ = d eₓ`, then
+`tr (Aⁿ) = ∑_{eₓ ∣ n} eₓ tr (Bₓ^{n / eₓ})`. -/
+theorem _root_.FrobeniusModule.trace_pow_eq_sum_of_equiv {K : Type} [Field K] [CharZero K]
+    {H₁ H₂ A : FrobeniusModule.{u + 1, 0} K} (E : H₁.Equiv H₂) {ι : Type*} [Fintype ι]
+    (B : ι → FrobeniusModule.{u + 1, 0} K) {d : ℕ} (hd : d ≠ 0) (e : ι → ℕ)
+    (h₁ : ∀ m : ℕ, m ≠ 0 → LinearMap.trace K H₁.carrier (H₁.frobeniusEnd ^ m) =
+      if d ∣ m then (d : K) * LinearMap.trace K A.carrier (A.frobeniusEnd ^ (m / d)) else 0)
+    (h₂ : ∀ m : ℕ, m ≠ 0 → LinearMap.trace K H₂.carrier (H₂.frobeniusEnd ^ m) =
+      ∑ x, if d * e x ∣ m then ((d * e x : ℕ) : K) *
+        LinearMap.trace K (B x).carrier ((B x).frobeniusEnd ^ (m / (d * e x))) else 0)
+    (n : ℕ) (hn : n ≠ 0) :
+    LinearMap.trace K A.carrier (A.frobeniusEnd ^ n) =
+      ∑ x, if e x ∣ n then (e x : K) *
+        LinearMap.trace K (B x).carrier ((B x).frobeniusEnd ^ (n / e x)) else 0 := by
+  have hdn : d * n ≠ 0 := mul_ne_zero hd hn
+  have h := E.trace_frobeniusEnd_pow (d * n)
+  rw [h₁ _ hdn, h₂ _ hdn, if_pos (dvd_mul_right d n),
+    Nat.mul_div_cancel_left _ (Nat.pos_of_ne_zero hd)] at h
+  have hdK : (d : K) ≠ 0 := Nat.cast_ne_zero.2 hd
+  refine mul_left_cancel₀ hdK (h.symm.trans ?_)
+  rw [Finset.mul_sum]
+  refine Finset.sum_congr rfl fun x _ ↦ ?_
+  rw [Nat.mul_div_mul_left _ _ (Nat.pos_of_ne_zero hd)]
+  simp only [Nat.mul_dvd_mul_iff_left (Nat.pos_of_ne_zero hd)]
+  split_ifs <;> push_cast <;> ring
 
 end Helpers
 
@@ -204,5 +233,170 @@ theorem WeilSheaf.nonempty_equiv_compactlySupportedCohomology_upperStar_higherLo
   exact ⟨WeilSheaf.globalSectionsEquivOfIso ((WeilComplex.homologySheaf 0).mapIso E')⟩
 
 end Fibre
+
+section Main
+
+variable {ι : PadicAlgCl l →+* ℂ} {X Y : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
+  [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
+  [Y.Over (Spec (CommRingCat.of k₀))] (f : X ⟶ Y) [f.IsOver (Spec (CommRingCat.of k₀))]
+  [IsSeparated f] [LocallyQuasiFinite f] [LocallyOfFiniteType f] [QuasiCompact f]
+  [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))]
+  [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))]
+  [QuasiSeparated (Y ↘ Spec (CommRingCat.of k₀))]
+
+/-- For a separated quasi-finite morphism `f : X ⟶ Y` of `k₀`-schemes the exact functor `f₀!`
+preserves punctual upper weight bounds (blueprint: `sk-l-dl-general-quasifinite`,
+`lem-zl-quasi-finite`, part 3): at a closed point `y` the Frobenius permutes the points above
+`y`; on an orbit of length `e` an eigenvalue `α` upstairs contributes eigenvalues `β` with
+`βᵉ = α` downstairs, whose normalized weights agree because `q_x = q_yᵉ`. -/
+theorem WeilSheaf.HasWeightsAtMost.higherLowerShriek_zero_of_quasiFinite {w : ℝ}
+    {F : WeilSheaf k₀ l X} (h : F.HasWeightsAtMost ι w) :
+    ((WeilSheaf.higherLowerShriek k₀ l f 0).obj F).HasWeightsAtMost ι w := by
+  intro y β hβ
+  -- the closed point `y`, as the spectrum of its residue field, a finite extension of `k₀`
+  let Z : Scheme.{u} := Spec (Y.residueField y.1)
+  let i : Z ⟶ Y := Y.fromSpecResidueField y.1
+  let : Z.Over (Spec (CommRingCat.of k₀)) := ⟨i ≫ Y ↘ Spec (CommRingCat.of k₀)⟩
+  have : i.IsOver (Spec (CommRingCat.of k₀)) := ⟨rfl⟩
+  have : Finite (Y.residueField y.1) := y.2
+  have : IsFinite (Z ↘ Spec (CommRingCat.of k₀)) := by
+    change IsFinite (i ≫ Y ↘ Spec (CommRingCat.of k₀))
+    rw [← Scheme.Hom.specMap_residueFieldAlgebraMap, IsFinite.SpecMap_iff]
+    let := ((Y ↘ Spec (CommRingCat.of k₀)).residueFieldAlgebraMap y.1).toAlgebra
+    exact Module.Finite.of_finite
+  -- the fibre `X_y = X ×_Y Spec κ(y)`
+  obtain ⟨Xy, g, f', hH⟩ : ∃ (Xy : Scheme.{u}) (g : Xy ⟶ X) (f' : Xy ⟶ Z), IsPullback g f' f i :=
+    ⟨_, _, _, IsPullback.of_hasPullback f i⟩
+  let : Xy.Over (Spec (CommRingCat.of k₀)) := ⟨g ≫ X ↘ Spec (CommRingCat.of k₀)⟩
+  have : g.IsOver (Spec (CommRingCat.of k₀)) := ⟨rfl⟩
+  have : f'.IsOver (Spec (CommRingCat.of k₀)) := ⟨by
+    change f' ≫ i ≫ Y ↘ Spec (CommRingCat.of k₀) = g ≫ X ↘ Spec (CommRingCat.of k₀)
+    rw [← Category.assoc, ← hH.w, Category.assoc, comp_over]⟩
+  have : IsSeparated f' := MorphismProperty.of_isPullback hH ‹_›
+  have : LocallyQuasiFinite f' := MorphismProperty.of_isPullback hH ‹_›
+  have : LocallyOfFiniteType f' := MorphismProperty.of_isPullback hH ‹_›
+  have : QuasiCompact f' := MorphismProperty.of_isPullback hH ‹_›
+  have : IsPreimmersion g :=
+    MorphismProperty.of_isPullback hH.flip (inferInstance : IsPreimmersion i)
+  have hX' : Xy ↘ Spec (CommRingCat.of k₀) = f' ≫ Z ↘ Spec (CommRingCat.of k₀) :=
+    (comp_over f' _).symm
+  have : IsSeparated (Xy ↘ Spec (CommRingCat.of k₀)) := by rw [hX']; infer_instance
+  have : LocallyOfFiniteType (Xy ↘ Spec (CommRingCat.of k₀)) := by rw [hX']; infer_instance
+  have : QuasiCompact (Xy ↘ Spec (CommRingCat.of k₀)) := by rw [hX']; infer_instance
+  have : LocallyQuasiFinite (Xy ↘ Spec (CommRingCat.of k₀)) := by rw [hX']; infer_instance
+  obtain ⟨E⟩ := WeilSheaf.nonempty_equiv_compactlySupportedCohomology_upperStar_higherLowerShriek
+    hH F
+  -- the degree `d` of `y` and the unique point `z₀` of `Z`
+  set d := (Y ↘ Spec (CommRingCat.of k₀)).degreeOver y.1 with hd_def
+  have hd : d ≠ 0 := Scheme.Hom.degreeOver_ne_zero _ y.2
+  let z₀ : Z := IsLocalRing.closedPoint (Y.residueField y.1)
+  have hiz : ∀ z : Z, i.base z = y.1 := fun z ↦ Scheme.fromSpecResidueField_apply _ _
+  have : ∀ z : Z, IsIso (i.residueFieldMap z) := fun z ↦ Scheme.Hom.isIso_residueFieldMap i z
+  have hz₀ : z₀ ∈ Z.finitePoints :=
+    (Scheme.Hom.mem_finitePoints_iff_of_isIso i z₀).1 ((hiz z₀).symm ▸ y.2)
+  have hdegZ : ∀ z : Z, (Z ↘ Spec (CommRingCat.of k₀)).degreeOver z = d := fun z ↦ by
+    change (i ≫ Y ↘ Spec (CommRingCat.of k₀)).degreeOver z = d
+    rw [Scheme.Hom.degreeOver_comp_of_isIso, hiz]
+  -- the traces of the powers of the Frobenius on `H_c^0` of the point
+  have hy : (⟨i.base z₀, Scheme.Hom.map_mem_finitePoints i hz₀⟩ : Y.finitePoints) = y :=
+    Subtype.ext (hiz z₀)
+  have hstalkZ : ∀ k : ℕ, LinearMap.trace (PadicAlgCl l)
+      (((WeilSheaf.upperStar i).obj ((WeilSheaf.higherLowerShriek k₀ l f 0).obj F)).stalk ⟨z₀, hz₀⟩).carrier
+        ((((WeilSheaf.upperStar i).obj ((WeilSheaf.higherLowerShriek k₀ l f 0).obj F)).stalk ⟨z₀, hz₀⟩).frobeniusEnd ^ k) =
+      LinearMap.trace (PadicAlgCl l) (((WeilSheaf.higherLowerShriek k₀ l f 0).obj F).stalk y).carrier ((((WeilSheaf.higherLowerShriek k₀ l f 0).obj F).stalk y).frobeniusEnd ^ k) := by
+    intro k
+    have hc := WeilSheaf.charpoly_frobeniusEnd_stalk_upperStar i ((WeilSheaf.higherLowerShriek k₀ l f 0).obj F) ⟨z₀, hz₀⟩
+    rw [hy, hdegZ, hiz, ← hd_def, Nat.div_self (Nat.pos_of_ne_zero hd), pow_one] at hc
+    exact LinearMap.trace_pow_eq_of_charpoly_eq hc k
+  have hZtr : ∀ m : ℕ, m ≠ 0 → LinearMap.trace (PadicAlgCl l)
+      (((WeilSheaf.upperStar i).obj ((WeilSheaf.higherLowerShriek k₀ l f 0).obj F)).compactlySupportedCohomology 0).carrier
+        ((((WeilSheaf.upperStar i).obj ((WeilSheaf.higherLowerShriek k₀ l f 0).obj F)).compactlySupportedCohomology 0).frobeniusEnd ^ m) =
+      if d ∣ m then (d : PadicAlgCl l) *
+        LinearMap.trace (PadicAlgCl l) (((WeilSheaf.higherLowerShriek k₀ l f 0).obj F).stalk y).carrier ((((WeilSheaf.higherLowerShriek k₀ l f 0).obj F).stalk y).frobeniusEnd ^ (m / d))
+      else 0 := by
+    intro m hm
+    rw [WeilSheaf.trace_compactlySupportedCohomology_zero_of_locallyQuasiFinite _ hm,
+      finsum_eq_single _ ⟨z₀, hz₀⟩ fun x hx ↦ absurd (Subtype.ext (Subsingleton.elim _ _)) hx,
+      hdegZ, hstalkZ]
+  -- the points of the fibre: their degrees and stalks
+  have : ∀ x : Xy, IsIso (g.residueFieldMap x) := fun x ↦ Scheme.Hom.isIso_residueFieldMap g x
+  have hdegX : ∀ x : Xy, (Xy ↘ Spec (CommRingCat.of k₀)).degreeOver x =
+      (X ↘ Spec (CommRingCat.of k₀)).degreeOver (g.base x) := fun x ↦
+    Scheme.Hom.degreeOver_comp_of_isIso g (X ↘ Spec (CommRingCat.of k₀)) x
+  have hdvd : ∀ x : Xy.finitePoints, d ∣ (Xy ↘ Spec (CommRingCat.of k₀)).degreeOver x.1 :=
+    fun x ↦ by
+      have := Scheme.Hom.degreeOver_dvd_degreeOver_comp f' (Z ↘ Spec (CommRingCat.of k₀)) x.2
+      rwa [← hX', hdegZ] at this
+  have hstalkX : ∀ (x : Xy.finitePoints) (k : ℕ), LinearMap.trace (PadicAlgCl l)
+      (((WeilSheaf.upperStar g).obj F).stalk x).carrier
+        ((((WeilSheaf.upperStar g).obj F).stalk x).frobeniusEnd ^ k) =
+      LinearMap.trace (PadicAlgCl l)
+        (F.stalk ⟨g.base x.1, Scheme.Hom.map_mem_finitePoints g x.2⟩).carrier
+        ((F.stalk ⟨g.base x.1, Scheme.Hom.map_mem_finitePoints g x.2⟩).frobeniusEnd ^ k) := by
+    intro x k
+    have hc := WeilSheaf.charpoly_frobeniusEnd_stalk_upperStar g F x
+    rw [hdegX, Nat.div_self (Nat.pos_of_ne_zero (Scheme.Hom.degreeOver_ne_zero _
+      (Scheme.Hom.map_mem_finitePoints g x.2))), pow_one] at hc
+    exact LinearMap.trace_pow_eq_of_charpoly_eq hc k
+  -- the fibre is finite
+  have : Finite Xy := by
+    have h1 := (Xy ↘ Spec (CommRingCat.of k₀)).finite_preimage_singleton
+      (IsLocalRing.closedPoint k₀)
+    have h2 : (Xy ↘ Spec (CommRingCat.of k₀)).base ⁻¹' {IsLocalRing.closedPoint k₀} =
+        Set.univ := Set.eq_univ_of_forall fun _ ↦ Subsingleton.elim _ _
+    rw [h2] at h1
+    exact Set.finite_univ_iff.1 h1
+  let : Fintype Xy.finitePoints := Fintype.ofFinite _
+  -- the traces of the powers of the Frobenius on the stalk of `f₀!F` at `y`
+  set e : Xy.finitePoints → ℕ := fun x ↦ (Xy ↘ Spec (CommRingCat.of k₀)).degreeOver x.1 / d
+    with he_def
+  have hde : ∀ x : Xy.finitePoints,
+      (Xy ↘ Spec (CommRingCat.of k₀)).degreeOver x.1 = d * e x := fun x ↦
+    (Nat.mul_div_cancel' (hdvd x)).symm
+  have he0 : ∀ x : Xy.finitePoints, e x ≠ 0 := fun x h0 ↦ by
+    have := hde x
+    rw [h0, mul_zero] at this
+    exact Scheme.Hom.degreeOver_ne_zero _ x.2 this
+  have hXtr : ∀ m : ℕ, m ≠ 0 → LinearMap.trace (PadicAlgCl l)
+      (((WeilSheaf.upperStar g).obj F).compactlySupportedCohomology 0).carrier
+        ((((WeilSheaf.upperStar g).obj F).compactlySupportedCohomology 0).frobeniusEnd ^ m) =
+      ∑ x : Xy.finitePoints, if d * e x ∣ m then ((d * e x : ℕ) : PadicAlgCl l) *
+        LinearMap.trace (PadicAlgCl l)
+          (F.stalk ⟨g.base x.1, Scheme.Hom.map_mem_finitePoints g x.2⟩).carrier
+          ((F.stalk ⟨g.base x.1, Scheme.Hom.map_mem_finitePoints g x.2⟩).frobeniusEnd ^
+            (m / (d * e x))) else 0 := by
+    intro m hm
+    rw [WeilSheaf.trace_compactlySupportedCohomology_zero_of_locallyQuasiFinite _ hm,
+      finsum_eq_sum_of_fintype]
+    refine Finset.sum_congr rfl fun x _ ↦ ?_
+    simp only [hde x, hstalkX]
+  have key := FrobeniusModule.trace_pow_eq_sum_of_equiv E
+    (fun x : Xy.finitePoints ↦ F.stalk ⟨g.base x.1, Scheme.Hom.map_mem_finitePoints g x.2⟩) hd e
+    hZtr hXtr
+  -- the local Frobenius at `y` is the product of the induced Frobenius of the points above `y`
+  have hA := LinearMap.charpolyRev_eq_prod_expand_of_trace_pow_eq
+    (((WeilSheaf.higherLowerShriek k₀ l f 0).obj F).stalk y).frobeniusEnd Finset.univ
+    (fun x : Xy.finitePoints ↦
+      (F.stalk ⟨g.base x.1, Scheme.Hom.map_mem_finitePoints g x.2⟩).frobeniusEnd) e he0 key
+  have hβ0 : β ≠ 0 := by
+    rintro rfl
+    obtain ⟨v, hv⟩ := hβ.exists_hasEigenvector
+    rw [Module.End.hasEigenvector_iff, Module.End.mem_eigenspace_iff, zero_smul] at hv
+    exact hv.2 ((((WeilSheaf.higherLowerShriek k₀ l f 0).obj F).stalk y).frobenius.injective
+      (hv.1.trans (map_zero _).symm))
+  obtain ⟨x, -, hx⟩ := LinearMap.exists_hasEigenvalue_pow_of_charpolyRev_eq _ _ _ e hA hβ hβ0
+  have hw := h ⟨g.base x.1, Scheme.Hom.map_mem_finitePoints g x.2⟩ (β ^ e x) hx
+  -- the weight bound: `|ι β| ^ e ≤ (q ^ (d e)) ^ (w / 2)`
+  have hq : (0 : ℝ) ≤ Nat.card k₀ := Nat.cast_nonneg _
+  have hxdeg : (X ↘ Spec (CommRingCat.of k₀)).degreeOver (g.base x.1) = d * e x := by
+    rw [← hdegX, hde]
+  simp only [Scheme.Hom.residueCard, hxdeg, Nat.cast_pow, map_pow, norm_pow] at hw
+  change ‖ι β‖ ≤ ((Nat.card k₀ ^ d : ℕ) : ℝ) ^ (w / 2)
+  refine (pow_le_pow_iff_left₀ (norm_nonneg _) (Real.rpow_nonneg (by positivity) _)
+    (he0 x)).1 ?_
+  rw [Nat.cast_pow, ← Real.rpow_pow_comm (by positivity), ← pow_mul]
+  rwa [← Real.rpow_pow_comm (by positivity)] at hw
+
+end Main
 
 end AlgebraicGeometry
