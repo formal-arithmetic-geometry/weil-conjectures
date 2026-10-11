@@ -163,3 +163,61 @@ lemma eq_zero_of_pullSection_eq_zero {V : T.Etale} {U : R.Etale}
 end PullSection
 
 end AlgebraicGeometry.Etale
+
+namespace AlgebraicGeometry.Etale
+
+section RestrictAlong
+
+variable {R T T' : Scheme.{u}} (t : T ⟶ R) (G : Sheaf R.smallEtaleTopology AddCommGrpCat.{u + 1})
+  (f : T' ⟶ T) (t' : T' ⟶ R) (ht' : t' = f ≫ t)
+
+set_option backward.isDefEq.respectTransparency false in
+/-- The restriction of a section of `t^* G` along `m` over `f` is its pullback along `m` as a
+section of `f^* t^* G`, transported along the composition isomorphism
+`f^* t^* G ≅ (f ≫ t)^* G`. -/
+lemma restrictAlong_apply {V : T.Etale} {V' : T'.Etale} (m : V'.left ⟶ V.left)
+    (hm : m ≫ V.hom = V'.hom ≫ f) (s : ((t)^*[AddCommGrpCat.{u + 1}].obj G).obj.obj (op V)) :
+    restrictAlong t G f t' ht' m hm s =
+      ((upperStarComp AddCommGrpCat.{u + 1} f t t' ht').inv.app G).hom.app (op V')
+        (pullSection f ((t)^*[AddCommGrpCat.{u + 1}].obj G) m hm s) := by
+  have := NatTrans.naturality_apply
+    ((upperStarComp AddCommGrpCat.{u + 1} f t t' ht').inv.app G).hom (homToPullback f m hm).op
+    (((upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} f).unit.app
+      ((t)^*[AddCommGrpCat.{u + 1}].obj G)).hom.app (op V) s)
+  rw [pullSection]
+  exact Eq.trans rfl this.symm
+
+set_option backward.isDefEq.respectTransparency false in
+/-- If the restriction of a section `s` of `t^* G` along `m` vanishes, then `s` vanishes near
+the image of `m`. -/
+lemma range_subset_vanishingLocus_of_restrictAlong_eq_zero {V : T.Etale} {V' : T'.Etale}
+    (m : V'.left ⟶ V.left) (hm : m ≫ V.hom = V'.hom ≫ f)
+    (s : ((t)^*[AddCommGrpCat.{u + 1}].obj G).obj.obj (op V))
+    (h : restrictAlong t G f t' ht' m hm s = 0) :
+    Set.range m ⊆ vanishingLocus ((t)^*[AddCommGrpCat.{u + 1}].obj G) s := by
+  refine range_subset_vanishingLocus_of_pullSection_eq_zero f _ m hm s ?_
+  rw [restrictAlong_apply] at h
+  have := congrArg (((upperStarComp AddCommGrpCat.{u + 1} f t t' ht').hom.app G).hom.app
+    (op V')) h
+  rwa [← ConcreteCategory.comp_apply, ← NatTrans.comp_app,
+    ← ObjectProperty.FullSubcategory.comp_hom, Iso.inv_hom_id_app,
+    ObjectProperty.FullSubcategory.id_hom, NatTrans.id_app, ConcreteCategory.id_apply,
+    map_zero] at this
+
+/-- **Injectivity of restriction of sections.** If every nonempty closed subset of `V` meets
+the image of `m : V' ⟶ V` (over `f`), then a section `s` of `t^* G` over `V` whose restriction
+along `m` vanishes is zero. -/
+lemma eq_zero_of_restrictAlong_eq_zero {V : T.Etale} {V' : T'.Etale}
+    (m : V'.left ⟶ V.left) (hm : m ≫ V.hom = V'.hom ≫ f)
+    (hC : ∀ C : Set V.left, IsClosed C → C.Nonempty → (C ∩ Set.range m).Nonempty)
+    (s : ((t)^*[AddCommGrpCat.{u + 1}].obj G).obj.obj (op V))
+    (h : restrictAlong t G f t' ht' m hm s = 0) : s = 0 := by
+  have h₁ := range_subset_vanishingLocus_of_restrictAlong_eq_zero t G f t' ht' m hm s h
+  refine eq_zero_of_forall_mem_vanishingLocus fun x ↦ ?_
+  by_contra hx
+  obtain ⟨y, hy, hym⟩ := hC _ (isOpen_vanishingLocus s).isClosed_compl ⟨x, hx⟩
+  exact hy (h₁ hym)
+
+end RestrictAlong
+
+end AlgebraicGeometry.Etale
