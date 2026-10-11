@@ -117,5 +117,23 @@
   "group": "C1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-lso2732 (reviewer sub-agent of L); spot-checked: Statement matches citer lem-pod-profinite-stable-lattice (GL_E(V), compact-open; citer pulls back along continuous rho; C4 ok); no project lattice/l-adic-topology def for vector spaces exists (sbc-def-admissible-lattices is derived-category, not a duplicate); no new nodes; step 1 cites DVR + fg-torsionfree-free correctly. FIX more, RETURN less: (1) C1: step 2 asserted compact-open = entrywise topology without reason; replaced by the one direction needed, with reason (evaluation at e_j continuous for compact-open, coordinates continuous), in step 3; (2) C1: openness of m_E now reasoned (|.|_E continuous) and unit criterion made explicit (det = 1 mod m_E, adjugate); (3) B3: statement put in TeX $...$ and the l-adic topology on V defined inline as product topology, matching the citer. Note: Second reading claims a created.item correction that is not in the head; created is the maintainer's field, left unchanged.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.NumberTheory.Padics.LatticeStabilizerOpen",
+  "declaration": "Padic.lattice_stabilizer_isOpen",
+  "file": "lean/Sheaf/NumberTheory/Padics/LatticeStabilizerOpen.lean",
+  "statement": "theorem lattice_stabilizer_isOpen (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] : letI : NormedField E := spectralNorm.normedField ℚ_[l] E ∀ (V : Type v) [AddCommGroup V] [Module E V] [FiniteDimensional E V] [TopologicalSpace V], (∃ b : Module.Basis (Fin (Module.finrank E V)) E V, Continuous b.equivFun ∧ Continuous b.equivFun.symm) → ∀ (Λ : Submodule (coefficientExtensionIntegers l E) V), Λ.FG → Submodule.span E (Λ : Set V) = ⊤ → letI : TopologicalSpace (V ≃L[E] V) := TopologicalSpace.induced (fun g : V ≃L[E] V ↦ (g : C(V, V))) inferInstance IsOpen {g : V ≃L[E] V | g '' (Λ : Set V) = (Λ : Set V)}",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-lso0932",
+  "group": "C1",
+  "result": "pass",
+  "note": "l prime/E finite ext of Q_l with spectral NormedField (= dependency abv); V fin-dim with topology s.t. a Fin(finrank) basis equivFun is a homeomorphism (= product topology, any basis); Lambda: Submodule over recorded coefficientExtensionIntegers (smul rfl = (o:E)•x), FG, E-span = top; GL_E(V) as V ≃L[E] V (all linear maps continuous under the hypothesis) with topology induced from C(V,V) compact-open (#synth checked); stabilizer exact image equality; IsOpen; V=0 ok; consistent with landed citer lem-pod-profinite-stable-lattice"
  }
 }
