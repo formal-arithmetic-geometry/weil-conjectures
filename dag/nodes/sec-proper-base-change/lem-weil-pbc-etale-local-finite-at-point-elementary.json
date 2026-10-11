@@ -237,5 +237,23 @@
   "by": "L",
   "result": "pass",
   "note": "Eight steps along Stacks 02LK with the translation back to schemes written out: affine reduction, q isolated among the primes over p, Algebra 00UJ as a new Mathlib leaf (exists_etale_isIdempotentElem_forall_liesOver_eq QuasiFinite.lean:379 with quasiFiniteAt_iff_isOpen_singleton_fiber ZMT:754, verified; stated in idempotent form, clause (5) omitted), the elementary etale neighbourhood, the open V = D(e), finiteness local on the target, the unique point, residue fields via the fibre-product nodes. Correct."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleLocalFiniteAtPoint",
+  "declaration": "AlgebraicGeometry.exists_etale_finite_open_of_isolated_fiber_point",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleLocalFiniteAtPoint.lean",
+  "statement": "theorem exists_etale_finite_open_of_isolated_fiber_point {X S : Scheme.{u}} (f : X ⟶ S) [LocallyOfFiniteType f] (x : X) (hx : IsOpen ({f.asFiber x} : Set (f.fiber (f x)))) : ∃ (U : Scheme.{u}) (φ : U ⟶ S) (u : U), Etale φ ∧ φ u = f x ∧ IsIso (φ.residueFieldMap u) ∧ ∃ (V : (pullback f φ).Opens), IsFinite (V.ι ≫ pullback.snd f φ) ∧ ∃ (v : V), (V.ι ≫ pullback.snd f φ) v = u ∧ (∀ (w : V), (V.ι ≫ pullback.snd f φ) w = u → w = v) ∧ (V.ι ≫ pullback.fst f φ) v = x ∧ IsIso ((V.ι ≫ pullback.fst f φ).residueFieldMap v)",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-elf0955",
+  "group": "F1",
+  "result": "pass",
+  "note": "f:X⟶S lft as [LocallyOfFiniteType f]; isolated in X_s as IsOpen {f.asFiber x} in f.fiber (f x); elementary etale nbhd Etale φ ∧ φ u = f x ∧ IsIso (φ.residueFieldMap u); V open of pullback f φ, (i) IsFinite (V.ι ≫ pullback.snd), (ii) exists+unique v over u, (iii) p(v)=x and IsIso residueFieldMap; spellings as sibling 705a27354; #check Etale/IsFinite/asFiber/residueFieldMap resolve to AlgebraicGeometry"
  }
 }
