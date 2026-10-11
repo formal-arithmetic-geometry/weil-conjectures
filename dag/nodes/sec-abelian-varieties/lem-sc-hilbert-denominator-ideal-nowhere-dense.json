@@ -20,7 +20,8 @@
  },
  "stmt_deps": [
   "def-pc-scheme",
-  "def-sc-invertible-module"
+  "def-sc-invertible-module",
+  "def-sc-meromorphic-module"
  ],
  "proof": [
   {
@@ -115,5 +116,27 @@
   "group": "K1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-hdn2512 (reviewer sub-agent of L); spot-checked: Statement (clauses 1-3, clause (1) kept verbatim, C4 ok) against Stacks 02P0; step 2 localization criterion; step 3 cites lem-pc-principal-open-dense-of-nonzerodivisor with matching nzd hypothesis, nowhere-dense derived from b in I / s(b)=a, not assumed. lem-sc-meromorphic-sheaf-generic-product (0EMH) NOT cited: it needs locally Noetherian without embedded points, the item is for an arbitrary scheme (would be C4). FIX more, RETURN less: C1 step 1 asserted the local a/b representation with a non-zero-divisor without justification; rewrote it as an elementary unpacking naming Tags 01X2 (sheafification, S(U) = nzds of A, O_X -> K_X injective) and 02OX (regularity gives a nzd), and derived I(U) = {y | y(a/b) in A} in Q(A) from O_X -> K_X injective; step 3 injectivity of s on I now names 01X2/02OX and why b in I.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.MeromorphicDenominatorIdeal",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.meromorphic_denominator_ideal_nowhere_dense",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.meromorphic_denominator_ideal_nowhere_dense"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/MeromorphicDenominatorIdeal.lean",
+  "statement": "theorem meromorphic_denominator_ideal_nowhere_dense (X : Scheme.{v}) (L : X.Modules) [L.IsInvertible] (s : unit X ⟶ meromorphicModule X L) (hs : Mono (meromorphicSectionMap X L s)) : let I : X.Modules := CategoryTheory.Limits.pullback s (toMeromorphicModule X L) let i : I ⟶ unit X := CategoryTheory.Limits.pullback.fst s (toMeromorphicModule X L) let j : I ⟶ L := CategoryTheory.Limits.pullback.snd s (toMeromorphicModule X L) (∀ (V : X.Opens) (f : Γ(X, V)), (∃ t : Γ(I, V), Hom.app i V t = f) ↔ ∃ t : Γ(L, V), Hom.app (toMeromorphicModule X L) V t = Hom.app s V f) ∧ (∀ x : X, ∃ (U : X.Opens), x ∈ U ∧ IsAffineOpen U ∧ ∃ (e : L.over U ≅ SheafOfModules.unit (X.ringCatSheaf.over U)) (a : Γ(X, U)) (b : meromorphicDenominators X U), a ∈ nonZeroDivisors Γ(X, U) ∧ ∃ hb : b.val ∈ nonZeroDivisors Γ(X, U), meromorphicFraction X L U (LocalizedModule.mk ((sectionsLinearEquivOfOverIsoUnit e le_rfl).symm a) b) = Hom.app s U (1 : Γ(X, U)) ∧ ∀ y : Γ(X, U), (∃ t : Γ(I, U), Hom.app i U t = y) ↔ ∃ c : Γ(X, U), algebraMap Γ(X, U) (Localization (nonZeroDivisors Γ(X, U))) c = IsLocalization.mk' (Localization (nonZeroDivisors Γ(X, U))) a ⟨b.val, hb⟩ * algebraMap Γ(X, U) (Localization (nonZeroDivisors Γ(X, U))) y) ∧ SheafOfModules.IsQuasicoherent I ∧ Mono i ∧ Mono j ∧ (∃ Z : Set X, IsClosed Z ∧ IsNowhereDense Z ∧ ∀ x : X, x ∉ Z → Subsingleton ((presheaf (cokernel i : X.Modules)).stalk x)) ∧ (∃ Z : Set X, IsClosed Z ∧ IsNowhereDense Z ∧ ∀ x : X, x ∉ Z → Subsingleton ((presheaf (cokernel j : X.Modules)).stalk x))",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-hdn1220"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-hdn1220",
+  "group": "C1",
+  "result": "fix",
+  "note": "X arbitrary Scheme, L IsInvertible (recorded class), s : O_X -> K_X(L) with K_X(L) = sheafified S^-1 L (tensor iso stated), regular = Mono of unique K_X-extension; I = pullback s along L -> K_X(L), defining set on every V; (1) affine U, sheaf trivialization e, a,b nzd (b also in S(U), equivalent on affine), s|U = a/b, I(U) = {y | y(a/b) in A} now in Localization (nonZeroDivisors A) as M1 (was ya=zb); (2) IsQuasicoherent+Mono i; (3) Mono i, Mono j, cokernel stalks vanish off closed IsNowhereDense Z; new def-sc-meromorphic-module not in Mathlib (totalQuotientPresheaf unsheafified rings) nor DAG, no hollow data"
  }
 }
