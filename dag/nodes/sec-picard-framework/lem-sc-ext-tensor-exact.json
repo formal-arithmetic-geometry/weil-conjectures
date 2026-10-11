@@ -129,5 +129,23 @@
   "group": "G1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ete (reviewer sub-agent of L); spot-checked: Source: Stacks Modules Tag 05NE (modules-lemma-flat-stalks-flat), first implication, with 01CB (stalk of tensor) and 01AG (abelian, stalkwise exactness); the item statement (scheme X, P finite locally free with ranks d_a varying on a cover, P tensor - preserves short exact sequences) is the specialization of 05NE to finite free stalks; it involves no Ext, so the ill-posed def-sc-ext-sheaf does not affect it and it is true. Only proof, proof_deps, proof_origin, status, split_report changed against sheaf-dag (diffed). Step 1: def-weil-pbc-module-stalk gives the O_{X,x}-module structure on stalks and stalk maps; P_x = O_{X,x}^{d_a} from the local trivialization is elementary. Step 2: lem-weil-pbc-module-stalk-tensor states the stalk-tensor isomorphism natural in both variables, so the stalk of 1 tensor g is 1 tensor g_x; finite free tensor = direct sum is elementary. Step 3: lem-weil-pbc-module-stalk-exact clause (5) both directions (end positions via zero terms) plus coordinatewise exactness of finite sums. Tool uses lem-weil-pbc-module-stalk-tensor and lem-weil-pbc-module-stalk-exact accepted as generic ringed-space black boxes (C8). No new nodes, no leaves. Small cases: d=0, d=1, two components of different rank, nonsplit sequence. FIX: dag/nodes/sec-picard-framework/lem-sc-ext-tensor-exact.json: proof[2].source.place: label lemma-flat-stalks corrected to lemma-flat-stalks-flat. Start Sat Oct 10 03:38:52 PM UTC 2026, end Sat Oct 10 03:39:09 PM UTC 2026.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.Modules.FiniteLocallyFreeTensorExact",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.finiteLocallyFree_tensorLeft_exact",
+  "file": "lean/Sheaf/AlgebraicGeometry/Modules/FiniteLocallyFreeTensorExact.lean",
+  "statement": "theorem finiteLocallyFree_tensorLeft_exact {X : Scheme.{u}} (P : X.Modules) [P.IsFiniteLocallyFree] : PreservesFiniteLimits (tensorLeft P) ∧ PreservesFiniteColimits (tensorLeft P)",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-ete1220",
+  "group": "F1",
+  "result": "pass",
+  "note": "X:Scheme.{u} any scheme; P:X.Modules all O_X-modules; [P.IsFiniteLocallyFree] = SheafOfModules.IsFiniteLocallyFree (varying finite ranks, recorded on def-sc-finite-locally-free-sheaf), not inferInstance; tensorLeft P from monoidalCategory X.sheaf (rfl checked); conclusion PreservesFiniteLimits ∧ PreservesFiniteColimits = exact, sibling form of LocallyFreeExtCohomology/FlatModulePullbackExact; no let, no existentials, one universe; only the lean record added to the node"
  }
 }
