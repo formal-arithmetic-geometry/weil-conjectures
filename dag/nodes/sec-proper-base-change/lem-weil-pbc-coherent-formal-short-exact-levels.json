@@ -156,5 +156,23 @@
   "by": "L",
   "result": "pass",
   "note": "Four steps: uniqueness of kernels/cokernels up to isomorphism (termwise), (a) from the termwise cokernels of the abelian node, (b) from the explicit kernel of alpha in Coh(X,I) (new unsplit node stating the proof of 087X: stabilized images K'_m and K_n = K'_{n+c}/I^n K'_{n+c}), with m = n+2c, via a new leaf (in an abelian category the first map of a short exact sequence is a kernel of the second: ShortExact.fIsKernel ShortExact.lean:162 verified). Correct. Statement: citation of def-weil-pbc-exact-sequence added. Stage-3 note (worker): lem-weil-pbc-coherent-formal-modules-abelian states only cokernels; a kernel clause there would absorb the new kernel node."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CoherentFormalShortExactLevels",
+  "declaration": "AlgebraicGeometry.coherentFormalModule_shortExact_levels",
+  "file": "lean/Sheaf/AlgebraicGeometry/CoherentFormalShortExactLevels.lean",
+  "statement": "theorem coherentFormalModule_shortExact_levels (X : Scheme.{u}) [IsNoetherian X] (I : X.IdealSheafData) (S : ShortComplex (CoherentFormalModule X I)) (hS : S.ShortExact) : (∀ n : ℕ, (S.map ((IsCoherentFormalModule I).ι ⋙ (evaluation ℕᵒᵖ X.Modules).obj (op n))).Exact ∧ Epi (S.g.hom.app (op n))) ∧ (∀ n : ℕ, ∃ m : ℕ, n ≤ m ∧ ∃ q : kernel (S.g.hom.app (op m)) ⟶ S.X₁.obj.obj (op n), Epi q)",
+  "branch": "sheaf-dag",
+  "by": "P1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "P1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }
