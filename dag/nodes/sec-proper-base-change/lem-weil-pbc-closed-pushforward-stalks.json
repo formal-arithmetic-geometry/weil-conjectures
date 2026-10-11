@@ -173,5 +173,24 @@
   "group": "F1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of F1; spot-checked by L: L: 6 steps, 0 new nodes, along Sheaves 00AE: vanishing off the closed image, cofinality of the neighbourhoods i^{-1}V of z (with the trick U union (X minus i(Z))), bijectivity of the stalk map, linearity through i^sharp_z, naturality. Correct."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ClosedPushforwardStalks",
+  "declaration": "AlgebraicGeometry.closedImmersion_pushforward_stalks",
+  "file": "lean/Sheaf/AlgebraicGeometry/ClosedPushforwardStalks.lean",
+  "statement": "theorem closedImmersion_pushforward_stalks {X Z : Scheme.{w}} (i : Z ⟶ X) (h : Topology.IsClosedEmbedding i.base) (G : Z.Modules) : (∀ x : X, x ∉ Set.range i.base → Subsingleton (↥(TopCat.Presheaf.stalk ((Scheme.Modules.pushforward i).obj G).presheaf x))) ∧ (∀ z : Z, Function.Bijective (ConcreteCategory.hom (TopCat.Presheaf.stalkPushforward Ab i.base G.presheaf z)) ∧ IsIso (TopCat.Presheaf.stalkPushforward Ab i.base G.presheaf z) ∧ ∀ (r : X.presheaf.stalk (i.base z)) (m : ↥(TopCat.Presheaf.stalk ((Scheme.Modules.pushforward i).obj G).val.presheaf (i.base z))), ConcreteCategory.hom (TopCat.Presheaf.stalkPushforward Ab i.base G.val.presheaf z) (r • m) = (i.stalkMap z).hom r • ConcreteCategory.hom (TopCat.Presheaf.stalkPushforward Ab i.base G.val.presheaf z) m) ∧ (∀ H : Z.Modules, ∀ φ : G ⟶ H, ∀ z : Z, (TopCat.Presheaf.stalkFunctor Ab (i.base z)).map ((Scheme.Modules.pushforward i).map φ).mapPresheaf ≫ (TopCat.Presheaf.stalkPushforward Ab i.base H.presheaf z) = (TopCat.Presheaf.stalkPushforward Ab i.base G.presheaf z) ≫ (TopCat.Presheaf.stalkFunctor Ab z).map φ.mapPresheaf)",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-cps1459"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-cps1459",
+  "group": "E1",
+  "result": "fix",
+  "note": "i:Z->X scheme morphism with IsClosedEmbedding i.base = homeomorphism onto closed subset; G : Z.Modules; pushforward = Scheme.Modules.pushforward; (1) stalk off Set.range subsingleton; (2) stalkPushforward bijective/iso and O_{X,i(z)}-linear via i.stalkMap z (clause added by reviewer); (3) naturality square in G; statement correction reverted (only inserted Lean name); reverted the delivery's statement correction of the item (statement, statement_change kept as on sheaf-dag; --revert-statement)"
  }
 }
