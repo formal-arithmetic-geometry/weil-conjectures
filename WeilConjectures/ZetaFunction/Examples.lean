@@ -273,12 +273,14 @@ lemma projectiveLineFieldPoint_bijective :
       rw [this]
   · have hsub : ∀ x : Spec (.of K), x = x₀ := fun x ↦ Subsingleton.elim (α := PrimeSpectrum K) _ _
     by_cases hx : g.1.base x₀ ∈ (ProjectiveLine.affineChart (Spec (.of k))).opensRange
-    · have hr : Set.range g.1.base ⊆ Set.range (ProjectiveLine.affineChart (Spec (.of k))).base := by
+    · have hr :
+          Set.range g.1.base ⊆ Set.range (ProjectiveLine.affineChart (Spec (.of k))).base := by
         rintro _ ⟨x, rfl⟩
         rw [hsub x]
         exact hx
       set h := IsOpenImmersion.lift (ProjectiveLine.affineChart _) g.1 hr
-      have hh : h ≫ affineLine k ↘ Spec (.of k) = Spec.map (CommRingCat.ofHom (algebraMap k K)) := by
+      have hh :
+          h ≫ affineLine k ↘ Spec (.of k) = Spec.map (CommRingCat.ofHom (algebraMap k K)) := by
         rw [← ProjectiveLine.affineChart_over, ← Category.assoc, IsOpenImmersion.lift_fac, g.2]
       refine ⟨some (affineLineFieldPointsEquiv k K ⟨h, hh⟩), Subtype.ext ?_⟩
       change ((affineLineFieldPointsEquiv k K).symm _).1 ≫ _ = _
@@ -295,7 +297,8 @@ lemma projectiveLineFieldPoint_bijective :
         rw [hsub x]
         exact hx'
       set h := IsOpenImmersion.lift (ProjectiveLine.infinityChart _) g.1 hr
-      have hh : h ≫ affineLine k ↘ Spec (.of k) = Spec.map (CommRingCat.ofHom (algebraMap k K)) := by
+      have hh :
+          h ≫ affineLine k ↘ Spec (.of k) = Spec.map (CommRingCat.ofHom (algebraMap k K)) := by
         rw [← ProjectiveLine.infinityChart_over, ← Category.assoc, IsOpenImmersion.lift_fac, g.2]
       set c := affineLineFieldPointsEquiv k K ⟨h, hh⟩
       have hc : affineLinePoint k c = h :=

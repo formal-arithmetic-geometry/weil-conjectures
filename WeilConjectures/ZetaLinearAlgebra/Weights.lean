@@ -60,7 +60,7 @@ open scoped Polynomial
 
 /-- `P` is pure of weight `w` for `q` if `P (0) = 1` and every complex root `z` of `P`
 satisfies `‖z‖ = q ^ (-w / 2)`; equivalently every reciprocal root has absolute value
-`q ^ (w / 2)`. -/
+`q ^ (w / 2)` (blueprint `sk-def-roots`). -/
 def Polynomial.IsPureOfWeight (q w : ℕ) (P : Polynomial ℂ) : Prop :=
   P.coeff 0 = 1 ∧ ∀ z ∈ P.roots, ‖z‖ = (q : ℝ) ^ (-(w : ℝ) / 2)
 
@@ -73,12 +73,13 @@ def Polynomial.IsMixedOfWeightLE (q w : ℕ) (P : Polynomial ℂ) : Prop :=
 
 /-- `z : ℂ` is *universally* pure of weight `w`: it is algebraic over `ℚ` and every
 conjugate of `z` — every complex root of its minimal polynomial over `ℚ` — has absolute
-value `q ^ (-w/2)`. This is strictly stronger than purity under one embedding. -/
+value `q ^ (-w/2)`. This is strictly stronger than purity under one embedding (blueprint
+`sk-def-roots`). -/
 def IsUniversallyPureOfWeight (q w : ℕ) (z : ℂ) : Prop :=
   IsAlgebraic ℚ z ∧ ∀ y ∈ ((minpoly ℚ z).map (algebraMap ℚ ℂ)).roots,
     ‖y‖ = (q : ℝ) ^ (-(w : ℝ) / 2)
 
-/-- Every reciprocal root of `P` is universally pure of weight `w`. -/
+/-- Every reciprocal root of `P` is universally pure of weight `w` (blueprint `sk-def-roots`). -/
 def Polynomial.IsUniversallyPureOfWeight (q w : ℕ) (P : Polynomial ℂ) : Prop :=
   P.coeff 0 = 1 ∧ ∀ z ∈ P.roots, _root_.IsUniversallyPureOfWeight q w z
 

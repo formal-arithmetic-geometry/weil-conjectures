@@ -84,7 +84,8 @@ theorem mem_roots_reverse_iff {P : K[X]} (hP : P ≠ 0) {α : K} :
   exact ⟨fun h ↦ ⟨ne_zero_of_mem_roots_reverse h, (key (ne_zero_of_mem_roots_reverse h)).1 h⟩,
     fun ⟨hα, h⟩ ↦ (key hα).2 h⟩
 
-/-- Blueprint `def-weil-ordinary-reciprocal-roots`: let `P` be a polynomial with `P(0) = 1`.
+/-- Blueprints `def-weil-ordinary-reciprocal-roots` and `sk-def-roots` (ordinary and reciprocal
+roots): let `P` be a polynomial with `P(0) = 1`.
 1. Its *ordinary roots* (the roots of `P`) are nonzero.
 2. Its *reciprocal roots*, the nonzero `α` with `P(α⁻¹) = 0`, are the roots of `P.reverse`.
 3. If `P` splits (e.g. over an algebraically closed field), the reciprocal roots are the
@@ -154,7 +155,8 @@ end LinearMap
 
 namespace PowerSeries
 
-/-- Blueprint `def-weil-normalized-integral-fraction`: a *normalized reduced integral
+/-- Blueprints `def-weil-normalized-integral-fraction` and `sk-def-roots`: a *normalized reduced
+integral
 presentation* of a power series `Z ∈ ℚ⟦X⟧` is a pair `A, B ∈ ℤ[X]` with `A(0) = B(0) = 1`, `A`
 and `B` coprime in `ℚ[X]`, and `Z * B = A` as power series. -/
 def IsNormalizedIntegralFraction (Z : ℚ⟦X⟧) (A B : ℤ[X]) : Prop :=
