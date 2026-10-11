@@ -1,11 +1,11 @@
 # Work queue
 
-272 items; claim with `tools/claim.py next <group> [--stage N]`.
+265 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (272)
+## Stage 2: nodes to state (265)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -15,7 +15,6 @@
 | `lem-galois-inverse-image-representable` | 1 | state |
 | `lem-pc-chow-relative-ample` | 1 | state |
 | `lem-pc-coherent-property-devissage` | 1 | state |
-| `lem-pc-coherent-property-irreducible` | 1 | state |
 | `lem-pc-derived-tensor-transitivity` | 1 | state |
 | `lem-pc-finite-flat-proper-support-descent` | 1 | state |
 | `lem-pc-module-pullback-identity-composition` | 1 | state |
@@ -33,7 +32,6 @@
 | `lem-weil-pbc-coherent-property-devissage-integral-subschemes` | 1 | state |
 | `lem-weil-pbc-coherent-support-union-exact-sequence` | 1 | state |
 | `lem-weil-pbc-etale-geometric-fibre-inverse-image-constant` | 1 | state |
-| `lem-weil-pbc-etale-inverse-image-section-description` | 1 | state |
 | `lem-weil-pbc-etale-sections-equal-open` | 1 | state |
 | `lem-weil-pbc-etale-sections-flat-qc-connected-fibres` | 1 | state |
 | `lem-weil-pbc-etale-sections-fpqc-descent` | 1 | state |
@@ -54,19 +52,14 @@
 | `lem-weil-pbc-sets-etale-inverse-image-stalk-germ` | 1 | state |
 | `lem-weil-pbc-sets-etale-section-continuity` | 1 | state |
 | `lem-weil-pbc-sets-finite-surjective-descent` | 1 | state |
-| `lem-weil-pbc-sheaf-isomorphism-local-open-cover` | 1 | state |
 | `lem-weil-pbc-sheaves-directed-colimit-sections` | 1 | state |
-| `lem-weil-pbc-simplicial-set-glue-simplex` | 1 | state |
-| `lem-weil-pbc-smooth-at-prime-free-conormal-basis` | 1 | state |
 | `lem-weil-pbc-smooth-differentials-free-rank-fibre-dimension` | 1 | state |
 | `lem-weil-pbc-smooth-fibre-regular-local` | 1 | state |
 | `lem-weil-pbc-smooth-free-differentials-strictly-standard-power` | 1 | state |
 | `lem-weil-pbc-smooth-localization-conormal-split` | 1 | state |
-| `lem-weil-pbc-smooth-over-field-dimension-differentials` | 1 | state |
 | `lem-weil-pbc-smooth-over-field-regular-local` | 1 | state |
 | `lem-weil-pbc-smooth-over-normal-ring-normal` | 1 | state |
 | `lem-weil-pbc-smooth-over-product-ring` | 1 | state |
-| `lem-weil-pbc-smooth-product-algebra` | 1 | state |
 | `lem-weil-pbc-smooth-retract-relative-global-complete-intersection` | 1 | state |
 | `lem-weil-pbc-smooth-retract-standard-smooth` | 1 | state |
 | `lem-weil-pbc-smooth-ring-map-iff-smooth-affine` | 1 | state |
