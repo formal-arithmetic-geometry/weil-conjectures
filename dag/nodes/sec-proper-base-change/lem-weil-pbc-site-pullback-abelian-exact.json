@@ -174,5 +174,23 @@
   "item": "lem-weil-pbc-site-pullback-abelian-exact",
   "worker": "stage1",
   "summary": "Checked against Modules on Sites 04JC (first assertion and first paragraph of proof), Sites 00YR/00YV(2), 00W2, Modules on Sites 03CO, 03DC; tags verified in stacks-project/tags/tags (04JC lemma-flat-pullback-exact, 00YR section-sheaves-algebraic-structures, 00YV proposition-functoriality-algebraic-structures-topoi, 00W2 lemma-limit-sheaf, 03CO lemma-limits-colimits-abelian-sheaves, 03DC lemma-exactness-pushforward-pullback, 00X1 definition-morphism-sites). The definition node (def-weil-pbc-sites-and-cohomology (3)) already includes exactness of u_s on sheaves of sets (Stacks 00X1) and asserts the underlying-sets identification for the abelian f^{-1}; the proof derives the abelian statement from the set one: (1) definitions; (2) abelian f^{-1} is naturally isomorphic to the lift L^gr of the set f^{-1} to abelian group objects (adjunction-lifts lemma + uniqueness of left adjoints); (3) finite limits via sectionwise limits of sheaves of sets and of abelian sheaves; (4) colimits since f^{-1} is a left adjoint; (5) additivity from the construction of L^gr; (6) kernels, cokernels, short and long exact sequences. Statement kept. One new node: lem-weil-pbc-site-sheaf-sets-limits-sectionwise (Stacks 00W2, Mathlib leaf). The guessed tags 03A4 (sites-modules-section-phantom), 00X6 (proposition-get-morphism) and 00WJ (sheafification exact) are not needed by this route: exactness of u_s on sets is part of the definition 00X1."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SitePullbackAbelianExact",
+  "declaration": "CategoryTheory.sitePullback_abelian_exact",
+  "file": "lean/Sheaf/CategoryTheory/SitePullbackAbelianExact.lean",
+  "statement": "theorem sitePullback_abelian_exact {C D : Type u} [SmallCategory C] [SmallCategory D] (J : Precoverage C) (K : Precoverage D) [J.HasIsos] [J.IsStableUnderComposition] [J.IsStableUnderBaseChange] [J.HasPullbacks] [K.HasIsos] [K.IsStableUnderComposition] [K.IsStableUnderBaseChange] [K.HasPullbacks] (U : C ⥤ D) (hcover : ∀ (X : C) (R : Presieve X), R ∈ J X → R.map U ∈ K (U.obj X)) (hpullback : ∀ (X Y Z : C) (R : Presieve X), R ∈ J X → ∀ (f : Y ⟶ X) (g : Z ⟶ X), R f → PreservesLimit (cospan f g) U) [U.IsContinuous J.toGrothendieck K.toGrothendieck] [PreservesFiniteLimits (sheafPullback U (Type u) J.toGrothendieck K.toGrothendieck)] [PreservesFiniteColimits (sheafPullback U (Type u) J.toGrothendieck K.toGrothendieck)] : ∃ (_ : (sheafPullback U AddCommGrpCat.{u} J.toGrothendieck K.toGrothendieck).Additive), PreservesFiniteLimits (sheafPullback U AddCommGrpCat.{u} J.toGrothendieck K.toGrothendieck) ∧ PreservesFiniteColimits (sheafPullback U AddCommGrpCat.{u} J.toGrothendieck K.toGrothendieck) ∧ (∀ S : ShortComplex (Sheaf J.toGrothendieck AddCommGrpCat.{u}), S.ShortExact → (S.map (sheafPullback U AddCommGrpCat.{u} J.toGrothendieck K.toGrothendieck)).ShortExact) ∧ (∀ S : ShortComplex (Sheaf J.toGrothendieck AddCommGrpCat.{u}), S.Exact → (S.map (sheafPullback U AddCommGrpCat.{u} J.toGrothendieck K.toGrothendieck)).Exact)",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "F1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }
