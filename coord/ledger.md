@@ -5666,3 +5666,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 19:40 L: merged deliver/H1/lem-sc-cech-h1-injective (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.CechH1Injective AlgebraicGeometry.Scheme.Modules.cechH1_injective)
 - 19:41 L: merged deliver/T1/lem-weil-pbc-colimit-of-sites-cech-complex (stage 2; reviewer PASS; first push; Sheaf.CategoryTheory.ColimitSiteCechComplex CategoryTheory.colimitSite_cech_complex_isIso)
 - 19:43 L: merged deliver/T1/lem-sc-constant-subsheaf-finite-filtration (stage 2; reviewer PASS; first push; Sheaf.Topology.ConstantSubsheafFiniteFiltration TopCat.Sheaf.constantSubsheaf_finite_filtration)
+- 19:43 L: returned deliver/C1/lem-pc-affine-morphism-hom-out-of-perfect (reviewer RETURN: (reviewer R-sub-A, head 03f724ac9) The earlier return (61a43ae6c) is not repaired: the arbitrary model isomorphisms were)
