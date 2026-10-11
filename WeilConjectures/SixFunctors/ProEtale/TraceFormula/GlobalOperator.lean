@@ -171,6 +171,22 @@ lemma properComparison_comp_inv_app_hom (f : X ⟶ Y) (g : Y ⟶ Z) (hf : IsGeom
   rw [reassoc_of% e₁, reassoc_of% e₂, e₃]
   rfl
 
+
+/-- The inverse form of the field `properComparison_commShift`: the identification
+`Rf_* ≃ Rf_!` commutes with the shifts. -/
+lemma properComparison_inv_commShift (f : X ⟶ Y) (hf : IsGeometricHom s f)
+    [HasCompactification f] [IsProper f] (K : Ctf A X) (n : ℤ) :
+    (((lowerStar A f).rightDerivedFunctor).commShiftIso n).hom.app K.obj ≫
+        ((G.properComparison f hf).inv.app K).hom⟦n⟧' =
+      ((G.properComparison f hf).inv.app
+          ⟨K.obj⟦n⟧, ProEtale.DerivedCategory.constructibleFiniteTor.shift K.property n⟩).hom ≫
+        ((rightDerivedLowerShriek A f).commShiftIso n).hom.app K.obj := by
+  rw [← cancel_epi ((G.properComparison f hf).hom.app
+    ⟨K.obj⟦n⟧, ProEtale.DerivedCategory.constructibleFiniteTor.shift K.property n⟩).hom,
+    reassoc_of% (G.properComparison_commShift f hf K n), ← Functor.map_comp,
+    ← ObjectProperty.FullSubcategory.comp_hom, Iso.hom_inv_id_app,
+    ← ObjectProperty.FullSubcategory.comp_hom_assoc, Iso.hom_inv_id_app]
+  simp
 end Naturality
 
 /-- The unit of `L(f ≫ g)^* ⊣ R(f ≫ g)_*` is the composite of the units of `Lg^* ⊣ Rg_*` and
@@ -313,6 +329,68 @@ theorem properPullback_comp (h : X' ⟶ X) (h' : X'' ⟶ X') [IsProper h] [IsPro
   erw [Category.id_comp]
   rfl
 
+
+/-- The proper pullback commutes with the shifts: the pullback at `K⟦n⟧`, read through the
+commutation of `Lh^*`, `Ra_{X'!}` and `Ra_{X!}` with the shift, is the shift of the pullback
+at `K`. -/
+lemma properPullback_commShift (h : X' ⟶ X) [IsProper h] (hh : h ≫ aX = aX')
+    {K : DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)} (hK : G.ctf X K) (n : ℤ) :
+    G.properPullback h hh (ProEtale.DerivedCategory.constructibleFiniteTor.shift hK n) ≫
+        (rightDerivedLowerShriek A aX').map
+          ((((upperStar A h).leftDerivedFunctor).commShiftIso n).hom.app K) ≫
+        ((rightDerivedLowerShriek A aX').commShiftIso n).hom.app
+          (((upperStar A h).leftDerivedFunctor).obj K) =
+      ((rightDerivedLowerShriek A aX).commShiftIso n).hom.app K ≫
+        (G.properPullback h hh hK)⟦n⟧' := by
+  subst hh
+  simp only [properPullback, rightDerivedLowerShriekCongr_rfl, Iso.refl_hom, NatTrans.id_app,
+    Category.assoc]
+  erw [Category.id_comp, Category.comp_id]
+  have hL : G.ctf X' (((upperStar A h).leftDerivedFunctor).obj K) :=
+    G.ctf_upperStar h (.mk (aY := aX) rfl) hK
+  have hLn : G.ctf X' (((upperStar A h).leftDerivedFunctor).obj (K⟦n⟧)) :=
+    G.ctf_upperStar h (.mk (aY := aX) rfl) (ProEtale.DerivedCategory.constructibleFiniteTor.shift hK n)
+  have u := (derivedUpperStarLowerStarAdjunction A h).unit_app_commShiftIso_hom_app ℤ n K
+  rw [Functor.commShiftIso_comp_hom_app] at u
+  have key : (derivedUpperStarLowerStarAdjunction A h).unit.app (K⟦n⟧) ≫
+      ((G.properComparison h (.mk (aY := aX) rfl)).inv.app ⟨_, hLn⟩).hom ≫
+      (rightDerivedLowerShriek A h).map
+        ((((upperStar A h).leftDerivedFunctor).commShiftIso n).hom.app K) ≫
+      ((rightDerivedLowerShriek A h).commShiftIso n).hom.app
+        (((upperStar A h).leftDerivedFunctor).obj K) =
+      ((derivedUpperStarLowerStarAdjunction A h).unit.app K)⟦n⟧' ≫
+        ((G.properComparison h (.mk (aY := aX) rfl)).inv.app ⟨_, hL⟩).hom⟦n⟧' := by
+    rw [← G.properComparison_inv_app_naturality_assoc h _ (M := ⟨_, hLn⟩)
+      (M' := ⟨_, ProEtale.DerivedCategory.constructibleFiniteTor.shift hL n⟩)
+      ((((upperStar A h).leftDerivedFunctor).commShiftIso n).hom.app K),
+      ← G.properComparison_inv_commShift h _ ⟨_, hL⟩ n, reassoc_of% u]
+  rw [← G.lowerShriekComp_hom_app_naturality_assoc h aX _ _ _ (M := ⟨_, hLn⟩)
+      (M' := ⟨_, ProEtale.DerivedCategory.constructibleFiniteTor.shift hL n⟩)
+      ((((upperStar A h).leftDerivedFunctor).commShiftIso n).hom.app K),
+    G.lowerShriekComp_commShift h aX _ _ _ ⟨_, hL⟩ n]
+  simp only [← Functor.map_comp_assoc]
+  rw [key]
+  have n₁ : (rightDerivedLowerShriek A aX).map
+        (((G.properComparison h (.mk (aY := aX) rfl)).inv.app ⟨_, hL⟩).hom⟦n⟧') ≫
+      ((rightDerivedLowerShriek A aX).commShiftIso n).hom.app
+        ((rightDerivedLowerShriek A h).obj (((upperStar A h).leftDerivedFunctor).obj K)) =
+      ((rightDerivedLowerShriek A aX).commShiftIso n).hom.app
+          (((lowerStar A h).rightDerivedFunctor).obj
+            (((upperStar A h).leftDerivedFunctor).obj K)) ≫
+        ((rightDerivedLowerShriek A aX).map
+          ((G.properComparison h (.mk (aY := aX) rfl)).inv.app ⟨_, hL⟩).hom)⟦n⟧' :=
+    Functor.commShiftIso_hom_naturality _ _ _
+  simp only [Functor.map_comp, Category.assoc]
+  have n₂ : (rightDerivedLowerShriek A aX).map
+        (((derivedUpperStarLowerStarAdjunction A h).unit.app K)⟦n⟧') ≫
+      ((rightDerivedLowerShriek A aX).commShiftIso n).hom.app
+          (((lowerStar A h).rightDerivedFunctor).obj
+            (((upperStar A h).leftDerivedFunctor).obj K)) =
+      ((rightDerivedLowerShriek A aX).commShiftIso n).hom.app K ≫
+        ((rightDerivedLowerShriek A aX).map
+          ((derivedUpperStarLowerStarAdjunction A h).unit.app K))⟦n⟧' :=
+    Functor.commShiftIso_hom_naturality _ _ _
+  rw [reassoc_of% n₁, reassoc_of% n₂]
 end ProperPullback
 
 section ExceptionalPushforward

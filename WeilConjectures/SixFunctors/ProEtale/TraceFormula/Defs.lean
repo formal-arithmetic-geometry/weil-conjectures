@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Scheme
 public import WeilConjectures.SixFunctors.ProEtale.Derived.Hom
+public import WeilConjectures.SixFunctors.ProEtale.Derived.Shift
 public import WeilConjectures.SixFunctors.ProEtale.Derived.TorAmplitude
 public import WeilConjectures.SixFunctors.ProEtale.Derived.UpperLowerStar
 public import WeilConjectures.SixFunctors.ProEtale.Derived.UpperShriek
@@ -745,6 +746,33 @@ structure GeometricOperations (s : Scheme.{u}) extends GeometricCoefficients A s
               (.mk (aY := a) rfl))).app ⟨dualizing a, ctf_dualizing a⟩) ≪≫
         (rightDerivedUpperShriek A f).mapIso (dualizingComp g a) ≪≫ dualizingComp f (g ≫ a) ≪≫
         eqToIso (congrArg dualizing (Category.assoc f g a).symm)
+  /-- `properComparison` is compatible with the shifts: the identification `Rf_! ≃ Rf_*` at
+  `K⟦n⟧` is, through the commutation of `Rf_!` and `Rf_*` with the shift, the shift of the
+  identification at `K`. The two functors are triangulated and the identification is one of
+  triangulated functors. -/
+  properComparison_commShift {X Y : Scheme.{u}} (f : X ⟶ Y) (hf : IsGeometricHom s f)
+      [HasCompactification f] [IsProper f] (K : Ctf A X) (n : ℤ) :
+    ((properComparison f hf).hom.app
+          ⟨K.obj⟦n⟧, ProEtale.DerivedCategory.constructibleFiniteTor.shift K.property n⟩).hom ≫
+        (((lowerStar A f).rightDerivedFunctor).commShiftIso n).hom.app K.obj =
+      ((rightDerivedLowerShriek A f).commShiftIso n).hom.app K.obj ≫
+        ((properComparison f hf).hom.app K).hom⟦n⟧'
+  /-- `lowerShriekComp` is compatible with the shifts: the composition `Rg_! Rf_! ≃ R(f ≫ g)_!`
+  at `K⟦n⟧` is, through the commutation of the functors with the shift, the shift of the
+  composition at `K`. The functors are triangulated and the composition is an isomorphism of
+  triangulated functors. -/
+  lowerShriekComp_commShift {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
+      (hf : IsGeometricHom s f) (hg : IsGeometricHom s g) (hfg : IsGeometricHom s (f ≫ g))
+      [HasCompactification f] [HasCompactification g] [HasCompactification (f ≫ g)]
+      (K : Ctf A X) (n : ℤ) :
+    ((lowerShriekComp f g hf hg hfg).hom.app
+          ⟨K.obj⟦n⟧, ProEtale.DerivedCategory.constructibleFiniteTor.shift K.property n⟩).hom ≫
+        ((rightDerivedLowerShriek A (f ≫ g)).commShiftIso n).hom.app K.obj =
+      (rightDerivedLowerShriek A g).map
+          (((rightDerivedLowerShriek A f).commShiftIso n).hom.app K.obj) ≫
+        ((rightDerivedLowerShriek A g).commShiftIso n).hom.app
+          ((rightDerivedLowerShriek A f).obj K.obj) ≫
+        ((lowerShriekComp f g hf hg hfg).hom.app K).hom⟦n⟧'
   /-- `!`-base change along a Cartesian square of geometric schemes: `Lg^* Rf_! ≃ Rf'_! Lg'^*`
   on `Dᵇctf`, for
 
