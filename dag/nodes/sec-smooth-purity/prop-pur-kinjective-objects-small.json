@@ -21,9 +21,45 @@
  "stmt_deps": [
   "def-sp-grothendieck-abelian"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write the colimit of the monomorphism chain as the union B = colim_{\\beta<\\alpha} B_\\beta, viewing each B_\\beta as a subobject of B. For a morphism f:M\\to B, the inverse images M_\\beta=f^{-1}(B_\\beta) form an increasing family of subobjects of M, and AB5 gives colim_{\\beta<\\alpha} M_\\beta = f^{-1}(colim_{\\beta<\\alpha}B_\\beta)=M.",
+   "uses": [
+    "def-sp-grothendieck-abelian"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/injectives.tex",
+    "place": "Proposition proposition-objects-are-small, proof (AB5 inverse-image equality)"
+   }
+  },
+  {
+   "text": "There are at most |M| distinct subobjects among the M_\\beta, because |M| is the cardinality of the set of subobjects of M. Choose a set S of indices of cardinality at most |M| that contains an index for every distinct M_\\beta. Since cof(\\alpha)>|M|, S has an upper bound \\widetilde{\\alpha}<\\alpha. Monotonicity then gives M_\\beta\\subseteq M_{\\widetilde{\\alpha}} for every \\beta, so the union equality in the preceding step forces M_{\\widetilde{\\alpha}}=M.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/injectives.tex",
+    "place": "Proposition proposition-objects-are-small, proof (cardinality and cofinality argument)"
+   }
+  },
+  {
+   "text": "The equality M_{\\widetilde{\\alpha}}=M means that f(M) is contained in B_{\\widetilde{\\alpha}}. Because B_{\\widetilde{\\alpha}}\\hookrightarrow B is monic, f factors through the structure map B_{\\widetilde{\\alpha}}\\to colim_{\\beta<\\alpha}B_\\beta. Thus M is \\alpha-small with respect to monomorphisms.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/injectives.tex",
+    "place": "Proposition proposition-objects-are-small, proof (factorization conclusion)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sp-grothendieck-abelian"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/injectives.tex",
+  "place": "Proposition proposition-objects-are-small"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -48,12 +84,28 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pur-kinjective-degreewise-existence",
   "by": "worker",
   "date": "2026-10-11"
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-def-sf-operations"
+ "unit": "sk-def-sf-operations",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "prop-pur-kinjective-objects-small",
+  "worker": "stage1",
+  "summary": "Checked the Stacks proposition and expanded its proof into the AB5 inverse-image, cardinality/cofinality, and factorization steps. No new node was created because every auxiliary fact is elementary from the Grothendieck-category hypotheses and the item's size definition.",
+  "blueprint": "Realizes the factorization-through-an-earlier-transfinite-stage clause in the theorem construction of def-weil-derived-pullback-tensor-hom.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-kos0028",
+  "group": "C1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-kos0028 (reviewer sub-agent of L); spot-checked: Read Stacks proposition-objects-are-small and proof: statement (size defined inline as Stacks definition-size, cof(alpha)>|M|, mono chain, factorization) matches; step 1 AB5 inverse-image equality and B_beta->B mono from exact filtered colimits of [def-sp-grothendieck-abelian] (C1/C4 ok); step 2 cardinality/cofinality bound written out, elementary; step 3 factorization through pullback, elementary; citer lem-pur-kinjective-degreewise-existence uses exactly this clause (M subset U with |M|<=|U|<cof(alpha), chain T_gamma^n with mono transitions, colim at limit alpha) (C4 ok); no duplicate small-object node (class b/d grep). Second reading's claimed edits (Tag 079F source, created.item change) are not in the diff; created.item correctly remains the creating item. No repairs."
+ }
 }
