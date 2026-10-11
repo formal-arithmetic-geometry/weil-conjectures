@@ -6,9 +6,10 @@ Authors: Claude
 module
 
 public import WeilConjectures.AlgebraicGeometry.AbelianVariety.Defs
+public import WeilConjectures.CategoryTheory.DerivedCategory.InjectiveCoseparator
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.FullyFaithful
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triangulated
-public import WeilConjectures.CategoryTheory.DerivedCategory.InjectiveCoseparator
+public import WeilConjectures.RepresentationTheory.GroupCohomology.CupNonvanishing
 public import WeilConjectures.SixFunctors.ProEtale.Derived.ClopenIdempotent
 public import WeilConjectures.SixFunctors.ProEtale.ExceptionalAdjoint
 
@@ -166,22 +167,43 @@ section AbelianVariety
 variable (Λ : Type (u + 1)) [Field Λ] {k : Type u} [Field k] [IsAlgClosed k]
   (E : Over (Spec (.of k))) [GrpObj E] [IsAbelianVariety E]
 
-/-- Blueprint `sk-rem-sf-fullcd-scope`, the counterexample sheaf: for an elliptic curve (more
-generally an abelian variety of positive dimension) `E` over an algebraically closed field `k`
-and a field `Λ`, there is a pro-étale sheaf `F` of `Λ`-modules on `E` whose pro-étale cohomology
-`Hⁿ(E_proét, F) = Hⁿ(Ra_{E*} F)` is nonzero in every degree `n ≥ 1`.
+/-- Blueprint `sk-rem-sf-fullcd-scope`, the cohomology of the counterexample sheaf: for an
+elliptic curve (more generally an abelian variety of positive dimension) `E` over an
+algebraically closed field `k` and a field `Λ`, there is a pro-étale sheaf `F` of `Λ`-modules on
+`E` with `Hⁿ(E_proét, F) ≅ Hⁿ(H, Λ)` for `n ≥ 1`, where `H ≅ ⊕_ℕ ℤ` acts trivially on `Λ`. Here
+`Hⁿ(E_proét, F) = Γ(Spec k, Rⁿa_{E*} F)`, global sections on `Spec k` being exact.
 
 The sheaf is `F = V_H(Λ)`, for `V_H` the right adjoint of evaluation at the pro-étale geometric
 generic point `T = Spec k(E)^sep`, viewed as a functor to modules over the group ring of an
 abstract subgroup `H ≅ ⊕_ℕ ℤ` of `Gal(k(E)^sep / k(E))` acting freely on `Hom_E(T, W)` for every
-affine weakly contractible `W`; then `Hⁿ(E_proét, F) ≅ Hⁿ(H, Λ) ≠ 0`. -/
+affine weakly contractible `W`. -/
+theorem exists_nonempty_iso_groupCohomology (hE : 0 < IsAbelianVariety.dim E) :
+    ∃ F : Sheaf (Scheme.ProEt.topology E.left) (ModuleCat.{u + 1} Λ), ∀ n : ℕ, 0 < n →
+      Nonempty ((Sheaf.Γ (Scheme.ProEt.topology (Spec (.of k))) (ModuleCat.{u + 1} Λ)).obj
+        ((DerivedCategory.homologyFunctor _ n).obj
+          ((R((E.hom)_*[ModuleCat.{u + 1} Λ])).obj ((DerivedCategory.singleFunctor _ 0).obj F))) ≅
+        groupCohomology
+          (Rep.trivial Λ (Multiplicative (ULift.{u + 1} ℕ →₀ ℤ)) Λ) n) :=
+  sorry
+
+/-- Blueprint `sk-rem-sf-fullcd-scope`, the counterexample sheaf: for an elliptic curve (more
+generally an abelian variety of positive dimension) `E` over an algebraically closed field `k`
+and a field `Λ`, there is a pro-étale sheaf `F` of `Λ`-modules on `E` whose pro-étale cohomology
+`Hⁿ(E_proét, F) = Hⁿ(Ra_{E*} F)` is nonzero in every degree `n ≥ 1`: by
+`AlgebraicGeometry.ProEtale.exists_nonempty_iso_groupCohomology` its global sections are
+`Hⁿ(⊕_ℕ ℤ, Λ)`, which is nonzero (`groupCohomology.not_isZero_groupCohomology_finsupp`). -/
 theorem exists_forall_not_isZero_homology_rightDerivedLowerStar
     (hE : 0 < IsAbelianVariety.dim E) :
     ∃ F : Sheaf (Scheme.ProEt.topology E.left) (ModuleCat.{u + 1} Λ), ∀ n : ℤ, 0 < n →
       ¬ IsZero ((DerivedCategory.homologyFunctor _ n).obj
         ((R((E.hom)_*[ModuleCat.{u + 1} Λ])).obj
-          ((DerivedCategory.singleFunctor _ 0).obj F))) :=
-  sorry
+          ((DerivedCategory.singleFunctor _ 0).obj F))) := by
+  obtain ⟨F, hF⟩ := exists_nonempty_iso_groupCohomology Λ E hE
+  refine ⟨F, fun n hn hZ ↦ ?_⟩
+  obtain ⟨m, rfl⟩ : ∃ m : ℕ, n = ((m + 1 : ℕ) : ℤ) := ⟨n.toNat - 1, by omega⟩
+  obtain ⟨e⟩ := hF (m + 1) (by omega)
+  exact groupCohomology.not_isZero_groupCohomology_finsupp (k := Λ) (ULift.{u + 1} ℕ) m
+    (((Sheaf.Γ _ _).map_isZero hZ).of_iso e.symm)
 
 /-- Blueprint `sk-rem-sf-fullcd-scope` (i): for the structure morphism `a_E` of an elliptic
 curve (more generally an abelian variety of positive dimension) over an algebraically closed
