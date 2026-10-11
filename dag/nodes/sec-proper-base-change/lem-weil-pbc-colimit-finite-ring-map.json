@@ -172,5 +172,24 @@
   "item": "lem-weil-pbc-colimit-finite-ring-map",
   "worker": "stage1",
   "summary": "Split in five steps along the proof of Stacks Algebra 07RG (tag verified: tags line 9866, algebra.tex line 47522). Statement kept (checked against the source; the node adds the explicit conventions of the sibling 07RI node). Step 1 (elementary) fixes the stage maps beta, gamma, their compatibilities with phi_i, and shows C_T is generated over B_T by the 1 (x) x_j; step 2 gets monic equations over B from finite => integral (Mathlib leaf lem-weil-pbc-finite-algebra-is-integral); steps 3-4 descend the coefficients and then the relations to a stage with parts (1) and (2) of lem-weil-pbc-directed-colimit-base-change-elementwise (00DD), with M_0 = B_0 and M_0 = C_0; step 5 concludes by the Mathlib leaf lem-weil-pbc-finite-of-integral-generators. No new node. Mathlib searched again (leansearch, leanfinder, grep; the item's earlier loogle search stands; a new loogle query was refused by the rate limit): no match. No Lean candidate in slopmaster2 (grep of WeilConjectures for 07RG / colimit finite / DirectLimit with Module.Finite found nothing relevant)."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.FiniteMapColimitDescent",
+  "declaration": "RingHom.exists_finite_tensorProductMap_of_colimit",
+  "file": "lean/Sheaf/RingTheory/FiniteMapColimitDescent.lean",
+  "statement": "theorem exists_finite_tensorProductMap_of_colimit {I : Type w} [Preorder I] [IsDirected I (· ≤ ·)] (F : I ⥤ CommRingCat.{u}) [HasColimit F] (i₀ : I) (B₀ : Type v) (C₀ : Type t) [CommRing B₀] [CommRing C₀] [Algebra (F.obj i₀) B₀] [Algebra (F.obj i₀) C₀] (φ₀ : B₀ →ₐ[F.obj i₀] C₀) (hft : φ₀.FiniteType) : letI : Algebra (F.obj i₀) (colimit F : CommRingCat.{u}) := (CommRingCat.Hom.hom (colimit.ι F i₀)).toAlgebra (Algebra.TensorProduct.map (AlgHom.id (F.obj i₀) (colimit F : CommRingCat.{u})) φ₀).Finite → ∃ (i : I) (h : i₀ ≤ i), letI : Algebra (F.obj i₀) (F.obj i) := (CommRingCat.Hom.hom (F.map (homOfLE h))).toAlgebra (Algebra.TensorProduct.map (AlgHom.id (F.obj i₀) (F.obj i)) φ₀).Finite",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-cfr1442"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-cfr1442",
+  "group": "J1",
+  "result": "fix",
+  "note": "directed set (Stacks 00D3 preorder: PartialOrder->Preorder FIX) with i0; F : I ⥤ CommRingCat, colimit F / colimit.ι (dep's colimit); B0,C0 comm A0-algebras; φ0 AlgHom with AlgHom.FiniteType; A, A_i as A0-algebras via colimit.ι / F.map (homOfLE h); φ, φ_i = TensorProduct.map id φ0; finiteness RingHom.Finite via AlgHom.Finite both sides; ∃ i ≥ i0"
  }
 }
