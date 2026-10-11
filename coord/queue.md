@@ -1,11 +1,11 @@
 # Work queue
 
-421 items; claim with `tools/claim.py next <group> [--stage N]`.
+414 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (421)
+## Stage 2: nodes to state (414)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -50,7 +50,6 @@
 | `lem-sc-hilbert-embedded-points-gluing` | 1 | state |
 | `lem-sc-koszul-regular-closed-immersion-perfect` | 1 | state |
 | `lem-sc-koszul-regular-sequence-dual-complex` | 1 | state |
-| `lem-sc-module-extension-by-zero-stalk-maps` | 1 | state |
 | `lem-sc-p1-ext-pushout-postcompose` | 1 | state |
 | `lem-sc-perfect-cut-complex-degree-zero` | 1 | state |
 | `lem-sc-perfect-degree-zero-fibre-criterion` | 1 | state |
@@ -73,20 +72,14 @@
 | `lem-weil-pbc-popescu-enlarge-solution-modulo` | 1 | state |
 | `lem-weil-pbc-popescu-solution-modulo-choose` | 1 | state |
 | `lem-weil-pbc-power-series-parameter-quotient` | 1 | state |
-| `lem-weil-pbc-projective-dimension-well-defined` | 1 | state |
 | `lem-weil-pbc-projective-space-functor-of-points` | 1 | state |
-| `lem-weil-pbc-proper-limit-noetherian` | 1 | state |
 | `lem-weil-pbc-purely-inseparable-base-change-local-ring` | 1 | state |
-| `lem-weil-pbc-purely-inseparable-integral-prime-unique` | 1 | state |
 | `lem-weil-pbc-purely-inseparable-pth-root-tower` | 1 | state |
 | `lem-weil-pbc-qcqs-higher-direct-image` | 1 | state |
 | `lem-weil-pbc-quasi-coherence-scalar-restriction` | 1 | state |
 | `lem-weil-pbc-quasi-coherent-affine-section-base-change` | 1 | state |
-| `lem-weil-pbc-quasi-coherent-algebra-affine-inclusion` | 1 | state |
-| `lem-weil-pbc-quasi-coherent-algebra-change-of-rings` | 1 | state |
 | `lem-weil-pbc-quasi-coherent-algebra-colimit` | 1 | state |
 | `lem-weil-pbc-quasi-coherent-algebra-kernel-image-ideal` | 1 | state |
-| `lem-weil-pbc-quasi-coherent-extension-qc-open` | 1 | state |
 | `lem-weil-pbc-quasi-coherent-finite-type-affine` | 1 | state |
 | `lem-weil-pbc-quasi-coherent-ideal-zero-set-affine` | 1 | state |
 | `lem-weil-pbc-quasi-coherent-iso-on-affine-cover` | 1 | state |
