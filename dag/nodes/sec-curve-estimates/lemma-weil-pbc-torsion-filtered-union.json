@@ -15,7 +15,8 @@
  "stmt_deps": [
   "def-weil-pbc-etale-sheaves",
   "def-pur-abelian-sheaf-kernel",
-  "def-weil-pbc-category-colimit"
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-torsion-etale-sheaf"
  ],
  "proof": [
   {
@@ -153,5 +154,22 @@
   "blueprint": "Steps 1-4 realize the whole of the blueprint proof of lemma-weil-pbc-torsion-filtered-union (detailed form): step 1 = 'Filteredness follows from the lcm property' and the transition maps of the short proof ('sends a section killed by n to the same section, now regarded as killed by mn'); step 2 = 'a section that is zero in F is already zero in every F[n], so it is a monomorphism' (made correct by exactness of filtered colimits); step 3 = 'Every local section of F is locally killed by some positive integer, hence lies in F[n] locally, so the canonical map to F is an epimorphism of sheaves' / 'sheafification preserves this local epimorphism'; step 4 = 'the sheaf axioms pass the local statements to global ones'."
  },
  "reviewed": "2026-10-10 L: 4 steps (the diagram over divisibility, mono by exactness of filtered colimits, epi by local surjectivity, mono + epi = iso); blueprint proof gap on the mono repaired; statement given its scheme X and the canonical map; 0 new nodes. The two sorry-free exists_isColimit declarations tagged with this id state only the existence of some such diagram, not this: not attached (right).",
- "lead_note": "2026-10-10 L: the same as (2) => (1) of lem-weil-pbc-torsion-sheaf-characterizations (unit sk-def-pbc); torsion is defined twice (def-weil-pbc-etale-sheaves: locally killed by n; def-weil-pbc-torsion-etale-sheaf: c_F an isomorphism). Kept as the unit sk-prop-h2 states it; to merge when sk-def-pbc is reviewed."
+ "lead_note": "2026-10-10 L: the same as (2) => (1) of lem-weil-pbc-torsion-sheaf-characterizations (unit sk-def-pbc); torsion is defined twice (def-weil-pbc-etale-sheaves: locally killed by n; def-weil-pbc-torsion-etale-sheaf: c_F an isomorphism). Kept as the unit sk-prop-h2 states it; to merge when sk-def-pbc is reviewed.",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.TorsionFilteredUnion",
+  "declaration": "AlgebraicGeometry.Scheme.isTorsionAbelianSheaf_of_isTorsion",
+  "file": "lean/Sheaf/AlgebraicGeometry/TorsionFilteredUnion.lean",
+  "statement": "theorem isTorsionAbelianSheaf_of_isTorsion {X : Scheme.{u}} (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (hF : F.IsTorsion) : IsTorsionAbelianSheaf F",
+  "branch": "sheaf-dag",
+  "by": "V1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-tfu2",
+  "group": "V1",
+  "result": "pass"
+ }
 }
