@@ -146,5 +146,24 @@
   "group": "M1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-pdc2 (reviewer sub-agent of L); spot-checked: Source: Stacks Tags 0478 (lemma-locally-finite-type-Jacobson) and 0A21 (lemma-dimension-locally-algebraic) with the Algebra finite-type Jacobson argument (00G1); the statement (k field, X locally of finite type, Z irreducible closed of positive topological dimension => infinitely many closed points of X in Z) agrees hypothesis by hypothesis and does not cite the creating item lem-sc-finite-type-nonclosed-closure-closed-points (no cycle; the audit's demand that the split carry the Jacobson argument is met). Step 1: lem-sc-dimension-locally-algebraic gives dim V = dim Z > 0 for the nonempty open V=U cap Z of Z; step 2: lem-sc-fg-domain-positive-dimension-infinite-maximals (true: f.g. domain with finitely many maximals is Jacobson with zero Jacobson radical, so a field) gives infinitely many maximals, lifted through R->R/I; step 3: lem-sc-affine-maximal-points-closed-in-lft-scheme (true, Jacobson; Mathlib: LocallyOfFiniteType.jacobsonSpace FiniteType.lean:117 + IsOpenEmbedding.preimage_closedPoints JacobsonSpace.lean:127, verified by sed, two declarations so kept unsplit). Small cases: k[t] (A^1) and Spec k. tool_uses lem-sc-dimension-locally-algebraic accepted as generic. FIX more, RETURN less: dag/nodes/sec-picard-framework/lem-sc-positive-dimensional-locally-algebraic-closed-points.json: proof[0].text/uses/proof_deps: step 1 called the coordinate ring of V a domain without fixing a scheme structure on Z (C1, a nonreduced structure gives no domain); now gives Z its reduced induced structure citing lem-weil-pbc-reduced-induced-closed-subscheme (off-unit generic tool, added to tool_uses), A=R/I with I radical and prime since V irreducible, finite type via def-weil-pbc-finite-type-algebra, Krull dimension via def-weil-pbc-krull-dimension-ring. Mathlib searches added by reviewer: lem-sc-fg-domain-positive-dimension-infinite-maximals.json: mathlib_searches: LeanFinder query, no match; lem-sc-affine-maximal-points-closed-in-lft-scheme.json: mathlib_searches: grep JacobsonSpace, no single-declaration match. Blueprint search 'infinitely many closed points': nothing relevant. Start 2026-10-10 16:55:01 UTC, end Sat Oct 10 04:56:17 PM UTC 2026.; 3 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.InfiniteClosedPointsInterOfTopologicalKrullDimPos",
+  "declaration": "AlgebraicGeometry.infinite_closedPoints_inter_of_topologicalKrullDim_pos",
+  "file": "lean/Sheaf/AlgebraicGeometry/InfiniteClosedPointsInterOfTopologicalKrullDimPos.lean",
+  "statement": "theorem infinite_closedPoints_inter_of_topologicalKrullDim_pos (k : Type u) [Field k] (X : Scheme.{u}) [X.Over (Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))] (Z : Set X) (hZclosed : IsClosed Z) (hZirred : IsIrreducible Z) (hZdim : 0 < topologicalKrullDim Z) : (Z ∩ closedPoints X).Infinite",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-pdl1222"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-pdl1222",
+  "group": "J1",
+  "result": "fix",
+  "note": "k field -> [Field k]; X lft over k -> [X.Over (Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))] (FIX from explicit f); Z irreducible closed -> IsClosed Z, IsIrreducible Z (nonempty); positive dim -> 0 < topologicalKrullDim Z (subspace); conclusion -> (Z ∩ closedPoints X).Infinite, ambient closedness"
  }
 }
