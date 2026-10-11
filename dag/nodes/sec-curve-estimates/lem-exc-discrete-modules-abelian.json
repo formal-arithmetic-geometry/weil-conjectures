@@ -24,7 +24,8 @@
  },
  "stmt_deps": [
   "def-sp-abelian",
-  "def-sp-injective-resolutions"
+  "def-sp-injective-resolutions",
+  "def-exc-discrete-modules-category"
  ],
  "proof": [
   {
@@ -121,5 +122,28 @@
   "group": "G1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-dma (reviewer sub-agent of L); spot-checked: Source: etale-cohomology.tex Definition 04JP (definition-G-module-continuous) and the following paragraph (continuity iff open stabilizers; Mod_G has enough injectives), and injectives.tex Tag 04JF (lemma-G-modules: Mod_{R,G} for any topological group G and ring R has functorial injective embeddings, via the right adjoint u(M)={x: open stabilizer} of the forgetful functor to Mod_{R[G]}). The item statement is unchanged; it is the specialization G profinite, A finite ring, objects A-modules with A-linear G-action with open stabilizers, morphisms equivariant A-linear maps, matching 04JP hypothesis by hypothesis. New node -structure (zero object, biproducts, kernels, cokernels with induced action, exactness on underlying modules) checked true: kernel elements keep their stabilizer, a class's stabilizer contains that of a representative, componentwise biproducts keep open stabilizers. Step 1 carried by -structure plus def-sp-abelian: a mono has zero kernel in C hence is injective, and is then the kernel of N -> N/f(M) since C-kernels are module kernels; dually for epis; preadditivity is obvious; a few lines from the cited statements (C2). New node -injective-embeddings is exactly 04JF specialized (true; enough injectives follows), and step 2 is carried by it plus def-sp-injective-resolutions. def-sp-abelian and def-sp-injective-resolutions are of unit sk-prop-av-pqf-finite, generic definitions used as black boxes, recorded as tool_uses (C8). New nodes: statement only, created.item the item, from = {node, place, via}, is null, same_as lists, three Mathlib searches each (leansearch unavailable 403, recorded); no sorry-free slopmaster2 declaration found by grep (EnoughInjectives occurrences concern sheaf categories only), so B10 does not apply. Small cases: trivial G, zero module, quotient by a stable submodule. Report present with Review by G1. Start 14:20 UTC, end 14:21 UTC."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.DiscreteModulesAbelian",
+  "declaration": "CategoryTheory.discreteModules_abelian",
+  "declarations": [
+   "CategoryTheory.discreteModuleActionProperties",
+   "CategoryTheory.discreteModules_abelian"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/DiscreteModulesAbelian.lean",
+  "statement": "theorem discreteModules_abelian (G : Type u) [TopologicalSpace G] [Group G] [IsTopologicalGroup G] [CompactSpace G] [T2Space G] [TotallyDisconnectedSpace G] (A : Type v) [Ring A] [Finite A] : ∃ (h : Abelian (Rep.DiscreteContinuousRep.{v, u, w} A G)), discreteModuleActionProperties.{u, v, w} A G h",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-dma0928"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-dma0928",
+  "group": "M1",
+  "result": "fix",
+  "note": "Rep.DiscreteContinuousRep.{v,u,w} A G landed+imported, no copy, stmt_deps +def-exc-discrete-modules-category; G profinite = TopGroup+Compact+T2+TotDisc; A Ring+Finite; w carriers; exists Abelian h; EnoughInjectives; F=iota>>forget2 preserves finite limits/colimits (module kernels/cokernels, induced action); ShortComplex exact iff map F exact; h0 PreservesZeroMorphisms harmless (zero morphisms unique); docstring both proof steps; fix: 2 unused imports, stale worker report"
  }
 }
