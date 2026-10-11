@@ -1,0 +1,123 @@
+{
+ "id": "def-sc-module-cech-comparison",
+ "kind": "definition",
+ "title": "Canonical module-valued Cech-to-cohomology comparison",
+ "status": "split",
+ "statement": "Let $X$ be a scheme [def-pc-scheme], $\\mathcal U:X=\\bigcup_{i\\in I}U_i$ an open cover, and $F$ an $\\mathcal O_X$-module [def-weil-sheaf-of-modules-category]. Form its Cech complex $C^\\bullet(\\mathcal U,F)$ [def-weil-pbc-site-cech-complex] in modules over $\\Gamma(X,\\mathcal O_X)$ by restricting scalars on each section module. Choose an injective resolution $F\\to I^\\bullet$ [def-sp-injective-resolutions]. The double complex with terms $C^p(\\mathcal U,I^q)$ has total complex $T$ [def-sp-double-complex-total], with differential $d_I+(-1)^q d_C$ when resolution degree is the first index. Restrictions of global sections define $\\alpha:\\Gamma(X,I^\\bullet)\\to T$ in Cech degree zero, and the augmentation defines $\\beta:C^\\bullet(\\mathcal U,F)\\to T$ in resolution degree zero. Since injective modules are Cech-acyclic, $H^n(\\alpha)$ is invertible. Define $c_{\\mathcal U,F}^n:H^n(C^\\bullet(\\mathcal U,F))\\to H^n(X,F)$ by $H^n(\\beta)$ followed by $H^n(\\alpha)^{-1}$ and the injective-resolution identification with module cohomology [def-sc-ringed-space-module-cohomology]. Equivalently, $c_{\\mathcal U,F}^n$ is the map whose composite with the identification $H^n(X,F)\\cong H^n(\\Gamma(X,I^\\bullet))$ and with $H^n(\\alpha)$ is $H^n(\\beta)$, for every injective resolution $F\\to I^\\bullet$. These are the canonical comparison maps of Stacks 01EQ.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-site-cech-complex",
+  "def-sp-injective-resolutions",
+  "def-sp-double-complex-total",
+  "def-sc-ringed-space-module-cohomology"
+ ],
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 01EQ, proof: the maps alpha and beta into the total complex of the Cech double complex of an injective resolution"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of Cech cohomology comparison isomorphism for quasi coherent modules on an affine intersection open cover",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TopCat.Sheaf.interUnionPullbackConeLift_left\", \"TopCat.Sheaf.interUnionPullbackConeLift_right\", \"TopCat.Sheaf.objSupIsoProdEqLocus_hom_fst\", \"TopCat.Sheaf.objSupIsoProdEqLocus_hom_snd\", \"TopCat.Sheaf.objSupIsoProdEqLocus_inv_eq_iff\", \"CategoryTheory.Sheaf.ΓRes_map_assoc\", \"TopCat.Presheaf.SheafConditionEqualizerProducts.w\", \"TopCat.Sheaf.objSupIsoProdEqLocus_inv_fst\"]}",
+   "date": "2026-10-11",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "cech.*(comparison|natural)|cechComplexFunctor",
+   "results": "{\"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Sites/SheafCohomology/Cech.lean\", \"Mathlib/CategoryTheory/Sites/SheafCohomology/Cech.lean\"]}",
+   "date": "2026-10-11",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "canonical Cech comparison map into right derived global sections of a sheaf of modules",
+   "results": "{\"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: Internal Server Error\", \"top\": []}",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "cech|Cech",
+   "results": "{\"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/LocalCohomology.lean\"]}",
+   "date": "2026-10-11",
+   "verdict": "no exact match"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sc-cech-comparison-natural",
+  "date": "2026-10-11",
+  "group": "K1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-p1-duality",
+   "place": "proof Step 1, coefficient naturality of the affine-cover Cech comparison, via the comparison-map construction of Stacks 01EQ",
+   "via": [
+    "lem-sc-cech-comparison-natural",
+    "lem-sc-p1-ext-locally-free-naturality"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ModuleCechComparison",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.IsModuleCechComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/ModuleCechComparison.lean",
+  "statement": "def IsModuleCechComparison {X : Scheme.{u}} {ι : Type u} (U : ι → X.Opens) (F : X.Modules) (p : ℕ) (c : ((CategoryTheory.cechComplexFunctor U).obj F.presheafModuleCat).homology p ⟶ (RingedSpace.moduleCohomology X.toRingedSpace p).obj F) : Prop",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-11",
+  "existing": false,
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.cechComplexFunctor_presheafModuleCat_additive",
+   "AlgebraicGeometry.Scheme.Modules.moduleCechDouble",
+   "AlgebraicGeometry.Scheme.Modules.moduleCech_top_restriction",
+   "AlgebraicGeometry.Scheme.Modules.moduleCechZero",
+   "AlgebraicGeometry.Scheme.Modules.moduleCechAlphaComponent",
+   "AlgebraicGeometry.Scheme.Modules.moduleCechAlpha_comm",
+   "AlgebraicGeometry.Scheme.Modules.moduleCechAlpha",
+   "AlgebraicGeometry.Scheme.Modules.moduleCechBetaComponent",
+   "AlgebraicGeometry.Scheme.Modules.moduleCechBeta_comm",
+   "AlgebraicGeometry.Scheme.Modules.moduleCechBeta",
+   "AlgebraicGeometry.Scheme.Modules.moduleCechAlpha_isIso",
+   "AlgebraicGeometry.Scheme.Modules.IsModuleCechComparison"
+  ],
+  "note": "R-ccn: the comparison is a characterizing predicate, not data: H^n(beta) followed by inv H^n(alpha) took inv of a sorried IsIso (Classical.choose, H5); the Cech complex of an O_X-module is the source's (cechComplexFunctor U).obj F.presheafModuleCat (nonempty_cechComplex_linearEquiv_H), the delivered moduleCechFunctor (a second spelling) is dropped",
+  "fixed_by": "R-ccn"
+ },
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-ccn",
+  "group": "K1",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-ccn",
+  "group": "K1",
+  "result": "fix",
+  "note": "R-ccn: H5 fixed (moduleCechComparison took inv of a sorried IsIso; now the predicate IsModuleCechComparison, for every injective resolution c ≫ isoRightDerivedObj.hom ≫ H(alpha) = H(beta)); second spelling moduleCechFunctor dropped for the source's (cechComplexFunctor U).obj F.presheafModuleCat; re-pointed lem-pc-cech-computes record reverted and its module left out; upstream 7d675a263 and Mathlib have no canonical Cech-to-cohomology map (only Nonempty isos); reverted the delivery's change of existing node(s) lem-pc-cech-computes (--revert-nodes; kept as on sheaf-dag)"
+ }
+}

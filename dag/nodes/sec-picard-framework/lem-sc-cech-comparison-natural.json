@@ -21,7 +21,8 @@
  "stmt_deps": [
   "def-pc-scheme",
   "lem-pc-cech-computes",
-  "pqf-def-cohomology"
+  "pqf-def-cohomology",
+  "def-sc-module-cech-comparison"
  ],
  "proof": [
   {
@@ -119,5 +120,24 @@
   "group": "G1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ccn (reviewer sub-agent of L); spot-checked: Reviewer R-ccn: statement checked against Stacks 01EQ/01XD; C4 at step 2 repaired by the added statement node lem-sc-cech-comparison-map-iso-affine (01XD via 01ET, 01XB, 01EQ: the canonical comparison map is the isomorphism, not just abstract equality); B3 repaired by defining the comparison map in lem-sc-cech-comparison-map-naturality via the 01EQ double complex and citing def-weil-pbc-site-cech-complex; first merge refused for a missing Mathlib search on the reviewer-added node, added by L at 16:16 UTC and rerun; 3 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AffineModuleCechComparisonNatural",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.moduleCechComparison_natural_affine",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineModuleCechComparisonNatural.lean",
+  "statement": "theorem moduleCechComparison_natural_affine (X : Scheme.{u}) {ι : Type u} (U : ι → X.Opens) (hU : ∀ (n : ℕ) (y : Fin (n + 1) → ι), IsAffineOpen (⨅ l, U (y l))) (hcover : iSup U = ⊤) (F F' : X.Modules) [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) F] [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) F'] (φ : F ⟶ F') (p : ℕ) : ∃ (e : ((CategoryTheory.cechComplexFunctor U).obj F.presheafModuleCat).homology p ≅ (RingedSpace.moduleCohomology X.toRingedSpace p).obj F) (e' : ((CategoryTheory.cechComplexFunctor U).obj F'.presheafModuleCat).homology p ≅ (RingedSpace.moduleCohomology X.toRingedSpace p).obj F'), IsModuleCechComparison U F p e.hom ∧ IsModuleCechComparison U F' p e'.hom ∧ e.inv ≫ HomologicalComplex.homologyMap ((CategoryTheory.cechComplexFunctor U).map ((PresheafOfModules.forgetToPresheafModuleCat (op ⊤) isTerminalTop.op).map φ.val)) p ≫ e'.hom = (RingedSpace.moduleCohomology X.toRingedSpace p).map φ",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-ccn"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-ccn",
+  "group": "K1",
+  "result": "fix",
+  "note": "R-ccn: H5 fixed (moduleCechComparison took inv of a sorried IsIso; now the predicate IsModuleCechComparison, for every injective resolution c ≫ isoRightDerivedObj.hom ≫ H(alpha) = H(beta)); second spelling moduleCechFunctor dropped for the source's (cechComplexFunctor U).obj F.presheafModuleCat; re-pointed lem-pc-cech-computes record reverted and its module left out; upstream 7d675a263 and Mathlib have no canonical Cech-to-cohomology map (only Nonempty isos); reverted the delivery's change of existing node(s) lem-pc-cech-computes (--revert-nodes; kept as on sheaf-dag)"
  }
 }
