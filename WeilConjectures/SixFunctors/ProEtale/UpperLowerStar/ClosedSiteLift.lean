@@ -349,7 +349,7 @@ section FullyFaithful
 
 variable (A : Type*) [Category.{u + 1} A]
 
-instance full_lowerStar : ((i)_*[A]).Full := by
+instance full_lowerStar_of_isClosedImmersion : ((i)_*[A]).Full := by
   have : ((i)_*[A] ⋙ (AffineProEt.toProEt X).sheafPushforwardContinuous A
       (AffineProEt.topology X) (ProEt.topology X)).Full :=
     inferInstanceAs ((closedBaseChange i).sheafPushforwardContinuous A
@@ -358,7 +358,7 @@ instance full_lowerStar : ((i)_*[A]).Full := by
     ((AffineProEt.toProEt X).sheafPushforwardContinuous A (AffineProEt.topology X)
       (ProEt.topology X))
 
-instance faithful_lowerStar : ((i)_*[A]).Faithful := by
+instance faithful_lowerStar_of_isClosedImmersion : ((i)_*[A]).Faithful := by
   have : ((i)_*[A] ⋙ (AffineProEt.toProEt X).sheafPushforwardContinuous A
       (AffineProEt.topology X) (ProEt.topology X)).Faithful :=
     inferInstanceAs ((closedBaseChange i).sheafPushforwardContinuous A
