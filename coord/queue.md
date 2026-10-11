@@ -1,11 +1,11 @@
 # Work queue
 
-314 items; claim with `tools/claim.py next <group> [--stage N]`.
+318 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (314)
+## Stage 2: nodes to state (318)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -32,6 +32,11 @@
 | `lem-weil-pbc-closed-subset-proper-over-base-universally-closed-image` | 1 | state |
 | `lem-weil-pbc-coherent-property-devissage-integral-subschemes` | 1 | state |
 | `lem-weil-pbc-coherent-support-union-exact-sequence` | 1 | state |
+| `lem-weil-pbc-etale-geometric-fibre-inverse-image-constant` | 1 | state |
+| `lem-weil-pbc-etale-inverse-image-section-description` | 1 | state |
+| `lem-weil-pbc-etale-sections-equal-open` | 1 | state |
+| `lem-weil-pbc-etale-sections-flat-qc-connected-fibres` | 1 | state |
+| `lem-weil-pbc-etale-sections-fpqc-descent` | 1 | state |
 | `lem-weil-pbc-finite-surjective-coherent-generic-support` | 1 | state |
 | `lem-weil-pbc-finite-type-module-support-closed` | 1 | state |
 | `lem-weil-pbc-geometrically-regular-descent` | 1 | state |
@@ -44,7 +49,6 @@
 | `lem-weil-pbc-ring-quasi-finite-locus-open` | 1 | state |
 | `lem-weil-pbc-ringed-space-colimit-restriction` | 1 | state |
 | `lem-weil-pbc-ringed-space-module-exactness-local-lifting` | 1 | state |
-| `lem-weil-pbc-scheme-clopen-idempotent` | 1 | state |
 | `lem-weil-pbc-scheme-theoretic-support` | 1 | state |
 | `lem-weil-pbc-scheme-theoretic-union` | 1 | state |
 | `lem-weil-pbc-sections-annihilated-by-ideal` | 1 | state |
@@ -59,25 +63,24 @@
 | `lem-weil-pbc-separable-split-purely-inseparable-residue-fields` | 1 | state |
 | `lem-weil-pbc-separable-tensor-purely-inseparable-field` | 1 | state |
 | `lem-weil-pbc-separably-generated-differentials-dimension` | 1 | state |
-| `lem-weil-pbc-separably-generated-separable` | 1 | state |
 | `lem-weil-pbc-separably-generated-tensor-reduced` | 1 | state |
 | `lem-weil-pbc-separated-affine-cover-criterion` | 1 | state |
 | `lem-weil-pbc-separated-lqf-base-change` | 1 | state |
 | `lem-weil-pbc-separating-transcendence-basis-finite-subextension` | 1 | state |
 | `lem-weil-pbc-serre-criterion-normal` | 1 | state |
 | `lem-weil-pbc-serre-criterion-reduced` | 1 | state |
-| `lem-weil-pbc-serre-sk-goes-up` | 1 | state |
 | `lem-weil-pbc-ses-cech-h1-surjective` | 1 | state |
 | `lem-weil-pbc-set-cech-nerve-free-resolution` | 1 | state |
-| `lem-weil-pbc-sets-etale-inverse-image-composition-units` | 1 | state |
-| `lem-weil-pbc-sets-etale-inverse-image-constant-base-change` | 1 | state |
+| `lem-weil-pbc-sets-etale-inverse-image-constant-sheaf` | 1 | state |
+| `lem-weil-pbc-sets-etale-inverse-image-restriction` | 1 | state |
+| `lem-weil-pbc-sets-etale-inverse-image-stalk-germ` | 1 | state |
+| `lem-weil-pbc-sets-etale-section-continuity` | 1 | state |
 | `lem-weil-pbc-sets-finite-pushforward-stalk` | 1 | state |
-| `lem-weil-pbc-sets-inverse-image-composition` | 1 | state |
+| `lem-weil-pbc-sets-finite-surjective-descent` | 1 | state |
 | `lem-weil-pbc-sets-strictly-henselian-open-sections-stalk` | 1 | state |
 | `lem-weil-pbc-sheaf-algebraic-structures-objects` | 1 | state |
 | `lem-weil-pbc-sheaf-algebras-directed-colimit` | 1 | state |
 | `lem-weil-pbc-sheaf-cokernel-local-image` | 1 | state |
-| `lem-weil-pbc-sheaf-hom-finite-presentation-colimit` | 1 | state |
 | `lem-weil-pbc-sheaf-hom-finite-presentation-kernel` | 1 | state |
 | `lem-weil-pbc-sheaf-hom-finite-presentation-quasi-coherent` | 1 | state |
 | `lem-weil-pbc-sheaf-isomorphism-local-open-cover` | 1 | state |
@@ -133,6 +136,7 @@
 | `lem-weil-pbc-spectral-limit-constructible-closed-nonempty` | 1 | state |
 | `lem-weil-pbc-spectral-limit-constructible-closed-quasi-compact` | 1 | state |
 | `lem-weil-pbc-spectral-limit-descend-opens` | 1 | state |
+| `lem-weil-pbc-spectral-limit-pullback-sections` | 1 | state |
 | `lem-weil-pbc-spectral-map-constructible-continuous` | 1 | state |
 | `lem-weil-pbc-spectral-proconstructible-closure-specialization` | 1 | state |
 | `lem-weil-pbc-spectral-sheaf-colimit-constant-embeddings` | 1 | state |
@@ -324,7 +328,7 @@
 | `lem-pc-essentially-constant-pro-hom-colimit` | 4 | state |
 | `lem-pur-essential-constant-pro-criterion-05py` | 4 | state |
 
-Not open yet: 40 nodes that wait for stage 1, 478 nodes that wait for a statement dependency.
+Not open yet: 40 nodes that wait for stage 1, 467 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
