@@ -165,5 +165,23 @@
   "summary": "Read Stacks More on Algebra 05E8 (more-algebra-lemma-I-power-torsion-presentation, tag verified in tags/tags) and its proof; the item is its first two sentences. Split into four elementary steps following the proof: the maps R/I^{n_q}->Q, 1->q (well defined because I^{n_q}q=0), the canonical surjection from the direct sum over Q, the I-power torsion of P (finite support, I^{max n_q}) and hence of the kernel, and the short exact sequence in Mod(R). Statement kept, made explicit about the torsion of K and the inclusion; stmt_deps gains def-weil-pbc-quotient-module (R/I^{n_j}). lem-weil-pbc-quotient-by-power-torsion-no-torsion (needs I finitely generated, about M/M[I^infty]) is not used: the submodule argument needed is the one-line closure under finite sums written in step 3. No sorry-free slopmaster2 declaration states the item (grep by id, by 05E8 and by power-torsion keywords; only Submodule.powTorsion for a single element). Old grep search in an unrelated checkout replaced by one in the project's Mathlib.",
   "blueprint": "No blueprint node states 05E8; the item serves thm-weil-pbc-finite-etale-lifting's proof, step (b), through the torsion-extension descent used in Proposition 05ER (via lem-weil-pbc-torsion-extension-flat-descent): steps 1-3 give the surjection with I-power torsion kernel that that descent tensors with S, step 4 the short exact sequence it uses."
  },
- "reviewed": "2026-10-10 L: 4 elementary steps (05E8, first sentences): the cyclic maps, the direct sum and its surjection, torsion of P and K, exactness; 0 new nodes"
+ "reviewed": "2026-10-10 L: 4 elementary steps (05E8, first sentences): the cyclic maps, the direct sum and its surjection, torsion of P and K, exactness; 0 new nodes",
+ "lean": {
+  "module": "Sheaf.RingTheory.TorsionCyclicPresentation",
+  "declaration": "Ideal.exists_torsion_cyclic_presentation",
+  "file": "lean/Sheaf/RingTheory/TorsionCyclicPresentation.lean",
+  "statement": "theorem exists_torsion_cyclic_presentation {R : Type u} [CommRing R] (I : Ideal R) (Q : Type (max u v)) [AddCommGroup Q] [Module R Q] (hQ : ∀ q : Q, ∃ n : ℕ, 0 < n ∧ ∀ a ∈ I ^ n, a • q = 0) : ∃ (J : Type (max u v)) (n : J → ℕ), (∀ j : J, 0 < n j) ∧ ∃ p : (⨁ j : J, R ⧸ I ^ n j) →ₗ[R] Q, Function.Surjective p ∧ (∀ k : LinearMap.ker p, ∃ m : ℕ, 0 < m ∧ ∀ a ∈ I ^ m, a • k = 0) ∧ p.shortComplexKer.ShortExact",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "M1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ }
 }
