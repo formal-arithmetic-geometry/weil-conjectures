@@ -107,7 +107,9 @@ implement `sk-i-restriction`, the normality, commutator and Lie statements also
 the `G` part of `lem-ag-closure-semisimple`;
 `RepresentedDegreeDatum.surjective_mul_center_geometricMonodromy` and
 `RepresentedDegreeDatum.exists_mem_center_mul_mem_geometricMonodromy_eq` implement `sk-p-product`;
-`RepresentedDegreeDatum.exists_isPositiveCentralPair` implements `sk-p-central`;
+`RepresentedDegreeDatum.exists_isPositiveCentralPair` implements `sk-p-central` and `p-central`,
+`RepresentedDegreeDatum.exists_pos_mem_center_mem_degreeComponent` implements
+`lem-mg-common-positive-central-element`;
 `RepresentedDegreeDatum.frobeniusConj`, `RepresentedDegreeDatum.frobeniusAction`,
 `RepresentedDegreeDatum.ArithmeticMonodromyExtension` and
 `RepresentedDegreeDatum.arithmeticMonodromyExtensionHom` implement, on `k`-points,
@@ -1041,6 +1043,48 @@ theorem exists_isPositiveCentralPair (hD : D.IsSemisimple) :
     Set.mem_mul.2 ⟨_, hzF, _, rfl, ?_⟩⟩
   · exact congrArg Subtype.val (Subgroup.mem_center_iff.1 hz ⟨g, hg⟩).symm
   · simp
+
+/-- **A common positive-degree central element.** For a semisimple represented degree datum (for
+instance the direct sum of the Weil representations of several semisimple lisse Weil sheaves on
+the same curve) there are `m > 0` and an algebraic-monodromy element `z` of degree `m` central in
+the arithmetic monodromy extension `G_arith(ρ)(k) = H(k) ⋊ ℤ`; its matrix `z_mat = h Fᵐ` is a
+positive central pair (`exists_isPositiveCentralPair`).
+
+With `z = (h, m)`: the matrix `z_mat` commutes with `H(k)` and with `F`, so `h` commutes with `F`,
+and `z (x, n) = (h Fᵐ x F⁻ᵐ, m + n) = (x h, m + n) = (x Fⁿ h F⁻ⁿ, n + m) = (x, n) z`.
+(blueprint: `lem-mg-common-positive-central-element`) -/
+theorem exists_pos_mem_center_mem_degreeComponent (hD : D.IsSemisimple) :
+    ∃ m : ℕ, 0 < m ∧ ∃ z ∈ Subgroup.center D.ArithmeticMonodromyExtension,
+      z ∈ D.degreeComponent m ∧
+        D.arithmeticMonodromyExtensionHom z ∈ centerPoints D.arithmeticMonodromy := by
+  obtain ⟨N, z, hN, hzc, h, hh, _, rfl, rfl⟩ := D.exists_isPositiveCentralPair hD
+  obtain ⟨-, hc⟩ := (mem_centerPoints_iff _).1 hzc
+  have hG := D.zeroLocus_geometricMonodromy_le_zeroLocus_arithmeticMonodromy k
+  -- `h` commutes with `F`
+  have hFz : h * D.frobenius ^ N * D.frobenius = D.frobenius * (h * D.frobenius ^ N) :=
+    hc _ D.frobenius_mem_zeroLocus_arithmeticMonodromy
+  have hhF : D.frobenius * h = h * D.frobenius := by
+    have : h * D.frobenius * D.frobenius ^ N = D.frobenius * h * D.frobenius ^ N := by
+      rw [mul_assoc, ← pow_succ', pow_succ, ← mul_assoc, hFz, ← mul_assoc]
+    exact (mul_right_cancel this).symm
+  have hhFz (m : ℤ) : D.frobenius ^ m * h = h * D.frobenius ^ m :=
+    ((Commute.zpow_left hhF m))
+  refine ⟨N, hN, ⟨⟨h, hh⟩, Multiplicative.ofAdd (N : ℤ)⟩, ?_, rfl, ?_⟩
+  · refine Subgroup.mem_center_iff.2 fun w ↦ SemidirectProduct.ext ?_ ?_
+    · apply Subtype.ext
+      simp only [SemidirectProduct.mul_left, Subgroup.coe_mul, coe_frobeniusAction_apply,
+        toAdd_ofAdd, zpow_natCast]
+      have hx : h * D.frobenius ^ N * w.left = w.left * (h * D.frobenius ^ N) :=
+        hc _ (hG w.left.2)
+      calc (w.left : GL n k) * (D.frobenius ^ w.right.toAdd * h * (D.frobenius ^ w.right.toAdd)⁻¹)
+          = w.left * h := by rw [hhFz, mul_inv_cancel_right]
+        _ = h * D.frobenius ^ N * w.left * (D.frobenius ^ N)⁻¹ := by
+          rw [hx, mul_assoc, mul_assoc, mul_inv_cancel, mul_one]
+        _ = h * (D.frobenius ^ N * w.left * (D.frobenius ^ N)⁻¹) := by group
+    · simp only [SemidirectProduct.mul_right]
+      exact mul_comm _ _
+  · rw [arithmeticMonodromyExtensionHom_apply, toAdd_ofAdd, zpow_natCast]
+    exact hzc
 
 end IsAlgClosed
 
