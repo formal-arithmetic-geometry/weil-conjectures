@@ -237,4 +237,27 @@ lemma exists_app_toCycles_eq_of_isAffineOpen [ℱ.IsQuasicoherent] (I : Injectiv
     op_id, CategoryTheory.Functor.map_id]
   rfl
 
+/-- **Čech criterion for the vanishing of a degree-one class.** Let `ℱ` be quasi-coherent with
+injective resolution `I`, let `(U i)` be an open cover of `Y` by affine opens, and let `s` be a
+global section of the cycles `Z¹` of `I`. Over each `U i`, `s` lifts to `I⁰`
+(`exists_app_toCycles_eq_of_isAffineOpen`); if any such lifts can be corrected by sections of
+`ker(I⁰ ⟶ I¹)` so that they agree on overlaps (the Čech cocycle of `s` is a coboundary), then `s`
+comes from a global section of `I⁰`, i.e. its class in `H¹(Y, ℱ)` vanishes. -/
+lemma mem_range_app_toCycles_of_cech [ℱ.IsQuasicoherent] (I : InjectiveResolution ℱ)
+    {ι : Type u} (U : ι → Y.Opens) (hU : ∀ i, IsAffineOpen (U i)) (hcover : ⨆ i, U i = ⊤)
+    (s : Γ(I.cocomplex.cycles 1, ⊤))
+    (hcech : ∀ t : ∀ i, Γ(I.cocomplex.X 0, U i), (∀ i, (I.cocomplex.toCycles 0 1).app (U i) (t i) =
+        (I.cocomplex.cycles 1).presheaf.map (homOfLE le_top : U i ⟶ ⊤).op s) →
+      ∃ a : ∀ i, Γ(I.cocomplex.X 0, U i), (∀ i, (I.cocomplex.d 0 1).app (U i) (a i) = 0) ∧
+        TopCat.Presheaf.IsCompatible (I.cocomplex.X 0).presheaf U (fun i ↦ t i - a i)) :
+    s ∈ ((I.cocomplex.toCycles 0 1).app ⊤).hom.range := by
+  let K := I.cocomplex
+  choose t ht using fun i ↦ exists_app_toCycles_eq_of_isAffineOpen I (hU i)
+    ((K.cycles 1).presheaf.map (homOfLE le_top : U i ⟶ ⊤).op s)
+  obtain ⟨a, ha, hcompat⟩ := hcech t ht
+  refine mem_range_app_toCycles_of_isCompatible K s U hcover (fun i ↦ t i - a i) (fun i ↦ ?_)
+    hcompat
+  rw [map_sub, ha, sub_zero, ← HomologicalComplex.toCycles_i, Hom.comp_app,
+    ConcreteCategory.comp_apply, ht, Hom.app_presheaf_map]
+
 end AlgebraicGeometry.Scheme.Modules
