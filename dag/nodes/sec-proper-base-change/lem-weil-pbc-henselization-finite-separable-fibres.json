@@ -216,5 +216,23 @@
   "by": "L",
   "result": "pass",
   "note": "Reviewed by the lead (opus-relaunch6). Node created by C1; statement made precise by the worker (colimit in A-algebras, 'etale A-algebra' via lem-weil-pbc-etale-ring-map-iff-etale-affine, the canonical map written out, r = 0 allowed, separable algebraic cited; the residue extensions are separable algebraic, not necessarily finite, as in Stacks). Nine steps along the proof of 0AH1, five new nodes: two Mathlib leaves verified by line (00U3: Algebra.Etale.iff_exists_algEquiv_prod Etale/Field.lean:271; 00FR: minimalPrimes.finite_of_isNoetherianRing MinimalPrime/Noetherian.lean:43) and three unsplit (the elementwise description of a tensored filtered colimit of algebras, 00DD+00D6; primes of the fibre ring and their residue fields, 00E6/0H9M; the fibre ring of a Noetherian algebra is Noetherian). The fibre is a filtered colimit of finite products of finite separable extensions, hence reduced with incomparable primes, Noetherian with finitely many primes, so a product of its residue fields (00JA node), identified with the residue fields of the primes of B over p; separability passes to the colimit."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.FiniteSeparableFibersOfEtaleColimit",
+  "declaration": "CommAlgCat.finite_separable_fibers_of_etale_colimit",
+  "file": "lean/Sheaf/RingTheory/FiniteSeparableFibersOfEtaleColimit.lean",
+  "statement": "theorem finite_separable_fibers_of_etale_colimit (A : Type u) [CommRing A] {I : Type w} [SmallCategory I] [IsFiltered I] (D : I ⥤ CommAlgCat.{v} A) [HasColimit D] (hD : ∀ i : I, Algebra.Etale A (D.obj i)) [IsNoetherianRing ↥(colimit D)] (p : PrimeSpectrum A) : let B := ↥(colimit D) let F := PrimeSpectrum.comap (algebraMap A B) ⁻¹' {p} let ρ : (q : F) → p.asIdeal.ResidueField →ₐ[A] q.1.asIdeal.ResidueField := fun q ↦ Ideal.ResidueField.mapₐ p.asIdeal q.1.asIdeal (Algebra.ofId A B) congr($(q.2.symm).asIdeal) let ψ : (q : F) → p.asIdeal.Fiber B →+* q.1.asIdeal.ResidueField := fun q ↦ (Algebra.TensorProduct.lift (ρ q) (IsScalarTower.toAlgHom A B q.1.asIdeal.ResidueField) (fun _ _ ↦ Commute.all _ _)).toRingHom Finite F ∧ Function.Bijective (RingHom.pi ψ) ∧ ∀ q : F, letI := (ρ q).toRingHom.toAlgebra Algebra.IsSeparable p.asIdeal.ResidueField q.1.asIdeal.ResidueField",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-hfs1055",
+  "group": "M1",
+  "result": "pass",
+  "note": "A CommRing; I small filtered, D : I ⥤ CommAlgCat A with HasColimit (colimit in A-algebras); hD Algebra.Etale per stage (not hollow); IsNoetherianRing colimit; p prime; F = all primes over p, Finite F (r=0 allowed); ψ = canonical lift of mapₐ and B→κ(q) on p.Fiber B (FIBRE RING), same maps as landed FibrePrimesResidueFields; Algebra.IsSeparable via ρ includes algebraicity, no finiteness; no test universes"
  }
 }
