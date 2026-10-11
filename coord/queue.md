@@ -1,11 +1,11 @@
 # Work queue
 
-61 items; claim with `tools/claim.py next <group> [--stage N]`.
+59 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (61)
+## Stage 2: nodes to state (59)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
@@ -32,7 +32,6 @@
 | `lem-pc-proper-derived-direct-image-composition` | 1 | state | 0 |
 | `lem-pc-rf-base-change-complex` | 1 | state | 0 |
 | `lem-pc-rf-base-change-single-complex-criterion` | 1 | state | 0 |
-| `lem-pc-rf-mv-triangle-naturality` | 1 | state | 0 |
 | `lem-pc-rf-perfect-base-change` | 1 | state | 0 |
 | `lem-pc-rf-single-complex-affine-base-change` | 1 | state | 0 |
 | `lem-pc-rf-single-complex-relative-mayer-vietoris` | 1 | state | 0 |
@@ -57,7 +56,6 @@
 | `lem-sc-qcoh-acyclic-derived-pushforward-cohomology` | 1 | state | 0 |
 | `lem-sc-smooth-proper-diagonal-basechange-upper-shriek` | 1 | state | 0 |
 | `lem-sc-smooth-proper-relative-dualizing-general` | 1 | state | 0 |
-| `lem-weil-pbc-cohomology-pullback-derived-unit` | 1 | state | 0 |
 | `lem-weil-pbc-etale-mayer-vietoris-pullback` | 1 | state | 0 |
 | `lem-weil-pbc-exact-couple-differential` | 1 | state | 0 |
 | `lem-weil-pbc-flat-base-change-map-sections` | 1 | state | 0 |
