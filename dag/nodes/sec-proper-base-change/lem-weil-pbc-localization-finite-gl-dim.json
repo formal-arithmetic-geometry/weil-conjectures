@@ -172,5 +172,23 @@
   "by": "L",
   "result": "accepted",
   "note": "4 steps following Stacks 00O8: localization is exact (00CS leaf); S^{-1}P projective (new leaf, LocalProperties/Projective.lean:76 verified by L); for an S^{-1}R-module M', S^{-1}M' = M' (new composed leaf: isLocalizedModule_id, IsLocalizedModule.iso, extendScalarsOfIsLocalization; lines 613, 886, 241 verified); the 'in particular'. Statement now cites the localization and projective-module definitions."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.LocalizationFiniteGlobalDimension",
+  "declaration": "Ring.localization_preserves_projective_and_global_dimension",
+  "file": "lean/Sheaf/RingTheory/LocalizationFiniteGlobalDimension.lean",
+  "statement": "theorem localization_preserves_projective_and_global_dimension (R : Type u) [CommRing R] (S : Submonoid R) (n : ℕ) : (∀ M : ModuleCat.{max u v} R, ModuleCat.HasProjectiveResolutionLE M n → ModuleCat.HasProjectiveResolutionLE (ModuleCat.of (Localization S) (LocalizedModule S M)) n) ∧ (HasGlobalDimensionLE.{u, max u v} R n → HasGlobalDimensionLE.{u, max u v} (Localization S) n) ∧ (∀ h : HasFiniteGlobalDimension.{u, max u v} R, ∃ hS : HasFiniteGlobalDimension.{u, max u v} (Localization S), globalDimension.{u, max u v} (Localization S) hS ≤ globalDimension.{u, max u v} R h)",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-lfg1112",
+  "group": "C1",
+  "result": "pass",
+  "note": "R CommRing u, S Submonoid, n:ℕ; (1) ∀ M:ModuleCat.{max u v} R, HasProjectiveResolutionLE M n → same on ModuleCat.of (Localization S) (LocalizedModule S M); (2) HasGlobalDimensionLE.{u,max u v} R n → same for Localization S; (3) finite gl.dim transfers with globalDimension ≤; #check resolves to Ring./ModuleCat. landed defs of H1 GlobalDimension, universes as landed 065T"
  }
 }

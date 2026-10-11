@@ -4407,3 +4407,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 11:13 L: merged deliver/E1/lem-weil-pbc-krull-intersection-localization (stage 2; reviewer FIX; first push; Sheaf.RingTheory.KrullIntersectionLocalization RingTheory.krull_intersection_localization)
 - 11:13 L: merged deliver/G1/lem-weil-pbc-injective-sheaf-cech-acyclic (stage 2; reviewer FIX; first push; Sheaf.CategoryTheory.InjectiveSheafCechAcyclic CategoryTheory.injective_sheaf_cech_acyclic)
 - 11:13 L: merged deliver/E1/lem-weil-pbc-local-nagata-domain-analytically-unramified (stage 2; reviewer PASS; first push; Sheaf.RingTheory.IsAnalyticallyUnramifiedOfIsNagataRing isAnalyticallyUnramified_of_isNagataRing)
+- 11:13 L: merged deliver/C1/lem-weil-pbc-localization-finite-gl-dim (stage 2; reviewer PASS; first push; Sheaf.RingTheory.LocalizationFiniteGlobalDimension Ring.localization_preserves_projective_and_global_dimension)
