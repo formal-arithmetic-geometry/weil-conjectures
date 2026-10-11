@@ -1,11 +1,11 @@
 # Work queue
 
-921 items; claim with `tools/claim.py next <group> [--stage N]`.
+919 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (921)
+## Stage 2: nodes to state (919)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -41,11 +41,9 @@
 | `lem-sc-ringed-space-restrict-injective-resolution` | 1 | state |
 | `lem-sc-smooth-proper-diagonal-conormal-differentials` | 1 | state |
 | `lem-sc-strict-henselization-dimension` | 1 | state |
-| `lem-sc-strict-henselization-regular` | 1 | state |
 | `lem-sc-sylow-module-filtration` | 1 | state |
 | `lem-sc-tangent-map-linear` | 1 | state |
 | `lem-sc-tensor-generating-sections` | 1 | state |
-| `lem-sc-tensor-globally-generated` | 1 | state |
 | `lem-sc-tensor-section-affine-open` | 1 | state |
 | `lem-sc-valuation-zero-section-relative-cartier` | 1 | state |
 | `lem-sc-zariski-contracted-power-torsor` | 1 | state |
