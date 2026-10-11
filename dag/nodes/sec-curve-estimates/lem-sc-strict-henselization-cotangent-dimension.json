@@ -141,5 +141,24 @@
   "group": "C1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-shc2211 (reviewer sub-agent of L); spot-checked: Step 1: triples node clause 2 with p=m, K=kappa^sep gives m_C=mC (=mR^sh) and residue field kappa^sep, cited not restated (C1 ok); flatness from lem-sc-strict-henselization-faithfully-flat whose R^sh is the same triples colimit (C4 ok). Step 2: conormal flat base change leaf with A=R, B=R^sh, I=m, J=mR^sh=m^sh (hypotheses ok). Step 3: (m/m^2)(x)_R R^sh = (m/m^2)(x)_kappa R^sh/mR^sh, elementary. Noetherian/dimension siblings not needed. Tool use of sk-thm-p1 triples node accepted as generic construction (C7). No faults; second reading missed none."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.StrictHenselizationCotangentDimension",
+  "declaration": "Algebra.finrank_cotangentSpace_eq_of_isStrictHenselization",
+  "file": "lean/Sheaf/RingTheory/StrictHenselizationCotangentDimension.lean",
+  "statement": "theorem finrank_cotangentSpace_eq_of_isStrictHenselization (R K C : Type u) [CommRing R] [IsLocalRing R] [IsNoetherianRing R] [Field K] [Algebra (IsLocalRing.ResidueField R) K] [IsSepClosure (IsLocalRing.ResidueField R) K] [Algebra R K] [IsScalarTower R (IsLocalRing.ResidueField R) K] [CommRing C] [Algebra R C] (hC : IsStrictHenselization R K C) : ∃ _ : IsLocalRing C, (∃ h : IsLocalRing.maximalIdeal R ≤ (IsLocalRing.maximalIdeal C).comap (algebraMap R C), Function.Bijective (LinearMap.liftBaseChange C (Ideal.mapCotangent (IsLocalRing.maximalIdeal R) (IsLocalRing.maximalIdeal C) (Algebra.ofId R C) h))) ∧ Module.finrank (IsLocalRing.ResidueField R) (IsLocalRing.CotangentSpace R) = Module.finrank (IsLocalRing.ResidueField C) (IsLocalRing.CotangentSpace C)",
+  "branch": "sheaf-dag",
+  "by": "N1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-shc"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-shc",
+  "group": "N1",
+  "result": "fix",
+  "note": "reverted the delivery's statement correction of the item (statement, stmt_deps, statement_change kept as on sheaf-dag; --revert-statement)"
  }
 }
