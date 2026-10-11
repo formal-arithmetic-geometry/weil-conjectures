@@ -3405,3 +3405,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 05:51 L: merged deliver/G1/def-weil-pbc-depth (stage 2; reviewer PASS; first push; Sheaf.RingTheory.Depth Ideal.depth)
 - 05:51 L: merged deliver/E1/def-sp-composite-acyclicity (stage 2; reviewer FIX; first push; Sheaf.CategoryTheory.GrothendieckComposablePair CategoryTheory.GrothendieckComposablePair)
 - 05:51 L: merged deliver/G1/def-weil-pbc-delta-functor (stage 2; reviewer PASS; first push; Sheaf.CategoryTheory.DeltaFunctor CategoryTheory.CohomologicalDeltaFunctor)
+- 05:51 L: merged deliver/H1/def-weil-pbc-fibre-degree-bound (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.FiberDegreeBound AlgebraicGeometry.Scheme.Hom.HasUniversallyBoundedFibers)
