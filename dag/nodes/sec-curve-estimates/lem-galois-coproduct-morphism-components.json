@@ -199,5 +199,23 @@
   "summary": "Split against Stacks 0BN0 (pione.tex, label lemma-epi-mono; tag verified in tags/tags), item (8) and its four-line proof, with the parts of the proofs of items (2) and (4) it uses without mention, and Definition 0BMY (1), (4). Statement kept (it is the source's (8) with the coprojections and the factorization made explicit; Stacks' uniqueness of alpha(i) is not stated, and is remarked in step 5 as unneeded). The proof is written from the Stacks axioms of def-galois-category only; no Mathlib PreGaloisCategory/FiberFunctor declaration is used (the item's mathlib_candidate is kept as recorded). Steps: (1) F turns finite coproducts into disjoint unions and initial objects into the empty set (exactness); (2) connected objects have nonempty fibre (Stacks (4), written out); (3) the coprojections kappa_j are monomorphisms, via the existing general leaf lem-galois-mono-iff-injective (Stacks (2)); (4) E_ij = X_i x_Y Y_j -> X_i is a monomorphism (base change of a mono, written out), hence by connectedness E_ij is initial or p_ij is an isomorphism, and F(E_ij) is the fibre product of sets; (5) alpha(i) is the unique j with F(phi iota_i)(s_i) in F(Y_j), and then E_{i alpha(i)} is not initial so p is an isomorphism; (6) phi_i = q p^{-1} and the coproduct property. The small facts Stacks uses silently (F of initial is empty, connected implies nonempty fibre, coprojections mono, base change of monos) are written out in steps 1-4 from the definition nodes rather than cited from lem-galois-axioms, which is this item's citer. No new nodes; no slopmaster2 declaration states this (slopmaster2 uses Mathlib's PreGaloisCategory only for the finite etale site, and has no lemma of this form). Searches: blueprint_refs search 'coproduct connected', 'index sets', '0BN0', 'initial empty' found only def-galois-category and lem-galois-axioms (the citer, whose clause (7) is this item).",
   "blueprint": "lem-galois-axioms, clause 7 of its statement and the Stacks proof of (8) behind it ('E_ij = X_i x_Y Y_j is either initial or equal to X_i ... this happens for a unique j = alpha(i)'): steps 4-5 realize that sentence, steps 1-3 the facts it uses silently (F(Y_j) ⊂ F(Y) disjoint, coprojections mono, F(X_i) nonempty), step 6 the conclusion 'X -> Y comes from a collection of morphisms X_i -> Y_alpha(i)'."
  },
- "reviewed": "2026-10-10 L: 6 steps from the Stacks 0BMY axioms checked (F turns finite coproducts into disjoint unions; connected objects have nonempty fibre via reflection of isomorphisms; coprojections mono by lem-galois-mono-iff-injective; E_ij = X_i x_Y Y_j with mono projection, initial or iso by connectedness; alpha(i) from the fibre; factorization by the coproduct property). No Mathlib GaloisCategory declaration used (SGA1 notion); no new nodes. Steps 1-2 repeat the clause-3 step of the citer lem-galois-axioms; a shared node may be split off later."
+ "reviewed": "2026-10-10 L: 6 steps from the Stacks 0BMY axioms checked (F turns finite coproducts into disjoint unions; connected objects have nonempty fibre via reflection of isomorphisms; coprojections mono by lem-galois-mono-iff-injective; E_ij = X_i x_Y Y_j with mono projection, initial or iso by connectedness; alpha(i) from the fibre; factorization by the coproduct property). No Mathlib GaloisCategory declaration used (SGA1 notion); no new nodes. Steps 1-2 repeat the clause-3 step of the citer lem-galois-axioms; a shared node may be split off later.",
+ "lean": {
+  "module": "Sheaf.CategoryTheory.Galois.CoproductMorphismComponents",
+  "declaration": "CategoryTheory.morphism_coproduct_connected_components",
+  "file": "lean/Sheaf/CategoryTheory/Galois/CoproductMorphismComponents.lean",
+  "statement": "theorem morphism_coproduct_connected_components {C : Type u} [Category.{v} C] (F : C ⥤ Type w) (hG : IsStacksGaloisCategory F) {α : Type x} {β : Type y} [Finite α] [Finite β] {X Y : C} {Xᵢ : α → C} {Yⱼ : β → C} {ι : (i : α) → Xᵢ i ⟶ X} {κ : (j : β) → Yⱼ j ⟶ Y} (hX : IsColimit (Cofan.mk X ι)) (hY : IsColimit (Cofan.mk Y κ)) (hXconn : ∀ i, IsConnected (Xᵢ i)) (hYconn : ∀ j, IsConnected (Yⱼ j)) (φ : X ⟶ Y) : ∃ (a : α → β) (φᵢ : (i : α) → Xᵢ i ⟶ Yⱼ (a i)), ∀ i, ι i ≫ φ = φᵢ i ≫ κ (a i)",
+  "by": "J1",
+  "date": "2026-10-11",
+  "branch": "sheaf-dag",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-cmc0636",
+  "group": "J1",
+  "result": "pass",
+  "note": "C, F, hG=IsStacksGaloisCategory, finite α β (any universes, empty allowed), Xᵢ/Yⱼ cofans with IsColimit, IsConnected of all summands, φ; ∃ a, φᵢ with ι i ≫ φ = φᵢ i ≫ κ (a i); no Mathlib/source/H1 duplicate"
+ }
 }
