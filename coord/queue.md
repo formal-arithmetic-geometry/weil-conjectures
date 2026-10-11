@@ -1,11 +1,11 @@
 # Work queue
 
-943 items; claim with `tools/claim.py next <group> [--stage N]`.
+938 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (943)
+## Stage 2: nodes to state (938)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -21,22 +21,18 @@
 | `lem-pc-derived-tensor-transitivity` | 1 | state |
 | `lem-pc-flat-bounded-complex-descent` | 1 | state |
 | `lem-pc-flat-module-descent` | 1 | state |
-| `lem-pc-hilb-containment-locus` | 1 | state |
 | `lem-pc-module-pullback-identity-composition` | 1 | state |
 | `lem-pc-pre-derived-adjoint-functors-general` | 1 | state |
 | `lem-pc-projective-base-change` | 1 | state |
 | `lem-pc-very-ample-disjoint-union` | 1 | state |
 | `lem-pur-derived-change-of-rings` | 1 | state |
 | `lem-sc-base-change-curve` | 1 | state |
-| `lem-sc-etale-base-change-geometric` | 1 | state |
 | `lem-sc-etale-faithfully-flat-local` | 1 | state |
 | `lem-sc-finite-free-internal-hom-exact` | 1 | state |
 | `lem-sc-hilbert-embedded-points-affine-localization` | 1 | state |
-| `lem-sc-lfp-field-extension-pointwise-descent` | 1 | state |
 | `lem-sc-local-domain-dim-one-principal-localization-fraction-field` | 1 | state |
 | `lem-sc-p1-ext-locally-free-naturality` | 1 | state |
 | `lem-sc-p1-ext-yoneda-associativity` | 1 | state |
-| `lem-sc-p1-tor-dimension-shift-natural` | 1 | state |
 | `lem-sc-p1-tor-dimension-shifting` | 1 | state |
 | `lem-sc-picard-h1-multiple-locus` | 1 | state |
 | `lem-sc-picard-h1-product-injective` | 1 | state |
@@ -48,7 +44,6 @@
 | `lem-sc-proper-or-affine` | 1 | state |
 | `lem-sc-qcoh-cech-total-tensor-iso` | 1 | state |
 | `lem-sc-rational-functions-generic-stalks` | 1 | state |
-| `lem-sc-reduced-ideals-zero-intersection` | 1 | state |
 | `lem-sc-regular-local-ext-vanishing` | 1 | state |
 | `lem-sc-ringed-space-injective-restriction-surjective` | 1 | state |
 | `lem-sc-ringed-space-module-sheaves-enough-injectives` | 1 | state |
