@@ -134,5 +134,23 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.Topology.ConstantSubsheafFiniteFiltration",
+  "declaration": "TopCat.Sheaf.constantSubsheaf_finite_filtration",
+  "file": "lean/Sheaf/Topology/ConstantSubsheafFiniteFiltration.lean",
+  "statement": "theorem constantSubsheaf_finite_filtration (X : TopCat.{u}) (hqc : ∀ U V : Opens X, IsCompact (U : Set X) → IsCompact (V : Set X) → IsCompact ((U ⊓ V : Opens X) : Set X)) (K C : Sheaf AddCommGrpCat X) (ι : K ⟶ C) [Mono ι] (hC : Nonempty (C ≅ (constantSheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}).obj (AddCommGrpCat.of (ULift.{u} ℤ)))) (hgen : ∃ (n : ℕ) (U : Fin n → Opens X) (_ : ∀ i, IsCompact ((U i : Opens X) : Set X)), ∃ g : (∐ fun i => (abelianOpenExtensionByZero (U i)).obj ((constantSheaf (Opens.grothendieckTopology ((Opens.toTopCat X).obj (U i))) AddCommGrpCat.{u}).obj (AddCommGrpCat.of (ULift.{u} ℤ)))) ⟶ K, Epi g) : ∃ (m : ℕ) (F : Fin (m + 1) → Sheaf AddCommGrpCat X) (f : ∀ i : Fin m, F i.castSucc ⟶ F i.succ) (hf : ∀ i : Fin m, Mono (f i)) (Q : Fin m → Sheaf AddCommGrpCat X) (S : ∀ i : Fin m, ShortComplex (Sheaf AddCommGrpCat X)) (hS : ∀ i : Fin m, (S i).ShortExact) (hQ : ∀ i : Fin m, Nonempty (Q i ≅ cokernel (f i))) (hquot : ∀ i : Fin m, ∃ (U V : Opens X), IsCompact (U : Set X) ∧ IsCompact (V : Set X) ∧ V ≤ U ∧ Nonempty ((S i).X₁ ≅ (abelianOpenExtensionByZero V).obj ((constantSheaf (Opens.grothendieckTopology ((Opens.toTopCat X).obj V)) AddCommGrpCat.{u}).obj (AddCommGrpCat.of (ULift.{u} ℤ)))) ∧ Nonempty ((S i).X₂ ≅ (abelianOpenExtensionByZero U).obj ((constantSheaf (Opens.grothendieckTopology ((Opens.toTopCat X).obj U)) AddCommGrpCat.{u}).obj (AddCommGrpCat.of (ULift.{u} ℤ)))) ∧ Nonempty ((S i).X₃ ≅ Q i)) , IsZero (F 0) ∧ Nonempty (F (Fin.last m) ≅ K)",
+  "branch": "sheaf-dag",
+  "by": "T1",
+  "date": "2026-10-12",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "T1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }
