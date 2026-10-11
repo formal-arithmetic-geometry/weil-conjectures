@@ -1,14 +1,13 @@
 # Work queue
 
-869 items; claim with `tools/claim.py next <group> [--stage N]`.
+870 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (26)
+## Stage 1: nodes to split (25)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
 | `lem-weil-derived-limit-roos-complex` | 15 | none |
 | `lem-pc-ringed-space-module-stalk-tensor` | 3013 | none |
-| `lem-pc-ring-precise-vanishing` | 3019 | none |
 | `lem-pc-genus-agrees-sc` | 4007 | rests_on_sorry |
 | `prop-av-tate-rank` | 4008 | rests_on_sorry |
 | `cor-pc-sigma-pic-iso` | 4009 | rests_on_sorry |
@@ -24,7 +23,7 @@
 | `lem-sc-valuation-limit-qcoh-section-descent` | 6015 | none |
 | `lem-sc-pseudo-coherent-lift-stably-free-complex` | 6016 | none |
 | `lem-pc-derived-splitting-unique` | 6017 | none |
-| `lem-pc-finite-projective-cokernel-localization` | 6017 | none |
+| `lem-pc-finite-free-map-residue-localization` | 6018 | none |
 | `lem-sc-base-change-curve` | - | none |
 | `lem-sc-global-functions` | - | rests_on_sorry |
 | `def-pur-saturated-triangulated-localization` | - | none |
@@ -33,7 +32,7 @@
 | `lem-pur-derived-functor-shift-05su` | - | none |
 | `lem-pur-derived-functor-triangles-05sc` | - | none |
 
-## Stage 2: nodes to state (843)
+## Stage 2: nodes to state (845)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -189,6 +188,7 @@
 | `lem-pc-right-localization-hom-colimit` | 1 | state |
 | `lem-pc-ring-derived-map-lift` | 1 | state |
 | `lem-pc-ring-m-pseudo-coherent-vanishing-base` | 1 | state |
+| `lem-pc-ring-precise-vanishing` | 1 | state |
 | `lem-pc-ring-pseudo-coherent-distinguished-triangle` | 1 | state |
 | `lem-pc-ring-pseudo-coherent-iff-all-m` | 1 | state |
 | `lem-pc-ring-pseudo-coherent-localization-glue` | 1 | state |
@@ -847,6 +847,7 @@
 | `lem-galois-flasque` | 2 | state |
 | `lem-kun-etale-lfp` | 2 | state |
 | `lem-pc-cartier-criterion` | 2 | state |
+| `lem-pc-finite-projective-cokernel-localization` | 2 | state |
 | `lem-pc-flat-rf-open` | 2 | state |
 | `lem-pc-hilb-smooth` | 2 | state |
 | `lem-pc-ring-pseudo-coherent-summand` | 2 | state |
@@ -881,7 +882,7 @@
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 1759 nodes that wait for a statement dependency, 67 nodes that wait for stage 1.
+Not open yet: 1759 nodes that wait for a statement dependency, 66 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
