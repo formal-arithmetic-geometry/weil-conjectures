@@ -124,6 +124,38 @@ lemma rightAdjointProjectionMap_mate
   congr 1
   exact ((T₂.map (V.map (adj₁.counit.app M))).naturality (σ.app L))
 
+section Comp
+
+variable {B : Type*} [Category* B] {F₁ : D₁ ⥤ C₁} {G₁ : C₁ ⥤ D₁} (adj₁ : F₁ ⊣ G₁) {F₂ : C₁ ⥤ B}
+  {G₂ : B ⥤ C₁} (adj₂ : F₂ ⊣ G₂) {T_B : B ⥤ B ⥤ B}
+  (φ₁ : (postcompose₂.obj F₁).obj S₁ ⟶ (((whiskeringLeft₂ C₁).obj F₁).obj F₁).obj T₁)
+  (φ₂ : (postcompose₂.obj F₂).obj T₁ ⟶ (((whiskeringLeft₂ B).obj F₂).obj F₂).obj T_B)
+  (φ₁₂ : (postcompose₂.obj (F₁ ⋙ F₂)).obj S₁ ⟶
+    (((whiskeringLeft₂ B).obj (F₁ ⋙ F₂)).obj (F₁ ⋙ F₂)).obj T_B)
+
+/-- **The projection map of a composite of adjunctions** is the composite of the projection
+maps, for the composite comparison `F₂ (F₁ (a ⊗ b)) ⟶ F₂ (F₁ a ⊗ F₁ b) ⟶ F₂ F₁ a ⊗ F₂ F₁ b`. -/
+lemma rightAdjointProjectionMap_comp
+    (hφ : ∀ a b, (φ₁₂.app a).app b =
+      F₂.map ((φ₁.app a).app b) ≫ (φ₂.app (F₁.obj a)).app (F₁.obj b))
+    (M : B) (L : D₁) :
+    (((adj₁.comp adj₂).rightAdjointProjectionMap φ₁₂).app M).app L =
+      ((adj₁.rightAdjointProjectionMap φ₁).app (G₂.obj M)).app L ≫
+        G₁.map (((adj₂.rightAdjointProjectionMap φ₂).app M).app (F₁.obj L)) := by
+  apply ((adj₁.comp adj₂).homEquiv _ _).symm.injective
+  rw [homEquiv_symm_rightAdjointProjectionMap_app_app, comp_homEquiv]
+  dsimp only [Equiv.symm_trans_apply]
+  erw [homEquiv_naturality_right_symm, homEquiv_symm_rightAdjointProjectionMap_app_app,
+    homEquiv_naturality_left_symm, homEquiv_symm_rightAdjointProjectionMap_app_app]
+  rw [hφ]
+  have h₁ := NatTrans.congr_app (φ₂.naturality (adj₁.counit.app (G₂.obj M))) (F₁.obj L)
+  dsimp at h₁ ⊢
+  rw [Functor.map_comp_assoc, reassoc_of% h₁, comp_counit_app, T_B.map_comp,
+    NatTrans.comp_app]
+  simp only [Category.assoc]
+
+end Comp
+
 end RightAdjoint
 
 section LeftAdjoint
