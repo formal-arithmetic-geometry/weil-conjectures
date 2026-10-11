@@ -65,7 +65,8 @@ variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {k : Type u} [Field k]
 
 /-! #### Direct image -/
 
-/-- Blueprint `sk-prop-sf-finiteness`: Finiteness and constructibility.
+/-- Blueprint `sk-thm-sf-direct-image-tor-amplitude` (constructibility clause; the
+finite-coefficient case is `sk-prop-sf-finiteness`): Finiteness and constructibility.
 
 Let `f : X ⟶ Y` be a morphism of finite-type `k`-schemes, and let `K` be a bounded constructible
 complex on `X_ét` killed by an integer `N` invertible on `Y`. Then `Rf_* K` is bounded
