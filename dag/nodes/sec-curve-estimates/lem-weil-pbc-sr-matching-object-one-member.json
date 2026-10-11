@@ -23,7 +23,8 @@
   "def-weil-pbc-etale-site",
   "def-weil-pbc-finite-split-hypercover",
   "def-weil-pbc-simplicial-object",
-  "def-weil-pbc-semi-representable-object"
+  "def-weil-pbc-semi-representable-object",
+  "lem-weil-pbc-matching-object-proper-faces"
  ],
  "proof": [
   {
@@ -180,5 +181,24 @@
   "summary": "Proof written in six steps. The comparison of the two descriptions of the matching diagram (all proper faces, as in def-weil-pbc-finite-split-hypercover and lem-weil-pbc-matching-object-fibre-product, against the codimension-1/2 diagram D_n of lem-weil-pbc-simplicial-matching-object) is the new node lem-weil-pbc-matching-object-proper-faces (Stacks 0186 for injective maps). The key fact that the inclusions X_Et -> Sch/X and X_Et -> SR(X) (one-member families) preserve finite limits is derived from preservation of the final object and fibre products (lem-weil-pbc-etale-base-change-finite-limits (2), lem-weil-pbc-semi-representable-finite-limits (1),(2) with one-point index sets) through the new Mathlib leaf lem-weil-pbc-finite-limits-from-terminal-pullbacks (preservesFiniteLimits_of_preservesTerminal_and_pullbacks). Part (3) uses that isomorphisms of SR(X) are coverings (written out) and covering-permanence (1), and etaleness of X-morphisms between etale X-schemes. Statement and stmt_deps kept. Tags 01G2, 01G3, 01G5, 0186, 002O, 002N checked in tags/tags. No slopmaster2 Lean found (grep of the id, 'matching', 'hypercover', FormalCoproduct in WeilConjectures).",
   "blueprint": "The steps realize the clause of lem-weil-pbc-hypercover-refinement, proof, fourth paragraph, 'the matching covers of U lift those boundaries after finite refinement' in the form needed there: steps 2 and 4 identify the matching objects in SR(X) of a simplicial etale X-scheme with its matching schemes M_n(U), steps 5-6 identify 'U_n -> M_n(U) is an etale covering' with 'K_n -> M_n(K) is a covering in SR(X)', so that the lifting in SR(X) applies to the matching covers of U."
  },
- "reviewed": "2026-10-10 L: 6 steps checked (finite limits in X_et and their preservation into Sch/X and into SR(X) via one-member families, from the new terminal+pullbacks Mathlib leaf; matching object of the proper-faces diagram equals the codimension-1/2 matching object by the new proper-faces node; isomorphisms of SR(X) are coverings; etale by cancellation). New Mathlib leaf lem-weil-pbc-finite-limits-from-terminal-pullbacks (hasFiniteLimits_of_hasTerminal_and_pullbacks 270, preservesFiniteLimits_of_preservesTerminal_and_pullbacks 279, verified) and new unsplit node lem-weil-pbc-matching-object-proper-faces (Stacks 0186 restricted to injective maps) accepted. Off-unit citations are Mathlib leaves (no tool_uses entry)."
+ "reviewed": "2026-10-10 L: 6 steps checked (finite limits in X_et and their preservation into Sch/X and into SR(X) via one-member families, from the new terminal+pullbacks Mathlib leaf; matching object of the proper-faces diagram equals the codimension-1/2 matching object by the new proper-faces node; isomorphisms of SR(X) are coverings; etale by cancellation). New Mathlib leaf lem-weil-pbc-finite-limits-from-terminal-pullbacks (hasFiniteLimits_of_hasTerminal_and_pullbacks 270, preservesFiniteLimits_of_preservesTerminal_and_pullbacks 279, verified) and new unsplit node lem-weil-pbc-matching-object-proper-faces (Stacks 0186 restricted to injective maps) accepted. Off-unit citations are Mathlib leaves (no tool_uses entry).",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SRMatchingObjectOneMember",
+  "declaration": "AlgebraicGeometry.Scheme.sr_matching_object_one_member",
+  "file": "lean/Sheaf/AlgebraicGeometry/SRMatchingObjectOneMember.lean",
+  "statement": "theorem sr_matching_object_one_member (X : Scheme.{u}) (U : SimplicialObject X.Etale) : ∃ (M : ℕ → X.Etale) (π : ∀ n : ℕ, (Functor.const _).obj (M n) ⟶ U.properFaceDiagram n) (μ : ∀ n : ℕ, U _⦋n⦌ ⟶ M n), M 0 = Etale.mk (𝟙 X) ∧ (∀ n : ℕ, Nonempty (IsLimit ((Etale.forget X).mapCone (Cone.mk (M n) (π n))))) ∧ (∀ (n : ℕ) (a : SimplicialObject.ProperFaceCategory n), μ n ≫ (π n).app (op a) = U.map a.obj.hom.op) ∧ (∀ n : ℕ, ∃ ψ : semiRepresentableMatchingObject (U ⋙ FormalCoproduct.incl.{w} X.Etale) n ≅ (FormalCoproduct.incl.{w} X.Etale).obj (M n), semiRepresentableMatchingMap (U ⋙ FormalCoproduct.incl.{w} X.Etale) n ≫ ψ.hom = (FormalCoproduct.incl.{w} X.Etale).map (μ n)) ∧ (∀ n : ℕ, IsSemiRepresentableCovering (semiRepresentableMatchingMap (U ⋙ FormalCoproduct.incl.{w} X.Etale) n) ↔ Surjective (μ n).left) ∧ (IsSemiRepresentableHypercover (U ⋙ FormalCoproduct.incl.{w} X.Etale) ↔ ∀ n : ℕ, Etale (μ n).left ∧ Surjective (μ n).left)",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-11",
+  "existing": false,
+  "note": "Uses the existing properFaceDiagram (the added, already-landed stmt_dep) and the recorded SR matching objects. SimplicialObject X.Etale encodes exactly the augmented simplicial X-scheme with every term etale; the matching cone is limiting after forgetting to Over X. No splitting, covering, finiteness or qcqs hypothesis is imposed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-sub-B",
+  "group": "K1",
+  "result": "pass",
+  "note": "X arbitrary scheme, U simplicial object of X.Etale (all terms etale, augmented); M_n, pi_n cones over properFaceDiagram limiting in Over X with M_0 = id_X, mu_n with face components U(delta); K = U ⋙ FormalCoproduct.incl; (1) M_n in X.Etale, (2) iso psi of semiRepresentableMatchingObject with incl(M_n) carrying the matching map to incl(mu_n), (3) covering iff Surjective, final iff with IsSemiRepresentableHypercover; all n incl. 0; stmt_deps gained only the landed proper-faces node; compile clean"
+ }
 }
