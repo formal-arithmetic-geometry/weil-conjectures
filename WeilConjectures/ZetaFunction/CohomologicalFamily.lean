@@ -259,14 +259,16 @@ theorem map_zetaSeries_mul_evenFrobeniusProduct :
   have h := D.zeta_mul_prod_even_eq_prod_odd
   rw [← D.map_zetaSeries _ hN] at h
   have hpar (p : ℕ → Prop) [DecidablePred p] :
-      ∏ i ∈ Finset.univ.filter (fun i : Fin (2 * d + 1) ↦ p i), (D.P i : PowerSeries _) =
+      ∏ i ∈ Finset.univ.filter (fun i : Fin (2 * d + 1) ↦ p i),
+          (D.P i : PowerSeries (PadicAlgCl l)) =
         ((∏ i ∈ (Finset.range (2 * d + 1)).filter p, frobeniusCharpolyRev k₀ l X i :
-          Polynomial _) : PowerSeries _) := by
+          Polynomial (PadicAlgCl l)) : PowerSeries (PadicAlgCl l)) := by
     rw [← Polynomial.coeToPowerSeries.ringHom_apply, map_prod, Finset.prod_filter,
       Finset.prod_filter]
     simp only [hP, Polynomial.coeToPowerSeries.ringHom_apply]
     exact Fin.prod_univ_eq_prod_range (fun i ↦ if p i then
-      ((frobeniusCharpolyRev k₀ l X i : Polynomial _) : PowerSeries _) else 1) _
+      ((frobeniusCharpolyRev k₀ l X i : Polynomial (PadicAlgCl l)) :
+        PowerSeries (PadicAlgCl l)) else 1) _
   rw [hpar Even, hpar Odd] at h
   exact h
 

@@ -11,7 +11,8 @@ public import WeilConjectures.ZetaFunction.SmoothProper
 # Weight separation and the parity factorization
 
 Let `X₀` be a smooth, proper, geometrically connected scheme of pure dimension `d` over
-`k₀ = 𝔽_q`, and `ℓ ≠ p`. By root purity (`AlgebraicGeometry.Scheme.isPureOfWeight_map_frobeniusCharpolyRev`)
+`k₀ = 𝔽_q`, and `ℓ ≠ p`. By root purity
+(`AlgebraicGeometry.Scheme.isPureOfWeight_map_frobeniusCharpolyRev`)
 every reciprocal root of `P_{i,ℓ}` has absolute value `q^{i/2}` under every embedding
 `ι : ℚ̄_ℓ → ℂ`. These absolute values are pairwise distinct, so distinct `P_{i,ℓ}` are coprime,
 the parity products `N_ℓ = ∏_{i odd} P_{i,ℓ}` and `D_ℓ = ∏_{i even} P_{i,ℓ}` are coprime, and

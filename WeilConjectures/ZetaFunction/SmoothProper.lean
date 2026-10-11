@@ -83,7 +83,7 @@ theorem frobeniusCharpolyRev_two_mul (d : ℕ) [IsProper (X ↘ Spec (CommRingCa
     (LinearEquiv.ofBijective T.trace htr).finrank_eq.trans (Module.finrank_self _)
   have hfrob : M.frobeniusEnd = (Nat.card k₀ : PadicAlgCl l) ^ d • 1 := by
     refine LinearMap.ext fun z ↦ htr.1 ?_
-    rw [LinearMap.smul_apply, LinearMap.one_apply, map_smul, smul_eq_mul]
+    rw [LinearMap.smul_apply, Module.End.one_apply, map_smul, smul_eq_mul]
     exact hF z
   rw [frobeniusCharpolyRev_def, FrobeniusModule.localPolynomial, hfrob,
     LinearMap.charpolyRev_smul_one, hfin, pow_one]
@@ -103,7 +103,8 @@ theorem isPureOfWeight_map_frobeniusCharpolyRev (d : ℕ)
   have hpure := WeilSheaf.isPureOfWeightOver_cohomology_adicConstant k₀ l X d ι i
   refine ⟨by rw [Polynomial.coeff_map, coeff_zero_frobeniusCharpolyRev, map_one], fun z hz ↦ ?_⟩
   rw [frobeniusCharpolyRev_def, FrobeniusModule.localPolynomial,
-    LinearMap.roots_map_charpolyRev_eq_map_inv ι _ (LinearEquiv.isUnit_det' M.frobenius),
+    LinearMap.roots_map_charpolyRev_eq_map_inv ι M.frobeniusEnd
+      (LinearEquiv.isUnit_det' M.frobenius),
     (IsAlgClosed.splits M.frobeniusEnd.charpoly).roots_map ι, Multiset.map_map,
     Multiset.mem_map] at hz
   obtain ⟨α, hα, rfl⟩ := hz
