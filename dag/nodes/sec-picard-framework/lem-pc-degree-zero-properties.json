@@ -16,7 +16,8 @@
   "def-pc-finite-locally-free",
   "lem-pc-flf-properties",
   "def-pc-derived-category",
-  "def-sc-invertible-module"
+  "def-sc-invertible-module",
+  "def-amb-finite-locally-free-module"
  ],
  "proof": [
   {
@@ -157,5 +158,27 @@
   "group": "J1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-dzp1811 (reviewer sub-agent of L); spot-checked: No cycle (no uses, proof_deps empty); steps 1-3 elementary and correct (zig-zag of qis preserves cohomology; single-term complex; E[-i] has E in degree i). FIX more, RETURN less: (1) E7/C7: delivery changed the statement by citing def-amb-finite-locally-free-module (sec-smooth-purity, unit sk-prop-an, not in stmt_deps, needless for a statement already pointing to def-pc-finite-locally-free); reverted to the imported statement. (2) steps 2-3 source.document pointed to a nonexistent path sec-picard-f/...; corrected to sec-picard-framework/sk-def-picard-f/.... Second reading missed both.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.DegreeZeroCohomology",
+  "declaration": "AlgebraicGeometry.cohomology_of_iso_invertible_single_zero",
+  "declarations": [
+   "AlgebraicGeometry.cohomology_of_iso_invertible_single_zero",
+   "AlgebraicGeometry.cohomology_of_iso_locallyFree_shift"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/DegreeZeroCohomology.lean",
+  "statement": "theorem cohomology_of_iso_invertible_single_zero (X : Scheme.{u}) [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] (M : schemeDerivedCategory X) (N : X.Modules) [Scheme.Modules.IsInvertible N] (hM : Nonempty (M ≅ (DerivedCategory.singleFunctor (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).obj N)) : (∀ i : ℤ, i ≠ 0 → IsZero ((DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings X.toRingedSpace)) i).obj M)) ∧ Nonempty ((DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).obj M ≅ N)",
+  "branch": "sheaf-dag",
+  "by": "P1",
+  "date": "2026-10-11",
+  "existing": false,
+  "note": "The two independent assertions are stated separately. The added landed dependency def-amb-finite-locally-free-module supplies module rank; the original finite-locally-free dependencies concern morphisms and their structure-sheaf pushforwards."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-dzp",
+  "group": "P1",
+  "result": "pass"
  }
 }
