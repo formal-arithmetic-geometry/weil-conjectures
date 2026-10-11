@@ -10,6 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.Curve
 public import WeilConjectures.Mathlib.Algebra.Polynomial.FieldDivision
 public import WeilConjectures.Statement
 public import WeilConjectures.ZetaFunction.BettiSymmetry
+public import WeilConjectures.ZetaFunction.CurveZeta
 public import WeilConjectures.ZetaLinearAlgebra.TraceDatum
 
 /-!
@@ -48,8 +49,8 @@ roots `α` of the `P i`, the shadow of the Lefschetz trace formula.
   `n = 1`.
 - `AlgebraicGeometry.Scheme.Hom.abs_pointCount_sub_le_two_mul_genus`: the Hasse–Weil bound
   `|N n - (qⁿ + 1)| ≤ 2 g q^{n/2}` for a smooth proper geometrically integral curve of genus `g`.
-  It depends on `AlgebraicGeometry.Scheme.Hom.natDegree_eq_two_mul_genus_of_isWeilFactorization`,
-  the identity `deg P 1 = 2 g`, which is not proved here.
+  It uses `AlgebraicGeometry.Scheme.Hom.natDegree_eq_two_mul_genus_of_isWeilFactorization`,
+  the identity `deg P 1 = 2 g`, proved by counting effective divisors with Riemann–Roch.
 
 ## References
 
@@ -234,24 +235,14 @@ theorem Hom.abs_pointCount_one_sub_le (f : X.Hom (Spec (.of k))) {q d : ℕ}
 geometrically integral curve over a finite field, the factor `P 1` in the factorization
 `Z = P 1 / ((1 - T) (1 - q T))` of its zeta function has degree `2 g`.
 
-This is the zeta-function form of Step 4 of the blueprint proof of `cor-zl-hasse-bound`:
-`dim H¹(C ⊗ k̄, ℚ̄_ℓ) = 2 g`.
-
-The proof reduces the statement to this dimension count: a Weil factorization with `d = 1` is
-determined by the zeta function (`AlgebraicGeometry.IsWeilFactorization.eq_of_one`), so `P` is
-the family of integral Frobenius factors of
-`AlgebraicGeometry.Scheme.exists_isWeilFactorization_of_smoothProper`, and
-`deg P 1 = dim H¹(C ⊗ k̄, ℚ̄_ℓ)`
-(`AlgebraicGeometry.Scheme.natDegree_eq_finrank_of_isIntegralFrobeniusFactor`).
-
-The remaining `sorry` is the identity `dim_{ℚ̄_ℓ} H¹(C ⊗ k̄, ℚ̄_ℓ) = 2 g` for the cohomology
-`(WeilSheaf.adicConstant k l X).cohomology 1` of the constant pro-étale `ℓ`-adic Weil sheaf.
-It needs the Kummer computation `H¹(C ⊗ k̄, ℤ/ℓⁿ) ≅ (ℤ/ℓⁿ)^{2g}`
-(`AlgebraicGeometry.IsCurve.nonempty_addEquiv_sheafH_constantZMod_one`, itself `sorry`), the
-invariance of the genus under the base change `k → k̄` (blueprint `lem-pc-genus-base-change`),
-and a comparison of the pro-étale cohomology with coefficients in the sheaf `ℚ̄_ℓ` of locally
-finite continuous functions with `(lim_n H¹_ét(C ⊗ k̄, ℤ/ℓⁿ)) ⊗ ℚ̄_ℓ` (Bhatt–Scholze), which
-the repository does not have: its `ℓ`-adic Weil sheaves are not built from finite levels. -/
+This is the zeta-function form of Step 4 of the blueprint proof of `cor-zl-hasse-bound`,
+`dim H¹(C ⊗ k̄, ℚ̄_ℓ) = 2 g`. It is proved here without `ℓ`-adic cohomology, by F. K. Schmidt's
+argument: Riemann–Roch counts the effective divisors of large degree, which are the coefficients
+of the zeta function, and together with the Riemann hypothesis for `P 1` this forces
+`deg P 1 = 2 g`
+(`AlgebraicGeometry.Scheme.natDegree_eq_two_mul_arithmeticGenus_of_isWeilFactorization`). The
+genus `dim_k Γ(C, Ω¹)` is the arithmetic genus by
+`AlgebraicGeometry.Scheme.genus_eq_arithmeticGenus`. -/
 theorem Hom.natDegree_eq_two_mul_genus_of_isWeilFactorization
     (f : X ⟶ Spec (.of k)) [SmoothOfRelativeDimension 1 f] [IsProper f]
     [GeometricallyIntegral f] {P : Fin (2 * 1 + 1) → Polynomial ℤ}
@@ -261,19 +252,15 @@ theorem Hom.natDegree_eq_two_mul_genus_of_isWeilFactorization
   have : SmoothOfRelativeDimension 1 (X ↘ Spec (CommRingCat.of k)) :=
     ‹SmoothOfRelativeDimension 1 f›
   have : IsProper (X ↘ Spec (CommRingCat.of k)) := ‹IsProper f›
+  have : GeometricallyIntegral (X ↘ Spec (CommRingCat.of k)) := ‹GeometricallyIntegral f›
   have : GeometricallyConnected (X ↘ Spec (CommRingCat.of k)) :=
     GeometricallyIntegral.geometricallyConnected f
-  obtain ⟨P', hfact', -, -, hP'⟩ := exists_isWeilFactorization_of_smoothProper k X 1
+  have : IsIntegral X := GeometricallyIntegral.isIntegral_of_subsingleton f
+  obtain ⟨P', hfact', -, hrh'⟩ := Scheme.weil_conjectures f 1
   obtain rfl : P = P' := hfact.eq_of_one hfact'
-  obtain ⟨l, hl, hne⟩ : ∃ l : ℕ, l.Prime ∧ ringChar k ≠ l := by
-    by_cases h : ringChar k = 2
-    · exact ⟨3, Nat.prime_three, by omega⟩
-    · exact ⟨2, Nat.prime_two, h⟩
-  have : Fact l.Prime := ⟨hl⟩
-  have : Fact (ringChar k ≠ l) := ⟨hne⟩
-  rw [natDegree_eq_finrank_of_isIntegralFrobeniusFactor k X (hP' 1) l]
-  -- `dim H¹(C ⊗ k̄, ℚ̄_ℓ) = 2 g`: see the docstring
-  sorry
+  rw [natDegree_eq_two_mul_arithmeticGenus_of_isWeilFactorization (C := X) hfact' hrh',
+    ← genus_eq_arithmeticGenus]
+  rfl
 
 /-- **The Hasse–Weil bound for curves.** Let `C` be a smooth proper geometrically integral curve
 of genus `g` over a finite field `k` with `q` elements. Then for every `n ≥ 1`,
