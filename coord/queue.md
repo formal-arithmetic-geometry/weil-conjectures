@@ -1,11 +1,11 @@
 # Work queue
 
-66 items; claim with `tools/claim.py next <group> [--stage N]`.
+64 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (66)
+## Stage 2: nodes to state (64)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
@@ -44,7 +44,6 @@
 | `lem-sc-derived-internal-hom-stalk-localization` | 1 | state | 0 |
 | `lem-sc-etale-qcoherent-descent-fpqc-sections` | 1 | state | 0 |
 | `lem-sc-finite-duality-derived-hom` | 1 | state | 0 |
-| `lem-sc-finite-flat-duality-evaluation` | 1 | state | 0 |
 | `lem-sc-finite-sheafhom-affine-adjoint` | 1 | state | 0 |
 | `lem-sc-hilb-dominating-power` | 1 | state | 0 |
 | `lem-sc-injective-module-abelian-acyclic-zariski` | 1 | state | 0 |
@@ -70,7 +69,6 @@
 | `lem-weil-pbc-site-sheafification-sections-local` | 1 | state | 0 |
 | `lem-weil-pbc-zariski-extension-by-zero-adjunction` | 1 | state | 0 |
 | `lem-weil-pbc-zariski-extension-by-zero-exact` | 1 | state | 0 |
-| `prop-weil-pbc-strict-henselization-stalk-formula` | 1 | state | 0 |
 | `lem-sc-p1-proj-shifted-free-twist` | 2 | state | 0 |
 | `lem-weil-pbc-constant-sheaf-open-maps-sections` | 2 | state | 0 |
 | `lem-weil-pbc-locally-constant-maps-sheaf` | 2 | state | 0 |
