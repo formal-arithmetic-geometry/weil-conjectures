@@ -141,5 +141,23 @@
   "group": "F1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-hpg1941 (reviewer sub-agent of L); spot-checked: Checked the stabilized-page computation (u<=0, D_r^{p+2,q-1}=0 as q-r+1<a, alpha iso in first degree <=0 from vanishing E_2) and g_r(alpha^{r-2}y)=[g(y)] against lem-sp-derived-couple-exact items 2 and 4; tool use lem-sp-derived-couple-exact accepted. FIX more, RETURN less: (1) C5: Step 1 attributed the D_r image formula to the theorem's 'stabilized-page calculation' (its proof); now cites item 4 of lem-sp-derived-couple-exact and spells out the exact sequence and the alpha^{-u} transport. (2) C5/E: Step 3 relied on which isomorphism the theorem's proof builds; the theorem's statement leaves it unspecified, so Step 3 now says it is fixed as the canonical weak-convergence isomorphism of def-sp-convergence (A^n=D^{0,n} as stable colimit), and cites the theorem. (3) B4: plain-text arrows in Steps 1-2 rewritten in TeX.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.HalfPlaneGradedCanonical",
+  "declaration": "CategoryTheory.BigradedExactCouple.halfPlaneGradedCanonical",
+  "file": "lean/Sheaf/CategoryTheory/HalfPlaneGradedCanonical.lean",
+  "statement": "theorem halfPlaneGradedCanonical (X : BigradedExactCouple C 0) (a : ℤ) (hD : ∀ (p q : ℤ), q < a → IsZero (X.D p q)) (hE : ∀ (p q : ℤ), (p < 0 ∨ q < a) → IsZero (X.E p q)) : ∃ L : LimitSubobjects X, ∃ A : ∀ n : ℤ, AlphaColimit X n, ∃ hA : ∀ n : ℤ, (A n).obj = X.D 0 n, ∃ hConv : X.ConvergesTo L A, ∀ (p q : ℤ), 0 ≤ p → a ≤ q → (L.Z p q).Factors (X.initialG p q) ∧ Epi (X.toPageInfinity L p q) ∧ Epi (X.toGradedPiece A p q) ∧ kernelSubobject (X.toPageInfinity L p q) = kernelSubobject (X.toGradedPiece A p q) ∧ ∃! e : X.pageInfinity L p q ≅ (X.imageFiltration (p + q) (A (p + q))).gradedPiece p, X.toPageInfinity L p q ≫ e.hom = X.toGradedPiece A p q",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "F1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }

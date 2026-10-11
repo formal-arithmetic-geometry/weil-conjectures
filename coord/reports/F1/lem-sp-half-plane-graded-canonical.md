@@ -1,23 +1,71 @@
-Files written:
+## Worker report
 
-- `dag/nodes/sec-abelian-varieties/lem-sp-half-plane-graded-canonical.json` (statement, split; no new nodes; Mathlib searches found no match).
+The module `Sheaf.CategoryTheory.HalfPlaneGradedCanonical` states
+`CategoryTheory.BigradedExactCouple.halfPlaneGradedCanonical`. It takes a type-zero
+bigraded exact couple, an integer lower bound `a`, and the two half-plane vanishing
+hypotheses. It existentially supplies the limiting subobjects `L`, diagonal colimits
+`A`, the identification `hA` with `D 0 n`, and convergence `hConv`, then states the
+canonical identification for every `p,q` with `0 ≤ p` and `a ≤ q`.
 
-Attachments: none.
+The hypothesis `hD` is rendered as
+`∀ (p q : ℤ), q < a → IsZero (X.D p q)` and `hE` as
+`∀ (p q : ℤ), (p < 0 ∨ q < a) → IsZero (X.E p q)`. The conclusion's clauses are:
+`(L.Z p q).Factors (X.initialG p q)` expresses that `g` lands in the limiting
+cycle object; the two `Epi` clauses state that the maps to the infinite page and
+the filtration graded piece are epimorphisms; the `kernelSubobject` equality gives
+the same kernel; and the final existential is the isomorphism
+`X.pageInfinity L p q ≅ (X.imageFiltration (p + q) (A (p + q))).gradedPiece p`
+with commutation equation `X.toPageInfinity L p q ≫ e.hom = X.toGradedPiece A p q`.
+The bounds are explicit binders `0 ≤ p` and `a ≤ q`.
 
-WANTED: none.
+Dependencies used are `Sheaf.CategoryTheory.ExactCouple` (the declaration
+`CategoryTheory.BigradedExactCouple`, `initialG`, and page objects),
+`Sheaf.CategoryTheory.ExactCoupleConvergence` (the declarations
+`LimitSubobjects`, `AlphaColimit`, `ConvergesTo`, `toPageInfinity`,
+`toGradedPiece`, `pageInfinity`, `WeaklyConvergesTo`),
+`Sheaf.CategoryTheory.Filtration` (`DecreasingFiltration.gradedPiece`), and
+`Sheaf.CategoryTheory.HalfPlaneConvergence` (`halfPlaneConvergence`).
 
-The item had no Lean declaration in `weil-src-slopmaster2`. I kept its statement and filled the proof from the stabilized-page argument referenced by `lem-sp-couple-morphism`. No child node was created: the proof uses the existing half-plane convergence theorem, exact-couple definition, and the existing derived-couple exactness statement. The latter is outside this unit and is recorded as a tool use because it supplies the iterated-page exactness and the formula for `D_r`.
+Edge cases checked: `p = 0` and `q = a` are admitted; `p,q` range over all integers;
+zero objects are allowed through `IsZero`; no nonempty or positivity assumptions on
+indices beyond the node's displayed bounds are introduced. The index universe is the
+same category universe as the exact couple.
 
-## Review by F1
+Searches: the node's recorded LeanFinder, Loogle, grep, and LeanSearch searches
+found no Mathlib or project exact-couple/E-infinity declaration. I additionally ran
+`rg -n "halfPlaneGradedCanonical|E_infty|ExactCouple"` over `WeilConjectures/` and
+`lean/Sheaf`; only the existing exact-couple infrastructure was found, so this
+statement is new.
 
-I read `dag/nodes/sec-abelian-varieties/thm-sp-half-plane-convergence.json`, `def-sp-exact-couple`, `def-sp-convergence`, and `dag/nodes/sec-proper-base-change/lem-sp-derived-couple-exact.json`, together with the source references Tags 011T and 012F in `literature/stacks-project/homology.tex` as named by the item. Step 1 uses the half-plane stabilization bound, the exact-couple page recursion, and the derived-couple statement that `D_r` is the image of the indicated power of `alpha`; these statements supply the stabilized quotient and the filtration quotient. Step 2 uses the derived-couple page maps and the convergence definition's canonical map from `g`, then checks that the `alpha^p` map is the corresponding filtration quotient map; both are quotient maps from the same `G_q/G_{q-1}` object. Step 3 uses the convergence definition's criterion that two epimorphisms with the same kernel induce the canonical isomorphism. I verified the hypotheses `p >= 0`, `q >= a`, `r > max(q-a+1,p)`, and `u <= 0` at the stabilized-page choice, and checked the edge case `p=0` where `alpha^p` is the identity. The Mathlib searches were rerun for the item with LeanFinder, Loogle, grep, and LeanSearch; no exact-couple declaration was found, and LeanSearch was unavailable.
+## Earlier second reading (a previous round; superseded)
+
+Read the node and module independently. The two vanishing hypotheses, the bounds on
+`p,q`, the limiting-cycle landing clause, both epimorphism clauses, equality of kernels,
+and the induced isomorphism equation all occur verbatim in the Lean statement. The
+objects are exactly the dependency notions (`L`, `A`, `initialG`, `toPageInfinity`,
+`toGradedPiece`, and `gradedPiece`); no extra mathematical hypothesis or conclusion
+was introduced.
 
 ## Second reading by F1
 
-- Item statement: checked against the half-plane convergence and convergence-definition statements and Stacks Tags 011T and 012F; the hypotheses and the assertion that the canonical comparison is induced by `g` and `alpha^p` are retained.
-- Step 1: checked against `thm-sp-half-plane-convergence`, `def-sp-exact-couple`, and `lem-sp-derived-couple-exact`; the stabilization bound, iterated image formula, exact sequence, and filtration indices agree. Repaired the previously implicit `alpha^{-u}` isomorphism by spelling out the two vanishing neighboring terms and exactness.
-- Step 2: checked against `lem-sp-derived-couple-exact`, `def-sp-convergence`, and the filtration formula in `thm-sp-half-plane-convergence`; the iterated `g_r` formula and the two quotient maps have the same source quotient and kernel.
-- Step 3: checked against `def-sp-convergence`; its same-kernel quotient criterion exactly gives the claimed canonical isomorphism, and the step is elementary from that definition.
-- New nodes: none; there were no child nodes to audit. Existing-node searches found the cited exact-couple and convergence statements, and Mathlib searches recorded in the item found no exact-couple or `E_infty` declaration.
-- Edge cases checked: `p=0` makes `alpha^p` the identity; `q=a` still permits the stated stabilization bound; the zero/vanishing case gives zero source and zero quotient; the field and trivial exact-couple cases reduce to the same quotient criterion.
-- Changes: expanded Step 1's exactness argument for `alpha^{-u}`; appended this second-reading record. No statement, citation quote, or dependency was otherwise changed.
+The node introduces a type-zero exact couple `(D,E,alpha,f,g)`, an integer `a`,
+vanishing hypotheses `q < a -> IsZero (X.D p q)` and
+`(p < 0 ∨ q < a) -> IsZero (X.E p q)`, and the half-plane convergence data.
+The Lean renders these as `(X : BigradedExactCouple C 0)`, `a : ℤ`, `hD`, and
+`hE`, with the same quantifier order and no extra finiteness, nonemptiness,
+or characteristic assumptions. It existentially introduces `L : LimitSubobjects X`,
+`A : ∀ n, AlphaColimit X n`, the object equalities `hA`, and `hConv : X.ConvergesTo L A`.
+For every `p,q` with `0 ≤ p` and `a ≤ q`, the clauses render exactly as
+`(L.Z p q).Factors (X.initialG p q)`, epimorphisms of `toPageInfinity` and
+`toGradedPiece`, equality of their `kernelSubobject`s, and an isomorphism commuting
+with those maps. The node says this is the canonical induced isomorphism; uniqueness
+is therefore required and is rendered by `∃! e`.
+
+The earlier Lean used `∃ e`, omitting uniqueness from the canonical-identification
+clause. I changed it to `∃! e`; the node's statement and the recorded `lean.statement`
+now match this signature. No other mismatch was found. Edge cases `p = 0`, `q = a`,
+zero objects, and arbitrary integer indices remain included; the empty-index issue does
+not arise because all indices are integers. The module imports only the dependency
+module and compiles cleanly with `scompile.py`. Searches in the worker report were
+rechecked with `rg` over Mathlib and the source repository; no existing declaration
+for this exact-couple half-plane canonical identification exists.
