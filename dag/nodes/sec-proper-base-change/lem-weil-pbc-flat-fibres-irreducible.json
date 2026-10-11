@@ -106,5 +106,23 @@
   "group": "E1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ffi1706 (reviewer sub-agent of L); spot-checked: Source Stacks Algebra Lemma 00I6 (algebra.tex 11083): item statement agrees hypothesis by hypothesis ((a) Spec R irreducible, (b) flat, (c) finite presentation, (d) dense set of primes with irreducible fibre-ring spectra); proof follows 00I6 exactly (00I1 then Topology 004Z). Step 1 carried by lem-weil-pbc-flat-finite-presentation-open = Algebra 00I1 (algebra.tex 9708), statement checked. Step 2 carried by lem-weil-pbc-irreducible-on-top = Topology 004Z (topology.tex 1115), statement checked hypothesis by hypothesis; the irreducibility notion def-weil-irreducible-components includes nonemptiness. Mathlib lines verified with sed: Chevalley.lean:59 isOpenMap_comap_of_hasGoingDown_of_finitePresentation (@[stacks 00I1]) with GoingDown.lean:155 instance HasGoingDown.of_flat; Topology/Irreducible.lean:413 IsPreirreducible.preimage_of_dense_isPreirreducible_fiber (@[stacks 004Z]). Small cases: identity map of an irreducible spectrum; k[t] -> k[t,x]/(x^2-t) (flat fp, fibres over t != 0 two points over kbar, item gives no conclusion, Spec T irreducible anyway, no contradiction); k[t] -> k[t] x k[t] (fibres two points, Spec T reducible, hypothesis (d) fails as required). FIX more, RETURN less: (1) C1 in step 2: the identification of the fibre f^{-1}(p) with Spec(T (x)_R kappa(p)) as topological spaces had no node; added statement-only node lem-weil-pbc-fibre-spec-homeomorphism (Stacks Remark 00E6; my LeanFinder query found PrimeSpectrum.preimageHomeomorphFiber, Fiber.lean:212, recorded as match for the splitter), cited in step 2 uses and item proof_deps; step 2 text now says the homeomorphism preserves irreducibility. (2) dag/nodes/sec-proper-base-change/lem-weil-pbc-flat-finite-presentation-open.json: mathlib_match: file/line was UniversallyOpen.lean:129 (a use inside a proof), corrected to Mathlib/RingTheory/Spectrum/Prime/Chevalley.lean:59 with the of_flat instance in how. (3) dag/nodes/sec-proper-base-change/lem-weil-pbc-irreducible-on-top.json: status unsplit -> mathlib, mathlib_match IsPreirreducible.preimage_of_dense_isPreirreducible_fiber Topology/Irreducible.lean:413 (V = univ, nonemptiness from the dense set), my LeanFinder query added to mathlib_searches (the worker's searches had reported no match). Start 2026-10-10 Sat Oct 10 05:06:33 PM UTC 2026, end Sat Oct 10 05:08:20 PM UTC 2026.; 4 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FlatFibresIrreducible",
+  "declaration": "flat_finitePresentation_dense_irreducible_fibres",
+  "file": "lean/Sheaf/Paper/FlatFibresIrreducible.lean",
+  "statement": "theorem flat_finitePresentation_dense_irreducible_fibres {R T : Type*} [CommRing R] [CommRing T] [Algebra R T] (hR : IsIrreducible (Set.univ : Set (PrimeSpectrum R))) (hflat : (algebraMap R T).Flat) (hfp : (algebraMap R T).FinitePresentation) (hdense : ∃ U : Set (PrimeSpectrum R), Dense U ∧ ∀ p ∈ U, IsIrreducible (Set.univ : Set (PrimeSpectrum (p.asIdeal.Fiber T)))) : IsIrreducible (Set.univ : Set (PrimeSpectrum T))",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-ffi1029",
+  "group": "G1",
+  "result": "pass",
+  "note": "Stacks 00I6 (a)-(d) vs Lean: hR IsIrreducible univ (PrimeSpectrum R) = Spec R irreducible incl. nonempty; hflat RingHom.Flat (algebraMap); hfp RingHom.FinitePresentation; hdense exists Dense U, each p in U IsIrreducible univ (PrimeSpectrum (p.asIdeal.Fiber T)) = FIBRE RING line kappa(p) (x)_R T; conclusion IsIrreducible univ (PrimeSpectrum T); #check: RingHom.Flat/FinitePresentation/Ideal.Fiber are Mathlib's; zero ring/zero target edge cases handled by IsIrreducible nonemptiness; no hollow or added hypotheses; docstring follows 00I1 + 00E6 + 004Z"
  }
 }
