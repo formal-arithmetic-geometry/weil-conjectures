@@ -5381,3 +5381,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 16:14 L: merged deliver/Q1/lem-pc-sheaf-rhom-projection-formula (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.DerivedDirectImageInternalHom AlgebraicGeometry.exists_derivedDirectImage_internalHom_comparison)
 - 16:14 L: merged deliver/T1/lem-weil-pbc-pullback-iso-prime-torsion-devissage (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.PullbackIsoPrimeTorsionDevissage AlgebraicGeometry.Etale.pullback_cohomology_bijective_of_prime_torsion_devissage)
 - 16:14 L: merged deliver/F1/lem-pc-affine-pseudo-coherent-criterion (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.AffinePseudoCoherentCriterion AlgebraicGeometry.isPseudoCoherent_affine_iff)
+- 16:14 L: merged deliver/U1/lem-pqf-quasicompact-h1-zero (stage 2; reviewer PASS; first push; Sheaf.Paper.QuasiCompactH1Zero AlgebraicGeometry.quasiCompact_affine_of_h1_ideal_zero)
