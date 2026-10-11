@@ -169,5 +169,23 @@
   "summary": "Split following the proof of Stacks 02KQ (only its descent clause; base change 01K5 and Zariski locality are not needed for the one-member covering): for an affine open U of S, V = g^{-1}(U) is quasi-compact; W = f'^{-1}(V) is quasi-compact (new Mathlib leaf lem-weil-pbc-quasi-compact-morphism-preimage-qc-open, Stacks 01K4, Scheme.Hom.isCompact_preimage); p: X' -> X is surjective (lem-weil-pbc-surjective-base-change); p(W) = f^{-1}(U) (elementary); so f^{-1}(U) is the continuous image of a quasi-compact space (lem-weil-pbc-continuous-image-quasi-compact). Flatness of g is not used (as in the source's proof). The source reduces to S' affine, the item has g quasi-compact instead, which replaces 'X' is quasi-compact' by the quasi-compactness of f'^{-1}(g^{-1}(U)). No slopmaster2 declaration states the item (grep by id, 02KQ, DescendsAlong QuasiCompact); Mathlib has no DescendsAlong instance for QuasiCompact (Loogle, LeanFinder, grep); LeanSearch returned HTTP 500 throughout. Statement unchanged.",
   "blueprint": "The item serves the clause 'By Lemmas [02KQ] and [02KU] we see that X -> S is separated and quasi-compact' (quasi-compact half) of the proof of Descent 02L5, realized in the chain via down to lemma-weil-pbc-h1-constructible-representation (proof, second paragraph: the reduction to constructible sheaves through 03SA/03Q5); steps 1-5 realize all of the 02KQ descent argument: step 1 the affine reduction, step 2 'X' is quasi-compact', step 3 'X' -> X is surjective', steps 4-5 'Hence X is quasi-compact. This implies f is quasi-compact'."
  },
- "reviewed": "2026-10-10 L: 5 steps along 02KQ checked (affine open U, V = g^-1(U) quasi-compact; W = f'^-1(V) quasi-compact by the new leaf Scheme.Hom.isCompact_preimage, line 55 verified; p surjective by base change; p(W) = f^-1(U); continuous image). Flatness unused, as in the source. New Mathlib leaf lem-weil-pbc-quasi-compact-morphism-preimage-qc-open (01K4)."
+ "reviewed": "2026-10-10 L: 5 steps along 02KQ checked (affine open U, V = g^-1(U) quasi-compact; W = f'^-1(V) quasi-compact by the new leaf Scheme.Hom.isCompact_preimage, line 55 verified; p surjective by base change; p(W) = f^-1(U); continuous image). Flatness unused, as in the source. New Mathlib leaf lem-weil-pbc-quasi-compact-morphism-preimage-qc-open (01K4).",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FpqcDescendQuasiCompact",
+  "declaration": "AlgebraicGeometry.quasiCompact_of_fpqc_baseChange",
+  "file": "lean/Sheaf/AlgebraicGeometry/FpqcDescendQuasiCompact.lean",
+  "statement": "theorem quasiCompact_of_fpqc_baseChange {S S' X : Scheme.{u}} (g : S' ⟶ S) [Flat g] [Surjective g] [QuasiCompact g] (f : X ⟶ S) [QuasiCompact (pullback.snd f g)] : QuasiCompact f",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-fdq1043",
+  "group": "C1",
+  "result": "pass",
+  "note": "S S' X : Scheme.{u}; g : S' ⟶ S with [Flat g] [Surjective g] [QuasiCompact g] (node's three fpqc hypotheses, single morphism as E1 c2fa8c1e3); f : X ⟶ S arbitrary; f' = pullback.snd f g with [QuasiCompact f'] (not instance-inferable); conclusion QuasiCompact f; no Mathlib DescendsAlong @QuasiCompact (Surjective ⊓ Flat ⊓ QuasiCompact) instance (synth fails), so existing:false correct; node json diff only adds lean"
+ }
 }
