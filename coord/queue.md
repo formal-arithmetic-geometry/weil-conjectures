@@ -1,11 +1,11 @@
 # Work queue
 
-517 items; claim with `tools/claim.py next <group> [--stage N]`.
+514 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (517)
+## Stage 2: nodes to state (514)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -50,7 +50,6 @@
 | `lem-sc-invertible-tensor-qcoherent` | 1 | state |
 | `lem-sc-local-section-quotient-finite-free` | 1 | state |
 | `lem-sc-local-splitting-finite-free` | 1 | state |
-| `lem-sc-meromorphic-weakass-generic-product` | 1 | state |
 | `lem-sc-numerical-polynomial-leading-term` | 1 | state |
 | `lem-sc-p1-invertible-section-localization` | 1 | state |
 | `lem-sc-p1-section-clearing-denominators-qcqs` | 1 | state |
@@ -73,9 +72,7 @@
 | `lem-weil-pbc-algebra-directed-colimit-finite-type` | 1 | state |
 | `lem-weil-pbc-closed-immersion-pushforward-annihilated` | 1 | state |
 | `lem-weil-pbc-coherent-filtration-integral-subschemes` | 1 | state |
-| `lem-weil-pbc-coherent-finite-type-sub-kernel` | 1 | state |
 | `lem-weil-pbc-coherent-generic-point-ideal-inclusion` | 1 | state |
-| `lem-weil-pbc-coherent-kernel-cokernel-locnoeth` | 1 | state |
 | `lem-weil-pbc-coherent-local-isomorphism` | 1 | state |
 | `lem-weil-pbc-coherent-module-local-on-open-cover` | 1 | state |
 | `lem-weil-pbc-coherent-modules-kernel-cokernel-sum` | 1 | state |
