@@ -22,7 +22,8 @@
   "def-weil-field",
   "def-weil-proper-morphism",
   "def-weil-scheme-over-base",
-  "def-pc-rational-point"
+  "def-pc-rational-point",
+  "def-sc-structure-sheaf-cohomology-pullback"
  ],
  "proof": [
   {
@@ -139,5 +140,26 @@
   "group": "J1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-phi3139 (reviewer sub-agent of L); spot-checked: Checked child lem-sc-picard-kunneth-qcoh against Tag 0BED (hypotheses qc + affine diagonal, cup-product map via projections; no Zariski qcoh Kunneth node exists, existing kunneth nodes are etale/derived); H^0=k used in step 2 (needed: slice pullback on H^1(X)(x)H^0(Y) is evaluation at y); cross terms in step 3 factor through Spec k. FIX more, RETURN less: (1) C1 step 1 now cites pqf-lem-proper-basic for quasi-compact+separated; (2) C1 step 3 now cites pqf-lem-affine-vanishing for H^1(Spec k,O)=0 and makes the factoring through Spec k via the rational point explicit; proof_deps updated. The Second reading claimed these citations were added but the branch file did not contain them.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.PicardH1ProductInjective",
+  "declaration": "AlgebraicGeometry.Scheme.picard_h1_product_injective",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.picard_h1_product_injective"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/PicardH1ProductInjective.lean",
+  "statement": "theorem picard_h1_product_injective (k : Type u) [Field k] (X Y : Scheme.{u}) [X.Over (Spec (CommRingCat.of k))] [Y.Over (Spec (CommRingCat.of k))] [IsProper (X ↘ Spec (CommRingCat.of k))] [IsProper (Y ↘ Spec (CommRingCat.of k))] (hX : Function.Bijective (globalSectionsRingHom k (X := X))) (hY : Function.Bijective (globalSectionsRingHom k (X := Y))) (x : (X ↘ Spec (CommRingCat.of k)).fieldPoints k) (y : (Y ↘ Spec (CommRingCat.of k)).fieldPoints k) : let f := X ↘ Spec (CommRingCat.of k) let g := Y ↘ Spec (CommRingCat.of k) let iX : X ⟶ pullback f g := pullback.lift (𝟙 X) (f ≫ y.1) (by dsimp only [f, g] rw [Category.id_comp, Category.assoc, y.2] simp) let iY : Y ⟶ pullback f g := pullback.lift (g ≫ x.1) (𝟙 Y) (by dsimp only [f, g] rw [Category.id_comp, Category.assoc, x.2] simp) Function.Injective ((structureSheafCohomologyPullback iX 1).prod (structureSheafCohomologyPullback iY 1))",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-phi1316",
+  "group": "E1",
+  "result": "pass",
+  "note": "k Field; X,Y Over Spec k with IsProper on X↘/Y↘; H0=k as bijective globalSectionsRingHom; x,y fieldPoints (sections); X×_kY = pullback f g; iX=lift(𝟙,f≫y), iY=lift(g≫x,𝟙) = (1,y),(x,1); H1 = Sheaf.H of O_ab on Zariski site, pullback = Ext map via exact f^{-1}, ℤ comparison, adjoint of f.c; conclusion Injective of AddMonoidHom.prod"
  }
 }

@@ -1,0 +1,101 @@
+{
+ "id": "def-sc-structure-sheaf-cohomology-pullback",
+ "kind": "definition",
+ "title": "Canonical pullback on structure sheaf cohomology",
+ "statement": "Let $f:X\\to Y$ be a morphism of schemes [def-pc-scheme]. Let $\\mathcal O_{X,\\mathrm{ab}}$ and $\\mathcal O_{Y,\\mathrm{ab}}$ be their structure sheaves regarded as sheaves of abelian groups. For $n\\geq0$, their cohomology is the Zariski sheaf cohomology [def-sc-topological-abelian-cohomology]. Define $f^*:H^n(Y,\\mathcal O_Y)\\to H^n(X,\\mathcal O_X)$ by first applying the exact inverse-image functor $f^{-1}$ to an Ext class from the constant integer sheaf, precomposing with the canonical comparison $\\mathbb Z_X\\simeq f^{-1}\\mathbb Z_Y$, and then applying cohomology to the morphism $f^{-1}\\mathcal O_{Y,\\mathrm{ab}}\\to\\mathcal O_{X,\\mathrm{ab}}$ adjoint to the structure-sheaf homomorphism $f^\\#: \\mathcal O_{Y,\\mathrm{ab}}\\to f_*\\mathcal O_{X,\\mathrm{ab}}$.",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0BED, varieties-lemma-kunneth, proof, functoriality maps; Cohomology of Sheaves, Section 01F7"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sc-topological-abelian-cohomology"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "pullback map on Zariski structure sheaf cohomology of schemes",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "canonical pullback on structure sheaf cohomology of a scheme morphism",
+   "results": "8 hits: Scheme.Modules.pullback, Scheme.Hom.toRingCatSheafHom, Scheme.Modules.pullbackPushforwardAdjunction, Scheme.Hom.app, Scheme.Modules.instIsLeftAdjointPullback, Scheme.Modules.pushforward_map_app, Scheme.Modules.pushforward_obj_obj, Scheme.Modules.pushforward_obj_presheaf_map. None is the map on cohomology.",
+   "date": "2026-10-11",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "msearch grep structureSheafCohomology|cohomologyPullback|cohomologyMap AlgebraicGeometry; rg structureSheafCohomologyPullback|structureSheafAb in Mathlib, WeilConjectures, lean/Sheaf; rg -l structure sheaf cohomology|structure-sheaf-cohomology|structureSheafCohomology dag/nodes; blueprint_refs.py search structure sheaf cohomology",
+   "results": "msearch: 0 hits. rg for the proposed declaration names: no hits in Mathlib, WeilConjectures, lean/Sheaf or upstream names. blueprint search: 0 nodes. DAG contains general module f-map and etale pullback nodes, but no declaration for the canonical structure-sheaf specialization. Source Sheaf.H.mapFunctor and Functor.constantSheafsheafPullbackIso supply the generic building blocks.",
+   "date": "2026-10-11",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sc-picard-h1-product-injective",
+  "date": "2026-10-11",
+  "group": "E1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "Tag 0BF3 proof: the two rational-point slice maps on the first structure-sheaf cohomology of a product",
+   "via": [
+    "lem-sc-picard-h1-product-injective",
+    "lem-sc-picard-product-open",
+    "lem-sc-general-theorem-of-cube"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.StructureSheafCohomologyPullback",
+  "declaration": "AlgebraicGeometry.Scheme.structureSheafCohomologyPullback",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.structureSheafAb",
+   "AlgebraicGeometry.Scheme.structureSheafCohomologyPullback"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/StructureSheafCohomologyPullback.lean",
+  "statement": "def structureSheafCohomologyPullback {X Y : Scheme.{v}} (f : X ⟶ Y) (n : ℕ) : Sheaf.H (structureSheafAb Y) n →+ Sheaf.H (structureSheafAb X) n",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-phi1316",
+  "group": "E1",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-phi1316",
+  "group": "E1",
+  "result": "pass",
+  "note": "k Field; X,Y Over Spec k with IsProper on X↘/Y↘; H0=k as bijective globalSectionsRingHom; x,y fieldPoints (sections); X×_kY = pullback f g; iX=lift(𝟙,f≫y), iY=lift(g≫x,𝟙) = (1,y),(x,1); H1 = Sheaf.H of O_ab on Zariski site, pullback = Ext map via exact f^{-1}, ℤ comparison, adjoint of f.c; conclusion Injective of AddMonoidHom.prod"
+ }
+}
