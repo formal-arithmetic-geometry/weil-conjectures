@@ -132,5 +132,23 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-grl2303 (reviewer sub-agent of L); spot-checked: Return 19:54 points: (1) Step 1 now devisses E via lem-weil-pbc-coherent-filtration-integral-subschemes, rank count at generic point correct, ideal sequences 0->I_j->O_Y->O_Y/I_j->0: repaired; (2) coherent 0BEM bound now cited: repaired; (3) filtration and lem-pc-euler-additive cited, elementary false: repaired; (4) file matches report except phantom citations.json. FIX more, RETURN less: new node lem-sc-hilbert-polynomial-coherent-support is class (b), a weaker special case (large m, single ample L) of lem-sc-snapper-numerical-polynomial (0BEL, all m, any invertible); dropped it and cited the Snapper node in Step 1, stmt_deps, proof_deps, tool_uses; made exactness of twisting by M^m and dim Z_j<=g-1 explicit.; 1 file(s) fixed by the reviewer"
  },
- "lead_note": "2026-10-10 L (R-grl2303): Report claims a citations.json with verbatim citation records; no such file exists in the delivery or repo (report/file mismatch again, harmless)."
+ "lead_note": "2026-10-10 L (R-grl2303): Report claims a citations.json with verbatim citation records; no such file exists in the delivery or repo (report/file mismatch again, harmless).",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GenericRankLeadingDegree",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_polynomials_coeff_eq_genericRank",
+  "file": "lean/Sheaf/AlgebraicGeometry/GenericRankLeadingDegree.lean",
+  "statement": "theorem exists_polynomials_coeff_eq_genericRank (K : Type u) [Field K] (Y : Scheme.{u}) [IsIntegral Y] [Y.Over (Spec (.of K))] [IsProper (Y ↘ Spec (.of K))] (g : ℕ) (hdim : topologicalKrullDim Y = g) (M : Y.Modules) (hM : IsAmple (Y ↘ Spec (.of K)) M) (E : Y.Modules) (hE : RingedSpace.IsCoherent Y.toRingedSpace E) (U : Y.Opens) (hU : (U : Set Y).Nonempty) (r : ℕ) (e : E.over U ≅ SheafOfModules.free (R := (moduleRings Y.toRingedSpace).over U) (ULift.{u} (Fin r))) : ∃ P Q : Polynomial ℚ, (∀ m : ℕ, P.eval (m : ℚ) = ((E ⊗ M.tensorPow m).eulerChar K : ℚ)) ∧ (∀ m : ℕ, Q.eval (m : ℚ) = ((M.tensorPow m).eulerChar K : ℚ)) ∧ P.coeff g = (r : ℚ) * Q.coeff g",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "G1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ }
 }

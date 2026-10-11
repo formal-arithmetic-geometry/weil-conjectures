@@ -5165,3 +5165,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 15:12 L: merged deliver/F1/lem-pur-derived-functor-inverts-05sb (stage 2; reviewer PASS; first push; Sheaf.CategoryTheory.DerivedFunctorInverts CategoryTheory.Functor.leftDerived_inverts)
 - 15:12 L: merged deliver/F1/lem-weil-pbc-coherent-artin-rees (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.CoherentArtinRees AlgebraicGeometry.Scheme.coherent_artin_rees)
 - 15:12 L: merged deliver/F1/lem-weil-pbc-spectral-limit-pullback-sections (stage 2; reviewer PASS; first push; Sheaf.Topology.SpectralLimitPullbackSections TopCat.Sheaf.spectralLimit_pullback_sections)
+- 15:12 L: merged deliver/G1/lem-sc-generic-rank-leading-degree (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.GenericRankLeadingDegree AlgebraicGeometry.Scheme.Modules.exists_polynomials_coeff_eq_genericRank)
