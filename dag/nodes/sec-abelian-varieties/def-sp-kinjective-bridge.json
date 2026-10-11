@@ -132,5 +132,29 @@
   "group": "F1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-kib1848 (reviewer sub-agent of L); spot-checked: Definition read whole; K-injective (Hom-complex acyclic) and RvK:=v(I) correct, choice-dependence deferred explicitly to lem-sp-kinjective-computes. Not a duplicate: def-weil-pbc-kinjective-resolutions is etale-module-specific, def-pur-kinjective-complex is O-module homotopy form; no cycle (neither cited node reaches the item). FIX more, RETURN less: C1 the existence clause 'every bounded-below complex in a Grothendieck abelian category admits a K-injective resolution' was an uncited theorem inside the definition (missed by the Second reading); now cites lem-weil-pbc-kinjective-functorial-existence (all complexes, generic tool), and Hom(A,I) made precise via def-weil-pbc-kinjective-resolutions; both added to stmt_deps and tool_uses.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.KInjectiveBridge",
+  "declaration": "CategoryTheory.Functor.rightDerivedComplexWithResolution",
+  "declarations": [
+   "CochainComplex.KInjectiveResolutionChoice",
+   "CochainComplex.grothendieckKInjectiveResolutionChoice",
+   "CategoryTheory.Functor.rightDerivedComplexWithResolution",
+   "CategoryTheory.Functor.rightDerivedCohomologyWithResolution"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/KInjectiveBridge.lean",
+  "statement": "def rightDerivedComplexWithResolution {C : Type u₁} [Category.{v₁} C] [Abelian C] {D : Type u₂} [Category.{v₂} D] [Abelian D] (F : C ⥤ D) [F.Additive] [PreservesFiniteLimits F] (K : CochainComplex.Plus C) (r : CochainComplex.KInjectiveResolutionChoice K.obj) : CochainComplex D ℤ",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-kib1519",
+  "group": "H1",
+  "result": "pass",
+  "note": "arbitrary abelian C,D; resolution = QuasiIso map + Mathlib CochainComplex.IsKInjective (no second predicate; etale IsKInjectiveResolution abbrev inapplicable to general C, no generic bundled form upstream); Grothendieck existence from recorded kInjectiveResolutionFunctor data (#check'd); F Additive+PreservesFiniteLimits; K : CochainComplex.Plus; RvK = mapHomologicalComplex of r.complex; R^p = homology p, all p : Z; choice-independence deferred to lem-sp-kinjective-computes"
  }
 }
