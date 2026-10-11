@@ -142,5 +142,23 @@
   "group": "J1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-rml0118 (reviewer sub-agent of L); spot-checked: Read packet whole; Tag 064E/064D/064B text vs item and new nodes; citer lem-pc-ring-pseudo-coherent-distinguished-triangle step 1 applies the lift with alpha=beta:E->B and P->A->B as D(R) morphisms (B an object of D(R)); Mathlib KProjective.lean:113 (isKProjective_of_projective, IsStrictlyLE d + Projective terms) and DerivedCategory/KProjective.lean:43 (Qh_map_bijective) read with sed: one-line term specialization; Step 1 cone cohomology vanishing j>=n checked; duplicates: lem-sc-bounded-above-projective-kprojective states only K-projectivity, lem-weil-pbc-projective-resolution-lift is module-resolution lift, no 064B/064D node exists. FIX more, RETURN less: (1) C4/E7 in the citer: the delivery changed the item statement to chain maps alpha,beta with a homotopy conclusion while the split_report claims it unchanged; the citer uses D(R)-morphism alpha,beta, so the sheaf-dag D(R) statement (which implies the 064E chain-map form) is restored; (2) Step 1 now forms the triangle by TR1 of def-weil-triangulated-category (added to uses/proof_deps) with C=Q(C^bullet); Step 3 rewritten to use hom-into-triangle (ii) and surjectivity of the representative bijection, giving alpha o Q(gamma)=beta. The Second reading by J1 missed (1): it introduced the fault.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.DerivedMapLift",
+  "declaration": "RingTheory.derived_map_lift",
+  "file": "lean/Sheaf/RingTheory/DerivedMapLift.lean",
+  "statement": "theorem derived_map_lift (R : Type u) [Ring R] (n : ℤ) (P E L : CochainComplex (ModuleCat R) ℤ) (hbounded : ∃ a b : ℤ, P.IsStrictlyGE a ∧ P.IsStrictlyLE b) (hprojective : ∀ i : ℤ, Projective (P.X i)) (hbelow : ∀ i : ℤ, i < n → IsZero (P.X i)) [HasDerivedCategory.{w} (ModuleCat R)] (α : DerivedCategory.Q.obj E ⟶ DerivedCategory.Q.obj L) (β : DerivedCategory.Q.obj P ⟶ DerivedCategory.Q.obj L) (hα_iso : ∀ i : ℤ, n < i → IsIso ((DerivedCategory.homologyFunctor (ModuleCat R) i).map α)) (hα_epi : Epi ((DerivedCategory.homologyFunctor (ModuleCat R) n).map α)) : ∃ γ : P ⟶ E, DerivedCategory.Q.map γ ≫ α = β",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-dml0900",
+  "group": "J1",
+  "result": "fix",
+  "note": "Read packet whole; Tag 064E derived.tex text vs node; binders matched: R ring, n, P E L CochainComplex (ModuleCat R) Z, bounded = exists IsStrictlyGE a and IsStrictlyLE b, termwise categorical Projective, IsZero below n, alpha: Q E -> Q L, beta: Q P -> Q L, H^i(alpha) IsIso for i>n and Epi at n via DerivedCategory.homologyFunctor, conclusion exists chain map gamma with Q.map gamma >> alpha = beta (= alpha o Q(gamma)); no uniqueness in node; universes polymorphic (ModuleCat universe free, HasDerivedCategory.{w}) checked with pp.universes; docstring carries the 3 proof steps; H4: Mathlib has IsKProjective.Qh_map_bijective/exists_Q_map_eq but no lift-through-alpha theorem, existing false right. FIX: dropped unused imports Mathlib.Algebra.Module.Projective (module-theoretic, not the categorical Projective used) and ModuleCat.Basic (implied by ModuleCat.Abelian); recompiled clean."
  }
 }

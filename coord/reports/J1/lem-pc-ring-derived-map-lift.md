@@ -1,55 +1,89 @@
-# Stage-1 report: lem-pc-ring-derived-map-lift
+## Worker report
 
-## Files written
+The module `Sheaf.RingTheory.DerivedMapLift` states `RingTheory.derived_map_lift`
+with proof `sorry`.  `R : Type u` is a ring and `n : ℤ`; `P`, `E`, and `L` are
+cochain complexes in `ModuleCat R`.  Boundedness is rendered by
+`∃ a b, P.IsStrictlyGE a ∧ P.IsStrictlyLE b`; termwise projectivity is
+`∀ i, Projective (P.X i)`; and the lower vanishing hypothesis is
+`∀ i, i < n → IsZero (P.X i)`.  The derived morphisms are
+`α : DerivedCategory.Q.obj E ⟶ DerivedCategory.Q.obj L` and
+`β : DerivedCategory.Q.obj P ⟶ DerivedCategory.Q.obj L`, with an explicit
+`HasDerivedCategory (ModuleCat R)` instance.  The conditions on cohomology are
+`IsIso ((DerivedCategory.homologyFunctor (ModuleCat R) i).map α)` for `n < i`
+and `Epi ((DerivedCategory.homologyFunctor (ModuleCat R) n).map α)` at `n`.
+The conclusion is a chain map `γ : P ⟶ E` satisfying
+`DerivedCategory.Q.map γ ≫ α = β`.
 
-- `dag/nodes/sec-picard-framework/lem-pc-ring-derived-map-lift.json`: completed the Tag 064E split with three proof steps; no Mathlib match for the full lift.
-- `dag/nodes/sec-picard-framework/lem-pc-ring-precise-vanishing.json`: new statement-only Tag 064D dependency; no Mathlib match.
-- `dag/nodes/sec-picard-framework/lem-pc-ring-derived-map-representative.json`: new Mathlib leaf for `CochainComplex.IsKProjective.Qh_map_bijective`.
-- `citations.json`: verbatim quotes for every dependency used by every step.
+The dependency declaration used is the Mathlib declaration `DerivedCategory`
+from `Mathlib.Algebra.Homology.DerivedCategory.Basic`; its localization functor
+is `DerivedCategory.Q`.  Cohomology maps use Mathlib's
+`DerivedCategory.homologyFunctor` from `Mathlib.Algebra.Homology.DerivedCategory.HomologySequence`.
 
-## Attachments
+Edge cases checked: arbitrary integer `n` (including zero and negative values),
+empty or zero complexes through `IsZero`, and arbitrary ring universes.  The
+strict support bounds allow any bounded complex and do not impose a nonempty
+support condition.
 
-None. A grep of the slopmaster2 `WeilConjectures/` tree found no declaration tagged `(blueprint: lem-pc-ring-derived-map-lift)` and no sorry-free declaration of the exact bounded-projective lifting statement.
+Searches made: `msearch.py leanfinder` for a derived lift theorem (no exact
+match); `msearch.py loogle` for `Qh_map_bijective`, `DerivedCategory.Q`, and
+cones (no exact lift theorem); grep of Mathlib homology sources for
+`lift.*map`/projective-derived declarations (no matching theorem); grep of
+`WeilConjectures` and `lean/Sheaf` for `lem-pc-ring-derived-map-lift` and
+corresponding lift declarations (none).  The dependency's recorded Mathlib
+match was read in full and used directly.
 
-## WANTED
+## Earlier second reading (a previous round; superseded)
 
-None.
-
-## Not duplicates
-
-lem-pc-ring-precise-vanishing vs lem-sc-bounded-above-projective-kprojective: the new node gives vanishing of derived morphisms into a complex with cohomology zero in degrees at least $n$, while the existing Mathlib leaf only states K-projectivity (Hom-complex acyclicity) for bounded-above projective complexes.
-
-lem-pc-ring-precise-vanishing vs lem-weil-pbc-hom-into-triangle-exact: the new node is a derived-category vanishing criterion from a truncated projective source; the existing node is exactness of Hom into a distinguished triangle.
-
-lem-pc-ring-derived-map-representative vs lem-sc-bounded-above-projective-kprojective: the new node states bijectivity of the homotopy-to-derived morphism map, whereas the existing node states only the K-projective acyclicity property.
-
-## Review by J1
-
-I read the target statement against Derived Categories Tag 064E (`derived.tex`, `lemma-lift-map`) and its cited Tags 064B, 064C, and 064D. The ring-module specialization introduces $R$, $n$, the bounded projective complex $P$, the lower-degree vanishing, the two complex morphisms, and the homotopy conclusion (equivalently the displayed equality after applying $Q$). I also read `def-weil-abstract-derived-category` to verify that its $Q$ is the localization used in the statement.
-
-Step 1 uses the cone and distinguished-triangle clause of `def-weil-abstract-derived-category` and the long exact cohomology statement of `lem-sf-derived-homology-long-exact`; these state respectively that the cone triangle exists in $D(R)$ and that its cohomology sequence is exact. The isomorphism hypotheses above $n$ and surjection at $n$ were checked directly in the four consecutive terms, giving $H^j(C(\\alpha))=0$ for every $j\\ge n$.
-
-Step 2 uses the exact statement of the new Tag 064D node: a bounded projective source vanishing below $n$ has no derived morphisms to a complex whose cohomology vanishes in degrees at least $n$. The hypotheses are exactly the item hypotheses and the conclusion of Step 1, so the composite into the cone is zero.
-
-Step 3 uses `lem-weil-pbc-hom-into-triangle-exact`, whose statement gives the factorization through the first arrow of a distinguished triangle when the composite with the second arrow is zero. It then uses the Mathlib leaf `lem-pc-ring-derived-map-representative`; its statement is precisely the bijection needed to replace the derived factor $δ$ by a chain map $\\gamma$. The resulting equality is $Q(\\alpha)\\circ Q(\\gamma)=Q(\\beta)$, hence $\\alpha\\circ\\gamma$ is homotopic to $\\beta$.
-
-I searched the whole DAG and blueprint for Tags 064D/064E, for precise-vanishing language, and for the representation statement before creating nodes; no duplicate statement or blueprint node was found. The Mathlib searches were run for the item and both new nodes with LeanFinder, Loogle, grep, and LeanSearch; LeanSearch was unavailable and is recorded as unavailable in each JSON. I tested the hypotheses on the zero complex and on a one-term projective complex with $n=0$; the cone vanishing and factorization reduce to the stated surjectivity/isomorphism conditions. The imported auxiliary node had `created.item` pointing to the neighboring triangle item; this split corrects ownership to the present item and supplies its missing proof.
-
-## What was wrong and what changed
-
-The imported node was statement-only and owned by `lem-pc-ring-pseudo-coherent-distinguished-triangle`. I retained its statement, corrected its ownership metadata, and supplied the Tag 064E cone argument. The missing Tag 064D vanishing input and the chain-map representation input are now explicit dependencies rather than hidden assertions.
-
-## Unfinished
-
-Nothing.
+The node and module were read together.  Every hypothesis and conclusion is
+rendered by the corresponding explicit Lean binder; no mismatch was found.
 
 ## Second reading by J1
 
-- Item statement: checked against Stacks Tag 064E, including the chain-map hypotheses and homotopy conclusion; repaired the temporary derived-morphism phrasing so the cone $C(\\alpha)$ is defined.
-- Step 1: checked against the cone triangle in `def-weil-abstract-derived-category` and the exact sequence in `lem-sf-derived-homology-long-exact`; the $j>n$ and $j=n$ cases use exactly the stated isomorphism/surjection hypotheses.
-- Step 2: checked against `lem-pc-ring-precise-vanishing`; its bounded-projective, truncation, and cohomology-vanishing hypotheses match the step.
-- Step 3: checked against `lem-weil-pbc-hom-into-triangle-exact` and the representative bijection; the factor is represented by a chain map and yields homotopy, with no unstated cone or derived-map assumption.
-- `lem-pc-ring-precise-vanishing`: checked against Tag 064D hypothesis by hypothesis, including zero-complex and one-term projective cases; statement-only and strictly smaller than 064E.
-- `lem-pc-ring-derived-map-representative`: checked against Mathlib declarations `CochainComplex.IsKProjective.Qh_map_bijective` (DerivedCategory/KProjective.lean:43) and `isKProjective_of_projective` (HomotopyCategory/KProjective.lean:113); exact bounded-above-projective specialization and recorded searches are present.
-- Duplicate and blueprint checks: searched the DAG and imported blueprint for Tags 064D/064E and the representation claim; no duplicate or blueprint statement found.
-- Changes: restored the source-faithful chain-map/homotopy interface, updated Step 3 and its source place, and made the Mathlib file/line citation exact; this fixes the cone typing gap without changing the intended derived equality.
+The node introduces the following data, all rendered by the theorem signature in
+`Sheaf.RingTheory.DerivedMapLift`:
+
+* `R : Type u` with `[Ring R]`, and `n : ℤ`; these are the ring and integer in
+  the statement.
+* `P`, `E`, and `L : CochainComplex (ModuleCat R) ℤ`; these are the three
+  complexes of `R`-modules.
+* Boundedness of `P` is
+  `∃ a b : ℤ, P.IsStrictlyGE a ∧ P.IsStrictlyLE b`; projectivity is
+  `∀ i : ℤ, Projective (P.X i)`; lower vanishing is
+  `∀ i : ℤ, i < n → IsZero (P.X i)`. These exactly render “bounded projective”
+  and `P^i = 0` for `i < n`.
+* `[HasDerivedCategory.{w} (ModuleCat R)]` supplies the derived category and
+  its localization functor. The maps are
+  `α : DerivedCategory.Q.obj E ⟶ DerivedCategory.Q.obj L` and
+  `β : DerivedCategory.Q.obj P ⟶ DerivedCategory.Q.obj L`, hence morphisms in
+  `D(R)` as required by the node.
+* The cohomology assumptions are
+  `∀ i, n < i → IsIso ((DerivedCategory.homologyFunctor (ModuleCat R) i).map α)`
+  and `Epi ((DerivedCategory.homologyFunctor (ModuleCat R) n).map α)`, exactly
+  the isomorphism-above-`n` and surjectivity-at-`n` clauses.
+* The conclusion is `∃ γ : P ⟶ E, DerivedCategory.Q.map γ ≫ α = β`, precisely
+  a chain map whose derived image composes with `α` to `β`.
+
+The dependency `def-weil-abstract-derived-category` records Mathlib's
+`DerivedCategory` and `DerivedCategory.Q`; its declaration and the
+`homologyFunctor` declaration were checked directly. The source Tag 064E
+states the equivalent chain-map/homotopy form for an arbitrary abelian
+category; the node deliberately records its derived-category formulation, and
+Lean uses the ring-module specialization without adding finiteness, Noetherian,
+separatedness, or characteristic hypotheses.
+
+Edge cases checked: `n = 0` and negative `n`; zero and empty-support complexes
+are admitted by `IsZero`; the existential strict bounds allow the zero complex;
+all ring and derived-category universes remain polymorphic; no nonempty index
+or characteristic assumption is present.
+
+Searches: `msearch.py` LeanFinder/Loogle queries for a derived lift theorem,
+grep of Mathlib's derived-category and projective-complex sources, and grep of
+`WeilConjectures/` and `lean/Sheaf/` found no existing declaration with this
+statement. The only matching notion is Mathlib `DerivedCategory`, already the
+recorded dependency.
+
+No statement mismatch was found. I expanded the theorem docstring to carry the
+node's three proof steps (cone cohomology vanishing, precise vanishing and
+triangle factorization, then chain-map representation), naming the dependency
+nodes; the typed signature and node JSON are unchanged. The module compiles
+cleanly with only its intended `sorry` proof.
