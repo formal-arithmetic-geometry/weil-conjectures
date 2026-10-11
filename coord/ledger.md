@@ -3891,3 +3891,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 08:50 L: merged deliver/F1/lem-exc-field-discrete-modules (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.FieldDiscreteModules AlgebraicGeometry.Scheme.etaleModuleSheaves_equiv_discreteGModules)
 - 08:50 L: merged deliver/G1/lem-weil-pbc-annihilator-element-flat-base-change (stage 2; reviewer PASS; first push; Sheaf.RingTheory.AnnihilatorElementFlatBaseChange RingHom.annihilator_element_flat_base_change)
 - 08:51 L: merged deliver/M1/lem-sc-ringed-space-restrict-injective-resolution (stage 2; reviewer PASS; first push; Sheaf.Topology.RestrictInjectiveResolution AlgebraicGeometry.RingedSpace.restrict_injectiveResolution)
+- 08:51 L: merged deliver/G1/lem-sc-qcoh-cech-total-tensor-iso (stage 2; reviewer FIX; first push; Sheaf.Algebra.Homology.TensorKunneth HomologicalComplex.tensor_kunneth; dropped nodes: def-sc-module-tensor-bifunctor)
