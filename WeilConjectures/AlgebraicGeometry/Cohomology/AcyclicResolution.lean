@@ -410,12 +410,6 @@ noncomputable def cyclesShortComplexMap (k : ℕ) :
     rw [← cancel_mono (K'.iCycles (k + 1))]
     simp
 
-lemma eqToHom_comp_cyclesMap {a b : ℕ} (h : a = b) :
-    (eqToHom (by rw [h]) : K.cycles a ⟶ K.cycles b) ≫ HomologicalComplex.cyclesMap ψ b =
-      HomologicalComplex.cyclesMap ψ a ≫ (eqToHom (by rw [h]) : K'.cycles a ⟶ K'.cycles b) := by
-  subst h
-  simp
-
 variable (hK : ∀ j, K.ExactAt (j + 1)) (hacyc : ∀ j m, Subsingleton ((K.X j).H (m + 1)))
   (hK' : ∀ j, K'.ExactAt (j + 1)) (hacyc' : ∀ j m, Subsingleton ((K'.X j).H (m + 1)))
 
@@ -448,15 +442,8 @@ lemma H.cyclesShiftAddEquiv_naturality : ∀ (m k : ℕ) (x : (K.cycles k).H (m 
       ← H.map_comp_apply]
     congr 1
     exact congrArg (H.map · 1)
-      (eqToHom_comp_cyclesMap ψ (a := k + 1 + m) (b := k + (m + 1)) (by omega)).symm
-
-/-- A chain map commutes with the maps `Kⁿ ⟶ Zⁿ⁺¹`. -/
-@[reassoc]
-lemma toCycles_cyclesMap (n : ℕ) :
-    K.toCycles n (n + 1) ≫ HomologicalComplex.cyclesMap ψ (n + 1) =
-      ψ.f n ≫ K'.toCycles n (n + 1) := by
-  rw [← cancel_mono (K'.iCycles (n + 1))]
-  simp
+      (HomologicalComplex.eqToHom_comp_cyclesMap ψ (a := k + 1 + m) (b := k + (m + 1))
+        (by omega)).symm
 
 lemma range_app_toCycles_le_comap (n : ℕ) :
     ((K.toCycles n (n + 1)).app ⊤).hom.range ≤
@@ -466,7 +453,7 @@ lemma range_app_toCycles_le_comap (n : ℕ) :
   refine ⟨(ψ.f n).app ⊤ z, ?_⟩
   change ((ψ.f n ≫ K'.toCycles n (n + 1)).app ⊤) z =
     ((K.toCycles n (n + 1) ≫ HomologicalComplex.cyclesMap ψ (n + 1)).app ⊤) z
-  rw [toCycles_cyclesMap]
+  rw [HomologicalComplex.toCycles_cyclesMap]
 
 include hK hacyc in
 lemma H.cyclesOneAddEquiv_cyclesδZero (n : ℕ) (s : Γ(K.cycles (n + 1), ⊤)) :
@@ -505,7 +492,8 @@ lemma H.cyclesZeroSuccAddEquiv_naturality (n : ℕ) (w : (K.cycles 0).H (n + 1))
   change H.cyclesOneAddEquiv K' hK' hacyc' n (H.map _ 1 (H.cyclesShiftAddEquiv K' hK' hacyc' n 0
     (H.map (HomologicalComplex.cyclesMap ψ 0) (n + 1) w))) = _
   rw [H.cyclesShiftAddEquiv_naturality ψ hK hacyc hK' hacyc', ← H.map_comp_apply, eqToIso.hom,
-    ← eqToHom_comp_cyclesMap ψ (a := 0 + n) (b := n) (by omega), H.map_comp_apply]
+    ← HomologicalComplex.eqToHom_comp_cyclesMap ψ (a := 0 + n) (b := n) (by omega),
+    H.map_comp_apply]
   change H.cyclesOneAddEquiv K' hK' hacyc' n (H.map (HomologicalComplex.cyclesMap ψ n) 1 v) = _
   rw [← hs, H.map_cyclesδZero ψ hK hK', H.cyclesOneAddEquiv_cyclesδZero]
 
