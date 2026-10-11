@@ -3829,3 +3829,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 08:26 L: merged deliver/M1/def-galois-categories (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.GaloisCategories AlgebraicGeometry.Scheme.FLC)
 - 08:27 L: merged deliver/M1/lem-pc-projective-base-change (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.Morphisms.ProjectiveBaseChange AlgebraicGeometry.projective_base_change)
 - 08:27 L: merged deliver/H1/lem-sc-p1-tor-dimension-shifting (stage 2; reviewer FIX; first push; Sheaf.Algebra.TorDimensionShifting CategoryTheory.tor_dimension_shifting)
+- 08:28 L: merged deliver/C1/lem-sc-proper-flat-global-sections-criterion (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.ProperFlatGlobalSectionsCriterion AlgebraicGeometry.isIso_structureSheafMap_of_proper_flat_fiberwise)

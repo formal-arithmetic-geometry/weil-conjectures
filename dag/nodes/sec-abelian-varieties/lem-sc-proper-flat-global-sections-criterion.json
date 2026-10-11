@@ -124,5 +124,24 @@
   "group": "K1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-pfg3131 (reviewer sub-agent of L); spot-checked: Not a duplicate of lem-sc-proper-flat-global-sections (sibling adds geometric reduced/connected fibres and cites this item); statement matches Tag 0E62(a); new criterion not in Mathlib, not a duplicate of lem-sc-perfect-h0-locally-closed; C4 finite presentation and flatness of O_X checked against lem-pc-rf-perfect-base-change. FIX more, RETURN less: (1) B4 step 1 plain-text arrows/ASCII rewritten in TeX; (2) C1 step 1 asserted Tor-amplitude [0,inf) of Rf_*O_X with no cited node: removed that redundant hypothesis from the new criterion (perfect + fibre H^i=0 for i<0 already implies it) and step 1 now derives the fibre vanishing from the cited base change; (3) C1/E step 2 relied on the new node's vacuous base-change clause without checking its hypotheses on T: clause removed from the new node, step 2 now applies the criterion to (Lg^*K, Lg^*u) after verifying the fibre hypotheses via transitivity of pullback and exactness of field extension.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProperFlatGlobalSectionsCriterion",
+  "declaration": "AlgebraicGeometry.isIso_structureSheafMap_of_proper_flat_fiberwise",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProperFlatGlobalSectionsCriterion.lean",
+  "statement": "theorem isIso_structureSheafMap_of_proper_flat_fiberwise {X S : Scheme.{u}} (f : X ⟶ S) [IsProper f] [Flat f] [LocallyOfFinitePresentation f] (hfiber : ∀ s : S, IsIso (f.fiberToSpecResidueField s).appTop) : IsIso ((Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction f)).unit.app (SheafOfModules.unit S.ringCatSheaf)) ∧ ∀ {T : Scheme.{u}} (g : T ⟶ S), IsIso ((Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction (pullback.snd f g))).unit.app (SheafOfModules.unit T.ringCatSheaf))",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-pfg1239"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-pfg1239",
+  "group": "C1",
+  "result": "fix",
+  "note": "f proper/flat/LFP (proper gives qc+qs, so FP); hfiber = appTop of fiberToSpecResidueField (kappa(s) -> H0(X_s,O) via GammaSpecIso); FIX: conclusion IsIso f.c (ring presheaf map) replaced by IsIso of tensorPullback-adjunction unit at O_S, and for all g : T -> S at O_T for pullback.snd f g, the exact hO form of landed lem-sc-picard-diagonal-locally-closed; import BaseChangeConventions (unused) -> Fiber + TensorPullbackAdjunction"
  }
 }
