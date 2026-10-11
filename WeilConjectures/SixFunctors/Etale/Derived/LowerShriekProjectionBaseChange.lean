@@ -313,6 +313,81 @@ theorem projectionMapOfCompactification_baseChange_app
           (L((g)^*[A]).obj L) :=
   projectionMapOfCompactification_baseChange' A sq c c' q hi hp K L
 
+
+/-- `projectionMapOfCompactification_baseChange` followed by a comparison `κ : Rf'_!(c') ⟶ Rf'_!(e)`
+intertwining the projection maps. -/
+theorem projectionMapOfCompactification_baseChange_comp (e : Compactification f')
+    (κ : Rf_!(c')[A] ⟶ Rf_!(e)[A])
+    (hκ : ∀ (K : DerivedCategory (Sheaf X'.smallEtaleTopology A))
+      (L : DerivedCategory (Sheaf Y'.smallEtaleTopology A)),
+      ((projectionMapOfCompactification A c').app K).app L ≫
+        κ.app (((-⊗ᴸ-(X')[A]).obj K).obj (L((f')^*[A]).obj L)) =
+      ((-⊗ᴸ-(Y')[A]).map (κ.app K)).app L ≫ ((projectionMapOfCompactification A e).app K).app L)
+    (K : DerivedCategory (Sheaf X.smallEtaleTopology A))
+    (L : DerivedCategory (Sheaf Y.smallEtaleTopology A)) :
+    L((g)^*[A]).map (((projectionMapOfCompactification A c).app K).app L) ≫
+        (rightDerivedLowerShriekOfCompactificationBaseChangeMap' A c c' q hi hp).app
+          (((-⊗ᴸ-(X)[A]).obj K).obj (L((f)^*[A]).obj L)) ≫
+        κ.app (L((g')^*[A]).obj (((-⊗ᴸ-(X)[A]).obj K).obj (L((f)^*[A]).obj L))) ≫
+        (Rf_!(e)[A]).map (((leftDerivedUpperStarTensorComparison A g').app K).app
+          (L((f)^*[A]).obj L)) ≫
+        (Rf_!(e)[A]).map (((-⊗ᴸ-(X')[A]).obj (L((g')^*[A]).obj K)).map
+          (derivedSquareUpperStarIsoInvApp A sq L)) =
+      ((leftDerivedUpperStarTensorComparison A g).app ((Rf_!(c)[A]).obj K)).app L ≫
+        ((-⊗ᴸ-(Y')[A]).map ((rightDerivedLowerShriekOfCompactificationBaseChangeMap' A c c' q hi
+          hp).app K)).app (L((g)^*[A]).obj L) ≫
+        ((-⊗ᴸ-(Y')[A]).map (κ.app (L((g')^*[A]).obj K))).app (L((g)^*[A]).obj L) ≫
+        ((projectionMapOfCompactification A e).app (L((g')^*[A]).obj K)).app
+          (L((g)^*[A]).obj L) := by
+  have thm := projectionMapOfCompactification_baseChange A sq c c' q hi hp K L
+  have hn₁ : κ.app (L((g')^*[A]).obj (((-⊗ᴸ-(X)[A]).obj K).obj (L((f)^*[A]).obj L))) ≫
+      (Rf_!(e)[A]).map (((leftDerivedUpperStarTensorComparison A g').app K).app
+        (L((f)^*[A]).obj L)) =
+      (Rf_!(c')[A]).map (((leftDerivedUpperStarTensorComparison A g').app K).app
+        (L((f)^*[A]).obj L)) ≫
+      κ.app (((-⊗ᴸ-(X')[A]).obj (L((g')^*[A]).obj K)).obj (L((g')^*[A]).obj (L((f)^*[A]).obj L))) :=
+    (κ.naturality _).symm
+  have hn₂ : κ.app (((-⊗ᴸ-(X')[A]).obj (L((g')^*[A]).obj K)).obj
+        (L((g')^*[A]).obj (L((f)^*[A]).obj L))) ≫
+      (Rf_!(e)[A]).map (((-⊗ᴸ-(X')[A]).obj (L((g')^*[A]).obj K)).map
+        (derivedSquareUpperStarIsoInvApp A sq L)) =
+      (Rf_!(c')[A]).map (((-⊗ᴸ-(X')[A]).obj (L((g')^*[A]).obj K)).map
+        (derivedSquareUpperStarIsoInvApp A sq L)) ≫
+      κ.app (((-⊗ᴸ-(X')[A]).obj (L((g')^*[A]).obj K)).obj
+        (L((f')^*[A]).obj (L((g)^*[A]).obj L))) :=
+    (κ.naturality _).symm
+  erw [reassoc_of% hn₁, hn₂]
+  erw [reassoc_of% thm]
+  rw [hκ]
+  rfl
+
+/-- `projectionMapOfCompactification_baseChange_comp` with the base change map followed by the
+comparison written as a single natural transformation. -/
+theorem projectionMapOfCompactification_baseChange_comp' (e : Compactification f')
+    (κ : Rf_!(c')[A] ⟶ Rf_!(e)[A])
+    (hκ : ∀ (K : DerivedCategory (Sheaf X'.smallEtaleTopology A))
+      (L : DerivedCategory (Sheaf Y'.smallEtaleTopology A)),
+      ((projectionMapOfCompactification A c').app K).app L ≫
+        κ.app (((-⊗ᴸ-(X')[A]).obj K).obj (L((f')^*[A]).obj L)) =
+      ((-⊗ᴸ-(Y')[A]).map (κ.app K)).app L ≫ ((projectionMapOfCompactification A e).app K).app L)
+    (K : DerivedCategory (Sheaf X.smallEtaleTopology A))
+    (L : DerivedCategory (Sheaf Y.smallEtaleTopology A)) :
+    L((g)^*[A]).map (((projectionMapOfCompactification A c).app K).app L) ≫
+        (rightDerivedLowerShriekOfCompactificationBaseChangeMap' A c c' q hi hp ≫
+          Functor.whiskerLeft _ κ).app (((-⊗ᴸ-(X)[A]).obj K).obj (L((f)^*[A]).obj L)) ≫
+        (Rf_!(e)[A]).map (((leftDerivedUpperStarTensorComparison A g').app K).app
+          (L((f)^*[A]).obj L)) ≫
+        (Rf_!(e)[A]).map (((-⊗ᴸ-(X')[A]).obj (L((g')^*[A]).obj K)).map
+          (derivedSquareUpperStarIsoInvApp A sq L)) =
+      ((leftDerivedUpperStarTensorComparison A g).app ((Rf_!(c)[A]).obj K)).app L ≫
+        ((-⊗ᴸ-(Y')[A]).map ((rightDerivedLowerShriekOfCompactificationBaseChangeMap' A c c' q hi
+          hp ≫ Functor.whiskerLeft _ κ).app K)).app (L((g)^*[A]).obj L) ≫
+        ((projectionMapOfCompactification A e).app (L((g')^*[A]).obj K)).app
+          (L((g)^*[A]).obj L) := by
+  have h := projectionMapOfCompactification_baseChange_comp A sq c c' q hi hp e κ hκ K L
+  simp only [NatTrans.comp_app, Functor.whiskerLeft_app, Functor.map_comp, NatTrans.comp_app,
+    Category.assoc] at h ⊢
+  exact h
 end
 
 end Etale
