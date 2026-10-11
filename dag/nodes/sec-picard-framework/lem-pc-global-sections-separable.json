@@ -116,5 +116,23 @@
   "group": "F1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-gss (reviewer sub-agent of L); spot-checked: Source: Stacks 0BUG (varieties-lemma-proper-geometrically-reduced-global-sections), read in varieties.tex: X proper over k; (3) reduced gives A a product of finite field extensions k_i, one per connected component; (4) geometrically reduced gives each k_i finite separable. New node lem-pc-proper-geometrically-reduced-global-sections-separable (X proper, geometrically reduced, A=Gamma(X,O_X) a field over k => A/k separable) is the specialization n=1 of (3)+(4) (A a field forces one factor), true; notions cited by existing nodes (def-weil-proper-morphism, def-pc-geometrically-irreducible which defines geometrically reduced, def-pc-field-extension, def-weil-pbc-separable-field-extension; a finite separable algebraic extension is separably generated with empty transcendence basis). Step 1: def-pc-smooth-projective-curve gives X->Spec k smooth and projective; lem-pc-projective-proper states projective => proper; sbc-lem-smooth-geometrically-reduced states smooth => geometrically reduced fibres, and the fibre over the single point of Spec k is X itself (elementary). Step 2: the new node applied with the item's hypothesis that k' is a field extension; conclusion is the item's. proof_deps = union of uses. Declared tool use sbc-lem-smooth-geometrically-reduced (generic smooth => geometrically reduced fibres, black box) accepted (C8). No Mathlib leaf; searches recorded on both nodes with verdict no match. Small case: X = P^1_k, Gamma = k, trivially separable; X = P^1 over a finite separable extension k'/k viewed over k, Gamma = k' separable, consistent. Start Sat Oct 10 04:13:51 PM UTC 2026, end Sat Oct 10 04:14:21 PM UTC 2026."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GlobalSectionsSeparable",
+  "declaration": "AlgebraicGeometry.globalSections_isSeparable_of_isSmoothProjectiveCurve",
+  "file": "lean/Sheaf/AlgebraicGeometry/GlobalSectionsSeparable.lean",
+  "statement": "theorem globalSections_isSeparable_of_isSmoothProjectiveCurve (k : Type u) [Field k] (X : Scheme.{u}) [X.Over (Spec (.of k))] [Scheme.Hom.IsSmoothProjectiveCurve (X ↘ Spec (.of k))] (hA : IsField Γ(X, ⊤)) : @Algebra.IsSeparableExtension k Γ(X, ⊤) _ hA.toField (Scheme.globalSectionsRingHom k (X := X)).toAlgebra",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-gss1132",
+  "group": "H1",
+  "result": "pass",
+  "note": "k field = (k:Type u)[Field k]; X smooth projective curve = [X.Over (Spec (.of k))] + [Scheme.Hom.IsSmoothProjectiveCurve (X ↘ Spec (.of k))] (#print: IsCurveOverField+Smooth+IsProjective, integral, dim=1); k'=Γ(X,⊤) actual section ring; k'/k field extension = hA : IsField Γ(X,⊤) with algebra (Scheme.globalSectionsRingHom k).toAlgebra (ΓSpecIso.inv ≫ appTop); conclusion Algebra.IsSeparableExtension (recorded decl of def-weil-pbc-separable-field-extension); same form as landed C1 proper_geometricallyReduced_globalSections_isSeparable; #check of all names in L sandbox clean"
  }
 }
