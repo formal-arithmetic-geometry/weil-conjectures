@@ -23,7 +23,8 @@
   "def-weil-pbc-scheme-conventions",
   "def-weil-residue-field",
   "def-sc-dual-numbers",
-  "def-weil-affine-spectrum"
+  "def-weil-affine-spectrum",
+  "def-sc-trivial-square-zero-extension"
  ],
  "proof": [
   {
@@ -131,5 +132,23 @@
   "group": "F1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-tsv1745 (reviewer sub-agent of L); spot-checked: Uses def-sc-dual-numbers; restating T is required, not a duplicate (def-sc-scheme-tangent-space has the item in its stmt_deps, so citing it would make a cycle); no other node restated; new pushout node is a real lemma, not in Mathlib (LeanFinder: only SpecToEquivOfLocalRing as an ingredient). FIX more, RETURN less: (1) B3: the new node lem-sc-dual-number-scheme-pushout was vague prose ('scheme with two square-zero coordinates', maps not named); rewritten in TeX with K[eps_1..eps_n], j_i and c defined explicitly; (2) C1/D: associativity in Step 3 needs a three-fold gluing that the two-copy pushout does not give, so the node is generalised to n copies (same Stacks/01J6 argument) and Step 3 is rewritten with explicit gluing maps for each axiom, including additive inverses; (3) Step 1: the k-morphism clause now justified by uniqueness with target Spec k.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.TangentVectorsVectorSpace",
+  "declaration": "AlgebraicGeometry.exists_tangentVectors_vectorSpace",
+  "file": "lean/Sheaf/AlgebraicGeometry/TangentVectorsVectorSpace.lean",
+  "statement": "theorem exists_tangentVectors_vectorSpace (k : Type u) [Field k] (X : Scheme.{u}) (p : X ⟶ Spec (.of k)) (x : X) : let K := X.residueField x let D := Spec (.of (DualNumber K)) let E := Spec (.of (TrivSqZeroExt K (Fin 2 → K))) let b := X.fromSpecResidueField x let c : Spec K ⟶ D := Spec.map (CommRingCat.ofHom (TrivSqZeroExt.fstHom K K K).toRingHom) let q : D ⟶ Spec K := Spec.map (CommRingCat.ofHom (TrivSqZeroExt.inlHom K K)) let r : E ⟶ Spec K := Spec.map (CommRingCat.ofHom (TrivSqZeroExt.inlHom K (Fin 2 → K))) let j : Fin 2 → (D ⟶ E) := fun i => Spec.map (CommRingCat.ofHom (TrivSqZeroExt.map (LinearMap.proj i : (Fin 2 → K) →ₗ[K] K)).toRingHom) let s : D ⟶ E := Spec.map (CommRingCat.ofHom (TrivSqZeroExt.map ((LinearMap.proj 0 : (Fin 2 → K) →ₗ[K] K) + LinearMap.proj 1)).toRingHom) let m : K → (D ⟶ D) := fun t => Spec.map (CommRingCat.ofHom (TrivSqZeroExt.map (t • (LinearMap.id : K →ₗ[K] K))).toRingHom) let T := {θ : D ⟶ X // c ≫ θ = b ∧ θ ≫ p = q ≫ b ≫ p} IsPushout c c (j 0) (j 1) ∧ (∀ θ₁ θ₂ : T, ∃! Θ : E ⟶ X, j 0 ≫ Θ = θ₁.val ∧ j 1 ≫ Θ = θ₂.val) ∧ (∀ θ₁ θ₂ : T, ∀ Θ : E ⟶ X, j 0 ≫ Θ = θ₁.val → j 1 ≫ Θ = θ₂.val → Θ ≫ p = r ≫ b ≫ p) ∧ (∃ a : AddCommGroup T, letI := a; ∃ v : Module K T, letI := v; (0 : T).val = q ≫ b ∧ (∀ θ₁ θ₂ : T, ∀ Θ : E ⟶ X, j 0 ≫ Θ = θ₁.val → j 1 ≫ Θ = θ₂.val → (θ₁ + θ₂).val = s ≫ Θ) ∧ (∀ (t : K) (θ : T), (t • θ).val = m t ≫ θ.val))",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-tsv1303",
+  "group": "C1",
+  "result": "pass",
+  "note": "Matched k field, X with explicit p (several k-morphisms D,E->X: STATE SCHEMES OVER A FIELD), K=residueField, b=fromSpecResidueField; c=Spec fstHom (eps->0), j_i=Spec map(proj i), s=Spec map(proj0+proj1), m_t=Spec map(t.id), q/r=Spec inlHom; T = c≫θ=b ∧ θ≫p=q≫b≫p (k-morphism, not implied by the first: k->κ[ε] may carry a derivation); (a) IsPushout c c (j 0)(j 1), ∃! Θ, Θ over k; (b) ∃ AddCommGroup/Module K T with zero q≫b, sum s≫Θ, scaling m t≫θ; #check of map/fstHom/inlHom/fromSpecResidueField, recompiled 2.2 s"
  }
 }
