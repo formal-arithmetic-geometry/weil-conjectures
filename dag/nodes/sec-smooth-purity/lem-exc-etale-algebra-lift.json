@@ -174,5 +174,29 @@
   "group": "H1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-eal3020 (reviewer sub-agent of L); spot-checked: Statement vs Stacks 04D1 (arbitrary ideal, no nilpotence: honest, 04D1 needs none for existence); Step 1 Jacobian of (f, t*Delta-1) in (x,t) is block lower triangular with zero last column above Delta, det = Delta^2, unit by t*Delta=1, so a square Jacobian presentation per def-exc-jacobian-presentation (Algebra.SquareJacobianPresentation) and lem-exc-etale-jacobian-presentation (Algebra.Etale.iff_exists_squareJacobianPresentation, both directions, read at StandardSmoothOfFree.lean:59) gives etale fp (C1/C4 ok); construction is exactly def-exc-etale-algebra-lift (= 04D1 proof); Step 2 B[t]/(t*Deltabar-1)=B as Deltabar is a unit, elementary; Step 3 converse via the same lemma; citers lem-weil-pbc-gabber-finite-etale-section (needs etale R->C, C/IC = Cbar as R/I-algebras) and lem-exc-closed-lift-reduction (every etale fp term lifts) use exactly this statement; tool_use of the Jacobian node accepted (generic tool); no Mathlib/slopmaster2 quotient-lift declaration (grep Mathlib/RingTheory/Etale for lift: only StandardEtalePair.lift), so not B10. No fault found; Second reading by H1 missed nothing."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.EtaleAlgebraLift",
+  "declaration": "Algebra.SquareJacobianPresentation.CoefficientLift.etale_and_reduction_equiv",
+  "declarations": [
+   "Algebra.SquareJacobianPresentation.CoefficientLift.etale_and_reduction_equiv",
+   "Algebra.exists_etale_coefficientLift"
+  ],
+  "file": "lean/Sheaf/RingTheory/EtaleAlgebraLift.lean",
+  "statement": "theorem SquareJacobianPresentation.CoefficientLift.etale_and_reduction_equiv {A : Type u} [CommRing A] (I : Ideal A) {B : Type v} [CommRing B] [Algebra (A ⧸ I) B] {m : ℕ} (P : Algebra.SquareJacobianPresentation (A ⧸ I) B (Fin m)) (L : Algebra.SquareJacobianPresentation.CoefficientLift I P) : Algebra.Etale A L.LiftRing ∧ Algebra.FinitePresentation A L.LiftRing ∧ ∃ e : (L.LiftRing ⧸ I.map (algebraMap A L.LiftRing)) ≃+* B, ∀ x : L.LiftRing, e (Ideal.Quotient.mk (I.map (algebraMap A L.LiftRing)) x) = L.reduction x",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": false,
+  "note": "The first theorem treats every chosen coefficient lift and identifies the specified reduction map; the second states existence for every etale quotient algebra. Algebra.Etale includes finite presentation.",
+  "fixed_by": "R-eal"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-eal",
+  "group": "H1",
+  "result": "fix",
+  "note": "arbitrary A, ideal I (no nilpotence), specified P : SquareJacobianPresentation over A/I and lifts L of def-exc-etale-algebra-lift; Etale+FP of L.LiftRing; reduction iso tied as e ∘ mk = L.reduction; existence for every [Algebra.Etale (A/I) B]; no Mathlib analogue (FormallyEtale lifts homs, not algebras); fix: qualified Algebra.Etale/FinitePresentation/SquareJacobianPresentation"
  }
 }
