@@ -168,5 +168,24 @@
   "worker": "stage1",
   "summary": "Checked statement against Stacks 00LX (algebra.tex 17905-17916): agrees clause by clause (statement kept). The source proof is two lines (Ext characterization 00LW plus the long exact Ext sequence 00LU); written out as 5 steps: Step 1 turns 00LW into 'depth(X) >= n iff Ext^i(kappa,X)=0 for i<n' (all depths finite, so the infinity conventions are vacuous); Step 2 extracts the three exact pieces and the degree-0 injectivity from 00LU; Steps 3-5 prove (1),(2),(3) by vanishing of the middle term. The citer lem-weil-pbc-cm-local-free-resolution-to-mcm (step 4) uses parts (2) and (3); all three are proved. New nodes: lem-weil-pbc-depth-ext (00LW, unsplit, candidate ModuleCat.exists_isRegular_tfae Rees.lean:158, not one line by B8) and lem-weil-pbc-ext-long-exact-second-variable (00LU, Mathlib leaf: Abelian.Ext.covariantSequence_exact line 135 and postcomp_mk0_injective_of_mono line 166). Ext is the existing def-pc-ext (Hom in D(R-Mod)), which is also Mathlib's Abelian.Ext; the Stacks resolution definition (00LO) is not needed by these statements."
  },
- "reviewed": "pass (L, 2026-10-10): 5 steps follow 00LX: depth via Ext vanishing (new unsplit node 00LW, Rees candidate) and the long exact Ext sequence in the second variable (new leaf 00LU); the three inequalities are read off the exact pieces."
+ "reviewed": "pass (L, 2026-10-10): 5 steps follow 00LX: depth via Ext vanishing (new unsplit node 00LW, Rees candidate) and the long exact Ext sequence in the second variable (new leaf 00LU); the three inequalities are read off the exact pieces.",
+ "lean": {
+  "module": "Sheaf.RingTheory.DepthInSES",
+  "declaration": "IsLocalRing.depth_in_short_exact",
+  "file": "lean/Sheaf/RingTheory/DepthInSES.lean",
+  "statement": "theorem depth_in_short_exact {R : Type u} [CommRing R] [IsNoetherianRing R] [IsLocalRing R] {N' : Type v₁} [AddCommGroup N'] [Module R N'] [Module.Finite R N'] [Nontrivial N'] {N : Type v₂} [AddCommGroup N] [Module R N] [Module.Finite R N] [Nontrivial N] {N'' : Type v₃} [AddCommGroup N''] [Module R N''] [Module.Finite R N''] [Nontrivial N''] (f : N' →ₗ[R] N) (g : N →ₗ[R] N'') (hf : Function.Injective f) (hfg : Function.Exact f g) (hg : Function.Surjective g) : depth (R := R) N ≥ min (depth (R := R) N') (depth (R := R) N'') ∧ depth (R := R) N'' ≥ min (depth (R := R) N) (depth (R := R) N' - 1) ∧ depth (R := R) N' ≥ min (depth (R := R) N) (depth (R := R) N'' + 1)",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-dss0942"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-dss0942",
+  "group": "J1",
+  "result": "fix",
+  "note": "R: CommRing+IsNoetherianRing+IsLocalRing; N',N,N'' separate universes each AddCommGroup/Module/Module.Finite/Nontrivial; SES as Injective f/Function.Exact f g/Surjective g (fixed from ShortComplex ModuleCat.{v}); (1)-(3) in ℕ∞ with IsLocalRing.depth, truncated -1 equivalent since depth ≥ 0, ⊤±1=⊤"
+ }
 }
