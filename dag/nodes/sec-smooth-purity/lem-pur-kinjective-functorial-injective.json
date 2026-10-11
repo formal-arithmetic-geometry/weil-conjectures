@@ -115,5 +115,23 @@
   "group": "K1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-kfi0031 (reviewer sub-agent of L); spot-checked: Statement vs Stacks lemma-functorial-injective clause by clause (C4 ok); embedding cited to lem-weil-pbc-grothendieck-functorial-injective-embedding (C1 ok); cone formula/differential and quasi-iso via acyclic quotient checked by hand; citer lem-pur-kinjective-degreewise-existence uses exactly clauses (1),(2); no duplicate (lem-weil-pbc-kinjective-functorial-existence is the K-injective statement). FIX more, RETURN less: (1) E/step 2: j does not factor through I(M^n)+0 (u has second component i∘d); now factors through 0+J^n(M)=I(M^n)+I(M^{n+1}), injective as finite direct sum of injectives; (2) step 3: contracting homotopy had wrong degrees; replaced by h(q,q')=(0,-q) with Dh+hD=id; (3) B4: plain-text arrows/notation in steps 1-3 rewritten in TeX.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.GrothendieckAbelian.FunctorialInjectiveComplexEmbedding",
+  "declaration": "CochainComplex.exists_functorial_injective_complex_embedding",
+  "file": "lean/Sheaf/CategoryTheory/GrothendieckAbelian/FunctorialInjectiveComplexEmbedding.lean",
+  "statement": "theorem exists_functorial_injective_complex_embedding (C : Type u) [Category.{v} C] [Abelian C] [IsGrothendieckAbelian.{v} C] : ∃ (N : CochainComplex C ℤ ⥤ CochainComplex C ℤ) (j : 𝟭 (CochainComplex C ℤ) ⟶ N), ∀ (M : CochainComplex C ℤ), (∀ (n : ℤ), Mono ((j.app M).f n)) ∧ QuasiIso (j.app M) ∧ ∀ (n : ℤ), ∃ (I : C) (a : M.X n ⟶ I) (b : I ⟶ (N.obj M).X n), Injective I ∧ Mono b ∧ a ≫ b = (j.app M).f n",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-kfi0928",
+  "group": "H1",
+  "result": "fix",
+  "note": "C:Type u, Category.{v}, Abelian, IsGrothendieckAbelian.{v} = node's Grothendieck A; single N functor and j : 𝟭 ⟶ N bound before ∀M; (1) termwise Mono ∧ QuasiIso; (2) ∀n ∃ injective I, mono b, a≫b = j^n (subobject as mono representative); no boundedness; docstring = node proof 3 steps; not in Mathlib/source (upstream kInjectiveResolutionFunctor lacks clause 2); FIX: dropped unused import HomologicalComplexAbelian (H9)"
  }
 }
