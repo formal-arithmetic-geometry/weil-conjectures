@@ -26,7 +26,8 @@
   "def-weil-pbc-constant-sheaf",
   "def-weil-pbc-etale-site",
   "def-weil-pbc-etale-sheaf-of-sets",
-  "lem-galois-constant-sheaf-sets-representable"
+  "lem-galois-constant-sheaf-sets-representable",
+  "def-weil-pbc-etale-sheaves"
  ],
  "proof": [
   {
@@ -145,5 +146,23 @@
   "group": "E1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-css1706 (reviewer sub-agent of L); spot-checked: Source Stacks Remark 59.23.2 (Tag 03P5, etale-cohomology-remark-constant-locally-constant-maps); statement unchanged, hypotheses (U nonempty connected per def-weil-connected-scheme, small etale site U_Et, E any set) agree with the source; Omega plays no role, harmless. Step 1: lem-galois-constant-sheaf-sets-representable gives phi:E->h_{U_E} iso with c=phi.eta, so eta_U(e) <-> iota_e o id_U. Step 2: lem-galois-coproduct-copies-morphisms-clopen (b),(c) with W=U, s=id identifies Mor_U(U,U_E) with maps |U|->E with open fibres, iota_e <-> constant e; lem-weil-pbc-connected-locally-constant-map makes all constant, nonemptiness gives injectivity; E empty checked (both sides empty). Step 3 as delivered was wrong in its reasoning: for an arbitrary Omega-morphism v:V->U (not etale; the parent lem-weil-pbc-etale-geometric-fibre-constant-sections uses inverse image along arbitrary v) V is not an object of U_Et, so 'pullback represented by f o v' is not a statement of any cited node. FIX more, RETURN less (C1): dag/nodes/sec-proper-base-change/lem-weil-pbc-constant-sheaf-set-sections-connected-natural.json: proof[2]: rewritten to take v^*eta_U(e) [lem-weil-pbc-sets-etale-inverse-image-composition-units] and the canonical iso gamma_v:v^{-1}E_U->E_V with gamma_v(v^*eta_U(e))=eta_V(e); uses/proof_deps updated; NEW statement-only node lem-weil-pbc-sets-etale-inverse-image-constant-sheaf (Stacks 093I/093R, 0H7J; true: the presheaf inverse image of a constant presheaf is constant since (U,V'->V) is terminal in the index category, then sheafify), Mathlib loogle 'CategoryTheory.constantSheaf, CategoryTheory.Sheaf.IsConstant' run by me: no pullback-of-constant-sheaf statement. Tool uses accepted as generic black boxes (C8). Fix adapted from partial scratch of cut-off reviewer R-css1709, re-verified. Start Sat Oct 10 05:06:08 PM UTC 2026, end Sat Oct 10 05:07:15 PM UTC 2026; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ConstantSheafSetSectionsConnectedNatural",
+  "declaration": "AlgebraicGeometry.Scheme.constantSheaf_set_sections_connected_natural",
+  "file": "lean/Sheaf/AlgebraicGeometry/ConstantSheafSetSectionsConnectedNatural.lean",
+  "statement": "theorem constantSheaf_set_sections_connected_natural (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (U : Scheme.{u}) [U.Over (Spec (.of Ω))] [ConnectedSpace U] (E : Type u) : Function.Bijective (fun e : E => (toSheafify U.smallEtaleTopology ((Functor.const U.Etaleᵒᵖ).obj (ULift.{u + 1, u} E))).app (Opposite.op (Etale.mk (𝟙 U))) ⟨e⟩) ∧ ∀ (V : Scheme.{u}) [V.Over (Spec (.of Ω))] (v : V ⟶ U) [v.IsOver (Spec (.of Ω))], let b := MorphismProperty.Over.pullback @Etale ⊤ v let F := (constantSheaf U.smallEtaleTopology (Type (u + 1))).obj (ULift.{u + 1, u} E) let G := (constantSheaf V.smallEtaleTopology (Type (u + 1))).obj (ULift.{u + 1, u} E) let adj := Functor.sheafPullbackConstruction.sheafAdjunctionContinuous b (Type (u + 1)) (U.smallGrothendieckTopology @Etale) (V.smallGrothendieckTopology @Etale) ∃ γ : (etaleSetPullback v).obj F ≅ G, ∀ e : E, γ.hom.hom.app (Opposite.op (b.obj (Etale.mk (𝟙 U)))) (((adj.unit.app F).hom.app (Opposite.op (Etale.mk (𝟙 U)))) ((toSheafify U.smallEtaleTopology ((Functor.const U.Etaleᵒᵖ).obj (ULift.{u + 1, u} E))).app (Opposite.op (Etale.mk (𝟙 U))) ⟨e⟩)) = (toSheafify V.smallEtaleTopology ((Functor.const V.Etaleᵒᵖ).obj (ULift.{u + 1, u} E))).app (Opposite.op (b.obj (Etale.mk (𝟙 U)))) ⟨e⟩",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-csn0938",
+  "group": "J1",
+  "result": "pass",
+  "note": "Omega alg closed = [Field][IsAlgClosed]; U over Omega = [U.Over (Spec (.of Omega))]; nonempty connected = ConnectedSpace (toNonempty); E any set = Type u lifted to Type (u+1), the landed set-sheaf universe of etaleSetPullback/constantSheaf_sets_representable/IsLocallyConstantEtaleSheafOfSets; constant sheaf = Mathlib constantSheaf on smallEtaleTopology, canonical map = toSheafify component at Etale.mk (1 U), Bijective of that map; every Omega-morphism v (no hypothesis on V) with v^{-1} = landed etaleSetPullback, v^* = unit of sheafAdjunctionContinuous (defeq left adjoint, checked by #print), U x_U V as terminal of V_et per sibling node; exists gamma iso with gamma(v^*eta_U e)=eta_V e, pinned uniquely since constants generate; #print pp.fullNames confirms Etale.mk = Scheme.Etale.mk and @Etale = AlgebraicGeometry.Etale"
  }
 }
