@@ -111,5 +111,23 @@
   "group": "K1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ccs (reviewer sub-agent of L); spot-checked: Source: Stacks 0DVG (etale-cohomology.tex, section-continuous-group-cohomology, lines 9005-9044): the displayed inhomogeneous differential (n>=1 and n=0 gm-m) agrees term by term and sign by sign with the node's statement, and the paragraph at line 9041 asserts the short exactness of continuous-cochain complexes for discrete G-modules; the node's specialization (profinite G, finite ring A, open stabilizers = continuous action on discrete module) is a special case, finiteness of A unused. Statement unchanged; only proof fields and split_report added. Step 1 rests on the clause of lem-exc-discrete-modules-abelian that exactness is underlying A-module exactness; injectivity, kernel = image (pointwise preimage is continuous because preimages of singletons are preimages under f of singletons) and surjectivity (a set-theoretic section of a map of discrete spaces is continuous) checked. Step 2 elementary: continuity of d^n f (action map GxM->M continuous with open stabilizers and M discrete) and d^2=0 by the standard cancellation, checked. Step 3: equivariance and additivity give chain maps; degreewise short exactness plus lem-weil-pbc-cochain-complexes-degreewise-exact (existing Mathlib leaf, off-unit generic tool, statement read; Mathlib HomologicalComplexAbelian.lean:70 shortExact_iff_degreewise_shortExact verified, valid for any shape) gives short exactness of complexes. Small cases: G trivial (degree 0 = original sequence), M'=0, M''=0. Blueprint search 'continuous cochains short exact' via tools/blueprint_refs.py: 0 matches, same_as [] consistent. 14:40-14:41 UTC"
+ },
+ "lean": {
+  "module": "Sheaf.RepresentationTheory.ContinuousCochainsShortExact",
+  "declaration": "Rep.continuousCochains_shortExact",
+  "file": "lean/Sheaf/RepresentationTheory/ContinuousCochainsShortExact.lean",
+  "statement": "theorem continuousCochains_shortExact (G : Type u) [Group G] [TopologicalSpace G] [IsTopologicalGroup G] [CompactSpace G] [T2Space G] [TotallyDisconnectedSpace G] (A : Type v) [Ring A] [Finite A] (S : ShortComplex (DiscreteContinuousRep.{v, u, w} A G)) : S.ShortExact → let X : Fin 3 → DiscreteContinuousRep.{v, u, w} A G := ![S.X₁, S.X₂, S.X₃] letI : ∀ j : Fin 3, TopologicalSpace (X j).obj.V := fun _ ↦ ⊥ letI : ∀ j : Fin 3, DiscreteTopology (X j).obj.V := fun _ ↦ ⟨rfl⟩ letI : ∀ j : Fin 3, ContinuousConstSMul A (X j).obj.V := fun _ ↦ ⟨fun _ ↦ continuous_of_discreteTopology⟩ ∃ (K : Fin 3 → CochainComplex (ModuleCat.{max u w} A) ℕ) (e : ∀ (j : Fin 3) (n : ℕ), (K j).X n ≃ₗ[A] C((Fin n → G), (X j).obj.V)) (i : K 0 ⟶ K 1) (p : K 1 ⟶ K 2) (hip : i ≫ p = 0), (ShortComplex.mk i p hip).ShortExact ∧ (∀ n : ℕ, Function.Injective (i.f n) ∧ Set.range (i.f n) = {x | p.f n x = 0} ∧ Function.Surjective (p.f n)) ∧ (∀ (n : ℕ) (f : (K 0).X n) (g : Fin n → G), e 1 n (i.f n f) g = S.f.hom.hom (e 0 n f g)) ∧ (∀ (n : ℕ) (f : (K 1).X n) (g : Fin n → G), e 2 n (p.f n f) g = S.g.hom.hom (e 1 n f g)) ∧ (∀ (j : Fin 3) (n : ℕ) (f : (K j).X n) (g : Fin (n + 1) → G), e j (n + 1) ((K j).d n (n + 1) f) g = (X j).obj.ρ (g 0) (e j n f (fun k ↦ g k.succ)) + ∑ k : Fin (n + 1), (-1 : ℤ) ^ (k.val + 1) • e j n f (Fin.contractNth k (· * ·) g))",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-ccs1027",
+  "group": "C1",
+  "result": "pass",
+  "note": "profinite G (Group/Top/IsTopGroup/Compact/T2/TotDisc), finite Ring A, S.ShortExact in landed Rep.DiscreteContinuousRep; discrete topology on V; e: K_j^n ≃ₗ C(Fin n→G,V); i,p = postcomposition; degreewise inj/ker=im/surj; d via ρ(g0) + Σ(-1)^(k+1) contractNth (k=n drops last), n=0 gives gm-m; ShortExact of complexes in ModuleCat A; no record for def-exc-continuous-cohomology, Mathlib ContCohomology homogeneous so no H4"
  }
 }

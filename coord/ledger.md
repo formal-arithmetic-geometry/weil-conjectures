@@ -3701,3 +3701,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 07:50 L: merged deliver/M1/lem-sc-ample-proj-canonical-map (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.AmpleProjCanonicalMap AlgebraicGeometry.Scheme.Modules.exists_sectionRing_proj_morphism; new nodes: def-sc-invertible-section-ring, def-sc-section-generating-locus)
 - 07:50 L: merged deliver/H1/lem-sc-ext-derived-composite (stage 2; reviewer PASS; first push; Sheaf.CategoryTheory.RightDerivedExactComposite CategoryTheory.Functor.exists_rightDerived_exact_comp_iso)
 - 07:50 L: merged deliver/H1/lem-sc-exterior-top-direct-sum (stage 2; reviewer PASS; first push; Sheaf.LinearAlgebra.ExteriorTopDirectSum exteriorPower.existsUnique_topDirectSum)
+- 07:50 L: merged deliver/C1/lem-exc-continuous-cochains-short-exact (stage 2; reviewer PASS; first push; Sheaf.RepresentationTheory.ContinuousCochainsShortExact Rep.continuousCochains_shortExact)
