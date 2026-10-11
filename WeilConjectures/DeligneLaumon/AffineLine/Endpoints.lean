@@ -7,7 +7,17 @@ module
 
 public import Mathlib.AlgebraicGeometry.Geometrically.Connected
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
+public import WeilConjectures.AlgebraicGeometry.Regular
 public import WeilConjectures.DeligneLaumon.AffineLine.Defs
+public import WeilConjectures.DeligneLaumon.AffineLine.FiniteBoundary
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Affine
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
+public import WeilConjectures.WeilSheaf.CohomologicalRange
+public import WeilConjectures.WeilSheaf.CohomologySequence
+public import WeilConjectures.WeilSheaf.CurveTopCohomology
+public import WeilConjectures.WeilSheaf.GeometricCoinvariants
+public import WeilConjectures.WeilSheaf.OpenClosedTriangle
+public import WeilConjectures.WeilSheaf.UpperStarLowerStar
 
 /-!
 # The two endpoints of the compactly supported cohomology of a middle extension
@@ -42,7 +52,7 @@ This leaves degree one, which is the only place where the Fourier argument of
 
 universe u
 
-open CategoryTheory
+open CategoryTheory TopologicalSpace
 
 namespace AlgebraicGeometry
 
@@ -66,6 +76,105 @@ theorem WeilSheaf.hasWeightsAtMostOver_compactlySupportedCohomology_two
     (G.compactlySupportedCohomology 2).HasWeightsAtMostOver k₀ ι (w + 2) := by
   -- TODO(adic): prove once Weil sheaves carry genuine `ℓ`-adic coefficients
   sorry
+
+section Complement
+
+omit [Finite k₀] [IsAffine C] in
+/-- A smooth geometrically connected curve is irreducible. -/
+lemma irreducibleSpace_of_geometricallyConnected
+    [GeometricallyConnected (C ↘ Spec (CommRingCat.of k₀))] : IrreducibleSpace C := by
+  have := SmoothOfRelativeDimension.smooth 1 (C ↘ Spec (CommRingCat.of k₀))
+  have : GeometricallyIrreducible (C ↘ Spec (CommRingCat.of k₀)) :=
+    .of_smooth_of_geometricallyConnected _
+  exact GeometricallyIrreducible.irreducibleSpace_of_subsingleton
+    (f := C ↘ Spec (CommRingCat.of k₀))
+
+omit [Finite k₀] in
+include k₀ in
+/-- A smooth affine curve is a noetherian topological space. -/
+lemma noetherianSpace_of_curve : NoetherianSpace C := by
+  have := LocallyOfFiniteType.isLocallyNoetherian (C ↘ Spec (CommRingCat.of k₀))
+  have : IsNoetherian C := {}
+  infer_instance
+
+omit [Finite k₀] [IsAffine C] in
+include k₀ in
+/-- A smooth curve has dimension at most one. -/
+lemma topologicalKrullDim_le_one_of_curve : topologicalKrullDim C ≤ 1 := by
+  exact_mod_cast
+    topologicalKrullDim_le_of_smoothOfRelativeDimension (C ↘ Spec (CommRingCat.of k₀)) 1
+
+variable {U : Scheme.{u}} (j : U ⟶ C) [IsOpenImmersion j] [IsDominant j]
+
+omit [Finite k₀] [IsAffine C] [SmoothOfRelativeDimension 1 (C ↘ Spec (CommRingCat.of k₀))]
+  [IsOpenImmersion j] in
+include k₀ j in
+/-- A dense open of a nonempty scheme is nonempty. -/
+lemma nonempty_of_isDominant [GeometricallyConnected (C ↘ Spec (CommRingCat.of k₀))] :
+    Nonempty U := by
+  have : Surjective (C ↘ Spec (CommRingCat.of k₀)) := inferInstance
+  obtain ⟨c, -⟩ := (C ↘ Spec (CommRingCat.of k₀)).surjective
+    (Nonempty.some (inferInstance : Nonempty (Spec (CommRingCat.of k₀))))
+  by_contra hU
+  rw [not_nonempty_iff] at hU
+  have hd := j.denseRange
+  rw [DenseRange, Set.range_eq_empty] at hd
+  have h := hd.closure_eq
+  rw [closure_empty] at h
+  have hc : c ∈ (Set.univ : Set C) := trivial
+  rw [← h] at hc
+  exact hc
+
+
+omit [Finite k₀] in
+include k₀ in
+/-- The complement of a dense open of a smooth geometrically connected curve is finite. -/
+lemma finite_compl_range_of_isDominant [GeometricallyConnected (C ↘ Spec (CommRingCat.of k₀))] :
+    (Set.range j.base)ᶜ.Finite := by
+  have := irreducibleSpace_of_geometricallyConnected (k₀ := k₀) (C := C)
+  have := noetherianSpace_of_curve (k₀ := k₀) (C := C)
+  have := nonempty_of_isDominant (k₀ := k₀) j
+  exact j.isOpenEmbedding.isOpen_range.finite_compl_of_topologicalKrullDim_le_one
+    (topologicalKrullDim_le_one_of_curve (k₀ := k₀)) (Set.range_nonempty _)
+
+omit [Finite k₀] in
+include k₀ j in
+/-- A dense open of a smooth geometrically connected affine curve is affine. -/
+lemma isAffine_of_isDominant [GeometricallyConnected (C ↘ Spec (CommRingCat.of k₀))] :
+    IsAffine U := by
+  have := irreducibleSpace_of_geometricallyConnected (k₀ := k₀) (C := C)
+  have := noetherianSpace_of_curve (k₀ := k₀) (C := C)
+  have := nonempty_of_isDominant (k₀ := k₀) j
+  exact isAffine_of_isOpenImmersion_of_topologicalKrullDim_le_one j
+    (topologicalKrullDim_le_one_of_curve (k₀ := k₀))
+
+omit [Finite k₀] in
+/-- The closed complement of a dense open of a smooth geometrically connected affine curve, as a
+finite `k₀`-scheme. -/
+lemma exists_isClosedImmersion_range_eq_compl
+    [GeometricallyConnected (C ↘ Spec (CommRingCat.of k₀))] :
+    ∃ (Z : Scheme.{u}) (_ : Z.Over (Spec (CommRingCat.of k₀))) (i : Z ⟶ C)
+      (_ : IsClosedImmersion i) (_ : i.IsOver (Spec (CommRingCat.of k₀)))
+      (_ : IsFinite (Z ↘ Spec (CommRingCat.of k₀))), Set.range i.base = (Set.range j.base)ᶜ := by
+  let I := Scheme.IdealSheafData.vanishingIdeal
+    (⟨(Set.range j.base)ᶜ, j.isOpenEmbedding.isOpen_range.isClosed_compl⟩ : Closeds C)
+  have hI : Set.range I.subschemeι.base = (Set.range j.base)ᶜ := by
+    rw [Scheme.IdealSheafData.range_subschemeι]
+    simp [I]
+  let : I.subscheme.Over (Spec (CommRingCat.of k₀)) := ⟨I.subschemeι ≫ C ↘ _⟩
+  have : I.subschemeι.IsOver (Spec (CommRingCat.of k₀)) := ⟨rfl⟩
+  have hfin : Finite I.subscheme := by
+    have := (finite_compl_range_of_isDominant (k₀ := k₀) j).to_subtype
+    rw [← hI] at this
+    exact Finite.of_equiv _ (Equiv.ofInjective _ I.subschemeι.isClosedEmbedding.injective).symm
+  have : LocallyOfFiniteType (I.subscheme ↘ Spec (CommRingCat.of k₀)) :=
+    show LocallyOfFiniteType (I.subschemeι ≫ C ↘ _) from inferInstance
+  have : LocallyQuasiFinite (I.subscheme ↘ Spec (CommRingCat.of k₀)) :=
+    .of_finite_preimage_singleton _ fun _ ↦ Set.toFinite _
+  refine ⟨I.subscheme, inferInstance, I.subschemeι, inferInstance, inferInstance,
+    IsFinite.of_locallyQuasiFinite _, hI⟩
+
+end Complement
 
 variable {U : Scheme.{u}} [U.Over (Spec (CommRingCat.of k₀))] (j : U ⟶ C) [IsOpenImmersion j]
   [QuasiCompact j] [j.IsOver (Spec (CommRingCat.of k₀))] [IsDominant j]
