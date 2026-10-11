@@ -169,5 +169,23 @@
   "group": "C1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of C1; spot-checked by L: L read the five steps: finite transcendence basis of k(E), the complete-intersection model node, principal localization at the product of denominators, the presentation with hT-1 regular, directedness."
+ },
+ "lean": {
+  "module": "Sheaf.FieldTheory.FieldExtensionCompleteIntersectionSubalgebras",
+  "declaration": "FieldTheory.exists_completeIntersection_subalgebra",
+  "file": "lean/Sheaf/FieldTheory/FieldExtensionCompleteIntersectionSubalgebras.lean",
+  "statement": "theorem exists_completeIntersection_subalgebra (k : Type u) (K : Type v) [Field k] [Field K] [Algebra k K] (E : Finset K) : ∃ (n c : ℕ) (f : List (MvPolynomial (Fin n) k)), f.length = c ∧ RingTheory.Sequence.IsRegular (MvPolynomial (Fin n) k) f ∧ ∃ (ι : ((MvPolynomial (Fin n) k ⧸ Ideal.ofList f) →ₐ[k] K)), Function.Injective ι ∧ ∀ x : K, x ∈ E → ∃ y : (MvPolynomial (Fin n) k ⧸ Ideal.ofList f), ι y = x",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-fci1013",
+  "group": "E1",
+  "result": "pass",
+  "note": "matched k field, K/k as [Field K][Algebra k K], E : Finset K universal before ∃ n c; f : List (MvPolynomial (Fin n) k) with length c; IsRegular (#print: regular_mod_prev + top_ne_smul = both clauses, c=0 ok); ι : (MvPolynomial ⧸ Ideal.ofList f) →ₐ[k] K injective with E ⊆ range; node statement unchanged (diff adds lean record only); parenthetical directed union is commentary, presentation form stated by node"
  }
 }
