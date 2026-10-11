@@ -15,7 +15,7 @@
  },
  "kind": "statement",
  "title": "Etale morphisms become finite etale on a constructible stratification",
- "statement": "Let $X$ be a quasi-compact and quasi-separated scheme [def-weil-pbc-scheme-conventions], and let $j:U\\to X$ be an etale morphism [def-weil-etale-morphism] with $U$ quasi-compact and quasi-separated. Then there exists a finite partition $X=\\coprod_i X_i$ by constructible locally closed subschemes [def-weil-constructible-subset] such that each base change $U_i:=U\\times_X X_i\\to X_i$ is finite etale [def-weil-pbc-finite-etale-category]. The fibre products are those of [def-pc-fibre-product]. This is Stacks Project Lemma Tag 03S9 (lemma-etale-stratified-finite).",
+ "statement": "Let $X$ be a quasi-compact and quasi-separated scheme [def-weil-pbc-scheme-conventions], and let $j:U\\to X$ be an etale morphism [def-weil-etale-morphism] with $U$ quasi-compact and quasi-separated. Then there exists a finite partition $X=\\coprod_i X_i$ by constructible locally closed subschemes [def-weil-constructible-subset], forming a stratification [def-constructible-stratification], such that each base change $U_i:=U\\times_X X_i\\to X_i$ is finite etale [def-weil-pbc-finite-etale-category]. The fibre products are those of [def-pc-fibre-product]. This is Stacks Project Lemma Tag 03S0 (lemma-etale-stratified-finite).",
  "source": {
   "document": "literature/stacks-project/etale-cohomology.tex",
   "place": "Etale Cohomology, Lemma Tag 03S9 (lemma-etale-stratified-finite), line 12034"
@@ -25,7 +25,8 @@
   "def-weil-etale-morphism",
   "def-weil-constructible-subset",
   "def-weil-pbc-finite-etale-category",
-  "def-pc-fibre-product"
+  "def-pc-fibre-product",
+  "def-constructible-stratification"
  ],
  "proof": [
   {
@@ -151,5 +152,48 @@
   "group": "F1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of F1; spot-checked by L: L: 4th delivery meets the third return: the locality node is now a concrete statement, the separated case (07RZ) and the affine-cover gluing have Stacks places. Route along 03S9 correct (separated case, charts and overlaps over an affine base with common refinement and affine strata, separatedness of the glued piece, locality over a finite affine cover). Stage-3 note: lem-weil-pbc-etale-affine-cover-gluing packages the whole of step 2; the reusable content is the gluing lemma 'a finite open cover whose pairwise intersections are proper over X makes U -> X separated'. Proof-hint sentence removed from the locality node by L after merge."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleStratifiedFinite",
+  "declaration": "AlgebraicGeometry.Scheme.exists_etale_stratified_finite",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleStratifiedFinite.lean",
+  "statement": "theorem exists_etale_stratified_finite {X U : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X] [CompactSpace U] [QuasiSeparatedSpace U] (j : U ⟶ X) [Etale j] : ∃ S : LocallyClosedStratification X, (∀ i : Fin S.n, Topology.IsConstructible (S.stratum i)) ∧ (∀ i : Fin S.n, IsFinite (pullback.snd j (S.immersion i)) ∧ Etale (pullback.snd j (S.immersion i)))",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-esf1002",
+  "group": "F1",
+  "result": "pass",
+  "note": "X,U qcqs as CompactSpace+QuasiSeparatedSpace; j etale, no separatedness; finite partition by locally closed subschemes = LocallyClosedStratification X (landed def-constructible-stratification, same form as IsConstructibleEtaleModuleSheaf); constructible strata = Topology.IsConstructible (S.stratum i); U_i -> X_i = pullback.snd j (S.immersion i), IsFinite ∧ Etale; n=0/empty U fine; tag 03S0 checked in tags file; names #check'd (IsFinite/Etale rfl to AlgebraicGeometry.*)",
+  "statement_corrected": true
+ },
+ "statement_change": {
+  "date": "2026-10-11",
+  "by": "F1 stage 2",
+  "old_statement": "Let $X$ be a quasi-compact and quasi-separated scheme [def-weil-pbc-scheme-conventions], and let $j:U\\to X$ be an etale morphism [def-weil-etale-morphism] with $U$ quasi-compact and quasi-separated. Then there exists a finite partition $X=\\coprod_i X_i$ by constructible locally closed subschemes [def-weil-constructible-subset] such that each base change $U_i:=U\\times_X X_i\\to X_i$ is finite etale [def-weil-pbc-finite-etale-category]. The fibre products are those of [def-pc-fibre-product]. This is Stacks Project Lemma Tag 03S9 (lemma-etale-stratified-finite).",
+  "what": "The named lemma-etale-stratified-finite is Stacks Tag 03S0, not 03S9. Correct that erroneous citation; explicitly cite the already landed finite scheme-stratification notion used to render the partition. No mathematical hypothesis or conclusion changes.",
+  "source": {
+   "document": "Stacks Project, Etale Cohomology",
+   "place": "Tag 03S0, Lemma 59.72.1 (lemma-etale-stratified-finite), https://stacks.math.columbia.edu/tag/03S0"
+  },
+  "citers": [
+   {
+    "id": "lem-weil-pbc-etale-free-sheaf-constructible",
+    "holds": true,
+    "note": "Only the citation tag is corrected and the existing partition notion is cited explicitly; the mathematical theorem and its application are unchanged."
+   }
+  ],
+  "old_stmt_deps": [
+   "def-weil-pbc-scheme-conventions",
+   "def-weil-etale-morphism",
+   "def-weil-constructible-subset",
+   "def-weil-pbc-finite-etale-category",
+   "def-pc-fibre-product"
+  ]
  }
 }
