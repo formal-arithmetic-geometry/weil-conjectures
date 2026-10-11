@@ -3643,3 +3643,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 07:31 L: merged deliver/M1/lem-pc-kflat-tensor-quasi-iso (stage 2; reviewer PASS; after a return; Sheaf.Algebra.Homology.KFlatTensorQuasiIso CochainComplex.kFlat_tensor_quasiIso)
 - 07:31 L: merged deliver/C1/lem-pc-flat-tensor-complex-cohom (stage 2; reviewer FIX; after a return; Mathlib.Algebra.Homology.ShortComplex.PreservesHomology CategoryTheory.ShortComplex.mapHomologyIso; existing declaration)
 - 07:32 L: merged deliver/K1/lem-pur-sheaf-hom-cover-gluing (stage 2; reviewer PASS; first push; Sheaf.Algebra.Category.ModuleCat.Sheaf.HomCoverGluing SheafOfModules.existsUnique_hom_of_cover)
+- 07:32 L: merged deliver/E1/lem-sc-affine-maximal-points-closed-in-lft-scheme (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.ClosedPointOfAffineOpen AlgebraicGeometry.closedPoint_of_affineOpen)

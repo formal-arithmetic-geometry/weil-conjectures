@@ -124,5 +124,23 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-mpc1727 (reviewer sub-agent of L); spot-checked: Read both Mathlib lines with sed: IsOpenEmbedding.preimage_closedPoints (JacobsonSpace.lean:127) needs [JacobsonSpace Y]; LocallyOfFiniteType.jacobsonSpace (FiniteType.lean:117) is a lemma, not an instance (Mathlib itself uses it via have :=, e.g. Group/Smooth.lean:41), so the leaf is a chain of two declarations for one clause (B8). Statement, hypotheses and source tag of the item unchanged and right. No existing node states Tag 0478(2) (grep of dag for jacobson/0478). FIX more, RETURN less: item json: status mathlib -> split, mathlib_match null, two steps: step 1 cites new statement-only node lem-sc-lft-over-field-jacobson-space (closed points dense in every closed subset; leaf candidate LocallyOfFiniteType.jacobsonSpace for X -> Spec k recorded in its mathlib_searches), step 2 elementary (closure Z of {x}, Z cap U = {x} open nonempty in Z, a closed point of X lies in it), proof_deps set, my grep recorded in mathlib_searches, split_report.blueprint rewritten (B8); new node added with blueprint.from copied from the item. Edge case U = X immediate.; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
  },
- "lead_note": "2026-10-10 L (R-mpc1727): The lead's leaf premise was false: LocallyOfFiniteType.jacobsonSpace (FiniteType.lean:117) is a nonrec lemma, not an instance, so Lean does not infer JacobsonSpace X and the leaf chains two declarations (B8). Reviewer split it as the 17:09 return asked; the new node lem-sc-lft-over-field-jacobson-space is unsplit with its Mathlib leaf candidate recorded."
+ "lead_note": "2026-10-10 L (R-mpc1727): The lead's leaf premise was false: LocallyOfFiniteType.jacobsonSpace (FiniteType.lean:117) is a nonrec lemma, not an instance, so Lean does not infer JacobsonSpace X and the leaf chains two declarations (B8). Reviewer split it as the 17:09 return asked; the new node lem-sc-lft-over-field-jacobson-space is unsplit with its Mathlib leaf candidate recorded.",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ClosedPointOfAffineOpen",
+  "declaration": "AlgebraicGeometry.closedPoint_of_affineOpen",
+  "file": "lean/Sheaf/AlgebraicGeometry/ClosedPointOfAffineOpen.lean",
+  "statement": "theorem closedPoint_of_affineOpen {k : Type u} [Field k] {X : Scheme.{u}} (f : X ⟶ Spec (CommRingCat.of k)) [LocallyOfFiniteType f] (U : X.Opens) (_hU : IsAffineOpen U) (x : U) (hx : x ∈ closedPoints U) : (x : X) ∈ closedPoints X",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-amp0933",
+  "group": "E1",
+  "result": "pass",
+  "note": "k field, X : Scheme.{u}, f : X ⟶ Spec (.of k) [LocallyOfFiniteType f] (no QuasiCompact), U : X.Opens + IsAffineOpen U, x : U with x ∈ closedPoints U (subspace topology = open subscheme), conclusion (x : X) ∈ closedPoints X; existing false right: Finite.lean:209/221 and FiniteType.lean:117 need [JacobsonSpace] which is not inferred, no single decl; docstring carries both proof steps; lines ≤100, one import, proof sorry"
+ }
 }
