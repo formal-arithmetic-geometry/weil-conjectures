@@ -17,8 +17,9 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvari
 For `h : Y ⟶ X` and `K ∈ D⁺(Y_ét, Λ)`, the `q`-th cohomology sheaf of `Rh_* K` receives a
 canonical map from the presheaf `W ↦ H^q(W ×_X Y, K|)` on the small étale site of `X`; for `h`
 quasi-compact and quasi-separated it identifies `R^q h_* K` with the sheafification of that
-presheaf. Consequences: higher direct images commute with filtered colimits of sheaves, and a
-vanishing criterion for `R^q h_* (Λ/dΛ)`.
+presheaf. Consequence: a vanishing criterion for `R^q h_* (Λ/dΛ)`. That higher direct images
+commute with filtered colimits is in
+`WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.FilteredColimit`.
 
 ## Main definitions
 
@@ -34,8 +35,6 @@ vanishing criterion for `R^q h_* (Λ/dΛ)`.
   classes `Λ[W][0] ⟶ L` are locally the same as sections of `H⁰(L)` over `W`.
 - `AlgebraicGeometry.Etale.isIso_higherDirectImagePresheafToSheaf`: `R^q h_* K` is the
   sheafification of `W ↦ H^q(W ×_X Y, K|)` for a quasi-compact quasi-separated `h`.
-- `AlgebraicGeometry.Etale.preservesColimitsOfShape_higherDirectImage`: higher direct images
-  along a quasi-compact quasi-separated morphism commute with filtered colimits of sheaves.
 - `AlgebraicGeometry.Etale.isZero_higherDirectImage_constantModSheaf_of_forall_exists`: the
   higher direct image `R^q h_* (Λ/dΛ)` vanishes as soon as every class of
   `H^q(U ×_X Y, ℤ/e)`, for `e ∣ d` and `U` affine étale over `X`, dies on an étale cover of `U`.
@@ -500,21 +499,15 @@ noncomputable def Etale.higherDirectImagePresheafToSheaf {X Y : Scheme.{u}} (h :
             (R+((h)_*[ModuleCat.{u + 1} Λ]).obj K))) :=
   Etale.higherDirectImagePresheafToHom Λ h q K ≫ Etale.freeSheafSections Λ _
 
-/-- Blueprint `lem-weil-pbc-qcqs-higher-direct-image`: Higher direct images for quasi-compact
-quasi-separated morphisms, for complexes.
-
-Let `h : Y ⟶ X` be quasi-compact and quasi-separated and `K ∈ D⁺(Y_ét, Λ)`. Then the `q`-th
-cohomology sheaf of `Rh_* K` is, as a sheaf of abelian groups, the sheafification of the
-presheaf `W ↦ H^q(W ×_X Y, K|)` on the small étale site of `X`
-(`AlgebraicGeometry.Etale.higherDirectImagePresheaf`): the canonical map
-`AlgebraicGeometry.Etale.higherDirectImagePresheafToSheaf` induces an isomorphism from the
-sheafification. The hypotheses on `h` are those of the blueprint; the statement holds for any
-`h` (Stacks `072W`). -/
-theorem Etale.isIso_higherDirectImagePresheafToSheaf {X Y : Scheme.{u}}
-    (h : Y ⟶ X) [QuasiCompact h] [QuasiSeparated h] (q : ℤ)
+/-- The canonical map from `W ↦ Hᵠ(W ×_X Y, K|)` to `Hᵠ(Rh_* K)` is locally injective and
+locally surjective, for every morphism `h`. -/
+theorem Etale.isLocallyBijective_higherDirectImagePresheafToSheaf {X Y : Scheme.{u}}
+    (h : Y ⟶ X) (q : ℤ)
     (K : DerivedCategory.Plus (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
-    IsIso (((sheafificationAdjunction X.smallEtaleTopology AddCommGrpCat.{u + 1}).homEquiv _ _).symm
-      (Etale.higherDirectImagePresheafToSheaf Λ h q K)) := by
+    Presheaf.IsLocallyInjective X.smallEtaleTopology
+        (Etale.higherDirectImagePresheafToSheaf Λ h q K) ∧
+      Presheaf.IsLocallySurjective X.smallEtaleTopology
+        (Etale.higherDirectImagePresheafToSheaf Λ h q K) := by
   let L := R+((h)_*[ModuleCat.{u + 1} Λ]).obj (K⟦q⟧)
   let eH : (DerivedCategory.Plus.homologyFunctor _ 0).obj L ⟶
       (DerivedCategory.Plus.homologyFunctor _ q).obj (R+((h)_*[ModuleCat.{u + 1} Λ]).obj K) :=
@@ -539,6 +532,24 @@ theorem Etale.isIso_higherDirectImagePresheafToSheaf {X Y : Scheme.{u}}
       (Etale.higherDirectImagePresheafToSheaf Λ h q K) := by rw [hφ]; infer_instance
   have : Presheaf.IsLocallySurjective X.smallEtaleTopology
       (Etale.higherDirectImagePresheafToSheaf Λ h q K) := by rw [hφ]; infer_instance
+  exact ⟨‹_›, ‹_›⟩
+
+/-- Blueprint `lem-weil-pbc-qcqs-higher-direct-image`: Higher direct images for quasi-compact
+quasi-separated morphisms, for complexes.
+
+Let `h : Y ⟶ X` be quasi-compact and quasi-separated and `K ∈ D⁺(Y_ét, Λ)`. Then the `q`-th
+cohomology sheaf of `Rh_* K` is, as a sheaf of abelian groups, the sheafification of the
+presheaf `W ↦ H^q(W ×_X Y, K|)` on the small étale site of `X`
+(`AlgebraicGeometry.Etale.higherDirectImagePresheaf`): the canonical map
+`AlgebraicGeometry.Etale.higherDirectImagePresheafToSheaf` induces an isomorphism from the
+sheafification. The hypotheses on `h` are those of the blueprint; the statement holds for any
+`h` (Stacks `072W`). -/
+theorem Etale.isIso_higherDirectImagePresheafToSheaf {X Y : Scheme.{u}}
+    (h : Y ⟶ X) [QuasiCompact h] [QuasiSeparated h] (q : ℤ)
+    (K : DerivedCategory.Plus (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
+    IsIso (((sheafificationAdjunction X.smallEtaleTopology AddCommGrpCat.{u + 1}).homEquiv _ _).symm
+      (Etale.higherDirectImagePresheafToSheaf Λ h q K)) := by
+  obtain ⟨_, _⟩ := Etale.isLocallyBijective_higherDirectImagePresheafToSheaf Λ h q K
   set ψ := ((sheafificationAdjunction X.smallEtaleTopology AddCommGrpCat.{u + 1}).homEquiv _ _).symm
     (Etale.higherDirectImagePresheafToSheaf Λ h q K)
   have hfac : toSheafify _ _ ≫ ψ.hom = Etale.higherDirectImagePresheafToSheaf Λ h q K := by
@@ -579,20 +590,160 @@ theorem Etale.isIso_higherDirectImagePresheafToSheaf_singleFunctor
 
 end CohomologyPresheaf
 
-/-- Blueprint `lemma-weil-pbc-direct-image-filtered-colimit`: Filtered colimits and higher
-direct image.
 
-For a quasi-compact quasi-separated morphism `h : Y ⟶ X`, the higher direct image
-`F ↦ R^q h_* F` commutes with filtered colimits of sheaves of `Λ`-modules on `Y_ét`:
-`colim_i R^q h_* F_i ≅ R^q h_* (colim_i F_i)`. The functor is written out as the degree-`q`
-homology of the derived pushforward of a sheaf placed in degree `0`, the functor whose value
-at `F` is `AlgebraicGeometry.Etale.higherDirectImage`. -/
-theorem Etale.preservesColimitsOfShape_higherDirectImage {X Y : Scheme.{u}} (h : Y ⟶ X)
-    [QuasiCompact h] [QuasiSeparated h] (q : ℤ) (J : Type) [SmallCategory J] [IsFiltered J] :
-    PreservesColimitsOfShape J
-      (DerivedCategory.Plus.singleFunctor (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)) 0 ⋙
-        R+((h)_*[ModuleCat.{u + 1} Λ]) ⋙ DerivedCategory.Plus.homologyFunctor _ q) :=
-  sorry
+section FilteredColimits
+
+open Opposite
+
+/-- Morphisms out of `h^* Λ[W]` are morphisms out of `Λ[W ×_X Y]`. -/
+noncomputable def Etale.upperStarFreeSheafHomEquiv {X Y : Scheme.{u}} (h : Y ⟶ X) (W : X.Etale)
+    (G : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
+    ((h)^*[ModuleCat.{u + 1} Λ].obj ((Etale.freeSheaf Λ X).obj W) ⟶ G) ≃
+      ((Etale.freeSheaf Λ Y).obj ((MorphismProperty.Over.pullback @Etale ⊤ h).obj W) ⟶ G) :=
+  ((Etale.upperStarLowerStarAdjunction _ h).homEquiv _ _).trans
+    ((Etale.freeSheafHomEquiv Λ W _).trans (Etale.freeSheafHomEquiv Λ _ G).symm)
+
+lemma Etale.upperStarFreeSheafHomEquiv_comp {X Y : Scheme.{u}} (h : Y ⟶ X) (W : X.Etale)
+    {G G' : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)}
+    (a : (h)^*[ModuleCat.{u + 1} Λ].obj ((Etale.freeSheaf Λ X).obj W) ⟶ G) (g : G ⟶ G') :
+    Etale.upperStarFreeSheafHomEquiv Λ h W G' (a ≫ g) =
+      Etale.upperStarFreeSheafHomEquiv Λ h W G a ≫ g := by
+  apply (Etale.freeSheafHomEquiv Λ _ G').injective
+  simp only [Etale.upperStarFreeSheafHomEquiv, Equiv.trans_apply, Etale.freeSheafHomEquiv_comp,
+    Adjunction.homEquiv_naturality_right]
+  erw [Equiv.apply_symm_apply, Equiv.apply_symm_apply]
+  rfl
+
+/-- The pullback of the free sheaf `Λ[W]` along `h : Y ⟶ X` is the free sheaf on `W ×_X Y`:
+both corepresent the sections over `W ×_X Y`. -/
+noncomputable def Etale.upperStarFreeSheafIso {X Y : Scheme.{u}} (h : Y ⟶ X) (W : X.Etale) :
+    (h)^*[ModuleCat.{u + 1} Λ].obj ((Etale.freeSheaf Λ X).obj W) ≅
+      (Etale.freeSheaf Λ Y).obj ((MorphismProperty.Over.pullback @Etale ⊤ h).obj W) :=
+  Coyoneda.ext _ _ (fun f ↦ Etale.upperStarFreeSheafHomEquiv Λ h W _ f)
+    (fun g ↦ (Etale.upperStarFreeSheafHomEquiv Λ h W _).symm g) (by simp) (by simp) (by
+      intro Z Z' f g
+      apply (Etale.upperStarFreeSheafHomEquiv Λ h W _).injective
+      rw [Etale.upperStarFreeSheafHomEquiv_comp]
+      simp)
+
+/-- The map of hypercohomology presheaves `W ↦ Hᵠ(W ×_X Y, K|)` induced by `φ : K ⟶ K'`. -/
+noncomputable def Etale.higherDirectImagePresheafMap {X Y : Scheme.{u}} (h : Y ⟶ X) (q : ℤ)
+    {K K' : DerivedCategory.Plus (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
+    (φ : K ⟶ K') :
+    Etale.higherDirectImagePresheaf Λ h q K ⟶ Etale.higherDirectImagePresheaf Λ h q K' :=
+  Functor.whiskerLeft _ (preadditiveYoneda.map ((shiftFunctor _ q).map φ))
+
+
+/-- The shift identification `H⁰((Rh_* K)[q]) ≅ Hᵠ(Rh_* K)`. -/
+noncomputable abbrev Etale.homologyShiftComparison {X Y : Scheme.{u}} (h : Y ⟶ X) (q : ℤ)
+    (K : DerivedCategory.Plus (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
+    (DerivedCategory.Plus.homologyFunctor _ 0).obj (R+((h)_*[ModuleCat.{u + 1} Λ]).obj (K⟦q⟧)) ⟶
+      (DerivedCategory.Plus.homologyFunctor _ q).obj (R+((h)_*[ModuleCat.{u + 1} Λ]).obj K) :=
+  (DerivedCategory.Plus.homologyFunctor _ 0).map
+      ((R+((h)_*[ModuleCat.{u + 1} Λ]).commShiftIso q).hom.app K) ≫
+    ((DerivedCategory.Plus.homologyFunctor _ 0).isoShiftZero ℤ).inv.app _ ≫
+      ((DerivedCategory.Plus.homologyFunctor _ 0).shiftIso q 0 q (add_zero q)).hom.app _
+
+lemma Etale.higherDirectImagePresheafToHom_app_apply {X Y : Scheme.{u}} (h : Y ⟶ X) (q : ℤ)
+    (K : DerivedCategory.Plus (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
+    (W : X.Etaleᵒᵖ) (β : (DerivedCategory.Plus.singleFunctor _ 0).obj
+      ((h)^*[ModuleCat.{u + 1} Λ].obj ((Etale.freeSheaf Λ X).obj W.unop)) ⟶ K⟦q⟧) :
+    (Etale.higherDirectImagePresheafToHom Λ h q K).app W β =
+      (DerivedCategory.Plus.singleFunctorCompHomologyFunctorIso 0).inv.app _ ≫
+        (DerivedCategory.Plus.homologyFunctor _ 0).map
+          ((Etale.derivedUpperStarLowerStarAdjunctionPlus (ModuleCat.{u + 1} Λ) h).homEquiv _ _
+            ((((h)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlusSingleFunctor 0).hom.app
+              ((Etale.freeSheaf Λ X).obj W.unop) ≫ β)) ≫
+        Etale.homologyShiftComparison Λ h q K := by
+  simp only [Etale.higherDirectImagePresheafToHom, NatTrans.comp_app, ConcreteCategory.comp_apply,
+    Etale.derivedHomToHomology_app_apply]
+  rfl
+
+/-- Naturality of the shift identification `H⁰((Rh_* K)[q]) ≅ Hᵠ(Rh_* K)` in `K`: for
+`φ : K ⟶ K'` the square
+```
+H⁰((Rh_* K)[q])  ⟶ Hᵠ(Rh_* K)
+      │                 │
+      ▼                 ▼
+H⁰((Rh_* K')[q]) ⟶ Hᵠ(Rh_* K')
+```
+commutes. -/
+lemma Etale.homologyShiftComparison_naturality {X Y : Scheme.{u}} (h : Y ⟶ X) (q : ℤ)
+    {K K' : DerivedCategory.Plus (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
+    (φ : K ⟶ K') :
+    (DerivedCategory.Plus.homologyFunctor _ 0).map
+        (R+((h)_*[ModuleCat.{u + 1} Λ]).map ((shiftFunctor _ q).map φ)) ≫
+      Etale.homologyShiftComparison Λ h q K' =
+    Etale.homologyShiftComparison Λ h q K ≫
+      (DerivedCategory.Plus.homologyFunctor _ q).map (R+((h)_*[ModuleCat.{u + 1} Λ]).map φ) := by
+  simp only [Etale.homologyShiftComparison]
+  rw [← Functor.map_comp_assoc, Functor.commShiftIso_hom_naturality, Functor.map_comp_assoc]
+  simp only [Category.assoc]
+  congr 1
+  have n₁ := ((DerivedCategory.Plus.homologyFunctor _ 0).isoShiftZero ℤ).inv.naturality
+    ((shiftFunctor _ q).map (R+((h)_*[ModuleCat.{u + 1} Λ]).map φ))
+  have n₂ := ((DerivedCategory.Plus.homologyFunctor _ 0).shiftIso q 0 q (add_zero q)).hom.naturality
+    (R+((h)_*[ModuleCat.{u + 1} Λ]).map φ)
+  erw [reassoc_of% n₁, n₂]
+  rfl
+
+/-- Naturality of the canonical map from `W ↦ Hᵠ(W ×_X Y, K|)` to `Hᵠ(Rh_* K)` in `K`: for
+`φ : K ⟶ K'` the square
+```
+Hᵠ(- ×_X Y, K|)  ⟶ Hᵠ(Rh_* K)
+      │                 │
+      ▼                 ▼
+Hᵠ(- ×_X Y, K'|) ⟶ Hᵠ(Rh_* K')
+```
+of presheaves on `X_ét` commutes, the right map being the map on sections of `Hᵠ(Rh_* φ)`. -/
+lemma Etale.higherDirectImagePresheafToSheaf_naturality {X Y : Scheme.{u}} (h : Y ⟶ X) (q : ℤ)
+    {K K' : DerivedCategory.Plus (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
+    (φ : K ⟶ K') :
+    Etale.higherDirectImagePresheafMap Λ h q φ ≫ Etale.higherDirectImagePresheafToSheaf Λ h q K' =
+      Etale.higherDirectImagePresheafToSheaf Λ h q K ≫ Etale.sectionsMap
+        ((DerivedCategory.Plus.homologyFunctor _ q).map
+          (R+((h)_*[ModuleCat.{u + 1} Λ]).map φ)) := by
+  have h₁ : ∀ L, Etale.higherDirectImagePresheafToSheaf Λ h q L =
+      Etale.higherDirectImagePresheafToHom Λ h q L ≫ Etale.freeSheafSections Λ _ := fun _ ↦ rfl
+  have h₂ : Etale.higherDirectImagePresheafMap Λ h q φ ≫
+      Etale.higherDirectImagePresheafToHom Λ h q K' =
+      Etale.higherDirectImagePresheafToHom Λ h q K ≫ Functor.whiskerLeft (Etale.freeSheaf Λ X).op
+        (preadditiveYoneda.map ((DerivedCategory.Plus.homologyFunctor _ q).map
+          (R+((h)_*[ModuleCat.{u + 1} Λ]).map φ))) := by
+    ext W β
+    have e₁ : (Etale.higherDirectImagePresheafMap Λ h q φ).app W β =
+        β ≫ (shiftFunctor _ q).map φ := rfl
+    rw [NatTrans.comp_app, NatTrans.comp_app, ConcreteCategory.comp_apply,
+      ConcreteCategory.comp_apply, e₁, Etale.higherDirectImagePresheafToHom_app_apply,
+      Etale.higherDirectImagePresheafToHom_app_apply]
+    change _ = _ ≫ _
+    rw [← Category.assoc _ β, Adjunction.homEquiv_naturality_right, Functor.map_comp]
+    simp only [Category.assoc]
+    congr 2
+    exact Etale.homologyShiftComparison_naturality Λ h q φ
+  rw [h₁, h₁, Category.assoc, Etale.freeSheafSections_naturality, ← Category.assoc,
+    ← Category.assoc, h₂]
+
+/-- The hypercohomology presheaves `W ↦ Hᵠ(W ×_X Y, K|)` as a functor of `K`. -/
+noncomputable def Etale.higherDirectImagePresheafFunctor {X Y : Scheme.{u}} (h : Y ⟶ X)
+    (q : ℤ) :
+    DerivedCategory.Plus (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)) ⥤
+      X.Etaleᵒᵖ ⥤ AddCommGrpCat.{u + 1} :=
+  shiftFunctor _ q ⋙ preadditiveYoneda ⋙ (Functor.whiskeringLeft _ _ _).obj
+    (Etale.freeSheaf Λ X ⋙ (h)^*[ModuleCat.{u + 1} Λ] ⋙ DerivedCategory.Plus.singleFunctor _ 0).op
+
+lemma Etale.higherDirectImagePresheafFunctor_obj {X Y : Scheme.{u}} (h : Y ⟶ X) (q : ℤ) (K) :
+    (Etale.higherDirectImagePresheafFunctor Λ h q).obj K =
+      Etale.higherDirectImagePresheaf Λ h q K :=
+  rfl
+
+lemma Etale.higherDirectImagePresheafFunctor_map {X Y : Scheme.{u}} (h : Y ⟶ X) (q : ℤ)
+    {K K'} (φ : K ⟶ K') :
+    (Etale.higherDirectImagePresheafFunctor Λ h q).map φ =
+      Etale.higherDirectImagePresheafMap Λ h q φ :=
+  rfl
+
+end FilteredColimits
 
 /-- Blueprint `sbc-lem-higher-direct-image-presheaf`, in the vanishing form used for constant
 coefficients: Higher direct image as a sheafified cohomology presheaf.

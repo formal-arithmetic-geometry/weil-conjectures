@@ -59,6 +59,17 @@ The composition law of the pro-étale `Rf_!` is only available through the étal
 `AlgebraicGeometry.Etale.nonempty_iso_rightDerivedLowerShriek_comp`, which asserts that *some*
 isomorphism exists; this is why the mate statements are existential in the isomorphism of left
 adjoints. Being formal, they hold for every such isomorphism.
+
+Clause (a) of `sk-lem-sf-mate` takes the mate of "the composition isomorphism
+`R(gf)_! ≅ Rg_! Rf_!` of `sk-thm-sf-comp-composition`" on the *ambient* functors, but that node
+only gives the composition law on bounded below objects of étale origin. So clause (a) is stated
+for a given ambient composition isomorphism (`HasAmbientExceptionalRightAdjoint.compIso`), and
+`HasAmbientExceptionalRightAdjoint.nonempty_iso_comp_iff` records that the ambient isomorphism
+`R(f ≫ g)^× ≅ Rg^× ⋙ Rf^×` exists exactly when the ambient composition law does. The ambient
+composition law on all of `D(X_proét)` is not stated. Comparing the chosen compactifications
+needs proper base change at the boundary for arbitrary unbounded pro-étale sheaves, which is not
+known. The datum `FullCD` does not help: it bounds only the proper parts of the three chosen
+compactifications, not those of the auxiliary compactifications used in the comparison.
 -/
 
 @[expose] public section

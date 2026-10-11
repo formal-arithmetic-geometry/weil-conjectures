@@ -8,6 +8,7 @@ module
 public import Mathlib.AlgebraicGeometry.ResidueField
 public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
 public import Mathlib.RingTheory.RingHom.Etale
+public import Mathlib.RingTheory.TensorProduct.Nontrivial
 
 /-!
 # The geometric point over a point of a scheme
@@ -18,7 +19,11 @@ the algebraic closure of `κ(y)`.
 
 We also record that whether a residue field extension is étale, that is finite separable, is
 insensitive to composing with a morphism inducing isomorphisms of residue fields, such as an open
-immersion.
+immersion, and two facts on morphisms from spectra of fields: precomposition with
+`Spec L ⟶ Spec K` for a field extension `K ⟶ L` is injective
+(`AlgebraicGeometry.Scheme.SpecMap_comp_injective`), and two field-valued points with the same
+image have a common field extension
+(`AlgebraicGeometry.Scheme.exists_SpecMap_comp_eq_of_apply_eq`).
 -/
 
 @[expose] public section
@@ -70,5 +75,69 @@ lemma exists_eq_spec_map_comp_fromSpecResidueField {K : Type u} [Field K] {X : S
     ∃ ι : X.residueField x ⟶ .of K, p = Spec.map ι ≫ X.fromSpecResidueField x := by
   subst hx
   exact ⟨_, ((SpecToEquivOfField K X).left_inv p).symm⟩
+
+
+section FieldPoints
+
+open IsLocalRing
+
+/-- The morphism `Spec L ⟶ Spec K` induced by a field extension maps the point to the point. -/
+lemma SpecMap_apply_closedPoint {K L : Type u} [Field K] [Field L]
+    (α : CommRingCat.of K ⟶ CommRingCat.of L) :
+    Spec.map α (closedPoint L) = closedPoint K :=
+  Subsingleton.elim _ _
+
+/-- Precomposition with `Spec L ⟶ Spec K` for a field extension `K ⟶ L` is injective on
+morphisms `Spec K ⟶ X`. -/
+lemma SpecMap_comp_injective {X : Scheme.{u}} {K L : Type u} [Field K] [Field L]
+    (α : CommRingCat.of K ⟶ CommRingCat.of L) {g₁ g₂ : Spec (.of K) ⟶ X}
+    (h : Spec.map α ≫ g₁ = Spec.map α ≫ g₂) : g₁ = g₂ := by
+  have hx : g₁ (closedPoint K) = g₂ (closedPoint K) := by
+    have := congr($h (closedPoint L))
+    simpa only [Scheme.Hom.comp_apply, SpecMap_apply_closedPoint] using this
+  obtain ⟨c₁, hc₁⟩ := exists_eq_spec_map_comp_fromSpecResidueField g₁ _ rfl
+  obtain ⟨c₂, hc₂⟩ := exists_eq_spec_map_comp_fromSpecResidueField g₂ _ rfl
+  rw [← X.residueFieldCongr_fromSpecResidueField hx, ← Category.assoc, ← Spec.map_comp] at hc₂
+  rw [hc₁, hc₂, ← Category.assoc, ← Category.assoc, ← Spec.map_comp, ← Spec.map_comp] at h
+  have h' := Spec.map_injective ((cancel_mono _).1 h)
+  have : c₁ = (X.residueFieldCongr hx).hom ≫ c₂ := by
+    ext a
+    exact α.hom.injective congr(($h').hom a)
+  rw [hc₁, hc₂, this]
+
+
+/-- Two field-valued points of `S` with the same image have a common field extension. -/
+lemma exists_SpecMap_comp_eq_of_apply_eq {S : Scheme.{u}} {K L : Type u} [Field K] [Field L]
+    (σ : Spec (.of K) ⟶ S) (τ : Spec (.of L) ⟶ S)
+    (h : σ (closedPoint K) = τ (closedPoint L)) :
+    ∃ (Ω : Type u) (_ : Field Ω) (α : CommRingCat.of K ⟶ CommRingCat.of Ω)
+      (β : CommRingCat.of L ⟶ CommRingCat.of Ω), Spec.map α ≫ σ = Spec.map β ≫ τ := by
+  obtain ⟨a, ha⟩ := exists_eq_spec_map_comp_fromSpecResidueField σ _ rfl
+  obtain ⟨b, hb⟩ := exists_eq_spec_map_comp_fromSpecResidueField τ _ rfl
+  rw [← S.residueFieldCongr_fromSpecResidueField h, ← Category.assoc,
+    ← Spec.map_comp] at hb
+  let F := S.residueField (σ (closedPoint K))
+  let b' := (S.residueFieldCongr h).hom ≫ b
+  let : Algebra F K := a.hom.toAlgebra
+  let : Algebra F L := b'.hom.toAlgebra
+  have : Nontrivial (TensorProduct F K L) :=
+    Algebra.TensorProduct.nontrivial_of_algebraMap_injective_of_isDomain F K L
+      a.hom.injective b'.hom.injective
+  obtain ⟨m, hm⟩ := Ideal.exists_maximal (TensorProduct F K L)
+  let := Ideal.Quotient.field m
+  refine ⟨TensorProduct F K L ⧸ m, inferInstance,
+    CommRingCat.ofHom ((Ideal.Quotient.mk m).comp Algebra.TensorProduct.includeLeftRingHom),
+    CommRingCat.ofHom ((Ideal.Quotient.mk m).comp
+      (Algebra.TensorProduct.includeRight (R := F) (A := K)).toRingHom), ?_⟩
+  refine (congrArg (Spec.map _ ≫ ·) ha).trans (Eq.trans ?_ (congrArg (Spec.map _ ≫ ·) hb).symm)
+  dsimp only
+  rw [← Category.assoc, ← Category.assoc, ← Spec.map_comp, ← Spec.map_comp]
+  congr 2
+  ext x
+  change Ideal.Quotient.mk m (algebraMap F K x ⊗ₜ[F] (1 : L)) =
+    Ideal.Quotient.mk m ((1 : K) ⊗ₜ[F] algebraMap F L x)
+  rw [Algebra.algebraMap_eq_smul_one, Algebra.algebraMap_eq_smul_one, TensorProduct.smul_tmul]
+
+end FieldPoints
 
 end AlgebraicGeometry.Scheme
