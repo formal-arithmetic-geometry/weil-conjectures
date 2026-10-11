@@ -289,5 +289,23 @@
   "by": "L",
   "result": "accepted",
   "note": "11 steps following Algebra 00R7: two general claims (a localization of a module flat over the base is flat; flatness passes along base change followed by localization, with the isomorphism N (x)_B B' = N'); the limit tower of Noetherian local stages (new unsplit node for the construction of 00R7's first paragraph, 'as in' 00QV/00QX/00QU); the stages and their fibres Noetherian local; S'_lambda (x) R_mu -> S'_mu a localization; eventual flatness of M_lambda over R_lambda and of the fibres by a new unsplit node for 00R6 stated with the hypotheses its proof uses (Noetherian local stages, localizations), extended to all larger stages by Claim P; the Noetherian case 00MP (split node) at a common stage; descent to R -> S and S -> M by Claim P, since S = S_lambda (x) R only up to localization. Statement unchanged; two gaps of the source recorded in HUMAN.md."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.FlatOfFlatClosedFiber",
+  "declaration": "Module.flat_of_flat_closedFiber",
+  "file": "lean/Sheaf/RingTheory/FlatOfFlatClosedFiber.lean",
+  "statement": "theorem flat_of_flat_closedFiber (R : Type u) (S : Type v) (S' : Type w) (M : Type t) [CommRing R] [CommRing S] [CommRing S'] [IsLocalRing R] [IsLocalRing S] [IsLocalRing S'] [Algebra R S] [Algebra S S'] [Algebra R S'] [IsScalarTower R S S'] [IsLocalHom (algebraMap R S)] [IsLocalHom (algebraMap S S')] [AddCommGroup M] [Module S' M] [Module S M] [Module R M] [IsScalarTower S S' M] [IsScalarTower R S M] (P : Type p) (Q : Type q) [CommRing P] [CommRing Q] [Algebra R P] [Algebra P S] [IsScalarTower R P S] [Algebra R Q] [Algebra Q S'] [IsScalarTower R Q S'] [Algebra.FinitePresentation R P] [Algebra.FinitePresentation R Q] (W : Submonoid P) (V : Submonoid Q) [IsLocalization W S] [IsLocalization V S'] [Module.FinitePresentation S' M] [Nontrivial M] (h_fibre : Module.Flat (S ⧸ Ideal.map (algebraMap R S) (IsLocalRing.maximalIdeal R)) ((S ⧸ Ideal.map (algebraMap R S) (IsLocalRing.maximalIdeal R)) ⊗[S] M)) [Module.Flat R M] : Module.Flat R S ∧ Module.Flat S M",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-cff0931",
+  "group": "E1",
+  "result": "pass",
+  "note": "3 local rings + IsLocalHom algebraMaps, R S' composite via tower; M S'-module with S,R restriction by IsScalarTower; (1) ess. fin. pres. via FinitePresentation P,Q + IsLocalization W S / V S' with R-towers; (2) Module.FinitePresentation S' M; (3) Nontrivial M; (4) Module.Flat (S/m_R S) ((S/m_R S) ⊗[S] M) = M/m_R M (leftModule, checked rfl); (5) Module.Flat R M; concl Module.Flat R S ∧ Module.Flat S M with given Module S M (pp.explicit)"
  }
 }

@@ -4028,3 +4028,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 09:31 L: merged deliver/M1/lem-pc-ringed-space-derived-products (stage 2; reviewer FIX; first push; Sheaf.CategoryTheory.Triangulated.RingedSpaceDerivedProducts AlgebraicGeometry.RingedSpace.derivedProducts)
 - 09:32 L: merged deliver/K1/lem-sc-mayer-vietoris-ringed-space (stage 2; reviewer PASS; first push; Sheaf.Topology.ModuleMayerVietoris AlgebraicGeometry.RingedSpace.module_mayerVietoris; new nodes: def-sc-open-module-cohomology)
 - 09:32 L: merged deliver/E1/lem-pod-profinite-stable-lattice (stage 2; reviewer PASS; first push; Sheaf.RepresentationTheory.ProfiniteStableLattice Padic.exists_stable_lattice)
+- 09:32 L: merged deliver/E1/lem-weil-pbc-criterion-flatness-fibre (stage 2; reviewer PASS; first push; Sheaf.RingTheory.FlatOfFlatClosedFiber Module.flat_of_flat_closedFiber)
