@@ -58,7 +58,8 @@ variable (w : g ≫ iX = iY ≫ f) {V : S.Opens} (hfV : ⊤ ≤ f ⁻¹ᵁ V) (�
 omit [Algebra Γ(S, V) Γ(T, ⊤)] in
 include w in
 lemma appLE_comp_eq_app_appLE (a : Γ(S, V)) :
-    iY.appLE ⊤ (g ⁻¹ᵁ W) (le_top.trans iY.preimage_top.ge) (f.appLE V ⊤ hfV a) = g.app W (iX.appLE V W hWV a) := by
+    iY.appLE ⊤ (g ⁻¹ᵁ W) (le_top.trans iY.preimage_top.ge) (f.appLE V ⊤ hfV a) =
+      g.app W (iX.appLE V W hWV a) := by
   rw [← CommRingCat.comp_apply, Scheme.Hom.appLE_comp_appLE, Scheme.Hom.app_eq_appLE,
     ← CommRingCat.comp_apply, Scheme.Hom.appLE_comp_appLE]
   congr 1
@@ -95,7 +96,7 @@ of functions `Γ(Y, g⁻¹ W)` of the affine `g⁻¹ W = W ×_S T`. -/
 theorem sectionsBaseChange_bijective (H : IsPullback g iY iX f) (hV : IsAffineOpen V)
     [IsAffine T] (hWa : IsAffineOpen W) {e : Γ(ℱ, W)} (he : IsFreeGenerator e) :
     Function.Bijective (sectionsBaseChange H.w hfV ℱ hWV hf hW) := by
-  letI : Algebra Γ(S, V) Γ(X, W) := (iX.appLE V W hWV).hom.toAlgebra
+  let : Algebra Γ(S, V) Γ(X, W) := (iX.appLE V W hWV).hom.toAlgebra
   let ψ : Γ(X, W) →ₗ[Γ(S, V)] Γ(ℱ, W) :=
     { toFun r := r • e
       map_add' r r' := add_smul r r' e
@@ -268,6 +269,38 @@ theorem cechBaseChange_d (k : ℕ) (z : Γ(T, ⊤) ⊗[Γ(S, V)] CechCochain U �
     rw [pullbackSection_map, presheaf_map_eqToHom_eq_homOfLE, presheaf_map_eqToHom_eq_homOfLE,
       presheaf_map_appLE_smul, presheaf_map_appLE_smul, presheaf_map_appLE_smul,
       TopCat.Presheaf.map_homOfLE_map_homOfLE_apply, TopCat.Presheaf.map_homOfLE_map_homOfLE_apply]
+
+
+omit [Fintype ι] [DecidableEq ι] in
+include hf in
+/-- **Exactness of the base-changed Čech complex.** If the Čech complex of `g^* ℱ` for the cover
+`g⁻¹ U` is exact in degree `1`, then so is `B ⊗[A] Č(U, ℱ)`. -/
+theorem exact_lTensor_cechDifferential [Finite ι] (H : IsPullback g iY iX f)
+    (hV : IsAffineOpen V) [IsAffine T]
+    (hUa : ∀ (k : ℕ) (y : Fin (k + 1) → ι), IsAffineOpen (⨅ l, U (y l)))
+    (he : ∀ (k : ℕ) (y : Fin (k + 1) → ι), ∃ e : Γ(ℱ, ⨅ l, U (y l)), IsFreeGenerator e)
+    (hex : ((cechComplex (fun i ↦ g ⁻¹ᵁ U i)).obj ((pullback g).obj ℱ).presheaf).ExactAt 1) :
+    Function.Exact ((cechDifferential ℱ U hUV hU 0).lTensor Γ(T, ⊤))
+      ((cechDifferential ℱ U hUV hU 1).lTensor Γ(T, ⊤)) := by
+  classical
+  have := Fintype.ofFinite ι
+  rw [exactAt_cechComplex_iff] at hex
+  have hb (k : ℕ) := cechBaseChange_bijective hfV ℱ U hUV hf hU H hV hUa he k
+  intro z
+  constructor
+  · intro hz
+    have h1 := cechBaseChange_d hfV ℱ U hUV hf hU H.w 1 z
+    rw [hz, map_zero] at h1
+    obtain ⟨c, hc⟩ := hex _ h1.symm
+    obtain ⟨z₀, rfl⟩ := (hb 0).2 c
+    refine ⟨z₀, (hb 1).1 ?_⟩
+    rw [cechBaseChange_d]
+    exact hc
+  · rintro ⟨z₀, rfl⟩
+    refine (hb 2).1 ?_
+    rw [cechBaseChange_d, cechBaseChange_d, map_zero]
+    exact congr($(((cechComplex (fun i ↦ g ⁻¹ᵁ U i)).obj
+      ((pullback g).obj ℱ).presheaf).d_comp_d 0 1 2) _)
 
 end Cech
 
