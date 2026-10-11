@@ -157,5 +157,23 @@
   "item": "lem-weil-pbc-integral-closure-finite-fibre-part-localization",
   "worker": "stage1",
   "summary": "Read the official Stacks Tag 09XH page and matched its proof: the finite fibre component is quasi-finite, Zariski's Main Theorem supplies a neighbourhood where the integral-closure map is an isomorphism, the component image is open and closed and yields the product decomposition with C'_1 isomorphic to C_1, and a lift g of the component idempotent gives B'_g isomorphic to B_g. Added four child interfaces: the finite-component quasi-finiteness statement and two unsplit image/localization statements, plus the Mathlib leaf for the Zariski Main localization. The local literature checkout is absent; the cited Stacks source was read online and is recorded as WANTED in the delivery report."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.IntegralClosureFiniteFibrePartLocalization",
+  "declaration": "integralClosure_finiteFibrePart_localization",
+  "statement": "theorem integralClosure_finiteFibrePart_localization (A : Type u) (B : Type v) [CommRing A] [CommRing B] [Algebra A B] [Algebra.FiniteType A B] (I : Ideal A) (C₁ : Type w) (C₂ : Type z) [CommRing C₁] [CommRing C₂] [Algebra (A ⧸ I) C₁] [Algebra (A ⧸ I) C₂] [Module.Finite (A ⧸ I) C₁] (e : (B ⧸ Ideal.map (algebraMap A B) I) ≃+* (C₁ × C₂)) (he : ∀ a : A, e (Ideal.Quotient.mk _ (algebraMap A B a)) = (algebraMap (A ⧸ I) C₁ (Ideal.Quotient.mk I a), algebraMap (A ⧸ I) C₂ (Ideal.Quotient.mk I a))) (ε : B ⧸ Ideal.map (algebraMap A B) I) (hε : e ε = (1, 0)) : ∃ (ε' : (integralClosure A B) ⧸ Ideal.map (algebraMap A (integralClosure A B)) I) (g : integralClosure A B) (q : (integralClosure A B) ⧸ Ideal.map (algebraMap A (integralClosure A B)) I →+* (B ⧸ Ideal.map (algebraMap A B) I)), (∀ x : integralClosure A B, q (Ideal.Quotient.mk _ x) = Ideal.Quotient.mk _ x.1) ∧ IsIdempotentElem ε' ∧ q ε' = ε ∧ (∀ x, ε' * x = x → (e (q x)).2 = 0) ∧ (∀ x, (1 - ε') * x = x → (e (q x)).1 = 0) ∧ (∀ c : C₁, ∃! x, ε' * x = x ∧ e (q x) = (c, 0)) ∧ Ideal.Quotient.mk _ g = ε' ∧ Function.Bijective (Localization.awayMap (integralClosure A B).val.toRingHom g)",
+  "by": "H1",
+  "date": "2026-10-11",
+  "file": "lean/Sheaf/Paper/IntegralClosureFiniteFibrePartLocalization.lean",
+  "branch": "sheaf-dag",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "H1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }
