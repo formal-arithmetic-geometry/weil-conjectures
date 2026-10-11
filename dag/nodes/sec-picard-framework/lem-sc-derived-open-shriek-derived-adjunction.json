@@ -132,5 +132,24 @@
   "group": "H1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-osa3133 (reviewer sub-agent of L); spot-checked: Read packet whole; checked Step 1/2 against lem-sc-derived-open-restriction-adjunction-exact, lem-weil-pbc-exact-functor-derived-factorization, lem-pc-derived-adjoint-functors (Tag 015F/09T5 route via exactness, no K-injective restriction needed); no duplicate of lem-pc-ringed-spaces-derived-adjoint(-general) (those are Lf^*/Rf_*). FIX more, RETURN less: (1) C4: Step 1 set A=Mod(O_U), B=Mod(O_X), making G=j_! : A->B and F=j^{-1} : B->A, the reverse of lem-pc-derived-adjoint-functors (F:A->B, G:B->A); swapped to A=Mod(O_X), B=Mod(O_U). (2) C1: the inference 'termwise functor => RF/LG defined everywhere' (essentially constant ind/pro-systems) is now spelled out from the qis-preservation clause of the factorization lemma. (3) source.place still said 'Tag 08BW proof, using 08BS' despite the second reading's claim; set to 08BT, and Step 2 source no longer names 08BS (K-injective restriction is not used).; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.DerivedOpenShriekAdjunction",
+  "declaration": "AlgebraicGeometry.derived_open_shriek_adjunction",
+  "file": "lean/Sheaf/Algebra/Homology/DerivedOpenShriekAdjunction.lean",
+  "statement": "theorem derived_open_shriek_adjunction (X : RingedSpace.{u}) (U : Opens X) [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X))] [HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X).over U))] : Nonempty (@Functor.mapDerivedCategory _ _ _ _ _ _ _ _ (SheafOfModules.extensionByZeroPresheaf.{u} (moduleRings X) U ⋙ PresheafOfModules.sheafification.{u} (𝟙 (moduleRings X).obj)) (Adjunction.left_adjoint_additive (Classical.choice (open_restriction_adjunction_exact X U).2.2.2.2)) (open_restriction_adjunction_exact X U).2.2.1 (open_restriction_adjunction_exact X U).2.2.2.1 ⊣ (SheafOfModules.overFunctor.{u} (moduleRings X) U).mapDerivedCategory)",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-dsa1345"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-dsa1345",
+  "group": "K1",
+  "result": "fix",
+  "note": "X:RingedSpace, U:Opens X = open inclusion; Mod(O_X), Mod(O_U)=SheafOfModules (moduleRings X)/(.over U); j_! = extensionByZeroPresheaf ⋙ sheafification and j⁻¹ = overFunctor as in landed open_restriction_adjunction_exact; termwise derived functors = mapDerivedCategory (exactness proofs from the dep, Props); natural Hom bijection = Nonempty adjunction; no added hypotheses. FIX: existential L,R+factorization isos and existential PreservesZeroMorphisms witness replaced by the shared mapDerivedCategory form (H4, DERIVED RESTRICTION line); wX/wU -> one w"
  }
 }

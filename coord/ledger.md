@@ -4721,3 +4721,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 13:11 L: merged deliver/G1/lem-weil-pbc-proper-closed-in-proper-fp (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.ProperFinitePresentationClosedLimit AlgebraicGeometry.exists_proper_finitePresentation_closedImmersion_limit)
 - 13:11 L: merged deliver/C1/lem-weil-pbc-projective-resolution-kernel-projective (stage 2; reviewer PASS; first push; Sheaf.RingTheory.ProjectiveResolutionKernelProjective ModuleCat.projective_kernel_of_partial_projective_resolution)
 - 13:11 L: merged deliver/G1/lem-weil-pbc-projective-dimension-ses-kernel (stage 2; reviewer FIX; first push; Sheaf.RingTheory.ProjectiveDimensionSESKernel Ring.projectiveDimensionLE_of_shortExact)
+- 13:12 L: merged deliver/K1/lem-sc-derived-open-shriek-derived-adjunction (stage 2; reviewer FIX; first push; Sheaf.Algebra.Homology.DerivedOpenShriekAdjunction AlgebraicGeometry.derived_open_shriek_adjunction)
