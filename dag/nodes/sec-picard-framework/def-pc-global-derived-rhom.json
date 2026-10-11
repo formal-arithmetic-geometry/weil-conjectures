@@ -87,5 +87,32 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GlobalDerivedHom",
+  "declaration": "AlgebraicGeometry.schemeGlobalDerivedHom",
+  "file": "lean/Sheaf/AlgebraicGeometry/GlobalDerivedHom.lean",
+  "statement": "def schemeGlobalDerivedHom (X : Scheme.{u}) [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] [HasDerivedCategory.{wA} (ModuleCat.{u} ((moduleRings X.toRingedSpace).obj.obj (op ⊤)))] : (schemeDerivedCategory X)ᵒᵖ × schemeDerivedCategory X ⥤ DerivedCategory (ModuleCat.{u} ((moduleRings X.toRingedSpace).obj.obj (op ⊤)))",
+  "branch": "sheaf-dag",
+  "by": "N1",
+  "date": "2026-10-12",
+  "existing": false,
+  "declarations": [
+   "AlgebraicGeometry.globalSectionsPoint",
+   "AlgebraicGeometry.toGlobalSectionsPoint",
+   "AlgebraicGeometry.schemeDerivedGlobalSections",
+   "AlgebraicGeometry.schemeDerivedGlobalSections_point_comparison",
+   "AlgebraicGeometry.schemeDerivedGlobalSections_computed_by_resolution",
+   "AlgebraicGeometry.schemeGlobalDerivedHom"
+  ],
+  "fixed_by": "R-gdr"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-gdr",
+  "group": "N1",
+  "result": "fix",
+  "note": "X : Scheme; D(O_X) = schemeDerivedCategory; A = (moduleRings X).obj.obj (op ⊤); RΓ = rightDerivedFunctor of RingedSpace.globalSectionsFunctor into D(A), tied to Rp_* (derivedModuleDirectImage toGlobalSectionsPoint) by an equivalence whose functor is point evaluation; K-injective computation; RHom_X = derivedInternalHom (Opens site, X.sheaf) ⋙ RΓ on D(O_X)ᵒᵖ × D(O_X). FIX: removed three global instances from sorried theorems and the separate exactness theorems (STATE RΓ line), folded the point equivalence into the comparison theorem (exactness from the equivalence), dropped the extra affine/Ab definitions (one form)"
  }
 }
