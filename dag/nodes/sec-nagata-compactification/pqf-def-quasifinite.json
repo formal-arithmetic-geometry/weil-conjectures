@@ -94,5 +94,31 @@
   "group": "K1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-pdq2516 (reviewer sub-agent of L); spot-checked: Statement clauses 1-3 identical to before and to Stacks 01TD (only the 'Definition 29.21.1' number dropped, no mathematical change), so citers pqf-lem-finite-qf, pqf-lem-qf-finitefibres, pqf-lem-locqf-fibre-discrete, pqf-lem-proper-lqf-finite keep the clauses they rely on (quasi-finite = finite type + isolated points; locally quasi-finite includes ring-level finite type); no proof steps; mathlib_match null: Mathlib LocallyQuasiFinite (QuasiFinite.lean:71, docstring: not locally of finite type) correctly not recorded as a match for clause 2; second reading by K1 missed no fault."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.QuasiFiniteMorphism",
+  "declaration": "AlgebraicGeometry.Scheme.Hom.IsQuasiFiniteAtPoint",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Hom.IsQuasiFiniteAtPoint",
+   "AlgebraicGeometry.Scheme.Hom.IsLocallyQuasiFinite",
+   "AlgebraicGeometry.Scheme.Hom.IsQuasiFinite",
+   "AlgebraicGeometry.Scheme.Hom.HasFiniteFibres"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/QuasiFiniteMorphism.lean",
+  "statement": "def IsQuasiFiniteAtPoint {X S : AlgebraicGeometry.Scheme.{u}} (f : X ⟶ S) (x : X) : Prop",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-11",
+  "existing": false,
+  "note": "Four predicates realize the four notions of Stacks 01TD plus the finite-fibres convention; the fibre scheme is Mathlib Scheme.Hom.fiber, isolation is IsOpen {f.asFiber x} in f.fiber (f x), and the ring-level clause of IsQuasiFiniteAtPoint is the recorded Algebra.IsQuasiFiniteAtPrime (def-weil-pbc-ring-map-quasi-finite-at-prime) with the appLE algebra and an Algebra.FiniteType witness, the same form as lem-weil-pbc-isolated-fibre-point-quasi-finite-affine-pairs. Mathlib LocallyQuasiFinite and Scheme.Hom.QuasiFiniteAt omit the finite-type requirement of Stacks 01TD.",
+  "fixed_by": "R-pdq1107"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-pdq1107",
+  "group": "C1",
+  "result": "fix",
+  "note": "clause 1 affine U∋x, affine V, U≤f⁻¹V, appLE algebra finite type + IsQuasiFiniteAtPrime at hU.primeIdealOf x; clause 2 ∀x; clause 3 LocallyOfFiniteType ∧ QuasiCompact ∧ IsOpen {f.asFiber x} in f.fiber (f x); finite fibres ∀s (f⁻¹'{s}).Finite; arbitrary Scheme.{u}, no extra instances"
  }
 }
