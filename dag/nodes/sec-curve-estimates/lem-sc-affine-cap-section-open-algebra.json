@@ -152,5 +152,23 @@
   "group": "F1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-aca (reviewer sub-agent of L); spot-checked: Source Stacks 01PV (properties-lemma-affine-cap-s-open, properties.tex 4286-4318) read: R a ring, N invertible (locally free rank 1), s in N, B=Sym(N)/(s-1), V={p: s not in pN}; the item statement agrees hypothesis by hypothesis and is unchanged. Step 1 elementary (N projective so s in pN iff s/1 in pN_p; on D(f_i) with N_{f_i}=R_{f_i}e_i this is a_i in pR_{f_i}). Step 2 carried by lem-weil-pbc-localization-quotient-commute (B=Sym, b=f_i, J=(iota(s)-1)), lem-weil-pbc-symmetric-algebra-base-change (its R_f parenthetical), lem-weil-pbc-symmetric-algebra-free-module-polynomial (n=1). Step 3 by lem-weil-pbc-localization-away-polynomial-quotient (r=a_i over R_{f_i}, any a_i incl. 0) and lem-weil-pbc-principal-localization-open-immersion (image D(a_i)). Step 4 by def-weil-pbc-fpqc-covering (localizations flat since stalks are isomorphic; finite affine refinement by principal opens inside V cap D(f_i), V quasi-compact), lem-galois-fpqc-descend-open-immersion (accepts any fibre product), def-weil-open-immersion. Declared tool uses accepted as generic black boxes (C8): symmetric-algebra base change, fpqc descent of open immersions. FIX more, RETURN less: dag/nodes/sec-curve-estimates/lem-sc-affine-cap-section-open-algebra.json: proof[2].text/uses and proof_deps: step 3 used that the base change of Spec B to Spec R_{f_i} is Spec(B_{f_i}) with no node (C1); added a sentence citing the existing lem-weil-pbc-fibre-product-affine-spectra (mathlib leaf) and added it to uses and proof_deps. No new nodes, no Mathlib leaves. Small cases: N=R, s=a gives R[t]/(at-1)=R_a, V=D(a); a=0 gives zero ring and empty V; a=1 gives B=R. Start Sat Oct 10 03:55:14 PM UTC 2026, end Sat Oct 10 03:58:04 PM UTC 2026.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AffineCapSectionOpenAlgebra",
+  "declaration": "AlgebraicGeometry.affine_cap_section_open_algebra",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineCapSectionOpenAlgebra.lean",
+  "statement": "theorem affine_cap_section_open_algebra (R : Type u) [CommRing R] (N : Type v) [AddCommGroup N] [Module R N] [Module.Finite R N] [Module.Projective R N] (_hN : ∀ p : PrimeSpectrum R, Module.rankAtStalk N p = 1) (s : N) : IsOpenImmersion (Spec.map (CommRingCat.ofHom ((algebraMap R (SymmetricAlgebra R N ⧸ Ideal.span {SymmetricAlgebra.ι R N s - 1})).comp (ULift.ringEquiv : ULift.{v} R ≃+* R).toRingHom))) ∧ Set.range (Spec.map (CommRingCat.ofHom ((algebraMap R (SymmetricAlgebra R N ⧸ Ideal.span {SymmetricAlgebra.ι R N s - 1})).comp (ULift.ringEquiv : ULift.{v} R ≃+* R).toRingHom))) = {p : PrimeSpectrum (ULift.{v} R) | s ∉ (p.asIdeal.comap ULift.ringEquiv.symm.toRingHom) • (⊤ : Submodule R N)}",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-aco0933",
+  "group": "K1",
+  "result": "pass",
+  "note": "R comm ring (u), N (v) finite projective with rankAtStalk=1 at every prime (= invertible; N/pN torsion-free over R/p so global pN agrees with stalkwise), s:N, B=SymmetricAlgebra R N / span{iota s - 1}, Spec B -> Spec(ULift R) via algebraMap∘ULift.ringEquiv: IsOpenImmersion and range = {p | s ∉ p•⊤}; affineness implied; docstring carries all 4 proof steps with their 9 uses; no Mathlib statement (SymmetricAlgebra absent from AlgebraicGeometry)"
  }
 }
