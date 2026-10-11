@@ -125,5 +125,23 @@
   "group": "F1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-seo1748 (reviewer sub-agent of L); spot-checked: Checked steps 1-3 against Tags 09XM/04HV and cited statements (stalk-germ bijection with nbhd (V, a ybar) / (V x_S T,(a ybar, ybar)); unit restriction compatibility (0)). New node 04HV not a duplicate, no Mathlib match. FIX more, RETURN less: (1) B3 new node second clause used germs/stalks without citation: restated as 'H_xbar nonempty' citing def-weil-pbc-geometric-stalks, added to stmt_deps; (2) C1 step 3 converse used unit naturality without citation: spelled out via composition-units (0), cited it and def-weil-pbc-geometric-stalks, proof_deps updated; (3) uniqueness of W was not argued: added the open-immersion test to step 2.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleSectionsEqualOpen",
+  "declaration": "AlgebraicGeometry.existsUnique_etaleSections_equal_open",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleSectionsEqualOpen.lean",
+  "statement": "theorem existsUnique_etaleSections_equal_open (S : Scheme.{u}) (F : Sheaf S.smallEtaleTopology (Type (u + 1))) (V : S.Etale) (s t : F.obj.obj (op V)) : ∃! W : V.left.Opens, ∀ (T : Scheme.{u}) (a : T ⟶ V.left), (∃ b : T ⟶ W.toScheme, b ≫ W.ι = a) ↔ ((Scheme.etaleSetPullback (a ≫ V.hom)).obj F).obj.map (MorphismProperty.Over.homMk (A := MorphismProperty.Over.mk ⊤ (𝟙 T) (inferInstance : Etale (𝟙 T))) (B := (MorphismProperty.Over.pullback @Etale ⊤ (a ≫ V.hom)).obj V) (pullback.lift a (𝟙 T) (Category.id_comp (a ≫ V.hom)).symm) (pullback.lift_snd a (𝟙 T) (Category.id_comp (a ≫ V.hom)).symm)).op (((@Functor.sheafPullbackConstruction.sheafAdjunctionContinuous _ _ _ _ (MorphismProperty.Over.pullback @Etale ⊤ (a ≫ V.hom)) (Type (u + 1)) _ (S.smallGrothendieckTopology @Etale) (T.smallGrothendieckTopology @Etale) (Etale.isContinuous_overPullback (a ≫ V.hom)) _ _).unit.app F).hom.app (op V) s) = ((Scheme.etaleSetPullback (a ≫ V.hom)).obj F).obj.map (MorphismProperty.Over.homMk (A := MorphismProperty.Over.mk ⊤ (𝟙 T) (inferInstance : Etale (𝟙 T))) (B := (MorphismProperty.Over.pullback @Etale ⊤ (a ≫ V.hom)).obj V) (pullback.lift a (𝟙 T) (Category.id_comp (a ≫ V.hom)).symm) (pullback.lift_snd a (𝟙 T) (Category.id_comp (a ≫ V.hom)).symm)).op (((@Functor.sheafPullbackConstruction.sheafAdjunctionContinuous _ _ _ _ (MorphismProperty.Over.pullback @Etale ⊤ (a ≫ V.hom)) (Type (u + 1)) _ (S.smallGrothendieckTopology @Etale) (T.smallGrothendieckTopology @Etale) (Etale.isContinuous_overPullback (a ≫ V.hom)) _ _).unit.app F).hom.app (op V) t)",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-seo",
+  "group": "F1",
+  "result": "pass",
+  "note": "Statement matched clause by clause to node (Tag 09XM): S, F on smallEtaleTopology Type (u+1), V : S.Etale, s t, arbitrary T and a, e = a ≫ V.hom, e* via the recorded composition-units unit (same sheafAdjunctionContinuous/etaleSetPullback as the dep and E1 776ffb658), restriction along (a, id_T) as Over.homMk of pullback.lift, ∃! W : V.left.Opens with factorization ↔ equality. Explicit @ continuity argument needed: instance not synthesized for a ≫ V.hom (checked)."
  }
 }
