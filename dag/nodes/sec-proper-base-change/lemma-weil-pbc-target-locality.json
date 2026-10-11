@@ -218,5 +218,28 @@
   "date": "2026-10-09",
   "by": "L",
   "result": "pass"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProperBaseChangeTargetLocality",
+  "declaration": "AlgebraicGeometry.Etale.derivedBaseChange_target_locality",
+  "declarations": [
+   "AlgebraicGeometry.Etale.derivedBaseChange_target_locality",
+   "AlgebraicGeometry.Etale.hasTorsionAbelianBaseChange_of_etale_cover"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ProperBaseChangeTargetLocality.lean",
+  "statement": "theorem derivedBaseChange_target_locality {X Y X' Y' : Scheme.{u}} (f : X ⟶ Y) [IsProper f] (g : Y' ⟶ Y) (f' : X' ⟶ Y') (g' : X' ⟶ X) (sq : IsPullback g' f' f g) (I : Type w) (V Xi Yi' Xi' : I → Scheme.{u}) (j : ∀ i, V i ⟶ Y) [∀ i, AlgebraicGeometry.Etale (j i)] (_hcover : ∀ y : Y, ∃ (i : I) (v : V i), (j i).base v = y) (fi : ∀ i, Xi i ⟶ V i) (jXi : ∀ i, Xi i ⟶ X) (_sqj : ∀ i, IsPullback (jXi i) (fi i) f (j i)) (k : ∀ i, Yi' i ⟶ Y') (gi : ∀ i, Yi' i ⟶ V i) (_sqY : ∀ i, IsPullback (k i) (gi i) g (j i)) (kXi : ∀ i, Xi' i ⟶ X') (fi' : ∀ i, Xi' i ⟶ Yi' i) (_sqk : ∀ i, IsPullback (kXi i) (fi' i) f' (k i)) (gi' : ∀ i, Xi' i ⟶ Xi i) (_hcomponent : ∀ i, gi' i ≫ jXi i = kXi i ≫ g') (sqᵢ : ∀ i, CommSq (gi' i) (fi' i) (fi i) (gi i)) (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) : (∀ i, IsPullback (gi' i) (fi' i) (fi i) (gi i)) ∧ (∀ i, IsIso ((upperStar AddCommGrpCat.{u + 1} (k i)).mapDerivedCategoryPlus.map ((derivedBaseChangeMapPlus AddCommGrpCat.{u + 1} sq.toCommSq).app ((DerivedCategory.Plus.singleFunctor (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) 0).obj F))) ↔ IsIso ((derivedBaseChangeMapPlus AddCommGrpCat.{u + 1} (sqᵢ i)).app ((DerivedCategory.Plus.singleFunctor (Sheaf (Xi i).smallEtaleTopology AddCommGrpCat.{u + 1}) 0).obj ((upperStar AddCommGrpCat.{u + 1} (jXi i)).obj F)))) ∧ (IsIso ((derivedBaseChangeMapPlus AddCommGrpCat.{u + 1} sq.toCommSq).app ((DerivedCategory.Plus.singleFunctor (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) 0).obj F)) ↔ ∀ i, IsIso ((derivedBaseChangeMapPlus AddCommGrpCat.{u + 1} (sqᵢ i)).app ((DerivedCategory.Plus.singleFunctor (Sheaf (Xi i).smallEtaleTopology AddCommGrpCat.{u + 1}) 0).obj ((upperStar AddCommGrpCat.{u + 1} (jXi i)).obj F))))",
+  "branch": "sheaf-dag",
+  "by": "U1",
+  "date": "2026-10-11",
+  "existing": false,
+  "note": "Part (a) is derivedBaseChange_target_locality; part (b) is hasTorsionAbelianBaseChange_of_etale_cover. Chosen fibre products are represented by their projection maps and IsPullback witnesses; the induced map is specified by its two components. No statement correction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-tgl",
+  "group": "U1",
+  "result": "pass",
+  "note": "proper f; etale j with pointwise joint surjectivity (I : Type w as landed etale-cover-detects-iso); X_i,Y'_i,X'_i as IsPullback; g'_i by both components; arbitrary F degree 0; three conjuncts of (a) incl. k_i^{-1} via mapDerivedCategoryPlus; (b) IsProper fi and PBC descent only, no converse"
  }
 }
