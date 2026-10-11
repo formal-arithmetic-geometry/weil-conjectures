@@ -23,9 +23,78 @@
   "def-weil-presheaf-modules-sheafification",
   "def-weil-extension-by-zero-presheaf"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The restriction $j_U^*$ is a functor on module sheaves by the definition of the localized ringed site: it keeps the section groups and restriction maps on objects $V\\to U$, and the action of $\\mathcal O|_U(V\\to U)=\\mathcal O(V)$ is the restricted action. The extension-by-zero presheaf $P_F$ is a presheaf of $\\mathcal O$-modules by [def-weil-extension-by-zero-presheaf], and its module sheafification $P_F^\\#$ is the stated $j_{U!}F$ by [def-weil-presheaf-modules-sheafification]. Thus both assignments are functors on the displayed module categories.",
+   "uses": [
+    "def-pur-localized-ringed-site",
+    "def-weil-extension-by-zero-presheaf",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Section 03DH and Lemma 03DI, construction of the module extension by zero"
+   }
+  },
+  {
+   "text": "The abelian sheafification of the underlying presheaf of $P_F$ is the direct-sum presheaf extension by zero for the underlying abelian sheaf of $F$, by [def-weil-extension-by-zero-presheaf] and the underlying-sheaf clause of [lem-pc-sites-module-sheafification-interface]. Hence the underlying abelian functor of $j_{U!}$ is the sheafified direct-sum functor of [lem-weil-pbc-site-extension-by-zero-presheaf-adjoint], while the underlying functor of $j_U^*$ is abelian restriction. The natural bijection of that node therefore gives the required bijection of underlying hom-sets. In the explicit sectionwise formula, multiplication by $a\\in\\mathcal O(V)$ is carried to multiplication by its restriction in $\\mathcal O|_U(V\\to U)$; therefore a map and its adjoint are $\\mathcal O$-linear simultaneously. The underlying bijection thus restricts to a natural bijection $\\operatorname{Hom}_{\\mathcal O}(j_{U!}F,G)\\cong\\operatorname{Hom}_{\\mathcal O|_U}(F,j_U^*G)$.",
+   "uses": [
+    "def-weil-extension-by-zero-presheaf",
+    "lem-pc-sites-module-sheafification-interface",
+    "lem-weil-pbc-site-extension-by-zero-presheaf-adjoint"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Lemma 03DI, adjunction construction, with the module linearity in the paragraph after the presheaf formula"
+   }
+  },
+  {
+   "text": "For a short exact sequence of $\\mathcal O$-module sheaves, forgetting the module structure gives a short exact sequence of abelian sheaves by the faithful exactness of the forgetful functor in [lem-weil-pbc-module-sheaves-colimits-forgetful]. Applying the exact abelian restriction functor [lem-weil-pbc-site-restriction-exact] gives a short exact sequence after restriction. The underlying sequence of the restricted module sequence is therefore exact, and faithfulness and exactness of forgetting imply that $j_U^*$ is exact.",
+   "uses": [
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "lem-weil-pbc-site-restriction-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Lemma 03DJ, restriction exactness assertion and the module forgetful-functor lemma 03DA"
+   }
+  },
+  {
+   "text": "Likewise, forgetting a short exact sequence of $\\mathcal O|_U$-module sheaves gives a short exact sequence of abelian sheaves. By Step 2 the underlying abelian functor of $j_{U!}$ is the sheafified direct-sum functor, a left adjoint of abelian restriction by [lem-weil-pbc-site-extension-by-zero-presheaf-adjoint]; the functor $j_{U!}$ of [lem-weil-pbc-site-extension-by-zero-exact] is the left adjoint of [lem-weil-pbc-site-restriction-adjunction], so the two are naturally isomorphic by uniqueness of adjoints, and exactness passes along the isomorphism. Hence [lem-weil-pbc-site-extension-by-zero-exact] makes the underlying sequence after applying $j_{U!}$ short exact. The forgetful functor is faithful and exact by [lem-weil-pbc-module-sheaves-colimits-forgetful], hence the module sequence itself is short exact. Thus $j_{U!}$ is exact.",
+   "uses": [
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "lem-weil-pbc-site-extension-by-zero-exact",
+    "lem-pc-sites-module-sheafification-interface",
+    "def-weil-extension-by-zero-presheaf",
+    "lem-weil-pbc-site-extension-by-zero-presheaf-adjoint",
+    "lem-weil-pbc-site-restriction-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Lemma 03DJ, exactness of extension by zero, with Lemmas 03DA and 03CY for modules"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-localized-ringed-site",
+  "def-weil-extension-by-zero-presheaf",
+  "def-weil-presheaf-modules-sheafification",
+  "lem-pc-sites-module-sheafification-interface",
+  "lem-weil-pbc-site-extension-by-zero-presheaf-adjoint",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-weil-pbc-site-restriction-exact",
+  "lem-weil-pbc-site-extension-by-zero-exact",
+  "lem-weil-pbc-site-restriction-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Sections 03DH and 03DJ, together with Lemmas 03DA and 03CY"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -57,12 +126,56 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pur-rhom-into-kinjective-local",
   "by": "worker",
   "date": "2026-10-11"
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-def-sf-operations"
+ "unit": "sk-def-sf-operations",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pur-site-restriction-module-adjunction-exact",
+  "worker": "stage1",
+  "summary": "No exact Lean declaration exists. Split the module statement into functor construction, linearity of the existing abelian extension-by-zero adjunction, exactness of restriction by forgetting to abelian sheaves, and exactness of extension by zero by the same transport. No new nodes were needed; every non-elementary input is an existing DAG statement or Mathlib leaf.",
+  "blueprint": "Realizes the ancestor blueprint clause 'restriction and extension by zero on sheaves of modules' in the localized K-injective comparison.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-site-extension-by-zero-presheaf-adjoint",
+    "why": "Step 2 uses its underlying abelian adjunction and explicit summand formula."
+   },
+   {
+    "node": "lem-weil-pbc-site-restriction-exact",
+    "why": "Step 3 uses exactness of restriction on abelian sheaves."
+   },
+   {
+    "node": "lem-weil-pbc-site-extension-by-zero-exact",
+    "why": "Step 4 uses exactness of abelian extension by zero."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "why": "Steps 3-4 use that forgetting module structure is faithful and exact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-site-extension-by-zero-presheaf-adjoint",
+  "lem-weil-pbc-site-restriction-exact",
+  "lem-weil-pbc-site-extension-by-zero-exact",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-weil-pbc-site-restriction-adjunction",
+  "lem-weil-pbc-site-extension-by-zero-presheaf-adjoint",
+  "lem-weil-pbc-site-restriction-exact",
+  "lem-weil-pbc-site-extension-by-zero-exact",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful"
+ ],
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-sra0028",
+  "group": "E1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-sra0028 (reviewer sub-agent of L); spot-checked: Statement vs Stacks 03DH/03DI/03DJ: j_{U!}=module sheafification of def-weil-extension-by-zero-presheaf (O-module structure in that def; sheafification is an O-module by def-weil-presheaf-modules-sheafification / lem-pc-sites-module-sheafification-interface = 03CY). Step 2 adjunction via abelian sheafified direct-sum adjunction + linearity both directions (C1 ok). Steps 3-4 exactness via faithful exact forgetful (03DA) + abelian restriction/extension exactness (C4 ok; forgetful hypothesis sheafification exists on small sites). Citer lem-pur-rhom-into-kinjective-local uses exactly adjunction + exactness of left adjoint. No duplicate: lem-weil-pbc-site-* are the abelian versions, lem-weil-pbc-module-extension-by-zero-adjunction / lem-sc-derived-open-restriction-adjunction-exact are schemes/ringed spaces, lem-weil-extension-by-zero-* pro-etale. FIX more, RETURN less: (1) C1 Step 4: abelian j_{W!} of lem-weil-pbc-site-extension-by-zero-exact is the abstract left adjoint of lem-weil-pbc-site-restriction-adjunction; added its identification with the sheafified direct-sum functor by uniqueness of adjoints, citing that node (uses, proof_deps, tool_uses). Missed by the second reading.; 1 file(s) fixed by the reviewer"
+ }
 }
