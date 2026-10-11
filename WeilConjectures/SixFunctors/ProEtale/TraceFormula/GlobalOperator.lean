@@ -66,6 +66,20 @@ lemma ctfLowerShriekCongr_hom_app_hom {X Y : Scheme.{u}} {f g : X ⟶ Y} (e : f 
   subst e
   rfl
 
+/-- The inverse of the transport `ctfLowerShriekCongr` is the inverse of the transport
+`rightDerivedLowerShriekCongr` on `D(X, A)`. -/
+lemma ctfLowerShriekCongr_inv_app_hom {X Y : Scheme.{u}} {f g : X ⟶ Y} (e : f = g)
+    [HasCompactification f] [HasCompactification g]
+    (h₁ : ∀ K, DerivedCategory.constructibleFiniteTor A X K →
+      DerivedCategory.constructibleFiniteTor A Y ((rightDerivedLowerShriek A f).obj K))
+    (h₂ : ∀ K, DerivedCategory.constructibleFiniteTor A X K →
+      DerivedCategory.constructibleFiniteTor A Y ((rightDerivedLowerShriek A g).obj K))
+    (M : Ctf A X) :
+    ((ctfLowerShriekCongr e h₁ h₂).inv.app M).hom =
+      (rightDerivedLowerShriekCongr A e).inv.app M.obj := by
+  subst e
+  rfl
+
 namespace GeometricOperations
 
 variable [DerivedBraiding A] (G : GeometricOperations A s)
@@ -95,6 +109,19 @@ lemma lowerShriekComp_hom_app_naturality (f : X ⟶ Y) (g : Y ⟶ Z) (hf : IsGeo
       ((G.lowerShriekComp f g hf hg hfg).hom.app M).hom ≫
         (rightDerivedLowerShriek A (f ≫ g)).map φ :=
   congrArg (·.hom) ((G.lowerShriekComp f g hf hg hfg).hom.naturality (ObjectProperty.homMk φ))
+
+/-- The inverse `R(f ≫ g)_! ≃ Rg_! Rf_!` of `lowerShriekComp` is natural, as a family of
+morphisms of `D(Z, A)` indexed by `Dᵇctf(X)`. -/
+@[reassoc]
+lemma lowerShriekComp_inv_app_naturality (f : X ⟶ Y) (g : Y ⟶ Z) (hf : IsGeometricHom s f)
+    (hg : IsGeometricHom s g) (hfg : IsGeometricHom s (f ≫ g)) [HasCompactification f]
+    [HasCompactification g] [HasCompactification (f ≫ g)] {M M' : Ctf A X}
+    (φ : M.obj ⟶ M'.obj) :
+    (rightDerivedLowerShriek A (f ≫ g)).map φ ≫
+        ((G.lowerShriekComp f g hf hg hfg).inv.app M').hom =
+      ((G.lowerShriekComp f g hf hg hfg).inv.app M).hom ≫
+        (rightDerivedLowerShriek A g).map ((rightDerivedLowerShriek A f).map φ) :=
+  congrArg (·.hom) ((G.lowerShriekComp f g hf hg hfg).inv.naturality (ObjectProperty.homMk φ))
 
 /-- The counit `Rf_! Rf^! L ⟶ L` of the exceptional adjunction is natural in `L ∈ Dᵇctf(Y)`. -/
 @[reassoc]
@@ -218,6 +245,9 @@ lemma properPullback_naturality (h : X' ⟶ X) [IsProper h] (hh : h ≫ aX = aX'
     ← Category.assoc, (derivedUpperStarLowerStarAdjunction A h).unit_naturality]
   simp only [Functor.id_obj, Functor.id_map, Functor.comp_obj, Functor.map_comp, Category.assoc]
 
+-- the composite of the two proper pullbacks is a long chain of morphisms between objects of
+-- `Dᵇctf`, whose types are only defeq after unfolding the functors on `Dᵇctf`
+set_option maxHeartbeats 400000 in
 /-- The proper pullback is compatible with composition: for proper `h : X' ⟶ X` and
 `h' : X'' ⟶ X'`, the pullback along `h' ≫ h` is the pullback along `h` followed by the
 pullback along `h'`, read through `Lh'^* Lh^* K ≃ L(h' ≫ h)^* K`. -/
@@ -284,6 +314,87 @@ theorem properPullback_comp (h : X' ⟶ X) (h' : X'' ⟶ X') [IsProper h] [IsPro
   rfl
 
 end ProperPullback
+
+section ExceptionalPushforward
+
+variable {C Y : Scheme.{u}} {aC : C ⟶ s} {aY : Y ⟶ s} [IsGeometric aC] [IsGeometric aY]
+  [HasCompactification aC] [HasCompactification aY]
+
+/-- The pushforward `RΓ_c(C, Rf^! L) ⟶ RΓ_c(Y, L)` along a morphism `f : C ⟶ Y` of geometric
+schemes over `s`, for `L ∈ Dᵇctf(Y)`: the composite
+
+```
+  Ra_{C!} Rf^! L = R(f ≫ a_Y)_! Rf^! L ≅ Ra_{Y!} Rf_! Rf^! L ──ε──▶ Ra_{Y!} L
+```
+
+of the composition `R(f ≫ a_Y)_! ≃ Ra_{Y!} Rf_!` and the counit of `Rf_! ⊣ Rf^!`
+(part of blueprint `def-trf-global-operator`). -/
+noncomputable def exceptionalPushforward (f : C ⟶ Y) [HasCompactification f] (hf : f ≫ aY = aC)
+    {L : DerivedCategory (Sheaf (Scheme.ProEt.topology Y) A)} (hL : G.ctf Y L) :
+    (rightDerivedLowerShriek A aC).obj ((rightDerivedUpperShriek A f).obj L) ⟶
+      (rightDerivedLowerShriek A aY).obj L :=
+  haveI : HasCompactification (f ≫ aY) := .of_eq hf.symm
+  (rightDerivedLowerShriekCongr A hf.symm).hom.app _ ≫
+    ((G.lowerShriekComp f aY (.mk hf) (.of_isGeometric aY)
+      (.mk (aX := aC) (aY := 𝟙 s) (by rw [Category.comp_id, hf]))).inv.app
+        ⟨_, G.ctf_upperShriek f (.mk hf) hL⟩).hom ≫
+    (rightDerivedLowerShriek A aY).map (G.exceptionalCounit f (.mk hf) L hL)
+
+/-- The exceptional pushforward is natural in `L ∈ Dᵇctf(Y)`. -/
+@[reassoc]
+lemma exceptionalPushforward_naturality (f : C ⟶ Y) [HasCompactification f]
+    (hf : f ≫ aY = aC) {L L' : DerivedCategory (Sheaf (Scheme.ProEt.topology Y) A)}
+    (hL : G.ctf Y L) (hL' : G.ctf Y L') (φ : L ⟶ L') :
+    (rightDerivedLowerShriek A aC).map ((rightDerivedUpperShriek A f).map φ) ≫
+        G.exceptionalPushforward f hf hL' =
+      G.exceptionalPushforward f hf hL ≫ (rightDerivedLowerShriek A aY).map φ := by
+  subst hf
+  simp only [exceptionalPushforward, rightDerivedLowerShriekCongr_rfl, Iso.refl_hom,
+    NatTrans.id_app]
+  erw [Category.id_comp, Category.id_comp]
+  rw [G.lowerShriekComp_inv_app_naturality_assoc f aY _ _ _
+      (M := ⟨_, G.ctf_upperShriek f (.mk (aY := aY) rfl) hL⟩)
+      (M' := ⟨_, G.ctf_upperShriek f (.mk (aY := aY) rfl) hL'⟩),
+    ← Functor.map_comp, Category.assoc, ← Functor.map_comp, G.exceptionalCounit_naturality]
+
+/-- For the identity `𝟙 X`, read through `K ≃ (𝟙 X)^! K`, the exceptional pushforward is the
+transport `RΓ_c(X, K) ≃ RΓ_c(X, K)` along the two structure morphisms. -/
+lemma exceptionalPushforward_id {aX : Y ⟶ s} [IsGeometric aX] [HasCompactification aX]
+    {aX' : Y ⟶ s} [IsGeometric aX'] [HasCompactification aX'] (hf : 𝟙 Y ≫ aX = aX')
+    {K : DerivedCategory (Sheaf (Scheme.ProEt.topology Y) A)} (hK : G.ctf Y K) :
+    (rightDerivedLowerShriek A aX').map (G.upperShriekIdIso Y (.mk hf) K hK).hom ≫
+        G.exceptionalPushforward (𝟙 Y) hf hK =
+      (rightDerivedLowerShriekCongr A (hf.symm.trans (Category.id_comp aX))).hom.app K := by
+  subst hf
+  have hY : IsGeometricHom s (𝟙 Y) := .mk (aY := aX) rfl
+  have key : (G.upperShriekId Y hY).inv.app ⟨K, hK⟩ ≫
+      (G.lowerShriekId Y hY).inv.app ((G.upperShriekCtf (𝟙 Y) hY).obj ⟨K, hK⟩) ≫
+        (G.exceptionalAdjunction (𝟙 Y) hY).counit.app ⟨K, hK⟩ = 𝟙 _ := by
+    have := conjugateEquiv_counit Adjunction.id (G.exceptionalAdjunction (𝟙 Y) hY)
+      (G.lowerShriekId Y hY).hom ⟨K, hK⟩
+    have nat := (G.lowerShriekId Y hY).inv.naturality
+      ((conjugateEquiv Adjunction.id (G.exceptionalAdjunction (𝟙 Y) hY)
+        (G.lowerShriekId Y hY).hom).app ⟨K, hK⟩)
+    rw [upperShriekId, Iso.symm_inv, conjugateIsoEquiv_apply_hom, ← Category.assoc]
+    erw [nat]
+    rw [Category.assoc, this]
+    simp
+  simp only [exceptionalPushforward, rightDerivedLowerShriekCongr_rfl, Iso.refl_hom,
+    NatTrans.id_app, Category.id_comp, G.lowerShriekComp_id_left]
+  simp only [Iso.trans_inv, NatTrans.comp_app, ObjectProperty.FullSubcategory.comp_hom,
+    ctfLowerShriekCongr_inv_app_hom, Functor.leftUnitor_inv_app, Functor.isoWhiskerRight_inv,
+    Functor.whiskerRight_app, ObjectProperty.lift_map, ObjectProperty.homMk_hom, Functor.comp_map,
+    ObjectProperty.ι_map, Category.assoc, Category.id_comp]
+  have keyD : (G.upperShriekIdIso Y hY K hK).hom ≫
+      ((G.lowerShriekId Y hY).inv.app ⟨_, G.ctf_upperShriek (𝟙 Y) hY hK⟩).hom ≫
+        G.exceptionalCounit (𝟙 Y) hY K hK = 𝟙 K :=
+    congrArg (·.hom) key
+  rw [(rightDerivedLowerShriekCongr A _).inv.naturality_assoc, ← Functor.map_comp,
+    ← Functor.map_comp, keyD]
+  simp
+  rfl
+
+end ExceptionalPushforward
 
 end GeometricOperations
 
