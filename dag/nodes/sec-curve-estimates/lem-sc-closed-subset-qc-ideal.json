@@ -100,5 +100,24 @@
   "group": "E1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-csq (reviewer sub-agent of L); spot-checked: Source: Stacks Schemes Lemma 01J3 (schemes-lemma-reduced-closed-subscheme, schemes.tex l.2186), whose proof constructs I(U)={f: f(t)=0 for t in T cap U} and identifies it on affine U=Spec R with the radical ideal I, V(I)=T cap U. Item statement (scheme Y, closed subset Z, quasi-coherent ideal J with stalk vanishing set {y: J_y != O_y} = Z) unchanged, stmt_deps unchanged. Single step cites lem-weil-pbc-reduced-induced-closed-subscheme with X=Y, T=Z: its clause (1) gives quasi-coherence and J|_U = I~ with V(I)=Z cap U, hypotheses (scheme, closed subset) identical; the stalk identity is elementary from (1): J_p = I_p, and I_p != R_p iff I subset p iff p in V(I) = Z cap U (C2). Only changed fields are split-owned (proof, proof_deps = union of uses, proof_origin, status, split_report); one commit, only the item's files, report with Review by E1. Tool use accepted (C8): lem-weil-pbc-reduced-induced-closed-subscheme (unit sk-thm-p1) is a generic scheme-theory construction used as a black box, no step of the curve-estimate route replaced. Small case: Y=Spec k[x], Z={(x)}: J=(x)~, stalk vanishing set {(x)}. No Mathlib leaf, no attachment. Start Sat Oct 10 03:58:25 PM UTC 2026, end Sat Oct 10 03:58:49 PM UTC 2026."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ClosedSubsetQcIdeal",
+  "declaration": "AlgebraicGeometry.Scheme.exists_idealSheafData_support_eq",
+  "file": "lean/Sheaf/AlgebraicGeometry/ClosedSubsetQcIdeal.lean",
+  "statement": "theorem exists_idealSheafData_support_eq (Y : Scheme.{u}) (Z : Set Y) (hZ : IsClosed Z) : ∃ J : Y.IdealSheafData, (J.support : Set Y) = Z",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-csq1203"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-csq1203",
+  "group": "M1",
+  "result": "fix",
+  "note": "Y : Scheme.{u}; Z : Set Y with IsClosed Z; quasi-coherent ideal sheaf J = Y.IdealSheafData (qc by construction); V(J)={y: J_y != O_y} = (J.support : Set Y); conclusion ∃ J, support = Z. FIX: replaced source-project toModules + extra IsQuasicoherent conjunct + hand-written stalk-surjectivity locus (private model of support) with Mathlib IdealSheafData.support; renamed to exists_idealSheafData_support_eq; import Mathlib IdealSheaf.Basic instead of Coherent + source Module bridge"
  }
 }
