@@ -9,6 +9,8 @@ public import Mathlib.AlgebraicGeometry.Morphisms.OpenImmersion
 public import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
 public import WeilConjectures.DeligneLaumon.AffineLine.TraceEnergy
+public import WeilConjectures.DeligneLaumon.Reduction.AffineCurve
+public import WeilConjectures.DeligneLaumon.Reduction.FibreCohomology
 public import WeilConjectures.DeligneLaumon.Reduction.OpenLine
 public import WeilConjectures.DeligneLaumon.Reduction.RealSheaves
 public import WeilConjectures.DeligneLaumon.Reduction.Weights
@@ -84,21 +86,6 @@ namespace AlgebraicGeometry
 
 variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]
   (ι : PadicAlgCl l →+* ℂ)
-
-/-- **Purity of the top affine-curve factor.** Let `C` be a smooth affine curve over `k₀` and let
-`E` be a lisse Weil sheaf on `C`, punctually `ι`-pure of weight `0`. Then `H_c^2(C, E)` is
-`ι`-pure of weight `2`: on each geometrically connected component, defined over a finite
-extension of `k₀`, this is the degree-two endpoint estimate, and purity descends along the
-finite constant extension (blueprint: `lem-zl-affine-curve-hc2-purity`). -/
-theorem isPureOfWeightOver_compactlySupportedCohomology_two_of_isAffine {C : Scheme.{u}}
-    [C.Over (Spec (CommRingCat.of k₀))] [IsAffine C]
-    [SmoothOfRelativeDimension 1 (C ↘ Spec (CommRingCat.of k₀))] (E : WeilSheaf k₀ l C)
-    (hE : E.IsLisse) (hpure : E.IsPunctuallyPureOfWeight ι 0) :
-    -- `C ↘ Spec k₀` is locally of finite type, being smooth
-    haveI := SmoothOfRelativeDimension.smooth 1 (C ↘ Spec (CommRingCat.of k₀))
-    (E.compactlySupportedCohomology 2).IsPureOfWeightOver k₀ ι 2 :=
-  -- TODO(adic): needs the endpoint lemma on each geometric component and descent of weights
-  sorry
 
 /-- A Weil sheaf punctually `ι`-pure of weight `w` is punctually `ι`-pure of some weight `w'`
 for which there is a unit `b ∈ ℚ̄_ℓˣ` with `|ι b| = q ^ (-w' / 2)`: if `F` has a local

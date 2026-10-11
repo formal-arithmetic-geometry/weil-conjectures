@@ -48,4 +48,35 @@ theorem hasWeightsAtMostOver_compactlySupportedCohomology_of_isAffine {C : Schem
     (F.compactlySupportedCohomology r).HasWeightsAtMostOver k₀ ι (w + r) := by
   sorry
 
+/-- **Purity of the top affine-curve factor.** Let `C` be a smooth affine curve over `k₀`, not
+necessarily geometrically connected, and let `E` be a lisse Weil sheaf on `C`, punctually `ι`-pure
+of weight `0`. Then `H_c^2(C, E)` is `ι`-pure of weight `2` (blueprint:
+`lem-zl-affine-curve-hc2-purity`). For a finite morphism `f : C ⟶ 𝔸¹_{k₀}`,
+`H_c^2(C, E) ≅ H_c^2(𝔸¹, f₀*E) ≅ H_c^2(V, f₀*E)` for a dense open `V ⊆ 𝔸¹` on which `f₀*E` is
+lisse, and the degree-two endpoint estimate applies on the geometrically connected `V`. -/
+theorem isPureOfWeightOver_compactlySupportedCohomology_two_of_isAffine {C : Scheme.{u}}
+    [C.Over (Spec (CommRingCat.of k₀))] [IsAffine C]
+    [SmoothOfRelativeDimension 1 (C ↘ Spec (CommRingCat.of k₀))] (E : WeilSheaf k₀ l C)
+    (hE : E.IsLisse) (hpure : E.IsPunctuallyPureOfWeight ι 0) :
+    -- `C ↘ Spec k₀` is locally of finite type, being smooth
+    haveI := SmoothOfRelativeDimension.smooth 1 (C ↘ Spec (CommRingCat.of k₀))
+    (E.compactlySupportedCohomology 2).IsPureOfWeightOver k₀ ι 2 := by
+  sorry
+
+/-- **Vanishing of `H_c^0` on a smooth affine curve.** Let `C` be a smooth affine curve over `k₀`,
+not necessarily geometrically connected, and let `E` be a lisse Weil sheaf on `C`. Then
+`H_c^0(C, E) = 0` (blueprint: `lem-zl-relative-envelope-factor-reality`, the vanishing of the
+degree-zero group of an affine fibre, by `lem-a1-affine-hc0`). For a finite morphism
+`f : C ⟶ 𝔸¹_{k₀}`, the direct image `f₀*E` is the middle extension of its restriction to a dense
+open `V ⊆ 𝔸¹` on which it is lisse (`lem-a1-lisse-middle-extension`), and `H_c^0` of a middle
+extension on the geometrically connected `𝔸¹` vanishes. -/
+theorem WeilSheaf.subsingleton_compactlySupportedCohomology_zero_of_isAffine {C : Scheme.{u}}
+    [C.Over (Spec (CommRingCat.of k₀))] [IsAffine C]
+    [SmoothOfRelativeDimension 1 (C ↘ Spec (CommRingCat.of k₀))] (E : WeilSheaf k₀ l C)
+    (hE : E.IsLisse) :
+    -- `C ↘ Spec k₀` is locally of finite type, being smooth
+    haveI := SmoothOfRelativeDimension.smooth 1 (C ↘ Spec (CommRingCat.of k₀))
+    Subsingleton (E.compactlySupportedCohomology 0).carrier := by
+  sorry
+
 end AlgebraicGeometry
