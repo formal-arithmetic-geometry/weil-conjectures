@@ -3,13 +3,22 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group J1
 -/
-import Sheaf.AlgebraicGeometry.IdealPowerCohomology
+import Sheaf.AlgebraicGeometry.CoherentFormalModule
+import Sheaf.Topology.RingedSpaceModuleCohomology
+import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
+import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 import Mathlib.AlgebraicGeometry.Morphisms.Proper
 
 /-! # Image and kernel bounds for cohomology of ideal powers
 
 Source: Stacks Project, Cohomology of Schemes, Lemma 02OA, parts (2) and (3)
 (blueprint: lem-weil-pbc-cohomology-powers-ideal-application).
+
+Forms used (no new definition): `I^n F` is
+`Scheme.idealModuleProduct (Scheme.idealSheafPower J.toModulesι n).2 F`, with `J` the extended
+ideal sheaf of `I` (hypothesis `hJ`); `H^q(X, -)` as an `A`-module is
+`RingedSpace.moduleCohomology` restricted along `(ΓSpecIso A).inv ≫ f.appTop`; the transition
+maps `I^k F ⟶ I^n F` are the unique maps over the inclusions into `F`, stated to exist.
 -/
 
 universe v
@@ -46,16 +55,34 @@ As d_i ≤ c, its further image in M_(n-c) is zero. This gives the reverse conta
 and proves (b). These steps are the node's eight proof steps, following Stacks 02OA. -/
 theorem cohomology_powers_ideal_application
     (A : Type v) [CommRing A] [IsNoetherianRing A] {X : Scheme.{v}}
-    (I : Ideal A) (f : X ⟶ Spec (CommRingCat.of A)) [IsProper f]
+    (I : Ideal A) (f : X ⟶ Spec (CommRingCat.of A)) [IsProper f] (J : X.IdealSheafData)
+    (hJ : J = (Scheme.IdealSheafData.ofIdealTop
+      (I.map (Scheme.ΓSpecIso (CommRingCat.of A)).inv.hom)).comap f)
     (F : X.Modules) (hF : RingedSpace.IsCoherent X.toRingedSpace F) (q : ℕ) :
-    ∃ c : ℕ,
-      (∀ (n m : ℕ), c ≤ n + m →
-        LinearMap.range (idealPowerCohomologyMap f I F q (Nat.le_add_right n m)).hom ≤
-          I ^ (m - (c - n)) •
-            (⊤ : Submodule A (idealPowerCohomology f I F q n))) ∧
-      (∀ n : ℕ, c ≤ n →
-        LinearMap.ker (idealPowerCohomologyMap f I F q (Nat.zero_le n)).hom =
-          LinearMap.ker (idealPowerCohomologyMap f I F q (Nat.sub_le n c)).hom) := by
+    ∃ i : ∀ (k n : ℕ), n ≤ k →
+        (Scheme.idealModuleProduct (Scheme.idealSheafPower J.toModulesι k).2 F ⟶
+          Scheme.idealModuleProduct (Scheme.idealSheafPower J.toModulesι n).2 F),
+      (∀ (k n : ℕ) (h : n ≤ k),
+        i k n h ≫ Scheme.idealModuleProductι (Scheme.idealSheafPower J.toModulesι n).2 F =
+          Scheme.idealModuleProductι (Scheme.idealSheafPower J.toModulesι k).2 F) ∧
+      ∃ c : ℕ,
+        (∀ (n m : ℕ), c ≤ n + m →
+          LinearMap.range ((ModuleCat.restrictScalars
+              ((Scheme.ΓSpecIso (CommRingCat.of A)).inv ≫ f.appTop).hom).map
+            ((RingedSpace.moduleCohomology X.toRingedSpace q).map
+              (i (n + m) n (Nat.le_add_right n m)))).hom ≤
+            I ^ (m - (c - n)) • (⊤ : Submodule A ((ModuleCat.restrictScalars
+              ((Scheme.ΓSpecIso (CommRingCat.of A)).inv ≫ f.appTop).hom).obj
+                ((RingedSpace.moduleCohomology X.toRingedSpace q).obj
+                  (Scheme.idealModuleProduct (Scheme.idealSheafPower J.toModulesι n).2 F))))) ∧
+        (∀ n : ℕ, c ≤ n →
+          LinearMap.ker ((ModuleCat.restrictScalars
+              ((Scheme.ΓSpecIso (CommRingCat.of A)).inv ≫ f.appTop).hom).map
+            ((RingedSpace.moduleCohomology X.toRingedSpace q).map (i n 0 (Nat.zero_le n)))).hom =
+          LinearMap.ker ((ModuleCat.restrictScalars
+              ((Scheme.ΓSpecIso (CommRingCat.of A)).inv ≫ f.appTop).hom).map
+            ((RingedSpace.moduleCohomology X.toRingedSpace q).map
+              (i n (n - c) (Nat.sub_le n c)))).hom) := by
   sorry
 
 end AlgebraicGeometry

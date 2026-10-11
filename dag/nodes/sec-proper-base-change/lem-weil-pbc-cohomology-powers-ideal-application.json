@@ -30,8 +30,7 @@
   "def-nagata-extended-ideal",
   "pqf-def-coherent",
   "def-weil-pbc-coherent-formal-module",
-  "pqf-def-cohomology",
-  "def-weil-pbc-ideal-power-cohomology-system"
+  "pqf-def-cohomology"
  ],
  "proof": [
   {
@@ -180,7 +179,7 @@
   },
   {
    "tool": "loogle",
-   "query": "Module.Finite ↥(reesAlgebra _) _",
+   "query": "Module.Finite \u21a5(reesAlgebra _) _",
    "results": "none",
    "date": "2026-10-10",
    "verdict": "no match"
@@ -234,11 +233,13 @@
    "AlgebraicGeometry.cohomology_powers_ideal_application"
   ],
   "file": "lean/Sheaf/AlgebraicGeometry/CohomologyPowersIdealApplication.lean",
-  "statement": "theorem cohomology_powers_ideal_application (A : Type v) [CommRing A] [IsNoetherianRing A] {X : Scheme.{v}} (I : Ideal A) (f : X ⟶ Spec (CommRingCat.of A)) [IsProper f] (F : X.Modules) (hF : RingedSpace.IsCoherent X.toRingedSpace F) (q : ℕ) : ∃ c : ℕ, (∀ (n m : ℕ), c ≤ n + m → LinearMap.range (idealPowerCohomologyMap f I F q (Nat.le_add_right n m)).hom ≤ I ^ (m - (c - n)) • (⊤ : Submodule A (idealPowerCohomology f I F q n))) ∧ (∀ n : ℕ, c ≤ n → LinearMap.ker (idealPowerCohomologyMap f I F q (Nat.zero_le n)).hom = LinearMap.ker (idealPowerCohomologyMap f I F q (Nat.sub_le n c)).hom)",
+  "statement": "theorem cohomology_powers_ideal_application (A : Type v) [CommRing A] [IsNoetherianRing A] {X : Scheme.{v}} (I : Ideal A) (f : X \u27f6 Spec (CommRingCat.of A)) [IsProper f] (J : X.IdealSheafData) (hJ : J = (Scheme.IdealSheafData.ofIdealTop (I.map (Scheme.\u0393SpecIso (CommRingCat.of A)).inv.hom)).comap f) (F : X.Modules) (hF : RingedSpace.IsCoherent X.toRingedSpace F) (q : \u2115) : \u2203 i : \u2200 (k n : \u2115), n \u2264 k \u2192 (Scheme.idealModuleProduct (Scheme.idealSheafPower J.toModules\u03b9 k).2 F \u27f6 Scheme.idealModuleProduct (Scheme.idealSheafPower J.toModules\u03b9 n).2 F), (\u2200 (k n : \u2115) (h : n \u2264 k), i k n h \u226b Scheme.idealModuleProduct\u03b9 (Scheme.idealSheafPower J.toModules\u03b9 n).2 F = Scheme.idealModuleProduct\u03b9 (Scheme.idealSheafPower J.toModules\u03b9 k).2 F) \u2227 \u2203 c : \u2115, (\u2200 (n m : \u2115), c \u2264 n + m \u2192 LinearMap.range ((ModuleCat.restrictScalars ((Scheme.\u0393SpecIso (CommRingCat.of A)).inv \u226b f.appTop).hom).map ((RingedSpace.moduleCohomology X.toRingedSpace q).map (i (n + m) n (Nat.le_add_right n m)))).hom \u2264 I ^ (m - (c - n)) \u2022 (\u22a4 : Submodule A ((ModuleCat.restrictScalars ((Scheme.\u0393SpecIso (CommRingCat.of A)).inv \u226b f.appTop).hom).obj ((RingedSpace.moduleCohomology X.toRingedSpace q).obj (Scheme.idealModuleProduct (Scheme.idealSheafPower J.toModules\u03b9 n).2 F))))) \u2227 (\u2200 n : \u2115, c \u2264 n \u2192 LinearMap.ker ((ModuleCat.restrictScalars ((Scheme.\u0393SpecIso (CommRingCat.of A)).inv \u226b f.appTop).hom).map ((RingedSpace.moduleCohomology X.toRingedSpace q).map (i n 0 (Nat.zero_le n)))).hom = LinearMap.ker ((ModuleCat.restrictScalars ((Scheme.\u0393SpecIso (CommRingCat.of A)).inv \u226b f.appTop).hom).map ((RingedSpace.moduleCohomology X.toRingedSpace q).map (i n (n - c) (Nat.sub_le n c)))).hom)",
   "branch": "sheaf-dag",
   "by": "J1",
   "date": "2026-10-11",
-  "existing": false
+  "existing": false,
+  "note": "re-landed without the node def-weil-pbc-ideal-power-cohomology-system by X-cpr, lead ruling 16:1x (second spelling of landed forms); inline forms, transition maps stated to exist",
+  "fixed_by": "X-cpr"
  },
  "reviewed_lean": {
   "date": "2026-10-11",

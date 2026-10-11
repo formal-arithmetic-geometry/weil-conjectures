@@ -236,3 +236,24 @@ mismatch was found; I changed only this report by adding the independent reading
 
 Validation: both delivery modules compiled together with scompile.py, dependency
 first, in 2.0 seconds with exit 0 and no warnings.
+
+## Re-landed without def-weil-pbc-ideal-power-cohomology-system (X-cpr, for L)
+
+Lead ruling (16:1x, following R-crf on lem-weil-pbc-cohomology-powers-ideal-rees-finite):
+the definition node `def-weil-pbc-ideal-power-cohomology-system` and its module
+`Sheaf.AlgebraicGeometry.IdealPowerCohomology` were a second spelling of landed forms and
+are removed. The node file is deleted, it is dropped from this item's `stmt_deps`, and the
+module is deleted (nothing else imported it or cited the node).
+
+The statement now uses the landed forms inline (statement prepared and compiled by R-cpi):
+- `I^n F` = `Scheme.idealModuleProduct (Scheme.idealSheafPower J.toModulesι n).2 F`;
+- `J` the extended ideal, tied by the binder `hJ : J = (ofIdealTop (I.map (ΓSpecIso _).inv.hom)).comap f`;
+- `H^q` as an `A`-module = `ModuleCat.restrictScalars ((ΓSpecIso (.of A)).inv ≫ f.appTop).hom`
+  of `RingedSpace.moduleCohomology X.toRingedSpace q`;
+- the transition maps are no longer a binder: the conclusion is
+  `∃ i, (∀ k n h, i k n h ≫ ι_n = ι_k) ∧ ∃ c, (image bound) ∧ (kernel bound)`.
+  Since each `ι` is a monomorphism the maps are unique, so the existential states the same
+  thing as the binder version and needs no new hypothesis from callers.
+
+Landed with `SHEAF_GROUP=L tools/land_set.sh` (one interface landing: the changed module and the
+deletion), compiled with exit 0; the global build verifies downstream.
