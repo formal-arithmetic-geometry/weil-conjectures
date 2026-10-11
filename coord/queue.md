@@ -1,15 +1,14 @@
 # Work queue
 
-798 items; claim with `tools/claim.py next <group> [--stage N]`.
+808 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (798)
+## Stage 2: nodes to state (808)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
-| `def-kun-topological-dimension-at-point` | 1 | state |
 | `def-nagata-basechanged-system` | 1 | state |
 | `def-nagata-directed-finite-upper-bound` | 1 | state |
 | `def-pc-dimension` | 1 | state |
@@ -308,6 +307,7 @@
 | `lem-weil-pbc-clopen-open-cover-section` | 1 | state |
 | `lem-weil-pbc-closed-immersion-products` | 1 | state |
 | `lem-weil-pbc-closed-immersion-residue-field-iso` | 1 | state |
+| `lem-weil-pbc-closed-point-dimension-local-ring` | 1 | state |
 | `lem-weil-pbc-closed-pushforward-constant-restriction` | 1 | state |
 | `lem-weil-pbc-cohen-coefficient-ring-exists` | 1 | state |
 | `lem-weil-pbc-cohen-power-series-presentation` | 1 | state |
@@ -363,13 +363,19 @@
 | `lem-weil-pbc-differential-zero-iff-pth-power` | 1 | state |
 | `lem-weil-pbc-dim-one-residue-field-extensions-finite` | 1 | state |
 | `lem-weil-pbc-dim-one-submodule-quotient-finite-length` | 1 | state |
+| `lem-weil-pbc-dimension-at-point-components` | 1 | state |
+| `lem-weil-pbc-dimension-at-point-field-extension` | 1 | state |
+| `lem-weil-pbc-dimension-at-point-local-ring-trdeg` | 1 | state |
+| `lem-weil-pbc-dimension-at-point-open-subspace` | 1 | state |
 | `lem-weil-pbc-dimension-preserved-field-extension` | 1 | state |
+| `lem-weil-pbc-dimension-supremum-local-dimensions` | 1 | state |
 | `lem-weil-pbc-direct-image-preserves-injectives` | 1 | state |
 | `lem-weil-pbc-direct-sum-extension-assembly` | 1 | state |
 | `lem-weil-pbc-directed-colimit-base-change-elementwise` | 1 | state |
 | `lem-weil-pbc-directed-union-subrings-flat-module` | 1 | state |
 | `lem-weil-pbc-double-complex-cokernel-homology-iso` | 1 | state |
 | `lem-weil-pbc-elementary-etale-finite-piece-persistence` | 1 | state |
+| `lem-weil-pbc-equation-count-fibre-dimension-flat` | 1 | state |
 | `lem-weil-pbc-essentially-finite-presentation-over-intermediate` | 1 | state |
 | `lem-weil-pbc-etale-algebra-filtered-colimit-descent` | 1 | state |
 | `lem-weil-pbc-etale-colimit-normal-local-domain` | 1 | state |
@@ -396,6 +402,8 @@
 | `lem-weil-pbc-exact-free-complex-last-minors-regular-sequence` | 1 | state |
 | `lem-weil-pbc-ext-one-direct-sum` | 1 | state |
 | `lem-weil-pbc-factorization-criterion-filtered-colimit` | 1 | state |
+| `lem-weil-pbc-fibre-dimension-bounded-open-upstairs` | 1 | state |
+| `lem-weil-pbc-fibre-dimension-neighborhood` | 1 | state |
 | `lem-weil-pbc-fibre-product-affine-transition` | 1 | state |
 | `lem-weil-pbc-fibre-product-point-residue-field` | 1 | state |
 | `lem-weil-pbc-fibre-ring-local-ring-natural-iso` | 1 | state |
@@ -489,6 +497,7 @@
 | `lem-weil-pbc-gabber-finite-etale-section` | 1 | state |
 | `lem-weil-pbc-gabber-root-criterion-etale-section-lifting` | 1 | state |
 | `lem-weil-pbc-generic-separable-algebra-splitting` | 1 | state |
+| `lem-weil-pbc-global-complete-intersection-equidimensional` | 1 | state |
 | `lem-weil-pbc-global-complete-intersection-local-regular-sequence` | 1 | state |
 | `lem-weil-pbc-glue-sheaves-of-modules` | 1 | state |
 | `lem-weil-pbc-graded-module-away-restriction` | 1 | state |
@@ -586,6 +595,7 @@
 | `lem-weil-pbc-p-independent-differentials-independent` | 1 | state |
 | `lem-weil-pbc-p-independent-extends-to-p-basis` | 1 | state |
 | `lem-weil-pbc-polynomial-ideal-coefficients-monomial` | 1 | state |
+| `lem-weil-pbc-polynomial-quotient-dimension-at-point-height-difference` | 1 | state |
 | `lem-weil-pbc-polynomial-quotient-dimension-lower-bound` | 1 | state |
 | `lem-weil-pbc-polynomial-ring-maximal-chain-height-difference` | 1 | state |
 | `lem-weil-pbc-polynomial-ring-maximal-localization-dimension` | 1 | state |
@@ -808,7 +818,7 @@
 | `lem-sc-normalization-properties` | 3 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 1432 nodes that wait for a statement dependency, 40 nodes that wait for stage 1.
+Not open yet: 1421 nodes that wait for a statement dependency, 40 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
