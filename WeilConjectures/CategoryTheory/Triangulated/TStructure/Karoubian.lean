@@ -53,7 +53,7 @@ variable {C : Type u} [Category.{v} C] [Preadditive C] [HasZeroObject C] [HasShi
 
 /-- An idempotent of an object of the heart splits. -/
 lemma isSplit_of_heart {X : C} (hX : t.heart X) {p : X ⟶ X} (hp : p ≫ p = p) : IsSplit p := by
-  letI := t.hasHeartFullSubcategory
+  let := t.hasHeartFullSubcategory
   have h := (isIdempotentComplete_iff_isSplit.1
     (t.isIdempotentComplete_heart t.heart.FullSubcategory)) ⟨X, hX⟩
     (ObjectProperty.homMk p) (by ext; exact hp)
@@ -69,6 +69,7 @@ lemma isSplit_of_isLE_of_isGE {X : C} (a : ℤ) [t.IsLE X a] [t.IsGE X a] {p : X
   exact h.of_iso ((shiftFunctorCompIsoId C a (-a) (by lia)).symm.app X)
     ((shiftFunctorCompIsoId C a (-a) (by lia)).inv.naturality p)
 
+omit [IsTriangulated C] in
 /-- The core of the inductive step: an idempotent `p` of the middle term of a distinguished
 triangle `T`, compatible with idempotents `pA`, `pB` of the outer terms, splits if `pA` and `pB`
 split through the outer terms of a distinguished triangle `T₁` whose connecting morphism is the
@@ -118,6 +119,7 @@ lemma isSplit_of_distTriang_aux (T T₁ : Triangle C) (hT : T ∈ distTriang C)
   nth_rewrite 2 [hd]
   rw [← assoc, h₂, zero_comp]
 
+omit [IsTriangulated C] in
 /-- The inductive step: an idempotent `p` of the middle term of a distinguished triangle splits if
 it is compatible with idempotents of the outer terms which split. -/
 lemma isSplit_of_distTriang (T : Triangle C) (hT : T ∈ distTriang C) {p : T.obj₂ ⟶ T.obj₂}

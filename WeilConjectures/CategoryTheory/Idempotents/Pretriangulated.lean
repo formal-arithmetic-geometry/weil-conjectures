@@ -28,7 +28,8 @@ is idempotent.
 
 ## References
 
-* [Paul Balmer and Marco Schlichting, *Idempotent completion of triangulated categories*][balmer2001]
+* Paul Balmer and Marco Schlichting, *Idempotent completion of triangulated categories*,
+  J. Algebra 236 (2001)
 -/
 
 @[expose] public section
@@ -73,14 +74,20 @@ lemma comp_eq_zero_of_distTriang (T : Triangle C) (hT : T ∈ distTriang C)
 def idemPoly {X : C} (x : X ⟶ X) : X ⟶ X :=
   x ≫ x + x ≫ x + x ≫ x - x ≫ x ≫ x - x ≫ x ≫ x
 
+omit [HasZeroObject C] [HasShift C ℤ] [∀ (n : ℤ), (shiftFunctor C n).Additive]
+  [Pretriangulated C] in
 lemma comp_idemPoly {X Y : C} (f : Y ⟶ X) (x : X ⟶ X) (y : Y ⟶ Y) (h : f ≫ x = y ≫ f) :
     f ≫ idemPoly x = idemPoly y ≫ f := by
   simp only [idemPoly, comp_add, comp_sub, add_comp, sub_comp, assoc, reassoc_of% h, h]
 
+omit [HasZeroObject C] [HasShift C ℤ] [∀ (n : ℤ), (shiftFunctor C n).Additive]
+  [Pretriangulated C] in
 lemma idemPoly_of_idem {X : C} (x : X ⟶ X) (hx : x ≫ x = x) : idemPoly x = x := by
   simp only [idemPoly, hx]
   abel
 
+omit [HasZeroObject C] [HasShift C ℤ] [∀ (n : ℤ), (shiftFunctor C n).Additive]
+  [Pretriangulated C] in
 lemma idemPoly_idem {X : C} (x : X ⟶ X) (h : (x ≫ x - x) ≫ (x ≫ x - x) = 0) :
     idemPoly x ≫ idemPoly x = idemPoly x := by
   have := idem_of_sub_mul_sub_eq_zero (R := End X) x (by
@@ -123,7 +130,8 @@ variable {C}
 
 namespace Karoubi
 
-omit [HasZeroObject C] [∀ (n : ℤ), (shiftFunctor C n).Additive] [Pretriangulated C] in
+omit [Preadditive C] [HasZeroObject C] [HasShift C ℤ] [∀ (n : ℤ), (shiftFunctor C n).Additive]
+  [Pretriangulated C] in
 lemma comm_of_comp_eq {X Y : C} {p : X ⟶ X} {q : Y ⟶ Y} (f : X ⟶ Y) (hq : q ≫ q = q)
     (h : f ≫ q = p ≫ f) : p ≫ (f ≫ q) ≫ q = f ≫ q := by
   rw [assoc, hq, ← assoc, ← h, assoc, hq]
@@ -134,12 +142,18 @@ variable (T : Triangle C) (E : T ⟶ T) (hE : E ≫ E = E)
 
 include hE
 
+omit [Preadditive C] [HasZeroObject C] [∀ (n : ℤ), (shiftFunctor C n).Additive]
+  [Pretriangulated C] in
 lemma idem_hom₁ : E.hom₁ ≫ E.hom₁ = E.hom₁ := by
   rw [← Pretriangulated.comp_hom₁, hE]
 
+omit [Preadditive C] [HasZeroObject C] [∀ (n : ℤ), (shiftFunctor C n).Additive]
+  [Pretriangulated C] in
 lemma idem_hom₂ : E.hom₂ ≫ E.hom₂ = E.hom₂ := by
   rw [← Pretriangulated.comp_hom₂, hE]
 
+omit [Preadditive C] [HasZeroObject C] [∀ (n : ℤ), (shiftFunctor C n).Additive]
+  [Pretriangulated C] in
 lemma idem_hom₃ : E.hom₃ ≫ E.hom₃ = E.hom₃ := by
   rw [← Pretriangulated.comp_hom₃, hE]
 
@@ -235,7 +249,7 @@ lemma distinguished_cocone_triangle {X Y : Karoubi C} (f : X ⟶ Y) :
     isomorphic_distinguished _ (triangleOfIdem_distinguished _ hT E hE) _ ?_⟩
   refine Triangle.isoMk _ _ (Iso.refl _) (Iso.refl _) (Iso.refl _) ?_ (by simp) (by simp)
   ext
-  simp [objOfIdem₁, objOfIdem₂, E]
+  simp [E]
 
 lemma contractible_distinguished (X : Karoubi C) :
     contractibleTriangle X ∈ distinguishedTriangles C := by
@@ -251,7 +265,8 @@ lemma contractible_distinguished (X : Karoubi C) :
   refine Triangle.isoMk _ _ (Iso.refl _) (Iso.refl _) ((isZero_zero _).iso h₃) ?_ ?_ ?_
   · ext
     simp only [E, contractibleTriangle]
-    simp
+    simp only [zero_def, Triangle.mk_mor₁, Iso.refl_hom, comp_id, id_f, id_comp,
+      triangleOfIdem_mor₁_f, Triangle.homMk_hom₁]
     exact (Category.comp_id _).symm
   · exact h₃.eq_of_tgt _ _
   · exact (isZero_zero _).eq_of_src _ _
@@ -339,6 +354,17 @@ lemma Karoubi.mem_distTriang_iff (T : Triangle (Karoubi C)) :
 category into its Karoubi envelope is a triangulated functor. -/
 instance toKaroubi.isTriangulated : (toKaroubi C).IsTriangulated where
   map_distinguished T hT := ⟨T, hT, ⟨Retract.refl _⟩⟩
+
+/-- Blueprint `lem-weil-karoubi-envelope-triangulated`, octahedral axiom: the Karoubi envelope of
+a triangulated category satisfies the octahedral axiom (Balmer–Schlichting).
+
+Unfinished: the difficulty is to choose, for a composable pair of morphisms of the envelope,
+an octahedron in `C` together with idempotent endomorphisms of its four triangles which are
+compatible with each other; the idempotents of the three cone triangles can be chosen by
+`CategoryTheory.Pretriangulated.exists_idempotent_of_distTriang`, but their compatibility with
+the morphisms `m₁`, `m₃` of the octahedron is not automatic. -/
+theorem Karoubi.isTriangulated [IsTriangulated C] : IsTriangulated (Karoubi C) :=
+  sorry
 
 end Idempotents
 

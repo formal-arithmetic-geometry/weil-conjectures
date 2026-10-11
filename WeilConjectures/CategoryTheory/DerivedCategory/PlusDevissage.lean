@@ -67,6 +67,7 @@ lemma exists_iso_singleFunctor_obj_of_isGE_of_isLE (X : Plus C) (n : ℤ) [X.IsG
   obtain ⟨Y, ⟨e⟩⟩ := DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE (ι.obj X) n
   exact ⟨Y, ⟨ι.preimageIso (e ≪≫ ((singleFunctorιIso C n).app Y).symm)⟩⟩
 
+omit [F.IsTriangulated] [G.IsTriangulated] in
 /-- If `τ` is an isomorphism at an object of `C` placed in degree `0`, then it is an isomorphism at
 this object placed in any degree. -/
 lemma isIso_app_singleFunctor_obj (Y : C) (h : IsIso (τ.app ((singleFunctor C 0).obj Y)))
@@ -168,7 +169,7 @@ lemma isIso_app_of_forall_homology (P : ObjectProperty C) [P.IsClosedUnderIsomor
       exact P.prop_of_iso (asIso ((homologyFunctor C q).map ((t.truncLTι (n + 1)).app X))).symm
         (hX q)
     have := (homologyFunctor D n).congr_map (τ.naturality ((t.truncLEι n).app X))
-    simp only [Functor.map_comp, Functor.id_obj, Functor.id_map] at this
+    simp only [Functor.map_comp, Functor.id_obj] at this
     have : IsIso ((homologyFunctor D n).map (F.map ((t.truncLEι n).app X)) ≫
         (homologyFunctor D n).map (τ.app X)) := by rw [this]; infer_instance
     exact IsIso.of_isIso_comp_left ((homologyFunctor D n).map (F.map ((t.truncLEι n).app X))) _

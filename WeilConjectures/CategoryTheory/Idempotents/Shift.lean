@@ -98,7 +98,9 @@ lemma Karoubi.δ_shift_app_f (a b : A) (P : Karoubi C) :
   change ((Functor.OplaxMonoidal.δ (shiftMonoidalFunctor C A ⋙ functorExtension₂ C C)
     ⟨a⟩ ⟨b⟩).app P).f = _
   rw [Functor.OplaxMonoidal.comp_δ]
-  simp
+  simp only [Functor.comp_obj, endofunctorMonoidalCategory_tensorObj_obj, NatTrans.comp_app,
+    Karoubi.comp_f, functorExtension₂_map_app_f, endofunctorMonoidalCategory_tensorObj_map,
+    functorExtension₂_δ_app_f, assoc]
   rw [← Functor.map_comp, ← Functor.map_comp, P.idem]
   rfl
 
@@ -115,9 +117,12 @@ lemma Karoubi.μ_shift_app_f (a b : A) (P : Karoubi C) :
   change ((Functor.LaxMonoidal.μ (shiftMonoidalFunctor C A ⋙ functorExtension₂ C C)
     ⟨a⟩ ⟨b⟩).app P).f = _
   rw [Functor.LaxMonoidal.comp_μ]
-  simp
+  simp only [Functor.comp_obj, endofunctorMonoidalCategory_tensorObj_obj, NatTrans.comp_app,
+    Karoubi.comp_f, functorExtension₂_μ_app_f, functorExtension₂_map_app_f]
+  rw [← (Functor.LaxMonoidal.μ (shiftMonoidalFunctor C A) ⟨a⟩ ⟨b⟩).naturality P.p]
+  simp only [endofunctorMonoidalCategory_tensorObj_map, ← Functor.map_comp_assoc]
   rw [← Functor.map_comp, P.idem]
-  exact ((Functor.LaxMonoidal.μ (shiftMonoidalFunctor C A) ⟨a⟩ ⟨b⟩).naturality P.p).symm
+  rfl
 
 @[simp]
 lemma Karoubi.shiftFunctorZero_hom_app_f (P : Karoubi C) :

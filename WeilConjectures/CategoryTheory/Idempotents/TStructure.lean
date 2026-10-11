@@ -39,10 +39,14 @@ def karoubiProp (P : ObjectProperty C) : ObjectProperty (Karoubi C) :=
 instance (P : ObjectProperty C) : (karoubiProp P).IsClosedUnderIsomorphisms where
   of_iso e := fun ⟨X, hX, ⟨r⟩⟩ ↦ ⟨X, hX, ⟨(Retract.ofIso e.symm).trans r⟩⟩
 
+omit [Preadditive C] [HasZeroObject C] [HasShift C ℤ] [∀ (n : ℤ), (shiftFunctor C n).Additive]
+  [Pretriangulated C] in
 lemma karoubiProp_toKaroubi_obj {P : ObjectProperty C} {X : C} (hX : P X) :
     karoubiProp P ((toKaroubi C).obj X) :=
   ⟨X, hX, ⟨Retract.refl _⟩⟩
 
+omit [Preadditive C] [HasZeroObject C] [HasShift C ℤ] [∀ (n : ℤ), (shiftFunctor C n).Additive]
+  [Pretriangulated C] in
 lemma karoubiProp_monotone {P P' : ObjectProperty C} (h : P ≤ P') :
     karoubiProp P ≤ karoubiProp P' :=
   fun _ ⟨X, hX, r⟩ ↦ ⟨X, h _ hX, r⟩

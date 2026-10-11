@@ -47,14 +47,17 @@ section Heart
 
 variable [IsTriangulated C] (H : Type u') [Category.{v'} H] [Preadditive H] [t.Heart H]
 
+omit [IsTriangulated C] in
 variable {H} in
 lemma ιHeart_hom_shift_eq_zero {X Y : H} {n : ℤ}
     (f : t.ιHeart.obj X ⟶ (t.ιHeart.obj Y)⟦n⟧) (hn : n < 0) : f = 0 :=
   have := t.isGE_shift (t.ιHeart.obj Y) 0 n (-n) (by lia)
   t.zero f 0 (-n) (by lia)
 
+omit [IsTriangulated C] in
 variable {H} in
-lemma exists_ιHeart_obj_iso {X : C} (hX : t.heart X) : ∃ (Y : H), Nonempty (t.ιHeart.obj Y ≅ X) := by
+lemma exists_ιHeart_obj_iso {X : C} (hX : t.heart X) :
+    ∃ (Y : H), Nonempty (t.ιHeart.obj Y ≅ X) := by
   rw [← t.essImage_ιHeart H] at hX
   exact hX
 
@@ -63,8 +66,11 @@ lemma admissibleMorphism_ιHeart_eq_top :
   ext X₁ X₂ f₁
   simp only [MorphismProperty.top_apply, iff_true]
   intro X₃ f₂ f₃ hT
-  have h₁ : t.IsLE X₃ 0 := t.isLE₂ _ (rot_of_distTriang _ hT) 0 (by exact inferInstanceAs (t.IsLE (t.ιHeart.obj X₂) 0))
-    (by have := t.isLE_shift (t.ιHeart.obj X₁) 0 1 (-1) (by lia); exact t.isLE_of_le ((t.ιHeart.obj X₁)⟦(1 : ℤ)⟧) (-1) 0)
+  have h₁ : t.IsLE X₃ 0 := t.isLE₂ _ (rot_of_distTriang _ hT) 0
+    (inferInstanceAs (t.IsLE (t.ιHeart.obj X₂) 0))
+    (by
+      have := t.isLE_shift (t.ιHeart.obj X₁) 0 1 (-1) (by lia)
+      exact t.isLE_of_le ((t.ιHeart.obj X₁)⟦(1 : ℤ)⟧) (-1) 0)
   have h₂ : t.IsGE X₃ (-1) := t.isGE₂ _ (rot_of_distTriang _ hT) (-1)
     (by exact t.isGE_of_ge (t.ιHeart.obj X₂) (-1) 0)
     (by exact t.isGE_shift (t.ιHeart.obj X₁) 0 1 (-1) (by lia))
@@ -86,6 +92,7 @@ lemma admissibleMorphism_ιHeart_eq_top :
   · dsimp; simp
   · dsimp; simp [← Functor.map_comp]
 
+omit [IsTriangulated C] in
 variable {H} in
 lemma heart_biprod (X Y : H) : t.heart (t.ιHeart.obj X ⊞ t.ιHeart.obj Y) := by
   have hT := binaryBiproductTriangle_distinguished (t.ιHeart.obj X) (t.ιHeart.obj Y)
@@ -95,6 +102,7 @@ lemma heart_biprod (X Y : H) : t.heart (t.ιHeart.obj X ⊞ t.ιHeart.obj Y) := 
     t.isGE₂ _ hT 0 (inferInstanceAs (t.IsGE (t.ιHeart.obj X) 0))
     (inferInstanceAs (t.IsGE (t.ιHeart.obj Y) 0))⟩
 
+omit [IsTriangulated C] in
 include t in
 lemma hasBinaryBiproducts_heart : HasBinaryBiproducts H where
   has_binary_biproduct X Y := by
@@ -116,6 +124,7 @@ lemma hasBinaryBiproducts_heart : HasBinaryBiproducts H where
             rw [biprod.total, id_comp, Iso.hom_inv_id]
           simpa only [Preadditive.comp_add, Preadditive.add_comp, assoc] using this)) }
 
+omit [IsTriangulated C] in
 include t in
 lemma hasZeroObject_heart : HasZeroObject H := by
   obtain ⟨Z, ⟨e⟩⟩ := t.exists_ιHeart_obj_iso (H := H) (X := 0) (by
@@ -126,6 +135,7 @@ lemma hasZeroObject_heart : HasZeroObject H := by
     (by rw [Functor.map_id, Functor.map_zero, ← IsZero.iff_id_eq_zero];
         exact IsZero.of_iso (isZero_zero C) e)
 
+omit [IsTriangulated C] in
 include t in
 lemma hasFiniteProducts_heart : HasFiniteProducts H :=
   have := t.hasBinaryBiproducts_heart H

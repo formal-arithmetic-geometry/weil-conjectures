@@ -20,7 +20,8 @@ between the triangulated structure of `C` and the abelian structure of `H`
 1. truncation triangles are unique up to unique isomorphism
    (`CategoryTheory.Triangulated.TStructure.triangle_hom_ext_of_isLE_of_isGE`,
    `CategoryTheory.Triangulated.TStructure.exists_iso_triangleLEGE`), and the truncation
-   functors are adjoint to the inclusions (`CategoryTheory.Triangulated.TStructure.truncLEAdjunction`,
+   functors are adjoint to the inclusions
+   (`CategoryTheory.Triangulated.TStructure.truncLEAdjunction`,
    `CategoryTheory.Triangulated.TStructure.truncGEAdjunction`); the commutation
    `τ_{≥ 0} τ_{≤ 0} ≅ τ_{≤ 0} τ_{≥ 0}` is `CategoryTheory.Triangulated.TStructure.truncGELEIsoLEGE`;
 2. the subcategories `t.le n`, `t.ge n` (`CategoryTheory.Triangulated.TStructure.isLE₂`,
@@ -52,6 +53,7 @@ variable {C : Type u} [Category.{v} C] [Preadditive C] [HasZeroObject C] [HasShi
 
 section Truncation
 
+omit [HasZeroObject C] [Pretriangulated C] in
 /-- A morphism `X ⟶ Y` with `X ≤ n` and `Y⟦1⟧`-shifted... a morphism of objects which becomes zero
 after a shift is zero. -/
 lemma eq_zero_of_shift_map_eq_zero {X Y : C} (f : X ⟶ Y) (a : ℤ) (h : f⟦a⟧' = 0) : f = 0 :=
@@ -225,6 +227,7 @@ lemma exists_distTriang_truncLE_truncGE (S : C) [t.IsLE S 0] [t.IsGE S (-1)] :
   · dsimp; simp
   · dsimp; simp [← Functor.map_comp]
 
+omit [IsTriangulated C] in
 /-- The cone of a morphism of the heart lies in `[-1, 0]`. -/
 lemma isLE_isGE_of_distTriang {X Y : H} (f : X ⟶ Y) {S : C} (g : t.ιHeart.obj Y ⟶ S)
     (δ : S ⟶ (t.ιHeart.obj X)⟦(1 : ℤ)⟧) (hT : Triangle.mk (t.ιHeart.map f) g δ ∈ distTriang C) :
@@ -267,6 +270,7 @@ lemma exists_isColimit_cokernelCofork_of_distTriang {X Y : H} (f : X ⟶ Y) {S :
   exact ⟨Q, _, _, AbelianSubcategory.isColimitCokernelCofork hι hT hT', eQ,
     by rw [AbelianSubcategory.ι_map_πQ]; simp⟩
 
+omit [IsTriangulated C] in
 /-- Blueprint `lem-weil-heart-short-exact-triangles` (4): the connecting morphism of a
 distinguished triangle whose terms lie in the heart is determined by the first two morphisms. -/
 lemma eq_of_distTriang_of_heart {X Y Z : H} (f : X ⟶ Y) (g : Y ⟶ Z)
