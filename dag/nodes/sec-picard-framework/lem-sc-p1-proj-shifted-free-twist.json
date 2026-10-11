@@ -19,7 +19,8 @@
  "stmt_deps": [
   "def-sc-p1-standard",
   "lem-sc-p1-twist-exists",
-  "def-weil-pbc-proj-twisting-sheaf"
+  "def-weil-pbc-proj-twisting-sheaf",
+  "def-sc-p1-proj-chart-isomorphism"
  ],
  "proof": [
   {
@@ -136,5 +137,23 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProjShiftedFreeTwist",
+  "declaration": "AlgebraicGeometry.Proj.proj_shifted_free_is_twist",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjShiftedFreeTwist.lean",
+  "statement": "theorem proj_shifted_free_is_twist (k : Type v) [Field k] (d : ℤ) : ∃ C : ProjectiveLine.ProjChartIsomorphism k, (∃ (L : (ProjectiveLine (Spec (.of k))).Modules), Nonempty (ProjectiveLine.TwistData (Spec (.of k)) d L) ∧ Nonempty (twist (MvPolynomial.homogeneousSubmodule (Fin 2) k) d ≅ (Scheme.Modules.tensorPullback C.iso.hom).obj L)) ∧ (∀ (r : ℕ) (a : Fin r → ℤ), ∃ alpha : ∀ (f : MvPolynomial (Fin 2) k) (b : ℕ), 0 < b → f ∈ MvPolynomial.homogeneousSubmodule (Fin 2) k b → (∐ (fun i : Fin r ↦ twist (MvPolynomial.homogeneousSubmodule (Fin 2) k) (a i))).val.obj (op (basicOpen (MvPolynomial.homogeneousSubmodule (Fin 2) k) f)) →+ LocalizedModule.Away f (Fin r → MvPolynomial (Fin 2) k), (∀ (f : MvPolynomial (Fin 2) k) (b : ℕ) (hb : 0 < b) (hf : f ∈ MvPolynomial.homogeneousSubmodule (Fin 2) k b), Function.Injective (alpha f b hb hf) ∧ Set.range (alpha f b hb hf) = degreeZeroFractions (fun n : ℕ ↦ (MvPolynomial.homogeneousSubmodule (Fin 2) k n : Set _)) (fun n : ℕ ↦ {y : Fin r → MvPolynomial (Fin 2) k | ∀ i, if 0 ≤ a i + n then y i ∈ MvPolynomial.homogeneousSubmodule (Fin 2) k (a i + n).toNat else y i = 0}) (Submonoid.powers f)) ∧ (∀ (f : MvPolynomial (Fin 2) k) (b : ℕ) (hb : 0 < b) (hf : f ∈ MvPolynomial.homogeneousSubmodule (Fin 2) k b) (q : HomogeneousLocalization.Away (MvPolynomial.homogeneousSubmodule (Fin 2) k) f) (s : (∐ (fun i : Fin r ↦ twist (MvPolynomial.homogeneousSubmodule (Fin 2) k) (a i))).val.obj (op (basicOpen (MvPolynomial.homogeneousSubmodule (Fin 2) k) f))), alpha f b hb hf (awayToSection (MvPolynomial.homogeneousSubmodule (Fin 2) k) f q • s) = algebraMap (HomogeneousLocalization.Away (MvPolynomial.homogeneousSubmodule (Fin 2) k) f) (Localization.Away f) q • alpha f b hb hf s) ∧ (∀ (f g : MvPolynomial (Fin 2) k) (b c : ℕ) (hb : 0 < b) (hc : 0 < c) (hf : f ∈ MvPolynomial.homogeneousSubmodule (Fin 2) k b) (hg : g ∈ MvPolynomial.homogeneousSubmodule (Fin 2) k c) (inc : basicOpen (MvPolynomial.homogeneousSubmodule (Fin 2) k) g ≤ basicOpen (MvPolynomial.homogeneousSubmodule (Fin 2) k) f) (e t : ℕ) (h : MvPolynomial (Fin 2) k), 0 < e → h ∈ MvPolynomial.homogeneousSubmodule (Fin 2) k t → g ^ e = h * f → ∀ (m : ℕ) (y : Fin r → MvPolynomial (Fin 2) k) (s : (∐ (fun i : Fin r ↦ twist (MvPolynomial.homogeneousSubmodule (Fin 2) k) (a i))).val.obj (op (basicOpen (MvPolynomial.homogeneousSubmodule (Fin 2) k) f))), alpha f b hb hf s = mk y (⟨f ^ m, ⟨m, rfl⟩⟩ : Submonoid.powers f) → alpha g c hc hg ((∐ (fun i : Fin r ↦ twist (MvPolynomial.homogeneousSubmodule (Fin 2) k) (a i))).val.map (homOfLE inc).op s) = mk (h ^ m • y) (⟨g ^ (e * m), ⟨e * m, rfl⟩⟩ : Submonoid.powers g)))",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-12",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-h45184",
+  "group": "E1",
+  "result": "pass",
+  "note": "headless review: field k (Type v) and S=k[x0,x1] standard grading = homogeneousSubmodule (Fin 2) k with gradedAlgebra; P=Proj; d:ℤ; S(d)~ = Proj.twist d (recorded def-weil-pbc-proj-twisting-sheaf); O_P(d) of the standard cover = L with TwistData d L on ProjectiveLine (Spec k) (def-sc-p1-standard / lem-sc-p1-twist-exists, existence enough by uniqueness), transported by tensorPullback along the chart-compatible iso C of the new node def-sc-p1-proj-chart-isomorphism (awayι x_i ≫ iso.hom = linearChartHom i, per P¹ MODEL ruling); finite direct sum: ∀ r, a : Fin r → ℤ, ∐ twist(a i) satisfies the associated-sheaf characterisation of ⊕S(a_i) (injective onto degreeZeroFractions with M_n = Π S_{a_i+n}, zero when a_i+n<0; scalar compatibility; restriction y/f^m ↦ h^m y/g^{em}) as in gradedModuleSheaf_exists and landed coherent_exists_graded_representation; edge cases d=0, d<0, r=0, f=0; combined co"
  }
 }

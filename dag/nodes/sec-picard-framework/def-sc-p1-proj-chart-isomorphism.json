@@ -1,0 +1,103 @@
+{
+ "id": "def-sc-p1-proj-chart-isomorphism",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-p1-graded-resolution",
+   "place": "comparison of Proj with the projective line in the standard-chart computation",
+   "via": [
+    "lem-sc-p1-proj-shifted-free-twist"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "definition",
+ "title": "Chart comparison for the projective line",
+ "statement": "Let $k$ be a field, $P=\\operatorname{Proj}k[x_0,x_1]$ with the standard grading [def-pc-proj], and let $Q=\\mathbf P^1_k$ be the glued projective line with its standard charts [def-sc-p1-standard]. A chart-compatible comparison is an isomorphism $c:P\\xrightarrow{\\sim}Q$ such that, for $i=0,1$, the composite $\\operatorname{Spec}(k[x_0,x_1]_{(x_i)})\\to P\\xrightarrow{c}Q$ is the coordinate-ratio chart morphism [def-pc-linear-pair-morphism], sending the chart coordinate to $x_{1-i}/x_i$.",
+ "stmt_deps": [
+  "def-pc-proj",
+  "def-sc-p1-standard",
+  "def-pc-linear-pair-morphism"
+ ],
+ "source": {
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Tag 01NG and Lemma 01M7"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "isomorphism between polynomial Proj and projective line compatible with coordinate ratio charts",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Polynomial projective spectrum scheme is isomorphic to the projective line with coordinate quotient charts",
+   "results": "Only basic-open-to-Spec isomorphisms; no comparison with glued projective line.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry.Proj.twist\"",
+   "results": "No matching declaration. Also searched DAG, project and upstream with rg; linearChartHom exists, but no chart-compatible scheme isomorphism.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Proj.*ProjectiveLine|ProjectiveLine.*Proj",
+   "results": "No matching declaration. Also searched DAG, project and upstream with rg; linearChartHom exists, but no chart-compatible scheme isomorphism.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sc-p1-proj-shifted-free-twist",
+  "date": "2026-10-12",
+  "group": "E1"
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProjectiveLineProjChartIsomorphism",
+  "declaration": "AlgebraicGeometry.ProjectiveLine.ProjChartIsomorphism",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjectiveLineProjChartIsomorphism.lean",
+  "statement": "structure ProjChartIsomorphism (k : Type u) [Field k]",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-12",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-h45184",
+  "group": "E1",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-h45184",
+  "group": "E1",
+  "result": "pass",
+  "note": "headless review: field k (Type v) and S=k[x0,x1] standard grading = homogeneousSubmodule (Fin 2) k with gradedAlgebra; P=Proj; d:ℤ; S(d)~ = Proj.twist d (recorded def-weil-pbc-proj-twisting-sheaf); O_P(d) of the standard cover = L with TwistData d L on ProjectiveLine (Spec k) (def-sc-p1-standard / lem-sc-p1-twist-exists, existence enough by uniqueness), transported by tensorPullback along the chart-compatible iso C of the new node def-sc-p1-proj-chart-isomorphism (awayι x_i ≫ iso.hom = linearChartHom i, per P¹ MODEL ruling); finite direct sum: ∀ r, a : Fin r → ℤ, ∐ twist(a i) satisfies the associated-sheaf characterisation of ⊕S(a_i) (injective onto degreeZeroFractions with M_n = Π S_{a_i+n}, zero when a_i+n<0; scalar compatibility; restriction y/f^m ↦ h^m y/g^{em}) as in gradedModuleSheaf_exists and landed coherent_exists_graded_representation; edge cases d=0, d<0, r=0, f=0; combined co"
+ }
+}
