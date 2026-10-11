@@ -4135,3 +4135,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 10:01 L: merged deliver/C1/lem-weil-pbc-etale-residue-polynomial-lift (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.EtaleResiduePolynomialLift AlgebraicGeometry.residue_polynomial_lift)
 - 10:01 L: merged deliver/J1/lem-weil-pbc-etale-splits-off-quasi-finite-part (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.EtaleSplitsOffQuasiFinitePart AlgebraicGeometry.exists_etale_splits_off_quasiFinitePart)
 - 10:02 L: merged deliver/C1/lem-weil-pbc-double-complex-cokernel-homology-iso (stage 2; reviewer FIX; first push; Sheaf.Algebra.Homology.DoubleComplexCokernelHomologyIso HomologicalComplex₂.doubleComplexCokernelHomologyIso)
+- 10:02 L: merged deliver/M1/lem-weil-pbc-complex-spectral-sequence-comparison (stage 2; reviewer FIX; first push; Sheaf.CategoryTheory.SpectralSequenceComparison CategoryTheory.complex_spectral_sequence_comparison)
