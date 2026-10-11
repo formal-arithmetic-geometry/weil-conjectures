@@ -6,7 +6,10 @@ Authors: Weil conjectures project
 module
 
 public import WeilConjectures.Compactification.Comp
+public import WeilConjectures.Compactification.CommonRefinement
+public import WeilConjectures.Compactification.Constructions
 public import WeilConjectures.Compactification.Refinement
+public import WeilConjectures.Compactification.RefinementPullback
 
 /-!
 # Triangles of compactifications
@@ -124,6 +127,159 @@ theorem isPullback_rfg : IsPullback T'.cfg.i (𝟙 X) φ.rfg.hom T.cfg.i := by
   exact this.flip
 
 end Hom
+
+lemma cfg_i_p : T.cfg.i ≫ T.p = f ≫ T.cg.i := by
+  rw [← T.i_q, Category.assoc, ← T.isPullback.w, ← Category.assoc, ← T.cf.comm]
+
+section HomOfRestrict
+
+variable (d : Compactification g) (rg : d.Refinement T.cg)
+  (hrg : IsPullback d.i (𝟙 Y) rg.hom T.cg.i) (e : Compactification (f ≫ d.i))
+  (m : e.Z ⟶ T.cfg.Z) (hm : e.i ≫ m = T.cfg.i) (hm' : e.g ≫ rg.hom = m ≫ T.p)
+
+include hm hm' in
+/-- The refinement of the compactifications of `f ≫ g` underlying `Triangle.homOfRestrict`. -/
+@[simps]
+def homOfRestrictRfg : (ofRestrict d e).cfg.Refinement T.cfg where
+  hom := m
+  i_hom := hm
+  hom_g := by
+    rw [← T.p_g, ← Category.assoc, ← hm', Category.assoc, rg.hom_g]
+    rfl
+
+include hm hm' in
+/-- The refinement of the compactifications of `f` underlying `Triangle.homOfRestrict`. -/
+noncomputable def homOfRestrictRf : (ofRestrict d e).cf.Refinement T.cf where
+  hom := T.isPullback.lift e.restrict.g (pullback.fst e.g d.i ≫ m) (by
+    rw [Category.assoc, ← hm', ← rg.i_hom, restrict_g, ← Category.assoc, ← pullback.condition,
+      Category.assoc])
+  i_hom := by
+    apply T.isPullback.hom_ext
+    · change e.restrict.i ≫ T.isPullback.lift _ _ _ ≫ T.cf.g = _
+      rw [IsPullback.lift_fst, ← T.cf.comm]
+      exact (e.restrict.comm).symm
+    · change e.restrict.i ≫ T.isPullback.lift _ _ _ ≫ T.q = _
+      rw [IsPullback.lift_snd, restrict_i_fst_assoc, hm, T.i_q]
+  hom_g := IsPullback.lift_fst _ _ _ _
+
+include hm hm' in
+lemma homOfRestrictRf_hom_q :
+    (homOfRestrictRf T d rg e m hm hm').hom ≫ T.q = pullback.fst e.g d.i ≫ m :=
+  T.isPullback.lift_snd _ _ _
+
+include hrg hm hm' in
+/-- **A morphism of triangles out of a restricted triangle**: for a compactification `d` of `g`
+refining `T.cg` with cartesian square, a compactification `e` of `f ≫ d.i` whose open immersion
+is scheme-theoretically dominant, and a map `m : e.Z ⟶ T.cfg.Z` compatible with the open
+immersions and with `p`, the morphism of triangles `ofRestrict d e ⟶ T`. -/
+noncomputable def homOfRestrict [QuasiCompact f] [QuasiCompact e.i]
+    [IsSchemeTheoreticallyDominant e.i] :
+    (ofRestrict d e).Hom T where
+  rf := homOfRestrictRf T d rg e m hm hm'
+  rg := rg
+  rfg := homOfRestrictRfg T d rg e m hm hm'
+  q_comm := homOfRestrictRf_hom_q T d rg e m hm hm'
+  p_comm := hm'
+  isPullback_rf := by
+    have : QuasiCompact e.restrict.i := e.restrict.quasiCompact_openImmersion ‹_›
+    have : QuasiCompact (e.restrict.i ≫ pullback.fst e.g d.i) := by
+      rw [restrict_i_fst]; infer_instance
+    have : IsSchemeTheoreticallyDominant (e.restrict.i ≫ pullback.fst e.g d.i) := by
+      rw [restrict_i_fst]; infer_instance
+    have : IsSchemeTheoreticallyDominant (ofRestrict d e).cf.i :=
+      IsSchemeTheoreticallyDominant.of_comp e.restrict.i (pullback.fst e.g d.i)
+    have : QuasiCompact (ofRestrict d e).cf.i := e.restrict.quasiCompact_openImmersion ‹_›
+    exact Refinement.isPullback_of_isSchemeTheoreticallyDominant _
+  isPullback_rg := hrg
+
+end HomOfRestrict
+
+
+section Inf
+
+variable [QuasiCompact g] (T₁ T₂ : Triangle f g)
+
+/-- The immersion of `X` into `W = (T₁.cfg.Z ×_{T₁.cg.Z} d.Z) ×_{d.Z} (T₂.cfg.Z ×_{T₂.cg.Z} d.Z)`,
+for `d` the common refinement of `T₁.cg` and `T₂.cg`, whose closure is the common refinement of
+the triangles `T₁` and `T₂`. -/
+noncomputable def infLift : X ⟶ pullback (pullback.snd T₁.p (infFst T₁.cg T₂.cg).hom)
+    (pullback.snd T₂.p (infSnd T₁.cg T₂.cg).hom) :=
+  pullback.lift
+    (pullback.lift T₁.cfg.i (f ≫ (inf T₁.cg T₂.cg).i)
+      (by rw [cfg_i_p, Category.assoc, (infFst _ _).i_hom]))
+    (pullback.lift T₂.cfg.i (f ≫ (inf T₁.cg T₂.cg).i)
+      (by rw [cfg_i_p, Category.assoc, (infSnd _ _).i_hom]))
+    (by simp)
+
+@[reassoc (attr := simp)]
+lemma infLift_fst_fst : T₁.infLift T₂ ≫ pullback.fst _ _ ≫ pullback.fst _ _ = T₁.cfg.i := by
+  simp [infLift]
+
+@[reassoc (attr := simp)]
+lemma infLift_snd_fst : T₁.infLift T₂ ≫ pullback.snd _ _ ≫ pullback.fst _ _ = T₂.cfg.i := by
+  simp [infLift]
+
+@[reassoc (attr := simp)]
+lemma infLift_fst_snd :
+    T₁.infLift T₂ ≫ pullback.fst _ _ ≫ pullback.snd _ _ = f ≫ (inf T₁.cg T₂.cg).i := by
+  simp [infLift]
+
+instance : IsImmersion (T₁.infLift T₂) :=
+  have : IsImmersion (T₁.infLift T₂ ≫ pullback.fst _ _ ≫ pullback.fst _ _) := by
+    rw [infLift_fst_fst]; infer_instance
+  .of_comp _ (pullback.fst _ _ ≫ pullback.fst _ _)
+
+instance [QuasiCompact (f ≫ g)] : QuasiCompact (T₁.infLift T₂) :=
+  have : QuasiCompact (T₁.infLift T₂ ≫ pullback.fst _ _ ≫ pullback.fst _ _) := by
+    rw [infLift_fst_fst]; exact T₁.cfg.quasiCompact_openImmersion inferInstance
+  .of_comp _ (pullback.fst _ _ ≫ pullback.fst _ _)
+
+/-- The compactification of `f ≫ d.i`, for `d` the common refinement of `T₁.cg` and `T₂.cg`:
+the closure of `X` in `(T₁.cfg.Z ×_{T₁.cg.Z} d.Z) ×_{d.Z} (T₂.cfg.Z ×_{T₂.cg.Z} d.Z)`. -/
+noncomputable def infCompactification [QuasiCompact (f ≫ g)] : Compactification (f ≫ (inf T₁.cg T₂.cg).i) :=
+  (Compactification.ofIsImmersion (T₁.infLift T₂)
+    (pullback.fst _ _ ≫ pullback.snd T₁.p (infFst T₁.cg T₂.cg).hom)).copy
+    (by rw [infLift_fst_snd])
+
+instance [QuasiCompact (f ≫ g)] : QuasiCompact (T₁.infCompactification T₂).i :=
+  inferInstanceAs (QuasiCompact (T₁.infLift T₂).toImage)
+
+instance [QuasiCompact (f ≫ g)] : IsSchemeTheoreticallyDominant (T₁.infCompactification T₂).i :=
+  inferInstanceAs (IsSchemeTheoreticallyDominant (T₁.infLift T₂).toImage)
+
+/-- **The common refinement of two triangles of compactifications.** -/
+noncomputable def inf [QuasiCompact (f ≫ g)] : Triangle f g :=
+  ofRestrict (Compactification.inf T₁.cg T₂.cg) (T₁.infCompactification T₂)
+
+/-- The common refinement of two triangles refines the first one. -/
+noncomputable def infFst [QuasiCompact (f ≫ g)] : (T₁.inf T₂).Hom T₁ :=
+  have : IsSeparated g := T₁.cg.isSeparated
+  have : QuasiCompact f := .of_comp f g
+  homOfRestrict T₁ _ (Compactification.infFst T₁.cg T₂.cg)
+    (Compactification.isPullback_infFst T₁.cg T₂.cg) _
+    ((T₁.infLift T₂).imageι ≫ pullback.fst _ _ ≫ pullback.fst _ _)
+    (by
+      change (T₁.infLift T₂).toImage ≫ _ = _
+      rw [Scheme.Hom.toImage_imageι_assoc, infLift_fst_fst])
+    (by
+      change ((T₁.infLift T₂).imageι ≫ pullback.fst _ _ ≫ pullback.snd _ _) ≫ _ = _
+      simp only [Category.assoc, ← pullback.condition])
+
+/-- The common refinement of two triangles refines the second one. -/
+noncomputable def infSnd [QuasiCompact (f ≫ g)] : (T₁.inf T₂).Hom T₂ :=
+  have : IsSeparated g := T₁.cg.isSeparated
+  have : QuasiCompact f := .of_comp f g
+  homOfRestrict T₂ _ (Compactification.infSnd T₁.cg T₂.cg)
+    (Compactification.isPullback_infSnd T₁.cg T₂.cg) _
+    ((T₁.infLift T₂).imageι ≫ pullback.snd _ _ ≫ pullback.fst _ _)
+    (by
+      change (T₁.infLift T₂).toImage ≫ _ = _
+      rw [Scheme.Hom.toImage_imageι_assoc, infLift_snd_fst])
+    (by
+      change ((T₁.infLift T₂).imageι ≫ pullback.fst _ _ ≫ pullback.snd _ _) ≫ _ = _
+      simp only [Category.assoc, pullback.condition])
+
+end Inf
 
 end Triangle
 
