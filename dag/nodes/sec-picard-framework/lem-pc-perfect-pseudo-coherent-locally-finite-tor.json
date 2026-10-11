@@ -23,7 +23,8 @@
   "def-pc-scheme",
   "def-pc-derived-category",
   "def-pc-perfect-complex",
-  "def-pur-pseudo-coherent-complex"
+  "def-pur-pseudo-coherent-complex",
+  "def-pc-locally-finite-tor-dimension"
  ],
  "proof": [
   {
@@ -139,5 +140,24 @@
   "group": "J1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ppl2916 (reviewer sub-agent of L); spot-checked: Statement = Stacks 08CQ (1)=>(2) specialized to schemes; Tor clause is the 08CF tor-amplitude condition stated pointwise-locally, exactly what both citers use (lem-pc-perfect-affine-bounded-projective takes min/max over a finite affine cover; lem-pc-perfect-summand uses 'Tor amplitude in [a,b] near every point'). Step 1: affine refinement of a strictly perfect model has terms = direct summands of finite free = tilde of finite projective (the elementary clause of def-pc-perfect-complex, not the 08EB converse, so no cycle with the citer), lem-weil-pbc-finite-projective-standard-free-cover gives finite-free principal opens, matches def-pur-pseudo-coherent-complex (C4 ok). Step 2: summands of free are flat, lem-pc-bounded-above-flat-kflat (generic tool, hypotheses ringed space + bounded-above flat met) gives derived = ordinary tensor, bounded so G-independent interval. No new nodes. Second reading: no missed fault found. No repairs."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.PerfectPseudoCoherentLocallyFiniteTor",
+  "declaration": "AlgebraicGeometry.Scheme.perfect_isPseudoCoherent_and_hasLocallyFiniteTorDimension",
+  "file": "lean/Sheaf/AlgebraicGeometry/PerfectPseudoCoherentLocallyFiniteTor.lean",
+  "statement": "theorem perfect_isPseudoCoherent_and_hasLocallyFiniteTorDimension (X : Scheme.{uP}) [HasDerivedCategory.{wP} (SheafOfModules.{uP} (moduleRings X.toRingedSpace))] [∀ U : X.Opens, HasDerivedCategory.{wP} (SheafOfModules.{uP} ((moduleRings X.toRingedSpace).over U))] [∀ U : X.Opens, HasDerivedCategory.{wP} (SheafOfModules.{uP} (moduleRings U.toScheme.toRingedSpace))] (E : schemeDerivedCategory X) (hE : IsPerfect X E) : IsPseudoCoherent X E ∧ HasLocallyFiniteTorDimension X E",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-ppt1520"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-ppt1520",
+  "group": "J1",
+  "result": "fix",
+  "note": "08CQ (1)=>(2): X Scheme, E : schemeDerivedCategory X, hE Scheme.IsPerfect (M1); conclusion Scheme.IsPseudoCoherent (M1) and HasLocallyFiniteTorDimension; new def-pc-locally-finite-tor-dimension pointwise open nbhd U, a<=b, all O_U-modules G, i<a or b<i, restated via landed schemeDerivedTensorCohomologyVanishes on U.toScheme of (derivedPullback U.ι).obj E (was an over-site re-spelling with 3 letI); extra HasDerivedCategory binder on U.toScheme is a localization model; no let, universes shared"
  }
 }

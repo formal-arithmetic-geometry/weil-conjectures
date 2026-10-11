@@ -1,0 +1,111 @@
+{
+ "id": "def-pc-locally-finite-tor-dimension",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "set-of-representatives proof, affine case: local finite Tor dimension",
+   "via": [
+    "lem-pc-perfect-pseudo-coherent-locally-finite-tor",
+    "lem-pc-perfect-affine-bounded-projective",
+    "lem-pc-perfect-complexes-compact-set",
+    "lem-pc-derived-qcoh-compact-generation",
+    "lem-pc-noetherian-derived-direct-image-right-adjoint",
+    "lem-sc-proper-upper-shriek-composition",
+    "lem-sc-finite-duality-trace"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "definition",
+ "title": "Locally finite Tor dimension",
+ "statement": "Let $X$ be a scheme [def-pc-scheme] and $E\\in D(\\mathcal O_X)$ [def-pc-derived-category]. Say that $E$ locally has finite Tor dimension if every point $x\\in X$ has an open neighbourhood $U$ and integers $a\\le b$ such that $H^i(E|_U\\otimes^{\\mathbf L}_{\\mathcal O_U}\\mathcal G)=0$ for every $\\mathcal O_U$-module $\\mathcal G$ and every $i\\notin[a,b]$. Here $U$ is the open subscheme, $E|_U=Lj^*E$ is the derived pullback [def-pc-derived-pullback] along the inclusion $j:U\\to X$, and $H^i(E|_U\\otimes^{\\mathbf L}_{\\mathcal O_U}\\mathcal G)=0$ is the derived tensor cohomology vanishing predicate on $U$ [def-pc-derived-tensor-cohomology-vanishes].",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Definition 08CG (cohomology-definition-tor-amplitude), clause (3)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-derived-pullback",
+  "def-pc-derived-tensor-cohomology-vanishes"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "perfect complex is pseudo coherent and locally finite Tor dimension",
+   "results": "Internal Server Error: service unavailable",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "locally finite Tor dimension sheaves modules perfect pseudo coherent",
+   "results": "SheafOfModules.IsFiniteType, IsFinitePresentation, QuasicoherentData.IsFinitePresentation: module finiteness notions, no match",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "HasLocallyFiniteTorDimension",
+   "results": "0 hits; unknown identifier",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "locally finite Tor|HasLocallyFiniteTorDimension|TorAmplitude|pseudo.?coherent in Mathlib, WeilConjectures, lean/Sheaf and dag/nodes",
+   "results": "No local finite Tor predicate. Source DerivedCategory.Perfect/IsPerfect is for ModuleCat R, and ProEtale/Derived/TorAmplitude is for pro-etale coefficient sheaves. Existing def-pc-derived-tensor-cohomology-vanishes gives global scheme vanishing only; reused its K-flat/total-tensor ingredients on the over site. Existing Scheme.IsPerfect and IsPseudoCoherent are the dependency notions, not the local Tor predicate or this implication.",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.LocallyFiniteTorDimension",
+  "declaration": "AlgebraicGeometry.Scheme.HasLocallyFiniteTorDimension",
+  "file": "lean/Sheaf/AlgebraicGeometry/LocallyFiniteTorDimension.lean",
+  "statement": "def HasLocallyFiniteTorDimension (X : Scheme.{u}) [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] [∀ U : X.Opens, HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))] (E : schemeDerivedCategory X) : Prop",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-ppt1520"
+ },
+ "created": {
+  "by": "worker",
+  "item": "lem-pc-perfect-pseudo-coherent-locally-finite-tor",
+  "date": "2026-10-11",
+  "group": "J1"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-ppt1520",
+  "group": "J1",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-ppt1520",
+  "group": "J1",
+  "result": "fix",
+  "note": "08CQ (1)=>(2): X Scheme, E : schemeDerivedCategory X, hE Scheme.IsPerfect (M1); conclusion Scheme.IsPseudoCoherent (M1) and HasLocallyFiniteTorDimension; new def-pc-locally-finite-tor-dimension pointwise open nbhd U, a<=b, all O_U-modules G, i<a or b<i, restated via landed schemeDerivedTensorCohomologyVanishes on U.toScheme of (derivedPullback U.ι).obj E (was an over-site re-spelling with 3 letI); extra HasDerivedCategory binder on U.toScheme is a localization model; no let, universes shared"
+ }
+}
