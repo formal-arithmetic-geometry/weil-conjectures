@@ -72,7 +72,8 @@ lemma unit_app_comp_lowerStarCompSheafSectionsTerminalIso_hom_app_comp
         (op (⊤_ X.Etale)) =
     B.obj.map (terminal.from ((MorphismProperty.Over.map ⊤ hf).obj (⊤_ X.Etale))).op := by
   let ι := upperStarIsoLocalizationRestriction AddCommGrpCat.{u + 1} f hf
-  let P := PreservesTerminal.iso (MorphismProperty.Over.pullback @AlgebraicGeometry.Etale ⊤ f)
+  let P : (MorphismProperty.Over.pullback @AlgebraicGeometry.Etale ⊤ f).obj (⊤_ Y.Etale) ≅
+      ⊤_ X.Etale := PreservesTerminal.iso _
   have h₁ : ((upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} f).unit.app B).hom.app
         (op (⊤_ Y.Etale)) ≫ (ι.hom.app B).hom.app
           (op ((MorphismProperty.Over.pullback @AlgebraicGeometry.Etale ⊤ f).obj
@@ -90,9 +91,9 @@ lemma unit_app_comp_lowerStarCompSheafSectionsTerminalIso_hom_app_comp
         ((f)^*[AddCommGrpCat.{u + 1}].obj B).obj.map P.inv.op := rfl
   rw [h₃, h₂, ← Category.assoc, h₁, hm]
   change B.obj.map _ ≫ B.obj.map _ = _
-  rw [← Functor.map_comp, ← op_comp]
-  congr 2
-  exact terminal.hom_ext _ _
+  rw [← Functor.map_comp]
+  congr 1
+  exact Quiver.Hom.unop_inj (terminal.hom_ext _ _)
 
 /-- **The comparison map in degree `0` along an étale morphism.** For an étale `f : X ⟶ Y`
 and an abelian sheaf `F` on `Y_ét`, the comparison map
@@ -114,7 +115,10 @@ theorem upperStarIsoLocalizationRestriction_hom_app_equiv₀_cohomologyMap
       Sheaf.H.equiv₀ G terminalIsTerminal (Ext.mk₀ ψ) =
         ((constantSheafAdj S.smallEtaleTopology AddCommGrpCat.{u + 1}
           terminalIsTerminal).homEquiv _ _ ψ) (ULift.up 1) := by
-    simp [Sheaf.H.equiv₀]
+    have h : Ext.addEquiv₀ (Ext.mk₀ ψ) = ψ := Ext.addEquiv₀.apply_symm_apply ψ
+    simp only [Sheaf.H.equiv₀, AddEquiv.trans_apply]
+    erw [h]
+    rfl
   obtain ⟨φ, rfl⟩ := (Ext.mk₀_bijective _ F).2 x
   have hc : cohomologyMap f F 0 (Ext.mk₀ φ) =
       Ext.mk₀ (e.inv.app M ≫ (f)^*[AddCommGrpCat.{u + 1}].map φ) := by
@@ -132,8 +136,21 @@ theorem upperStarIsoLocalizationRestriction_hom_app_equiv₀_cohomologyMap
     rw [← unit_app_comp_lowerStarCompSheafSectionsTerminalIso_hom_app_comp f hf]
     simp [Adjunction.comp_unit_app]
     rfl
-  rw [hc, key, key, Adjunction.homEquiv_unit, Adjunction.homEquiv_unit]
-  sorry
+  rw [hc, key, key]
+  have hn : e.inv.app M ≫ (f)^*[AddCommGrpCat.{u + 1}].map φ ≫ ι.hom.app F =
+      (e.inv.app M ≫ ι.hom.app _) ≫ (localizationRestriction AddCommGrpCat.{u + 1} f hf).map φ := by
+    rw [Category.assoc, ι.hom.naturality]
+  have h₁ := congrArg (fun g ↦ ((constantSheafAdj X.smallEtaleTopology AddCommGrpCat.{u + 1}
+    terminalIsTerminal).homEquiv _ _ g) (ULift.up 1)) hn
+  simp only at h₁
+  have hB' := hB
+  rw [Adjunction.homEquiv_naturality_right] at hB'
+  simp only [Adjunction.homEquiv_naturality_right, Functor.map_comp, Category.assoc] at h₁
+  erw [reassoc_of% hB'] at h₁
+  refine h₁.trans ?_
+  rw [Adjunction.homEquiv_unit]
+  simp only [ConcreteCategory.comp_apply]
+  exact NatTrans.naturality_apply φ.hom _ _
 
 end Zero
 
