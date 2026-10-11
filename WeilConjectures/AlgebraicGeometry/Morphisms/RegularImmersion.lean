@@ -183,6 +183,76 @@ theorem IsRegularImmersion.ringKrullDim_stalk_add {k : Type u} [Field k] [Perfec
       (RingHom.quotientKerEquivOfSurjective (i.stalkMap_surjective z)), List.length_map] at key
   exact key.symm
 
+/-- Blueprint `sk-lem-regular-smooth`: A regular immersion of smooth schemes over a perfect
+field
+
+**Local constancy of the dimensions.** With the hypotheses of
+`AlgebraicGeometry.IsRegularImmersion.smooth_comp`, every point of `Z` has an affine open
+neighbourhood `W` in `X` on which `X` is smooth of some relative dimension `n` and `Z ∩ W` is
+smooth of some relative dimension `m`, with `m + c = n`.
+
+Smooth morphisms are smooth of constant relative dimension locally on the source. The relation
+`m + c = n` is the dimension count `AlgebraicGeometry.IsRegularImmersion.ringKrullDim_stalk_add`
+at a closed point of `Z ∩ W`, where the local rings of `X` and `Z` have dimensions `n` and `m`. -/
+theorem IsRegularImmersion.exists_isAffineOpen_smoothOfRelativeDimension {k : Type u} [Field k]
+    [PerfectField k] (c : ℕ) (i : Z ⟶ X) [IsRegularImmersion c i] (aX : X ⟶ Spec (.of k))
+    [Smooth aX] (hZ : ∀ z : Z, IsRegularLocalRing (Z.presheaf.stalk z)) (z : Z) :
+    ∃ (W : X.Opens) (_ : IsAffineOpen W) (_ : i.base z ∈ W) (n m : ℕ), m + c = n ∧
+      SmoothOfRelativeDimension n (W.ι ≫ aX) ∧
+        SmoothOfRelativeDimension m ((i ⁻¹ᵁ W).ι ≫ i ≫ aX) := by
+  obtain ⟨U₁, V₁, -, -, hzV₁, e₁, n, hn⟩ := Smooth.exists_smoothOfRelativeDimension_resLE aX (i z)
+  have h₁ : SmoothOfRelativeDimension n (V₁.ι ≫ aX) := by
+    rw [← Scheme.Hom.resLE_comp_ι aX e₁]
+    have : SmoothOfRelativeDimension (n + 0) (aX.resLE U₁ V₁ e₁ ≫ U₁.ι) := inferInstance
+    simpa using this
+  have : Smooth (i ≫ aX) := IsRegularImmersion.smooth_comp c i aX hZ
+  obtain ⟨U₂, V₂, -, -, hzV₂, e₂, m, hm⟩ :=
+    Smooth.exists_smoothOfRelativeDimension_resLE (i ≫ aX) z
+  have h₂ : SmoothOfRelativeDimension m (V₂.ι ≫ i ≫ aX) := by
+    rw [← Scheme.Hom.resLE_comp_ι (i ≫ aX) e₂]
+    have : SmoothOfRelativeDimension (m + 0) ((i ≫ aX).resLE U₂ V₂ e₂ ≫ U₂.ι) := inferInstance
+    simpa using this
+  obtain ⟨W₂, hW₂, hV₂⟩ := i.isClosedEmbedding.isInducing.isOpen_iff.mp V₂.isOpen
+  obtain ⟨_, ⟨W₀, hW, rfl⟩, hzW, hWV⟩ := X.isBasis_affineOpens.exists_subset_of_mem_open
+    (show i z ∈ (V₁ : Set X) ∩ W₂ from ⟨hzV₁, by rw [← Set.mem_preimage, hV₂]; exact hzV₂⟩)
+    (V₁.isOpen.inter hW₂)
+  let W : X.Opens := W₀
+  have hW₁ : W ≤ V₁ := fun x hx ↦ (hWV hx).1
+  have hWZ : i ⁻¹ᵁ W ≤ V₂ := fun x hx ↦ by
+    change x ∈ (V₂ : Set Z)
+    rw [← hV₂]
+    exact (hWV hx).2
+  have hnW : SmoothOfRelativeDimension n (W.ι ≫ aX) := by
+    rw [← X.homOfLE_ι hW₁, Category.assoc]
+    have : SmoothOfRelativeDimension (0 + n) (X.homOfLE hW₁ ≫ V₁.ι ≫ aX) := inferInstance
+    simpa using this
+  have hmW : SmoothOfRelativeDimension m ((i ⁻¹ᵁ W).ι ≫ i ≫ aX) := by
+    rw [← Z.homOfLE_ι hWZ, Category.assoc]
+    have : SmoothOfRelativeDimension (0 + m) (Z.homOfLE hWZ ≫ V₂.ι ≫ i ≫ aX) := inferInstance
+    simpa using this
+  refine ⟨W, hW, hzW, n, m, ?_, hnW, hmW⟩
+  -- compare the dimensions of the local rings at a closed point of `Z ∩ W`
+  have : IsAffine (i ⁻¹ᵁ W).toScheme := (hW.preimage i : IsAffineOpen (i ⁻¹ᵁ W))
+  have : Nonempty (i ⁻¹ᵁ W).toScheme := ⟨⟨z, hzW⟩⟩
+  obtain ⟨z', -, hz'⟩ := isClosed_univ.exists_closed_singleton (X := (i ⁻¹ᵁ W).toScheme)
+    Set.univ_nonempty
+  let w' : W.toScheme := ⟨i ((i ⁻¹ᵁ W).ι z'), z'.2⟩
+  have hw' : IsClosed ({w'} : Set W.toScheme) := by
+    have : (i ∣_ W).base z' = w' := by
+      apply Subtype.ext
+      simp [w', morphismRestrict_base_coe]
+    rw [← this, ← Set.image_singleton]
+    exact (i ∣_ W).isClosedEmbedding.isClosedMap _ hz'
+  have key := IsRegularImmersion.ringKrullDim_stalk_add c i aX hZ ((i ⁻¹ᵁ W).ι z')
+  rw [ringKrullDim_stalk_eq_coheight, ringKrullDim_stalk_eq_coheight,
+    show i ((i ⁻¹ᵁ W).ι z') = W.ι w' from rfl, coheight_eq_of_isOpenImmersion,
+    coheight_eq_of_isOpenImmersion,
+    coheight_eq_of_smoothOfRelativeDimension_of_isClosed (W.ι ≫ aX) n hw',
+    coheight_eq_of_smoothOfRelativeDimension_of_isClosed ((i ⁻¹ᵁ W).ι ≫ i ≫ aX) m hz'] at key
+  have key' : ((n : ℕ∞) : WithBot ℕ∞) = (((m + c : ℕ) : ℕ∞) : WithBot ℕ∞) := by
+    rw [key]; push_cast; rfl
+  exact_mod_cast (WithBot.coe_injective key').symm
+
 namespace IsRegularImmersion
 
 open RingTheory.Sequence
