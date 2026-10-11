@@ -23,7 +23,8 @@ blueprint `sk-lem-sf-mate` in its constructible form: the mate of the compositio
 `R(g ∘ f)_! ≅ Rg_! Rf_!` under these adjunctions is an isomorphism `R(g ∘ f)^! ≅ Rf^! Rg^!` of
 functors `D⁺(Z_proét) ⥤ D⁺(X_proét)`, the unit and counit of the composite adjunction being the
 pasted ones; and it restricts to `Dctf` as soon as the three functors preserve `Dctf`. It also
-records the formal clause (a), for any ambient right adjoints of the pro-étale `Rf_!`.
+records the formal clause (a), for the ambient right adjoints, and that the constructible
+adjunction is the restriction of any ambient one.of the pro-étale `Rf_!`.
 
 ## Main definitions
 
@@ -41,8 +42,10 @@ records the formal clause (a), for any ambient right adjoints of the pro-étale 
   `R(f ≫ g)^! ≅ Rg^! ⋙ Rf^!` on `D⁺(Z_proét)`.
 - `AlgebraicGeometry.ProEtale.exists_rightDerivedUpperShriekAdjunction_comp_eq_of_finiteTor`: the
   restriction to `Dctf`.
-- `AlgebraicGeometry.ProEtale.ofNatIsoLeft_ofNatIsoRight_conjugateIsoEquiv_eq_comp`: clause (a),
-  for any ambient right adjoints.
+- `HasAmbientExceptionalRightAdjoint.ofNatIsoLeft_ofNatIsoRight_conjugateIsoEquiv` (in the
+  namespace `AlgebraicGeometry.ProEtale`): clause (a), the ambient form.
+- `AlgebraicGeometry.ProEtale.exists_bijective_comp_and_homEquiv_symm_comp_eq`: under the ambient
+  datum, the constructible adjunction is the restriction of the ambient one.
 
 ## Implementation notes
 
