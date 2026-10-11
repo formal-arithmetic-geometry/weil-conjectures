@@ -1,17 +1,16 @@
 # Work queue
 
-981 items; claim with `tools/claim.py next <group> [--stage N]`.
+988 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (981)
+## Stage 2: nodes to state (988)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
 | `def-pc-module-pullback` | 1 | state |
 | `def-pur-sheaf-hom` | 1 | state |
-| `def-weil-pbc-ample-invertible-module` | 1 | state |
 | `def-weil-pbc-derived-categories` | 1 | state |
 | `def-weil-pbc-etale-constructible-sheaf` | 1 | state |
 | `def-weil-pbc-finite-torsors` | 1 | state |
@@ -43,27 +42,30 @@
 | `lem-pc-stalk-tensor-complex` | 1 | state |
 | `lem-pc-tor-independent-projective-complex-tensor` | 1 | state |
 | `lem-pc-tower-enough-injectives` | 1 | state |
-| `lem-pod-equivalence-induces-module-objects` | 1 | state |
-| `lem-pod-etale-stalk-tensor-scalar` | 1 | state |
 | `lem-pod-lisse-module-sheaves-as-module-objects` | 1 | state |
 | `lem-pod-lisse-tensor-and-scalar-extension` | 1 | state |
 | `lem-pur-kinjective-acyclic-quotient-complexes-bounded-size` | 1 | state |
 | `lem-pur-kinjective-homotopy-limit-vanishing` | 1 | state |
 | `lem-pur-kinjective-surjection-bounded-size` | 1 | state |
-| `lem-pur-ringed-site-grothendieck-abelian` | 1 | state |
 | `lem-sc-acyclic-comparison-natural` | 1 | state |
+| `lem-sc-affine-cap-section-open` | 1 | state |
 | `lem-sc-affine-finite-module-free-locus` | 1 | state |
 | `lem-sc-affine-finite-projective-prime-membership` | 1 | state |
-| `lem-sc-affine-totalquotient-minimal-product` | 1 | state |
 | `lem-sc-affine-weakass-nonzerodivisors` | 1 | state |
+| `lem-sc-ample-finite-affine-cover` | 1 | state |
+| `lem-sc-ample-finite-principal-affine` | 1 | state |
+| `lem-sc-ample-finite-set-affine` | 1 | state |
 | `lem-sc-ample-proj-canonical-map` | 1 | state |
+| `lem-sc-ample-proj-local-chart` | 1 | state |
+| `lem-sc-ample-proj-open` | 1 | state |
 | `lem-sc-bounded-below-injective-resolution` | 1 | state |
 | `lem-sc-closed-affine-union-affine` | 1 | state |
-| `lem-sc-coherent-ring-fp-kernel-cokernel` | 1 | state |
 | `lem-sc-complex-lift-acyclic-projective` | 1 | state |
+| `lem-sc-conductor-sections` | 1 | state |
 | `lem-sc-cone-pseudo-coherent` | 1 | state |
 | `lem-sc-derived-hom-mayer-vietoris` | 1 | state |
 | `lem-sc-determinant-short-exact` | 1 | state |
+| `lem-sc-dim-one-ample-invertible` | 1 | state |
 | `lem-sc-dim-one-quasi-projective` | 1 | state |
 | `lem-sc-dual-number-scheme-pushout` | 1 | state |
 | `lem-sc-dvr-field-extension-order` | 1 | state |
@@ -72,6 +74,7 @@
 | `lem-sc-dvr-valuation-ring-characterization` | 1 | state |
 | `lem-sc-effective-cartier-affine-dimension-drop` | 1 | state |
 | `lem-sc-effective-cartier-dimension-drop` | 1 | state |
+| `lem-sc-enough-globally-generated-ample` | 1 | state |
 | `lem-sc-etale-at-prime-flat-unramified-criterion` | 1 | state |
 | `lem-sc-etale-coproduct-etale` | 1 | state |
 | `lem-sc-etale-fibre-product-coproduct` | 1 | state |
@@ -92,11 +95,13 @@
 | `lem-sc-finite-length-global-submodule` | 1 | state |
 | `lem-sc-finite-maximals-over-element` | 1 | state |
 | `lem-sc-finite-pushforward-locally-free` | 1 | state |
+| `lem-sc-finite-sections-cover-qc` | 1 | state |
 | `lem-sc-finite-type-nonclosed-closure-closed-points` | 1 | state |
 | `lem-sc-free-prime-membership` | 1 | state |
 | `lem-sc-generic-stalk-finite-length` | 1 | state |
 | `lem-sc-generic-vanishing-kernel-colimit` | 1 | state |
 | `lem-sc-genus-invariant` | 1 | state |
+| `lem-sc-global-generation-nonvanishing-cover` | 1 | state |
 | `lem-sc-global-sections-left-exact` | 1 | state |
 | `lem-sc-glue-component-line-bundles` | 1 | state |
 | `lem-sc-glue-component-reduced-cover-sections` | 1 | state |
@@ -157,6 +162,7 @@
 | `lem-sc-tangent-space-vector-space` | 1 | state |
 | `lem-sc-tensor-generating-sections` | 1 | state |
 | `lem-sc-tensor-globally-generated` | 1 | state |
+| `lem-sc-tensor-section-affine-open` | 1 | state |
 | `lem-sc-valuation-zero-section-relative-cartier` | 1 | state |
 | `lem-sc-weakass-localization` | 1 | state |
 | `lem-sc-zariski-contracted-power-torsor` | 1 | state |
@@ -180,6 +186,7 @@
 | `lem-weil-pbc-affine-formally-smooth-iff-ring-lifting` | 1 | state |
 | `lem-weil-pbc-affine-tilde-tensor` | 1 | state |
 | `lem-weil-pbc-algebra-colimit-fp-algebras-over-it` | 1 | state |
+| `lem-weil-pbc-ample-scheme-separated` | 1 | state |
 | `lem-weil-pbc-analytic-unramified-principal-criterion` | 1 | state |
 | `lem-weil-pbc-analytically-unramified-n1` | 1 | state |
 | `lem-weil-pbc-annihilator-element-flat-base-change` | 1 | state |
@@ -991,7 +998,7 @@
 | `lem-sc-normalization-properties` | 3 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 1031 nodes that wait for a statement dependency, 40 nodes that wait for stage 1.
+Not open yet: 1018 nodes that wait for a statement dependency, 40 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
