@@ -4847,3 +4847,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 14:00 L: merged deliver/G1/lem-weil-pbc-regular-permanence (stage 2; reviewer FIX; first push; Sheaf.RingTheory.RegularPermanence RingHom.isRegular_of_isRegular_comp)
 - 14:00 L: merged deliver/F1/lem-sc-valuation-limit-qcoh-section-descent (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.ValuationLimitQcohSectionDescent AlgebraicGeometry.valuation_limit_qcoh_section_descent)
 - 14:01 L: merged deliver/F1/lem-weil-pbc-quotient-base-change-closed-immersion-ideal (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.QuotientBaseChangeIdeal AlgebraicGeometry.quotientBaseChange_closedImmersion_ideal)
+- 14:01 L: merged deliver/E1/lem-weil-pbc-regular-sequence-swap-two (stage 2; reviewer PASS; first push; Sheaf.RingTheory.RegularSequenceSwapTwo RingTheory.Sequence.IsRegular.swap_of_isSMulRegular)
