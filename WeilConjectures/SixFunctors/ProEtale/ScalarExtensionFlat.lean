@@ -112,7 +112,8 @@ theorem isIso_biproductDesc_sheafExtendScalarsAdjunction_unit [Module.Finite R S
     intro i
     simp only [biproduct.ι_desc, biproduct.ι_desc_assoc, Functor.map_comp]
     change ((Sheaf.adjunction _
-        (ModuleCat.extendRestrictScalarsAdj.{u + 1, u + 1, u + 1} φ)).unit.app F).hom ≫ Functor.whiskerRight ((b i : S) • 𝟙 ((sheafExtendScalars φ X).obj F)).hom
+        (ModuleCat.extendRestrictScalarsAdj.{u + 1, u + 1, u + 1} φ)).unit.app F).hom ≫
+        Functor.whiskerRight ((b i : S) • 𝟙 ((sheafExtendScalars φ X).obj F)).hom
           (ModuleCat.restrictScalars.{u + 1} φ) = _
     rw [Sheaf.adjunction_unit_app_hom]
     simp only [ψ, t, Category.assoc, ← Functor.whiskerRight_comp]
