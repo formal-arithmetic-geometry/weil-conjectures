@@ -124,5 +124,23 @@
   "group": "K1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-fcc (reviewer sub-agent of L); spot-checked: Source Stacks Tag 0032 (categories-lemma-directed-category-system) with Definition 04E6 (definition-cofinal, categories.tex read): the item statement agrees with it (small filtered J, one nonempty directed A with x_a, phi_ab serving all C and M, clause (1) colimits, clause (2) limits of contravariant diagrams). Leaf lem-weil-pbc-filtered-category-exists-directed-final verified at Mathlib/CategoryTheory/Presentable/Directed.lean:544 (IsFiltered.exists_directed, @[stacks 0032] at 543): nonempty directed partial order and F.Final, exact. Step 1 carried by the leaf; step 2 by lem-weil-pbc-initial-functor-cofiltered-criterion clause (1) with A:=A^op, B:=J^op, H:=F^op (canonical map induced by the coprojections iota_{F(a)} is an iso); step 3 by lem-weil-pbc-initial-functor-limit clause (a) with H:=F^op. Both cited nodes are off-unit Mathlib leaves used as generic transport tools (C8 accepted). FIX more, RETURN less: (B3) the leaf used 'final' with no definition node; dag/nodes/sec-proper-base-change/lem-weil-pbc-filtered-category-exists-directed-final.json: statement: finality now spelled out as Stacks 04E6 conditions (1) nonempty, (2) alternating zigzag, same mathematics; mathlib_match.how: Final.out (Limits/Final.lean:96, IsConnected (StructuredArrow d F)) plus isPreconnected_zigzag (IsConnected.lean:418) named for the unfolding. (C4/C2) steps 2 and 3 asserted 'F^op is initial because F is final' while the cited nodes require explicit hypotheses (i),(ii) resp. (1),(2); dag/nodes/sec-proper-base-change/lem-weil-pbc-filtered-category-directed-cofinal.json: proof[1].text: derivation of (i) from leaf (1) and of (ii) from leaf (2) by pushing the zigzag to a common upper bound c in A, and the explicit B=J^op, H^op=F instantiation; proof[2].text: (1),(2) of the initial-functor node from leaf (1),(2) by padding the zigzag with identities to the required orientation; proof[1].uses and proof[2].uses: leaf added; proof[0].text: wording (finality conditions, phi_aa=id, phi_bc phi_ab=phi_ac). proof_deps unchanged (already the union). Small cases: one-object J (A singleton, both clauses tautological), J a directed poset with F=id (usual directed (co)limits). Start Sat Oct 10 03:28:06 PM UTC 2026, end Sat Oct 10 03:30:20 PM UTC 2026; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.ExistsDirectedReindexing",
+  "declaration": "CategoryTheory.exists_directed_reindexing",
+  "file": "lean/Sheaf/CategoryTheory/ExistsDirectedReindexing.lean",
+  "statement": "theorem exists_directed_reindexing (J : Type w) [SmallCategory J] [IsFiltered J] : ∃ (A : Type w) (_ : Preorder A) (_ : IsDirected A (· ≤ ·)) (_ : Nonempty A) (F : A ⥤ J), ∀ (C : Type u) (_ : Category.{v} C), (∀ (M : J ⥤ C) (c : Cocone M), IsColimit c → Nonempty (IsColimit (c.whisker F))) ∧ (∀ (M : Jᵒᵖ ⥤ C) (c : Cone M), IsLimit c → Nonempty (IsLimit (c.whisker F.op)))",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-fcd1011",
+  "group": "J1",
+  "result": "pass",
+  "note": "Stacks 0032 (1)(2) vs node: small filtered J = [SmallCategory J] [IsFiltered J]; nonempty directed set = Preorder+IsDirected+Nonempty (STATE DIRECTED SETS); x_a, phi_ab with phi_aa=id, phi_bc.phi_ab=phi_ac = F : A ⥤ J (functoriality); exists A,F before forall C,M (same system for all C,M); (1) every colimit cocone of M:J⥤C stays colimit after whisker F (same vertex, legs iota_{x_a}); (2) every limit cone of M:Jᵒᵖ⥤C stays limit after whisker F.op (inverse system over Aᵒᵖ); no completeness hypotheses; not literally Mathlib (exists_directed gives Final only, transport via Final.isColimitWhiskerEquiv separate) so existing:false right; deps Cocone/IsColimit/IsFiltered recorded Mathlib; universe of C fixed per instance (u v outer) unavoidable"
  }
 }
