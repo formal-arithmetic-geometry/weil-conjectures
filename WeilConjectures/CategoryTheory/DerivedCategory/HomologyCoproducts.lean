@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.CategoryTheory.DerivedCategory.Coproducts
 public import WeilConjectures.CategoryTheory.DerivedCategory.ProjectiveSingleHom
-public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Colimits
+public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Products
 
 /-!
 # Homology commutes with coproducts in the derived category
