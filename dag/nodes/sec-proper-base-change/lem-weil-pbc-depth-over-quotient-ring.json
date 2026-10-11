@@ -163,5 +163,24 @@
   "group": "C1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of C1; spot-checked by L: 0AUK for a quotient map: R/I local Noetherian, regular sequences and m M agree for R and R/I on M, so the depths agree"
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.DepthOverQuotientRing",
+  "declaration": "IsLocalRing.depth_over_quotient_ring",
+  "file": "lean/Sheaf/RingTheory/DepthOverQuotientRing.lean",
+  "statement": "theorem depth_over_quotient_ring (R : Type u) [CommRing R] [IsNoetherianRing R] [IsLocalRing R] (I : Ideal R) (hI : I ≤ maximalIdeal R) (M : Type v) [AddCommGroup M] [Module R M] [Module.Finite R M] (hIM : Module.IsTorsionBySet R M (I : Set R)) : letI : Nontrivial (R ⧸ I) := Ideal.Quotient.nontrivial_iff.mpr (ne_top_of_le_ne_top (maximalIdeal.isMaximal R).ne_top hI) letI : IsLocalRing (R ⧸ I) := IsLocalRing.of_surjective' (Ideal.Quotient.mk I) Ideal.Quotient.mk_surjective letI : Module (R ⧸ I) M := hIM.module haveI : Module.Finite (R ⧸ I) M := Module.Finite.of_restrictScalars_finite R (R ⧸ I) M depth (R := R ⧸ I) M = depth (R := R) M ∧ depth (R := R ⧸ I) (R ⧸ I) = depth (R := R) (R ⧸ I)",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-dqr0939"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-dqr0939",
+  "group": "C1",
+  "result": "fix",
+  "note": "Noetherian local R; I ≤ m; finite R-module M; IM=0 as IsTorsionBySet; R/I-action = hIM.module, finite over R/I derived; R/I local from I≠⊤; depth_{R/I} M = depth_R M and the M=R/I case, via IsLocalRing.depth"
  }
 }

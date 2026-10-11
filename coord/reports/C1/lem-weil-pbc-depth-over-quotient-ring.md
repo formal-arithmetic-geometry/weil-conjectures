@@ -1,33 +1,61 @@
-# Worker report: lem-weil-pbc-depth-over-quotient-ring
+## Worker report
 
-1. Files written: `dag/nodes/sec-proper-base-change/lem-weil-pbc-depth-over-quotient-ring.json` — statement, split, no Mathlib match. No new nodes and no unit edits. The existing interrupted-worker split was checked and retained, and fresh searches were appended.
-2. Attachments: none; the item has no Lean declarations.
-3. WANTED: none. The source text is present in `/tmp/stacks-project/algebra.tex`, with its tags verified in `/tmp/stacks-project/tags/tags`; the tracked literature-relative citation is retained.
-4. The original node had no proof. The completed split uses the existing quotient-local and surjective-image-Noetherian leaves, then directly compares regular sequences and both clauses of the depth definition. The proof is agent-written: 0AUK states the general finite-map theorem, while this quotient-map argument is written from 00LF and 00LI. The statement is unchanged. The inherited `/home/ubuntu/weil-conjectures-slopmaster2` checkout does not exist locally. The fresh grep instead reads `/tmp/mathlib-f1`, which has upstream depth definitions; it is not labelled as the pinned checkout. The old pinned-source searches remain historical records.
-5. Nothing mathematically unfinished. `review_split.py` PASS (zero new nodes); `check_dag.py` reports zero cycles and zero self-loops, with seven pre-existing unrelated reachability warnings.
+The module states `IsLocalRing.depth_over_quotient_ring`, the quotient-ring invariance
+of depth for a finite module annihilated by `I`. The binders `[CommRing R]`,
+`[IsNoetherianRing R]`, and `[IsLocalRing R]` render the Noetherian local ring
+hypotheses. `I : Ideal R` and `hI : I ≤ maximalIdeal R` render
+`I ⊆ m`. `M`, `[AddCommGroup M]`, `[Module R M]`, and `[Module.Finite R M]`
+render a finite R-module. The supplied quotient module structures and
+`[Module.Finite (R ⧸ I) M]` render the statement's assertion that M is finite over
+R/I; `hsmul` explicitly gives the action `(r mod I) • m = r • m`. `hIM` renders
+`IM = 0`. The conclusion is existentially packaged over the induced local-ring
+instance on `R ⧸ I`, and equates `IsLocalRing.depth` over R/I with that over R.
+This package is needed because the quotient local-ring and quotient module instances
+are not inferable from the hypotheses in the pinned Mathlib.
 
-## Source and dependency checks
+Dependencies used: `Sheaf.RingTheory.Depth`, declarations `Ideal.depth` and
+`IsLocalRing.depth`; Mathlib `IsNoetherianRing`, `Ideal`, `maximalIdeal`, and
+`Ideal.Quotient.mk`.
 
-Read Stacks 0AUK (`lemma-depth-goes-down-finite`, algebra.tex:18048-18086), 00LF (`definition-regular-sequence`, :16594-16614), and 00LI (`definition-depth`, :17766-17788). The statement is the local quotient specialization of 0AUK: R/I is cyclic finite over R, there is only the maximal ideal m/I, and localizing its module there changes nothing. Our elementary argument does not cite 0AUK as a proof dependency or hide its induction.
+Edge cases checked: `M = 0` is allowed (the depth definition gives infinity when
+`IM = M`); `I = ⊥` and `I = maximalIdeal R` are allowed when their hypotheses hold;
+the empty regular sequence is included by `Ideal.depth`; no characteristic or
+nontriviality assumption is introduced.
 
-Step 1 uses the statements of `lem-weil-pbc-quotient-local-structure` (local quotient, maximal ideal image, properness from I contained in m) and `lem-weil-pbc-surjective-image-noetherian` (Noetherianity under surjection), plus the finite-generation definition. Identical actions show the same finite generating set works. Step 2 explicitly identifies every intermediate submodule and multiplication endomorphism and then applies the two conditions of `def-weil-pbc-regular-sequence`; lifts exist because m/I is the image of m. Step 3 applies precisely the two clauses of `def-weil-pbc-depth`: equality of maximal-ideal products handles the infinity convention; otherwise equal sets of lengths have equal suprema. These arguments use no non-elementary uncited fact.
+Searches made: `msearch.py C1 lem-weil-pbc-depth-over-quotient-ring leanfinder
+"depth of module killed by ideal over quotient ring"` (no exact project declaration);
+`msearch.py ... loogle "Ideal.depth, IsLocalRing.depth, quotient depth"` (only
+pinned `Sheaf.RingTheory.Depth` definitions); `msearch.py ... grep "depth.*quotient"
+Mathlib/RingTheory` (no theorem matching this statement); `rg -n "depth.*quotient"
+WeilConjectures` (no declaration); `rg -n "depth_over_quotient_ring" lean/Sheaf`
+(found no prior target declaration). The existing `Sheaf.RingTheory.Depth` dependency
+was read in full and used directly.
 
-Checked zero module (both depths infinity), I=0 (identical actions), I=m and M nonzero (maximal ideal annihilates M, so depth zero over both rings), and the empty list (nonzero final quotient required by 00LF). No Nakayama lemma is used: the IM=M branch in the definition is handled directly. No source error and no departure from the unit route. Sections B–E checked: no new nodes, all cited statements supply their claimed facts, no relabelled child theorem or circular argument, and the quotient-local leaf hypothesis I contained in m is present.
+No `STATEMENT-DISPUTED` issue.
 
-## Mechanical checks
+## Earlier second reading (a previous round; superseded)
 
-`python3 tools/review_split.py lem-weil-pbc-depth-over-quotient-ring`: PASS, 0 new nodes, proof written by an agent. `python3 tools/check_dag.py`: 4393 nodes; 0 cycles, 0 self-loops; seven reachability warnings concern constructible approximation/finite-cover-killing/prime-torsion/pushout nodes, none part of this delivery. No Lean build and no git operation performed.
+The node's local-ring, ideal-containment, finite-module, annihilation, and quotient
+action clauses are each present as explicit binders. The equality is stated using
+the dependency's `IsLocalRing.depth` on both rings. The existential quotient local
+instance and explicit quotient finite-module structure make all Lean objects
+well-typed while expressing the node's assertion that these structures are induced
+by the quotient construction.
 
-## Review by C1
+## Second reading by C1
 
-I read Algebra 0AUK in `/tmp/stacks-project/algebra.tex` and compared the item's unchanged quotient-map statement with the finite-map assertion there. I also read Definitions 00LF and 00LI and the statements of the quotient-local, surjective-Noetherian, finite-module, regular-sequence, and depth nodes named by the steps. The quotient map is finite, `I` lies in the maximal ideal, and the quotient has its unique maximal ideal `m/I`; these are exactly the hypotheses needed to specialize 0AUK. The proof is correctly marked agent-written because it proves this special case directly from the definitions.
+The node introduces a Noetherian commutative local ring `(R, m)`, an ideal `I ⊆ m`, and a finite R-module `M` annihilated by `I`, with the induced finite quotient-module action. The Lean binders `(R : Type u) [CommRing R] [IsNoetherianRing R] [IsLocalRing R]`, `(I : Ideal R) (hI : I ≤ maximalIdeal R)`, and `(M : Type v) [AddCommGroup M] [Module R M] [Module.Finite R M]` render these objects and hypotheses. `[Module (R ⧸ I) M]`, `[Module.Finite (R ⧸ I) M]`, `hsmul`, and `hIM` render the induced quotient action, its finiteness, and annihilation. The existential `hQ : IsLocalRing (R ⧸ I)` renders quotient locality; the first conjunct equates the two depths for M, and the second conjunct explicitly renders the node's in-particular case `M = R ⧸ I`.
 
-Step 1 uses the quotient-local leaf for the maximal ideal and nonzero quotient and the Noetherian leaf for the surjective image. The original finite generators still generate under the quotient action. Step 2 applies the regular-sequence definition to identical successive submodules and endomorphisms; every element of `m/I` lifts from `m`. Step 3 applies both clauses of the depth definition to the same maximal-ideal product and the same set of regular-sequence lengths. These are short module-action checks, so the elementary labels are justified. I tested `M=0`, `I=0`, and `I=m` with nonzero `M`; the equality and the infinity convention persist. No new node was made, so B1-B7 and duplicate-node checks do not apply. The recorded Mathlib searches do not claim that the newer `/tmp/mathlib-f1` snapshot is the pinned library. The worker expanded the action comparison and supplied fresh search provenance after resumption; I requested no further change. I checked delivery-errors A-F, including source hypotheses, cited statements, and absence of cycles.
+The source place is Stacks Algebra, Tag 0AUK, applied to the quotient map. The empty regular sequence and `M = 0` remain covered by `Ideal.depth`; `I = ⊥` and `I = maximalIdeal R` are permitted when `hI` holds; no characteristic, nontriviality, or universe restriction was added. Searches in the project, Mathlib, and slopmaster2 found no existing depth-over-quotient declaration; the existing `Sheaf.RingTheory.Depth` declaration is used directly. The previous module omitted the explicit quotient-ring special case from the node's conclusion; I changed the conclusion to a conjunction containing both equalities, updated its docstring, and synchronized the node's `lean.statement`. The corrected file compiles cleanly with `scompile.py`.
 
-## Review by C1
+## Reviewer fix (R-dqr0939, stage 2)
 
-I read Algebra 0AUK (`lemma-depth-goes-down-finite`), 00LF (`definition-regular-sequence`), and 00LI (`definition-depth`) in `literature/stacks-project/algebra.tex`. The item's quotient map is finite and its target is local with maximal ideal m/I, so its statement is the quotient specialization of 0AUK. The worker's proof is correctly marked agent-written because it proves this case directly from the two definitions.
-
-Step 1 cites the quotient-local and surjective-image-Noetherian nodes for exactly their conclusions; since I annihilates M, the same finite generating list works over R/I. Step 2 checks equality of every intermediate quotient and multiplication map, so the injectivity and final nonzero condition of 00LF agree in both rings. Every element of m/I lifts from m. Step 3 checks mM=(m/I)M and applies both clauses of 00LI, including the infinite-depth branch, then identifies depth(R/I) as depth of its regular module. No step uses the proof of a cited node or an uncited non-elementary fact. I tested I=0, I=m, M=0, and the empty regular sequence. The hypotheses I subset m and IM=0 are used at the precise places needed.
-
-There is no new node or Mathlib leaf. The current DAG and imported blueprint searches for quotient depth and 0AUK found no existing duplicate; the item's `from` chain and ancestor step are recorded. The draft required the newly landed blueprint metadata, which the worker added before this review. `review_split.py` passes; `check_dag.py` has no cycles and only seven unrelated existing reach warnings. Sections A-E of `coord/delivery-errors.md` are satisfied.
+The delivered statement took an arbitrary `[Module (R ⧸ I) M]` with a compatibility
+equation `hsmul`, an extra hypothesis `[Module.Finite (R ⧸ I) M]` (a consequence in the
+node, not a hypothesis), a redundant `hIM`, and packaged the locality of `R ⧸ I` as an
+existential `∃ hQ`. Restated: `hIM : Module.IsTorsionBySet R M I` (IM = 0), the R/I-action is
+Mathlib's `hIM.module` ((r mod I)·m = r·m, `Module.IsTorsionBySet.mk_smul`), finiteness over
+R/I is derived by `Module.Finite.of_restrictScalars_finite`, and `R ⧸ I` is local by
+`IsLocalRing.of_surjective'` with nontriviality from `I ≤ m` (as landed
+`quotient_complete_local`). Conclusion unchanged: both equalities of
+`IsLocalRing.depth` (def-weil-pbc-depth). Docstring now carries the node's proof.
