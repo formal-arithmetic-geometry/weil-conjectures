@@ -41,7 +41,7 @@ identity.
 universe u
 
 open CategoryTheory TrivSqZeroExt IsLocalRing
-open scoped MonObj
+open scoped MonObj commutatorElement
 
 namespace AlgebraicGeometry.GrpObj
 
@@ -276,4 +276,351 @@ theorem kerHom_tangentMap_mul_tangentMap (m n : A) (hm : m * m = 0) (hn : n * n 
     kerHom_tangent]
   simp only [fst_add, fst_inl, fst_inr, add_zero, snd_add, snd_inl, snd_inr, zero_add]
   ring
+/-! ### Points killing the maximal ideal are central -/
+
+omit [IsLocalRing A] [IsLocalHom π.toRingHom] in
+theorem dualAug_comp_inlAlgHom : (dualAug π).comp (inlAlgHom k A A) = π := by
+  ext
+  simp
+
+omit [IsLocalRing A] [IsLocalHom π.toRingHom] in
+theorem dualAug_inr_one : dualAug π (inr 1 : DualNumber A) = 0 := by
+  simp
+
+omit [IsLocalRing A] in
+theorem inr_one_mul_self' : (inr 1 : DualNumber A) * inr 1 = 0 := by
+  ext <;> simp
+
+/-- The map `A[τ] → k[ε]`, `x + yτ ↦ π(x) + π(y) ε`. -/
+def resDual (π : A →ₐ[k] k) : DualNumber A →ₐ[k] DualNumber k :=
+  DualNumber.lift ⟨((Algebra.ofId k (DualNumber k)).comp π, inr 1), inr_one_mul_self,
+    fun _ ↦ Commute.all _ _⟩
+
+omit [IsLocalRing A] [IsLocalHom π.toRingHom] in
+theorem resDual_apply (x : DualNumber A) :
+    resDual π x = inl (π x.fst) + inr (π x.snd) := by
+  rw [resDual, DualNumber.lift_apply_apply]
+  ext <;> simp [algebraMap_eq_inl]
+
+omit [IsLocalRing A] [IsLocalHom π.toRingHom] in
+theorem aug₁_comp_resDual : aug₁.comp (resDual π) = dualAug π := by
+  refine AlgHom.ext fun x ↦ ?_
+  simp [resDual_apply]
+
+/-- The map `A[τ] → A`, `τ ↦ m`. -/
+def substDual (m : A) (hm : m * m = 0) : DualNumber A →ₐ[k] A :=
+  DualNumber.lift ⟨(AlgHom.id k A, m), hm, fun _ ↦ Commute.all _ _⟩
+
+omit [IsLocalRing A] [IsLocalHom π.toRingHom] in
+theorem substDual_apply (m : A) (hm : m * m = 0) (x : DualNumber A) :
+    substDual (k := k) m hm x = x.fst + x.snd * m :=
+  rfl
+
+omit [IsLocalRing A] [IsLocalHom π.toRingHom] in
+theorem aug_comp_substDual (m : A) (hm : m * m = 0) (hπ : π m = 0) :
+    π.comp (substDual m hm) = dualAug π := by
+  refine AlgHom.ext fun x ↦ ?_
+  simp [substDual_apply, hπ]
+
+/-- A point `P` over `A[τ]` whose reduction `τ ↦ 0` is `q` and whose residue in `k[ε]` is `u`
+becomes `q + m D_u` after the substitution `τ ↦ m`, when `m` kills the maximal ideal. -/
+theorem kerHom_kerMap_substDual (m : A) (hπm : π m = 0) (hm : ∀ x, π x = 0 → m * x = 0)
+    (P : pointsKer G (dualAug π)) (q : pointsKer G π) (u : pointsKer G aug₁)
+    (hq : kerMap (πA := dualAug π) (πB := π) (fstHom k A A) rfl P = q)
+    (hu : kerMap (resDual π) aug₁_comp_resDual P = u)
+    (a : stalkOne G) :
+    kerHom (kerMap (substDual m (hm m hπm)) (aug_comp_substDual m (hm m hπm) hπm) P) a =
+      kerHom q a + algebraMap k A (tangentCoeff u a) * m := by
+  rw [kerHom_kerMap, RingHom.comp_apply]
+  have h1 : (kerHom P a).fst = kerHom q a := by
+    rw [← hq, kerHom_kerMap]
+    rfl
+  have h2 : π (kerHom P a).snd = tangentCoeff u a := by
+    rw [← hu, tangentCoeff, kerHom_kerMap, RingHom.comp_apply]
+    change _ = (resDual π (kerHom P a)).snd
+    simp [resDual_apply]
+  generalize kerHom P a = Y at h1 h2
+  change substDual m _ Y = _
+  rw [substDual_apply, h1, ← h2]
+  congr 1
+  have : m * (Y.snd - algebraMap k A (π Y.snd)) = 0 := hm _ (by simp)
+  rw [mul_sub] at this
+  rw [mul_comm, sub_eq_zero.mp this, mul_comm]
+
+/-- If `m` kills the maximal ideal, `(u^{(m)} q)^♯ = q^♯ + m D_u`. -/
+theorem kerHom_tangentMap_mul (m : A) (hπm : π m = 0) (hm : ∀ x, π x = 0 → m * x = 0)
+    (u : pointsKer G aug₁) (q : pointsKer G π) (a : stalkOne G) :
+    kerHom (tangentMap m (hm m hπm) hπm u * q) a =
+      kerHom q a + algebraMap k A (tangentCoeff u a) * m := by
+  set uτ := tangentMap (A := DualNumber A) (π := dualAug π) (inr 1) inr_one_mul_self'
+    dualAug_inr_one u
+  set q' := kerMap (inlAlgHom k A A) dualAug_comp_inlAlgHom q
+  have e : tangentMap m (hm m hπm) hπm u * q =
+      kerMap (substDual m (hm m hπm)) (aug_comp_substDual m (hm m hπm) hπm) (uτ * q') := by
+    rw [map_mul, kerMap_tangentMap _ _ _ _ _ m (hm m hπm) hπm (by simp [substDual_apply]),
+      kerMap_kerMap]
+    congr 1
+    rw [kerMap_congr (ψ' := AlgHom.id k A) (by ext; simp [substDual_apply]) _
+      (AlgHom.comp_id _), kerMap_id]
+  rw [e]
+  refine kerHom_kerMap_substDual m hπm hm _ q u ?_ ?_ a
+  · rw [map_mul, kerMap_tangentMap _ _ _ _ _ 0 (mul_zero 0) (map_zero _) (by simp),
+      tangentMap_zero, one_mul, kerMap_kerMap, kerMap_congr (ψ' := AlgHom.id k A)
+        (by ext; simp) _ (AlgHom.comp_id _), kerMap_id]
+  · rw [map_mul, kerMap_tangentMap _ _ _ _ _ (inr 1) inr_one_mul_self (by simp)
+      (by simp [resDual_apply]), tangentMap_inr_one, kerMap_kerMap,
+      kerMap_eq_one _ (by ext <;> simp [resDual_apply, algebraMap_eq_inl]), mul_one]
+
+/-- If `m` kills the maximal ideal, `(q u^{(m)})^♯ = q^♯ + m D_u`. -/
+theorem kerHom_mul_tangentMap (m : A) (hπm : π m = 0) (hm : ∀ x, π x = 0 → m * x = 0)
+    (u : pointsKer G aug₁) (q : pointsKer G π) (a : stalkOne G) :
+    kerHom (q * tangentMap m (hm m hπm) hπm u) a =
+      kerHom q a + algebraMap k A (tangentCoeff u a) * m := by
+  set uτ := tangentMap (A := DualNumber A) (π := dualAug π) (inr 1) inr_one_mul_self'
+    dualAug_inr_one u
+  set q' := kerMap (inlAlgHom k A A) dualAug_comp_inlAlgHom q
+  have e : q * tangentMap m (hm m hπm) hπm u =
+      kerMap (substDual m (hm m hπm)) (aug_comp_substDual m (hm m hπm) hπm) (q' * uτ) := by
+    rw [map_mul, kerMap_tangentMap _ _ _ _ _ m (hm m hπm) hπm (by simp [substDual_apply]),
+      kerMap_kerMap]
+    congr 1
+    rw [kerMap_congr (ψ' := AlgHom.id k A) (by ext; simp [substDual_apply]) _
+      (AlgHom.comp_id _), kerMap_id]
+  rw [e]
+  refine kerHom_kerMap_substDual m hπm hm _ q u ?_ ?_ a
+  · rw [map_mul, kerMap_tangentMap _ _ _ _ _ 0 (mul_zero 0) (map_zero _) (by simp),
+      tangentMap_zero, mul_one, kerMap_kerMap, kerMap_congr (ψ' := AlgHom.id k A)
+        (by ext; simp) _ (AlgHom.comp_id _), kerMap_id]
+  · rw [map_mul, kerMap_tangentMap _ _ _ _ _ (inr 1) inr_one_mul_self (by simp)
+      (by simp [resDual_apply]), tangentMap_inr_one, kerMap_kerMap,
+      kerMap_eq_one _ (by ext <;> simp [resDual_apply, algebraMap_eq_inl]), one_mul]
+
+/-- A point `u^{(m)}` with `m` killing the maximal ideal is central. -/
+theorem commute_tangentMap (m : A) (hπm : π m = 0) (hm : ∀ x, π x = 0 → m * x = 0)
+    (u : pointsKer G aug₁) (q : pointsKer G π) :
+    Commute (tangentMap m (hm m hπm) hπm u) q :=
+  kerHom_injective (RingHom.ext fun a ↦ by
+    rw [kerHom_tangentMap_mul, kerHom_mul_tangentMap])
+/-! ### The bracket -/
+
+theorem eps₂_mul_del₂_mul (x : DualNumber (DualNumber k)) (hx : aug₂ x = 0) :
+    eps₂ * del₂ * x = 0 := by
+  have h : x.fst.fst = 0 := hx
+  ext <;> simp [h]
+
+theorem aug₂_eps₂_mul_del₂ : aug₂ (eps₂ * del₂ : DualNumber (DualNumber k)) = 0 := by
+  simp
+
+/-- The map `k[η] → k[ε][δ]`, `η ↦ εδ`. -/
+abbrev mul₂ : DualNumber k →ₐ[k] DualNumber (DualNumber k) :=
+  DualNumber.liftElem (eps₂ * del₂) eps₂_mul_del₂_mul_self
+
+theorem mul₂_injective : Function.Injective (mul₂ (k := k)) := by
+  intro x y h
+  have h1 := congrArg (fun z : DualNumber (DualNumber k) ↦ z.fst.fst) h
+  have h2 := congrArg (fun z : DualNumber (DualNumber k) ↦ z.snd.snd) h
+  simp [DualNumber.liftElem_apply, algebraMap_eq_inl'] at h1 h2
+  exact TrivSqZeroExt.ext h1 h2
+
+theorem aug₂_comp_mul₂ : aug₂.comp mul₂ = (aug₁ : DualNumber k →ₐ[k] k) :=
+  aug_comp_liftElem _ _ aug₂_eps₂_mul_del₂
+
+/-- The point `u^{(εδ)}` of `G` over `k[ε][δ]`. -/
+noncomputable abbrev tangentMul (u : pointsKer G aug₁) : pointsKer G (aug₂ (k := k)) :=
+  tangentMap (A := DualNumber (DualNumber k)) (π := aug₂) (eps₂ * del₂)
+    eps₂_mul_del₂_mul_self aug₂_eps₂_mul_del₂ u
+
+theorem tangentMul_injective : Function.Injective (tangentMul (G := G)) :=
+  kerMap_injective _ _ mul₂_injective
+
+theorem kerHom_commutator_fst (v w : pointsKer G aug₁) (a : stalkOne G) :
+    (kerHom ⁅tangentEps v, tangentDel w⁆ a).fst = inl (counit G a) := by
+  have h := kerHom_kerMap fst₂ aug₁_comp_fst₂ ⁅tangentEps v, tangentDel w⁆
+  rw [map_commutatorElement, kerMap_tangentMap _ _ _ _ _ (inr 1) inr_one_mul_self (by simp)
+      (by simp), kerMap_tangentMap _ _ _ _ _ 0 (mul_zero 0) (map_zero _) (by simp),
+    tangentMap_zero, commutatorElement_one_right, kerHom_one] at h
+  have := congrArg (· a) h
+  simpa [algebraMap_eq_inl] using this.symm
+
+theorem kerHom_commutator_snd_fst (v w : pointsKer G aug₁) (a : stalkOne G) :
+    (kerHom ⁅tangentEps v, tangentDel w⁆ a).snd.fst = 0 := by
+  have h := kerHom_kerMap rho₂ aug₁_comp_rho₂ ⁅tangentEps v, tangentDel w⁆
+  rw [map_commutatorElement, kerMap_tangentMap _ _ _ _ _ 0 (mul_zero 0) (map_zero _)
+      (by simp [lift₂_apply, DualNumber.liftElem_apply, algebraMap_eq_inl]),
+    kerMap_tangentMap _ _ _ _ _ (inr 1) inr_one_mul_self (by simp)
+      (by simp [lift₂_apply, DualNumber.liftElem_apply, algebraMap_eq_inl]),
+    tangentMap_zero, commutatorElement_one_left, kerHom_one] at h
+  have h' := congrArg (fun f ↦ (f a).snd) h
+  simp only [RingHom.coe_comp, Function.comp_apply, AlgHom.toRingHom_eq_coe, RingHom.coe_coe,
+    lift₂_apply, DualNumber.liftElem_apply, algebraMap_eq_inl] at h'
+  simpa using h'.symm
+
+/-- The commutator of `v_ε` and `w_δ` has the form `a(1) + εδ B(a)`. -/
+theorem kerHom_commutator (v w : pointsKer G aug₁) (a : stalkOne G) :
+    kerHom ⁅tangentEps v, tangentDel w⁆ a =
+      mul₂ (inl (counit G a) + inr (kerHom ⁅tangentEps v, tangentDel w⁆ a).snd.snd) := by
+  have h1 := kerHom_commutator_fst v w a
+  have h2 := kerHom_commutator_snd_fst v w a
+  generalize kerHom ⁅tangentEps v, tangentDel w⁆ a = X at h1 h2 ⊢
+  ext
+  · simp [DualNumber.liftElem_apply, algebraMap_eq_inl', h1]
+  · simp [DualNumber.liftElem_apply, algebraMap_eq_inl', h1]
+  · simp [DualNumber.liftElem_apply, algebraMap_eq_inl', h2]
+  · simp [DualNumber.liftElem_apply, algebraMap_eq_inl']
+
+instance : IsLocalHom (counit G) :=
+  inferInstanceAs (IsLocalHom (pointStalkHom _ _).hom)
+
+/-- The commutator of `v_ε` and `w_δ` is `u^{(εδ)}` for a tangent vector `u`. -/
+theorem exists_tangentMul_eq_commutator (v w : pointsKer G aug₁) :
+    ∃ u : pointsKer G aug₁, tangentMul u = ⁅tangentEps v, tangentDel w⁆ := by
+  set c := ⁅tangentEps v, tangentDel w⁆
+  set f : stalkOne G → DualNumber k := fun a ↦ inl (counit G a) + inr (kerHom c a).snd.snd
+  have hf (a : stalkOne G) : mul₂ (f a) = kerHom c a := (kerHom_commutator v w a).symm
+  let θ : stalkOne G →+* DualNumber k :=
+    { toFun := f
+      map_one' := mul₂_injective (by rw [hf, map_one, map_one])
+      map_mul' a b := mul₂_injective (by rw [hf, map_mul, map_mul, hf, hf])
+      map_zero' := mul₂_injective (by rw [hf, map_zero, map_zero])
+      map_add' a b := mul₂_injective (by rw [hf, map_add, map_add, hf, hf]) }
+  have hθ : aug₁.toRingHom.comp θ = counit G := RingHom.ext fun a ↦ by simp [θ, f]
+  have : IsLocalHom (CommRingCat.ofHom θ).hom := by
+    have : IsLocalHom (aug₁.toRingHom.comp θ) := by rw [hθ]; infer_instance
+    exact isLocalHom_of_comp θ aug₁.toRingHom
+  have := isLocalHom_of_comp_eq (A := DualNumber k) (B := DualNumber (DualNumber k))
+    (πA := aug₁) (πB := aug₂) mul₂ aug₂_comp_mul₂
+  obtain ⟨p, hp, -, hpc⟩ := exists_pointStalkHom_eq mul₂ mul₂_injective c.1
+    (closedPoint_eq_onePoint c.2) (CommRingCat.ofHom θ)
+    (CommRingCat.hom_ext (RingHom.ext fun a ↦ by
+      change kerHom c a = mul₂ (f a)
+      exact (hf a).symm))
+  have hp' : p ∈ pointsKer G aug₁ := by
+    rw [mem_pointsKer, ← aug₂_comp_mul₂, ← points.map_map, hpc]
+    exact mem_pointsKer.1 c.2
+  exact ⟨⟨p, hp'⟩, Subtype.ext hpc⟩
+
+/-- The bracket `[v, w]` of two tangent vectors: the tangent vector `u` with
+`u^{(εδ)} = v_ε w_δ v_ε⁻¹ w_δ⁻¹` over `k[ε][δ]`. -/
+noncomputable def tangentBracket (v w : pointsKer G aug₁) : pointsKer G aug₁ :=
+  (exists_tangentMul_eq_commutator v w).choose
+
+theorem tangentMul_tangentBracket (v w : pointsKer G aug₁) :
+    tangentMul (tangentBracket v w) = ⁅tangentEps v, tangentDel w⁆ :=
+  (exists_tangentMul_eq_commutator v w).choose_spec
+
+omit [IsLocalRing A] [IsLocalHom π.toRingHom] in
+theorem tangentMap_congr {m m' : A} (h : m = m') (hm : m * m = 0) (hπ : π m = 0)
+    (hm' : m' * m' = 0) (hπ' : π m' = 0) :
+    tangentMap (G := G) m hm hπ = tangentMap m' hm' hπ' := by
+  subst h
+  rfl
+
+/-- **Substitution into the bracket.** `[v^{(m)}, w^{(n)}] = [v, w]^{(mn)}` for `m, n` of square
+zero in the maximal ideal. -/
+theorem commutator_tangentMap (m n : A) (hm : m * m = 0) (hn : n * n = 0) (hπm : π m = 0)
+    (hπn : π n = 0) (v w : pointsKer G aug₁) :
+    ⁅tangentMap m hm hπm v, tangentMap n hn hπn w⁆ =
+      tangentMap (A := A) (π := π) (m * n) (by rw [mul_mul_mul_comm, hm, zero_mul])
+        (by rw [map_mul, hπm, zero_mul]) (tangentBracket v w) := by
+  have h := congrArg (kerMap (A := DualNumber (DualNumber k)) (πA := aug₂) (πB := π)
+    (lift₂ m n hm hn) (aug_comp_lift₂ m n hm hn hπm hπn)) (tangentMul_tangentBracket v w)
+  rw [map_commutatorElement, kerMap_tangentMap (m := eps₂) (m' := m) _ _ _ _ hm hπm
+      (by simp [lift₂_apply, DualNumber.liftElem_apply]),
+    kerMap_tangentMap (m := del₂) (m' := n) _ _ _ _ hn hπn
+      (by simp [lift₂_apply, DualNumber.liftElem_apply]),
+    kerMap_tangentMap (m := eps₂ * del₂) (m' := m * n) _ _ _ _
+      (by rw [mul_mul_mul_comm, hm, zero_mul]) (by rw [map_mul, hπm, zero_mul])
+      (by simp [lift₂_apply, DualNumber.liftElem_apply, algebraMap_eq_inl])] at h
+  exact h.symm
+/-! ### The laws of the bracket -/
+
+theorem tangentCoeff_one (a : stalkOne G) : tangentCoeff (1 : pointsKer G aug₁) a = 0 := by
+  rw [tangentCoeff, kerHom_one]
+  simp [algebraMap_eq_inl]
+
+/-- The group law on tangent vectors is the addition of the `D_v`. -/
+theorem tangentCoeff_mul (v w : pointsKer G aug₁) (a : stalkOne G) :
+    tangentCoeff (v * w) a = tangentCoeff v a + tangentCoeff w a := by
+  conv_lhs => rw [← tangentMap_inr_one v, ← tangentMap_inr_one w]
+  rw [tangentCoeff, kerHom_tangentMap_mul_tangentMap]
+  simp [algebraMap_eq_inl]
+
+theorem tangent_mul_comm (v w : pointsKer G aug₁) : v * w = w * v :=
+  tangent_ext fun a ↦ by rw [tangentCoeff_mul, tangentCoeff_mul, add_comm]
+
+theorem tangentCoeff_inv (v : pointsKer G aug₁) (a : stalkOne G) :
+    tangentCoeff v⁻¹ a = -tangentCoeff v a := by
+  have h := tangentCoeff_mul v v⁻¹ a
+  rw [mul_inv_cancel, tangentCoeff_one] at h
+  linear_combination -h
+
+theorem snd_snd_algebraMap₂ (c : k) :
+    (algebraMap k (DualNumber (DualNumber k)) c).snd.snd = 0 := by
+  simp [algebraMap_eq_inl']
+
+theorem snd_snd_algebraMap₂_mul_eps₂ (c : k) :
+    (algebraMap k (DualNumber (DualNumber k)) c * eps₂).snd.snd = 0 := by
+  simp [algebraMap_eq_inl']
+
+theorem snd_snd_algebraMap₂_mul_del₂ (c : k) :
+    (algebraMap k (DualNumber (DualNumber k)) c * del₂).snd.snd = 0 := by
+  simp [algebraMap_eq_inl']
+
+theorem snd_snd_algebraMap₂_mul_eps₂_mul_del₂ (c : k) :
+    (algebraMap k (DualNumber (DualNumber k)) c * (eps₂ * del₂)).snd.snd = c := by
+  simp [algebraMap_eq_inl']
+
+theorem snd_snd_algebraMap₂_mul_del₂_mul_eps₂ (c : k) :
+    (algebraMap k (DualNumber (DualNumber k)) c * (del₂ * eps₂)).snd.snd = c := by
+  simp [algebraMap_eq_inl']
+
+/-- **The bracket in coordinates.** `D_{[v, w]} = C(v, w) - C(w, v)`. -/
+theorem tangentCoeff_tangentBracket (v w : pointsKer G aug₁) (a : stalkOne G) :
+    tangentCoeff (tangentBracket v w) a = mulCoeff v w a - mulCoeff w v a := by
+  have e : tangentMul (tangentBracket v w) * (tangentDel w * tangentEps v) =
+      tangentEps v * tangentDel w := by
+    rw [tangentMul_tangentBracket, commutatorElement_def]
+    group
+  have h := congrArg (fun p ↦ (kerHom p a).snd.snd) e
+  rw [kerHom_tangentMap_mul (eps₂ * del₂) aug₂_eps₂_mul_del₂ eps₂_mul_del₂_mul,
+    kerHom_tangentMap_mul_tangentMap, kerHom_tangentMap_mul_tangentMap] at h
+  simp only [snd_add, snd_snd_algebraMap₂, snd_snd_algebraMap₂_mul_eps₂,
+    snd_snd_algebraMap₂_mul_del₂, snd_snd_algebraMap₂_mul_eps₂_mul_del₂,
+    snd_snd_algebraMap₂_mul_del₂_mul_eps₂] at h
+  linear_combination h
+
+theorem tangentBracket_self (v : pointsKer G aug₁) : tangentBracket v v = 1 :=
+  tangent_ext fun a ↦ by rw [tangentCoeff_tangentBracket, sub_self, tangentCoeff_one]
+
+theorem commute_tangentMul (u : pointsKer G aug₁) (q : pointsKer G (aug₂ (k := k))) :
+    Commute (tangentMul u) q :=
+  commute_tangentMap (eps₂ * del₂) aug₂_eps₂_mul_del₂ eps₂_mul_del₂_mul u q
+
+theorem tangentBracket_mul_left (v v' w : pointsKer G aug₁) :
+    tangentBracket (v * v') w = tangentBracket v w * tangentBracket v' w := by
+  apply tangentMul_injective
+  rw [tangentMul_tangentBracket, show tangentEps (v * v') = tangentEps v * tangentEps v' from
+    map_mul _ _ _, show tangentMul (tangentBracket v w * tangentBracket v' w) =
+      tangentMul (tangentBracket v w) * tangentMul (tangentBracket v' w) from map_mul _ _ _,
+    tangentMul_tangentBracket, tangentMul_tangentBracket]
+  have e : ∀ a b c : pointsKer G (aug₂ (k := k)), ⁅a * b, c⁆ = a * ⁅b, c⁆ * a⁻¹ * ⁅a, c⁆ := by
+    intro a b c
+    simp only [commutatorElement_def]
+    group
+  rw [e, ← tangentMul_tangentBracket v' w, ← (commute_tangentMul _ _).eq, mul_inv_cancel_right,
+    ← tangentMul_tangentBracket v w]
+  exact (commute_tangentMul _ _).eq
+
+theorem tangentBracket_mul_right (v w w' : pointsKer G aug₁) :
+    tangentBracket v (w * w') = tangentBracket v w * tangentBracket v w' := by
+  apply tangentMul_injective
+  rw [tangentMul_tangentBracket, show tangentDel (w * w') = tangentDel w * tangentDel w' from
+    map_mul _ _ _, show tangentMul (tangentBracket v w * tangentBracket v w') =
+      tangentMul (tangentBracket v w) * tangentMul (tangentBracket v w') from map_mul _ _ _,
+    tangentMul_tangentBracket, tangentMul_tangentBracket]
+  have e : ∀ a b c : pointsKer G (aug₂ (k := k)), ⁅a, b * c⁆ = ⁅a, b⁆ * (b * ⁅a, c⁆ * b⁻¹) := by
+    intro a b c
+    simp only [commutatorElement_def]
+    group
+  rw [e, ← tangentMul_tangentBracket v w', ← (commute_tangentMul _ _).eq, mul_inv_cancel_right]
 end AlgebraicGeometry.GrpObj
