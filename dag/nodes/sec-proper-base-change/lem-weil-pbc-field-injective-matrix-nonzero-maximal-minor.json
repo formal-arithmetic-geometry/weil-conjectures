@@ -202,5 +202,23 @@
    "module": "WeilConjectures.Mathlib.LinearAlgebra.Matrix.Rank",
    "note": "sorry-free on slopmaster2 (71d63dcf); gives, for r <= rank A, row and column selections e1, e2 : Fin r -> _ with det (A.submatrix e1 e2) != 0. States the node once r = n = rank (injectivity), e2 forced bijective by det != 0 and the column permutation absorbed: an attachment-check item (L, 2026-10-10)"
   }
- ]
+ ],
+ "lean": {
+  "module": "Sheaf.LinearAlgebra.NonzeroMaximalMinorOfInjective",
+  "declaration": "Matrix.exists_strictMono_submatrix_det_ne_zero_of_mulVec_injective",
+  "file": "lean/Sheaf/LinearAlgebra/NonzeroMaximalMinorOfInjective.lean",
+  "statement": "theorem exists_strictMono_submatrix_det_ne_zero_of_mulVec_injective {K : Type u} [Field K] {n p : ℕ} (B : Matrix (Fin p) (Fin n) K) (hinj : Function.Injective B.mulVec) : n ≤ p ∧ ∃ r : Fin n → Fin p, StrictMono r ∧ (B.submatrix r id).det ≠ 0 ∧ (n = 0 → (B.submatrix r id).det = 1)",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-fim1007",
+  "group": "F1",
+  "result": "pass",
+  "note": "[Field K]; {n p : ℕ}; B : Matrix (Fin p) (Fin n) K; Function.Injective B.mulVec; n ≤ p; ∃ r StrictMono r rows/id columns as H1 92f32df54; (B.submatrix r id).det ≠ 0 via Matrix.det; n=0 det=1 clause literal; no Mathlib exact match (Rank.lean has only rank/submatrix bounds)"
+ }
 }
