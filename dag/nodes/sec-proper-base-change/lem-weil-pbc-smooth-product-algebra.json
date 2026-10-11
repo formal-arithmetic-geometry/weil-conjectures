@@ -189,5 +189,22 @@
   "worker": "stage1",
   "summary": "Checked the statement against Stacks 0GIF ('if' direction; tags 0GIF, 00TC, 00ED, 00EH verified in tags/tags) and kept it. def-weil-pbc-smooth-ring-map is the Stacks definition (finite presentation, H_1(NL)=0, Omega finite projective) and is already a Mathlib leaf for Algebra.Smooth (Mathlib's FormallySmooth is defined as Omega projective + H1Cotangent = 0, Smooth/Basic.lean:70), so the notions agree; still, the Mathlib assembly for S' x S'' (Pi instance, FinitePresentation.pi, RingEquiv.piFinTwo upgraded to an AlgEquiv, Smooth.of_equiv) is several lines, not a one-line specialization (B8): the candidate is kept and corrected (RingEquiv.piFinTwo exists, Algebra/Ring/Fin.lean:27). Wrote the omitted proof following Stacks' hint in 4 steps: idempotents e_1=(1,0), e_2=(0,1) generate the unit ideal and are the kernels' complements of the projections (elementary); S_{e_i} is the factor via the projection by the existing leaf lem-weil-pbc-fg-idempotent-ideal-idempotent-generator (2) (00EH); smoothness transfers along that R-algebra isomorphism by a new Mathlib leaf lem-weil-pbc-smooth-ring-map-isomorphism-invariant (Algebra.Smooth.of_equiv, exact); conclusion by the existing leaf lem-weil-pbc-smooth-ring-map-local-on-cover (finite-cover form of 00TC). All cited nodes are in unit sk-thm-p1. The citer lem-weil-pbc-smooth-over-product-ring step 3 uses exactly this statement (S'=A_1, S''=A_2 with structure maps psi_1, psi_2); no error found there."
  },
- "reviewed": "pass (L, 2026-10-10): 4 steps by agent following the 0GIF hint: the factors are the localizations at the idempotents, smoothness transfers along the isomorphism (new leaf Smooth.of_equiv) and is local on a finite cover by D(e_i)."
+ "reviewed": "pass (L, 2026-10-10): 4 steps by agent following the 0GIF hint: the factors are the localizations at the idempotents, smoothness transfers along the isomorphism (new leaf Smooth.of_equiv) and is local on a finite cover by D(e_i).",
+ "lean": {
+  "module": "Sheaf.RingTheory.SmoothProductAlgebra",
+  "declaration": "Algebra.Smooth.prod",
+  "file": "lean/Sheaf/RingTheory/SmoothProductAlgebra.lean",
+  "statement": "theorem prod (R : Type u) (S' : Type v) (S'' : Type w) [CommRing R] [CommRing S'] [CommRing S''] [Algebra R S'] [Algebra R S''] [Smooth R S'] [Smooth R S''] : Smooth R (S' × S'')",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-spa",
+  "group": "H1",
+  "result": "pass"
+ }
 }
