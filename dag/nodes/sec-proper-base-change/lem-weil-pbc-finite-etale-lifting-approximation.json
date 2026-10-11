@@ -234,5 +234,23 @@
   "by": "L",
   "result": "pass",
   "note": "Statement made precise (G-ring henselian pair, proper Y, lift with a Y_0-isomorphism); eight steps along the Noetherian G-ring paragraph of Stacks 0GS2/0A48: completion (new leaves def-weil-pbc-adic-completion = AdicCompletion and lem-weil-pbc-adic-completion-mod-ideal = isAdicComplete_self LocalRing.lean:61, evalOneₐ_surjective Algebra.lean:193, ker_evalOneₐ_eq_map, evalOneₐ_comp_algebraMap_eq_mk :188, verified; new unsplit nodes lem-weil-pbc-adic-completion-noetherian (0316) and lem-weil-pbc-complete-pair-henselian (0ALJ, needed because the complete-case node assumes henselian)); the complete case; A^ as a directed union of finite type A-subalgebras; descent of the cover to a stage (tool use thm-pd-spreading-out, new node lem-weil-pbc-descend-finite (01ZO), lem-weil-pbc-descend-etale); Artin approximation for henselian pairs (new node lem-weil-pbc-henselian-pair-approximation, Smoothing 0AH5 (2); new definition def-weil-pbc-g-ring, 07GH); the lift by base change along the approximated map; its closed fibre by pasting; conclusion. Worker's corrections: the brief's tag 07QY is the local case, 0AH5 is the pair case; Stacks descends to a stage where the cover is already finite etale and approximates the map, no Jacobian equations; proof_origin fixed (the source is in literature/). Cites lem-weil-pbc-proper-base-change (imported, sk-thm-br; not flagged by review_split)."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteEtaleLiftingApproximation",
+  "declaration": "AlgebraicGeometry.Scheme.exists_finiteEtale_lift_of_henselianPair_of_isGRing",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteEtaleLiftingApproximation.lean",
+  "statement": "theorem exists_finiteEtale_lift_of_henselianPair_of_isGRing {A : Type u} [CommRing A] (hA : IsGRing A) (I : Ideal A) [HenselianRing A I] {Y : Scheme.{u}} (f : Y ⟶ Spec (.of A)) [IsProper f] (V : (@IsFinite ⊓ @Etale : MorphismProperty Scheme.{u}).Over ⊤ (pullback f (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I))))) : ∃ U : (@IsFinite ⊓ @Etale : MorphismProperty Scheme.{u}).Over ⊤ Y, Nonempty (Over.mk (pullback.snd U.hom (pullback.fst f (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I))))) ≅ Over.mk V.hom)",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-fel1012",
+  "group": "K1",
+  "result": "pass",
+  "note": "IsGRing A (Noetherian inside); arbitrary ideal I with HenselianRing A I per dep's mixed record (09XI equiv); f:Y->Spec A IsProper; Y0 = pullback f (Spec.map (Quotient.mk I)); V in (IsFinite ⊓ Etale).Over ⊤ Y0 per the node's Mathlib match; ∃ U in same over Y; Over Y0 iso pullback.snd U.hom (pullback.fst f _) ≅ V.hom; universes single u; #check'd names; clean compile"
  }
 }
