@@ -105,6 +105,14 @@ lemma derivedOpenImmersionLowerShriekProjectionMap_assoc
     (mapDerivedCategoryUpperStarDerivedTensorIso A j).hom
     (mapDerivedCategoryUpperStarDerivedTensorIso_assoc A j) K M M'
 
+omit [IsGrothendieckAbelian.{u + 1} A] [MonoidalCategory A] [MonoidalPreadditive A]
+  [SymmetricCategory A] [MonoidalClosed A] [Abelian.HasFunctorialFlatResolution A] in
+lemma symm_trans_eqToIso_family {𝒞 : Type*} [Category* 𝒞] {I : Type*} (G : 𝒞) (F : I → 𝒞)
+    {a : I} (Φ : ∀ h : I, h = a → (F h ≅ G)) (h : I) (hh : h = a) :
+    (Φ a rfl).symm ≪≫ eqToIso (congrArg F hh.symm) = (Φ h hh).symm := by
+  subst hh
+  simp
+
 section Comp
 
 variable {T S R : Scheme.{u}} (g₁ : T ⟶ S) (g₂ : S ⟶ R) (g₁₂ : T ⟶ R) (hg : g₁₂ = g₁ ≫ g₂)
@@ -140,8 +148,9 @@ lemma leftDerivedUpperStarCompactificationIso_hom_app
     (K : DerivedCategory (Sheaf Y.smallEtaleTopology A)) :
     (leftDerivedUpperStarCompactificationIso A c).hom.app K =
       (leftDerivedUpperStarComp A c.i c.g f c.comm).inv.app K := by
-  -- WIP: `obtain ⟨Z, p, j, hc, _, _⟩ := c; subst hc; rw [leftDerivedUpperStarCompactificationIso,
-  -- eqToIso_refl, Iso.trans_refl]; rfl` elaborates but the kernel times out.
+  -- WIP: both `obtain ⟨Z, p, j, hc, _, _⟩ := c; subst hc; rw [..]; rfl` and
+  -- `congr_app (congrArg Iso.hom (symm_trans_eqToIso_family ..)) K` elaborate, but the kernel
+  -- times out; the statement alone is cheap.
   sorry
 
 /-- The projection map `Rf_!(c) M ⊗ᴸ L ⟶ Rf_!(c)(M ⊗ᴸ Lf^* L)` is compatible with the
