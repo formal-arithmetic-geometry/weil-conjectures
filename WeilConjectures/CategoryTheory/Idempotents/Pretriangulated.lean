@@ -355,17 +355,6 @@ category into its Karoubi envelope is a triangulated functor. -/
 instance toKaroubi.isTriangulated : (toKaroubi C).IsTriangulated where
   map_distinguished T hT := ⟨T, hT, ⟨Retract.refl _⟩⟩
 
-/-- Blueprint `lem-weil-karoubi-envelope-triangulated`, octahedral axiom: the Karoubi envelope of
-a triangulated category satisfies the octahedral axiom (Balmer–Schlichting).
-
-Unfinished: the difficulty is to choose, for a composable pair of morphisms of the envelope,
-an octahedron in `C` together with idempotent endomorphisms of its four triangles which are
-compatible with each other; the idempotents of the three cone triangles can be chosen by
-`CategoryTheory.Pretriangulated.exists_idempotent_of_distTriang`, but their compatibility with
-the morphisms `m₁`, `m₃` of the octahedron is not automatic. -/
-theorem Karoubi.isTriangulated [IsTriangulated C] : IsTriangulated (Karoubi C) :=
-  sorry
-
 end Idempotents
 
 end CategoryTheory

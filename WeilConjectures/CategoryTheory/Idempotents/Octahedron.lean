@@ -23,7 +23,10 @@ writes down explicit corrections `x` and `y` such that the triangle
 `(Z₁₂, s₁₂) ⟶ (Z₁₃, s₁₃) ⟶ (Z₂₃, s₂₃) ⟶ (Z₁₂, s₁₂)⟦1⟧` of the envelope is a retract of the image
 of the octahedron triangle, hence distinguished.
 
-This file contains the algebraic part of the argument, in `C`.
+## Main statements
+
+- `CategoryTheory.Idempotents.Karoubi.isTriangulated`: the Karoubi envelope of a triangulated
+  category is triangulated.
 -/
 
 @[expose] public section
@@ -47,10 +50,6 @@ lemma self_comp_compl {X : C} {s : X ⟶ X} (hs : s ≫ s = s) : s ≫ (𝟙 _ -
 lemma compl_comp_compl {X : C} {s : X ⟶ X} (hs : s ≫ s = s) :
     (𝟙 _ - s) ≫ (𝟙 _ - s) = 𝟙 _ - s := by
   simp [comp_sub, sub_comp, hs]
-
-lemma comm_of_comp_eq' {X Y : C} {p : X ⟶ X} {q : Y ⟶ Y} (f : X ⟶ Y) (hq : q ≫ q = q)
-    (h : f ≫ q = p ≫ f) : p ≫ (f ≫ q) ≫ q = f ≫ q := by
-  rw [assoc, hq, ← assoc, ← h, assoc, hq]
 
 lemma compl_comp {X Y : C} {w : X ⟶ Y} {s : X ⟶ X} {q : Y ⟶ Y} (h : s ≫ w = w ≫ q) :
     (𝟙 _ - s) ≫ w = w ≫ (𝟙 _ - q) := by
@@ -77,7 +76,7 @@ def corrY (s₁₃ : Z₁₃ ⟶ Z₁₃) (w₁₃ : Z₁₃ ⟶ Y₁) (σ₁₂
     Z₁₃ ⟶ Z₁₃ :=
   -((𝟙 _ - s₁₃) ≫ w₁₃ ≫ σ₁₂ ≫ m₁ ≫ s₁₃)
 
-lemma m₁_corrY (hs₁₃ : s₁₃ ≫ s₁₃ = s₁₃) (hg₂ : p₂ ≫ g = g)
+lemma m₁_corrY (hg₂ : p₂ ≫ g = g)
     (hv₁₂ : v₁₂ ≫ s₁₂ = p₂ ≫ v₁₂) (hw₁₃ : s₁₃ ≫ w₁₃ = w₁₃ ≫ q₁)
     (c₁ : v₁₂ ≫ m₁ = g ≫ v₁₃) (c₂ : m₁ ≫ w₁₃ = w₁₂)
     (S₁₂ : ρ₁₂ ≫ v₁₂ ≫ (𝟙 _ - s₁₂) + w₁₂ ≫ (𝟙 _ - q₁) ≫ σ₁₂ = 𝟙 _ - s₁₂) :
@@ -114,7 +113,7 @@ lemma corrY_m₃ (hs₁₃ : s₁₃ ≫ s₁₃ = s₁₃) (hp₃ : p₃ ≫ p�
   rw [e1, comp_neg, comp_neg, comp_neg, neg_neg, e3, reassoc_of% c₂,
     reassoc_of% (compl_comp hw₁₃), reassoc_of% T₁₂, reassoc_of% (compl_comp_compl hq₁)]
 
-lemma corrX_m₃ (hs₂₃ : s₂₃ ≫ s₂₃ = s₂₃) (hv₁₃ : v₁₃ ≫ s₁₃ = p₃ ≫ v₁₃)
+lemma corrX_m₃ (hv₁₃ : v₁₃ ≫ s₁₃ = p₃ ≫ v₁₃)
     (hv₂₃ : v₂₃ ≫ s₂₃ = p₃ ≫ v₂₃) (c₃ : v₁₃ ≫ m₃ = v₂₃) (c₄ : w₁₃ ≫ u₁ = m₃ ≫ w₂₃)
     (hu₁ : u₁ ≫ (𝟙 _ - q₂) = 0) (hρ₂₃ : (𝟙 _ - s₂₃) ≫ ρ₂₃ = ρ₂₃)
     (S₂₃ : ρ₂₃ ≫ v₂₃ ≫ (𝟙 _ - s₂₃) + w₂₃ ≫ (𝟙 _ - q₂) ≫ σ₂₃ = 𝟙 _ - s₂₃) :
@@ -202,9 +201,9 @@ attached to a triangle of `C` with compatible idempotents. -/
 @[simps!]
 noncomputable def triangleOfIdem' : Triangle (Karoubi C) :=
   Triangle.mk (X := ⟨X₁, p₁, h₁⟩) (Y := ⟨X₂, p₂, h₂⟩) (Z := ⟨X₃, p₃, h₃⟩)
-    ⟨u ≫ p₂, OctahedronAux.comm_of_comp_eq' u h₂ c₁⟩
-    ⟨v ≫ p₃, OctahedronAux.comm_of_comp_eq' v h₃ c₂⟩
-    ⟨w ≫ p₁⟦(1 : ℤ)⟧', OctahedronAux.comm_of_comp_eq' w
+    ⟨u ≫ p₂, comm_of_comp_eq u h₂ c₁⟩
+    ⟨v ≫ p₃, comm_of_comp_eq v h₃ c₂⟩
+    ⟨w ≫ p₁⟦(1 : ℤ)⟧', comm_of_comp_eq w
       (by rw [← Functor.map_comp, h₁]) c₃⟩
 
 lemma triangleOfIdem'_distinguished (hT : Triangle.mk u v w ∈ distTriang C) :
@@ -256,5 +255,173 @@ lemma exists_split_compl (hT : Triangle.mk u v w ∈ distTriang C) (hu : u ≫ (
     exact congrArg Karoubi.Hom.f hD
 
 end Raw
+
+lemma exists_idempotent_raw {X₁ X₂ X₃ : C} (u : X₁ ⟶ X₂) (v : X₂ ⟶ X₃) (w : X₃ ⟶ X₁⟦(1 : ℤ)⟧)
+    (hT : Triangle.mk u v w ∈ distTriang C) (a : X₁ ⟶ X₁) (b : X₂ ⟶ X₂) (ha : a ≫ a = a)
+    (hb : b ≫ b = b) (hab : u ≫ b = a ≫ u) :
+    ∃ (c : X₃ ⟶ X₃), c ≫ c = c ∧ v ≫ c = b ≫ v ∧ w ≫ a⟦(1 : ℤ)⟧' = c ≫ w :=
+  Pretriangulated.exists_idempotent_of_distTriang _ hT a b ha hb hab
+
+open OctahedronAux in
+/-- Blueprint `lem-weil-karoubi-envelope-triangulated`, octahedral axiom: the Karoubi envelope of
+a triangulated category is triangulated. -/
+instance isTriangulated [IsTriangulated C] : IsTriangulated (Karoubi C) := by
+  apply IsTriangulated.mk'
+  intro P₁ P₂ P₃ U G
+  obtain ⟨Z₁₂, v₁₂, w₁₂, h₁₂⟩ := Pretriangulated.distinguished_cocone_triangle U.f
+  obtain ⟨Z₂₃, v₂₃, w₂₃, h₂₃⟩ := Pretriangulated.distinguished_cocone_triangle G.f
+  obtain ⟨Z₁₃, v₁₃, w₁₃, h₁₃⟩ := Pretriangulated.distinguished_cocone_triangle (U.f ≫ G.f)
+  have hu₁ : P₁.p ≫ U.f = U.f := Karoubi.p_comp U
+  have hu₂ : U.f ≫ P₂.p = U.f := Karoubi.comp_p U
+  have hg₂ : P₂.p ≫ G.f = G.f := Karoubi.p_comp G
+  have hg₃ : G.f ≫ P₃.p = G.f := Karoubi.comp_p G
+  have cu : U.f ≫ P₂.p = P₁.p ≫ U.f := by rw [hu₁, hu₂]
+  have cg : G.f ≫ P₃.p = P₂.p ≫ G.f := by rw [hg₂, hg₃]
+  have cug : (U.f ≫ G.f) ≫ P₃.p = P₁.p ≫ (U.f ≫ G.f) := by rw [assoc, hg₃, reassoc_of% hu₁]
+  obtain ⟨s₁₂, hs₁₂, cv₁₂, cw₁₂⟩ :=
+    exists_idempotent_raw _ _ _ h₁₂ P₁.p P₂.p P₁.idem P₂.idem cu
+  obtain ⟨s₂₃, hs₂₃, cv₂₃, cw₂₃⟩ :=
+    exists_idempotent_raw _ _ _ h₂₃ P₂.p P₃.p P₂.idem P₃.idem cg
+  obtain ⟨s₁₃, hs₁₃, cv₁₃, cw₁₃⟩ :=
+    exists_idempotent_raw _ _ _ h₁₃ P₁.p P₃.p P₁.idem P₃.idem cug
+  let O := Triangulated.someOctahedron rfl h₁₂ h₂₃ h₁₃
+  have hmm : O.m₁ ≫ O.m₃ = 0 := comp_distTriang_mor_zero₁₂ _ O.mem
+  have hvw₁₃ : v₁₃ ≫ w₁₃ = 0 := comp_distTriang_mor_zero₂₃ _ h₁₃
+  -- splittings of the complementary triangles
+  obtain ⟨ρ₁₂, σ₁₂, -, S₁₂, -, T₁₂⟩ := exists_split_compl U.f v₁₂ w₁₂ P₁.p P₂.p s₁₂ P₁.idem
+    P₂.idem hs₁₂ cu cv₁₂ cw₁₂ h₁₂ (by rw [comp_sub, hu₂, comp_id, sub_self])
+  obtain ⟨ρ₁₃, σ₁₃, -, S₁₃, -, -⟩ := exists_split_compl (U.f ≫ G.f) v₁₃ w₁₃ P₁.p P₃.p s₁₃
+    P₁.idem P₃.idem hs₁₃ cug cv₁₃ cw₁₃ h₁₃ (by rw [comp_sub, comp_id, assoc, hg₃, sub_self])
+  obtain ⟨ρ₂₃, σ₂₃, hρ₂₃, S₂₃, T₂₃, -⟩ := exists_split_compl G.f v₂₃ w₂₃ P₂.p P₃.p s₂₃
+    P₂.idem P₃.idem hs₂₃ cg cv₂₃ cw₂₃ h₂₃ (by rw [comp_sub, hg₃, comp_id, sub_self])
+  simp only [Functor.map_sub, Functor.map_id] at S₁₂ T₁₂ S₁₃ S₂₃
+  have hq₁ : P₁.p⟦(1 : ℤ)⟧' ≫ P₁.p⟦(1 : ℤ)⟧' = P₁.p⟦(1 : ℤ)⟧' := by
+    rw [← Functor.map_comp, P₁.idem]
+  have hU₁ : U.f⟦(1 : ℤ)⟧' ≫ (𝟙 _ - P₂.p⟦(1 : ℤ)⟧') = 0 := by
+    rw [comp_sub, comp_id, ← Functor.map_comp, hu₂, sub_self]
+  have i₁ := m₁_corrX hs₁₃ hs₂₃ hq₁ cw₁₂.symm cv₁₃ cv₂₃ O.comm₂ O.comm₃ hmm S₁₃ T₂₃
+  have i₂ := corrX_m₃ cv₁₃ cv₂₃ O.comm₃ O.comm₄ hU₁ hρ₂₃ S₂₃
+  have r₁ := m₁_corrY hg₂ cv₁₂ cw₁₃.symm O.comm₁ O.comm₂ S₁₂
+  have r₂ := corrY_m₃ hs₁₃ P₃.idem hq₁ cv₁₃ cw₁₃.symm cv₂₃ O.comm₂ O.comm₃ hmm S₁₃ T₁₂
+  have xy := corrX_corrY (m₃ := O.m₃) (s₂₃ := s₂₃) (ρ₂₃ := ρ₂₃) (σ₁₂ := σ₁₂) (m₁ := O.m₁)
+    hs₁₃ cw₁₃.symm hvw₁₃
+  have hsx := s_corrX (m₃ := O.m₃) (s₂₃ := s₂₃) (ρ₂₃ := ρ₂₃) (v₁₃ := v₁₃) hs₁₃
+  have hxs := corrX_s (m₃ := O.m₃) (s₂₃ := s₂₃) (ρ₂₃ := ρ₂₃) (v₁₃ := v₁₃) hs₁₃
+  have hys := corrY_s (w₁₃ := w₁₃) (σ₁₂ := σ₁₂) (m₁ := O.m₁) hs₁₃
+  have hsy := s_corrY (w₁₃ := w₁₃) (σ₁₂ := σ₁₂) (m₁ := O.m₁) hs₁₃
+  -- the triangles of the envelope
+  have hΔ₁₂ := triangleOfIdem'_distinguished U.f v₁₂ w₁₂ P₁.p P₂.p s₁₂ P₁.idem P₂.idem hs₁₂
+    cu cv₁₂ cw₁₂ h₁₂
+  have hΔ₂₃ := triangleOfIdem'_distinguished G.f v₂₃ w₂₃ P₂.p P₃.p s₂₃ P₂.idem P₃.idem hs₂₃
+    cg cv₂₃ cw₂₃ h₂₃
+  have hΔ₁₃ := triangleOfIdem'_distinguished (U.f ≫ G.f) v₁₃ w₁₃ P₁.p P₃.p s₁₃ P₁.idem P₃.idem
+    hs₁₃ cug cv₁₃ cw₁₃ h₁₃
+  have hΔ₁₃' : Triangle.mk ((triangleOfIdem' U.f v₁₂ w₁₂ P₁.p P₂.p s₁₂ P₁.idem P₂.idem hs₁₂
+      cu cv₁₂ cw₁₂).mor₁ ≫ (triangleOfIdem' G.f v₂₃ w₂₃ P₂.p P₃.p s₂₃ P₂.idem P₃.idem hs₂₃
+      cg cv₂₃ cw₂₃).mor₁) (triangleOfIdem' (U.f ≫ G.f) v₁₃ w₁₃ P₁.p P₃.p s₁₃ P₁.idem P₃.idem
+      hs₁₃ cug cv₁₃ cw₁₃).mor₂ (triangleOfIdem' (U.f ≫ G.f) v₁₃ w₁₃ P₁.p P₃.p s₁₃ P₁.idem
+      P₃.idem hs₁₃ cug cv₁₃ cw₁₃).mor₃ ∈ distTriang (Karoubi C) := by
+    have e : (triangleOfIdem' U.f v₁₂ w₁₂ P₁.p P₂.p s₁₂ P₁.idem P₂.idem hs₁₂ cu cv₁₂ cw₁₂).mor₁ ≫
+        (triangleOfIdem' G.f v₂₃ w₂₃ P₂.p P₃.p s₂₃ P₂.idem P₃.idem hs₂₃ cg cv₂₃ cw₂₃).mor₁ =
+        (triangleOfIdem' (U.f ≫ G.f) v₁₃ w₁₃ P₁.p P₃.p s₁₃ P₁.idem P₃.idem hs₁₃ cug cv₁₃
+          cw₁₃).mor₁ := by
+      ext
+      simp [hu₂]
+    rw [e]
+    exact hΔ₁₃
+  refine ⟨P₁, P₂, P₃, ⟨Z₁₂, s₁₂, hs₁₂⟩, ⟨Z₂₃, s₂₃, hs₂₃⟩, ⟨Z₁₃, s₁₃, hs₁₃⟩, _, _,
+    Iso.refl _, Iso.refl _, Iso.refl _, ?_, ?_, _, _, hΔ₁₂, _, _, hΔ₂₃, _, _, hΔ₁₃', ⟨?_⟩⟩
+  · ext; simp [hu₂]
+  · ext; simp [hg₃]
+  have hM₁ : s₁₂ ≫ (s₁₂ ≫ O.m₁ ≫ s₁₃) ≫ s₁₃ = s₁₂ ≫ O.m₁ ≫ s₁₃ := by
+    simp only [assoc, hs₁₃, reassoc_of% hs₁₂]
+  have hM₃ : s₁₃ ≫ (s₁₃ ≫ O.m₃ ≫ s₂₃) ≫ s₂₃ = s₁₃ ≫ O.m₃ ≫ s₂₃ := by
+    simp only [assoc, hs₂₃, reassoc_of% hs₁₃]
+  exact
+    { m₁ := ⟨s₁₂ ≫ O.m₁ ≫ s₁₃, hM₁⟩
+      m₃ := ⟨s₁₃ ≫ O.m₃ ≫ s₂₃, hM₃⟩
+      comm₁ := by
+        ext
+        change (v₁₂ ≫ s₁₂) ≫ (s₁₂ ≫ O.m₁ ≫ s₁₃) = (G.f ≫ P₃.p) ≫ (v₁₃ ≫ s₁₃)
+        rw [assoc, reassoc_of% hs₁₂, reassoc_of% cv₁₂, reassoc_of% O.comm₁, reassoc_of% hg₂,
+          assoc, ← reassoc_of% cv₁₃, hs₁₃]
+      comm₂ := by
+        ext
+        change (s₁₂ ≫ O.m₁ ≫ s₁₃) ≫ (w₁₃ ≫ P₁.p⟦(1 : ℤ)⟧') = w₁₂ ≫ P₁.p⟦(1 : ℤ)⟧'
+        simp only [assoc]
+        rw [← reassoc_of% cw₁₃, reassoc_of% O.comm₂, hq₁, ← reassoc_of% cw₁₂, hq₁]
+      comm₃ := by
+        ext
+        change (v₁₃ ≫ s₁₃) ≫ (s₁₃ ≫ O.m₃ ≫ s₂₃) = v₂₃ ≫ s₂₃
+        simp only [assoc]
+        rw [reassoc_of% hs₁₃, reassoc_of% cv₁₃, reassoc_of% O.comm₃, cv₂₃, reassoc_of% P₃.idem]
+      comm₄ := by
+        ext
+        change (w₁₃ ≫ P₁.p⟦(1 : ℤ)⟧') ≫ (U.f ≫ P₂.p)⟦(1 : ℤ)⟧' =
+          (s₁₃ ≫ O.m₃ ≫ s₂₃) ≫ (w₂₃ ≫ P₂.p⟦(1 : ℤ)⟧')
+        have hq₂ : P₂.p⟦(1 : ℤ)⟧' ≫ P₂.p⟦(1 : ℤ)⟧' = P₂.p⟦(1 : ℤ)⟧' := by
+          rw [← Functor.map_comp, P₂.idem]
+        simp only [assoc, Functor.map_comp]
+        rw [← reassoc_of% cw₂₃, ← reassoc_of% O.comm₄, ← reassoc_of% cw₁₃, hq₂]
+      mem := by
+        refine (Karoubi.mem_distTriang_iff _).2 ⟨_, O.mem, ⟨
+          { i := Triangle.homMk _ _
+              (⟨s₁₂, by simp [hs₁₂]⟩ : (⟨Z₁₂, s₁₂, hs₁₂⟩ : Karoubi C) ⟶ (toKaroubi C).obj Z₁₂)
+              (⟨s₁₃ + corrX s₁₃ O.m₃ s₂₃ ρ₂₃ v₁₃, by
+                change s₁₃ ≫ (s₁₃ + corrX s₁₃ O.m₃ s₂₃ ρ₂₃ v₁₃) ≫ 𝟙 Z₁₃ = _
+                rw [Category.comp_id, comp_add, hs₁₃, hsx]⟩ :
+                (⟨Z₁₃, s₁₃, hs₁₃⟩ : Karoubi C) ⟶ (toKaroubi C).obj Z₁₃)
+              (⟨s₂₃, by simp [hs₂₃]⟩ : (⟨Z₂₃, s₂₃, hs₂₃⟩ : Karoubi C) ⟶ (toKaroubi C).obj Z₂₃)
+              ?_ ?_ ?_
+            r := Triangle.homMk _ _
+              (⟨s₁₂, by simp [hs₁₂]⟩ : (toKaroubi C).obj Z₁₂ ⟶ (⟨Z₁₂, s₁₂, hs₁₂⟩ : Karoubi C))
+              (⟨s₁₃ + corrY s₁₃ w₁₃ σ₁₂ O.m₁, by
+                change 𝟙 Z₁₃ ≫ (s₁₃ + corrY s₁₃ w₁₃ σ₁₂ O.m₁) ≫ s₁₃ = _
+                rw [Category.id_comp, add_comp, hs₁₃, hys]⟩ :
+                (toKaroubi C).obj Z₁₃ ⟶ (⟨Z₁₃, s₁₃, hs₁₃⟩ : Karoubi C))
+              (⟨s₂₃, by simp [hs₂₃]⟩ : (toKaroubi C).obj Z₂₃ ⟶ (⟨Z₂₃, s₂₃, hs₂₃⟩ : Karoubi C))
+              ?_ ?_ ?_
+            retract := ?_ }⟩⟩
+        · ext
+          change (s₁₂ ≫ O.m₁ ≫ s₁₃) ≫ (s₁₃ + corrX s₁₃ O.m₃ s₂₃ ρ₂₃ v₁₃) = s₁₂ ≫ O.m₁
+          rw [comp_add]
+          simp only [assoc, hs₁₃, i₁]
+          rw [← comp_add, ← comp_add, add_sub_cancel, comp_id]
+        · ext
+          change (s₁₃ ≫ O.m₃ ≫ s₂₃) ≫ s₂₃ = (s₁₃ + corrX s₁₃ O.m₃ s₂₃ ρ₂₃ v₁₃) ≫ O.m₃
+          simp only [assoc, hs₂₃, add_comp, i₂, comp_sub, comp_id]
+          abel
+        · ext
+          change ((w₂₃ ≫ P₂.p⟦(1 : ℤ)⟧') ≫ (v₁₂ ≫ s₁₂)⟦(1 : ℤ)⟧') ≫ s₁₂⟦(1 : ℤ)⟧' =
+            s₂₃ ≫ (w₂₃ ≫ v₁₂⟦(1 : ℤ)⟧') ≫ 𝟙 _
+          have k : P₂.p⟦(1 : ℤ)⟧' ≫ (v₁₂ ≫ s₁₂)⟦(1 : ℤ)⟧' ≫ s₁₂⟦(1 : ℤ)⟧' =
+              P₂.p⟦(1 : ℤ)⟧' ≫ v₁₂⟦(1 : ℤ)⟧' := by
+            rw [← Functor.map_comp, ← Functor.map_comp, ← Functor.map_comp, assoc, hs₁₂, cv₁₂,
+              reassoc_of% P₂.idem]
+          simp only [assoc]
+          rw [k, comp_id, ← reassoc_of% cw₂₃]
+        · ext
+          change O.m₁ ≫ (s₁₃ + corrY s₁₃ w₁₃ σ₁₂ O.m₁) = s₁₂ ≫ s₁₂ ≫ O.m₁ ≫ s₁₃
+          rw [comp_add, r₁, reassoc_of% hs₁₂, sub_comp, id_comp]
+          abel
+        · ext
+          change O.m₃ ≫ s₂₃ = (s₁₃ + corrY s₁₃ w₁₃ σ₁₂ O.m₁) ≫ s₁₃ ≫ O.m₃ ≫ s₂₃
+          rw [add_comp, reassoc_of% hs₁₃, r₂, ← add_comp, add_sub_cancel, id_comp]
+        · ext
+          change ((w₂₃ ≫ v₁₂⟦(1 : ℤ)⟧') ≫ 𝟙 _) ≫ s₁₂⟦(1 : ℤ)⟧' =
+            s₂₃ ≫ (w₂₃ ≫ P₂.p⟦(1 : ℤ)⟧') ≫ (v₁₂ ≫ s₁₂)⟦(1 : ℤ)⟧'
+          have k2 : P₂.p⟦(1 : ℤ)⟧' ≫ P₂.p⟦(1 : ℤ)⟧' ≫ (v₁₂ ≫ s₁₂)⟦(1 : ℤ)⟧' =
+              (v₁₂ ≫ s₁₂)⟦(1 : ℤ)⟧' := by
+            rw [← Functor.map_comp, ← Functor.map_comp, reassoc_of% P₂.idem, ← reassoc_of% cv₁₂,
+              hs₁₂]
+          simp only [assoc, comp_id]
+          rw [← reassoc_of% cw₂₃, k2, Functor.map_comp]
+        · ext
+          · exact hs₁₂
+          · change (s₁₃ + corrX s₁₃ O.m₃ s₂₃ ρ₂₃ v₁₃) ≫ (s₁₃ + corrY s₁₃ w₁₃ σ₁₂ O.m₁) = s₁₃
+            rw [add_comp, comp_add, comp_add, hs₁₃, hsy, hxs, xy]
+            simp
+          · exact hs₂₃
+        }
 
 end CategoryTheory.Idempotents.Karoubi
