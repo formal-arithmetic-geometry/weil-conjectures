@@ -118,5 +118,24 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-csl1700 (reviewer sub-agent of L); spot-checked: Source: blueprint lemma-constructible-flc-serre.md, extension paragraph, only the sentence 'a surjection of sheaves is locally surjective on sections'; the statement (X scheme, Lambda ring, short exact sequence of sheaves of Lambda-modules on X_et; local lifts of sections of N) is true for every Lambda and does not use the false local-splitting/torsor argument of HUMAN 16:17. Steps: (1) def-weil-pbc-exact-sequence (mathlib leaf) gives pi epi; (3) lem-weil-pbc-abelian-sheaf-epi-locally-surjective (mathlib leaf, Sheaf.isLocallySurjective_iff_epi', EpiMono.lean:124 verified) gives the covering and lifts, but it is stated for Ab(X_et) only. FIX more, RETURN less: C4 repair: inserted step 2 citing lem-weil-pbc-module-sheaves-colimits-forgetful (1) (forget Mod(Lambda_X) -> Ab(X_et) exact, preserves cokernels; etale site has sheafification) so pi is epi in Ab(X_et); added it to proof_deps and declared it as a generic tool use (C8; off-unit sk-thm-reduction, black-box exactness of forget). Fixes: dag/nodes/sec-proper-base-change/lem-constructible-shortexact-local-lift.json: proof[0].text: garbled '\\$\\Lambda\\$' corrected to $\\Lambda$; proof: new step 2 as above; proof[2].text: says pi is epi of Ab(X_et) by the previous step; proof_deps: added the forgetful node. Leaves are not off-unit route replacements (C7 ok). Grep of Mathlib ModuleCat/Sheaf found no SheafOfModules epi<->locally surjective lemma, so no attachment. Small cases: identity pi (trivial cover), Z/4 -> Z/2 constant sheaves (global lift exists, no splitting needed). Report mentions a citations.json not in the commit (harmless). Times: Sat Oct 10 04:59:17 PM UTC 2026 - Sat Oct 10 05:00:07 PM UTC 2026; 1 file(s) fixed by the reviewer"
  },
- "lead_note": "2026-10-10 L (R-csl1700): Statement asserts only local lifts of an epimorphism (true for any Lambda); it does not assert local splitting of the extension, so the HUMAN 16:17 torsor error does not affect it, though blueprint.from.place quotes the false 'locally split' sentence."
+ "lead_note": "2026-10-10 L (R-csl1700): Statement asserts only local lifts of an epimorphism (true for any Lambda); it does not assert local splitting of the extension, so the HUMAN 16:17 torsor error does not affect it, though blueprint.from.place quotes the false 'locally split' sentence.",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleShortExactLocalLift",
+  "declaration": "AlgebraicGeometry.Scheme.exists_etale_local_lift_of_shortExact",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleShortExactLocalLift.lean",
+  "statement": "theorem exists_etale_local_lift_of_shortExact (X : Scheme.{u}) (Λ : Type u) [CommRing Λ] (S : ShortComplex (SheafOfModules.{u + 1} ((constantSheaf X.smallEtaleTopology RingCat.{u + 1}).obj (RingCat.of (ULift.{u + 1, u} Λ))))) (hS : S.ShortExact) (U : X.Etale) (t : S.X₃.val.obj (op U)) : ∃ (I : Type (u + 1)) (V : I → X.Etale) (f : ∀ i : I, V i ⟶ U) (s : ∀ i : I, S.X₂.val.obj (op (V i))), Sieve.ofArrows V f ∈ X.smallEtaleTopology U ∧ ∀ i : I, S.g.val.app (op (V i)) (s i) = S.X₃.val.map (f i).op t",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-csl1031"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-csl1031",
+  "group": "F1",
+  "result": "fix",
+  "note": "X : Scheme.{u} arbitrary; Λ a ring = commutative (Stacks convention, Decision L 06:32, Mod(T_et,R) of def-weil-pbc-etale-sheaves is for commutative R): FIX [Ring Λ] -> [CommRing Λ]; R_T = constantSheaf smallEtaleTopology RingCat of ULift Λ and SheafOfModules.{u+1} exactly as the landed E1 record (same pattern as landed proEtaleDerivedCategory); 0->M->E->N->0 = ShortComplex + ShortExact (exact, mono f, epi g); U : X.Etale, t : N(U) universal; cover = Sieve.ofArrows V f in smallEtaleTopology U (= joint surjectivity), I : Type (u+1), empty I allowed for empty U; s_i in E(V i) with g(s_i) = t|_{V i}; docstring carries the 3 proof steps and (blueprint: ...); no constructible/locally constant notion used"
+ }
 }
