@@ -84,7 +84,7 @@ noncomputable abbrev etaleTransportTerminal : X.Etale :=
 /-- The base change of the terminal object of `Y.Etale` along `e` is terminal: the
 isomorphism `Y ×_Y X ≅ X`. -/
 noncomputable def etaleTransportTerminalIso : etaleTransportTerminal e ≅ etaleTerminal X :=
-  MorphismProperty.Over.isoMk (asIso (pullback.snd (𝟙 Y) e.hom)) (by simp)
+  MorphismProperty.Over.isoMk (asIso (pullback.snd (𝟙 Y) e.hom)) (by simp; rfl)
 
 lemma bijective_map_etaleTransportTerminalIso
     (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) :

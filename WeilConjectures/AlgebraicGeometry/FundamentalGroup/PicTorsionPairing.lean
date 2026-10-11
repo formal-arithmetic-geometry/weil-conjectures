@@ -76,9 +76,10 @@ noncomputable def kummerSequenceMap (m d : ℕ) :
   comm₁₂ := by
     simp [kummerSequence]
   comm₂₃ := by
-    simp only [kummerSequence, Category.id_comp, Preadditive.comp_nsmul, Category.comp_id]
+    simp only [kummerSequence, Preadditive.comp_nsmul, Category.comp_id]
     rw [mul_comm, mul_smul]
 
+omit [IsProper (X ↘ Spec (.of k))] [SmoothOfRelativeDimension 1 (X ↘ Spec (.of k))] in
 /-- The Kummer map to `H²` is compatible with the inclusion `μ_m ⊆ μ_{dm}`: the class of `L`
 is sent to the class of `L^d`. -/
 lemma map_rootsOfUnityInclusion_picToSheafHTwo (m d : ℕ) (hm : (m : k) ≠ 0)
@@ -143,7 +144,7 @@ lemma picPairing_eq_of_isIsomorphic {m : ℕ} [NeZero m] (hm : (m : k) ≠ 0)
   ext y
   rw [picPairing_apply, picPairing_apply, t₁.cupMu_eq_cupMu_nsmul t₂ φ.inv
     (by rw [← hφ, Iso.inv_hom_id_assoc]) 1 (by rw [one_nsmul, Iso.comp_inv_eq, Category.assoc,
-      ← hv, Iso.inv_hom_id_assoc]), one_nsmul]
+      hv, Iso.inv_hom_id_assoc]), one_nsmul]
 
 omit [IsAlgClosed k] [SmoothOfRelativeDimension 1 (X ↘ Spec (.of k))]
   [IsProper (X ↘ Spec (.of k))] in
@@ -175,20 +176,21 @@ lemma picPairing_nsmul {m d m' : ℕ} [NeZero m] [NeZero m'] (hmd : m' = m * d)
       (t'.picPairing hm' y) := by
   subst hmd
   have hd : d ≠ 0 := right_ne_zero_of_mul (NeZero.ne (m * d))
-  set x := (kummerTorsionEquiv m hm).symm ⟨_, hy⟩
+  obtain ⟨x, hxd⟩ : ∃ x, x = (kummerTorsionEquiv m hm).symm ⟨_, hy⟩ := ⟨_, rfl⟩
   have hx : Sheaf.H.map (rootsOfUnityInclusion m (m * d) (dvd_mul_right m d)) 1 x =
       d • (kummerTorsionEquiv (m * d) hm').symm y := by
     apply (kummerTorsionEquiv (m * d) hm').injective
     apply Subtype.ext
     rw [map_nsmul, AddEquiv.apply_symm_apply, coe_kummerTorsionEquiv_map_rootsOfUnityInclusion m
-      (m * d) hm hm', AddSubgroup.coe_nsmul, x, AddEquiv.apply_symm_apply, natCast_zsmul]
+      (m * d) hm hm', AddSubgroup.coe_nsmul, hxd, AddEquiv.apply_symm_apply]
+    exact natCast_zsmul _ _
   have key := t.map_cupMu t' h 1 hπ hc (dvd_mul_right m d) x
   rw [one_nsmul, hx, map_nsmul] at key
   obtain ⟨L, hL⟩ := surjective_picToSheafHTwo m hm (t.cupMu x)
   have h1 := sheafHTwoTrace_map_rootsOfUnityInclusion m d hm hm' L
   rw [hL, key, map_nsmul, nsmul_eq_mul] at h1
   push_cast at h1
-  rw [picPairing_apply, ← hL, sheafHTwoTrace_picToSheafHTwo]
+  rw [picPairing_apply, ← hxd, ← hL, sheafHTwoTrace_picToSheafHTwo]
   change (((picDegreeHom k X L.toMul).toAdd : ℤ) : ZMod m) = _
   rw [← map_intCast (ZMod.castHom (dvd_mul_right m d) (ZMod m))]
   exact ZMod.castHom_eq_of_natCast_mul_eq hd _ _ h1.symm

@@ -18,7 +18,8 @@ Let `C₀` be a proper smooth curve over a field `K` whose geometric fibre `C = 
 connected, let `G = π₁(C, s)` and let `l ≠ char K` be a prime. The identification
 `H¹(C_ét, ℤ / lᵏ) ≃ Hom_cont(G, ℤ / lᵏ)`
 (`AlgebraicGeometry.Scheme.EtaleTorsor.sheafHEquivContinuousMonoidHom`) and the curve estimate
-`H¹(C_ét, ℤ / lᵏ) ≅ (ℤ / lᵏ)^{2g}` (`AlgebraicGeometry.IsCurve.nonempty_addEquiv_sheafH_constantZMod_one`)
+`H¹(C_ét, ℤ / lᵏ) ≅ (ℤ / lᵏ)^{2g}`
+(`AlgebraicGeometry.IsCurve.nonempty_addEquiv_sheafH_constantZMod_one`)
 show that `G` has exactly `l ^ (2 g k)` continuous characters with values in `ℤ / lᵏ`
 (`AlgebraicGeometry.Scheme.EtaleTorsor.exists_card_continuousMonoidHom_zmod_eq`). This is the
 counting hypothesis of `ContinuousMonoidHom.exists_surjective_of_card_eq`.
@@ -32,7 +33,7 @@ of relative dimension one, hence of dimension one.
 
 universe u
 
-open CategoryTheory Limits
+open CategoryTheory Limits PreGaloisCategory
 
 namespace AlgebraicGeometry
 
@@ -79,7 +80,7 @@ theorem exists_card_continuousMonoidHom_zmod_eq (p : C ⟶ Spec (.of K))
   -- `l` is invertible in `K`, hence in `K̄`
   have hlK : (l : K) ≠ 0 := fun h ↦ by
     rcases hl.eq_one_or_self_of_dvd _ ((ringChar.spec K l).1 h) with h1 | h1
-    · exact ringChar_ne_one h1
+    · exact CharP.ringChar_ne_one h1
     · exact (Fact.out : ringChar K ≠ l) h1
   refine ⟨2 * q.genus, fun k ↦ ?_⟩
   have : NeZero (l ^ k) := ⟨pow_ne_zero _ hl.ne_zero⟩
