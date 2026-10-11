@@ -149,5 +149,24 @@
   "by": "L",
   "result": "accepted",
   "note": "4 steps follow Stacks 07CM: the square-zero case via the existing 07C3 factorization-criterion node, new 07CK and 07CL nodes (with the composite identified), and the induction on n written out with K = I^{n-1} (flatness passes to R/K by the base-change leaves). Tags 07CM, 07CK, 07CL, 07C3 verified."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.PopescuLiftNilpotent",
+  "declaration": "Algebra.popescu_lift_nilpotent",
+  "file": "lean/Sheaf/Algebra/PopescuLiftNilpotent.lean",
+  "statement": "theorem popescu_lift_nilpotent (R : Type u) [CommRing R] (Λ : Type (max u v)) [CommRing Λ] [Algebra R Λ] (I : Ideal R) (hI : ∃ n : ℕ, 1 ≤ n ∧ I ^ n = ⊥) (hΛ : ObjectProperty.ind.{max u v} (fun C : CommAlgCat.{max u v} (R ⧸ I) ↦ Smooth (R ⧸ I) C) (CommAlgCat.of (R ⧸ I) (Λ ⧸ I.map (algebraMap R Λ)))) (hflat : RingHom.Flat (algebraMap R Λ)) : ObjectProperty.ind.{max u v} (fun C : CommAlgCat.{max u v} R ↦ Smooth R C) (CommAlgCat.of R Λ)",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-pln1314"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-pln1314",
+  "group": "M1",
+  "result": "fix",
+  "note": "R:u, Λ:max u v, [Algebra R Λ]=ring map; (1) ∃ n≥1, I^n=⊥; (2) ind.{max u v} Smooth (R⧸I) at Λ⧸I.map (algebraMap R Λ) via Mathlib algebraQuotientMapQuotient; (3) RingHom.Flat (algebraMap R Λ); concl ind.{max u v} Smooth R at Λ; letI removed, universes as lift-once/lift-twice"
  }
 }

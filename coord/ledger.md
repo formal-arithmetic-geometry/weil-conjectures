@@ -4692,3 +4692,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 13:01 L: merged deliver/J1/lem-sc-pseudo-coherent-qcoh (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.PseudoCoherentQCoh AlgebraicGeometry.Scheme.schemeDerivedQCohProperty_of_isPseudoCoherent)
 - 13:01 L: merged deliver/K1/lem-weil-pbc-power-series-field-cohen-fs-adic (stage 2; reviewer FIX; first push; Sheaf.RingTheory.PowerSeriesFieldCohenFsAdic MvPowerSeries.formallySmoothAdic_zmod)
 - 13:01 L: merged deliver/C1/lem-weil-pbc-popescu-lift-solution (stage 2; reviewer FIX; first push; Sheaf.RingTheory.PopescuLiftSolution Algebra.canBePopescuResolved_of_quotient_eighth_powers)
+- 13:02 L: merged deliver/M1/lem-weil-pbc-popescu-lift-nilpotent (stage 2; reviewer FIX; first push; Sheaf.Algebra.PopescuLiftNilpotent Algebra.popescu_lift_nilpotent)
