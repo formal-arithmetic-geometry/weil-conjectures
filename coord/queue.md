@@ -1,11 +1,11 @@
 # Work queue
 
-988 items; claim with `tools/claim.py next <group> [--stage N]`.
+980 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (988)
+## Stage 2: nodes to state (980)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -13,7 +13,6 @@
 | `def-pur-sheaf-hom` | 1 | state |
 | `def-weil-pbc-derived-categories` | 1 | state |
 | `def-weil-pbc-finite-torsors` | 1 | state |
-| `lem-constructible-constant-exact` | 1 | state |
 | `lem-exc-abelian-sheaves-gmodules` | 1 | state |
 | `lem-exc-cochains-derived-invariants` | 1 | state |
 | `lem-kun-03sa` | 1 | state |
@@ -39,8 +38,6 @@
 | `lem-pc-zero-scheme-pullback` | 1 | state |
 | `lem-pc-zero-scheme-pullback-local-coefficient` | 1 | state |
 | `lem-pod-lisse-module-sheaves-as-module-objects` | 1 | state |
-| `lem-pur-kinjective-acyclic-quotient-complexes-bounded-size` | 1 | state |
-| `lem-pur-kinjective-surjection-bounded-size` | 1 | state |
 | `lem-sc-affine-cap-section-open` | 1 | state |
 | `lem-sc-ample-finite-affine-cover` | 1 | state |
 | `lem-sc-ample-finite-principal-affine` | 1 | state |
@@ -57,12 +54,7 @@
 | `lem-sc-enough-globally-generated-ample` | 1 | state |
 | `lem-sc-etale-torsor-pushout-extension` | 1 | state |
 | `lem-sc-ext-derived-composite-natural` | 1 | state |
-| `lem-sc-filtered-colimit-prime-chain-dimension` | 1 | state |
-| `lem-sc-finite-cohomology` | 1 | state |
-| `lem-sc-finite-discrete-separated-affine` | 1 | state |
 | `lem-sc-finite-duality-trace` | 1 | state |
-| `lem-sc-finite-integral-conductor` | 1 | state |
-| `lem-sc-finite-length-global-submodule` | 1 | state |
 | `lem-sc-finite-maximals-over-element` | 1 | state |
 | `lem-sc-finite-pushforward-locally-free` | 1 | state |
 | `lem-sc-finite-sections-cover-qc` | 1 | state |
