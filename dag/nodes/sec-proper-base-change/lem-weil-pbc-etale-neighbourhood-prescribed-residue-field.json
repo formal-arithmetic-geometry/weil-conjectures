@@ -181,5 +181,23 @@
   "by": "L",
   "result": "pass",
   "note": "Reviewed by the lead (opus-relaunch6). Five steps (Stacks 02LF says only 'reduce to S affine, then 00UD'): affine chart with the residue-field identifications, transport of k, the new unsplit node for Algebra 00UD (etale ring map with prescribed finite separable residue field extension; its split needs the primitive element theorem and standard etale algebras), the neighbourhood is etale (composition leaf), the residue field compatibility via a new unsplit node on Spec of a ring map and residue fields (01HY/01HV(6)/01I2; Mathlib has Spec.map_apply and the stalk-level localRingHom_comp_stalkIso). Tag correction done by L in lem-weil-pbc-standard-etale-monic-derivative (00UH -> 00UD)."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleNeighbourhoodPrescribedResidueField",
+  "declaration": "AlgebraicGeometry.Scheme.exists_etale_neighbourhood_prescribed_residueField",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleNeighbourhoodPrescribedResidueField.lean",
+  "statement": "theorem Scheme.exists_etale_neighbourhood_prescribed_residueField (S : Scheme.{u}) (s : S) (k : Type v) [Field k] [Algebra (S.residueField s) k] [FiniteDimensional (S.residueField s) k] [Algebra.IsSeparable (S.residueField s) k] : ∃ (U : Scheme.{u}) (φ : U ⟶ S), Etale φ ∧ ∃ (u : U) (h : φ u = s) (e : k ≃+* U.residueField u), ∀ a : S.residueField s, e (algebraMap (S.residueField s) k a) = (φ.residueFieldMap u).hom ((S.residueFieldCongr h).inv.hom a)",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-enr0958",
+  "group": "E1",
+  "result": "pass",
+  "note": "S scheme, s point; k Field + Algebra κ(s) k + FiniteDimensional + Algebra.IsSeparable; ∃ U, φ : U ⟶ S, Etale φ, u with φ u = s, e : k ≃+* κ(u) with e ∘ algebraMap = φ.residueFieldMap u ∘ (residueFieldCongr h).inv (direction checked in Mathlib: congr h : κ(φu) ≅ κ(s)); universes u/v independent, U in u fine (finite k has small model); ring-level sibling 00UD has no lean yet"
  }
 }
