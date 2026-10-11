@@ -1,8 +1,8 @@
 # Work queue
 
-869 items; claim with `tools/claim.py next <group> [--stage N]`.
+868 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (53)
+## Stage 1: nodes to split (52)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -26,7 +26,6 @@
 | `lem-sc-strict-henselization-completion-flat-over-base` | 4013 | none |
 | `lem-pc-derived-tensor-transitivity` | 5015 | none |
 | `lem-pc-affine-derived-base-change-comparison-map` | 5016 | none |
-| `def-pc-derived-base-change-map` | 5017 | none |
 | `lem-pc-affine-flat-module-local-criterion` | 5017 | none |
 | `lem-pc-derived-mayer-vietoris-functorial` | 5017 | none |
 | `lem-sp-ce-vertical-nullhomotopy` | 6008 | none |
@@ -35,11 +34,11 @@
 | `lem-sc-picard-kunneth-qcoh` | 6014 | none |
 | `lem-sc-valuation-closed-fibre-section-vanishing` | 6014 | none |
 | `lem-sc-valuation-fp-torsionfree-free` | 6014 | none |
-| `lem-sc-valuation-proper-coherent-sections` | 6014 | none |
 | `lem-sc-valuation-zero-section-relative-cartier` | 6014 | none |
 | `lem-sc-finite-free-complex-homology-upper-semicontinuous` | 6015 | none |
 | `lem-sc-finite-locally-free-residue-isomorphism` | 6015 | none |
 | `lem-sc-perfect-cut-complex-degree-zero` | 6015 | none |
+| `lem-sc-valuation-proper-coherent-higher-direct-images` | 6015 | none |
 | `lem-sc-base-change-curve` | - | none |
 | `lem-sc-global-functions` | - | rests_on_sorry |
 | `lem-pc-coherent-property-irreducible` | - | none |
@@ -881,7 +880,7 @@
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 1717 nodes that wait for a statement dependency, 94 nodes that wait for stage 1.
+Not open yet: 1719 nodes that wait for a statement dependency, 93 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
