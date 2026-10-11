@@ -109,5 +109,23 @@
   "group": "H1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-fpl2952 (reviewer sub-agent of L); spot-checked: Not a MATHLIB leaf: Fubini.lean:546 limitFlipCompLimIsoLimitCompLim needs HasLimitsOfShape J C for J=I^op, which Scheme lacks; limitUncurryIsoLimitCompLim (407) likewise needs HasLimitsOfShape in its section, so the item's honest 'indicated limits exist' form is not one declaration. Proof is the cone-comparison universal-property argument (Categories 002M, dual), elementary, C1 ok; existence hypothesis honest (E); citers lem-weil-pbc-limit-fibre-products, lem-kun-0f09/0f1h/0f1i-normal use exactly this comparison (C4); statement uses categorical limits, not the affine-transition construction, so no limit-node citation needed. FIX more, RETURN less: Step 1 composition order corrected (s_i=gamma_i o x_i, delta_i o y_i, not x_i o gamma_i) and compatibility with transition maps made explicit. Note: second reading claims source changed to categories.tex and same_as filled, but the node still has the blueprint source and empty same_as.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FibreProductLimit",
+  "declaration": "AlgebraicGeometry.Scheme.isIso_limit_pullback_comparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/FibreProductLimit.lean",
+  "statement": "theorem Scheme.isIso_limit_pullback_comparison {J : Type w} [Category.{v} J] (X Y S : J ⥤ Scheme.{u}) (f : X ⟶ S) (g : Y ⟶ S) [HasLimit X] [HasLimit Y] [HasLimit S] [HasLimit (pullback f g)] : IsIso (pullback.lift (f := limMap f) (g := limMap g) (limMap (pullback.fst f g)) (limMap (pullback.snd f g)) (by apply limit.hom_ext (F := S) intro j simp only [Category.assoc, limMap_π] rw [← Category.assoc, limMap_π, ← Category.assoc, limMap_π] simpa only [Category.assoc, NatTrans.comp_app] using congrArg (fun a : pullback f g ⟶ S => limit.π (pullback f g) j ≫ a.app j) (pullback.condition (f := f) (g := g))))",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-fpl0720",
+  "group": "M1",
+  "result": "fix",
+  "note": "Index: arbitrary {J : Type w} [Category.{v} J] covers the node's inverse system over I (take J = I^op; the comparison is iso for any J once the four limits exist, so no directedness/cofiltered hypothesis needed and none in node); X Y S : J ⥤ Scheme.{u} with f g natural = compatible system gamma_i, delta_i; [HasLimit X/Y/S/(pullback f g)] = 'all indicated limits exist'; pullback f g in J ⥤ Scheme is pointwise the recorded pullback (pullbackObjIso); conclusion IsIso of pullback.lift (limMap fst, limMap snd) = the canonical map; true by limits commuting with limits. H4: Mathlib's limitFlipCompLimIsoLimitCompLim needs HasLimitsOfShape J Scheme, no exact match in Mathlib/source (grep cofiltered+pullback in WeilConjectures, AffineTransitionLimit only has isPullback lemmas for affine-transition cones). Docstring carries both proof steps. FIX (H9): removed unused import Mathlib.CategoryTheory.Limits.FunctorCategory.Shapes.Pullbacks (file compiles without it)."
  }
 }
