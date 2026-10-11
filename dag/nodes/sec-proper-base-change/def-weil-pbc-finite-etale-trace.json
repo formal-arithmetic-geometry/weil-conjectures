@@ -169,5 +169,27 @@
   "by": "L",
   "result": "pass",
   "note": "definition made precise: res = unit of f^{-1} ⊣ f_*, tr = the member of the unique characterized family of lem-weil-pbc-finite-etale-trace-exists (Stacks 03SE with the characterization paragraph of 03SH, not the counit of f_! ⊣ f^{-1}, which the DAG does not support); the R-linearity claim removed, Z/n-linearity justified in one line; no new nodes; no Lean for the trace in the source repository"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteEtaleTrace",
+  "declaration": "AlgebraicGeometry.Etale.finiteEtaleTrace",
+  "declarations": [
+   "AlgebraicGeometry.Etale.finiteEtaleRestriction",
+   "AlgebraicGeometry.Etale.finiteEtaleTrace"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteEtaleTrace.lean",
+  "statement": "def finiteEtaleTrace {X Y : Scheme.{u}} (f : Y ⟶ X) [IsFinite f] [Etale f] (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) : (lowerStar AddCommGrpCat.{u + 1} f).obj ((upperStar AddCommGrpCat.{u + 1} f).obj F) ⟶ F",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-det1035",
+  "group": "C1",
+  "result": "pass",
+  "note": "f:Y->X with [IsFinite f][Etale f], F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u+1}; res = (upperStarLowerStarAdjunction _ f).unit.app F; tr = Classical.choose of H1 existsUnique_finiteEtaleTrace.exists evaluated at (X,Y,f,F), same T binder order, rfl-checked; no second trace; compiles against landed H1 module"
  }
 }
