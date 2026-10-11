@@ -131,5 +131,23 @@
   "group": "M1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-nrp (reviewer sub-agent of L); spot-checked: Source: blueprint master sec-curve-estimates/sk-thm-br/lem-sc-normalization-properties.md (order 919); the item statement is unchanged and agrees with it clause by clause (integral, finite type over k, normalization in k(X) via def-sc-normalization; (a) finite/surjective/birational, proper if X proper, dim equal; (b) iso over every normal open U; (c) smooth if dim X=1 and k perfect). Step 1 carried by lem-sc-normalization-exists (same hypotheses, states all of (a)); step 2 by lem-sc-normalization-over-normal-locus (same hypotheses, states (b) verbatim); step 3 by lem-sc-normalized-curve-smooth (perfect k, dim X=1, states smoothness of X^nu). All three cited nodes are in the same unit sk-thm-br, so no C7/C8 issue; the split follows the blueprint proof exactly. No new nodes, no Mathlib leaves; four Mathlib searches recorded (LeanSearch HTTP 500 noted), no combined declaration expected. Changed fields: same_as null->[], proof, mathlib_searches, status, split_report only. Note: report section 1 mentions a citations.json that is not in the commit (harmless). Small cases: (b) with U empty is trivial; (c) restricted exactly as the cited node. Start Sat Oct 10 03:18:14 PM UTC 2026, end Sat Oct 10 03:18:32 PM UTC 2026"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.NormalizationProperties",
+  "declaration": "AlgebraicGeometry.Scheme.normalization_properties",
+  "statement": "theorem normalization_properties {k : Type u} [Field k] {X : Scheme.{u}} [IsIntegral X] (q : X ⟶ Spec (.of k)) [LocallyOfFiniteType q] [QuasiCompact q] : IsFinite X.fromNormalization ∧ Surjective X.fromNormalization ∧ Birational X.normalization X ∧ (IsProper q → IsProper (X.fromNormalization ≫ q)) ∧ topologicalKrullDim X.normalization = topologicalKrullDim X ∧ (∀ (U : X.Opens), (∀ x ∈ U, IsIntegrallyClosed (X.presheaf.stalk x)) → IsIso (X.fromNormalization ∣_ U)) ∧ (PerfectField k → topologicalKrullDim X = 1 → Smooth (X.fromNormalization ≫ q))",
+  "by": "F1",
+  "date": "2026-10-11",
+  "file": "lean/Sheaf/AlgebraicGeometry/NormalizationProperties.lean",
+  "branch": "sheaf-dag",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "F1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }
