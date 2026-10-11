@@ -24,7 +24,8 @@
   "def-pc-derived-category",
   "def-weil-abstract-derived-category",
   "def-weil-sheaf-of-modules-category",
-  "lem-weil-pbc-affine-module-correspondence"
+  "lem-weil-pbc-affine-module-correspondence",
+  "def-sc-direct-image-algebra-derived-category"
  ],
  "proof": [
   {
@@ -158,5 +159,23 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteAffineDerivedEquivalence",
+  "declaration": "AlgebraicGeometry.finite_affine_derived_equivalence",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteAffineDerivedEquivalence.lean",
+  "statement": "theorem finite_affine_derived_equivalence {X Y : Scheme.{v}} (f : X ⟶ Y) [IsAffineHom f] [HasDerivedCategory.{wX} (SheafOfModules.{v} (moduleRings X.toRingedSpace))] [HasDerivedCategory.{wY} (SheafOfModules.{v} (moduleRings Y.toRingedSpace))] [HasDerivedCategory.{wA} (SheafOfModules.{v} (moduleRings (directImageAlgebraSpace f)))] : ∃ E : schemeDerivedQCohCategory X ≌ directImageAlgebraDerivedQCohCategory f, Nonempty (E.functor ⋙ (directImageAlgebraDerivedQCohProperty f).ι ≅ (schemeDerivedQCohProperty X).ι ⋙ RingedSpace.derivedModuleDirectImage (toDirectImageAlgebraSpace f)) ∧ ∃ S : directImageAlgebraDerivedQCohCategory f ⥤ schemeDerivedQCohCategory Y, Nonempty (S ⋙ (schemeDerivedQCohProperty Y).ι ≅ (directImageAlgebraDerivedQCohProperty f).ι ⋙ (SheafOfModules.restrictScalars (R := moduleRings Y.toRingedSpace) (R' := moduleRings (directImageAlgebraSpace f)) ⟨Functor.whiskerRight f.c (forget₂ CommRingCat RingCat)⟩).rightDerivedFunctor) ∧ Nonempty (E.functor ⋙ S ⋙ (schemeDerivedQCohProperty Y).ι ≅ (schemeDerivedQCohProperty X).ι ⋙ schemeDerivedDirectImage f)",
+  "branch": "sheaf-dag",
+  "by": "S1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-fad",
+  "group": "S1",
+  "result": "pass",
+  "note": "X,Y,f,[IsAffineHom f] = affine morphism; source schemeDerivedQCohCategory X; target new unbounded D_QCoh(f_*O_X) over (Y,f_*O_X) (carrier rfl-equal to CommAlgebraSheaf Under.mk <f.c> form, checked); E.functor tied to Rg_* (derivedModuleDirectImage of g); S tied to rightDerivedFunctor of restrictScalars along f.c (as landed AffineQCohDerivedEquivalence); E.functor ⋙ S = Rf_*; new node needed (no landed ringed space (Y,f_*O_X)/g, D+_QCoh(B) is bounded); check_dag clean"
  }
 }
