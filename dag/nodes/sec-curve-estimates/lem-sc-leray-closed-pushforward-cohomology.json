@@ -114,5 +114,23 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.Topology.Sheaves.LerayAcyclicComparison",
+  "declaration": "TopCat.Sheaf.exists_lerayEdge_isIso_of_acyclic",
+  "file": "lean/Sheaf/Topology/Sheaves/LerayAcyclicComparison.lean",
+  "statement": "theorem exists_lerayEdge_isIso_of_acyclic {Z X : TopCat.{u}} (f : Z ⟶ X) : ∃ a : (presheafToSheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}).obj (yoneda.obj (⊤ : Opens X) ⋙ AddCommGrpCat.free) ⟶ (pushforwardAb f).obj ((presheafToSheaf (Opens.grothendieckTopology Z) AddCommGrpCat.{u}).obj (yoneda.obj (⊤ : Opens Z) ⋙ AddCommGrpCat.free)), (∀ (U : Opens X) (g : U ⟶ (⊤ : Opens X)), a.hom.app (op U) ((toSheafify (Opens.grothendieckTopology X) (yoneda.obj (⊤ : Opens X) ⋙ AddCommGrpCat.free)).app (op U) (FreeAbelianGroup.of g)) = (toSheafify (Opens.grothendieckTopology Z) (yoneda.obj (⊤ : Opens Z) ⋙ AddCommGrpCat.free)).app (op ((Opens.map f).obj U)) (FreeAbelianGroup.of ((Opens.map f).map g ≫ eqToHom (Opens.map_top f)))) ∧ ∃ ε : ∀ p : ℕ, pushforwardAb f ⋙ Sheaf.cohomologyPresheafFunctor (Opens.grothendieckTopology X) p ⋙ (evaluation (Opens X)ᵒᵖ AddCommGrpCat.{u}).obj (op ⊤) ⟶ Sheaf.cohomologyPresheafFunctor (Opens.grothendieckTopology Z) p ⋙ (evaluation (Opens Z)ᵒᵖ AddCommGrpCat.{u}).obj (op ⊤), (∀ (F : CategoryTheory.Sheaf (Opens.grothendieckTopology Z) AddCommGrpCat.{u}) (I : InjectiveResolution F) (J : InjectiveResolution ((pushforwardAb f).obj F)) (φ : J.cocomplex ⟶ ((pushforwardAb f).mapHomologicalComplex (ComplexShape.up ℕ)).obj I.cocomplex) (_hφ : J.ι.f 0 ≫ φ.f 0 = (pushforwardAb f).map (I.ι.f 0)) (p : ℕ) (s : (presheafToSheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}).obj (yoneda.obj (⊤ : Opens X) ⋙ AddCommGrpCat.free) ⟶ J.cocomplex.X p) (hs : s ≫ J.cocomplex.d p (p + 1) = 0) (t : (presheafToSheaf (Opens.grothendieckTopology Z) AddCommGrpCat.{u}).obj (yoneda.obj (⊤ : Opens Z) ⋙ AddCommGrpCat.free) ⟶ I.cocomplex.X p) (ht : t ≫ I.cocomplex.d p (p + 1) = 0) (_hst : a ≫ (pushforwardAb f).map t = s ≫ φ.f p), (ε p).app F (J.extMk s (p + 1) rfl hs) = I.extMk t (p + 1) rfl ht) ∧ (∀ (F : CategoryTheory.Sheaf (Opens.grothendieckTopology Z) AddCommGrpCat.{u}), (∀ q : ℕ, 0 < q → IsZero ((@Functor.rightDerived _ _ _ _ _ _ _ (pushforwardAb f) (@Functor.additive_of_comp_faithful _ _ _ _ _ _ _ _ _ (pushforwardAb f) (sheafToPresheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}) inferInstance (Functor.additive_of_iso (F := sheafToPresheaf (Opens.grothendieckTopology Z) AddCommGrpCat.{u} ⋙ (Functor.whiskeringLeft (Opens X)ᵒᵖ (Opens Z)ᵒᵖ AddCommGrpCat.{u}).obj (Opens.map f).op) (Iso.refl _)) inferInstance) q).obj F)) → ∀ p : ℕ, IsIso ((ε p).app F))",
+  "branch": "sheaf-dag",
+  "by": "U1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "U1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }

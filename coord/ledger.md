@@ -5604,3 +5604,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 18:48 L: merged deliver/F1/lem-weil-pbc-site-plus-injective-separated (stage 2; reviewer PASS; first push; Sheaf.Paper.SitePlusInjectiveSeparated CategoryTheory.GrothendieckTopology.Plus.inj_of_separated_presheaf)
 - 18:48 L: merged deliver/G1/lem-weil-pbc-site-plus-of-sheaf-iso (stage 2; reviewer PASS; first push; Sheaf.Paper.SitePlusOfSheafIso CategoryTheory.GrothendieckTopology.isIso_toPlus_of_isSheaf_and_isSheaf_plus)
 - 18:48 L: merged deliver/T1/lem-sc-closed-immersion-pushforward-exact (stage 2; reviewer PASS; first push; Sheaf.Topology.ClosedImmersionPushforwardExact TopCat.Sheaf.shortExact_map_pushforward_closedSubset)
+- 18:49 L: merged deliver/U1/lem-sc-leray-closed-pushforward-cohomology (stage 2; reviewer PASS; first push; Sheaf.Topology.Sheaves.LerayAcyclicComparison TopCat.Sheaf.exists_lerayEdge_isIso_of_acyclic)
