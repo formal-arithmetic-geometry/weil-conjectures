@@ -94,5 +94,23 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ece2 (reviewer sub-agent of L); spot-checked: Started Sat Oct 10 04:15:52 PM UTC 2026. Source Stacks Morphisms Lemma 02GJ (lemma-etale-characterize), (1)<=>(3): etaleness local on the source; the item statement (finite family of etale u_i:U_i->X, induced u from the coproduct) is the direct application to the open-and-closed coproduct summands, hypotheses agree. Single step: lem-weil-pbc-scheme-coproduct-family (Mathlib leaf, read) carries existence of the coproduct, uniqueness of u with u o iota_i = u_i, iota_i open immersions with disjoint images covering V; lem-weil-pbc-etale-local-on-source (Mathlib leaf, read: IsZariskiLocalAtSource.iff_of_iSup_eq_top) carries the iff for an open cover of the source; identifying the restriction to the open image iota_i(U_i) with u_i via the isomorphism U_i -> iota_i(U_i) is elementary (C2). Both cited nodes are Mathlib leaves of unit sk-thm-p1 used as generic tools (no tool_uses needed). Only the item's node and report changed; split-owned fields only. Small cases: empty family (V empty, vacuous), one member (u = u_1). Mathlib: AlgebraicGeometry.IsZariskiLocalAtSource.sigmaDesc (Morphisms/Basic.lean:305, read) with P := @Etale states this node exactly (for any small index type); the worker's searches missed it, recorded in the lead note. Ended Sat Oct 10 04:16:28 PM UTC 2026."
  },
- "lead_note": "2026-10-10 L (R-ece2): Mathlib IsZariskiLocalAtSource.sigmaDesc (Mathlib/AlgebraicGeometry/Morphisms/Basic.lean:305) with P := @AlgebraicGeometry.Etale (IsZariskiLocalAtSource instance RingHomProperties.lean:382) states this node exactly: candidate to become a Mathlib leaf. Stage-3 merge candidate: lem-exc-etale-coproduct-etale (E1, merged 16:12) is the special case u_i = Spec L_i -> Spec K of this node and repeats the same locality argument; it could cite this node instead."
+ "lead_note": "2026-10-10 L (R-ece2): Mathlib IsZariskiLocalAtSource.sigmaDesc (Mathlib/AlgebraicGeometry/Morphisms/Basic.lean:305) with P := @AlgebraicGeometry.Etale (IsZariskiLocalAtSource instance RingHomProperties.lean:382) states this node exactly: candidate to become a Mathlib leaf. Stage-3 merge candidate: lem-exc-etale-coproduct-etale (E1, merged 16:12) is the special case u_i = Spec L_i -> Spec K of this node and repeats the same locality argument; it could cite this node instead.",
+ "lean": {
+  "module": "Mathlib.AlgebraicGeometry.Morphisms.Basic",
+  "declaration": "AlgebraicGeometry.IsZariskiLocalAtSource.sigmaDesc",
+  "statement": "lemma sigmaDesc {X : Scheme.{u}} {ι : Type v} [Small.{u} ι] {Y : ι → Scheme.{u}}\n    {f : ∀ i, Y i ⟶ X} (hf : ∀ i, P (f i)) : P (Sigma.desc f)",
+  "branch": "mathlib",
+  "by": "G1",
+  "date": "2026-10-11",
+  "existing": true,
+  "note": "Specialize the ambient morphism property P to @AlgebraicGeometry.Etale and the index type to the given finite I. The IsZariskiLocalAtSource instance follows from Etale.HasRingHomProperty; finite index types are Small in every universe. Sigma.desc is exactly the induced coproduct morphism, by Sigma.ι_desc. This is the Mathlib match already identified in the stage-1 lead_note; no duplicate module is needed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-ece1006",
+  "group": "G1",
+  "result": "pass",
+  "note": "Mathlib IsZariskiLocalAtSource.sigmaDesc (Basic.lean:305, read) with P:=@Etale: X:Scheme.{u}, finite I (Finite->Small.{u}), U_i:Scheme.{u}, u_i:U_i⟶X, hf: all Etale; conclusion Etale (Sigma.desc f), Sigma.ι_desc gives u|U_i=u_i; specialization recompiled clean via lean_run_code; empty/singleton family covered"
+ }
 }
