@@ -1,105 +1,109 @@
 {
- "id": "lem-weil-pbc-module-tensor-symmetric-monoidal",
- "blueprint": {
-  "is": null,
-  "from": {
-   "node": "lem-weil-pbc-symmetric-product-properties",
-   "place": "step 1, 2, 3, 5 of its split (source: Etale Cohomology, proof of Lemma 0A4F: the F_j are the integer polynomials with prod(x_i t + y_i) = sum F_j t^{n-j} (Stacks indexes in reverse order))",
-   "via": [
-    "lem-weil-pbc-invertible-pullback-tensor"
-   ]
+  "id": "lem-weil-pbc-module-tensor-symmetric-monoidal",
+  "blueprint": {
+    "is": null,
+    "from": {
+      "node": "lem-weil-pbc-symmetric-product-properties",
+      "place": "step 1, 2, 3, 5 of its split (source: Etale Cohomology, proof of Lemma 0A4F: the F_j are the integer polynomials with prod(x_i t + y_i) = sum F_j t^{n-j} (Stacks indexes in reverse order))",
+      "via": [
+        "lem-weil-pbc-invertible-pullback-tensor"
+      ]
+    },
+    "same_as": null
   },
-  "same_as": null
- },
- "kind": "statement",
- "title": "Associativity, symmetry and unit of the tensor product of modules on a scheme",
- "statement": "Let $X$ be a scheme and $\\otimes=\\otimes_{\\mathcal O_X}$ the tensor product of $\\mathcal O_X$-modules [def-pur-sheaf-tensor-product]; for sections $s,t$ over one open $U$ write $s\\otimes t$ for the image of $s\\otimes t$ in the tensor product sheaf. Then there are isomorphisms of $\\mathcal O_X$-modules\n$$a:(\\mathcal F\\otimes\\mathcal G)\\otimes\\mathcal H\\to\\mathcal F\\otimes(\\mathcal G\\otimes\\mathcal H),\\quad c:\\mathcal F\\otimes\\mathcal G\\to\\mathcal G\\otimes\\mathcal F,\\quad l:\\mathcal O_X\\otimes\\mathcal F\\to\\mathcal F,$$\nnatural in $\\mathcal F,\\mathcal G,\\mathcal H$, with $a((s\\otimes t)\\otimes u)=s\\otimes(t\\otimes u)$, $c(s\\otimes t)=t\\otimes s$ and $l(r\\otimes s)=rs$ for sections over any open $U$, and they make the category of $\\mathcal O_X$-modules a symmetric monoidal category (pentagon, hexagon, triangle and $c\\circ c=\\mathrm{id}$). In particular, for $\\mathcal L_1,\\dots,\\mathcal L_n$ and a permutation $\\pi$ of $\\{1,\\dots,n\\}$ there is an isomorphism $\\mathcal L_1\\otimes\\cdots\\otimes\\mathcal L_n\\to\\mathcal L_{\\pi^{-1}(1)}\\otimes\\cdots\\otimes\\mathcal L_{\\pi^{-1}(n)}$ (products bracketed from the left) sending $s_1\\otimes\\cdots\\otimes s_n$ to $s_{\\pi^{-1}(1)}\\otimes\\cdots\\otimes s_{\\pi^{-1}(n)}$, i.e. moving the $i$-th factor to position $\\pi(i)$.",
- "source": {
-  "document": "literature/stacks-project/modules.tex",
-  "place": "Modules, Section 17.16 (Tag 01CA, label section-tensor-product: 'the tensor product of modules over a ring satisfies symmetry ... hence the same holds for tensor products of sheaves of modules', and the same for associativity; argument omitted), with Lemma Tag 05NA (lemma-tensor-product-sheafification: $\\mathcal F\\otimes\\mathcal G=(\\mathcal F'\\otimes_p\\mathcal G')^\\#$ for presheaves $\\mathcal F',\\mathcal G'$ with sheafifications $\\mathcal F,\\mathcal G$), which is what lets the presheaf-level associativity be sheafified. Lean (slopmaster2, all sorry-free per the sorry map): SheafOfModules.monoidalCategory and SheafOfModules.symmetricCategory (WeilConjectures/Algebra/Category/ModuleCat/Sheaf/Monoidal.lean lines 151-157, 159-166), the instances AlgebraicGeometry.Scheme.Modules.instMonoidalCategory_weilConjectures / instSymmetricCategory_weilConjectures (WeilConjectures/AlgebraicGeometry/Modules/Invertible.lean lines 121-125, 127-129), and on sections tmulSection (TensorSection.lean 77-80), associator_hom_app_tmulSection (337-342), braiding_hom_app_tmulSection (344-348), leftUnitor_hom_app_tmulSection (313-318)"
- },
- "stmt_deps": [
-  "def-pur-sheaf-tensor-product"
- ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
- "mathlib_searches": [
-  {
-   "tool": "leansearch",
-   "query": "monoidal category structure on sheaves of modules over a sheaf of commutative rings, tensor product sheafification",
-   "results": "CategoryTheory.Sheaf.monoidalCategory and Sheaf.instMonoidalFunctorOppositePresheafToSheaf (Mathlib.CategoryTheory.Sites.Monoidal; sheaves with values in a fixed monoidal category A, not modules over a sheaf of rings), LightCondensed monoidal instances, PresheafOfModules.monoidalCategory / monoidalCategoryStruct (Mathlib.Algebra.Category.ModuleCat.Presheaf.Monoidal)",
-   "date": "2026-10-09",
-   "verdict": "no match: symmetric monoidal structure only for presheaves of modules, or for A-valued sheaves with A fixed"
+  "kind": "statement",
+  "title": "Associativity, symmetry and unit of the tensor product of modules on a scheme",
+  "statement": "Let $X$ be a scheme and $\\otimes=\\otimes_{\\mathcal O_X}$ the tensor product of $\\mathcal O_X$-modules [def-pur-sheaf-tensor-product]; for sections $s,t$ over one open $U$ write $s\\otimes t$ for the image of $s\\otimes t$ in the tensor product sheaf. Then there are isomorphisms of $\\mathcal O_X$-modules\n$$a:(\\mathcal F\\otimes\\mathcal G)\\otimes\\mathcal H\\to\\mathcal F\\otimes(\\mathcal G\\otimes\\mathcal H),\\quad c:\\mathcal F\\otimes\\mathcal G\\to\\mathcal G\\otimes\\mathcal F,\\quad l:\\mathcal O_X\\otimes\\mathcal F\\to\\mathcal F,$$\nnatural in $\\mathcal F,\\mathcal G,\\mathcal H$, with $a((s\\otimes t)\\otimes u)=s\\otimes(t\\otimes u)$, $c(s\\otimes t)=t\\otimes s$ and $l(r\\otimes s)=rs$ for sections over any open $U$, and they make the category of $\\mathcal O_X$-modules a symmetric monoidal category (pentagon, hexagon, triangle and $c\\circ c=\\mathrm{id}$). In particular, for $\\mathcal L_1,\\dots,\\mathcal L_n$ and a permutation $\\pi$ of $\\{1,\\dots,n\\}$ there is an isomorphism $\\mathcal L_1\\otimes\\cdots\\otimes\\mathcal L_n\\to\\mathcal L_{\\pi^{-1}(1)}\\otimes\\cdots\\otimes\\mathcal L_{\\pi^{-1}(n)}$ (products bracketed from the left) sending $s_1\\otimes\\cdots\\otimes s_n$ to $s_{\\pi^{-1}(1)}\\otimes\\cdots\\otimes s_{\\pi^{-1}(n)}$, i.e. moving the $i$-th factor to position $\\pi(i)$.",
+  "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Modules, Section 17.16 (Tag 01CA, label section-tensor-product: 'the tensor product of modules over a ring satisfies symmetry ... hence the same holds for tensor products of sheaves of modules', and the same for associativity; argument omitted), with Lemma Tag 05NA (lemma-tensor-product-sheafification: $\\mathcal F\\otimes\\mathcal G=(\\mathcal F'\\otimes_p\\mathcal G')^\\#$ for presheaves $\\mathcal F',\\mathcal G'$ with sheafifications $\\mathcal F,\\mathcal G$), which is what lets the presheaf-level associativity be sheafified. Lean (slopmaster2, all sorry-free per the sorry map): SheafOfModules.monoidalCategory and SheafOfModules.symmetricCategory (WeilConjectures/Algebra/Category/ModuleCat/Sheaf/Monoidal.lean lines 151-157, 159-166), the instances AlgebraicGeometry.Scheme.Modules.instMonoidalCategory_weilConjectures / instSymmetricCategory_weilConjectures (WeilConjectures/AlgebraicGeometry/Modules/Invertible.lean lines 121-125, 127-129), and on sections tmulSection (TensorSection.lean 77-80), associator_hom_app_tmulSection (337-342), braiding_hom_app_tmulSection (344-348), leftUnitor_hom_app_tmulSection (313-318)"
   },
-  {
-   "tool": "loogle",
-   "query": "CategoryTheory.MonoidalCategory (SheafOfModules _)",
-   "results": "none",
-   "date": "2026-10-09",
-   "verdict": "no match"
-  },
-  {
-   "tool": "grep",
-   "query": "grep -rln 'MonoidalCategory\\|SymmetricCategory' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Sheaf ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Modules; ls ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Presheaf/Monoidal.lean",
-   "results": "no hits in ModuleCat/Sheaf or AlgebraicGeometry/Modules; Presheaf/Monoidal.lean has the presheaf-level monoidal structure",
-   "date": "2026-10-09",
-   "verdict": "no match (presheaf level only)"
-  }
- ],
- "mathlib_match": null,
- "status": "unsplit",
- "merged_into": null,
- "created": {
-  "by": "worker",
-  "item": "lem-weil-pbc-invertible-pullback-tensor",
-  "date": "2026-10-09"
- },
- "lean_audit": {
-  "master": {
-   "state": "none",
-   "decls": [],
-   "missing": [
-    "SheafOfModules.monoidalCategory",
-    "SheafOfModules.symmetricCategory"
-   ]
-  },
-  "slopmaster2": {
-   "state": "closed",
-   "decls": [
+  "stmt_deps": [
+    "def-pur-sheaf-tensor-product"
+  ],
+  "proof": [],
+  "proof_deps": [],
+  "proof_origin": null,
+  "mathlib_searches": [
     {
-     "name": "SheafOfModules.monoidalCategory",
-     "module": "WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Monoidal",
-     "lines": [
-      151,
-      157
-     ],
-     "kind": "def",
-     "sorry": false
+      "tool": "leansearch",
+      "query": "monoidal category structure on sheaves of modules over a sheaf of commutative rings, tensor product sheafification",
+      "results": "CategoryTheory.Sheaf.monoidalCategory and Sheaf.instMonoidalFunctorOppositePresheafToSheaf (Mathlib.CategoryTheory.Sites.Monoidal; sheaves with values in a fixed monoidal category A, not modules over a sheaf of rings), LightCondensed monoidal instances, PresheafOfModules.monoidalCategory / monoidalCategoryStruct (Mathlib.Algebra.Category.ModuleCat.Presheaf.Monoidal)",
+      "date": "2026-10-09",
+      "verdict": "no match: symmetric monoidal structure only for presheaves of modules, or for A-valued sheaves with A fixed"
     },
     {
-     "name": "SheafOfModules.symmetricCategory",
-     "module": "WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Monoidal",
-     "lines": [
-      159,
-      166
-     ],
-     "kind": "def",
-     "sorry": false
+      "tool": "loogle",
+      "query": "CategoryTheory.MonoidalCategory (SheafOfModules _)",
+      "results": "none",
+      "date": "2026-10-09",
+      "verdict": "no match"
+    },
+    {
+      "tool": "grep",
+      "query": "grep -rln 'MonoidalCategory\\|SymmetricCategory' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Sheaf ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Modules; ls ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Presheaf/Monoidal.lean",
+      "results": "no hits in ModuleCat/Sheaf or AlgebraicGeometry/Modules; Presheaf/Monoidal.lean has the presheaf-level monoidal structure",
+      "date": "2026-10-09",
+      "verdict": "no match (presheaf level only)"
     }
-   ],
-   "missing": [],
-   "open": []
-  }
- },
- "chapter": "sec-proper-base-change",
- "unit": "sk-thm-reduction",
- "lean": {
-  "branch": "slopmaster2",
-  "declarations": [
-   "SheafOfModules.monoidalCategory",
-   "SheafOfModules.symmetricCategory"
   ],
-  "note": "attached by the lead at review (2026-10-09), found by the opus worker: the symmetric monoidal structure on sheaves of modules, with the associator, braiding and unitor computed on sections in TensorSection.lean (associator_hom_app_tmulSection, braiding_hom_app_tmulSection, leftUnitor_hom_app_tmulSection); the permutation isomorphism of the node is the composite of these; sorry-free on the full map"
- }
+  "mathlib_match": null,
+  "status": "unsplit",
+  "merged_into": null,
+  "created": {
+    "by": "worker",
+    "item": "lem-weil-pbc-invertible-pullback-tensor",
+    "date": "2026-10-09"
+  },
+  "lean_audit": {
+    "master": {
+      "state": "none",
+      "decls": [],
+      "missing": [
+        "SheafOfModules.monoidalCategory",
+        "SheafOfModules.symmetricCategory"
+      ]
+    },
+    "slopmaster2": {
+      "state": "closed",
+      "decls": [
+        {
+          "name": "SheafOfModules.monoidalCategory",
+          "module": "WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Monoidal",
+          "lines": [
+            151,
+            157
+          ],
+          "kind": "def",
+          "sorry": false
+        },
+        {
+          "name": "SheafOfModules.symmetricCategory",
+          "module": "WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Monoidal",
+          "lines": [
+            159,
+            166
+          ],
+          "kind": "def",
+          "sorry": false
+        }
+      ],
+      "missing": [],
+      "open": []
+    }
+  },
+  "chapter": "sec-proper-base-change",
+  "unit": "sk-thm-reduction",
+  "lean": {
+    "module": "WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Monoidal",
+    "declaration": "SheafOfModules.monoidalCategory",
+    "branch": "slopmaster2",
+    "line": 151,
+    "declarations": [
+      "SheafOfModules.monoidalCategory",
+      "SheafOfModules.symmetricCategory"
+    ],
+    "sorry_free": true,
+    "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state closed)"
+  }
 }

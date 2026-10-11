@@ -1,175 +1,186 @@
 {
- "id": "lemma-weil-pbc-direct-image-filtered-colimit",
- "blueprint": {
-  "is": "lemma-weil-pbc-direct-image-filtered-colimit",
-  "from": null,
-  "same_as": null
- },
- "kind": "statement",
- "title": "Filtered colimits and higher direct image",
- "statement": "If $u:U\\to V$ is quasi-compact and quasi-separated\n[def-weil-pbc-scheme-conventions] and $(F_i)$ is a filtered system of torsion\netale sheaves [def-weil-pbc-etale-sheaves], then for every $q\\geq0$ the\ncanonical map\n\n$$\n \\varinjlim_iR^qu_*F_i\\xrightarrow{\\sim}R^qu_*(\\varinjlim_iF_i)\n$$\n\ninvolving the higher direct image [def-weil-pbc-direct-image] is an\nisomorphism. The same assertion holds after arbitrary base change.",
- "source": {
-  "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Lemma Tag 09Z1 (lemma-relative-colimit), proof; Cohomology on Sites Lemma Tag 03Q5 for the cohomology-colimit input"
- },
- "stmt_deps": [
-  "def-weil-pbc-scheme-conventions",
-  "def-weil-pbc-etale-sheaves",
-  "def-weil-pbc-direct-image"
- ],
- "proof": [
-  {
-   "text": "For an etale object $W\\to V$, the higher-direct-image description [lem-weil-pbc-qcqs-higher-direct-image] identifies $(R^qu_*F_i)(W)$ and $(R^qu_*\\varinjlim_iF_i)(W)$ after sheafification with $H^q(W\\times_VU,F_i|)$ and $H^q(W\\times_VU,(\\varinjlim_iF_i)|)$, respectively. The comparison is natural in $W$ and in the coefficient sheaves, by the definition of [def-weil-pbc-direct-image].",
-   "uses": [
+  "id": "lemma-weil-pbc-direct-image-filtered-colimit",
+  "blueprint": {
+    "is": "lemma-weil-pbc-direct-image-filtered-colimit",
+    "from": null,
+    "same_as": null
+  },
+  "kind": "statement",
+  "title": "Filtered colimits and higher direct image",
+  "statement": "If $u:U\\to V$ is quasi-compact and quasi-separated\n[def-weil-pbc-scheme-conventions] and $(F_i)$ is a filtered system of torsion\netale sheaves [def-weil-pbc-etale-sheaves], then for every $q\\geq0$ the\ncanonical map\n\n$$\n \\varinjlim_iR^qu_*F_i\\xrightarrow{\\sim}R^qu_*(\\varinjlim_iF_i)\n$$\n\ninvolving the higher direct image [def-weil-pbc-direct-image] is an\nisomorphism. The same assertion holds after arbitrary base change.",
+  "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma Tag 09Z1 (lemma-relative-colimit), proof; Cohomology on Sites Lemma Tag 03Q5 for the cohomology-colimit input"
+  },
+  "stmt_deps": [
+    "def-weil-pbc-scheme-conventions",
+    "def-weil-pbc-etale-sheaves",
+    "def-weil-pbc-direct-image"
+  ],
+  "proof": [
+    {
+      "text": "For an etale object $W\\to V$, the higher-direct-image description [lem-weil-pbc-qcqs-higher-direct-image] identifies $(R^qu_*F_i)(W)$ and $(R^qu_*\\varinjlim_iF_i)(W)$ after sheafification with $H^q(W\\times_VU,F_i|)$ and $H^q(W\\times_VU,(\\varinjlim_iF_i)|)$, respectively. The comparison is natural in $W$ and in the coefficient sheaves, by the definition of [def-weil-pbc-direct-image].",
+      "uses": [
+        "def-weil-pbc-direct-image",
+        "lem-weil-pbc-qcqs-higher-direct-image"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/etale-cohomology.tex",
+        "place": "Lemma Tag 09Z1, proof: recall the higher-direct-image sheafification description"
+      }
+    },
+    {
+      "text": "Every etale $W\\to V$ has a covering by affine etale objects; on such a quasi-compact quasi-separated $W$, the fibre product $W\\times_VU$ is quasi-compact and quasi-separated. The filtered-colimit cohomology theorem [lem-weil-pbc-cohomology-filtered-colimit] therefore gives a canonical isomorphism $\\varinjlim_i H^q(W\\times_VU,F_i|)\\cong H^q(W\\times_VU,\\varinjlim_iF_i|)$. The same statement holds on finite fibre products of the affine basis objects, so these isomorphisms form an isomorphism of the associated presheaves after restricting to that basis.",
+      "uses": [
+        "lem-weil-pbc-cohomology-filtered-colimit",
+        "lem-weil-pbc-qcqs-morphism-permanence"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/etale-cohomology.tex",
+        "place": "Lemma Tag 09Z1, proof: quasi-compact etale objects and the equality of cohomology colimits; underlying cohomology input is Tag 03Q5"
+      }
+    },
+    {
+      "text": "The inverse image of sheaves commutes with filtered colimits because [lem-weil-pbc-inverse-image-preserves-colimits] identifies it as a left adjoint. Colimits of abelian sheaves are sheafifications of presheaf colimits, and sheafification preserves colimits; filtered colimits are exact by [lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact]. Thus sheafifying the basiswise cohomology isomorphisms yields the canonical isomorphism $\\varinjlim_iR^qu_*F_i\\xrightarrow{\\sim}R^qu_*(\\varinjlim_iF_i)$.",
+      "uses": [
+        "lem-weil-pbc-inverse-image-preserves-colimits",
+        "lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/etale-cohomology.tex",
+        "place": "Lemma Tag 09Z1, proof: colimits of sheaves are sheafified presheaf colimits and the final sheafification argument"
+      }
+    },
+    {
+      "text": "After an arbitrary base change $V'\\to V$, the base-changed morphism $U\\times_VV'\\to V'$ remains quasi-compact and quasi-separated by [lem-weil-pbc-qcqs-morphism-permanence]. Repeating the preceding three steps for this morphism proves the asserted base-change form, with the same canonical maps and naturality.",
+      "uses": [
+        "lem-weil-pbc-qcqs-morphism-permanence"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/etale-cohomology.tex",
+        "place": "Lemma Tag 09Z1, proof applied after base change"
+      }
+    }
+  ],
+  "proof_deps": [
     "def-weil-pbc-direct-image",
-    "lem-weil-pbc-qcqs-higher-direct-image"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma Tag 09Z1, proof: recall the higher-direct-image sheafification description"
-   }
-  },
-  {
-   "text": "Every etale $W\\to V$ has a covering by affine etale objects; on such a quasi-compact quasi-separated $W$, the fibre product $W\\times_VU$ is quasi-compact and quasi-separated. The filtered-colimit cohomology theorem [lem-weil-pbc-cohomology-filtered-colimit] therefore gives a canonical isomorphism $\\varinjlim_i H^q(W\\times_VU,F_i|)\\cong H^q(W\\times_VU,\\varinjlim_iF_i|)$. The same statement holds on finite fibre products of the affine basis objects, so these isomorphisms form an isomorphism of the associated presheaves after restricting to that basis.",
-   "uses": [
+    "lem-weil-pbc-qcqs-higher-direct-image",
     "lem-weil-pbc-cohomology-filtered-colimit",
-    "lem-weil-pbc-qcqs-morphism-permanence"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma Tag 09Z1, proof: quasi-compact etale objects and the equality of cohomology colimits; underlying cohomology input is Tag 03Q5"
-   }
-  },
-  {
-   "text": "The inverse image of sheaves commutes with filtered colimits because [lem-weil-pbc-inverse-image-preserves-colimits] identifies it as a left adjoint. Colimits of abelian sheaves are sheafifications of presheaf colimits, and sheafification preserves colimits; filtered colimits are exact by [lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact]. Thus sheafifying the basiswise cohomology isomorphisms yields the canonical isomorphism $\\varinjlim_iR^qu_*F_i\\xrightarrow{\\sim}R^qu_*(\\varinjlim_iF_i)$.",
-   "uses": [
+    "lem-weil-pbc-qcqs-morphism-permanence",
     "lem-weil-pbc-inverse-image-preserves-colimits",
     "lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact"
-   ],
-   "elementary": false,
-   "source": {
+  ],
+  "proof_origin": {
+    "by": "document",
     "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma Tag 09Z1, proof: colimits of sheaves are sheafified presheaf colimits and the final sheafification argument"
-   }
+    "place": "Lemma Tag 09Z1 (lemma-relative-colimit), proof; Tag 03Q5 (lemma-colimit)"
   },
-  {
-   "text": "After an arbitrary base change $V'\\to V$, the base-changed morphism $U\\times_VV'\\to V'$ remains quasi-compact and quasi-separated by [lem-weil-pbc-qcqs-morphism-permanence]. Repeating the preceding three steps for this morphism proves the asserted base-change form, with the same canonical maps and naturality.",
-   "uses": [
-    "lem-weil-pbc-qcqs-morphism-permanence"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma Tag 09Z1, proof applied after base change"
-   }
-  }
- ],
- "proof_deps": [
-  "def-weil-pbc-direct-image",
-  "lem-weil-pbc-qcqs-higher-direct-image",
-  "lem-weil-pbc-cohomology-filtered-colimit",
-  "lem-weil-pbc-qcqs-morphism-permanence",
-  "lem-weil-pbc-inverse-image-preserves-colimits",
-  "lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact"
- ],
- "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Lemma Tag 09Z1 (lemma-relative-colimit), proof; Tag 03Q5 (lemma-colimit)"
- },
- "mathlib_searches": [
-  {
-   "tool": "leansearch",
-   "query": "higher direct image commutes with filtered colimits for a quasi-compact quasi-separated morphism of schemes",
-   "results": "CategoryTheory.Sheaf.cohomologyPresheaf and sheafPushforwardContinuous; no derived pushforward or higher direct-image filtered-colimit theorem for small etale sites",
-   "date": "2026-10-10",
-   "verdict": "no match"
-  },
-  {
-   "tool": "loogle",
-   "query": "filtered colimit higher direct image etale cohomology",
-   "results": "CategoryTheory.Limits.filtered_colim_preservesFiniteLimits and CategoryTheory.Sheaf.hasExactColimitsOfShape provide only generic exact-colimit infrastructure; no R^q u_* theorem",
-   "date": "2026-10-10",
-   "verdict": "no match for the combined statement"
-  },
-  {
-   "tool": "grep",
-   "query": "rg -n 'higherDirectImage|HigherDirectImage|derivedPushforward|DerivedPushforward' /home/ubuntu/SHEAF/project/lean/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites /home/ubuntu/SHEAF/project/lean/.lake/packages/mathlib/Mathlib/AlgebraicGeometry; rg -n 'cohomologyPresheaf|sheafPushforward' /home/ubuntu/SHEAF/project/lean/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites",
-   "results": "The source grep finds zero higherDirectImage/HigherDirectImage/derivedPushforward declarations in the Sites or AlgebraicGeometry directories. It finds only generic sheafPushforwardContinuous and cohomology-presheaf infrastructure (for example Sites/Over.lean and Sites/Pullback.lean), with no higher direct-image filtered-colimit theorem.",
-   "date": "2026-10-10",
-   "verdict": "no match"
-  }
- ],
- "mathlib_match": null,
- "status": "split",
- "merged_into": null,
- "import_flags": [
-  "detailed_form",
-  "two_proofs"
- ],
- "blueprint_kind": "lemma",
- "blueprint_order": 1087,
- "blueprint_uses": [
-  "def-weil-pbc-direct-image",
-  "def-weil-pbc-etale-sheaves",
-  "def-weil-pbc-scheme-conventions",
-  "lem-weil-pbc-cohomology-filtered-colimit",
-  "lem-weil-pbc-qcqs-higher-direct-image"
- ],
- "proof_split_by": "paragraphs",
- "blueprint_sketch": [
-  {
-   "statement": "For a quasi-compact and quasi-separated morphism of schemes $h:W\\to V$ and a\nfiltered system of torsion sheaves $(F_i)$, the canonical map\n\n$$\n\\varinjlim_i R^qh_*F_i\\longrightarrow R^qh_*(\\varinjlim_iF_i)\n$$\n\nis an isomorphism for every $q$.",
-   "proof": "For $q=0$, sections on a quasi-compact etale object are the equalizer of a\nfinite covering diagram after a finite quasi-compact refinement; filtered\ncolimits commute with this finite limit. For $q>0$, represent a class by a\ndegree-$q$ cocycle on a split etale hypercover with finite $(q+1)$-skeleton.\nEach of its finitely many sections is represented in some $F_i$, and the\nfinite list of face-map equalities holds at one later index because the system\nis filtered. This proves surjectivity of\n$\\varinjlim_iH^q(W,F_i)\\to H^q(W,\\varinjlim_iF_i)$.\n\nIf a class from $F_i$ dies after the colimit, choose a finite hypercover\nrefinement and a degree-$(q-1)$ null-homotopy on the limit. Its finitely many\nsections, refinement maps, and equations descend to one index $j\\geq i$;\nthere the class is already a coboundary. Thus the map is injective. The\nsame argument applies after every quasi-compact etale base change\n$U\\to V$, so the cohomology-sheaf description of $R^qh_*$ identifies the\ndisplayed sheaves. This is the derived filtered-colimit argument, with no\nunbounded injective replacement required.",
-   "cites": []
-  }
- ],
- "lean_audit": {
-  "master": {
-   "state": "none",
-   "decls": [],
-   "missing": []
-  },
-  "slopmaster2": {
-   "state": "sorry_here",
-   "decls": [
+  "mathlib_searches": [
     {
-     "name": "AlgebraicGeometry.Etale.preservesColimitsOfShape_higherDirectImage",
-     "module": "WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage",
-     "lines": [
-      307,
-      320
-     ],
-     "kind": "theorem",
-     "sorry": true
+      "tool": "leansearch",
+      "query": "higher direct image commutes with filtered colimits for a quasi-compact quasi-separated morphism of schemes",
+      "results": "CategoryTheory.Sheaf.cohomologyPresheaf and sheafPushforwardContinuous; no derived pushforward or higher direct-image filtered-colimit theorem for small etale sites",
+      "date": "2026-10-10",
+      "verdict": "no match"
+    },
+    {
+      "tool": "loogle",
+      "query": "filtered colimit higher direct image etale cohomology",
+      "results": "CategoryTheory.Limits.filtered_colim_preservesFiniteLimits and CategoryTheory.Sheaf.hasExactColimitsOfShape provide only generic exact-colimit infrastructure; no R^q u_* theorem",
+      "date": "2026-10-10",
+      "verdict": "no match for the combined statement"
+    },
+    {
+      "tool": "grep",
+      "query": "rg -n 'higherDirectImage|HigherDirectImage|derivedPushforward|DerivedPushforward' /home/ubuntu/SHEAF/project/lean/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites /home/ubuntu/SHEAF/project/lean/.lake/packages/mathlib/Mathlib/AlgebraicGeometry; rg -n 'cohomologyPresheaf|sheafPushforward' /home/ubuntu/SHEAF/project/lean/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites",
+      "results": "The source grep finds zero higherDirectImage/HigherDirectImage/derivedPushforward declarations in the Sites or AlgebraicGeometry directories. It finds only generic sheafPushforwardContinuous and cohomology-presheaf infrastructure (for example Sites/Over.lean and Sites/Pullback.lean), with no higher direct-image filtered-colimit theorem.",
+      "date": "2026-10-10",
+      "verdict": "no match"
     }
-   ],
-   "missing": [],
-   "open": []
+  ],
+  "mathlib_match": null,
+  "status": "split",
+  "merged_into": null,
+  "import_flags": [
+    "detailed_form",
+    "two_proofs"
+  ],
+  "blueprint_kind": "lemma",
+  "blueprint_order": 1087,
+  "blueprint_uses": [
+    "def-weil-pbc-direct-image",
+    "def-weil-pbc-etale-sheaves",
+    "def-weil-pbc-scheme-conventions",
+    "lem-weil-pbc-cohomology-filtered-colimit",
+    "lem-weil-pbc-qcqs-higher-direct-image"
+  ],
+  "proof_split_by": "paragraphs",
+  "blueprint_sketch": [
+    {
+      "statement": "For a quasi-compact and quasi-separated morphism of schemes $h:W\\to V$ and a\nfiltered system of torsion sheaves $(F_i)$, the canonical map\n\n$$\n\\varinjlim_i R^qh_*F_i\\longrightarrow R^qh_*(\\varinjlim_iF_i)\n$$\n\nis an isomorphism for every $q$.",
+      "proof": "For $q=0$, sections on a quasi-compact etale object are the equalizer of a\nfinite covering diagram after a finite quasi-compact refinement; filtered\ncolimits commute with this finite limit. For $q>0$, represent a class by a\ndegree-$q$ cocycle on a split etale hypercover with finite $(q+1)$-skeleton.\nEach of its finitely many sections is represented in some $F_i$, and the\nfinite list of face-map equalities holds at one later index because the system\nis filtered. This proves surjectivity of\n$\\varinjlim_iH^q(W,F_i)\\to H^q(W,\\varinjlim_iF_i)$.\n\nIf a class from $F_i$ dies after the colimit, choose a finite hypercover\nrefinement and a degree-$(q-1)$ null-homotopy on the limit. Its finitely many\nsections, refinement maps, and equations descend to one index $j\\geq i$;\nthere the class is already a coboundary. Thus the map is injective. The\nsame argument applies after every quasi-compact etale base change\n$U\\to V$, so the cohomology-sheaf description of $R^qh_*$ identifies the\ndisplayed sheaves. This is the derived filtered-colimit argument, with no\nunbounded injective replacement required.",
+      "cites": []
+    }
+  ],
+  "lean_audit": {
+    "master": {
+      "state": "none",
+      "decls": [],
+      "missing": []
+    },
+    "slopmaster2": {
+      "state": "sorry_here",
+      "decls": [
+        {
+          "name": "AlgebraicGeometry.Etale.preservesColimitsOfShape_higherDirectImage",
+          "module": "WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage",
+          "lines": [
+            307,
+            320
+          ],
+          "kind": "theorem",
+          "sorry": true
+        }
+      ],
+      "missing": [],
+      "open": []
+    }
+  },
+  "chapter": "sec-proper-base-change",
+  "unit": "sk-thm-iff",
+  "tool_uses": [
+    "def-weil-pbc-direct-image",
+    "lem-weil-pbc-cohomology-filtered-colimit",
+    "lem-weil-pbc-inverse-image-preserves-colimits",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact"
+  ],
+  "split_report": {
+    "date": "2026-10-10",
+    "item": "lemma-weil-pbc-direct-image-filtered-colimit",
+    "worker": "stage1",
+    "summary": "Replaced the imported two-paragraph sketch by four sourced steps following Stacks Tag 09Z1: identify higher direct images with sheafified cohomology presheaves, apply the filtered-colimit cohomology theorem on the affine etale basis and its finite fibre products, use inverse-image and sheaf-colimit exactness to sheafify the canonical comparison, and repeat after arbitrary base change using qcqs permanence. Recorded LeanSearch, Loogle and Mathlib-source grep searches finding no combined higher-direct-image theorem. Existing cross-unit facts are explicitly accepted as generic tool uses."
+  },
+  "reviewed": {
+    "date": "2026-10-10",
+    "by": "L",
+    "group": "C1",
+    "result": "pass",
+    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of C1; spot-checked by L: Re-reviewed corrected one-commit delivery, statement and four proof steps against cited sources, tool_uses, searches, and reusable-node requirement; no private lemma/module."
+  },
+  "lean": {
+    "module": "WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage",
+    "declaration": "AlgebraicGeometry.Etale.preservesColimitsOfShape_higherDirectImage",
+    "branch": "slopmaster2",
+    "line": 307,
+    "declarations": [
+      "AlgebraicGeometry.Etale.preservesColimitsOfShape_higherDirectImage"
+    ],
+    "sorry_free": false,
+    "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state sorry_here)"
   }
- },
- "chapter": "sec-proper-base-change",
- "unit": "sk-thm-iff",
- "tool_uses": [
-  "def-weil-pbc-direct-image",
-  "lem-weil-pbc-cohomology-filtered-colimit",
-  "lem-weil-pbc-inverse-image-preserves-colimits",
-  "lem-weil-pbc-qcqs-morphism-permanence",
-  "lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact"
- ],
- "split_report": {
-  "date": "2026-10-10",
-  "item": "lemma-weil-pbc-direct-image-filtered-colimit",
-  "worker": "stage1",
-  "summary": "Replaced the imported two-paragraph sketch by four sourced steps following Stacks Tag 09Z1: identify higher direct images with sheafified cohomology presheaves, apply the filtered-colimit cohomology theorem on the affine etale basis and its finite fibre products, use inverse-image and sheaf-colimit exactness to sheafify the canonical comparison, and repeat after arbitrary base change using qcqs permanence. Recorded LeanSearch, Loogle and Mathlib-source grep searches finding no combined higher-direct-image theorem. Existing cross-unit facts are explicitly accepted as generic tool uses."
- },
- "reviewed": {
-  "date": "2026-10-10",
-  "by": "L",
-  "group": "C1",
-  "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of C1; spot-checked by L: Re-reviewed corrected one-commit delivery, statement and four proof steps against cited sources, tool_uses, searches, and reusable-node requirement; no private lemma/module."
- }
 }

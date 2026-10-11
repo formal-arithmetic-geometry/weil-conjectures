@@ -1,94 +1,98 @@
 {
- "id": "lem-weil-pbc-invertible-pullback-invertible",
- "blueprint": {
-  "is": null,
-  "from": {
-   "node": "lem-weil-pbc-symmetric-product-properties",
-   "place": "step 1, 2, 3, 5 of its split (source: Etale Cohomology, proof of Lemma 0A4F: the F_j are the integer polynomials with prod(x_i t + y_i) = sum F_j t^{n-j} (Stacks indexes in reverse order))",
-   "via": [
-    "lem-weil-pbc-invertible-pullback-tensor"
-   ]
+  "id": "lem-weil-pbc-invertible-pullback-invertible",
+  "blueprint": {
+    "is": null,
+    "from": {
+      "node": "lem-weil-pbc-symmetric-product-properties",
+      "place": "step 1, 2, 3, 5 of its split (source: Etale Cohomology, proof of Lemma 0A4F: the F_j are the integer polynomials with prod(x_i t + y_i) = sum F_j t^{n-j} (Stacks indexes in reverse order))",
+      "via": [
+        "lem-weil-pbc-invertible-pullback-tensor"
+      ]
+    },
+    "same_as": null
   },
-  "same_as": null
- },
- "kind": "statement",
- "title": "The pullback of an invertible module is invertible",
- "statement": "Let $f:X\\to Y$ be a morphism of schemes and $\\mathcal L$ an invertible $\\mathcal O_Y$-module [def-sc-invertible-module], i.e. a quasi-coherent $\\mathcal O_Y$-module such that every point of $Y$ has an open neighbourhood $V$ with $\\mathcal L|_V\\cong\\mathcal O_V$. Then the pullback $f^*\\mathcal L$ [def-pc-module-pullback] is an invertible $\\mathcal O_X$-module: for every open $V\\subseteq Y$ with $\\mathcal L|_V\\cong\\mathcal O_V$ one has $(f^*\\mathcal L)|_{f^{-1}V}\\cong\\mathcal O_{f^{-1}V}$.",
- "source": {
-  "document": "literature/stacks-project/modules.tex",
-  "place": "Modules, Lemma 17.14.3 (Tag 01C8, label lemma-pullback-locally-free: the pullback of a locally free module is locally free; proof omitted in the source) for the rank-one case, with Lemma Tag 01C7 (lemma-locally-free-quasi-coherent: locally free implies quasi-coherent); for invertible modules in the sense of Stacks Definition Tag 01CS (definition-invertible; equivalent to locally free of rank one on a scheme by Lemma Tag 0B8M), Lemma Tag 0B8L (lemma-pullback-invertible). Lean (slopmaster2, sorry-free per the sorry map): AlgebraicGeometry.Scheme.Modules.IsInvertible.pullback, WeilConjectures/AlgebraicGeometry/Modules/Invertible.lean lines 62-82 (its proof: $(f^*\\mathcal L)|_{f^{-1}V}=(f|_V)^*(\\mathcal L|_V)\\cong(f|_V)^*\\mathcal O_V\\cong\\mathcal O_{f^{-1}V}$ by pullbackComp, pullbackCongr and pullbackObjUnitIso)"
- },
- "stmt_deps": [
-  "def-sc-invertible-module",
-  "def-pc-module-pullback"
- ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
- "mathlib_searches": [
-  {
-   "tool": "leansearch",
-   "query": "pullback of locally free sheaf of modules of rank one is locally free",
-   "results": "SheafOfModules.pullback, AlgebraicGeometry.Scheme.Modules.pullback, SheafOfModules.pullbackObjFreeIso (+ _hom_naturality, congr_simp), SheafOfModules.pullbackPushforwardAdjunction, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom",
-   "date": "2026-10-09",
-   "verdict": "no match: Mathlib has f^*(free) = free (pullbackObjFreeIso) but no statement that pullbacks of locally free or invertible modules are locally free/invertible"
+  "kind": "statement",
+  "title": "The pullback of an invertible module is invertible",
+  "statement": "Let $f:X\\to Y$ be a morphism of schemes and $\\mathcal L$ an invertible $\\mathcal O_Y$-module [def-sc-invertible-module], i.e. a quasi-coherent $\\mathcal O_Y$-module such that every point of $Y$ has an open neighbourhood $V$ with $\\mathcal L|_V\\cong\\mathcal O_V$. Then the pullback $f^*\\mathcal L$ [def-pc-module-pullback] is an invertible $\\mathcal O_X$-module: for every open $V\\subseteq Y$ with $\\mathcal L|_V\\cong\\mathcal O_V$ one has $(f^*\\mathcal L)|_{f^{-1}V}\\cong\\mathcal O_{f^{-1}V}$.",
+  "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Modules, Lemma 17.14.3 (Tag 01C8, label lemma-pullback-locally-free: the pullback of a locally free module is locally free; proof omitted in the source) for the rank-one case, with Lemma Tag 01C7 (lemma-locally-free-quasi-coherent: locally free implies quasi-coherent); for invertible modules in the sense of Stacks Definition Tag 01CS (definition-invertible; equivalent to locally free of rank one on a scheme by Lemma Tag 0B8M), Lemma Tag 0B8L (lemma-pullback-invertible). Lean (slopmaster2, sorry-free per the sorry map): AlgebraicGeometry.Scheme.Modules.IsInvertible.pullback, WeilConjectures/AlgebraicGeometry/Modules/Invertible.lean lines 62-82 (its proof: $(f^*\\mathcal L)|_{f^{-1}V}=(f|_V)^*(\\mathcal L|_V)\\cong(f|_V)^*\\mathcal O_V\\cong\\mathcal O_{f^{-1}V}$ by pullbackComp, pullbackCongr and pullbackObjUnitIso)"
   },
-  {
-   "tool": "leanfinder",
-   "query": "pullback of a locally free sheaf of modules is locally free",
-   "results": "SheafOfModules.pullbackObjFreeIso, pullback_map_ιFree_comp_pullbackObjFreeIso_hom, pullbackObjFreeIso_hom_naturality(_assoc), freeFunctorCompPullbackIso (Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackFree)",
-   "date": "2026-10-09",
-   "verdict": "no match (ingredient only: the pullback of a free module is free)"
-  },
-  {
-   "tool": "grep",
-   "query": "grep -rn 'IsLocallyFree' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib --include=*.lean | grep -i pullback; grep -rn 'IsInvertible\\|Invertible' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Sheaf ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Modules",
-   "results": "no hits for a pullback of IsLocallyFree (SheafOfModules.IsLocallyFree is defined in Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean with no pullback lemma); no invertible sheaves of modules",
-   "date": "2026-10-09",
-   "verdict": "no match"
-  }
- ],
- "mathlib_match": null,
- "status": "unsplit",
- "merged_into": null,
- "created": {
-  "by": "worker",
-  "item": "lem-weil-pbc-invertible-pullback-tensor",
-  "date": "2026-10-09"
- },
- "lean_audit": {
-  "master": {
-   "state": "none",
-   "decls": [],
-   "missing": [
-    "AlgebraicGeometry.Scheme.Modules.IsInvertible.pullback"
-   ]
-  },
-  "slopmaster2": {
-   "state": "closed",
-   "decls": [
-    {
-     "name": "AlgebraicGeometry.Scheme.Modules.IsInvertible.pullback",
-     "module": "WeilConjectures.AlgebraicGeometry.Modules.Invertible",
-     "lines": [
-      62,
-      82
-     ],
-     "kind": "theorem",
-     "sorry": false
-    }
-   ],
-   "missing": [],
-   "open": []
-  }
- },
- "chapter": "sec-proper-base-change",
- "unit": "sk-thm-reduction",
- "lean": {
-  "branch": "slopmaster2",
-  "declarations": [
-   "AlgebraicGeometry.Scheme.Modules.IsInvertible.pullback"
+  "stmt_deps": [
+    "def-sc-invertible-module",
+    "def-pc-module-pullback"
   ],
-  "note": "attached by the lead at review (2026-10-09), found by the opus worker of lem-weil-pbc-invertible-pullback-tensor: the pullback of an invertible module is invertible; sorry-free on the full map"
- }
+  "proof": [],
+  "proof_deps": [],
+  "proof_origin": null,
+  "mathlib_searches": [
+    {
+      "tool": "leansearch",
+      "query": "pullback of locally free sheaf of modules of rank one is locally free",
+      "results": "SheafOfModules.pullback, AlgebraicGeometry.Scheme.Modules.pullback, SheafOfModules.pullbackObjFreeIso (+ _hom_naturality, congr_simp), SheafOfModules.pullbackPushforwardAdjunction, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom",
+      "date": "2026-10-09",
+      "verdict": "no match: Mathlib has f^*(free) = free (pullbackObjFreeIso) but no statement that pullbacks of locally free or invertible modules are locally free/invertible"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "pullback of a locally free sheaf of modules is locally free",
+      "results": "SheafOfModules.pullbackObjFreeIso, pullback_map_ιFree_comp_pullbackObjFreeIso_hom, pullbackObjFreeIso_hom_naturality(_assoc), freeFunctorCompPullbackIso (Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackFree)",
+      "date": "2026-10-09",
+      "verdict": "no match (ingredient only: the pullback of a free module is free)"
+    },
+    {
+      "tool": "grep",
+      "query": "grep -rn 'IsLocallyFree' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib --include=*.lean | grep -i pullback; grep -rn 'IsInvertible\\|Invertible' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Sheaf ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Modules",
+      "results": "no hits for a pullback of IsLocallyFree (SheafOfModules.IsLocallyFree is defined in Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean with no pullback lemma); no invertible sheaves of modules",
+      "date": "2026-10-09",
+      "verdict": "no match"
+    }
+  ],
+  "mathlib_match": null,
+  "status": "unsplit",
+  "merged_into": null,
+  "created": {
+    "by": "worker",
+    "item": "lem-weil-pbc-invertible-pullback-tensor",
+    "date": "2026-10-09"
+  },
+  "lean_audit": {
+    "master": {
+      "state": "none",
+      "decls": [],
+      "missing": [
+        "AlgebraicGeometry.Scheme.Modules.IsInvertible.pullback"
+      ]
+    },
+    "slopmaster2": {
+      "state": "closed",
+      "decls": [
+        {
+          "name": "AlgebraicGeometry.Scheme.Modules.IsInvertible.pullback",
+          "module": "WeilConjectures.AlgebraicGeometry.Modules.Invertible",
+          "lines": [
+            62,
+            82
+          ],
+          "kind": "theorem",
+          "sorry": false
+        }
+      ],
+      "missing": [],
+      "open": []
+    }
+  },
+  "chapter": "sec-proper-base-change",
+  "unit": "sk-thm-reduction",
+  "lean": {
+    "module": "WeilConjectures.AlgebraicGeometry.Modules.Invertible",
+    "declaration": "AlgebraicGeometry.Scheme.Modules.IsInvertible.pullback",
+    "branch": "slopmaster2",
+    "line": 62,
+    "declarations": [
+      "AlgebraicGeometry.Scheme.Modules.IsInvertible.pullback"
+    ],
+    "sorry_free": true,
+    "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state closed)"
+  }
 }

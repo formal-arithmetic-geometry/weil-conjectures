@@ -1,191 +1,202 @@
 {
- "id": "lem-pc-cohomology-sections-affine-base",
- "blueprint": {
-  "is": null,
-  "from": {
-   "node": "lem-pc-euler-characteristic-well-defined",
-   "place": "proof, first sentence: 'The assertion is a consequence of proper coherent-finiteness over a Noetherian base, which is recorded as [lem-pc-coherent-hi]'; the passage, over the affine base Spec k, from the higher direct images R^if_*F of [lem-pc-coherent-hi] to the groups H^i(X,F) (Stacks 0BEJ, remark after the definition, cites 01XJ for it)",
-   "via": []
+  "id": "lem-pc-cohomology-sections-affine-base",
+  "blueprint": {
+    "is": null,
+    "from": {
+      "node": "lem-pc-euler-characteristic-well-defined",
+      "place": "proof, first sentence: 'The assertion is a consequence of proper coherent-finiteness over a Noetherian base, which is recorded as [lem-pc-coherent-hi]'; the passage, over the affine base Spec k, from the higher direct images R^if_*F of [lem-pc-coherent-hi] to the groups H^i(X,F) (Stacks 0BEJ, remark after the definition, cites 01XJ for it)",
+      "via": []
+    },
+    "same_as": []
   },
-  "same_as": []
- },
- "kind": "statement",
- "title": "Cohomology over an affine base is the global sections of the higher direct images",
- "statement": "Let $f:X\\to S$ be a morphism of schemes [def-pc-scheme] which is quasi-compact [def-weil-finite-type-morphism] and separated [def-weil-proper-morphism], and assume that $S$ is affine [def-pc-scheme]. For every integer $q\\geq0$ and every quasi-coherent $\\mathcal O_X$-module $\\mathcal F$ [pqf-def-coherent] there is an isomorphism of abelian groups\n$$\ne_{\\mathcal F}:\\;\\Gamma\\bigl(S,R^qf_*\\mathcal F\\bigr)=H^0\\bigl(S,R^qf_*\\mathcal F\\bigr)\\xrightarrow{\\ \\sim\\ }H^q(X,\\mathcal F),\n$$\nwhere $H^q(X,-)$ is the cohomology of $\\mathcal O_X$-modules and $R^qf_*$ the $q$-th higher direct image [pqf-def-cohomology]; these isomorphisms are natural in $\\mathcal F$: for every morphism $\\varphi:\\mathcal F\\to\\mathcal G$ of quasi-coherent $\\mathcal O_X$-modules, $e_{\\mathcal G}\\circ\\Gamma(S,R^qf_*\\varphi)=H^q(X,\\varphi)\\circ e_{\\mathcal F}$. (The source states it for $f$ quasi-compact and quasi-separated; the separated case is the one stated here.)",
- "source": {
-  "document": "literature/stacks-project/coherent.tex",
-  "place": "Lemma 01XK (coherent-lemma-quasi-coherence-higher-direct-images-application), stated there for f quasi-compact and quasi-separated; proof by the Leray spectral sequence (Cohomology 01F2), quasi-coherence of R^qf_*F (01XJ (1)) and vanishing of higher cohomology of quasi-coherent modules on affines (01XB)",
-  "lean": {
-   "module": "WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage",
-   "lines": [
-    307,
-    324
-   ],
-   "declaration": "AlgebraicGeometry.Scheme.Modules.exists_addEquiv_sections_higherDirectImage_H"
-  }
- },
- "stmt_deps": [
-  "def-pc-scheme",
-  "def-weil-finite-type-morphism",
-  "def-weil-proper-morphism",
-  "pqf-def-coherent",
-  "pqf-def-cohomology"
- ],
- "proof": [
-  {
-   "text": "*$f$ is quasi-compact and quasi-separated.* The morphism $f$ is quasi-compact by hypothesis [def-weil-finite-type-morphism] and separated [def-weil-proper-morphism], hence quasi-separated [lem-pc-separated-quasi-separated]. (Stacks states 01XK for $f$ quasi-compact and quasi-separated; this step brings the separated case to it.)",
-   "uses": [
+  "kind": "statement",
+  "title": "Cohomology over an affine base is the global sections of the higher direct images",
+  "statement": "Let $f:X\\to S$ be a morphism of schemes [def-pc-scheme] which is quasi-compact [def-weil-finite-type-morphism] and separated [def-weil-proper-morphism], and assume that $S$ is affine [def-pc-scheme]. For every integer $q\\geq0$ and every quasi-coherent $\\mathcal O_X$-module $\\mathcal F$ [pqf-def-coherent] there is an isomorphism of abelian groups\n$$\ne_{\\mathcal F}:\\;\\Gamma\\bigl(S,R^qf_*\\mathcal F\\bigr)=H^0\\bigl(S,R^qf_*\\mathcal F\\bigr)\\xrightarrow{\\ \\sim\\ }H^q(X,\\mathcal F),\n$$\nwhere $H^q(X,-)$ is the cohomology of $\\mathcal O_X$-modules and $R^qf_*$ the $q$-th higher direct image [pqf-def-cohomology]; these isomorphisms are natural in $\\mathcal F$: for every morphism $\\varphi:\\mathcal F\\to\\mathcal G$ of quasi-coherent $\\mathcal O_X$-modules, $e_{\\mathcal G}\\circ\\Gamma(S,R^qf_*\\varphi)=H^q(X,\\varphi)\\circ e_{\\mathcal F}$. (The source states it for $f$ quasi-compact and quasi-separated; the separated case is the one stated here.)",
+  "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Lemma 01XK (coherent-lemma-quasi-coherence-higher-direct-images-application), stated there for f quasi-compact and quasi-separated; proof by the Leray spectral sequence (Cohomology 01F2), quasi-coherence of R^qf_*F (01XJ (1)) and vanishing of higher cohomology of quasi-coherent modules on affines (01XB)",
+    "lean": {
+      "module": "WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage",
+      "lines": [
+        307,
+        324
+      ],
+      "declaration": "AlgebraicGeometry.Scheme.Modules.exists_addEquiv_sections_higherDirectImage_H"
+    }
+  },
+  "stmt_deps": [
+    "def-pc-scheme",
     "def-weil-finite-type-morphism",
     "def-weil-proper-morphism",
-    "lem-pc-separated-quasi-separated"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/schemes.tex",
-    "place": "Section 01KH, paragraph after Definition 01KK, using Lemma 01K7"
-   }
-  },
-  {
-   "text": "*The higher direct images are quasi-coherent.* Let $\\mathcal F$ be a quasi-coherent $\\mathcal O_X$-module [pqf-def-coherent]. Since $f$ is quasi-compact and quasi-separated (Step 1), clause 1 of [lem-pc-finite-support-hi] (Stacks 01XJ (1)) says that $R^qf_*\\mathcal F$ is a quasi-coherent $\\mathcal O_S$-module for every $q\\geq0$.",
-   "uses": [
     "pqf-def-coherent",
-    "lem-pc-finite-support-hi"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Lemma 01XK, proof, second sentence: 'By Lemma 01XJ we see that the sheaves R^qf_*F are quasi-coherent'"
-   }
-  },
-  {
-   "text": "*The columns $p>0$ of the Leray spectral sequence vanish.* $S$ is affine [def-pc-scheme], i.e. isomorphic to $\\operatorname{Spec}(A)$ for a ring $A$; cohomology of modules is transported along an isomorphism of schemes (an isomorphism of ringed spaces identifies the categories of modules, their global section functors and hence their right derived functors [pqf-def-cohomology]), so [lem-pc-affine-vanishing] applies to $S$: every quasi-coherent $\\mathcal O_S$-module has vanishing $H^p(S,-)$ for $p>0$. With Step 2, $H^p(S,R^qf_*\\mathcal F)=0$ for all $q\\geq0$ and all $p>0$. (In the Leray spectral sequence $E_2^{p,q}=H^p(S,R^qf_*\\mathcal F)\\Rightarrow H^{p+q}(X,\\mathcal F)$ these are the terms $E_2^{p,q}$, $p>0$.)",
-   "uses": [
+    "pqf-def-cohomology"
+  ],
+  "proof": [
+    {
+      "text": "*$f$ is quasi-compact and quasi-separated.* The morphism $f$ is quasi-compact by hypothesis [def-weil-finite-type-morphism] and separated [def-weil-proper-morphism], hence quasi-separated [lem-pc-separated-quasi-separated]. (Stacks states 01XK for $f$ quasi-compact and quasi-separated; this step brings the separated case to it.)",
+      "uses": [
+        "def-weil-finite-type-morphism",
+        "def-weil-proper-morphism",
+        "lem-pc-separated-quasi-separated"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/schemes.tex",
+        "place": "Section 01KH, paragraph after Definition 01KK, using Lemma 01K7"
+      }
+    },
+    {
+      "text": "*The higher direct images are quasi-coherent.* Let $\\mathcal F$ be a quasi-coherent $\\mathcal O_X$-module [pqf-def-coherent]. Since $f$ is quasi-compact and quasi-separated (Step 1), clause 1 of [lem-pc-finite-support-hi] (Stacks 01XJ (1)) says that $R^qf_*\\mathcal F$ is a quasi-coherent $\\mathcal O_S$-module for every $q\\geq0$.",
+      "uses": [
+        "pqf-def-coherent",
+        "lem-pc-finite-support-hi"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/coherent.tex",
+        "place": "Lemma 01XK, proof, second sentence: 'By Lemma 01XJ we see that the sheaves R^qf_*F are quasi-coherent'"
+      }
+    },
+    {
+      "text": "*The columns $p>0$ of the Leray spectral sequence vanish.* $S$ is affine [def-pc-scheme], i.e. isomorphic to $\\operatorname{Spec}(A)$ for a ring $A$; cohomology of modules is transported along an isomorphism of schemes (an isomorphism of ringed spaces identifies the categories of modules, their global section functors and hence their right derived functors [pqf-def-cohomology]), so [lem-pc-affine-vanishing] applies to $S$: every quasi-coherent $\\mathcal O_S$-module has vanishing $H^p(S,-)$ for $p>0$. With Step 2, $H^p(S,R^qf_*\\mathcal F)=0$ for all $q\\geq0$ and all $p>0$. (In the Leray spectral sequence $E_2^{p,q}=H^p(S,R^qf_*\\mathcal F)\\Rightarrow H^{p+q}(X,\\mathcal F)$ these are the terms $E_2^{p,q}$, $p>0$.)",
+      "uses": [
+        "def-pc-scheme",
+        "pqf-def-cohomology",
+        "lem-pc-affine-vanishing"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/coherent.tex",
+        "place": "Lemma 01XK, proof, third sentence: 'By Lemma 01XB we see that E_2^{p,q}=0 when p>0'"
+      }
+    },
+    {
+      "text": "*Degeneration gives the isomorphism.* By Step 3 the $\\mathcal O_X$-module $\\mathcal F$ satisfies the hypothesis of [lem-pc-leray-degenerate-sections] (2) for the morphism $f:X\\to S$, so the edge map $\\varepsilon^q_{\\mathcal F}:H^q(X,\\mathcal F)\\to\\Gamma(S,R^qf_*\\mathcal F)$ of that node is an isomorphism of abelian groups for every $q\\geq0$. Here $\\Gamma(S,-)=H^0(S,-)$ on $\\mathcal O_S$-modules: $H^0$ is the zeroth right derived functor of the left exact functor $\\Gamma(S,-)$ [pqf-def-cohomology], computed from an injective resolution $\\mathcal G\\to\\mathcal J^\\bullet$ as $\\ker(\\Gamma(S,\\mathcal J^0)\\to\\Gamma(S,\\mathcal J^1))=\\Gamma(S,\\mathcal G)$ by left exactness. Put $e_{\\mathcal F}=(\\varepsilon^q_{\\mathcal F})^{-1}:\\Gamma(S,R^qf_*\\mathcal F)=H^0(S,R^qf_*\\mathcal F)\\xrightarrow{\\sim}H^q(X,\\mathcal F)$.",
+      "uses": [
+        "lem-pc-leray-degenerate-sections",
+        "pqf-def-cohomology"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/coherent.tex",
+        "place": "Lemma 01XK, proof, last sentences: 'Hence the spectral sequence degenerates at E_2 and we win. See also Cohomology, Lemma 01F4 (2) for the general principle.'"
+      }
+    },
+    {
+      "text": "*Naturality.* Let $\\varphi:\\mathcal F\\to\\mathcal G$ be a morphism of quasi-coherent $\\mathcal O_X$-modules. Steps 2-4 apply to $\\mathcal F$ and to $\\mathcal G$, so $\\varepsilon^q_{\\mathcal F}$ and $\\varepsilon^q_{\\mathcal G}$ are isomorphisms, and [lem-pc-leray-degenerate-sections] (1) gives $\\Gamma(S,R^qf_*\\varphi)\\circ\\varepsilon^q_{\\mathcal F}=\\varepsilon^q_{\\mathcal G}\\circ H^q(X,\\varphi)$. Composing on the left with $e_{\\mathcal G}=(\\varepsilon^q_{\\mathcal G})^{-1}$ and on the right with $e_{\\mathcal F}=(\\varepsilon^q_{\\mathcal F})^{-1}$ gives $e_{\\mathcal G}\\circ\\Gamma(S,R^qf_*\\varphi)=H^q(X,\\varphi)\\circ e_{\\mathcal F}$, the asserted naturality.",
+      "uses": [
+        "lem-pc-leray-degenerate-sections"
+      ],
+      "elementary": true,
+      "source": {
+        "document": "literature/stacks-project/coherent.tex",
+        "place": "Lemma 01XK (naturality of the identification, from the functoriality of the Leray spectral sequence, Cohomology 01F2/01F4)"
+      }
+    }
+  ],
+  "proof_deps": [
+    "def-weil-finite-type-morphism",
+    "def-weil-proper-morphism",
+    "lem-pc-separated-quasi-separated",
+    "pqf-def-coherent",
+    "lem-pc-finite-support-hi",
     "def-pc-scheme",
     "pqf-def-cohomology",
-    "lem-pc-affine-vanishing"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Lemma 01XK, proof, third sentence: 'By Lemma 01XB we see that E_2^{p,q}=0 when p>0'"
-   }
-  },
-  {
-   "text": "*Degeneration gives the isomorphism.* By Step 3 the $\\mathcal O_X$-module $\\mathcal F$ satisfies the hypothesis of [lem-pc-leray-degenerate-sections] (2) for the morphism $f:X\\to S$, so the edge map $\\varepsilon^q_{\\mathcal F}:H^q(X,\\mathcal F)\\to\\Gamma(S,R^qf_*\\mathcal F)$ of that node is an isomorphism of abelian groups for every $q\\geq0$. Here $\\Gamma(S,-)=H^0(S,-)$ on $\\mathcal O_S$-modules: $H^0$ is the zeroth right derived functor of the left exact functor $\\Gamma(S,-)$ [pqf-def-cohomology], computed from an injective resolution $\\mathcal G\\to\\mathcal J^\\bullet$ as $\\ker(\\Gamma(S,\\mathcal J^0)\\to\\Gamma(S,\\mathcal J^1))=\\Gamma(S,\\mathcal G)$ by left exactness. Put $e_{\\mathcal F}=(\\varepsilon^q_{\\mathcal F})^{-1}:\\Gamma(S,R^qf_*\\mathcal F)=H^0(S,R^qf_*\\mathcal F)\\xrightarrow{\\sim}H^q(X,\\mathcal F)$.",
-   "uses": [
-    "lem-pc-leray-degenerate-sections",
-    "pqf-def-cohomology"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Lemma 01XK, proof, last sentences: 'Hence the spectral sequence degenerates at E_2 and we win. See also Cohomology, Lemma 01F4 (2) for the general principle.'"
-   }
-  },
-  {
-   "text": "*Naturality.* Let $\\varphi:\\mathcal F\\to\\mathcal G$ be a morphism of quasi-coherent $\\mathcal O_X$-modules. Steps 2-4 apply to $\\mathcal F$ and to $\\mathcal G$, so $\\varepsilon^q_{\\mathcal F}$ and $\\varepsilon^q_{\\mathcal G}$ are isomorphisms, and [lem-pc-leray-degenerate-sections] (1) gives $\\Gamma(S,R^qf_*\\varphi)\\circ\\varepsilon^q_{\\mathcal F}=\\varepsilon^q_{\\mathcal G}\\circ H^q(X,\\varphi)$. Composing on the left with $e_{\\mathcal G}=(\\varepsilon^q_{\\mathcal G})^{-1}$ and on the right with $e_{\\mathcal F}=(\\varepsilon^q_{\\mathcal F})^{-1}$ gives $e_{\\mathcal G}\\circ\\Gamma(S,R^qf_*\\varphi)=H^q(X,\\varphi)\\circ e_{\\mathcal F}$, the asserted naturality.",
-   "uses": [
+    "lem-pc-affine-vanishing",
     "lem-pc-leray-degenerate-sections"
-   ],
-   "elementary": true,
-   "source": {
+  ],
+  "proof_origin": {
+    "by": "document",
     "document": "literature/stacks-project/coherent.tex",
-    "place": "Lemma 01XK (naturality of the identification, from the functoriality of the Leray spectral sequence, Cohomology 01F2/01F4)"
-   }
-  }
- ],
- "proof_deps": [
-  "def-weil-finite-type-morphism",
-  "def-weil-proper-morphism",
-  "lem-pc-separated-quasi-separated",
-  "pqf-def-coherent",
-  "lem-pc-finite-support-hi",
-  "def-pc-scheme",
-  "pqf-def-cohomology",
-  "lem-pc-affine-vanishing",
-  "lem-pc-leray-degenerate-sections"
- ],
- "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/coherent.tex",
-  "place": "Lemma 01XK (coherent-lemma-quasi-coherence-higher-direct-images-application), proof; with Cohomology Lemma 01F4 (2) (cohomology.tex) for the degeneration and Schemes Section 01KH for separated => quasi-separated"
- },
- "mathlib_searches": [
-  {
-   "tool": "leansearch",
-   "query": "higher direct image global sections over affine base equals sheaf cohomology",
-   "results": "service error (HTTP 500 from leansearch.net, via lean-lsp and via curl to https://leansearch.net/search); no result",
-   "date": "2026-10-10",
-   "verdict": "no result (service down); verdict rests on the other two kinds"
+    "place": "Lemma 01XK (coherent-lemma-quasi-coherence-higher-direct-images-application), proof; with Cohomology Lemma 01F4 (2) (cohomology.tex) for the degeneration and Schemes Section 01KH for separated => quasi-separated"
   },
-  {
-   "tool": "leanfinder",
-   "query": "H^q(X, F) is isomorphic to global sections of R^q f_* F when the base S is affine and F quasi-coherent",
-   "results": "AlgebraicGeometry.Scheme.AffineZariskiSite.sheafEquiv, AlgebraicGeometry.isIso_ΓSpec_adjunction_unit_app_basicOpen, AlgebraicGeometry.IsAffineOpen.ΓSpecIso_hom_fromSpec_app, CategoryTheory.Sheaf.H (Mathlib.CategoryTheory.Sites.SheafCohomology.Basic); no higher direct images, no comparison",
-   "date": "2026-10-10",
-   "verdict": "no match"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "Leray spectral sequence degenerates: cohomology of X equals sections of higher direct image over affine scheme",
-   "results": "AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, CategoryTheory.Sheaf.cohomologyPresheaf; nothing on Leray or R^q f_*",
-   "date": "2026-10-10",
-   "verdict": "no match"
-  },
-  {
-   "tool": "loogle",
-   "query": "\"higherDirectImage\"",
-   "results": "none",
-   "date": "2026-10-10",
-   "verdict": "no match"
-  },
-  {
-   "tool": "grep",
-   "query": "grep -rlE 'higherDirectImage|HigherDirectImage|Leray' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
-   "results": "none (only Mathlib/Algebra/Homology/EulerCharacteristic.lean matched the companion pattern eulerChar, unrelated); Mathlib/CategoryTheory/Sites/SheafCohomology/{Basic,Cech,MayerVietoris}.lean define sheaf cohomology only",
-   "date": "2026-10-10",
-   "verdict": "no match: Mathlib has no higher direct images of O_X-modules"
-  }
- ],
- "mathlib_match": null,
- "status": "split",
- "merged_into": null,
- "created": {
-  "by": "worker",
-  "item": "lem-pc-euler-characteristic-well-defined",
-  "date": "2026-10-10"
- },
- "lean_audit": {
-  "master": {
-   "state": "none"
-  },
-  "slopmaster2": {
-   "state": "sorry_here",
-   "decls": [
+  "mathlib_searches": [
     {
-     "name": "AlgebraicGeometry.Scheme.Modules.exists_addEquiv_sections_higherDirectImage_H",
-     "module": "WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage",
-     "lines": [
-      307,
-      324
-     ],
-     "kind": "theorem",
-     "sorry": true
+      "tool": "leansearch",
+      "query": "higher direct image global sections over affine base equals sheaf cohomology",
+      "results": "service error (HTTP 500 from leansearch.net, via lean-lsp and via curl to https://leansearch.net/search); no result",
+      "date": "2026-10-10",
+      "verdict": "no result (service down); verdict rests on the other two kinds"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "H^q(X, F) is isomorphic to global sections of R^q f_* F when the base S is affine and F quasi-coherent",
+      "results": "AlgebraicGeometry.Scheme.AffineZariskiSite.sheafEquiv, AlgebraicGeometry.isIso_ΓSpec_adjunction_unit_app_basicOpen, AlgebraicGeometry.IsAffineOpen.ΓSpecIso_hom_fromSpec_app, CategoryTheory.Sheaf.H (Mathlib.CategoryTheory.Sites.SheafCohomology.Basic); no higher direct images, no comparison",
+      "date": "2026-10-10",
+      "verdict": "no match"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "Leray spectral sequence degenerates: cohomology of X equals sections of higher direct image over affine scheme",
+      "results": "AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, CategoryTheory.Sheaf.cohomologyPresheaf; nothing on Leray or R^q f_*",
+      "date": "2026-10-10",
+      "verdict": "no match"
+    },
+    {
+      "tool": "loogle",
+      "query": "\"higherDirectImage\"",
+      "results": "none",
+      "date": "2026-10-10",
+      "verdict": "no match"
+    },
+    {
+      "tool": "grep",
+      "query": "grep -rlE 'higherDirectImage|HigherDirectImage|Leray' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+      "results": "none (only Mathlib/Algebra/Homology/EulerCharacteristic.lean matched the companion pattern eulerChar, unrelated); Mathlib/CategoryTheory/Sites/SheafCohomology/{Basic,Cech,MayerVietoris}.lean define sheaf cohomology only",
+      "date": "2026-10-10",
+      "verdict": "no match: Mathlib has no higher direct images of O_X-modules"
     }
-   ]
+  ],
+  "mathlib_match": null,
+  "status": "split",
+  "merged_into": null,
+  "created": {
+    "by": "worker",
+    "item": "lem-pc-euler-characteristic-well-defined",
+    "date": "2026-10-10"
+  },
+  "lean_audit": {
+    "master": {
+      "state": "none"
+    },
+    "slopmaster2": {
+      "state": "sorry_here",
+      "decls": [
+        {
+          "name": "AlgebraicGeometry.Scheme.Modules.exists_addEquiv_sections_higherDirectImage_H",
+          "module": "WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage",
+          "lines": [
+            307,
+            324
+          ],
+          "kind": "theorem",
+          "sorry": true
+        }
+      ]
+    }
+  },
+  "chapter": "sec-picard-framework",
+  "unit": "sk-thm-picard-rr",
+  "split_report": {
+    "date": "2026-10-10",
+    "item": "lem-pc-cohomology-sections-affine-base",
+    "worker": "stage1",
+    "summary": "Split following the proof of Stacks 01XK (read in coherent.tex with 01XJ, 01XB, Cohomology 01F2 and 01F4; tags verified in tags/tags). Step 1 reduces the separated case to the source's quasi-separated hypothesis via the new Mathlib leaf lem-pc-separated-quasi-separated (Schemes 01KH after 01KK, via 01K7; AlgebraicGeometry.IsSeparated.instQuasiSeparated). Step 2: quasi-coherence of R^qf_*F by lem-pc-finite-support-hi (1) (= 01XJ (1); other unit sk-thm-picard-coherence, used as a tool). Step 3: affine vanishing by lem-pc-affine-vanishing (01XB; Lean-closed). Steps 4-5: the degeneration ('we win', 01F4 (2)) is the new unsplit node lem-pc-leray-degenerate-sections, stated for schemes with the explicit edge map and its naturality, which carries the naturality the item states. No node stated 01F4 (2): lem-weil-pbc-site-leray-degenerate states only 01F4 (1) on sites, pqf-lem-leray states the spectral sequence without edge maps or functoriality. Statement unchanged. No sorry-free slopmaster2 declaration states the item or the new nodes (exists_addEquiv_sections_higherDirectImage_H and isQuasicoherent_higherDirectImage have sorry; sorryfree.py).",
+    "blueprint": "The steps realize, in the proof of lem-pc-euler-characteristic-well-defined (the blueprint ancestor), the passage in its first sentence ('The assertion is a consequence of proper coherent-finiteness over a Noetherian base, which is recorded as [lem-pc-coherent-hi]') from the higher direct images R^if_*F of lem-pc-coherent-hi to the groups H^i(X,F) over the affine base Spec k: Steps 1-3 check the hypotheses (qcqs, quasi-coherence, affine vanishing), Steps 4-5 give the natural isomorphism used in the ancestor's step 'Vanishing in large degrees'."
+  },
+  "tool_uses": [
+    "lem-pc-finite-support-hi"
+  ],
+  "reviewed": "2026-10-10 L: 5 steps along 01XK checked (separated hence quasi-separated by the new leaf IsSeparated.instQuasiSeparated 68; R^q f_* F quasi-coherent by lem-pc-finite-support-hi (1) used as a tool; vanishing on the affine S by lem-pc-affine-vanishing; the Leray edge map an isomorphism by the new 01F4 (2) node; naturality). tool_uses lem-pc-finite-support-hi. New nodes lem-pc-separated-quasi-separated (leaf) and lem-pc-leray-degenerate-sections (unsplit). LeanSearch down.",
+  "lean": {
+    "module": "WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage",
+    "declaration": "AlgebraicGeometry.Scheme.Modules.exists_addEquiv_sections_higherDirectImage_H",
+    "branch": "slopmaster2",
+    "line": 307,
+    "declarations": [
+      "AlgebraicGeometry.Scheme.Modules.exists_addEquiv_sections_higherDirectImage_H"
+    ],
+    "sorry_free": false,
+    "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state sorry_here)"
   }
- },
- "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-rr",
- "split_report": {
-  "date": "2026-10-10",
-  "item": "lem-pc-cohomology-sections-affine-base",
-  "worker": "stage1",
-  "summary": "Split following the proof of Stacks 01XK (read in coherent.tex with 01XJ, 01XB, Cohomology 01F2 and 01F4; tags verified in tags/tags). Step 1 reduces the separated case to the source's quasi-separated hypothesis via the new Mathlib leaf lem-pc-separated-quasi-separated (Schemes 01KH after 01KK, via 01K7; AlgebraicGeometry.IsSeparated.instQuasiSeparated). Step 2: quasi-coherence of R^qf_*F by lem-pc-finite-support-hi (1) (= 01XJ (1); other unit sk-thm-picard-coherence, used as a tool). Step 3: affine vanishing by lem-pc-affine-vanishing (01XB; Lean-closed). Steps 4-5: the degeneration ('we win', 01F4 (2)) is the new unsplit node lem-pc-leray-degenerate-sections, stated for schemes with the explicit edge map and its naturality, which carries the naturality the item states. No node stated 01F4 (2): lem-weil-pbc-site-leray-degenerate states only 01F4 (1) on sites, pqf-lem-leray states the spectral sequence without edge maps or functoriality. Statement unchanged. No sorry-free slopmaster2 declaration states the item or the new nodes (exists_addEquiv_sections_higherDirectImage_H and isQuasicoherent_higherDirectImage have sorry; sorryfree.py).",
-  "blueprint": "The steps realize, in the proof of lem-pc-euler-characteristic-well-defined (the blueprint ancestor), the passage in its first sentence ('The assertion is a consequence of proper coherent-finiteness over a Noetherian base, which is recorded as [lem-pc-coherent-hi]') from the higher direct images R^if_*F of lem-pc-coherent-hi to the groups H^i(X,F) over the affine base Spec k: Steps 1-3 check the hypotheses (qcqs, quasi-coherence, affine vanishing), Steps 4-5 give the natural isomorphism used in the ancestor's step 'Vanishing in large degrees'."
- },
- "tool_uses": [
-  "lem-pc-finite-support-hi"
- ],
- "reviewed": "2026-10-10 L: 5 steps along 01XK checked (separated hence quasi-separated by the new leaf IsSeparated.instQuasiSeparated 68; R^q f_* F quasi-coherent by lem-pc-finite-support-hi (1) used as a tool; vanishing on the affine S by lem-pc-affine-vanishing; the Leray edge map an isomorphism by the new 01F4 (2) node; naturality). tool_uses lem-pc-finite-support-hi. New nodes lem-pc-separated-quasi-separated (leaf) and lem-pc-leray-degenerate-sections (unsplit). LeanSearch down."
 }

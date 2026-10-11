@@ -1,69 +1,80 @@
 {
- "id": "lem-sc-ext-torsor",
- "blueprint": {
-  "is": "lem-sc-ext-torsor",
-  "from": null,
-  "same_as": null
- },
- "kind": "statement",
- "title": "Extensions and torsors",
- "statement": "Let $X$ be a scheme and $G$ an abelian sheaf on $X_{\\Et}$.\nThere is a canonical bijection\n\n$$\n\\operatorname{Ext}^1_{\\mathrm{Ab}(X_{\\Et})}(\\mathbf Z_X,G)\n\\cong\\{\\text{isomorphism classes of }G\\text{-torsors}\\}.\n$$",
- "source": {
-  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-hilbert90/lem-sc-ext-torsor.md",
-  "place": "node lem-sc-ext-torsor, order 879"
- },
- "stmt_deps": [],
- "proof": [
-  {
-   "text": "Given an extension\n$0\\to G\\xrightarrow{\\iota}E\\xrightarrow{\\pi}\\mathbf Z_X\\to0$, the\npreimage $T:=\\pi^{-1}(1)\\subseteq E$ of the section $1$ is a\n$G$-torsor: the $G$-action is free and transitive, the stalks of\n$T$ are nonempty because $\\pi$ is surjective as a morphism of\nsheaves, and a section $t\\in T(U)$ trivializes\n$T|_U\\xrightarrow{\\sim}G|_U$ via $g\\mapsto\\iota(g)+t$.",
-   "uses": [],
-   "elementary": null
+  "id": "lem-sc-ext-torsor",
+  "blueprint": {
+    "is": "lem-sc-ext-torsor",
+    "from": null,
+    "same_as": null
   },
-  {
-   "text": "Conversely, given a $G$-torsor $T$, define an abelian sheaf\n$E$ on $X_{\\Et}$ by\n\n$$\nE:=\\coprod_{n\\in\\mathbf Z}T^{\\otimes n},\n$$\n\nwhere for $n\\geq1$, $T^{\\otimes n}$ is the $n$-fold contracted\nproduct $(T\\times\\cdots\\times T)/G$ with the antidiagonal action\n$g\\cdot(t_1,\\dots,t_n)=(t_1+g,t_2-g,t_3+g,\\dots)$,\n$T^{\\otimes0}:=G$, and $T^{\\otimes(-n)}$ is the $n$-fold\ncontracted product of the inverse torsor $T^{-1}$ (the set $T$\nwith $G$ acting through negation). The group law on $E$ is the\nconcatenation\n\n$$\nT^{\\otimes m}\\times T^{\\otimes n}\\longrightarrow T^{\\otimes(m+n)},\n$$\n\n$([t_1,\\dots,t_m],[s_1,\\dots,s_n])\\mapsto[t_1,\\dots,t_m,s_1,\\dots,s_n]$;\nthis makes $E$ an abelian sheaf (associativity is the associativity\nof contracted products, and the inverse is given by\n$T^{\\otimes n}\\cong(T^{-1})^{\\otimes n}$ componentwise). The map\n$\\pi:E\\to\\mathbf Z_X$ sending $T^{\\otimes n}$ to $n$ is a\nhomomorphism, surjective because its stalks are surjective (each\n$T^{\\otimes n}$ is a torsor, hence has nonempty stalks), and its\nkernel is $T^{\\otimes0}=G$; thus\n$0\\to G\\to E\\xrightarrow{\\pi}\\mathbf Z_X\\to0$ is exact. The two\nconstructions are mutually inverse: for the extension built from\n$T$, the preimage of $1$ is $T^{\\otimes1}=T$; and for the\ntorsor $T:=\\pi^{-1}(1)$ of an extension $E$, the addition of\n$E$ induces isomorphisms\n$\\pi^{-1}(n)\\xrightarrow{\\sim}T^{\\otimes n}$,\n$(e_1,\\dots,e_n)\\mapsto e_1+\\cdots+e_n$, which identify $E$ with\n$\\coprod_nT^{\\otimes n}$.",
-   "uses": [],
-   "elementary": null
-  }
- ],
- "proof_deps": [],
- "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-hilbert90/lem-sc-ext-torsor.md",
-  "place": "## Proof"
- },
- "mathlib_searches": [],
- "mathlib_match": null,
- "status": "imported",
- "merged_into": null,
- "import_flags": [],
- "blueprint_kind": "lemma",
- "blueprint_order": 879,
- "blueprint_uses": [],
- "proof_split_by": "paragraphs",
- "lean_audit": {
-  "master": {
-   "state": "none",
-   "decls": [],
-   "missing": []
+  "kind": "statement",
+  "title": "Extensions and torsors",
+  "statement": "Let $X$ be a scheme and $G$ an abelian sheaf on $X_{\\Et}$.\nThere is a canonical bijection\n\n$$\n\\operatorname{Ext}^1_{\\mathrm{Ab}(X_{\\Et})}(\\mathbf Z_X,G)\n\\cong\\{\\text{isomorphism classes of }G\\text{-torsors}\\}.\n$$",
+  "source": {
+    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-hilbert90/lem-sc-ext-torsor.md",
+    "place": "node lem-sc-ext-torsor, order 879"
   },
-  "slopmaster2": {
-   "state": "closed",
-   "decls": [
+  "stmt_deps": [],
+  "proof": [
     {
-     "name": "CategoryTheory.Sheaf.nonempty_equiv_ext_torsor",
-     "module": "WeilConjectures.CategoryTheory.Sites.Torsor",
-     "lines": [
-      927,
-      940
-     ],
-     "kind": "theorem",
-     "sorry": false
+      "text": "Given an extension\n$0\\to G\\xrightarrow{\\iota}E\\xrightarrow{\\pi}\\mathbf Z_X\\to0$, the\npreimage $T:=\\pi^{-1}(1)\\subseteq E$ of the section $1$ is a\n$G$-torsor: the $G$-action is free and transitive, the stalks of\n$T$ are nonempty because $\\pi$ is surjective as a morphism of\nsheaves, and a section $t\\in T(U)$ trivializes\n$T|_U\\xrightarrow{\\sim}G|_U$ via $g\\mapsto\\iota(g)+t$.",
+      "uses": [],
+      "elementary": null
+    },
+    {
+      "text": "Conversely, given a $G$-torsor $T$, define an abelian sheaf\n$E$ on $X_{\\Et}$ by\n\n$$\nE:=\\coprod_{n\\in\\mathbf Z}T^{\\otimes n},\n$$\n\nwhere for $n\\geq1$, $T^{\\otimes n}$ is the $n$-fold contracted\nproduct $(T\\times\\cdots\\times T)/G$ with the antidiagonal action\n$g\\cdot(t_1,\\dots,t_n)=(t_1+g,t_2-g,t_3+g,\\dots)$,\n$T^{\\otimes0}:=G$, and $T^{\\otimes(-n)}$ is the $n$-fold\ncontracted product of the inverse torsor $T^{-1}$ (the set $T$\nwith $G$ acting through negation). The group law on $E$ is the\nconcatenation\n\n$$\nT^{\\otimes m}\\times T^{\\otimes n}\\longrightarrow T^{\\otimes(m+n)},\n$$\n\n$([t_1,\\dots,t_m],[s_1,\\dots,s_n])\\mapsto[t_1,\\dots,t_m,s_1,\\dots,s_n]$;\nthis makes $E$ an abelian sheaf (associativity is the associativity\nof contracted products, and the inverse is given by\n$T^{\\otimes n}\\cong(T^{-1})^{\\otimes n}$ componentwise). The map\n$\\pi:E\\to\\mathbf Z_X$ sending $T^{\\otimes n}$ to $n$ is a\nhomomorphism, surjective because its stalks are surjective (each\n$T^{\\otimes n}$ is a torsor, hence has nonempty stalks), and its\nkernel is $T^{\\otimes0}=G$; thus\n$0\\to G\\to E\\xrightarrow{\\pi}\\mathbf Z_X\\to0$ is exact. The two\nconstructions are mutually inverse: for the extension built from\n$T$, the preimage of $1$ is $T^{\\otimes1}=T$; and for the\ntorsor $T:=\\pi^{-1}(1)$ of an extension $E$, the addition of\n$E$ induces isomorphisms\n$\\pi^{-1}(n)\\xrightarrow{\\sim}T^{\\otimes n}$,\n$(e_1,\\dots,e_n)\\mapsto e_1+\\cdots+e_n$, which identify $E$ with\n$\\coprod_nT^{\\otimes n}$.",
+      "uses": [],
+      "elementary": null
     }
-   ],
-   "missing": [],
-   "open": []
+  ],
+  "proof_deps": [],
+  "proof_origin": {
+    "by": "agent",
+    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-hilbert90/lem-sc-ext-torsor.md",
+    "place": "## Proof"
+  },
+  "mathlib_searches": [],
+  "mathlib_match": null,
+  "status": "imported",
+  "merged_into": null,
+  "import_flags": [],
+  "blueprint_kind": "lemma",
+  "blueprint_order": 879,
+  "blueprint_uses": [],
+  "proof_split_by": "paragraphs",
+  "lean_audit": {
+    "master": {
+      "state": "none",
+      "decls": [],
+      "missing": []
+    },
+    "slopmaster2": {
+      "state": "closed",
+      "decls": [
+        {
+          "name": "CategoryTheory.Sheaf.nonempty_equiv_ext_torsor",
+          "module": "WeilConjectures.CategoryTheory.Sites.Torsor",
+          "lines": [
+            927,
+            940
+          ],
+          "kind": "theorem",
+          "sorry": false
+        }
+      ],
+      "missing": [],
+      "open": []
+    }
+  },
+  "chapter": "sec-curve-estimates",
+  "unit": "sk-prop-hilbert90",
+  "lean": {
+    "module": "WeilConjectures.CategoryTheory.Sites.Torsor",
+    "declaration": "CategoryTheory.Sheaf.nonempty_equiv_ext_torsor",
+    "branch": "slopmaster2",
+    "line": 927,
+    "declarations": [
+      "CategoryTheory.Sheaf.nonempty_equiv_ext_torsor"
+    ],
+    "sorry_free": true,
+    "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state closed)"
   }
- },
- "chapter": "sec-curve-estimates",
- "unit": "sk-prop-hilbert90"
 }

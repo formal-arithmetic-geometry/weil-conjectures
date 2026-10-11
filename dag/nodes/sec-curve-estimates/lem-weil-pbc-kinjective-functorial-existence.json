@@ -1,163 +1,167 @@
 {
- "id": "lem-weil-pbc-kinjective-functorial-existence",
- "blueprint": {
-  "is": null,
-  "from": {
-   "node": "prop-weil-pbc-kinjective-resolutions-exist",
-   "place": "proof paragraph: Grothendieck category and Stacks 079P",
-   "via": []
+  "id": "lem-weil-pbc-kinjective-functorial-existence",
+  "blueprint": {
+    "is": null,
+    "from": {
+      "node": "prop-weil-pbc-kinjective-resolutions-exist",
+      "place": "proof paragraph: Grothendieck category and Stacks 079P",
+      "via": []
+    },
+    "same_as": []
   },
-  "same_as": []
- },
- "kind": "statement",
- "title": "Functorial K-injective replacement",
- "statement": "Let $\\mathcal A$ be a Grothendieck abelian category [def-sp-grothendieck-abelian] and $\\mathsf{Cpx}(\\mathcal A)$ its category of cochain complexes [def-weil-abstract-derived-category]. There is a functor $I:\\mathsf{Cpx}(\\mathcal A)\\to\\mathsf{Cpx}(\\mathcal A)$ and a natural transformation $\\eta:\\mathrm{id}\\Rightarrow I$ such that, for every complex $K$, $\\eta_K:K\\to I(K)$ is a quasi-isomorphism [def-weil-abstract-derived-category] and $I(K)$ is K-injective (for every acyclic complex $A$ the complex $\\operatorname{Hom}^\\bullet(A,I(K))$ is acyclic, as in [def-weil-pbc-kinjective-resolutions] with $\\mathcal A$ in place of $\\Mod(T_{\\Et},R)$).",
- "source": {
-  "document": "literature/stacks-project/injectives.tex",
-  "place": "Injectives, Theorem 079P (label theorem-K-injective-embedding-grothendieck), the existence and functoriality of a quasi-isomorphism into a K-injective complex; Lean: WeilConjectures/CategoryTheory/GrothendieckAbelian/KInjectiveResolution.lean, kInjectiveResolutionFunctor (142-146), toKInjectiveResolution (149-154), monoQuasiIso_toKInjectiveResolution_app (156-158), isKInjective_kInjectiveResolutionFunctor_obj (160-166)"
- },
- "stmt_deps": [
-  "def-sp-grothendieck-abelian",
-  "def-weil-abstract-derived-category",
-  "def-weil-pbc-kinjective-resolutions"
- ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
- "mathlib_searches": [
-  {
-   "tool": "leansearch",
-   "query": "functorial K-injective replacement for every complex in a Grothendieck abelian category",
-   "results": "No direct Mathlib result; only injective resolutions of individual objects and bounded-below complexes.",
-   "date": "2026-10-10",
-   "verdict": "no match"
+  "kind": "statement",
+  "title": "Functorial K-injective replacement",
+  "statement": "Let $\\mathcal A$ be a Grothendieck abelian category [def-sp-grothendieck-abelian] and $\\mathsf{Cpx}(\\mathcal A)$ its category of cochain complexes [def-weil-abstract-derived-category]. There is a functor $I:\\mathsf{Cpx}(\\mathcal A)\\to\\mathsf{Cpx}(\\mathcal A)$ and a natural transformation $\\eta:\\mathrm{id}\\Rightarrow I$ such that, for every complex $K$, $\\eta_K:K\\to I(K)$ is a quasi-isomorphism [def-weil-abstract-derived-category] and $I(K)$ is K-injective (for every acyclic complex $A$ the complex $\\operatorname{Hom}^\\bullet(A,I(K))$ is acyclic, as in [def-weil-pbc-kinjective-resolutions] with $\\mathcal A$ in place of $\\Mod(T_{\\Et},R)$).",
+  "source": {
+    "document": "literature/stacks-project/injectives.tex",
+    "place": "Injectives, Theorem 079P (label theorem-K-injective-embedding-grothendieck), the existence and functoriality of a quasi-isomorphism into a K-injective complex; Lean: WeilConjectures/CategoryTheory/GrothendieckAbelian/KInjectiveResolution.lean, kInjectiveResolutionFunctor (142-146), toKInjectiveResolution (149-154), monoQuasiIso_toKInjectiveResolution_app (156-158), isKInjective_kInjectiveResolutionFunctor_obj (160-166)"
   },
-  {
-   "tool": "loogle",
-   "query": "CochainComplex.kInjectiveResolutionFunctor",
-   "results": "No pinned Mathlib declaration; the declaration occurs only in WeilConjectures/CategoryTheory/GrothendieckAbelian/KInjectiveResolution.lean:142.",
-   "date": "2026-10-10",
-   "verdict": "no match"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "functorial K-injective replacement for unbounded complexes in a Grothendieck abelian category",
-   "results": "Only CategoryTheory.InjectiveResolution.of and instHasInjectiveResolutions for object resolutions; no functorial unbounded K-injective replacement.",
-   "date": "2026-10-10",
-   "verdict": "no match"
-  },
-  {
-   "tool": "grep",
-   "query": "rg -n 'kInjectiveResolutionFunctor|toKInjectiveResolution|HasKInjectiveResolutions' /home/ubuntu/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
-   "results": "No matches in Mathlib; exact construction is WeilConjectures/CategoryTheory/GrothendieckAbelian/KInjectiveResolution.lean:142-180.",
-   "date": "2026-10-10",
-   "verdict": "no match"
-  }
- ],
- "mathlib_match": null,
- "status": "unsplit",
- "created": {
-  "item": "prop-weil-pbc-kinjective-resolutions-exist",
-  "by": "worker",
-  "date": "2026-10-10"
- },
- "chapter": "sec-curve-estimates",
- "unit": "sk-prop-cd",
- "lean_candidates": [
-  {
-   "name": "CochainComplex.kInjectiveResolutionFunctor",
-   "module": "WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution",
-   "lines": [
-    138,
-    145
-   ],
-   "note": "sorry-free (sorryfree.py on slopmaster2_71d63dcf: OK); with the other three declarations states the node, one declaration per clause, for C abelian with [IsGrothendieckAbelian.{w} C]: the functor I, the natural transformation eta, eta_K a (mono) quasi-isomorphism, I(K) IsKInjective (Mathlib HomotopyCategory/KInjective.lean:42, maps from acyclic complexes homotopic to zero). Attachment recorded by reviewer R-kir (B10) for the maintainer to verify."
-  },
-  {
-   "name": "CochainComplex.toKInjectiveResolution",
-   "module": "WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution",
-   "lines": [
-    147,
-    154
-   ],
-   "note": "sorry-free (sorryfree.py on slopmaster2_71d63dcf: OK); with the other three declarations states the node, one declaration per clause, for C abelian with [IsGrothendieckAbelian.{w} C]: the functor I, the natural transformation eta, eta_K a (mono) quasi-isomorphism, I(K) IsKInjective (Mathlib HomotopyCategory/KInjective.lean:42, maps from acyclic complexes homotopic to zero). Attachment recorded by reviewer R-kir (B10) for the maintainer to verify."
-  },
-  {
-   "name": "CochainComplex.monoQuasiIso_toKInjectiveResolution_app",
-   "module": "WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution",
-   "lines": [
-    156,
-    158
-   ],
-   "note": "sorry-free (sorryfree.py on slopmaster2_71d63dcf: OK); with the other three declarations states the node, one declaration per clause, for C abelian with [IsGrothendieckAbelian.{w} C]: the functor I, the natural transformation eta, eta_K a (mono) quasi-isomorphism, I(K) IsKInjective (Mathlib HomotopyCategory/KInjective.lean:42, maps from acyclic complexes homotopic to zero). Attachment recorded by reviewer R-kir (B10) for the maintainer to verify."
-  },
-  {
-   "name": "CochainComplex.isKInjective_kInjectiveResolutionFunctor_obj",
-   "module": "WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution",
-   "lines": [
-    160,
-    164
-   ],
-   "note": "sorry-free (sorryfree.py on slopmaster2_71d63dcf: OK); with the other three declarations states the node, one declaration per clause, for C abelian with [IsGrothendieckAbelian.{w} C]: the functor I, the natural transformation eta, eta_K a (mono) quasi-isomorphism, I(K) IsKInjective (Mathlib HomotopyCategory/KInjective.lean:42, maps from acyclic complexes homotopic to zero). Attachment recorded by reviewer R-kir (B10) for the maintainer to verify."
-  }
- ],
- "lean": {
-  "branch": "slopmaster2",
-  "declarations": [
-   "CochainComplex.kInjectiveResolutionFunctor",
-   "CochainComplex.toKInjectiveResolution",
-   "CochainComplex.monoQuasiIso_toKInjectiveResolution_app",
-   "CochainComplex.isKInjective_kInjectiveResolutionFunctor_obj"
+  "stmt_deps": [
+    "def-sp-grothendieck-abelian",
+    "def-weil-abstract-derived-category",
+    "def-weil-pbc-kinjective-resolutions"
   ],
-  "note": "attached by the lead functorial K-injective replacement in a Grothendieck abelian category, four declarations one per clause (functor I, natural transformation eta, eta_K a monomorphic quasi-isomorphism, I(K) K-injective in Mathlib's sense: maps from acyclic complexes null-homotopic), KInjectiveResolution.lean 138-164, read by L; candidates recorded by reviewer R-kir of H1's prop-weil-pbc-kinjective-resolutions-exist"
- },
- "lean_audit": {
-  "slopmaster2": {
-   "state": "closed",
-   "decls": [
+  "proof": [],
+  "proof_deps": [],
+  "proof_origin": null,
+  "mathlib_searches": [
     {
-     "name": "CochainComplex.kInjectiveResolutionFunctor",
-     "module": "WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution",
-     "lines": [
-      138,
-      145
-     ],
-     "kind": "def",
-     "sorry": false
+      "tool": "leansearch",
+      "query": "functorial K-injective replacement for every complex in a Grothendieck abelian category",
+      "results": "No direct Mathlib result; only injective resolutions of individual objects and bounded-below complexes.",
+      "date": "2026-10-10",
+      "verdict": "no match"
     },
     {
-     "name": "CochainComplex.toKInjectiveResolution",
-     "module": "WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution",
-     "lines": [
-      147,
-      154
-     ],
-     "kind": "def",
-     "sorry": false
+      "tool": "loogle",
+      "query": "CochainComplex.kInjectiveResolutionFunctor",
+      "results": "No pinned Mathlib declaration; the declaration occurs only in WeilConjectures/CategoryTheory/GrothendieckAbelian/KInjectiveResolution.lean:142.",
+      "date": "2026-10-10",
+      "verdict": "no match"
     },
     {
-     "name": "CochainComplex.monoQuasiIso_toKInjectiveResolution_app",
-     "module": "WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution",
-     "lines": [
-      156,
-      158
-     ],
-     "kind": "theorem",
-     "sorry": false
+      "tool": "leanfinder",
+      "query": "functorial K-injective replacement for unbounded complexes in a Grothendieck abelian category",
+      "results": "Only CategoryTheory.InjectiveResolution.of and instHasInjectiveResolutions for object resolutions; no functorial unbounded K-injective replacement.",
+      "date": "2026-10-10",
+      "verdict": "no match"
     },
     {
-     "name": "CochainComplex.isKInjective_kInjectiveResolutionFunctor_obj",
-     "module": "WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution",
-     "lines": [
-      160,
-      164
-     ],
-     "kind": "theorem",
-     "sorry": false
+      "tool": "grep",
+      "query": "rg -n 'kInjectiveResolutionFunctor|toKInjectiveResolution|HasKInjectiveResolutions' /home/ubuntu/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+      "results": "No matches in Mathlib; exact construction is WeilConjectures/CategoryTheory/GrothendieckAbelian/KInjectiveResolution.lean:142-180.",
+      "date": "2026-10-10",
+      "verdict": "no match"
     }
-   ],
-   "missing": [],
-   "open": []
+  ],
+  "mathlib_match": null,
+  "status": "unsplit",
+  "created": {
+    "item": "prop-weil-pbc-kinjective-resolutions-exist",
+    "by": "worker",
+    "date": "2026-10-10"
+  },
+  "chapter": "sec-curve-estimates",
+  "unit": "sk-prop-cd",
+  "lean_candidates": [
+    {
+      "name": "CochainComplex.kInjectiveResolutionFunctor",
+      "module": "WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution",
+      "lines": [
+        138,
+        145
+      ],
+      "note": "sorry-free (sorryfree.py on slopmaster2_71d63dcf: OK); with the other three declarations states the node, one declaration per clause, for C abelian with [IsGrothendieckAbelian.{w} C]: the functor I, the natural transformation eta, eta_K a (mono) quasi-isomorphism, I(K) IsKInjective (Mathlib HomotopyCategory/KInjective.lean:42, maps from acyclic complexes homotopic to zero). Attachment recorded by reviewer R-kir (B10) for the maintainer to verify."
+    },
+    {
+      "name": "CochainComplex.toKInjectiveResolution",
+      "module": "WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution",
+      "lines": [
+        147,
+        154
+      ],
+      "note": "sorry-free (sorryfree.py on slopmaster2_71d63dcf: OK); with the other three declarations states the node, one declaration per clause, for C abelian with [IsGrothendieckAbelian.{w} C]: the functor I, the natural transformation eta, eta_K a (mono) quasi-isomorphism, I(K) IsKInjective (Mathlib HomotopyCategory/KInjective.lean:42, maps from acyclic complexes homotopic to zero). Attachment recorded by reviewer R-kir (B10) for the maintainer to verify."
+    },
+    {
+      "name": "CochainComplex.monoQuasiIso_toKInjectiveResolution_app",
+      "module": "WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution",
+      "lines": [
+        156,
+        158
+      ],
+      "note": "sorry-free (sorryfree.py on slopmaster2_71d63dcf: OK); with the other three declarations states the node, one declaration per clause, for C abelian with [IsGrothendieckAbelian.{w} C]: the functor I, the natural transformation eta, eta_K a (mono) quasi-isomorphism, I(K) IsKInjective (Mathlib HomotopyCategory/KInjective.lean:42, maps from acyclic complexes homotopic to zero). Attachment recorded by reviewer R-kir (B10) for the maintainer to verify."
+    },
+    {
+      "name": "CochainComplex.isKInjective_kInjectiveResolutionFunctor_obj",
+      "module": "WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution",
+      "lines": [
+        160,
+        164
+      ],
+      "note": "sorry-free (sorryfree.py on slopmaster2_71d63dcf: OK); with the other three declarations states the node, one declaration per clause, for C abelian with [IsGrothendieckAbelian.{w} C]: the functor I, the natural transformation eta, eta_K a (mono) quasi-isomorphism, I(K) IsKInjective (Mathlib HomotopyCategory/KInjective.lean:42, maps from acyclic complexes homotopic to zero). Attachment recorded by reviewer R-kir (B10) for the maintainer to verify."
+    }
+  ],
+  "lean": {
+    "module": "WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution",
+    "declaration": "CochainComplex.kInjectiveResolutionFunctor",
+    "branch": "slopmaster2",
+    "line": 138,
+    "declarations": [
+      "CochainComplex.kInjectiveResolutionFunctor",
+      "CochainComplex.toKInjectiveResolution",
+      "CochainComplex.monoQuasiIso_toKInjectiveResolution_app",
+      "CochainComplex.isKInjective_kInjectiveResolutionFunctor_obj"
+    ],
+    "sorry_free": true,
+    "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state closed)"
+  },
+  "lean_audit": {
+    "slopmaster2": {
+      "state": "closed",
+      "decls": [
+        {
+          "name": "CochainComplex.kInjectiveResolutionFunctor",
+          "module": "WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution",
+          "lines": [
+            138,
+            145
+          ],
+          "kind": "def",
+          "sorry": false
+        },
+        {
+          "name": "CochainComplex.toKInjectiveResolution",
+          "module": "WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution",
+          "lines": [
+            147,
+            154
+          ],
+          "kind": "def",
+          "sorry": false
+        },
+        {
+          "name": "CochainComplex.monoQuasiIso_toKInjectiveResolution_app",
+          "module": "WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution",
+          "lines": [
+            156,
+            158
+          ],
+          "kind": "theorem",
+          "sorry": false
+        },
+        {
+          "name": "CochainComplex.isKInjective_kInjectiveResolutionFunctor_obj",
+          "module": "WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution",
+          "lines": [
+            160,
+            164
+          ],
+          "kind": "theorem",
+          "sorry": false
+        }
+      ],
+      "missing": [],
+      "open": []
+    }
   }
- }
 }

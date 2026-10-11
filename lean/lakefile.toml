@@ -1,0 +1,25 @@
+# The stage-2 library of the SHEAF run (stages/2-statements.md): one module per node, every proof `sorry`.
+# It builds on the compiled source repository (branch slopmaster2 at 71d63dcf6) as a path dependency and shares its
+# package directory, so nothing of Mathlib or of the source library is rebuilt here. The library root `Sheaf` mirrors
+# the source's `WeilConjectures` root directory by directory; upstreaming a module is the rename `Sheaf.X` -> `WeilConjectures.X`.
+name = "sheaf-weil"
+version = "0.1.0"
+defaultTargets = ["Sheaf"]
+packagesDir = "/home/ubuntu/weil-conjectures-slopmaster2/.lake/packages"
+
+[leanOptions]
+pp.unicode.fun = true
+relaxedAutoImplicit = false
+backward.isDefEq.respectTransparency = false
+weak.linter.mathlibStandardSet = true
+weak.linter.style.header = false
+maxSynthPendingDepth = 3
+warn.sorry = false
+
+[[require]]
+name = "weil-conjectures"
+path = "/home/ubuntu/weil-conjectures-slopmaster2"
+
+[[lean_lib]]
+name = "Sheaf"
+globs = ["Sheaf.+"]

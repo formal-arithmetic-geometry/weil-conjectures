@@ -1,134 +1,138 @@
 {
- "id": "lem-sp-derived-functor-single-identification",
- "blueprint": {
-  "is": null,
-  "from": {
-   "node": "lem-sp-shift-identification",
-   "place": "step 5 of its split (source: Derived Categories, Definition 015A (definition-higher-derived-functors), Lemma 05TH (lemma-injective-acyclic), Proposition 05TA (proposition-enough-acyclics) (1), Lemma 05TI (lemma-enough-injectives-right-derived))",
-   "via": []
-  },
-  "same_as": null
- },
- "kind": "statement",
- "title": "The derived functor on an object placed in degree 0 computes the classical right derived functors",
- "statement": "Let $\\mathcal A,\\mathcal B$ be abelian categories, $\\mathcal A$ with enough injectives (for example $\\mathcal A$ Grothendieck abelian [def-sp-grothendieck-abelian]), let $v:\\mathcal A\\to\\mathcal B$ be an additive functor (in the application left exact additive [def-sp-left-exact-additive]), and let $Rv:D^+(\\mathcal A)\\to D^+(\\mathcal B)$ [def-weil-pbc-bounded-derived-subcategories] be its right derived functor, computed on a bounded below complex $L$ by a K-injective resolution $L\\to I(L)$, for instance a bounded below complex of injective objects, as $RvL=v(I(L))$ [def-sp-kinjective-bridge]. For an object $X$ of $\\mathcal A$ let $X[0]$ be the complex with $X$ in degree $0$, and let $R^pv(X)=\\mathcal H^p(v(I^\\bullet))$, $p\\ge0$, be the right derived functors defined by an injective resolution $X\\to I^\\bullet$ [def-sp-left-exact-additive], [def-sp-injective-resolutions]. Then for every $p\\geq0$ there is an isomorphism\n\n$$\n \\theta^p_X:\\ \\mathcal H^p\\bigl(Rv(X[0])\\bigr)\\xrightarrow{\\ \\sim\\ }R^pv(X),\n$$\n\nnatural in $X\\in\\mathcal A$: it is induced by the isomorphism $Rv(X[0])\\cong v(I^\\bullet)$ in $D^+(\\mathcal B)$ coming from the fact that the injective resolution $X[0]\\to I^\\bullet$ is a K-injective resolution, and for a morphism $f:X\\to Y$ both sides are functorial through a lift of $f$ to the injective resolutions, which is unique up to homotopy.",
- "source": {
-  "document": "literature/stacks-project/derived.tex",
-  "place": "Derived Categories, Definition 015A (definition-higher-derived-functors): $R^iF=H^i\\circ RF$ on objects; Lemma 05TH (lemma-injective-acyclic) with Proposition 05TA (proposition-enough-acyclics), last sentence of (1): a bounded below complex of injectives computes $RF$; Lemma 05TI (lemma-enough-injectives-right-derived): $RF$ is everywhere defined on $D^+$; Section 05TM (lemma-right-derived-functor): $RF(K)=F(j(K))$ for a resolution functor $j$. Lean: WeilConjectures/CategoryTheory/DerivedCategory/RightDerivedFunctor/PlusSingle.lean, lines 153-161 and 213-245 (slopmaster2)"
- },
- "stmt_deps": [
-  "def-sp-left-exact-additive",
-  "def-sp-grothendieck-abelian",
-  "def-sp-kinjective-bridge",
-  "def-sp-injective-resolutions",
-  "def-weil-pbc-bounded-derived-subcategories"
- ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
- "mathlib_searches": [
-  {
-   "tool": "leansearch",
-   "query": "homology of rightDerivedFunctorPlus applied to single complex is rightDerived functor",
-   "results": "CategoryTheory.InjectiveResolution.isoRightDerivedObj, CategoryTheory.Functor.rightDerived, isoRightDerivedObj_hom_naturality_assoc, rightDerivedToHomotopyCategory (Mathlib.CategoryTheory.Abelian.RightDerived)",
-   "date": "2026-10-09",
-   "verdict": "no match: only R^nF X ≅ H^n(F(I)) for an injective resolution I; nothing relates `rightDerivedFunctorPlus` to `rightDerived`"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "isomorphism between H^n of the right derived functor of X placed in degree 0 and the n-th right derived functor R^n F X defined by injective resolutions",
-   "results": "InjectiveResolution.isoRightDerivedObj, ProjectiveResolution.isoLeftDerivedObj, isoRightDerivedObj_inv_naturality_assoc, isoRightDerivedToHomotopyCategoryObj, isoRightDerivedObj_hom_naturality (Mathlib.CategoryTheory.Abelian.RightDerived / LeftDerived)",
-   "date": "2026-10-09",
-   "verdict": "no match (half of the comparison: R^nF X ≅ H^n(F(I)) on the classical side)"
-  },
-  {
-   "tool": "loogle",
-   "query": "CategoryTheory.Functor.rightDerivedFunctorPlus, CategoryTheory.Functor.rightDerived",
-   "results": "none",
-   "date": "2026-10-09",
-   "verdict": "no match"
-  },
-  {
-   "tool": "grep",
-   "query": "grep -rln 'rightDerivedFunctorPlus' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib | xargs grep -ln 'InjectiveResolution\\|rightDerived '; grep -rn 'singleFunctor.*rightDerived\\|rightDerived.*singleFunctor' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
-   "results": "Mathlib/CategoryTheory/Abelian/RightDerived.lean mentions `rightDerivedFunctorPlus` only in its module docstring (line 46: '`F.rightDerived` shall be redefined using `F.rightDerivedFunctorPlus`', a TODO); Mathlib/Algebra/Homology/DerivedCategory/RightDerivedFunctorPlus.lean defines the functor and its unit only; no hit for the second pattern",
-   "date": "2026-10-09",
-   "verdict": "no match: the comparison is an announced TODO of Mathlib"
-  },
-  {
-   "tool": "local_search",
-   "query": "singleFunctorCompRightDerivedFunctorPlusCompHomologyFunctorIso (project ~/weil-conjectures-slopmaster2)",
-   "results": "CategoryTheory.Functor.singleFunctorCompRightDerivedFunctorPlusCompHomologyFunctorIso, def, WeilConjectures/CategoryTheory/DerivedCategory/RightDerivedFunctor/PlusSingle.lean (index unavailable: name found by file scan)",
-   "date": "2026-10-09",
-   "verdict": "in the source repository, not in Mathlib; sorry-free by the sorry map (nothing with sorry reachable)"
-  }
- ],
- "mathlib_match": null,
- "status": "unsplit",
- "merged_into": null,
- "created": {
-  "by": "worker",
-  "item": "lem-sp-shift-identification",
-  "date": "2026-10-09"
- },
- "lean_audit": {
-  "master": {
-   "state": "none",
-   "decls": [],
-   "missing": [
-    "CategoryTheory.Functor.homologyRightDerivedFunctorPlusObjSingleFunctorIso",
-    "CategoryTheory.Functor.homologyRightDerivedFunctorPlusObjSingleFunctorIso_hom_naturality",
-    "CategoryTheory.Functor.singleFunctorCompRightDerivedFunctorPlusCompHomologyFunctorIso"
-   ]
-  },
-  "slopmaster2": {
-   "state": "closed",
-   "decls": [
-    {
-     "name": "CategoryTheory.Functor.homologyRightDerivedFunctorPlusObjSingleFunctorIso",
-     "module": "WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusSingle",
-     "lines": [
-      153,
-      161
-     ],
-     "kind": "def",
-     "sorry": false
+  "id": "lem-sp-derived-functor-single-identification",
+  "blueprint": {
+    "is": null,
+    "from": {
+      "node": "lem-sp-shift-identification",
+      "place": "step 5 of its split (source: Derived Categories, Definition 015A (definition-higher-derived-functors), Lemma 05TH (lemma-injective-acyclic), Proposition 05TA (proposition-enough-acyclics) (1), Lemma 05TI (lemma-enough-injectives-right-derived))",
+      "via": []
     },
-    {
-     "name": "CategoryTheory.Functor.homologyRightDerivedFunctorPlusObjSingleFunctorIso_hom_naturality",
-     "module": "WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusSingle",
-     "lines": [
-      213,
-      236
-     ],
-     "kind": "theorem",
-     "sorry": false
-    },
-    {
-     "name": "CategoryTheory.Functor.singleFunctorCompRightDerivedFunctorPlusCompHomologyFunctorIso",
-     "module": "WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusSingle",
-     "lines": [
-      238,
-      245
-     ],
-     "kind": "def",
-     "sorry": false
-    }
-   ],
-   "missing": [],
-   "open": []
-  }
- },
- "import_flags": [],
- "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange",
- "lean": {
-  "branch": "slopmaster2",
-  "declarations": [
-   "CategoryTheory.Functor.homologyRightDerivedFunctorPlusObjSingleFunctorIso",
-   "CategoryTheory.Functor.homologyRightDerivedFunctorPlusObjSingleFunctorIso_hom_naturality",
-   "CategoryTheory.Functor.singleFunctorCompRightDerivedFunctorPlusCompHomologyFunctorIso"
+    "same_as": null
+  },
+  "kind": "statement",
+  "title": "The derived functor on an object placed in degree 0 computes the classical right derived functors",
+  "statement": "Let $\\mathcal A,\\mathcal B$ be abelian categories, $\\mathcal A$ with enough injectives (for example $\\mathcal A$ Grothendieck abelian [def-sp-grothendieck-abelian]), let $v:\\mathcal A\\to\\mathcal B$ be an additive functor (in the application left exact additive [def-sp-left-exact-additive]), and let $Rv:D^+(\\mathcal A)\\to D^+(\\mathcal B)$ [def-weil-pbc-bounded-derived-subcategories] be its right derived functor, computed on a bounded below complex $L$ by a K-injective resolution $L\\to I(L)$, for instance a bounded below complex of injective objects, as $RvL=v(I(L))$ [def-sp-kinjective-bridge]. For an object $X$ of $\\mathcal A$ let $X[0]$ be the complex with $X$ in degree $0$, and let $R^pv(X)=\\mathcal H^p(v(I^\\bullet))$, $p\\ge0$, be the right derived functors defined by an injective resolution $X\\to I^\\bullet$ [def-sp-left-exact-additive], [def-sp-injective-resolutions]. Then for every $p\\geq0$ there is an isomorphism\n\n$$\n \\theta^p_X:\\ \\mathcal H^p\\bigl(Rv(X[0])\\bigr)\\xrightarrow{\\ \\sim\\ }R^pv(X),\n$$\n\nnatural in $X\\in\\mathcal A$: it is induced by the isomorphism $Rv(X[0])\\cong v(I^\\bullet)$ in $D^+(\\mathcal B)$ coming from the fact that the injective resolution $X[0]\\to I^\\bullet$ is a K-injective resolution, and for a morphism $f:X\\to Y$ both sides are functorial through a lift of $f$ to the injective resolutions, which is unique up to homotopy.",
+  "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Derived Categories, Definition 015A (definition-higher-derived-functors): $R^iF=H^i\\circ RF$ on objects; Lemma 05TH (lemma-injective-acyclic) with Proposition 05TA (proposition-enough-acyclics), last sentence of (1): a bounded below complex of injectives computes $RF$; Lemma 05TI (lemma-enough-injectives-right-derived): $RF$ is everywhere defined on $D^+$; Section 05TM (lemma-right-derived-functor): $RF(K)=F(j(K))$ for a resolution functor $j$. Lean: WeilConjectures/CategoryTheory/DerivedCategory/RightDerivedFunctor/PlusSingle.lean, lines 153-161 and 213-245 (slopmaster2)"
+  },
+  "stmt_deps": [
+    "def-sp-left-exact-additive",
+    "def-sp-grothendieck-abelian",
+    "def-sp-kinjective-bridge",
+    "def-sp-injective-resolutions",
+    "def-weil-pbc-bounded-derived-subcategories"
   ],
-  "note": "attached by the lead at review (2026-10-09), found by the opus worker of lem-sp-shift-identification: the isomorphism H^n(R^+F(X[0])) = R^nF(X) for an additive F on an abelian category with enough injectives, its naturality, and the natural isomorphism of functors; all sorry-free on the full map"
- }
+  "proof": [],
+  "proof_deps": [],
+  "proof_origin": null,
+  "mathlib_searches": [
+    {
+      "tool": "leansearch",
+      "query": "homology of rightDerivedFunctorPlus applied to single complex is rightDerived functor",
+      "results": "CategoryTheory.InjectiveResolution.isoRightDerivedObj, CategoryTheory.Functor.rightDerived, isoRightDerivedObj_hom_naturality_assoc, rightDerivedToHomotopyCategory (Mathlib.CategoryTheory.Abelian.RightDerived)",
+      "date": "2026-10-09",
+      "verdict": "no match: only R^nF X ≅ H^n(F(I)) for an injective resolution I; nothing relates `rightDerivedFunctorPlus` to `rightDerived`"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "isomorphism between H^n of the right derived functor of X placed in degree 0 and the n-th right derived functor R^n F X defined by injective resolutions",
+      "results": "InjectiveResolution.isoRightDerivedObj, ProjectiveResolution.isoLeftDerivedObj, isoRightDerivedObj_inv_naturality_assoc, isoRightDerivedToHomotopyCategoryObj, isoRightDerivedObj_hom_naturality (Mathlib.CategoryTheory.Abelian.RightDerived / LeftDerived)",
+      "date": "2026-10-09",
+      "verdict": "no match (half of the comparison: R^nF X ≅ H^n(F(I)) on the classical side)"
+    },
+    {
+      "tool": "loogle",
+      "query": "CategoryTheory.Functor.rightDerivedFunctorPlus, CategoryTheory.Functor.rightDerived",
+      "results": "none",
+      "date": "2026-10-09",
+      "verdict": "no match"
+    },
+    {
+      "tool": "grep",
+      "query": "grep -rln 'rightDerivedFunctorPlus' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib | xargs grep -ln 'InjectiveResolution\\|rightDerived '; grep -rn 'singleFunctor.*rightDerived\\|rightDerived.*singleFunctor' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+      "results": "Mathlib/CategoryTheory/Abelian/RightDerived.lean mentions `rightDerivedFunctorPlus` only in its module docstring (line 46: '`F.rightDerived` shall be redefined using `F.rightDerivedFunctorPlus`', a TODO); Mathlib/Algebra/Homology/DerivedCategory/RightDerivedFunctorPlus.lean defines the functor and its unit only; no hit for the second pattern",
+      "date": "2026-10-09",
+      "verdict": "no match: the comparison is an announced TODO of Mathlib"
+    },
+    {
+      "tool": "local_search",
+      "query": "singleFunctorCompRightDerivedFunctorPlusCompHomologyFunctorIso (project ~/weil-conjectures-slopmaster2)",
+      "results": "CategoryTheory.Functor.singleFunctorCompRightDerivedFunctorPlusCompHomologyFunctorIso, def, WeilConjectures/CategoryTheory/DerivedCategory/RightDerivedFunctor/PlusSingle.lean (index unavailable: name found by file scan)",
+      "date": "2026-10-09",
+      "verdict": "in the source repository, not in Mathlib; sorry-free by the sorry map (nothing with sorry reachable)"
+    }
+  ],
+  "mathlib_match": null,
+  "status": "unsplit",
+  "merged_into": null,
+  "created": {
+    "by": "worker",
+    "item": "lem-sp-shift-identification",
+    "date": "2026-10-09"
+  },
+  "lean_audit": {
+    "master": {
+      "state": "none",
+      "decls": [],
+      "missing": [
+        "CategoryTheory.Functor.homologyRightDerivedFunctorPlusObjSingleFunctorIso",
+        "CategoryTheory.Functor.homologyRightDerivedFunctorPlusObjSingleFunctorIso_hom_naturality",
+        "CategoryTheory.Functor.singleFunctorCompRightDerivedFunctorPlusCompHomologyFunctorIso"
+      ]
+    },
+    "slopmaster2": {
+      "state": "closed",
+      "decls": [
+        {
+          "name": "CategoryTheory.Functor.homologyRightDerivedFunctorPlusObjSingleFunctorIso",
+          "module": "WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusSingle",
+          "lines": [
+            153,
+            161
+          ],
+          "kind": "def",
+          "sorry": false
+        },
+        {
+          "name": "CategoryTheory.Functor.homologyRightDerivedFunctorPlusObjSingleFunctorIso_hom_naturality",
+          "module": "WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusSingle",
+          "lines": [
+            213,
+            236
+          ],
+          "kind": "theorem",
+          "sorry": false
+        },
+        {
+          "name": "CategoryTheory.Functor.singleFunctorCompRightDerivedFunctorPlusCompHomologyFunctorIso",
+          "module": "WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusSingle",
+          "lines": [
+            238,
+            245
+          ],
+          "kind": "def",
+          "sorry": false
+        }
+      ],
+      "missing": [],
+      "open": []
+    }
+  },
+  "import_flags": [],
+  "chapter": "sec-proper-base-change",
+  "unit": "sk-thm-properbasechange",
+  "lean": {
+    "module": "WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusSingle",
+    "declaration": "CategoryTheory.Functor.homologyRightDerivedFunctorPlusObjSingleFunctorIso",
+    "branch": "slopmaster2",
+    "line": 153,
+    "declarations": [
+      "CategoryTheory.Functor.homologyRightDerivedFunctorPlusObjSingleFunctorIso",
+      "CategoryTheory.Functor.homologyRightDerivedFunctorPlusObjSingleFunctorIso_hom_naturality",
+      "CategoryTheory.Functor.singleFunctorCompRightDerivedFunctorPlusCompHomologyFunctorIso"
+    ],
+    "sorry_free": true,
+    "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state closed)"
+  }
 }

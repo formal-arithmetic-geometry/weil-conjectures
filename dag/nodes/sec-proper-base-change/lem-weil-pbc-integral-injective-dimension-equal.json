@@ -1,108 +1,112 @@
 {
- "id": "lem-weil-pbc-integral-injective-dimension-equal",
- "blueprint": {
-  "is": null,
-  "from": {
-   "node": "thm-weil-pbc-finite-etale-lifting",
-   "place": "step 7 of its split (source: Lemma 0GS2, proof: the essential-surjectivity paragraphs); via the dimension-at-point branch and its Algebra 00P0 sublemma, this is the integral-extension dimension equality used to identify the number of Noether-normalization coordinates",
-   "via": [
-    "lem-weil-pbc-finite-type-domain-dimension-trdeg",
-    "lem-weil-pbc-dimension-at-point-local-ring-trdeg",
-    "lem-weil-pbc-regular-local-separable-residue-smooth",
-    "lem-weil-pbc-smooth-at-generic-point-over-field",
-    "lem-weil-pbc-separable-extension-fraction-field-of-smooth-algebra",
-    "lem-weil-pbc-geometrically-regular-finitely-generated-extensions",
-    "lem-weil-pbc-geometric-regularity-separable-extension",
-    "lem-weil-pbc-henselization-pair-g-ring",
-    "lem-weil-pbc-finite-etale-lifting-limit-descent",
-    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
-   ]
+  "id": "lem-weil-pbc-integral-injective-dimension-equal",
+  "blueprint": {
+    "is": null,
+    "from": {
+      "node": "thm-weil-pbc-finite-etale-lifting",
+      "place": "step 7 of its split (source: Lemma 0GS2, proof: the essential-surjectivity paragraphs); via the dimension-at-point branch and its Algebra 00P0 sublemma, this is the integral-extension dimension equality used to identify the number of Noether-normalization coordinates",
+      "via": [
+        "lem-weil-pbc-finite-type-domain-dimension-trdeg",
+        "lem-weil-pbc-dimension-at-point-local-ring-trdeg",
+        "lem-weil-pbc-regular-local-separable-residue-smooth",
+        "lem-weil-pbc-smooth-at-generic-point-over-field",
+        "lem-weil-pbc-separable-extension-fraction-field-of-smooth-algebra",
+        "lem-weil-pbc-geometrically-regular-finitely-generated-extensions",
+        "lem-weil-pbc-geometric-regularity-separable-extension",
+        "lem-weil-pbc-henselization-pair-g-ring",
+        "lem-weil-pbc-finite-etale-lifting-limit-descent",
+        "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+      ]
+    },
+    "same_as": []
   },
-  "same_as": []
- },
- "kind": "statement",
- "title": "An injective integral extension preserves Krull dimension",
- "statement": "Let $R\\hookrightarrow S$ be an injective homomorphism of commutative rings such that every element of $S$ is integral over $R$ [def-weil-pbc-integral-closure]. Then the Krull dimensions [def-weil-pbc-krull-dimension-ring] of $R$ and $S$ are equal: $\\dim R=\\dim S$.",
- "source": {
-  "document": "literature/stacks-project/algebra.tex",
-  "place": "Algebra, Lemma Tag 00OK (lemma-integral-sub-dim-equal, lines 27360-27373); proof cites 00GU, 00GQ, 00OI, 00OJ"
- },
- "stmt_deps": [
-  "def-weil-pbc-integral-closure",
-  "def-weil-pbc-krull-dimension-ring"
- ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
- "mathlib_searches": [
-  {
-   "tool": "leansearch",
-   "query": "injective integral ring extension has equal Krull dimension",
-   "results": "Ring.DimensionLEOne.integralClosure (dimension at most one only); ringKrullDim_le_of_surjective (surjective maps); no general dimension equality",
-   "date": "2026-10-10",
-   "verdict": "no match"
+  "kind": "statement",
+  "title": "An injective integral extension preserves Krull dimension",
+  "statement": "Let $R\\hookrightarrow S$ be an injective homomorphism of commutative rings such that every element of $S$ is integral over $R$ [def-weil-pbc-integral-closure]. Then the Krull dimensions [def-weil-pbc-krull-dimension-ring] of $R$ and $S$ are equal: $\\dim R=\\dim S$.",
+  "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 00OK (lemma-integral-sub-dim-equal, lines 27360-27373); proof cites 00GU, 00GQ, 00OI, 00OJ"
   },
-  {
-   "tool": "leanfinder",
-   "query": "Krull dimensions of two rings are equal when one is integral over the other and the map is injective",
-   "results": "Ring.DimensionLEOne.isIntegralClosure (at most one only); PrimeSpectrum.topologicalKrullDim_eq_ringKrullDim; IsLocalization.AtPrime.ringKrullDim_eq_height; no integral-extension equality",
-   "date": "2026-10-10",
-   "verdict": "no match"
-  },
-  {
-   "tool": "loogle",
-   "query": "ringKrullDim, AlgHom.Finite",
-   "results": "none",
-   "date": "2026-10-10",
-   "verdict": "no match"
-  },
-  {
-   "tool": "grep",
-   "query": "rg -n 'ringKrullDim_eq.*[Ii]ntegral|[Ii]ntegral.*ringKrullDim_eq|ringKrullDim.*comap_surjective|ringKrullDim.*GoingUp' Mathlib/RingTheory",
-   "results": "none; Mathlib/RingTheory/KrullDimension/Polynomial.lean has the polynomial-ring calculation, and Mathlib/RingTheory/NoetherNormalization.lean:289 gives an injective finite map without a dimension clause",
-   "date": "2026-10-10",
-   "verdict": "no match"
-  }
- ],
- "mathlib_match": null,
- "status": "unsplit",
- "merged_into": null,
- "created": {
-  "by": "worker",
-  "item": "lem-weil-pbc-finite-type-domain-dimension-trdeg",
-  "date": "2026-10-10"
- },
- "lean_audit": {
-  "master": {
-   "state": "none",
-   "decls": [],
-   "missing": []
-  },
-  "slopmaster2": {
-   "state": "closed",
-   "decls": [
-    {
-     "name": "ringKrullDim_eq_of_isIntegral",
-     "module": "WeilConjectures.Mathlib.RingTheory.Ideal.HasGoingUp",
-     "lines": [
-      25,
-      38
-     ],
-     "kind": "theorem",
-     "sorry": false
-    }
-   ],
-   "missing": [],
-   "open": []
-  }
- },
- "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1",
- "lean": {
-  "branch": "slopmaster2",
-  "declarations": [
-   "ringKrullDim_eq_of_isIntegral"
+  "stmt_deps": [
+    "def-weil-pbc-integral-closure",
+    "def-weil-pbc-krull-dimension-ring"
   ],
-  "note": "attached by the lead at the worker's rule-0 finding (2026-10-10): 00OK as stated (IsIntegral, FaithfulSMul = injective, ringKrullDim bottom for the zero ring as the node's -infinity)"
- }
+  "proof": [],
+  "proof_deps": [],
+  "proof_origin": null,
+  "mathlib_searches": [
+    {
+      "tool": "leansearch",
+      "query": "injective integral ring extension has equal Krull dimension",
+      "results": "Ring.DimensionLEOne.integralClosure (dimension at most one only); ringKrullDim_le_of_surjective (surjective maps); no general dimension equality",
+      "date": "2026-10-10",
+      "verdict": "no match"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "Krull dimensions of two rings are equal when one is integral over the other and the map is injective",
+      "results": "Ring.DimensionLEOne.isIntegralClosure (at most one only); PrimeSpectrum.topologicalKrullDim_eq_ringKrullDim; IsLocalization.AtPrime.ringKrullDim_eq_height; no integral-extension equality",
+      "date": "2026-10-10",
+      "verdict": "no match"
+    },
+    {
+      "tool": "loogle",
+      "query": "ringKrullDim, AlgHom.Finite",
+      "results": "none",
+      "date": "2026-10-10",
+      "verdict": "no match"
+    },
+    {
+      "tool": "grep",
+      "query": "rg -n 'ringKrullDim_eq.*[Ii]ntegral|[Ii]ntegral.*ringKrullDim_eq|ringKrullDim.*comap_surjective|ringKrullDim.*GoingUp' Mathlib/RingTheory",
+      "results": "none; Mathlib/RingTheory/KrullDimension/Polynomial.lean has the polynomial-ring calculation, and Mathlib/RingTheory/NoetherNormalization.lean:289 gives an injective finite map without a dimension clause",
+      "date": "2026-10-10",
+      "verdict": "no match"
+    }
+  ],
+  "mathlib_match": null,
+  "status": "unsplit",
+  "merged_into": null,
+  "created": {
+    "by": "worker",
+    "item": "lem-weil-pbc-finite-type-domain-dimension-trdeg",
+    "date": "2026-10-10"
+  },
+  "lean_audit": {
+    "master": {
+      "state": "none",
+      "decls": [],
+      "missing": []
+    },
+    "slopmaster2": {
+      "state": "closed",
+      "decls": [
+        {
+          "name": "ringKrullDim_eq_of_isIntegral",
+          "module": "WeilConjectures.Mathlib.RingTheory.Ideal.HasGoingUp",
+          "lines": [
+            25,
+            38
+          ],
+          "kind": "theorem",
+          "sorry": false
+        }
+      ],
+      "missing": [],
+      "open": []
+    }
+  },
+  "chapter": "sec-proper-base-change",
+  "unit": "sk-thm-p1",
+  "lean": {
+    "module": "WeilConjectures.Mathlib.RingTheory.Ideal.HasGoingUp",
+    "declaration": "ringKrullDim_eq_of_isIntegral",
+    "branch": "slopmaster2",
+    "line": 25,
+    "declarations": [
+      "ringKrullDim_eq_of_isIntegral"
+    ],
+    "sorry_free": true,
+    "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state closed)"
+  }
 }

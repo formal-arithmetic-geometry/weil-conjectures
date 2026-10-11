@@ -1,110 +1,122 @@
 {
- "id": "def-weil-weil-sheaf-complex",
- "blueprint": {
-  "is": "def-weil-weil-sheaf-complex",
-  "from": null,
-  "same_as": null
- },
- "kind": "definition",
- "title": "Weil sheaf and Weil complex",
- "statement": "Fix the finite-field datum [def-weil-finite-field-fiber] $p,a,q,k_0,k$, where $q=p^a$, a prime $\\ell\\neq p$, the field $\\Ql=\\mathbf Q_\\ell$ of $\\ell$-adic numbers [def-weil-l-adic-numbers], an algebraic closure $\\Qlb$ of $\\Ql$ [def-weil-algebraic-closure], and a finite extension $E/\\Ql$ contained in $\\Qlb$ [def-weil-l-adic-coefficient-extension]. Let $Y_0$ be a $k_0$-scheme of finite type [def-weil-finite-type-morphism], put $Y=Y_0\\times_{k_0}k$, and let $g_Y=\\operatorname{id}_{Y_0}\\times_{k_0}\\operatorname{Spec}(\\gamma):Y\\to Y$ be the geometric-Frobenius automorphism [def-weil-frobenius-detailed]; $\\ell$ is invertible on $Y$ since $\\ell\\neq p=\\operatorname{char}k$. Let $\\Lambda\\in\\{E,\\Qlb\\}$, where $D^b_c(Y,E)=D^b_c(Y,\\mathcal O_E)[1/\\varpi_E]$ is the rationalized category [def-weil-rationalization-karoubi] and $D^b_c(Y,\\Qlb)=\\mathcal C_Y$ is the common-stage category of pairs $(E,K)$ [def-weil-algebraically-closed-coefficients]. Let\n\n$$\n Lg_Y^*:D^b_c(Y,\\Lambda)\\longrightarrow D^b_c(Y,\\Lambda)\n$$\n\nbe the derived pullback along $g_Y$ [def-weil-derived-pullback-tensor-hom]: at $\\Lambda=E$ it is $Lg_{Y,E}^*$, and at $\\Lambda=\\Qlb$ it is $Lg_Y^*(E,K)=(E,Lg_{Y,E}^*K)$ on objects and acts on a morphism represented over a common finite extension $L$ by the same operation at stage $L$, composed with the scalar-extension isomorphisms; it is a functor from $D^b_c(Y,\\Lambda)$ to itself.\n\n1. *Weil complexes.* A *$\\Lambda$-Weil complex* on $Y_0$ is a pair $(K,\\theta)$ with $K$ an object of $D^b_c(Y,\\Lambda)$ and\n\n$$\n \\theta:Lg_Y^*K\\xrightarrow{\\ \\sim\\ }K\n$$\n\nan isomorphism of $D^b_c(Y,\\Lambda)$, the *Weil structure* (Frobenius isomorphism) of the pair. A morphism $(K,\\theta)\\to(K',\\theta')$ is a morphism $u:K\\to K'$ of $D^b_c(Y,\\Lambda)$ with $u\\circ\\theta=\\theta'\\circ Lg_Y^*(u)$. With the identities and composition of $D^b_c(Y,\\Lambda)$ these form the category\n\n$$\n D^b_{c,\\mathrm W}(Y,\\Lambda)=D^b_c(Y,\\Lambda)^{Lg_Y^*},\n$$\n\nthe category of $Lg_Y^*$-fixed pairs in $D^b_c(Y,\\Lambda)$ [def-weil-endofunctor-fixed-pair-category].\n\n2. *Forgetful functor.* $\\operatorname{For}:D^b_{c,\\mathrm W}(Y,\\Lambda)\\to D^b_c(Y,\\Lambda)$ sends $(K,\\theta)$ to $K$ and a morphism $u$ to $u$; it is faithful [def-weil-endofunctor-fixed-pair-category]. An object $(K,\\theta)$ carries, besides $\\operatorname{For}(K,\\theta)=K$, its Frobenius isomorphism $\\theta_K=\\theta:Lg_Y^*\\operatorname{For}(K,\\theta)\\xrightarrow{\\sim}\\operatorname{For}(K,\\theta)$.\n\n3. *Weil sheaves.* A *constructible $\\Lambda$-Weil sheaf* on $Y_0$ is a $\\Lambda$-Weil complex $(\\mathcal F,\\theta)$ whose underlying object $\\mathcal F$ lies in the constructible heart $\\Sh_c(Y,\\Lambda)$ [def-weil-constructible-heart]; constructible $\\Lambda$-Weil sheaves form the full subcategory of $D^b_{c,\\mathrm W}(Y,\\Lambda)$ on these objects.\n\n4. *Finite stages at $\\Qlb$.* For $E$ in the directed set $\\mathcal E_\\ell$ of finite extensions of $\\Ql$ in $\\Qlb$ and an $E$-Weil complex $(K,\\theta)$, write $(E,(K,\\theta))$ for the $\\Qlb$-Weil complex $\\bigl((E,K),[E,\\theta]\\bigr)$, where $[E,\\theta]:Lg_Y^*(E,K)=(E,Lg_{Y,E}^*K)\\to(E,K)$ is the morphism of $\\mathcal C_Y$ represented by $\\theta$ at the stage $E$ (an isomorphism, with inverse $[E,\\theta^{-1}]$).\n\nNo triangulated structure is part of this definition: $D^b_{c,\\mathrm W}(Y,\\Lambda)$ is a category of pairs over $D^b_c(Y,\\Lambda)$, not a derived category of Weil sheaves (its Hom groups are not Ext groups of Weil sheaves: for $Y_0=\\operatorname{Spec}k_0$ a nonsplit Frobenius extension of $\\Lambda$ by $\\Lambda$, a Jordan block, gives no nonzero morphism of pairs $(\\Lambda,\\mathrm{can})\\to(\\Lambda[1],\\mathrm{can})$, since $\\operatorname{Hom}(\\Lambda,\\Lambda[1])=H^1(\\operatorname{Spec}k,\\Lambda)=0$).",
- "source": {
-  "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
-  "place": "Deligne, La conjecture de Weil II, Définition (1.1.10)(i), p. 151 (Weil sheaf: a sheaf on X with an action of W(F̄/F_q) compatible with its action on X), with the explanation of 'action' p. 151-152 (an automorphism of (X,F) is a pair (f, g: f^*F -> F)) and (1.1.14), p. 153 (Weil sheaves = sheaves F on X with an isomorphism F^*F ≅ F); (1.1.11), p. 152 admits the analogues for complexes. Blueprint: literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-admissible/def-weil-weil-sheaf-complex.md (order 1507); slopmaster2 chapter 05_adic_weil_reviewed.tex, Definition 'Weil complex' (def:weil-complex), pair (K, phi: F_X^*K ≅ K)"
- },
- "stmt_deps": [
-  "def-weil-finite-field-fiber",
-  "def-weil-l-adic-numbers",
-  "def-weil-algebraic-closure",
-  "def-weil-l-adic-coefficient-extension",
-  "def-weil-finite-type-morphism",
-  "def-weil-frobenius-detailed",
-  "def-weil-rationalization-karoubi",
-  "def-weil-algebraically-closed-coefficients",
-  "def-weil-derived-pullback-tensor-hom",
-  "def-weil-endofunctor-fixed-pair-category",
-  "def-weil-constructible-heart"
- ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
- "mathlib_searches": [
-  {
-   "tool": "grep",
-   "query": "grep -rln -i 'weil sheaf\\|WeilSheaf\\|weil complex\\|WeilComplex\\|Weil structure' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
-   "results": "none",
-   "date": "2026-10-09",
-   "verdict": "no match"
+  "id": "def-weil-weil-sheaf-complex",
+  "blueprint": {
+    "is": "def-weil-weil-sheaf-complex",
+    "from": null,
+    "same_as": null
   },
-  {
-   "tool": "grep",
-   "query": "grep -n 'structure Algebra\\|structure Hom\\|def forget' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Endofunctor/Algebra.lean",
-   "results": "Endofunctor.Algebra, Algebra.Hom, Algebra.forget: the categorical shape of item 1-2, recorded as the leaf def-weil-endofunctor-fixed-pair-category; the ingredients D^b_c(Y,Λ) and Lg_Y^* have no Mathlib counterpart",
-   "date": "2026-10-09",
-   "verdict": "generalization: categorical part only"
-  }
- ],
- "mathlib_match": null,
- "status": "split",
- "merged_into": null,
- "import_flags": [],
- "blueprint_kind": "definition",
- "blueprint_order": 1507,
- "blueprint_uses": [
-  "def-weil-algebraically-closed-coefficients",
-  "def-weil-constructible-heart",
-  "def-weil-derived-pullback-tensor-hom",
-  "def-weil-finite-field-fiber",
-  "def-weil-finite-torsion-constructibility",
-  "def-weil-frobenius-detailed",
-  "def-weil-pbc-proetale-site",
-  "def-weil-scheme-morphism-properties"
- ],
- "lean_audit": {
-  "master": {
-   "state": "none",
-   "decls": [],
-   "missing": []
+  "kind": "definition",
+  "title": "Weil sheaf and Weil complex",
+  "statement": "Fix the finite-field datum [def-weil-finite-field-fiber] $p,a,q,k_0,k$, where $q=p^a$, a prime $\\ell\\neq p$, the field $\\Ql=\\mathbf Q_\\ell$ of $\\ell$-adic numbers [def-weil-l-adic-numbers], an algebraic closure $\\Qlb$ of $\\Ql$ [def-weil-algebraic-closure], and a finite extension $E/\\Ql$ contained in $\\Qlb$ [def-weil-l-adic-coefficient-extension]. Let $Y_0$ be a $k_0$-scheme of finite type [def-weil-finite-type-morphism], put $Y=Y_0\\times_{k_0}k$, and let $g_Y=\\operatorname{id}_{Y_0}\\times_{k_0}\\operatorname{Spec}(\\gamma):Y\\to Y$ be the geometric-Frobenius automorphism [def-weil-frobenius-detailed]; $\\ell$ is invertible on $Y$ since $\\ell\\neq p=\\operatorname{char}k$. Let $\\Lambda\\in\\{E,\\Qlb\\}$, where $D^b_c(Y,E)=D^b_c(Y,\\mathcal O_E)[1/\\varpi_E]$ is the rationalized category [def-weil-rationalization-karoubi] and $D^b_c(Y,\\Qlb)=\\mathcal C_Y$ is the common-stage category of pairs $(E,K)$ [def-weil-algebraically-closed-coefficients]. Let\n\n$$\n Lg_Y^*:D^b_c(Y,\\Lambda)\\longrightarrow D^b_c(Y,\\Lambda)\n$$\n\nbe the derived pullback along $g_Y$ [def-weil-derived-pullback-tensor-hom]: at $\\Lambda=E$ it is $Lg_{Y,E}^*$, and at $\\Lambda=\\Qlb$ it is $Lg_Y^*(E,K)=(E,Lg_{Y,E}^*K)$ on objects and acts on a morphism represented over a common finite extension $L$ by the same operation at stage $L$, composed with the scalar-extension isomorphisms; it is a functor from $D^b_c(Y,\\Lambda)$ to itself.\n\n1. *Weil complexes.* A *$\\Lambda$-Weil complex* on $Y_0$ is a pair $(K,\\theta)$ with $K$ an object of $D^b_c(Y,\\Lambda)$ and\n\n$$\n \\theta:Lg_Y^*K\\xrightarrow{\\ \\sim\\ }K\n$$\n\nan isomorphism of $D^b_c(Y,\\Lambda)$, the *Weil structure* (Frobenius isomorphism) of the pair. A morphism $(K,\\theta)\\to(K',\\theta')$ is a morphism $u:K\\to K'$ of $D^b_c(Y,\\Lambda)$ with $u\\circ\\theta=\\theta'\\circ Lg_Y^*(u)$. With the identities and composition of $D^b_c(Y,\\Lambda)$ these form the category\n\n$$\n D^b_{c,\\mathrm W}(Y,\\Lambda)=D^b_c(Y,\\Lambda)^{Lg_Y^*},\n$$\n\nthe category of $Lg_Y^*$-fixed pairs in $D^b_c(Y,\\Lambda)$ [def-weil-endofunctor-fixed-pair-category].\n\n2. *Forgetful functor.* $\\operatorname{For}:D^b_{c,\\mathrm W}(Y,\\Lambda)\\to D^b_c(Y,\\Lambda)$ sends $(K,\\theta)$ to $K$ and a morphism $u$ to $u$; it is faithful [def-weil-endofunctor-fixed-pair-category]. An object $(K,\\theta)$ carries, besides $\\operatorname{For}(K,\\theta)=K$, its Frobenius isomorphism $\\theta_K=\\theta:Lg_Y^*\\operatorname{For}(K,\\theta)\\xrightarrow{\\sim}\\operatorname{For}(K,\\theta)$.\n\n3. *Weil sheaves.* A *constructible $\\Lambda$-Weil sheaf* on $Y_0$ is a $\\Lambda$-Weil complex $(\\mathcal F,\\theta)$ whose underlying object $\\mathcal F$ lies in the constructible heart $\\Sh_c(Y,\\Lambda)$ [def-weil-constructible-heart]; constructible $\\Lambda$-Weil sheaves form the full subcategory of $D^b_{c,\\mathrm W}(Y,\\Lambda)$ on these objects.\n\n4. *Finite stages at $\\Qlb$.* For $E$ in the directed set $\\mathcal E_\\ell$ of finite extensions of $\\Ql$ in $\\Qlb$ and an $E$-Weil complex $(K,\\theta)$, write $(E,(K,\\theta))$ for the $\\Qlb$-Weil complex $\\bigl((E,K),[E,\\theta]\\bigr)$, where $[E,\\theta]:Lg_Y^*(E,K)=(E,Lg_{Y,E}^*K)\\to(E,K)$ is the morphism of $\\mathcal C_Y$ represented by $\\theta$ at the stage $E$ (an isomorphism, with inverse $[E,\\theta^{-1}]$).\n\nNo triangulated structure is part of this definition: $D^b_{c,\\mathrm W}(Y,\\Lambda)$ is a category of pairs over $D^b_c(Y,\\Lambda)$, not a derived category of Weil sheaves (its Hom groups are not Ext groups of Weil sheaves: for $Y_0=\\operatorname{Spec}k_0$ a nonsplit Frobenius extension of $\\Lambda$ by $\\Lambda$, a Jordan block, gives no nonzero morphism of pairs $(\\Lambda,\\mathrm{can})\\to(\\Lambda[1],\\mathrm{can})$, since $\\operatorname{Hom}(\\Lambda,\\Lambda[1])=H^1(\\operatorname{Spec}k,\\Lambda)=0$).",
+  "source": {
+    "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+    "place": "Deligne, La conjecture de Weil II, Définition (1.1.10)(i), p. 151 (Weil sheaf: a sheaf on X with an action of W(F̄/F_q) compatible with its action on X), with the explanation of 'action' p. 151-152 (an automorphism of (X,F) is a pair (f, g: f^*F -> F)) and (1.1.14), p. 153 (Weil sheaves = sheaves F on X with an isomorphism F^*F ≅ F); (1.1.11), p. 152 admits the analogues for complexes. Blueprint: literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-admissible/def-weil-weil-sheaf-complex.md (order 1507); slopmaster2 chapter 05_adic_weil_reviewed.tex, Definition 'Weil complex' (def:weil-complex), pair (K, phi: F_X^*K ≅ K)"
   },
-  "slopmaster2": {
-   "state": "closed",
-   "decls": [
+  "stmt_deps": [
+    "def-weil-finite-field-fiber",
+    "def-weil-l-adic-numbers",
+    "def-weil-algebraic-closure",
+    "def-weil-l-adic-coefficient-extension",
+    "def-weil-finite-type-morphism",
+    "def-weil-frobenius-detailed",
+    "def-weil-rationalization-karoubi",
+    "def-weil-algebraically-closed-coefficients",
+    "def-weil-derived-pullback-tensor-hom",
+    "def-weil-endofunctor-fixed-pair-category",
+    "def-weil-constructible-heart"
+  ],
+  "proof": [],
+  "proof_deps": [],
+  "proof_origin": null,
+  "mathlib_searches": [
     {
-     "name": "AlgebraicGeometry.WeilSheaf",
-     "module": "WeilConjectures.WeilSheaf.Category",
-     "lines": [
-      164,
-      170
-     ],
-     "kind": "def",
-     "sorry": false
+      "tool": "grep",
+      "query": "grep -rln -i 'weil sheaf\\|WeilSheaf\\|weil complex\\|WeilComplex\\|Weil structure' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+      "results": "none",
+      "date": "2026-10-09",
+      "verdict": "no match"
     },
     {
-     "name": "AlgebraicGeometry.WeilComplex",
-     "module": "WeilConjectures.WeilSheaf.Category",
-     "lines": [
-      172,
-      177
-     ],
-     "kind": "def",
-     "sorry": false
+      "tool": "grep",
+      "query": "grep -n 'structure Algebra\\|structure Hom\\|def forget' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Endofunctor/Algebra.lean",
+      "results": "Endofunctor.Algebra, Algebra.Hom, Algebra.forget: the categorical shape of item 1-2, recorded as the leaf def-weil-endofunctor-fixed-pair-category; the ingredients D^b_c(Y,Λ) and Lg_Y^* have no Mathlib counterpart",
+      "date": "2026-10-09",
+      "verdict": "generalization: categorical part only"
     }
-   ],
-   "missing": [],
-   "open": []
+  ],
+  "mathlib_match": null,
+  "status": "split",
+  "merged_into": null,
+  "import_flags": [],
+  "blueprint_kind": "definition",
+  "blueprint_order": 1507,
+  "blueprint_uses": [
+    "def-weil-algebraically-closed-coefficients",
+    "def-weil-constructible-heart",
+    "def-weil-derived-pullback-tensor-hom",
+    "def-weil-finite-field-fiber",
+    "def-weil-finite-torsion-constructibility",
+    "def-weil-frobenius-detailed",
+    "def-weil-pbc-proetale-site",
+    "def-weil-scheme-morphism-properties"
+  ],
+  "lean_audit": {
+    "master": {
+      "state": "none",
+      "decls": [],
+      "missing": []
+    },
+    "slopmaster2": {
+      "state": "closed",
+      "decls": [
+        {
+          "name": "AlgebraicGeometry.WeilSheaf",
+          "module": "WeilConjectures.WeilSheaf.Category",
+          "lines": [
+            164,
+            170
+          ],
+          "kind": "def",
+          "sorry": false
+        },
+        {
+          "name": "AlgebraicGeometry.WeilComplex",
+          "module": "WeilConjectures.WeilSheaf.Category",
+          "lines": [
+            172,
+            177
+          ],
+          "kind": "def",
+          "sorry": false
+        }
+      ],
+      "missing": [],
+      "open": []
+    }
+  },
+  "split_report": {
+    "date": "2026-10-09",
+    "item": "def-weil-weil-sheaf-complex",
+    "worker": "stage1",
+    "summary": "Checked against Deligne, Weil II (1.1.10)(i) p.151-152 and (1.1.14) p.153: Deligne defines only Weil sheaves (sheaf with W(F̄/F_q)-action over the action on X, equivalently a sheaf F on X with an isomorphism F^*F ≅ F for F = id x geometric Frobenius) and in (1.1.11) admits the analogues for complexes without defining them. Corrected the statement: the imported text defined D^b_{c,W}(Y,E) as the localization of complexes of Weil sheaves at equivariant quasi-isomorphisms, asserted without construction or proof that it is triangulated and has an exact forgetful functor to D^b_c(Y,E) (which would need a realization functor), and said θ_K is 'represented termwise'. Its users (def-weil-constant-weil-structure, lem-fix-weil-operations, prop-sf-open-closed-triangle-all-stages, def-trf-strict-weil-complex) and the slopmaster2 blueprint (05_adic_weil_reviewed.tex def:weil-complex) all use the pair definition, so the statement now defines a Λ-Weil complex as a pair (K, θ: Lg_Y^*K ≅ K) in D^b_c(Y,Λ), morphisms commuting with θ, D^b_{c,W}(Y,Λ) as the category of Lg_Y^*-fixed pairs, the faithful functor For, constructible Weil sheaves as the pairs with K in the constructible heart, and the notation (E,(K,θ)) for a stage-E pair viewed at Qlb (the notation def-weil-constant-weil-structure item 5 uses). At Qlb the category is formed directly over the common-stage category C_Y instead of as a 2-colimit of the stage-E categories. Stmt deps: dropped def-weil-pbc-proetale-site and def-weil-finite-torsion-constructibility (reached through the coefficient categories), replaced def-weil-scheme-morphism-properties by def-weil-finite-type-morphism, added def-weil-l-adic-numbers, def-weil-algebraic-closure, def-weil-l-adic-coefficient-extension, def-weil-rationalization-karoubi and the new Mathlib leaf def-weil-endofunctor-fixed-pair-category (Endofunctor.Algebra with IsIso str)."
+  },
+  "reviewed": {
+    "date": "2026-10-09",
+    "by": "L",
+    "result": "pass"
+  },
+  "chapter": "sec-smooth-purity",
+  "unit": null,
+  "lean": {
+    "module": "WeilConjectures.WeilSheaf.Category",
+    "declaration": "AlgebraicGeometry.WeilSheaf",
+    "branch": "slopmaster2",
+    "line": 164,
+    "declarations": [
+      "AlgebraicGeometry.WeilSheaf",
+      "AlgebraicGeometry.WeilComplex"
+    ],
+    "sorry_free": true,
+    "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state closed)"
   }
- },
- "split_report": {
-  "date": "2026-10-09",
-  "item": "def-weil-weil-sheaf-complex",
-  "worker": "stage1",
-  "summary": "Checked against Deligne, Weil II (1.1.10)(i) p.151-152 and (1.1.14) p.153: Deligne defines only Weil sheaves (sheaf with W(F̄/F_q)-action over the action on X, equivalently a sheaf F on X with an isomorphism F^*F ≅ F for F = id x geometric Frobenius) and in (1.1.11) admits the analogues for complexes without defining them. Corrected the statement: the imported text defined D^b_{c,W}(Y,E) as the localization of complexes of Weil sheaves at equivariant quasi-isomorphisms, asserted without construction or proof that it is triangulated and has an exact forgetful functor to D^b_c(Y,E) (which would need a realization functor), and said θ_K is 'represented termwise'. Its users (def-weil-constant-weil-structure, lem-fix-weil-operations, prop-sf-open-closed-triangle-all-stages, def-trf-strict-weil-complex) and the slopmaster2 blueprint (05_adic_weil_reviewed.tex def:weil-complex) all use the pair definition, so the statement now defines a Λ-Weil complex as a pair (K, θ: Lg_Y^*K ≅ K) in D^b_c(Y,Λ), morphisms commuting with θ, D^b_{c,W}(Y,Λ) as the category of Lg_Y^*-fixed pairs, the faithful functor For, constructible Weil sheaves as the pairs with K in the constructible heart, and the notation (E,(K,θ)) for a stage-E pair viewed at Qlb (the notation def-weil-constant-weil-structure item 5 uses). At Qlb the category is formed directly over the common-stage category C_Y instead of as a 2-colimit of the stage-E categories. Stmt deps: dropped def-weil-pbc-proetale-site and def-weil-finite-torsion-constructibility (reached through the coefficient categories), replaced def-weil-scheme-morphism-properties by def-weil-finite-type-morphism, added def-weil-l-adic-numbers, def-weil-algebraic-closure, def-weil-l-adic-coefficient-extension, def-weil-rationalization-karoubi and the new Mathlib leaf def-weil-endofunctor-fixed-pair-category (Endofunctor.Algebra with IsIso str)."
- },
- "reviewed": {
-  "date": "2026-10-09",
-  "by": "L",
-  "result": "pass"
- },
- "chapter": "sec-smooth-purity",
- "unit": null
 }

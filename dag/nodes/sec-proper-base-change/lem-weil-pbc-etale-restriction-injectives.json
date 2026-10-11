@@ -1,113 +1,126 @@
 {
- "id": "lem-weil-pbc-etale-restriction-injectives",
- "blueprint": {
-  "is": "lem-weil-pbc-etale-restriction-injectives",
-  "from": null,
-  "same_as": null
- },
- "kind": "statement",
- "title": "Etale restriction preserves injectives",
- "statement": "For an etale map $v:W\\to X$, the functor $v_!$\n[def-weil-pbc-etale-sum-extension] is exact and left adjoint to $v^*$\n[def-weil-pbc-inverse-image] on sheaves of modules over a constant ring.\nConsequently $v^*$ sends injective module sheaves to injective module\nsheaves.",
- "source": {
-  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-iff/lem-weil-pbc-etale-restriction-injectives.md",
-  "place": "node lem-weil-pbc-etale-restriction-injectives, order 1070"
- },
- "stmt_deps": [
-  "def-weil-pbc-etale-sum-extension",
-  "def-weil-pbc-inverse-image"
- ],
- "proof": [
-  {
-   "text": "A morphism from the presheaf in [def-weil-pbc-etale-sum-extension] to a sheaf\n$N$ is a compatible family of maps $M(V,s)\\to N(V)$. Such a family is exactly\na morphism $M\\to v^*N$: on the slice etale site, the inverse image of\n[def-weil-pbc-inverse-image] is restriction. Sheafification has the same maps\nto $N$, so this proves adjunction.",
-   "uses": [
+  "id": "lem-weil-pbc-etale-restriction-injectives",
+  "blueprint": {
+    "is": "lem-weil-pbc-etale-restriction-injectives",
+    "from": null,
+    "same_as": null
+  },
+  "kind": "statement",
+  "title": "Etale restriction preserves injectives",
+  "statement": "For an etale map $v:W\\to X$, the functor $v_!$\n[def-weil-pbc-etale-sum-extension] is exact and left adjoint to $v^*$\n[def-weil-pbc-inverse-image] on sheaves of modules over a constant ring.\nConsequently $v^*$ sends injective module sheaves to injective module\nsheaves.",
+  "source": {
+    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-iff/lem-weil-pbc-etale-restriction-injectives.md",
+    "place": "node lem-weil-pbc-etale-restriction-injectives, order 1070"
+  },
+  "stmt_deps": [
     "def-weil-pbc-etale-sum-extension",
     "def-weil-pbc-inverse-image"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "At a geometric point $\\bar x$, the defining direct sums give\n\n$$\n (v_!M)_{\\bar x}=\\bigoplus_{\\bar w\\in W_{\\bar x}} M_{\\bar w}.\n$$",
-   "uses": [],
-   "elementary": null
-  },
-  {
-   "text": "Indeed, a point of the etale fibre is a lift on an etale neighbourhood of\n$\\bar x$. Finitely many lifts and germs can be represented on a common\nneighbourhood by taking fibre products. Equality of finitely many germs holds\non a further neighbourhood. Thus taking the colimit over neighbourhoods gives\nexactly the displayed direct sum, whose elements have finite support.\nGeometric stalks are exact by\n[prop-weil-pbc-geometric-stalks-exact]; direct sums of modules are exact.\nConservativity in [lemma-weil-pbc-geometric-stalk-conservative] proves\nexactness of $v_!$. Finally\n$\\operatorname{Hom}(-,v^*I)=\\operatorname{Hom}(v_!(-),I)$ is exact when $I$\nis injective, proving the last assertion.",
-   "uses": [
+  ],
+  "proof": [
+    {
+      "text": "A morphism from the presheaf in [def-weil-pbc-etale-sum-extension] to a sheaf\n$N$ is a compatible family of maps $M(V,s)\\to N(V)$. Such a family is exactly\na morphism $M\\to v^*N$: on the slice etale site, the inverse image of\n[def-weil-pbc-inverse-image] is restriction. Sheafification has the same maps\nto $N$, so this proves adjunction.",
+      "uses": [
+        "def-weil-pbc-etale-sum-extension",
+        "def-weil-pbc-inverse-image"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "At a geometric point $\\bar x$, the defining direct sums give\n\n$$\n (v_!M)_{\\bar x}=\\bigoplus_{\\bar w\\in W_{\\bar x}} M_{\\bar w}.\n$$",
+      "uses": [],
+      "elementary": null
+    },
+    {
+      "text": "Indeed, a point of the etale fibre is a lift on an etale neighbourhood of\n$\\bar x$. Finitely many lifts and germs can be represented on a common\nneighbourhood by taking fibre products. Equality of finitely many germs holds\non a further neighbourhood. Thus taking the colimit over neighbourhoods gives\nexactly the displayed direct sum, whose elements have finite support.\nGeometric stalks are exact by\n[prop-weil-pbc-geometric-stalks-exact]; direct sums of modules are exact.\nConservativity in [lemma-weil-pbc-geometric-stalk-conservative] proves\nexactness of $v_!$. Finally\n$\\operatorname{Hom}(-,v^*I)=\\operatorname{Hom}(v_!(-),I)$ is exact when $I$\nis injective, proving the last assertion.",
+      "uses": [
+        "prop-weil-pbc-geometric-stalks-exact",
+        "lemma-weil-pbc-geometric-stalk-conservative"
+      ],
+      "elementary": false
+    }
+  ],
+  "proof_deps": [
+    "def-weil-pbc-etale-sum-extension",
+    "def-weil-pbc-inverse-image",
     "prop-weil-pbc-geometric-stalks-exact",
     "lemma-weil-pbc-geometric-stalk-conservative"
-   ],
-   "elementary": false
-  }
- ],
- "proof_deps": [
-  "def-weil-pbc-etale-sum-extension",
-  "def-weil-pbc-inverse-image",
-  "prop-weil-pbc-geometric-stalks-exact",
-  "lemma-weil-pbc-geometric-stalk-conservative"
- ],
- "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-iff/lem-weil-pbc-etale-restriction-injectives.md",
-  "place": "## Proof"
- },
- "mathlib_searches": [],
- "mathlib_match": null,
- "status": "imported",
- "merged_into": null,
- "import_flags": [],
- "blueprint_kind": "lemma",
- "blueprint_order": 1070,
- "blueprint_uses": [
-  "def-weil-pbc-etale-sum-extension",
-  "def-weil-pbc-inverse-image",
-  "lemma-weil-pbc-geometric-stalk-conservative",
-  "prop-weil-pbc-geometric-stalks-exact"
- ],
- "proof_split_by": "paragraphs",
- "lean_audit": {
-  "master": {
-   "state": "none",
-   "decls": [],
-   "missing": []
+  ],
+  "proof_origin": {
+    "by": "agent",
+    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-iff/lem-weil-pbc-etale-restriction-injectives.md",
+    "place": "## Proof"
   },
-  "slopmaster2": {
-   "state": "closed",
-   "decls": [
-    {
-     "name": "AlgebraicGeometry.Etale.etaleLowerShriekUpperStarAdjunction",
-     "module": "WeilConjectures.SixFunctors.Etale.LowerShriek.EtaleMap",
-     "lines": [
-      61,
-      71
-     ],
-     "kind": "def",
-     "sorry": false
+  "mathlib_searches": [],
+  "mathlib_match": null,
+  "status": "imported",
+  "merged_into": null,
+  "import_flags": [],
+  "blueprint_kind": "lemma",
+  "blueprint_order": 1070,
+  "blueprint_uses": [
+    "def-weil-pbc-etale-sum-extension",
+    "def-weil-pbc-inverse-image",
+    "lemma-weil-pbc-geometric-stalk-conservative",
+    "prop-weil-pbc-geometric-stalks-exact"
+  ],
+  "proof_split_by": "paragraphs",
+  "lean_audit": {
+    "master": {
+      "state": "none",
+      "decls": [],
+      "missing": []
     },
-    {
-     "name": "AlgebraicGeometry.Etale.preservesFiniteLimits_etaleLowerShriek",
-     "module": "WeilConjectures.SixFunctors.Etale.LowerShriek.EtaleMap",
-     "lines": [
-      73,
-      89
-     ],
-     "kind": "theorem",
-     "sorry": false
-    },
-    {
-     "name": "AlgebraicGeometry.Etale.injective_upperStar_obj_of_etale",
-     "module": "WeilConjectures.SixFunctors.Etale.LowerShriek.EtaleMap",
-     "lines": [
-      91,
-      101
-     ],
-     "kind": "theorem",
-     "sorry": false
+    "slopmaster2": {
+      "state": "closed",
+      "decls": [
+        {
+          "name": "AlgebraicGeometry.Etale.etaleLowerShriekUpperStarAdjunction",
+          "module": "WeilConjectures.SixFunctors.Etale.LowerShriek.EtaleMap",
+          "lines": [
+            61,
+            71
+          ],
+          "kind": "def",
+          "sorry": false
+        },
+        {
+          "name": "AlgebraicGeometry.Etale.preservesFiniteLimits_etaleLowerShriek",
+          "module": "WeilConjectures.SixFunctors.Etale.LowerShriek.EtaleMap",
+          "lines": [
+            73,
+            89
+          ],
+          "kind": "theorem",
+          "sorry": false
+        },
+        {
+          "name": "AlgebraicGeometry.Etale.injective_upperStar_obj_of_etale",
+          "module": "WeilConjectures.SixFunctors.Etale.LowerShriek.EtaleMap",
+          "lines": [
+            91,
+            101
+          ],
+          "kind": "theorem",
+          "sorry": false
+        }
+      ],
+      "missing": [],
+      "open": []
     }
-   ],
-   "missing": [],
-   "open": []
+  },
+  "chapter": "sec-proper-base-change",
+  "unit": "sk-thm-iff",
+  "lean": {
+    "module": "WeilConjectures.SixFunctors.Etale.LowerShriek.EtaleMap",
+    "declaration": "AlgebraicGeometry.Etale.etaleLowerShriekUpperStarAdjunction",
+    "branch": "slopmaster2",
+    "line": 61,
+    "declarations": [
+      "AlgebraicGeometry.Etale.etaleLowerShriekUpperStarAdjunction",
+      "AlgebraicGeometry.Etale.preservesFiniteLimits_etaleLowerShriek",
+      "AlgebraicGeometry.Etale.injective_upperStar_obj_of_etale"
+    ],
+    "sorry_free": true,
+    "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state closed)"
   }
- },
- "chapter": "sec-proper-base-change",
- "unit": "sk-thm-iff"
 }

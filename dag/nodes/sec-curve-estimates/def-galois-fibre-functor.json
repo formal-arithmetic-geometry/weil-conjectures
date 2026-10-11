@@ -1,107 +1,111 @@
 {
- "id": "def-galois-fibre-functor",
- "blueprint": {
-  "is": "def-galois-fibre-functor",
-  "from": null,
-  "same_as": []
- },
- "kind": "definition",
- "title": "The fibre functor",
- "statement": "In the situation of [def-galois-categories], with $\\mathrm{FLC}(Y)$ understood as finite locally constant sheaves of sets in the sense of Stacks Definition 03RU (etale-locally constant with finite set values), the *fibre functor* is\n\n$$\nF_{\\bar y}:\\mathrm{FLC}(Y)\\longrightarrow(\\text{finite sets}),\\qquad\n\\mathcal F\\longmapsto\\mathcal F_{\\bar y},\n$$\n\nwhere the stalk is that of [def-weil-pbc-geometric-stalks], its finiteness is [lem-galois-flc-set-stalk-finite], and a sheaf morphism is sent to its map on stalks. On $\\mathrm{F\\acute Et}(Y)$ the notation $P\\mapsto|P_{\\bar y}|$ of [def-galois-categories] is used; that the two functors correspond under the identification of [thm-galois-lc-etale] is part of that theorem. Its *automorphism group*\n\n$$\n\\pi_1(Y,\\bar y)=\\operatorname{Aut}(F_{\\bar y})\n$$\n\nis the group of natural automorphisms of $F_{\\bar y}$, embedded into $\\prod_{\\mathcal F}\\operatorname{Aut}(F_{\\bar y}(\\mathcal F))$ by evaluation, where the product ranges over the objects of a chosen small skeleton of $\\mathrm{FLC}(Y)$ (one representative of each isomorphism class). Each factor is a finite discrete group by [lem-galois-flc-set-stalk-finite], and $\\operatorname{Aut}(F_{\\bar y})$ has the topology induced from their product [def-galois-aut-topology]; this is the *etale fundamental group* of $Y$ at $\\bar y$. A $\\pi_1(Y,\\bar y)$-set is a finite set with a continuous action of $\\pi_1(Y,\\bar y)$, and such sets with equivariant maps form the category $\\pi_1(Y,\\bar y)\\text{-}\\mathbf{Set}$.",
- "source": {
-  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/def-galois-fibre-functor.md",
-  "place": "node def-galois-fibre-functor, order 962"
- },
- "stmt_deps": [
-  "def-galois-categories",
-  "def-weil-pbc-geometric-stalks",
-  "lem-galois-flc-set-stalk-finite",
-  "thm-galois-lc-etale",
-  "def-galois-aut-topology"
- ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
- "mathlib_searches": [
-  {
-   "tool": "leansearch",
-   "query": "functor to finite sets group of natural automorphisms with continuous action on finite sets",
-   "results": "service returned HTTP 500 on two attempts, 2026-10-10; no search result available",
-   "date": "2026-10-10",
-   "verdict": "unavailable; Loogle and source grep used below"
+  "id": "def-galois-fibre-functor",
+  "blueprint": {
+    "is": "def-galois-fibre-functor",
+    "from": null,
+    "same_as": []
   },
-  {
-   "tool": "loogle",
-   "query": "ContAction FintypeCat",
-   "results": "CategoryTheory.PreGaloisCategory.functorToContAction : (F : C ⟤ FintypeCat) → C ⟤ ContAction FintypeCat (Aut F), Mathlib/CategoryTheory/Galois/Equivalence.lean; related equivalence instances",
-   "date": "2026-10-10",
-   "verdict": "partial: provides the action category and evaluation for an already given FintypeCat-valued functor, not the stalk functor on FLC(Y)"
+  "kind": "definition",
+  "title": "The fibre functor",
+  "statement": "In the situation of [def-galois-categories], with $\\mathrm{FLC}(Y)$ understood as finite locally constant sheaves of sets in the sense of Stacks Definition 03RU (etale-locally constant with finite set values), the *fibre functor* is\n\n$$\nF_{\\bar y}:\\mathrm{FLC}(Y)\\longrightarrow(\\text{finite sets}),\\qquad\n\\mathcal F\\longmapsto\\mathcal F_{\\bar y},\n$$\n\nwhere the stalk is that of [def-weil-pbc-geometric-stalks], its finiteness is [lem-galois-flc-set-stalk-finite], and a sheaf morphism is sent to its map on stalks. On $\\mathrm{F\\acute Et}(Y)$ the notation $P\\mapsto|P_{\\bar y}|$ of [def-galois-categories] is used; that the two functors correspond under the identification of [thm-galois-lc-etale] is part of that theorem. Its *automorphism group*\n\n$$\n\\pi_1(Y,\\bar y)=\\operatorname{Aut}(F_{\\bar y})\n$$\n\nis the group of natural automorphisms of $F_{\\bar y}$, embedded into $\\prod_{\\mathcal F}\\operatorname{Aut}(F_{\\bar y}(\\mathcal F))$ by evaluation, where the product ranges over the objects of a chosen small skeleton of $\\mathrm{FLC}(Y)$ (one representative of each isomorphism class). Each factor is a finite discrete group by [lem-galois-flc-set-stalk-finite], and $\\operatorname{Aut}(F_{\\bar y})$ has the topology induced from their product [def-galois-aut-topology]; this is the *etale fundamental group* of $Y$ at $\\bar y$. A $\\pi_1(Y,\\bar y)$-set is a finite set with a continuous action of $\\pi_1(Y,\\bar y)$, and such sets with equivariant maps form the category $\\pi_1(Y,\\bar y)\\text{-}\\mathbf{Set}$.",
+  "source": {
+    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/def-galois-fibre-functor.md",
+    "place": "node def-galois-fibre-functor, order 962"
   },
-  {
-   "tool": "grep",
-   "query": "rg 'fiber|functorToContAction|TopologicalSpace (Aut F)' Mathlib/CategoryTheory/Galois/{Basic,Topology,Equivalence}.lean Mathlib/AlgebraicGeometry/Sites/EtalePoint.lean Mathlib/CategoryTheory/Sites/Point/Basic.lean",
-   "results": "Point/Basic.lean:277-278 sheafFiber; EtalePoint.lean:64-65 pointSmallEtale; Galois/Topology.lean:41,63,78 autEmbedding and induced topology; Galois/Equivalence.lean:40 functorToContAction; no Mathlib definition of FLC(Y) or of its stalk functor to finite sets",
-   "date": "2026-10-10",
-   "verdict": "no match for the whole definition"
-  }
- ],
- "mathlib_match": null,
- "status": "split",
- "merged_into": null,
- "import_flags": [
-  "cites_outside_uses"
- ],
- "blueprint_kind": "definition",
- "blueprint_order": 962,
- "blueprint_uses": [
-  "def-galois-categories"
- ],
- "lean_audit": {
-  "master": {
-   "state": "none",
-   "decls": [],
-   "missing": []
-  },
-  "slopmaster2": {
-   "state": "closed",
-   "decls": [
-    {
-     "name": "AlgebraicGeometry.Scheme.FiniteEtale.fiber",
-     "module": "WeilConjectures.AlgebraicGeometry.FundamentalGroup.FiniteEtale",
-     "lines": [
-      114,
-      119
-     ],
-     "kind": "def",
-     "sorry": false
-    }
-   ],
-   "missing": [],
-   "open": []
-  }
- },
- "chapter": "sec-curve-estimates",
- "unit": "sk-prop-h2",
- "split_report": {
-  "date": "2026-10-10",
-  "item": "def-galois-fibre-functor",
-  "worker": "stage1",
-  "summary": "The definition uses the 03RU meaning of finite locally constant sets. The new statement lem-galois-flc-set-stalk-finite supplies the previously missing finite-stalk implication for the codomain and the finite discrete factors of the automorphism topology. Evaluation uses a small skeleton. The remaining notion dependencies and the narrower sorry-free Lean fibre functors were checked again; no one declaration states the entire composite definition.",
-  "blueprint": "The blueprint definition at order 962 has no proof steps: its first displayed formula uses def-galois-categories, def-weil-pbc-geometric-stalks and the new finite-stalk statement; its finite-etale sentence cites thm-galois-lc-etale; its second displayed formula and induced topology use def-galois-aut-topology and again the finite-stalk statement; its final sentence defines the finite continuous-action category. The product is indexed over a small skeleton. Whole-DAG blueprint search found no second blueprint node stating the entire definition or the set-valued finite-stalk implication."
- },
- "reviewed": {
-  "date": "2026-10-10",
-  "by": "L",
-  "reviewer": "R-fibfun2",
-  "group": "C1",
-  "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-fibfun2 (reviewer sub-agent of L); spot-checked: Re-push after the 13:50 return; each point repaired. B3/C4: new unsplit statement lem-galois-flc-set-stalk-finite (sets-valued finiteness of geometric stalks under the 03RU hypothesis) is cited next to the first display and next to the def-galois-aut-topology clause, so the finite-values hypothesis of def-galois-aut-topology is now carried. Source checked: Stacks 03RU (definition-finite-locally-constant, etale-cohomology.tex:9917), sets part (4) 'locally constant and the constant values are finite sets', agrees with the new node hypothesis by hypothesis (covering, restriction constant with finite value S_i) and with the item's stated meaning of FLC(Y), which refines def-galois-categories' wording. B10: IsFiniteSheaf.isFinitelyGenerated_sheafFiber (ConstructibleSheaf/Defs.lean:192-195) is a class projection; Scheme.IsFiniteLocallyConstantSheafOfTypes (HenselianFiniteEtale.lean:83-87) is 'locally constant (any value) AND IsFiniteSheaf', so finiteness of stalks is assumed there, not derived from finite constant values: correctly not attached. C5: no DAG node or blueprint node states the sets-valued claim (grep 03RU, blueprint_refs search); existing ones are abelian/module. Skeleton: product over a chosen small skeleton now stated; applying def-galois-aut-topology to F restricted to the skeleton gives the same Aut and topology (elementary, equivalence of categories). Cited statements read: def-galois-categories, def-weil-pbc-geometric-stalks (sheafFiber leaf), thm-galois-lc-etale (equivalence compatible with fibre functors), def-galois-aut-topology (generic leaf, no Galois-category hypothesis, so the B8 Stacks/SGA1 rule is not touched), def-pc-scheme, def-weil-pbc-etale-site, def-weil-pbc-etale-sheaf-of-sets, def-weil-pbc-constant-sheaf. E: new statement true (lift ybar to some U_i by joint surjectivity; stalk of restriction = stalk; stalk of constant sheaf of a set S is S since the neighbourhood category is cofiltered and nonempty); small cases S_i empty, singleton, Y empty checked. FIX: dag/nodes/sec-curve-estimates/lem-galois-flc-set-stalk-finite.json: statement: 'restriction to the localised site' spelled out as 'the restriction V -> F(V) for V -> U_i etale, viewed over Y through u_i' (B2, no change of mathematics). 14:08-14:10 UTC.; 1 file(s) fixed by the reviewer"
- },
- "lean": {
-  "branch": "slopmaster2",
-  "declarations": [
-   "AlgebraicGeometry.Scheme.FiniteEtale.fiber"
+  "stmt_deps": [
+    "def-galois-categories",
+    "def-weil-pbc-geometric-stalks",
+    "lem-galois-flc-set-stalk-finite",
+    "thm-galois-lc-etale",
+    "def-galois-aut-topology"
   ],
-  "note": "attached by the lead released by H1 as an attachment 13:16; Lean defines the fibre functor on FEt(Y) (the P -> |P_ybar| = Hom_Y(Spec Omega, P) side named in the definition), the FLC side corresponds under thm-galois-lc-etale; sorry-free"
- }
+  "proof": [],
+  "proof_deps": [],
+  "proof_origin": null,
+  "mathlib_searches": [
+    {
+      "tool": "leansearch",
+      "query": "functor to finite sets group of natural automorphisms with continuous action on finite sets",
+      "results": "service returned HTTP 500 on two attempts, 2026-10-10; no search result available",
+      "date": "2026-10-10",
+      "verdict": "unavailable; Loogle and source grep used below"
+    },
+    {
+      "tool": "loogle",
+      "query": "ContAction FintypeCat",
+      "results": "CategoryTheory.PreGaloisCategory.functorToContAction : (F : C ⟤ FintypeCat) → C ⟤ ContAction FintypeCat (Aut F), Mathlib/CategoryTheory/Galois/Equivalence.lean; related equivalence instances",
+      "date": "2026-10-10",
+      "verdict": "partial: provides the action category and evaluation for an already given FintypeCat-valued functor, not the stalk functor on FLC(Y)"
+    },
+    {
+      "tool": "grep",
+      "query": "rg 'fiber|functorToContAction|TopologicalSpace (Aut F)' Mathlib/CategoryTheory/Galois/{Basic,Topology,Equivalence}.lean Mathlib/AlgebraicGeometry/Sites/EtalePoint.lean Mathlib/CategoryTheory/Sites/Point/Basic.lean",
+      "results": "Point/Basic.lean:277-278 sheafFiber; EtalePoint.lean:64-65 pointSmallEtale; Galois/Topology.lean:41,63,78 autEmbedding and induced topology; Galois/Equivalence.lean:40 functorToContAction; no Mathlib definition of FLC(Y) or of its stalk functor to finite sets",
+      "date": "2026-10-10",
+      "verdict": "no match for the whole definition"
+    }
+  ],
+  "mathlib_match": null,
+  "status": "split",
+  "merged_into": null,
+  "import_flags": [
+    "cites_outside_uses"
+  ],
+  "blueprint_kind": "definition",
+  "blueprint_order": 962,
+  "blueprint_uses": [
+    "def-galois-categories"
+  ],
+  "lean_audit": {
+    "master": {
+      "state": "none",
+      "decls": [],
+      "missing": []
+    },
+    "slopmaster2": {
+      "state": "closed",
+      "decls": [
+        {
+          "name": "AlgebraicGeometry.Scheme.FiniteEtale.fiber",
+          "module": "WeilConjectures.AlgebraicGeometry.FundamentalGroup.FiniteEtale",
+          "lines": [
+            114,
+            119
+          ],
+          "kind": "def",
+          "sorry": false
+        }
+      ],
+      "missing": [],
+      "open": []
+    }
+  },
+  "chapter": "sec-curve-estimates",
+  "unit": "sk-prop-h2",
+  "split_report": {
+    "date": "2026-10-10",
+    "item": "def-galois-fibre-functor",
+    "worker": "stage1",
+    "summary": "The definition uses the 03RU meaning of finite locally constant sets. The new statement lem-galois-flc-set-stalk-finite supplies the previously missing finite-stalk implication for the codomain and the finite discrete factors of the automorphism topology. Evaluation uses a small skeleton. The remaining notion dependencies and the narrower sorry-free Lean fibre functors were checked again; no one declaration states the entire composite definition.",
+    "blueprint": "The blueprint definition at order 962 has no proof steps: its first displayed formula uses def-galois-categories, def-weil-pbc-geometric-stalks and the new finite-stalk statement; its finite-etale sentence cites thm-galois-lc-etale; its second displayed formula and induced topology use def-galois-aut-topology and again the finite-stalk statement; its final sentence defines the finite continuous-action category. The product is indexed over a small skeleton. Whole-DAG blueprint search found no second blueprint node stating the entire definition or the set-valued finite-stalk implication."
+  },
+  "reviewed": {
+    "date": "2026-10-10",
+    "by": "L",
+    "reviewer": "R-fibfun2",
+    "group": "C1",
+    "result": "pass",
+    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-fibfun2 (reviewer sub-agent of L); spot-checked: Re-push after the 13:50 return; each point repaired. B3/C4: new unsplit statement lem-galois-flc-set-stalk-finite (sets-valued finiteness of geometric stalks under the 03RU hypothesis) is cited next to the first display and next to the def-galois-aut-topology clause, so the finite-values hypothesis of def-galois-aut-topology is now carried. Source checked: Stacks 03RU (definition-finite-locally-constant, etale-cohomology.tex:9917), sets part (4) 'locally constant and the constant values are finite sets', agrees with the new node hypothesis by hypothesis (covering, restriction constant with finite value S_i) and with the item's stated meaning of FLC(Y), which refines def-galois-categories' wording. B10: IsFiniteSheaf.isFinitelyGenerated_sheafFiber (ConstructibleSheaf/Defs.lean:192-195) is a class projection; Scheme.IsFiniteLocallyConstantSheafOfTypes (HenselianFiniteEtale.lean:83-87) is 'locally constant (any value) AND IsFiniteSheaf', so finiteness of stalks is assumed there, not derived from finite constant values: correctly not attached. C5: no DAG node or blueprint node states the sets-valued claim (grep 03RU, blueprint_refs search); existing ones are abelian/module. Skeleton: product over a chosen small skeleton now stated; applying def-galois-aut-topology to F restricted to the skeleton gives the same Aut and topology (elementary, equivalence of categories). Cited statements read: def-galois-categories, def-weil-pbc-geometric-stalks (sheafFiber leaf), thm-galois-lc-etale (equivalence compatible with fibre functors), def-galois-aut-topology (generic leaf, no Galois-category hypothesis, so the B8 Stacks/SGA1 rule is not touched), def-pc-scheme, def-weil-pbc-etale-site, def-weil-pbc-etale-sheaf-of-sets, def-weil-pbc-constant-sheaf. E: new statement true (lift ybar to some U_i by joint surjectivity; stalk of restriction = stalk; stalk of constant sheaf of a set S is S since the neighbourhood category is cofiltered and nonempty); small cases S_i empty, singleton, Y empty checked. FIX: dag/nodes/sec-curve-estimates/lem-galois-flc-set-stalk-finite.json: statement: 'restriction to the localised site' spelled out as 'the restriction V -> F(V) for V -> U_i etale, viewed over Y through u_i' (B2, no change of mathematics). 14:08-14:10 UTC.; 1 file(s) fixed by the reviewer"
+  },
+  "lean": {
+    "module": "WeilConjectures.AlgebraicGeometry.FundamentalGroup.FiniteEtale",
+    "declaration": "AlgebraicGeometry.Scheme.FiniteEtale.fiber",
+    "branch": "slopmaster2",
+    "line": 114,
+    "declarations": [
+      "AlgebraicGeometry.Scheme.FiniteEtale.fiber"
+    ],
+    "sorry_free": true,
+    "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state closed)"
+  }
 }

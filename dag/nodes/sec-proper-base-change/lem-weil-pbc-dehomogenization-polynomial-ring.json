@@ -1,101 +1,105 @@
 {
- "id": "lem-weil-pbc-dehomogenization-polynomial-ring",
- "blueprint": {
-  "is": null,
-  "from": {
-   "node": "lem-weil-pbc-symmetric-product-finite",
-   "place": "step 2, 9 of its split (source: Lemma (Tag 01NE) via Lemma (Tag 01NA, label lemma-apply))",
-   "via": [
-    "lem-weil-pbc-projective-space-twisting-sheaf-charts",
-    "lem-weil-pbc-projective-morphism-chart-preimage"
-   ]
+  "id": "lem-weil-pbc-dehomogenization-polynomial-ring",
+  "blueprint": {
+    "is": null,
+    "from": {
+      "node": "lem-weil-pbc-symmetric-product-finite",
+      "place": "step 2, 9 of its split (source: Lemma (Tag 01NE) via Lemma (Tag 01NA, label lemma-apply))",
+      "via": [
+        "lem-weil-pbc-projective-space-twisting-sheaf-charts",
+        "lem-weil-pbc-projective-morphism-chart-preimage"
+      ]
+    },
+    "same_as": null
   },
-  "same_as": null
- },
- "kind": "statement",
- "title": "The degree-zero localization of a polynomial ring at a variable is a polynomial ring",
- "statement": "Let $A$ be a commutative ring, $n\\ge0$, $S=A[T_0,\\dots,T_n]$ graded by total degree, $j\\in\\{0,\\dots,n\\}$, and $S_{(T_j)}$ the degree-zero part of $S_{T_j}=S[1/T_j]$ [def-nagata-homogeneous-localization-degree-zero], i.e. the ring of fractions $a/T_j^m$ with $a\\in S$ homogeneous of degree $m$. Let $A[Y_l:l\\neq j]$ be the polynomial ring over $A$ in $n$ variables. Then the $A$-algebra map $\\theta_j:A[Y_l:l\\neq j]\\to S_{(T_j)}$, $Y_l\\mapsto T_l/T_j$, is an isomorphism; its inverse sends $a/T_j^m$ ($a$ homogeneous of degree $m$) to the dehomogenization $a(Y_0,\\dots,Y_{j-1},1,Y_{j+1},\\dots,Y_n)$. In particular the $n$ elements $T_l/T_j$, $l\\neq j$, are algebraically independent over $A$ and generate $S_{(T_j)}$ as an $A$-algebra.",
- "source": {
-  "document": "literature/stacks-project/constructions.tex",
-  "place": "Constructions, Lemma 01NG (label lemma-standard-covering-projective-space) and its proof, which asserts $\\operatorname{Spec}\\mathbf Z[T_0/T_i,\\dots,T_n/T_i]\\cong\\mathbf A^n_{\\mathbf Z}$ without proof"
- },
- "stmt_deps": [
-  "def-nagata-homogeneous-localization-degree-zero"
- ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
- "mathlib_searches": [
-  {
-   "tool": "leansearch",
-   "query": "degree zero homogeneous localization of MvPolynomial away from X i is isomorphic to polynomial ring in the other variables",
-   "results": "HomogeneousLocalization, HomogeneousLocalization.Away, HomogeneousLocalization.fromZeroRingHom, awayMap_fromZeroRingHom, IsLocalization.Away.mvPolynomialQuotientEquiv, instAlgebraSubtypeMemOfNat, algebraMap_eq, MvPolynomial.homogeneousComponent",
-   "date": "2026-10-09",
-   "verdict": "no match"
+  "kind": "statement",
+  "title": "The degree-zero localization of a polynomial ring at a variable is a polynomial ring",
+  "statement": "Let $A$ be a commutative ring, $n\\ge0$, $S=A[T_0,\\dots,T_n]$ graded by total degree, $j\\in\\{0,\\dots,n\\}$, and $S_{(T_j)}$ the degree-zero part of $S_{T_j}=S[1/T_j]$ [def-nagata-homogeneous-localization-degree-zero], i.e. the ring of fractions $a/T_j^m$ with $a\\in S$ homogeneous of degree $m$. Let $A[Y_l:l\\neq j]$ be the polynomial ring over $A$ in $n$ variables. Then the $A$-algebra map $\\theta_j:A[Y_l:l\\neq j]\\to S_{(T_j)}$, $Y_l\\mapsto T_l/T_j$, is an isomorphism; its inverse sends $a/T_j^m$ ($a$ homogeneous of degree $m$) to the dehomogenization $a(Y_0,\\dots,Y_{j-1},1,Y_{j+1},\\dots,Y_n)$. In particular the $n$ elements $T_l/T_j$, $l\\neq j$, are algebraically independent over $A$ and generate $S_{(T_j)}$ as an $A$-algebra.",
+  "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Constructions, Lemma 01NG (label lemma-standard-covering-projective-space) and its proof, which asserts $\\operatorname{Spec}\\mathbf Z[T_0/T_i,\\dots,T_n/T_i]\\cong\\mathbf A^n_{\\mathbf Z}$ without proof"
   },
-  {
-   "tool": "leanfinder",
-   "query": "dehomogenization: degree-zero part of polynomial ring localized at variable X_i equals polynomial ring in X_j/X_i",
-   "results": "Polynomial.homogenize_X, Algebra.Generators.localizationAway_sigma, Polynomial.homogenize_eq_of_isHomogeneous (one-variable homogenization only), HomogeneousLocalization.Away, IsLocalization.Away.mvPolynomialQuotientEquiv_apply, NumDenSameDeg.embedding",
-   "date": "2026-10-09",
-   "verdict": "no match"
-  },
-  {
-   "tool": "loogle",
-   "query": "HomogeneousLocalization.Away, MvPolynomial",
-   "results": "none",
-   "date": "2026-10-09",
-   "verdict": "no match"
-  },
-  {
-   "tool": "grep",
-   "query": "grep -rnE 'dehomogeni|AwayXEquiv|awayXRatio|Away.*MvPolynomial|MvPolynomial.*Away' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
-   "results": "none relevant (two unrelated Localization.Away lines in RingTheory/Unramified/LocalStructure.lean and Extension/Presentation/Submersive.lean)",
-   "date": "2026-10-09",
-   "verdict": "no match (the source repository proves it as MvPolynomial.homogeneousLocalizationAwayXEquiv, WeilConjectures/Mathlib/RingTheory/MvPolynomial/Homogeneous.lean:321, outside Mathlib)"
-  }
- ],
- "mathlib_match": null,
- "status": "unsplit",
- "merged_into": null,
- "created": {
-  "by": "worker",
-  "item": "lem-weil-pbc-projective-space-twisting-sheaf-charts",
-  "date": "2026-10-09"
- },
- "lean_audit": {
-  "master": {
-   "state": "none",
-   "decls": [],
-   "missing": [
-    "MvPolynomial.homogeneousLocalizationAwayXEquiv"
-   ]
-  },
-  "slopmaster2": {
-   "state": "closed",
-   "decls": [
-    {
-     "name": "MvPolynomial.homogeneousLocalizationAwayXEquiv",
-     "module": "WeilConjectures.Mathlib.RingTheory.MvPolynomial.Homogeneous",
-     "lines": [
-      319,
-      339
-     ],
-     "kind": "def",
-     "sorry": false
-    }
-   ],
-   "missing": [],
-   "open": []
-  }
- },
- "chapter": "sec-proper-base-change",
- "unit": "sk-thm-reduction",
- "lean": {
-  "branch": "slopmaster2",
-  "declarations": [
-   "MvPolynomial.homogeneousLocalizationAwayXEquiv"
+  "stmt_deps": [
+    "def-nagata-homogeneous-localization-degree-zero"
   ],
-  "note": "attached by the lead at the review of lem-weil-pbc-projective-space-twisting-sheaf-charts (2026-10-09), found by its opus worker: the degree-zero homogeneous localization of R[X_i] away from X_i is the polynomial ring R[Y_j : j ≠ i] via Y_j ↦ X_j/X_i (with _symm_X and _awayMk); sorry-free on the full map"
- }
+  "proof": [],
+  "proof_deps": [],
+  "proof_origin": null,
+  "mathlib_searches": [
+    {
+      "tool": "leansearch",
+      "query": "degree zero homogeneous localization of MvPolynomial away from X i is isomorphic to polynomial ring in the other variables",
+      "results": "HomogeneousLocalization, HomogeneousLocalization.Away, HomogeneousLocalization.fromZeroRingHom, awayMap_fromZeroRingHom, IsLocalization.Away.mvPolynomialQuotientEquiv, instAlgebraSubtypeMemOfNat, algebraMap_eq, MvPolynomial.homogeneousComponent",
+      "date": "2026-10-09",
+      "verdict": "no match"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "dehomogenization: degree-zero part of polynomial ring localized at variable X_i equals polynomial ring in X_j/X_i",
+      "results": "Polynomial.homogenize_X, Algebra.Generators.localizationAway_sigma, Polynomial.homogenize_eq_of_isHomogeneous (one-variable homogenization only), HomogeneousLocalization.Away, IsLocalization.Away.mvPolynomialQuotientEquiv_apply, NumDenSameDeg.embedding",
+      "date": "2026-10-09",
+      "verdict": "no match"
+    },
+    {
+      "tool": "loogle",
+      "query": "HomogeneousLocalization.Away, MvPolynomial",
+      "results": "none",
+      "date": "2026-10-09",
+      "verdict": "no match"
+    },
+    {
+      "tool": "grep",
+      "query": "grep -rnE 'dehomogeni|AwayXEquiv|awayXRatio|Away.*MvPolynomial|MvPolynomial.*Away' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+      "results": "none relevant (two unrelated Localization.Away lines in RingTheory/Unramified/LocalStructure.lean and Extension/Presentation/Submersive.lean)",
+      "date": "2026-10-09",
+      "verdict": "no match (the source repository proves it as MvPolynomial.homogeneousLocalizationAwayXEquiv, WeilConjectures/Mathlib/RingTheory/MvPolynomial/Homogeneous.lean:321, outside Mathlib)"
+    }
+  ],
+  "mathlib_match": null,
+  "status": "unsplit",
+  "merged_into": null,
+  "created": {
+    "by": "worker",
+    "item": "lem-weil-pbc-projective-space-twisting-sheaf-charts",
+    "date": "2026-10-09"
+  },
+  "lean_audit": {
+    "master": {
+      "state": "none",
+      "decls": [],
+      "missing": [
+        "MvPolynomial.homogeneousLocalizationAwayXEquiv"
+      ]
+    },
+    "slopmaster2": {
+      "state": "closed",
+      "decls": [
+        {
+          "name": "MvPolynomial.homogeneousLocalizationAwayXEquiv",
+          "module": "WeilConjectures.Mathlib.RingTheory.MvPolynomial.Homogeneous",
+          "lines": [
+            319,
+            339
+          ],
+          "kind": "def",
+          "sorry": false
+        }
+      ],
+      "missing": [],
+      "open": []
+    }
+  },
+  "chapter": "sec-proper-base-change",
+  "unit": "sk-thm-reduction",
+  "lean": {
+    "module": "WeilConjectures.Mathlib.RingTheory.MvPolynomial.Homogeneous",
+    "declaration": "MvPolynomial.homogeneousLocalizationAwayXEquiv",
+    "branch": "slopmaster2",
+    "line": 319,
+    "declarations": [
+      "MvPolynomial.homogeneousLocalizationAwayXEquiv"
+    ],
+    "sorry_free": true,
+    "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state closed)"
+  }
 }

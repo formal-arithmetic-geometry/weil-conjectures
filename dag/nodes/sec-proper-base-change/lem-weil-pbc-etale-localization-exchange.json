@@ -1,221 +1,225 @@
 {
- "id": "lem-weil-pbc-etale-localization-exchange",
- "blueprint": {
-  "is": null,
-  "from": {
-   "node": "lemma-weil-pbc-target-locality",
-   "place": "step 4 of its split (source: Cohomology on Sites, Lemma label lemma-restrict-direct-image-open, Tag 0D6G, as invoked in the proof of Etale Cohomology, Lemma label lemma-base-change-local, Tag 0EZR (literature/stacks-project/etale-cohomology.tex), last paragraph)",
-   "via": []
+  "id": "lem-weil-pbc-etale-localization-exchange",
+  "blueprint": {
+    "is": null,
+    "from": {
+      "node": "lemma-weil-pbc-target-locality",
+      "place": "step 4 of its split (source: Cohomology on Sites, Lemma label lemma-restrict-direct-image-open, Tag 0D6G, as invoked in the proof of Etale Cohomology, Lemma label lemma-base-change-local, Tag 0EZR (literature/stacks-project/etale-cohomology.tex), last paragraph)",
+      "via": []
+    },
+    "same_as": null
   },
-  "same_as": null
- },
- "kind": "statement",
- "title": "Exchange along an etale morphism of the target is an isomorphism",
- "statement": "Let $f:X\\to Y$ be a morphism of schemes [def-pc-scheme] and let $j:V\\to Y$ be an etale morphism [def-weil-etale-morphism]. Let $X_V=X\\times_YV$ [def-pc-fibre-product] with projections $j_X:X_V\\to X$ and $f_V:X_V\\to V$, and let $\\square_j=(f,f_V,j,j_X)$ be the resulting cartesian square [def-weil-pbc-cartesian-square] (bottom map $j$, top map $j_X$). Then for every $K\\in\\Dplus(X_{\\Et})$ [def-weil-pbc-derived-categories] the derived exchange morphism [def-weil-pbc-derived-exchange]\n\n$$\n \\Ex_{\\square_j,K}:j^{-1}Rf_*K\\longrightarrow Rf_{V*}\\,j_X^{-1}K\n$$\n\nis an isomorphism in $\\Dplus(V_{\\Et})$. No hypothesis is put on $f$. (Under the identification of $V_{\\Et}$ with the localized site $Y_{\\Et}/V$, $j^{-1}$ is restriction to $Y_{\\Et}/V$ and $j_X^{-1}$ restriction to $X_{\\Et}/X_V$; the lemma says that $Rf_*$ commutes with this restriction, and that the identification is the exchange morphism.)",
- "source": {
-  "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Cohomology on Sites, Lemma label lemma-restrict-direct-image-open, Tag 0D6G ($(Rf_*E)|_{\\mathcal D/V}=Rg_*(E|_{\\mathcal C/U})$, proof by a K-injective representative and Lemma lemma-restrict-K-injective-to-open, Tag 08FI); with Sites, Lemma label sites-lemma-localize-morphism-strong, Tag 03EF (the underived statement), and the use of both in the proof of Etale Cohomology, Lemma label lemma-base-change-local, Tag 0EZR (literature/stacks-project/etale-cohomology.tex), where the restricted base change map is identified with the base change map of the localized square"
- },
- "stmt_deps": [
-  "def-pc-scheme",
-  "def-weil-etale-morphism",
-  "def-pc-fibre-product",
-  "def-weil-pbc-cartesian-square",
-  "def-weil-pbc-derived-categories",
-  "def-weil-pbc-derived-exchange"
- ],
- "proof": [
-  {
-   "text": "*Step 1 (the square and the restrictions).* By [lem-weil-pbc-etale-base-change-finite-limits] (1), applied to $f:X\\to Y$ and the object $j:V\\to Y$ of $Y_{\\Et}$, the base change $j_X:X_V=X\\times_YV\\to X$ is etale, so $X_V$ with $j_X$ is an object of $X_{\\Et}$. The square $\\square_j=(f,f_V,j,j_X)$ with the identity of $X\\times_YV$ as identification is a cartesian square [def-weil-pbc-cartesian-square], [def-pc-fibre-product]. Since $j$ and $j_X$ are etale, [lem-weil-pbc-etale-inverse-image-restriction] gives natural isomorphisms $\\rho_{j,G}:j^{-1}G\\xrightarrow{\\sim}G|_V$, $G|_V(W)=G(W\\to V\\to Y)$, and $\\rho_{j_X,F}:j_X^{-1}F\\xrightarrow{\\sim}F|_{X_V}$, $F|_{X_V}(T)=F(T\\to X_V\\to X)$: under $V_{\\Et}\\cong Y_{\\Et}/V$ and $(X_V)_{\\Et}\\cong X_{\\Et}/X_V$ the inverse images are the restrictions to the localized sites, as in Stacks 0D6G. Applied termwise (naturality), they identify the complexes $j^{-1}P$ with $P|_V$ and $j_X^{-1}P$ with $P|_{X_V}$ for complexes $P$.",
-   "uses": [
+  "kind": "statement",
+  "title": "Exchange along an etale morphism of the target is an isomorphism",
+  "statement": "Let $f:X\\to Y$ be a morphism of schemes [def-pc-scheme] and let $j:V\\to Y$ be an etale morphism [def-weil-etale-morphism]. Let $X_V=X\\times_YV$ [def-pc-fibre-product] with projections $j_X:X_V\\to X$ and $f_V:X_V\\to V$, and let $\\square_j=(f,f_V,j,j_X)$ be the resulting cartesian square [def-weil-pbc-cartesian-square] (bottom map $j$, top map $j_X$). Then for every $K\\in\\Dplus(X_{\\Et})$ [def-weil-pbc-derived-categories] the derived exchange morphism [def-weil-pbc-derived-exchange]\n\n$$\n \\Ex_{\\square_j,K}:j^{-1}Rf_*K\\longrightarrow Rf_{V*}\\,j_X^{-1}K\n$$\n\nis an isomorphism in $\\Dplus(V_{\\Et})$. No hypothesis is put on $f$. (Under the identification of $V_{\\Et}$ with the localized site $Y_{\\Et}/V$, $j^{-1}$ is restriction to $Y_{\\Et}/V$ and $j_X^{-1}$ restriction to $X_{\\Et}/X_V$; the lemma says that $Rf_*$ commutes with this restriction, and that the identification is the exchange morphism.)",
+  "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Cohomology on Sites, Lemma label lemma-restrict-direct-image-open, Tag 0D6G ($(Rf_*E)|_{\\mathcal D/V}=Rg_*(E|_{\\mathcal C/U})$, proof by a K-injective representative and Lemma lemma-restrict-K-injective-to-open, Tag 08FI); with Sites, Lemma label sites-lemma-localize-morphism-strong, Tag 03EF (the underived statement), and the use of both in the proof of Etale Cohomology, Lemma label lemma-base-change-local, Tag 0EZR (literature/stacks-project/etale-cohomology.tex), where the restricted base change map is identified with the base change map of the localized square"
+  },
+  "stmt_deps": [
+    "def-pc-scheme",
+    "def-weil-etale-morphism",
+    "def-pc-fibre-product",
+    "def-weil-pbc-cartesian-square",
+    "def-weil-pbc-derived-categories",
+    "def-weil-pbc-derived-exchange"
+  ],
+  "proof": [
+    {
+      "text": "*Step 1 (the square and the restrictions).* By [lem-weil-pbc-etale-base-change-finite-limits] (1), applied to $f:X\\to Y$ and the object $j:V\\to Y$ of $Y_{\\Et}$, the base change $j_X:X_V=X\\times_YV\\to X$ is etale, so $X_V$ with $j_X$ is an object of $X_{\\Et}$. The square $\\square_j=(f,f_V,j,j_X)$ with the identity of $X\\times_YV$ as identification is a cartesian square [def-weil-pbc-cartesian-square], [def-pc-fibre-product]. Since $j$ and $j_X$ are etale, [lem-weil-pbc-etale-inverse-image-restriction] gives natural isomorphisms $\\rho_{j,G}:j^{-1}G\\xrightarrow{\\sim}G|_V$, $G|_V(W)=G(W\\to V\\to Y)$, and $\\rho_{j_X,F}:j_X^{-1}F\\xrightarrow{\\sim}F|_{X_V}$, $F|_{X_V}(T)=F(T\\to X_V\\to X)$: under $V_{\\Et}\\cong Y_{\\Et}/V$ and $(X_V)_{\\Et}\\cong X_{\\Et}/X_V$ the inverse images are the restrictions to the localized sites, as in Stacks 0D6G. Applied termwise (naturality), they identify the complexes $j^{-1}P$ with $P|_V$ and $j_X^{-1}P$ with $P|_{X_V}$ for complexes $P$.",
+      "uses": [
+        "lem-weil-pbc-etale-base-change-finite-limits",
+        "def-weil-pbc-cartesian-square",
+        "def-pc-fibre-product",
+        "lem-weil-pbc-etale-inverse-image-restriction"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/sites-cohomology.tex",
+        "place": "Lemma Tag 0D6G (statement: the localized morphism $g:\\mathcal C/U\\to\\mathcal D/V$, $U=u(V)$); literature/stacks-project/etale-cohomology.tex Section Tag 03S2 ($j^{-1}$ is restriction along $U_{\\etale}\\to X_{\\etale}$)"
+      }
+    },
+    {
+      "text": "*Step 2 (underived: the exchange along $j$ is an isomorphism, and is the identity of sections).* For every abelian sheaf $F$ on $X_{\\Et}$, [lem-weil-pbc-etale-underived-exchange-restriction] gives the isomorphism $\\psi_F:(f_*F)|_V\\xrightarrow{\\sim}f_{V*}(F|_{X_V})$, $\\psi_{F,W}=F(c_W):F(W\\times_YX)\\to F(W\\times_VX_V)$ for $W\\to V$ etale ($c_W$ the canonical isomorphism over $X$), natural in $F$, and the equality $f_{V*}(\\rho_{j_X,F})\\circ\\Ex^0_{\\square_j,F}=\\psi_F\\circ\\rho_{j,f_*F}$; hence the underived exchange morphism $\\Ex^0_{\\square_j,F}:j^{-1}f_*F\\to f_{V*}j_X^{-1}F$ [def-weil-pbc-underived-exchange] is an isomorphism, being a composite of the isomorphisms $\\rho_{j,f_*F}$, $\\psi_F$ and $f_{V*}(\\rho_{j_X,F})^{-1}$. This is the underived statement $(f_*\\mathcal F)|_{\\mathcal D/V}=g_*(\\mathcal F|_{\\mathcal C/U})$ which the proof of Stacks 0D6G calls clear, citing Sites 03CF/03EF.",
+      "uses": [
+        "lem-weil-pbc-etale-underived-exchange-restriction",
+        "def-weil-pbc-underived-exchange"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/sites-cohomology.tex",
+        "place": "proof of Lemma Tag 0D6G ('it is clear that $(f_*\\mathcal F)|_{\\mathcal D/V}=g_*(\\mathcal F|_{\\mathcal C/U})$', citing literature/stacks-project/sites.tex Lemma Tag 03CF and Lemma Tag 03EF)"
+      }
+    },
+    {
+      "text": "*Step 3 (restriction of a K-injective complex stays K-injective).* By [lem-weil-pbc-etale-restriction-injectives] (with the constant ring $\\mathbf Z$, for which module sheaves are the abelian sheaves [def-weil-pbc-abelian-etale-sheaves]), for the etale $j_X:X_V\\to X$ the functor $j_{X!}:\\Ab(X_{V,\\Et})\\to\\Ab(X_{\\Et})$ is exact and left adjoint to $j_X^{-1}$. So [lem-weil-pbc-right-adjoint-preserves-kinjective], applied with $\\mathcal A=\\Ab(X_{\\Et})$, $\\mathcal B=\\Ab(X_{V,\\Et})$, $u=j_X^{-1}$ and $v=j_{X!}$, shows that for every K-injective complex $I$ on $X_{\\Et}$ [def-weil-pbc-kinjective-resolutions] the termwise complex $j_X^{-1}I$ is K-injective. If $I$ is bounded below, so is $j_X^{-1}I$ (termwise functor, $j_X^{-1}0=0$). (Stacks: Cohomology on Sites, Lemma Tag 08FI, proved from Derived Categories Lemma Tag 08BJ and the exact left adjoint $j_!$.)",
+      "uses": [
+        "lem-weil-pbc-etale-restriction-injectives",
+        "def-weil-pbc-abelian-etale-sheaves",
+        "lem-weil-pbc-right-adjoint-preserves-kinjective",
+        "def-weil-pbc-kinjective-resolutions"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/sites-cohomology.tex",
+        "place": "Lemma label lemma-restrict-K-injective-to-open, Tag 08FI, and its proof (Derived Categories, Lemma Tag 08BJ, with the exact left adjoint $j_!$ of restriction); used in the proof of Lemma Tag 0D6G"
+      }
+    },
+    {
+      "text": "*Step 4 ($\\Ex_{\\square_j,K}$ is an isomorphism).* Let $K\\in\\Dplus(X_{\\Et})$ [def-weil-pbc-derived-categories] and let $(I,s)=(I(K),\\rho_K)$ be its chosen K-injective resolution, $I$ a bounded below K-injective complex and $s:K\\xrightarrow{\\sim}QI$, so that $Rf_*K=Q(f_*I)$ [def-weil-pbc-direct-image]. By step 3, $J:=j_X^{-1}I$ is K-injective, so the identity $\\mathrm{id}:j_X^{-1}I\\to J$ is a K-injective resolution of the termwise complex $j_X^{-1}I$ (an identity is a quasi-isomorphism). Apply [lem-weil-pbc-derived-exchange-termwise] to the cartesian square $\\square_j$ (step 1), to $(I,s)$ and to this resolution: the termwise underived exchange $\\Ex^0_{\\square_j,I}=(\\Ex^0_{\\square_j,I^r})_r:j^{-1}f_*I\\to f_{V*}j_X^{-1}I$ is a morphism of complexes, $e=f_{V*}(\\mathrm{id})\\circ\\Ex^0_{\\square_j,I}=\\Ex^0_{\\square_j,I}$, and $\\Ex_{\\square_j,K}\\circ\\sigma_{\\rm src}=\\sigma_{\\rm tgt}\\circ Q(e)$ with isomorphisms $\\sigma_{\\rm src}:Q(j^{-1}f_*I)\\xrightarrow{\\sim}j^{-1}Rf_*K$ and $\\sigma_{\\rm tgt}:Q(f_{V*}J)\\xrightarrow{\\sim}Rf_{V*}j_X^{-1}K$. By step 2 every component $\\Ex^0_{\\square_j,I^r}$ is an isomorphism of sheaves, so $e$ is an isomorphism of complexes (its termwise inverses commute with the differentials), and $Q(e)$ is an isomorphism, $Q$ being a functor [def-weil-abstract-derived-category]. Hence $\\Ex_{\\square_j,K}=\\sigma_{\\rm tgt}\\circ Q(e)\\circ\\sigma_{\\rm src}^{-1}$ [def-weil-pbc-derived-exchange] is an isomorphism in $\\Dplus(V_{\\Et})$. No property of $f$ was used.",
+      "uses": [
+        "def-weil-pbc-derived-categories",
+        "def-weil-pbc-direct-image",
+        "lem-weil-pbc-derived-exchange-termwise",
+        "def-weil-abstract-derived-category",
+        "def-weil-pbc-derived-exchange"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/sites-cohomology.tex",
+        "place": "proof of Lemma Tag 0D6G ('Represent $E$ by a K-injective complex $\\mathcal I^\\bullet$. Then $Rf_*(E)=f_*\\mathcal I^\\bullet$ and $Rg_*(E|_{\\mathcal C/U})=g_*(\\mathcal I^\\bullet|_{\\mathcal C/U})$'); literature/stacks-project/etale-cohomology.tex proof of Lemma Tag 0EZR (2) (the base change map restricted to $V_i$ is the base change map of the localized square, by 0D6G)"
+      }
+    },
+    {
+      "text": "*Step 5 (the identification of the parenthetical remark).* Composing step 4 with the isomorphisms of complexes $\\rho_{j,f_*I}:j^{-1}f_*I\\xrightarrow{\\sim}(f_*I)|_V$ and $f_{V*}(\\rho_{j_X,I}):f_{V*}j_X^{-1}I\\xrightarrow{\\sim}f_{V*}(I|_{X_V})$ (step 1, termwise) and using the equality of step 2 in each degree, $f_{V*}(\\rho_{j_X,I})\\circ e=\\psi_I\\circ\\rho_{j,f_*I}$, one gets\n$$\\Ex_{\\square_j,K}=\\sigma_{\\rm tgt}\\circ Q(f_{V*}\\rho_{j_X,I})^{-1}\\circ Q(\\psi_I)\\circ Q(\\rho_{j,f_*I})\\circ\\sigma_{\\rm src}^{-1}.$$\nThat is: $j^{-1}Rf_*K$ is represented by the restriction $(f_*I)|_V$, $Rf_{V*}(j_X^{-1}K)$ by $f_{V*}(I|_{X_V})$ (the restriction $I|_{X_V}\\cong j_X^{-1}I$ being a K-injective complex representing $j_X^{-1}K$, step 3), and $\\Ex_{\\square_j,K}$ is the class of the identity of sections $\\psi_I:(f_*I)|_V(W)=I(W\\times_YX)=I(W\\times_VX_V)=f_{V*}(I|_{X_V})(W)$; this is the identification $(Rf_*K)|_{Y_{\\Et}/V}=Rf_{V*}(K|_{X_{\\Et}/X_V})$ of Stacks 0D6G, and it is the exchange morphism.",
+      "uses": [
+        "lem-weil-pbc-etale-inverse-image-restriction",
+        "lem-weil-pbc-etale-underived-exchange-restriction",
+        "def-weil-abstract-derived-category"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/sites-cohomology.tex",
+        "place": "Lemma label lemma-restrict-direct-image-open, Tag 0D6G, statement and proof"
+      }
+    }
+  ],
+  "proof_deps": [
     "lem-weil-pbc-etale-base-change-finite-limits",
     "def-weil-pbc-cartesian-square",
     "def-pc-fibre-product",
-    "lem-weil-pbc-etale-inverse-image-restriction"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Lemma Tag 0D6G (statement: the localized morphism $g:\\mathcal C/U\\to\\mathcal D/V$, $U=u(V)$); literature/stacks-project/etale-cohomology.tex Section Tag 03S2 ($j^{-1}$ is restriction along $U_{\\etale}\\to X_{\\etale}$)"
-   }
-  },
-  {
-   "text": "*Step 2 (underived: the exchange along $j$ is an isomorphism, and is the identity of sections).* For every abelian sheaf $F$ on $X_{\\Et}$, [lem-weil-pbc-etale-underived-exchange-restriction] gives the isomorphism $\\psi_F:(f_*F)|_V\\xrightarrow{\\sim}f_{V*}(F|_{X_V})$, $\\psi_{F,W}=F(c_W):F(W\\times_YX)\\to F(W\\times_VX_V)$ for $W\\to V$ etale ($c_W$ the canonical isomorphism over $X$), natural in $F$, and the equality $f_{V*}(\\rho_{j_X,F})\\circ\\Ex^0_{\\square_j,F}=\\psi_F\\circ\\rho_{j,f_*F}$; hence the underived exchange morphism $\\Ex^0_{\\square_j,F}:j^{-1}f_*F\\to f_{V*}j_X^{-1}F$ [def-weil-pbc-underived-exchange] is an isomorphism, being a composite of the isomorphisms $\\rho_{j,f_*F}$, $\\psi_F$ and $f_{V*}(\\rho_{j_X,F})^{-1}$. This is the underived statement $(f_*\\mathcal F)|_{\\mathcal D/V}=g_*(\\mathcal F|_{\\mathcal C/U})$ which the proof of Stacks 0D6G calls clear, citing Sites 03CF/03EF.",
-   "uses": [
+    "lem-weil-pbc-etale-inverse-image-restriction",
     "lem-weil-pbc-etale-underived-exchange-restriction",
-    "def-weil-pbc-underived-exchange"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "proof of Lemma Tag 0D6G ('it is clear that $(f_*\\mathcal F)|_{\\mathcal D/V}=g_*(\\mathcal F|_{\\mathcal C/U})$', citing literature/stacks-project/sites.tex Lemma Tag 03CF and Lemma Tag 03EF)"
-   }
-  },
-  {
-   "text": "*Step 3 (restriction of a K-injective complex stays K-injective).* By [lem-weil-pbc-etale-restriction-injectives] (with the constant ring $\\mathbf Z$, for which module sheaves are the abelian sheaves [def-weil-pbc-abelian-etale-sheaves]), for the etale $j_X:X_V\\to X$ the functor $j_{X!}:\\Ab(X_{V,\\Et})\\to\\Ab(X_{\\Et})$ is exact and left adjoint to $j_X^{-1}$. So [lem-weil-pbc-right-adjoint-preserves-kinjective], applied with $\\mathcal A=\\Ab(X_{\\Et})$, $\\mathcal B=\\Ab(X_{V,\\Et})$, $u=j_X^{-1}$ and $v=j_{X!}$, shows that for every K-injective complex $I$ on $X_{\\Et}$ [def-weil-pbc-kinjective-resolutions] the termwise complex $j_X^{-1}I$ is K-injective. If $I$ is bounded below, so is $j_X^{-1}I$ (termwise functor, $j_X^{-1}0=0$). (Stacks: Cohomology on Sites, Lemma Tag 08FI, proved from Derived Categories Lemma Tag 08BJ and the exact left adjoint $j_!$.)",
-   "uses": [
+    "def-weil-pbc-underived-exchange",
     "lem-weil-pbc-etale-restriction-injectives",
     "def-weil-pbc-abelian-etale-sheaves",
     "lem-weil-pbc-right-adjoint-preserves-kinjective",
-    "def-weil-pbc-kinjective-resolutions"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Lemma label lemma-restrict-K-injective-to-open, Tag 08FI, and its proof (Derived Categories, Lemma Tag 08BJ, with the exact left adjoint $j_!$ of restriction); used in the proof of Lemma Tag 0D6G"
-   }
-  },
-  {
-   "text": "*Step 4 ($\\Ex_{\\square_j,K}$ is an isomorphism).* Let $K\\in\\Dplus(X_{\\Et})$ [def-weil-pbc-derived-categories] and let $(I,s)=(I(K),\\rho_K)$ be its chosen K-injective resolution, $I$ a bounded below K-injective complex and $s:K\\xrightarrow{\\sim}QI$, so that $Rf_*K=Q(f_*I)$ [def-weil-pbc-direct-image]. By step 3, $J:=j_X^{-1}I$ is K-injective, so the identity $\\mathrm{id}:j_X^{-1}I\\to J$ is a K-injective resolution of the termwise complex $j_X^{-1}I$ (an identity is a quasi-isomorphism). Apply [lem-weil-pbc-derived-exchange-termwise] to the cartesian square $\\square_j$ (step 1), to $(I,s)$ and to this resolution: the termwise underived exchange $\\Ex^0_{\\square_j,I}=(\\Ex^0_{\\square_j,I^r})_r:j^{-1}f_*I\\to f_{V*}j_X^{-1}I$ is a morphism of complexes, $e=f_{V*}(\\mathrm{id})\\circ\\Ex^0_{\\square_j,I}=\\Ex^0_{\\square_j,I}$, and $\\Ex_{\\square_j,K}\\circ\\sigma_{\\rm src}=\\sigma_{\\rm tgt}\\circ Q(e)$ with isomorphisms $\\sigma_{\\rm src}:Q(j^{-1}f_*I)\\xrightarrow{\\sim}j^{-1}Rf_*K$ and $\\sigma_{\\rm tgt}:Q(f_{V*}J)\\xrightarrow{\\sim}Rf_{V*}j_X^{-1}K$. By step 2 every component $\\Ex^0_{\\square_j,I^r}$ is an isomorphism of sheaves, so $e$ is an isomorphism of complexes (its termwise inverses commute with the differentials), and $Q(e)$ is an isomorphism, $Q$ being a functor [def-weil-abstract-derived-category]. Hence $\\Ex_{\\square_j,K}=\\sigma_{\\rm tgt}\\circ Q(e)\\circ\\sigma_{\\rm src}^{-1}$ [def-weil-pbc-derived-exchange] is an isomorphism in $\\Dplus(V_{\\Et})$. No property of $f$ was used.",
-   "uses": [
+    "def-weil-pbc-kinjective-resolutions",
     "def-weil-pbc-derived-categories",
     "def-weil-pbc-direct-image",
     "lem-weil-pbc-derived-exchange-termwise",
     "def-weil-abstract-derived-category",
     "def-weil-pbc-derived-exchange"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "proof of Lemma Tag 0D6G ('Represent $E$ by a K-injective complex $\\mathcal I^\\bullet$. Then $Rf_*(E)=f_*\\mathcal I^\\bullet$ and $Rg_*(E|_{\\mathcal C/U})=g_*(\\mathcal I^\\bullet|_{\\mathcal C/U})$'); literature/stacks-project/etale-cohomology.tex proof of Lemma Tag 0EZR (2) (the base change map restricted to $V_i$ is the base change map of the localized square, by 0D6G)"
-   }
-  },
-  {
-   "text": "*Step 5 (the identification of the parenthetical remark).* Composing step 4 with the isomorphisms of complexes $\\rho_{j,f_*I}:j^{-1}f_*I\\xrightarrow{\\sim}(f_*I)|_V$ and $f_{V*}(\\rho_{j_X,I}):f_{V*}j_X^{-1}I\\xrightarrow{\\sim}f_{V*}(I|_{X_V})$ (step 1, termwise) and using the equality of step 2 in each degree, $f_{V*}(\\rho_{j_X,I})\\circ e=\\psi_I\\circ\\rho_{j,f_*I}$, one gets\n$$\\Ex_{\\square_j,K}=\\sigma_{\\rm tgt}\\circ Q(f_{V*}\\rho_{j_X,I})^{-1}\\circ Q(\\psi_I)\\circ Q(\\rho_{j,f_*I})\\circ\\sigma_{\\rm src}^{-1}.$$\nThat is: $j^{-1}Rf_*K$ is represented by the restriction $(f_*I)|_V$, $Rf_{V*}(j_X^{-1}K)$ by $f_{V*}(I|_{X_V})$ (the restriction $I|_{X_V}\\cong j_X^{-1}I$ being a K-injective complex representing $j_X^{-1}K$, step 3), and $\\Ex_{\\square_j,K}$ is the class of the identity of sections $\\psi_I:(f_*I)|_V(W)=I(W\\times_YX)=I(W\\times_VX_V)=f_{V*}(I|_{X_V})(W)$; this is the identification $(Rf_*K)|_{Y_{\\Et}/V}=Rf_{V*}(K|_{X_{\\Et}/X_V})$ of Stacks 0D6G, and it is the exchange morphism.",
-   "uses": [
-    "lem-weil-pbc-etale-inverse-image-restriction",
-    "lem-weil-pbc-etale-underived-exchange-restriction",
-    "def-weil-abstract-derived-category"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Lemma label lemma-restrict-direct-image-open, Tag 0D6G, statement and proof"
-   }
-  }
- ],
- "proof_deps": [
-  "lem-weil-pbc-etale-base-change-finite-limits",
-  "def-weil-pbc-cartesian-square",
-  "def-pc-fibre-product",
-  "lem-weil-pbc-etale-inverse-image-restriction",
-  "lem-weil-pbc-etale-underived-exchange-restriction",
-  "def-weil-pbc-underived-exchange",
-  "lem-weil-pbc-etale-restriction-injectives",
-  "def-weil-pbc-abelian-etale-sheaves",
-  "lem-weil-pbc-right-adjoint-preserves-kinjective",
-  "def-weil-pbc-kinjective-resolutions",
-  "def-weil-pbc-derived-categories",
-  "def-weil-pbc-direct-image",
-  "lem-weil-pbc-derived-exchange-termwise",
-  "def-weil-abstract-derived-category",
-  "def-weil-pbc-derived-exchange"
- ],
- "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Cohomology on Sites, Lemma Tag 0D6G (label lemma-restrict-direct-image-open) with Lemma Tag 08FI (label lemma-restrict-K-injective-to-open); Sites, Lemmas Tag 03CF and 03EF (literature/stacks-project/sites.tex); Etale Cohomology, proof of Lemma Tag 0EZR (literature/stacks-project/etale-cohomology.tex). The identification of the Stacks isomorphism with the exchange morphism (steps 2, 4, 5) is written out here through the termwise description of the derived exchange morphism; Stacks asserts it in the proof of 0EZR without argument."
- },
- "mathlib_searches": [
-  {
-   "tool": "leansearch",
-   "query": "restriction of derived pushforward to an open (etale) object equals derived pushforward of restriction",
-   "results": "AlgebraicGeometry.Scheme.Modules.restrictAdjunction, Scheme.Modules.pushforward_obj_presheaf_map, Scheme.Modules.restrictFunctorAdjCounitIso, Scheme.Modules.restrictFunctor (Mathlib.AlgebraicGeometry.Modules.Sheaf; Zariski O_X-modules, underived, open immersions only)",
-   "date": "2026-10-09",
-   "verdict": "no match"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "exchange morphism for etale base change of derived direct image is an isomorphism (localization of Rf_* to an etale V over the target)",
-   "results": "AlgebraicGeometry.IsEtale.of_comp, IsEtale.instIsStableUnderBaseChangeScheme, RingHom.Etale.respectsIso, Algebra.basicOpen_subset_etaleLocus_iff (morphism properties only)",
-   "date": "2026-10-09",
-   "verdict": "no match"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "derived pushforward of sheaves commutes with restriction to an over category (localization of a site at an object)",
-   "results": "Functor.sheafPushforwardContinuousComp'_hom_app_val_app, Functor.sheafPushforwardCocontinuousCompSheafToPresheafIso_hom, SheafOfModules.pushforwardNatIso (underived composition of pushforwards; nothing derived, nothing about restriction to J.over)",
-   "date": "2026-10-09",
-   "verdict": "no match"
-  },
-  {
-   "tool": "grep",
-   "query": "grep -rln 'Etale' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Sites | xargs grep -ln 'pushforward\\|DerivedCategory\\|rightDerived'; grep -rn 'overPullback' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/ | grep -i 'pushforward\\|derived'",
-   "results": "no file of AlgebraicGeometry/Sites mentions pushforward or derived categories; overPullback occurs with pushforward only in Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean:97,358 (SheafOfModules.overPullback, adjunction overMap ⊣ overPullback, underived)",
-   "date": "2026-10-09",
-   "verdict": "no match: Mathlib has no derived direct image on the small etale site and no exchange morphism"
-  },
-  {
-   "tool": "loogle",
-   "query": "CategoryTheory.GrothendieckTopology.overPullback, CategoryTheory.Functor.rightDerived",
-   "results": "none",
-   "date": "2026-10-09",
-   "verdict": "no match"
-  },
-  {
-   "tool": "leansearch",
-   "query": "restriction of a K-injective complex to an open subobject (localized site) is K-injective; derived pushforward commutes with restriction",
-   "results": "HomologicalComplex.restrictionMap, HomologicalComplex.restriction (Mathlib.Algebra.Homology.Embedding.Restriction: restriction of complexes along an embedding of index shapes), Scheme.Modules.restrictFunctor, instIsLeftAdjointRestrictFunctor, restrictFunctorComp (Zariski O_X-modules), LocallyRingedSpace.IsOpenImmersion.isoRestrict_hom_ofRestrict_assoc",
-   "date": "2026-10-09",
-   "verdict": "no match"
-  }
- ],
- "mathlib_match": null,
- "status": "split",
- "merged_into": null,
- "created": {
-  "by": "worker",
-  "item": "lemma-weil-pbc-target-locality",
-  "date": "2026-10-09"
- },
- "lean_audit": {
-  "master": {
-   "state": "none",
-   "decls": [],
-   "missing": [
-    "AlgebraicGeometry.Etale.isIso_derivedBaseChangeMapPlus_of_etale"
-   ]
-  },
-  "slopmaster2": {
-   "state": "closed",
-   "decls": [
-    {
-     "name": "AlgebraicGeometry.Etale.isIso_derivedBaseChangeMapPlus_of_etale",
-     "module": "WeilConjectures.SixFunctors.BaseChange.EtaleDerived",
-     "lines": [
-      40,
-      98
-     ],
-     "kind": "theorem",
-     "sorry": false
-    }
-   ],
-   "missing": [],
-   "open": []
-  }
- },
- "chapter": "sec-proper-base-change",
- "unit": "sk-thm-reduction",
- "split_report": {
-  "date": "2026-10-09",
-  "item": "lem-weil-pbc-etale-localization-exchange",
-  "worker": "stage1",
-  "summary": "Statement kept (checked against Stacks 0D6G, 08FI, 03CF/03EF and the proof of 0EZR; no hypothesis on f is needed, correct). Proof written in five steps following 0D6G: (1) j_X etale, the cartesian square, and j^{-1}, j_X^{-1} as restrictions [lem-weil-pbc-etale-inverse-image-restriction]; (2) underived: the exchange along an etale j is an isomorphism and is the identity of sections F(W x_Y X)=F(W x_V X_V), stated as the new node lem-weil-pbc-etale-underived-exchange-restriction (Stacks 03CF/03EF, 'clear' in the proof of 0D6G); (3) restriction of a K-injective complex along the etale j_X is K-injective (Stacks 08FI) from the existing nodes lem-weil-pbc-etale-restriction-injectives (exact left adjoint j_!) and lem-weil-pbc-right-adjoint-preserves-kinjective, so no new node; (4) the termwise description [lem-weil-pbc-derived-exchange-termwise] with J = j_X^{-1}I and the identity resolution gives Ex = sigma_tgt Q(Ex^0_I) sigma_src^{-1}, an isomorphism; (5) through the restriction isomorphisms this is the class of the identity of sections, i.e. the Stacks identification (Rf_*K)|_V = Rf_{V*}(K|_{X_V}). Searches for the item completed with Loogle and a second LeanSearch; the new node searched with LeanSearch, LeanFinder, Loogle and grep: no match. Tool uses outside the unit's route (sk-thm-reduction does not cite sk-def-exchange): lem-weil-pbc-derived-exchange-termwise and lem-weil-pbc-right-adjoint-preserves-kinjective (sk-def-exchange, generic, the latter closed in Lean); lem-weil-pbc-etale-inverse-image-restriction is in sk-thm-p1 and lem-weil-pbc-etale-restriction-injectives in sk-thm-iff, both cited units."
- },
- "tool_uses": [
-  "lem-weil-pbc-derived-exchange-termwise"
- ],
- "reviewed": {
-  "date": "2026-10-09",
-  "by": "L",
-  "result": "pass",
-  "note": "Stacks 0D6G with 08FI; lem-weil-pbc-derived-exchange-termwise (sk-def-exchange) accepted as a tool use; 1 new node"
- },
- "lean": {
-  "branch": "slopmaster2",
-  "declarations": [
-   "AlgebraicGeometry.Etale.isIso_derivedBaseChangeMapPlus_of_etale"
   ],
-  "note": "attached by the lead at review of lem-weil-pbc-etale-underived-exchange-restriction (2026-10-09), found by its worker: the derived base change map along an etale morphism is an isomorphism on D^+, stated for sheaves of Lambda-modules (Lambda = Z gives the node) and for derivedBaseChangeMapPlus, which baseChange_eq_derivedBaseChangeMapPlus identifies with the mate-defined map (that identification rests on the flat-separator sorry; this declaration itself is sorry-free)"
- }
+  "proof_origin": {
+    "by": "document",
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Cohomology on Sites, Lemma Tag 0D6G (label lemma-restrict-direct-image-open) with Lemma Tag 08FI (label lemma-restrict-K-injective-to-open); Sites, Lemmas Tag 03CF and 03EF (literature/stacks-project/sites.tex); Etale Cohomology, proof of Lemma Tag 0EZR (literature/stacks-project/etale-cohomology.tex). The identification of the Stacks isomorphism with the exchange morphism (steps 2, 4, 5) is written out here through the termwise description of the derived exchange morphism; Stacks asserts it in the proof of 0EZR without argument."
+  },
+  "mathlib_searches": [
+    {
+      "tool": "leansearch",
+      "query": "restriction of derived pushforward to an open (etale) object equals derived pushforward of restriction",
+      "results": "AlgebraicGeometry.Scheme.Modules.restrictAdjunction, Scheme.Modules.pushforward_obj_presheaf_map, Scheme.Modules.restrictFunctorAdjCounitIso, Scheme.Modules.restrictFunctor (Mathlib.AlgebraicGeometry.Modules.Sheaf; Zariski O_X-modules, underived, open immersions only)",
+      "date": "2026-10-09",
+      "verdict": "no match"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "exchange morphism for etale base change of derived direct image is an isomorphism (localization of Rf_* to an etale V over the target)",
+      "results": "AlgebraicGeometry.IsEtale.of_comp, IsEtale.instIsStableUnderBaseChangeScheme, RingHom.Etale.respectsIso, Algebra.basicOpen_subset_etaleLocus_iff (morphism properties only)",
+      "date": "2026-10-09",
+      "verdict": "no match"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "derived pushforward of sheaves commutes with restriction to an over category (localization of a site at an object)",
+      "results": "Functor.sheafPushforwardContinuousComp'_hom_app_val_app, Functor.sheafPushforwardCocontinuousCompSheafToPresheafIso_hom, SheafOfModules.pushforwardNatIso (underived composition of pushforwards; nothing derived, nothing about restriction to J.over)",
+      "date": "2026-10-09",
+      "verdict": "no match"
+    },
+    {
+      "tool": "grep",
+      "query": "grep -rln 'Etale' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Sites | xargs grep -ln 'pushforward\\|DerivedCategory\\|rightDerived'; grep -rn 'overPullback' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/ | grep -i 'pushforward\\|derived'",
+      "results": "no file of AlgebraicGeometry/Sites mentions pushforward or derived categories; overPullback occurs with pushforward only in Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean:97,358 (SheafOfModules.overPullback, adjunction overMap ⊣ overPullback, underived)",
+      "date": "2026-10-09",
+      "verdict": "no match: Mathlib has no derived direct image on the small etale site and no exchange morphism"
+    },
+    {
+      "tool": "loogle",
+      "query": "CategoryTheory.GrothendieckTopology.overPullback, CategoryTheory.Functor.rightDerived",
+      "results": "none",
+      "date": "2026-10-09",
+      "verdict": "no match"
+    },
+    {
+      "tool": "leansearch",
+      "query": "restriction of a K-injective complex to an open subobject (localized site) is K-injective; derived pushforward commutes with restriction",
+      "results": "HomologicalComplex.restrictionMap, HomologicalComplex.restriction (Mathlib.Algebra.Homology.Embedding.Restriction: restriction of complexes along an embedding of index shapes), Scheme.Modules.restrictFunctor, instIsLeftAdjointRestrictFunctor, restrictFunctorComp (Zariski O_X-modules), LocallyRingedSpace.IsOpenImmersion.isoRestrict_hom_ofRestrict_assoc",
+      "date": "2026-10-09",
+      "verdict": "no match"
+    }
+  ],
+  "mathlib_match": null,
+  "status": "split",
+  "merged_into": null,
+  "created": {
+    "by": "worker",
+    "item": "lemma-weil-pbc-target-locality",
+    "date": "2026-10-09"
+  },
+  "lean_audit": {
+    "master": {
+      "state": "none",
+      "decls": [],
+      "missing": [
+        "AlgebraicGeometry.Etale.isIso_derivedBaseChangeMapPlus_of_etale"
+      ]
+    },
+    "slopmaster2": {
+      "state": "closed",
+      "decls": [
+        {
+          "name": "AlgebraicGeometry.Etale.isIso_derivedBaseChangeMapPlus_of_etale",
+          "module": "WeilConjectures.SixFunctors.BaseChange.EtaleDerived",
+          "lines": [
+            40,
+            98
+          ],
+          "kind": "theorem",
+          "sorry": false
+        }
+      ],
+      "missing": [],
+      "open": []
+    }
+  },
+  "chapter": "sec-proper-base-change",
+  "unit": "sk-thm-reduction",
+  "split_report": {
+    "date": "2026-10-09",
+    "item": "lem-weil-pbc-etale-localization-exchange",
+    "worker": "stage1",
+    "summary": "Statement kept (checked against Stacks 0D6G, 08FI, 03CF/03EF and the proof of 0EZR; no hypothesis on f is needed, correct). Proof written in five steps following 0D6G: (1) j_X etale, the cartesian square, and j^{-1}, j_X^{-1} as restrictions [lem-weil-pbc-etale-inverse-image-restriction]; (2) underived: the exchange along an etale j is an isomorphism and is the identity of sections F(W x_Y X)=F(W x_V X_V), stated as the new node lem-weil-pbc-etale-underived-exchange-restriction (Stacks 03CF/03EF, 'clear' in the proof of 0D6G); (3) restriction of a K-injective complex along the etale j_X is K-injective (Stacks 08FI) from the existing nodes lem-weil-pbc-etale-restriction-injectives (exact left adjoint j_!) and lem-weil-pbc-right-adjoint-preserves-kinjective, so no new node; (4) the termwise description [lem-weil-pbc-derived-exchange-termwise] with J = j_X^{-1}I and the identity resolution gives Ex = sigma_tgt Q(Ex^0_I) sigma_src^{-1}, an isomorphism; (5) through the restriction isomorphisms this is the class of the identity of sections, i.e. the Stacks identification (Rf_*K)|_V = Rf_{V*}(K|_{X_V}). Searches for the item completed with Loogle and a second LeanSearch; the new node searched with LeanSearch, LeanFinder, Loogle and grep: no match. Tool uses outside the unit's route (sk-thm-reduction does not cite sk-def-exchange): lem-weil-pbc-derived-exchange-termwise and lem-weil-pbc-right-adjoint-preserves-kinjective (sk-def-exchange, generic, the latter closed in Lean); lem-weil-pbc-etale-inverse-image-restriction is in sk-thm-p1 and lem-weil-pbc-etale-restriction-injectives in sk-thm-iff, both cited units."
+  },
+  "tool_uses": [
+    "lem-weil-pbc-derived-exchange-termwise"
+  ],
+  "reviewed": {
+    "date": "2026-10-09",
+    "by": "L",
+    "result": "pass",
+    "note": "Stacks 0D6G with 08FI; lem-weil-pbc-derived-exchange-termwise (sk-def-exchange) accepted as a tool use; 1 new node"
+  },
+  "lean": {
+    "module": "WeilConjectures.SixFunctors.BaseChange.EtaleDerived",
+    "declaration": "AlgebraicGeometry.Etale.isIso_derivedBaseChangeMapPlus_of_etale",
+    "branch": "slopmaster2",
+    "line": 40,
+    "declarations": [
+      "AlgebraicGeometry.Etale.isIso_derivedBaseChangeMapPlus_of_etale"
+    ],
+    "sorry_free": true,
+    "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state closed)"
+  }
 }

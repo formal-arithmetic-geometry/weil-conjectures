@@ -1,252 +1,263 @@
 {
- "id": "lem-sc-riemann-roch-large-degree",
- "blueprint": {
-  "is": "lem-sc-riemann-roch-large-degree",
-  "from": null,
-  "same_as": []
- },
- "kind": "statement",
- "title": "Sections of line bundles of degree at least $2g-1$",
- "statement": "Let $k$ be algebraically closed, $C$ a proper smooth connected curve of\ngenus $g$ ([def-sc-genus]) over $k$, and $\\mathcal L$ a line bundle on\n$C$ of degree $d=\\deg\\mathcal L\\ge2g-1$ ([def-sc-pic0]). Then\n$H^1(C,\\mathcal L)=0$ and\n\n$$\nh^0(\\mathcal L):=\\dim_kH^0(C,\\mathcal L)=d+1-g.\n$$",
- "source": {
-  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-sc-riemann-roch-large-degree.md",
-  "place": "node lem-sc-riemann-roch-large-degree, order 717"
- },
- "stmt_deps": [
-  "def-sc-genus",
-  "def-sc-pic0",
-  "def-sc-curves"
- ],
- "proof": [
-  {
-   "text": "The curve is connected in the sense of [def-sc-curves], hence has dimension one. Apply [thm-sc-serre-duality-curve] to the line bundle $\\mathcal L$: its dimension-one case gives\n$$\nH^1(C,\\mathcal L)^{\\vee}\\cong H^0(C,\\mathcal M),\\qquad\\mathcal M:=\\Omega^1_{C/k}\\otimes\\mathcal L^{-1}.\n$$\nThe same theorem makes these cohomology groups finite-dimensional and gives $H^q(C,\\mathcal L)=0$ for $q\\ge2$.",
-   "uses": [
-    "def-sc-curves",
-    "thm-sc-serre-duality-curve"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-sc-riemann-roch-large-degree.md",
-    "place": "proof, first paragraph; Stacks Project, Algebraic Curves, Tag 0BS6, part (3), duality formula"
-   }
+  "id": "lem-sc-riemann-roch-large-degree",
+  "blueprint": {
+    "is": "lem-sc-riemann-roch-large-degree",
+    "from": null,
+    "same_as": []
   },
-  {
-   "text": "By [lem-sc-canonical-degree], $\\Omega^1_{C/k}\\cong\\mathcal O_C(K_C)$ has degree $2g-2$. The dual of the invertible $\\mathcal L$ is invertible by [lem-sc-invertible-dual]; the tensor product $\\mathcal M$ is therefore a line bundle. Additivity of degree and its negation under duals follow from the homomorphism [def-sc-pic0]. Thus $\\deg\\mathcal M=(2g-2)-d\\le-1$.",
-   "uses": [
+  "kind": "statement",
+  "title": "Sections of line bundles of degree at least $2g-1$",
+  "statement": "Let $k$ be algebraically closed, $C$ a proper smooth connected curve of\ngenus $g$ ([def-sc-genus]) over $k$, and $\\mathcal L$ a line bundle on\n$C$ of degree $d=\\deg\\mathcal L\\ge2g-1$ ([def-sc-pic0]). Then\n$H^1(C,\\mathcal L)=0$ and\n\n$$\nh^0(\\mathcal L):=\\dim_kH^0(C,\\mathcal L)=d+1-g.\n$$",
+  "source": {
+    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-sc-riemann-roch-large-degree.md",
+    "place": "node lem-sc-riemann-roch-large-degree, order 717"
+  },
+  "stmt_deps": [
+    "def-sc-genus",
+    "def-sc-pic0",
+    "def-sc-curves"
+  ],
+  "proof": [
+    {
+      "text": "The curve is connected in the sense of [def-sc-curves], hence has dimension one. Apply [thm-sc-serre-duality-curve] to the line bundle $\\mathcal L$: its dimension-one case gives\n$$\nH^1(C,\\mathcal L)^{\\vee}\\cong H^0(C,\\mathcal M),\\qquad\\mathcal M:=\\Omega^1_{C/k}\\otimes\\mathcal L^{-1}.\n$$\nThe same theorem makes these cohomology groups finite-dimensional and gives $H^q(C,\\mathcal L)=0$ for $q\\ge2$.",
+      "uses": [
+        "def-sc-curves",
+        "thm-sc-serre-duality-curve"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-sc-riemann-roch-large-degree.md",
+        "place": "proof, first paragraph; Stacks Project, Algebraic Curves, Tag 0BS6, part (3), duality formula"
+      }
+    },
+    {
+      "text": "By [lem-sc-canonical-degree], $\\Omega^1_{C/k}\\cong\\mathcal O_C(K_C)$ has degree $2g-2$. The dual of the invertible $\\mathcal L$ is invertible by [lem-sc-invertible-dual]; the tensor product $\\mathcal M$ is therefore a line bundle. Additivity of degree and its negation under duals follow from the homomorphism [def-sc-pic0]. Thus $\\deg\\mathcal M=(2g-2)-d\\le-1$.",
+      "uses": [
+        "lem-sc-canonical-degree",
+        "lem-sc-invertible-dual",
+        "def-sc-pic0"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-sc-riemann-roch-large-degree.md",
+        "place": "proof, second paragraph; Stacks Project, Algebraic Curves, Tags 0BS2 (6) and 0BS6 (2)"
+      }
+    },
+    {
+      "text": "Suppose $s\\in H^0(C,\\mathcal M)$ is nonzero. Since $C$ is integral, [lem-sc-invertible-module-generic-stalk] (3) sends $s$ injectively to a nonzero rational section $s_\\eta$. At each closed point $P$, its germ is in $\\mathcal M_P$, so the local coefficient of $s_\\eta$ relative to a generator of $\\mathcal M_P$ lies in the discrete valuation ring $\\mathcal O_{C,P}$; by [def-sc-rational-section-divisor] its order is nonnegative. Hence $D:=\\operatorname{div}(s_\\eta)$ is effective and has $\\deg D\\ge0$ by [def-sc-divisor]. But [lem-sc-line-bundle-rational-section] identifies $\\mathcal M$ with $\\mathcal O_C(D)$, and [def-sc-pic0] gives $\\deg\\mathcal M=\\deg D$, contrary to Step 2. Therefore $H^0(C,\\mathcal M)=0$.",
+      "uses": [
+        "lem-sc-invertible-module-generic-stalk",
+        "def-sc-rational-section-divisor",
+        "def-sc-divisor",
+        "lem-sc-line-bundle-rational-section",
+        "def-sc-pic0"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-sc-riemann-roch-large-degree.md",
+        "place": "proof, last paragraph, the negative-degree argument expanded using the divisor construction of lem-sc-line-bundle-rational-section and Stacks Project, Divisors, Tags 02SF and 0BE6"
+      }
+    },
+    {
+      "text": "The isomorphism in Step 1 now gives $H^1(C,\\mathcal L)^{\\vee}=0$. This space is finite-dimensional by [thm-sc-serre-duality-curve], so $H^1(C,\\mathcal L)=0$. Its cohomology in degrees $q\\ge2$ vanishes by the same theorem. Consequently $\\chi(C,\\mathcal L)=\\dim_kH^0(C,\\mathcal L)$; [lem-sc-riemann-roch] (1) gives $\\chi(C,\\mathcal L)=d+1-g$.",
+      "uses": [
+        "thm-sc-serre-duality-curve",
+        "lem-sc-riemann-roch"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-sc-riemann-roch-large-degree.md",
+        "place": "proof, last paragraph; Stacks Project, Algebraic Curves, Tag 0BS6 (3), Riemann-Roch and duality"
+      }
+    }
+  ],
+  "proof_deps": [
+    "def-sc-curves",
+    "thm-sc-serre-duality-curve",
     "lem-sc-canonical-degree",
     "lem-sc-invertible-dual",
-    "def-sc-pic0"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-sc-riemann-roch-large-degree.md",
-    "place": "proof, second paragraph; Stacks Project, Algebraic Curves, Tags 0BS2 (6) and 0BS6 (2)"
-   }
-  },
-  {
-   "text": "Suppose $s\\in H^0(C,\\mathcal M)$ is nonzero. Since $C$ is integral, [lem-sc-invertible-module-generic-stalk] (3) sends $s$ injectively to a nonzero rational section $s_\\eta$. At each closed point $P$, its germ is in $\\mathcal M_P$, so the local coefficient of $s_\\eta$ relative to a generator of $\\mathcal M_P$ lies in the discrete valuation ring $\\mathcal O_{C,P}$; by [def-sc-rational-section-divisor] its order is nonnegative. Hence $D:=\\operatorname{div}(s_\\eta)$ is effective and has $\\deg D\\ge0$ by [def-sc-divisor]. But [lem-sc-line-bundle-rational-section] identifies $\\mathcal M$ with $\\mathcal O_C(D)$, and [def-sc-pic0] gives $\\deg\\mathcal M=\\deg D$, contrary to Step 2. Therefore $H^0(C,\\mathcal M)=0$.",
-   "uses": [
+    "def-sc-pic0",
     "lem-sc-invertible-module-generic-stalk",
     "def-sc-rational-section-divisor",
     "def-sc-divisor",
     "lem-sc-line-bundle-rational-section",
-    "def-sc-pic0"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-sc-riemann-roch-large-degree.md",
-    "place": "proof, last paragraph, the negative-degree argument expanded using the divisor construction of lem-sc-line-bundle-rational-section and Stacks Project, Divisors, Tags 02SF and 0BE6"
-   }
-  },
-  {
-   "text": "The isomorphism in Step 1 now gives $H^1(C,\\mathcal L)^{\\vee}=0$. This space is finite-dimensional by [thm-sc-serre-duality-curve], so $H^1(C,\\mathcal L)=0$. Its cohomology in degrees $q\\ge2$ vanishes by the same theorem. Consequently $\\chi(C,\\mathcal L)=\\dim_kH^0(C,\\mathcal L)$; [lem-sc-riemann-roch] (1) gives $\\chi(C,\\mathcal L)=d+1-g$.",
-   "uses": [
-    "thm-sc-serre-duality-curve",
     "lem-sc-riemann-roch"
-   ],
-   "elementary": false,
-   "source": {
+  ],
+  "proof_origin": {
+    "by": "agent",
     "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-sc-riemann-roch-large-degree.md",
-    "place": "proof, last paragraph; Stacks Project, Algebraic Curves, Tag 0BS6 (3), Riemann-Roch and duality"
-   }
-  }
- ],
- "proof_deps": [
-  "def-sc-curves",
-  "thm-sc-serre-duality-curve",
-  "lem-sc-canonical-degree",
-  "lem-sc-invertible-dual",
-  "def-sc-pic0",
-  "lem-sc-invertible-module-generic-stalk",
-  "def-sc-rational-section-divisor",
-  "def-sc-divisor",
-  "lem-sc-line-bundle-rational-section",
-  "lem-sc-riemann-roch"
- ],
- "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-sc-riemann-roch-large-degree.md",
-  "place": "## Proof"
- },
- "mathlib_searches": [],
- "mathlib_match": null,
- "status": "split",
- "merged_into": null,
- "import_flags": [],
- "blueprint_kind": "lemma",
- "blueprint_order": 717,
- "blueprint_uses": [
-  "def-sc-curves",
-  "def-sc-genus",
-  "def-sc-pic0",
-  "lem-sc-canonical-degree",
-  "lem-sc-negative-degree-no-sections",
-  "lem-sc-riemann-roch",
-  "thm-sc-serre-duality-curve"
- ],
- "uses_not_cited": [
-  "def-sc-curves"
- ],
- "proof_split_by": "paragraphs",
- "lean_audit": {
-  "master": {
-   "state": "none",
-   "decls": [],
-   "missing": []
+    "place": "## Proof"
   },
-  "slopmaster2": {
-   "state": "rests_on_sorry",
-   "decls": [
-    {
-     "name": "AlgebraicGeometry.Scheme.finrankH_zero_eq",
-     "module": "WeilConjectures.AlgebraicGeometry.Curve.RiemannRoch",
-     "lines": [
-      1392,
-      1403
-     ],
-     "kind": "theorem",
-     "sorry": false
+  "mathlib_searches": [],
+  "mathlib_match": null,
+  "status": "split",
+  "merged_into": null,
+  "import_flags": [],
+  "blueprint_kind": "lemma",
+  "blueprint_order": 717,
+  "blueprint_uses": [
+    "def-sc-curves",
+    "def-sc-genus",
+    "def-sc-pic0",
+    "lem-sc-canonical-degree",
+    "lem-sc-negative-degree-no-sections",
+    "lem-sc-riemann-roch",
+    "thm-sc-serre-duality-curve"
+  ],
+  "uses_not_cited": [
+    "def-sc-curves"
+  ],
+  "proof_split_by": "paragraphs",
+  "lean_audit": {
+    "master": {
+      "state": "none",
+      "decls": [],
+      "missing": []
+    },
+    "slopmaster2": {
+      "state": "rests_on_sorry",
+      "decls": [
+        {
+          "name": "AlgebraicGeometry.Scheme.finrankH_zero_eq",
+          "module": "WeilConjectures.AlgebraicGeometry.Curve.RiemannRoch",
+          "lines": [
+            1392,
+            1403
+          ],
+          "kind": "theorem",
+          "sorry": false
+        }
+      ],
+      "missing": [],
+      "open": [
+        {
+          "name": "AlgebraicGeometry.ProjectiveSpace.subsingleton_H_of_lt",
+          "module": "WeilConjectures.AlgebraicGeometry.Cohomology.Serre",
+          "lines": [
+            116,
+            127
+          ],
+          "kind": "theorem",
+          "nodes": [],
+          "below": false
+        },
+        {
+          "name": "AlgebraicGeometry.Scheme.Modules.IsFiniteLocallyFree.dual",
+          "module": "WeilConjectures.AlgebraicGeometry.Modules.Dual",
+          "lines": [
+            178,
+            182
+          ],
+          "kind": "theorem",
+          "nodes": [],
+          "below": false
+        },
+        {
+          "name": "AlgebraicGeometry.Scheme.Modules.IsFiniteLocallyFree.tensorObj",
+          "module": "WeilConjectures.AlgebraicGeometry.Modules.Dual",
+          "lines": [
+            184,
+            188
+          ],
+          "kind": "theorem",
+          "nodes": [],
+          "below": false
+        },
+        {
+          "name": "AlgebraicGeometry.Scheme.Modules.exists_addEquiv_sections_higherDirectImage_H",
+          "module": "WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage",
+          "lines": [
+            307,
+            324
+          ],
+          "kind": "theorem",
+          "nodes": [],
+          "below": false
+        },
+        {
+          "name": "AlgebraicGeometry.Scheme.Modules.finite_sections_higherDirectImage",
+          "module": "WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage",
+          "lines": [
+            617,
+            632
+          ],
+          "kind": "theorem",
+          "nodes": [],
+          "below": false
+        },
+        {
+          "name": "AlgebraicGeometry.Scheme.Modules.isQuasicoherent_higherDirectImage",
+          "module": "WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage",
+          "lines": [
+            467,
+            474
+          ],
+          "kind": "theorem",
+          "nodes": [],
+          "below": false
+        },
+        {
+          "name": "AlgebraicGeometry.Scheme.Modules.nonempty_iso_dual_tensorObj_dual_tensorObj",
+          "module": "WeilConjectures.AlgebraicGeometry.Modules.Dual",
+          "lines": [
+            204,
+            214
+          ],
+          "kind": "theorem",
+          "nodes": [],
+          "below": false
+        },
+        {
+          "name": "AlgebraicGeometry.Scheme.Modules.subsingleton_H_of_topologicalKrullDim_lt",
+          "module": "WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar",
+          "lines": [
+            64,
+            73
+          ],
+          "kind": "theorem",
+          "nodes": [],
+          "below": false
+        },
+        {
+          "name": "AlgebraicGeometry.Scheme.exists_isIso_pushforwardHomObjComparison_unit",
+          "module": "WeilConjectures.AlgebraicGeometry.Curve.SerreDuality",
+          "lines": [
+            527,
+            541
+          ],
+          "kind": "theorem",
+          "nodes": [],
+          "below": false
+        }
+      ]
     }
-   ],
-   "missing": [],
-   "open": [
-    {
-     "name": "AlgebraicGeometry.ProjectiveSpace.subsingleton_H_of_lt",
-     "module": "WeilConjectures.AlgebraicGeometry.Cohomology.Serre",
-     "lines": [
-      116,
-      127
-     ],
-     "kind": "theorem",
-     "nodes": [],
-     "below": false
-    },
-    {
-     "name": "AlgebraicGeometry.Scheme.Modules.IsFiniteLocallyFree.dual",
-     "module": "WeilConjectures.AlgebraicGeometry.Modules.Dual",
-     "lines": [
-      178,
-      182
-     ],
-     "kind": "theorem",
-     "nodes": [],
-     "below": false
-    },
-    {
-     "name": "AlgebraicGeometry.Scheme.Modules.IsFiniteLocallyFree.tensorObj",
-     "module": "WeilConjectures.AlgebraicGeometry.Modules.Dual",
-     "lines": [
-      184,
-      188
-     ],
-     "kind": "theorem",
-     "nodes": [],
-     "below": false
-    },
-    {
-     "name": "AlgebraicGeometry.Scheme.Modules.exists_addEquiv_sections_higherDirectImage_H",
-     "module": "WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage",
-     "lines": [
-      307,
-      324
-     ],
-     "kind": "theorem",
-     "nodes": [],
-     "below": false
-    },
-    {
-     "name": "AlgebraicGeometry.Scheme.Modules.finite_sections_higherDirectImage",
-     "module": "WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage",
-     "lines": [
-      617,
-      632
-     ],
-     "kind": "theorem",
-     "nodes": [],
-     "below": false
-    },
-    {
-     "name": "AlgebraicGeometry.Scheme.Modules.isQuasicoherent_higherDirectImage",
-     "module": "WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage",
-     "lines": [
-      467,
-      474
-     ],
-     "kind": "theorem",
-     "nodes": [],
-     "below": false
-    },
-    {
-     "name": "AlgebraicGeometry.Scheme.Modules.nonempty_iso_dual_tensorObj_dual_tensorObj",
-     "module": "WeilConjectures.AlgebraicGeometry.Modules.Dual",
-     "lines": [
-      204,
-      214
-     ],
-     "kind": "theorem",
-     "nodes": [],
-     "below": false
-    },
-    {
-     "name": "AlgebraicGeometry.Scheme.Modules.subsingleton_H_of_topologicalKrullDim_lt",
-     "module": "WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar",
-     "lines": [
-      64,
-      73
-     ],
-     "kind": "theorem",
-     "nodes": [],
-     "below": false
-    },
-    {
-     "name": "AlgebraicGeometry.Scheme.exists_isIso_pushforwardHomObjComparison_unit",
-     "module": "WeilConjectures.AlgebraicGeometry.Curve.SerreDuality",
-     "lines": [
-      527,
-      541
-     ],
-     "kind": "theorem",
-     "nodes": [],
-     "below": false
-    }
-   ]
+  },
+  "chapter": "sec-picard-framework",
+  "unit": "sk-thm-picard-rr",
+  "split_report": {
+    "date": "2026-10-10",
+    "item": "lem-sc-riemann-roch-large-degree",
+    "worker": "stage1",
+    "summary": "Expanded the large-degree argument into the duality, canonical-degree, negative-degree and Riemann-Roch steps. The imported negative-degree citation has a false disconnected formulation, so the proof derives the needed connected case directly from rational sections and effective divisors. Checked the formulas against Stacks Tags 0BS2 and 0BS6 and the unit's Riemann-Roch route.",
+    "blueprint": "The four steps realize the first, second and final paragraphs of this blueprint node's proof, including its appeal to negative-degree vanishing and its final Riemann-Roch calculation."
+  },
+  "reviewed": {
+    "date": "2026-10-10",
+    "by": "L",
+    "reviewer": "R-rrld",
+    "group": "E1",
+    "result": "pass",
+    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-rrld (reviewer sub-agent of L); spot-checked: Source: Stacks 0BS6 (curves-lemma-rr: chi(L)=d+1-g, deg omega=2g-2, duality) and 0BS2 (curves-lemma-duality-dim-1, omega=Omega for smooth relative dimension one); blueprint node lem-sc-riemann-roch-large-degree.md read; statement unchanged and agrees (k alg. closed, C proper smooth connected, L invertible, d>=2g-1; H^1=0 and h^0=d+1-g). Step 1: def-sc-curves (connected curve has dimension one, so n=1) and thm-sc-serre-duality-curve (its invertible n=1 case gives H^1(L)^dual = H^0(Omega tensor L^{-1}), finite-dimensionality, vanishing outside 0..n). Step 2: lem-sc-canonical-degree (Omega=O(K), deg 2g-2), lem-sc-invertible-dual (L^dual invertible, L tensor L^dual = O, so inverse class), def-sc-pic0 (deg a homomorphism on Pic); 2g-2-d<=-1. Step 3 (replaces lem-sc-negative-degree-no-sections, which omits connectedness and is false on P^1 disjoint union P^1 with O(1),O(-2), as the report says): lem-sc-invertible-module-generic-stalk (3) with U=C gives s_eta nonzero and in lambda_P(M_P), so g_P in O_{C,P} and ord_P>=0 by def-sc-rational-section-divisor; D effective so deg D>=0 by def-sc-divisor; lem-sc-line-bundle-rational-section gives M = O(D), def-sc-pic0 gives deg M = deg D; contradiction. Integrality from the smooth connected hypothesis as stated in the cited nodes. Step 4: duality plus finite dimension gives H^1=0, higher vanishing, lem-sc-riemann-roch (1). Route: all off-unit nodes are in sk-def-av-pic or sk-thm-picard-duality, which the unit cites; the unit sketch itself uses the divisor of a rational section. B10: slopmaster2 finrankH_zero_eq (RiemannRoch.lean:1392-1403) uses Modules.degree defined as chi(L)-chi(O) (EulerChar.lean:161-170), not the divisor degree, and lean_audit records rests_on_sorry, so no attachment. No new nodes, no Mathlib leaves. Small cases: g=0,d=-1 (h^0=0 on P^1), g=1,d=1 (h^0=1), d=2g-1 boundary. Review 14:00-14:02 UTC."
+  },
+  "lean": {
+    "module": "WeilConjectures.AlgebraicGeometry.Curve.RiemannRoch",
+    "declaration": "AlgebraicGeometry.Scheme.finrankH_zero_eq",
+    "branch": "slopmaster2",
+    "line": 1392,
+    "declarations": [
+      "AlgebraicGeometry.Scheme.finrankH_zero_eq"
+    ],
+    "sorry_free": false,
+    "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state rests_on_sorry)"
   }
- },
- "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-rr",
- "split_report": {
-  "date": "2026-10-10",
-  "item": "lem-sc-riemann-roch-large-degree",
-  "worker": "stage1",
-  "summary": "Expanded the large-degree argument into the duality, canonical-degree, negative-degree and Riemann-Roch steps. The imported negative-degree citation has a false disconnected formulation, so the proof derives the needed connected case directly from rational sections and effective divisors. Checked the formulas against Stacks Tags 0BS2 and 0BS6 and the unit's Riemann-Roch route.",
-  "blueprint": "The four steps realize the first, second and final paragraphs of this blueprint node's proof, including its appeal to negative-degree vanishing and its final Riemann-Roch calculation."
- },
- "reviewed": {
-  "date": "2026-10-10",
-  "by": "L",
-  "reviewer": "R-rrld",
-  "group": "E1",
-  "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-rrld (reviewer sub-agent of L); spot-checked: Source: Stacks 0BS6 (curves-lemma-rr: chi(L)=d+1-g, deg omega=2g-2, duality) and 0BS2 (curves-lemma-duality-dim-1, omega=Omega for smooth relative dimension one); blueprint node lem-sc-riemann-roch-large-degree.md read; statement unchanged and agrees (k alg. closed, C proper smooth connected, L invertible, d>=2g-1; H^1=0 and h^0=d+1-g). Step 1: def-sc-curves (connected curve has dimension one, so n=1) and thm-sc-serre-duality-curve (its invertible n=1 case gives H^1(L)^dual = H^0(Omega tensor L^{-1}), finite-dimensionality, vanishing outside 0..n). Step 2: lem-sc-canonical-degree (Omega=O(K), deg 2g-2), lem-sc-invertible-dual (L^dual invertible, L tensor L^dual = O, so inverse class), def-sc-pic0 (deg a homomorphism on Pic); 2g-2-d<=-1. Step 3 (replaces lem-sc-negative-degree-no-sections, which omits connectedness and is false on P^1 disjoint union P^1 with O(1),O(-2), as the report says): lem-sc-invertible-module-generic-stalk (3) with U=C gives s_eta nonzero and in lambda_P(M_P), so g_P in O_{C,P} and ord_P>=0 by def-sc-rational-section-divisor; D effective so deg D>=0 by def-sc-divisor; lem-sc-line-bundle-rational-section gives M = O(D), def-sc-pic0 gives deg M = deg D; contradiction. Integrality from the smooth connected hypothesis as stated in the cited nodes. Step 4: duality plus finite dimension gives H^1=0, higher vanishing, lem-sc-riemann-roch (1). Route: all off-unit nodes are in sk-def-av-pic or sk-thm-picard-duality, which the unit cites; the unit sketch itself uses the divisor of a rational section. B10: slopmaster2 finrankH_zero_eq (RiemannRoch.lean:1392-1403) uses Modules.degree defined as chi(L)-chi(O) (EulerChar.lean:161-170), not the divisor degree, and lean_audit records rests_on_sorry, so no attachment. No new nodes, no Mathlib leaves. Small cases: g=0,d=-1 (h^0=0 on P^1), g=1,d=1 (h^0=1), d=2g-1 boundary. Review 14:00-14:02 UTC."
- }
 }

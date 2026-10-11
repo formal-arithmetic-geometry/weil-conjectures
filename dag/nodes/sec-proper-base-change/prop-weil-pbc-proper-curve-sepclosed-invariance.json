@@ -1,223 +1,227 @@
 {
- "id": "prop-weil-pbc-proper-curve-sepclosed-invariance",
- "blueprint": {
-  "is": "prop-weil-pbc-proper-curve-sepclosed-invariance",
-  "from": null,
-  "same_as": null
- },
- "kind": "statement",
- "title": "Proper curve invariance over separably closed fields",
- "statement": "Let $k\\subseteq k'$ be an extension of separably closed fields [def-pc-separably-closed], and let $\\iota:\\operatorname{Spec}k'\\to\\operatorname{Spec}k$ be the induced morphism of spectra [def-weil-affine-spectrum]. Let $C$ be a scheme over $k$ [def-weil-scheme-over-base] whose structure morphism $f:C\\to\\operatorname{Spec}k$ is proper [def-weil-proper-morphism] and whose underlying topological space has Krull dimension $\\dim C\\le1$ [def-kun-topological-krull-dimension] (the empty scheme is allowed). Let $C_{k'}=C\\times_{\\operatorname{Spec}k}\\operatorname{Spec}k'$ be the base change of $C$ along $\\iota$ [def-pc-base-change], with projection $\\pi:C_{k'}\\to C$. Let $F$ be a torsion abelian sheaf on the small etale site $C_{\\Et}$ [def-weil-pbc-torsion-etale-sheaf], and write $F|_{C_{k'}}=\\pi^{-1}F$ for its inverse image [def-weil-pbc-inverse-image]. Then for every $q\\ge0$ the pullback map along $\\pi$ [def-weil-pbc-cohomology-pullback]\n\n$$\n \\pi^*:H^q(C_{\\Et},F)\\longrightarrow H^q((C_{k'})_{\\Et},\\pi^{-1}F)\n$$\n\nbetween the etale cohomology groups [def-weil-pbc-etale-cohomology] is an isomorphism.",
- "source": {
-  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-p1/prop-weil-pbc-proper-curve-sepclosed-invariance.md",
-  "place": "node prop-weil-pbc-proper-curve-sepclosed-invariance, order 1182",
-  "external": [
-   {
-    "document": "Stacks Project",
-    "place": "Tag 03SC"
-   },
-   {
-    "document": "Stacks Project",
-    "place": "Tag 0A5E (etale-cohomology.tex, lemma-base-change-dim-1-separably-closed), the statement of this node; Tag 03SC is the algebraically closed case it uses"
-   }
-  ]
- },
- "stmt_deps": [
-  "def-pc-separably-closed",
-  "def-weil-affine-spectrum",
-  "def-weil-scheme-over-base",
-  "def-weil-proper-morphism",
-  "def-kun-topological-krull-dimension",
-  "def-pc-base-change",
-  "def-weil-pbc-torsion-etale-sheaf",
-  "def-weil-pbc-inverse-image",
-  "def-weil-pbc-cohomology-pullback",
-  "def-weil-pbc-etale-cohomology"
- ],
- "proof": [
-  {
-   "text": "The algebraically closed case. By [prop-weil-pbc-algebraically-closed-extension] (Stacks Theorem 03SC, item (7), which the proof of Lemma 0A5E invokes: 'We have seen this for algebraically closed fields in Theorem 03SC'), the following holds: (H) for every extension $K\\subseteq K'$ of algebraically closed fields, every scheme $D$ proper over $K$ with $\\dim D\\le1$, and every torsion abelian sheaf $G$ on $D_{\\Et}$, the pullback $H^q(D_{\\Et},G)\\to H^q((D_{K'})_{\\Et},G|_{D_{K'}})$ along the projection $D_{K'}=D\\times_{\\operatorname{Spec}K}\\operatorname{Spec}K'\\to D$ is an isomorphism for every $q\\ge0$. Statement (H) is exactly the hypothesis of the passage lemma used in the next step (in the Lean, the argument `H` of `bijective_cohomologyMap_of_isSepClosed_of_isAlgClosed`, supplied by `bijective_cohomologyMap_of_isAlgClosed`).",
-   "uses": [
-    "prop-weil-pbc-algebraically-closed-extension"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma 0A5E, proof, first sentence; Theorem 03SC (theorem-vanishing-affine-curves), item (7)"
-   }
+  "id": "prop-weil-pbc-proper-curve-sepclosed-invariance",
+  "blueprint": {
+    "is": "prop-weil-pbc-proper-curve-sepclosed-invariance",
+    "from": null,
+    "same_as": null
   },
-  {
-   "text": "Passage to separably closed fields. Apply [lemma-weil-pbc-curve-separably-closed-passage] to the extension $k\\subseteq k'$ of separably closed fields, the proper scheme $C$ of dimension $\\le1$ over $k$ and the torsion sheaf $F$, with hypothesis (H) of the previous step. It gives that the pullback $\\pi^*:H^q(C_{\\Et},F)\\to H^q((C_{k'})_{\\Et},\\pi^{-1}F)$ along the projection $\\pi:C_{k'}\\to C$ is an isomorphism for every $q\\ge0$, which is the claim. (That lemma carries the rest of the proof of Lemma 0A5E: choose algebraic closures $k\\subseteq\\bar k$, $k'\\subseteq\\bar k'$ and an embedding $\\bar k\\to\\bar k'$ extending $k\\to k'$; $\\bar k/k$ and $\\bar k'/k'$ are algebraic and purely inseparable because $k,k'$ are separably closed; hence $C_{\\bar k}\\to C$ and $C_{\\bar k'}\\to C_{k'}$ are universal homeomorphisms and induce isomorphisms on etale cohomology (Stacks Proposition 03SI (3)); the square of pullback maps between $H^q(C,F)$, $H^q(C_{k'},F|)$, $H^q(C_{\\bar k},F|)$, $H^q(C_{\\bar k'},F|)$ commutes since both composites are the pullback along the same composite morphism $C_{\\bar k'}\\to C$, and its bottom row is an isomorphism by (H).)",
-   "uses": [
-    "lemma-weil-pbc-curve-separably-closed-passage"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma 0A5E, proof (diagram of algebraic closures; Proposition 03SI, proposition-topological-invariance)"
-   }
-  }
- ],
- "proof_deps": [
-  "prop-weil-pbc-algebraically-closed-extension",
-  "lemma-weil-pbc-curve-separably-closed-passage"
- ],
- "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Lemma 0A5E (lemma-base-change-dim-1-separably-closed), proof"
- },
- "mathlib_searches": [
-  {
-   "tool": "leansearch",
-   "query": "etale cohomology of a proper curve is invariant under extension of separably closed base field",
-   "results": "Algebra.Etale.baseChange, IsSepClosure.recOn, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.IsProper.isStableUnderBaseChange, separableClosure (none about etale cohomology)",
-   "date": "2026-10-09",
-   "verdict": "no match"
+  "kind": "statement",
+  "title": "Proper curve invariance over separably closed fields",
+  "statement": "Let $k\\subseteq k'$ be an extension of separably closed fields [def-pc-separably-closed], and let $\\iota:\\operatorname{Spec}k'\\to\\operatorname{Spec}k$ be the induced morphism of spectra [def-weil-affine-spectrum]. Let $C$ be a scheme over $k$ [def-weil-scheme-over-base] whose structure morphism $f:C\\to\\operatorname{Spec}k$ is proper [def-weil-proper-morphism] and whose underlying topological space has Krull dimension $\\dim C\\le1$ [def-kun-topological-krull-dimension] (the empty scheme is allowed). Let $C_{k'}=C\\times_{\\operatorname{Spec}k}\\operatorname{Spec}k'$ be the base change of $C$ along $\\iota$ [def-pc-base-change], with projection $\\pi:C_{k'}\\to C$. Let $F$ be a torsion abelian sheaf on the small etale site $C_{\\Et}$ [def-weil-pbc-torsion-etale-sheaf], and write $F|_{C_{k'}}=\\pi^{-1}F$ for its inverse image [def-weil-pbc-inverse-image]. Then for every $q\\ge0$ the pullback map along $\\pi$ [def-weil-pbc-cohomology-pullback]\n\n$$\n \\pi^*:H^q(C_{\\Et},F)\\longrightarrow H^q((C_{k'})_{\\Et},\\pi^{-1}F)\n$$\n\nbetween the etale cohomology groups [def-weil-pbc-etale-cohomology] is an isomorphism.",
+  "source": {
+    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-p1/prop-weil-pbc-proper-curve-sepclosed-invariance.md",
+    "place": "node prop-weil-pbc-proper-curve-sepclosed-invariance, order 1182",
+    "external": [
+      {
+        "document": "Stacks Project",
+        "place": "Tag 03SC"
+      },
+      {
+        "document": "Stacks Project",
+        "place": "Tag 0A5E (etale-cohomology.tex, lemma-base-change-dim-1-separably-closed), the statement of this node; Tag 03SC is the algebraically closed case it uses"
+      }
+    ]
   },
-  {
-   "tool": "leanfinder",
-   "query": "For an extension of separably closed fields k ⊆ k' and a proper scheme C of dimension at most one over k, the pullback on étale cohomology H^q(C,F) → H^q(C_{k'},F) is an isomorphism for torsion sheaves F",
-   "results": "AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.Scheme.instHasPullbacksEtale, Algebra.FormallyEtale.iff_exists_algEquiv_prod, Algebra.Etale.iff_exists_algEquiv_prod, ... (no cohomology statement)",
-   "date": "2026-10-09",
-   "verdict": "no match"
-  },
-  {
-   "tool": "loogle",
-   "query": "AlgebraicGeometry.Scheme.smallEtaleTopology, IsSepClosed",
-   "results": "only AlgebraicGeometry.Scheme.pointSmallEtale and its lemmas (Mathlib.AlgebraicGeometry.Sites.EtalePoint): points of the small etale site, nothing on cohomology",
-   "date": "2026-10-09",
-   "verdict": "no match"
-  },
-  {
-   "tool": "grep",
-   "query": "grep -rln 'smallEtaleTopology|etaleCohomology|IsSepClosed' Mathlib/AlgebraicGeometry; ls Mathlib/AlgebraicGeometry/Sites/",
-   "results": "Sites/Etale.lean, Sites/EtalePoint.lean, Sites/AffineEtale.lean define the small etale site and its points; Sites/ElladicCohomology.lean uses Sheaf.H for pro-etale cohomology; no base-change or field-extension invariance of etale cohomology, no topological invariance",
-   "date": "2026-10-09",
-   "verdict": "no match"
-  }
- ],
- "mathlib_match": null,
- "status": "split",
- "merged_into": null,
- "import_flags": [
-  "detailed_form",
-  "two_proofs"
- ],
- "blueprint_kind": "theorem",
- "blueprint_order": 1182,
- "blueprint_uses": [
-  "def-weil-pbc-etale-sheaves",
-  "def-weil-pbc-scheme-conventions",
-  "lemma-weil-pbc-curve-constructible-primary-reduction",
-  "lemma-weil-pbc-curve-dense-open-reduction",
-  "lemma-weil-pbc-curve-locally-constant-reduction",
-  "lemma-weil-pbc-curve-normalization-constant",
-  "lemma-weil-pbc-curve-separably-closed-passage",
-  "lemma-weil-pbc-finite-pushforward-extension-zero",
-  "lemma-weil-pbc-universal-homeomorphism-coverings",
-  "lemma-weil-pbc-universal-homeomorphism-site-equivalence",
-  "prop-weil-pbc-algebraically-closed-extension",
-  "thm-weil-pbc-universal-homeomorphism-invariance"
- ],
- "blueprint_tags": [
-  "latex:proposition"
- ],
- "uses_not_cited": [
-  "def-weil-pbc-etale-sheaves",
-  "def-weil-pbc-scheme-conventions",
-  "lemma-weil-pbc-curve-constructible-primary-reduction",
-  "lemma-weil-pbc-curve-dense-open-reduction",
-  "lemma-weil-pbc-curve-locally-constant-reduction",
-  "lemma-weil-pbc-curve-normalization-constant",
-  "lemma-weil-pbc-curve-separably-closed-passage",
-  "lemma-weil-pbc-finite-pushforward-extension-zero",
-  "lemma-weil-pbc-universal-homeomorphism-coverings",
-  "lemma-weil-pbc-universal-homeomorphism-site-equivalence",
-  "thm-weil-pbc-universal-homeomorphism-invariance"
- ],
- "proof_split_by": "paragraphs",
- "blueprint_sketch": [
-  {
-   "statement": "Let $k\\subseteq k'$ be separably closed fields, $C$ a proper $k$-scheme of\ndimension at most one, and $F$ a torsion etale sheaf. Then\n\n$$\nH^q(C,F)\\xrightarrow{\\sim}H^q(C_{k'},F|)\n$$\n\nfor every $q$.",
-   "proof": "First assume both fields algebraically closed. Apply constructible/primary\nreduction. The closed immersion $C_{\\mathrm{red}}\\to C$ is a universal\nhomeomorphism, so the explicit site equivalence first replaces $C$ by its\nreduction. Then apply dense-open localization, the prime-to-$\\ell$ trace\nsplitting, the\nfinite-pushforward comparison, and the normalized smooth constant calculation\nin that order. Every step commutes with field extension, giving the result.\nFor separably closed $k\\subseteq k'$, apply Lemma\n[lemma-weil-pbc-curve-separably-closed-passage] to the algebraically\nclosed result just proved. Its commutative rectangle identifies the\nresulting isomorphism with the specified restriction map. This expands Tags\n`03SC` and `0A5E`.",
-   "cites": [
-    "lemma-weil-pbc-curve-separably-closed-passage"
-   ]
-  }
- ],
- "lean_audit": {
-  "master": {
-   "state": "none",
-   "decls": [],
-   "missing": [
-    "AlgebraicGeometry.IsCurve.bijective_cohomologyMap_of_isSepClosed"
-   ]
-  },
-  "slopmaster2": {
-   "state": "rests_on_sorry",
-   "decls": [
+  "stmt_deps": [
+    "def-pc-separably-closed",
+    "def-weil-affine-spectrum",
+    "def-weil-scheme-over-base",
+    "def-weil-proper-morphism",
+    "def-kun-topological-krull-dimension",
+    "def-pc-base-change",
+    "def-weil-pbc-torsion-etale-sheaf",
+    "def-weil-pbc-inverse-image",
+    "def-weil-pbc-cohomology-pullback",
+    "def-weil-pbc-etale-cohomology"
+  ],
+  "proof": [
     {
-     "name": "AlgebraicGeometry.IsCurve.bijective_cohomologyMap_of_isSepClosed",
-     "module": "WeilConjectures.AlgebraicGeometry.Curve.FieldExtension",
-     "lines": [
-      136,
-      164
-     ],
-     "kind": "theorem",
-     "sorry": false
-    }
-   ],
-   "missing": [],
-   "open": [
-    {
-     "name": "AlgebraicGeometry.IsCurve.bijective_cohomologyMap_of_isAlgClosed",
-     "module": "WeilConjectures.AlgebraicGeometry.Curve.FieldExtension",
-     "lines": [
-      69,
-      95
-     ],
-     "kind": "theorem",
-     "nodes": [
-      "prop-weil-pbc-algebraically-closed-extension"
-     ],
-     "below": true
+      "text": "The algebraically closed case. By [prop-weil-pbc-algebraically-closed-extension] (Stacks Theorem 03SC, item (7), which the proof of Lemma 0A5E invokes: 'We have seen this for algebraically closed fields in Theorem 03SC'), the following holds: (H) for every extension $K\\subseteq K'$ of algebraically closed fields, every scheme $D$ proper over $K$ with $\\dim D\\le1$, and every torsion abelian sheaf $G$ on $D_{\\Et}$, the pullback $H^q(D_{\\Et},G)\\to H^q((D_{K'})_{\\Et},G|_{D_{K'}})$ along the projection $D_{K'}=D\\times_{\\operatorname{Spec}K}\\operatorname{Spec}K'\\to D$ is an isomorphism for every $q\\ge0$. Statement (H) is exactly the hypothesis of the passage lemma used in the next step (in the Lean, the argument `H` of `bijective_cohomologyMap_of_isSepClosed_of_isAlgClosed`, supplied by `bijective_cohomologyMap_of_isAlgClosed`).",
+      "uses": [
+        "prop-weil-pbc-algebraically-closed-extension"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/etale-cohomology.tex",
+        "place": "Lemma 0A5E, proof, first sentence; Theorem 03SC (theorem-vanishing-affine-curves), item (7)"
+      }
     },
     {
-     "name": "AlgebraicGeometry.IsCurve.bijective_cohomologyMap_of_isSepClosed_of_isAlgClosed",
-     "module": "WeilConjectures.AlgebraicGeometry.Curve.FieldExtension",
-     "lines": [
-      97,
-      134
-     ],
-     "kind": "theorem",
-     "nodes": [
-      "lemma-weil-pbc-curve-separably-closed-passage"
-     ],
-     "below": true
+      "text": "Passage to separably closed fields. Apply [lemma-weil-pbc-curve-separably-closed-passage] to the extension $k\\subseteq k'$ of separably closed fields, the proper scheme $C$ of dimension $\\le1$ over $k$ and the torsion sheaf $F$, with hypothesis (H) of the previous step. It gives that the pullback $\\pi^*:H^q(C_{\\Et},F)\\to H^q((C_{k'})_{\\Et},\\pi^{-1}F)$ along the projection $\\pi:C_{k'}\\to C$ is an isomorphism for every $q\\ge0$, which is the claim. (That lemma carries the rest of the proof of Lemma 0A5E: choose algebraic closures $k\\subseteq\\bar k$, $k'\\subseteq\\bar k'$ and an embedding $\\bar k\\to\\bar k'$ extending $k\\to k'$; $\\bar k/k$ and $\\bar k'/k'$ are algebraic and purely inseparable because $k,k'$ are separably closed; hence $C_{\\bar k}\\to C$ and $C_{\\bar k'}\\to C_{k'}$ are universal homeomorphisms and induce isomorphisms on etale cohomology (Stacks Proposition 03SI (3)); the square of pullback maps between $H^q(C,F)$, $H^q(C_{k'},F|)$, $H^q(C_{\\bar k},F|)$, $H^q(C_{\\bar k'},F|)$ commutes since both composites are the pullback along the same composite morphism $C_{\\bar k'}\\to C$, and its bottom row is an isomorphism by (H).)",
+      "uses": [
+        "lemma-weil-pbc-curve-separably-closed-passage"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/etale-cohomology.tex",
+        "place": "Lemma 0A5E, proof (diagram of algebraic closures; Proposition 03SI, proposition-topological-invariance)"
+      }
     }
-   ]
-  }
- },
- "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1",
- "lean": {
-  "branch": "slopmaster2",
-  "declarations": [
-   "AlgebraicGeometry.IsCurve.bijective_cohomologyMap_of_isSepClosed"
   ],
-  "note": "attached by the lead at review (2026-10-09), found by the opus worker of prop-weil-pbc-projective-line; the Lean of the unit sk-thm-p1 is stated for complexes with torsion cohomology and any coefficient ring (stronger than the node); exists_addEquiv... is a weaker existential form of the stalk identification"
- },
- "split_report": {
-  "date": "2026-10-09",
-  "item": "prop-weil-pbc-proper-curve-sepclosed-invariance",
-  "worker": "stage1",
-  "summary": "Statement made precise after Stacks Lemma 0A5E: separably closed k ⊆ k', C proper over k with topological Krull dimension ≤ 1, F torsion abelian sheaf, the map is the pullback of def-weil-pbc-cohomology-pullback along the projection C_{k'} → C; the grab-bag stmt_deps def-weil-pbc-etale-sheaves and def-weil-pbc-scheme-conventions replaced by the leaves and definitions used (separably closed, Spec, scheme over a base, proper, Krull dimension, base change, torsion sheaf, inverse image, cohomology pullback, etale cohomology). Proof follows the Lean (bijective_cohomologyMap_of_isSepClosed) and Stacks 0A5E: step 1 the algebraically closed case prop-weil-pbc-algebraically-closed-extension (03SC (7)) gives the hypothesis H, step 2 the passage lemma lemma-weil-pbc-curve-separably-closed-passage (the open sorry ..._of_isSepClosed_of_isAlgClosed) concludes. Of the ten imported proof_deps only these two are real dependencies; the five curve reductions (constructible-primary, dense-open, locally-constant, normalization-constant, finite-pushforward-extension-zero) belong to the algebraically closed case, and the universal-homeomorphism nodes (coverings, site-equivalence, thm-weil-pbc-universal-homeomorphism-invariance) belong to the passage lemma; all dropped here as pointers. Source and proof_origin repointed from the blueprint to Stacks 0A5E. Mathlib searched three ways: no match."
- },
- "reviewed": {
-  "date": "2026-10-09",
-  "by": "L",
-  "result": "pass",
-  "note": "statement aligned with Stacks 0A5E and the Lean; eight pointer dependencies dropped, three nodes thereby unreached and flagged"
- }
+  "proof_deps": [
+    "prop-weil-pbc-algebraically-closed-extension",
+    "lemma-weil-pbc-curve-separably-closed-passage"
+  ],
+  "proof_origin": {
+    "by": "document",
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma 0A5E (lemma-base-change-dim-1-separably-closed), proof"
+  },
+  "mathlib_searches": [
+    {
+      "tool": "leansearch",
+      "query": "etale cohomology of a proper curve is invariant under extension of separably closed base field",
+      "results": "Algebra.Etale.baseChange, IsSepClosure.recOn, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.IsProper.isStableUnderBaseChange, separableClosure (none about etale cohomology)",
+      "date": "2026-10-09",
+      "verdict": "no match"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "For an extension of separably closed fields k ⊆ k' and a proper scheme C of dimension at most one over k, the pullback on étale cohomology H^q(C,F) → H^q(C_{k'},F) is an isomorphism for torsion sheaves F",
+      "results": "AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.Scheme.instHasPullbacksEtale, Algebra.FormallyEtale.iff_exists_algEquiv_prod, Algebra.Etale.iff_exists_algEquiv_prod, ... (no cohomology statement)",
+      "date": "2026-10-09",
+      "verdict": "no match"
+    },
+    {
+      "tool": "loogle",
+      "query": "AlgebraicGeometry.Scheme.smallEtaleTopology, IsSepClosed",
+      "results": "only AlgebraicGeometry.Scheme.pointSmallEtale and its lemmas (Mathlib.AlgebraicGeometry.Sites.EtalePoint): points of the small etale site, nothing on cohomology",
+      "date": "2026-10-09",
+      "verdict": "no match"
+    },
+    {
+      "tool": "grep",
+      "query": "grep -rln 'smallEtaleTopology|etaleCohomology|IsSepClosed' Mathlib/AlgebraicGeometry; ls Mathlib/AlgebraicGeometry/Sites/",
+      "results": "Sites/Etale.lean, Sites/EtalePoint.lean, Sites/AffineEtale.lean define the small etale site and its points; Sites/ElladicCohomology.lean uses Sheaf.H for pro-etale cohomology; no base-change or field-extension invariance of etale cohomology, no topological invariance",
+      "date": "2026-10-09",
+      "verdict": "no match"
+    }
+  ],
+  "mathlib_match": null,
+  "status": "split",
+  "merged_into": null,
+  "import_flags": [
+    "detailed_form",
+    "two_proofs"
+  ],
+  "blueprint_kind": "theorem",
+  "blueprint_order": 1182,
+  "blueprint_uses": [
+    "def-weil-pbc-etale-sheaves",
+    "def-weil-pbc-scheme-conventions",
+    "lemma-weil-pbc-curve-constructible-primary-reduction",
+    "lemma-weil-pbc-curve-dense-open-reduction",
+    "lemma-weil-pbc-curve-locally-constant-reduction",
+    "lemma-weil-pbc-curve-normalization-constant",
+    "lemma-weil-pbc-curve-separably-closed-passage",
+    "lemma-weil-pbc-finite-pushforward-extension-zero",
+    "lemma-weil-pbc-universal-homeomorphism-coverings",
+    "lemma-weil-pbc-universal-homeomorphism-site-equivalence",
+    "prop-weil-pbc-algebraically-closed-extension",
+    "thm-weil-pbc-universal-homeomorphism-invariance"
+  ],
+  "blueprint_tags": [
+    "latex:proposition"
+  ],
+  "uses_not_cited": [
+    "def-weil-pbc-etale-sheaves",
+    "def-weil-pbc-scheme-conventions",
+    "lemma-weil-pbc-curve-constructible-primary-reduction",
+    "lemma-weil-pbc-curve-dense-open-reduction",
+    "lemma-weil-pbc-curve-locally-constant-reduction",
+    "lemma-weil-pbc-curve-normalization-constant",
+    "lemma-weil-pbc-curve-separably-closed-passage",
+    "lemma-weil-pbc-finite-pushforward-extension-zero",
+    "lemma-weil-pbc-universal-homeomorphism-coverings",
+    "lemma-weil-pbc-universal-homeomorphism-site-equivalence",
+    "thm-weil-pbc-universal-homeomorphism-invariance"
+  ],
+  "proof_split_by": "paragraphs",
+  "blueprint_sketch": [
+    {
+      "statement": "Let $k\\subseteq k'$ be separably closed fields, $C$ a proper $k$-scheme of\ndimension at most one, and $F$ a torsion etale sheaf. Then\n\n$$\nH^q(C,F)\\xrightarrow{\\sim}H^q(C_{k'},F|)\n$$\n\nfor every $q$.",
+      "proof": "First assume both fields algebraically closed. Apply constructible/primary\nreduction. The closed immersion $C_{\\mathrm{red}}\\to C$ is a universal\nhomeomorphism, so the explicit site equivalence first replaces $C$ by its\nreduction. Then apply dense-open localization, the prime-to-$\\ell$ trace\nsplitting, the\nfinite-pushforward comparison, and the normalized smooth constant calculation\nin that order. Every step commutes with field extension, giving the result.\nFor separably closed $k\\subseteq k'$, apply Lemma\n[lemma-weil-pbc-curve-separably-closed-passage] to the algebraically\nclosed result just proved. Its commutative rectangle identifies the\nresulting isomorphism with the specified restriction map. This expands Tags\n`03SC` and `0A5E`.",
+      "cites": [
+        "lemma-weil-pbc-curve-separably-closed-passage"
+      ]
+    }
+  ],
+  "lean_audit": {
+    "master": {
+      "state": "none",
+      "decls": [],
+      "missing": [
+        "AlgebraicGeometry.IsCurve.bijective_cohomologyMap_of_isSepClosed"
+      ]
+    },
+    "slopmaster2": {
+      "state": "rests_on_sorry",
+      "decls": [
+        {
+          "name": "AlgebraicGeometry.IsCurve.bijective_cohomologyMap_of_isSepClosed",
+          "module": "WeilConjectures.AlgebraicGeometry.Curve.FieldExtension",
+          "lines": [
+            136,
+            164
+          ],
+          "kind": "theorem",
+          "sorry": false
+        }
+      ],
+      "missing": [],
+      "open": [
+        {
+          "name": "AlgebraicGeometry.IsCurve.bijective_cohomologyMap_of_isAlgClosed",
+          "module": "WeilConjectures.AlgebraicGeometry.Curve.FieldExtension",
+          "lines": [
+            69,
+            95
+          ],
+          "kind": "theorem",
+          "nodes": [
+            "prop-weil-pbc-algebraically-closed-extension"
+          ],
+          "below": true
+        },
+        {
+          "name": "AlgebraicGeometry.IsCurve.bijective_cohomologyMap_of_isSepClosed_of_isAlgClosed",
+          "module": "WeilConjectures.AlgebraicGeometry.Curve.FieldExtension",
+          "lines": [
+            97,
+            134
+          ],
+          "kind": "theorem",
+          "nodes": [
+            "lemma-weil-pbc-curve-separably-closed-passage"
+          ],
+          "below": true
+        }
+      ]
+    }
+  },
+  "chapter": "sec-proper-base-change",
+  "unit": "sk-thm-p1",
+  "lean": {
+    "module": "WeilConjectures.AlgebraicGeometry.Curve.FieldExtension",
+    "declaration": "AlgebraicGeometry.IsCurve.bijective_cohomologyMap_of_isSepClosed",
+    "branch": "slopmaster2",
+    "line": 136,
+    "declarations": [
+      "AlgebraicGeometry.IsCurve.bijective_cohomologyMap_of_isSepClosed"
+    ],
+    "sorry_free": false,
+    "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state rests_on_sorry)"
+  },
+  "split_report": {
+    "date": "2026-10-09",
+    "item": "prop-weil-pbc-proper-curve-sepclosed-invariance",
+    "worker": "stage1",
+    "summary": "Statement made precise after Stacks Lemma 0A5E: separably closed k ⊆ k', C proper over k with topological Krull dimension ≤ 1, F torsion abelian sheaf, the map is the pullback of def-weil-pbc-cohomology-pullback along the projection C_{k'} → C; the grab-bag stmt_deps def-weil-pbc-etale-sheaves and def-weil-pbc-scheme-conventions replaced by the leaves and definitions used (separably closed, Spec, scheme over a base, proper, Krull dimension, base change, torsion sheaf, inverse image, cohomology pullback, etale cohomology). Proof follows the Lean (bijective_cohomologyMap_of_isSepClosed) and Stacks 0A5E: step 1 the algebraically closed case prop-weil-pbc-algebraically-closed-extension (03SC (7)) gives the hypothesis H, step 2 the passage lemma lemma-weil-pbc-curve-separably-closed-passage (the open sorry ..._of_isSepClosed_of_isAlgClosed) concludes. Of the ten imported proof_deps only these two are real dependencies; the five curve reductions (constructible-primary, dense-open, locally-constant, normalization-constant, finite-pushforward-extension-zero) belong to the algebraically closed case, and the universal-homeomorphism nodes (coverings, site-equivalence, thm-weil-pbc-universal-homeomorphism-invariance) belong to the passage lemma; all dropped here as pointers. Source and proof_origin repointed from the blueprint to Stacks 0A5E. Mathlib searched three ways: no match."
+  },
+  "reviewed": {
+    "date": "2026-10-09",
+    "by": "L",
+    "result": "pass",
+    "note": "statement aligned with Stacks 0A5E and the Lean; eight pointer dependencies dropped, three nodes thereby unreached and flagged"
+  }
 }

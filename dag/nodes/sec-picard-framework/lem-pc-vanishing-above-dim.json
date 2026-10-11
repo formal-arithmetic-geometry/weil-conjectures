@@ -1,199 +1,210 @@
 {
- "id": "lem-pc-vanishing-above-dim",
- "blueprint": {
-  "is": "lem-pc-vanishing-above-dim",
-  "from": null,
-  "same_as": []
- },
- "kind": "statement",
- "title": "Vanishing above the dimension of a curve",
- "statement": "Let $k$ be a field and let $X$ be a\ncurve over $k$ which is smooth and\nprojective. For every\nquasi-coherent $\\mathcal{O}_X$-module $\\mathcal{F}$ one has\n\n$$\nH^i(X,\\mathcal{F})=0\\qquad\\text{for all }i\\ge2 .\n$$\n\n(EGA III$_1$, (3.2.1): cohomology of a Noetherian scheme of\ndimension $d$ vanishes above $d$; here $d=1$.)",
- "source": {
-  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-twist/lem-pc-vanishing-above-dim.md",
-  "place": "node lem-pc-vanishing-above-dim, order 759",
-  "external": [
-   {
-    "document": "EGA III",
-    "place": "For every quasi-coherent $\\mathcal{O}_X$-module $\\mathcal{F}$ one has $$ H^i(X,\\mathcal{F})=0\\qquad\\text{for all }i\\ge2 . $$ (EGA III$_1$, (3.2.1): cohomology of a Noetherian scheme of dimension $d$ vanishes above $d$; here $d=1$.) *Step 1: the point $P$ and the first affine open.* The curve $X$ is proper (a projective morphism is proper, [lem-pc-projective-proper]), nonempty (an integral scheme, "
-   }
-  ]
- },
- "stmt_deps": [
-  "def-pc-projective-morphism",
-  "def-pc-smooth-projective-curve"
- ],
- "proof": [
-  {
-   "text": "By [def-pc-smooth-projective-curve] and [def-pc-curve], the structure morphism $X\\to\\operatorname{Spec}(k)$ is of finite type. Since $k$ is a field, $\\operatorname{Spec}(k)$ is Noetherian; therefore [lem-weil-pbc-finite-type-over-noetherian] implies that $X$ is a Noetherian scheme.",
-   "uses": [
+  "id": "lem-pc-vanishing-above-dim",
+  "blueprint": {
+    "is": "lem-pc-vanishing-above-dim",
+    "from": null,
+    "same_as": []
+  },
+  "kind": "statement",
+  "title": "Vanishing above the dimension of a curve",
+  "statement": "Let $k$ be a field and let $X$ be a\ncurve over $k$ which is smooth and\nprojective. For every\nquasi-coherent $\\mathcal{O}_X$-module $\\mathcal{F}$ one has\n\n$$\nH^i(X,\\mathcal{F})=0\\qquad\\text{for all }i\\ge2 .\n$$\n\n(EGA III$_1$, (3.2.1): cohomology of a Noetherian scheme of\ndimension $d$ vanishes above $d$; here $d=1$.)",
+  "source": {
+    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-twist/lem-pc-vanishing-above-dim.md",
+    "place": "node lem-pc-vanishing-above-dim, order 759",
+    "external": [
+      {
+        "document": "EGA III",
+        "place": "For every quasi-coherent $\\mathcal{O}_X$-module $\\mathcal{F}$ one has $$ H^i(X,\\mathcal{F})=0\\qquad\\text{for all }i\\ge2 . $$ (EGA III$_1$, (3.2.1): cohomology of a Noetherian scheme of dimension $d$ vanishes above $d$; here $d=1$.) *Step 1: the point $P$ and the first affine open.* The curve $X$ is proper (a projective morphism is proper, [lem-pc-projective-proper]), nonempty (an integral scheme, "
+      }
+    ]
+  },
+  "stmt_deps": [
+    "def-pc-projective-morphism",
+    "def-pc-smooth-projective-curve"
+  ],
+  "proof": [
+    {
+      "text": "By [def-pc-smooth-projective-curve] and [def-pc-curve], the structure morphism $X\\to\\operatorname{Spec}(k)$ is of finite type. Since $k$ is a field, $\\operatorname{Spec}(k)$ is Noetherian; therefore [lem-weil-pbc-finite-type-over-noetherian] implies that $X$ is a Noetherian scheme.",
+      "uses": [
+        "def-pc-smooth-projective-curve",
+        "def-pc-curve",
+        "lem-weil-pbc-finite-type-over-noetherian"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/morphisms.tex",
+        "place": "Lemma 01T6 (finite type over a Noetherian scheme)"
+      }
+    },
+    {
+      "text": "The curve hypothesis gives $\\dim X=1$ as the supremum of the dimensions of its local rings [def-pc-curve, def-pc-dimension]. By [lem-pc-scheme-dimension-local-rings], this equals the topological Krull dimension of the underlying space, so $\\operatorname{topologicalKrullDim}(X)=1$.",
+      "uses": [
+        "def-pc-curve",
+        "def-pc-dimension",
+        "lem-pc-scheme-dimension-local-rings"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/properties.tex",
+        "place": "Lemma 04MU (dimension of a scheme)"
+      }
+    },
+    {
+      "text": "For $q\\ge2$, the equality $\\operatorname{topologicalKrullDim}(X)=1$ gives $\\operatorname{topologicalKrullDim}(X)<q$. Applying [lem-sc-noetherian-cohomology-above-dimension] to the Noetherian scheme $X$ and the quasi-coherent module $\\mathcal F$ yields $H^q(X,\\mathcal F)=0$ for every $q\\ge2$.",
+      "uses": [
+        "lem-sc-noetherian-cohomology-above-dimension"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/cohomology.tex",
+        "place": "Proposition 02UZ, applied to a quasi-coherent module"
+      }
+    }
+  ],
+  "proof_deps": [
     "def-pc-smooth-projective-curve",
     "def-pc-curve",
-    "lem-weil-pbc-finite-type-over-noetherian"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Lemma 01T6 (finite type over a Noetherian scheme)"
-   }
-  },
-  {
-   "text": "The curve hypothesis gives $\\dim X=1$ as the supremum of the dimensions of its local rings [def-pc-curve, def-pc-dimension]. By [lem-pc-scheme-dimension-local-rings], this equals the topological Krull dimension of the underlying space, so $\\operatorname{topologicalKrullDim}(X)=1$.",
-   "uses": [
-    "def-pc-curve",
+    "lem-weil-pbc-finite-type-over-noetherian",
     "def-pc-dimension",
-    "lem-pc-scheme-dimension-local-rings"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/properties.tex",
-    "place": "Lemma 04MU (dimension of a scheme)"
-   }
-  },
-  {
-   "text": "For $q\\ge2$, the equality $\\operatorname{topologicalKrullDim}(X)=1$ gives $\\operatorname{topologicalKrullDim}(X)<q$. Applying [lem-sc-noetherian-cohomology-above-dimension] to the Noetherian scheme $X$ and the quasi-coherent module $\\mathcal F$ yields $H^q(X,\\mathcal F)=0$ for every $q\\ge2$.",
-   "uses": [
+    "lem-pc-scheme-dimension-local-rings",
     "lem-sc-noetherian-cohomology-above-dimension"
-   ],
-   "elementary": false,
-   "source": {
+  ],
+  "proof_origin": {
+    "by": "document",
     "document": "literature/stacks-project/cohomology.tex",
-    "place": "Proposition 02UZ, applied to a quasi-coherent module"
-   }
-  }
- ],
- "proof_deps": [
-  "def-pc-smooth-projective-curve",
-  "def-pc-curve",
-  "lem-weil-pbc-finite-type-over-noetherian",
-  "def-pc-dimension",
-  "lem-pc-scheme-dimension-local-rings",
-  "lem-sc-noetherian-cohomology-above-dimension"
- ],
- "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/cohomology.tex",
-  "place": "Proposition 02UZ, specialized to a smooth projective curve"
- },
- "mathlib_searches": [
-  {
-   "tool": "leanfinder",
-   "query": "For a smooth projective curve over a field, quasi-coherent sheaf cohomology vanishes in all degrees at least two",
-   "results": "Ext and projective-object vanishing declarations; no scheme cohomology vanishing declaration",
-   "date": "2026-10-11",
-   "verdict": "no match"
+    "place": "Proposition 02UZ, specialized to a smooth projective curve"
   },
-  {
-   "tool": "loogle",
-   "query": "AlgebraicGeometry.Scheme.Modules.subsingleton_H_of_two_le, AlgebraicGeometry.Scheme.Modules.subsingleton_H_of_topologicalKrullDim_lt",
-   "results": "0 hits; unknown identifier for project theorem",
-   "date": "2026-10-11",
-   "verdict": "no match"
-  },
-  {
-   "tool": "grep",
-   "query": "subsingleton_H_of_two_le|subsingleton_H_of_topologicalKrullDim_lt in Mathlib",
-   "results": "0 hits",
-   "date": "2026-10-11",
-   "verdict": "no match"
-  },
-  {
-   "tool": "leansearch",
-   "query": "For a smooth projective curve over a field, quasi-coherent sheaf cohomology vanishes in all degrees at least two",
-   "results": "service unavailable: Internal Server Error",
-   "date": "2026-10-11",
-   "verdict": "unavailable"
-  }
- ],
- "mathlib_match": null,
- "status": "split",
- "merged_into": null,
- "import_flags": [],
- "blueprint_kind": "lemma",
- "blueprint_order": 759,
- "blueprint_uses": [
-  "def-pc-curve",
-  "def-pc-degree-line-bundle",
-  "def-pc-dimension",
-  "def-pc-divisor-line-bundle",
-  "def-pc-projective-morphism",
-  "def-pc-smooth-projective-curve",
-  "def-sc-ample",
-  "def-sc-effective-cartier-divisor",
-  "lem-pc-ample-positive-degree",
-  "lem-pc-cech-computes",
-  "lem-pc-euler-additive",
-  "lem-pc-projective-proper",
-  "lem-sc-ample-complement-affine",
-  "lem-sc-point-cartier",
-  "lem-sc-regular-dim1-dvr",
-  "lem-sc-smooth-regular"
- ],
- "uses_not_cited": [
-  "def-pc-projective-morphism",
-  "def-pc-smooth-projective-curve"
- ],
- "proof_split_by": "labels",
- "lean_audit": {
-  "master": {
-   "state": "none",
-   "decls": [],
-   "missing": []
-  },
-  "slopmaster2": {
-   "state": "rests_on_sorry",
-   "decls": [
+  "mathlib_searches": [
     {
-     "name": "AlgebraicGeometry.Scheme.Modules.subsingleton_H_of_two_le",
-     "module": "WeilConjectures.AlgebraicGeometry.Curve.RiemannRoch",
-     "lines": [
-      316,
-      327
-     ],
-     "kind": "theorem",
-     "sorry": false
-    }
-   ],
-   "missing": [],
-   "open": [
+      "tool": "leanfinder",
+      "query": "For a smooth projective curve over a field, quasi-coherent sheaf cohomology vanishes in all degrees at least two",
+      "results": "Ext and projective-object vanishing declarations; no scheme cohomology vanishing declaration",
+      "date": "2026-10-11",
+      "verdict": "no match"
+    },
     {
-     "name": "AlgebraicGeometry.Scheme.Modules.subsingleton_H_of_topologicalKrullDim_lt",
-     "module": "WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar",
-     "lines": [
-      64,
-      73
-     ],
-     "kind": "theorem",
-     "nodes": [],
-     "below": false
+      "tool": "loogle",
+      "query": "AlgebraicGeometry.Scheme.Modules.subsingleton_H_of_two_le, AlgebraicGeometry.Scheme.Modules.subsingleton_H_of_topologicalKrullDim_lt",
+      "results": "0 hits; unknown identifier for project theorem",
+      "date": "2026-10-11",
+      "verdict": "no match"
+    },
+    {
+      "tool": "grep",
+      "query": "subsingleton_H_of_two_le|subsingleton_H_of_topologicalKrullDim_lt in Mathlib",
+      "results": "0 hits",
+      "date": "2026-10-11",
+      "verdict": "no match"
+    },
+    {
+      "tool": "leansearch",
+      "query": "For a smooth projective curve over a field, quasi-coherent sheaf cohomology vanishes in all degrees at least two",
+      "results": "service unavailable: Internal Server Error",
+      "date": "2026-10-11",
+      "verdict": "unavailable"
     }
-   ]
-  }
- },
- "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-twist",
- "split_report": {
-  "date": "2026-10-11",
-  "item": "lem-pc-vanishing-above-dim",
-  "worker": "stage1",
-  "summary": "Replaced the imported affine-cover argument with the existing Stacks-based Noetherian cohomology vanishing node. The proof checks finite type over the Noetherian field spectrum, identifies topological dimension with the curve's local-ring dimension, and specializes the general vanishing theorem to q >= 2. The slopmaster2 theorem remains unattached because its proof depends on the sorried Grothendieck vanishing declaration.",
-  "blueprint": "Realizes the blueprint node's EGA III dimension-vanishing claim by Proposition 02UZ and the existing dimension comparison.",
+  ],
+  "mathlib_match": null,
+  "status": "split",
+  "merged_into": null,
+  "import_flags": [],
+  "blueprint_kind": "lemma",
+  "blueprint_order": 759,
+  "blueprint_uses": [
+    "def-pc-curve",
+    "def-pc-degree-line-bundle",
+    "def-pc-dimension",
+    "def-pc-divisor-line-bundle",
+    "def-pc-projective-morphism",
+    "def-pc-smooth-projective-curve",
+    "def-sc-ample",
+    "def-sc-effective-cartier-divisor",
+    "lem-pc-ample-positive-degree",
+    "lem-pc-cech-computes",
+    "lem-pc-euler-additive",
+    "lem-pc-projective-proper",
+    "lem-sc-ample-complement-affine",
+    "lem-sc-point-cartier",
+    "lem-sc-regular-dim1-dvr",
+    "lem-sc-smooth-regular"
+  ],
+  "uses_not_cited": [
+    "def-pc-projective-morphism",
+    "def-pc-smooth-projective-curve"
+  ],
+  "proof_split_by": "labels",
+  "lean_audit": {
+    "master": {
+      "state": "none",
+      "decls": [],
+      "missing": []
+    },
+    "slopmaster2": {
+      "state": "rests_on_sorry",
+      "decls": [
+        {
+          "name": "AlgebraicGeometry.Scheme.Modules.subsingleton_H_of_two_le",
+          "module": "WeilConjectures.AlgebraicGeometry.Curve.RiemannRoch",
+          "lines": [
+            316,
+            327
+          ],
+          "kind": "theorem",
+          "sorry": false
+        }
+      ],
+      "missing": [],
+      "open": [
+        {
+          "name": "AlgebraicGeometry.Scheme.Modules.subsingleton_H_of_topologicalKrullDim_lt",
+          "module": "WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar",
+          "lines": [
+            64,
+            73
+          ],
+          "kind": "theorem",
+          "nodes": [],
+          "below": false
+        }
+      ]
+    }
+  },
+  "chapter": "sec-picard-framework",
+  "unit": "sk-thm-picard-twist",
+  "split_report": {
+    "date": "2026-10-11",
+    "item": "lem-pc-vanishing-above-dim",
+    "worker": "stage1",
+    "summary": "Replaced the imported affine-cover argument with the existing Stacks-based Noetherian cohomology vanishing node. The proof checks finite type over the Noetherian field spectrum, identifies topological dimension with the curve's local-ring dimension, and specializes the general vanishing theorem to q >= 2. The slopmaster2 theorem remains unattached because its proof depends on the sorried Grothendieck vanishing declaration.",
+    "blueprint": "Realizes the blueprint node's EGA III dimension-vanishing claim by Proposition 02UZ and the existing dimension comparison.",
+    "tool_uses": [
+      {
+        "node": "lem-sc-noetherian-cohomology-above-dimension",
+        "why": "Generic Noetherian scheme cohomology vanishing above topological dimension; the Picard-twist unit does not restate this theorem."
+      }
+    ]
+  },
   "tool_uses": [
-   {
-    "node": "lem-sc-noetherian-cohomology-above-dimension",
-    "why": "Generic Noetherian scheme cohomology vanishing above topological dimension; the Picard-twist unit does not restate this theorem."
-   }
-  ]
- },
- "tool_uses": [
-  "lem-sc-noetherian-cohomology-above-dimension",
-  "lem-sc-noetherian-cohomology-above-dimension"
- ],
- "reviewed": {
-  "date": "2026-10-11",
-  "by": "L",
-  "reviewer": "R-vad0309",
-  "group": "K1",
-  "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-vad0309 (reviewer sub-agent of L); spot-checked: Steps 1-3 against cited statements (finite type over Spec k Noetherian; def-pc-curve dim 1 = sup local rings = topologicalKrullDim by lem-pc-scheme-dimension-local-rings; lem-sc-noetherian-cohomology-above-dimension with q>=2, qcoh, no cycle); route is Grothendieck vanishing by dimension (02UZ), not two-affine Cech. Tool use accepted. Citers: statement unchanged. FIX more, RETURN less: B4 delivery broke TeX 'here $d=1.)' (unbalanced dollar, missed by Second reading) restored to 'here $d=1$.)' matching sheaf-dag; cleaned source.external.place of pasted proof text.; 1 file(s) fixed by the reviewer"
- }
+    "lem-sc-noetherian-cohomology-above-dimension",
+    "lem-sc-noetherian-cohomology-above-dimension"
+  ],
+  "reviewed": {
+    "date": "2026-10-11",
+    "by": "L",
+    "reviewer": "R-vad0309",
+    "group": "K1",
+    "result": "pass",
+    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-vad0309 (reviewer sub-agent of L); spot-checked: Steps 1-3 against cited statements (finite type over Spec k Noetherian; def-pc-curve dim 1 = sup local rings = topologicalKrullDim by lem-pc-scheme-dimension-local-rings; lem-sc-noetherian-cohomology-above-dimension with q>=2, qcoh, no cycle); route is Grothendieck vanishing by dimension (02UZ), not two-affine Cech. Tool use accepted. Citers: statement unchanged. FIX more, RETURN less: B4 delivery broke TeX 'here $d=1.)' (unbalanced dollar, missed by Second reading) restored to 'here $d=1$.)' matching sheaf-dag; cleaned source.external.place of pasted proof text.; 1 file(s) fixed by the reviewer"
+  },
+  "lean": {
+    "module": "WeilConjectures.AlgebraicGeometry.Curve.RiemannRoch",
+    "declaration": "AlgebraicGeometry.Scheme.Modules.subsingleton_H_of_two_le",
+    "branch": "slopmaster2",
+    "line": 316,
+    "declarations": [
+      "AlgebraicGeometry.Scheme.Modules.subsingleton_H_of_two_le"
+    ],
+    "sorry_free": false,
+    "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state rests_on_sorry)"
+  }
 }

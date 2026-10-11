@@ -1,128 +1,140 @@
 {
- "id": "lem-fd-stalk-formula",
- "blueprint": {
-  "is": "lem-fd-stalk-formula",
-  "from": null,
-  "same_as": null
- },
- "kind": "statement",
- "title": "Stalks of the transform are fibre integrals",
- "statement": "Let $S=\\operatorname{Spec}k$, $V\\cong\\mathbf A^r_k$, let $\\bar\\xi:\\operatorname{Spec}\\Omega\\to V^\\vee$ be a geometric point of $V^\\vee$ with $\\Omega$ algebraically closed, and let $K\\in D^b_c(V,E)$. Write $V_{\\bar\\xi}=(V\\times_kV^\\vee)\\times_{p_2,V^\\vee}\\bar\\xi=V\\times_k\\Omega$ for the fibre of $p_2$ over $\\bar\\xi$ (it is $V_{\\bar k}$ when $\\bar\\xi$ is a $\\bar k$-point of $V^\\vee$; for $\\bar\\xi$ over a non-closed point it is the affine $r$-space over $\\Omega\\supset\\kappa(\\bar\\xi)$). Then\n\n$$\n(\\operatorname{FT}_\\psi(K))_{\\bar\\xi}\\cong H^*_c\\bigl(V_{\\bar\\xi},\\,K|_{V_{\\bar\\xi}}\\otimes^L\\mathcal L_{\\psi(\\langle x,\\xi\\rangle)}\\bigr)[r],\n$$\n\nwhere $\\langle x,\\xi\\rangle:V_{\\bar\\xi}\\to\\mathbf A^1$ is the pairing with the point $\\xi$.",
- "source": {
-  "document": "literature/blueprint/master/blueprint/sec-fourier-transform/sk-prop-stalk/lem-fd-stalk-formula.md",
-  "place": "node lem-fd-stalk-formula, order 2699"
- },
- "stmt_deps": [],
- "proof": [
-  {
-   "text": "Form the cartesian square with $g=\\bar\\xi:\\operatorname{Spec}\\Omega\\to V^\\vee$ and $p_2:V\\times_kV^\\vee\\to V^\\vee$. Its base change $p_2':V_{\\bar\\xi}\\to\\operatorname{Spec}\\Omega$ is the structure morphism of $V_{\\bar\\xi}\\cong\\mathbf A^r_\\Omega$, and $g':V_{\\bar\\xi}\\to V\\times_kV^\\vee$ is $(\\mathrm{pr}_V,\\bar\\xi)$. The stalk at $\\bar\\xi$ of a complex on $V^\\vee$ is its inverse image along $g$, so the compact-support base change of [thm-cbc-finite-extension] at the $E$-stage (or of [thm-cbc-qbar] in the $\\overline{\\mathbf Q}_\\ell$-form of the coefficient category of [def-weil-pbc-qbar-category]), applied to this square and to $p_1^*K\\otimes^L\\mathcal K_\\psi\\in D^b_c(V\\times_kV^\\vee,E)$, gives\n\n$$\n\\bigl(Rp_{2!}(p_1^*K\\otimes^L\\mathcal K_\\psi)\\bigr)_{\\bar\\xi}\n=Lg^*Rp_{2!}(p_1^*K\\otimes^L\\mathcal K_\\psi)\n\\cong Rp'_{2!}\\,Lg'^*(p_1^*K\\otimes^L\\mathcal K_\\psi)\n=R\\Gamma_c\\bigl(V_{\\bar\\xi},\\,g'^*(p_1^*K\\otimes^L\\mathcal K_\\psi)\\bigr).\n$$",
-   "uses": [
-    "thm-cbc-finite-extension",
-    "thm-cbc-qbar",
-    "def-weil-pbc-qbar-category"
-   ],
-   "elementary": false
+  "id": "lem-fd-stalk-formula",
+  "blueprint": {
+    "is": "lem-fd-stalk-formula",
+    "from": null,
+    "same_as": null
   },
-  {
-   "text": "Here $g'^*p_1^*K=K|_{V_{\\bar\\xi}}$, and $g'^*\\mathcal K_\\psi=g'^*b^*\\mathcal L_\\psi$ is the Artin–Schreier sheaf of the function $b\\circ g'=\\langle x,\\xi\\rangle$ on $V_{\\bar\\xi}$, because the base change of the twist is the twist by the base-changed function ([def-fd-kernel]): the inverse image of $\\mathcal L_{\\psi,f}$ along a morphism $h$ is $\\mathcal L_{\\psi,f\\circ h}$, the Artin–Schreier covering being compatible with base change. With the shift $[r]$ of [def-fd-transform], this is the displayed formula. (The base change used is the proper, compact-support one along $\\bar\\xi\\to V^\\vee$, not smooth base change. If one passes instead through the strict henselization $\\operatorname{Spec}\\mathcal O^{\\mathrm{sh}}_{V^\\vee,\\bar\\xi}$, the kernel on $V\\times_k\\operatorname{Spec}\\mathcal O^{\\mathrm{sh}}_{V^\\vee,\\bar\\xi}$ is $\\mathcal L_{\\psi(\\langle x,\\xi_{\\mathrm{univ}}\\rangle)}$ for the tautological point $\\xi_{\\mathrm{univ}}$, not the pullback of $\\mathcal L_{\\psi(\\langle x,\\xi\\rangle)}$ from $V_{\\bar\\xi}$, and the passage to the closed fibre is again this compact-support base change.)",
-   "uses": [
-    "def-fd-kernel",
-    "def-fd-transform"
-   ],
-   "elementary": false
-  }
- ],
- "proof_deps": [
-  "thm-cbc-finite-extension",
-  "thm-cbc-qbar",
-  "def-weil-pbc-qbar-category",
-  "def-fd-kernel",
-  "def-fd-transform"
- ],
- "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-fourier-transform/sk-prop-stalk/lem-fd-stalk-formula.md",
-  "place": "## Proof"
- },
- "mathlib_searches": [
-  {
-   "tool": "text search of the local Mathlib checkout (0df444a360)",
-   "query": "AlgebraicGeometry.Etale.fourierTransformStalkIso",
-   "results": [],
-   "date": "2026-10-08"
-  }
- ],
- "mathlib_match": null,
- "status": "imported",
- "merged_into": null,
- "import_flags": [
-  "lean_not_found"
- ],
- "blueprint_kind": "lemma",
- "blueprint_order": 2699,
- "blueprint_uses": [
-  "def-fd-kernel",
-  "def-fd-transform",
-  "def-weil-pbc-qbar-category",
-  "thm-cbc-finite-extension",
-  "thm-cbc-qbar"
- ],
- "blueprint_lean": [
-  "AlgebraicGeometry.Etale.fourierTransformStalkIso"
- ],
- "blueprint_lean_not_found": [
-  "AlgebraicGeometry.Etale.fourierTransformStalkIso"
- ],
- "proof_split_by": "paragraphs",
- "lean_audit": {
-  "master": {
-   "state": "none",
-   "decls": [],
-   "missing": [
-    "AlgebraicGeometry.Etale.fourierTransformStalkIso"
-   ]
+  "kind": "statement",
+  "title": "Stalks of the transform are fibre integrals",
+  "statement": "Let $S=\\operatorname{Spec}k$, $V\\cong\\mathbf A^r_k$, let $\\bar\\xi:\\operatorname{Spec}\\Omega\\to V^\\vee$ be a geometric point of $V^\\vee$ with $\\Omega$ algebraically closed, and let $K\\in D^b_c(V,E)$. Write $V_{\\bar\\xi}=(V\\times_kV^\\vee)\\times_{p_2,V^\\vee}\\bar\\xi=V\\times_k\\Omega$ for the fibre of $p_2$ over $\\bar\\xi$ (it is $V_{\\bar k}$ when $\\bar\\xi$ is a $\\bar k$-point of $V^\\vee$; for $\\bar\\xi$ over a non-closed point it is the affine $r$-space over $\\Omega\\supset\\kappa(\\bar\\xi)$). Then\n\n$$\n(\\operatorname{FT}_\\psi(K))_{\\bar\\xi}\\cong H^*_c\\bigl(V_{\\bar\\xi},\\,K|_{V_{\\bar\\xi}}\\otimes^L\\mathcal L_{\\psi(\\langle x,\\xi\\rangle)}\\bigr)[r],\n$$\n\nwhere $\\langle x,\\xi\\rangle:V_{\\bar\\xi}\\to\\mathbf A^1$ is the pairing with the point $\\xi$.",
+  "source": {
+    "document": "literature/blueprint/master/blueprint/sec-fourier-transform/sk-prop-stalk/lem-fd-stalk-formula.md",
+    "place": "node lem-fd-stalk-formula, order 2699"
   },
-  "slopmaster2": {
-   "state": "rests_on_sorry",
-   "decls": [
+  "stmt_deps": [],
+  "proof": [
     {
-     "name": "AlgebraicGeometry.Etale.fourierTransformStalkIso",
-     "module": "WeilConjectures.FourierTransform.Properties",
-     "lines": [
-      216,
-      246
-     ],
-     "kind": "def",
-     "sorry": false
+      "text": "Form the cartesian square with $g=\\bar\\xi:\\operatorname{Spec}\\Omega\\to V^\\vee$ and $p_2:V\\times_kV^\\vee\\to V^\\vee$. Its base change $p_2':V_{\\bar\\xi}\\to\\operatorname{Spec}\\Omega$ is the structure morphism of $V_{\\bar\\xi}\\cong\\mathbf A^r_\\Omega$, and $g':V_{\\bar\\xi}\\to V\\times_kV^\\vee$ is $(\\mathrm{pr}_V,\\bar\\xi)$. The stalk at $\\bar\\xi$ of a complex on $V^\\vee$ is its inverse image along $g$, so the compact-support base change of [thm-cbc-finite-extension] at the $E$-stage (or of [thm-cbc-qbar] in the $\\overline{\\mathbf Q}_\\ell$-form of the coefficient category of [def-weil-pbc-qbar-category]), applied to this square and to $p_1^*K\\otimes^L\\mathcal K_\\psi\\in D^b_c(V\\times_kV^\\vee,E)$, gives\n\n$$\n\\bigl(Rp_{2!}(p_1^*K\\otimes^L\\mathcal K_\\psi)\\bigr)_{\\bar\\xi}\n=Lg^*Rp_{2!}(p_1^*K\\otimes^L\\mathcal K_\\psi)\n\\cong Rp'_{2!}\\,Lg'^*(p_1^*K\\otimes^L\\mathcal K_\\psi)\n=R\\Gamma_c\\bigl(V_{\\bar\\xi},\\,g'^*(p_1^*K\\otimes^L\\mathcal K_\\psi)\\bigr).\n$$",
+      "uses": [
+        "thm-cbc-finite-extension",
+        "thm-cbc-qbar",
+        "def-weil-pbc-qbar-category"
+      ],
+      "elementary": false
     },
     {
-     "name": "AlgebraicGeometry.Etale.nonempty_iso_fourierTransform_geometricStalk",
-     "module": "WeilConjectures.FourierTransform.Properties",
-     "lines": [
-      250,
-      281
-     ],
-     "kind": "theorem",
-     "sorry": false,
-     "partial": "`sk-prop-stalk`; blueprint: `lem-fd-stalk-formula`"
+      "text": "Here $g'^*p_1^*K=K|_{V_{\\bar\\xi}}$, and $g'^*\\mathcal K_\\psi=g'^*b^*\\mathcal L_\\psi$ is the Artin–Schreier sheaf of the function $b\\circ g'=\\langle x,\\xi\\rangle$ on $V_{\\bar\\xi}$, because the base change of the twist is the twist by the base-changed function ([def-fd-kernel]): the inverse image of $\\mathcal L_{\\psi,f}$ along a morphism $h$ is $\\mathcal L_{\\psi,f\\circ h}$, the Artin–Schreier covering being compatible with base change. With the shift $[r]$ of [def-fd-transform], this is the displayed formula. (The base change used is the proper, compact-support one along $\\bar\\xi\\to V^\\vee$, not smooth base change. If one passes instead through the strict henselization $\\operatorname{Spec}\\mathcal O^{\\mathrm{sh}}_{V^\\vee,\\bar\\xi}$, the kernel on $V\\times_k\\operatorname{Spec}\\mathcal O^{\\mathrm{sh}}_{V^\\vee,\\bar\\xi}$ is $\\mathcal L_{\\psi(\\langle x,\\xi_{\\mathrm{univ}}\\rangle)}$ for the tautological point $\\xi_{\\mathrm{univ}}$, not the pullback of $\\mathcal L_{\\psi(\\langle x,\\xi\\rangle)}$ from $V_{\\bar\\xi}$, and the passage to the closed fibre is again this compact-support base change.)",
+      "uses": [
+        "def-fd-kernel",
+        "def-fd-transform"
+      ],
+      "elementary": false
     }
-   ],
-   "missing": [],
-   "open": [
+  ],
+  "proof_deps": [
+    "thm-cbc-finite-extension",
+    "thm-cbc-qbar",
+    "def-weil-pbc-qbar-category",
+    "def-fd-kernel",
+    "def-fd-transform"
+  ],
+  "proof_origin": {
+    "by": "agent",
+    "document": "literature/blueprint/master/blueprint/sec-fourier-transform/sk-prop-stalk/lem-fd-stalk-formula.md",
+    "place": "## Proof"
+  },
+  "mathlib_searches": [
     {
-     "name": "AlgebraicGeometry.Etale.isIso_derivedBaseChangeMap_of_isProper_of_isAddTorsion_ring",
-     "module": "WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.Proper",
-     "lines": [
-      143,
-      157
-     ],
-     "kind": "theorem",
-     "nodes": [],
-     "below": false
+      "tool": "text search of the local Mathlib checkout (0df444a360)",
+      "query": "AlgebraicGeometry.Etale.fourierTransformStalkIso",
+      "results": [],
+      "date": "2026-10-08"
     }
-   ]
+  ],
+  "mathlib_match": null,
+  "status": "imported",
+  "merged_into": null,
+  "import_flags": [
+    "lean_not_found"
+  ],
+  "blueprint_kind": "lemma",
+  "blueprint_order": 2699,
+  "blueprint_uses": [
+    "def-fd-kernel",
+    "def-fd-transform",
+    "def-weil-pbc-qbar-category",
+    "thm-cbc-finite-extension",
+    "thm-cbc-qbar"
+  ],
+  "blueprint_lean": [
+    "AlgebraicGeometry.Etale.fourierTransformStalkIso"
+  ],
+  "blueprint_lean_not_found": [
+    "AlgebraicGeometry.Etale.fourierTransformStalkIso"
+  ],
+  "proof_split_by": "paragraphs",
+  "lean_audit": {
+    "master": {
+      "state": "none",
+      "decls": [],
+      "missing": [
+        "AlgebraicGeometry.Etale.fourierTransformStalkIso"
+      ]
+    },
+    "slopmaster2": {
+      "state": "rests_on_sorry",
+      "decls": [
+        {
+          "name": "AlgebraicGeometry.Etale.fourierTransformStalkIso",
+          "module": "WeilConjectures.FourierTransform.Properties",
+          "lines": [
+            216,
+            246
+          ],
+          "kind": "def",
+          "sorry": false
+        },
+        {
+          "name": "AlgebraicGeometry.Etale.nonempty_iso_fourierTransform_geometricStalk",
+          "module": "WeilConjectures.FourierTransform.Properties",
+          "lines": [
+            250,
+            281
+          ],
+          "kind": "theorem",
+          "sorry": false,
+          "partial": "`sk-prop-stalk`; blueprint: `lem-fd-stalk-formula`"
+        }
+      ],
+      "missing": [],
+      "open": [
+        {
+          "name": "AlgebraicGeometry.Etale.isIso_derivedBaseChangeMap_of_isProper_of_isAddTorsion_ring",
+          "module": "WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.Proper",
+          "lines": [
+            143,
+            157
+          ],
+          "kind": "theorem",
+          "nodes": [],
+          "below": false
+        }
+      ]
+    }
+  },
+  "chapter": "sec-fourier-transform",
+  "unit": "sk-prop-stalk",
+  "lean": {
+    "module": "WeilConjectures.FourierTransform.Properties",
+    "declaration": "AlgebraicGeometry.Etale.fourierTransformStalkIso",
+    "branch": "slopmaster2",
+    "line": 216,
+    "declarations": [
+      "AlgebraicGeometry.Etale.fourierTransformStalkIso",
+      "AlgebraicGeometry.Etale.nonempty_iso_fourierTransform_geometricStalk"
+    ],
+    "sorry_free": false,
+    "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state rests_on_sorry)"
   }
- },
- "chapter": "sec-fourier-transform",
- "unit": "sk-prop-stalk"
 }

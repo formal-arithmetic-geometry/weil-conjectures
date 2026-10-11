@@ -1,104 +1,108 @@
 {
- "id": "lem-pc-spec-pure-insep-integral-radicial-surjective",
- "blueprint": {
-  "is": null,
-  "from": {
-   "node": "lem-pc-homeo-pure-insep",
-   "place": "proof, sentence 'By Algebra, Lemma 10.46.7 the induced map on spectra is a homeomorphism' (the homeomorphism for $A\\to A\\otimes_kk'$, Tag 0BRA)",
-   "via": []
+  "id": "lem-pc-spec-pure-insep-integral-radicial-surjective",
+  "blueprint": {
+    "is": null,
+    "from": {
+      "node": "lem-pc-homeo-pure-insep",
+      "place": "proof, sentence 'By Algebra, Lemma 10.46.7 the induced map on spectra is a homeomorphism' (the homeomorphism for $A\\to A\\otimes_kk'$, Tag 0BRA)",
+      "via": []
+    },
+    "same_as": []
   },
-  "same_as": []
- },
- "kind": "statement",
- "title": "Spec of a purely inseparable extension is integral, universally injective and surjective",
- "statement": "Let $k\\subset k'$ be a purely inseparable field extension [def-pc-field-tower] [def-weil-pbc-finite-purely-inseparable-extension], and let $\\pi:\\operatorname{Spec}k'\\to\\operatorname{Spec}k$ be the morphism of schemes induced by the inclusion $k\\to k'$ [def-weil-affine-spectrum]. Then $\\pi$ is integral [def-weil-finite-integral-morphism], universally injective [def-weil-radicial-morphism] and surjective [def-weil-surjective-morphism].",
- "source": {
-  "document": "literature/stacks-project/morphisms.tex",
-  "place": "Morphisms, Lemma 01S4 (morphisms-lemma-universally-injective: radicial iff universally injective), applied to $\\operatorname{Spec}k'\\to\\operatorname{Spec}k$, a one-point map with purely inseparable residue field extension; integrality: Algebra Section 0BR5 (algebra-section-universal-homeomorphism), opening paragraph (purely inseparable means algebraic)",
-  "lean": {
-   "module": "WeilConjectures.AlgebraicGeometry.Morphisms.UniversalHomeomorphism.Algebra",
-   "declaration": "Algebra.IsUniversalHomeomorphism.of_isPurelyInseparable",
-   "lines": [
-    135,
-    157
-   ]
-  }
- },
- "stmt_deps": [
-  "def-pc-field-tower",
-  "def-weil-pbc-finite-purely-inseparable-extension",
-  "def-weil-affine-spectrum",
-  "def-weil-finite-integral-morphism",
-  "def-weil-radicial-morphism",
-  "def-weil-surjective-morphism"
- ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
- "mathlib_searches": [
-  {
-   "tool": "leansearch",
-   "query": "integral universally injective surjective morphism of schemes is universal homeomorphism; purely inseparable field extension base change of scheme is homeomorphism",
-   "results": "AlgebraicGeometry.UniversallyInjective, AlgebraicGeometry.IsIntegralHom (Mathlib.AlgebraicGeometry.Morphisms.*); PrimeSpectrum.isHomeomorph_comap_of_isPurelyInseparable (Mathlib.RingTheory.Spectrum.Prime.Homeomorph); IsPurelyInseparable.isIntegral (Mathlib.FieldTheory.PurelyInseparable.Basic)",
-   "date": "2026-10-10",
-   "verdict": "no match: Mathlib has the three notions and the integrality of a purely inseparable extension, but no statement that Spec k' -> Spec k is universally injective"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "Spec of a purely inseparable field extension is universally injective and integral and surjective",
-   "results": "PrimeSpectrum.isHomeomorph_comap_of_isPurelyInseparable; IsPurelyInseparable.of_injective_comp_algebraMap; IsPurelyInseparable.bijective_comp_algebraMap; instSubsingletonAlgHomOfIsPurelyInseparable (Mathlib.FieldTheory.PurelyInseparable.Basic)",
-   "date": "2026-10-10",
-   "verdict": "no match (ingredients only: uniqueness of embeddings into a reduced algebra gives universal injectivity via field points)"
-  },
-  {
-   "tool": "grep",
-   "query": "grep -rn 'IsPurelyInseparable' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry; grep -rn 'UniversalHomeomorph\\|universal homeomorphism' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
-   "results": "AlgebraicGeometry/Morphisms/UniversallyInjective.lean:111-143 (radicial characterization of UniversallyInjective via RingHom.IsPurelyInseparable residue field maps, no Spec k' -> Spec k instance); RingTheory/Spectrum/Prime/Homeomorph.lean:13,63 (docstrings only)",
-   "date": "2026-10-10",
-   "verdict": "no match in Mathlib; the statement is the sorry-free slopmaster2 instance Algebra.IsUniversalHomeomorphism.of_isPurelyInseparable (WeilConjectures/AlgebraicGeometry/Morphisms/UniversalHomeomorphism/Algebra.lean:139-157), whose class unfolds to IsIntegralHom, UniversallyInjective and Surjective of Spec.map (algebraMap K L)"
-  }
- ],
- "mathlib_match": null,
- "status": "unsplit",
- "merged_into": null,
- "created": {
-  "by": "worker",
-  "item": "lem-pc-homeo-pure-insep",
-  "date": "2026-10-10"
- },
- "lean_audit": {
-  "master": {
-   "state": "none",
-   "decls": [],
-   "missing": [
-    "Algebra.IsUniversalHomeomorphism.of_isPurelyInseparable"
-   ]
-  },
-  "slopmaster2": {
-   "state": "closed",
-   "decls": [
-    {
-     "name": "Algebra.IsUniversalHomeomorphism.of_isPurelyInseparable",
-     "module": "WeilConjectures.AlgebraicGeometry.Morphisms.UniversalHomeomorphism.Algebra",
-     "lines": [
-      135,
-      157
-     ],
-     "kind": "theorem",
-     "sorry": false
+  "kind": "statement",
+  "title": "Spec of a purely inseparable extension is integral, universally injective and surjective",
+  "statement": "Let $k\\subset k'$ be a purely inseparable field extension [def-pc-field-tower] [def-weil-pbc-finite-purely-inseparable-extension], and let $\\pi:\\operatorname{Spec}k'\\to\\operatorname{Spec}k$ be the morphism of schemes induced by the inclusion $k\\to k'$ [def-weil-affine-spectrum]. Then $\\pi$ is integral [def-weil-finite-integral-morphism], universally injective [def-weil-radicial-morphism] and surjective [def-weil-surjective-morphism].",
+  "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Morphisms, Lemma 01S4 (morphisms-lemma-universally-injective: radicial iff universally injective), applied to $\\operatorname{Spec}k'\\to\\operatorname{Spec}k$, a one-point map with purely inseparable residue field extension; integrality: Algebra Section 0BR5 (algebra-section-universal-homeomorphism), opening paragraph (purely inseparable means algebraic)",
+    "lean": {
+      "module": "WeilConjectures.AlgebraicGeometry.Morphisms.UniversalHomeomorphism.Algebra",
+      "declaration": "Algebra.IsUniversalHomeomorphism.of_isPurelyInseparable",
+      "lines": [
+        135,
+        157
+      ]
     }
-   ],
-   "missing": [],
-   "open": []
-  }
- },
- "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-rr",
- "lean": {
-  "branch": "slopmaster2",
-  "declarations": [
-   "Algebra.IsUniversalHomeomorphism.of_isPurelyInseparable"
+  },
+  "stmt_deps": [
+    "def-pc-field-tower",
+    "def-weil-pbc-finite-purely-inseparable-extension",
+    "def-weil-affine-spectrum",
+    "def-weil-finite-integral-morphism",
+    "def-weil-radicial-morphism",
+    "def-weil-surjective-morphism"
   ],
-  "note": "attached by the lead (worker's attachment at creation, verified by L against the sorry map, 2026-10-10)"
- }
+  "proof": [],
+  "proof_deps": [],
+  "proof_origin": null,
+  "mathlib_searches": [
+    {
+      "tool": "leansearch",
+      "query": "integral universally injective surjective morphism of schemes is universal homeomorphism; purely inseparable field extension base change of scheme is homeomorphism",
+      "results": "AlgebraicGeometry.UniversallyInjective, AlgebraicGeometry.IsIntegralHom (Mathlib.AlgebraicGeometry.Morphisms.*); PrimeSpectrum.isHomeomorph_comap_of_isPurelyInseparable (Mathlib.RingTheory.Spectrum.Prime.Homeomorph); IsPurelyInseparable.isIntegral (Mathlib.FieldTheory.PurelyInseparable.Basic)",
+      "date": "2026-10-10",
+      "verdict": "no match: Mathlib has the three notions and the integrality of a purely inseparable extension, but no statement that Spec k' -> Spec k is universally injective"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "Spec of a purely inseparable field extension is universally injective and integral and surjective",
+      "results": "PrimeSpectrum.isHomeomorph_comap_of_isPurelyInseparable; IsPurelyInseparable.of_injective_comp_algebraMap; IsPurelyInseparable.bijective_comp_algebraMap; instSubsingletonAlgHomOfIsPurelyInseparable (Mathlib.FieldTheory.PurelyInseparable.Basic)",
+      "date": "2026-10-10",
+      "verdict": "no match (ingredients only: uniqueness of embeddings into a reduced algebra gives universal injectivity via field points)"
+    },
+    {
+      "tool": "grep",
+      "query": "grep -rn 'IsPurelyInseparable' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry; grep -rn 'UniversalHomeomorph\\|universal homeomorphism' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+      "results": "AlgebraicGeometry/Morphisms/UniversallyInjective.lean:111-143 (radicial characterization of UniversallyInjective via RingHom.IsPurelyInseparable residue field maps, no Spec k' -> Spec k instance); RingTheory/Spectrum/Prime/Homeomorph.lean:13,63 (docstrings only)",
+      "date": "2026-10-10",
+      "verdict": "no match in Mathlib; the statement is the sorry-free slopmaster2 instance Algebra.IsUniversalHomeomorphism.of_isPurelyInseparable (WeilConjectures/AlgebraicGeometry/Morphisms/UniversalHomeomorphism/Algebra.lean:139-157), whose class unfolds to IsIntegralHom, UniversallyInjective and Surjective of Spec.map (algebraMap K L)"
+    }
+  ],
+  "mathlib_match": null,
+  "status": "unsplit",
+  "merged_into": null,
+  "created": {
+    "by": "worker",
+    "item": "lem-pc-homeo-pure-insep",
+    "date": "2026-10-10"
+  },
+  "lean_audit": {
+    "master": {
+      "state": "none",
+      "decls": [],
+      "missing": [
+        "Algebra.IsUniversalHomeomorphism.of_isPurelyInseparable"
+      ]
+    },
+    "slopmaster2": {
+      "state": "closed",
+      "decls": [
+        {
+          "name": "Algebra.IsUniversalHomeomorphism.of_isPurelyInseparable",
+          "module": "WeilConjectures.AlgebraicGeometry.Morphisms.UniversalHomeomorphism.Algebra",
+          "lines": [
+            135,
+            157
+          ],
+          "kind": "theorem",
+          "sorry": false
+        }
+      ],
+      "missing": [],
+      "open": []
+    }
+  },
+  "chapter": "sec-picard-framework",
+  "unit": "sk-thm-picard-rr",
+  "lean": {
+    "module": "WeilConjectures.AlgebraicGeometry.Morphisms.UniversalHomeomorphism.Algebra",
+    "declaration": "Algebra.IsUniversalHomeomorphism.of_isPurelyInseparable",
+    "branch": "slopmaster2",
+    "line": 135,
+    "declarations": [
+      "Algebra.IsUniversalHomeomorphism.of_isPurelyInseparable"
+    ],
+    "sorry_free": true,
+    "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state closed)"
+  }
 }

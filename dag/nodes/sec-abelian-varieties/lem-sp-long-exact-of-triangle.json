@@ -1,129 +1,141 @@
 {
- "id": "lem-sp-long-exact-of-triangle",
- "blueprint": {
-  "is": "lem-sp-long-exact-of-triangle",
-  "from": null,
-  "same_as": []
- },
- "kind": "statement",
- "title": "Long exact sequences of distinguished triangles",
- "statement": "Let $\\Phi:\\mathcal C\\to\\mathcal D$ be a homological functor\n[def-sp-homological-functor] with $\\mathcal D$ abelian\n[def-sp-abelian]. For every distinguished triangle $K_1\\to K_2\\to K_3\\to\nK_1[1]$ there is a long exact sequence\n\n$$\n \\cdots\\to\\Phi(K_1)\\to\\Phi(K_2)\\to\\Phi(K_3)\n \\xrightarrow{\\ \\delta\\ }\\Phi(K_1[1])\\to\\cdots\n$$\n\nwhose connecting map $\\delta$ is natural in the triangle.",
- "source": {
-  "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-pqf-finite/lem-sp-long-exact-of-triangle.md",
-  "place": "node lem-sp-long-exact-of-triangle, order 505"
- },
- "stmt_deps": [
-  "def-sp-homological-functor",
-  "def-sp-abelian"
- ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
- "mathlib_searches": [
-  {
-   "tool": "leanfinder",
-   "query": "long exact sequence of a homological functor applied to a distinguished triangle",
-   "results": "CategoryTheory.Functor.IsHomological.exact; CategoryTheory.Functor.comp_homologySequenceδ; CategoryTheory.Functor.homologySequence_exact₁; CategoryTheory.Functor.homologySequence_exact₂; CategoryTheory.Functor.homologySequence_exact₃ (Mathlib/CategoryTheory/Triangulated/HomologicalFunctor.lean)",
-   "date": "2026-10-11",
-   "verdict": "generalization: Mathlib provides exact short segments for a homological functor with an explicit ShiftSequence, not this statement's unindexed long-sequence formulation"
+  "id": "lem-sp-long-exact-of-triangle",
+  "blueprint": {
+    "is": "lem-sp-long-exact-of-triangle",
+    "from": null,
+    "same_as": []
   },
-  {
-   "tool": "loogle",
-   "query": "Functor.IsHomological, homologySequenceδ, homologySequence_exact₁",
-   "results": "0 hits; unknown identifier 'Functor.IsHomological'",
-   "date": "2026-10-11",
-   "verdict": "no match"
+  "kind": "statement",
+  "title": "Long exact sequences of distinguished triangles",
+  "statement": "Let $\\Phi:\\mathcal C\\to\\mathcal D$ be a homological functor\n[def-sp-homological-functor] with $\\mathcal D$ abelian\n[def-sp-abelian]. For every distinguished triangle $K_1\\to K_2\\to K_3\\to\nK_1[1]$ there is a long exact sequence\n\n$$\n \\cdots\\to\\Phi(K_1)\\to\\Phi(K_2)\\to\\Phi(K_3)\n \\xrightarrow{\\ \\delta\\ }\\Phi(K_1[1])\\to\\cdots\n$$\n\nwhose connecting map $\\delta$ is natural in the triangle.",
+  "source": {
+    "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-pqf-finite/lem-sp-long-exact-of-triangle.md",
+    "place": "node lem-sp-long-exact-of-triangle, order 505"
   },
-  {
-   "tool": "grep",
-   "query": "homologySequence|IsHomological|long exact in Mathlib/CategoryTheory/Triangulated",
-   "results": "Mathlib/CategoryTheory/Triangulated/HomologicalFunctor.lean:17,26,28,31,32; declarations homologySequenceδ, homologySequence_exact₁, homologySequence_exact₂, homologySequence_exact₃",
-   "date": "2026-10-11",
-   "verdict": "generalization: related indexed homology-sequence declarations only"
-  },
-  {
-   "tool": "leansearch",
-   "query": "homological functor distinguished triangle long exact sequence",
-   "results": "service unavailable: Internal Server Error",
-   "date": "2026-10-11",
-   "verdict": "unavailable"
-  },
-  {
-   "tool": "grep",
-   "query": "grep -n 'homologySequence_exact\\|homologySequenceδ_naturality\\|def homologySequenceδ\\|class IsHomological\\|tautological' Mathlib/CategoryTheory/Triangulated/HomologicalFunctor.lean Mathlib/CategoryTheory/Shift/ShiftSequence.lean (~/weil-conjectures-slopmaster2/.lake/packages/mathlib)",
-   "results": "IsHomological :82, homologySequenceδ :174, homologySequenceδ_naturality :182, homologySequence_exact₂ :218, _exact₃ :227, _exact₁ :235; ShiftSequence.tautological (ShiftSequence.lean:65)",
-   "date": "2026-10-10",
-   "verdict": "exact (reviewer R-let2004): with ShiftSequence.tautological the indexed sequence is the unindexed one Φ(K_i[n]); the ShiftSequence is not an extra hypothesis"
-  }
- ],
- "mathlib_match": {
-  "declaration": "CategoryTheory.Functor.homologySequence_exact₂",
-  "file": "Mathlib/CategoryTheory/Triangulated/HomologicalFunctor.lean",
-  "line": 218,
-  "how": "exact, with the tautological shift sequence `Functor.ShiftSequence.tautological` (Mathlib/CategoryTheory/Shift/ShiftSequence.lean:65, `sequence n := shiftFunctor C n ⋙ F`, so `F.shift n` sends K to Φ(K[n])) for `[F.IsHomological]` (HomologicalFunctor.lean:82) into an abelian category: exactness at Φ(K_2[n]) is `homologySequence_exact₂` (line 218), at Φ(K_3[n]) is `homologySequence_exact₃` (line 227), at Φ(K_1[n+1]) is `homologySequence_exact₁` (line 235); the connecting map is `homologySequenceδ` (line 174) and its naturality in a morphism of triangles is `homologySequenceδ_naturality` (line 182). One declaration per clause."
- },
- "status": "mathlib",
- "merged_into": null,
- "import_flags": [],
- "blueprint_kind": "lemma",
- "blueprint_order": 505,
- "blueprint_uses": [
-  "def-sp-abelian",
-  "def-sp-homological-functor"
- ],
- "proof_split_by": "paragraphs",
- "lean_audit": {
-  "master": {
-   "state": "none",
-   "decls": [],
-   "missing": []
-  },
-  "slopmaster2": {
-   "state": "sorry_here",
-   "decls": [
+  "stmt_deps": [
+    "def-sp-homological-functor",
+    "def-sp-abelian"
+  ],
+  "proof": [],
+  "proof_deps": [],
+  "proof_origin": null,
+  "mathlib_searches": [
     {
-     "name": "AlgebraicGeometry.WeilSheaf.exists_exact_higherLowerShriek_of_openClosed",
-     "module": "WeilConjectures.DeligneLaumon.Reduction.FormalSteps",
-     "lines": [
-      283,
-      307
-     ],
-     "kind": "theorem",
-     "sorry": true,
-     "partial": "`lem-zl-morphism-open-closed-reduction`, part 1, using `lem-sp-long-exact-of-triangle`"
+      "tool": "leanfinder",
+      "query": "long exact sequence of a homological functor applied to a distinguished triangle",
+      "results": "CategoryTheory.Functor.IsHomological.exact; CategoryTheory.Functor.comp_homologySequenceδ; CategoryTheory.Functor.homologySequence_exact₁; CategoryTheory.Functor.homologySequence_exact₂; CategoryTheory.Functor.homologySequence_exact₃ (Mathlib/CategoryTheory/Triangulated/HomologicalFunctor.lean)",
+      "date": "2026-10-11",
+      "verdict": "generalization: Mathlib provides exact short segments for a homological functor with an explicit ShiftSequence, not this statement's unindexed long-sequence formulation"
     },
     {
-     "name": "AlgebraicGeometry.WeilSheaf.exact_map_higherLowerShriek",
-     "module": "WeilConjectures.DeligneLaumon.Reduction.FormalSteps",
-     "lines": [
-      372,
-      385
-     ],
-     "kind": "theorem",
-     "sorry": true,
-     "partial": "`lem-weil-heart-short-exact-triangles` and `lem-sp-long-exact-of-triangle`, used in"
+      "tool": "loogle",
+      "query": "Functor.IsHomological, homologySequenceδ, homologySequence_exact₁",
+      "results": "0 hits; unknown identifier 'Functor.IsHomological'",
+      "date": "2026-10-11",
+      "verdict": "no match"
+    },
+    {
+      "tool": "grep",
+      "query": "homologySequence|IsHomological|long exact in Mathlib/CategoryTheory/Triangulated",
+      "results": "Mathlib/CategoryTheory/Triangulated/HomologicalFunctor.lean:17,26,28,31,32; declarations homologySequenceδ, homologySequence_exact₁, homologySequence_exact₂, homologySequence_exact₃",
+      "date": "2026-10-11",
+      "verdict": "generalization: related indexed homology-sequence declarations only"
+    },
+    {
+      "tool": "leansearch",
+      "query": "homological functor distinguished triangle long exact sequence",
+      "results": "service unavailable: Internal Server Error",
+      "date": "2026-10-11",
+      "verdict": "unavailable"
+    },
+    {
+      "tool": "grep",
+      "query": "grep -n 'homologySequence_exact\\|homologySequenceδ_naturality\\|def homologySequenceδ\\|class IsHomological\\|tautological' Mathlib/CategoryTheory/Triangulated/HomologicalFunctor.lean Mathlib/CategoryTheory/Shift/ShiftSequence.lean (~/weil-conjectures-slopmaster2/.lake/packages/mathlib)",
+      "results": "IsHomological :82, homologySequenceδ :174, homologySequenceδ_naturality :182, homologySequence_exact₂ :218, _exact₃ :227, _exact₁ :235; ShiftSequence.tautological (ShiftSequence.lean:65)",
+      "date": "2026-10-10",
+      "verdict": "exact (reviewer R-let2004): with ShiftSequence.tautological the indexed sequence is the unindexed one Φ(K_i[n]); the ShiftSequence is not an extra hypothesis"
     }
-   ],
-   "missing": [],
-   "open": []
+  ],
+  "mathlib_match": {
+    "declaration": "CategoryTheory.Functor.homologySequence_exact₂",
+    "file": "Mathlib/CategoryTheory/Triangulated/HomologicalFunctor.lean",
+    "line": 218,
+    "how": "exact, with the tautological shift sequence `Functor.ShiftSequence.tautological` (Mathlib/CategoryTheory/Shift/ShiftSequence.lean:65, `sequence n := shiftFunctor C n ⋙ F`, so `F.shift n` sends K to Φ(K[n])) for `[F.IsHomological]` (HomologicalFunctor.lean:82) into an abelian category: exactness at Φ(K_2[n]) is `homologySequence_exact₂` (line 218), at Φ(K_3[n]) is `homologySequence_exact₃` (line 227), at Φ(K_1[n+1]) is `homologySequence_exact₁` (line 235); the connecting map is `homologySequenceδ` (line 174) and its naturality in a morphism of triangles is `homologySequenceδ_naturality` (line 182). One declaration per clause."
+  },
+  "status": "mathlib",
+  "merged_into": null,
+  "import_flags": [],
+  "blueprint_kind": "lemma",
+  "blueprint_order": 505,
+  "blueprint_uses": [
+    "def-sp-abelian",
+    "def-sp-homological-functor"
+  ],
+  "proof_split_by": "paragraphs",
+  "lean_audit": {
+    "master": {
+      "state": "none",
+      "decls": [],
+      "missing": []
+    },
+    "slopmaster2": {
+      "state": "sorry_here",
+      "decls": [
+        {
+          "name": "AlgebraicGeometry.WeilSheaf.exists_exact_higherLowerShriek_of_openClosed",
+          "module": "WeilConjectures.DeligneLaumon.Reduction.FormalSteps",
+          "lines": [
+            283,
+            307
+          ],
+          "kind": "theorem",
+          "sorry": true,
+          "partial": "`lem-zl-morphism-open-closed-reduction`, part 1, using `lem-sp-long-exact-of-triangle`"
+        },
+        {
+          "name": "AlgebraicGeometry.WeilSheaf.exact_map_higherLowerShriek",
+          "module": "WeilConjectures.DeligneLaumon.Reduction.FormalSteps",
+          "lines": [
+            372,
+            385
+          ],
+          "kind": "theorem",
+          "sorry": true,
+          "partial": "`lem-weil-heart-short-exact-triangles` and `lem-sp-long-exact-of-triangle`, used in"
+        }
+      ],
+      "missing": [],
+      "open": []
+    }
+  },
+  "chapter": "sec-abelian-varieties",
+  "unit": "sk-prop-av-pqf-finite",
+  "split_report": {
+    "date": "2026-10-11",
+    "item": "lem-sp-long-exact-of-triangle",
+    "worker": "stage1",
+    "summary": "The imported statement is retained. Its proof is made explicit from the homological-functor definition: exactness for the triangle and every rotation concatenates into the bi-infinite sequence, while the connecting map is the functor image of the third triangle morphism and is natural by functoriality. No subordinate node is needed.",
+    "blueprint": "Realizes the blueprint node statement and its ## Proof paragraph by iterating exactness over rotations and identifying the connecting morphism.",
+    "tool_uses": []
+  },
+  "reviewed": {
+    "date": "2026-10-10",
+    "by": "L",
+    "reviewer": "R-let2004",
+    "group": "F1",
+    "result": "pass",
+    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-let2004 (reviewer sub-agent of L); spot-checked: Read HomologicalFunctor.lean:82,174,182,218,227,235 and ShiftSequence.lean:65. FIX more, RETURN less: (c) item is Mathlib's long exact sequence of a homological functor; with ShiftSequence.tautological (F.shift n = shift n ⋙ F) the indexed sequence is exactly Phi(K_i[n]), so the worker's 'generalization' verdict was wrong; made a leaf (status mathlib, mathlib_match homologySequence_exact₂ line 218 with exact₃/exact₁/homologySequenceδ_naturality one per clause), proof and proof_deps emptied, grep recorded in mathlib_searches. Second reading missed this; its Step 1 also misdescribed the 'n-fold rotation' as having terms K_i[n] (that is the 3n-fold rotation up to signs), now moot.; 1 file(s) fixed by the reviewer"
+  },
+  "lean": {
+    "module": "WeilConjectures.DeligneLaumon.Reduction.FormalSteps",
+    "declaration": "AlgebraicGeometry.WeilSheaf.exists_exact_higherLowerShriek_of_openClosed",
+    "branch": "slopmaster2",
+    "line": 283,
+    "declarations": [
+      "AlgebraicGeometry.WeilSheaf.exists_exact_higherLowerShriek_of_openClosed",
+      "AlgebraicGeometry.WeilSheaf.exact_map_higherLowerShriek"
+    ],
+    "sorry_free": false,
+    "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state sorry_here)"
   }
- },
- "chapter": "sec-abelian-varieties",
- "unit": "sk-prop-av-pqf-finite",
- "split_report": {
-  "date": "2026-10-11",
-  "item": "lem-sp-long-exact-of-triangle",
-  "worker": "stage1",
-  "summary": "The imported statement is retained. Its proof is made explicit from the homological-functor definition: exactness for the triangle and every rotation concatenates into the bi-infinite sequence, while the connecting map is the functor image of the third triangle morphism and is natural by functoriality. No subordinate node is needed.",
-  "blueprint": "Realizes the blueprint node statement and its ## Proof paragraph by iterating exactness over rotations and identifying the connecting morphism.",
-  "tool_uses": []
- },
- "reviewed": {
-  "date": "2026-10-10",
-  "by": "L",
-  "reviewer": "R-let2004",
-  "group": "F1",
-  "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-let2004 (reviewer sub-agent of L); spot-checked: Read HomologicalFunctor.lean:82,174,182,218,227,235 and ShiftSequence.lean:65. FIX more, RETURN less: (c) item is Mathlib's long exact sequence of a homological functor; with ShiftSequence.tautological (F.shift n = shift n ⋙ F) the indexed sequence is exactly Phi(K_i[n]), so the worker's 'generalization' verdict was wrong; made a leaf (status mathlib, mathlib_match homologySequence_exact₂ line 218 with exact₃/exact₁/homologySequenceδ_naturality one per clause), proof and proof_deps emptied, grep recorded in mathlib_searches. Second reading missed this; its Step 1 also misdescribed the 'n-fold rotation' as having terms K_i[n] (that is the 3n-fold rotation up to signs), now moot.; 1 file(s) fixed by the reviewer"
- }
 }

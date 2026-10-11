@@ -1,133 +1,145 @@
 {
- "id": "cor-mg-central-determinant-weight",
- "blueprint": {
-  "is": "cor-mg-central-determinant-weight",
-  "from": null,
-  "same_as": null
- },
- "kind": "statement",
- "title": "Central element determines the determinant weight",
- "statement": "Let $X_0$ be a normal geometrically connected curve over $k_0$, put\n$|k_0|=q$, and fix a real weight character $\\lambda$ ([d-weights]). Let\n$\\rho:W(X_0)\\to\\operatorname{GL}(V)$ be the representation of a lisse\nWeil sheaf, with the monodromy data of [def-wf-monodromy-data], computed\nwith one fixed degree-one element $s$, and let\n$z=(h,m)\\in G^{[m]}(\\Qlb)$ be an algebraic-monodromy element of positive\ndegree $m$ which is central in $G_{\\mathrm{arith}}(\\rho)$ (an element\nfurnished by [lem-mg-common-positive-central-element] when $\\rho$ is\nsemisimple). Let $Q\\neq0$ be a Weil-stable subquotient of $V$, or more\ngenerally any of the tensor, exterior-power or iterated-subquotient\nconstructions of [lem-mg-degree-component-functoriality], of rank $r$,\nwith Weil representation $\\rho_Q$, with finite geometric determinant,\ni.e. $\\det\\rho_Q(\\pi_1(X))$ finite, and with the homomorphism\n$\\Phi_Q:G_{\\mathrm{arith}}(\\rho)\\to G_{\\mathrm{arith}}(\\rho_Q)$ of that\nlemma. The representation $Q$ need not be irreducible or semisimple.\nSay that $z$ *acts on $Q$ as a scalar* $c_Q\\in\\Qlb^\\times$ if the matrix\nof $\\Phi_Q(z)$ under the matrix map $(h',n)\\mapsto h'\\rho_Q(s)^n$ of\n[def-wf-arithmetic-monodromy-extension] is $c_Q\\,1_Q$. If $z$ acts on\n$Q$ as a scalar $c_Q$, then\n\n$$\n\\dw_\\lambda(Q)=\\frac{\\lambda(c_Q)}{m}.\n$$\n\nThe scalar-action hypothesis holds whenever $Q$ is Weil-irreducible.\nIn particular, for an irreducible lisse Weil sheaf $\\mathcal W_0$ of rank\n$r$ with representation $\\rho_{\\mathcal W}$ and finite geometric\ndeterminant, and $z\\in G^{[m]}$ central in\n$G_{\\mathrm{arith}}(\\rho_{\\mathcal W})$ (the case $V=Q$, $\\Phi_Q$ the\nidentity), $z$ acts by a scalar $c_W$ and\n\n$$\n\\dw_\\lambda(\\mathcal W_0)=\\frac{\\lambda(c_W)}{m};\n$$\n\nfor $\\lambda=\\lambda_\\iota$ this reads\n\n$$\n\\frac{2\\log_q|\\iota(\\det\\rho_{\\mathcal W}(s))|}{r}=\\frac{2\\log_q|\\iota(c_W)|}{m},\n$$\n\nwhere $\\log_q$ is the base-$q$ logarithm. The determinant weight\n$\\dw_\\lambda(Q)$ does not depend on the degree-one element used to\ndefine it in [d-weights].",
- "source": {
-  "document": "literature/blueprint/master/blueprint/sec-algebraic-groups-lie-algebras/sk-p-readout/cor-mg-central-determinant-weight.md",
-  "place": "node cor-mg-central-determinant-weight, order 2557"
- },
- "stmt_deps": [
-  "d-weights",
-  "def-wf-monodromy-data",
-  "lem-mg-common-positive-central-element",
-  "lem-mg-degree-component-functoriality",
-  "def-wf-arithmetic-monodromy-extension",
-  "def-wf-weil-category"
- ],
- "proof": [
-  {
-   "text": "*The matrix map is a homomorphism.* For $(h',n),(h'',p)$ in\n$G_{\\mathrm{arith}}(\\rho_Q)$, the product\n$(h'\\alpha^n(h''),n+p)$ of [def-wf-arithmetic-monodromy-extension] has\nmatrix\n$h'\\rho_Q(s)^nh''\\rho_Q(s)^{-n}\\rho_Q(s)^{n+p}\n=(h'\\rho_Q(s)^n)(h''\\rho_Q(s)^p)$. If $w\\in W(X_0)$ has degree $n$,\nthen $ws^{-n}\\in\\pi_1(X)$, so $(\\rho_Q(ws^{-n}),n)$ lies in\n$G_{\\mathrm{arith}}(\\rho_Q)$ and its matrix is $\\rho_Q(w)$.",
-   "uses": [
-    "def-wf-arithmetic-monodromy-extension"
-   ],
-   "elementary": false
+  "id": "cor-mg-central-determinant-weight",
+  "blueprint": {
+    "is": "cor-mg-central-determinant-weight",
+    "from": null,
+    "same_as": null
   },
-  {
-   "text": "*The general scalar case.* Let\n$\\chi_{\\det}=\\det\\circ\\rho_Q:W(X_0)\\to\\Qlb^\\times$ be the character of\nthe determinant line of $Q$, and put $c=\\chi_{\\det}(s)$. Write\n$\\Phi_Q(z)=(h_Q,m)$ with $h_Q\\in H_{\\mathrm{geom}}(\\rho_Q)$; the degree\nis $m$ because $\\Phi_Q$ preserves degrees\n([lem-mg-degree-component-functoriality]). By hypothesis its matrix is\n$h_Q\\rho_Q(s)^m=c_Q1_Q$, and taking determinants on the $r$-dimensional\nspace $Q$ gives\n\n$$\nc_Q^r=\\det(h_Q)\\,c^m .\n$$\n\nThe morphism $\\Delta_{\\rho_Q}$ of\n[lem-mg-determinant-monodromy-morphism] sends $\\Phi_Q(z)$ to\n$(\\det h_Q,m)$ in the arithmetic monodromy group of the rank-one\ndeterminant line. The group $A=\\chi_{\\det}(\\pi_1(X))$ is finite by\nhypothesis, so [lem-wf-rank-one-algebraic-extension] applies: in the\nnotation of [def-wf-degree-components],\n$H_{\\mathrm{geom}}(\\chi_{\\det})=A$ and\n$G_{\\mathrm{arith}}(\\chi_{\\det})=A\\times\\mathbf Z$, so\n$a:=\\det h_Q\\in A$. The element $a$ has finite order, and a real weight\ncharacter kills finite-order elements: if $a^e=1$ with $e>0$, then\n$e\\lambda(a)=\\lambda(a^e)=0$. Applying $\\lambda$ therefore gives\n$r\\lambda(c_Q)=m\\lambda(c)$, that is,\n\n$$\n\\frac{\\lambda(c_Q)}{m}=\\frac{\\lambda(c)}{r}=\\dw_\\lambda(Q)\n$$\n\nby the definition in [d-weights]. Only the scalar action of $z$ on $Q$\nwas used here, not the irreducibility or semisimplicity of $Q$.",
-   "uses": [
+  "kind": "statement",
+  "title": "Central element determines the determinant weight",
+  "statement": "Let $X_0$ be a normal geometrically connected curve over $k_0$, put\n$|k_0|=q$, and fix a real weight character $\\lambda$ ([d-weights]). Let\n$\\rho:W(X_0)\\to\\operatorname{GL}(V)$ be the representation of a lisse\nWeil sheaf, with the monodromy data of [def-wf-monodromy-data], computed\nwith one fixed degree-one element $s$, and let\n$z=(h,m)\\in G^{[m]}(\\Qlb)$ be an algebraic-monodromy element of positive\ndegree $m$ which is central in $G_{\\mathrm{arith}}(\\rho)$ (an element\nfurnished by [lem-mg-common-positive-central-element] when $\\rho$ is\nsemisimple). Let $Q\\neq0$ be a Weil-stable subquotient of $V$, or more\ngenerally any of the tensor, exterior-power or iterated-subquotient\nconstructions of [lem-mg-degree-component-functoriality], of rank $r$,\nwith Weil representation $\\rho_Q$, with finite geometric determinant,\ni.e. $\\det\\rho_Q(\\pi_1(X))$ finite, and with the homomorphism\n$\\Phi_Q:G_{\\mathrm{arith}}(\\rho)\\to G_{\\mathrm{arith}}(\\rho_Q)$ of that\nlemma. The representation $Q$ need not be irreducible or semisimple.\nSay that $z$ *acts on $Q$ as a scalar* $c_Q\\in\\Qlb^\\times$ if the matrix\nof $\\Phi_Q(z)$ under the matrix map $(h',n)\\mapsto h'\\rho_Q(s)^n$ of\n[def-wf-arithmetic-monodromy-extension] is $c_Q\\,1_Q$. If $z$ acts on\n$Q$ as a scalar $c_Q$, then\n\n$$\n\\dw_\\lambda(Q)=\\frac{\\lambda(c_Q)}{m}.\n$$\n\nThe scalar-action hypothesis holds whenever $Q$ is Weil-irreducible.\nIn particular, for an irreducible lisse Weil sheaf $\\mathcal W_0$ of rank\n$r$ with representation $\\rho_{\\mathcal W}$ and finite geometric\ndeterminant, and $z\\in G^{[m]}$ central in\n$G_{\\mathrm{arith}}(\\rho_{\\mathcal W})$ (the case $V=Q$, $\\Phi_Q$ the\nidentity), $z$ acts by a scalar $c_W$ and\n\n$$\n\\dw_\\lambda(\\mathcal W_0)=\\frac{\\lambda(c_W)}{m};\n$$\n\nfor $\\lambda=\\lambda_\\iota$ this reads\n\n$$\n\\frac{2\\log_q|\\iota(\\det\\rho_{\\mathcal W}(s))|}{r}=\\frac{2\\log_q|\\iota(c_W)|}{m},\n$$\n\nwhere $\\log_q$ is the base-$q$ logarithm. The determinant weight\n$\\dw_\\lambda(Q)$ does not depend on the degree-one element used to\ndefine it in [d-weights].",
+  "source": {
+    "document": "literature/blueprint/master/blueprint/sec-algebraic-groups-lie-algebras/sk-p-readout/cor-mg-central-determinant-weight.md",
+    "place": "node cor-mg-central-determinant-weight, order 2557"
+  },
+  "stmt_deps": [
+    "d-weights",
+    "def-wf-monodromy-data",
+    "lem-mg-common-positive-central-element",
+    "lem-mg-degree-component-functoriality",
+    "def-wf-arithmetic-monodromy-extension",
+    "def-wf-weil-category"
+  ],
+  "proof": [
+    {
+      "text": "*The matrix map is a homomorphism.* For $(h',n),(h'',p)$ in\n$G_{\\mathrm{arith}}(\\rho_Q)$, the product\n$(h'\\alpha^n(h''),n+p)$ of [def-wf-arithmetic-monodromy-extension] has\nmatrix\n$h'\\rho_Q(s)^nh''\\rho_Q(s)^{-n}\\rho_Q(s)^{n+p}\n=(h'\\rho_Q(s)^n)(h''\\rho_Q(s)^p)$. If $w\\in W(X_0)$ has degree $n$,\nthen $ws^{-n}\\in\\pi_1(X)$, so $(\\rho_Q(ws^{-n}),n)$ lies in\n$G_{\\mathrm{arith}}(\\rho_Q)$ and its matrix is $\\rho_Q(w)$.",
+      "uses": [
+        "def-wf-arithmetic-monodromy-extension"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "*The general scalar case.* Let\n$\\chi_{\\det}=\\det\\circ\\rho_Q:W(X_0)\\to\\Qlb^\\times$ be the character of\nthe determinant line of $Q$, and put $c=\\chi_{\\det}(s)$. Write\n$\\Phi_Q(z)=(h_Q,m)$ with $h_Q\\in H_{\\mathrm{geom}}(\\rho_Q)$; the degree\nis $m$ because $\\Phi_Q$ preserves degrees\n([lem-mg-degree-component-functoriality]). By hypothesis its matrix is\n$h_Q\\rho_Q(s)^m=c_Q1_Q$, and taking determinants on the $r$-dimensional\nspace $Q$ gives\n\n$$\nc_Q^r=\\det(h_Q)\\,c^m .\n$$\n\nThe morphism $\\Delta_{\\rho_Q}$ of\n[lem-mg-determinant-monodromy-morphism] sends $\\Phi_Q(z)$ to\n$(\\det h_Q,m)$ in the arithmetic monodromy group of the rank-one\ndeterminant line. The group $A=\\chi_{\\det}(\\pi_1(X))$ is finite by\nhypothesis, so [lem-wf-rank-one-algebraic-extension] applies: in the\nnotation of [def-wf-degree-components],\n$H_{\\mathrm{geom}}(\\chi_{\\det})=A$ and\n$G_{\\mathrm{arith}}(\\chi_{\\det})=A\\times\\mathbf Z$, so\n$a:=\\det h_Q\\in A$. The element $a$ has finite order, and a real weight\ncharacter kills finite-order elements: if $a^e=1$ with $e>0$, then\n$e\\lambda(a)=\\lambda(a^e)=0$. Applying $\\lambda$ therefore gives\n$r\\lambda(c_Q)=m\\lambda(c)$, that is,\n\n$$\n\\frac{\\lambda(c_Q)}{m}=\\frac{\\lambda(c)}{r}=\\dw_\\lambda(Q)\n$$\n\nby the definition in [d-weights]. Only the scalar action of $z$ on $Q$\nwas used here, not the irreducibility or semisimplicity of $Q$.",
+      "uses": [
+        "lem-mg-degree-component-functoriality",
+        "lem-mg-determinant-monodromy-morphism",
+        "lem-wf-rank-one-algebraic-extension",
+        "def-wf-degree-components",
+        "d-weights"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "*Irreducible $Q$.* By [lem-mg-degree-component-functoriality],\n$\\Phi_Q(z)$ is central in $G_{\\mathrm{arith}}(\\rho_Q)$. By the first\nparagraph its matrix commutes with the matrix $\\rho_Q(w)$ of every\n$(\\rho_Q(ws^{-n}),n)$, i.e. with the whole Weil-group image. If $Q$ is\nWeil-irreducible, [lem-wf-schur-scalar] makes this matrix a scalar\n$c_Q$, nonzero because the matrix is invertible. Taking $V=Q$ and\n$\\Phi_Q$ the identity gives the stated case of $\\mathcal W_0$, and the\ncase $\\lambda=\\lambda_\\iota$ is the last display.",
+      "uses": [
+        "lem-mg-degree-component-functoriality",
+        "lem-wf-schur-scalar"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "*Independence of the lift.* Replacing the degree-one element by $us$\nwith $u\\in\\pi_1(X)$ multiplies $\\chi_{\\det}(s)$ by the finite-order\nelement $\\chi_{\\det}(u)\\in A$, which $\\lambda$ kills; so\n$\\dw_\\lambda(Q)$ does not depend on the degree-one lift.",
+      "uses": [],
+      "elementary": null
+    }
+  ],
+  "proof_deps": [
+    "def-wf-arithmetic-monodromy-extension",
     "lem-mg-degree-component-functoriality",
     "lem-mg-determinant-monodromy-morphism",
     "lem-wf-rank-one-algebraic-extension",
     "def-wf-degree-components",
-    "d-weights"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "*Irreducible $Q$.* By [lem-mg-degree-component-functoriality],\n$\\Phi_Q(z)$ is central in $G_{\\mathrm{arith}}(\\rho_Q)$. By the first\nparagraph its matrix commutes with the matrix $\\rho_Q(w)$ of every\n$(\\rho_Q(ws^{-n}),n)$, i.e. with the whole Weil-group image. If $Q$ is\nWeil-irreducible, [lem-wf-schur-scalar] makes this matrix a scalar\n$c_Q$, nonzero because the matrix is invertible. Taking $V=Q$ and\n$\\Phi_Q$ the identity gives the stated case of $\\mathcal W_0$, and the\ncase $\\lambda=\\lambda_\\iota$ is the last display.",
-   "uses": [
-    "lem-mg-degree-component-functoriality",
+    "d-weights",
     "lem-wf-schur-scalar"
-   ],
-   "elementary": false
+  ],
+  "proof_origin": {
+    "by": "agent",
+    "document": "literature/blueprint/master/blueprint/sec-algebraic-groups-lie-algebras/sk-p-readout/cor-mg-central-determinant-weight.md",
+    "place": "## Proof"
   },
-  {
-   "text": "*Independence of the lift.* Replacing the degree-one element by $us$\nwith $u\\in\\pi_1(X)$ multiplies $\\chi_{\\det}(s)$ by the finite-order\nelement $\\chi_{\\det}(u)\\in A$, which $\\lambda$ kills; so\n$\\dw_\\lambda(Q)$ does not depend on the degree-one lift.",
-   "uses": [],
-   "elementary": null
-  }
- ],
- "proof_deps": [
-  "def-wf-arithmetic-monodromy-extension",
-  "lem-mg-degree-component-functoriality",
-  "lem-mg-determinant-monodromy-morphism",
-  "lem-wf-rank-one-algebraic-extension",
-  "def-wf-degree-components",
-  "d-weights",
-  "lem-wf-schur-scalar"
- ],
- "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-algebraic-groups-lie-algebras/sk-p-readout/cor-mg-central-determinant-weight.md",
-  "place": "## Proof"
- },
- "mathlib_searches": [],
- "mathlib_match": null,
- "status": "imported",
- "merged_into": null,
- "import_flags": [
-  "cites_outside_uses"
- ],
- "blueprint_kind": "theorem",
- "blueprint_order": 2557,
- "blueprint_uses": [
-  "d-weights",
-  "def-wf-arithmetic-monodromy-extension",
-  "def-wf-degree-components",
-  "def-wf-monodromy-data",
-  "def-wf-weil-category",
-  "lem-mg-degree-component-functoriality",
-  "lem-mg-determinant-monodromy-morphism",
-  "lem-wf-rank-one-algebraic-extension",
-  "lem-wf-schur-scalar"
- ],
- "blueprint_tags": [
-  "latex:corollary"
- ],
- "uses_not_cited": [
-  "def-wf-weil-category"
- ],
- "proof_split_by": "labels",
- "lean_audit": {
-  "master": {
-   "state": "none",
-   "decls": [],
-   "missing": []
-  },
-  "slopmaster2": {
-   "state": "closed",
-   "decls": [
-    {
-     "name": "AlgebraicGeometry.Monodromy.RepresentedDegreeDatum.exists_detWeight_eq_of_isPositiveCentralPair_of_isIrreducible",
-     "module": "WeilConjectures.AlgebraicGeometry.LinearAlgebraicGroup.Weights",
-     "lines": [
-      304,
-      330
-     ],
-     "kind": "theorem",
-     "sorry": false
+  "mathlib_searches": [],
+  "mathlib_match": null,
+  "status": "imported",
+  "merged_into": null,
+  "import_flags": [
+    "cites_outside_uses"
+  ],
+  "blueprint_kind": "theorem",
+  "blueprint_order": 2557,
+  "blueprint_uses": [
+    "d-weights",
+    "def-wf-arithmetic-monodromy-extension",
+    "def-wf-degree-components",
+    "def-wf-monodromy-data",
+    "def-wf-weil-category",
+    "lem-mg-degree-component-functoriality",
+    "lem-mg-determinant-monodromy-morphism",
+    "lem-wf-rank-one-algebraic-extension",
+    "lem-wf-schur-scalar"
+  ],
+  "blueprint_tags": [
+    "latex:corollary"
+  ],
+  "uses_not_cited": [
+    "def-wf-weil-category"
+  ],
+  "proof_split_by": "labels",
+  "lean_audit": {
+    "master": {
+      "state": "none",
+      "decls": [],
+      "missing": []
     },
-    {
-     "name": "AlgebraicGeometry.Monodromy.RepresentedDegreeDatum.exists_detWeight_eq_of_isPositiveCentralPair_of_surjective",
-     "module": "WeilConjectures.AlgebraicGeometry.LinearAlgebraicGroup.Weights",
-     "lines": [
-      388,
-      441
-     ],
-     "kind": "theorem",
-     "sorry": false
+    "slopmaster2": {
+      "state": "closed",
+      "decls": [
+        {
+          "name": "AlgebraicGeometry.Monodromy.RepresentedDegreeDatum.exists_detWeight_eq_of_isPositiveCentralPair_of_isIrreducible",
+          "module": "WeilConjectures.AlgebraicGeometry.LinearAlgebraicGroup.Weights",
+          "lines": [
+            304,
+            330
+          ],
+          "kind": "theorem",
+          "sorry": false
+        },
+        {
+          "name": "AlgebraicGeometry.Monodromy.RepresentedDegreeDatum.exists_detWeight_eq_of_isPositiveCentralPair_of_surjective",
+          "module": "WeilConjectures.AlgebraicGeometry.LinearAlgebraicGroup.Weights",
+          "lines": [
+            388,
+            441
+          ],
+          "kind": "theorem",
+          "sorry": false
+        }
+      ],
+      "missing": [],
+      "open": []
     }
-   ],
-   "missing": [],
-   "open": []
+  },
+  "chapter": "sec-algebraic-groups-lie-algebras",
+  "unit": "sk-p-readout",
+  "lean": {
+    "module": "WeilConjectures.AlgebraicGeometry.LinearAlgebraicGroup.Weights",
+    "declaration": "AlgebraicGeometry.Monodromy.RepresentedDegreeDatum.exists_detWeight_eq_of_isPositiveCentralPair_of_isIrreducible",
+    "branch": "slopmaster2",
+    "line": 304,
+    "declarations": [
+      "AlgebraicGeometry.Monodromy.RepresentedDegreeDatum.exists_detWeight_eq_of_isPositiveCentralPair_of_isIrreducible",
+      "AlgebraicGeometry.Monodromy.RepresentedDegreeDatum.exists_detWeight_eq_of_isPositiveCentralPair_of_surjective"
+    ],
+    "sorry_free": true,
+    "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state closed)"
   }
- },
- "chapter": "sec-algebraic-groups-lie-algebras",
- "unit": "sk-p-readout"
 }

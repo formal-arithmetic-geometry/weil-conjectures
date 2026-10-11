@@ -1,94 +1,98 @@
 {
- "id": "lem-sc-finite-support-acyclic",
- "blueprint": {
-  "is": null,
-  "from": {
-   "node": "lem-sc-cohomological-dimension",
-   "place": "## Proof, as a whole (degrees $q>2$): the blueprint proof concludes 'For total degree $q>2$ there are thus no differentials into or out of $H^q(C,\\eta_*M)$. It equals $H^q(k(C),M)=0$'; the split replaces this generic-point assembly by the route of the Lean proof AlgebraicGeometry.IsCurve.subsingleton_sheafH_of_three_le_of_forall (HighDegreeVanishing.lean), and this node is used in step 7 (the cokernel $R$ of $\\psi:N\\to j_*G'$ is acyclic) and through [lem-sc-iso-off-finite-set-cohomology] in step 2.",
-   "via": []
+  "id": "lem-sc-finite-support-acyclic",
+  "blueprint": {
+    "is": null,
+    "from": {
+      "node": "lem-sc-cohomological-dimension",
+      "place": "## Proof, as a whole (degrees $q>2$): the blueprint proof concludes 'For total degree $q>2$ there are thus no differentials into or out of $H^q(C,\\eta_*M)$. It equals $H^q(k(C),M)=0$'; the split replaces this generic-point assembly by the route of the Lean proof AlgebraicGeometry.IsCurve.subsingleton_sheafH_of_three_le_of_forall (HighDegreeVanishing.lean), and this node is used in step 7 (the cokernel $R$ of $\\psi:N\\to j_*G'$ is acyclic) and through [lem-sc-iso-off-finite-set-cohomology] in step 2.",
+      "via": []
+    },
+    "same_as": []
   },
-  "same_as": []
- },
- "kind": "statement",
- "title": "Sheaves supported on finitely many closed points with separably closed residue fields are acyclic",
- "statement": "Let $X$ be a scheme, $U\\subseteq X$ an open subscheme with inclusion $j:U\\to X$, and assume that $X\\setminus U$ is a finite set of closed points [def-weil-closed-points] $x$ each of whose residue fields $\\kappa(x)$ [def-weil-residue-field] is separably closed [def-kun-separably-closed]. Let $G$ be an abelian sheaf on $X_{\\Et}$ [def-weil-pbc-abelian-etale-sheaves] whose inverse image $j^{-1}G$ [def-weil-pbc-inverse-image] on $U_{\\Et}$ is zero. Then $H^q(X_{\\Et},G)=0$ for all $q\\ge1$ [def-weil-pbc-etale-cohomology].",
- "source": {
-  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-cd/lem-sc-cohomological-dimension.md (agent-written split, following the Lean)",
-  "place": "Lean: WeilConjectures/AlgebraicGeometry/Sites/FiniteSupport.lean, AlgebraicGeometry.Etale.subsingleton_H_of_isZero_upperStar, lines 57-149 ($G\\cong\\bigoplus_x i_{x*}i_x^{-1}G$ and a geometric point has no higher cohomology)"
- },
- "stmt_deps": [
-  "def-weil-closed-points",
-  "def-weil-residue-field",
-  "def-kun-separably-closed",
-  "def-weil-pbc-abelian-etale-sheaves",
-  "def-weil-pbc-inverse-image",
-  "def-weil-pbc-etale-cohomology"
- ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
- "mathlib_searches": [
-  {
-   "tool": "leansearch",
-   "query": "etale sheaf supported on finitely many closed points has vanishing higher cohomology",
-   "results": "IdealSheafData.support, Algebra.isOpen_etaleLocus, Scheme.Etale (no étale cohomology vanishing)",
-   "date": "2026-10-10",
-   "verdict": "no match"
+  "kind": "statement",
+  "title": "Sheaves supported on finitely many closed points with separably closed residue fields are acyclic",
+  "statement": "Let $X$ be a scheme, $U\\subseteq X$ an open subscheme with inclusion $j:U\\to X$, and assume that $X\\setminus U$ is a finite set of closed points [def-weil-closed-points] $x$ each of whose residue fields $\\kappa(x)$ [def-weil-residue-field] is separably closed [def-kun-separably-closed]. Let $G$ be an abelian sheaf on $X_{\\Et}$ [def-weil-pbc-abelian-etale-sheaves] whose inverse image $j^{-1}G$ [def-weil-pbc-inverse-image] on $U_{\\Et}$ is zero. Then $H^q(X_{\\Et},G)=0$ for all $q\\ge1$ [def-weil-pbc-etale-cohomology].",
+  "source": {
+    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-cd/lem-sc-cohomological-dimension.md (agent-written split, following the Lean)",
+    "place": "Lean: WeilConjectures/AlgebraicGeometry/Sites/FiniteSupport.lean, AlgebraicGeometry.Etale.subsingleton_H_of_isZero_upperStar, lines 57-149 ($G\\cong\\bigoplus_x i_{x*}i_x^{-1}G$ and a geometric point has no higher cohomology)"
   },
-  {
-   "tool": "leanfinder",
-   "query": "sheaf on small etale site vanishing outside finitely many closed points is acyclic",
-   "results": "Scheme.etaleTopology, Scheme.smallEtaleTopology (Mathlib.AlgebraicGeometry.Sites.Etale), Scheme.zero_of_zero_cover",
-   "date": "2026-10-10",
-   "verdict": "no match"
-  },
-  {
-   "tool": "grep",
-   "query": "grep -rln 'smallEtaleTopology' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib; grep -rln 'subsingleton_H\\|Sheaf.H ' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
-   "results": "Sites/Etale.lean, Sites/AffineEtale.lean, Sites/EtalePoint.lean, Sites/ElladicCohomology.lean, CategoryTheory/Sites/SheafCohomology/Basic.lean: definitions of the site and of Sheaf.H only, no vanishing statement; the project declaration AlgebraicGeometry.Etale.subsingleton_H_of_isZero_upperStar (WeilConjectures/AlgebraicGeometry/Sites/FiniteSupport.lean:66) states it",
-   "date": "2026-10-10",
-   "verdict": "no match in Mathlib"
-  }
- ],
- "mathlib_match": null,
- "status": "unsplit",
- "merged_into": null,
- "created": {
-  "by": "worker",
-  "item": "lem-sc-cohomological-dimension",
-  "date": "2026-10-10"
- },
- "chapter": "sec-curve-estimates",
- "unit": "sk-prop-cd",
- "lean_audit": {
-  "master": {
-   "state": "none",
-   "decls": [],
-   "missing": []
-  },
-  "slopmaster2": {
-   "state": "closed",
-   "decls": [
-    {
-     "name": "AlgebraicGeometry.Etale.subsingleton_H_of_isZero_upperStar",
-     "module": "WeilConjectures.AlgebraicGeometry.Sites.FiniteSupport",
-     "lines": [
-      57,
-      149
-     ],
-     "kind": "theorem",
-     "sorry": false
-    }
-   ],
-   "missing": [],
-   "open": []
-  }
- },
- "lean": {
-  "branch": "slopmaster2",
-  "declarations": [
-   "AlgebraicGeometry.Etale.subsingleton_H_of_isZero_upperStar"
+  "stmt_deps": [
+    "def-weil-closed-points",
+    "def-weil-residue-field",
+    "def-kun-separably-closed",
+    "def-weil-pbc-abelian-etale-sheaves",
+    "def-weil-pbc-inverse-image",
+    "def-weil-pbc-etale-cohomology"
   ],
-  "note": "attached by the lead (worker's attachment at creation, verified by L against the sorry map, 2026-10-10)"
- }
+  "proof": [],
+  "proof_deps": [],
+  "proof_origin": null,
+  "mathlib_searches": [
+    {
+      "tool": "leansearch",
+      "query": "etale sheaf supported on finitely many closed points has vanishing higher cohomology",
+      "results": "IdealSheafData.support, Algebra.isOpen_etaleLocus, Scheme.Etale (no étale cohomology vanishing)",
+      "date": "2026-10-10",
+      "verdict": "no match"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "sheaf on small etale site vanishing outside finitely many closed points is acyclic",
+      "results": "Scheme.etaleTopology, Scheme.smallEtaleTopology (Mathlib.AlgebraicGeometry.Sites.Etale), Scheme.zero_of_zero_cover",
+      "date": "2026-10-10",
+      "verdict": "no match"
+    },
+    {
+      "tool": "grep",
+      "query": "grep -rln 'smallEtaleTopology' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib; grep -rln 'subsingleton_H\\|Sheaf.H ' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+      "results": "Sites/Etale.lean, Sites/AffineEtale.lean, Sites/EtalePoint.lean, Sites/ElladicCohomology.lean, CategoryTheory/Sites/SheafCohomology/Basic.lean: definitions of the site and of Sheaf.H only, no vanishing statement; the project declaration AlgebraicGeometry.Etale.subsingleton_H_of_isZero_upperStar (WeilConjectures/AlgebraicGeometry/Sites/FiniteSupport.lean:66) states it",
+      "date": "2026-10-10",
+      "verdict": "no match in Mathlib"
+    }
+  ],
+  "mathlib_match": null,
+  "status": "unsplit",
+  "merged_into": null,
+  "created": {
+    "by": "worker",
+    "item": "lem-sc-cohomological-dimension",
+    "date": "2026-10-10"
+  },
+  "chapter": "sec-curve-estimates",
+  "unit": "sk-prop-cd",
+  "lean_audit": {
+    "master": {
+      "state": "none",
+      "decls": [],
+      "missing": []
+    },
+    "slopmaster2": {
+      "state": "closed",
+      "decls": [
+        {
+          "name": "AlgebraicGeometry.Etale.subsingleton_H_of_isZero_upperStar",
+          "module": "WeilConjectures.AlgebraicGeometry.Sites.FiniteSupport",
+          "lines": [
+            57,
+            149
+          ],
+          "kind": "theorem",
+          "sorry": false
+        }
+      ],
+      "missing": [],
+      "open": []
+    }
+  },
+  "lean": {
+    "module": "WeilConjectures.AlgebraicGeometry.Sites.FiniteSupport",
+    "declaration": "AlgebraicGeometry.Etale.subsingleton_H_of_isZero_upperStar",
+    "branch": "slopmaster2",
+    "line": 57,
+    "declarations": [
+      "AlgebraicGeometry.Etale.subsingleton_H_of_isZero_upperStar"
+    ],
+    "sorry_free": true,
+    "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state closed)"
+  }
 }

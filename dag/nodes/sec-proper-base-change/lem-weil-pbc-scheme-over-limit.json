@@ -1,103 +1,107 @@
 {
- "id": "lem-weil-pbc-scheme-over-limit",
- "blueprint": {
-  "is": null,
-  "from": {
-   "node": "lemma-weil-pbc-injective-restriction-acyclicity",
-   "place": "step 5 of its split (source: Lemma Tag 0A51 (lemma-vanishing-restriction-injective) and its proof: 'By Theorem 09YQ we have H^q(X^h, I|) = colim H^q(Spec(B), I|)... Thus the cohomology groups on the right are zero')",
-   "via": [
-    "lem-weil-pbc-affine-etale-site-colimit",
-    "lem-weil-pbc-etale-cohomology-limit-of-schemes"
-   ]
+  "id": "lem-weil-pbc-scheme-over-limit",
+  "blueprint": {
+    "is": null,
+    "from": {
+      "node": "lemma-weil-pbc-injective-restriction-acyclicity",
+      "place": "step 5 of its split (source: Lemma Tag 0A51 (lemma-vanishing-restriction-injective) and its proof: 'By Theorem 09YQ we have H^q(X^h, I|) = colim H^q(Spec(B), I|)... Thus the cohomology groups on the right are zero')",
+      "via": [
+        "lem-weil-pbc-affine-etale-site-colimit",
+        "lem-weil-pbc-etale-cohomology-limit-of-schemes"
+      ]
+    },
+    "same_as": null
   },
-  "same_as": null
- },
- "kind": "statement",
- "title": "A scheme over a stage, base changed to the limit, is the limit of its base changes",
- "statement": "Let $I$ be a directed set and $(S_i,f_{ii'})$ an inverse system of schemes [def-pc-scheme] over $I$ whose transition morphisms $f_{ii'}:S_i\\to S_{i'}$ ($i\\ge i'$) are affine [pqf-def-affine-morphism], with limit $S=\\varprojlim_iS_i$ and projections $f_i:S\\to S_i$ [lem-weil-pbc-limit-affine-transition]. Let $0\\in I$ and let $T\\to S_0$ be a morphism of schemes. For $i\\ge0$ put $T_i=T\\times_{S_0}S_i$ (fibre product [def-pc-fibre-product] along $f_{i0}$) and for $i\\ge i'\\ge0$ let $t_{ii'}=\\mathrm{id}_T\\times f_{ii'}:T_i\\to T_{i'}$. Then $(T_i,t_{ii'})_{i\\ge0}$ is an inverse system over the directed set $I_{\\ge0}$ whose transition morphisms are affine (base changes of the $f_{ii'}$), and $T\\times_{S_0}S$, with the morphisms $\\mathrm{id}_T\\times f_i:T\\times_{S_0}S\\to T_i$, is its limit in the category of schemes: $T\\times_{S_0}S=\\varprojlim_{i\\ge0}T\\times_{S_0}S_i$ (Stacks Limits, Lemma 01YZ).",
- "source": {
-  "document": "literature/stacks-project/limits.tex",
-  "place": "Lemma Tag 01YZ (lemma-scheme-over-limit, line 114) and its proof (the right side exists by Lemma 01YX; the equality is formal, Categories Lemma colimits-commute)"
- },
- "stmt_deps": [
-  "def-pc-scheme",
-  "pqf-def-affine-morphism",
-  "def-pc-fibre-product",
-  "lem-weil-pbc-limit-affine-transition"
- ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
- "mathlib_searches": [
-  {
-   "tool": "leansearch",
-   "query": "base change of a cofiltered limit of schemes along a morphism to one stage is the limit of the base changes",
-   "results": "AlgebraicGeometry.isLimitOpensCone, isAffineHom_π_app, Scheme.compactSpace_of_isLimit (Mathlib.AlgebraicGeometry.AffineTransitionLimit), IsSeparated.isStableUnderBaseChange, AffineScheme.forgetToScheme_preservesLimits",
-   "date": "2026-10-10",
-   "verdict": "no match: only the case of an open subscheme T of a stage (isLimitOpensCone)"
+  "kind": "statement",
+  "title": "A scheme over a stage, base changed to the limit, is the limit of its base changes",
+  "statement": "Let $I$ be a directed set and $(S_i,f_{ii'})$ an inverse system of schemes [def-pc-scheme] over $I$ whose transition morphisms $f_{ii'}:S_i\\to S_{i'}$ ($i\\ge i'$) are affine [pqf-def-affine-morphism], with limit $S=\\varprojlim_iS_i$ and projections $f_i:S\\to S_i$ [lem-weil-pbc-limit-affine-transition]. Let $0\\in I$ and let $T\\to S_0$ be a morphism of schemes. For $i\\ge0$ put $T_i=T\\times_{S_0}S_i$ (fibre product [def-pc-fibre-product] along $f_{i0}$) and for $i\\ge i'\\ge0$ let $t_{ii'}=\\mathrm{id}_T\\times f_{ii'}:T_i\\to T_{i'}$. Then $(T_i,t_{ii'})_{i\\ge0}$ is an inverse system over the directed set $I_{\\ge0}$ whose transition morphisms are affine (base changes of the $f_{ii'}$), and $T\\times_{S_0}S$, with the morphisms $\\mathrm{id}_T\\times f_i:T\\times_{S_0}S\\to T_i$, is its limit in the category of schemes: $T\\times_{S_0}S=\\varprojlim_{i\\ge0}T\\times_{S_0}S_i$ (Stacks Limits, Lemma 01YZ).",
+  "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Lemma Tag 01YZ (lemma-scheme-over-limit, line 114) and its proof (the right side exists by Lemma 01YX; the equality is formal, Categories Lemma colimits-commute)"
   },
-  {
-   "tool": "leanfinder",
-   "query": "pullback Y x_{D_i} (lim D) is the limit of the pullbacks Y x_{D_i} D_j for a cofiltered diagram of schemes",
-   "results": "ExistsHomHomCompEqCompAux.hc', .c', .g (implementation of Mathlib.AlgebraicGeometry.AffineTransitionLimit, pullback along an affine open immersion only), Scheme.Pullback.gluedIsLimit, GlueData.vPullbackConeIsLimit, isLimitOpensCone",
-   "date": "2026-10-10",
-   "verdict": "no match (open-immersion special case only)"
-  },
-  {
-   "tool": "grep",
-   "query": "grep -rn 'baseChangeCone\\|isLimitBaseChange' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry",
-   "results": "none in Mathlib; the source repository has AlgebraicGeometry.isLimitBaseChangeCone (WeilConjectures/Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean:2243, sorry-free by the slopmaster2 sorry map), which states exactly this for a cofiltered diagram and a morphism p : Y -> D_i",
-   "date": "2026-10-10",
-   "verdict": "no match in Mathlib; Lean of the source repository found (lead to attach)"
-  }
- ],
- "mathlib_match": null,
- "status": "unsplit",
- "merged_into": null,
- "created": {
-  "by": "worker",
-  "item": "lem-weil-pbc-affine-etale-site-colimit",
-  "date": "2026-10-10"
- },
- "lean_audit": {
-  "master": {
-   "state": "none",
-   "decls": [],
-   "missing": [
-    "AlgebraicGeometry.isLimitBaseChangeCone"
-   ]
-  },
-  "slopmaster2": {
-   "state": "closed",
-   "decls": [
-    {
-     "name": "AlgebraicGeometry.isLimitBaseChangeCone",
-     "module": "WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit",
-     "lines": [
-      2244,
-      2252
-     ],
-     "kind": "def",
-     "sorry": false
-    }
-   ],
-   "missing": [],
-   "open": []
-  }
- },
- "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1",
- "lean": {
-  "branch": "slopmaster2",
-  "declarations": [
-   "AlgebraicGeometry.isLimitBaseChangeCone"
+  "stmt_deps": [
+    "def-pc-scheme",
+    "pqf-def-affine-morphism",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-limit-affine-transition"
   ],
-  "note": "attached by the lead at the review of lem-weil-pbc-affine-etale-site-colimit (2026-10-10): WeilConjectures/Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean:2243, base change of a cofiltered limit of schemes along p: Y -> D_i is the limit of Y x_{D_i} D_j (the node's statement, for any cofiltered system); no sorry reachable (8 declarations)"
- },
- "reviewed": {
-  "date": "2026-10-10",
-  "by": "L",
-  "result": "pass",
-  "note": "closed by the attached Lean, which states the node (base change of a cofiltered limit); the affineness of the transition maps of the base-changed system is the base-change clause of lem-weil-pbc-affine-morphism-permanence."
- }
+  "proof": [],
+  "proof_deps": [],
+  "proof_origin": null,
+  "mathlib_searches": [
+    {
+      "tool": "leansearch",
+      "query": "base change of a cofiltered limit of schemes along a morphism to one stage is the limit of the base changes",
+      "results": "AlgebraicGeometry.isLimitOpensCone, isAffineHom_π_app, Scheme.compactSpace_of_isLimit (Mathlib.AlgebraicGeometry.AffineTransitionLimit), IsSeparated.isStableUnderBaseChange, AffineScheme.forgetToScheme_preservesLimits",
+      "date": "2026-10-10",
+      "verdict": "no match: only the case of an open subscheme T of a stage (isLimitOpensCone)"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "pullback Y x_{D_i} (lim D) is the limit of the pullbacks Y x_{D_i} D_j for a cofiltered diagram of schemes",
+      "results": "ExistsHomHomCompEqCompAux.hc', .c', .g (implementation of Mathlib.AlgebraicGeometry.AffineTransitionLimit, pullback along an affine open immersion only), Scheme.Pullback.gluedIsLimit, GlueData.vPullbackConeIsLimit, isLimitOpensCone",
+      "date": "2026-10-10",
+      "verdict": "no match (open-immersion special case only)"
+    },
+    {
+      "tool": "grep",
+      "query": "grep -rn 'baseChangeCone\\|isLimitBaseChange' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry",
+      "results": "none in Mathlib; the source repository has AlgebraicGeometry.isLimitBaseChangeCone (WeilConjectures/Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean:2243, sorry-free by the slopmaster2 sorry map), which states exactly this for a cofiltered diagram and a morphism p : Y -> D_i",
+      "date": "2026-10-10",
+      "verdict": "no match in Mathlib; Lean of the source repository found (lead to attach)"
+    }
+  ],
+  "mathlib_match": null,
+  "status": "unsplit",
+  "merged_into": null,
+  "created": {
+    "by": "worker",
+    "item": "lem-weil-pbc-affine-etale-site-colimit",
+    "date": "2026-10-10"
+  },
+  "lean_audit": {
+    "master": {
+      "state": "none",
+      "decls": [],
+      "missing": [
+        "AlgebraicGeometry.isLimitBaseChangeCone"
+      ]
+    },
+    "slopmaster2": {
+      "state": "closed",
+      "decls": [
+        {
+          "name": "AlgebraicGeometry.isLimitBaseChangeCone",
+          "module": "WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit",
+          "lines": [
+            2244,
+            2252
+          ],
+          "kind": "def",
+          "sorry": false
+        }
+      ],
+      "missing": [],
+      "open": []
+    }
+  },
+  "chapter": "sec-proper-base-change",
+  "unit": "sk-thm-p1",
+  "lean": {
+    "module": "WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit",
+    "declaration": "AlgebraicGeometry.isLimitBaseChangeCone",
+    "branch": "slopmaster2",
+    "line": 2244,
+    "declarations": [
+      "AlgebraicGeometry.isLimitBaseChangeCone"
+    ],
+    "sorry_free": true,
+    "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state closed)"
+  },
+  "reviewed": {
+    "date": "2026-10-10",
+    "by": "L",
+    "result": "pass",
+    "note": "closed by the attached Lean, which states the node (base change of a cofiltered limit); the affineness of the transition maps of the base-changed system is the base-change clause of lem-weil-pbc-affine-morphism-permanence."
+  }
 }

@@ -1,193 +1,204 @@
 {
- "id": "lem-sc-picg-geometrically-integral",
- "blueprint": {
-  "is": null,
-  "from": {
-   "node": "thm-sc-jacobian-representability",
-   "place": "proof, step (5) 'Abel variety and base change': 'J_C:=Pic^0_{C/k} is a proper smooth connected group scheme' -- the connectedness of Pic^0_{C/k}, which the blueprint proof asserts without an argument (steps (2)-(4) give only representability, smoothness and properness); unit sk-prop-jacobian step 5 'Connected and commutative': Pic^g is irreducible as the image of Hilb^g",
-   "via": []
+  "id": "lem-sc-picg-geometrically-integral",
+  "blueprint": {
+    "is": null,
+    "from": {
+      "node": "thm-sc-jacobian-representability",
+      "place": "proof, step (5) 'Abel variety and base change': 'J_C:=Pic^0_{C/k} is a proper smooth connected group scheme' -- the connectedness of Pic^0_{C/k}, which the blueprint proof asserts without an argument (steps (2)-(4) give only representability, smoothness and properness); unit sk-prop-jacobian step 5 'Connected and commutative': Pic^g is irreducible as the image of Hilb^g",
+      "via": []
+    },
+    "same_as": []
   },
-  "same_as": []
- },
- "kind": "statement",
- "title": "The degree-$g$ part of the Picard scheme is geometrically integral",
- "statement": "Let $k$ be a separably closed field and let $C$ be a smooth projective curve over $k$ [def-pc-smooth-projective-curve] which is geometrically integral [def-pc-geometrically-irreducible], of genus $g=\\dim_kH^1(C,\\mathcal O_C)$ [def-pc-genus]. Let $\\operatorname{Pic}^g_{C/k}$ be the subfunctor of the Picard functor $\\operatorname{Pic}_{C/k}$ [def-pc-picard-functor] on $(\\mathit{Sch}/k)_{fppf}$ consisting of the classes whose fibrewise degree [def-pd-fibrewise-degree] is identically $g$ (equivalently, the fppf sheafification of the subpresheaf $T\\mapsto\\{\\mathcal L\\in\\operatorname{Pic}(C_T):\\deg_T(\\mathcal L)(t)=g\\text{ for all }t\\in T\\}$ of the Picard presheaf). Let $P$ be a scheme over $k$ representing $\\operatorname{Pic}^g_{C/k}$. Then $P$ is geometrically integral over $k$: for every field extension $k'/k$ the base change $P_{k'}=P\\times_{\\operatorname{Spec}k}\\operatorname{Spec}k'$ is an integral scheme.",
- "source": {
-  "document": "literature/stacks-project/pic.tex",
-  "place": "Tag 0BA0 (lemma-picard-pieces), clause (1) 'a disjoint union of g-dimensional smooth proper varieties Pic^d_{X/k}' for d=g, and its proof: the image of gamma_g: Hilb^g_{X/k} -> Pic^g_{X/k} is a proper variety (Morphisms 03GN applied to the irreducible Hilb^g), gamma_d is surjective for d >= g (chi(L)=d+1-g>0 gives a nonzero section, L = O(D)); Lean: WeilConjectures.AlgebraicGeometry.Picard.Jacobian, AlgebraicGeometry.geometricallyIntegral_of_representableBy_picardFunctorDegree_genus, lines 659-669 (slopmaster2 71d63dcf), docstring: 'it is the image of the geometrically integral Hilb^g_{X/k} under D -> O_X(D), so geometrically irreducible, and it is smooth, hence geometrically reduced'",
-  "module": "WeilConjectures.AlgebraicGeometry.Picard.Jacobian",
-  "lines": [
-   659,
-   669
-  ]
- },
- "stmt_deps": [
-  "def-pc-smooth-projective-curve",
-  "def-pc-geometrically-irreducible",
-  "def-pc-genus",
-  "def-pc-picard-functor",
-  "def-pd-fibrewise-degree"
- ],
- "proof": [
-  {
-   "text": "*(1) $P$ is smooth over $k$.* By [prop-pd-picard-degree-decomposition] (2) the open and closed subscheme $\\underline{\\operatorname{Pic}}^g_{C/k}$ of the scheme $\\underline{\\operatorname{Pic}}_{C/k}$ representing $\\operatorname{Pic}_{C/k}$ represents the subfunctor $\\operatorname{Pic}^g_{C/k}$. Since $P$ represents the same functor, there is an isomorphism $P\\cong\\underline{\\operatorname{Pic}}^g_{C/k}$ over $k$ [lem-pc-representable-unique]. By the theorem of the base [thm-sc-theorem-of-the-base], $\\underline{\\operatorname{Pic}}^g_{C/k}$ is smooth (and proper, of dimension $g$) over $k$; smoothness of the structure morphism [def-sbc-smooth-morphisms] is invariant under composing with an isomorphism over $k$, so $P\\to\\operatorname{Spec}k$ is smooth. (The theorem of the base also calls $\\underline{\\operatorname{Pic}}^g_{C/k}$ a variety, i.e. integral; this is not used: the steps below prove the stronger geometric statement.)",
-   "uses": [
+  "kind": "statement",
+  "title": "The degree-$g$ part of the Picard scheme is geometrically integral",
+  "statement": "Let $k$ be a separably closed field and let $C$ be a smooth projective curve over $k$ [def-pc-smooth-projective-curve] which is geometrically integral [def-pc-geometrically-irreducible], of genus $g=\\dim_kH^1(C,\\mathcal O_C)$ [def-pc-genus]. Let $\\operatorname{Pic}^g_{C/k}$ be the subfunctor of the Picard functor $\\operatorname{Pic}_{C/k}$ [def-pc-picard-functor] on $(\\mathit{Sch}/k)_{fppf}$ consisting of the classes whose fibrewise degree [def-pd-fibrewise-degree] is identically $g$ (equivalently, the fppf sheafification of the subpresheaf $T\\mapsto\\{\\mathcal L\\in\\operatorname{Pic}(C_T):\\deg_T(\\mathcal L)(t)=g\\text{ for all }t\\in T\\}$ of the Picard presheaf). Let $P$ be a scheme over $k$ representing $\\operatorname{Pic}^g_{C/k}$. Then $P$ is geometrically integral over $k$: for every field extension $k'/k$ the base change $P_{k'}=P\\times_{\\operatorname{Spec}k}\\operatorname{Spec}k'$ is an integral scheme.",
+  "source": {
+    "document": "literature/stacks-project/pic.tex",
+    "place": "Tag 0BA0 (lemma-picard-pieces), clause (1) 'a disjoint union of g-dimensional smooth proper varieties Pic^d_{X/k}' for d=g, and its proof: the image of gamma_g: Hilb^g_{X/k} -> Pic^g_{X/k} is a proper variety (Morphisms 03GN applied to the irreducible Hilb^g), gamma_d is surjective for d >= g (chi(L)=d+1-g>0 gives a nonzero section, L = O(D)); Lean: WeilConjectures.AlgebraicGeometry.Picard.Jacobian, AlgebraicGeometry.geometricallyIntegral_of_representableBy_picardFunctorDegree_genus, lines 659-669 (slopmaster2 71d63dcf), docstring: 'it is the image of the geometrically integral Hilb^g_{X/k} under D -> O_X(D), so geometrically irreducible, and it is smooth, hence geometrically reduced'",
+    "module": "WeilConjectures.AlgebraicGeometry.Picard.Jacobian",
+    "lines": [
+      659,
+      669
+    ]
+  },
+  "stmt_deps": [
+    "def-pc-smooth-projective-curve",
+    "def-pc-geometrically-irreducible",
+    "def-pc-genus",
+    "def-pc-picard-functor",
+    "def-pd-fibrewise-degree"
+  ],
+  "proof": [
+    {
+      "text": "*(1) $P$ is smooth over $k$.* By [prop-pd-picard-degree-decomposition] (2) the open and closed subscheme $\\underline{\\operatorname{Pic}}^g_{C/k}$ of the scheme $\\underline{\\operatorname{Pic}}_{C/k}$ representing $\\operatorname{Pic}_{C/k}$ represents the subfunctor $\\operatorname{Pic}^g_{C/k}$. Since $P$ represents the same functor, there is an isomorphism $P\\cong\\underline{\\operatorname{Pic}}^g_{C/k}$ over $k$ [lem-pc-representable-unique]. By the theorem of the base [thm-sc-theorem-of-the-base], $\\underline{\\operatorname{Pic}}^g_{C/k}$ is smooth (and proper, of dimension $g$) over $k$; smoothness of the structure morphism [def-sbc-smooth-morphisms] is invariant under composing with an isomorphism over $k$, so $P\\to\\operatorname{Spec}k$ is smooth. (The theorem of the base also calls $\\underline{\\operatorname{Pic}}^g_{C/k}$ a variety, i.e. integral; this is not used: the steps below prove the stronger geometric statement.)",
+      "uses": [
+        "prop-pd-picard-degree-decomposition",
+        "lem-pc-representable-unique",
+        "thm-sc-theorem-of-the-base",
+        "def-sbc-smooth-morphisms"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/pic.tex",
+        "place": "Tag 0BA0 (lemma-picard-pieces), clause (1) 'g-dimensional smooth proper varieties' and the proof's third paragraph (smoothness via gamma_g and translates)"
+      }
+    },
+    {
+      "text": "*(2) $P$ is geometrically reduced.* The structure morphism $P\\to\\operatorname{Spec}k$ is smooth by step (1), so by [sbc-lem-smooth-geometrically-reduced] it has geometrically reduced fibres. Its only fibre is $P$ itself, over the point of $\\operatorname{Spec}k$ with residue field $k$; so for every field extension $k'/k$ the base change $P_{k'}=P\\times_{\\operatorname{Spec}k}\\operatorname{Spec}k'$ is reduced [def-pc-geometrically-irreducible].",
+      "uses": [
+        "sbc-lem-smooth-geometrically-reduced",
+        "def-pc-geometrically-irreducible"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/pic.tex",
+        "place": "Lean docstring of AlgebraicGeometry.geometricallyIntegral_of_representableBy_picardFunctorDegree_genus: 'it is smooth, hence geometrically reduced'; Varieties Tag 056T (smooth over a field implies geometrically reduced)"
+      }
+    },
+    {
+      "text": "*(3) A surjection from the Hilbert scheme.* $C$ is projective over $k$, hence proper [lem-pc-projective-proper]; it is a curve over $k$ (part of [def-pc-smooth-projective-curve]), smooth over $k$, and geometrically irreducible, being geometrically integral [def-pc-geometrically-irreducible]. So by [thm-pc-hilb-curves] (1) the functor $\\operatorname{Hilb}^g_{C/k}$ is represented by a $k$-scheme $H:=\\underline{\\operatorname{Hilb}}^g_{C/k}$, and by [lem-sc-hilb-geometrically-integral] (with $X=C$, $d=g$) $H$ is geometrically integral over $k$. With the representing scheme $P$ of $\\operatorname{Pic}^g_{C/k}$, [lem-sc-hilb-to-pic-morphism] (with $d=g$) gives the $k$-morphism $\\gamma_g:H\\to P$, $D\\mapsto\\mathcal O(D)$, defined by the universal divisor, and by [lem-sc-hilb-to-pic-surjective] (with $d=g\\geq g$) $\\gamma_g$ is surjective.",
+      "uses": [
+        "lem-pc-projective-proper",
+        "def-pc-smooth-projective-curve",
+        "def-pc-geometrically-irreducible",
+        "thm-pc-hilb-curves",
+        "lem-sc-hilb-geometrically-integral",
+        "lem-sc-hilb-to-pic-morphism",
+        "lem-sc-hilb-to-pic-surjective"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/pic.tex",
+        "place": "Tag 0BA0 (lemma-picard-pieces), clauses (4), (5) and the proof's second and fourth paragraphs (gamma_d from O(D_univ); gamma_d surjective for d >= g since chi(L) = d+1-g > 0); Tag 0B9I (proposition-hilb-d) (1) and its proof ('in fact geometrically irreducible')"
+      }
+    },
+    {
+      "text": "*(4) $P$ is geometrically irreducible.* Let $k'/k$ be a field extension and let $\\gamma'=\\gamma_g\\times_k\\mathrm{id}:H_{k'}\\to P_{k'}$ be the base change of $\\gamma_g$. It is the projection $H\\times_P P_{k'}\\to P_{k'}$ of the fibre product of $\\gamma_g$ with the projection $P_{k'}=P\\times_k\\operatorname{Spec}k'\\to P$, because $H\\times_P(P\\times_k\\operatorname{Spec}k')\\cong H\\times_k\\operatorname{Spec}k'=H_{k'}$ (pasting of fibre products [def-pc-fibre-product]), compatibly with the maps to $P_{k'}$. Since $\\gamma_g$ is surjective (step (3)), $\\gamma'$ is surjective [lem-weil-pbc-surjective-base-change]. By step (3) $H_{k'}$ is integral, in particular irreducible [def-pc-integral-scheme]; the image of the irreducible space $H_{k'}$ under the continuous map underlying $\\gamma'$ is irreducible [lem-weil-pbc-irreducible-continuous-image], and this image is all of $P_{k'}$. So $P_{k'}$ is irreducible [def-weil-irreducible-components] (in particular nonempty) for every $k'/k$.",
+      "uses": [
+        "def-pc-fibre-product",
+        "lem-weil-pbc-surjective-base-change",
+        "def-pc-integral-scheme",
+        "lem-weil-pbc-irreducible-continuous-image",
+        "def-weil-irreducible-components"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/pic.tex",
+        "place": "Tag 0BA0 proof, third and fourth paragraphs (the image of gamma_g is a proper variety; gamma_g surjective), made geometric along the Lean docstring of geometricallyIntegral_of_representableBy_picardFunctorDegree_genus: 'the image of the geometrically integral Hilb^g_{X/k} under D -> O_X(D), so geometrically irreducible'"
+      }
+    },
+    {
+      "text": "*(5) Conclusion.* For every field extension $k'/k$ the scheme $P_{k'}$ is reduced (step (2)) and irreducible, hence nonempty (step (4)); so it is integral [def-pc-integral-scheme]. Hence $P$ is geometrically integral over $k$ [def-pc-geometrically-irreducible].",
+      "uses": [
+        "def-pc-integral-scheme",
+        "def-pc-geometrically-irreducible"
+      ],
+      "elementary": true,
+      "source": {
+        "document": "literature/stacks-project/pic.tex",
+        "place": "Lean docstring of geometricallyIntegral_of_representableBy_picardFunctorDegree_genus (geometrically irreducible and geometrically reduced); Mathlib GeometricallyIntegral.of_geometricallyReduced_of_geometricallyIrreducible"
+      }
+    }
+  ],
+  "proof_deps": [
     "prop-pd-picard-degree-decomposition",
     "lem-pc-representable-unique",
     "thm-sc-theorem-of-the-base",
-    "def-sbc-smooth-morphisms"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/pic.tex",
-    "place": "Tag 0BA0 (lemma-picard-pieces), clause (1) 'g-dimensional smooth proper varieties' and the proof's third paragraph (smoothness via gamma_g and translates)"
-   }
-  },
-  {
-   "text": "*(2) $P$ is geometrically reduced.* The structure morphism $P\\to\\operatorname{Spec}k$ is smooth by step (1), so by [sbc-lem-smooth-geometrically-reduced] it has geometrically reduced fibres. Its only fibre is $P$ itself, over the point of $\\operatorname{Spec}k$ with residue field $k$; so for every field extension $k'/k$ the base change $P_{k'}=P\\times_{\\operatorname{Spec}k}\\operatorname{Spec}k'$ is reduced [def-pc-geometrically-irreducible].",
-   "uses": [
+    "def-sbc-smooth-morphisms",
     "sbc-lem-smooth-geometrically-reduced",
-    "def-pc-geometrically-irreducible"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/pic.tex",
-    "place": "Lean docstring of AlgebraicGeometry.geometricallyIntegral_of_representableBy_picardFunctorDegree_genus: 'it is smooth, hence geometrically reduced'; Varieties Tag 056T (smooth over a field implies geometrically reduced)"
-   }
-  },
-  {
-   "text": "*(3) A surjection from the Hilbert scheme.* $C$ is projective over $k$, hence proper [lem-pc-projective-proper]; it is a curve over $k$ (part of [def-pc-smooth-projective-curve]), smooth over $k$, and geometrically irreducible, being geometrically integral [def-pc-geometrically-irreducible]. So by [thm-pc-hilb-curves] (1) the functor $\\operatorname{Hilb}^g_{C/k}$ is represented by a $k$-scheme $H:=\\underline{\\operatorname{Hilb}}^g_{C/k}$, and by [lem-sc-hilb-geometrically-integral] (with $X=C$, $d=g$) $H$ is geometrically integral over $k$. With the representing scheme $P$ of $\\operatorname{Pic}^g_{C/k}$, [lem-sc-hilb-to-pic-morphism] (with $d=g$) gives the $k$-morphism $\\gamma_g:H\\to P$, $D\\mapsto\\mathcal O(D)$, defined by the universal divisor, and by [lem-sc-hilb-to-pic-surjective] (with $d=g\\geq g$) $\\gamma_g$ is surjective.",
-   "uses": [
+    "def-pc-geometrically-irreducible",
     "lem-pc-projective-proper",
     "def-pc-smooth-projective-curve",
-    "def-pc-geometrically-irreducible",
     "thm-pc-hilb-curves",
     "lem-sc-hilb-geometrically-integral",
     "lem-sc-hilb-to-pic-morphism",
-    "lem-sc-hilb-to-pic-surjective"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/pic.tex",
-    "place": "Tag 0BA0 (lemma-picard-pieces), clauses (4), (5) and the proof's second and fourth paragraphs (gamma_d from O(D_univ); gamma_d surjective for d >= g since chi(L) = d+1-g > 0); Tag 0B9I (proposition-hilb-d) (1) and its proof ('in fact geometrically irreducible')"
-   }
-  },
-  {
-   "text": "*(4) $P$ is geometrically irreducible.* Let $k'/k$ be a field extension and let $\\gamma'=\\gamma_g\\times_k\\mathrm{id}:H_{k'}\\to P_{k'}$ be the base change of $\\gamma_g$. It is the projection $H\\times_P P_{k'}\\to P_{k'}$ of the fibre product of $\\gamma_g$ with the projection $P_{k'}=P\\times_k\\operatorname{Spec}k'\\to P$, because $H\\times_P(P\\times_k\\operatorname{Spec}k')\\cong H\\times_k\\operatorname{Spec}k'=H_{k'}$ (pasting of fibre products [def-pc-fibre-product]), compatibly with the maps to $P_{k'}$. Since $\\gamma_g$ is surjective (step (3)), $\\gamma'$ is surjective [lem-weil-pbc-surjective-base-change]. By step (3) $H_{k'}$ is integral, in particular irreducible [def-pc-integral-scheme]; the image of the irreducible space $H_{k'}$ under the continuous map underlying $\\gamma'$ is irreducible [lem-weil-pbc-irreducible-continuous-image], and this image is all of $P_{k'}$. So $P_{k'}$ is irreducible [def-weil-irreducible-components] (in particular nonempty) for every $k'/k$.",
-   "uses": [
+    "lem-sc-hilb-to-pic-surjective",
     "def-pc-fibre-product",
     "lem-weil-pbc-surjective-base-change",
     "def-pc-integral-scheme",
     "lem-weil-pbc-irreducible-continuous-image",
     "def-weil-irreducible-components"
-   ],
-   "elementary": false,
-   "source": {
+  ],
+  "proof_origin": {
+    "by": "document",
     "document": "literature/stacks-project/pic.tex",
-    "place": "Tag 0BA0 proof, third and fourth paragraphs (the image of gamma_g is a proper variety; gamma_g surjective), made geometric along the Lean docstring of geometricallyIntegral_of_representableBy_picardFunctorDegree_genus: 'the image of the geometrically integral Hilb^g_{X/k} under D -> O_X(D), so geometrically irreducible'"
-   }
+    "place": "Tag 0BA0 (lemma-picard-pieces), clause (1) for d = g and its proof (gamma_g from O(D_univ), Remark 0B9J; gamma_d surjective for d >= g; the image of gamma_g is a proper variety, Morphisms 03GN/0AH6), with Tag 0B9I (proposition-hilb-d) for Hilb^g; the passage to an arbitrary field extension k'/k (steps 2 and 4) follows the route of the Lean docstring of AlgebraicGeometry.geometricallyIntegral_of_representableBy_picardFunctorDegree_genus (WeilConjectures/AlgebraicGeometry/Picard/Jacobian.lean 655-669), Stacks stating only that Pic^d is a variety"
   },
-  {
-   "text": "*(5) Conclusion.* For every field extension $k'/k$ the scheme $P_{k'}$ is reduced (step (2)) and irreducible, hence nonempty (step (4)); so it is integral [def-pc-integral-scheme]. Hence $P$ is geometrically integral over $k$ [def-pc-geometrically-irreducible].",
-   "uses": [
-    "def-pc-integral-scheme",
-    "def-pc-geometrically-irreducible"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/pic.tex",
-    "place": "Lean docstring of geometricallyIntegral_of_representableBy_picardFunctorDegree_genus (geometrically irreducible and geometrically reduced); Mathlib GeometricallyIntegral.of_geometricallyReduced_of_geometricallyIrreducible"
-   }
-  }
- ],
- "proof_deps": [
-  "prop-pd-picard-degree-decomposition",
-  "lem-pc-representable-unique",
-  "thm-sc-theorem-of-the-base",
-  "def-sbc-smooth-morphisms",
-  "sbc-lem-smooth-geometrically-reduced",
-  "def-pc-geometrically-irreducible",
-  "lem-pc-projective-proper",
-  "def-pc-smooth-projective-curve",
-  "thm-pc-hilb-curves",
-  "lem-sc-hilb-geometrically-integral",
-  "lem-sc-hilb-to-pic-morphism",
-  "lem-sc-hilb-to-pic-surjective",
-  "def-pc-fibre-product",
-  "lem-weil-pbc-surjective-base-change",
-  "def-pc-integral-scheme",
-  "lem-weil-pbc-irreducible-continuous-image",
-  "def-weil-irreducible-components"
- ],
- "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/pic.tex",
-  "place": "Tag 0BA0 (lemma-picard-pieces), clause (1) for d = g and its proof (gamma_g from O(D_univ), Remark 0B9J; gamma_d surjective for d >= g; the image of gamma_g is a proper variety, Morphisms 03GN/0AH6), with Tag 0B9I (proposition-hilb-d) for Hilb^g; the passage to an arbitrary field extension k'/k (steps 2 and 4) follows the route of the Lean docstring of AlgebraicGeometry.geometricallyIntegral_of_representableBy_picardFunctorDegree_genus (WeilConjectures/AlgebraicGeometry/Picard/Jacobian.lean 655-669), Stacks stating only that Pic^d is a variety"
- },
- "mathlib_searches": [
-  {
-   "tool": "leansearch",
-   "query": "Picard scheme of a curve is geometrically integral",
-   "results": "AlgebraicGeometry.isIntegral_of_irreducibleSpace_of_isReduced, AlgebraicGeometry.IsIntegral, affine_isIntegral_iff, isIntegral_of_isAffine_of_isDomain, irreducibleSpace_of_isIntegral, isIntegral_of_isOpenImmersion (all Mathlib.AlgebraicGeometry.Properties): generic integrality facts, nothing on Picard schemes",
-   "date": "2026-10-10",
-   "verdict": "no match"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "the degree g component of the Picard scheme of a smooth projective curve of genus g is a geometrically integral variety",
-   "results": "AlgebraicGeometry.AffineSpace.not_isIntegralHom, WeierstrassCurve.IsIntegral, AffineSpace.isIntegralHom_over_iff_isEmpty, WeierstrassCurve.integralModel, WeierstrassCurve.exists_isIntegral: unrelated",
-   "date": "2026-10-10",
-   "verdict": "no match"
-  },
-  {
-   "tool": "grep",
-   "query": "grep -rli 'picard' and grep -rn 'GeometricallyIntegral' in ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry",
-   "results": "no Picard functor or Picard scheme in Mathlib (only a Weierstrass-curve file mentions the word); GeometricallyIntegral occurs in Geometrically/Integral.lean (the definition), AffineSpace.lean:435 (affine space), Group/Abelian.lean:134 (hypothesis on a group scheme)",
-   "date": "2026-10-10",
-   "verdict": "no match"
-  }
- ],
- "mathlib_match": null,
- "status": "split",
- "merged_into": null,
- "created": {
-  "by": "worker",
-  "item": "thm-sc-jacobian-representability",
-  "date": "2026-10-10"
- },
- "lean_audit": {
-  "master": {
-   "state": "none"
-  },
-  "slopmaster2": {
-   "state": "sorry_here",
-   "decls": [
+  "mathlib_searches": [
     {
-     "name": "AlgebraicGeometry.geometricallyIntegral_of_representableBy_picardFunctorDegree_genus",
-     "module": "WeilConjectures.AlgebraicGeometry.Picard.Jacobian",
-     "lines": [
-      659,
-      669
-     ],
-     "kind": "theorem",
-     "nodes": [],
-     "below": false
+      "tool": "leansearch",
+      "query": "Picard scheme of a curve is geometrically integral",
+      "results": "AlgebraicGeometry.isIntegral_of_irreducibleSpace_of_isReduced, AlgebraicGeometry.IsIntegral, affine_isIntegral_iff, isIntegral_of_isAffine_of_isDomain, irreducibleSpace_of_isIntegral, isIntegral_of_isOpenImmersion (all Mathlib.AlgebraicGeometry.Properties): generic integrality facts, nothing on Picard schemes",
+      "date": "2026-10-10",
+      "verdict": "no match"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "the degree g component of the Picard scheme of a smooth projective curve of genus g is a geometrically integral variety",
+      "results": "AlgebraicGeometry.AffineSpace.not_isIntegralHom, WeierstrassCurve.IsIntegral, AffineSpace.isIntegralHom_over_iff_isEmpty, WeierstrassCurve.integralModel, WeierstrassCurve.exists_isIntegral: unrelated",
+      "date": "2026-10-10",
+      "verdict": "no match"
+    },
+    {
+      "tool": "grep",
+      "query": "grep -rli 'picard' and grep -rn 'GeometricallyIntegral' in ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry",
+      "results": "no Picard functor or Picard scheme in Mathlib (only a Weierstrass-curve file mentions the word); GeometricallyIntegral occurs in Geometrically/Integral.lean (the definition), AffineSpace.lean:435 (affine space), Group/Abelian.lean:134 (hypothesis on a group scheme)",
+      "date": "2026-10-10",
+      "verdict": "no match"
     }
-   ]
+  ],
+  "mathlib_match": null,
+  "status": "split",
+  "merged_into": null,
+  "created": {
+    "by": "worker",
+    "item": "thm-sc-jacobian-representability",
+    "date": "2026-10-10"
+  },
+  "lean_audit": {
+    "master": {
+      "state": "none"
+    },
+    "slopmaster2": {
+      "state": "sorry_here",
+      "decls": [
+        {
+          "name": "AlgebraicGeometry.geometricallyIntegral_of_representableBy_picardFunctorDegree_genus",
+          "module": "WeilConjectures.AlgebraicGeometry.Picard.Jacobian",
+          "lines": [
+            659,
+            669
+          ],
+          "kind": "theorem",
+          "nodes": [],
+          "below": false
+        }
+      ]
+    }
+  },
+  "chapter": "sec-picard-framework",
+  "unit": "sk-prop-jacobian",
+  "split_report": {
+    "date": "2026-10-10",
+    "item": "lem-sc-picg-geometrically-integral",
+    "worker": "stage1",
+    "summary": "Read Stacks pic.tex Tag 0BA0 (lemma-picard-pieces) and its proof, Tag 0B9I (proposition-hilb-d) and its proof, Remark 0B9J, Morphisms 03GN and 0AH6 (tags verified in tags/tags), and the Lean declaration geometricallyIntegral_of_representableBy_picardFunctorDegree_genus (Jacobian.lean 659-669, sorry, docstring route). Rule 0: no sorry-free slopmaster2 declaration states the item (its own declaration is sorry; no Hilb->Pic map exists in the Lean). Proof in five steps along the Stacks/Lean route: P = Pic^g is smooth (theorem of the base, uniqueness of representing objects), hence geometrically reduced; gamma_g: Hilb^g -> P, D -> O(D), is surjective (Stacks 0BA0 (4), (5)); Hilb^g is geometrically integral (Stacks 0B9I proof, Lean isProper_and_geometricallyIntegral_of_representableBy_hilbertPresheaf_curve); base-changing gamma_g to k' keeps it surjective, so P_{k'} is the continuous image of the irreducible H_{k'}; reduced + irreducible = integral. Three new unsplit nodes: lem-sc-hilb-geometrically-integral (Hilb^d geometrically integral; thm-pc-hilb-curves states only 'variety'), lem-sc-hilb-to-pic-morphism (0BA0 (4)), lem-sc-hilb-to-pic-surjective (0BA0 (5), first half). Statement unchanged.",
+    "blueprint": "Realizes, for the blueprint node thm-sc-jacobian-representability, the place of its proof step (4) 'Connectedness' that cites this lemma (geometric integrality of Pic^g, whence J connected), and unit sk-prop-jacobian step 5 'Connected': 'Hilb^g_{C/k} is an irreducible variety ([sk-thm-picard-hilb-curves] (1)), so its image Pic^g_{C/k} under alpha is irreducible' (steps 3-4, made geometric), using the map alpha and its surjectivity of unit step 4 (step 3 via lem-sc-hilb-to-pic-morphism and lem-sc-hilb-to-pic-surjective) and the smoothness of unit step 3 (steps 1-2, via thm-sc-theorem-of-the-base)."
+  },
+  "tool_uses": [
+    "sbc-lem-smooth-geometrically-reduced",
+    "lem-pc-representable-unique"
+  ],
+  "reviewed": "2026-10-10 L: 5 steps checked (P smooth via the degree decomposition and uniqueness of representing objects; geometrically reduced by sbc-lem-smooth-geometrically-reduced; a surjection from the geometrically integral Hilb^g by the three new nodes; geometrically irreducible as a continuous image under base change; integral). tool_uses: sbc-lem-smooth-geometrically-reduced (sk-def-smooth), lem-pc-representable-unique (sk-d-real-jacobian) as generic tools. New nodes lem-sc-hilb-geometrically-integral (rests_on_sorry in Lean), lem-sc-hilb-to-pic-morphism, lem-sc-hilb-to-pic-surjective, unsplit. Worker died at the account limit after writing; files complete.",
+  "lean": {
+    "module": "WeilConjectures.AlgebraicGeometry.Picard.Jacobian",
+    "declaration": "AlgebraicGeometry.geometricallyIntegral_of_representableBy_picardFunctorDegree_genus",
+    "branch": "slopmaster2",
+    "line": 659,
+    "declarations": [
+      "AlgebraicGeometry.geometricallyIntegral_of_representableBy_picardFunctorDegree_genus"
+    ],
+    "sorry_free": false,
+    "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state sorry_here)"
   }
- },
- "chapter": "sec-picard-framework",
- "unit": "sk-prop-jacobian",
- "split_report": {
-  "date": "2026-10-10",
-  "item": "lem-sc-picg-geometrically-integral",
-  "worker": "stage1",
-  "summary": "Read Stacks pic.tex Tag 0BA0 (lemma-picard-pieces) and its proof, Tag 0B9I (proposition-hilb-d) and its proof, Remark 0B9J, Morphisms 03GN and 0AH6 (tags verified in tags/tags), and the Lean declaration geometricallyIntegral_of_representableBy_picardFunctorDegree_genus (Jacobian.lean 659-669, sorry, docstring route). Rule 0: no sorry-free slopmaster2 declaration states the item (its own declaration is sorry; no Hilb->Pic map exists in the Lean). Proof in five steps along the Stacks/Lean route: P = Pic^g is smooth (theorem of the base, uniqueness of representing objects), hence geometrically reduced; gamma_g: Hilb^g -> P, D -> O(D), is surjective (Stacks 0BA0 (4), (5)); Hilb^g is geometrically integral (Stacks 0B9I proof, Lean isProper_and_geometricallyIntegral_of_representableBy_hilbertPresheaf_curve); base-changing gamma_g to k' keeps it surjective, so P_{k'} is the continuous image of the irreducible H_{k'}; reduced + irreducible = integral. Three new unsplit nodes: lem-sc-hilb-geometrically-integral (Hilb^d geometrically integral; thm-pc-hilb-curves states only 'variety'), lem-sc-hilb-to-pic-morphism (0BA0 (4)), lem-sc-hilb-to-pic-surjective (0BA0 (5), first half). Statement unchanged.",
-  "blueprint": "Realizes, for the blueprint node thm-sc-jacobian-representability, the place of its proof step (4) 'Connectedness' that cites this lemma (geometric integrality of Pic^g, whence J connected), and unit sk-prop-jacobian step 5 'Connected': 'Hilb^g_{C/k} is an irreducible variety ([sk-thm-picard-hilb-curves] (1)), so its image Pic^g_{C/k} under alpha is irreducible' (steps 3-4, made geometric), using the map alpha and its surjectivity of unit step 4 (step 3 via lem-sc-hilb-to-pic-morphism and lem-sc-hilb-to-pic-surjective) and the smoothness of unit step 3 (steps 1-2, via thm-sc-theorem-of-the-base)."
- },
- "tool_uses": [
-  "sbc-lem-smooth-geometrically-reduced",
-  "lem-pc-representable-unique"
- ],
- "reviewed": "2026-10-10 L: 5 steps checked (P smooth via the degree decomposition and uniqueness of representing objects; geometrically reduced by sbc-lem-smooth-geometrically-reduced; a surjection from the geometrically integral Hilb^g by the three new nodes; geometrically irreducible as a continuous image under base change; integral). tool_uses: sbc-lem-smooth-geometrically-reduced (sk-def-smooth), lem-pc-representable-unique (sk-d-real-jacobian) as generic tools. New nodes lem-sc-hilb-geometrically-integral (rests_on_sorry in Lean), lem-sc-hilb-to-pic-morphism, lem-sc-hilb-to-pic-surjective, unsplit. Worker died at the account limit after writing; files complete."
 }

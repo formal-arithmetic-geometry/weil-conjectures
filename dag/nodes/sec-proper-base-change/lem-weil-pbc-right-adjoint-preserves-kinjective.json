@@ -1,112 +1,116 @@
 {
- "id": "lem-weil-pbc-right-adjoint-preserves-kinjective",
- "blueprint": {
-  "is": null,
-  "from": {
-   "node": "def-weil-pbc-derived-exchange",
-   "place": "its statement (a notion the statement uses)",
-   "via": [
-    "prop-weil-pbc-derived-inverse-image-adjunction"
-   ]
+  "id": "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "blueprint": {
+    "is": null,
+    "from": {
+      "node": "def-weil-pbc-derived-exchange",
+      "place": "its statement (a notion the statement uses)",
+      "via": [
+        "prop-weil-pbc-derived-inverse-image-adjunction"
+      ]
+    },
+    "same_as": null
   },
-  "same_as": null
- },
- "kind": "statement",
- "title": "A right adjoint of an exact functor preserves K-injective complexes",
- "statement": "Let $\\mathcal A,\\mathcal B$ be abelian categories [def-sp-abelian], and let $u:\\mathcal A\\to\\mathcal B$ and $v:\\mathcal B\\to\\mathcal A$ be additive functors with $u$ right adjoint to $v$ and $v$ exact. Call a cochain complex $I$ of $\\mathcal A$ *K-injective* if every morphism of complexes $M\\to I$ from an acyclic complex $M$ (all cohomology objects zero) is homotopic to zero, i.e. $\\operatorname{Hom}_{K(\\mathcal A)}(M,I)=0$ in the homotopy category for every acyclic $M$ [def-weil-abstract-derived-category] (equivalently, the Hom complex $\\operatorname{Hom}^\\bullet(M,I)$ is acyclic for every acyclic $M$, as in [def-weil-pbc-kinjective-resolutions], since $H^n\\operatorname{Hom}^\\bullet(M,I)=\\operatorname{Hom}_{K(\\mathcal A)}(M[-n],I)$ and shifts of acyclic complexes are acyclic). Then for every K-injective complex $I$ of $\\mathcal A$ the complex $u(I)=(u(I^r),u(d^r))_r$ obtained by applying $u$ termwise is a K-injective complex of $\\mathcal B$.",
- "source": {
-  "document": "literature/stacks-project/derived.tex",
-  "place": "Lemma 08BJ (lemma-adjoint-preserve-K-injectives, line 9857), with Definition 070H (definition-K-injective, line 9620) for K-injective complexes"
- },
- "stmt_deps": [
-  "def-sp-abelian",
-  "def-weil-abstract-derived-category",
-  "def-weil-pbc-kinjective-resolutions"
- ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
- "mathlib_searches": [
-  {
-   "tool": "leansearch",
-   "query": "right adjoint of an exact functor sends K-injective complexes to K-injective complexes",
-   "results": "CategoryTheory.Injective.injective_of_adjoint, Adjunction.map_injective, Functor.preservesInjectiveObjects_of_adjunction_of_preservesMonomorphisms (Mathlib.CategoryTheory.Preadditive.Injective.*: injective objects, not K-injective complexes); Functor.rightDerivedToHomotopyCategory",
-   "verdict": "no match (only the statement for injective objects)",
-   "date": "2026-10-09"
+  "kind": "statement",
+  "title": "A right adjoint of an exact functor preserves K-injective complexes",
+  "statement": "Let $\\mathcal A,\\mathcal B$ be abelian categories [def-sp-abelian], and let $u:\\mathcal A\\to\\mathcal B$ and $v:\\mathcal B\\to\\mathcal A$ be additive functors with $u$ right adjoint to $v$ and $v$ exact. Call a cochain complex $I$ of $\\mathcal A$ *K-injective* if every morphism of complexes $M\\to I$ from an acyclic complex $M$ (all cohomology objects zero) is homotopic to zero, i.e. $\\operatorname{Hom}_{K(\\mathcal A)}(M,I)=0$ in the homotopy category for every acyclic $M$ [def-weil-abstract-derived-category] (equivalently, the Hom complex $\\operatorname{Hom}^\\bullet(M,I)$ is acyclic for every acyclic $M$, as in [def-weil-pbc-kinjective-resolutions], since $H^n\\operatorname{Hom}^\\bullet(M,I)=\\operatorname{Hom}_{K(\\mathcal A)}(M[-n],I)$ and shifts of acyclic complexes are acyclic). Then for every K-injective complex $I$ of $\\mathcal A$ the complex $u(I)=(u(I^r),u(d^r))_r$ obtained by applying $u$ termwise is a K-injective complex of $\\mathcal B$.",
+  "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Lemma 08BJ (lemma-adjoint-preserve-K-injectives, line 9857), with Definition 070H (definition-K-injective, line 9620) for K-injective complexes"
   },
-  {
-   "tool": "leanfinder",
-   "query": "right adjoint of exact functor preserves K-injective cochain complexes",
-   "results": "Functor.isZero_rightDerived_obj_injective_succ, Functor.mapDerivedCategory, Abelian.Ext.mapExactFunctor (none about K-injective complexes)",
-   "verdict": "no match",
-   "date": "2026-10-09"
-  },
-  {
-   "tool": "loogle",
-   "query": "CochainComplex.IsKInjective, CategoryTheory.Adjunction",
-   "results": "none",
-   "verdict": "no match",
-   "date": "2026-10-09"
-  },
-  {
-   "tool": "grep",
-   "query": "grep -rln IsKInjective ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib | xargs grep -ln 'Adjunction\\|⊣'",
-   "results": "none: the files using CochainComplex.IsKInjective (HomotopyCategory/KInjective.lean, DerivedCategory/KInjective.lean, Plus.lean, DerivabilityStructureInjectives.lean, ModelCategory/Injective.lean, Abelian/Injective/Ext.lean) never mention an adjunction",
-   "verdict": "no match; the source repository has it as CategoryTheory.Adjunction.preservesKInjectiveComplexes (WeilConjectures/CategoryTheory/DerivedCategory/RightDerivedFunctor/Comp.lean:91-114, sorry-free), not Mathlib",
-   "date": "2026-10-09"
-  }
- ],
- "mathlib_match": null,
- "status": "unsplit",
- "merged_into": null,
- "created": {
-  "by": "worker",
-  "item": "prop-weil-pbc-derived-inverse-image-adjunction",
-  "date": "2026-10-09"
- },
- "lean_audit": {
-  "master": {
-   "state": "closed",
-   "decls": [
-    {
-     "name": "CategoryTheory.Adjunction.preservesKInjectiveComplexes",
-     "module": "WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp",
-     "lines": [
-      90,
-      113
-     ],
-     "kind": "theorem",
-     "sorry": false
-    }
-   ],
-   "missing": [],
-   "open": []
-  },
-  "slopmaster2": {
-   "state": "closed",
-   "decls": [
-    {
-     "name": "CategoryTheory.Adjunction.preservesKInjectiveComplexes",
-     "module": "WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp",
-     "lines": [
-      91,
-      114
-     ],
-     "kind": "theorem",
-     "sorry": false
-    }
-   ],
-   "missing": [],
-   "open": []
-  }
- },
- "chapter": "sec-proper-base-change",
- "unit": "sk-def-exchange",
- "lean": {
-  "branch": "slopmaster2",
-  "declarations": [
-   "CategoryTheory.Adjunction.preservesKInjectiveComplexes"
+  "stmt_deps": [
+    "def-sp-abelian",
+    "def-weil-abstract-derived-category",
+    "def-weil-pbc-kinjective-resolutions"
   ],
-  "note": "attached by the lead at review (2026-10-09), found by the opus worker of prop-weil-pbc-derived-inverse-image-adjunction: the right adjoint of an exact functor carries K-injective complexes to K-injective complexes (Stacks 08BJ); sorry-free on the full map"
- }
+  "proof": [],
+  "proof_deps": [],
+  "proof_origin": null,
+  "mathlib_searches": [
+    {
+      "tool": "leansearch",
+      "query": "right adjoint of an exact functor sends K-injective complexes to K-injective complexes",
+      "results": "CategoryTheory.Injective.injective_of_adjoint, Adjunction.map_injective, Functor.preservesInjectiveObjects_of_adjunction_of_preservesMonomorphisms (Mathlib.CategoryTheory.Preadditive.Injective.*: injective objects, not K-injective complexes); Functor.rightDerivedToHomotopyCategory",
+      "verdict": "no match (only the statement for injective objects)",
+      "date": "2026-10-09"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "right adjoint of exact functor preserves K-injective cochain complexes",
+      "results": "Functor.isZero_rightDerived_obj_injective_succ, Functor.mapDerivedCategory, Abelian.Ext.mapExactFunctor (none about K-injective complexes)",
+      "verdict": "no match",
+      "date": "2026-10-09"
+    },
+    {
+      "tool": "loogle",
+      "query": "CochainComplex.IsKInjective, CategoryTheory.Adjunction",
+      "results": "none",
+      "verdict": "no match",
+      "date": "2026-10-09"
+    },
+    {
+      "tool": "grep",
+      "query": "grep -rln IsKInjective ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib | xargs grep -ln 'Adjunction\\|⊣'",
+      "results": "none: the files using CochainComplex.IsKInjective (HomotopyCategory/KInjective.lean, DerivedCategory/KInjective.lean, Plus.lean, DerivabilityStructureInjectives.lean, ModelCategory/Injective.lean, Abelian/Injective/Ext.lean) never mention an adjunction",
+      "verdict": "no match; the source repository has it as CategoryTheory.Adjunction.preservesKInjectiveComplexes (WeilConjectures/CategoryTheory/DerivedCategory/RightDerivedFunctor/Comp.lean:91-114, sorry-free), not Mathlib",
+      "date": "2026-10-09"
+    }
+  ],
+  "mathlib_match": null,
+  "status": "unsplit",
+  "merged_into": null,
+  "created": {
+    "by": "worker",
+    "item": "prop-weil-pbc-derived-inverse-image-adjunction",
+    "date": "2026-10-09"
+  },
+  "lean_audit": {
+    "master": {
+      "state": "closed",
+      "decls": [
+        {
+          "name": "CategoryTheory.Adjunction.preservesKInjectiveComplexes",
+          "module": "WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp",
+          "lines": [
+            90,
+            113
+          ],
+          "kind": "theorem",
+          "sorry": false
+        }
+      ],
+      "missing": [],
+      "open": []
+    },
+    "slopmaster2": {
+      "state": "closed",
+      "decls": [
+        {
+          "name": "CategoryTheory.Adjunction.preservesKInjectiveComplexes",
+          "module": "WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp",
+          "lines": [
+            91,
+            114
+          ],
+          "kind": "theorem",
+          "sorry": false
+        }
+      ],
+      "missing": [],
+      "open": []
+    }
+  },
+  "chapter": "sec-proper-base-change",
+  "unit": "sk-def-exchange",
+  "lean": {
+    "module": "WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp",
+    "declaration": "CategoryTheory.Adjunction.preservesKInjectiveComplexes",
+    "branch": "slopmaster2",
+    "line": 91,
+    "declarations": [
+      "CategoryTheory.Adjunction.preservesKInjectiveComplexes"
+    ],
+    "sorry_free": true,
+    "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state closed)"
+  }
 }

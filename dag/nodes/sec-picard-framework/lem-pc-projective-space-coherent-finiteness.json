@@ -1,176 +1,187 @@
 {
- "id": "lem-pc-projective-space-coherent-finiteness",
- "blueprint": {
-  "is": "lem-pc-projective-space-coherent-finiteness",
-  "from": null,
-  "same_as": []
- },
- "kind": "statement",
- "title": "Coherent cohomology of projective space over a Noetherian ring",
- "statement": "Let $A$ be Noetherian, let $n\\ge0$, and let $P=\\hyperref[def-pc-projective-space-twist]{\\mathbf P^n_A}$.\nLet $\\mathcal F$ be a coherent module on $P$ [pqf-def-coherent].\nThen each $H^q(P,\\mathcal F)$ is a finite $A$-module.",
- "source": {
-  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-coherence/lem-pc-projective-space-coherent-finiteness.md",
-  "place": "node lem-pc-projective-space-coherent-finiteness, order 655"
- },
- "stmt_deps": [
-  "def-pc-projective-space-twist",
-  "pqf-def-coherent"
- ],
- "proof": [
-  {
-   "text": "We descend on $q$, proving the assertion for all coherent modules\nat once. For $q>n$ it follows from\n[lem-pc-projective-space-cohomology-bound].\nSuppose it is known in degree $q+1$ for every coherent module.\nFor a given $\\mathcal F$, choose the exact sequence\n$0\\to\\mathcal K\\to\\mathcal E\\to\\mathcal F\\to0$ of\n[lem-pc-projective-space-twist-quotient], with $\\mathcal E$\na finite sum of twists and $\\mathcal K$ coherent.\nThe long exact sequence of [pqf-def-cohomology] contains\n\n$$\nH^q(P,\\mathcal E)\\longrightarrow H^q(P,\\mathcal F)\n\\longrightarrow H^{q+1}(P,\\mathcal K).\n$$",
-   "uses": [
+  "id": "lem-pc-projective-space-coherent-finiteness",
+  "blueprint": {
+    "is": "lem-pc-projective-space-coherent-finiteness",
+    "from": null,
+    "same_as": []
+  },
+  "kind": "statement",
+  "title": "Coherent cohomology of projective space over a Noetherian ring",
+  "statement": "Let $A$ be Noetherian, let $n\\ge0$, and let $P=\\hyperref[def-pc-projective-space-twist]{\\mathbf P^n_A}$.\nLet $\\mathcal F$ be a coherent module on $P$ [pqf-def-coherent].\nThen each $H^q(P,\\mathcal F)$ is a finite $A$-module.",
+  "source": {
+    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-coherence/lem-pc-projective-space-coherent-finiteness.md",
+    "place": "node lem-pc-projective-space-coherent-finiteness, order 655"
+  },
+  "stmt_deps": [
+    "def-pc-projective-space-twist",
+    "pqf-def-coherent"
+  ],
+  "proof": [
+    {
+      "text": "We descend on $q$, proving the assertion for all coherent modules\nat once. For $q>n$ it follows from\n[lem-pc-projective-space-cohomology-bound].\nSuppose it is known in degree $q+1$ for every coherent module.\nFor a given $\\mathcal F$, choose the exact sequence\n$0\\to\\mathcal K\\to\\mathcal E\\to\\mathcal F\\to0$ of\n[lem-pc-projective-space-twist-quotient], with $\\mathcal E$\na finite sum of twists and $\\mathcal K$ coherent.\nThe long exact sequence of [pqf-def-cohomology] contains\n\n$$\nH^q(P,\\mathcal E)\\longrightarrow H^q(P,\\mathcal F)\n\\longrightarrow H^{q+1}(P,\\mathcal K).\n$$",
+      "uses": [
+        "lem-pc-projective-space-cohomology-bound",
+        "lem-pc-projective-space-twist-quotient",
+        "pqf-def-cohomology"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "The first term is finite by\n[lem-pc-projective-space-twist-cohomology]; the last is finite\nby the induction hypothesis applied to $\\mathcal K$.\nThe middle term is an extension of a quotient of the first term\nby a submodule of the last. Quotients and extensions of finite\nmodules are finite; the submodule is finite because $A$ is\nNoetherian. This proves the induction step, including $q=0$.",
+      "uses": [
+        "lem-pc-projective-space-twist-cohomology",
+        "lem-weil-pbc-noetherian-submodule-finite"
+      ],
+      "elementary": false
+    }
+  ],
+  "proof_deps": [
     "lem-pc-projective-space-cohomology-bound",
     "lem-pc-projective-space-twist-quotient",
-    "pqf-def-cohomology"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "The first term is finite by\n[lem-pc-projective-space-twist-cohomology]; the last is finite\nby the induction hypothesis applied to $\\mathcal K$.\nThe middle term is an extension of a quotient of the first term\nby a submodule of the last. Quotients and extensions of finite\nmodules are finite; the submodule is finite because $A$ is\nNoetherian. This proves the induction step, including $q=0$.",
-   "uses": [
+    "pqf-def-cohomology",
     "lem-pc-projective-space-twist-cohomology",
     "lem-weil-pbc-noetherian-submodule-finite"
-   ],
-   "elementary": false
-  }
- ],
- "proof_deps": [
-  "lem-pc-projective-space-cohomology-bound",
-  "lem-pc-projective-space-twist-quotient",
-  "pqf-def-cohomology",
-  "lem-pc-projective-space-twist-cohomology",
-  "lem-weil-pbc-noetherian-submodule-finite"
- ],
- "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-coherence/lem-pc-projective-space-coherent-finiteness.md",
-  "place": "## Proof"
- },
- "mathlib_searches": [
-  {
-   "tool": "leanfinder",
-   "query": "finite cohomology modules of coherent sheaves on projective space over Noetherian ring",
-   "results": "SheafOfModules.IsFiniteType; Algebra.instFiniteH1CotangentOfFinitePresentationOfProjectiveKaehlerDifferential; AlgebraicGeometry.Proj.instLocallyOfFiniteTypeToSpecZeroOfFiniteTypeSubtypeMemOfNatNat; SheafOfModules.GeneratingSections.IsFiniteType.finite; Condensed.finFree; SheafOfModules.GeneratingSections.IsFiniteType; SheafOfModules.LocalGeneratorsData.IsFiniteType.isFiniteType; CochainComplex.isKProjective_of_projective",
-   "date": "2026-10-11",
-   "verdict": "no match"
+  ],
+  "proof_origin": {
+    "by": "agent",
+    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-coherence/lem-pc-projective-space-coherent-finiteness.md",
+    "place": "## Proof"
   },
-  {
-   "tool": "loogle",
-   "query": "ProjectiveSpace.finite_H, Module.Finite",
-   "results": "0 hits; loogle: unknown identifier 'ProjectiveSpace.finite_H'",
-   "date": "2026-10-11",
-   "verdict": "no match"
-  },
-  {
-   "tool": "grep",
-   "query": "finite_H|coherent.*projective.*Noetherian [Mathlib/AlgebraicGeometry]",
-   "results": "0 hits in Mathlib/AlgebraicGeometry",
-   "date": "2026-10-11",
-   "verdict": "no match"
-  },
-  {
-   "tool": "leansearch",
-   "query": "coherent sheaf projective space Noetherian finite cohomology",
-   "results": "service unavailable: Internal Server Error",
-   "date": "2026-10-11",
-   "verdict": "unavailable"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "finite A-module cohomology coherent sheaf projective n-space",
-   "results": "Algebra.instFiniteH1CotangentOfFinitePresentationOfProjectiveKaehlerDifferential; Rep.standardComplex.x_projective; Rep.FiniteCyclicGroup.moduleCatCochainComplex; Rep.isZero_Tor_succ_of_projective; CategoryTheory.ProjectiveResolution.instProjectiveXIntCochainComplex; CochainComplex.isKProjective_of_projective; AlgebraicGeometry.Proj.instLocallyOfFiniteTypeToSpecZeroOfFiniteTypeSubtypeMemOfNatNat; CategoryTheory.Sheaf.cohomologyPresheaf",
-   "date": "2026-10-11",
-   "verdict": "no match"
-  },
-  {
-   "tool": "loogle",
-   "query": "Module.Finite A (F.H q), IsNoetherianRing A",
-   "results": "0 hits; loogle: Unknown identifier `A`",
-   "date": "2026-10-11",
-   "verdict": "no match"
-  },
-  {
-   "tool": "grep",
-   "query": "Module.Finite.*Noetherian|finite_H [Mathlib]",
-   "results": "0 hits in Mathlib",
-   "date": "2026-10-11",
-   "verdict": "no match"
-  }
- ],
- "mathlib_match": null,
- "status": "split",
- "merged_into": null,
- "import_flags": [],
- "blueprint_kind": "lemma",
- "blueprint_order": 655,
- "blueprint_uses": [
-  "def-pc-projective-space-twist",
-  "lem-pc-projective-space-cohomology-bound",
-  "lem-pc-projective-space-twist-cohomology",
-  "lem-pc-projective-space-twist-quotient",
-  "pqf-def-coherent",
-  "pqf-def-cohomology"
- ],
- "uses_not_cited": [
-  "pqf-def-coherent"
- ],
- "proof_split_by": "paragraphs",
- "lean_audit": {
-  "master": {
-   "state": "none",
-   "decls": [],
-   "missing": []
-  },
-  "slopmaster2": {
-   "state": "sorry_here",
-   "decls": [
+  "mathlib_searches": [
     {
-     "name": "AlgebraicGeometry.ProjectiveSpace.finite_H",
-     "module": "WeilConjectures.AlgebraicGeometry.Cohomology.Projective",
-     "lines": [
-      90,
-      104
-     ],
-     "kind": "theorem",
-     "sorry": true
+      "tool": "leanfinder",
+      "query": "finite cohomology modules of coherent sheaves on projective space over Noetherian ring",
+      "results": "SheafOfModules.IsFiniteType; Algebra.instFiniteH1CotangentOfFinitePresentationOfProjectiveKaehlerDifferential; AlgebraicGeometry.Proj.instLocallyOfFiniteTypeToSpecZeroOfFiniteTypeSubtypeMemOfNatNat; SheafOfModules.GeneratingSections.IsFiniteType.finite; Condensed.finFree; SheafOfModules.GeneratingSections.IsFiniteType; SheafOfModules.LocalGeneratorsData.IsFiniteType.isFiniteType; CochainComplex.isKProjective_of_projective",
+      "date": "2026-10-11",
+      "verdict": "no match"
+    },
+    {
+      "tool": "loogle",
+      "query": "ProjectiveSpace.finite_H, Module.Finite",
+      "results": "0 hits; loogle: unknown identifier 'ProjectiveSpace.finite_H'",
+      "date": "2026-10-11",
+      "verdict": "no match"
+    },
+    {
+      "tool": "grep",
+      "query": "finite_H|coherent.*projective.*Noetherian [Mathlib/AlgebraicGeometry]",
+      "results": "0 hits in Mathlib/AlgebraicGeometry",
+      "date": "2026-10-11",
+      "verdict": "no match"
+    },
+    {
+      "tool": "leansearch",
+      "query": "coherent sheaf projective space Noetherian finite cohomology",
+      "results": "service unavailable: Internal Server Error",
+      "date": "2026-10-11",
+      "verdict": "unavailable"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "finite A-module cohomology coherent sheaf projective n-space",
+      "results": "Algebra.instFiniteH1CotangentOfFinitePresentationOfProjectiveKaehlerDifferential; Rep.standardComplex.x_projective; Rep.FiniteCyclicGroup.moduleCatCochainComplex; Rep.isZero_Tor_succ_of_projective; CategoryTheory.ProjectiveResolution.instProjectiveXIntCochainComplex; CochainComplex.isKProjective_of_projective; AlgebraicGeometry.Proj.instLocallyOfFiniteTypeToSpecZeroOfFiniteTypeSubtypeMemOfNatNat; CategoryTheory.Sheaf.cohomologyPresheaf",
+      "date": "2026-10-11",
+      "verdict": "no match"
+    },
+    {
+      "tool": "loogle",
+      "query": "Module.Finite A (F.H q), IsNoetherianRing A",
+      "results": "0 hits; loogle: Unknown identifier `A`",
+      "date": "2026-10-11",
+      "verdict": "no match"
+    },
+    {
+      "tool": "grep",
+      "query": "Module.Finite.*Noetherian|finite_H [Mathlib]",
+      "results": "0 hits in Mathlib",
+      "date": "2026-10-11",
+      "verdict": "no match"
     }
-   ],
-   "missing": [],
-   "open": []
-  }
- },
- "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-coherence",
- "split_report": {
-  "date": "2026-10-11",
-  "item": "lem-pc-projective-space-coherent-finiteness",
-  "worker": "stage1",
-  "summary": "Checked the sorry-bearing declaration AlgebraicGeometry.ProjectiveSpace.finite_H against the imported blueprint statement and split proof. The descending induction uses the existing cohomology bound, finite twist quotient, and long exact sequence; finiteness of the submodule in the final term is supplied by the existing Mathlib leaf lem-weil-pbc-noetherian-submodule-finite. Quotient and extension closure of finite modules are written directly from finite generators and the exact sequence, so no duplicate child node is created.",
-  "blueprint": "Realizes the complete ## Proof of the blueprint node: descending induction in q, the twist quotient exact sequence, the long exact cohomology segment, and Noetherian finiteness of the resulting submodule.",
+  ],
+  "mathlib_match": null,
+  "status": "split",
+  "merged_into": null,
+  "import_flags": [],
+  "blueprint_kind": "lemma",
+  "blueprint_order": 655,
+  "blueprint_uses": [
+    "def-pc-projective-space-twist",
+    "lem-pc-projective-space-cohomology-bound",
+    "lem-pc-projective-space-twist-cohomology",
+    "lem-pc-projective-space-twist-quotient",
+    "pqf-def-coherent",
+    "pqf-def-cohomology"
+  ],
+  "uses_not_cited": [
+    "pqf-def-coherent"
+  ],
+  "proof_split_by": "paragraphs",
+  "lean_audit": {
+    "master": {
+      "state": "none",
+      "decls": [],
+      "missing": []
+    },
+    "slopmaster2": {
+      "state": "sorry_here",
+      "decls": [
+        {
+          "name": "AlgebraicGeometry.ProjectiveSpace.finite_H",
+          "module": "WeilConjectures.AlgebraicGeometry.Cohomology.Projective",
+          "lines": [
+            90,
+            104
+          ],
+          "kind": "theorem",
+          "sorry": true
+        }
+      ],
+      "missing": [],
+      "open": []
+    }
+  },
+  "chapter": "sec-picard-framework",
+  "unit": "sk-thm-picard-coherence",
+  "split_report": {
+    "date": "2026-10-11",
+    "item": "lem-pc-projective-space-coherent-finiteness",
+    "worker": "stage1",
+    "summary": "Checked the sorry-bearing declaration AlgebraicGeometry.ProjectiveSpace.finite_H against the imported blueprint statement and split proof. The descending induction uses the existing cohomology bound, finite twist quotient, and long exact sequence; finiteness of the submodule in the final term is supplied by the existing Mathlib leaf lem-weil-pbc-noetherian-submodule-finite. Quotient and extension closure of finite modules are written directly from finite generators and the exact sequence, so no duplicate child node is created.",
+    "blueprint": "Realizes the complete ## Proof of the blueprint node: descending induction in q, the twist quotient exact sequence, the long exact cohomology segment, and Noetherian finiteness of the resulting submodule.",
+    "tool_uses": [
+      {
+        "node": "lem-pc-projective-space-cohomology-bound",
+        "why": "The induction's vanishing base case uses the already established projective-space cohomology bound from unit sk-thm-picard-pn."
+      },
+      {
+        "node": "lem-pc-projective-space-twist-cohomology",
+        "why": "The induction step uses finiteness of cohomology of each twisting module, established in unit sk-thm-picard-pn."
+      }
+    ]
+  },
   "tool_uses": [
-   {
-    "node": "lem-pc-projective-space-cohomology-bound",
-    "why": "The induction's vanishing base case uses the already established projective-space cohomology bound from unit sk-thm-picard-pn."
-   },
-   {
-    "node": "lem-pc-projective-space-twist-cohomology",
-    "why": "The induction step uses finiteness of cohomology of each twisting module, established in unit sk-thm-picard-pn."
-   }
-  ]
- },
- "tool_uses": [
-  "lem-pc-projective-space-twist-quotient",
-  "lem-weil-pbc-noetherian-submodule-finite",
-  "lem-pc-projective-space-cohomology-bound",
-  "lem-pc-projective-space-twist-cohomology"
- ],
- "reviewed": {
-  "date": "2026-10-10",
-  "by": "L",
-  "reviewer": "R-psf3012",
-  "group": "E1",
-  "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-psf3012 (reviewer sub-agent of L); spot-checked: Statement (n bound, coherent, A Noetherian) matches exactly what lem-pc-projective-coherent-finiteness applies to i_*F (C4); descending induction: base q>n from cohomology-bound (quasi-coherent, any A), twist-quotient (Noetherian, coherent kernel) + LES of pqf-def-cohomology, twist cohomology finite free (n=0 covered), Noetherian submodule leaf for the image in H^{q+1}(K); Noetherianity used for coherent kernel and submodule finiteness (E); finite-sum additivity and quotient/extension closure elementary; no cycle. FIX more, RETURN less: declared the cross-unit generic tools lem-pc-projective-space-twist-quotient (unit sk-thm-picard-serre-b) and lem-weil-pbc-noetherian-submodule-finite (unit sk-thm-p1) as tool_uses, which split_report.tool_uses omitted (C7/C8)."
- }
+    "lem-pc-projective-space-twist-quotient",
+    "lem-weil-pbc-noetherian-submodule-finite",
+    "lem-pc-projective-space-cohomology-bound",
+    "lem-pc-projective-space-twist-cohomology"
+  ],
+  "reviewed": {
+    "date": "2026-10-10",
+    "by": "L",
+    "reviewer": "R-psf3012",
+    "group": "E1",
+    "result": "pass",
+    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-psf3012 (reviewer sub-agent of L); spot-checked: Statement (n bound, coherent, A Noetherian) matches exactly what lem-pc-projective-coherent-finiteness applies to i_*F (C4); descending induction: base q>n from cohomology-bound (quasi-coherent, any A), twist-quotient (Noetherian, coherent kernel) + LES of pqf-def-cohomology, twist cohomology finite free (n=0 covered), Noetherian submodule leaf for the image in H^{q+1}(K); Noetherianity used for coherent kernel and submodule finiteness (E); finite-sum additivity and quotient/extension closure elementary; no cycle. FIX more, RETURN less: declared the cross-unit generic tools lem-pc-projective-space-twist-quotient (unit sk-thm-picard-serre-b) and lem-weil-pbc-noetherian-submodule-finite (unit sk-thm-p1) as tool_uses, which split_report.tool_uses omitted (C7/C8)."
+  },
+  "lean": {
+    "module": "WeilConjectures.AlgebraicGeometry.Cohomology.Projective",
+    "declaration": "AlgebraicGeometry.ProjectiveSpace.finite_H",
+    "branch": "slopmaster2",
+    "line": 90,
+    "declarations": [
+      "AlgebraicGeometry.ProjectiveSpace.finite_H"
+    ],
+    "sorry_free": false,
+    "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state sorry_here)"
+  }
 }

@@ -1,92 +1,96 @@
 {
- "id": "lem-galois-pi1-finite-etale-injective",
- "blueprint": {
-  "is": null,
-  "from": {
-   "node": "thm-galois-fundamental",
-   "place": "statement, last clause: 'with base change along Y'->Y ..., where it corresponds to the passage to the open subgroup of the fundamental group' (that the map of fundamental groups is injective, for Y'->Y finite etale)",
-   "via": []
+  "id": "lem-galois-pi1-finite-etale-injective",
+  "blueprint": {
+    "is": null,
+    "from": {
+      "node": "thm-galois-fundamental",
+      "place": "statement, last clause: 'with base change along Y'->Y ..., where it corresponds to the passage to the open subgroup of the fundamental group' (that the map of fundamental groups is injective, for Y'->Y finite etale)",
+      "via": []
+    },
+    "same_as": []
   },
-  "same_as": []
- },
- "kind": "statement",
- "title": "A finite etale morphism is injective on fundamental groups",
- "statement": "Let $f:Y'\\to Y$ be a finite etale morphism of connected schemes, $\\bar y'$ a geometric point of $Y'$, $\\bar y=f\\circ\\bar y'$, and $f_*:\\pi_1(Y',\\bar y')\\to\\pi_1(Y,\\bar y)$ the continuous homomorphism of [lem-galois-pi1-functoriality]. Then $f_*$ is injective.",
- "source": {
-  "document": "literature/sga/SGA1_arXiv-math0206203.pdf",
-  "place": "SGA 1 V §7, p. 116, last paragraph: 'Si en particulier S' est un revetement etale de S, alors l'homomorphisme u est un isomorphisme de pi_1(S',a') sur le sous-groupe ouvert ...' (the injectivity); Prop. V.6.13; Lean (slopmaster2): AlgebraicGeometry.Scheme.FiniteEtale.fundamentalGroupMap_injective (WeilConjectures.AlgebraicGeometry.FundamentalGroup.Restriction, lines 173-202)"
- },
- "stmt_deps": [
-  "def-weil-pbc-scheme-conventions",
-  "lem-galois-pi1-functoriality"
- ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
- "mathlib_searches": [
-  {
-   "tool": "leansearch",
-   "query": "finite etale morphism induces injective map on etale fundamental groups",
-   "results": "Scheme.Etale, IsEtale, RingHom.Etale, Algebra.Etale.formallyEtale, IsFinite.recOn, PreGaloisCategory.instIsPretransitiveCarrierObjFintypeCatOfIsConnected",
-   "date": "2026-10-10",
-   "verdict": "no match"
+  "kind": "statement",
+  "title": "A finite etale morphism is injective on fundamental groups",
+  "statement": "Let $f:Y'\\to Y$ be a finite etale morphism of connected schemes, $\\bar y'$ a geometric point of $Y'$, $\\bar y=f\\circ\\bar y'$, and $f_*:\\pi_1(Y',\\bar y')\\to\\pi_1(Y,\\bar y)$ the continuous homomorphism of [lem-galois-pi1-functoriality]. Then $f_*$ is injective.",
+  "source": {
+    "document": "literature/sga/SGA1_arXiv-math0206203.pdf",
+    "place": "SGA 1 V §7, p. 116, last paragraph: 'Si en particulier S' est un revetement etale de S, alors l'homomorphisme u est un isomorphisme de pi_1(S',a') sur le sous-groupe ouvert ...' (the injectivity); Prop. V.6.13; Lean (slopmaster2): AlgebraicGeometry.Scheme.FiniteEtale.fundamentalGroupMap_injective (WeilConjectures.AlgebraicGeometry.FundamentalGroup.Restriction, lines 173-202)"
   },
-  {
-   "tool": "leanfinder",
-   "query": "fundamental group of connected finite etale cover is the stabilizer subgroup, open of finite index",
-   "results": "PreGaloisCategory.exists_set_ker_evaluation_subset_of_isOpen (Galois.Topology), fiberIsoQuotientStabilizer (Galois.EssSurj), IsFundamentalGroup.transitive_of_isGalois, instIsFundamentalGroupAutFunctorFintypeCat",
-   "date": "2026-10-10",
-   "verdict": "no match: fiberIsoQuotientStabilizer identifies F(X) with Aut F / Stab(x) inside one Galois category; nothing on the slice category over a connected object or on its fundamental group"
-  },
-  {
-   "tool": "grep",
-   "query": "grep -rn 'stabilizer\\|Over ' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Galois/*.lean; grep -rln 'FiniteEtale' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry",
-   "results": "only EssSurj.lean:66-109 (stabilizer of a point of F(X), fintypeQuotient, fiberIsoQuotientStabilizer); no FiniteEtale in Mathlib",
-   "date": "2026-10-10",
-   "verdict": "no match in Mathlib"
-  }
- ],
- "mathlib_match": null,
- "status": "unsplit",
- "merged_into": null,
- "created": {
-  "by": "worker",
-  "item": "thm-galois-fundamental",
-  "date": "2026-10-10"
- },
- "lean_audit": {
-  "master": {
-   "state": "none",
-   "decls": [],
-   "missing": [
-    "AlgebraicGeometry.Scheme.FiniteEtale.fundamentalGroupMap_injective"
-   ]
-  },
-  "slopmaster2": {
-   "state": "closed",
-   "decls": [
-    {
-     "name": "AlgebraicGeometry.Scheme.FiniteEtale.fundamentalGroupMap_injective",
-     "module": "WeilConjectures.AlgebraicGeometry.FundamentalGroup.Restriction",
-     "lines": [
-      173,
-      202
-     ],
-     "kind": "theorem",
-     "sorry": false
-    }
-   ],
-   "missing": [],
-   "open": []
-  }
- },
- "chapter": "sec-curve-estimates",
- "unit": "sk-prop-h2",
- "lean": {
-  "branch": "slopmaster2",
-  "declarations": [
-   "AlgebraicGeometry.Scheme.FiniteEtale.fundamentalGroupMap_injective"
+  "stmt_deps": [
+    "def-weil-pbc-scheme-conventions",
+    "lem-galois-pi1-functoriality"
   ],
-  "note": "attached by the lead (worker's attachment at creation, verified by L, 2026-10-10)"
- }
+  "proof": [],
+  "proof_deps": [],
+  "proof_origin": null,
+  "mathlib_searches": [
+    {
+      "tool": "leansearch",
+      "query": "finite etale morphism induces injective map on etale fundamental groups",
+      "results": "Scheme.Etale, IsEtale, RingHom.Etale, Algebra.Etale.formallyEtale, IsFinite.recOn, PreGaloisCategory.instIsPretransitiveCarrierObjFintypeCatOfIsConnected",
+      "date": "2026-10-10",
+      "verdict": "no match"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "fundamental group of connected finite etale cover is the stabilizer subgroup, open of finite index",
+      "results": "PreGaloisCategory.exists_set_ker_evaluation_subset_of_isOpen (Galois.Topology), fiberIsoQuotientStabilizer (Galois.EssSurj), IsFundamentalGroup.transitive_of_isGalois, instIsFundamentalGroupAutFunctorFintypeCat",
+      "date": "2026-10-10",
+      "verdict": "no match: fiberIsoQuotientStabilizer identifies F(X) with Aut F / Stab(x) inside one Galois category; nothing on the slice category over a connected object or on its fundamental group"
+    },
+    {
+      "tool": "grep",
+      "query": "grep -rn 'stabilizer\\|Over ' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Galois/*.lean; grep -rln 'FiniteEtale' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry",
+      "results": "only EssSurj.lean:66-109 (stabilizer of a point of F(X), fintypeQuotient, fiberIsoQuotientStabilizer); no FiniteEtale in Mathlib",
+      "date": "2026-10-10",
+      "verdict": "no match in Mathlib"
+    }
+  ],
+  "mathlib_match": null,
+  "status": "unsplit",
+  "merged_into": null,
+  "created": {
+    "by": "worker",
+    "item": "thm-galois-fundamental",
+    "date": "2026-10-10"
+  },
+  "lean_audit": {
+    "master": {
+      "state": "none",
+      "decls": [],
+      "missing": [
+        "AlgebraicGeometry.Scheme.FiniteEtale.fundamentalGroupMap_injective"
+      ]
+    },
+    "slopmaster2": {
+      "state": "closed",
+      "decls": [
+        {
+          "name": "AlgebraicGeometry.Scheme.FiniteEtale.fundamentalGroupMap_injective",
+          "module": "WeilConjectures.AlgebraicGeometry.FundamentalGroup.Restriction",
+          "lines": [
+            173,
+            202
+          ],
+          "kind": "theorem",
+          "sorry": false
+        }
+      ],
+      "missing": [],
+      "open": []
+    }
+  },
+  "chapter": "sec-curve-estimates",
+  "unit": "sk-prop-h2",
+  "lean": {
+    "module": "WeilConjectures.AlgebraicGeometry.FundamentalGroup.Restriction",
+    "declaration": "AlgebraicGeometry.Scheme.FiniteEtale.fundamentalGroupMap_injective",
+    "branch": "slopmaster2",
+    "line": 173,
+    "declarations": [
+      "AlgebraicGeometry.Scheme.FiniteEtale.fundamentalGroupMap_injective"
+    ],
+    "sorry_free": true,
+    "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state closed)"
+  }
 }

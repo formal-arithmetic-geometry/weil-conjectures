@@ -1,99 +1,110 @@
 {
- "id": "thm-zl-relative-noether",
- "blueprint": {
-  "is": "thm-zl-relative-noether",
-  "from": null,
-  "same_as": null
- },
- "kind": "statement",
- "title": "Relative Noether normalization",
- "statement": "Let $f:X_0\\to Y_0$ be a\nseparated finite-type\nmorphism of separated finite-type $k_0$-schemes.\nThere are finite partitions of source and target by locally closed\nreduced subschemes such that each source piece $X'_0$, mapping to\na target piece $Y'_0$, has\ncoordinates inducing a\nfactorization\n\n$$\nX'_0\\xrightarrow{\\nu}\\mathbf A^d_{Y'_0}\n\\longrightarrow\\mathbf A^{d-1}_{Y'_0}\\longrightarrow\\cdots\n\\longrightarrow\\mathbf A^1_{Y'_0}\\longrightarrow Y'_0\n$$\n\nwith $\\nu$ finite and all subsequent arrows the coordinate\nprojections of relative affine space.\nFor $d=0$, the factorization consists just of the finite map\n$X'_0\\to Y'_0=\\mathbf A^0_{Y'_0}$.",
- "source": {
-  "document": "literature/blueprint/master/blueprint/sec-deligne-laumon-general/sk-l-dl-general-normalization/thm-zl-relative-noether.md",
-  "place": "node thm-zl-relative-noether, order 2826"
- },
- "stmt_deps": [],
- "proof": [
-  {
-   "text": "All schemes under consideration are Noetherian. We use induction\non closed subsets of the target, with their reduced structures.\nThis induction terminates because a Noetherian space has no infinite\nstrictly descending chain of closed subsets.",
-   "uses": [],
-   "elementary": null
+  "id": "thm-zl-relative-noether",
+  "blueprint": {
+    "is": "thm-zl-relative-noether",
+    "from": null,
+    "same_as": null
   },
-  {
-   "text": "For a nonempty reduced target $Y$, take the finitely many\nirreducible components. In each component choose a nonempty\naffine open avoiding all the other components. These give disjoint\nintegral affine opens $V_j=\\operatorname{Spec}A_j$ of $Y$;\ntheir union contains every generic point of $Y$.\nFor each $j$, apply [lem-zl-affine-partition] to\n$X_0\\times_{Y_0}V_j$. The resulting finitely many reduced affine\npieces are $\\operatorname{Spec}B_{ji}$, with $B_{ji}$\na finitely generated $A_j$-algebra.",
-   "uses": [
-    "lem-zl-affine-partition"
-   ],
-   "elementary": false
+  "kind": "statement",
+  "title": "Relative Noether normalization",
+  "statement": "Let $f:X_0\\to Y_0$ be a\nseparated finite-type\nmorphism of separated finite-type $k_0$-schemes.\nThere are finite partitions of source and target by locally closed\nreduced subschemes such that each source piece $X'_0$, mapping to\na target piece $Y'_0$, has\ncoordinates inducing a\nfactorization\n\n$$\nX'_0\\xrightarrow{\\nu}\\mathbf A^d_{Y'_0}\n\\longrightarrow\\mathbf A^{d-1}_{Y'_0}\\longrightarrow\\cdots\n\\longrightarrow\\mathbf A^1_{Y'_0}\\longrightarrow Y'_0\n$$\n\nwith $\\nu$ finite and all subsequent arrows the coordinate\nprojections of relative affine space.\nFor $d=0$, the factorization consists just of the finite map\n$X'_0\\to Y'_0=\\mathbf A^0_{Y'_0}$.",
+  "source": {
+    "document": "literature/blueprint/master/blueprint/sec-deligne-laumon-general/sk-l-dl-general-normalization/thm-zl-relative-noether.md",
+    "place": "node thm-zl-relative-noether, order 2826"
   },
-  {
-   "text": "Apply [lem-zl-spread-normalization] to every $A_j\\to B_{ji}$.\nFor fixed $j$, multiply the finitely many nonzero denominators\nto obtain $s_j$. Localizing the resulting finite module\ngenerators once more preserves their generation, so all pieces\nover $D(s_j)\\subset V_j$ simultaneously have finite maps to\nrelative affine spaces. These maps are the explicit\n[def-zl-localized-coordinates] maps.\nThe open subset $V=\\bigcup_jD(s_j)$ still contains every generic\npoint of $Y$, and its pieces and their inverse images give the\nrequired finite partitions over $V$.",
-   "uses": [
+  "stmt_deps": [],
+  "proof": [
+    {
+      "text": "All schemes under consideration are Noetherian. We use induction\non closed subsets of the target, with their reduced structures.\nThis induction terminates because a Noetherian space has no infinite\nstrictly descending chain of closed subsets.",
+      "uses": [],
+      "elementary": null
+    },
+    {
+      "text": "For a nonempty reduced target $Y$, take the finitely many\nirreducible components. In each component choose a nonempty\naffine open avoiding all the other components. These give disjoint\nintegral affine opens $V_j=\\operatorname{Spec}A_j$ of $Y$;\ntheir union contains every generic point of $Y$.\nFor each $j$, apply [lem-zl-affine-partition] to\n$X_0\\times_{Y_0}V_j$. The resulting finitely many reduced affine\npieces are $\\operatorname{Spec}B_{ji}$, with $B_{ji}$\na finitely generated $A_j$-algebra.",
+      "uses": [
+        "lem-zl-affine-partition"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "Apply [lem-zl-spread-normalization] to every $A_j\\to B_{ji}$.\nFor fixed $j$, multiply the finitely many nonzero denominators\nto obtain $s_j$. Localizing the resulting finite module\ngenerators once more preserves their generation, so all pieces\nover $D(s_j)\\subset V_j$ simultaneously have finite maps to\nrelative affine spaces. These maps are the explicit\n[def-zl-localized-coordinates] maps.\nThe open subset $V=\\bigcup_jD(s_j)$ still contains every generic\npoint of $Y$, and its pieces and their inverse images give the\nrequired finite partitions over $V$.",
+      "uses": [
+        "lem-zl-spread-normalization",
+        "def-zl-localized-coordinates"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "The complement $Y\\setminus V$ is a proper closed subset.\nApply the induction hypothesis to the restriction of $f$ over\nthis complement. Reduced source pieces factor through the reduced\ntarget, since a nilpotent section maps to zero in a reduced ring.\nCombining those partitions with the pieces over $V$ gives finite\npartitions of source and target by locally closed reduced\nsubschemes, as in [def-weil-pbc-scheme-conventions].\nFinally the standard coordinate projections factor each\n$\\mathbf A^d_{Y'_0}\\to Y'_0$ into the $d$ relative affine-line\nprojections of [def-sbc-affine-space].",
+      "uses": [
+        "def-weil-pbc-scheme-conventions",
+        "def-sbc-affine-space"
+      ],
+      "elementary": false
+    }
+  ],
+  "proof_deps": [
+    "lem-zl-affine-partition",
     "lem-zl-spread-normalization",
-    "def-zl-localized-coordinates"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "The complement $Y\\setminus V$ is a proper closed subset.\nApply the induction hypothesis to the restriction of $f$ over\nthis complement. Reduced source pieces factor through the reduced\ntarget, since a nilpotent section maps to zero in a reduced ring.\nCombining those partitions with the pieces over $V$ gives finite\npartitions of source and target by locally closed reduced\nsubschemes, as in [def-weil-pbc-scheme-conventions].\nFinally the standard coordinate projections factor each\n$\\mathbf A^d_{Y'_0}\\to Y'_0$ into the $d$ relative affine-line\nprojections of [def-sbc-affine-space].",
-   "uses": [
+    "def-zl-localized-coordinates",
     "def-weil-pbc-scheme-conventions",
     "def-sbc-affine-space"
-   ],
-   "elementary": false
-  }
- ],
- "proof_deps": [
-  "lem-zl-affine-partition",
-  "lem-zl-spread-normalization",
-  "def-zl-localized-coordinates",
-  "def-weil-pbc-scheme-conventions",
-  "def-sbc-affine-space"
- ],
- "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-deligne-laumon-general/sk-l-dl-general-normalization/thm-zl-relative-noether.md",
-  "place": "## Proof"
- },
- "mathlib_searches": [],
- "mathlib_match": null,
- "status": "imported",
- "merged_into": null,
- "import_flags": [],
- "blueprint_kind": "theorem",
- "blueprint_order": 2826,
- "blueprint_uses": [
-  "def-sbc-affine-space",
-  "def-weil-pbc-scheme-conventions",
-  "def-zl-localized-coordinates",
-  "lem-zl-affine-partition",
-  "lem-zl-spread-normalization"
- ],
- "proof_split_by": "paragraphs",
- "lean_audit": {
-  "master": {
-   "state": "none",
-   "decls": [],
-   "missing": []
+  ],
+  "proof_origin": {
+    "by": "agent",
+    "document": "literature/blueprint/master/blueprint/sec-deligne-laumon-general/sk-l-dl-general-normalization/thm-zl-relative-noether.md",
+    "place": "## Proof"
   },
-  "slopmaster2": {
-   "state": "closed",
-   "decls": [
-    {
-     "name": "AlgebraicGeometry.exists_partition_isFinite_toIteratedAffineLine",
-     "module": "WeilConjectures.AlgebraicGeometry.NoetherNormalization",
-     "lines": [
-      597,
-      617
-     ],
-     "kind": "theorem",
-     "sorry": false
+  "mathlib_searches": [],
+  "mathlib_match": null,
+  "status": "imported",
+  "merged_into": null,
+  "import_flags": [],
+  "blueprint_kind": "theorem",
+  "blueprint_order": 2826,
+  "blueprint_uses": [
+    "def-sbc-affine-space",
+    "def-weil-pbc-scheme-conventions",
+    "def-zl-localized-coordinates",
+    "lem-zl-affine-partition",
+    "lem-zl-spread-normalization"
+  ],
+  "proof_split_by": "paragraphs",
+  "lean_audit": {
+    "master": {
+      "state": "none",
+      "decls": [],
+      "missing": []
+    },
+    "slopmaster2": {
+      "state": "closed",
+      "decls": [
+        {
+          "name": "AlgebraicGeometry.exists_partition_isFinite_toIteratedAffineLine",
+          "module": "WeilConjectures.AlgebraicGeometry.NoetherNormalization",
+          "lines": [
+            597,
+            617
+          ],
+          "kind": "theorem",
+          "sorry": false
+        }
+      ],
+      "missing": [],
+      "open": []
     }
-   ],
-   "missing": [],
-   "open": []
+  },
+  "chapter": "sec-deligne-laumon-general",
+  "unit": "sk-l-dl-general-normalization",
+  "lean": {
+    "module": "WeilConjectures.AlgebraicGeometry.NoetherNormalization",
+    "declaration": "AlgebraicGeometry.exists_partition_isFinite_toIteratedAffineLine",
+    "branch": "slopmaster2",
+    "line": 597,
+    "declarations": [
+      "AlgebraicGeometry.exists_partition_isFinite_toIteratedAffineLine"
+    ],
+    "sorry_free": true,
+    "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state closed)"
   }
- },
- "chapter": "sec-deligne-laumon-general",
- "unit": "sk-l-dl-general-normalization"
 }

@@ -1,216 +1,228 @@
 {
- "id": "lem-zl-relative-curve-mixedness",
- "blueprint": {
-  "is": "lem-zl-relative-curve-mixedness",
-  "from": null,
-  "same_as": null
- },
- "kind": "statement",
- "title": "Mixedness of the direct images over a relative affine curve",
- "statement": "Fix the coefficient and weight conventions of\n[def-weil-punctual-weights]. Let $h:U_0\\to Y_0$ be a\nsmooth separated morphism\nbetween separated finite-type\n$k_0$-schemes, with every nonempty geometric fiber a smooth affine curve,\nand let $\\mathcal F$ be a\nlisse\n$\\Qlb$-Weil sheaf that is\npunctually $\\iota$-pure of weight\n$w$. Then for every $i$ there is a real number $u_i$ such that\n$R^ih_!\\mathcal F$ is\n$\\iota$-mixed of weights at most\n$u_i$.\nThe proof follows the reduction in Kiehl–Weissauer I.7, pp. 53–54:\nthe curve bound separates the two cohomological root radii, and\n[thm-zl-real-mixed-by-curves] supplies mixedness on the base by\ngeometric reduction to the already proved real-sheaf theorem on curves.\nNo instance of the general direct-image weight theorem is imported.",
- "source": {
-  "document": "literature/blueprint/master/blueprint/sec-deligne-laumon-general/sk-p-dl-general-relative-line/lem-zl-relative-curve-mixedness.md",
-  "place": "node lem-zl-relative-curve-mixedness, order 2843"
- },
- "stmt_deps": [
-  "def-weil-punctual-weights",
-  "thm-zl-real-mixed-by-curves",
-  "def-weil-pbc-constructible-complexes",
-  "def-weil-pbc-qbar-category",
-  "def-weil-pbc-scheme-conventions",
-  "def-weil-scheme-morphism-properties"
- ],
- "proof": [
-  {
-   "text": "Normalize $\\mathcal F$ as in\n[def-wf-normalized-real-envelope]: put\n$b=\\iota^{-1}(q^{-w/2})$,\n$\\mathcal F^0=\\mathcal F\\otimes\\mathcal B_b$, and\n$\\mathcal E=\\mathcal F^0\\oplus(\\mathcal F^0)^\\vee$.\nIt is lisse, pure of weight zero and real by\n[lem-wf-envelope-real]. The relative factor calculation\n[lem-zl-relative-envelope-factor-reality], which uses only the\nproved curve estimate, shows that $R^ih_!\\mathcal E$ is real for\nevery $i$. These are constructible sheaves: the finite-level\nfiniteness theorem [sbc-thm-finiteness-finite-type] supplies the\nconstructible landing hypotheses in the coefficient passage of\n[thm-cbc-qbar].",
-   "uses": [
+  "id": "lem-zl-relative-curve-mixedness",
+  "blueprint": {
+    "is": "lem-zl-relative-curve-mixedness",
+    "from": null,
+    "same_as": null
+  },
+  "kind": "statement",
+  "title": "Mixedness of the direct images over a relative affine curve",
+  "statement": "Fix the coefficient and weight conventions of\n[def-weil-punctual-weights]. Let $h:U_0\\to Y_0$ be a\nsmooth separated morphism\nbetween separated finite-type\n$k_0$-schemes, with every nonempty geometric fiber a smooth affine curve,\nand let $\\mathcal F$ be a\nlisse\n$\\Qlb$-Weil sheaf that is\npunctually $\\iota$-pure of weight\n$w$. Then for every $i$ there is a real number $u_i$ such that\n$R^ih_!\\mathcal F$ is\n$\\iota$-mixed of weights at most\n$u_i$.\nThe proof follows the reduction in Kiehl–Weissauer I.7, pp. 53–54:\nthe curve bound separates the two cohomological root radii, and\n[thm-zl-real-mixed-by-curves] supplies mixedness on the base by\ngeometric reduction to the already proved real-sheaf theorem on curves.\nNo instance of the general direct-image weight theorem is imported.",
+  "source": {
+    "document": "literature/blueprint/master/blueprint/sec-deligne-laumon-general/sk-p-dl-general-relative-line/lem-zl-relative-curve-mixedness.md",
+    "place": "node lem-zl-relative-curve-mixedness, order 2843"
+  },
+  "stmt_deps": [
+    "def-weil-punctual-weights",
+    "thm-zl-real-mixed-by-curves",
+    "def-weil-pbc-constructible-complexes",
+    "def-weil-pbc-qbar-category",
+    "def-weil-pbc-scheme-conventions",
+    "def-weil-scheme-morphism-properties"
+  ],
+  "proof": [
+    {
+      "text": "Normalize $\\mathcal F$ as in\n[def-wf-normalized-real-envelope]: put\n$b=\\iota^{-1}(q^{-w/2})$,\n$\\mathcal F^0=\\mathcal F\\otimes\\mathcal B_b$, and\n$\\mathcal E=\\mathcal F^0\\oplus(\\mathcal F^0)^\\vee$.\nIt is lisse, pure of weight zero and real by\n[lem-wf-envelope-real]. The relative factor calculation\n[lem-zl-relative-envelope-factor-reality], which uses only the\nproved curve estimate, shows that $R^ih_!\\mathcal E$ is real for\nevery $i$. These are constructible sheaves: the finite-level\nfiniteness theorem [sbc-thm-finiteness-finite-type] supplies the\nconstructible landing hypotheses in the coefficient passage of\n[thm-cbc-qbar].",
+      "uses": [
+        "def-wf-normalized-real-envelope",
+        "lem-wf-envelope-real",
+        "lem-zl-relative-envelope-factor-reality",
+        "sbc-thm-finiteness-finite-type",
+        "thm-cbc-qbar"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "Apply [thm-zl-real-mixed-by-curves] on $Y_0$, obtaining a\nfinite mixed filtration of $R^ih_!\\mathcal E$.\nAdditivity makes $R^ih_!\\mathcal F^0$ a direct summand, so it is\nmixed by [lem-a1-mixed-direct-summand]. The constant-twist\nprojection formula [lem-wf-constant-twist-cohomology] identifies\n\n$$\nR^ih_!\\mathcal F\n\\cong R^ih_!\\mathcal F^0\\otimes\\mathcal B_{b^{-1}}.\n$$",
+      "uses": [
+        "thm-zl-real-mixed-by-curves",
+        "lem-a1-mixed-direct-summand",
+        "lem-wf-constant-twist-cohomology"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "Tensoring the finite filtration with this rank-one sheaf is exact.\nAt a closed point of degree $m$, the twist multiplies each\neigenvalue by $b^{-m}$, of $\\iota$-modulus $q^{mw/2}$, by\n[def-wf-constant-weil-twist]. Thus every pure quotient of weight\n$v$ becomes pure of weight $v+w$, including where its stalk is\nzero. This gives the required finite mixed filtration without a\nlissity assumption on the direct image. Its finitely many\nweights have a maximum $u_i$; for the zero sheaf take any $u_i$.",
+      "uses": [
+        "def-wf-constant-weil-twist"
+      ],
+      "elementary": false
+    }
+  ],
+  "proof_deps": [
     "def-wf-normalized-real-envelope",
     "lem-wf-envelope-real",
     "lem-zl-relative-envelope-factor-reality",
     "sbc-thm-finiteness-finite-type",
-    "thm-cbc-qbar"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Apply [thm-zl-real-mixed-by-curves] on $Y_0$, obtaining a\nfinite mixed filtration of $R^ih_!\\mathcal E$.\nAdditivity makes $R^ih_!\\mathcal F^0$ a direct summand, so it is\nmixed by [lem-a1-mixed-direct-summand]. The constant-twist\nprojection formula [lem-wf-constant-twist-cohomology] identifies\n\n$$\nR^ih_!\\mathcal F\n\\cong R^ih_!\\mathcal F^0\\otimes\\mathcal B_{b^{-1}}.\n$$",
-   "uses": [
+    "thm-cbc-qbar",
     "thm-zl-real-mixed-by-curves",
     "lem-a1-mixed-direct-summand",
-    "lem-wf-constant-twist-cohomology"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Tensoring the finite filtration with this rank-one sheaf is exact.\nAt a closed point of degree $m$, the twist multiplies each\neigenvalue by $b^{-m}$, of $\\iota$-modulus $q^{mw/2}$, by\n[def-wf-constant-weil-twist]. Thus every pure quotient of weight\n$v$ becomes pure of weight $v+w$, including where its stalk is\nzero. This gives the required finite mixed filtration without a\nlissity assumption on the direct image. Its finitely many\nweights have a maximum $u_i$; for the zero sheaf take any $u_i$.",
-   "uses": [
+    "lem-wf-constant-twist-cohomology",
     "def-wf-constant-weil-twist"
-   ],
-   "elementary": false
-  }
- ],
- "proof_deps": [
-  "def-wf-normalized-real-envelope",
-  "lem-wf-envelope-real",
-  "lem-zl-relative-envelope-factor-reality",
-  "sbc-thm-finiteness-finite-type",
-  "thm-cbc-qbar",
-  "thm-zl-real-mixed-by-curves",
-  "lem-a1-mixed-direct-summand",
-  "lem-wf-constant-twist-cohomology",
-  "def-wf-constant-weil-twist"
- ],
- "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-deligne-laumon-general/sk-p-dl-general-relative-line/lem-zl-relative-curve-mixedness.md",
-  "place": "## Proof"
- },
- "mathlib_searches": [],
- "mathlib_match": null,
- "status": "imported",
- "merged_into": null,
- "import_flags": [],
- "blueprint_kind": "lemma",
- "blueprint_order": 2843,
- "blueprint_uses": [
-  "def-weil-pbc-constructible-complexes",
-  "def-weil-pbc-qbar-category",
-  "def-weil-pbc-scheme-conventions",
-  "def-weil-punctual-weights",
-  "def-weil-scheme-morphism-properties",
-  "def-wf-constant-weil-twist",
-  "def-wf-normalized-real-envelope",
-  "lem-a1-mixed-direct-summand",
-  "lem-wf-constant-twist-cohomology",
-  "lem-wf-envelope-real",
-  "lem-zl-relative-envelope-factor-reality",
-  "sbc-thm-finiteness-finite-type",
-  "thm-cbc-qbar",
-  "thm-zl-real-mixed-by-curves"
- ],
- "uses_not_cited": [
-  "def-weil-pbc-constructible-complexes",
-  "def-weil-pbc-qbar-category",
-  "def-weil-pbc-scheme-conventions",
-  "def-weil-scheme-morphism-properties"
- ],
- "proof_split_by": "paragraphs",
- "lean_audit": {
-  "master": {
-   "state": "none",
-   "decls": [],
-   "missing": []
+  ],
+  "proof_origin": {
+    "by": "agent",
+    "document": "literature/blueprint/master/blueprint/sec-deligne-laumon-general/sk-p-dl-general-relative-line/lem-zl-relative-curve-mixedness.md",
+    "place": "## Proof"
   },
-  "slopmaster2": {
-   "state": "sorry_here",
-   "decls": [
-    {
-     "name": "AlgebraicGeometry.exists_isMixedOfWeightsAtMost_higherLowerShriek_of_isAffine_fiber",
-     "module": "WeilConjectures.DeligneLaumon.Reduction.RelativeAffineLine",
-     "lines": [
-      221,
-      246
-     ],
-     "kind": "theorem",
-     "sorry": false
+  "mathlib_searches": [],
+  "mathlib_match": null,
+  "status": "imported",
+  "merged_into": null,
+  "import_flags": [],
+  "blueprint_kind": "lemma",
+  "blueprint_order": 2843,
+  "blueprint_uses": [
+    "def-weil-pbc-constructible-complexes",
+    "def-weil-pbc-qbar-category",
+    "def-weil-pbc-scheme-conventions",
+    "def-weil-punctual-weights",
+    "def-weil-scheme-morphism-properties",
+    "def-wf-constant-weil-twist",
+    "def-wf-normalized-real-envelope",
+    "lem-a1-mixed-direct-summand",
+    "lem-wf-constant-twist-cohomology",
+    "lem-wf-envelope-real",
+    "lem-zl-relative-envelope-factor-reality",
+    "sbc-thm-finiteness-finite-type",
+    "thm-cbc-qbar",
+    "thm-zl-real-mixed-by-curves"
+  ],
+  "uses_not_cited": [
+    "def-weil-pbc-constructible-complexes",
+    "def-weil-pbc-qbar-category",
+    "def-weil-pbc-scheme-conventions",
+    "def-weil-scheme-morphism-properties"
+  ],
+  "proof_split_by": "paragraphs",
+  "lean_audit": {
+    "master": {
+      "state": "none",
+      "decls": [],
+      "missing": []
     },
-    {
-     "name": "AlgebraicGeometry.WeilSheaf.IsMixedOfWeightsAtMost.constantTwist",
-     "module": "WeilConjectures.DeligneLaumon.Reduction.Weights",
-     "lines": [
-      221,
-      228
-     ],
-     "kind": "theorem",
-     "sorry": true
+    "slopmaster2": {
+      "state": "sorry_here",
+      "decls": [
+        {
+          "name": "AlgebraicGeometry.exists_isMixedOfWeightsAtMost_higherLowerShriek_of_isAffine_fiber",
+          "module": "WeilConjectures.DeligneLaumon.Reduction.RelativeAffineLine",
+          "lines": [
+            221,
+            246
+          ],
+          "kind": "theorem",
+          "sorry": false
+        },
+        {
+          "name": "AlgebraicGeometry.WeilSheaf.IsMixedOfWeightsAtMost.constantTwist",
+          "module": "WeilConjectures.DeligneLaumon.Reduction.Weights",
+          "lines": [
+            221,
+            228
+          ],
+          "kind": "theorem",
+          "sorry": true
+        }
+      ],
+      "missing": [],
+      "open": [
+        {
+          "name": "AlgebraicGeometry.ProEtale.finiteLowerStar_singleFunctor_of_isAffine",
+          "module": "WeilConjectures.SixFunctors.ProEtale.Adic.LowerStar",
+          "lines": [
+            405,
+            415
+          ],
+          "kind": "theorem",
+          "nodes": [],
+          "below": false
+        },
+        {
+          "name": "AlgebraicGeometry.WeilSheaf.IsReal.isMixed",
+          "module": "WeilConjectures.DeligneLaumon.Reduction.RealSheaves",
+          "lines": [
+            97,
+            105
+          ],
+          "kind": "theorem",
+          "nodes": [
+            "thm-zl-real-mixed-by-curves"
+          ],
+          "below": true
+        },
+        {
+          "name": "AlgebraicGeometry.WeilSheaf.nonempty_equiv_stalk_biprod",
+          "module": "WeilConjectures.WeilSheaf.Stalk",
+          "lines": [
+            325,
+            328
+          ],
+          "kind": "theorem",
+          "nodes": [],
+          "below": false
+        },
+        {
+          "name": "AlgebraicGeometry.WeilSheaf.nonempty_equiv_stalk_constantTwist",
+          "module": "WeilConjectures.WeilSheaf.Tensor",
+          "lines": [
+            102,
+            108
+          ],
+          "kind": "theorem",
+          "nodes": [],
+          "below": false
+        },
+        {
+          "name": "AlgebraicGeometry.WeilSheaf.nonempty_equiv_stalk_dual",
+          "module": "WeilConjectures.WeilSheaf.Dual",
+          "lines": [
+            251,
+            255
+          ],
+          "kind": "theorem",
+          "nodes": [],
+          "below": false
+        },
+        {
+          "name": "AlgebraicGeometry.WeilSheaf.nonempty_higherLowerShriek_constantTwist_iso",
+          "module": "WeilConjectures.WeilSheaf.Tensor",
+          "lines": [
+            127,
+            140
+          ],
+          "kind": "theorem",
+          "nodes": [],
+          "below": false
+        },
+        {
+          "name": "AlgebraicGeometry.isReal_higherLowerShriek_of_isAffine_fiber",
+          "module": "WeilConjectures.DeligneLaumon.Reduction.RelativeAffineLine",
+          "lines": [
+            203,
+            219
+          ],
+          "kind": "theorem",
+          "nodes": [
+            "lem-zl-relative-envelope-factor-reality"
+          ],
+          "below": true
+        }
+      ]
     }
-   ],
-   "missing": [],
-   "open": [
-    {
-     "name": "AlgebraicGeometry.ProEtale.finiteLowerStar_singleFunctor_of_isAffine",
-     "module": "WeilConjectures.SixFunctors.ProEtale.Adic.LowerStar",
-     "lines": [
-      405,
-      415
-     ],
-     "kind": "theorem",
-     "nodes": [],
-     "below": false
-    },
-    {
-     "name": "AlgebraicGeometry.WeilSheaf.IsReal.isMixed",
-     "module": "WeilConjectures.DeligneLaumon.Reduction.RealSheaves",
-     "lines": [
-      97,
-      105
-     ],
-     "kind": "theorem",
-     "nodes": [
-      "thm-zl-real-mixed-by-curves"
-     ],
-     "below": true
-    },
-    {
-     "name": "AlgebraicGeometry.WeilSheaf.nonempty_equiv_stalk_biprod",
-     "module": "WeilConjectures.WeilSheaf.Stalk",
-     "lines": [
-      325,
-      328
-     ],
-     "kind": "theorem",
-     "nodes": [],
-     "below": false
-    },
-    {
-     "name": "AlgebraicGeometry.WeilSheaf.nonempty_equiv_stalk_constantTwist",
-     "module": "WeilConjectures.WeilSheaf.Tensor",
-     "lines": [
-      102,
-      108
-     ],
-     "kind": "theorem",
-     "nodes": [],
-     "below": false
-    },
-    {
-     "name": "AlgebraicGeometry.WeilSheaf.nonempty_equiv_stalk_dual",
-     "module": "WeilConjectures.WeilSheaf.Dual",
-     "lines": [
-      251,
-      255
-     ],
-     "kind": "theorem",
-     "nodes": [],
-     "below": false
-    },
-    {
-     "name": "AlgebraicGeometry.WeilSheaf.nonempty_higherLowerShriek_constantTwist_iso",
-     "module": "WeilConjectures.WeilSheaf.Tensor",
-     "lines": [
-      127,
-      140
-     ],
-     "kind": "theorem",
-     "nodes": [],
-     "below": false
-    },
-    {
-     "name": "AlgebraicGeometry.isReal_higherLowerShriek_of_isAffine_fiber",
-     "module": "WeilConjectures.DeligneLaumon.Reduction.RelativeAffineLine",
-     "lines": [
-      203,
-      219
-     ],
-     "kind": "theorem",
-     "nodes": [
-      "lem-zl-relative-envelope-factor-reality"
-     ],
-     "below": true
-    }
-   ]
+  },
+  "chapter": "sec-deligne-laumon-general",
+  "unit": "sk-p-dl-general-relative-line",
+  "lean": {
+    "module": "WeilConjectures.DeligneLaumon.Reduction.RelativeAffineLine",
+    "declaration": "AlgebraicGeometry.exists_isMixedOfWeightsAtMost_higherLowerShriek_of_isAffine_fiber",
+    "branch": "slopmaster2",
+    "line": 221,
+    "declarations": [
+      "AlgebraicGeometry.exists_isMixedOfWeightsAtMost_higherLowerShriek_of_isAffine_fiber",
+      "AlgebraicGeometry.WeilSheaf.IsMixedOfWeightsAtMost.constantTwist"
+    ],
+    "sorry_free": false,
+    "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state sorry_here)"
   }
- },
- "chapter": "sec-deligne-laumon-general",
- "unit": "sk-p-dl-general-relative-line"
 }

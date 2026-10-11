@@ -1,272 +1,276 @@
 {
- "id": "lem-weil-pbc-etale-inverse-image-restriction",
- "blueprint": {
-  "is": null,
-  "from": {
-   "node": "lemma-weil-pbc-p1-exchange-geometric-stalk",
-   "place": "step 4, 5 of its split (source: ## Proof, first proof, 'To check the upper square' paragraph (the upper square of the diagram with $\\Phi_S,\\Phi_T,\\lambda$); Stacks etale-cohomology.tex proof of Theorem Tag 095T, fourth paragraph ('By our discussion above the map on stalks at $\\bar t$ is the map'))",
-   "via": [
-    "lem-weil-pbc-cohomology-pullback-functorial"
-   ]
+  "id": "lem-weil-pbc-etale-inverse-image-restriction",
+  "blueprint": {
+    "is": null,
+    "from": {
+      "node": "lemma-weil-pbc-p1-exchange-geometric-stalk",
+      "place": "step 4, 5 of its split (source: ## Proof, first proof, 'To check the upper square' paragraph (the upper square of the diagram with $\\Phi_S,\\Phi_T,\\lambda$); Stacks etale-cohomology.tex proof of Theorem Tag 095T, fourth paragraph ('By our discussion above the map on stalks at $\\bar t$ is the map'))",
+      "via": [
+        "lem-weil-pbc-cohomology-pullback-functorial"
+      ]
+    },
+    "same_as": null
   },
-  "same_as": null
- },
- "kind": "statement",
- "title": "Inverse image along an etale morphism is restriction",
- "statement": "Let $j:Y\\to X$ be an etale morphism of schemes [def-weil-etale-morphism], with small etale sites [def-weil-pbc-etale-site]. An object $V\\to Y$ of $Y_{\\Et}$ gives the object $V\\to Y\\xrightarrow{j}X$ of $X_{\\Et}$ (a composite of etale morphisms is etale), and a morphism over $Y$ is a morphism over $X$; write $\\iota_j:Y_{\\Et}\\to X_{\\Et}$ for this functor. For an abelian sheaf $G$ on $X_{\\Et}$ [def-weil-pbc-abelian-etale-sheaves] let $G|_Y=G\\circ\\iota_j$, i.e. $G|_Y(V\\to Y)=G(V\\to X)$ with the restriction maps of $G$. Let $j^{-1}$, $j_*$ and $\\eta_j:\\mathrm{id}\\to j_*j^{-1}$ be the inverse image, the direct image $(j_*F)(W)=F(W\\times_XY)$ and the unit of $j^{-1}\\dashv j_*$ [def-weil-pbc-inverse-image], [def-weil-pbc-direct-image]. Then:\n\n1. $G|_Y$ is an abelian sheaf on $Y_{\\Et}$, and there is an isomorphism $\\rho_G:j^{-1}G\\xrightarrow{\\sim}G|_Y$ of abelian sheaves on $Y_{\\Et}$, natural in $G$.\n2. Under $\\rho$, the unit is restriction: for every object $W$ of $X_{\\Et}$, $\\rho_G(W\\times_XY)\\circ\\eta_{j,G}(W):G(W)\\to G|_Y(W\\times_XY)=G(W\\times_XY)$ is the restriction map of $G$ along the projection $W\\times_XY\\to W$ (a morphism of $X_{\\Et}$). In particular, on global sections, $\\rho_G(Y)\\circ\\eta_{j,G}(X):\\Gamma(X,G)=G(X)\\to G(Y)$ is the restriction of $G$ along $j:Y\\to X$, and $\\rho_G(Y):\\Gamma(Y,j^{-1}G)\\xrightarrow{\\sim}G(Y)$.",
- "source": {
-  "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Section Tag 03S2 (section-extension-by-zero), paragraph after Definition Tag 03S3: \"recall that $j^{-1}$ is just the restriction via the functor $U_\\etale\\to X_\\etale$. In other words, $j^{-1}\\mathcal G(U')=\\mathcal G(U')$ for $U'$ etale over $U$\"; literature/stacks-project/sites.tex Section Tag 00XZ (section-localize): $j_U^{-1}\\mathcal F(X/U)=\\mathcal F(X)$, with Lemma Tag 00XR (lemma-when-shriek) for the cocontinuous and continuous functor $\\iota_j$"
- },
- "stmt_deps": [
-  "def-weil-etale-morphism",
-  "def-weil-pbc-etale-site",
-  "def-weil-pbc-abelian-etale-sheaves",
-  "def-weil-pbc-inverse-image",
-  "def-weil-pbc-direct-image",
-  "def-pc-fibre-product"
- ],
- "proof": [
-  {
-   "text": "*Step 1 (the two functors and their adjunction).* By [lem-weil-pbc-etale-localization-functor-adjoint] (1), since $j$ is etale, $\\iota_j(V\\xrightarrow{v}Y)=(V\\xrightarrow{j\\circ v}X)$ is a functor $Y_{\\Et}\\to X_{\\Et}$; it is the identity on morphisms, a $Y$-morphism being in particular an $X$-morphism. By clause (2) of the same lemma, $b_j(W)=(W\\times_XY\\xrightarrow{q_W}Y)$ is a functor $X_{\\Et}\\to Y_{\\Et}$, and by clause (3) $\\iota_j$ is left adjoint to $b_j$ ($\\operatorname{Hom}_Y(V,W\\times_XY)=\\operatorname{Hom}_X(V,W)$), with counit $\\varepsilon_W=p_W:W\\times_XY\\to W$, the projection, regarded as a morphism $\\iota_jb_jW\\to W$ of $X_{\\Et}$. By [def-weil-pbc-direct-image], $(j_*F)(W)=F(W\\times_XY)=F(b_jW)$ for an abelian sheaf $F$ on $Y_{\\Et}$, i.e. $j_*F=F\\circ b_j$, with the restriction maps $F(b_j(g))$.",
-   "uses": [
+  "kind": "statement",
+  "title": "Inverse image along an etale morphism is restriction",
+  "statement": "Let $j:Y\\to X$ be an etale morphism of schemes [def-weil-etale-morphism], with small etale sites [def-weil-pbc-etale-site]. An object $V\\to Y$ of $Y_{\\Et}$ gives the object $V\\to Y\\xrightarrow{j}X$ of $X_{\\Et}$ (a composite of etale morphisms is etale), and a morphism over $Y$ is a morphism over $X$; write $\\iota_j:Y_{\\Et}\\to X_{\\Et}$ for this functor. For an abelian sheaf $G$ on $X_{\\Et}$ [def-weil-pbc-abelian-etale-sheaves] let $G|_Y=G\\circ\\iota_j$, i.e. $G|_Y(V\\to Y)=G(V\\to X)$ with the restriction maps of $G$. Let $j^{-1}$, $j_*$ and $\\eta_j:\\mathrm{id}\\to j_*j^{-1}$ be the inverse image, the direct image $(j_*F)(W)=F(W\\times_XY)$ and the unit of $j^{-1}\\dashv j_*$ [def-weil-pbc-inverse-image], [def-weil-pbc-direct-image]. Then:\n\n1. $G|_Y$ is an abelian sheaf on $Y_{\\Et}$, and there is an isomorphism $\\rho_G:j^{-1}G\\xrightarrow{\\sim}G|_Y$ of abelian sheaves on $Y_{\\Et}$, natural in $G$.\n2. Under $\\rho$, the unit is restriction: for every object $W$ of $X_{\\Et}$, $\\rho_G(W\\times_XY)\\circ\\eta_{j,G}(W):G(W)\\to G|_Y(W\\times_XY)=G(W\\times_XY)$ is the restriction map of $G$ along the projection $W\\times_XY\\to W$ (a morphism of $X_{\\Et}$). In particular, on global sections, $\\rho_G(Y)\\circ\\eta_{j,G}(X):\\Gamma(X,G)=G(X)\\to G(Y)$ is the restriction of $G$ along $j:Y\\to X$, and $\\rho_G(Y):\\Gamma(Y,j^{-1}G)\\xrightarrow{\\sim}G(Y)$.",
+  "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Section Tag 03S2 (section-extension-by-zero), paragraph after Definition Tag 03S3: \"recall that $j^{-1}$ is just the restriction via the functor $U_\\etale\\to X_\\etale$. In other words, $j^{-1}\\mathcal G(U')=\\mathcal G(U')$ for $U'$ etale over $U$\"; literature/stacks-project/sites.tex Section Tag 00XZ (section-localize): $j_U^{-1}\\mathcal F(X/U)=\\mathcal F(X)$, with Lemma Tag 00XR (lemma-when-shriek) for the cocontinuous and continuous functor $\\iota_j$"
+  },
+  "stmt_deps": [
+    "def-weil-etale-morphism",
+    "def-weil-pbc-etale-site",
+    "def-weil-pbc-abelian-etale-sheaves",
+    "def-weil-pbc-inverse-image",
+    "def-weil-pbc-direct-image",
+    "def-pc-fibre-product"
+  ],
+  "proof": [
+    {
+      "text": "*Step 1 (the two functors and their adjunction).* By [lem-weil-pbc-etale-localization-functor-adjoint] (1), since $j$ is etale, $\\iota_j(V\\xrightarrow{v}Y)=(V\\xrightarrow{j\\circ v}X)$ is a functor $Y_{\\Et}\\to X_{\\Et}$; it is the identity on morphisms, a $Y$-morphism being in particular an $X$-morphism. By clause (2) of the same lemma, $b_j(W)=(W\\times_XY\\xrightarrow{q_W}Y)$ is a functor $X_{\\Et}\\to Y_{\\Et}$, and by clause (3) $\\iota_j$ is left adjoint to $b_j$ ($\\operatorname{Hom}_Y(V,W\\times_XY)=\\operatorname{Hom}_X(V,W)$), with counit $\\varepsilon_W=p_W:W\\times_XY\\to W$, the projection, regarded as a morphism $\\iota_jb_jW\\to W$ of $X_{\\Et}$. By [def-weil-pbc-direct-image], $(j_*F)(W)=F(W\\times_XY)=F(b_jW)$ for an abelian sheaf $F$ on $Y_{\\Et}$, i.e. $j_*F=F\\circ b_j$, with the restriction maps $F(b_j(g))$.",
+      "uses": [
+        "lem-weil-pbc-etale-localization-functor-adjoint",
+        "def-weil-pbc-direct-image"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/topologies.tex",
+        "place": "Lemma Tag 021H (lemma-morphism-big-etale), proof: $\\Mor_S(u(U),V)=\\Mor_T(U,V\\times_ST)$; Lemma Tag 021I (lemma-morphism-big-small-etale) (2): $f_{small,*}\\mathcal F(U/S)=\\mathcal F(U\\times_ST/T)$"
+      }
+    },
+    {
+      "text": "*Step 2 (precomposition with $\\iota_j$ and with $b_j$ preserves sheaves; $G|_Y$ is a sheaf).* (a) Let $H$ be a sheaf of sets on $X_{\\Et}$ and $\\{V_i\\to V\\}_i$ a covering of $Y_{\\Et}$: a jointly surjective family of etale morphisms of schemes etale over $Y$ [def-weil-pbc-etale-site]. The same morphisms form a jointly surjective family of etale morphisms between the objects $\\iota_jV_i$, $\\iota_jV$ of $X_{\\Et}$, i.e. a covering $\\{\\iota_jV_i\\to\\iota_jV\\}$ of $X_{\\Et}$. The fibre products $V_i\\times_VV_k$ of $Y_{\\Et}$ and $\\iota_jV_i\\times_{\\iota_jV}\\iota_jV_k$ of $X_{\\Et}$ are both the scheme-theoretic fibre product [def-weil-pbc-etale-site], [def-pc-fibre-product], so $\\iota_j(V_i\\times_VV_k)=\\iota_jV_i\\times_{\\iota_jV}\\iota_jV_k$. Hence the diagram $H(\\iota_jV)\\to\\prod_iH(\\iota_jV_i)\\rightrightarrows\\prod_{i,k}H(\\iota_j(V_i\\times_VV_k))$ expressing the sheaf condition of $H\\circ\\iota_j$ for $\\{V_i\\to V\\}$ is the diagram expressing the sheaf condition of $H$ for the covering $\\{\\iota_jV_i\\to\\iota_jV\\}$, which is an equalizer; so $H\\circ\\iota_j$ is a sheaf. Applied to the underlying sheaf of sets of an abelian sheaf $G$ (whose sheaf condition is that of the underlying presheaf of sets, [def-weil-pbc-abelian-etale-sheaves]), $G|_Y=G\\circ\\iota_j$ is an abelian sheaf on $Y_{\\Et}$, the first assertion of clause 1. (b) Let $F$ be a sheaf of sets on $Y_{\\Et}$ and $\\{W_i\\to W\\}_i$ a covering of $X_{\\Et}$. By [lem-weil-pbc-etale-covering-base-change], applied to the jointly surjective etale family $\\{W_i\\to W\\}$ and the projection $W\\times_XY\\to W$, the family $\\{(W\\times_XY)\\times_WW_i\\to W\\times_XY\\}$ is etale and jointly surjective; composing with the canonical isomorphisms $(W\\times_XY)\\times_WW_i\\cong W_i\\times_XY$ over $W\\times_XY$ [def-pc-fibre-product], $\\{b_jW_i\\to b_jW\\}$ is a covering of $Y_{\\Et}$. By [lem-weil-pbc-etale-base-change-finite-limits] (3), applied to $u=j$ (its base change $Y\\times_X-$ being $b_j$ up to the symmetry of the fibre product), $b_j$ carries the fibre products $W_i\\times_WW_k$ to fibre products: $b_j(W_i\\times_WW_k)\\cong b_jW_i\\times_{b_jW}b_jW_k$ compatibly with the projections. So the sheaf-condition diagram of $F\\circ b_j$ for $\\{W_i\\to W\\}$ is isomorphic to that of $F$ for the covering $\\{b_jW_i\\to b_jW\\}$, an equalizer; $F\\circ b_j$ is a sheaf. In particular $j_*F=F\\circ b_j$ of step 1 is an abelian sheaf, as [def-weil-pbc-direct-image] takes for granted.",
+      "uses": [
+        "def-weil-pbc-etale-site",
+        "def-pc-fibre-product",
+        "def-weil-pbc-abelian-etale-sheaves",
+        "lem-weil-pbc-etale-covering-base-change",
+        "lem-weil-pbc-etale-base-change-finite-limits",
+        "def-weil-pbc-direct-image"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/sites.tex",
+        "place": "Lemma Tag 00WW (lemma-pushforward-sheaf) and its proof (a functor carrying coverings to coverings and commuting with the fibre products $V_i\\times_VV_j$ preserves sheaves under precomposition); Topologies Lemma Tag 021F (lemma-put-in-T-etale), proof: the functor $T_\\etale\\to(\\Sch/S)_\\etale$ \"is also continuous as $u$ transforms coverings to coverings and commutes with fibre products\"; Topologies Lemma Tag 021I proof of (2) for the base change functor"
+      }
+    },
+    {
+      "text": "*Step 3 (restriction is left adjoint to $j_*$, with unit the restriction along $p_W$).* By steps 1 and 2, the adjoint functors $\\lambda=\\iota_j:Y_{\\Et}\\to X_{\\Et}$, $\\beta=b_j:X_{\\Et}\\to Y_{\\Et}$ satisfy the hypotheses of [lem-weil-pbc-adjoint-continuous-restriction-adjunction] with $\\mathcal C=Y_{\\Et}$, $\\mathcal D=X_{\\Et}$; there $\\lambda^sG=G|_Y$ and $\\beta^sF=F\\circ b_j=j_*F$. By its clause 1, $G\\mapsto G|_Y$ is left adjoint to $j_*:\\Ab(Y_{\\Et})\\to\\Ab(X_{\\Et})$, with unit $u_G:G\\to j_*(G|_Y)$ given at $W\\in X_{\\Et}$ by $G(\\varepsilon_W)=G(p_W):G(W)\\to G(W\\times_XY)=G|_Y(b_jW)=j_*(G|_Y)(W)$, the restriction map of $G$ along the projection $p_W:W\\times_XY\\to W$ (a morphism of $X_{\\Et}$).",
+      "uses": [
+        "lem-weil-pbc-adjoint-continuous-restriction-adjunction",
+        "lem-weil-pbc-etale-localization-functor-adjoint",
+        "def-weil-pbc-direct-image"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/sites.tex",
+        "place": "Lemma Tag 00XX (lemma-have-functor-other-way) (1) and proof ($g_*\\mathcal F=v^p\\mathcal F$, with $u\\dashv v$ and Lemma Tag 09VQ); Lemma Tag 00XR (lemma-when-shriek) (1) ($g^{-1}\\mathcal G(U)=\\mathcal G(u(U))$ for $u$ continuous and cocontinuous)"
+      }
+    },
+    {
+      "text": "*Step 4 (the isomorphism $\\rho$; clause 1).* By [def-weil-pbc-inverse-image], $j^{-1}:\\Ab(X_{\\Et})\\to\\Ab(Y_{\\Et})$ is left adjoint to $j_*$, with unit $\\eta_j$. By step 3, $G\\mapsto G|_Y$ is also left adjoint to $j_*$. By [lem-weil-pbc-adjoint-continuous-restriction-adjunction] (2), with $L=j^{-1}$ and $\\eta=\\eta_j$, there is a unique natural isomorphism $\\rho:j^{-1}\\xrightarrow{\\sim}(-)|_Y$ of functors $\\Ab(X_{\\Et})\\to\\Ab(Y_{\\Et})$ with $j_*(\\rho_G)\\circ\\eta_{j,G}=u_G$ for all $G$. Its component $\\rho_G:j^{-1}G\\to G|_Y$ is an isomorphism of abelian sheaves on $Y_{\\Et}$, natural in $G$. This is clause 1.",
+      "uses": [
+        "def-weil-pbc-inverse-image",
+        "lem-weil-pbc-adjoint-continuous-restriction-adjunction"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/sites.tex",
+        "place": "Lemma Tag 00XX (2) and Lemma Tag 00XY (lemma-have-functor-other-way-morphism): the morphism of sites defined by the continuous right adjoint $v$ has $f^{-1}=v_s=g^{-1}$; Lemma Tag 09VQ (5) \"by the uniqueness of adjoint functors\"; Etale Cohomology Section Tag 03S2, paragraph after Definition Tag 03S3: \"$j^{-1}$ is just the restriction via the functor $U_\\etale\\to X_\\etale$\""
+      }
+    },
+    {
+      "text": "*Step 5 (the unit is restriction; clause 2).* Evaluate $j_*(\\rho_G)\\circ\\eta_{j,G}=u_G$ (step 4) at $W\\in X_{\\Et}$. Since $j_*F=F\\circ b_j$ on objects and on morphisms (step 1), $j_*(\\rho_G)(W)=\\rho_G(b_jW)=\\rho_G(W\\times_XY)$; and $u_G(W)=G(p_W)$ by step 3. Hence $\\rho_G(W\\times_XY)\\circ\\eta_{j,G}(W)=G(p_W):G(W)\\to G(W\\times_XY)$, the restriction of $G$ along the projection $p_W$, which is the first statement of clause 2. Global sections: take $W=(X,\\mathrm{id}_X)$. The fibre product $X\\times_XY$ has $q_X:X\\times_XY\\to Y$ an isomorphism and $p_X=j\\circ q_X$ [def-pc-fibre-product], so $q_X$ is an isomorphism $(X\\times_XY,p_X)\\cong(Y,j)=\\iota_j(Y,\\mathrm{id}_Y)$ in $X_{\\Et}$ and in $Y_{\\Et}$; identifying $G(X\\times_XY)$ with $G(Y)$ through $G(q_X)$ (and $\\Gamma(Y,j^{-1}G)=(j^{-1}G)(Y)$ with $(j^{-1}G)(X\\times_XY)$ through $(j^{-1}G)(q_X)$, compatibly with $\\rho_G$ by its naturality in the object), the identity reads $\\rho_G(Y)\\circ\\eta_{j,G}(X)=G(j):G(X)\\to G(Y)$, since $G(p_X)=G(q_X)\\circ G(j)$. Finally $\\rho_G(Y):\\Gamma(Y,j^{-1}G)\\to G(Y)$ is an isomorphism, being a component of the isomorphism of sheaves $\\rho_G$.",
+      "uses": [
+        "def-weil-pbc-direct-image",
+        "def-pc-fibre-product"
+      ],
+      "elementary": true,
+      "source": {
+        "document": "literature/stacks-project/sites.tex",
+        "place": "Section Tag 00XZ (section-localize), after Definition Tag 00Y0: \"The restriction $j_U^{-1}\\mathcal F$ is the sheaf defined by the rule $j_U^{-1}\\mathcal F(X/U)=\\mathcal F(X)$\" (unwinding the unit of the adjunction of steps 3-4)"
+      }
+    }
+  ],
+  "proof_deps": [
     "lem-weil-pbc-etale-localization-functor-adjoint",
-    "def-weil-pbc-direct-image"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/topologies.tex",
-    "place": "Lemma Tag 021H (lemma-morphism-big-etale), proof: $\\Mor_S(u(U),V)=\\Mor_T(U,V\\times_ST)$; Lemma Tag 021I (lemma-morphism-big-small-etale) (2): $f_{small,*}\\mathcal F(U/S)=\\mathcal F(U\\times_ST/T)$"
-   }
-  },
-  {
-   "text": "*Step 2 (precomposition with $\\iota_j$ and with $b_j$ preserves sheaves; $G|_Y$ is a sheaf).* (a) Let $H$ be a sheaf of sets on $X_{\\Et}$ and $\\{V_i\\to V\\}_i$ a covering of $Y_{\\Et}$: a jointly surjective family of etale morphisms of schemes etale over $Y$ [def-weil-pbc-etale-site]. The same morphisms form a jointly surjective family of etale morphisms between the objects $\\iota_jV_i$, $\\iota_jV$ of $X_{\\Et}$, i.e. a covering $\\{\\iota_jV_i\\to\\iota_jV\\}$ of $X_{\\Et}$. The fibre products $V_i\\times_VV_k$ of $Y_{\\Et}$ and $\\iota_jV_i\\times_{\\iota_jV}\\iota_jV_k$ of $X_{\\Et}$ are both the scheme-theoretic fibre product [def-weil-pbc-etale-site], [def-pc-fibre-product], so $\\iota_j(V_i\\times_VV_k)=\\iota_jV_i\\times_{\\iota_jV}\\iota_jV_k$. Hence the diagram $H(\\iota_jV)\\to\\prod_iH(\\iota_jV_i)\\rightrightarrows\\prod_{i,k}H(\\iota_j(V_i\\times_VV_k))$ expressing the sheaf condition of $H\\circ\\iota_j$ for $\\{V_i\\to V\\}$ is the diagram expressing the sheaf condition of $H$ for the covering $\\{\\iota_jV_i\\to\\iota_jV\\}$, which is an equalizer; so $H\\circ\\iota_j$ is a sheaf. Applied to the underlying sheaf of sets of an abelian sheaf $G$ (whose sheaf condition is that of the underlying presheaf of sets, [def-weil-pbc-abelian-etale-sheaves]), $G|_Y=G\\circ\\iota_j$ is an abelian sheaf on $Y_{\\Et}$, the first assertion of clause 1. (b) Let $F$ be a sheaf of sets on $Y_{\\Et}$ and $\\{W_i\\to W\\}_i$ a covering of $X_{\\Et}$. By [lem-weil-pbc-etale-covering-base-change], applied to the jointly surjective etale family $\\{W_i\\to W\\}$ and the projection $W\\times_XY\\to W$, the family $\\{(W\\times_XY)\\times_WW_i\\to W\\times_XY\\}$ is etale and jointly surjective; composing with the canonical isomorphisms $(W\\times_XY)\\times_WW_i\\cong W_i\\times_XY$ over $W\\times_XY$ [def-pc-fibre-product], $\\{b_jW_i\\to b_jW\\}$ is a covering of $Y_{\\Et}$. By [lem-weil-pbc-etale-base-change-finite-limits] (3), applied to $u=j$ (its base change $Y\\times_X-$ being $b_j$ up to the symmetry of the fibre product), $b_j$ carries the fibre products $W_i\\times_WW_k$ to fibre products: $b_j(W_i\\times_WW_k)\\cong b_jW_i\\times_{b_jW}b_jW_k$ compatibly with the projections. So the sheaf-condition diagram of $F\\circ b_j$ for $\\{W_i\\to W\\}$ is isomorphic to that of $F$ for the covering $\\{b_jW_i\\to b_jW\\}$, an equalizer; $F\\circ b_j$ is a sheaf. In particular $j_*F=F\\circ b_j$ of step 1 is an abelian sheaf, as [def-weil-pbc-direct-image] takes for granted.",
-   "uses": [
+    "def-weil-pbc-direct-image",
     "def-weil-pbc-etale-site",
     "def-pc-fibre-product",
     "def-weil-pbc-abelian-etale-sheaves",
     "lem-weil-pbc-etale-covering-base-change",
     "lem-weil-pbc-etale-base-change-finite-limits",
-    "def-weil-pbc-direct-image"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Lemma Tag 00WW (lemma-pushforward-sheaf) and its proof (a functor carrying coverings to coverings and commuting with the fibre products $V_i\\times_VV_j$ preserves sheaves under precomposition); Topologies Lemma Tag 021F (lemma-put-in-T-etale), proof: the functor $T_\\etale\\to(\\Sch/S)_\\etale$ \"is also continuous as $u$ transforms coverings to coverings and commutes with fibre products\"; Topologies Lemma Tag 021I proof of (2) for the base change functor"
-   }
-  },
-  {
-   "text": "*Step 3 (restriction is left adjoint to $j_*$, with unit the restriction along $p_W$).* By steps 1 and 2, the adjoint functors $\\lambda=\\iota_j:Y_{\\Et}\\to X_{\\Et}$, $\\beta=b_j:X_{\\Et}\\to Y_{\\Et}$ satisfy the hypotheses of [lem-weil-pbc-adjoint-continuous-restriction-adjunction] with $\\mathcal C=Y_{\\Et}$, $\\mathcal D=X_{\\Et}$; there $\\lambda^sG=G|_Y$ and $\\beta^sF=F\\circ b_j=j_*F$. By its clause 1, $G\\mapsto G|_Y$ is left adjoint to $j_*:\\Ab(Y_{\\Et})\\to\\Ab(X_{\\Et})$, with unit $u_G:G\\to j_*(G|_Y)$ given at $W\\in X_{\\Et}$ by $G(\\varepsilon_W)=G(p_W):G(W)\\to G(W\\times_XY)=G|_Y(b_jW)=j_*(G|_Y)(W)$, the restriction map of $G$ along the projection $p_W:W\\times_XY\\to W$ (a morphism of $X_{\\Et}$).",
-   "uses": [
     "lem-weil-pbc-adjoint-continuous-restriction-adjunction",
-    "lem-weil-pbc-etale-localization-functor-adjoint",
-    "def-weil-pbc-direct-image"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Lemma Tag 00XX (lemma-have-functor-other-way) (1) and proof ($g_*\\mathcal F=v^p\\mathcal F$, with $u\\dashv v$ and Lemma Tag 09VQ); Lemma Tag 00XR (lemma-when-shriek) (1) ($g^{-1}\\mathcal G(U)=\\mathcal G(u(U))$ for $u$ continuous and cocontinuous)"
-   }
-  },
-  {
-   "text": "*Step 4 (the isomorphism $\\rho$; clause 1).* By [def-weil-pbc-inverse-image], $j^{-1}:\\Ab(X_{\\Et})\\to\\Ab(Y_{\\Et})$ is left adjoint to $j_*$, with unit $\\eta_j$. By step 3, $G\\mapsto G|_Y$ is also left adjoint to $j_*$. By [lem-weil-pbc-adjoint-continuous-restriction-adjunction] (2), with $L=j^{-1}$ and $\\eta=\\eta_j$, there is a unique natural isomorphism $\\rho:j^{-1}\\xrightarrow{\\sim}(-)|_Y$ of functors $\\Ab(X_{\\Et})\\to\\Ab(Y_{\\Et})$ with $j_*(\\rho_G)\\circ\\eta_{j,G}=u_G$ for all $G$. Its component $\\rho_G:j^{-1}G\\to G|_Y$ is an isomorphism of abelian sheaves on $Y_{\\Et}$, natural in $G$. This is clause 1.",
-   "uses": [
-    "def-weil-pbc-inverse-image",
-    "lem-weil-pbc-adjoint-continuous-restriction-adjunction"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Lemma Tag 00XX (2) and Lemma Tag 00XY (lemma-have-functor-other-way-morphism): the morphism of sites defined by the continuous right adjoint $v$ has $f^{-1}=v_s=g^{-1}$; Lemma Tag 09VQ (5) \"by the uniqueness of adjoint functors\"; Etale Cohomology Section Tag 03S2, paragraph after Definition Tag 03S3: \"$j^{-1}$ is just the restriction via the functor $U_\\etale\\to X_\\etale$\""
-   }
-  },
-  {
-   "text": "*Step 5 (the unit is restriction; clause 2).* Evaluate $j_*(\\rho_G)\\circ\\eta_{j,G}=u_G$ (step 4) at $W\\in X_{\\Et}$. Since $j_*F=F\\circ b_j$ on objects and on morphisms (step 1), $j_*(\\rho_G)(W)=\\rho_G(b_jW)=\\rho_G(W\\times_XY)$; and $u_G(W)=G(p_W)$ by step 3. Hence $\\rho_G(W\\times_XY)\\circ\\eta_{j,G}(W)=G(p_W):G(W)\\to G(W\\times_XY)$, the restriction of $G$ along the projection $p_W$, which is the first statement of clause 2. Global sections: take $W=(X,\\mathrm{id}_X)$. The fibre product $X\\times_XY$ has $q_X:X\\times_XY\\to Y$ an isomorphism and $p_X=j\\circ q_X$ [def-pc-fibre-product], so $q_X$ is an isomorphism $(X\\times_XY,p_X)\\cong(Y,j)=\\iota_j(Y,\\mathrm{id}_Y)$ in $X_{\\Et}$ and in $Y_{\\Et}$; identifying $G(X\\times_XY)$ with $G(Y)$ through $G(q_X)$ (and $\\Gamma(Y,j^{-1}G)=(j^{-1}G)(Y)$ with $(j^{-1}G)(X\\times_XY)$ through $(j^{-1}G)(q_X)$, compatibly with $\\rho_G$ by its naturality in the object), the identity reads $\\rho_G(Y)\\circ\\eta_{j,G}(X)=G(j):G(X)\\to G(Y)$, since $G(p_X)=G(q_X)\\circ G(j)$. Finally $\\rho_G(Y):\\Gamma(Y,j^{-1}G)\\to G(Y)$ is an isomorphism, being a component of the isomorphism of sheaves $\\rho_G$.",
-   "uses": [
-    "def-weil-pbc-direct-image",
-    "def-pc-fibre-product"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Section Tag 00XZ (section-localize), after Definition Tag 00Y0: \"The restriction $j_U^{-1}\\mathcal F$ is the sheaf defined by the rule $j_U^{-1}\\mathcal F(X/U)=\\mathcal F(X)$\" (unwinding the unit of the adjunction of steps 3-4)"
-   }
-  }
- ],
- "proof_deps": [
-  "lem-weil-pbc-etale-localization-functor-adjoint",
-  "def-weil-pbc-direct-image",
-  "def-weil-pbc-etale-site",
-  "def-pc-fibre-product",
-  "def-weil-pbc-abelian-etale-sheaves",
-  "lem-weil-pbc-etale-covering-base-change",
-  "lem-weil-pbc-etale-base-change-finite-limits",
-  "lem-weil-pbc-adjoint-continuous-restriction-adjunction",
-  "def-weil-pbc-inverse-image"
- ],
- "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/sites.tex",
-  "place": "Lemmas Tag 00WW, 00XX, 00XY, 00XR, 09VQ (localization of sites and cocontinuous functors with a continuous right adjoint), applied to the small etale sites as Topologies Lemmas Tag 021F, 021H, 021I do for the big ones; Etale Cohomology Section Tag 03S2 states the result"
- },
- "mathlib_searches": [
-  {
-   "tool": "leansearch",
-   "query": "restriction of a sheaf to the over category (localization at an object) evaluates as F(V)",
-   "results": "Sheaf.over, GrothendieckTopology.overPullback (Mathlib.CategoryTheory.Sites.Over: restriction to J.over X as sheafPushforwardContinuous along Over.forget), Sheaf.ΓRes (Sites.GlobalSections), sheafSectionsNatIsoEvaluation, Scheme.restrictFunctor; no etale-site inverse image along an etale morphism of schemes",
-   "date": "2026-10-09",
-   "verdict": "no match (overPullback is the restriction G|_Y on a generic over site, not its identification with the inverse image along j)"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "restriction of a sheaf to the over site J.over X preserves injective objects; sections over V/X equal F(V)",
-   "results": "Sheaf.isLocallyInjective_forget, Presheaf.isLocallyInjective_of_injective, Sheaf.isLocallyInjective_iff_injective (Mathlib.CategoryTheory.Sites.LocallyInjective); unrelated",
-   "date": "2026-10-09",
-   "verdict": "no match"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "restriction of sheaf cohomology to an open (etale) object: H^n(X, F) → H^n(U, F|_U), functorial",
-   "results": "Sheaf.ΓRes_map, Sheaf.natTransΓRes(_app), Sheaf.ΓRes_naturality (Mathlib.CategoryTheory.Sites.GlobalSections: restriction from global sections to F(U)), TopCat.Presheaf.restrictOpen; no inverse image along an etale morphism",
-   "date": "2026-10-09",
-   "verdict": "no match"
-  },
-  {
-   "tool": "loogle",
-   "query": "CategoryTheory.GrothendieckTopology.overPullback, CategoryTheory.Injective",
-   "results": "none",
-   "date": "2026-10-09",
-   "verdict": "no match"
-  },
-  {
-   "tool": "grep",
-   "query": "grep -n '^def \\|^abbrev \\|^lemma ' Mathlib/AlgebraicGeometry/Sites/Etale.lean; grep -n 'overPullback' Mathlib/CategoryTheory/Sites/Over.lean",
-   "results": "Sites/Etale.lean: etalePrecoverage, etalePretopology, etaleTopology, smallEtaleTopology (X.Etale), smallEtalePretopology, geometricFiber; Sites/Over.lean:288 overPullback = (Over.forget X).sheafPushforwardContinuous; no functor X.Etale -> Y.Etale along a morphism of schemes and no inverse image on small etale sites",
-   "date": "2026-10-09",
-   "verdict": "no match"
-  },
-  {
-   "tool": "leansearch",
-   "query": "sheafPullback along a continuous functor G with left adjoint F is isomorphic to sheafPushforwardContinuous along F",
-   "results": "Functor.sheafPullback, sheafPullbackConstruction.sheafPullback, Functor.sheafAdjunctionContinuous (Mathlib.CategoryTheory.Sites.Pullback), Functor.sheafPushforwardContinuous (Sites.Continuous), TopCat.Presheaf.pushforwardPullbackAdjunction; no isomorphism of the pullback with restriction along a left adjoint",
-   "date": "2026-10-09",
-   "verdict": "no match (the generic pieces are Adjunction.sheafPushforwardContinuous and Adjunction.leftAdjointUniq: new node lem-weil-pbc-adjoint-continuous-restriction-adjunction)"
-  },
-  {
-   "tool": "grep",
-   "query": "grep -rn 'IsContinuous\\|IsCocontinuous\\|Over.map\\|mapPullbackAdj' Mathlib/AlgebraicGeometry/Sites/; grep -rn 'sheafAdjunctionCocontinuous\\|pushforwardContinuousSheafificationCompatibility' Mathlib/CategoryTheory/Sites/CoverLifting.lean",
-   "results": "no continuity instance for MorphismProperty.Over.map or Over.pullback on small etale sites in Mathlib (only BigZariski forgetToTop, Proetale.lean:160,171); CoverLifting.lean:322 sheafAdjunctionCocontinuous, :382 pushforwardContinuousSheafificationCompatibility (generic, for continuous and cocontinuous G)",
-   "date": "2026-10-09",
-   "verdict": "no match for the etale statement; continuity of ι_j and b_j is proved in step 2"
-  }
- ],
- "mathlib_match": null,
- "status": "split",
- "merged_into": null,
- "created": {
-  "by": "worker",
-  "item": "lem-weil-pbc-cohomology-pullback-functorial",
-  "date": "2026-10-09"
- },
- "lean_audit": {
-  "master": {
-   "state": "rests_on_sorry",
-   "decls": [
-    {
-     "name": "AlgebraicGeometry.Etale.upperStarIsoLocalizationRestriction",
-     "module": "WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs",
-     "lines": [
-      181,
-      187
-     ],
-     "kind": "def",
-     "sorry": false
-    },
-    {
-     "name": "AlgebraicGeometry.Etale.localizationRestrictionLowerStarAdjunction",
-     "module": "WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs",
-     "lines": [
-      172,
-      179
-     ],
-     "kind": "def",
-     "sorry": false
-    }
-   ],
-   "missing": [],
-   "open": [
-    {
-     "name": "AlgebraicGeometry.Etale.hasLeftKanExtension_op_overPullback",
-     "module": "WeilConjectures.CategoryTheory.GrothendieckAbelian.HasLeftKanExtension",
-     "lines": [
-      223,
-      231
-     ],
-     "kind": "theorem",
-     "nodes": [],
-     "below": false
-    },
-    {
-     "name": "CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall",
-     "module": "WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify",
-     "lines": [
-      39,
-      49
-     ],
-     "kind": "theorem",
-     "nodes": [],
-     "below": false
-    }
-   ]
-  },
-  "slopmaster2": {
-   "state": "closed",
-   "decls": [
-    {
-     "name": "AlgebraicGeometry.Etale.upperStarIsoLocalizationRestriction",
-     "module": "WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs",
-     "lines": [
-      181,
-      187
-     ],
-     "kind": "def",
-     "sorry": false
-    },
-    {
-     "name": "AlgebraicGeometry.Etale.localizationRestrictionLowerStarAdjunction",
-     "module": "WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs",
-     "lines": [
-      172,
-      179
-     ],
-     "kind": "def",
-     "sorry": false
-    }
-   ],
-   "missing": [],
-   "open": []
-  }
- },
- "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1",
- "split_report": {
-  "date": "2026-10-09",
-  "item": "lem-weil-pbc-etale-inverse-image-restriction",
-  "worker": "stage1",
-  "summary": "Statement kept (added def-pc-fibre-product to stmt_deps: it uses W×_XY). Proof written in 5 steps following Stacks Sites 00XX/00XY/09VQ/00WW/00XR and Topologies 021F/021H/021I, in the sheaf-level form also used by the source repository (Etale.upperStarIsoLocalizationRestriction): ι_j ⊣ b_j (new Mathlib leaf lem-weil-pbc-etale-localization-functor-adjoint, MorphismProperty.Over.mapPullbackAdj); precomposition with ι_j and b_j preserves sheaves (step 2, from the site definition, lem-weil-pbc-etale-covering-base-change and lem-weil-pbc-etale-base-change-finite-limits); hence restriction ⊣ j_* with unit G(p_W) and, by uniqueness of left adjoints, j^{-1} ≅ restriction compatibly with units (new Mathlib leaf lem-weil-pbc-adjoint-continuous-restriction-adjunction: Adjunction.sheafPushforwardContinuous + Adjunction.leftAdjointUniq). This replaces the brief's presheaf route (b_p = ι^p, then sheafification does nothing): the sheaf-level uniqueness argument needs neither the Kan extension formula nor lem-weil-pbc-presheaf-finite-limits-objectwise. Clause 2 by evaluating the unit identity at W and at W = X."
- },
- "lean": {
-  "branch": "slopmaster2",
-  "declarations": [
-   "AlgebraicGeometry.Etale.upperStarIsoLocalizationRestriction",
-   "AlgebraicGeometry.Etale.localizationRestrictionLowerStarAdjunction"
+    "def-weil-pbc-inverse-image"
   ],
-  "note": "attached by the lead at review (2026-10-09), found by the opus worker: j^{-1}G identified with the restriction G|_Y for an etale j through the uniqueness of left adjoints of j_* (clause 1; the adjunction restriction ⊣ j_* is the second declaration); sorry-free on the full map"
- },
- "reviewed": {
-  "date": "2026-10-09",
-  "by": "L",
-  "result": "pass",
-  "note": "sheaf-level adjoint-uniqueness route (Stacks 00XX/00XY); 2 new Mathlib leaves; Lean attached (closed)"
- }
+  "proof_origin": {
+    "by": "document",
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Lemmas Tag 00WW, 00XX, 00XY, 00XR, 09VQ (localization of sites and cocontinuous functors with a continuous right adjoint), applied to the small etale sites as Topologies Lemmas Tag 021F, 021H, 021I do for the big ones; Etale Cohomology Section Tag 03S2 states the result"
+  },
+  "mathlib_searches": [
+    {
+      "tool": "leansearch",
+      "query": "restriction of a sheaf to the over category (localization at an object) evaluates as F(V)",
+      "results": "Sheaf.over, GrothendieckTopology.overPullback (Mathlib.CategoryTheory.Sites.Over: restriction to J.over X as sheafPushforwardContinuous along Over.forget), Sheaf.ΓRes (Sites.GlobalSections), sheafSectionsNatIsoEvaluation, Scheme.restrictFunctor; no etale-site inverse image along an etale morphism of schemes",
+      "date": "2026-10-09",
+      "verdict": "no match (overPullback is the restriction G|_Y on a generic over site, not its identification with the inverse image along j)"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "restriction of a sheaf to the over site J.over X preserves injective objects; sections over V/X equal F(V)",
+      "results": "Sheaf.isLocallyInjective_forget, Presheaf.isLocallyInjective_of_injective, Sheaf.isLocallyInjective_iff_injective (Mathlib.CategoryTheory.Sites.LocallyInjective); unrelated",
+      "date": "2026-10-09",
+      "verdict": "no match"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "restriction of sheaf cohomology to an open (etale) object: H^n(X, F) → H^n(U, F|_U), functorial",
+      "results": "Sheaf.ΓRes_map, Sheaf.natTransΓRes(_app), Sheaf.ΓRes_naturality (Mathlib.CategoryTheory.Sites.GlobalSections: restriction from global sections to F(U)), TopCat.Presheaf.restrictOpen; no inverse image along an etale morphism",
+      "date": "2026-10-09",
+      "verdict": "no match"
+    },
+    {
+      "tool": "loogle",
+      "query": "CategoryTheory.GrothendieckTopology.overPullback, CategoryTheory.Injective",
+      "results": "none",
+      "date": "2026-10-09",
+      "verdict": "no match"
+    },
+    {
+      "tool": "grep",
+      "query": "grep -n '^def \\|^abbrev \\|^lemma ' Mathlib/AlgebraicGeometry/Sites/Etale.lean; grep -n 'overPullback' Mathlib/CategoryTheory/Sites/Over.lean",
+      "results": "Sites/Etale.lean: etalePrecoverage, etalePretopology, etaleTopology, smallEtaleTopology (X.Etale), smallEtalePretopology, geometricFiber; Sites/Over.lean:288 overPullback = (Over.forget X).sheafPushforwardContinuous; no functor X.Etale -> Y.Etale along a morphism of schemes and no inverse image on small etale sites",
+      "date": "2026-10-09",
+      "verdict": "no match"
+    },
+    {
+      "tool": "leansearch",
+      "query": "sheafPullback along a continuous functor G with left adjoint F is isomorphic to sheafPushforwardContinuous along F",
+      "results": "Functor.sheafPullback, sheafPullbackConstruction.sheafPullback, Functor.sheafAdjunctionContinuous (Mathlib.CategoryTheory.Sites.Pullback), Functor.sheafPushforwardContinuous (Sites.Continuous), TopCat.Presheaf.pushforwardPullbackAdjunction; no isomorphism of the pullback with restriction along a left adjoint",
+      "date": "2026-10-09",
+      "verdict": "no match (the generic pieces are Adjunction.sheafPushforwardContinuous and Adjunction.leftAdjointUniq: new node lem-weil-pbc-adjoint-continuous-restriction-adjunction)"
+    },
+    {
+      "tool": "grep",
+      "query": "grep -rn 'IsContinuous\\|IsCocontinuous\\|Over.map\\|mapPullbackAdj' Mathlib/AlgebraicGeometry/Sites/; grep -rn 'sheafAdjunctionCocontinuous\\|pushforwardContinuousSheafificationCompatibility' Mathlib/CategoryTheory/Sites/CoverLifting.lean",
+      "results": "no continuity instance for MorphismProperty.Over.map or Over.pullback on small etale sites in Mathlib (only BigZariski forgetToTop, Proetale.lean:160,171); CoverLifting.lean:322 sheafAdjunctionCocontinuous, :382 pushforwardContinuousSheafificationCompatibility (generic, for continuous and cocontinuous G)",
+      "date": "2026-10-09",
+      "verdict": "no match for the etale statement; continuity of ι_j and b_j is proved in step 2"
+    }
+  ],
+  "mathlib_match": null,
+  "status": "split",
+  "merged_into": null,
+  "created": {
+    "by": "worker",
+    "item": "lem-weil-pbc-cohomology-pullback-functorial",
+    "date": "2026-10-09"
+  },
+  "lean_audit": {
+    "master": {
+      "state": "rests_on_sorry",
+      "decls": [
+        {
+          "name": "AlgebraicGeometry.Etale.upperStarIsoLocalizationRestriction",
+          "module": "WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs",
+          "lines": [
+            181,
+            187
+          ],
+          "kind": "def",
+          "sorry": false
+        },
+        {
+          "name": "AlgebraicGeometry.Etale.localizationRestrictionLowerStarAdjunction",
+          "module": "WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs",
+          "lines": [
+            172,
+            179
+          ],
+          "kind": "def",
+          "sorry": false
+        }
+      ],
+      "missing": [],
+      "open": [
+        {
+          "name": "AlgebraicGeometry.Etale.hasLeftKanExtension_op_overPullback",
+          "module": "WeilConjectures.CategoryTheory.GrothendieckAbelian.HasLeftKanExtension",
+          "lines": [
+            223,
+            231
+          ],
+          "kind": "theorem",
+          "nodes": [],
+          "below": false
+        },
+        {
+          "name": "CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall",
+          "module": "WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify",
+          "lines": [
+            39,
+            49
+          ],
+          "kind": "theorem",
+          "nodes": [],
+          "below": false
+        }
+      ]
+    },
+    "slopmaster2": {
+      "state": "closed",
+      "decls": [
+        {
+          "name": "AlgebraicGeometry.Etale.upperStarIsoLocalizationRestriction",
+          "module": "WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs",
+          "lines": [
+            181,
+            187
+          ],
+          "kind": "def",
+          "sorry": false
+        },
+        {
+          "name": "AlgebraicGeometry.Etale.localizationRestrictionLowerStarAdjunction",
+          "module": "WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs",
+          "lines": [
+            172,
+            179
+          ],
+          "kind": "def",
+          "sorry": false
+        }
+      ],
+      "missing": [],
+      "open": []
+    }
+  },
+  "chapter": "sec-proper-base-change",
+  "unit": "sk-thm-p1",
+  "split_report": {
+    "date": "2026-10-09",
+    "item": "lem-weil-pbc-etale-inverse-image-restriction",
+    "worker": "stage1",
+    "summary": "Statement kept (added def-pc-fibre-product to stmt_deps: it uses W×_XY). Proof written in 5 steps following Stacks Sites 00XX/00XY/09VQ/00WW/00XR and Topologies 021F/021H/021I, in the sheaf-level form also used by the source repository (Etale.upperStarIsoLocalizationRestriction): ι_j ⊣ b_j (new Mathlib leaf lem-weil-pbc-etale-localization-functor-adjoint, MorphismProperty.Over.mapPullbackAdj); precomposition with ι_j and b_j preserves sheaves (step 2, from the site definition, lem-weil-pbc-etale-covering-base-change and lem-weil-pbc-etale-base-change-finite-limits); hence restriction ⊣ j_* with unit G(p_W) and, by uniqueness of left adjoints, j^{-1} ≅ restriction compatibly with units (new Mathlib leaf lem-weil-pbc-adjoint-continuous-restriction-adjunction: Adjunction.sheafPushforwardContinuous + Adjunction.leftAdjointUniq). This replaces the brief's presheaf route (b_p = ι^p, then sheafification does nothing): the sheaf-level uniqueness argument needs neither the Kan extension formula nor lem-weil-pbc-presheaf-finite-limits-objectwise. Clause 2 by evaluating the unit identity at W and at W = X."
+  },
+  "lean": {
+    "module": "WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs",
+    "declaration": "AlgebraicGeometry.Etale.upperStarIsoLocalizationRestriction",
+    "branch": "slopmaster2",
+    "line": 181,
+    "declarations": [
+      "AlgebraicGeometry.Etale.upperStarIsoLocalizationRestriction",
+      "AlgebraicGeometry.Etale.localizationRestrictionLowerStarAdjunction"
+    ],
+    "sorry_free": true,
+    "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state closed)"
+  },
+  "reviewed": {
+    "date": "2026-10-09",
+    "by": "L",
+    "result": "pass",
+    "note": "sheaf-level adjoint-uniqueness route (Stacks 00XX/00XY); 2 new Mathlib leaves; Lean attached (closed)"
+  }
 }

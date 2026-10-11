@@ -1,151 +1,156 @@
 {
- "id": "def-weil-pbc-property",
- "blueprint": {
-  "is": "def-weil-pbc-property",
-  "from": null,
-  "same_as": null
- },
- "kind": "definition",
- "title": "Proper base-change property",
- "statement": "Let $f:X\\to Y$ be a proper morphism of schemes [def-weil-proper-morphism]. Write $\\mathrm{PBC}(f)$ if, for every morphism of schemes $g:Y'\\to Y$, every cartesian square [def-weil-pbc-cartesian-square]\n\n$$\n \\square:\\quad\n \\begin{array}{ccc}\n X'&\\xrightarrow{g'}&X\\\\\n f'\\downarrow&&\\downarrow f\\\\\n Y'&\\xrightarrow{g}&Y\n \\end{array}\n$$\n\ncompleting $f$ and $g$ (with its chosen identification $X'\\cong X\\times_YY'$), and every torsion abelian sheaf [def-weil-pbc-torsion-etale-sheaf] $F\\in\\Ab(X_{\\Et})$ [def-weil-pbc-abelian-etale-sheaves], regarded as a complex concentrated in degree $0$, the derived exchange morphism [def-weil-pbc-derived-exchange]\n\n$$\n \\Ex_{\\square,F}:g^{-1}Rf_*F\\longrightarrow Rf'_*g'^{-1}F\n$$\n\nis an isomorphism in the bounded below derived category $\\Dplus(Y'_{\\Et})$ [def-weil-pbc-derived-categories]. The assertion concerns this specified map, not an unnamed isomorphism between its source and target.",
- "source": {
-  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-def-pbc/def-weil-pbc-property.md",
-  "place": "node def-weil-pbc-property, order 1048"
- },
- "stmt_deps": [
-  "def-weil-proper-morphism",
-  "def-weil-pbc-cartesian-square",
-  "def-weil-pbc-torsion-etale-sheaf",
-  "def-weil-pbc-abelian-etale-sheaves",
-  "def-weil-pbc-derived-exchange",
-  "def-weil-pbc-derived-categories"
- ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
- "mathlib_searches": [
-  {
-   "tool": "grep",
-   "query": "grep -rln 'BaseChange\\|baseChange' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites | xargs grep -ln 'Etale\\|smallEtale'",
-   "results": "none relevant: Mathlib's base change results concern modules/quasi-coherent sheaves and ring maps; no etale direct image Rf_*, no exchange map of etale sheaves, no proper base change property",
-   "date": "2026-10-09",
-   "verdict": "no match"
+  "id": "def-weil-pbc-property",
+  "blueprint": {
+    "is": "def-weil-pbc-property",
+    "from": null,
+    "same_as": null
   },
-  {
-   "tool": "grep",
-   "query": "grep -rn 'IsProper' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Morphisms/Proper.lean; grep -rn 'IsPullback' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Limits/Shapes/Pullback/IsPullback/Defs.lean",
-   "results": "AlgebraicGeometry.IsProper (proper morphisms) and CategoryTheory.IsPullback (cartesian squares) exist; nothing about etale cohomology along them",
-   "date": "2026-10-09",
-   "verdict": "no match (only the ingredients proper morphism and cartesian square)"
+  "kind": "definition",
+  "title": "Proper base-change property",
+  "statement": "Let $f:X\\to Y$ be a proper morphism of schemes [def-weil-proper-morphism]. Write $\\mathrm{PBC}(f)$ if, for every morphism of schemes $g:Y'\\to Y$, every cartesian square [def-weil-pbc-cartesian-square]\n\n$$\n \\square:\\quad\n \\begin{array}{ccc}\n X'&\\xrightarrow{g'}&X\\\\\n f'\\downarrow&&\\downarrow f\\\\\n Y'&\\xrightarrow{g}&Y\n \\end{array}\n$$\n\ncompleting $f$ and $g$ (with its chosen identification $X'\\cong X\\times_YY'$), and every torsion abelian sheaf [def-weil-pbc-torsion-etale-sheaf] $F\\in\\Ab(X_{\\Et})$ [def-weil-pbc-abelian-etale-sheaves], regarded as a complex concentrated in degree $0$, the derived exchange morphism [def-weil-pbc-derived-exchange]\n\n$$\n \\Ex_{\\square,F}:g^{-1}Rf_*F\\longrightarrow Rf'_*g'^{-1}F\n$$\n\nis an isomorphism in the bounded below derived category $\\Dplus(Y'_{\\Et})$ [def-weil-pbc-derived-categories]. The assertion concerns this specified map, not an unnamed isomorphism between its source and target.",
+  "source": {
+    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-def-pbc/def-weil-pbc-property.md",
+    "place": "node def-weil-pbc-property, order 1048"
   },
-  {
-   "tool": "leansearch",
-   "query": "proper base change theorem for étale cohomology",
-   "results": "KaehlerDifferential.isBaseChange_of_formallyEtale, RingHom.Etale.isStableUnderBaseChange, Algebra.Etale.baseChange, IsEtale/IsProper/IsSmooth isStableUnderBaseChange: no base change of etale sheaves",
-   "date": "2026-10-09",
-   "verdict": "no match"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "exchange morphism g^* Rf_* F → Rf'_* g'^* F is an isomorphism (proper base change)",
-   "results": "SheafOfModules.pullbackComp, Functor.sheafPushforwardCocontinuousCompSheafToPresheafIso(_hom), Functor.sheafPushforwardContinuousComp', ExponentiableMorphism.pushforwardComp: compositions of pushforward/pullback, no exchange map, no derived direct image",
-   "date": "2026-10-09",
-   "verdict": "no match"
-  },
-  {
-   "tool": "grep",
-   "query": "rg -il 'proper.?base.?change|baseChangeMap|BaseChange.*Sheaf' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
-   "results": "Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, PullbackFree.lean, Presheaf/Pullback.lean, AlgebraicGeometry/Modules/Sheaf.lean, Topology/Sheaves/*: pullback of modules / presheaves, nothing on etale cohomology",
-   "date": "2026-10-09",
-   "verdict": "no match: confirms the earlier verdict"
-  }
- ],
- "mathlib_match": null,
- "status": "split",
- "merged_into": null,
- "import_flags": [
-  "detailed_form"
- ],
- "blueprint_kind": "definition",
- "blueprint_order": 1048,
- "blueprint_uses": [
-  "def-weil-pbc-cartesian-square",
-  "def-weil-pbc-derived-exchange",
-  "def-weil-pbc-etale-sheaves",
-  "def-weil-pbc-scheme-conventions"
- ],
- "lean": {
-  "branch": "slopmaster2",
-  "declarations": [
-   "AlgebraicGeometry.Etale.HasTorsionBaseChange"
+  "stmt_deps": [
+    "def-weil-proper-morphism",
+    "def-weil-pbc-cartesian-square",
+    "def-weil-pbc-torsion-etale-sheaf",
+    "def-weil-pbc-abelian-etale-sheaves",
+    "def-weil-pbc-derived-exchange",
+    "def-weil-pbc-derived-categories"
   ],
-  "note": "attached by the lead at review (2026-10-09): the Lean the unit sk-def-pbc names; PBC at the level of D^+ with torsion cohomology and any f (stronger as written than the sheaf-level PBC(f) of the node for proper f; equal to it for proper f by the five lemma and truncation, the content of the target's third step); sorry-free by the full sorry map (370 declarations reachable)"
- },
- "blueprint_lean": [
-  "AlgebraicGeometry.Etale.IsBaseChangeIso"
- ],
- "blueprint_sketch": [
-  {
-   "statement": "For a proper morphism $f:X\\to Y$, define $\\mathsf{PBC}(f)$ to mean that for\nevery morphism $g:Y'\\to Y$, every associated Cartesian square $\\square$, and\nevery torsion sheaf $F$ on $X_{\\mathrm{et}}$, the map\n$\\operatorname{Ex}_{\\square,F}$ is an isomorphism in the derived category.\nThe assertion includes the specified map of Definition\n[def-weil-pbc-derived-exchange], not an unnamed isomorphism.",
-   "proof": "",
-   "cites": [
-    "def-weil-pbc-derived-exchange"
-   ]
-  }
- ],
- "lean_audit": {
-  "master": {
-   "state": "none",
-   "decls": [],
-   "missing": [
-    "AlgebraicGeometry.Etale.HasTorsionBaseChange"
-   ]
-  },
-  "slopmaster2": {
-   "state": "closed",
-   "decls": [
+  "proof": [],
+  "proof_deps": [],
+  "proof_origin": null,
+  "mathlib_searches": [
     {
-     "name": "AlgebraicGeometry.Etale.HasTorsionBaseChange",
-     "module": "WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.BaseChangeProperty",
-     "lines": [
-      116,
-      139
-     ],
-     "kind": "def",
-     "sorry": false
+      "tool": "grep",
+      "query": "grep -rln 'BaseChange\\|baseChange' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites | xargs grep -ln 'Etale\\|smallEtale'",
+      "results": "none relevant: Mathlib's base change results concern modules/quasi-coherent sheaves and ring maps; no etale direct image Rf_*, no exchange map of etale sheaves, no proper base change property",
+      "date": "2026-10-09",
+      "verdict": "no match"
     },
     {
-     "name": "AlgebraicGeometry.Etale.IsBaseChangeIso",
-     "module": "WeilConjectures.SixFunctors.BaseChange.Derived",
-     "lines": [
-      295,
-      307
-     ],
-     "kind": "structure",
-     "sorry": false
+      "tool": "grep",
+      "query": "grep -rn 'IsProper' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Morphisms/Proper.lean; grep -rn 'IsPullback' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Limits/Shapes/Pullback/IsPullback/Defs.lean",
+      "results": "AlgebraicGeometry.IsProper (proper morphisms) and CategoryTheory.IsPullback (cartesian squares) exist; nothing about etale cohomology along them",
+      "date": "2026-10-09",
+      "verdict": "no match (only the ingredients proper morphism and cartesian square)"
+    },
+    {
+      "tool": "leansearch",
+      "query": "proper base change theorem for étale cohomology",
+      "results": "KaehlerDifferential.isBaseChange_of_formallyEtale, RingHom.Etale.isStableUnderBaseChange, Algebra.Etale.baseChange, IsEtale/IsProper/IsSmooth isStableUnderBaseChange: no base change of etale sheaves",
+      "date": "2026-10-09",
+      "verdict": "no match"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "exchange morphism g^* Rf_* F → Rf'_* g'^* F is an isomorphism (proper base change)",
+      "results": "SheafOfModules.pullbackComp, Functor.sheafPushforwardCocontinuousCompSheafToPresheafIso(_hom), Functor.sheafPushforwardContinuousComp', ExponentiableMorphism.pushforwardComp: compositions of pushforward/pullback, no exchange map, no derived direct image",
+      "date": "2026-10-09",
+      "verdict": "no match"
+    },
+    {
+      "tool": "grep",
+      "query": "rg -il 'proper.?base.?change|baseChangeMap|BaseChange.*Sheaf' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+      "results": "Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, PullbackFree.lean, Presheaf/Pullback.lean, AlgebraicGeometry/Modules/Sheaf.lean, Topology/Sheaves/*: pullback of modules / presheaves, nothing on etale cohomology",
+      "date": "2026-10-09",
+      "verdict": "no match: confirms the earlier verdict"
     }
-   ],
-   "missing": [],
-   "open": []
+  ],
+  "mathlib_match": null,
+  "status": "split",
+  "merged_into": null,
+  "import_flags": [
+    "detailed_form"
+  ],
+  "blueprint_kind": "definition",
+  "blueprint_order": 1048,
+  "blueprint_uses": [
+    "def-weil-pbc-cartesian-square",
+    "def-weil-pbc-derived-exchange",
+    "def-weil-pbc-etale-sheaves",
+    "def-weil-pbc-scheme-conventions"
+  ],
+  "lean": {
+    "module": "WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.BaseChangeProperty",
+    "declaration": "AlgebraicGeometry.Etale.HasTorsionBaseChange",
+    "branch": "slopmaster2",
+    "line": 116,
+    "declarations": [
+      "AlgebraicGeometry.Etale.HasTorsionBaseChange",
+      "AlgebraicGeometry.Etale.IsBaseChangeIso"
+    ],
+    "sorry_free": true,
+    "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state closed)"
+  },
+  "blueprint_lean": [
+    "AlgebraicGeometry.Etale.IsBaseChangeIso"
+  ],
+  "blueprint_sketch": [
+    {
+      "statement": "For a proper morphism $f:X\\to Y$, define $\\mathsf{PBC}(f)$ to mean that for\nevery morphism $g:Y'\\to Y$, every associated Cartesian square $\\square$, and\nevery torsion sheaf $F$ on $X_{\\mathrm{et}}$, the map\n$\\operatorname{Ex}_{\\square,F}$ is an isomorphism in the derived category.\nThe assertion includes the specified map of Definition\n[def-weil-pbc-derived-exchange], not an unnamed isomorphism.",
+      "proof": "",
+      "cites": [
+        "def-weil-pbc-derived-exchange"
+      ]
+    }
+  ],
+  "lean_audit": {
+    "master": {
+      "state": "none",
+      "decls": [],
+      "missing": [
+        "AlgebraicGeometry.Etale.HasTorsionBaseChange"
+      ]
+    },
+    "slopmaster2": {
+      "state": "closed",
+      "decls": [
+        {
+          "name": "AlgebraicGeometry.Etale.HasTorsionBaseChange",
+          "module": "WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.BaseChangeProperty",
+          "lines": [
+            116,
+            139
+          ],
+          "kind": "def",
+          "sorry": false
+        },
+        {
+          "name": "AlgebraicGeometry.Etale.IsBaseChangeIso",
+          "module": "WeilConjectures.SixFunctors.BaseChange.Derived",
+          "lines": [
+            295,
+            307
+          ],
+          "kind": "structure",
+          "sorry": false
+        }
+      ],
+      "missing": [],
+      "open": []
+    }
+  },
+  "chapter": "sec-proper-base-change",
+  "unit": "sk-def-pbc",
+  "split_report": {
+    "date": "2026-10-09",
+    "item": "def-weil-pbc-property",
+    "worker": "stage1",
+    "summary": "Checked against the unit sk-def-pbc (statement only, no proof steps) and the blueprint node; the definition agrees with the Stacks Project's 'cohomology commutes with base change for f' (Etale Cohomology, Section 095S, paragraph before Lemma 0A4B), restricted to proper f. Split by one level: 'proper' repointed from the grab-bag def-weil-pbc-scheme-conventions to def-weil-proper-morphism (Mathlib leaf IsProper); the grab-bag def-weil-pbc-etale-sheaves replaced by two new nodes, def-weil-pbc-abelian-etale-sheaves (Ab(X_et), Mathlib leaf Sheaf (smallEtaleTopology X) AddCommGrpCat) and def-weil-pbc-torsion-etale-sheaf (unsplit: Mathlib has IsAddTorsion for groups but no torsion sheaf), defined as in the unit by the canonical map colim_n F[n] -> F being an isomorphism, which uses def-pur-abelian-sheaf-kernel and a new Mathlib leaf def-weil-pbc-category-colimit. The claims the old statement carried (equivalence with torsion geometric stalks and with locally killed sections; not every F(U) torsion) moved to the new statement node lem-weil-pbc-torsion-sheaf-characterizations (unsplit, flagged unreachable, carried in the unit's realized.statement). Kept def-weil-pbc-cartesian-square and def-weil-pbc-derived-exchange (the specified map; being split by another worker) and added def-weil-pbc-derived-categories for 'isomorphism in D+(Y'_et)'. Lean: the attached AlgebraicGeometry.Etale.IsBaseChangeIso (no torsion hypothesis, all of D+) states something stronger than this node, false for proper f in general; the unit's AlgebraicGeometry.Etale.HasTorsionBaseChange (BaseChangeProperty.lean:116-139) quantifies over Lambda-module complexes in D+ with torsion cohomology, which for Lambda = Z implies this node's property (take K = F[0]) but is not literally the same."
+  },
+  "lean_names_rejected": [
+    {
+      "name": "AlgebraicGeometry.Etale.IsBaseChangeIso",
+      "reason": "states that the base change map is an isomorphism on all of D^+ with no torsion hypothesis (WeilConjectures/SixFunctors/BaseChange/Derived.lean 295-307), which the module docstring itself says is false for proper f with non-torsion coefficients; not this definition (found by the opus worker, 2026-10-09)"
+    }
+  ],
+  "reviewed": {
+    "date": "2026-10-09",
+    "by": "L",
+    "result": "pass"
   }
- },
- "chapter": "sec-proper-base-change",
- "unit": "sk-def-pbc",
- "split_report": {
-  "date": "2026-10-09",
-  "item": "def-weil-pbc-property",
-  "worker": "stage1",
-  "summary": "Checked against the unit sk-def-pbc (statement only, no proof steps) and the blueprint node; the definition agrees with the Stacks Project's 'cohomology commutes with base change for f' (Etale Cohomology, Section 095S, paragraph before Lemma 0A4B), restricted to proper f. Split by one level: 'proper' repointed from the grab-bag def-weil-pbc-scheme-conventions to def-weil-proper-morphism (Mathlib leaf IsProper); the grab-bag def-weil-pbc-etale-sheaves replaced by two new nodes, def-weil-pbc-abelian-etale-sheaves (Ab(X_et), Mathlib leaf Sheaf (smallEtaleTopology X) AddCommGrpCat) and def-weil-pbc-torsion-etale-sheaf (unsplit: Mathlib has IsAddTorsion for groups but no torsion sheaf), defined as in the unit by the canonical map colim_n F[n] -> F being an isomorphism, which uses def-pur-abelian-sheaf-kernel and a new Mathlib leaf def-weil-pbc-category-colimit. The claims the old statement carried (equivalence with torsion geometric stalks and with locally killed sections; not every F(U) torsion) moved to the new statement node lem-weil-pbc-torsion-sheaf-characterizations (unsplit, flagged unreachable, carried in the unit's realized.statement). Kept def-weil-pbc-cartesian-square and def-weil-pbc-derived-exchange (the specified map; being split by another worker) and added def-weil-pbc-derived-categories for 'isomorphism in D+(Y'_et)'. Lean: the attached AlgebraicGeometry.Etale.IsBaseChangeIso (no torsion hypothesis, all of D+) states something stronger than this node, false for proper f in general; the unit's AlgebraicGeometry.Etale.HasTorsionBaseChange (BaseChangeProperty.lean:116-139) quantifies over Lambda-module complexes in D+ with torsion cohomology, which for Lambda = Z implies this node's property (take K = F[0]) but is not literally the same."
- },
- "lean_names_rejected": [
-  {
-   "name": "AlgebraicGeometry.Etale.IsBaseChangeIso",
-   "reason": "states that the base change map is an isomorphism on all of D^+ with no torsion hypothesis (WeilConjectures/SixFunctors/BaseChange/Derived.lean 295-307), which the module docstring itself says is false for proper f with non-torsion coefficients; not this definition (found by the opus worker, 2026-10-09)"
-  }
- ],
- "reviewed": {
-  "date": "2026-10-09",
-  "by": "L",
-  "result": "pass"
- }
 }

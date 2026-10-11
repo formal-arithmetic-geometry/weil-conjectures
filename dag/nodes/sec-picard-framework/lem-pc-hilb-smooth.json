@@ -1,107 +1,111 @@
 {
- "id": "lem-pc-hilb-smooth",
- "blueprint": {
-  "is": "lem-pc-hilb-smooth",
-  "from": null,
-  "same_as": null
- },
- "kind": "statement",
- "title": "Hilbert schemes of curves are smooth",
- "statement": "(Picard Schemes of Curves, Lemma 44.3.5, Tag\n[0B9H](https://stacks.math.columbia.edu/tag/0B9H).) Let $X\\to S$ be\na separated smooth morphism of relative dimension $1$ such that\nall the functors $\\operatorname{Hilb}^e_{X/S}$ are representable. Then\n$\\underline{\\operatorname{Hilb}}^d_{X/S}$ is smooth over $S$ of relative dimension $d$\n(for a smooth proper curve $X$ over a field $k$,\n$\\underline{\\operatorname{Hilb}}^d_{X/k}$ is smooth of dimension $d$ over $k$).",
- "source": {
-  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-hilb-curves/lem-pc-hilb-smooth.md",
-  "place": "node lem-pc-hilb-smooth, order 788",
-  "external": [
-   {
-    "document": "Stacks Project",
-    "place": "Tag 0B9H"
-   }
-  ]
- },
- "stmt_deps": [],
- "proof": [
-  {
-   "text": "*The cases $d=0,1$.* $\\operatorname{Hilb}^0_{X/S}(T)$ has exactly one element\n(the empty closed subscheme of $X_T$, finite locally free of degree\n$0$; it is defined by the unit ideal; the pullback along $T'\\to T$ is the empty\nsubscheme): the representing scheme is $S$, which is smooth over $S$\nof relative dimension $0$. $\\operatorname{Hilb}^1_{X/S}(T)$ consists of the closed\nsubschemes $Z\\subseteq X_T$ finite locally free of degree $1$: such a\n$Z$ is the graph of a unique morphism $T\\to X$ (the projection\n$Z\\to T$ is an isomorphism, being finite locally free of degree $1$\nand the closed immersion gives the section $T\\to X$: the composite\n$T\\stackrel{\\sim}{\\leftarrow}Z\\hookrightarrow X_T$ is the desired\nmorphism; conversely the graph of a morphism $T\\to X$ is a closed\nsubscheme finite locally free of degree $1$ because $X\\to S$ is\nseparated, the graph being closed): hence $\\operatorname{Hilb}^1_{X/S}=X$ (the\nfunctor is represented by $X$), which is smooth of relative dimension\n$1$ over $S$. (For a non-separated $X\\to S$ the graph of a morphism\nis not closed in general: one then uses the ``closed graph'' via the\nimmersion-theoretic twist; the classical statement is used here in the\nseparated case, which holds in all applications of this lemma.)",
-   "uses": [],
-   "elementary": null
+  "id": "lem-pc-hilb-smooth",
+  "blueprint": {
+    "is": "lem-pc-hilb-smooth",
+    "from": null,
+    "same_as": null
   },
-  {
-   "text": "*Induction.* Assume $\\underline{\\operatorname{Hilb}}^d_{X/S}$ is smooth over\n$S$ of relative dimension $d$. Put $H_d:=\\underline{\\operatorname{Hilb}}^d_{X/S}$\nand let\n\n$$\n\\pi:H_d\\times_SX\\;\\longrightarrow\\;H_{d+1}\n$$\n\nbe the morphism of [lem-pc-hilb-addition], finite locally free of\ndegree $d+1$. The source $H_d\\times_SX$ is smooth over $S$ of\nrelative dimension $d+1$: base changes and compositions of smooth\nmorphisms are smooth (the standard statements; in the\n[def-pc-morphism-conventions] under the local\ncharacterization of smoothness), so the source is smooth over\n$H_d$ (the projection is the base change of the smooth\n$X\\to S$ along $H_d\\to S$) and then over $S$; the relative dimension\nis $d+1$ (relative dimensions add for composites, and base change of\n$X/S$ of relative dimension $1$ keeps relative dimension $1$).\nSince $\\pi$ is finite locally free of degree $d+1\\ge1$, it is\nsurjective (a finite locally free morphism of positive degree has\nnonempty fibres: over a point $t$ of the target the fibre is a\nfinite flat algebra of rank $d+1\\ge1$ over $\\kappa(t)$, hence nonzero,\nso the fibre is a nonempty scheme) and faithfully flat. Smoothness\ndescends along faithfully flat coverings: the classical descent\n``smoothness is of fpqc local nature on the target''\n(Descent, Lemma 35.14.5: a morphism $Y\\to S$ such that there is a\nsurjective flat morphism of finite presentation $Y'\\to Y$ with\n$Y'\\to S$ smooth, has $Y\\to S$ smooth; the statement in the precise\nform used here: the faithfully flat descent of the smoothness\nproperty, which is a local property in the fpqc topology), so\n$H_{d+1}\\to S$ is smooth. The relative dimension: $\\pi$ is finite,\nhence proper, and surjective, so $\\dim H_{d+1}=\\dim(H_d\\times_SX)= d+1$ (a finite surjective morphism between schemes of finite type\nover $S$ preserves the dimension; the dimension of the source over\n$S$ is $d+1$ since it is smooth of relative dimension $d+1$), i.e. $H_{d+1}$ is smooth of relative dimension $d+1$ over $S$. This\nproves the lemma.",
-   "uses": [
-    "lem-pc-hilb-addition",
-    "def-pc-morphism-conventions"
-   ],
-   "elementary": false
-  }
- ],
- "proof_deps": [
-  "lem-pc-hilb-addition",
-  "def-pc-morphism-conventions"
- ],
- "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-hilb-curves/lem-pc-hilb-smooth.md",
-  "place": "## Proof"
- },
- "mathlib_searches": [],
- "mathlib_match": null,
- "status": "imported",
- "merged_into": null,
- "import_flags": [
-  "long_proof_few_deps"
- ],
- "blueprint_kind": "lemma",
- "blueprint_order": 788,
- "blueprint_uses": [
-  "def-pc-morphism-conventions",
-  "lem-pc-hilb-addition"
- ],
- "proof_split_by": "labels",
- "lean_audit": {
-  "master": {
-   "state": "none",
-   "decls": [],
-   "missing": [
-    "AlgebraicGeometry.smoothOfRelativeDimension_of_representableBy_hilbertPresheaf",
-    "AlgebraicGeometry.isIso_of_representableBy_hilbertPresheaf_zero"
-   ]
+  "kind": "statement",
+  "title": "Hilbert schemes of curves are smooth",
+  "statement": "(Picard Schemes of Curves, Lemma 44.3.5, Tag\n[0B9H](https://stacks.math.columbia.edu/tag/0B9H).) Let $X\\to S$ be\na separated smooth morphism of relative dimension $1$ such that\nall the functors $\\operatorname{Hilb}^e_{X/S}$ are representable. Then\n$\\underline{\\operatorname{Hilb}}^d_{X/S}$ is smooth over $S$ of relative dimension $d$\n(for a smooth proper curve $X$ over a field $k$,\n$\\underline{\\operatorname{Hilb}}^d_{X/k}$ is smooth of dimension $d$ over $k$).",
+  "source": {
+    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-hilb-curves/lem-pc-hilb-smooth.md",
+    "place": "node lem-pc-hilb-smooth, order 788",
+    "external": [
+      {
+        "document": "Stacks Project",
+        "place": "Tag 0B9H"
+      }
+    ]
   },
-  "slopmaster2": {
-   "state": "closed",
-   "decls": [
+  "stmt_deps": [],
+  "proof": [
     {
-     "name": "AlgebraicGeometry.smoothOfRelativeDimension_of_representableBy_hilbertPresheaf",
-     "module": "WeilConjectures.AlgebraicGeometry.Hilbert.Curve",
-     "lines": [
-      801,
-      828
-     ],
-     "kind": "theorem",
-     "sorry": false
+      "text": "*The cases $d=0,1$.* $\\operatorname{Hilb}^0_{X/S}(T)$ has exactly one element\n(the empty closed subscheme of $X_T$, finite locally free of degree\n$0$; it is defined by the unit ideal; the pullback along $T'\\to T$ is the empty\nsubscheme): the representing scheme is $S$, which is smooth over $S$\nof relative dimension $0$. $\\operatorname{Hilb}^1_{X/S}(T)$ consists of the closed\nsubschemes $Z\\subseteq X_T$ finite locally free of degree $1$: such a\n$Z$ is the graph of a unique morphism $T\\to X$ (the projection\n$Z\\to T$ is an isomorphism, being finite locally free of degree $1$\nand the closed immersion gives the section $T\\to X$: the composite\n$T\\stackrel{\\sim}{\\leftarrow}Z\\hookrightarrow X_T$ is the desired\nmorphism; conversely the graph of a morphism $T\\to X$ is a closed\nsubscheme finite locally free of degree $1$ because $X\\to S$ is\nseparated, the graph being closed): hence $\\operatorname{Hilb}^1_{X/S}=X$ (the\nfunctor is represented by $X$), which is smooth of relative dimension\n$1$ over $S$. (For a non-separated $X\\to S$ the graph of a morphism\nis not closed in general: one then uses the ``closed graph'' via the\nimmersion-theoretic twist; the classical statement is used here in the\nseparated case, which holds in all applications of this lemma.)",
+      "uses": [],
+      "elementary": null
     },
     {
-     "name": "AlgebraicGeometry.isIso_of_representableBy_hilbertPresheaf_zero",
-     "module": "WeilConjectures.AlgebraicGeometry.Hilbert.Curve",
-     "lines": [
-      787,
-      799
-     ],
-     "kind": "theorem",
-     "sorry": false
+      "text": "*Induction.* Assume $\\underline{\\operatorname{Hilb}}^d_{X/S}$ is smooth over\n$S$ of relative dimension $d$. Put $H_d:=\\underline{\\operatorname{Hilb}}^d_{X/S}$\nand let\n\n$$\n\\pi:H_d\\times_SX\\;\\longrightarrow\\;H_{d+1}\n$$\n\nbe the morphism of [lem-pc-hilb-addition], finite locally free of\ndegree $d+1$. The source $H_d\\times_SX$ is smooth over $S$ of\nrelative dimension $d+1$: base changes and compositions of smooth\nmorphisms are smooth (the standard statements; in the\n[def-pc-morphism-conventions] under the local\ncharacterization of smoothness), so the source is smooth over\n$H_d$ (the projection is the base change of the smooth\n$X\\to S$ along $H_d\\to S$) and then over $S$; the relative dimension\nis $d+1$ (relative dimensions add for composites, and base change of\n$X/S$ of relative dimension $1$ keeps relative dimension $1$).\nSince $\\pi$ is finite locally free of degree $d+1\\ge1$, it is\nsurjective (a finite locally free morphism of positive degree has\nnonempty fibres: over a point $t$ of the target the fibre is a\nfinite flat algebra of rank $d+1\\ge1$ over $\\kappa(t)$, hence nonzero,\nso the fibre is a nonempty scheme) and faithfully flat. Smoothness\ndescends along faithfully flat coverings: the classical descent\n``smoothness is of fpqc local nature on the target''\n(Descent, Lemma 35.14.5: a morphism $Y\\to S$ such that there is a\nsurjective flat morphism of finite presentation $Y'\\to Y$ with\n$Y'\\to S$ smooth, has $Y\\to S$ smooth; the statement in the precise\nform used here: the faithfully flat descent of the smoothness\nproperty, which is a local property in the fpqc topology), so\n$H_{d+1}\\to S$ is smooth. The relative dimension: $\\pi$ is finite,\nhence proper, and surjective, so $\\dim H_{d+1}=\\dim(H_d\\times_SX)= d+1$ (a finite surjective morphism between schemes of finite type\nover $S$ preserves the dimension; the dimension of the source over\n$S$ is $d+1$ since it is smooth of relative dimension $d+1$), i.e. $H_{d+1}$ is smooth of relative dimension $d+1$ over $S$. This\nproves the lemma.",
+      "uses": [
+        "lem-pc-hilb-addition",
+        "def-pc-morphism-conventions"
+      ],
+      "elementary": false
     }
-   ],
-   "missing": [],
-   "open": []
-  }
- },
- "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-hilb-curves",
- "lean": {
-  "branch": "slopmaster2",
-  "declarations": [
-   "AlgebraicGeometry.smoothOfRelativeDimension_of_representableBy_hilbertPresheaf",
-   "AlgebraicGeometry.isIso_of_representableBy_hilbertPresheaf_zero"
   ],
-  "note": "attached by the lead at the attachment check of 2026-10-10: smoothOfRelativeDimension_of_representableBy_hilbertPresheaf states the node for every representing object (Stacks 0B9H; separatedness assumed by both); the zero lemma is its case d = 0"
- }
+  "proof_deps": [
+    "lem-pc-hilb-addition",
+    "def-pc-morphism-conventions"
+  ],
+  "proof_origin": {
+    "by": "agent",
+    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-hilb-curves/lem-pc-hilb-smooth.md",
+    "place": "## Proof"
+  },
+  "mathlib_searches": [],
+  "mathlib_match": null,
+  "status": "imported",
+  "merged_into": null,
+  "import_flags": [
+    "long_proof_few_deps"
+  ],
+  "blueprint_kind": "lemma",
+  "blueprint_order": 788,
+  "blueprint_uses": [
+    "def-pc-morphism-conventions",
+    "lem-pc-hilb-addition"
+  ],
+  "proof_split_by": "labels",
+  "lean_audit": {
+    "master": {
+      "state": "none",
+      "decls": [],
+      "missing": [
+        "AlgebraicGeometry.smoothOfRelativeDimension_of_representableBy_hilbertPresheaf",
+        "AlgebraicGeometry.isIso_of_representableBy_hilbertPresheaf_zero"
+      ]
+    },
+    "slopmaster2": {
+      "state": "closed",
+      "decls": [
+        {
+          "name": "AlgebraicGeometry.smoothOfRelativeDimension_of_representableBy_hilbertPresheaf",
+          "module": "WeilConjectures.AlgebraicGeometry.Hilbert.Curve",
+          "lines": [
+            801,
+            828
+          ],
+          "kind": "theorem",
+          "sorry": false
+        },
+        {
+          "name": "AlgebraicGeometry.isIso_of_representableBy_hilbertPresheaf_zero",
+          "module": "WeilConjectures.AlgebraicGeometry.Hilbert.Curve",
+          "lines": [
+            787,
+            799
+          ],
+          "kind": "theorem",
+          "sorry": false
+        }
+      ],
+      "missing": [],
+      "open": []
+    }
+  },
+  "chapter": "sec-picard-framework",
+  "unit": "sk-thm-picard-hilb-curves",
+  "lean": {
+    "module": "WeilConjectures.AlgebraicGeometry.Hilbert.Curve",
+    "declaration": "AlgebraicGeometry.smoothOfRelativeDimension_of_representableBy_hilbertPresheaf",
+    "branch": "slopmaster2",
+    "line": 801,
+    "declarations": [
+      "AlgebraicGeometry.smoothOfRelativeDimension_of_representableBy_hilbertPresheaf",
+      "AlgebraicGeometry.isIso_of_representableBy_hilbertPresheaf_zero"
+    ],
+    "sorry_free": true,
+    "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state closed)"
+  }
 }

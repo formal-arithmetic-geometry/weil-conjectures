@@ -1,184 +1,196 @@
 {
- "id": "lem-pc-affine-morphism-hi",
- "blueprint": {
-  "is": "lem-pc-affine-morphism-hi",
-  "from": null,
-  "same_as": []
- },
- "kind": "statement",
- "title": "Higher direct images of affine morphisms",
- "statement": "Let $f:X\\to S$ be an affine morphism and $\\mathcal{F}$ a quasi-coherent\n$\\mathcal{O}_X$-module. Then $R^if_*\\mathcal{F}=0$ for all $i>0$, and $f_*\\mathcal{F}$ is\nquasi-coherent.",
- "source": {
-  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-serre-b/lem-pc-affine-morphism-hi.md",
-  "place": "node lem-pc-affine-morphism-hi, order 623"
- },
- "stmt_deps": [
-  "def-pc-morphism-conventions",
-  "def-pc-scheme"
- ],
- "proof": [
-  {
-   "text": "For every point $y\\in S$, the stalk of $R^if_*\\mathcal F$ is the filtered colimit of $H^i(f^{-1}(V),\\mathcal F|_{f^{-1}(V)})$ over open neighborhoods $V$ of $y$ [lem-weil-pbc-higher-direct-image-presheaf]. Affine opens containing $y$ are cofinal among these neighborhoods, and for such an affine $V$ the inverse image $f^{-1}(V)$ is affine by the definition of an affine morphism [pqf-def-affine-morphism]. The restriction of $\\mathcal F$ remains quasi-coherent, so [lem-pc-affine-vanishing] makes each term of this cofinal colimit zero when $i>0$. Hence every stalk of $R^if_*\\mathcal F$ is zero, and [pqf-lem-sheaf-zero-stalks] gives $R^if_*\\mathcal F=0$.",
-   "uses": [
+  "id": "lem-pc-affine-morphism-hi",
+  "blueprint": {
+    "is": "lem-pc-affine-morphism-hi",
+    "from": null,
+    "same_as": []
+  },
+  "kind": "statement",
+  "title": "Higher direct images of affine morphisms",
+  "statement": "Let $f:X\\to S$ be an affine morphism and $\\mathcal{F}$ a quasi-coherent\n$\\mathcal{O}_X$-module. Then $R^if_*\\mathcal{F}=0$ for all $i>0$, and $f_*\\mathcal{F}$ is\nquasi-coherent.",
+  "source": {
+    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-serre-b/lem-pc-affine-morphism-hi.md",
+    "place": "node lem-pc-affine-morphism-hi, order 623"
+  },
+  "stmt_deps": [
+    "def-pc-morphism-conventions",
+    "def-pc-scheme"
+  ],
+  "proof": [
+    {
+      "text": "For every point $y\\in S$, the stalk of $R^if_*\\mathcal F$ is the filtered colimit of $H^i(f^{-1}(V),\\mathcal F|_{f^{-1}(V)})$ over open neighborhoods $V$ of $y$ [lem-weil-pbc-higher-direct-image-presheaf]. Affine opens containing $y$ are cofinal among these neighborhoods, and for such an affine $V$ the inverse image $f^{-1}(V)$ is affine by the definition of an affine morphism [pqf-def-affine-morphism]. The restriction of $\\mathcal F$ remains quasi-coherent, so [lem-pc-affine-vanishing] makes each term of this cofinal colimit zero when $i>0$. Hence every stalk of $R^if_*\\mathcal F$ is zero, and [pqf-lem-sheaf-zero-stalks] gives $R^if_*\\mathcal F=0$.",
+      "uses": [
+        "lem-weil-pbc-higher-direct-image-presheaf",
+        "pqf-def-affine-morphism",
+        "lem-pc-affine-vanishing",
+        "pqf-lem-sheaf-zero-stalks"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/cohomology.tex",
+        "place": "Lemma 01E4 (description of higher direct images) together with Schemes, Lemma 01EO (affine cohomology vanishing)"
+      }
+    },
+    {
+      "text": "An affine morphism is quasi-compact and quasi-separated by clause (3) of [lem-weil-pbc-affine-morphism-permanence]. Therefore [pqf-lem-pushforward-qcoh] applies directly and gives that $f_*\\mathcal F$ is quasi-coherent.",
+      "uses": [
+        "lem-weil-pbc-affine-morphism-permanence",
+        "pqf-lem-pushforward-qcoh"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/coherent.tex",
+        "place": "Lemma 01XJ, clause (1)"
+      }
+    }
+  ],
+  "proof_deps": [
     "lem-weil-pbc-higher-direct-image-presheaf",
     "pqf-def-affine-morphism",
     "lem-pc-affine-vanishing",
-    "pqf-lem-sheaf-zero-stalks"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Lemma 01E4 (description of higher direct images) together with Schemes, Lemma 01EO (affine cohomology vanishing)"
-   }
-  },
-  {
-   "text": "An affine morphism is quasi-compact and quasi-separated by clause (3) of [lem-weil-pbc-affine-morphism-permanence]. Therefore [pqf-lem-pushforward-qcoh] applies directly and gives that $f_*\\mathcal F$ is quasi-coherent.",
-   "uses": [
+    "pqf-lem-sheaf-zero-stalks",
     "lem-weil-pbc-affine-morphism-permanence",
     "pqf-lem-pushforward-qcoh"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Lemma 01XJ, clause (1)"
-   }
-  }
- ],
- "proof_deps": [
-  "lem-weil-pbc-higher-direct-image-presheaf",
-  "pqf-def-affine-morphism",
-  "lem-pc-affine-vanishing",
-  "pqf-lem-sheaf-zero-stalks",
-  "lem-weil-pbc-affine-morphism-permanence",
-  "pqf-lem-pushforward-qcoh"
- ],
- "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-serre-b/lem-pc-affine-morphism-hi.md",
-  "place": "## Proof"
- },
- "mathlib_searches": [],
- "mathlib_match": null,
- "status": "split",
- "merged_into": null,
- "import_flags": [],
- "blueprint_kind": "lemma",
- "blueprint_order": 623,
- "blueprint_uses": [
-  "def-pc-morphism-conventions",
-  "def-pc-scheme",
-  "lem-pc-affine-vanishing"
- ],
- "uses_not_cited": [
-  "def-pc-morphism-conventions",
-  "def-pc-scheme"
- ],
- "proof_split_by": "paragraphs",
- "lean_audit": {
-  "master": {
-   "state": "none",
-   "decls": [],
-   "missing": []
+  ],
+  "proof_origin": {
+    "by": "agent",
+    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-serre-b/lem-pc-affine-morphism-hi.md",
+    "place": "## Proof"
   },
-  "slopmaster2": {
-   "state": "rests_on_sorry",
-   "decls": [
-    {
-     "name": "AlgebraicGeometry.Scheme.Modules.isZero_higherDirectImage_of_isAffineHom",
-     "module": "WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage",
-     "lines": [
-      1362,
-      1390
-     ],
-     "kind": "theorem",
-     "sorry": false
+  "mathlib_searches": [],
+  "mathlib_match": null,
+  "status": "split",
+  "merged_into": null,
+  "import_flags": [],
+  "blueprint_kind": "lemma",
+  "blueprint_order": 623,
+  "blueprint_uses": [
+    "def-pc-morphism-conventions",
+    "def-pc-scheme",
+    "lem-pc-affine-vanishing"
+  ],
+  "uses_not_cited": [
+    "def-pc-morphism-conventions",
+    "def-pc-scheme"
+  ],
+  "proof_split_by": "paragraphs",
+  "lean_audit": {
+    "master": {
+      "state": "none",
+      "decls": [],
+      "missing": []
     },
-    {
-     "name": "AlgebraicGeometry.Scheme.Modules.isQuasicoherent_pushforward_of_isAffineHom",
-     "module": "WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage",
-     "lines": [
-      1392,
-      1406
-     ],
-     "kind": "theorem",
-     "sorry": false
+    "slopmaster2": {
+      "state": "rests_on_sorry",
+      "decls": [
+        {
+          "name": "AlgebraicGeometry.Scheme.Modules.isZero_higherDirectImage_of_isAffineHom",
+          "module": "WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage",
+          "lines": [
+            1362,
+            1390
+          ],
+          "kind": "theorem",
+          "sorry": false
+        },
+        {
+          "name": "AlgebraicGeometry.Scheme.Modules.isQuasicoherent_pushforward_of_isAffineHom",
+          "module": "WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage",
+          "lines": [
+            1392,
+            1406
+          ],
+          "kind": "theorem",
+          "sorry": false
+        }
+      ],
+      "missing": [],
+      "open": [
+        {
+          "name": "AlgebraicGeometry.Scheme.Modules.exists_addEquiv_sections_higherDirectImage_H",
+          "module": "WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage",
+          "lines": [
+            307,
+            324
+          ],
+          "kind": "theorem",
+          "nodes": [],
+          "below": false
+        },
+        {
+          "name": "AlgebraicGeometry.Scheme.Modules.isQuasicoherent_higherDirectImage",
+          "module": "WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage",
+          "lines": [
+            467,
+            474
+          ],
+          "kind": "theorem",
+          "nodes": [],
+          "below": false
+        },
+        {
+          "name": "AlgebraicGeometry.Scheme.Modules.nonempty_higherDirectImage_iso_restrict",
+          "module": "WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage",
+          "lines": [
+            421,
+            440
+          ],
+          "kind": "theorem",
+          "nodes": [],
+          "below": false
+        }
+      ]
     }
-   ],
-   "missing": [],
-   "open": [
-    {
-     "name": "AlgebraicGeometry.Scheme.Modules.exists_addEquiv_sections_higherDirectImage_H",
-     "module": "WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage",
-     "lines": [
-      307,
-      324
-     ],
-     "kind": "theorem",
-     "nodes": [],
-     "below": false
-    },
-    {
-     "name": "AlgebraicGeometry.Scheme.Modules.isQuasicoherent_higherDirectImage",
-     "module": "WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage",
-     "lines": [
-      467,
-      474
-     ],
-     "kind": "theorem",
-     "nodes": [],
-     "below": false
-    },
-    {
-     "name": "AlgebraicGeometry.Scheme.Modules.nonempty_higherDirectImage_iso_restrict",
-     "module": "WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage",
-     "lines": [
-      421,
-      440
-     ],
-     "kind": "theorem",
-     "nodes": [],
-     "below": false
-    }
-   ]
-  }
- },
- "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-serre-b",
- "split_report": {
-  "date": "2026-10-11",
-  "item": "lem-pc-affine-morphism-hi",
-  "worker": "stage1",
-  "summary": "Repaired the split by removing the child's restatement of the vanishing clause. The vanishing is proved directly from the existing higher-direct-image presheaf/stalk description: affine neighborhoods are cofinal, affine inverse images have zero higher cohomology, and zero stalks imply the sheaf is zero. The degree-zero assertion uses the dedicated qcqs pushforward theorem, with affine morphism qcqs supplied by affine permanence.",
-  "blueprint": "The two steps realize the sole proof paragraph of the blueprint node: affine-open restriction and affine cohomology vanishing, together with the degree-zero quasi-coherence conclusion.",
+  },
+  "chapter": "sec-picard-framework",
+  "unit": "sk-thm-picard-serre-b",
+  "split_report": {
+    "date": "2026-10-11",
+    "item": "lem-pc-affine-morphism-hi",
+    "worker": "stage1",
+    "summary": "Repaired the split by removing the child's restatement of the vanishing clause. The vanishing is proved directly from the existing higher-direct-image presheaf/stalk description: affine neighborhoods are cofinal, affine inverse images have zero higher cohomology, and zero stalks imply the sheaf is zero. The degree-zero assertion uses the dedicated qcqs pushforward theorem, with affine morphism qcqs supplied by affine permanence.",
+    "blueprint": "The two steps realize the sole proof paragraph of the blueprint node: affine-open restriction and affine cohomology vanishing, together with the degree-zero quasi-coherence conclusion.",
+    "tool_uses": [
+      {
+        "node": "lem-weil-pbc-higher-direct-image-presheaf",
+        "why": "Step 1 uses its general stalk-colimit description of higher direct images, a generic cohomological tool outside this unit route."
+      },
+      {
+        "node": "pqf-lem-sheaf-zero-stalks",
+        "why": "Step 1 uses the generic sheaf criterion that vanishing of all stalks implies the sheaf is zero."
+      },
+      {
+        "node": "pqf-lem-pushforward-qcoh",
+        "why": "Step 2 uses the general Tag 01LC theorem that qcqs pushforward preserves quasi-coherence."
+      }
+    ]
+  },
   "tool_uses": [
-   {
-    "node": "lem-weil-pbc-higher-direct-image-presheaf",
-    "why": "Step 1 uses its general stalk-colimit description of higher direct images, a generic cohomological tool outside this unit route."
-   },
-   {
-    "node": "pqf-lem-sheaf-zero-stalks",
-    "why": "Step 1 uses the generic sheaf criterion that vanishing of all stalks implies the sheaf is zero."
-   },
-   {
-    "node": "pqf-lem-pushforward-qcoh",
-    "why": "Step 2 uses the general Tag 01LC theorem that qcqs pushforward preserves quasi-coherence."
-   }
-  ]
- },
- "tool_uses": [
-  "lem-weil-pbc-higher-direct-image-presheaf",
-  "pqf-lem-sheaf-zero-stalks",
-  "pqf-lem-pushforward-qcoh",
-  "lem-weil-pbc-higher-direct-image-presheaf",
-  "pqf-lem-sheaf-zero-stalks",
-  "pqf-lem-pushforward-qcoh"
- ],
- "reviewed": {
-  "date": "2026-10-10",
-  "by": "L",
-  "reviewer": "R-amh2313",
-  "group": "H1",
-  "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-amh2313 (reviewer sub-agent of L); spot-checked: Return 20:06 repairs checked: (1) D2 child lem-pc-affine-higher-direct-image-vanishing removed; vanishing now proved via stalk colimit of lem-weil-pbc-higher-direct-image-presheaf, affine cofinality (elementary), pqf-def-affine-morphism, lem-pc-affine-vanishing, pqf-lem-sheaf-zero-stalks (Stacks 01XC); (2) qcqs cited from lem-weil-pbc-affine-morphism-permanence (3), f_*F qcoh from pqf-lem-pushforward-qcoh (01LC) directly. Cited nodes do not cite the item (no cycle). Tool uses generic, accepted. Second reading: no missed fault."
- }
+    "lem-weil-pbc-higher-direct-image-presheaf",
+    "pqf-lem-sheaf-zero-stalks",
+    "pqf-lem-pushforward-qcoh",
+    "lem-weil-pbc-higher-direct-image-presheaf",
+    "pqf-lem-sheaf-zero-stalks",
+    "pqf-lem-pushforward-qcoh"
+  ],
+  "reviewed": {
+    "date": "2026-10-10",
+    "by": "L",
+    "reviewer": "R-amh2313",
+    "group": "H1",
+    "result": "pass",
+    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-amh2313 (reviewer sub-agent of L); spot-checked: Return 20:06 repairs checked: (1) D2 child lem-pc-affine-higher-direct-image-vanishing removed; vanishing now proved via stalk colimit of lem-weil-pbc-higher-direct-image-presheaf, affine cofinality (elementary), pqf-def-affine-morphism, lem-pc-affine-vanishing, pqf-lem-sheaf-zero-stalks (Stacks 01XC); (2) qcqs cited from lem-weil-pbc-affine-morphism-permanence (3), f_*F qcoh from pqf-lem-pushforward-qcoh (01LC) directly. Cited nodes do not cite the item (no cycle). Tool uses generic, accepted. Second reading: no missed fault."
+  },
+  "lean": {
+    "module": "WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage",
+    "declaration": "AlgebraicGeometry.Scheme.Modules.isZero_higherDirectImage_of_isAffineHom",
+    "branch": "slopmaster2",
+    "line": 1362,
+    "declarations": [
+      "AlgebraicGeometry.Scheme.Modules.isZero_higherDirectImage_of_isAffineHom",
+      "AlgebraicGeometry.Scheme.Modules.isQuasicoherent_pushforward_of_isAffineHom"
+    ],
+    "sorry_free": false,
+    "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state rests_on_sorry)"
+  }
 }

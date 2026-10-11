@@ -1,103 +1,107 @@
 {
- "id": "lem-weil-pbc-geometric-point-open-or-closed",
- "blueprint": {
-  "is": null,
-  "from": {
-   "node": "lem-weil-pbc-curve-dense-open-localization",
-   "place": "step 4 of its split (source: Lemma 095L (lemma-ses-associated-to-open), as used in the proof of Lemma 0GJA)",
-   "via": [
-    "lem-weil-pbc-open-closed-short-exact"
-   ]
+  "id": "lem-weil-pbc-geometric-point-open-or-closed",
+  "blueprint": {
+    "is": null,
+    "from": {
+      "node": "lem-weil-pbc-curve-dense-open-localization",
+      "place": "step 4 of its split (source: Lemma 095L (lemma-ses-associated-to-open), as used in the proof of Lemma 0GJA)",
+      "via": [
+        "lem-weil-pbc-open-closed-short-exact"
+      ]
+    },
+    "same_as": null
   },
-  "same_as": null
- },
- "kind": "statement",
- "title": "A field-valued point lies on the open part or on the closed complement",
- "statement": "Let $X$ be a scheme [def-weil-pbc-scheme-conventions], let $j:U\\hookrightarrow X$ be an open immersion [def-weil-open-immersion] and $i:Z\\hookrightarrow X$ a closed immersion [def-weil-scheme-morphism-properties] with $i(Z)=X\\setminus j(U)$ as sets. Let $K$ be a field and $s:\\operatorname{Spec}K\\to X$ a morphism of schemes (for instance a geometric point [def-weil-geometric-point]), and let $x\\in X$ be the image of the unique point of $\\operatorname{Spec}K$. Then exactly one of the following holds: (a) $x\\in j(U)$, and there is a unique morphism $t:\\operatorname{Spec}K\\to U$ with $j\\circ t=s$; (b) $x\\in i(Z)$, and there is a unique morphism $t:\\operatorname{Spec}K\\to Z$ with $i\\circ t=s$. In particular a geometric point $\\bar x$ of $X$ whose image lies in $i(Z)$ is $i\\circ\\bar z$ for a unique geometric point $\\bar z$ of $Z$ (with the same field), and one whose image lies in $j(U)$ is $j\\circ\\bar u$ for a unique geometric point $\\bar u$ of $U$.",
- "source": {
-  "document": "literature/stacks-project/schemes.tex",
-  "place": "Schemes, Lemma 0356 (label lemma-map-into-reduction: a morphism from a reduced scheme factors through a closed subscheme iff it does so set-theoretically), with Etale Cohomology, Lemma 095L (lemma-ses-associated-to-open), whose proof uses that a geometric point lies in U or in Z. Lean (slopmaster2): AlgebraicGeometry.existsUnique_fac_or_fac_of_range_eq_compl, WeilConjectures/SixFunctors/OpenClosed/Points.lean:53-67 (blueprint label lemma:openclosed-point-factors), sorry-free by the sorry map (closed half: AlgebraicGeometry.IsClosedImmersion.existsUnique_fac_of_field, WeilConjectures/Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean:201)"
- },
- "stmt_deps": [
-  "def-weil-pbc-scheme-conventions",
-  "def-weil-open-immersion",
-  "def-weil-scheme-morphism-properties",
-  "def-weil-geometric-point"
- ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
- "mathlib_searches": [
-  {
-   "tool": "leansearch",
-   "query": "morphism from a reduced scheme whose image lies in the range of a closed immersion factors through the closed immersion",
-   "results": "AlgebraicGeometry.IsImmersion.mk, IsClosedImmersion, IsClosedImmersion.lift (needs f.ker <= g.ker), IsClosedImmersion.lift_fac, instIsIsoSchemeToImage, specTargetImageFactorization, IsClosedImmersion.of_isPreimmersion (Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion, .AffineScheme)",
-   "date": "2026-10-09",
-   "verdict": "no match: IsClosedImmersion.lift needs the kernel inclusion f.ker <= g.ker, not the set-theoretic condition; the passage from range to kernel for a reduced source is not in Mathlib"
+  "kind": "statement",
+  "title": "A field-valued point lies on the open part or on the closed complement",
+  "statement": "Let $X$ be a scheme [def-weil-pbc-scheme-conventions], let $j:U\\hookrightarrow X$ be an open immersion [def-weil-open-immersion] and $i:Z\\hookrightarrow X$ a closed immersion [def-weil-scheme-morphism-properties] with $i(Z)=X\\setminus j(U)$ as sets. Let $K$ be a field and $s:\\operatorname{Spec}K\\to X$ a morphism of schemes (for instance a geometric point [def-weil-geometric-point]), and let $x\\in X$ be the image of the unique point of $\\operatorname{Spec}K$. Then exactly one of the following holds: (a) $x\\in j(U)$, and there is a unique morphism $t:\\operatorname{Spec}K\\to U$ with $j\\circ t=s$; (b) $x\\in i(Z)$, and there is a unique morphism $t:\\operatorname{Spec}K\\to Z$ with $i\\circ t=s$. In particular a geometric point $\\bar x$ of $X$ whose image lies in $i(Z)$ is $i\\circ\\bar z$ for a unique geometric point $\\bar z$ of $Z$ (with the same field), and one whose image lies in $j(U)$ is $j\\circ\\bar u$ for a unique geometric point $\\bar u$ of $U$.",
+  "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Schemes, Lemma 0356 (label lemma-map-into-reduction: a morphism from a reduced scheme factors through a closed subscheme iff it does so set-theoretically), with Etale Cohomology, Lemma 095L (lemma-ses-associated-to-open), whose proof uses that a geometric point lies in U or in Z. Lean (slopmaster2): AlgebraicGeometry.existsUnique_fac_or_fac_of_range_eq_compl, WeilConjectures/SixFunctors/OpenClosed/Points.lean:53-67 (blueprint label lemma:openclosed-point-factors), sorry-free by the sorry map (closed half: AlgebraicGeometry.IsClosedImmersion.existsUnique_fac_of_field, WeilConjectures/Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean:201)"
   },
-  {
-   "tool": "leanfinder",
-   "query": "a morphism Spec K -> X from the spectrum of a field factors uniquely through an open immersion or through the complementary closed immersion",
-   "results": "SpecToEquivOfLocalRing (Mathlib.AlgebraicGeometry.Stalk), genericPoint_eq_of_isOpenImmersion, specTargetImageFactorization, Scheme.SpecToEquivOfField (Mathlib.AlgebraicGeometry.ResidueField), instIsPreimmersionFromSpecStalk, instIsPreimmersionFromSpecResidueField, RationalMap.fromFunctionField_ofFunctionField",
-   "date": "2026-10-09",
-   "verdict": "no match (SpecToEquivOfField describes Spec K -> X by a point and a residue field map; no factorization through a closed immersion)"
-  },
-  {
-   "tool": "loogle",
-   "query": "AlgebraicGeometry.IsClosedImmersion, AlgebraicGeometry.IsReduced, ∃! _, _ ; and AlgebraicGeometry.IsClosedImmersion.lift",
-   "results": "first: none; second: IsClosedImmersion.lift, isIso_lift, lift_fac, lift_fac_assoc (Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion), all with the kernel hypothesis",
-   "date": "2026-10-09",
-   "verdict": "no match"
-  },
-  {
-   "tool": "grep",
-   "query": "grep -rn 'liftReduced\\|lift_of_range\\|range_subset\\|IsReduced\\|le_ker_iff_range_subset_support\\|ker_le_ker_iff_existsUnique_fac\\|existsUnique_fac' Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean Mathlib/AlgebraicGeometry/IdealSheaf/ Mathlib/AlgebraicGeometry/OpenImmersion.lean",
-   "results": "IsOpenImmersion.lift / lift_fac / lift_uniq (OpenImmersion.lean:701-708: the open half, from Set.range g ⊆ Set.range f); IsClosedImmersion.lift (ClosedImmersion.lean:210, kernel hypothesis); IdealSheafData nilradical_eq_bot / support_eq_top_iff for reduced X (IdealSheaf/Basic.lean:673-676); le_ker_iff_range_subset_support and ker_le_ker_iff_existsUnique_fac only in the source repository (WeilConjectures/Mathlib/AlgebraicGeometry/...), not in Mathlib",
-   "date": "2026-10-09",
-   "verdict": "no match: the open half is IsOpenImmersion.lift + lift_uniq, the closed half is absent"
-  }
- ],
- "mathlib_match": null,
- "status": "unsplit",
- "merged_into": null,
- "created": {
-  "by": "worker",
-  "item": "lem-weil-pbc-open-closed-short-exact",
-  "date": "2026-10-09"
- },
- "lean_audit": {
-  "master": {
-   "state": "none",
-   "decls": [],
-   "missing": [
-    "AlgebraicGeometry.existsUnique_fac_or_fac_of_range_eq_compl"
-   ]
-  },
-  "slopmaster2": {
-   "state": "closed",
-   "decls": [
-    {
-     "name": "AlgebraicGeometry.existsUnique_fac_or_fac_of_range_eq_compl",
-     "module": "WeilConjectures.SixFunctors.OpenClosed.Points",
-     "lines": [
-      40,
-      63
-     ],
-     "kind": "theorem",
-     "sorry": false
-    }
-   ],
-   "missing": [],
-   "open": []
-  }
- },
- "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1",
- "lean": {
-  "branch": "slopmaster2",
-  "declarations": [
-   "AlgebraicGeometry.existsUnique_fac_or_fac_of_range_eq_compl"
+  "stmt_deps": [
+    "def-weil-pbc-scheme-conventions",
+    "def-weil-open-immersion",
+    "def-weil-scheme-morphism-properties",
+    "def-weil-geometric-point"
   ],
-  "note": "attached by the lead at the review of lem-weil-pbc-open-closed-short-exact (2026-10-09), found by its opus worker: a morphism Spec K → X, K a field, factors uniquely through the open immersion j or uniquely through the closed immersion i when range i = (range j)^c; sorry-free on the full map"
- }
+  "proof": [],
+  "proof_deps": [],
+  "proof_origin": null,
+  "mathlib_searches": [
+    {
+      "tool": "leansearch",
+      "query": "morphism from a reduced scheme whose image lies in the range of a closed immersion factors through the closed immersion",
+      "results": "AlgebraicGeometry.IsImmersion.mk, IsClosedImmersion, IsClosedImmersion.lift (needs f.ker <= g.ker), IsClosedImmersion.lift_fac, instIsIsoSchemeToImage, specTargetImageFactorization, IsClosedImmersion.of_isPreimmersion (Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion, .AffineScheme)",
+      "date": "2026-10-09",
+      "verdict": "no match: IsClosedImmersion.lift needs the kernel inclusion f.ker <= g.ker, not the set-theoretic condition; the passage from range to kernel for a reduced source is not in Mathlib"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "a morphism Spec K -> X from the spectrum of a field factors uniquely through an open immersion or through the complementary closed immersion",
+      "results": "SpecToEquivOfLocalRing (Mathlib.AlgebraicGeometry.Stalk), genericPoint_eq_of_isOpenImmersion, specTargetImageFactorization, Scheme.SpecToEquivOfField (Mathlib.AlgebraicGeometry.ResidueField), instIsPreimmersionFromSpecStalk, instIsPreimmersionFromSpecResidueField, RationalMap.fromFunctionField_ofFunctionField",
+      "date": "2026-10-09",
+      "verdict": "no match (SpecToEquivOfField describes Spec K -> X by a point and a residue field map; no factorization through a closed immersion)"
+    },
+    {
+      "tool": "loogle",
+      "query": "AlgebraicGeometry.IsClosedImmersion, AlgebraicGeometry.IsReduced, ∃! _, _ ; and AlgebraicGeometry.IsClosedImmersion.lift",
+      "results": "first: none; second: IsClosedImmersion.lift, isIso_lift, lift_fac, lift_fac_assoc (Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion), all with the kernel hypothesis",
+      "date": "2026-10-09",
+      "verdict": "no match"
+    },
+    {
+      "tool": "grep",
+      "query": "grep -rn 'liftReduced\\|lift_of_range\\|range_subset\\|IsReduced\\|le_ker_iff_range_subset_support\\|ker_le_ker_iff_existsUnique_fac\\|existsUnique_fac' Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean Mathlib/AlgebraicGeometry/IdealSheaf/ Mathlib/AlgebraicGeometry/OpenImmersion.lean",
+      "results": "IsOpenImmersion.lift / lift_fac / lift_uniq (OpenImmersion.lean:701-708: the open half, from Set.range g ⊆ Set.range f); IsClosedImmersion.lift (ClosedImmersion.lean:210, kernel hypothesis); IdealSheafData nilradical_eq_bot / support_eq_top_iff for reduced X (IdealSheaf/Basic.lean:673-676); le_ker_iff_range_subset_support and ker_le_ker_iff_existsUnique_fac only in the source repository (WeilConjectures/Mathlib/AlgebraicGeometry/...), not in Mathlib",
+      "date": "2026-10-09",
+      "verdict": "no match: the open half is IsOpenImmersion.lift + lift_uniq, the closed half is absent"
+    }
+  ],
+  "mathlib_match": null,
+  "status": "unsplit",
+  "merged_into": null,
+  "created": {
+    "by": "worker",
+    "item": "lem-weil-pbc-open-closed-short-exact",
+    "date": "2026-10-09"
+  },
+  "lean_audit": {
+    "master": {
+      "state": "none",
+      "decls": [],
+      "missing": [
+        "AlgebraicGeometry.existsUnique_fac_or_fac_of_range_eq_compl"
+      ]
+    },
+    "slopmaster2": {
+      "state": "closed",
+      "decls": [
+        {
+          "name": "AlgebraicGeometry.existsUnique_fac_or_fac_of_range_eq_compl",
+          "module": "WeilConjectures.SixFunctors.OpenClosed.Points",
+          "lines": [
+            40,
+            63
+          ],
+          "kind": "theorem",
+          "sorry": false
+        }
+      ],
+      "missing": [],
+      "open": []
+    }
+  },
+  "chapter": "sec-proper-base-change",
+  "unit": "sk-thm-p1",
+  "lean": {
+    "module": "WeilConjectures.SixFunctors.OpenClosed.Points",
+    "declaration": "AlgebraicGeometry.existsUnique_fac_or_fac_of_range_eq_compl",
+    "branch": "slopmaster2",
+    "line": 40,
+    "declarations": [
+      "AlgebraicGeometry.existsUnique_fac_or_fac_of_range_eq_compl"
+    ],
+    "sorry_free": true,
+    "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state closed)"
+  }
 }

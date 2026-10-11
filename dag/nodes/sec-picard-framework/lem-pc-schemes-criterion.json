@@ -1,122 +1,134 @@
 {
- "id": "lem-pc-schemes-criterion",
- "blueprint": {
-  "is": "lem-pc-schemes-criterion",
-  "from": null,
-  "same_as": null
- },
- "kind": "statement",
- "title": "A representability criterion via covers",
- "statement": "(Schemes, Lemma 26.15.4, Tag\n[01JJ](https://stacks.math.columbia.edu/tag/01JJ).) Let\n$F:(\\mathit{Sch}/S)^{\\mathrm{op}}\\to\\textit{Sets}$ be a functor and suppose:\n\n1. **(1)** $F$ satisfies the sheaf property for the Zariski topology;\n1. **(2)(a)** there exists a family $(F_i)_{i\\in I}$ of subfunctors of\n$F$ each of which is representable;\n1. **(2)(b)** each inclusion $F_i\\subseteq F$ is\nrepresentable by open immersions;\n1. **(2)(c)** the family $(F_i)_{i\\in I}$ covers $F$.\n\nThen $F$ is representable by a scheme over $S$.",
- "source": {
-  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-prop-picard-schemes-criterion/lem-pc-schemes-criterion.md",
-  "place": "node lem-pc-schemes-criterion, order 777",
-  "external": [
-   {
-    "document": "Stacks Project",
-    "place": "Tag 01JJ"
-   }
-  ]
- },
- "stmt_deps": [
-  "def-pc-representable-functor",
-  "def-pc-subfunctor"
- ],
- "proof": [
-  {
-   "text": "For $i\\in I$ choose a scheme $X_i$ over $S$ representing $F_i$ and the\nuniversal element $\\xi_i\\in F_i(X_i)\\subseteq F(X_i)$, and let\n$U_{ij}\\subseteq X_i$ be the open subscheme given by (2)(b) for the\ninclusion $F_j\\subseteq F$: a morphism $T\\to X_i$ factors through\n$U_{ij}$ if and only if the pullback of $\\xi_i$ to $T$ lies in\n$F_j(T)$. In particular $\\xi_i|_{U_{ij}}\\in F_j(U_{ij})$, so by the\nrepresentability of $F_j$ the element $\\xi_i|_{U_{ij}}$ comes from a\nunique morphism\n\n$$\n\\varphi_{ij}:U_{ij}\\longrightarrow X_j\n$$\n\nwith $\\varphi_{ij}^*\\xi_j=\\xi_i|_{U_{ij}}$. The element\n$\\varphi_{ij}^*\\xi_j=\\xi_i|_{U_{ij}}$ of $F(U_{ij})$ lies in\n$F_i(U_{ij})$, so by (2)(b) for the inclusion $F_i\\subseteq F$ the\nmorphism $\\varphi_{ij}$ factors through the largest open\n$U_{ji}\\subseteq X_j$ with $\\xi_j|_{U_{ji}}\\in F_i(U_{ji})$: we get\n$\\varphi_{ij}(U_{ij})\\subseteq U_{ji}$, i.e. $\\varphi_{ij}$ factors\nas $U_{ij}\\to U_{ji}\\hookrightarrow X_j$. The\ncomposite\n\n$$\n\\varphi_{ji}\\circ\\varphi_{ij}:U_{ij}\\longrightarrow U_{ji}\\subseteq X_i\n$$\n\npulls $\\xi_i$ back to\n$\\varphi_{ij}^*\\varphi_{ji}^*\\xi_j=\\varphi_{ij}^*\\xi_j=\\xi_i|_{U_{ij}}$\n(here we used (2)(b) twice, i.e. that the two open embeddings\n$U_{ji}\\hookrightarrow X_j$ and $U_{ij}\\hookrightarrow X_i$ respect\nthe elements), so by the uniqueness of the morphism representing\n$\\xi_i$ over $X_i$: $\\varphi_{ji}\\circ\\varphi_{ij} =\\mathrm{id}_{U_{ij}}$; similarly\n$\\varphi_{ij}\\circ\\varphi_{ji}=\\mathrm{id}_{U_{ji}}$. Hence the\n$\\varphi_{ij}:U_{ij}\\to U_{ji}$ are mutually inverse isomorphisms.",
-   "uses": [],
-   "elementary": null
+  "id": "lem-pc-schemes-criterion",
+  "blueprint": {
+    "is": "lem-pc-schemes-criterion",
+    "from": null,
+    "same_as": null
   },
-  {
-   "text": "The compatibility condition of the classical glueing lemma for schemes\nis the equality\n\n$$\n\\varphi_{ij}^{-1}(U_{ji}\\cap U_{jk})=U_{ij}\\cap U_{ik} :\n$$\n\nboth sides are the largest open $W\\subseteq U_{ij}$ with\n$\\xi_i|_W\\in F_k(W)$ (for the left: $U_{ji}\\cap U_{jk}$ is the\nlargest open $V\\subseteq U_{ji}$ with $\\xi_j|_V\\in F_k(V)$, and\n$\\varphi_{ij}$ pulls back $\\xi_j$ to $\\xi_i$; for the right: by\ndefinition of $U_{ik}$). Moreover the cocycle condition\n$\\varphi_{jk}\\circ\\varphi_{ij}\\circ\\varphi_{ik}^{-1} =\\mathrm{id}$ on $U_{ij}\\cap U_{ik}$ holds trivially (both sides pull\n$\\xi_k$ back to $\\xi_i$ there and the representing morphism is\nunique). By the glueing lemma for schemes (Schemes, Lemma 26.14.2:\na scheme $X$ with an open covering $X=\\bigcup_{i}U_i$ and isomorphisms\n$\\varphi_i:X_i\\stackrel{\\sim}{\\to}U_i$ with the compatibility above\nglues to a scheme; note the family is a set: the $X_i$ form a set) we\nobtain a scheme $X$ over $S$ with open immersions\n$X_i\\hookrightarrow X$ whose intersections are the $U_{ij}$.",
-   "uses": [],
-   "elementary": null
+  "kind": "statement",
+  "title": "A representability criterion via covers",
+  "statement": "(Schemes, Lemma 26.15.4, Tag\n[01JJ](https://stacks.math.columbia.edu/tag/01JJ).) Let\n$F:(\\mathit{Sch}/S)^{\\mathrm{op}}\\to\\textit{Sets}$ be a functor and suppose:\n\n1. **(1)** $F$ satisfies the sheaf property for the Zariski topology;\n1. **(2)(a)** there exists a family $(F_i)_{i\\in I}$ of subfunctors of\n$F$ each of which is representable;\n1. **(2)(b)** each inclusion $F_i\\subseteq F$ is\nrepresentable by open immersions;\n1. **(2)(c)** the family $(F_i)_{i\\in I}$ covers $F$.\n\nThen $F$ is representable by a scheme over $S$.",
+  "source": {
+    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-prop-picard-schemes-criterion/lem-pc-schemes-criterion.md",
+    "place": "node lem-pc-schemes-criterion, order 777",
+    "external": [
+      {
+        "document": "Stacks Project",
+        "place": "Tag 01JJ"
+      }
+    ]
   },
-  {
-   "text": "It remains to identify $X$ as a scheme representing $F$. The\nelements $\\xi_i\\in F(X_i)=F(U_i)$ agree on the overlaps\n($\\varphi_{ij}^*\\xi_j=\\xi_i|_{U_{ij}}$), so by the Zariski sheaf\nproperty (1) of $F$ there is a unique element\n$\\xi\\in F(X)$ with $\\xi|_{U_i}=\\xi_i$; this gives a natural\ntransformation $h_X\\to F$, $a^*\\xi:=\\xi\\circ a$ for $a:T\\to X$. It is\ninjective: if $a,b:T\\to X$ with $a^*\\xi=b^*\\xi$, then the open\n$T_i:=a^{-1}(U_i)$ is the largest open over which the pullback of\n$\\xi$ lies in $F_i$ (a property determined by\n$a^*\\xi=b^*\\xi$), and over $T_i$ both $a$ and $b$ factor through\n$X_i$, hence agree there because $X_i$ represents $F_i$ and\n$\\xi_i$ is universal: $a|_{T_i}=b|_{T_i}$; the Zariski sheaf property\nof $h_X$ gives $a=b$. It is surjective: for $t\\in F(T)$, the opens\n$T_i:=t^{-1}(F_i)\\subseteq T$ – the largest opens with\n$t|_{T_i}\\in F_i(T_i)$, well defined by (2)(b) – cover $T$ by\n(2)(c); each $t|_{T_i}$ comes from a unique $a_i:T_i\\to X_i$ (the\nrepresentability of $F_i$); on $T_i\\cap T_j$ both $a_i$ and $a_j$\npull back the same element of $F$ (namely $t$), so by the\nrepresentability of $F_i$ (and by (2)(b)) they agree after the open\nembeddings; the $a_i$'s glue to a unique $a:T\\to X$ (the Zariski\nsheaf property of $h_X$) and the construction gives\n$a^*\\xi=t$. Hence $h_X\\cong F$ and $F$ is representable.",
-   "uses": [],
-   "elementary": null
-  }
- ],
- "proof_deps": [],
- "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-prop-picard-schemes-criterion/lem-pc-schemes-criterion.md",
-  "place": "## Proof"
- },
- "mathlib_searches": [
-  {
-   "tool": "text search of the local Mathlib checkout (0df444a360)",
-   "query": "AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable",
-   "results": [
-    "Mathlib.AlgebraicGeometry.Sites.Representability:210 (theorem)"
-   ],
-   "date": "2026-10-08"
-  }
- ],
- "mathlib_match": null,
- "status": "imported",
- "merged_into": null,
- "import_flags": [
-  "long_proof_few_deps",
-  "lean_not_found",
-  "lean_names_mathlib_declaration"
- ],
- "blueprint_kind": "lemma",
- "blueprint_order": 777,
- "blueprint_uses": [
-  "def-pc-representable-functor",
-  "def-pc-subfunctor"
- ],
- "blueprint_lean": [
-  "AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable"
- ],
- "blueprint_lean_not_found": [
-  "AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable"
- ],
- "uses_not_cited": [
-  "def-pc-representable-functor",
-  "def-pc-subfunctor"
- ],
- "proof_split_by": "paragraphs",
- "lean_audit": {
-  "master": {
-   "state": "none",
-   "decls": [],
-   "missing": [
-    "AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable"
-   ]
-  },
-  "slopmaster2": {
-   "state": "closed",
-   "decls": [
+  "stmt_deps": [
+    "def-pc-representable-functor",
+    "def-pc-subfunctor"
+  ],
+  "proof": [
     {
-     "name": "AlgebraicGeometry.isRepresentable_of_isSheaf_of_zariskiCovers",
-     "module": "WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Representability",
-     "lines": [
-      682,
-      726
-     ],
-     "kind": "theorem",
-     "sorry": false
+      "text": "For $i\\in I$ choose a scheme $X_i$ over $S$ representing $F_i$ and the\nuniversal element $\\xi_i\\in F_i(X_i)\\subseteq F(X_i)$, and let\n$U_{ij}\\subseteq X_i$ be the open subscheme given by (2)(b) for the\ninclusion $F_j\\subseteq F$: a morphism $T\\to X_i$ factors through\n$U_{ij}$ if and only if the pullback of $\\xi_i$ to $T$ lies in\n$F_j(T)$. In particular $\\xi_i|_{U_{ij}}\\in F_j(U_{ij})$, so by the\nrepresentability of $F_j$ the element $\\xi_i|_{U_{ij}}$ comes from a\nunique morphism\n\n$$\n\\varphi_{ij}:U_{ij}\\longrightarrow X_j\n$$\n\nwith $\\varphi_{ij}^*\\xi_j=\\xi_i|_{U_{ij}}$. The element\n$\\varphi_{ij}^*\\xi_j=\\xi_i|_{U_{ij}}$ of $F(U_{ij})$ lies in\n$F_i(U_{ij})$, so by (2)(b) for the inclusion $F_i\\subseteq F$ the\nmorphism $\\varphi_{ij}$ factors through the largest open\n$U_{ji}\\subseteq X_j$ with $\\xi_j|_{U_{ji}}\\in F_i(U_{ji})$: we get\n$\\varphi_{ij}(U_{ij})\\subseteq U_{ji}$, i.e. $\\varphi_{ij}$ factors\nas $U_{ij}\\to U_{ji}\\hookrightarrow X_j$. The\ncomposite\n\n$$\n\\varphi_{ji}\\circ\\varphi_{ij}:U_{ij}\\longrightarrow U_{ji}\\subseteq X_i\n$$\n\npulls $\\xi_i$ back to\n$\\varphi_{ij}^*\\varphi_{ji}^*\\xi_j=\\varphi_{ij}^*\\xi_j=\\xi_i|_{U_{ij}}$\n(here we used (2)(b) twice, i.e. that the two open embeddings\n$U_{ji}\\hookrightarrow X_j$ and $U_{ij}\\hookrightarrow X_i$ respect\nthe elements), so by the uniqueness of the morphism representing\n$\\xi_i$ over $X_i$: $\\varphi_{ji}\\circ\\varphi_{ij} =\\mathrm{id}_{U_{ij}}$; similarly\n$\\varphi_{ij}\\circ\\varphi_{ji}=\\mathrm{id}_{U_{ji}}$. Hence the\n$\\varphi_{ij}:U_{ij}\\to U_{ji}$ are mutually inverse isomorphisms.",
+      "uses": [],
+      "elementary": null
     },
     {
-     "name": "AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable",
-     "module": "Mathlib.AlgebraicGeometry.Sites.Representability",
-     "lines": [
-      0,
-      0
-     ],
-     "kind": "theorem",
-     "sorry": false,
-     "library": true
+      "text": "The compatibility condition of the classical glueing lemma for schemes\nis the equality\n\n$$\n\\varphi_{ij}^{-1}(U_{ji}\\cap U_{jk})=U_{ij}\\cap U_{ik} :\n$$\n\nboth sides are the largest open $W\\subseteq U_{ij}$ with\n$\\xi_i|_W\\in F_k(W)$ (for the left: $U_{ji}\\cap U_{jk}$ is the\nlargest open $V\\subseteq U_{ji}$ with $\\xi_j|_V\\in F_k(V)$, and\n$\\varphi_{ij}$ pulls back $\\xi_j$ to $\\xi_i$; for the right: by\ndefinition of $U_{ik}$). Moreover the cocycle condition\n$\\varphi_{jk}\\circ\\varphi_{ij}\\circ\\varphi_{ik}^{-1} =\\mathrm{id}$ on $U_{ij}\\cap U_{ik}$ holds trivially (both sides pull\n$\\xi_k$ back to $\\xi_i$ there and the representing morphism is\nunique). By the glueing lemma for schemes (Schemes, Lemma 26.14.2:\na scheme $X$ with an open covering $X=\\bigcup_{i}U_i$ and isomorphisms\n$\\varphi_i:X_i\\stackrel{\\sim}{\\to}U_i$ with the compatibility above\nglues to a scheme; note the family is a set: the $X_i$ form a set) we\nobtain a scheme $X$ over $S$ with open immersions\n$X_i\\hookrightarrow X$ whose intersections are the $U_{ij}$.",
+      "uses": [],
+      "elementary": null
+    },
+    {
+      "text": "It remains to identify $X$ as a scheme representing $F$. The\nelements $\\xi_i\\in F(X_i)=F(U_i)$ agree on the overlaps\n($\\varphi_{ij}^*\\xi_j=\\xi_i|_{U_{ij}}$), so by the Zariski sheaf\nproperty (1) of $F$ there is a unique element\n$\\xi\\in F(X)$ with $\\xi|_{U_i}=\\xi_i$; this gives a natural\ntransformation $h_X\\to F$, $a^*\\xi:=\\xi\\circ a$ for $a:T\\to X$. It is\ninjective: if $a,b:T\\to X$ with $a^*\\xi=b^*\\xi$, then the open\n$T_i:=a^{-1}(U_i)$ is the largest open over which the pullback of\n$\\xi$ lies in $F_i$ (a property determined by\n$a^*\\xi=b^*\\xi$), and over $T_i$ both $a$ and $b$ factor through\n$X_i$, hence agree there because $X_i$ represents $F_i$ and\n$\\xi_i$ is universal: $a|_{T_i}=b|_{T_i}$; the Zariski sheaf property\nof $h_X$ gives $a=b$. It is surjective: for $t\\in F(T)$, the opens\n$T_i:=t^{-1}(F_i)\\subseteq T$ – the largest opens with\n$t|_{T_i}\\in F_i(T_i)$, well defined by (2)(b) – cover $T$ by\n(2)(c); each $t|_{T_i}$ comes from a unique $a_i:T_i\\to X_i$ (the\nrepresentability of $F_i$); on $T_i\\cap T_j$ both $a_i$ and $a_j$\npull back the same element of $F$ (namely $t$), so by the\nrepresentability of $F_i$ (and by (2)(b)) they agree after the open\nembeddings; the $a_i$'s glue to a unique $a:T\\to X$ (the Zariski\nsheaf property of $h_X$) and the construction gives\n$a^*\\xi=t$. Hence $h_X\\cong F$ and $F$ is representable.",
+      "uses": [],
+      "elementary": null
     }
-   ],
-   "missing": [],
-   "open": []
+  ],
+  "proof_deps": [],
+  "proof_origin": {
+    "by": "agent",
+    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-prop-picard-schemes-criterion/lem-pc-schemes-criterion.md",
+    "place": "## Proof"
+  },
+  "mathlib_searches": [
+    {
+      "tool": "text search of the local Mathlib checkout (0df444a360)",
+      "query": "AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable",
+      "results": [
+        "Mathlib.AlgebraicGeometry.Sites.Representability:210 (theorem)"
+      ],
+      "date": "2026-10-08"
+    }
+  ],
+  "mathlib_match": null,
+  "status": "imported",
+  "merged_into": null,
+  "import_flags": [
+    "long_proof_few_deps",
+    "lean_not_found",
+    "lean_names_mathlib_declaration"
+  ],
+  "blueprint_kind": "lemma",
+  "blueprint_order": 777,
+  "blueprint_uses": [
+    "def-pc-representable-functor",
+    "def-pc-subfunctor"
+  ],
+  "blueprint_lean": [
+    "AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable"
+  ],
+  "blueprint_lean_not_found": [
+    "AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable"
+  ],
+  "uses_not_cited": [
+    "def-pc-representable-functor",
+    "def-pc-subfunctor"
+  ],
+  "proof_split_by": "paragraphs",
+  "lean_audit": {
+    "master": {
+      "state": "none",
+      "decls": [],
+      "missing": [
+        "AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable"
+      ]
+    },
+    "slopmaster2": {
+      "state": "closed",
+      "decls": [
+        {
+          "name": "AlgebraicGeometry.isRepresentable_of_isSheaf_of_zariskiCovers",
+          "module": "WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Representability",
+          "lines": [
+            682,
+            726
+          ],
+          "kind": "theorem",
+          "sorry": false
+        },
+        {
+          "name": "AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable",
+          "module": "Mathlib.AlgebraicGeometry.Sites.Representability",
+          "lines": [
+            0,
+            0
+          ],
+          "kind": "theorem",
+          "sorry": false,
+          "library": true
+        }
+      ],
+      "missing": [],
+      "open": []
+    }
+  },
+  "chapter": "sec-picard-framework",
+  "unit": "sk-prop-picard-schemes-criterion",
+  "lean": {
+    "module": "WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Representability",
+    "declaration": "AlgebraicGeometry.isRepresentable_of_isSheaf_of_zariskiCovers",
+    "branch": "slopmaster2",
+    "line": 682,
+    "declarations": [
+      "AlgebraicGeometry.isRepresentable_of_isSheaf_of_zariskiCovers",
+      "AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable"
+    ],
+    "sorry_free": true,
+    "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state closed)"
   }
- },
- "chapter": "sec-picard-framework",
- "unit": "sk-prop-picard-schemes-criterion"
 }

@@ -1,222 +1,226 @@
 {
- "id": "def-weil-pbc-derived-exchange",
- "blueprint": {
-  "is": "def-weil-pbc-derived-exchange",
-  "from": null,
-  "same_as": null
- },
- "kind": "definition",
- "title": "Derived exchange map",
- "statement": "Let $\\square=(f,f',g,g',\\alpha)$ be a cartesian square of schemes [def-weil-pbc-cartesian-square],\n\n$$\n \\begin{array}{ccc}\n X'&\\xrightarrow{g'}&X\\\\\n f'\\downarrow&&\\downarrow f\\\\\n Y'&\\xrightarrow{g}&Y\n \\end{array}\n$$\n\n(of it only the equality $fg'=gf'$ enters, through $\\theta_\\square$). On the bounded below derived categories of etale abelian sheaves [def-weil-pbc-derived-categories] use the inverse images $f^{-1},g^{-1},f'^{-1},g'^{-1}$ [def-weil-pbc-derived-inverse-image] (of the sheaf-level inverse images [def-weil-pbc-inverse-image]), the derived direct images $Rf_*,Rf'_*$ [def-weil-pbc-direct-image], the derived adjunctions $f^{-1}\\dashv Rf_*$ with counit $\\varepsilon_f:f^{-1}Rf_*\\to\\mathrm{id}$ and $f'^{-1}\\dashv Rf'_*$ with unit $\\eta_{f'}:\\mathrm{id}\\to Rf'_*f'^{-1}$ [prop-weil-pbc-derived-inverse-image-adjunction], and the derived square isomorphism $\\theta^D_\\square:f'^{-1}g^{-1}\\xrightarrow{\\sim}g'^{-1}f^{-1}$ [def-weil-pbc-derived-square-iso]. The *derived exchange transformation*\n\n$$\n \\Ex_\\square:g^{-1}Rf_*\\longrightarrow Rf'_*g'^{-1}\\qquad\\text{of functors }\\Dplus(X_{\\Et})\\to\\Dplus(Y'_{\\Et})\n$$\n\nis the mate [def-weil-pbc-adjunction-mate] of $\\theta^D_\\square$ with respect to the adjunctions $f^{-1}\\dashv Rf_*$ and $f'^{-1}\\dashv Rf'_*$ and the functors $G=g^{-1}$, $H=g'^{-1}$; that is, for $K\\in\\Dplus(X_{\\Et})$ the *derived exchange morphism* $\\Ex_{\\square,K}:g^{-1}Rf_*K\\to Rf'_*g'^{-1}K$ is the morphism whose transpose under $f'^{-1}\\dashv Rf'_*$ is the composite\n\n$$\n f'^{-1}g^{-1}Rf_*K\\xrightarrow{\\theta^D_{\\square,Rf_*K}}\n g'^{-1}f^{-1}Rf_*K\\xrightarrow{g'^{-1}\\varepsilon_{f,K}}g'^{-1}K,\n$$\n\nexplicitly\n\n$$\n g^{-1}Rf_*K\\xrightarrow{\\eta_{f',\\,g^{-1}Rf_*K}}Rf'_*f'^{-1}g^{-1}Rf_*K\\xrightarrow{Rf'_*\\theta^D_{\\square,Rf_*K}}Rf'_*g'^{-1}f^{-1}Rf_*K\\xrightarrow{Rf'_*g'^{-1}\\varepsilon_{f,K}}Rf'_*g'^{-1}K .\n$$\n\nBeing a natural transformation, $\\Ex_\\square$ is natural in $K$. The computation of $\\Ex_{\\square,K}$ on a K-injective resolution by the underived exchange morphism applied term by term is the statement [lem-weil-pbc-derived-exchange-termwise], not part of this definition.",
- "source": {
-  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-def-exchange/def-weil-pbc-derived-exchange.md",
-  "place": "node def-weil-pbc-derived-exchange, order 1040"
- },
- "stmt_deps": [
-  "def-weil-pbc-cartesian-square",
-  "def-weil-pbc-derived-categories",
-  "def-weil-pbc-inverse-image",
-  "def-weil-pbc-derived-inverse-image",
-  "def-weil-pbc-direct-image",
-  "prop-weil-pbc-derived-inverse-image-adjunction",
-  "def-weil-pbc-derived-square-iso",
-  "def-weil-pbc-adjunction-mate"
- ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
- "mathlib_searches": [
-  {
-   "tool": "grep",
-   "query": "grep -rln 'base change map\\|baseChangeMap\\|BaseChange\\|exchange' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Sites ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology",
-   "results": "only BaseChange of coverings/precoverages and monoidal 'exchange' lemmas (Algebra/Homology/Monoidal.lean, CategoryTheory/Sites/Point/Monoidal.lean); no cohomological base change map of a square of sites",
-   "date": "2026-10-09",
-   "verdict": "no match"
+  "id": "def-weil-pbc-derived-exchange",
+  "blueprint": {
+    "is": "def-weil-pbc-derived-exchange",
+    "from": null,
+    "same_as": null
   },
-  {
-   "tool": "grep",
-   "query": "grep -rln 'mapDerivedCategoryPlus\\|derivedPlus\\|derivedAdjunctionPlus' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib; grep -rn 'smallEtaleTopology' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology",
-   "results": "none: Mathlib has neither the inverse image on D^+ nor the D^+ derived adjunction nor etale derived categories; the mate is CategoryTheory.mateEquiv (node def-weil-pbc-adjunction-mate)",
-   "date": "2026-10-09",
-   "verdict": "no match"
+  "kind": "definition",
+  "title": "Derived exchange map",
+  "statement": "Let $\\square=(f,f',g,g',\\alpha)$ be a cartesian square of schemes [def-weil-pbc-cartesian-square],\n\n$$\n \\begin{array}{ccc}\n X'&\\xrightarrow{g'}&X\\\\\n f'\\downarrow&&\\downarrow f\\\\\n Y'&\\xrightarrow{g}&Y\n \\end{array}\n$$\n\n(of it only the equality $fg'=gf'$ enters, through $\\theta_\\square$). On the bounded below derived categories of etale abelian sheaves [def-weil-pbc-derived-categories] use the inverse images $f^{-1},g^{-1},f'^{-1},g'^{-1}$ [def-weil-pbc-derived-inverse-image] (of the sheaf-level inverse images [def-weil-pbc-inverse-image]), the derived direct images $Rf_*,Rf'_*$ [def-weil-pbc-direct-image], the derived adjunctions $f^{-1}\\dashv Rf_*$ with counit $\\varepsilon_f:f^{-1}Rf_*\\to\\mathrm{id}$ and $f'^{-1}\\dashv Rf'_*$ with unit $\\eta_{f'}:\\mathrm{id}\\to Rf'_*f'^{-1}$ [prop-weil-pbc-derived-inverse-image-adjunction], and the derived square isomorphism $\\theta^D_\\square:f'^{-1}g^{-1}\\xrightarrow{\\sim}g'^{-1}f^{-1}$ [def-weil-pbc-derived-square-iso]. The *derived exchange transformation*\n\n$$\n \\Ex_\\square:g^{-1}Rf_*\\longrightarrow Rf'_*g'^{-1}\\qquad\\text{of functors }\\Dplus(X_{\\Et})\\to\\Dplus(Y'_{\\Et})\n$$\n\nis the mate [def-weil-pbc-adjunction-mate] of $\\theta^D_\\square$ with respect to the adjunctions $f^{-1}\\dashv Rf_*$ and $f'^{-1}\\dashv Rf'_*$ and the functors $G=g^{-1}$, $H=g'^{-1}$; that is, for $K\\in\\Dplus(X_{\\Et})$ the *derived exchange morphism* $\\Ex_{\\square,K}:g^{-1}Rf_*K\\to Rf'_*g'^{-1}K$ is the morphism whose transpose under $f'^{-1}\\dashv Rf'_*$ is the composite\n\n$$\n f'^{-1}g^{-1}Rf_*K\\xrightarrow{\\theta^D_{\\square,Rf_*K}}\n g'^{-1}f^{-1}Rf_*K\\xrightarrow{g'^{-1}\\varepsilon_{f,K}}g'^{-1}K,\n$$\n\nexplicitly\n\n$$\n g^{-1}Rf_*K\\xrightarrow{\\eta_{f',\\,g^{-1}Rf_*K}}Rf'_*f'^{-1}g^{-1}Rf_*K\\xrightarrow{Rf'_*\\theta^D_{\\square,Rf_*K}}Rf'_*g'^{-1}f^{-1}Rf_*K\\xrightarrow{Rf'_*g'^{-1}\\varepsilon_{f,K}}Rf'_*g'^{-1}K .\n$$\n\nBeing a natural transformation, $\\Ex_\\square$ is natural in $K$. The computation of $\\Ex_{\\square,K}$ on a K-injective resolution by the underived exchange morphism applied term by term is the statement [lem-weil-pbc-derived-exchange-termwise], not part of this definition.",
+  "source": {
+    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-def-exchange/def-weil-pbc-derived-exchange.md",
+    "place": "node def-weil-pbc-derived-exchange, order 1040"
   },
-  {
-   "tool": "leansearch",
-   "query": "base change morphism g^* Rf_* → Rf'_* g'^* for a cartesian square",
-   "results": "CategoryTheory.TwoSquare.lanBaseChange / isIso_lanBaseChange_app (Mathlib.CategoryTheory.GuitartExact.KanExtension: base change of left Kan extensions, not sheaves); MorphismProperty.IsStableUnderBaseChangeAlong.of_isPullback; LinearMap.baseChange_comp",
-   "date": "2026-10-09",
-   "verdict": "no match"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "base change morphism for derived pushforward of sheaves along a cartesian square of schemes",
-   "results": "SheafOfModules.pullbackComp; SheafOfModules.pushforwardComp_hom_app_val_app; Scheme.Modules.pushforwardComp; SheafOfModules.pushforwardNatTrans (sheaf level, no derived base change map)",
-   "date": "2026-10-09",
-   "verdict": "no match"
-  },
-  {
-   "tool": "grep",
-   "query": "rg -ln 'mateEquiv' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry; rg -n 'mateEquiv' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Adjunction/Mates.lean",
-   "results": "no use of mateEquiv for sheaves or derived categories; the general mate is CategoryTheory.mateEquiv (Adjunction/Mates.lean:84), already carried by def-weil-pbc-adjunction-mate",
-   "date": "2026-10-09",
-   "verdict": "no match; split unchanged"
-  }
- ],
- "mathlib_match": null,
- "status": "split",
- "merged_into": null,
- "import_flags": [
-  "detailed_form"
- ],
- "blueprint_kind": "definition",
- "blueprint_order": 1040,
- "blueprint_uses": [
-  "def-weil-pbc-cartesian-square",
-  "def-weil-pbc-derived-categories",
-  "def-weil-pbc-direct-image",
-  "def-weil-pbc-inverse-image",
-  "def-weil-pbc-kinjective-resolutions",
-  "def-weil-pbc-underived-exchange"
- ],
- "lean": {
-  "branch": "slopmaster2",
-  "declarations": [
-   "AlgebraicGeometry.Etale.derivedBaseChangeMapPlus",
-   "AlgebraicGeometry.Etale.baseChange"
+  "stmt_deps": [
+    "def-weil-pbc-cartesian-square",
+    "def-weil-pbc-derived-categories",
+    "def-weil-pbc-inverse-image",
+    "def-weil-pbc-derived-inverse-image",
+    "def-weil-pbc-direct-image",
+    "prop-weil-pbc-derived-inverse-image-adjunction",
+    "def-weil-pbc-derived-square-iso",
+    "def-weil-pbc-adjunction-mate"
   ],
-  "note": "attached by the lead at review (2026-10-09): the unit's Lean `Etale.baseChange` (BC on D^+ as unit, square transport, counit; equal to the mateEquiv form by baseChange_app_eq_mateEquiv) added beside the blueprint's derivedBaseChangeMapPlus; both sorry-free"
- },
- "blueprint_lean": [
-  "AlgebraicGeometry.Etale.derivedBaseChangeMapPlus"
- ],
- "uses_not_cited": [
-  "def-weil-pbc-derived-categories",
-  "def-weil-pbc-direct-image"
- ],
- "blueprint_sketch": [
-  {
-   "statement": "For $K\\in D^+(X_{\\mathrm{et}})$ choose an injective resolution\n$K\\xrightarrow{\\simeq}I^\\bullet$. Apply\n$\\operatorname{Ex}_{\\square,I^r}$ in every degree and use the naturality\nlemma to obtain a morphism of complexes\n\n$$\ng^{-1}f_*I^\\bullet\\longrightarrow f'_*g'^{-1}I^\\bullet.\n$$\n\nChoose a K-injective replacement\n$g'^{-1}I^\\bullet\\xrightarrow{\\simeq}J^\\bullet$ in the Grothendieck\ncategory of etale abelian sheaves on $X'$. Compose the displayed map with\n$f'_*g'^{-1}I^\\bullet\\to f'_*J^\\bullet$ and define\n\n$$\n\\operatorname{Ex}_{\\square,K}:g^{-1}f_*I^\\bullet\\longrightarrow f'_*J^\\bullet\n$$\n\nto be its class in $D^+(Y'_{\\mathrm{et}})$. The target complex is a model\nfor $Rf'_*g'^{-1}K$, since $J^\\bullet$ is K-injective; the source is a model\nfor $g^{-1}Rf_*K$ because $g^{-1}$ is exact.\nIts class in $D^+(Y'_{\\mathrm{et}})$ is\n\n$$\n\\operatorname{Ex}_{\\square,K}:g^{-1}Rf_*K\\longrightarrow\nRf'_*g'^{-1}K.\n$$",
-   "proof": "",
-   "cites": []
-  }
- ],
- "lean_audit": {
-  "master": {
-   "state": "rests_on_sorry",
-   "decls": [
+  "proof": [],
+  "proof_deps": [],
+  "proof_origin": null,
+  "mathlib_searches": [
     {
-     "name": "AlgebraicGeometry.Etale.baseChange",
-     "module": "WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.MorphismDefs",
-     "lines": [
-      234,
-      246
-     ],
-     "kind": "def",
-     "sorry": false
+      "tool": "grep",
+      "query": "grep -rln 'base change map\\|baseChangeMap\\|BaseChange\\|exchange' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Sites ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology",
+      "results": "only BaseChange of coverings/precoverages and monoidal 'exchange' lemmas (Algebra/Homology/Monoidal.lean, CategoryTheory/Sites/Point/Monoidal.lean); no cohomological base change map of a square of sites",
+      "date": "2026-10-09",
+      "verdict": "no match"
+    },
+    {
+      "tool": "grep",
+      "query": "grep -rln 'mapDerivedCategoryPlus\\|derivedPlus\\|derivedAdjunctionPlus' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib; grep -rn 'smallEtaleTopology' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology",
+      "results": "none: Mathlib has neither the inverse image on D^+ nor the D^+ derived adjunction nor etale derived categories; the mate is CategoryTheory.mateEquiv (node def-weil-pbc-adjunction-mate)",
+      "date": "2026-10-09",
+      "verdict": "no match"
+    },
+    {
+      "tool": "leansearch",
+      "query": "base change morphism g^* Rf_* → Rf'_* g'^* for a cartesian square",
+      "results": "CategoryTheory.TwoSquare.lanBaseChange / isIso_lanBaseChange_app (Mathlib.CategoryTheory.GuitartExact.KanExtension: base change of left Kan extensions, not sheaves); MorphismProperty.IsStableUnderBaseChangeAlong.of_isPullback; LinearMap.baseChange_comp",
+      "date": "2026-10-09",
+      "verdict": "no match"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "base change morphism for derived pushforward of sheaves along a cartesian square of schemes",
+      "results": "SheafOfModules.pullbackComp; SheafOfModules.pushforwardComp_hom_app_val_app; Scheme.Modules.pushforwardComp; SheafOfModules.pushforwardNatTrans (sheaf level, no derived base change map)",
+      "date": "2026-10-09",
+      "verdict": "no match"
+    },
+    {
+      "tool": "grep",
+      "query": "rg -ln 'mateEquiv' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry; rg -n 'mateEquiv' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Adjunction/Mates.lean",
+      "results": "no use of mateEquiv for sheaves or derived categories; the general mate is CategoryTheory.mateEquiv (Adjunction/Mates.lean:84), already carried by def-weil-pbc-adjunction-mate",
+      "date": "2026-10-09",
+      "verdict": "no match; split unchanged"
     }
-   ],
-   "missing": [
-    "AlgebraicGeometry.Etale.derivedBaseChangeMapPlus"
-   ],
-   "open": [
-    {
-     "name": "AlgebraicGeometry.Etale.hasLeftKanExtension_op_overPullback",
-     "module": "WeilConjectures.CategoryTheory.GrothendieckAbelian.HasLeftKanExtension",
-     "lines": [
-      223,
-      231
-     ],
-     "kind": "theorem",
-     "nodes": [],
-     "below": false
-    },
-    {
-     "name": "AlgebraicGeometry.Etale.preservesFiniteLimits_op_lan_overPullback_of_isGrothendieckAbelian",
-     "module": "WeilConjectures.CategoryTheory.GrothendieckAbelian.HasLeftKanExtension",
-     "lines": [
-      270,
-      282
-     ],
-     "kind": "theorem",
-     "nodes": [],
-     "below": false
-    },
-    {
-     "name": "CategoryTheory.Abelian.hasKInjectiveResolutions_of_isGrothendieckAbelian",
-     "module": "WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution",
-     "lines": [
-      19,
-      25
-     ],
-     "kind": "theorem",
-     "nodes": [],
-     "below": false
-    },
-    {
-     "name": "CategoryTheory.GrothendieckTopology.exists_flat_separator_sheaf_of_essentiallySmall",
-     "module": "WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolution",
-     "lines": [
-      164,
-      170
-     ],
-     "kind": "theorem",
-     "nodes": [
-      "lem-weil-pbc-sheaf-flat-separator"
-     ],
-     "below": false
-    },
-    {
-     "name": "CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall",
-     "module": "WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify",
-     "lines": [
-      39,
-      49
-     ],
-     "kind": "theorem",
-     "nodes": [],
-     "below": false
-    }
-   ]
+  ],
+  "mathlib_match": null,
+  "status": "split",
+  "merged_into": null,
+  "import_flags": [
+    "detailed_form"
+  ],
+  "blueprint_kind": "definition",
+  "blueprint_order": 1040,
+  "blueprint_uses": [
+    "def-weil-pbc-cartesian-square",
+    "def-weil-pbc-derived-categories",
+    "def-weil-pbc-direct-image",
+    "def-weil-pbc-inverse-image",
+    "def-weil-pbc-kinjective-resolutions",
+    "def-weil-pbc-underived-exchange"
+  ],
+  "lean": {
+    "module": "WeilConjectures.SixFunctors.BaseChange.Derived",
+    "declaration": "AlgebraicGeometry.Etale.derivedBaseChangeMapPlus",
+    "branch": "slopmaster2",
+    "line": 129,
+    "declarations": [
+      "AlgebraicGeometry.Etale.derivedBaseChangeMapPlus",
+      "AlgebraicGeometry.Etale.baseChange"
+    ],
+    "sorry_free": true,
+    "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state closed)"
   },
-  "slopmaster2": {
-   "state": "closed",
-   "decls": [
+  "blueprint_lean": [
+    "AlgebraicGeometry.Etale.derivedBaseChangeMapPlus"
+  ],
+  "uses_not_cited": [
+    "def-weil-pbc-derived-categories",
+    "def-weil-pbc-direct-image"
+  ],
+  "blueprint_sketch": [
     {
-     "name": "AlgebraicGeometry.Etale.derivedBaseChangeMapPlus",
-     "module": "WeilConjectures.SixFunctors.BaseChange.Derived",
-     "lines": [
-      129,
-      138
-     ],
-     "kind": "def",
-     "sorry": false
-    },
-    {
-     "name": "AlgebraicGeometry.Etale.baseChange",
-     "module": "WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.MorphismDefs",
-     "lines": [
-      234,
-      246
-     ],
-     "kind": "def",
-     "sorry": false
+      "statement": "For $K\\in D^+(X_{\\mathrm{et}})$ choose an injective resolution\n$K\\xrightarrow{\\simeq}I^\\bullet$. Apply\n$\\operatorname{Ex}_{\\square,I^r}$ in every degree and use the naturality\nlemma to obtain a morphism of complexes\n\n$$\ng^{-1}f_*I^\\bullet\\longrightarrow f'_*g'^{-1}I^\\bullet.\n$$\n\nChoose a K-injective replacement\n$g'^{-1}I^\\bullet\\xrightarrow{\\simeq}J^\\bullet$ in the Grothendieck\ncategory of etale abelian sheaves on $X'$. Compose the displayed map with\n$f'_*g'^{-1}I^\\bullet\\to f'_*J^\\bullet$ and define\n\n$$\n\\operatorname{Ex}_{\\square,K}:g^{-1}f_*I^\\bullet\\longrightarrow f'_*J^\\bullet\n$$\n\nto be its class in $D^+(Y'_{\\mathrm{et}})$. The target complex is a model\nfor $Rf'_*g'^{-1}K$, since $J^\\bullet$ is K-injective; the source is a model\nfor $g^{-1}Rf_*K$ because $g^{-1}$ is exact.\nIts class in $D^+(Y'_{\\mathrm{et}})$ is\n\n$$\n\\operatorname{Ex}_{\\square,K}:g^{-1}Rf_*K\\longrightarrow\nRf'_*g'^{-1}K.\n$$",
+      "proof": "",
+      "cites": []
     }
-   ],
-   "missing": [],
-   "open": []
+  ],
+  "lean_audit": {
+    "master": {
+      "state": "rests_on_sorry",
+      "decls": [
+        {
+          "name": "AlgebraicGeometry.Etale.baseChange",
+          "module": "WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.MorphismDefs",
+          "lines": [
+            234,
+            246
+          ],
+          "kind": "def",
+          "sorry": false
+        }
+      ],
+      "missing": [
+        "AlgebraicGeometry.Etale.derivedBaseChangeMapPlus"
+      ],
+      "open": [
+        {
+          "name": "AlgebraicGeometry.Etale.hasLeftKanExtension_op_overPullback",
+          "module": "WeilConjectures.CategoryTheory.GrothendieckAbelian.HasLeftKanExtension",
+          "lines": [
+            223,
+            231
+          ],
+          "kind": "theorem",
+          "nodes": [],
+          "below": false
+        },
+        {
+          "name": "AlgebraicGeometry.Etale.preservesFiniteLimits_op_lan_overPullback_of_isGrothendieckAbelian",
+          "module": "WeilConjectures.CategoryTheory.GrothendieckAbelian.HasLeftKanExtension",
+          "lines": [
+            270,
+            282
+          ],
+          "kind": "theorem",
+          "nodes": [],
+          "below": false
+        },
+        {
+          "name": "CategoryTheory.Abelian.hasKInjectiveResolutions_of_isGrothendieckAbelian",
+          "module": "WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution",
+          "lines": [
+            19,
+            25
+          ],
+          "kind": "theorem",
+          "nodes": [],
+          "below": false
+        },
+        {
+          "name": "CategoryTheory.GrothendieckTopology.exists_flat_separator_sheaf_of_essentiallySmall",
+          "module": "WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolution",
+          "lines": [
+            164,
+            170
+          ],
+          "kind": "theorem",
+          "nodes": [
+            "lem-weil-pbc-sheaf-flat-separator"
+          ],
+          "below": false
+        },
+        {
+          "name": "CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall",
+          "module": "WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify",
+          "lines": [
+            39,
+            49
+          ],
+          "kind": "theorem",
+          "nodes": [],
+          "below": false
+        }
+      ]
+    },
+    "slopmaster2": {
+      "state": "closed",
+      "decls": [
+        {
+          "name": "AlgebraicGeometry.Etale.derivedBaseChangeMapPlus",
+          "module": "WeilConjectures.SixFunctors.BaseChange.Derived",
+          "lines": [
+            129,
+            138
+          ],
+          "kind": "def",
+          "sorry": false
+        },
+        {
+          "name": "AlgebraicGeometry.Etale.baseChange",
+          "module": "WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.MorphismDefs",
+          "lines": [
+            234,
+            246
+          ],
+          "kind": "def",
+          "sorry": false
+        }
+      ],
+      "missing": [],
+      "open": []
+    }
+  },
+  "chapter": "sec-proper-base-change",
+  "unit": "sk-def-exchange",
+  "split_report": {
+    "date": "2026-10-09",
+    "item": "def-weil-pbc-derived-exchange",
+    "worker": "stage1",
+    "summary": "Checked against the unit sk-def-exchange (mate of g'^{-1}eps_f after theta under f'^{-1} -| Rf'_*) and Stacks Remark 07A7 (sites-cohomology.tex, remark-base-change; the flat/exact-pullback construction on D^+ is Lemma 0736 in Section 0735; the earlier pointer 0A9D, the twisted inverse image section of duality.tex, is not the place). Rewrote the statement to name every ingredient on the derived level: the imported text used the sheaf-level theta_square and 'the derived adjunction of the inverse-image adjunction' without a node; both are now nodes. The definition is the mate (CategoryTheory.mateEquiv, def-weil-pbc-adjunction-mate) of the derived square isomorphism, as in the reviewed def-weil-pbc-ambient-ringed-exchange. The 'Equivalently, choose a K-injective resolution ... term by term' clause was a claim inside the definition; it is exactly lem-weil-pbc-derived-exchange-termwise (existing node), so it was removed from the statement and stmt_deps lost def-weil-pbc-kinjective-resolutions and def-weil-pbc-underived-exchange (pointed to in the text only, not cited as dependencies, to avoid a cycle). New nodes: def-weil-pbc-derived-inverse-image (u^{-1} on D^+, termwise), lem-weil-pbc-exact-functor-bounded-below (exact functors preserve D^+, Stacks 015F/0736), prop-weil-pbc-derived-inverse-image-adjunction (u^{-1} -| Ru_* on D^+ with termwise unit/counit, Stacks 0DVC/09T5/07A6), def-weil-pbc-derived-square-iso (theta on D^+, termwise; Stacks 07A7/0D6D); all searched in Mathlib, none present (Mathlib has mapDerivedCategory on D, DerivedCategory.Plus, rightDerivedFunctorPlus, Adjunction.derived for absolute derived functors, Localization.liftNatIso, mateEquiv). Lean: the unit's declaration AlgebraicGeometry.Etale.baseChange (MorphismDefs.lean:243, sorry-free, = mateEquiv by baseChange_app_eq_mateEquiv) states this node exactly; the node's recorded derivedBaseChangeMapPlus is the termwise-characterized version, equal to it by baseChange_eq_derivedBaseChangeMapPlus."
+  },
+  "reviewed": {
+    "date": "2026-10-09",
+    "by": "L",
+    "result": "pass"
   }
- },
- "chapter": "sec-proper-base-change",
- "unit": "sk-def-exchange",
- "split_report": {
-  "date": "2026-10-09",
-  "item": "def-weil-pbc-derived-exchange",
-  "worker": "stage1",
-  "summary": "Checked against the unit sk-def-exchange (mate of g'^{-1}eps_f after theta under f'^{-1} -| Rf'_*) and Stacks Remark 07A7 (sites-cohomology.tex, remark-base-change; the flat/exact-pullback construction on D^+ is Lemma 0736 in Section 0735; the earlier pointer 0A9D, the twisted inverse image section of duality.tex, is not the place). Rewrote the statement to name every ingredient on the derived level: the imported text used the sheaf-level theta_square and 'the derived adjunction of the inverse-image adjunction' without a node; both are now nodes. The definition is the mate (CategoryTheory.mateEquiv, def-weil-pbc-adjunction-mate) of the derived square isomorphism, as in the reviewed def-weil-pbc-ambient-ringed-exchange. The 'Equivalently, choose a K-injective resolution ... term by term' clause was a claim inside the definition; it is exactly lem-weil-pbc-derived-exchange-termwise (existing node), so it was removed from the statement and stmt_deps lost def-weil-pbc-kinjective-resolutions and def-weil-pbc-underived-exchange (pointed to in the text only, not cited as dependencies, to avoid a cycle). New nodes: def-weil-pbc-derived-inverse-image (u^{-1} on D^+, termwise), lem-weil-pbc-exact-functor-bounded-below (exact functors preserve D^+, Stacks 015F/0736), prop-weil-pbc-derived-inverse-image-adjunction (u^{-1} -| Ru_* on D^+ with termwise unit/counit, Stacks 0DVC/09T5/07A6), def-weil-pbc-derived-square-iso (theta on D^+, termwise; Stacks 07A7/0D6D); all searched in Mathlib, none present (Mathlib has mapDerivedCategory on D, DerivedCategory.Plus, rightDerivedFunctorPlus, Adjunction.derived for absolute derived functors, Localization.liftNatIso, mateEquiv). Lean: the unit's declaration AlgebraicGeometry.Etale.baseChange (MorphismDefs.lean:243, sorry-free, = mateEquiv by baseChange_app_eq_mateEquiv) states this node exactly; the node's recorded derivedBaseChangeMapPlus is the termwise-characterized version, equal to it by baseChange_eq_derivedBaseChangeMapPlus."
- },
- "reviewed": {
-  "date": "2026-10-09",
-  "by": "L",
-  "result": "pass"
- }
 }

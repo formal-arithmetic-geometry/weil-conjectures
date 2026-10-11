@@ -1,239 +1,243 @@
 {
- "id": "lem-weil-pbc-derived-exchange-triangulated",
- "blueprint": {
-  "is": null,
-  "from": {
-   "node": "lem-weil-pbc-exact-couple-differential",
-   "place": "step 2, 5 of its split (source: Lemma 0A8D (lemma-adjoint-is-exact, line 2290), for the shift isomorphism of the right adjoints; Definition of a morphism of triangles, Tag 0145 (derived.tex, section on triangulated categories))",
-   "via": []
+  "id": "lem-weil-pbc-derived-exchange-triangulated",
+  "blueprint": {
+    "is": null,
+    "from": {
+      "node": "lem-weil-pbc-exact-couple-differential",
+      "place": "step 2, 5 of its split (source: Lemma 0A8D (lemma-adjoint-is-exact, line 2290), for the shift isomorphism of the right adjoints; Definition of a morphism of triangles, Tag 0145 (derived.tex, section on triangulated categories))",
+      "via": []
+    },
+    "same_as": null
   },
-  "same_as": null
- },
- "kind": "statement",
- "title": "The derived exchange transformation commutes with shifts and maps triangles to morphisms of triangles",
- "statement": "Let $\\square=(f,f',g,g',\\alpha)$ be a cartesian square of schemes [def-weil-pbc-cartesian-square], with $f:X\\to Y$, $g:Y'\\to Y$, $f':X'\\to Y'$, $g':X'\\to X$, and let $\\Ex_\\square:\\Phi:=g^{-1}Rf_*\\to\\Psi:=Rf'_*g'^{-1}$ be the derived exchange transformation of functors $\\Dplus(X_{\\Et})\\to\\Dplus(Y'_{\\Et})$ [def-weil-pbc-derived-exchange]. Write $[1]$ for the shift of complexes, $(M[1])^r=M^{r+1}$, $d_{M[1]}=-d_M$. Give each of the four functors $u^{-1}$ [def-weil-pbc-derived-inverse-image] and $Ru_*$ [def-weil-pbc-direct-image] its shift-commutation isomorphism: for $u^{-1}$ the identity $u^{-1}(M[1])=(u^{-1}M)[1]$ of termwise shifted complexes; for $Ru_*$ the isomorphism $Ru_*(K[1])\\cong u_*(I(K)[1])=(u_*I(K))[1]$ obtained by comparing the K-injective resolution $K[1]\\to I(K[1])$ with the K-injective resolution $K[1]\\to I(K)[1]$ [def-weil-pbc-kinjective-resolutions], [lem-weil-pbc-derived-direct-image-triangulated]. Let $\\xi_K:\\Phi(K[1])\\xrightarrow{\\sim}\\Phi(K)[1]$ and $\\zeta_K:\\Psi(K[1])\\xrightarrow{\\sim}\\Psi(K)[1]$ be the composite shift-commutation isomorphisms, and $\\xi^{(n)}_K:\\Phi(K[n])\\xrightarrow{\\sim}\\Phi(K)[n]$, $\\zeta^{(n)}_K$ ($n\\in\\mathbf Z$) their iterates (for $n<0$ the inverses of the iterates at $K[n]$). Then:\n\n(1) for every $K\\in\\Dplus(X_{\\Et})$, $\\zeta_K\\circ\\Ex_{\\square,K[1]}=\\Ex_{\\square,K}[1]\\circ\\xi_K$; hence $\\zeta^{(n)}_K\\circ\\Ex_{\\square,K[n]}=\\Ex_{\\square,K}[n]\\circ\\xi^{(n)}_K$ for every $n\\in\\mathbf Z$;\n\n(2) for every triangle $X_1\\xrightarrow{u}X_2\\xrightarrow{v}X_3\\xrightarrow{w}X_1[1]$ in $\\Dplus(X_{\\Et})$ [def-weil-pbc-triangles-with-shift], the triple $(\\Ex_{\\square,X_1},\\Ex_{\\square,X_2},\\Ex_{\\square,X_3})$ is a morphism of triangles from $(\\Phi X_1,\\Phi X_2,\\Phi X_3,\\Phi u,\\Phi v,\\xi_{X_1}\\circ\\Phi w)$ to $(\\Psi X_1,\\Psi X_2,\\Psi X_3,\\Psi u,\\Psi v,\\zeta_{X_1}\\circ\\Psi w)$.\n\n(Part (2) follows from (1) and the naturality of $\\Ex_\\square$; part (1) says that $\\Ex_\\square$ is a morphism of triangulated functors.)",
- "source": {
-  "document": "literature/stacks-project/derived.tex",
-  "place": "Lemma 0A8D (lemma-adjoint-is-exact, line 2290): the right adjoint of an exact functor is exact, with the shift isomorphism G(A)[1] -> G(A[1]) adjoint to eps_A[1] o xi_{G(A)}; applied to the adjunctions f^{-1} -| Rf_*, f'^{-1} -| Rf'_* and to the base change map of literature/stacks-project/etale-cohomology.tex, equation (equation-base-change), line 18332, defined in literature/stacks-project/sites-cohomology.tex, Remark (remark-base-change), line 4033, as a composite of unit, square isomorphism and counit. The statement is assembled by an agent: the Stacks project uses it without stating it (Lemma 0DDE, 'some details omitted')."
- },
- "stmt_deps": [
-  "def-weil-pbc-cartesian-square",
-  "def-weil-pbc-derived-exchange",
-  "def-weil-pbc-derived-inverse-image",
-  "def-weil-pbc-direct-image",
-  "def-weil-pbc-kinjective-resolutions",
-  "def-weil-pbc-triangles-with-shift",
-  "lem-weil-pbc-derived-direct-image-triangulated"
- ],
- "proof": [
-  {
-   "text": "**Step 1 (the shift isomorphisms of all functors involved).** Every inverse image $u^{-1}$ ($u\\in\\{f,g,f',g'\\}$) carries $\\iota^u_M:u^{-1}(M[1])=(u^{-1}M)[1]$, the identity of the termwise shifted complex [def-weil-pbc-derived-inverse-image]; every $Ru_*$ ($u\\in\\{f,f'\\}$) carries $\\sigma^u_K:Ru_*(K[1])\\xrightarrow{\\sim}(Ru_*K)[1]$, the comparison of K-injective resolutions [lem-weil-pbc-derived-direct-image-triangulated]; a composite functor carries the composite isomorphism $\\chi_X=\\gamma_{FX}\\circ G(\\varphi_X)$ [lem-weil-pbc-triangulated-functor-composite], which does not depend on how a composite of three or more functors is bracketed ([lem-weil-pbc-commshift-nattrans-comp-whisker] (iv)). In particular $\\xi_K=\\iota^g_{Rf_*K}\\circ g^{-1}(\\sigma^f_K)$ and $\\zeta_K=\\sigma^{f'}_{g'^{-1}K}\\circ Rf'_*(\\iota^{g'}_K)$ are the isomorphisms $\\xi,\\zeta$ of the statement, and the intermediate functors $\\Phi_1=Rf'_*f'^{-1}g^{-1}Rf_*$ and $\\Phi_2=Rf'_*g'^{-1}f^{-1}Rf_*$ carry composite isomorphisms $\\chi^1,\\chi^2$.",
-   "uses": [
+  "kind": "statement",
+  "title": "The derived exchange transformation commutes with shifts and maps triangles to morphisms of triangles",
+  "statement": "Let $\\square=(f,f',g,g',\\alpha)$ be a cartesian square of schemes [def-weil-pbc-cartesian-square], with $f:X\\to Y$, $g:Y'\\to Y$, $f':X'\\to Y'$, $g':X'\\to X$, and let $\\Ex_\\square:\\Phi:=g^{-1}Rf_*\\to\\Psi:=Rf'_*g'^{-1}$ be the derived exchange transformation of functors $\\Dplus(X_{\\Et})\\to\\Dplus(Y'_{\\Et})$ [def-weil-pbc-derived-exchange]. Write $[1]$ for the shift of complexes, $(M[1])^r=M^{r+1}$, $d_{M[1]}=-d_M$. Give each of the four functors $u^{-1}$ [def-weil-pbc-derived-inverse-image] and $Ru_*$ [def-weil-pbc-direct-image] its shift-commutation isomorphism: for $u^{-1}$ the identity $u^{-1}(M[1])=(u^{-1}M)[1]$ of termwise shifted complexes; for $Ru_*$ the isomorphism $Ru_*(K[1])\\cong u_*(I(K)[1])=(u_*I(K))[1]$ obtained by comparing the K-injective resolution $K[1]\\to I(K[1])$ with the K-injective resolution $K[1]\\to I(K)[1]$ [def-weil-pbc-kinjective-resolutions], [lem-weil-pbc-derived-direct-image-triangulated]. Let $\\xi_K:\\Phi(K[1])\\xrightarrow{\\sim}\\Phi(K)[1]$ and $\\zeta_K:\\Psi(K[1])\\xrightarrow{\\sim}\\Psi(K)[1]$ be the composite shift-commutation isomorphisms, and $\\xi^{(n)}_K:\\Phi(K[n])\\xrightarrow{\\sim}\\Phi(K)[n]$, $\\zeta^{(n)}_K$ ($n\\in\\mathbf Z$) their iterates (for $n<0$ the inverses of the iterates at $K[n]$). Then:\n\n(1) for every $K\\in\\Dplus(X_{\\Et})$, $\\zeta_K\\circ\\Ex_{\\square,K[1]}=\\Ex_{\\square,K}[1]\\circ\\xi_K$; hence $\\zeta^{(n)}_K\\circ\\Ex_{\\square,K[n]}=\\Ex_{\\square,K}[n]\\circ\\xi^{(n)}_K$ for every $n\\in\\mathbf Z$;\n\n(2) for every triangle $X_1\\xrightarrow{u}X_2\\xrightarrow{v}X_3\\xrightarrow{w}X_1[1]$ in $\\Dplus(X_{\\Et})$ [def-weil-pbc-triangles-with-shift], the triple $(\\Ex_{\\square,X_1},\\Ex_{\\square,X_2},\\Ex_{\\square,X_3})$ is a morphism of triangles from $(\\Phi X_1,\\Phi X_2,\\Phi X_3,\\Phi u,\\Phi v,\\xi_{X_1}\\circ\\Phi w)$ to $(\\Psi X_1,\\Psi X_2,\\Psi X_3,\\Psi u,\\Psi v,\\zeta_{X_1}\\circ\\Psi w)$.\n\n(Part (2) follows from (1) and the naturality of $\\Ex_\\square$; part (1) says that $\\Ex_\\square$ is a morphism of triangulated functors.)",
+  "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Lemma 0A8D (lemma-adjoint-is-exact, line 2290): the right adjoint of an exact functor is exact, with the shift isomorphism G(A)[1] -> G(A[1]) adjoint to eps_A[1] o xi_{G(A)}; applied to the adjunctions f^{-1} -| Rf_*, f'^{-1} -| Rf'_* and to the base change map of literature/stacks-project/etale-cohomology.tex, equation (equation-base-change), line 18332, defined in literature/stacks-project/sites-cohomology.tex, Remark (remark-base-change), line 4033, as a composite of unit, square isomorphism and counit. The statement is assembled by an agent: the Stacks project uses it without stating it (Lemma 0DDE, 'some details omitted')."
+  },
+  "stmt_deps": [
+    "def-weil-pbc-cartesian-square",
+    "def-weil-pbc-derived-exchange",
+    "def-weil-pbc-derived-inverse-image",
+    "def-weil-pbc-direct-image",
+    "def-weil-pbc-kinjective-resolutions",
+    "def-weil-pbc-triangles-with-shift",
+    "lem-weil-pbc-derived-direct-image-triangulated"
+  ],
+  "proof": [
+    {
+      "text": "**Step 1 (the shift isomorphisms of all functors involved).** Every inverse image $u^{-1}$ ($u\\in\\{f,g,f',g'\\}$) carries $\\iota^u_M:u^{-1}(M[1])=(u^{-1}M)[1]$, the identity of the termwise shifted complex [def-weil-pbc-derived-inverse-image]; every $Ru_*$ ($u\\in\\{f,f'\\}$) carries $\\sigma^u_K:Ru_*(K[1])\\xrightarrow{\\sim}(Ru_*K)[1]$, the comparison of K-injective resolutions [lem-weil-pbc-derived-direct-image-triangulated]; a composite functor carries the composite isomorphism $\\chi_X=\\gamma_{FX}\\circ G(\\varphi_X)$ [lem-weil-pbc-triangulated-functor-composite], which does not depend on how a composite of three or more functors is bracketed ([lem-weil-pbc-commshift-nattrans-comp-whisker] (iv)). In particular $\\xi_K=\\iota^g_{Rf_*K}\\circ g^{-1}(\\sigma^f_K)$ and $\\zeta_K=\\sigma^{f'}_{g'^{-1}K}\\circ Rf'_*(\\iota^{g'}_K)$ are the isomorphisms $\\xi,\\zeta$ of the statement, and the intermediate functors $\\Phi_1=Rf'_*f'^{-1}g^{-1}Rf_*$ and $\\Phi_2=Rf'_*g'^{-1}f^{-1}Rf_*$ carry composite isomorphisms $\\chi^1,\\chi^2$.",
+      "uses": [
+        "def-weil-pbc-derived-inverse-image",
+        "lem-weil-pbc-derived-direct-image-triangulated",
+        "lem-weil-pbc-triangulated-functor-composite",
+        "lem-weil-pbc-commshift-nattrans-comp-whisker"
+      ],
+      "elementary": true,
+      "source": {
+        "document": "literature/stacks-project/derived.tex",
+        "place": "Lemma 0A8D (lemma-adjoint-is-exact, line 2290) and Definition 014V (line 191); the base change map as unit, square isomorphism and counit: literature/stacks-project/sites-cohomology.tex, Remark remark-base-change (line 4033)"
+      }
+    },
+    {
+      "text": "**Step 2 (Ex as a composite of three whiskered transformations).** By [def-weil-pbc-derived-exchange], $\\Ex_{\\square,K}=c_K\\circ b_K\\circ a_K$ with $a=\\eta^D_{f'}\\Phi:\\Phi\\to\\Phi_1$, $a_K=\\eta^D_{f',\\Phi K}$ (the unit of $f'^{-1}\\dashv Rf'_*$ precomposed with $\\Phi=g^{-1}Rf_*$); $b=Rf'_*\\theta^D_\\square Rf_*:\\Phi_1\\to\\Phi_2$, $b_K=Rf'_*(\\theta^D_{\\square,Rf_*K})$; $c=Rf'_*g'^{-1}\\varepsilon^D_f:\\Phi_2\\to\\Psi$, $c_K=Rf'_*g'^{-1}(\\varepsilon^D_{f,K})$. This is the explicit formula of the definition, read as an identity of natural transformations.",
+      "uses": [
+        "def-weil-pbc-derived-exchange"
+      ],
+      "elementary": true,
+      "source": {
+        "document": "literature/stacks-project/derived.tex",
+        "place": "Lemma 0A8D (lemma-adjoint-is-exact, line 2290) and Definition 014V (line 191); the base change map as unit, square isomorphism and counit: literature/stacks-project/sites-cohomology.tex, Remark remark-base-change (line 4033)"
+      }
+    },
+    {
+      "text": "**Step 3 (each ingredient commutes with the shift).** (a) By [lem-weil-pbc-derived-adjunction-commshift] (b) for $u=f'$, the unit $\\eta^D_{f'}:\\mathrm{id}\\to Rf'_*f'^{-1}$ is compatible with the shift: $\\sigma^{f'}_{f'^{-1}M}\\circ Rf'_*(\\iota^{f'}_M)\\circ\\eta^D_{f',M[1]}=\\eta^D_{f',M}[1]$, the left-hand isomorphism being the composite isomorphism of $Rf'_*f'^{-1}$ and the identity functor carrying the identity. (b) By [lem-weil-pbc-derived-adjunction-commshift] (a) for $u=f$, the counit $\\varepsilon^D_f:f^{-1}Rf_*\\to\\mathrm{id}$ is compatible with the shift: $\\varepsilon^D_{f,K[1]}=\\varepsilon^D_{f,K}[1]\\circ\\iota^f_{Rf_*K}\\circ f^{-1}(\\sigma^f_K)$. (c) By [lem-weil-pbc-derived-square-iso-commshift], $\\theta^D_\\square:f'^{-1}g^{-1}\\to g'^{-1}f^{-1}$ is compatible with the composite shift isomorphisms $\\varphi,\\psi$ of the two composites of inverse images.",
+      "uses": [
+        "lem-weil-pbc-derived-adjunction-commshift",
+        "lem-weil-pbc-derived-square-iso-commshift"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/derived.tex",
+        "place": "Lemma 0A8D (lemma-adjoint-is-exact, line 2290) and Definition 014V (line 191); the base change map as unit, square isomorphism and counit: literature/stacks-project/sites-cohomology.tex, Remark remark-base-change (line 4033)"
+      }
+    },
+    {
+      "text": "**Step 4 (part (1) for $n=1$).** By [lem-weil-pbc-commshift-nattrans-comp-whisker] (iii) with $F=\\Phi$, $a=\\eta^D_{f'}\\Phi$ is compatible with the shift: $\\chi^1_K\\circ a_{K[1]}=a_K[1]\\circ\\xi_K$. (Directly: $\\chi^1_K=\\sigma^{f'}_{f'^{-1}\\Phi K}\\circ Rf'_*(\\iota^{f'}_{\\Phi K})\\circ Rf'_*f'^{-1}(\\xi_K)$, and naturality of $\\eta^D_{f'}$ for $\\xi_K$ followed by Step 3(a) at $M=\\Phi K$ gives $\\chi^1_K\\circ\\eta^D_{f',\\Phi(K[1])}=\\eta^D_{f',\\Phi K}[1]\\circ\\xi_K$.) By (iii) with $F=Rf_*$ and then (ii) with $G=Rf'_*$, $b$ is compatible: $\\chi^2_K\\circ b_{K[1]}=b_K[1]\\circ\\chi^1_K$. By (ii) with $G=Rf'_*g'^{-1}$, $c$ is compatible: $\\zeta_K\\circ c_{K[1]}=c_K[1]\\circ\\chi^2_K$ (the identity functor carrying the identity isomorphism, the composite isomorphism of $Rf'_*g'^{-1}\\circ\\mathrm{id}$ is $\\zeta$). Composing, by (i): $\\zeta_K\\circ\\Ex_{\\square,K[1]}=\\zeta_K\\circ c_{K[1]}\\circ b_{K[1]}\\circ a_{K[1]}=c_K[1]\\circ\\chi^2_K\\circ b_{K[1]}\\circ a_{K[1]}=c_K[1]\\circ b_K[1]\\circ\\chi^1_K\\circ a_{K[1]}=c_K[1]\\circ b_K[1]\\circ a_K[1]\\circ\\xi_K=\\Ex_{\\square,K}[1]\\circ\\xi_K$, using that $[1]$ is a functor. This is (1) for $n=1$: $\\Ex_\\square$ is a morphism of triangulated functors.",
+      "uses": [
+        "lem-weil-pbc-commshift-nattrans-comp-whisker",
+        "lem-weil-pbc-derived-adjunction-commshift",
+        "lem-weil-pbc-derived-square-iso-commshift"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/derived.tex",
+        "place": "Lemma 0A8D (lemma-adjoint-is-exact, line 2290) and Definition 014V (line 191); the base change map as unit, square isomorphism and counit: literature/stacks-project/sites-cohomology.tex, Remark remark-base-change (line 4033)"
+      }
+    },
+    {
+      "text": "**Step 5 (part (1) for all $n$).** For $n=0$, $\\xi^{(0)}=\\zeta^{(0)}=\\mathrm{id}$. For $n\\ge1$, $\\xi^{(n+1)}_K=\\xi^{(n)}_K[1]\\circ\\xi_{K[n]}$ and likewise for $\\zeta$, so by induction, Step 4 at $K[n]$ and functoriality of $[1]$: $\\zeta^{(n+1)}_K\\circ\\Ex_{K[n+1]}=\\zeta^{(n)}_K[1]\\circ\\zeta_{K[n]}\\circ\\Ex_{K[n][1]}=\\zeta^{(n)}_K[1]\\circ\\Ex_{K[n]}[1]\\circ\\xi_{K[n]}=(\\Ex_K[n]\\circ\\xi^{(n)}_K)[1]\\circ\\xi_{K[n]}=\\Ex_K[n+1]\\circ\\xi^{(n+1)}_K$. For $n=-m<0$, $\\xi^{(-m)}_K=\\bigl((\\xi^{(m)}_{K[-m]})^{-1}\\bigr)[-m]$ and likewise for $\\zeta$ (the shift of complexes satisfies $[m][-m]=\\mathrm{id}$); the case $m$ at $K[-m]$, $\\zeta^{(m)}_{K[-m]}\\circ\\Ex_K=\\Ex_{K[-m]}[m]\\circ\\xi^{(m)}_{K[-m]}$, rearranges to $(\\zeta^{(m)}_{K[-m]})^{-1}\\circ\\Ex_{K[-m]}[m]=\\Ex_K\\circ(\\xi^{(m)}_{K[-m]})^{-1}$, and applying $[-m]$ gives $\\zeta^{(-m)}_K\\circ\\Ex_{K[-m]}=\\Ex_K[-m]\\circ\\xi^{(-m)}_K$.",
+      "uses": [],
+      "elementary": true,
+      "source": {
+        "document": "literature/stacks-project/derived.tex",
+        "place": "Lemma 0A8D (lemma-adjoint-is-exact, line 2290) and Definition 014V (line 191); the base change map as unit, square isomorphism and counit: literature/stacks-project/sites-cohomology.tex, Remark remark-base-change (line 4033)"
+      }
+    },
+    {
+      "text": "**Step 6 (part (2)).** Apply [lem-weil-pbc-commshift-nattrans-triangle-morphism] to $F_1=\\Phi$ with $\\varphi=\\xi$, $F_2=\\Psi$ with $\\psi=\\zeta$ and $\\tau=\\Ex_\\square$, which is natural [def-weil-pbc-derived-exchange] and compatible with the shift by Step 4. Explicitly, for a triangle $X_1\\xrightarrow{u}X_2\\xrightarrow{v}X_3\\xrightarrow{w}X_1[1]$: $\\Psi u\\circ\\Ex_{X_1}=\\Ex_{X_2}\\circ\\Phi u$ and $\\Psi v\\circ\\Ex_{X_2}=\\Ex_{X_3}\\circ\\Phi v$ by naturality, and $\\zeta_{X_1}\\circ\\Psi w\\circ\\Ex_{X_3}=\\zeta_{X_1}\\circ\\Ex_{X_1[1]}\\circ\\Phi w=\\Ex_{X_1}[1]\\circ\\xi_{X_1}\\circ\\Phi w$ by naturality for $w$ and Step 4 at $X_1$; these are the three squares of a morphism of triangles [def-weil-pbc-triangles-with-shift].",
+      "uses": [
+        "lem-weil-pbc-commshift-nattrans-triangle-morphism",
+        "def-weil-pbc-derived-exchange",
+        "def-weil-pbc-triangles-with-shift"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/derived.tex",
+        "place": "Lemma 0A8D (lemma-adjoint-is-exact, line 2290) and Definition 014V (line 191); the base change map as unit, square isomorphism and counit: literature/stacks-project/sites-cohomology.tex, Remark remark-base-change (line 4033)"
+      }
+    }
+  ],
+  "proof_deps": [
     "def-weil-pbc-derived-inverse-image",
     "lem-weil-pbc-derived-direct-image-triangulated",
     "lem-weil-pbc-triangulated-functor-composite",
-    "lem-weil-pbc-commshift-nattrans-comp-whisker"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Lemma 0A8D (lemma-adjoint-is-exact, line 2290) and Definition 014V (line 191); the base change map as unit, square isomorphism and counit: literature/stacks-project/sites-cohomology.tex, Remark remark-base-change (line 4033)"
-   }
-  },
-  {
-   "text": "**Step 2 (Ex as a composite of three whiskered transformations).** By [def-weil-pbc-derived-exchange], $\\Ex_{\\square,K}=c_K\\circ b_K\\circ a_K$ with $a=\\eta^D_{f'}\\Phi:\\Phi\\to\\Phi_1$, $a_K=\\eta^D_{f',\\Phi K}$ (the unit of $f'^{-1}\\dashv Rf'_*$ precomposed with $\\Phi=g^{-1}Rf_*$); $b=Rf'_*\\theta^D_\\square Rf_*:\\Phi_1\\to\\Phi_2$, $b_K=Rf'_*(\\theta^D_{\\square,Rf_*K})$; $c=Rf'_*g'^{-1}\\varepsilon^D_f:\\Phi_2\\to\\Psi$, $c_K=Rf'_*g'^{-1}(\\varepsilon^D_{f,K})$. This is the explicit formula of the definition, read as an identity of natural transformations.",
-   "uses": [
-    "def-weil-pbc-derived-exchange"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Lemma 0A8D (lemma-adjoint-is-exact, line 2290) and Definition 014V (line 191); the base change map as unit, square isomorphism and counit: literature/stacks-project/sites-cohomology.tex, Remark remark-base-change (line 4033)"
-   }
-  },
-  {
-   "text": "**Step 3 (each ingredient commutes with the shift).** (a) By [lem-weil-pbc-derived-adjunction-commshift] (b) for $u=f'$, the unit $\\eta^D_{f'}:\\mathrm{id}\\to Rf'_*f'^{-1}$ is compatible with the shift: $\\sigma^{f'}_{f'^{-1}M}\\circ Rf'_*(\\iota^{f'}_M)\\circ\\eta^D_{f',M[1]}=\\eta^D_{f',M}[1]$, the left-hand isomorphism being the composite isomorphism of $Rf'_*f'^{-1}$ and the identity functor carrying the identity. (b) By [lem-weil-pbc-derived-adjunction-commshift] (a) for $u=f$, the counit $\\varepsilon^D_f:f^{-1}Rf_*\\to\\mathrm{id}$ is compatible with the shift: $\\varepsilon^D_{f,K[1]}=\\varepsilon^D_{f,K}[1]\\circ\\iota^f_{Rf_*K}\\circ f^{-1}(\\sigma^f_K)$. (c) By [lem-weil-pbc-derived-square-iso-commshift], $\\theta^D_\\square:f'^{-1}g^{-1}\\to g'^{-1}f^{-1}$ is compatible with the composite shift isomorphisms $\\varphi,\\psi$ of the two composites of inverse images.",
-   "uses": [
-    "lem-weil-pbc-derived-adjunction-commshift",
-    "lem-weil-pbc-derived-square-iso-commshift"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Lemma 0A8D (lemma-adjoint-is-exact, line 2290) and Definition 014V (line 191); the base change map as unit, square isomorphism and counit: literature/stacks-project/sites-cohomology.tex, Remark remark-base-change (line 4033)"
-   }
-  },
-  {
-   "text": "**Step 4 (part (1) for $n=1$).** By [lem-weil-pbc-commshift-nattrans-comp-whisker] (iii) with $F=\\Phi$, $a=\\eta^D_{f'}\\Phi$ is compatible with the shift: $\\chi^1_K\\circ a_{K[1]}=a_K[1]\\circ\\xi_K$. (Directly: $\\chi^1_K=\\sigma^{f'}_{f'^{-1}\\Phi K}\\circ Rf'_*(\\iota^{f'}_{\\Phi K})\\circ Rf'_*f'^{-1}(\\xi_K)$, and naturality of $\\eta^D_{f'}$ for $\\xi_K$ followed by Step 3(a) at $M=\\Phi K$ gives $\\chi^1_K\\circ\\eta^D_{f',\\Phi(K[1])}=\\eta^D_{f',\\Phi K}[1]\\circ\\xi_K$.) By (iii) with $F=Rf_*$ and then (ii) with $G=Rf'_*$, $b$ is compatible: $\\chi^2_K\\circ b_{K[1]}=b_K[1]\\circ\\chi^1_K$. By (ii) with $G=Rf'_*g'^{-1}$, $c$ is compatible: $\\zeta_K\\circ c_{K[1]}=c_K[1]\\circ\\chi^2_K$ (the identity functor carrying the identity isomorphism, the composite isomorphism of $Rf'_*g'^{-1}\\circ\\mathrm{id}$ is $\\zeta$). Composing, by (i): $\\zeta_K\\circ\\Ex_{\\square,K[1]}=\\zeta_K\\circ c_{K[1]}\\circ b_{K[1]}\\circ a_{K[1]}=c_K[1]\\circ\\chi^2_K\\circ b_{K[1]}\\circ a_{K[1]}=c_K[1]\\circ b_K[1]\\circ\\chi^1_K\\circ a_{K[1]}=c_K[1]\\circ b_K[1]\\circ a_K[1]\\circ\\xi_K=\\Ex_{\\square,K}[1]\\circ\\xi_K$, using that $[1]$ is a functor. This is (1) for $n=1$: $\\Ex_\\square$ is a morphism of triangulated functors.",
-   "uses": [
     "lem-weil-pbc-commshift-nattrans-comp-whisker",
-    "lem-weil-pbc-derived-adjunction-commshift",
-    "lem-weil-pbc-derived-square-iso-commshift"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Lemma 0A8D (lemma-adjoint-is-exact, line 2290) and Definition 014V (line 191); the base change map as unit, square isomorphism and counit: literature/stacks-project/sites-cohomology.tex, Remark remark-base-change (line 4033)"
-   }
-  },
-  {
-   "text": "**Step 5 (part (1) for all $n$).** For $n=0$, $\\xi^{(0)}=\\zeta^{(0)}=\\mathrm{id}$. For $n\\ge1$, $\\xi^{(n+1)}_K=\\xi^{(n)}_K[1]\\circ\\xi_{K[n]}$ and likewise for $\\zeta$, so by induction, Step 4 at $K[n]$ and functoriality of $[1]$: $\\zeta^{(n+1)}_K\\circ\\Ex_{K[n+1]}=\\zeta^{(n)}_K[1]\\circ\\zeta_{K[n]}\\circ\\Ex_{K[n][1]}=\\zeta^{(n)}_K[1]\\circ\\Ex_{K[n]}[1]\\circ\\xi_{K[n]}=(\\Ex_K[n]\\circ\\xi^{(n)}_K)[1]\\circ\\xi_{K[n]}=\\Ex_K[n+1]\\circ\\xi^{(n+1)}_K$. For $n=-m<0$, $\\xi^{(-m)}_K=\\bigl((\\xi^{(m)}_{K[-m]})^{-1}\\bigr)[-m]$ and likewise for $\\zeta$ (the shift of complexes satisfies $[m][-m]=\\mathrm{id}$); the case $m$ at $K[-m]$, $\\zeta^{(m)}_{K[-m]}\\circ\\Ex_K=\\Ex_{K[-m]}[m]\\circ\\xi^{(m)}_{K[-m]}$, rearranges to $(\\zeta^{(m)}_{K[-m]})^{-1}\\circ\\Ex_{K[-m]}[m]=\\Ex_K\\circ(\\xi^{(m)}_{K[-m]})^{-1}$, and applying $[-m]$ gives $\\zeta^{(-m)}_K\\circ\\Ex_{K[-m]}=\\Ex_K[-m]\\circ\\xi^{(-m)}_K$.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Lemma 0A8D (lemma-adjoint-is-exact, line 2290) and Definition 014V (line 191); the base change map as unit, square isomorphism and counit: literature/stacks-project/sites-cohomology.tex, Remark remark-base-change (line 4033)"
-   }
-  },
-  {
-   "text": "**Step 6 (part (2)).** Apply [lem-weil-pbc-commshift-nattrans-triangle-morphism] to $F_1=\\Phi$ with $\\varphi=\\xi$, $F_2=\\Psi$ with $\\psi=\\zeta$ and $\\tau=\\Ex_\\square$, which is natural [def-weil-pbc-derived-exchange] and compatible with the shift by Step 4. Explicitly, for a triangle $X_1\\xrightarrow{u}X_2\\xrightarrow{v}X_3\\xrightarrow{w}X_1[1]$: $\\Psi u\\circ\\Ex_{X_1}=\\Ex_{X_2}\\circ\\Phi u$ and $\\Psi v\\circ\\Ex_{X_2}=\\Ex_{X_3}\\circ\\Phi v$ by naturality, and $\\zeta_{X_1}\\circ\\Psi w\\circ\\Ex_{X_3}=\\zeta_{X_1}\\circ\\Ex_{X_1[1]}\\circ\\Phi w=\\Ex_{X_1}[1]\\circ\\xi_{X_1}\\circ\\Phi w$ by naturality for $w$ and Step 4 at $X_1$; these are the three squares of a morphism of triangles [def-weil-pbc-triangles-with-shift].",
-   "uses": [
-    "lem-weil-pbc-commshift-nattrans-triangle-morphism",
     "def-weil-pbc-derived-exchange",
+    "lem-weil-pbc-derived-adjunction-commshift",
+    "lem-weil-pbc-derived-square-iso-commshift",
+    "lem-weil-pbc-commshift-nattrans-triangle-morphism",
     "def-weil-pbc-triangles-with-shift"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Lemma 0A8D (lemma-adjoint-is-exact, line 2290) and Definition 014V (line 191); the base change map as unit, square isomorphism and counit: literature/stacks-project/sites-cohomology.tex, Remark remark-base-change (line 4033)"
-   }
-  }
- ],
- "proof_deps": [
-  "def-weil-pbc-derived-inverse-image",
-  "lem-weil-pbc-derived-direct-image-triangulated",
-  "lem-weil-pbc-triangulated-functor-composite",
-  "lem-weil-pbc-commshift-nattrans-comp-whisker",
-  "def-weil-pbc-derived-exchange",
-  "lem-weil-pbc-derived-adjunction-commshift",
-  "lem-weil-pbc-derived-square-iso-commshift",
-  "lem-weil-pbc-commshift-nattrans-triangle-morphism",
-  "def-weil-pbc-triangles-with-shift"
- ],
- "proof_origin": {
-  "by": "agent",
-  "document": "literature/stacks-project/derived.tex",
-  "place": "Lemma 0A8D (lemma-adjoint-is-exact, line 2290: the shift isomorphism of a right adjoint is the one compatible with the counit) and Definition 014V (line 191); Stacks uses the shift compatibility of the base change map without stating it (etale-cohomology.tex Lemma 0DDE, 'some details omitted')"
- },
- "mathlib_searches": [
-  {
-   "tool": "grep",
-   "query": "grep -rn 'class CommShift\\|NatTrans.CommShift\\|instance comp\\|instance whisker' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Shift/CommShift.lean",
-   "results": "NatTrans.CommShift (a natural transformation commuting with the shift isomorphisms, CommShift.lean:346) with instances id, comp, whiskerLeft, whiskerRight, of_iso_inv (lines 389-422)",
-   "date": "2026-10-09",
-   "verdict": "generalization of the notion, not of the statement: Mathlib has the notion used in (1) and its stability under composition and whiskering, but nothing about etale sheaves, the derived inverse and direct images, or the exchange transformation"
-  },
-  {
-   "tool": "grep",
-   "query": "grep -n 'class CommShift\\|unit_app_commShiftIso\\|rightAdjointCommShift\\|commShift_of_leftAdjoint' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Shift/Adjunction.lean; grep -rln 'mateEquiv\\|conjugateEquiv' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib | xargs grep -ln CommShift",
-   "results": "Adjunction.CommShift (unit and counit commute with shifts, Adjunction.lean:208), rightAdjointCommShift (Adjunction.lean:388, the right adjoint of a CommShift functor gets a CommShift structure, Stacks 0A8D); the only file mentioning both mates/conjugates and CommShift is Shift/Adjunction.lean, which has no statement that the mate of a CommShift transformation is CommShift",
-   "date": "2026-10-09",
-   "verdict": "no match: the tools for a proof are there (the exchange transformation is unit, then theta, then counit, whiskered; each commutes with shifts), the statement is not"
-  },
-  {
-   "tool": "grep",
-   "query": "grep -n 'def mapTriangle\\|mapTriangleIso' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Triangulated/Functor.lean",
-   "results": "Functor.mapTriangle (line 42) and mapTriangleIso (line 168): a natural isomorphism e with NatTrans.CommShift e.hom gives an isomorphism of the image triangles; no version for a non-invertible natural transformation",
-   "date": "2026-10-09",
-   "verdict": "no match for (2) for a non-invertible transformation; the isomorphism case's proof (naturality plus the CommShift square) is the proof of (2)"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "mate of a natural transformation commuting with shifts commutes with shifts, adjunction compatible with shift",
-   "results": "Adjunction.CommShift, Adjunction.CommShift.mk', LeftAdjointCommShift.iso_hom_app_assoc, unit_app_commShiftIso_hom_app_assoc, CommShift.commShift_counit (Mathlib.CategoryTheory.Shift.Adjunction)",
-   "date": "2026-10-09",
-   "verdict": "tools only: Adjunction.CommShift and the NatTrans.CommShift instances for composites/whiskerings give (1) once the four adjunctions are shown CommShift for the node's chosen shift isomorphisms; no lemma about mates"
-  },
-  {
-   "tool": "loogle",
-   "query": "CategoryTheory.mateEquiv, CategoryTheory.NatTrans.CommShift",
-   "results": "none",
-   "date": "2026-10-09",
-   "verdict": "no match"
-  },
-  {
-   "tool": "grep",
-   "query": "rg -n 'mateEquiv|conjugateEquiv' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Shift ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Triangulated; rg -n 'def .*[mM]apTriangle' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory",
-   "results": "Shift/Adjunction.lean:351 (one simp use of conjugateEquiv, inside rightAdjointCommShift); Triangulated/Functor.lean:168 Functor.mapTriangleIso only for natural isomorphisms; no morphism of triangles from a NatTrans.CommShift",
-   "date": "2026-10-09",
-   "verdict": "no match"
-  },
-  {
-   "tool": "leansearch",
-   "query": "mate of a natural transformation compatible with shifts is compatible with shifts (base change exchange morphism commutes with shift)",
-   "results": "NatTrans.CommShiftCore.shift_comm, NatTrans.shift_comm, NatTrans.CommShiftCore.shift_app_comm, NatTrans.CommShift.of_core, LocalizerMorphism.natTransCommShift_hom, NatTrans.CommShiftCore.app_shift, NatTrans.CommShift₂.commShift_app, NatTrans.CommShift.shift_comm (Mathlib.CategoryTheory.Shift.CommShift, .Localization, .CommShiftTwo)",
-   "date": "2026-10-09",
-   "verdict": "no match: only the notion NatTrans.CommShift and its API"
-  },
-  {
-   "tool": "loogle",
-   "query": "CategoryTheory.NatTrans.CommShift, CategoryTheory.Pretriangulated.TriangleMorphism",
-   "results": "none",
-   "date": "2026-10-09",
-   "verdict": "no match for (2)"
-  },
-  {
-   "tool": "grep",
-   "query": "grep -rln 'Adjunction.CommShift\\|NatTrans.CommShift' ~/weil-conjectures-slopmaster2/WeilConjectures; sed -n 150,186p SixFunctors/BaseChange/DerivedComparison.lean; sed -n 193,243p SixFunctors/BaseChange/Derived.lean (source repository, not Mathlib)",
-   "results": "AlgebraicGeometry.Etale.commShift_baseChange (WeilConjectures/SixFunctors/BaseChange/DerivedComparison.lean:180-186, instance NatTrans.CommShift (Etale.baseChange A sq) ℤ, proved through baseChange_eq_derivedBaseChangeMapPlus and commShift_derivedBaseChangeMapPlus (Derived.lean:193-243), a route through the termwise computation on injective complexes rather than units and counits); sorry map: the only sorry reachable is CategoryTheory.GrothendieckTopology.exists_flat_separator_sheaf_of_essentiallySmall, as for Etale.baseChange itself",
-   "date": "2026-10-09",
-   "verdict": "no Mathlib match; Lean for part (1) exists in slopmaster2 (rests_on_sorry through the flat-separator lemma only), reported as an attachment"
-  }
- ],
- "mathlib_match": null,
- "status": "split",
- "merged_into": null,
- "created": {
-  "by": "worker",
-  "item": "lem-weil-pbc-exact-couple-differential",
-  "date": "2026-10-09"
- },
- "lean_audit": {
-  "master": {
-   "state": "none",
-   "decls": [],
-   "missing": [
-    "AlgebraicGeometry.Etale.commShift_baseChange"
-   ]
-  },
-  "slopmaster2": {
-   "state": "closed",
-   "decls": [
-    {
-     "name": "AlgebraicGeometry.Etale.commShift_baseChange",
-     "module": "WeilConjectures.SixFunctors.BaseChange.DerivedComparison",
-     "lines": [
-      180,
-      186
-     ],
-     "kind": "theorem",
-     "sorry": false
-    }
-   ],
-   "missing": [],
-   "open": []
-  }
- },
- "import_flags": [],
- "chapter": "sec-proper-base-change",
- "unit": "sk-def-exchange",
- "split_report": {
-  "date": "2026-10-09",
-  "item": "lem-weil-pbc-derived-exchange-triangulated",
-  "worker": "stage1",
-  "summary": "Checked the statement against def-weil-pbc-derived-exchange (Ex = Rf'_*g'^{-1}eps_f o Rf'_*theta^D Rf_* o eta_{f'} g^{-1}Rf_*, the mate of theta^D) and against its users (lem-weil-pbc-exact-couple-differential Steps 2 and 5, lem-weil-pbc-truncation-couple-morphism Steps 3 and 5): kept it, adding the citation of lem-weil-pbc-derived-direct-image-triangulated, which already names the shift isomorphism sigma of Ru_* that the statement describes. Wrote the proof in six steps along the unit/theta/counit decomposition: the shift isomorphisms of the composites; Ex as a composite of three whiskered transformations; the shift compatibility of the derived unit and counit (new node lem-weil-pbc-derived-adjunction-commshift, unsplit: prop-weil-pbc-derived-inverse-image-adjunction does not state it) and of theta^D (new node lem-weil-pbc-derived-square-iso-commshift, unsplit); whiskering and composing (new Mathlib leaf lem-weil-pbc-commshift-nattrans-comp-whisker, NatTrans.CommShift.comp/whiskerLeft/whiskerRight/associator); the iterates by induction; part (2) from the generic new node lem-weil-pbc-commshift-nattrans-triangle-morphism (absent from Mathlib, which has only Functor.mapTriangleIso for isomorphisms; sorry-free CategoryTheory.NatTrans.mapTriangle in slopmaster2). Mathlib searched with LeanSearch, Loogle/LeanFinder and grep for the item and each new node. The source repository proves part (1) as AlgebraicGeometry.Etale.commShift_baseChange by a different route (termwise computation)."
- },
- "lean": {
-  "branch": "slopmaster2",
-  "declarations": [
-   "AlgebraicGeometry.Etale.commShift_baseChange"
   ],
-  "note": "attached by the lead at review (2026-10-09), found by the opus workers of lem-weil-pbc-derived-exchange-triangulated and def-weil-pbc-derived-inverse-image: part (1): the derived base-change morphism commutes with the shifts (through its identification with derivedBaseChangeMapPlus); rests on the sorry of the flat separator (lem-weil-pbc-sheaf-flat-separator), like Etale.baseChange itself"
- },
- "reviewed": {
-  "date": "2026-10-09",
-  "by": "L",
-  "result": "pass",
-  "note": "proof through the mate description of Ex: units/counits, theta^D and whiskerings commute with the shifts; 4 new nodes, one a Mathlib leaf; Lean attached by the lead (rests on sorry)"
- }
+  "proof_origin": {
+    "by": "agent",
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Lemma 0A8D (lemma-adjoint-is-exact, line 2290: the shift isomorphism of a right adjoint is the one compatible with the counit) and Definition 014V (line 191); Stacks uses the shift compatibility of the base change map without stating it (etale-cohomology.tex Lemma 0DDE, 'some details omitted')"
+  },
+  "mathlib_searches": [
+    {
+      "tool": "grep",
+      "query": "grep -rn 'class CommShift\\|NatTrans.CommShift\\|instance comp\\|instance whisker' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Shift/CommShift.lean",
+      "results": "NatTrans.CommShift (a natural transformation commuting with the shift isomorphisms, CommShift.lean:346) with instances id, comp, whiskerLeft, whiskerRight, of_iso_inv (lines 389-422)",
+      "date": "2026-10-09",
+      "verdict": "generalization of the notion, not of the statement: Mathlib has the notion used in (1) and its stability under composition and whiskering, but nothing about etale sheaves, the derived inverse and direct images, or the exchange transformation"
+    },
+    {
+      "tool": "grep",
+      "query": "grep -n 'class CommShift\\|unit_app_commShiftIso\\|rightAdjointCommShift\\|commShift_of_leftAdjoint' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Shift/Adjunction.lean; grep -rln 'mateEquiv\\|conjugateEquiv' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib | xargs grep -ln CommShift",
+      "results": "Adjunction.CommShift (unit and counit commute with shifts, Adjunction.lean:208), rightAdjointCommShift (Adjunction.lean:388, the right adjoint of a CommShift functor gets a CommShift structure, Stacks 0A8D); the only file mentioning both mates/conjugates and CommShift is Shift/Adjunction.lean, which has no statement that the mate of a CommShift transformation is CommShift",
+      "date": "2026-10-09",
+      "verdict": "no match: the tools for a proof are there (the exchange transformation is unit, then theta, then counit, whiskered; each commutes with shifts), the statement is not"
+    },
+    {
+      "tool": "grep",
+      "query": "grep -n 'def mapTriangle\\|mapTriangleIso' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Triangulated/Functor.lean",
+      "results": "Functor.mapTriangle (line 42) and mapTriangleIso (line 168): a natural isomorphism e with NatTrans.CommShift e.hom gives an isomorphism of the image triangles; no version for a non-invertible natural transformation",
+      "date": "2026-10-09",
+      "verdict": "no match for (2) for a non-invertible transformation; the isomorphism case's proof (naturality plus the CommShift square) is the proof of (2)"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "mate of a natural transformation commuting with shifts commutes with shifts, adjunction compatible with shift",
+      "results": "Adjunction.CommShift, Adjunction.CommShift.mk', LeftAdjointCommShift.iso_hom_app_assoc, unit_app_commShiftIso_hom_app_assoc, CommShift.commShift_counit (Mathlib.CategoryTheory.Shift.Adjunction)",
+      "date": "2026-10-09",
+      "verdict": "tools only: Adjunction.CommShift and the NatTrans.CommShift instances for composites/whiskerings give (1) once the four adjunctions are shown CommShift for the node's chosen shift isomorphisms; no lemma about mates"
+    },
+    {
+      "tool": "loogle",
+      "query": "CategoryTheory.mateEquiv, CategoryTheory.NatTrans.CommShift",
+      "results": "none",
+      "date": "2026-10-09",
+      "verdict": "no match"
+    },
+    {
+      "tool": "grep",
+      "query": "rg -n 'mateEquiv|conjugateEquiv' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Shift ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Triangulated; rg -n 'def .*[mM]apTriangle' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory",
+      "results": "Shift/Adjunction.lean:351 (one simp use of conjugateEquiv, inside rightAdjointCommShift); Triangulated/Functor.lean:168 Functor.mapTriangleIso only for natural isomorphisms; no morphism of triangles from a NatTrans.CommShift",
+      "date": "2026-10-09",
+      "verdict": "no match"
+    },
+    {
+      "tool": "leansearch",
+      "query": "mate of a natural transformation compatible with shifts is compatible with shifts (base change exchange morphism commutes with shift)",
+      "results": "NatTrans.CommShiftCore.shift_comm, NatTrans.shift_comm, NatTrans.CommShiftCore.shift_app_comm, NatTrans.CommShift.of_core, LocalizerMorphism.natTransCommShift_hom, NatTrans.CommShiftCore.app_shift, NatTrans.CommShift₂.commShift_app, NatTrans.CommShift.shift_comm (Mathlib.CategoryTheory.Shift.CommShift, .Localization, .CommShiftTwo)",
+      "date": "2026-10-09",
+      "verdict": "no match: only the notion NatTrans.CommShift and its API"
+    },
+    {
+      "tool": "loogle",
+      "query": "CategoryTheory.NatTrans.CommShift, CategoryTheory.Pretriangulated.TriangleMorphism",
+      "results": "none",
+      "date": "2026-10-09",
+      "verdict": "no match for (2)"
+    },
+    {
+      "tool": "grep",
+      "query": "grep -rln 'Adjunction.CommShift\\|NatTrans.CommShift' ~/weil-conjectures-slopmaster2/WeilConjectures; sed -n 150,186p SixFunctors/BaseChange/DerivedComparison.lean; sed -n 193,243p SixFunctors/BaseChange/Derived.lean (source repository, not Mathlib)",
+      "results": "AlgebraicGeometry.Etale.commShift_baseChange (WeilConjectures/SixFunctors/BaseChange/DerivedComparison.lean:180-186, instance NatTrans.CommShift (Etale.baseChange A sq) ℤ, proved through baseChange_eq_derivedBaseChangeMapPlus and commShift_derivedBaseChangeMapPlus (Derived.lean:193-243), a route through the termwise computation on injective complexes rather than units and counits); sorry map: the only sorry reachable is CategoryTheory.GrothendieckTopology.exists_flat_separator_sheaf_of_essentiallySmall, as for Etale.baseChange itself",
+      "date": "2026-10-09",
+      "verdict": "no Mathlib match; Lean for part (1) exists in slopmaster2 (rests_on_sorry through the flat-separator lemma only), reported as an attachment"
+    }
+  ],
+  "mathlib_match": null,
+  "status": "split",
+  "merged_into": null,
+  "created": {
+    "by": "worker",
+    "item": "lem-weil-pbc-exact-couple-differential",
+    "date": "2026-10-09"
+  },
+  "lean_audit": {
+    "master": {
+      "state": "none",
+      "decls": [],
+      "missing": [
+        "AlgebraicGeometry.Etale.commShift_baseChange"
+      ]
+    },
+    "slopmaster2": {
+      "state": "closed",
+      "decls": [
+        {
+          "name": "AlgebraicGeometry.Etale.commShift_baseChange",
+          "module": "WeilConjectures.SixFunctors.BaseChange.DerivedComparison",
+          "lines": [
+            180,
+            186
+          ],
+          "kind": "theorem",
+          "sorry": false
+        }
+      ],
+      "missing": [],
+      "open": []
+    }
+  },
+  "import_flags": [],
+  "chapter": "sec-proper-base-change",
+  "unit": "sk-def-exchange",
+  "split_report": {
+    "date": "2026-10-09",
+    "item": "lem-weil-pbc-derived-exchange-triangulated",
+    "worker": "stage1",
+    "summary": "Checked the statement against def-weil-pbc-derived-exchange (Ex = Rf'_*g'^{-1}eps_f o Rf'_*theta^D Rf_* o eta_{f'} g^{-1}Rf_*, the mate of theta^D) and against its users (lem-weil-pbc-exact-couple-differential Steps 2 and 5, lem-weil-pbc-truncation-couple-morphism Steps 3 and 5): kept it, adding the citation of lem-weil-pbc-derived-direct-image-triangulated, which already names the shift isomorphism sigma of Ru_* that the statement describes. Wrote the proof in six steps along the unit/theta/counit decomposition: the shift isomorphisms of the composites; Ex as a composite of three whiskered transformations; the shift compatibility of the derived unit and counit (new node lem-weil-pbc-derived-adjunction-commshift, unsplit: prop-weil-pbc-derived-inverse-image-adjunction does not state it) and of theta^D (new node lem-weil-pbc-derived-square-iso-commshift, unsplit); whiskering and composing (new Mathlib leaf lem-weil-pbc-commshift-nattrans-comp-whisker, NatTrans.CommShift.comp/whiskerLeft/whiskerRight/associator); the iterates by induction; part (2) from the generic new node lem-weil-pbc-commshift-nattrans-triangle-morphism (absent from Mathlib, which has only Functor.mapTriangleIso for isomorphisms; sorry-free CategoryTheory.NatTrans.mapTriangle in slopmaster2). Mathlib searched with LeanSearch, Loogle/LeanFinder and grep for the item and each new node. The source repository proves part (1) as AlgebraicGeometry.Etale.commShift_baseChange by a different route (termwise computation)."
+  },
+  "lean": {
+    "module": "WeilConjectures.SixFunctors.BaseChange.DerivedComparison",
+    "declaration": "AlgebraicGeometry.Etale.commShift_baseChange",
+    "branch": "slopmaster2",
+    "line": 180,
+    "declarations": [
+      "AlgebraicGeometry.Etale.commShift_baseChange"
+    ],
+    "sorry_free": true,
+    "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state closed)"
+  },
+  "reviewed": {
+    "date": "2026-10-09",
+    "by": "L",
+    "result": "pass",
+    "note": "proof through the mate description of Ex: units/counits, theta^D and whiskerings commute with the shifts; 4 new nodes, one a Mathlib leaf; Lean attached by the lead (rests on sorry)"
+  }
 }

@@ -1,236 +1,247 @@
 {
- "id": "lem-galois-flc-representable",
- "blueprint": {
-  "is": null,
-  "from": {
-   "node": "thm-galois-lc-etale",
-   "place": "proof, Step 1 ('the sheaf is finite locally constant') and Step 3 ('essential surjectivity')",
-   "via": []
+  "id": "lem-galois-flc-representable",
+  "blueprint": {
+    "is": null,
+    "from": {
+      "node": "thm-galois-lc-etale",
+      "place": "proof, Step 1 ('the sheaf is finite locally constant') and Step 3 ('essential surjectivity')",
+      "via": []
+    },
+    "same_as": [
+      "lemma-weil-pbc-finite-locally-constant-etale-equivalence"
+    ]
   },
-  "same_as": [
-   "lemma-weil-pbc-finite-locally-constant-etale-equivalence"
-  ]
- },
- "kind": "statement",
- "title": "Finite locally constant sheaves of sets are represented by finite etale schemes",
- "statement": "Let $Y$ be a scheme [def-pc-scheme] with small etale site $Y_{\\Et}$ [def-weil-pbc-etale-site]. For a $Y$-scheme $P$ let $h_P$ be the presheaf of sets on $Y_{\\Et}$ with $h_P(U)=\\operatorname{Mor}_Y(U,P)$, restriction along $U'\\to U$ being composition. Call a sheaf of sets $\\mathcal F$ on $Y_{\\Et}$ [def-weil-pbc-etale-sheaf-of-sets] *finite locally constant* if there are a covering $\\{Y_i\\to Y\\}_{i\\in I}$ of $Y_{\\Et}$ and finite sets $S_i$ such that for every $i$ the restriction $\\mathcal F|_{Y_i}$ (the sheaf $U\\mapsto\\mathcal F(U)$ on $(Y_i)_{\\Et}$, an etale $Y_i$-scheme being an etale $Y$-scheme through $Y_i\\to Y$) is isomorphic to the constant sheaf $\\underline{S_i}$ on $(Y_i)_{\\Et}$ [def-weil-pbc-constant-sheaf]. Then:\n\n1. for every finite etale morphism $P\\to Y$ [def-weil-pbc-finite-etale-category] the presheaf $h_P$ is a sheaf of sets on $Y_{\\Et}$ and is finite locally constant;\n2. every finite locally constant sheaf of sets $\\mathcal F$ on $Y_{\\Et}$ is isomorphic to $h_P$ for some finite etale morphism $P\\to Y$.",
- "source": {
-  "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Lemma Tag 03RV (lemma-characterize-finite-locally-constant), lines 9993-10023, with Definition Tag 03RU (definition-finite-locally-constant), lines 9915-9931; Lean: WeilConjectures.AlgebraicGeometry.HenselianFiniteEtale, AlgebraicGeometry.Scheme.isFiniteLocallyConstant_yoneda_and_exists_iso, lines 91-111"
- },
- "stmt_deps": [
-  "def-pc-scheme",
-  "def-weil-pbc-etale-site",
-  "def-weil-pbc-etale-sheaf-of-sets",
-  "def-weil-pbc-constant-sheaf",
-  "def-weil-pbc-finite-etale-category"
- ],
- "proof": [
-  {
-   "text": "(Notation; restriction of a representable sheaf.) For an etale morphism $g:V\\to Y$ and a presheaf $\\mathcal G$ on $Y_{\\Et}$, $\\mathcal G|_V$ is the presheaf $W\\mapsto\\mathcal G(W)$ on $V_{\\Et}$, an object $w:W\\to V$ of $V_{\\Et}$ being the object $g\\circ w$ of $Y_{\\Et}$ (etale by [lem-weil-pbc-etale-composition-cancellation] (2)); if $\\mathcal G$ is a sheaf so is $\\mathcal G|_V$, since a covering of $V_{\\Et}$ is a covering of $Y_{\\Et}$ with the same fibre products [def-weil-pbc-etale-site, def-weil-pbc-etale-sheaf-of-sets]. For a $Y$-scheme $Q$ and an object $w:W\\to V$ of $V_{\\Et}$, the universal property of the fibre product $Q\\times_YV$ [def-pc-fibre-product] gives the bijection $\\operatorname{Mor}_Y(W,Q)\\to\\operatorname{Mor}_V(W,Q\\times_YV)$, $a\\mapsto(a,w)$, with inverse $b\\mapsto\\mathrm{pr}_1\\circ b$; it commutes with composition by $V$-morphisms $W'\\to W$. Hence $h_Q|_V\\cong h_{Q\\times_YV}$ as presheaves on $V_{\\Et}$ (*), naturally in $Q$: for a $Y$-morphism $u:Q\\to Q'$ it carries $h_u|_V$ to $h_{u\\times_YV}$, and for a further etale $V'\\to V$ the restriction of (*) to $V'$ composed with (*) for $Q\\times_YV$ over $V'$ is (*) for $Q$ over $V'$, by the canonical isomorphism $(Q\\times_YV)\\times_VV'=Q\\times_YV'$.",
-   "uses": [
+  "kind": "statement",
+  "title": "Finite locally constant sheaves of sets are represented by finite etale schemes",
+  "statement": "Let $Y$ be a scheme [def-pc-scheme] with small etale site $Y_{\\Et}$ [def-weil-pbc-etale-site]. For a $Y$-scheme $P$ let $h_P$ be the presheaf of sets on $Y_{\\Et}$ with $h_P(U)=\\operatorname{Mor}_Y(U,P)$, restriction along $U'\\to U$ being composition. Call a sheaf of sets $\\mathcal F$ on $Y_{\\Et}$ [def-weil-pbc-etale-sheaf-of-sets] *finite locally constant* if there are a covering $\\{Y_i\\to Y\\}_{i\\in I}$ of $Y_{\\Et}$ and finite sets $S_i$ such that for every $i$ the restriction $\\mathcal F|_{Y_i}$ (the sheaf $U\\mapsto\\mathcal F(U)$ on $(Y_i)_{\\Et}$, an etale $Y_i$-scheme being an etale $Y$-scheme through $Y_i\\to Y$) is isomorphic to the constant sheaf $\\underline{S_i}$ on $(Y_i)_{\\Et}$ [def-weil-pbc-constant-sheaf]. Then:\n\n1. for every finite etale morphism $P\\to Y$ [def-weil-pbc-finite-etale-category] the presheaf $h_P$ is a sheaf of sets on $Y_{\\Et}$ and is finite locally constant;\n2. every finite locally constant sheaf of sets $\\mathcal F$ on $Y_{\\Et}$ is isomorphic to $h_P$ for some finite etale morphism $P\\to Y$.",
+  "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma Tag 03RV (lemma-characterize-finite-locally-constant), lines 9993-10023, with Definition Tag 03RU (definition-finite-locally-constant), lines 9915-9931; Lean: WeilConjectures.AlgebraicGeometry.HenselianFiniteEtale, AlgebraicGeometry.Scheme.isFiniteLocallyConstant_yoneda_and_exists_iso, lines 91-111"
+  },
+  "stmt_deps": [
+    "def-pc-scheme",
+    "def-weil-pbc-etale-site",
+    "def-weil-pbc-etale-sheaf-of-sets",
+    "def-weil-pbc-constant-sheaf",
+    "def-weil-pbc-finite-etale-category"
+  ],
+  "proof": [
+    {
+      "text": "(Notation; restriction of a representable sheaf.) For an etale morphism $g:V\\to Y$ and a presheaf $\\mathcal G$ on $Y_{\\Et}$, $\\mathcal G|_V$ is the presheaf $W\\mapsto\\mathcal G(W)$ on $V_{\\Et}$, an object $w:W\\to V$ of $V_{\\Et}$ being the object $g\\circ w$ of $Y_{\\Et}$ (etale by [lem-weil-pbc-etale-composition-cancellation] (2)); if $\\mathcal G$ is a sheaf so is $\\mathcal G|_V$, since a covering of $V_{\\Et}$ is a covering of $Y_{\\Et}$ with the same fibre products [def-weil-pbc-etale-site, def-weil-pbc-etale-sheaf-of-sets]. For a $Y$-scheme $Q$ and an object $w:W\\to V$ of $V_{\\Et}$, the universal property of the fibre product $Q\\times_YV$ [def-pc-fibre-product] gives the bijection $\\operatorname{Mor}_Y(W,Q)\\to\\operatorname{Mor}_V(W,Q\\times_YV)$, $a\\mapsto(a,w)$, with inverse $b\\mapsto\\mathrm{pr}_1\\circ b$; it commutes with composition by $V$-morphisms $W'\\to W$. Hence $h_Q|_V\\cong h_{Q\\times_YV}$ as presheaves on $V_{\\Et}$ (*), naturally in $Q$: for a $Y$-morphism $u:Q\\to Q'$ it carries $h_u|_V$ to $h_{u\\times_YV}$, and for a further etale $V'\\to V$ the restriction of (*) to $V'$ composed with (*) for $Q\\times_YV$ over $V'$ is (*) for $Q$ over $V'$, by the canonical isomorphism $(Q\\times_YV)\\times_VV'=Q\\times_YV'$.",
+      "uses": [
+        "lem-weil-pbc-etale-composition-cancellation",
+        "def-weil-pbc-etale-site",
+        "def-weil-pbc-etale-sheaf-of-sets",
+        "def-pc-fibre-product"
+      ],
+      "elementary": true,
+      "source": {
+        "document": "literature/stacks-project/descent.tex",
+        "place": "Remark Tag 02W6 (remark-what-product-means) after Lemma Tag 02W5 (lemma-descent-data-sheaves): restriction of $F$ to $S_i$ and $h_{S_i}\\times F$"
+      }
+    },
+    {
+      "text": "(Part 1: $h_P$ is a sheaf.) Let $p:P\\to Y$ be finite etale [def-weil-pbc-finite-etale-category]. By [lem-weil-pbc-small-etale-representable-presheaf-sheaf] (with $T=Y$, $X=P$) the presheaf $h_P$ is a sheaf of sets on $Y_{\\Et}$.",
+      "uses": [
+        "def-weil-pbc-finite-etale-category",
+        "lem-weil-pbc-small-etale-representable-presheaf-sheaf"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/etale-cohomology.tex",
+        "place": "Lemma Tag 03O3 (lemma-representable-sheaf-fpqc), used tacitly in Lemma Tag 03RV (lemma-characterize-finite-locally-constant), lines 9993-10023"
+      }
+    },
+    {
+      "text": "(Part 1: $h_P$ is finite locally constant.) Let $y\\in Y$. By [lem-weil-pbc-finite-etale-etale-local-split] there are an etale $g_y:U_y\\to Y$, a point $u_y\\in U_y$ with $g_y(u_y)=y$, a finite set $J_y$ and a decomposition $P\\times_YU_y=\\coprod_{j\\in J_y}V_j$ into pairwise disjoint open and closed subschemes covering $P\\times_YU_y$, each $\\mathrm{pr}_2|_{V_j}:V_j\\to U_y$ an isomorphism. Let $(U_y)_{J_y}=\\coprod_{j\\in J_y}U_y$ with coprojections $\\iota_j$ and codiagonal $\\pi$ [lem-weil-pbc-scheme-coproduct-family], and let $\\theta:(U_y)_{J_y}\\to P\\times_YU_y$ be the morphism with $\\theta\\circ\\iota_j=(\\mathrm{pr}_2|_{V_j})^{-1}$ followed by the inclusion of $V_j$. Then $\\mathrm{pr}_2\\circ\\theta=\\pi$, and $\\theta$ is an isomorphism: its restriction to the open subscheme $\\iota_j(U_y)$ is an isomorphism onto the open subscheme $V_j$, these opens cover source and target and are pairwise disjoint on both sides, so the inverses glue to an inverse of $\\theta$. The family $\\{g_y:U_y\\to Y\\}_{y\\in Y}$ consists of etale morphisms and is jointly surjective ($y=g_y(u_y)$), so it is a covering of $Y_{\\Et}$ [def-weil-pbc-etale-site]. For each $y$, by (*) of step 1, by $\\theta$ (through $h_\\theta$) and by [lem-galois-constant-sheaf-sets-representable] (with $U=U_y$, $E=J_y$) we get isomorphisms of sheaves on $(U_y)_{\\Et}$\n$$h_P|_{U_y}\\cong h_{P\\times_YU_y}\\cong h_{(U_y)_{J_y}}\\cong\\underline{J_y},$$\nwith $J_y$ finite. With step 2, $h_P$ is a finite locally constant sheaf of sets on $Y_{\\Et}$ in the sense of the statement. This proves (1).",
+      "uses": [
+        "lem-weil-pbc-finite-etale-etale-local-split",
+        "lem-weil-pbc-scheme-coproduct-family",
+        "def-weil-pbc-etale-site",
+        "lem-galois-constant-sheaf-sets-representable",
+        "def-weil-pbc-constant-sheaf"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/etale-cohomology.tex",
+        "place": "Lemma Tag 03RV (lemma-characterize-finite-locally-constant), lines 9993-10023, proof, first two sentences ('A finite etale morphism is locally isomorphic to a disjoint union of isomorphisms, see Etale Morphisms, Lemma 04HN. Thus (2) implies (1).')"
+      }
+    },
+    {
+      "text": "(Part 2: local representing objects.) Let $\\mathcal F$ be finite locally constant: a covering $\\{g_i:Y_i\\to Y\\}_{i\\in I}$ of $Y_{\\Et}$, finite sets $S_i$ and isomorphisms $\\mathcal F|_{Y_i}\\cong\\underline{S_i}$ on $(Y_i)_{\\Et}$. Put $P_i=(Y_i)_{S_i}=\\coprod_{s\\in S_i}Y_i$ with codiagonal $\\pi_i:P_i\\to Y_i$ [lem-weil-pbc-scheme-coproduct-family]. By [lem-galois-constant-sheaf-sets-representable] (with $U=Y_i$, $E=S_i$) we obtain isomorphisms of sheaves $\\beta_i:\\mathcal F|_{Y_i}\\xrightarrow{\\sim}h_{P_i}$ on $(Y_i)_{\\Et}$. Each $\\pi_i$ is finite etale [def-weil-pbc-finite-etale-category]: etale by [lem-weil-pbc-etale-local-on-source], its restriction to each member $\\iota_s(Y_i)$ of the open cover of $P_i$ being an isomorphism, hence an open immersion, hence etale [lem-weil-pbc-etale-composition-cancellation] (1); finite by induction on $|S_i|$: for $S_i=\\varnothing$, $P_i$ is empty and the preimage of every affine open of $Y_i$ is the empty affine scheme $\\operatorname{Spec}0$, finite over it; for $|S_i|=1$, $\\pi_i$ is an isomorphism, finite; and $(Y_i)_{S\\sqcup\\{s\\}}=(Y_i)_S\\amalg Y_i$ with $\\pi_i$ induced by the two codiagonals, finite by [lem-weil-pbc-finite-coproduct] [lem-weil-pbc-finite-local-on-target].",
+      "uses": [
+        "lem-weil-pbc-scheme-coproduct-family",
+        "lem-galois-constant-sheaf-sets-representable",
+        "def-weil-pbc-finite-etale-category",
+        "lem-weil-pbc-etale-local-on-source",
+        "lem-weil-pbc-etale-composition-cancellation",
+        "lem-weil-pbc-finite-coproduct",
+        "lem-weil-pbc-finite-local-on-target"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/etale-cohomology.tex",
+        "place": "Lemma Tag 03RV (lemma-characterize-finite-locally-constant), lines 9993-10023, proof: 'if F is finite locally constant, then there exists an etale covering {X_i -> X} such that F|_{X_i} is representable by U_i -> X_i finite etale'"
+      }
+    },
+    {
+      "text": "(Part 2: the descent datum; the details the source omits.) For $i,j\\in I$ put $Y_{ij}=Y_i\\times_YY_j$ and for $i,j,k$ put $Y_{ijk}=Y_i\\times_YY_j\\times_YY_k$ [def-pc-fibre-product]; the projections $Y_{ij}\\to Y_i$, $Y_{ij}\\to Y_j$ are etale [lem-weil-pbc-etale-scheme-base-change], so $Y_{ij}$ is an object of $(Y_i)_{\\Et}$, $(Y_j)_{\\Et}$ and $Y_{\\Et}$, and $(\\mathcal F|_{Y_i})|_{Y_{ij}}=\\mathcal F|_{Y_{ij}}=(\\mathcal F|_{Y_j})|_{Y_{ij}}$ as presheaves (the composites $W\\to Y_{ij}\\to Y_i\\to Y$ and $W\\to Y_{ij}\\to Y_j\\to Y$ agree). Write $P_i|_{ij}=P_i\\times_{Y_i}Y_{ij}$, an object of $(Y_{ij})_{\\Et}$ ([lem-weil-pbc-etale-scheme-base-change], $\\pi_i$ etale by step 4). Let $\\gamma_{ij}$ be the isomorphism of sheaves on $(Y_{ij})_{\\Et}$\n$$h_{P_i|_{ij}}\\overset{(*)}{\\cong}h_{P_i}|_{Y_{ij}}\\xrightarrow{\\beta_i^{-1}}\\mathcal F|_{Y_{ij}}\\xrightarrow{\\beta_j}h_{P_j}|_{Y_{ij}}\\overset{(*)}{\\cong}h_{P_j|_{ij}}$$\n((*) of step 1 applied over $Y_i$ and over $Y_j$). By [lem-galois-yoneda-fully-faithful] in the category $(Y_{ij})_{\\Et}$ there is a unique $Y_{ij}$-morphism $\\varphi_{ij}:P_i|_{ij}\\to P_j|_{ij}$ with $h_{\\varphi_{ij}}=\\gamma_{ij}$, and it is an isomorphism (the morphism attached to $\\gamma_{ij}^{-1}$ is its inverse, by the uniqueness in the same lemma). Cocycle: over $Y_{ijk}$ the pullbacks of $\\varphi_{ij},\\varphi_{jk},\\varphi_{ik}$ correspond under (*) (with its compatibility under further restriction, step 1) to the restrictions of $\\gamma_{ij},\\gamma_{jk},\\gamma_{ik}$ to $Y_{ijk}$, and $\\gamma_{jk}\\circ\\gamma_{ij}=\\gamma_{ik}$ there because the factors $\\beta_j\\beta_j^{-1}$ cancel; by the injectivity in [lem-galois-yoneda-fully-faithful] on $(Y_{ijk})_{\\Et}$, $\\varphi_{jk}\\circ\\varphi_{ij}=\\varphi_{ik}$ over $Y_{ijk}$, and likewise $\\varphi_{ii}=\\mathrm{id}$. Now let $Y'=\\coprod_iY_i$, $P'=\\coprod_iP_i$ [lem-weil-pbc-scheme-coproduct-family] with the morphisms $Y'\\to Y$ and $P'\\to Y'$ induced by the $g_i$ and the $\\pi_i$. $Y'\\to Y$ is etale [lem-weil-pbc-etale-local-on-source] and surjective (the $g_i$ are jointly surjective); $P'\\to Y'$ is finite etale, since over the open cover $\\{Y_i\\}$ of $Y'$ its restrictions are the $\\pi_i$ [lem-weil-pbc-finite-local-on-target, lem-weil-pbc-etale-local-on-source]. By [lem-weil-pbc-open-fibre-product], $Y''=Y'\\times_YY'$ is covered by the pairwise disjoint open subschemes $Y_i\\times_YY_j=Y_{ij}$, and $Y'''=Y'\\times_YY'\\times_YY'$ by the $Y_{ijk}$, and over $Y_{ij}$ the pullbacks $p_1^*P'$, $p_2^*P'$ are $P_i|_{ij}$, $P_j|_{ij}$. So the $\\varphi_{ij}$ glue to an isomorphism $\\varphi:p_1^*P'\\to p_2^*P'$ over $Y''$, and the cocycle identities over the $Y_{ijk}$ give $p_{13}^*\\varphi=p_{23}^*\\varphi\\circ p_{12}^*\\varphi$ over $Y'''$: $(P',\\varphi)$ is a finite etale $Y'$-scheme with a descent datum.",
+      "uses": [
+        "def-pc-fibre-product",
+        "lem-weil-pbc-etale-scheme-base-change",
+        "lem-galois-yoneda-fully-faithful",
+        "lem-weil-pbc-scheme-coproduct-family",
+        "lem-weil-pbc-etale-local-on-source",
+        "lem-weil-pbc-finite-local-on-target",
+        "lem-weil-pbc-open-fibre-product",
+        "def-weil-pbc-etale-site"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/descent.tex",
+        "place": "Lemma Tag 02W5 (lemma-descent-data-sheaves), proof, second paragraph (construction of $\\varphi_{ii'}$ from the two representing objects of $h_{S_i}\\times F\\times h_{S_{i'}}$ and the cocycle condition), which Lemma Tag 03RV (lemma-characterize-finite-locally-constant), lines 9993-10023 invokes: 'Arguing exactly as in the proof of Descent, Lemma 02W5 we obtain a descent datum for schemes (U_i, phi_ij) relative to {X_i -> X} (details omitted)'"
+      }
+    },
+    {
+      "text": "(Part 2: effectivity.) By [lem-galois-descent] (applied to the surjective etale $Y'=\\coprod_iY_i\\to Y$ of step 5; its equivalence is base change $P\\mapsto(P\\times_YY',\\text{canonical datum})$) there are a finite etale $Y$-scheme $P$ [def-weil-pbc-finite-etale-category] and an isomorphism $\\psi:P\\times_YY'\\to P'$ of $Y'$-schemes compatible with the descent data. Restricting to the open $Y_i\\subseteq Y'$ gives isomorphisms of $Y_i$-schemes $\\psi_i:P\\times_YY_i\\to P_i$, and the compatibility says, over each $Y_{ij}$, that $\\varphi_{ij}\\circ(\\psi_i\\times_{Y_i}Y_{ij})=\\psi_j\\times_{Y_j}Y_{ij}$ as morphisms $P\\times_YY_{ij}\\to P_j|_{ij}$, where $(P\\times_YY_i)\\times_{Y_i}Y_{ij}=P\\times_YY_{ij}=(P\\times_YY_j)\\times_{Y_j}Y_{ij}$ canonically [def-pc-fibre-product].",
+      "uses": [
+        "lem-galois-descent",
+        "def-weil-pbc-finite-etale-category",
+        "def-pc-fibre-product"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/etale-cohomology.tex",
+        "place": "Lemma Tag 03RV (lemma-characterize-finite-locally-constant), lines 9993-10023, proof: 'This descent datum is effective for example by Descent, Lemma 0245 and the resulting morphism of schemes U -> X is finite etale by Descent, Lemmas 02LA and 02VN'"
+      }
+    },
+    {
+      "text": "(Part 2: $\\mathcal F\\cong h_P$.) For each $i$ let $\\alpha_i:\\mathcal F|_{Y_i}\\to h_P|_{Y_i}$ be the isomorphism of sheaves on $(Y_i)_{\\Et}$ given by $\\beta_i$, then $h_{\\psi_i^{-1}}:h_{P_i}\\to h_{P\\times_YY_i}$, then the inverse of (*) of step 1. By the definition of $\\gamma_{ij}=h_{\\varphi_{ij}}$ (step 5), the identity $\\varphi_{ij}\\circ(\\psi_i\\times_{Y_i}Y_{ij})=\\psi_j\\times_{Y_j}Y_{ij}$ (step 6) and the compatibility of (*) with restriction (step 1), $\\alpha_i$ and $\\alpha_j$ have the same restriction $\\mathcal F|_{Y_{ij}}\\to h_P|_{Y_{ij}}$. Let $w:W\\to Y$ be an object of $Y_{\\Et}$ and $s\\in\\mathcal F(W)$. Put $W_i=W\\times_YY_i$, an object of $(Y_i)_{\\Et}$ through its second projection; $\\{W_i\\to W\\}_i$ is a covering of $Y_{\\Et}$ by [lem-weil-pbc-etale-covering-base-change], and $W_i\\times_WW_j=W\\times_YY_{ij}$ [def-pc-fibre-product]. Put $t_i=\\alpha_i(s|_{W_i})\\in h_P(W_i)$. By naturality of $\\alpha_i,\\alpha_j$ and their agreement on $Y_{ij}$, $t_i$ and $t_j$ have the same restriction to $W\\times_YY_{ij}$. Since $h_P$ is a sheaf (step 2) [def-weil-pbc-etale-sheaf-of-sets], there is a unique $t\\in h_P(W)$ with $t|_{W_i}=t_i$ for all $i$; set $\\alpha_W(s)=t$. Uniqueness of gluing shows that $\\alpha_W$ is natural in $W$, i.e. $\\alpha:\\mathcal F\\to h_P$ is a morphism of sheaves with $\\alpha|_{Y_i}=\\alpha_i$. The same construction with the $\\alpha_i^{-1}$ (which also agree on the $Y_{ij}$), using that $\\mathcal F$ is a sheaf, gives $\\alpha':h_P\\to\\mathcal F$, and $\\alpha'\\alpha$, $\\alpha\\alpha'$ are the identities because their restrictions to every $W_i$ are, by uniqueness in the sheaf condition. So $\\mathcal F\\cong h_P$ with $P\\to Y$ finite etale. This proves (2).",
+      "uses": [
+        "lem-weil-pbc-etale-covering-base-change",
+        "def-pc-fibre-product",
+        "def-weil-pbc-etale-sheaf-of-sets",
+        "lem-weil-pbc-small-etale-representable-presheaf-sheaf"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/descent.tex",
+        "place": "Lemma Tag 02W5 (lemma-descent-data-sheaves), (2): the sheaf F is representable iff the corresponding descent datum is effective, as invoked by Lemma Tag 03RV (lemma-characterize-finite-locally-constant), lines 9993-10023"
+      }
+    }
+  ],
+  "proof_deps": [
     "lem-weil-pbc-etale-composition-cancellation",
     "def-weil-pbc-etale-site",
     "def-weil-pbc-etale-sheaf-of-sets",
-    "def-pc-fibre-product"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/descent.tex",
-    "place": "Remark Tag 02W6 (remark-what-product-means) after Lemma Tag 02W5 (lemma-descent-data-sheaves): restriction of $F$ to $S_i$ and $h_{S_i}\\times F$"
-   }
-  },
-  {
-   "text": "(Part 1: $h_P$ is a sheaf.) Let $p:P\\to Y$ be finite etale [def-weil-pbc-finite-etale-category]. By [lem-weil-pbc-small-etale-representable-presheaf-sheaf] (with $T=Y$, $X=P$) the presheaf $h_P$ is a sheaf of sets on $Y_{\\Et}$.",
-   "uses": [
+    "def-pc-fibre-product",
     "def-weil-pbc-finite-etale-category",
-    "lem-weil-pbc-small-etale-representable-presheaf-sheaf"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma Tag 03O3 (lemma-representable-sheaf-fpqc), used tacitly in Lemma Tag 03RV (lemma-characterize-finite-locally-constant), lines 9993-10023"
-   }
-  },
-  {
-   "text": "(Part 1: $h_P$ is finite locally constant.) Let $y\\in Y$. By [lem-weil-pbc-finite-etale-etale-local-split] there are an etale $g_y:U_y\\to Y$, a point $u_y\\in U_y$ with $g_y(u_y)=y$, a finite set $J_y$ and a decomposition $P\\times_YU_y=\\coprod_{j\\in J_y}V_j$ into pairwise disjoint open and closed subschemes covering $P\\times_YU_y$, each $\\mathrm{pr}_2|_{V_j}:V_j\\to U_y$ an isomorphism. Let $(U_y)_{J_y}=\\coprod_{j\\in J_y}U_y$ with coprojections $\\iota_j$ and codiagonal $\\pi$ [lem-weil-pbc-scheme-coproduct-family], and let $\\theta:(U_y)_{J_y}\\to P\\times_YU_y$ be the morphism with $\\theta\\circ\\iota_j=(\\mathrm{pr}_2|_{V_j})^{-1}$ followed by the inclusion of $V_j$. Then $\\mathrm{pr}_2\\circ\\theta=\\pi$, and $\\theta$ is an isomorphism: its restriction to the open subscheme $\\iota_j(U_y)$ is an isomorphism onto the open subscheme $V_j$, these opens cover source and target and are pairwise disjoint on both sides, so the inverses glue to an inverse of $\\theta$. The family $\\{g_y:U_y\\to Y\\}_{y\\in Y}$ consists of etale morphisms and is jointly surjective ($y=g_y(u_y)$), so it is a covering of $Y_{\\Et}$ [def-weil-pbc-etale-site]. For each $y$, by (*) of step 1, by $\\theta$ (through $h_\\theta$) and by [lem-galois-constant-sheaf-sets-representable] (with $U=U_y$, $E=J_y$) we get isomorphisms of sheaves on $(U_y)_{\\Et}$\n$$h_P|_{U_y}\\cong h_{P\\times_YU_y}\\cong h_{(U_y)_{J_y}}\\cong\\underline{J_y},$$\nwith $J_y$ finite. With step 2, $h_P$ is a finite locally constant sheaf of sets on $Y_{\\Et}$ in the sense of the statement. This proves (1).",
-   "uses": [
+    "lem-weil-pbc-small-etale-representable-presheaf-sheaf",
     "lem-weil-pbc-finite-etale-etale-local-split",
     "lem-weil-pbc-scheme-coproduct-family",
-    "def-weil-pbc-etale-site",
     "lem-galois-constant-sheaf-sets-representable",
-    "def-weil-pbc-constant-sheaf"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma Tag 03RV (lemma-characterize-finite-locally-constant), lines 9993-10023, proof, first two sentences ('A finite etale morphism is locally isomorphic to a disjoint union of isomorphisms, see Etale Morphisms, Lemma 04HN. Thus (2) implies (1).')"
-   }
-  },
-  {
-   "text": "(Part 2: local representing objects.) Let $\\mathcal F$ be finite locally constant: a covering $\\{g_i:Y_i\\to Y\\}_{i\\in I}$ of $Y_{\\Et}$, finite sets $S_i$ and isomorphisms $\\mathcal F|_{Y_i}\\cong\\underline{S_i}$ on $(Y_i)_{\\Et}$. Put $P_i=(Y_i)_{S_i}=\\coprod_{s\\in S_i}Y_i$ with codiagonal $\\pi_i:P_i\\to Y_i$ [lem-weil-pbc-scheme-coproduct-family]. By [lem-galois-constant-sheaf-sets-representable] (with $U=Y_i$, $E=S_i$) we obtain isomorphisms of sheaves $\\beta_i:\\mathcal F|_{Y_i}\\xrightarrow{\\sim}h_{P_i}$ on $(Y_i)_{\\Et}$. Each $\\pi_i$ is finite etale [def-weil-pbc-finite-etale-category]: etale by [lem-weil-pbc-etale-local-on-source], its restriction to each member $\\iota_s(Y_i)$ of the open cover of $P_i$ being an isomorphism, hence an open immersion, hence etale [lem-weil-pbc-etale-composition-cancellation] (1); finite by induction on $|S_i|$: for $S_i=\\varnothing$, $P_i$ is empty and the preimage of every affine open of $Y_i$ is the empty affine scheme $\\operatorname{Spec}0$, finite over it; for $|S_i|=1$, $\\pi_i$ is an isomorphism, finite; and $(Y_i)_{S\\sqcup\\{s\\}}=(Y_i)_S\\amalg Y_i$ with $\\pi_i$ induced by the two codiagonals, finite by [lem-weil-pbc-finite-coproduct] [lem-weil-pbc-finite-local-on-target].",
-   "uses": [
-    "lem-weil-pbc-scheme-coproduct-family",
-    "lem-galois-constant-sheaf-sets-representable",
-    "def-weil-pbc-finite-etale-category",
+    "def-weil-pbc-constant-sheaf",
     "lem-weil-pbc-etale-local-on-source",
-    "lem-weil-pbc-etale-composition-cancellation",
     "lem-weil-pbc-finite-coproduct",
-    "lem-weil-pbc-finite-local-on-target"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma Tag 03RV (lemma-characterize-finite-locally-constant), lines 9993-10023, proof: 'if F is finite locally constant, then there exists an etale covering {X_i -> X} such that F|_{X_i} is representable by U_i -> X_i finite etale'"
-   }
-  },
-  {
-   "text": "(Part 2: the descent datum; the details the source omits.) For $i,j\\in I$ put $Y_{ij}=Y_i\\times_YY_j$ and for $i,j,k$ put $Y_{ijk}=Y_i\\times_YY_j\\times_YY_k$ [def-pc-fibre-product]; the projections $Y_{ij}\\to Y_i$, $Y_{ij}\\to Y_j$ are etale [lem-weil-pbc-etale-scheme-base-change], so $Y_{ij}$ is an object of $(Y_i)_{\\Et}$, $(Y_j)_{\\Et}$ and $Y_{\\Et}$, and $(\\mathcal F|_{Y_i})|_{Y_{ij}}=\\mathcal F|_{Y_{ij}}=(\\mathcal F|_{Y_j})|_{Y_{ij}}$ as presheaves (the composites $W\\to Y_{ij}\\to Y_i\\to Y$ and $W\\to Y_{ij}\\to Y_j\\to Y$ agree). Write $P_i|_{ij}=P_i\\times_{Y_i}Y_{ij}$, an object of $(Y_{ij})_{\\Et}$ ([lem-weil-pbc-etale-scheme-base-change], $\\pi_i$ etale by step 4). Let $\\gamma_{ij}$ be the isomorphism of sheaves on $(Y_{ij})_{\\Et}$\n$$h_{P_i|_{ij}}\\overset{(*)}{\\cong}h_{P_i}|_{Y_{ij}}\\xrightarrow{\\beta_i^{-1}}\\mathcal F|_{Y_{ij}}\\xrightarrow{\\beta_j}h_{P_j}|_{Y_{ij}}\\overset{(*)}{\\cong}h_{P_j|_{ij}}$$\n((*) of step 1 applied over $Y_i$ and over $Y_j$). By [lem-galois-yoneda-fully-faithful] in the category $(Y_{ij})_{\\Et}$ there is a unique $Y_{ij}$-morphism $\\varphi_{ij}:P_i|_{ij}\\to P_j|_{ij}$ with $h_{\\varphi_{ij}}=\\gamma_{ij}$, and it is an isomorphism (the morphism attached to $\\gamma_{ij}^{-1}$ is its inverse, by the uniqueness in the same lemma). Cocycle: over $Y_{ijk}$ the pullbacks of $\\varphi_{ij},\\varphi_{jk},\\varphi_{ik}$ correspond under (*) (with its compatibility under further restriction, step 1) to the restrictions of $\\gamma_{ij},\\gamma_{jk},\\gamma_{ik}$ to $Y_{ijk}$, and $\\gamma_{jk}\\circ\\gamma_{ij}=\\gamma_{ik}$ there because the factors $\\beta_j\\beta_j^{-1}$ cancel; by the injectivity in [lem-galois-yoneda-fully-faithful] on $(Y_{ijk})_{\\Et}$, $\\varphi_{jk}\\circ\\varphi_{ij}=\\varphi_{ik}$ over $Y_{ijk}$, and likewise $\\varphi_{ii}=\\mathrm{id}$. Now let $Y'=\\coprod_iY_i$, $P'=\\coprod_iP_i$ [lem-weil-pbc-scheme-coproduct-family] with the morphisms $Y'\\to Y$ and $P'\\to Y'$ induced by the $g_i$ and the $\\pi_i$. $Y'\\to Y$ is etale [lem-weil-pbc-etale-local-on-source] and surjective (the $g_i$ are jointly surjective); $P'\\to Y'$ is finite etale, since over the open cover $\\{Y_i\\}$ of $Y'$ its restrictions are the $\\pi_i$ [lem-weil-pbc-finite-local-on-target, lem-weil-pbc-etale-local-on-source]. By [lem-weil-pbc-open-fibre-product], $Y''=Y'\\times_YY'$ is covered by the pairwise disjoint open subschemes $Y_i\\times_YY_j=Y_{ij}$, and $Y'''=Y'\\times_YY'\\times_YY'$ by the $Y_{ijk}$, and over $Y_{ij}$ the pullbacks $p_1^*P'$, $p_2^*P'$ are $P_i|_{ij}$, $P_j|_{ij}$. So the $\\varphi_{ij}$ glue to an isomorphism $\\varphi:p_1^*P'\\to p_2^*P'$ over $Y''$, and the cocycle identities over the $Y_{ijk}$ give $p_{13}^*\\varphi=p_{23}^*\\varphi\\circ p_{12}^*\\varphi$ over $Y'''$: $(P',\\varphi)$ is a finite etale $Y'$-scheme with a descent datum.",
-   "uses": [
-    "def-pc-fibre-product",
+    "lem-weil-pbc-finite-local-on-target",
     "lem-weil-pbc-etale-scheme-base-change",
     "lem-galois-yoneda-fully-faithful",
-    "lem-weil-pbc-scheme-coproduct-family",
-    "lem-weil-pbc-etale-local-on-source",
-    "lem-weil-pbc-finite-local-on-target",
     "lem-weil-pbc-open-fibre-product",
-    "def-weil-pbc-etale-site"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/descent.tex",
-    "place": "Lemma Tag 02W5 (lemma-descent-data-sheaves), proof, second paragraph (construction of $\\varphi_{ii'}$ from the two representing objects of $h_{S_i}\\times F\\times h_{S_{i'}}$ and the cocycle condition), which Lemma Tag 03RV (lemma-characterize-finite-locally-constant), lines 9993-10023 invokes: 'Arguing exactly as in the proof of Descent, Lemma 02W5 we obtain a descent datum for schemes (U_i, phi_ij) relative to {X_i -> X} (details omitted)'"
-   }
-  },
-  {
-   "text": "(Part 2: effectivity.) By [lem-galois-descent] (applied to the surjective etale $Y'=\\coprod_iY_i\\to Y$ of step 5; its equivalence is base change $P\\mapsto(P\\times_YY',\\text{canonical datum})$) there are a finite etale $Y$-scheme $P$ [def-weil-pbc-finite-etale-category] and an isomorphism $\\psi:P\\times_YY'\\to P'$ of $Y'$-schemes compatible with the descent data. Restricting to the open $Y_i\\subseteq Y'$ gives isomorphisms of $Y_i$-schemes $\\psi_i:P\\times_YY_i\\to P_i$, and the compatibility says, over each $Y_{ij}$, that $\\varphi_{ij}\\circ(\\psi_i\\times_{Y_i}Y_{ij})=\\psi_j\\times_{Y_j}Y_{ij}$ as morphisms $P\\times_YY_{ij}\\to P_j|_{ij}$, where $(P\\times_YY_i)\\times_{Y_i}Y_{ij}=P\\times_YY_{ij}=(P\\times_YY_j)\\times_{Y_j}Y_{ij}$ canonically [def-pc-fibre-product].",
-   "uses": [
     "lem-galois-descent",
-    "def-weil-pbc-finite-etale-category",
-    "def-pc-fibre-product"
-   ],
-   "elementary": false,
-   "source": {
+    "lem-weil-pbc-etale-covering-base-change"
+  ],
+  "proof_origin": {
+    "by": "document",
     "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma Tag 03RV (lemma-characterize-finite-locally-constant), lines 9993-10023, proof: 'This descent datum is effective for example by Descent, Lemma 0245 and the resulting morphism of schemes U -> X is finite etale by Descent, Lemmas 02LA and 02VN'"
-   }
+    "place": "Lemma Tag 03RV (lemma-characterize-finite-locally-constant), lines 9993-10023, with the omitted details (the descent datum) written out following Descent, Lemma Tag 02W5 (lemma-descent-data-sheaves), literature/stacks-project/descent.tex lines 9334-9423"
   },
-  {
-   "text": "(Part 2: $\\mathcal F\\cong h_P$.) For each $i$ let $\\alpha_i:\\mathcal F|_{Y_i}\\to h_P|_{Y_i}$ be the isomorphism of sheaves on $(Y_i)_{\\Et}$ given by $\\beta_i$, then $h_{\\psi_i^{-1}}:h_{P_i}\\to h_{P\\times_YY_i}$, then the inverse of (*) of step 1. By the definition of $\\gamma_{ij}=h_{\\varphi_{ij}}$ (step 5), the identity $\\varphi_{ij}\\circ(\\psi_i\\times_{Y_i}Y_{ij})=\\psi_j\\times_{Y_j}Y_{ij}$ (step 6) and the compatibility of (*) with restriction (step 1), $\\alpha_i$ and $\\alpha_j$ have the same restriction $\\mathcal F|_{Y_{ij}}\\to h_P|_{Y_{ij}}$. Let $w:W\\to Y$ be an object of $Y_{\\Et}$ and $s\\in\\mathcal F(W)$. Put $W_i=W\\times_YY_i$, an object of $(Y_i)_{\\Et}$ through its second projection; $\\{W_i\\to W\\}_i$ is a covering of $Y_{\\Et}$ by [lem-weil-pbc-etale-covering-base-change], and $W_i\\times_WW_j=W\\times_YY_{ij}$ [def-pc-fibre-product]. Put $t_i=\\alpha_i(s|_{W_i})\\in h_P(W_i)$. By naturality of $\\alpha_i,\\alpha_j$ and their agreement on $Y_{ij}$, $t_i$ and $t_j$ have the same restriction to $W\\times_YY_{ij}$. Since $h_P$ is a sheaf (step 2) [def-weil-pbc-etale-sheaf-of-sets], there is a unique $t\\in h_P(W)$ with $t|_{W_i}=t_i$ for all $i$; set $\\alpha_W(s)=t$. Uniqueness of gluing shows that $\\alpha_W$ is natural in $W$, i.e. $\\alpha:\\mathcal F\\to h_P$ is a morphism of sheaves with $\\alpha|_{Y_i}=\\alpha_i$. The same construction with the $\\alpha_i^{-1}$ (which also agree on the $Y_{ij}$), using that $\\mathcal F$ is a sheaf, gives $\\alpha':h_P\\to\\mathcal F$, and $\\alpha'\\alpha$, $\\alpha\\alpha'$ are the identities because their restrictions to every $W_i$ are, by uniqueness in the sheaf condition. So $\\mathcal F\\cong h_P$ with $P\\to Y$ finite etale. This proves (2).",
-   "uses": [
-    "lem-weil-pbc-etale-covering-base-change",
-    "def-pc-fibre-product",
-    "def-weil-pbc-etale-sheaf-of-sets",
-    "lem-weil-pbc-small-etale-representable-presheaf-sheaf"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/descent.tex",
-    "place": "Lemma Tag 02W5 (lemma-descent-data-sheaves), (2): the sheaf F is representable iff the corresponding descent datum is effective, as invoked by Lemma Tag 03RV (lemma-characterize-finite-locally-constant), lines 9993-10023"
-   }
-  }
- ],
- "proof_deps": [
-  "lem-weil-pbc-etale-composition-cancellation",
-  "def-weil-pbc-etale-site",
-  "def-weil-pbc-etale-sheaf-of-sets",
-  "def-pc-fibre-product",
-  "def-weil-pbc-finite-etale-category",
-  "lem-weil-pbc-small-etale-representable-presheaf-sheaf",
-  "lem-weil-pbc-finite-etale-etale-local-split",
-  "lem-weil-pbc-scheme-coproduct-family",
-  "lem-galois-constant-sheaf-sets-representable",
-  "def-weil-pbc-constant-sheaf",
-  "lem-weil-pbc-etale-local-on-source",
-  "lem-weil-pbc-finite-coproduct",
-  "lem-weil-pbc-finite-local-on-target",
-  "lem-weil-pbc-etale-scheme-base-change",
-  "lem-galois-yoneda-fully-faithful",
-  "lem-weil-pbc-open-fibre-product",
-  "lem-galois-descent",
-  "lem-weil-pbc-etale-covering-base-change"
- ],
- "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Lemma Tag 03RV (lemma-characterize-finite-locally-constant), lines 9993-10023, with the omitted details (the descent datum) written out following Descent, Lemma Tag 02W5 (lemma-descent-data-sheaves), literature/stacks-project/descent.tex lines 9334-9423"
- },
- "mathlib_searches": [
-  {
-   "tool": "leansearch",
-   "query": "finite locally constant sheaf on etale site is representable by finite etale scheme",
-   "results": "AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable (Zariski, open immersions), CategoryTheory.Sheaf.isConstant_iff_mem_essImage, CategoryTheory.Sheaf.IsConstant, CategoryTheory.Sheaf.isSheaf_of_isRepresentable (canonical topology); nothing on finite etale schemes",
-   "date": "2026-10-10",
-   "verdict": "no match"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "finite locally constant étale sheaf of sets is represented by a finite étale scheme",
-   "results": "AlgebraicGeometry.Scheme.Etale.forget, Scheme.etaleTopology, Etale.forgetFullyFaithful, Algebra.isOpen_etaleLocus, Scheme.smallEtaleTopology",
-   "date": "2026-10-10",
-   "verdict": "no match"
-  },
-  {
-   "tool": "loogle",
-   "query": "AlgebraicGeometry.Scheme.smallEtaleTopology, AlgebraicGeometry.IsFinite",
-   "results": "no declarations",
-   "date": "2026-10-10",
-   "verdict": "no match"
-  },
-  {
-   "tool": "grep",
-   "query": "grep -rln 'FiniteLocallyConstant\\|finite.*locally constant' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites",
-   "results": "only AlgebraicGeometry/Morphisms/FlatRank.lean (prose about the rank function being locally constant)",
-   "date": "2026-10-10",
-   "verdict": "no match"
-  }
- ],
- "mathlib_match": null,
- "status": "split",
- "merged_into": null,
- "created": {
-  "by": "worker",
-  "item": "thm-galois-lc-etale",
-  "date": "2026-10-10"
- },
- "lean_audit": {
-  "master": {
-   "state": "none",
-   "decls": [],
-   "missing": [
-    "AlgebraicGeometry.Scheme.isFiniteLocallyConstant_yoneda_and_exists_iso"
-   ]
-  },
-  "slopmaster2": {
-   "state": "sorry_here",
-   "decls": [
+  "mathlib_searches": [
     {
-     "name": "AlgebraicGeometry.Scheme.isFiniteLocallyConstant_yoneda_and_exists_iso",
-     "module": "WeilConjectures.AlgebraicGeometry.HenselianFiniteEtale",
-     "lines": [
-      91,
-      111
-     ],
-     "kind": "theorem",
-     "sorry": true
+      "tool": "leansearch",
+      "query": "finite locally constant sheaf on etale site is representable by finite etale scheme",
+      "results": "AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable (Zariski, open immersions), CategoryTheory.Sheaf.isConstant_iff_mem_essImage, CategoryTheory.Sheaf.IsConstant, CategoryTheory.Sheaf.isSheaf_of_isRepresentable (canonical topology); nothing on finite etale schemes",
+      "date": "2026-10-10",
+      "verdict": "no match"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "finite locally constant étale sheaf of sets is represented by a finite étale scheme",
+      "results": "AlgebraicGeometry.Scheme.Etale.forget, Scheme.etaleTopology, Etale.forgetFullyFaithful, Algebra.isOpen_etaleLocus, Scheme.smallEtaleTopology",
+      "date": "2026-10-10",
+      "verdict": "no match"
+    },
+    {
+      "tool": "loogle",
+      "query": "AlgebraicGeometry.Scheme.smallEtaleTopology, AlgebraicGeometry.IsFinite",
+      "results": "no declarations",
+      "date": "2026-10-10",
+      "verdict": "no match"
+    },
+    {
+      "tool": "grep",
+      "query": "grep -rln 'FiniteLocallyConstant\\|finite.*locally constant' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites",
+      "results": "only AlgebraicGeometry/Morphisms/FlatRank.lean (prose about the rank function being locally constant)",
+      "date": "2026-10-10",
+      "verdict": "no match"
     }
-   ],
-   "missing": [],
-   "open": []
+  ],
+  "mathlib_match": null,
+  "status": "split",
+  "merged_into": null,
+  "created": {
+    "by": "worker",
+    "item": "thm-galois-lc-etale",
+    "date": "2026-10-10"
+  },
+  "lean_audit": {
+    "master": {
+      "state": "none",
+      "decls": [],
+      "missing": [
+        "AlgebraicGeometry.Scheme.isFiniteLocallyConstant_yoneda_and_exists_iso"
+      ]
+    },
+    "slopmaster2": {
+      "state": "sorry_here",
+      "decls": [
+        {
+          "name": "AlgebraicGeometry.Scheme.isFiniteLocallyConstant_yoneda_and_exists_iso",
+          "module": "WeilConjectures.AlgebraicGeometry.HenselianFiniteEtale",
+          "lines": [
+            91,
+            111
+          ],
+          "kind": "theorem",
+          "sorry": true
+        }
+      ],
+      "missing": [],
+      "open": []
+    }
+  },
+  "chapter": "sec-curve-estimates",
+  "unit": "sk-prop-h2",
+  "split_report": {
+    "date": "2026-10-10",
+    "item": "lem-galois-flc-representable",
+    "worker": "stage1",
+    "summary": "Split along Stacks 03RV, whose proof was read with every lemma it cites (04HN, 02W5 and Remark 02W6, 0245, 02LA, 02VN; tags verified in tags/tags). The slopmaster2 declaration AlgebraicGeometry.Scheme.isFiniteLocallyConstant_yoneda_and_exists_iso (HenselianFiniteEtale.lean 91-111) is a bare sorry with no decomposition, so the split follows the source; its notion IsFiniteLocallyConstantSheafOfTypes asks finite stalks instead of finite constant values (equivalent, not a mismatch for the node). Steps: (1) restriction to an etale V and h_Q|_V = h_{Q x_Y V} (universal property of fibre product); (2) h_P is a sheaf (lem-weil-pbc-small-etale-representable-presheaf-sheaf); (3) h_P finite locally constant via 04HN (lem-weil-pbc-finite-etale-etale-local-split) and the new node lem-galois-constant-sheaf-sets-representable (constant sheaf of sets E = h of the disjoint union of E copies, Stacks 03P5); (4) F|_{Y_i} = h_{P_i} with P_i = finite disjoint union of copies of Y_i, finite etale; (5) the descent datum, written out where 03RV says 'details omitted' (Yoneda on (Y_ij)_et gives phi_ij and the cocycle); (6) effectivity and finite-etaleness by lem-galois-descent (the unit's own finite etale descent node, which packages 0245 + 02LA + 02VN); (7) gluing of the local isomorphisms to F = h_P by the sheaf condition. New node: lem-galois-constant-sheaf-sets-representable (unsplit). Generic tools of unit sk-thm-p1 used as black boxes: lem-weil-pbc-finite-etale-etale-local-split (04HN) and lem-weil-pbc-small-etale-representable-presheaf-sheaf (03O3); the other cross-unit citations are Mathlib leaves.",
+    "blueprint": "The item serves thm-galois-lc-etale, proof Step 1 ('the sheaf is finite locally constant': steps 1-3 here, (2) implies (1) of 03RV) and Step 3 ('essential surjectivity': steps 4-7 here, (1) implies (2) of 03RV, with the descent of finite etale schemes through lem-galois-descent, the blueprint node of the same unit for that descent)."
+  },
+  "tool_uses": [
+    "lem-weil-pbc-finite-etale-etale-local-split",
+    "lem-weil-pbc-small-etale-representable-presheaf-sheaf"
+  ],
+  "reviewed": "2026-10-10 L: 7 steps following 03RV (h_P a sheaf, finite locally constant via 04HN and the new constant-sheaf node, local representability by disjoint unions, the descent datum written out from 02W5, effectivity by lem-galois-descent, gluing); 2 tool uses accepted; 1 new node. lem-galois-descent is reached again: unflagged; its imported proof is wrong (Zariski gluing along an etale cover), noted there.",
+  "lean": {
+    "module": "WeilConjectures.AlgebraicGeometry.HenselianFiniteEtale",
+    "declaration": "AlgebraicGeometry.Scheme.isFiniteLocallyConstant_yoneda_and_exists_iso",
+    "branch": "slopmaster2",
+    "line": 91,
+    "declarations": [
+      "AlgebraicGeometry.Scheme.isFiniteLocallyConstant_yoneda_and_exists_iso"
+    ],
+    "sorry_free": false,
+    "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state sorry_here)"
   }
- },
- "chapter": "sec-curve-estimates",
- "unit": "sk-prop-h2",
- "split_report": {
-  "date": "2026-10-10",
-  "item": "lem-galois-flc-representable",
-  "worker": "stage1",
-  "summary": "Split along Stacks 03RV, whose proof was read with every lemma it cites (04HN, 02W5 and Remark 02W6, 0245, 02LA, 02VN; tags verified in tags/tags). The slopmaster2 declaration AlgebraicGeometry.Scheme.isFiniteLocallyConstant_yoneda_and_exists_iso (HenselianFiniteEtale.lean 91-111) is a bare sorry with no decomposition, so the split follows the source; its notion IsFiniteLocallyConstantSheafOfTypes asks finite stalks instead of finite constant values (equivalent, not a mismatch for the node). Steps: (1) restriction to an etale V and h_Q|_V = h_{Q x_Y V} (universal property of fibre product); (2) h_P is a sheaf (lem-weil-pbc-small-etale-representable-presheaf-sheaf); (3) h_P finite locally constant via 04HN (lem-weil-pbc-finite-etale-etale-local-split) and the new node lem-galois-constant-sheaf-sets-representable (constant sheaf of sets E = h of the disjoint union of E copies, Stacks 03P5); (4) F|_{Y_i} = h_{P_i} with P_i = finite disjoint union of copies of Y_i, finite etale; (5) the descent datum, written out where 03RV says 'details omitted' (Yoneda on (Y_ij)_et gives phi_ij and the cocycle); (6) effectivity and finite-etaleness by lem-galois-descent (the unit's own finite etale descent node, which packages 0245 + 02LA + 02VN); (7) gluing of the local isomorphisms to F = h_P by the sheaf condition. New node: lem-galois-constant-sheaf-sets-representable (unsplit). Generic tools of unit sk-thm-p1 used as black boxes: lem-weil-pbc-finite-etale-etale-local-split (04HN) and lem-weil-pbc-small-etale-representable-presheaf-sheaf (03O3); the other cross-unit citations are Mathlib leaves.",
-  "blueprint": "The item serves thm-galois-lc-etale, proof Step 1 ('the sheaf is finite locally constant': steps 1-3 here, (2) implies (1) of 03RV) and Step 3 ('essential surjectivity': steps 4-7 here, (1) implies (2) of 03RV, with the descent of finite etale schemes through lem-galois-descent, the blueprint node of the same unit for that descent)."
- },
- "tool_uses": [
-  "lem-weil-pbc-finite-etale-etale-local-split",
-  "lem-weil-pbc-small-etale-representable-presheaf-sheaf"
- ],
- "reviewed": "2026-10-10 L: 7 steps following 03RV (h_P a sheaf, finite locally constant via 04HN and the new constant-sheaf node, local representability by disjoint unions, the descent datum written out from 02W5, effectivity by lem-galois-descent, gluing); 2 tool uses accepted; 1 new node. lem-galois-descent is reached again: unflagged; its imported proof is wrong (Zariski gluing along an etale cover), noted there."
 }

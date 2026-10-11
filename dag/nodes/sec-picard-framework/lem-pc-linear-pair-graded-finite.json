@@ -1,78 +1,89 @@
 {
- "id": "lem-pc-linear-pair-graded-finite",
- "blueprint": {
-  "is": "lem-pc-linear-pair-graded-finite",
-  "from": null,
-  "same_as": null
- },
- "kind": "statement",
- "title": "A degree bound for a pair of linear forms",
- "statement": "Let $S$ be a standard graded\n$k$-algebra, and let $l_0,l_1\\in S_1$ have no common zero on\n$\\operatorname{Proj}(S)$. There is an integer $N\\ge1$ such that\n\n$$\nS_n=l_0S_{n-1}+l_1S_{n-1}\\qquad(n\\ge N).\n$$",
- "source": {
-  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-coherence/lem-pc-linear-pair-graded-finite.md",
-  "place": "node lem-pc-linear-pair-graded-finite, order 652"
- },
- "stmt_deps": [],
- "proof": [
-  {
-   "text": "Put $J=(l_0,l_1)$, a homogeneous ideal of $S$.\nChoose degree-one generators $x_0,\\ldots,x_m$ of $S$ as in\n[def-pc-standard-graded-algebra]. For each $x_i$, the quotient\nchart $\\operatorname{Spec}((S/J)_{(x_i)})$ is the closed subscheme\nof $D_+(x_i)$ cut out by $l_0/x_i$ and $l_1/x_i$.\nIts underlying space is empty, by the hypothesis and\n[def-pc-proj]. Its coordinate ring is consequently the zero\nring. Thus $1=0$ also in the localization $(S/J)[x_i^{-1}]$,\nwhose degree-zero subring it is. The defining equivalence relation\nfor localization now gives $x_i^{a_i}\\in J$ for some $a_i\\ge1$.",
-   "uses": [
+  "id": "lem-pc-linear-pair-graded-finite",
+  "blueprint": {
+    "is": "lem-pc-linear-pair-graded-finite",
+    "from": null,
+    "same_as": null
+  },
+  "kind": "statement",
+  "title": "A degree bound for a pair of linear forms",
+  "statement": "Let $S$ be a standard graded\n$k$-algebra, and let $l_0,l_1\\in S_1$ have no common zero on\n$\\operatorname{Proj}(S)$. There is an integer $N\\ge1$ such that\n\n$$\nS_n=l_0S_{n-1}+l_1S_{n-1}\\qquad(n\\ge N).\n$$",
+  "source": {
+    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-coherence/lem-pc-linear-pair-graded-finite.md",
+    "place": "node lem-pc-linear-pair-graded-finite, order 652"
+  },
+  "stmt_deps": [],
+  "proof": [
+    {
+      "text": "Put $J=(l_0,l_1)$, a homogeneous ideal of $S$.\nChoose degree-one generators $x_0,\\ldots,x_m$ of $S$ as in\n[def-pc-standard-graded-algebra]. For each $x_i$, the quotient\nchart $\\operatorname{Spec}((S/J)_{(x_i)})$ is the closed subscheme\nof $D_+(x_i)$ cut out by $l_0/x_i$ and $l_1/x_i$.\nIts underlying space is empty, by the hypothesis and\n[def-pc-proj]. Its coordinate ring is consequently the zero\nring. Thus $1=0$ also in the localization $(S/J)[x_i^{-1}]$,\nwhose degree-zero subring it is. The defining equivalence relation\nfor localization now gives $x_i^{a_i}\\in J$ for some $a_i\\ge1$.",
+      "uses": [
+        "def-pc-standard-graded-algebra",
+        "def-pc-proj"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "Choose $N=1+\\sum_{i=0}^m(a_i-1)$. Every monomial of degree\n$n\\ge N$ in the $x_i$ contains a factor $x_i^{a_i}$, so belongs\nto $J$. Such monomials span $S_n$, proving $S_n\\subseteq J$.\nTaking degree $n$ components of $J=(l_0,l_1)$ gives\n$S_n=l_0S_{n-1}+l_1S_{n-1}$, as required.",
+      "uses": [],
+      "elementary": null
+    }
+  ],
+  "proof_deps": [
     "def-pc-standard-graded-algebra",
     "def-pc-proj"
-   ],
-   "elementary": false
+  ],
+  "proof_origin": {
+    "by": "agent",
+    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-coherence/lem-pc-linear-pair-graded-finite.md",
+    "place": "## Proof"
   },
-  {
-   "text": "Choose $N=1+\\sum_{i=0}^m(a_i-1)$. Every monomial of degree\n$n\\ge N$ in the $x_i$ contains a factor $x_i^{a_i}$, so belongs\nto $J$. Such monomials span $S_n$, proving $S_n\\subseteq J$.\nTaking degree $n$ components of $J=(l_0,l_1)$ gives\n$S_n=l_0S_{n-1}+l_1S_{n-1}$, as required.",
-   "uses": [],
-   "elementary": null
-  }
- ],
- "proof_deps": [
-  "def-pc-standard-graded-algebra",
-  "def-pc-proj"
- ],
- "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-coherence/lem-pc-linear-pair-graded-finite.md",
-  "place": "## Proof"
- },
- "mathlib_searches": [],
- "mathlib_match": null,
- "status": "imported",
- "merged_into": null,
- "import_flags": [],
- "blueprint_kind": "lemma",
- "blueprint_order": 652,
- "blueprint_uses": [
-  "def-pc-proj",
-  "def-pc-standard-graded-algebra"
- ],
- "proof_split_by": "paragraphs",
- "lean_audit": {
-  "master": {
-   "state": "none",
-   "decls": [],
-   "missing": []
-  },
-  "slopmaster2": {
-   "state": "closed",
-   "decls": [
-    {
-     "name": "GradedAlgebra.IsStandard.exists_grade_succ_eq_span_mul",
-     "module": "WeilConjectures.RingTheory.GradedAlgebra.Standard",
-     "lines": [
-      144,
-      197
-     ],
-     "kind": "theorem",
-     "sorry": false
+  "mathlib_searches": [],
+  "mathlib_match": null,
+  "status": "imported",
+  "merged_into": null,
+  "import_flags": [],
+  "blueprint_kind": "lemma",
+  "blueprint_order": 652,
+  "blueprint_uses": [
+    "def-pc-proj",
+    "def-pc-standard-graded-algebra"
+  ],
+  "proof_split_by": "paragraphs",
+  "lean_audit": {
+    "master": {
+      "state": "none",
+      "decls": [],
+      "missing": []
+    },
+    "slopmaster2": {
+      "state": "closed",
+      "decls": [
+        {
+          "name": "GradedAlgebra.IsStandard.exists_grade_succ_eq_span_mul",
+          "module": "WeilConjectures.RingTheory.GradedAlgebra.Standard",
+          "lines": [
+            144,
+            197
+          ],
+          "kind": "theorem",
+          "sorry": false
+        }
+      ],
+      "missing": [],
+      "open": []
     }
-   ],
-   "missing": [],
-   "open": []
+  },
+  "chapter": "sec-picard-framework",
+  "unit": "sk-thm-picard-coherence",
+  "lean": {
+    "module": "WeilConjectures.RingTheory.GradedAlgebra.Standard",
+    "declaration": "GradedAlgebra.IsStandard.exists_grade_succ_eq_span_mul",
+    "branch": "slopmaster2",
+    "line": 144,
+    "declarations": [
+      "GradedAlgebra.IsStandard.exists_grade_succ_eq_span_mul"
+    ],
+    "sorry_free": true,
+    "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state closed)"
   }
- },
- "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-coherence"
 }

@@ -1,200 +1,213 @@
 {
- "id": "thm-galois-lc-etale",
- "blueprint": {
-  "is": "thm-galois-lc-etale",
-  "from": null,
-  "same_as": [
-   "lemma-weil-pbc-finite-locally-constant-etale-equivalence"
-  ]
- },
- "kind": "statement",
- "title": "Finite locally constant sheaves and finite etale schemes",
- "statement": "In the situation of [def-galois-categories], the functor\n\n$$\n\\mathrm{F\\acute Et}(Y)\\longrightarrow\\mathrm{FLC}(Y),\\qquad\nP\\longmapsto\\underline{\\operatorname{Hom}}_Y(-,P),\n$$\n\nwhere $\\underline{\\operatorname{Hom}}_Y(T,P)$ is the set of\n$Y$-morphisms $T\\to P$, is an equivalence of categories. It is\ncompatible with base change and with the fibre functors, and it carries\n$M$-torsors to $M$-torsors and simply transitive $M$-actions to\nsimply transitive ones.",
- "source": {
-  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/thm-galois-lc-etale.md",
-  "place": "node thm-galois-lc-etale, order 966"
- },
- "stmt_deps": [
-  "def-galois-categories"
- ],
- "proof": [
-  {
-   "text": "(The functor.) Let $P\\to Y$ be an object of $\\mathrm{F\\acute Et}(Y)$ [def-galois-categories], a finite etale $Y$-scheme [def-weil-pbc-finite-etale-category]. By [lem-galois-flc-representable] (1) the presheaf $h_P=\\underline{\\operatorname{Hom}}_Y(-,P)$, $U\\mapsto\\operatorname{Mor}_Y(U,P)$, on $Y_{\\Et}$ is a sheaf of sets and is finite locally constant: over the members $Y_i$ of a covering of $Y_{\\Et}$ it is isomorphic to a constant sheaf with finite value $S_i$. So $h_P$ is an object of $\\mathrm{FLC}(Y)$. A $Y$-morphism $g:P\\to Q$ gives the morphism of sheaves $h_g:h_P\\to h_Q$, $\\varphi\\mapsto g\\circ\\varphi$ (natural in $U$ because composition is associative), and $h_{g'\\circ g}=h_{g'}\\circ h_g$, $h_{\\mathrm{id}}=\\mathrm{id}$; this is the functor $P\\mapsto\\underline{\\operatorname{Hom}}_Y(-,P)$ of the statement.",
-   "uses": [
+  "id": "thm-galois-lc-etale",
+  "blueprint": {
+    "is": "thm-galois-lc-etale",
+    "from": null,
+    "same_as": [
+      "lemma-weil-pbc-finite-locally-constant-etale-equivalence"
+    ]
+  },
+  "kind": "statement",
+  "title": "Finite locally constant sheaves and finite etale schemes",
+  "statement": "In the situation of [def-galois-categories], the functor\n\n$$\n\\mathrm{F\\acute Et}(Y)\\longrightarrow\\mathrm{FLC}(Y),\\qquad\nP\\longmapsto\\underline{\\operatorname{Hom}}_Y(-,P),\n$$\n\nwhere $\\underline{\\operatorname{Hom}}_Y(T,P)$ is the set of\n$Y$-morphisms $T\\to P$, is an equivalence of categories. It is\ncompatible with base change and with the fibre functors, and it carries\n$M$-torsors to $M$-torsors and simply transitive $M$-actions to\nsimply transitive ones.",
+  "source": {
+    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/thm-galois-lc-etale.md",
+    "place": "node thm-galois-lc-etale, order 966"
+  },
+  "stmt_deps": [
+    "def-galois-categories"
+  ],
+  "proof": [
+    {
+      "text": "(The functor.) Let $P\\to Y$ be an object of $\\mathrm{F\\acute Et}(Y)$ [def-galois-categories], a finite etale $Y$-scheme [def-weil-pbc-finite-etale-category]. By [lem-galois-flc-representable] (1) the presheaf $h_P=\\underline{\\operatorname{Hom}}_Y(-,P)$, $U\\mapsto\\operatorname{Mor}_Y(U,P)$, on $Y_{\\Et}$ is a sheaf of sets and is finite locally constant: over the members $Y_i$ of a covering of $Y_{\\Et}$ it is isomorphic to a constant sheaf with finite value $S_i$. So $h_P$ is an object of $\\mathrm{FLC}(Y)$. A $Y$-morphism $g:P\\to Q$ gives the morphism of sheaves $h_g:h_P\\to h_Q$, $\\varphi\\mapsto g\\circ\\varphi$ (natural in $U$ because composition is associative), and $h_{g'\\circ g}=h_{g'}\\circ h_g$, $h_{\\mathrm{id}}=\\mathrm{id}$; this is the functor $P\\mapsto\\underline{\\operatorname{Hom}}_Y(-,P)$ of the statement.",
+      "uses": [
+        "def-galois-categories",
+        "def-weil-pbc-finite-etale-category",
+        "lem-galois-flc-representable"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/etale-cohomology.tex",
+        "place": "Lemma Tag 03RV (lemma-characterize-finite-locally-constant), (2) implies (1)"
+      }
+    },
+    {
+      "text": "(Full faithfulness.) A finite etale morphism is etale, so every object $P$ of $\\mathrm{F\\acute Et}(Y)$ is an object of the small etale site $Y_{\\Et}$ [def-weil-pbc-etale-site], and the morphisms $P\\to Q$ in $Y_{\\Et}$ are exactly the $Y$-morphisms, i.e. the morphisms of $\\mathrm{F\\acute Et}(Y)$ [def-weil-pbc-finite-etale-category]. The morphisms $h_P\\to h_Q$ in $\\mathrm{FLC}(Y)$ are the morphisms of sheaves, i.e. the natural transformations of the underlying presheaves on $Y_{\\Et}$ [def-galois-categories]. Hence the map $\\operatorname{Hom}_Y(P,Q)\\to\\operatorname{Hom}(h_P,h_Q)$, $g\\mapsto h_g=(g\\circ-)$, of step 1 is the map of [lem-galois-yoneda-fully-faithful] for the category $\\mathcal C=Y_{\\Et}$ and the objects $P,Q$, and is therefore bijective, with inverse $\\tau\\mapsto\\tau_P(\\mathrm{id}_P)$. (This replaces the blueprint's argument by graphs and descent: no descent is needed for full faithfulness.)",
+      "uses": [
+        "def-weil-pbc-etale-site",
+        "def-weil-pbc-finite-etale-category",
+        "def-galois-categories",
+        "lem-galois-yoneda-fully-faithful"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/categories.tex",
+        "place": "Categories, Lemma Tag 001P (lemma-yoneda), applied to $Y_{\\Et}$"
+      }
+    },
+    {
+      "text": "(Essential surjectivity; the equivalence.) Let $\\mathcal F$ be an object of $\\mathrm{FLC}(Y)$, a finite locally constant sheaf of finite sets on $Y_{\\Et}$ [def-galois-categories]. By [lem-galois-flc-representable] (2) there are a finite etale $P_{\\mathcal F}\\to Y$ and an isomorphism $\\epsilon_{\\mathcal F}:h_{P_{\\mathcal F}}\\xrightarrow{\\sim}\\mathcal F$. So the functor $h$ of step 1 is essentially surjective, and fully faithful by step 2. Written out: choosing $P_{\\mathcal F},\\epsilon_{\\mathcal F}$ for every $\\mathcal F$, a morphism $\\alpha:\\mathcal F\\to\\mathcal G$ gives $\\epsilon_{\\mathcal G}^{-1}\\alpha\\epsilon_{\\mathcal F}:h_{P_{\\mathcal F}}\\to h_{P_{\\mathcal G}}$, which by step 2 is $h_{G(\\alpha)}$ for a unique $Y$-morphism $G(\\alpha):P_{\\mathcal F}\\to P_{\\mathcal G}$; uniqueness gives $G(\\beta\\alpha)=G(\\beta)G(\\alpha)$ and $G(\\mathrm{id})=\\mathrm{id}$. Then $\\epsilon:h\\circ G\\cong\\mathrm{id}$ is a natural isomorphism by construction, and for $P$ in $\\mathrm{F\\acute Et}(Y)$ the isomorphism $\\epsilon_{h_P}:h_{P_{h_P}}\\to h_P$ is $h_{\\eta_P}$ for a unique isomorphism $\\eta_P:P_{h_P}\\to P$ (step 2 applied to it and to its inverse), natural in $P$ by step 2 again. So $h$ is an equivalence of categories with quasi-inverse $G$.",
+      "uses": [
+        "def-galois-categories",
+        "lem-galois-flc-representable"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/etale-cohomology.tex",
+        "place": "Lemma Tag 03RV (lemma-characterize-finite-locally-constant), (1) implies (2)"
+      }
+    },
+    {
+      "text": "(Compatibility with base change.) Let $g:Y'\\to Y$ be a morphism of schemes and $P$ in $\\mathrm{F\\acute Et}(Y)$; its base change $g^*P=P\\times_YY'$ is in $\\mathrm{F\\acute Et}(Y')$ [def-weil-pbc-finite-etale-category]. Since $P$ is an object of $Y_{\\Et}$ (step 2), [lem-galois-inverse-image-representable] with $f=g$, $X=Y'$, $V=P$ gives an isomorphism $g^{-1}h_P\\cong h_{Y'\\times_YP}=h_{g^*P}$ of sheaves on $Y'_{\\Et}$, natural in $P$ for $Y$-morphisms. Thus the square formed by $h_Y$, $h_{Y'}$, base change $g^*:\\mathrm{F\\acute Et}(Y)\\to\\mathrm{F\\acute Et}(Y')$ and inverse image $g^{-1}$ commutes up to this natural isomorphism; in particular (with step 1 over $Y'$) $g^{-1}$ carries $\\mathrm{FLC}(Y)$ into $\\mathrm{FLC}(Y')$, every object of $\\mathrm{FLC}(Y)$ being some $h_P$ by step 3.",
+      "uses": [
+        "def-weil-pbc-finite-etale-category",
+        "lem-galois-inverse-image-representable"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/etale-cohomology.tex",
+        "place": "Lemma Tag 03Q1 (lemma-stalk-pullback), part (4)"
+      }
+    },
+    {
+      "text": "(Compatibility with the fibre functors.) Let $\\bar y:\\operatorname{Spec}\\Omega\\to Y$ be the geometric point of [def-galois-categories]. For $P$ in $\\mathrm{F\\acute Et}(Y)$, which is etale over $Y$, [lem-galois-stalk-representable] gives the bijection $(h_P)_{\\bar y}\\to|P_{\\bar y}|$, $[(U,\\bar u),\\varphi]\\mapsto\\varphi\\circ\\bar u$, natural in $P$. So the fibre functor $\\mathcal F\\mapsto\\mathcal F_{\\bar y}$ on $\\mathrm{FLC}(Y)$ composed with $h$ is naturally isomorphic to $P\\mapsto|P_{\\bar y}|$ on $\\mathrm{F\\acute Et}(Y)$.",
+      "uses": [
+        "def-galois-categories",
+        "lem-galois-stalk-representable"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/sites.tex",
+        "place": "Sites, Lemma Tag 00Y6 (lemma-points-recover), with Etale Cohomology, Lemma Tag 04FM (lemma-stalk-gives-point)"
+      }
+    },
+    {
+      "text": "(Torsors and simply transitive actions.) Let $M$ be a finite abelian group; $M$-torsors on $Y_{\\Et}$ are those of [def-weil-pbc-finite-torsors], read as torsors under the constant sheaf $\\underline M$ in the sense of [def-sc-gm-torsor] (simply transitive action on the sections over every object, and sections locally; see the report on the missing local-nonemptiness clause of [def-weil-pbc-finite-torsors]). An $M$-torsor over $Y$ in $\\mathrm{F\\acute Et}(Y)$ is a finite etale surjective $P\\to Y$ with an action of $M$ by $Y$-automorphisms for which $\\coprod_{m\\in M}P\\to P\\times_YP$, $(m+\\cdot,\\mathrm{id})$ on the $m$-th summand, is an isomorphism, as in [lem-galois-etale-torsor-sheaf-torsor]. (a) By step 2, $g\\mapsto h_g$ is a group isomorphism $\\operatorname{Aut}_Y(P)\\to\\operatorname{Aut}(h_P)$, so actions of $M$ on $P$ by $Y$-automorphisms correspond bijectively to actions of $M$ on the sheaf $h_P$, and such an action of $M$ extends to the action of $\\underline M$ of [lem-galois-etale-torsor-sheaf-torsor] (a locally constant $a$ acting by $m$ on $a^{-1}(m)$). (b) Torsors to torsors: if $P$ is an $M$-torsor over $Y$, then $h_P$ with this action is a torsor under $\\underline M$ by [lem-galois-etale-torsor-sheaf-torsor] (1), and it is finite locally constant by step 1; the map $\\underline M\\times h_P\\to h_P\\times h_P$, $(a,\\varphi)\\mapsto(a\\cdot\\varphi,\\varphi)$, is bijective on sections over every $U$ because for each $\\varphi$ the map $a\\mapsto a\\cdot\\varphi$ is bijective. (c) Conversely let $T$ be a torsor under $\\underline M$. By [lem-galois-etale-torsor-sheaf-torsor] (2) $T$ is finite locally constant, with finite values $M$, so by [lem-galois-flc-representable] (2) its underlying sheaf is isomorphic to $h_Q$ for a finite etale $Q\\to Y$, and by [lem-galois-etale-torsor-sheaf-torsor] (3) there is an action of $M$ on $Q$ making $Q$ an $M$-torsor over $Y$ with $h_Q\\cong T$ as torsors. So up to isomorphism the torsors under $\\underline M$ are exactly the $h_P$ of the $M$-torsors $P$ over $Y$. (d) Simply transitive actions: let $P\\to Y$ be finite etale with an action $m\\mapsto(m+\\cdot)$ of $M$ by $Y$-automorphisms. If $P$ with it is an $M$-torsor, $h_P$ with the corresponding action is a torsor under $\\underline M$ by (b). Conversely, if $h_P$ with the corresponding action is a torsor $T$ under $\\underline M$, (c) applied to $T$ and the identity $h_P\\cong T$ gives an action $m\\mapsto(m+'\\cdot)$ making $P$ an $M$-torsor and an isomorphism of torsors $h_P\\to h_P$ from the $+'$-action to the $+$-action; by step 2 it is $h_\\psi$ for a $Y$-automorphism $\\psi$ of $P$, and compatibility with the constant sections gives $\\psi\\circ(m+'\\cdot)=(m+\\cdot)\\circ\\psi$ for all $m$ (step 2 again). Hence $P\\to Y$ is surjective and the morphism $\\coprod_mP\\to P\\times_YP$ for $+$ is the one for $+'$ conjugated by the isomorphisms $\\coprod_m\\psi$ and $\\psi\\times_Y\\psi$, so it is an isomorphism: $P$ with the given action is an $M$-torsor.",
+      "uses": [
+        "def-weil-pbc-finite-torsors",
+        "def-sc-gm-torsor",
+        "lem-galois-etale-torsor-sheaf-torsor",
+        "lem-galois-flc-representable"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/etale-cohomology.tex",
+        "place": "proof of Lemma Tag 09ZB (lemma-gabber-for-h1-absolutely-algebraically-closed), lines 14431-14440, with Lemma Tag 03RV"
+      }
+    }
+  ],
+  "proof_deps": [
     "def-galois-categories",
     "def-weil-pbc-finite-etale-category",
-    "lem-galois-flc-representable"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma Tag 03RV (lemma-characterize-finite-locally-constant), (2) implies (1)"
-   }
-  },
-  {
-   "text": "(Full faithfulness.) A finite etale morphism is etale, so every object $P$ of $\\mathrm{F\\acute Et}(Y)$ is an object of the small etale site $Y_{\\Et}$ [def-weil-pbc-etale-site], and the morphisms $P\\to Q$ in $Y_{\\Et}$ are exactly the $Y$-morphisms, i.e. the morphisms of $\\mathrm{F\\acute Et}(Y)$ [def-weil-pbc-finite-etale-category]. The morphisms $h_P\\to h_Q$ in $\\mathrm{FLC}(Y)$ are the morphisms of sheaves, i.e. the natural transformations of the underlying presheaves on $Y_{\\Et}$ [def-galois-categories]. Hence the map $\\operatorname{Hom}_Y(P,Q)\\to\\operatorname{Hom}(h_P,h_Q)$, $g\\mapsto h_g=(g\\circ-)$, of step 1 is the map of [lem-galois-yoneda-fully-faithful] for the category $\\mathcal C=Y_{\\Et}$ and the objects $P,Q$, and is therefore bijective, with inverse $\\tau\\mapsto\\tau_P(\\mathrm{id}_P)$. (This replaces the blueprint's argument by graphs and descent: no descent is needed for full faithfulness.)",
-   "uses": [
+    "lem-galois-flc-representable",
     "def-weil-pbc-etale-site",
-    "def-weil-pbc-finite-etale-category",
-    "def-galois-categories",
-    "lem-galois-yoneda-fully-faithful"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/categories.tex",
-    "place": "Categories, Lemma Tag 001P (lemma-yoneda), applied to $Y_{\\Et}$"
-   }
-  },
-  {
-   "text": "(Essential surjectivity; the equivalence.) Let $\\mathcal F$ be an object of $\\mathrm{FLC}(Y)$, a finite locally constant sheaf of finite sets on $Y_{\\Et}$ [def-galois-categories]. By [lem-galois-flc-representable] (2) there are a finite etale $P_{\\mathcal F}\\to Y$ and an isomorphism $\\epsilon_{\\mathcal F}:h_{P_{\\mathcal F}}\\xrightarrow{\\sim}\\mathcal F$. So the functor $h$ of step 1 is essentially surjective, and fully faithful by step 2. Written out: choosing $P_{\\mathcal F},\\epsilon_{\\mathcal F}$ for every $\\mathcal F$, a morphism $\\alpha:\\mathcal F\\to\\mathcal G$ gives $\\epsilon_{\\mathcal G}^{-1}\\alpha\\epsilon_{\\mathcal F}:h_{P_{\\mathcal F}}\\to h_{P_{\\mathcal G}}$, which by step 2 is $h_{G(\\alpha)}$ for a unique $Y$-morphism $G(\\alpha):P_{\\mathcal F}\\to P_{\\mathcal G}$; uniqueness gives $G(\\beta\\alpha)=G(\\beta)G(\\alpha)$ and $G(\\mathrm{id})=\\mathrm{id}$. Then $\\epsilon:h\\circ G\\cong\\mathrm{id}$ is a natural isomorphism by construction, and for $P$ in $\\mathrm{F\\acute Et}(Y)$ the isomorphism $\\epsilon_{h_P}:h_{P_{h_P}}\\to h_P$ is $h_{\\eta_P}$ for a unique isomorphism $\\eta_P:P_{h_P}\\to P$ (step 2 applied to it and to its inverse), natural in $P$ by step 2 again. So $h$ is an equivalence of categories with quasi-inverse $G$.",
-   "uses": [
-    "def-galois-categories",
-    "lem-galois-flc-representable"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma Tag 03RV (lemma-characterize-finite-locally-constant), (1) implies (2)"
-   }
-  },
-  {
-   "text": "(Compatibility with base change.) Let $g:Y'\\to Y$ be a morphism of schemes and $P$ in $\\mathrm{F\\acute Et}(Y)$; its base change $g^*P=P\\times_YY'$ is in $\\mathrm{F\\acute Et}(Y')$ [def-weil-pbc-finite-etale-category]. Since $P$ is an object of $Y_{\\Et}$ (step 2), [lem-galois-inverse-image-representable] with $f=g$, $X=Y'$, $V=P$ gives an isomorphism $g^{-1}h_P\\cong h_{Y'\\times_YP}=h_{g^*P}$ of sheaves on $Y'_{\\Et}$, natural in $P$ for $Y$-morphisms. Thus the square formed by $h_Y$, $h_{Y'}$, base change $g^*:\\mathrm{F\\acute Et}(Y)\\to\\mathrm{F\\acute Et}(Y')$ and inverse image $g^{-1}$ commutes up to this natural isomorphism; in particular (with step 1 over $Y'$) $g^{-1}$ carries $\\mathrm{FLC}(Y)$ into $\\mathrm{FLC}(Y')$, every object of $\\mathrm{FLC}(Y)$ being some $h_P$ by step 3.",
-   "uses": [
-    "def-weil-pbc-finite-etale-category",
-    "lem-galois-inverse-image-representable"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma Tag 03Q1 (lemma-stalk-pullback), part (4)"
-   }
-  },
-  {
-   "text": "(Compatibility with the fibre functors.) Let $\\bar y:\\operatorname{Spec}\\Omega\\to Y$ be the geometric point of [def-galois-categories]. For $P$ in $\\mathrm{F\\acute Et}(Y)$, which is etale over $Y$, [lem-galois-stalk-representable] gives the bijection $(h_P)_{\\bar y}\\to|P_{\\bar y}|$, $[(U,\\bar u),\\varphi]\\mapsto\\varphi\\circ\\bar u$, natural in $P$. So the fibre functor $\\mathcal F\\mapsto\\mathcal F_{\\bar y}$ on $\\mathrm{FLC}(Y)$ composed with $h$ is naturally isomorphic to $P\\mapsto|P_{\\bar y}|$ on $\\mathrm{F\\acute Et}(Y)$.",
-   "uses": [
-    "def-galois-categories",
-    "lem-galois-stalk-representable"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Sites, Lemma Tag 00Y6 (lemma-points-recover), with Etale Cohomology, Lemma Tag 04FM (lemma-stalk-gives-point)"
-   }
-  },
-  {
-   "text": "(Torsors and simply transitive actions.) Let $M$ be a finite abelian group; $M$-torsors on $Y_{\\Et}$ are those of [def-weil-pbc-finite-torsors], read as torsors under the constant sheaf $\\underline M$ in the sense of [def-sc-gm-torsor] (simply transitive action on the sections over every object, and sections locally; see the report on the missing local-nonemptiness clause of [def-weil-pbc-finite-torsors]). An $M$-torsor over $Y$ in $\\mathrm{F\\acute Et}(Y)$ is a finite etale surjective $P\\to Y$ with an action of $M$ by $Y$-automorphisms for which $\\coprod_{m\\in M}P\\to P\\times_YP$, $(m+\\cdot,\\mathrm{id})$ on the $m$-th summand, is an isomorphism, as in [lem-galois-etale-torsor-sheaf-torsor]. (a) By step 2, $g\\mapsto h_g$ is a group isomorphism $\\operatorname{Aut}_Y(P)\\to\\operatorname{Aut}(h_P)$, so actions of $M$ on $P$ by $Y$-automorphisms correspond bijectively to actions of $M$ on the sheaf $h_P$, and such an action of $M$ extends to the action of $\\underline M$ of [lem-galois-etale-torsor-sheaf-torsor] (a locally constant $a$ acting by $m$ on $a^{-1}(m)$). (b) Torsors to torsors: if $P$ is an $M$-torsor over $Y$, then $h_P$ with this action is a torsor under $\\underline M$ by [lem-galois-etale-torsor-sheaf-torsor] (1), and it is finite locally constant by step 1; the map $\\underline M\\times h_P\\to h_P\\times h_P$, $(a,\\varphi)\\mapsto(a\\cdot\\varphi,\\varphi)$, is bijective on sections over every $U$ because for each $\\varphi$ the map $a\\mapsto a\\cdot\\varphi$ is bijective. (c) Conversely let $T$ be a torsor under $\\underline M$. By [lem-galois-etale-torsor-sheaf-torsor] (2) $T$ is finite locally constant, with finite values $M$, so by [lem-galois-flc-representable] (2) its underlying sheaf is isomorphic to $h_Q$ for a finite etale $Q\\to Y$, and by [lem-galois-etale-torsor-sheaf-torsor] (3) there is an action of $M$ on $Q$ making $Q$ an $M$-torsor over $Y$ with $h_Q\\cong T$ as torsors. So up to isomorphism the torsors under $\\underline M$ are exactly the $h_P$ of the $M$-torsors $P$ over $Y$. (d) Simply transitive actions: let $P\\to Y$ be finite etale with an action $m\\mapsto(m+\\cdot)$ of $M$ by $Y$-automorphisms. If $P$ with it is an $M$-torsor, $h_P$ with the corresponding action is a torsor under $\\underline M$ by (b). Conversely, if $h_P$ with the corresponding action is a torsor $T$ under $\\underline M$, (c) applied to $T$ and the identity $h_P\\cong T$ gives an action $m\\mapsto(m+'\\cdot)$ making $P$ an $M$-torsor and an isomorphism of torsors $h_P\\to h_P$ from the $+'$-action to the $+$-action; by step 2 it is $h_\\psi$ for a $Y$-automorphism $\\psi$ of $P$, and compatibility with the constant sections gives $\\psi\\circ(m+'\\cdot)=(m+\\cdot)\\circ\\psi$ for all $m$ (step 2 again). Hence $P\\to Y$ is surjective and the morphism $\\coprod_mP\\to P\\times_YP$ for $+$ is the one for $+'$ conjugated by the isomorphisms $\\coprod_m\\psi$ and $\\psi\\times_Y\\psi$, so it is an isomorphism: $P$ with the given action is an $M$-torsor.",
-   "uses": [
+    "lem-galois-yoneda-fully-faithful",
+    "lem-galois-inverse-image-representable",
+    "lem-galois-stalk-representable",
     "def-weil-pbc-finite-torsors",
     "def-sc-gm-torsor",
-    "lem-galois-etale-torsor-sheaf-torsor",
-    "lem-galois-flc-representable"
-   ],
-   "elementary": false,
-   "source": {
+    "lem-galois-etale-torsor-sheaf-torsor"
+  ],
+  "proof_origin": {
+    "by": "agent",
     "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "proof of Lemma Tag 09ZB (lemma-gabber-for-h1-absolutely-algebraically-closed), lines 14431-14440, with Lemma Tag 03RV"
-   }
-  }
- ],
- "proof_deps": [
-  "def-galois-categories",
-  "def-weil-pbc-finite-etale-category",
-  "lem-galois-flc-representable",
-  "def-weil-pbc-etale-site",
-  "lem-galois-yoneda-fully-faithful",
-  "lem-galois-inverse-image-representable",
-  "lem-galois-stalk-representable",
-  "def-weil-pbc-finite-torsors",
-  "def-sc-gm-torsor",
-  "lem-galois-etale-torsor-sheaf-torsor"
- ],
- "proof_origin": {
-  "by": "agent",
-  "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "assembled by the worker along the Lean decomposition of slopmaster2 (isFiniteLocallyConstant_yoneda_and_exists_iso, EtaleTorsor.toSheafTorsor, EtaleTorsorDescent): Lemma Tag 03RV for steps 1 and 3, Lemma Tag 03Q1 (4) for step 4, Sites 00Y6 with Lemma Tag 04FM for step 5, Categories 001P for step 2, proof of Lemma Tag 09ZB for step 6; the assembly itself (the equivalence with its compatibilities) is in no single place of the Stacks project"
- },
- "mathlib_searches": [],
- "mathlib_match": null,
- "status": "split",
- "merged_into": null,
- "import_flags": [],
- "blueprint_kind": "theorem",
- "blueprint_order": 966,
- "blueprint_uses": [
-  "def-galois-categories",
-  "def-weil-pbc-finite-torsors",
-  "lem-fet-locally-trivial",
-  "lem-galois-descent"
- ],
- "proof_split_by": "paragraphs",
- "lean_audit": {
-  "master": {
-   "state": "none",
-   "decls": [],
-   "missing": []
+    "place": "assembled by the worker along the Lean decomposition of slopmaster2 (isFiniteLocallyConstant_yoneda_and_exists_iso, EtaleTorsor.toSheafTorsor, EtaleTorsorDescent): Lemma Tag 03RV for steps 1 and 3, Lemma Tag 03Q1 (4) for step 4, Sites 00Y6 with Lemma Tag 04FM for step 5, Categories 001P for step 2, proof of Lemma Tag 09ZB for step 6; the assembly itself (the equivalence with its compatibilities) is in no single place of the Stacks project"
   },
-  "slopmaster2": {
-   "state": "rests_on_sorry",
-   "decls": [
-    {
-     "name": "AlgebraicGeometry.Scheme.EtaleTorsor.toSheafTorsor",
-     "module": "WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsor",
-     "lines": [
-      425,
-      438
-     ],
-     "kind": "def",
-     "sorry": false
+  "mathlib_searches": [],
+  "mathlib_match": null,
+  "status": "split",
+  "merged_into": null,
+  "import_flags": [],
+  "blueprint_kind": "theorem",
+  "blueprint_order": 966,
+  "blueprint_uses": [
+    "def-galois-categories",
+    "def-weil-pbc-finite-torsors",
+    "lem-fet-locally-trivial",
+    "lem-galois-descent"
+  ],
+  "proof_split_by": "paragraphs",
+  "lean_audit": {
+    "master": {
+      "state": "none",
+      "decls": [],
+      "missing": []
     },
-    {
-     "name": "AlgebraicGeometry.Scheme.EtaleTorsor.exists_toSheafTorsor_equiv",
-     "module": "WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsorDescent",
-     "lines": [
-      481,
-      493
-     ],
-     "kind": "theorem",
-     "sorry": false
-    },
-    {
-     "name": "AlgebraicGeometry.Scheme.EtaleTorsor.exists_toSheafTorsor_equiv_of_iso",
-     "module": "WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsorDescent",
-     "lines": [
-      345,
-      360
-     ],
-     "kind": "theorem",
-     "sorry": false,
-     "partial": "`thm-galois-lc-etale`, simply transitive actions"
+    "slopmaster2": {
+      "state": "rests_on_sorry",
+      "decls": [
+        {
+          "name": "AlgebraicGeometry.Scheme.EtaleTorsor.toSheafTorsor",
+          "module": "WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsor",
+          "lines": [
+            425,
+            438
+          ],
+          "kind": "def",
+          "sorry": false
+        },
+        {
+          "name": "AlgebraicGeometry.Scheme.EtaleTorsor.exists_toSheafTorsor_equiv",
+          "module": "WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsorDescent",
+          "lines": [
+            481,
+            493
+          ],
+          "kind": "theorem",
+          "sorry": false
+        },
+        {
+          "name": "AlgebraicGeometry.Scheme.EtaleTorsor.exists_toSheafTorsor_equiv_of_iso",
+          "module": "WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsorDescent",
+          "lines": [
+            345,
+            360
+          ],
+          "kind": "theorem",
+          "sorry": false,
+          "partial": "`thm-galois-lc-etale`, simply transitive actions"
+        }
+      ],
+      "missing": [],
+      "open": [
+        {
+          "name": "AlgebraicGeometry.Scheme.isFiniteLocallyConstant_yoneda_and_exists_iso",
+          "module": "WeilConjectures.AlgebraicGeometry.HenselianFiniteEtale",
+          "lines": [
+            91,
+            111
+          ],
+          "kind": "theorem",
+          "nodes": [
+            "lemma-weil-pbc-finite-locally-constant-etale-equivalence",
+            "lem-galois-flc-representable"
+          ],
+          "below": false
+        }
+      ]
     }
-   ],
-   "missing": [],
-   "open": [
-    {
-     "name": "AlgebraicGeometry.Scheme.isFiniteLocallyConstant_yoneda_and_exists_iso",
-     "module": "WeilConjectures.AlgebraicGeometry.HenselianFiniteEtale",
-     "lines": [
-      91,
-      111
-     ],
-     "kind": "theorem",
-     "nodes": [
-      "lemma-weil-pbc-finite-locally-constant-etale-equivalence",
-      "lem-galois-flc-representable"
-     ],
-     "below": false
-    }
-   ]
+  },
+  "chapter": "sec-curve-estimates",
+  "unit": "sk-prop-h2",
+  "split_report": {
+    "date": "2026-10-10",
+    "item": "thm-galois-lc-etale",
+    "worker": "stage1",
+    "summary": "Split along the Lean of slopmaster2 (71d63dcf): the node's only open declaration is isFiniteLocallyConstant_yoneda_and_exists_iso (the two object-level halves of Stacks 03RV), which gets the new node lem-galois-flc-representable (sorry_here); the torsor part is closed Lean (EtaleTorsor.toSheafTorsor, isFiniteLocallyConstantSheafOfTypes_sheaf, exists_toSheafTorsor_equiv_of_iso), stated as the new node lem-galois-etale-torsor-sheaf-torsor (closed). Full faithfulness is Yoneda in Y_et (new Mathlib leaf lem-galois-yoneda-fully-faithful) instead of the blueprint's descent argument; base change is Stacks 03Q1 (4) (new node lem-galois-inverse-image-representable); fibre functors are Sites 00Y6 + 04FM (new Mathlib leaf lem-galois-stalk-representable). The blueprint's lem-fet-locally-trivial and lem-galois-descent are no longer used (they are what the Lean of 03RV will need, not this assembly). The equivalence argument (fully faithful + essentially surjective) is written out in step 3; the 'simply transitive actions' clause is proved in step 6 (d).",
+    "blueprint": "Step 1 realizes the blueprint proof's 'Step 1: the sheaf is finite locally constant'; step 2 realizes 'Step 2: full faithfulness' (by Yoneda in place of graphs and descent); step 3 realizes 'Step 3: essential surjectivity' (the descent there is inside lem-galois-flc-representable (2)); steps 4, 5 and 6 realize 'Step 4: the compatibilities and the torsor statement' (base change, fibre $|P_{\\bar y}|$, and the M-action / simple transitivity sentence)."
+  },
+  "reviewed": "2026-10-10 L: 6 steps along the slopmaster2 Lean (03RV as a node, Yoneda full faithfulness leaf, base change 03Q1 (4) node, stalks leaf, torsors node closed on slopmaster2); 5 new nodes; the blueprint proof's descent/graph argument replaced by Yoneda. def-weil-pbc-finite-torsors lacks the local-sections condition (lead note, HUMAN.md).",
+  "lean": {
+    "module": "WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsor",
+    "declaration": "AlgebraicGeometry.Scheme.EtaleTorsor.toSheafTorsor",
+    "branch": "slopmaster2",
+    "line": 425,
+    "declarations": [
+      "AlgebraicGeometry.Scheme.EtaleTorsor.toSheafTorsor",
+      "AlgebraicGeometry.Scheme.EtaleTorsor.exists_toSheafTorsor_equiv",
+      "AlgebraicGeometry.Scheme.EtaleTorsor.exists_toSheafTorsor_equiv_of_iso"
+    ],
+    "sorry_free": false,
+    "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state rests_on_sorry)"
   }
- },
- "chapter": "sec-curve-estimates",
- "unit": "sk-prop-h2",
- "split_report": {
-  "date": "2026-10-10",
-  "item": "thm-galois-lc-etale",
-  "worker": "stage1",
-  "summary": "Split along the Lean of slopmaster2 (71d63dcf): the node's only open declaration is isFiniteLocallyConstant_yoneda_and_exists_iso (the two object-level halves of Stacks 03RV), which gets the new node lem-galois-flc-representable (sorry_here); the torsor part is closed Lean (EtaleTorsor.toSheafTorsor, isFiniteLocallyConstantSheafOfTypes_sheaf, exists_toSheafTorsor_equiv_of_iso), stated as the new node lem-galois-etale-torsor-sheaf-torsor (closed). Full faithfulness is Yoneda in Y_et (new Mathlib leaf lem-galois-yoneda-fully-faithful) instead of the blueprint's descent argument; base change is Stacks 03Q1 (4) (new node lem-galois-inverse-image-representable); fibre functors are Sites 00Y6 + 04FM (new Mathlib leaf lem-galois-stalk-representable). The blueprint's lem-fet-locally-trivial and lem-galois-descent are no longer used (they are what the Lean of 03RV will need, not this assembly). The equivalence argument (fully faithful + essentially surjective) is written out in step 3; the 'simply transitive actions' clause is proved in step 6 (d).",
-  "blueprint": "Step 1 realizes the blueprint proof's 'Step 1: the sheaf is finite locally constant'; step 2 realizes 'Step 2: full faithfulness' (by Yoneda in place of graphs and descent); step 3 realizes 'Step 3: essential surjectivity' (the descent there is inside lem-galois-flc-representable (2)); steps 4, 5 and 6 realize 'Step 4: the compatibilities and the torsor statement' (base change, fibre $|P_{\\bar y}|$, and the M-action / simple transitivity sentence)."
- },
- "reviewed": "2026-10-10 L: 6 steps along the slopmaster2 Lean (03RV as a node, Yoneda full faithfulness leaf, base change 03Q1 (4) node, stalks leaf, torsors node closed on slopmaster2); 5 new nodes; the blueprint proof's descent/graph argument replaced by Yoneda. def-weil-pbc-finite-torsors lacks the local-sections condition (lead note, HUMAN.md)."
 }

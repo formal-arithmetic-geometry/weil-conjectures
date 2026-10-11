@@ -1,95 +1,106 @@
 {
- "id": "lem-pc-pic-exact",
- "blueprint": {
-  "is": "lem-pc-pic-exact",
-  "from": null,
-  "same_as": null
- },
- "kind": "statement",
- "title": "Exactness of the Picard sequence",
- "statement": "(Picard Schemes of Curves, Lemma 44.4.2, Tag\n[0B9M](https://stacks.math.columbia.edu/tag/0B9M).)\nLet $f:X\\to S$ be a morphism of schemes as in\nDefinition [def-pc-picard-functor].\nIf $\\mathcal{O}_T\\to f_{T,*}\\mathcal{O}_{X_T}$ is an isomorphism for all\n$T\\in\\operatorname{Ob}((\\mathit{Sch}/S)_{fppf})$, then\n\n$$\n0\\;\\longrightarrow\\;\\operatorname{Pic}(T)\\;\\longrightarrow\\;\\operatorname{Pic}(X_T)\\;\n\\longrightarrow\\;\\operatorname{Pic}_{X/S}(T)\n$$\n\nis an exact sequence for all $T$ (the first map is $f_T^*$, the second the\ncanonical map).",
- "source": {
-  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-prop-picard-pic-split/lem-pc-pic-exact.md",
-  "place": "node lem-pc-pic-exact, order 814",
-  "external": [
-   {
-    "document": "Stacks Project",
-    "place": "Tag 0B9M"
-   }
-  ]
- },
- "stmt_deps": [
-  "def-pc-picard-functor",
-  "def-pc-fppf-site",
-  "def-sc-invertible-module",
-  "def-sc-picard-group"
- ],
- "proof": [
-  {
-   "text": "By base change we may assume $T=S$. *Injectivity.* Let $\\mathcal{N}$ be an\ninvertible $\\mathcal{O}_S$-module with $f^*\\mathcal{N}\\cong\\mathcal{O}_X$. Then\n$f_*f^*\\mathcal{N}\\cong f_*\\mathcal{O}_X\\cong\\mathcal{O}_S$ by hypothesis. The canonical map\n$\\mathcal{N}\\to f_*f^*\\mathcal{N}$ is locally an isomorphism (the composition with\n$\\mathcal{O}_S\\to f_*f^*\\mathcal{O}_S$ is the identity of $\\mathcal{O}_S$), and the composite\n$\\mathcal{N}\\to f_*f^*\\mathcal{N}\\to\\mathcal{O}_S$ is therefore an isomorphism; so $\\mathcal{N}$ is\ntrivial, and $f_S^*$ is injective.",
-   "uses": [],
-   "elementary": null
+  "id": "lem-pc-pic-exact",
+  "blueprint": {
+    "is": "lem-pc-pic-exact",
+    "from": null,
+    "same_as": null
   },
-  {
-   "text": "*Kernel equals image.* Let $\\mathcal{L}$ be an invertible $\\mathcal{O}_X$-module\nwhose image in $\\operatorname{Pic}_{X/S}(S)$ is trivial. Since $\\operatorname{Pic}_{X/S}$ is the\nfppf sheafification of $T\\mapsto\\operatorname{Pic}(X_T)$, there is an fppf covering\n$\\{S_i\\to S\\}$ such that $\\mathcal{L}|_{X_{S_i}}\\cong\\mathcal{O}_{X_{S_i}}$; choose\ntrivializing sections $s_i$ of $\\mathcal{L}|_{X_{S_i}}$. Then $\\mathrm{pr}_0^*s_i$ and\n$\\mathrm{pr}_1^*s_j$ are both trivialising sections of $\\mathcal{L}$ on\n$X_{S_i\\times_SS_j}$, so they differ by a multiplicative unit\n\n$$\nf_{ij}\\in\\Gamma(X_{S_i\\times_SS_j},\\mathcal{O}^*)\n=\\Gamma(S_i\\times_SS_j,\\mathcal{O}^*)\n$$\n\n(the equality is the isomorphism $\\mathcal{O}_T\\to f_{T,*}\\mathcal{O}_{X_T}$ and its\ninverse on global sections, applied to\n$T=S_i\\times_SS_j$). The $f_{ij}$ satisfy the cocycle condition on\n$S_i\\times_SS_j\\times_SS_k$, hence define a descent datum on invertible\nsheaves for the fppf (in particular fpqc) covering\n$\\{S_i\\to S\\}$; by [lem-pc-fpqc-descent] there is an invertible\n$\\mathcal{O}_S$-module $\\mathcal{N}$ with trivializations over $S_i$ whose associated\ndescent datum is $\\{f_{ij}\\}$. Then $f^*\\mathcal{N}\\cong\\mathcal{L}$, as both are\ninvertible modules with the same descent datum for the covering\n$\\{X_{S_i}\\to X\\}$ (the pullback of the covering; base changes of fppf\ncoverings are fppf coverings), which shows the kernel is contained in the\nimage of $f_S^*$; the reverse inclusion is immediate, since the composite\n$\\operatorname{Pic}(S)\\xrightarrow{f_S^*}\\operatorname{Pic}(X)\\to\\operatorname{Pic}_{X/S}(S)$ vanishes on the\nfppf covering $\\{S_i\\to S\\}$ (the restrictions of the pulled-back module\nare trivial). This proves the lemma.",
-   "uses": [
-    "lem-pc-fpqc-descent"
-   ],
-   "elementary": false
-  }
- ],
- "proof_deps": [
-  "lem-pc-fpqc-descent"
- ],
- "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-prop-picard-pic-split/lem-pc-pic-exact.md",
-  "place": "## Proof"
- },
- "mathlib_searches": [],
- "mathlib_match": null,
- "status": "imported",
- "merged_into": null,
- "import_flags": [],
- "blueprint_kind": "lemma",
- "blueprint_order": 814,
- "blueprint_uses": [
-  "def-pc-fppf-site",
-  "def-pc-picard-functor",
-  "def-sc-invertible-module",
-  "def-sc-picard-group",
-  "lem-pc-fpqc-descent"
- ],
- "uses_not_cited": [
-  "def-pc-fppf-site",
-  "def-sc-invertible-module",
-  "def-sc-picard-group"
- ],
- "proof_split_by": "paragraphs",
- "lean_audit": {
-  "master": {
-   "state": "none",
-   "decls": [],
-   "missing": []
+  "kind": "statement",
+  "title": "Exactness of the Picard sequence",
+  "statement": "(Picard Schemes of Curves, Lemma 44.4.2, Tag\n[0B9M](https://stacks.math.columbia.edu/tag/0B9M).)\nLet $f:X\\to S$ be a morphism of schemes as in\nDefinition [def-pc-picard-functor].\nIf $\\mathcal{O}_T\\to f_{T,*}\\mathcal{O}_{X_T}$ is an isomorphism for all\n$T\\in\\operatorname{Ob}((\\mathit{Sch}/S)_{fppf})$, then\n\n$$\n0\\;\\longrightarrow\\;\\operatorname{Pic}(T)\\;\\longrightarrow\\;\\operatorname{Pic}(X_T)\\;\n\\longrightarrow\\;\\operatorname{Pic}_{X/S}(T)\n$$\n\nis an exact sequence for all $T$ (the first map is $f_T^*$, the second the\ncanonical map).",
+  "source": {
+    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-prop-picard-pic-split/lem-pc-pic-exact.md",
+    "place": "node lem-pc-pic-exact, order 814",
+    "external": [
+      {
+        "document": "Stacks Project",
+        "place": "Tag 0B9M"
+      }
+    ]
   },
-  "slopmaster2": {
-   "state": "closed",
-   "decls": [
+  "stmt_deps": [
+    "def-pc-picard-functor",
+    "def-pc-fppf-site",
+    "def-sc-invertible-module",
+    "def-sc-picard-group"
+  ],
+  "proof": [
     {
-     "name": "AlgebraicGeometry.toPicardFunctor_app_eq_iff",
-     "module": "WeilConjectures.AlgebraicGeometry.Picard.Defs",
-     "lines": [
-      413,
-      428
-     ],
-     "kind": "theorem",
-     "sorry": false
+      "text": "By base change we may assume $T=S$. *Injectivity.* Let $\\mathcal{N}$ be an\ninvertible $\\mathcal{O}_S$-module with $f^*\\mathcal{N}\\cong\\mathcal{O}_X$. Then\n$f_*f^*\\mathcal{N}\\cong f_*\\mathcal{O}_X\\cong\\mathcal{O}_S$ by hypothesis. The canonical map\n$\\mathcal{N}\\to f_*f^*\\mathcal{N}$ is locally an isomorphism (the composition with\n$\\mathcal{O}_S\\to f_*f^*\\mathcal{O}_S$ is the identity of $\\mathcal{O}_S$), and the composite\n$\\mathcal{N}\\to f_*f^*\\mathcal{N}\\to\\mathcal{O}_S$ is therefore an isomorphism; so $\\mathcal{N}$ is\ntrivial, and $f_S^*$ is injective.",
+      "uses": [],
+      "elementary": null
+    },
+    {
+      "text": "*Kernel equals image.* Let $\\mathcal{L}$ be an invertible $\\mathcal{O}_X$-module\nwhose image in $\\operatorname{Pic}_{X/S}(S)$ is trivial. Since $\\operatorname{Pic}_{X/S}$ is the\nfppf sheafification of $T\\mapsto\\operatorname{Pic}(X_T)$, there is an fppf covering\n$\\{S_i\\to S\\}$ such that $\\mathcal{L}|_{X_{S_i}}\\cong\\mathcal{O}_{X_{S_i}}$; choose\ntrivializing sections $s_i$ of $\\mathcal{L}|_{X_{S_i}}$. Then $\\mathrm{pr}_0^*s_i$ and\n$\\mathrm{pr}_1^*s_j$ are both trivialising sections of $\\mathcal{L}$ on\n$X_{S_i\\times_SS_j}$, so they differ by a multiplicative unit\n\n$$\nf_{ij}\\in\\Gamma(X_{S_i\\times_SS_j},\\mathcal{O}^*)\n=\\Gamma(S_i\\times_SS_j,\\mathcal{O}^*)\n$$\n\n(the equality is the isomorphism $\\mathcal{O}_T\\to f_{T,*}\\mathcal{O}_{X_T}$ and its\ninverse on global sections, applied to\n$T=S_i\\times_SS_j$). The $f_{ij}$ satisfy the cocycle condition on\n$S_i\\times_SS_j\\times_SS_k$, hence define a descent datum on invertible\nsheaves for the fppf (in particular fpqc) covering\n$\\{S_i\\to S\\}$; by [lem-pc-fpqc-descent] there is an invertible\n$\\mathcal{O}_S$-module $\\mathcal{N}$ with trivializations over $S_i$ whose associated\ndescent datum is $\\{f_{ij}\\}$. Then $f^*\\mathcal{N}\\cong\\mathcal{L}$, as both are\ninvertible modules with the same descent datum for the covering\n$\\{X_{S_i}\\to X\\}$ (the pullback of the covering; base changes of fppf\ncoverings are fppf coverings), which shows the kernel is contained in the\nimage of $f_S^*$; the reverse inclusion is immediate, since the composite\n$\\operatorname{Pic}(S)\\xrightarrow{f_S^*}\\operatorname{Pic}(X)\\to\\operatorname{Pic}_{X/S}(S)$ vanishes on the\nfppf covering $\\{S_i\\to S\\}$ (the restrictions of the pulled-back module\nare trivial). This proves the lemma.",
+      "uses": [
+        "lem-pc-fpqc-descent"
+      ],
+      "elementary": false
     }
-   ],
-   "missing": [],
-   "open": []
+  ],
+  "proof_deps": [
+    "lem-pc-fpqc-descent"
+  ],
+  "proof_origin": {
+    "by": "agent",
+    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-prop-picard-pic-split/lem-pc-pic-exact.md",
+    "place": "## Proof"
+  },
+  "mathlib_searches": [],
+  "mathlib_match": null,
+  "status": "imported",
+  "merged_into": null,
+  "import_flags": [],
+  "blueprint_kind": "lemma",
+  "blueprint_order": 814,
+  "blueprint_uses": [
+    "def-pc-fppf-site",
+    "def-pc-picard-functor",
+    "def-sc-invertible-module",
+    "def-sc-picard-group",
+    "lem-pc-fpqc-descent"
+  ],
+  "uses_not_cited": [
+    "def-pc-fppf-site",
+    "def-sc-invertible-module",
+    "def-sc-picard-group"
+  ],
+  "proof_split_by": "paragraphs",
+  "lean_audit": {
+    "master": {
+      "state": "none",
+      "decls": [],
+      "missing": []
+    },
+    "slopmaster2": {
+      "state": "closed",
+      "decls": [
+        {
+          "name": "AlgebraicGeometry.toPicardFunctor_app_eq_iff",
+          "module": "WeilConjectures.AlgebraicGeometry.Picard.Defs",
+          "lines": [
+            413,
+            428
+          ],
+          "kind": "theorem",
+          "sorry": false
+        }
+      ],
+      "missing": [],
+      "open": []
+    }
+  },
+  "chapter": "sec-picard-framework",
+  "unit": "sk-prop-picard-pic-split",
+  "lean": {
+    "module": "WeilConjectures.AlgebraicGeometry.Picard.Defs",
+    "declaration": "AlgebraicGeometry.toPicardFunctor_app_eq_iff",
+    "branch": "slopmaster2",
+    "line": 413,
+    "declarations": [
+      "AlgebraicGeometry.toPicardFunctor_app_eq_iff"
+    ],
+    "sorry_free": true,
+    "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state closed)"
   }
- },
- "chapter": "sec-picard-framework",
- "unit": "sk-prop-picard-pic-split"
 }

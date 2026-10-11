@@ -1,129 +1,140 @@
 {
- "id": "lem-wf-boundary-semicontinuity",
- "blueprint": {
-  "is": "lem-wf-boundary-semicontinuity",
-  "from": null,
-  "same_as": null
- },
- "kind": "statement",
- "title": "Boundary semicontinuity of weights on a curve",
- "statement": "Let $X_0$ be a curve over $k_0=\\mathbf F_q$ in the sense of\n[d-real-setup] (smooth, separated, geometrically connected; it need\nnot be affine, e.g. it may be proper), let $j:U_0\\hookrightarrow X_0$ be a dense open\nimmersion with finite complement $S_0$, and let $\\mathcal F$ be a\nlisse Weil sheaf of rank $r\\ge1$ on $U_0$. Assume that for every\nclosed point $x\\in|U_0|$ and every eigenvalue $\\alpha$ of the local\nFrobenius $F_x$ on $\\mathcal F_{\\bar x}$ the inequality\n\n$$\n|\\iota(\\alpha)|^2\\le q_x^{\\beta}\n$$\n\nholds for a real number $\\beta$ (i.e. $\\mathcal F$ is punctually\n$\\iota$-mixed of weights at most $\\beta$ in the punctual weight\nconvention of [def-weil-punctual-weights]). Then the same\ninequality holds at every boundary point: for every $s\\in S_0$ and\nevery eigenvalue $\\alpha$ of $F_s$ on the middle-extension stalk\n$(j_*\\mathcal F)_{\\bar s}$ of\n[def-wf-middle-extension],\n\n$$\n|\\iota(\\alpha)|^2\\le q_s^{\\beta}.\n$$\n\nSince $j_*\\mathcal F$ restricts to $\\mathcal F$ on $U_0$, this says\nthat $j_*\\mathcal F$ has punctual weights at most $\\beta$ on all of\n$X_0$.",
- "source": {
-  "document": "literature/blueprint/master/blueprint/sec-purity-real-sheaves/sk-p-real-semi/lem-wf-boundary-semicontinuity.md",
-  "place": "node lem-wf-boundary-semicontinuity, order 2655"
- },
- "stmt_deps": [
-  "def-weil-punctual-weights",
-  "def-wf-middle-extension"
- ],
- "proof": [
-  {
-   "text": "Step 0 (reduction to an affine curve). Fix $s\\in S_0$. Since $X_0$\nis of finite type over $k_0$, the point $s$ has an affine open\nneighbourhood $X'_0\\subseteq X_0$. The scheme $X=X_0\\times_{k_0}k$\nis smooth and connected, hence irreducible (a connected noetherian\nnormal scheme is integral), so the nonempty open\n$X'=X'_0\\times_{k_0}k$ is irreducible, in particular connected; thus\n$X'_0$ is a smooth geometrically connected affine curve. Put\n$U'_0=U_0\\cap X'_0$, a dense open of $X'_0$ with finite complement\n$S'_0=S_0\\cap X'_0\\ni s$, with inclusion $j':U'_0\\hookrightarrow X'_0$.\nThe restriction $\\mathcal F|_{U'_0}$ is lisse of rank $r$ and\nsatisfies the hypothesis at every closed point of $U'_0\\subseteq U_0$.\nFormation of the direct image along an open immersion commutes with\nrestriction to an open: for $V\\to X'_0$ étale, sections of\n$(j_*\\mathcal F)|_{X'_0}$ and of $j'_*(\\mathcal F|_{U'_0})$ over $V$\nare both the sections of $\\mathcal F$ over\n$V\\times_{X_0}U_0=V\\times_{X'_0}U'_0$. Hence\n$(j_*\\mathcal F)|_{X'_0}=j'_*(\\mathcal F|_{U'_0})$ as Weil sheaves, and\nthe stalks at $\\bar s$ agree together with their Frobenius $F_s$\n(equivalently, both are $\\mathcal F_{\\bar\\eta}^{I_s}$ by\n[lem-wf-boundary-stalk-invariants], and $I_s$ depends only on the\nhenselization at $s$). So the bound at $s$ follows from the affine\ncase applied to $j'$. From now on we assume $X_0$ affine.",
-   "uses": [
-    "lem-wf-boundary-stalk-invariants"
-   ],
-   "elementary": false
+  "id": "lem-wf-boundary-semicontinuity",
+  "blueprint": {
+    "is": "lem-wf-boundary-semicontinuity",
+    "from": null,
+    "same_as": null
   },
-  {
-   "text": "Step 1 (the pole-free region of the open part). Let\n$L(U,t):=\\prod_{x\\in|U_0|}\\det(1-F_xt^{d(x)},\\mathcal F_{\\bar x})^{-1}$\nbe the open-part $L$-series of [d-real-cohom]. In the punctual weight convention of\n[def-weil-punctual-weights], its logarithmic derivative has the\ncoefficient series\n\n$$\nc_m:=\\sum_{d\\mid m}d\\sum_{\\substack{x\\in|U_0|\\\\d(x)=d}}\n\\operatorname{Tr}\\bigl(F_x^{m/d}\\mid\\mathcal F_{\\bar x}\\bigr),\n$$\n\nand by the hypothesis the summands have modulus at most\n$r q^{m\\beta/2}$ (an eigenvalue of $F_x^{m/d}$ has $\\iota$-modulus\n$q_x^{\\beta/2}$ to the power $m/d$, i.e. $q^{m\\beta/2}$). Since\nthe points over $k_m$ regroup as\n$\\#U_0(k_m)=\\sum_{d\\mid m}d\\cdot\\#\\{x\\in|U_0|:d(x)=d\\}$, the estimate\nof [lem-wf-point-count-linear-growth], applied over all base\nextensions $k_n$, gives $|c_m|\\le r\\,d\\,q^{m(\\beta/2+1)}$ for a\nconstant $d$. Hence the series $\\sum_m c_m t^{m-1}$ converges for\n$|t|<R$ with $R:=q^{-\\beta/2-1}$, the power series\n$\\log L(U,t)=\\sum_m c_m t^m/m$ converges there, and\n$L(U,t)=\\exp(\\log L(U,t))$ is holomorphic and nonzero on\n$|t|<R$.",
-   "uses": [
+  "kind": "statement",
+  "title": "Boundary semicontinuity of weights on a curve",
+  "statement": "Let $X_0$ be a curve over $k_0=\\mathbf F_q$ in the sense of\n[d-real-setup] (smooth, separated, geometrically connected; it need\nnot be affine, e.g. it may be proper), let $j:U_0\\hookrightarrow X_0$ be a dense open\nimmersion with finite complement $S_0$, and let $\\mathcal F$ be a\nlisse Weil sheaf of rank $r\\ge1$ on $U_0$. Assume that for every\nclosed point $x\\in|U_0|$ and every eigenvalue $\\alpha$ of the local\nFrobenius $F_x$ on $\\mathcal F_{\\bar x}$ the inequality\n\n$$\n|\\iota(\\alpha)|^2\\le q_x^{\\beta}\n$$\n\nholds for a real number $\\beta$ (i.e. $\\mathcal F$ is punctually\n$\\iota$-mixed of weights at most $\\beta$ in the punctual weight\nconvention of [def-weil-punctual-weights]). Then the same\ninequality holds at every boundary point: for every $s\\in S_0$ and\nevery eigenvalue $\\alpha$ of $F_s$ on the middle-extension stalk\n$(j_*\\mathcal F)_{\\bar s}$ of\n[def-wf-middle-extension],\n\n$$\n|\\iota(\\alpha)|^2\\le q_s^{\\beta}.\n$$\n\nSince $j_*\\mathcal F$ restricts to $\\mathcal F$ on $U_0$, this says\nthat $j_*\\mathcal F$ has punctual weights at most $\\beta$ on all of\n$X_0$.",
+  "source": {
+    "document": "literature/blueprint/master/blueprint/sec-purity-real-sheaves/sk-p-real-semi/lem-wf-boundary-semicontinuity.md",
+    "place": "node lem-wf-boundary-semicontinuity, order 2655"
+  },
+  "stmt_deps": [
+    "def-weil-punctual-weights",
+    "def-wf-middle-extension"
+  ],
+  "proof": [
+    {
+      "text": "Step 0 (reduction to an affine curve). Fix $s\\in S_0$. Since $X_0$\nis of finite type over $k_0$, the point $s$ has an affine open\nneighbourhood $X'_0\\subseteq X_0$. The scheme $X=X_0\\times_{k_0}k$\nis smooth and connected, hence irreducible (a connected noetherian\nnormal scheme is integral), so the nonempty open\n$X'=X'_0\\times_{k_0}k$ is irreducible, in particular connected; thus\n$X'_0$ is a smooth geometrically connected affine curve. Put\n$U'_0=U_0\\cap X'_0$, a dense open of $X'_0$ with finite complement\n$S'_0=S_0\\cap X'_0\\ni s$, with inclusion $j':U'_0\\hookrightarrow X'_0$.\nThe restriction $\\mathcal F|_{U'_0}$ is lisse of rank $r$ and\nsatisfies the hypothesis at every closed point of $U'_0\\subseteq U_0$.\nFormation of the direct image along an open immersion commutes with\nrestriction to an open: for $V\\to X'_0$ étale, sections of\n$(j_*\\mathcal F)|_{X'_0}$ and of $j'_*(\\mathcal F|_{U'_0})$ over $V$\nare both the sections of $\\mathcal F$ over\n$V\\times_{X_0}U_0=V\\times_{X'_0}U'_0$. Hence\n$(j_*\\mathcal F)|_{X'_0}=j'_*(\\mathcal F|_{U'_0})$ as Weil sheaves, and\nthe stalks at $\\bar s$ agree together with their Frobenius $F_s$\n(equivalently, both are $\\mathcal F_{\\bar\\eta}^{I_s}$ by\n[lem-wf-boundary-stalk-invariants], and $I_s$ depends only on the\nhenselization at $s$). So the bound at $s$ follows from the affine\ncase applied to $j'$. From now on we assume $X_0$ affine.",
+      "uses": [
+        "lem-wf-boundary-stalk-invariants"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "Step 1 (the pole-free region of the open part). Let\n$L(U,t):=\\prod_{x\\in|U_0|}\\det(1-F_xt^{d(x)},\\mathcal F_{\\bar x})^{-1}$\nbe the open-part $L$-series of [d-real-cohom]. In the punctual weight convention of\n[def-weil-punctual-weights], its logarithmic derivative has the\ncoefficient series\n\n$$\nc_m:=\\sum_{d\\mid m}d\\sum_{\\substack{x\\in|U_0|\\\\d(x)=d}}\n\\operatorname{Tr}\\bigl(F_x^{m/d}\\mid\\mathcal F_{\\bar x}\\bigr),\n$$\n\nand by the hypothesis the summands have modulus at most\n$r q^{m\\beta/2}$ (an eigenvalue of $F_x^{m/d}$ has $\\iota$-modulus\n$q_x^{\\beta/2}$ to the power $m/d$, i.e. $q^{m\\beta/2}$). Since\nthe points over $k_m$ regroup as\n$\\#U_0(k_m)=\\sum_{d\\mid m}d\\cdot\\#\\{x\\in|U_0|:d(x)=d\\}$, the estimate\nof [lem-wf-point-count-linear-growth], applied over all base\nextensions $k_n$, gives $|c_m|\\le r\\,d\\,q^{m(\\beta/2+1)}$ for a\nconstant $d$. Hence the series $\\sum_m c_m t^{m-1}$ converges for\n$|t|<R$ with $R:=q^{-\\beta/2-1}$, the power series\n$\\log L(U,t)=\\sum_m c_m t^m/m$ converges there, and\n$L(U,t)=\\exp(\\log L(U,t))$ is holomorphic and nonzero on\n$|t|<R$.",
+      "uses": [
+        "d-real-cohom",
+        "def-weil-punctual-weights",
+        "lem-wf-point-count-linear-growth"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "Step 2 (the poles of the graded form). By\n[lem-wf-euler-product-middle-extension] the full $L$-series\n$L(X,t):=\\prod_{x\\in|X_0|}\\det(1-F_xt^{d(x)},(j_*\\mathcal F)_{\\bar x})^{-1}$\nequals $\\det(1-Ft,H_c^1)/\\det(1-Ft,H_c^2)$ with $H_c^i$ the\ncompact-support cohomology of the middle extension\n$j_*\\mathcal F$ of [def-wf-middle-extension] in the convention of\n[def-weil-ordinary-compact-cohomology] on $X_0$. The\n$H_c^2$-factor: the boundary corrections at $S$ are concentrated in\ndegree zero (the recollement triangle\n$j_!\\mathcal F\\to j_*\\mathcal F\\to i_*i^*j_*\\mathcal F\\to$ of [prop-sf-open-closed-triangle-all-stages], with\n$H_c^i(X,i_*B)=0$ for $i\\ge1$ on the zero-dimensional\n$B$), so $H_c^2(X,j_*\\mathcal F)\\cong H_c^2(U,\\mathcal F)$, and\n[lem-a1-affine-hc2] describes\n$H_c^2(U,\\mathcal F)$ as the coinvariants $V_{\\pi_1(U)}(-1)$ of the\nlocal geometric generic stalk $V=\\mathcal F_{\\bar\\eta}$ twisted by\n$(-1)$. The quotient $Q=V_{\\pi_1(U)}$ is a Weil subquotient on\nwhich the geometric fundamental group acts trivially. Thus a closed\npoint Frobenius of degree $d(x)$ acts on $Q$ as the $d(x)$-th\npower of its degree-one operator. For every eigenvalue $\\lambda$\nof that operator, $\\lambda^{d(x)}$ is therefore a closed-point\neigenvalue of this quotient, and hence of the original sheaf.\nThe hypothesis gives $|\\iota(\\lambda)|\\le q^{\\beta/2}$.\nThis argument concerns only the geometrically constant quotient;\nit makes no assertion about an arbitrary Frobenius lift on $V$.\nHence an eigenvalue $\\alpha$ of the\nglobal $F$ on $H_c^2(X,j_*\\mathcal F)$ satisfies\n$|\\iota(\\alpha)|\\le q^{\\beta/2+1}$, i.e. the roots of the\ndenominator polynomial, the inverses $\\alpha^{-1}$, lie outside the\ndisc $|t|<R$. The numerator is a polynomial and the rational function\nis therefore holomorphic on $|t|<R$.",
+      "uses": [
+        "lem-wf-euler-product-middle-extension",
+        "def-wf-middle-extension",
+        "def-weil-ordinary-compact-cohomology",
+        "prop-sf-open-closed-triangle-all-stages",
+        "lem-a1-affine-hc2"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "Step 3 (each boundary factor is pole-free). The identity of\n[lem-wf-euler-product-middle-extension] reads\n$L(X,t)=L(U,t)\\cdot\\prod_{s\\in S_0}B_s(t)$ with\n$B_s(t):=\\det(1-F_st^{d(s)},(j_*\\mathcal F)_{\\bar s})^{-1}$; by\nSteps 1–2 the left-hand side is holomorphic and $L(U,t)$ is\nholomorphic and nonzero on $|t|<R$, so the finite product\n$\\prod_s B_s(t)$ has a pole at no point of the disc. A pole of the\nproduct at $t_0$ is a pole of one of the factors, so every\n$B_s$ is holomorphic on the disc: no root of\n$\\det(1-F_st^{d(s)},(j_*\\mathcal F)_{\\bar s})$ lies in $|t|<R$.\nFor an eigenvalue $\\alpha$ of $F_s$ on the boundary stalk, the\nnumber $t_0$ with $t_0^{d(s)}=\\alpha^{-1}$ is such a root, whence\n$|\\iota(\\alpha)|^{-1}\\ge q^{-d(s)(\\beta/2+1)}$, i.e.\n\n$$\n|\\iota(\\alpha)|^2\\le q^{d(s)(\\beta+2)}=q_s^{\\beta+2}.\n$$",
+      "uses": [
+        "lem-wf-euler-product-middle-extension"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "Step 4 (sharpening by tensor powers). Apply Steps 1–3 to the $k$-fold\ntensor power $\\mathcal F^{\\otimes k}$, lisse of rank $r^k$ on\n$U$, whose punctual bounds are $q_x^{k\\beta}$. For an eigenvalue\n$\\alpha$ of $F_s$ on $(j_*\\mathcal F)_{\\bar s} =\\mathcal F_{\\bar\\eta}^{I_s}$ (the boundary stalk description\n[lem-wf-boundary-stalk-invariants]), choose an eigenvector\n$v\\in\\mathcal F_{\\bar\\eta}^{I_s}$; then $v^{\\otimes k}$ is an\n$I_s$-invariant eigenvector of $F_s$ on\n$\\mathcal F_{\\bar\\eta}^{\\otimes k}$ with eigenvalue $\\alpha^k$ (an instance of [p-linear-spectra]), so\n$\\alpha^k$ is an eigenvalue of $F_s$ on the boundary stalk of\n$\\mathcal F^{\\otimes k}$ and the $\\beta+2$ bound of Step 3 for that\nsheaf gives\n$|\\iota(\\alpha)|^{2k}\\le q_s^{k\\beta+2}$, hence\n$|\\iota(\\alpha)|^2\\le q_s^{\\beta+2/k}$. Letting $k\\to\\infty$\ngives the asserted bound.",
+      "uses": [
+        "lem-wf-boundary-stalk-invariants",
+        "p-linear-spectra"
+      ],
+      "elementary": false
+    }
+  ],
+  "proof_deps": [
+    "lem-wf-boundary-stalk-invariants",
     "d-real-cohom",
     "def-weil-punctual-weights",
-    "lem-wf-point-count-linear-growth"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Step 2 (the poles of the graded form). By\n[lem-wf-euler-product-middle-extension] the full $L$-series\n$L(X,t):=\\prod_{x\\in|X_0|}\\det(1-F_xt^{d(x)},(j_*\\mathcal F)_{\\bar x})^{-1}$\nequals $\\det(1-Ft,H_c^1)/\\det(1-Ft,H_c^2)$ with $H_c^i$ the\ncompact-support cohomology of the middle extension\n$j_*\\mathcal F$ of [def-wf-middle-extension] in the convention of\n[def-weil-ordinary-compact-cohomology] on $X_0$. The\n$H_c^2$-factor: the boundary corrections at $S$ are concentrated in\ndegree zero (the recollement triangle\n$j_!\\mathcal F\\to j_*\\mathcal F\\to i_*i^*j_*\\mathcal F\\to$ of [prop-sf-open-closed-triangle-all-stages], with\n$H_c^i(X,i_*B)=0$ for $i\\ge1$ on the zero-dimensional\n$B$), so $H_c^2(X,j_*\\mathcal F)\\cong H_c^2(U,\\mathcal F)$, and\n[lem-a1-affine-hc2] describes\n$H_c^2(U,\\mathcal F)$ as the coinvariants $V_{\\pi_1(U)}(-1)$ of the\nlocal geometric generic stalk $V=\\mathcal F_{\\bar\\eta}$ twisted by\n$(-1)$. The quotient $Q=V_{\\pi_1(U)}$ is a Weil subquotient on\nwhich the geometric fundamental group acts trivially. Thus a closed\npoint Frobenius of degree $d(x)$ acts on $Q$ as the $d(x)$-th\npower of its degree-one operator. For every eigenvalue $\\lambda$\nof that operator, $\\lambda^{d(x)}$ is therefore a closed-point\neigenvalue of this quotient, and hence of the original sheaf.\nThe hypothesis gives $|\\iota(\\lambda)|\\le q^{\\beta/2}$.\nThis argument concerns only the geometrically constant quotient;\nit makes no assertion about an arbitrary Frobenius lift on $V$.\nHence an eigenvalue $\\alpha$ of the\nglobal $F$ on $H_c^2(X,j_*\\mathcal F)$ satisfies\n$|\\iota(\\alpha)|\\le q^{\\beta/2+1}$, i.e. the roots of the\ndenominator polynomial, the inverses $\\alpha^{-1}$, lie outside the\ndisc $|t|<R$. The numerator is a polynomial and the rational function\nis therefore holomorphic on $|t|<R$.",
-   "uses": [
+    "lem-wf-point-count-linear-growth",
     "lem-wf-euler-product-middle-extension",
     "def-wf-middle-extension",
     "def-weil-ordinary-compact-cohomology",
     "prop-sf-open-closed-triangle-all-stages",
-    "lem-a1-affine-hc2"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Step 3 (each boundary factor is pole-free). The identity of\n[lem-wf-euler-product-middle-extension] reads\n$L(X,t)=L(U,t)\\cdot\\prod_{s\\in S_0}B_s(t)$ with\n$B_s(t):=\\det(1-F_st^{d(s)},(j_*\\mathcal F)_{\\bar s})^{-1}$; by\nSteps 1–2 the left-hand side is holomorphic and $L(U,t)$ is\nholomorphic and nonzero on $|t|<R$, so the finite product\n$\\prod_s B_s(t)$ has a pole at no point of the disc. A pole of the\nproduct at $t_0$ is a pole of one of the factors, so every\n$B_s$ is holomorphic on the disc: no root of\n$\\det(1-F_st^{d(s)},(j_*\\mathcal F)_{\\bar s})$ lies in $|t|<R$.\nFor an eigenvalue $\\alpha$ of $F_s$ on the boundary stalk, the\nnumber $t_0$ with $t_0^{d(s)}=\\alpha^{-1}$ is such a root, whence\n$|\\iota(\\alpha)|^{-1}\\ge q^{-d(s)(\\beta/2+1)}$, i.e.\n\n$$\n|\\iota(\\alpha)|^2\\le q^{d(s)(\\beta+2)}=q_s^{\\beta+2}.\n$$",
-   "uses": [
-    "lem-wf-euler-product-middle-extension"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Step 4 (sharpening by tensor powers). Apply Steps 1–3 to the $k$-fold\ntensor power $\\mathcal F^{\\otimes k}$, lisse of rank $r^k$ on\n$U$, whose punctual bounds are $q_x^{k\\beta}$. For an eigenvalue\n$\\alpha$ of $F_s$ on $(j_*\\mathcal F)_{\\bar s} =\\mathcal F_{\\bar\\eta}^{I_s}$ (the boundary stalk description\n[lem-wf-boundary-stalk-invariants]), choose an eigenvector\n$v\\in\\mathcal F_{\\bar\\eta}^{I_s}$; then $v^{\\otimes k}$ is an\n$I_s$-invariant eigenvector of $F_s$ on\n$\\mathcal F_{\\bar\\eta}^{\\otimes k}$ with eigenvalue $\\alpha^k$ (an instance of [p-linear-spectra]), so\n$\\alpha^k$ is an eigenvalue of $F_s$ on the boundary stalk of\n$\\mathcal F^{\\otimes k}$ and the $\\beta+2$ bound of Step 3 for that\nsheaf gives\n$|\\iota(\\alpha)|^{2k}\\le q_s^{k\\beta+2}$, hence\n$|\\iota(\\alpha)|^2\\le q_s^{\\beta+2/k}$. Letting $k\\to\\infty$\ngives the asserted bound.",
-   "uses": [
-    "lem-wf-boundary-stalk-invariants",
+    "lem-a1-affine-hc2",
     "p-linear-spectra"
-   ],
-   "elementary": false
-  }
- ],
- "proof_deps": [
-  "lem-wf-boundary-stalk-invariants",
-  "d-real-cohom",
-  "def-weil-punctual-weights",
-  "lem-wf-point-count-linear-growth",
-  "lem-wf-euler-product-middle-extension",
-  "def-wf-middle-extension",
-  "def-weil-ordinary-compact-cohomology",
-  "prop-sf-open-closed-triangle-all-stages",
-  "lem-a1-affine-hc2",
-  "p-linear-spectra"
- ],
- "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-purity-real-sheaves/sk-p-real-semi/lem-wf-boundary-semicontinuity.md",
-  "place": "## Proof"
- },
- "mathlib_searches": [],
- "mathlib_match": null,
- "status": "imported",
- "merged_into": null,
- "import_flags": [
-  "cites_remark"
- ],
- "blueprint_kind": "lemma",
- "blueprint_order": 2655,
- "blueprint_uses": [
-  "d-real-cohom",
-  "d-real-setup",
-  "def-weil-ordinary-compact-cohomology",
-  "def-weil-punctual-weights",
-  "def-wf-middle-extension",
-  "lem-a1-affine-hc2",
-  "lem-wf-boundary-stalk-invariants",
-  "lem-wf-euler-product-middle-extension",
-  "lem-wf-point-count-linear-growth",
-  "p-linear-spectra",
-  "prop-sf-open-closed-triangle-all-stages"
- ],
- "proof_split_by": "paragraphs",
- "lean_audit": {
-  "master": {
-   "state": "none",
-   "decls": [],
-   "missing": []
+  ],
+  "proof_origin": {
+    "by": "agent",
+    "document": "literature/blueprint/master/blueprint/sec-purity-real-sheaves/sk-p-real-semi/lem-wf-boundary-semicontinuity.md",
+    "place": "## Proof"
   },
-  "slopmaster2": {
-   "state": "sorry_here",
-   "decls": [
-    {
-     "name": "AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.hasWeightsAtMost_directImage",
-     "module": "WeilConjectures.DeligneLaumon.AffineLine.DegreeOne",
-     "lines": [
-      116,
-      123
-     ],
-     "kind": "theorem",
-     "sorry": true
+  "mathlib_searches": [],
+  "mathlib_match": null,
+  "status": "imported",
+  "merged_into": null,
+  "import_flags": [
+    "cites_remark"
+  ],
+  "blueprint_kind": "lemma",
+  "blueprint_order": 2655,
+  "blueprint_uses": [
+    "d-real-cohom",
+    "d-real-setup",
+    "def-weil-ordinary-compact-cohomology",
+    "def-weil-punctual-weights",
+    "def-wf-middle-extension",
+    "lem-a1-affine-hc2",
+    "lem-wf-boundary-stalk-invariants",
+    "lem-wf-euler-product-middle-extension",
+    "lem-wf-point-count-linear-growth",
+    "p-linear-spectra",
+    "prop-sf-open-closed-triangle-all-stages"
+  ],
+  "proof_split_by": "paragraphs",
+  "lean_audit": {
+    "master": {
+      "state": "none",
+      "decls": [],
+      "missing": []
+    },
+    "slopmaster2": {
+      "state": "sorry_here",
+      "decls": [
+        {
+          "name": "AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.hasWeightsAtMost_directImage",
+          "module": "WeilConjectures.DeligneLaumon.AffineLine.DegreeOne",
+          "lines": [
+            116,
+            123
+          ],
+          "kind": "theorem",
+          "sorry": true
+        }
+      ],
+      "missing": [],
+      "open": []
     }
-   ],
-   "missing": [],
-   "open": []
+  },
+  "chapter": "sec-purity-real-sheaves",
+  "unit": "sk-p-real-semi",
+  "lean": {
+    "module": "WeilConjectures.DeligneLaumon.AffineLine.DegreeOne",
+    "declaration": "AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.hasWeightsAtMost_directImage",
+    "branch": "slopmaster2",
+    "line": 116,
+    "declarations": [
+      "AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.hasWeightsAtMost_directImage"
+    ],
+    "sorry_free": false,
+    "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state sorry_here)"
   }
- },
- "chapter": "sec-purity-real-sheaves",
- "unit": "sk-p-real-semi"
 }

@@ -1,271 +1,275 @@
 {
- "id": "prop-weil-pbc-p1-strict-henselian-comparison",
- "blueprint": {
-  "is": "prop-weil-pbc-p1-strict-henselian-comparison",
-  "from": null,
-  "same_as": null
- },
- "kind": "statement",
- "title": "Strictly henselian $\\mathbf P^1$ comparison",
- "statement": "In the setup of [def-weil-pbc-strict-henselian-setup]: let $(A,\\mathfrak m)$ be a strictly henselian local ring with residue field $\\kappa=A/\\mathfrak m$, $S=\\operatorname{Spec}A$, $s=\\operatorname{Spec}\\kappa$, $X=\\mathbf P^1_S=\\mathbf P(\\{0,1\\};S)$ [def-nagata-projective-space-base-change], $X_0=\\mathbf P^1_s=X\\times_Ss$ its closed fibre and $i:X_0\\to X$ the closed immersion (the base change of $s\\to S$). Let $F$ be a torsion abelian sheaf [def-weil-pbc-torsion-etale-sheaf] on $X_{\\Et}$ and $F_0=i^{-1}F$ its inverse image [def-weil-pbc-inverse-image]. Then for every $q\\ge0$ the pullback map [def-weil-pbc-cohomology-pullback] of etale cohomology [def-weil-pbc-etale-cohomology]\n\n$$\n i^*:H^q(X_{\\Et},F)\\xrightarrow{\\ \\sim\\ }H^q(X_{0,\\Et},F_0)\n$$\n\nis an isomorphism, natural in $F$.\n\n(Scope. Stacks 095T proves this for sheaves of $\\mathbf Z/\\ell\\mathbf Z$-modules only, and its proof of PBC for $\\mathbf P^1$ never needs more. The torsion case is stated here because the unit sk-thm-p1, step (ii), the users [lemma-weil-pbc-p1-exchange-geometric-stalk] (Steps 2-3) and [prop-weil-pbc-projective-line] (Steps 2 and 4), and the Lean declaration AlgebraicGeometry.Etale.bijective_cohomologyMap_projectiveLine_residueField state it; it is carried by the devissage of the last step, which is not Stacks 095T's route. For the use in [prop-weil-pbc-projective-line] only Steps 1-5 are needed: there $F$ is the inverse image of an injective sheaf of $\\mathbf F_r$-modules, killed by $r$.)",
- "source": {
-  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-p1/prop-weil-pbc-p1-strict-henselian-comparison.md",
-  "place": "node prop-weil-pbc-p1-strict-henselian-comparison, order 1142",
-  "external": [
-   {
-    "document": "Stacks Project",
-    "place": "Tag 0A0C"
-   }
-  ]
- },
- "stmt_deps": [
-  "def-weil-pbc-strict-henselian-setup",
-  "def-nagata-projective-space-base-change",
-  "def-weil-pbc-torsion-etale-sheaf",
-  "def-weil-pbc-inverse-image",
-  "def-weil-pbc-cohomology-pullback",
-  "def-weil-pbc-etale-cohomology"
- ],
- "proof": [
-  {
-   "text": "*The setting.* $A$ is strictly henselian, so in particular $(A,\\mathfrak m)$ is a henselian pair [def-weil-pbc-henselian-terminology], and $S_0=\\operatorname{Spec}(A/\\mathfrak m)=s$. The projection $X=\\mathbf P(\\{0,1\\};S)\\to S$ is proper by [lemma-nagata-projective-space-base-change-proper], and so is $X_0=\\mathbf P(\\{0,1\\};s)\\to s$; hence $X$ and $X_0$ are quasi-compact and quasi-separated (proper morphisms are of finite type and separated, and the bases are affine) [def-weil-pbc-scheme-conventions]. The closed fibre $X\\times_SS_0$ of [lemma-weil-pbc-etale-degree-zero] for the henselian pair $(A,\\mathfrak m)$ and the proper $X\\to S$ is $X_0$, with $i$ its inclusion.",
-   "uses": [
+  "id": "prop-weil-pbc-p1-strict-henselian-comparison",
+  "blueprint": {
+    "is": "prop-weil-pbc-p1-strict-henselian-comparison",
+    "from": null,
+    "same_as": null
+  },
+  "kind": "statement",
+  "title": "Strictly henselian $\\mathbf P^1$ comparison",
+  "statement": "In the setup of [def-weil-pbc-strict-henselian-setup]: let $(A,\\mathfrak m)$ be a strictly henselian local ring with residue field $\\kappa=A/\\mathfrak m$, $S=\\operatorname{Spec}A$, $s=\\operatorname{Spec}\\kappa$, $X=\\mathbf P^1_S=\\mathbf P(\\{0,1\\};S)$ [def-nagata-projective-space-base-change], $X_0=\\mathbf P^1_s=X\\times_Ss$ its closed fibre and $i:X_0\\to X$ the closed immersion (the base change of $s\\to S$). Let $F$ be a torsion abelian sheaf [def-weil-pbc-torsion-etale-sheaf] on $X_{\\Et}$ and $F_0=i^{-1}F$ its inverse image [def-weil-pbc-inverse-image]. Then for every $q\\ge0$ the pullback map [def-weil-pbc-cohomology-pullback] of etale cohomology [def-weil-pbc-etale-cohomology]\n\n$$\n i^*:H^q(X_{\\Et},F)\\xrightarrow{\\ \\sim\\ }H^q(X_{0,\\Et},F_0)\n$$\n\nis an isomorphism, natural in $F$.\n\n(Scope. Stacks 095T proves this for sheaves of $\\mathbf Z/\\ell\\mathbf Z$-modules only, and its proof of PBC for $\\mathbf P^1$ never needs more. The torsion case is stated here because the unit sk-thm-p1, step (ii), the users [lemma-weil-pbc-p1-exchange-geometric-stalk] (Steps 2-3) and [prop-weil-pbc-projective-line] (Steps 2 and 4), and the Lean declaration AlgebraicGeometry.Etale.bijective_cohomologyMap_projectiveLine_residueField state it; it is carried by the devissage of the last step, which is not Stacks 095T's route. For the use in [prop-weil-pbc-projective-line] only Steps 1-5 are needed: there $F$ is the inverse image of an injective sheaf of $\\mathbf F_r$-modules, killed by $r$.)",
+  "source": {
+    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-p1/prop-weil-pbc-p1-strict-henselian-comparison.md",
+    "place": "node prop-weil-pbc-p1-strict-henselian-comparison, order 1142",
+    "external": [
+      {
+        "document": "Stacks Project",
+        "place": "Tag 0A0C"
+      }
+    ]
+  },
+  "stmt_deps": [
+    "def-weil-pbc-strict-henselian-setup",
+    "def-nagata-projective-space-base-change",
+    "def-weil-pbc-torsion-etale-sheaf",
+    "def-weil-pbc-inverse-image",
+    "def-weil-pbc-cohomology-pullback",
+    "def-weil-pbc-etale-cohomology"
+  ],
+  "proof": [
+    {
+      "text": "*The setting.* $A$ is strictly henselian, so in particular $(A,\\mathfrak m)$ is a henselian pair [def-weil-pbc-henselian-terminology], and $S_0=\\operatorname{Spec}(A/\\mathfrak m)=s$. The projection $X=\\mathbf P(\\{0,1\\};S)\\to S$ is proper by [lemma-nagata-projective-space-base-change-proper], and so is $X_0=\\mathbf P(\\{0,1\\};s)\\to s$; hence $X$ and $X_0$ are quasi-compact and quasi-separated (proper morphisms are of finite type and separated, and the bases are affine) [def-weil-pbc-scheme-conventions]. The closed fibre $X\\times_SS_0$ of [lemma-weil-pbc-etale-degree-zero] for the henselian pair $(A,\\mathfrak m)$ and the proper $X\\to S$ is $X_0$, with $i$ its inclusion.",
+      "uses": [
+        "def-weil-pbc-strict-henselian-setup",
+        "def-weil-pbc-henselian-terminology",
+        "def-nagata-projective-space-base-change",
+        "lemma-nagata-projective-space-base-change-proper",
+        "def-weil-pbc-scheme-conventions"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/etale-cohomology.tex",
+        "place": "proof of Theorem 095T (theorem-proper-base-change), paragraph 2 (S the spectrum of a strictly henselian local ring, X = P^1_S, X_0 = P^1_s)"
+      }
+    },
+    {
+      "text": "*(a) Restricted injectives are acyclic on the closed fibre.* Let $r$ be a prime and $I$ an injective object of the category of sheaves of $\\mathbf F_r$-modules on $X_{\\Et}$. By [prop-weil-pbc-p1-acyclicity] (in the present setup), $H^q(X_{0,\\Et},i^{-1}I)=0$ for $q>0$, cohomology of the underlying abelian sheaf; i.e. $i^{-1}I$ is $\\Gamma(X_0,-)$-acyclic on $\\Ab(X_{0,\\Et})$. (This is Stacks Lemma 0A5H, which needs only $A$ henselian; [lemma-weil-pbc-p1-injective-acyclic] states the same and is not cited separately.)",
+      "uses": [
+        "prop-weil-pbc-p1-acyclicity"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/etale-cohomology.tex",
+        "place": "proof of Theorem 095T, paragraph 2 (\"see Lemma 0A5H\"); Lemma 0A5H (lemma-efface-cohomology-on-fibre-by-finite-cover)"
+      }
+    },
+    {
+      "text": "*(b) Degree zero.* For every abelian sheaf $H$ on $X_{\\Et}$ the restriction $\\operatorname{res}_H:\\Gamma(X,H)\\to\\Gamma(X_0,i^{-1}H)$, $a\\mapsto\\eta_{i,H}(a)$ ($\\eta_i$ the unit of $i^{-1}\\dashv i_*$, [def-weil-pbc-inverse-image]), is bijective, by [lemma-weil-pbc-etale-degree-zero] applied to the henselian pair $(A,\\mathfrak m)$ and the proper morphism $X\\to S$ (Step 1). As $\\eta_i$ is a natural transformation, $\\operatorname{res}_H$ is natural in $H$; so for a complex $H^\\bullet$ of abelian sheaves the maps $\\operatorname{res}_{H^m}$ form an isomorphism of complexes $\\Gamma(X,H^\\bullet)\\xrightarrow{\\sim}\\Gamma(X_0,i^{-1}H^\\bullet)$.",
+      "uses": [
+        "lemma-weil-pbc-etale-degree-zero",
+        "def-weil-pbc-inverse-image"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/etale-cohomology.tex",
+        "place": "proof of Theorem 095T, paragraph 2 (\"by Lemma 0A3S\"); Lemma 0A3S (lemma-h0-proper-over-henselian-local), the special case of Lemma 0A0C (lemma-h0-proper-over-henselian-pair) for A henselian local"
+      }
+    },
+    {
+      "text": "*(c) Both sides computed by one complex, for sheaves killed by a prime.* Let $r$ be a prime and $G$ an abelian sheaf on $X_{\\Et}$ with $rG=0$. Then $G$ is a sheaf of $\\mathbf F_r$-modules (the action of $\\mathbf Z$ on each $G(U)$ factors through $\\mathbf F_r$, and morphisms of abelian sheaves between such sheaves are $\\mathbf F_r$-linear). The category of sheaves of $\\mathbf F_r$-modules on $X_{\\Et}$ has enough injectives [lem-weil-pbc-module-sheaves-enough-injectives]; embedding $G$ and then the successive cokernels into injectives gives a resolution $\\epsilon:G\\to I^\\bullet$ ($I^m=0$ for $m<0$) by injective $\\mathbf F_r$-module sheaves. Kernels and cokernels of sheaves of $\\mathbf F_r$-modules are those of the underlying abelian sheaves, so $\\epsilon$ is also a resolution in $\\Ab(X_{\\Et})$. On $X$: each $I^m$ is $\\Gamma(X,-)$-acyclic as an abelian sheaf [lem-weil-pbc-injective-module-abelian-acyclic], so by the acyclicity criterion [lemma-weil-pbc-leray-acyclicity](2) for $v=\\Gamma(X,-)$ on $\\Ab(X_{\\Et})$, for any resolution $s:G\\to K^\\bullet$ by a bounded below complex of injective abelian sheaves and any morphism of complexes $\\iota:I^\\bullet\\to K^\\bullet$ with $\\iota\\epsilon=s$, $\\mathcal H^q(\\Gamma(X,\\iota))$ is an isomorphism; $K^\\bullet$ is K-injective [prop-weil-pbc-kinjective-resolutions-exist], so $\\mathcal H^q(\\Gamma(X,K^\\bullet))=H^q(X_{\\Et},G)$ [def-weil-pbc-etale-cohomology]. On $X_0$: $i^{-1}$ is exact [prop-weil-pbc-inverse-image-exact], so $i^{-1}\\epsilon:i^{-1}G\\to i^{-1}I^\\bullet$ is a resolution, by $\\Gamma(X_0,-)$-acyclic abelian sheaves (Step 2); by [lemma-weil-pbc-leray-acyclicity](2) for $v=\\Gamma(X_0,-)$, for any resolution $J^\\bullet$ of $i^{-1}G$ by a bounded below complex of injective abelian sheaves and any morphism $\\gamma:i^{-1}I^\\bullet\\to J^\\bullet$ over $\\mathrm{id}_{i^{-1}G}$, $\\mathcal H^q(\\Gamma(X_0,\\gamma))$ is an isomorphism onto $H^q(X_{0,\\Et},i^{-1}G)$. Between them, Step 3 gives the isomorphism of complexes $\\operatorname{res}:\\Gamma(X,I^\\bullet)\\xrightarrow{\\sim}\\Gamma(X_0,i^{-1}I^\\bullet)$.",
+      "uses": [
+        "lem-weil-pbc-module-sheaves-enough-injectives",
+        "lem-weil-pbc-injective-module-abelian-acyclic",
+        "lemma-weil-pbc-leray-acyclicity",
+        "prop-weil-pbc-kinjective-resolutions-exist",
+        "def-weil-pbc-etale-cohomology",
+        "prop-weil-pbc-inverse-image-exact",
+        "def-sp-injective-resolutions"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/etale-cohomology.tex",
+        "place": "proof of Theorem 095T, paragraph 2 (\"choose a resolution F -> I^. by injective sheaves of Z/lZ-modules ... Leray's acyclicity lemma ... This complex computes the left hand side\"); Lemma 03FD (sites-cohomology-lemma-cohomology-modules-abelian-agree) for the left hand side"
+      }
+    },
+    {
+      "text": "*(d) The map is the pullback $i^*$.* Keep $r,G,\\epsilon,I^\\bullet$ of Step 4. Choose $s:G\\to K^\\bullet$ a resolution by a bounded below complex of injective abelian sheaves (a K-injective resolution, [prop-weil-pbc-kinjective-resolutions-exist]); since $\\epsilon$ is a quasi-isomorphism between bounded below complexes and $K^\\bullet$ is a bounded below complex of injectives, there is a morphism of complexes $\\iota:I^\\bullet\\to K^\\bullet$ with $\\iota\\epsilon=s$ (the comparison underlying [lemma-weil-pbc-leray-acyclicity](2)). Choose a resolution $\\rho:i^{-1}K^\\bullet\\to J^\\bullet$ by a bounded below complex of injective abelian sheaves on $X_{0,\\Et}$. By [def-weil-pbc-cohomology-pullback], computed with $(K^\\bullet,J^\\bullet)$ (any choice gives the same map by the independence clause (1) of [lem-weil-pbc-cohomology-pullback-functorial]), $i^*$ is $\\mathcal H^q$ of $\\Gamma(X,K^\\bullet)\\xrightarrow{\\operatorname{res}}\\Gamma(X_0,i^{-1}K^\\bullet)\\xrightarrow{\\Gamma(\\rho)}\\Gamma(X_0,J^\\bullet)$. Naturality of $\\eta_i$ gives $\\operatorname{res}\\circ\\Gamma(X,\\iota)=\\Gamma(X_0,i^{-1}\\iota)\\circ\\operatorname{res}$ on $\\Gamma(X,I^\\bullet)$, hence\n$$i^*\\circ\\mathcal H^q(\\Gamma(X,\\iota))=\\mathcal H^q(\\Gamma(X_0,\\gamma))\\circ\\mathcal H^q(\\operatorname{res}_{I^\\bullet}),\\qquad\\gamma=\\rho\\circ i^{-1}\\iota:i^{-1}I^\\bullet\\to J^\\bullet .$$\nHere $\\gamma\\circ i^{-1}\\epsilon=\\rho\\circ i^{-1}s$, so $\\gamma$ lies over $\\mathrm{id}_{i^{-1}G}$ into the injective resolution $\\rho\\circ i^{-1}s$ of $i^{-1}G$ (a resolution since $i^{-1}$ is exact). By Step 4 the three maps $\\mathcal H^q(\\Gamma(X,\\iota))$, $\\mathcal H^q(\\Gamma(X_0,\\gamma))$, $\\mathcal H^q(\\operatorname{res}_{I^\\bullet})$ are isomorphisms; hence $i^*:H^q(X_{\\Et},G)\\to H^q(X_{0,\\Et},i^{-1}G)$ is bijective for every $q\\ge0$. (This is the last sentence of clause (2) of [lem-weil-pbc-cohomology-pullback-functorial] with $M^\\bullet=i^{-1}I^\\bullet$, a complex of $\\Gamma(X_0,-)$-acyclic sheaves; clause (2) as stated asks for a map $\\beta$ out of the inverse image of the K-injective resolution into $M^\\bullet$, which is not at hand here since $\\iota$ goes the other way, so the comparison is made directly as above.)",
+      "uses": [
+        "def-weil-pbc-cohomology-pullback",
+        "lem-weil-pbc-cohomology-pullback-functorial",
+        "prop-weil-pbc-kinjective-resolutions-exist",
+        "lemma-weil-pbc-leray-acyclicity",
+        "prop-weil-pbc-inverse-image-exact",
+        "def-weil-pbc-inverse-image"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/etale-cohomology.tex",
+        "place": "proof of Theorem 095T, paragraph 2: the identification of the comparison with restriction is left implicit there; written out by the agent"
+      }
+    },
+    {
+      "text": "*(e) Torsion sheaves.* By Step 5, the hypothesis of [lem-weil-pbc-pullback-iso-prime-torsion-devissage] holds for $u=i:X_0\\to X$, both schemes being quasi-compact and quasi-separated (Step 1). That lemma gives that $i^*:H^q(X_{\\Et},F)\\to H^q(X_{0,\\Et},F_0)$ is bijective for every torsion abelian sheaf $F$ and every $q\\ge0$. (Stacks 095T has no such step: it works with sheaves of $\\mathbf Z/\\ell\\mathbf Z$-modules throughout.)",
+      "uses": [
+        "lem-weil-pbc-pullback-iso-prime-torsion-devissage"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/etale-cohomology.tex",
+        "place": "devissage of the proof of Lemma 0A4B (lemma-proper-base-change-in-terms-of-injectives), paragraphs 2-3, transposed by the agent to global cohomology"
+      }
+    },
+    {
+      "text": "*Naturality.* For a morphism $\\varphi:F\\to F'$ of torsion abelian sheaves, $i^*\\circ H^q(\\varphi)=H^q(i^{-1}\\varphi)\\circ i^*$ by the naturality clause (3) of [lem-weil-pbc-cohomology-pullback-functorial].",
+      "uses": [
+        "lem-weil-pbc-cohomology-pullback-functorial"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/etale-cohomology.tex",
+        "place": "agent"
+      }
+    }
+  ],
+  "proof_deps": [
     "def-weil-pbc-strict-henselian-setup",
     "def-weil-pbc-henselian-terminology",
     "def-nagata-projective-space-base-change",
     "lemma-nagata-projective-space-base-change-proper",
-    "def-weil-pbc-scheme-conventions"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "proof of Theorem 095T (theorem-proper-base-change), paragraph 2 (S the spectrum of a strictly henselian local ring, X = P^1_S, X_0 = P^1_s)"
-   }
-  },
-  {
-   "text": "*(a) Restricted injectives are acyclic on the closed fibre.* Let $r$ be a prime and $I$ an injective object of the category of sheaves of $\\mathbf F_r$-modules on $X_{\\Et}$. By [prop-weil-pbc-p1-acyclicity] (in the present setup), $H^q(X_{0,\\Et},i^{-1}I)=0$ for $q>0$, cohomology of the underlying abelian sheaf; i.e. $i^{-1}I$ is $\\Gamma(X_0,-)$-acyclic on $\\Ab(X_{0,\\Et})$. (This is Stacks Lemma 0A5H, which needs only $A$ henselian; [lemma-weil-pbc-p1-injective-acyclic] states the same and is not cited separately.)",
-   "uses": [
-    "prop-weil-pbc-p1-acyclicity"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "proof of Theorem 095T, paragraph 2 (\"see Lemma 0A5H\"); Lemma 0A5H (lemma-efface-cohomology-on-fibre-by-finite-cover)"
-   }
-  },
-  {
-   "text": "*(b) Degree zero.* For every abelian sheaf $H$ on $X_{\\Et}$ the restriction $\\operatorname{res}_H:\\Gamma(X,H)\\to\\Gamma(X_0,i^{-1}H)$, $a\\mapsto\\eta_{i,H}(a)$ ($\\eta_i$ the unit of $i^{-1}\\dashv i_*$, [def-weil-pbc-inverse-image]), is bijective, by [lemma-weil-pbc-etale-degree-zero] applied to the henselian pair $(A,\\mathfrak m)$ and the proper morphism $X\\to S$ (Step 1). As $\\eta_i$ is a natural transformation, $\\operatorname{res}_H$ is natural in $H$; so for a complex $H^\\bullet$ of abelian sheaves the maps $\\operatorname{res}_{H^m}$ form an isomorphism of complexes $\\Gamma(X,H^\\bullet)\\xrightarrow{\\sim}\\Gamma(X_0,i^{-1}H^\\bullet)$.",
-   "uses": [
+    "def-weil-pbc-scheme-conventions",
+    "prop-weil-pbc-p1-acyclicity",
     "lemma-weil-pbc-etale-degree-zero",
-    "def-weil-pbc-inverse-image"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "proof of Theorem 095T, paragraph 2 (\"by Lemma 0A3S\"); Lemma 0A3S (lemma-h0-proper-over-henselian-local), the special case of Lemma 0A0C (lemma-h0-proper-over-henselian-pair) for A henselian local"
-   }
-  },
-  {
-   "text": "*(c) Both sides computed by one complex, for sheaves killed by a prime.* Let $r$ be a prime and $G$ an abelian sheaf on $X_{\\Et}$ with $rG=0$. Then $G$ is a sheaf of $\\mathbf F_r$-modules (the action of $\\mathbf Z$ on each $G(U)$ factors through $\\mathbf F_r$, and morphisms of abelian sheaves between such sheaves are $\\mathbf F_r$-linear). The category of sheaves of $\\mathbf F_r$-modules on $X_{\\Et}$ has enough injectives [lem-weil-pbc-module-sheaves-enough-injectives]; embedding $G$ and then the successive cokernels into injectives gives a resolution $\\epsilon:G\\to I^\\bullet$ ($I^m=0$ for $m<0$) by injective $\\mathbf F_r$-module sheaves. Kernels and cokernels of sheaves of $\\mathbf F_r$-modules are those of the underlying abelian sheaves, so $\\epsilon$ is also a resolution in $\\Ab(X_{\\Et})$. On $X$: each $I^m$ is $\\Gamma(X,-)$-acyclic as an abelian sheaf [lem-weil-pbc-injective-module-abelian-acyclic], so by the acyclicity criterion [lemma-weil-pbc-leray-acyclicity](2) for $v=\\Gamma(X,-)$ on $\\Ab(X_{\\Et})$, for any resolution $s:G\\to K^\\bullet$ by a bounded below complex of injective abelian sheaves and any morphism of complexes $\\iota:I^\\bullet\\to K^\\bullet$ with $\\iota\\epsilon=s$, $\\mathcal H^q(\\Gamma(X,\\iota))$ is an isomorphism; $K^\\bullet$ is K-injective [prop-weil-pbc-kinjective-resolutions-exist], so $\\mathcal H^q(\\Gamma(X,K^\\bullet))=H^q(X_{\\Et},G)$ [def-weil-pbc-etale-cohomology]. On $X_0$: $i^{-1}$ is exact [prop-weil-pbc-inverse-image-exact], so $i^{-1}\\epsilon:i^{-1}G\\to i^{-1}I^\\bullet$ is a resolution, by $\\Gamma(X_0,-)$-acyclic abelian sheaves (Step 2); by [lemma-weil-pbc-leray-acyclicity](2) for $v=\\Gamma(X_0,-)$, for any resolution $J^\\bullet$ of $i^{-1}G$ by a bounded below complex of injective abelian sheaves and any morphism $\\gamma:i^{-1}I^\\bullet\\to J^\\bullet$ over $\\mathrm{id}_{i^{-1}G}$, $\\mathcal H^q(\\Gamma(X_0,\\gamma))$ is an isomorphism onto $H^q(X_{0,\\Et},i^{-1}G)$. Between them, Step 3 gives the isomorphism of complexes $\\operatorname{res}:\\Gamma(X,I^\\bullet)\\xrightarrow{\\sim}\\Gamma(X_0,i^{-1}I^\\bullet)$.",
-   "uses": [
+    "def-weil-pbc-inverse-image",
     "lem-weil-pbc-module-sheaves-enough-injectives",
     "lem-weil-pbc-injective-module-abelian-acyclic",
     "lemma-weil-pbc-leray-acyclicity",
     "prop-weil-pbc-kinjective-resolutions-exist",
     "def-weil-pbc-etale-cohomology",
     "prop-weil-pbc-inverse-image-exact",
-    "def-sp-injective-resolutions"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "proof of Theorem 095T, paragraph 2 (\"choose a resolution F -> I^. by injective sheaves of Z/lZ-modules ... Leray's acyclicity lemma ... This complex computes the left hand side\"); Lemma 03FD (sites-cohomology-lemma-cohomology-modules-abelian-agree) for the left hand side"
-   }
-  },
-  {
-   "text": "*(d) The map is the pullback $i^*$.* Keep $r,G,\\epsilon,I^\\bullet$ of Step 4. Choose $s:G\\to K^\\bullet$ a resolution by a bounded below complex of injective abelian sheaves (a K-injective resolution, [prop-weil-pbc-kinjective-resolutions-exist]); since $\\epsilon$ is a quasi-isomorphism between bounded below complexes and $K^\\bullet$ is a bounded below complex of injectives, there is a morphism of complexes $\\iota:I^\\bullet\\to K^\\bullet$ with $\\iota\\epsilon=s$ (the comparison underlying [lemma-weil-pbc-leray-acyclicity](2)). Choose a resolution $\\rho:i^{-1}K^\\bullet\\to J^\\bullet$ by a bounded below complex of injective abelian sheaves on $X_{0,\\Et}$. By [def-weil-pbc-cohomology-pullback], computed with $(K^\\bullet,J^\\bullet)$ (any choice gives the same map by the independence clause (1) of [lem-weil-pbc-cohomology-pullback-functorial]), $i^*$ is $\\mathcal H^q$ of $\\Gamma(X,K^\\bullet)\\xrightarrow{\\operatorname{res}}\\Gamma(X_0,i^{-1}K^\\bullet)\\xrightarrow{\\Gamma(\\rho)}\\Gamma(X_0,J^\\bullet)$. Naturality of $\\eta_i$ gives $\\operatorname{res}\\circ\\Gamma(X,\\iota)=\\Gamma(X_0,i^{-1}\\iota)\\circ\\operatorname{res}$ on $\\Gamma(X,I^\\bullet)$, hence\n$$i^*\\circ\\mathcal H^q(\\Gamma(X,\\iota))=\\mathcal H^q(\\Gamma(X_0,\\gamma))\\circ\\mathcal H^q(\\operatorname{res}_{I^\\bullet}),\\qquad\\gamma=\\rho\\circ i^{-1}\\iota:i^{-1}I^\\bullet\\to J^\\bullet .$$\nHere $\\gamma\\circ i^{-1}\\epsilon=\\rho\\circ i^{-1}s$, so $\\gamma$ lies over $\\mathrm{id}_{i^{-1}G}$ into the injective resolution $\\rho\\circ i^{-1}s$ of $i^{-1}G$ (a resolution since $i^{-1}$ is exact). By Step 4 the three maps $\\mathcal H^q(\\Gamma(X,\\iota))$, $\\mathcal H^q(\\Gamma(X_0,\\gamma))$, $\\mathcal H^q(\\operatorname{res}_{I^\\bullet})$ are isomorphisms; hence $i^*:H^q(X_{\\Et},G)\\to H^q(X_{0,\\Et},i^{-1}G)$ is bijective for every $q\\ge0$. (This is the last sentence of clause (2) of [lem-weil-pbc-cohomology-pullback-functorial] with $M^\\bullet=i^{-1}I^\\bullet$, a complex of $\\Gamma(X_0,-)$-acyclic sheaves; clause (2) as stated asks for a map $\\beta$ out of the inverse image of the K-injective resolution into $M^\\bullet$, which is not at hand here since $\\iota$ goes the other way, so the comparison is made directly as above.)",
-   "uses": [
+    "def-sp-injective-resolutions",
     "def-weil-pbc-cohomology-pullback",
     "lem-weil-pbc-cohomology-pullback-functorial",
-    "prop-weil-pbc-kinjective-resolutions-exist",
-    "lemma-weil-pbc-leray-acyclicity",
-    "prop-weil-pbc-inverse-image-exact",
-    "def-weil-pbc-inverse-image"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "proof of Theorem 095T, paragraph 2: the identification of the comparison with restriction is left implicit there; written out by the agent"
-   }
-  },
-  {
-   "text": "*(e) Torsion sheaves.* By Step 5, the hypothesis of [lem-weil-pbc-pullback-iso-prime-torsion-devissage] holds for $u=i:X_0\\to X$, both schemes being quasi-compact and quasi-separated (Step 1). That lemma gives that $i^*:H^q(X_{\\Et},F)\\to H^q(X_{0,\\Et},F_0)$ is bijective for every torsion abelian sheaf $F$ and every $q\\ge0$. (Stacks 095T has no such step: it works with sheaves of $\\mathbf Z/\\ell\\mathbf Z$-modules throughout.)",
-   "uses": [
     "lem-weil-pbc-pullback-iso-prime-torsion-devissage"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "devissage of the proof of Lemma 0A4B (lemma-proper-base-change-in-terms-of-injectives), paragraphs 2-3, transposed by the agent to global cohomology"
-   }
-  },
-  {
-   "text": "*Naturality.* For a morphism $\\varphi:F\\to F'$ of torsion abelian sheaves, $i^*\\circ H^q(\\varphi)=H^q(i^{-1}\\varphi)\\circ i^*$ by the naturality clause (3) of [lem-weil-pbc-cohomology-pullback-functorial].",
-   "uses": [
-    "lem-weil-pbc-cohomology-pullback-functorial"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "agent"
-   }
-  }
- ],
- "proof_deps": [
-  "def-weil-pbc-strict-henselian-setup",
-  "def-weil-pbc-henselian-terminology",
-  "def-nagata-projective-space-base-change",
-  "lemma-nagata-projective-space-base-change-proper",
-  "def-weil-pbc-scheme-conventions",
-  "prop-weil-pbc-p1-acyclicity",
-  "lemma-weil-pbc-etale-degree-zero",
-  "def-weil-pbc-inverse-image",
-  "lem-weil-pbc-module-sheaves-enough-injectives",
-  "lem-weil-pbc-injective-module-abelian-acyclic",
-  "lemma-weil-pbc-leray-acyclicity",
-  "prop-weil-pbc-kinjective-resolutions-exist",
-  "def-weil-pbc-etale-cohomology",
-  "prop-weil-pbc-inverse-image-exact",
-  "def-sp-injective-resolutions",
-  "def-weil-pbc-cohomology-pullback",
-  "lem-weil-pbc-cohomology-pullback-functorial",
-  "lem-weil-pbc-pullback-iso-prime-torsion-devissage"
- ],
- "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "proof of Theorem 095T (theorem-proper-base-change), paragraph 2, for sheaves killed by a prime (Steps 1-5); the torsion devissage (Step 6) and the identification of the map with the pullback (Step 5) are written by the agent on the pattern of the proof of Lemma 0A4B"
- },
- "mathlib_searches": [
-  {
-   "tool": "leansearch",
-   "query": "etale cohomology of projective line over strictly henselian local ring equals cohomology of closed fibre",
-   "results": "RingHom.Etale.propertyIsLocal, AlgebraicGeometry.Scheme.Etale, Algebra.Etale.formallyEtale, RingHom.Etale, Algebra.FormallyEtale.subsingleton_h1Cotangent, Algebra.exists_etale_of_isEtaleAt: etale ring maps only",
-   "date": "2026-10-09",
-   "verdict": "no match"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "restriction map in sheaf cohomology from a proper scheme over a henselian local ring to its closed fibre is an isomorphism",
-   "results": "AlgebraicGeometry.Scheme.Hom.instIsIsoCommRingCatApp, Scheme.Opens.instIsIsoCommRingCatAppLEιTopToScheme, isIso_of_comp_eq_sigmaSpec, Scheme.Modules.Hom.isIso_iff_isIso_app, isIso_ΓSpec_adjunction_unit_app_basicOpen, LocalRepresentability...: structure-sheaf facts, no etale cohomology",
-   "date": "2026-10-09",
-   "verdict": "no match"
-  },
-  {
-   "tool": "loogle",
-   "query": "CategoryTheory.Sheaf.H, HenselianLocalRing",
-   "results": "none",
-   "date": "2026-10-09",
-   "verdict": "no match"
-  },
-  {
-   "tool": "grep",
-   "query": "grep -rln 'HenselianLocalRing\\|HenselianRing' Mathlib; grep -rln 'ProjectiveLine\\|closedFibre\\|closed fibre' Mathlib; ls Mathlib/CategoryTheory/Sites/SheafCohomology/",
-   "results": "HenselianLocalRing only in Mathlib/RingTheory/Henselian.lean (ring theory); no ProjectiveLine scheme / closed fibre (only NumberTheory/ModularForms/Cusps.lean); SheafCohomology/{Basic,Cech,MayerVietoris}.lean define Sheaf.H without pullback maps along morphisms of schemes",
-   "date": "2026-10-09",
-   "verdict": "no match"
-  },
-  {
-   "tool": "local_search",
-   "query": "bijective_cohomologyMap_projectiveLine_residueField (project ~/weil-conjectures-slopmaster2)",
-   "results": "AlgebraicGeometry.Etale.bijective_cohomologyMap_projectiveLine_residueField in WeilConjectures/SixFunctors/Etale/BaseChangeTheorems/ProjectiveLine/StrictHenselian.lean (source repository, sorry; index unavailable)",
-   "date": "2026-10-09",
-   "verdict": "no match in Mathlib (source-repository declaration, with sorry)"
-  }
- ],
- "mathlib_match": null,
- "status": "split",
- "merged_into": null,
- "import_flags": [
-  "detailed_form",
-  "two_proofs"
- ],
- "blueprint_kind": "theorem",
- "blueprint_order": 1142,
- "blueprint_uses": [
-  "def-weil-pbc-etale-sheaves",
-  "def-weil-pbc-kinjective-resolutions",
-  "def-weil-pbc-strict-henselian-setup",
-  "lemma-weil-pbc-etale-degree-zero",
-  "lemma-weil-pbc-p1-injective-acyclic",
-  "prop-weil-pbc-p1-acyclicity"
- ],
- "blueprint_tags": [
-  "latex:proposition"
- ],
- "uses_not_cited": [
-  "def-weil-pbc-etale-sheaves",
-  "def-weil-pbc-kinjective-resolutions",
-  "lemma-weil-pbc-etale-degree-zero",
-  "lemma-weil-pbc-p1-injective-acyclic"
- ],
- "proof_split_by": "paragraphs",
- "blueprint_sketch": [
-  {
-   "statement": "For every torsion sheaf $F$ on $X$, restriction induces isomorphisms\n\n$$\nH^q(X,F)\\xrightarrow{\\sim}H^q(X_0,F_0)\\qquad(q\\geq0).\n$$",
-   "proof": "Choose an injective resolution $F\\to I^\\bullet$. Exactness of inverse\nimage along the closed immersion gives an exact complex $F_0\\to I_0^\\bullet$.\nThe preceding lemma makes each $I_0^r$ acyclic, so Leray's acyclicity lemma\nidentifies $R\\Gamma(X_0,F_0)$ with $\\Gamma(X_0,I_0^\\bullet)$. Degree-zero\nrestriction identifies this complex with $\\Gamma(X,I^\\bullet)$ term by term.\nTaking cohomology gives the displayed isomorphisms, and naturality follows\nfrom the naturality of the restriction map and of injective resolutions. The\nsource locators are Tags `0A0C` and `0A3S`.",
-   "cites": []
-  }
- ],
- "lean_audit": {
-  "master": {
-   "state": "none",
-   "decls": [],
-   "missing": [
-    "AlgebraicGeometry.Etale.bijective_cohomologyMap_projectiveLine_residueField"
-   ]
-  },
-  "slopmaster2": {
-   "state": "sorry_here",
-   "decls": [
-    {
-     "name": "AlgebraicGeometry.Etale.bijective_cohomologyMap_projectiveLine_residueField",
-     "module": "WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.ProjectiveLine.StrictHenselian",
-     "lines": [
-      150,
-      162
-     ],
-     "kind": "theorem",
-     "sorry": true
-    }
-   ],
-   "missing": [],
-   "open": []
-  }
- },
- "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1",
- "split_report": {
-  "date": "2026-10-09",
-  "item": "prop-weil-pbc-p1-strict-henselian-comparison",
-  "worker": "stage1",
-  "summary": "Statement made precise (objects of the setup named, the map is the pullback i^* of def-weil-pbc-cohomology-pullback, scope note). Kept for every torsion F, as the unit sk-thm-p1 step (ii), the two users (lemma-weil-pbc-p1-exchange-geometric-stalk Steps 2-3, prop-weil-pbc-projective-line Steps 2/4) and the Lean declaration state it, rather than narrowing to F_r-modules; the hypothesis gap noted at review (the cited acyclicity covers only injective F_r-sheaves) is closed by a devissage step carried by the new node lem-weil-pbc-pullback-iso-prime-torsion-devissage, which is not Stacks 095T's route (095T stays with Z/l-modules). Proof rewritten from Stacks 095T paragraph 2 in five steps: setting; (a) acyclicity of restricted injective F_r-sheaves (prop-weil-pbc-p1-acyclicity); (b) degree zero (lemma-weil-pbc-etale-degree-zero, Stacks 0A3S/0A0C); (c) an injective F_r-resolution computes both sides (enough injectives, abelian acyclicity of injective module sheaves = Stacks 03FD, Leray acyclicity, exactness of i^{-1}); (d) identification with the pullback i^* via a comparison map into an abelian injective resolution (independence clause (1); clause (2) of the functoriality lemma does not apply literally, since the comparison map goes the wrong way); then (e) devissage and naturality. Grab-bags repointed: def-weil-pbc-etale-sheaves and def-weil-pbc-kinjective-resolutions dropped from stmt_deps; lemma-weil-pbc-p1-injective-acyclic (duplicate of prop-weil-pbc-p1-acyclicity) dropped from proof_deps; proof_deps = union of uses."
- },
- "lean": {
-  "branch": "slopmaster2",
-  "declarations": [
-   "AlgebraicGeometry.Etale.bijective_cohomologyMap_projectiveLine_residueField"
   ],
-  "note": "attached by the lead at review (2026-10-09), found by the opus worker of prop-weil-pbc-p1-strict-henselian-comparison: the comparison for torsion sheaves of Lambda-modules (Lambda = Z gives the node); sorry here"
- },
- "tool_uses": [
-  "lem-weil-pbc-module-sheaves-enough-injectives",
-  "prop-weil-pbc-inverse-image-exact"
- ],
- "reviewed": {
-  "date": "2026-10-09",
-  "by": "L",
-  "result": "pass",
-  "note": "statement kept for torsion sheaves with the devissage carried by a new node (the users and the unit step state the torsion case); steps (a)-(d) follow Stacks 095T; two tool uses accepted; Lean attached (sorry); lemma-weil-pbc-p1-injective-acyclic dropped as a duplicate, flagged unreachable"
- }
+  "proof_origin": {
+    "by": "document",
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "proof of Theorem 095T (theorem-proper-base-change), paragraph 2, for sheaves killed by a prime (Steps 1-5); the torsion devissage (Step 6) and the identification of the map with the pullback (Step 5) are written by the agent on the pattern of the proof of Lemma 0A4B"
+  },
+  "mathlib_searches": [
+    {
+      "tool": "leansearch",
+      "query": "etale cohomology of projective line over strictly henselian local ring equals cohomology of closed fibre",
+      "results": "RingHom.Etale.propertyIsLocal, AlgebraicGeometry.Scheme.Etale, Algebra.Etale.formallyEtale, RingHom.Etale, Algebra.FormallyEtale.subsingleton_h1Cotangent, Algebra.exists_etale_of_isEtaleAt: etale ring maps only",
+      "date": "2026-10-09",
+      "verdict": "no match"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "restriction map in sheaf cohomology from a proper scheme over a henselian local ring to its closed fibre is an isomorphism",
+      "results": "AlgebraicGeometry.Scheme.Hom.instIsIsoCommRingCatApp, Scheme.Opens.instIsIsoCommRingCatAppLEιTopToScheme, isIso_of_comp_eq_sigmaSpec, Scheme.Modules.Hom.isIso_iff_isIso_app, isIso_ΓSpec_adjunction_unit_app_basicOpen, LocalRepresentability...: structure-sheaf facts, no etale cohomology",
+      "date": "2026-10-09",
+      "verdict": "no match"
+    },
+    {
+      "tool": "loogle",
+      "query": "CategoryTheory.Sheaf.H, HenselianLocalRing",
+      "results": "none",
+      "date": "2026-10-09",
+      "verdict": "no match"
+    },
+    {
+      "tool": "grep",
+      "query": "grep -rln 'HenselianLocalRing\\|HenselianRing' Mathlib; grep -rln 'ProjectiveLine\\|closedFibre\\|closed fibre' Mathlib; ls Mathlib/CategoryTheory/Sites/SheafCohomology/",
+      "results": "HenselianLocalRing only in Mathlib/RingTheory/Henselian.lean (ring theory); no ProjectiveLine scheme / closed fibre (only NumberTheory/ModularForms/Cusps.lean); SheafCohomology/{Basic,Cech,MayerVietoris}.lean define Sheaf.H without pullback maps along morphisms of schemes",
+      "date": "2026-10-09",
+      "verdict": "no match"
+    },
+    {
+      "tool": "local_search",
+      "query": "bijective_cohomologyMap_projectiveLine_residueField (project ~/weil-conjectures-slopmaster2)",
+      "results": "AlgebraicGeometry.Etale.bijective_cohomologyMap_projectiveLine_residueField in WeilConjectures/SixFunctors/Etale/BaseChangeTheorems/ProjectiveLine/StrictHenselian.lean (source repository, sorry; index unavailable)",
+      "date": "2026-10-09",
+      "verdict": "no match in Mathlib (source-repository declaration, with sorry)"
+    }
+  ],
+  "mathlib_match": null,
+  "status": "split",
+  "merged_into": null,
+  "import_flags": [
+    "detailed_form",
+    "two_proofs"
+  ],
+  "blueprint_kind": "theorem",
+  "blueprint_order": 1142,
+  "blueprint_uses": [
+    "def-weil-pbc-etale-sheaves",
+    "def-weil-pbc-kinjective-resolutions",
+    "def-weil-pbc-strict-henselian-setup",
+    "lemma-weil-pbc-etale-degree-zero",
+    "lemma-weil-pbc-p1-injective-acyclic",
+    "prop-weil-pbc-p1-acyclicity"
+  ],
+  "blueprint_tags": [
+    "latex:proposition"
+  ],
+  "uses_not_cited": [
+    "def-weil-pbc-etale-sheaves",
+    "def-weil-pbc-kinjective-resolutions",
+    "lemma-weil-pbc-etale-degree-zero",
+    "lemma-weil-pbc-p1-injective-acyclic"
+  ],
+  "proof_split_by": "paragraphs",
+  "blueprint_sketch": [
+    {
+      "statement": "For every torsion sheaf $F$ on $X$, restriction induces isomorphisms\n\n$$\nH^q(X,F)\\xrightarrow{\\sim}H^q(X_0,F_0)\\qquad(q\\geq0).\n$$",
+      "proof": "Choose an injective resolution $F\\to I^\\bullet$. Exactness of inverse\nimage along the closed immersion gives an exact complex $F_0\\to I_0^\\bullet$.\nThe preceding lemma makes each $I_0^r$ acyclic, so Leray's acyclicity lemma\nidentifies $R\\Gamma(X_0,F_0)$ with $\\Gamma(X_0,I_0^\\bullet)$. Degree-zero\nrestriction identifies this complex with $\\Gamma(X,I^\\bullet)$ term by term.\nTaking cohomology gives the displayed isomorphisms, and naturality follows\nfrom the naturality of the restriction map and of injective resolutions. The\nsource locators are Tags `0A0C` and `0A3S`.",
+      "cites": []
+    }
+  ],
+  "lean_audit": {
+    "master": {
+      "state": "none",
+      "decls": [],
+      "missing": [
+        "AlgebraicGeometry.Etale.bijective_cohomologyMap_projectiveLine_residueField"
+      ]
+    },
+    "slopmaster2": {
+      "state": "sorry_here",
+      "decls": [
+        {
+          "name": "AlgebraicGeometry.Etale.bijective_cohomologyMap_projectiveLine_residueField",
+          "module": "WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.ProjectiveLine.StrictHenselian",
+          "lines": [
+            150,
+            162
+          ],
+          "kind": "theorem",
+          "sorry": true
+        }
+      ],
+      "missing": [],
+      "open": []
+    }
+  },
+  "chapter": "sec-proper-base-change",
+  "unit": "sk-thm-p1",
+  "split_report": {
+    "date": "2026-10-09",
+    "item": "prop-weil-pbc-p1-strict-henselian-comparison",
+    "worker": "stage1",
+    "summary": "Statement made precise (objects of the setup named, the map is the pullback i^* of def-weil-pbc-cohomology-pullback, scope note). Kept for every torsion F, as the unit sk-thm-p1 step (ii), the two users (lemma-weil-pbc-p1-exchange-geometric-stalk Steps 2-3, prop-weil-pbc-projective-line Steps 2/4) and the Lean declaration state it, rather than narrowing to F_r-modules; the hypothesis gap noted at review (the cited acyclicity covers only injective F_r-sheaves) is closed by a devissage step carried by the new node lem-weil-pbc-pullback-iso-prime-torsion-devissage, which is not Stacks 095T's route (095T stays with Z/l-modules). Proof rewritten from Stacks 095T paragraph 2 in five steps: setting; (a) acyclicity of restricted injective F_r-sheaves (prop-weil-pbc-p1-acyclicity); (b) degree zero (lemma-weil-pbc-etale-degree-zero, Stacks 0A3S/0A0C); (c) an injective F_r-resolution computes both sides (enough injectives, abelian acyclicity of injective module sheaves = Stacks 03FD, Leray acyclicity, exactness of i^{-1}); (d) identification with the pullback i^* via a comparison map into an abelian injective resolution (independence clause (1); clause (2) of the functoriality lemma does not apply literally, since the comparison map goes the wrong way); then (e) devissage and naturality. Grab-bags repointed: def-weil-pbc-etale-sheaves and def-weil-pbc-kinjective-resolutions dropped from stmt_deps; lemma-weil-pbc-p1-injective-acyclic (duplicate of prop-weil-pbc-p1-acyclicity) dropped from proof_deps; proof_deps = union of uses."
+  },
+  "lean": {
+    "module": "WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.ProjectiveLine.StrictHenselian",
+    "declaration": "AlgebraicGeometry.Etale.bijective_cohomologyMap_projectiveLine_residueField",
+    "branch": "slopmaster2",
+    "line": 150,
+    "declarations": [
+      "AlgebraicGeometry.Etale.bijective_cohomologyMap_projectiveLine_residueField"
+    ],
+    "sorry_free": false,
+    "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state sorry_here)"
+  },
+  "tool_uses": [
+    "lem-weil-pbc-module-sheaves-enough-injectives",
+    "prop-weil-pbc-inverse-image-exact"
+  ],
+  "reviewed": {
+    "date": "2026-10-09",
+    "by": "L",
+    "result": "pass",
+    "note": "statement kept for torsion sheaves with the devissage carried by a new node (the users and the unit step state the torsion case); steps (a)-(d) follow Stacks 095T; two tool uses accepted; Lean attached (sorry); lemma-weil-pbc-p1-injective-acyclic dropped as a duplicate, flagged unreachable"
+  }
 }

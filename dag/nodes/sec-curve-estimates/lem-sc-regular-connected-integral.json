@@ -1,99 +1,103 @@
 {
- "id": "lem-sc-regular-connected-integral",
- "blueprint": {
-  "is": null,
-  "from": {
-   "node": "lem-sc-cohomological-dimension",
-   "place": "## Proof, as a whole (degrees $q>2$): the blueprint proof concludes 'For total degree $q>2$ there are thus no differentials into or out of $H^q(C,\\eta_*M)$. It equals $H^q(k(C),M)=0$'; the split replaces this generic-point assembly by the route of the Lean proof AlgebraicGeometry.IsCurve.subsingleton_sheafH_of_three_le_of_forall, using [lem-sc-affine-curve-h2-vanishing] in steps 4 and 5; within the proof of that H^2 vanishing ([lem-sc-affine-curve-h2-vanishing], step 2) this node makes a smooth connected curve integral, so that its generic point and function field exist (the blueprint unit sk-prop-cd, Step 1, last sentence 'So assume $C$ smooth and integral').",
-   "via": [
-    "lem-sc-affine-curve-h2-vanishing"
-   ]
+  "id": "lem-sc-regular-connected-integral",
+  "blueprint": {
+    "is": null,
+    "from": {
+      "node": "lem-sc-cohomological-dimension",
+      "place": "## Proof, as a whole (degrees $q>2$): the blueprint proof concludes 'For total degree $q>2$ there are thus no differentials into or out of $H^q(C,\\eta_*M)$. It equals $H^q(k(C),M)=0$'; the split replaces this generic-point assembly by the route of the Lean proof AlgebraicGeometry.IsCurve.subsingleton_sheafH_of_three_le_of_forall, using [lem-sc-affine-curve-h2-vanishing] in steps 4 and 5; within the proof of that H^2 vanishing ([lem-sc-affine-curve-h2-vanishing], step 2) this node makes a smooth connected curve integral, so that its generic point and function field exist (the blueprint unit sk-prop-cd, Step 1, last sentence 'So assume $C$ smooth and integral').",
+      "via": [
+        "lem-sc-affine-curve-h2-vanishing"
+      ]
+    },
+    "same_as": []
   },
-  "same_as": []
- },
- "kind": "statement",
- "title": "A connected regular scheme is integral",
- "statement": "Let $X$ be a regular scheme [def-weil-regular-scheme] (locally Noetherian, with every local ring $\\mathcal O_{X,x}$ a regular local ring) whose underlying topological space is nonempty and connected. Then $X$ is integral [def-pc-integral-scheme].",
- "source": {
-  "document": "literature/stacks-project/properties.tex",
-  "place": "Tag 0569 (properties-lemma-regular-normal: a regular scheme is normal) and Tag 033N (properties-lemma-normal-locally-Noetherian: a locally Noetherian normal scheme is a disjoint union of integral normal schemes); Lean: WeilConjectures/AlgebraicGeometry/Regular.lean, AlgebraicGeometry.IsRegular.isIntegral, lines 220-227"
- },
- "stmt_deps": [
-  "def-weil-regular-scheme",
-  "def-pc-integral-scheme"
- ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
- "mathlib_searches": [
-  {
-   "tool": "leansearch",
-   "query": "connected locally noetherian scheme whose stalks are integral domains is irreducible (integral)",
-   "results": "AlgebraicGeometry.irreducibleSpace_of_isIntegral, isIntegral_of_irreducibleSpace_of_isReduced, isIntegral_iff_irreducibleSpace_and_isReduced, isIntegral_of_isAffine_of_isDomain (Mathlib.AlgebraicGeometry.Properties)",
-   "date": "2026-10-10",
-   "verdict": "no match (only the converse direction and the reduced+irreducible criterion; irreducibility from connectedness is missing)"
+  "kind": "statement",
+  "title": "A connected regular scheme is integral",
+  "statement": "Let $X$ be a regular scheme [def-weil-regular-scheme] (locally Noetherian, with every local ring $\\mathcal O_{X,x}$ a regular local ring) whose underlying topological space is nonempty and connected. Then $X$ is integral [def-pc-integral-scheme].",
+  "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 0569 (properties-lemma-regular-normal: a regular scheme is normal) and Tag 033N (properties-lemma-normal-locally-Noetherian: a locally Noetherian normal scheme is a disjoint union of integral normal schemes); Lean: WeilConjectures/AlgebraicGeometry/Regular.lean, AlgebraicGeometry.IsRegular.isIntegral, lines 220-227"
   },
-  {
-   "tool": "leanfinder",
-   "query": "a connected regular locally Noetherian scheme is integral",
-   "results": "AlgebraicGeometry.IsIntegral, isIntegral_of_isAffine_of_isDomain, affine_isIntegral_iff, instIsIntegralSpecOfIsDomainCarrier, isIntegral_iff_irreducibleSpace_and_isReduced, IsLocallyNoetherian",
-   "date": "2026-10-10",
-   "verdict": "no match"
-  },
-  {
-   "tool": "loogle",
-   "query": "AlgebraicGeometry.IsIntegral, ConnectedSpace",
-   "results": "none",
-   "date": "2026-10-10",
-   "verdict": "no match"
-  },
-  {
-   "tool": "grep",
-   "query": "grep -rn 'irreducibleSpace_of_isDomain_stalk\\|isIntegral_of_irreducibleSpace_of_isReduced\\|isReduced_of_isReduced_stalk' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib ; grep -rn ConnectedSpace ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/{Noetherian,Properties}.lean",
-   "results": "Mathlib has isReduced_of_isReduced_stalk (AlgebraicGeometry/Properties.lean:74) and isIntegral_of_irreducibleSpace_of_isReduced (Properties.lean:288); the irreducibility of a connected locally Noetherian scheme with domain stalks (irreducibleSpace_of_isDomain_stalk) is only in the project (WeilConjectures/Mathlib/AlgebraicGeometry/Noetherian.lean:45)",
-   "date": "2026-10-10",
-   "verdict": "no match in Mathlib (two of the three ingredients present)"
-  }
- ],
- "mathlib_match": null,
- "status": "unsplit",
- "merged_into": null,
- "created": {
-  "by": "worker",
-  "item": "lem-sc-affine-curve-h2-vanishing",
-  "date": "2026-10-10"
- },
- "chapter": "sec-curve-estimates",
- "unit": "sk-prop-cd",
- "lean_audit": {
-  "master": {
-   "state": "none",
-   "decls": [],
-   "missing": []
-  },
-  "slopmaster2": {
-   "state": "closed",
-   "decls": [
-    {
-     "name": "AlgebraicGeometry.IsRegular.isIntegral",
-     "module": "WeilConjectures.AlgebraicGeometry.Regular",
-     "lines": [
-      220,
-      227
-     ],
-     "kind": "theorem",
-     "sorry": false
-    }
-   ],
-   "missing": [],
-   "open": []
-  }
- },
- "lean": {
-  "branch": "slopmaster2",
-  "declarations": [
-   "AlgebraicGeometry.IsRegular.isIntegral"
+  "stmt_deps": [
+    "def-weil-regular-scheme",
+    "def-pc-integral-scheme"
   ],
-  "note": "attached by the lead (worker's attachment at creation, verified by L, 2026-10-10)"
- }
+  "proof": [],
+  "proof_deps": [],
+  "proof_origin": null,
+  "mathlib_searches": [
+    {
+      "tool": "leansearch",
+      "query": "connected locally noetherian scheme whose stalks are integral domains is irreducible (integral)",
+      "results": "AlgebraicGeometry.irreducibleSpace_of_isIntegral, isIntegral_of_irreducibleSpace_of_isReduced, isIntegral_iff_irreducibleSpace_and_isReduced, isIntegral_of_isAffine_of_isDomain (Mathlib.AlgebraicGeometry.Properties)",
+      "date": "2026-10-10",
+      "verdict": "no match (only the converse direction and the reduced+irreducible criterion; irreducibility from connectedness is missing)"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "a connected regular locally Noetherian scheme is integral",
+      "results": "AlgebraicGeometry.IsIntegral, isIntegral_of_isAffine_of_isDomain, affine_isIntegral_iff, instIsIntegralSpecOfIsDomainCarrier, isIntegral_iff_irreducibleSpace_and_isReduced, IsLocallyNoetherian",
+      "date": "2026-10-10",
+      "verdict": "no match"
+    },
+    {
+      "tool": "loogle",
+      "query": "AlgebraicGeometry.IsIntegral, ConnectedSpace",
+      "results": "none",
+      "date": "2026-10-10",
+      "verdict": "no match"
+    },
+    {
+      "tool": "grep",
+      "query": "grep -rn 'irreducibleSpace_of_isDomain_stalk\\|isIntegral_of_irreducibleSpace_of_isReduced\\|isReduced_of_isReduced_stalk' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib ; grep -rn ConnectedSpace ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/{Noetherian,Properties}.lean",
+      "results": "Mathlib has isReduced_of_isReduced_stalk (AlgebraicGeometry/Properties.lean:74) and isIntegral_of_irreducibleSpace_of_isReduced (Properties.lean:288); the irreducibility of a connected locally Noetherian scheme with domain stalks (irreducibleSpace_of_isDomain_stalk) is only in the project (WeilConjectures/Mathlib/AlgebraicGeometry/Noetherian.lean:45)",
+      "date": "2026-10-10",
+      "verdict": "no match in Mathlib (two of the three ingredients present)"
+    }
+  ],
+  "mathlib_match": null,
+  "status": "unsplit",
+  "merged_into": null,
+  "created": {
+    "by": "worker",
+    "item": "lem-sc-affine-curve-h2-vanishing",
+    "date": "2026-10-10"
+  },
+  "chapter": "sec-curve-estimates",
+  "unit": "sk-prop-cd",
+  "lean_audit": {
+    "master": {
+      "state": "none",
+      "decls": [],
+      "missing": []
+    },
+    "slopmaster2": {
+      "state": "closed",
+      "decls": [
+        {
+          "name": "AlgebraicGeometry.IsRegular.isIntegral",
+          "module": "WeilConjectures.AlgebraicGeometry.Regular",
+          "lines": [
+            220,
+            227
+          ],
+          "kind": "theorem",
+          "sorry": false
+        }
+      ],
+      "missing": [],
+      "open": []
+    }
+  },
+  "lean": {
+    "module": "WeilConjectures.AlgebraicGeometry.Regular",
+    "declaration": "AlgebraicGeometry.IsRegular.isIntegral",
+    "branch": "slopmaster2",
+    "line": 220,
+    "declarations": [
+      "AlgebraicGeometry.IsRegular.isIntegral"
+    ],
+    "sorry_free": true,
+    "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state closed)"
+  }
 }

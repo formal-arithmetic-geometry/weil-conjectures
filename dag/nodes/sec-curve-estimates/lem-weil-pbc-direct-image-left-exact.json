@@ -1,148 +1,152 @@
 {
- "id": "lem-weil-pbc-direct-image-left-exact",
- "blueprint": {
-  "is": null,
-  "from": {
-   "node": "def-weil-pbc-direct-image",
-   "place": "statement, first sentence: 'direct image is the left exact functor u_*: Ab(U_Et) -> Ab(V_Et), (u_*F)(W)=F(W x_V U)' (the claim 'left exact')",
-   "via": []
-  },
-  "same_as": []
- },
- "kind": "statement",
- "title": "Direct image of abelian etale sheaves is additive and left exact",
- "statement": "Let $u:U\\to V$ be a morphism of schemes [def-pc-scheme]. For a scheme $T$ let $T_{\\Et}$ be its small etale site [def-weil-pbc-etale-site] and $\\Ab(T_{\\Et})$ the abelian category of sheaves of abelian groups on $T_{\\Et}$ [def-weil-pbc-abelian-etale-sheaves]. For $F\\in\\Ab(U_{\\Et})$ let $u_*F$ be the sheaf of abelian groups on $V_{\\Et}$ given by $(u_*F)(W)=F(W\\times_VU)$ for $W\\to V$ in $V_{\\Et}$, $W\\times_VU$ the fibre product [def-pc-fibre-product] with its projection to $U$, with restriction along $g:W_1\\to W_2$ the restriction of $F$ along $g\\times\\mathrm{id}_U$ (a sheaf by [lem-weil-pbc-etale-base-change-continuous]), and for a morphism $\\varphi:F\\to F'$ of $\\Ab(U_{\\Et})$ let $u_*\\varphi:u_*F\\to u_*F'$ be given by $(u_*\\varphi)_W=\\varphi_{W\\times_VU}$. Then the functor $u_*:\\Ab(U_{\\Et})\\to\\Ab(V_{\\Et})$ is additive ($u_*(\\varphi+\\psi)=u_*\\varphi+u_*\\psi$), and it preserves the limit of every small diagram; in particular it preserves finite products and kernels, so it is left exact in the sense of [def-sp-left-exact-additive]: for every exact sequence $0\\to F_1\\to F_2\\to F_3$ of $\\Ab(U_{\\Et})$ the sequence $0\\to u_*F_1\\to u_*F_2\\to u_*F_3$ is exact in $\\Ab(V_{\\Et})$.",
- "source": {
-  "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Section 03PV (section-direct-image), paragraph after Definition 03PY (definition-direct-image-sheaf): 'The functor f_* on abelian sheaves is left exact ... because this is the previous sequence with U = X x_Y V'; Lean (slopmaster2): AlgebraicGeometry.Etale.lowerStar_additive and AlgebraicGeometry.Etale.preservesLimitsOfShape_lowerStar / preservesFiniteLimits_lowerStar, module WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs, lines 198-221"
- },
- "stmt_deps": [
-  "def-pc-scheme",
-  "def-weil-pbc-etale-site",
-  "def-weil-pbc-abelian-etale-sheaves",
-  "def-pc-fibre-product",
-  "lem-weil-pbc-etale-base-change-continuous",
-  "def-sp-left-exact-additive"
- ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
- "mathlib_searches": [
-  {
-   "tool": "leansearch",
-   "query": "pushforward of sheaves along a continuous functor preserves limits",
-   "results": "TopCat.Sheaf.pushforward (Mathlib.Topology.Sheaves.Functors); Functor.sheafPushforwardContinuous and its _obj_val_obj/_obj_val_map simp lemmas (Mathlib.CategoryTheory.Sites.Continuous); SheafOfModules.pushforward_map_val; TopCat.Sheaf.pushforward_sheaf_of_sheaf; Functor.sheafPullbackConstruction.preservesFiniteLimits (for the pullback, not the pushforward)",
-   "date": "2026-10-10",
-   "verdict": "no match: the pushforward Functor.sheafPushforwardContinuous exists, no statement that it preserves limits or is additive"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "direct image of sheaves along a continuous functor of sites is left exact (preserves finite limits)",
-   "results": "Functor.sheafPullbackConstruction.preservesFiniteLimits and instPreservesFiniteLimitsSheafSheafPullback (pullback); HasSheafify.isLeftExact; coherent-topology instance; IsContinuous.op_comp_isSheaf_of_types",
-   "date": "2026-10-10",
-   "verdict": "no match for the pushforward"
-  },
-  {
-   "tool": "grep",
-   "query": "grep -rn 'sheafPushforwardContinuous' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib | grep -i 'preserves\\|additive'; grep -rln 'PreservesFiniteLimits (.*sheafPushforwardContinuous\\|PreservesLimitsOfShape.*sheafPushforwardContinuous' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib; sed -n 100,120p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites/Pullback.lean",
-   "results": "none for preservation of limits or additivity; the only related declaration is `example : (G.sheafPushforwardContinuous A J K).IsRightAdjoint` (Sites/Pullback.lean:117), stated for SmallCategory sites with concrete A, which the small etale site (Scheme.Etale, not small) is not",
-   "date": "2026-10-10",
-   "verdict": "no match in Mathlib; the statement is proved sorry-free in slopmaster2 (AlgebraicGeometry.Etale.preservesFiniteLimits_lowerStar, Etale.lowerStar_additive, from WeilConjectures/Mathlib/CategoryTheory/Sites/Continuous.lean:85-94)"
-  }
- ],
- "mathlib_match": null,
- "status": "unsplit",
- "merged_into": null,
- "created": {
-  "by": "worker",
-  "item": "def-weil-pbc-direct-image",
-  "date": "2026-10-10"
- },
- "lean_audit": {
-  "master": {
-   "state": "closed",
-   "decls": [
-    {
-     "name": "AlgebraicGeometry.Etale.lowerStar_additive",
-     "module": "WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs",
-     "lines": [
-      182,
-      185
-     ],
-     "kind": "theorem",
-     "sorry": false
+  "id": "lem-weil-pbc-direct-image-left-exact",
+  "blueprint": {
+    "is": null,
+    "from": {
+      "node": "def-weil-pbc-direct-image",
+      "place": "statement, first sentence: 'direct image is the left exact functor u_*: Ab(U_Et) -> Ab(V_Et), (u_*F)(W)=F(W x_V U)' (the claim 'left exact')",
+      "via": []
     },
-    {
-     "name": "AlgebraicGeometry.Etale.preservesLimitsOfShape_lowerStar",
-     "module": "WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs",
-     "lines": [
-      187,
-      194
-     ],
-     "kind": "theorem",
-     "sorry": false
-    },
-    {
-     "name": "AlgebraicGeometry.Etale.preservesFiniteLimits_lowerStar",
-     "module": "WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs",
-     "lines": [
-      196,
-      200
-     ],
-     "kind": "theorem",
-     "sorry": false
-    }
-   ],
-   "missing": [],
-   "open": []
+    "same_as": []
   },
-  "slopmaster2": {
-   "state": "closed",
-   "decls": [
-    {
-     "name": "AlgebraicGeometry.Etale.lowerStar_additive",
-     "module": "WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs",
-     "lines": [
-      198,
-      201
-     ],
-     "kind": "theorem",
-     "sorry": false
-    },
-    {
-     "name": "AlgebraicGeometry.Etale.preservesLimitsOfShape_lowerStar",
-     "module": "WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs",
-     "lines": [
-      208,
-      215
-     ],
-     "kind": "theorem",
-     "sorry": false
-    },
-    {
-     "name": "AlgebraicGeometry.Etale.preservesFiniteLimits_lowerStar",
-     "module": "WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs",
-     "lines": [
-      217,
-      221
-     ],
-     "kind": "theorem",
-     "sorry": false
-    }
-   ],
-   "missing": [],
-   "open": []
-  }
- },
- "chapter": "sec-curve-estimates",
- "unit": "sk-prop-h2",
- "lean": {
-  "branch": "slopmaster2",
-  "declarations": [
-   "AlgebraicGeometry.Etale.lowerStar_additive",
-   "AlgebraicGeometry.Etale.preservesLimitsOfShape_lowerStar",
-   "AlgebraicGeometry.Etale.preservesFiniteLimits_lowerStar"
+  "kind": "statement",
+  "title": "Direct image of abelian etale sheaves is additive and left exact",
+  "statement": "Let $u:U\\to V$ be a morphism of schemes [def-pc-scheme]. For a scheme $T$ let $T_{\\Et}$ be its small etale site [def-weil-pbc-etale-site] and $\\Ab(T_{\\Et})$ the abelian category of sheaves of abelian groups on $T_{\\Et}$ [def-weil-pbc-abelian-etale-sheaves]. For $F\\in\\Ab(U_{\\Et})$ let $u_*F$ be the sheaf of abelian groups on $V_{\\Et}$ given by $(u_*F)(W)=F(W\\times_VU)$ for $W\\to V$ in $V_{\\Et}$, $W\\times_VU$ the fibre product [def-pc-fibre-product] with its projection to $U$, with restriction along $g:W_1\\to W_2$ the restriction of $F$ along $g\\times\\mathrm{id}_U$ (a sheaf by [lem-weil-pbc-etale-base-change-continuous]), and for a morphism $\\varphi:F\\to F'$ of $\\Ab(U_{\\Et})$ let $u_*\\varphi:u_*F\\to u_*F'$ be given by $(u_*\\varphi)_W=\\varphi_{W\\times_VU}$. Then the functor $u_*:\\Ab(U_{\\Et})\\to\\Ab(V_{\\Et})$ is additive ($u_*(\\varphi+\\psi)=u_*\\varphi+u_*\\psi$), and it preserves the limit of every small diagram; in particular it preserves finite products and kernels, so it is left exact in the sense of [def-sp-left-exact-additive]: for every exact sequence $0\\to F_1\\to F_2\\to F_3$ of $\\Ab(U_{\\Et})$ the sequence $0\\to u_*F_1\\to u_*F_2\\to u_*F_3$ is exact in $\\Ab(V_{\\Et})$.",
+  "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Section 03PV (section-direct-image), paragraph after Definition 03PY (definition-direct-image-sheaf): 'The functor f_* on abelian sheaves is left exact ... because this is the previous sequence with U = X x_Y V'; Lean (slopmaster2): AlgebraicGeometry.Etale.lowerStar_additive and AlgebraicGeometry.Etale.preservesLimitsOfShape_lowerStar / preservesFiniteLimits_lowerStar, module WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs, lines 198-221"
+  },
+  "stmt_deps": [
+    "def-pc-scheme",
+    "def-weil-pbc-etale-site",
+    "def-weil-pbc-abelian-etale-sheaves",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-etale-base-change-continuous",
+    "def-sp-left-exact-additive"
   ],
-  "note": "attached by the lead (worker's attachment at creation, verified by L against the sorry map, 2026-10-10)"
- }
+  "proof": [],
+  "proof_deps": [],
+  "proof_origin": null,
+  "mathlib_searches": [
+    {
+      "tool": "leansearch",
+      "query": "pushforward of sheaves along a continuous functor preserves limits",
+      "results": "TopCat.Sheaf.pushforward (Mathlib.Topology.Sheaves.Functors); Functor.sheafPushforwardContinuous and its _obj_val_obj/_obj_val_map simp lemmas (Mathlib.CategoryTheory.Sites.Continuous); SheafOfModules.pushforward_map_val; TopCat.Sheaf.pushforward_sheaf_of_sheaf; Functor.sheafPullbackConstruction.preservesFiniteLimits (for the pullback, not the pushforward)",
+      "date": "2026-10-10",
+      "verdict": "no match: the pushforward Functor.sheafPushforwardContinuous exists, no statement that it preserves limits or is additive"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "direct image of sheaves along a continuous functor of sites is left exact (preserves finite limits)",
+      "results": "Functor.sheafPullbackConstruction.preservesFiniteLimits and instPreservesFiniteLimitsSheafSheafPullback (pullback); HasSheafify.isLeftExact; coherent-topology instance; IsContinuous.op_comp_isSheaf_of_types",
+      "date": "2026-10-10",
+      "verdict": "no match for the pushforward"
+    },
+    {
+      "tool": "grep",
+      "query": "grep -rn 'sheafPushforwardContinuous' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib | grep -i 'preserves\\|additive'; grep -rln 'PreservesFiniteLimits (.*sheafPushforwardContinuous\\|PreservesLimitsOfShape.*sheafPushforwardContinuous' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib; sed -n 100,120p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites/Pullback.lean",
+      "results": "none for preservation of limits or additivity; the only related declaration is `example : (G.sheafPushforwardContinuous A J K).IsRightAdjoint` (Sites/Pullback.lean:117), stated for SmallCategory sites with concrete A, which the small etale site (Scheme.Etale, not small) is not",
+      "date": "2026-10-10",
+      "verdict": "no match in Mathlib; the statement is proved sorry-free in slopmaster2 (AlgebraicGeometry.Etale.preservesFiniteLimits_lowerStar, Etale.lowerStar_additive, from WeilConjectures/Mathlib/CategoryTheory/Sites/Continuous.lean:85-94)"
+    }
+  ],
+  "mathlib_match": null,
+  "status": "unsplit",
+  "merged_into": null,
+  "created": {
+    "by": "worker",
+    "item": "def-weil-pbc-direct-image",
+    "date": "2026-10-10"
+  },
+  "lean_audit": {
+    "master": {
+      "state": "closed",
+      "decls": [
+        {
+          "name": "AlgebraicGeometry.Etale.lowerStar_additive",
+          "module": "WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs",
+          "lines": [
+            182,
+            185
+          ],
+          "kind": "theorem",
+          "sorry": false
+        },
+        {
+          "name": "AlgebraicGeometry.Etale.preservesLimitsOfShape_lowerStar",
+          "module": "WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs",
+          "lines": [
+            187,
+            194
+          ],
+          "kind": "theorem",
+          "sorry": false
+        },
+        {
+          "name": "AlgebraicGeometry.Etale.preservesFiniteLimits_lowerStar",
+          "module": "WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs",
+          "lines": [
+            196,
+            200
+          ],
+          "kind": "theorem",
+          "sorry": false
+        }
+      ],
+      "missing": [],
+      "open": []
+    },
+    "slopmaster2": {
+      "state": "closed",
+      "decls": [
+        {
+          "name": "AlgebraicGeometry.Etale.lowerStar_additive",
+          "module": "WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs",
+          "lines": [
+            198,
+            201
+          ],
+          "kind": "theorem",
+          "sorry": false
+        },
+        {
+          "name": "AlgebraicGeometry.Etale.preservesLimitsOfShape_lowerStar",
+          "module": "WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs",
+          "lines": [
+            208,
+            215
+          ],
+          "kind": "theorem",
+          "sorry": false
+        },
+        {
+          "name": "AlgebraicGeometry.Etale.preservesFiniteLimits_lowerStar",
+          "module": "WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs",
+          "lines": [
+            217,
+            221
+          ],
+          "kind": "theorem",
+          "sorry": false
+        }
+      ],
+      "missing": [],
+      "open": []
+    }
+  },
+  "chapter": "sec-curve-estimates",
+  "unit": "sk-prop-h2",
+  "lean": {
+    "module": "WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs",
+    "declaration": "AlgebraicGeometry.Etale.lowerStar_additive",
+    "branch": "slopmaster2",
+    "line": 198,
+    "declarations": [
+      "AlgebraicGeometry.Etale.lowerStar_additive",
+      "AlgebraicGeometry.Etale.preservesLimitsOfShape_lowerStar",
+      "AlgebraicGeometry.Etale.preservesFiniteLimits_lowerStar"
+    ],
+    "sorry_free": true,
+    "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state closed)"
+  }
 }

@@ -1,81 +1,92 @@
 {
- "id": "lem-fd-as-trace",
- "blueprint": {
-  "is": "lem-fd-as-trace",
-  "from": null,
-  "same_as": null
- },
- "kind": "statement",
- "title": "Trace function of the Artin–Schreier sheaf",
- "statement": "Let $k_0=\\mathbf F_q$, fix the nondegenerate additive character\n$\\psi=\\Psi\\circ\\operatorname{Tr}_{k_0/\\mathbf F_p}$ of [def-fd-additive-character],\nlet $a\\in k_0^\\times$, and let $\\mathcal L_{\\psi,ax}$ be the\nArtin–Schreier sheaf of [def-fd-artin-schreier-sheaf] on\n$\\mathbf A^1_{k_0}$ attached to the linear function $x\\mapsto ax$.\nThen the *trace function* of $\\mathcal L_{\\psi,ax}$ is\n\n$$\nt_{\\mathcal L_{\\psi,ax}}(u)=\\psi\\bigl(\\operatorname{Tr}_{\\kappa(u)/k_0}(au)\\bigr)\n=\\Psi\\bigl(\\operatorname{Tr}_{\\kappa(u)/\\mathbf F_p}(au)\\bigr),\n$$\n\nfor every closed point $u$ (with the local Frobenius convention of\n[def-weil-local-frobenius-trace]); in particular, on the\n$\\mathbf F_{q^n}$-points of the line,\n\n$$\nt_{\\mathcal L_{\\psi,ax}}(x)=\\psi\\bigl(\\operatorname{Tr}_{\\mathbf F_{q^n}/k_0}(ax)\\bigr).\n$$",
- "source": {
-  "document": "literature/blueprint/master/blueprint/sec-fourier-transform/sk-lem-as-properties/lem-fd-as-trace.md",
-  "place": "node lem-fd-as-trace, order 2687"
- },
- "stmt_deps": [
-  "def-fd-additive-character",
-  "def-fd-artin-schreier-sheaf",
-  "def-weil-local-frobenius-trace"
- ],
- "proof": [
-  {
-   "text": "Fix a closed point $u$ of $\\mathbf A^1_{k_0}$ of degree $n$, with\n$u\\in\\kappa(u)\\subset \\overline k$ its image and geometric point\n$\\bar u$, and let $F_u$ be the local Frobenius operator of\n[def-weil-local-frobenius-trace] (the $n$-fold iterate of the\ngeometric Frobenius), which acts on functions on the fibre by pullback\nalong $y\\mapsto y^{q^n}$. By the affine-line covering\n[lem-fd-as-cover-affine-line], the fibre of\n$\\pi:Y\\to\\mathbf A^1_{k_0}$, $y\\mapsto y^p-y$, over $\\bar u$ is\nthe set\n\n$$\nY_{\\bar u}=\\{y\\in\\overline k:\\ y^p-y=au\\},\n$$\n\nwhich is an $\\mathbf F_p$-torsor (the difference of two roots is a\nroot of $X^p-X$, hence lies in $\\mathbf F_p$; the polynomial\n$T^p-T-au$ is separable). The stalk\n$(\\pi_*\\overline{\\mathbf Q}_\\ell)_{\\bar u}$ is the space of functions on\n$Y_{\\bar u}$, with $\\sigma_c$ ($c\\in\\mathbf F_p$) acting by pullback along\n$y\\mapsto y+c$, and $(\\mathcal L_{\\psi,ax})_{\\bar u}$ is the image of the\nidempotent $e_\\Psi$ of [def-fd-artin-schreier-sheaf], on which $\\sigma_c$\nacts by $\\Psi(c)$. For $y\\in Y_{\\bar u}$, induction on $j$ gives\n\n$$\ny^{p^j}=y+\\sum_{0\\leq i<j}(au)^{p^i},\n\\qquad\\text{so}\\qquad\ny^{q^n}=y^{p^m}=y+\\operatorname{Tr}_{\\kappa(u)/\\mathbf F_p}(au),\n\\quad m=[\\kappa(u):\\mathbf F_p],\n$$\n\nbecause the conjugates of $au\\in\\kappa(u)$ over $\\mathbf F_p$ are the\n$(au)^{p^i}$, $0\\le i<m$. Hence $F_u$ acts on the functions on\n$Y_{\\bar u}$ as $\\sigma_t$ with\n$t=\\operatorname{Tr}_{\\kappa(u)/\\mathbf F_p}(au)\\in\\mathbf F_p$, and so on\nthe rank-one $\\Psi$-isotypic stalk by the scalar $\\Psi(t)$. By\ntransitivity of the trace,\n$\\Psi(\\operatorname{Tr}_{\\kappa(u)/\\mathbf F_p}(au))\n=\\Psi(\\operatorname{Tr}_{k_0/\\mathbf F_p}\\operatorname{Tr}_{\\kappa(u)/k_0}(au))\n=\\psi(\\operatorname{Tr}_{\\kappa(u)/k_0}(au))$, which is the announced\nformula; for an $\\mathbf F_{q^n}$-point the same computation applies with\n$\\kappa(u)$ replaced by $\\mathbf F_{q^n}$.",
-   "uses": [
+  "id": "lem-fd-as-trace",
+  "blueprint": {
+    "is": "lem-fd-as-trace",
+    "from": null,
+    "same_as": null
+  },
+  "kind": "statement",
+  "title": "Trace function of the Artin–Schreier sheaf",
+  "statement": "Let $k_0=\\mathbf F_q$, fix the nondegenerate additive character\n$\\psi=\\Psi\\circ\\operatorname{Tr}_{k_0/\\mathbf F_p}$ of [def-fd-additive-character],\nlet $a\\in k_0^\\times$, and let $\\mathcal L_{\\psi,ax}$ be the\nArtin–Schreier sheaf of [def-fd-artin-schreier-sheaf] on\n$\\mathbf A^1_{k_0}$ attached to the linear function $x\\mapsto ax$.\nThen the *trace function* of $\\mathcal L_{\\psi,ax}$ is\n\n$$\nt_{\\mathcal L_{\\psi,ax}}(u)=\\psi\\bigl(\\operatorname{Tr}_{\\kappa(u)/k_0}(au)\\bigr)\n=\\Psi\\bigl(\\operatorname{Tr}_{\\kappa(u)/\\mathbf F_p}(au)\\bigr),\n$$\n\nfor every closed point $u$ (with the local Frobenius convention of\n[def-weil-local-frobenius-trace]); in particular, on the\n$\\mathbf F_{q^n}$-points of the line,\n\n$$\nt_{\\mathcal L_{\\psi,ax}}(x)=\\psi\\bigl(\\operatorname{Tr}_{\\mathbf F_{q^n}/k_0}(ax)\\bigr).\n$$",
+  "source": {
+    "document": "literature/blueprint/master/blueprint/sec-fourier-transform/sk-lem-as-properties/lem-fd-as-trace.md",
+    "place": "node lem-fd-as-trace, order 2687"
+  },
+  "stmt_deps": [
+    "def-fd-additive-character",
+    "def-fd-artin-schreier-sheaf",
+    "def-weil-local-frobenius-trace"
+  ],
+  "proof": [
+    {
+      "text": "Fix a closed point $u$ of $\\mathbf A^1_{k_0}$ of degree $n$, with\n$u\\in\\kappa(u)\\subset \\overline k$ its image and geometric point\n$\\bar u$, and let $F_u$ be the local Frobenius operator of\n[def-weil-local-frobenius-trace] (the $n$-fold iterate of the\ngeometric Frobenius), which acts on functions on the fibre by pullback\nalong $y\\mapsto y^{q^n}$. By the affine-line covering\n[lem-fd-as-cover-affine-line], the fibre of\n$\\pi:Y\\to\\mathbf A^1_{k_0}$, $y\\mapsto y^p-y$, over $\\bar u$ is\nthe set\n\n$$\nY_{\\bar u}=\\{y\\in\\overline k:\\ y^p-y=au\\},\n$$\n\nwhich is an $\\mathbf F_p$-torsor (the difference of two roots is a\nroot of $X^p-X$, hence lies in $\\mathbf F_p$; the polynomial\n$T^p-T-au$ is separable). The stalk\n$(\\pi_*\\overline{\\mathbf Q}_\\ell)_{\\bar u}$ is the space of functions on\n$Y_{\\bar u}$, with $\\sigma_c$ ($c\\in\\mathbf F_p$) acting by pullback along\n$y\\mapsto y+c$, and $(\\mathcal L_{\\psi,ax})_{\\bar u}$ is the image of the\nidempotent $e_\\Psi$ of [def-fd-artin-schreier-sheaf], on which $\\sigma_c$\nacts by $\\Psi(c)$. For $y\\in Y_{\\bar u}$, induction on $j$ gives\n\n$$\ny^{p^j}=y+\\sum_{0\\leq i<j}(au)^{p^i},\n\\qquad\\text{so}\\qquad\ny^{q^n}=y^{p^m}=y+\\operatorname{Tr}_{\\kappa(u)/\\mathbf F_p}(au),\n\\quad m=[\\kappa(u):\\mathbf F_p],\n$$\n\nbecause the conjugates of $au\\in\\kappa(u)$ over $\\mathbf F_p$ are the\n$(au)^{p^i}$, $0\\le i<m$. Hence $F_u$ acts on the functions on\n$Y_{\\bar u}$ as $\\sigma_t$ with\n$t=\\operatorname{Tr}_{\\kappa(u)/\\mathbf F_p}(au)\\in\\mathbf F_p$, and so on\nthe rank-one $\\Psi$-isotypic stalk by the scalar $\\Psi(t)$. By\ntransitivity of the trace,\n$\\Psi(\\operatorname{Tr}_{\\kappa(u)/\\mathbf F_p}(au))\n=\\Psi(\\operatorname{Tr}_{k_0/\\mathbf F_p}\\operatorname{Tr}_{\\kappa(u)/k_0}(au))\n=\\psi(\\operatorname{Tr}_{\\kappa(u)/k_0}(au))$, which is the announced\nformula; for an $\\mathbf F_{q^n}$-point the same computation applies with\n$\\kappa(u)$ replaced by $\\mathbf F_{q^n}$.",
+      "uses": [
+        "def-weil-local-frobenius-trace",
+        "lem-fd-as-cover-affine-line",
+        "def-fd-artin-schreier-sheaf"
+      ],
+      "elementary": false
+    }
+  ],
+  "proof_deps": [
     "def-weil-local-frobenius-trace",
     "lem-fd-as-cover-affine-line",
     "def-fd-artin-schreier-sheaf"
-   ],
-   "elementary": false
-  }
- ],
- "proof_deps": [
-  "def-weil-local-frobenius-trace",
-  "lem-fd-as-cover-affine-line",
-  "def-fd-artin-schreier-sheaf"
- ],
- "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-fourier-transform/sk-lem-as-properties/lem-fd-as-trace.md",
-  "place": "## Proof"
- },
- "mathlib_searches": [],
- "mathlib_match": null,
- "status": "imported",
- "merged_into": null,
- "import_flags": [],
- "blueprint_kind": "lemma",
- "blueprint_order": 2687,
- "blueprint_uses": [
-  "def-fd-additive-character",
-  "def-fd-artin-schreier-sheaf",
-  "def-weil-local-frobenius-trace",
-  "lem-fd-as-cover-affine-line"
- ],
- "proof_split_by": "paragraphs",
- "lean_audit": {
-  "master": {
-   "state": "none",
-   "decls": [],
-   "missing": []
+  ],
+  "proof_origin": {
+    "by": "agent",
+    "document": "literature/blueprint/master/blueprint/sec-fourier-transform/sk-lem-as-properties/lem-fd-as-trace.md",
+    "place": "## Proof"
   },
-  "slopmaster2": {
-   "state": "sorry_here",
-   "decls": [
-    {
-     "name": "AlgebraicGeometry.WeilSheaf.traceFunction_artinSchreier",
-     "module": "WeilConjectures.WeilSheaf.ArtinSchreierTrace",
-     "lines": [
-      39,
-      53
-     ],
-     "kind": "theorem",
-     "sorry": true
+  "mathlib_searches": [],
+  "mathlib_match": null,
+  "status": "imported",
+  "merged_into": null,
+  "import_flags": [],
+  "blueprint_kind": "lemma",
+  "blueprint_order": 2687,
+  "blueprint_uses": [
+    "def-fd-additive-character",
+    "def-fd-artin-schreier-sheaf",
+    "def-weil-local-frobenius-trace",
+    "lem-fd-as-cover-affine-line"
+  ],
+  "proof_split_by": "paragraphs",
+  "lean_audit": {
+    "master": {
+      "state": "none",
+      "decls": [],
+      "missing": []
+    },
+    "slopmaster2": {
+      "state": "sorry_here",
+      "decls": [
+        {
+          "name": "AlgebraicGeometry.WeilSheaf.traceFunction_artinSchreier",
+          "module": "WeilConjectures.WeilSheaf.ArtinSchreierTrace",
+          "lines": [
+            39,
+            53
+          ],
+          "kind": "theorem",
+          "sorry": true
+        }
+      ],
+      "missing": [],
+      "open": []
     }
-   ],
-   "missing": [],
-   "open": []
+  },
+  "chapter": "sec-fourier-transform",
+  "unit": "sk-lem-as-properties",
+  "lean": {
+    "module": "WeilConjectures.WeilSheaf.ArtinSchreierTrace",
+    "declaration": "AlgebraicGeometry.WeilSheaf.traceFunction_artinSchreier",
+    "branch": "slopmaster2",
+    "line": 39,
+    "declarations": [
+      "AlgebraicGeometry.WeilSheaf.traceFunction_artinSchreier"
+    ],
+    "sorry_free": false,
+    "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state sorry_here)"
   }
- },
- "chapter": "sec-fourier-transform",
- "unit": "sk-lem-as-properties"
 }

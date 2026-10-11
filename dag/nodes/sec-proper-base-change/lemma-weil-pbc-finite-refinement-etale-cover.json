@@ -1,234 +1,245 @@
 {
- "id": "lemma-weil-pbc-finite-refinement-etale-cover",
- "blueprint": {
-  "is": "lemma-weil-pbc-finite-refinement-etale-cover",
-  "from": null,
-  "same_as": []
- },
- "kind": "statement",
- "title": "Finite refinement of a surjective etale morphism",
- "statement": "Let $u:U\\to T$ be a surjective etale morphism\n[def-weil-pbc-scheme-conventions] and assume that $T$ is quasi-compact and\nquasi-separated. There exist a finite set $J$, a finite, finitely presented,\nsurjective morphism\n\n$$\n r:T'\\longrightarrow T,\n$$\n\na finite open covering $T'=\\bigcup_{a\\in J}W_a$, and $T$-morphisms\n$\\phi_a:W_a\\to U$ such that\n\n$$\n u\\circ\\phi_a=r|_{W_a}:W_a\\longrightarrow T\n \\qquad(a\\in J).\n$$\n\nEquivalently, $r$ factors through $u$ Zariski locally on $T'$.",
- "source": {
-  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-iff/lemma-weil-pbc-finite-refinement-etale-cover.md",
-  "place": "node lemma-weil-pbc-finite-refinement-etale-cover, order 1074",
-  "external": [
-   {
-    "document": "Stacks Project",
-    "place": "Tag 09Z0"
-   }
-  ]
- },
- "stmt_deps": [
-  "def-weil-pbc-scheme-conventions",
-  "def-weil-pbc-etale-site"
- ],
- "proof": [
-  {
-   "text": "Choose a finite affine open cover $T=\\bigcup_kT_k$ using quasi-compactness. For each $k$, base change the surjective etale map $U\\to T$ to the affine scheme $T_k$; the resulting family of etale maps is jointly surjective, so [lem-weil-pbc-etale-covering-affine-refinement] gives finitely many affine opens in the members of this base-changed family whose images cover $T_k$. Taking the disjoint union over the finitely many $k$ and finitely many opens gives an affine scheme $E$ with a surjective etale map $E\\to T$ factoring through $U$. Since $E$ is affine, the map $E\\to T$ is separated [lem-weil-pbc-affine-source-morphism-separated]. Since $T$ is quasi-separated, [lem-weil-pbc-qcqs-morphism-permanence] (1) makes this quasi-compact etale map finitely presented.",
-   "uses": [
+  "id": "lemma-weil-pbc-finite-refinement-etale-cover",
+  "blueprint": {
+    "is": "lemma-weil-pbc-finite-refinement-etale-cover",
+    "from": null,
+    "same_as": []
+  },
+  "kind": "statement",
+  "title": "Finite refinement of a surjective etale morphism",
+  "statement": "Let $u:U\\to T$ be a surjective etale morphism\n[def-weil-pbc-scheme-conventions] and assume that $T$ is quasi-compact and\nquasi-separated. There exist a finite set $J$, a finite, finitely presented,\nsurjective morphism\n\n$$\n r:T'\\longrightarrow T,\n$$\n\na finite open covering $T'=\\bigcup_{a\\in J}W_a$, and $T$-morphisms\n$\\phi_a:W_a\\to U$ such that\n\n$$\n u\\circ\\phi_a=r|_{W_a}:W_a\\longrightarrow T\n \\qquad(a\\in J).\n$$\n\nEquivalently, $r$ factors through $u$ Zariski locally on $T'$.",
+  "source": {
+    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-iff/lemma-weil-pbc-finite-refinement-etale-cover.md",
+    "place": "node lemma-weil-pbc-finite-refinement-etale-cover, order 1074",
+    "external": [
+      {
+        "document": "Stacks Project",
+        "place": "Tag 09Z0"
+      }
+    ]
+  },
+  "stmt_deps": [
+    "def-weil-pbc-scheme-conventions",
+    "def-weil-pbc-etale-site"
+  ],
+  "proof": [
+    {
+      "text": "Choose a finite affine open cover $T=\\bigcup_kT_k$ using quasi-compactness. For each $k$, base change the surjective etale map $U\\to T$ to the affine scheme $T_k$; the resulting family of etale maps is jointly surjective, so [lem-weil-pbc-etale-covering-affine-refinement] gives finitely many affine opens in the members of this base-changed family whose images cover $T_k$. Taking the disjoint union over the finitely many $k$ and finitely many opens gives an affine scheme $E$ with a surjective etale map $E\\to T$ factoring through $U$. Since $E$ is affine, the map $E\\to T$ is separated [lem-weil-pbc-affine-source-morphism-separated]. Since $T$ is quasi-separated, [lem-weil-pbc-qcqs-morphism-permanence] (1) makes this quasi-compact etale map finitely presented.",
+      "uses": [
+        "lem-weil-pbc-qcqs-finite-affine-open-cover",
+        "lem-weil-pbc-etale-covering-affine-refinement",
+        "lem-weil-pbc-qcqs-morphism-permanence",
+        "lem-weil-pbc-affine-source-morphism-separated",
+        "def-weil-pbc-scheme-conventions"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/more-morphisms.tex",
+        "place": "Lemma 37.45.7 (Tag 09Z0), proof paragraph beginning 'Since X is quasi-compact, there exist finitely many affine opens U_i'"
+      }
+    },
+    {
+      "text": "Prove by induction on $d$ the following claim for every qcqs scheme $X$: for every surjective etale $v:E\\to X$ with $E$ quasi-compact and separated, and every geometric fibre of $v$ having at most $d$ points, there are a finite surjective $r:Z\\to X$ and a finite open cover of $Z$ on whose members $r$ factors through $E$. The affine-source reduction in step 1 lies in this class: etale is locally quasi-finite [lem-weil-pbc-etale-ring-map-quasi-finite], and [lem-weil-pbc-lqf-qc-source-bounded-fibres] gives a uniform finite bound (the number of geometric points is at most the fibre degree). A surjective map with bound $d=0$ has empty target, when the empty finite cover gives the claim. If $d=1$, every geometric fibre has exactly one point, so $v$ is radicial and etale; [lem-weil-pbc-radicial-etale-open] makes it an open immersion, and surjectivity makes it an isomorphism. Take $Z=E\\cong X$ and the one-member cover.",
+      "uses": [
+        "lem-weil-pbc-etale-ring-map-quasi-finite",
+        "lem-weil-pbc-lqf-qc-source-bounded-fibres",
+        "lem-weil-pbc-radicial-etale-open"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/more-morphisms.tex",
+        "place": "Lemma 37.45.7 (Tag 09Z0), induction setup and the case d=1"
+      }
+    },
+    {
+      "text": "For $d>1$, the map $v:E\\to X$ in the induction claim is separated and quasi-finite, and is of finite type because etale is locally of finite presentation and its quasi-compact source lies over the qcqs $X$ [lem-weil-pbc-qcqs-morphism-permanence] (1). Apply [thm-pqf-zmt-factorization] to obtain a finite (hence integral) $\\pi:\\widetilde X\\to X$ and a quasi-compact open immersion $j:E\\hookrightarrow\\widetilde X$; replace $\\widetilde X$ by the scheme-theoretic closure of $E$ [def-nagata-scheme-theoretically-dense-open]. In $P=E\\times_X\\widetilde X$, the projection $P\\to\\widetilde X$ is etale by base change, and the graph $s=(\\mathrm{id}_E,j):E\\to P$ is a section of $P\\to E$. This latter projection is finite by base change of $\\pi$ [lem-weil-pbc-finite-morphism-permanence] (a), hence affine, hence separated. The graph is a closed immersion by [lem-weil-pbc-section-separated-closed-immersion]; it is etale as a morphism between schemes etale over $\\widetilde X$ by [lem-weil-pbc-etale-composition-cancellation] (3), so its image is open by [lem-weil-pbc-etale-morphism-open-map] and closed by the closed immersion. Let $W$ be the open-and-closed complement of $s(E)$, so $P=E\\amalg W$. The image $V$ of the etale map $W\\to\\widetilde X$ is open [lem-weil-pbc-etale-morphism-open-map] and contains $\\widetilde X\\setminus E$. The map $W\\to V$ is quasi-compact and separated, and $V$ is qcqs. Over the dense open $E$, each geometric fibre of $W$ is the corresponding fibre of $E\\to X$ with the diagonal point removed [lem-weil-pbc-fibre-degree-base-change], hence has fewer than $d$ points. The strict bound holds on all of $V$ by [lem-weil-pbc-etale-fibre-specialization-bound].",
+      "uses": [
+        "thm-pqf-zmt-factorization",
+        "lem-weil-pbc-qcqs-morphism-permanence",
+        "lem-weil-pbc-finite-morphism-permanence",
+        "lem-weil-pbc-section-separated-closed-immersion",
+        "lem-weil-pbc-etale-composition-cancellation",
+        "lem-weil-pbc-etale-morphism-open-map",
+        "def-nagata-scheme-theoretically-dense-open",
+        "lem-weil-pbc-fibre-degree-base-change",
+        "lem-weil-pbc-etale-fibre-specialization-bound"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/more-morphisms.tex",
+        "place": "Lemma 37.45.7 (Tag 09Z0), proof paragraphs applying Lemma 37.43.3 and forming W and V"
+      }
+    },
+    {
+      "text": "The finite map $\\widetilde X\\to X$ makes $\\widetilde X$ qcqs [lem-weil-pbc-qcqs-morphism-permanence] (2). The open-and-closed $W\\subset E\\times_X\\widetilde X$ is quasi-compact, since the projection to the quasi-compact $\\widetilde X$ is quasi-compact; the map $W\\to V$ is separated by base change of the separated $E\\to X$ and restriction to an open-and-closed subscheme. Its image $V$ is a quasi-compact open of the quasi-separated $\\widetilde X$, hence qcqs. Thus the induction hypothesis applies to the surjective etale $W\\to V$ with bound $d-1$, with $W$ quasi-compact and separated and $V$ qcqs, giving a finite surjective $Z\\to V$ with finitely many local factorizations through $W$. The composite $Z\\to V\\hookrightarrow\\widetilde X$ is separated, of finite type and everywhere quasi-finite: the first map is finite (hence of finite type) and the second a quasi-compact open immersion; all three properties are preserved by composition. With $\\widetilde X$ qcqs, [thm-pqf-zmt-factorization] applies to this composite and gives a finite $Z'\\to\\widetilde X$ with $Z\\hookrightarrow Z'$ quasi-compact open. Replace $Z'$ by the scheme-theoretic closure of $Z$ [def-nagata-scheme-theoretically-dense-open]; then $Z'\\times_{\\widetilde X}V=Z$. Let $C$ be the reduced closed complement $\\widetilde X\\setminus V$, so $C\\to\\widetilde X$ is a closed immersion and hence finite. Both $Z'\\to\\widetilde X$ and $C\\to\\widetilde X$ are finite, and their composites with the finite $\\widetilde X\\to X$ are finite: affine locally, if $A\\to B$ and $B\\to D$ are module-finite, products of finite module generators for $B/A$ and $D/B$ generate $D/A$. A finite disjoint union of finite maps is finite, so $Z'\\amalg C\\to X$ is finite; it is surjective since $Z'$ covers $V$ and $C$ covers its complement. On $C\\subset E$ it factors through $E$. A point of $Z'\\setminus Z$ lies above $\\widetilde X\\setminus V\\subset E$, and a point of $Z$ has a neighbourhood factoring through $W\\subset E\\times_X\\widetilde X$; thus the map locally factors through $E\\to X$. This proves the induction claim. Apply it to $E\\to T$ from step 1 with the uniform bound $d$ of step 2; the resulting finite surjective $T'\\to T$ locally factors through $E$ and hence through the original $U$.",
+      "uses": [
+        "thm-pqf-zmt-factorization",
+        "lem-weil-pbc-qcqs-morphism-permanence",
+        "lem-weil-pbc-finite-morphism-permanence",
+        "def-nagata-scheme-theoretically-dense-open"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/more-morphisms.tex",
+        "place": "Lemma 37.45.7 (Tag 09Z0), induction step after applying the induction hypothesis"
+      }
+    },
+    {
+      "text": "Call this finite (hence integral) surjection $T'\\to T$. Choose a finite affine open cover $T'=\\bigcup_jV_j$ refining the opens on which the factorisation through the original $U$ is defined. Write $T'=\\varprojlim_iT_i$ with each $T_i\\to T$ finite and finitely presented and affine transition maps by [lem-weil-pbc-integral-morphism-limit-of-finite]. By [pqf-lem-limit-qc-open-descends] (1), after one common stage each $V_j$ descends to a quasi-compact open $W_{j,i}\\subset T_i$; clause (3) of that node identifies $V_j$ with the limit of the $W_{j,k}$ for $k\\ge i$, with affine transitions. The $T$-maps $V_j\\to U$ therefore descend, after increasing $i$, by [lem-weil-pbc-finite-presentation-map-limit-factorization], since the etale $U\\to T$ is locally of finite presentation. Their equalities over $T$ descend as finite-presentation data by the same limit factorization (or by applying it to the fibre-product equalizer). The opens $W_{j,i}$ cover the stage $T_i$ at a sufficiently large common stage: the finite union $\\bigcup_jW_{j,i}$ and $T_i$ itself are quasi-compact opens of $T_i$ with the same preimage $\\bigcup_jV_j=T'$ in $T'$, so by [pqf-lem-limit-qc-open-descends] (2) their preimages in some later stage $T_{i'}$ agree, that is, $T_{i'}=\\bigcup_jW_{j,i'}$. The map $T_i\\to T$ is surjective because its composite with $T'\\to T_i$ is the surjective $T'\\to T$. This stage, its finite open cover, and the descended maps give the stated finite, finitely presented refinement.",
+      "uses": [
+        "lem-weil-pbc-integral-morphism-limit-of-finite",
+        "pqf-lem-limit-qc-open-descends",
+        "lem-weil-pbc-finite-presentation-map-limit-factorization",
+        "def-weil-pbc-scheme-conventions"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/more-morphisms.tex",
+        "place": "Lemma 37.45.7 (Tag 09Z0), final paragraph passing from an integral cover to a finite finitely presented stage"
+      }
+    }
+  ],
+  "proof_deps": [
+    "def-weil-pbc-scheme-conventions",
     "lem-weil-pbc-qcqs-finite-affine-open-cover",
     "lem-weil-pbc-etale-covering-affine-refinement",
-    "lem-weil-pbc-qcqs-morphism-permanence",
-    "lem-weil-pbc-affine-source-morphism-separated",
-    "def-weil-pbc-scheme-conventions"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Lemma 37.45.7 (Tag 09Z0), proof paragraph beginning 'Since X is quasi-compact, there exist finitely many affine opens U_i'"
-   }
-  },
-  {
-   "text": "Prove by induction on $d$ the following claim for every qcqs scheme $X$: for every surjective etale $v:E\\to X$ with $E$ quasi-compact and separated, and every geometric fibre of $v$ having at most $d$ points, there are a finite surjective $r:Z\\to X$ and a finite open cover of $Z$ on whose members $r$ factors through $E$. The affine-source reduction in step 1 lies in this class: etale is locally quasi-finite [lem-weil-pbc-etale-ring-map-quasi-finite], and [lem-weil-pbc-lqf-qc-source-bounded-fibres] gives a uniform finite bound (the number of geometric points is at most the fibre degree). A surjective map with bound $d=0$ has empty target, when the empty finite cover gives the claim. If $d=1$, every geometric fibre has exactly one point, so $v$ is radicial and etale; [lem-weil-pbc-radicial-etale-open] makes it an open immersion, and surjectivity makes it an isomorphism. Take $Z=E\\cong X$ and the one-member cover.",
-   "uses": [
     "lem-weil-pbc-etale-ring-map-quasi-finite",
     "lem-weil-pbc-lqf-qc-source-bounded-fibres",
-    "lem-weil-pbc-radicial-etale-open"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Lemma 37.45.7 (Tag 09Z0), induction setup and the case d=1"
-   }
-  },
-  {
-   "text": "For $d>1$, the map $v:E\\to X$ in the induction claim is separated and quasi-finite, and is of finite type because etale is locally of finite presentation and its quasi-compact source lies over the qcqs $X$ [lem-weil-pbc-qcqs-morphism-permanence] (1). Apply [thm-pqf-zmt-factorization] to obtain a finite (hence integral) $\\pi:\\widetilde X\\to X$ and a quasi-compact open immersion $j:E\\hookrightarrow\\widetilde X$; replace $\\widetilde X$ by the scheme-theoretic closure of $E$ [def-nagata-scheme-theoretically-dense-open]. In $P=E\\times_X\\widetilde X$, the projection $P\\to\\widetilde X$ is etale by base change, and the graph $s=(\\mathrm{id}_E,j):E\\to P$ is a section of $P\\to E$. This latter projection is finite by base change of $\\pi$ [lem-weil-pbc-finite-morphism-permanence] (a), hence affine, hence separated. The graph is a closed immersion by [lem-weil-pbc-section-separated-closed-immersion]; it is etale as a morphism between schemes etale over $\\widetilde X$ by [lem-weil-pbc-etale-composition-cancellation] (3), so its image is open by [lem-weil-pbc-etale-morphism-open-map] and closed by the closed immersion. Let $W$ be the open-and-closed complement of $s(E)$, so $P=E\\amalg W$. The image $V$ of the etale map $W\\to\\widetilde X$ is open [lem-weil-pbc-etale-morphism-open-map] and contains $\\widetilde X\\setminus E$. The map $W\\to V$ is quasi-compact and separated, and $V$ is qcqs. Over the dense open $E$, each geometric fibre of $W$ is the corresponding fibre of $E\\to X$ with the diagonal point removed [lem-weil-pbc-fibre-degree-base-change], hence has fewer than $d$ points. The strict bound holds on all of $V$ by [lem-weil-pbc-etale-fibre-specialization-bound].",
-   "uses": [
-    "thm-pqf-zmt-factorization",
-    "lem-weil-pbc-qcqs-morphism-permanence",
-    "lem-weil-pbc-finite-morphism-permanence",
-    "lem-weil-pbc-section-separated-closed-immersion",
-    "lem-weil-pbc-etale-composition-cancellation",
     "lem-weil-pbc-etale-morphism-open-map",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-affine-source-morphism-separated",
+    "lem-weil-pbc-finite-morphism-permanence",
+    "lem-weil-pbc-etale-composition-cancellation",
+    "lem-weil-pbc-section-separated-closed-immersion",
+    "thm-pqf-zmt-factorization",
     "def-nagata-scheme-theoretically-dense-open",
     "lem-weil-pbc-fibre-degree-base-change",
-    "lem-weil-pbc-etale-fibre-specialization-bound"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Lemma 37.45.7 (Tag 09Z0), proof paragraphs applying Lemma 37.43.3 and forming W and V"
-   }
-  },
-  {
-   "text": "The finite map $\\widetilde X\\to X$ makes $\\widetilde X$ qcqs [lem-weil-pbc-qcqs-morphism-permanence] (2). The open-and-closed $W\\subset E\\times_X\\widetilde X$ is quasi-compact, since the projection to the quasi-compact $\\widetilde X$ is quasi-compact; the map $W\\to V$ is separated by base change of the separated $E\\to X$ and restriction to an open-and-closed subscheme. Its image $V$ is a quasi-compact open of the quasi-separated $\\widetilde X$, hence qcqs. Thus the induction hypothesis applies to the surjective etale $W\\to V$ with bound $d-1$, with $W$ quasi-compact and separated and $V$ qcqs, giving a finite surjective $Z\\to V$ with finitely many local factorizations through $W$. The composite $Z\\to V\\hookrightarrow\\widetilde X$ is separated, of finite type and everywhere quasi-finite: the first map is finite (hence of finite type) and the second a quasi-compact open immersion; all three properties are preserved by composition. With $\\widetilde X$ qcqs, [thm-pqf-zmt-factorization] applies to this composite and gives a finite $Z'\\to\\widetilde X$ with $Z\\hookrightarrow Z'$ quasi-compact open. Replace $Z'$ by the scheme-theoretic closure of $Z$ [def-nagata-scheme-theoretically-dense-open]; then $Z'\\times_{\\widetilde X}V=Z$. Let $C$ be the reduced closed complement $\\widetilde X\\setminus V$, so $C\\to\\widetilde X$ is a closed immersion and hence finite. Both $Z'\\to\\widetilde X$ and $C\\to\\widetilde X$ are finite, and their composites with the finite $\\widetilde X\\to X$ are finite: affine locally, if $A\\to B$ and $B\\to D$ are module-finite, products of finite module generators for $B/A$ and $D/B$ generate $D/A$. A finite disjoint union of finite maps is finite, so $Z'\\amalg C\\to X$ is finite; it is surjective since $Z'$ covers $V$ and $C$ covers its complement. On $C\\subset E$ it factors through $E$. A point of $Z'\\setminus Z$ lies above $\\widetilde X\\setminus V\\subset E$, and a point of $Z$ has a neighbourhood factoring through $W\\subset E\\times_X\\widetilde X$; thus the map locally factors through $E\\to X$. This proves the induction claim. Apply it to $E\\to T$ from step 1 with the uniform bound $d$ of step 2; the resulting finite surjective $T'\\to T$ locally factors through $E$ and hence through the original $U$.",
-   "uses": [
-    "thm-pqf-zmt-factorization",
-    "lem-weil-pbc-qcqs-morphism-permanence",
-    "lem-weil-pbc-finite-morphism-permanence",
-    "def-nagata-scheme-theoretically-dense-open"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Lemma 37.45.7 (Tag 09Z0), induction step after applying the induction hypothesis"
-   }
-  },
-  {
-   "text": "Call this finite (hence integral) surjection $T'\\to T$. Choose a finite affine open cover $T'=\\bigcup_jV_j$ refining the opens on which the factorisation through the original $U$ is defined. Write $T'=\\varprojlim_iT_i$ with each $T_i\\to T$ finite and finitely presented and affine transition maps by [lem-weil-pbc-integral-morphism-limit-of-finite]. By [pqf-lem-limit-qc-open-descends] (1), after one common stage each $V_j$ descends to a quasi-compact open $W_{j,i}\\subset T_i$; clause (3) of that node identifies $V_j$ with the limit of the $W_{j,k}$ for $k\\ge i$, with affine transitions. The $T$-maps $V_j\\to U$ therefore descend, after increasing $i$, by [lem-weil-pbc-finite-presentation-map-limit-factorization], since the etale $U\\to T$ is locally of finite presentation. Their equalities over $T$ descend as finite-presentation data by the same limit factorization (or by applying it to the fibre-product equalizer). The opens $W_{j,i}$ cover the stage $T_i$ at a sufficiently large common stage: the finite union $\\bigcup_jW_{j,i}$ and $T_i$ itself are quasi-compact opens of $T_i$ with the same preimage $\\bigcup_jV_j=T'$ in $T'$, so by [pqf-lem-limit-qc-open-descends] (2) their preimages in some later stage $T_{i'}$ agree, that is, $T_{i'}=\\bigcup_jW_{j,i'}$. The map $T_i\\to T$ is surjective because its composite with $T'\\to T_i$ is the surjective $T'\\to T$. This stage, its finite open cover, and the descended maps give the stated finite, finitely presented refinement.",
-   "uses": [
     "lem-weil-pbc-integral-morphism-limit-of-finite",
     "pqf-lem-limit-qc-open-descends",
-    "lem-weil-pbc-finite-presentation-map-limit-factorization",
-    "def-weil-pbc-scheme-conventions"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Lemma 37.45.7 (Tag 09Z0), final paragraph passing from an integral cover to a finite finitely presented stage"
-   }
-  }
- ],
- "proof_deps": [
-  "def-weil-pbc-scheme-conventions",
-  "lem-weil-pbc-qcqs-finite-affine-open-cover",
-  "lem-weil-pbc-etale-covering-affine-refinement",
-  "lem-weil-pbc-etale-ring-map-quasi-finite",
-  "lem-weil-pbc-lqf-qc-source-bounded-fibres",
-  "lem-weil-pbc-etale-morphism-open-map",
-  "lem-weil-pbc-qcqs-morphism-permanence",
-  "lem-weil-pbc-affine-source-morphism-separated",
-  "lem-weil-pbc-finite-morphism-permanence",
-  "lem-weil-pbc-etale-composition-cancellation",
-  "lem-weil-pbc-section-separated-closed-immersion",
-  "thm-pqf-zmt-factorization",
-  "def-nagata-scheme-theoretically-dense-open",
-  "lem-weil-pbc-fibre-degree-base-change",
-  "lem-weil-pbc-integral-morphism-limit-of-finite",
-  "pqf-lem-limit-qc-open-descends",
-  "lem-weil-pbc-radicial-etale-open",
-  "lem-weil-pbc-etale-fibre-specialization-bound",
-  "lem-weil-pbc-finite-presentation-map-limit-factorization"
- ],
- "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/more-morphisms.tex",
-  "place": "Lemma 37.45.7 (Tag 09Z0), proof"
- },
- "mathlib_searches": [],
- "mathlib_match": null,
- "status": "split",
- "merged_into": null,
- "import_flags": [
-  "detailed_form",
-  "two_proofs",
-  "proof_cites_literature"
- ],
- "blueprint_kind": "lemma",
- "blueprint_order": 1074,
- "blueprint_uses": [
-  "def-weil-pbc-etale-site",
-  "def-weil-pbc-scheme-conventions"
- ],
- "uses_not_cited": [
-  "def-weil-pbc-etale-site"
- ],
- "proof_split_by": "paragraphs",
- "blueprint_sketch": [
-  {
-   "statement": "Let $U\\to T$ be surjective and etale, with $T$ quasi-compact and\nquasi-separated. There is a finite, finitely presented, surjective morphism\n$r:T'\\to T$ and a finite open covering $T'=\\bigcup_aW_a$ such that every\n$W_a\\to T$ factors through $U\\to T$.",
-   "proof": "Choose finitely many affine opens $U_a\\subset U$ whose images cover $T$ and\nreplace $U$ by their disjoint union. The resulting map is quasi-compact,\nseparated, etale, and has a finite upper bound $d$ on the cardinalities of\nits geometric fibres. We induct on $d$. If $d=1$, the map is radicial and\netale, hence an open immersion; surjectivity makes it an isomorphism.\n\nFor $d>1$, apply the affine form of Zariski's Main Theorem to the separated\nquasi-finite map $U\\to T$: adjoining to $\\mathcal O_T$ the integral elements\nof the quasi-coherent algebra $u_*\\mathcal O_U$ gives an integral\n$\\pi:\\widetilde T\\to T$ and a quasi-compact open immersion\n$j:U\\hookrightarrow\\widetilde T$. Replace $\\widetilde T$ by the\nscheme-theoretic closure of $U$, so $U$ is schematically dense. The diagonal\nsection gives an open-and-closed decomposition\n\n$$\nU\\times_T\\widetilde T=U\\amalg W.\n$$\n\nThe image $V$ of $W\\to\\widetilde T$ is open and contains\n$\\widetilde T\\setminus U$. Over a point of the dense open $U$, the fibre of\n$W\\to V$ is the fibre of $U\\to T$ with the diagonal point removed, so it has\nfewer than $d$ points. The number of points in a separated etale fibre\ncannot increase under specialization: after writing the map locally as a\nfinite disjoint union of Jacobian etale algebra presentations, distinct idempotents at a\nspecialization lift to distinct idempotents at a generization. Thus every\ngeometric fibre of $W\\to V$ has cardinality $<d$.\n\nBy induction there is an integral surjection $Z\\to V$, locally factoring\nthrough $W$. Apply the same integral-closure construction to\n$Z\\to\\widetilde T$ and take the closure $Z'$ of $Z$; then\n$Z'\\times_{\\widetilde T}V=Z$. If $C$ is the reduced closed complement\n$\\widetilde T\\setminus V$, then $C\\subset U$, and\n$Z'\\amalg C\\to T$ is integral and surjective. Near a point of $Z$ it\nfactors through $W\\to U$; near a point of $Z'\\setminus Z$ it factors through\n$C\\subset U$. Hence it locally factors through the original cover.\n\nFinally write this integral morphism as the inverse limit of its finite\nfinitely presented $T$-subalgebras. Choose finitely many affine opens on\nwhich the factorization through $U$ is defined. Each open, each map to $U$,\nthe equalities over $T$, and surjectivity descend to a common finite stage:\nthe first three assertions are finite-presentation data, while failure of\nsurjectivity has quasi-compact open image and would persist after pullback to\nthe limit. That common stage is the required $T'$. This is the construction\nlocated at Tag `09Z0`, with the degree induction and final finite stage\nmade explicit.",
-   "cites": []
-  }
- ],
- "lean_audit": {
-  "master": {
-   "state": "none",
-   "decls": [],
-   "missing": []
-  },
-  "slopmaster2": {
-   "state": "sorry_here",
-   "decls": [
-    {
-     "name": "AlgebraicGeometry.Scheme.exists_finite_surjective_refinement_of_etale",
-     "module": "WeilConjectures.AlgebraicGeometry.EtaleFiniteRefinement",
-     "lines": [
-      37,
-      50
-     ],
-     "kind": "theorem",
-     "sorry": true
-    }
-   ],
-   "missing": [],
-   "open": []
-  }
- },
- "chapter": "sec-proper-base-change",
- "unit": "sk-thm-iff",
- "split_report": {
-  "date": "2026-10-10",
-  "item": "lemma-weil-pbc-finite-refinement-etale-cover",
-  "worker": "stage1",
-  "summary": "Repaired the Tag 09Z0 degree induction to produce finite surjections at every degree, proved finiteness of the glued cover, applied the induction to the original etale refinement, and derived graph clopenness from its etaleness and closed immersion; finite presentation is imposed only in the final approximation.",
-  "blueprint": [
-   "finite affine reduction: blueprint proof paragraph beginning 'Choose finitely many affine opens U_a'",
-   "degree induction and diagonal complement: blueprint proof paragraphs beginning 'We induct on d' and 'For d>1'",
-   "integral gluing: blueprint proof paragraph beginning 'By induction there is an integral surjection'",
-   "finite stage: blueprint proof paragraph beginning 'Finally write this integral morphism as the inverse limit'"
+    "lem-weil-pbc-radicial-etale-open",
+    "lem-weil-pbc-etale-fibre-specialization-bound",
+    "lem-weil-pbc-finite-presentation-map-limit-factorization"
   ],
+  "proof_origin": {
+    "by": "document",
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Lemma 37.45.7 (Tag 09Z0), proof"
+  },
+  "mathlib_searches": [],
+  "mathlib_match": null,
+  "status": "split",
+  "merged_into": null,
+  "import_flags": [
+    "detailed_form",
+    "two_proofs",
+    "proof_cites_literature"
+  ],
+  "blueprint_kind": "lemma",
+  "blueprint_order": 1074,
+  "blueprint_uses": [
+    "def-weil-pbc-etale-site",
+    "def-weil-pbc-scheme-conventions"
+  ],
+  "uses_not_cited": [
+    "def-weil-pbc-etale-site"
+  ],
+  "proof_split_by": "paragraphs",
+  "blueprint_sketch": [
+    {
+      "statement": "Let $U\\to T$ be surjective and etale, with $T$ quasi-compact and\nquasi-separated. There is a finite, finitely presented, surjective morphism\n$r:T'\\to T$ and a finite open covering $T'=\\bigcup_aW_a$ such that every\n$W_a\\to T$ factors through $U\\to T$.",
+      "proof": "Choose finitely many affine opens $U_a\\subset U$ whose images cover $T$ and\nreplace $U$ by their disjoint union. The resulting map is quasi-compact,\nseparated, etale, and has a finite upper bound $d$ on the cardinalities of\nits geometric fibres. We induct on $d$. If $d=1$, the map is radicial and\netale, hence an open immersion; surjectivity makes it an isomorphism.\n\nFor $d>1$, apply the affine form of Zariski's Main Theorem to the separated\nquasi-finite map $U\\to T$: adjoining to $\\mathcal O_T$ the integral elements\nof the quasi-coherent algebra $u_*\\mathcal O_U$ gives an integral\n$\\pi:\\widetilde T\\to T$ and a quasi-compact open immersion\n$j:U\\hookrightarrow\\widetilde T$. Replace $\\widetilde T$ by the\nscheme-theoretic closure of $U$, so $U$ is schematically dense. The diagonal\nsection gives an open-and-closed decomposition\n\n$$\nU\\times_T\\widetilde T=U\\amalg W.\n$$\n\nThe image $V$ of $W\\to\\widetilde T$ is open and contains\n$\\widetilde T\\setminus U$. Over a point of the dense open $U$, the fibre of\n$W\\to V$ is the fibre of $U\\to T$ with the diagonal point removed, so it has\nfewer than $d$ points. The number of points in a separated etale fibre\ncannot increase under specialization: after writing the map locally as a\nfinite disjoint union of Jacobian etale algebra presentations, distinct idempotents at a\nspecialization lift to distinct idempotents at a generization. Thus every\ngeometric fibre of $W\\to V$ has cardinality $<d$.\n\nBy induction there is an integral surjection $Z\\to V$, locally factoring\nthrough $W$. Apply the same integral-closure construction to\n$Z\\to\\widetilde T$ and take the closure $Z'$ of $Z$; then\n$Z'\\times_{\\widetilde T}V=Z$. If $C$ is the reduced closed complement\n$\\widetilde T\\setminus V$, then $C\\subset U$, and\n$Z'\\amalg C\\to T$ is integral and surjective. Near a point of $Z$ it\nfactors through $W\\to U$; near a point of $Z'\\setminus Z$ it factors through\n$C\\subset U$. Hence it locally factors through the original cover.\n\nFinally write this integral morphism as the inverse limit of its finite\nfinitely presented $T$-subalgebras. Choose finitely many affine opens on\nwhich the factorization through $U$ is defined. Each open, each map to $U$,\nthe equalities over $T$, and surjectivity descend to a common finite stage:\nthe first three assertions are finite-presentation data, while failure of\nsurjectivity has quasi-compact open image and would persist after pullback to\nthe limit. That common stage is the required $T'$. This is the construction\nlocated at Tag `09Z0`, with the degree induction and final finite stage\nmade explicit.",
+      "cites": []
+    }
+  ],
+  "lean_audit": {
+    "master": {
+      "state": "none",
+      "decls": [],
+      "missing": []
+    },
+    "slopmaster2": {
+      "state": "sorry_here",
+      "decls": [
+        {
+          "name": "AlgebraicGeometry.Scheme.exists_finite_surjective_refinement_of_etale",
+          "module": "WeilConjectures.AlgebraicGeometry.EtaleFiniteRefinement",
+          "lines": [
+            37,
+            50
+          ],
+          "kind": "theorem",
+          "sorry": true
+        }
+      ],
+      "missing": [],
+      "open": []
+    }
+  },
+  "chapter": "sec-proper-base-change",
+  "unit": "sk-thm-iff",
+  "split_report": {
+    "date": "2026-10-10",
+    "item": "lemma-weil-pbc-finite-refinement-etale-cover",
+    "worker": "stage1",
+    "summary": "Repaired the Tag 09Z0 degree induction to produce finite surjections at every degree, proved finiteness of the glued cover, applied the induction to the original etale refinement, and derived graph clopenness from its etaleness and closed immersion; finite presentation is imposed only in the final approximation.",
+    "blueprint": [
+      "finite affine reduction: blueprint proof paragraph beginning 'Choose finitely many affine opens U_a'",
+      "degree induction and diagonal complement: blueprint proof paragraphs beginning 'We induct on d' and 'For d>1'",
+      "integral gluing: blueprint proof paragraph beginning 'By induction there is an integral surjection'",
+      "finite stage: blueprint proof paragraph beginning 'Finally write this integral morphism as the inverse limit'"
+    ],
+    "tool_uses": [
+      {
+        "node": "lem-weil-pbc-etale-ring-map-quasi-finite",
+        "why": "The induction needs quasi-finiteness of the etale map."
+      },
+      {
+        "node": "lem-weil-pbc-lqf-qc-source-bounded-fibres",
+        "why": "The induction needs a uniform bound on geometric fibre cardinalities."
+      },
+      {
+        "node": "thm-pqf-zmt-factorization",
+        "why": "The induction embeds quasi-finite separated covers as opens in finite covers."
+      },
+      {
+        "node": "lem-weil-pbc-fibre-degree-base-change",
+        "why": "The diagonal argument counts geometric points after base change."
+      },
+      {
+        "node": "lem-weil-pbc-integral-morphism-limit-of-finite",
+        "why": "The final step expresses the integral cover as finite finitely presented stages."
+      },
+      {
+        "node": "pqf-lem-limit-qc-open-descends",
+        "why": "The final step descends each quasi-compact open and identifies its limit."
+      }
+    ]
+  },
   "tool_uses": [
-   {
-    "node": "lem-weil-pbc-etale-ring-map-quasi-finite",
-    "why": "The induction needs quasi-finiteness of the etale map."
-   },
-   {
-    "node": "lem-weil-pbc-lqf-qc-source-bounded-fibres",
-    "why": "The induction needs a uniform bound on geometric fibre cardinalities."
-   },
-   {
-    "node": "thm-pqf-zmt-factorization",
-    "why": "The induction embeds quasi-finite separated covers as opens in finite covers."
-   },
-   {
-    "node": "lem-weil-pbc-fibre-degree-base-change",
-    "why": "The diagonal argument counts geometric points after base change."
-   },
-   {
-    "node": "lem-weil-pbc-integral-morphism-limit-of-finite",
-    "why": "The final step expresses the integral cover as finite finitely presented stages."
-   },
-   {
-    "node": "pqf-lem-limit-qc-open-descends",
-    "why": "The final step descends each quasi-compact open and identifies its limit."
-   }
-  ]
- },
- "tool_uses": [
-  "lem-weil-pbc-etale-ring-map-quasi-finite",
-  "lem-weil-pbc-lqf-qc-source-bounded-fibres",
-  "thm-pqf-zmt-factorization",
-  "lem-weil-pbc-fibre-degree-base-change",
-  "lem-weil-pbc-integral-morphism-limit-of-finite",
-  "pqf-lem-limit-qc-open-descends"
- ],
- "reviewed": {
-  "date": "2026-10-10",
-  "by": "L",
-  "reviewer": "R-fr3",
-  "group": "G1",
-  "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-fr3 (reviewer sub-agent of L); spot-checked: Both points of the 14:57 return are repaired: (1) step 2 claims a finite surjection with a finite cover of local factorizations through E; step 4 takes finite Z->V from the induction hypothesis, proves Z' amalg C -> X finite by the module-finiteness argument, closes the induction and applies the claim to E->T from step 1; step 5 begins with the finite (hence integral) T'->T and alone imposes finite presentation. (2) step 3 no longer cites lem-weil-pbc-etale-section-clopen-immersion (text, uses, proof_deps); s is closed by lem-weil-pbc-section-separated-closed-immersion (P->E finite by finite-morphism-permanence (a), hence affine, hence separated), etale by etale-composition-cancellation (3), open by etale-morphism-open-map. Read all cited statements: qcqs-morphism-permanence (1),(2); thm-pqf-zmt-factorization hypotheses (separated, finite type, quasi-finite, qcqs base) checked at both applications; fibre-degree-base-change and etale-fibre-specialization-bound (its 'in particular' is true for qc separated etale maps since the locus of >=d points is constructible and stable under generization) give the strict bound on V; radicial-etale-open with def-weil-radicial-morphism (1) for d=1; integral-morphism-limit-of-finite, pqf-lem-limit-qc-open-descends (1),(3), map-limit-factorization (gives an S-morphism, so the equalities over T are automatic). Mathlib leaves verified: Separated.lean:242 IsClosedImmersion.of_comp, AffineTransitionLimit.lean:1231 exists_pi_app_comp_eq_of_locallyOfFinitePresentation. Item statement unchanged (Tag 09Z0). FIX more, RETURN less: (a) C1: step 1 quoted Schemes Tag 01KN for 'a morphism with affine source is separated'; added statement-only node lem-weil-pbc-affine-source-morphism-separated (Tags 01KN+01KV; Mathlib Separated.lean:354 and :359 recorded in mathlib_searches) and cited it in step 1 uses and proof_deps. (b) C4: step 5 cited clause (3) of lem-weil-pbc-spectral-limit-descend-opens, whose hypothesis that T' is the limit of the T_i in topological spaces no cited node gives; replaced by pqf-lem-limit-qc-open-descends (2) applied to the qc opens union_j W_{j,i} and T_i (same preimage T'), removed the spectral node from step 5 uses, proof_deps and split_report.tool_uses (and --drop-tool-uses). dag/nodes/sec-proper-base-change/lemma-weil-pbc-finite-refinement-etale-cover.json: proof[0].text/uses, proof[4].text/uses, proof_deps, split_report.tool_uses. Start Sat Oct 10 03:05:32 PM UTC 2026, end Sat Oct 10 03:08:16 PM UTC 2026.; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
- }
+    "lem-weil-pbc-etale-ring-map-quasi-finite",
+    "lem-weil-pbc-lqf-qc-source-bounded-fibres",
+    "thm-pqf-zmt-factorization",
+    "lem-weil-pbc-fibre-degree-base-change",
+    "lem-weil-pbc-integral-morphism-limit-of-finite",
+    "pqf-lem-limit-qc-open-descends"
+  ],
+  "reviewed": {
+    "date": "2026-10-10",
+    "by": "L",
+    "reviewer": "R-fr3",
+    "group": "G1",
+    "result": "pass",
+    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-fr3 (reviewer sub-agent of L); spot-checked: Both points of the 14:57 return are repaired: (1) step 2 claims a finite surjection with a finite cover of local factorizations through E; step 4 takes finite Z->V from the induction hypothesis, proves Z' amalg C -> X finite by the module-finiteness argument, closes the induction and applies the claim to E->T from step 1; step 5 begins with the finite (hence integral) T'->T and alone imposes finite presentation. (2) step 3 no longer cites lem-weil-pbc-etale-section-clopen-immersion (text, uses, proof_deps); s is closed by lem-weil-pbc-section-separated-closed-immersion (P->E finite by finite-morphism-permanence (a), hence affine, hence separated), etale by etale-composition-cancellation (3), open by etale-morphism-open-map. Read all cited statements: qcqs-morphism-permanence (1),(2); thm-pqf-zmt-factorization hypotheses (separated, finite type, quasi-finite, qcqs base) checked at both applications; fibre-degree-base-change and etale-fibre-specialization-bound (its 'in particular' is true for qc separated etale maps since the locus of >=d points is constructible and stable under generization) give the strict bound on V; radicial-etale-open with def-weil-radicial-morphism (1) for d=1; integral-morphism-limit-of-finite, pqf-lem-limit-qc-open-descends (1),(3), map-limit-factorization (gives an S-morphism, so the equalities over T are automatic). Mathlib leaves verified: Separated.lean:242 IsClosedImmersion.of_comp, AffineTransitionLimit.lean:1231 exists_pi_app_comp_eq_of_locallyOfFinitePresentation. Item statement unchanged (Tag 09Z0). FIX more, RETURN less: (a) C1: step 1 quoted Schemes Tag 01KN for 'a morphism with affine source is separated'; added statement-only node lem-weil-pbc-affine-source-morphism-separated (Tags 01KN+01KV; Mathlib Separated.lean:354 and :359 recorded in mathlib_searches) and cited it in step 1 uses and proof_deps. (b) C4: step 5 cited clause (3) of lem-weil-pbc-spectral-limit-descend-opens, whose hypothesis that T' is the limit of the T_i in topological spaces no cited node gives; replaced by pqf-lem-limit-qc-open-descends (2) applied to the qc opens union_j W_{j,i} and T_i (same preimage T'), removed the spectral node from step 5 uses, proof_deps and split_report.tool_uses (and --drop-tool-uses). dag/nodes/sec-proper-base-change/lemma-weil-pbc-finite-refinement-etale-cover.json: proof[0].text/uses, proof[4].text/uses, proof_deps, split_report.tool_uses. Start Sat Oct 10 03:05:32 PM UTC 2026, end Sat Oct 10 03:08:16 PM UTC 2026.; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+  },
+  "lean": {
+    "module": "WeilConjectures.AlgebraicGeometry.EtaleFiniteRefinement",
+    "declaration": "AlgebraicGeometry.Scheme.exists_finite_surjective_refinement_of_etale",
+    "branch": "slopmaster2",
+    "line": 37,
+    "declarations": [
+      "AlgebraicGeometry.Scheme.exists_finite_surjective_refinement_of_etale"
+    ],
+    "sorry_free": false,
+    "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state sorry_here)"
+  }
 }

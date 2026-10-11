@@ -1,98 +1,102 @@
 {
- "id": "lem-weil-pbc-mate-whisker",
- "blueprint": {
-  "is": null,
-  "from": {
-   "node": "lem-weil-pbc-exchange-identity-pasting",
-   "place": "step 2, 3 of its split (source: Remark 07A7 (remark-base-change); the identity case is not stated in Stacks: written by an agent from the mate calculus of Mathlib/CategoryTheory/Adjunction/Mates.lean (Mathlib of ~/weil-conjectures-slopmaster2) (conjugateEquiv_id), as in the source Lean AlgebraicGeometry.Etale.derivedBaseChangeMapPlus_id)",
-   "via": []
+  "id": "lem-weil-pbc-mate-whisker",
+  "blueprint": {
+    "is": null,
+    "from": {
+      "node": "lem-weil-pbc-exchange-identity-pasting",
+      "place": "step 2, 3 of its split (source: Remark 07A7 (remark-base-change); the identity case is not stated in Stacks: written by an agent from the mate calculus of Mathlib/CategoryTheory/Adjunction/Mates.lean (Mathlib of ~/weil-conjectures-slopmaster2) (conjugateEquiv_id), as in the source Lean AlgebraicGeometry.Etale.derivedBaseChangeMapPlus_id)",
+      "via": []
+    },
+    "same_as": null
   },
-  "same_as": null
- },
- "kind": "statement",
- "title": "Mates are natural in the non-adjoint sides of the square",
- "statement": "Let $L_1\\dashv R_1$ ($L_1:\\mathcal A\\to\\mathcal B$, counit $\\varepsilon_1$) and $L_2\\dashv R_2$ ($L_2:\\mathcal C\\to\\mathcal D$, unit $\\eta_2$) be adjunctions, $G,G':\\mathcal A\\to\\mathcal C$ and $H,H':\\mathcal B\\to\\mathcal D$ functors, $\\alpha:L_2G\\to HL_1$ a natural transformation with mate $\\alpha^\\flat:GR_1\\to R_2H$ [def-weil-pbc-adjunction-mate], and $\\sigma:G'\\to G$, $\\tau:H\\to H'$ natural transformations. Then the mate of $(\\tau L_1)\\circ\\alpha\\circ(L_2\\sigma):L_2G'\\to H'L_1$ is\n$$\n (R_2\\tau)\\circ\\alpha^\\flat\\circ(\\sigma R_1):G'R_1\\to GR_1\\to R_2H\\to R_2H'.\n$$\n(Proof sketch for the splitter: in the component formula of the mate, move $\\sigma$ past $\\eta_2$ by naturality of $\\eta_2$ and $\\tau$ past $\\varepsilon_1$ by naturality of $\\tau$.)",
- "source": {
-  "document": "Mathlib/CategoryTheory/Adjunction/Mates.lean",
-  "place": "mateEquiv_apply (component formula of mateEquiv, line 84); not stated in Mathlib; the source repository proves it as CategoryTheory.mateEquiv_whiskerTop_whiskerBottom (WeilConjectures/SixFunctors/BaseChange/Pasting.lean lines 76-89, slopmaster2)"
- },
- "stmt_deps": [
-  "def-weil-pbc-adjunction-mate"
- ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
- "mathlib_searches": [
-  {
-   "tool": "leansearch",
-   "query": "mate of a square whiskered by natural transformations on top and bottom equals whiskered mate",
-   "results": "Functor.whiskerLeft_comp_whiskerRight (Mathlib.CategoryTheory.Whiskering); mateEquiv_square, mateEquiv_apply (Mathlib.CategoryTheory.Adjunction.Mates); TwoSquare.whiskerTop_app, whiskerRight_app, whiskerLeft_app (Mathlib.CategoryTheory.Functor.TwoSquare); TwoSquare.whiskerVertical_app (Mathlib.CategoryTheory.GuitartExact.VerticalComposition)",
-   "date": "2026-10-09",
-   "verdict": "no match"
+  "kind": "statement",
+  "title": "Mates are natural in the non-adjoint sides of the square",
+  "statement": "Let $L_1\\dashv R_1$ ($L_1:\\mathcal A\\to\\mathcal B$, counit $\\varepsilon_1$) and $L_2\\dashv R_2$ ($L_2:\\mathcal C\\to\\mathcal D$, unit $\\eta_2$) be adjunctions, $G,G':\\mathcal A\\to\\mathcal C$ and $H,H':\\mathcal B\\to\\mathcal D$ functors, $\\alpha:L_2G\\to HL_1$ a natural transformation with mate $\\alpha^\\flat:GR_1\\to R_2H$ [def-weil-pbc-adjunction-mate], and $\\sigma:G'\\to G$, $\\tau:H\\to H'$ natural transformations. Then the mate of $(\\tau L_1)\\circ\\alpha\\circ(L_2\\sigma):L_2G'\\to H'L_1$ is\n$$\n (R_2\\tau)\\circ\\alpha^\\flat\\circ(\\sigma R_1):G'R_1\\to GR_1\\to R_2H\\to R_2H'.\n$$\n(Proof sketch for the splitter: in the component formula of the mate, move $\\sigma$ past $\\eta_2$ by naturality of $\\eta_2$ and $\\tau$ past $\\varepsilon_1$ by naturality of $\\tau$.)",
+  "source": {
+    "document": "Mathlib/CategoryTheory/Adjunction/Mates.lean",
+    "place": "mateEquiv_apply (component formula of mateEquiv, line 84); not stated in Mathlib; the source repository proves it as CategoryTheory.mateEquiv_whiskerTop_whiskerBottom (WeilConjectures/SixFunctors/BaseChange/Pasting.lean lines 76-89, slopmaster2)"
   },
-  {
-   "tool": "loogle",
-   "query": "CategoryTheory.mateEquiv, CategoryTheory.TwoSquare.whiskerTop",
-   "results": "only CategoryTheory.conjugateEquiv_mateEquiv_vcomp (whiskerTop by a conjugate, i.e. a change of the top adjunction, not a transformation of G)",
-   "date": "2026-10-09",
-   "verdict": "no match"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "mate of a 2-square is natural with respect to whiskering the non-adjoint sides by natural transformations",
-   "results": "mateEquiv_vcomp, mateEquiv_hcomp (Mathlib.CategoryTheory.Adjunction.Mates); Bicategory.mateEquiv_square, mateEquiv_vcomp, mateEquiv_hcomp, toNatTrans_mateEquiv",
-   "date": "2026-10-09",
-   "verdict": "no match (pasting only)"
-  },
-  {
-   "tool": "grep",
-   "query": "grep -rn 'whiskerTop.*mateEquiv\\|mateEquiv.*whiskerTop\\|mateEquiv.*whiskerBottom\\|mateEquiv_whisker' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib --include=*.lean",
-   "results": "only Mates.lean lines 490 and 509 (mateEquiv_conjugateEquiv_vcomp, conjugateEquiv_mateEquiv_vcomp: whiskering by conjugates of changes of adjunction)",
-   "date": "2026-10-09",
-   "verdict": "no match"
-  }
- ],
- "mathlib_match": null,
- "status": "unsplit",
- "merged_into": null,
- "created": {
-  "by": "worker",
-  "item": "lem-weil-pbc-exchange-identity-pasting",
-  "date": "2026-10-09"
- },
- "lean_audit": {
-  "master": {
-   "state": "none",
-   "decls": [],
-   "missing": [
-    "CategoryTheory.mateEquiv_whiskerTop_whiskerBottom"
-   ]
-  },
-  "slopmaster2": {
-   "state": "closed",
-   "decls": [
-    {
-     "name": "CategoryTheory.mateEquiv_whiskerTop_whiskerBottom",
-     "module": "WeilConjectures.SixFunctors.BaseChange.Pasting",
-     "lines": [
-      76,
-      89
-     ],
-     "kind": "theorem",
-     "sorry": false
-    }
-   ],
-   "missing": [],
-   "open": []
-  }
- },
- "chapter": "sec-proper-base-change",
- "unit": "sk-def-exchange",
- "lean": {
-  "branch": "slopmaster2",
-  "declarations": [
-   "CategoryTheory.mateEquiv_whiskerTop_whiskerBottom"
+  "stmt_deps": [
+    "def-weil-pbc-adjunction-mate"
   ],
-  "note": "attached by the lead at review (2026-10-09), found by the opus worker of lem-weil-pbc-exchange-identity-pasting: naturality of the mate in the top and bottom functors; sorry-free on the full map"
- }
+  "proof": [],
+  "proof_deps": [],
+  "proof_origin": null,
+  "mathlib_searches": [
+    {
+      "tool": "leansearch",
+      "query": "mate of a square whiskered by natural transformations on top and bottom equals whiskered mate",
+      "results": "Functor.whiskerLeft_comp_whiskerRight (Mathlib.CategoryTheory.Whiskering); mateEquiv_square, mateEquiv_apply (Mathlib.CategoryTheory.Adjunction.Mates); TwoSquare.whiskerTop_app, whiskerRight_app, whiskerLeft_app (Mathlib.CategoryTheory.Functor.TwoSquare); TwoSquare.whiskerVertical_app (Mathlib.CategoryTheory.GuitartExact.VerticalComposition)",
+      "date": "2026-10-09",
+      "verdict": "no match"
+    },
+    {
+      "tool": "loogle",
+      "query": "CategoryTheory.mateEquiv, CategoryTheory.TwoSquare.whiskerTop",
+      "results": "only CategoryTheory.conjugateEquiv_mateEquiv_vcomp (whiskerTop by a conjugate, i.e. a change of the top adjunction, not a transformation of G)",
+      "date": "2026-10-09",
+      "verdict": "no match"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "mate of a 2-square is natural with respect to whiskering the non-adjoint sides by natural transformations",
+      "results": "mateEquiv_vcomp, mateEquiv_hcomp (Mathlib.CategoryTheory.Adjunction.Mates); Bicategory.mateEquiv_square, mateEquiv_vcomp, mateEquiv_hcomp, toNatTrans_mateEquiv",
+      "date": "2026-10-09",
+      "verdict": "no match (pasting only)"
+    },
+    {
+      "tool": "grep",
+      "query": "grep -rn 'whiskerTop.*mateEquiv\\|mateEquiv.*whiskerTop\\|mateEquiv.*whiskerBottom\\|mateEquiv_whisker' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib --include=*.lean",
+      "results": "only Mates.lean lines 490 and 509 (mateEquiv_conjugateEquiv_vcomp, conjugateEquiv_mateEquiv_vcomp: whiskering by conjugates of changes of adjunction)",
+      "date": "2026-10-09",
+      "verdict": "no match"
+    }
+  ],
+  "mathlib_match": null,
+  "status": "unsplit",
+  "merged_into": null,
+  "created": {
+    "by": "worker",
+    "item": "lem-weil-pbc-exchange-identity-pasting",
+    "date": "2026-10-09"
+  },
+  "lean_audit": {
+    "master": {
+      "state": "none",
+      "decls": [],
+      "missing": [
+        "CategoryTheory.mateEquiv_whiskerTop_whiskerBottom"
+      ]
+    },
+    "slopmaster2": {
+      "state": "closed",
+      "decls": [
+        {
+          "name": "CategoryTheory.mateEquiv_whiskerTop_whiskerBottom",
+          "module": "WeilConjectures.SixFunctors.BaseChange.Pasting",
+          "lines": [
+            76,
+            89
+          ],
+          "kind": "theorem",
+          "sorry": false
+        }
+      ],
+      "missing": [],
+      "open": []
+    }
+  },
+  "chapter": "sec-proper-base-change",
+  "unit": "sk-def-exchange",
+  "lean": {
+    "module": "WeilConjectures.SixFunctors.BaseChange.Pasting",
+    "declaration": "CategoryTheory.mateEquiv_whiskerTop_whiskerBottom",
+    "branch": "slopmaster2",
+    "line": 76,
+    "declarations": [
+      "CategoryTheory.mateEquiv_whiskerTop_whiskerBottom"
+    ],
+    "sorry_free": true,
+    "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state closed)"
+  }
 }

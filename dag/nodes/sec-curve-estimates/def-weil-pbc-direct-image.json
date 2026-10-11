@@ -1,145 +1,149 @@
 {
- "id": "def-weil-pbc-direct-image",
- "blueprint": {
-  "is": "def-weil-pbc-direct-image",
-  "from": null,
-  "same_as": []
- },
- "kind": "definition",
- "title": "Direct image and its derived functor",
- "statement": "Let $u:U\\to V$ be a morphism of schemes [def-pc-scheme]. For a scheme $T$ let $T_{\\Et}$ be its small etale site [def-weil-pbc-etale-site] and $\\Ab(T_{\\Et})$ the abelian category of sheaves of abelian groups on $T_{\\Et}$ [def-weil-pbc-abelian-etale-sheaves]. For an object $W\\to V$ of $V_{\\Et}$ the fibre product $W\\times_VU$ [def-pc-fibre-product], with its projection to $U$, is an object of $U_{\\Et}$, and $W\\mapsto W\\times_VU$, $(g:W_1\\to W_2)\\mapsto g\\times\\mathrm{id}_U$, is the base-change functor $V_{\\Et}\\to U_{\\Et}$ [lem-weil-pbc-etale-base-change-finite-limits].\n\n*Direct image.* For $F\\in\\Ab(U_{\\Et})$ let $u_*F$ be the presheaf of abelian groups on $V_{\\Et}$\n\n$$\n (u_*F)(W)=F(W\\times_VU),\n$$\n\nwith restriction along $g:W_1\\to W_2$ the restriction of $F$ along $g\\times\\mathrm{id}_U$; it is a sheaf [lem-weil-pbc-etale-base-change-continuous]. For a morphism $\\varphi:F\\to F'$ of $\\Ab(U_{\\Et})$ put $(u_*\\varphi)_W=\\varphi_{W\\times_VU}$. This defines the *direct image* functor\n\n$$\n u_*:\\Ab(U_{\\Et})\\longrightarrow\\Ab(V_{\\Et}),\n$$\n\nwhich is additive and left exact [def-sp-left-exact-additive], [lem-weil-pbc-direct-image-left-exact].\n\n*Derived direct image.* Let $\\Dplus(T_{\\Et})$ be the bounded below derived category of $\\Ab(T_{\\Et})$, with cohomology sheaves $\\mathcal H^q$ [def-weil-pbc-derived-categories], and $Q$ the localization functor from complexes [def-weil-abstract-derived-category]; $\\Ab(U_{\\Et})$ has enough injectives [lem-weil-pbc-module-sheaves-enough-injectives]. The *derived direct image*\n\n$$\n Ru_*:\\Dplus(U_{\\Et})\\longrightarrow\\Dplus(V_{\\Et})\n$$\n\nis the right derived functor $Rv$ of the additive functor $v=u_*$, together with its natural transformation $\\alpha_L:Q(u_*L)\\to Ru_*(QL)$ for bounded below complexes $L$, of [lem-weil-pbc-right-derived-plus-injective] (determined up to a unique isomorphism compatible with $\\alpha$, by part (3) there). It is computed by K-injective resolutions [def-weil-pbc-kinjective-resolutions]: for $K\\in\\Dplus(U_{\\Et})$ there are a bounded below complex $I$ of injective objects of $\\Ab(U_{\\Et})$ and an isomorphism $K\\cong QI$, and $I$ is K-injective [lem-weil-pbc-dplus-injective-representative]; then $\\alpha_I$ is an isomorphism (part (2) of [lem-weil-pbc-right-derived-plus-injective]), so that\n\n$$\n Ru_*K\\cong Q(u_*I),\n$$\n\nwhich is the formula $Ru_*K=u_*I(K)$. For any other K-injective resolution $K\\to J$, the isomorphism $QI\\cong K\\cong QJ$ is $Q(h)$ for a homotopy class $h:I\\to J$ which is a homotopy equivalence [lem-weil-pbc-kinjective-hom-derived]; as $u_*$ is additive, $u_*h$ is a homotopy equivalence, so $Q(u_*J)\\cong Q(u_*I)\\cong Ru_*K$ and the formula holds with every K-injective resolution. On morphisms: for $f:K\\to K'$ and $I,I'$ as above, $f$ corresponds under $K\\cong QI$, $K'\\cong QI'$ to $Q(\\tilde f)$ for a unique homotopy class $\\tilde f:I\\to I'$ [lem-weil-pbc-kinjective-hom-derived], and by the naturality of $\\alpha$, $Ru_*(f)$ corresponds under these isomorphisms to $Q(u_*\\tilde f)$. For a sheaf $F\\in\\Ab(U_{\\Et})$, placed in degree $0$, and $q\\in\\mathbf Z$ put\n\n$$\n R^qu_*F=\\mathcal H^q(Ru_*F).\n$$\n\n*Module sheaves.* Let $R$ be a commutative ring, $R_T$ the constant sheaf of rings with value $R$ on $T_{\\Et}$ [def-weil-pbc-constant-sheaf], $\\Mod(T_{\\Et},R)$ the abelian category of sheaves of $R_T$-modules [def-weil-sheaf-of-modules-category] and $\\Dplus(T_{\\Et},R)$ its bounded below derived category [def-weil-pbc-derived-categories]. The same formula defines the direct image $u_*:\\Mod(U_{\\Et},R)\\to\\Mod(V_{\\Et},R)$, the module structure of $u_*F$ being given through the map of sheaves of rings $\\rho:R_V\\to u_*R_U$ induced, by the universal property of sheafification [def-weil-pbc-sheafification], by the maps $R\\to R_U(W\\times_VU)$; it is additive and left exact and commutes with the forgetful functors to abelian sheaves [lem-weil-pbc-module-direct-image-left-exact]. As $\\Mod(U_{\\Et},R)$ has enough injectives [lem-weil-pbc-module-sheaves-enough-injectives], $Ru_*:\\Dplus(U_{\\Et},R)\\to\\Dplus(V_{\\Et},R)$, its computation by K-injective resolutions and $R^qu_*$ are defined in the same way, with [lem-weil-pbc-right-derived-plus-injective] applied to this $u_*$. (This is the source's 'fixed coefficient ring whose pullback is canonically identified with itself': the constant sheaf $R_V$, whose inverse image is $R_U$.)",
- "source": {
-  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/def-weil-pbc-direct-image.md",
-  "place": "node def-weil-pbc-direct-image, order 938"
- },
- "stmt_deps": [
-  "def-pc-scheme",
-  "def-weil-pbc-etale-site",
-  "def-weil-pbc-abelian-etale-sheaves",
-  "def-pc-fibre-product",
-  "lem-weil-pbc-etale-base-change-finite-limits",
-  "lem-weil-pbc-etale-base-change-continuous",
-  "def-sp-left-exact-additive",
-  "lem-weil-pbc-direct-image-left-exact",
-  "def-weil-pbc-derived-categories",
-  "def-weil-abstract-derived-category",
-  "lem-weil-pbc-module-sheaves-enough-injectives",
-  "lem-weil-pbc-right-derived-plus-injective",
-  "def-weil-pbc-kinjective-resolutions",
-  "lem-weil-pbc-dplus-injective-representative",
-  "lem-weil-pbc-kinjective-hom-derived",
-  "def-weil-pbc-constant-sheaf",
-  "def-weil-sheaf-of-modules-category",
-  "def-weil-pbc-sheafification",
-  "lem-weil-pbc-module-direct-image-left-exact"
- ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
- "mathlib_searches": [
-  {
-   "tool": "leansearch",
-   "query": "pushforward of sheaves along a continuous functor preserves limits",
-   "results": "Functor.sheafPushforwardContinuous (Mathlib.CategoryTheory.Sites.Continuous), TopCat.Sheaf.pushforward, SheafOfModules.pushforward; no etale direct image",
-   "date": "2026-10-10",
-   "verdict": "generalization for the data of u_*: Functor.sheafPushforwardContinuous along the base-change functor (Mathlib has no etale direct image; slopmaster2's AlgebraicGeometry.Etale.lowerStar is exactly this); the derived part: Functor.rightDerivedFunctorPlus (node lem-weil-pbc-right-derived-plus-injective)"
+  "id": "def-weil-pbc-direct-image",
+  "blueprint": {
+    "is": "def-weil-pbc-direct-image",
+    "from": null,
+    "same_as": []
   },
-  {
-   "tool": "loogle",
-   "query": "CategoryTheory.Functor.rightDerivedFunctorPlus",
-   "results": "Functor.rightDerivedFunctorPlus, rightDerivedFunctorPlusUnit and their IsRightDerivedFunctor instances (Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus)",
-   "date": "2026-10-10",
-   "verdict": "the derived functor on D^+ of any additive functor; recorded on lem-weil-pbc-right-derived-plus-injective"
+  "kind": "definition",
+  "title": "Direct image and its derived functor",
+  "statement": "Let $u:U\\to V$ be a morphism of schemes [def-pc-scheme]. For a scheme $T$ let $T_{\\Et}$ be its small etale site [def-weil-pbc-etale-site] and $\\Ab(T_{\\Et})$ the abelian category of sheaves of abelian groups on $T_{\\Et}$ [def-weil-pbc-abelian-etale-sheaves]. For an object $W\\to V$ of $V_{\\Et}$ the fibre product $W\\times_VU$ [def-pc-fibre-product], with its projection to $U$, is an object of $U_{\\Et}$, and $W\\mapsto W\\times_VU$, $(g:W_1\\to W_2)\\mapsto g\\times\\mathrm{id}_U$, is the base-change functor $V_{\\Et}\\to U_{\\Et}$ [lem-weil-pbc-etale-base-change-finite-limits].\n\n*Direct image.* For $F\\in\\Ab(U_{\\Et})$ let $u_*F$ be the presheaf of abelian groups on $V_{\\Et}$\n\n$$\n (u_*F)(W)=F(W\\times_VU),\n$$\n\nwith restriction along $g:W_1\\to W_2$ the restriction of $F$ along $g\\times\\mathrm{id}_U$; it is a sheaf [lem-weil-pbc-etale-base-change-continuous]. For a morphism $\\varphi:F\\to F'$ of $\\Ab(U_{\\Et})$ put $(u_*\\varphi)_W=\\varphi_{W\\times_VU}$. This defines the *direct image* functor\n\n$$\n u_*:\\Ab(U_{\\Et})\\longrightarrow\\Ab(V_{\\Et}),\n$$\n\nwhich is additive and left exact [def-sp-left-exact-additive], [lem-weil-pbc-direct-image-left-exact].\n\n*Derived direct image.* Let $\\Dplus(T_{\\Et})$ be the bounded below derived category of $\\Ab(T_{\\Et})$, with cohomology sheaves $\\mathcal H^q$ [def-weil-pbc-derived-categories], and $Q$ the localization functor from complexes [def-weil-abstract-derived-category]; $\\Ab(U_{\\Et})$ has enough injectives [lem-weil-pbc-module-sheaves-enough-injectives]. The *derived direct image*\n\n$$\n Ru_*:\\Dplus(U_{\\Et})\\longrightarrow\\Dplus(V_{\\Et})\n$$\n\nis the right derived functor $Rv$ of the additive functor $v=u_*$, together with its natural transformation $\\alpha_L:Q(u_*L)\\to Ru_*(QL)$ for bounded below complexes $L$, of [lem-weil-pbc-right-derived-plus-injective] (determined up to a unique isomorphism compatible with $\\alpha$, by part (3) there). It is computed by K-injective resolutions [def-weil-pbc-kinjective-resolutions]: for $K\\in\\Dplus(U_{\\Et})$ there are a bounded below complex $I$ of injective objects of $\\Ab(U_{\\Et})$ and an isomorphism $K\\cong QI$, and $I$ is K-injective [lem-weil-pbc-dplus-injective-representative]; then $\\alpha_I$ is an isomorphism (part (2) of [lem-weil-pbc-right-derived-plus-injective]), so that\n\n$$\n Ru_*K\\cong Q(u_*I),\n$$\n\nwhich is the formula $Ru_*K=u_*I(K)$. For any other K-injective resolution $K\\to J$, the isomorphism $QI\\cong K\\cong QJ$ is $Q(h)$ for a homotopy class $h:I\\to J$ which is a homotopy equivalence [lem-weil-pbc-kinjective-hom-derived]; as $u_*$ is additive, $u_*h$ is a homotopy equivalence, so $Q(u_*J)\\cong Q(u_*I)\\cong Ru_*K$ and the formula holds with every K-injective resolution. On morphisms: for $f:K\\to K'$ and $I,I'$ as above, $f$ corresponds under $K\\cong QI$, $K'\\cong QI'$ to $Q(\\tilde f)$ for a unique homotopy class $\\tilde f:I\\to I'$ [lem-weil-pbc-kinjective-hom-derived], and by the naturality of $\\alpha$, $Ru_*(f)$ corresponds under these isomorphisms to $Q(u_*\\tilde f)$. For a sheaf $F\\in\\Ab(U_{\\Et})$, placed in degree $0$, and $q\\in\\mathbf Z$ put\n\n$$\n R^qu_*F=\\mathcal H^q(Ru_*F).\n$$\n\n*Module sheaves.* Let $R$ be a commutative ring, $R_T$ the constant sheaf of rings with value $R$ on $T_{\\Et}$ [def-weil-pbc-constant-sheaf], $\\Mod(T_{\\Et},R)$ the abelian category of sheaves of $R_T$-modules [def-weil-sheaf-of-modules-category] and $\\Dplus(T_{\\Et},R)$ its bounded below derived category [def-weil-pbc-derived-categories]. The same formula defines the direct image $u_*:\\Mod(U_{\\Et},R)\\to\\Mod(V_{\\Et},R)$, the module structure of $u_*F$ being given through the map of sheaves of rings $\\rho:R_V\\to u_*R_U$ induced, by the universal property of sheafification [def-weil-pbc-sheafification], by the maps $R\\to R_U(W\\times_VU)$; it is additive and left exact and commutes with the forgetful functors to abelian sheaves [lem-weil-pbc-module-direct-image-left-exact]. As $\\Mod(U_{\\Et},R)$ has enough injectives [lem-weil-pbc-module-sheaves-enough-injectives], $Ru_*:\\Dplus(U_{\\Et},R)\\to\\Dplus(V_{\\Et},R)$, its computation by K-injective resolutions and $R^qu_*$ are defined in the same way, with [lem-weil-pbc-right-derived-plus-injective] applied to this $u_*$. (This is the source's 'fixed coefficient ring whose pullback is canonically identified with itself': the constant sheaf $R_V$, whose inverse image is $R_U$.)",
+  "source": {
+    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/def-weil-pbc-direct-image.md",
+    "place": "node def-weil-pbc-direct-image, order 938"
   },
-  {
-   "tool": "grep",
-   "query": "grep -rln 'smallEtaleTopology' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib | xargs grep -ln 'sheafPushforwardContinuous\\|pushforward'",
-   "results": "Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean (pushforward along AffineEtale.Spec, an equivalence of sites, not along a morphism of schemes); no direct image along a morphism of schemes on small etale sites",
-   "date": "2026-10-10",
-   "verdict": "no match: the definition is not in Mathlib; it is AlgebraicGeometry.Etale.lowerStar / rightDerivedLowerStarPlus of slopmaster2 (sorry-free)"
-  }
- ],
- "mathlib_match": null,
- "status": "split",
- "merged_into": null,
- "import_flags": [],
- "blueprint_kind": "definition",
- "blueprint_order": 938,
- "blueprint_uses": [
-  "def-weil-pbc-derived-categories",
-  "def-weil-pbc-etale-sheaves",
-  "def-weil-pbc-etale-site",
-  "def-weil-pbc-kinjective-resolutions",
-  "def-weil-pbc-scheme-conventions"
- ],
- "uses_not_cited": [
-  "def-weil-pbc-derived-categories",
-  "def-weil-pbc-etale-sheaves"
- ],
- "lean_audit": {
-  "master": {
-   "state": "closed_part",
-   "decls": [
+  "stmt_deps": [
+    "def-pc-scheme",
+    "def-weil-pbc-etale-site",
+    "def-weil-pbc-abelian-etale-sheaves",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-etale-base-change-finite-limits",
+    "lem-weil-pbc-etale-base-change-continuous",
+    "def-sp-left-exact-additive",
+    "lem-weil-pbc-direct-image-left-exact",
+    "def-weil-pbc-derived-categories",
+    "def-weil-abstract-derived-category",
+    "lem-weil-pbc-module-sheaves-enough-injectives",
+    "lem-weil-pbc-right-derived-plus-injective",
+    "def-weil-pbc-kinjective-resolutions",
+    "lem-weil-pbc-dplus-injective-representative",
+    "lem-weil-pbc-kinjective-hom-derived",
+    "def-weil-pbc-constant-sheaf",
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-pbc-sheafification",
+    "lem-weil-pbc-module-direct-image-left-exact"
+  ],
+  "proof": [],
+  "proof_deps": [],
+  "proof_origin": null,
+  "mathlib_searches": [
     {
-     "name": "AlgebraicGeometry.Etale.lowerStar",
-     "module": "WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs",
-     "lines": [
-      151,
-      157
-     ],
-     "kind": "def",
-     "sorry": false
-    }
-   ],
-   "missing": [
-    "AlgebraicGeometry.Etale.rightDerivedLowerStarPlus"
-   ],
-   "open": []
-  },
-  "slopmaster2": {
-   "state": "closed",
-   "decls": [
-    {
-     "name": "AlgebraicGeometry.Etale.lowerStar",
-     "module": "WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs",
-     "lines": [
-      159,
-      165
-     ],
-     "kind": "def",
-     "sorry": false
+      "tool": "leansearch",
+      "query": "pushforward of sheaves along a continuous functor preserves limits",
+      "results": "Functor.sheafPushforwardContinuous (Mathlib.CategoryTheory.Sites.Continuous), TopCat.Sheaf.pushforward, SheafOfModules.pushforward; no etale direct image",
+      "date": "2026-10-10",
+      "verdict": "generalization for the data of u_*: Functor.sheafPushforwardContinuous along the base-change functor (Mathlib has no etale direct image; slopmaster2's AlgebraicGeometry.Etale.lowerStar is exactly this); the derived part: Functor.rightDerivedFunctorPlus (node lem-weil-pbc-right-derived-plus-injective)"
     },
     {
-     "name": "AlgebraicGeometry.Etale.rightDerivedLowerStarPlus",
-     "module": "WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStarCoherence",
-     "lines": [
-      75,
-      80
-     ],
-     "kind": "def",
-     "sorry": false
+      "tool": "loogle",
+      "query": "CategoryTheory.Functor.rightDerivedFunctorPlus",
+      "results": "Functor.rightDerivedFunctorPlus, rightDerivedFunctorPlusUnit and their IsRightDerivedFunctor instances (Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus)",
+      "date": "2026-10-10",
+      "verdict": "the derived functor on D^+ of any additive functor; recorded on lem-weil-pbc-right-derived-plus-injective"
+    },
+    {
+      "tool": "grep",
+      "query": "grep -rln 'smallEtaleTopology' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib | xargs grep -ln 'sheafPushforwardContinuous\\|pushforward'",
+      "results": "Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean (pushforward along AffineEtale.Spec, an equivalence of sites, not along a morphism of schemes); no direct image along a morphism of schemes on small etale sites",
+      "date": "2026-10-10",
+      "verdict": "no match: the definition is not in Mathlib; it is AlgebraicGeometry.Etale.lowerStar / rightDerivedLowerStarPlus of slopmaster2 (sorry-free)"
     }
-   ],
-   "missing": [],
-   "open": []
-  }
- },
- "chapter": "sec-curve-estimates",
- "unit": "sk-prop-h2",
- "split_report": {
-  "date": "2026-10-10",
-  "item": "def-weil-pbc-direct-image",
-  "worker": "stage1",
-  "summary": "Definition split, checked against Stacks etale-cohomology.tex Section 03PV (Definition 03PY, Remark 03PX: the direct image of a sheaf is a sheaf; the paragraph after 03PY: f_* on abelian sheaves is left exact; Definition 04I2), sites-cohomology.tex Section 071J (left exact f_* on modules and Rf_*: D^+ -> D^+) and derived.tex Lemmas 05TI, 05TH, 070Y. Every notion now cites a node: 'morphism' repointed from the grab-bag def-weil-pbc-scheme-conventions to def-pc-scheme; Ab(T_Et) cites def-weil-pbc-abelian-etale-sheaves (Mathlib leaf) instead of the imported def-weil-pbc-etale-sheaves; fibre product def-pc-fibre-product; base-change functor lem-weil-pbc-etale-base-change-finite-limits; D^+, H^q def-weil-pbc-derived-categories; Q def-weil-abstract-derived-category; modules def-weil-pbc-constant-sheaf, def-weil-sheaf-of-modules-category, def-weil-pbc-sheafification. Claims moved out of the definition: that u_*F is a sheaf is the existing Lean-closed node lem-weil-pbc-etale-base-change-continuous; additivity and left exactness on abelian sheaves are the new node lem-weil-pbc-direct-image-left-exact (unsplit, but proved sorry-free in slopmaster2: AlgebraicGeometry.Etale.lowerStar_additive, preservesLimitsOfShape_lowerStar, preservesFiniteLimits_lowerStar, recorded in its lean_audit as closed); on module sheaves (module structure through rho: R_V -> u_*R_U, additive, left exact) the new node lem-weil-pbc-module-direct-image-left-exact (unsplit). The derived functor: the source's 'set Ru_*K = u_*I(K)' hides that this is a functor on D^+ independent of the resolution; Ru_* is now the right derived functor of u_* on D^+ of the new Mathlib leaf lem-weil-pbc-right-derived-plus-injective (Functor.rightDerivedFunctorPlus; isomorphic to u_* on bounded below complexes of injectives; unique up to unique isomorphism), and the formula Ru_*K = u_*I(K) for every K-injective resolution, and the action on morphisms through homotopy classes, follow from the existing Mathlib leaves lem-weil-pbc-dplus-injective-representative (bounded below injective representative, K-injective) and lem-weil-pbc-kinjective-hom-derived (Hom into K-injective complexes computed in the homotopy category; quasi-isomorphisms between K-injective complexes are homotopy equivalences) plus additivity of u_*. Enough injectives: lem-weil-pbc-module-sheaves-enough-injectives (covers Ab and Mod(R)). R^qu_* = H^q(Ru_*) kept. The statement's meaning is unchanged; the module sentence is made precise (R_V constant, rho). Nodes of other units cited as notions/tools in this definition's statement: lem-weil-pbc-etale-base-change-continuous (Lean closed), lem-weil-pbc-etale-base-change-finite-limits, lem-weil-pbc-dplus-injective-representative, lem-weil-pbc-kinjective-hom-derived (Mathlib leaves), lem-weil-pbc-module-sheaves-enough-injectives (sk-thm-reduction, split). Lean: AlgebraicGeometry.Etale.lowerStar (WeilConjectures/SixFunctors/Etale/UpperLowerStar/Defs.lean:159-165, (u_*F)(W) = F(W x_V U) by lowerStar_obj_val_obj, rfl) and AlgebraicGeometry.Etale.rightDerivedLowerStarPlus (WeilConjectures/SixFunctors/Etale/Derived/UpperLowerStarCoherence.lean:75-80, = (u)_*[A].rightDerivedFunctorPlus) are sorry-free and state this definition for any Grothendieck abelian coefficient category A (A = abelian groups, resp. R-modules as ModuleCat R-valued sheaves); reported for attachment by the lead (the item's lean_audit is left untouched).",
-  "blueprint": "The blueprint node is the item itself (a definition, no proof). Its statement's places are realized as follows: '(u_*F)(W)=F(W x_V U)' and 'W -> V runs over the objects of V_Et': the Direct image paragraph, with the sheaf property from lem-weil-pbc-etale-base-change-continuous; 'the left exact functor u_*': lem-weil-pbc-direct-image-left-exact; 'If K -> I(K) is a K-injective resolution, set Ru_*K = u_*I(K), Ru_*: D^+(U_Et) -> D^+(V_Et)': the Derived direct image paragraph, through lem-weil-pbc-right-derived-plus-injective, lem-weil-pbc-dplus-injective-representative and lem-weil-pbc-kinjective-hom-derived; 'R^qu_*F = H^q(Ru_*F)': kept as notation; 'With a fixed coefficient ring whose pullback is canonically identified with itself, the same functors act on module sheaves': the Module sheaves paragraph, through lem-weil-pbc-module-direct-image-left-exact."
- },
- "lean": {
-  "branch": "slopmaster2",
-  "declarations": [
-   "AlgebraicGeometry.Etale.lowerStar",
-   "AlgebraicGeometry.Etale.rightDerivedLowerStarPlus"
   ],
-  "note": "attached by the lead at the review of its definition split (2026-10-10): the direct image and its right derived functor on D^+ for any Grothendieck abelian coefficient category, the node being the case of abelian groups (found by the worker)"
- },
- "reviewed": "2026-10-10 L: definition split: u_* and R u_* with every notion cited, the hidden facts made nodes (left exactness: closed on slopmaster2; the right derived functor on D^+ with its uniqueness: Mathlib leaf; the module case: unsplit); the two slopmaster2 definitions lowerStar and rightDerivedLowerStarPlus attached (any Grothendieck abelian A; the node is A = Ab); 3 new nodes"
+  "mathlib_match": null,
+  "status": "split",
+  "merged_into": null,
+  "import_flags": [],
+  "blueprint_kind": "definition",
+  "blueprint_order": 938,
+  "blueprint_uses": [
+    "def-weil-pbc-derived-categories",
+    "def-weil-pbc-etale-sheaves",
+    "def-weil-pbc-etale-site",
+    "def-weil-pbc-kinjective-resolutions",
+    "def-weil-pbc-scheme-conventions"
+  ],
+  "uses_not_cited": [
+    "def-weil-pbc-derived-categories",
+    "def-weil-pbc-etale-sheaves"
+  ],
+  "lean_audit": {
+    "master": {
+      "state": "closed_part",
+      "decls": [
+        {
+          "name": "AlgebraicGeometry.Etale.lowerStar",
+          "module": "WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs",
+          "lines": [
+            151,
+            157
+          ],
+          "kind": "def",
+          "sorry": false
+        }
+      ],
+      "missing": [
+        "AlgebraicGeometry.Etale.rightDerivedLowerStarPlus"
+      ],
+      "open": []
+    },
+    "slopmaster2": {
+      "state": "closed",
+      "decls": [
+        {
+          "name": "AlgebraicGeometry.Etale.lowerStar",
+          "module": "WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs",
+          "lines": [
+            159,
+            165
+          ],
+          "kind": "def",
+          "sorry": false
+        },
+        {
+          "name": "AlgebraicGeometry.Etale.rightDerivedLowerStarPlus",
+          "module": "WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStarCoherence",
+          "lines": [
+            75,
+            80
+          ],
+          "kind": "def",
+          "sorry": false
+        }
+      ],
+      "missing": [],
+      "open": []
+    }
+  },
+  "chapter": "sec-curve-estimates",
+  "unit": "sk-prop-h2",
+  "split_report": {
+    "date": "2026-10-10",
+    "item": "def-weil-pbc-direct-image",
+    "worker": "stage1",
+    "summary": "Definition split, checked against Stacks etale-cohomology.tex Section 03PV (Definition 03PY, Remark 03PX: the direct image of a sheaf is a sheaf; the paragraph after 03PY: f_* on abelian sheaves is left exact; Definition 04I2), sites-cohomology.tex Section 071J (left exact f_* on modules and Rf_*: D^+ -> D^+) and derived.tex Lemmas 05TI, 05TH, 070Y. Every notion now cites a node: 'morphism' repointed from the grab-bag def-weil-pbc-scheme-conventions to def-pc-scheme; Ab(T_Et) cites def-weil-pbc-abelian-etale-sheaves (Mathlib leaf) instead of the imported def-weil-pbc-etale-sheaves; fibre product def-pc-fibre-product; base-change functor lem-weil-pbc-etale-base-change-finite-limits; D^+, H^q def-weil-pbc-derived-categories; Q def-weil-abstract-derived-category; modules def-weil-pbc-constant-sheaf, def-weil-sheaf-of-modules-category, def-weil-pbc-sheafification. Claims moved out of the definition: that u_*F is a sheaf is the existing Lean-closed node lem-weil-pbc-etale-base-change-continuous; additivity and left exactness on abelian sheaves are the new node lem-weil-pbc-direct-image-left-exact (unsplit, but proved sorry-free in slopmaster2: AlgebraicGeometry.Etale.lowerStar_additive, preservesLimitsOfShape_lowerStar, preservesFiniteLimits_lowerStar, recorded in its lean_audit as closed); on module sheaves (module structure through rho: R_V -> u_*R_U, additive, left exact) the new node lem-weil-pbc-module-direct-image-left-exact (unsplit). The derived functor: the source's 'set Ru_*K = u_*I(K)' hides that this is a functor on D^+ independent of the resolution; Ru_* is now the right derived functor of u_* on D^+ of the new Mathlib leaf lem-weil-pbc-right-derived-plus-injective (Functor.rightDerivedFunctorPlus; isomorphic to u_* on bounded below complexes of injectives; unique up to unique isomorphism), and the formula Ru_*K = u_*I(K) for every K-injective resolution, and the action on morphisms through homotopy classes, follow from the existing Mathlib leaves lem-weil-pbc-dplus-injective-representative (bounded below injective representative, K-injective) and lem-weil-pbc-kinjective-hom-derived (Hom into K-injective complexes computed in the homotopy category; quasi-isomorphisms between K-injective complexes are homotopy equivalences) plus additivity of u_*. Enough injectives: lem-weil-pbc-module-sheaves-enough-injectives (covers Ab and Mod(R)). R^qu_* = H^q(Ru_*) kept. The statement's meaning is unchanged; the module sentence is made precise (R_V constant, rho). Nodes of other units cited as notions/tools in this definition's statement: lem-weil-pbc-etale-base-change-continuous (Lean closed), lem-weil-pbc-etale-base-change-finite-limits, lem-weil-pbc-dplus-injective-representative, lem-weil-pbc-kinjective-hom-derived (Mathlib leaves), lem-weil-pbc-module-sheaves-enough-injectives (sk-thm-reduction, split). Lean: AlgebraicGeometry.Etale.lowerStar (WeilConjectures/SixFunctors/Etale/UpperLowerStar/Defs.lean:159-165, (u_*F)(W) = F(W x_V U) by lowerStar_obj_val_obj, rfl) and AlgebraicGeometry.Etale.rightDerivedLowerStarPlus (WeilConjectures/SixFunctors/Etale/Derived/UpperLowerStarCoherence.lean:75-80, = (u)_*[A].rightDerivedFunctorPlus) are sorry-free and state this definition for any Grothendieck abelian coefficient category A (A = abelian groups, resp. R-modules as ModuleCat R-valued sheaves); reported for attachment by the lead (the item's lean_audit is left untouched).",
+    "blueprint": "The blueprint node is the item itself (a definition, no proof). Its statement's places are realized as follows: '(u_*F)(W)=F(W x_V U)' and 'W -> V runs over the objects of V_Et': the Direct image paragraph, with the sheaf property from lem-weil-pbc-etale-base-change-continuous; 'the left exact functor u_*': lem-weil-pbc-direct-image-left-exact; 'If K -> I(K) is a K-injective resolution, set Ru_*K = u_*I(K), Ru_*: D^+(U_Et) -> D^+(V_Et)': the Derived direct image paragraph, through lem-weil-pbc-right-derived-plus-injective, lem-weil-pbc-dplus-injective-representative and lem-weil-pbc-kinjective-hom-derived; 'R^qu_*F = H^q(Ru_*F)': kept as notation; 'With a fixed coefficient ring whose pullback is canonically identified with itself, the same functors act on module sheaves': the Module sheaves paragraph, through lem-weil-pbc-module-direct-image-left-exact."
+  },
+  "lean": {
+    "module": "WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs",
+    "declaration": "AlgebraicGeometry.Etale.lowerStar",
+    "branch": "slopmaster2",
+    "line": 159,
+    "declarations": [
+      "AlgebraicGeometry.Etale.lowerStar",
+      "AlgebraicGeometry.Etale.rightDerivedLowerStarPlus"
+    ],
+    "sorry_free": true,
+    "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state closed)"
+  },
+  "reviewed": "2026-10-10 L: definition split: u_* and R u_* with every notion cited, the hidden facts made nodes (left exactness: closed on slopmaster2; the right derived functor on D^+ with its uniqueness: Mathlib leaf; the module case: unsplit); the two slopmaster2 definitions lowerStar and rightDerivedLowerStarPlus attached (any Grothendieck abelian A; the node is A = Ab); 3 new nodes"
 }

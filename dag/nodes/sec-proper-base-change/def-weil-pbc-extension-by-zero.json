@@ -1,199 +1,205 @@
 {
- "id": "def-weil-pbc-extension-by-zero",
- "blueprint": {
-  "is": "def-weil-pbc-extension-by-zero",
-  "from": null,
-  "same_as": null
- },
- "kind": "definition",
- "title": "Extension by zero for open immersions",
- "statement": "Let $\\Lambda$ be a commutative ring; for $\\Lambda=\\mathbf Z$ everything below is about abelian sheaves. Let $j:U\\hookrightarrow X$ be an open immersion [def-weil-open-immersion] of schemes [def-pc-scheme], and let $U_{\\Et}$, $X_{\\Et}$ be the small etale sites [def-weil-pbc-etale-site]. A *sheaf of $\\Lambda$-modules* on $T_{\\Et}$ ($T=U,X$) is a presheaf of $\\Lambda$-modules on $T_{\\Et}$ whose underlying presheaf of abelian groups is a sheaf [def-weil-pbc-abelian-etale-sheaves]; with $\\Lambda$-linear natural transformations they form the category $\\Mod(T_{\\Et},\\Lambda)$, and $\\Mod(T_{\\Et},\\mathbf Z)=\\Ab(T_{\\Et})$.\n\n*Objects over $U$.* Let $V\\to X$ be an object of $X_{\\Et}$. Since $j$ is an open immersion it is a monomorphism of schemes, so there is at most one $X$-morphism $\\varphi:V\\to U$; it exists exactly when the image of $V$ in $X$ lies in $j(U)$, and then we say that $V$ *factors through $U$*. In that case $(\\mathrm{id}_V,\\varphi):V\\to V\\times_XU$ is an isomorphism, so $\\varphi$ is the base change of the etale $V\\to X$ along $j$, hence etale [lem-weil-pbc-etale-base-change-finite-limits], and $(V\\xrightarrow{\\varphi}U)$ is an object of $U_{\\Et}$. If $a:V'\\to V$ is a morphism of $X_{\\Et}$ and $V$ factors through $U$ by $\\varphi$, then $V'$ factors through $U$ by $\\varphi a$ and $a$ is a morphism $(V',\\varphi a)\\to(V,\\varphi)$ of $U_{\\Et}$.\n\n*The presheaf.* For $F\\in\\Mod(U_{\\Et},\\Lambda)$ let $j_{p!}F$ be the presheaf of $\\Lambda$-modules on $X_{\\Et}$\n$$\n(j_{p!}F)(V)=\\begin{cases}F(V\\xrightarrow{\\varphi}U),&V\\text{ factors through }U\\text{ by }\\varphi,\\\\0,&\\text{otherwise},\\end{cases}\n$$\nwhose restriction along $a:V'\\to V$ is the restriction of $F$ along $a:(V',\\varphi a)\\to(V,\\varphi)$ when $V$ factors through $U$, and the zero map otherwise. A morphism $\\alpha:F\\to F'$ induces $j_{p!}\\alpha$, equal to $\\alpha_{(V,\\varphi)}$ when $V$ factors through $U$ and $0$ otherwise; this makes $j_{p!}$ a functor to presheaves of $\\Lambda$-modules. This is the presheaf $V\\mapsto\\bigoplus_{s\\in\\Hom_X(V,U)}F(V,s)$ of [def-weil-pbc-etale-sum-extension] for the etale morphism $v=j$, whose index set $\\Hom_X(V,U)$ has at most one element.\n\n*Extension by zero.* $j_!F$ is the sheafification [def-weil-pbc-sheafification] of $j_{p!}F$ as a presheaf of $\\Lambda$-modules, and $j_!\\alpha$ is the sheafification of $j_{p!}\\alpha$. This defines the functor\n$$\nj_!:\\Mod(U_{\\Et},\\Lambda)\\longrightarrow\\Mod(X_{\\Et},\\Lambda),\n$$\ncalled *extension by zero*; for $\\Lambda=\\mathbf Z$ it is $j_!:\\Ab(U_{\\Et})\\to\\Ab(X_{\\Et})$. It is applied to complexes degreewise.",
- "source": {
-  "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Section 03S2 (etale-cohomology-section-extension-by-zero): Definition 03S3 (etale-cohomology-definition-extension-zero) and the paragraph after it defining the presheaf j_{p!} (equation-j-p-shriek), 'j_!F is the sheafification of j_{p!}F'; the general construction is Modules on Sites, Lemma 03DI (literature/stacks-project/sites-modules.tex, sites-modules-lemma-extension-by-zero). Blueprint: literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-p1/def-weil-pbc-extension-by-zero.md, order 1173"
- },
- "stmt_deps": [
-  "def-pc-scheme",
-  "def-weil-open-immersion",
-  "def-weil-pbc-etale-site",
-  "def-weil-pbc-abelian-etale-sheaves",
-  "lem-weil-pbc-etale-base-change-finite-limits",
-  "def-weil-pbc-etale-sum-extension",
-  "def-weil-pbc-sheafification"
- ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
- "mathlib_searches": [
-  {
-   "tool": "leansearch",
-   "query": "extension by zero of a sheaf along an open immersion, left adjoint to restriction",
-   "results": "Scheme.Modules.restrictAdjunction, Scheme.Modules.instIsLeftAdjointRestrictFunctor, Scheme.Modules.restrictFunctor, Scheme.Modules.restrict (Mathlib.AlgebraicGeometry.Modules.Sheaf), stalkSkyscraperSheafAdjunction, RingedSpace.res_zero",
-   "date": "2026-10-09",
-   "verdict": "no match: Zariski O_X-modules, restriction ⊣ pushforward"
+  "id": "def-weil-pbc-extension-by-zero",
+  "blueprint": {
+    "is": "def-weil-pbc-extension-by-zero",
+    "from": null,
+    "same_as": null
   },
-  {
-   "tool": "leanfinder",
-   "query": "extension by zero j_! for an open immersion of schemes on étale sheaves of abelian groups, left adjoint of the restriction j^{-1}",
-   "results": "Scheme.Modules.instIsLeftAdjointRestrictFunctor, Scheme.Modules.restrictAdjunction, Scheme.Modules.restrictFunctor, SheafedSpace.ofRestrict_hom_c_app, Scheme.ofRestrict_toLRSHom_c_app",
-   "date": "2026-10-09",
-   "verdict": "no match"
+  "kind": "definition",
+  "title": "Extension by zero for open immersions",
+  "statement": "Let $\\Lambda$ be a commutative ring; for $\\Lambda=\\mathbf Z$ everything below is about abelian sheaves. Let $j:U\\hookrightarrow X$ be an open immersion [def-weil-open-immersion] of schemes [def-pc-scheme], and let $U_{\\Et}$, $X_{\\Et}$ be the small etale sites [def-weil-pbc-etale-site]. A *sheaf of $\\Lambda$-modules* on $T_{\\Et}$ ($T=U,X$) is a presheaf of $\\Lambda$-modules on $T_{\\Et}$ whose underlying presheaf of abelian groups is a sheaf [def-weil-pbc-abelian-etale-sheaves]; with $\\Lambda$-linear natural transformations they form the category $\\Mod(T_{\\Et},\\Lambda)$, and $\\Mod(T_{\\Et},\\mathbf Z)=\\Ab(T_{\\Et})$.\n\n*Objects over $U$.* Let $V\\to X$ be an object of $X_{\\Et}$. Since $j$ is an open immersion it is a monomorphism of schemes, so there is at most one $X$-morphism $\\varphi:V\\to U$; it exists exactly when the image of $V$ in $X$ lies in $j(U)$, and then we say that $V$ *factors through $U$*. In that case $(\\mathrm{id}_V,\\varphi):V\\to V\\times_XU$ is an isomorphism, so $\\varphi$ is the base change of the etale $V\\to X$ along $j$, hence etale [lem-weil-pbc-etale-base-change-finite-limits], and $(V\\xrightarrow{\\varphi}U)$ is an object of $U_{\\Et}$. If $a:V'\\to V$ is a morphism of $X_{\\Et}$ and $V$ factors through $U$ by $\\varphi$, then $V'$ factors through $U$ by $\\varphi a$ and $a$ is a morphism $(V',\\varphi a)\\to(V,\\varphi)$ of $U_{\\Et}$.\n\n*The presheaf.* For $F\\in\\Mod(U_{\\Et},\\Lambda)$ let $j_{p!}F$ be the presheaf of $\\Lambda$-modules on $X_{\\Et}$\n$$\n(j_{p!}F)(V)=\\begin{cases}F(V\\xrightarrow{\\varphi}U),&V\\text{ factors through }U\\text{ by }\\varphi,\\\\0,&\\text{otherwise},\\end{cases}\n$$\nwhose restriction along $a:V'\\to V$ is the restriction of $F$ along $a:(V',\\varphi a)\\to(V,\\varphi)$ when $V$ factors through $U$, and the zero map otherwise. A morphism $\\alpha:F\\to F'$ induces $j_{p!}\\alpha$, equal to $\\alpha_{(V,\\varphi)}$ when $V$ factors through $U$ and $0$ otherwise; this makes $j_{p!}$ a functor to presheaves of $\\Lambda$-modules. This is the presheaf $V\\mapsto\\bigoplus_{s\\in\\Hom_X(V,U)}F(V,s)$ of [def-weil-pbc-etale-sum-extension] for the etale morphism $v=j$, whose index set $\\Hom_X(V,U)$ has at most one element.\n\n*Extension by zero.* $j_!F$ is the sheafification [def-weil-pbc-sheafification] of $j_{p!}F$ as a presheaf of $\\Lambda$-modules, and $j_!\\alpha$ is the sheafification of $j_{p!}\\alpha$. This defines the functor\n$$\nj_!:\\Mod(U_{\\Et},\\Lambda)\\longrightarrow\\Mod(X_{\\Et},\\Lambda),\n$$\ncalled *extension by zero*; for $\\Lambda=\\mathbf Z$ it is $j_!:\\Ab(U_{\\Et})\\to\\Ab(X_{\\Et})$. It is applied to complexes degreewise.",
+  "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Section 03S2 (etale-cohomology-section-extension-by-zero): Definition 03S3 (etale-cohomology-definition-extension-zero) and the paragraph after it defining the presheaf j_{p!} (equation-j-p-shriek), 'j_!F is the sheafification of j_{p!}F'; the general construction is Modules on Sites, Lemma 03DI (literature/stacks-project/sites-modules.tex, sites-modules-lemma-extension-by-zero). Blueprint: literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-p1/def-weil-pbc-extension-by-zero.md, order 1173"
   },
-  {
-   "tool": "loogle",
-   "query": "CategoryTheory.Functor.sheafPullback",
-   "results": "Functor.sheafPullback G A J K (left adjoint of G.sheafPushforwardContinuous), Functor.sheafAdjunctionContinuous, sheafPullbackConstruction.sheafPullbackIso (= sheafToPresheaf ⋙ G.op.lan ⋙ presheafToSheaf), sheafPullbackConstruction.preservesFiniteLimits (needs PreservesFiniteLimits G.op.lan), SmallCategories...PreservesFiniteLimits (needs RepresentablyFlat G), GrothendieckTopology.Point.sheafFiberComapIso (needs RepresentablyFlat F) (Mathlib.CategoryTheory.Sites.Pullback, .Point.Comap)",
-   "date": "2026-10-09",
-   "verdict": "generalization, not one line: with G = MorphismProperty.Over.map ⊤ (j étale) : U.Etale ⥤ X.Etale the left adjoint G.sheafPullback is j_!, but its continuity for the small étale topologies, the identification of G.sheafPushforwardContinuous with j^{-1} and the computation of G.op.lan as the presheaf with at most one summand are not in Mathlib; G is not representably flat (it does not preserve the terminal object), so the flatness instances do not apply"
-  },
-  {
-   "tool": "loogle",
-   "query": "\"Sheaf.extend\"",
-   "results": "TopCat.Sheaf.extend_hom_app (Mathlib.Topology.Sheaves.SheafCondition.Sites: extending a morphism of sheaves from a basis of opens)",
-   "date": "2026-10-09",
-   "verdict": "no match (unrelated)"
-  },
-  {
-   "tool": "grep",
-   "query": "grep -rniE 'extension by zero|extensionByZero|lowerShriek|jShriek|extend ?by ?zero' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
-   "results": "only Function.ExtendByZero (LinearAlgebra/Pi.lean:653, Algebra/Group/Pi/Lemmas.lean:446: extension by zero of functions on index sets) and a comment in NumberTheory/MulChar/Basic.lean:144; nothing on sheaves",
-   "date": "2026-10-09",
-   "verdict": "no match"
-  },
-  {
-   "tool": "grep",
-   "query": "grep -nE '^(noncomputable )?(def|abbrev|instance|lemma|theorem)' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Sites/Etale.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Sites/Small.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Sites/EtalePoint.lean; grep -rnE 'Over\\.map|sheafPullback|IsContinuous' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Sites/",
-   "results": "small étale site X.Etale with smallEtaleTopology (Sites/Etale.lean:51), points pointSmallEtale and their conservativity (Sites/EtalePoint.lean:64,126,160); MorphismProperty.Over.map (CategoryTheory/MorphismProperty/OverAdjunction.lean:42) gives the functor U.Etale ⥤ X.Etale along an étale j, but Mathlib states no continuity of it for the small étale topologies, no sheafPullback along it and no extension by zero on the small étale site; TopCat.Presheaf.restrictOpen (Topology/Sheaves/Presheaf.lean:127) is only restriction of a section to a smaller open",
-   "date": "2026-10-09",
-   "verdict": "no match on the étale site"
-  }
- ],
- "mathlib_match": null,
- "status": "split",
- "merged_into": null,
- "import_flags": [
-  "detailed_form",
-  "self_citation"
- ],
- "blueprint_kind": "definition",
- "blueprint_order": 1173,
- "blueprint_uses": [
-  "def-cbc-open-immersion-square",
-  "def-weil-pbc-etale-sheaves",
-  "def-weil-pbc-etale-site",
-  "def-weil-pbc-geometric-stalks",
-  "def-weil-pbc-scheme-conventions"
- ],
- "uses_not_cited": [
-  "def-cbc-open-immersion-square",
-  "def-weil-pbc-etale-sheaves",
-  "def-weil-pbc-etale-site",
-  "def-weil-pbc-geometric-stalks",
-  "def-weil-pbc-scheme-conventions"
- ],
- "blueprint_sketch": [
-  {
-   "statement": "For an open immersion $j:U\\hookrightarrow X$, extension by zero is the exact\nfunctor\n\n$$\n j_!:\\Ab(U_{\\Et})\\longrightarrow\\Ab(X_{\\Et})\n$$\n\nleft adjoint to $j^{-1}$. It is characterized on geometric stalks by\n\n$$\n (j_!F)_{\\bar x}=\n \\begin{cases}\n F_{\\bar x},&\\bar x\\text{ lies in }U,\\\\\n 0,&\\bar x\\text{ lies in }X\\setminus U.\n \\end{cases}\n$$",
-   "proof": "",
-   "cites": []
-  }
- ],
- "lean_audit": {
-  "master": {
-   "state": "rests_on_sorry",
-   "decls": [
-    {
-     "name": "AlgebraicGeometry.Etale.openImmersionLowerShriek",
-     "module": "WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs",
-     "lines": [
-      286,
-      290
-     ],
-     "kind": "def",
-     "sorry": false
-    }
-   ],
-   "missing": [
-    "AlgebraicGeometry.Etale.openImmersionLowerShriekCompUliftSheafFiberIso",
-    "AlgebraicGeometry.Etale.isZero_uliftSheafFiber_openImmersionLowerShriek_obj"
-   ],
-   "open": [
-    {
-     "name": "CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall",
-     "module": "WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify",
-     "lines": [
-      39,
-      49
-     ],
-     "kind": "theorem",
-     "nodes": [],
-     "below": false
-    }
-   ]
-  },
-  "slopmaster2": {
-   "state": "closed",
-   "decls": [
-    {
-     "name": "AlgebraicGeometry.Etale.openImmersionLowerShriek",
-     "module": "WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs",
-     "lines": [
-      291,
-      295
-     ],
-     "kind": "def",
-     "sorry": false
-    },
-    {
-     "name": "AlgebraicGeometry.Etale.openImmersionLowerShriekCompUliftSheafFiberIso",
-     "module": "WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.FiniteComparison",
-     "lines": [
-      97,
-      108
-     ],
-     "kind": "def",
-     "sorry": false
-    },
-    {
-     "name": "AlgebraicGeometry.Etale.isZero_uliftSheafFiber_openImmersionLowerShriek_obj",
-     "module": "WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.FiniteComparison",
-     "lines": [
-      111,
-      125
-     ],
-     "kind": "theorem",
-     "sorry": false
-    }
-   ],
-   "missing": [],
-   "open": []
-  }
- },
- "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1",
- "split_report": {
-  "date": "2026-10-09",
-  "item": "def-weil-pbc-extension-by-zero",
-  "worker": "stage1",
-  "summary": "Checked against Stacks etale-cohomology Section 03S2 (Definition 03S3, the presheaf j_{p!} and 'j_! is the sheafification of j_{p!}', Exercise 03S4, Proposition 03S5) and Modules on Sites Lemmas 03DI, 03DJ. The old statement cited itself ('the functor of [def-weil-pbc-extension-by-zero]') and defined j_! only by its properties (exact left adjoint of j^{-1}, stalk formula); it is now the construction: for an open immersion j the presheaf V ↦ F(V→U) if V→X factors through U (uniquely, j being a monomorphism; the factorization is etale as a base change, lem-weil-pbc-etale-base-change-finite-limits), 0 otherwise, sheafified (def-weil-pbc-sheafification), with restriction maps and action on morphisms written out, for sheaves of Λ-modules with any commutative Λ (Λ = Z: abelian sheaves; the blueprint's 'finite Λ' is a special case). It is noted to be the case v = j of def-weil-pbc-etale-sum-extension (direct sum over Hom_X(V,U), at most one summand). The claims move to statement nodes, which this definition does not cite (they depend on it): lem-weil-pbc-extension-by-zero-adjunction (j_! ⊣ j^{-1}, Stacks 03S3/03S4/03DI, new), lem-weil-pbc-extension-by-zero-exact (Stacks 03DJ/03S5, new), lem-weil-pbc-extension-by-zero-stalks (stalk formula, Stacks 03S5/0710/04HU, new; the blueprint's F_{x̄} is made precise as F_{ū} for the unique lift ū), and the short exact sequence 0 → j_!j^{-1}F → F → i_*i^{-1}F → 0 (Stacks 095L), which already has the node lem-weil-pbc-open-closed-short-exact (created by the worker of lem-weil-pbc-curve-dense-open-localization). The grab-bags are replaced: def-weil-pbc-etale-sheaves → def-weil-pbc-abelian-etale-sheaves (Λ-module sheaves defined inline as presheaves of Λ-modules whose underlying abelian presheaf is a sheaf); def-weil-pbc-scheme-conventions → def-pc-scheme and def-weil-open-immersion. def-weil-pbc-geometric-stalks (now used by the stalk node) and def-cbc-open-immersion-square (unused) are dropped. Mathlib: no extension by zero on the small etale site; Functor.sheafPullback along MorphismProperty.Over.map is the abstract generalization, not one line."
- },
- "lean": {
-  "branch": "slopmaster2",
-  "declarations": [
-   "AlgebraicGeometry.Etale.openImmersionLowerShriek"
+  "stmt_deps": [
+    "def-pc-scheme",
+    "def-weil-open-immersion",
+    "def-weil-pbc-etale-site",
+    "def-weil-pbc-abelian-etale-sheaves",
+    "lem-weil-pbc-etale-base-change-finite-limits",
+    "def-weil-pbc-etale-sum-extension",
+    "def-weil-pbc-sheafification"
   ],
-  "note": "attached by the lead at review (2026-10-09), found by the opus workers of def-weil-pbc-extension-by-zero and def-weil-pbc-finite-open-comparison: j_! as the sheafified left Kan extension along the inclusion of small etale sites (for a monomorphism j the left Kan extension at V is F(V) when V factors through U and 0 otherwise, which is the explicit presheaf of the node), for any Grothendieck abelian coefficient category; sorry-free on the full map"
- },
- "pointers": [
-  "lem-weil-pbc-extension-by-zero-adjunction",
-  "lem-weil-pbc-extension-by-zero-exact",
-  "lem-weil-pbc-extension-by-zero-stalks",
-  "lem-weil-pbc-open-closed-short-exact"
- ],
- "reviewed": {
-  "date": "2026-10-09",
-  "by": "L",
-  "result": "pass",
-  "note": "definition rewritten as a construction (Stacks 03S3); its three properties moved to statement nodes (unreached until the users cite them; all three closed by Lean); Lean attached (closed); pointers added by the lead"
- }
+  "proof": [],
+  "proof_deps": [],
+  "proof_origin": null,
+  "mathlib_searches": [
+    {
+      "tool": "leansearch",
+      "query": "extension by zero of a sheaf along an open immersion, left adjoint to restriction",
+      "results": "Scheme.Modules.restrictAdjunction, Scheme.Modules.instIsLeftAdjointRestrictFunctor, Scheme.Modules.restrictFunctor, Scheme.Modules.restrict (Mathlib.AlgebraicGeometry.Modules.Sheaf), stalkSkyscraperSheafAdjunction, RingedSpace.res_zero",
+      "date": "2026-10-09",
+      "verdict": "no match: Zariski O_X-modules, restriction ⊣ pushforward"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "extension by zero j_! for an open immersion of schemes on étale sheaves of abelian groups, left adjoint of the restriction j^{-1}",
+      "results": "Scheme.Modules.instIsLeftAdjointRestrictFunctor, Scheme.Modules.restrictAdjunction, Scheme.Modules.restrictFunctor, SheafedSpace.ofRestrict_hom_c_app, Scheme.ofRestrict_toLRSHom_c_app",
+      "date": "2026-10-09",
+      "verdict": "no match"
+    },
+    {
+      "tool": "loogle",
+      "query": "CategoryTheory.Functor.sheafPullback",
+      "results": "Functor.sheafPullback G A J K (left adjoint of G.sheafPushforwardContinuous), Functor.sheafAdjunctionContinuous, sheafPullbackConstruction.sheafPullbackIso (= sheafToPresheaf ⋙ G.op.lan ⋙ presheafToSheaf), sheafPullbackConstruction.preservesFiniteLimits (needs PreservesFiniteLimits G.op.lan), SmallCategories...PreservesFiniteLimits (needs RepresentablyFlat G), GrothendieckTopology.Point.sheafFiberComapIso (needs RepresentablyFlat F) (Mathlib.CategoryTheory.Sites.Pullback, .Point.Comap)",
+      "date": "2026-10-09",
+      "verdict": "generalization, not one line: with G = MorphismProperty.Over.map ⊤ (j étale) : U.Etale ⥤ X.Etale the left adjoint G.sheafPullback is j_!, but its continuity for the small étale topologies, the identification of G.sheafPushforwardContinuous with j^{-1} and the computation of G.op.lan as the presheaf with at most one summand are not in Mathlib; G is not representably flat (it does not preserve the terminal object), so the flatness instances do not apply"
+    },
+    {
+      "tool": "loogle",
+      "query": "\"Sheaf.extend\"",
+      "results": "TopCat.Sheaf.extend_hom_app (Mathlib.Topology.Sheaves.SheafCondition.Sites: extending a morphism of sheaves from a basis of opens)",
+      "date": "2026-10-09",
+      "verdict": "no match (unrelated)"
+    },
+    {
+      "tool": "grep",
+      "query": "grep -rniE 'extension by zero|extensionByZero|lowerShriek|jShriek|extend ?by ?zero' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+      "results": "only Function.ExtendByZero (LinearAlgebra/Pi.lean:653, Algebra/Group/Pi/Lemmas.lean:446: extension by zero of functions on index sets) and a comment in NumberTheory/MulChar/Basic.lean:144; nothing on sheaves",
+      "date": "2026-10-09",
+      "verdict": "no match"
+    },
+    {
+      "tool": "grep",
+      "query": "grep -nE '^(noncomputable )?(def|abbrev|instance|lemma|theorem)' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Sites/Etale.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Sites/Small.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Sites/EtalePoint.lean; grep -rnE 'Over\\.map|sheafPullback|IsContinuous' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Sites/",
+      "results": "small étale site X.Etale with smallEtaleTopology (Sites/Etale.lean:51), points pointSmallEtale and their conservativity (Sites/EtalePoint.lean:64,126,160); MorphismProperty.Over.map (CategoryTheory/MorphismProperty/OverAdjunction.lean:42) gives the functor U.Etale ⥤ X.Etale along an étale j, but Mathlib states no continuity of it for the small étale topologies, no sheafPullback along it and no extension by zero on the small étale site; TopCat.Presheaf.restrictOpen (Topology/Sheaves/Presheaf.lean:127) is only restriction of a section to a smaller open",
+      "date": "2026-10-09",
+      "verdict": "no match on the étale site"
+    }
+  ],
+  "mathlib_match": null,
+  "status": "split",
+  "merged_into": null,
+  "import_flags": [
+    "detailed_form",
+    "self_citation"
+  ],
+  "blueprint_kind": "definition",
+  "blueprint_order": 1173,
+  "blueprint_uses": [
+    "def-cbc-open-immersion-square",
+    "def-weil-pbc-etale-sheaves",
+    "def-weil-pbc-etale-site",
+    "def-weil-pbc-geometric-stalks",
+    "def-weil-pbc-scheme-conventions"
+  ],
+  "uses_not_cited": [
+    "def-cbc-open-immersion-square",
+    "def-weil-pbc-etale-sheaves",
+    "def-weil-pbc-etale-site",
+    "def-weil-pbc-geometric-stalks",
+    "def-weil-pbc-scheme-conventions"
+  ],
+  "blueprint_sketch": [
+    {
+      "statement": "For an open immersion $j:U\\hookrightarrow X$, extension by zero is the exact\nfunctor\n\n$$\n j_!:\\Ab(U_{\\Et})\\longrightarrow\\Ab(X_{\\Et})\n$$\n\nleft adjoint to $j^{-1}$. It is characterized on geometric stalks by\n\n$$\n (j_!F)_{\\bar x}=\n \\begin{cases}\n F_{\\bar x},&\\bar x\\text{ lies in }U,\\\\\n 0,&\\bar x\\text{ lies in }X\\setminus U.\n \\end{cases}\n$$",
+      "proof": "",
+      "cites": []
+    }
+  ],
+  "lean_audit": {
+    "master": {
+      "state": "rests_on_sorry",
+      "decls": [
+        {
+          "name": "AlgebraicGeometry.Etale.openImmersionLowerShriek",
+          "module": "WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs",
+          "lines": [
+            286,
+            290
+          ],
+          "kind": "def",
+          "sorry": false
+        }
+      ],
+      "missing": [
+        "AlgebraicGeometry.Etale.openImmersionLowerShriekCompUliftSheafFiberIso",
+        "AlgebraicGeometry.Etale.isZero_uliftSheafFiber_openImmersionLowerShriek_obj"
+      ],
+      "open": [
+        {
+          "name": "CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall",
+          "module": "WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify",
+          "lines": [
+            39,
+            49
+          ],
+          "kind": "theorem",
+          "nodes": [],
+          "below": false
+        }
+      ]
+    },
+    "slopmaster2": {
+      "state": "closed",
+      "decls": [
+        {
+          "name": "AlgebraicGeometry.Etale.openImmersionLowerShriek",
+          "module": "WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs",
+          "lines": [
+            291,
+            295
+          ],
+          "kind": "def",
+          "sorry": false
+        },
+        {
+          "name": "AlgebraicGeometry.Etale.openImmersionLowerShriekCompUliftSheafFiberIso",
+          "module": "WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.FiniteComparison",
+          "lines": [
+            97,
+            108
+          ],
+          "kind": "def",
+          "sorry": false
+        },
+        {
+          "name": "AlgebraicGeometry.Etale.isZero_uliftSheafFiber_openImmersionLowerShriek_obj",
+          "module": "WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.FiniteComparison",
+          "lines": [
+            111,
+            125
+          ],
+          "kind": "theorem",
+          "sorry": false
+        }
+      ],
+      "missing": [],
+      "open": []
+    }
+  },
+  "chapter": "sec-proper-base-change",
+  "unit": "sk-thm-p1",
+  "split_report": {
+    "date": "2026-10-09",
+    "item": "def-weil-pbc-extension-by-zero",
+    "worker": "stage1",
+    "summary": "Checked against Stacks etale-cohomology Section 03S2 (Definition 03S3, the presheaf j_{p!} and 'j_! is the sheafification of j_{p!}', Exercise 03S4, Proposition 03S5) and Modules on Sites Lemmas 03DI, 03DJ. The old statement cited itself ('the functor of [def-weil-pbc-extension-by-zero]') and defined j_! only by its properties (exact left adjoint of j^{-1}, stalk formula); it is now the construction: for an open immersion j the presheaf V ↦ F(V→U) if V→X factors through U (uniquely, j being a monomorphism; the factorization is etale as a base change, lem-weil-pbc-etale-base-change-finite-limits), 0 otherwise, sheafified (def-weil-pbc-sheafification), with restriction maps and action on morphisms written out, for sheaves of Λ-modules with any commutative Λ (Λ = Z: abelian sheaves; the blueprint's 'finite Λ' is a special case). It is noted to be the case v = j of def-weil-pbc-etale-sum-extension (direct sum over Hom_X(V,U), at most one summand). The claims move to statement nodes, which this definition does not cite (they depend on it): lem-weil-pbc-extension-by-zero-adjunction (j_! ⊣ j^{-1}, Stacks 03S3/03S4/03DI, new), lem-weil-pbc-extension-by-zero-exact (Stacks 03DJ/03S5, new), lem-weil-pbc-extension-by-zero-stalks (stalk formula, Stacks 03S5/0710/04HU, new; the blueprint's F_{x̄} is made precise as F_{ū} for the unique lift ū), and the short exact sequence 0 → j_!j^{-1}F → F → i_*i^{-1}F → 0 (Stacks 095L), which already has the node lem-weil-pbc-open-closed-short-exact (created by the worker of lem-weil-pbc-curve-dense-open-localization). The grab-bags are replaced: def-weil-pbc-etale-sheaves → def-weil-pbc-abelian-etale-sheaves (Λ-module sheaves defined inline as presheaves of Λ-modules whose underlying abelian presheaf is a sheaf); def-weil-pbc-scheme-conventions → def-pc-scheme and def-weil-open-immersion. def-weil-pbc-geometric-stalks (now used by the stalk node) and def-cbc-open-immersion-square (unused) are dropped. Mathlib: no extension by zero on the small etale site; Functor.sheafPullback along MorphismProperty.Over.map is the abstract generalization, not one line."
+  },
+  "lean": {
+    "module": "WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs",
+    "declaration": "AlgebraicGeometry.Etale.openImmersionLowerShriek",
+    "branch": "slopmaster2",
+    "line": 291,
+    "declarations": [
+      "AlgebraicGeometry.Etale.openImmersionLowerShriek",
+      "AlgebraicGeometry.Etale.openImmersionLowerShriekCompUliftSheafFiberIso",
+      "AlgebraicGeometry.Etale.isZero_uliftSheafFiber_openImmersionLowerShriek_obj"
+    ],
+    "sorry_free": true,
+    "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state closed)"
+  },
+  "pointers": [
+    "lem-weil-pbc-extension-by-zero-adjunction",
+    "lem-weil-pbc-extension-by-zero-exact",
+    "lem-weil-pbc-extension-by-zero-stalks",
+    "lem-weil-pbc-open-closed-short-exact"
+  ],
+  "reviewed": {
+    "date": "2026-10-09",
+    "by": "L",
+    "result": "pass",
+    "note": "definition rewritten as a construction (Stacks 03S3); its three properties moved to statement nodes (unreached until the users cite them; all three closed by Lean); Lean attached (closed); pointers added by the lead"
+  }
 }

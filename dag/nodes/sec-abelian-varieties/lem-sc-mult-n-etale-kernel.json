@@ -1,300 +1,312 @@
 {
- "id": "lem-sc-mult-n-etale-kernel",
- "blueprint": {
-  "is": "lem-sc-mult-n-etale-kernel",
-  "from": null,
-  "same_as": []
- },
- "kind": "statement",
- "title": "Multiplication by $d$ prime to the characteristic is etale",
- "statement": "Let $A$ be an abelian variety of dimension $g$ over a field $k$\nand let $d\\geq1$. If $\\operatorname{char}k\\nmid d$, then the\nmultiplication morphism $[d]:A\\to A$ of [def-sc-mult-n] is etale,\nand its kernel $A[d]$ is a finite etale group scheme of rank\n$d^{2g}$ (equivalently, it has order $d^{2g}$).\n(*Stacks Project, Groupoid Schemes, [Tag 0BFH](https://stacks.math.columbia.edu/tag/0BFH)*.)",
- "source": {
-  "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-ntorsion-etale/lem-sc-mult-n-etale-kernel.md",
-  "place": "node lem-sc-mult-n-etale-kernel, order 588",
-  "external": [
-   {
-    "document": "Stacks Project",
-    "place": "Tag 0BFH"
-   }
-  ]
- },
- "stmt_deps": [
-  "def-sc-mult-n",
-  "def-sc-abelian-variety"
- ],
- "proof": [
-  {
-   "text": "The morphism [d] is a homomorphism of group schemes. By translation invariance of the etale locus for a homomorphism [lem-sc-hom-etale-locus-translation], it is enough to check etaleness at the identity e.",
-   "uses": [
-    "lem-sc-hom-etale-locus-translation"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/groupoids.tex",
-    "place": "Tag 0BFH, proof: translation invariance"
-   }
+  "id": "lem-sc-mult-n-etale-kernel",
+  "blueprint": {
+    "is": "lem-sc-mult-n-etale-kernel",
+    "from": null,
+    "same_as": []
   },
-  {
-   "text": "The finite-flat input [lem-sc-mult-n-finite-flat] makes [d] finite locally free. The finite-flat tangent criterion [lem-sc-finite-flat-unramified-tangent-criterion] identifies etaleness at e with injectivity of the tangent map d[d] on T_{A/k,e}.",
-   "uses": [
+  "kind": "statement",
+  "title": "Multiplication by $d$ prime to the characteristic is etale",
+  "statement": "Let $A$ be an abelian variety of dimension $g$ over a field $k$\nand let $d\\geq1$. If $\\operatorname{char}k\\nmid d$, then the\nmultiplication morphism $[d]:A\\to A$ of [def-sc-mult-n] is etale,\nand its kernel $A[d]$ is a finite etale group scheme of rank\n$d^{2g}$ (equivalently, it has order $d^{2g}$).\n(*Stacks Project, Groupoid Schemes, [Tag 0BFH](https://stacks.math.columbia.edu/tag/0BFH)*.)",
+  "source": {
+    "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-ntorsion-etale/lem-sc-mult-n-etale-kernel.md",
+    "place": "node lem-sc-mult-n-etale-kernel, order 588",
+    "external": [
+      {
+        "document": "Stacks Project",
+        "place": "Tag 0BFH"
+      }
+    ]
+  },
+  "stmt_deps": [
+    "def-sc-mult-n",
+    "def-sc-abelian-variety"
+  ],
+  "proof": [
+    {
+      "text": "The morphism [d] is a homomorphism of group schemes. By translation invariance of the etale locus for a homomorphism [lem-sc-hom-etale-locus-translation], it is enough to check etaleness at the identity e.",
+      "uses": [
+        "lem-sc-hom-etale-locus-translation"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/groupoids.tex",
+        "place": "Tag 0BFH, proof: translation invariance"
+      }
+    },
+    {
+      "text": "The finite-flat input [lem-sc-mult-n-finite-flat] makes [d] finite locally free. The finite-flat tangent criterion [lem-sc-finite-flat-unramified-tangent-criterion] identifies etaleness at e with injectivity of the tangent map d[d] on T_{A/k,e}.",
+      "uses": [
+        "lem-sc-mult-n-finite-flat",
+        "lem-sc-finite-flat-unramified-tangent-criterion"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/varieties.tex",
+        "place": "lemma-injective-tangent-spaces-unramified, combined with Tag 0BFH"
+      }
+    },
+    {
+      "text": "The differential of the group addition is additive on tangent vectors [lem-sc-group-addition-tangent-differential], and hence the differential of [d] is scalar multiplication v↦d·v [lem-sc-mult-n-tangent-differential]. Since char(k) does not divide d, this scalar map is injective. Thus [d] is etale.",
+      "uses": [
+        "lem-sc-group-addition-tangent-differential",
+        "lem-sc-mult-n-tangent-differential"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/groupoids.tex",
+        "place": "Tag 0BFH, differential at the identity"
+      }
+    },
+    {
+      "text": "The kernel A[d] is the base change of [d] along the identity section e:Spec(k)→A. The one-member family ([d]) is etale and surjective (a finite locally free morphism of rank d^{2g}≥1 is surjective), so by [lem-weil-pbc-etale-covering-base-change] applied with g=e its base change A[d]→Spec(k) is etale; thus A[d] is etale; [lem-sc-mult-n-finite-flat] gives that it is finite and has rank d^{2g}.",
+      "uses": [
+        "lem-weil-pbc-etale-covering-base-change",
+        "lem-sc-mult-n-finite-flat"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/morphisms.tex",
+        "place": "Tag 02GO, base change of etale morphisms"
+      }
+    }
+  ],
+  "proof_deps": [
+    "lem-sc-hom-etale-locus-translation",
     "lem-sc-mult-n-finite-flat",
-    "lem-sc-finite-flat-unramified-tangent-criterion"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/varieties.tex",
-    "place": "lemma-injective-tangent-spaces-unramified, combined with Tag 0BFH"
-   }
-  },
-  {
-   "text": "The differential of the group addition is additive on tangent vectors [lem-sc-group-addition-tangent-differential], and hence the differential of [d] is scalar multiplication v↦d·v [lem-sc-mult-n-tangent-differential]. Since char(k) does not divide d, this scalar map is injective. Thus [d] is etale.",
-   "uses": [
+    "lem-sc-finite-flat-unramified-tangent-criterion",
     "lem-sc-group-addition-tangent-differential",
-    "lem-sc-mult-n-tangent-differential"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/groupoids.tex",
-    "place": "Tag 0BFH, differential at the identity"
-   }
+    "lem-sc-mult-n-tangent-differential",
+    "lem-weil-pbc-etale-covering-base-change"
+  ],
+  "proof_origin": {
+    "by": "agent",
+    "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-ntorsion-etale/lem-sc-mult-n-etale-kernel.md",
+    "place": "## Proof"
   },
-  {
-   "text": "The kernel A[d] is the base change of [d] along the identity section e:Spec(k)→A. The one-member family ([d]) is etale and surjective (a finite locally free morphism of rank d^{2g}≥1 is surjective), so by [lem-weil-pbc-etale-covering-base-change] applied with g=e its base change A[d]→Spec(k) is etale; thus A[d] is etale; [lem-sc-mult-n-finite-flat] gives that it is finite and has rank d^{2g}.",
-   "uses": [
-    "lem-weil-pbc-etale-covering-base-change",
+  "mathlib_searches": [
+    {
+      "tool": "leanfinder",
+      "query": "abelian variety torsion subgroup scheme etale and constant group scheme",
+      "results": "Etale-related declarations, no theorem for abelian-variety torsion",
+      "date": "2026-10-11",
+      "verdict": "no match"
+    },
+    {
+      "tool": "loogle",
+      "query": "Etale (torsionSubgroupScheme A n).hom",
+      "results": "Unknown identifier Etale; no match",
+      "date": "2026-10-11",
+      "verdict": "no match"
+    },
+    {
+      "tool": "grep",
+      "query": "torsionSubgroupScheme|etale_npow_id Mathlib/",
+      "results": "no Mathlib matches",
+      "date": "2026-10-11",
+      "verdict": "no match"
+    },
+    {
+      "tool": "leansearch",
+      "query": "n-torsion points of abelian variety",
+      "results": "service unavailable: Internal Server Error",
+      "date": "2026-10-11",
+      "verdict": "unavailable"
+    }
+  ],
+  "mathlib_match": null,
+  "status": "split",
+  "merged_into": null,
+  "import_flags": [
+    "proof_cites_literature"
+  ],
+  "blueprint_kind": "lemma",
+  "blueprint_order": 588,
+  "blueprint_uses": [
+    "def-sc-abelian-variety",
+    "def-sc-mult-n",
+    "lem-sc-fg-order-prime-etale",
     "lem-sc-mult-n-finite-flat"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Tag 02GO, base change of etale morphisms"
-   }
-  }
- ],
- "proof_deps": [
-  "lem-sc-hom-etale-locus-translation",
-  "lem-sc-mult-n-finite-flat",
-  "lem-sc-finite-flat-unramified-tangent-criterion",
-  "lem-sc-group-addition-tangent-differential",
-  "lem-sc-mult-n-tangent-differential",
-  "lem-weil-pbc-etale-covering-base-change"
- ],
- "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-ntorsion-etale/lem-sc-mult-n-etale-kernel.md",
-  "place": "## Proof"
- },
- "mathlib_searches": [
-  {
-   "tool": "leanfinder",
-   "query": "abelian variety torsion subgroup scheme etale and constant group scheme",
-   "results": "Etale-related declarations, no theorem for abelian-variety torsion",
-   "date": "2026-10-11",
-   "verdict": "no match"
-  },
-  {
-   "tool": "loogle",
-   "query": "Etale (torsionSubgroupScheme A n).hom",
-   "results": "Unknown identifier Etale; no match",
-   "date": "2026-10-11",
-   "verdict": "no match"
-  },
-  {
-   "tool": "grep",
-   "query": "torsionSubgroupScheme|etale_npow_id Mathlib/",
-   "results": "no Mathlib matches",
-   "date": "2026-10-11",
-   "verdict": "no match"
-  },
-  {
-   "tool": "leansearch",
-   "query": "n-torsion points of abelian variety",
-   "results": "service unavailable: Internal Server Error",
-   "date": "2026-10-11",
-   "verdict": "unavailable"
-  }
- ],
- "mathlib_match": null,
- "status": "split",
- "merged_into": null,
- "import_flags": [
-  "proof_cites_literature"
- ],
- "blueprint_kind": "lemma",
- "blueprint_order": 588,
- "blueprint_uses": [
-  "def-sc-abelian-variety",
-  "def-sc-mult-n",
-  "lem-sc-fg-order-prime-etale",
-  "lem-sc-mult-n-finite-flat"
- ],
- "uses_not_cited": [
-  "def-sc-abelian-variety"
- ],
- "proof_split_by": "paragraphs",
- "lean_audit": {
-  "master": {
-   "state": "none",
-   "decls": [],
-   "missing": []
-  },
-  "slopmaster2": {
-   "state": "rests_on_sorry",
-   "decls": [
-    {
-     "name": "AlgebraicGeometry.etale_npow_id",
-     "module": "WeilConjectures.AlgebraicGeometry.AbelianVariety.Torsion",
-     "lines": [
-      81,
-      108
-     ],
-     "kind": "theorem",
-     "sorry": false
+  ],
+  "uses_not_cited": [
+    "def-sc-abelian-variety"
+  ],
+  "proof_split_by": "paragraphs",
+  "lean_audit": {
+    "master": {
+      "state": "none",
+      "decls": [],
+      "missing": []
     },
-    {
-     "name": "AlgebraicGeometry.etale_torsionSubgroupScheme",
-     "module": "WeilConjectures.AlgebraicGeometry.AbelianVariety.Torsion",
-     "lines": [
-      61,
-      79
-     ],
-     "kind": "theorem",
-     "sorry": false
+    "slopmaster2": {
+      "state": "rests_on_sorry",
+      "decls": [
+        {
+          "name": "AlgebraicGeometry.etale_npow_id",
+          "module": "WeilConjectures.AlgebraicGeometry.AbelianVariety.Torsion",
+          "lines": [
+            81,
+            108
+          ],
+          "kind": "theorem",
+          "sorry": false
+        },
+        {
+          "name": "AlgebraicGeometry.etale_torsionSubgroupScheme",
+          "module": "WeilConjectures.AlgebraicGeometry.AbelianVariety.Torsion",
+          "lines": [
+            61,
+            79
+          ],
+          "kind": "theorem",
+          "sorry": false
+        }
+      ],
+      "missing": [],
+      "open": [
+        {
+          "name": "AlgebraicGeometry.Scheme.Hom.degree_pos_of_isAmple_of_connectedSpace",
+          "module": "WeilConjectures.AlgebraicGeometry.Modules.Ample",
+          "lines": [
+            501,
+            511
+          ],
+          "kind": "theorem",
+          "nodes": [],
+          "below": false
+        },
+        {
+          "name": "AlgebraicGeometry.Scheme.Hom.degree_pos_of_isAmple_of_nonempty",
+          "module": "WeilConjectures.AlgebraicGeometry.Modules.Ample",
+          "lines": [
+            596,
+            605
+          ],
+          "kind": "theorem",
+          "nodes": [],
+          "below": false
+        },
+        {
+          "name": "AlgebraicGeometry.Scheme.Hom.exists_polynomial_hilbertFunction",
+          "module": "WeilConjectures.AlgebraicGeometry.Modules.Ample",
+          "lines": [
+            238,
+            248
+          ],
+          "kind": "theorem",
+          "nodes": [],
+          "below": false
+        },
+        {
+          "name": "AlgebraicGeometry.Scheme.Hom.fwdDiff_iter_eulerChar_tensorObj_tensorPow",
+          "module": "WeilConjectures.AlgebraicGeometry.Modules.Ample",
+          "lines": [
+            640,
+            658
+          ],
+          "kind": "theorem",
+          "nodes": [],
+          "below": false
+        },
+        {
+          "name": "AlgebraicGeometry.Scheme.Modules.exists_addEquiv_sections_higherDirectImage_H",
+          "module": "WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage",
+          "lines": [
+            307,
+            324
+          ],
+          "kind": "theorem",
+          "nodes": [],
+          "below": false
+        },
+        {
+          "name": "AlgebraicGeometry.Scheme.Modules.finite_sections_higherDirectImage",
+          "module": "WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage",
+          "lines": [
+            617,
+            632
+          ],
+          "kind": "theorem",
+          "nodes": [
+            "lem-pc-coherent-hi"
+          ],
+          "below": false
+        },
+        {
+          "name": "AlgebraicGeometry.Scheme.Modules.isQuasicoherent_higherDirectImage",
+          "module": "WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage",
+          "lines": [
+            467,
+            474
+          ],
+          "kind": "theorem",
+          "nodes": [],
+          "below": false
+        },
+        {
+          "name": "AlgebraicGeometry.Scheme.Modules.subsingleton_H_of_topologicalKrullDim_lt",
+          "module": "WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar",
+          "lines": [
+            64,
+            73
+          ],
+          "kind": "theorem",
+          "nodes": [],
+          "below": false
+        },
+        {
+          "name": "AlgebraicGeometry.exists_mem_nonempty_iso_preimageSnd",
+          "module": "WeilConjectures.AlgebraicGeometry.TheoremOfCube",
+          "lines": [
+            77,
+            100
+          ],
+          "kind": "theorem",
+          "nodes": [],
+          "below": false
+        },
+        {
+          "name": "AlgebraicGeometry.isClosed_setOf_exists_nonempty_iso_preimageSnd",
+          "module": "WeilConjectures.AlgebraicGeometry.TheoremOfCube",
+          "lines": [
+            54,
+            75
+          ],
+          "kind": "theorem",
+          "nodes": [],
+          "below": false
+        }
+      ]
     }
-   ],
-   "missing": [],
-   "open": [
-    {
-     "name": "AlgebraicGeometry.Scheme.Hom.degree_pos_of_isAmple_of_connectedSpace",
-     "module": "WeilConjectures.AlgebraicGeometry.Modules.Ample",
-     "lines": [
-      501,
-      511
-     ],
-     "kind": "theorem",
-     "nodes": [],
-     "below": false
-    },
-    {
-     "name": "AlgebraicGeometry.Scheme.Hom.degree_pos_of_isAmple_of_nonempty",
-     "module": "WeilConjectures.AlgebraicGeometry.Modules.Ample",
-     "lines": [
-      596,
-      605
-     ],
-     "kind": "theorem",
-     "nodes": [],
-     "below": false
-    },
-    {
-     "name": "AlgebraicGeometry.Scheme.Hom.exists_polynomial_hilbertFunction",
-     "module": "WeilConjectures.AlgebraicGeometry.Modules.Ample",
-     "lines": [
-      238,
-      248
-     ],
-     "kind": "theorem",
-     "nodes": [],
-     "below": false
-    },
-    {
-     "name": "AlgebraicGeometry.Scheme.Hom.fwdDiff_iter_eulerChar_tensorObj_tensorPow",
-     "module": "WeilConjectures.AlgebraicGeometry.Modules.Ample",
-     "lines": [
-      640,
-      658
-     ],
-     "kind": "theorem",
-     "nodes": [],
-     "below": false
-    },
-    {
-     "name": "AlgebraicGeometry.Scheme.Modules.exists_addEquiv_sections_higherDirectImage_H",
-     "module": "WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage",
-     "lines": [
-      307,
-      324
-     ],
-     "kind": "theorem",
-     "nodes": [],
-     "below": false
-    },
-    {
-     "name": "AlgebraicGeometry.Scheme.Modules.finite_sections_higherDirectImage",
-     "module": "WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage",
-     "lines": [
-      617,
-      632
-     ],
-     "kind": "theorem",
-     "nodes": [
-      "lem-pc-coherent-hi"
-     ],
-     "below": false
-    },
-    {
-     "name": "AlgebraicGeometry.Scheme.Modules.isQuasicoherent_higherDirectImage",
-     "module": "WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage",
-     "lines": [
-      467,
-      474
-     ],
-     "kind": "theorem",
-     "nodes": [],
-     "below": false
-    },
-    {
-     "name": "AlgebraicGeometry.Scheme.Modules.subsingleton_H_of_topologicalKrullDim_lt",
-     "module": "WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar",
-     "lines": [
-      64,
-      73
-     ],
-     "kind": "theorem",
-     "nodes": [],
-     "below": false
-    },
-    {
-     "name": "AlgebraicGeometry.exists_mem_nonempty_iso_preimageSnd",
-     "module": "WeilConjectures.AlgebraicGeometry.TheoremOfCube",
-     "lines": [
-      77,
-      100
-     ],
-     "kind": "theorem",
-     "nodes": [],
-     "below": false
-    },
-    {
-     "name": "AlgebraicGeometry.isClosed_setOf_exists_nonempty_iso_preimageSnd",
-     "module": "WeilConjectures.AlgebraicGeometry.TheoremOfCube",
-     "lines": [
-      54,
-      75
-     ],
-     "kind": "theorem",
-     "nodes": [],
-     "below": false
-    }
-   ]
+  },
+  "chapter": "sec-abelian-varieties",
+  "unit": "sk-prop-av-ntorsion-etale",
+  "split_report": {
+    "date": "2026-10-11",
+    "item": "lem-sc-mult-n-etale-kernel",
+    "worker": "stage1",
+    "summary": "Corrected the imported statement by removing the false constant-group clause and split Tag 0BFH into translation invariance, the finite-flat tangent criterion, the differential computation, and base change for the kernel.",
+    "blueprint": "The single proof paragraph of the blueprint node is realized by steps 1-4: translation invariance, finite-flat tangent criterion, differential multiplication by d, and base change of the kernel.",
+    "tool_uses": []
+  },
+  "reviewed": {
+    "date": "2026-10-10",
+    "by": "L",
+    "reviewer": "R-mek1856",
+    "group": "H1",
+    "result": "pass",
+    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-mek1856 (reviewer sub-agent of L); spot-checked: Repairs of the 18:19 return all made: step 1 translation node (true: k-point translations, dichotomy via field-extension points), step 2 lem-sc-mult-n-finite-flat + new finite-flat tangent criterion (true: Omega_{X/Y} tensor kappa(x)=0 iff cotangent surjective at rational points; flat+unramified+lfp=etale), step 3 two new differential nodes (standard, true; not duplicates of lem-sc-tangent-map-linear), step 4 base change; 'Lemma 39.9.9' dropped; no cycle: neither item nor new nodes cite lem-sc-ntorsion-etale. FIX more, RETURN less: C4 in step 4, the cited covering node needs joint surjectivity; added that [d] is surjective (finite locally free of rank d^{2g}>=1) and that the base change is along g=e.; 1 file(s) fixed by the reviewer"
+  },
+  "lean": {
+    "module": "WeilConjectures.AlgebraicGeometry.AbelianVariety.Torsion",
+    "declaration": "AlgebraicGeometry.etale_npow_id",
+    "branch": "slopmaster2",
+    "line": 81,
+    "declarations": [
+      "AlgebraicGeometry.etale_npow_id",
+      "AlgebraicGeometry.etale_torsionSubgroupScheme"
+    ],
+    "sorry_free": false,
+    "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state rests_on_sorry)"
   }
- },
- "chapter": "sec-abelian-varieties",
- "unit": "sk-prop-av-ntorsion-etale",
- "split_report": {
-  "date": "2026-10-11",
-  "item": "lem-sc-mult-n-etale-kernel",
-  "worker": "stage1",
-  "summary": "Corrected the imported statement by removing the false constant-group clause and split Tag 0BFH into translation invariance, the finite-flat tangent criterion, the differential computation, and base change for the kernel.",
-  "blueprint": "The single proof paragraph of the blueprint node is realized by steps 1-4: translation invariance, finite-flat tangent criterion, differential multiplication by d, and base change of the kernel.",
-  "tool_uses": []
- },
- "reviewed": {
-  "date": "2026-10-10",
-  "by": "L",
-  "reviewer": "R-mek1856",
-  "group": "H1",
-  "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-mek1856 (reviewer sub-agent of L); spot-checked: Repairs of the 18:19 return all made: step 1 translation node (true: k-point translations, dichotomy via field-extension points), step 2 lem-sc-mult-n-finite-flat + new finite-flat tangent criterion (true: Omega_{X/Y} tensor kappa(x)=0 iff cotangent surjective at rational points; flat+unramified+lfp=etale), step 3 two new differential nodes (standard, true; not duplicates of lem-sc-tangent-map-linear), step 4 base change; 'Lemma 39.9.9' dropped; no cycle: neither item nor new nodes cite lem-sc-ntorsion-etale. FIX more, RETURN less: C4 in step 4, the cited covering node needs joint surjectivity; added that [d] is surjective (finite locally free of rank d^{2g}>=1) and that the base change is along g=e.; 1 file(s) fixed by the reviewer"
- }
 }

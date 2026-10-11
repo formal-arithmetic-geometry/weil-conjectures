@@ -1,210 +1,221 @@
 {
- "id": "lem-sc-affine-open-proper",
- "blueprint": {
-  "is": "lem-sc-affine-open-proper",
-  "from": null,
-  "same_as": []
- },
- "kind": "statement",
- "title": "Open subschemes of a proper curve",
- "statement": "Let $k$ be algebraically closed, let $\\overline C$ be a\nproper smooth connected curve over $k$, and let\n$j:U\\hookrightarrow\\overline C$ be an open immersion with\n$\\overline C\\setminus U\\neq\\emptyset$. Then $U$ is affine.",
- "source": {
-  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-thm-br/lem-sc-affine-open-proper.md",
-  "place": "node lem-sc-affine-open-proper, order 924"
- },
- "stmt_deps": [
-  "def-sc-curves"
- ],
- "proof": [
-  {
-   "text": "If $U=\\varnothing$, it is affine as $\\operatorname{Spec}(0)$. Otherwise $U$ contains the generic point $\\eta$ of $\\overline C$: every nonempty open of an integral scheme contains its generic point. Put $S=\\overline C\\setminus U$. The curve is Noetherian and integral, and every point other than $\\eta$ is closed, by [lem-sc-smooth-connected-curve-local-rings]. Thus every point of the closed subset $S$ is closed. By [lem-sc-noetherian-closed-points-finite], $S$ is finite; it is nonempty by the hypothesis $U\\ne\\overline C$.",
-   "uses": [
-    "lem-sc-smooth-connected-curve-local-rings",
-    "lem-sc-noetherian-closed-points-finite"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/varieties.tex",
-    "place": "Varieties Lemma 09ND (one-dimensional Noetherian schemes), proof; the finite closed-boundary argument"
-   }
+  "id": "lem-sc-affine-open-proper",
+  "blueprint": {
+    "is": "lem-sc-affine-open-proper",
+    "from": null,
+    "same_as": []
   },
-  {
-   "text": "For the finite nonempty set $S$ of step 1, form the effective divisor $D=\\sum_{P\\in S}[P]$ of [def-sc-divisor]. Each closed point with its reduced structure is an effective Cartier divisor, and finite sums remain effective Cartier, by [lem-sc-point-cartier] and the notion in [def-sc-effective-cartier-divisor]. The support of this sum is exactly $S$, since every coefficient is one. By the divisor-degree formula in [def-sc-divisor], $\\deg D=\\sum_{P\\in S}1=|S|>0$.",
-   "uses": [
+  "kind": "statement",
+  "title": "Open subschemes of a proper curve",
+  "statement": "Let $k$ be algebraically closed, let $\\overline C$ be a\nproper smooth connected curve over $k$, and let\n$j:U\\hookrightarrow\\overline C$ be an open immersion with\n$\\overline C\\setminus U\\neq\\emptyset$. Then $U$ is affine.",
+  "source": {
+    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-thm-br/lem-sc-affine-open-proper.md",
+    "place": "node lem-sc-affine-open-proper, order 924"
+  },
+  "stmt_deps": [
+    "def-sc-curves"
+  ],
+  "proof": [
+    {
+      "text": "If $U=\\varnothing$, it is affine as $\\operatorname{Spec}(0)$. Otherwise $U$ contains the generic point $\\eta$ of $\\overline C$: every nonempty open of an integral scheme contains its generic point. Put $S=\\overline C\\setminus U$. The curve is Noetherian and integral, and every point other than $\\eta$ is closed, by [lem-sc-smooth-connected-curve-local-rings]. Thus every point of the closed subset $S$ is closed. By [lem-sc-noetherian-closed-points-finite], $S$ is finite; it is nonempty by the hypothesis $U\\ne\\overline C$.",
+      "uses": [
+        "lem-sc-smooth-connected-curve-local-rings",
+        "lem-sc-noetherian-closed-points-finite"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/varieties.tex",
+        "place": "Varieties Lemma 09ND (one-dimensional Noetherian schemes), proof; the finite closed-boundary argument"
+      }
+    },
+    {
+      "text": "For the finite nonempty set $S$ of step 1, form the effective divisor $D=\\sum_{P\\in S}[P]$ of [def-sc-divisor]. Each closed point with its reduced structure is an effective Cartier divisor, and finite sums remain effective Cartier, by [lem-sc-point-cartier] and the notion in [def-sc-effective-cartier-divisor]. The support of this sum is exactly $S$, since every coefficient is one. By the divisor-degree formula in [def-sc-divisor], $\\deg D=\\sum_{P\\in S}1=|S|>0$.",
+      "uses": [
+        "def-sc-divisor",
+        "lem-sc-point-cartier",
+        "def-sc-effective-cartier-divisor"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-thm-br/lem-sc-affine-open-proper.md",
+        "place": "node lem-sc-affine-open-proper, Proof, first half (the finite boundary divisor)"
+      }
+    },
+    {
+      "text": "The divisor-class identification [lem-sc-divisor-class-curve] supplies the invertible sheaf $\\mathcal O_{\\overline C}(D)$. By the defining degree formula in [def-sc-pic0], $\\deg[\\mathcal O_{\\overline C}(D)]=\\deg D=|S|>0$; the well-definedness of this degree is the separate fact [lem-sc-deg-principal-zero].",
+      "uses": [
+        "lem-sc-divisor-class-curve",
+        "def-sc-pic0",
+        "lem-sc-deg-principal-zero"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-thm-br/lem-sc-affine-open-proper.md",
+        "place": "node lem-sc-affine-open-proper, Proof, degree of the divisor line bundle"
+      }
+    },
+    {
+      "text": "The proper smooth connected curve $\\overline C$ and its invertible sheaf $\\mathcal O_{\\overline C}(D)$ satisfy [lem-sc-positive-degree-ample], because step 3 gives positive degree; hence this sheaf is ample. By [lem-pc-divisor-line-bundle-agrees-sc], applied to the effective divisor $D$ of step 2, this sheaf $\\mathcal O_{\\overline C}(D)$ of [def-sc-divisor] is isomorphic to the sheaf $\\mathcal O_{\\overline C}(D)=\\mathcal I_D^\\vee$ of [def-pc-divisor-line-bundle] attached to the effective Cartier divisor $D$, so the latter is ample as well. The effective Cartier divisor $D$ from step 2 therefore satisfies [lem-sc-ample-complement-affine], so $\\overline C\\setminus D$ is affine. Its underlying complement is $\\overline C\\setminus S=U$, proving the claim also when $U$ is nonempty.",
+      "uses": [
+        "lem-sc-positive-degree-ample",
+        "lem-pc-divisor-line-bundle-agrees-sc",
+        "def-sc-divisor",
+        "def-pc-divisor-line-bundle",
+        "lem-sc-ample-complement-affine"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-thm-br/lem-sc-affine-open-proper.md",
+        "place": "node lem-sc-affine-open-proper, Proof, final two sentences (ampleness and affine complement)"
+      }
+    }
+  ],
+  "proof_deps": [
+    "lem-sc-smooth-connected-curve-local-rings",
+    "lem-sc-noetherian-closed-points-finite",
     "def-sc-divisor",
     "lem-sc-point-cartier",
-    "def-sc-effective-cartier-divisor"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-thm-br/lem-sc-affine-open-proper.md",
-    "place": "node lem-sc-affine-open-proper, Proof, first half (the finite boundary divisor)"
-   }
-  },
-  {
-   "text": "The divisor-class identification [lem-sc-divisor-class-curve] supplies the invertible sheaf $\\mathcal O_{\\overline C}(D)$. By the defining degree formula in [def-sc-pic0], $\\deg[\\mathcal O_{\\overline C}(D)]=\\deg D=|S|>0$; the well-definedness of this degree is the separate fact [lem-sc-deg-principal-zero].",
-   "uses": [
+    "def-sc-effective-cartier-divisor",
     "lem-sc-divisor-class-curve",
     "def-sc-pic0",
-    "lem-sc-deg-principal-zero"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-thm-br/lem-sc-affine-open-proper.md",
-    "place": "node lem-sc-affine-open-proper, Proof, degree of the divisor line bundle"
-   }
-  },
-  {
-   "text": "The proper smooth connected curve $\\overline C$ and its invertible sheaf $\\mathcal O_{\\overline C}(D)$ satisfy [lem-sc-positive-degree-ample], because step 3 gives positive degree; hence this sheaf is ample. By [lem-pc-divisor-line-bundle-agrees-sc], applied to the effective divisor $D$ of step 2, this sheaf $\\mathcal O_{\\overline C}(D)$ of [def-sc-divisor] is isomorphic to the sheaf $\\mathcal O_{\\overline C}(D)=\\mathcal I_D^\\vee$ of [def-pc-divisor-line-bundle] attached to the effective Cartier divisor $D$, so the latter is ample as well. The effective Cartier divisor $D$ from step 2 therefore satisfies [lem-sc-ample-complement-affine], so $\\overline C\\setminus D$ is affine. Its underlying complement is $\\overline C\\setminus S=U$, proving the claim also when $U$ is nonempty.",
-   "uses": [
+    "lem-sc-deg-principal-zero",
     "lem-sc-positive-degree-ample",
     "lem-pc-divisor-line-bundle-agrees-sc",
-    "def-sc-divisor",
     "def-pc-divisor-line-bundle",
     "lem-sc-ample-complement-affine"
-   ],
-   "elementary": false,
-   "source": {
+  ],
+  "proof_origin": {
+    "by": "agent",
     "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-thm-br/lem-sc-affine-open-proper.md",
-    "place": "node lem-sc-affine-open-proper, Proof, final two sentences (ampleness and affine complement)"
-   }
-  }
- ],
- "proof_deps": [
-  "lem-sc-smooth-connected-curve-local-rings",
-  "lem-sc-noetherian-closed-points-finite",
-  "def-sc-divisor",
-  "lem-sc-point-cartier",
-  "def-sc-effective-cartier-divisor",
-  "lem-sc-divisor-class-curve",
-  "def-sc-pic0",
-  "lem-sc-deg-principal-zero",
-  "lem-sc-positive-degree-ample",
-  "lem-pc-divisor-line-bundle-agrees-sc",
-  "def-pc-divisor-line-bundle",
-  "lem-sc-ample-complement-affine"
- ],
- "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-thm-br/lem-sc-affine-open-proper.md",
-  "place": "## Proof"
- },
- "mathlib_searches": [],
- "mathlib_match": null,
- "status": "split",
- "merged_into": null,
- "import_flags": [],
- "blueprint_kind": "lemma",
- "blueprint_order": 924,
- "blueprint_uses": [
-  "def-sc-curves",
-  "def-sc-divisor",
-  "def-sc-effective-cartier-divisor",
-  "lem-sc-ample-complement-affine",
-  "lem-sc-deg-principal-zero",
-  "lem-sc-dim0-finite",
-  "lem-sc-point-cartier",
-  "lem-sc-positive-degree-ample"
- ],
- "uses_not_cited": [
-  "def-sc-curves"
- ],
- "proof_split_by": "paragraphs",
- "lean_audit": {
-  "master": {
-   "state": "none",
-   "decls": [],
-   "missing": []
+    "place": "## Proof"
   },
-  "slopmaster2": {
-   "state": "sorry_here",
-   "decls": [
-    {
-     "name": "AlgebraicGeometry.IsConnectedCurve.isAffine_of_ne_top",
-     "module": "WeilConjectures.AlgebraicGeometry.Curve.Compactification",
-     "lines": [
-      256,
-      264
-     ],
-     "kind": "theorem",
-     "sorry": true
+  "mathlib_searches": [],
+  "mathlib_match": null,
+  "status": "split",
+  "merged_into": null,
+  "import_flags": [],
+  "blueprint_kind": "lemma",
+  "blueprint_order": 924,
+  "blueprint_uses": [
+    "def-sc-curves",
+    "def-sc-divisor",
+    "def-sc-effective-cartier-divisor",
+    "lem-sc-ample-complement-affine",
+    "lem-sc-deg-principal-zero",
+    "lem-sc-dim0-finite",
+    "lem-sc-point-cartier",
+    "lem-sc-positive-degree-ample"
+  ],
+  "uses_not_cited": [
+    "def-sc-curves"
+  ],
+  "proof_split_by": "paragraphs",
+  "lean_audit": {
+    "master": {
+      "state": "none",
+      "decls": [],
+      "missing": []
+    },
+    "slopmaster2": {
+      "state": "sorry_here",
+      "decls": [
+        {
+          "name": "AlgebraicGeometry.IsConnectedCurve.isAffine_of_ne_top",
+          "module": "WeilConjectures.AlgebraicGeometry.Curve.Compactification",
+          "lines": [
+            256,
+            264
+          ],
+          "kind": "theorem",
+          "sorry": true
+        }
+      ],
+      "missing": [],
+      "open": []
     }
-   ],
-   "missing": [],
-   "open": []
-  }
- },
- "chapter": "sec-curve-estimates",
- "unit": "sk-thm-br",
- "split_report": {
-  "date": "2026-10-10",
-  "item": "lem-sc-affine-open-proper",
-  "worker": "stage1",
-  "summary": "Separated the boundary, divisor, degree, and affine-complement arguments; replaced the unsupported dimension-zero claim and degree citation with existing nodes that state the facts used, and handled the empty open explicitly.",
-  "blueprint": "The sole proof paragraph: finite boundary and sum of points, positive degree of its divisor line bundle, ampleness, and affine complement.",
+  },
+  "chapter": "sec-curve-estimates",
+  "unit": "sk-thm-br",
+  "split_report": {
+    "date": "2026-10-10",
+    "item": "lem-sc-affine-open-proper",
+    "worker": "stage1",
+    "summary": "Separated the boundary, divisor, degree, and affine-complement arguments; replaced the unsupported dimension-zero claim and degree citation with existing nodes that state the facts used, and handled the empty open explicitly.",
+    "blueprint": "The sole proof paragraph: finite boundary and sum of points, positive degree of its divisor line bundle, ampleness, and affine complement.",
+    "tool_uses": [
+      {
+        "node": "lem-sc-smooth-connected-curve-local-rings",
+        "why": "Supplies Noetherian integrality and the closed-point description of a smooth connected curve."
+      },
+      {
+        "node": "lem-sc-noetherian-closed-points-finite",
+        "why": "Turns the closed boundary of closed points into a finite set."
+      },
+      {
+        "node": "def-sc-divisor",
+        "why": "Defines the finite sum of points and its degree."
+      },
+      {
+        "node": "lem-sc-point-cartier",
+        "why": "Makes closed points and their finite sum effective Cartier divisors."
+      },
+      {
+        "node": "def-sc-effective-cartier-divisor",
+        "why": "Defines the divisor notion used by the affine-complement theorem."
+      },
+      {
+        "node": "lem-sc-divisor-class-curve",
+        "why": "Provides the invertible sheaf associated to the divisor."
+      },
+      {
+        "node": "def-sc-pic0",
+        "why": "States the degree formula for the associated line bundle."
+      },
+      {
+        "node": "lem-sc-deg-principal-zero",
+        "why": "Supplies well-definedness of degree on divisor classes."
+      },
+      {
+        "node": "lem-sc-positive-degree-ample",
+        "why": "Converts positive line-bundle degree into ampleness."
+      },
+      {
+        "node": "lem-sc-ample-complement-affine",
+        "why": "Turns an ample Cartier divisor's complement into an affine scheme."
+      }
+    ]
+  },
   "tool_uses": [
-   {
-    "node": "lem-sc-smooth-connected-curve-local-rings",
-    "why": "Supplies Noetherian integrality and the closed-point description of a smooth connected curve."
-   },
-   {
-    "node": "lem-sc-noetherian-closed-points-finite",
-    "why": "Turns the closed boundary of closed points into a finite set."
-   },
-   {
-    "node": "def-sc-divisor",
-    "why": "Defines the finite sum of points and its degree."
-   },
-   {
-    "node": "lem-sc-point-cartier",
-    "why": "Makes closed points and their finite sum effective Cartier divisors."
-   },
-   {
-    "node": "def-sc-effective-cartier-divisor",
-    "why": "Defines the divisor notion used by the affine-complement theorem."
-   },
-   {
-    "node": "lem-sc-divisor-class-curve",
-    "why": "Provides the invertible sheaf associated to the divisor."
-   },
-   {
-    "node": "def-sc-pic0",
-    "why": "States the degree formula for the associated line bundle."
-   },
-   {
-    "node": "lem-sc-deg-principal-zero",
-    "why": "Supplies well-definedness of degree on divisor classes."
-   },
-   {
-    "node": "lem-sc-positive-degree-ample",
-    "why": "Converts positive line-bundle degree into ampleness."
-   },
-   {
-    "node": "lem-sc-ample-complement-affine",
-    "why": "Turns an ample Cartier divisor's complement into an affine scheme."
-   }
-  ]
- },
- "tool_uses": [
-  "lem-pc-divisor-line-bundle-agrees-sc",
-  "def-pc-divisor-line-bundle",
-  "lem-sc-smooth-connected-curve-local-rings",
-  "lem-sc-noetherian-closed-points-finite",
-  "def-sc-divisor",
-  "lem-sc-point-cartier",
-  "def-sc-effective-cartier-divisor",
-  "lem-sc-divisor-class-curve",
-  "def-sc-pic0",
-  "lem-sc-deg-principal-zero",
-  "lem-sc-positive-degree-ample",
-  "lem-sc-ample-complement-affine"
- ],
- "reviewed": {
-  "date": "2026-10-10",
-  "by": "L",
-  "reviewer": "R-aop",
-  "group": "K1",
-  "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-aop (reviewer sub-agent of L); spot-checked: Source: blueprint node lem-sc-affine-open-proper (proof paragraph) and Stacks 09ND (varieties-lemma-dim-1-noetherian-integral-separated-has-ample) for the finite boundary; statement unchanged (proper smooth connected curve over algebraically closed k, nonempty complement). Lean isAffine_of_ne_top is sorry itself (sorryfree.py), so no attachment. Step 1: lem-sc-smooth-connected-curve-local-rings (1: Noetherian integral; 2: every point other than eta closed) and lem-sc-noetherian-closed-points-finite (Noetherian X, closed E of closed points finite); U nonempty contains eta so S has only closed points; U empty treated as Spec(0). Step 2: def-sc-divisor (D=sum[P], deg D=sum n_P=|S|>0), lem-sc-point-cartier (every effective divisor is effective Cartier), def-sc-effective-cartier-divisor. Step 3: lem-sc-divisor-class-curve (O_C(D) invertible, class in Pic), def-sc-pic0 (deg[O(D)]=deg D, hypotheses proper smooth connected, k alg. closed match), lem-sc-deg-principal-zero for well-definedness. Step 4: lem-sc-positive-degree-ample (deg L>0 implies ample) and lem-sc-ample-complement-affine (proper X over k, effective Cartier D with O_X(D)=I_D^vee ample gives X minus D affine). Small cases: U empty, U=C minus one point (S one point, deg 1), U=C excluded. FIX more, RETURN less: C4 at step 4: lem-sc-ample-complement-affine needs ampleness of I_D^vee (def-pc-divisor-line-bundle) while step 4 proved ampleness of the Weil-divisor sheaf O_C(D) of def-sc-divisor; repaired by citing the existing node lem-pc-divisor-line-bundle-agrees-sc (the two O_C(D) are canonically isomorphic for D effective Cartier on a smooth connected curve). dag/nodes/sec-curve-estimates/lem-sc-affine-open-proper.json: proof[3].text: one sentence added transferring ampleness via lem-pc-divisor-line-bundle-agrees-sc; proof[3].uses: + lem-pc-divisor-line-bundle-agrees-sc, def-sc-divisor, def-pc-divisor-line-bundle; proof_deps: + lem-pc-divisor-line-bundle-agrees-sc, def-pc-divisor-line-bundle. Declared tool_uses (10 off-unit nodes, all on the blueprint's own route or generic) accepted; the two added nodes added as tool uses (generic comparison/definition, unit sk-thm-picard-rr). No new nodes. Start Sat Oct 10 04:06:41 PM UTC 2026, end Sat Oct 10 04:07:27 PM UTC 2026.; 1 file(s) fixed by the reviewer"
- }
+    "lem-pc-divisor-line-bundle-agrees-sc",
+    "def-pc-divisor-line-bundle",
+    "lem-sc-smooth-connected-curve-local-rings",
+    "lem-sc-noetherian-closed-points-finite",
+    "def-sc-divisor",
+    "lem-sc-point-cartier",
+    "def-sc-effective-cartier-divisor",
+    "lem-sc-divisor-class-curve",
+    "def-sc-pic0",
+    "lem-sc-deg-principal-zero",
+    "lem-sc-positive-degree-ample",
+    "lem-sc-ample-complement-affine"
+  ],
+  "reviewed": {
+    "date": "2026-10-10",
+    "by": "L",
+    "reviewer": "R-aop",
+    "group": "K1",
+    "result": "pass",
+    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-aop (reviewer sub-agent of L); spot-checked: Source: blueprint node lem-sc-affine-open-proper (proof paragraph) and Stacks 09ND (varieties-lemma-dim-1-noetherian-integral-separated-has-ample) for the finite boundary; statement unchanged (proper smooth connected curve over algebraically closed k, nonempty complement). Lean isAffine_of_ne_top is sorry itself (sorryfree.py), so no attachment. Step 1: lem-sc-smooth-connected-curve-local-rings (1: Noetherian integral; 2: every point other than eta closed) and lem-sc-noetherian-closed-points-finite (Noetherian X, closed E of closed points finite); U nonempty contains eta so S has only closed points; U empty treated as Spec(0). Step 2: def-sc-divisor (D=sum[P], deg D=sum n_P=|S|>0), lem-sc-point-cartier (every effective divisor is effective Cartier), def-sc-effective-cartier-divisor. Step 3: lem-sc-divisor-class-curve (O_C(D) invertible, class in Pic), def-sc-pic0 (deg[O(D)]=deg D, hypotheses proper smooth connected, k alg. closed match), lem-sc-deg-principal-zero for well-definedness. Step 4: lem-sc-positive-degree-ample (deg L>0 implies ample) and lem-sc-ample-complement-affine (proper X over k, effective Cartier D with O_X(D)=I_D^vee ample gives X minus D affine). Small cases: U empty, U=C minus one point (S one point, deg 1), U=C excluded. FIX more, RETURN less: C4 at step 4: lem-sc-ample-complement-affine needs ampleness of I_D^vee (def-pc-divisor-line-bundle) while step 4 proved ampleness of the Weil-divisor sheaf O_C(D) of def-sc-divisor; repaired by citing the existing node lem-pc-divisor-line-bundle-agrees-sc (the two O_C(D) are canonically isomorphic for D effective Cartier on a smooth connected curve). dag/nodes/sec-curve-estimates/lem-sc-affine-open-proper.json: proof[3].text: one sentence added transferring ampleness via lem-pc-divisor-line-bundle-agrees-sc; proof[3].uses: + lem-pc-divisor-line-bundle-agrees-sc, def-sc-divisor, def-pc-divisor-line-bundle; proof_deps: + lem-pc-divisor-line-bundle-agrees-sc, def-pc-divisor-line-bundle. Declared tool_uses (10 off-unit nodes, all on the blueprint's own route or generic) accepted; the two added nodes added as tool uses (generic comparison/definition, unit sk-thm-picard-rr). No new nodes. Start Sat Oct 10 04:06:41 PM UTC 2026, end Sat Oct 10 04:07:27 PM UTC 2026.; 1 file(s) fixed by the reviewer"
+  },
+  "lean": {
+    "module": "WeilConjectures.AlgebraicGeometry.Curve.Compactification",
+    "declaration": "AlgebraicGeometry.IsConnectedCurve.isAffine_of_ne_top",
+    "branch": "slopmaster2",
+    "line": 256,
+    "declarations": [
+      "AlgebraicGeometry.IsConnectedCurve.isAffine_of_ne_top"
+    ],
+    "sorry_free": false,
+    "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state sorry_here)"
+  }
 }

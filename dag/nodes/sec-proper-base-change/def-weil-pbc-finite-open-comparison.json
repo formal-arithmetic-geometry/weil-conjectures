@@ -1,147 +1,151 @@
 {
- "id": "def-weil-pbc-finite-open-comparison",
- "blueprint": {
-  "is": "def-weil-pbc-finite-open-comparison",
-  "from": null,
-  "same_as": null
- },
- "kind": "definition",
- "title": "Finite-open comparison map",
- "statement": "Let $\\square=(\\bar v,v,j_V,j_U,\\alpha)$ be a cartesian square [def-weil-pbc-cartesian-square]\n\n$$\n \\begin{array}{ccc}\n U&\\xrightarrow{j_U}&X\\\\\n v\\downarrow&&\\downarrow\\bar v\\\\\n V&\\xrightarrow{j_V}&Y,\n \\end{array}\n$$\n\n(in the notation of that node $f=\\bar v$, $f'=v$, $g=j_V$, $g'=j_U$, with chosen identification $\\alpha:U\\xrightarrow{\\sim}X\\times_YV$), in which $j_U$ and $j_V$ are open immersions [def-weil-open-immersion] and $\\bar v$ is finite [def-weil-finite-integral-morphism]. Use the abelian sheaves $\\Ab(T_{\\Et})$ [def-weil-pbc-abelian-etale-sheaves], the direct images $u_*$ [def-weil-pbc-direct-image], the inverse images $u^{-1}$ [def-weil-pbc-inverse-image], and, for an open immersion $j$, the extension by zero $j_!$ with its adjunction $j_!\\dashv j^{-1}$ [def-weil-pbc-extension-by-zero]; write\n\n$$\n \\eta^!_j:\\mathrm{id}\\longrightarrow j^{-1}j_!,\\qquad \\varepsilon^!_j:j_!j^{-1}\\longrightarrow\\mathrm{id}\n$$\n\nfor the unit and the counit of $j_!\\dashv j^{-1}$. Let\n\n$$\n \\Ex^0_{\\square,F}:j_V^{-1}\\bar v_*F\\longrightarrow v_*j_U^{-1}F\\qquad(F\\in\\Ab(X_{\\Et}))\n$$\n\nbe the underived exchange morphism of $\\square$ [def-weil-pbc-underived-exchange]; since $\\bar v$ is finite it is an isomorphism for every $F$ (finite base change, [lemma-weil-pbc-finite-exchange]; Stacks Lemma 0959). For $G\\in\\Ab(U_{\\Et})$ define\n\n$$\n a_G:=\\bigl(\\Ex^0_{\\square,(j_U)_!G}\\bigr)^{-1}\\circ v_*\\bigl(\\eta^!_{j_U,G}\\bigr):\\;\n v_*G\\xrightarrow{v_*\\eta^!_{j_U,G}}v_*j_U^{-1}(j_U)_!G\n \\xrightarrow{(\\Ex^0_{\\square,(j_U)_!G})^{-1}}j_V^{-1}\\bar v_*(j_U)_!G,\n$$\n\nand define the *finite-open comparison map* as the adjoint of $a_G$ under $(j_V)_!\\dashv j_V^{-1}$:\n\n$$\n \\beta_{\\bar v,j_V,G}:=\\varepsilon^!_{j_V,\\,\\bar v_*(j_U)_!G}\\circ(j_V)_!(a_G):\\;\n (j_V)_!v_*G\\xrightarrow{(j_V)_!a_G}(j_V)_!j_V^{-1}\\bar v_*(j_U)_!G\n \\xrightarrow{\\varepsilon^!_{j_V}}\\bar v_*(j_U)_!G.\n$$\n\nThe maps $\\beta_{\\bar v,j_V,G}$, $G\\in\\Ab(U_{\\Et})$, form a natural transformation $\\beta_{\\bar v,j_V}:(j_V)_!v_*\\to\\bar v_*(j_U)_!$ of functors $\\Ab(U_{\\Et})\\to\\Ab(Y_{\\Et})$: $\\eta^!_{j_U}$ and $\\varepsilon^!_{j_V}$ are natural transformations, $v_*$ and $(j_V)_!$ are functors, $\\Ex^0_{\\square,-}$ is natural in $F$ [lemma-weil-pbc-underived-exchange-naturality] and hence so is its inverse, and a composite of natural transformations is natural. (This is the map of Stacks Lemma 0GJ1, whose proof identifies $j_V^{-1}\\bar v_*(j_U)_!G=v_*j_U^{-1}(j_U)_!G=v_*G$ by Lemmas 0959 and 0F70; $\\eta^!_{j_U}$ being an isomorphism, Stacks 0F70, makes $a_G$ an isomorphism but is not needed to define $\\beta$.)",
- "source": {
-  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-p1/def-weil-pbc-finite-open-comparison.md",
-  "place": "node def-weil-pbc-finite-open-comparison, order 1174"
- },
- "stmt_deps": [
-  "def-weil-pbc-cartesian-square",
-  "def-weil-open-immersion",
-  "def-weil-finite-integral-morphism",
-  "def-weil-pbc-abelian-etale-sheaves",
-  "def-weil-pbc-direct-image",
-  "def-weil-pbc-inverse-image",
-  "def-weil-pbc-extension-by-zero",
-  "def-weil-pbc-underived-exchange",
-  "lemma-weil-pbc-finite-exchange",
-  "lemma-weil-pbc-underived-exchange-naturality"
- ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
- "mathlib_searches": [
-  {
-   "tool": "leansearch",
-   "query": "extension by zero j_! commutes with finite pushforward for open immersion, etale sheaves",
-   "results": "AlgebraicGeometry.Scheme.Modules.restrictAdjunction, restrictFunctorAdjCounitIso, restrictStalkNatIso (Mathlib.AlgebraicGeometry.Modules.Sheaf: Zariski O-modules, restriction left adjoint to pushforward, not j_!), Function.ExtendByZero.linearMap (Mathlib.LinearAlgebra.Pi, unrelated)",
-   "date": "2026-10-09",
-   "verdict": "no match"
+  "id": "def-weil-pbc-finite-open-comparison",
+  "blueprint": {
+    "is": "def-weil-pbc-finite-open-comparison",
+    "from": null,
+    "same_as": null
   },
-  {
-   "tool": "leansearch",
-   "query": "pushforward of etale sheaves along finite morphism base change isomorphism open immersion",
-   "results": "TopCat.Sheaf.pushforward, TopCat.Presheaf.toPushforwardOfIso_app, Scheme.Modules.pushforward_obj_obj, IsOpenImmersion.isoRestrict (topological/Zariski only)",
-   "date": "2026-10-09",
-   "verdict": "no match"
+  "kind": "definition",
+  "title": "Finite-open comparison map",
+  "statement": "Let $\\square=(\\bar v,v,j_V,j_U,\\alpha)$ be a cartesian square [def-weil-pbc-cartesian-square]\n\n$$\n \\begin{array}{ccc}\n U&\\xrightarrow{j_U}&X\\\\\n v\\downarrow&&\\downarrow\\bar v\\\\\n V&\\xrightarrow{j_V}&Y,\n \\end{array}\n$$\n\n(in the notation of that node $f=\\bar v$, $f'=v$, $g=j_V$, $g'=j_U$, with chosen identification $\\alpha:U\\xrightarrow{\\sim}X\\times_YV$), in which $j_U$ and $j_V$ are open immersions [def-weil-open-immersion] and $\\bar v$ is finite [def-weil-finite-integral-morphism]. Use the abelian sheaves $\\Ab(T_{\\Et})$ [def-weil-pbc-abelian-etale-sheaves], the direct images $u_*$ [def-weil-pbc-direct-image], the inverse images $u^{-1}$ [def-weil-pbc-inverse-image], and, for an open immersion $j$, the extension by zero $j_!$ with its adjunction $j_!\\dashv j^{-1}$ [def-weil-pbc-extension-by-zero]; write\n\n$$\n \\eta^!_j:\\mathrm{id}\\longrightarrow j^{-1}j_!,\\qquad \\varepsilon^!_j:j_!j^{-1}\\longrightarrow\\mathrm{id}\n$$\n\nfor the unit and the counit of $j_!\\dashv j^{-1}$. Let\n\n$$\n \\Ex^0_{\\square,F}:j_V^{-1}\\bar v_*F\\longrightarrow v_*j_U^{-1}F\\qquad(F\\in\\Ab(X_{\\Et}))\n$$\n\nbe the underived exchange morphism of $\\square$ [def-weil-pbc-underived-exchange]; since $\\bar v$ is finite it is an isomorphism for every $F$ (finite base change, [lemma-weil-pbc-finite-exchange]; Stacks Lemma 0959). For $G\\in\\Ab(U_{\\Et})$ define\n\n$$\n a_G:=\\bigl(\\Ex^0_{\\square,(j_U)_!G}\\bigr)^{-1}\\circ v_*\\bigl(\\eta^!_{j_U,G}\\bigr):\\;\n v_*G\\xrightarrow{v_*\\eta^!_{j_U,G}}v_*j_U^{-1}(j_U)_!G\n \\xrightarrow{(\\Ex^0_{\\square,(j_U)_!G})^{-1}}j_V^{-1}\\bar v_*(j_U)_!G,\n$$\n\nand define the *finite-open comparison map* as the adjoint of $a_G$ under $(j_V)_!\\dashv j_V^{-1}$:\n\n$$\n \\beta_{\\bar v,j_V,G}:=\\varepsilon^!_{j_V,\\,\\bar v_*(j_U)_!G}\\circ(j_V)_!(a_G):\\;\n (j_V)_!v_*G\\xrightarrow{(j_V)_!a_G}(j_V)_!j_V^{-1}\\bar v_*(j_U)_!G\n \\xrightarrow{\\varepsilon^!_{j_V}}\\bar v_*(j_U)_!G.\n$$\n\nThe maps $\\beta_{\\bar v,j_V,G}$, $G\\in\\Ab(U_{\\Et})$, form a natural transformation $\\beta_{\\bar v,j_V}:(j_V)_!v_*\\to\\bar v_*(j_U)_!$ of functors $\\Ab(U_{\\Et})\\to\\Ab(Y_{\\Et})$: $\\eta^!_{j_U}$ and $\\varepsilon^!_{j_V}$ are natural transformations, $v_*$ and $(j_V)_!$ are functors, $\\Ex^0_{\\square,-}$ is natural in $F$ [lemma-weil-pbc-underived-exchange-naturality] and hence so is its inverse, and a composite of natural transformations is natural. (This is the map of Stacks Lemma 0GJ1, whose proof identifies $j_V^{-1}\\bar v_*(j_U)_!G=v_*j_U^{-1}(j_U)_!G=v_*G$ by Lemmas 0959 and 0F70; $\\eta^!_{j_U}$ being an isomorphism, Stacks 0F70, makes $a_G$ an isomorphism but is not needed to define $\\beta$.)",
+  "source": {
+    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-p1/def-weil-pbc-finite-open-comparison.md",
+    "place": "node def-weil-pbc-finite-open-comparison, order 1174"
   },
-  {
-   "tool": "leanfinder",
-   "query": "extension by zero of an abelian sheaf along an open immersion on the small etale site, left adjoint to restriction",
-   "results": "AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor, restrictAdjunction, restrictAdjunction_unit_app_app, restrictAdjunction_counit_app_app, restrictFunctor, restrictFunctorAdjCounitIso (Mathlib.AlgebraicGeometry.Modules.Sheaf), SheafedSpace.ofRestrict_hom_c_app, PresheafedSpace.ofRestrict_c_app: all Zariski sheaves of modules, where restriction is the LEFT adjoint of pushforward; no left adjoint of restriction (extension by zero) on the small etale site",
-   "date": "2026-10-09",
-   "verdict": "no match"
-  },
-  {
-   "tool": "loogle",
-   "query": "\"lowerShriek\"",
-   "results": "none",
-   "date": "2026-10-09",
-   "verdict": "no match"
-  },
-  {
-   "tool": "loogle",
-   "query": "AlgebraicGeometry.Scheme.smallEtaleTopology, CategoryTheory.Adjunction",
-   "results": "none (no adjunction stated on the small etale site in Mathlib)",
-   "date": "2026-10-09",
-   "verdict": "no match"
-  },
-  {
-   "tool": "grep",
-   "query": "grep -rnil 'extension by zero\\|extendByZero\\|lowerShriek\\|j_!' Mathlib/; ls Mathlib/AlgebraicGeometry/Sites/ and grep of Etale.lean for def/lemma; grep 'overPullback\\|sheafPushforwardCocontinuous' Mathlib/CategoryTheory/Sites/",
-   "results": "only Function.extendByZero-type linear algebra (LinearAlgebra/Pi.lean, InvariantBasisNumber.lean, Algebra/Group/Pi/Lemmas.lean, NumberTheory/MulChar/Basic.lean); Sites/Etale.lean has etalePrecoverage, etalePretopology, smallEtaleTopology, smallEtalePretopology, geometricFiber, no pushforward, inverse image or extension by zero of etale sheaves; CategoryTheory/Sites has the generic Functor.sheafPushforwardCocontinuous (CoverLifting.lean:291) and GrothendieckTopology.overPullback (Over.lean:288), not specialized to j_! on X_et and with no finite-pushforward comparison",
-   "date": "2026-10-09",
-   "verdict": "no match: Mathlib has no extension by zero on the small etale site and no comparison j_!v_* -> vbar_* j'_!"
-  }
- ],
- "mathlib_match": null,
- "status": "split",
- "merged_into": null,
- "import_flags": [
-  "detailed_form"
- ],
- "blueprint_kind": "definition",
- "blueprint_order": 1174,
- "blueprint_uses": [
-  "def-weil-pbc-cartesian-square",
-  "def-weil-pbc-extension-by-zero",
-  "def-weil-pbc-scheme-conventions",
-  "def-weil-pbc-underived-exchange"
- ],
- "uses_not_cited": [
-  "def-weil-pbc-extension-by-zero",
-  "def-weil-pbc-scheme-conventions",
-  "def-weil-pbc-underived-exchange"
- ],
- "blueprint_sketch": [
-  {
-   "statement": "Consider a Cartesian square\n\n$$\n\\begin{CD}\nU @>{j_X}>> X\\\\\n@V{v}VV @VV{\\bar v}V\\\\\nV @>{j_Y}>> Y\n\\end{CD}\n$$\n\nwith $j_X,j_Y$ open immersions and $\\bar v$ finite. For an abelian sheaf\n$G$ on $U_{\\mathrm{et}}$, define\n\n$$\n\\beta_{\\bar v,j_Y,G}:(j_Y)_!v_*G\\longrightarrow\n\\bar v_*(j_X)_!G\n$$\n\nas the morphism adjoint to\n\n$$\nv_*G\\xrightarrow{\\sim}\nj_Y^{-1}\\bar v_*(j_X)_!G.\n$$\n\nThe displayed isomorphism is finite base change\n$j_Y^{-1}\\bar v_*\\cong v_*j_X^{-1}$ followed by\n$j_X^{-1}(j_X)_!G\\cong G$.",
-   "proof": "",
-   "cites": []
-  }
- ],
- "lean_audit": {
-  "master": {
-   "state": "none",
-   "decls": [],
-   "missing": [
-    "AlgebraicGeometry.Etale.finiteOpenComparison"
-   ]
-  },
-  "slopmaster2": {
-   "state": "closed",
-   "decls": [
-    {
-     "name": "AlgebraicGeometry.Etale.finiteOpenComparison",
-     "module": "WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.FiniteComparison",
-     "lines": [
-      157,
-      173
-     ],
-     "kind": "def",
-     "sorry": false
-    }
-   ],
-   "missing": [],
-   "open": []
-  }
- },
- "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1",
- "split_report": {
-  "date": "2026-10-09",
-  "item": "def-weil-pbc-finite-open-comparison",
-  "worker": "stage1",
-  "summary": "Statement made explicit (not wrong, only vague): beta is written as the composite eps^!_{j_V} o (j_V)_!((Ex^0_{square,(j_U)_!G})^{-1} o v_*(eta^!_{j_U,G})), following the proof of Stacks 0GJ1 (lemma-compatible-shriek-push-finite, etale-cohomology.tex l.11612) and the slopmaster2 Lean AlgebraicGeometry.Etale.finiteOpenComparison (same composite). The identification is finite base change, cited as the closed node lemma-weil-pbc-finite-exchange (Stacks 0959, the lemma Stacks uses; Lean isIso_baseChangeMap_of_isFinite), which holds for an arbitrary cartesian square with chosen identification; the etale-localization nodes lem-weil-pbc-etale-underived-exchange-restriction / lem-weil-pbc-etale-localization-exchange were not used because they are stated only for the literal fibre product with identity identification. Only the invertibility of Ex^0 is needed; that eta^!_{j_U} is an isomorphism (Stacks 0F70) is noted but not used. Naturality in G from lemma-weil-pbc-underived-exchange-naturality (closed) plus naturality of units/counits. Repointed def-weil-pbc-scheme-conventions to def-weil-open-immersion and def-weil-finite-integral-morphism; added direct image, inverse image, abelian etale sheaves; the adjunction j_! -| j^{-1} is cited from def-weil-pbc-extension-by-zero (being split by another worker). Mathlib: no extension by zero on the small etale site (LeanSearch x2, LeanFinder, Loogle x2, grep). Sorry-free Lean found on slopmaster2: AlgebraicGeometry.Etale.finiteOpenComparison (WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.FiniteComparison, l.157-173, closure sorry-free in the sorry map), for the lead to attach."
- },
- "lean": {
-  "branch": "slopmaster2",
-  "declarations": [
-   "AlgebraicGeometry.Etale.finiteOpenComparison"
+  "stmt_deps": [
+    "def-weil-pbc-cartesian-square",
+    "def-weil-open-immersion",
+    "def-weil-finite-integral-morphism",
+    "def-weil-pbc-abelian-etale-sheaves",
+    "def-weil-pbc-direct-image",
+    "def-weil-pbc-inverse-image",
+    "def-weil-pbc-extension-by-zero",
+    "def-weil-pbc-underived-exchange",
+    "lemma-weil-pbc-finite-exchange",
+    "lemma-weil-pbc-underived-exchange-naturality"
   ],
-  "note": "attached by the lead at review (2026-10-09), found by the opus worker: the comparison map built as the same composite (counit of j_! ⊣ j^{-1}, inverse of the finite exchange, unit), for sheaves valued in a Grothendieck abelian category and an IsPullback square; sorry-free on the full map"
- },
- "reviewed": {
-  "date": "2026-10-09",
-  "by": "L",
-  "result": "pass",
-  "note": "beta written as an explicit composite following Stacks 0GJ1; Lean attached (closed). Noted for the users: isIso_finiteOpenComparison (lines 240-243, sorry-free) gives the isomorphism and naturality of lemma-weil-pbc-finite-pushforward-extension-zero but not its compatibilities; isIso_finiteOpenComparison_app (216-230) gives the existence of the inverse of lemma-weil-pbc-finite-open-comparison-inverse, not its description; both to be attached only if those nodes are narrowed at their split"
- }
+  "proof": [],
+  "proof_deps": [],
+  "proof_origin": null,
+  "mathlib_searches": [
+    {
+      "tool": "leansearch",
+      "query": "extension by zero j_! commutes with finite pushforward for open immersion, etale sheaves",
+      "results": "AlgebraicGeometry.Scheme.Modules.restrictAdjunction, restrictFunctorAdjCounitIso, restrictStalkNatIso (Mathlib.AlgebraicGeometry.Modules.Sheaf: Zariski O-modules, restriction left adjoint to pushforward, not j_!), Function.ExtendByZero.linearMap (Mathlib.LinearAlgebra.Pi, unrelated)",
+      "date": "2026-10-09",
+      "verdict": "no match"
+    },
+    {
+      "tool": "leansearch",
+      "query": "pushforward of etale sheaves along finite morphism base change isomorphism open immersion",
+      "results": "TopCat.Sheaf.pushforward, TopCat.Presheaf.toPushforwardOfIso_app, Scheme.Modules.pushforward_obj_obj, IsOpenImmersion.isoRestrict (topological/Zariski only)",
+      "date": "2026-10-09",
+      "verdict": "no match"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "extension by zero of an abelian sheaf along an open immersion on the small etale site, left adjoint to restriction",
+      "results": "AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor, restrictAdjunction, restrictAdjunction_unit_app_app, restrictAdjunction_counit_app_app, restrictFunctor, restrictFunctorAdjCounitIso (Mathlib.AlgebraicGeometry.Modules.Sheaf), SheafedSpace.ofRestrict_hom_c_app, PresheafedSpace.ofRestrict_c_app: all Zariski sheaves of modules, where restriction is the LEFT adjoint of pushforward; no left adjoint of restriction (extension by zero) on the small etale site",
+      "date": "2026-10-09",
+      "verdict": "no match"
+    },
+    {
+      "tool": "loogle",
+      "query": "\"lowerShriek\"",
+      "results": "none",
+      "date": "2026-10-09",
+      "verdict": "no match"
+    },
+    {
+      "tool": "loogle",
+      "query": "AlgebraicGeometry.Scheme.smallEtaleTopology, CategoryTheory.Adjunction",
+      "results": "none (no adjunction stated on the small etale site in Mathlib)",
+      "date": "2026-10-09",
+      "verdict": "no match"
+    },
+    {
+      "tool": "grep",
+      "query": "grep -rnil 'extension by zero\\|extendByZero\\|lowerShriek\\|j_!' Mathlib/; ls Mathlib/AlgebraicGeometry/Sites/ and grep of Etale.lean for def/lemma; grep 'overPullback\\|sheafPushforwardCocontinuous' Mathlib/CategoryTheory/Sites/",
+      "results": "only Function.extendByZero-type linear algebra (LinearAlgebra/Pi.lean, InvariantBasisNumber.lean, Algebra/Group/Pi/Lemmas.lean, NumberTheory/MulChar/Basic.lean); Sites/Etale.lean has etalePrecoverage, etalePretopology, smallEtaleTopology, smallEtalePretopology, geometricFiber, no pushforward, inverse image or extension by zero of etale sheaves; CategoryTheory/Sites has the generic Functor.sheafPushforwardCocontinuous (CoverLifting.lean:291) and GrothendieckTopology.overPullback (Over.lean:288), not specialized to j_! on X_et and with no finite-pushforward comparison",
+      "date": "2026-10-09",
+      "verdict": "no match: Mathlib has no extension by zero on the small etale site and no comparison j_!v_* -> vbar_* j'_!"
+    }
+  ],
+  "mathlib_match": null,
+  "status": "split",
+  "merged_into": null,
+  "import_flags": [
+    "detailed_form"
+  ],
+  "blueprint_kind": "definition",
+  "blueprint_order": 1174,
+  "blueprint_uses": [
+    "def-weil-pbc-cartesian-square",
+    "def-weil-pbc-extension-by-zero",
+    "def-weil-pbc-scheme-conventions",
+    "def-weil-pbc-underived-exchange"
+  ],
+  "uses_not_cited": [
+    "def-weil-pbc-extension-by-zero",
+    "def-weil-pbc-scheme-conventions",
+    "def-weil-pbc-underived-exchange"
+  ],
+  "blueprint_sketch": [
+    {
+      "statement": "Consider a Cartesian square\n\n$$\n\\begin{CD}\nU @>{j_X}>> X\\\\\n@V{v}VV @VV{\\bar v}V\\\\\nV @>{j_Y}>> Y\n\\end{CD}\n$$\n\nwith $j_X,j_Y$ open immersions and $\\bar v$ finite. For an abelian sheaf\n$G$ on $U_{\\mathrm{et}}$, define\n\n$$\n\\beta_{\\bar v,j_Y,G}:(j_Y)_!v_*G\\longrightarrow\n\\bar v_*(j_X)_!G\n$$\n\nas the morphism adjoint to\n\n$$\nv_*G\\xrightarrow{\\sim}\nj_Y^{-1}\\bar v_*(j_X)_!G.\n$$\n\nThe displayed isomorphism is finite base change\n$j_Y^{-1}\\bar v_*\\cong v_*j_X^{-1}$ followed by\n$j_X^{-1}(j_X)_!G\\cong G$.",
+      "proof": "",
+      "cites": []
+    }
+  ],
+  "lean_audit": {
+    "master": {
+      "state": "none",
+      "decls": [],
+      "missing": [
+        "AlgebraicGeometry.Etale.finiteOpenComparison"
+      ]
+    },
+    "slopmaster2": {
+      "state": "closed",
+      "decls": [
+        {
+          "name": "AlgebraicGeometry.Etale.finiteOpenComparison",
+          "module": "WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.FiniteComparison",
+          "lines": [
+            157,
+            173
+          ],
+          "kind": "def",
+          "sorry": false
+        }
+      ],
+      "missing": [],
+      "open": []
+    }
+  },
+  "chapter": "sec-proper-base-change",
+  "unit": "sk-thm-p1",
+  "split_report": {
+    "date": "2026-10-09",
+    "item": "def-weil-pbc-finite-open-comparison",
+    "worker": "stage1",
+    "summary": "Statement made explicit (not wrong, only vague): beta is written as the composite eps^!_{j_V} o (j_V)_!((Ex^0_{square,(j_U)_!G})^{-1} o v_*(eta^!_{j_U,G})), following the proof of Stacks 0GJ1 (lemma-compatible-shriek-push-finite, etale-cohomology.tex l.11612) and the slopmaster2 Lean AlgebraicGeometry.Etale.finiteOpenComparison (same composite). The identification is finite base change, cited as the closed node lemma-weil-pbc-finite-exchange (Stacks 0959, the lemma Stacks uses; Lean isIso_baseChangeMap_of_isFinite), which holds for an arbitrary cartesian square with chosen identification; the etale-localization nodes lem-weil-pbc-etale-underived-exchange-restriction / lem-weil-pbc-etale-localization-exchange were not used because they are stated only for the literal fibre product with identity identification. Only the invertibility of Ex^0 is needed; that eta^!_{j_U} is an isomorphism (Stacks 0F70) is noted but not used. Naturality in G from lemma-weil-pbc-underived-exchange-naturality (closed) plus naturality of units/counits. Repointed def-weil-pbc-scheme-conventions to def-weil-open-immersion and def-weil-finite-integral-morphism; added direct image, inverse image, abelian etale sheaves; the adjunction j_! -| j^{-1} is cited from def-weil-pbc-extension-by-zero (being split by another worker). Mathlib: no extension by zero on the small etale site (LeanSearch x2, LeanFinder, Loogle x2, grep). Sorry-free Lean found on slopmaster2: AlgebraicGeometry.Etale.finiteOpenComparison (WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.FiniteComparison, l.157-173, closure sorry-free in the sorry map), for the lead to attach."
+  },
+  "lean": {
+    "module": "WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.FiniteComparison",
+    "declaration": "AlgebraicGeometry.Etale.finiteOpenComparison",
+    "branch": "slopmaster2",
+    "line": 157,
+    "declarations": [
+      "AlgebraicGeometry.Etale.finiteOpenComparison"
+    ],
+    "sorry_free": true,
+    "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state closed)"
+  },
+  "reviewed": {
+    "date": "2026-10-09",
+    "by": "L",
+    "result": "pass",
+    "note": "beta written as an explicit composite following Stacks 0GJ1; Lean attached (closed). Noted for the users: isIso_finiteOpenComparison (lines 240-243, sorry-free) gives the isomorphism and naturality of lemma-weil-pbc-finite-pushforward-extension-zero but not its compatibilities; isIso_finiteOpenComparison_app (216-230) gives the existence of the inverse of lemma-weil-pbc-finite-open-comparison-inverse, not its description; both to be attached only if those nodes are narrowed at their split"
+  }
 }

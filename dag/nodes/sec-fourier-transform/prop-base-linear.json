@@ -1,179 +1,192 @@
 {
- "id": "prop-base-linear",
- "blueprint": {
-  "is": "prop-base-linear",
-  "from": null,
-  "same_as": null
- },
- "kind": "statement",
- "title": "P7: the transform is linear over the base",
- "statement": "Let $V_0\\to S_0$ be the rank-$r$ vector bundle of [def-fd-kernel], let\n$p:V\\to S$ and $p':V^\\vee\\to S$ be the structure morphisms, and let\n$\\operatorname{FT}_\\psi$ be the transform of [def-fd-transform]. For\n$K\\in D^b_c(V,E)$ and $N\\in D^b_c(S,E)$ there is an isomorphism, natural\nin $K$ and $N$,\n\n$$\n\\operatorname{FT}_\\psi\\bigl(K\\otimes^L_Ep^*N\\bigr)\\cong\n\\operatorname{FT}_\\psi(K)\\otimes^L_E{p'}^*N .\n$$\n\nIn particular:\n\n1. for $N$ from the base,\n   $\\operatorname{FT}_\\psi(p^*N)\\cong\\operatorname{FT}_\\psi(\\underline{E})\\otimes^L_E{p'}^*N$,\n   so the transform of a base-changed sheaf is the base change of the\n   transform of the unit;\n2. (*Tate twists*) for every $m\\in\\mathbf Z$ and every $K$,\n   $$\n   \\operatorname{FT}_\\psi\\bigl(K(m)\\bigr)\\cong\\operatorname{FT}_\\psi(K)(m),\n   $$\n   with the Tate twist of [def-wf-tate-twist]; if $K$ carries a Weil\n   structure, this isomorphism is one of Weil complexes.",
- "source": {
-  "document": "literature/blueprint/master/blueprint/sec-fourier-transform/sk-prop-base-linear/prop-base-linear.md",
-  "place": "node prop-base-linear, order 2705"
- },
- "stmt_deps": [
-  "def-fd-kernel",
-  "def-fd-transform",
-  "def-wf-tate-twist"
- ],
- "proof": [
-  {
-   "text": "Write $\\pi:V\\times_SV^\\vee\\to S$ for the structure morphism of the Fourier\nsquare, so that $p\\circ p_1=\\pi=p'\\circ p_2$. Pullback is monoidal and\ncompatible with composition, hence\n\n$$\np_1^*\\bigl(K\\otimes^L_Ep^*N\\bigr)\\cong p_1^*K\\otimes^L_Ep_1^*p^*N\n\\cong p_1^*K\\otimes^L_E\\pi^*N\\cong p_1^*K\\otimes^L_Ep_2^*{p'}^*N .\n$$",
-   "uses": [],
-   "elementary": null
+  "id": "prop-base-linear",
+  "blueprint": {
+    "is": "prop-base-linear",
+    "from": null,
+    "same_as": null
   },
-  {
-   "text": "Tensoring with the kernel $\\mathcal K_\\psi$ of [def-fd-kernel] and using\nthe associativity and commutativity constraints of $\\otimes^L_E$ gives\n\n$$\np_1^*\\bigl(K\\otimes^L_Ep^*N\\bigr)\\otimes^L_E\\mathcal K_\\psi\\cong\n\\bigl(p_1^*K\\otimes^L_E\\mathcal K_\\psi\\bigr)\\otimes^L_Ep_2^*\\bigl({p'}^*N\\bigr).\n$$",
-   "uses": [
-    "def-fd-kernel"
-   ],
-   "elementary": false
+  "kind": "statement",
+  "title": "P7: the transform is linear over the base",
+  "statement": "Let $V_0\\to S_0$ be the rank-$r$ vector bundle of [def-fd-kernel], let\n$p:V\\to S$ and $p':V^\\vee\\to S$ be the structure morphisms, and let\n$\\operatorname{FT}_\\psi$ be the transform of [def-fd-transform]. For\n$K\\in D^b_c(V,E)$ and $N\\in D^b_c(S,E)$ there is an isomorphism, natural\nin $K$ and $N$,\n\n$$\n\\operatorname{FT}_\\psi\\bigl(K\\otimes^L_Ep^*N\\bigr)\\cong\n\\operatorname{FT}_\\psi(K)\\otimes^L_E{p'}^*N .\n$$\n\nIn particular:\n\n1. for $N$ from the base,\n   $\\operatorname{FT}_\\psi(p^*N)\\cong\\operatorname{FT}_\\psi(\\underline{E})\\otimes^L_E{p'}^*N$,\n   so the transform of a base-changed sheaf is the base change of the\n   transform of the unit;\n2. (*Tate twists*) for every $m\\in\\mathbf Z$ and every $K$,\n   $$\n   \\operatorname{FT}_\\psi\\bigl(K(m)\\bigr)\\cong\\operatorname{FT}_\\psi(K)(m),\n   $$\n   with the Tate twist of [def-wf-tate-twist]; if $K$ carries a Weil\n   structure, this isomorphism is one of Weil complexes.",
+  "source": {
+    "document": "literature/blueprint/master/blueprint/sec-fourier-transform/sk-prop-base-linear/prop-base-linear.md",
+    "place": "node prop-base-linear, order 2705"
   },
-  {
-   "text": "The first factor $A:=p_1^*K\\otimes^L_E\\mathcal K_\\psi$ lies in\n$D^b_c(V\\times_SV^\\vee,E)$ ($\\mathcal K_\\psi$ being lisse of rank one),\nand $L:={p'}^*N\\in D^b_c(V^\\vee,E)$ has finite Tor amplitude because\n$E$ is a field. The morphism $p_2$ is separated of finite type, so the\ncompact-support projection formula, clause (5) of\n[prop-functor-package], gives\n\n$$\np_{2,!}\\bigl(A\\otimes^L_Ep_2^*L\\bigr)\\cong p_{2,!}(A)\\otimes^L_EL .\n$$",
-   "uses": [
-    "prop-functor-package"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Finally the shift commutes with tensoring by $L$,\n$(X\\otimes^L_EL)[r]\\cong X[r]\\otimes^L_EL$, and by the definition\n[def-fd-transform] the two sides are\n$\\operatorname{FT}_\\psi(K\\otimes^L_Ep^*N)$ and\n$\\operatorname{FT}_\\psi(K)\\otimes^L_E{p'}^*N$. Each isomorphism used is a\nnatural transformation, whence naturality in $K$ and $N$.",
-   "uses": [
-    "def-fd-transform"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "(1) is the case $K=\\underline E=E_V$, since $E_V\\otimes^L_Ep^*N\\cong p^*N$.",
-   "uses": [],
-   "elementary": null
-  },
-  {
-   "text": "(2) Let $E_S(m)$, $E_V(m)$, $E_{V^\\vee}(m)$ be the twisting objects of\n[def-wf-tate-twist] on $S$, $V$, $V^\\vee$. For any morphism $f:X\\to Y$\nthe canonical isomorphisms $f^*\\mu_{\\ell^n,Y}\\cong\\mu_{\\ell^n,X}$\n(both being the sheaf represented by the group scheme $\\mu_{\\ell^n}$)\nare compatible with the $\\ell$-th power transition maps; since\n$\\mathbf Z_\\ell(1)_Y$ is pro-etale locally isomorphic to the constant\nsheaf $\\mathbf Z_\\ell$, whose pullback is again $\\mathbf Z_\\ell$, the\npullback commutes with this limit, and they give\n$f^*E_Y(1)\\cong E_X(1)$; since $f^*$ is monoidal, this gives\n$f^*E_Y(m)\\cong E_X(m)$ for $m\\ge0$, and, $E_Y(m)$ being invertible\n(lisse of rank one) with inverse $E_Y(-m)=R\\mathcal Hom_E(E_Y(m),E_Y)$,\npullback commutes with this dual, which gives the case $m<0$. Hence\n$K(m)=K\\otimes^L_EE_V(m)\\cong K\\otimes^L_Ep^*E_S(m)$ and\n$\\operatorname{FT}_\\psi(K)(m)\\cong\\operatorname{FT}_\\psi(K)\\otimes^L_E{p'}^*E_S(m)$,\nand the main isomorphism with $N=E_S(m)$ gives (2). The Frobenius\npullbacks commute with all the canonical isomorphisms used (monoidality\nof pullback, the projection-formula map, the pullback of roots of\nunity), so a Weil structure on $K$ is carried to the Weil structure on\nboth sides.",
-   "uses": [
+  "stmt_deps": [
+    "def-fd-kernel",
+    "def-fd-transform",
     "def-wf-tate-twist"
-   ],
-   "elementary": false
-  }
- ],
- "proof_deps": [
-  "def-fd-kernel",
-  "prop-functor-package",
-  "def-fd-transform",
-  "def-wf-tate-twist"
- ],
- "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-fourier-transform/sk-prop-base-linear/prop-base-linear.md",
-  "place": "## Proof"
- },
- "mathlib_searches": [
-  {
-   "tool": "text search of the local Mathlib checkout (0df444a360)",
-   "query": "AlgebraicGeometry.Etale.fourierTransformTensorIso",
-   "results": [],
-   "date": "2026-10-08"
-  }
- ],
- "mathlib_match": null,
- "status": "imported",
- "merged_into": null,
- "import_flags": [
-  "lean_not_found"
- ],
- "blueprint_kind": "theorem",
- "blueprint_order": 2705,
- "blueprint_uses": [
-  "def-fd-kernel",
-  "def-fd-transform",
-  "def-wf-tate-twist",
-  "prop-functor-package"
- ],
- "blueprint_lean": [
-  "AlgebraicGeometry.Etale.fourierTransformTensorIso"
- ],
- "blueprint_lean_not_found": [
-  "AlgebraicGeometry.Etale.fourierTransformTensorIso"
- ],
- "blueprint_tags": [
-  "latex:proposition"
- ],
- "proof_split_by": "paragraphs",
- "lean_audit": {
-  "master": {
-   "state": "none",
-   "decls": [],
-   "missing": [
-    "AlgebraicGeometry.Etale.fourierTransformTensorIso"
-   ]
+  ],
+  "proof": [
+    {
+      "text": "Write $\\pi:V\\times_SV^\\vee\\to S$ for the structure morphism of the Fourier\nsquare, so that $p\\circ p_1=\\pi=p'\\circ p_2$. Pullback is monoidal and\ncompatible with composition, hence\n\n$$\np_1^*\\bigl(K\\otimes^L_Ep^*N\\bigr)\\cong p_1^*K\\otimes^L_Ep_1^*p^*N\n\\cong p_1^*K\\otimes^L_E\\pi^*N\\cong p_1^*K\\otimes^L_Ep_2^*{p'}^*N .\n$$",
+      "uses": [],
+      "elementary": null
+    },
+    {
+      "text": "Tensoring with the kernel $\\mathcal K_\\psi$ of [def-fd-kernel] and using\nthe associativity and commutativity constraints of $\\otimes^L_E$ gives\n\n$$\np_1^*\\bigl(K\\otimes^L_Ep^*N\\bigr)\\otimes^L_E\\mathcal K_\\psi\\cong\n\\bigl(p_1^*K\\otimes^L_E\\mathcal K_\\psi\\bigr)\\otimes^L_Ep_2^*\\bigl({p'}^*N\\bigr).\n$$",
+      "uses": [
+        "def-fd-kernel"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "The first factor $A:=p_1^*K\\otimes^L_E\\mathcal K_\\psi$ lies in\n$D^b_c(V\\times_SV^\\vee,E)$ ($\\mathcal K_\\psi$ being lisse of rank one),\nand $L:={p'}^*N\\in D^b_c(V^\\vee,E)$ has finite Tor amplitude because\n$E$ is a field. The morphism $p_2$ is separated of finite type, so the\ncompact-support projection formula, clause (5) of\n[prop-functor-package], gives\n\n$$\np_{2,!}\\bigl(A\\otimes^L_Ep_2^*L\\bigr)\\cong p_{2,!}(A)\\otimes^L_EL .\n$$",
+      "uses": [
+        "prop-functor-package"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "Finally the shift commutes with tensoring by $L$,\n$(X\\otimes^L_EL)[r]\\cong X[r]\\otimes^L_EL$, and by the definition\n[def-fd-transform] the two sides are\n$\\operatorname{FT}_\\psi(K\\otimes^L_Ep^*N)$ and\n$\\operatorname{FT}_\\psi(K)\\otimes^L_E{p'}^*N$. Each isomorphism used is a\nnatural transformation, whence naturality in $K$ and $N$.",
+      "uses": [
+        "def-fd-transform"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "(1) is the case $K=\\underline E=E_V$, since $E_V\\otimes^L_Ep^*N\\cong p^*N$.",
+      "uses": [],
+      "elementary": null
+    },
+    {
+      "text": "(2) Let $E_S(m)$, $E_V(m)$, $E_{V^\\vee}(m)$ be the twisting objects of\n[def-wf-tate-twist] on $S$, $V$, $V^\\vee$. For any morphism $f:X\\to Y$\nthe canonical isomorphisms $f^*\\mu_{\\ell^n,Y}\\cong\\mu_{\\ell^n,X}$\n(both being the sheaf represented by the group scheme $\\mu_{\\ell^n}$)\nare compatible with the $\\ell$-th power transition maps; since\n$\\mathbf Z_\\ell(1)_Y$ is pro-etale locally isomorphic to the constant\nsheaf $\\mathbf Z_\\ell$, whose pullback is again $\\mathbf Z_\\ell$, the\npullback commutes with this limit, and they give\n$f^*E_Y(1)\\cong E_X(1)$; since $f^*$ is monoidal, this gives\n$f^*E_Y(m)\\cong E_X(m)$ for $m\\ge0$, and, $E_Y(m)$ being invertible\n(lisse of rank one) with inverse $E_Y(-m)=R\\mathcal Hom_E(E_Y(m),E_Y)$,\npullback commutes with this dual, which gives the case $m<0$. Hence\n$K(m)=K\\otimes^L_EE_V(m)\\cong K\\otimes^L_Ep^*E_S(m)$ and\n$\\operatorname{FT}_\\psi(K)(m)\\cong\\operatorname{FT}_\\psi(K)\\otimes^L_E{p'}^*E_S(m)$,\nand the main isomorphism with $N=E_S(m)$ gives (2). The Frobenius\npullbacks commute with all the canonical isomorphisms used (monoidality\nof pullback, the projection-formula map, the pullback of roots of\nunity), so a Weil structure on $K$ is carried to the Weil structure on\nboth sides.",
+      "uses": [
+        "def-wf-tate-twist"
+      ],
+      "elementary": false
+    }
+  ],
+  "proof_deps": [
+    "def-fd-kernel",
+    "prop-functor-package",
+    "def-fd-transform",
+    "def-wf-tate-twist"
+  ],
+  "proof_origin": {
+    "by": "agent",
+    "document": "literature/blueprint/master/blueprint/sec-fourier-transform/sk-prop-base-linear/prop-base-linear.md",
+    "place": "## Proof"
   },
-  "slopmaster2": {
-   "state": "sorry_here",
-   "decls": [
+  "mathlib_searches": [
     {
-     "name": "AlgebraicGeometry.Etale.nonempty_iso_fourierTransform_tensor",
-     "module": "WeilConjectures.FourierTransform.Properties",
-     "lines": [
-      431,
-      461
-     ],
-     "kind": "theorem",
-     "sorry": false,
-     "partial": "`sk-prop-base-linear`; blueprint: `prop-base-linear`"
-    },
-    {
-     "name": "AlgebraicGeometry.Etale.nonempty_iso_fourierTransform_tateTwist",
-     "module": "WeilConjectures.FourierTransform.Properties",
-     "lines": [
-      463,
-      495
-     ],
-     "kind": "theorem",
-     "sorry": false,
-     "partial": "`sk-prop-base-linear`; blueprint: `prop-base-linear`, clause (2"
-    },
-    {
-     "name": "AlgebraicGeometry.nonempty_iso_fourierTransform_tateTwist",
-     "module": "WeilConjectures.WeilSheaf.TateTwist",
-     "lines": [
-      191,
-      203
-     ],
-     "kind": "theorem",
-     "sorry": true,
-     "partial": "`prop-base-linear`, clause (2"
+      "tool": "text search of the local Mathlib checkout (0df444a360)",
+      "query": "AlgebraicGeometry.Etale.fourierTransformTensorIso",
+      "results": [],
+      "date": "2026-10-08"
     }
-   ],
-   "missing": [
+  ],
+  "mathlib_match": null,
+  "status": "imported",
+  "merged_into": null,
+  "import_flags": [
+    "lean_not_found"
+  ],
+  "blueprint_kind": "theorem",
+  "blueprint_order": 2705,
+  "blueprint_uses": [
+    "def-fd-kernel",
+    "def-fd-transform",
+    "def-wf-tate-twist",
+    "prop-functor-package"
+  ],
+  "blueprint_lean": [
     "AlgebraicGeometry.Etale.fourierTransformTensorIso"
-   ],
-   "open": [
-    {
-     "name": "AlgebraicGeometry.Etale.isIso_projectionMap_of_finite",
-     "module": "WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula",
-     "lines": [
-      255,
-      275
-     ],
-     "kind": "theorem",
-     "nodes": [],
-     "below": false
+  ],
+  "blueprint_lean_not_found": [
+    "AlgebraicGeometry.Etale.fourierTransformTensorIso"
+  ],
+  "blueprint_tags": [
+    "latex:proposition"
+  ],
+  "proof_split_by": "paragraphs",
+  "lean_audit": {
+    "master": {
+      "state": "none",
+      "decls": [],
+      "missing": [
+        "AlgebraicGeometry.Etale.fourierTransformTensorIso"
+      ]
     },
-    {
-     "name": "AlgebraicGeometry.Etale.nonempty_iso_kernelTransform_shift",
-     "module": "WeilConjectures.SixFunctors.Etale.Derived.KernelTransform",
-     "lines": [
-      171,
-      180
-     ],
-     "kind": "theorem",
-     "nodes": [],
-     "below": false
+    "slopmaster2": {
+      "state": "sorry_here",
+      "decls": [
+        {
+          "name": "AlgebraicGeometry.Etale.nonempty_iso_fourierTransform_tensor",
+          "module": "WeilConjectures.FourierTransform.Properties",
+          "lines": [
+            431,
+            461
+          ],
+          "kind": "theorem",
+          "sorry": false,
+          "partial": "`sk-prop-base-linear`; blueprint: `prop-base-linear`"
+        },
+        {
+          "name": "AlgebraicGeometry.Etale.nonempty_iso_fourierTransform_tateTwist",
+          "module": "WeilConjectures.FourierTransform.Properties",
+          "lines": [
+            463,
+            495
+          ],
+          "kind": "theorem",
+          "sorry": false,
+          "partial": "`sk-prop-base-linear`; blueprint: `prop-base-linear`, clause (2"
+        },
+        {
+          "name": "AlgebraicGeometry.nonempty_iso_fourierTransform_tateTwist",
+          "module": "WeilConjectures.WeilSheaf.TateTwist",
+          "lines": [
+            191,
+            203
+          ],
+          "kind": "theorem",
+          "sorry": true,
+          "partial": "`prop-base-linear`, clause (2"
+        }
+      ],
+      "missing": [
+        "AlgebraicGeometry.Etale.fourierTransformTensorIso"
+      ],
+      "open": [
+        {
+          "name": "AlgebraicGeometry.Etale.isIso_projectionMap_of_finite",
+          "module": "WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula",
+          "lines": [
+            255,
+            275
+          ],
+          "kind": "theorem",
+          "nodes": [],
+          "below": false
+        },
+        {
+          "name": "AlgebraicGeometry.Etale.nonempty_iso_kernelTransform_shift",
+          "module": "WeilConjectures.SixFunctors.Etale.Derived.KernelTransform",
+          "lines": [
+            171,
+            180
+          ],
+          "kind": "theorem",
+          "nodes": [],
+          "below": false
+        }
+      ]
     }
-   ]
+  },
+  "chapter": "sec-fourier-transform",
+  "unit": "sk-prop-base-linear",
+  "lean": {
+    "module": "WeilConjectures.FourierTransform.Properties",
+    "declaration": "AlgebraicGeometry.Etale.nonempty_iso_fourierTransform_tensor",
+    "branch": "slopmaster2",
+    "line": 431,
+    "declarations": [
+      "AlgebraicGeometry.Etale.nonempty_iso_fourierTransform_tensor",
+      "AlgebraicGeometry.Etale.nonempty_iso_fourierTransform_tateTwist",
+      "AlgebraicGeometry.nonempty_iso_fourierTransform_tateTwist"
+    ],
+    "sorry_free": false,
+    "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state sorry_here)"
   }
- },
- "chapter": "sec-fourier-transform",
- "unit": "sk-prop-base-linear"
 }

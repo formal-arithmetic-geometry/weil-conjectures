@@ -1,128 +1,132 @@
 {
- "id": "lem-zl-noether-normalization-dimension",
- "blueprint": {
-  "is": "lem-zl-noether-normalization-dimension",
-  "from": null,
-  "same_as": null
- },
- "kind": "statement",
- "title": "The number of Noether coordinates is the Krull dimension",
- "statement": "Let $K$ be a field, $B\\neq0$ a finitely generated commutative\n$K$-algebra, and $K[T_1,\\ldots,T_d]\\to B$ an injective $K$-algebra\nhomomorphism over which $B$ is a finitely generated module (such a\nmap exists by [lem-zl-noether-normalization-field]). Then\n$d=\\dim B$, the Krull dimension of $B$; in particular\n$\\dim B<\\infty$.\n\nIn particular, if $B$ has Krull dimension one, there is an injective\n$K$-algebra homomorphism $K[T]\\to B$ making $B$ a finite\n$K[T]$-module. This holds in particular over finite fields $K$, and\napplies to the coordinate rings of affine charts of the curves over\n$\\mathbf F_q$ considered in this part.",
- "source": {
-  "document": "literature/blueprint/master/blueprint/sec-purity-real-sheaves/sk-i-real-normalization/lem-zl-noether-normalization-dimension.md",
-  "place": "node lem-zl-noether-normalization-dimension, order 2649",
-  "external": [
-   {
-    "document": "Stacks Project",
-    "place": "Tag 00OY"
-   },
-   {
-    "document": "Stacks Project",
-    "place": "Tag 00OK"
-   }
-  ]
- },
- "stmt_deps": [
-  "lem-zl-noether-normalization-field"
- ],
- "proof": [
-  {
-   "text": "Put $A=K[T_1,\\ldots,T_d]$ and regard $A\\subseteq B$. A finite\nextension is integral, since each element of $B$ acts on the finite\n$A$-module $B$ and satisfies the monic characteristic polynomial of that\naction (determinant trick). We show $\\dim B=\\dim A$ and then\n$\\dim A=d$.",
-   "uses": [],
-   "elementary": null
+  "id": "lem-zl-noether-normalization-dimension",
+  "blueprint": {
+    "is": "lem-zl-noether-normalization-dimension",
+    "from": null,
+    "same_as": null
   },
-  {
-   "text": "*Step 1 ($\\dim B\\le\\dim A$; incomparability, [pqf-lem-incomparability]).* Let\n$\\mathfrak q\\subsetneq\\mathfrak q'$ be primes of $B$; we claim\n$\\mathfrak q\\cap A\\neq\\mathfrak q'\\cap A$. Suppose both contract to\n$\\mathfrak p$. Then $A/\\mathfrak p\\hookrightarrow B/\\mathfrak q$ is\ninjective and integral, $B/\\mathfrak q$ is a domain, and\n$\\mathfrak q'/\\mathfrak q$ is a nonzero prime contracting to $0$. Pick\n$0\\neq b\\in\\mathfrak q'/\\mathfrak q$ and a monic equation\n$b^n+a_{n-1}b^{n-1}+\\cdots+a_0=0$ over $A/\\mathfrak p$ of minimal\ndegree $n$. Then $a_0\\neq0$: otherwise\n$b(b^{n-1}+\\cdots+a_1)=0$ in the domain $B/\\mathfrak q$ with $b\\ne0$\ngives an equation of smaller degree. But\n$a_0=-b(b^{n-1}+\\cdots+a_1)\\in(\\mathfrak q'/\\mathfrak q)\\cap\n(A/\\mathfrak p)=0$, a contradiction. Hence a strict chain\n$\\mathfrak q_0\\subsetneq\\cdots\\subsetneq\\mathfrak q_r$ in $B$ contracts\nto a strict chain of primes of $A$ of the same length, so\n$\\dim B\\le\\dim A$.",
-   "uses": [
-    "pqf-lem-incomparability"
-   ],
-   "elementary": false
+  "kind": "statement",
+  "title": "The number of Noether coordinates is the Krull dimension",
+  "statement": "Let $K$ be a field, $B\\neq0$ a finitely generated commutative\n$K$-algebra, and $K[T_1,\\ldots,T_d]\\to B$ an injective $K$-algebra\nhomomorphism over which $B$ is a finitely generated module (such a\nmap exists by [lem-zl-noether-normalization-field]). Then\n$d=\\dim B$, the Krull dimension of $B$; in particular\n$\\dim B<\\infty$.\n\nIn particular, if $B$ has Krull dimension one, there is an injective\n$K$-algebra homomorphism $K[T]\\to B$ making $B$ a finite\n$K[T]$-module. This holds in particular over finite fields $K$, and\napplies to the coordinate rings of affine charts of the curves over\n$\\mathbf F_q$ considered in this part.",
+  "source": {
+    "document": "literature/blueprint/master/blueprint/sec-purity-real-sheaves/sk-i-real-normalization/lem-zl-noether-normalization-dimension.md",
+    "place": "node lem-zl-noether-normalization-dimension, order 2649",
+    "external": [
+      {
+        "document": "Stacks Project",
+        "place": "Tag 00OY"
+      },
+      {
+        "document": "Stacks Project",
+        "place": "Tag 00OK"
+      }
+    ]
   },
-  {
-   "text": "*Step 2 ($\\dim B\\ge\\dim A$; lifting chains).* Let\n$\\mathfrak p_0\\subsetneq\\cdots\\subsetneq\\mathfrak p_r$ be a chain of\nprimes of $A$. By lying over [pqf-lem-lying-over] (the map $A\\to B$ is\ninjective and integral) there is a prime $\\mathfrak q_0$ of $B$ over\n$\\mathfrak p_0$, and by going up [pqf-lem-going-up], inductively, primes\n$\\mathfrak q_0\\subseteq\\mathfrak q_1\\subseteq\\cdots\\subseteq\\mathfrak q_r$\nwith $\\mathfrak q_i\\cap A=\\mathfrak p_i$. These inclusions are strict\nbecause the contractions are distinct. Hence $\\dim B\\ge\\dim A$.",
-   "uses": [
-    "pqf-lem-lying-over",
-    "pqf-lem-going-up"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "*Step 3 ($\\dim A=d$).* The chain\n$0\\subsetneq(T_1)\\subsetneq(T_1,T_2)\\subsetneq\\cdots\\subsetneq\n(T_1,\\ldots,T_d)$ of primes of $A$ shows $\\dim A\\ge d$. That\n$\\dim K[T_1,\\ldots,T_d]\\le d$, hence $=d$, is the standard\ncomputation of the dimension of a polynomial ring over a field (for\ninstance: a strict chain of primes of a finitely generated domain over\n$K$ strictly decreases the transcendence degree of the fraction fields\nof the successive quotients, and\n$\\operatorname{Frac}A=K(T_1,\\ldots,T_d)$ has transcendence degree $d$;\nsee Stacks Project, Commutative Algebra, the section on dimension of\nfinite type algebras over fields).\n\nCombining the three steps, $\\dim B=\\dim A=d$. For the final\nassertion, apply [lem-zl-noether-normalization-field] to $B$ with\n$\\dim B=1$: it gives some $K[T_1,\\ldots,T_d]\\to B$ injective and finite,\nand the first part forces $d=1$; put $T=T_1$. This is Stacks Project,\nLemma 10.115.4 ([Tag 00OY](https://stacks.math.columbia.edu/tag/00OY)),\ntogether with the equality of dimensions along an integral injective\nmap ([Tag 00OK](https://stacks.math.columbia.edu/tag/00OK)),\nspecialized to $\\dim B=1$.",
-   "uses": [
+  "stmt_deps": [
     "lem-zl-noether-normalization-field"
-   ],
-   "elementary": false
-  }
- ],
- "proof_deps": [
-  "pqf-lem-incomparability",
-  "pqf-lem-lying-over",
-  "pqf-lem-going-up",
-  "lem-zl-noether-normalization-field"
- ],
- "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-purity-real-sheaves/sk-i-real-normalization/lem-zl-noether-normalization-dimension.md",
-  "place": "## Proof"
- },
- "mathlib_searches": [],
- "mathlib_match": null,
- "status": "imported",
- "merged_into": null,
- "import_flags": [
-  "proof_cites_literature"
- ],
- "blueprint_kind": "lemma",
- "blueprint_order": 2649,
- "blueprint_uses": [
-  "lem-zl-noether-normalization-field",
-  "pqf-lem-going-up",
-  "pqf-lem-incomparability",
-  "pqf-lem-lying-over"
- ],
- "proof_split_by": "labels",
- "lean_audit": {
-  "master": {
-   "state": "none",
-   "decls": [],
-   "missing": []
-  },
-  "slopmaster2": {
-   "state": "closed",
-   "decls": [
+  ],
+  "proof": [
     {
-     "name": "ringKrullDim_eq_of_finite_inj_algHom_mvPolynomial",
-     "module": "WeilConjectures.Mathlib.RingTheory.NoetherNormalization",
-     "lines": [
-      58,
-      74
-     ],
-     "kind": "theorem",
-     "sorry": false
+      "text": "Put $A=K[T_1,\\ldots,T_d]$ and regard $A\\subseteq B$. A finite\nextension is integral, since each element of $B$ acts on the finite\n$A$-module $B$ and satisfies the monic characteristic polynomial of that\naction (determinant trick). We show $\\dim B=\\dim A$ and then\n$\\dim A=d$.",
+      "uses": [],
+      "elementary": null
     },
     {
-     "name": "exists_finite_inj_algHom_polynomial_of_ringKrullDim_eq_one",
-     "module": "WeilConjectures.Mathlib.RingTheory.NoetherNormalization",
-     "lines": [
-      96,
-      111
-     ],
-     "kind": "theorem",
-     "sorry": false
+      "text": "*Step 1 ($\\dim B\\le\\dim A$; incomparability, [pqf-lem-incomparability]).* Let\n$\\mathfrak q\\subsetneq\\mathfrak q'$ be primes of $B$; we claim\n$\\mathfrak q\\cap A\\neq\\mathfrak q'\\cap A$. Suppose both contract to\n$\\mathfrak p$. Then $A/\\mathfrak p\\hookrightarrow B/\\mathfrak q$ is\ninjective and integral, $B/\\mathfrak q$ is a domain, and\n$\\mathfrak q'/\\mathfrak q$ is a nonzero prime contracting to $0$. Pick\n$0\\neq b\\in\\mathfrak q'/\\mathfrak q$ and a monic equation\n$b^n+a_{n-1}b^{n-1}+\\cdots+a_0=0$ over $A/\\mathfrak p$ of minimal\ndegree $n$. Then $a_0\\neq0$: otherwise\n$b(b^{n-1}+\\cdots+a_1)=0$ in the domain $B/\\mathfrak q$ with $b\\ne0$\ngives an equation of smaller degree. But\n$a_0=-b(b^{n-1}+\\cdots+a_1)\\in(\\mathfrak q'/\\mathfrak q)\\cap\n(A/\\mathfrak p)=0$, a contradiction. Hence a strict chain\n$\\mathfrak q_0\\subsetneq\\cdots\\subsetneq\\mathfrak q_r$ in $B$ contracts\nto a strict chain of primes of $A$ of the same length, so\n$\\dim B\\le\\dim A$.",
+      "uses": [
+        "pqf-lem-incomparability"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "*Step 2 ($\\dim B\\ge\\dim A$; lifting chains).* Let\n$\\mathfrak p_0\\subsetneq\\cdots\\subsetneq\\mathfrak p_r$ be a chain of\nprimes of $A$. By lying over [pqf-lem-lying-over] (the map $A\\to B$ is\ninjective and integral) there is a prime $\\mathfrak q_0$ of $B$ over\n$\\mathfrak p_0$, and by going up [pqf-lem-going-up], inductively, primes\n$\\mathfrak q_0\\subseteq\\mathfrak q_1\\subseteq\\cdots\\subseteq\\mathfrak q_r$\nwith $\\mathfrak q_i\\cap A=\\mathfrak p_i$. These inclusions are strict\nbecause the contractions are distinct. Hence $\\dim B\\ge\\dim A$.",
+      "uses": [
+        "pqf-lem-lying-over",
+        "pqf-lem-going-up"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "*Step 3 ($\\dim A=d$).* The chain\n$0\\subsetneq(T_1)\\subsetneq(T_1,T_2)\\subsetneq\\cdots\\subsetneq\n(T_1,\\ldots,T_d)$ of primes of $A$ shows $\\dim A\\ge d$. That\n$\\dim K[T_1,\\ldots,T_d]\\le d$, hence $=d$, is the standard\ncomputation of the dimension of a polynomial ring over a field (for\ninstance: a strict chain of primes of a finitely generated domain over\n$K$ strictly decreases the transcendence degree of the fraction fields\nof the successive quotients, and\n$\\operatorname{Frac}A=K(T_1,\\ldots,T_d)$ has transcendence degree $d$;\nsee Stacks Project, Commutative Algebra, the section on dimension of\nfinite type algebras over fields).\n\nCombining the three steps, $\\dim B=\\dim A=d$. For the final\nassertion, apply [lem-zl-noether-normalization-field] to $B$ with\n$\\dim B=1$: it gives some $K[T_1,\\ldots,T_d]\\to B$ injective and finite,\nand the first part forces $d=1$; put $T=T_1$. This is Stacks Project,\nLemma 10.115.4 ([Tag 00OY](https://stacks.math.columbia.edu/tag/00OY)),\ntogether with the equality of dimensions along an integral injective\nmap ([Tag 00OK](https://stacks.math.columbia.edu/tag/00OK)),\nspecialized to $\\dim B=1$.",
+      "uses": [
+        "lem-zl-noether-normalization-field"
+      ],
+      "elementary": false
     }
-   ],
-   "missing": [],
-   "open": []
-  }
- },
- "chapter": "sec-purity-real-sheaves",
- "unit": "sk-i-real-normalization",
- "lean": {
-  "branch": "slopmaster2",
-  "declarations": [
-   "ringKrullDim_eq_of_finite_inj_algHom_mvPolynomial",
-   "exists_finite_inj_algHom_polynomial_of_ringKrullDim_eq_one"
   ],
-  "note": "attached by the lead's tool attach.py 2026-10-10 23:07 UTC for group M1, the statement match confirmed by two remote workers, sorry-free and resting on no sorry by sorry_map_slopmaster2_71d63dcf.jsonl.gz: The first gives the dimension equality and finiteness, and the second gives the one-dimensional finite injec"
- }
+  "proof_deps": [
+    "pqf-lem-incomparability",
+    "pqf-lem-lying-over",
+    "pqf-lem-going-up",
+    "lem-zl-noether-normalization-field"
+  ],
+  "proof_origin": {
+    "by": "agent",
+    "document": "literature/blueprint/master/blueprint/sec-purity-real-sheaves/sk-i-real-normalization/lem-zl-noether-normalization-dimension.md",
+    "place": "## Proof"
+  },
+  "mathlib_searches": [],
+  "mathlib_match": null,
+  "status": "imported",
+  "merged_into": null,
+  "import_flags": [
+    "proof_cites_literature"
+  ],
+  "blueprint_kind": "lemma",
+  "blueprint_order": 2649,
+  "blueprint_uses": [
+    "lem-zl-noether-normalization-field",
+    "pqf-lem-going-up",
+    "pqf-lem-incomparability",
+    "pqf-lem-lying-over"
+  ],
+  "proof_split_by": "labels",
+  "lean_audit": {
+    "master": {
+      "state": "none",
+      "decls": [],
+      "missing": []
+    },
+    "slopmaster2": {
+      "state": "closed",
+      "decls": [
+        {
+          "name": "ringKrullDim_eq_of_finite_inj_algHom_mvPolynomial",
+          "module": "WeilConjectures.Mathlib.RingTheory.NoetherNormalization",
+          "lines": [
+            58,
+            74
+          ],
+          "kind": "theorem",
+          "sorry": false
+        },
+        {
+          "name": "exists_finite_inj_algHom_polynomial_of_ringKrullDim_eq_one",
+          "module": "WeilConjectures.Mathlib.RingTheory.NoetherNormalization",
+          "lines": [
+            96,
+            111
+          ],
+          "kind": "theorem",
+          "sorry": false
+        }
+      ],
+      "missing": [],
+      "open": []
+    }
+  },
+  "chapter": "sec-purity-real-sheaves",
+  "unit": "sk-i-real-normalization",
+  "lean": {
+    "module": "WeilConjectures.Mathlib.RingTheory.NoetherNormalization",
+    "declaration": "ringKrullDim_eq_of_finite_inj_algHom_mvPolynomial",
+    "branch": "slopmaster2",
+    "line": 58,
+    "declarations": [
+      "ringKrullDim_eq_of_finite_inj_algHom_mvPolynomial",
+      "exists_finite_inj_algHom_polynomial_of_ringKrullDim_eq_one"
+    ],
+    "sorry_free": true,
+    "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state closed)"
+  }
 }

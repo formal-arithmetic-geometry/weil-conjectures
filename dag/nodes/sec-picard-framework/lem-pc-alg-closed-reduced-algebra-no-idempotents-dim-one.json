@@ -1,105 +1,109 @@
 {
- "id": "lem-pc-alg-closed-reduced-algebra-no-idempotents-dim-one",
- "blueprint": {
-  "is": null,
-  "from": {
-   "node": "lem-pc-h0-geom-connected",
-   "place": "proof, second paragraph: 'it is reduced ... and has no nontrivial idempotents (connectedness), hence it is a finite product of finite field extensions of $\\Omega$ with exactly one factor: it is a finite field extension of $\\Omega$; by [lem-pc-finite-extension-alg-closed] it equals $\\Omega$'",
-   "via": []
+  "id": "lem-pc-alg-closed-reduced-algebra-no-idempotents-dim-one",
+  "blueprint": {
+    "is": null,
+    "from": {
+      "node": "lem-pc-h0-geom-connected",
+      "place": "proof, second paragraph: 'it is reduced ... and has no nontrivial idempotents (connectedness), hence it is a finite product of finite field extensions of $\\Omega$ with exactly one factor: it is a finite field extension of $\\Omega$; by [lem-pc-finite-extension-alg-closed] it equals $\\Omega$'",
+      "via": []
+    },
+    "same_as": []
   },
-  "same_as": []
- },
- "kind": "statement",
- "title": "A nonzero finite reduced algebra without nontrivial idempotents over an algebraically closed field has dimension 1",
- "statement": "Let $K$ be an algebraically closed field [def-weil-algebraic-closure] and let $B$ be a commutative $K$-algebra which is finite-dimensional as a $K$-vector space, is reduced (has no nonzero nilpotent element), is not the zero ring ($1\\neq0$ in $B$), and whose only idempotents $e=e^2$ are $0$ and $1$. Then $\\dim_KB=1$, i.e. the structure map $K\\to B$ is bijective.",
- "source": {
-  "document": "literature/stacks-project/varieties.tex",
-  "place": "Lemma 0BUG (lemma-proper-geometrically-reduced-global-sections), proof of parts (2), (3) and (7): a finite-dimensional algebra is a product of Artinian local rings (Algebra 00J6, 00KJ), the reduced ones are fields (00EU), and a field finite over the algebraically closed $\\overline k$ is $\\overline k$. Stated in Lean as IsAlgClosed.finrank_eq_one_of_isReduced, module WeilConjectures.Mathlib.RingTheory.Artinian.Ring, lines 30-55 (slopmaster2 at 71d63dcf)"
- },
- "stmt_deps": [
-  "def-weil-algebraic-closure"
- ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
- "mathlib_searches": [
-  {
-   "tool": "leansearch",
-   "query": "finite reduced algebra over algebraically closed field with no nontrivial idempotents has dimension one",
-   "results": "none: HTTP 500 from the service (lean_leansearch and https://leansearch.net/search, 2026-10-10 13:24-13:27 UTC)",
-   "date": "2026-10-10",
-   "verdict": "no result (service unavailable)"
+  "kind": "statement",
+  "title": "A nonzero finite reduced algebra without nontrivial idempotents over an algebraically closed field has dimension 1",
+  "statement": "Let $K$ be an algebraically closed field [def-weil-algebraic-closure] and let $B$ be a commutative $K$-algebra which is finite-dimensional as a $K$-vector space, is reduced (has no nonzero nilpotent element), is not the zero ring ($1\\neq0$ in $B$), and whose only idempotents $e=e^2$ are $0$ and $1$. Then $\\dim_KB=1$, i.e. the structure map $K\\to B$ is bijective.",
+  "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Lemma 0BUG (lemma-proper-geometrically-reduced-global-sections), proof of parts (2), (3) and (7): a finite-dimensional algebra is a product of Artinian local rings (Algebra 00J6, 00KJ), the reduced ones are fields (00EU), and a field finite over the algebraically closed $\\overline k$ is $\\overline k$. Stated in Lean as IsAlgClosed.finrank_eq_one_of_isReduced, module WeilConjectures.Mathlib.RingTheory.Artinian.Ring, lines 30-55 (slopmaster2 at 71d63dcf)"
   },
-  {
-   "tool": "leanfinder",
-   "query": "finite-dimensional reduced commutative algebra over an algebraically closed field whose only idempotents are 0 and 1 is the field itself (finrank = 1)",
-   "results": "IsSimpleModule.finrank_eq_one_of_isMulCommutative (RepresentationTheory.AlgebraRepresentation.Basic: simple modules, not algebras), IsSimpleRing.exists_algEquiv_matrix_of_isAlgClosed, IsSemisimpleRing.exists_algEquiv_pi_matrix_of_isAlgClosed (RingTheory.SimpleModule.IsAlgClosed), isSimpleRing_iff_isField",
-   "date": "2026-10-10",
-   "verdict": "no match (ingredients only: a reduced Artinian ring is semisimple, then Artin-Wedderburn; the step from 'no nontrivial idempotents' to one factor is not stated)"
-  },
-  {
-   "tool": "loogle",
-   "query": "IsAlgClosed, IsReduced, Module.finrank",
-   "results": "none",
-   "date": "2026-10-10",
-   "verdict": "no match"
-  },
-  {
-   "tool": "grep",
-   "query": "grep -rn 'IsIdempotentElem' and 'finrank.*= 1' in Mathlib/FieldTheory/IsAlgClosed and Mathlib/RingTheory/Artinian",
-   "results": "IsIdempotentElem.spectrum_subset etc. (FieldTheory/IsAlgClosed/Spectrum.lean:163-182, spectra of idempotents); IsArtinianRing.equivPi (RingTheory/Artinian/Module.lean:633: reduced Artinian R ≃ product of its residue fields), isField_of_isReduced_of_isLocalRing (RingTheory/Artinian/Ring.lean:69)",
-   "date": "2026-10-10",
-   "verdict": "no match (ingredients only)"
-  },
-  {
-   "tool": "local_search",
-   "query": "grep of ~/weil-conjectures-slopmaster2/WeilConjectures for finrank_eq_one_of_isReduced",
-   "results": "IsAlgClosed.finrank_eq_one_of_isReduced (WeilConjectures/Mathlib/RingTheory/Artinian/Ring.lean:33, statement read: [Field K] [IsAlgClosed K] [CommRing B] [Algebra K B] [Module.Finite K B] [IsReduced B] [Nontrivial B] (hB : ∀ e : B, IsIdempotentElem e → e = 0 ∨ e = 1) : Module.finrank K B = 1); sorry map of 71d63dcf: no sorry in it or anything it reaches",
-   "date": "2026-10-10",
-   "verdict": "not Mathlib; exact sorry-free declaration of slopmaster2, attached"
-  }
- ],
- "mathlib_match": null,
- "status": "unsplit",
- "merged_into": null,
- "created": {
-  "by": "worker",
-  "item": "lem-pc-h0-geom-connected",
-  "date": "2026-10-10"
- },
- "lean_audit": {
-  "master": {
-   "state": "none",
-   "decls": [],
-   "missing": [
-    "IsAlgClosed.finrank_eq_one_of_isReduced"
-   ]
-  },
-  "slopmaster2": {
-   "state": "closed",
-   "decls": [
-    {
-     "name": "IsAlgClosed.finrank_eq_one_of_isReduced",
-     "module": "WeilConjectures.Mathlib.RingTheory.Artinian.Ring",
-     "lines": [
-      30,
-      55
-     ],
-     "kind": "theorem",
-     "sorry": false
-    }
-   ],
-   "missing": [],
-   "open": []
-  }
- },
- "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-rr",
- "lean": {
-  "branch": "slopmaster2",
-  "declarations": [
-   "IsAlgClosed.finrank_eq_one_of_isReduced"
+  "stmt_deps": [
+    "def-weil-algebraic-closure"
   ],
-  "note": "attached by the lead 2026-10-10 after the worker's attachment: IsAlgClosed.finrank_eq_one_of_isReduced"
- }
+  "proof": [],
+  "proof_deps": [],
+  "proof_origin": null,
+  "mathlib_searches": [
+    {
+      "tool": "leansearch",
+      "query": "finite reduced algebra over algebraically closed field with no nontrivial idempotents has dimension one",
+      "results": "none: HTTP 500 from the service (lean_leansearch and https://leansearch.net/search, 2026-10-10 13:24-13:27 UTC)",
+      "date": "2026-10-10",
+      "verdict": "no result (service unavailable)"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "finite-dimensional reduced commutative algebra over an algebraically closed field whose only idempotents are 0 and 1 is the field itself (finrank = 1)",
+      "results": "IsSimpleModule.finrank_eq_one_of_isMulCommutative (RepresentationTheory.AlgebraRepresentation.Basic: simple modules, not algebras), IsSimpleRing.exists_algEquiv_matrix_of_isAlgClosed, IsSemisimpleRing.exists_algEquiv_pi_matrix_of_isAlgClosed (RingTheory.SimpleModule.IsAlgClosed), isSimpleRing_iff_isField",
+      "date": "2026-10-10",
+      "verdict": "no match (ingredients only: a reduced Artinian ring is semisimple, then Artin-Wedderburn; the step from 'no nontrivial idempotents' to one factor is not stated)"
+    },
+    {
+      "tool": "loogle",
+      "query": "IsAlgClosed, IsReduced, Module.finrank",
+      "results": "none",
+      "date": "2026-10-10",
+      "verdict": "no match"
+    },
+    {
+      "tool": "grep",
+      "query": "grep -rn 'IsIdempotentElem' and 'finrank.*= 1' in Mathlib/FieldTheory/IsAlgClosed and Mathlib/RingTheory/Artinian",
+      "results": "IsIdempotentElem.spectrum_subset etc. (FieldTheory/IsAlgClosed/Spectrum.lean:163-182, spectra of idempotents); IsArtinianRing.equivPi (RingTheory/Artinian/Module.lean:633: reduced Artinian R ≃ product of its residue fields), isField_of_isReduced_of_isLocalRing (RingTheory/Artinian/Ring.lean:69)",
+      "date": "2026-10-10",
+      "verdict": "no match (ingredients only)"
+    },
+    {
+      "tool": "local_search",
+      "query": "grep of ~/weil-conjectures-slopmaster2/WeilConjectures for finrank_eq_one_of_isReduced",
+      "results": "IsAlgClosed.finrank_eq_one_of_isReduced (WeilConjectures/Mathlib/RingTheory/Artinian/Ring.lean:33, statement read: [Field K] [IsAlgClosed K] [CommRing B] [Algebra K B] [Module.Finite K B] [IsReduced B] [Nontrivial B] (hB : ∀ e : B, IsIdempotentElem e → e = 0 ∨ e = 1) : Module.finrank K B = 1); sorry map of 71d63dcf: no sorry in it or anything it reaches",
+      "date": "2026-10-10",
+      "verdict": "not Mathlib; exact sorry-free declaration of slopmaster2, attached"
+    }
+  ],
+  "mathlib_match": null,
+  "status": "unsplit",
+  "merged_into": null,
+  "created": {
+    "by": "worker",
+    "item": "lem-pc-h0-geom-connected",
+    "date": "2026-10-10"
+  },
+  "lean_audit": {
+    "master": {
+      "state": "none",
+      "decls": [],
+      "missing": [
+        "IsAlgClosed.finrank_eq_one_of_isReduced"
+      ]
+    },
+    "slopmaster2": {
+      "state": "closed",
+      "decls": [
+        {
+          "name": "IsAlgClosed.finrank_eq_one_of_isReduced",
+          "module": "WeilConjectures.Mathlib.RingTheory.Artinian.Ring",
+          "lines": [
+            30,
+            55
+          ],
+          "kind": "theorem",
+          "sorry": false
+        }
+      ],
+      "missing": [],
+      "open": []
+    }
+  },
+  "chapter": "sec-picard-framework",
+  "unit": "sk-thm-picard-rr",
+  "lean": {
+    "module": "WeilConjectures.Mathlib.RingTheory.Artinian.Ring",
+    "declaration": "IsAlgClosed.finrank_eq_one_of_isReduced",
+    "branch": "slopmaster2",
+    "line": 30,
+    "declarations": [
+      "IsAlgClosed.finrank_eq_one_of_isReduced"
+    ],
+    "sorry_free": true,
+    "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state closed)"
+  }
 }

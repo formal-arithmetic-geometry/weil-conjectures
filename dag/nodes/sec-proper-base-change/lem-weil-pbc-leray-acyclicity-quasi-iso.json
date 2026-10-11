@@ -1,130 +1,134 @@
 {
- "id": "lem-weil-pbc-leray-acyclicity-quasi-iso",
- "blueprint": {
-  "is": null,
-  "from": {
-   "node": "thm-weil-pbc-henselian-idempotent-lifting",
-   "place": "step 2 of its split (source: Lemma 59.91.1 (Tag 0A0B), label lemma-zariski-h0-proper-over-henselian-pair, line 18167; the choice of the sheaf $\\mathcal C$ and the computation of $\\Gamma(T,\\mathcal C|_T)$ written out by the agent)",
-   "via": [
-    "lem-weil-pbc-module-pushforward-injectives-sections-quasi-iso",
-    "def-weil-pbc-module-cohomology-fmap",
-    "lem-weil-pbc-formal-functions-stalk",
-    "lem-weil-pbc-stein-fibre-idempotent-image",
-    "lem-weil-pbc-stein-normalized-fibre-idempotent",
-    "lem-weil-pbc-stein-factorization-affine",
-    "lem-weil-pbc-zariski-h0-proper-henselian-pair"
-   ]
+  "id": "lem-weil-pbc-leray-acyclicity-quasi-iso",
+  "blueprint": {
+    "is": null,
+    "from": {
+      "node": "thm-weil-pbc-henselian-idempotent-lifting",
+      "place": "step 2 of its split (source: Lemma 59.91.1 (Tag 0A0B), label lemma-zariski-h0-proper-over-henselian-pair, line 18167; the choice of the sheaf $\\mathcal C$ and the computation of $\\Gamma(T,\\mathcal C|_T)$ written out by the agent)",
+      "via": [
+        "lem-weil-pbc-module-pushforward-injectives-sections-quasi-iso",
+        "def-weil-pbc-module-cohomology-fmap",
+        "lem-weil-pbc-formal-functions-stalk",
+        "lem-weil-pbc-stein-fibre-idempotent-image",
+        "lem-weil-pbc-stein-normalized-fibre-idempotent",
+        "lem-weil-pbc-stein-factorization-affine",
+        "lem-weil-pbc-zariski-h0-proper-henselian-pair"
+      ]
+    },
+    "same_as": null
   },
-  "same_as": null
- },
- "kind": "statement",
- "title": "Leray's acyclicity lemma: a left exact functor preserves quasi-isomorphisms between bounded-below complexes of acyclic objects",
- "statement": "Let $\\mathcal A$ and $\\mathcal B$ be abelian categories [def-sp-abelian], where $\\mathcal A$ has enough injectives (every object of $\\mathcal A$ admits a monomorphism into an injective object [def-sp-injective-resolutions]), and let $F:\\mathcal A\\to\\mathcal B$ be a left exact additive functor [def-sp-left-exact-additive], with right derived functors $R^qF$ computed by injective resolutions. Let $K^\\bullet$ and $L^\\bullet$ be cochain complexes of $\\mathcal A$ [def-weil-abstract-derived-category] and $a\\in\\mathbf Z$ an integer with $K^n=0$ and $L^n=0$ for all $n<a$, such that every term $K^n$ and every term $L^n$ is $F$-acyclic [def-sp-acyclic], i.e. $R^qF(K^n)=0$ and $R^qF(L^n)=0$ for all $q>0$ and all $n$. Let $\\varphi:K^\\bullet\\to L^\\bullet$ be a quasi-isomorphism (a morphism of complexes with $H^r(\\varphi)$ an isomorphism for every $r\\in\\mathbf Z$). Then the morphism of complexes $F(\\varphi):F(K^\\bullet)\\to F(L^\\bullet)$ of $\\mathcal B$, obtained by applying $F$ termwise ($F(K^\\bullet)^n=F(K^n)$ with differentials $F(d_K^n)$), is a quasi-isomorphism: $H^r(F(\\varphi)):H^r(F(K^\\bullet))\\to H^r(F(L^\\bullet))$ is an isomorphism of $\\mathcal B$ for every $r\\in\\mathbf Z$.",
- "source": {
-  "document": "literature/stacks-project/derived.tex",
-  "place": "Derived Categories, Lemma 015E (lemma-leray-acyclicity, line 5717: a bounded below complex $A^\\bullet$ of right $F$-acyclic objects computes $RF$, i.e. $F(A^\\bullet)\\to RF(A^\\bullet)$ is an isomorphism in $D^+(\\mathcal B)$), with Proposition 05TA (proposition-enough-acyclics, line 5810) for $RF$ everywhere defined on $D^+(\\mathcal A)$ and Lemma 015C (lemma-F-acyclic, line 5619) (2) for right $F$-acyclic = $R^qF=0$ for $q>0$ when $F$ is left exact. The statement here is the form in complexes: applying 015E to $K^\\bullet$ and to $L^\\bullet$, $F(\\varphi)$ is identified with the isomorphism $RF(\\varphi)$ of $D^+(\\mathcal B)$ through the natural transformation $F\\to RF$, so it is a quasi-isomorphism."
- },
- "stmt_deps": [
-  "def-sp-abelian",
-  "def-sp-injective-resolutions",
-  "def-sp-left-exact-additive",
-  "def-weil-abstract-derived-category",
-  "def-sp-acyclic"
- ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
- "mathlib_searches": [
-  {
-   "tool": "leansearch",
-   "query": "left exact functor applied to a quasi-isomorphism between bounded below complexes of acyclic objects is a quasi-isomorphism (Leray acyclicity)",
-   "results": "CategoryTheory.ShortComplex.quasiIso_map_of_preservesLeftHomology, HomologicalComplex.quasiIso_map_of_preservesHomology (Mathlib.Algebra.Homology.QuasiIso; needs F to preserve homology, i.e. F exact), ShortComplex.quasiIso_map_iff_of_preservesLeftHomology, Functor.PreservesHomology.preservesLeftHomologyOf, DerivedCategory.instIsIsoMapCochainComplexIntQ, HomologicalComplex.Acyclic, ShortComplex.QuasiIso.exact_iff",
-   "date": "2026-10-10",
-   "verdict": "no match: only exact functors (PreservesHomology) are shown to preserve quasi-isomorphisms; no F-acyclic hypothesis anywhere"
+  "kind": "statement",
+  "title": "Leray's acyclicity lemma: a left exact functor preserves quasi-isomorphisms between bounded-below complexes of acyclic objects",
+  "statement": "Let $\\mathcal A$ and $\\mathcal B$ be abelian categories [def-sp-abelian], where $\\mathcal A$ has enough injectives (every object of $\\mathcal A$ admits a monomorphism into an injective object [def-sp-injective-resolutions]), and let $F:\\mathcal A\\to\\mathcal B$ be a left exact additive functor [def-sp-left-exact-additive], with right derived functors $R^qF$ computed by injective resolutions. Let $K^\\bullet$ and $L^\\bullet$ be cochain complexes of $\\mathcal A$ [def-weil-abstract-derived-category] and $a\\in\\mathbf Z$ an integer with $K^n=0$ and $L^n=0$ for all $n<a$, such that every term $K^n$ and every term $L^n$ is $F$-acyclic [def-sp-acyclic], i.e. $R^qF(K^n)=0$ and $R^qF(L^n)=0$ for all $q>0$ and all $n$. Let $\\varphi:K^\\bullet\\to L^\\bullet$ be a quasi-isomorphism (a morphism of complexes with $H^r(\\varphi)$ an isomorphism for every $r\\in\\mathbf Z$). Then the morphism of complexes $F(\\varphi):F(K^\\bullet)\\to F(L^\\bullet)$ of $\\mathcal B$, obtained by applying $F$ termwise ($F(K^\\bullet)^n=F(K^n)$ with differentials $F(d_K^n)$), is a quasi-isomorphism: $H^r(F(\\varphi)):H^r(F(K^\\bullet))\\to H^r(F(L^\\bullet))$ is an isomorphism of $\\mathcal B$ for every $r\\in\\mathbf Z$.",
+  "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Derived Categories, Lemma 015E (lemma-leray-acyclicity, line 5717: a bounded below complex $A^\\bullet$ of right $F$-acyclic objects computes $RF$, i.e. $F(A^\\bullet)\\to RF(A^\\bullet)$ is an isomorphism in $D^+(\\mathcal B)$), with Proposition 05TA (proposition-enough-acyclics, line 5810) for $RF$ everywhere defined on $D^+(\\mathcal A)$ and Lemma 015C (lemma-F-acyclic, line 5619) (2) for right $F$-acyclic = $R^qF=0$ for $q>0$ when $F$ is left exact. The statement here is the form in complexes: applying 015E to $K^\\bullet$ and to $L^\\bullet$, $F(\\varphi)$ is identified with the isomorphism $RF(\\varphi)$ of $D^+(\\mathcal B)$ through the natural transformation $F\\to RF$, so it is a quasi-isomorphism."
   },
-  {
-   "tool": "leanfinder",
-   "query": "Leray's acyclicity lemma: a bounded below complex of F-acyclic objects computes the right derived functor RF",
-   "results": "Functor.rightDerived, Functor.isZero_rightDerived_obj_injective_succ, InjectiveResolution.isoRightDerivedObj, Functor.toRightDerivedZero (Mathlib.CategoryTheory.Abelian.RightDerived), Functor.mapDerivedCategoryFactors(h) (Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor, exact functors only)",
-   "date": "2026-10-10",
-   "verdict": "no match: derived functors only via injective resolutions; no acyclic-resolution statement"
-  },
-  {
-   "tool": "loogle",
-   "query": "\"rightDerivedFunctorPlus\"",
-   "results": "Functor.rightDerivedFunctorPlus, rightDerivedFunctorPlusUnit(h), IsRightDerivedFunctor instances, CommShift instances, NatTrans.rightDerivedFunctorPlus(_id) (Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus)",
-   "date": "2026-10-10",
-   "verdict": "no match: the unit F -> RF on D^+ is shown invertible only at bounded-below complexes of injectives (file lines 57-66, the two `example`s), not at complexes of F-acyclic objects"
-  },
-  {
-   "tool": "loogle",
-   "query": "QuasiIso ((CategoryTheory.Functor.mapHomologicalComplex _ _).map _), CategoryTheory.Functor.rightDerived",
-   "results": "none",
-   "date": "2026-10-10",
-   "verdict": "no match"
-  },
-  {
-   "tool": "grep",
-   "query": "grep -rn 'rightAcyclic\\|RightAcyclic\\|leray\\|Leray' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib; grep -rln 'F-acyclic\\|acyclic for\\|acyclic object' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib; grep -rlni acyclic ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Abelian ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology; sed -n 1,66p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/DerivedCategory/RightDerivedFunctorPlus.lean",
-   "results": "no hit for rightAcyclic/Leray/F-acyclic; 'acyclic' only for acyclic complexes (HomologicalComplex.Acyclic, HomotopyCategory.subcategoryAcyclic in HomotopyCategory/Acyclic.lean, KInjective.lean, ModelCategory/Injective.lean); RightDerivedFunctorPlus.lean defines F.rightDerivedFunctorPlus with unit iso on injective complexes only (TODO in its header)",
-   "date": "2026-10-10",
-   "verdict": "no match"
-  },
-  {
-   "tool": "local_search",
-   "query": "Acyclic (project root ~/weil-conjectures-slopmaster2)",
-   "results": "HomologicalComplex.Acyclic (Mathlib), HomologicalComplex.Acyclic.map_of_rightAcyclic (WeilConjectures/CategoryTheory/Abelian/RightDerived/Acyclic.lean, not Mathlib), ...; index: unavailable. Read that file: CategoryTheory.Functor.quasiIso_map_of_rightAcyclic (lines 208-230; F additive with PreservesFiniteLimits, K L : CochainComplex C ℤ, [K.IsStrictlyGE a] [L.IsStrictlyGE a], all terms F.rightAcyclic (= ∀ q, IsZero ((F.rightDerived (q+1)).obj A), line 77), [QuasiIso φ] ⊢ QuasiIso ((F.mapHomologicalComplex _).map φ)); sorry map local/sorry_map_slopmaster2_full.jsonl: s=false, ts=false",
-   "date": "2026-10-10",
-   "verdict": "not in Mathlib; slopmaster2 (source repository, not Mathlib) has a sorry-free declaration stating exactly this node: candidate for attachment by the lead"
-  }
- ],
- "mathlib_match": null,
- "mathlib_candidate": {
-  "declaration": "CategoryTheory.Functor.rightDerivedFunctorPlus with rightDerivedFunctorPlusUnit",
-  "file": "Mathlib/Algebra/Homology/DerivedCategory/RightDerivedFunctorPlus.lean",
-  "how": "read lines 1-66: the right derived functor D^+(C) -> D^+(D) of an additive F with C having enough injectives, and the unit F -> RF is an isomorphism at bounded-below complexes of injectives (examples at lines 57-66). The node needs the unit to be an isomorphism at bounded-below complexes of F-acyclic objects, which Mathlib does not state; it is a theorem (dimension shifting on the cone), so not a leaf (B8). The slopmaster2 declaration CategoryTheory.Functor.quasiIso_map_of_rightAcyclic (WeilConjectures/CategoryTheory/Abelian/RightDerived/Acyclic.lean, lines 208-230, sorry-free) states the node exactly."
- },
- "status": "unsplit",
- "merged_into": null,
- "created": {
-  "by": "worker",
-  "item": "lem-weil-pbc-module-pushforward-injectives-sections-quasi-iso",
-  "date": "2026-10-10"
- },
- "lean_audit": {
-  "master": {
-   "state": "none",
-   "decls": [],
-   "missing": [
-    "CategoryTheory.Functor.quasiIso_map_of_rightAcyclic"
-   ]
-  },
-  "slopmaster2": {
-   "state": "closed",
-   "decls": [
-    {
-     "name": "CategoryTheory.Functor.quasiIso_map_of_rightAcyclic",
-     "module": "WeilConjectures.CategoryTheory.Abelian.RightDerived.Acyclic",
-     "lines": [
-      208,
-      230
-     ],
-     "kind": "theorem",
-     "sorry": false
-    }
-   ],
-   "missing": [],
-   "open": []
-  }
- },
- "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1",
- "lean": {
-  "branch": "slopmaster2",
-  "declarations": [
-   "CategoryTheory.Functor.quasiIso_map_of_rightAcyclic"
+  "stmt_deps": [
+    "def-sp-abelian",
+    "def-sp-injective-resolutions",
+    "def-sp-left-exact-additive",
+    "def-weil-abstract-derived-category",
+    "def-sp-acyclic"
   ],
-  "note": "attached by the lead at the review of lem-weil-pbc-module-pushforward-injectives-sections-quasi-iso (2026-10-10), found by its opus worker: WeilConjectures/CategoryTheory/Abelian/RightDerived/Acyclic.lean lines 208-230 (read by L): F additive with PreservesFiniteLimits, K, L strictly ≥ a, all terms F.rightAcyclic (R^{q+1}F = 0 for all q, the definition at line 77), phi a quasi-isomorphism ⇒ F(phi) a quasi-isomorphism; sorry-free (s=false, ts=false in the sorry map). Matches the statement clause by clause (left exact additive F = additive + preserves finite limits; F-acyclic = rightAcyclic)."
- },
- "reviewed": "Reviewed by L 2026-10-10 (statement): Derived Categories 015E in the form 'both complexes bounded below with F-acyclic terms, quasi-isomorphism preserved by F'; Lean theorem quasiIso_map_of_rightAcyclic of the source repository attached (closed on slopmaster2). Unsplit as a proof node. Relation to lemma-weil-pbc-leray-acyclicity (sk-thm-acyclicity, single-object resolutions) noted."
+  "proof": [],
+  "proof_deps": [],
+  "proof_origin": null,
+  "mathlib_searches": [
+    {
+      "tool": "leansearch",
+      "query": "left exact functor applied to a quasi-isomorphism between bounded below complexes of acyclic objects is a quasi-isomorphism (Leray acyclicity)",
+      "results": "CategoryTheory.ShortComplex.quasiIso_map_of_preservesLeftHomology, HomologicalComplex.quasiIso_map_of_preservesHomology (Mathlib.Algebra.Homology.QuasiIso; needs F to preserve homology, i.e. F exact), ShortComplex.quasiIso_map_iff_of_preservesLeftHomology, Functor.PreservesHomology.preservesLeftHomologyOf, DerivedCategory.instIsIsoMapCochainComplexIntQ, HomologicalComplex.Acyclic, ShortComplex.QuasiIso.exact_iff",
+      "date": "2026-10-10",
+      "verdict": "no match: only exact functors (PreservesHomology) are shown to preserve quasi-isomorphisms; no F-acyclic hypothesis anywhere"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "Leray's acyclicity lemma: a bounded below complex of F-acyclic objects computes the right derived functor RF",
+      "results": "Functor.rightDerived, Functor.isZero_rightDerived_obj_injective_succ, InjectiveResolution.isoRightDerivedObj, Functor.toRightDerivedZero (Mathlib.CategoryTheory.Abelian.RightDerived), Functor.mapDerivedCategoryFactors(h) (Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor, exact functors only)",
+      "date": "2026-10-10",
+      "verdict": "no match: derived functors only via injective resolutions; no acyclic-resolution statement"
+    },
+    {
+      "tool": "loogle",
+      "query": "\"rightDerivedFunctorPlus\"",
+      "results": "Functor.rightDerivedFunctorPlus, rightDerivedFunctorPlusUnit(h), IsRightDerivedFunctor instances, CommShift instances, NatTrans.rightDerivedFunctorPlus(_id) (Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus)",
+      "date": "2026-10-10",
+      "verdict": "no match: the unit F -> RF on D^+ is shown invertible only at bounded-below complexes of injectives (file lines 57-66, the two `example`s), not at complexes of F-acyclic objects"
+    },
+    {
+      "tool": "loogle",
+      "query": "QuasiIso ((CategoryTheory.Functor.mapHomologicalComplex _ _).map _), CategoryTheory.Functor.rightDerived",
+      "results": "none",
+      "date": "2026-10-10",
+      "verdict": "no match"
+    },
+    {
+      "tool": "grep",
+      "query": "grep -rn 'rightAcyclic\\|RightAcyclic\\|leray\\|Leray' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib; grep -rln 'F-acyclic\\|acyclic for\\|acyclic object' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib; grep -rlni acyclic ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Abelian ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology; sed -n 1,66p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/DerivedCategory/RightDerivedFunctorPlus.lean",
+      "results": "no hit for rightAcyclic/Leray/F-acyclic; 'acyclic' only for acyclic complexes (HomologicalComplex.Acyclic, HomotopyCategory.subcategoryAcyclic in HomotopyCategory/Acyclic.lean, KInjective.lean, ModelCategory/Injective.lean); RightDerivedFunctorPlus.lean defines F.rightDerivedFunctorPlus with unit iso on injective complexes only (TODO in its header)",
+      "date": "2026-10-10",
+      "verdict": "no match"
+    },
+    {
+      "tool": "local_search",
+      "query": "Acyclic (project root ~/weil-conjectures-slopmaster2)",
+      "results": "HomologicalComplex.Acyclic (Mathlib), HomologicalComplex.Acyclic.map_of_rightAcyclic (WeilConjectures/CategoryTheory/Abelian/RightDerived/Acyclic.lean, not Mathlib), ...; index: unavailable. Read that file: CategoryTheory.Functor.quasiIso_map_of_rightAcyclic (lines 208-230; F additive with PreservesFiniteLimits, K L : CochainComplex C ℤ, [K.IsStrictlyGE a] [L.IsStrictlyGE a], all terms F.rightAcyclic (= ∀ q, IsZero ((F.rightDerived (q+1)).obj A), line 77), [QuasiIso φ] ⊢ QuasiIso ((F.mapHomologicalComplex _).map φ)); sorry map local/sorry_map_slopmaster2_full.jsonl: s=false, ts=false",
+      "date": "2026-10-10",
+      "verdict": "not in Mathlib; slopmaster2 (source repository, not Mathlib) has a sorry-free declaration stating exactly this node: candidate for attachment by the lead"
+    }
+  ],
+  "mathlib_match": null,
+  "mathlib_candidate": {
+    "declaration": "CategoryTheory.Functor.rightDerivedFunctorPlus with rightDerivedFunctorPlusUnit",
+    "file": "Mathlib/Algebra/Homology/DerivedCategory/RightDerivedFunctorPlus.lean",
+    "how": "read lines 1-66: the right derived functor D^+(C) -> D^+(D) of an additive F with C having enough injectives, and the unit F -> RF is an isomorphism at bounded-below complexes of injectives (examples at lines 57-66). The node needs the unit to be an isomorphism at bounded-below complexes of F-acyclic objects, which Mathlib does not state; it is a theorem (dimension shifting on the cone), so not a leaf (B8). The slopmaster2 declaration CategoryTheory.Functor.quasiIso_map_of_rightAcyclic (WeilConjectures/CategoryTheory/Abelian/RightDerived/Acyclic.lean, lines 208-230, sorry-free) states the node exactly."
+  },
+  "status": "unsplit",
+  "merged_into": null,
+  "created": {
+    "by": "worker",
+    "item": "lem-weil-pbc-module-pushforward-injectives-sections-quasi-iso",
+    "date": "2026-10-10"
+  },
+  "lean_audit": {
+    "master": {
+      "state": "none",
+      "decls": [],
+      "missing": [
+        "CategoryTheory.Functor.quasiIso_map_of_rightAcyclic"
+      ]
+    },
+    "slopmaster2": {
+      "state": "closed",
+      "decls": [
+        {
+          "name": "CategoryTheory.Functor.quasiIso_map_of_rightAcyclic",
+          "module": "WeilConjectures.CategoryTheory.Abelian.RightDerived.Acyclic",
+          "lines": [
+            208,
+            230
+          ],
+          "kind": "theorem",
+          "sorry": false
+        }
+      ],
+      "missing": [],
+      "open": []
+    }
+  },
+  "chapter": "sec-proper-base-change",
+  "unit": "sk-thm-p1",
+  "lean": {
+    "module": "WeilConjectures.CategoryTheory.Abelian.RightDerived.Acyclic",
+    "declaration": "CategoryTheory.Functor.quasiIso_map_of_rightAcyclic",
+    "branch": "slopmaster2",
+    "line": 208,
+    "declarations": [
+      "CategoryTheory.Functor.quasiIso_map_of_rightAcyclic"
+    ],
+    "sorry_free": true,
+    "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state closed)"
+  },
+  "reviewed": "Reviewed by L 2026-10-10 (statement): Derived Categories 015E in the form 'both complexes bounded below with F-acyclic terms, quasi-isomorphism preserved by F'; Lean theorem quasiIso_map_of_rightAcyclic of the source repository attached (closed on slopmaster2). Unsplit as a proof node. Relation to lemma-weil-pbc-leray-acyclicity (sk-thm-acyclicity, single-object resolutions) noted."
 }

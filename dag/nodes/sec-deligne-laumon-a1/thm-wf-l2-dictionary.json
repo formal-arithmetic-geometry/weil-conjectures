@@ -1,140 +1,151 @@
 {
- "id": "thm-wf-l2-dictionary",
- "blueprint": {
-  "is": "thm-wf-l2-dictionary",
-  "from": null,
-  "same_as": null
- },
- "kind": "statement",
- "title": "The Fourier-analytic weight of a pure real sheaf equals its weight",
- "statement": "Let $X_0$ be a smooth geometrically connected affine curve over\n$k_0=\\mathbf F_q$, and let $\\mathcal G$ be a nonzero lisse\n$\\iota$-real Weil sheaf, punctually\n$\\iota$-pure of weight $w$. Then\n\n$$\n\\|\\mathcal G\\|=w\n$$\n\nin the $L^2$-weight parameter of [def-wf-l2-norm].",
- "source": {
-  "document": "literature/blueprint/master/blueprint/sec-deligne-laumon-a1/sk-l-dl-a1-energy/thm-wf-l2-dictionary.md",
-  "place": "node thm-wf-l2-dictionary, order 2762"
- },
- "stmt_deps": [
-  "def-wf-l2-norm",
-  "def-weil-punctual-weights"
- ],
- "proof": [
-  {
-   "text": "Put $\\mathcal T=\\mathcal G\\otimes\\mathcal G$.\nAt every point over every finite extension, the trace of $\\mathcal G$\nis real by [def-wf-iota-real]. Hence the trace of $\\mathcal T$\nis its square, equal to the squared absolute value of that trace.\nThe logarithm of the Frobenius determinant\n[lem-zl-log-det-identity] (applied to each local factor, with\n$T\\mapsto t^{d(x)}$, and transported to $\\mathbf C[[t]]$ by the field\nisomorphism $\\iota$, exactly as in the proof of\n[lem-wf-conjugate-tensor-traces]) and the Euler product\n[cor-rp-euler-product] therefore give\n\n$$\n\\varphi_{\\mathcal G}(t)=L'(t)/L(t),\\qquad\nL(t)=\\frac{\\iota\\det(1-Ft,H_c^1(X,\\mathcal T))}\n{\\iota\\det(1-Ft,H_c^2(X,\\mathcal T))}.\n$$",
-   "uses": [
+  "id": "thm-wf-l2-dictionary",
+  "blueprint": {
+    "is": "thm-wf-l2-dictionary",
+    "from": null,
+    "same_as": null
+  },
+  "kind": "statement",
+  "title": "The Fourier-analytic weight of a pure real sheaf equals its weight",
+  "statement": "Let $X_0$ be a smooth geometrically connected affine curve over\n$k_0=\\mathbf F_q$, and let $\\mathcal G$ be a nonzero lisse\n$\\iota$-real Weil sheaf, punctually\n$\\iota$-pure of weight $w$. Then\n\n$$\n\\|\\mathcal G\\|=w\n$$\n\nin the $L^2$-weight parameter of [def-wf-l2-norm].",
+  "source": {
+    "document": "literature/blueprint/master/blueprint/sec-deligne-laumon-a1/sk-l-dl-a1-energy/thm-wf-l2-dictionary.md",
+    "place": "node thm-wf-l2-dictionary, order 2762"
+  },
+  "stmt_deps": [
+    "def-wf-l2-norm",
+    "def-weil-punctual-weights"
+  ],
+  "proof": [
+    {
+      "text": "Put $\\mathcal T=\\mathcal G\\otimes\\mathcal G$.\nAt every point over every finite extension, the trace of $\\mathcal G$\nis real by [def-wf-iota-real]. Hence the trace of $\\mathcal T$\nis its square, equal to the squared absolute value of that trace.\nThe logarithm of the Frobenius determinant\n[lem-zl-log-det-identity] (applied to each local factor, with\n$T\\mapsto t^{d(x)}$, and transported to $\\mathbf C[[t]]$ by the field\nisomorphism $\\iota$, exactly as in the proof of\n[lem-wf-conjugate-tensor-traces]) and the Euler product\n[cor-rp-euler-product] therefore give\n\n$$\n\\varphi_{\\mathcal G}(t)=L'(t)/L(t),\\qquad\nL(t)=\\frac{\\iota\\det(1-Ft,H_c^1(X,\\mathcal T))}\n{\\iota\\det(1-Ft,H_c^2(X,\\mathcal T))}.\n$$",
+      "uses": [
+        "def-wf-iota-real",
+        "lem-zl-log-det-identity",
+        "lem-wf-conjugate-tensor-traces",
+        "cor-rp-euler-product"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "Here $\\varphi_{\\mathcal G}$ is the series of\n[def-wf-l2-series].",
+      "uses": [
+        "def-wf-l2-series"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "The tensor $\\mathcal T$ is lisse and punctually pure of weight $2w$:\nits local eigenvalues are products of two eigenvalues of weight $w$ ([p-linear-spectra]).\nThe endpoint lemma [lem-a1-middle-extension-endpoints], applied with\n$j$ the identity of $X_0$ (so that $j_*\\mathcal T=\\mathcal T$), shows\nthat $H_c^2(X,\\mathcal T)$ is $\\iota$-pure of weight $2w+2$ in the\nsense of [def-weil-frobenius-module-weights]: its Frobenius\neigenvalues $\\alpha$ have $\\iota$-modulus $q^{w+1}$. Hence every\ndenominator root $\\alpha^{-1}$ of $L$, if there are any, has modulus\n\n$$\nR=q^{-w-1}.\n$$",
+      "uses": [
+        "p-linear-spectra",
+        "lem-a1-middle-extension-endpoints",
+        "def-weil-frobenius-module-weights"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "At least one of these roots remains a pole after cancellation.\nIndeed [lem-rp-even-tensor-positivity], applied to\n$\\mathcal G$ with tensor exponent two, says that every local Euler\nfactor of $L$ has nonnegative real Taylor coefficients and constant\nterm one. Thus the coefficients of $L$ dominate those of any one\nlocal factor. Choose a closed point $x$ of the nonempty curve.\nSince $\\mathcal G$ is nonzero lisse, its rank at $x$ is positive,\nand the local factor for $\\mathcal T$ is the reciprocal of a\nnonconstant polynomial with nonzero leading coefficient.\nSuch a reciprocal has infinitely many nonzero Taylor coefficients:\nif it were a polynomial, its product with the denominator would be\none, contradicting degrees. It follows that $L$ cannot be a\npolynomial. As its denominator has all its roots on $|t|=R$,\nits reduced rational expression has a pole on that circle.",
+      "uses": [
+        "lem-rp-even-tensor-positivity"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "The logarithmic derivative has a pole at every pole of $L$:\nlocally $L=(t-t_0)^{-a}u$, $a>0$, $u(t_0)\\neq0$, gives\n$L'/L=-a/(t-t_0)+u'/u$.\nConsequently the Taylor radius of $\\varphi_{\\mathcal G}$ is at most\n$R$. On the other hand [lem-wf-l2-upper], applied to the\npunctually pure sheaf, bounds that radius below by $R$.\nIt is therefore exactly $q^{-w-1}$, and\n[def-wf-l2-series], [def-wf-l2-norm], [lem-wf-l2-radius] gives\n$\\|\\mathcal G\\|=w$.",
+      "uses": [
+        "lem-wf-l2-upper",
+        "def-wf-l2-series",
+        "def-wf-l2-norm",
+        "lem-wf-l2-radius"
+      ],
+      "elementary": false
+    }
+  ],
+  "proof_deps": [
     "def-wf-iota-real",
     "lem-zl-log-det-identity",
     "lem-wf-conjugate-tensor-traces",
-    "cor-rp-euler-product"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Here $\\varphi_{\\mathcal G}$ is the series of\n[def-wf-l2-series].",
-   "uses": [
-    "def-wf-l2-series"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "The tensor $\\mathcal T$ is lisse and punctually pure of weight $2w$:\nits local eigenvalues are products of two eigenvalues of weight $w$ ([p-linear-spectra]).\nThe endpoint lemma [lem-a1-middle-extension-endpoints], applied with\n$j$ the identity of $X_0$ (so that $j_*\\mathcal T=\\mathcal T$), shows\nthat $H_c^2(X,\\mathcal T)$ is $\\iota$-pure of weight $2w+2$ in the\nsense of [def-weil-frobenius-module-weights]: its Frobenius\neigenvalues $\\alpha$ have $\\iota$-modulus $q^{w+1}$. Hence every\ndenominator root $\\alpha^{-1}$ of $L$, if there are any, has modulus\n\n$$\nR=q^{-w-1}.\n$$",
-   "uses": [
+    "cor-rp-euler-product",
+    "def-wf-l2-series",
     "p-linear-spectra",
     "lem-a1-middle-extension-endpoints",
-    "def-weil-frobenius-module-weights"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "At least one of these roots remains a pole after cancellation.\nIndeed [lem-rp-even-tensor-positivity], applied to\n$\\mathcal G$ with tensor exponent two, says that every local Euler\nfactor of $L$ has nonnegative real Taylor coefficients and constant\nterm one. Thus the coefficients of $L$ dominate those of any one\nlocal factor. Choose a closed point $x$ of the nonempty curve.\nSince $\\mathcal G$ is nonzero lisse, its rank at $x$ is positive,\nand the local factor for $\\mathcal T$ is the reciprocal of a\nnonconstant polynomial with nonzero leading coefficient.\nSuch a reciprocal has infinitely many nonzero Taylor coefficients:\nif it were a polynomial, its product with the denominator would be\none, contradicting degrees. It follows that $L$ cannot be a\npolynomial. As its denominator has all its roots on $|t|=R$,\nits reduced rational expression has a pole on that circle.",
-   "uses": [
-    "lem-rp-even-tensor-positivity"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "The logarithmic derivative has a pole at every pole of $L$:\nlocally $L=(t-t_0)^{-a}u$, $a>0$, $u(t_0)\\neq0$, gives\n$L'/L=-a/(t-t_0)+u'/u$.\nConsequently the Taylor radius of $\\varphi_{\\mathcal G}$ is at most\n$R$. On the other hand [lem-wf-l2-upper], applied to the\npunctually pure sheaf, bounds that radius below by $R$.\nIt is therefore exactly $q^{-w-1}$, and\n[def-wf-l2-series], [def-wf-l2-norm], [lem-wf-l2-radius] gives\n$\\|\\mathcal G\\|=w$.",
-   "uses": [
+    "def-weil-frobenius-module-weights",
+    "lem-rp-even-tensor-positivity",
     "lem-wf-l2-upper",
-    "def-wf-l2-series",
     "def-wf-l2-norm",
-    "lem-wf-l2-radius"
-   ],
-   "elementary": false
-  }
- ],
- "proof_deps": [
-  "def-wf-iota-real",
-  "lem-zl-log-det-identity",
-  "lem-wf-conjugate-tensor-traces",
-  "cor-rp-euler-product",
-  "def-wf-l2-series",
-  "p-linear-spectra",
-  "lem-a1-middle-extension-endpoints",
-  "def-weil-frobenius-module-weights",
-  "lem-rp-even-tensor-positivity",
-  "lem-wf-l2-upper",
-  "def-wf-l2-norm",
-  "lem-wf-l2-radius",
-  "lem-a1-affine-hc0"
- ],
- "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-deligne-laumon-a1/sk-l-dl-a1-energy/thm-wf-l2-dictionary.md",
-  "place": "## Proof"
- },
- "mathlib_searches": [],
- "mathlib_match": null,
- "status": "imported",
- "merged_into": null,
- "import_flags": [],
- "blueprint_kind": "theorem",
- "blueprint_order": 2762,
- "blueprint_uses": [
-  "cor-rp-euler-product",
-  "def-weil-frobenius-module-weights",
-  "def-weil-punctual-weights",
-  "def-wf-iota-real",
-  "def-wf-l2-norm",
-  "def-wf-l2-series",
-  "lem-a1-affine-hc0",
-  "lem-a1-middle-extension-endpoints",
-  "lem-rp-even-tensor-positivity",
-  "lem-wf-conjugate-tensor-traces",
-  "lem-wf-l2-radius",
-  "lem-wf-l2-upper",
-  "lem-zl-log-det-identity",
-  "p-linear-spectra"
- ],
- "uses_not_cited": [
-  "def-weil-punctual-weights",
-  "lem-a1-affine-hc0"
- ],
- "proof_split_by": "paragraphs",
- "lean_audit": {
-  "master": {
-   "state": "none",
-   "decls": [],
-   "missing": []
+    "lem-wf-l2-radius",
+    "lem-a1-affine-hc0"
+  ],
+  "proof_origin": {
+    "by": "agent",
+    "document": "literature/blueprint/master/blueprint/sec-deligne-laumon-a1/sk-l-dl-a1-energy/thm-wf-l2-dictionary.md",
+    "place": "## Proof"
   },
-  "slopmaster2": {
-   "state": "sorry_here",
-   "decls": [
-    {
-     "name": "AlgebraicGeometry.WeilSheaf.l2Weight_eq_of_isReal",
-     "module": "WeilConjectures.DeligneLaumon.AffineLine.TraceEnergy",
-     "lines": [
-      537,
-      554
-     ],
-     "kind": "theorem",
-     "sorry": true
+  "mathlib_searches": [],
+  "mathlib_match": null,
+  "status": "imported",
+  "merged_into": null,
+  "import_flags": [],
+  "blueprint_kind": "theorem",
+  "blueprint_order": 2762,
+  "blueprint_uses": [
+    "cor-rp-euler-product",
+    "def-weil-frobenius-module-weights",
+    "def-weil-punctual-weights",
+    "def-wf-iota-real",
+    "def-wf-l2-norm",
+    "def-wf-l2-series",
+    "lem-a1-affine-hc0",
+    "lem-a1-middle-extension-endpoints",
+    "lem-rp-even-tensor-positivity",
+    "lem-wf-conjugate-tensor-traces",
+    "lem-wf-l2-radius",
+    "lem-wf-l2-upper",
+    "lem-zl-log-det-identity",
+    "p-linear-spectra"
+  ],
+  "uses_not_cited": [
+    "def-weil-punctual-weights",
+    "lem-a1-affine-hc0"
+  ],
+  "proof_split_by": "paragraphs",
+  "lean_audit": {
+    "master": {
+      "state": "none",
+      "decls": [],
+      "missing": []
+    },
+    "slopmaster2": {
+      "state": "sorry_here",
+      "decls": [
+        {
+          "name": "AlgebraicGeometry.WeilSheaf.l2Weight_eq_of_isReal",
+          "module": "WeilConjectures.DeligneLaumon.AffineLine.TraceEnergy",
+          "lines": [
+            537,
+            554
+          ],
+          "kind": "theorem",
+          "sorry": true
+        }
+      ],
+      "missing": [
+        "AlgebraicGeometry.LAdicWeilSheaf.l2Weight_eq_of_isReal"
+      ],
+      "open": []
     }
-   ],
-   "missing": [
-    "AlgebraicGeometry.LAdicWeilSheaf.l2Weight_eq_of_isReal"
-   ],
-   "open": []
+  },
+  "chapter": "sec-deligne-laumon-a1",
+  "unit": "sk-l-dl-a1-energy",
+  "lean": {
+    "module": "WeilConjectures.DeligneLaumon.AffineLine.TraceEnergy",
+    "declaration": "AlgebraicGeometry.WeilSheaf.l2Weight_eq_of_isReal",
+    "branch": "slopmaster2",
+    "line": 537,
+    "declarations": [
+      "AlgebraicGeometry.WeilSheaf.l2Weight_eq_of_isReal"
+    ],
+    "sorry_free": false,
+    "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state sorry_here)"
   }
- },
- "chapter": "sec-deligne-laumon-a1",
- "unit": "sk-l-dl-a1-energy"
 }

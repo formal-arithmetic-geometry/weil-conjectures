@@ -1,208 +1,212 @@
 {
- "id": "def-weil-pbc-derived-square-iso",
- "blueprint": {
-  "is": null,
-  "from": {
-   "node": "def-weil-pbc-derived-exchange",
-   "place": "its statement (a notion the statement uses)",
-   "via": []
-  },
-  "same_as": null
- },
- "kind": "definition",
- "title": "Square isomorphism on bounded below derived categories",
- "statement": "Let $\\square=(f,f',g,g',\\alpha)$ be a cartesian square of schemes [def-weil-pbc-cartesian-square],\n\n$$\n \\begin{array}{ccc}\n X'&\\xrightarrow{g'}&X\\\\\n f'\\downarrow&&\\downarrow f\\\\\n Y'&\\xrightarrow{g}&Y\n \\end{array}\n$$\n\nwith its specified natural isomorphism $\\theta_\\square:f'^{-1}g^{-1}\\xrightarrow{\\sim}g'^{-1}f^{-1}$ of functors $\\Ab(Y_{\\Et})\\to\\Ab(X'_{\\Et})$ between the sheaf-level inverse images [def-weil-pbc-inverse-image] (of the square only the equality $fg'=gf'$ enters, through $\\theta_\\square$). The inverse images are exact [prop-weil-pbc-inverse-image-exact]; for each edge $u\\in\\{f,g,f',g'\\}$ let $u^{-1}_D:D(V_{\\Et})\\to D(U_{\\Et})$ be the functor on the derived categories [def-weil-pbc-derived-categories], [def-weil-abstract-derived-category] induced by applying $u^{-1}$ termwise to cochain complexes, with its natural isomorphism $\\beta_u:u^{-1}_D(QK^\\bullet)\\xrightarrow{\\sim}Q(u^{-1}K^\\bullet)$ for every complex $K^\\bullet$ [lem-sf-exact-functor-derived-triangulated], $Q$ denoting the localization functors at the quasi-isomorphisms; and let $u^{-1}:\\Dplus(V_{\\Et})\\to\\Dplus(U_{\\Et})$ be its restriction to the bounded below derived categories, the inverse image on $\\Dplus$ [def-weil-pbc-derived-inverse-image].\n\nFor a complex $K^\\bullet$ of sheaves on $Y_{\\Et}$ the termwise isomorphisms $\\theta_{\\square,K^r}$ commute with the differentials (naturality of $\\theta_\\square$) and form an isomorphism of complexes $\\theta_{\\square,K^\\bullet}=(\\theta_{\\square,K^r})_r:f'^{-1}g^{-1}K^\\bullet\\to g'^{-1}f^{-1}K^\\bullet$, natural in $K^\\bullet$. Write\n\n$$\n \\beta_1:f'^{-1}_Dg^{-1}_D(QK^\\bullet)\\xrightarrow{f'^{-1}_D\\beta_g}f'^{-1}_DQ(g^{-1}K^\\bullet)\\xrightarrow{\\beta_{f'}}Q(f'^{-1}g^{-1}K^\\bullet),\\qquad\n \\beta_2:g'^{-1}_Df^{-1}_D(QK^\\bullet)\\xrightarrow{g'^{-1}_D\\beta_f}g'^{-1}_DQ(f^{-1}K^\\bullet)\\xrightarrow{\\beta_{g'}}Q(g'^{-1}f^{-1}K^\\bullet).\n$$\n\nLet $\\theta^{D}_{\\square,\\mathrm{unb}}:f'^{-1}_D\\circ g^{-1}_D\\xrightarrow{\\sim}g'^{-1}_D\\circ f^{-1}_D$ (functors $D(Y_{\\Et})\\to D(X'_{\\Et})$) be the unique natural transformation whose component at $QK^\\bullet$ is\n\n$$\n \\beta_2^{-1}\\circ Q(\\theta_{\\square,K^\\bullet})\\circ\\beta_1\\qquad\\text{for every complex }K^\\bullet\\text{ on }Y_{\\Et};\n$$\n\nit exists, is unique and is a natural isomorphism by the universal property of the localization [lem-weil-pbc-localization-universal-property], clause (2), applied to $L=Q$, $W$ the quasi-isomorphisms, $F_1=Q\\circ(f'^{-1}g^{-1})$ and $F_2=Q\\circ(g'^{-1}f^{-1})$ (termwise composites), $F_1'=f'^{-1}_Dg^{-1}_D$, $F_2'=g'^{-1}_Df^{-1}_D$, $\\phi_1=\\beta_1$, $\\phi_2=\\beta_2$, and $\\tau=Q\\theta_{\\square,-}$ (a natural isomorphism, so its lift is one; $F_1,F_2$ invert quasi-isomorphisms since they are isomorphic to functors $F_i'\\circ Q$). The *derived square isomorphism*\n\n$$\n \\theta^D_\\square:f'^{-1}\\circ g^{-1}\\xrightarrow{\\ \\sim\\ }g'^{-1}\\circ f^{-1}\\qquad\\text{of functors }\\Dplus(Y_{\\Et})\\to\\Dplus(X'_{\\Et})\n$$\n\nis the restriction of $\\theta^D_{\\square,\\mathrm{unb}}$ to the full subcategory $\\Dplus(Y_{\\Et})$: its component at $K\\in\\Dplus(Y_{\\Et})$ is $\\theta^D_{\\square,\\mathrm{unb},K}$, a morphism between objects of the full subcategory $\\Dplus(X'_{\\Et})$. In particular, for a bounded below complex $K^\\bullet$, its component at $QK^\\bullet$ is, after the identifications $\\beta_1,\\beta_2$, the class $Q\\bigl((\\theta_{\\square,K^r})_r\\bigr)$ of the termwise isomorphism.",
- "source": {
-  "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Remark 07A7 (remark-base-change): the identification L(f')^* o Lg^* = L(g')^* o Lf^* used in the base change map; the general composition isomorphism of derived pullbacks is Lemma 0D6D (lemma-derived-pullback-composition); for exact pullbacks the derived pullback is computed termwise (Section 0735, Lemma 0736). The construction by descent along Q follows the agent-written source Lean AlgebraicGeometry.Etale.pullbackSquareComparison (slopmaster2, WeilConjectures/SixFunctors/Etale/BaseChangeTheorems/MorphismDefs.lean:145-153, via Functor.mapDerivedCategoryPlusNatIso / mapDerivedCategoryPlusCompIso, WeilConjectures/Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean:94-186, 504-574: Localization.liftNatIso on D, then restriction to D^+ along the fully faithful inclusion)."
- },
- "stmt_deps": [
-  "def-weil-pbc-cartesian-square",
-  "def-weil-pbc-inverse-image",
-  "prop-weil-pbc-inverse-image-exact",
-  "def-weil-pbc-derived-categories",
-  "def-weil-abstract-derived-category",
-  "lem-sf-exact-functor-derived-triangulated",
-  "def-weil-pbc-derived-inverse-image",
-  "lem-weil-pbc-localization-universal-property"
- ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
- "mathlib_searches": [
-  {
-   "tool": "grep",
-   "query": "grep -n 'def liftNatTrans\\|def liftNatIso' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Localization/Predicate.lean; grep -rn 'mapDerivedCategoryCompIso\\|mapDerivedCategoryNatIso\\|NatTrans.mapDerivedCategory' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
-   "results": "Predicate.lean:326 Localization.liftNatTrans and :357 liftNatIso (descent of a natural transformation between lifted functors along a localization); no mapDerivedCategory composition or NatIso versions, nothing for D^+",
-   "date": "2026-10-09",
-   "verdict": "no match (the descent step is Localization.liftNatIso; the isomorphism itself is not in Mathlib)"
-  },
-  {
-   "tool": "grep",
-   "query": "grep -rn 'NatTrans.mapHomotopyCategory\\|def mapHomologicalComplexCompIso' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/HomotopyCategory.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/Additive.lean",
-   "results": "NatTrans.mapHomotopyCategory (HomotopyCategory.lean:259) and the composition iso for mapHomotopyCategory (HomotopyCategory.lean:294): the termwise transformation on homotopy categories exists, its derived-category version does not",
-   "date": "2026-10-09",
-   "verdict": "no match"
-  },
-  {
-   "tool": "leansearch",
-   "query": "natural isomorphism of composites of induced functors on derived categories from an isomorphism of exact functors",
-   "results": "Functor.leftDerivedNatIso / rightDerivedNatIso (Functor/Derived); Functor.mapHomologicalComplexUpToQuasiIso, …Factors, …Factorsh (Mathlib.Algebra.Homology.Localization)",
-   "date": "2026-10-09",
-   "verdict": "no match; tools only"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "natural isomorphism between functors induced on localizations from a natural isomorphism of functors inverting W",
-   "results": "CategoryTheory.Localization.liftNatIso, liftNatIso_hom (Localization/Predicate.lean); Localization.isoUniqFunctor; Functor.IsLocalization.of_iso; Localization.compUniqFunctor",
-   "date": "2026-10-09",
-   "verdict": "tool, not a match: Localization.liftNatIso descends a natural iso along a localization given Lifting instances; applying it here needs the composite Lifting data on D^+ and the termwise iso, i.e. this node's construction"
-  },
-  {
-   "tool": "grep",
-   "query": "rg -n 'mapDerivedCategoryCompIso|mapDerivedCategoryIso|NatTrans.mapDerivedCategory|NatIso.mapDerivedCategory' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
-   "results": "none",
-   "date": "2026-10-09",
-   "verdict": "no match"
-  },
-  {
-   "tool": "leansearch",
-   "query": "composition isomorphism (F ⋙ G).mapDerivedCategory ≅ F.mapDerivedCategory ⋙ G.mapDerivedCategory for exact functors",
-   "results": "Grothendieck.mapCompIso, Functor.mapGrpCompIso, Functor.mapMonCompIso, Functor.coreComp (unrelated composition isos); Functor.mapDerivedCategory, mapDerivedCategoryFactorsh(_hom_app) (Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor); Ext.mapExactFunctor_hom",
-   "date": "2026-10-09",
-   "verdict": "no match in the pinned Mathlib"
-  },
-  {
-   "tool": "loogle",
-   "query": "CategoryTheory.Functor.mapDerivedCategory",
-   "results": "on the Loogle server's (newer) Mathlib: Functor.mapDerivedCategory, mapDerivedCategoryFactors(h), mapDerivedCategorySingleFunctor, mapDerivedCategoryIdIso, Functor.mapDerivedCategoryCompIso (F.mapDerivedCategory ⋙ G.mapDerivedCategory ≅ (F ⋙ G).mapDerivedCategory), NatTrans.mapDerivedCategory (τ : F ⟶ G) : F.mapDerivedCategory ⟶ G.mapDerivedCategory, with CommShift instances; all on the unbounded D, nothing on DerivedCategory.Plus. rg in the pinned Mathlib (~/weil-conjectures-slopmaster2/.lake/packages/mathlib, v4.33.1) finds none of mapDerivedCategoryCompIso, mapDerivedCategoryIdIso, NatTrans.mapDerivedCategory: ExactFunctor.lean there has only mapDerivedCategory (:36), mapDerivedCategoryFactors (:41), mapDerivedCategoryFactorsh (:61), mapDerivedCategorySingleFunctor (:112)",
-   "date": "2026-10-09",
-   "verdict": "no match in the pinned Mathlib; in a newer Mathlib the D-level ingredients exist (θ^D_unb = (mapDerivedCategoryCompIso g f').symm ≪≫ NatIso of NatTrans.mapDerivedCategory θ_□ ≪≫ mapDerivedCategoryCompIso f g', one lemma per clause) but not the D^+ restriction, so still no leaf"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "natural isomorphism of exact functors induces natural isomorphism of the induced functors on derived categories, computed termwise on complexes",
-   "results": "Functor.mapDerivedCategorySingleFunctor, mapDerivedCategoryFactorsh(_hom_app), mapDerivedCategoryFactors, mapDerivedCategory (DerivedCategory/ExactFunctor); Functor.mapHomologicalComplexUpToQuasiIsoFactors(h)(_hom_app) (Algebra/Homology/Localization)",
-   "date": "2026-10-09",
-   "verdict": "no match; tools only (the lifts are Localization.liftNatIso, node lem-weil-pbc-localization-universal-property)"
-  },
-  {
-   "tool": "grep",
-   "query": "rg -n 'mapDerivedCategoryCompIso|NatTrans.mapDerivedCategory|mapDerivedCategoryIdIso|def mapDerivedCategory' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib; sed -n 215,230p .../Mathlib/Algebra/Homology/DerivedCategory/Plus.lean",
-   "results": "only mapDerivedCategory, mapDerivedCategoryFactors, mapDerivedCategoryFactorsh, mapDerivedCategorySingleFunctor (ExactFunctor.lean); DerivedCategory.Plus.Q (Plus.lean:221) with '-- TODO: show that Q is indeed a localization functor' (so the D^+ functor is best obtained by restriction from D, as here)",
-   "date": "2026-10-09",
-   "verdict": "no match"
-  }
- ],
- "mathlib_match": null,
- "status": "split",
- "merged_into": null,
- "import_flags": [],
- "created": {
-  "by": "worker",
-  "item": "def-weil-pbc-derived-exchange",
-  "date": "2026-10-09"
- },
- "lean_audit": {
-  "master": {
-   "state": "rests_on_sorry",
-   "decls": [
-    {
-     "name": "AlgebraicGeometry.Etale.pullbackSquareComparison",
-     "module": "WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.MorphismDefs",
-     "lines": [
-      145,
-      153
-     ],
-     "kind": "def",
-     "sorry": false
-    }
-   ],
-   "missing": [],
-   "open": [
-    {
-     "name": "AlgebraicGeometry.Etale.hasLeftKanExtension_op_overPullback",
-     "module": "WeilConjectures.CategoryTheory.GrothendieckAbelian.HasLeftKanExtension",
-     "lines": [
-      223,
-      231
-     ],
-     "kind": "theorem",
-     "nodes": [],
-     "below": false
+  "id": "def-weil-pbc-derived-square-iso",
+  "blueprint": {
+    "is": null,
+    "from": {
+      "node": "def-weil-pbc-derived-exchange",
+      "place": "its statement (a notion the statement uses)",
+      "via": []
     },
-    {
-     "name": "AlgebraicGeometry.Etale.preservesFiniteLimits_op_lan_overPullback_of_isGrothendieckAbelian",
-     "module": "WeilConjectures.CategoryTheory.GrothendieckAbelian.HasLeftKanExtension",
-     "lines": [
-      270,
-      282
-     ],
-     "kind": "theorem",
-     "nodes": [],
-     "below": false
-    },
-    {
-     "name": "CategoryTheory.Abelian.hasKInjectiveResolutions_of_isGrothendieckAbelian",
-     "module": "WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution",
-     "lines": [
-      19,
-      25
-     ],
-     "kind": "theorem",
-     "nodes": [],
-     "below": false
-    },
-    {
-     "name": "CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall",
-     "module": "WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify",
-     "lines": [
-      39,
-      49
-     ],
-     "kind": "theorem",
-     "nodes": [],
-     "below": false
-    }
-   ]
+    "same_as": null
   },
-  "slopmaster2": {
-   "state": "closed",
-   "decls": [
-    {
-     "name": "AlgebraicGeometry.Etale.pullbackSquareComparison",
-     "module": "WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.MorphismDefs",
-     "lines": [
-      145,
-      153
-     ],
-     "kind": "def",
-     "sorry": false
-    }
-   ],
-   "missing": [],
-   "open": []
-  }
- },
- "chapter": "sec-proper-base-change",
- "unit": "sk-def-exchange",
- "split_report": {
-  "date": "2026-10-09",
-  "item": "def-weil-pbc-derived-square-iso",
-  "worker": "stage1",
-  "summary": "Checked against unit sk-def-exchange (the isomorphism f'^{-1}g^{-1}Rf_* ≅ g'^{-1}f^{-1}Rf_* 'induced by f∘g'=g∘f'') and Stacks 07A7/0D6D/0736. Rewrote the statement to name every ingredient and every claim: the derived functors are first taken on the unbounded D (lem-sf-exact-functor-derived-triangulated, Mathlib mapDerivedCategory with its identification β_u: u^{-1}_D Q ≅ Q u^{-1}), the natural isomorphism is lifted along Q there by the reviewed Mathlib leaf lem-weil-pbc-localization-universal-property clause (2) (Localization.liftNatIso), and θ^D on D^+ is its restriction to the full subcategory, its inverse images on D^+ being restrictions (def-weil-pbc-derived-inverse-image). The old wording claimed uniqueness on D^+ from the components at QK^• with K^• bounded below only; that needs every object of D^+ to be isomorphic to such a QK^• (truncation), a claim with no node, and is not needed by the user def-weil-pbc-derived-exchange, so it was replaced by the restriction (which matches the source Lean: mapDerivedCategoryPlusNatIso is fullyFaithfulCancelRight of the D-level iso; Mathlib's DerivedCategory.Plus.Q is not yet known to be a localization). Added stmt_deps def-weil-pbc-inverse-image, prop-weil-pbc-inverse-image-exact (termwise functors invert quasi-isomorphisms), lem-sf-exact-functor-derived-triangulated, lem-weil-pbc-localization-universal-property. The sheaf-level θ_□ is the datum of def-weil-pbc-cartesian-square; that the termwise θ is a morphism of complexes is its naturality (written in the statement). No new nodes. Mathlib: the pinned Mathlib has no composition or NatTrans version of mapDerivedCategory and nothing on D^+; Loogle's newer Mathlib has Functor.mapDerivedCategoryCompIso and NatTrans.mapDerivedCategory on D only (recorded). Lean: AlgebraicGeometry.Etale.pullbackSquareComparison (slopmaster2, MorphismDefs.lean:145-153, sorry-free by the sorry map) builds this isomorphism on D^+ for the coefficient category A from the composition isos upperStarPlusComp and the square's equality; its sheaf-level θ is the composite of the composition isomorphisms upperStarComp, a choice of θ_□ consistent with def-weil-pbc-cartesian-square."
- },
- "lean": {
-  "branch": "slopmaster2",
-  "declarations": [
-   "AlgebraicGeometry.Etale.pullbackSquareComparison"
+  "kind": "definition",
+  "title": "Square isomorphism on bounded below derived categories",
+  "statement": "Let $\\square=(f,f',g,g',\\alpha)$ be a cartesian square of schemes [def-weil-pbc-cartesian-square],\n\n$$\n \\begin{array}{ccc}\n X'&\\xrightarrow{g'}&X\\\\\n f'\\downarrow&&\\downarrow f\\\\\n Y'&\\xrightarrow{g}&Y\n \\end{array}\n$$\n\nwith its specified natural isomorphism $\\theta_\\square:f'^{-1}g^{-1}\\xrightarrow{\\sim}g'^{-1}f^{-1}$ of functors $\\Ab(Y_{\\Et})\\to\\Ab(X'_{\\Et})$ between the sheaf-level inverse images [def-weil-pbc-inverse-image] (of the square only the equality $fg'=gf'$ enters, through $\\theta_\\square$). The inverse images are exact [prop-weil-pbc-inverse-image-exact]; for each edge $u\\in\\{f,g,f',g'\\}$ let $u^{-1}_D:D(V_{\\Et})\\to D(U_{\\Et})$ be the functor on the derived categories [def-weil-pbc-derived-categories], [def-weil-abstract-derived-category] induced by applying $u^{-1}$ termwise to cochain complexes, with its natural isomorphism $\\beta_u:u^{-1}_D(QK^\\bullet)\\xrightarrow{\\sim}Q(u^{-1}K^\\bullet)$ for every complex $K^\\bullet$ [lem-sf-exact-functor-derived-triangulated], $Q$ denoting the localization functors at the quasi-isomorphisms; and let $u^{-1}:\\Dplus(V_{\\Et})\\to\\Dplus(U_{\\Et})$ be its restriction to the bounded below derived categories, the inverse image on $\\Dplus$ [def-weil-pbc-derived-inverse-image].\n\nFor a complex $K^\\bullet$ of sheaves on $Y_{\\Et}$ the termwise isomorphisms $\\theta_{\\square,K^r}$ commute with the differentials (naturality of $\\theta_\\square$) and form an isomorphism of complexes $\\theta_{\\square,K^\\bullet}=(\\theta_{\\square,K^r})_r:f'^{-1}g^{-1}K^\\bullet\\to g'^{-1}f^{-1}K^\\bullet$, natural in $K^\\bullet$. Write\n\n$$\n \\beta_1:f'^{-1}_Dg^{-1}_D(QK^\\bullet)\\xrightarrow{f'^{-1}_D\\beta_g}f'^{-1}_DQ(g^{-1}K^\\bullet)\\xrightarrow{\\beta_{f'}}Q(f'^{-1}g^{-1}K^\\bullet),\\qquad\n \\beta_2:g'^{-1}_Df^{-1}_D(QK^\\bullet)\\xrightarrow{g'^{-1}_D\\beta_f}g'^{-1}_DQ(f^{-1}K^\\bullet)\\xrightarrow{\\beta_{g'}}Q(g'^{-1}f^{-1}K^\\bullet).\n$$\n\nLet $\\theta^{D}_{\\square,\\mathrm{unb}}:f'^{-1}_D\\circ g^{-1}_D\\xrightarrow{\\sim}g'^{-1}_D\\circ f^{-1}_D$ (functors $D(Y_{\\Et})\\to D(X'_{\\Et})$) be the unique natural transformation whose component at $QK^\\bullet$ is\n\n$$\n \\beta_2^{-1}\\circ Q(\\theta_{\\square,K^\\bullet})\\circ\\beta_1\\qquad\\text{for every complex }K^\\bullet\\text{ on }Y_{\\Et};\n$$\n\nit exists, is unique and is a natural isomorphism by the universal property of the localization [lem-weil-pbc-localization-universal-property], clause (2), applied to $L=Q$, $W$ the quasi-isomorphisms, $F_1=Q\\circ(f'^{-1}g^{-1})$ and $F_2=Q\\circ(g'^{-1}f^{-1})$ (termwise composites), $F_1'=f'^{-1}_Dg^{-1}_D$, $F_2'=g'^{-1}_Df^{-1}_D$, $\\phi_1=\\beta_1$, $\\phi_2=\\beta_2$, and $\\tau=Q\\theta_{\\square,-}$ (a natural isomorphism, so its lift is one; $F_1,F_2$ invert quasi-isomorphisms since they are isomorphic to functors $F_i'\\circ Q$). The *derived square isomorphism*\n\n$$\n \\theta^D_\\square:f'^{-1}\\circ g^{-1}\\xrightarrow{\\ \\sim\\ }g'^{-1}\\circ f^{-1}\\qquad\\text{of functors }\\Dplus(Y_{\\Et})\\to\\Dplus(X'_{\\Et})\n$$\n\nis the restriction of $\\theta^D_{\\square,\\mathrm{unb}}$ to the full subcategory $\\Dplus(Y_{\\Et})$: its component at $K\\in\\Dplus(Y_{\\Et})$ is $\\theta^D_{\\square,\\mathrm{unb},K}$, a morphism between objects of the full subcategory $\\Dplus(X'_{\\Et})$. In particular, for a bounded below complex $K^\\bullet$, its component at $QK^\\bullet$ is, after the identifications $\\beta_1,\\beta_2$, the class $Q\\bigl((\\theta_{\\square,K^r})_r\\bigr)$ of the termwise isomorphism.",
+  "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Remark 07A7 (remark-base-change): the identification L(f')^* o Lg^* = L(g')^* o Lf^* used in the base change map; the general composition isomorphism of derived pullbacks is Lemma 0D6D (lemma-derived-pullback-composition); for exact pullbacks the derived pullback is computed termwise (Section 0735, Lemma 0736). The construction by descent along Q follows the agent-written source Lean AlgebraicGeometry.Etale.pullbackSquareComparison (slopmaster2, WeilConjectures/SixFunctors/Etale/BaseChangeTheorems/MorphismDefs.lean:145-153, via Functor.mapDerivedCategoryPlusNatIso / mapDerivedCategoryPlusCompIso, WeilConjectures/Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean:94-186, 504-574: Localization.liftNatIso on D, then restriction to D^+ along the fully faithful inclusion)."
+  },
+  "stmt_deps": [
+    "def-weil-pbc-cartesian-square",
+    "def-weil-pbc-inverse-image",
+    "prop-weil-pbc-inverse-image-exact",
+    "def-weil-pbc-derived-categories",
+    "def-weil-abstract-derived-category",
+    "lem-sf-exact-functor-derived-triangulated",
+    "def-weil-pbc-derived-inverse-image",
+    "lem-weil-pbc-localization-universal-property"
   ],
-  "note": "attached by the lead at review (2026-10-09), found by the opus worker: the Lean defines the square comparison on the bounded below derived categories for any coefficient category from the composition isomorphisms of the derived inverse images and the commutativity of the square; it is the node when the sheaf-level theta of def-weil-pbc-cartesian-square is the composite of the composition isomorphisms (to be confirmed when that node is split); sorry-free on the full map"
- },
- "reviewed": {
-  "date": "2026-10-09",
-  "by": "L",
-  "result": "pass",
-  "note": "theta^D now built on D by the universal property of the localization and restricted to D^+, as the source Lean does; Lean attached by the lead"
- }
+  "proof": [],
+  "proof_deps": [],
+  "proof_origin": null,
+  "mathlib_searches": [
+    {
+      "tool": "grep",
+      "query": "grep -n 'def liftNatTrans\\|def liftNatIso' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Localization/Predicate.lean; grep -rn 'mapDerivedCategoryCompIso\\|mapDerivedCategoryNatIso\\|NatTrans.mapDerivedCategory' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+      "results": "Predicate.lean:326 Localization.liftNatTrans and :357 liftNatIso (descent of a natural transformation between lifted functors along a localization); no mapDerivedCategory composition or NatIso versions, nothing for D^+",
+      "date": "2026-10-09",
+      "verdict": "no match (the descent step is Localization.liftNatIso; the isomorphism itself is not in Mathlib)"
+    },
+    {
+      "tool": "grep",
+      "query": "grep -rn 'NatTrans.mapHomotopyCategory\\|def mapHomologicalComplexCompIso' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/HomotopyCategory.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/Additive.lean",
+      "results": "NatTrans.mapHomotopyCategory (HomotopyCategory.lean:259) and the composition iso for mapHomotopyCategory (HomotopyCategory.lean:294): the termwise transformation on homotopy categories exists, its derived-category version does not",
+      "date": "2026-10-09",
+      "verdict": "no match"
+    },
+    {
+      "tool": "leansearch",
+      "query": "natural isomorphism of composites of induced functors on derived categories from an isomorphism of exact functors",
+      "results": "Functor.leftDerivedNatIso / rightDerivedNatIso (Functor/Derived); Functor.mapHomologicalComplexUpToQuasiIso, …Factors, …Factorsh (Mathlib.Algebra.Homology.Localization)",
+      "date": "2026-10-09",
+      "verdict": "no match; tools only"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "natural isomorphism between functors induced on localizations from a natural isomorphism of functors inverting W",
+      "results": "CategoryTheory.Localization.liftNatIso, liftNatIso_hom (Localization/Predicate.lean); Localization.isoUniqFunctor; Functor.IsLocalization.of_iso; Localization.compUniqFunctor",
+      "date": "2026-10-09",
+      "verdict": "tool, not a match: Localization.liftNatIso descends a natural iso along a localization given Lifting instances; applying it here needs the composite Lifting data on D^+ and the termwise iso, i.e. this node's construction"
+    },
+    {
+      "tool": "grep",
+      "query": "rg -n 'mapDerivedCategoryCompIso|mapDerivedCategoryIso|NatTrans.mapDerivedCategory|NatIso.mapDerivedCategory' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+      "results": "none",
+      "date": "2026-10-09",
+      "verdict": "no match"
+    },
+    {
+      "tool": "leansearch",
+      "query": "composition isomorphism (F ⋙ G).mapDerivedCategory ≅ F.mapDerivedCategory ⋙ G.mapDerivedCategory for exact functors",
+      "results": "Grothendieck.mapCompIso, Functor.mapGrpCompIso, Functor.mapMonCompIso, Functor.coreComp (unrelated composition isos); Functor.mapDerivedCategory, mapDerivedCategoryFactorsh(_hom_app) (Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor); Ext.mapExactFunctor_hom",
+      "date": "2026-10-09",
+      "verdict": "no match in the pinned Mathlib"
+    },
+    {
+      "tool": "loogle",
+      "query": "CategoryTheory.Functor.mapDerivedCategory",
+      "results": "on the Loogle server's (newer) Mathlib: Functor.mapDerivedCategory, mapDerivedCategoryFactors(h), mapDerivedCategorySingleFunctor, mapDerivedCategoryIdIso, Functor.mapDerivedCategoryCompIso (F.mapDerivedCategory ⋙ G.mapDerivedCategory ≅ (F ⋙ G).mapDerivedCategory), NatTrans.mapDerivedCategory (τ : F ⟶ G) : F.mapDerivedCategory ⟶ G.mapDerivedCategory, with CommShift instances; all on the unbounded D, nothing on DerivedCategory.Plus. rg in the pinned Mathlib (~/weil-conjectures-slopmaster2/.lake/packages/mathlib, v4.33.1) finds none of mapDerivedCategoryCompIso, mapDerivedCategoryIdIso, NatTrans.mapDerivedCategory: ExactFunctor.lean there has only mapDerivedCategory (:36), mapDerivedCategoryFactors (:41), mapDerivedCategoryFactorsh (:61), mapDerivedCategorySingleFunctor (:112)",
+      "date": "2026-10-09",
+      "verdict": "no match in the pinned Mathlib; in a newer Mathlib the D-level ingredients exist (θ^D_unb = (mapDerivedCategoryCompIso g f').symm ≪≫ NatIso of NatTrans.mapDerivedCategory θ_□ ≪≫ mapDerivedCategoryCompIso f g', one lemma per clause) but not the D^+ restriction, so still no leaf"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "natural isomorphism of exact functors induces natural isomorphism of the induced functors on derived categories, computed termwise on complexes",
+      "results": "Functor.mapDerivedCategorySingleFunctor, mapDerivedCategoryFactorsh(_hom_app), mapDerivedCategoryFactors, mapDerivedCategory (DerivedCategory/ExactFunctor); Functor.mapHomologicalComplexUpToQuasiIsoFactors(h)(_hom_app) (Algebra/Homology/Localization)",
+      "date": "2026-10-09",
+      "verdict": "no match; tools only (the lifts are Localization.liftNatIso, node lem-weil-pbc-localization-universal-property)"
+    },
+    {
+      "tool": "grep",
+      "query": "rg -n 'mapDerivedCategoryCompIso|NatTrans.mapDerivedCategory|mapDerivedCategoryIdIso|def mapDerivedCategory' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib; sed -n 215,230p .../Mathlib/Algebra/Homology/DerivedCategory/Plus.lean",
+      "results": "only mapDerivedCategory, mapDerivedCategoryFactors, mapDerivedCategoryFactorsh, mapDerivedCategorySingleFunctor (ExactFunctor.lean); DerivedCategory.Plus.Q (Plus.lean:221) with '-- TODO: show that Q is indeed a localization functor' (so the D^+ functor is best obtained by restriction from D, as here)",
+      "date": "2026-10-09",
+      "verdict": "no match"
+    }
+  ],
+  "mathlib_match": null,
+  "status": "split",
+  "merged_into": null,
+  "import_flags": [],
+  "created": {
+    "by": "worker",
+    "item": "def-weil-pbc-derived-exchange",
+    "date": "2026-10-09"
+  },
+  "lean_audit": {
+    "master": {
+      "state": "rests_on_sorry",
+      "decls": [
+        {
+          "name": "AlgebraicGeometry.Etale.pullbackSquareComparison",
+          "module": "WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.MorphismDefs",
+          "lines": [
+            145,
+            153
+          ],
+          "kind": "def",
+          "sorry": false
+        }
+      ],
+      "missing": [],
+      "open": [
+        {
+          "name": "AlgebraicGeometry.Etale.hasLeftKanExtension_op_overPullback",
+          "module": "WeilConjectures.CategoryTheory.GrothendieckAbelian.HasLeftKanExtension",
+          "lines": [
+            223,
+            231
+          ],
+          "kind": "theorem",
+          "nodes": [],
+          "below": false
+        },
+        {
+          "name": "AlgebraicGeometry.Etale.preservesFiniteLimits_op_lan_overPullback_of_isGrothendieckAbelian",
+          "module": "WeilConjectures.CategoryTheory.GrothendieckAbelian.HasLeftKanExtension",
+          "lines": [
+            270,
+            282
+          ],
+          "kind": "theorem",
+          "nodes": [],
+          "below": false
+        },
+        {
+          "name": "CategoryTheory.Abelian.hasKInjectiveResolutions_of_isGrothendieckAbelian",
+          "module": "WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution",
+          "lines": [
+            19,
+            25
+          ],
+          "kind": "theorem",
+          "nodes": [],
+          "below": false
+        },
+        {
+          "name": "CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall",
+          "module": "WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify",
+          "lines": [
+            39,
+            49
+          ],
+          "kind": "theorem",
+          "nodes": [],
+          "below": false
+        }
+      ]
+    },
+    "slopmaster2": {
+      "state": "closed",
+      "decls": [
+        {
+          "name": "AlgebraicGeometry.Etale.pullbackSquareComparison",
+          "module": "WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.MorphismDefs",
+          "lines": [
+            145,
+            153
+          ],
+          "kind": "def",
+          "sorry": false
+        }
+      ],
+      "missing": [],
+      "open": []
+    }
+  },
+  "chapter": "sec-proper-base-change",
+  "unit": "sk-def-exchange",
+  "split_report": {
+    "date": "2026-10-09",
+    "item": "def-weil-pbc-derived-square-iso",
+    "worker": "stage1",
+    "summary": "Checked against unit sk-def-exchange (the isomorphism f'^{-1}g^{-1}Rf_* ≅ g'^{-1}f^{-1}Rf_* 'induced by f∘g'=g∘f'') and Stacks 07A7/0D6D/0736. Rewrote the statement to name every ingredient and every claim: the derived functors are first taken on the unbounded D (lem-sf-exact-functor-derived-triangulated, Mathlib mapDerivedCategory with its identification β_u: u^{-1}_D Q ≅ Q u^{-1}), the natural isomorphism is lifted along Q there by the reviewed Mathlib leaf lem-weil-pbc-localization-universal-property clause (2) (Localization.liftNatIso), and θ^D on D^+ is its restriction to the full subcategory, its inverse images on D^+ being restrictions (def-weil-pbc-derived-inverse-image). The old wording claimed uniqueness on D^+ from the components at QK^• with K^• bounded below only; that needs every object of D^+ to be isomorphic to such a QK^• (truncation), a claim with no node, and is not needed by the user def-weil-pbc-derived-exchange, so it was replaced by the restriction (which matches the source Lean: mapDerivedCategoryPlusNatIso is fullyFaithfulCancelRight of the D-level iso; Mathlib's DerivedCategory.Plus.Q is not yet known to be a localization). Added stmt_deps def-weil-pbc-inverse-image, prop-weil-pbc-inverse-image-exact (termwise functors invert quasi-isomorphisms), lem-sf-exact-functor-derived-triangulated, lem-weil-pbc-localization-universal-property. The sheaf-level θ_□ is the datum of def-weil-pbc-cartesian-square; that the termwise θ is a morphism of complexes is its naturality (written in the statement). No new nodes. Mathlib: the pinned Mathlib has no composition or NatTrans version of mapDerivedCategory and nothing on D^+; Loogle's newer Mathlib has Functor.mapDerivedCategoryCompIso and NatTrans.mapDerivedCategory on D only (recorded). Lean: AlgebraicGeometry.Etale.pullbackSquareComparison (slopmaster2, MorphismDefs.lean:145-153, sorry-free by the sorry map) builds this isomorphism on D^+ for the coefficient category A from the composition isos upperStarPlusComp and the square's equality; its sheaf-level θ is the composite of the composition isomorphisms upperStarComp, a choice of θ_□ consistent with def-weil-pbc-cartesian-square."
+  },
+  "lean": {
+    "module": "WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.MorphismDefs",
+    "declaration": "AlgebraicGeometry.Etale.pullbackSquareComparison",
+    "branch": "slopmaster2",
+    "line": 145,
+    "declarations": [
+      "AlgebraicGeometry.Etale.pullbackSquareComparison"
+    ],
+    "sorry_free": true,
+    "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state closed)"
+  },
+  "reviewed": {
+    "date": "2026-10-09",
+    "by": "L",
+    "result": "pass",
+    "note": "theta^D now built on D by the universal property of the localization and restricted to D^+, as the source Lean does; Lean attached by the lead"
+  }
 }

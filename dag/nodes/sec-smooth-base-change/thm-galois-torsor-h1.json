@@ -1,146 +1,163 @@
 {
- "id": "thm-galois-torsor-h1",
- "blueprint": {
-  "is": "thm-galois-torsor-h1",
-  "from": null,
-  "same_as": null
- },
- "kind": "statement",
- "title": "Torsors and first etale cohomology",
- "statement": "In the situation of [def-galois-categories], let $M$ be a finite\nabelian group. Then the construction below is a canonical bijection\n\n$$\n\\operatorname{Tor}^1(Y,M)\\xrightarrow{\\ \\sim\\ }H^1(Y_{\\Et},\\underline M),\n$$\n\nnatural in $(Y,M)$. For a curve the statement is proved independently in\nthe smooth-curve chapter by $\\operatorname{Ext}^1$ and the Baer-sum\ndescription of torsors.",
- "source": {
-  "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-prop-input-torsors/thm-galois-torsor-h1.md",
-  "place": "node thm-galois-torsor-h1, order 1408"
- },
- "stmt_deps": [
-  "def-galois-categories"
- ],
- "proof": [
-  {
-   "text": "We use the $M$-torsors of [def-weil-pbc-finite-torsors], the\ncohomology $H^1(Y_{\\Et},-)$ of [def-weil-pbc-etale-cohomology]\nand the dictionary of [thm-galois-lc-etale] between finite locally\nconstant sheaves and finite etale schemes.\nStep 1: the lifting torsor. Choose $0\\to\\underline M\\to I\\xrightarrow{d}J\\to0$ as in [lem-galois-flasque] and let $s\\in J(Y)$ represent a class in $H^1(Y_{\\Et},\\underline M)$. Define\n$P_s(U)=\\{x\\in I(U):d(x)=s|_U\\}$, a sheaf of sets with the translation\naction of $\\underline M$.\nStep 2: $P_s$ is an $M$-torsor. If $x,x'\\in P_s(U)$ then\n$d(x-x')=0$, so $x'-x\\in\\ker d(U)=\\underline M(U)$; hence\n$M\\times P_s\\to P_s\\times P_s$, $(m,x)\\mapsto(x+m,x)$, is an\nisomorphism. It is locally nonempty because $J$ is the quotient sheaf of\n$I$: over a cover $\\{U_i\\}$ there are $x_i\\in I(U_i)$ with\n$d(x_i)=s|_{U_i}$, and then $P_s|_{U_i}\\cong\\underline M|_{U_i}$. So\n$P_s$ is finite locally constant with simply transitive $M$-action,\ni.e. an $M$-torsor.\nStep 3: well-definedness and naturality. Translation by $x\\in I(Y)$\nidentifies $P_{s+d(x)}\\cong P_s$, so $s\\mapsto[P_s]$ factors through\n$\\operatorname{coker}(d_Y)\\cong H^1(Y_{\\Et},\\underline M)$; functoriality\nof $I,J,d$ and of pullback gives naturality.\nStep 4: injectivity. Suppose $P_s\\cong P_{s'}$. Trivialize both over a\ncover $\\{U_i\\}$ and choose $p_i\\in P_s(U_i)$, $p_i'\\in P_{s'}(U_i)$.\nOver $U_i$ the isomorphism is translation by $a_i=p_i'-p_i\\in I(U_i)$;\nover $U_{ij}$ the two trivializations differ by an element of\n$\\underline M(U_{ij})$, and compatibility of the isomorphism with the\ntorsor structures says exactly that the $a_i$ agree on overlaps, so they\nglue to $a\\in I(Y)$ with $d(a)=s'-s$. Hence $s-s'\\in \\operatorname{im}(d_Y)$ and the classes agree.\nStep 5: surjectivity. Let $P$ be an $M$-torsor and trivialize it over\na cover $\\{U_i\\to Y\\}$ with sections $p_i\\in P(U_i)$ (possible by\nStep 2 applied to the locally constant structure); put\n$c_{ij}=p_i-p_j\\in\\underline M(U_{ij})$. The $c_{ij}$ form a Čech\n1-cocycle. The Čech complex of the Godement sheaf $I$ of\n[lem-galois-flasque] with respect to any covering is acyclic in\npositive degrees: at each geometric point it is the cochain complex\nof the nerve of a surjection of sets, which is contractible, and\nproducts of such complexes are again acyclic in positive degrees.\nHence $c_{ij}=a_i|_{U_{ij}}-a_j|_{U_{ij}}$ for some\n$a_i\\in I(U_i)$. The sections $d(a_i)\\in J(U_i)$ agree on the\noverlaps, because $d(c_{ij})=0$, so they glue to $s\\in J(Y)$, and\n$a_i\\in P_s(U_i)$ are trivializations of the lifting torsor $P_s$ with\ntransition data $a_i-a_j=c_{ij}$. Both $P$ and $P_s$ are therefore\nglued from the trivial torsors $\\underline M|_{U_i}$ by the same\ncocycle $(c_{ij})$, so $P\\cong P_s$.\nSteps 1–5 give the bijection.",
-   "uses": [
+  "id": "thm-galois-torsor-h1",
+  "blueprint": {
+    "is": "thm-galois-torsor-h1",
+    "from": null,
+    "same_as": null
+  },
+  "kind": "statement",
+  "title": "Torsors and first etale cohomology",
+  "statement": "In the situation of [def-galois-categories], let $M$ be a finite\nabelian group. Then the construction below is a canonical bijection\n\n$$\n\\operatorname{Tor}^1(Y,M)\\xrightarrow{\\ \\sim\\ }H^1(Y_{\\Et},\\underline M),\n$$\n\nnatural in $(Y,M)$. For a curve the statement is proved independently in\nthe smooth-curve chapter by $\\operatorname{Ext}^1$ and the Baer-sum\ndescription of torsors.",
+  "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-prop-input-torsors/thm-galois-torsor-h1.md",
+    "place": "node thm-galois-torsor-h1, order 1408"
+  },
+  "stmt_deps": [
+    "def-galois-categories"
+  ],
+  "proof": [
+    {
+      "text": "We use the $M$-torsors of [def-weil-pbc-finite-torsors], the\ncohomology $H^1(Y_{\\Et},-)$ of [def-weil-pbc-etale-cohomology]\nand the dictionary of [thm-galois-lc-etale] between finite locally\nconstant sheaves and finite etale schemes.\nStep 1: the lifting torsor. Choose $0\\to\\underline M\\to I\\xrightarrow{d}J\\to0$ as in [lem-galois-flasque] and let $s\\in J(Y)$ represent a class in $H^1(Y_{\\Et},\\underline M)$. Define\n$P_s(U)=\\{x\\in I(U):d(x)=s|_U\\}$, a sheaf of sets with the translation\naction of $\\underline M$.\nStep 2: $P_s$ is an $M$-torsor. If $x,x'\\in P_s(U)$ then\n$d(x-x')=0$, so $x'-x\\in\\ker d(U)=\\underline M(U)$; hence\n$M\\times P_s\\to P_s\\times P_s$, $(m,x)\\mapsto(x+m,x)$, is an\nisomorphism. It is locally nonempty because $J$ is the quotient sheaf of\n$I$: over a cover $\\{U_i\\}$ there are $x_i\\in I(U_i)$ with\n$d(x_i)=s|_{U_i}$, and then $P_s|_{U_i}\\cong\\underline M|_{U_i}$. So\n$P_s$ is finite locally constant with simply transitive $M$-action,\ni.e. an $M$-torsor.\nStep 3: well-definedness and naturality. Translation by $x\\in I(Y)$\nidentifies $P_{s+d(x)}\\cong P_s$, so $s\\mapsto[P_s]$ factors through\n$\\operatorname{coker}(d_Y)\\cong H^1(Y_{\\Et},\\underline M)$; functoriality\nof $I,J,d$ and of pullback gives naturality.\nStep 4: injectivity. Suppose $P_s\\cong P_{s'}$. Trivialize both over a\ncover $\\{U_i\\}$ and choose $p_i\\in P_s(U_i)$, $p_i'\\in P_{s'}(U_i)$.\nOver $U_i$ the isomorphism is translation by $a_i=p_i'-p_i\\in I(U_i)$;\nover $U_{ij}$ the two trivializations differ by an element of\n$\\underline M(U_{ij})$, and compatibility of the isomorphism with the\ntorsor structures says exactly that the $a_i$ agree on overlaps, so they\nglue to $a\\in I(Y)$ with $d(a)=s'-s$. Hence $s-s'\\in \\operatorname{im}(d_Y)$ and the classes agree.\nStep 5: surjectivity. Let $P$ be an $M$-torsor and trivialize it over\na cover $\\{U_i\\to Y\\}$ with sections $p_i\\in P(U_i)$ (possible by\nStep 2 applied to the locally constant structure); put\n$c_{ij}=p_i-p_j\\in\\underline M(U_{ij})$. The $c_{ij}$ form a Čech\n1-cocycle. The Čech complex of the Godement sheaf $I$ of\n[lem-galois-flasque] with respect to any covering is acyclic in\npositive degrees: at each geometric point it is the cochain complex\nof the nerve of a surjection of sets, which is contractible, and\nproducts of such complexes are again acyclic in positive degrees.\nHence $c_{ij}=a_i|_{U_{ij}}-a_j|_{U_{ij}}$ for some\n$a_i\\in I(U_i)$. The sections $d(a_i)\\in J(U_i)$ agree on the\noverlaps, because $d(c_{ij})=0$, so they glue to $s\\in J(Y)$, and\n$a_i\\in P_s(U_i)$ are trivializations of the lifting torsor $P_s$ with\ntransition data $a_i-a_j=c_{ij}$. Both $P$ and $P_s$ are therefore\nglued from the trivial torsors $\\underline M|_{U_i}$ by the same\ncocycle $(c_{ij})$, so $P\\cong P_s$.\nSteps 1–5 give the bijection.",
+      "uses": [
+        "def-weil-pbc-finite-torsors",
+        "def-weil-pbc-etale-cohomology",
+        "thm-galois-lc-etale",
+        "lem-galois-flasque"
+      ],
+      "elementary": false
+    }
+  ],
+  "proof_deps": [
     "def-weil-pbc-finite-torsors",
     "def-weil-pbc-etale-cohomology",
     "thm-galois-lc-etale",
     "lem-galois-flasque"
-   ],
-   "elementary": false
-  }
- ],
- "proof_deps": [
-  "def-weil-pbc-finite-torsors",
-  "def-weil-pbc-etale-cohomology",
-  "thm-galois-lc-etale",
-  "lem-galois-flasque"
- ],
- "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-prop-input-torsors/thm-galois-torsor-h1.md",
-  "place": "## Proof"
- },
- "mathlib_searches": [],
- "mathlib_match": null,
- "status": "imported",
- "merged_into": null,
- "import_flags": [],
- "blueprint_kind": "theorem",
- "blueprint_order": 1408,
- "blueprint_uses": [
-  "def-galois-categories",
-  "def-weil-pbc-etale-cohomology",
-  "def-weil-pbc-finite-torsors",
-  "lem-galois-flasque",
-  "thm-galois-lc-etale"
- ],
- "proof_split_by": "paragraphs",
- "lean_audit": {
-  "master": {
-   "state": "none",
-   "decls": [],
-   "missing": []
+  ],
+  "proof_origin": {
+    "by": "agent",
+    "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-prop-input-torsors/thm-galois-torsor-h1.md",
+    "place": "## Proof"
   },
-  "slopmaster2": {
-   "state": "closed",
-   "decls": [
-    {
-     "name": "CategoryTheory.Sheaf.Torsor.classH1",
-     "module": "WeilConjectures.CategoryTheory.Sites.Torsor",
-     "lines": [
-      749,
-      763
-     ],
-     "kind": "def",
-     "sorry": false
+  "mathlib_searches": [],
+  "mathlib_match": null,
+  "status": "imported",
+  "merged_into": null,
+  "import_flags": [],
+  "blueprint_kind": "theorem",
+  "blueprint_order": 1408,
+  "blueprint_uses": [
+    "def-galois-categories",
+    "def-weil-pbc-etale-cohomology",
+    "def-weil-pbc-finite-torsors",
+    "lem-galois-flasque",
+    "thm-galois-lc-etale"
+  ],
+  "proof_split_by": "paragraphs",
+  "lean_audit": {
+    "master": {
+      "state": "none",
+      "decls": [],
+      "missing": []
     },
-    {
-     "name": "CategoryTheory.Sheaf.Torsor.classH1_lifts",
-     "module": "WeilConjectures.CategoryTheory.Sites.Torsor",
-     "lines": [
-      781,
-      800
-     ],
-     "kind": "theorem",
-     "sorry": false
-    },
-    {
-     "name": "CategoryTheory.Sheaf.Torsor.exists_quotientEquiv_H_one",
-     "module": "WeilConjectures.CategoryTheory.Sites.Torsor",
-     "lines": [
-      813,
-      822
-     ],
-     "kind": "theorem",
-     "sorry": false
-    },
-    {
-     "name": "CategoryTheory.Sheaf.Torsor.lifts",
-     "module": "WeilConjectures.CategoryTheory.Sites.Torsor",
-     "lines": [
-      364,
-      400
-     ],
-     "kind": "def",
-     "sorry": false,
-     "partial": "`thm-galois-torsor-h1`, Steps 1 and 2"
-    },
-    {
-     "name": "CategoryTheory.Sheaf.Torsor.lifts_equiv_lifts_add",
-     "module": "WeilConjectures.CategoryTheory.Sites.Torsor",
-     "lines": [
-      409,
-      428
-     ],
-     "kind": "theorem",
-     "sorry": false,
-     "partial": "`thm-galois-torsor-h1`, Step 3"
-    },
-    {
-     "name": "CategoryTheory.Sheaf.Torsor.exists_hom_app_eq_sub_of_lifts_equiv",
-     "module": "WeilConjectures.CategoryTheory.Sites.Torsor",
-     "lines": [
-      430,
-      463
-     ],
-     "kind": "theorem",
-     "sorry": false,
-     "partial": "`thm-galois-torsor-h1`, Step 4"
-    },
-    {
-     "name": "CategoryTheory.Sheaf.Torsor.exists_equiv_lifts",
-     "module": "WeilConjectures.CategoryTheory.Sites.Torsor",
-     "lines": [
-      601,
-      647
-     ],
-     "kind": "theorem",
-     "sorry": false,
-     "partial": "`thm-galois-torsor-h1`, Step 5, where the Čech argument with the Godement sheaf is"
+    "slopmaster2": {
+      "state": "closed",
+      "decls": [
+        {
+          "name": "CategoryTheory.Sheaf.Torsor.classH1",
+          "module": "WeilConjectures.CategoryTheory.Sites.Torsor",
+          "lines": [
+            749,
+            763
+          ],
+          "kind": "def",
+          "sorry": false
+        },
+        {
+          "name": "CategoryTheory.Sheaf.Torsor.classH1_lifts",
+          "module": "WeilConjectures.CategoryTheory.Sites.Torsor",
+          "lines": [
+            781,
+            800
+          ],
+          "kind": "theorem",
+          "sorry": false
+        },
+        {
+          "name": "CategoryTheory.Sheaf.Torsor.exists_quotientEquiv_H_one",
+          "module": "WeilConjectures.CategoryTheory.Sites.Torsor",
+          "lines": [
+            813,
+            822
+          ],
+          "kind": "theorem",
+          "sorry": false
+        },
+        {
+          "name": "CategoryTheory.Sheaf.Torsor.lifts",
+          "module": "WeilConjectures.CategoryTheory.Sites.Torsor",
+          "lines": [
+            364,
+            400
+          ],
+          "kind": "def",
+          "sorry": false,
+          "partial": "`thm-galois-torsor-h1`, Steps 1 and 2"
+        },
+        {
+          "name": "CategoryTheory.Sheaf.Torsor.lifts_equiv_lifts_add",
+          "module": "WeilConjectures.CategoryTheory.Sites.Torsor",
+          "lines": [
+            409,
+            428
+          ],
+          "kind": "theorem",
+          "sorry": false,
+          "partial": "`thm-galois-torsor-h1`, Step 3"
+        },
+        {
+          "name": "CategoryTheory.Sheaf.Torsor.exists_hom_app_eq_sub_of_lifts_equiv",
+          "module": "WeilConjectures.CategoryTheory.Sites.Torsor",
+          "lines": [
+            430,
+            463
+          ],
+          "kind": "theorem",
+          "sorry": false,
+          "partial": "`thm-galois-torsor-h1`, Step 4"
+        },
+        {
+          "name": "CategoryTheory.Sheaf.Torsor.exists_equiv_lifts",
+          "module": "WeilConjectures.CategoryTheory.Sites.Torsor",
+          "lines": [
+            601,
+            647
+          ],
+          "kind": "theorem",
+          "sorry": false,
+          "partial": "`thm-galois-torsor-h1`, Step 5, where the Čech argument with the Godement sheaf is"
+        }
+      ],
+      "missing": [],
+      "open": []
     }
-   ],
-   "missing": [],
-   "open": []
+  },
+  "chapter": "sec-smooth-base-change",
+  "unit": "sk-prop-input-torsors",
+  "lean": {
+    "module": "WeilConjectures.CategoryTheory.Sites.Torsor",
+    "declaration": "CategoryTheory.Sheaf.Torsor.classH1",
+    "branch": "slopmaster2",
+    "line": 749,
+    "declarations": [
+      "CategoryTheory.Sheaf.Torsor.classH1",
+      "CategoryTheory.Sheaf.Torsor.classH1_lifts",
+      "CategoryTheory.Sheaf.Torsor.exists_quotientEquiv_H_one",
+      "CategoryTheory.Sheaf.Torsor.lifts",
+      "CategoryTheory.Sheaf.Torsor.lifts_equiv_lifts_add",
+      "CategoryTheory.Sheaf.Torsor.exists_hom_app_eq_sub_of_lifts_equiv",
+      "CategoryTheory.Sheaf.Torsor.exists_equiv_lifts"
+    ],
+    "sorry_free": true,
+    "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state closed)"
   }
- },
- "chapter": "sec-smooth-base-change",
- "unit": "sk-prop-input-torsors"
 }

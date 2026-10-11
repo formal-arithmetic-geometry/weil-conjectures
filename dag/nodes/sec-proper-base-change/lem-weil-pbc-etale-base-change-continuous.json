@@ -1,231 +1,235 @@
 {
- "id": "lem-weil-pbc-etale-base-change-continuous",
- "blueprint": {
-  "is": null,
-  "from": {
-   "node": "def-weil-pbc-derived-exchange",
-   "place": "its statement (a notion the statement uses)",
-   "via": [
-    "lem-weil-pbc-etale-inverse-image-algebraic-structures",
-    "prop-weil-pbc-inverse-image-modules-exact",
-    "def-weil-pbc-derived-inverse-image"
-   ]
+  "id": "lem-weil-pbc-etale-base-change-continuous",
+  "blueprint": {
+    "is": null,
+    "from": {
+      "node": "def-weil-pbc-derived-exchange",
+      "place": "its statement (a notion the statement uses)",
+      "via": [
+        "lem-weil-pbc-etale-inverse-image-algebraic-structures",
+        "prop-weil-pbc-inverse-image-modules-exact",
+        "def-weil-pbc-derived-inverse-image"
+      ]
+    },
+    "same_as": null
   },
-  "same_as": null
- },
- "kind": "statement",
- "title": "Base change between small etale sites is continuous; direct image preserves sheaves of sets",
- "statement": "Let $u:U\\to V$ be a morphism of schemes [def-pc-scheme], $V_{\\Et}$, $U_{\\Et}$ the small etale sites [def-weil-pbc-etale-site] and $b:V_{\\Et}\\to U_{\\Et}$, $W\\mapsto U\\times_VW$, $(g:W_1\\to W_2)\\mapsto\\mathrm{id}_U\\times g$, the base-change functor. Then: (1) $b$ sends coverings to coverings: if $\\{W_i\\to W\\}_{i}$ is a covering of $V_{\\Et}$ (etale morphisms over $V$, jointly surjective), then $\\{U\\times_VW_i\\to U\\times_VW\\}_i$ is a covering of $U_{\\Et}$; (2) for a morphism $W'\\to W$ and a morphism $W''\\to W$ of $V_{\\Et}$ the canonical map $U\\times_V(W'\\times_WW'')\\to(U\\times_VW')\\times_{U\\times_VW}(U\\times_VW'')$ is an isomorphism; (3) consequently $b$ is a continuous functor of sites (Stacks, Sites, Definition 00WV), and for every sheaf of sets $\\mathcal F$ on $U_{\\Et}$ the presheaf $u_*\\mathcal F=\\mathcal F\\circ b$, $W\\mapsto\\mathcal F(U\\times_VW)$, is a sheaf of sets on $V_{\\Et}$; the sheaf condition of $u_*\\mathcal F$ for a covering $\\{W_i\\to W\\}$ is the sheaf condition of $\\mathcal F$ for the covering $\\{U\\times_VW_i\\to U\\times_VW\\}$. The same holds for sheaves of abelian groups and of commutative rings, whose sheaf condition is that of the underlying presheaf of sets.",
- "source": {
-  "document": "literature/stacks-project/sites.tex",
-  "place": "Definition 00WV (definition-continuous: u continuous if it sends coverings to coverings and commutes with the fibre products of coverings) and Lemma 00WW (lemma-pushforward-sheaf: u^p of a sheaf is a sheaf for a continuous u, the sheaf conditions being the same); base change of etale coverings: literature/stacks-project/topologies.tex Lemma 0217 (lemma-etale: an etale covering base-changes to an etale covering) with Definition 0215 (definition-etale-covering) and Definition 021B (the small etale site)"
- },
- "stmt_deps": [
-  "def-pc-scheme",
-  "def-weil-pbc-etale-site",
-  "def-pc-fibre-product",
-  "def-weil-pbc-etale-sheaf-of-sets",
-  "def-weil-pbc-abelian-etale-sheaves"
- ],
- "proof": [
-  {
-   "text": "*Step 1 (b is a well-defined functor; clause (2)).* By [lem-weil-pbc-etale-base-change-finite-limits] (1), for an object $W\\to V$ of $V_{\\Et}$ the base change $U\\times_VW\\to U$ is etale, and $W\\mapsto U\\times_VW$, $(g:W_1\\to W_2)\\mapsto\\mathrm{id}_U\\times g$ is a functor $b:V_{\\Et}\\to U_{\\Et}$. By (2) of the same node, $W'\\times_WW''$ (scheme-theoretic fibre product with its map to $V$) is the fibre product in $V_{\\Et}$, and by (3) the canonical morphism $U\\times_V(W'\\times_WW'')\\to(U\\times_VW')\\times_{U\\times_VW}(U\\times_VW'')$, i.e. the morphism $(b(\\mathrm{pr}_1),b(\\mathrm{pr}_2))$ given by the universal property of the fibre product [def-pc-fibre-product], is an isomorphism; it is compatible with the projections: its composites with the two projections are $b(\\mathrm{pr}_1)$ and $b(\\mathrm{pr}_2)$. This is clause (2).",
-   "uses": [
-    "lem-weil-pbc-etale-base-change-finite-limits",
-    "def-pc-fibre-product"
-   ],
-   "elementary": false,
-   "source": {
+  "kind": "statement",
+  "title": "Base change between small etale sites is continuous; direct image preserves sheaves of sets",
+  "statement": "Let $u:U\\to V$ be a morphism of schemes [def-pc-scheme], $V_{\\Et}$, $U_{\\Et}$ the small etale sites [def-weil-pbc-etale-site] and $b:V_{\\Et}\\to U_{\\Et}$, $W\\mapsto U\\times_VW$, $(g:W_1\\to W_2)\\mapsto\\mathrm{id}_U\\times g$, the base-change functor. Then: (1) $b$ sends coverings to coverings: if $\\{W_i\\to W\\}_{i}$ is a covering of $V_{\\Et}$ (etale morphisms over $V$, jointly surjective), then $\\{U\\times_VW_i\\to U\\times_VW\\}_i$ is a covering of $U_{\\Et}$; (2) for a morphism $W'\\to W$ and a morphism $W''\\to W$ of $V_{\\Et}$ the canonical map $U\\times_V(W'\\times_WW'')\\to(U\\times_VW')\\times_{U\\times_VW}(U\\times_VW'')$ is an isomorphism; (3) consequently $b$ is a continuous functor of sites (Stacks, Sites, Definition 00WV), and for every sheaf of sets $\\mathcal F$ on $U_{\\Et}$ the presheaf $u_*\\mathcal F=\\mathcal F\\circ b$, $W\\mapsto\\mathcal F(U\\times_VW)$, is a sheaf of sets on $V_{\\Et}$; the sheaf condition of $u_*\\mathcal F$ for a covering $\\{W_i\\to W\\}$ is the sheaf condition of $\\mathcal F$ for the covering $\\{U\\times_VW_i\\to U\\times_VW\\}$. The same holds for sheaves of abelian groups and of commutative rings, whose sheaf condition is that of the underlying presheaf of sets.",
+  "source": {
     "document": "literature/stacks-project/sites.tex",
-    "place": "Definition 00WV, condition (2) (u(T x_V V_i) -> u(T) x_{u(V)} u(V_i) an isomorphism); the fibre products of the small etale site: literature/stacks-project/topologies.tex Definition 021B (definition-big-small-etale)"
-   }
+    "place": "Definition 00WV (definition-continuous: u continuous if it sends coverings to coverings and commutes with the fibre products of coverings) and Lemma 00WW (lemma-pushforward-sheaf: u^p of a sheaf is a sheaf for a continuous u, the sheaf conditions being the same); base change of etale coverings: literature/stacks-project/topologies.tex Lemma 0217 (lemma-etale: an etale covering base-changes to an etale covering) with Definition 0215 (definition-etale-covering) and Definition 021B (the small etale site)"
   },
-  {
-   "text": "*Step 2 (clause (1): b sends coverings to coverings).* Let $\\{g_i:W_i\\to W\\}_{i\\in I}$ be a covering of $V_{\\Et}$: by [def-weil-pbc-etale-site] a jointly surjective family of etale morphisms. Write $h:W\\to V$ for the structure morphism, $p:U\\times_VW\\to W$ and $q:U\\times_VW\\to U$ for the projections, and $p_i:U\\times_VW_i\\to W_i$, $q_i:U\\times_VW_i\\to U$. Consider the diagram with rows $U\\times_VW_i\\xrightarrow{p_i}W_i$, $U\\times_VW\\xrightarrow{p}W$, $U\\xrightarrow{u}V$ and columns $\\mathrm{id}_U\\times g_i:U\\times_VW_i\\to U\\times_VW$, $g_i$, then $q$, $h$. It commutes ($g_ip_i=p(\\mathrm{id}_U\\times g_i)$ and $hp=uq$ by the definition of $\\mathrm{id}_U\\times g_i$ through the universal property [def-pc-fibre-product]). The lower square is cartesian ($U\\times_VW$ is the fibre product of $u$ and $h$), and the outer rectangle is cartesian: $(U\\times_VW_i,p_i,q\\circ(\\mathrm{id}_U\\times g_i)=q_i)$ is the fibre product of $u$ and $h g_i$, the structure morphism of $W_i$. By [lem-weil-pbc-cartesian-square-pasting] the upper square is cartesian: $(U\\times_VW_i,\\ \\mathrm{id}_U\\times g_i,\\ p_i)$ is a fibre product of $p$ and $g_i$, so there is an isomorphism $\\theta_i:U\\times_VW_i\\xrightarrow{\\sim}(U\\times_VW)\\times_WW_i$ with $k_i\\circ\\theta_i=\\mathrm{id}_U\\times g_i$, $k_i$ the first projection. By [lem-weil-pbc-etale-covering-base-change], applied to the jointly surjective etale family $\\{g_i\\}$ and the morphism $p:U\\times_VW\\to W$, the projections $k_i:(U\\times_VW)\\times_WW_i\\to U\\times_VW$ are etale and jointly surjective. Hence $\\mathrm{id}_U\\times g_i=k_i\\theta_i$ is etale (an isomorphism is an open immersion, hence etale, and a composite of etale morphisms is etale, [lem-weil-pbc-etale-composition-cancellation] (1), (2)), and its image equals the image of $k_i$ since $\\theta_i$ is bijective; so $\\bigcup_i\\mathrm{im}(\\mathrm{id}_U\\times g_i)=\\bigcup_i\\mathrm{im}(k_i)=U\\times_VW$. Thus $\\{b(W_i)\\to b(W)\\}_i$ is a jointly surjective family of etale morphisms between objects of $U_{\\Et}$, i.e. a covering of $U_{\\Et}$ [def-weil-pbc-etale-site].",
-   "uses": [
+  "stmt_deps": [
+    "def-pc-scheme",
     "def-weil-pbc-etale-site",
     "def-pc-fibre-product",
+    "def-weil-pbc-etale-sheaf-of-sets",
+    "def-weil-pbc-abelian-etale-sheaves"
+  ],
+  "proof": [
+    {
+      "text": "*Step 1 (b is a well-defined functor; clause (2)).* By [lem-weil-pbc-etale-base-change-finite-limits] (1), for an object $W\\to V$ of $V_{\\Et}$ the base change $U\\times_VW\\to U$ is etale, and $W\\mapsto U\\times_VW$, $(g:W_1\\to W_2)\\mapsto\\mathrm{id}_U\\times g$ is a functor $b:V_{\\Et}\\to U_{\\Et}$. By (2) of the same node, $W'\\times_WW''$ (scheme-theoretic fibre product with its map to $V$) is the fibre product in $V_{\\Et}$, and by (3) the canonical morphism $U\\times_V(W'\\times_WW'')\\to(U\\times_VW')\\times_{U\\times_VW}(U\\times_VW'')$, i.e. the morphism $(b(\\mathrm{pr}_1),b(\\mathrm{pr}_2))$ given by the universal property of the fibre product [def-pc-fibre-product], is an isomorphism; it is compatible with the projections: its composites with the two projections are $b(\\mathrm{pr}_1)$ and $b(\\mathrm{pr}_2)$. This is clause (2).",
+      "uses": [
+        "lem-weil-pbc-etale-base-change-finite-limits",
+        "def-pc-fibre-product"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/sites.tex",
+        "place": "Definition 00WV, condition (2) (u(T x_V V_i) -> u(T) x_{u(V)} u(V_i) an isomorphism); the fibre products of the small etale site: literature/stacks-project/topologies.tex Definition 021B (definition-big-small-etale)"
+      }
+    },
+    {
+      "text": "*Step 2 (clause (1): b sends coverings to coverings).* Let $\\{g_i:W_i\\to W\\}_{i\\in I}$ be a covering of $V_{\\Et}$: by [def-weil-pbc-etale-site] a jointly surjective family of etale morphisms. Write $h:W\\to V$ for the structure morphism, $p:U\\times_VW\\to W$ and $q:U\\times_VW\\to U$ for the projections, and $p_i:U\\times_VW_i\\to W_i$, $q_i:U\\times_VW_i\\to U$. Consider the diagram with rows $U\\times_VW_i\\xrightarrow{p_i}W_i$, $U\\times_VW\\xrightarrow{p}W$, $U\\xrightarrow{u}V$ and columns $\\mathrm{id}_U\\times g_i:U\\times_VW_i\\to U\\times_VW$, $g_i$, then $q$, $h$. It commutes ($g_ip_i=p(\\mathrm{id}_U\\times g_i)$ and $hp=uq$ by the definition of $\\mathrm{id}_U\\times g_i$ through the universal property [def-pc-fibre-product]). The lower square is cartesian ($U\\times_VW$ is the fibre product of $u$ and $h$), and the outer rectangle is cartesian: $(U\\times_VW_i,p_i,q\\circ(\\mathrm{id}_U\\times g_i)=q_i)$ is the fibre product of $u$ and $h g_i$, the structure morphism of $W_i$. By [lem-weil-pbc-cartesian-square-pasting] the upper square is cartesian: $(U\\times_VW_i,\\ \\mathrm{id}_U\\times g_i,\\ p_i)$ is a fibre product of $p$ and $g_i$, so there is an isomorphism $\\theta_i:U\\times_VW_i\\xrightarrow{\\sim}(U\\times_VW)\\times_WW_i$ with $k_i\\circ\\theta_i=\\mathrm{id}_U\\times g_i$, $k_i$ the first projection. By [lem-weil-pbc-etale-covering-base-change], applied to the jointly surjective etale family $\\{g_i\\}$ and the morphism $p:U\\times_VW\\to W$, the projections $k_i:(U\\times_VW)\\times_WW_i\\to U\\times_VW$ are etale and jointly surjective. Hence $\\mathrm{id}_U\\times g_i=k_i\\theta_i$ is etale (an isomorphism is an open immersion, hence etale, and a composite of etale morphisms is etale, [lem-weil-pbc-etale-composition-cancellation] (1), (2)), and its image equals the image of $k_i$ since $\\theta_i$ is bijective; so $\\bigcup_i\\mathrm{im}(\\mathrm{id}_U\\times g_i)=\\bigcup_i\\mathrm{im}(k_i)=U\\times_VW$. Thus $\\{b(W_i)\\to b(W)\\}_i$ is a jointly surjective family of etale morphisms between objects of $U_{\\Et}$, i.e. a covering of $U_{\\Et}$ [def-weil-pbc-etale-site].",
+      "uses": [
+        "def-weil-pbc-etale-site",
+        "def-pc-fibre-product",
+        "lem-weil-pbc-cartesian-square-pasting",
+        "lem-weil-pbc-etale-covering-base-change",
+        "lem-weil-pbc-etale-composition-cancellation"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/topologies.tex",
+        "place": "Lemma 0217 (lemma-etale) (3): base change of an etale covering is an etale covering, with Definition 0215 (definition-etale-covering) and Definition 021B; the identification U x_V W_i = (U x_V W) x_W W_i is the pasting of cartesian squares"
+      }
+    },
+    {
+      "text": "*Step 3 (b is continuous).* Stacks' Definition 00WV asks, for every covering $\\{W_i\\to W\\}$ of $V_{\\Et}$: (a) $\\{b(W_i)\\to b(W)\\}$ is a covering of $U_{\\Et}$, which is step 2; (b) for every morphism $T\\to W$ of $V_{\\Et}$ the canonical morphism $b(T\\times_WW_i)\\to b(T)\\times_{b(W)}b(W_i)$ is an isomorphism, which is step 1 (clause (2)) with $W'=T$, $W''=W_i$. So $b$ is continuous; this is the first part of clause (3).",
+      "uses": [],
+      "elementary": true,
+      "source": {
+        "document": "literature/stacks-project/sites.tex",
+        "place": "Definition 00WV (definition-continuous)"
+      }
+    },
+    {
+      "text": "*Step 4 (u_* F = F o b is a sheaf; the two sheaf conditions are the same).* Let $\\mathcal F$ be a sheaf of sets on $U_{\\Et}$ [def-weil-pbc-etale-sheaf-of-sets] and $\\{g_i:W_i\\to W\\}$ a covering of $V_{\\Et}$. The sheaf condition of $\\mathcal F\\circ b$ for it is that $\\mathcal F(bW)\\to\\prod_i\\mathcal F(bW_i)\\rightrightarrows\\prod_{i,j}\\mathcal F(b(W_i\\times_WW_j))$, with maps $\\mathcal F(b g_i)$ and $\\mathcal F(b\\,\\mathrm{pr}_1)$, $\\mathcal F(b\\,\\mathrm{pr}_2)$, is an equalizer. By step 1 the canonical $\\varphi_{ij}:b(W_i\\times_WW_j)\\to bW_i\\times_{bW}bW_j$ is an isomorphism with $\\mathrm{pr}_1\\varphi_{ij}=b(\\mathrm{pr}_1)$, $\\mathrm{pr}_2\\varphi_{ij}=b(\\mathrm{pr}_2)$; so $\\prod_{i,j}\\mathcal F(\\varphi_{ij})$ is a bijection $\\prod_{i,j}\\mathcal F(bW_i\\times_{bW}bW_j)\\to\\prod_{i,j}\\mathcal F(b(W_i\\times_WW_j))$ which carries the two maps of the diagram of $\\mathcal F$ for the family $\\{b g_i:bW_i\\to bW\\}$ to the two maps above (functoriality of $\\mathcal F$), and the first maps agree. Hence the diagram for $\\mathcal F\\circ b$ and $\\{W_i\\to W\\}$ is isomorphic, by the identity on the first two terms and a bijection on the third, to the diagram of $\\mathcal F$ for $\\{bW_i\\to bW\\}$; the latter family is a covering of $U_{\\Et}$ by step 2, so that diagram is an equalizer since $\\mathcal F$ is a sheaf; an equalizer property only depends on the diagram up to such an isomorphism (the equalizer of two maps is unchanged by composing both with the same injection), so the diagram of $\\mathcal F\\circ b$ is an equalizer. Thus $u_*\\mathcal F=\\mathcal F\\circ b$ is a sheaf of sets on $V_{\\Et}$, and $\\mathcal F\\mapsto\\mathcal F\\circ b$, $\\varphi\\mapsto\\varphi\\circ b$ (whiskering) is a functor $\\Sh(U_{\\Et})\\to\\Sh(V_{\\Et})$. If $\\mathcal F$ is a sheaf of abelian groups (resp. commutative rings), $\\mathcal F\\circ b$ is a presheaf of abelian groups (rings) with the same sections and restriction maps, and its sheaf condition is the equalizer condition of the underlying presheaf of sets [def-weil-pbc-abelian-etale-sheaves] (the equalizer in sets of homomorphisms carries the induced structure), so the same argument shows $\\mathcal F\\circ b$ is a sheaf of abelian groups (rings).",
+      "uses": [
+        "def-weil-pbc-etale-sheaf-of-sets",
+        "def-weil-pbc-abelian-etale-sheaves",
+        "def-pc-fibre-product"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/sites.tex",
+        "place": "Lemma 00WW (lemma-pushforward-sheaf) and its proof: 'the sheaf condition for u^p F and the covering {V_i -> V} is precisely the same as the sheaf condition for F and the covering {u(V_i) -> u(V)}'"
+      }
+    }
+  ],
+  "proof_deps": [
+    "lem-weil-pbc-etale-base-change-finite-limits",
+    "def-pc-fibre-product",
+    "def-weil-pbc-etale-site",
     "lem-weil-pbc-cartesian-square-pasting",
     "lem-weil-pbc-etale-covering-base-change",
-    "lem-weil-pbc-etale-composition-cancellation"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/topologies.tex",
-    "place": "Lemma 0217 (lemma-etale) (3): base change of an etale covering is an etale covering, with Definition 0215 (definition-etale-covering) and Definition 021B; the identification U x_V W_i = (U x_V W) x_W W_i is the pasting of cartesian squares"
-   }
-  },
-  {
-   "text": "*Step 3 (b is continuous).* Stacks' Definition 00WV asks, for every covering $\\{W_i\\to W\\}$ of $V_{\\Et}$: (a) $\\{b(W_i)\\to b(W)\\}$ is a covering of $U_{\\Et}$, which is step 2; (b) for every morphism $T\\to W$ of $V_{\\Et}$ the canonical morphism $b(T\\times_WW_i)\\to b(T)\\times_{b(W)}b(W_i)$ is an isomorphism, which is step 1 (clause (2)) with $W'=T$, $W''=W_i$. So $b$ is continuous; this is the first part of clause (3).",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Definition 00WV (definition-continuous)"
-   }
-  },
-  {
-   "text": "*Step 4 (u_* F = F o b is a sheaf; the two sheaf conditions are the same).* Let $\\mathcal F$ be a sheaf of sets on $U_{\\Et}$ [def-weil-pbc-etale-sheaf-of-sets] and $\\{g_i:W_i\\to W\\}$ a covering of $V_{\\Et}$. The sheaf condition of $\\mathcal F\\circ b$ for it is that $\\mathcal F(bW)\\to\\prod_i\\mathcal F(bW_i)\\rightrightarrows\\prod_{i,j}\\mathcal F(b(W_i\\times_WW_j))$, with maps $\\mathcal F(b g_i)$ and $\\mathcal F(b\\,\\mathrm{pr}_1)$, $\\mathcal F(b\\,\\mathrm{pr}_2)$, is an equalizer. By step 1 the canonical $\\varphi_{ij}:b(W_i\\times_WW_j)\\to bW_i\\times_{bW}bW_j$ is an isomorphism with $\\mathrm{pr}_1\\varphi_{ij}=b(\\mathrm{pr}_1)$, $\\mathrm{pr}_2\\varphi_{ij}=b(\\mathrm{pr}_2)$; so $\\prod_{i,j}\\mathcal F(\\varphi_{ij})$ is a bijection $\\prod_{i,j}\\mathcal F(bW_i\\times_{bW}bW_j)\\to\\prod_{i,j}\\mathcal F(b(W_i\\times_WW_j))$ which carries the two maps of the diagram of $\\mathcal F$ for the family $\\{b g_i:bW_i\\to bW\\}$ to the two maps above (functoriality of $\\mathcal F$), and the first maps agree. Hence the diagram for $\\mathcal F\\circ b$ and $\\{W_i\\to W\\}$ is isomorphic, by the identity on the first two terms and a bijection on the third, to the diagram of $\\mathcal F$ for $\\{bW_i\\to bW\\}$; the latter family is a covering of $U_{\\Et}$ by step 2, so that diagram is an equalizer since $\\mathcal F$ is a sheaf; an equalizer property only depends on the diagram up to such an isomorphism (the equalizer of two maps is unchanged by composing both with the same injection), so the diagram of $\\mathcal F\\circ b$ is an equalizer. Thus $u_*\\mathcal F=\\mathcal F\\circ b$ is a sheaf of sets on $V_{\\Et}$, and $\\mathcal F\\mapsto\\mathcal F\\circ b$, $\\varphi\\mapsto\\varphi\\circ b$ (whiskering) is a functor $\\Sh(U_{\\Et})\\to\\Sh(V_{\\Et})$. If $\\mathcal F$ is a sheaf of abelian groups (resp. commutative rings), $\\mathcal F\\circ b$ is a presheaf of abelian groups (rings) with the same sections and restriction maps, and its sheaf condition is the equalizer condition of the underlying presheaf of sets [def-weil-pbc-abelian-etale-sheaves] (the equalizer in sets of homomorphisms carries the induced structure), so the same argument shows $\\mathcal F\\circ b$ is a sheaf of abelian groups (rings).",
-   "uses": [
+    "lem-weil-pbc-etale-composition-cancellation",
     "def-weil-pbc-etale-sheaf-of-sets",
-    "def-weil-pbc-abelian-etale-sheaves",
-    "def-pc-fibre-product"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Lemma 00WW (lemma-pushforward-sheaf) and its proof: 'the sheaf condition for u^p F and the covering {V_i -> V} is precisely the same as the sheaf condition for F and the covering {u(V_i) -> u(V)}'"
-   }
-  }
- ],
- "proof_deps": [
-  "lem-weil-pbc-etale-base-change-finite-limits",
-  "def-pc-fibre-product",
-  "def-weil-pbc-etale-site",
-  "lem-weil-pbc-cartesian-square-pasting",
-  "lem-weil-pbc-etale-covering-base-change",
-  "lem-weil-pbc-etale-composition-cancellation",
-  "def-weil-pbc-etale-sheaf-of-sets",
-  "def-weil-pbc-abelian-etale-sheaves"
- ],
- "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/sites.tex",
-  "place": "Definition 00WV and Lemma 00WW with its proof; literature/stacks-project/topologies.tex Lemma 0217 (3) (proof omitted there; written out in step 2), Definitions 0215, 021B"
- },
- "mathlib_searches": [
-  {
-   "tool": "leansearch",
-   "query": "base change functor between small etale sites is continuous (sends coverings to coverings)",
-   "results": "Functor.IsContinuous, Functor.isContinuous_of_coverPreserving (Mathlib.CategoryTheory.Sites.CoverPreserving), IsDenseSubsite.instIsContinuous, instIsContinuousOpensCarrierMapGrothendieckTopology (Topology.Sheaves.SheafCondition.Sites; for continuous maps of spaces only)",
-   "date": "2026-10-09",
-   "verdict": "no match: only the general criterion isContinuous_of_coverPreserving and the topological-space case"
-  },
-  {
-   "tool": "loogle",
-   "query": "CategoryTheory.MorphismProperty.Over.pullback, CategoryTheory.Functor.IsContinuous",
-   "results": "no results",
-   "date": "2026-10-09",
-   "verdict": "no match"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "pullback (base change) of etale schemes along a morphism is a continuous functor between small etale sites, so pushforward preserves sheaves",
-   "results": "Scheme.instHasPullbacksEtale, Scheme.Etale.forget, IsEtale.instIsStableUnderBaseChangeScheme (Mathlib.AlgebraicGeometry.Morphisms.Etale), SheafOfModules.pullback, Functor.sheafPullbackConstruction.sheafPullback",
-   "date": "2026-10-09",
-   "verdict": "no match"
-  },
-  {
-   "tool": "grep",
-   "query": "rg -n 'IsContinuous|Over.pullback|CoverPreserving|coverPreserving' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Sites/",
-   "results": "IsContinuous only for Scheme.forgetToTop (BigZariski.lean:78) and ProEt.forget (Proetale.lean:160,171); no Over.pullback continuity",
-   "date": "2026-10-09",
-   "verdict": "no match (the source repository backports it as AlgebraicGeometry.Scheme.isContinuous_overPullback, WeilConjectures/Mathlib/AlgebraicGeometry/Sites/Small.lean:95, with coverPreserving_overPullback :79; not in this Mathlib)"
-  },
-  {
-   "tool": "leansearch",
-   "query": "a representably flat functor between sites that preserves covering sieves is continuous",
-   "results": "Functor.IsContinuous.mk, Functor.isContinuous_of_coverPreserving (Mathlib.CategoryTheory.Sites.CoverPreserving), Functor.IsContinuous, IsDenseSubsite.instIsContinuous, IsCoverDense.isContinuous, CoverPreserving.mk",
-   "date": "2026-10-09",
-   "verdict": "generalization, not one line: Functor.isContinuous_iff_coverPreserving (CoverPreserving.lean:190) with flat_of_preservesFiniteLimits (Functor/Flat.lean:163) and the leaf lem-weil-pbc-etale-base-change-finite-limits reduce clause (3) to CoverPreserving for MorphismProperty.Over.pullback @Etale ⊤ u on the small etale topologies, which Mathlib does not state (it is the source repository's backport coverPreserving_overPullback, a ~10-line sieve argument)"
-  },
-  {
-   "tool": "loogle",
-   "query": "CategoryTheory.MorphismProperty.Over.pullback, CategoryTheory.CoverPreserving",
-   "results": "none",
-   "date": "2026-10-09",
-   "verdict": "no match"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "a family of morphisms in the small étale site of X is a covering iff it is jointly surjective on underlying points",
-   "results": "Scheme.smallEtaleTopology, Scheme.etaleTopology, Scheme.smallEtalePretopology, Scheme.etalePretopology (Mathlib.AlgebraicGeometry.Sites.Etale), Scheme.JointlySurjective (Mathlib.AlgebraicGeometry.Cover.MorphismProperty)",
-   "date": "2026-10-09",
-   "verdict": "auxiliary: the covering description is ofArrows_mem_smallEtaleTopology_iff (Etale.lean:61), used to read step 2 in Mathlib; no statement of the node"
-  },
-  {
-   "tool": "grep",
-   "query": "rg -n 'IsContinuous|CoverPreserving|coverPreserving_overPullback|Over.pullback' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/{AlgebraicGeometry,CategoryTheory/Sites,CategoryTheory/MorphismProperty}",
-   "results": "CategoryTheory/Sites/Over.lean:391 coverPreserving_overPullback and :396 instance (Over.pullback f).IsContinuous (J.over Y) (J.over X): the big over-sites J.over, not the small etale topologies; CategoryTheory/MorphismProperty/CommaSites.lean:99 isContinuous_comap_forget (forgetful functor only); AlgebraicGeometry/Sites/Proetale.lean:161 (pro-etale forget); no continuity of MorphismProperty.Over.pullback for Scheme.smallGrothendieckTopology",
-   "date": "2026-10-09",
-   "verdict": "no match in Mathlib"
-  },
-  {
-   "tool": "local_search",
-   "query": "isContinuous_overPullback (project ~/weil-conjectures-slopmaster2; index: unavailable)",
-   "results": "AlgebraicGeometry.Etale.isContinuous_overPullback (WeilConjectures/SixFunctors/Etale/UpperLowerStar/Defs.lean), AlgebraicGeometry.Scheme.isContinuous_overPullback (WeilConjectures/Mathlib/AlgebraicGeometry/Sites/Small.lean), Scheme.ProEt.isContinuous_overPullback, Scheme.isContinuous_overPullback_comp_overMap",
-   "date": "2026-10-09",
-   "verdict": "only in the source repository (WeilConjectures/...), not in Mathlib"
-  }
- ],
- "mathlib_match": null,
- "status": "split",
- "merged_into": null,
- "import_flags": [],
- "created": {
-  "by": "worker",
-  "item": "lem-weil-pbc-etale-inverse-image-algebraic-structures",
-  "date": "2026-10-09"
- },
- "lean_audit": {
-  "master": {
-   "state": "closed",
-   "decls": [
-    {
-     "name": "AlgebraicGeometry.Etale.isContinuous_overPullback",
-     "module": "WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs",
-     "lines": [
-      99,
-      105
-     ],
-     "kind": "theorem",
-     "sorry": false
-    }
-   ],
-   "missing": [],
-   "open": []
-  },
-  "slopmaster2": {
-   "state": "closed",
-   "decls": [
-    {
-     "name": "AlgebraicGeometry.Etale.isContinuous_overPullback",
-     "module": "WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs",
-     "lines": [
-      107,
-      113
-     ],
-     "kind": "theorem",
-     "sorry": false
-    }
-   ],
-   "missing": [],
-   "open": []
-  }
- },
- "chapter": "sec-proper-base-change",
- "unit": "sk-def-exchange",
- "lean_candidates": {
-  "branch": "slopmaster2",
-  "note": "recorded by the lead at the review of lem-weil-pbc-etale-inverse-image-algebraic-structures (2026-10-09): AlgebraicGeometry.Etale.isContinuous_overPullback (SixFunctors/Etale/UpperLowerStar/Defs.lean:110) and AlgebraicGeometry.Scheme.isContinuous_overPullback (WeilConjectures/Mathlib/AlgebraicGeometry/Sites/Small.lean:95), sorry-free, state Mathlib's Functor.IsContinuous (precomposition preserves sheaves), i.e. the consequence clause of this node; clauses (1)-(2) (coverings to coverings, fibre products) are Stacks' definition of continuity (00WV) and are not stated separately in Lean; attach at the split after checking the universe/site conventions"
- },
- "split_report": {
-  "date": "2026-10-09",
-  "item": "lem-weil-pbc-etale-base-change-continuous",
-  "worker": "stage1",
-  "summary": "Split along Stacks Sites 00WV/00WW and Topologies 0217 into four steps whose uses are all Mathlib leaves or definitions: (1) b well defined and clause (2) from the reviewed leaf lem-weil-pbc-etale-base-change-finite-limits; (2) clause (1) by pasting (lem-weil-pbc-cartesian-square-pasting) to identify U x_V W_i with (U x_V W) x_W W_i, then the reviewed leaf lem-weil-pbc-etale-covering-base-change and etale composition (lem-weil-pbc-etale-composition-cancellation); (3) continuity in Stacks' sense = (1)+(2) (elementary); (4) the sheaf condition of F o b for {W_i -> W} is that of F for {bW_i -> bW}, written out from the proof of 00WW, extended to abelian/ring sheaves via def-weil-pbc-abelian-etale-sheaves. New Mathlib-leaf definition def-weil-pbc-etale-sheaf-of-sets (Sheaf (smallEtaleTopology T) (Type u), equalizer form via isSheaf_pretopology and Equalizer.Presieve.Arrows.sheaf_condition), added with def-pc-fibre-product and def-weil-pbc-abelian-etale-sheaves to stmt_deps. Item re-searched: not in Mathlib (continuity of Over.pullback is in Mathlib only for the big J.over sites); the source repository's sorry-free AlgebraicGeometry.Scheme.coverPreserving_overPullback / isContinuous_overPullback and AlgebraicGeometry.Etale.isContinuous_overPullback (P = Q = Etale) state clause (1) in sieve form and the consequence of clause (3) (Mathlib's IsContinuous, F o b a sheaf via Functor.op_comp_isSheaf), with clause (2) given by Mathlib's instPreservesFiniteLimitsTopPullback; Lean's base change is W x_V U, not U x_V W."
- },
- "lean": {
-  "branch": "slopmaster2",
-  "declarations": [
-   "AlgebraicGeometry.Etale.isContinuous_overPullback"
+    "def-weil-pbc-abelian-etale-sheaves"
   ],
-  "note": "attached by the lead at review (2026-10-09): SixFunctors/Etale/UpperLowerStar/Defs.lean:110 (instance; the P = Q = Etale case of Scheme.isContinuous_overPullback, WeilConjectures/Mathlib/AlgebraicGeometry/Sites/Small.lean:95), sorry-free; states Mathlib's Functor.IsContinuous of the base-change functor for the small etale topologies, which is the consequence clause of (3) (precomposition carries sheaves to sheaves); clauses (1) and (2) are Stacks' definition of continuity and are not stated separately in Lean (clause (1) in sieve form is coverPreserving_overPullback, Small.lean:79). Base change written W x_V U there."
- },
- "reviewed": {
-  "date": "2026-10-09",
-  "by": "L",
-  "result": "pass",
-  "note": "Four steps along Stacks 00WV/00WW and Topologies 0217 (whose proof Stacks omits; written out via lem-weil-pbc-cartesian-square-pasting and lem-weil-pbc-etale-covering-base-change): the functor and clause (2) from the reviewed leaf lem-weil-pbc-etale-base-change-finite-limits; coverings to coverings; continuity; the sheaf property with the identification of the two equalizer diagrams. New Mathlib leaf def-weil-pbc-etale-sheaf-of-sets verified (smallEtaleTopology Etale.lean:51, ofArrows_mem_smallEtaleTopology_iff :61, smallGrothendieckTopology_eq_toGrothendieck_smallPretopology Small.lean:203, Presieve.isSheaf_pretopology SheafOfTypes.lean:138, Equalizer.Presieve.Arrows.sheaf_condition EqualizerSheafCondition.lean:361). Lean Etale.isContinuous_overPullback attached for the consequence clause (sorry-free)."
- }
+  "proof_origin": {
+    "by": "document",
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Definition 00WV and Lemma 00WW with its proof; literature/stacks-project/topologies.tex Lemma 0217 (3) (proof omitted there; written out in step 2), Definitions 0215, 021B"
+  },
+  "mathlib_searches": [
+    {
+      "tool": "leansearch",
+      "query": "base change functor between small etale sites is continuous (sends coverings to coverings)",
+      "results": "Functor.IsContinuous, Functor.isContinuous_of_coverPreserving (Mathlib.CategoryTheory.Sites.CoverPreserving), IsDenseSubsite.instIsContinuous, instIsContinuousOpensCarrierMapGrothendieckTopology (Topology.Sheaves.SheafCondition.Sites; for continuous maps of spaces only)",
+      "date": "2026-10-09",
+      "verdict": "no match: only the general criterion isContinuous_of_coverPreserving and the topological-space case"
+    },
+    {
+      "tool": "loogle",
+      "query": "CategoryTheory.MorphismProperty.Over.pullback, CategoryTheory.Functor.IsContinuous",
+      "results": "no results",
+      "date": "2026-10-09",
+      "verdict": "no match"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "pullback (base change) of etale schemes along a morphism is a continuous functor between small etale sites, so pushforward preserves sheaves",
+      "results": "Scheme.instHasPullbacksEtale, Scheme.Etale.forget, IsEtale.instIsStableUnderBaseChangeScheme (Mathlib.AlgebraicGeometry.Morphisms.Etale), SheafOfModules.pullback, Functor.sheafPullbackConstruction.sheafPullback",
+      "date": "2026-10-09",
+      "verdict": "no match"
+    },
+    {
+      "tool": "grep",
+      "query": "rg -n 'IsContinuous|Over.pullback|CoverPreserving|coverPreserving' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Sites/",
+      "results": "IsContinuous only for Scheme.forgetToTop (BigZariski.lean:78) and ProEt.forget (Proetale.lean:160,171); no Over.pullback continuity",
+      "date": "2026-10-09",
+      "verdict": "no match (the source repository backports it as AlgebraicGeometry.Scheme.isContinuous_overPullback, WeilConjectures/Mathlib/AlgebraicGeometry/Sites/Small.lean:95, with coverPreserving_overPullback :79; not in this Mathlib)"
+    },
+    {
+      "tool": "leansearch",
+      "query": "a representably flat functor between sites that preserves covering sieves is continuous",
+      "results": "Functor.IsContinuous.mk, Functor.isContinuous_of_coverPreserving (Mathlib.CategoryTheory.Sites.CoverPreserving), Functor.IsContinuous, IsDenseSubsite.instIsContinuous, IsCoverDense.isContinuous, CoverPreserving.mk",
+      "date": "2026-10-09",
+      "verdict": "generalization, not one line: Functor.isContinuous_iff_coverPreserving (CoverPreserving.lean:190) with flat_of_preservesFiniteLimits (Functor/Flat.lean:163) and the leaf lem-weil-pbc-etale-base-change-finite-limits reduce clause (3) to CoverPreserving for MorphismProperty.Over.pullback @Etale ⊤ u on the small etale topologies, which Mathlib does not state (it is the source repository's backport coverPreserving_overPullback, a ~10-line sieve argument)"
+    },
+    {
+      "tool": "loogle",
+      "query": "CategoryTheory.MorphismProperty.Over.pullback, CategoryTheory.CoverPreserving",
+      "results": "none",
+      "date": "2026-10-09",
+      "verdict": "no match"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "a family of morphisms in the small étale site of X is a covering iff it is jointly surjective on underlying points",
+      "results": "Scheme.smallEtaleTopology, Scheme.etaleTopology, Scheme.smallEtalePretopology, Scheme.etalePretopology (Mathlib.AlgebraicGeometry.Sites.Etale), Scheme.JointlySurjective (Mathlib.AlgebraicGeometry.Cover.MorphismProperty)",
+      "date": "2026-10-09",
+      "verdict": "auxiliary: the covering description is ofArrows_mem_smallEtaleTopology_iff (Etale.lean:61), used to read step 2 in Mathlib; no statement of the node"
+    },
+    {
+      "tool": "grep",
+      "query": "rg -n 'IsContinuous|CoverPreserving|coverPreserving_overPullback|Over.pullback' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/{AlgebraicGeometry,CategoryTheory/Sites,CategoryTheory/MorphismProperty}",
+      "results": "CategoryTheory/Sites/Over.lean:391 coverPreserving_overPullback and :396 instance (Over.pullback f).IsContinuous (J.over Y) (J.over X): the big over-sites J.over, not the small etale topologies; CategoryTheory/MorphismProperty/CommaSites.lean:99 isContinuous_comap_forget (forgetful functor only); AlgebraicGeometry/Sites/Proetale.lean:161 (pro-etale forget); no continuity of MorphismProperty.Over.pullback for Scheme.smallGrothendieckTopology",
+      "date": "2026-10-09",
+      "verdict": "no match in Mathlib"
+    },
+    {
+      "tool": "local_search",
+      "query": "isContinuous_overPullback (project ~/weil-conjectures-slopmaster2; index: unavailable)",
+      "results": "AlgebraicGeometry.Etale.isContinuous_overPullback (WeilConjectures/SixFunctors/Etale/UpperLowerStar/Defs.lean), AlgebraicGeometry.Scheme.isContinuous_overPullback (WeilConjectures/Mathlib/AlgebraicGeometry/Sites/Small.lean), Scheme.ProEt.isContinuous_overPullback, Scheme.isContinuous_overPullback_comp_overMap",
+      "date": "2026-10-09",
+      "verdict": "only in the source repository (WeilConjectures/...), not in Mathlib"
+    }
+  ],
+  "mathlib_match": null,
+  "status": "split",
+  "merged_into": null,
+  "import_flags": [],
+  "created": {
+    "by": "worker",
+    "item": "lem-weil-pbc-etale-inverse-image-algebraic-structures",
+    "date": "2026-10-09"
+  },
+  "lean_audit": {
+    "master": {
+      "state": "closed",
+      "decls": [
+        {
+          "name": "AlgebraicGeometry.Etale.isContinuous_overPullback",
+          "module": "WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs",
+          "lines": [
+            99,
+            105
+          ],
+          "kind": "theorem",
+          "sorry": false
+        }
+      ],
+      "missing": [],
+      "open": []
+    },
+    "slopmaster2": {
+      "state": "closed",
+      "decls": [
+        {
+          "name": "AlgebraicGeometry.Etale.isContinuous_overPullback",
+          "module": "WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs",
+          "lines": [
+            107,
+            113
+          ],
+          "kind": "theorem",
+          "sorry": false
+        }
+      ],
+      "missing": [],
+      "open": []
+    }
+  },
+  "chapter": "sec-proper-base-change",
+  "unit": "sk-def-exchange",
+  "lean_candidates": {
+    "branch": "slopmaster2",
+    "note": "recorded by the lead at the review of lem-weil-pbc-etale-inverse-image-algebraic-structures (2026-10-09): AlgebraicGeometry.Etale.isContinuous_overPullback (SixFunctors/Etale/UpperLowerStar/Defs.lean:110) and AlgebraicGeometry.Scheme.isContinuous_overPullback (WeilConjectures/Mathlib/AlgebraicGeometry/Sites/Small.lean:95), sorry-free, state Mathlib's Functor.IsContinuous (precomposition preserves sheaves), i.e. the consequence clause of this node; clauses (1)-(2) (coverings to coverings, fibre products) are Stacks' definition of continuity (00WV) and are not stated separately in Lean; attach at the split after checking the universe/site conventions"
+  },
+  "split_report": {
+    "date": "2026-10-09",
+    "item": "lem-weil-pbc-etale-base-change-continuous",
+    "worker": "stage1",
+    "summary": "Split along Stacks Sites 00WV/00WW and Topologies 0217 into four steps whose uses are all Mathlib leaves or definitions: (1) b well defined and clause (2) from the reviewed leaf lem-weil-pbc-etale-base-change-finite-limits; (2) clause (1) by pasting (lem-weil-pbc-cartesian-square-pasting) to identify U x_V W_i with (U x_V W) x_W W_i, then the reviewed leaf lem-weil-pbc-etale-covering-base-change and etale composition (lem-weil-pbc-etale-composition-cancellation); (3) continuity in Stacks' sense = (1)+(2) (elementary); (4) the sheaf condition of F o b for {W_i -> W} is that of F for {bW_i -> bW}, written out from the proof of 00WW, extended to abelian/ring sheaves via def-weil-pbc-abelian-etale-sheaves. New Mathlib-leaf definition def-weil-pbc-etale-sheaf-of-sets (Sheaf (smallEtaleTopology T) (Type u), equalizer form via isSheaf_pretopology and Equalizer.Presieve.Arrows.sheaf_condition), added with def-pc-fibre-product and def-weil-pbc-abelian-etale-sheaves to stmt_deps. Item re-searched: not in Mathlib (continuity of Over.pullback is in Mathlib only for the big J.over sites); the source repository's sorry-free AlgebraicGeometry.Scheme.coverPreserving_overPullback / isContinuous_overPullback and AlgebraicGeometry.Etale.isContinuous_overPullback (P = Q = Etale) state clause (1) in sieve form and the consequence of clause (3) (Mathlib's IsContinuous, F o b a sheaf via Functor.op_comp_isSheaf), with clause (2) given by Mathlib's instPreservesFiniteLimitsTopPullback; Lean's base change is W x_V U, not U x_V W."
+  },
+  "lean": {
+    "module": "WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs",
+    "declaration": "AlgebraicGeometry.Etale.isContinuous_overPullback",
+    "branch": "slopmaster2",
+    "line": 107,
+    "declarations": [
+      "AlgebraicGeometry.Etale.isContinuous_overPullback"
+    ],
+    "sorry_free": true,
+    "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state closed)"
+  },
+  "reviewed": {
+    "date": "2026-10-09",
+    "by": "L",
+    "result": "pass",
+    "note": "Four steps along Stacks 00WV/00WW and Topologies 0217 (whose proof Stacks omits; written out via lem-weil-pbc-cartesian-square-pasting and lem-weil-pbc-etale-covering-base-change): the functor and clause (2) from the reviewed leaf lem-weil-pbc-etale-base-change-finite-limits; coverings to coverings; continuity; the sheaf property with the identification of the two equalizer diagrams. New Mathlib leaf def-weil-pbc-etale-sheaf-of-sets verified (smallEtaleTopology Etale.lean:51, ofArrows_mem_smallEtaleTopology_iff :61, smallGrothendieckTopology_eq_toGrothendieck_smallPretopology Small.lean:203, Presieve.isSheaf_pretopology SheafOfTypes.lean:138, Equalizer.Presieve.Arrows.sheaf_condition EqualizerSheafCondition.lean:361). Lean Etale.isContinuous_overPullback attached for the consequence clause (sorry-free)."
+  }
 }

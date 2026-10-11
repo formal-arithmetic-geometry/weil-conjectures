@@ -1,195 +1,199 @@
 {
- "id": "lem-weil-pbc-finite-surjective-unit-mono",
- "blueprint": {
-  "is": null,
-  "from": {
-   "node": "lemma-weil-pbc-gabber-effacement",
-   "place": "step 8 of its split (source: Lemma 09ZE (label lemma-efface-cohomology-on-closed-by-finite-cover), etale-cohomology.tex line 14900, proof, second and last paragraphs (stalk formula of Proposition 03QP (1)))",
-   "via": []
+  "id": "lem-weil-pbc-finite-surjective-unit-mono",
+  "blueprint": {
+    "is": null,
+    "from": {
+      "node": "lemma-weil-pbc-gabber-effacement",
+      "place": "step 8 of its split (source: Lemma 09ZE (label lemma-efface-cohomology-on-closed-by-finite-cover), etale-cohomology.tex line 14900, proof, second and last paragraphs (stalk formula of Proposition 03QP (1)))",
+      "via": []
+    },
+    "same_as": null
   },
-  "same_as": null
- },
- "kind": "statement",
- "title": "The unit along a finite surjective morphism is a monomorphism",
- "statement": "Let $\\pi:Y'\\to Y$ be a morphism of schemes which is finite [def-weil-finite-integral-morphism] and surjective [def-weil-surjective-morphism], and let $G$ be an abelian sheaf on $Y_{\\Et}$ [def-weil-pbc-abelian-etale-sheaves]. Then the unit $\\eta_{\\pi,G}:G\\to\\pi_*\\pi^{-1}G$ of the adjunction $\\pi^{-1}\\dashv\\pi_*$ [def-weil-pbc-inverse-image], [def-weil-pbc-direct-image] is a monomorphism of $\\Ab(Y_{\\Et})$. (Intended proof, Stacks' argument: at a geometric point $\\bar y:\\operatorname{Spec}\\Omega\\to Y$ [def-weil-geometric-point] the stalk of $\\pi_*\\pi^{-1}G$ is $\\prod_{\\bar y'}(\\pi^{-1}G)_{\\bar y'}=\\prod_{\\bar y'}G_{\\bar y}$ over the geometric points $\\bar y'$ of $Y'$ with $\\pi\\circ\\bar y'=\\bar y$ [lem-weil-pbc-finite-stalk-formula-restriction], and $\\eta$ induces the diagonal map; the index set is nonempty because $Y'\\times_Y\\operatorname{Spec}\\Omega$ is a nonempty finite $\\Omega$-scheme ($\\pi$ surjective) and $\\Omega$ is algebraically closed; geometric stalks detect monomorphisms [lem-weil-pbc-geometric-stalks-detect-mono].)",
- "source": {
-  "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Lemma 09ZE (label lemma-efface-cohomology-on-closed-by-finite-cover), proof, last paragraph (line ~14955: 'To see the desired injectivity we can look at stalks ... Since Y' -> Y is surjective and finite we see that the induced map on geometric points lifting x is surjective too'), with Proposition 03QP (proposition-finite-higher-direct-image-zero) part (1). Stacks proves injectivity of f_*M -> f'_*M for f' = f o pi; this node is the same stalk argument for the unit along pi, from which Stacks' map is obtained by applying the left exact f_*. Reformulation by an agent."
- },
- "stmt_deps": [
-  "def-weil-finite-integral-morphism",
-  "def-weil-surjective-morphism",
-  "def-weil-pbc-abelian-etale-sheaves",
-  "def-weil-pbc-inverse-image",
-  "def-weil-pbc-direct-image"
- ],
- "proof": [
-  {
-   "text": "*The stalk of the unit is the diagonal (Stacks: '$(f_*\\underline M)_{\\bar x}=\\bigoplus_{f(\\bar y)=\\bar x}M$ ... and similarly for the other sheaf').* Fix a geometric point $\\bar y:\\operatorname{Spec}\\Omega\\to Y$ and let $P(\\bar y)$ be the set of geometric points $\\bar y':\\operatorname{Spec}\\Omega\\to Y'$ with $\\pi\\circ\\bar y'=\\bar y$. Write $\\eta=\\eta_{\\pi,G}$, so $\\eta(U):G(U)\\to(\\pi_*\\pi^{-1}G)(U)=(\\pi^{-1}G)(U\\times_YY')$ for $U\\to Y$ etale [def-weil-pbc-inverse-image], [def-weil-pbc-direct-image], and let $\\eta_{\\bar y}:G_{\\bar y}\\to(\\pi_*\\pi^{-1}G)_{\\bar y}$ be the induced map of stalks, i.e. the map of colimits over pointed etale neighbourhoods [def-weil-pbc-geometric-stalks] induced by the maps $\\eta(U)$: it sends the germ of $a\\in G(U)$ at $(U,\\bar u)$ to the germ of $\\eta(U)(a)$ at $(U,\\bar u)$. For $\\bar y'\\in P(\\bar y)$ let $r_{\\bar y'}=r_{\\pi,\\bar y',\\pi^{-1}G}:(\\pi_*\\pi^{-1}G)_{\\bar y}\\to(\\pi^{-1}G)_{\\bar y'}$ be the restriction of germs of [lem-weil-pbc-finite-stalk-formula-restriction] (applied to the finite $\\pi$ and $F=\\pi^{-1}G$) and $c_{\\bar y'}=c_{\\pi,\\bar y',G}:(\\pi^{-1}G)_{\\bar y'}\\xrightarrow{\\sim}G_{\\pi\\circ\\bar y'}=G_{\\bar y}$ the isomorphism of [lem-weil-pbc-inverse-image-stalk-germ] (applied to $f=\\pi$, the geometric point $\\bar y'$ of $Y'$ and its image $\\bar y$). Claim: $c_{\\bar y'}\\circ r_{\\bar y'}\\circ\\eta_{\\bar y}=\\mathrm{id}_{G_{\\bar y}}$. By the universal property of the colimit $G_{\\bar y}$ it suffices to check this on the germ of every $a\\in G(U)$ at every pointed etale neighbourhood $(U,\\bar u)$ of $\\bar y$. Then: $\\eta_{\\bar y}$ sends it to the germ at $(U,\\bar u)$ of $s=\\eta(U)(a)\\in(\\pi_*\\pi^{-1}G)(U)=(\\pi^{-1}G)(U\\times_YY')$; $r_{\\bar y'}$ sends this, by its definition in [lem-weil-pbc-finite-stalk-formula-restriction], to the germ of $s$ at the pointed etale neighbourhood $(U\\times_YY',(\\bar u,\\bar y'))$ of $\\bar y'$; and $c_{\\bar y'}$ sends the germ of $\\eta(U)(a)$ at $(U\\times_YY',(\\bar u,\\bar y'))$ to the germ of $a$ at $(U,\\bar u)$, which is exactly the germ compatibility in the statement of [lem-weil-pbc-inverse-image-stalk-germ] (its $X,Y,f,\\bar y,\\bar x$ being our $Y,Y',\\pi,\\bar y',\\bar y$). So the composite is the identity. Consequently, under the isomorphism $(r_{\\bar y'})_{\\bar y'}:(\\pi_*\\pi^{-1}G)_{\\bar y}\\xrightarrow{\\sim}\\prod_{\\bar y'\\in P(\\bar y)}(\\pi^{-1}G)_{\\bar y'}$ of [lem-weil-pbc-finite-stalk-formula-restriction] followed by $\\prod_{\\bar y'}c_{\\bar y'}:\\prod_{\\bar y'}(\\pi^{-1}G)_{\\bar y'}\\xrightarrow{\\sim}\\prod_{\\bar y'\\in P(\\bar y)}G_{\\bar y}$, the map $\\eta_{\\bar y}$ becomes the diagonal $G_{\\bar y}\\to\\prod_{P(\\bar y)}G_{\\bar y}$, $g\\mapsto(g)_{\\bar y'}$: its $\\bar y'$-component is $c_{\\bar y'}r_{\\bar y'}\\eta_{\\bar y}=\\mathrm{id}$. (Only the components, not the bijectivity of the product map, are used below.)",
-   "uses": [
+  "kind": "statement",
+  "title": "The unit along a finite surjective morphism is a monomorphism",
+  "statement": "Let $\\pi:Y'\\to Y$ be a morphism of schemes which is finite [def-weil-finite-integral-morphism] and surjective [def-weil-surjective-morphism], and let $G$ be an abelian sheaf on $Y_{\\Et}$ [def-weil-pbc-abelian-etale-sheaves]. Then the unit $\\eta_{\\pi,G}:G\\to\\pi_*\\pi^{-1}G$ of the adjunction $\\pi^{-1}\\dashv\\pi_*$ [def-weil-pbc-inverse-image], [def-weil-pbc-direct-image] is a monomorphism of $\\Ab(Y_{\\Et})$. (Intended proof, Stacks' argument: at a geometric point $\\bar y:\\operatorname{Spec}\\Omega\\to Y$ [def-weil-geometric-point] the stalk of $\\pi_*\\pi^{-1}G$ is $\\prod_{\\bar y'}(\\pi^{-1}G)_{\\bar y'}=\\prod_{\\bar y'}G_{\\bar y}$ over the geometric points $\\bar y'$ of $Y'$ with $\\pi\\circ\\bar y'=\\bar y$ [lem-weil-pbc-finite-stalk-formula-restriction], and $\\eta$ induces the diagonal map; the index set is nonempty because $Y'\\times_Y\\operatorname{Spec}\\Omega$ is a nonempty finite $\\Omega$-scheme ($\\pi$ surjective) and $\\Omega$ is algebraically closed; geometric stalks detect monomorphisms [lem-weil-pbc-geometric-stalks-detect-mono].)",
+  "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma 09ZE (label lemma-efface-cohomology-on-closed-by-finite-cover), proof, last paragraph (line ~14955: 'To see the desired injectivity we can look at stalks ... Since Y' -> Y is surjective and finite we see that the induced map on geometric points lifting x is surjective too'), with Proposition 03QP (proposition-finite-higher-direct-image-zero) part (1). Stacks proves injectivity of f_*M -> f'_*M for f' = f o pi; this node is the same stalk argument for the unit along pi, from which Stacks' map is obtained by applying the left exact f_*. Reformulation by an agent."
+  },
+  "stmt_deps": [
+    "def-weil-finite-integral-morphism",
+    "def-weil-surjective-morphism",
+    "def-weil-pbc-abelian-etale-sheaves",
+    "def-weil-pbc-inverse-image",
+    "def-weil-pbc-direct-image"
+  ],
+  "proof": [
+    {
+      "text": "*The stalk of the unit is the diagonal (Stacks: '$(f_*\\underline M)_{\\bar x}=\\bigoplus_{f(\\bar y)=\\bar x}M$ ... and similarly for the other sheaf').* Fix a geometric point $\\bar y:\\operatorname{Spec}\\Omega\\to Y$ and let $P(\\bar y)$ be the set of geometric points $\\bar y':\\operatorname{Spec}\\Omega\\to Y'$ with $\\pi\\circ\\bar y'=\\bar y$. Write $\\eta=\\eta_{\\pi,G}$, so $\\eta(U):G(U)\\to(\\pi_*\\pi^{-1}G)(U)=(\\pi^{-1}G)(U\\times_YY')$ for $U\\to Y$ etale [def-weil-pbc-inverse-image], [def-weil-pbc-direct-image], and let $\\eta_{\\bar y}:G_{\\bar y}\\to(\\pi_*\\pi^{-1}G)_{\\bar y}$ be the induced map of stalks, i.e. the map of colimits over pointed etale neighbourhoods [def-weil-pbc-geometric-stalks] induced by the maps $\\eta(U)$: it sends the germ of $a\\in G(U)$ at $(U,\\bar u)$ to the germ of $\\eta(U)(a)$ at $(U,\\bar u)$. For $\\bar y'\\in P(\\bar y)$ let $r_{\\bar y'}=r_{\\pi,\\bar y',\\pi^{-1}G}:(\\pi_*\\pi^{-1}G)_{\\bar y}\\to(\\pi^{-1}G)_{\\bar y'}$ be the restriction of germs of [lem-weil-pbc-finite-stalk-formula-restriction] (applied to the finite $\\pi$ and $F=\\pi^{-1}G$) and $c_{\\bar y'}=c_{\\pi,\\bar y',G}:(\\pi^{-1}G)_{\\bar y'}\\xrightarrow{\\sim}G_{\\pi\\circ\\bar y'}=G_{\\bar y}$ the isomorphism of [lem-weil-pbc-inverse-image-stalk-germ] (applied to $f=\\pi$, the geometric point $\\bar y'$ of $Y'$ and its image $\\bar y$). Claim: $c_{\\bar y'}\\circ r_{\\bar y'}\\circ\\eta_{\\bar y}=\\mathrm{id}_{G_{\\bar y}}$. By the universal property of the colimit $G_{\\bar y}$ it suffices to check this on the germ of every $a\\in G(U)$ at every pointed etale neighbourhood $(U,\\bar u)$ of $\\bar y$. Then: $\\eta_{\\bar y}$ sends it to the germ at $(U,\\bar u)$ of $s=\\eta(U)(a)\\in(\\pi_*\\pi^{-1}G)(U)=(\\pi^{-1}G)(U\\times_YY')$; $r_{\\bar y'}$ sends this, by its definition in [lem-weil-pbc-finite-stalk-formula-restriction], to the germ of $s$ at the pointed etale neighbourhood $(U\\times_YY',(\\bar u,\\bar y'))$ of $\\bar y'$; and $c_{\\bar y'}$ sends the germ of $\\eta(U)(a)$ at $(U\\times_YY',(\\bar u,\\bar y'))$ to the germ of $a$ at $(U,\\bar u)$, which is exactly the germ compatibility in the statement of [lem-weil-pbc-inverse-image-stalk-germ] (its $X,Y,f,\\bar y,\\bar x$ being our $Y,Y',\\pi,\\bar y',\\bar y$). So the composite is the identity. Consequently, under the isomorphism $(r_{\\bar y'})_{\\bar y'}:(\\pi_*\\pi^{-1}G)_{\\bar y}\\xrightarrow{\\sim}\\prod_{\\bar y'\\in P(\\bar y)}(\\pi^{-1}G)_{\\bar y'}$ of [lem-weil-pbc-finite-stalk-formula-restriction] followed by $\\prod_{\\bar y'}c_{\\bar y'}:\\prod_{\\bar y'}(\\pi^{-1}G)_{\\bar y'}\\xrightarrow{\\sim}\\prod_{\\bar y'\\in P(\\bar y)}G_{\\bar y}$, the map $\\eta_{\\bar y}$ becomes the diagonal $G_{\\bar y}\\to\\prod_{P(\\bar y)}G_{\\bar y}$, $g\\mapsto(g)_{\\bar y'}$: its $\\bar y'$-component is $c_{\\bar y'}r_{\\bar y'}\\eta_{\\bar y}=\\mathrm{id}$. (Only the components, not the bijectivity of the product map, are used below.)",
+      "uses": [
+        "def-weil-pbc-inverse-image",
+        "def-weil-pbc-direct-image",
+        "def-weil-pbc-geometric-stalks",
+        "lem-weil-pbc-finite-stalk-formula-restriction",
+        "lem-weil-pbc-inverse-image-stalk-germ"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/etale-cohomology.tex",
+        "place": "Lemma 09ZE (lemma-efface-cohomology-on-closed-by-finite-cover), proof, last paragraph, with Proposition 03QP (proposition-finite-higher-direct-image-zero) (1) for the product decomposition and Lemma 03Q1 (lemma-stalk-pullback) (3) for the stalk of the inverse image; Stacks states the decomposition and leaves the identification of the map implicit"
+      }
+    },
+    {
+      "text": "*The index set is nonempty (Stacks: 'Since $Y'\\to Y$ is surjective and finite we see that the induced map on geometric points lifting $\\bar x$ is surjective too').* Let $y\\in Y$ be the point under $\\bar y$. Since $\\pi$ is surjective [def-weil-surjective-morphism] there is $y'\\in Y'$ with $\\pi(y')=y$, and since $\\pi$ is finite, [lem-weil-pbc-finite-geometric-point-lift] gives a geometric point $\\bar y':\\operatorname{Spec}\\Omega\\to Y'$ over $y'$ with $\\pi\\circ\\bar y'=\\bar y$, i.e. $\\bar y'\\in P(\\bar y)$. So $P(\\bar y)\\neq\\emptyset$.",
+      "uses": [
+        "def-weil-surjective-morphism",
+        "lem-weil-pbc-finite-geometric-point-lift"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/etale-cohomology.tex",
+        "place": "Lemma 09ZE (lemma-efface-cohomology-on-closed-by-finite-cover), proof, last paragraph"
+      }
+    },
+    {
+      "text": "*The stalk map is injective.* Choose $\\bar y'\\in P(\\bar y)$ (step 2). By step 1, $c_{\\bar y'}\\circ r_{\\bar y'}$ is a left inverse of $\\eta_{\\bar y}$, so $\\eta_{\\bar y}:G_{\\bar y}\\to(\\pi_*\\pi^{-1}G)_{\\bar y}$ is injective (equivalently: the diagonal into a nonempty product is injective).",
+      "uses": [],
+      "elementary": true,
+      "source": {
+        "document": "literature/stacks-project/etale-cohomology.tex",
+        "place": "Lemma 09ZE (lemma-efface-cohomology-on-closed-by-finite-cover), proof, last paragraph ('we conclude')"
+      }
+    },
+    {
+      "text": "*Geometric stalks detect monomorphisms (Stacks: 'To see the desired injectivity we can look at stalks').* For every point $y\\in Y$ choose an algebraic closure $\\Omega_y$ of $\\kappa(y)$ [def-weil-algebraic-closure] and let $\\bar y_y:\\operatorname{Spec}\\Omega_y\\to Y$ be the geometric point given by $y$ and $\\kappa(y)\\to\\Omega_y$ [def-weil-geometric-point]; the family $(\\bar y_y)_{y\\in Y}$ covers $Y$. By steps 1-3 (applied to each $\\bar y_y$) every $\\eta_{\\bar y_y}$ is injective, so by [lem-weil-pbc-geometric-stalks-detect-mono] (the 'if' direction, for the morphism $\\eta_{\\pi,G}$ of $\\Ab(Y_{\\Et})$ [def-weil-pbc-abelian-etale-sheaves]) $\\eta_{\\pi,G}$ is a monomorphism.",
+      "uses": [
+        "def-weil-algebraic-closure",
+        "def-weil-geometric-point",
+        "lem-weil-pbc-geometric-stalks-detect-mono",
+        "def-weil-pbc-abelian-etale-sheaves"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/etale-cohomology.tex",
+        "place": "Lemma 09ZE (lemma-efface-cohomology-on-closed-by-finite-cover), proof, last paragraph; Theorem 03PU (theorem-exactness-stalks)"
+      }
+    }
+  ],
+  "proof_deps": [
     "def-weil-pbc-inverse-image",
     "def-weil-pbc-direct-image",
     "def-weil-pbc-geometric-stalks",
     "lem-weil-pbc-finite-stalk-formula-restriction",
-    "lem-weil-pbc-inverse-image-stalk-germ"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma 09ZE (lemma-efface-cohomology-on-closed-by-finite-cover), proof, last paragraph, with Proposition 03QP (proposition-finite-higher-direct-image-zero) (1) for the product decomposition and Lemma 03Q1 (lemma-stalk-pullback) (3) for the stalk of the inverse image; Stacks states the decomposition and leaves the identification of the map implicit"
-   }
-  },
-  {
-   "text": "*The index set is nonempty (Stacks: 'Since $Y'\\to Y$ is surjective and finite we see that the induced map on geometric points lifting $\\bar x$ is surjective too').* Let $y\\in Y$ be the point under $\\bar y$. Since $\\pi$ is surjective [def-weil-surjective-morphism] there is $y'\\in Y'$ with $\\pi(y')=y$, and since $\\pi$ is finite, [lem-weil-pbc-finite-geometric-point-lift] gives a geometric point $\\bar y':\\operatorname{Spec}\\Omega\\to Y'$ over $y'$ with $\\pi\\circ\\bar y'=\\bar y$, i.e. $\\bar y'\\in P(\\bar y)$. So $P(\\bar y)\\neq\\emptyset$.",
-   "uses": [
+    "lem-weil-pbc-inverse-image-stalk-germ",
     "def-weil-surjective-morphism",
-    "lem-weil-pbc-finite-geometric-point-lift"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma 09ZE (lemma-efface-cohomology-on-closed-by-finite-cover), proof, last paragraph"
-   }
-  },
-  {
-   "text": "*The stalk map is injective.* Choose $\\bar y'\\in P(\\bar y)$ (step 2). By step 1, $c_{\\bar y'}\\circ r_{\\bar y'}$ is a left inverse of $\\eta_{\\bar y}$, so $\\eta_{\\bar y}:G_{\\bar y}\\to(\\pi_*\\pi^{-1}G)_{\\bar y}$ is injective (equivalently: the diagonal into a nonempty product is injective).",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma 09ZE (lemma-efface-cohomology-on-closed-by-finite-cover), proof, last paragraph ('we conclude')"
-   }
-  },
-  {
-   "text": "*Geometric stalks detect monomorphisms (Stacks: 'To see the desired injectivity we can look at stalks').* For every point $y\\in Y$ choose an algebraic closure $\\Omega_y$ of $\\kappa(y)$ [def-weil-algebraic-closure] and let $\\bar y_y:\\operatorname{Spec}\\Omega_y\\to Y$ be the geometric point given by $y$ and $\\kappa(y)\\to\\Omega_y$ [def-weil-geometric-point]; the family $(\\bar y_y)_{y\\in Y}$ covers $Y$. By steps 1-3 (applied to each $\\bar y_y$) every $\\eta_{\\bar y_y}$ is injective, so by [lem-weil-pbc-geometric-stalks-detect-mono] (the 'if' direction, for the morphism $\\eta_{\\pi,G}$ of $\\Ab(Y_{\\Et})$ [def-weil-pbc-abelian-etale-sheaves]) $\\eta_{\\pi,G}$ is a monomorphism.",
-   "uses": [
+    "lem-weil-pbc-finite-geometric-point-lift",
     "def-weil-algebraic-closure",
     "def-weil-geometric-point",
     "lem-weil-pbc-geometric-stalks-detect-mono",
     "def-weil-pbc-abelian-etale-sheaves"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma 09ZE (lemma-efface-cohomology-on-closed-by-finite-cover), proof, last paragraph; Theorem 03PU (theorem-exactness-stalks)"
-   }
-  }
- ],
- "proof_deps": [
-  "def-weil-pbc-inverse-image",
-  "def-weil-pbc-direct-image",
-  "def-weil-pbc-geometric-stalks",
-  "lem-weil-pbc-finite-stalk-formula-restriction",
-  "lem-weil-pbc-inverse-image-stalk-germ",
-  "def-weil-surjective-morphism",
-  "lem-weil-pbc-finite-geometric-point-lift",
-  "def-weil-algebraic-closure",
-  "def-weil-geometric-point",
-  "lem-weil-pbc-geometric-stalks-detect-mono",
-  "def-weil-pbc-abelian-etale-sheaves"
- ],
- "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Lemma 09ZE (lemma-efface-cohomology-on-closed-by-finite-cover), proof, last paragraph (the stalk argument), with Proposition 03QP (1) and Lemma 03Q1 (3); the identification of the induced map as the diagonal (step 1) is written out by the worker, Stacks leaving it implicit"
- },
- "mathlib_searches": [
-  {
-   "tool": "leansearch",
-   "query": "unit of adjunction G → π_* π^* G is a monomorphism for surjective morphism of schemes",
-   "results": "CategoryTheory.Adjunction.unit_mono_of_L_faithful, AlgebraicGeometry.instIsIsoSchemeAppUnit...ΓSpec, SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app, CategoryTheory.Functor.preservesMonomorphisms_of_adjunction, Scheme.Modules.restrictAdjunction_unit_app_app",
-   "date": "2026-10-09",
-   "verdict": "no match (unit_mono_of_L_faithful would need faithfulness of pi^{-1}, itself the content here, and Mathlib has no pi^{-1} on small etale sites)"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "for a surjective finite morphism of schemes the adjunction unit F → π_* π^* F of étale sheaves is injective",
-   "results": "TopCat.Presheaf.app_surjective_of_injective_of_locally_surjective, Scheme.instFaithfulEtaleOverForget, Sheaf...LocallyInjective factorization instance, SurjectiveOnStalks.mono_of_injective",
-   "date": "2026-10-09",
-   "verdict": "no match"
-  },
-  {
-   "tool": "grep",
-   "query": "grep -rn -i 'finite.*surjective.*cohomolog\\|unit.*mono.*surjective' /home/ubuntu/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry /home/ubuntu/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites; grep -rln 'smallEtaleTopology' /home/ubuntu/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
-   "results": "no hits for the first pattern; the small etale site appears only in AlgebraicGeometry/Sites/{Etale,EtalePoint,AffineEtale}.lean, without direct or inverse images of sheaves",
-   "date": "2026-10-09",
-   "verdict": "no match"
-  },
-  {
-   "tool": "leansearch",
-   "query": "unit of adjunction is mono when left adjoint is faithful",
-   "results": "CategoryTheory.Adjunction.unit_mono_of_L_faithful (instance, Mathlib.CategoryTheory.Adjunction.FullyFaithful), Adjunction.faithful_L_of_mono_unit_app, instIsIsoAppUnitOfFullOfFaithful, Triple.mono_leftToRight_app_iff_mono_adj₂_unit_app, counit_epi_of_R_faithful",
-   "date": "2026-10-10",
-   "verdict": "no match: unit_mono_of_L_faithful reduces the node to the faithfulness of π^{-1}, which Mathlib does not provide (no inverse image of sheaves on small etale sites in Mathlib); the source repository proves exactly this (see split_report)"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "pullback of étale sheaf along surjective morphism of schemes is faithful functor",
-   "results": "Scheme.instFaithfulEtaleOverForget, Scheme.Etale.forgetFullyFaithful, instFullEtaleOverForget, Scheme.Etale.forget, Scheme.Modules.instFaithfulPushforward (open immersions), Scheme.instHasPullbacksEtale",
-   "date": "2026-10-10",
-   "verdict": "no match"
-  },
-  {
-   "tool": "grep",
-   "query": "grep -rn 'inverseImage\\|pullback.*Sheaf\\|Sheaf.*pullback' /home/ubuntu/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Sites/*.lean; grep -rn 'unit_mono\\|mono.*unit' /home/ubuntu/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites/*.lean",
-   "results": "only isSheafFor_of_pullback in Sites/SheafQuasiCompact.lean; no unit/mono lemma in CategoryTheory/Sites",
-   "date": "2026-10-10",
-   "verdict": "no match"
-  }
- ],
- "mathlib_match": null,
- "status": "split",
- "merged_into": null,
- "created": {
-  "by": "worker",
-  "item": "lemma-weil-pbc-gabber-effacement",
-  "date": "2026-10-09"
- },
- "lean_audit": {
-  "master": {
-   "state": "none",
-   "decls": [],
-   "missing": [
-    "AlgebraicGeometry.Etale.mono_unit_app_of_surjective"
-   ]
-  },
-  "slopmaster2": {
-   "state": "closed",
-   "decls": [
-    {
-     "name": "AlgebraicGeometry.Etale.mono_unit_app_of_surjective",
-     "module": "WeilConjectures.SixFunctors.Etale.UpperLowerStar.Surjective",
-     "lines": [
-      68,
-      75
-     ],
-     "kind": "theorem",
-     "sorry": false
-    }
-   ],
-   "missing": [],
-   "open": []
-  }
- },
- "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1",
- "reviewed": {
-  "date": "2026-10-10",
-  "by": "L",
-  "result": "accepted",
-  "note": "Four steps along the last paragraph of Stacks 09ZE with 03QP (1): the stalk of the unit composed with restriction to a lift and the inverse-image stalk isomorphism is the identity (checked on germs), a lift exists (surjective + new node lem-weil-pbc-finite-geometric-point-lift, closed by the sorry-free GeometricFiber.exists_apply_default_eq), left inverse ⇒ injective, geometric stalks detect monomorphisms (reviewed leaf). Checked. Lean mono_unit_app_of_surjective attached (sorry-free generalization: surjective suffices)."
- },
- "split_report": {
-  "date": "2026-10-10",
-  "item": "lem-weil-pbc-finite-surjective-unit-mono",
-  "worker": "stage1",
-  "summary": "Proof written in four steps after the last paragraph of Stacks 09ZE: (1) for a geometric point ybar and each lift ybar' the composite c∘r∘eta_ybar of the stalk of the unit, the restriction of germs r of lem-weil-pbc-finite-stalk-formula-restriction and the inverse-image stalk isomorphism c of lem-weil-pbc-inverse-image-stalk-germ is the identity, checked on germs (the germ compatibility of the latter node is exactly what is needed), so eta_ybar is the diagonal under the product decomposition; (2) the set of lifts is nonempty by surjectivity and the new node lem-weil-pbc-finite-geometric-point-lift (Stacks 01J5/02NU/01TG/09GU; sorry-free Lean AlgebraicGeometry.Scheme.Hom.GeometricFiber.exists_apply_default_eq on slopmaster2); (3) a map with a left inverse is injective (elementary); (4) the Mathlib leaf lem-weil-pbc-geometric-stalks-detect-mono with the family of geometric points at algebraic closures of residue fields. Statement unchanged. Mathlib re-searched (unit_mono_of_L_faithful needs faithfulness of pi^{-1}, absent from Mathlib). Source repository: AlgebraicGeometry.Etale.mono_unit_app_of_surjective (WeilConjectures/SixFunctors/Etale/UpperLowerStar/Surjective.lean:68-72) is sorry-free per the sorry map (132 declarations reached) and proves a generalization: the unit F ⟶ π_*π^*F is mono for every surjective π, for sheaves of ModuleCat.{u+1} Λ (via faithfulness of π^*, faithful_upperStar_of_surjective, lines 41-63); it is stated for Λ-modules, not for AddCommGrpCat, so it matches this node only through Λ = ULift ℤ and the equivalence of Z-modules with abelian groups; left to the lead whether to attach."
- },
- "lean": {
-  "branch": "slopmaster2",
-  "declarations": [
-   "AlgebraicGeometry.Etale.mono_unit_app_of_surjective"
   ],
-  "note": "attached by the lead 2026-10-10: WeilConjectures/SixFunctors/Etale/UpperLowerStar/Surjective.lean:68, sorry-free (reach.py, 132 decls). More general than the node: π only surjective (via faithful_upperStar_of_surjective), for sheaves of ModuleCat Λ; the abelian case is Λ = Z (ModuleCat Z ≃ AddCommGrp). The DAG keeps Stacks′ stalk route."
- }
+  "proof_origin": {
+    "by": "document",
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma 09ZE (lemma-efface-cohomology-on-closed-by-finite-cover), proof, last paragraph (the stalk argument), with Proposition 03QP (1) and Lemma 03Q1 (3); the identification of the induced map as the diagonal (step 1) is written out by the worker, Stacks leaving it implicit"
+  },
+  "mathlib_searches": [
+    {
+      "tool": "leansearch",
+      "query": "unit of adjunction G → π_* π^* G is a monomorphism for surjective morphism of schemes",
+      "results": "CategoryTheory.Adjunction.unit_mono_of_L_faithful, AlgebraicGeometry.instIsIsoSchemeAppUnit...ΓSpec, SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app, CategoryTheory.Functor.preservesMonomorphisms_of_adjunction, Scheme.Modules.restrictAdjunction_unit_app_app",
+      "date": "2026-10-09",
+      "verdict": "no match (unit_mono_of_L_faithful would need faithfulness of pi^{-1}, itself the content here, and Mathlib has no pi^{-1} on small etale sites)"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "for a surjective finite morphism of schemes the adjunction unit F → π_* π^* F of étale sheaves is injective",
+      "results": "TopCat.Presheaf.app_surjective_of_injective_of_locally_surjective, Scheme.instFaithfulEtaleOverForget, Sheaf...LocallyInjective factorization instance, SurjectiveOnStalks.mono_of_injective",
+      "date": "2026-10-09",
+      "verdict": "no match"
+    },
+    {
+      "tool": "grep",
+      "query": "grep -rn -i 'finite.*surjective.*cohomolog\\|unit.*mono.*surjective' /home/ubuntu/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry /home/ubuntu/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites; grep -rln 'smallEtaleTopology' /home/ubuntu/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+      "results": "no hits for the first pattern; the small etale site appears only in AlgebraicGeometry/Sites/{Etale,EtalePoint,AffineEtale}.lean, without direct or inverse images of sheaves",
+      "date": "2026-10-09",
+      "verdict": "no match"
+    },
+    {
+      "tool": "leansearch",
+      "query": "unit of adjunction is mono when left adjoint is faithful",
+      "results": "CategoryTheory.Adjunction.unit_mono_of_L_faithful (instance, Mathlib.CategoryTheory.Adjunction.FullyFaithful), Adjunction.faithful_L_of_mono_unit_app, instIsIsoAppUnitOfFullOfFaithful, Triple.mono_leftToRight_app_iff_mono_adj₂_unit_app, counit_epi_of_R_faithful",
+      "date": "2026-10-10",
+      "verdict": "no match: unit_mono_of_L_faithful reduces the node to the faithfulness of π^{-1}, which Mathlib does not provide (no inverse image of sheaves on small etale sites in Mathlib); the source repository proves exactly this (see split_report)"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "pullback of étale sheaf along surjective morphism of schemes is faithful functor",
+      "results": "Scheme.instFaithfulEtaleOverForget, Scheme.Etale.forgetFullyFaithful, instFullEtaleOverForget, Scheme.Etale.forget, Scheme.Modules.instFaithfulPushforward (open immersions), Scheme.instHasPullbacksEtale",
+      "date": "2026-10-10",
+      "verdict": "no match"
+    },
+    {
+      "tool": "grep",
+      "query": "grep -rn 'inverseImage\\|pullback.*Sheaf\\|Sheaf.*pullback' /home/ubuntu/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Sites/*.lean; grep -rn 'unit_mono\\|mono.*unit' /home/ubuntu/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites/*.lean",
+      "results": "only isSheafFor_of_pullback in Sites/SheafQuasiCompact.lean; no unit/mono lemma in CategoryTheory/Sites",
+      "date": "2026-10-10",
+      "verdict": "no match"
+    }
+  ],
+  "mathlib_match": null,
+  "status": "split",
+  "merged_into": null,
+  "created": {
+    "by": "worker",
+    "item": "lemma-weil-pbc-gabber-effacement",
+    "date": "2026-10-09"
+  },
+  "lean_audit": {
+    "master": {
+      "state": "none",
+      "decls": [],
+      "missing": [
+        "AlgebraicGeometry.Etale.mono_unit_app_of_surjective"
+      ]
+    },
+    "slopmaster2": {
+      "state": "closed",
+      "decls": [
+        {
+          "name": "AlgebraicGeometry.Etale.mono_unit_app_of_surjective",
+          "module": "WeilConjectures.SixFunctors.Etale.UpperLowerStar.Surjective",
+          "lines": [
+            68,
+            75
+          ],
+          "kind": "theorem",
+          "sorry": false
+        }
+      ],
+      "missing": [],
+      "open": []
+    }
+  },
+  "chapter": "sec-proper-base-change",
+  "unit": "sk-thm-p1",
+  "reviewed": {
+    "date": "2026-10-10",
+    "by": "L",
+    "result": "accepted",
+    "note": "Four steps along the last paragraph of Stacks 09ZE with 03QP (1): the stalk of the unit composed with restriction to a lift and the inverse-image stalk isomorphism is the identity (checked on germs), a lift exists (surjective + new node lem-weil-pbc-finite-geometric-point-lift, closed by the sorry-free GeometricFiber.exists_apply_default_eq), left inverse ⇒ injective, geometric stalks detect monomorphisms (reviewed leaf). Checked. Lean mono_unit_app_of_surjective attached (sorry-free generalization: surjective suffices)."
+  },
+  "split_report": {
+    "date": "2026-10-10",
+    "item": "lem-weil-pbc-finite-surjective-unit-mono",
+    "worker": "stage1",
+    "summary": "Proof written in four steps after the last paragraph of Stacks 09ZE: (1) for a geometric point ybar and each lift ybar' the composite c∘r∘eta_ybar of the stalk of the unit, the restriction of germs r of lem-weil-pbc-finite-stalk-formula-restriction and the inverse-image stalk isomorphism c of lem-weil-pbc-inverse-image-stalk-germ is the identity, checked on germs (the germ compatibility of the latter node is exactly what is needed), so eta_ybar is the diagonal under the product decomposition; (2) the set of lifts is nonempty by surjectivity and the new node lem-weil-pbc-finite-geometric-point-lift (Stacks 01J5/02NU/01TG/09GU; sorry-free Lean AlgebraicGeometry.Scheme.Hom.GeometricFiber.exists_apply_default_eq on slopmaster2); (3) a map with a left inverse is injective (elementary); (4) the Mathlib leaf lem-weil-pbc-geometric-stalks-detect-mono with the family of geometric points at algebraic closures of residue fields. Statement unchanged. Mathlib re-searched (unit_mono_of_L_faithful needs faithfulness of pi^{-1}, absent from Mathlib). Source repository: AlgebraicGeometry.Etale.mono_unit_app_of_surjective (WeilConjectures/SixFunctors/Etale/UpperLowerStar/Surjective.lean:68-72) is sorry-free per the sorry map (132 declarations reached) and proves a generalization: the unit F ⟶ π_*π^*F is mono for every surjective π, for sheaves of ModuleCat.{u+1} Λ (via faithfulness of π^*, faithful_upperStar_of_surjective, lines 41-63); it is stated for Λ-modules, not for AddCommGrpCat, so it matches this node only through Λ = ULift ℤ and the equivalence of Z-modules with abelian groups; left to the lead whether to attach."
+  },
+  "lean": {
+    "module": "WeilConjectures.SixFunctors.Etale.UpperLowerStar.Surjective",
+    "declaration": "AlgebraicGeometry.Etale.mono_unit_app_of_surjective",
+    "branch": "slopmaster2",
+    "line": 68,
+    "declarations": [
+      "AlgebraicGeometry.Etale.mono_unit_app_of_surjective"
+    ],
+    "sorry_free": true,
+    "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state closed)"
+  }
 }

@@ -1,113 +1,117 @@
 {
- "id": "lem-weil-pbc-extension-by-zero-stalks",
- "blueprint": {
-  "is": null,
-  "from": {
-   "node": "def-weil-pbc-extension-by-zero",
-   "place": "unspecified",
-   "via": []
+  "id": "lem-weil-pbc-extension-by-zero-stalks",
+  "blueprint": {
+    "is": null,
+    "from": {
+      "node": "def-weil-pbc-extension-by-zero",
+      "place": "unspecified",
+      "via": []
+    },
+    "same_as": null
   },
-  "same_as": null
- },
- "kind": "statement",
- "title": "Geometric stalks of extension by zero along an open immersion",
- "statement": "Let $\\Lambda$ be a commutative ring ($\\Lambda=\\mathbf Z$ gives abelian sheaves), let $j:U\\hookrightarrow X$ be an open immersion of schemes, let $F$ be a sheaf of $\\Lambda$-modules on $U_{\\Et}$ and $j_!F$ its extension by zero [def-weil-pbc-extension-by-zero], and let $\\bar x:\\operatorname{Spec}\\Omega\\to X$ be a geometric point [def-weil-geometric-point]. Stalks are taken as in [def-weil-pbc-geometric-stalks].\n1. If the image of $\\bar x$ lies in $j(U)$, then $\\bar x$ factors uniquely as $\\bar x=j\\circ\\bar u$ with $\\bar u:\\operatorname{Spec}\\Omega\\to U$, and the map sending the class of $s\\in(j_{p!}F)(V)=F(V\\xrightarrow{\\varphi}U)$, for a pointed etale neighbourhood $(V,\\bar v)$ of $\\bar x$ with $V\\to X$ factoring as $j\\varphi$, to the class of $s$ in $F_{\\bar u}$ (note $\\varphi\\bar v=\\bar u$) induces an isomorphism $(j_!F)_{\\bar x}\\xrightarrow{\\sim}F_{\\bar u}$, natural in $F$ and $\\Lambda$-linear.\n2. If the image of $\\bar x$ does not lie in $j(U)$, then $(j_!F)_{\\bar x}=0$.\nIn short $(j_!F)_{\\bar x}=F_{\\bar u}$ for $\\bar x=j\\bar u$ in $U$ and $0$ for $\\bar x$ in $X\\setminus U$; this is the case of an open immersion of the formula $(j_!F)_{\\bar x}=\\bigoplus_{\\bar u:\\,j\\bar u=\\bar x}F_{\\bar u}$ for etale $j$.",
- "source": {
-  "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Proposition 03S5 (etale-cohomology-proposition-describe-jshriek) and its proof (via Modules on Sites, Lemma 0710 sites-modules-lemma-stalk-j-shriek, and Lemma 04HU etale-cohomology-lemma-points-small-etale-site); for an open immersion the sum has at most one summand since j is a monomorphism"
- },
- "stmt_deps": [
-  "def-weil-pbc-extension-by-zero",
-  "def-weil-geometric-point",
-  "def-weil-pbc-geometric-stalks"
- ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
- "mathlib_searches": [
-  {
-   "tool": "leansearch",
-   "query": "stalk of extension by zero sheaf is zero outside the open subset",
-   "results": "LocallyRingedSpace.Γevaluation_eq_zero_iff_notMem_basicOpen, RingedSpace.res_zero, Scheme.basicOpen_zero, IsAffineOpen.isLocalization_stalk, PresheafedSpace.restrictStalkIso (Mathlib.Geometry.RingedSpace.*, AlgebraicGeometry.*)",
-   "date": "2026-10-09",
-   "verdict": "no match"
+  "kind": "statement",
+  "title": "Geometric stalks of extension by zero along an open immersion",
+  "statement": "Let $\\Lambda$ be a commutative ring ($\\Lambda=\\mathbf Z$ gives abelian sheaves), let $j:U\\hookrightarrow X$ be an open immersion of schemes, let $F$ be a sheaf of $\\Lambda$-modules on $U_{\\Et}$ and $j_!F$ its extension by zero [def-weil-pbc-extension-by-zero], and let $\\bar x:\\operatorname{Spec}\\Omega\\to X$ be a geometric point [def-weil-geometric-point]. Stalks are taken as in [def-weil-pbc-geometric-stalks].\n1. If the image of $\\bar x$ lies in $j(U)$, then $\\bar x$ factors uniquely as $\\bar x=j\\circ\\bar u$ with $\\bar u:\\operatorname{Spec}\\Omega\\to U$, and the map sending the class of $s\\in(j_{p!}F)(V)=F(V\\xrightarrow{\\varphi}U)$, for a pointed etale neighbourhood $(V,\\bar v)$ of $\\bar x$ with $V\\to X$ factoring as $j\\varphi$, to the class of $s$ in $F_{\\bar u}$ (note $\\varphi\\bar v=\\bar u$) induces an isomorphism $(j_!F)_{\\bar x}\\xrightarrow{\\sim}F_{\\bar u}$, natural in $F$ and $\\Lambda$-linear.\n2. If the image of $\\bar x$ does not lie in $j(U)$, then $(j_!F)_{\\bar x}=0$.\nIn short $(j_!F)_{\\bar x}=F_{\\bar u}$ for $\\bar x=j\\bar u$ in $U$ and $0$ for $\\bar x$ in $X\\setminus U$; this is the case of an open immersion of the formula $(j_!F)_{\\bar x}=\\bigoplus_{\\bar u:\\,j\\bar u=\\bar x}F_{\\bar u}$ for etale $j$.",
+  "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Proposition 03S5 (etale-cohomology-proposition-describe-jshriek) and its proof (via Modules on Sites, Lemma 0710 sites-modules-lemma-stalk-j-shriek, and Lemma 04HU etale-cohomology-lemma-points-small-etale-site); for an open immersion the sum has at most one summand since j is a monomorphism"
   },
-  {
-   "tool": "leanfinder",
-   "query": "stalk at a geometric point of the extension by zero of an étale sheaf from an open subscheme equals the stalk of the sheaf if the point lies in the open, zero otherwise",
-   "results": "StructureSheaf.germ_toOpen, Scheme.fromSpecStalk_app, StructureSheaf.stalkToFiberRingHom_germ, ModuleCat.Tilde.toOpen_germ_apply, Scheme.germ_stalkClosedPointTo (Zariski stalks only)",
-   "date": "2026-10-09",
-   "verdict": "no match"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "fiber of the sheaf pullback (left adjoint of pushforward) at a point is the fiber at the comap point",
-   "results": "SheafOfModules.pullback, SheafOfModules.pullbackIso, TopCat.Sheaf.pullbackPushforwardAdjunction, TopCat.Sheaf.pullbackIso, TopCat.Sheaf.pullback; by loogle also GrothendieckTopology.Point.sheafFiberComapIso (Mathlib.CategoryTheory.Sites.Point.Comap:69, requires RepresentablyFlat F)",
-   "date": "2026-10-09",
-   "verdict": "generalization, not one line: sheafFiberComapIso computes fibres of F.sheafPullback for representably flat F; the localization functor U.Etale ⥤ X.Etale is not representably flat, and the point-outside-U case has no counterpart"
-  },
-  {
-   "tool": "grep",
-   "query": "grep -nE 'def pointSmallEtale|lemma isConservative_pointSmallEtale|sheafFiber' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Sites/EtalePoint.lean; grep -rniE 'extension by zero|lowerShriek' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
-   "results": "pointSmallEtale (EtalePoint.lean:64), isConservative_pointSmallEtale (:126), HasEnoughPoints (:160); no extension by zero",
-   "date": "2026-10-09",
-   "verdict": "no match"
-  }
- ],
- "mathlib_match": null,
- "status": "unsplit",
- "merged_into": null,
- "import_flags": [],
- "created": {
-  "by": "worker",
-  "item": "def-weil-pbc-extension-by-zero",
-  "date": "2026-10-09"
- },
- "lean_audit": {
-  "master": {
-   "state": "none",
-   "decls": [],
-   "missing": [
-    "AlgebraicGeometry.Etale.openImmersionLowerShriekCompUliftSheafFiberIso",
-    "AlgebraicGeometry.Etale.isZero_uliftSheafFiber_openImmersionLowerShriek_obj"
-   ]
-  },
-  "slopmaster2": {
-   "state": "closed",
-   "decls": [
+  "stmt_deps": [
+    "def-weil-pbc-extension-by-zero",
+    "def-weil-geometric-point",
+    "def-weil-pbc-geometric-stalks"
+  ],
+  "proof": [],
+  "proof_deps": [],
+  "proof_origin": null,
+  "mathlib_searches": [
     {
-     "name": "AlgebraicGeometry.Etale.openImmersionLowerShriekCompUliftSheafFiberIso",
-     "module": "WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.FiniteComparison",
-     "lines": [
-      97,
-      108
-     ],
-     "kind": "def",
-     "sorry": false
+      "tool": "leansearch",
+      "query": "stalk of extension by zero sheaf is zero outside the open subset",
+      "results": "LocallyRingedSpace.Γevaluation_eq_zero_iff_notMem_basicOpen, RingedSpace.res_zero, Scheme.basicOpen_zero, IsAffineOpen.isLocalization_stalk, PresheafedSpace.restrictStalkIso (Mathlib.Geometry.RingedSpace.*, AlgebraicGeometry.*)",
+      "date": "2026-10-09",
+      "verdict": "no match"
     },
     {
-     "name": "AlgebraicGeometry.Etale.isZero_uliftSheafFiber_openImmersionLowerShriek_obj",
-     "module": "WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.FiniteComparison",
-     "lines": [
-      111,
-      125
-     ],
-     "kind": "theorem",
-     "sorry": false
+      "tool": "leanfinder",
+      "query": "stalk at a geometric point of the extension by zero of an étale sheaf from an open subscheme equals the stalk of the sheaf if the point lies in the open, zero otherwise",
+      "results": "StructureSheaf.germ_toOpen, Scheme.fromSpecStalk_app, StructureSheaf.stalkToFiberRingHom_germ, ModuleCat.Tilde.toOpen_germ_apply, Scheme.germ_stalkClosedPointTo (Zariski stalks only)",
+      "date": "2026-10-09",
+      "verdict": "no match"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "fiber of the sheaf pullback (left adjoint of pushforward) at a point is the fiber at the comap point",
+      "results": "SheafOfModules.pullback, SheafOfModules.pullbackIso, TopCat.Sheaf.pullbackPushforwardAdjunction, TopCat.Sheaf.pullbackIso, TopCat.Sheaf.pullback; by loogle also GrothendieckTopology.Point.sheafFiberComapIso (Mathlib.CategoryTheory.Sites.Point.Comap:69, requires RepresentablyFlat F)",
+      "date": "2026-10-09",
+      "verdict": "generalization, not one line: sheafFiberComapIso computes fibres of F.sheafPullback for representably flat F; the localization functor U.Etale ⥤ X.Etale is not representably flat, and the point-outside-U case has no counterpart"
+    },
+    {
+      "tool": "grep",
+      "query": "grep -nE 'def pointSmallEtale|lemma isConservative_pointSmallEtale|sheafFiber' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Sites/EtalePoint.lean; grep -rniE 'extension by zero|lowerShriek' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+      "results": "pointSmallEtale (EtalePoint.lean:64), isConservative_pointSmallEtale (:126), HasEnoughPoints (:160); no extension by zero",
+      "date": "2026-10-09",
+      "verdict": "no match"
     }
-   ],
-   "missing": [],
-   "open": []
-  }
- },
- "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1",
- "lean": {
-  "branch": "slopmaster2",
-  "declarations": [
-   "AlgebraicGeometry.Etale.openImmersionLowerShriekCompUliftSheafFiberIso",
-   "AlgebraicGeometry.Etale.isZero_uliftSheafFiber_openImmersionLowerShriek_obj"
   ],
-  "note": "attached by the lead at review (2026-10-09), found by the opus workers of def-weil-pbc-extension-by-zero and def-weil-pbc-finite-open-comparison: the stalk of j_!F at a geometric point of U, and its vanishing outside U; sorry-free on the full map"
- }
+  "mathlib_match": null,
+  "status": "unsplit",
+  "merged_into": null,
+  "import_flags": [],
+  "created": {
+    "by": "worker",
+    "item": "def-weil-pbc-extension-by-zero",
+    "date": "2026-10-09"
+  },
+  "lean_audit": {
+    "master": {
+      "state": "none",
+      "decls": [],
+      "missing": [
+        "AlgebraicGeometry.Etale.openImmersionLowerShriekCompUliftSheafFiberIso",
+        "AlgebraicGeometry.Etale.isZero_uliftSheafFiber_openImmersionLowerShriek_obj"
+      ]
+    },
+    "slopmaster2": {
+      "state": "closed",
+      "decls": [
+        {
+          "name": "AlgebraicGeometry.Etale.openImmersionLowerShriekCompUliftSheafFiberIso",
+          "module": "WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.FiniteComparison",
+          "lines": [
+            97,
+            108
+          ],
+          "kind": "def",
+          "sorry": false
+        },
+        {
+          "name": "AlgebraicGeometry.Etale.isZero_uliftSheafFiber_openImmersionLowerShriek_obj",
+          "module": "WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.FiniteComparison",
+          "lines": [
+            111,
+            125
+          ],
+          "kind": "theorem",
+          "sorry": false
+        }
+      ],
+      "missing": [],
+      "open": []
+    }
+  },
+  "chapter": "sec-proper-base-change",
+  "unit": "sk-thm-p1",
+  "lean": {
+    "module": "WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.FiniteComparison",
+    "declaration": "AlgebraicGeometry.Etale.openImmersionLowerShriekCompUliftSheafFiberIso",
+    "branch": "slopmaster2",
+    "line": 97,
+    "declarations": [
+      "AlgebraicGeometry.Etale.openImmersionLowerShriekCompUliftSheafFiberIso",
+      "AlgebraicGeometry.Etale.isZero_uliftSheafFiber_openImmersionLowerShriek_obj"
+    ],
+    "sorry_free": true,
+    "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state closed)"
+  }
 }

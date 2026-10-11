@@ -1,287 +1,298 @@
 {
- "id": "lem-sc-canonical-degree",
- "blueprint": {
-  "is": "lem-sc-canonical-degree",
-  "from": null,
-  "same_as": []
- },
- "kind": "statement",
- "title": "Degree of the canonical bundle",
- "statement": "Let $k$ be algebraically closed and let $C$ be a proper smooth connected curve of dimension one over $k$ [def-sc-curves], of genus $g=\\dim_k H^1(C,\\mathcal O_C)$ [def-sc-genus]. Put $\\omega_C=\\Omega^1_{C/k}$ [def-sc-kahler-differentials]. There is a divisor $K_C$ on $C$ [def-sc-divisor] such that $\\omega_C\\cong\\mathcal O_C(K_C)$ and $\\deg K_C=2g-2$. In fact, every divisor $K$ with $\\mathcal O_C(K)\\cong\\omega_C$ has degree $2g-2$, with degree as in [def-sc-pic0].",
- "source": {
-  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-sc-canonical-degree.md",
-  "place": "node lem-sc-canonical-degree, order 713",
-  "external": [
-   {
-    "document": "Stacks Project",
-    "place": "Tag 0BS2"
-   },
-   {
-    "document": "Stacks Project",
-    "place": "Tag 0BS6"
-   }
-  ]
- },
- "stmt_deps": [
-  "def-sc-curves",
-  "def-sc-genus",
-  "def-sc-kahler-differentials",
-  "def-sc-divisor",
-  "def-sc-pic0"
- ],
- "proof": [
-  {
-   "text": "The canonical sheaf $\\omega_C=\\Omega^1_{C/k}$ is invertible by [lem-sc-canonical-sheaf]. The curve is integral by [lem-sc-smooth-connected-curve-local-rings]. Apply [lem-sc-line-bundle-rational-section] to $\\omega_C$: a nonzero rational section $s$ gives the divisor $K_C=\\operatorname{div}(s)$ and an isomorphism $\\mathcal O_C(K_C)\\cong\\omega_C$.",
-   "uses": [
+  "id": "lem-sc-canonical-degree",
+  "blueprint": {
+    "is": "lem-sc-canonical-degree",
+    "from": null,
+    "same_as": []
+  },
+  "kind": "statement",
+  "title": "Degree of the canonical bundle",
+  "statement": "Let $k$ be algebraically closed and let $C$ be a proper smooth connected curve of dimension one over $k$ [def-sc-curves], of genus $g=\\dim_k H^1(C,\\mathcal O_C)$ [def-sc-genus]. Put $\\omega_C=\\Omega^1_{C/k}$ [def-sc-kahler-differentials]. There is a divisor $K_C$ on $C$ [def-sc-divisor] such that $\\omega_C\\cong\\mathcal O_C(K_C)$ and $\\deg K_C=2g-2$. In fact, every divisor $K$ with $\\mathcal O_C(K)\\cong\\omega_C$ has degree $2g-2$, with degree as in [def-sc-pic0].",
+  "source": {
+    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-sc-canonical-degree.md",
+    "place": "node lem-sc-canonical-degree, order 713",
+    "external": [
+      {
+        "document": "Stacks Project",
+        "place": "Tag 0BS2"
+      },
+      {
+        "document": "Stacks Project",
+        "place": "Tag 0BS6"
+      }
+    ]
+  },
+  "stmt_deps": [
+    "def-sc-curves",
+    "def-sc-genus",
+    "def-sc-kahler-differentials",
+    "def-sc-divisor",
+    "def-sc-pic0"
+  ],
+  "proof": [
+    {
+      "text": "The canonical sheaf $\\omega_C=\\Omega^1_{C/k}$ is invertible by [lem-sc-canonical-sheaf]. The curve is integral by [lem-sc-smooth-connected-curve-local-rings]. Apply [lem-sc-line-bundle-rational-section] to $\\omega_C$: a nonzero rational section $s$ gives the divisor $K_C=\\operatorname{div}(s)$ and an isomorphism $\\mathcal O_C(K_C)\\cong\\omega_C$.",
+      "uses": [
+        "lem-sc-canonical-sheaf",
+        "lem-sc-smooth-connected-curve-local-rings",
+        "lem-sc-line-bundle-rational-section"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-sc-canonical-degree.md",
+        "place": "canonical bundle clause, supplemented by the divisor realization in unit sk-thm-picard-rr, Degrees"
+      }
+    },
+    {
+      "text": "For the structure sheaf, [lem-sc-global-functions] gives $h^0(\\mathcal O_C)=1$ and [def-sc-genus] gives $h^1(\\mathcal O_C)=g$. For $\\omega_C$, apply [thm-sc-serre-duality-curve] with $\\mathcal M=\\mathcal O_C$: the two dualities in dimensions zero and one give $h^0(\\omega_C)=h^1(\\mathcal O_C)=g$ and $h^1(\\omega_C)=h^0(\\mathcal O_C)=1$. Vanishing above dimension one from [lem-sc-noetherian-cohomology-above-dimension] makes the Euler characteristics $\\chi(\\mathcal O_C)=1-g$ and $\\chi(\\omega_C)=g-1$.",
+      "uses": [
+        "lem-sc-global-functions",
+        "def-sc-genus",
+        "thm-sc-serre-duality-curve",
+        "lem-sc-noetherian-cohomology-above-dimension"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/_section.md",
+        "place": "Step (RR), computation of the degree of the canonical sheaf by duality"
+      }
+    },
+    {
+      "text": "Apply the line-bundle clause of [lem-sc-riemann-roch] to the invertible $\\omega_C$ of Step 1: $\\chi(\\omega_C)=\\deg\\omega_C+1-g$. Substituting the value $g-1$ from Step 2 gives $\\deg\\omega_C=2g-2$, the degree identity for the dualizing sheaf on this smooth connected curve.",
+      "uses": [
+        "lem-sc-riemann-roch"
+      ],
+      "elementary": true,
+      "source": {
+        "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-sc-canonical-degree.md",
+        "place": "Stacks Tag 0BS6, parts (1) and (2), via unit sk-thm-picard-rr Step (RR)"
+      }
+    },
+    {
+      "text": "By the degree definition [def-sc-pic0], any $K$ satisfying $\\mathcal O_C(K)\\cong\\omega_C$ has $\\deg K=\\deg\\omega_C$. In particular the divisor $K_C$ constructed in Step 1 has degree $2g-2$ by Step 3.",
+      "uses": [
+        "def-sc-pic0"
+      ],
+      "elementary": true,
+      "source": {
+        "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/_section.md",
+        "place": "Degrees, divisor and line-bundle degree agree"
+      }
+    }
+  ],
+  "proof_deps": [
     "lem-sc-canonical-sheaf",
     "lem-sc-smooth-connected-curve-local-rings",
-    "lem-sc-line-bundle-rational-section"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-sc-canonical-degree.md",
-    "place": "canonical bundle clause, supplemented by the divisor realization in unit sk-thm-picard-rr, Degrees"
-   }
-  },
-  {
-   "text": "For the structure sheaf, [lem-sc-global-functions] gives $h^0(\\mathcal O_C)=1$ and [def-sc-genus] gives $h^1(\\mathcal O_C)=g$. For $\\omega_C$, apply [thm-sc-serre-duality-curve] with $\\mathcal M=\\mathcal O_C$: the two dualities in dimensions zero and one give $h^0(\\omega_C)=h^1(\\mathcal O_C)=g$ and $h^1(\\omega_C)=h^0(\\mathcal O_C)=1$. Vanishing above dimension one from [lem-sc-noetherian-cohomology-above-dimension] makes the Euler characteristics $\\chi(\\mathcal O_C)=1-g$ and $\\chi(\\omega_C)=g-1$.",
-   "uses": [
+    "lem-sc-line-bundle-rational-section",
     "lem-sc-global-functions",
     "def-sc-genus",
     "thm-sc-serre-duality-curve",
-    "lem-sc-noetherian-cohomology-above-dimension"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/_section.md",
-    "place": "Step (RR), computation of the degree of the canonical sheaf by duality"
-   }
-  },
-  {
-   "text": "Apply the line-bundle clause of [lem-sc-riemann-roch] to the invertible $\\omega_C$ of Step 1: $\\chi(\\omega_C)=\\deg\\omega_C+1-g$. Substituting the value $g-1$ from Step 2 gives $\\deg\\omega_C=2g-2$, the degree identity for the dualizing sheaf on this smooth connected curve.",
-   "uses": [
-    "lem-sc-riemann-roch"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-sc-canonical-degree.md",
-    "place": "Stacks Tag 0BS6, parts (1) and (2), via unit sk-thm-picard-rr Step (RR)"
-   }
-  },
-  {
-   "text": "By the degree definition [def-sc-pic0], any $K$ satisfying $\\mathcal O_C(K)\\cong\\omega_C$ has $\\deg K=\\deg\\omega_C$. In particular the divisor $K_C$ constructed in Step 1 has degree $2g-2$ by Step 3.",
-   "uses": [
+    "lem-sc-noetherian-cohomology-above-dimension",
+    "lem-sc-riemann-roch",
     "def-sc-pic0"
-   ],
-   "elementary": true,
-   "source": {
+  ],
+  "proof_origin": {
+    "by": "agent",
     "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/_section.md",
-    "place": "Degrees, divisor and line-bundle degree agree"
-   }
-  }
- ],
- "proof_deps": [
-  "lem-sc-canonical-sheaf",
-  "lem-sc-smooth-connected-curve-local-rings",
-  "lem-sc-line-bundle-rational-section",
-  "lem-sc-global-functions",
-  "def-sc-genus",
-  "thm-sc-serre-duality-curve",
-  "lem-sc-noetherian-cohomology-above-dimension",
-  "lem-sc-riemann-roch",
-  "def-sc-pic0"
- ],
- "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/_section.md",
-  "place": "Step (RR), canonical degree calculation; Stacks Tags 0BS2 and 0BS6 checked online because the local source is unavailable"
- },
- "mathlib_searches": [],
- "mathlib_match": null,
- "status": "split",
- "merged_into": null,
- "import_flags": [
-  "undischarged_input",
-  "proof_cites_literature"
- ],
- "blueprint_kind": "lemma",
- "blueprint_order": 713,
- "blueprint_uses": [
-  "def-sc-curves"
- ],
- "uses_not_cited": [
-  "def-sc-curves"
- ],
- "blueprint_proof_text": "This is the recorded classical input of the statement, Stacks Project,\nAlgebraic Curves, Lemma 53.4.1\n([Tag 0BS2](https://stacks.math.columbia.edu/tag/0BS2)), part (6),\nwhich identifies the dualizing sheaf of a smooth curve of relative\ndimension one with the sheaf of Kähler differentials, together with\nLemma 53.5.2\n([Tag 0BS6](https://stacks.math.columbia.edu/tag/0BS6)), parts (1)\nand (2): the dualizing sheaf is invertible and its degree is\n$-2\\chi(\\mathcal O_X)=2g-2$. The\nblueprint uses the statement in this form and gives no separate proof.",
- "blueprint_proof_steps": [
-  {
-   "text": "This is the recorded classical input of the statement, Stacks Project,\nAlgebraic Curves, Lemma 53.4.1\n([Tag 0BS2](https://stacks.math.columbia.edu/tag/0BS2)), part (6),\nwhich identifies the dualizing sheaf of a smooth curve of relative\ndimension one with the sheaf of Kähler differentials, together with\nLemma 53.5.2\n([Tag 0BS6](https://stacks.math.columbia.edu/tag/0BS6)), parts (1)\nand (2): the dualizing sheaf is invertible and its degree is\n$-2\\chi(\\mathcal O_X)=2g-2$. The\nblueprint uses the statement in this form and gives no separate proof.",
-   "uses": [],
-   "elementary": null
-  }
- ],
- "lean_audit": {
-  "master": {
-   "state": "none",
-   "decls": [],
-   "missing": []
+    "place": "Step (RR), canonical degree calculation; Stacks Tags 0BS2 and 0BS6 checked online because the local source is unavailable"
   },
-  "slopmaster2": {
-   "state": "rests_on_sorry",
-   "decls": [
+  "mathlib_searches": [],
+  "mathlib_match": null,
+  "status": "split",
+  "merged_into": null,
+  "import_flags": [
+    "undischarged_input",
+    "proof_cites_literature"
+  ],
+  "blueprint_kind": "lemma",
+  "blueprint_order": 713,
+  "blueprint_uses": [
+    "def-sc-curves"
+  ],
+  "uses_not_cited": [
+    "def-sc-curves"
+  ],
+  "blueprint_proof_text": "This is the recorded classical input of the statement, Stacks Project,\nAlgebraic Curves, Lemma 53.4.1\n([Tag 0BS2](https://stacks.math.columbia.edu/tag/0BS2)), part (6),\nwhich identifies the dualizing sheaf of a smooth curve of relative\ndimension one with the sheaf of Kähler differentials, together with\nLemma 53.5.2\n([Tag 0BS6](https://stacks.math.columbia.edu/tag/0BS6)), parts (1)\nand (2): the dualizing sheaf is invertible and its degree is\n$-2\\chi(\\mathcal O_X)=2g-2$. The\nblueprint uses the statement in this form and gives no separate proof.",
+  "blueprint_proof_steps": [
     {
-     "name": "AlgebraicGeometry.Scheme.degree_relativeDifferentials",
-     "module": "WeilConjectures.AlgebraicGeometry.Curve.RiemannRoch",
-     "lines": [
-      1315,
-      1338
-     ],
-     "kind": "theorem",
-     "sorry": false
+      "text": "This is the recorded classical input of the statement, Stacks Project,\nAlgebraic Curves, Lemma 53.4.1\n([Tag 0BS2](https://stacks.math.columbia.edu/tag/0BS2)), part (6),\nwhich identifies the dualizing sheaf of a smooth curve of relative\ndimension one with the sheaf of Kähler differentials, together with\nLemma 53.5.2\n([Tag 0BS6](https://stacks.math.columbia.edu/tag/0BS6)), parts (1)\nand (2): the dualizing sheaf is invertible and its degree is\n$-2\\chi(\\mathcal O_X)=2g-2$. The\nblueprint uses the statement in this form and gives no separate proof.",
+      "uses": [],
+      "elementary": null
     }
-   ],
-   "missing": [],
-   "open": [
-    {
-     "name": "AlgebraicGeometry.ProjectiveSpace.subsingleton_H_of_lt",
-     "module": "WeilConjectures.AlgebraicGeometry.Cohomology.Serre",
-     "lines": [
-      116,
-      127
-     ],
-     "kind": "theorem",
-     "nodes": [
-      "lem-pc-projective-space-cohomology-bound"
-     ],
-     "below": false
+  ],
+  "lean_audit": {
+    "master": {
+      "state": "none",
+      "decls": [],
+      "missing": []
     },
-    {
-     "name": "AlgebraicGeometry.Scheme.Modules.IsFiniteLocallyFree.dual",
-     "module": "WeilConjectures.AlgebraicGeometry.Modules.Dual",
-     "lines": [
-      178,
-      182
-     ],
-     "kind": "theorem",
-     "nodes": [],
-     "below": false
-    },
-    {
-     "name": "AlgebraicGeometry.Scheme.Modules.IsFiniteLocallyFree.tensorObj",
-     "module": "WeilConjectures.AlgebraicGeometry.Modules.Dual",
-     "lines": [
-      184,
-      188
-     ],
-     "kind": "theorem",
-     "nodes": [],
-     "below": false
-    },
-    {
-     "name": "AlgebraicGeometry.Scheme.Modules.exists_addEquiv_sections_higherDirectImage_H",
-     "module": "WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage",
-     "lines": [
-      307,
-      324
-     ],
-     "kind": "theorem",
-     "nodes": [],
-     "below": false
-    },
-    {
-     "name": "AlgebraicGeometry.Scheme.Modules.finite_sections_higherDirectImage",
-     "module": "WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage",
-     "lines": [
-      617,
-      632
-     ],
-     "kind": "theorem",
-     "nodes": [
-      "lem-pc-coherent-hi"
-     ],
-     "below": false
-    },
-    {
-     "name": "AlgebraicGeometry.Scheme.Modules.isQuasicoherent_higherDirectImage",
-     "module": "WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage",
-     "lines": [
-      467,
-      474
-     ],
-     "kind": "theorem",
-     "nodes": [],
-     "below": false
-    },
-    {
-     "name": "AlgebraicGeometry.Scheme.Modules.nonempty_iso_dual_tensorObj_dual_tensorObj",
-     "module": "WeilConjectures.AlgebraicGeometry.Modules.Dual",
-     "lines": [
-      204,
-      214
-     ],
-     "kind": "theorem",
-     "nodes": [],
-     "below": false
-    },
-    {
-     "name": "AlgebraicGeometry.Scheme.Modules.subsingleton_H_of_topologicalKrullDim_lt",
-     "module": "WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar",
-     "lines": [
-      64,
-      73
-     ],
-     "kind": "theorem",
-     "nodes": [],
-     "below": false
-    },
-    {
-     "name": "AlgebraicGeometry.Scheme.exists_isIso_pushforwardHomObjComparison_unit",
-     "module": "WeilConjectures.AlgebraicGeometry.Curve.SerreDuality",
-     "lines": [
-      527,
-      541
-     ],
-     "kind": "theorem",
-     "nodes": [],
-     "below": false
+    "slopmaster2": {
+      "state": "rests_on_sorry",
+      "decls": [
+        {
+          "name": "AlgebraicGeometry.Scheme.degree_relativeDifferentials",
+          "module": "WeilConjectures.AlgebraicGeometry.Curve.RiemannRoch",
+          "lines": [
+            1315,
+            1338
+          ],
+          "kind": "theorem",
+          "sorry": false
+        }
+      ],
+      "missing": [],
+      "open": [
+        {
+          "name": "AlgebraicGeometry.ProjectiveSpace.subsingleton_H_of_lt",
+          "module": "WeilConjectures.AlgebraicGeometry.Cohomology.Serre",
+          "lines": [
+            116,
+            127
+          ],
+          "kind": "theorem",
+          "nodes": [
+            "lem-pc-projective-space-cohomology-bound"
+          ],
+          "below": false
+        },
+        {
+          "name": "AlgebraicGeometry.Scheme.Modules.IsFiniteLocallyFree.dual",
+          "module": "WeilConjectures.AlgebraicGeometry.Modules.Dual",
+          "lines": [
+            178,
+            182
+          ],
+          "kind": "theorem",
+          "nodes": [],
+          "below": false
+        },
+        {
+          "name": "AlgebraicGeometry.Scheme.Modules.IsFiniteLocallyFree.tensorObj",
+          "module": "WeilConjectures.AlgebraicGeometry.Modules.Dual",
+          "lines": [
+            184,
+            188
+          ],
+          "kind": "theorem",
+          "nodes": [],
+          "below": false
+        },
+        {
+          "name": "AlgebraicGeometry.Scheme.Modules.exists_addEquiv_sections_higherDirectImage_H",
+          "module": "WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage",
+          "lines": [
+            307,
+            324
+          ],
+          "kind": "theorem",
+          "nodes": [],
+          "below": false
+        },
+        {
+          "name": "AlgebraicGeometry.Scheme.Modules.finite_sections_higherDirectImage",
+          "module": "WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage",
+          "lines": [
+            617,
+            632
+          ],
+          "kind": "theorem",
+          "nodes": [
+            "lem-pc-coherent-hi"
+          ],
+          "below": false
+        },
+        {
+          "name": "AlgebraicGeometry.Scheme.Modules.isQuasicoherent_higherDirectImage",
+          "module": "WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage",
+          "lines": [
+            467,
+            474
+          ],
+          "kind": "theorem",
+          "nodes": [],
+          "below": false
+        },
+        {
+          "name": "AlgebraicGeometry.Scheme.Modules.nonempty_iso_dual_tensorObj_dual_tensorObj",
+          "module": "WeilConjectures.AlgebraicGeometry.Modules.Dual",
+          "lines": [
+            204,
+            214
+          ],
+          "kind": "theorem",
+          "nodes": [],
+          "below": false
+        },
+        {
+          "name": "AlgebraicGeometry.Scheme.Modules.subsingleton_H_of_topologicalKrullDim_lt",
+          "module": "WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar",
+          "lines": [
+            64,
+            73
+          ],
+          "kind": "theorem",
+          "nodes": [],
+          "below": false
+        },
+        {
+          "name": "AlgebraicGeometry.Scheme.exists_isIso_pushforwardHomObjComparison_unit",
+          "module": "WeilConjectures.AlgebraicGeometry.Curve.SerreDuality",
+          "lines": [
+            527,
+            541
+          ],
+          "kind": "theorem",
+          "nodes": [],
+          "below": false
+        }
+      ]
     }
-   ]
-  }
- },
- "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-rr",
- "split_report": {
-  "date": "2026-10-10",
-  "item": "lem-sc-canonical-degree",
-  "worker": "stage1",
-  "summary": "Quantified the canonical divisor in the statement. Split its existence from its degree calculation, using the existing line-bundle realization, Serre duality, Riemann-Roch, and divisor-degree nodes.",
-  "blueprint": "Steps 1 and 4 realize the canonical-divisor assertion, and Steps 2 and 3 realize the 0BS2 and 0BS6 duality and degree clauses in the blueprint proof text; the unit's Step (RR) supplies the Euler-characteristic computation.",
+  },
+  "chapter": "sec-picard-framework",
+  "unit": "sk-thm-picard-rr",
+  "split_report": {
+    "date": "2026-10-10",
+    "item": "lem-sc-canonical-degree",
+    "worker": "stage1",
+    "summary": "Quantified the canonical divisor in the statement. Split its existence from its degree calculation, using the existing line-bundle realization, Serre duality, Riemann-Roch, and divisor-degree nodes.",
+    "blueprint": "Steps 1 and 4 realize the canonical-divisor assertion, and Steps 2 and 3 realize the 0BS2 and 0BS6 duality and degree clauses in the blueprint proof text; the unit's Step (RR) supplies the Euler-characteristic computation.",
+    "tool_uses": [
+      {
+        "node": "lem-sc-smooth-connected-curve-local-rings",
+        "why": "Supplies the standard integrality of a smooth connected curve needed to form a rational-section divisor."
+      },
+      {
+        "node": "lem-sc-global-functions",
+        "why": "Supplies H0(O_C)=k used in the unit's Euler-characteristic calculation."
+      },
+      {
+        "node": "lem-sc-noetherian-cohomology-above-dimension",
+        "why": "Supplies the general dimension-vanishing input for the two Euler characteristics."
+      }
+    ]
+  },
   "tool_uses": [
-   {
-    "node": "lem-sc-smooth-connected-curve-local-rings",
-    "why": "Supplies the standard integrality of a smooth connected curve needed to form a rational-section divisor."
-   },
-   {
-    "node": "lem-sc-global-functions",
-    "why": "Supplies H0(O_C)=k used in the unit's Euler-characteristic calculation."
-   },
-   {
-    "node": "lem-sc-noetherian-cohomology-above-dimension",
-    "why": "Supplies the general dimension-vanishing input for the two Euler characteristics."
-   }
-  ]
- },
- "tool_uses": [
-  "lem-sc-smooth-connected-curve-local-rings",
-  "lem-sc-global-functions",
-  "lem-sc-noetherian-cohomology-above-dimension"
- ],
- "reviewed": {
-  "date": "2026-10-10",
-  "by": "L",
-  "reviewer": "R-cd2",
-  "group": "G1",
-  "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-cd2 (reviewer sub-agent of L); spot-checked: Repaired re-push after the 14:54 return (head a319d283e): point 1 repaired (the four orphan nodes lem-sc-finite-locally-free-dual/-tensor, lem-sc-twisted-biduality, lem-sc-finite-flat-trace-comparison are gone: the diff is only the item node and the report; the report's Attachments carries the two requested lines; the brief-vs-C3 paragraph is dropped); point 2 repaired (lem-sc-line-bundle-rational-section removed from split_report.tool_uses; the three remaining tool uses lem-sc-smooth-connected-curve-local-rings (sk-def-pic), lem-sc-global-functions (sk-prop-cd-affine), lem-sc-noetherian-cohomology-above-dimension (sk-prop-cd) are off-unit generic statements used as black boxes, accepted C8). Statement agrees with Stacks 0BS2(6) and 0BS6(1),(2) (omega = Omega^1 invertible, deg omega = 2g-2), with K_C now quantified (existence plus independence of the degree). Steps unchanged from the version the previous reviewer checked; re-read the cited statements: step 1 lem-sc-canonical-sheaf (invertible), lem-sc-smooth-connected-curve-local-rings clause 1 (integral), lem-sc-line-bundle-rational-section (nonzero rational section s, O(div s) iso L); step 2 lem-sc-global-functions (H^0=k), def-sc-genus (h^1=g), thm-sc-serre-duality-curve with M=O_C, n=1 (h^0(omega)=g, h^1(omega)=1), lem-sc-noetherian-cohomology-above-dimension (C Noetherian, top. dim 1, quasi-coherent); step 3 lem-sc-riemann-roch clause 1 chi(L)=deg L+1-g, giving deg omega=2g-2; step 4 def-sc-pic0 deg[O(D)]=deg D. Small case g=0 (P^1: omega=O(-2), deg -2) and g=1 (omega trivial, deg 0) agree. No new nodes, no Mathlib leaves. Start Sat Oct 10 02:59:42 PM UTC 2026, end Sat Oct 10 03:00:12 PM UTC 2026"
- }
+    "lem-sc-smooth-connected-curve-local-rings",
+    "lem-sc-global-functions",
+    "lem-sc-noetherian-cohomology-above-dimension"
+  ],
+  "reviewed": {
+    "date": "2026-10-10",
+    "by": "L",
+    "reviewer": "R-cd2",
+    "group": "G1",
+    "result": "pass",
+    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-cd2 (reviewer sub-agent of L); spot-checked: Repaired re-push after the 14:54 return (head a319d283e): point 1 repaired (the four orphan nodes lem-sc-finite-locally-free-dual/-tensor, lem-sc-twisted-biduality, lem-sc-finite-flat-trace-comparison are gone: the diff is only the item node and the report; the report's Attachments carries the two requested lines; the brief-vs-C3 paragraph is dropped); point 2 repaired (lem-sc-line-bundle-rational-section removed from split_report.tool_uses; the three remaining tool uses lem-sc-smooth-connected-curve-local-rings (sk-def-pic), lem-sc-global-functions (sk-prop-cd-affine), lem-sc-noetherian-cohomology-above-dimension (sk-prop-cd) are off-unit generic statements used as black boxes, accepted C8). Statement agrees with Stacks 0BS2(6) and 0BS6(1),(2) (omega = Omega^1 invertible, deg omega = 2g-2), with K_C now quantified (existence plus independence of the degree). Steps unchanged from the version the previous reviewer checked; re-read the cited statements: step 1 lem-sc-canonical-sheaf (invertible), lem-sc-smooth-connected-curve-local-rings clause 1 (integral), lem-sc-line-bundle-rational-section (nonzero rational section s, O(div s) iso L); step 2 lem-sc-global-functions (H^0=k), def-sc-genus (h^1=g), thm-sc-serre-duality-curve with M=O_C, n=1 (h^0(omega)=g, h^1(omega)=1), lem-sc-noetherian-cohomology-above-dimension (C Noetherian, top. dim 1, quasi-coherent); step 3 lem-sc-riemann-roch clause 1 chi(L)=deg L+1-g, giving deg omega=2g-2; step 4 def-sc-pic0 deg[O(D)]=deg D. Small case g=0 (P^1: omega=O(-2), deg -2) and g=1 (omega trivial, deg 0) agree. No new nodes, no Mathlib leaves. Start Sat Oct 10 02:59:42 PM UTC 2026, end Sat Oct 10 03:00:12 PM UTC 2026"
+  },
+  "lean": {
+    "module": "WeilConjectures.AlgebraicGeometry.Curve.RiemannRoch",
+    "declaration": "AlgebraicGeometry.Scheme.degree_relativeDifferentials",
+    "branch": "slopmaster2",
+    "line": 1315,
+    "declarations": [
+      "AlgebraicGeometry.Scheme.degree_relativeDifferentials"
+    ],
+    "sorry_free": false,
+    "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state rests_on_sorry)"
+  }
 }

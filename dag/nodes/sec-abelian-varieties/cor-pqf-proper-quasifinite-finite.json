@@ -1,150 +1,161 @@
 {
- "id": "cor-pqf-proper-quasifinite-finite",
- "blueprint": {
-  "is": "cor-pqf-proper-quasifinite-finite",
-  "from": null,
-  "same_as": null
- },
- "kind": "statement",
- "title": "Proper quasi-finite morphisms are finite",
- "statement": "Let $f:X\\to S$ be a morphism of schemes (no hypothesis on $S$). If\n$f$ is proper and quasi-finite, then $f$ is finite.\n(*Stacks Project, More on Morphisms, a consequence of Zariski's main\ntheorem; the locally Noetherian case is Tag\n[02OG](https://stacks.math.columbia.edu/tag/02OG).*)",
- "source": {
-  "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-pqf-finite/cor-pqf-proper-quasifinite-finite.md",
-  "place": "node cor-pqf-proper-quasifinite-finite, order 547",
-  "external": [
-   {
-    "document": "Stacks Project",
-    "place": "Tag 02OG"
-   }
-  ]
- },
- "stmt_deps": [],
- "proof": [
-  {
-   "text": "*Step 0: reduction to an affine base.* By\n[def-weil-pbc-scheme-conventions], $f$ is finite if and only if it is\naffine and $f_*\\mathcal O_X$ is a finite $\\mathcal O_S$-module. By\n[pqf-lem-affine-local-target] (with [pqf-def-affine-morphism]) it\ntherefore suffices to find an affine open covering $S=\\bigcup_iV_i$\nsuch that each $f^{-1}(V_i)$ is affine with\n$\\Gamma(f^{-1}(V_i),\\mathcal O_X)$ a finite\n$\\Gamma(V_i,\\mathcal O_S)$-module: then $f$ is affine, $f_*\\mathcal\nO_X$ is the quasi-coherent sheaf whose sections over $V_i$ are these\nmodules, and it is of finite type on the covering $\\{V_i\\}$. Let\n$V=\\operatorname{Spec}R\\subseteq S$ be any affine open and replace\n$f$ by its restriction $f^{-1}(V)\\to V$. This restriction is again\nproper (it is the base change of $f$ along the open immersion\n$V\\hookrightarrow S$, and separatedness, finite type and universal\nclosedness are preserved, the last because a base change of the\nrestriction is a base change of $f$) and quasi-finite (it is of finite\ntype and its fibres are fibres of $f$, [pqf-def-quasifinite]). So we\nmay assume $S=\\operatorname{Spec}R$ is affine, and we must show that\n$X$ is affine with $\\Gamma(X,\\mathcal O_X)$ a finite $R$-module.",
-   "uses": [
+  "id": "cor-pqf-proper-quasifinite-finite",
+  "blueprint": {
+    "is": "cor-pqf-proper-quasifinite-finite",
+    "from": null,
+    "same_as": null
+  },
+  "kind": "statement",
+  "title": "Proper quasi-finite morphisms are finite",
+  "statement": "Let $f:X\\to S$ be a morphism of schemes (no hypothesis on $S$). If\n$f$ is proper and quasi-finite, then $f$ is finite.\n(*Stacks Project, More on Morphisms, a consequence of Zariski's main\ntheorem; the locally Noetherian case is Tag\n[02OG](https://stacks.math.columbia.edu/tag/02OG).*)",
+  "source": {
+    "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-pqf-finite/cor-pqf-proper-quasifinite-finite.md",
+    "place": "node cor-pqf-proper-quasifinite-finite, order 547",
+    "external": [
+      {
+        "document": "Stacks Project",
+        "place": "Tag 02OG"
+      }
+    ]
+  },
+  "stmt_deps": [],
+  "proof": [
+    {
+      "text": "*Step 0: reduction to an affine base.* By\n[def-weil-pbc-scheme-conventions], $f$ is finite if and only if it is\naffine and $f_*\\mathcal O_X$ is a finite $\\mathcal O_S$-module. By\n[pqf-lem-affine-local-target] (with [pqf-def-affine-morphism]) it\ntherefore suffices to find an affine open covering $S=\\bigcup_iV_i$\nsuch that each $f^{-1}(V_i)$ is affine with\n$\\Gamma(f^{-1}(V_i),\\mathcal O_X)$ a finite\n$\\Gamma(V_i,\\mathcal O_S)$-module: then $f$ is affine, $f_*\\mathcal\nO_X$ is the quasi-coherent sheaf whose sections over $V_i$ are these\nmodules, and it is of finite type on the covering $\\{V_i\\}$. Let\n$V=\\operatorname{Spec}R\\subseteq S$ be any affine open and replace\n$f$ by its restriction $f^{-1}(V)\\to V$. This restriction is again\nproper (it is the base change of $f$ along the open immersion\n$V\\hookrightarrow S$, and separatedness, finite type and universal\nclosedness are preserved, the last because a base change of the\nrestriction is a base change of $f$) and quasi-finite (it is of finite\ntype and its fibres are fibres of $f$, [pqf-def-quasifinite]). So we\nmay assume $S=\\operatorname{Spec}R$ is affine, and we must show that\n$X$ is affine with $\\Gamma(X,\\mathcal O_X)$ a finite $R$-module.",
+      "uses": [
+        "def-weil-pbc-scheme-conventions",
+        "pqf-lem-affine-local-target",
+        "pqf-def-affine-morphism",
+        "pqf-def-quasifinite"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "*Step 1: Zariski's main theorem.* By [pqf-lem-proper-basic], $f$ is\nseparated and of finite type; by [pqf-lem-qf-locqf-qc] it is locally\nquasi-finite, i.e. quasi-finite at every point of $X$\n([pqf-def-quasifinite]). The affine scheme $S$ is quasi-compact and\nquasi-separated. Hence [thm-pqf-zmt-factorization] gives a scheme\n$T$, a quasi-compact open immersion $j:X\\hookrightarrow T$ and a\nfinite morphism $p:T\\to S$ with $f=p\\circ j$. Since $p$ is finite,\nit is affine, so $T=\\operatorname{Spec}B$ with $B=\\Gamma(T,\\mathcal\nO_T)$ a finite $R$-algebra.",
+      "uses": [
+        "pqf-lem-proper-basic",
+        "pqf-lem-qf-locqf-qc",
+        "pqf-def-quasifinite",
+        "thm-pqf-zmt-factorization"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "*Step 2: the image of $j$ is closed.* The morphism $p$ is affine,\nhence separated (a morphism of affine schemes has closed-immersion\ndiagonal, as $B\\otimes_RB\\to B$ is surjective). Consider the graph\n$\\Gamma_j=(\\mathrm{id}_X,j):X\\to X\\times_ST$. It is the base change of\nthe diagonal $\\Delta_{T/S}:T\\to T\\times_ST$ along\n$j\\times\\mathrm{id}_T:X\\times_ST\\to T\\times_ST$, hence a closed\nimmersion, and in particular a closed map. The second projection\n$\\mathrm{pr}_2:X\\times_ST\\to T$ is the base change of $f$ along $p$;\nsince $f$ is universally closed ([pqf-lem-proper-basic]), it is a\nclosed map. Therefore $j=\\mathrm{pr}_2\\circ\\Gamma_j$ is a closed map,\nand $Z=j(X)$ is a subset of $T$ which is both open (as $j$ is an open\nimmersion) and closed.",
+      "uses": [
+        "pqf-lem-proper-basic"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "*Step 3: conclusion.* An open and closed subset of the affine scheme\n$\\operatorname{Spec}B$ is of the form $Z=D(e)=V(1-e)$ for an\nidempotent $e\\in B$ (the standard correspondence between idempotents\nof $B$ and open-and-closed subsets of $\\operatorname{Spec}B$, via the\ndecomposition $B\\cong eB\\times(1-e)B$). Since $j$ identifies $X$ with\nthe open subscheme $Z=D(e)$ of $T$, we get\n\n$$\nX\\cong\\operatorname{Spec}B_e\\cong\\operatorname{Spec}\\bigl(B/(1-e)B\\bigr),\n$$\n\nusing $B_e\\cong eB\\cong B/(1-e)B$ for an idempotent $e$. Thus $X$ is\naffine and $\\Gamma(X,\\mathcal O_X)\\cong B/(1-e)B$ is a quotient of the\nfinite $R$-module $B$, hence a finite $R$-module. By Step 0, $f$ is\nfinite.",
+      "uses": [],
+      "elementary": null
+    },
+    {
+      "text": "*Remark (the locally Noetherian case).* When $S$ is locally\nNoetherian the statement also follows without Zariski's main theorem:\na quasi-finite morphism has finite fibres by\n[pqf-lem-qf-finitefibres], so $f$ is proper with finite fibres in the\nsense of [pqf-def-quasifinite], and\n[thm-pqf-finite-iff-proper-finite-fibres] applies.",
+      "uses": [
+        "pqf-lem-qf-finitefibres",
+        "pqf-def-quasifinite",
+        "thm-pqf-finite-iff-proper-finite-fibres"
+      ],
+      "elementary": false
+    }
+  ],
+  "proof_deps": [
     "def-weil-pbc-scheme-conventions",
     "pqf-lem-affine-local-target",
     "pqf-def-affine-morphism",
-    "pqf-def-quasifinite"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "*Step 1: Zariski's main theorem.* By [pqf-lem-proper-basic], $f$ is\nseparated and of finite type; by [pqf-lem-qf-locqf-qc] it is locally\nquasi-finite, i.e. quasi-finite at every point of $X$\n([pqf-def-quasifinite]). The affine scheme $S$ is quasi-compact and\nquasi-separated. Hence [thm-pqf-zmt-factorization] gives a scheme\n$T$, a quasi-compact open immersion $j:X\\hookrightarrow T$ and a\nfinite morphism $p:T\\to S$ with $f=p\\circ j$. Since $p$ is finite,\nit is affine, so $T=\\operatorname{Spec}B$ with $B=\\Gamma(T,\\mathcal\nO_T)$ a finite $R$-algebra.",
-   "uses": [
+    "pqf-def-quasifinite",
     "pqf-lem-proper-basic",
     "pqf-lem-qf-locqf-qc",
-    "pqf-def-quasifinite",
-    "thm-pqf-zmt-factorization"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "*Step 2: the image of $j$ is closed.* The morphism $p$ is affine,\nhence separated (a morphism of affine schemes has closed-immersion\ndiagonal, as $B\\otimes_RB\\to B$ is surjective). Consider the graph\n$\\Gamma_j=(\\mathrm{id}_X,j):X\\to X\\times_ST$. It is the base change of\nthe diagonal $\\Delta_{T/S}:T\\to T\\times_ST$ along\n$j\\times\\mathrm{id}_T:X\\times_ST\\to T\\times_ST$, hence a closed\nimmersion, and in particular a closed map. The second projection\n$\\mathrm{pr}_2:X\\times_ST\\to T$ is the base change of $f$ along $p$;\nsince $f$ is universally closed ([pqf-lem-proper-basic]), it is a\nclosed map. Therefore $j=\\mathrm{pr}_2\\circ\\Gamma_j$ is a closed map,\nand $Z=j(X)$ is a subset of $T$ which is both open (as $j$ is an open\nimmersion) and closed.",
-   "uses": [
-    "pqf-lem-proper-basic"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "*Step 3: conclusion.* An open and closed subset of the affine scheme\n$\\operatorname{Spec}B$ is of the form $Z=D(e)=V(1-e)$ for an\nidempotent $e\\in B$ (the standard correspondence between idempotents\nof $B$ and open-and-closed subsets of $\\operatorname{Spec}B$, via the\ndecomposition $B\\cong eB\\times(1-e)B$). Since $j$ identifies $X$ with\nthe open subscheme $Z=D(e)$ of $T$, we get\n\n$$\nX\\cong\\operatorname{Spec}B_e\\cong\\operatorname{Spec}\\bigl(B/(1-e)B\\bigr),\n$$\n\nusing $B_e\\cong eB\\cong B/(1-e)B$ for an idempotent $e$. Thus $X$ is\naffine and $\\Gamma(X,\\mathcal O_X)\\cong B/(1-e)B$ is a quotient of the\nfinite $R$-module $B$, hence a finite $R$-module. By Step 0, $f$ is\nfinite.",
-   "uses": [],
-   "elementary": null
-  },
-  {
-   "text": "*Remark (the locally Noetherian case).* When $S$ is locally\nNoetherian the statement also follows without Zariski's main theorem:\na quasi-finite morphism has finite fibres by\n[pqf-lem-qf-finitefibres], so $f$ is proper with finite fibres in the\nsense of [pqf-def-quasifinite], and\n[thm-pqf-finite-iff-proper-finite-fibres] applies.",
-   "uses": [
+    "thm-pqf-zmt-factorization",
     "pqf-lem-qf-finitefibres",
-    "pqf-def-quasifinite",
     "thm-pqf-finite-iff-proper-finite-fibres"
-   ],
-   "elementary": false
-  }
- ],
- "proof_deps": [
-  "def-weil-pbc-scheme-conventions",
-  "pqf-lem-affine-local-target",
-  "pqf-def-affine-morphism",
-  "pqf-def-quasifinite",
-  "pqf-lem-proper-basic",
-  "pqf-lem-qf-locqf-qc",
-  "thm-pqf-zmt-factorization",
-  "pqf-lem-qf-finitefibres",
-  "thm-pqf-finite-iff-proper-finite-fibres"
- ],
- "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-pqf-finite/cor-pqf-proper-quasifinite-finite.md",
-  "place": "## Proof"
- },
- "mathlib_searches": [
-  {
-   "tool": "text search of the local Mathlib checkout (0df444a360)",
-   "query": "AlgebraicGeometry.IsFinite.of_isProper_of_locallyQuasiFinite",
-   "results": [
-    "Mathlib.AlgebraicGeometry.ZariskisMainTheorem:373 (lemma)"
-   ],
-   "date": "2026-10-08"
-  }
- ],
- "mathlib_match": null,
- "status": "imported",
- "merged_into": null,
- "import_flags": [
-  "lean_not_found",
-  "lean_names_mathlib_declaration"
- ],
- "blueprint_kind": "theorem",
- "blueprint_order": 547,
- "blueprint_uses": [
-  "def-weil-pbc-scheme-conventions",
-  "pqf-def-affine-morphism",
-  "pqf-def-quasifinite",
-  "pqf-lem-affine-local-target",
-  "pqf-lem-proper-basic",
-  "pqf-lem-qf-finitefibres",
-  "pqf-lem-qf-locqf-qc",
-  "thm-pqf-finite-iff-proper-finite-fibres",
-  "thm-pqf-zmt-factorization"
- ],
- "blueprint_lean": [
-  "AlgebraicGeometry.IsFinite.of_isProper_of_locallyQuasiFinite"
- ],
- "blueprint_lean_not_found": [
-  "AlgebraicGeometry.IsFinite.of_isProper_of_locallyQuasiFinite"
- ],
- "blueprint_tags": [
-  "latex:corollary"
- ],
- "proof_split_by": "labels",
- "lean_audit": {
-  "master": {
-   "state": "none",
-   "decls": [],
-   "missing": [
-    "AlgebraicGeometry.IsFinite.of_isProper_of_locallyQuasiFinite"
-   ]
+  ],
+  "proof_origin": {
+    "by": "agent",
+    "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-pqf-finite/cor-pqf-proper-quasifinite-finite.md",
+    "place": "## Proof"
   },
-  "slopmaster2": {
-   "state": "closed",
-   "decls": [
+  "mathlib_searches": [
     {
-     "name": "AlgebraicGeometry.IsFinite.of_isProper_of_locallyQuasiFinite",
-     "module": "Mathlib.AlgebraicGeometry.ZariskisMainTheorem",
-     "lines": [
-      0,
-      0
-     ],
-     "kind": "theorem",
-     "sorry": false,
-     "library": true
+      "tool": "text search of the local Mathlib checkout (0df444a360)",
+      "query": "AlgebraicGeometry.IsFinite.of_isProper_of_locallyQuasiFinite",
+      "results": [
+        "Mathlib.AlgebraicGeometry.ZariskisMainTheorem:373 (lemma)"
+      ],
+      "date": "2026-10-08"
     }
-   ],
-   "missing": [],
-   "open": []
+  ],
+  "mathlib_match": null,
+  "status": "imported",
+  "merged_into": null,
+  "import_flags": [
+    "lean_not_found",
+    "lean_names_mathlib_declaration"
+  ],
+  "blueprint_kind": "theorem",
+  "blueprint_order": 547,
+  "blueprint_uses": [
+    "def-weil-pbc-scheme-conventions",
+    "pqf-def-affine-morphism",
+    "pqf-def-quasifinite",
+    "pqf-lem-affine-local-target",
+    "pqf-lem-proper-basic",
+    "pqf-lem-qf-finitefibres",
+    "pqf-lem-qf-locqf-qc",
+    "thm-pqf-finite-iff-proper-finite-fibres",
+    "thm-pqf-zmt-factorization"
+  ],
+  "blueprint_lean": [
+    "AlgebraicGeometry.IsFinite.of_isProper_of_locallyQuasiFinite"
+  ],
+  "blueprint_lean_not_found": [
+    "AlgebraicGeometry.IsFinite.of_isProper_of_locallyQuasiFinite"
+  ],
+  "blueprint_tags": [
+    "latex:corollary"
+  ],
+  "proof_split_by": "labels",
+  "lean_audit": {
+    "master": {
+      "state": "none",
+      "decls": [],
+      "missing": [
+        "AlgebraicGeometry.IsFinite.of_isProper_of_locallyQuasiFinite"
+      ]
+    },
+    "slopmaster2": {
+      "state": "closed",
+      "decls": [
+        {
+          "name": "AlgebraicGeometry.IsFinite.of_isProper_of_locallyQuasiFinite",
+          "module": "Mathlib.AlgebraicGeometry.ZariskisMainTheorem",
+          "lines": [
+            0,
+            0
+          ],
+          "kind": "theorem",
+          "sorry": false,
+          "library": true
+        }
+      ],
+      "missing": [],
+      "open": []
+    }
+  },
+  "chapter": "sec-abelian-varieties",
+  "unit": "sk-prop-av-pqf-finite",
+  "lean": {
+    "module": "Mathlib.AlgebraicGeometry.ZariskisMainTheorem",
+    "declaration": "AlgebraicGeometry.IsFinite.of_isProper_of_locallyQuasiFinite",
+    "branch": "slopmaster2",
+    "line": 0,
+    "declarations": [
+      "AlgebraicGeometry.IsFinite.of_isProper_of_locallyQuasiFinite"
+    ],
+    "sorry_free": true,
+    "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state closed)"
   }
- },
- "chapter": "sec-abelian-varieties",
- "unit": "sk-prop-av-pqf-finite"
 }

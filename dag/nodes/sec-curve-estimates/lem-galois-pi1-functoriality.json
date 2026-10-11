@@ -1,141 +1,145 @@
 {
- "id": "lem-galois-pi1-functoriality",
- "blueprint": {
-  "is": null,
-  "from": {
-   "node": "thm-galois-fundamental",
-   "place": "proof, last sentence: 'For base change: ... the pullback of the system of Galois covers of Y along Y'->Y ...' and statement clause 'compatible with base change along Y'->Y for Y' connected' (the continuous homomorphism of Stacks 0BND (3) that replaces the cofinality argument)",
-   "via": []
-  },
-  "same_as": []
- },
- "kind": "statement",
- "title": "Base change of finite etale covers and the map of fundamental groups",
- "statement": "Let $f:Y'\\to Y$ be a morphism of connected schemes [def-weil-pbc-scheme-conventions], let $\\bar y'$ be a geometric point of $Y'$ and $\\bar y=f\\circ\\bar y'$, the corresponding geometric point of $Y$. Write $\\mathrm{F\\acute Et}(Y)$, $\\mathrm{F\\acute Et}(Y')$ and $|P_{\\bar y}|$ as in [def-galois-categories], and $\\pi_1(Y,\\bar y)$, $\\pi_1(Y',\\bar y')$ for the profinite groups of [def-galois-fibre-functor], acting on $|P_{\\bar y}|$, $|Q_{\\bar y'}|$ through the fibre functors. Base change $f^*:\\mathrm{F\\acute Et}(Y)\\to\\mathrm{F\\acute Et}(Y')$, $P\\mapsto P\\times_YY'$ (with its second projection), is a functor, and for $P\\in\\mathrm{F\\acute Et}(Y)$ the map\n$$\n\\tau_P:|(P\\times_YY')_{\\bar y'}|\\longrightarrow|P_{\\bar y}|,\\qquad z\\longmapsto \\mathrm{pr}_1\\circ z,\n$$\nis a bijection, natural in $P$. There is a continuous group homomorphism\n$$\nf_*:\\pi_1(Y',\\bar y')\\longrightarrow\\pi_1(Y,\\bar y)\n$$\nsuch that $f_*(g)\\cdot\\tau_P(z)=\\tau_P(g\\cdot z)$ for all $g\\in\\pi_1(Y',\\bar y')$, $P\\in\\mathrm{F\\acute Et}(Y)$ and $z\\in|(P\\times_YY')_{\\bar y'}|$. In other words, under $\\tau$ the finite $\\pi_1(Y',\\bar y')$-set $|(f^*P)_{\\bar y'}|$ is the finite $\\pi_1(Y,\\bar y)$-set $|P_{\\bar y}|$ with $\\pi_1(Y',\\bar y')$ acting through $f_*$, naturally in $P$.",
- "source": {
-  "document": "literature/stacks-project/pione.tex",
-  "place": "Theorem 0BND (pione-theorem-fundamental-group), part (3), and its proof via Lemma 0BN5 (pione-lemma-functoriality-galois); also SGA 1 V §7 (literature/sga/SGA1_arXiv-math0206203.pdf, p. 116: 'f^• : C(S) -> C(S'), F_a = F_a' o f^•, u = pi_1(f; a')'); Lean (slopmaster2): AlgebraicGeometry.Scheme.FiniteEtale.pullback (WeilConjectures.AlgebraicGeometry.FundamentalGroup.Functoriality, lines 57-81), pullbackFiberIso (WeilConjectures.AlgebraicGeometry.FundamentalGroup.Restriction, lines 40-57), fundamentalGroupMap (lines 113-118), fundamentalGroupMap_smul (lines 120-129), continuous_fundamentalGroupMap (lines 131-145)"
- },
- "stmt_deps": [
-  "def-weil-pbc-scheme-conventions",
-  "def-galois-categories",
-  "def-galois-fibre-functor"
- ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
- "mathlib_searches": [
-  {
-   "tool": "leansearch",
-   "query": "exact functor between Galois categories induces continuous homomorphism of fundamental groups",
-   "results": "PreGaloisCategory.toAut_continuous, toAut_isHomeomorph, IsFundamentalGroup.mk, IsFundamentalGroup.non_trivial', instIsFundamentalGroupAutFunctorFintypeCat (Mathlib.CategoryTheory.Galois.IsFundamentalgroup); FundamentalGroup.map (topological spaces)",
-   "date": "2026-10-10",
-   "verdict": "no match: Mathlib has no functoriality of fundamental groups for functors between Galois categories, and nothing for schemes"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "morphism of schemes induces homomorphism of etale fundamental groups compatible with base change of finite etale covers",
-   "results": "Scheme.instCategoryEtale, instHasPullbacksEtale, IsEtale.of_comp, Scheme.Etale.forget (Mathlib.AlgebraicGeometry.Morphisms.Etale)",
-   "date": "2026-10-10",
-   "verdict": "no match"
-  },
-  {
-   "tool": "grep",
-   "query": "grep -rln 'FiniteEtale\\|fundamentalGroup' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry; ls ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Galois/",
-   "results": "no file in AlgebraicGeometry; CategoryTheory/Galois has Action, Basic, Decomposition, Equivalence, EssSurj, Examples, Full, GaloisObjects, IsFundamentalgroup, Prorepresentability, Topology, none with a functor between two Galois categories",
-   "date": "2026-10-10",
-   "verdict": "no match in Mathlib; stated sorry-free in slopmaster2 (AlgebraicGeometry.Scheme.FiniteEtale.fundamentalGroupMap, fundamentalGroupMap_smul, continuous_fundamentalGroupMap, pullbackFiberIso)"
-  }
- ],
- "mathlib_match": null,
- "status": "unsplit",
- "merged_into": null,
- "created": {
-  "by": "worker",
-  "item": "thm-galois-fundamental",
-  "date": "2026-10-10"
- },
- "lean_audit": {
-  "master": {
-   "state": "none",
-   "decls": [],
-   "missing": [
-    "AlgebraicGeometry.Scheme.FiniteEtale.pullback",
-    "AlgebraicGeometry.Scheme.FiniteEtale.pullbackFiberIso",
-    "AlgebraicGeometry.Scheme.FiniteEtale.fundamentalGroupMap",
-    "AlgebraicGeometry.Scheme.FiniteEtale.fundamentalGroupMap_smul",
-    "AlgebraicGeometry.Scheme.FiniteEtale.continuous_fundamentalGroupMap"
-   ]
-  },
-  "slopmaster2": {
-   "state": "closed",
-   "decls": [
-    {
-     "name": "AlgebraicGeometry.Scheme.FiniteEtale.pullback",
-     "module": "WeilConjectures.AlgebraicGeometry.FundamentalGroup.Functoriality",
-     "lines": [
-      57,
-      81
-     ],
-     "kind": "def",
-     "sorry": false
+  "id": "lem-galois-pi1-functoriality",
+  "blueprint": {
+    "is": null,
+    "from": {
+      "node": "thm-galois-fundamental",
+      "place": "proof, last sentence: 'For base change: ... the pullback of the system of Galois covers of Y along Y'->Y ...' and statement clause 'compatible with base change along Y'->Y for Y' connected' (the continuous homomorphism of Stacks 0BND (3) that replaces the cofinality argument)",
+      "via": []
     },
-    {
-     "name": "AlgebraicGeometry.Scheme.FiniteEtale.pullbackFiberIso",
-     "module": "WeilConjectures.AlgebraicGeometry.FundamentalGroup.Restriction",
-     "lines": [
-      40,
-      57
-     ],
-     "kind": "def",
-     "sorry": false
-    },
-    {
-     "name": "AlgebraicGeometry.Scheme.FiniteEtale.fundamentalGroupMap",
-     "module": "WeilConjectures.AlgebraicGeometry.FundamentalGroup.Restriction",
-     "lines": [
-      113,
-      118
-     ],
-     "kind": "def",
-     "sorry": false
-    },
-    {
-     "name": "AlgebraicGeometry.Scheme.FiniteEtale.fundamentalGroupMap_smul",
-     "module": "WeilConjectures.AlgebraicGeometry.FundamentalGroup.Restriction",
-     "lines": [
-      120,
-      129
-     ],
-     "kind": "theorem",
-     "sorry": false
-    },
-    {
-     "name": "AlgebraicGeometry.Scheme.FiniteEtale.continuous_fundamentalGroupMap",
-     "module": "WeilConjectures.AlgebraicGeometry.FundamentalGroup.Restriction",
-     "lines": [
-      131,
-      145
-     ],
-     "kind": "theorem",
-     "sorry": false
-    }
-   ],
-   "missing": [],
-   "open": []
-  }
- },
- "chapter": "sec-curve-estimates",
- "unit": "sk-prop-h2",
- "lean": {
-  "branch": "slopmaster2",
-  "declarations": [
-   "AlgebraicGeometry.Scheme.FiniteEtale.pullback",
-   "AlgebraicGeometry.Scheme.FiniteEtale.pullbackFiberIso",
-   "AlgebraicGeometry.Scheme.FiniteEtale.fundamentalGroupMap",
-   "AlgebraicGeometry.Scheme.FiniteEtale.fundamentalGroupMap_smul",
-   "AlgebraicGeometry.Scheme.FiniteEtale.continuous_fundamentalGroupMap"
+    "same_as": []
+  },
+  "kind": "statement",
+  "title": "Base change of finite etale covers and the map of fundamental groups",
+  "statement": "Let $f:Y'\\to Y$ be a morphism of connected schemes [def-weil-pbc-scheme-conventions], let $\\bar y'$ be a geometric point of $Y'$ and $\\bar y=f\\circ\\bar y'$, the corresponding geometric point of $Y$. Write $\\mathrm{F\\acute Et}(Y)$, $\\mathrm{F\\acute Et}(Y')$ and $|P_{\\bar y}|$ as in [def-galois-categories], and $\\pi_1(Y,\\bar y)$, $\\pi_1(Y',\\bar y')$ for the profinite groups of [def-galois-fibre-functor], acting on $|P_{\\bar y}|$, $|Q_{\\bar y'}|$ through the fibre functors. Base change $f^*:\\mathrm{F\\acute Et}(Y)\\to\\mathrm{F\\acute Et}(Y')$, $P\\mapsto P\\times_YY'$ (with its second projection), is a functor, and for $P\\in\\mathrm{F\\acute Et}(Y)$ the map\n$$\n\\tau_P:|(P\\times_YY')_{\\bar y'}|\\longrightarrow|P_{\\bar y}|,\\qquad z\\longmapsto \\mathrm{pr}_1\\circ z,\n$$\nis a bijection, natural in $P$. There is a continuous group homomorphism\n$$\nf_*:\\pi_1(Y',\\bar y')\\longrightarrow\\pi_1(Y,\\bar y)\n$$\nsuch that $f_*(g)\\cdot\\tau_P(z)=\\tau_P(g\\cdot z)$ for all $g\\in\\pi_1(Y',\\bar y')$, $P\\in\\mathrm{F\\acute Et}(Y)$ and $z\\in|(P\\times_YY')_{\\bar y'}|$. In other words, under $\\tau$ the finite $\\pi_1(Y',\\bar y')$-set $|(f^*P)_{\\bar y'}|$ is the finite $\\pi_1(Y,\\bar y)$-set $|P_{\\bar y}|$ with $\\pi_1(Y',\\bar y')$ acting through $f_*$, naturally in $P$.",
+  "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Theorem 0BND (pione-theorem-fundamental-group), part (3), and its proof via Lemma 0BN5 (pione-lemma-functoriality-galois); also SGA 1 V §7 (literature/sga/SGA1_arXiv-math0206203.pdf, p. 116: 'f^• : C(S) -> C(S'), F_a = F_a' o f^•, u = pi_1(f; a')'); Lean (slopmaster2): AlgebraicGeometry.Scheme.FiniteEtale.pullback (WeilConjectures.AlgebraicGeometry.FundamentalGroup.Functoriality, lines 57-81), pullbackFiberIso (WeilConjectures.AlgebraicGeometry.FundamentalGroup.Restriction, lines 40-57), fundamentalGroupMap (lines 113-118), fundamentalGroupMap_smul (lines 120-129), continuous_fundamentalGroupMap (lines 131-145)"
+  },
+  "stmt_deps": [
+    "def-weil-pbc-scheme-conventions",
+    "def-galois-categories",
+    "def-galois-fibre-functor"
   ],
-  "note": "attached by the lead (worker's attachment at creation, verified by L, 2026-10-10)"
- }
+  "proof": [],
+  "proof_deps": [],
+  "proof_origin": null,
+  "mathlib_searches": [
+    {
+      "tool": "leansearch",
+      "query": "exact functor between Galois categories induces continuous homomorphism of fundamental groups",
+      "results": "PreGaloisCategory.toAut_continuous, toAut_isHomeomorph, IsFundamentalGroup.mk, IsFundamentalGroup.non_trivial', instIsFundamentalGroupAutFunctorFintypeCat (Mathlib.CategoryTheory.Galois.IsFundamentalgroup); FundamentalGroup.map (topological spaces)",
+      "date": "2026-10-10",
+      "verdict": "no match: Mathlib has no functoriality of fundamental groups for functors between Galois categories, and nothing for schemes"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "morphism of schemes induces homomorphism of etale fundamental groups compatible with base change of finite etale covers",
+      "results": "Scheme.instCategoryEtale, instHasPullbacksEtale, IsEtale.of_comp, Scheme.Etale.forget (Mathlib.AlgebraicGeometry.Morphisms.Etale)",
+      "date": "2026-10-10",
+      "verdict": "no match"
+    },
+    {
+      "tool": "grep",
+      "query": "grep -rln 'FiniteEtale\\|fundamentalGroup' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry; ls ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Galois/",
+      "results": "no file in AlgebraicGeometry; CategoryTheory/Galois has Action, Basic, Decomposition, Equivalence, EssSurj, Examples, Full, GaloisObjects, IsFundamentalgroup, Prorepresentability, Topology, none with a functor between two Galois categories",
+      "date": "2026-10-10",
+      "verdict": "no match in Mathlib; stated sorry-free in slopmaster2 (AlgebraicGeometry.Scheme.FiniteEtale.fundamentalGroupMap, fundamentalGroupMap_smul, continuous_fundamentalGroupMap, pullbackFiberIso)"
+    }
+  ],
+  "mathlib_match": null,
+  "status": "unsplit",
+  "merged_into": null,
+  "created": {
+    "by": "worker",
+    "item": "thm-galois-fundamental",
+    "date": "2026-10-10"
+  },
+  "lean_audit": {
+    "master": {
+      "state": "none",
+      "decls": [],
+      "missing": [
+        "AlgebraicGeometry.Scheme.FiniteEtale.pullback",
+        "AlgebraicGeometry.Scheme.FiniteEtale.pullbackFiberIso",
+        "AlgebraicGeometry.Scheme.FiniteEtale.fundamentalGroupMap",
+        "AlgebraicGeometry.Scheme.FiniteEtale.fundamentalGroupMap_smul",
+        "AlgebraicGeometry.Scheme.FiniteEtale.continuous_fundamentalGroupMap"
+      ]
+    },
+    "slopmaster2": {
+      "state": "closed",
+      "decls": [
+        {
+          "name": "AlgebraicGeometry.Scheme.FiniteEtale.pullback",
+          "module": "WeilConjectures.AlgebraicGeometry.FundamentalGroup.Functoriality",
+          "lines": [
+            57,
+            81
+          ],
+          "kind": "def",
+          "sorry": false
+        },
+        {
+          "name": "AlgebraicGeometry.Scheme.FiniteEtale.pullbackFiberIso",
+          "module": "WeilConjectures.AlgebraicGeometry.FundamentalGroup.Restriction",
+          "lines": [
+            40,
+            57
+          ],
+          "kind": "def",
+          "sorry": false
+        },
+        {
+          "name": "AlgebraicGeometry.Scheme.FiniteEtale.fundamentalGroupMap",
+          "module": "WeilConjectures.AlgebraicGeometry.FundamentalGroup.Restriction",
+          "lines": [
+            113,
+            118
+          ],
+          "kind": "def",
+          "sorry": false
+        },
+        {
+          "name": "AlgebraicGeometry.Scheme.FiniteEtale.fundamentalGroupMap_smul",
+          "module": "WeilConjectures.AlgebraicGeometry.FundamentalGroup.Restriction",
+          "lines": [
+            120,
+            129
+          ],
+          "kind": "theorem",
+          "sorry": false
+        },
+        {
+          "name": "AlgebraicGeometry.Scheme.FiniteEtale.continuous_fundamentalGroupMap",
+          "module": "WeilConjectures.AlgebraicGeometry.FundamentalGroup.Restriction",
+          "lines": [
+            131,
+            145
+          ],
+          "kind": "theorem",
+          "sorry": false
+        }
+      ],
+      "missing": [],
+      "open": []
+    }
+  },
+  "chapter": "sec-curve-estimates",
+  "unit": "sk-prop-h2",
+  "lean": {
+    "module": "WeilConjectures.AlgebraicGeometry.FundamentalGroup.Functoriality",
+    "declaration": "AlgebraicGeometry.Scheme.FiniteEtale.pullback",
+    "branch": "slopmaster2",
+    "line": 57,
+    "declarations": [
+      "AlgebraicGeometry.Scheme.FiniteEtale.pullback",
+      "AlgebraicGeometry.Scheme.FiniteEtale.pullbackFiberIso",
+      "AlgebraicGeometry.Scheme.FiniteEtale.fundamentalGroupMap",
+      "AlgebraicGeometry.Scheme.FiniteEtale.fundamentalGroupMap_smul",
+      "AlgebraicGeometry.Scheme.FiniteEtale.continuous_fundamentalGroupMap"
+    ],
+    "sorry_free": true,
+    "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state closed)"
+  }
 }

@@ -1,130 +1,134 @@
 {
- "id": "lem-weil-pbc-extension-by-zero-exact",
- "blueprint": {
-  "is": null,
-  "from": {
-   "node": "def-weil-pbc-extension-by-zero",
-   "place": "unspecified",
-   "via": []
+  "id": "lem-weil-pbc-extension-by-zero-exact",
+  "blueprint": {
+    "is": null,
+    "from": {
+      "node": "def-weil-pbc-extension-by-zero",
+      "place": "unspecified",
+      "via": []
+    },
+    "same_as": null
   },
-  "same_as": null
- },
- "kind": "statement",
- "title": "Extension by zero is exact (étale site)",
- "statement": "Let $\\Lambda$ be a commutative ring ($\\Lambda=\\mathbf Z$ gives abelian sheaves), let $j:U\\hookrightarrow X$ be an open immersion of schemes and let $j_!:\\Mod(U_{\\Et},\\Lambda)\\to\\Mod(X_{\\Et},\\Lambda)$ be extension by zero on the small etale sites [def-weil-pbc-extension-by-zero]. Then $j_!$ is an exact functor of abelian categories: it is additive and carries every short exact sequence $0\\to F'\\to F\\to F''\\to0$ of sheaves of $\\Lambda$-modules on $U_{\\Et}$ to a short exact sequence $0\\to j_!F'\\to j_!F\\to j_!F''\\to0$ on $X_{\\Et}$. Consequently, applied degreewise, $j_!$ carries complexes to complexes, quasi-isomorphisms to quasi-isomorphisms and acyclic complexes to acyclic complexes.",
- "source": {
-  "document": "literature/stacks-project/sites-modules.tex",
-  "place": "Lemma 03DJ (sites-modules-lemma-extension-by-zero-exact), applied to the small etale site as in literature/stacks-project/etale-cohomology.tex, Proposition 03S5 (etale-cohomology-proposition-describe-jshriek), 'In particular, j_! is an exact functor' and its proof"
- },
- "stmt_deps": [
-  "def-weil-pbc-extension-by-zero"
- ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
- "mathlib_searches": [
-  {
-   "tool": "leansearch",
-   "query": "left adjoint of restriction of sheaves to the over category (localization of a site) is exact",
-   "results": "HasSheafify.isLeftExact (sheafification preserves finite limits), TopCat.Sheaf.instIsLeftAdjointPullback, constantSheafΓAdj, Scheme.Modules.instIsLeftAdjointRestrictFunctor, sheafPullbackConstruction.sheafAdjunctionContinuous",
-   "date": "2026-10-09",
-   "verdict": "no match: only the ingredients (left exactness of sheafification; right exactness of any left adjoint)"
+  "kind": "statement",
+  "title": "Extension by zero is exact (étale site)",
+  "statement": "Let $\\Lambda$ be a commutative ring ($\\Lambda=\\mathbf Z$ gives abelian sheaves), let $j:U\\hookrightarrow X$ be an open immersion of schemes and let $j_!:\\Mod(U_{\\Et},\\Lambda)\\to\\Mod(X_{\\Et},\\Lambda)$ be extension by zero on the small etale sites [def-weil-pbc-extension-by-zero]. Then $j_!$ is an exact functor of abelian categories: it is additive and carries every short exact sequence $0\\to F'\\to F\\to F''\\to0$ of sheaves of $\\Lambda$-modules on $U_{\\Et}$ to a short exact sequence $0\\to j_!F'\\to j_!F\\to j_!F''\\to0$ on $X_{\\Et}$. Consequently, applied degreewise, $j_!$ carries complexes to complexes, quasi-isomorphisms to quasi-isomorphisms and acyclic complexes to acyclic complexes.",
+  "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Lemma 03DJ (sites-modules-lemma-extension-by-zero-exact), applied to the small etale site as in literature/stacks-project/etale-cohomology.tex, Proposition 03S5 (etale-cohomology-proposition-describe-jshriek), 'In particular, j_! is an exact functor' and its proof"
   },
-  {
-   "tool": "leanfinder",
-   "query": "exactness of the left adjoint of restriction to a localized site (extension by zero j_U! is exact)",
-   "results": "GrothendieckTopology instIsLocalization presheafToSheaf, HasSheafify.isLeftExact, PreservesSheafification lemmas (Mathlib.CategoryTheory.Sites.Localization/Sheafification/PreservesSheafification)",
-   "date": "2026-10-09",
-   "verdict": "no match"
-  },
-  {
-   "tool": "loogle",
-   "query": "CategoryTheory.Functor.sheafPullback",
-   "results": "Functor.sheafPullback G A J K (left adjoint of G.sheafPushforwardContinuous), Functor.sheafAdjunctionContinuous, sheafPullbackConstruction.sheafPullbackIso (= sheafToPresheaf ⋙ G.op.lan ⋙ presheafToSheaf), sheafPullbackConstruction.preservesFiniteLimits (needs PreservesFiniteLimits G.op.lan), SmallCategories...PreservesFiniteLimits (needs RepresentablyFlat G), GrothendieckTopology.Point.sheafFiberComapIso (needs RepresentablyFlat F) (Mathlib.CategoryTheory.Sites.Pullback, .Point.Comap)",
-   "date": "2026-10-09",
-   "verdict": "generalization, not one line: with G = MorphismProperty.Over.map ⊤ (j étale) : U.Etale ⥤ X.Etale the left adjoint G.sheafPullback is j_!, but its continuity for the small étale topologies, the identification of G.sheafPushforwardContinuous with j^{-1} and the computation of G.op.lan as the presheaf with at most one summand are not in Mathlib; G is not representably flat (it does not preserve the terminal object), so the flatness instances do not apply"
-  },
-  {
-   "tool": "grep",
-   "query": "grep -n 'instance.*PreservesFiniteLimits' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites/Pullback.lean",
-   "results": "Pullback.lean:93/98 PreservesFiniteLimits (sheafPullback G A J K) under [PreservesFiniteLimits G.op.lan]; :120 under [RepresentablyFlat G]",
-   "date": "2026-10-09",
-   "verdict": "generalization, not one line: for G = MorphismProperty.Over.map ⊤ along j neither hypothesis is in Mathlib (left exactness of G.op.lan is the direct-sum computation; G is not representably flat)"
-  },
-  {
-   "tool": "grep",
-   "query": "grep -rniE 'extension by zero|extensionByZero|lowerShriek|jShriek|extend ?by ?zero' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
-   "results": "only Function.ExtendByZero (LinearAlgebra/Pi.lean:653, Algebra/Group/Pi/Lemmas.lean:446: extension by zero of functions on index sets) and a comment in NumberTheory/MulChar/Basic.lean:144; nothing on sheaves",
-   "date": "2026-10-09",
-   "verdict": "no match"
-  }
- ],
- "mathlib_match": null,
- "status": "unsplit",
- "merged_into": null,
- "import_flags": [
-  "unreachable"
- ],
- "created": {
-  "by": "worker",
-  "item": "def-weil-pbc-extension-by-zero",
-  "date": "2026-10-09"
- },
- "lean_audit": {
-  "master": {
-   "state": "rests_on_sorry",
-   "decls": [
-    {
-     "name": "AlgebraicGeometry.Etale.preservesFiniteLimits_openImmersionLowerShriek",
-     "module": "WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs",
-     "lines": [
-      315,
-      335
-     ],
-     "kind": "theorem",
-     "sorry": false
-    }
-   ],
-   "missing": [],
-   "open": [
-    {
-     "name": "CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall",
-     "module": "WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify",
-     "lines": [
-      39,
-      49
-     ],
-     "kind": "theorem",
-     "nodes": [],
-     "below": false
-    }
-   ]
-  },
-  "slopmaster2": {
-   "state": "closed",
-   "decls": [
-    {
-     "name": "AlgebraicGeometry.Etale.preservesFiniteLimits_openImmersionLowerShriek",
-     "module": "WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs",
-     "lines": [
-      326,
-      346
-     ],
-     "kind": "theorem",
-     "sorry": false
-    }
-   ],
-   "missing": [],
-   "open": []
-  }
- },
- "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1",
- "lean": {
-  "branch": "slopmaster2",
-  "declarations": [
-   "AlgebraicGeometry.Etale.preservesFiniteLimits_openImmersionLowerShriek"
+  "stmt_deps": [
+    "def-weil-pbc-extension-by-zero"
   ],
-  "note": "attached by the lead at review (2026-10-09), found by the opus workers of def-weil-pbc-extension-by-zero and def-weil-pbc-finite-open-comparison: left exactness (finite limits preserved; right exactness holds since j_! is a left adjoint); sorry-free on the full map"
- }
+  "proof": [],
+  "proof_deps": [],
+  "proof_origin": null,
+  "mathlib_searches": [
+    {
+      "tool": "leansearch",
+      "query": "left adjoint of restriction of sheaves to the over category (localization of a site) is exact",
+      "results": "HasSheafify.isLeftExact (sheafification preserves finite limits), TopCat.Sheaf.instIsLeftAdjointPullback, constantSheafΓAdj, Scheme.Modules.instIsLeftAdjointRestrictFunctor, sheafPullbackConstruction.sheafAdjunctionContinuous",
+      "date": "2026-10-09",
+      "verdict": "no match: only the ingredients (left exactness of sheafification; right exactness of any left adjoint)"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "exactness of the left adjoint of restriction to a localized site (extension by zero j_U! is exact)",
+      "results": "GrothendieckTopology instIsLocalization presheafToSheaf, HasSheafify.isLeftExact, PreservesSheafification lemmas (Mathlib.CategoryTheory.Sites.Localization/Sheafification/PreservesSheafification)",
+      "date": "2026-10-09",
+      "verdict": "no match"
+    },
+    {
+      "tool": "loogle",
+      "query": "CategoryTheory.Functor.sheafPullback",
+      "results": "Functor.sheafPullback G A J K (left adjoint of G.sheafPushforwardContinuous), Functor.sheafAdjunctionContinuous, sheafPullbackConstruction.sheafPullbackIso (= sheafToPresheaf ⋙ G.op.lan ⋙ presheafToSheaf), sheafPullbackConstruction.preservesFiniteLimits (needs PreservesFiniteLimits G.op.lan), SmallCategories...PreservesFiniteLimits (needs RepresentablyFlat G), GrothendieckTopology.Point.sheafFiberComapIso (needs RepresentablyFlat F) (Mathlib.CategoryTheory.Sites.Pullback, .Point.Comap)",
+      "date": "2026-10-09",
+      "verdict": "generalization, not one line: with G = MorphismProperty.Over.map ⊤ (j étale) : U.Etale ⥤ X.Etale the left adjoint G.sheafPullback is j_!, but its continuity for the small étale topologies, the identification of G.sheafPushforwardContinuous with j^{-1} and the computation of G.op.lan as the presheaf with at most one summand are not in Mathlib; G is not representably flat (it does not preserve the terminal object), so the flatness instances do not apply"
+    },
+    {
+      "tool": "grep",
+      "query": "grep -n 'instance.*PreservesFiniteLimits' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites/Pullback.lean",
+      "results": "Pullback.lean:93/98 PreservesFiniteLimits (sheafPullback G A J K) under [PreservesFiniteLimits G.op.lan]; :120 under [RepresentablyFlat G]",
+      "date": "2026-10-09",
+      "verdict": "generalization, not one line: for G = MorphismProperty.Over.map ⊤ along j neither hypothesis is in Mathlib (left exactness of G.op.lan is the direct-sum computation; G is not representably flat)"
+    },
+    {
+      "tool": "grep",
+      "query": "grep -rniE 'extension by zero|extensionByZero|lowerShriek|jShriek|extend ?by ?zero' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+      "results": "only Function.ExtendByZero (LinearAlgebra/Pi.lean:653, Algebra/Group/Pi/Lemmas.lean:446: extension by zero of functions on index sets) and a comment in NumberTheory/MulChar/Basic.lean:144; nothing on sheaves",
+      "date": "2026-10-09",
+      "verdict": "no match"
+    }
+  ],
+  "mathlib_match": null,
+  "status": "unsplit",
+  "merged_into": null,
+  "import_flags": [
+    "unreachable"
+  ],
+  "created": {
+    "by": "worker",
+    "item": "def-weil-pbc-extension-by-zero",
+    "date": "2026-10-09"
+  },
+  "lean_audit": {
+    "master": {
+      "state": "rests_on_sorry",
+      "decls": [
+        {
+          "name": "AlgebraicGeometry.Etale.preservesFiniteLimits_openImmersionLowerShriek",
+          "module": "WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs",
+          "lines": [
+            315,
+            335
+          ],
+          "kind": "theorem",
+          "sorry": false
+        }
+      ],
+      "missing": [],
+      "open": [
+        {
+          "name": "CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall",
+          "module": "WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify",
+          "lines": [
+            39,
+            49
+          ],
+          "kind": "theorem",
+          "nodes": [],
+          "below": false
+        }
+      ]
+    },
+    "slopmaster2": {
+      "state": "closed",
+      "decls": [
+        {
+          "name": "AlgebraicGeometry.Etale.preservesFiniteLimits_openImmersionLowerShriek",
+          "module": "WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs",
+          "lines": [
+            326,
+            346
+          ],
+          "kind": "theorem",
+          "sorry": false
+        }
+      ],
+      "missing": [],
+      "open": []
+    }
+  },
+  "chapter": "sec-proper-base-change",
+  "unit": "sk-thm-p1",
+  "lean": {
+    "module": "WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs",
+    "declaration": "AlgebraicGeometry.Etale.preservesFiniteLimits_openImmersionLowerShriek",
+    "branch": "slopmaster2",
+    "line": 326,
+    "declarations": [
+      "AlgebraicGeometry.Etale.preservesFiniteLimits_openImmersionLowerShriek"
+    ],
+    "sorry_free": true,
+    "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state closed)"
+  }
 }

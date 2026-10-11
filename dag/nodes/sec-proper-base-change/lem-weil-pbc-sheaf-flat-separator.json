@@ -1,200 +1,211 @@
 {
- "id": "lem-weil-pbc-sheaf-flat-separator",
- "blueprint": {
-  "is": null,
-  "from": {
-   "node": "thm-weil-pbc-bounded-below",
-   "place": "unspecified",
-   "via": []
+  "id": "lem-weil-pbc-sheaf-flat-separator",
+  "blueprint": {
+    "is": null,
+    "from": {
+      "node": "thm-weil-pbc-bounded-below",
+      "place": "unspecified",
+      "via": []
+    },
+    "same_as": null
   },
-  "same_as": null
- },
- "kind": "statement",
- "title": "Sheaves on an essentially small site have a flat separator (Lean split)",
- "statement": "Let $\\mathcal C$ be an essentially small category with a Grothendieck topology $J$, and let $\\mathcal A$ be a Grothendieck abelian category with a symmetric monoidal closed structure whose tensor product is additive in each variable. Call an object $P$ of $\\mathcal A$ (resp. of the category $\\mathrm{Sh}(\\mathcal C,J;\\mathcal A)$ of $\\mathcal A$-valued sheaves, with the monoidal structure obtained by sheafifying the objectwise tensor product) *flat* if tensoring with $P$ preserves finite limits, and a *separator* if for every two distinct parallel morphisms $u\\neq v:M\\to N$ there is a morphism $h:P\\to M$ with $u h\\neq v h$. If $\\mathcal A$ has an object that is both flat and a separator, then so does $\\mathrm{Sh}(\\mathcal C,J;\\mathcal A)$. (For $\\mathcal A$ the category of $\\Lambda$-modules and $\\mathcal C$ the small étale site of a scheme, such an object is $\\bigoplus_U j_{U!}\\Lambda_U$, the sum over the objects $U$ of extension by zero of the constant sheaf.)",
- "source": {
-  "document": "literature/stacks-project/sites-modules.tex",
-  "place": "Lemma 03EV (lemma-j-shriek-flat: j_{U!}O_U is flat) and Lemma 03EW (lemma-module-quotient-flat: every module is a quotient of a direct sum of j_{U!}O_U), for A = modules; the general statement is that of the Lean declaration CategoryTheory.GrothendieckTopology.exists_flat_separator_sheaf_of_essentiallySmall, module WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolution, lines 164-170 (branch slopmaster2), whose module docstring ('The sheaf case') gives the intended proof"
- },
- "stmt_deps": [
-  "lem-weil-pbc-sheaf-tensor-closed"
- ],
- "mathlib_searches": [
-  {
-   "tool": "grep",
-   "query": "grep -rln 'IsSeparator' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Abelian/GrothendieckCategory",
-   "results": "CategoryTheory/Abelian/GrothendieckCategory/{EnoughInjectives,ModuleEmbedding/GabrielPopescu,ModuleEmbedding/Opposite}.lean and Basic.lean:74 (a Grothendieck abelian category has a separator, IsGrothendieckAbelian.hasSeparator); nothing in CategoryTheory/Sites",
-   "date": "2026-10-09",
-   "verdict": "no match: Mathlib gives a separator of a Grothendieck abelian category, but no flatness of it and no separator of a sheaf category built from the site"
-  },
-  {
-   "tool": "grep",
-   "query": "grep -rln 'Flat' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory | grep -i 'monoidal\\|abelian'; grep -rn 'extensionByZero\\|ExtensionByZero' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
-   "results": "none: Mathlib has no flat objects of a monoidal abelian category and no extension by zero j_{U!} for sheaves on a site",
-   "date": "2026-10-09",
-   "verdict": "no match"
-  },
-  {
-   "tool": "leansearch",
-   "query": "category of sheaves with values in a Grothendieck abelian category has a separator",
-   "results": "CategoryTheory.Sheaf.hasSeparator, Sheaf.isSeparator, Sheaf.isSeparating (Mathlib.CategoryTheory.Generator.Sheaf); IsGrothendieckAbelian.hasSeparator; Sheaf.isGrothendieckAbelian_of_essentiallySmall; Presheaf.hasSeparator",
-   "date": "2026-10-09",
-   "verdict": "separator half only: Sheaf.hasSeparator gives a separator of Sheaf J A (the coproduct of the Sheaf.freeYoneda J X (S)) from one of A; no flatness"
-  },
-  {
-   "tool": "leansearch",
-   "query": "object both flat and separator in category of sheaves of modules",
-   "results": "Sheaf.hasSeparator; SheafOfModules.instAbelian; SheafOfModules.hom_ext; SheafOfModules.instCategory; Scheme.Modules",
-   "date": "2026-10-09",
-   "verdict": "no match"
-  },
-  {
-   "tool": "loogle",
-   "query": "CategoryTheory.HasSeparator (CategoryTheory.Sheaf _ _)",
-   "results": "CategoryTheory.Sheaf.hasSeparator only",
-   "date": "2026-10-09",
-   "verdict": "no match for the flat-and-separator statement"
-  },
-  {
-   "tool": "grep",
-   "query": "rg -n 'instance hasSeparator|def freeYoneda' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Generator/Sheaf.lean; rg -ln 'Flat' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Monoidal; rg -n 'class .*Flat|def .*Flat' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Monoidal ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Abelian",
-   "results": "Generator/Sheaf.lean:36 freeYoneda, :63 hasSeparator; no notion of a flat object of a monoidal abelian category in Mathlib",
-   "date": "2026-10-09",
-   "verdict": "no match; stays unsplit (Sheaf.hasSeparator is a candidate for the separator half when it is split)"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "category of sheaves on a site has a separator which is flat for the tensor product",
-   "results": "Sheaf.hasSeparator, Sheaf.isSeparator, Sheaf.isSeparating (Mathlib.CategoryTheory.Generator.Sheaf); Sheaf.isSeparated (Sites.Whiskering); SheafOfTypes.balanced (Sites.LeftExact)",
-   "date": "2026-10-09",
-   "verdict": "no match for flat-and-separator; the separator half is Sheaf.isSeparator (node lem-weil-pbc-sheaf-free-separator)"
-  }
- ],
- "mathlib_match": null,
- "status": "split",
- "lean_audit": {
-  "master": {
-   "state": "sorry_here",
-   "decls": [
-    {
-     "name": "CategoryTheory.GrothendieckTopology.exists_flat_separator_sheaf_of_essentiallySmall",
-     "module": "WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolution",
-     "lines": [
-      164,
-      170
-     ],
-     "kind": "theorem",
-     "sorry": true
-    }
-   ],
-   "missing": [],
-   "open": []
-  },
-  "slopmaster2": {
-   "state": "closed",
-   "decls": [
-    {
-     "name": "CategoryTheory.GrothendieckTopology.exists_flat_separator_sheaf_of_essentiallySmall",
-     "module": "WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolution",
-     "lines": [
-      179,
-      196
-     ],
-     "kind": "theorem",
-     "sorry": false
-    }
-   ],
-   "missing": [],
-   "open": []
-  }
- },
- "proof": [
-  {
-   "text": "Step 1 (the sheaf category and the meaning of flat). By [lem-weil-pbc-sheaf-tensor-closed], $\\mathcal S:=\\mathrm{Sh}(\\mathcal C,J;\\mathcal A)$ is a Grothendieck abelian category, and with the sheafified objectwise tensor product it is symmetric monoidal closed. Hence for a sheaf $Q$ the functors $Q\\otimes-$ and $-\\otimes Q$ are left adjoints, so they preserve all colimits, in particular finite colimits; and the symmetry gives $Q\\otimes-\\cong-\\otimes Q$. So $Q$ is flat in the sense of the statement (tensoring with $Q$ preserves finite limits) if and only if both $Q\\otimes-$ and $-\\otimes Q$ are exact (preserve finite limits and finite colimits), which is the notion of flat object of the Lean declaration (`ObjectProperty.flat`; the equivalence is `ObjectProperty.flat_iff_preservesFiniteLimits`). The same holds in $\\mathcal A$, which is symmetric monoidal closed by hypothesis.",
-   "uses": [
-    "lem-weil-pbc-sheaf-tensor-closed"
-   ],
-   "elementary": false,
-   "source": {
+  "kind": "statement",
+  "title": "Sheaves on an essentially small site have a flat separator (Lean split)",
+  "statement": "Let $\\mathcal C$ be an essentially small category with a Grothendieck topology $J$, and let $\\mathcal A$ be a Grothendieck abelian category with a symmetric monoidal closed structure whose tensor product is additive in each variable. Call an object $P$ of $\\mathcal A$ (resp. of the category $\\mathrm{Sh}(\\mathcal C,J;\\mathcal A)$ of $\\mathcal A$-valued sheaves, with the monoidal structure obtained by sheafifying the objectwise tensor product) *flat* if tensoring with $P$ preserves finite limits, and a *separator* if for every two distinct parallel morphisms $u\\neq v:M\\to N$ there is a morphism $h:P\\to M$ with $u h\\neq v h$. If $\\mathcal A$ has an object that is both flat and a separator, then so does $\\mathrm{Sh}(\\mathcal C,J;\\mathcal A)$. (For $\\mathcal A$ the category of $\\Lambda$-modules and $\\mathcal C$ the small étale site of a scheme, such an object is $\\bigoplus_U j_{U!}\\Lambda_U$, the sum over the objects $U$ of extension by zero of the constant sheaf.)",
+  "source": {
     "document": "literature/stacks-project/sites-modules.tex",
-    "place": "agent: generalization of Lemma 0GMW (sheafified tensor product) and Lemma 03EO (tensor-Hom adjunction) to A-valued sheaves; Lean module docstring of WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolution (slopmaster2), section \"The sheaf case\""
-   }
+    "place": "Lemma 03EV (lemma-j-shriek-flat: j_{U!}O_U is flat) and Lemma 03EW (lemma-module-quotient-flat: every module is a quotient of a direct sum of j_{U!}O_U), for A = modules; the general statement is that of the Lean declaration CategoryTheory.GrothendieckTopology.exists_flat_separator_sheaf_of_essentiallySmall, module WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolution, lines 164-170 (branch slopmaster2), whose module docstring ('The sheaf case') gives the intended proof"
   },
-  {
-   "text": "Step 2 (the candidate and the separator half). Let $G$ be an object of $\\mathcal A$ that is flat and a separator. For each object $X$ of $\\mathcal C$ let $G_X^\\#$ be the sheaf associated to the presheaf $V\\mapsto\\bigoplus_{\\varphi\\in\\mathrm{Mor}_{\\mathcal C}(V,X)}G$, i.e. $j_{X!}\\underline G_X$, the extension by zero of the constant sheaf $G$ on $\\mathcal C/X$ (Stacks 03DI); it represents $F\\mapsto\\mathrm{Hom}_{\\mathcal A}(G,F(X))$. Since $\\mathcal S$ is Grothendieck abelian (Step 1) it has all coproducts indexed by sets of the size of its Hom-sets; the objects of $\\mathcal C$ form such a set (in the Lean statement $\\mathcal C:\\mathrm{Type}(u+1)$ and the Hom-sets of $\\mathcal S$ live in $\\mathrm{Type}(u+1)$; alternatively, since $\\mathcal C$ is essentially small one may sum only over a set of representatives of the isomorphism classes of objects, $G_X^\\#\\cong G_{X'}^\\#$ for $X\\cong X'$). Put $S:=\\coprod_{X\\in\\mathrm{Ob}(\\mathcal C)}G_X^\\#$. By [lem-weil-pbc-sheaf-free-separator] (the sheaves $G_X^\\#$ detect morphisms because $\\mathrm{Hom}(G_X^\\#,F)=\\mathrm{Hom}(G,F(X))$, $G$ separates in $\\mathcal A$ and a morphism of sheaves is determined by its components), $S$ is a separator of $\\mathcal S$.",
-   "uses": [
+  "stmt_deps": [
+    "lem-weil-pbc-sheaf-tensor-closed"
+  ],
+  "mathlib_searches": [
+    {
+      "tool": "grep",
+      "query": "grep -rln 'IsSeparator' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Abelian/GrothendieckCategory",
+      "results": "CategoryTheory/Abelian/GrothendieckCategory/{EnoughInjectives,ModuleEmbedding/GabrielPopescu,ModuleEmbedding/Opposite}.lean and Basic.lean:74 (a Grothendieck abelian category has a separator, IsGrothendieckAbelian.hasSeparator); nothing in CategoryTheory/Sites",
+      "date": "2026-10-09",
+      "verdict": "no match: Mathlib gives a separator of a Grothendieck abelian category, but no flatness of it and no separator of a sheaf category built from the site"
+    },
+    {
+      "tool": "grep",
+      "query": "grep -rln 'Flat' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory | grep -i 'monoidal\\|abelian'; grep -rn 'extensionByZero\\|ExtensionByZero' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+      "results": "none: Mathlib has no flat objects of a monoidal abelian category and no extension by zero j_{U!} for sheaves on a site",
+      "date": "2026-10-09",
+      "verdict": "no match"
+    },
+    {
+      "tool": "leansearch",
+      "query": "category of sheaves with values in a Grothendieck abelian category has a separator",
+      "results": "CategoryTheory.Sheaf.hasSeparator, Sheaf.isSeparator, Sheaf.isSeparating (Mathlib.CategoryTheory.Generator.Sheaf); IsGrothendieckAbelian.hasSeparator; Sheaf.isGrothendieckAbelian_of_essentiallySmall; Presheaf.hasSeparator",
+      "date": "2026-10-09",
+      "verdict": "separator half only: Sheaf.hasSeparator gives a separator of Sheaf J A (the coproduct of the Sheaf.freeYoneda J X (S)) from one of A; no flatness"
+    },
+    {
+      "tool": "leansearch",
+      "query": "object both flat and separator in category of sheaves of modules",
+      "results": "Sheaf.hasSeparator; SheafOfModules.instAbelian; SheafOfModules.hom_ext; SheafOfModules.instCategory; Scheme.Modules",
+      "date": "2026-10-09",
+      "verdict": "no match"
+    },
+    {
+      "tool": "loogle",
+      "query": "CategoryTheory.HasSeparator (CategoryTheory.Sheaf _ _)",
+      "results": "CategoryTheory.Sheaf.hasSeparator only",
+      "date": "2026-10-09",
+      "verdict": "no match for the flat-and-separator statement"
+    },
+    {
+      "tool": "grep",
+      "query": "rg -n 'instance hasSeparator|def freeYoneda' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Generator/Sheaf.lean; rg -ln 'Flat' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Monoidal; rg -n 'class .*Flat|def .*Flat' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Monoidal ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Abelian",
+      "results": "Generator/Sheaf.lean:36 freeYoneda, :63 hasSeparator; no notion of a flat object of a monoidal abelian category in Mathlib",
+      "date": "2026-10-09",
+      "verdict": "no match; stays unsplit (Sheaf.hasSeparator is a candidate for the separator half when it is split)"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "category of sheaves on a site has a separator which is flat for the tensor product",
+      "results": "Sheaf.hasSeparator, Sheaf.isSeparator, Sheaf.isSeparating (Mathlib.CategoryTheory.Generator.Sheaf); Sheaf.isSeparated (Sites.Whiskering); SheafOfTypes.balanced (Sites.LeftExact)",
+      "date": "2026-10-09",
+      "verdict": "no match for flat-and-separator; the separator half is Sheaf.isSeparator (node lem-weil-pbc-sheaf-free-separator)"
+    }
+  ],
+  "mathlib_match": null,
+  "status": "split",
+  "lean_audit": {
+    "master": {
+      "state": "sorry_here",
+      "decls": [
+        {
+          "name": "CategoryTheory.GrothendieckTopology.exists_flat_separator_sheaf_of_essentiallySmall",
+          "module": "WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolution",
+          "lines": [
+            164,
+            170
+          ],
+          "kind": "theorem",
+          "sorry": true
+        }
+      ],
+      "missing": [],
+      "open": []
+    },
+    "slopmaster2": {
+      "state": "closed",
+      "decls": [
+        {
+          "name": "CategoryTheory.GrothendieckTopology.exists_flat_separator_sheaf_of_essentiallySmall",
+          "module": "WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolution",
+          "lines": [
+            179,
+            196
+          ],
+          "kind": "theorem",
+          "sorry": false
+        }
+      ],
+      "missing": [],
+      "open": []
+    }
+  },
+  "proof": [
+    {
+      "text": "Step 1 (the sheaf category and the meaning of flat). By [lem-weil-pbc-sheaf-tensor-closed], $\\mathcal S:=\\mathrm{Sh}(\\mathcal C,J;\\mathcal A)$ is a Grothendieck abelian category, and with the sheafified objectwise tensor product it is symmetric monoidal closed. Hence for a sheaf $Q$ the functors $Q\\otimes-$ and $-\\otimes Q$ are left adjoints, so they preserve all colimits, in particular finite colimits; and the symmetry gives $Q\\otimes-\\cong-\\otimes Q$. So $Q$ is flat in the sense of the statement (tensoring with $Q$ preserves finite limits) if and only if both $Q\\otimes-$ and $-\\otimes Q$ are exact (preserve finite limits and finite colimits), which is the notion of flat object of the Lean declaration (`ObjectProperty.flat`; the equivalence is `ObjectProperty.flat_iff_preservesFiniteLimits`). The same holds in $\\mathcal A$, which is symmetric monoidal closed by hypothesis.",
+      "uses": [
+        "lem-weil-pbc-sheaf-tensor-closed"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/sites-modules.tex",
+        "place": "agent: generalization of Lemma 0GMW (sheafified tensor product) and Lemma 03EO (tensor-Hom adjunction) to A-valued sheaves; Lean module docstring of WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolution (slopmaster2), section \"The sheaf case\""
+      }
+    },
+    {
+      "text": "Step 2 (the candidate and the separator half). Let $G$ be an object of $\\mathcal A$ that is flat and a separator. For each object $X$ of $\\mathcal C$ let $G_X^\\#$ be the sheaf associated to the presheaf $V\\mapsto\\bigoplus_{\\varphi\\in\\mathrm{Mor}_{\\mathcal C}(V,X)}G$, i.e. $j_{X!}\\underline G_X$, the extension by zero of the constant sheaf $G$ on $\\mathcal C/X$ (Stacks 03DI); it represents $F\\mapsto\\mathrm{Hom}_{\\mathcal A}(G,F(X))$. Since $\\mathcal S$ is Grothendieck abelian (Step 1) it has all coproducts indexed by sets of the size of its Hom-sets; the objects of $\\mathcal C$ form such a set (in the Lean statement $\\mathcal C:\\mathrm{Type}(u+1)$ and the Hom-sets of $\\mathcal S$ live in $\\mathrm{Type}(u+1)$; alternatively, since $\\mathcal C$ is essentially small one may sum only over a set of representatives of the isomorphism classes of objects, $G_X^\\#\\cong G_{X'}^\\#$ for $X\\cong X'$). Put $S:=\\coprod_{X\\in\\mathrm{Ob}(\\mathcal C)}G_X^\\#$. By [lem-weil-pbc-sheaf-free-separator] (the sheaves $G_X^\\#$ detect morphisms because $\\mathrm{Hom}(G_X^\\#,F)=\\mathrm{Hom}(G,F(X))$, $G$ separates in $\\mathcal A$ and a morphism of sheaves is determined by its components), $S$ is a separator of $\\mathcal S$.",
+      "uses": [
+        "lem-weil-pbc-sheaf-free-separator",
+        "lem-weil-pbc-sheaf-tensor-closed"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/sites-modules.tex",
+        "place": "Lemma 03EW (lemma-module-quotient-flat) part (3) and its proof; equation after Lemma 03DI (Hom(j_{U!}O_U, F) = F(U)); Mathlib Sheaf.isSeparator"
+      }
+    },
+    {
+      "text": "Step 3 (each summand is flat). $G$ is flat in $\\mathcal A$, so by [lem-weil-pbc-free-sheaf-flat] applied with $P=G$, each $G_X^\\#=j_{X!}\\underline G_X$ is flat in $\\mathcal S$: $G_X^\\#\\otimes-$ preserves finite limits. (For $\\mathcal A$ the category of $\\mathcal O$-modules this is Stacks 03EV (2).)",
+      "uses": [
+        "lem-weil-pbc-free-sheaf-flat"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/sites-modules.tex",
+        "place": "Lemma 03EV (lemma-j-shriek-flat), generalized to A-valued sheaves in [lem-weil-pbc-free-sheaf-flat]"
+      }
+    },
+    {
+      "text": "Step 4 (the sum is flat). $\\mathcal S$ is Grothendieck abelian with a braided (indeed symmetric) monoidal closed structure (Step 1), and $(G_X^\\#)_{X\\in\\mathrm{Ob}(\\mathcal C)}$ is a family of flat objects indexed by a set of the size of the Hom-sets of $\\mathcal S$ (Steps 2, 3). By [lem-weil-pbc-flat-coproduct] applied to $\\mathcal B=\\mathcal S$, $S=\\coprod_XG_X^\\#$ is flat.",
+      "uses": [
+        "lem-weil-pbc-flat-coproduct",
+        "lem-weil-pbc-sheaf-tensor-closed"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/sites-modules.tex",
+        "place": "Lemma 03EU (lemma-colimits-flat) part (2), generalized in [lem-weil-pbc-flat-coproduct]"
+      }
+    },
+    {
+      "text": "Step 5 (conclusion and the étale case). By Steps 2 and 4, $S$ is an object of $\\mathrm{Sh}(\\mathcal C,J;\\mathcal A)$ that is a separator and flat; by Step 1 it is flat in the two-sided exact sense as well. For $\\mathcal A$ the category of $\\Lambda$-modules, $G=\\Lambda$ is a flat separator ($\\mathrm{Hom}(\\Lambda,M)=M$, $\\Lambda\\otimes_\\Lambda-=\\mathrm{id}$), and for $\\mathcal C$ the small étale site of a scheme, $S=\\bigoplus_Uj_{U!}\\Lambda_U$, the sum over the objects $U$.",
+      "uses": [],
+      "elementary": true,
+      "source": {
+        "document": "literature/stacks-project/sites-modules.tex",
+        "place": "Lemma 03EW (lemma-module-quotient-flat) part (3): every module is a quotient of a direct sum of j_{U!}O_U"
+      }
+    }
+  ],
+  "proof_deps": [
+    "lem-weil-pbc-flat-coproduct",
+    "lem-weil-pbc-free-sheaf-flat",
     "lem-weil-pbc-sheaf-free-separator",
     "lem-weil-pbc-sheaf-tensor-closed"
-   ],
-   "elementary": false,
-   "source": {
+  ],
+  "proof_origin": {
+    "by": "agent",
     "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Lemma 03EW (lemma-module-quotient-flat) part (3) and its proof; equation after Lemma 03DI (Hom(j_{U!}O_U, F) = F(U)); Mathlib Sheaf.isSeparator"
-   }
+    "place": "route of Lemmas 03EV, 03EW (and 03EU, 03DI) for O-modules on a ringed site, generalized by the agent to sheaves with values in a Grothendieck abelian symmetric monoidal closed category A; it is the intended proof of the Lean module docstring of WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolution (slopmaster2), section \"The sheaf case\". Stacks covers the case A = Mod(Lambda) (sheaves of modules over the constant sheaf of rings Lambda_C), not general A."
   },
-  {
-   "text": "Step 3 (each summand is flat). $G$ is flat in $\\mathcal A$, so by [lem-weil-pbc-free-sheaf-flat] applied with $P=G$, each $G_X^\\#=j_{X!}\\underline G_X$ is flat in $\\mathcal S$: $G_X^\\#\\otimes-$ preserves finite limits. (For $\\mathcal A$ the category of $\\mathcal O$-modules this is Stacks 03EV (2).)",
-   "uses": [
-    "lem-weil-pbc-free-sheaf-flat"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Lemma 03EV (lemma-j-shriek-flat), generalized to A-valued sheaves in [lem-weil-pbc-free-sheaf-flat]"
-   }
+  "merged_into": null,
+  "import_flags": [],
+  "created": {
+    "by": "worker",
+    "item": "thm-weil-pbc-bounded-below",
+    "date": "2026-10-09"
   },
-  {
-   "text": "Step 4 (the sum is flat). $\\mathcal S$ is Grothendieck abelian with a braided (indeed symmetric) monoidal closed structure (Step 1), and $(G_X^\\#)_{X\\in\\mathrm{Ob}(\\mathcal C)}$ is a family of flat objects indexed by a set of the size of the Hom-sets of $\\mathcal S$ (Steps 2, 3). By [lem-weil-pbc-flat-coproduct] applied to $\\mathcal B=\\mathcal S$, $S=\\coprod_XG_X^\\#$ is flat.",
-   "uses": [
-    "lem-weil-pbc-flat-coproduct",
-    "lem-weil-pbc-sheaf-tensor-closed"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Lemma 03EU (lemma-colimits-flat) part (2), generalized in [lem-weil-pbc-flat-coproduct]"
-   }
+  "chapter": "sec-proper-base-change",
+  "unit": "sk-def-exchange",
+  "split_report": {
+    "date": "2026-10-09",
+    "item": "lem-weil-pbc-sheaf-flat-separator",
+    "worker": "stage1",
+    "summary": "Read the Lean declaration (FlatResolution.lean 164-170, sorry), its docstring and the module docstring ('The sheaf case'), Mathlib Generator/Sheaf.lean, and Stacks sites-modules 03DI, 03EU, 03EV, 03EW, 0E8I, 0GMW. Statement kept (its 'flat' = left exactness of tensoring agrees with the Lean ObjectProperty.flat = both tensor functors exact because Sh(C,J;A) and A are symmetric monoidal closed; Step 1 says so). Split in five steps: separator half by the Mathlib leaf Sheaf.isSeparator (new node lem-weil-pbc-sheaf-free-separator, the object being Sheaf.freeYoneda J X G = j_{X!}G); flat half by flatness of j_{X!}G (new node lem-weil-pbc-free-sheaf-flat, Stacks 03EV route generalized: sheafification is monoidal and exact, objectwise tensor with an objectwise-flat sum of copies of G is left exact by AB4) and by coproducts of flat objects being flat (new node lem-weil-pbc-flat-coproduct; sorry-free slopmaster2 ObjectProperty.flat_coproduct); the structure of Sh(C,J;A) (Grothendieck abelian, symmetric monoidal closed, a strong monoidal) is new node lem-weil-pbc-sheaf-tensor-closed (sorry-free slopmaster2 declarations of Defs/TensorColimits/Sheaf). stmt_deps gets lem-weil-pbc-sheaf-tensor-closed (the monoidal structure the statement uses). Generality: Stacks covers O-modules only; the proof carries over to A-valued sheaves using only AB4/AB5 of A, closedness of A and of Sh, and exactness and monoidality of sheafification; proof_origin is agent. The brief's tag 04BN is module differentials, not the projection formula (that is 0E8I); 03A5/03A9 are the introduction and Z_{coprod G_i} = sum Z_{G_i}, not used. The Lean sorry is used directly only by hasFunctorialFlatResolution_sheaf_of_essentiallySmall (same file) and reaches 923 declarations of slopmaster2, among them both target declarations."
   },
-  {
-   "text": "Step 5 (conclusion and the étale case). By Steps 2 and 4, $S$ is an object of $\\mathrm{Sh}(\\mathcal C,J;\\mathcal A)$ that is a separator and flat; by Step 1 it is flat in the two-sided exact sense as well. For $\\mathcal A$ the category of $\\Lambda$-modules, $G=\\Lambda$ is a flat separator ($\\mathrm{Hom}(\\Lambda,M)=M$, $\\Lambda\\otimes_\\Lambda-=\\mathrm{id}$), and for $\\mathcal C$ the small étale site of a scheme, $S=\\bigoplus_Uj_{U!}\\Lambda_U$, the sum over the objects $U$.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Lemma 03EW (lemma-module-quotient-flat) part (3): every module is a quotient of a direct sum of j_{U!}O_U"
-   }
+  "reviewed": {
+    "date": "2026-10-09",
+    "by": "L",
+    "result": "pass",
+    "note": "agent proof on the route of Stacks 03EV/03EW generalized to A-valued sheaves; 4 new nodes: a Mathlib leaf (Sheaf.isSeparator) and three statements, two closed by Lean attached by the lead"
+  },
+  "lean": {
+    "module": "WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolution",
+    "declaration": "CategoryTheory.GrothendieckTopology.exists_flat_separator_sheaf_of_essentiallySmall",
+    "branch": "slopmaster2",
+    "line": 179,
+    "declarations": [
+      "CategoryTheory.GrothendieckTopology.exists_flat_separator_sheaf_of_essentiallySmall"
+    ],
+    "sorry_free": true,
+    "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state closed)"
   }
- ],
- "proof_deps": [
-  "lem-weil-pbc-flat-coproduct",
-  "lem-weil-pbc-free-sheaf-flat",
-  "lem-weil-pbc-sheaf-free-separator",
-  "lem-weil-pbc-sheaf-tensor-closed"
- ],
- "proof_origin": {
-  "by": "agent",
-  "document": "literature/stacks-project/sites-modules.tex",
-  "place": "route of Lemmas 03EV, 03EW (and 03EU, 03DI) for O-modules on a ringed site, generalized by the agent to sheaves with values in a Grothendieck abelian symmetric monoidal closed category A; it is the intended proof of the Lean module docstring of WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolution (slopmaster2), section \"The sheaf case\". Stacks covers the case A = Mod(Lambda) (sheaves of modules over the constant sheaf of rings Lambda_C), not general A."
- },
- "merged_into": null,
- "import_flags": [],
- "created": {
-  "by": "worker",
-  "item": "thm-weil-pbc-bounded-below",
-  "date": "2026-10-09"
- },
- "chapter": "sec-proper-base-change",
- "unit": "sk-def-exchange",
- "split_report": {
-  "date": "2026-10-09",
-  "item": "lem-weil-pbc-sheaf-flat-separator",
-  "worker": "stage1",
-  "summary": "Read the Lean declaration (FlatResolution.lean 164-170, sorry), its docstring and the module docstring ('The sheaf case'), Mathlib Generator/Sheaf.lean, and Stacks sites-modules 03DI, 03EU, 03EV, 03EW, 0E8I, 0GMW. Statement kept (its 'flat' = left exactness of tensoring agrees with the Lean ObjectProperty.flat = both tensor functors exact because Sh(C,J;A) and A are symmetric monoidal closed; Step 1 says so). Split in five steps: separator half by the Mathlib leaf Sheaf.isSeparator (new node lem-weil-pbc-sheaf-free-separator, the object being Sheaf.freeYoneda J X G = j_{X!}G); flat half by flatness of j_{X!}G (new node lem-weil-pbc-free-sheaf-flat, Stacks 03EV route generalized: sheafification is monoidal and exact, objectwise tensor with an objectwise-flat sum of copies of G is left exact by AB4) and by coproducts of flat objects being flat (new node lem-weil-pbc-flat-coproduct; sorry-free slopmaster2 ObjectProperty.flat_coproduct); the structure of Sh(C,J;A) (Grothendieck abelian, symmetric monoidal closed, a strong monoidal) is new node lem-weil-pbc-sheaf-tensor-closed (sorry-free slopmaster2 declarations of Defs/TensorColimits/Sheaf). stmt_deps gets lem-weil-pbc-sheaf-tensor-closed (the monoidal structure the statement uses). Generality: Stacks covers O-modules only; the proof carries over to A-valued sheaves using only AB4/AB5 of A, closedness of A and of Sh, and exactness and monoidality of sheafification; proof_origin is agent. The brief's tag 04BN is module differentials, not the projection formula (that is 0E8I); 03A5/03A9 are the introduction and Z_{coprod G_i} = sum Z_{G_i}, not used. The Lean sorry is used directly only by hasFunctorialFlatResolution_sheaf_of_essentiallySmall (same file) and reaches 923 declarations of slopmaster2, among them both target declarations."
- },
- "reviewed": {
-  "date": "2026-10-09",
-  "by": "L",
-  "result": "pass",
-  "note": "agent proof on the route of Stacks 03EV/03EW generalized to A-valued sheaves; 4 new nodes: a Mathlib leaf (Sheaf.isSeparator) and three statements, two closed by Lean attached by the lead"
- }
 }

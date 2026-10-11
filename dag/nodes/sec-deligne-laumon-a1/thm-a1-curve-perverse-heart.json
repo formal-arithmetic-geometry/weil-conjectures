@@ -1,178 +1,192 @@
 {
- "id": "thm-a1-curve-perverse-heart",
- "blueprint": {
-  "is": "thm-a1-curve-perverse-heart",
-  "from": null,
-  "same_as": null
- },
- "kind": "statement",
- "title": "The perverse t-structure on a smooth curve and its heart",
- "statement": "In the setting of [def-per-support-condition], let the base field $k$ be\nperfect (in the applications $k=k_0=\\mathbf F_q$ or its algebraic\nclosure) and let $X=C$ be a smooth separated $k$-scheme of pure dimension\none, for instance $C=A_0$ or a dense open of it. For $k=k_0$ the objects\nmay equally be Weil complexes on $C_0$, in the conventions of\n[rem-dl-a1-conventions]. All conditions below concern cohomology sheaves,\nand the operations used in the proof carry the Weil structure, so the\nstatements hold verbatim in that case. \"Sheaf\" means a constructible\n$\\overline{\\mathbf Q}_\\ell$-sheaf on $C$ (a Weil sheaf in the Weil case),\nthat is, an object of the heart of the standard t-structure of\n[prop-constructible-truncations]. A sheaf is *punctual* if its support is\na finite set of closed points. Let ${}^pD^{\\le0}(C)$ and\n${}^pD^{\\ge0}(C)$ be the classes of [def-per-perverse-subcategories].\n\n1. (*Description.*) For $K\\in D^b_c(C,\\overline{\\mathbf Q}_\\ell)$,\n   $$\n   \\begin{aligned}\n   K\\in{}^pD^{\\le0}(C)&\\iff \\mathcal H^aK=0\\ (a>0)\\ \\text{and}\\\n   \\mathcal H^0K\\ \\text{is punctual},\\\\\n   K\\in{}^pD^{\\ge0}(C)&\\iff \\mathcal H^aK=0\\ (a<-1)\\ \\text{and}\\\n   \\mathcal H^{-1}K\\ \\text{has no nonzero punctual subsheaf}.\n   \\end{aligned}\n   $$\n2. (*t-structure.*) The pair $\\bigl({}^pD^{\\le0}(C),{}^pD^{\\ge0}(C)\\bigr)$\n   is a bounded t-structure on $D^b_c(C,\\overline{\\mathbf Q}_\\ell)$ in the\n   sense of [def-weil-t-structure]. Its heart\n   $$\n   \\mathrm{Perv}(C):={}^pD^{\\le0}(C)\\cap{}^pD^{\\ge0}(C)\n   $$\n   (the perverse heart candidate of [def-per-perverse-subcategories]) is\n   an abelian category.\n3. (*The heart.*) $K\\in\\mathrm{Perv}(C)$ if and only if\n   $\\mathcal H^aK=0$ for $a\\notin\\{-1,0\\}$, $\\mathcal H^0K$ is punctual,\n   and $\\mathcal H^{-1}K$ has no nonzero punctual subsheaf.\n4. (*Basic objects.*) If $j:U\\hookrightarrow C$ is a dense open immersion\n   and $\\mathcal N$ is a lisse sheaf on $U$, then the middle extension\n   $(j_*\\mathcal N)[1]$ of [def-wf-middle-extension] lies in\n   $\\mathrm{Perv}(C)$. If $x$ is a closed point with inclusion $i_x$ and\n   $E$ is a sheaf on $x$ (a finite-dimensional continuous\n   representation of the Galois group, respectively of the Weil group,\n   of $k(x)$), then $i_{x*}E$, placed in degree $0$, lies in\n   $\\mathrm{Perv}(C)$.\n5. (*Exact sequences.*) For $P\\in\\mathrm{Perv}(C)$ the sequence\n   $0\\to(\\mathcal H^{-1}P)[1]\\to P\\to(\\mathcal H^0P)[0]\\to0$ is exact in\n   $\\mathrm{Perv}(C)$. A short exact sequence $0\\to Q\\to P\\to R\\to0$ in\n   $\\mathrm{Perv}(C)$ gives an exact sequence of sheaves\n   $$\n   0\\to\\mathcal H^{-1}Q\\to\\mathcal H^{-1}P\\to\\mathcal H^{-1}R\n   \\to\\mathcal H^0Q\\to\\mathcal H^0P\\to\\mathcal H^0R\\to0 .\n   $$",
- "source": {
-  "document": "literature/blueprint/master/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-perverse/thm-a1-curve-perverse-heart.md",
-  "place": "node thm-a1-curve-perverse-heart, order 2747"
- },
- "stmt_deps": [
-  "def-per-support-condition",
-  "prop-constructible-truncations",
-  "def-per-perverse-subcategories",
-  "def-weil-t-structure",
-  "def-wf-middle-extension"
- ],
- "proof": [
-  {
-   "text": "*Step 0: two facts about sheaves on a smooth curve.* (i) Let $V$ be a\nsmooth curve (every component of dimension one) and $\\mathcal M$ a lisse\nsheaf on $V$. Then $\\mathcal M$ has no nonzero punctual subsheaf, and in\nparticular a punctual lisse sheaf on $V$ is zero. Indeed, let\n$\\mathcal G\\subset\\mathcal M$ be supported on a finite set $S$ and let\n$s$ be a section of $\\mathcal G$ over a connected étale $W\\to V$ on which\n$\\mathcal M$ is constant. Then $s$ vanishes on the complement of the\npreimage of $S$, which is dense in $W$. A section of a constant sheaf on\na connected scheme that vanishes on a nonempty open is zero, so $s=0$.\n(ii) Every sheaf $\\mathcal F$ on $C$ has a largest punctual subsheaf\n$\\mathcal F_{\\mathrm p}$, and $\\mathcal F/\\mathcal F_{\\mathrm p}$ has no\nnonzero punctual subsheaf. Choose a dense open $j:U\\hookrightarrow C$ on\nwhich $\\mathcal F$ is lisse. Its complement $Z$ is a finite set of closed\npoints, because $C$ has pure dimension one. Put\n$\\mathcal F_{\\mathrm p}:=\\ker(\\mathcal F\\to j_*j^*\\mathcal F)$. This\nkernel vanishes on $U$, so it is punctual. If $\\mathcal G\\subset\\mathcal F$\nis punctual, then $j^*\\mathcal G=0$ by (i), so $\\mathcal G\\subset\n\\mathcal F_{\\mathrm p}$. The quotient embeds in $j_*j^*\\mathcal F$. A\nsection of $j_*\\mathcal M$ over $W$ is a section of $\\mathcal M$ over\n$W\\times_CU$, so a punctual subsheaf of $j_*\\mathcal M$ restricts to zero\non $U$ and is therefore zero. The same argument shows that $j_*\\mathcal M$\nhas no nonzero punctual subsheaf for any lisse $\\mathcal M$ on $U$.",
-   "uses": [],
-   "elementary": null
+  "id": "thm-a1-curve-perverse-heart",
+  "blueprint": {
+    "is": "thm-a1-curve-perverse-heart",
+    "from": null,
+    "same_as": null
   },
-  {
-   "text": "*Step 1: the support condition.* The supports of constructible sheaves on\n$C$ have dimension $\\le1$. So in [def-per-support-condition] the\ninequalities for $i\\ge1$ are automatic. For $i=0$ the inequality says that\n$\\mathcal H^0$ is punctual, and for $i<0$ it says that $\\mathcal H^{-i}=0$.\nThis gives\n$$\n\\operatorname{SuppCon}(N)\\iff\\mathcal H^aN=0\\ (a>0)\\ \\text{and}\\\n\\mathcal H^0N\\ \\text{is punctual},\n$$\nwhich is the first half of (1). Now fix a dense open $j:U\\hookrightarrow C$\non which all $\\mathcal H^aN$ are lisse, with finite closed complement\n$i:Z\\hookrightarrow C$. Stalks at the points of $U$ and of $Z$ detect\nvanishing, and a lisse punctual sheaf on $U$ is zero by Step 0(i). Hence\n$$\n\\operatorname{SuppCon}(N)\\iff \\mathcal H^a(j^*N)=0\\ (a\\ge0)\\ \\text{and}\\\n\\mathcal H^a(i^*N)=0\\ (a>0).\\tag{$*$}\n$$",
-   "uses": [
-    "def-per-support-condition"
-   ],
-   "elementary": false
+  "kind": "statement",
+  "title": "The perverse t-structure on a smooth curve and its heart",
+  "statement": "In the setting of [def-per-support-condition], let the base field $k$ be\nperfect (in the applications $k=k_0=\\mathbf F_q$ or its algebraic\nclosure) and let $X=C$ be a smooth separated $k$-scheme of pure dimension\none, for instance $C=A_0$ or a dense open of it. For $k=k_0$ the objects\nmay equally be Weil complexes on $C_0$, in the conventions of\n[rem-dl-a1-conventions]. All conditions below concern cohomology sheaves,\nand the operations used in the proof carry the Weil structure, so the\nstatements hold verbatim in that case. \"Sheaf\" means a constructible\n$\\overline{\\mathbf Q}_\\ell$-sheaf on $C$ (a Weil sheaf in the Weil case),\nthat is, an object of the heart of the standard t-structure of\n[prop-constructible-truncations]. A sheaf is *punctual* if its support is\na finite set of closed points. Let ${}^pD^{\\le0}(C)$ and\n${}^pD^{\\ge0}(C)$ be the classes of [def-per-perverse-subcategories].\n\n1. (*Description.*) For $K\\in D^b_c(C,\\overline{\\mathbf Q}_\\ell)$,\n   $$\n   \\begin{aligned}\n   K\\in{}^pD^{\\le0}(C)&\\iff \\mathcal H^aK=0\\ (a>0)\\ \\text{and}\\\n   \\mathcal H^0K\\ \\text{is punctual},\\\\\n   K\\in{}^pD^{\\ge0}(C)&\\iff \\mathcal H^aK=0\\ (a<-1)\\ \\text{and}\\\n   \\mathcal H^{-1}K\\ \\text{has no nonzero punctual subsheaf}.\n   \\end{aligned}\n   $$\n2. (*t-structure.*) The pair $\\bigl({}^pD^{\\le0}(C),{}^pD^{\\ge0}(C)\\bigr)$\n   is a bounded t-structure on $D^b_c(C,\\overline{\\mathbf Q}_\\ell)$ in the\n   sense of [def-weil-t-structure]. Its heart\n   $$\n   \\mathrm{Perv}(C):={}^pD^{\\le0}(C)\\cap{}^pD^{\\ge0}(C)\n   $$\n   (the perverse heart candidate of [def-per-perverse-subcategories]) is\n   an abelian category.\n3. (*The heart.*) $K\\in\\mathrm{Perv}(C)$ if and only if\n   $\\mathcal H^aK=0$ for $a\\notin\\{-1,0\\}$, $\\mathcal H^0K$ is punctual,\n   and $\\mathcal H^{-1}K$ has no nonzero punctual subsheaf.\n4. (*Basic objects.*) If $j:U\\hookrightarrow C$ is a dense open immersion\n   and $\\mathcal N$ is a lisse sheaf on $U$, then the middle extension\n   $(j_*\\mathcal N)[1]$ of [def-wf-middle-extension] lies in\n   $\\mathrm{Perv}(C)$. If $x$ is a closed point with inclusion $i_x$ and\n   $E$ is a sheaf on $x$ (a finite-dimensional continuous\n   representation of the Galois group, respectively of the Weil group,\n   of $k(x)$), then $i_{x*}E$, placed in degree $0$, lies in\n   $\\mathrm{Perv}(C)$.\n5. (*Exact sequences.*) For $P\\in\\mathrm{Perv}(C)$ the sequence\n   $0\\to(\\mathcal H^{-1}P)[1]\\to P\\to(\\mathcal H^0P)[0]\\to0$ is exact in\n   $\\mathrm{Perv}(C)$. A short exact sequence $0\\to Q\\to P\\to R\\to0$ in\n   $\\mathrm{Perv}(C)$ gives an exact sequence of sheaves\n   $$\n   0\\to\\mathcal H^{-1}Q\\to\\mathcal H^{-1}P\\to\\mathcal H^{-1}R\n   \\to\\mathcal H^0Q\\to\\mathcal H^0P\\to\\mathcal H^0R\\to0 .\n   $$",
+  "source": {
+    "document": "literature/blueprint/master/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-perverse/thm-a1-curve-perverse-heart.md",
+    "place": "node thm-a1-curve-perverse-heart, order 2747"
   },
-  {
-   "text": "*Step 2: the duals on $U$ and on $Z$.* By [cor-pur-adic-and-rational-smooth-dualizing-complexes],\n$\\omega_U\\cong\\overline{\\mathbf Q}_\\ell(1)[2]$. Restriction to an open\ncommutes with internal Hom, and $j^*\\omega_C=\\omega_U$, so\n$j^*D_C=D_Uj^*$. For a lisse sheaf $\\mathcal L$ on $U$,\n[lem-per-dual-lisse-tensor] with $K=\\overline{\\mathbf Q}_\\ell$ gives\n$D_U\\mathcal L\\cong\\omega_U\\otimes\\mathcal L^\\vee=\\mathcal L^\\vee(1)[2]$.\nNow let $M$ have lisse cohomology sheaves on $U$. Induction on the number\nof nonzero cohomology sheaves, using the truncation triangles\n$\\tau^{\\le n-1}M\\to M\\to\\mathcal H^nM[-n]\\to$ of\n[prop-constructible-truncations] and the exactness of $D_U$, gives\n$$\n\\mathcal H^a(D_UM)\\cong\\bigl(\\mathcal H^{-2-a}M\\bigr)^\\vee(1),\n$$\nand these sheaves are again lisse. The reduced scheme $Z$ is a finite\ndisjoint union of spectra of perfect fields, hence smooth of dimension\nzero, so $\\omega_Z=\\overline{\\mathbf Q}_\\ell$ by\n[cor-pur-adic-and-rational-smooth-dualizing-complexes]. Sheaves on $Z$ are finite-dimensional\nrepresentations, and $R\\mathcal Hom(-,\\overline{\\mathbf Q}_\\ell)$ is\ncomputed on geometric stalks by the exact linear dual. Hence\n$\\mathcal H^a(D_ZM)\\cong(\\mathcal H^{-a}M)^\\vee$.",
-   "uses": [
+  "stmt_deps": [
+    "def-per-support-condition",
+    "prop-constructible-truncations",
+    "def-per-perverse-subcategories",
+    "def-weil-t-structure",
+    "def-wf-middle-extension"
+  ],
+  "proof": [
+    {
+      "text": "*Step 0: two facts about sheaves on a smooth curve.* (i) Let $V$ be a\nsmooth curve (every component of dimension one) and $\\mathcal M$ a lisse\nsheaf on $V$. Then $\\mathcal M$ has no nonzero punctual subsheaf, and in\nparticular a punctual lisse sheaf on $V$ is zero. Indeed, let\n$\\mathcal G\\subset\\mathcal M$ be supported on a finite set $S$ and let\n$s$ be a section of $\\mathcal G$ over a connected étale $W\\to V$ on which\n$\\mathcal M$ is constant. Then $s$ vanishes on the complement of the\npreimage of $S$, which is dense in $W$. A section of a constant sheaf on\na connected scheme that vanishes on a nonempty open is zero, so $s=0$.\n(ii) Every sheaf $\\mathcal F$ on $C$ has a largest punctual subsheaf\n$\\mathcal F_{\\mathrm p}$, and $\\mathcal F/\\mathcal F_{\\mathrm p}$ has no\nnonzero punctual subsheaf. Choose a dense open $j:U\\hookrightarrow C$ on\nwhich $\\mathcal F$ is lisse. Its complement $Z$ is a finite set of closed\npoints, because $C$ has pure dimension one. Put\n$\\mathcal F_{\\mathrm p}:=\\ker(\\mathcal F\\to j_*j^*\\mathcal F)$. This\nkernel vanishes on $U$, so it is punctual. If $\\mathcal G\\subset\\mathcal F$\nis punctual, then $j^*\\mathcal G=0$ by (i), so $\\mathcal G\\subset\n\\mathcal F_{\\mathrm p}$. The quotient embeds in $j_*j^*\\mathcal F$. A\nsection of $j_*\\mathcal M$ over $W$ is a section of $\\mathcal M$ over\n$W\\times_CU$, so a punctual subsheaf of $j_*\\mathcal M$ restricts to zero\non $U$ and is therefore zero. The same argument shows that $j_*\\mathcal M$\nhas no nonzero punctual subsheaf for any lisse $\\mathcal M$ on $U$.",
+      "uses": [],
+      "elementary": null
+    },
+    {
+      "text": "*Step 1: the support condition.* The supports of constructible sheaves on\n$C$ have dimension $\\le1$. So in [def-per-support-condition] the\ninequalities for $i\\ge1$ are automatic. For $i=0$ the inequality says that\n$\\mathcal H^0$ is punctual, and for $i<0$ it says that $\\mathcal H^{-i}=0$.\nThis gives\n$$\n\\operatorname{SuppCon}(N)\\iff\\mathcal H^aN=0\\ (a>0)\\ \\text{and}\\\n\\mathcal H^0N\\ \\text{is punctual},\n$$\nwhich is the first half of (1). Now fix a dense open $j:U\\hookrightarrow C$\non which all $\\mathcal H^aN$ are lisse, with finite closed complement\n$i:Z\\hookrightarrow C$. Stalks at the points of $U$ and of $Z$ detect\nvanishing, and a lisse punctual sheaf on $U$ is zero by Step 0(i). Hence\n$$\n\\operatorname{SuppCon}(N)\\iff \\mathcal H^a(j^*N)=0\\ (a\\ge0)\\ \\text{and}\\\n\\mathcal H^a(i^*N)=0\\ (a>0).\\tag{$*$}\n$$",
+      "uses": [
+        "def-per-support-condition"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "*Step 2: the duals on $U$ and on $Z$.* By [cor-pur-adic-and-rational-smooth-dualizing-complexes],\n$\\omega_U\\cong\\overline{\\mathbf Q}_\\ell(1)[2]$. Restriction to an open\ncommutes with internal Hom, and $j^*\\omega_C=\\omega_U$, so\n$j^*D_C=D_Uj^*$. For a lisse sheaf $\\mathcal L$ on $U$,\n[lem-per-dual-lisse-tensor] with $K=\\overline{\\mathbf Q}_\\ell$ gives\n$D_U\\mathcal L\\cong\\omega_U\\otimes\\mathcal L^\\vee=\\mathcal L^\\vee(1)[2]$.\nNow let $M$ have lisse cohomology sheaves on $U$. Induction on the number\nof nonzero cohomology sheaves, using the truncation triangles\n$\\tau^{\\le n-1}M\\to M\\to\\mathcal H^nM[-n]\\to$ of\n[prop-constructible-truncations] and the exactness of $D_U$, gives\n$$\n\\mathcal H^a(D_UM)\\cong\\bigl(\\mathcal H^{-2-a}M\\bigr)^\\vee(1),\n$$\nand these sheaves are again lisse. The reduced scheme $Z$ is a finite\ndisjoint union of spectra of perfect fields, hence smooth of dimension\nzero, so $\\omega_Z=\\overline{\\mathbf Q}_\\ell$ by\n[cor-pur-adic-and-rational-smooth-dualizing-complexes]. Sheaves on $Z$ are finite-dimensional\nrepresentations, and $R\\mathcal Hom(-,\\overline{\\mathbf Q}_\\ell)$ is\ncomputed on geometric stalks by the exact linear dual. Hence\n$\\mathcal H^a(D_ZM)\\cong(\\mathcal H^{-a}M)^\\vee$.",
+      "uses": [
+        "cor-pur-adic-and-rational-smooth-dualizing-complexes",
+        "lem-per-dual-lisse-tensor",
+        "prop-constructible-truncations"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "*Step 3: the cosupport condition.* Let $K\\in D^b_c(C,\\overline{\\mathbf Q}_\\ell)$,\nand choose $U$ and $Z$ as in Step 1 for $K$. By Step 2 this choice also\nserves for $N:=D_CK$ on $U$. By [lem-weil-closed-costalk-duality] applied\nto $D_CK$, and by the biduality of [thm-coef-qbar-verdier] on $C$ and on\n$Z$, we get $Ri^!K\\cong Ri^!D_CD_CK\\cong D_Zi^*D_CK$, hence\n$i^*D_CK\\cong D_ZRi^!K$. The object $Ri^!=D_Zi^*D_C$ is constructible by\n[thm-coef-qbar-verdier]. By $(*)$ and Step 2,\n$$\n\\operatorname{CosuppCon}(K)\\iff\n\\text{(a) }\\mathcal H^b(j^*K)=0\\ (b\\le-2)\\ \\text{and (b) }\n\\mathcal H^b(Ri^!K)=0\\ (b<0).\n$$\nAssume (a). The closed-support triangle, [prop-sf-localization-all-stages]\n(on the $\\overline{\\mathbf Q}_\\ell$-category, with Weil-equivariant arrows in the Weil case;\nat each finite stage it is [lem-exc-closed-support-triangle]), with $Rj_*j^*K$ constructible,\nreads\n$$\ni_*Ri^!K\\to K\\to Rj_*j^*K\\to .\n$$\nSince $j^*K\\in D^{\\ge-1}$ and $j_*$ is left exact, $Rj_*j^*K\\in D^{\\ge-1}$\nand $\\mathcal H^{-1}(Rj_*j^*K)=j_*j^*\\mathcal H^{-1}K$. Apply the exact\nfunctor $i^*$ (note $i^*i_*=\\mathrm{id}$) to the long exact sequence of\ncohomology sheaves. This gives $\\mathcal H^b(Ri^!K)\\cong i^*\\mathcal H^bK$\nfor $b\\le-2$, and\n$$\n0\\to\\mathcal H^{-1}(Ri^!K)\\to i^*\\mathcal H^{-1}K\\to\ni^*j_*j^*\\mathcal H^{-1}K .\n$$\nThe second map is $i^*$ of the unit $\\mathcal H^{-1}K\\to j_*j^*\\mathcal\nH^{-1}K$. That unit is an isomorphism on $U$, so its kernel is\n$i_*\\mathcal H^{-1}(Ri^!K)$, which is the largest punctual subsheaf of\n$\\mathcal H^{-1}K$ by Step 0(ii). So under (a), condition (b) says that\n$\\mathcal H^bK$ vanishes on $Z$ for $b\\le-2$ and that $\\mathcal H^{-1}K$\nhas no nonzero punctual subsheaf. Together with (a) on $U$, this is the\nsecond half of (1).",
+      "uses": [
+        "lem-weil-closed-costalk-duality",
+        "thm-coef-qbar-verdier",
+        "prop-sf-localization-all-stages",
+        "lem-exc-closed-support-triangle"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "*Step 4: t-structure.* Write ${}^pD^{\\le n}$ and ${}^pD^{\\ge n}$ for the\nshifts of [def-per-perverse-subcategories]. By (1),\n$B\\in{}^pD^{\\ge1}(C)$ if and only if $\\mathcal H^bB=0$ for $b<0$ and\n$\\mathcal H^0B$ has no nonzero punctual subsheaf. Both classes are\nstrictly full, and the stability under shifts in axiom 1 of\n[def-weil-t-structure] can be read off (1).\n\nFor axiom 2, let $A\\in{}^pD^{\\le0}$ and $B\\in{}^pD^{\\ge1}$. Then $A$ is in\nstandard degrees $\\le0$ and $B$ in standard degrees $\\ge0$. The truncation\naxioms of the standard t-structure of [prop-constructible-truncations]\ngive $\\operatorname{Hom}(A,B)=\\operatorname{Hom}(\\tau^{\\ge0}A,B)\n=\\operatorname{Hom}(\\mathcal H^0A,\\tau^{\\le0}B)=\n\\operatorname{Hom}(\\mathcal H^0A,\\mathcal H^0B)$, a Hom of sheaves. The\nimage of a map $\\mathcal H^0A\\to\\mathcal H^0B$ is a punctual subsheaf of\n$\\mathcal H^0B$, hence zero.\n\nFor axiom 3, let $K$ be given, put $K'=\\tau^{\\le0}K$ and\n$\\mathcal F=\\mathcal H^0K$, and let $\\mathcal F_{\\mathrm p}$ be as in\nStep 0(ii). Complete the composite\n$K'\\to\\mathcal F[0]\\to(\\mathcal F/\\mathcal F_{\\mathrm p})[0]$ to a\ntriangle $A\\to K'\\to(\\mathcal F/\\mathcal F_{\\mathrm p})[0]\\to$. Its long\nexact sequence gives $\\mathcal H^aA=\\mathcal H^aK$ for $a<0$,\n$\\mathcal H^0A=\\mathcal F_{\\mathrm p}$ and $\\mathcal H^aA=0$ for $a>0$.\nSo $A\\in{}^pD^{\\le0}$. The octahedral axiom applied to\n$A\\to K'\\to K$ gives a triangle $A\\to K\\to B\\to$, together with a triangle\n$(\\mathcal F/\\mathcal F_{\\mathrm p})[0]\\to B\\to\\tau^{\\ge1}K\\to$. Then\n$\\mathcal H^bB=0$ for $b<0$ and\n$\\mathcal H^0B=\\mathcal F/\\mathcal F_{\\mathrm p}$, which has no punctual\nsubsheaf by Step 0(ii). So $B\\in{}^pD^{\\ge1}$, which is axiom 3 with\n$B=(B[1])[-1]$.\n\nFinally, if $K$ has standard cohomology in degrees $[a,b]$, then (1)\ngives $K\\in{}^pD^{\\le b+1}\\cap{}^pD^{\\ge a}$, so the t-structure is\nbounded. Its heart is abelian by [prop-weil-heart-abelian]. This proves\n(2), and (3) is the intersection of the two conditions in (1).",
+      "uses": [
+        "def-per-perverse-subcategories",
+        "def-weil-t-structure",
+        "prop-constructible-truncations",
+        "prop-weil-heart-abelian"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "*Step 5: basic objects.* $(j_*\\mathcal N)[1]$ has only\n$\\mathcal H^{-1}=j_*\\mathcal N$, which has no nonzero punctual subsheaf\nby Step 0(ii). $i_{x*}E$ has only $\\mathcal H^0=i_{x*}E$, which is\npunctual. By (3) both lie in the heart, which is (4).",
+      "uses": [],
+      "elementary": null
+    },
+    {
+      "text": "*Step 6: exact sequences.* In the heart of a t-structure, a sequence\n$0\\to Q\\to P\\to R\\to0$ is short exact exactly when it extends to a\ndistinguished triangle $Q\\to P\\to R\\to Q[1]$, by part (4) of\n[lem-weil-heart-short-exact-triangles]. For $P\\in\\mathrm{Perv}(C)$\nthe standard truncation triangle is\n$(\\mathcal H^{-1}P)[1]\\to P\\to(\\mathcal H^0P)[0]\\to$. Its outer terms lie\nin the heart by (3), which gives the first claim of (5). For a short exact\nsequence in the heart, the long exact cohomology sequence of the\ncorresponding triangle, together with the vanishing of $\\mathcal H^a$ for\n$a\\notin\\{-1,0\\}$ on all three terms, gives the displayed six-term\nsequence.",
+      "uses": [
+        "lem-weil-heart-short-exact-triangles"
+      ],
+      "elementary": false
+    }
+  ],
+  "proof_deps": [
+    "def-per-support-condition",
     "cor-pur-adic-and-rational-smooth-dualizing-complexes",
     "lem-per-dual-lisse-tensor",
-    "prop-constructible-truncations"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "*Step 3: the cosupport condition.* Let $K\\in D^b_c(C,\\overline{\\mathbf Q}_\\ell)$,\nand choose $U$ and $Z$ as in Step 1 for $K$. By Step 2 this choice also\nserves for $N:=D_CK$ on $U$. By [lem-weil-closed-costalk-duality] applied\nto $D_CK$, and by the biduality of [thm-coef-qbar-verdier] on $C$ and on\n$Z$, we get $Ri^!K\\cong Ri^!D_CD_CK\\cong D_Zi^*D_CK$, hence\n$i^*D_CK\\cong D_ZRi^!K$. The object $Ri^!=D_Zi^*D_C$ is constructible by\n[thm-coef-qbar-verdier]. By $(*)$ and Step 2,\n$$\n\\operatorname{CosuppCon}(K)\\iff\n\\text{(a) }\\mathcal H^b(j^*K)=0\\ (b\\le-2)\\ \\text{and (b) }\n\\mathcal H^b(Ri^!K)=0\\ (b<0).\n$$\nAssume (a). The closed-support triangle, [prop-sf-localization-all-stages]\n(on the $\\overline{\\mathbf Q}_\\ell$-category, with Weil-equivariant arrows in the Weil case;\nat each finite stage it is [lem-exc-closed-support-triangle]), with $Rj_*j^*K$ constructible,\nreads\n$$\ni_*Ri^!K\\to K\\to Rj_*j^*K\\to .\n$$\nSince $j^*K\\in D^{\\ge-1}$ and $j_*$ is left exact, $Rj_*j^*K\\in D^{\\ge-1}$\nand $\\mathcal H^{-1}(Rj_*j^*K)=j_*j^*\\mathcal H^{-1}K$. Apply the exact\nfunctor $i^*$ (note $i^*i_*=\\mathrm{id}$) to the long exact sequence of\ncohomology sheaves. This gives $\\mathcal H^b(Ri^!K)\\cong i^*\\mathcal H^bK$\nfor $b\\le-2$, and\n$$\n0\\to\\mathcal H^{-1}(Ri^!K)\\to i^*\\mathcal H^{-1}K\\to\ni^*j_*j^*\\mathcal H^{-1}K .\n$$\nThe second map is $i^*$ of the unit $\\mathcal H^{-1}K\\to j_*j^*\\mathcal\nH^{-1}K$. That unit is an isomorphism on $U$, so its kernel is\n$i_*\\mathcal H^{-1}(Ri^!K)$, which is the largest punctual subsheaf of\n$\\mathcal H^{-1}K$ by Step 0(ii). So under (a), condition (b) says that\n$\\mathcal H^bK$ vanishes on $Z$ for $b\\le-2$ and that $\\mathcal H^{-1}K$\nhas no nonzero punctual subsheaf. Together with (a) on $U$, this is the\nsecond half of (1).",
-   "uses": [
+    "prop-constructible-truncations",
     "lem-weil-closed-costalk-duality",
     "thm-coef-qbar-verdier",
     "prop-sf-localization-all-stages",
-    "lem-exc-closed-support-triangle"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "*Step 4: t-structure.* Write ${}^pD^{\\le n}$ and ${}^pD^{\\ge n}$ for the\nshifts of [def-per-perverse-subcategories]. By (1),\n$B\\in{}^pD^{\\ge1}(C)$ if and only if $\\mathcal H^bB=0$ for $b<0$ and\n$\\mathcal H^0B$ has no nonzero punctual subsheaf. Both classes are\nstrictly full, and the stability under shifts in axiom 1 of\n[def-weil-t-structure] can be read off (1).\n\nFor axiom 2, let $A\\in{}^pD^{\\le0}$ and $B\\in{}^pD^{\\ge1}$. Then $A$ is in\nstandard degrees $\\le0$ and $B$ in standard degrees $\\ge0$. The truncation\naxioms of the standard t-structure of [prop-constructible-truncations]\ngive $\\operatorname{Hom}(A,B)=\\operatorname{Hom}(\\tau^{\\ge0}A,B)\n=\\operatorname{Hom}(\\mathcal H^0A,\\tau^{\\le0}B)=\n\\operatorname{Hom}(\\mathcal H^0A,\\mathcal H^0B)$, a Hom of sheaves. The\nimage of a map $\\mathcal H^0A\\to\\mathcal H^0B$ is a punctual subsheaf of\n$\\mathcal H^0B$, hence zero.\n\nFor axiom 3, let $K$ be given, put $K'=\\tau^{\\le0}K$ and\n$\\mathcal F=\\mathcal H^0K$, and let $\\mathcal F_{\\mathrm p}$ be as in\nStep 0(ii). Complete the composite\n$K'\\to\\mathcal F[0]\\to(\\mathcal F/\\mathcal F_{\\mathrm p})[0]$ to a\ntriangle $A\\to K'\\to(\\mathcal F/\\mathcal F_{\\mathrm p})[0]\\to$. Its long\nexact sequence gives $\\mathcal H^aA=\\mathcal H^aK$ for $a<0$,\n$\\mathcal H^0A=\\mathcal F_{\\mathrm p}$ and $\\mathcal H^aA=0$ for $a>0$.\nSo $A\\in{}^pD^{\\le0}$. The octahedral axiom applied to\n$A\\to K'\\to K$ gives a triangle $A\\to K\\to B\\to$, together with a triangle\n$(\\mathcal F/\\mathcal F_{\\mathrm p})[0]\\to B\\to\\tau^{\\ge1}K\\to$. Then\n$\\mathcal H^bB=0$ for $b<0$ and\n$\\mathcal H^0B=\\mathcal F/\\mathcal F_{\\mathrm p}$, which has no punctual\nsubsheaf by Step 0(ii). So $B\\in{}^pD^{\\ge1}$, which is axiom 3 with\n$B=(B[1])[-1]$.\n\nFinally, if $K$ has standard cohomology in degrees $[a,b]$, then (1)\ngives $K\\in{}^pD^{\\le b+1}\\cap{}^pD^{\\ge a}$, so the t-structure is\nbounded. Its heart is abelian by [prop-weil-heart-abelian]. This proves\n(2), and (3) is the intersection of the two conditions in (1).",
-   "uses": [
+    "lem-exc-closed-support-triangle",
     "def-per-perverse-subcategories",
     "def-weil-t-structure",
-    "prop-constructible-truncations",
-    "prop-weil-heart-abelian"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "*Step 5: basic objects.* $(j_*\\mathcal N)[1]$ has only\n$\\mathcal H^{-1}=j_*\\mathcal N$, which has no nonzero punctual subsheaf\nby Step 0(ii). $i_{x*}E$ has only $\\mathcal H^0=i_{x*}E$, which is\npunctual. By (3) both lie in the heart, which is (4).",
-   "uses": [],
-   "elementary": null
-  },
-  {
-   "text": "*Step 6: exact sequences.* In the heart of a t-structure, a sequence\n$0\\to Q\\to P\\to R\\to0$ is short exact exactly when it extends to a\ndistinguished triangle $Q\\to P\\to R\\to Q[1]$, by part (4) of\n[lem-weil-heart-short-exact-triangles]. For $P\\in\\mathrm{Perv}(C)$\nthe standard truncation triangle is\n$(\\mathcal H^{-1}P)[1]\\to P\\to(\\mathcal H^0P)[0]\\to$. Its outer terms lie\nin the heart by (3), which gives the first claim of (5). For a short exact\nsequence in the heart, the long exact cohomology sequence of the\ncorresponding triangle, together with the vanishing of $\\mathcal H^a$ for\n$a\\notin\\{-1,0\\}$ on all three terms, gives the displayed six-term\nsequence.",
-   "uses": [
+    "prop-weil-heart-abelian",
     "lem-weil-heart-short-exact-triangles"
-   ],
-   "elementary": false
-  }
- ],
- "proof_deps": [
-  "def-per-support-condition",
-  "cor-pur-adic-and-rational-smooth-dualizing-complexes",
-  "lem-per-dual-lisse-tensor",
-  "prop-constructible-truncations",
-  "lem-weil-closed-costalk-duality",
-  "thm-coef-qbar-verdier",
-  "prop-sf-localization-all-stages",
-  "lem-exc-closed-support-triangle",
-  "def-per-perverse-subcategories",
-  "def-weil-t-structure",
-  "prop-weil-heart-abelian",
-  "lem-weil-heart-short-exact-triangles"
- ],
- "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-perverse/thm-a1-curve-perverse-heart.md",
-  "place": "## Proof"
- },
- "mathlib_searches": [],
- "mathlib_match": null,
- "status": "imported",
- "merged_into": null,
- "import_flags": [
-  "cites_remark"
- ],
- "blueprint_kind": "theorem",
- "blueprint_order": 2747,
- "blueprint_uses": [
-  "cor-pur-adic-and-rational-smooth-dualizing-complexes",
-  "def-per-perverse-subcategories",
-  "def-per-support-condition",
-  "def-weil-t-structure",
-  "def-wf-middle-extension",
-  "lem-exc-closed-support-triangle",
-  "lem-per-dual-lisse-tensor",
-  "lem-weil-closed-costalk-duality",
-  "lem-weil-heart-short-exact-triangles",
-  "prop-constructible-truncations",
-  "prop-sf-localization-all-stages",
-  "prop-weil-heart-abelian",
-  "rem-dl-a1-conventions",
-  "thm-coef-qbar-verdier"
- ],
- "proof_split_by": "labels",
- "lean_audit": {
-  "master": {
-   "state": "none",
-   "decls": [],
-   "missing": []
+  ],
+  "proof_origin": {
+    "by": "agent",
+    "document": "literature/blueprint/master/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-perverse/thm-a1-curve-perverse-heart.md",
+    "place": "## Proof"
   },
-  "slopmaster2": {
-   "state": "sorry_here",
-   "decls": [
-    {
-     "name": "AlgebraicGeometry.WeilComplex.IsCurvePerverseLE",
-     "module": "WeilConjectures.DeligneLaumon.AffineLine.Perverse",
-     "lines": [
-      104,
-      109
-     ],
-     "kind": "def",
-     "sorry": false
+  "mathlib_searches": [],
+  "mathlib_match": null,
+  "status": "imported",
+  "merged_into": null,
+  "import_flags": [
+    "cites_remark"
+  ],
+  "blueprint_kind": "theorem",
+  "blueprint_order": 2747,
+  "blueprint_uses": [
+    "cor-pur-adic-and-rational-smooth-dualizing-complexes",
+    "def-per-perverse-subcategories",
+    "def-per-support-condition",
+    "def-weil-t-structure",
+    "def-wf-middle-extension",
+    "lem-exc-closed-support-triangle",
+    "lem-per-dual-lisse-tensor",
+    "lem-weil-closed-costalk-duality",
+    "lem-weil-heart-short-exact-triangles",
+    "prop-constructible-truncations",
+    "prop-sf-localization-all-stages",
+    "prop-weil-heart-abelian",
+    "rem-dl-a1-conventions",
+    "thm-coef-qbar-verdier"
+  ],
+  "proof_split_by": "labels",
+  "lean_audit": {
+    "master": {
+      "state": "none",
+      "decls": [],
+      "missing": []
     },
-    {
-     "name": "AlgebraicGeometry.WeilComplex.isCurvePerverseLower_iff_forall_hom_eq_zero",
-     "module": "WeilConjectures.DeligneLaumon.AffineLine.Perverse",
-     "lines": [
-      137,
-      205
-     ],
-     "kind": "theorem",
-     "sorry": false
-    },
-    {
-     "name": "AlgebraicGeometry.WeilComplex.isCurvePerverse_toComplex_obj",
-     "module": "WeilConjectures.DeligneLaumon.AffineLine.Perverse",
-     "lines": [
-      209,
-      226
-     ],
-     "kind": "theorem",
-     "sorry": false
-    },
-    {
-     "name": "AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.isCurvePerverse_middleExtension",
-     "module": "WeilConjectures.DeligneLaumon.AffineLine.Perverse",
-     "lines": [
-      236,
-      242
-     ],
-     "kind": "theorem",
-     "sorry": true
+    "slopmaster2": {
+      "state": "sorry_here",
+      "decls": [
+        {
+          "name": "AlgebraicGeometry.WeilComplex.IsCurvePerverseLE",
+          "module": "WeilConjectures.DeligneLaumon.AffineLine.Perverse",
+          "lines": [
+            104,
+            109
+          ],
+          "kind": "def",
+          "sorry": false
+        },
+        {
+          "name": "AlgebraicGeometry.WeilComplex.isCurvePerverseLower_iff_forall_hom_eq_zero",
+          "module": "WeilConjectures.DeligneLaumon.AffineLine.Perverse",
+          "lines": [
+            137,
+            205
+          ],
+          "kind": "theorem",
+          "sorry": false
+        },
+        {
+          "name": "AlgebraicGeometry.WeilComplex.isCurvePerverse_toComplex_obj",
+          "module": "WeilConjectures.DeligneLaumon.AffineLine.Perverse",
+          "lines": [
+            209,
+            226
+          ],
+          "kind": "theorem",
+          "sorry": false
+        },
+        {
+          "name": "AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.isCurvePerverse_middleExtension",
+          "module": "WeilConjectures.DeligneLaumon.AffineLine.Perverse",
+          "lines": [
+            236,
+            242
+          ],
+          "kind": "theorem",
+          "sorry": true
+        }
+      ],
+      "missing": [],
+      "open": []
     }
-   ],
-   "missing": [],
-   "open": []
+  },
+  "chapter": "sec-deligne-laumon-a1",
+  "unit": "sk-p-dl-a1-perverse",
+  "lean": {
+    "module": "WeilConjectures.DeligneLaumon.AffineLine.Perverse",
+    "declaration": "AlgebraicGeometry.WeilComplex.IsCurvePerverseLE",
+    "branch": "slopmaster2",
+    "line": 104,
+    "declarations": [
+      "AlgebraicGeometry.WeilComplex.IsCurvePerverseLE",
+      "AlgebraicGeometry.WeilComplex.isCurvePerverseLower_iff_forall_hom_eq_zero",
+      "AlgebraicGeometry.WeilComplex.isCurvePerverse_toComplex_obj",
+      "AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.isCurvePerverse_middleExtension"
+    ],
+    "sorry_free": false,
+    "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state sorry_here)"
   }
- },
- "chapter": "sec-deligne-laumon-a1",
- "unit": "sk-p-dl-a1-perverse"
 }

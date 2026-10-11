@@ -1,107 +1,111 @@
 {
- "id": "lem-weil-pbc-module-pullback-quasi-coherent",
- "blueprint": {
-  "is": null,
-  "from": {
-   "node": "thm-weil-pbc-finite-etale-lifting",
-   "place": "step 7 of its split (source: Lemma 0GS2, proof: the essential-surjectivity paragraphs)",
-   "via": [
-    "lem-weil-pbc-closed-immersion-pushforward-annihilated",
-    "lem-weil-pbc-module-support-proper-over-base",
-    "lem-weil-pbc-algebraize-finite-over-proper",
-    "lem-weil-pbc-finite-etale-lifting-complete",
-    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
-   ]
+  "id": "lem-weil-pbc-module-pullback-quasi-coherent",
+  "blueprint": {
+    "is": null,
+    "from": {
+      "node": "thm-weil-pbc-finite-etale-lifting",
+      "place": "step 7 of its split (source: Lemma 0GS2, proof: the essential-surjectivity paragraphs)",
+      "via": [
+        "lem-weil-pbc-closed-immersion-pushforward-annihilated",
+        "lem-weil-pbc-module-support-proper-over-base",
+        "lem-weil-pbc-algebraize-finite-over-proper",
+        "lem-weil-pbc-finite-etale-lifting-complete",
+        "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+      ]
+    },
+    "same_as": null
   },
-  "same_as": null
- },
- "kind": "statement",
- "title": "The pullback of a quasi-coherent module is quasi-coherent",
- "statement": "Let $f:X\\to Y$ be a morphism of schemes [def-pc-scheme] and $\\mathcal G$ a quasi-coherent $\\mathcal O_Y$-module [pqf-def-coherent]. Then the pullback $f^*\\mathcal G$ [def-pc-module-pullback] is a quasi-coherent $\\mathcal O_X$-module.",
- "source": {
-  "document": "literature/stacks-project/modules.tex",
-  "place": "Modules, Lemma 01BG (label lemma-pullback-quasi-coherent) with its proof (local global presentation by direct sums of O_Y, f^* right exact and commuting with direct sums, f^*O_Y = O_X); for schemes, quasi-coherent in the sense of Modules 01BD agrees with the affine-local definition of [pqf-def-coherent] by Schemes, Lemma 01IA (lemma-quasi-coherent-affine) and Section 01LA (section-quasi-coherent)"
- },
- "stmt_deps": [
-  "def-pc-scheme",
-  "pqf-def-coherent",
-  "def-pc-module-pullback"
- ],
- "mathlib_searches": [
-  {
-   "tool": "leansearch",
-   "query": "pullback of a quasi-coherent sheaf of modules along a morphism of schemes is quasi-coherent",
-   "results": "SheafOfModules.pullback, SheafOfModules.pullbackPushforwardAdjunction, SheafOfModules.pullbackObjFreeIso (Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous/PullbackFree); AlgebraicGeometry.Scheme.Modules.pullback, pullbackPushforwardAdjunction, instAdditivePullback (Mathlib.AlgebraicGeometry.Modules.Sheaf)",
-   "date": "2026-10-10",
-   "verdict": "no match: the functor exists, no quasi-coherence statement"
+  "kind": "statement",
+  "title": "The pullback of a quasi-coherent module is quasi-coherent",
+  "statement": "Let $f:X\\to Y$ be a morphism of schemes [def-pc-scheme] and $\\mathcal G$ a quasi-coherent $\\mathcal O_Y$-module [pqf-def-coherent]. Then the pullback $f^*\\mathcal G$ [def-pc-module-pullback] is a quasi-coherent $\\mathcal O_X$-module.",
+  "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Modules, Lemma 01BG (label lemma-pullback-quasi-coherent) with its proof (local global presentation by direct sums of O_Y, f^* right exact and commuting with direct sums, f^*O_Y = O_X); for schemes, quasi-coherent in the sense of Modules 01BD agrees with the affine-local definition of [pqf-def-coherent] by Schemes, Lemma 01IA (lemma-quasi-coherent-affine) and Section 01LA (section-quasi-coherent)"
   },
-  {
-   "tool": "leanfinder",
-   "query": "the inverse image f^* of a quasi-coherent O_Y-module under a morphism of schemes f : X → Y is quasi-coherent",
-   "results": "AlgebraicGeometry.Scheme.Modules.pullback, Scheme.Modules.pushforward, Scheme.Modules.pushforward_obj_obj (Mathlib.AlgebraicGeometry.Modules.Sheaf); SheafOfModules.pullback, SheafOfModules.pushforward",
-   "date": "2026-10-10",
-   "verdict": "no match"
-  },
-  {
-   "tool": "loogle",
-   "query": "AlgebraicGeometry.Scheme.Modules.pullback, SheafOfModules.IsQuasicoherent",
-   "results": "none",
-   "date": "2026-10-10",
-   "verdict": "no match"
-  },
-  {
-   "tool": "grep",
-   "query": "grep -rn 'IsQuasicoherent' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib --include=*.lean | grep -iE 'pullback|map|presentation'; grep -n 'theorem|lemma|instance' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Modules/Tilde.lean",
-   "results": "Presentation.isQuasicoherent, Presentation.map (Quasicoherent.lean:180, a presentation maps along a colimit-preserving functor with F(unit) ≅ unit), isQuasicoherent_pushforward(_of_isLeftAdjoint) (:329, :340; pushforward along a continuous cocontinuous functor of sites, used for restriction to opens), Scheme.Modules.isQuasicoherent_restrictFunctor (Tilde.lean:576, open immersions only); nothing for Scheme.Modules.pullback of a general morphism",
-   "date": "2026-10-10",
-   "verdict": "no match: only open immersions (restriction); the ingredients Presentation.map and SheafOfModules.pullbackObjFreeIso exist"
-  }
- ],
- "mathlib_match": null,
- "status": "unsplit",
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
- "merged_into": null,
- "created": {
-  "by": "worker",
-  "item": "lem-weil-pbc-closed-immersion-pushforward-annihilated",
-  "date": "2026-10-10"
- },
- "lean_audit": {
-  "master": {
-   "state": "none",
-   "decls": [],
-   "missing": [
-    "AlgebraicGeometry.Scheme.Modules.isQuasicoherent_pullback"
-   ]
-  },
-  "slopmaster2": {
-   "state": "closed",
-   "decls": [
-    {
-     "name": "AlgebraicGeometry.Scheme.Modules.isQuasicoherent_pullback",
-     "module": "WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde",
-     "lines": [
-      338,
-      362
-     ],
-     "kind": "theorem",
-     "sorry": false
-    }
-   ],
-   "missing": [],
-   "open": []
-  }
- },
- "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1",
- "lean": {
-  "branch": "slopmaster2",
-  "declarations": [
-   "AlgebraicGeometry.Scheme.Modules.isQuasicoherent_pullback"
+  "stmt_deps": [
+    "def-pc-scheme",
+    "pqf-def-coherent",
+    "def-pc-module-pullback"
   ],
-  "note": "attached by the lead on 2026-10-10: WeilConjectures/Mathlib/AlgebraicGeometry/Modules/Tilde.lean:343, sorry-free per the sorry map; instance: for g : X -> Y and M : Y.Modules with M.IsQuasicoherent, (Modules.pullback g).obj M is quasi-coherent, which is the statement."
- },
- "lead_note": "Lean attached by the lead (see lean)."
+  "mathlib_searches": [
+    {
+      "tool": "leansearch",
+      "query": "pullback of a quasi-coherent sheaf of modules along a morphism of schemes is quasi-coherent",
+      "results": "SheafOfModules.pullback, SheafOfModules.pullbackPushforwardAdjunction, SheafOfModules.pullbackObjFreeIso (Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous/PullbackFree); AlgebraicGeometry.Scheme.Modules.pullback, pullbackPushforwardAdjunction, instAdditivePullback (Mathlib.AlgebraicGeometry.Modules.Sheaf)",
+      "date": "2026-10-10",
+      "verdict": "no match: the functor exists, no quasi-coherence statement"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "the inverse image f^* of a quasi-coherent O_Y-module under a morphism of schemes f : X → Y is quasi-coherent",
+      "results": "AlgebraicGeometry.Scheme.Modules.pullback, Scheme.Modules.pushforward, Scheme.Modules.pushforward_obj_obj (Mathlib.AlgebraicGeometry.Modules.Sheaf); SheafOfModules.pullback, SheafOfModules.pushforward",
+      "date": "2026-10-10",
+      "verdict": "no match"
+    },
+    {
+      "tool": "loogle",
+      "query": "AlgebraicGeometry.Scheme.Modules.pullback, SheafOfModules.IsQuasicoherent",
+      "results": "none",
+      "date": "2026-10-10",
+      "verdict": "no match"
+    },
+    {
+      "tool": "grep",
+      "query": "grep -rn 'IsQuasicoherent' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib --include=*.lean | grep -iE 'pullback|map|presentation'; grep -n 'theorem|lemma|instance' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Modules/Tilde.lean",
+      "results": "Presentation.isQuasicoherent, Presentation.map (Quasicoherent.lean:180, a presentation maps along a colimit-preserving functor with F(unit) ≅ unit), isQuasicoherent_pushforward(_of_isLeftAdjoint) (:329, :340; pushforward along a continuous cocontinuous functor of sites, used for restriction to opens), Scheme.Modules.isQuasicoherent_restrictFunctor (Tilde.lean:576, open immersions only); nothing for Scheme.Modules.pullback of a general morphism",
+      "date": "2026-10-10",
+      "verdict": "no match: only open immersions (restriction); the ingredients Presentation.map and SheafOfModules.pullbackObjFreeIso exist"
+    }
+  ],
+  "mathlib_match": null,
+  "status": "unsplit",
+  "proof": [],
+  "proof_deps": [],
+  "proof_origin": null,
+  "merged_into": null,
+  "created": {
+    "by": "worker",
+    "item": "lem-weil-pbc-closed-immersion-pushforward-annihilated",
+    "date": "2026-10-10"
+  },
+  "lean_audit": {
+    "master": {
+      "state": "none",
+      "decls": [],
+      "missing": [
+        "AlgebraicGeometry.Scheme.Modules.isQuasicoherent_pullback"
+      ]
+    },
+    "slopmaster2": {
+      "state": "closed",
+      "decls": [
+        {
+          "name": "AlgebraicGeometry.Scheme.Modules.isQuasicoherent_pullback",
+          "module": "WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde",
+          "lines": [
+            338,
+            362
+          ],
+          "kind": "theorem",
+          "sorry": false
+        }
+      ],
+      "missing": [],
+      "open": []
+    }
+  },
+  "chapter": "sec-proper-base-change",
+  "unit": "sk-thm-p1",
+  "lean": {
+    "module": "WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde",
+    "declaration": "AlgebraicGeometry.Scheme.Modules.isQuasicoherent_pullback",
+    "branch": "slopmaster2",
+    "line": 338,
+    "declarations": [
+      "AlgebraicGeometry.Scheme.Modules.isQuasicoherent_pullback"
+    ],
+    "sorry_free": true,
+    "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state closed)"
+  },
+  "lead_note": "Lean attached by the lead (see lean)."
 }

@@ -1,173 +1,177 @@
 {
- "id": "def-weil-pbc-derived-inverse-image",
- "blueprint": {
-  "is": null,
-  "from": {
-   "node": "def-weil-pbc-derived-exchange",
-   "place": "its statement (a notion the statement uses)",
-   "via": []
+  "id": "def-weil-pbc-derived-inverse-image",
+  "blueprint": {
+    "is": null,
+    "from": {
+      "node": "def-weil-pbc-derived-exchange",
+      "place": "its statement (a notion the statement uses)",
+      "via": []
+    },
+    "same_as": null
   },
-  "same_as": null
- },
- "kind": "definition",
- "title": "Inverse image on bounded below derived categories",
- "statement": "Let $u:U\\to V$ be a morphism of schemes [def-pc-scheme], let $\\Ab(T_{\\Et})$ denote the category of abelian sheaves on the small etale site of a scheme $T$ [def-weil-pbc-abelian-etale-sheaves], and let $u^{-1}:\\Ab(V_{\\Et})\\to\\Ab(U_{\\Et})$ be the inverse image [def-weil-pbc-inverse-image], an exact functor [prop-weil-pbc-inverse-image-exact]. Applying $u^{-1}$ termwise to cochain complexes, $K^\\bullet\\mapsto u^{-1}K^\\bullet=(u^{-1}K^r,u^{-1}d^r)_r$, induces a triangulated functor $u^{-1}_D:D(V_{\\Et})\\to D(U_{\\Et})$ [lem-sf-exact-functor-derived-triangulated] together with a natural isomorphism\n\n$$\n \\varphi_{K^\\bullet}:u^{-1}_D(QK^\\bullet)\\xrightarrow{\\ \\sim\\ }Q(u^{-1}K^\\bullet),\n$$\n\n$Q$ denoting the localization functors from cochain complexes to the derived categories [def-weil-abstract-derived-category], compatible with the shift isomorphisms of $u^{-1}_D$ and of $Q$, the shift isomorphism $u^{-1}(K^\\bullet[n])=(u^{-1}K^\\bullet)[n]$ of the termwise functor being the identity in each degree [lem-weil-pbc-exact-functor-derived-factorization]. The functor $u^{-1}_D$ carries $\\Dplus(V_{\\Et})$ into $\\Dplus(U_{\\Et})$ [def-weil-pbc-derived-categories], [lem-weil-pbc-exact-functor-bounded-below]. The *inverse image on the bounded below derived categories*\n\n$$\n u^{-1}:\\Dplus(V_{\\Et})\\longrightarrow\\Dplus(U_{\\Et}),\\qquad u^{-1}K=u^{-1}_DK,\n$$\n\nis the restriction of $u^{-1}_D$ to these full triangulated subcategories, with the restricted shift isomorphisms; it is a triangulated functor, and its composite with the inclusion $\\Dplus(U_{\\Et})\\subset D(U_{\\Et})$ is the composite of the inclusion $\\Dplus(V_{\\Et})\\subset D(V_{\\Et})$ with $u^{-1}_D$ [lem-weil-pbc-triangulated-functor-restriction]. No resolution is used: if $K^\\bullet$ is a bounded below complex of abelian sheaves on $V_{\\Et}$, then $QK^\\bullet\\in\\Dplus(V_{\\Et})$, $u^{-1}K^\\bullet$ is bounded below, and $\\varphi_{K^\\bullet}:u^{-1}(QK^\\bullet)\\xrightarrow{\\sim}Q(u^{-1}K^\\bullet)$, so the termwise complex $u^{-1}K^\\bullet$ represents $u^{-1}(QK^\\bullet)$. Following the source this functor is written $u^{-1}$ rather than $Lu^{-1}$. For a commutative ring $R$, the same construction applied to the exact functor $u^{-1}:\\Mod(V_{\\Et},R)\\to\\Mod(U_{\\Et},R)$ on sheaves of modules over the constant sheaves of rings [prop-weil-pbc-inverse-image-modules-exact] (in place of $u^{-1}$ on abelian sheaves; the three facts cited above are about arbitrary exact functors between abelian categories) defines $u^{-1}:\\Dplus(V_{\\Et},R)\\to\\Dplus(U_{\\Et},R)$.",
- "source": {
-  "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Section 0735 (section-base-change-map), paragraph before Lemma 0736: an exact pullback g^* has a derived functor on D computed by pulling back any representative (Derived Categories, Lemma 015F) and preserves the bounded (above, below) subcategories; it is written g^* rather than Lg^*"
- },
- "stmt_deps": [
-  "def-pc-scheme",
-  "def-weil-pbc-abelian-etale-sheaves",
-  "def-weil-pbc-inverse-image",
-  "prop-weil-pbc-inverse-image-exact",
-  "lem-sf-exact-functor-derived-triangulated",
-  "def-weil-abstract-derived-category",
-  "lem-weil-pbc-exact-functor-derived-factorization",
-  "def-weil-pbc-derived-categories",
-  "lem-weil-pbc-exact-functor-bounded-below",
-  "lem-weil-pbc-triangulated-functor-restriction",
-  "prop-weil-pbc-inverse-image-modules-exact"
- ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
- "mathlib_searches": [
-  {
-   "tool": "grep",
-   "query": "grep -rln 'mapDerivedCategoryPlus\\|derivedPlus\\|derivedAdjunctionPlus' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
-   "results": "none; Mathlib has Functor.mapDerivedCategory on the unbounded D (Algebra/Homology/DerivedCategory/ExactFunctor.lean:36) and DerivedCategory.Plus (TStructure.lean:204), but no restriction of mapDerivedCategory to DerivedCategory.Plus",
-   "date": "2026-10-09",
-   "verdict": "no match (generalization on D: CategoryTheory.Functor.mapDerivedCategory; the restriction to D^+ needs lem-weil-pbc-exact-functor-bounded-below)"
+  "kind": "definition",
+  "title": "Inverse image on bounded below derived categories",
+  "statement": "Let $u:U\\to V$ be a morphism of schemes [def-pc-scheme], let $\\Ab(T_{\\Et})$ denote the category of abelian sheaves on the small etale site of a scheme $T$ [def-weil-pbc-abelian-etale-sheaves], and let $u^{-1}:\\Ab(V_{\\Et})\\to\\Ab(U_{\\Et})$ be the inverse image [def-weil-pbc-inverse-image], an exact functor [prop-weil-pbc-inverse-image-exact]. Applying $u^{-1}$ termwise to cochain complexes, $K^\\bullet\\mapsto u^{-1}K^\\bullet=(u^{-1}K^r,u^{-1}d^r)_r$, induces a triangulated functor $u^{-1}_D:D(V_{\\Et})\\to D(U_{\\Et})$ [lem-sf-exact-functor-derived-triangulated] together with a natural isomorphism\n\n$$\n \\varphi_{K^\\bullet}:u^{-1}_D(QK^\\bullet)\\xrightarrow{\\ \\sim\\ }Q(u^{-1}K^\\bullet),\n$$\n\n$Q$ denoting the localization functors from cochain complexes to the derived categories [def-weil-abstract-derived-category], compatible with the shift isomorphisms of $u^{-1}_D$ and of $Q$, the shift isomorphism $u^{-1}(K^\\bullet[n])=(u^{-1}K^\\bullet)[n]$ of the termwise functor being the identity in each degree [lem-weil-pbc-exact-functor-derived-factorization]. The functor $u^{-1}_D$ carries $\\Dplus(V_{\\Et})$ into $\\Dplus(U_{\\Et})$ [def-weil-pbc-derived-categories], [lem-weil-pbc-exact-functor-bounded-below]. The *inverse image on the bounded below derived categories*\n\n$$\n u^{-1}:\\Dplus(V_{\\Et})\\longrightarrow\\Dplus(U_{\\Et}),\\qquad u^{-1}K=u^{-1}_DK,\n$$\n\nis the restriction of $u^{-1}_D$ to these full triangulated subcategories, with the restricted shift isomorphisms; it is a triangulated functor, and its composite with the inclusion $\\Dplus(U_{\\Et})\\subset D(U_{\\Et})$ is the composite of the inclusion $\\Dplus(V_{\\Et})\\subset D(V_{\\Et})$ with $u^{-1}_D$ [lem-weil-pbc-triangulated-functor-restriction]. No resolution is used: if $K^\\bullet$ is a bounded below complex of abelian sheaves on $V_{\\Et}$, then $QK^\\bullet\\in\\Dplus(V_{\\Et})$, $u^{-1}K^\\bullet$ is bounded below, and $\\varphi_{K^\\bullet}:u^{-1}(QK^\\bullet)\\xrightarrow{\\sim}Q(u^{-1}K^\\bullet)$, so the termwise complex $u^{-1}K^\\bullet$ represents $u^{-1}(QK^\\bullet)$. Following the source this functor is written $u^{-1}$ rather than $Lu^{-1}$. For a commutative ring $R$, the same construction applied to the exact functor $u^{-1}:\\Mod(V_{\\Et},R)\\to\\Mod(U_{\\Et},R)$ on sheaves of modules over the constant sheaves of rings [prop-weil-pbc-inverse-image-modules-exact] (in place of $u^{-1}$ on abelian sheaves; the three facts cited above are about arbitrary exact functors between abelian categories) defines $u^{-1}:\\Dplus(V_{\\Et},R)\\to\\Dplus(U_{\\Et},R)$.",
+  "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Section 0735 (section-base-change-map), paragraph before Lemma 0736: an exact pullback g^* has a derived functor on D computed by pulling back any representative (Derived Categories, Lemma 015F) and preserves the bounded (above, below) subcategories; it is written g^* rather than Lg^*"
   },
-  {
-   "tool": "grep",
-   "query": "grep -rn 'Etale\\|smallEtale' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/DerivedCategory/",
-   "results": "none: no etale derived categories or inverse images in Mathlib",
-   "date": "2026-10-09",
-   "verdict": "no match"
-  },
-  {
-   "tool": "leansearch",
-   "query": "exact functor between abelian categories induces triangulated functor on derived categories",
-   "results": "Functor.mapDerivedCategory and its IsTriangulated/Linear instances (Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor); Abelian.Ext.mapExactFunctor; Functor.mapHomologicalComplexUpToQuasiIso; HomotopyCategory…mapHomotopyCategory",
-   "date": "2026-10-09",
-   "verdict": "generalization on the unbounded D only: Functor.mapDerivedCategory (node lem-sf-exact-functor-derived-triangulated); no functor on DerivedCategory.Plus"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "exact functor induces functor between bounded below derived categories D^+",
-   "results": "Functor.mapDerivedCategory; mapDerivedCategoryFactorsh; mapDerivedCategoryFactors; Lifting instance; instIsTriangulatedDerivedCategoryMapDerivedCategory",
-   "date": "2026-10-09",
-   "verdict": "no match for D^+"
-  },
-  {
-   "tool": "loogle",
-   "query": "DerivedCategory.Plus, CategoryTheory.Functor.mapDerivedCategory",
-   "results": "none",
-   "date": "2026-10-09",
-   "verdict": "no match"
-  },
-  {
-   "tool": "grep",
-   "query": "rg -n 'Plus' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean; rg -ln 'mapDerivedCategoryPlus|mapHomotopyCategoryPlus' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib; sed -n 20,50p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/DerivedCategory/RightDerivedFunctorPlus.lean",
-   "results": "DerivedCategory.Plus exists (DerivedCategory/Plus.lean, full subcategory of D); Functor.mapHomotopyCategoryPlus (HomotopyCategory/Plus.lean:265) on K^+; Functor.rightDerivedFunctorPlus (RightDerivedFunctorPlus.lean:36) for C with enough injectives; no exact-functor restriction to D^+",
-   "date": "2026-10-09",
-   "verdict": "no match: the restriction of mapDerivedCategory to D^+ needs lem-weil-pbc-exact-functor-bounded-below; rightDerivedFunctorPlus of an exact functor agrees with it only by a theorem"
-  },
-  {
-   "tool": "leansearch",
-   "query": "functor on bounded below derived category DerivedCategory.Plus induced by exact functor",
-   "results": "Functor.mapDerivedCategory (Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor), Functor.mapHomologicalComplexUpToQuasiIso, Abelian.Ext.mapExactFunctor, Functor.mapExtAddHom, HomotopyCategory.instIsTriangulatedIntUpMapHomotopyCategory, ExactFunctor.of",
-   "date": "2026-10-09",
-   "verdict": "no match on D^+ (only the unbounded mapDerivedCategory)"
-  },
-  {
-   "tool": "loogle",
-   "query": "CategoryTheory.Functor.mapDerivedCategory, DerivedCategory.Plus",
-   "results": "none",
-   "date": "2026-10-09",
-   "verdict": "no match: no Mathlib declaration mentions both"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "exact functor F between abelian categories restricts to a functor between bounded below derived categories D^+",
-   "results": "Functor.mapDerivedCategory, Abelian.Ext.mapExactFunctor(_hom), mapDerivedCategoryFactors, mapDerivedCategoryFactorsh, the Localization.Lifting instance, instIsTriangulatedDerivedCategoryMapDerivedCategory, mapHomologicalComplexUpToQuasiIso",
-   "date": "2026-10-09",
-   "verdict": "no match on D^+"
-  },
-  {
-   "tool": "grep",
-   "query": "rg -l 'mapDerivedCategory' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib --glob '*.lean'; rg -n 'Plus' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean; rg -n 'mapHomotopyCategoryPlus' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/HomotopyCategory/Plus.lean",
-   "results": "mapDerivedCategory occurs only in DerivedCategory/ExactFunctor.lean and DerivedCategory/Ext/Map.lean; ExactFunctor.lean never mentions Plus; Functor.mapHomotopyCategoryPlus (HomotopyCategory/Plus.lean:265) on K^+ only; no preservation of IsGE by mapDerivedCategory",
-   "date": "2026-10-09",
-   "verdict": "no match: Mathlib has the functor on D (mapDerivedCategory) and the subcategory DerivedCategory.Plus, but neither the restriction nor the preservation of D^+ (lem-weil-pbc-exact-functor-bounded-below), so the node is not a leaf; the restriction itself is ObjectProperty.lift (lem-weil-pbc-triangulated-functor-restriction)"
-  }
- ],
- "mathlib_match": null,
- "status": "split",
- "merged_into": null,
- "import_flags": [],
- "created": {
-  "by": "worker",
-  "item": "def-weil-pbc-derived-exchange",
-  "date": "2026-10-09"
- },
- "lean_audit": {
-  "master": {
-   "state": "closed",
-   "decls": [
-    {
-     "name": "CategoryTheory.Functor.mapDerivedCategoryPlus",
-     "module": "WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor",
-     "lines": [
-      142,
-      151
-     ],
-     "kind": "def",
-     "sorry": false
-    }
-   ],
-   "missing": [],
-   "open": []
-  },
-  "slopmaster2": {
-   "state": "closed",
-   "decls": [
-    {
-     "name": "CategoryTheory.Functor.mapDerivedCategoryPlus",
-     "module": "WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor",
-     "lines": [
-      400,
-      409
-     ],
-     "kind": "def",
-     "sorry": false
-    }
-   ],
-   "missing": [],
-   "open": []
-  }
- },
- "chapter": "sec-proper-base-change",
- "unit": "sk-def-exchange",
- "split_report": {
-  "date": "2026-10-09",
-  "item": "def-weil-pbc-derived-inverse-image",
-  "worker": "stage1",
-  "summary": "Checked against Stacks sites-cohomology.tex Section 0735 (paragraph before Lemma 0736), derived.tex Lemma 015F and sites-modules.tex Lemma 04JC. Statement rewritten to name a node for every notion and every claim: 'morphism of schemes' repointed from the grab-bag def-weil-pbc-scheme-conventions to def-pc-scheme; Ab(T_et) now cites def-weil-pbc-abelian-etale-sheaves. lem-sf-exact-functor-derived-triangulated states the termwise induced functor and that it is triangulated, but not the natural isomorphism u^{-1}_D(QK) = Q(u^{-1}K) nor the compatibility of the shift isomorphisms with the termwise identity (its Mathlib match has both, as mapDerivedCategoryFactors and NatTrans.CommShift mapDerivedCategoryFactors.hom): new Mathlib leaf lem-weil-pbc-exact-functor-derived-factorization. Values in D^+: lem-weil-pbc-exact-functor-bounded-below (unchanged citation). Restriction to the full triangulated subcategories, triangulated, commuting with the inclusions: new Mathlib leaf lem-weil-pbc-triangulated-functor-restriction (ObjectProperty.lift, isTriangulated_lift). 'No resolution is used' is now an instance of the factorization (QK in D^+ for K bounded below by the definition of D^+ via cohomology). The claim 'this functor is also its right and left derived functor' (Stacks 015F) was moved out of the definition into the new statement node lem-weil-pbc-exact-functor-derived-functor (unsplit, flagged unreachable: nothing uses it); only the notation remark stays. The module sentence now cites the new node prop-weil-pbc-inverse-image-modules-exact (u^{-1} on sheaves of R_T-modules, exact; Stacks 04JC), which did not exist. Mathlib: mapDerivedCategory exists on D only; no restriction to DerivedCategory.Plus (searched with leansearch, loogle, leanfinder, grep), so the node is not a leaf. Lean (slopmaster2): the u^{-1} on D^+ of the source repository is the generic CategoryTheory.Functor.mapDerivedCategoryPlus (WeilConjectures/Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean:372-381, sorry-free) applied to AlgebraicGeometry.Etale.upperStar A u (notation D+((u)^*[A])), with no dedicated declaration; reported as a note."
- },
- "lean": {
-  "branch": "slopmaster2",
-  "declarations": [
-   "CategoryTheory.Functor.mapDerivedCategoryPlus"
+  "stmt_deps": [
+    "def-pc-scheme",
+    "def-weil-pbc-abelian-etale-sheaves",
+    "def-weil-pbc-inverse-image",
+    "prop-weil-pbc-inverse-image-exact",
+    "lem-sf-exact-functor-derived-triangulated",
+    "def-weil-abstract-derived-category",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "def-weil-pbc-derived-categories",
+    "lem-weil-pbc-exact-functor-bounded-below",
+    "lem-weil-pbc-triangulated-functor-restriction",
+    "prop-weil-pbc-inverse-image-modules-exact"
   ],
-  "note": "attached by the lead at review (2026-10-09), found by the opus workers of lem-weil-pbc-derived-exchange-triangulated and def-weil-pbc-derived-inverse-image: the functor on D^+ induced by an exact functor, defined as the lift of the composite through the inclusion of D^+; the etale inverse image on D^+ of the source repository is this functor applied to Etale.upperStar (written D+((u)^*[A])), for any Grothendieck abelian coefficient category; sorry-free on the full map"
- },
- "reviewed": {
-  "date": "2026-10-09",
-  "by": "L",
-  "result": "pass",
-  "note": "claims inside the definition moved to nodes (two Mathlib leaves, two unsplit); Lean mapDerivedCategoryPlus attached by the lead"
- }
+  "proof": [],
+  "proof_deps": [],
+  "proof_origin": null,
+  "mathlib_searches": [
+    {
+      "tool": "grep",
+      "query": "grep -rln 'mapDerivedCategoryPlus\\|derivedPlus\\|derivedAdjunctionPlus' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+      "results": "none; Mathlib has Functor.mapDerivedCategory on the unbounded D (Algebra/Homology/DerivedCategory/ExactFunctor.lean:36) and DerivedCategory.Plus (TStructure.lean:204), but no restriction of mapDerivedCategory to DerivedCategory.Plus",
+      "date": "2026-10-09",
+      "verdict": "no match (generalization on D: CategoryTheory.Functor.mapDerivedCategory; the restriction to D^+ needs lem-weil-pbc-exact-functor-bounded-below)"
+    },
+    {
+      "tool": "grep",
+      "query": "grep -rn 'Etale\\|smallEtale' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/DerivedCategory/",
+      "results": "none: no etale derived categories or inverse images in Mathlib",
+      "date": "2026-10-09",
+      "verdict": "no match"
+    },
+    {
+      "tool": "leansearch",
+      "query": "exact functor between abelian categories induces triangulated functor on derived categories",
+      "results": "Functor.mapDerivedCategory and its IsTriangulated/Linear instances (Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor); Abelian.Ext.mapExactFunctor; Functor.mapHomologicalComplexUpToQuasiIso; HomotopyCategory…mapHomotopyCategory",
+      "date": "2026-10-09",
+      "verdict": "generalization on the unbounded D only: Functor.mapDerivedCategory (node lem-sf-exact-functor-derived-triangulated); no functor on DerivedCategory.Plus"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "exact functor induces functor between bounded below derived categories D^+",
+      "results": "Functor.mapDerivedCategory; mapDerivedCategoryFactorsh; mapDerivedCategoryFactors; Lifting instance; instIsTriangulatedDerivedCategoryMapDerivedCategory",
+      "date": "2026-10-09",
+      "verdict": "no match for D^+"
+    },
+    {
+      "tool": "loogle",
+      "query": "DerivedCategory.Plus, CategoryTheory.Functor.mapDerivedCategory",
+      "results": "none",
+      "date": "2026-10-09",
+      "verdict": "no match"
+    },
+    {
+      "tool": "grep",
+      "query": "rg -n 'Plus' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean; rg -ln 'mapDerivedCategoryPlus|mapHomotopyCategoryPlus' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib; sed -n 20,50p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/DerivedCategory/RightDerivedFunctorPlus.lean",
+      "results": "DerivedCategory.Plus exists (DerivedCategory/Plus.lean, full subcategory of D); Functor.mapHomotopyCategoryPlus (HomotopyCategory/Plus.lean:265) on K^+; Functor.rightDerivedFunctorPlus (RightDerivedFunctorPlus.lean:36) for C with enough injectives; no exact-functor restriction to D^+",
+      "date": "2026-10-09",
+      "verdict": "no match: the restriction of mapDerivedCategory to D^+ needs lem-weil-pbc-exact-functor-bounded-below; rightDerivedFunctorPlus of an exact functor agrees with it only by a theorem"
+    },
+    {
+      "tool": "leansearch",
+      "query": "functor on bounded below derived category DerivedCategory.Plus induced by exact functor",
+      "results": "Functor.mapDerivedCategory (Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor), Functor.mapHomologicalComplexUpToQuasiIso, Abelian.Ext.mapExactFunctor, Functor.mapExtAddHom, HomotopyCategory.instIsTriangulatedIntUpMapHomotopyCategory, ExactFunctor.of",
+      "date": "2026-10-09",
+      "verdict": "no match on D^+ (only the unbounded mapDerivedCategory)"
+    },
+    {
+      "tool": "loogle",
+      "query": "CategoryTheory.Functor.mapDerivedCategory, DerivedCategory.Plus",
+      "results": "none",
+      "date": "2026-10-09",
+      "verdict": "no match: no Mathlib declaration mentions both"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "exact functor F between abelian categories restricts to a functor between bounded below derived categories D^+",
+      "results": "Functor.mapDerivedCategory, Abelian.Ext.mapExactFunctor(_hom), mapDerivedCategoryFactors, mapDerivedCategoryFactorsh, the Localization.Lifting instance, instIsTriangulatedDerivedCategoryMapDerivedCategory, mapHomologicalComplexUpToQuasiIso",
+      "date": "2026-10-09",
+      "verdict": "no match on D^+"
+    },
+    {
+      "tool": "grep",
+      "query": "rg -l 'mapDerivedCategory' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib --glob '*.lean'; rg -n 'Plus' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean; rg -n 'mapHomotopyCategoryPlus' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/HomotopyCategory/Plus.lean",
+      "results": "mapDerivedCategory occurs only in DerivedCategory/ExactFunctor.lean and DerivedCategory/Ext/Map.lean; ExactFunctor.lean never mentions Plus; Functor.mapHomotopyCategoryPlus (HomotopyCategory/Plus.lean:265) on K^+ only; no preservation of IsGE by mapDerivedCategory",
+      "date": "2026-10-09",
+      "verdict": "no match: Mathlib has the functor on D (mapDerivedCategory) and the subcategory DerivedCategory.Plus, but neither the restriction nor the preservation of D^+ (lem-weil-pbc-exact-functor-bounded-below), so the node is not a leaf; the restriction itself is ObjectProperty.lift (lem-weil-pbc-triangulated-functor-restriction)"
+    }
+  ],
+  "mathlib_match": null,
+  "status": "split",
+  "merged_into": null,
+  "import_flags": [],
+  "created": {
+    "by": "worker",
+    "item": "def-weil-pbc-derived-exchange",
+    "date": "2026-10-09"
+  },
+  "lean_audit": {
+    "master": {
+      "state": "closed",
+      "decls": [
+        {
+          "name": "CategoryTheory.Functor.mapDerivedCategoryPlus",
+          "module": "WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor",
+          "lines": [
+            142,
+            151
+          ],
+          "kind": "def",
+          "sorry": false
+        }
+      ],
+      "missing": [],
+      "open": []
+    },
+    "slopmaster2": {
+      "state": "closed",
+      "decls": [
+        {
+          "name": "CategoryTheory.Functor.mapDerivedCategoryPlus",
+          "module": "WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor",
+          "lines": [
+            400,
+            409
+          ],
+          "kind": "def",
+          "sorry": false
+        }
+      ],
+      "missing": [],
+      "open": []
+    }
+  },
+  "chapter": "sec-proper-base-change",
+  "unit": "sk-def-exchange",
+  "split_report": {
+    "date": "2026-10-09",
+    "item": "def-weil-pbc-derived-inverse-image",
+    "worker": "stage1",
+    "summary": "Checked against Stacks sites-cohomology.tex Section 0735 (paragraph before Lemma 0736), derived.tex Lemma 015F and sites-modules.tex Lemma 04JC. Statement rewritten to name a node for every notion and every claim: 'morphism of schemes' repointed from the grab-bag def-weil-pbc-scheme-conventions to def-pc-scheme; Ab(T_et) now cites def-weil-pbc-abelian-etale-sheaves. lem-sf-exact-functor-derived-triangulated states the termwise induced functor and that it is triangulated, but not the natural isomorphism u^{-1}_D(QK) = Q(u^{-1}K) nor the compatibility of the shift isomorphisms with the termwise identity (its Mathlib match has both, as mapDerivedCategoryFactors and NatTrans.CommShift mapDerivedCategoryFactors.hom): new Mathlib leaf lem-weil-pbc-exact-functor-derived-factorization. Values in D^+: lem-weil-pbc-exact-functor-bounded-below (unchanged citation). Restriction to the full triangulated subcategories, triangulated, commuting with the inclusions: new Mathlib leaf lem-weil-pbc-triangulated-functor-restriction (ObjectProperty.lift, isTriangulated_lift). 'No resolution is used' is now an instance of the factorization (QK in D^+ for K bounded below by the definition of D^+ via cohomology). The claim 'this functor is also its right and left derived functor' (Stacks 015F) was moved out of the definition into the new statement node lem-weil-pbc-exact-functor-derived-functor (unsplit, flagged unreachable: nothing uses it); only the notation remark stays. The module sentence now cites the new node prop-weil-pbc-inverse-image-modules-exact (u^{-1} on sheaves of R_T-modules, exact; Stacks 04JC), which did not exist. Mathlib: mapDerivedCategory exists on D only; no restriction to DerivedCategory.Plus (searched with leansearch, loogle, leanfinder, grep), so the node is not a leaf. Lean (slopmaster2): the u^{-1} on D^+ of the source repository is the generic CategoryTheory.Functor.mapDerivedCategoryPlus (WeilConjectures/Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean:372-381, sorry-free) applied to AlgebraicGeometry.Etale.upperStar A u (notation D+((u)^*[A])), with no dedicated declaration; reported as a note."
+  },
+  "lean": {
+    "module": "WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor",
+    "declaration": "CategoryTheory.Functor.mapDerivedCategoryPlus",
+    "branch": "slopmaster2",
+    "line": 400,
+    "declarations": [
+      "CategoryTheory.Functor.mapDerivedCategoryPlus"
+    ],
+    "sorry_free": true,
+    "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state closed)"
+  },
+  "reviewed": {
+    "date": "2026-10-09",
+    "by": "L",
+    "result": "pass",
+    "note": "claims inside the definition moved to nodes (two Mathlib leaves, two unsplit); Lean mapDerivedCategoryPlus attached by the lead"
+  }
 }

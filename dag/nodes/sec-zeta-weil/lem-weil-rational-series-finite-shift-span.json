@@ -1,89 +1,100 @@
 {
- "id": "lem-weil-rational-series-finite-shift-span",
- "blueprint": {
-  "is": null,
-  "from": {
-   "node": "prop-weil-integral-rational-series",
-   "place": "step 1 of its split (source: Ch. II §27, Cor. 27.8 and proof of Lemma 27.9, pp. 156-157 (rationality over $\\mathbf Q$ as a linear recurrence of the coefficients, Bourbaki Algèbre IV §5 Ex. 3(a)); blueprint ## Proof, first paragraph)",
-   "via": []
+  "id": "lem-weil-rational-series-finite-shift-span",
+  "blueprint": {
+    "is": null,
+    "from": {
+      "node": "prop-weil-integral-rational-series",
+      "place": "step 1 of its split (source: Ch. II §27, Cor. 27.8 and proof of Lemma 27.9, pp. 156-157 (rationality over $\\mathbf Q$ as a linear recurrence of the coefficients, Bourbaki Algèbre IV §5 Ex. 3(a)); blueprint ## Proof, first paragraph)",
+      "via": []
+    },
+    "same_as": null
   },
-  "same_as": null
- },
- "kind": "statement",
- "title": "Rational power series and finite-dimensional shift span",
- "statement": "Let $K$ be a field [def-weil-field], $T$ an indeterminate and $f=\\sum_{n\\geq0}c_nT^n\\in K[[T]]$ a formal power series [def-weil-formal-power-series]. For $m\\geq0$ let $R_m=(c_{m+s})_{s\\geq0}\\in K^{\\mathbf Z_{\\geq0}}$ be the $m$-th shift of the coefficient sequence, and let $V_f\\subseteq K^{\\mathbf Z_{\\geq0}}$ be the $K$-vector subspace spanned by all $R_m$, $m\\geq0$ [def-weil-sequence-subspace]. Then the following are equivalent:\n\n1. there are polynomials $P,Q\\in K[T]$ [def-weil-polynomial-ring] with $Q(0)=1$ and $Qf=P$ in $K[[T]]$ (polynomials regarded as power series [def-weil-polynomial-as-power-series]);\n2. $V_f$ is finite-dimensional [def-weil-finite-dimensional-subspace].\n\n(For (1)$\\Rightarrow$(2): if $Q=1+q_1T+\\cdots+q_dT^d$ and $\\deg P<m_0$, then $c_n+q_1c_{n-1}+\\cdots+q_dc_{n-d}=0$ for $n\\geq\\max(m_0,d)$, so every $R_m$ lies in the span of $R_0,\\ldots,R_{\\max(m_0,d)-1}$.)",
- "source": {
-  "document": "literature/milne-lectures-on-etale-cohomology_LEC.pdf",
-  "place": "Ch. II §27, proof of Lemma 27.9, p. 157 (Bourbaki, Algèbre IV §5, Exercise 3(a): $f\\in k(t)$ iff its coefficients satisfy a linear recurrence from some index on); the shift-span form is the slopmaster2 Lean statement, WeilConjectures/ZetaLinearAlgebra/ShiftSpan.lean lines 252-291"
- },
- "stmt_deps": [
-  "def-weil-field",
-  "def-weil-formal-power-series",
-  "def-weil-sequence-subspace",
-  "def-weil-polynomial-ring",
-  "def-weil-polynomial-as-power-series",
-  "def-weil-finite-dimensional-subspace"
- ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
- "mathlib_searches": [
-  {
-   "tool": "grep",
-   "query": "grep -rn 'shiftSpan\\|seqShift\\|IsRational\\|rational' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/PowerSeries/",
-   "results": "no shift span of a power series and no predicate for rational power series",
-   "date": "2026-10-09",
-   "verdict": "no match"
+  "kind": "statement",
+  "title": "Rational power series and finite-dimensional shift span",
+  "statement": "Let $K$ be a field [def-weil-field], $T$ an indeterminate and $f=\\sum_{n\\geq0}c_nT^n\\in K[[T]]$ a formal power series [def-weil-formal-power-series]. For $m\\geq0$ let $R_m=(c_{m+s})_{s\\geq0}\\in K^{\\mathbf Z_{\\geq0}}$ be the $m$-th shift of the coefficient sequence, and let $V_f\\subseteq K^{\\mathbf Z_{\\geq0}}$ be the $K$-vector subspace spanned by all $R_m$, $m\\geq0$ [def-weil-sequence-subspace]. Then the following are equivalent:\n\n1. there are polynomials $P,Q\\in K[T]$ [def-weil-polynomial-ring] with $Q(0)=1$ and $Qf=P$ in $K[[T]]$ (polynomials regarded as power series [def-weil-polynomial-as-power-series]);\n2. $V_f$ is finite-dimensional [def-weil-finite-dimensional-subspace].\n\n(For (1)$\\Rightarrow$(2): if $Q=1+q_1T+\\cdots+q_dT^d$ and $\\deg P<m_0$, then $c_n+q_1c_{n-1}+\\cdots+q_dc_{n-d}=0$ for $n\\geq\\max(m_0,d)$, so every $R_m$ lies in the span of $R_0,\\ldots,R_{\\max(m_0,d)-1}$.)",
+  "source": {
+    "document": "literature/milne-lectures-on-etale-cohomology_LEC.pdf",
+    "place": "Ch. II §27, proof of Lemma 27.9, p. 157 (Bourbaki, Algèbre IV §5, Exercise 3(a): $f\\in k(t)$ iff its coefficients satisfy a linear recurrence from some index on); the shift-span form is the slopmaster2 Lean statement, WeilConjectures/ZetaLinearAlgebra/ShiftSpan.lean lines 252-291"
   },
-  {
-   "tool": "grep",
-   "query": "grep -n 'def \\|theorem ' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/LinearRecurrence.lean",
-   "results": "LinearRecurrence (a fixed recurrence of given order with coefficients in a comm. ring): IsSolution, solSpace, solSpace_rank, charPoly; nothing relating a recurrence to a power series being a quotient of polynomials, nor to the span of the shifts",
-   "date": "2026-10-09",
-   "verdict": "no match"
-  },
-  {
-   "tool": "grep",
-   "query": "grep -rln 'span.*funLeft\\|funLeft.*span' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/LinearAlgebra",
-   "results": "LinearMap.funLeft is the shift as a linear map; no lemma on the finite-dimensionality of the span of iterated shifts",
-   "date": "2026-10-09",
-   "verdict": "no match"
-  }
- ],
- "mathlib_match": null,
- "status": "unsplit",
- "merged_into": null,
- "created": {
-  "by": "worker",
-  "item": "prop-weil-integral-rational-series",
-  "date": "2026-10-09"
- },
- "lean_audit": {
-  "master": {
-   "state": "none",
-   "decls": [],
-   "missing": [
-    "PowerSeries.exists_normalized_fraction_iff_finiteDimensional_shiftSpan"
-   ]
-  },
-  "slopmaster2": {
-   "state": "closed",
-   "decls": [
+  "stmt_deps": [
+    "def-weil-field",
+    "def-weil-formal-power-series",
+    "def-weil-sequence-subspace",
+    "def-weil-polynomial-ring",
+    "def-weil-polynomial-as-power-series",
+    "def-weil-finite-dimensional-subspace"
+  ],
+  "proof": [],
+  "proof_deps": [],
+  "proof_origin": null,
+  "mathlib_searches": [
     {
-     "name": "PowerSeries.exists_normalized_fraction_iff_finiteDimensional_shiftSpan",
-     "module": "WeilConjectures.ZetaLinearAlgebra.ShiftSpan",
-     "lines": [
-      252,
-      291
-     ],
-     "kind": "theorem",
-     "sorry": false
+      "tool": "grep",
+      "query": "grep -rn 'shiftSpan\\|seqShift\\|IsRational\\|rational' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/PowerSeries/",
+      "results": "no shift span of a power series and no predicate for rational power series",
+      "date": "2026-10-09",
+      "verdict": "no match"
+    },
+    {
+      "tool": "grep",
+      "query": "grep -n 'def \\|theorem ' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/LinearRecurrence.lean",
+      "results": "LinearRecurrence (a fixed recurrence of given order with coefficients in a comm. ring): IsSolution, solSpace, solSpace_rank, charPoly; nothing relating a recurrence to a power series being a quotient of polynomials, nor to the span of the shifts",
+      "date": "2026-10-09",
+      "verdict": "no match"
+    },
+    {
+      "tool": "grep",
+      "query": "grep -rln 'span.*funLeft\\|funLeft.*span' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/LinearAlgebra",
+      "results": "LinearMap.funLeft is the shift as a linear map; no lemma on the finite-dimensionality of the span of iterated shifts",
+      "date": "2026-10-09",
+      "verdict": "no match"
     }
-   ],
-   "missing": [],
-   "open": []
+  ],
+  "mathlib_match": null,
+  "status": "unsplit",
+  "merged_into": null,
+  "created": {
+    "by": "worker",
+    "item": "prop-weil-integral-rational-series",
+    "date": "2026-10-09"
+  },
+  "lean_audit": {
+    "master": {
+      "state": "none",
+      "decls": [],
+      "missing": [
+        "PowerSeries.exists_normalized_fraction_iff_finiteDimensional_shiftSpan"
+      ]
+    },
+    "slopmaster2": {
+      "state": "closed",
+      "decls": [
+        {
+          "name": "PowerSeries.exists_normalized_fraction_iff_finiteDimensional_shiftSpan",
+          "module": "WeilConjectures.ZetaLinearAlgebra.ShiftSpan",
+          "lines": [
+            252,
+            291
+          ],
+          "kind": "theorem",
+          "sorry": false
+        }
+      ],
+      "missing": [],
+      "open": []
+    }
+  },
+  "chapter": "sec-zeta-weil",
+  "unit": "sk-thm-intfactors",
+  "lean": {
+    "module": "WeilConjectures.ZetaLinearAlgebra.ShiftSpan",
+    "declaration": "PowerSeries.exists_normalized_fraction_iff_finiteDimensional_shiftSpan",
+    "branch": "slopmaster2",
+    "line": 252,
+    "declarations": [
+      "PowerSeries.exists_normalized_fraction_iff_finiteDimensional_shiftSpan"
+    ],
+    "sorry_free": true,
+    "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state closed)"
   }
- },
- "chapter": "sec-zeta-weil",
- "unit": "sk-thm-intfactors"
 }

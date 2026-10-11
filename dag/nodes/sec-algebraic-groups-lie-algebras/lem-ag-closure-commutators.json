@@ -1,220 +1,234 @@
 {
- "id": "lem-ag-closure-commutators",
- "blueprint": {
-  "is": "lem-ag-closure-commutators",
-  "from": null,
-  "same_as": null
- },
- "kind": "statement",
- "title": "Normality, commutators and the Lie inclusion",
- "statement": "For a represented degree datum as in [d-monodromy], $H$ is normal in\n$G$, and\n\n$$\naba^{-1}b^{-1}\\in H\\quad(a,b\\in G),\\qquad\n[\\operatorname{Lie}(G^\\circ),\\operatorname{Lie}(G^\\circ)]\\subseteq\\operatorname{Lie}(H^\\circ).\n$$",
- "source": {
-  "document": "literature/blueprint/master/blueprint/sec-algebraic-groups-lie-algebras/sk-i-restriction/lem-ag-closure-commutators.md",
-  "place": "node lem-ag-closure-commutators, order 2514"
- },
- "stmt_deps": [
-  "d-monodromy"
- ],
- "proof": [
-  {
-   "text": "*Normality and commutators.* The kernel $P$ of the degree map in\n[d-monodromy] is normal, so conjugation by an element of $\\rho(W)$\npreserves $\\rho(P)$ and, being a homeomorphism, preserves its closure $H$\n(as in [lem-wf-conjugation-geometric-monodromy]; both closures are\ngroups by [lem-wf-zariski-closure-subgroup]).\nFor fixed $h\\in H$ the condition $ghg^{-1}\\in H$ is closed in $G$ and\ncontains $\\rho(W)$, hence contains $G$; applying it to $g^{-1}$ gives\n$gHg^{-1}=H$. Since $\\mathbf Z$ is abelian the degree map kills\ncommutators, so commutators of elements of $\\rho(W)$ lie in $H$. Fixing\none variable, $a\\mapsto aba^{-1}b^{-1}$ is regular, so the preimage of $H$\nis closed and contains $\\rho(W)$, hence $G$; fixing $a\\in G$ and repeating\nin the other variable gives the assertion on all of $G\\times G$. No\nquotient algebraic group is needed.",
-   "uses": [
+  "id": "lem-ag-closure-commutators",
+  "blueprint": {
+    "is": "lem-ag-closure-commutators",
+    "from": null,
+    "same_as": null
+  },
+  "kind": "statement",
+  "title": "Normality, commutators and the Lie inclusion",
+  "statement": "For a represented degree datum as in [d-monodromy], $H$ is normal in\n$G$, and\n\n$$\naba^{-1}b^{-1}\\in H\\quad(a,b\\in G),\\qquad\n[\\operatorname{Lie}(G^\\circ),\\operatorname{Lie}(G^\\circ)]\\subseteq\\operatorname{Lie}(H^\\circ).\n$$",
+  "source": {
+    "document": "literature/blueprint/master/blueprint/sec-algebraic-groups-lie-algebras/sk-i-restriction/lem-ag-closure-commutators.md",
+    "place": "node lem-ag-closure-commutators, order 2514"
+  },
+  "stmt_deps": [
+    "d-monodromy"
+  ],
+  "proof": [
+    {
+      "text": "*Normality and commutators.* The kernel $P$ of the degree map in\n[d-monodromy] is normal, so conjugation by an element of $\\rho(W)$\npreserves $\\rho(P)$ and, being a homeomorphism, preserves its closure $H$\n(as in [lem-wf-conjugation-geometric-monodromy]; both closures are\ngroups by [lem-wf-zariski-closure-subgroup]).\nFor fixed $h\\in H$ the condition $ghg^{-1}\\in H$ is closed in $G$ and\ncontains $\\rho(W)$, hence contains $G$; applying it to $g^{-1}$ gives\n$gHg^{-1}=H$. Since $\\mathbf Z$ is abelian the degree map kills\ncommutators, so commutators of elements of $\\rho(W)$ lie in $H$. Fixing\none variable, $a\\mapsto aba^{-1}b^{-1}$ is regular, so the preimage of $H$\nis closed and contains $\\rho(W)$, hence $G$; fixing $a\\in G$ and repeating\nin the other variable gives the assertion on all of $G\\times G$. No\nquotient algebraic group is needed.",
+      "uses": [
+        "d-monodromy",
+        "lem-wf-conjugation-geometric-monodromy",
+        "lem-wf-zariski-closure-subgroup"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "*The Lie inclusion.* Fix $a\\in G$. The morphism\n$b\\mapsto aba^{-1}b^{-1}$ of the reduced variety $G$ sends every\n$k$-point into the closed subvariety $H$, so by the vanishing principle\n(a function on a reduced affine variety vanishing at every $k$-point is\nzero) it factors through $H$. It sends $1$ to $1$; differentiating at\n$b=1$ in the dual-number description of\n[def-wf-lie-algebra-derivation] gives\n\n$$\n(\\operatorname{Ad}(a)-1)\\operatorname{Lie}(G)\\subseteq\\operatorname{Lie}(H).\n$$\n\nNow fix $X\\in\\operatorname{Lie}(G)$. The morphism\n$a\\mapsto(\\operatorname{Ad}(a)-1)X$ from $G$ to the vector space\n$\\operatorname{Lie}(G)$ sends every $k$-point into the linear subspace\n$\\operatorname{Lie}(H)$, so again it factors through it. Its differential\nat $a=1$ along $Y\\in\\operatorname{Lie}(G)$ is $[Y,X]$, since\n$(1+\\varepsilon Y)X(1-\\varepsilon Y)-X=\\varepsilon[Y,X]$. Hence\n$[Y,X]\\in\\operatorname{Lie}(H)$. Finally, the identity components are\nopen by [lem-wf-algebraic-component-cosets], so\n$\\operatorname{Lie}(G^\\circ)=\\operatorname{Lie}(G)$ and\n$\\operatorname{Lie}(H^\\circ)=\\operatorname{Lie}(H)$. Spanning over all\nsuch brackets gives the inclusion.",
+      "uses": [
+        "def-wf-lie-algebra-derivation",
+        "lem-wf-algebraic-component-cosets"
+      ],
+      "elementary": false
+    }
+  ],
+  "proof_deps": [
     "d-monodromy",
     "lem-wf-conjugation-geometric-monodromy",
-    "lem-wf-zariski-closure-subgroup"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "*The Lie inclusion.* Fix $a\\in G$. The morphism\n$b\\mapsto aba^{-1}b^{-1}$ of the reduced variety $G$ sends every\n$k$-point into the closed subvariety $H$, so by the vanishing principle\n(a function on a reduced affine variety vanishing at every $k$-point is\nzero) it factors through $H$. It sends $1$ to $1$; differentiating at\n$b=1$ in the dual-number description of\n[def-wf-lie-algebra-derivation] gives\n\n$$\n(\\operatorname{Ad}(a)-1)\\operatorname{Lie}(G)\\subseteq\\operatorname{Lie}(H).\n$$\n\nNow fix $X\\in\\operatorname{Lie}(G)$. The morphism\n$a\\mapsto(\\operatorname{Ad}(a)-1)X$ from $G$ to the vector space\n$\\operatorname{Lie}(G)$ sends every $k$-point into the linear subspace\n$\\operatorname{Lie}(H)$, so again it factors through it. Its differential\nat $a=1$ along $Y\\in\\operatorname{Lie}(G)$ is $[Y,X]$, since\n$(1+\\varepsilon Y)X(1-\\varepsilon Y)-X=\\varepsilon[Y,X]$. Hence\n$[Y,X]\\in\\operatorname{Lie}(H)$. Finally, the identity components are\nopen by [lem-wf-algebraic-component-cosets], so\n$\\operatorname{Lie}(G^\\circ)=\\operatorname{Lie}(G)$ and\n$\\operatorname{Lie}(H^\\circ)=\\operatorname{Lie}(H)$. Spanning over all\nsuch brackets gives the inclusion.",
-   "uses": [
+    "lem-wf-zariski-closure-subgroup",
     "def-wf-lie-algebra-derivation",
     "lem-wf-algebraic-component-cosets"
-   ],
-   "elementary": false
-  }
- ],
- "proof_deps": [
-  "d-monodromy",
-  "lem-wf-conjugation-geometric-monodromy",
-  "lem-wf-zariski-closure-subgroup",
-  "def-wf-lie-algebra-derivation",
-  "lem-wf-algebraic-component-cosets"
- ],
- "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-algebraic-groups-lie-algebras/sk-i-restriction/lem-ag-closure-commutators.md",
-  "place": "## Proof"
- },
- "mathlib_searches": [],
- "mathlib_match": null,
- "status": "imported",
- "merged_into": null,
- "import_flags": [],
- "blueprint_kind": "lemma",
- "blueprint_order": 2514,
- "blueprint_uses": [
-  "d-monodromy",
-  "def-wf-lie-algebra-derivation",
-  "lem-wf-algebraic-component-cosets",
-  "lem-wf-conjugation-geometric-monodromy",
-  "lem-wf-zariski-closure-subgroup"
- ],
- "proof_split_by": "labels",
- "lean_audit": {
-  "master": {
-   "state": "none",
-   "decls": [],
-   "missing": []
+  ],
+  "proof_origin": {
+    "by": "agent",
+    "document": "literature/blueprint/master/blueprint/sec-algebraic-groups-lie-algebras/sk-i-restriction/lem-ag-closure-commutators.md",
+    "place": "## Proof"
   },
-  "slopmaster2": {
-   "state": "rests_on_sorry",
-   "decls": [
-    {
-     "name": "AlgebraicGeometry.Monodromy.RepresentedDegreeDatum.normal_zeroLocus_geometricMonodromy",
-     "module": "WeilConjectures.AlgebraicGeometry.LinearAlgebraicGroup.Monodromy",
-     "lines": [
-      443,
-      455
-     ],
-     "kind": "theorem",
-     "sorry": false
+  "mathlib_searches": [],
+  "mathlib_match": null,
+  "status": "imported",
+  "merged_into": null,
+  "import_flags": [],
+  "blueprint_kind": "lemma",
+  "blueprint_order": 2514,
+  "blueprint_uses": [
+    "d-monodromy",
+    "def-wf-lie-algebra-derivation",
+    "lem-wf-algebraic-component-cosets",
+    "lem-wf-conjugation-geometric-monodromy",
+    "lem-wf-zariski-closure-subgroup"
+  ],
+  "proof_split_by": "labels",
+  "lean_audit": {
+    "master": {
+      "state": "none",
+      "decls": [],
+      "missing": []
     },
-    {
-     "name": "AlgebraicGeometry.Monodromy.RepresentedDegreeDatum.commutator_zeroLocus_le_zeroLocus_geometricMonodromy",
-     "module": "WeilConjectures.AlgebraicGeometry.LinearAlgebraicGroup.Monodromy",
-     "lines": [
-      458,
-      472
-     ],
-     "kind": "theorem",
-     "sorry": false
-    },
-    {
-     "name": "AlgebraicGeometry.Monodromy.RepresentedDegreeDatum.lie_mem_lieAlgebra_geometricMonodromy",
-     "module": "WeilConjectures.AlgebraicGeometry.LinearAlgebraicGroup.Monodromy",
-     "lines": [
-      785,
-      792
-     ],
-     "kind": "theorem",
-     "sorry": false
-    },
-    {
-     "name": "AlgebraicGeometry.Monodromy.RepresentedDegreeDatum.lie_mem_lieAlgebra_identityComponent_geometricMonodromy",
-     "module": "WeilConjectures.AlgebraicGeometry.LinearAlgebraicGroup.Monodromy",
-     "lines": [
-      794,
-      801
-     ],
-     "kind": "theorem",
-     "sorry": false
+    "slopmaster2": {
+      "state": "rests_on_sorry",
+      "decls": [
+        {
+          "name": "AlgebraicGeometry.Monodromy.RepresentedDegreeDatum.normal_zeroLocus_geometricMonodromy",
+          "module": "WeilConjectures.AlgebraicGeometry.LinearAlgebraicGroup.Monodromy",
+          "lines": [
+            443,
+            455
+          ],
+          "kind": "theorem",
+          "sorry": false
+        },
+        {
+          "name": "AlgebraicGeometry.Monodromy.RepresentedDegreeDatum.commutator_zeroLocus_le_zeroLocus_geometricMonodromy",
+          "module": "WeilConjectures.AlgebraicGeometry.LinearAlgebraicGroup.Monodromy",
+          "lines": [
+            458,
+            472
+          ],
+          "kind": "theorem",
+          "sorry": false
+        },
+        {
+          "name": "AlgebraicGeometry.Monodromy.RepresentedDegreeDatum.lie_mem_lieAlgebra_geometricMonodromy",
+          "module": "WeilConjectures.AlgebraicGeometry.LinearAlgebraicGroup.Monodromy",
+          "lines": [
+            785,
+            792
+          ],
+          "kind": "theorem",
+          "sorry": false
+        },
+        {
+          "name": "AlgebraicGeometry.Monodromy.RepresentedDegreeDatum.lie_mem_lieAlgebra_identityComponent_geometricMonodromy",
+          "module": "WeilConjectures.AlgebraicGeometry.LinearAlgebraicGroup.Monodromy",
+          "lines": [
+            794,
+            801
+          ],
+          "kind": "theorem",
+          "sorry": false
+        }
+      ],
+      "missing": [],
+      "open": [
+        {
+          "name": "AlgebraicGeometry.GeneralLinearGroup.containsCommutators_subgroupSchemeHom",
+          "module": "WeilConjectures.AlgebraicGeometry.GroupScheme.GeneralLinear.ClosedSubgroup",
+          "lines": [
+            248,
+            262
+          ],
+          "kind": "theorem",
+          "nodes": [],
+          "below": false
+        },
+        {
+          "name": "AlgebraicGeometry.GeneralLinearGroup.lie_mem_range_lieAlgebraMap_identityComponent",
+          "module": "WeilConjectures.AlgebraicGeometry.GroupScheme.GeneralLinear.ClosedSubgroup.Lie",
+          "lines": [
+            381,
+            390
+          ],
+          "kind": "theorem",
+          "nodes": [],
+          "below": false
+        },
+        {
+          "name": "AlgebraicGeometry.GrpObj.commutator_mem_mixedPoints",
+          "module": "WeilConjectures.AlgebraicGeometry.GroupScheme.Lie",
+          "lines": [
+            610,
+            614
+          ],
+          "kind": "theorem",
+          "nodes": [],
+          "below": false
+        },
+        {
+          "name": "AlgebraicGeometry.GrpObj.infBracket_mem_range_infPointsMap",
+          "module": "WeilConjectures.AlgebraicGeometry.GroupScheme.Lie",
+          "lines": [
+            711,
+            720
+          ],
+          "kind": "theorem",
+          "nodes": [],
+          "below": false
+        },
+        {
+          "name": "AlgebraicGeometry.GrpObj.infPointsMap_infBracket",
+          "module": "WeilConjectures.AlgebraicGeometry.GroupScheme.Lie",
+          "lines": [
+            705,
+            709
+          ],
+          "kind": "theorem",
+          "nodes": [],
+          "below": false
+        },
+        {
+          "name": "AlgebraicGeometry.GrpObj.instLieAlgebraLie",
+          "module": "WeilConjectures.AlgebraicGeometry.GroupScheme.Lie",
+          "lines": [
+            741,
+            743
+          ],
+          "kind": "instance",
+          "nodes": [],
+          "below": false
+        },
+        {
+          "name": "AlgebraicGeometry.GrpObj.instLieRingLie",
+          "module": "WeilConjectures.AlgebraicGeometry.GroupScheme.Lie",
+          "lines": [
+            630,
+            636
+          ],
+          "kind": "instance",
+          "nodes": [],
+          "below": false
+        },
+        {
+          "name": "AlgebraicGeometry.GrpObj.lieEquiv_mul",
+          "module": "WeilConjectures.AlgebraicGeometry.GroupScheme.Lie",
+          "lines": [
+            556,
+            558
+          ],
+          "kind": "theorem",
+          "nodes": [],
+          "below": false
+        },
+        {
+          "name": "AlgebraicGeometry.GrpObj.toMixed_bijective",
+          "module": "WeilConjectures.AlgebraicGeometry.GroupScheme.Lie",
+          "lines": [
+            591,
+            594
+          ],
+          "kind": "theorem",
+          "nodes": [],
+          "below": false
+        }
+      ]
     }
-   ],
-   "missing": [],
-   "open": [
-    {
-     "name": "AlgebraicGeometry.GeneralLinearGroup.containsCommutators_subgroupSchemeHom",
-     "module": "WeilConjectures.AlgebraicGeometry.GroupScheme.GeneralLinear.ClosedSubgroup",
-     "lines": [
-      248,
-      262
-     ],
-     "kind": "theorem",
-     "nodes": [],
-     "below": false
-    },
-    {
-     "name": "AlgebraicGeometry.GeneralLinearGroup.lie_mem_range_lieAlgebraMap_identityComponent",
-     "module": "WeilConjectures.AlgebraicGeometry.GroupScheme.GeneralLinear.ClosedSubgroup.Lie",
-     "lines": [
-      381,
-      390
-     ],
-     "kind": "theorem",
-     "nodes": [],
-     "below": false
-    },
-    {
-     "name": "AlgebraicGeometry.GrpObj.commutator_mem_mixedPoints",
-     "module": "WeilConjectures.AlgebraicGeometry.GroupScheme.Lie",
-     "lines": [
-      610,
-      614
-     ],
-     "kind": "theorem",
-     "nodes": [],
-     "below": false
-    },
-    {
-     "name": "AlgebraicGeometry.GrpObj.infBracket_mem_range_infPointsMap",
-     "module": "WeilConjectures.AlgebraicGeometry.GroupScheme.Lie",
-     "lines": [
-      711,
-      720
-     ],
-     "kind": "theorem",
-     "nodes": [],
-     "below": false
-    },
-    {
-     "name": "AlgebraicGeometry.GrpObj.infPointsMap_infBracket",
-     "module": "WeilConjectures.AlgebraicGeometry.GroupScheme.Lie",
-     "lines": [
-      705,
-      709
-     ],
-     "kind": "theorem",
-     "nodes": [],
-     "below": false
-    },
-    {
-     "name": "AlgebraicGeometry.GrpObj.instLieAlgebraLie",
-     "module": "WeilConjectures.AlgebraicGeometry.GroupScheme.Lie",
-     "lines": [
-      741,
-      743
-     ],
-     "kind": "instance",
-     "nodes": [],
-     "below": false
-    },
-    {
-     "name": "AlgebraicGeometry.GrpObj.instLieRingLie",
-     "module": "WeilConjectures.AlgebraicGeometry.GroupScheme.Lie",
-     "lines": [
-      630,
-      636
-     ],
-     "kind": "instance",
-     "nodes": [],
-     "below": false
-    },
-    {
-     "name": "AlgebraicGeometry.GrpObj.lieEquiv_mul",
-     "module": "WeilConjectures.AlgebraicGeometry.GroupScheme.Lie",
-     "lines": [
-      556,
-      558
-     ],
-     "kind": "theorem",
-     "nodes": [],
-     "below": false
-    },
-    {
-     "name": "AlgebraicGeometry.GrpObj.toMixed_bijective",
-     "module": "WeilConjectures.AlgebraicGeometry.GroupScheme.Lie",
-     "lines": [
-      591,
-      594
-     ],
-     "kind": "theorem",
-     "nodes": [],
-     "below": false
-    }
-   ]
+  },
+  "chapter": "sec-algebraic-groups-lie-algebras",
+  "unit": "sk-i-restriction",
+  "lean": {
+    "module": "WeilConjectures.AlgebraicGeometry.LinearAlgebraicGroup.Monodromy",
+    "declaration": "AlgebraicGeometry.Monodromy.RepresentedDegreeDatum.normal_zeroLocus_geometricMonodromy",
+    "branch": "slopmaster2",
+    "line": 443,
+    "declarations": [
+      "AlgebraicGeometry.Monodromy.RepresentedDegreeDatum.normal_zeroLocus_geometricMonodromy",
+      "AlgebraicGeometry.Monodromy.RepresentedDegreeDatum.commutator_zeroLocus_le_zeroLocus_geometricMonodromy",
+      "AlgebraicGeometry.Monodromy.RepresentedDegreeDatum.lie_mem_lieAlgebra_geometricMonodromy",
+      "AlgebraicGeometry.Monodromy.RepresentedDegreeDatum.lie_mem_lieAlgebra_identityComponent_geometricMonodromy"
+    ],
+    "sorry_free": false,
+    "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state rests_on_sorry)"
   }
- },
- "chapter": "sec-algebraic-groups-lie-algebras",
- "unit": "sk-i-restriction"
 }

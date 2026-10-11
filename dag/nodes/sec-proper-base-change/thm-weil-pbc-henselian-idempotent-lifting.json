@@ -1,190 +1,194 @@
 {
- "id": "thm-weil-pbc-henselian-idempotent-lifting",
- "blueprint": {
-  "is": "thm-weil-pbc-henselian-idempotent-lifting",
-  "from": null,
-  "same_as": null
- },
- "kind": "statement",
- "title": "Idempotent lifting for the structure sheaf over a henselian pair",
- "statement": "Let $(A,I)$ be a henselian pair [def-weil-pbc-henselian-terminology], $S=\\operatorname{Spec}A$, $S_0=\\operatorname{Spec}(A/I)$, let $Z\\to S$ be proper [def-weil-pbc-scheme-conventions], and let $Z_0=Z\\times_SS_0$ with its projection $i:Z_0\\to Z$. Then:\n\n(a) $W\\mapsto W_0=W\\times_SS_0=i^{-1}(W)$ is a bijection from the set of open and closed subsets of $Z$ to the set of open and closed subsets of $Z_0$. In particular an open and closed subset $W\\subseteq Z$ with $W\\times_SS_0=\\emptyset$ is empty.\n\n(b) Restriction $i^\\sharp:H^0(Z,\\mathcal O_Z)\\to H^0(Z_0,\\mathcal O_{Z_0})$ induces a bijection between the idempotents of the two rings: every idempotent of $H^0(Z_0,\\mathcal O_{Z_0})$ lifts uniquely to an idempotent of $H^0(Z,\\mathcal O_Z)$.\n\n(The map $i^\\sharp$ itself need not be bijective: for $A=k[[t]]$, $I=(t)$, $Z=\\mathbf P^1_A$ it is $k[[t]]\\to k$.)",
- "source": {
-  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-p1/thm-weil-pbc-henselian-idempotent-lifting.md",
-  "place": "node thm-weil-pbc-henselian-idempotent-lifting, order 1137",
-  "external": [
-   {
-    "document": "Stacks Project",
-    "place": "Tag 0A0B"
-   },
-   {
-    "document": "Stacks Project",
-    "place": "Tag 0A0C"
-   },
-   {
-    "document": "Stacks Project",
-    "place": "Tag 0A3S"
-   }
-  ]
- },
- "stmt_deps": [
-  "def-weil-pbc-henselian-terminology",
-  "def-weil-pbc-scheme-conventions"
- ],
- "proof": [
-  {
-   "text": "*Step 1 (the closed fibre as a closed subset).* $S_0\\to S$ is a closed immersion [lem-weil-pbc-spec-quotient-closed-immersion], hence so is its base change $i:Z_0=Z\\times_SS_0\\to Z$ [lem-weil-pbc-closed-immersion-base-change]. By definition of a closed immersion [def-weil-closed-immersion], $i$ is a homeomorphism of $Z_0$ onto the closed subset $T=i(Z_0)\\subseteq Z$. For an open $W\\subseteq Z$, the scheme $W\\times_SS_0=W\\times_ZZ_0$ is the open subscheme $i^{-1}(W)$ of $Z_0$. Since $i:Z_0\\to T$ is a homeomorphism, $W'\\mapsto i(W')$ is a bijection from the open and closed subsets of $Z_0$ to the open and closed subsets of $T$ (relative topology), and it sends $i^{-1}(W)$ to $W\\cap T$.",
-   "uses": [
-    "lem-weil-pbc-spec-quotient-closed-immersion",
-    "lem-weil-pbc-closed-immersion-base-change",
-    "def-weil-closed-immersion"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma 59.91.1 (Tag 0A0B), statement: $Z=X\\times_{\\operatorname{Spec}A}\\operatorname{Spec}(A/I)$ as a closed subset; written out by the agent"
-   }
+  "id": "thm-weil-pbc-henselian-idempotent-lifting",
+  "blueprint": {
+    "is": "thm-weil-pbc-henselian-idempotent-lifting",
+    "from": null,
+    "same_as": null
   },
-  {
-   "text": "*Step 2 (Tag 0A0B applied to the sheaf of $\\{0,1\\}$-valued locally constant functions).* Let $\\mathcal C$ be the sheaf on the topological space $Z$ with $\\mathcal C(U)$ the set of continuous maps $U\\to\\{0,1\\}$ ($\\{0,1\\}$ discrete); $\\chi\\mapsto\\chi^{-1}(1)$ identifies $\\mathcal C(U)$ with the set of open and closed subsets of $U$, compatibly with restriction ($U'\\subseteq U$: $\\chi^{-1}(1)\\cap U'$). Its inverse image $\\mathcal C|_T$ along $T\\subseteq Z$ has $\\Gamma(T,\\mathcal C|_T)$ = continuous maps $T\\to\\{0,1\\}$, the restriction map $\\Gamma(Z,\\mathcal C)\\to\\Gamma(T,\\mathcal C|_T)$ being $\\chi\\mapsto\\chi|_T$: a section of the inverse image is, near each point $t\\in T$, the restriction to $T$ of a section $\\chi$ of $\\mathcal C$ over an open $V\\ni t$ of $Z$, hence locally constant on $T$, and germs at $t$ are determined by their values near $t$; conversely a continuous $\\chi:T\\to\\{0,1\\}$ is locally constant, so near each $t\\in T$ it is the restriction of the constant function $\\chi(t)$ on an open of $Z$, and these local sections of the presheaf inverse image agree on overlaps and glue in the sheafification. The lemma [lem-weil-pbc-zariski-h0-proper-henselian-pair] for the henselian pair $(A,I)$, the proper $Z\\to S$ and the sheaf $\\mathcal C$ says that $\\chi\\mapsto\\chi|_T$ is bijective; that is, $W\\mapsto W\\cap T$ is a bijection from the open and closed subsets of $Z$ to those of $T$.",
-   "uses": [
-    "lem-weil-pbc-zariski-h0-proper-henselian-pair"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma 59.91.1 (Tag 0A0B), label lemma-zariski-h0-proper-over-henselian-pair, line 18167; the choice of the sheaf $\\mathcal C$ and the computation of $\\Gamma(T,\\mathcal C|_T)$ written out by the agent"
-   }
+  "kind": "statement",
+  "title": "Idempotent lifting for the structure sheaf over a henselian pair",
+  "statement": "Let $(A,I)$ be a henselian pair [def-weil-pbc-henselian-terminology], $S=\\operatorname{Spec}A$, $S_0=\\operatorname{Spec}(A/I)$, let $Z\\to S$ be proper [def-weil-pbc-scheme-conventions], and let $Z_0=Z\\times_SS_0$ with its projection $i:Z_0\\to Z$. Then:\n\n(a) $W\\mapsto W_0=W\\times_SS_0=i^{-1}(W)$ is a bijection from the set of open and closed subsets of $Z$ to the set of open and closed subsets of $Z_0$. In particular an open and closed subset $W\\subseteq Z$ with $W\\times_SS_0=\\emptyset$ is empty.\n\n(b) Restriction $i^\\sharp:H^0(Z,\\mathcal O_Z)\\to H^0(Z_0,\\mathcal O_{Z_0})$ induces a bijection between the idempotents of the two rings: every idempotent of $H^0(Z_0,\\mathcal O_{Z_0})$ lifts uniquely to an idempotent of $H^0(Z,\\mathcal O_Z)$.\n\n(The map $i^\\sharp$ itself need not be bijective: for $A=k[[t]]$, $I=(t)$, $Z=\\mathbf P^1_A$ it is $k[[t]]\\to k$.)",
+  "source": {
+    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-p1/thm-weil-pbc-henselian-idempotent-lifting.md",
+    "place": "node thm-weil-pbc-henselian-idempotent-lifting, order 1137",
+    "external": [
+      {
+        "document": "Stacks Project",
+        "place": "Tag 0A0B"
+      },
+      {
+        "document": "Stacks Project",
+        "place": "Tag 0A0C"
+      },
+      {
+        "document": "Stacks Project",
+        "place": "Tag 0A3S"
+      }
+    ]
   },
-  {
-   "text": "*Step 3 (statement (a)).* By Steps 1 and 2, $W\\mapsto i^{-1}(W)=W\\times_SS_0$ is the composite of the bijection $W\\mapsto W\\cap T$ (Step 2) and the inverse of the bijection $W'\\mapsto i(W')$ (Step 1), hence a bijection from the open and closed subsets of $Z$ to those of $Z_0$. If $W$ is open and closed with $W\\times_SS_0=\\emptyset$, then $W$ and $\\emptyset$ have the same image, so $W=\\emptyset$ by injectivity.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma 59.91.1 (Tag 0A0B); written out by the agent"
-   }
-  },
-  {
-   "text": "*Step 4 (statement (b)).* By [lem-weil-pbc-scheme-clopen-idempotent] (b), $e\\mapsto U_e$ is a bijection from the idempotents of $H^0(Z,\\mathcal O_Z)$ to the open and closed subsets of $Z$, and likewise for $Z_0$; by (c) of that lemma applied to $g=i$, $i^\\sharp(e)$ is idempotent and $U_{i^\\sharp(e)}=i^{-1}(U_e)$. So the map $e\\mapsto i^\\sharp(e)$ on idempotents is, through these two bijections, the map $W\\mapsto i^{-1}(W)$ of Step 3, which is bijective. Hence $i^\\sharp$ is bijective on idempotents: every idempotent of $H^0(Z_0,\\mathcal O_{Z_0})$ is $i^\\sharp(e)$ for exactly one idempotent $e$ of $H^0(Z,\\mathcal O_Z)$.",
-   "uses": [
-    "lem-weil-pbc-scheme-clopen-idempotent"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma 10.21.3 (Tag 00EE) for the correspondence on affine pieces; the passage to idempotents written out by the agent"
-   }
-  }
- ],
- "proof_deps": [
-  "def-weil-closed-immersion",
-  "lem-weil-pbc-closed-immersion-base-change",
-  "lem-weil-pbc-scheme-clopen-idempotent",
-  "lem-weil-pbc-spec-quotient-closed-immersion",
-  "lem-weil-pbc-zariski-h0-proper-henselian-pair"
- ],
- "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Lemma 59.91.1 (Tag 0A0B) applied to the sheaf of locally constant $\\{0,1\\}$-valued functions; Steps 1, 3 and 4 (closed fibre as closed subset, clopens to idempotents) written out by the agent"
- },
- "mathlib_searches": [
-  {
-   "tool": "leansearch",
-   "query": "proper scheme over henselian pair: idempotents of global sections lift from closed fibre",
-   "results": "StandardEtalePair.existsUnique_hasMap_of_hasMap_quotient_of_sq_eq_bot, Scheme.germ_stalkClosedPointTo_Spec, isProper_eq, HenselianLocalRing, finite_appTop_of_universallyClosed (none states the claim)",
-   "date": "2026-10-10",
-   "verdict": "no match"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "idempotents of global sections of a proper scheme over a henselian pair correspond bijectively to idempotents of global sections of its closed fibre",
-   "results": "isOpenImmersion_SpecMap_iff_of_surjective, Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq, ProjIsoSpecTopComponent.toSpec_bijective, PrimeSpectrum.coe_isIdempotentElemEquivClopens_apply",
-   "date": "2026-10-10",
-   "verdict": "no match"
-  },
-  {
-   "tool": "loogle",
-   "query": "HenselianRing, AlgebraicGeometry.IsProper",
-   "results": "none",
-   "date": "2026-10-10",
-   "verdict": "no match"
-  },
-  {
-   "tool": "grep",
-   "query": "grep -rln 'HenselianRing\\|HenselianLocalRing' Mathlib/; grep -rn 'IsIdempotentElem' Mathlib/AlgebraicGeometry",
-   "results": "Henselian only in RingTheory/Henselian.lean; IsIdempotentElem in AlgebraicGeometry only at Morphisms/OpenImmersion.lean:38",
-   "date": "2026-10-10",
-   "verdict": "no match"
-  }
- ],
- "mathlib_match": null,
- "status": "split",
- "merged_into": null,
- "import_flags": [
-  "no_proof_in_blueprint",
-  "open_problem"
- ],
- "blueprint_kind": "remark",
- "blueprint_order": 1137,
- "blueprint_uses": [
-  "def-weil-pbc-henselian-terminology",
-  "def-weil-pbc-scheme-conventions",
-  "thm-weil-pbc-stein-inputs"
- ],
- "blueprint_tags": [
-  "latex:openproblem"
- ],
- "uses_not_cited": [
-  "def-weil-pbc-henselian-terminology",
-  "def-weil-pbc-scheme-conventions",
-  "thm-weil-pbc-stein-inputs"
- ],
- "lean_audit": {
-  "master": {
-   "state": "none",
-   "decls": [],
-   "missing": [
-    "AlgebraicGeometry.Scheme.bijective_appTop_idempotent_of_henselianRing"
-   ]
-  },
-  "slopmaster2": {
-   "state": "sorry_here",
-   "decls": [
-    {
-     "name": "AlgebraicGeometry.Scheme.bijective_appTop_idempotent_of_henselianRing",
-     "module": "WeilConjectures.AlgebraicGeometry.HenselianFiniteEtale",
-     "lines": [
-      119,
-      130
-     ],
-     "kind": "theorem",
-     "sorry": true
-    }
-   ],
-   "missing": [],
-   "open": []
-  }
- },
- "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1",
- "split_report": {
-  "date": "2026-10-10",
-  "item": "thm-weil-pbc-henselian-idempotent-lifting",
-  "worker": "stage1",
-  "summary": "The blueprint gave no proof (interface). Found Tag 0A0B = Etale Cohomology Lemma 59.91.1 (lemma-zariski-h0-proper-over-henselian-pair): for (A,I) henselian and X proper over A, Gamma(X,F)=Gamma(Z,F|_Z) for every sheaf on the topological space X. The item is that lemma applied to the sheaf of {0,1}-valued locally constant functions (whose sections are clopens), combined with the closed-immersion description of Z_0 and the clopen/idempotent correspondence for schemes. Statement rewritten: blueprint-status prose removed, counterexample kept in one line, and the clopen bijection W -> W x_S S_0 with its injectivity form ('a clopen missing Z_0 is empty') stated as (a), as thm-weil-pbc-finite-etale-lifting uses it. thm-weil-pbc-stein-inputs dropped from proof_deps (unused; it records unproved inputs, and its (ii) is a step inside the proof of 0A0B). New nodes: lem-weil-pbc-zariski-h0-proper-henselian-pair (Tag 0A0B, unsplit), lem-weil-pbc-scheme-clopen-idempotent (unsplit; Mathlib has only the affine case), lem-weil-pbc-spec-quotient-closed-immersion (Mathlib leaf)."
- },
- "lean": {
-  "branch": "slopmaster2",
-  "declarations": [
-   "AlgebraicGeometry.Scheme.bijective_appTop_idempotent_of_henselianRing"
+  "stmt_deps": [
+    "def-weil-pbc-henselian-terminology",
+    "def-weil-pbc-scheme-conventions"
   ],
-  "note": "attached by the lead at review (2026-10-10): WeilConjectures/AlgebraicGeometry/HenselianFiniteEtale.lean:126-131, @[stacks 0A0B], states clause (b) exactly (bijection on idempotents of Gamma(Y, O) -> Gamma(Y_0, O) for the pullback square of the closed fibre, HenselianRing A I); own sorry; its docstring names this node"
- },
- "reviewed": {
-  "date": "2026-10-10",
-  "by": "L",
-  "result": "pass",
-  "note": "The blueprint gave no proof. Four steps: the closed fibre as a closed subset (new Mathlib leaf lem-weil-pbc-spec-quotient-closed-immersion: IsClosedImmersion.spec_of_quotient_mk ClosedImmersion.lean:115, verified; lem-weil-pbc-closed-immersion-base-change); Stacks 0A0B (lemma-zariski-h0-proper-over-henselian-pair, etale-cohomology.tex:18167, read: Gamma(X, F) = Gamma(Z, F|_Z) for every sheaf on the topological space of X; new unsplit node lem-weil-pbc-zariski-h0-proper-henselian-pair) applied to the sheaf of {0,1}-valued continuous functions, whose sections are the clopens; clause (a); clause (b) via the clopen/idempotent correspondence for schemes (new unsplit node lem-weil-pbc-scheme-clopen-idempotent; Mathlib has the affine case). Statement rewritten as (a) clopens correspond (the form thm-weil-pbc-finite-etale-lifting uses) and (b) idempotents lift uniquely; the counterexample kept in one line; thm-weil-pbc-stein-inputs dropped (unused). Lean attached (sorry). The import flags no_proof_in_blueprint/open_problem now describe history only: the node has a proof on the route."
- }
+  "proof": [
+    {
+      "text": "*Step 1 (the closed fibre as a closed subset).* $S_0\\to S$ is a closed immersion [lem-weil-pbc-spec-quotient-closed-immersion], hence so is its base change $i:Z_0=Z\\times_SS_0\\to Z$ [lem-weil-pbc-closed-immersion-base-change]. By definition of a closed immersion [def-weil-closed-immersion], $i$ is a homeomorphism of $Z_0$ onto the closed subset $T=i(Z_0)\\subseteq Z$. For an open $W\\subseteq Z$, the scheme $W\\times_SS_0=W\\times_ZZ_0$ is the open subscheme $i^{-1}(W)$ of $Z_0$. Since $i:Z_0\\to T$ is a homeomorphism, $W'\\mapsto i(W')$ is a bijection from the open and closed subsets of $Z_0$ to the open and closed subsets of $T$ (relative topology), and it sends $i^{-1}(W)$ to $W\\cap T$.",
+      "uses": [
+        "lem-weil-pbc-spec-quotient-closed-immersion",
+        "lem-weil-pbc-closed-immersion-base-change",
+        "def-weil-closed-immersion"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/etale-cohomology.tex",
+        "place": "Lemma 59.91.1 (Tag 0A0B), statement: $Z=X\\times_{\\operatorname{Spec}A}\\operatorname{Spec}(A/I)$ as a closed subset; written out by the agent"
+      }
+    },
+    {
+      "text": "*Step 2 (Tag 0A0B applied to the sheaf of $\\{0,1\\}$-valued locally constant functions).* Let $\\mathcal C$ be the sheaf on the topological space $Z$ with $\\mathcal C(U)$ the set of continuous maps $U\\to\\{0,1\\}$ ($\\{0,1\\}$ discrete); $\\chi\\mapsto\\chi^{-1}(1)$ identifies $\\mathcal C(U)$ with the set of open and closed subsets of $U$, compatibly with restriction ($U'\\subseteq U$: $\\chi^{-1}(1)\\cap U'$). Its inverse image $\\mathcal C|_T$ along $T\\subseteq Z$ has $\\Gamma(T,\\mathcal C|_T)$ = continuous maps $T\\to\\{0,1\\}$, the restriction map $\\Gamma(Z,\\mathcal C)\\to\\Gamma(T,\\mathcal C|_T)$ being $\\chi\\mapsto\\chi|_T$: a section of the inverse image is, near each point $t\\in T$, the restriction to $T$ of a section $\\chi$ of $\\mathcal C$ over an open $V\\ni t$ of $Z$, hence locally constant on $T$, and germs at $t$ are determined by their values near $t$; conversely a continuous $\\chi:T\\to\\{0,1\\}$ is locally constant, so near each $t\\in T$ it is the restriction of the constant function $\\chi(t)$ on an open of $Z$, and these local sections of the presheaf inverse image agree on overlaps and glue in the sheafification. The lemma [lem-weil-pbc-zariski-h0-proper-henselian-pair] for the henselian pair $(A,I)$, the proper $Z\\to S$ and the sheaf $\\mathcal C$ says that $\\chi\\mapsto\\chi|_T$ is bijective; that is, $W\\mapsto W\\cap T$ is a bijection from the open and closed subsets of $Z$ to those of $T$.",
+      "uses": [
+        "lem-weil-pbc-zariski-h0-proper-henselian-pair"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/etale-cohomology.tex",
+        "place": "Lemma 59.91.1 (Tag 0A0B), label lemma-zariski-h0-proper-over-henselian-pair, line 18167; the choice of the sheaf $\\mathcal C$ and the computation of $\\Gamma(T,\\mathcal C|_T)$ written out by the agent"
+      }
+    },
+    {
+      "text": "*Step 3 (statement (a)).* By Steps 1 and 2, $W\\mapsto i^{-1}(W)=W\\times_SS_0$ is the composite of the bijection $W\\mapsto W\\cap T$ (Step 2) and the inverse of the bijection $W'\\mapsto i(W')$ (Step 1), hence a bijection from the open and closed subsets of $Z$ to those of $Z_0$. If $W$ is open and closed with $W\\times_SS_0=\\emptyset$, then $W$ and $\\emptyset$ have the same image, so $W=\\emptyset$ by injectivity.",
+      "uses": [],
+      "elementary": true,
+      "source": {
+        "document": "literature/stacks-project/etale-cohomology.tex",
+        "place": "Lemma 59.91.1 (Tag 0A0B); written out by the agent"
+      }
+    },
+    {
+      "text": "*Step 4 (statement (b)).* By [lem-weil-pbc-scheme-clopen-idempotent] (b), $e\\mapsto U_e$ is a bijection from the idempotents of $H^0(Z,\\mathcal O_Z)$ to the open and closed subsets of $Z$, and likewise for $Z_0$; by (c) of that lemma applied to $g=i$, $i^\\sharp(e)$ is idempotent and $U_{i^\\sharp(e)}=i^{-1}(U_e)$. So the map $e\\mapsto i^\\sharp(e)$ on idempotents is, through these two bijections, the map $W\\mapsto i^{-1}(W)$ of Step 3, which is bijective. Hence $i^\\sharp$ is bijective on idempotents: every idempotent of $H^0(Z_0,\\mathcal O_{Z_0})$ is $i^\\sharp(e)$ for exactly one idempotent $e$ of $H^0(Z,\\mathcal O_Z)$.",
+      "uses": [
+        "lem-weil-pbc-scheme-clopen-idempotent"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/algebra.tex",
+        "place": "Algebra, Lemma 10.21.3 (Tag 00EE) for the correspondence on affine pieces; the passage to idempotents written out by the agent"
+      }
+    }
+  ],
+  "proof_deps": [
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "lem-weil-pbc-scheme-clopen-idempotent",
+    "lem-weil-pbc-spec-quotient-closed-immersion",
+    "lem-weil-pbc-zariski-h0-proper-henselian-pair"
+  ],
+  "proof_origin": {
+    "by": "document",
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma 59.91.1 (Tag 0A0B) applied to the sheaf of locally constant $\\{0,1\\}$-valued functions; Steps 1, 3 and 4 (closed fibre as closed subset, clopens to idempotents) written out by the agent"
+  },
+  "mathlib_searches": [
+    {
+      "tool": "leansearch",
+      "query": "proper scheme over henselian pair: idempotents of global sections lift from closed fibre",
+      "results": "StandardEtalePair.existsUnique_hasMap_of_hasMap_quotient_of_sq_eq_bot, Scheme.germ_stalkClosedPointTo_Spec, isProper_eq, HenselianLocalRing, finite_appTop_of_universallyClosed (none states the claim)",
+      "date": "2026-10-10",
+      "verdict": "no match"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "idempotents of global sections of a proper scheme over a henselian pair correspond bijectively to idempotents of global sections of its closed fibre",
+      "results": "isOpenImmersion_SpecMap_iff_of_surjective, Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq, ProjIsoSpecTopComponent.toSpec_bijective, PrimeSpectrum.coe_isIdempotentElemEquivClopens_apply",
+      "date": "2026-10-10",
+      "verdict": "no match"
+    },
+    {
+      "tool": "loogle",
+      "query": "HenselianRing, AlgebraicGeometry.IsProper",
+      "results": "none",
+      "date": "2026-10-10",
+      "verdict": "no match"
+    },
+    {
+      "tool": "grep",
+      "query": "grep -rln 'HenselianRing\\|HenselianLocalRing' Mathlib/; grep -rn 'IsIdempotentElem' Mathlib/AlgebraicGeometry",
+      "results": "Henselian only in RingTheory/Henselian.lean; IsIdempotentElem in AlgebraicGeometry only at Morphisms/OpenImmersion.lean:38",
+      "date": "2026-10-10",
+      "verdict": "no match"
+    }
+  ],
+  "mathlib_match": null,
+  "status": "split",
+  "merged_into": null,
+  "import_flags": [
+    "no_proof_in_blueprint",
+    "open_problem"
+  ],
+  "blueprint_kind": "remark",
+  "blueprint_order": 1137,
+  "blueprint_uses": [
+    "def-weil-pbc-henselian-terminology",
+    "def-weil-pbc-scheme-conventions",
+    "thm-weil-pbc-stein-inputs"
+  ],
+  "blueprint_tags": [
+    "latex:openproblem"
+  ],
+  "uses_not_cited": [
+    "def-weil-pbc-henselian-terminology",
+    "def-weil-pbc-scheme-conventions",
+    "thm-weil-pbc-stein-inputs"
+  ],
+  "lean_audit": {
+    "master": {
+      "state": "none",
+      "decls": [],
+      "missing": [
+        "AlgebraicGeometry.Scheme.bijective_appTop_idempotent_of_henselianRing"
+      ]
+    },
+    "slopmaster2": {
+      "state": "sorry_here",
+      "decls": [
+        {
+          "name": "AlgebraicGeometry.Scheme.bijective_appTop_idempotent_of_henselianRing",
+          "module": "WeilConjectures.AlgebraicGeometry.HenselianFiniteEtale",
+          "lines": [
+            119,
+            130
+          ],
+          "kind": "theorem",
+          "sorry": true
+        }
+      ],
+      "missing": [],
+      "open": []
+    }
+  },
+  "chapter": "sec-proper-base-change",
+  "unit": "sk-thm-p1",
+  "split_report": {
+    "date": "2026-10-10",
+    "item": "thm-weil-pbc-henselian-idempotent-lifting",
+    "worker": "stage1",
+    "summary": "The blueprint gave no proof (interface). Found Tag 0A0B = Etale Cohomology Lemma 59.91.1 (lemma-zariski-h0-proper-over-henselian-pair): for (A,I) henselian and X proper over A, Gamma(X,F)=Gamma(Z,F|_Z) for every sheaf on the topological space X. The item is that lemma applied to the sheaf of {0,1}-valued locally constant functions (whose sections are clopens), combined with the closed-immersion description of Z_0 and the clopen/idempotent correspondence for schemes. Statement rewritten: blueprint-status prose removed, counterexample kept in one line, and the clopen bijection W -> W x_S S_0 with its injectivity form ('a clopen missing Z_0 is empty') stated as (a), as thm-weil-pbc-finite-etale-lifting uses it. thm-weil-pbc-stein-inputs dropped from proof_deps (unused; it records unproved inputs, and its (ii) is a step inside the proof of 0A0B). New nodes: lem-weil-pbc-zariski-h0-proper-henselian-pair (Tag 0A0B, unsplit), lem-weil-pbc-scheme-clopen-idempotent (unsplit; Mathlib has only the affine case), lem-weil-pbc-spec-quotient-closed-immersion (Mathlib leaf)."
+  },
+  "lean": {
+    "module": "WeilConjectures.AlgebraicGeometry.HenselianFiniteEtale",
+    "declaration": "AlgebraicGeometry.Scheme.bijective_appTop_idempotent_of_henselianRing",
+    "branch": "slopmaster2",
+    "line": 119,
+    "declarations": [
+      "AlgebraicGeometry.Scheme.bijective_appTop_idempotent_of_henselianRing"
+    ],
+    "sorry_free": false,
+    "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state sorry_here)"
+  },
+  "reviewed": {
+    "date": "2026-10-10",
+    "by": "L",
+    "result": "pass",
+    "note": "The blueprint gave no proof. Four steps: the closed fibre as a closed subset (new Mathlib leaf lem-weil-pbc-spec-quotient-closed-immersion: IsClosedImmersion.spec_of_quotient_mk ClosedImmersion.lean:115, verified; lem-weil-pbc-closed-immersion-base-change); Stacks 0A0B (lemma-zariski-h0-proper-over-henselian-pair, etale-cohomology.tex:18167, read: Gamma(X, F) = Gamma(Z, F|_Z) for every sheaf on the topological space of X; new unsplit node lem-weil-pbc-zariski-h0-proper-henselian-pair) applied to the sheaf of {0,1}-valued continuous functions, whose sections are the clopens; clause (a); clause (b) via the clopen/idempotent correspondence for schemes (new unsplit node lem-weil-pbc-scheme-clopen-idempotent; Mathlib has the affine case). Statement rewritten as (a) clopens correspond (the form thm-weil-pbc-finite-etale-lifting uses) and (b) idempotents lift uniquely; the counterexample kept in one line; thm-weil-pbc-stein-inputs dropped (unused). Lean attached (sorry). The import flags no_proof_in_blueprint/open_problem now describe history only: the node has a proof on the route."
+  }
 }

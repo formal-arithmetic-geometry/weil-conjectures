@@ -1,95 +1,99 @@
 {
- "id": "lem-sc-dim-one-point-outside-open-closed",
- "blueprint": {
-  "is": null,
-  "from": {
-   "node": "lem-sc-zero-generic-acyclic",
-   "place": "## Proof, first paragraph: 'the remaining points of its non-vanishing locus are closed points whose image in $C$ is closed too' (that every point of the integral curve other than its generic point is closed, so a sheaf with zero generic stalk is supported on closed points)",
-   "via": []
+  "id": "lem-sc-dim-one-point-outside-open-closed",
+  "blueprint": {
+    "is": null,
+    "from": {
+      "node": "lem-sc-zero-generic-acyclic",
+      "place": "## Proof, first paragraph: 'the remaining points of its non-vanishing locus are closed points whose image in $C$ is closed too' (that every point of the integral curve other than its generic point is closed, so a sheaf with zero generic stalk is supported on closed points)",
+      "via": []
+    },
+    "same_as": []
   },
-  "same_as": []
- },
- "kind": "statement",
- "title": "In an irreducible T0 space of dimension at most one, points off a nonempty open are closed",
- "statement": "Let $X$ be a topological space which is irreducible [def-weil-irreducible-components] and Kolmogorov (for any two distinct points of $X$ there is an open subset of $X$ containing exactly one of them), and whose Krull dimension satisfies $\\dim X\\le1$ [def-kun-topological-krull-dimension]. Let $U\\subseteq X$ be a nonempty open subset and $x\\in X\\setminus U$. Then $\\{x\\}$ is closed in $X$.",
- "source": {
-  "document": "agent-written, following the Lean declaration",
-  "place": "Lean: ~/weil-conjectures-slopmaster2/WeilConjectures/Mathlib/Topology/KrullDimension.lean, IsOpen.isClosed_singleton_of_mem_compl, lines 72-102 (a proper specialization y of x would give the chain $\\overline{\\{y\\}}\\subsetneq\\overline{\\{x\\}}\\subsetneq X$ of length 2)"
- },
- "stmt_deps": [
-  "def-weil-irreducible-components",
-  "def-kun-topological-krull-dimension"
- ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
- "mathlib_searches": [
-  {
-   "tool": "leansearch",
-   "query": "irreducible space of Krull dimension at most one, point outside a nonempty open set is closed (also: in an irreducible topological space of Krull dimension at most one every point other than the generic point is closed)",
-   "results": "service error: HTTP 500 Internal Server Error from leansearch.net, both through lean_leansearch (twice) and a direct POST to https://leansearch.net/search",
-   "date": "2026-10-10",
-   "verdict": "no result (service down); verdict rests on the other searches"
+  "kind": "statement",
+  "title": "In an irreducible T0 space of dimension at most one, points off a nonempty open are closed",
+  "statement": "Let $X$ be a topological space which is irreducible [def-weil-irreducible-components] and Kolmogorov (for any two distinct points of $X$ there is an open subset of $X$ containing exactly one of them), and whose Krull dimension satisfies $\\dim X\\le1$ [def-kun-topological-krull-dimension]. Let $U\\subseteq X$ be a nonempty open subset and $x\\in X\\setminus U$. Then $\\{x\\}$ is closed in $X$.",
+  "source": {
+    "document": "agent-written, following the Lean declaration",
+    "place": "Lean: ~/weil-conjectures-slopmaster2/WeilConjectures/Mathlib/Topology/KrullDimension.lean, IsOpen.isClosed_singleton_of_mem_compl, lines 72-102 (a proper specialization y of x would give the chain $\\overline{\\{y\\}}\\subsetneq\\overline{\\{x\\}}\\subsetneq X$ of length 2)"
   },
-  {
-   "tool": "leanfinder",
-   "query": "sober irreducible space with topologicalKrullDim <= 1: a point which is not the generic point has closed singleton; every point outside a nonempty open subset of an irreducible T0 space of dimension at most one is a closed point",
-   "results": "IsIrreducible.isGenericPoint_genericPoint, quasiSober_iff, QuasiSober.sober, genericPoint, genericPoint_spec, genericPoints_eq_singleton, genericPoints.isGenericPoint_ofComponent (Mathlib.Topology.Sober): generic points only, nothing about closed points in dimension one",
-   "date": "2026-10-10",
-   "verdict": "no match"
-  },
-  {
-   "tool": "loogle",
-   "query": "topologicalKrullDim, IsClosed",
-   "results": "none",
-   "date": "2026-10-10",
-   "verdict": "no match"
-  },
-  {
-   "tool": "grep",
-   "query": "grep -rn 'topologicalKrullDim' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib | grep -i 'closed\\|singleton'; grep -rln topologicalKrullDim (same dir)",
-   "results": "no line; the notion occurs only in Topology/KrullDimension.lean, RingTheory/Spectrum/Prime/Topology.lean, AlgebraicGeometry/Artinian.lean, none states this. The project declaration IsOpen.isClosed_singleton_of_mem_compl (WeilConjectures/Mathlib/Topology/KrullDimension.lean:75) states it, sorry-free by the sorry map",
-   "date": "2026-10-10",
-   "verdict": "no match in Mathlib; Lean of slopmaster2 states it exactly"
-  }
- ],
- "mathlib_match": null,
- "status": "unsplit",
- "merged_into": null,
- "created": {
-  "by": "worker",
-  "item": "lem-sc-zero-generic-acyclic",
-  "date": "2026-10-10"
- },
- "lean_audit": {
-  "master": {
-   "state": "none"
-  },
-  "slopmaster2": {
-   "state": "closed",
-   "decls": [
-    {
-     "name": "IsOpen.isClosed_singleton_of_mem_compl",
-     "module": "WeilConjectures.Mathlib.Topology.KrullDimension",
-     "lines": [
-      72,
-      102
-     ],
-     "kind": "theorem",
-     "sorry": false
-    }
-   ],
-   "missing": [],
-   "open": []
-  }
- },
- "chapter": "sec-curve-estimates",
- "unit": "sk-prop-cd",
- "lean": {
-  "branch": "slopmaster2",
-  "declarations": [
-   "IsOpen.isClosed_singleton_of_mem_compl"
+  "stmt_deps": [
+    "def-weil-irreducible-components",
+    "def-kun-topological-krull-dimension"
   ],
-  "note": "attached by the lead 2026-10-10 after the worker's attachment: IsOpen.isClosed_singleton_of_mem_compl (Topology/KrullDimension.lean 72-102)"
- }
+  "proof": [],
+  "proof_deps": [],
+  "proof_origin": null,
+  "mathlib_searches": [
+    {
+      "tool": "leansearch",
+      "query": "irreducible space of Krull dimension at most one, point outside a nonempty open set is closed (also: in an irreducible topological space of Krull dimension at most one every point other than the generic point is closed)",
+      "results": "service error: HTTP 500 Internal Server Error from leansearch.net, both through lean_leansearch (twice) and a direct POST to https://leansearch.net/search",
+      "date": "2026-10-10",
+      "verdict": "no result (service down); verdict rests on the other searches"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "sober irreducible space with topologicalKrullDim <= 1: a point which is not the generic point has closed singleton; every point outside a nonempty open subset of an irreducible T0 space of dimension at most one is a closed point",
+      "results": "IsIrreducible.isGenericPoint_genericPoint, quasiSober_iff, QuasiSober.sober, genericPoint, genericPoint_spec, genericPoints_eq_singleton, genericPoints.isGenericPoint_ofComponent (Mathlib.Topology.Sober): generic points only, nothing about closed points in dimension one",
+      "date": "2026-10-10",
+      "verdict": "no match"
+    },
+    {
+      "tool": "loogle",
+      "query": "topologicalKrullDim, IsClosed",
+      "results": "none",
+      "date": "2026-10-10",
+      "verdict": "no match"
+    },
+    {
+      "tool": "grep",
+      "query": "grep -rn 'topologicalKrullDim' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib | grep -i 'closed\\|singleton'; grep -rln topologicalKrullDim (same dir)",
+      "results": "no line; the notion occurs only in Topology/KrullDimension.lean, RingTheory/Spectrum/Prime/Topology.lean, AlgebraicGeometry/Artinian.lean, none states this. The project declaration IsOpen.isClosed_singleton_of_mem_compl (WeilConjectures/Mathlib/Topology/KrullDimension.lean:75) states it, sorry-free by the sorry map",
+      "date": "2026-10-10",
+      "verdict": "no match in Mathlib; Lean of slopmaster2 states it exactly"
+    }
+  ],
+  "mathlib_match": null,
+  "status": "unsplit",
+  "merged_into": null,
+  "created": {
+    "by": "worker",
+    "item": "lem-sc-zero-generic-acyclic",
+    "date": "2026-10-10"
+  },
+  "lean_audit": {
+    "master": {
+      "state": "none"
+    },
+    "slopmaster2": {
+      "state": "closed",
+      "decls": [
+        {
+          "name": "IsOpen.isClosed_singleton_of_mem_compl",
+          "module": "WeilConjectures.Mathlib.Topology.KrullDimension",
+          "lines": [
+            72,
+            102
+          ],
+          "kind": "theorem",
+          "sorry": false
+        }
+      ],
+      "missing": [],
+      "open": []
+    }
+  },
+  "chapter": "sec-curve-estimates",
+  "unit": "sk-prop-cd",
+  "lean": {
+    "module": "WeilConjectures.Mathlib.Topology.KrullDimension",
+    "declaration": "IsOpen.isClosed_singleton_of_mem_compl",
+    "branch": "slopmaster2",
+    "line": 72,
+    "declarations": [
+      "IsOpen.isClosed_singleton_of_mem_compl"
+    ],
+    "sorry_free": true,
+    "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state closed)"
+  }
 }

@@ -1,300 +1,304 @@
 {
- "id": "lem-weil-pbc-inverse-image-composition",
- "blueprint": {
-  "is": null,
-  "from": {
-   "node": "lemma-weil-pbc-p1-exchange-geometric-stalk",
-   "place": "step 4, 5 of its split (source: ## Proof, first proof, 'To check the upper square' paragraph (the upper square of the diagram with $\\Phi_S,\\Phi_T,\\lambda$); Stacks etale-cohomology.tex proof of Theorem Tag 095T, fourth paragraph ('By our discussion above the map on stalks at $\\bar t$ is the map'))",
-   "via": [
-    "lem-weil-pbc-cohomology-pullback-functorial"
-   ]
+  "id": "lem-weil-pbc-inverse-image-composition",
+  "blueprint": {
+    "is": null,
+    "from": {
+      "node": "lemma-weil-pbc-p1-exchange-geometric-stalk",
+      "place": "step 4, 5 of its split (source: ## Proof, first proof, 'To check the upper square' paragraph (the upper square of the diagram with $\\Phi_S,\\Phi_T,\\lambda$); Stacks etale-cohomology.tex proof of Theorem Tag 095T, fourth paragraph ('By our discussion above the map on stalks at $\\bar t$ is the map'))",
+      "via": [
+        "lem-weil-pbc-cohomology-pullback-functorial"
+      ]
+    },
+    "same_as": null
   },
-  "same_as": null
- },
- "kind": "statement",
- "title": "Inverse images along a composite: the canonical isomorphism compatible with the units",
- "statement": "Let $u:Y\\to X$ and $v:Z\\to Y$ be morphisms of schemes [def-pc-scheme], with small etale sites [def-weil-pbc-etale-site], categories of abelian sheaves $\\Ab(-_{\\Et})$ [def-weil-pbc-abelian-etale-sheaves], direct images $u_*,v_*,(u\\circ v)_*$ given by $(u_*F)(W)=F(W\\times_XY)$ [def-weil-pbc-direct-image], and inverse images $u^{-1},v^{-1},(u\\circ v)^{-1}$ with the units $\\eta_u,\\eta_v,\\eta_{u\\circ v}$ of the adjunctions $u^{-1}\\dashv u_*$, $v^{-1}\\dashv v_*$, $(u\\circ v)^{-1}\\dashv(u\\circ v)_*$ [def-weil-pbc-inverse-image].\n\n1. For an abelian sheaf $F$ on $Z_{\\Et}$ and an object $W$ of $X_{\\Et}$, the canonical isomorphism of $Z$-schemes $(W\\times_XY)\\times_YZ\\xrightarrow{\\sim}W\\times_XZ$ [def-pc-fibre-product] induces isomorphisms $d_{u,v,F}(W):((u\\circ v)_*F)(W)=F(W\\times_XZ)\\to F((W\\times_XY)\\times_YZ)=(u_*v_*F)(W)$, compatible with the restriction maps in $W$ and natural in $F$; they form an isomorphism of functors $d_{u,v}:(u\\circ v)_*\\xrightarrow{\\sim}u_*\\circ v_*$.\n2. There is a unique isomorphism of functors $c_{u,v}:v^{-1}\\circ u^{-1}\\xrightarrow{\\sim}(u\\circ v)^{-1}$ from $\\Ab(X_{\\Et})$ to $\\Ab(Z_{\\Et})$ such that for every abelian sheaf $G$ on $X_{\\Et}$\n$$\n u_*v_*(c_{u,v,G})\\circ u_*(\\eta_{v,u^{-1}G})\\circ\\eta_{u,G}=d_{u,v,(u\\circ v)^{-1}G}\\circ\\eta_{u\\circ v,G}:\\ G\\longrightarrow u_*v_*(u\\circ v)^{-1}G,\n$$\nthat is, $c_{u,v}$ carries the unit $u_*\\eta_vu^{-1}\\circ\\eta_u$ of the composite adjunction $v^{-1}u^{-1}\\dashv u_*v_*$ to the unit of $(u\\circ v)^{-1}\\dashv(u\\circ v)_*$, transported along $d_{u,v}$.\n3. For $u=\\mathrm{id}_X$, the isomorphisms $W\\times_XX\\xrightarrow{\\sim}W$ give an isomorphism $d_X:(\\mathrm{id}_X)_*\\xrightarrow{\\sim}\\mathrm{id}$ as in (1), and there is a unique isomorphism of functors $e_X:\\mathrm{id}_X^{-1}\\xrightarrow{\\sim}\\mathrm{id}_{\\Ab(X_{\\Et})}$ with $e_{X,G}\\circ d_{X,\\mathrm{id}_X^{-1}G}\\circ\\eta_{\\mathrm{id}_X,G}=\\mathrm{id}_G$ for every $G$.",
- "source": {
-  "document": "literature/stacks-project/sites.tex",
-  "place": "Lemma Tag 03CB (lemma-composition-morphisms-sites) and its proof: $(u\\circ v)_s$ and $u_s\\circ v_s$ are both left adjoints of $(u\\circ v)^s$, hence isomorphic; for the small etale sites literature/stacks-project/topologies.tex Lemmas Tag 021I (lemma-morphism-big-small-etale, description of $f_{small,*}$) and Tag 021J (lemma-composition-etale, $g_{small}\\circ f_{small}=(g\\circ f)_{small}$); the uniqueness of the isomorphism of left adjoints compatible with the units is literature/stacks-project/categories.tex Lemma Tag 0B65 (lemma-transformation-between-functors-and-adjoints) and the Yoneda argument of its proof"
- },
- "stmt_deps": [
-  "def-pc-scheme",
-  "def-weil-pbc-etale-site",
-  "def-weil-pbc-abelian-etale-sheaves",
-  "def-weil-pbc-direct-image",
-  "def-weil-pbc-inverse-image",
-  "def-pc-fibre-product"
- ],
- "proof": [
-  {
-   "text": "**Step 1 (clause 1: the isomorphism $d_{u,v}$).** Let $W\\to X$ be an object of $X_{\\Et}$. In the diagram with rows $(W\\times_XY)\\times_YZ\\to W\\times_XY\\to W$ over $Z\\xrightarrow{v}Y\\xrightarrow{u}X$ [def-pc-fibre-product], both squares are cartesian (each is the chosen fibre product), so by the pasting lemma [lem-weil-pbc-cartesian-square-pasting] the outer rectangle is cartesian: $(W\\times_XY)\\times_YZ$ with its projections to $W$ and to $Z$ is a fibre product of $W\\to X$ and $u\\circ v:Z\\to X$. By the uniqueness of fibre products [def-pc-fibre-product] there is a unique isomorphism $\\phi_W:(W\\times_XY)\\times_YZ\\xrightarrow{\\sim}W\\times_XZ$ compatible with the projections to $W$ and to $Z$; in particular $\\phi_W$ is a $Z$-morphism, i.e. an isomorphism in $Z_{\\Et}$ [def-weil-pbc-etale-site] (both sides are etale over $Z$ as base changes of the etale $W\\to X$, as in [def-weil-pbc-direct-image]). For a morphism $g:W'\\to W$ of $X_{\\Et}$, the two $Z$-morphisms $\\phi_W\\circ((g\\times_XY)\\times_YZ)$ and $(g\\times_XZ)\\circ\\phi_{W'}$ from $(W'\\times_XY)\\times_YZ$ to $W\\times_XZ$ have the same compositions with both projections (each projection is $g$ composed with the projection to $W'$, resp. the projection to $Z$), so they are equal by the uniqueness clause of the universal property [def-pc-fibre-product]: $\\phi$ is natural in $W$. For an abelian sheaf $F$ on $Z_{\\Et}$ put $d_{u,v,F}(W)=F(\\phi_W):F(W\\times_XZ)\\to F((W\\times_XY)\\times_YZ)$; by the formula $(s_*F)(W)=F(W\\times_ST)$ [def-weil-pbc-direct-image] applied to $u\\circ v$, to $v$ and then to $u$, its source is $((u\\circ v)_*F)(W)$ and its target $(v_*F)(W\\times_XY)=(u_*v_*F)(W)$. It is bijective with inverse $F(\\phi_W^{-1})$; compatibility with the restriction maps along $g$ is $F$ applied to the naturality square of $\\phi$ (the restriction maps of $(u\\circ v)_*F$ and $u_*v_*F$ along $g$ being $F(g\\times_XZ)$ and $F((g\\times_XY)\\times_YZ)$); naturality in $F$ holds because a morphism of sheaves $F\\to F'$ is a natural transformation and so commutes with $F(\\phi_W)$, $F'(\\phi_W)$. Hence the $d_{u,v,F}$ are isomorphisms of sheaves, natural in $F$, i.e. an isomorphism of functors $d_{u,v}:(u\\circ v)_*\\xrightarrow{\\sim}u_*\\circ v_*$. This is the identity $(g\\circ f)_{small,*}=g_{small,*}\\circ f_{small,*}$ of Stacks 021J, read with the canonical isomorphism of iterated fibre products written out.",
-   "uses": [
+  "kind": "statement",
+  "title": "Inverse images along a composite: the canonical isomorphism compatible with the units",
+  "statement": "Let $u:Y\\to X$ and $v:Z\\to Y$ be morphisms of schemes [def-pc-scheme], with small etale sites [def-weil-pbc-etale-site], categories of abelian sheaves $\\Ab(-_{\\Et})$ [def-weil-pbc-abelian-etale-sheaves], direct images $u_*,v_*,(u\\circ v)_*$ given by $(u_*F)(W)=F(W\\times_XY)$ [def-weil-pbc-direct-image], and inverse images $u^{-1},v^{-1},(u\\circ v)^{-1}$ with the units $\\eta_u,\\eta_v,\\eta_{u\\circ v}$ of the adjunctions $u^{-1}\\dashv u_*$, $v^{-1}\\dashv v_*$, $(u\\circ v)^{-1}\\dashv(u\\circ v)_*$ [def-weil-pbc-inverse-image].\n\n1. For an abelian sheaf $F$ on $Z_{\\Et}$ and an object $W$ of $X_{\\Et}$, the canonical isomorphism of $Z$-schemes $(W\\times_XY)\\times_YZ\\xrightarrow{\\sim}W\\times_XZ$ [def-pc-fibre-product] induces isomorphisms $d_{u,v,F}(W):((u\\circ v)_*F)(W)=F(W\\times_XZ)\\to F((W\\times_XY)\\times_YZ)=(u_*v_*F)(W)$, compatible with the restriction maps in $W$ and natural in $F$; they form an isomorphism of functors $d_{u,v}:(u\\circ v)_*\\xrightarrow{\\sim}u_*\\circ v_*$.\n2. There is a unique isomorphism of functors $c_{u,v}:v^{-1}\\circ u^{-1}\\xrightarrow{\\sim}(u\\circ v)^{-1}$ from $\\Ab(X_{\\Et})$ to $\\Ab(Z_{\\Et})$ such that for every abelian sheaf $G$ on $X_{\\Et}$\n$$\n u_*v_*(c_{u,v,G})\\circ u_*(\\eta_{v,u^{-1}G})\\circ\\eta_{u,G}=d_{u,v,(u\\circ v)^{-1}G}\\circ\\eta_{u\\circ v,G}:\\ G\\longrightarrow u_*v_*(u\\circ v)^{-1}G,\n$$\nthat is, $c_{u,v}$ carries the unit $u_*\\eta_vu^{-1}\\circ\\eta_u$ of the composite adjunction $v^{-1}u^{-1}\\dashv u_*v_*$ to the unit of $(u\\circ v)^{-1}\\dashv(u\\circ v)_*$, transported along $d_{u,v}$.\n3. For $u=\\mathrm{id}_X$, the isomorphisms $W\\times_XX\\xrightarrow{\\sim}W$ give an isomorphism $d_X:(\\mathrm{id}_X)_*\\xrightarrow{\\sim}\\mathrm{id}$ as in (1), and there is a unique isomorphism of functors $e_X:\\mathrm{id}_X^{-1}\\xrightarrow{\\sim}\\mathrm{id}_{\\Ab(X_{\\Et})}$ with $e_{X,G}\\circ d_{X,\\mathrm{id}_X^{-1}G}\\circ\\eta_{\\mathrm{id}_X,G}=\\mathrm{id}_G$ for every $G$.",
+  "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Lemma Tag 03CB (lemma-composition-morphisms-sites) and its proof: $(u\\circ v)_s$ and $u_s\\circ v_s$ are both left adjoints of $(u\\circ v)^s$, hence isomorphic; for the small etale sites literature/stacks-project/topologies.tex Lemmas Tag 021I (lemma-morphism-big-small-etale, description of $f_{small,*}$) and Tag 021J (lemma-composition-etale, $g_{small}\\circ f_{small}=(g\\circ f)_{small}$); the uniqueness of the isomorphism of left adjoints compatible with the units is literature/stacks-project/categories.tex Lemma Tag 0B65 (lemma-transformation-between-functors-and-adjoints) and the Yoneda argument of its proof"
+  },
+  "stmt_deps": [
+    "def-pc-scheme",
+    "def-weil-pbc-etale-site",
+    "def-weil-pbc-abelian-etale-sheaves",
+    "def-weil-pbc-direct-image",
+    "def-weil-pbc-inverse-image",
+    "def-pc-fibre-product"
+  ],
+  "proof": [
+    {
+      "text": "**Step 1 (clause 1: the isomorphism $d_{u,v}$).** Let $W\\to X$ be an object of $X_{\\Et}$. In the diagram with rows $(W\\times_XY)\\times_YZ\\to W\\times_XY\\to W$ over $Z\\xrightarrow{v}Y\\xrightarrow{u}X$ [def-pc-fibre-product], both squares are cartesian (each is the chosen fibre product), so by the pasting lemma [lem-weil-pbc-cartesian-square-pasting] the outer rectangle is cartesian: $(W\\times_XY)\\times_YZ$ with its projections to $W$ and to $Z$ is a fibre product of $W\\to X$ and $u\\circ v:Z\\to X$. By the uniqueness of fibre products [def-pc-fibre-product] there is a unique isomorphism $\\phi_W:(W\\times_XY)\\times_YZ\\xrightarrow{\\sim}W\\times_XZ$ compatible with the projections to $W$ and to $Z$; in particular $\\phi_W$ is a $Z$-morphism, i.e. an isomorphism in $Z_{\\Et}$ [def-weil-pbc-etale-site] (both sides are etale over $Z$ as base changes of the etale $W\\to X$, as in [def-weil-pbc-direct-image]). For a morphism $g:W'\\to W$ of $X_{\\Et}$, the two $Z$-morphisms $\\phi_W\\circ((g\\times_XY)\\times_YZ)$ and $(g\\times_XZ)\\circ\\phi_{W'}$ from $(W'\\times_XY)\\times_YZ$ to $W\\times_XZ$ have the same compositions with both projections (each projection is $g$ composed with the projection to $W'$, resp. the projection to $Z$), so they are equal by the uniqueness clause of the universal property [def-pc-fibre-product]: $\\phi$ is natural in $W$. For an abelian sheaf $F$ on $Z_{\\Et}$ put $d_{u,v,F}(W)=F(\\phi_W):F(W\\times_XZ)\\to F((W\\times_XY)\\times_YZ)$; by the formula $(s_*F)(W)=F(W\\times_ST)$ [def-weil-pbc-direct-image] applied to $u\\circ v$, to $v$ and then to $u$, its source is $((u\\circ v)_*F)(W)$ and its target $(v_*F)(W\\times_XY)=(u_*v_*F)(W)$. It is bijective with inverse $F(\\phi_W^{-1})$; compatibility with the restriction maps along $g$ is $F$ applied to the naturality square of $\\phi$ (the restriction maps of $(u\\circ v)_*F$ and $u_*v_*F$ along $g$ being $F(g\\times_XZ)$ and $F((g\\times_XY)\\times_YZ)$); naturality in $F$ holds because a morphism of sheaves $F\\to F'$ is a natural transformation and so commutes with $F(\\phi_W)$, $F'(\\phi_W)$. Hence the $d_{u,v,F}$ are isomorphisms of sheaves, natural in $F$, i.e. an isomorphism of functors $d_{u,v}:(u\\circ v)_*\\xrightarrow{\\sim}u_*\\circ v_*$. This is the identity $(g\\circ f)_{small,*}=g_{small,*}\\circ f_{small,*}$ of Stacks 021J, read with the canonical isomorphism of iterated fibre products written out.",
+      "uses": [
+        "def-pc-fibre-product",
+        "lem-weil-pbc-cartesian-square-pasting",
+        "def-weil-pbc-etale-site",
+        "def-weil-pbc-direct-image"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/topologies.tex",
+        "place": "Lemma Tag 021I (lemma-morphism-big-small-etale) (2): $f_{small,*}\\mathcal F(U/S)=\\mathcal F(U\\times_ST/T)$; Lemma Tag 021J (lemma-composition-etale) and its proof: $g_{small}\\circ f_{small}=(g\\circ f)_{small}$ from this description of the pushforwards"
+      }
+    },
+    {
+      "text": "**Step 2 (clause 3, first part: $d_X$).** For $u=\\mathrm{id}_X$ and an object $W\\to X$ of $X_{\\Et}$, $(W,\\mathrm{id}_W,W\\to X)$ is a fibre product of $W\\to X$ and $\\mathrm{id}_X$ (a pair $a:T\\to W$, $b:T\\to X$ with $(W\\to X)\\circ a=b$ is determined by $a$), so by uniqueness of fibre products [def-pc-fibre-product] the first projection $\\psi_W:W\\times_XX\\to W$ is an isomorphism of $X$-schemes, with inverse $(\\mathrm{id}_W,W\\to X)$, and as in step 1 it is natural in $W$ (for $g:W'\\to W$, $g\\circ\\psi_{W'}=\\psi_W\\circ(g\\times_XX)$ is the definition of $g\\times_XX$). Put $d_{X,G}(W)=G(\\psi_W^{-1}):G(W\\times_XX)=((\\mathrm{id}_X)_*G)(W)\\to G(W)$ [def-weil-pbc-direct-image]; exactly as in step 1 these are isomorphisms compatible with restrictions and natural in $G$, giving an isomorphism of functors $d_X:(\\mathrm{id}_X)_*\\xrightarrow{\\sim}\\mathrm{id}_{\\Ab(X_{\\Et})}$.",
+      "uses": [
+        "def-pc-fibre-product",
+        "def-weil-pbc-direct-image",
+        "def-weil-pbc-etale-site"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/topologies.tex",
+        "place": "Lemma Tag 021I (lemma-morphism-big-small-etale) (2): $f_{small,*}\\mathcal F(U/S)=\\mathcal F(U\\times_ST/T)$; Lemma Tag 021J (lemma-composition-etale) and its proof: $g_{small}\\circ f_{small}=(g\\circ f)_{small}$ from this description of the pushforwards"
+      }
+    },
+    {
+      "text": "**Step 3 (clause 2: $c_{u,v}$).** By [def-weil-pbc-inverse-image] there are adjunctions $u^{-1}\\dashv u_*$, $v^{-1}\\dashv v_*$ and $(u\\circ v)^{-1}\\dashv(u\\circ v)_*$ with units $\\eta_u,\\eta_v,\\eta_{u\\circ v}$. Composing the first two [def-weil-pbc-composite-adjunction] (with $F=u^{-1}$, $G=u_*$, $H=v^{-1}$, $I=v_*$) gives an adjunction $L_1=v^{-1}\\circ u^{-1}\\dashv R_1=u_*\\circ v_*$ whose unit is $\\eta_{1,G}=u_*(\\eta_{v,u^{-1}G})\\circ\\eta_{u,G}$. Let $L_2=(u\\circ v)^{-1}\\dashv R_2=(u\\circ v)_*$ with $\\eta_2=\\eta_{u\\circ v}$, and $\\delta=d_{u,v}:R_2\\xrightarrow{\\sim}R_1$ the isomorphism of step 1. By [lem-weil-pbc-conjugate-iso-unit-equation] there is a unique natural transformation $c_{u,v}:v^{-1}u^{-1}\\to(u\\circ v)^{-1}$ with $R_1(c_{u,v,G})\\circ\\eta_{1,G}=\\delta_{L_2G}\\circ\\eta_{2,G}$ for every $G$, i.e. $u_*v_*(c_{u,v,G})\\circ u_*(\\eta_{v,u^{-1}G})\\circ\\eta_{u,G}=d_{u,v,(u\\circ v)^{-1}G}\\circ\\eta_{u\\circ v,G}$, and it is an isomorphism. Uniqueness among isomorphisms (as stated) follows from uniqueness among all natural transformations. This is the argument of Stacks 03CB ($(u\\circ v)_s$ and $u_s\\circ v_s$ are both left adjoints of $(u\\circ v)^s$), with the isomorphism of right adjoints $d_{u,v}$ in place of the equality $(u\\circ v)^s=v^s\\circ u^s$, and with the unit compatibility that makes the isomorphism unique (Stacks 0B65).",
+      "uses": [
+        "def-weil-pbc-inverse-image",
+        "def-weil-pbc-composite-adjunction",
+        "lem-weil-pbc-conjugate-iso-unit-equation"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/sites.tex",
+        "place": "Lemma Tag 03CB (lemma-composition-morphisms-sites), proof: $(u\\circ v)_s$ and $u_s\\circ v_s$ are both left adjoints of $(u\\circ v)^s$, hence isomorphic; Definition Tag 03CC and the remark after it"
+      }
+    },
+    {
+      "text": "**Step 4 (clause 3, second part: $e_X$).** Apply [lem-weil-pbc-conjugate-iso-unit-equation] to $L_1=\\mathrm{id}_X^{-1}\\dashv R_1=(\\mathrm{id}_X)_*$ (unit $\\eta_{\\mathrm{id}_X}$, [def-weil-pbc-inverse-image]), to the identity adjunction $L_2=\\mathrm{id}\\dashv R_2=\\mathrm{id}$ on $\\Ab(X_{\\Et})$ with identity unit [def-weil-pbc-composite-adjunction], and to $\\delta=d_X^{-1}:\\mathrm{id}\\xrightarrow{\\sim}(\\mathrm{id}_X)_*$ of step 2: there is a unique natural transformation $e_X:\\mathrm{id}_X^{-1}\\to\\mathrm{id}$ with $(\\mathrm{id}_X)_*(e_{X,G})\\circ\\eta_{\\mathrm{id}_X,G}=d_{X,G}^{-1}$ for every $G$ $(\\ast)$, and it is an isomorphism. By naturality of $d_X$ applied to the morphism $e_{X,G}:\\mathrm{id}_X^{-1}G\\to G$, $(\\mathrm{id}_X)_*(e_{X,G})=d_{X,G}^{-1}\\circ e_{X,G}\\circ d_{X,\\mathrm{id}_X^{-1}G}$; hence for any natural transformation $e':\\mathrm{id}_X^{-1}\\to\\mathrm{id}$, $(\\ast)$ for $e'$ is equivalent (compose with the isomorphism $d_{X,G}$ on the left) to $e'_G\\circ d_{X,\\mathrm{id}_X^{-1}G}\\circ\\eta_{\\mathrm{id}_X,G}=\\mathrm{id}_G$, the equation of clause (3). So $e_X$ is the unique isomorphism with $e_{X,G}\\circ d_{X,\\mathrm{id}_X^{-1}G}\\circ\\eta_{\\mathrm{id}_X,G}=\\mathrm{id}_G$.",
+      "uses": [
+        "def-weil-pbc-inverse-image",
+        "def-weil-pbc-composite-adjunction",
+        "lem-weil-pbc-conjugate-iso-unit-equation"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/categories.tex",
+        "place": "Lemma Tag 0B65 (lemma-transformation-between-functors-and-adjoints) and the Yoneda argument of its proof; Lemma Tag 03CB of sites.tex for the two left adjoints"
+      }
+    }
+  ],
+  "proof_deps": [
     "def-pc-fibre-product",
     "lem-weil-pbc-cartesian-square-pasting",
     "def-weil-pbc-etale-site",
-    "def-weil-pbc-direct-image"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/topologies.tex",
-    "place": "Lemma Tag 021I (lemma-morphism-big-small-etale) (2): $f_{small,*}\\mathcal F(U/S)=\\mathcal F(U\\times_ST/T)$; Lemma Tag 021J (lemma-composition-etale) and its proof: $g_{small}\\circ f_{small}=(g\\circ f)_{small}$ from this description of the pushforwards"
-   }
-  },
-  {
-   "text": "**Step 2 (clause 3, first part: $d_X$).** For $u=\\mathrm{id}_X$ and an object $W\\to X$ of $X_{\\Et}$, $(W,\\mathrm{id}_W,W\\to X)$ is a fibre product of $W\\to X$ and $\\mathrm{id}_X$ (a pair $a:T\\to W$, $b:T\\to X$ with $(W\\to X)\\circ a=b$ is determined by $a$), so by uniqueness of fibre products [def-pc-fibre-product] the first projection $\\psi_W:W\\times_XX\\to W$ is an isomorphism of $X$-schemes, with inverse $(\\mathrm{id}_W,W\\to X)$, and as in step 1 it is natural in $W$ (for $g:W'\\to W$, $g\\circ\\psi_{W'}=\\psi_W\\circ(g\\times_XX)$ is the definition of $g\\times_XX$). Put $d_{X,G}(W)=G(\\psi_W^{-1}):G(W\\times_XX)=((\\mathrm{id}_X)_*G)(W)\\to G(W)$ [def-weil-pbc-direct-image]; exactly as in step 1 these are isomorphisms compatible with restrictions and natural in $G$, giving an isomorphism of functors $d_X:(\\mathrm{id}_X)_*\\xrightarrow{\\sim}\\mathrm{id}_{\\Ab(X_{\\Et})}$.",
-   "uses": [
-    "def-pc-fibre-product",
     "def-weil-pbc-direct-image",
-    "def-weil-pbc-etale-site"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/topologies.tex",
-    "place": "Lemma Tag 021I (lemma-morphism-big-small-etale) (2): $f_{small,*}\\mathcal F(U/S)=\\mathcal F(U\\times_ST/T)$; Lemma Tag 021J (lemma-composition-etale) and its proof: $g_{small}\\circ f_{small}=(g\\circ f)_{small}$ from this description of the pushforwards"
-   }
-  },
-  {
-   "text": "**Step 3 (clause 2: $c_{u,v}$).** By [def-weil-pbc-inverse-image] there are adjunctions $u^{-1}\\dashv u_*$, $v^{-1}\\dashv v_*$ and $(u\\circ v)^{-1}\\dashv(u\\circ v)_*$ with units $\\eta_u,\\eta_v,\\eta_{u\\circ v}$. Composing the first two [def-weil-pbc-composite-adjunction] (with $F=u^{-1}$, $G=u_*$, $H=v^{-1}$, $I=v_*$) gives an adjunction $L_1=v^{-1}\\circ u^{-1}\\dashv R_1=u_*\\circ v_*$ whose unit is $\\eta_{1,G}=u_*(\\eta_{v,u^{-1}G})\\circ\\eta_{u,G}$. Let $L_2=(u\\circ v)^{-1}\\dashv R_2=(u\\circ v)_*$ with $\\eta_2=\\eta_{u\\circ v}$, and $\\delta=d_{u,v}:R_2\\xrightarrow{\\sim}R_1$ the isomorphism of step 1. By [lem-weil-pbc-conjugate-iso-unit-equation] there is a unique natural transformation $c_{u,v}:v^{-1}u^{-1}\\to(u\\circ v)^{-1}$ with $R_1(c_{u,v,G})\\circ\\eta_{1,G}=\\delta_{L_2G}\\circ\\eta_{2,G}$ for every $G$, i.e. $u_*v_*(c_{u,v,G})\\circ u_*(\\eta_{v,u^{-1}G})\\circ\\eta_{u,G}=d_{u,v,(u\\circ v)^{-1}G}\\circ\\eta_{u\\circ v,G}$, and it is an isomorphism. Uniqueness among isomorphisms (as stated) follows from uniqueness among all natural transformations. This is the argument of Stacks 03CB ($(u\\circ v)_s$ and $u_s\\circ v_s$ are both left adjoints of $(u\\circ v)^s$), with the isomorphism of right adjoints $d_{u,v}$ in place of the equality $(u\\circ v)^s=v^s\\circ u^s$, and with the unit compatibility that makes the isomorphism unique (Stacks 0B65).",
-   "uses": [
     "def-weil-pbc-inverse-image",
     "def-weil-pbc-composite-adjunction",
     "lem-weil-pbc-conjugate-iso-unit-equation"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Lemma Tag 03CB (lemma-composition-morphisms-sites), proof: $(u\\circ v)_s$ and $u_s\\circ v_s$ are both left adjoints of $(u\\circ v)^s$, hence isomorphic; Definition Tag 03CC and the remark after it"
-   }
-  },
-  {
-   "text": "**Step 4 (clause 3, second part: $e_X$).** Apply [lem-weil-pbc-conjugate-iso-unit-equation] to $L_1=\\mathrm{id}_X^{-1}\\dashv R_1=(\\mathrm{id}_X)_*$ (unit $\\eta_{\\mathrm{id}_X}$, [def-weil-pbc-inverse-image]), to the identity adjunction $L_2=\\mathrm{id}\\dashv R_2=\\mathrm{id}$ on $\\Ab(X_{\\Et})$ with identity unit [def-weil-pbc-composite-adjunction], and to $\\delta=d_X^{-1}:\\mathrm{id}\\xrightarrow{\\sim}(\\mathrm{id}_X)_*$ of step 2: there is a unique natural transformation $e_X:\\mathrm{id}_X^{-1}\\to\\mathrm{id}$ with $(\\mathrm{id}_X)_*(e_{X,G})\\circ\\eta_{\\mathrm{id}_X,G}=d_{X,G}^{-1}$ for every $G$ $(\\ast)$, and it is an isomorphism. By naturality of $d_X$ applied to the morphism $e_{X,G}:\\mathrm{id}_X^{-1}G\\to G$, $(\\mathrm{id}_X)_*(e_{X,G})=d_{X,G}^{-1}\\circ e_{X,G}\\circ d_{X,\\mathrm{id}_X^{-1}G}$; hence for any natural transformation $e':\\mathrm{id}_X^{-1}\\to\\mathrm{id}$, $(\\ast)$ for $e'$ is equivalent (compose with the isomorphism $d_{X,G}$ on the left) to $e'_G\\circ d_{X,\\mathrm{id}_X^{-1}G}\\circ\\eta_{\\mathrm{id}_X,G}=\\mathrm{id}_G$, the equation of clause (3). So $e_X$ is the unique isomorphism with $e_{X,G}\\circ d_{X,\\mathrm{id}_X^{-1}G}\\circ\\eta_{\\mathrm{id}_X,G}=\\mathrm{id}_G$.",
-   "uses": [
-    "def-weil-pbc-inverse-image",
-    "def-weil-pbc-composite-adjunction",
-    "lem-weil-pbc-conjugate-iso-unit-equation"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/categories.tex",
-    "place": "Lemma Tag 0B65 (lemma-transformation-between-functors-and-adjoints) and the Yoneda argument of its proof; Lemma Tag 03CB of sites.tex for the two left adjoints"
-   }
-  }
- ],
- "proof_deps": [
-  "def-pc-fibre-product",
-  "lem-weil-pbc-cartesian-square-pasting",
-  "def-weil-pbc-etale-site",
-  "def-weil-pbc-direct-image",
-  "def-weil-pbc-inverse-image",
-  "def-weil-pbc-composite-adjunction",
-  "lem-weil-pbc-conjugate-iso-unit-equation"
- ],
- "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/sites.tex",
-  "place": "Lemma Tag 03CB and its proof (uniqueness of left adjoints), with literature/stacks-project/topologies.tex Lemmas Tag 021I (2), 021J for the description of the direct images and literature/stacks-project/categories.tex Lemma Tag 0B65 for the unit compatibility; the iterated-fibre-product isomorphism and the unit equations are written out by the worker"
- },
- "mathlib_searches": [
-  {
-   "tool": "leansearch",
-   "query": "composition of pullbacks of sheaves is isomorphic to pullback along composite, compatible with unit of adjunction",
-   "results": "ChosenPullbacksAlong.unit_pullbackComp_hom, ChosenPullbacksAlong.comp (Mathlib.CategoryTheory.LocallyCartesianClosed.ChosenPullbacksAlong), MorphismProperty.Over.pullbackComp_hom_app_left, Scheme.Modules.pullbackComp (Mathlib.AlgebraicGeometry.Modules.Sheaf, O-modules on the Zariski site), SheafOfModules.conjugateEquiv_pullbackComp_inv, Over.pullbackComp, PresheafOfModules.pullback_comp_id; none for etale abelian sheaves along morphisms of schemes",
-   "date": "2026-10-09",
-   "verdict": "no match (the categorical part is generic: see the grep and loogle entries)"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "pullback along a composite of morphisms of sites is isomorphic to the composite of pullbacks, compatible with adjunction units",
-   "results": "GrothendieckTopology.pullbackComp (Sites.Grothendieck, sieves), GrothendieckTopology.overMapPullbackComp(_hom_app_val_app) (Mathlib.CategoryTheory.Sites.Over: restriction along Over.map, a pushforward-type functor between over sites), PresheafOfModules.pullbackComp, SheafOfModules.pullbackComp (via conjugate equivalence of adjunctions); nothing for the small etale sites of schemes",
-   "date": "2026-10-09",
-   "verdict": "no match"
-  },
-  {
-   "tool": "loogle",
-   "query": "CategoryTheory.Adjunction.leftAdjointUniq, CategoryTheory.Adjunction.comp",
-   "results": "none",
-   "date": "2026-10-09",
-   "verdict": "no match"
-  },
-  {
-   "tool": "grep",
-   "query": "grep -n 'leftAdjointUniq\\|unit_leftAdjointUniq\\|conjugateIsoEquiv' Mathlib/CategoryTheory/Adjunction/Unique.lean Mathlib/CategoryTheory/Adjunction/Mates.lean; grep -n '^def \\|^abbrev \\|^lemma ' Mathlib/AlgebraicGeometry/Sites/Etale.lean",
-   "results": "Adjunction.leftAdjointUniq (Unique.lean:36), Adjunction.unit_leftAdjointUniq_hom_app (Unique.lean:53: adj1.unit.app x ≫ G.map ((leftAdjointUniq adj1 adj2).hom.app x) = adj2.unit.app x), conjugateIsoEquiv (Mates.lean:425): the categorical content of (2) and (3) for two left adjoints of one functor, or of isomorphic right adjoints via conjugateIsoEquiv; Sites/Etale.lean defines smallEtaleTopology on X.Etale but no direct or inverse image along a morphism of schemes and no isomorphism d_{u,v}",
-   "date": "2026-10-09",
-   "verdict": "no match for the node (the generic step (2)-(3) given (1) is Adjunction.leftAdjointUniq / conjugateIsoEquiv; (1) and the etale functors are absent)"
-  },
-  {
-   "tool": "leansearch",
-   "query": "pushforward of sheaves on small etale site along composite of morphisms of schemes isomorphic to composite of pushforwards",
-   "results": "Scheme.Modules.pushforwardComp (Mathlib.AlgebraicGeometry.Modules.Sheaf, Zariski O-modules), Functor.sheafPushforwardContinuousComp, sheafPushforwardContinuousComp'(_hom_app_val_app) (Mathlib.CategoryTheory.Sites.Continuous), SheafOfModules.pushforwardComp",
-   "date": "2026-10-09",
-   "verdict": "no match (generic site-level tools only; no direct image along a morphism of schemes on small etale sites)"
-  },
-  {
-   "tool": "grep",
-   "query": "grep -rn 'def pullbackComp' Mathlib/CategoryTheory/MorphismProperty/OverAdjunction.lean Mathlib/CategoryTheory/Comma/Over/Pullback.lean; grep -n 'def sheafPushforwardContinuousComp' Mathlib/CategoryTheory/Sites/Continuous.lean; grep -rn 'lowerStar\\|upperStar\\|pushforward' Mathlib/AlgebraicGeometry/Sites/",
-   "results": "MorphismProperty.Over.pullbackComp (OverAdjunction.lean:116, the iterated-pullback isomorphism of functors on over categories), Over.pullbackComp (Comma/Over/Pullback.lean:115), Functor.sheafPushforwardContinuousComp (Continuous.lean:383), sheafPushforwardContinuousComp' (:424, pushforwards compose up to an isomorphism eFG : F ⋙ G ≅ FG); nothing in AlgebraicGeometry/Sites/ for direct or inverse images along a morphism of schemes",
-   "date": "2026-10-09",
-   "verdict": "no match for the node; Over.pullbackComp + sheafPushforwardContinuousComp' are the Mathlib form of step 1 (this is how the source repository builds Etale.lowerStarComp), conjugateIsoEquiv / unit_conjugateEquiv_symm the form of steps 3-4 (new leaf lem-weil-pbc-conjugate-iso-unit-equation)"
-  }
- ],
- "mathlib_match": null,
- "status": "split",
- "merged_into": null,
- "created": {
-  "by": "worker",
-  "item": "lem-weil-pbc-cohomology-pullback-functorial",
-  "date": "2026-10-09"
- },
- "lean_audit": {
-  "master": {
-   "state": "rests_on_sorry",
-   "decls": [
-    {
-     "name": "AlgebraicGeometry.Etale.lowerStarComp",
-     "module": "WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs",
-     "lines": [
-      280,
-      288
-     ],
-     "kind": "def",
-     "sorry": false
-    },
-    {
-     "name": "AlgebraicGeometry.Etale.upperStarComp",
-     "module": "WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs",
-     "lines": [
-      292,
-      299
-     ],
-     "kind": "def",
-     "sorry": false
-    }
-   ],
-   "missing": [
-    "AlgebraicGeometry.Etale.upperStarComp_hom_app_unit_app",
-    "AlgebraicGeometry.Etale.lowerStarId",
-    "AlgebraicGeometry.Etale.upperStarId",
-    "AlgebraicGeometry.Etale.upperStarId_hom_app_unit_app"
-   ],
-   "open": [
-    {
-     "name": "AlgebraicGeometry.Etale.hasLeftKanExtension_op_overPullback",
-     "module": "WeilConjectures.CategoryTheory.GrothendieckAbelian.HasLeftKanExtension",
-     "lines": [
-      223,
-      231
-     ],
-     "kind": "theorem",
-     "nodes": [],
-     "below": false
-    },
-    {
-     "name": "CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall",
-     "module": "WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify",
-     "lines": [
-      39,
-      49
-     ],
-     "kind": "theorem",
-     "nodes": [],
-     "below": false
-    }
-   ]
-  },
-  "slopmaster2": {
-   "state": "closed",
-   "decls": [
-    {
-     "name": "AlgebraicGeometry.Etale.lowerStarComp",
-     "module": "WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs",
-     "lines": [
-      309,
-      318
-     ],
-     "kind": "def",
-     "sorry": false
-    },
-    {
-     "name": "AlgebraicGeometry.Etale.upperStarComp",
-     "module": "WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs",
-     "lines": [
-      322,
-      330
-     ],
-     "kind": "def",
-     "sorry": false
-    },
-    {
-     "name": "AlgebraicGeometry.Etale.upperStarComp_hom_app_unit_app",
-     "module": "WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence",
-     "lines": [
-      159,
-      182
-     ],
-     "kind": "theorem",
-     "sorry": false
-    },
-    {
-     "name": "AlgebraicGeometry.Etale.lowerStarId",
-     "module": "WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence",
-     "lines": [
-      65,
-      67
-     ],
-     "kind": "def",
-     "sorry": false
-    },
-    {
-     "name": "AlgebraicGeometry.Etale.upperStarId",
-     "module": "WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence",
-     "lines": [
-      69,
-      71
-     ],
-     "kind": "def",
-     "sorry": false
-    },
-    {
-     "name": "AlgebraicGeometry.Etale.upperStarId_hom_app_unit_app",
-     "module": "WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence",
-     "lines": [
-      96,
-      111
-     ],
-     "kind": "theorem",
-     "sorry": false
-    }
-   ],
-   "missing": [],
-   "open": []
-  }
- },
- "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1",
- "split_report": {
-  "date": "2026-10-09",
-  "item": "lem-weil-pbc-inverse-image-composition",
-  "worker": "stage1",
-  "summary": "Split in four steps following Stacks 03CB (left adjoints of one right adjoint are isomorphic), 021I/021J (description and composition of the small etale direct images) and 0B65 (unit compatibility). Step 1 builds d_{u,v} from the fibre-product isomorphism (W x_X Y) x_Y Z = W x_X Z given by the pasting lemma (Mathlib leaf lem-weil-pbc-cartesian-square-pasting) and uniqueness of fibre products, with naturality in W and F written out; step 2 builds d_X from W x_X X = W. Steps 3 and 4 get c_{u,v} and e_X, existence, uniqueness and invertibility, from one new generic Mathlib leaf lem-weil-pbc-conjugate-iso-unit-equation (given adjunctions L1 -| R1, L2 -| R2 and an iso delta: R2 -> R1 there is a unique c: L1 -> L2 with R1(c) eta1 = delta eta2, an iso; Mathlib conjugateEquiv / unit_conjugateEquiv_symm / conjugateIsoEquiv / homEquiv_unit), applied to the composite adjunction (def-weil-pbc-composite-adjunction) with delta = d_{u,v}, and to the identity adjunction with delta = d_X^{-1}; for e_X the equation of the leaf is shown equivalent to the one of clause (3) by naturality of d_X. Statement unchanged. The source repository has sorry-free Lean for the whole statement (AlgebraicGeometry.Etale.lowerStarComp, upperStarComp, upperStarComp_hom_app_unit_app, lowerStarId, upperStarId, upperStarId_hom_app_unit_app on slopmaster2), to be attached by the lead; uniqueness is not a separate Lean declaration but is the injectivity of conjugateIsoEquiv by which upperStarComp is defined."
- },
- "lean": {
-  "branch": "slopmaster2",
-  "declarations": [
-   "AlgebraicGeometry.Etale.lowerStarComp",
-   "AlgebraicGeometry.Etale.upperStarComp",
-   "AlgebraicGeometry.Etale.upperStarComp_hom_app_unit_app",
-   "AlgebraicGeometry.Etale.lowerStarId",
-   "AlgebraicGeometry.Etale.upperStarId",
-   "AlgebraicGeometry.Etale.upperStarId_hom_app_unit_app"
   ],
-  "note": "attached by the lead at review (2026-10-09), found by the opus worker: the composition and identity isomorphisms of direct and inverse images (in the inverse direction, lowerStarComp = d^{-1}, upperStarComp = c^{-1}) with their unit equations; uniqueness holds since conjugateIsoEquiv is a bijection; for any Grothendieck abelian coefficient category (abelian groups is the node); all sorry-free on the full map"
- },
- "reviewed": {
-  "date": "2026-10-09",
-  "by": "L",
-  "result": "pass",
-  "note": "Stacks 03CB / 0B65 through the composite adjunction and a new Mathlib leaf for the conjugate unit equation; Lean attached (closed)"
- }
+  "proof_origin": {
+    "by": "document",
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Lemma Tag 03CB and its proof (uniqueness of left adjoints), with literature/stacks-project/topologies.tex Lemmas Tag 021I (2), 021J for the description of the direct images and literature/stacks-project/categories.tex Lemma Tag 0B65 for the unit compatibility; the iterated-fibre-product isomorphism and the unit equations are written out by the worker"
+  },
+  "mathlib_searches": [
+    {
+      "tool": "leansearch",
+      "query": "composition of pullbacks of sheaves is isomorphic to pullback along composite, compatible with unit of adjunction",
+      "results": "ChosenPullbacksAlong.unit_pullbackComp_hom, ChosenPullbacksAlong.comp (Mathlib.CategoryTheory.LocallyCartesianClosed.ChosenPullbacksAlong), MorphismProperty.Over.pullbackComp_hom_app_left, Scheme.Modules.pullbackComp (Mathlib.AlgebraicGeometry.Modules.Sheaf, O-modules on the Zariski site), SheafOfModules.conjugateEquiv_pullbackComp_inv, Over.pullbackComp, PresheafOfModules.pullback_comp_id; none for etale abelian sheaves along morphisms of schemes",
+      "date": "2026-10-09",
+      "verdict": "no match (the categorical part is generic: see the grep and loogle entries)"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "pullback along a composite of morphisms of sites is isomorphic to the composite of pullbacks, compatible with adjunction units",
+      "results": "GrothendieckTopology.pullbackComp (Sites.Grothendieck, sieves), GrothendieckTopology.overMapPullbackComp(_hom_app_val_app) (Mathlib.CategoryTheory.Sites.Over: restriction along Over.map, a pushforward-type functor between over sites), PresheafOfModules.pullbackComp, SheafOfModules.pullbackComp (via conjugate equivalence of adjunctions); nothing for the small etale sites of schemes",
+      "date": "2026-10-09",
+      "verdict": "no match"
+    },
+    {
+      "tool": "loogle",
+      "query": "CategoryTheory.Adjunction.leftAdjointUniq, CategoryTheory.Adjunction.comp",
+      "results": "none",
+      "date": "2026-10-09",
+      "verdict": "no match"
+    },
+    {
+      "tool": "grep",
+      "query": "grep -n 'leftAdjointUniq\\|unit_leftAdjointUniq\\|conjugateIsoEquiv' Mathlib/CategoryTheory/Adjunction/Unique.lean Mathlib/CategoryTheory/Adjunction/Mates.lean; grep -n '^def \\|^abbrev \\|^lemma ' Mathlib/AlgebraicGeometry/Sites/Etale.lean",
+      "results": "Adjunction.leftAdjointUniq (Unique.lean:36), Adjunction.unit_leftAdjointUniq_hom_app (Unique.lean:53: adj1.unit.app x ≫ G.map ((leftAdjointUniq adj1 adj2).hom.app x) = adj2.unit.app x), conjugateIsoEquiv (Mates.lean:425): the categorical content of (2) and (3) for two left adjoints of one functor, or of isomorphic right adjoints via conjugateIsoEquiv; Sites/Etale.lean defines smallEtaleTopology on X.Etale but no direct or inverse image along a morphism of schemes and no isomorphism d_{u,v}",
+      "date": "2026-10-09",
+      "verdict": "no match for the node (the generic step (2)-(3) given (1) is Adjunction.leftAdjointUniq / conjugateIsoEquiv; (1) and the etale functors are absent)"
+    },
+    {
+      "tool": "leansearch",
+      "query": "pushforward of sheaves on small etale site along composite of morphisms of schemes isomorphic to composite of pushforwards",
+      "results": "Scheme.Modules.pushforwardComp (Mathlib.AlgebraicGeometry.Modules.Sheaf, Zariski O-modules), Functor.sheafPushforwardContinuousComp, sheafPushforwardContinuousComp'(_hom_app_val_app) (Mathlib.CategoryTheory.Sites.Continuous), SheafOfModules.pushforwardComp",
+      "date": "2026-10-09",
+      "verdict": "no match (generic site-level tools only; no direct image along a morphism of schemes on small etale sites)"
+    },
+    {
+      "tool": "grep",
+      "query": "grep -rn 'def pullbackComp' Mathlib/CategoryTheory/MorphismProperty/OverAdjunction.lean Mathlib/CategoryTheory/Comma/Over/Pullback.lean; grep -n 'def sheafPushforwardContinuousComp' Mathlib/CategoryTheory/Sites/Continuous.lean; grep -rn 'lowerStar\\|upperStar\\|pushforward' Mathlib/AlgebraicGeometry/Sites/",
+      "results": "MorphismProperty.Over.pullbackComp (OverAdjunction.lean:116, the iterated-pullback isomorphism of functors on over categories), Over.pullbackComp (Comma/Over/Pullback.lean:115), Functor.sheafPushforwardContinuousComp (Continuous.lean:383), sheafPushforwardContinuousComp' (:424, pushforwards compose up to an isomorphism eFG : F ⋙ G ≅ FG); nothing in AlgebraicGeometry/Sites/ for direct or inverse images along a morphism of schemes",
+      "date": "2026-10-09",
+      "verdict": "no match for the node; Over.pullbackComp + sheafPushforwardContinuousComp' are the Mathlib form of step 1 (this is how the source repository builds Etale.lowerStarComp), conjugateIsoEquiv / unit_conjugateEquiv_symm the form of steps 3-4 (new leaf lem-weil-pbc-conjugate-iso-unit-equation)"
+    }
+  ],
+  "mathlib_match": null,
+  "status": "split",
+  "merged_into": null,
+  "created": {
+    "by": "worker",
+    "item": "lem-weil-pbc-cohomology-pullback-functorial",
+    "date": "2026-10-09"
+  },
+  "lean_audit": {
+    "master": {
+      "state": "rests_on_sorry",
+      "decls": [
+        {
+          "name": "AlgebraicGeometry.Etale.lowerStarComp",
+          "module": "WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs",
+          "lines": [
+            280,
+            288
+          ],
+          "kind": "def",
+          "sorry": false
+        },
+        {
+          "name": "AlgebraicGeometry.Etale.upperStarComp",
+          "module": "WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs",
+          "lines": [
+            292,
+            299
+          ],
+          "kind": "def",
+          "sorry": false
+        }
+      ],
+      "missing": [
+        "AlgebraicGeometry.Etale.upperStarComp_hom_app_unit_app",
+        "AlgebraicGeometry.Etale.lowerStarId",
+        "AlgebraicGeometry.Etale.upperStarId",
+        "AlgebraicGeometry.Etale.upperStarId_hom_app_unit_app"
+      ],
+      "open": [
+        {
+          "name": "AlgebraicGeometry.Etale.hasLeftKanExtension_op_overPullback",
+          "module": "WeilConjectures.CategoryTheory.GrothendieckAbelian.HasLeftKanExtension",
+          "lines": [
+            223,
+            231
+          ],
+          "kind": "theorem",
+          "nodes": [],
+          "below": false
+        },
+        {
+          "name": "CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall",
+          "module": "WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify",
+          "lines": [
+            39,
+            49
+          ],
+          "kind": "theorem",
+          "nodes": [],
+          "below": false
+        }
+      ]
+    },
+    "slopmaster2": {
+      "state": "closed",
+      "decls": [
+        {
+          "name": "AlgebraicGeometry.Etale.lowerStarComp",
+          "module": "WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs",
+          "lines": [
+            309,
+            318
+          ],
+          "kind": "def",
+          "sorry": false
+        },
+        {
+          "name": "AlgebraicGeometry.Etale.upperStarComp",
+          "module": "WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs",
+          "lines": [
+            322,
+            330
+          ],
+          "kind": "def",
+          "sorry": false
+        },
+        {
+          "name": "AlgebraicGeometry.Etale.upperStarComp_hom_app_unit_app",
+          "module": "WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence",
+          "lines": [
+            159,
+            182
+          ],
+          "kind": "theorem",
+          "sorry": false
+        },
+        {
+          "name": "AlgebraicGeometry.Etale.lowerStarId",
+          "module": "WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence",
+          "lines": [
+            65,
+            67
+          ],
+          "kind": "def",
+          "sorry": false
+        },
+        {
+          "name": "AlgebraicGeometry.Etale.upperStarId",
+          "module": "WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence",
+          "lines": [
+            69,
+            71
+          ],
+          "kind": "def",
+          "sorry": false
+        },
+        {
+          "name": "AlgebraicGeometry.Etale.upperStarId_hom_app_unit_app",
+          "module": "WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence",
+          "lines": [
+            96,
+            111
+          ],
+          "kind": "theorem",
+          "sorry": false
+        }
+      ],
+      "missing": [],
+      "open": []
+    }
+  },
+  "chapter": "sec-proper-base-change",
+  "unit": "sk-thm-p1",
+  "split_report": {
+    "date": "2026-10-09",
+    "item": "lem-weil-pbc-inverse-image-composition",
+    "worker": "stage1",
+    "summary": "Split in four steps following Stacks 03CB (left adjoints of one right adjoint are isomorphic), 021I/021J (description and composition of the small etale direct images) and 0B65 (unit compatibility). Step 1 builds d_{u,v} from the fibre-product isomorphism (W x_X Y) x_Y Z = W x_X Z given by the pasting lemma (Mathlib leaf lem-weil-pbc-cartesian-square-pasting) and uniqueness of fibre products, with naturality in W and F written out; step 2 builds d_X from W x_X X = W. Steps 3 and 4 get c_{u,v} and e_X, existence, uniqueness and invertibility, from one new generic Mathlib leaf lem-weil-pbc-conjugate-iso-unit-equation (given adjunctions L1 -| R1, L2 -| R2 and an iso delta: R2 -> R1 there is a unique c: L1 -> L2 with R1(c) eta1 = delta eta2, an iso; Mathlib conjugateEquiv / unit_conjugateEquiv_symm / conjugateIsoEquiv / homEquiv_unit), applied to the composite adjunction (def-weil-pbc-composite-adjunction) with delta = d_{u,v}, and to the identity adjunction with delta = d_X^{-1}; for e_X the equation of the leaf is shown equivalent to the one of clause (3) by naturality of d_X. Statement unchanged. The source repository has sorry-free Lean for the whole statement (AlgebraicGeometry.Etale.lowerStarComp, upperStarComp, upperStarComp_hom_app_unit_app, lowerStarId, upperStarId, upperStarId_hom_app_unit_app on slopmaster2), to be attached by the lead; uniqueness is not a separate Lean declaration but is the injectivity of conjugateIsoEquiv by which upperStarComp is defined."
+  },
+  "lean": {
+    "module": "WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs",
+    "declaration": "AlgebraicGeometry.Etale.lowerStarComp",
+    "branch": "slopmaster2",
+    "line": 309,
+    "declarations": [
+      "AlgebraicGeometry.Etale.lowerStarComp",
+      "AlgebraicGeometry.Etale.upperStarComp",
+      "AlgebraicGeometry.Etale.upperStarComp_hom_app_unit_app",
+      "AlgebraicGeometry.Etale.lowerStarId",
+      "AlgebraicGeometry.Etale.upperStarId",
+      "AlgebraicGeometry.Etale.upperStarId_hom_app_unit_app"
+    ],
+    "sorry_free": true,
+    "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state closed)"
+  },
+  "reviewed": {
+    "date": "2026-10-09",
+    "by": "L",
+    "result": "pass",
+    "note": "Stacks 03CB / 0B65 through the composite adjunction and a new Mathlib leaf for the conjugate unit equation; Lean attached (closed)"
+  }
 }

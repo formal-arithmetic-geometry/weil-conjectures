@@ -1,107 +1,111 @@
 {
- "id": "lem-weil-pbc-counit-stalk-germ-restriction",
- "blueprint": {
-  "is": null,
-  "from": {
-   "node": "prop-weil-pbc-algebraically-closed-extension",
-   "place": "step 3, 4, 7 of its split (source: Section 03SB, Lemma 03SG (lemma-even-easier) and its proof, and Lemma 0A5B (lemma-constant-smooth-statements))",
-   "via": [
-    "lem-weil-pbc-finite-pushforward-constructible-descent",
-    "lem-weil-pbc-curve-assertions-finite-pushforward"
-   ]
+  "id": "lem-weil-pbc-counit-stalk-germ-restriction",
+  "blueprint": {
+    "is": null,
+    "from": {
+      "node": "prop-weil-pbc-algebraically-closed-extension",
+      "place": "step 3, 4, 7 of its split (source: Section 03SB, Lemma 03SG (lemma-even-easier) and its proof, and Lemma 0A5B (lemma-constant-smooth-statements))",
+      "via": [
+        "lem-weil-pbc-finite-pushforward-constructible-descent",
+        "lem-weil-pbc-curve-assertions-finite-pushforward"
+      ]
+    },
+    "same_as": null
   },
-  "same_as": null
- },
- "kind": "statement",
- "title": "The stalk of the counit $f^{-1}f_*F\\to F$ is the restriction of germs",
- "statement": "Let $f:X\\to Y$ be a morphism of schemes [def-pc-scheme], $F$ an abelian sheaf on $X_{\\Et}$ [def-weil-pbc-abelian-etale-sheaves], $\\bar x:\\operatorname{Spec}\\Omega\\to X$ a geometric point [def-weil-geometric-point] and $\\bar y=f\\circ\\bar x$. For a pointed etale neighbourhood $(V,\\bar v)$ of $\\bar y$ [def-weil-pbc-geometric-stalks], the pair $(V\\times_YX,(\\bar v,\\bar x))$ is a pointed etale neighbourhood of $\\bar x$ (the base change $V\\times_YX\\to X$ is etale, and $(\\bar v,\\bar x)$ is defined since $f\\circ\\bar x=\\bar y$ is the image of $\\bar v$), functorially in $(V,\\bar v)$; since $(f_*F)(V)=F(V\\times_YX)$ [def-weil-pbc-direct-image], these give a homomorphism of abelian groups $r_{f,\\bar x,F}:(f_*F)_{\\bar y}\\to F_{\\bar x}$ sending the germ of $s\\in(f_*F)(V)$ at $(V,\\bar v)$ to the germ of $s\\in F(V\\times_YX)$ at $(V\\times_YX,(\\bar v,\\bar x))$. Let $\\varepsilon_{f,F}:f^{-1}f_*F\\to F$ be the counit of the adjunction $f^{-1}\\dashv f_*$ [def-weil-pbc-inverse-image] and $c_{f,\\bar x,f_*F}:(f^{-1}f_*F)_{\\bar x}\\xrightarrow{\\sim}(f_*F)_{\\bar y}$ the isomorphism of [lem-weil-pbc-inverse-image-stalk-germ] (for the sheaf $G=f_*F$ on $Y$). Then the stalk of the counit at $\\bar x$ is\n$$(\\varepsilon_{f,F})_{\\bar x}=r_{f,\\bar x,F}\\circ c_{f,\\bar x,f_*F}:(f^{-1}f_*F)_{\\bar x}\\longrightarrow F_{\\bar x}.$$\n(No finiteness of $f$ is needed. Proof in outline, for the split: for $s\\in(f_*F)(V)$ the triangle identity $f_*(\\varepsilon_{f,F})\\circ\\eta_{f,f_*F}=\\mathrm{id}_{f_*F}$ gives $\\varepsilon_{f,F}(V\\times_YX)(\\eta_{f,f_*F}(V)(s))=s$ in $F(V\\times_YX)$; taking germs at $(V\\times_YX,(\\bar v,\\bar x))$ and using the germ property of $c$, both sides agree on the germ of $\\eta(V)(s)$, and these germs are all of $(f^{-1}f_*F)_{\\bar x}$ because $c$ is bijective and sends them onto all germs of $(f_*F)_{\\bar y}$.)",
- "source": {
-  "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Etale Cohomology, Lemma 03Q1 (lemma-stalk-pullback) for the identification of the stalk of the inverse image and Section 03Q7 (section-stalks-direct-image) for the germ description of the stalk of a direct image; the counit computed by the triangle identity (Sites, Section 'pullback'). Not stated as such in Stacks; agent-formulated. Lean (slopmaster2, sorry-free per the sorry map): AlgebraicGeometry.Etale.stalkRestrict_eq_counit, WeilConjectures/SixFunctors/Finite/Stalk.lean lines 164-209 (with Etale.stalkRestrict, lines 117-121, and the identification Etale.upperStarCompSheafFiberIso)."
- },
- "stmt_deps": [
-  "def-pc-scheme",
-  "def-weil-pbc-abelian-etale-sheaves",
-  "def-weil-geometric-point",
-  "def-weil-pbc-geometric-stalks",
-  "def-weil-pbc-direct-image",
-  "def-weil-pbc-inverse-image",
-  "lem-weil-pbc-inverse-image-stalk-germ"
- ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
- "mathlib_searches": [
-  {
-   "tool": "leansearch",
-   "query": "stalk of the counit of the pullback pushforward adjunction of sheaves at a point is the restriction of germs",
-   "results": "TopCat.Presheaf.germ_stalkPullbackHom, TopCat.Presheaf.stalkPushforward, TopCat.Presheaf.stalkPullbackHom, TopCat.Presheaf.germToPullbackStalk_stalkPullbackHom (Mathlib.Topology.Sheaves.Stalks), SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app: sheaves on topological spaces only, nothing for the etale site",
-   "date": "2026-10-09",
-   "verdict": "no match"
+  "kind": "statement",
+  "title": "The stalk of the counit $f^{-1}f_*F\\to F$ is the restriction of germs",
+  "statement": "Let $f:X\\to Y$ be a morphism of schemes [def-pc-scheme], $F$ an abelian sheaf on $X_{\\Et}$ [def-weil-pbc-abelian-etale-sheaves], $\\bar x:\\operatorname{Spec}\\Omega\\to X$ a geometric point [def-weil-geometric-point] and $\\bar y=f\\circ\\bar x$. For a pointed etale neighbourhood $(V,\\bar v)$ of $\\bar y$ [def-weil-pbc-geometric-stalks], the pair $(V\\times_YX,(\\bar v,\\bar x))$ is a pointed etale neighbourhood of $\\bar x$ (the base change $V\\times_YX\\to X$ is etale, and $(\\bar v,\\bar x)$ is defined since $f\\circ\\bar x=\\bar y$ is the image of $\\bar v$), functorially in $(V,\\bar v)$; since $(f_*F)(V)=F(V\\times_YX)$ [def-weil-pbc-direct-image], these give a homomorphism of abelian groups $r_{f,\\bar x,F}:(f_*F)_{\\bar y}\\to F_{\\bar x}$ sending the germ of $s\\in(f_*F)(V)$ at $(V,\\bar v)$ to the germ of $s\\in F(V\\times_YX)$ at $(V\\times_YX,(\\bar v,\\bar x))$. Let $\\varepsilon_{f,F}:f^{-1}f_*F\\to F$ be the counit of the adjunction $f^{-1}\\dashv f_*$ [def-weil-pbc-inverse-image] and $c_{f,\\bar x,f_*F}:(f^{-1}f_*F)_{\\bar x}\\xrightarrow{\\sim}(f_*F)_{\\bar y}$ the isomorphism of [lem-weil-pbc-inverse-image-stalk-germ] (for the sheaf $G=f_*F$ on $Y$). Then the stalk of the counit at $\\bar x$ is\n$$(\\varepsilon_{f,F})_{\\bar x}=r_{f,\\bar x,F}\\circ c_{f,\\bar x,f_*F}:(f^{-1}f_*F)_{\\bar x}\\longrightarrow F_{\\bar x}.$$\n(No finiteness of $f$ is needed. Proof in outline, for the split: for $s\\in(f_*F)(V)$ the triangle identity $f_*(\\varepsilon_{f,F})\\circ\\eta_{f,f_*F}=\\mathrm{id}_{f_*F}$ gives $\\varepsilon_{f,F}(V\\times_YX)(\\eta_{f,f_*F}(V)(s))=s$ in $F(V\\times_YX)$; taking germs at $(V\\times_YX,(\\bar v,\\bar x))$ and using the germ property of $c$, both sides agree on the germ of $\\eta(V)(s)$, and these germs are all of $(f^{-1}f_*F)_{\\bar x}$ because $c$ is bijective and sends them onto all germs of $(f_*F)_{\\bar y}$.)",
+  "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Etale Cohomology, Lemma 03Q1 (lemma-stalk-pullback) for the identification of the stalk of the inverse image and Section 03Q7 (section-stalks-direct-image) for the germ description of the stalk of a direct image; the counit computed by the triangle identity (Sites, Section 'pullback'). Not stated as such in Stacks; agent-formulated. Lean (slopmaster2, sorry-free per the sorry map): AlgebraicGeometry.Etale.stalkRestrict_eq_counit, WeilConjectures/SixFunctors/Finite/Stalk.lean lines 164-209 (with Etale.stalkRestrict, lines 117-121, and the identification Etale.upperStarCompSheafFiberIso)."
   },
-  {
-   "tool": "leanfinder",
-   "query": "counit of inverse image direct image adjunction for sheaves is surjective on stalks for a finite morphism",
-   "results": "TopCat.Presheaf.app_surjective_of_stalkFunctor_map_bijective, TopCat.Presheaf.locally_surjective_iff_surjective_on_stalks, Sheaf.instIsLocallySurjective...toImage, SurjectiveOnStalks.Spec_iff: topological stalks / locally surjective morphisms, no etale counit",
-   "date": "2026-10-09",
-   "verdict": "no match"
-  },
-  {
-   "tool": "loogle",
-   "query": "CategoryTheory.GrothendieckTopology.Point.sheafFiberComapIso",
-   "results": "sheafFiberComapIso, sheafFiberComapIso_hom_app, sheafFiberComapIso_inv_app (Mathlib.CategoryTheory.Sites.Point.Comap): the generic iso (Phi.comap F).sheafFiber = F.sheafPullback >> Phi.sheafFiber, described through skyscraper adjunctions; no germ description of the counit (the germ lemma toPresheafFiber_sheafFiberComapIso_hom_app_counit is in the source repository, WeilConjectures/Mathlib/CategoryTheory/Sites/Point/Comap.lean:89, not in Mathlib)",
-   "date": "2026-10-09",
-   "verdict": "no match (ingredient only)"
-  },
-  {
-   "tool": "grep",
-   "query": "grep -rn 'counit' Mathlib/CategoryTheory/Sites/Point/ Mathlib/AlgebraicGeometry/Sites/; grep -rn 'stalkRestrict\\|GeometricFiber\\|lowerStar' Mathlib/AlgebraicGeometry",
-   "results": "none; AlgebraicGeometry/Sites/EtalePoint.lean has pointSmallEtale and conservativity only",
-   "date": "2026-10-09",
-   "verdict": "no match"
-  }
- ],
- "mathlib_match": null,
- "status": "unsplit",
- "merged_into": null,
- "created": {
-  "by": "worker",
-  "item": "lem-weil-pbc-finite-pushforward-constructible-descent",
-  "date": "2026-10-09"
- },
- "lean_audit": {
-  "master": {
-   "state": "none",
-   "decls": [],
-   "missing": [
-    "AlgebraicGeometry.Etale.stalkRestrict_eq_counit"
-   ]
-  },
-  "slopmaster2": {
-   "state": "closed",
-   "decls": [
-    {
-     "name": "AlgebraicGeometry.Etale.stalkRestrict_eq_counit",
-     "module": "WeilConjectures.SixFunctors.Finite.Stalk",
-     "lines": [
-      154,
-      205
-     ],
-     "kind": "theorem",
-     "sorry": false
-    }
-   ],
-   "missing": [],
-   "open": []
-  }
- },
- "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1",
- "lean": {
-  "branch": "slopmaster2",
-  "declarations": [
-   "AlgebraicGeometry.Etale.stalkRestrict_eq_counit"
+  "stmt_deps": [
+    "def-pc-scheme",
+    "def-weil-pbc-abelian-etale-sheaves",
+    "def-weil-geometric-point",
+    "def-weil-pbc-geometric-stalks",
+    "def-weil-pbc-direct-image",
+    "def-weil-pbc-inverse-image",
+    "lem-weil-pbc-inverse-image-stalk-germ"
   ],
-  "note": "attached by the lead at the review of lem-weil-pbc-finite-pushforward-constructible-descent (2026-10-09), found by its opus worker: the germ restriction (f_*G)_{s∘f} → G_s equals the stalk of the counit composed with the stalk isomorphism of the inverse image (there upperStarCompSheafFiberIso, the Lean of lemma-openclosed-stalk-upperstar; the node uses the germ-compatible isomorphism of lem-weil-pbc-inverse-image-stalk-germ, which is the same map by its germ property); sorry-free on the full map"
- }
+  "proof": [],
+  "proof_deps": [],
+  "proof_origin": null,
+  "mathlib_searches": [
+    {
+      "tool": "leansearch",
+      "query": "stalk of the counit of the pullback pushforward adjunction of sheaves at a point is the restriction of germs",
+      "results": "TopCat.Presheaf.germ_stalkPullbackHom, TopCat.Presheaf.stalkPushforward, TopCat.Presheaf.stalkPullbackHom, TopCat.Presheaf.germToPullbackStalk_stalkPullbackHom (Mathlib.Topology.Sheaves.Stalks), SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app: sheaves on topological spaces only, nothing for the etale site",
+      "date": "2026-10-09",
+      "verdict": "no match"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "counit of inverse image direct image adjunction for sheaves is surjective on stalks for a finite morphism",
+      "results": "TopCat.Presheaf.app_surjective_of_stalkFunctor_map_bijective, TopCat.Presheaf.locally_surjective_iff_surjective_on_stalks, Sheaf.instIsLocallySurjective...toImage, SurjectiveOnStalks.Spec_iff: topological stalks / locally surjective morphisms, no etale counit",
+      "date": "2026-10-09",
+      "verdict": "no match"
+    },
+    {
+      "tool": "loogle",
+      "query": "CategoryTheory.GrothendieckTopology.Point.sheafFiberComapIso",
+      "results": "sheafFiberComapIso, sheafFiberComapIso_hom_app, sheafFiberComapIso_inv_app (Mathlib.CategoryTheory.Sites.Point.Comap): the generic iso (Phi.comap F).sheafFiber = F.sheafPullback >> Phi.sheafFiber, described through skyscraper adjunctions; no germ description of the counit (the germ lemma toPresheafFiber_sheafFiberComapIso_hom_app_counit is in the source repository, WeilConjectures/Mathlib/CategoryTheory/Sites/Point/Comap.lean:89, not in Mathlib)",
+      "date": "2026-10-09",
+      "verdict": "no match (ingredient only)"
+    },
+    {
+      "tool": "grep",
+      "query": "grep -rn 'counit' Mathlib/CategoryTheory/Sites/Point/ Mathlib/AlgebraicGeometry/Sites/; grep -rn 'stalkRestrict\\|GeometricFiber\\|lowerStar' Mathlib/AlgebraicGeometry",
+      "results": "none; AlgebraicGeometry/Sites/EtalePoint.lean has pointSmallEtale and conservativity only",
+      "date": "2026-10-09",
+      "verdict": "no match"
+    }
+  ],
+  "mathlib_match": null,
+  "status": "unsplit",
+  "merged_into": null,
+  "created": {
+    "by": "worker",
+    "item": "lem-weil-pbc-finite-pushforward-constructible-descent",
+    "date": "2026-10-09"
+  },
+  "lean_audit": {
+    "master": {
+      "state": "none",
+      "decls": [],
+      "missing": [
+        "AlgebraicGeometry.Etale.stalkRestrict_eq_counit"
+      ]
+    },
+    "slopmaster2": {
+      "state": "closed",
+      "decls": [
+        {
+          "name": "AlgebraicGeometry.Etale.stalkRestrict_eq_counit",
+          "module": "WeilConjectures.SixFunctors.Finite.Stalk",
+          "lines": [
+            154,
+            205
+          ],
+          "kind": "theorem",
+          "sorry": false
+        }
+      ],
+      "missing": [],
+      "open": []
+    }
+  },
+  "chapter": "sec-proper-base-change",
+  "unit": "sk-thm-p1",
+  "lean": {
+    "module": "WeilConjectures.SixFunctors.Finite.Stalk",
+    "declaration": "AlgebraicGeometry.Etale.stalkRestrict_eq_counit",
+    "branch": "slopmaster2",
+    "line": 154,
+    "declarations": [
+      "AlgebraicGeometry.Etale.stalkRestrict_eq_counit"
+    ],
+    "sorry_free": true,
+    "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state closed)"
+  }
 }

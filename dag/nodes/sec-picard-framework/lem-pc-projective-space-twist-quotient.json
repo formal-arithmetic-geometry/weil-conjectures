@@ -1,89 +1,100 @@
 {
- "id": "lem-pc-projective-space-twist-quotient",
- "blueprint": {
-  "is": "lem-pc-projective-space-twist-quotient",
-  "from": null,
-  "same_as": null
- },
- "kind": "statement",
- "title": "A finite quotient by twists",
- "statement": "Let $A$ be Noetherian, $P=\\mathbf P^n_A$, and $\\mathcal F$ a\ncoherent module on $P$.\nThere are integers $m_1,\\ldots,m_r\\ge0$ and a surjection\n\n$$\n\\bigoplus_{j=1}^r\\mathcal O_P(-m_j)\\longrightarrow\\mathcal F,\n$$\n\nwhere the summands are the\ntwisting modules.\nIts kernel is coherent.",
- "source": {
-  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-serre-b/lem-pc-projective-space-twist-quotient.md",
-  "place": "node lem-pc-projective-space-twist-quotient, order 626"
- },
- "stmt_deps": [
-  "pqf-def-coherent"
- ],
- "proof": [
-  {
-   "text": "On every standard affine $U_i=D_+(x_i)$, choose finitely many\ngenerators $t_{ia}$ of $\\mathcal F|_{U_i}$, using the finite-module\ndescription in [pqf-lem-coherent-ft-locnoeth].\nThe space $P$ is separated over $\\operatorname{Spec}(A)$: on each\n$U_i\\times_A U_j$, its diagonal is the closed subscheme given by\nthe equations $x_a y_b=x_b y_a$ for all $a,b$, where $x_i=y_j=1$.\nFor example $x_jy_i=1$ identifies that subscheme with the affine\nintersection $U_i\\cap U_j$. Thus the clearing-denominators lemma\napplies to $P$ and its standard finite affine cover.\nApply [lem-pc-section-clearing-denominators] to the section\n$x_i$ of $\\mathcal O_P(1)$ from\n[def-pc-projective-space-twist]. It gives an exponent $m_{ia}$\nand a global section $u_{ia}$ of $\\mathcal F(m_{ia})$ with\n$u_{ia}|_{U_i}=t_{ia}\\otimes x_i^{m_{ia}}$.\nTensoring the section map $\\mathcal O_P\\to\\mathcal F(m_{ia})$\nby $\\mathcal O_P(-m_{ia})$ defines a map\n$\\mathcal O_P(-m_{ia})\\to\\mathcal F$.\nOn $U_i$, its image contains the chosen generator $t_{ia}$,\nbecause $x_i^{m_{ia}}$ is a basis of the twisting module there.\nThe finite direct sum of all these maps is therefore surjective\non every $U_i$, hence on $P$.",
-   "uses": [
+  "id": "lem-pc-projective-space-twist-quotient",
+  "blueprint": {
+    "is": "lem-pc-projective-space-twist-quotient",
+    "from": null,
+    "same_as": null
+  },
+  "kind": "statement",
+  "title": "A finite quotient by twists",
+  "statement": "Let $A$ be Noetherian, $P=\\mathbf P^n_A$, and $\\mathcal F$ a\ncoherent module on $P$.\nThere are integers $m_1,\\ldots,m_r\\ge0$ and a surjection\n\n$$\n\\bigoplus_{j=1}^r\\mathcal O_P(-m_j)\\longrightarrow\\mathcal F,\n$$\n\nwhere the summands are the\ntwisting modules.\nIts kernel is coherent.",
+  "source": {
+    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-serre-b/lem-pc-projective-space-twist-quotient.md",
+    "place": "node lem-pc-projective-space-twist-quotient, order 626"
+  },
+  "stmt_deps": [
+    "pqf-def-coherent"
+  ],
+  "proof": [
+    {
+      "text": "On every standard affine $U_i=D_+(x_i)$, choose finitely many\ngenerators $t_{ia}$ of $\\mathcal F|_{U_i}$, using the finite-module\ndescription in [pqf-lem-coherent-ft-locnoeth].\nThe space $P$ is separated over $\\operatorname{Spec}(A)$: on each\n$U_i\\times_A U_j$, its diagonal is the closed subscheme given by\nthe equations $x_a y_b=x_b y_a$ for all $a,b$, where $x_i=y_j=1$.\nFor example $x_jy_i=1$ identifies that subscheme with the affine\nintersection $U_i\\cap U_j$. Thus the clearing-denominators lemma\napplies to $P$ and its standard finite affine cover.\nApply [lem-pc-section-clearing-denominators] to the section\n$x_i$ of $\\mathcal O_P(1)$ from\n[def-pc-projective-space-twist]. It gives an exponent $m_{ia}$\nand a global section $u_{ia}$ of $\\mathcal F(m_{ia})$ with\n$u_{ia}|_{U_i}=t_{ia}\\otimes x_i^{m_{ia}}$.\nTensoring the section map $\\mathcal O_P\\to\\mathcal F(m_{ia})$\nby $\\mathcal O_P(-m_{ia})$ defines a map\n$\\mathcal O_P(-m_{ia})\\to\\mathcal F$.\nOn $U_i$, its image contains the chosen generator $t_{ia}$,\nbecause $x_i^{m_{ia}}$ is a basis of the twisting module there.\nThe finite direct sum of all these maps is therefore surjective\non every $U_i$, hence on $P$.",
+      "uses": [
+        "pqf-lem-coherent-ft-locnoeth",
+        "lem-pc-section-clearing-denominators",
+        "def-pc-projective-space-twist"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "The coordinate rings of the standard charts are polynomial rings\nover the Noetherian ring $A$, and are Noetherian by the Hilbert\nbasis theorem. The kernel on each chart is a submodule of a finite\nfree module over such a ring, hence is finite. Kernels of maps\nof quasi-coherent modules are quasi-coherent by exactness of\nlocalization. By [pqf-lem-coherent-ft-locnoeth] these kernels\nform a coherent sheaf on $P$.",
+      "uses": [
+        "pqf-lem-coherent-ft-locnoeth"
+      ],
+      "elementary": false
+    }
+  ],
+  "proof_deps": [
     "pqf-lem-coherent-ft-locnoeth",
     "lem-pc-section-clearing-denominators",
     "def-pc-projective-space-twist"
-   ],
-   "elementary": false
+  ],
+  "proof_origin": {
+    "by": "agent",
+    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-serre-b/lem-pc-projective-space-twist-quotient.md",
+    "place": "## Proof"
   },
-  {
-   "text": "The coordinate rings of the standard charts are polynomial rings\nover the Noetherian ring $A$, and are Noetherian by the Hilbert\nbasis theorem. The kernel on each chart is a submodule of a finite\nfree module over such a ring, hence is finite. Kernels of maps\nof quasi-coherent modules are quasi-coherent by exactness of\nlocalization. By [pqf-lem-coherent-ft-locnoeth] these kernels\nform a coherent sheaf on $P$.",
-   "uses": [
+  "mathlib_searches": [],
+  "mathlib_match": null,
+  "status": "imported",
+  "merged_into": null,
+  "import_flags": [],
+  "blueprint_kind": "lemma",
+  "blueprint_order": 626,
+  "blueprint_uses": [
+    "def-pc-projective-space-twist",
+    "lem-pc-section-clearing-denominators",
+    "pqf-def-coherent",
     "pqf-lem-coherent-ft-locnoeth"
-   ],
-   "elementary": false
-  }
- ],
- "proof_deps": [
-  "pqf-lem-coherent-ft-locnoeth",
-  "lem-pc-section-clearing-denominators",
-  "def-pc-projective-space-twist"
- ],
- "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-serre-b/lem-pc-projective-space-twist-quotient.md",
-  "place": "## Proof"
- },
- "mathlib_searches": [],
- "mathlib_match": null,
- "status": "imported",
- "merged_into": null,
- "import_flags": [],
- "blueprint_kind": "lemma",
- "blueprint_order": 626,
- "blueprint_uses": [
-  "def-pc-projective-space-twist",
-  "lem-pc-section-clearing-denominators",
-  "pqf-def-coherent",
-  "pqf-lem-coherent-ft-locnoeth"
- ],
- "uses_not_cited": [
-  "pqf-def-coherent"
- ],
- "proof_split_by": "paragraphs",
- "lean_audit": {
-  "master": {
-   "state": "none",
-   "decls": [],
-   "missing": []
-  },
-  "slopmaster2": {
-   "state": "closed",
-   "decls": [
-    {
-     "name": "AlgebraicGeometry.ProjectiveSpace.exists_epi_sigma_twist",
-     "module": "WeilConjectures.AlgebraicGeometry.Cohomology.Serre",
-     "lines": [
-      227,
-      296
-     ],
-     "kind": "theorem",
-     "sorry": false
+  ],
+  "uses_not_cited": [
+    "pqf-def-coherent"
+  ],
+  "proof_split_by": "paragraphs",
+  "lean_audit": {
+    "master": {
+      "state": "none",
+      "decls": [],
+      "missing": []
+    },
+    "slopmaster2": {
+      "state": "closed",
+      "decls": [
+        {
+          "name": "AlgebraicGeometry.ProjectiveSpace.exists_epi_sigma_twist",
+          "module": "WeilConjectures.AlgebraicGeometry.Cohomology.Serre",
+          "lines": [
+            227,
+            296
+          ],
+          "kind": "theorem",
+          "sorry": false
+        }
+      ],
+      "missing": [],
+      "open": []
     }
-   ],
-   "missing": [],
-   "open": []
+  },
+  "chapter": "sec-picard-framework",
+  "unit": "sk-thm-picard-serre-b",
+  "lean": {
+    "module": "WeilConjectures.AlgebraicGeometry.Cohomology.Serre",
+    "declaration": "AlgebraicGeometry.ProjectiveSpace.exists_epi_sigma_twist",
+    "branch": "slopmaster2",
+    "line": 227,
+    "declarations": [
+      "AlgebraicGeometry.ProjectiveSpace.exists_epi_sigma_twist"
+    ],
+    "sorry_free": true,
+    "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state closed)"
   }
- },
- "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-serre-b"
 }

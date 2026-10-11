@@ -1,111 +1,122 @@
 {
- "id": "lem-sc-morphism-from-function",
- "blueprint": {
-  "is": "lem-sc-morphism-from-function",
-  "from": null,
-  "same_as": null
- },
- "kind": "statement",
- "title": "Rational functions define finite morphisms to $\\mathbf P^1$",
- "statement": "Let $C$ be a proper smooth connected curve over\n$k$, $f\\in k(C)\\setminus k$ ([def-sc-function-field]),\nand $\\pi_f:C\\to\\mathbf P^1_k$ the morphism of\n[lem-sc-rational-function-morphism]. Then $\\pi_f$ is\nfinite surjective and flat of degree $[k(C):k(f)]$.",
- "source": {
-  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-duality/lem-sc-morphism-from-function.md",
-  "place": "node lem-sc-morphism-from-function, order 699",
-  "external": [
-   {
-    "document": "Stacks Project",
-    "place": "Tag 02OG"
-   }
-  ]
- },
- "stmt_deps": [
-  "def-sc-function-field",
-  "lem-sc-rational-function-morphism",
-  "def-sc-curves"
- ],
- "proof": [
-  {
-   "text": "By [lem-sc-rational-function-morphism], $\\pi_f$ is defined\nwith $\\pi_f^*t=f$.",
-   "uses": [
-    "lem-sc-rational-function-morphism"
-   ],
-   "elementary": false
+  "id": "lem-sc-morphism-from-function",
+  "blueprint": {
+    "is": "lem-sc-morphism-from-function",
+    "from": null,
+    "same_as": null
   },
-  {
-   "text": "*Surjectivity and finiteness.* The image of $\\pi_f$ is not a\npoint (otherwise $\\pi_f^*t=f\\in k$), so it is closed (properness)\nand of dimension one, hence all of $\\mathbf P^1_k$: $\\pi_f$ is\nsurjective. The fibres of $\\pi_f$ are finite: the fibre over\n$y\\in\\mathbf P^1$ is a proper closed subscheme of $C$ not equal\nto $C$, hence of dimension zero and finite by\n[lem-sc-dim0-finite]. A proper morphism with finite fibres is\nfinite ([thm-pqf-finite-iff-proper-finite-fibres] of the quasi-finite chapter, i.e. proper and quasi-finite implies finite:\n*Stacks Project, Cohomology of Schemes, [Tag 02OG](https://stacks.math.columbia.edu/tag/02OG) = Lemma 30.21.1*), so\n$\\pi_f$ is finite.",
-   "uses": [
+  "kind": "statement",
+  "title": "Rational functions define finite morphisms to $\\mathbf P^1$",
+  "statement": "Let $C$ be a proper smooth connected curve over\n$k$, $f\\in k(C)\\setminus k$ ([def-sc-function-field]),\nand $\\pi_f:C\\to\\mathbf P^1_k$ the morphism of\n[lem-sc-rational-function-morphism]. Then $\\pi_f$ is\nfinite surjective and flat of degree $[k(C):k(f)]$.",
+  "source": {
+    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-duality/lem-sc-morphism-from-function.md",
+    "place": "node lem-sc-morphism-from-function, order 699",
+    "external": [
+      {
+        "document": "Stacks Project",
+        "place": "Tag 02OG"
+      }
+    ]
+  },
+  "stmt_deps": [
+    "def-sc-function-field",
+    "lem-sc-rational-function-morphism",
+    "def-sc-curves"
+  ],
+  "proof": [
+    {
+      "text": "By [lem-sc-rational-function-morphism], $\\pi_f$ is defined\nwith $\\pi_f^*t=f$.",
+      "uses": [
+        "lem-sc-rational-function-morphism"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "*Surjectivity and finiteness.* The image of $\\pi_f$ is not a\npoint (otherwise $\\pi_f^*t=f\\in k$), so it is closed (properness)\nand of dimension one, hence all of $\\mathbf P^1_k$: $\\pi_f$ is\nsurjective. The fibres of $\\pi_f$ are finite: the fibre over\n$y\\in\\mathbf P^1$ is a proper closed subscheme of $C$ not equal\nto $C$, hence of dimension zero and finite by\n[lem-sc-dim0-finite]. A proper morphism with finite fibres is\nfinite ([thm-pqf-finite-iff-proper-finite-fibres] of the quasi-finite chapter, i.e. proper and quasi-finite implies finite:\n*Stacks Project, Cohomology of Schemes, [Tag 02OG](https://stacks.math.columbia.edu/tag/02OG) = Lemma 30.21.1*), so\n$\\pi_f$ is finite.",
+      "uses": [
+        "lem-sc-dim0-finite",
+        "thm-pqf-finite-iff-proper-finite-fibres"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "*Flatness and degree.* The coherent sheaf\n$\\mathcal E:=(\\pi_f)_*\\mathcal O_C$ is a subsheaf of the constant\nsheaf $k(C)$ on $\\mathbf P^1$: the natural map\n$\\pi_{f*}\\mathcal O_C\\to j_*j^*\\pi_{f*}\\mathcal O_C=j_*(k(C))$ (for\n$j$ the generic point) is injective because $\\pi_f$ is dominant.\nHence $\\mathcal E$ is torsion-free. A coherent torsion-free sheaf\non the smooth curve $\\mathbf P^1$ is locally free: at a closed\npoint $y$, the stalk $\\mathcal E_y$ is a finitely generated\nmodule over the discrete valuation ring $\\mathcal O_{\\mathbf P^1,y}$\n([lem-sc-smooth-regular],\n[lem-sc-regular-dim1-dvr]) and is torsion-free, hence free\n(finitely generated torsion-free modules over a discrete valuation\nring are free). A finite morphism is flat if and only if its\npushforward is locally free, so $\\pi_f$ is finite flat. Its degree\nis the rank of the locally free sheaf $\\mathcal E$, which equals\n$[k(C):k(f)]$: the generic stalk of $\\mathcal E$ is the field\n$k(C)$, viewed as a $k(\\mathbf P^1)=k(t)$-vector space (and\n$k(C)$ is a finite extension of $k(t)$ by standard field theory:\na finitely generated field of transcendence degree one over $k$ is\nfinite over $k(t)$ for any transcendental $t$).",
+      "uses": [
+        "lem-sc-smooth-regular",
+        "lem-sc-regular-dim1-dvr"
+      ],
+      "elementary": false
+    }
+  ],
+  "proof_deps": [
+    "lem-sc-rational-function-morphism",
     "lem-sc-dim0-finite",
-    "thm-pqf-finite-iff-proper-finite-fibres"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "*Flatness and degree.* The coherent sheaf\n$\\mathcal E:=(\\pi_f)_*\\mathcal O_C$ is a subsheaf of the constant\nsheaf $k(C)$ on $\\mathbf P^1$: the natural map\n$\\pi_{f*}\\mathcal O_C\\to j_*j^*\\pi_{f*}\\mathcal O_C=j_*(k(C))$ (for\n$j$ the generic point) is injective because $\\pi_f$ is dominant.\nHence $\\mathcal E$ is torsion-free. A coherent torsion-free sheaf\non the smooth curve $\\mathbf P^1$ is locally free: at a closed\npoint $y$, the stalk $\\mathcal E_y$ is a finitely generated\nmodule over the discrete valuation ring $\\mathcal O_{\\mathbf P^1,y}$\n([lem-sc-smooth-regular],\n[lem-sc-regular-dim1-dvr]) and is torsion-free, hence free\n(finitely generated torsion-free modules over a discrete valuation\nring are free). A finite morphism is flat if and only if its\npushforward is locally free, so $\\pi_f$ is finite flat. Its degree\nis the rank of the locally free sheaf $\\mathcal E$, which equals\n$[k(C):k(f)]$: the generic stalk of $\\mathcal E$ is the field\n$k(C)$, viewed as a $k(\\mathbf P^1)=k(t)$-vector space (and\n$k(C)$ is a finite extension of $k(t)$ by standard field theory:\na finitely generated field of transcendence degree one over $k$ is\nfinite over $k(t)$ for any transcendental $t$).",
-   "uses": [
+    "thm-pqf-finite-iff-proper-finite-fibres",
     "lem-sc-smooth-regular",
     "lem-sc-regular-dim1-dvr"
-   ],
-   "elementary": false
-  }
- ],
- "proof_deps": [
-  "lem-sc-rational-function-morphism",
-  "lem-sc-dim0-finite",
-  "thm-pqf-finite-iff-proper-finite-fibres",
-  "lem-sc-smooth-regular",
-  "lem-sc-regular-dim1-dvr"
- ],
- "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-duality/lem-sc-morphism-from-function.md",
-  "place": "## Proof"
- },
- "mathlib_searches": [],
- "mathlib_match": null,
- "status": "imported",
- "merged_into": null,
- "import_flags": [
-  "proof_cites_literature"
- ],
- "blueprint_kind": "lemma",
- "blueprint_order": 699,
- "blueprint_uses": [
-  "def-sc-curves",
-  "def-sc-function-field",
-  "lem-sc-dim0-finite",
-  "lem-sc-rational-function-morphism",
-  "lem-sc-regular-dim1-dvr",
-  "lem-sc-smooth-regular",
-  "thm-pqf-finite-iff-proper-finite-fibres"
- ],
- "uses_not_cited": [
-  "def-sc-curves"
- ],
- "proof_split_by": "labels",
- "lean_audit": {
-  "master": {
-   "state": "none",
-   "decls": [],
-   "missing": []
+  ],
+  "proof_origin": {
+    "by": "agent",
+    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-duality/lem-sc-morphism-from-function.md",
+    "place": "## Proof"
   },
-  "slopmaster2": {
-   "state": "closed",
-   "decls": [
-    {
-     "name": "AlgebraicGeometry.Scheme.isFinite_flat_of_hom_projectiveLine_of_functionField",
-     "module": "WeilConjectures.AlgebraicGeometry.Curve.SerreDuality",
-     "lines": [
-      247,
-      425
-     ],
-     "kind": "theorem",
-     "sorry": false
+  "mathlib_searches": [],
+  "mathlib_match": null,
+  "status": "imported",
+  "merged_into": null,
+  "import_flags": [
+    "proof_cites_literature"
+  ],
+  "blueprint_kind": "lemma",
+  "blueprint_order": 699,
+  "blueprint_uses": [
+    "def-sc-curves",
+    "def-sc-function-field",
+    "lem-sc-dim0-finite",
+    "lem-sc-rational-function-morphism",
+    "lem-sc-regular-dim1-dvr",
+    "lem-sc-smooth-regular",
+    "thm-pqf-finite-iff-proper-finite-fibres"
+  ],
+  "uses_not_cited": [
+    "def-sc-curves"
+  ],
+  "proof_split_by": "labels",
+  "lean_audit": {
+    "master": {
+      "state": "none",
+      "decls": [],
+      "missing": []
+    },
+    "slopmaster2": {
+      "state": "closed",
+      "decls": [
+        {
+          "name": "AlgebraicGeometry.Scheme.isFinite_flat_of_hom_projectiveLine_of_functionField",
+          "module": "WeilConjectures.AlgebraicGeometry.Curve.SerreDuality",
+          "lines": [
+            247,
+            425
+          ],
+          "kind": "theorem",
+          "sorry": false
+        }
+      ],
+      "missing": [],
+      "open": []
     }
-   ],
-   "missing": [],
-   "open": []
+  },
+  "chapter": "sec-picard-framework",
+  "unit": "sk-thm-picard-duality",
+  "lean": {
+    "module": "WeilConjectures.AlgebraicGeometry.Curve.SerreDuality",
+    "declaration": "AlgebraicGeometry.Scheme.isFinite_flat_of_hom_projectiveLine_of_functionField",
+    "branch": "slopmaster2",
+    "line": 247,
+    "declarations": [
+      "AlgebraicGeometry.Scheme.isFinite_flat_of_hom_projectiveLine_of_functionField"
+    ],
+    "sorry_free": true,
+    "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state closed)"
   }
- },
- "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality"
 }

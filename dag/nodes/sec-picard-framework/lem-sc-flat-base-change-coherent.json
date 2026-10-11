@@ -1,141 +1,152 @@
 {
- "id": "lem-sc-flat-base-change-coherent",
- "blueprint": {
-  "is": "lem-sc-flat-base-change-coherent",
-  "from": null,
-  "same_as": [
-   "lem-pc-flat-base-change-cohom"
-  ]
- },
- "kind": "statement",
- "title": "Flat base change for coherent cohomology",
- "statement": "Let $k$ be a field, let $X$ be a scheme proper over $k$ [def-weil-proper-morphism], and let $k\\to k'$ be a flat map of commutative rings with $k'$ a $k$-algebra. Write $X_{k'}:=X\\times_{\\operatorname{Spec}k}\\operatorname{Spec}k'$ and let $\\mathcal F_{k'}$ denote the pullback of a quasi-coherent $\\mathcal O_X$-module $\\mathcal F$ [pqf-def-coherent, def-pc-base-change]. Then for all $i\\geq0$\n\n$$\nH^i(X_{k'},\\mathcal F_{k'})\\cong H^i(X,\\mathcal F)\\otimes_k k'.\n$$\n\nIn particular, if $k$ and $k'$ are algebraically closed fields with $k\\subseteq k'$ [def-pc-field-extension] and $\\mathcal F=\\mathcal O_X$, then\n\n$$\n\\dim_{k'}H^i(X_{k'},\\mathcal O_{X_{k'}})=\\dim_kH^i(X,\\mathcal O_X).\n$$",
- "source": {
-  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-sc-flat-base-change-coherent.md",
-  "place": "node lem-sc-flat-base-change-coherent, order 715"
- },
- "stmt_deps": [
-  "def-weil-proper-morphism",
-  "def-pc-base-change",
-  "pqf-def-coherent",
-  "pqf-def-cohomology",
-  "def-pc-field-extension"
- ],
- "proof": [
-  {
-   "text": "The structure morphism $X\\to\\operatorname{Spec}k$ is proper, hence separated and of finite type [def-weil-proper-morphism]. Thus $X$ is quasi-compact and quasi-separated and has a finite affine open cover $\\mathfrak U=\\{U_1,\\ldots,U_r\\}$ whose finite intersections are affine (a separated scheme over the affine $\\operatorname{Spec}k$ has affine intersections of affine opens [lem-weil-pbc-separated-affine-open-intersection]). Base change along $\\operatorname{Spec}k'\\to\\operatorname{Spec}k$ gives the affine cover $\\mathfrak U_{k'}$ of $X_{k'}$, with $(U_J)_{k'}$ affine for every intersection. Applying [lem-pc-cech-computes] to $\\mathfrak U$ and $\\mathfrak U_{k'}$ identifies both cohomology groups with the corresponding Cech cohomology groups.",
-   "uses": [
+  "id": "lem-sc-flat-base-change-coherent",
+  "blueprint": {
+    "is": "lem-sc-flat-base-change-coherent",
+    "from": null,
+    "same_as": [
+      "lem-pc-flat-base-change-cohom"
+    ]
+  },
+  "kind": "statement",
+  "title": "Flat base change for coherent cohomology",
+  "statement": "Let $k$ be a field, let $X$ be a scheme proper over $k$ [def-weil-proper-morphism], and let $k\\to k'$ be a flat map of commutative rings with $k'$ a $k$-algebra. Write $X_{k'}:=X\\times_{\\operatorname{Spec}k}\\operatorname{Spec}k'$ and let $\\mathcal F_{k'}$ denote the pullback of a quasi-coherent $\\mathcal O_X$-module $\\mathcal F$ [pqf-def-coherent, def-pc-base-change]. Then for all $i\\geq0$\n\n$$\nH^i(X_{k'},\\mathcal F_{k'})\\cong H^i(X,\\mathcal F)\\otimes_k k'.\n$$\n\nIn particular, if $k$ and $k'$ are algebraically closed fields with $k\\subseteq k'$ [def-pc-field-extension] and $\\mathcal F=\\mathcal O_X$, then\n\n$$\n\\dim_{k'}H^i(X_{k'},\\mathcal O_{X_{k'}})=\\dim_kH^i(X,\\mathcal O_X).\n$$",
+  "source": {
+    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-sc-flat-base-change-coherent.md",
+    "place": "node lem-sc-flat-base-change-coherent, order 715"
+  },
+  "stmt_deps": [
+    "def-weil-proper-morphism",
+    "def-pc-base-change",
+    "pqf-def-coherent",
+    "pqf-def-cohomology",
+    "def-pc-field-extension"
+  ],
+  "proof": [
+    {
+      "text": "The structure morphism $X\\to\\operatorname{Spec}k$ is proper, hence separated and of finite type [def-weil-proper-morphism]. Thus $X$ is quasi-compact and quasi-separated and has a finite affine open cover $\\mathfrak U=\\{U_1,\\ldots,U_r\\}$ whose finite intersections are affine (a separated scheme over the affine $\\operatorname{Spec}k$ has affine intersections of affine opens [lem-weil-pbc-separated-affine-open-intersection]). Base change along $\\operatorname{Spec}k'\\to\\operatorname{Spec}k$ gives the affine cover $\\mathfrak U_{k'}$ of $X_{k'}$, with $(U_J)_{k'}$ affine for every intersection. Applying [lem-pc-cech-computes] to $\\mathfrak U$ and $\\mathfrak U_{k'}$ identifies both cohomology groups with the corresponding Cech cohomology groups.",
+      "uses": [
+        "def-weil-proper-morphism",
+        "lem-pc-cech-computes",
+        "def-pc-base-change",
+        "lem-weil-pbc-separated-affine-open-intersection"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/coherent.tex",
+        "place": "Cohomology of Schemes, Lemma 30.5.2 (Tag 02KH), setup and affine-cover reduction"
+      }
+    },
+    {
+      "text": "For each multi-index $J$, write $U_J=\\operatorname{Spec}A_J$ and $\\mathcal F|_{U_J}=\\widetilde M_J$. Then $(U_J)_{k'}=\\operatorname{Spec}(A_J\\otimes_k k')$ and the pullback module is $\\widetilde{M_J\\otimes_k k'}$, so the affine-section formula for pullbacks of quasi-coherent modules [lem-weil-pbc-module-pullback-affine-sections], applied to $V=U_J$ and $U=(U_J)_{k'}$, gives $\\Gamma((U_J)_{k'},\\mathcal F_{k'})\\cong\\Gamma(U_J,\\mathcal F)\\otimes_{A_J}(A_J\\otimes_k k')\\cong\\Gamma(U_J,\\mathcal F)\\otimes_k k'$. These identifications commute with all restriction maps, hence identify the Cech complex for $\\mathfrak U_{k'}$ with the tensor product of the Cech complex for $\\mathfrak U$ by $k'$.",
+      "uses": [
+        "def-pc-base-change",
+        "lem-weil-pbc-module-pullback-affine-sections"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/coherent.tex",
+        "place": "Cohomology of Schemes, Lemma 30.5.2 (Tag 02KH), affine section calculation"
+      }
+    },
+    {
+      "text": "The map $k\\to k'$ is flat, so tensoring with $k'$ is exact. Exactness preserves the kernels and images in the Cech complex, and therefore $H^i(C^\\bullet\\otimes_k k')\\cong H^i(C^\\bullet)\\otimes_k k'$ for every $i$. Combining this with Step 1 and the Cech-complex identification of Step 2 gives the asserted isomorphism $H^i(X_{k'},\\mathcal F_{k'})\\cong H^i(X,\\mathcal F)\\otimes_k k'$.",
+      "uses": [],
+      "elementary": true,
+      "source": {
+        "document": "literature/stacks-project/coherent.tex",
+        "place": "Cohomology of Schemes, Lemma 30.5.2 (Tag 02KH), exactness of flat tensor product"
+      }
+    },
+    {
+      "text": "For algebraically closed field extensions $k\\subseteq k'$, the map $k\\to k'$ is flat because $k'$ is a vector space over the field $k$, so the first part applies to $\\mathcal F=\\mathcal O_X$. A $k$-basis of $H^i(X,\\mathcal O_X)$ remains a $k'$-basis after tensoring, which gives $\\dim_{k'}H^i(X_{k'},\\mathcal O_{X_{k'}})=\\dim_kH^i(X,\\mathcal O_X)$.",
+      "uses": [
+        "def-pc-field-extension"
+      ],
+      "elementary": true,
+      "source": {
+        "document": "literature/stacks-project/coherent.tex",
+        "place": "Cohomology of Schemes, Lemma 30.5.2 (Tag 02KH), field-extension specialization"
+      }
+    }
+  ],
+  "proof_deps": [
     "def-weil-proper-morphism",
     "lem-pc-cech-computes",
     "def-pc-base-change",
-    "lem-weil-pbc-separated-affine-open-intersection"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Cohomology of Schemes, Lemma 30.5.2 (Tag 02KH), setup and affine-cover reduction"
-   }
-  },
-  {
-   "text": "For each multi-index $J$, write $U_J=\\operatorname{Spec}A_J$ and $\\mathcal F|_{U_J}=\\widetilde M_J$. Then $(U_J)_{k'}=\\operatorname{Spec}(A_J\\otimes_k k')$ and the pullback module is $\\widetilde{M_J\\otimes_k k'}$, so the affine-section formula for pullbacks of quasi-coherent modules [lem-weil-pbc-module-pullback-affine-sections], applied to $V=U_J$ and $U=(U_J)_{k'}$, gives $\\Gamma((U_J)_{k'},\\mathcal F_{k'})\\cong\\Gamma(U_J,\\mathcal F)\\otimes_{A_J}(A_J\\otimes_k k')\\cong\\Gamma(U_J,\\mathcal F)\\otimes_k k'$. These identifications commute with all restriction maps, hence identify the Cech complex for $\\mathfrak U_{k'}$ with the tensor product of the Cech complex for $\\mathfrak U$ by $k'$.",
-   "uses": [
-    "def-pc-base-change",
+    "def-pc-field-extension",
+    "lem-weil-pbc-separated-affine-open-intersection",
     "lem-weil-pbc-module-pullback-affine-sections"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Cohomology of Schemes, Lemma 30.5.2 (Tag 02KH), affine section calculation"
-   }
+  ],
+  "proof_origin": {
+    "by": "agent",
+    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-sc-flat-base-change-coherent.md",
+    "place": "## Proof"
   },
-  {
-   "text": "The map $k\\to k'$ is flat, so tensoring with $k'$ is exact. Exactness preserves the kernels and images in the Cech complex, and therefore $H^i(C^\\bullet\\otimes_k k')\\cong H^i(C^\\bullet)\\otimes_k k'$ for every $i$. Combining this with Step 1 and the Cech-complex identification of Step 2 gives the asserted isomorphism $H^i(X_{k'},\\mathcal F_{k'})\\cong H^i(X,\\mathcal F)\\otimes_k k'$.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Cohomology of Schemes, Lemma 30.5.2 (Tag 02KH), exactness of flat tensor product"
-   }
-  },
-  {
-   "text": "For algebraically closed field extensions $k\\subseteq k'$, the map $k\\to k'$ is flat because $k'$ is a vector space over the field $k$, so the first part applies to $\\mathcal F=\\mathcal O_X$. A $k$-basis of $H^i(X,\\mathcal O_X)$ remains a $k'$-basis after tensoring, which gives $\\dim_{k'}H^i(X_{k'},\\mathcal O_{X_{k'}})=\\dim_kH^i(X,\\mathcal O_X)$.",
-   "uses": [
-    "def-pc-field-extension"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Cohomology of Schemes, Lemma 30.5.2 (Tag 02KH), field-extension specialization"
-   }
-  }
- ],
- "proof_deps": [
-  "def-weil-proper-morphism",
-  "lem-pc-cech-computes",
-  "def-pc-base-change",
-  "def-pc-field-extension",
-  "lem-weil-pbc-separated-affine-open-intersection",
-  "lem-weil-pbc-module-pullback-affine-sections"
- ],
- "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-sc-flat-base-change-coherent.md",
-  "place": "## Proof"
- },
- "mathlib_searches": [],
- "mathlib_match": null,
- "status": "split",
- "merged_into": null,
- "import_flags": [],
- "blueprint_kind": "lemma",
- "blueprint_order": 715,
- "blueprint_uses": [
-  "lem-sc-cech-spectral"
- ],
- "proof_split_by": "paragraphs",
- "lean_audit": {
-  "master": {
-   "state": "none",
-   "decls": [],
-   "missing": []
-  },
-  "slopmaster2": {
-   "state": "sorry_here",
-   "decls": [
-    {
-     "name": "AlgebraicGeometry.Scheme.Modules.nonempty_H_pullback_linearEquiv",
-     "module": "WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar",
-     "lines": [
-      100,
-      116
-     ],
-     "kind": "theorem",
-     "sorry": true
+  "mathlib_searches": [],
+  "mathlib_match": null,
+  "status": "split",
+  "merged_into": null,
+  "import_flags": [],
+  "blueprint_kind": "lemma",
+  "blueprint_order": 715,
+  "blueprint_uses": [
+    "lem-sc-cech-spectral"
+  ],
+  "proof_split_by": "paragraphs",
+  "lean_audit": {
+    "master": {
+      "state": "none",
+      "decls": [],
+      "missing": []
+    },
+    "slopmaster2": {
+      "state": "sorry_here",
+      "decls": [
+        {
+          "name": "AlgebraicGeometry.Scheme.Modules.nonempty_H_pullback_linearEquiv",
+          "module": "WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar",
+          "lines": [
+            100,
+            116
+          ],
+          "kind": "theorem",
+          "sorry": true
+        }
+      ],
+      "missing": [],
+      "open": []
     }
-   ],
-   "missing": [],
-   "open": []
+  },
+  "chapter": "sec-picard-framework",
+  "unit": "sk-thm-picard-rr",
+  "split_report": {
+    "date": "2026-10-10",
+    "item": "lem-sc-flat-base-change-coherent",
+    "worker": "stage1",
+    "summary": "Checked the imported item against Stacks Project Cohomology of Schemes, Lemma 30.5.2 (Tag 02KH), and against the exact sorry-bearing Lean declaration AlgebraicGeometry.Scheme.Modules.nonempty_H_pullback_linearEquiv in WeilConjectures/AlgebraicGeometry/Cohomology/EulerChar.lean:100-116. The statement agrees with the field-extension specialization: properness supplies quasi-compactness and quasi-separatedness, the sheaf is quasi-coherent, and the pullback and tensor products are the stated objects. No new node was needed: the Cech computation node, proper-morphism definition, base-change definition, and field-extension definition already exist. The four imported proof steps were retained after checking their hypotheses and the affine-section, Cech, exact-flat-tensor, and dimension arguments against Tag 02KH.",
+    "blueprint": "The item is the blueprint node itself. Step 1 realizes the setup and affine-cover reduction in the blueprint proof; Step 2 realizes the affine-section and Cech-complex base-change identification; Step 3 realizes exactness of tensoring by the flat field extension and passage to cohomology; Step 4 realizes the algebraically closed field-extension dimension specialization.",
+    "tool_uses": []
+  },
+  "tool_uses": [
+    "lem-weil-pbc-module-pullback-affine-sections"
+  ],
+  "reviewed": {
+    "date": "2026-10-10",
+    "by": "L",
+    "reviewer": "R-fbc",
+    "group": "F1",
+    "result": "pass",
+    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-fbc (reviewer sub-agent of L); spot-checked: Source Stacks 02KH (coherent.tex label lemma-flat-base-change-cohomology): g flat, f qcqs, F quasi-coherent; the item specializes it to S=Spec k, S'=Spec k', with X proper over k giving qcqs via def-weil-proper-morphism (separated, finite type incl. quasi-compact per def-weil-finite-type-morphism); statement rewritten only by adding citations and notation, mathematics unchanged. Step 1: def-weil-proper-morphism gives separated+finite type, finite affine cover; affine intersections need a cited fact, FIXED by citing the Mathlib leaf lem-weil-pbc-separated-affine-open-intersection; (U_J)_{k'}=U_J x_k k' affine; lem-pc-cech-computes (Lean closed, nonempty_cechComplex_linearEquiv_H sorry-free per sorryfree.py) states Cech=H^p for covers with all intersections affine and quasi-coherent F, hypotheses hold on X and X_{k'}. Step 2: affine pullback section formula was marked elementary with no node, FIXED by citing lem-weil-pbc-module-pullback-affine-sections (V=U_J, U=(U_J)_{k'}, B=A_J tensor_k k') and setting elementary false; this off-unit sk-thm-p1 node is a generic black-box tool, recorded with --tool-uses. Step 3: exactness of flat tensor commutes with cohomology of a complex, elementary; Cech complex is finite products since r finite. Step 4: def-pc-field-extension; field extension flat, basis argument, elementary. Lean: item decl nonempty_H_pullback_linearEquiv (EulerChar.lean:100-116) is sorry itself, so B10 does not apply. same_as lem-pc-flat-base-change-cohom is the general 02KH form, acceptable. Small cases: X empty, X=Spec k (H^0=k', higher 0), k'=k identity, X=P^1 with O(-2) (H^1 one-dimensional on both sides). Fixes: dag/nodes/sec-picard-framework/lem-sc-flat-base-change-coherent.json: proof[0].text/uses: cite lem-weil-pbc-separated-affine-open-intersection; proof[1].text/uses/elementary: cite lem-weil-pbc-module-pullback-affine-sections, elementary false; proof_deps: both added. 14:38-14:40 UTC; 1 file(s) fixed by the reviewer"
+  },
+  "lean": {
+    "module": "WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar",
+    "declaration": "AlgebraicGeometry.Scheme.Modules.nonempty_H_pullback_linearEquiv",
+    "branch": "slopmaster2",
+    "line": 100,
+    "declarations": [
+      "AlgebraicGeometry.Scheme.Modules.nonempty_H_pullback_linearEquiv"
+    ],
+    "sorry_free": false,
+    "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state sorry_here)"
   }
- },
- "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-rr",
- "split_report": {
-  "date": "2026-10-10",
-  "item": "lem-sc-flat-base-change-coherent",
-  "worker": "stage1",
-  "summary": "Checked the imported item against Stacks Project Cohomology of Schemes, Lemma 30.5.2 (Tag 02KH), and against the exact sorry-bearing Lean declaration AlgebraicGeometry.Scheme.Modules.nonempty_H_pullback_linearEquiv in WeilConjectures/AlgebraicGeometry/Cohomology/EulerChar.lean:100-116. The statement agrees with the field-extension specialization: properness supplies quasi-compactness and quasi-separatedness, the sheaf is quasi-coherent, and the pullback and tensor products are the stated objects. No new node was needed: the Cech computation node, proper-morphism definition, base-change definition, and field-extension definition already exist. The four imported proof steps were retained after checking their hypotheses and the affine-section, Cech, exact-flat-tensor, and dimension arguments against Tag 02KH.",
-  "blueprint": "The item is the blueprint node itself. Step 1 realizes the setup and affine-cover reduction in the blueprint proof; Step 2 realizes the affine-section and Cech-complex base-change identification; Step 3 realizes exactness of tensoring by the flat field extension and passage to cohomology; Step 4 realizes the algebraically closed field-extension dimension specialization.",
-  "tool_uses": []
- },
- "tool_uses": [
-  "lem-weil-pbc-module-pullback-affine-sections"
- ],
- "reviewed": {
-  "date": "2026-10-10",
-  "by": "L",
-  "reviewer": "R-fbc",
-  "group": "F1",
-  "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-fbc (reviewer sub-agent of L); spot-checked: Source Stacks 02KH (coherent.tex label lemma-flat-base-change-cohomology): g flat, f qcqs, F quasi-coherent; the item specializes it to S=Spec k, S'=Spec k', with X proper over k giving qcqs via def-weil-proper-morphism (separated, finite type incl. quasi-compact per def-weil-finite-type-morphism); statement rewritten only by adding citations and notation, mathematics unchanged. Step 1: def-weil-proper-morphism gives separated+finite type, finite affine cover; affine intersections need a cited fact, FIXED by citing the Mathlib leaf lem-weil-pbc-separated-affine-open-intersection; (U_J)_{k'}=U_J x_k k' affine; lem-pc-cech-computes (Lean closed, nonempty_cechComplex_linearEquiv_H sorry-free per sorryfree.py) states Cech=H^p for covers with all intersections affine and quasi-coherent F, hypotheses hold on X and X_{k'}. Step 2: affine pullback section formula was marked elementary with no node, FIXED by citing lem-weil-pbc-module-pullback-affine-sections (V=U_J, U=(U_J)_{k'}, B=A_J tensor_k k') and setting elementary false; this off-unit sk-thm-p1 node is a generic black-box tool, recorded with --tool-uses. Step 3: exactness of flat tensor commutes with cohomology of a complex, elementary; Cech complex is finite products since r finite. Step 4: def-pc-field-extension; field extension flat, basis argument, elementary. Lean: item decl nonempty_H_pullback_linearEquiv (EulerChar.lean:100-116) is sorry itself, so B10 does not apply. same_as lem-pc-flat-base-change-cohom is the general 02KH form, acceptable. Small cases: X empty, X=Spec k (H^0=k', higher 0), k'=k identity, X=P^1 with O(-2) (H^1 one-dimensional on both sides). Fixes: dag/nodes/sec-picard-framework/lem-sc-flat-base-change-coherent.json: proof[0].text/uses: cite lem-weil-pbc-separated-affine-open-intersection; proof[1].text/uses/elementary: cite lem-weil-pbc-module-pullback-affine-sections, elementary false; proof_deps: both added. 14:38-14:40 UTC; 1 file(s) fixed by the reviewer"
- }
 }

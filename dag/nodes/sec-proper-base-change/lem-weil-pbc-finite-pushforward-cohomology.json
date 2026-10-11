@@ -1,106 +1,110 @@
 {
- "id": "lem-weil-pbc-finite-pushforward-cohomology",
- "blueprint": {
-  "is": null,
-  "from": {
-   "node": "prop-weil-pbc-algebraically-closed-extension",
-   "place": "step 3, 4, 7 of its split (source: Section 03SB, Lemma 03SG (lemma-even-easier) and its proof, and Lemma 0A5B (lemma-constant-smooth-statements))",
-   "via": [
-    "lem-weil-pbc-curve-assertions-finite-pushforward"
-   ]
+  "id": "lem-weil-pbc-finite-pushforward-cohomology",
+  "blueprint": {
+    "is": null,
+    "from": {
+      "node": "prop-weil-pbc-algebraically-closed-extension",
+      "place": "step 3, 4, 7 of its split (source: Section 03SB, Lemma 03SG (lemma-even-easier) and its proof, and Lemma 0A5B (lemma-constant-smooth-statements))",
+      "via": [
+        "lem-weil-pbc-curve-assertions-finite-pushforward"
+      ]
+    },
+    "same_as": null
   },
-  "same_as": null
- },
- "kind": "statement",
- "title": "Finite direct image does not change etale cohomology (edge map)",
- "statement": "Let $f:X\\to Y$ be a finite morphism of schemes [def-weil-finite-integral-morphism] and let $F$ be an abelian sheaf on $X_{\\Et}$ [def-weil-pbc-abelian-etale-sheaves], with direct image $f_*F$ [def-weil-pbc-direct-image] and counit $\\varepsilon_{f,F}:f^{-1}f_*F\\to F$ of the adjunction $f^{-1}\\dashv f_*$ [def-weil-pbc-inverse-image]. For $q\\ge0$ define the *edge map* $$e^q_{f,F}=H^q(\\varepsilon_{f,F})\\circ f^*:\\ H^q(Y_{\\Et},f_*F)\\xrightarrow{\\ f^*\\ }H^q(X_{\\Et},f^{-1}f_*F)\\xrightarrow{\\ H^q(\\varepsilon_{f,F})\\ }H^q(X_{\\Et},F),$$ where $f^*$ is the pullback map of [def-weil-pbc-cohomology-pullback] and $H^q(\\varepsilon_{f,F})$ the map induced on the cohomology groups of [def-weil-pbc-etale-cohomology] by a morphism of sheaves, as in [lem-weil-pbc-cohomology-pullback-functorial]. Then $e^q_{f,F}$ is an isomorphism for every $q\\ge0$. (In degree $0$ it is the identity of $\\Gamma(Y,f_*F)=F(X\\times_YY)=\\Gamma(X,F)$.)",
- "source": {
-  "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Etale Cohomology, Section 03SB, proof of Lemma 0A5D (lemma-finite-pushforward-statements): 'H^q(X,F)=H^q(Y,f_*F) by the vanishing of R^qf_* for q>0 (Proposition 03QP, proposition-finite-higher-direct-image-zero) and the Leray spectral sequence (Cohomology on Sites, Lemma 0733, sites-cohomology-lemma-apply-Leray)'; the same identification in the proof of Lemma 0A5E (lemma-restrict-to-open) for a closed immersion. Intended proof: f_* is exact (lemma-weil-pbc-finite-direct-image-exact) and preserves injectives (lem-weil-pbc-direct-image-preserves-injectives), so f_* of an injective resolution of F is an injective resolution of f_*F with the same global sections. Lean (slopmaster2, sorry-free per the sorry map): AlgebraicGeometry.Etale.bijective_edgeMap_of_isFinite, WeilConjectures/AlgebraicGeometry/Sites/CohomologyClopen.lean:46-56."
- },
- "stmt_deps": [
-  "def-weil-finite-integral-morphism",
-  "def-weil-pbc-abelian-etale-sheaves",
-  "def-weil-pbc-direct-image",
-  "def-weil-pbc-inverse-image",
-  "def-weil-pbc-cohomology-pullback",
-  "def-weil-pbc-etale-cohomology",
-  "lem-weil-pbc-cohomology-pullback-functorial"
- ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
- "mathlib_searches": [
-  {
-   "tool": "leansearch",
-   "query": "cohomology of the direct image of a sheaf along a finite morphism is isomorphic to the cohomology of the sheaf",
-   "results": "Scheme.Modules.pushforward_obj_obj, SheafOfModules.pushforward_map_val, Scheme.Modules.pushforward_obj_presheaf_map, IsFinite.recOn, IsProper.instOfIsFinite: definitions of pushforward and finite morphisms, no cohomology comparison",
-   "date": "2026-10-09",
-   "verdict": "no match"
+  "kind": "statement",
+  "title": "Finite direct image does not change etale cohomology (edge map)",
+  "statement": "Let $f:X\\to Y$ be a finite morphism of schemes [def-weil-finite-integral-morphism] and let $F$ be an abelian sheaf on $X_{\\Et}$ [def-weil-pbc-abelian-etale-sheaves], with direct image $f_*F$ [def-weil-pbc-direct-image] and counit $\\varepsilon_{f,F}:f^{-1}f_*F\\to F$ of the adjunction $f^{-1}\\dashv f_*$ [def-weil-pbc-inverse-image]. For $q\\ge0$ define the *edge map* $$e^q_{f,F}=H^q(\\varepsilon_{f,F})\\circ f^*:\\ H^q(Y_{\\Et},f_*F)\\xrightarrow{\\ f^*\\ }H^q(X_{\\Et},f^{-1}f_*F)\\xrightarrow{\\ H^q(\\varepsilon_{f,F})\\ }H^q(X_{\\Et},F),$$ where $f^*$ is the pullback map of [def-weil-pbc-cohomology-pullback] and $H^q(\\varepsilon_{f,F})$ the map induced on the cohomology groups of [def-weil-pbc-etale-cohomology] by a morphism of sheaves, as in [lem-weil-pbc-cohomology-pullback-functorial]. Then $e^q_{f,F}$ is an isomorphism for every $q\\ge0$. (In degree $0$ it is the identity of $\\Gamma(Y,f_*F)=F(X\\times_YY)=\\Gamma(X,F)$.)",
+  "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Etale Cohomology, Section 03SB, proof of Lemma 0A5D (lemma-finite-pushforward-statements): 'H^q(X,F)=H^q(Y,f_*F) by the vanishing of R^qf_* for q>0 (Proposition 03QP, proposition-finite-higher-direct-image-zero) and the Leray spectral sequence (Cohomology on Sites, Lemma 0733, sites-cohomology-lemma-apply-Leray)'; the same identification in the proof of Lemma 0A5E (lemma-restrict-to-open) for a closed immersion. Intended proof: f_* is exact (lemma-weil-pbc-finite-direct-image-exact) and preserves injectives (lem-weil-pbc-direct-image-preserves-injectives), so f_* of an injective resolution of F is an injective resolution of f_*F with the same global sections. Lean (slopmaster2, sorry-free per the sorry map): AlgebraicGeometry.Etale.bijective_edgeMap_of_isFinite, WeilConjectures/AlgebraicGeometry/Sites/CohomologyClopen.lean:46-56."
   },
-  {
-   "tool": "leanfinder",
-   "query": "Leray edge map H^n(Y, f_* F) -> H^n(X, F) is an isomorphism when higher direct images vanish",
-   "results": "CochainComplex.ConnectData.homologyIsoPos, InjectiveResolution.isoRightDerivedObj (Mathlib.CategoryTheory.Abelian.RightDerived), cm5b quasi-iso, HomologySequence.isIso_homologyMap_τ₃, groupCohomology.isIso_δ_of_isZero: generic homological algebra, nothing on sites or direct images",
-   "date": "2026-10-09",
-   "verdict": "no match (generic ingredient only)"
-  },
-  {
-   "tool": "grep",
-   "query": "grep -rn 'edgeMap\\|Leray' and grep -rln 'Sheaf.H' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/",
-   "results": "no edgeMap/Leray; Sheaf.H only in CategoryTheory/Sites/SheafCohomology/Basic.lean (definition as Ext, H.map), no pullback along a morphism of sites, no direct image",
-   "date": "2026-10-09",
-   "verdict": "no match"
-  },
-  {
-   "tool": "local_search",
-   "query": "AlgebraicGeometry.Etale.bijective_edgeMap_of_isFinite (grep of ~/weil-conjectures-slopmaster2/WeilConjectures)",
-   "results": "source repository (not Mathlib): WeilConjectures/AlgebraicGeometry/Sites/CohomologyClopen.lean:46 theorem bijective_edgeMap_of_isFinite, sorry-free in local/sorry_map_slopmaster2_full.jsonl (s false, ts false); states exactly this node",
-   "date": "2026-10-09",
-   "verdict": "not Mathlib; source-repository Lean found, for the lead to attach"
-  }
- ],
- "mathlib_match": null,
- "status": "unsplit",
- "merged_into": null,
- "created": {
-  "by": "worker",
-  "item": "lem-weil-pbc-curve-assertions-finite-pushforward",
-  "date": "2026-10-09"
- },
- "lean_audit": {
-  "master": {
-   "state": "none",
-   "decls": [],
-   "missing": [
-    "AlgebraicGeometry.Etale.bijective_edgeMap_of_isFinite"
-   ]
-  },
-  "slopmaster2": {
-   "state": "closed",
-   "decls": [
-    {
-     "name": "AlgebraicGeometry.Etale.bijective_edgeMap_of_isFinite",
-     "module": "WeilConjectures.AlgebraicGeometry.Sites.CohomologyClopen",
-     "lines": [
-      43,
-      56
-     ],
-     "kind": "theorem",
-     "sorry": false
-    }
-   ],
-   "missing": [],
-   "open": []
-  }
- },
- "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1",
- "lean": {
-  "branch": "slopmaster2",
-  "declarations": [
-   "AlgebraicGeometry.Etale.bijective_edgeMap_of_isFinite"
+  "stmt_deps": [
+    "def-weil-finite-integral-morphism",
+    "def-weil-pbc-abelian-etale-sheaves",
+    "def-weil-pbc-direct-image",
+    "def-weil-pbc-inverse-image",
+    "def-weil-pbc-cohomology-pullback",
+    "def-weil-pbc-etale-cohomology",
+    "lem-weil-pbc-cohomology-pullback-functorial"
   ],
-  "note": "attached by the lead at review (2026-10-09), found by the opus worker of lem-weil-pbc-curve-assertions-finite-pushforward: the edge map H^q(Y, f_*F) -> H^q(X, F) is bijective for finite f; sorry-free on the full map"
- }
+  "proof": [],
+  "proof_deps": [],
+  "proof_origin": null,
+  "mathlib_searches": [
+    {
+      "tool": "leansearch",
+      "query": "cohomology of the direct image of a sheaf along a finite morphism is isomorphic to the cohomology of the sheaf",
+      "results": "Scheme.Modules.pushforward_obj_obj, SheafOfModules.pushforward_map_val, Scheme.Modules.pushforward_obj_presheaf_map, IsFinite.recOn, IsProper.instOfIsFinite: definitions of pushforward and finite morphisms, no cohomology comparison",
+      "date": "2026-10-09",
+      "verdict": "no match"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "Leray edge map H^n(Y, f_* F) -> H^n(X, F) is an isomorphism when higher direct images vanish",
+      "results": "CochainComplex.ConnectData.homologyIsoPos, InjectiveResolution.isoRightDerivedObj (Mathlib.CategoryTheory.Abelian.RightDerived), cm5b quasi-iso, HomologySequence.isIso_homologyMap_τ₃, groupCohomology.isIso_δ_of_isZero: generic homological algebra, nothing on sites or direct images",
+      "date": "2026-10-09",
+      "verdict": "no match (generic ingredient only)"
+    },
+    {
+      "tool": "grep",
+      "query": "grep -rn 'edgeMap\\|Leray' and grep -rln 'Sheaf.H' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/",
+      "results": "no edgeMap/Leray; Sheaf.H only in CategoryTheory/Sites/SheafCohomology/Basic.lean (definition as Ext, H.map), no pullback along a morphism of sites, no direct image",
+      "date": "2026-10-09",
+      "verdict": "no match"
+    },
+    {
+      "tool": "local_search",
+      "query": "AlgebraicGeometry.Etale.bijective_edgeMap_of_isFinite (grep of ~/weil-conjectures-slopmaster2/WeilConjectures)",
+      "results": "source repository (not Mathlib): WeilConjectures/AlgebraicGeometry/Sites/CohomologyClopen.lean:46 theorem bijective_edgeMap_of_isFinite, sorry-free in local/sorry_map_slopmaster2_full.jsonl (s false, ts false); states exactly this node",
+      "date": "2026-10-09",
+      "verdict": "not Mathlib; source-repository Lean found, for the lead to attach"
+    }
+  ],
+  "mathlib_match": null,
+  "status": "unsplit",
+  "merged_into": null,
+  "created": {
+    "by": "worker",
+    "item": "lem-weil-pbc-curve-assertions-finite-pushforward",
+    "date": "2026-10-09"
+  },
+  "lean_audit": {
+    "master": {
+      "state": "none",
+      "decls": [],
+      "missing": [
+        "AlgebraicGeometry.Etale.bijective_edgeMap_of_isFinite"
+      ]
+    },
+    "slopmaster2": {
+      "state": "closed",
+      "decls": [
+        {
+          "name": "AlgebraicGeometry.Etale.bijective_edgeMap_of_isFinite",
+          "module": "WeilConjectures.AlgebraicGeometry.Sites.CohomologyClopen",
+          "lines": [
+            43,
+            56
+          ],
+          "kind": "theorem",
+          "sorry": false
+        }
+      ],
+      "missing": [],
+      "open": []
+    }
+  },
+  "chapter": "sec-proper-base-change",
+  "unit": "sk-thm-p1",
+  "lean": {
+    "module": "WeilConjectures.AlgebraicGeometry.Sites.CohomologyClopen",
+    "declaration": "AlgebraicGeometry.Etale.bijective_edgeMap_of_isFinite",
+    "branch": "slopmaster2",
+    "line": 43,
+    "declarations": [
+      "AlgebraicGeometry.Etale.bijective_edgeMap_of_isFinite"
+    ],
+    "sorry_free": true,
+    "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state closed)"
+  }
 }

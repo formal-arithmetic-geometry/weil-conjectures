@@ -1,87 +1,98 @@
 {
- "id": "lem-pc-section-clearing-denominators",
- "blueprint": {
-  "is": "lem-pc-section-clearing-denominators",
-  "from": null,
-  "same_as": null
- },
- "kind": "statement",
- "title": "Clearing denominators for a section of an invertible module",
- "statement": "Let $X$ be a quasi-compact scheme\nseparated over an affine scheme,\nlet $\\mathcal L$ be an\ninvertible module, and let\n$s\\in\\Gamma(X,\\mathcal L)$. Put\n$X_s=X\\setminus Z(s)$, the complement of its\nzero scheme.\nFor every quasi-coherent module\n$\\mathcal F$ and $t\\in\\Gamma(X_s,\\mathcal F)$, there exist $m\\ge0$\nand $u\\in\\Gamma(X,\\mathcal F\\otimes\\mathcal L^{\\otimes m})$ such that\n$u|_{X_s}=t\\otimes s^m$.",
- "source": {
-  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-serre-b/lem-pc-section-clearing-denominators.md",
-  "place": "node lem-pc-section-clearing-denominators, order 625"
- },
- "stmt_deps": [
-  "def-pc-morphism-conventions"
- ],
- "proof": [
-  {
-   "text": "Choose a finite affine cover $V_j$ of $X$ on which $\\mathcal L$\nis free, as in [def-sc-invertible-module]; write $e_j$ for its\nbasis and $s=f_je_j$. By [def-pc-zero-scheme],\n$X_s\\cap V_j=D(f_j)$. For\n$M_j=\\Gamma(V_j,\\mathcal F)$, the affine description of\n[pqf-def-coherent] identifies sections there with $(M_j)_{f_j}$.\nChoose one $a\\ge0$ so that $f_j^a t$ has a lift $t_j\\in M_j$ for\nevery $j$. This is possible by the definition of localization and\nthe finiteness of the cover. The sections $t_j\\otimes e_j^a$ of\n$\\mathcal F\\otimes\\mathcal L^a$ agree on the part of each overlap\nwhere $s$ is invertible, but may not yet agree on the full overlap.",
-   "uses": [
+  "id": "lem-pc-section-clearing-denominators",
+  "blueprint": {
+    "is": "lem-pc-section-clearing-denominators",
+    "from": null,
+    "same_as": null
+  },
+  "kind": "statement",
+  "title": "Clearing denominators for a section of an invertible module",
+  "statement": "Let $X$ be a quasi-compact scheme\nseparated over an affine scheme,\nlet $\\mathcal L$ be an\ninvertible module, and let\n$s\\in\\Gamma(X,\\mathcal L)$. Put\n$X_s=X\\setminus Z(s)$, the complement of its\nzero scheme.\nFor every quasi-coherent module\n$\\mathcal F$ and $t\\in\\Gamma(X_s,\\mathcal F)$, there exist $m\\ge0$\nand $u\\in\\Gamma(X,\\mathcal F\\otimes\\mathcal L^{\\otimes m})$ such that\n$u|_{X_s}=t\\otimes s^m$.",
+  "source": {
+    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-serre-b/lem-pc-section-clearing-denominators.md",
+    "place": "node lem-pc-section-clearing-denominators, order 625"
+  },
+  "stmt_deps": [
+    "def-pc-morphism-conventions"
+  ],
+  "proof": [
+    {
+      "text": "Choose a finite affine cover $V_j$ of $X$ on which $\\mathcal L$\nis free, as in [def-sc-invertible-module]; write $e_j$ for its\nbasis and $s=f_je_j$. By [def-pc-zero-scheme],\n$X_s\\cap V_j=D(f_j)$. For\n$M_j=\\Gamma(V_j,\\mathcal F)$, the affine description of\n[pqf-def-coherent] identifies sections there with $(M_j)_{f_j}$.\nChoose one $a\\ge0$ so that $f_j^a t$ has a lift $t_j\\in M_j$ for\nevery $j$. This is possible by the definition of localization and\nthe finiteness of the cover. The sections $t_j\\otimes e_j^a$ of\n$\\mathcal F\\otimes\\mathcal L^a$ agree on the part of each overlap\nwhere $s$ is invertible, but may not yet agree on the full overlap.",
+      "uses": [
+        "def-sc-invertible-module",
+        "def-pc-zero-scheme",
+        "pqf-def-coherent"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "The overlaps $V_j\\cap V_k$ are affine: they are inverse images of\nthe closed diagonal under the affine product $V_j\\times V_k$ over\nthe affine base. On such an overlap use the trivialization $e_j$.\nThe difference of the two proposed sections is a module element\nwhose localization at $f_j$ is zero. Hence some power $f_j^{b_{jk}}$\nkills that difference. There are finitely many pairs, so choose\n$b\\ge b_{jk}$ for all of them. Multiplying all local sections\nby the global section $s^b$ makes their differences zero on every\noverlap. The sheaf gluing axiom gives a section $u$ of\n$\\mathcal F\\otimes\\mathcal L^{a+b}$ on $X$, with restriction\n$t\\otimes s^{a+b}$ on $X_s$. Take $m=a+b$.",
+      "uses": [],
+      "elementary": null
+    }
+  ],
+  "proof_deps": [
     "def-sc-invertible-module",
     "def-pc-zero-scheme",
     "pqf-def-coherent"
-   ],
-   "elementary": false
+  ],
+  "proof_origin": {
+    "by": "agent",
+    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-serre-b/lem-pc-section-clearing-denominators.md",
+    "place": "## Proof"
   },
-  {
-   "text": "The overlaps $V_j\\cap V_k$ are affine: they are inverse images of\nthe closed diagonal under the affine product $V_j\\times V_k$ over\nthe affine base. On such an overlap use the trivialization $e_j$.\nThe difference of the two proposed sections is a module element\nwhose localization at $f_j$ is zero. Hence some power $f_j^{b_{jk}}$\nkills that difference. There are finitely many pairs, so choose\n$b\\ge b_{jk}$ for all of them. Multiplying all local sections\nby the global section $s^b$ makes their differences zero on every\noverlap. The sheaf gluing axiom gives a section $u$ of\n$\\mathcal F\\otimes\\mathcal L^{a+b}$ on $X$, with restriction\n$t\\otimes s^{a+b}$ on $X_s$. Take $m=a+b$.",
-   "uses": [],
-   "elementary": null
-  }
- ],
- "proof_deps": [
-  "def-sc-invertible-module",
-  "def-pc-zero-scheme",
-  "pqf-def-coherent"
- ],
- "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-serre-b/lem-pc-section-clearing-denominators.md",
-  "place": "## Proof"
- },
- "mathlib_searches": [],
- "mathlib_match": null,
- "status": "imported",
- "merged_into": null,
- "import_flags": [],
- "blueprint_kind": "lemma",
- "blueprint_order": 625,
- "blueprint_uses": [
-  "def-pc-morphism-conventions",
-  "def-pc-zero-scheme",
-  "def-sc-invertible-module",
-  "pqf-def-coherent"
- ],
- "uses_not_cited": [
-  "def-pc-morphism-conventions"
- ],
- "proof_split_by": "paragraphs",
- "lean_audit": {
-  "master": {
-   "state": "none",
-   "decls": [],
-   "missing": []
-  },
-  "slopmaster2": {
-   "state": "closed",
-   "decls": [
-    {
-     "name": "AlgebraicGeometry.Scheme.Modules.exists_tensorPowSection_eq_restrict",
-     "module": "WeilConjectures.AlgebraicGeometry.Modules.ClearDenominators",
-     "lines": [
-      247,
-      384
-     ],
-     "kind": "theorem",
-     "sorry": false
+  "mathlib_searches": [],
+  "mathlib_match": null,
+  "status": "imported",
+  "merged_into": null,
+  "import_flags": [],
+  "blueprint_kind": "lemma",
+  "blueprint_order": 625,
+  "blueprint_uses": [
+    "def-pc-morphism-conventions",
+    "def-pc-zero-scheme",
+    "def-sc-invertible-module",
+    "pqf-def-coherent"
+  ],
+  "uses_not_cited": [
+    "def-pc-morphism-conventions"
+  ],
+  "proof_split_by": "paragraphs",
+  "lean_audit": {
+    "master": {
+      "state": "none",
+      "decls": [],
+      "missing": []
+    },
+    "slopmaster2": {
+      "state": "closed",
+      "decls": [
+        {
+          "name": "AlgebraicGeometry.Scheme.Modules.exists_tensorPowSection_eq_restrict",
+          "module": "WeilConjectures.AlgebraicGeometry.Modules.ClearDenominators",
+          "lines": [
+            247,
+            384
+          ],
+          "kind": "theorem",
+          "sorry": false
+        }
+      ],
+      "missing": [],
+      "open": []
     }
-   ],
-   "missing": [],
-   "open": []
+  },
+  "chapter": "sec-picard-framework",
+  "unit": "sk-thm-picard-serre-b",
+  "lean": {
+    "module": "WeilConjectures.AlgebraicGeometry.Modules.ClearDenominators",
+    "declaration": "AlgebraicGeometry.Scheme.Modules.exists_tensorPowSection_eq_restrict",
+    "branch": "slopmaster2",
+    "line": 247,
+    "declarations": [
+      "AlgebraicGeometry.Scheme.Modules.exists_tensorPowSection_eq_restrict"
+    ],
+    "sorry_free": true,
+    "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state closed)"
   }
- },
- "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-serre-b"
 }

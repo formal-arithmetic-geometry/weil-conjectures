@@ -1,95 +1,106 @@
 {
- "id": "lem-ag-homomorphism-image-closed",
- "blueprint": {
-  "is": "lem-ag-homomorphism-image-closed",
-  "from": null,
-  "same_as": null
- },
- "kind": "statement",
- "title": "The image of a regular homomorphism is closed",
- "statement": "Let $G\\subseteq\\operatorname{GL}(V)$ and $K\\subseteq\\operatorname{GL}(W)$\nbe closed reduced matrix groups over $k=\\overline{\\mathbf Q}_\\ell$, and\nlet $\\varphi:G\\to K$ be a regular homomorphism, that is, a morphism of\nvarieties which is a group homomorphism on $k$-points. Then the image\n$S=\\varphi(G(k))$ is a closed subgroup of $K(k)$: it is the set of\n$k$-points of a closed subgroup of $K$, which we equip with its reduced\nstructure.",
- "source": {
-  "document": "literature/blueprint/master/blueprint/sec-algebraic-groups-lie-algebras/sk-p-geometry/lem-ag-homomorphism-image-closed.md",
-  "place": "node lem-ag-homomorphism-image-closed, order 2495"
- },
- "stmt_deps": [],
- "proof": [
-  {
-   "text": "Since $\\varphi$ is a homomorphism, $S$ is a subgroup of $K(k)$. For any\nsubgroup $H\\subseteq K(k)$ its Zariski closure $\\overline H$ is again a\nsubgroup: for fixed $y\\in H$ the closed condition $xy\\in\\overline H$\nholds on $H$, hence on $\\overline H$; then for fixed $x\\in\\overline H$\nthe closed condition $xy\\in\\overline H$ holds on $H$, hence on\n$\\overline H$; inversion is the same argument.",
-   "uses": [],
-   "elementary": null
+  "id": "lem-ag-homomorphism-image-closed",
+  "blueprint": {
+    "is": "lem-ag-homomorphism-image-closed",
+    "from": null,
+    "same_as": null
   },
-  {
-   "text": "First treat the identity component. By\n[lem-wf-algebraic-component-cosets], $G^\\circ$ is an irreducible closed\nsubset of the affine variety $\\operatorname{GL}(V)$, hence an\nirreducible affine variety. Put $S_0=\\varphi(G^\\circ(k))$, a subgroup of\n$S$, and let $T=\\overline{S_0}\\subseteq K$ with its reduced structure.\nThen $T$ is a closed subgroup; it is irreducible as the closure of the\nimage of an irreducible space, and it is affine, being closed in\n$\\operatorname{GL}(W)$. The morphism $\\varphi|_{G^\\circ}:G^\\circ\\to T$ is a\nmorphism of affine schemes of finite type over $k$, so by part (1) of\n[lem-wf-affine-constructible-open] its image\n$\\varphi(G^\\circ)\\subseteq T$ is constructible. It is dense in $T$,\nbecause its closed points $S_0$ are already dense; hence part (2)\nof [lem-wf-affine-constructible-open] gives a nonempty open\n$U\\subseteq T$ contained in the image. On $k$-points: every closed\npoint $t\\in U$ has a nonempty fibre, which is a nonempty finite-type\n$k$-scheme and therefore has a $k$-point because $k$ is algebraically\nclosed; hence $U(k)\\subseteq S_0$, and $U(k)\\neq\\varnothing$.",
-   "uses": [
-    "lem-wf-algebraic-component-cosets",
-    "lem-wf-affine-constructible-open"
-   ],
-   "elementary": false
+  "kind": "statement",
+  "title": "The image of a regular homomorphism is closed",
+  "statement": "Let $G\\subseteq\\operatorname{GL}(V)$ and $K\\subseteq\\operatorname{GL}(W)$\nbe closed reduced matrix groups over $k=\\overline{\\mathbf Q}_\\ell$, and\nlet $\\varphi:G\\to K$ be a regular homomorphism, that is, a morphism of\nvarieties which is a group homomorphism on $k$-points. Then the image\n$S=\\varphi(G(k))$ is a closed subgroup of $K(k)$: it is the set of\n$k$-points of a closed subgroup of $K$, which we equip with its reduced\nstructure.",
+  "source": {
+    "document": "literature/blueprint/master/blueprint/sec-algebraic-groups-lie-algebras/sk-p-geometry/lem-ag-homomorphism-image-closed.md",
+    "place": "node lem-ag-homomorphism-image-closed, order 2495"
   },
-  {
-   "text": "Now\n\n$$\nU(k)^{-1}U(k)=\\bigcup_{u\\in U(k)}u^{-1}U(k)\n$$\n\nis the set of $k$-points of an open neighbourhood of the identity in\n$T$, and it lies in the subgroup $S_0$. Its translates $sU^{-1}U$ for\n$s\\in S_0$ show that $S_0$ is open in $T(k)$; the other cosets of $S_0$\nin $T(k)$ are open for the same reason, so $S_0$ is also closed in\n$T(k)$. Since $S_0$ is dense in $T$, we get $S_0=T(k)$. Thus\n$\\varphi(G^\\circ(k))$ is the set of $k$-points of the closed subgroup\n$T$.",
-   "uses": [],
-   "elementary": null
-  },
-  {
-   "text": "Finally, by [lem-wf-algebraic-component-cosets] the group $G(k)$ is the\nunion of finitely many cosets $g_1G^\\circ(k),\\ldots,g_nG^\\circ(k)$ (as\nin [def-wf-algebraic-components], $G^\\circ$ is the identity component).\nTherefore\n\n$$\nS=\\bigcup_{i=1}^n\\varphi(g_i)\\,T(k),\n$$\n\na finite union of translates of the closed set $T(k)$. Each translate\nis closed, so $S$ is the set of $k$-points of the closed reduced\nsubvariety $\\bigcup_i\\varphi(g_i)T$ of $K$, which is a subgroup because\n$S$ is and closed subvarieties of $K$ are determined by their\n$k$-points.",
-   "uses": [
-    "lem-wf-algebraic-component-cosets",
-    "def-wf-algebraic-components"
-   ],
-   "elementary": false
-  }
- ],
- "proof_deps": [
-  "lem-wf-algebraic-component-cosets",
-  "lem-wf-affine-constructible-open",
-  "def-wf-algebraic-components"
- ],
- "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-algebraic-groups-lie-algebras/sk-p-geometry/lem-ag-homomorphism-image-closed.md",
-  "place": "## Proof"
- },
- "mathlib_searches": [],
- "mathlib_match": null,
- "status": "imported",
- "merged_into": null,
- "import_flags": [
-  "long_proof_few_deps"
- ],
- "blueprint_kind": "lemma",
- "blueprint_order": 2495,
- "blueprint_uses": [
-  "def-wf-algebraic-components",
-  "lem-wf-affine-constructible-open",
-  "lem-wf-algebraic-component-cosets"
- ],
- "proof_split_by": "paragraphs",
- "lean_audit": {
-  "master": {
-   "state": "none",
-   "decls": [],
-   "missing": []
-  },
-  "slopmaster2": {
-   "state": "closed",
-   "decls": [
+  "stmt_deps": [],
+  "proof": [
     {
-     "name": "AlgebraicGeometry.GeneralLinearGroup.RationalHom.mem_range_points_iff",
-     "module": "WeilConjectures.AlgebraicGeometry.GroupScheme.GeneralLinear.ClosedSubgroup.Image",
-     "lines": [
-      338,
-      353
-     ],
-     "kind": "theorem",
-     "sorry": false
+      "text": "Since $\\varphi$ is a homomorphism, $S$ is a subgroup of $K(k)$. For any\nsubgroup $H\\subseteq K(k)$ its Zariski closure $\\overline H$ is again a\nsubgroup: for fixed $y\\in H$ the closed condition $xy\\in\\overline H$\nholds on $H$, hence on $\\overline H$; then for fixed $x\\in\\overline H$\nthe closed condition $xy\\in\\overline H$ holds on $H$, hence on\n$\\overline H$; inversion is the same argument.",
+      "uses": [],
+      "elementary": null
+    },
+    {
+      "text": "First treat the identity component. By\n[lem-wf-algebraic-component-cosets], $G^\\circ$ is an irreducible closed\nsubset of the affine variety $\\operatorname{GL}(V)$, hence an\nirreducible affine variety. Put $S_0=\\varphi(G^\\circ(k))$, a subgroup of\n$S$, and let $T=\\overline{S_0}\\subseteq K$ with its reduced structure.\nThen $T$ is a closed subgroup; it is irreducible as the closure of the\nimage of an irreducible space, and it is affine, being closed in\n$\\operatorname{GL}(W)$. The morphism $\\varphi|_{G^\\circ}:G^\\circ\\to T$ is a\nmorphism of affine schemes of finite type over $k$, so by part (1) of\n[lem-wf-affine-constructible-open] its image\n$\\varphi(G^\\circ)\\subseteq T$ is constructible. It is dense in $T$,\nbecause its closed points $S_0$ are already dense; hence part (2)\nof [lem-wf-affine-constructible-open] gives a nonempty open\n$U\\subseteq T$ contained in the image. On $k$-points: every closed\npoint $t\\in U$ has a nonempty fibre, which is a nonempty finite-type\n$k$-scheme and therefore has a $k$-point because $k$ is algebraically\nclosed; hence $U(k)\\subseteq S_0$, and $U(k)\\neq\\varnothing$.",
+      "uses": [
+        "lem-wf-algebraic-component-cosets",
+        "lem-wf-affine-constructible-open"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "Now\n\n$$\nU(k)^{-1}U(k)=\\bigcup_{u\\in U(k)}u^{-1}U(k)\n$$\n\nis the set of $k$-points of an open neighbourhood of the identity in\n$T$, and it lies in the subgroup $S_0$. Its translates $sU^{-1}U$ for\n$s\\in S_0$ show that $S_0$ is open in $T(k)$; the other cosets of $S_0$\nin $T(k)$ are open for the same reason, so $S_0$ is also closed in\n$T(k)$. Since $S_0$ is dense in $T$, we get $S_0=T(k)$. Thus\n$\\varphi(G^\\circ(k))$ is the set of $k$-points of the closed subgroup\n$T$.",
+      "uses": [],
+      "elementary": null
+    },
+    {
+      "text": "Finally, by [lem-wf-algebraic-component-cosets] the group $G(k)$ is the\nunion of finitely many cosets $g_1G^\\circ(k),\\ldots,g_nG^\\circ(k)$ (as\nin [def-wf-algebraic-components], $G^\\circ$ is the identity component).\nTherefore\n\n$$\nS=\\bigcup_{i=1}^n\\varphi(g_i)\\,T(k),\n$$\n\na finite union of translates of the closed set $T(k)$. Each translate\nis closed, so $S$ is the set of $k$-points of the closed reduced\nsubvariety $\\bigcup_i\\varphi(g_i)T$ of $K$, which is a subgroup because\n$S$ is and closed subvarieties of $K$ are determined by their\n$k$-points.",
+      "uses": [
+        "lem-wf-algebraic-component-cosets",
+        "def-wf-algebraic-components"
+      ],
+      "elementary": false
     }
-   ],
-   "missing": [],
-   "open": []
+  ],
+  "proof_deps": [
+    "lem-wf-algebraic-component-cosets",
+    "lem-wf-affine-constructible-open",
+    "def-wf-algebraic-components"
+  ],
+  "proof_origin": {
+    "by": "agent",
+    "document": "literature/blueprint/master/blueprint/sec-algebraic-groups-lie-algebras/sk-p-geometry/lem-ag-homomorphism-image-closed.md",
+    "place": "## Proof"
+  },
+  "mathlib_searches": [],
+  "mathlib_match": null,
+  "status": "imported",
+  "merged_into": null,
+  "import_flags": [
+    "long_proof_few_deps"
+  ],
+  "blueprint_kind": "lemma",
+  "blueprint_order": 2495,
+  "blueprint_uses": [
+    "def-wf-algebraic-components",
+    "lem-wf-affine-constructible-open",
+    "lem-wf-algebraic-component-cosets"
+  ],
+  "proof_split_by": "paragraphs",
+  "lean_audit": {
+    "master": {
+      "state": "none",
+      "decls": [],
+      "missing": []
+    },
+    "slopmaster2": {
+      "state": "closed",
+      "decls": [
+        {
+          "name": "AlgebraicGeometry.GeneralLinearGroup.RationalHom.mem_range_points_iff",
+          "module": "WeilConjectures.AlgebraicGeometry.GroupScheme.GeneralLinear.ClosedSubgroup.Image",
+          "lines": [
+            338,
+            353
+          ],
+          "kind": "theorem",
+          "sorry": false
+        }
+      ],
+      "missing": [],
+      "open": []
+    }
+  },
+  "chapter": "sec-algebraic-groups-lie-algebras",
+  "unit": "sk-p-geometry",
+  "lean": {
+    "module": "WeilConjectures.AlgebraicGeometry.GroupScheme.GeneralLinear.ClosedSubgroup.Image",
+    "declaration": "AlgebraicGeometry.GeneralLinearGroup.RationalHom.mem_range_points_iff",
+    "branch": "slopmaster2",
+    "line": 338,
+    "declarations": [
+      "AlgebraicGeometry.GeneralLinearGroup.RationalHom.mem_range_points_iff"
+    ],
+    "sorry_free": true,
+    "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state closed)"
   }
- },
- "chapter": "sec-algebraic-groups-lie-algebras",
- "unit": "sk-p-geometry"
 }

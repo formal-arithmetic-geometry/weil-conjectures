@@ -1,357 +1,374 @@
 {
- "id": "lem-pc-degree-base-change",
- "blueprint": {
-  "is": "lem-pc-degree-base-change",
-  "from": null,
-  "same_as": []
- },
- "kind": "statement",
- "title": "Degree: base change and tensor products",
- "statement": "Let $k$ be a field, $X$ a scheme proper over $k$ [def-weil-proper-morphism] with $\\dim X\\le1$ [def-pc-dimension], and let $\\mathcal{L},\\mathcal{M}$ be invertible $\\mathcal{O}_X$-modules [def-sc-invertible-module]. Write $\\chi$ for the Euler characteristic [def-pc-euler-characteristic] and $\\deg=\\chi(-)-\\chi(\\mathcal O)$ for the degree [def-pc-degree-line-bundle].\n\n1. (Base change) Let $K/k$ be a field extension [def-pc-field-extension], $X_K:=X\\times_{\\operatorname{Spec}k}\\operatorname{Spec}K$ with projection $p:X_K\\to X$ [def-pc-base-change], and $\\mathcal L_K:=p^*\\mathcal L$ [def-pc-module-pullback]. Then $X_K$ is proper over $K$, $\\mathcal L_K$ is invertible, and\n$\\deg_{X_K}(\\mathcal{L}_K)=\\deg_X(\\mathcal{L})$.\n1. (Tensor with an effective divisor) Let $D\\subset X$ be an effective Cartier divisor, i.e. the closed subscheme cut out by an effective Cartier ideal $\\mathcal I_D$ [def-nagata-effective-cartier-ideal] (on a curve: [def-sc-effective-cartier-divisor]), and $\\mathcal{M}=\\mathcal{O}_X(D)=\\mathcal I_D^\\vee$ [def-pc-divisor-line-bundle]. Then $\\Gamma(D,\\mathcal O_D)$ is finite-dimensional over $k$ and\n$$\n\\deg(\\mathcal{O}_X(D))=\\dim_k\\Gamma(D,\\mathcal{O}_D),\\qquad\n\\chi(X,\\mathcal{L}\\otimes\\mathcal{M})=\\deg(\\mathcal{L})+\\chi(X,\\mathcal{M}),\\qquad\n\\deg(\\mathcal{L}\\otimes\\mathcal{M})=\\deg(\\mathcal{L})+\\deg(\\mathcal{M}).\n$$\nMoreover, let $P_1,\\dots,P_m$ be closed points of $X$ with residue fields $\\kappa(P_i)=k$ ($k$-rational points, [def-weil-residue-field]) such that each $P_i$ with its reduced induced structure, $[P_i]\\cong\\operatorname{Spec}\\kappa(P_i)$, is an effective Cartier divisor, let $n_1,\\dots,n_m\\in\\mathbf Z$, and put $\\mathcal O_X(\\sum_in_i[P_i]):=\\bigotimes_i\\mathcal O_X([P_i])^{\\otimes n_i}$ (a negative power meaning a power of the dual). Then $\\deg(\\mathcal{O}_X(\\sum_in_i[P_i]))=\\sum_in_i$.\n1. (Additivity) For a short exact sequence of coherent modules\n$0\\to\\mathcal{F}_1\\to\\mathcal{F}_2\\to\\mathcal{F}_3\\to0$:\n$\\chi(X,\\mathcal{F}_2)=\\chi(X,\\mathcal{F}_1)+\\chi(X,\\mathcal{F}_3)$\n([lem-pc-euler-additive]).",
- "source": {
-  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-pc-degree-base-change.md",
-  "place": "node lem-pc-degree-base-change, order 740",
-  "external": [
-   {
-    "document": "Stacks Project",
-    "place": "Tag 0AYV"
-   }
-  ]
- },
- "stmt_deps": [
-  "def-weil-proper-morphism",
-  "def-pc-dimension",
-  "def-sc-invertible-module",
-  "def-pc-euler-characteristic",
-  "def-pc-degree-line-bundle",
-  "def-pc-field-extension",
-  "def-pc-base-change",
-  "def-pc-module-pullback",
-  "def-nagata-effective-cartier-ideal",
-  "def-sc-effective-cartier-divisor",
-  "def-pc-divisor-line-bundle",
-  "def-weil-residue-field",
-  "lem-pc-euler-additive"
- ],
- "proof": [
-  {
-   "text": "*(3).* This is exactly [lem-pc-euler-additive] (Stacks Tag 08AA: the long exact cohomology sequence of finite-dimensional $k$-vector spaces and rank–nullity).",
-   "uses": [
-    "lem-pc-euler-additive"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/varieties.tex",
-    "place": "Tag 08AA (varieties-lemma-euler-characteristic-additive)"
-   }
+  "id": "lem-pc-degree-base-change",
+  "blueprint": {
+    "is": "lem-pc-degree-base-change",
+    "from": null,
+    "same_as": []
   },
-  {
-   "text": "*(1), the objects.* $X_K\\to\\operatorname{Spec}K$ is the base change of the proper morphism $X\\to\\operatorname{Spec}k$ along $\\operatorname{Spec}K\\to\\operatorname{Spec}k$, hence proper [lem-pc-proper-base-change]. By [def-pc-module-pullback], $p^*$ commutes with restriction to opens ($p^*(\\mathcal G|_U)=(p^*\\mathcal G)|_{p^{-1}U}$) and $p^*\\mathcal O_X=\\mathcal O_{X_K}\\otimes_{p^{-1}\\mathcal O_X}p^{-1}\\mathcal O_X=\\mathcal O_{X_K}$; so on an open $U$ with $\\mathcal L|_U\\cong\\mathcal O_U$ one gets $\\mathcal L_K|_{p^{-1}U}\\cong\\mathcal O_{p^{-1}U}$, and these $p^{-1}U$ cover $X_K$: $\\mathcal L_K$ is invertible [def-sc-invertible-module]. As $X_K$ is of finite type over the field $K$ it is Noetherian, so the invertible modules $\\mathcal L_K$, $\\mathcal O_{X_K}$ are coherent and $\\chi(X_K,\\mathcal L_K)$, $\\chi(X_K,\\mathcal O_{X_K})$, $\\deg_{X_K}(\\mathcal L_K)$ are defined.",
-   "uses": [
+  "kind": "statement",
+  "title": "Degree: base change and tensor products",
+  "statement": "Let $k$ be a field, $X$ a scheme proper over $k$ [def-weil-proper-morphism] with $\\dim X\\le1$ [def-pc-dimension], and let $\\mathcal{L},\\mathcal{M}$ be invertible $\\mathcal{O}_X$-modules [def-sc-invertible-module]. Write $\\chi$ for the Euler characteristic [def-pc-euler-characteristic] and $\\deg=\\chi(-)-\\chi(\\mathcal O)$ for the degree [def-pc-degree-line-bundle].\n\n1. (Base change) Let $K/k$ be a field extension [def-pc-field-extension], $X_K:=X\\times_{\\operatorname{Spec}k}\\operatorname{Spec}K$ with projection $p:X_K\\to X$ [def-pc-base-change], and $\\mathcal L_K:=p^*\\mathcal L$ [def-pc-module-pullback]. Then $X_K$ is proper over $K$, $\\mathcal L_K$ is invertible, and\n$\\deg_{X_K}(\\mathcal{L}_K)=\\deg_X(\\mathcal{L})$.\n1. (Tensor with an effective divisor) Let $D\\subset X$ be an effective Cartier divisor, i.e. the closed subscheme cut out by an effective Cartier ideal $\\mathcal I_D$ [def-nagata-effective-cartier-ideal] (on a curve: [def-sc-effective-cartier-divisor]), and $\\mathcal{M}=\\mathcal{O}_X(D)=\\mathcal I_D^\\vee$ [def-pc-divisor-line-bundle]. Then $\\Gamma(D,\\mathcal O_D)$ is finite-dimensional over $k$ and\n$$\n\\deg(\\mathcal{O}_X(D))=\\dim_k\\Gamma(D,\\mathcal{O}_D),\\qquad\n\\chi(X,\\mathcal{L}\\otimes\\mathcal{M})=\\deg(\\mathcal{L})+\\chi(X,\\mathcal{M}),\\qquad\n\\deg(\\mathcal{L}\\otimes\\mathcal{M})=\\deg(\\mathcal{L})+\\deg(\\mathcal{M}).\n$$\nMoreover, let $P_1,\\dots,P_m$ be closed points of $X$ with residue fields $\\kappa(P_i)=k$ ($k$-rational points, [def-weil-residue-field]) such that each $P_i$ with its reduced induced structure, $[P_i]\\cong\\operatorname{Spec}\\kappa(P_i)$, is an effective Cartier divisor, let $n_1,\\dots,n_m\\in\\mathbf Z$, and put $\\mathcal O_X(\\sum_in_i[P_i]):=\\bigotimes_i\\mathcal O_X([P_i])^{\\otimes n_i}$ (a negative power meaning a power of the dual). Then $\\deg(\\mathcal{O}_X(\\sum_in_i[P_i]))=\\sum_in_i$.\n1. (Additivity) For a short exact sequence of coherent modules\n$0\\to\\mathcal{F}_1\\to\\mathcal{F}_2\\to\\mathcal{F}_3\\to0$:\n$\\chi(X,\\mathcal{F}_2)=\\chi(X,\\mathcal{F}_1)+\\chi(X,\\mathcal{F}_3)$\n([lem-pc-euler-additive]).",
+  "source": {
+    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-pc-degree-base-change.md",
+    "place": "node lem-pc-degree-base-change, order 740",
+    "external": [
+      {
+        "document": "Stacks Project",
+        "place": "Tag 0AYV"
+      }
+    ]
+  },
+  "stmt_deps": [
+    "def-weil-proper-morphism",
+    "def-pc-dimension",
+    "def-sc-invertible-module",
+    "def-pc-euler-characteristic",
+    "def-pc-degree-line-bundle",
+    "def-pc-field-extension",
+    "def-pc-base-change",
+    "def-pc-module-pullback",
+    "def-nagata-effective-cartier-ideal",
+    "def-sc-effective-cartier-divisor",
+    "def-pc-divisor-line-bundle",
+    "def-weil-residue-field",
+    "lem-pc-euler-additive"
+  ],
+  "proof": [
+    {
+      "text": "*(3).* This is exactly [lem-pc-euler-additive] (Stacks Tag 08AA: the long exact cohomology sequence of finite-dimensional $k$-vector spaces and rank–nullity).",
+      "uses": [
+        "lem-pc-euler-additive"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/varieties.tex",
+        "place": "Tag 08AA (varieties-lemma-euler-characteristic-additive)"
+      }
+    },
+    {
+      "text": "*(1), the objects.* $X_K\\to\\operatorname{Spec}K$ is the base change of the proper morphism $X\\to\\operatorname{Spec}k$ along $\\operatorname{Spec}K\\to\\operatorname{Spec}k$, hence proper [lem-pc-proper-base-change]. By [def-pc-module-pullback], $p^*$ commutes with restriction to opens ($p^*(\\mathcal G|_U)=(p^*\\mathcal G)|_{p^{-1}U}$) and $p^*\\mathcal O_X=\\mathcal O_{X_K}\\otimes_{p^{-1}\\mathcal O_X}p^{-1}\\mathcal O_X=\\mathcal O_{X_K}$; so on an open $U$ with $\\mathcal L|_U\\cong\\mathcal O_U$ one gets $\\mathcal L_K|_{p^{-1}U}\\cong\\mathcal O_{p^{-1}U}$, and these $p^{-1}U$ cover $X_K$: $\\mathcal L_K$ is invertible [def-sc-invertible-module]. As $X_K$ is of finite type over the field $K$ it is Noetherian, so the invertible modules $\\mathcal L_K$, $\\mathcal O_{X_K}$ are coherent and $\\chi(X_K,\\mathcal L_K)$, $\\chi(X_K,\\mathcal O_{X_K})$, $\\deg_{X_K}(\\mathcal L_K)$ are defined.",
+      "uses": [
+        "lem-pc-proper-base-change",
+        "def-pc-base-change",
+        "def-pc-module-pullback",
+        "def-sc-invertible-module"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/varieties.tex",
+        "place": "Tag 0B59 (varieties-lemma-degree-base-change), proof, first sentences: 'set $X_{k'}=X\\times_{\\Spec(k)}\\Spec(k')$. Let $\\mathcal{E}_{k'}=p^*\\mathcal{E}$'"
+      }
+    },
+    {
+      "text": "*(1), the computation.* A field extension $K$ is a free, hence flat, $k$-module, so flat base change [lem-sc-flat-base-change-coherent] (Stacks 02KH) applied to the quasi-coherent modules $\\mathcal L$ and $\\mathcal O_X$ (with $p^*\\mathcal O_X=\\mathcal O_{X_K}$ from the previous step) gives, for every $i\\ge0$, isomorphisms of $K$-vector spaces\n$$H^i(X_K,\\mathcal L_K)\\cong H^i(X,\\mathcal L)\\otimes_kK,\\qquad H^i(X_K,\\mathcal O_{X_K})\\cong H^i(X,\\mathcal O_X)\\otimes_kK .$$\nBy [lem-pc-euler-characteristic-well-defined] the $k$-vector spaces $H^i(X,\\mathcal L)$, $H^i(X,\\mathcal O_X)$ are finite-dimensional and nonzero for only finitely many $i$; by [lem-pc-finrank-field-base-change], $\\dim_K(H^i(X,\\mathcal F)\\otimes_kK)=\\dim_kH^i(X,\\mathcal F)$ for $\\mathcal F=\\mathcal L,\\mathcal O_X$. Hence the alternating sums of [def-pc-euler-characteristic] agree term by term: $\\chi(X_K,\\mathcal L_K)=\\chi(X,\\mathcal L)$ and $\\chi(X_K,\\mathcal O_{X_K})=\\chi(X,\\mathcal O_X)$ (Stacks 08AB), and by [def-pc-degree-line-bundle]\n$$\\deg_{X_K}(\\mathcal L_K)=\\chi(X_K,\\mathcal L_K)-\\chi(X_K,\\mathcal O_{X_K})=\\chi(X,\\mathcal L)-\\chi(X,\\mathcal O_X)=\\deg_X(\\mathcal L).$$",
+      "uses": [
+        "lem-sc-flat-base-change-coherent",
+        "lem-pc-euler-characteristic-well-defined",
+        "lem-pc-finrank-field-base-change",
+        "def-pc-euler-characteristic",
+        "def-pc-degree-line-bundle"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/varieties.tex",
+        "place": "Tag 0B59, proof: 'By Cohomology of Schemes, Lemma 02KH we have $H^i(X_{k'},\\mathcal{E}_{k'})=H^i(X,\\mathcal{E})\\otimes_kk'$ and $H^i(X_{k'},\\mathcal{O}_{X_{k'}})=H^i(X,\\mathcal{O}_X)\\otimes_kk'$. Hence ... the Euler characteristics are unchanged'; Tag 08AB, proof"
+      }
+    },
+    {
+      "text": "*(2), finiteness of $D$.* By [lem-pc-cartier-divisor-finite-over-field], $\\dim D\\le0$, $D$ is affine and finite over $k$, and $\\delta:=\\dim_k\\Gamma(D,\\mathcal O_D)<\\infty$.",
+      "uses": [
+        "lem-pc-cartier-divisor-finite-over-field"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/varieties.tex",
+        "place": "Tag 0AYY (varieties-lemma-degree-effective-Cartier-divisor), proof: 'Since $D$ is nowhere dense in $X$ ... $\\dim(D)\\leq0$. Hence $D$ is finite over $k$'"
+      }
+    },
+    {
+      "text": "*(2), the exact sequence.* Let $i:D\\to X$ be the closed immersion. By [def-weil-closed-immersion] the map $i^\\sharp:\\mathcal O_X\\to i_*\\mathcal O_D$ is surjective, and its kernel is the ideal sheaf $\\mathcal I_D$ [def-sbc-closed-immersion-ideal-sheaf]; so $0\\to\\mathcal I_D\\to\\mathcal O_X\\to i_*\\mathcal O_D\\to0$ is exact. The ideal $\\mathcal I_D$ is invertible [lemma-nagata-effective-cartier-is-invertible], $\\mathcal O_X(D)=\\mathcal I_D^\\vee$ is invertible [lem-pc-divisor-line-bundle-invertible], hence so is $\\mathcal N:=\\mathcal L\\otimes\\mathcal O_X(D)$ [lem-pc-tensor-dual-invertible]. Tensoring with an invertible module is exact: exactness of a sequence of $\\mathcal O_X$-modules is checked on stalks, $(\\mathcal G\\otimes\\mathcal N)_x=\\mathcal G_x\\otimes_{\\mathcal O_{X,x}}\\mathcal N_x$, and $\\mathcal N_x\\cong\\mathcal O_{X,x}$ is free of rank one [def-sc-invertible-module]. So\n$$0\\to\\mathcal I_D\\otimes\\mathcal N\\to\\mathcal N\\to i_*\\mathcal O_D\\otimes\\mathcal N\\to0$$\nis exact. By associativity and commutativity of $\\otimes$ and the isomorphism $\\mathcal I_D\\otimes\\mathcal I_D^\\vee\\cong\\mathcal O_X$ of [lem-pc-tensor-dual-invertible] (applied to the invertible $\\mathcal I_D$), $\\mathcal I_D\\otimes\\mathcal N\\cong\\mathcal L\\otimes(\\mathcal I_D\\otimes\\mathcal I_D^\\vee)\\cong\\mathcal L$. Hence an exact sequence\n$$0\\to\\mathcal L\\to\\mathcal L\\otimes\\mathcal O_X(D)\\to i_*\\mathcal O_D\\otimes\\mathcal N\\to0 .$$",
+      "uses": [
+        "def-weil-closed-immersion",
+        "def-sbc-closed-immersion-ideal-sheaf",
+        "lemma-nagata-effective-cartier-is-invertible",
+        "lem-pc-divisor-line-bundle-invertible",
+        "lem-pc-tensor-dual-invertible",
+        "def-sc-invertible-module"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/varieties.tex",
+        "place": "Tag 0AYY, proof: 'By Divisors, Definition 01WX there is a short exact sequence $0\\to\\mathcal{O}_X\\to\\mathcal{O}_X(D)\\to i_*i^*\\mathcal{O}_X(D)\\to0$ ... Tensoring with $\\mathcal{E}$ we obtain a short exact sequence'"
+      }
+    },
+    {
+      "text": "*(2), the Euler characteristic of the quotient.* Put $\\mathcal F:=i_*\\mathcal O_D$. On an affine open $U=\\operatorname{Spec}A$ of the Noetherian scheme $X$ (finite type over $k$) one has $\\mathcal F|_U=\\widetilde{A/I}$ with $I=\\mathcal I_D(U)$ [def-sbc-closed-immersion-ideal-sheaf], a finitely generated module over the Noetherian ring $A$, so $\\mathcal F$ is coherent [pqf-def-coherent]; its stalk $\\mathcal F_x=\\mathcal O_{X,x}/\\mathcal I_{D,x}$ is nonzero exactly for $x\\in D$, so $\\operatorname{Supp}\\mathcal F=D$, of dimension $\\le0$ by the finiteness step. By [lem-pc-chi-zero-dim-support] (Stacks 0AYT (3)–(5)) applied to $\\mathcal F$ and the invertible $\\mathcal N$: $\\mathcal F\\otimes\\mathcal N$ is coherent and\n$$\\chi(X,i_*\\mathcal O_D\\otimes\\mathcal N)=\\chi(X,\\mathcal F)=\\dim_k\\Gamma(X,i_*\\mathcal O_D)=\\dim_k\\Gamma(D,\\mathcal O_D)=\\delta ,$$\nthe last equality being the definition of the pushforward, $\\Gamma(X,i_*\\mathcal O_D)=\\Gamma(i^{-1}X,\\mathcal O_D)$.",
+      "uses": [
+        "def-sbc-closed-immersion-ideal-sheaf",
+        "pqf-def-coherent",
+        "lem-pc-chi-zero-dim-support",
+        "lem-pc-cartier-divisor-finite-over-field"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/varieties.tex",
+        "place": "Tag 0AYY, proof: 'The equation of the lemma follows from ... Lemma 0AYT'; Tag 0AYT (varieties-lemma-chi-tensor-finite) (3)-(5)"
+      }
+    },
+    {
+      "text": "*(2), the formulas.* The three terms of the exact sequence are coherent ($\\mathcal L$, $\\mathcal L\\otimes\\mathcal O_X(D)$ are invertible on the Noetherian $X$; the third by the previous step), so additivity (3) [lem-pc-euler-additive] gives\n$$\\chi(X,\\mathcal L\\otimes\\mathcal O_X(D))=\\chi(X,\\mathcal L)+\\delta\\qquad(\\ast)$$\nfor every invertible $\\mathcal L$. For $\\mathcal L=\\mathcal O_X$ (with $\\mathcal O_X\\otimes\\mathcal O_X(D)\\cong\\mathcal O_X(D)$) this is $\\chi(X,\\mathcal O_X(D))=\\chi(X,\\mathcal O_X)+\\delta$, i.e. $\\deg\\mathcal O_X(D)=\\delta=\\dim_k\\Gamma(D,\\mathcal O_D)$ by [def-pc-degree-line-bundle]. With $\\mathcal M=\\mathcal O_X(D)$, $(\\ast)$ and $\\chi(X,\\mathcal L)=\\deg\\mathcal L+\\chi(X,\\mathcal O_X)$ give $\\chi(X,\\mathcal L\\otimes\\mathcal M)=\\deg\\mathcal L+\\chi(X,\\mathcal O_X)+\\delta=\\deg\\mathcal L+\\chi(X,\\mathcal M)$, and subtracting $\\chi(X,\\mathcal O_X)$: $\\deg(\\mathcal L\\otimes\\mathcal M)=\\deg\\mathcal L+\\delta=\\deg\\mathcal L+\\deg\\mathcal M$.",
+      "uses": [
+        "lem-pc-euler-additive",
+        "def-pc-degree-line-bundle"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/varieties.tex",
+        "place": "Tag 0AYY, statement 'deg(E(D)) = n deg(D) + deg(E)' with $n=1$ and its proof: 'The equation of the lemma follows from additivity of the Euler characteristic (Lemma 08AA)'"
+      }
+    },
+    {
+      "text": "*(2), rational points.* Let $P$ be a closed point with $\\kappa(P)=k$ such that $[P]$ is an effective Cartier divisor. The reduced induced closed subscheme on the closed point $P$ is the one-point reduced scheme whose local ring is a field, namely $\\operatorname{Spec}\\kappa(P)$ [def-weil-residue-field]; so $\\Gamma([P],\\mathcal O_{[P]})=\\kappa(P)=k$ and, by the previous step, $\\deg\\mathcal O_X([P])=1$ and $\\deg(\\mathcal L'\\otimes\\mathcal O_X([P]))=\\deg\\mathcal L'+1$ for every invertible $\\mathcal L'$. Applying this to $\\mathcal L'':=\\mathcal L'\\otimes\\mathcal O_X([P])^\\vee$ (invertible by [lem-pc-tensor-dual-invertible]), for which $\\mathcal L''\\otimes\\mathcal O_X([P])\\cong\\mathcal L'\\otimes(\\mathcal O_X([P])^\\vee\\otimes\\mathcal O_X([P]))\\cong\\mathcal L'$ by [lem-pc-tensor-dual-invertible], gives $\\deg(\\mathcal L'\\otimes\\mathcal O_X([P])^\\vee)=\\deg\\mathcal L'-1$ (the degree depends only on the isomorphism class, since $\\chi$ does: isomorphic modules have isomorphic cohomology). Starting from $\\deg\\mathcal O_X=0$ [def-pc-degree-line-bundle] and tensoring one factor $\\mathcal O_X([P_i])^{\\pm1}$ at a time, induction on $\\sum_i|n_i|$ gives $\\deg\\bigl(\\bigotimes_i\\mathcal O_X([P_i])^{\\otimes n_i}\\bigr)=\\sum_in_i$.",
+      "uses": [
+        "def-weil-residue-field",
+        "lem-pc-tensor-dual-invertible",
+        "def-pc-degree-line-bundle"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/varieties.tex",
+        "place": "Tag 0AYY (statement: $\\deg(D)=\\dim_k\\Gamma(D,\\mathcal{O}_D)$), applied to $D=[P]$; the induction follows the blueprint's last sentence ('$\\deg(\\mathcal{O}_X(D))=\\sum_in_i\\deg(\\mathcal{O}_X([P_i]))=\\sum_in_i$')"
+      }
+    }
+  ],
+  "proof_deps": [
+    "lem-pc-euler-additive",
     "lem-pc-proper-base-change",
     "def-pc-base-change",
     "def-pc-module-pullback",
-    "def-sc-invertible-module"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/varieties.tex",
-    "place": "Tag 0B59 (varieties-lemma-degree-base-change), proof, first sentences: 'set $X_{k'}=X\\times_{\\Spec(k)}\\Spec(k')$. Let $\\mathcal{E}_{k'}=p^*\\mathcal{E}$'"
-   }
-  },
-  {
-   "text": "*(1), the computation.* A field extension $K$ is a free, hence flat, $k$-module, so flat base change [lem-sc-flat-base-change-coherent] (Stacks 02KH) applied to the quasi-coherent modules $\\mathcal L$ and $\\mathcal O_X$ (with $p^*\\mathcal O_X=\\mathcal O_{X_K}$ from the previous step) gives, for every $i\\ge0$, isomorphisms of $K$-vector spaces\n$$H^i(X_K,\\mathcal L_K)\\cong H^i(X,\\mathcal L)\\otimes_kK,\\qquad H^i(X_K,\\mathcal O_{X_K})\\cong H^i(X,\\mathcal O_X)\\otimes_kK .$$\nBy [lem-pc-euler-characteristic-well-defined] the $k$-vector spaces $H^i(X,\\mathcal L)$, $H^i(X,\\mathcal O_X)$ are finite-dimensional and nonzero for only finitely many $i$; by [lem-pc-finrank-field-base-change], $\\dim_K(H^i(X,\\mathcal F)\\otimes_kK)=\\dim_kH^i(X,\\mathcal F)$ for $\\mathcal F=\\mathcal L,\\mathcal O_X$. Hence the alternating sums of [def-pc-euler-characteristic] agree term by term: $\\chi(X_K,\\mathcal L_K)=\\chi(X,\\mathcal L)$ and $\\chi(X_K,\\mathcal O_{X_K})=\\chi(X,\\mathcal O_X)$ (Stacks 08AB), and by [def-pc-degree-line-bundle]\n$$\\deg_{X_K}(\\mathcal L_K)=\\chi(X_K,\\mathcal L_K)-\\chi(X_K,\\mathcal O_{X_K})=\\chi(X,\\mathcal L)-\\chi(X,\\mathcal O_X)=\\deg_X(\\mathcal L).$$",
-   "uses": [
+    "def-sc-invertible-module",
     "lem-sc-flat-base-change-coherent",
     "lem-pc-euler-characteristic-well-defined",
     "lem-pc-finrank-field-base-change",
     "def-pc-euler-characteristic",
-    "def-pc-degree-line-bundle"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/varieties.tex",
-    "place": "Tag 0B59, proof: 'By Cohomology of Schemes, Lemma 02KH we have $H^i(X_{k'},\\mathcal{E}_{k'})=H^i(X,\\mathcal{E})\\otimes_kk'$ and $H^i(X_{k'},\\mathcal{O}_{X_{k'}})=H^i(X,\\mathcal{O}_X)\\otimes_kk'$. Hence ... the Euler characteristics are unchanged'; Tag 08AB, proof"
-   }
-  },
-  {
-   "text": "*(2), finiteness of $D$.* By [lem-pc-cartier-divisor-finite-over-field], $\\dim D\\le0$, $D$ is affine and finite over $k$, and $\\delta:=\\dim_k\\Gamma(D,\\mathcal O_D)<\\infty$.",
-   "uses": [
-    "lem-pc-cartier-divisor-finite-over-field"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/varieties.tex",
-    "place": "Tag 0AYY (varieties-lemma-degree-effective-Cartier-divisor), proof: 'Since $D$ is nowhere dense in $X$ ... $\\dim(D)\\leq0$. Hence $D$ is finite over $k$'"
-   }
-  },
-  {
-   "text": "*(2), the exact sequence.* Let $i:D\\to X$ be the closed immersion. By [def-weil-closed-immersion] the map $i^\\sharp:\\mathcal O_X\\to i_*\\mathcal O_D$ is surjective, and its kernel is the ideal sheaf $\\mathcal I_D$ [def-sbc-closed-immersion-ideal-sheaf]; so $0\\to\\mathcal I_D\\to\\mathcal O_X\\to i_*\\mathcal O_D\\to0$ is exact. The ideal $\\mathcal I_D$ is invertible [lemma-nagata-effective-cartier-is-invertible], $\\mathcal O_X(D)=\\mathcal I_D^\\vee$ is invertible [lem-pc-divisor-line-bundle-invertible], hence so is $\\mathcal N:=\\mathcal L\\otimes\\mathcal O_X(D)$ [lem-pc-tensor-dual-invertible]. Tensoring with an invertible module is exact: exactness of a sequence of $\\mathcal O_X$-modules is checked on stalks, $(\\mathcal G\\otimes\\mathcal N)_x=\\mathcal G_x\\otimes_{\\mathcal O_{X,x}}\\mathcal N_x$, and $\\mathcal N_x\\cong\\mathcal O_{X,x}$ is free of rank one [def-sc-invertible-module]. So\n$$0\\to\\mathcal I_D\\otimes\\mathcal N\\to\\mathcal N\\to i_*\\mathcal O_D\\otimes\\mathcal N\\to0$$\nis exact. By associativity and commutativity of $\\otimes$ and the isomorphism $\\mathcal I_D\\otimes\\mathcal I_D^\\vee\\cong\\mathcal O_X$ of [lem-pc-tensor-dual-invertible] (applied to the invertible $\\mathcal I_D$), $\\mathcal I_D\\otimes\\mathcal N\\cong\\mathcal L\\otimes(\\mathcal I_D\\otimes\\mathcal I_D^\\vee)\\cong\\mathcal L$. Hence an exact sequence\n$$0\\to\\mathcal L\\to\\mathcal L\\otimes\\mathcal O_X(D)\\to i_*\\mathcal O_D\\otimes\\mathcal N\\to0 .$$",
-   "uses": [
+    "def-pc-degree-line-bundle",
+    "lem-pc-cartier-divisor-finite-over-field",
     "def-weil-closed-immersion",
     "def-sbc-closed-immersion-ideal-sheaf",
     "lemma-nagata-effective-cartier-is-invertible",
     "lem-pc-divisor-line-bundle-invertible",
     "lem-pc-tensor-dual-invertible",
-    "def-sc-invertible-module"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/varieties.tex",
-    "place": "Tag 0AYY, proof: 'By Divisors, Definition 01WX there is a short exact sequence $0\\to\\mathcal{O}_X\\to\\mathcal{O}_X(D)\\to i_*i^*\\mathcal{O}_X(D)\\to0$ ... Tensoring with $\\mathcal{E}$ we obtain a short exact sequence'"
-   }
-  },
-  {
-   "text": "*(2), the Euler characteristic of the quotient.* Put $\\mathcal F:=i_*\\mathcal O_D$. On an affine open $U=\\operatorname{Spec}A$ of the Noetherian scheme $X$ (finite type over $k$) one has $\\mathcal F|_U=\\widetilde{A/I}$ with $I=\\mathcal I_D(U)$ [def-sbc-closed-immersion-ideal-sheaf], a finitely generated module over the Noetherian ring $A$, so $\\mathcal F$ is coherent [pqf-def-coherent]; its stalk $\\mathcal F_x=\\mathcal O_{X,x}/\\mathcal I_{D,x}$ is nonzero exactly for $x\\in D$, so $\\operatorname{Supp}\\mathcal F=D$, of dimension $\\le0$ by the finiteness step. By [lem-pc-chi-zero-dim-support] (Stacks 0AYT (3)–(5)) applied to $\\mathcal F$ and the invertible $\\mathcal N$: $\\mathcal F\\otimes\\mathcal N$ is coherent and\n$$\\chi(X,i_*\\mathcal O_D\\otimes\\mathcal N)=\\chi(X,\\mathcal F)=\\dim_k\\Gamma(X,i_*\\mathcal O_D)=\\dim_k\\Gamma(D,\\mathcal O_D)=\\delta ,$$\nthe last equality being the definition of the pushforward, $\\Gamma(X,i_*\\mathcal O_D)=\\Gamma(i^{-1}X,\\mathcal O_D)$.",
-   "uses": [
-    "def-sbc-closed-immersion-ideal-sheaf",
     "pqf-def-coherent",
     "lem-pc-chi-zero-dim-support",
-    "lem-pc-cartier-divisor-finite-over-field"
-   ],
-   "elementary": false,
-   "source": {
+    "def-weil-residue-field"
+  ],
+  "proof_origin": {
+    "by": "document",
     "document": "literature/stacks-project/varieties.tex",
-    "place": "Tag 0AYY, proof: 'The equation of the lemma follows from ... Lemma 0AYT'; Tag 0AYT (varieties-lemma-chi-tensor-finite) (3)-(5)"
-   }
+    "place": "Tag 0B59 (varieties-lemma-degree-base-change) for (1); Tag 0AYY (varieties-lemma-degree-effective-Cartier-divisor) with Tags 0AYT and 08AA for (2) and (3); the clause on rational points is the blueprint's own (literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-pc-degree-base-change.md, last sentence of the proof), deduced from 0AYY"
   },
-  {
-   "text": "*(2), the formulas.* The three terms of the exact sequence are coherent ($\\mathcal L$, $\\mathcal L\\otimes\\mathcal O_X(D)$ are invertible on the Noetherian $X$; the third by the previous step), so additivity (3) [lem-pc-euler-additive] gives\n$$\\chi(X,\\mathcal L\\otimes\\mathcal O_X(D))=\\chi(X,\\mathcal L)+\\delta\\qquad(\\ast)$$\nfor every invertible $\\mathcal L$. For $\\mathcal L=\\mathcal O_X$ (with $\\mathcal O_X\\otimes\\mathcal O_X(D)\\cong\\mathcal O_X(D)$) this is $\\chi(X,\\mathcal O_X(D))=\\chi(X,\\mathcal O_X)+\\delta$, i.e. $\\deg\\mathcal O_X(D)=\\delta=\\dim_k\\Gamma(D,\\mathcal O_D)$ by [def-pc-degree-line-bundle]. With $\\mathcal M=\\mathcal O_X(D)$, $(\\ast)$ and $\\chi(X,\\mathcal L)=\\deg\\mathcal L+\\chi(X,\\mathcal O_X)$ give $\\chi(X,\\mathcal L\\otimes\\mathcal M)=\\deg\\mathcal L+\\chi(X,\\mathcal O_X)+\\delta=\\deg\\mathcal L+\\chi(X,\\mathcal M)$, and subtracting $\\chi(X,\\mathcal O_X)$: $\\deg(\\mathcal L\\otimes\\mathcal M)=\\deg\\mathcal L+\\delta=\\deg\\mathcal L+\\deg\\mathcal M$.",
-   "uses": [
+  "mathlib_searches": [],
+  "mathlib_match": null,
+  "status": "split",
+  "merged_into": null,
+  "import_flags": [
+    "cites_outside_uses",
+    "cites_remark"
+  ],
+  "blueprint_kind": "lemma",
+  "blueprint_order": 740,
+  "blueprint_uses": [
+    "def-pc-base-change",
+    "def-pc-degree-line-bundle",
+    "def-pc-dimension",
+    "def-pc-divisor-line-bundle",
+    "def-pc-euler-characteristic",
+    "def-sc-divisor",
+    "def-sc-effective-cartier-divisor",
+    "def-sc-invertible-module",
+    "lem-pc-affine-vanishing",
     "lem-pc-euler-additive",
-    "def-pc-degree-line-bundle"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/varieties.tex",
-    "place": "Tag 0AYY, statement 'deg(E(D)) = n deg(D) + deg(E)' with $n=1$ and its proof: 'The equation of the lemma follows from additivity of the Euler characteristic (Lemma 08AA)'"
-   }
-  },
-  {
-   "text": "*(2), rational points.* Let $P$ be a closed point with $\\kappa(P)=k$ such that $[P]$ is an effective Cartier divisor. The reduced induced closed subscheme on the closed point $P$ is the one-point reduced scheme whose local ring is a field, namely $\\operatorname{Spec}\\kappa(P)$ [def-weil-residue-field]; so $\\Gamma([P],\\mathcal O_{[P]})=\\kappa(P)=k$ and, by the previous step, $\\deg\\mathcal O_X([P])=1$ and $\\deg(\\mathcal L'\\otimes\\mathcal O_X([P]))=\\deg\\mathcal L'+1$ for every invertible $\\mathcal L'$. Applying this to $\\mathcal L'':=\\mathcal L'\\otimes\\mathcal O_X([P])^\\vee$ (invertible by [lem-pc-tensor-dual-invertible]), for which $\\mathcal L''\\otimes\\mathcal O_X([P])\\cong\\mathcal L'\\otimes(\\mathcal O_X([P])^\\vee\\otimes\\mathcal O_X([P]))\\cong\\mathcal L'$ by [lem-pc-tensor-dual-invertible], gives $\\deg(\\mathcal L'\\otimes\\mathcal O_X([P])^\\vee)=\\deg\\mathcal L'-1$ (the degree depends only on the isomorphism class, since $\\chi$ does: isomorphic modules have isomorphic cohomology). Starting from $\\deg\\mathcal O_X=0$ [def-pc-degree-line-bundle] and tensoring one factor $\\mathcal O_X([P_i])^{\\pm1}$ at a time, induction on $\\sum_i|n_i|$ gives $\\deg\\bigl(\\bigotimes_i\\mathcal O_X([P_i])^{\\otimes n_i}\\bigr)=\\sum_in_i$.",
-   "uses": [
-    "def-weil-residue-field",
-    "lem-pc-tensor-dual-invertible",
-    "def-pc-degree-line-bundle"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/varieties.tex",
-    "place": "Tag 0AYY (statement: $\\deg(D)=\\dim_k\\Gamma(D,\\mathcal{O}_D)$), applied to $D=[P]$; the induction follows the blueprint's last sentence ('$\\deg(\\mathcal{O}_X(D))=\\sum_in_i\\deg(\\mathcal{O}_X([P_i]))=\\sum_in_i$')"
-   }
-  }
- ],
- "proof_deps": [
-  "lem-pc-euler-additive",
-  "lem-pc-proper-base-change",
-  "def-pc-base-change",
-  "def-pc-module-pullback",
-  "def-sc-invertible-module",
-  "lem-sc-flat-base-change-coherent",
-  "lem-pc-euler-characteristic-well-defined",
-  "lem-pc-finrank-field-base-change",
-  "def-pc-euler-characteristic",
-  "def-pc-degree-line-bundle",
-  "lem-pc-cartier-divisor-finite-over-field",
-  "def-weil-closed-immersion",
-  "def-sbc-closed-immersion-ideal-sheaf",
-  "lemma-nagata-effective-cartier-is-invertible",
-  "lem-pc-divisor-line-bundle-invertible",
-  "lem-pc-tensor-dual-invertible",
-  "pqf-def-coherent",
-  "lem-pc-chi-zero-dim-support",
-  "def-weil-residue-field"
- ],
- "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/varieties.tex",
-  "place": "Tag 0B59 (varieties-lemma-degree-base-change) for (1); Tag 0AYY (varieties-lemma-degree-effective-Cartier-divisor) with Tags 0AYT and 08AA for (2) and (3); the clause on rational points is the blueprint's own (literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-pc-degree-base-change.md, last sentence of the proof), deduced from 0AYY"
- },
- "mathlib_searches": [],
- "mathlib_match": null,
- "status": "split",
- "merged_into": null,
- "import_flags": [
-  "cites_outside_uses",
-  "cites_remark"
- ],
- "blueprint_kind": "lemma",
- "blueprint_order": 740,
- "blueprint_uses": [
-  "def-pc-base-change",
-  "def-pc-degree-line-bundle",
-  "def-pc-dimension",
-  "def-pc-divisor-line-bundle",
-  "def-pc-euler-characteristic",
-  "def-sc-divisor",
-  "def-sc-effective-cartier-divisor",
-  "def-sc-invertible-module",
-  "lem-pc-affine-vanishing",
-  "lem-pc-euler-additive",
-  "lem-pc-euler-characteristic-well-defined",
-  "lem-pc-finite-support-hi",
-  "lem-pc-flat-base-change-cohom",
-  "lem-pc-divisor-line-bundle-agrees-sc",
-  "lem-pc-proper-base-change",
-  "lem-sc-point-cartier",
-  "rem-pc-regularity-sc"
- ],
- "uses_not_cited": [
-  "def-pc-dimension",
-  "def-sc-invertible-module",
-  "lem-pc-affine-vanishing",
-  "lem-pc-flat-base-change-cohom"
- ],
- "proof_split_by": "labels",
- "lean_audit": {
-  "master": {
-   "state": "none",
-   "decls": [],
-   "missing": []
-  },
-  "slopmaster2": {
-   "state": "rests_on_sorry",
-   "decls": [
-    {
-     "name": "AlgebraicGeometry.Scheme.Modules.degree_pullback",
-     "module": "WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar",
-     "lines": [
-      181,
-      196
-     ],
-     "kind": "theorem",
-     "sorry": false
+    "lem-pc-euler-characteristic-well-defined",
+    "lem-pc-finite-support-hi",
+    "lem-pc-flat-base-change-cohom",
+    "lem-pc-divisor-line-bundle-agrees-sc",
+    "lem-pc-proper-base-change",
+    "lem-sc-point-cartier",
+    "rem-pc-regularity-sc"
+  ],
+  "uses_not_cited": [
+    "def-pc-dimension",
+    "def-sc-invertible-module",
+    "lem-pc-affine-vanishing",
+    "lem-pc-flat-base-change-cohom"
+  ],
+  "proof_split_by": "labels",
+  "lean_audit": {
+    "master": {
+      "state": "none",
+      "decls": [],
+      "missing": []
     },
-    {
-     "name": "AlgebraicGeometry.Scheme.IdealSheafData.IsInvertible.degree_dual_toModules",
-     "module": "WeilConjectures.AlgebraicGeometry.Curve.RiemannRoch",
-     "lines": [
-      433,
-      447
-     ],
-     "kind": "theorem",
-     "sorry": false
-    },
-    {
-     "name": "AlgebraicGeometry.Scheme.Modules.degree_tensorObj",
-     "module": "WeilConjectures.AlgebraicGeometry.Curve.RiemannRoch",
-     "lines": [
-      658,
-      680
-     ],
-     "kind": "theorem",
-     "sorry": false
-    },
-    {
-     "name": "AlgebraicGeometry.Scheme.degree_tensorObj_pullback_fst",
-     "module": "WeilConjectures.AlgebraicGeometry.Curve.RiemannRoch",
-     "lines": [
-      1702,
-      1717
-     ],
-     "kind": "theorem",
-     "sorry": false
-    },
-    {
-     "name": "AlgebraicGeometry.Scheme.Modules.degree_pullback_of_isPullback",
-     "module": "WeilConjectures.AlgebraicGeometry.Picard.Degree",
-     "lines": [
-      249,
-      283
-     ],
-     "kind": "theorem",
-     "sorry": false
-    },
-    {
-     "name": "AlgebraicGeometry.Scheme.IdealSheafData.IsInvertible.eulerChar_cokernel_whiskerRight",
-     "module": "WeilConjectures.AlgebraicGeometry.Curve.RiemannRoch",
-     "lines": [
-      372,
-      396
-     ],
-     "kind": "theorem",
-     "sorry": false,
-     "partial": "`lem-pc-degree-base-change`, part (2"
-    },
-    {
-     "name": "AlgebraicGeometry.Scheme.IdealSheafData.IsInvertible.eulerChar_tensorObj_dual_toModules",
-     "module": "WeilConjectures.AlgebraicGeometry.Curve.RiemannRoch",
-     "lines": [
-      398,
-      431
-     ],
-     "kind": "theorem",
-     "sorry": false,
-     "partial": "`lem-pc-degree-base-change`, part (2"
+    "slopmaster2": {
+      "state": "rests_on_sorry",
+      "decls": [
+        {
+          "name": "AlgebraicGeometry.Scheme.Modules.degree_pullback",
+          "module": "WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar",
+          "lines": [
+            181,
+            196
+          ],
+          "kind": "theorem",
+          "sorry": false
+        },
+        {
+          "name": "AlgebraicGeometry.Scheme.IdealSheafData.IsInvertible.degree_dual_toModules",
+          "module": "WeilConjectures.AlgebraicGeometry.Curve.RiemannRoch",
+          "lines": [
+            433,
+            447
+          ],
+          "kind": "theorem",
+          "sorry": false
+        },
+        {
+          "name": "AlgebraicGeometry.Scheme.Modules.degree_tensorObj",
+          "module": "WeilConjectures.AlgebraicGeometry.Curve.RiemannRoch",
+          "lines": [
+            658,
+            680
+          ],
+          "kind": "theorem",
+          "sorry": false
+        },
+        {
+          "name": "AlgebraicGeometry.Scheme.degree_tensorObj_pullback_fst",
+          "module": "WeilConjectures.AlgebraicGeometry.Curve.RiemannRoch",
+          "lines": [
+            1702,
+            1717
+          ],
+          "kind": "theorem",
+          "sorry": false
+        },
+        {
+          "name": "AlgebraicGeometry.Scheme.Modules.degree_pullback_of_isPullback",
+          "module": "WeilConjectures.AlgebraicGeometry.Picard.Degree",
+          "lines": [
+            249,
+            283
+          ],
+          "kind": "theorem",
+          "sorry": false
+        },
+        {
+          "name": "AlgebraicGeometry.Scheme.IdealSheafData.IsInvertible.eulerChar_cokernel_whiskerRight",
+          "module": "WeilConjectures.AlgebraicGeometry.Curve.RiemannRoch",
+          "lines": [
+            372,
+            396
+          ],
+          "kind": "theorem",
+          "sorry": false,
+          "partial": "`lem-pc-degree-base-change`, part (2"
+        },
+        {
+          "name": "AlgebraicGeometry.Scheme.IdealSheafData.IsInvertible.eulerChar_tensorObj_dual_toModules",
+          "module": "WeilConjectures.AlgebraicGeometry.Curve.RiemannRoch",
+          "lines": [
+            398,
+            431
+          ],
+          "kind": "theorem",
+          "sorry": false,
+          "partial": "`lem-pc-degree-base-change`, part (2"
+        }
+      ],
+      "missing": [],
+      "open": [
+        {
+          "name": "AlgebraicGeometry.Scheme.Modules.exists_addEquiv_sections_higherDirectImage_H",
+          "module": "WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage",
+          "lines": [
+            307,
+            324
+          ],
+          "kind": "theorem",
+          "nodes": [],
+          "below": false
+        },
+        {
+          "name": "AlgebraicGeometry.Scheme.Modules.finite_sections_higherDirectImage",
+          "module": "WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage",
+          "lines": [
+            617,
+            632
+          ],
+          "kind": "theorem",
+          "nodes": [],
+          "below": false
+        },
+        {
+          "name": "AlgebraicGeometry.Scheme.Modules.nonempty_H_pullback_linearEquiv",
+          "module": "WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar",
+          "lines": [
+            100,
+            116
+          ],
+          "kind": "theorem",
+          "nodes": [],
+          "below": false
+        },
+        {
+          "name": "AlgebraicGeometry.Scheme.Modules.subsingleton_H_of_topologicalKrullDim_lt",
+          "module": "WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar",
+          "lines": [
+            64,
+            73
+          ],
+          "kind": "theorem",
+          "nodes": [],
+          "below": false
+        }
+      ]
     }
-   ],
-   "missing": [],
-   "open": [
+  },
+  "pointers": [
     {
-     "name": "AlgebraicGeometry.Scheme.Modules.exists_addEquiv_sections_higherDirectImage_H",
-     "module": "WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage",
-     "lines": [
-      307,
-      324
-     ],
-     "kind": "theorem",
-     "nodes": [],
-     "below": false
-    },
-    {
-     "name": "AlgebraicGeometry.Scheme.Modules.finite_sections_higherDirectImage",
-     "module": "WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage",
-     "lines": [
-      617,
-      632
-     ],
-     "kind": "theorem",
-     "nodes": [],
-     "below": false
-    },
-    {
-     "name": "AlgebraicGeometry.Scheme.Modules.nonempty_H_pullback_linearEquiv",
-     "module": "WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar",
-     "lines": [
-      100,
-      116
-     ],
-     "kind": "theorem",
-     "nodes": [],
-     "below": false
-    },
-    {
-     "name": "AlgebraicGeometry.Scheme.Modules.subsingleton_H_of_topologicalKrullDim_lt",
-     "module": "WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar",
-     "lines": [
-      64,
-      73
-     ],
-     "kind": "theorem",
-     "nodes": [],
-     "below": false
+      "to": "lem-pc-degree-agrees-sc",
+      "was": [
+        "stmt"
+      ],
+      "reason": "forward pointer in the text, not a dependency: parenthetical on where the general formula is used",
+      "date": "2026-10-09"
     }
-   ]
+  ],
+  "chapter": "sec-picard-framework",
+  "unit": "sk-thm-picard-rr",
+  "split_report": {
+    "date": "2026-10-10",
+    "item": "lem-pc-degree-base-change",
+    "worker": "stage1",
+    "summary": "Checked against Stacks varieties.tex: the base-change clause is Tag 0B59 (proof via flat base change 02KH, as 08AB), the effective-divisor clause is Tag 0AYY (proof via 07ZU/06LH for finiteness of D, the sequence 0->I_D->O_X->i_*O_D->0 tensored with an invertible module, additivity 08AA and 0AYT); the tag 0AYV cited by the node is the different lemma chi(E⊗F)=r deg E + n chi(F) on an integral proper curve and is not used. Rewrote the proof along 0B59/0AYY: 8 steps, every fact cited; the blueprint's argument for (2) through the local structure of a smooth curve (DVR, lengths n_P[kappa(P):k], skyscraper sheaves) needed smoothness which the statement does not assume, and is replaced by 0AYY's route, which is also the Lean route (eulerChar_cokernel_whiskerRight, eulerChar_tensorObj_dual_toModules, degree_dual_toModules). Statement made precise: hypotheses named with their definition nodes, L_K := p^*L, effective Cartier divisor on any X via def-nagata-effective-cartier-ideal, the formula deg O_X(D) = dim_k Γ(D,O_D) of 0AYY added (citers lem-pc-ample-positive-degree and thm-pc-hilb-curves use it), and the rational-point clause made well-defined (points whose reduced subscheme is Cartier; O_X(Σ n_i[P_i]) := ⊗ O_X([P_i])^{⊗ n_i}, n_i in Z, the convention of the citer prop-pd-picard-degree-decomposition); the parenthetical pointer to 0AYV and lem-pc-degree-agrees-sc was dropped from the statement (kept in pointers). New nodes: lem-pc-finrank-field-base-change (Mathlib leaf Module.finrank_baseChange), lem-pc-cartier-divisor-finite-over-field (0AYY first sentences, unsplit), lem-pc-chi-zero-dim-support (0AYT (3)-(5), unsplit). Dropped proof deps no longer used: lem-pc-finite-support-hi, lem-sc-point-cartier, def-sc-divisor, lem-pc-divisor-line-bundle-agrees-sc, lem-pc-affine-vanishing (now below lem-pc-chi-zero-dim-support), lem-pc-flat-base-change-cohom (replaced by the same-unit lem-sc-flat-base-change-coherent, which is the Lean nonempty_H_pullback_linearEquiv), rem-pc-regularity-sc. Lean open entries: nonempty_H_pullback_linearEquiv belongs to lem-sc-flat-base-change-coherent (step 3); finite_sections_higherDirectImage belongs to lem-pc-coherent-hi (below lem-pc-euler-characteristic-well-defined, step 3); subsingleton_H_of_topologicalKrullDim_lt is the open entry of lem-pc-vanishing-above-dim and exists_addEquiv_sections_higherDirectImage_H is the comparison of R^q f_* with H^q: both enter the Lean only through finiteness/vanishing of H^q, i.e. lem-pc-euler-characteristic-well-defined, not through an argument of this proof.",
+    "blueprint": "The blueprint node is the item itself. Step 1 realizes '(3). This is exactly [lem-pc-euler-additive]'; steps 2-3 realize '(1). ... $H^i(X_K,\\mathcal{L}\\otimes_kK)=H^i(X,\\mathcal{L})\\otimes_kK$ ... $X_K$ is proper over $K$ ... because $\\dim_K(V\\otimes_kK)=\\dim_kV$'; steps 4-7 realize '(2) ... the exact sequence $0\\to\\mathcal{O}_X\\to\\mathcal{O}_X(D)\\to\\mathcal{O}_X(D)\\otimes\\mathcal{O}_D\\to0$ ... tensoring with the invertible $\\mathcal{L}$ ... $\\chi(X,\\mathcal{O}_D)=\\dim_kH^0(X,\\mathcal{O}_D)$ ... By the additivity (3)' (by Stacks 0AYY instead of the smooth-curve local computation); step 8 realizes 'For the last assertion: for a $k$-rational point $P$ ... $\\deg(\\mathcal{O}_X([P]))=1$ and by the additivity already established $\\deg(\\mathcal{O}_X(D))=\\sum_in_i$'."
+  },
+  "reviewed": "2026-10-10 L: 8 steps checked (additivity = lem-pc-euler-additive; X_K proper and L_K invertible; flat base change of cohomology plus the finrank leaf give equal chi; D finite over k by the new node; the sequence 0 -> L -> L(D) -> i_*O_D tensor N -> 0 from the invertible Cartier ideal; chi of a zero-dimensional-support coherent module by the new 0AYT node; the formulas; rational points by induction). Statement changed as the worker names: definitions cited, L_K spelled out, deg O(D) = dim Gamma(O_D) added (0AYY; citers use it), rational-point clause requires [P_i] Cartier with the tensor-power convention of prop-pd-picard-degree-decomposition. Tag 0AYV of the blueprint is a different lemma (0B59/0AYY/0AYT used). New Mathlib leaf lem-pc-finrank-field-base-change (Module.finrank_baseChange 379, verified); new unsplit nodes lem-pc-cartier-divisor-finite-over-field, lem-pc-chi-zero-dim-support. Off-unit citations (tensor-dual, divisor-line-bundle-invertible, nagata effective-cartier-is-invertible) are closed in Lean, tools by themselves.",
+  "lean": {
+    "module": "WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar",
+    "declaration": "AlgebraicGeometry.Scheme.Modules.degree_pullback",
+    "branch": "slopmaster2",
+    "line": 181,
+    "declarations": [
+      "AlgebraicGeometry.Scheme.Modules.degree_pullback",
+      "AlgebraicGeometry.Scheme.IdealSheafData.IsInvertible.degree_dual_toModules",
+      "AlgebraicGeometry.Scheme.Modules.degree_tensorObj",
+      "AlgebraicGeometry.Scheme.degree_tensorObj_pullback_fst",
+      "AlgebraicGeometry.Scheme.Modules.degree_pullback_of_isPullback",
+      "AlgebraicGeometry.Scheme.IdealSheafData.IsInvertible.eulerChar_cokernel_whiskerRight",
+      "AlgebraicGeometry.Scheme.IdealSheafData.IsInvertible.eulerChar_tensorObj_dual_toModules"
+    ],
+    "sorry_free": false,
+    "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state rests_on_sorry)"
   }
- },
- "pointers": [
-  {
-   "to": "lem-pc-degree-agrees-sc",
-   "was": [
-    "stmt"
-   ],
-   "reason": "forward pointer in the text, not a dependency: parenthetical on where the general formula is used",
-   "date": "2026-10-09"
-  }
- ],
- "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-rr",
- "split_report": {
-  "date": "2026-10-10",
-  "item": "lem-pc-degree-base-change",
-  "worker": "stage1",
-  "summary": "Checked against Stacks varieties.tex: the base-change clause is Tag 0B59 (proof via flat base change 02KH, as 08AB), the effective-divisor clause is Tag 0AYY (proof via 07ZU/06LH for finiteness of D, the sequence 0->I_D->O_X->i_*O_D->0 tensored with an invertible module, additivity 08AA and 0AYT); the tag 0AYV cited by the node is the different lemma chi(E⊗F)=r deg E + n chi(F) on an integral proper curve and is not used. Rewrote the proof along 0B59/0AYY: 8 steps, every fact cited; the blueprint's argument for (2) through the local structure of a smooth curve (DVR, lengths n_P[kappa(P):k], skyscraper sheaves) needed smoothness which the statement does not assume, and is replaced by 0AYY's route, which is also the Lean route (eulerChar_cokernel_whiskerRight, eulerChar_tensorObj_dual_toModules, degree_dual_toModules). Statement made precise: hypotheses named with their definition nodes, L_K := p^*L, effective Cartier divisor on any X via def-nagata-effective-cartier-ideal, the formula deg O_X(D) = dim_k Γ(D,O_D) of 0AYY added (citers lem-pc-ample-positive-degree and thm-pc-hilb-curves use it), and the rational-point clause made well-defined (points whose reduced subscheme is Cartier; O_X(Σ n_i[P_i]) := ⊗ O_X([P_i])^{⊗ n_i}, n_i in Z, the convention of the citer prop-pd-picard-degree-decomposition); the parenthetical pointer to 0AYV and lem-pc-degree-agrees-sc was dropped from the statement (kept in pointers). New nodes: lem-pc-finrank-field-base-change (Mathlib leaf Module.finrank_baseChange), lem-pc-cartier-divisor-finite-over-field (0AYY first sentences, unsplit), lem-pc-chi-zero-dim-support (0AYT (3)-(5), unsplit). Dropped proof deps no longer used: lem-pc-finite-support-hi, lem-sc-point-cartier, def-sc-divisor, lem-pc-divisor-line-bundle-agrees-sc, lem-pc-affine-vanishing (now below lem-pc-chi-zero-dim-support), lem-pc-flat-base-change-cohom (replaced by the same-unit lem-sc-flat-base-change-coherent, which is the Lean nonempty_H_pullback_linearEquiv), rem-pc-regularity-sc. Lean open entries: nonempty_H_pullback_linearEquiv belongs to lem-sc-flat-base-change-coherent (step 3); finite_sections_higherDirectImage belongs to lem-pc-coherent-hi (below lem-pc-euler-characteristic-well-defined, step 3); subsingleton_H_of_topologicalKrullDim_lt is the open entry of lem-pc-vanishing-above-dim and exists_addEquiv_sections_higherDirectImage_H is the comparison of R^q f_* with H^q: both enter the Lean only through finiteness/vanishing of H^q, i.e. lem-pc-euler-characteristic-well-defined, not through an argument of this proof.",
-  "blueprint": "The blueprint node is the item itself. Step 1 realizes '(3). This is exactly [lem-pc-euler-additive]'; steps 2-3 realize '(1). ... $H^i(X_K,\\mathcal{L}\\otimes_kK)=H^i(X,\\mathcal{L})\\otimes_kK$ ... $X_K$ is proper over $K$ ... because $\\dim_K(V\\otimes_kK)=\\dim_kV$'; steps 4-7 realize '(2) ... the exact sequence $0\\to\\mathcal{O}_X\\to\\mathcal{O}_X(D)\\to\\mathcal{O}_X(D)\\otimes\\mathcal{O}_D\\to0$ ... tensoring with the invertible $\\mathcal{L}$ ... $\\chi(X,\\mathcal{O}_D)=\\dim_kH^0(X,\\mathcal{O}_D)$ ... By the additivity (3)' (by Stacks 0AYY instead of the smooth-curve local computation); step 8 realizes 'For the last assertion: for a $k$-rational point $P$ ... $\\deg(\\mathcal{O}_X([P]))=1$ and by the additivity already established $\\deg(\\mathcal{O}_X(D))=\\sum_in_i$'."
- },
- "reviewed": "2026-10-10 L: 8 steps checked (additivity = lem-pc-euler-additive; X_K proper and L_K invertible; flat base change of cohomology plus the finrank leaf give equal chi; D finite over k by the new node; the sequence 0 -> L -> L(D) -> i_*O_D tensor N -> 0 from the invertible Cartier ideal; chi of a zero-dimensional-support coherent module by the new 0AYT node; the formulas; rational points by induction). Statement changed as the worker names: definitions cited, L_K spelled out, deg O(D) = dim Gamma(O_D) added (0AYY; citers use it), rational-point clause requires [P_i] Cartier with the tensor-power convention of prop-pd-picard-degree-decomposition. Tag 0AYV of the blueprint is a different lemma (0B59/0AYY/0AYT used). New Mathlib leaf lem-pc-finrank-field-base-change (Module.finrank_baseChange 379, verified); new unsplit nodes lem-pc-cartier-divisor-finite-over-field, lem-pc-chi-zero-dim-support. Off-unit citations (tensor-dual, divisor-line-bundle-invertible, nagata effective-cartier-is-invertible) are closed in Lean, tools by themselves."
 }

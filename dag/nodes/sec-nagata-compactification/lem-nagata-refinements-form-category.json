@@ -1,150 +1,154 @@
 {
- "id": "lem-nagata-refinements-form-category",
- "blueprint": {
-  "is": null,
-  "from": {
-   "node": "def-weil-compactifications-refinements",
-   "place": "its statement (a notion the statement uses)",
-   "via": []
-  },
-  "same_as": null
- },
- "kind": "statement",
- "title": "Compactifications and refinements form a category",
- "statement": "Let $f:X\\to Y$ be a morphism of schemes. Call a *compactification* of $f$ a triple $(\\overline X,j,\\bar f)$ of a scheme $\\overline X$, an open immersion $j:X\\to\\overline X$ and a proper morphism $\\bar f:\\overline X\\to Y$ with $\\bar f\\circ j=f$, and a *refinement* $u:(\\overline X_1,j_1,\\bar f_1)\\to(\\overline X_2,j_2,\\bar f_2)$ a proper morphism of schemes $u:\\overline X_1\\to\\overline X_2$ with $\\bar f_2\\circ u=\\bar f_1$ and $u\\circ j_1=j_2$. Then: (1) for every compactification $c=(\\overline X,j,\\bar f)$ the identity $\\mathrm{id}_{\\overline X}$ is a refinement $c\\to c$; (2) for refinements $u:c_1\\to c_2$ and $v:c_2\\to c_3$ the composite $v\\circ u:\\overline X_1\\to\\overline X_3$ is a refinement $c_1\\to c_3$. Consequently, since composition of morphisms of schemes is associative and unital, the compactifications of $f$ with the refinements as morphisms, identities $\\mathrm{id}_{\\overline X}$ and composition of morphisms of schemes, form a category [def-nagata-category] $\\operatorname{Comp}(f)$. (The properness of $u$ is in fact automatic: $u$ is a morphism over $Y$ from a scheme proper over $Y$ to a scheme separated over $Y$.)",
- "source": {
-  "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-prop-nagata-sketch-comp-category/def-weil-compactifications-refinements.md",
-  "place": "node def-weil-compactifications-refinements, order 413, last sentence"
- },
- "stmt_deps": [
-  "def-pc-scheme",
-  "def-weil-open-immersion",
-  "def-weil-proper-morphism",
-  "def-weil-scheme-over-base",
-  "def-nagata-category"
- ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
- "mathlib_searches": [
-  {
-   "tool": "grep",
-   "query": "'structure Factorisation' in ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory",
-   "results": "CategoryTheory.Factorisation (Mathlib/CategoryTheory/Category/Factorisation.lean:34): objects (mid, ι, π) with ι ≫ π = f; Factorisation.Hom (line 53): h : d.mid ⟶ e.mid with d.ι ≫ h = e.ι and h ≫ e.π = d.π; Category instance (line 67) with id = 𝟙 and comp = composition",
-   "date": "2026-10-09",
-   "verdict": "generalization: Comp(f) is the subcategory of `Factorisation f` (in `Scheme`) on the objects with `IsOpenImmersion ι` and `IsProper π` and the morphisms with `IsProper h`; Mathlib does not state this subcategory"
-  },
-  {
-   "tool": "grep",
-   "query": "'IsMultiplicative\\|IsStableUnderComposition\\|of_comp' in ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Morphisms/Proper.lean",
-   "results": "instance stableUnderComposition : IsStableUnderComposition @IsProper (line 58); instance : IsMultiplicative @IsProper (line 63, identities and composites are proper); IsProper.of_comp [IsProper (f ≫ g)] [IsSeparated g] : IsProper f (line 124)",
-   "date": "2026-10-09",
-   "verdict": "no match for the statement itself; these are the facts its proof uses (identity and composite proper), and of_comp gives the automatic properness"
-  },
-  {
-   "tool": "grep",
-   "query": "'^structure WideSubcategory\\|ObjectProperty.FullSubcategory' in ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory",
-   "results": "CategoryTheory.WideSubcategory (Mathlib/CategoryTheory/Widesubcategory.lean:99) for an IsMultiplicative MorphismProperty; ObjectProperty.FullSubcategory (Mathlib/CategoryTheory/ObjectProperty/FullSubcategory.lean:39)",
-   "date": "2026-10-09",
-   "verdict": "no match: tools to build Comp(f) as a wide subcategory of a full subcategory of `Factorisation f`, not the statement"
-  },
-  {
-   "tool": "grep",
-   "query": "'-i compactification' in ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry",
-   "results": "none",
-   "date": "2026-10-09",
-   "verdict": "no match"
-  }
- ],
- "mathlib_match": null,
- "status": "unsplit",
- "merged_into": null,
- "created": {
-  "by": "worker",
-  "item": "def-weil-compactifications-refinements",
-  "date": "2026-10-09"
- },
- "lean_audit": {
-  "master": {
-   "state": "none",
-   "decls": [],
-   "missing": [
-    "AlgebraicGeometry.Compactification.Refinement.id",
-    "AlgebraicGeometry.Compactification.Refinement.comp",
-    "AlgebraicGeometry.Compactification.Refinement.id_comp",
-    "AlgebraicGeometry.Compactification.Refinement.comp_id",
-    "AlgebraicGeometry.Compactification.Refinement.comp_assoc"
-   ]
-  },
-  "slopmaster2": {
-   "state": "closed",
-   "decls": [
-    {
-     "name": "AlgebraicGeometry.Compactification.Refinement.id",
-     "module": "WeilConjectures.Compactification.Refinement",
-     "lines": [
-      71,
-      77
-     ],
-     "kind": "def",
-     "sorry": false
+  "id": "lem-nagata-refinements-form-category",
+  "blueprint": {
+    "is": null,
+    "from": {
+      "node": "def-weil-compactifications-refinements",
+      "place": "its statement (a notion the statement uses)",
+      "via": []
     },
-    {
-     "name": "AlgebraicGeometry.Compactification.Refinement.comp",
-     "module": "WeilConjectures.Compactification.Refinement",
-     "lines": [
-      79,
-      84
-     ],
-     "kind": "def",
-     "sorry": false
-    },
-    {
-     "name": "AlgebraicGeometry.Compactification.Refinement.id_comp",
-     "module": "WeilConjectures.Compactification.Refinement",
-     "lines": [
-      86,
-      87
-     ],
-     "kind": "theorem",
-     "sorry": false
-    },
-    {
-     "name": "AlgebraicGeometry.Compactification.Refinement.comp_id",
-     "module": "WeilConjectures.Compactification.Refinement",
-     "lines": [
-      89,
-      90
-     ],
-     "kind": "theorem",
-     "sorry": false
-    },
-    {
-     "name": "AlgebraicGeometry.Compactification.Refinement.comp_assoc",
-     "module": "WeilConjectures.Compactification.Refinement",
-     "lines": [
-      92,
-      93
-     ],
-     "kind": "theorem",
-     "sorry": false
-    }
-   ],
-   "missing": [],
-   "open": []
-  }
- },
- "lean": {
-  "branch": "slopmaster2",
-  "declarations": [
-   "AlgebraicGeometry.Compactification.Refinement.id",
-   "AlgebraicGeometry.Compactification.Refinement.comp",
-   "AlgebraicGeometry.Compactification.Refinement.id_comp",
-   "AlgebraicGeometry.Compactification.Refinement.comp_id",
-   "AlgebraicGeometry.Compactification.Refinement.comp_assoc"
+    "same_as": null
+  },
+  "kind": "statement",
+  "title": "Compactifications and refinements form a category",
+  "statement": "Let $f:X\\to Y$ be a morphism of schemes. Call a *compactification* of $f$ a triple $(\\overline X,j,\\bar f)$ of a scheme $\\overline X$, an open immersion $j:X\\to\\overline X$ and a proper morphism $\\bar f:\\overline X\\to Y$ with $\\bar f\\circ j=f$, and a *refinement* $u:(\\overline X_1,j_1,\\bar f_1)\\to(\\overline X_2,j_2,\\bar f_2)$ a proper morphism of schemes $u:\\overline X_1\\to\\overline X_2$ with $\\bar f_2\\circ u=\\bar f_1$ and $u\\circ j_1=j_2$. Then: (1) for every compactification $c=(\\overline X,j,\\bar f)$ the identity $\\mathrm{id}_{\\overline X}$ is a refinement $c\\to c$; (2) for refinements $u:c_1\\to c_2$ and $v:c_2\\to c_3$ the composite $v\\circ u:\\overline X_1\\to\\overline X_3$ is a refinement $c_1\\to c_3$. Consequently, since composition of morphisms of schemes is associative and unital, the compactifications of $f$ with the refinements as morphisms, identities $\\mathrm{id}_{\\overline X}$ and composition of morphisms of schemes, form a category [def-nagata-category] $\\operatorname{Comp}(f)$. (The properness of $u$ is in fact automatic: $u$ is a morphism over $Y$ from a scheme proper over $Y$ to a scheme separated over $Y$.)",
+  "source": {
+    "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-prop-nagata-sketch-comp-category/def-weil-compactifications-refinements.md",
+    "place": "node def-weil-compactifications-refinements, order 413, last sentence"
+  },
+  "stmt_deps": [
+    "def-pc-scheme",
+    "def-weil-open-immersion",
+    "def-weil-proper-morphism",
+    "def-weil-scheme-over-base",
+    "def-nagata-category"
   ],
-  "note": "attached by the lead at review (2026-10-09): identity, composition and the category laws of refinements; sorry-free by the full sorry map"
- },
- "chapter": "sec-nagata-compactification",
- "unit": "sk-prop-nagata-sketch-comp-category"
+  "proof": [],
+  "proof_deps": [],
+  "proof_origin": null,
+  "mathlib_searches": [
+    {
+      "tool": "grep",
+      "query": "'structure Factorisation' in ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory",
+      "results": "CategoryTheory.Factorisation (Mathlib/CategoryTheory/Category/Factorisation.lean:34): objects (mid, ι, π) with ι ≫ π = f; Factorisation.Hom (line 53): h : d.mid ⟶ e.mid with d.ι ≫ h = e.ι and h ≫ e.π = d.π; Category instance (line 67) with id = 𝟙 and comp = composition",
+      "date": "2026-10-09",
+      "verdict": "generalization: Comp(f) is the subcategory of `Factorisation f` (in `Scheme`) on the objects with `IsOpenImmersion ι` and `IsProper π` and the morphisms with `IsProper h`; Mathlib does not state this subcategory"
+    },
+    {
+      "tool": "grep",
+      "query": "'IsMultiplicative\\|IsStableUnderComposition\\|of_comp' in ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Morphisms/Proper.lean",
+      "results": "instance stableUnderComposition : IsStableUnderComposition @IsProper (line 58); instance : IsMultiplicative @IsProper (line 63, identities and composites are proper); IsProper.of_comp [IsProper (f ≫ g)] [IsSeparated g] : IsProper f (line 124)",
+      "date": "2026-10-09",
+      "verdict": "no match for the statement itself; these are the facts its proof uses (identity and composite proper), and of_comp gives the automatic properness"
+    },
+    {
+      "tool": "grep",
+      "query": "'^structure WideSubcategory\\|ObjectProperty.FullSubcategory' in ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory",
+      "results": "CategoryTheory.WideSubcategory (Mathlib/CategoryTheory/Widesubcategory.lean:99) for an IsMultiplicative MorphismProperty; ObjectProperty.FullSubcategory (Mathlib/CategoryTheory/ObjectProperty/FullSubcategory.lean:39)",
+      "date": "2026-10-09",
+      "verdict": "no match: tools to build Comp(f) as a wide subcategory of a full subcategory of `Factorisation f`, not the statement"
+    },
+    {
+      "tool": "grep",
+      "query": "'-i compactification' in ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry",
+      "results": "none",
+      "date": "2026-10-09",
+      "verdict": "no match"
+    }
+  ],
+  "mathlib_match": null,
+  "status": "unsplit",
+  "merged_into": null,
+  "created": {
+    "by": "worker",
+    "item": "def-weil-compactifications-refinements",
+    "date": "2026-10-09"
+  },
+  "lean_audit": {
+    "master": {
+      "state": "none",
+      "decls": [],
+      "missing": [
+        "AlgebraicGeometry.Compactification.Refinement.id",
+        "AlgebraicGeometry.Compactification.Refinement.comp",
+        "AlgebraicGeometry.Compactification.Refinement.id_comp",
+        "AlgebraicGeometry.Compactification.Refinement.comp_id",
+        "AlgebraicGeometry.Compactification.Refinement.comp_assoc"
+      ]
+    },
+    "slopmaster2": {
+      "state": "closed",
+      "decls": [
+        {
+          "name": "AlgebraicGeometry.Compactification.Refinement.id",
+          "module": "WeilConjectures.Compactification.Refinement",
+          "lines": [
+            71,
+            77
+          ],
+          "kind": "def",
+          "sorry": false
+        },
+        {
+          "name": "AlgebraicGeometry.Compactification.Refinement.comp",
+          "module": "WeilConjectures.Compactification.Refinement",
+          "lines": [
+            79,
+            84
+          ],
+          "kind": "def",
+          "sorry": false
+        },
+        {
+          "name": "AlgebraicGeometry.Compactification.Refinement.id_comp",
+          "module": "WeilConjectures.Compactification.Refinement",
+          "lines": [
+            86,
+            87
+          ],
+          "kind": "theorem",
+          "sorry": false
+        },
+        {
+          "name": "AlgebraicGeometry.Compactification.Refinement.comp_id",
+          "module": "WeilConjectures.Compactification.Refinement",
+          "lines": [
+            89,
+            90
+          ],
+          "kind": "theorem",
+          "sorry": false
+        },
+        {
+          "name": "AlgebraicGeometry.Compactification.Refinement.comp_assoc",
+          "module": "WeilConjectures.Compactification.Refinement",
+          "lines": [
+            92,
+            93
+          ],
+          "kind": "theorem",
+          "sorry": false
+        }
+      ],
+      "missing": [],
+      "open": []
+    }
+  },
+  "lean": {
+    "module": "WeilConjectures.Compactification.Refinement",
+    "declaration": "AlgebraicGeometry.Compactification.Refinement.id",
+    "branch": "slopmaster2",
+    "line": 71,
+    "declarations": [
+      "AlgebraicGeometry.Compactification.Refinement.id",
+      "AlgebraicGeometry.Compactification.Refinement.comp",
+      "AlgebraicGeometry.Compactification.Refinement.id_comp",
+      "AlgebraicGeometry.Compactification.Refinement.comp_id",
+      "AlgebraicGeometry.Compactification.Refinement.comp_assoc"
+    ],
+    "sorry_free": true,
+    "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state closed)"
+  },
+  "chapter": "sec-nagata-compactification",
+  "unit": "sk-prop-nagata-sketch-comp-category"
 }

@@ -1,91 +1,95 @@
 {
- "id": "lem-weil-symmetric-alternating-sum-parity",
- "blueprint": {
-  "is": null,
-  "from": {
-   "node": "def-weil-functional-equation-sign",
-   "place": "its statement (a notion the statement uses)",
-   "via": [
-    "prop-weil-functional-equation-parity"
-   ]
+  "id": "lem-weil-symmetric-alternating-sum-parity",
+  "blueprint": {
+    "is": null,
+    "from": {
+      "node": "def-weil-functional-equation-sign",
+      "place": "its statement (a notion the statement uses)",
+      "via": [
+        "prop-weil-functional-equation-parity"
+      ]
+    },
+    "same_as": null
   },
-  "same_as": null
- },
- "kind": "statement",
- "title": "Alternating sum of a palindromic sequence of length 2d+1",
- "statement": "Let $d\\in\\mathbf Z_{\\geq0}$ and let $b_0,b_1,\\ldots,b_{2d}$ be integers with $b_i=b_{2d-i}$ for every integer $i$ with $0\\leq i\\leq2d$. Put\n\n$$\n\\chi=\\sum_{i=0}^{2d}(-1)^ib_i\\in\\mathbf Z.\n$$\n\nThen\n\n$$\n\\chi=2\\sum_{i=0}^{d-1}(-1)^ib_i+(-1)^db_d ,\n$$\n\nso in particular the integer $\\chi-b_d$ is even.",
- "source": {
-  "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-thm-fe/prop-functional-equation.md",
-  "place": "proof, the sentence 'pairing the terms indexed by $i$ and $2d-i$ gives $\\chi=2\\sum_{0\\leq i<d}(-1)^ib_i+(-1)^db_d$' (lines 119-124), used there without a node; the slopmaster2 Lean states the parity form as Polynomial.even_alternatingNatDegreeSum_sub_of_natDegree_rev (WeilConjectures/Mathlib/Algebra/Polynomial/BigOperators.lean:51-56, for the degrees of a family of polynomials indexed by Fin (2d+1), sorry-free)"
- },
- "stmt_deps": [],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
- "mathlib_searches": [
-  {
-   "tool": "grep",
-   "query": "grep -rn 'theorem sum_range_reflect\\|theorem prod_range_reflect\\|lemma prod_involution\\|theorem prod_range_add ' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/BigOperators/",
-   "results": "Finset.sum_range_reflect (Algebra/BigOperators/Intervals.lean:163: sum over range n of f (n-1-j) equals sum of f j), Finset.prod_involution (Algebra/BigOperators/Group/Finset/Basic.lean:665), Finset.prod_range_add / sum_range_add (Group/Finset/Basic.lean:548): the reindexing and splitting primitives, but no statement about the alternating sum of a sequence with b_i = b_{2d-i}",
-   "date": "2026-10-09",
-   "verdict": "no match: primitives only (split range (2d+1) as range d, {d}, d+1+range d, reflect the last part with sum_range_reflect, use (-1)^{2d-i}=(-1)^i)"
+  "kind": "statement",
+  "title": "Alternating sum of a palindromic sequence of length 2d+1",
+  "statement": "Let $d\\in\\mathbf Z_{\\geq0}$ and let $b_0,b_1,\\ldots,b_{2d}$ be integers with $b_i=b_{2d-i}$ for every integer $i$ with $0\\leq i\\leq2d$. Put\n\n$$\n\\chi=\\sum_{i=0}^{2d}(-1)^ib_i\\in\\mathbf Z.\n$$\n\nThen\n\n$$\n\\chi=2\\sum_{i=0}^{d-1}(-1)^ib_i+(-1)^db_d ,\n$$\n\nso in particular the integer $\\chi-b_d$ is even.",
+  "source": {
+    "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-thm-fe/prop-functional-equation.md",
+    "place": "proof, the sentence 'pairing the terms indexed by $i$ and $2d-i$ gives $\\chi=2\\sum_{0\\leq i<d}(-1)^ib_i+(-1)^db_d$' (lines 119-124), used there without a node; the slopmaster2 Lean states the parity form as Polynomial.even_alternatingNatDegreeSum_sub_of_natDegree_rev (WeilConjectures/Mathlib/Algebra/Polynomial/BigOperators.lean:51-56, for the degrees of a family of polynomials indexed by Fin (2d+1), sorry-free)"
   },
-  {
-   "tool": "grep",
-   "query": "grep -rn 'alternating' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/BigOperators/Fin.lean; grep -rln 'alternatingSum' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/BigOperators/; grep -rn 'neg_one_pow.*sub\\|reflect.*neg_one' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/BigOperators/",
-   "results": "List.alternatingSum / alternatingProd and List.alternatingSum_eq_finsetSum (Algebra/BigOperators/Fin.lean:757-777), with lemmas on appending and reversing lists of even length; nothing for a palindromic family of odd length or for the parity of its alternating sum; the last grep found nothing",
-   "date": "2026-10-09",
-   "verdict": "no match"
-  },
-  {
-   "tool": "grep",
-   "query": "grep -n 'lemma even_add \\|lemma even_sub \\|lemma even_mul ' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Group/Int/Even.lean",
-   "results": "Int.even_add (line 51: Even (m + n) <-> (Even m <-> Even n)), Int.even_sub (line 56), Int.even_mul (line 62: Even (m * n) <-> Even m or Even n): parity primitives for the 'in particular' clause",
-   "date": "2026-10-09",
-   "verdict": "no match (primitives only)"
-  }
- ],
- "mathlib_match": null,
- "status": "unsplit",
- "merged_into": null,
- "created": {
-  "by": "worker",
-  "item": "prop-weil-functional-equation-parity",
-  "date": "2026-10-09"
- },
- "lean_audit": {
-  "master": {
-   "state": "none",
-   "decls": [],
-   "missing": [
-    "Polynomial.even_alternatingNatDegreeSum_sub_of_natDegree_rev"
-   ]
-  },
-  "slopmaster2": {
-   "state": "closed",
-   "decls": [
+  "stmt_deps": [],
+  "proof": [],
+  "proof_deps": [],
+  "proof_origin": null,
+  "mathlib_searches": [
     {
-     "name": "Polynomial.even_alternatingNatDegreeSum_sub_of_natDegree_rev",
-     "module": "WeilConjectures.Mathlib.Algebra.Polynomial.BigOperators",
-     "lines": [
-      47,
-      91
-     ],
-     "kind": "theorem",
-     "sorry": false
+      "tool": "grep",
+      "query": "grep -rn 'theorem sum_range_reflect\\|theorem prod_range_reflect\\|lemma prod_involution\\|theorem prod_range_add ' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/BigOperators/",
+      "results": "Finset.sum_range_reflect (Algebra/BigOperators/Intervals.lean:163: sum over range n of f (n-1-j) equals sum of f j), Finset.prod_involution (Algebra/BigOperators/Group/Finset/Basic.lean:665), Finset.prod_range_add / sum_range_add (Group/Finset/Basic.lean:548): the reindexing and splitting primitives, but no statement about the alternating sum of a sequence with b_i = b_{2d-i}",
+      "date": "2026-10-09",
+      "verdict": "no match: primitives only (split range (2d+1) as range d, {d}, d+1+range d, reflect the last part with sum_range_reflect, use (-1)^{2d-i}=(-1)^i)"
+    },
+    {
+      "tool": "grep",
+      "query": "grep -rn 'alternating' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/BigOperators/Fin.lean; grep -rln 'alternatingSum' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/BigOperators/; grep -rn 'neg_one_pow.*sub\\|reflect.*neg_one' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/BigOperators/",
+      "results": "List.alternatingSum / alternatingProd and List.alternatingSum_eq_finsetSum (Algebra/BigOperators/Fin.lean:757-777), with lemmas on appending and reversing lists of even length; nothing for a palindromic family of odd length or for the parity of its alternating sum; the last grep found nothing",
+      "date": "2026-10-09",
+      "verdict": "no match"
+    },
+    {
+      "tool": "grep",
+      "query": "grep -n 'lemma even_add \\|lemma even_sub \\|lemma even_mul ' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Group/Int/Even.lean",
+      "results": "Int.even_add (line 51: Even (m + n) <-> (Even m <-> Even n)), Int.even_sub (line 56), Int.even_mul (line 62: Even (m * n) <-> Even m or Even n): parity primitives for the 'in particular' clause",
+      "date": "2026-10-09",
+      "verdict": "no match (primitives only)"
     }
-   ],
-   "missing": [],
-   "open": []
-  }
- },
- "lean": {
-  "branch": "slopmaster2",
-  "declarations": [
-   "Polynomial.even_alternatingNatDegreeSum_sub_of_natDegree_rev"
   ],
-  "note": "attached by the lead at review (2026-10-09): the parity form of this lemma, for the degrees of a family of polynomials with symmetric degrees; sorry-free by the sorry map"
- },
- "chapter": "sec-zeta-weil",
- "unit": "sk-thm-fe"
+  "mathlib_match": null,
+  "status": "unsplit",
+  "merged_into": null,
+  "created": {
+    "by": "worker",
+    "item": "prop-weil-functional-equation-parity",
+    "date": "2026-10-09"
+  },
+  "lean_audit": {
+    "master": {
+      "state": "none",
+      "decls": [],
+      "missing": [
+        "Polynomial.even_alternatingNatDegreeSum_sub_of_natDegree_rev"
+      ]
+    },
+    "slopmaster2": {
+      "state": "closed",
+      "decls": [
+        {
+          "name": "Polynomial.even_alternatingNatDegreeSum_sub_of_natDegree_rev",
+          "module": "WeilConjectures.Mathlib.Algebra.Polynomial.BigOperators",
+          "lines": [
+            47,
+            91
+          ],
+          "kind": "theorem",
+          "sorry": false
+        }
+      ],
+      "missing": [],
+      "open": []
+    }
+  },
+  "lean": {
+    "module": "WeilConjectures.Mathlib.Algebra.Polynomial.BigOperators",
+    "declaration": "Polynomial.even_alternatingNatDegreeSum_sub_of_natDegree_rev",
+    "branch": "slopmaster2",
+    "line": 47,
+    "declarations": [
+      "Polynomial.even_alternatingNatDegreeSum_sub_of_natDegree_rev"
+    ],
+    "sorry_free": true,
+    "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state closed)"
+  },
+  "chapter": "sec-zeta-weil",
+  "unit": "sk-thm-fe"
 }

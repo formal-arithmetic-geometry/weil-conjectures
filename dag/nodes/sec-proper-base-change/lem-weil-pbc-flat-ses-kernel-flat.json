@@ -1,207 +1,211 @@
 {
- "id": "lem-weil-pbc-flat-ses-kernel-flat",
- "blueprint": {
-  "is": null,
-  "from": {
-   "node": "thm-weil-pbc-finite-etale-lifting",
-   "place": "step 7 of its split (source: Lemma 0GS2, proof: the essential-surjectivity paragraphs)",
-   "via": [
-    "lem-weil-pbc-jacobi-zariski-left-term-vanishing",
-    "lem-weil-pbc-jacobi-zariski-quotient-smooth",
-    "lem-weil-pbc-smooth-section-etale-lift",
-    "lem-weil-pbc-henselian-pair-approximation",
-    "lem-weil-pbc-finite-etale-lifting-approximation",
-    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
-   ]
+  "id": "lem-weil-pbc-flat-ses-kernel-flat",
+  "blueprint": {
+    "is": null,
+    "from": {
+      "node": "thm-weil-pbc-finite-etale-lifting",
+      "place": "step 7 of its split (source: Lemma 0GS2, proof: the essential-surjectivity paragraphs)",
+      "via": [
+        "lem-weil-pbc-jacobi-zariski-left-term-vanishing",
+        "lem-weil-pbc-jacobi-zariski-quotient-smooth",
+        "lem-weil-pbc-smooth-section-etale-lift",
+        "lem-weil-pbc-henselian-pair-approximation",
+        "lem-weil-pbc-finite-etale-lifting-approximation",
+        "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+      ]
+    },
+    "same_as": null
   },
-  "same_as": null
- },
- "kind": "statement",
- "title": "The kernel of a surjection of flat modules is flat",
- "statement": "Let $R$ be a commutative ring and $0\\to M'\\xrightarrow{u}M\\xrightarrow{v}M''\\to0$ a short exact sequence [def-weil-pbc-exact-sequence] of $R$-modules. If $M$ and $M''$ are flat [def-weil-pbc-flat-ring-map], then $M'$ is flat.",
- "source": {
-  "document": "literature/stacks-project/algebra.tex",
-  "place": "Algebra, Lemma Tag 00HM (lemma-flat-ses), second assertion, line 9071"
- },
- "stmt_deps": [
-  "def-weil-pbc-flat-ring-map",
-  "def-weil-pbc-exact-sequence"
- ],
- "proof": [
-  {
-   "text": "Criterion. By [lem-weil-pbc-flat-fg-ideal-criterion] (Stacks 00HD, (4) implies (1)) it suffices to show: for every finitely generated ideal $I\\subset R$ the multiplication map $\\mu_{M'}:I\\otimes_RM'\\to M'$, $x\\otimes m'\\mapsto xm'$, is injective. Fix such an $I$ and write $\\mu_M:I\\otimes_RM\\to M$ likewise.",
-   "uses": [
-    "lem-weil-pbc-flat-fg-ideal-criterion",
-    "def-weil-pbc-flat-ring-map"
-   ],
-   "elementary": false,
-   "source": {
+  "kind": "statement",
+  "title": "The kernel of a surjection of flat modules is flat",
+  "statement": "Let $R$ be a commutative ring and $0\\to M'\\xrightarrow{u}M\\xrightarrow{v}M''\\to0$ a short exact sequence [def-weil-pbc-exact-sequence] of $R$-modules. If $M$ and $M''$ are flat [def-weil-pbc-flat-ring-map], then $M'$ is flat.",
+  "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 00HM (lemma-flat-ses), proof, lines 9078-9094: 'We will use the criterion that a module N is flat if for every ideal I the map N (x) I -> N is injective, see Lemma 00HD'"
-   }
+    "place": "Algebra, Lemma Tag 00HM (lemma-flat-ses), second assertion, line 9071"
   },
-  {
-   "text": "The diagram. The square with top row $u:M'\\to M$, bottom row $\\mathrm{id}_I\\otimes u:I\\otimes_RM'\\to I\\otimes_RM$ and vertical maps $\\mu_{M'}$, $\\mu_M$ commutes: on generators $\\mu_M((\\mathrm{id}_I\\otimes u)(x\\otimes m'))=\\mu_M(x\\otimes u(m'))=x\\,u(m')=u(xm')=u(\\mu_{M'}(x\\otimes m'))$ by $R$-linearity of $u$, and both composites are additive, so they agree on all of $I\\otimes_RM'$.",
-   "uses": [
+  "stmt_deps": [
+    "def-weil-pbc-flat-ring-map",
     "def-weil-pbc-exact-sequence"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 00HM (lemma-flat-ses), proof, lines 9078-9094: the diagram with rows 0 -> M' -> M -> M'' -> 0 and M' (x) I -> M (x) I -> M'' (x) I -> 0"
-   }
-  },
-  {
-   "text": "Two injective arrows. (a) Since $M$ is flat, $\\mu_M$ is injective, by the direction (1) implies (4) of [lem-weil-pbc-flat-fg-ideal-criterion]. (b) Since $0\\to M'\\to M\\to M''\\to0$ is exact and $M''$ is flat, [lem-weil-pbc-flat-quotient-tensor-injective] (Stacks 00HL), applied with $N=I$, shows that the lower left arrow $\\mathrm{id}_I\\otimes u:I\\otimes_RM'\\to I\\otimes_RM$ is injective.",
-   "uses": [
-    "lem-weil-pbc-flat-fg-ideal-criterion",
-    "lem-weil-pbc-flat-quotient-tensor-injective"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 00HM (lemma-flat-ses), proof, lines 9078-9094: 'if M'' is flat then the lower left horizontal arrow is injective by Lemma 00HL'"
-   }
-  },
-  {
-   "text": "Diagram chase. Let $z\\in I\\otimes_RM'$ with $\\mu_{M'}(z)=0$. By the commutative square (step 2), $\\mu_M((\\mathrm{id}_I\\otimes u)(z))=u(\\mu_{M'}(z))=0$; $\\mu_M$ is injective (step 3a), so $(\\mathrm{id}_I\\otimes u)(z)=0$; $\\mathrm{id}_I\\otimes u$ is injective (step 3b), so $z=0$. Hence $\\mu_{M'}$ is injective for every finitely generated ideal $I$, and $M'$ is flat by step 1. (Stacks writes the composite chase as 'the second follows'; the injectivity of $u$ itself is not needed.)",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 00HM (lemma-flat-ses), proof, lines 9078-9094: 'The second follows because ...'"
-   }
-  }
- ],
- "proof_deps": [
-  "lem-weil-pbc-flat-fg-ideal-criterion",
-  "def-weil-pbc-flat-ring-map",
-  "def-weil-pbc-exact-sequence",
-  "lem-weil-pbc-flat-quotient-tensor-injective"
- ],
- "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/algebra.tex",
-  "place": "Algebra, Lemma Tag 00HM (lemma-flat-ses), proof of the second assertion, lines 9078-9094"
- },
- "mathlib_searches": [
-  {
-   "tool": "leansearch",
-   "query": "kernel of a surjective linear map between flat modules is flat",
-   "results": "LinearMap.kerLTensorEquivOfSurjective (Mathlib.RingTheory.Flat.Equalizer), LinearMap.ker, LinearMap.quotKerEquivOfSurjective, Module.FinitePresentation.fg_ker, Module.Flat.of_retract (Mathlib.RingTheory.Flat.Basic, flat of a retract)",
-   "verdict": "no match",
-   "date": "2026-10-10"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "In a short exact sequence 0 → M' → M → M'' → 0 of modules, if M and M'' are flat then M' is flat",
-   "results": "Module.Flat.iff_lTensor_preserves_shortComplex_exact, Module.Flat.iff_rTensor_preserves_shortComplex_exact, Module.Flat.iff_lTensor_exact', Module.Flat.iff_rTensor_exact, Module.Flat.lTensor_shortComplex_exact (characterizations only)",
-   "verdict": "no match",
-   "date": "2026-10-10"
-  },
-  {
-   "tool": "loogle",
-   "query": "Module.Flat, Function.Exact, Function.Surjective",
-   "results": "only LinearMap.lTensor_injective_of_exact_of_flat",
-   "verdict": "no match",
-   "date": "2026-10-10"
-  },
-  {
-   "tool": "grep",
-   "query": "grep -rn 'Flat' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/ --include=*.lean | grep -E '(lemma|theorem|instance) ' | grep -iE 'ker|shortexact|exact|of_injective|of_surjective'",
-   "results": "Module.Flat.ker_lTensor_eq, LinearMap.tensorKerEquiv*, LinearMap.lTensor_injective_of_exact_of_flat, Module.Flat.lTensor_shortComplex_exact, FaithfullyFlat.*_reflects_exact; no 2-out-of-3 for flatness in a short exact sequence",
-   "verdict": "no match",
-   "date": "2026-10-10"
-  },
-  {
-   "tool": "leansearch",
-   "query": "short exact sequence of modules, middle and right flat implies left flat",
-   "results": "Module.Flat.iff_lTensor_exact', Module.Flat.lTensor_shortComplex_exact, Module.Flat.iff_rTensor_exact, Module.Flat.lTensor_exact, Module.Flat.rTensor_exact, ModuleCat.free_shortExact (free, extension), Module.Flat.rTensor_shortComplex_exact",
-   "date": "2026-10-10",
-   "verdict": "no match"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "Module.Flat of the kernel of a surjective linear map between flat modules",
-   "results": "Module.Flat.of_forall_exists_factorization, LinearMap.kerLTensorEquivOfSurjective, Module.Flat.iff_forall_exists_factorization, Module.FaithfullyFlat.lTensor_surjective_iff_surjective, Module.Flat.ker_lTensor_eq, Module.Flat.of_retract",
-   "date": "2026-10-10",
-   "verdict": "no match"
-  },
-  {
-   "tool": "loogle",
-   "query": "Module.Flat ?R ↥(LinearMap.ker ?f)",
-   "results": "none",
-   "date": "2026-10-10",
-   "verdict": "no match"
-  },
-  {
-   "tool": "local_search",
-   "query": "Module.Flat.of_exact (project ~/weil-conjectures-slopmaster2)",
-   "results": "Module.Flat.of_exact_of_flat_of_flat, Module.Flat.of_exact_of_flat_of_flat_right, both in WeilConjectures/Mathlib/RingTheory/Flat/Equalizer.lean of the source repository (not Mathlib); index: unavailable",
-   "date": "2026-10-10",
-   "verdict": "no Mathlib match; the source repository's sorry-free Module.Flat.of_exact_of_flat_of_flat_right (lines 119-134) states the node exactly"
-  },
-  {
-   "tool": "grep",
-   "query": "grep -rn 'theorem\\|lemma' Mathlib/RingTheory/Flat/*.lean | grep -i 'exact\\|ses\\|ker'; grep -rn Flat Mathlib --include=*.lean | grep -E '(theorem|lemma|instance) ' | grep -iE 'ker|shortExact|of_exact|of_surj|of_inj|Tor'",
-   "results": "Module.Flat.ker_lTensor_eq, LinearMap.lTensor_injective_of_exact_of_flat (Flat/Equalizer.lean:192), Module.Flat.lTensor_exact/rTensor_exact/iff_*Tensor_exact (Flat/Basic.lean:323-393), Flat.lTensor_shortComplex_exact (Flat/CategoryTheory.lean); no 2-out-of-3 statement for flatness in a short exact sequence",
-   "date": "2026-10-10",
-   "verdict": "no match"
-  }
- ],
- "mathlib_match": null,
- "status": "split",
- "merged_into": null,
- "created": {
-  "by": "worker",
-  "item": "lem-weil-pbc-jacobi-zariski-left-term-vanishing",
-  "date": "2026-10-10"
- },
- "lean_audit": {
-  "master": {
-   "state": "none",
-   "decls": [],
-   "missing": [
-    "Module.Flat.of_exact_of_flat_of_flat_right"
-   ]
-  },
-  "slopmaster2": {
-   "state": "closed",
-   "decls": [
-    {
-     "name": "Module.Flat.of_exact_of_flat_of_flat_right",
-     "module": "WeilConjectures.Mathlib.RingTheory.Flat.Equalizer",
-     "lines": [
-      119,
-      134
-     ],
-     "kind": "theorem",
-     "sorry": false
-    }
-   ],
-   "missing": [],
-   "open": []
-  }
- },
- "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1",
- "split_report": {
-  "date": "2026-10-10",
-  "item": "lem-weil-pbc-flat-ses-kernel-flat",
-  "worker": "stage1",
-  "summary": "Checked against Stacks 00HM (algebra.tex 9071-9094). def-weil-pbc-flat-ring-map defines flat modules as well as flat ring maps, so it stays the flatness dependency; def-weil-pbc-exact-sequence added to stmt_deps. Proof split in four steps following the Stacks proof: the finitely generated ideal criterion (existing Mathlib leaf lem-weil-pbc-flat-fg-ideal-criterion, Stacks 00HD), the commuting square I(x)M' -> I(x)M over M' -> M, injectivity of I(x)M -> M (M flat) and of I(x)M' -> I(x)M (existing Mathlib leaf lem-weil-pbc-flat-quotient-tensor-injective, Stacks 00HL, = LinearMap.lTensor_injective_of_exact_of_flat), and the diagram chase. No new nodes. Mathlib has no direct statement (searches recorded); the source repository slopmaster2 has a sorry-free exact statement Module.Flat.of_exact_of_flat_of_flat_right (WeilConjectures/Mathlib/RingTheory/Flat/Equalizer.lean:119-134, sorry map: no dependencies with sorry) for the lead to attach."
- },
- "lean": {
-  "branch": "slopmaster2",
-  "declarations": [
-   "Module.Flat.of_exact_of_flat_of_flat_right"
   ],
-  "note": "attached by the lead at the review of lem-weil-pbc-flat-ses-kernel-flat (2026-10-10), found by its opus worker: for f : M' -> M injective, g : M -> M'' surjective, exact, with M and M'' flat, M' is flat (WeilConjectures/Mathlib/RingTheory/Flat/Equalizer.lean:119-134, read by L); sorry-free with no dependencies on the full map"
- },
- "reviewed": {
-  "date": "2026-10-10",
-  "by": "L",
-  "result": "accepted",
-  "note": "4 steps following Stacks 00HM: the finitely generated ideal criterion (00HD leaf), the commuting square, injectivity of I (x) M -> M (M flat) and of I (x) M' -> I (x) M (00HL leaf, M'' flat), diagram chase. Statement gained the exact-sequence citation. Lean: Module.Flat.of_exact_of_flat_of_flat_right (slopmaster2, sorry-free) attached by L; the node is closed on slopmaster2."
- }
+  "proof": [
+    {
+      "text": "Criterion. By [lem-weil-pbc-flat-fg-ideal-criterion] (Stacks 00HD, (4) implies (1)) it suffices to show: for every finitely generated ideal $I\\subset R$ the multiplication map $\\mu_{M'}:I\\otimes_RM'\\to M'$, $x\\otimes m'\\mapsto xm'$, is injective. Fix such an $I$ and write $\\mu_M:I\\otimes_RM\\to M$ likewise.",
+      "uses": [
+        "lem-weil-pbc-flat-fg-ideal-criterion",
+        "def-weil-pbc-flat-ring-map"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/algebra.tex",
+        "place": "Algebra, Lemma Tag 00HM (lemma-flat-ses), proof, lines 9078-9094: 'We will use the criterion that a module N is flat if for every ideal I the map N (x) I -> N is injective, see Lemma 00HD'"
+      }
+    },
+    {
+      "text": "The diagram. The square with top row $u:M'\\to M$, bottom row $\\mathrm{id}_I\\otimes u:I\\otimes_RM'\\to I\\otimes_RM$ and vertical maps $\\mu_{M'}$, $\\mu_M$ commutes: on generators $\\mu_M((\\mathrm{id}_I\\otimes u)(x\\otimes m'))=\\mu_M(x\\otimes u(m'))=x\\,u(m')=u(xm')=u(\\mu_{M'}(x\\otimes m'))$ by $R$-linearity of $u$, and both composites are additive, so they agree on all of $I\\otimes_RM'$.",
+      "uses": [
+        "def-weil-pbc-exact-sequence"
+      ],
+      "elementary": true,
+      "source": {
+        "document": "literature/stacks-project/algebra.tex",
+        "place": "Algebra, Lemma Tag 00HM (lemma-flat-ses), proof, lines 9078-9094: the diagram with rows 0 -> M' -> M -> M'' -> 0 and M' (x) I -> M (x) I -> M'' (x) I -> 0"
+      }
+    },
+    {
+      "text": "Two injective arrows. (a) Since $M$ is flat, $\\mu_M$ is injective, by the direction (1) implies (4) of [lem-weil-pbc-flat-fg-ideal-criterion]. (b) Since $0\\to M'\\to M\\to M''\\to0$ is exact and $M''$ is flat, [lem-weil-pbc-flat-quotient-tensor-injective] (Stacks 00HL), applied with $N=I$, shows that the lower left arrow $\\mathrm{id}_I\\otimes u:I\\otimes_RM'\\to I\\otimes_RM$ is injective.",
+      "uses": [
+        "lem-weil-pbc-flat-fg-ideal-criterion",
+        "lem-weil-pbc-flat-quotient-tensor-injective"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/algebra.tex",
+        "place": "Algebra, Lemma Tag 00HM (lemma-flat-ses), proof, lines 9078-9094: 'if M'' is flat then the lower left horizontal arrow is injective by Lemma 00HL'"
+      }
+    },
+    {
+      "text": "Diagram chase. Let $z\\in I\\otimes_RM'$ with $\\mu_{M'}(z)=0$. By the commutative square (step 2), $\\mu_M((\\mathrm{id}_I\\otimes u)(z))=u(\\mu_{M'}(z))=0$; $\\mu_M$ is injective (step 3a), so $(\\mathrm{id}_I\\otimes u)(z)=0$; $\\mathrm{id}_I\\otimes u$ is injective (step 3b), so $z=0$. Hence $\\mu_{M'}$ is injective for every finitely generated ideal $I$, and $M'$ is flat by step 1. (Stacks writes the composite chase as 'the second follows'; the injectivity of $u$ itself is not needed.)",
+      "uses": [],
+      "elementary": true,
+      "source": {
+        "document": "literature/stacks-project/algebra.tex",
+        "place": "Algebra, Lemma Tag 00HM (lemma-flat-ses), proof, lines 9078-9094: 'The second follows because ...'"
+      }
+    }
+  ],
+  "proof_deps": [
+    "lem-weil-pbc-flat-fg-ideal-criterion",
+    "def-weil-pbc-flat-ring-map",
+    "def-weil-pbc-exact-sequence",
+    "lem-weil-pbc-flat-quotient-tensor-injective"
+  ],
+  "proof_origin": {
+    "by": "document",
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 00HM (lemma-flat-ses), proof of the second assertion, lines 9078-9094"
+  },
+  "mathlib_searches": [
+    {
+      "tool": "leansearch",
+      "query": "kernel of a surjective linear map between flat modules is flat",
+      "results": "LinearMap.kerLTensorEquivOfSurjective (Mathlib.RingTheory.Flat.Equalizer), LinearMap.ker, LinearMap.quotKerEquivOfSurjective, Module.FinitePresentation.fg_ker, Module.Flat.of_retract (Mathlib.RingTheory.Flat.Basic, flat of a retract)",
+      "verdict": "no match",
+      "date": "2026-10-10"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "In a short exact sequence 0 → M' → M → M'' → 0 of modules, if M and M'' are flat then M' is flat",
+      "results": "Module.Flat.iff_lTensor_preserves_shortComplex_exact, Module.Flat.iff_rTensor_preserves_shortComplex_exact, Module.Flat.iff_lTensor_exact', Module.Flat.iff_rTensor_exact, Module.Flat.lTensor_shortComplex_exact (characterizations only)",
+      "verdict": "no match",
+      "date": "2026-10-10"
+    },
+    {
+      "tool": "loogle",
+      "query": "Module.Flat, Function.Exact, Function.Surjective",
+      "results": "only LinearMap.lTensor_injective_of_exact_of_flat",
+      "verdict": "no match",
+      "date": "2026-10-10"
+    },
+    {
+      "tool": "grep",
+      "query": "grep -rn 'Flat' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/ --include=*.lean | grep -E '(lemma|theorem|instance) ' | grep -iE 'ker|shortexact|exact|of_injective|of_surjective'",
+      "results": "Module.Flat.ker_lTensor_eq, LinearMap.tensorKerEquiv*, LinearMap.lTensor_injective_of_exact_of_flat, Module.Flat.lTensor_shortComplex_exact, FaithfullyFlat.*_reflects_exact; no 2-out-of-3 for flatness in a short exact sequence",
+      "verdict": "no match",
+      "date": "2026-10-10"
+    },
+    {
+      "tool": "leansearch",
+      "query": "short exact sequence of modules, middle and right flat implies left flat",
+      "results": "Module.Flat.iff_lTensor_exact', Module.Flat.lTensor_shortComplex_exact, Module.Flat.iff_rTensor_exact, Module.Flat.lTensor_exact, Module.Flat.rTensor_exact, ModuleCat.free_shortExact (free, extension), Module.Flat.rTensor_shortComplex_exact",
+      "date": "2026-10-10",
+      "verdict": "no match"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "Module.Flat of the kernel of a surjective linear map between flat modules",
+      "results": "Module.Flat.of_forall_exists_factorization, LinearMap.kerLTensorEquivOfSurjective, Module.Flat.iff_forall_exists_factorization, Module.FaithfullyFlat.lTensor_surjective_iff_surjective, Module.Flat.ker_lTensor_eq, Module.Flat.of_retract",
+      "date": "2026-10-10",
+      "verdict": "no match"
+    },
+    {
+      "tool": "loogle",
+      "query": "Module.Flat ?R ↥(LinearMap.ker ?f)",
+      "results": "none",
+      "date": "2026-10-10",
+      "verdict": "no match"
+    },
+    {
+      "tool": "local_search",
+      "query": "Module.Flat.of_exact (project ~/weil-conjectures-slopmaster2)",
+      "results": "Module.Flat.of_exact_of_flat_of_flat, Module.Flat.of_exact_of_flat_of_flat_right, both in WeilConjectures/Mathlib/RingTheory/Flat/Equalizer.lean of the source repository (not Mathlib); index: unavailable",
+      "date": "2026-10-10",
+      "verdict": "no Mathlib match; the source repository's sorry-free Module.Flat.of_exact_of_flat_of_flat_right (lines 119-134) states the node exactly"
+    },
+    {
+      "tool": "grep",
+      "query": "grep -rn 'theorem\\|lemma' Mathlib/RingTheory/Flat/*.lean | grep -i 'exact\\|ses\\|ker'; grep -rn Flat Mathlib --include=*.lean | grep -E '(theorem|lemma|instance) ' | grep -iE 'ker|shortExact|of_exact|of_surj|of_inj|Tor'",
+      "results": "Module.Flat.ker_lTensor_eq, LinearMap.lTensor_injective_of_exact_of_flat (Flat/Equalizer.lean:192), Module.Flat.lTensor_exact/rTensor_exact/iff_*Tensor_exact (Flat/Basic.lean:323-393), Flat.lTensor_shortComplex_exact (Flat/CategoryTheory.lean); no 2-out-of-3 statement for flatness in a short exact sequence",
+      "date": "2026-10-10",
+      "verdict": "no match"
+    }
+  ],
+  "mathlib_match": null,
+  "status": "split",
+  "merged_into": null,
+  "created": {
+    "by": "worker",
+    "item": "lem-weil-pbc-jacobi-zariski-left-term-vanishing",
+    "date": "2026-10-10"
+  },
+  "lean_audit": {
+    "master": {
+      "state": "none",
+      "decls": [],
+      "missing": [
+        "Module.Flat.of_exact_of_flat_of_flat_right"
+      ]
+    },
+    "slopmaster2": {
+      "state": "closed",
+      "decls": [
+        {
+          "name": "Module.Flat.of_exact_of_flat_of_flat_right",
+          "module": "WeilConjectures.Mathlib.RingTheory.Flat.Equalizer",
+          "lines": [
+            119,
+            134
+          ],
+          "kind": "theorem",
+          "sorry": false
+        }
+      ],
+      "missing": [],
+      "open": []
+    }
+  },
+  "chapter": "sec-proper-base-change",
+  "unit": "sk-thm-p1",
+  "split_report": {
+    "date": "2026-10-10",
+    "item": "lem-weil-pbc-flat-ses-kernel-flat",
+    "worker": "stage1",
+    "summary": "Checked against Stacks 00HM (algebra.tex 9071-9094). def-weil-pbc-flat-ring-map defines flat modules as well as flat ring maps, so it stays the flatness dependency; def-weil-pbc-exact-sequence added to stmt_deps. Proof split in four steps following the Stacks proof: the finitely generated ideal criterion (existing Mathlib leaf lem-weil-pbc-flat-fg-ideal-criterion, Stacks 00HD), the commuting square I(x)M' -> I(x)M over M' -> M, injectivity of I(x)M -> M (M flat) and of I(x)M' -> I(x)M (existing Mathlib leaf lem-weil-pbc-flat-quotient-tensor-injective, Stacks 00HL, = LinearMap.lTensor_injective_of_exact_of_flat), and the diagram chase. No new nodes. Mathlib has no direct statement (searches recorded); the source repository slopmaster2 has a sorry-free exact statement Module.Flat.of_exact_of_flat_of_flat_right (WeilConjectures/Mathlib/RingTheory/Flat/Equalizer.lean:119-134, sorry map: no dependencies with sorry) for the lead to attach."
+  },
+  "lean": {
+    "module": "WeilConjectures.Mathlib.RingTheory.Flat.Equalizer",
+    "declaration": "Module.Flat.of_exact_of_flat_of_flat_right",
+    "branch": "slopmaster2",
+    "line": 119,
+    "declarations": [
+      "Module.Flat.of_exact_of_flat_of_flat_right"
+    ],
+    "sorry_free": true,
+    "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state closed)"
+  },
+  "reviewed": {
+    "date": "2026-10-10",
+    "by": "L",
+    "result": "accepted",
+    "note": "4 steps following Stacks 00HM: the finitely generated ideal criterion (00HD leaf), the commuting square, injectivity of I (x) M -> M (M flat) and of I (x) M' -> I (x) M (00HL leaf, M'' flat), diagram chase. Statement gained the exact-sequence citation. Lean: Module.Flat.of_exact_of_flat_of_flat_right (slopmaster2, sorry-free) attached by L; the node is closed on slopmaster2."
+  }
 }

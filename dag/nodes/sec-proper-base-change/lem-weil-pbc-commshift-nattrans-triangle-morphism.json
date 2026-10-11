@@ -1,101 +1,105 @@
 {
- "id": "lem-weil-pbc-commshift-nattrans-triangle-morphism",
- "blueprint": {
-  "is": null,
-  "from": {
-   "node": "lem-weil-pbc-exact-couple-differential",
-   "place": "step 2, 5 of its split (source: Lemma 0A8D (lemma-adjoint-is-exact, line 2290), for the shift isomorphism of the right adjoints; Definition of a morphism of triangles, Tag 0145 (derived.tex, section on triangulated categories))",
-   "via": [
-    "lem-weil-pbc-derived-exchange-triangulated"
-   ]
+  "id": "lem-weil-pbc-commshift-nattrans-triangle-morphism",
+  "blueprint": {
+    "is": null,
+    "from": {
+      "node": "lem-weil-pbc-exact-couple-differential",
+      "place": "step 2, 5 of its split (source: Lemma 0A8D (lemma-adjoint-is-exact, line 2290), for the shift isomorphism of the right adjoints; Definition of a morphism of triangles, Tag 0145 (derived.tex, section on triangulated categories))",
+      "via": [
+        "lem-weil-pbc-derived-exchange-triangulated"
+      ]
+    },
+    "same_as": null
   },
-  "same_as": null
- },
- "kind": "statement",
- "title": "A shift-compatible natural transformation gives morphisms of the image triangles",
- "statement": "Let $\\mathcal D,\\mathcal D'$ be additive categories with shift functors $[1]$ [def-weil-pbc-triangles-with-shift], let $F_1,F_2:\\mathcal D\\to\\mathcal D'$ be functors with natural isomorphisms $\\varphi_X:F_1(X[1])\\xrightarrow{\\sim}F_1(X)[1]$ and $\\psi_X:F_2(X[1])\\xrightarrow{\\sim}F_2(X)[1]$, and let $\\tau:F_1\\to F_2$ be a natural transformation compatible with the shift: $\\psi_X\\circ\\tau_{X[1]}=\\tau_X[1]\\circ\\varphi_X$ for every object $X$. For a triangle $T=(X,Y,Z,u,v,w)$ of $\\mathcal D$ ($w:Z\\to X[1]$) let $F_1T=(F_1X,F_1Y,F_1Z,F_1u,F_1v,\\varphi_X\\circ F_1w)$ and $F_2T=(F_2X,F_2Y,F_2Z,F_2u,F_2v,\\psi_X\\circ F_2w)$ be its image triangles. Then $(\\tau_X,\\tau_Y,\\tau_Z)$ is a morphism of triangles $F_1T\\to F_2T$ [def-weil-pbc-triangles-with-shift], natural in $T$.",
- "source": {
-  "document": "literature/stacks-project/derived.tex",
-  "place": "Definition 0144 (definition-triangle, line 49: triangles and morphisms of triangles) and Definition 014V (definition-exact-functor-triangulated-categories, line 191: the image triangle (F(X),F(Y),F(Z),F(f),F(g),xi_X o F(h))); the statement is assembled by an agent (not stated in Stacks)"
- },
- "stmt_deps": [
-  "def-weil-pbc-triangles-with-shift"
- ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
- "mathlib_searches": [
-  {
-   "tool": "leansearch",
-   "query": "natural transformation commuting with shift induces morphism of triangles between image triangles mapTriangle",
-   "results": "NatTrans.CommShift.mk, NatTrans.CommShift, Functor.mapTriangle, Functor.mapTriangle_obj, Triangle.functorHomMk', Functor.mapTriangleCommShiftIso_hom_app_hom₁, Functor.mapTriangleCompIso_hom_app_hom₂, Functor.mapTriangleIso (Mathlib.CategoryTheory.Triangulated.*)",
-   "date": "2026-10-09",
-   "verdict": "no match: Functor.mapTriangleIso only for a natural isomorphism"
+  "kind": "statement",
+  "title": "A shift-compatible natural transformation gives morphisms of the image triangles",
+  "statement": "Let $\\mathcal D,\\mathcal D'$ be additive categories with shift functors $[1]$ [def-weil-pbc-triangles-with-shift], let $F_1,F_2:\\mathcal D\\to\\mathcal D'$ be functors with natural isomorphisms $\\varphi_X:F_1(X[1])\\xrightarrow{\\sim}F_1(X)[1]$ and $\\psi_X:F_2(X[1])\\xrightarrow{\\sim}F_2(X)[1]$, and let $\\tau:F_1\\to F_2$ be a natural transformation compatible with the shift: $\\psi_X\\circ\\tau_{X[1]}=\\tau_X[1]\\circ\\varphi_X$ for every object $X$. For a triangle $T=(X,Y,Z,u,v,w)$ of $\\mathcal D$ ($w:Z\\to X[1]$) let $F_1T=(F_1X,F_1Y,F_1Z,F_1u,F_1v,\\varphi_X\\circ F_1w)$ and $F_2T=(F_2X,F_2Y,F_2Z,F_2u,F_2v,\\psi_X\\circ F_2w)$ be its image triangles. Then $(\\tau_X,\\tau_Y,\\tau_Z)$ is a morphism of triangles $F_1T\\to F_2T$ [def-weil-pbc-triangles-with-shift], natural in $T$.",
+  "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Definition 0144 (definition-triangle, line 49: triangles and morphisms of triangles) and Definition 014V (definition-exact-functor-triangulated-categories, line 191: the image triangle (F(X),F(Y),F(Z),F(f),F(g),xi_X o F(h))); the statement is assembled by an agent (not stated in Stacks)"
   },
-  {
-   "tool": "leanfinder",
-   "query": "a natural transformation between triangulated functors compatible with shifts gives a morphism of the image triangles of every triangle",
-   "results": "Triangle.functorHomMk', Triangle.functorHomMk (Triangulated.Basic), Functor.mapTriangle, Functor.mapTriangle_obj, Functor.instCommShiftTriangleMapTriangleInt, Functor.mapTriangulatedSpectralObject",
-   "date": "2026-10-09",
-   "verdict": "no match"
-  },
-  {
-   "tool": "loogle",
-   "query": "CategoryTheory.NatTrans.CommShift, CategoryTheory.Pretriangulated.TriangleMorphism",
-   "results": "none",
-   "date": "2026-10-09",
-   "verdict": "no match"
-  },
-  {
-   "tool": "grep",
-   "query": "grep -rn 'mapTriangle' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib --include=*.lean | grep -i 'nattrans\\|def \\|lemma \\|theorem '",
-   "results": "Triangulated/Functor.lean:42 Functor.mapTriangle, :168 Functor.mapTriangleIso (e : F1 ≅ F2) [NatTrans.CommShift e.hom ℤ]: F1.mapTriangle ≅ F2.mapTriangle; no NatTrans.mapTriangle for a non-invertible transformation in the pinned Mathlib. In the source repository: CategoryTheory.NatTrans.mapTriangle, ~/weil-conjectures-slopmaster2/WeilConjectures/Mathlib/CategoryTheory/Triangulated/Functor.lean lines 36-45 (sorry-free, nothing with sorry reachable in the sorry map)",
-   "date": "2026-10-09",
-   "verdict": "no match in Mathlib (mapTriangleIso is the isomorphism case only); sorry-free Lean in slopmaster2"
-  }
- ],
- "mathlib_match": null,
- "status": "unsplit",
- "merged_into": null,
- "created": {
-  "by": "worker",
-  "item": "lem-weil-pbc-derived-exchange-triangulated",
-  "date": "2026-10-09"
- },
- "lean_audit": {
-  "master": {
-   "state": "none",
-   "decls": [],
-   "missing": [
-    "CategoryTheory.NatTrans.mapTriangle"
-   ]
-  },
-  "slopmaster2": {
-   "state": "closed",
-   "decls": [
-    {
-     "name": "CategoryTheory.NatTrans.mapTriangle",
-     "module": "WeilConjectures.Mathlib.CategoryTheory.Triangulated.Functor",
-     "lines": [
-      36,
-      45
-     ],
-     "kind": "def",
-     "sorry": false
-    }
-   ],
-   "missing": [],
-   "open": []
-  }
- },
- "import_flags": [],
- "chapter": "sec-proper-base-change",
- "unit": "sk-def-exchange",
- "lean": {
-  "branch": "slopmaster2",
-  "declarations": [
-   "CategoryTheory.NatTrans.mapTriangle"
+  "stmt_deps": [
+    "def-weil-pbc-triangles-with-shift"
   ],
-  "note": "attached by the lead at review (2026-10-09), found by the opus workers of lem-weil-pbc-derived-exchange-triangulated and def-weil-pbc-derived-inverse-image: a natural transformation compatible with the shifts (NatTrans.CommShift for all n in Z, which for the integer shift is determined by n = 1) induces the morphism of image triangles with components tau; sorry-free on the full map"
- }
+  "proof": [],
+  "proof_deps": [],
+  "proof_origin": null,
+  "mathlib_searches": [
+    {
+      "tool": "leansearch",
+      "query": "natural transformation commuting with shift induces morphism of triangles between image triangles mapTriangle",
+      "results": "NatTrans.CommShift.mk, NatTrans.CommShift, Functor.mapTriangle, Functor.mapTriangle_obj, Triangle.functorHomMk', Functor.mapTriangleCommShiftIso_hom_app_hom₁, Functor.mapTriangleCompIso_hom_app_hom₂, Functor.mapTriangleIso (Mathlib.CategoryTheory.Triangulated.*)",
+      "date": "2026-10-09",
+      "verdict": "no match: Functor.mapTriangleIso only for a natural isomorphism"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "a natural transformation between triangulated functors compatible with shifts gives a morphism of the image triangles of every triangle",
+      "results": "Triangle.functorHomMk', Triangle.functorHomMk (Triangulated.Basic), Functor.mapTriangle, Functor.mapTriangle_obj, Functor.instCommShiftTriangleMapTriangleInt, Functor.mapTriangulatedSpectralObject",
+      "date": "2026-10-09",
+      "verdict": "no match"
+    },
+    {
+      "tool": "loogle",
+      "query": "CategoryTheory.NatTrans.CommShift, CategoryTheory.Pretriangulated.TriangleMorphism",
+      "results": "none",
+      "date": "2026-10-09",
+      "verdict": "no match"
+    },
+    {
+      "tool": "grep",
+      "query": "grep -rn 'mapTriangle' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib --include=*.lean | grep -i 'nattrans\\|def \\|lemma \\|theorem '",
+      "results": "Triangulated/Functor.lean:42 Functor.mapTriangle, :168 Functor.mapTriangleIso (e : F1 ≅ F2) [NatTrans.CommShift e.hom ℤ]: F1.mapTriangle ≅ F2.mapTriangle; no NatTrans.mapTriangle for a non-invertible transformation in the pinned Mathlib. In the source repository: CategoryTheory.NatTrans.mapTriangle, ~/weil-conjectures-slopmaster2/WeilConjectures/Mathlib/CategoryTheory/Triangulated/Functor.lean lines 36-45 (sorry-free, nothing with sorry reachable in the sorry map)",
+      "date": "2026-10-09",
+      "verdict": "no match in Mathlib (mapTriangleIso is the isomorphism case only); sorry-free Lean in slopmaster2"
+    }
+  ],
+  "mathlib_match": null,
+  "status": "unsplit",
+  "merged_into": null,
+  "created": {
+    "by": "worker",
+    "item": "lem-weil-pbc-derived-exchange-triangulated",
+    "date": "2026-10-09"
+  },
+  "lean_audit": {
+    "master": {
+      "state": "none",
+      "decls": [],
+      "missing": [
+        "CategoryTheory.NatTrans.mapTriangle"
+      ]
+    },
+    "slopmaster2": {
+      "state": "closed",
+      "decls": [
+        {
+          "name": "CategoryTheory.NatTrans.mapTriangle",
+          "module": "WeilConjectures.Mathlib.CategoryTheory.Triangulated.Functor",
+          "lines": [
+            36,
+            45
+          ],
+          "kind": "def",
+          "sorry": false
+        }
+      ],
+      "missing": [],
+      "open": []
+    }
+  },
+  "import_flags": [],
+  "chapter": "sec-proper-base-change",
+  "unit": "sk-def-exchange",
+  "lean": {
+    "module": "WeilConjectures.Mathlib.CategoryTheory.Triangulated.Functor",
+    "declaration": "CategoryTheory.NatTrans.mapTriangle",
+    "branch": "slopmaster2",
+    "line": 36,
+    "declarations": [
+      "CategoryTheory.NatTrans.mapTriangle"
+    ],
+    "sorry_free": true,
+    "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state closed)"
+  }
 }

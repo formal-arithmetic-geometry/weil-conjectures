@@ -1,129 +1,133 @@
 {
- "id": "lem-weil-pbc-direct-image-composition-coherence",
- "blueprint": {
-  "is": null,
-  "from": {
-   "node": "lem-weil-pbc-exchange-identity-pasting",
-   "place": "step 2, 3, 4 of its split (source: Remark 07A7 (remark-base-change); the identity case is not stated in Stacks: written by an agent from the mate calculus of Mathlib/CategoryTheory/Adjunction/Mates.lean (Mathlib of ~/weil-conjectures-slopmaster2) (conjugateEquiv_id), as in the source Lean AlgebraicGeometry.Etale.derivedBaseChangeMapPlus_id)",
-   "via": [
-    "lem-weil-pbc-derived-inverse-image-composition"
-   ]
-  },
-  "same_as": null
- },
- "kind": "statement",
- "title": "Associativity and unit laws of the composition isomorphisms of direct images",
- "statement": "Let $u:Y\\to X$, $v:Z\\to Y$, $w:T\\to Z$ be morphisms of schemes [def-pc-scheme], with small etale sites [def-weil-pbc-etale-site], categories of abelian sheaves $\\Ab(-_{\\Et})$ [def-weil-pbc-abelian-etale-sheaves] and direct images $s_*$, $(s_*F)(W)=F(W\\times_ST)$ for $s:T\\to S$ and $W$ an object of $S_{\\Et}$ [def-weil-pbc-direct-image]. For composable $s:S'\\to S$, $t:S''\\to S'$ let $d_{s,t}:(s\\circ t)_*\\xrightarrow{\\sim}s_*\\circ t_*$ be the isomorphism of functors whose component at a sheaf $F$ on $S''_{\\Et}$ and an object $W$ of $S_{\\Et}$ is $F$ applied to the canonical isomorphism $(W\\times_SS')\\times_{S'}S''\\xrightarrow{\\sim}W\\times_SS''$ of objects of $S''_{\\Et}$ [def-pc-fibre-product], and let $d_S:(\\mathrm{id}_S)_*\\xrightarrow{\\sim}\\mathrm{id}$ be given by the canonical isomorphisms $W\\xrightarrow{\\sim}W\\times_SS$ (these are the isomorphisms $d$ of [lem-weil-pbc-inverse-image-composition] (1), (3)). Then\n\n1. (Associativity.) $(u_*d_{v,w})\\circ d_{u,v\\circ w}=(d_{u,v}w_*)\\circ d_{u\\circ v,w}:\\ (u\\circ v\\circ w)_*\\to u_*v_*w_*$;\n2. (Unit laws.) $(d_Xu_*)\\circ d_{\\mathrm{id}_X,u}=\\mathrm{id}_{u_*}$ and $(u_*d_Y)\\circ d_{u,\\mathrm{id}_Y}=\\mathrm{id}_{u_*}$ as transformations $u_*\\to u_*$.",
- "source": {
-  "document": "literature/stacks-project/topologies.tex",
-  "place": "Lemma 021J (lemma-composition-etale): $g_{small}\\circ f_{small}=(g\\circ f)_{small}$, from the description of $f_{small,*}$ in Lemma 021I (lemma-morphism-big-small-etale); the coherence of the identifications is not stated in Stacks (where $(g\\circ f)_*=g_*\\circ f_*$ is an equality, literature/stacks-project/sites.tex after Definition of composition of morphisms of sites, following Lemma 03CB). Source Lean: AlgebraicGeometry.Etale.lowerStarComp_assoc, lowerStarComp_id_left, lowerStarComp_id_right (WeilConjectures/SixFunctors/Etale/UpperLowerStar/Coherence.lean 197-219, slopmaster2), stated for the inverse direction f_* ⋙ g_* ≅ (f ≫ g)_* and any coefficient category A"
- },
- "stmt_deps": [
-  "def-pc-scheme",
-  "def-weil-pbc-etale-site",
-  "def-weil-pbc-abelian-etale-sheaves",
-  "def-weil-pbc-direct-image",
-  "def-pc-fibre-product",
-  "lem-weil-pbc-inverse-image-composition"
- ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
- "mathlib_searches": [
-  {
-   "tool": "leansearch",
-   "query": "associativity of the composition isomorphism of pushforward of sheaves along composite morphisms (f ≫ g ≫ h)_* ≅ f_* ⋙ g_* ⋙ h_*",
-   "results": "Scheme.Modules.pushforwardComp (Mathlib.AlgebraicGeometry.Modules.Sheaf, O-modules, Zariski); ExponentiableMorphism.pushforwardComp; TopCat.Presheaf.Pushforward.comp_eq (an equality on topological spaces); Functor.sheafPushforwardContinuousComp(') (Mathlib.CategoryTheory.Sites.Continuous); SheafOfModules.pushforward_assoc; nothing for the small etale sites with the fibre-product identifications",
-   "date": "2026-10-09",
-   "verdict": "no match"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "the canonical isomorphisms between iterated pullbacks along composite morphisms satisfy associativity (pullbackComp assoc)",
-   "results": "Limits.pullbackRightPullbackFstIso_hom_fst_assoc, pullbackLeftPullbackSndIso_hom_fst_assoc/_hom_snd_assoc (Mathlib.CategoryTheory.Limits.Shapes.Pullback.Pasting), Limits.pullbackAssoc_hom_fst (Pullback.Assoc), ChosenPullbacksAlong.pullbackMap_comp_assoc: the fibre-product isomorphisms and their projection formulas, the ingredient of the proof, not the statement about direct images of etale sheaves",
-   "date": "2026-10-09",
-   "verdict": "no match (ingredients only)"
-  },
-  {
-   "tool": "loogle",
-   "query": "CategoryTheory.MorphismProperty.Over.pullbackComp",
-   "results": "MorphismProperty.Over.pullbackComp, pullbackComp_hom_app_left, pullbackComp_inv_app_left, pullbackComp_left_fst_fst (Mathlib.CategoryTheory.MorphismProperty.OverAdjunction); no associativity or unit lemma for it in Mathlib",
-   "date": "2026-10-09",
-   "verdict": "no match"
-  },
-  {
-   "tool": "grep",
-   "query": "grep -rn 'pullbackComp_assoc\\|pullbackComp_id\\|sheafPushforwardContinuousComp_assoc\\|pushforwardComp_assoc\\|lemma pushforward_assoc' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib; grep of Mathlib/AlgebraicGeometry/Sites/Etale.lean for pushforward/pullback",
-   "results": "only SheafOfModules.pushforward_assoc (Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean:159) and PresheafOfModules.pushforward_assoc (Presheaf/Pushforward.lean:156), for pushforward along continuous functors of sites where the composite functor is literally the composite (no fibre-product isomorphism); Sites/Etale.lean has no direct image along a morphism of schemes; MorphismProperty.Over.pullbackComp_assoc (used by the source Lean) is not in the pinned Mathlib",
-   "date": "2026-10-09",
-   "verdict": "no match"
-  }
- ],
- "mathlib_match": null,
- "status": "unsplit",
- "merged_into": null,
- "created": {
-  "by": "worker",
-  "item": "lem-weil-pbc-derived-inverse-image-composition",
-  "date": "2026-10-09"
- },
- "lean_audit": {
-  "master": {
-   "state": "none",
-   "decls": [],
-   "missing": [
-    "AlgebraicGeometry.Etale.lowerStarComp_assoc",
-    "AlgebraicGeometry.Etale.lowerStarComp_id_left",
-    "AlgebraicGeometry.Etale.lowerStarComp_id_right"
-   ]
-  },
-  "slopmaster2": {
-   "state": "closed",
-   "decls": [
-    {
-     "name": "AlgebraicGeometry.Etale.lowerStarComp_assoc",
-     "module": "WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence",
-     "lines": [
-      211,
-      219
-     ],
-     "kind": "theorem",
-     "sorry": false
+  "id": "lem-weil-pbc-direct-image-composition-coherence",
+  "blueprint": {
+    "is": null,
+    "from": {
+      "node": "lem-weil-pbc-exchange-identity-pasting",
+      "place": "step 2, 3, 4 of its split (source: Remark 07A7 (remark-base-change); the identity case is not stated in Stacks: written by an agent from the mate calculus of Mathlib/CategoryTheory/Adjunction/Mates.lean (Mathlib of ~/weil-conjectures-slopmaster2) (conjugateEquiv_id), as in the source Lean AlgebraicGeometry.Etale.derivedBaseChangeMapPlus_id)",
+      "via": [
+        "lem-weil-pbc-derived-inverse-image-composition"
+      ]
     },
-    {
-     "name": "AlgebraicGeometry.Etale.lowerStarComp_id_left",
-     "module": "WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence",
-     "lines": [
-      197,
-      201
-     ],
-     "kind": "theorem",
-     "sorry": false
-    },
-    {
-     "name": "AlgebraicGeometry.Etale.lowerStarComp_id_right",
-     "module": "WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence",
-     "lines": [
-      204,
-      208
-     ],
-     "kind": "theorem",
-     "sorry": false
-    }
-   ],
-   "missing": [],
-   "open": []
-  }
- },
- "chapter": "sec-proper-base-change",
- "unit": "sk-def-exchange",
- "lean": {
-  "branch": "slopmaster2",
-  "declarations": [
-   "AlgebraicGeometry.Etale.lowerStarComp_assoc",
-   "AlgebraicGeometry.Etale.lowerStarComp_id_left",
-   "AlgebraicGeometry.Etale.lowerStarComp_id_right"
+    "same_as": null
+  },
+  "kind": "statement",
+  "title": "Associativity and unit laws of the composition isomorphisms of direct images",
+  "statement": "Let $u:Y\\to X$, $v:Z\\to Y$, $w:T\\to Z$ be morphisms of schemes [def-pc-scheme], with small etale sites [def-weil-pbc-etale-site], categories of abelian sheaves $\\Ab(-_{\\Et})$ [def-weil-pbc-abelian-etale-sheaves] and direct images $s_*$, $(s_*F)(W)=F(W\\times_ST)$ for $s:T\\to S$ and $W$ an object of $S_{\\Et}$ [def-weil-pbc-direct-image]. For composable $s:S'\\to S$, $t:S''\\to S'$ let $d_{s,t}:(s\\circ t)_*\\xrightarrow{\\sim}s_*\\circ t_*$ be the isomorphism of functors whose component at a sheaf $F$ on $S''_{\\Et}$ and an object $W$ of $S_{\\Et}$ is $F$ applied to the canonical isomorphism $(W\\times_SS')\\times_{S'}S''\\xrightarrow{\\sim}W\\times_SS''$ of objects of $S''_{\\Et}$ [def-pc-fibre-product], and let $d_S:(\\mathrm{id}_S)_*\\xrightarrow{\\sim}\\mathrm{id}$ be given by the canonical isomorphisms $W\\xrightarrow{\\sim}W\\times_SS$ (these are the isomorphisms $d$ of [lem-weil-pbc-inverse-image-composition] (1), (3)). Then\n\n1. (Associativity.) $(u_*d_{v,w})\\circ d_{u,v\\circ w}=(d_{u,v}w_*)\\circ d_{u\\circ v,w}:\\ (u\\circ v\\circ w)_*\\to u_*v_*w_*$;\n2. (Unit laws.) $(d_Xu_*)\\circ d_{\\mathrm{id}_X,u}=\\mathrm{id}_{u_*}$ and $(u_*d_Y)\\circ d_{u,\\mathrm{id}_Y}=\\mathrm{id}_{u_*}$ as transformations $u_*\\to u_*$.",
+  "source": {
+    "document": "literature/stacks-project/topologies.tex",
+    "place": "Lemma 021J (lemma-composition-etale): $g_{small}\\circ f_{small}=(g\\circ f)_{small}$, from the description of $f_{small,*}$ in Lemma 021I (lemma-morphism-big-small-etale); the coherence of the identifications is not stated in Stacks (where $(g\\circ f)_*=g_*\\circ f_*$ is an equality, literature/stacks-project/sites.tex after Definition of composition of morphisms of sites, following Lemma 03CB). Source Lean: AlgebraicGeometry.Etale.lowerStarComp_assoc, lowerStarComp_id_left, lowerStarComp_id_right (WeilConjectures/SixFunctors/Etale/UpperLowerStar/Coherence.lean 197-219, slopmaster2), stated for the inverse direction f_* ⋙ g_* ≅ (f ≫ g)_* and any coefficient category A"
+  },
+  "stmt_deps": [
+    "def-pc-scheme",
+    "def-weil-pbc-etale-site",
+    "def-weil-pbc-abelian-etale-sheaves",
+    "def-weil-pbc-direct-image",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-inverse-image-composition"
   ],
-  "note": "attached by the lead at review (2026-10-09), found by the opus worker of lem-weil-pbc-derived-inverse-image-composition: associativity and unit laws of the composition isomorphisms of the sheaf-level direct images, stated for any coefficient category (Ab is the case of the node) and in the inverse direction; sorry-free on the full map"
- }
+  "proof": [],
+  "proof_deps": [],
+  "proof_origin": null,
+  "mathlib_searches": [
+    {
+      "tool": "leansearch",
+      "query": "associativity of the composition isomorphism of pushforward of sheaves along composite morphisms (f ≫ g ≫ h)_* ≅ f_* ⋙ g_* ⋙ h_*",
+      "results": "Scheme.Modules.pushforwardComp (Mathlib.AlgebraicGeometry.Modules.Sheaf, O-modules, Zariski); ExponentiableMorphism.pushforwardComp; TopCat.Presheaf.Pushforward.comp_eq (an equality on topological spaces); Functor.sheafPushforwardContinuousComp(') (Mathlib.CategoryTheory.Sites.Continuous); SheafOfModules.pushforward_assoc; nothing for the small etale sites with the fibre-product identifications",
+      "date": "2026-10-09",
+      "verdict": "no match"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "the canonical isomorphisms between iterated pullbacks along composite morphisms satisfy associativity (pullbackComp assoc)",
+      "results": "Limits.pullbackRightPullbackFstIso_hom_fst_assoc, pullbackLeftPullbackSndIso_hom_fst_assoc/_hom_snd_assoc (Mathlib.CategoryTheory.Limits.Shapes.Pullback.Pasting), Limits.pullbackAssoc_hom_fst (Pullback.Assoc), ChosenPullbacksAlong.pullbackMap_comp_assoc: the fibre-product isomorphisms and their projection formulas, the ingredient of the proof, not the statement about direct images of etale sheaves",
+      "date": "2026-10-09",
+      "verdict": "no match (ingredients only)"
+    },
+    {
+      "tool": "loogle",
+      "query": "CategoryTheory.MorphismProperty.Over.pullbackComp",
+      "results": "MorphismProperty.Over.pullbackComp, pullbackComp_hom_app_left, pullbackComp_inv_app_left, pullbackComp_left_fst_fst (Mathlib.CategoryTheory.MorphismProperty.OverAdjunction); no associativity or unit lemma for it in Mathlib",
+      "date": "2026-10-09",
+      "verdict": "no match"
+    },
+    {
+      "tool": "grep",
+      "query": "grep -rn 'pullbackComp_assoc\\|pullbackComp_id\\|sheafPushforwardContinuousComp_assoc\\|pushforwardComp_assoc\\|lemma pushforward_assoc' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib; grep of Mathlib/AlgebraicGeometry/Sites/Etale.lean for pushforward/pullback",
+      "results": "only SheafOfModules.pushforward_assoc (Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean:159) and PresheafOfModules.pushforward_assoc (Presheaf/Pushforward.lean:156), for pushforward along continuous functors of sites where the composite functor is literally the composite (no fibre-product isomorphism); Sites/Etale.lean has no direct image along a morphism of schemes; MorphismProperty.Over.pullbackComp_assoc (used by the source Lean) is not in the pinned Mathlib",
+      "date": "2026-10-09",
+      "verdict": "no match"
+    }
+  ],
+  "mathlib_match": null,
+  "status": "unsplit",
+  "merged_into": null,
+  "created": {
+    "by": "worker",
+    "item": "lem-weil-pbc-derived-inverse-image-composition",
+    "date": "2026-10-09"
+  },
+  "lean_audit": {
+    "master": {
+      "state": "none",
+      "decls": [],
+      "missing": [
+        "AlgebraicGeometry.Etale.lowerStarComp_assoc",
+        "AlgebraicGeometry.Etale.lowerStarComp_id_left",
+        "AlgebraicGeometry.Etale.lowerStarComp_id_right"
+      ]
+    },
+    "slopmaster2": {
+      "state": "closed",
+      "decls": [
+        {
+          "name": "AlgebraicGeometry.Etale.lowerStarComp_assoc",
+          "module": "WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence",
+          "lines": [
+            211,
+            219
+          ],
+          "kind": "theorem",
+          "sorry": false
+        },
+        {
+          "name": "AlgebraicGeometry.Etale.lowerStarComp_id_left",
+          "module": "WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence",
+          "lines": [
+            197,
+            201
+          ],
+          "kind": "theorem",
+          "sorry": false
+        },
+        {
+          "name": "AlgebraicGeometry.Etale.lowerStarComp_id_right",
+          "module": "WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence",
+          "lines": [
+            204,
+            208
+          ],
+          "kind": "theorem",
+          "sorry": false
+        }
+      ],
+      "missing": [],
+      "open": []
+    }
+  },
+  "chapter": "sec-proper-base-change",
+  "unit": "sk-def-exchange",
+  "lean": {
+    "module": "WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence",
+    "declaration": "AlgebraicGeometry.Etale.lowerStarComp_assoc",
+    "branch": "slopmaster2",
+    "line": 211,
+    "declarations": [
+      "AlgebraicGeometry.Etale.lowerStarComp_assoc",
+      "AlgebraicGeometry.Etale.lowerStarComp_id_left",
+      "AlgebraicGeometry.Etale.lowerStarComp_id_right"
+    ],
+    "sorry_free": true,
+    "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state closed)"
+  }
 }

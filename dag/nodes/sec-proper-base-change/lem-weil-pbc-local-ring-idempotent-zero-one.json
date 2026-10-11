@@ -1,104 +1,108 @@
 {
- "id": "lem-weil-pbc-local-ring-idempotent-zero-one",
- "blueprint": {
-  "is": null,
-  "from": {
-   "node": "thm-weil-pbc-henselian-idempotent-lifting",
-   "place": "step 4 of its split (source: Algebra, Lemma 10.21.3 (Tag 00EE) for the correspondence on affine pieces; the passage to idempotents written out by the agent)",
-   "via": [
-    "lem-weil-pbc-scheme-clopen-idempotent"
-   ]
+  "id": "lem-weil-pbc-local-ring-idempotent-zero-one",
+  "blueprint": {
+    "is": null,
+    "from": {
+      "node": "thm-weil-pbc-henselian-idempotent-lifting",
+      "place": "step 4 of its split (source: Algebra, Lemma 10.21.3 (Tag 00EE) for the correspondence on affine pieces; the passage to idempotents written out by the agent)",
+      "via": [
+        "lem-weil-pbc-scheme-clopen-idempotent"
+      ]
+    },
+    "same_as": null
   },
-  "same_as": null
- },
- "kind": "statement",
- "title": "An idempotent of a local ring is 0 or 1",
- "statement": "Let $R$ be a local ring (a commutative ring with exactly one maximal ideal $\\mathfrak m$; in particular $0\\neq1$ in $R$) and $e\\in R$ an idempotent, $e^2=e$. Then $e=0$ or $e=1$. Consequently, for an idempotent $e$ of $R$ the conditions $e\\neq0$, $e=1$ and $e\\notin\\mathfrak m$ ($e$ a unit) are equivalent.",
- "source": {
-  "document": "literature/stacks-project/algebra.tex",
-  "place": "Algebra, Lemma Tag 00E9 (lemma-characterize-local-ring), (1)⇒(4): a local ring is not the zero ring and for every x one of x, 1-x is a unit; the idempotent statement itself is not stated in Stacks: e(1-e)=0 and one of e, 1-e is a unit, so the other is 0"
- },
- "stmt_deps": [],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
- "mathlib_searches": [
-  {
-   "tool": "leansearch",
-   "query": "idempotent element of a local ring is zero or one",
-   "results": "IsIdempotentElem.iff_eq_zero_or_one (Mathlib.Algebra.GroupWithZero.Idempotent; needs IsLeftCancelMulZero, i.e. no zero divisors), Ideal.isIdempotentElem_iff_eq_bot_or_top_of_isLocalRing (ideals, Noetherian), isIdempotentElem_iff_one_sub_mul_self, isIdempotentElem_iff_mul_one_sub_self (Mathlib.Algebra.Ring.Idempotent)",
-   "date": "2026-10-10",
-   "verdict": "no match (the GroupWithZero lemma needs cancellation, which a local ring lacks)"
+  "kind": "statement",
+  "title": "An idempotent of a local ring is 0 or 1",
+  "statement": "Let $R$ be a local ring (a commutative ring with exactly one maximal ideal $\\mathfrak m$; in particular $0\\neq1$ in $R$) and $e\\in R$ an idempotent, $e^2=e$. Then $e=0$ or $e=1$. Consequently, for an idempotent $e$ of $R$ the conditions $e\\neq0$, $e=1$ and $e\\notin\\mathfrak m$ ($e$ a unit) are equivalent.",
+  "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 00E9 (lemma-characterize-local-ring), (1)⇒(4): a local ring is not the zero ring and for every x one of x, 1-x is a unit; the idempotent statement itself is not stated in Stacks: e(1-e)=0 and one of e, 1-e is a unit, so the other is 0"
   },
-  {
-   "tool": "leanfinder",
-   "query": "In a local ring every idempotent element equals 0 or 1",
-   "results": "IsIdempotentElem.iff_eq_zero_or_one, IsIdempotentElem.of_mul_add, BooleanRing.isIdempotentElem, Ideal.isIdempotentElem_iff_eq_bot_or_top_of_isLocalRing, isIdempotentElem_iff_mul_one_sub_self, OrthogonalIdempotents.unique",
-   "date": "2026-10-10",
-   "verdict": "no match"
-  },
-  {
-   "tool": "loogle",
-   "query": "IsLocalRing, IsIdempotentElem",
-   "results": "Ideal.isIdempotentElem_iff_eq_bot_or_top_of_isLocalRing (Mathlib.RingTheory.Filtration; ideals only)",
-   "date": "2026-10-10",
-   "verdict": "no match"
-  },
-  {
-   "tool": "grep",
-   "query": "grep -rn 'dempotent' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/LocalRing/ ; grep -rln IsLocalRing ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib | xargs grep -n IsIdempotentElem",
-   "results": "nothing in RingTheory/LocalRing; RingTheory/LocalRing/Basic.lean:106 IsLocalRing.isUnit_or_isUnit_one_sub_self (a : R) : IsUnit a ∨ IsUnit (1 - a) is the ingredient",
-   "date": "2026-10-10",
-   "verdict": "no match; two lines from IsLocalRing.isUnit_or_isUnit_one_sub_self and isIdempotentElem_iff_mul_one_sub_self. slopmaster2 has it closed: IsLocalRing.eq_zero_or_eq_one_of_isIdempotentElem (WeilConjectures/Mathlib/RingTheory/LocalRing/Basic.lean:25, no sorry reached, sorry map 2026-10-10), proof 3 lines using Mathlib only"
-  }
- ],
- "mathlib_match": null,
- "status": "unsplit",
- "merged_into": null,
- "created": {
-  "by": "worker",
-  "item": "lem-weil-pbc-scheme-clopen-idempotent",
-  "date": "2026-10-10"
- },
- "lean_audit": {
-  "master": {
-   "state": "none",
-   "decls": [],
-   "missing": [
-    "IsLocalRing.eq_zero_or_eq_one_of_isIdempotentElem"
-   ]
-  },
-  "slopmaster2": {
-   "state": "closed",
-   "decls": [
+  "stmt_deps": [],
+  "proof": [],
+  "proof_deps": [],
+  "proof_origin": null,
+  "mathlib_searches": [
     {
-     "name": "IsLocalRing.eq_zero_or_eq_one_of_isIdempotentElem",
-     "module": "WeilConjectures.Mathlib.RingTheory.LocalRing.Basic",
-     "lines": [
-      23,
-      29
-     ],
-     "kind": "theorem",
-     "sorry": false
+      "tool": "leansearch",
+      "query": "idempotent element of a local ring is zero or one",
+      "results": "IsIdempotentElem.iff_eq_zero_or_one (Mathlib.Algebra.GroupWithZero.Idempotent; needs IsLeftCancelMulZero, i.e. no zero divisors), Ideal.isIdempotentElem_iff_eq_bot_or_top_of_isLocalRing (ideals, Noetherian), isIdempotentElem_iff_one_sub_mul_self, isIdempotentElem_iff_mul_one_sub_self (Mathlib.Algebra.Ring.Idempotent)",
+      "date": "2026-10-10",
+      "verdict": "no match (the GroupWithZero lemma needs cancellation, which a local ring lacks)"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "In a local ring every idempotent element equals 0 or 1",
+      "results": "IsIdempotentElem.iff_eq_zero_or_one, IsIdempotentElem.of_mul_add, BooleanRing.isIdempotentElem, Ideal.isIdempotentElem_iff_eq_bot_or_top_of_isLocalRing, isIdempotentElem_iff_mul_one_sub_self, OrthogonalIdempotents.unique",
+      "date": "2026-10-10",
+      "verdict": "no match"
+    },
+    {
+      "tool": "loogle",
+      "query": "IsLocalRing, IsIdempotentElem",
+      "results": "Ideal.isIdempotentElem_iff_eq_bot_or_top_of_isLocalRing (Mathlib.RingTheory.Filtration; ideals only)",
+      "date": "2026-10-10",
+      "verdict": "no match"
+    },
+    {
+      "tool": "grep",
+      "query": "grep -rn 'dempotent' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/LocalRing/ ; grep -rln IsLocalRing ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib | xargs grep -n IsIdempotentElem",
+      "results": "nothing in RingTheory/LocalRing; RingTheory/LocalRing/Basic.lean:106 IsLocalRing.isUnit_or_isUnit_one_sub_self (a : R) : IsUnit a ∨ IsUnit (1 - a) is the ingredient",
+      "date": "2026-10-10",
+      "verdict": "no match; two lines from IsLocalRing.isUnit_or_isUnit_one_sub_self and isIdempotentElem_iff_mul_one_sub_self. slopmaster2 has it closed: IsLocalRing.eq_zero_or_eq_one_of_isIdempotentElem (WeilConjectures/Mathlib/RingTheory/LocalRing/Basic.lean:25, no sorry reached, sorry map 2026-10-10), proof 3 lines using Mathlib only"
     }
-   ],
-   "missing": [],
-   "open": []
-  }
- },
- "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1",
- "lean": {
-  "branch": "slopmaster2",
-  "declarations": [
-   "IsLocalRing.eq_zero_or_eq_one_of_isIdempotentElem"
   ],
-  "note": "attached by the lead 2026-10-10: WeilConjectures/Mathlib/RingTheory/LocalRing/Basic.lean:25, three-line proof from IsLocalRing.isUnit_or_isUnit_one_sub_self, reaches no sorry. The consequence clause (e ≠ 0 ⟺ e = 1 ⟺ e a unit) is immediate from e ∈ {0,1} and 0 ≠ 1."
- },
- "reviewed": {
-  "date": "2026-10-10",
-  "by": "L",
-  "result": "accepted",
-  "note": "Statement correct (Stacks 00E9 consequence); Lean attached, sorry-free; closed."
- }
+  "mathlib_match": null,
+  "status": "unsplit",
+  "merged_into": null,
+  "created": {
+    "by": "worker",
+    "item": "lem-weil-pbc-scheme-clopen-idempotent",
+    "date": "2026-10-10"
+  },
+  "lean_audit": {
+    "master": {
+      "state": "none",
+      "decls": [],
+      "missing": [
+        "IsLocalRing.eq_zero_or_eq_one_of_isIdempotentElem"
+      ]
+    },
+    "slopmaster2": {
+      "state": "closed",
+      "decls": [
+        {
+          "name": "IsLocalRing.eq_zero_or_eq_one_of_isIdempotentElem",
+          "module": "WeilConjectures.Mathlib.RingTheory.LocalRing.Basic",
+          "lines": [
+            23,
+            29
+          ],
+          "kind": "theorem",
+          "sorry": false
+        }
+      ],
+      "missing": [],
+      "open": []
+    }
+  },
+  "chapter": "sec-proper-base-change",
+  "unit": "sk-thm-p1",
+  "lean": {
+    "module": "WeilConjectures.Mathlib.RingTheory.LocalRing.Basic",
+    "declaration": "IsLocalRing.eq_zero_or_eq_one_of_isIdempotentElem",
+    "branch": "slopmaster2",
+    "line": 23,
+    "declarations": [
+      "IsLocalRing.eq_zero_or_eq_one_of_isIdempotentElem"
+    ],
+    "sorry_free": true,
+    "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state closed)"
+  },
+  "reviewed": {
+    "date": "2026-10-10",
+    "by": "L",
+    "result": "accepted",
+    "note": "Statement correct (Stacks 00E9 consequence); Lean attached, sorry-free; closed."
+  }
 }

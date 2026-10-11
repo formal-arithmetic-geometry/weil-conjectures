@@ -1,159 +1,170 @@
 {
- "id": "lem-sc-c2",
- "blueprint": {
-  "is": "lem-sc-c2",
-  "from": null,
-  "same_as": null
- },
- "kind": "statement",
- "title": "C2: vanishing on affine curves",
- "statement": "Let $k$ be algebraically closed, let $C$ be a\nsmooth affine connected curve over $k$, and let\n$n$ be a prime. Then the constant sheaf $\\mathbf F_n$ satisfies\n$\\mathcal C_2(C,\\mathbf F_n)$ of\n[def-weil-pbc-eight-curve-assertions]: $H^q(C_{\\Et},\\mathbf F_n)=0$\nfor every $q>1$.",
- "source": {
-  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-p1/lem-sc-c2.md",
-  "place": "node lem-sc-c2, order 1113"
- },
- "stmt_deps": [
-  "def-weil-pbc-eight-curve-assertions",
-  "def-sc-curves"
- ],
- "proof": [
-  {
-   "text": "If $n\\neq\\operatorname{char}k$, this is\n[thm-sc-affine-cohomology]. If $n=\\operatorname{char}k=p>0$,\nthen $\\mathbf F_p$ is $p$-primary and the assertion follows from\n[lem-sc-artin-schreier-dimension] (and\n[lem-sc-affine-cohomological-dimension] directly).",
-   "uses": [
+  "id": "lem-sc-c2",
+  "blueprint": {
+    "is": "lem-sc-c2",
+    "from": null,
+    "same_as": null
+  },
+  "kind": "statement",
+  "title": "C2: vanishing on affine curves",
+  "statement": "Let $k$ be algebraically closed, let $C$ be a\nsmooth affine connected curve over $k$, and let\n$n$ be a prime. Then the constant sheaf $\\mathbf F_n$ satisfies\n$\\mathcal C_2(C,\\mathbf F_n)$ of\n[def-weil-pbc-eight-curve-assertions]: $H^q(C_{\\Et},\\mathbf F_n)=0$\nfor every $q>1$.",
+  "source": {
+    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-p1/lem-sc-c2.md",
+    "place": "node lem-sc-c2, order 1113"
+  },
+  "stmt_deps": [
+    "def-weil-pbc-eight-curve-assertions",
+    "def-sc-curves"
+  ],
+  "proof": [
+    {
+      "text": "If $n\\neq\\operatorname{char}k$, this is\n[thm-sc-affine-cohomology]. If $n=\\operatorname{char}k=p>0$,\nthen $\\mathbf F_p$ is $p$-primary and the assertion follows from\n[lem-sc-artin-schreier-dimension] (and\n[lem-sc-affine-cohomological-dimension] directly).",
+      "uses": [
+        "thm-sc-affine-cohomology",
+        "lem-sc-artin-schreier-dimension",
+        "lem-sc-affine-cohomological-dimension"
+      ],
+      "elementary": false
+    }
+  ],
+  "proof_deps": [
     "thm-sc-affine-cohomology",
     "lem-sc-artin-schreier-dimension",
     "lem-sc-affine-cohomological-dimension"
-   ],
-   "elementary": false
-  }
- ],
- "proof_deps": [
-  "thm-sc-affine-cohomology",
-  "lem-sc-artin-schreier-dimension",
-  "lem-sc-affine-cohomological-dimension"
- ],
- "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-p1/lem-sc-c2.md",
-  "place": "## Proof"
- },
- "mathlib_searches": [
-  {
-   "tool": "leansearch",
-   "query": "étale cohomology of constant finite prime field sheaf on a smooth affine connected curve over an algebraically closed field vanishes in degrees greater than one",
-   "results": "No matching theorem; results were the generic cohomology object CategoryTheory.Sheaf.H (Mathlib.CategoryTheory.Sites.SheafCohomology.Basic) and étale-site definitions AlgebraicGeometry.Scheme.smallEtaleTopology and AlgebraicGeometry.IsEtale.",
-   "date": "2026-10-09",
-   "verdict": "no match"
+  ],
+  "proof_origin": {
+    "by": "agent",
+    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-p1/lem-sc-c2.md",
+    "place": "## Proof"
   },
-  {
-   "tool": "leanfinder",
-   "query": "Affine curves over algebraically closed fields have étale cohomological dimension at most one, so constant torsion sheaf cohomology vanishes above degree one",
-   "results": "No matching étale cohomological-dimension theorem; results were unrelated cotangent-cohomology declarations Algebra.FormallyEtale.subsingleton_h1Cotangent and IsLocalRing.finrank_cotangentSpace_eq_zero.",
-   "date": "2026-10-09",
-   "verdict": "no match"
-  },
-  {
-   "tool": "grep",
-   "query": "rg -n -i \"cohomological dimension|etale cohomology|affine.*curve|sheaf.*cohomology\" /home/ubuntu/Poincare-MorganTian/.work/helpers/codex-m47-line/.lake/packages/mathlib/Mathlib/AlgebraicGeometry /home/ubuntu/Poincare-MorganTian/.work/helpers/codex-m47-line/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites",
-   "results": "No affine-curve étale cohomological-dimension theorem. Grep found generic sheaf cohomology in Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean and Mayer-Vietoris infrastructure in Mathlib/CategoryTheory/Sites/MayerVietorisSquare.lean and Mathlib/CategoryTheory/Sites/SheafCohomology/MayerVietoris.lean.",
-   "date": "2026-10-09",
-   "verdict": "no match"
-  }
- ],
- "mathlib_match": null,
- "status": "split",
- "merged_into": null,
- "import_flags": [],
- "blueprint_kind": "lemma",
- "blueprint_order": 1113,
- "blueprint_uses": [
-  "def-sc-curves",
-  "def-weil-pbc-eight-curve-assertions",
-  "lem-sc-affine-cohomological-dimension",
-  "lem-sc-artin-schreier-dimension",
-  "thm-sc-affine-cohomology"
- ],
- "uses_not_cited": [
-  "def-sc-curves"
- ],
- "proof_split_by": "paragraphs",
- "lean_audit": {
-  "master": {
-   "state": "none",
-   "decls": [],
-   "missing": []
-  },
-  "slopmaster2": {
-   "state": "rests_on_sorry",
-   "decls": [
+  "mathlib_searches": [
     {
-     "name": "AlgebraicGeometry.IsCurve.subsingleton_sheafH_constantModSheaf_of_one_lt_of_isAffine",
-     "module": "WeilConjectures.AlgebraicGeometry.Curve.SmoothCalculations",
-     "lines": [
-      105,
-      116
-     ],
-     "kind": "theorem",
-     "sorry": false
-    }
-   ],
-   "missing": [],
-   "open": [
-    {
-     "name": "AlgebraicGeometry.Etale.unitComparison_app_isColimit_of_isLimit",
-     "module": "WeilConjectures.AlgebraicGeometry.Sites.SectionContinuity",
-     "lines": [
-      74,
-      102
-     ],
-     "kind": "theorem",
-     "nodes": [],
-     "below": false
+      "tool": "leansearch",
+      "query": "étale cohomology of constant finite prime field sheaf on a smooth affine connected curve over an algebraically closed field vanishes in degrees greater than one",
+      "results": "No matching theorem; results were the generic cohomology object CategoryTheory.Sheaf.H (Mathlib.CategoryTheory.Sites.SheafCohomology.Basic) and étale-site definitions AlgebraicGeometry.Scheme.smallEtaleTopology and AlgebraicGeometry.IsEtale.",
+      "date": "2026-10-09",
+      "verdict": "no match"
     },
     {
-     "name": "AlgebraicGeometry.IsConnectedCurve.subsingleton_sheafH_two_lowerStar",
-     "module": "WeilConjectures.AlgebraicGeometry.Curve.Affine",
-     "lines": [
-      333,
-      353
-     ],
-     "kind": "theorem",
-     "nodes": [],
-     "below": false
+      "tool": "leanfinder",
+      "query": "Affine curves over algebraically closed fields have étale cohomological dimension at most one, so constant torsion sheaf cohomology vanishes above degree one",
+      "results": "No matching étale cohomological-dimension theorem; results were unrelated cotangent-cohomology declarations Algebra.FormallyEtale.subsingleton_h1Cotangent and IsLocalRing.finrank_cotangentSpace_eq_zero.",
+      "date": "2026-10-09",
+      "verdict": "no match"
     },
     {
-     "name": "AlgebraicGeometry.Scheme.H_map_isColimit_of_isFiltered",
-     "module": "WeilConjectures.AlgebraicGeometry.Curve.Reductions",
-     "lines": [
-      68,
-      86
-     ],
-     "kind": "theorem",
-     "nodes": [
-      "lemma-weil-pbc-curve-filtered-cohomology"
-     ],
-     "below": false
+      "tool": "grep",
+      "query": "rg -n -i \"cohomological dimension|etale cohomology|affine.*curve|sheaf.*cohomology\" /home/ubuntu/Poincare-MorganTian/.work/helpers/codex-m47-line/.lake/packages/mathlib/Mathlib/AlgebraicGeometry /home/ubuntu/Poincare-MorganTian/.work/helpers/codex-m47-line/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites",
+      "results": "No affine-curve étale cohomological-dimension theorem. Grep found generic sheaf cohomology in Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean and Mayer-Vietoris infrastructure in Mathlib/CategoryTheory/Sites/MayerVietorisSquare.lean and Mathlib/CategoryTheory/Sites/SheafCohomology/MayerVietoris.lean.",
+      "date": "2026-10-09",
+      "verdict": "no match"
     }
-   ]
+  ],
+  "mathlib_match": null,
+  "status": "split",
+  "merged_into": null,
+  "import_flags": [],
+  "blueprint_kind": "lemma",
+  "blueprint_order": 1113,
+  "blueprint_uses": [
+    "def-sc-curves",
+    "def-weil-pbc-eight-curve-assertions",
+    "lem-sc-affine-cohomological-dimension",
+    "lem-sc-artin-schreier-dimension",
+    "thm-sc-affine-cohomology"
+  ],
+  "uses_not_cited": [
+    "def-sc-curves"
+  ],
+  "proof_split_by": "paragraphs",
+  "lean_audit": {
+    "master": {
+      "state": "none",
+      "decls": [],
+      "missing": []
+    },
+    "slopmaster2": {
+      "state": "rests_on_sorry",
+      "decls": [
+        {
+          "name": "AlgebraicGeometry.IsCurve.subsingleton_sheafH_constantModSheaf_of_one_lt_of_isAffine",
+          "module": "WeilConjectures.AlgebraicGeometry.Curve.SmoothCalculations",
+          "lines": [
+            105,
+            116
+          ],
+          "kind": "theorem",
+          "sorry": false
+        }
+      ],
+      "missing": [],
+      "open": [
+        {
+          "name": "AlgebraicGeometry.Etale.unitComparison_app_isColimit_of_isLimit",
+          "module": "WeilConjectures.AlgebraicGeometry.Sites.SectionContinuity",
+          "lines": [
+            74,
+            102
+          ],
+          "kind": "theorem",
+          "nodes": [],
+          "below": false
+        },
+        {
+          "name": "AlgebraicGeometry.IsConnectedCurve.subsingleton_sheafH_two_lowerStar",
+          "module": "WeilConjectures.AlgebraicGeometry.Curve.Affine",
+          "lines": [
+            333,
+            353
+          ],
+          "kind": "theorem",
+          "nodes": [],
+          "below": false
+        },
+        {
+          "name": "AlgebraicGeometry.Scheme.H_map_isColimit_of_isFiltered",
+          "module": "WeilConjectures.AlgebraicGeometry.Curve.Reductions",
+          "lines": [
+            68,
+            86
+          ],
+          "kind": "theorem",
+          "nodes": [
+            "lemma-weil-pbc-curve-filtered-cohomology"
+          ],
+          "below": false
+        }
+      ]
+    }
+  },
+  "chapter": "sec-proper-base-change",
+  "unit": "sk-thm-p1",
+  "tool_uses": [
+    "thm-sc-affine-cohomology",
+    "lem-sc-affine-cohomological-dimension"
+  ],
+  "split_report": {
+    "date": "2026-10-09",
+    "item": "lem-sc-c2",
+    "worker": "stage1",
+    "summary": "Checked the imported C2 statement against the blueprint node and the sk-thm-p1 unit. Its single proof paragraph is complete at this level: the prime-to-characteristic case uses thm-sc-affine-cohomology, while the characteristic-p case uses lem-sc-artin-schreier-dimension together with lem-sc-affine-cohomological-dimension. The existing statement dependencies and proof dependencies are exact, and no new DAG node is needed. LeanSearch, LeanFinder, Loogle, and a read-only Mathlib source grep found only generic sheaf-cohomology infrastructure, not the required étale affine-curve vanishing theorem."
+  },
+  "reviewed": {
+    "date": "2026-10-09",
+    "by": "L",
+    "group": "C",
+    "result": "pass",
+    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of C"
+  },
+  "lean": {
+    "module": "WeilConjectures.AlgebraicGeometry.Curve.SmoothCalculations",
+    "declaration": "AlgebraicGeometry.IsCurve.subsingleton_sheafH_constantModSheaf_of_one_lt_of_isAffine",
+    "branch": "slopmaster2",
+    "line": 105,
+    "declarations": [
+      "AlgebraicGeometry.IsCurve.subsingleton_sheafH_constantModSheaf_of_one_lt_of_isAffine"
+    ],
+    "sorry_free": false,
+    "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state rests_on_sorry)"
   }
- },
- "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1",
- "tool_uses": [
-  "thm-sc-affine-cohomology",
-  "lem-sc-affine-cohomological-dimension"
- ],
- "split_report": {
-  "date": "2026-10-09",
-  "item": "lem-sc-c2",
-  "worker": "stage1",
-  "summary": "Checked the imported C2 statement against the blueprint node and the sk-thm-p1 unit. Its single proof paragraph is complete at this level: the prime-to-characteristic case uses thm-sc-affine-cohomology, while the characteristic-p case uses lem-sc-artin-schreier-dimension together with lem-sc-affine-cohomological-dimension. The existing statement dependencies and proof dependencies are exact, and no new DAG node is needed. LeanSearch, LeanFinder, Loogle, and a read-only Mathlib source grep found only generic sheaf-cohomology infrastructure, not the required étale affine-curve vanishing theorem."
- },
- "reviewed": {
-  "date": "2026-10-09",
-  "by": "L",
-  "group": "C",
-  "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of C"
- }
 }

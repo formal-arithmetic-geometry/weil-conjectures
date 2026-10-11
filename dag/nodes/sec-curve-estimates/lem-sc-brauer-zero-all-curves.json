@@ -1,232 +1,243 @@
 {
- "id": "lem-sc-brauer-zero-all-curves",
- "blueprint": {
-  "is": "lem-sc-brauer-zero-all-curves",
-  "from": null,
-  "same_as": []
- },
- "kind": "statement",
- "title": "The Brauer group of an arbitrary curve",
- "statement": "Let $C$ be a curve over algebraically closed $k$ in the sense of\n[def-sc-curves]; $C$ may be singular, non-reduced, disconnected or\nhave zero-dimensional components. Then its Brauer group ([def-br])\nvanishes:\n\n$$\nH^2(C_{\\Et},\\mathbf G_m)=0,\n$$\n\nwith cohomology as in [def-weil-pbc-etale-cohomology].",
- "source": {
-  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lem-sc-brauer-zero-all-curves.md",
-  "place": "node lem-sc-brauer-zero-all-curves, order 960"
- },
- "stmt_deps": [
-  "def-sc-curves",
-  "def-br",
-  "def-weil-pbc-etale-cohomology"
- ],
- "proof": [
-  {
-   "text": "Throughout we use two standard facts about a closed immersion\n$i:Z\\to X$. First, $i_*$ is exact on etale abelian sheaves:\n$(i_*G)_{\\bar x}$ is $G_{\\bar x}$ if $\\bar x$ lies over a point of\n$Z$ and $0$ otherwise. Second, $i_*$ has the exact left adjoint\n$i^*$, so it preserves injectives and\n$H^q(X,i_*G)=H^q(Z,G)$. The same two facts hold for a finite\nmorphism $\\nu$. Its direct image is exact because\n$(\\nu_*G)_{\\bar x}=\\bigoplus_{\\bar y\\mapsto\\bar x}G_{\\bar y}$\n(*classical: Stacks Project, Etale Cohomology, section on finite\nmorphisms*), so $H^q(X,\\nu_*G)=H^q(X',G)$.",
-   "uses": [
+  "id": "lem-sc-brauer-zero-all-curves",
+  "blueprint": {
+    "is": "lem-sc-brauer-zero-all-curves",
+    "from": null,
+    "same_as": []
+  },
+  "kind": "statement",
+  "title": "The Brauer group of an arbitrary curve",
+  "statement": "Let $C$ be a curve over algebraically closed $k$ in the sense of\n[def-sc-curves]; $C$ may be singular, non-reduced, disconnected or\nhave zero-dimensional components. Then its Brauer group ([def-br])\nvanishes:\n\n$$\nH^2(C_{\\Et},\\mathbf G_m)=0,\n$$\n\nwith cohomology as in [def-weil-pbc-etale-cohomology].",
+  "source": {
+    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lem-sc-brauer-zero-all-curves.md",
+    "place": "node lem-sc-brauer-zero-all-curves, order 960"
+  },
+  "stmt_deps": [
+    "def-sc-curves",
+    "def-br",
+    "def-weil-pbc-etale-cohomology"
+  ],
+  "proof": [
+    {
+      "text": "Throughout we use two standard facts about a closed immersion\n$i:Z\\to X$. First, $i_*$ is exact on etale abelian sheaves:\n$(i_*G)_{\\bar x}$ is $G_{\\bar x}$ if $\\bar x$ lies over a point of\n$Z$ and $0$ otherwise. Second, $i_*$ has the exact left adjoint\n$i^*$, so it preserves injectives and\n$H^q(X,i_*G)=H^q(Z,G)$. The same two facts hold for a finite\nmorphism $\\nu$. Its direct image is exact because\n$(\\nu_*G)_{\\bar x}=\\bigoplus_{\\bar y\\mapsto\\bar x}G_{\\bar y}$\n(*classical: Stacks Project, Etale Cohomology, section on finite\nmorphisms*), so $H^q(X,\\nu_*G)=H^q(X',G)$.",
+      "uses": [
+        "lemma-weil-pbc-finite-direct-image-exact",
+        "lem-weil-pbc-finite-pushforward-cohomology"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/etale-cohomology.tex",
+        "place": "Section 03SB, Proposition 03QP and proof of Lemma 0A5E"
+      }
+    },
+    {
+      "text": "*Step 1 (reduction to $C$ reduced).* Let $\\mathcal N\\subseteq\\mathcal O_C$\nbe the nilradical. It is a coherent ideal with $\\mathcal N^m=0$ for\nsome $m$, since $C$ is noetherian. Let $i:C_{\\rm red}\\to C$ be the\nclosed immersion. For an etale $u:V\\to C$, the morphism $u$ is flat,\nso $u^*\\mathcal N=\\mathcal N\\mathcal O_V$ is the ideal of\n$V\\times_CC_{\\rm red}$. This scheme is etale over the reduced scheme\n$C_{\\rm red}$, hence reduced by [etale-proposition-etale-reduced], so it is $V_{\\rm red}$. Hence, with the\netale sheaves of [def-sc-etale-qcoherent-module], there is a\nsequence of etale sheaves on $C$\n\n$$\n1\\longrightarrow1+\\mathcal N_{\\rm et}\\longrightarrow\\mathbf G_{m,C}\n\\longrightarrow i_*\\mathbf G_{m,C_{\\rm red}}\\longrightarrow1 .\n$$\n\nIt is exact on every affine etale $V$: the map\n$\\mathcal O(V)\\to\\mathcal O(V_{\\rm red})$ is surjective, and an element\nlifting a unit modulo a nilpotent ideal is a unit. Hence it is\nexact as a sequence of sheaves. For $j\\ge1$ the map\n$1+a\\mapsto a$ induces an isomorphism of abelian sheaves\n\n$$\n(1+\\mathcal N^j_{\\rm et})/(1+\\mathcal N^{j+1}_{\\rm et})\n\\xrightarrow{\\ \\sim\\ }(\\mathcal N^j/\\mathcal N^{j+1})_{\\rm et}.\n$$\n\nIt is a homomorphism because $(1+a)(1+b)=1+a+b+ab$ with\n$ab\\in\\mathcal N^{2j}\\subseteq\\mathcal N^{j+1}$. It is surjective, and\nits kernel is $1+\\mathcal N^{j+1}_{\\rm et}$. Both claims can be checked\non affine etale $V$, where $u$ is flat and so\n$0\\to u^*\\mathcal N^{j+1}\\to u^*\\mathcal N^j\\to\nu^*(\\mathcal N^j/\\mathcal N^{j+1})\\to0$ is exact.",
+      "uses": [
+        "def-sc-etale-qcoherent-module",
+        "etale-proposition-etale-reduced"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lem-sc-brauer-zero-all-curves.md",
+        "place": "## Proof, Step 1 (reduction to C reduced)"
+      }
+    },
+    {
+      "text": "*Claim.* For every quasi-coherent $\\mathcal O_C$-module $\\mathcal F$,\n$H^q(C_{\\Et},\\mathcal F_{\\rm et})=0$ for $q\\ge2$. Indeed, let\n$\\mathfrak U=\\{U_1,\\dots,U_r\\}$ be a finite affine open covering of\nthe quasi-compact scheme $C$. Since $C$ is separated, all finite\nintersections $U_{i_0}\\cap\\dots\\cap U_{i_p}$ are affine. By\n[lem-sc-etale-affine-qcoherent], $\\mathcal F_{\\rm et}$ has no higher\ncohomology on them. So the spectral sequence of [lem-sc-cech-spectral]\ndegenerates and gives\n$H^q(C_{\\Et},\\mathcal F_{\\rm et})=\\check H^q(\\mathfrak U,\\mathcal F)$.\nThe same argument on the Zariski site, which [lem-sc-cech-spectral]\nalso covers, uses [pqf-lem-affine-vanishing] on affine intersections and\nidentifies this Cech group with the Zariski group $H^q(C,\\mathcal F)$.\nBy [lem-sc-noetherian-cohomology-above-dimension], this group vanishes\nfor $q>\\dim C$, and hence for $q\\ge2$ because $\\dim C\\le1$.\n\nBy the claim, $H^2(C,(\\mathcal N^j/\\mathcal N^{j+1})_{\\rm et})=0$ for\nevery $j$. Descending induction on $j$ gives\n$H^2(C,1+\\mathcal N^j_{\\rm et})=0$ for all $j\\ge1$: the case\n$j\\ge m$ is the trivial sheaf, and the inductive step uses the\nlong exact sequence of\n$1\\to1+\\mathcal N^{j+1}_{\\rm et}\\to1+\\mathcal N^j_{\\rm et}\n\\to(\\mathcal N^j/\\mathcal N^{j+1})_{\\rm et}\\to0$. The long exact\nsequence of the first display, together with\n$H^2(C,i_*\\mathbf G_m)=H^2(C_{\\rm red},\\mathbf G_m)$, now gives an\ninjection\n\n$$\nH^2(C,\\mathbf G_m)\\hookrightarrow H^2(C_{\\rm red},\\mathbf G_m).\n$$\n\nSince $C_{\\rm red}$ is again a curve, we may assume $C$ reduced.",
+      "uses": [
+        "lem-sc-etale-affine-qcoherent",
+        "lem-sc-cech-spectral",
+        "lem-sc-noetherian-cohomology-above-dimension",
+        "pqf-lem-affine-vanishing"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lem-sc-brauer-zero-all-curves.md",
+        "place": "## Proof, Claim and Step 1"
+      }
+    },
+    {
+      "text": "*Step 2 (normalization).* Let $C$ be reduced with irreducible\ncomponents $X_1,\\dots,X_r$, taken with their reduced structure. These\nare integral schemes of finite type over $k$ of dimension at most\none. Let $\\nu_i:X_i^{\\nu}\\to X_i$ be the normalization\n([def-sc-normalization]), put $C':=\\coprod_iX_i^{\\nu}$, and let\n$\\nu:C'\\to C$ be the induced morphism. By [lem-sc-normalization-exists]\neach $\\nu_i$ is finite, surjective and birational, so $\\nu$ is finite\nand surjective. Each $X_i^{\\nu}$ is described as follows.\n- If $\\dim X_i=0$, then $X_i$ is the spectrum of a finite field\n  extension of $k$, so $X_i=X_i^{\\nu}=\\operatorname{Spec}k$.\n- If $\\dim X_i=1$, then $X_i^{\\nu}$ is a smooth ([lem-sc-normalized-curve-smooth],\n  $k$ being perfect), integral, one-dimensional scheme. It is\n  separated and of finite type, being finite over $C$. So it is a\n  smooth separated connected curve.\n\nConsider the map $\\mathbf G_{m,C}\\to\\nu_*\\mathbf G_{m,C'}$. It is\ninjective. Let $V\\to C$ be etale and $f\\in\\mathcal O(V)^\\times$ with\n$f=1$ on $V\\times_CC'$. Then $f-1$ vanishes in the residue field of\nevery point of $V\\times_CC'$. This scheme surjects onto $V$, and residue\nfields only grow, so $f-1$ vanishes at every point of $V$. Since $V$ is etale over the reduced $C$, it is\nreduced by [etale-proposition-etale-reduced], so $f=1$. Let $\\mathcal Q$ be\nthe cokernel, so that\n\n$$\n1\\longrightarrow\\mathbf G_{m,C}\\longrightarrow\\nu_*\\mathbf G_{m,C'}\n\\longrightarrow\\mathcal Q\\longrightarrow1\n$$\n\nis exact. Let $Z\\subseteq C$ be the support of the coherent\n$\\mathcal O_C$-module $\\nu_*\\mathcal O_{C'}/\\mathcal O_C$. It is\nclosed. It contains no generic point $\\xi_i$ of a component. Indeed\n$\\mathcal O_{C,\\xi_i}$ is a reduced zero-dimensional local ring,\nhence the field $k(X_i)$. Over $\\operatorname{Spec}k(X_i)$ the map\n$\\nu$ is the birational map\n$\\operatorname{Spec}k(X_i)\\to\\operatorname{Spec}k(X_i)$, since the\n$X_j^{\\nu}$ with $j\\neq i$ lie over $X_j\\not\\ni\\xi_i$. So $Z$ is a proper\nclosed subset of each component. It is therefore a finite set of\nclosed points, a proper closed subset of an irreducible scheme of\ndimension at most one being finite. Over $U:=C\\setminus Z$ we have\n$\\nu_*\\mathcal O_{C'}|_U=\\mathcal O_U$. Since $\\nu$ is affine,\n$\\nu^{-1}(U)\\to U$ is an isomorphism. Hence $\\mathcal Q|_U=0$, because\n$\\nu_*$ commutes with restriction to the etale $U$. Give $Z$ its\nreduced structure, so that $Z\\cong\\coprod_{z\\in Z}\\operatorname{Spec}k$,\nand let $i_Z:Z\\to C$. Then $\\mathcal Q\\to i_{Z*}i_Z^*\\mathcal Q$ is\nan isomorphism, as one checks on geometric stalks. For $q\\ge1$ this\ngives\n\n$$\nH^q(C,\\mathcal Q)=H^q(Z,i_Z^*\\mathcal Q)\n=\\prod_{z\\in Z}H^q(\\operatorname{Spec}k,(i_Z^*\\mathcal Q)_z)=0.\n$$\n\nThe last equality holds by [lem-kun-03qu-sep-closed], applied to the\ncoefficient sheaf $(i_Z^*\\mathcal Q)_z$ on\n$\\operatorname{Spec}k$ (an algebraically closed field is separably\nclosed). The long exact sequence of\nthe last display, together with\n$H^2(C,\\nu_*\\mathbf G_{m,C'})=H^2(C',\\mathbf G_m)$, gives\n\n$$\n0=H^1(C,\\mathcal Q)\\longrightarrow H^2(C,\\mathbf G_m)\n\\longrightarrow H^2(C',\\mathbf G_m)\n=\\prod_iH^2(X_i^{\\nu},\\mathbf G_m).\n$$\n\nA factor with $X_i^{\\nu}=\\operatorname{Spec}k$ is zero by\n[lem-kun-03qu-sep-closed], applied to $\\mathbf G_m$. A factor with $X_i^{\\nu}$ a smooth\nseparated connected curve is zero by [lem-sc-brauer-zero]. Hence\n$H^2(C,\\mathbf G_m)=0$. (This is the classical vanishing of the\nBrauer group of a curve over an algebraically closed field:\n*reference: Grothendieck, Le groupe de Brauer III; Milne, Etale\nCohomology, Ch. III*.)",
+      "uses": [
+        "def-sc-normalization",
+        "lem-sc-normalization-exists",
+        "lem-sc-normalized-curve-smooth",
+        "lem-kun-03qu-sep-closed",
+        "lem-sc-brauer-zero",
+        "etale-proposition-etale-reduced"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lem-sc-brauer-zero-all-curves.md",
+        "place": "## Proof, Step 2 (normalization)"
+      }
+    }
+  ],
+  "proof_deps": [
     "lemma-weil-pbc-finite-direct-image-exact",
-    "lem-weil-pbc-finite-pushforward-cohomology"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Section 03SB, Proposition 03QP and proof of Lemma 0A5E"
-   }
-  },
-  {
-   "text": "*Step 1 (reduction to $C$ reduced).* Let $\\mathcal N\\subseteq\\mathcal O_C$\nbe the nilradical. It is a coherent ideal with $\\mathcal N^m=0$ for\nsome $m$, since $C$ is noetherian. Let $i:C_{\\rm red}\\to C$ be the\nclosed immersion. For an etale $u:V\\to C$, the morphism $u$ is flat,\nso $u^*\\mathcal N=\\mathcal N\\mathcal O_V$ is the ideal of\n$V\\times_CC_{\\rm red}$. This scheme is etale over the reduced scheme\n$C_{\\rm red}$, hence reduced by [etale-proposition-etale-reduced], so it is $V_{\\rm red}$. Hence, with the\netale sheaves of [def-sc-etale-qcoherent-module], there is a\nsequence of etale sheaves on $C$\n\n$$\n1\\longrightarrow1+\\mathcal N_{\\rm et}\\longrightarrow\\mathbf G_{m,C}\n\\longrightarrow i_*\\mathbf G_{m,C_{\\rm red}}\\longrightarrow1 .\n$$\n\nIt is exact on every affine etale $V$: the map\n$\\mathcal O(V)\\to\\mathcal O(V_{\\rm red})$ is surjective, and an element\nlifting a unit modulo a nilpotent ideal is a unit. Hence it is\nexact as a sequence of sheaves. For $j\\ge1$ the map\n$1+a\\mapsto a$ induces an isomorphism of abelian sheaves\n\n$$\n(1+\\mathcal N^j_{\\rm et})/(1+\\mathcal N^{j+1}_{\\rm et})\n\\xrightarrow{\\ \\sim\\ }(\\mathcal N^j/\\mathcal N^{j+1})_{\\rm et}.\n$$\n\nIt is a homomorphism because $(1+a)(1+b)=1+a+b+ab$ with\n$ab\\in\\mathcal N^{2j}\\subseteq\\mathcal N^{j+1}$. It is surjective, and\nits kernel is $1+\\mathcal N^{j+1}_{\\rm et}$. Both claims can be checked\non affine etale $V$, where $u$ is flat and so\n$0\\to u^*\\mathcal N^{j+1}\\to u^*\\mathcal N^j\\to\nu^*(\\mathcal N^j/\\mathcal N^{j+1})\\to0$ is exact.",
-   "uses": [
+    "lem-weil-pbc-finite-pushforward-cohomology",
     "def-sc-etale-qcoherent-module",
-    "etale-proposition-etale-reduced"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lem-sc-brauer-zero-all-curves.md",
-    "place": "## Proof, Step 1 (reduction to C reduced)"
-   }
-  },
-  {
-   "text": "*Claim.* For every quasi-coherent $\\mathcal O_C$-module $\\mathcal F$,\n$H^q(C_{\\Et},\\mathcal F_{\\rm et})=0$ for $q\\ge2$. Indeed, let\n$\\mathfrak U=\\{U_1,\\dots,U_r\\}$ be a finite affine open covering of\nthe quasi-compact scheme $C$. Since $C$ is separated, all finite\nintersections $U_{i_0}\\cap\\dots\\cap U_{i_p}$ are affine. By\n[lem-sc-etale-affine-qcoherent], $\\mathcal F_{\\rm et}$ has no higher\ncohomology on them. So the spectral sequence of [lem-sc-cech-spectral]\ndegenerates and gives\n$H^q(C_{\\Et},\\mathcal F_{\\rm et})=\\check H^q(\\mathfrak U,\\mathcal F)$.\nThe same argument on the Zariski site, which [lem-sc-cech-spectral]\nalso covers, uses [pqf-lem-affine-vanishing] on affine intersections and\nidentifies this Cech group with the Zariski group $H^q(C,\\mathcal F)$.\nBy [lem-sc-noetherian-cohomology-above-dimension], this group vanishes\nfor $q>\\dim C$, and hence for $q\\ge2$ because $\\dim C\\le1$.\n\nBy the claim, $H^2(C,(\\mathcal N^j/\\mathcal N^{j+1})_{\\rm et})=0$ for\nevery $j$. Descending induction on $j$ gives\n$H^2(C,1+\\mathcal N^j_{\\rm et})=0$ for all $j\\ge1$: the case\n$j\\ge m$ is the trivial sheaf, and the inductive step uses the\nlong exact sequence of\n$1\\to1+\\mathcal N^{j+1}_{\\rm et}\\to1+\\mathcal N^j_{\\rm et}\n\\to(\\mathcal N^j/\\mathcal N^{j+1})_{\\rm et}\\to0$. The long exact\nsequence of the first display, together with\n$H^2(C,i_*\\mathbf G_m)=H^2(C_{\\rm red},\\mathbf G_m)$, now gives an\ninjection\n\n$$\nH^2(C,\\mathbf G_m)\\hookrightarrow H^2(C_{\\rm red},\\mathbf G_m).\n$$\n\nSince $C_{\\rm red}$ is again a curve, we may assume $C$ reduced.",
-   "uses": [
     "lem-sc-etale-affine-qcoherent",
-    "lem-sc-cech-spectral",
     "lem-sc-noetherian-cohomology-above-dimension",
-    "pqf-lem-affine-vanishing"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lem-sc-brauer-zero-all-curves.md",
-    "place": "## Proof, Claim and Step 1"
-   }
-  },
-  {
-   "text": "*Step 2 (normalization).* Let $C$ be reduced with irreducible\ncomponents $X_1,\\dots,X_r$, taken with their reduced structure. These\nare integral schemes of finite type over $k$ of dimension at most\none. Let $\\nu_i:X_i^{\\nu}\\to X_i$ be the normalization\n([def-sc-normalization]), put $C':=\\coprod_iX_i^{\\nu}$, and let\n$\\nu:C'\\to C$ be the induced morphism. By [lem-sc-normalization-exists]\neach $\\nu_i$ is finite, surjective and birational, so $\\nu$ is finite\nand surjective. Each $X_i^{\\nu}$ is described as follows.\n- If $\\dim X_i=0$, then $X_i$ is the spectrum of a finite field\n  extension of $k$, so $X_i=X_i^{\\nu}=\\operatorname{Spec}k$.\n- If $\\dim X_i=1$, then $X_i^{\\nu}$ is a smooth ([lem-sc-normalized-curve-smooth],\n  $k$ being perfect), integral, one-dimensional scheme. It is\n  separated and of finite type, being finite over $C$. So it is a\n  smooth separated connected curve.\n\nConsider the map $\\mathbf G_{m,C}\\to\\nu_*\\mathbf G_{m,C'}$. It is\ninjective. Let $V\\to C$ be etale and $f\\in\\mathcal O(V)^\\times$ with\n$f=1$ on $V\\times_CC'$. Then $f-1$ vanishes in the residue field of\nevery point of $V\\times_CC'$. This scheme surjects onto $V$, and residue\nfields only grow, so $f-1$ vanishes at every point of $V$. Since $V$ is etale over the reduced $C$, it is\nreduced by [etale-proposition-etale-reduced], so $f=1$. Let $\\mathcal Q$ be\nthe cokernel, so that\n\n$$\n1\\longrightarrow\\mathbf G_{m,C}\\longrightarrow\\nu_*\\mathbf G_{m,C'}\n\\longrightarrow\\mathcal Q\\longrightarrow1\n$$\n\nis exact. Let $Z\\subseteq C$ be the support of the coherent\n$\\mathcal O_C$-module $\\nu_*\\mathcal O_{C'}/\\mathcal O_C$. It is\nclosed. It contains no generic point $\\xi_i$ of a component. Indeed\n$\\mathcal O_{C,\\xi_i}$ is a reduced zero-dimensional local ring,\nhence the field $k(X_i)$. Over $\\operatorname{Spec}k(X_i)$ the map\n$\\nu$ is the birational map\n$\\operatorname{Spec}k(X_i)\\to\\operatorname{Spec}k(X_i)$, since the\n$X_j^{\\nu}$ with $j\\neq i$ lie over $X_j\\not\\ni\\xi_i$. So $Z$ is a proper\nclosed subset of each component. It is therefore a finite set of\nclosed points, a proper closed subset of an irreducible scheme of\ndimension at most one being finite. Over $U:=C\\setminus Z$ we have\n$\\nu_*\\mathcal O_{C'}|_U=\\mathcal O_U$. Since $\\nu$ is affine,\n$\\nu^{-1}(U)\\to U$ is an isomorphism. Hence $\\mathcal Q|_U=0$, because\n$\\nu_*$ commutes with restriction to the etale $U$. Give $Z$ its\nreduced structure, so that $Z\\cong\\coprod_{z\\in Z}\\operatorname{Spec}k$,\nand let $i_Z:Z\\to C$. Then $\\mathcal Q\\to i_{Z*}i_Z^*\\mathcal Q$ is\nan isomorphism, as one checks on geometric stalks. For $q\\ge1$ this\ngives\n\n$$\nH^q(C,\\mathcal Q)=H^q(Z,i_Z^*\\mathcal Q)\n=\\prod_{z\\in Z}H^q(\\operatorname{Spec}k,(i_Z^*\\mathcal Q)_z)=0.\n$$\n\nThe last equality holds by [lem-kun-03qu-sep-closed], applied to the\ncoefficient sheaf $(i_Z^*\\mathcal Q)_z$ on\n$\\operatorname{Spec}k$ (an algebraically closed field is separably\nclosed). The long exact sequence of\nthe last display, together with\n$H^2(C,\\nu_*\\mathbf G_{m,C'})=H^2(C',\\mathbf G_m)$, gives\n\n$$\n0=H^1(C,\\mathcal Q)\\longrightarrow H^2(C,\\mathbf G_m)\n\\longrightarrow H^2(C',\\mathbf G_m)\n=\\prod_iH^2(X_i^{\\nu},\\mathbf G_m).\n$$\n\nA factor with $X_i^{\\nu}=\\operatorname{Spec}k$ is zero by\n[lem-kun-03qu-sep-closed], applied to $\\mathbf G_m$. A factor with $X_i^{\\nu}$ a smooth\nseparated connected curve is zero by [lem-sc-brauer-zero]. Hence\n$H^2(C,\\mathbf G_m)=0$. (This is the classical vanishing of the\nBrauer group of a curve over an algebraically closed field:\n*reference: Grothendieck, Le groupe de Brauer III; Milne, Etale\nCohomology, Ch. III*.)",
-   "uses": [
+    "pqf-lem-affine-vanishing",
+    "lem-sc-cech-spectral",
     "def-sc-normalization",
     "lem-sc-normalization-exists",
     "lem-sc-normalized-curve-smooth",
     "lem-kun-03qu-sep-closed",
-    "lem-sc-brauer-zero",
-    "etale-proposition-etale-reduced"
-   ],
-   "elementary": false,
-   "source": {
+    "etale-proposition-etale-reduced",
+    "lem-sc-brauer-zero"
+  ],
+  "proof_origin": {
+    "by": "agent",
     "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lem-sc-brauer-zero-all-curves.md",
-    "place": "## Proof, Step 2 (normalization)"
-   }
-  }
- ],
- "proof_deps": [
-  "lemma-weil-pbc-finite-direct-image-exact",
-  "lem-weil-pbc-finite-pushforward-cohomology",
-  "def-sc-etale-qcoherent-module",
-  "lem-sc-etale-affine-qcoherent",
-  "lem-sc-noetherian-cohomology-above-dimension",
-  "pqf-lem-affine-vanishing",
-  "lem-sc-cech-spectral",
-  "def-sc-normalization",
-  "lem-sc-normalization-exists",
-  "lem-sc-normalized-curve-smooth",
-  "lem-kun-03qu-sep-closed",
-  "etale-proposition-etale-reduced",
-  "lem-sc-brauer-zero"
- ],
- "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lem-sc-brauer-zero-all-curves.md",
-  "place": "## Proof"
- },
- "mathlib_searches": [
-  {
-   "tool": "leansearch",
-   "query": "Brauer group H^2 of every possibly singular nonreduced curve over an algebraically closed field",
-   "results": "No Mathlib declaration about etale cohomological Brauer groups of schemes or curves",
-   "date": "2026-10-10",
-   "verdict": "no match"
+    "place": "## Proof"
   },
-  {
-   "tool": "leanfinder",
-   "query": "vanishing of second etale cohomology of G_m on an arbitrary curve over an algebraically closed field",
-   "results": "No declaration matching scheme etale cohomology or cohomological Brauer groups; only generic sheaf cohomology infrastructure",
-   "date": "2026-10-10",
-   "verdict": "no match"
-  },
-  {
-   "tool": "grep",
-   "query": "rg -n CohomologicalBrauerGroup\\|BrauerGroup\\|Sheaf.H.*Gm ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Mathlib",
-   "results": "No Mathlib source declaration for cohomological Brauer groups of schemes or curves",
-   "date": "2026-10-10",
-   "verdict": "no match"
-  }
- ],
- "mathlib_match": null,
- "status": "split",
- "merged_into": null,
- "import_flags": [
-  "proof_cites_literature"
- ],
- "blueprint_kind": "lemma",
- "blueprint_order": 960,
- "blueprint_uses": [
-  "def-br",
-  "def-sc-curves",
-  "def-sc-etale-qcoherent-module",
-  "def-sc-normalization",
-  "def-weil-pbc-etale-cohomology",
-  "lem-sc-brauer-zero",
-  "lem-sc-cech-spectral",
-  "lem-sc-etale-affine-qcoherent",
-  "lem-sc-normalization-exists",
-  "lem-sc-normalized-curve-smooth",
-  "lem-sc-point-z-cohomology"
- ],
- "proof_split_by": "labels",
- "lean_audit": {
-  "master": {
-   "state": "none",
-   "decls": [],
-   "missing": []
-  },
-  "slopmaster2": {
-   "state": "sorry_here",
-   "decls": [
+  "mathlib_searches": [
     {
-     "name": "AlgebraicGeometry.IsCurve.subsingleton_cohomologicalBrauerGroup",
-     "module": "WeilConjectures.AlgebraicGeometry.Curve.Brauer",
-     "lines": [
-      179,
-      191
-     ],
-     "kind": "theorem",
-     "sorry": true
+      "tool": "leansearch",
+      "query": "Brauer group H^2 of every possibly singular nonreduced curve over an algebraically closed field",
+      "results": "No Mathlib declaration about etale cohomological Brauer groups of schemes or curves",
+      "date": "2026-10-10",
+      "verdict": "no match"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "vanishing of second etale cohomology of G_m on an arbitrary curve over an algebraically closed field",
+      "results": "No declaration matching scheme etale cohomology or cohomological Brauer groups; only generic sheaf cohomology infrastructure",
+      "date": "2026-10-10",
+      "verdict": "no match"
+    },
+    {
+      "tool": "grep",
+      "query": "rg -n CohomologicalBrauerGroup\\|BrauerGroup\\|Sheaf.H.*Gm ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Mathlib",
+      "results": "No Mathlib source declaration for cohomological Brauer groups of schemes or curves",
+      "date": "2026-10-10",
+      "verdict": "no match"
     }
-   ],
-   "missing": [],
-   "open": []
-  }
- },
- "chapter": "sec-curve-estimates",
- "unit": "sk-prop-h2",
- "split_report": {
-  "date": "2026-10-10",
-  "item": "lem-sc-brauer-zero-all-curves",
-  "worker": "stage1",
-  "summary": "Repaired the returned split by adding the etale-over-reduced reducedness node, citing the existing affine and Noetherian vanishing nodes in the cohomology claim, and replacing the constant-sheaf point lemma by the all-coefficients separably closed point lemma.",
-  "blueprint": "Realizes the blueprint node's opening finite-morphism fact, Step 1 reduction to the reduced curve, the quasi-coherent cohomology claim, and Step 2 normalization argument.",
+  ],
+  "mathlib_match": null,
+  "status": "split",
+  "merged_into": null,
+  "import_flags": [
+    "proof_cites_literature"
+  ],
+  "blueprint_kind": "lemma",
+  "blueprint_order": 960,
+  "blueprint_uses": [
+    "def-br",
+    "def-sc-curves",
+    "def-sc-etale-qcoherent-module",
+    "def-sc-normalization",
+    "def-weil-pbc-etale-cohomology",
+    "lem-sc-brauer-zero",
+    "lem-sc-cech-spectral",
+    "lem-sc-etale-affine-qcoherent",
+    "lem-sc-normalization-exists",
+    "lem-sc-normalized-curve-smooth",
+    "lem-sc-point-z-cohomology"
+  ],
+  "proof_split_by": "labels",
+  "lean_audit": {
+    "master": {
+      "state": "none",
+      "decls": [],
+      "missing": []
+    },
+    "slopmaster2": {
+      "state": "sorry_here",
+      "decls": [
+        {
+          "name": "AlgebraicGeometry.IsCurve.subsingleton_cohomologicalBrauerGroup",
+          "module": "WeilConjectures.AlgebraicGeometry.Curve.Brauer",
+          "lines": [
+            179,
+            191
+          ],
+          "kind": "theorem",
+          "sorry": true
+        }
+      ],
+      "missing": [],
+      "open": []
+    }
+  },
+  "chapter": "sec-curve-estimates",
+  "unit": "sk-prop-h2",
+  "split_report": {
+    "date": "2026-10-10",
+    "item": "lem-sc-brauer-zero-all-curves",
+    "worker": "stage1",
+    "summary": "Repaired the returned split by adding the etale-over-reduced reducedness node, citing the existing affine and Noetherian vanishing nodes in the cohomology claim, and replacing the constant-sheaf point lemma by the all-coefficients separably closed point lemma.",
+    "blueprint": "Realizes the blueprint node's opening finite-morphism fact, Step 1 reduction to the reduced curve, the quasi-coherent cohomology claim, and Step 2 normalization argument.",
+    "tool_uses": [
+      {
+        "node": "lem-sc-cech-spectral",
+        "why": "Generic Cech comparison."
+      },
+      {
+        "node": "def-sc-normalization",
+        "why": "Normalization construction."
+      },
+      {
+        "node": "lem-sc-normalization-exists",
+        "why": "Finite surjective birational normalization."
+      },
+      {
+        "node": "lem-sc-normalized-curve-smooth",
+        "why": "Smooth normalized components."
+      },
+      {
+        "node": "lem-kun-03qu-sep-closed",
+        "why": "Cohomology of the spectrum of an algebraically closed field for any coefficient sheaf."
+      },
+      {
+        "node": "etale-proposition-etale-reduced",
+        "why": "Etale schemes over reduced schemes are reduced in Step 1 and Step 2."
+      },
+      {
+        "node": "lem-sc-brauer-zero",
+        "why": "Smooth connected curve case."
+      },
+      {
+        "node": "lem-sc-noetherian-cohomology-above-dimension",
+        "why": "Noetherian scheme cohomology vanishes above dimension in the Cech claim."
+      },
+      {
+        "node": "pqf-lem-affine-vanishing",
+        "why": "Quasi-coherent cohomology vanishes on affine intersections in the Cech claim."
+      }
+    ]
+  },
   "tool_uses": [
-   {
-    "node": "lem-sc-cech-spectral",
-    "why": "Generic Cech comparison."
-   },
-   {
-    "node": "def-sc-normalization",
-    "why": "Normalization construction."
-   },
-   {
-    "node": "lem-sc-normalization-exists",
-    "why": "Finite surjective birational normalization."
-   },
-   {
-    "node": "lem-sc-normalized-curve-smooth",
-    "why": "Smooth normalized components."
-   },
-   {
-    "node": "lem-kun-03qu-sep-closed",
-    "why": "Cohomology of the spectrum of an algebraically closed field for any coefficient sheaf."
-   },
-   {
-    "node": "etale-proposition-etale-reduced",
-    "why": "Etale schemes over reduced schemes are reduced in Step 1 and Step 2."
-   },
-   {
-    "node": "lem-sc-brauer-zero",
-    "why": "Smooth connected curve case."
-   },
-   {
-    "node": "lem-sc-noetherian-cohomology-above-dimension",
-    "why": "Noetherian scheme cohomology vanishes above dimension in the Cech claim."
-   },
-   {
-    "node": "pqf-lem-affine-vanishing",
-    "why": "Quasi-coherent cohomology vanishes on affine intersections in the Cech claim."
-   }
-  ]
- },
- "tool_uses": [
-  "lem-sc-cech-spectral",
-  "def-sc-normalization",
-  "lem-sc-normalization-exists",
-  "lem-sc-normalized-curve-smooth",
-  "lem-kun-03qu-sep-closed",
-  "etale-proposition-etale-reduced",
-  "lem-sc-brauer-zero",
-  "lem-sc-noetherian-cohomology-above-dimension",
-  "pqf-lem-affine-vanishing"
- ],
- "reviewed": {
-  "date": "2026-10-10",
-  "by": "L",
-  "reviewer": "R-bz2",
-  "group": "C1",
-  "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-bz2 (reviewer sub-agent of L); spot-checked: Reviewer R-bz2 (re-push after the 14:45 return): all three return points repaired, mathematics right; the one fault was B10 on the new node, repaired by recording the sorry-free declaration as lean_candidates; first merge attempt refused by a tool bug of L (created stamp comparison), fixed and rerun by L at 15:09 UTC; 1 file(s) fixed by the reviewer"
- },
- "lead_note": "2026-10-10 L (R-bz2): new node etale-proposition-etale-reduced: stated exactly by AlgebraicGeometry.isReduced_of_etale (slopmaster2 Morphisms/Etale.lean 435-451, sorry-free per sorryfree.py), recorded as lean_candidates by the reviewer; attach. Its source.place names 025O (Noetherian local-ring version); the general scheme statement is Stacks 033B with 034E."
+    "lem-sc-cech-spectral",
+    "def-sc-normalization",
+    "lem-sc-normalization-exists",
+    "lem-sc-normalized-curve-smooth",
+    "lem-kun-03qu-sep-closed",
+    "etale-proposition-etale-reduced",
+    "lem-sc-brauer-zero",
+    "lem-sc-noetherian-cohomology-above-dimension",
+    "pqf-lem-affine-vanishing"
+  ],
+  "reviewed": {
+    "date": "2026-10-10",
+    "by": "L",
+    "reviewer": "R-bz2",
+    "group": "C1",
+    "result": "pass",
+    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-bz2 (reviewer sub-agent of L); spot-checked: Reviewer R-bz2 (re-push after the 14:45 return): all three return points repaired, mathematics right; the one fault was B10 on the new node, repaired by recording the sorry-free declaration as lean_candidates; first merge attempt refused by a tool bug of L (created stamp comparison), fixed and rerun by L at 15:09 UTC; 1 file(s) fixed by the reviewer"
+  },
+  "lead_note": "2026-10-10 L (R-bz2): new node etale-proposition-etale-reduced: stated exactly by AlgebraicGeometry.isReduced_of_etale (slopmaster2 Morphisms/Etale.lean 435-451, sorry-free per sorryfree.py), recorded as lean_candidates by the reviewer; attach. Its source.place names 025O (Noetherian local-ring version); the general scheme statement is Stacks 033B with 034E.",
+  "lean": {
+    "module": "WeilConjectures.AlgebraicGeometry.Curve.Brauer",
+    "declaration": "AlgebraicGeometry.IsCurve.subsingleton_cohomologicalBrauerGroup",
+    "branch": "slopmaster2",
+    "line": 179,
+    "declarations": [
+      "AlgebraicGeometry.IsCurve.subsingleton_cohomologicalBrauerGroup"
+    ],
+    "sorry_free": false,
+    "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state sorry_here)"
+  }
 }

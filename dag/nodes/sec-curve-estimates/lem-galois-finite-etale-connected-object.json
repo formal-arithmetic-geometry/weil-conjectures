@@ -1,119 +1,123 @@
 {
- "id": "lem-galois-finite-etale-connected-object",
- "blueprint": {
-  "is": null,
-  "from": {
-   "node": "thm-galois-fundamental",
-   "place": "proof, final sentence: the finite etale cover is a connected object, so its fibre is a transitive pi_1-set and its marked-point stabilizer has finite index",
-   "via": [
-    "lem-galois-pi1-finite-etale-image-stabilizer"
-   ]
+  "id": "lem-galois-finite-etale-connected-object",
+  "blueprint": {
+    "is": null,
+    "from": {
+      "node": "thm-galois-fundamental",
+      "place": "proof, final sentence: the finite etale cover is a connected object, so its fibre is a transitive pi_1-set and its marked-point stabilizer has finite index",
+      "via": [
+        "lem-galois-pi1-finite-etale-image-stabilizer"
+      ]
+    },
+    "same_as": []
   },
-  "same_as": []
- },
- "kind": "statement",
- "title": "A connected finite etale scheme is a connected object of the Galois category",
- "statement": "Let $Y$ be a connected scheme with a geometric point $\\bar y\\to Y$ [def-weil-pbc-scheme-conventions]. If $f:P\\to Y$ is a finite etale morphism, i.e. $(P,f)$ is an object of $\\mathrm{F\\acute Et}(Y)$ [def-galois-categories], and $P$ is connected as a scheme, then $(P,f)$ is a connected object of the category $\\mathrm{F\\acute Et}(Y)$ [def-galois-connected-object]: it is not initial, and every monomorphism $i:(Q,g)\\to(P,f)$ in $\\mathrm{F\\acute Et}(Y)$ whose source $(Q,g)$ is not initial is an isomorphism.",
- "source": {
-  "document": "literature/stacks-project/pione.tex",
-  "place": "Stacks Tag 0BNB, lemma-finite-etale-connected-galois-category, proof paragraph 2: a finite etale scheme is a connected object exactly when it is connected as a scheme; Lean proof at WeilConjectures/AlgebraicGeometry/FundamentalGroup/Connected.lean:46-68"
- },
- "stmt_deps": [
-  "def-weil-pbc-scheme-conventions",
-  "def-galois-categories",
-  "def-galois-connected-object"
- ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
- "mathlib_searches": [
-  {
-   "tool": "leansearch",
-   "query": "a finite etale scheme with connected underlying topological space is a connected object of the Galois category of finite etale schemes",
-   "results": "CategoryTheory.PreGaloisCategory.IsGalois.toIsConnected and IsConnected.mk (Mathlib.CategoryTheory.Galois); no schemes",
-   "date": "2026-10-10",
-   "verdict": "no match"
+  "kind": "statement",
+  "title": "A connected finite etale scheme is a connected object of the Galois category",
+  "statement": "Let $Y$ be a connected scheme with a geometric point $\\bar y\\to Y$ [def-weil-pbc-scheme-conventions]. If $f:P\\to Y$ is a finite etale morphism, i.e. $(P,f)$ is an object of $\\mathrm{F\\acute Et}(Y)$ [def-galois-categories], and $P$ is connected as a scheme, then $(P,f)$ is a connected object of the category $\\mathrm{F\\acute Et}(Y)$ [def-galois-connected-object]: it is not initial, and every monomorphism $i:(Q,g)\\to(P,f)$ in $\\mathrm{F\\acute Et}(Y)$ whose source $(Q,g)$ is not initial is an isomorphism.",
+  "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Stacks Tag 0BNB, lemma-finite-etale-connected-galois-category, proof paragraph 2: a finite etale scheme is a connected object exactly when it is connected as a scheme; Lean proof at WeilConjectures/AlgebraicGeometry/FundamentalGroup/Connected.lean:46-68"
   },
-  {
-   "tool": "leanfinder",
-   "query": "connected finite etale cover is connected object in Galois category",
-   "results": "PreGaloisCategory.exists_hom_from_galois_of_connected, IsGalois.toIsConnected, has_decomp_connected_components' (Mathlib.CategoryTheory.Galois); none identifies scheme connectedness with categorical connectedness",
-   "date": "2026-10-10",
-   "verdict": "no match"
-  },
-  {
-   "tool": "loogle",
-   "query": "isConnected_of_connectedSpace",
-   "results": "none in Mathlib",
-   "date": "2026-10-10",
-   "verdict": "no match"
-  },
-  {
-   "tool": "grep",
-   "query": "rg 'isConnected_of_connectedSpace|ConnectedSpace P.obj.left|IsConnected P' Mathlib/AlgebraicGeometry Mathlib/CategoryTheory/Galois (pinned 0df444a)",
-   "results": "none; Mathlib has abstract Galois categories but no category of finite etale schemes",
-   "date": "2026-10-10",
-   "verdict": "no match"
-  },
-  {
-   "tool": "local_search",
-   "query": "isConnected_of_connectedSpace (project ~/weil-conjectures-slopmaster2)",
-   "results": "AlgebraicGeometry.Scheme.FiniteEtale.isConnected_of_connectedSpace, WeilConjectures/AlgebraicGeometry/FundamentalGroup/Connected.lean:46-68 (source repository, not Mathlib); sorry map 71d63dcf: s=false, ts=false",
-   "date": "2026-10-10",
-   "verdict": "no match in Mathlib; sorry-free slopmaster2 declaration stating the node exactly (lean_candidates)"
-  }
- ],
- "mathlib_match": null,
- "status": "unsplit",
- "merged_into": null,
- "created": {
-  "by": "worker",
-  "item": "lem-galois-pi1-finite-etale-image-stabilizer",
-  "date": "2026-10-10"
- },
- "lean_audit": {
-  "master": {
-   "state": "none",
-   "decls": [],
-   "missing": []
-  },
-  "slopmaster2": {
-   "state": "closed",
-   "decls": [
-    {
-     "name": "AlgebraicGeometry.Scheme.FiniteEtale.isConnected_of_connectedSpace",
-     "module": "WeilConjectures.AlgebraicGeometry.FundamentalGroup.Connected",
-     "lines": [
-      46,
-      68
-     ],
-     "kind": "theorem",
-     "sorry": false
-    }
-   ],
-   "missing": [],
-   "open": []
-  }
- },
- "chapter": "sec-curve-estimates",
- "unit": "sk-prop-h2",
- "lean_candidates": [
-  {
-   "name": "AlgebraicGeometry.Scheme.FiniteEtale.isConnected_of_connectedSpace",
-   "module": "WeilConjectures.AlgebraicGeometry.FundamentalGroup.Connected",
-   "lines": [
-    46,
-    68
-   ],
-   "note": "sorry-free (sorry map slopmaster2_71d63dcf: s=false, ts=false); states the node exactly: for Y : Scheme with [ConnectedSpace Y] and P : Y.FiniteEtale (FiniteEtale.lean:72, the full subcategory of finite etale Y-schemes with Y-morphisms) with [ConnectedSpace P.obj.left], IsConnected P, where CategoryTheory.PreGaloisCategory.IsConnected (Mathlib/CategoryTheory/Galois/Basic.lean:102-106: notInitial, and every mono i : Z -> P with Z not initial is an iso) is the leaf of def-galois-connected-object, i.e. Stacks 0BMY's connectedness. The geometric point of the node is not used by the statement; the Lean picks one in the proof. Attachment for the maintainer to verify."
-  }
- ],
- "lean": {
-  "branch": "slopmaster2",
-  "declarations": [
-   "AlgebraicGeometry.Scheme.FiniteEtale.isConnected_of_connectedSpace"
+  "stmt_deps": [
+    "def-weil-pbc-scheme-conventions",
+    "def-galois-categories",
+    "def-galois-connected-object"
   ],
-  "note": "attached by the lead 2026-10-10 after the worker's attachment check: Scheme.FiniteEtale.isConnected_of_connectedSpace (Connected.lean 46-68); Mathlib's IsConnected is Stacks 0BMY's connected object, the notion of def-galois-connected-object"
- },
- "reviewed": "2026-10-10 L: attachment check: finished on slopmaster2 by Scheme.FiniteEtale.isConnected_of_connectedSpace (verified sorry-free); Mathlib IsConnected (not initial, every mono from a non-initial object is an iso) is Stacks 0BMY's connected object, which def-galois-connected-object states, so the SGA1 caveat does not apply here; statement wording aligned with Stacks and def-galois-connected-object added to stmt_deps by the worker. Not split (rule 0)."
+  "proof": [],
+  "proof_deps": [],
+  "proof_origin": null,
+  "mathlib_searches": [
+    {
+      "tool": "leansearch",
+      "query": "a finite etale scheme with connected underlying topological space is a connected object of the Galois category of finite etale schemes",
+      "results": "CategoryTheory.PreGaloisCategory.IsGalois.toIsConnected and IsConnected.mk (Mathlib.CategoryTheory.Galois); no schemes",
+      "date": "2026-10-10",
+      "verdict": "no match"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "connected finite etale cover is connected object in Galois category",
+      "results": "PreGaloisCategory.exists_hom_from_galois_of_connected, IsGalois.toIsConnected, has_decomp_connected_components' (Mathlib.CategoryTheory.Galois); none identifies scheme connectedness with categorical connectedness",
+      "date": "2026-10-10",
+      "verdict": "no match"
+    },
+    {
+      "tool": "loogle",
+      "query": "isConnected_of_connectedSpace",
+      "results": "none in Mathlib",
+      "date": "2026-10-10",
+      "verdict": "no match"
+    },
+    {
+      "tool": "grep",
+      "query": "rg 'isConnected_of_connectedSpace|ConnectedSpace P.obj.left|IsConnected P' Mathlib/AlgebraicGeometry Mathlib/CategoryTheory/Galois (pinned 0df444a)",
+      "results": "none; Mathlib has abstract Galois categories but no category of finite etale schemes",
+      "date": "2026-10-10",
+      "verdict": "no match"
+    },
+    {
+      "tool": "local_search",
+      "query": "isConnected_of_connectedSpace (project ~/weil-conjectures-slopmaster2)",
+      "results": "AlgebraicGeometry.Scheme.FiniteEtale.isConnected_of_connectedSpace, WeilConjectures/AlgebraicGeometry/FundamentalGroup/Connected.lean:46-68 (source repository, not Mathlib); sorry map 71d63dcf: s=false, ts=false",
+      "date": "2026-10-10",
+      "verdict": "no match in Mathlib; sorry-free slopmaster2 declaration stating the node exactly (lean_candidates)"
+    }
+  ],
+  "mathlib_match": null,
+  "status": "unsplit",
+  "merged_into": null,
+  "created": {
+    "by": "worker",
+    "item": "lem-galois-pi1-finite-etale-image-stabilizer",
+    "date": "2026-10-10"
+  },
+  "lean_audit": {
+    "master": {
+      "state": "none",
+      "decls": [],
+      "missing": []
+    },
+    "slopmaster2": {
+      "state": "closed",
+      "decls": [
+        {
+          "name": "AlgebraicGeometry.Scheme.FiniteEtale.isConnected_of_connectedSpace",
+          "module": "WeilConjectures.AlgebraicGeometry.FundamentalGroup.Connected",
+          "lines": [
+            46,
+            68
+          ],
+          "kind": "theorem",
+          "sorry": false
+        }
+      ],
+      "missing": [],
+      "open": []
+    }
+  },
+  "chapter": "sec-curve-estimates",
+  "unit": "sk-prop-h2",
+  "lean_candidates": [
+    {
+      "name": "AlgebraicGeometry.Scheme.FiniteEtale.isConnected_of_connectedSpace",
+      "module": "WeilConjectures.AlgebraicGeometry.FundamentalGroup.Connected",
+      "lines": [
+        46,
+        68
+      ],
+      "note": "sorry-free (sorry map slopmaster2_71d63dcf: s=false, ts=false); states the node exactly: for Y : Scheme with [ConnectedSpace Y] and P : Y.FiniteEtale (FiniteEtale.lean:72, the full subcategory of finite etale Y-schemes with Y-morphisms) with [ConnectedSpace P.obj.left], IsConnected P, where CategoryTheory.PreGaloisCategory.IsConnected (Mathlib/CategoryTheory/Galois/Basic.lean:102-106: notInitial, and every mono i : Z -> P with Z not initial is an iso) is the leaf of def-galois-connected-object, i.e. Stacks 0BMY's connectedness. The geometric point of the node is not used by the statement; the Lean picks one in the proof. Attachment for the maintainer to verify."
+    }
+  ],
+  "lean": {
+    "module": "WeilConjectures.AlgebraicGeometry.FundamentalGroup.Connected",
+    "declaration": "AlgebraicGeometry.Scheme.FiniteEtale.isConnected_of_connectedSpace",
+    "branch": "slopmaster2",
+    "line": 46,
+    "declarations": [
+      "AlgebraicGeometry.Scheme.FiniteEtale.isConnected_of_connectedSpace"
+    ],
+    "sorry_free": true,
+    "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state closed)"
+  },
+  "reviewed": "2026-10-10 L: attachment check: finished on slopmaster2 by Scheme.FiniteEtale.isConnected_of_connectedSpace (verified sorry-free); Mathlib IsConnected (not initial, every mono from a non-initial object is an iso) is Stacks 0BMY's connected object, which def-galois-connected-object states, so the SGA1 caveat does not apply here; statement wording aligned with Stacks and def-galois-connected-object added to stmt_deps by the worker. Not split (rule 0)."
 }

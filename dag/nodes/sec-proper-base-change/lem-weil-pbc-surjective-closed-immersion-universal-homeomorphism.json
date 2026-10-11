@@ -1,112 +1,116 @@
 {
- "id": "lem-weil-pbc-surjective-closed-immersion-universal-homeomorphism",
- "blueprint": {
-  "is": null,
-  "from": {
-   "node": "thm-weil-pbc-finite-etale-lifting",
-   "place": "step 7 of its split (source: Lemma 0GS2, proof: the essential-surjectivity paragraphs)",
-   "via": [
-    "lem-weil-pbc-finite-etale-lifting-complete",
-    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
-   ]
+  "id": "lem-weil-pbc-surjective-closed-immersion-universal-homeomorphism",
+  "blueprint": {
+    "is": null,
+    "from": {
+      "node": "thm-weil-pbc-finite-etale-lifting",
+      "place": "step 7 of its split (source: Lemma 0GS2, proof: the essential-surjectivity paragraphs)",
+      "via": [
+        "lem-weil-pbc-finite-etale-lifting-complete",
+        "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+      ]
+    },
+    "same_as": null
   },
-  "same_as": null
- },
- "kind": "statement",
- "title": "A surjective closed immersion is a universal homeomorphism",
- "statement": "Let $i:Z\\to X$ be a closed immersion of schemes [def-weil-closed-immersion] that is surjective on underlying sets [def-weil-surjective-morphism]; for instance $Z\\subseteq X$ a finite order thickening, i.e. a closed subscheme whose quasi-coherent ideal sheaf $\\mathcal I$ satisfies $\\mathcal I^{n+1}=0$ for some $n\\ge0$ [def-sbc-first-order-thickening]. Then $i$ is a universal homeomorphism [def-weil-universal-homeomorphism]: for every morphism of schemes $X'\\to X$ the projection $Z\\times_XX'\\to X'$ [def-pc-fibre-product] is a surjective closed immersion, hence a homeomorphism of underlying spaces. Moreover $i$ is integral (indeed finite) [def-weil-finite-integral-morphism], universally injective and surjective.",
- "source": {
-  "document": "literature/stacks-project/more-morphisms.tex; literature/stacks-project/morphisms.tex",
-  "place": "More on Morphisms, proof of Lemma 09ZV (label lemma-thicken-property-morphisms: 'S -> S\\' and X -> X\\' are universal homeomorphisms, see Morphisms, Lemma 054M'); Morphisms, Lemma 054M (proof omitted there) and Lemma 04DF (universal homeomorphism = integral, universally injective, surjective)"
- },
- "stmt_deps": [
-  "def-weil-closed-immersion",
-  "def-weil-surjective-morphism",
-  "def-sbc-first-order-thickening",
-  "def-weil-universal-homeomorphism",
-  "def-pc-fibre-product",
-  "def-weil-finite-integral-morphism"
- ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
- "mathlib_searches": [
-  {
-   "tool": "leansearch",
-   "query": "surjective closed immersion of schemes is a universal homeomorphism",
-   "results": "IsClosedImmersion.mk, isClosedImmersion_iff, instUniversallyClosedOfIsClosedImmersion (Mathlib.AlgebraicGeometry.Morphisms.*); no universal-homeomorphism statement",
-   "date": "2026-10-10",
-   "verdict": "no match"
+  "kind": "statement",
+  "title": "A surjective closed immersion is a universal homeomorphism",
+  "statement": "Let $i:Z\\to X$ be a closed immersion of schemes [def-weil-closed-immersion] that is surjective on underlying sets [def-weil-surjective-morphism]; for instance $Z\\subseteq X$ a finite order thickening, i.e. a closed subscheme whose quasi-coherent ideal sheaf $\\mathcal I$ satisfies $\\mathcal I^{n+1}=0$ for some $n\\ge0$ [def-sbc-first-order-thickening]. Then $i$ is a universal homeomorphism [def-weil-universal-homeomorphism]: for every morphism of schemes $X'\\to X$ the projection $Z\\times_XX'\\to X'$ [def-pc-fibre-product] is a surjective closed immersion, hence a homeomorphism of underlying spaces. Moreover $i$ is integral (indeed finite) [def-weil-finite-integral-morphism], universally injective and surjective.",
+  "source": {
+    "document": "literature/stacks-project/more-morphisms.tex; literature/stacks-project/morphisms.tex",
+    "place": "More on Morphisms, proof of Lemma 09ZV (label lemma-thicken-property-morphisms: 'S -> S\\' and X -> X\\' are universal homeomorphisms, see Morphisms, Lemma 054M'); Morphisms, Lemma 054M (proof omitted there) and Lemma 04DF (universal homeomorphism = integral, universally injective, surjective)"
   },
-  {
-   "tool": "leanfinder",
-   "query": "a closed immersion that is surjective is a universal homeomorphism (every base change is a homeomorphism)",
-   "results": "isClosedImmersion_iff, IsClosedImmersion.of_surjective_of_isAffine, IsClosedImmersion.spec_of_surjective, Surjective.of_universallyClosed_of_isDominant: ingredients only",
-   "date": "2026-10-10",
-   "verdict": "no match"
-  },
-  {
-   "tool": "loogle",
-   "query": "AlgebraicGeometry.IsClosedImmersion, AlgebraicGeometry.Surjective, IsHomeomorph",
-   "results": "no results",
-   "date": "2026-10-10",
-   "verdict": "no match"
-  },
-  {
-   "tool": "grep",
-   "query": "grep -rniE 'universal(ly)? ?homeomorph|UniversallyHomeomorph' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry",
-   "results": "no hits: Mathlib has no universal-homeomorphism class; the ingredients are IsClosedImmersion.isStableUnderBaseChange (ClosedImmersion.lean:382), Surjective stable under base change, and a surjective closed embedding is a homeomorphism (isHomeomorph_iff_isEmbedding_surjective)",
-   "date": "2026-10-10",
-   "verdict": "no match: the statement is a few Mathlib lemmas combined (as in lem-weil-pbc-reduction-universal-homeomorphism step 3), not one declaration; the source repository has it as the sorry-free instance AlgebraicGeometry.IsUniversalHomeomorphism.instOfIsClosedImmersionOfSurjective (WeilConjectures/AlgebraicGeometry/Morphisms/UniversalHomeomorphism.lean:111)"
-  }
- ],
- "mathlib_match": null,
- "status": "unsplit",
- "merged_into": null,
- "created": {
-  "by": "worker",
-  "item": "lem-weil-pbc-finite-etale-lifting-complete",
-  "date": "2026-10-10"
- },
- "lean_audit": {
-  "master": {
-   "state": "none",
-   "decls": [],
-   "missing": [
-    "AlgebraicGeometry.IsUniversalHomeomorphism.instOfIsClosedImmersionOfSurjective"
-   ]
-  },
-  "slopmaster2": {
-   "state": "closed",
-   "decls": [
-    {
-     "name": "AlgebraicGeometry.IsUniversalHomeomorphism.instOfIsClosedImmersionOfSurjective",
-     "module": "WeilConjectures.AlgebraicGeometry.Morphisms.UniversalHomeomorphism",
-     "lines": [
-      108,
-      111
-     ],
-     "kind": "theorem",
-     "sorry": false
-    }
-   ],
-   "missing": [],
-   "open": []
-  }
- },
- "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1",
- "lean": {
-  "branch": "slopmaster2",
-  "declarations": [
-   "AlgebraicGeometry.IsUniversalHomeomorphism.instOfIsClosedImmersionOfSurjective"
+  "stmt_deps": [
+    "def-weil-closed-immersion",
+    "def-weil-surjective-morphism",
+    "def-sbc-first-order-thickening",
+    "def-weil-universal-homeomorphism",
+    "def-pc-fibre-product",
+    "def-weil-finite-integral-morphism"
   ],
-  "note": "attached by the lead at the review of lem-weil-pbc-finite-etale-lifting-complete (2026-10-10): WeilConjectures/AlgebraicGeometry/Morphisms/UniversalHomeomorphism.lean:111, the instance 'a surjective closed immersion is a universal homeomorphism' for the repository's definition (integral, universally injective, surjective), which the node states as its second form; sorry-free"
- },
- "reviewed": {
-  "date": "2026-10-10",
-  "by": "L",
-  "result": "pass",
-  "note": "closed by the attached Lean instance (sorry-free) for the integral/universally-injective/surjective form; the equivalence with the topological form is the node's own clause (Stacks 04DF), left to the split if ever needed."
- }
+  "proof": [],
+  "proof_deps": [],
+  "proof_origin": null,
+  "mathlib_searches": [
+    {
+      "tool": "leansearch",
+      "query": "surjective closed immersion of schemes is a universal homeomorphism",
+      "results": "IsClosedImmersion.mk, isClosedImmersion_iff, instUniversallyClosedOfIsClosedImmersion (Mathlib.AlgebraicGeometry.Morphisms.*); no universal-homeomorphism statement",
+      "date": "2026-10-10",
+      "verdict": "no match"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "a closed immersion that is surjective is a universal homeomorphism (every base change is a homeomorphism)",
+      "results": "isClosedImmersion_iff, IsClosedImmersion.of_surjective_of_isAffine, IsClosedImmersion.spec_of_surjective, Surjective.of_universallyClosed_of_isDominant: ingredients only",
+      "date": "2026-10-10",
+      "verdict": "no match"
+    },
+    {
+      "tool": "loogle",
+      "query": "AlgebraicGeometry.IsClosedImmersion, AlgebraicGeometry.Surjective, IsHomeomorph",
+      "results": "no results",
+      "date": "2026-10-10",
+      "verdict": "no match"
+    },
+    {
+      "tool": "grep",
+      "query": "grep -rniE 'universal(ly)? ?homeomorph|UniversallyHomeomorph' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry",
+      "results": "no hits: Mathlib has no universal-homeomorphism class; the ingredients are IsClosedImmersion.isStableUnderBaseChange (ClosedImmersion.lean:382), Surjective stable under base change, and a surjective closed embedding is a homeomorphism (isHomeomorph_iff_isEmbedding_surjective)",
+      "date": "2026-10-10",
+      "verdict": "no match: the statement is a few Mathlib lemmas combined (as in lem-weil-pbc-reduction-universal-homeomorphism step 3), not one declaration; the source repository has it as the sorry-free instance AlgebraicGeometry.IsUniversalHomeomorphism.instOfIsClosedImmersionOfSurjective (WeilConjectures/AlgebraicGeometry/Morphisms/UniversalHomeomorphism.lean:111)"
+    }
+  ],
+  "mathlib_match": null,
+  "status": "unsplit",
+  "merged_into": null,
+  "created": {
+    "by": "worker",
+    "item": "lem-weil-pbc-finite-etale-lifting-complete",
+    "date": "2026-10-10"
+  },
+  "lean_audit": {
+    "master": {
+      "state": "none",
+      "decls": [],
+      "missing": [
+        "AlgebraicGeometry.IsUniversalHomeomorphism.instOfIsClosedImmersionOfSurjective"
+      ]
+    },
+    "slopmaster2": {
+      "state": "closed",
+      "decls": [
+        {
+          "name": "AlgebraicGeometry.IsUniversalHomeomorphism.instOfIsClosedImmersionOfSurjective",
+          "module": "WeilConjectures.AlgebraicGeometry.Morphisms.UniversalHomeomorphism",
+          "lines": [
+            108,
+            111
+          ],
+          "kind": "theorem",
+          "sorry": false
+        }
+      ],
+      "missing": [],
+      "open": []
+    }
+  },
+  "chapter": "sec-proper-base-change",
+  "unit": "sk-thm-p1",
+  "lean": {
+    "module": "WeilConjectures.AlgebraicGeometry.Morphisms.UniversalHomeomorphism",
+    "declaration": "AlgebraicGeometry.IsUniversalHomeomorphism.instOfIsClosedImmersionOfSurjective",
+    "branch": "slopmaster2",
+    "line": 108,
+    "declarations": [
+      "AlgebraicGeometry.IsUniversalHomeomorphism.instOfIsClosedImmersionOfSurjective"
+    ],
+    "sorry_free": true,
+    "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state closed)"
+  },
+  "reviewed": {
+    "date": "2026-10-10",
+    "by": "L",
+    "result": "pass",
+    "note": "closed by the attached Lean instance (sorry-free) for the integral/universally-injective/surjective form; the equivalence with the topological form is the node's own clause (Stacks 04DF), left to the split if ever needed."
+  }
 }

@@ -1,134 +1,138 @@
 {
- "id": "def-weil-compact-support-candidate",
- "blueprint": {
-  "is": "def-weil-compact-support-candidate",
-  "from": null,
-  "same_as": null
- },
- "kind": "definition",
- "title": "Compact-support candidate attached to a compactification",
- "statement": "Let $K_0$ be a field, let $X,Y$ be finite-type\n[def-weil-scheme-morphism-properties] $K_0$-schemes, and let $f:X\\to Y$ be a\nseparated finite-type $K_0$-morphism. Fix a prime $\\ell$, write\n$\\Ql=\\mathbf Q_\\ell$, and require that its image in $K_0$ is invertible.\nChoose a finite extension $E/\\Ql$, an integer $n\\in\\mathbf Z_{\\geq1}$, and\nput $A=A_{E,n}=\\mathcal O_E/\\varpi_E^n$ [def-weil-l-adic-coefficient-extension].\nFor a scheme $T$ write $D(T_{\\mathrm{proet}},A)$ for the derived category of\nsheaves of $A$-modules on the small pro-etale site of $T$\n[def-weil-pbc-proetale-site]. Let $c=(j,\\bar f)$ be an object of the\ncompactification category [def-weil-compactifications-refinements]\n$\\operatorname{Comp}(f)$: $j:X\\hookrightarrow\\overline X$ an open immersion\nand $\\bar f:\\overline X\\to Y$ proper with $\\bar f\\circ j=f$. The\nextension-by-zero functor [def-weil-extension-by-zero]\n$j_!:\\Sh(X_{\\mathrm{proet}},A)\\to\\Sh(\\overline X_{\\mathrm{proet}},A)$ is exact\n[lem-weil-extension-by-zero-exact], so applying it termwise to complexes\ninduces a functor $j_!:D(X_{\\mathrm{proet}},A)\\to D(\\overline X_{\\mathrm{proet}},A)$\n[lem-sf-exact-functor-derived-triangulated]. With the derived direct image\n[def-weil-derived-direct-image]\n$R\\bar f_{*,n}:D(\\overline X_{\\mathrm{proet}},A)\\to D(Y_{\\mathrm{proet}},A)$,\ncomputed by a K-injective resolution, set\n\n$$\n Rf_{!,n}^{c}=R\\bar f_{*,n}\\,j_!:\n D(X_{\\mathrm{proet}},A)\n \\longrightarrow D(Y_{\\mathrm{proet}},A),\n$$\n\nthe composite functor, attached to the chosen compactification $c$. The\ndefinition asserts nothing beyond this formula. (Scope remark, not part of\nthe definition: every property asserted of $Rf_{!,n}^{c}$ elsewhere in the\nblueprint, namely independence of the chosen compactification, base-change\ncompatibility, coherence and the finite-level comparisons, is asserted only\non the full subcategory $\\mathcal D^{+}_{\\mathrm{et}}(X,A)\\subseteq\nD(X_{\\mathrm{proet}},A)$ of complexes coming from the etale site\n[def-sf-etale-origin-subcategory]; there the superscript $c$ may be dropped.)",
- "source": {
-  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/def-weil-compact-support-candidate.md",
-  "place": "node def-weil-compact-support-candidate, order 1472"
- },
- "stmt_deps": [
-  "def-weil-scheme-morphism-properties",
-  "def-weil-l-adic-coefficient-extension",
-  "def-weil-pbc-proetale-site",
-  "def-weil-compactifications-refinements",
-  "def-weil-extension-by-zero",
-  "lem-weil-extension-by-zero-exact",
-  "lem-sf-exact-functor-derived-triangulated",
-  "def-weil-derived-direct-image",
-  "def-sf-etale-origin-subcategory"
- ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
- "mathlib_searches": [
-  {
-   "tool": "grep",
-   "query": "grep -rn -i 'lowerShriek\\|extensionByZero\\|compactification' Mathlib/AlgebraicGeometry Mathlib/CategoryTheory/Sites; grep -rln 'ProEt' Mathlib; grep -rn 'totalRightDerived\\|rightDerivedFunctor' Mathlib (~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/)",
-   "results": "no lower shriek, extension by zero or compactification of morphisms of schemes; the small pro-etale site exists (Mathlib/AlgebraicGeometry/Sites/Proetale.lean, ElladicCohomology.lean) with no direct image functor; total right derived functors exist only abstractly (Mathlib/CategoryTheory/Localization/DerivabilityStructure, Functor.totalRightDerived); Functor.mapDerivedCategory (Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean) gives the functor induced by an exact functor",
-   "date": "2026-10-09",
-   "verdict": "no match: the candidate is a composite of nodes not in Mathlib (derived direct image and extension by zero on pro-etale sites, compactifications); only the derived functor of the exact j_! is a Mathlib leaf (lem-sf-exact-functor-derived-triangulated)"
-  }
- ],
- "mathlib_match": null,
- "status": "split",
- "merged_into": null,
- "import_flags": [],
- "blueprint_kind": "definition",
- "blueprint_order": 1472,
- "blueprint_uses": [
-  "def-weil-compactifications-refinements",
-  "def-weil-derived-direct-image",
-  "def-weil-extension-by-zero",
-  "def-weil-finite-torsion-constructibility",
-  "def-weil-pbc-etale-origin-witness",
-  "def-weil-scheme-morphism-properties"
- ],
- "uses_not_cited": [
-  "def-weil-pbc-etale-origin-witness"
- ],
- "lean_audit": {
-  "master": {
-   "state": "rests_on_sorry",
-   "decls": [
-    {
-     "name": "AlgebraicGeometry.ProEtale.rightDerivedLowerShriekOfCompactification",
-     "module": "WeilConjectures.SixFunctors.ProEtale.Derived.LowerShriek",
-     "lines": [
-      84,
-      96
-     ],
-     "kind": "def",
-     "sorry": false
-    }
-   ],
-   "missing": [],
-   "open": [
-    {
-     "name": "CategoryTheory.Abelian.hasKInjectiveResolutions_of_isGrothendieckAbelian",
-     "module": "WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution",
-     "lines": [
-      19,
-      25
-     ],
-     "kind": "theorem",
-     "nodes": [],
-     "below": false
-    },
-    {
-     "name": "CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall",
-     "module": "WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify",
-     "lines": [
-      39,
-      49
-     ],
-     "kind": "theorem",
-     "nodes": [],
-     "below": false
-    }
-   ]
+  "id": "def-weil-compact-support-candidate",
+  "blueprint": {
+    "is": "def-weil-compact-support-candidate",
+    "from": null,
+    "same_as": null
   },
-  "slopmaster2": {
-   "state": "closed",
-   "decls": [
-    {
-     "name": "AlgebraicGeometry.ProEtale.rightDerivedLowerShriekOfCompactification",
-     "module": "WeilConjectures.SixFunctors.ProEtale.Derived.LowerShriek",
-     "lines": [
-      87,
-      99
-     ],
-     "kind": "def",
-     "sorry": false
-    }
-   ],
-   "missing": [],
-   "open": []
-  }
- },
- "split_report": {
-  "date": "2026-10-09",
-  "item": "def-weil-compact-support-candidate",
-  "worker": "stage1",
-  "summary": "Checked against the master blueprint node (order 1472; slopmaster2 blueprint has no file for it) and against the source repository's Lean AlgebraicGeometry.ProEtale.rightDerivedLowerShriekOfCompactification (WeilConjectures/SixFunctors/ProEtale/Derived/LowerShriek.lean lines 86-100, same lines on master and slopmaster2, sorry-free), which is D(i_!) followed by R(g_*) for a compactification (Z, g proper, i open immersion, f = i >> g), with sheaves valued in any Grothendieck abelian category A (specializing to sheaves of A_{E,n}-modules). The definition is split into: coefficients A_{E,n} (def-weil-l-adic-coefficient-extension, replacing def-weil-finite-torsion-constructibility, which is stated only for the finite-field datum), the derived categories D(T_proet, A) (def-weil-pbc-proetale-site), Comp(f) (def-weil-compactifications-refinements), j_! (def-weil-extension-by-zero) with its exactness (lem-weil-extension-by-zero-exact) and the induced functor on derived categories (Mathlib leaf lem-sf-exact-functor-derived-triangulated, Functor.mapDerivedCategory), R\\bar f_{*,n} (def-weil-derived-direct-image), and, for the scope remark only, the subcategory D^+_et (def-sf-etale-origin-subcategory, which carries the etale-origin witness, so def-weil-pbc-etale-origin-witness is no longer cited directly). The scope remark is rewritten as a remark: its claims that D^+_et contains the finite-torsion constructible complexes and that the functor is independent of c there are properties proved elsewhere (lem-sf-proetale-constructible-origin, prop-compactification-coherence-detailed, which depends on this node), not part of the definition, and were dropped from it. No new node was needed."
- },
- "lean": {
-  "branch": "slopmaster2",
-  "declarations": [
-   "AlgebraicGeometry.ProEtale.rightDerivedLowerShriekOfCompactification"
+  "kind": "definition",
+  "title": "Compact-support candidate attached to a compactification",
+  "statement": "Let $K_0$ be a field, let $X,Y$ be finite-type\n[def-weil-scheme-morphism-properties] $K_0$-schemes, and let $f:X\\to Y$ be a\nseparated finite-type $K_0$-morphism. Fix a prime $\\ell$, write\n$\\Ql=\\mathbf Q_\\ell$, and require that its image in $K_0$ is invertible.\nChoose a finite extension $E/\\Ql$, an integer $n\\in\\mathbf Z_{\\geq1}$, and\nput $A=A_{E,n}=\\mathcal O_E/\\varpi_E^n$ [def-weil-l-adic-coefficient-extension].\nFor a scheme $T$ write $D(T_{\\mathrm{proet}},A)$ for the derived category of\nsheaves of $A$-modules on the small pro-etale site of $T$\n[def-weil-pbc-proetale-site]. Let $c=(j,\\bar f)$ be an object of the\ncompactification category [def-weil-compactifications-refinements]\n$\\operatorname{Comp}(f)$: $j:X\\hookrightarrow\\overline X$ an open immersion\nand $\\bar f:\\overline X\\to Y$ proper with $\\bar f\\circ j=f$. The\nextension-by-zero functor [def-weil-extension-by-zero]\n$j_!:\\Sh(X_{\\mathrm{proet}},A)\\to\\Sh(\\overline X_{\\mathrm{proet}},A)$ is exact\n[lem-weil-extension-by-zero-exact], so applying it termwise to complexes\ninduces a functor $j_!:D(X_{\\mathrm{proet}},A)\\to D(\\overline X_{\\mathrm{proet}},A)$\n[lem-sf-exact-functor-derived-triangulated]. With the derived direct image\n[def-weil-derived-direct-image]\n$R\\bar f_{*,n}:D(\\overline X_{\\mathrm{proet}},A)\\to D(Y_{\\mathrm{proet}},A)$,\ncomputed by a K-injective resolution, set\n\n$$\n Rf_{!,n}^{c}=R\\bar f_{*,n}\\,j_!:\n D(X_{\\mathrm{proet}},A)\n \\longrightarrow D(Y_{\\mathrm{proet}},A),\n$$\n\nthe composite functor, attached to the chosen compactification $c$. The\ndefinition asserts nothing beyond this formula. (Scope remark, not part of\nthe definition: every property asserted of $Rf_{!,n}^{c}$ elsewhere in the\nblueprint, namely independence of the chosen compactification, base-change\ncompatibility, coherence and the finite-level comparisons, is asserted only\non the full subcategory $\\mathcal D^{+}_{\\mathrm{et}}(X,A)\\subseteq\nD(X_{\\mathrm{proet}},A)$ of complexes coming from the etale site\n[def-sf-etale-origin-subcategory]; there the superscript $c$ may be dropped.)",
+  "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/def-weil-compact-support-candidate.md",
+    "place": "node def-weil-compact-support-candidate, order 1472"
+  },
+  "stmt_deps": [
+    "def-weil-scheme-morphism-properties",
+    "def-weil-l-adic-coefficient-extension",
+    "def-weil-pbc-proetale-site",
+    "def-weil-compactifications-refinements",
+    "def-weil-extension-by-zero",
+    "lem-weil-extension-by-zero-exact",
+    "lem-sf-exact-functor-derived-triangulated",
+    "def-weil-derived-direct-image",
+    "def-sf-etale-origin-subcategory"
   ],
-  "note": "attached by the lead at review (2026-10-09): the Lean definition of Rf_! for a chosen compactification, D(i_!) ∘ R(g_*), stated for sheaves valued in any Grothendieck abelian category and any Compactification f (more general than the node: no K_0, no separated/finite-type hypotheses); sorry-free by the full sorry map (417 declarations reachable); found by the opus worker"
- },
- "reviewed": {
-  "date": "2026-10-09",
-  "by": "L",
-  "result": "pass"
- },
- "chapter": "sec-smooth-purity",
- "unit": "sk-def-sf-operations"
+  "proof": [],
+  "proof_deps": [],
+  "proof_origin": null,
+  "mathlib_searches": [
+    {
+      "tool": "grep",
+      "query": "grep -rn -i 'lowerShriek\\|extensionByZero\\|compactification' Mathlib/AlgebraicGeometry Mathlib/CategoryTheory/Sites; grep -rln 'ProEt' Mathlib; grep -rn 'totalRightDerived\\|rightDerivedFunctor' Mathlib (~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/)",
+      "results": "no lower shriek, extension by zero or compactification of morphisms of schemes; the small pro-etale site exists (Mathlib/AlgebraicGeometry/Sites/Proetale.lean, ElladicCohomology.lean) with no direct image functor; total right derived functors exist only abstractly (Mathlib/CategoryTheory/Localization/DerivabilityStructure, Functor.totalRightDerived); Functor.mapDerivedCategory (Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean) gives the functor induced by an exact functor",
+      "date": "2026-10-09",
+      "verdict": "no match: the candidate is a composite of nodes not in Mathlib (derived direct image and extension by zero on pro-etale sites, compactifications); only the derived functor of the exact j_! is a Mathlib leaf (lem-sf-exact-functor-derived-triangulated)"
+    }
+  ],
+  "mathlib_match": null,
+  "status": "split",
+  "merged_into": null,
+  "import_flags": [],
+  "blueprint_kind": "definition",
+  "blueprint_order": 1472,
+  "blueprint_uses": [
+    "def-weil-compactifications-refinements",
+    "def-weil-derived-direct-image",
+    "def-weil-extension-by-zero",
+    "def-weil-finite-torsion-constructibility",
+    "def-weil-pbc-etale-origin-witness",
+    "def-weil-scheme-morphism-properties"
+  ],
+  "uses_not_cited": [
+    "def-weil-pbc-etale-origin-witness"
+  ],
+  "lean_audit": {
+    "master": {
+      "state": "rests_on_sorry",
+      "decls": [
+        {
+          "name": "AlgebraicGeometry.ProEtale.rightDerivedLowerShriekOfCompactification",
+          "module": "WeilConjectures.SixFunctors.ProEtale.Derived.LowerShriek",
+          "lines": [
+            84,
+            96
+          ],
+          "kind": "def",
+          "sorry": false
+        }
+      ],
+      "missing": [],
+      "open": [
+        {
+          "name": "CategoryTheory.Abelian.hasKInjectiveResolutions_of_isGrothendieckAbelian",
+          "module": "WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution",
+          "lines": [
+            19,
+            25
+          ],
+          "kind": "theorem",
+          "nodes": [],
+          "below": false
+        },
+        {
+          "name": "CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall",
+          "module": "WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify",
+          "lines": [
+            39,
+            49
+          ],
+          "kind": "theorem",
+          "nodes": [],
+          "below": false
+        }
+      ]
+    },
+    "slopmaster2": {
+      "state": "closed",
+      "decls": [
+        {
+          "name": "AlgebraicGeometry.ProEtale.rightDerivedLowerShriekOfCompactification",
+          "module": "WeilConjectures.SixFunctors.ProEtale.Derived.LowerShriek",
+          "lines": [
+            87,
+            99
+          ],
+          "kind": "def",
+          "sorry": false
+        }
+      ],
+      "missing": [],
+      "open": []
+    }
+  },
+  "split_report": {
+    "date": "2026-10-09",
+    "item": "def-weil-compact-support-candidate",
+    "worker": "stage1",
+    "summary": "Checked against the master blueprint node (order 1472; slopmaster2 blueprint has no file for it) and against the source repository's Lean AlgebraicGeometry.ProEtale.rightDerivedLowerShriekOfCompactification (WeilConjectures/SixFunctors/ProEtale/Derived/LowerShriek.lean lines 86-100, same lines on master and slopmaster2, sorry-free), which is D(i_!) followed by R(g_*) for a compactification (Z, g proper, i open immersion, f = i >> g), with sheaves valued in any Grothendieck abelian category A (specializing to sheaves of A_{E,n}-modules). The definition is split into: coefficients A_{E,n} (def-weil-l-adic-coefficient-extension, replacing def-weil-finite-torsion-constructibility, which is stated only for the finite-field datum), the derived categories D(T_proet, A) (def-weil-pbc-proetale-site), Comp(f) (def-weil-compactifications-refinements), j_! (def-weil-extension-by-zero) with its exactness (lem-weil-extension-by-zero-exact) and the induced functor on derived categories (Mathlib leaf lem-sf-exact-functor-derived-triangulated, Functor.mapDerivedCategory), R\\bar f_{*,n} (def-weil-derived-direct-image), and, for the scope remark only, the subcategory D^+_et (def-sf-etale-origin-subcategory, which carries the etale-origin witness, so def-weil-pbc-etale-origin-witness is no longer cited directly). The scope remark is rewritten as a remark: its claims that D^+_et contains the finite-torsion constructible complexes and that the functor is independent of c there are properties proved elsewhere (lem-sf-proetale-constructible-origin, prop-compactification-coherence-detailed, which depends on this node), not part of the definition, and were dropped from it. No new node was needed."
+  },
+  "lean": {
+    "module": "WeilConjectures.SixFunctors.ProEtale.Derived.LowerShriek",
+    "declaration": "AlgebraicGeometry.ProEtale.rightDerivedLowerShriekOfCompactification",
+    "branch": "slopmaster2",
+    "line": 87,
+    "declarations": [
+      "AlgebraicGeometry.ProEtale.rightDerivedLowerShriekOfCompactification"
+    ],
+    "sorry_free": true,
+    "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state closed)"
+  },
+  "reviewed": {
+    "date": "2026-10-09",
+    "by": "L",
+    "result": "pass"
+  },
+  "chapter": "sec-smooth-purity",
+  "unit": "sk-def-sf-operations"
 }

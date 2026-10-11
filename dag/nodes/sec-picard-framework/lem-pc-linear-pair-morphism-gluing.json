@@ -1,109 +1,121 @@
 {
- "id": "lem-pc-linear-pair-morphism-gluing",
- "blueprint": {
-  "is": "lem-pc-linear-pair-morphism-gluing",
-  "from": null,
-  "same_as": null
- },
- "kind": "statement",
- "title": "Gluing of the morphism determined by two linear forms",
- "statement": "Let $S$ be a standard graded\n$k$-algebra, and let $l_0,l_1\\in S_1$ satisfy\n$D_+(l_0)\\cup D_+(l_1)=\\operatorname{Proj}(S)$. Then the two affine\ndescriptions of [def-pc-linear-pair-morphism] agree on the overlap\n$D_+(l_0)\\cap D_+(l_1)$ and glue to a morphism\n$\\pi_{l_0,l_1}:\\operatorname{Proj}(S)\\to\\mathbf P^1_k$.",
- "source": {
-  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-coherence/lem-pc-linear-pair-morphism-gluing.md",
-  "place": "node lem-pc-linear-pair-morphism-gluing, order 650"
- },
- "stmt_deps": [
-  "def-pc-linear-pair-morphism",
-  "def-pc-standard-graded-algebra"
- ],
- "proof": [
-  {
-   "text": "Write $X=\\operatorname{Proj}(S)$ and $U_i=D_+(l_i)$, and let\n$U'_0=D_+(x_0)=\\operatorname{Spec}(k[t])$,\n$U'_1=D_+(x_1)=\\operatorname{Spec}(k[t^{-1}])$ be the standard affine\ncover of $\\mathbf P^1_k$, so that\n$U'_0\\cap U'_1=\\operatorname{Spec}(k[t,t^{-1}])$\n([def-sc-p1-standard]); by [def-pc-proj] the open $U_i$ is the\naffine scheme $\\operatorname{Spec}(S_{(l_i)})$, and the hypothesis says\n$X=U_0\\cup U_1$.",
-   "uses": [
-    "def-sc-p1-standard",
-    "def-pc-proj"
-   ],
-   "elementary": false
+  "id": "lem-pc-linear-pair-morphism-gluing",
+  "blueprint": {
+    "is": "lem-pc-linear-pair-morphism-gluing",
+    "from": null,
+    "same_as": null
   },
-  {
-   "text": "*Agreement on the overlap.* Since $l_0,l_1$ are homogeneous of\npositive degree and the points of $\\operatorname{Proj}(S)$ are prime\nideals, $D_+(l_0l_1)=D_+(l_0)\\cap D_+(l_1)$; by [def-pc-proj] the\noverlap $U_{01}=U_0\\cap U_1$ is the affine scheme\n$\\operatorname{Spec}(S_{(l_0l_1)})$, and by [def-pc-proj] the\nrestriction map $S_{(l_0)}\\to S_{(l_0l_1)}$ is the graded localization\ninverting $l_1/l_0$. Hence the restriction to $U_{01}$ of the first\naffine description of [def-pc-linear-pair-morphism] is the morphism\n$U_{01}\\to U'_0$ corresponding to $k[t]\\to S_{(l_0l_1)}$,\n$t\\mapsto l_1/l_0$; this ring map factors through\n$k[t,t^{-1}]\\to S_{(l_0l_1)}$, $t\\mapsto l_1/l_0$, because $l_1/l_0$ is a\nunit of $S_{(l_0l_1)}$, so that restriction is the morphism\n$U_{01}\\to U'_0\\cap U'_1$ given by that ring map. Symmetrically, the\nrestriction to $U_{01}$ of the second affine description is the morphism\n$U_{01}\\to U'_0\\cap U'_1$ corresponding to\n$k[t,t^{-1}]\\to S_{(l_0l_1)}$, $t^{-1}\\mapsto l_0/l_1$. Since\n$t\\mapsto l_1/l_0$ and $t^{-1}\\mapsto l_0/l_1$ determine one and the same\nring map out of $k[t,t^{-1}]$, the two restrictions are equal.",
-   "uses": [
-    "def-pc-proj",
-    "def-pc-linear-pair-morphism"
-   ],
-   "elementary": false
+  "kind": "statement",
+  "title": "Gluing of the morphism determined by two linear forms",
+  "statement": "Let $S$ be a standard graded\n$k$-algebra, and let $l_0,l_1\\in S_1$ satisfy\n$D_+(l_0)\\cup D_+(l_1)=\\operatorname{Proj}(S)$. Then the two affine\ndescriptions of [def-pc-linear-pair-morphism] agree on the overlap\n$D_+(l_0)\\cap D_+(l_1)$ and glue to a morphism\n$\\pi_{l_0,l_1}:\\operatorname{Proj}(S)\\to\\mathbf P^1_k$.",
+  "source": {
+    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-coherence/lem-pc-linear-pair-morphism-gluing.md",
+    "place": "node lem-pc-linear-pair-morphism-gluing, order 650"
   },
-  {
-   "text": "*Gluing.* A morphism out of $X=U_0\\cup U_1$ is determined by its\nrestrictions to $U_0$ and $U_1$, and a pair of morphisms $f_i:U_i\\to \\mathbf P^1_k$ agreeing on $U_{01}$ glues to a morphism $f:X\\to\\mathbf P^1_k$: the underlying map of sets, equal to $f_i$ on $U_i$, is well\ndefined by the agreement on $U_{01}$; it is continuous because\n$f^{-1}(W)=f_0^{-1}(W)\\cup f_1^{-1}(W)$ for open $W\\subseteq\\mathbf P^1_k$;\nthe map of structure sheaves is obtained by gluing the maps\n$f_i^\\sharp$ over the cover $U_0,U_1$, which is possible because the\n$f_i^\\sharp$ agree on $U_{01}$ and $\\mathcal O_X$ is a sheaf of rings\n([def-pc-scheme]); and the induced maps on stalks are those of\n$f_0$ or of $f_1$, hence local. Applying this to the two affine\ndescriptions gives the required morphism $\\pi_{l_0,l_1}$.",
-   "uses": [
-    "def-pc-scheme"
-   ],
-   "elementary": false
-  }
- ],
- "proof_deps": [
-  "def-sc-p1-standard",
-  "def-pc-proj",
-  "def-pc-linear-pair-morphism",
-  "def-pc-scheme"
- ],
- "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-coherence/lem-pc-linear-pair-morphism-gluing.md",
-  "place": "## Proof"
- },
- "mathlib_searches": [],
- "mathlib_match": null,
- "status": "imported",
- "merged_into": null,
- "import_flags": [],
- "blueprint_kind": "lemma",
- "blueprint_order": 650,
- "blueprint_uses": [
-  "def-pc-linear-pair-morphism",
-  "def-pc-proj",
-  "def-pc-scheme",
-  "def-pc-standard-graded-algebra",
-  "def-sc-p1-standard"
- ],
- "uses_not_cited": [
-  "def-pc-standard-graded-algebra"
- ],
- "proof_split_by": "labels",
- "lean_audit": {
-  "master": {
-   "state": "none",
-   "decls": [],
-   "missing": []
-  },
-  "slopmaster2": {
-   "state": "closed",
-   "decls": [
+  "stmt_deps": [
+    "def-pc-linear-pair-morphism",
+    "def-pc-standard-graded-algebra"
+  ],
+  "proof": [
     {
-     "name": "AlgebraicGeometry.Proj.linearChartHom_compatible",
-     "module": "WeilConjectures.AlgebraicGeometry.ProjectiveSpace.LinearProjection",
-     "lines": [
-      188,
-      207
-     ],
-     "kind": "theorem",
-     "sorry": false
+      "text": "Write $X=\\operatorname{Proj}(S)$ and $U_i=D_+(l_i)$, and let\n$U'_0=D_+(x_0)=\\operatorname{Spec}(k[t])$,\n$U'_1=D_+(x_1)=\\operatorname{Spec}(k[t^{-1}])$ be the standard affine\ncover of $\\mathbf P^1_k$, so that\n$U'_0\\cap U'_1=\\operatorname{Spec}(k[t,t^{-1}])$\n([def-sc-p1-standard]); by [def-pc-proj] the open $U_i$ is the\naffine scheme $\\operatorname{Spec}(S_{(l_i)})$, and the hypothesis says\n$X=U_0\\cup U_1$.",
+      "uses": [
+        "def-sc-p1-standard",
+        "def-pc-proj"
+      ],
+      "elementary": false
     },
     {
-     "name": "AlgebraicGeometry.Proj.linearPairProjection",
-     "module": "WeilConjectures.AlgebraicGeometry.ProjectiveSpace.LinearProjection",
-     "lines": [
-      369,
-      375
-     ],
-     "kind": "def",
-     "sorry": false
+      "text": "*Agreement on the overlap.* Since $l_0,l_1$ are homogeneous of\npositive degree and the points of $\\operatorname{Proj}(S)$ are prime\nideals, $D_+(l_0l_1)=D_+(l_0)\\cap D_+(l_1)$; by [def-pc-proj] the\noverlap $U_{01}=U_0\\cap U_1$ is the affine scheme\n$\\operatorname{Spec}(S_{(l_0l_1)})$, and by [def-pc-proj] the\nrestriction map $S_{(l_0)}\\to S_{(l_0l_1)}$ is the graded localization\ninverting $l_1/l_0$. Hence the restriction to $U_{01}$ of the first\naffine description of [def-pc-linear-pair-morphism] is the morphism\n$U_{01}\\to U'_0$ corresponding to $k[t]\\to S_{(l_0l_1)}$,\n$t\\mapsto l_1/l_0$; this ring map factors through\n$k[t,t^{-1}]\\to S_{(l_0l_1)}$, $t\\mapsto l_1/l_0$, because $l_1/l_0$ is a\nunit of $S_{(l_0l_1)}$, so that restriction is the morphism\n$U_{01}\\to U'_0\\cap U'_1$ given by that ring map. Symmetrically, the\nrestriction to $U_{01}$ of the second affine description is the morphism\n$U_{01}\\to U'_0\\cap U'_1$ corresponding to\n$k[t,t^{-1}]\\to S_{(l_0l_1)}$, $t^{-1}\\mapsto l_0/l_1$. Since\n$t\\mapsto l_1/l_0$ and $t^{-1}\\mapsto l_0/l_1$ determine one and the same\nring map out of $k[t,t^{-1}]$, the two restrictions are equal.",
+      "uses": [
+        "def-pc-proj",
+        "def-pc-linear-pair-morphism"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "*Gluing.* A morphism out of $X=U_0\\cup U_1$ is determined by its\nrestrictions to $U_0$ and $U_1$, and a pair of morphisms $f_i:U_i\\to \\mathbf P^1_k$ agreeing on $U_{01}$ glues to a morphism $f:X\\to\\mathbf P^1_k$: the underlying map of sets, equal to $f_i$ on $U_i$, is well\ndefined by the agreement on $U_{01}$; it is continuous because\n$f^{-1}(W)=f_0^{-1}(W)\\cup f_1^{-1}(W)$ for open $W\\subseteq\\mathbf P^1_k$;\nthe map of structure sheaves is obtained by gluing the maps\n$f_i^\\sharp$ over the cover $U_0,U_1$, which is possible because the\n$f_i^\\sharp$ agree on $U_{01}$ and $\\mathcal O_X$ is a sheaf of rings\n([def-pc-scheme]); and the induced maps on stalks are those of\n$f_0$ or of $f_1$, hence local. Applying this to the two affine\ndescriptions gives the required morphism $\\pi_{l_0,l_1}$.",
+      "uses": [
+        "def-pc-scheme"
+      ],
+      "elementary": false
     }
-   ],
-   "missing": [],
-   "open": []
+  ],
+  "proof_deps": [
+    "def-sc-p1-standard",
+    "def-pc-proj",
+    "def-pc-linear-pair-morphism",
+    "def-pc-scheme"
+  ],
+  "proof_origin": {
+    "by": "agent",
+    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-coherence/lem-pc-linear-pair-morphism-gluing.md",
+    "place": "## Proof"
+  },
+  "mathlib_searches": [],
+  "mathlib_match": null,
+  "status": "imported",
+  "merged_into": null,
+  "import_flags": [],
+  "blueprint_kind": "lemma",
+  "blueprint_order": 650,
+  "blueprint_uses": [
+    "def-pc-linear-pair-morphism",
+    "def-pc-proj",
+    "def-pc-scheme",
+    "def-pc-standard-graded-algebra",
+    "def-sc-p1-standard"
+  ],
+  "uses_not_cited": [
+    "def-pc-standard-graded-algebra"
+  ],
+  "proof_split_by": "labels",
+  "lean_audit": {
+    "master": {
+      "state": "none",
+      "decls": [],
+      "missing": []
+    },
+    "slopmaster2": {
+      "state": "closed",
+      "decls": [
+        {
+          "name": "AlgebraicGeometry.Proj.linearChartHom_compatible",
+          "module": "WeilConjectures.AlgebraicGeometry.ProjectiveSpace.LinearProjection",
+          "lines": [
+            188,
+            207
+          ],
+          "kind": "theorem",
+          "sorry": false
+        },
+        {
+          "name": "AlgebraicGeometry.Proj.linearPairProjection",
+          "module": "WeilConjectures.AlgebraicGeometry.ProjectiveSpace.LinearProjection",
+          "lines": [
+            369,
+            375
+          ],
+          "kind": "def",
+          "sorry": false
+        }
+      ],
+      "missing": [],
+      "open": []
+    }
+  },
+  "chapter": "sec-picard-framework",
+  "unit": "sk-thm-picard-coherence",
+  "lean": {
+    "module": "WeilConjectures.AlgebraicGeometry.ProjectiveSpace.LinearProjection",
+    "declaration": "AlgebraicGeometry.Proj.linearChartHom_compatible",
+    "branch": "slopmaster2",
+    "line": 188,
+    "declarations": [
+      "AlgebraicGeometry.Proj.linearChartHom_compatible",
+      "AlgebraicGeometry.Proj.linearPairProjection"
+    ],
+    "sorry_free": true,
+    "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state closed)"
   }
- },
- "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-coherence"
 }

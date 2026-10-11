@@ -1,84 +1,95 @@
 {
- "id": "lem-zl-finite-matrix-irreducibility",
- "blueprint": {
-  "is": "lem-zl-finite-matrix-irreducibility",
-  "from": null,
-  "same_as": null
- },
- "kind": "statement",
- "title": "Absolute irreducibility has a finite matrix witness",
- "statement": "Let $E/\\mathbf Q_\\ell$ be finite, let $V$ be an $n$-dimensional\n$E$-vector space, and let $\\rho:\\Pi\\to\\operatorname{GL}_E(V)$\nbe a continuous representation of a profinite group. Assume that\n$V\\otimes_E\\Qlb$ is irreducible. There exist a stable\n$\\mathcal O_E$-lattice $L$ and $N\\geq1$ such that any subgroup\n$\\Pi'\\subset\\Pi$ with the same image as $\\Pi$ on\n$L/\\varpi_E^N L$ still acts absolutely irreducibly on $V$.",
- "source": {
-  "document": "literature/blueprint/master/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/lem-zl-finite-matrix-irreducibility.md",
-  "place": "node lem-zl-finite-matrix-irreducibility, order 2831"
- },
- "stmt_deps": [],
- "proof": [
-  {
-   "text": "First recall the elementary matrix-algebra argument behind Burnside's\nlemma. If a unital algebra $A\\subset\\operatorname{End}_k(W)$ acts\nirreducibly on a finite-dimensional vector space over an algebraically\nclosed field, Schur's lemma [lem-wf-schur-scalar] says\n$\\operatorname{End}_A(W)=k$. For linearly independent\n$w_1,\\ldots,w_r$, induction on $r$ shows that\n$A\\to W^r$, $a\\mapsto(aw_1,\\ldots,aw_r)$, is onto.\nFor the induction, its image projects onto $W^{r-1}$. The kernel\nin the last copy of $W$ is an $A$-submodule, hence is either\n$W$ or zero. In the latter case the image is the graph of an\n$A$-linear map $W^{r-1}\\to W$; Schur's lemma makes that map\n$(v_i)\\mapsto\\sum c_i v_i$. Applying it to the tuple furnished by\n$1\\in A$ contradicts the independence of the $w_i$.\nTaking a basis of $W$ proves $A=\\operatorname{End}_k(W)$.",
-   "uses": [
-    "lem-wf-schur-scalar"
-   ],
-   "elementary": false
+  "id": "lem-zl-finite-matrix-irreducibility",
+  "blueprint": {
+    "is": "lem-zl-finite-matrix-irreducibility",
+    "from": null,
+    "same_as": null
   },
-  {
-   "text": "Apply this to the span of $\\rho(\\Pi)$ after extending scalars from\n$E$ to $\\Qlb$. The $E$-span already has dimension $n^2$,\nso choose $g_1,\\ldots,g_{n^2}\\in\\Pi$ whose matrices form an\n$E$-basis of $\\operatorname{End}_E(V)$.\nCompactness of $\\rho(\\Pi)$ supplies a stable lattice (as in [p-real-integral]): for an initial\nlattice $L_0$, all its translates lie in $\\varpi_E^{-a}L_0$\nfor some $a$; their $\\mathcal O_E$-span is a finitely generated\ntorsion-free module containing $L_0$, and hence is a lattice $L$.\nIt is stable under the whole group.",
-   "uses": [
-    "p-real-integral"
-   ],
-   "elementary": false
+  "kind": "statement",
+  "title": "Absolute irreducibility has a finite matrix witness",
+  "statement": "Let $E/\\mathbf Q_\\ell$ be finite, let $V$ be an $n$-dimensional\n$E$-vector space, and let $\\rho:\\Pi\\to\\operatorname{GL}_E(V)$\nbe a continuous representation of a profinite group. Assume that\n$V\\otimes_E\\Qlb$ is irreducible. There exist a stable\n$\\mathcal O_E$-lattice $L$ and $N\\geq1$ such that any subgroup\n$\\Pi'\\subset\\Pi$ with the same image as $\\Pi$ on\n$L/\\varpi_E^N L$ still acts absolutely irreducibly on $V$.",
+  "source": {
+    "document": "literature/blueprint/master/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/lem-zl-finite-matrix-irreducibility.md",
+    "place": "node lem-zl-finite-matrix-irreducibility, order 2831"
   },
-  {
-   "text": "Write the matrices in a basis of $L$. The determinant $\\Delta$\nof their $n^2$ vectorized columns is a nonzero element of\n$\\mathcal O_E$. Choose $N>v_{\\varpi_E}(\\Delta)$.\nIf $\\Pi'$ has the same finite reduction image, choose\n$h_j\\in\\Pi'$ with\n$\\rho(h_j)\\equiv\\rho(g_j)\\pmod{\\varpi_E^N}$.\nTheir column determinant is congruent to $\\Delta$ modulo\n$\\varpi_E^N$, so is nonzero. Thus the $E$-span of\n$\\rho(\\Pi')$ is again the whole matrix algebra. The same is true\nafter extending scalars to $\\Qlb$, which excludes any nonzero\nproper invariant subspace. Continuity ensures that the reduction\nimage is a finite quotient of $\\Pi$.",
-   "uses": [],
-   "elementary": null
-  }
- ],
- "proof_deps": [
-  "lem-wf-schur-scalar",
-  "p-real-integral"
- ],
- "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/lem-zl-finite-matrix-irreducibility.md",
-  "place": "## Proof"
- },
- "mathlib_searches": [],
- "mathlib_match": null,
- "status": "imported",
- "merged_into": null,
- "import_flags": [],
- "blueprint_kind": "lemma",
- "blueprint_order": 2831,
- "blueprint_uses": [
-  "lem-wf-schur-scalar",
-  "p-real-integral"
- ],
- "proof_split_by": "paragraphs",
- "lean_audit": {
-  "master": {
-   "state": "none",
-   "decls": [],
-   "missing": []
-  },
-  "slopmaster2": {
-   "state": "closed",
-   "decls": [
+  "stmt_deps": [],
+  "proof": [
     {
-     "name": "Representation.exists_forall_isIrreducible_baseChange_of_congr",
-     "module": "WeilConjectures.RepresentationTheory.FiniteMatrixWitness",
-     "lines": [
-      169,
-      243
-     ],
-     "kind": "theorem",
-     "sorry": false
+      "text": "First recall the elementary matrix-algebra argument behind Burnside's\nlemma. If a unital algebra $A\\subset\\operatorname{End}_k(W)$ acts\nirreducibly on a finite-dimensional vector space over an algebraically\nclosed field, Schur's lemma [lem-wf-schur-scalar] says\n$\\operatorname{End}_A(W)=k$. For linearly independent\n$w_1,\\ldots,w_r$, induction on $r$ shows that\n$A\\to W^r$, $a\\mapsto(aw_1,\\ldots,aw_r)$, is onto.\nFor the induction, its image projects onto $W^{r-1}$. The kernel\nin the last copy of $W$ is an $A$-submodule, hence is either\n$W$ or zero. In the latter case the image is the graph of an\n$A$-linear map $W^{r-1}\\to W$; Schur's lemma makes that map\n$(v_i)\\mapsto\\sum c_i v_i$. Applying it to the tuple furnished by\n$1\\in A$ contradicts the independence of the $w_i$.\nTaking a basis of $W$ proves $A=\\operatorname{End}_k(W)$.",
+      "uses": [
+        "lem-wf-schur-scalar"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "Apply this to the span of $\\rho(\\Pi)$ after extending scalars from\n$E$ to $\\Qlb$. The $E$-span already has dimension $n^2$,\nso choose $g_1,\\ldots,g_{n^2}\\in\\Pi$ whose matrices form an\n$E$-basis of $\\operatorname{End}_E(V)$.\nCompactness of $\\rho(\\Pi)$ supplies a stable lattice (as in [p-real-integral]): for an initial\nlattice $L_0$, all its translates lie in $\\varpi_E^{-a}L_0$\nfor some $a$; their $\\mathcal O_E$-span is a finitely generated\ntorsion-free module containing $L_0$, and hence is a lattice $L$.\nIt is stable under the whole group.",
+      "uses": [
+        "p-real-integral"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "Write the matrices in a basis of $L$. The determinant $\\Delta$\nof their $n^2$ vectorized columns is a nonzero element of\n$\\mathcal O_E$. Choose $N>v_{\\varpi_E}(\\Delta)$.\nIf $\\Pi'$ has the same finite reduction image, choose\n$h_j\\in\\Pi'$ with\n$\\rho(h_j)\\equiv\\rho(g_j)\\pmod{\\varpi_E^N}$.\nTheir column determinant is congruent to $\\Delta$ modulo\n$\\varpi_E^N$, so is nonzero. Thus the $E$-span of\n$\\rho(\\Pi')$ is again the whole matrix algebra. The same is true\nafter extending scalars to $\\Qlb$, which excludes any nonzero\nproper invariant subspace. Continuity ensures that the reduction\nimage is a finite quotient of $\\Pi$.",
+      "uses": [],
+      "elementary": null
     }
-   ],
-   "missing": [],
-   "open": []
+  ],
+  "proof_deps": [
+    "lem-wf-schur-scalar",
+    "p-real-integral"
+  ],
+  "proof_origin": {
+    "by": "agent",
+    "document": "literature/blueprint/master/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/lem-zl-finite-matrix-irreducibility.md",
+    "place": "## Proof"
+  },
+  "mathlib_searches": [],
+  "mathlib_match": null,
+  "status": "imported",
+  "merged_into": null,
+  "import_flags": [],
+  "blueprint_kind": "lemma",
+  "blueprint_order": 2831,
+  "blueprint_uses": [
+    "lem-wf-schur-scalar",
+    "p-real-integral"
+  ],
+  "proof_split_by": "paragraphs",
+  "lean_audit": {
+    "master": {
+      "state": "none",
+      "decls": [],
+      "missing": []
+    },
+    "slopmaster2": {
+      "state": "closed",
+      "decls": [
+        {
+          "name": "Representation.exists_forall_isIrreducible_baseChange_of_congr",
+          "module": "WeilConjectures.RepresentationTheory.FiniteMatrixWitness",
+          "lines": [
+            169,
+            243
+          ],
+          "kind": "theorem",
+          "sorry": false
+        }
+      ],
+      "missing": [],
+      "open": []
+    }
+  },
+  "chapter": "sec-deligne-laumon-general",
+  "unit": "sk-i-dl-general-real",
+  "lean": {
+    "module": "WeilConjectures.RepresentationTheory.FiniteMatrixWitness",
+    "declaration": "Representation.exists_forall_isIrreducible_baseChange_of_congr",
+    "branch": "slopmaster2",
+    "line": 169,
+    "declarations": [
+      "Representation.exists_forall_isIrreducible_baseChange_of_congr"
+    ],
+    "sorry_free": true,
+    "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state closed)"
   }
- },
- "chapter": "sec-deligne-laumon-general",
- "unit": "sk-i-dl-general-real"
 }

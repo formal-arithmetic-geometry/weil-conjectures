@@ -1,122 +1,126 @@
 {
- "id": "lem-galois-etale-torsor-sheaf-torsor",
- "blueprint": {
-  "is": null,
-  "from": {
-   "node": "thm-galois-lc-etale",
-   "place": "statement, clause 'it carries $M$-torsors to $M$-torsors and simply transitive $M$-actions to simply transitive ones', and proof, Step 4: 'an $M$-action on $P$ corresponds to one on the sheaf, the map $M\\times P\\to P\\times_YP$ being an isomorphism exactly when ...'",
-   "via": []
-  },
-  "same_as": []
- },
- "kind": "statement",
- "title": "Finite etale M-torsors and torsors under the constant sheaf M",
- "statement": "Let $Y$ be a scheme [def-pc-scheme] and $M$ a finite abelian group. An *$M$-torsor over $Y$* is a finite etale [def-weil-pbc-finite-etale-category] surjective [def-weil-surjective-morphism] morphism $\\pi:P\\to Y$ together with an action $m\\mapsto(m+\\cdot)$ of $M$ on $P$ by $Y$-automorphisms ($0$ acting as $\\mathrm{id}_P$, $(m+n)+\\cdot=(m+\\cdot)\\circ(n+\\cdot)$) such that the morphism $\\coprod_{m\\in M}P\\to P\\times_YP$ [def-pc-fibre-product] whose restriction to the $m$-th summand is $(m+\\cdot,\\mathrm{id}_P)$ is an isomorphism. For a $Y$-scheme $P$ let $h_P$ be the sheaf $U\\mapsto\\operatorname{Mor}_Y(U,P)$ on $Y_{\\Et}$ [def-weil-pbc-etale-site]. Let $\\underline M$ be the constant sheaf with value $M$ on $Y_{\\Et}$ [def-weil-pbc-constant-sheaf], whose sections over $U$ are the locally constant maps $a:|U|\\to M$ [lem-weil-pbc-constant-sheaf-sections-locally-constant]; torsors under $\\underline M$ are as in [def-sc-gm-torsor] (a sheaf of sets with an action of $\\underline M$ which is simply transitive on the sections over every object $U$, and with sections over the members of some covering of every $U$). For an $M$-torsor $P$ over $Y$ let $a\\in\\underline M(U)$ act on $\\varphi\\in h_P(U)$ by $(a\\cdot\\varphi)|_{U_m}=(m+\\cdot)\\circ\\varphi|_{U_m}$ on the open and closed subschemes $U_m=a^{-1}(m)$, $m\\in M$. Then:\n\n1. for every $M$-torsor $P$ over $Y$, $h_P$ with this action is a torsor under $\\underline M$;\n2. every torsor $T$ under $\\underline M$ is finite locally constant: there is a covering $\\{U_i\\to Y\\}$ of $Y_{\\Et}$ such that $T|_{U_i}$ is isomorphic to the constant sheaf with value $M$ on $(U_i)_{\\Et}$ for every $i$;\n3. if $T$ is a torsor under $\\underline M$ whose underlying sheaf of sets is isomorphic to $h_Q$ for a finite etale morphism $Q\\to Y$, then there is an action of $M$ on $Q$ by $Y$-automorphisms making $Q\\to Y$ an $M$-torsor over $Y$ such that $h_Q$ with the action of (1) is isomorphic to $T$ as a torsor under $\\underline M$ (by an isomorphism of sheaves commuting with the actions).",
- "source": {
-  "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "proof of Lemma Tag 09ZB (lemma-gabber-for-h1-absolutely-algebraically-closed), lines 14431-14440 ('Such a torsor is clearly a finite locally constant sheaf ... representable by a scheme V finite etale over Z ... V -> Z is surjective as a torsor is locally trivial'); torsors as in Cohomology on Sites, Definition Tag 03AH. Lean (closed): WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsor, Scheme.EtaleTorsor (lines 96-134) and EtaleTorsor.toSheafTorsor (lines 425-438) for (1); WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsorDescent, EtaleTorsor.isFiniteLocallyConstantSheafOfTypes_sheaf (lines 456-477) for (2) and EtaleTorsor.exists_toSheafTorsor_equiv_of_iso (lines 345-360) for (3)"
- },
- "stmt_deps": [
-  "def-pc-scheme",
-  "def-weil-pbc-finite-etale-category",
-  "def-weil-surjective-morphism",
-  "def-pc-fibre-product",
-  "def-weil-pbc-etale-site",
-  "def-weil-pbc-constant-sheaf",
-  "lem-weil-pbc-constant-sheaf-sections-locally-constant",
-  "def-sc-gm-torsor"
- ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
- "mathlib_searches": [
-  {
-   "tool": "leansearch",
-   "query": "torsor under constant sheaf finite group corresponds to finite etale scheme with simply transitive action",
-   "results": "CategoryTheory.Sheaf.isConstant_iff_isIso_counit_app, Sheaf.isConstant_iff_mem_essImage, AddTorsor (Mathlib.Algebra.AddTorsor.Defs)",
-   "date": "2026-10-10",
-   "verdict": "no match"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "torsor under a constant sheaf of a finite group on the étale site of a scheme",
-   "results": "Scheme.Etale.forget, Scheme.Modules.pseudofunctor_obj_obj, Scheme.instCategoryEtale, Scheme.instFaithfulEtaleOverForget, PreGaloisCategory.instIsFundamentalGroupAutFunctorFintypeCat",
-   "date": "2026-10-10",
-   "verdict": "no match"
-  },
-  {
-   "tool": "grep",
-   "query": "grep -rn 'Torsor' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites",
-   "results": "none",
-   "date": "2026-10-10",
-   "verdict": "no match"
-  }
- ],
- "mathlib_match": null,
- "status": "unsplit",
- "merged_into": null,
- "created": {
-  "by": "worker",
-  "item": "thm-galois-lc-etale",
-  "date": "2026-10-10"
- },
- "lean_audit": {
-  "master": {
-   "state": "none",
-   "decls": [],
-   "missing": [
-    "AlgebraicGeometry.Scheme.EtaleTorsor.toSheafTorsor",
-    "AlgebraicGeometry.Scheme.EtaleTorsor.isFiniteLocallyConstantSheafOfTypes_sheaf",
-    "AlgebraicGeometry.Scheme.EtaleTorsor.exists_toSheafTorsor_equiv_of_iso"
-   ]
-  },
-  "slopmaster2": {
-   "state": "closed",
-   "decls": [
-    {
-     "name": "AlgebraicGeometry.Scheme.EtaleTorsor.toSheafTorsor",
-     "module": "WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsor",
-     "lines": [
-      425,
-      438
-     ],
-     "kind": "def",
-     "sorry": false
+  "id": "lem-galois-etale-torsor-sheaf-torsor",
+  "blueprint": {
+    "is": null,
+    "from": {
+      "node": "thm-galois-lc-etale",
+      "place": "statement, clause 'it carries $M$-torsors to $M$-torsors and simply transitive $M$-actions to simply transitive ones', and proof, Step 4: 'an $M$-action on $P$ corresponds to one on the sheaf, the map $M\\times P\\to P\\times_YP$ being an isomorphism exactly when ...'",
+      "via": []
     },
-    {
-     "name": "AlgebraicGeometry.Scheme.EtaleTorsor.isFiniteLocallyConstantSheafOfTypes_sheaf",
-     "module": "WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsorDescent",
-     "lines": [
-      456,
-      477
-     ],
-     "kind": "theorem",
-     "sorry": false
-    },
-    {
-     "name": "AlgebraicGeometry.Scheme.EtaleTorsor.exists_toSheafTorsor_equiv_of_iso",
-     "module": "WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsorDescent",
-     "lines": [
-      345,
-      360
-     ],
-     "kind": "theorem",
-     "sorry": false
-    }
-   ],
-   "missing": [],
-   "open": []
-  }
- },
- "chapter": "sec-curve-estimates",
- "unit": "sk-prop-h2",
- "lean": {
-  "branch": "slopmaster2",
-  "declarations": [
-   "AlgebraicGeometry.Scheme.EtaleTorsor.toSheafTorsor",
-   "AlgebraicGeometry.Scheme.EtaleTorsor.isFiniteLocallyConstantSheafOfTypes_sheaf",
-   "AlgebraicGeometry.Scheme.EtaleTorsor.exists_toSheafTorsor_equiv_of_iso"
+    "same_as": []
+  },
+  "kind": "statement",
+  "title": "Finite etale M-torsors and torsors under the constant sheaf M",
+  "statement": "Let $Y$ be a scheme [def-pc-scheme] and $M$ a finite abelian group. An *$M$-torsor over $Y$* is a finite etale [def-weil-pbc-finite-etale-category] surjective [def-weil-surjective-morphism] morphism $\\pi:P\\to Y$ together with an action $m\\mapsto(m+\\cdot)$ of $M$ on $P$ by $Y$-automorphisms ($0$ acting as $\\mathrm{id}_P$, $(m+n)+\\cdot=(m+\\cdot)\\circ(n+\\cdot)$) such that the morphism $\\coprod_{m\\in M}P\\to P\\times_YP$ [def-pc-fibre-product] whose restriction to the $m$-th summand is $(m+\\cdot,\\mathrm{id}_P)$ is an isomorphism. For a $Y$-scheme $P$ let $h_P$ be the sheaf $U\\mapsto\\operatorname{Mor}_Y(U,P)$ on $Y_{\\Et}$ [def-weil-pbc-etale-site]. Let $\\underline M$ be the constant sheaf with value $M$ on $Y_{\\Et}$ [def-weil-pbc-constant-sheaf], whose sections over $U$ are the locally constant maps $a:|U|\\to M$ [lem-weil-pbc-constant-sheaf-sections-locally-constant]; torsors under $\\underline M$ are as in [def-sc-gm-torsor] (a sheaf of sets with an action of $\\underline M$ which is simply transitive on the sections over every object $U$, and with sections over the members of some covering of every $U$). For an $M$-torsor $P$ over $Y$ let $a\\in\\underline M(U)$ act on $\\varphi\\in h_P(U)$ by $(a\\cdot\\varphi)|_{U_m}=(m+\\cdot)\\circ\\varphi|_{U_m}$ on the open and closed subschemes $U_m=a^{-1}(m)$, $m\\in M$. Then:\n\n1. for every $M$-torsor $P$ over $Y$, $h_P$ with this action is a torsor under $\\underline M$;\n2. every torsor $T$ under $\\underline M$ is finite locally constant: there is a covering $\\{U_i\\to Y\\}$ of $Y_{\\Et}$ such that $T|_{U_i}$ is isomorphic to the constant sheaf with value $M$ on $(U_i)_{\\Et}$ for every $i$;\n3. if $T$ is a torsor under $\\underline M$ whose underlying sheaf of sets is isomorphic to $h_Q$ for a finite etale morphism $Q\\to Y$, then there is an action of $M$ on $Q$ by $Y$-automorphisms making $Q\\to Y$ an $M$-torsor over $Y$ such that $h_Q$ with the action of (1) is isomorphic to $T$ as a torsor under $\\underline M$ (by an isomorphism of sheaves commuting with the actions).",
+  "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "proof of Lemma Tag 09ZB (lemma-gabber-for-h1-absolutely-algebraically-closed), lines 14431-14440 ('Such a torsor is clearly a finite locally constant sheaf ... representable by a scheme V finite etale over Z ... V -> Z is surjective as a torsor is locally trivial'); torsors as in Cohomology on Sites, Definition Tag 03AH. Lean (closed): WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsor, Scheme.EtaleTorsor (lines 96-134) and EtaleTorsor.toSheafTorsor (lines 425-438) for (1); WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsorDescent, EtaleTorsor.isFiniteLocallyConstantSheafOfTypes_sheaf (lines 456-477) for (2) and EtaleTorsor.exists_toSheafTorsor_equiv_of_iso (lines 345-360) for (3)"
+  },
+  "stmt_deps": [
+    "def-pc-scheme",
+    "def-weil-pbc-finite-etale-category",
+    "def-weil-surjective-morphism",
+    "def-pc-fibre-product",
+    "def-weil-pbc-etale-site",
+    "def-weil-pbc-constant-sheaf",
+    "lem-weil-pbc-constant-sheaf-sections-locally-constant",
+    "def-sc-gm-torsor"
   ],
-  "note": "attached by the lead (worker's attachment at creation, verified by L against the sorry map, 2026-10-10)"
- }
+  "proof": [],
+  "proof_deps": [],
+  "proof_origin": null,
+  "mathlib_searches": [
+    {
+      "tool": "leansearch",
+      "query": "torsor under constant sheaf finite group corresponds to finite etale scheme with simply transitive action",
+      "results": "CategoryTheory.Sheaf.isConstant_iff_isIso_counit_app, Sheaf.isConstant_iff_mem_essImage, AddTorsor (Mathlib.Algebra.AddTorsor.Defs)",
+      "date": "2026-10-10",
+      "verdict": "no match"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "torsor under a constant sheaf of a finite group on the étale site of a scheme",
+      "results": "Scheme.Etale.forget, Scheme.Modules.pseudofunctor_obj_obj, Scheme.instCategoryEtale, Scheme.instFaithfulEtaleOverForget, PreGaloisCategory.instIsFundamentalGroupAutFunctorFintypeCat",
+      "date": "2026-10-10",
+      "verdict": "no match"
+    },
+    {
+      "tool": "grep",
+      "query": "grep -rn 'Torsor' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites",
+      "results": "none",
+      "date": "2026-10-10",
+      "verdict": "no match"
+    }
+  ],
+  "mathlib_match": null,
+  "status": "unsplit",
+  "merged_into": null,
+  "created": {
+    "by": "worker",
+    "item": "thm-galois-lc-etale",
+    "date": "2026-10-10"
+  },
+  "lean_audit": {
+    "master": {
+      "state": "none",
+      "decls": [],
+      "missing": [
+        "AlgebraicGeometry.Scheme.EtaleTorsor.toSheafTorsor",
+        "AlgebraicGeometry.Scheme.EtaleTorsor.isFiniteLocallyConstantSheafOfTypes_sheaf",
+        "AlgebraicGeometry.Scheme.EtaleTorsor.exists_toSheafTorsor_equiv_of_iso"
+      ]
+    },
+    "slopmaster2": {
+      "state": "closed",
+      "decls": [
+        {
+          "name": "AlgebraicGeometry.Scheme.EtaleTorsor.toSheafTorsor",
+          "module": "WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsor",
+          "lines": [
+            425,
+            438
+          ],
+          "kind": "def",
+          "sorry": false
+        },
+        {
+          "name": "AlgebraicGeometry.Scheme.EtaleTorsor.isFiniteLocallyConstantSheafOfTypes_sheaf",
+          "module": "WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsorDescent",
+          "lines": [
+            456,
+            477
+          ],
+          "kind": "theorem",
+          "sorry": false
+        },
+        {
+          "name": "AlgebraicGeometry.Scheme.EtaleTorsor.exists_toSheafTorsor_equiv_of_iso",
+          "module": "WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsorDescent",
+          "lines": [
+            345,
+            360
+          ],
+          "kind": "theorem",
+          "sorry": false
+        }
+      ],
+      "missing": [],
+      "open": []
+    }
+  },
+  "chapter": "sec-curve-estimates",
+  "unit": "sk-prop-h2",
+  "lean": {
+    "module": "WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsor",
+    "declaration": "AlgebraicGeometry.Scheme.EtaleTorsor.toSheafTorsor",
+    "branch": "slopmaster2",
+    "line": 425,
+    "declarations": [
+      "AlgebraicGeometry.Scheme.EtaleTorsor.toSheafTorsor",
+      "AlgebraicGeometry.Scheme.EtaleTorsor.isFiniteLocallyConstantSheafOfTypes_sheaf",
+      "AlgebraicGeometry.Scheme.EtaleTorsor.exists_toSheafTorsor_equiv_of_iso"
+    ],
+    "sorry_free": true,
+    "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state closed)"
+  }
 }

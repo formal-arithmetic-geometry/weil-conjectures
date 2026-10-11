@@ -1,285 +1,289 @@
 {
- "id": "lem-weil-pbc-etale-underived-exchange-restriction",
- "blueprint": {
-  "is": null,
-  "from": {
-   "node": "lemma-weil-pbc-target-locality",
-   "place": "step 4 of its split (source: Cohomology on Sites, Lemma label lemma-restrict-direct-image-open, Tag 0D6G, as invoked in the proof of Etale Cohomology, Lemma label lemma-base-change-local, Tag 0EZR (literature/stacks-project/etale-cohomology.tex), last paragraph)",
-   "via": [
-    "lem-weil-pbc-etale-localization-exchange"
-   ]
+  "id": "lem-weil-pbc-etale-underived-exchange-restriction",
+  "blueprint": {
+    "is": null,
+    "from": {
+      "node": "lemma-weil-pbc-target-locality",
+      "place": "step 4 of its split (source: Cohomology on Sites, Lemma label lemma-restrict-direct-image-open, Tag 0D6G, as invoked in the proof of Etale Cohomology, Lemma label lemma-base-change-local, Tag 0EZR (literature/stacks-project/etale-cohomology.tex), last paragraph)",
+      "via": [
+        "lem-weil-pbc-etale-localization-exchange"
+      ]
+    },
+    "same_as": null
   },
-  "same_as": null
- },
- "kind": "statement",
- "title": "Underived exchange along an etale morphism is the restriction identification",
- "statement": "Let $f:X\\to Y$ be a morphism of schemes [def-pc-scheme] and $j:V\\to Y$ an etale morphism [def-weil-etale-morphism]. Let $X_V=X\\times_YV$ [def-pc-fibre-product] with projections $j_X:X_V\\to X$ (etale, as a base change of $j$) and $f_V:X_V\\to V$, and let $\\square_j=(f,f_V,j,j_X)$ be the cartesian square [def-weil-pbc-cartesian-square] with identification the identity of $X\\times_YV$. Use the small etale sites [def-weil-pbc-etale-site], the abelian sheaves on them [def-weil-pbc-abelian-etale-sheaves], the direct images $(u_*F)(W)=F(W\\times_TU)$ for $u:U\\to T$ [def-weil-pbc-direct-image] and the inverse images [def-weil-pbc-inverse-image]. For an abelian sheaf $G$ on $Y_{\\Et}$ write $G|_V(W)=G(W\\xrightarrow{p}V\\xrightarrow{j}Y)$ ($p:W\\to V$ etale) and $\\rho_{j,G}:j^{-1}G\\xrightarrow{\\sim}G|_V$ for the natural isomorphism of [lem-weil-pbc-etale-inverse-image-restriction]; likewise $F|_{X_V}(T)=F(T\\to X_V\\xrightarrow{j_X}X)$ and $\\rho_{j_X,F}:j_X^{-1}F\\xrightarrow{\\sim}F|_{X_V}$ for an abelian sheaf $F$ on $X_{\\Et}$. For an object $p:W\\to V$ of $V_{\\Et}$ let\n$$c_W:W\\times_VX_V\\longrightarrow W\\times_YX,\\qquad c_W=(\\mathrm{pr}_W,\\ j_X\\circ\\mathrm{pr}_{X_V}),$$\nan isomorphism of schemes over $X$ (inverse $(\\mathrm{pr}_W,(\\mathrm{pr}_X,p\\circ\\mathrm{pr}_W))$), hence an isomorphism in $X_{\\Et}$, and put\n$$\\psi_{F,W}=F(c_W):(f_*F)|_V(W)=F(W\\times_YX)\\longrightarrow F(W\\times_VX_V\\to X)=F|_{X_V}(W\\times_VX_V)=\\bigl(f_{V*}(F|_{X_V})\\bigr)(W).$$\nThen:\n1. $\\psi_F=(\\psi_{F,W})_W:(f_*F)|_V\\to f_{V*}(F|_{X_V})$ is an isomorphism of abelian sheaves on $V_{\\Et}$ (compatible with the restriction maps along morphisms $W'\\to W$ of $V_{\\Et}$), natural in $F$.\n2. The underived exchange morphism [def-weil-pbc-underived-exchange] $\\Ex^0_{\\square_j,F}:j^{-1}f_*F\\to f_{V*}j_X^{-1}F$ satisfies\n$$f_{V*}(\\rho_{j_X,F})\\circ\\Ex^0_{\\square_j,F}=\\psi_F\\circ\\rho_{j,f_*F}.$$\nIn particular $\\Ex^0_{\\square_j,F}$ is an isomorphism for every abelian sheaf $F$ on $X_{\\Et}$: the underived exchange along an etale base change is, on sections, the identity $F(W\\times_YX)=F(W\\times_VX_V)$.",
- "source": {
-  "document": "literature/stacks-project/sites.tex",
-  "place": "Sites, Lemma label lemma-localize-morphism, Tag 03CF (last assertion $f'_*j_U^{-1}=j_V^{-1}f_*$) and Lemma label lemma-localize-morphism-strong, Tag 03EF; used as an identification of base change maps in Etale Cohomology, proof of Lemma label lemma-base-change-local, Tag 0EZR, part (1) (literature/stacks-project/etale-cohomology.tex), and as 'it is clear that $(f_*\\mathcal F)|_{\\mathcal D/V}=g_*(\\mathcal F|_{\\mathcal C/U})$' in Cohomology on Sites, proof of Lemma Tag 0D6G (literature/stacks-project/sites-cohomology.tex); the base change map is Cohomology on Sites, Remark Tag 07A7"
- },
- "stmt_deps": [
-  "def-pc-scheme",
-  "def-weil-etale-morphism",
-  "def-pc-fibre-product",
-  "def-weil-pbc-cartesian-square",
-  "def-weil-pbc-etale-site",
-  "def-weil-pbc-abelian-etale-sheaves",
-  "def-weil-pbc-direct-image",
-  "def-weil-pbc-inverse-image",
-  "lem-weil-pbc-etale-inverse-image-restriction",
-  "def-weil-pbc-underived-exchange"
- ],
- "proof": [
-  {
-   "text": "*Step 1 (the objects and the isomorphisms $c_W$).* Put $h=f\\circ j_X=j\\circ f_V:X_V\\to Y$. Let $p:W\\to V$ be an object of $V_{\\Et}$. By [lem-weil-pbc-etale-base-change-finite-limits] (1), applied to $f_V:X_V\\to V$ and to $f:X\\to Y$ with the object $j\\circ p:W\\to Y$ of $Y_{\\Et}$ (a composite of etale morphisms, as in clause 1 of [lem-weil-pbc-etale-inverse-image-restriction]), $\\mathrm{pr}_{X_V}:W\\times_VX_V\\to X_V$ is an object of $(X_V)_{\\Et}$ and $\\mathrm{pr}_X:W\\times_YX\\to X$ is an object of $X_{\\Et}$; $W\\times_VX_V$ is an object of $X_{\\Et}$ through $j_X\\circ\\mathrm{pr}_{X_V}$ (the functor $\\iota_{j_X}$ of [lem-weil-pbc-etale-inverse-image-restriction]). The map $c_W=(\\mathrm{pr}_W,j_X\\circ\\mathrm{pr}_{X_V})$ is defined [def-pc-fibre-product], since $j\\circ p\\circ\\mathrm{pr}_W=j\\circ f_V\\circ\\mathrm{pr}_{X_V}=f\\circ j_X\\circ\\mathrm{pr}_{X_V}$, and it is a morphism over $X$: $\\mathrm{pr}_X\\circ c_W=j_X\\circ\\mathrm{pr}_{X_V}$. It is an isomorphism: apply [lem-weil-pbc-cartesian-square-pasting] to the diagram with rows $W\\times_VX_V\\xrightarrow{\\mathrm{pr}_W}W$, $X_V\\xrightarrow{f_V}V$, $X\\xrightarrow{f}Y$ and columns $\\mathrm{pr}_{X_V},j_X$ on the left and $p,j$ on the right: the lower square $(X_V,f_V,j_X)$ is a fibre product of $j$ and $f$, the upper square is the fibre product $W\\times_VX_V$ of $p$ and $f_V$, so the outer rectangle $(W\\times_VX_V,\\mathrm{pr}_W,j_X\\circ\\mathrm{pr}_{X_V})$ is a fibre product of $j\\circ p$ and $f$; $c_W$ is the comparison map from it to the chosen fibre product $W\\times_YX$, hence an isomorphism, with inverse $(\\mathrm{pr}_W,(\\mathrm{pr}_X,p\\circ\\mathrm{pr}_W))$ (both composites are the identity by the uniqueness in the universal properties). Its inverse is again over $X$, so $c_W$ is an isomorphism in $X_{\\Et}$. More generally, for a morphism $a:W'\\to W$ of $V_{\\Et}$, the two morphisms $c_W\\circ(a\\times_V\\mathrm{id}_{X_V})$ and $(a\\times_Y\\mathrm{id}_X)\\circ c_{W'}:W'\\times_VX_V\\to W\\times_YX$ have the same components $a\\circ\\mathrm{pr}_{W'}$ and $j_X\\circ\\mathrm{pr}_{X_V}$, hence are equal [def-pc-fibre-product]. (In Stacks 03CF this is the equality $u'(V')=u(V')$ of the localized functor: $V'\\times_YX$ seen over $X\\times_YV$.)",
-   "uses": [
+  "kind": "statement",
+  "title": "Underived exchange along an etale morphism is the restriction identification",
+  "statement": "Let $f:X\\to Y$ be a morphism of schemes [def-pc-scheme] and $j:V\\to Y$ an etale morphism [def-weil-etale-morphism]. Let $X_V=X\\times_YV$ [def-pc-fibre-product] with projections $j_X:X_V\\to X$ (etale, as a base change of $j$) and $f_V:X_V\\to V$, and let $\\square_j=(f,f_V,j,j_X)$ be the cartesian square [def-weil-pbc-cartesian-square] with identification the identity of $X\\times_YV$. Use the small etale sites [def-weil-pbc-etale-site], the abelian sheaves on them [def-weil-pbc-abelian-etale-sheaves], the direct images $(u_*F)(W)=F(W\\times_TU)$ for $u:U\\to T$ [def-weil-pbc-direct-image] and the inverse images [def-weil-pbc-inverse-image]. For an abelian sheaf $G$ on $Y_{\\Et}$ write $G|_V(W)=G(W\\xrightarrow{p}V\\xrightarrow{j}Y)$ ($p:W\\to V$ etale) and $\\rho_{j,G}:j^{-1}G\\xrightarrow{\\sim}G|_V$ for the natural isomorphism of [lem-weil-pbc-etale-inverse-image-restriction]; likewise $F|_{X_V}(T)=F(T\\to X_V\\xrightarrow{j_X}X)$ and $\\rho_{j_X,F}:j_X^{-1}F\\xrightarrow{\\sim}F|_{X_V}$ for an abelian sheaf $F$ on $X_{\\Et}$. For an object $p:W\\to V$ of $V_{\\Et}$ let\n$$c_W:W\\times_VX_V\\longrightarrow W\\times_YX,\\qquad c_W=(\\mathrm{pr}_W,\\ j_X\\circ\\mathrm{pr}_{X_V}),$$\nan isomorphism of schemes over $X$ (inverse $(\\mathrm{pr}_W,(\\mathrm{pr}_X,p\\circ\\mathrm{pr}_W))$), hence an isomorphism in $X_{\\Et}$, and put\n$$\\psi_{F,W}=F(c_W):(f_*F)|_V(W)=F(W\\times_YX)\\longrightarrow F(W\\times_VX_V\\to X)=F|_{X_V}(W\\times_VX_V)=\\bigl(f_{V*}(F|_{X_V})\\bigr)(W).$$\nThen:\n1. $\\psi_F=(\\psi_{F,W})_W:(f_*F)|_V\\to f_{V*}(F|_{X_V})$ is an isomorphism of abelian sheaves on $V_{\\Et}$ (compatible with the restriction maps along morphisms $W'\\to W$ of $V_{\\Et}$), natural in $F$.\n2. The underived exchange morphism [def-weil-pbc-underived-exchange] $\\Ex^0_{\\square_j,F}:j^{-1}f_*F\\to f_{V*}j_X^{-1}F$ satisfies\n$$f_{V*}(\\rho_{j_X,F})\\circ\\Ex^0_{\\square_j,F}=\\psi_F\\circ\\rho_{j,f_*F}.$$\nIn particular $\\Ex^0_{\\square_j,F}$ is an isomorphism for every abelian sheaf $F$ on $X_{\\Et}$: the underived exchange along an etale base change is, on sections, the identity $F(W\\times_YX)=F(W\\times_VX_V)$.",
+  "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Sites, Lemma label lemma-localize-morphism, Tag 03CF (last assertion $f'_*j_U^{-1}=j_V^{-1}f_*$) and Lemma label lemma-localize-morphism-strong, Tag 03EF; used as an identification of base change maps in Etale Cohomology, proof of Lemma label lemma-base-change-local, Tag 0EZR, part (1) (literature/stacks-project/etale-cohomology.tex), and as 'it is clear that $(f_*\\mathcal F)|_{\\mathcal D/V}=g_*(\\mathcal F|_{\\mathcal C/U})$' in Cohomology on Sites, proof of Lemma Tag 0D6G (literature/stacks-project/sites-cohomology.tex); the base change map is Cohomology on Sites, Remark Tag 07A7"
+  },
+  "stmt_deps": [
+    "def-pc-scheme",
+    "def-weil-etale-morphism",
+    "def-pc-fibre-product",
+    "def-weil-pbc-cartesian-square",
+    "def-weil-pbc-etale-site",
+    "def-weil-pbc-abelian-etale-sheaves",
+    "def-weil-pbc-direct-image",
+    "def-weil-pbc-inverse-image",
+    "lem-weil-pbc-etale-inverse-image-restriction",
+    "def-weil-pbc-underived-exchange"
+  ],
+  "proof": [
+    {
+      "text": "*Step 1 (the objects and the isomorphisms $c_W$).* Put $h=f\\circ j_X=j\\circ f_V:X_V\\to Y$. Let $p:W\\to V$ be an object of $V_{\\Et}$. By [lem-weil-pbc-etale-base-change-finite-limits] (1), applied to $f_V:X_V\\to V$ and to $f:X\\to Y$ with the object $j\\circ p:W\\to Y$ of $Y_{\\Et}$ (a composite of etale morphisms, as in clause 1 of [lem-weil-pbc-etale-inverse-image-restriction]), $\\mathrm{pr}_{X_V}:W\\times_VX_V\\to X_V$ is an object of $(X_V)_{\\Et}$ and $\\mathrm{pr}_X:W\\times_YX\\to X$ is an object of $X_{\\Et}$; $W\\times_VX_V$ is an object of $X_{\\Et}$ through $j_X\\circ\\mathrm{pr}_{X_V}$ (the functor $\\iota_{j_X}$ of [lem-weil-pbc-etale-inverse-image-restriction]). The map $c_W=(\\mathrm{pr}_W,j_X\\circ\\mathrm{pr}_{X_V})$ is defined [def-pc-fibre-product], since $j\\circ p\\circ\\mathrm{pr}_W=j\\circ f_V\\circ\\mathrm{pr}_{X_V}=f\\circ j_X\\circ\\mathrm{pr}_{X_V}$, and it is a morphism over $X$: $\\mathrm{pr}_X\\circ c_W=j_X\\circ\\mathrm{pr}_{X_V}$. It is an isomorphism: apply [lem-weil-pbc-cartesian-square-pasting] to the diagram with rows $W\\times_VX_V\\xrightarrow{\\mathrm{pr}_W}W$, $X_V\\xrightarrow{f_V}V$, $X\\xrightarrow{f}Y$ and columns $\\mathrm{pr}_{X_V},j_X$ on the left and $p,j$ on the right: the lower square $(X_V,f_V,j_X)$ is a fibre product of $j$ and $f$, the upper square is the fibre product $W\\times_VX_V$ of $p$ and $f_V$, so the outer rectangle $(W\\times_VX_V,\\mathrm{pr}_W,j_X\\circ\\mathrm{pr}_{X_V})$ is a fibre product of $j\\circ p$ and $f$; $c_W$ is the comparison map from it to the chosen fibre product $W\\times_YX$, hence an isomorphism, with inverse $(\\mathrm{pr}_W,(\\mathrm{pr}_X,p\\circ\\mathrm{pr}_W))$ (both composites are the identity by the uniqueness in the universal properties). Its inverse is again over $X$, so $c_W$ is an isomorphism in $X_{\\Et}$. More generally, for a morphism $a:W'\\to W$ of $V_{\\Et}$, the two morphisms $c_W\\circ(a\\times_V\\mathrm{id}_{X_V})$ and $(a\\times_Y\\mathrm{id}_X)\\circ c_{W'}:W'\\times_VX_V\\to W\\times_YX$ have the same components $a\\circ\\mathrm{pr}_{W'}$ and $j_X\\circ\\mathrm{pr}_{X_V}$, hence are equal [def-pc-fibre-product]. (In Stacks 03CF this is the equality $u'(V')=u(V')$ of the localized functor: $V'\\times_YX$ seen over $X\\times_YV$.)",
+      "uses": [
+        "lem-weil-pbc-etale-base-change-finite-limits",
+        "lem-weil-pbc-etale-inverse-image-restriction",
+        "def-pc-fibre-product",
+        "lem-weil-pbc-cartesian-square-pasting"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/sites.tex",
+        "place": "Sites, Lemma label lemma-localize-morphism (Tag 03CF), proof: $(j_V^{-1}f_*\\mathcal F)(V'/V)=f_*\\mathcal F(V')=\\mathcal F(u(V'))=(j_U^{-1}\\mathcal F)(u(V')/U)=(f'_*j_U^{-1}\\mathcal F)(V'/V)$; Lemma label lemma-localize-morphism-strong (Tag 03EF)"
+      }
+    },
+    {
+      "text": "*Step 2 (sections of the two sheaves).* By clause 1 of [lem-weil-pbc-etale-inverse-image-restriction] (for $j$ and for $j_X$), $(f_*F)|_V$ and $F|_{X_V}$ are abelian sheaves, and by [def-weil-pbc-direct-image] so is $f_{V*}(F|_{X_V})$. On an object $p:W\\to V$ of $V_{\\Et}$: $(f_*F)|_V(W)=(f_*F)(W\\xrightarrow{j p}Y)=F(W\\times_YX)$, and $f_{V*}(F|_{X_V})(W)=F|_{X_V}(W\\times_VX_V)=F(W\\times_VX_V\\xrightarrow{j_X\\mathrm{pr}}X)$; on a morphism $a:W'\\to W$ of $V_{\\Et}$ the restriction maps are $F(a\\times_Y\\mathrm{id}_X)$ and $F(a\\times_V\\mathrm{id}_{X_V})$ respectively (the direct image acts on morphisms by base change, and $G|_V$, $F|_{X_V}$ have the restriction maps of $G$, $F$). These are the two outer terms of the chain of equalities in the proof of Stacks 03CF.",
+      "uses": [
+        "lem-weil-pbc-etale-inverse-image-restriction",
+        "def-weil-pbc-direct-image"
+      ],
+      "elementary": true,
+      "source": {
+        "document": "literature/stacks-project/sites.tex",
+        "place": "Sites, Lemma label lemma-localize-morphism (Tag 03CF), proof: $(j_V^{-1}f_*\\mathcal F)(V'/V)=f_*\\mathcal F(V')=\\mathcal F(u(V'))=(j_U^{-1}\\mathcal F)(u(V')/U)=(f'_*j_U^{-1}\\mathcal F)(V'/V)$; Lemma label lemma-localize-morphism-strong (Tag 03EF)"
+      }
+    },
+    {
+      "text": "*Step 3 (clause 1: $\\psi_F$ is a natural isomorphism of sheaves).* By step 1, $c_W$ is an isomorphism of $X_{\\Et}$, so $\\psi_{F,W}=F(c_W)$ is an isomorphism of abelian groups with inverse $F(c_W^{-1})$. For $a:W'\\to W$ in $V_{\\Et}$, applying the contravariant functor $F$ to the equality $c_W\\circ(a\\times_V\\mathrm{id}_{X_V})=(a\\times_Y\\mathrm{id}_X)\\circ c_{W'}$ of step 1 gives $F(a\\times_V\\mathrm{id}_{X_V})\\circ\\psi_{F,W}=\\psi_{F,W'}\\circ F(a\\times_Y\\mathrm{id}_X)$, i.e. by step 2 $\\psi_F$ commutes with the restriction maps; so $\\psi_F$ is a morphism of abelian sheaves [def-weil-pbc-abelian-etale-sheaves] (a morphism of the underlying presheaves) and, its components being bijective, an isomorphism (the components $F(c_W^{-1})$ form the inverse morphism). Naturality in $F$: for a morphism $\\varphi:F\\to F'$ the morphisms $(f_*\\varphi)|_V$ and $f_{V*}(\\varphi|_{X_V})$ have components $\\varphi(W\\times_YX)$ and $\\varphi(W\\times_VX_V)$ (step 2), and $\\varphi(W\\times_VX_V)\\circ F(c_W)=F'(c_W)\\circ\\varphi(W\\times_YX)$ is the naturality of $\\varphi$ along $c_W$. This is clause 1, the isomorphism $f'_*j_U^{-1}=j_V^{-1}f_*$ of Stacks 03CF for the localization of the morphism of sites $f$ at $V$ (Stacks 03EF identifies the localized morphism with $f_V$).",
+      "uses": [
+        "def-weil-pbc-abelian-etale-sheaves"
+      ],
+      "elementary": true,
+      "source": {
+        "document": "literature/stacks-project/sites.tex",
+        "place": "Sites, Lemma label lemma-localize-morphism (Tag 03CF), proof: $(j_V^{-1}f_*\\mathcal F)(V'/V)=f_*\\mathcal F(V')=\\mathcal F(u(V'))=(j_U^{-1}\\mathcal F)(u(V')/U)=(f'_*j_U^{-1}\\mathcal F)(V'/V)$; Lemma label lemma-localize-morphism-strong (Tag 03EF)"
+      }
+    },
+    {
+      "text": "*Step 4 (reduction to the transposes under $j^{-1}\\dashv j_*$).* Write $A=f_*F$ and $B=F|_{X_V}$. Both sides of the equality of clause 2 are morphisms $j^{-1}A\\to f_{V*}B$. By [def-weil-pbc-inverse-image], $j^{-1}$ is left adjoint to $j_*$ with unit $\\eta_j$, so $\\alpha\\mapsto j_*(\\alpha)\\circ\\eta_{j,A}$ is a bijection from morphisms $j^{-1}A\\to f_{V*}B$ to morphisms $A\\to j_*f_{V*}B$. Hence it suffices to show $L=R$ for\n$$L=j_*\\bigl(f_{V*}(\\rho_{j_X,F})\\circ\\Ex^0_{\\square_j,F}\\bigr)\\circ\\eta_{j,A},\\qquad R=j_*(\\psi_F\\circ\\rho_{j,A})\\circ\\eta_{j,A},$$\nand, these being morphisms of sheaves on $Y_{\\Et}$, it suffices to compare their components at every object $t:T\\to Y$ of $Y_{\\Et}$. Write $T_V=T\\times_YV$ (an object of $V_{\\Et}$ via $\\mathrm{pr}_V$), $p_T:T_V\\to T$ the projection, and $T_X=T\\times_YX$.",
+      "uses": [
+        "def-weil-pbc-inverse-image"
+      ],
+      "elementary": true,
+      "source": {
+        "document": "literature/stacks-project/sites.tex",
+        "place": "written by the agent: the comparison with the exchange morphism is not in Stacks (asserted without argument in Etale Cohomology, proof of Lemma Tag 0EZR (1), literature/stacks-project/etale-cohomology.tex); it follows the mate argument of the source Lean AlgebraicGeometry.Etale.baseChangeMap_flip_eq (WeilConjectures/SixFunctors/BaseChange/Etale.lean, branch slopmaster2)"
+      }
+    },
+    {
+      "text": "*Step 5 (the right side on sections).* By [def-weil-pbc-direct-image], $j_*(\\beta)(T)=\\beta(T_V)$ for a morphism $\\beta$ of sheaves on $V_{\\Et}$. By clause 2 of [lem-weil-pbc-etale-inverse-image-restriction] for the etale $j$ and $G=A$, $\\rho_{j,A}(T_V)\\circ\\eta_{j,A}(T)=A(p_T)$, the restriction of $A=f_*F$ along $p_T$, which by step 2 is $F(p_T\\times_Y\\mathrm{id}_X):F(T_X)\\to F(T_V\\times_YX)$. Then $\\psi_F(T_V)=F(c_{T_V})$. Hence\n$$R(T)=F(c_{T_V})\\circ F(p_T\\times_Y\\mathrm{id}_X)=F(m_T),\\qquad m_T=(p_T\\times_Y\\mathrm{id}_X)\\circ c_{T_V}:T_V\\times_VX_V\\to T_X,$$\nand by the definition of $c_{T_V}$ (step 1) the components of $m_T$ are $\\mathrm{pr}_T\\circ\\mathrm{pr}_{T_V}$ (to $T$) and $j_X\\circ\\mathrm{pr}_{X_V}$ (to $X$).",
+      "uses": [
+        "def-weil-pbc-direct-image",
+        "lem-weil-pbc-etale-inverse-image-restriction"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/sites.tex",
+        "place": "written by the agent: the comparison with the exchange morphism is not in Stacks (asserted without argument in Etale Cohomology, proof of Lemma Tag 0EZR (1), literature/stacks-project/etale-cohomology.tex); it follows the mate argument of the source Lean AlgebraicGeometry.Etale.baseChangeMap_flip_eq (WeilConjectures/SixFunctors/BaseChange/Etale.lean, branch slopmaster2)"
+      }
+    },
+    {
+      "text": "*Step 6 (the left side through the composition isomorphisms).* By [def-weil-pbc-underived-exchange], $\\Ex^0_{\\square_j,F}$ is the adjoint under $f_V^{-1}\\dashv f_{V*}$ of $j_X^{-1}\\varepsilon_{f,F}\\circ\\theta_{\\square_j,A}$, i.e. $\\Ex^0_{\\square_j,F}=f_{V*}(j_X^{-1}\\varepsilon_{f,F}\\circ\\theta_{\\square_j,A})\\circ\\eta_{f_V,j^{-1}A}$. The specified isomorphism of the cartesian square [def-weil-pbc-cartesian-square] is the composite of composition isomorphisms $\\theta_{\\square_j}=c_{f,j_X}^{-1}\\circ c_{j,f_V}:f_V^{-1}j^{-1}\\to h^{-1}\\to j_X^{-1}f^{-1}$, with $c_{u,v}:v^{-1}u^{-1}\\to(u\\circ v)^{-1}$ and $d_{u,v}:(u\\circ v)_*\\to u_*v_*$ of [lem-weil-pbc-inverse-image-composition] (this is the definition of the attached source Lean `AlgebraicGeometry.Etale.squareUpperStarIso`: `(upperStarComp f' g (g' ≫ f) sq.w).symm ≪≫ upperStarComp g' f`); both composites $j\\circ f_V$ and $f\\circ j_X$ are the one morphism $h$. (a) Clause 2 of [lem-weil-pbc-inverse-image-composition] for $(u,v)=(j,f_V)$ and $G=A$ gives $j_*f_{V*}(c_{j,f_V,A})\\circ j_*(\\eta_{f_V,j^{-1}A})\\circ\\eta_{j,A}=d_{j,f_V,h^{-1}A}\\circ\\eta_{h,A}$; with the naturality of $d_{j,f_V}$ (clause 1) this gives\n$$j_*(\\Ex^0_{\\square_j,F})\\circ\\eta_{j,A}=d_{j,f_V,j_X^{-1}F}\\circ h_*(j_X^{-1}\\varepsilon_{f,F})\\circ h_*(c_{f,j_X,A}^{-1})\\circ\\eta_{h,A}.$$\n(b) Clause 2 for $(u,v)=(f,j_X)$ and $G=A$ gives $\\eta_{h,A}=d_{f,j_X,h^{-1}A}^{-1}\\circ f_*j_{X*}(c_{f,j_X,A})\\circ f_*(\\eta_{j_X,f^{-1}A})\\circ\\eta_{f,A}$; by the naturality of $d_{f,j_X}$, $h_*(c^{-1}_{f,j_X,A})\\circ d^{-1}_{f,j_X,h^{-1}A}=d^{-1}_{f,j_X,j_X^{-1}f^{-1}A}\\circ f_*j_{X*}(c^{-1}_{f,j_X,A})$, so $h_*(c^{-1}_{f,j_X,A})\\circ\\eta_{h,A}=d^{-1}_{f,j_X,j_X^{-1}f^{-1}A}\\circ f_*(\\eta_{j_X,f^{-1}A})\\circ\\eta_{f,A}$. (c) By the naturality of $d_{f,j_X}$, of $\\eta_{j_X}$ (along $\\varepsilon_{f,F}:f^{-1}A\\to F$) and the triangle identity $f_*(\\varepsilon_{f,F})\\circ\\eta_{f,f_*F}=\\mathrm{id}_{f_*F}$ of $f^{-1}\\dashv f_*$ [def-weil-pbc-inverse-image]: $h_*(j_X^{-1}\\varepsilon_{f,F})\\circ d^{-1}_{f,j_X,j_X^{-1}f^{-1}A}\\circ f_*(\\eta_{j_X,f^{-1}A})\\circ\\eta_{f,A}=d^{-1}_{f,j_X,j_X^{-1}F}\\circ f_*(\\eta_{j_X,F})\\circ f_*(\\varepsilon_{f,F})\\circ\\eta_{f,A}=d^{-1}_{f,j_X,j_X^{-1}F}\\circ f_*(\\eta_{j_X,F})$. Together:\n$$j_*(\\Ex^0_{\\square_j,F})\\circ\\eta_{j,A}=d_{j,f_V,j_X^{-1}F}\\circ d^{-1}_{f,j_X,j_X^{-1}F}\\circ f_*(\\eta_{j_X,F})$$\n(the exchange morphism is the mate of the composition isomorphism of direct images). Composing with $j_*f_{V*}(\\rho_{j_X,F})$ and using the naturality of $d_{j,f_V}$ and $d_{f,j_X}$ once more:\n$$L=d_{j,f_V,B}\\circ d^{-1}_{f,j_X,B}\\circ f_*\\bigl(j_{X*}(\\rho_{j_X,F})\\circ\\eta_{j_X,F}\\bigr).$$",
+      "uses": [
+        "def-weil-pbc-underived-exchange",
+        "def-weil-pbc-cartesian-square",
+        "lem-weil-pbc-inverse-image-composition",
+        "def-weil-pbc-inverse-image",
+        "def-weil-pbc-direct-image"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/sites.tex",
+        "place": "written by the agent: the comparison with the exchange morphism is not in Stacks (asserted without argument in Etale Cohomology, proof of Lemma Tag 0EZR (1), literature/stacks-project/etale-cohomology.tex); it follows the mate argument of the source Lean AlgebraicGeometry.Etale.baseChangeMap_flip_eq (WeilConjectures/SixFunctors/BaseChange/Etale.lean, branch slopmaster2)"
+      }
+    },
+    {
+      "text": "*Step 7 (the left side on sections; clause 2).* Evaluate the formula of step 6 at $T$. By [def-weil-pbc-direct-image], $f_*(\\gamma)(T)=\\gamma(T_X)$. By clause 2 of [lem-weil-pbc-etale-inverse-image-restriction] for the etale $j_X$ and the object $T_X$ of $X_{\\Et}$, $\\rho_{j_X,F}(T_X\\times_XX_V)\\circ\\eta_{j_X,F}(T_X)=F(q)$, $q:T_X\\times_XX_V\\to T_X$ the projection. By clause 1 of [lem-weil-pbc-inverse-image-composition], $d_{f,j_X,B}(T)=B(k_1)$ and $d_{j,f_V,B}(T)=B(k_2)$ for the canonical isomorphisms $k_1=(\\mathrm{pr}_T\\circ\\mathrm{pr}_{T_X},\\mathrm{pr}_{X_V}):T_X\\times_XX_V\\to T\\times_YX_V$ and $k_2=(\\mathrm{pr}_T\\circ\\mathrm{pr}_{T_V},\\mathrm{pr}_{X_V}):T_V\\times_VX_V\\to T\\times_YX_V$ ($T\\times_YX_V$ formed with $h$) [def-pc-fibre-product]; and $B(k)=F(k)$, $B=F|_{X_V}$ having the restriction maps of $F$. So $L(T)=F(k_2)\\circ F(k_1)^{-1}\\circ F(q)=F(q\\circ k_1^{-1}\\circ k_2)$. Now $k_1^{-1}=((\\mathrm{pr}_T,j_X\\circ\\mathrm{pr}_{X_V}),\\mathrm{pr}_{X_V})$, so $q\\circ k_1^{-1}=(\\mathrm{pr}_T,j_X\\circ\\mathrm{pr}_{X_V}):T\\times_YX_V\\to T_X$, and $q\\circ k_1^{-1}\\circ k_2$ has components $\\mathrm{pr}_T\\circ\\mathrm{pr}_{T_V}$ and $j_X\\circ\\mathrm{pr}_{X_V}$: it is the morphism $m_T$ of step 5, by the uniqueness in the universal property of $T_X$. Hence $L(T)=F(m_T)=R(T)$ for every $T$, so $L=R$, and by step 4 $f_{V*}(\\rho_{j_X,F})\\circ\\Ex^0_{\\square_j,F}=\\psi_F\\circ\\rho_{j,f_*F}$: clause 2. Finally $\\Ex^0_{\\square_j,F}=f_{V*}(\\rho_{j_X,F})^{-1}\\circ\\psi_F\\circ\\rho_{j,f_*F}$ is a composite of isomorphisms (clause 1 of [lem-weil-pbc-etale-inverse-image-restriction], step 3, and $f_{V*}$ a functor), hence an isomorphism; on sections it is the identification $F(W\\times_YX)=F(W\\times_VX_V)$ through $c_W$.",
+      "uses": [
+        "def-weil-pbc-direct-image",
+        "lem-weil-pbc-etale-inverse-image-restriction",
+        "lem-weil-pbc-inverse-image-composition",
+        "def-pc-fibre-product"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/sites.tex",
+        "place": "written by the agent: the comparison with the exchange morphism is not in Stacks (asserted without argument in Etale Cohomology, proof of Lemma Tag 0EZR (1), literature/stacks-project/etale-cohomology.tex); it follows the mate argument of the source Lean AlgebraicGeometry.Etale.baseChangeMap_flip_eq (WeilConjectures/SixFunctors/BaseChange/Etale.lean, branch slopmaster2)"
+      }
+    }
+  ],
+  "proof_deps": [
     "lem-weil-pbc-etale-base-change-finite-limits",
     "lem-weil-pbc-etale-inverse-image-restriction",
     "def-pc-fibre-product",
-    "lem-weil-pbc-cartesian-square-pasting"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Sites, Lemma label lemma-localize-morphism (Tag 03CF), proof: $(j_V^{-1}f_*\\mathcal F)(V'/V)=f_*\\mathcal F(V')=\\mathcal F(u(V'))=(j_U^{-1}\\mathcal F)(u(V')/U)=(f'_*j_U^{-1}\\mathcal F)(V'/V)$; Lemma label lemma-localize-morphism-strong (Tag 03EF)"
-   }
-  },
-  {
-   "text": "*Step 2 (sections of the two sheaves).* By clause 1 of [lem-weil-pbc-etale-inverse-image-restriction] (for $j$ and for $j_X$), $(f_*F)|_V$ and $F|_{X_V}$ are abelian sheaves, and by [def-weil-pbc-direct-image] so is $f_{V*}(F|_{X_V})$. On an object $p:W\\to V$ of $V_{\\Et}$: $(f_*F)|_V(W)=(f_*F)(W\\xrightarrow{j p}Y)=F(W\\times_YX)$, and $f_{V*}(F|_{X_V})(W)=F|_{X_V}(W\\times_VX_V)=F(W\\times_VX_V\\xrightarrow{j_X\\mathrm{pr}}X)$; on a morphism $a:W'\\to W$ of $V_{\\Et}$ the restriction maps are $F(a\\times_Y\\mathrm{id}_X)$ and $F(a\\times_V\\mathrm{id}_{X_V})$ respectively (the direct image acts on morphisms by base change, and $G|_V$, $F|_{X_V}$ have the restriction maps of $G$, $F$). These are the two outer terms of the chain of equalities in the proof of Stacks 03CF.",
-   "uses": [
-    "lem-weil-pbc-etale-inverse-image-restriction",
-    "def-weil-pbc-direct-image"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Sites, Lemma label lemma-localize-morphism (Tag 03CF), proof: $(j_V^{-1}f_*\\mathcal F)(V'/V)=f_*\\mathcal F(V')=\\mathcal F(u(V'))=(j_U^{-1}\\mathcal F)(u(V')/U)=(f'_*j_U^{-1}\\mathcal F)(V'/V)$; Lemma label lemma-localize-morphism-strong (Tag 03EF)"
-   }
-  },
-  {
-   "text": "*Step 3 (clause 1: $\\psi_F$ is a natural isomorphism of sheaves).* By step 1, $c_W$ is an isomorphism of $X_{\\Et}$, so $\\psi_{F,W}=F(c_W)$ is an isomorphism of abelian groups with inverse $F(c_W^{-1})$. For $a:W'\\to W$ in $V_{\\Et}$, applying the contravariant functor $F$ to the equality $c_W\\circ(a\\times_V\\mathrm{id}_{X_V})=(a\\times_Y\\mathrm{id}_X)\\circ c_{W'}$ of step 1 gives $F(a\\times_V\\mathrm{id}_{X_V})\\circ\\psi_{F,W}=\\psi_{F,W'}\\circ F(a\\times_Y\\mathrm{id}_X)$, i.e. by step 2 $\\psi_F$ commutes with the restriction maps; so $\\psi_F$ is a morphism of abelian sheaves [def-weil-pbc-abelian-etale-sheaves] (a morphism of the underlying presheaves) and, its components being bijective, an isomorphism (the components $F(c_W^{-1})$ form the inverse morphism). Naturality in $F$: for a morphism $\\varphi:F\\to F'$ the morphisms $(f_*\\varphi)|_V$ and $f_{V*}(\\varphi|_{X_V})$ have components $\\varphi(W\\times_YX)$ and $\\varphi(W\\times_VX_V)$ (step 2), and $\\varphi(W\\times_VX_V)\\circ F(c_W)=F'(c_W)\\circ\\varphi(W\\times_YX)$ is the naturality of $\\varphi$ along $c_W$. This is clause 1, the isomorphism $f'_*j_U^{-1}=j_V^{-1}f_*$ of Stacks 03CF for the localization of the morphism of sites $f$ at $V$ (Stacks 03EF identifies the localized morphism with $f_V$).",
-   "uses": [
-    "def-weil-pbc-abelian-etale-sheaves"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Sites, Lemma label lemma-localize-morphism (Tag 03CF), proof: $(j_V^{-1}f_*\\mathcal F)(V'/V)=f_*\\mathcal F(V')=\\mathcal F(u(V'))=(j_U^{-1}\\mathcal F)(u(V')/U)=(f'_*j_U^{-1}\\mathcal F)(V'/V)$; Lemma label lemma-localize-morphism-strong (Tag 03EF)"
-   }
-  },
-  {
-   "text": "*Step 4 (reduction to the transposes under $j^{-1}\\dashv j_*$).* Write $A=f_*F$ and $B=F|_{X_V}$. Both sides of the equality of clause 2 are morphisms $j^{-1}A\\to f_{V*}B$. By [def-weil-pbc-inverse-image], $j^{-1}$ is left adjoint to $j_*$ with unit $\\eta_j$, so $\\alpha\\mapsto j_*(\\alpha)\\circ\\eta_{j,A}$ is a bijection from morphisms $j^{-1}A\\to f_{V*}B$ to morphisms $A\\to j_*f_{V*}B$. Hence it suffices to show $L=R$ for\n$$L=j_*\\bigl(f_{V*}(\\rho_{j_X,F})\\circ\\Ex^0_{\\square_j,F}\\bigr)\\circ\\eta_{j,A},\\qquad R=j_*(\\psi_F\\circ\\rho_{j,A})\\circ\\eta_{j,A},$$\nand, these being morphisms of sheaves on $Y_{\\Et}$, it suffices to compare their components at every object $t:T\\to Y$ of $Y_{\\Et}$. Write $T_V=T\\times_YV$ (an object of $V_{\\Et}$ via $\\mathrm{pr}_V$), $p_T:T_V\\to T$ the projection, and $T_X=T\\times_YX$.",
-   "uses": [
-    "def-weil-pbc-inverse-image"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "written by the agent: the comparison with the exchange morphism is not in Stacks (asserted without argument in Etale Cohomology, proof of Lemma Tag 0EZR (1), literature/stacks-project/etale-cohomology.tex); it follows the mate argument of the source Lean AlgebraicGeometry.Etale.baseChangeMap_flip_eq (WeilConjectures/SixFunctors/BaseChange/Etale.lean, branch slopmaster2)"
-   }
-  },
-  {
-   "text": "*Step 5 (the right side on sections).* By [def-weil-pbc-direct-image], $j_*(\\beta)(T)=\\beta(T_V)$ for a morphism $\\beta$ of sheaves on $V_{\\Et}$. By clause 2 of [lem-weil-pbc-etale-inverse-image-restriction] for the etale $j$ and $G=A$, $\\rho_{j,A}(T_V)\\circ\\eta_{j,A}(T)=A(p_T)$, the restriction of $A=f_*F$ along $p_T$, which by step 2 is $F(p_T\\times_Y\\mathrm{id}_X):F(T_X)\\to F(T_V\\times_YX)$. Then $\\psi_F(T_V)=F(c_{T_V})$. Hence\n$$R(T)=F(c_{T_V})\\circ F(p_T\\times_Y\\mathrm{id}_X)=F(m_T),\\qquad m_T=(p_T\\times_Y\\mathrm{id}_X)\\circ c_{T_V}:T_V\\times_VX_V\\to T_X,$$\nand by the definition of $c_{T_V}$ (step 1) the components of $m_T$ are $\\mathrm{pr}_T\\circ\\mathrm{pr}_{T_V}$ (to $T$) and $j_X\\circ\\mathrm{pr}_{X_V}$ (to $X$).",
-   "uses": [
+    "lem-weil-pbc-cartesian-square-pasting",
     "def-weil-pbc-direct-image",
-    "lem-weil-pbc-etale-inverse-image-restriction"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "written by the agent: the comparison with the exchange morphism is not in Stacks (asserted without argument in Etale Cohomology, proof of Lemma Tag 0EZR (1), literature/stacks-project/etale-cohomology.tex); it follows the mate argument of the source Lean AlgebraicGeometry.Etale.baseChangeMap_flip_eq (WeilConjectures/SixFunctors/BaseChange/Etale.lean, branch slopmaster2)"
-   }
-  },
-  {
-   "text": "*Step 6 (the left side through the composition isomorphisms).* By [def-weil-pbc-underived-exchange], $\\Ex^0_{\\square_j,F}$ is the adjoint under $f_V^{-1}\\dashv f_{V*}$ of $j_X^{-1}\\varepsilon_{f,F}\\circ\\theta_{\\square_j,A}$, i.e. $\\Ex^0_{\\square_j,F}=f_{V*}(j_X^{-1}\\varepsilon_{f,F}\\circ\\theta_{\\square_j,A})\\circ\\eta_{f_V,j^{-1}A}$. The specified isomorphism of the cartesian square [def-weil-pbc-cartesian-square] is the composite of composition isomorphisms $\\theta_{\\square_j}=c_{f,j_X}^{-1}\\circ c_{j,f_V}:f_V^{-1}j^{-1}\\to h^{-1}\\to j_X^{-1}f^{-1}$, with $c_{u,v}:v^{-1}u^{-1}\\to(u\\circ v)^{-1}$ and $d_{u,v}:(u\\circ v)_*\\to u_*v_*$ of [lem-weil-pbc-inverse-image-composition] (this is the definition of the attached source Lean `AlgebraicGeometry.Etale.squareUpperStarIso`: `(upperStarComp f' g (g' ≫ f) sq.w).symm ≪≫ upperStarComp g' f`); both composites $j\\circ f_V$ and $f\\circ j_X$ are the one morphism $h$. (a) Clause 2 of [lem-weil-pbc-inverse-image-composition] for $(u,v)=(j,f_V)$ and $G=A$ gives $j_*f_{V*}(c_{j,f_V,A})\\circ j_*(\\eta_{f_V,j^{-1}A})\\circ\\eta_{j,A}=d_{j,f_V,h^{-1}A}\\circ\\eta_{h,A}$; with the naturality of $d_{j,f_V}$ (clause 1) this gives\n$$j_*(\\Ex^0_{\\square_j,F})\\circ\\eta_{j,A}=d_{j,f_V,j_X^{-1}F}\\circ h_*(j_X^{-1}\\varepsilon_{f,F})\\circ h_*(c_{f,j_X,A}^{-1})\\circ\\eta_{h,A}.$$\n(b) Clause 2 for $(u,v)=(f,j_X)$ and $G=A$ gives $\\eta_{h,A}=d_{f,j_X,h^{-1}A}^{-1}\\circ f_*j_{X*}(c_{f,j_X,A})\\circ f_*(\\eta_{j_X,f^{-1}A})\\circ\\eta_{f,A}$; by the naturality of $d_{f,j_X}$, $h_*(c^{-1}_{f,j_X,A})\\circ d^{-1}_{f,j_X,h^{-1}A}=d^{-1}_{f,j_X,j_X^{-1}f^{-1}A}\\circ f_*j_{X*}(c^{-1}_{f,j_X,A})$, so $h_*(c^{-1}_{f,j_X,A})\\circ\\eta_{h,A}=d^{-1}_{f,j_X,j_X^{-1}f^{-1}A}\\circ f_*(\\eta_{j_X,f^{-1}A})\\circ\\eta_{f,A}$. (c) By the naturality of $d_{f,j_X}$, of $\\eta_{j_X}$ (along $\\varepsilon_{f,F}:f^{-1}A\\to F$) and the triangle identity $f_*(\\varepsilon_{f,F})\\circ\\eta_{f,f_*F}=\\mathrm{id}_{f_*F}$ of $f^{-1}\\dashv f_*$ [def-weil-pbc-inverse-image]: $h_*(j_X^{-1}\\varepsilon_{f,F})\\circ d^{-1}_{f,j_X,j_X^{-1}f^{-1}A}\\circ f_*(\\eta_{j_X,f^{-1}A})\\circ\\eta_{f,A}=d^{-1}_{f,j_X,j_X^{-1}F}\\circ f_*(\\eta_{j_X,F})\\circ f_*(\\varepsilon_{f,F})\\circ\\eta_{f,A}=d^{-1}_{f,j_X,j_X^{-1}F}\\circ f_*(\\eta_{j_X,F})$. Together:\n$$j_*(\\Ex^0_{\\square_j,F})\\circ\\eta_{j,A}=d_{j,f_V,j_X^{-1}F}\\circ d^{-1}_{f,j_X,j_X^{-1}F}\\circ f_*(\\eta_{j_X,F})$$\n(the exchange morphism is the mate of the composition isomorphism of direct images). Composing with $j_*f_{V*}(\\rho_{j_X,F})$ and using the naturality of $d_{j,f_V}$ and $d_{f,j_X}$ once more:\n$$L=d_{j,f_V,B}\\circ d^{-1}_{f,j_X,B}\\circ f_*\\bigl(j_{X*}(\\rho_{j_X,F})\\circ\\eta_{j_X,F}\\bigr).$$",
-   "uses": [
+    "def-weil-pbc-abelian-etale-sheaves",
+    "def-weil-pbc-inverse-image",
     "def-weil-pbc-underived-exchange",
     "def-weil-pbc-cartesian-square",
-    "lem-weil-pbc-inverse-image-composition",
-    "def-weil-pbc-inverse-image",
-    "def-weil-pbc-direct-image"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "written by the agent: the comparison with the exchange morphism is not in Stacks (asserted without argument in Etale Cohomology, proof of Lemma Tag 0EZR (1), literature/stacks-project/etale-cohomology.tex); it follows the mate argument of the source Lean AlgebraicGeometry.Etale.baseChangeMap_flip_eq (WeilConjectures/SixFunctors/BaseChange/Etale.lean, branch slopmaster2)"
-   }
-  },
-  {
-   "text": "*Step 7 (the left side on sections; clause 2).* Evaluate the formula of step 6 at $T$. By [def-weil-pbc-direct-image], $f_*(\\gamma)(T)=\\gamma(T_X)$. By clause 2 of [lem-weil-pbc-etale-inverse-image-restriction] for the etale $j_X$ and the object $T_X$ of $X_{\\Et}$, $\\rho_{j_X,F}(T_X\\times_XX_V)\\circ\\eta_{j_X,F}(T_X)=F(q)$, $q:T_X\\times_XX_V\\to T_X$ the projection. By clause 1 of [lem-weil-pbc-inverse-image-composition], $d_{f,j_X,B}(T)=B(k_1)$ and $d_{j,f_V,B}(T)=B(k_2)$ for the canonical isomorphisms $k_1=(\\mathrm{pr}_T\\circ\\mathrm{pr}_{T_X},\\mathrm{pr}_{X_V}):T_X\\times_XX_V\\to T\\times_YX_V$ and $k_2=(\\mathrm{pr}_T\\circ\\mathrm{pr}_{T_V},\\mathrm{pr}_{X_V}):T_V\\times_VX_V\\to T\\times_YX_V$ ($T\\times_YX_V$ formed with $h$) [def-pc-fibre-product]; and $B(k)=F(k)$, $B=F|_{X_V}$ having the restriction maps of $F$. So $L(T)=F(k_2)\\circ F(k_1)^{-1}\\circ F(q)=F(q\\circ k_1^{-1}\\circ k_2)$. Now $k_1^{-1}=((\\mathrm{pr}_T,j_X\\circ\\mathrm{pr}_{X_V}),\\mathrm{pr}_{X_V})$, so $q\\circ k_1^{-1}=(\\mathrm{pr}_T,j_X\\circ\\mathrm{pr}_{X_V}):T\\times_YX_V\\to T_X$, and $q\\circ k_1^{-1}\\circ k_2$ has components $\\mathrm{pr}_T\\circ\\mathrm{pr}_{T_V}$ and $j_X\\circ\\mathrm{pr}_{X_V}$: it is the morphism $m_T$ of step 5, by the uniqueness in the universal property of $T_X$. Hence $L(T)=F(m_T)=R(T)$ for every $T$, so $L=R$, and by step 4 $f_{V*}(\\rho_{j_X,F})\\circ\\Ex^0_{\\square_j,F}=\\psi_F\\circ\\rho_{j,f_*F}$: clause 2. Finally $\\Ex^0_{\\square_j,F}=f_{V*}(\\rho_{j_X,F})^{-1}\\circ\\psi_F\\circ\\rho_{j,f_*F}$ is a composite of isomorphisms (clause 1 of [lem-weil-pbc-etale-inverse-image-restriction], step 3, and $f_{V*}$ a functor), hence an isomorphism; on sections it is the identification $F(W\\times_YX)=F(W\\times_VX_V)$ through $c_W$.",
-   "uses": [
-    "def-weil-pbc-direct-image",
-    "lem-weil-pbc-etale-inverse-image-restriction",
-    "lem-weil-pbc-inverse-image-composition",
-    "def-pc-fibre-product"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "written by the agent: the comparison with the exchange morphism is not in Stacks (asserted without argument in Etale Cohomology, proof of Lemma Tag 0EZR (1), literature/stacks-project/etale-cohomology.tex); it follows the mate argument of the source Lean AlgebraicGeometry.Etale.baseChangeMap_flip_eq (WeilConjectures/SixFunctors/BaseChange/Etale.lean, branch slopmaster2)"
-   }
-  }
- ],
- "proof_deps": [
-  "lem-weil-pbc-etale-base-change-finite-limits",
-  "lem-weil-pbc-etale-inverse-image-restriction",
-  "def-pc-fibre-product",
-  "lem-weil-pbc-cartesian-square-pasting",
-  "def-weil-pbc-direct-image",
-  "def-weil-pbc-abelian-etale-sheaves",
-  "def-weil-pbc-inverse-image",
-  "def-weil-pbc-underived-exchange",
-  "def-weil-pbc-cartesian-square",
-  "lem-weil-pbc-inverse-image-composition"
- ],
- "proof_origin": {
-  "by": "agent",
-  "document": "literature/stacks-project/sites.tex",
-  "place": "Steps 1-3 (clause 1) follow Sites, proof of Lemma label lemma-localize-morphism, Tag 03CF (the chain $(j_V^{-1}f_*\\mathcal F)(V'/V)=\\mathcal F(u(V'))=(f'_*j_U^{-1}\\mathcal F)(V'/V)$), with Lemma Tag 03EF; steps 4-7 (clause 2, the comparison with the exchange morphism, asserted without argument in Etale Cohomology, proof of Lemma Tag 0EZR (1)) are written by the agent, following the mate argument of the source Lean AlgebraicGeometry.Etale.baseChangeMap_flip_eq (slopmaster2)"
- },
- "mathlib_searches": [
-  {
-   "tool": "leansearch",
-   "query": "direct image of a sheaf commutes with restriction to a localized site over an object (pushforward then restrict equals restrict then pushforward)",
-   "results": "AlgebraicGeometry.Scheme.Modules.restrictAdjunction, Scheme.Modules.restrictFunctorAdjCounitIso, Scheme.Modules.pushforward_obj_presheaf_map (Mathlib.AlgebraicGeometry.Modules.Sheaf; Zariski O_X-modules, open immersions), TopCat.Sheaf.pushforward, TopCat.Sheaf.pushforward_sheaf_of_sheaf (Mathlib.Topology.Sheaves.Functors), SheafOfModules.pushforward_map_val, SheafOfModules.pushforwardComp, PresheafOfModules.pushforward",
-   "date": "2026-10-09",
-   "verdict": "no match: nothing on etale sites, no commutation of a direct image with restriction to an over site"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "sheaf pushforward along continuous functor commutes with overPullback / restriction to Over category: (f_* F)|_V ≅ f_V*(F|_U)",
-   "results": "TopCat.Sheaf.pushforwardForgetIso, TopCat.Sheaf.pushforward_forget (Mathlib.Topology.Sheaves.Functors), Functor.sheafPushforwardContinuousCompSheafToPresheafIso, Functor.sheafPushforwardContinuousComp_inv_app_val_app, Functor.sheafPushforwardContinuousComp'_inv_app_val_app (Mathlib.CategoryTheory.Sites.Continuous), SheafOfModules.pushforwardComp_inv_app_val_app, SheafOfModules.pullbackComp, TopCat.Sheaf.pullbackIso",
-   "date": "2026-10-09",
-   "verdict": "no match: composition of pushforwards only; the localization of a morphism of sites at an object of the target is absent"
-  },
-  {
-   "tool": "loogle",
-   "query": "CategoryTheory.GrothendieckTopology.overPullback, CategoryTheory.Functor.sheafPushforwardContinuous",
-   "results": "none",
-   "date": "2026-10-09",
-   "verdict": "no match"
-  },
-  {
-   "tool": "grep",
-   "query": "grep -n 'pushforward\\|def \\|lemma ' Mathlib/CategoryTheory/Sites/Over.lean; grep -rn 'overPullback' Mathlib/ ; grep -rn 'baseChange\\|exchange' Mathlib/AlgebraicGeometry/Sites/*.lean",
-   "results": "Sites/Over.lean:520 Sheaf.pushforwardOverMapIso (F.over Y pushed along Over.map f is F.over X, one site), :531 Sheaf.toPushforwardOverPullback (F.over Y -> pushforward of F.over X along Over.pullback f, induced by pullback.fst: the unit of restriction along a morphism inside one site, not a direct image along a morphism of sites); Sites/LocalProperties.lean (isIso detected by overPullback); Topology/Sheaves/Over.lean (open subsets); AlgebraicGeometry/Sites/*.lean: no base change or exchange map",
-   "date": "2026-10-09",
-   "verdict": "no match: Mathlib has no direct image between small etale sites of a morphism of schemes and no underived exchange morphism"
-  },
-  {
-   "tool": "leansearch",
-   "query": "base change morphism of étale sheaves along an étale morphism is an isomorphism; pushforward commutes with restriction to an étale open",
-   "results": "Scheme.Modules.restrictFunctorAdjCounitIso, Scheme.Modules.restrictFunctorIsoPullback, Scheme.Modules.instIsIsoFunctorCounitRestrictAdjunction, Scheme.Modules.pushforward_obj_presheaf_map (Mathlib.AlgebraicGeometry.Modules.Sheaf: Zariski O_X-modules, open immersions), pullbackRestrictIsoRestrict (Mathlib.AlgebraicGeometry.Restrict), IsEtale.instIsStableUnderBaseChangeScheme, Algebra.Etale.baseChange",
-   "date": "2026-10-09",
-   "verdict": "no match: open immersions and O_X-modules only; nothing on small etale sites"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "mate of the base change morphism under pullback-pushforward adjunctions equals the composition isomorphism of pushforwards for a commutative square of sites",
-   "results": "SheafOfModules.pullbackComp, SheafOfModules.conjugateEquiv_pullbackComp_inv (Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous), Scheme.Modules.conjugateEquiv_pullbackComp_inv (Mathlib.AlgebraicGeometry.Modules.Sheaf), PresheafOfModules.pullbackComp, SheafOfModules.pullbackIso, ExponentiableMorphism.pushforwardComp",
-   "date": "2026-10-09",
-   "verdict": "no match: composition isomorphisms of pullbacks as conjugates (the ingredient of lem-weil-pbc-inverse-image-composition), no exchange morphism of a square and no etale localization"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "pullback along composite: pullback of W→V along X×_Y V→V is isomorphic to pullback of W→Y along X→Y (pullbackRightPullbackFstIso)",
-   "results": "CategoryTheory.Limits.pullbackRightPullbackFstIso_hom_fst/_hom_snd/_inv_fst, pullbackLeftPullbackSndIso_hom_fst (Mathlib.CategoryTheory.Limits.Shapes.Pullback.Pasting)",
-   "date": "2026-10-09",
-   "verdict": "match for the isomorphism c_W only (step 1; covered by the leaf lem-weil-pbc-cartesian-square-pasting), not for the item"
-  },
-  {
-   "tool": "loogle",
-   "query": "CategoryTheory.MorphismProperty.Over.mapPullbackAdj",
-   "results": "Over.mapPullbackAdj, Over.mapPullbackAdj_counit_app, Over.mapPullbackAdj_unit_app (Mathlib.CategoryTheory.MorphismProperty.OverAdjunction)",
-   "date": "2026-10-09",
-   "verdict": "no match: the adjunction Over.map ⊣ Over.pullback only; no comparison Over.map j ⋙ Over.pullback f ≅ Over.pullback f_V ⋙ Over.map j_X (that is MorphismProperty.Over.pullbackMapComparison in the source repository's WeilConjectures/Mathlib overlay, not in Mathlib)"
-  },
-  {
-   "tool": "grep",
-   "query": "grep -rn 'pullbackMapComparison\\|mapPullbackComparison\\|pullbackMapIso\\|mapPullbackIso' Mathlib/CategoryTheory; grep -n 'def \\|lemma ' Mathlib/CategoryTheory/MorphismProperty/OverAdjunction.lean Mathlib/AlgebraicGeometry/Sites/Etale.lean; grep -rn 'upperStar\\|lowerStar\\|pushforward' Mathlib/AlgebraicGeometry/Sites/",
-   "results": "none for the comparison; OverAdjunction.lean has Over.map, Over.pullback, Over.pullbackComp, Over.pullbackMapHomPullback, Over.mapPullbackAdj; Sites/Etale.lean has smallEtaleTopology, smallEtalePretopology, geometricFiber; no direct or inverse image of etale sheaves in AlgebraicGeometry/Sites; Mathlib/CategoryTheory/Sites/Continuous.lean:393 sheafPushforwardContinuousNatTrans (action of a natural transformation of site functors on pushforwards: the generic tool the source Lean uses)",
-   "date": "2026-10-09",
-   "verdict": "no match"
-  }
- ],
- "mathlib_match": null,
- "status": "split",
- "merged_into": null,
- "created": {
-  "by": "worker",
-  "item": "lem-weil-pbc-etale-localization-exchange",
-  "date": "2026-10-09"
- },
- "lean_audit": {
-  "master": {
-   "state": "none",
-   "decls": [],
-   "missing": [
-    "AlgebraicGeometry.Etale.localizationRestrictionBaseChangeMap",
-    "AlgebraicGeometry.Etale.isIso_localizationRestrictionBaseChangeMap_of_isPullback",
-    "AlgebraicGeometry.Etale.baseChangeMap_flip_eq"
-   ]
-  },
-  "slopmaster2": {
-   "state": "closed",
-   "decls": [
-    {
-     "name": "AlgebraicGeometry.Etale.localizationRestrictionBaseChangeMap",
-     "module": "WeilConjectures.SixFunctors.BaseChange.Etale",
-     "lines": [
-      77,
-      97
-     ],
-     "kind": "def",
-     "sorry": false
-    },
-    {
-     "name": "AlgebraicGeometry.Etale.isIso_localizationRestrictionBaseChangeMap_of_isPullback",
-     "module": "WeilConjectures.SixFunctors.BaseChange.Etale",
-     "lines": [
-      99,
-      109
-     ],
-     "kind": "theorem",
-     "sorry": false
-    },
-    {
-     "name": "AlgebraicGeometry.Etale.baseChangeMap_flip_eq",
-     "module": "WeilConjectures.SixFunctors.BaseChange.Etale",
-     "lines": [
-      157,
-      184
-     ],
-     "kind": "theorem",
-     "sorry": false
-    }
-   ],
-   "missing": [],
-   "open": []
-  }
- },
- "chapter": "sec-proper-base-change",
- "unit": "sk-thm-reduction",
- "split_report": {
-  "date": "2026-10-09",
-  "item": "lem-weil-pbc-etale-underived-exchange-restriction",
-  "worker": "stage1",
-  "summary": "Statement kept (checked against Stacks 03CF/03EF and the definitions of Ex^0, theta, rho; correct, no hypothesis on f). Proof in 7 steps, no new node. Clause 1 (steps 1-3) follows the proof of Stacks 03CF: c_W is an isomorphism over X by the pasting leaf lem-weil-pbc-cartesian-square-pasting (with lem-weil-pbc-etale-base-change-finite-limits (1) for the objects), its compatibility with restriction maps and naturality in F are elementary. Clause 2 (steps 4-7, agent-written; Stacks asserts it without argument in 0EZR): compare transposes under j^{-1} -| j_*; the right side is restriction along p_T then F(c), by clause 2 of lem-weil-pbc-etale-inverse-image-restriction; for the left side theta = c_{f,j_X}^{-1} c_{j,f_V} (source Lean squareUpperStarIso; def-weil-pbc-cartesian-square does not spell this out) and the unit characterization of c_{u,v} (clause 2 of lem-weil-pbc-inverse-image-composition, sk-thm-p1) give j_*(Ex^0) eta_j = d_{j,f_V} d_{f,j_X}^{-1} f_*(eta_{j_X}) (the mate of the direct-image composition isomorphism), and both sides are F of the same morphism (pr_T pr, j_X pr): T_V x_V X_V -> T x_Y X. This is the route of the source Lean Etale.baseChangeMap_flip_eq / isIso_localizationRestrictionBaseChangeMap_of_isPullback (sorry-free on slopmaster2), reported as attachments. Searches redone: LeanSearch, LeanFinder (2), Loogle, grep: no match."
- },
- "lean": {
-  "branch": "slopmaster2",
-  "declarations": [
-   "AlgebraicGeometry.Etale.localizationRestrictionBaseChangeMap",
-   "AlgebraicGeometry.Etale.isIso_localizationRestrictionBaseChangeMap_of_isPullback",
-   "AlgebraicGeometry.Etale.baseChangeMap_flip_eq"
+    "lem-weil-pbc-inverse-image-composition"
   ],
-  "note": "attached by the lead at review (2026-10-09), found by the opus worker: psi as the map induced by the pullback comparison, its invertibility for a cartesian square, and the identification of the underived base change map with psi through the restriction isomorphisms; for any abelian coefficient category (abelian sheaves = modules over Z); all sorry-free on the full map"
- },
- "reviewed": {
-  "date": "2026-10-09",
-  "by": "L",
-  "result": "pass",
-  "note": "clause 1 from Stacks 03CF, clause 2 by the mate computation on sections (agent); Lean attached (closed)"
- }
+  "proof_origin": {
+    "by": "agent",
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Steps 1-3 (clause 1) follow Sites, proof of Lemma label lemma-localize-morphism, Tag 03CF (the chain $(j_V^{-1}f_*\\mathcal F)(V'/V)=\\mathcal F(u(V'))=(f'_*j_U^{-1}\\mathcal F)(V'/V)$), with Lemma Tag 03EF; steps 4-7 (clause 2, the comparison with the exchange morphism, asserted without argument in Etale Cohomology, proof of Lemma Tag 0EZR (1)) are written by the agent, following the mate argument of the source Lean AlgebraicGeometry.Etale.baseChangeMap_flip_eq (slopmaster2)"
+  },
+  "mathlib_searches": [
+    {
+      "tool": "leansearch",
+      "query": "direct image of a sheaf commutes with restriction to a localized site over an object (pushforward then restrict equals restrict then pushforward)",
+      "results": "AlgebraicGeometry.Scheme.Modules.restrictAdjunction, Scheme.Modules.restrictFunctorAdjCounitIso, Scheme.Modules.pushforward_obj_presheaf_map (Mathlib.AlgebraicGeometry.Modules.Sheaf; Zariski O_X-modules, open immersions), TopCat.Sheaf.pushforward, TopCat.Sheaf.pushforward_sheaf_of_sheaf (Mathlib.Topology.Sheaves.Functors), SheafOfModules.pushforward_map_val, SheafOfModules.pushforwardComp, PresheafOfModules.pushforward",
+      "date": "2026-10-09",
+      "verdict": "no match: nothing on etale sites, no commutation of a direct image with restriction to an over site"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "sheaf pushforward along continuous functor commutes with overPullback / restriction to Over category: (f_* F)|_V ≅ f_V*(F|_U)",
+      "results": "TopCat.Sheaf.pushforwardForgetIso, TopCat.Sheaf.pushforward_forget (Mathlib.Topology.Sheaves.Functors), Functor.sheafPushforwardContinuousCompSheafToPresheafIso, Functor.sheafPushforwardContinuousComp_inv_app_val_app, Functor.sheafPushforwardContinuousComp'_inv_app_val_app (Mathlib.CategoryTheory.Sites.Continuous), SheafOfModules.pushforwardComp_inv_app_val_app, SheafOfModules.pullbackComp, TopCat.Sheaf.pullbackIso",
+      "date": "2026-10-09",
+      "verdict": "no match: composition of pushforwards only; the localization of a morphism of sites at an object of the target is absent"
+    },
+    {
+      "tool": "loogle",
+      "query": "CategoryTheory.GrothendieckTopology.overPullback, CategoryTheory.Functor.sheafPushforwardContinuous",
+      "results": "none",
+      "date": "2026-10-09",
+      "verdict": "no match"
+    },
+    {
+      "tool": "grep",
+      "query": "grep -n 'pushforward\\|def \\|lemma ' Mathlib/CategoryTheory/Sites/Over.lean; grep -rn 'overPullback' Mathlib/ ; grep -rn 'baseChange\\|exchange' Mathlib/AlgebraicGeometry/Sites/*.lean",
+      "results": "Sites/Over.lean:520 Sheaf.pushforwardOverMapIso (F.over Y pushed along Over.map f is F.over X, one site), :531 Sheaf.toPushforwardOverPullback (F.over Y -> pushforward of F.over X along Over.pullback f, induced by pullback.fst: the unit of restriction along a morphism inside one site, not a direct image along a morphism of sites); Sites/LocalProperties.lean (isIso detected by overPullback); Topology/Sheaves/Over.lean (open subsets); AlgebraicGeometry/Sites/*.lean: no base change or exchange map",
+      "date": "2026-10-09",
+      "verdict": "no match: Mathlib has no direct image between small etale sites of a morphism of schemes and no underived exchange morphism"
+    },
+    {
+      "tool": "leansearch",
+      "query": "base change morphism of étale sheaves along an étale morphism is an isomorphism; pushforward commutes with restriction to an étale open",
+      "results": "Scheme.Modules.restrictFunctorAdjCounitIso, Scheme.Modules.restrictFunctorIsoPullback, Scheme.Modules.instIsIsoFunctorCounitRestrictAdjunction, Scheme.Modules.pushforward_obj_presheaf_map (Mathlib.AlgebraicGeometry.Modules.Sheaf: Zariski O_X-modules, open immersions), pullbackRestrictIsoRestrict (Mathlib.AlgebraicGeometry.Restrict), IsEtale.instIsStableUnderBaseChangeScheme, Algebra.Etale.baseChange",
+      "date": "2026-10-09",
+      "verdict": "no match: open immersions and O_X-modules only; nothing on small etale sites"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "mate of the base change morphism under pullback-pushforward adjunctions equals the composition isomorphism of pushforwards for a commutative square of sites",
+      "results": "SheafOfModules.pullbackComp, SheafOfModules.conjugateEquiv_pullbackComp_inv (Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous), Scheme.Modules.conjugateEquiv_pullbackComp_inv (Mathlib.AlgebraicGeometry.Modules.Sheaf), PresheafOfModules.pullbackComp, SheafOfModules.pullbackIso, ExponentiableMorphism.pushforwardComp",
+      "date": "2026-10-09",
+      "verdict": "no match: composition isomorphisms of pullbacks as conjugates (the ingredient of lem-weil-pbc-inverse-image-composition), no exchange morphism of a square and no etale localization"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "pullback along composite: pullback of W→V along X×_Y V→V is isomorphic to pullback of W→Y along X→Y (pullbackRightPullbackFstIso)",
+      "results": "CategoryTheory.Limits.pullbackRightPullbackFstIso_hom_fst/_hom_snd/_inv_fst, pullbackLeftPullbackSndIso_hom_fst (Mathlib.CategoryTheory.Limits.Shapes.Pullback.Pasting)",
+      "date": "2026-10-09",
+      "verdict": "match for the isomorphism c_W only (step 1; covered by the leaf lem-weil-pbc-cartesian-square-pasting), not for the item"
+    },
+    {
+      "tool": "loogle",
+      "query": "CategoryTheory.MorphismProperty.Over.mapPullbackAdj",
+      "results": "Over.mapPullbackAdj, Over.mapPullbackAdj_counit_app, Over.mapPullbackAdj_unit_app (Mathlib.CategoryTheory.MorphismProperty.OverAdjunction)",
+      "date": "2026-10-09",
+      "verdict": "no match: the adjunction Over.map ⊣ Over.pullback only; no comparison Over.map j ⋙ Over.pullback f ≅ Over.pullback f_V ⋙ Over.map j_X (that is MorphismProperty.Over.pullbackMapComparison in the source repository's WeilConjectures/Mathlib overlay, not in Mathlib)"
+    },
+    {
+      "tool": "grep",
+      "query": "grep -rn 'pullbackMapComparison\\|mapPullbackComparison\\|pullbackMapIso\\|mapPullbackIso' Mathlib/CategoryTheory; grep -n 'def \\|lemma ' Mathlib/CategoryTheory/MorphismProperty/OverAdjunction.lean Mathlib/AlgebraicGeometry/Sites/Etale.lean; grep -rn 'upperStar\\|lowerStar\\|pushforward' Mathlib/AlgebraicGeometry/Sites/",
+      "results": "none for the comparison; OverAdjunction.lean has Over.map, Over.pullback, Over.pullbackComp, Over.pullbackMapHomPullback, Over.mapPullbackAdj; Sites/Etale.lean has smallEtaleTopology, smallEtalePretopology, geometricFiber; no direct or inverse image of etale sheaves in AlgebraicGeometry/Sites; Mathlib/CategoryTheory/Sites/Continuous.lean:393 sheafPushforwardContinuousNatTrans (action of a natural transformation of site functors on pushforwards: the generic tool the source Lean uses)",
+      "date": "2026-10-09",
+      "verdict": "no match"
+    }
+  ],
+  "mathlib_match": null,
+  "status": "split",
+  "merged_into": null,
+  "created": {
+    "by": "worker",
+    "item": "lem-weil-pbc-etale-localization-exchange",
+    "date": "2026-10-09"
+  },
+  "lean_audit": {
+    "master": {
+      "state": "none",
+      "decls": [],
+      "missing": [
+        "AlgebraicGeometry.Etale.localizationRestrictionBaseChangeMap",
+        "AlgebraicGeometry.Etale.isIso_localizationRestrictionBaseChangeMap_of_isPullback",
+        "AlgebraicGeometry.Etale.baseChangeMap_flip_eq"
+      ]
+    },
+    "slopmaster2": {
+      "state": "closed",
+      "decls": [
+        {
+          "name": "AlgebraicGeometry.Etale.localizationRestrictionBaseChangeMap",
+          "module": "WeilConjectures.SixFunctors.BaseChange.Etale",
+          "lines": [
+            77,
+            97
+          ],
+          "kind": "def",
+          "sorry": false
+        },
+        {
+          "name": "AlgebraicGeometry.Etale.isIso_localizationRestrictionBaseChangeMap_of_isPullback",
+          "module": "WeilConjectures.SixFunctors.BaseChange.Etale",
+          "lines": [
+            99,
+            109
+          ],
+          "kind": "theorem",
+          "sorry": false
+        },
+        {
+          "name": "AlgebraicGeometry.Etale.baseChangeMap_flip_eq",
+          "module": "WeilConjectures.SixFunctors.BaseChange.Etale",
+          "lines": [
+            157,
+            184
+          ],
+          "kind": "theorem",
+          "sorry": false
+        }
+      ],
+      "missing": [],
+      "open": []
+    }
+  },
+  "chapter": "sec-proper-base-change",
+  "unit": "sk-thm-reduction",
+  "split_report": {
+    "date": "2026-10-09",
+    "item": "lem-weil-pbc-etale-underived-exchange-restriction",
+    "worker": "stage1",
+    "summary": "Statement kept (checked against Stacks 03CF/03EF and the definitions of Ex^0, theta, rho; correct, no hypothesis on f). Proof in 7 steps, no new node. Clause 1 (steps 1-3) follows the proof of Stacks 03CF: c_W is an isomorphism over X by the pasting leaf lem-weil-pbc-cartesian-square-pasting (with lem-weil-pbc-etale-base-change-finite-limits (1) for the objects), its compatibility with restriction maps and naturality in F are elementary. Clause 2 (steps 4-7, agent-written; Stacks asserts it without argument in 0EZR): compare transposes under j^{-1} -| j_*; the right side is restriction along p_T then F(c), by clause 2 of lem-weil-pbc-etale-inverse-image-restriction; for the left side theta = c_{f,j_X}^{-1} c_{j,f_V} (source Lean squareUpperStarIso; def-weil-pbc-cartesian-square does not spell this out) and the unit characterization of c_{u,v} (clause 2 of lem-weil-pbc-inverse-image-composition, sk-thm-p1) give j_*(Ex^0) eta_j = d_{j,f_V} d_{f,j_X}^{-1} f_*(eta_{j_X}) (the mate of the direct-image composition isomorphism), and both sides are F of the same morphism (pr_T pr, j_X pr): T_V x_V X_V -> T x_Y X. This is the route of the source Lean Etale.baseChangeMap_flip_eq / isIso_localizationRestrictionBaseChangeMap_of_isPullback (sorry-free on slopmaster2), reported as attachments. Searches redone: LeanSearch, LeanFinder (2), Loogle, grep: no match."
+  },
+  "lean": {
+    "module": "WeilConjectures.SixFunctors.BaseChange.Etale",
+    "declaration": "AlgebraicGeometry.Etale.localizationRestrictionBaseChangeMap",
+    "branch": "slopmaster2",
+    "line": 77,
+    "declarations": [
+      "AlgebraicGeometry.Etale.localizationRestrictionBaseChangeMap",
+      "AlgebraicGeometry.Etale.isIso_localizationRestrictionBaseChangeMap_of_isPullback",
+      "AlgebraicGeometry.Etale.baseChangeMap_flip_eq"
+    ],
+    "sorry_free": true,
+    "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state closed)"
+  },
+  "reviewed": {
+    "date": "2026-10-09",
+    "by": "L",
+    "result": "pass",
+    "note": "clause 1 from Stacks 03CF, clause 2 by the mate computation on sections (agent); Lean attached (closed)"
+  }
 }

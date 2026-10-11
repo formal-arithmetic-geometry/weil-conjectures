@@ -1,164 +1,175 @@
 {
- "id": "lem-sc-brauer-zero",
- "blueprint": {
-  "is": "lem-sc-brauer-zero",
-  "from": null,
-  "same_as": []
- },
- "kind": "statement",
- "title": "The Brauer group of a smooth curve",
- "statement": "Let $C$ be a smooth separated connected curve over\nalgebraically closed $k$. Then its Brauer group ([def-br]) vanishes:\n\n$$\nH^2(C_{\\Et},\\mathbf G_m)=0.\n$$",
- "source": {
-  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-thm-br/lem-sc-brauer-zero.md",
-  "place": "node lem-sc-brauer-zero, order 925",
-  "external": [
-   {
-    "document": "Stacks Project",
-    "place": "Tag 03RM"
-   }
-  ]
- },
- "stmt_deps": [
-  "def-br",
-  "def-sc-curves"
- ],
- "proof": [
-  {
-   "text": "By [lem-sc-compactification] and [lem-sc-affine-open-proper], a smooth separated connected curve is either proper or affine, and we treat the two cases.",
-   "uses": [
-    "lem-sc-compactification",
-    "lem-sc-affine-open-proper"
-   ],
-   "elementary": false
+  "id": "lem-sc-brauer-zero",
+  "blueprint": {
+    "is": "lem-sc-brauer-zero",
+    "from": null,
+    "same_as": []
   },
-  {
-   "text": "*Proper case.* Let $\\eta=\\operatorname{Spec}k(C)\\to C$ be the generic point. By [lem-sc-brauer-injectivity],\n\n$$\nH^2(C_{\\Et},\\mathbf G_m)\\hookrightarrow\\operatorname{Br}(k(C)),\n$$\nand the target is zero by [lem-sc-tsen].",
-   "uses": [
+  "kind": "statement",
+  "title": "The Brauer group of a smooth curve",
+  "statement": "Let $C$ be a smooth separated connected curve over\nalgebraically closed $k$. Then its Brauer group ([def-br]) vanishes:\n\n$$\nH^2(C_{\\Et},\\mathbf G_m)=0.\n$$",
+  "source": {
+    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-thm-br/lem-sc-brauer-zero.md",
+    "place": "node lem-sc-brauer-zero, order 925",
+    "external": [
+      {
+        "document": "Stacks Project",
+        "place": "Tag 03RM"
+      }
+    ]
+  },
+  "stmt_deps": [
+    "def-br",
+    "def-sc-curves"
+  ],
+  "proof": [
+    {
+      "text": "By [lem-sc-compactification] and [lem-sc-affine-open-proper], a smooth separated connected curve is either proper or affine, and we treat the two cases.",
+      "uses": [
+        "lem-sc-compactification",
+        "lem-sc-affine-open-proper"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "*Proper case.* Let $\\eta=\\operatorname{Spec}k(C)\\to C$ be the generic point. By [lem-sc-brauer-injectivity],\n\n$$\nH^2(C_{\\Et},\\mathbf G_m)\\hookrightarrow\\operatorname{Br}(k(C)),\n$$\nand the target is zero by [lem-sc-tsen].",
+      "uses": [
+        "lem-sc-brauer-injectivity",
+        "lem-sc-tsen"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "*Affine case.* Let $\\overline C$ be the compactification of [lem-sc-compactification] and $S:=\\overline C\\setminus C\\neq\\emptyset$ the finite complement ([lem-sc-dim0-finite]; nonempty because a proper affine curve is finite, [lem-sc-proper-affine-finite]). The divisor exact sequence ([lem-sc-divisor-exact-sequence])\n\n$$\n0\\to\\mathbf G_m\\to j_*\\mathbf G_m\\to\\bigoplus_{P\\in S}i_{P*}\\mathbf Z\\to0\n$$\n\non $\\overline C_{\\Et}$ gives, using [lem-sc-open-curve-gm-direct-image-cohomology] to identify $H^q(\\overline C_{\\Et},j_*\\mathbf G_m)$ with $H^q(C_{\\Et},\\mathbf G_m)$ for $q\\leq2$, the exact sequence\n\n$$\nH^2(\\overline C,\\mathbf G_m)\\to H^2(C,\\mathbf G_m)\\to H^2(\\overline C,\\textstyle\\bigoplus_{P\\in S}i_{P*}\\mathbf Z).\n$$\n\n For each $P$, the closed immersion $i_P$ is finite, so [lemma-weil-pbc-finite-direct-image-exact] gives exactness of $i_{P*}$, and [lem-weil-pbc-finite-pushforward-cohomology] identifies $H^q(\\overline C,i_{P*}\\mathbf Z)$ with $H^q(\\operatorname{Spec}k(P),\\mathbf Z)$. Since $k$ is algebraically closed, $k(P)=k$, so [lem-sc-point-z-cohomology] makes this zero for $q\\geq1$. Cohomology commutes with the finite direct sum over $P\\in S$. The proper case gives $H^2(\\overline C,\\mathbf G_m)=0$, hence $H^2(C,\\mathbf G_m)=0$.",
+      "uses": [
+        "lem-sc-compactification",
+        "lem-sc-dim0-finite",
+        "lem-sc-proper-affine-finite",
+        "lem-sc-divisor-exact-sequence",
+        "lem-sc-open-curve-gm-direct-image-cohomology",
+        "lemma-weil-pbc-finite-direct-image-exact",
+        "lem-weil-pbc-finite-pushforward-cohomology",
+        "lem-sc-point-z-cohomology"
+      ],
+      "elementary": false
+    }
+  ],
+  "proof_deps": [
+    "lem-sc-affine-open-proper",
     "lem-sc-brauer-injectivity",
-    "lem-sc-tsen"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "*Affine case.* Let $\\overline C$ be the compactification of [lem-sc-compactification] and $S:=\\overline C\\setminus C\\neq\\emptyset$ the finite complement ([lem-sc-dim0-finite]; nonempty because a proper affine curve is finite, [lem-sc-proper-affine-finite]). The divisor exact sequence ([lem-sc-divisor-exact-sequence])\n\n$$\n0\\to\\mathbf G_m\\to j_*\\mathbf G_m\\to\\bigoplus_{P\\in S}i_{P*}\\mathbf Z\\to0\n$$\n\non $\\overline C_{\\Et}$ gives, using [lem-sc-open-curve-gm-direct-image-cohomology] to identify $H^q(\\overline C_{\\Et},j_*\\mathbf G_m)$ with $H^q(C_{\\Et},\\mathbf G_m)$ for $q\\leq2$, the exact sequence\n\n$$\nH^2(\\overline C,\\mathbf G_m)\\to H^2(C,\\mathbf G_m)\\to H^2(\\overline C,\\textstyle\\bigoplus_{P\\in S}i_{P*}\\mathbf Z).\n$$\n\n For each $P$, the closed immersion $i_P$ is finite, so [lemma-weil-pbc-finite-direct-image-exact] gives exactness of $i_{P*}$, and [lem-weil-pbc-finite-pushforward-cohomology] identifies $H^q(\\overline C,i_{P*}\\mathbf Z)$ with $H^q(\\operatorname{Spec}k(P),\\mathbf Z)$. Since $k$ is algebraically closed, $k(P)=k$, so [lem-sc-point-z-cohomology] makes this zero for $q\\geq1$. Cohomology commutes with the finite direct sum over $P\\in S$. The proper case gives $H^2(\\overline C,\\mathbf G_m)=0$, hence $H^2(C,\\mathbf G_m)=0$.",
-   "uses": [
     "lem-sc-compactification",
     "lem-sc-dim0-finite",
-    "lem-sc-proper-affine-finite",
     "lem-sc-divisor-exact-sequence",
     "lem-sc-open-curve-gm-direct-image-cohomology",
-    "lemma-weil-pbc-finite-direct-image-exact",
+    "lem-sc-point-z-cohomology",
+    "lem-sc-proper-affine-finite",
+    "lem-sc-tsen",
     "lem-weil-pbc-finite-pushforward-cohomology",
-    "lem-sc-point-z-cohomology"
-   ],
-   "elementary": false
-  }
- ],
- "proof_deps": [
-  "lem-sc-affine-open-proper",
-  "lem-sc-brauer-injectivity",
-  "lem-sc-compactification",
-  "lem-sc-dim0-finite",
-  "lem-sc-divisor-exact-sequence",
-  "lem-sc-open-curve-gm-direct-image-cohomology",
-  "lem-sc-point-z-cohomology",
-  "lem-sc-proper-affine-finite",
-  "lem-sc-tsen",
-  "lem-weil-pbc-finite-pushforward-cohomology",
-  "lemma-weil-pbc-finite-direct-image-exact"
- ],
- "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-thm-br/lem-sc-brauer-zero.md",
-  "place": "## Proof"
- },
- "mathlib_searches": [],
- "mathlib_match": null,
- "status": "split",
- "merged_into": null,
- "import_flags": [
-  "proof_cites_literature"
- ],
- "blueprint_kind": "lemma",
- "blueprint_order": 925,
- "blueprint_uses": [
-  "def-br",
-  "def-sc-curves",
-  "lem-sc-affine-open-proper",
-  "lem-sc-brauer-injectivity",
-  "lem-sc-compactification",
-  "lem-sc-dim0-finite",
-  "lem-sc-divisor-exact-sequence",
-  "lem-sc-point-z-cohomology",
-  "lem-sc-proper-affine-finite",
-  "lem-sc-tsen"
- ],
- "uses_not_cited": [
-  "def-sc-curves"
- ],
- "proof_split_by": "labels",
- "lean_audit": {
-  "master": {
-   "state": "none",
-   "decls": [],
-   "missing": []
+    "lemma-weil-pbc-finite-direct-image-exact"
+  ],
+  "proof_origin": {
+    "by": "agent",
+    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-thm-br/lem-sc-brauer-zero.md",
+    "place": "## Proof"
   },
-  "slopmaster2": {
-   "state": "rests_on_sorry",
-   "decls": [
-    {
-     "name": "AlgebraicGeometry.IsCurve.subsingleton_cohomologicalBrauerGroup_of_connectedSpace",
-     "module": "WeilConjectures.AlgebraicGeometry.Curve.Brauer",
-     "lines": [
-      116,
-      139
-     ],
-     "kind": "theorem",
-     "sorry": false
+  "mathlib_searches": [],
+  "mathlib_match": null,
+  "status": "split",
+  "merged_into": null,
+  "import_flags": [
+    "proof_cites_literature"
+  ],
+  "blueprint_kind": "lemma",
+  "blueprint_order": 925,
+  "blueprint_uses": [
+    "def-br",
+    "def-sc-curves",
+    "lem-sc-affine-open-proper",
+    "lem-sc-brauer-injectivity",
+    "lem-sc-compactification",
+    "lem-sc-dim0-finite",
+    "lem-sc-divisor-exact-sequence",
+    "lem-sc-point-z-cohomology",
+    "lem-sc-proper-affine-finite",
+    "lem-sc-tsen"
+  ],
+  "uses_not_cited": [
+    "def-sc-curves"
+  ],
+  "proof_split_by": "labels",
+  "lean_audit": {
+    "master": {
+      "state": "none",
+      "decls": [],
+      "missing": []
+    },
+    "slopmaster2": {
+      "state": "rests_on_sorry",
+      "decls": [
+        {
+          "name": "AlgebraicGeometry.IsCurve.subsingleton_cohomologicalBrauerGroup_of_connectedSpace",
+          "module": "WeilConjectures.AlgebraicGeometry.Curve.Brauer",
+          "lines": [
+            116,
+            139
+          ],
+          "kind": "theorem",
+          "sorry": false
+        }
+      ],
+      "missing": [],
+      "open": [
+        {
+          "name": "AlgebraicGeometry.Scheme.nonempty_equiv_cohomologicalBrauerGroup",
+          "module": "WeilConjectures.AlgebraicGeometry.Sites.BrauerGroup",
+          "lines": [
+            37,
+            45
+          ],
+          "kind": "theorem",
+          "nodes": [],
+          "below": false
+        }
+      ]
     }
-   ],
-   "missing": [],
-   "open": [
-    {
-     "name": "AlgebraicGeometry.Scheme.nonempty_equiv_cohomologicalBrauerGroup",
-     "module": "WeilConjectures.AlgebraicGeometry.Sites.BrauerGroup",
-     "lines": [
-      37,
-      45
-     ],
-     "kind": "theorem",
-     "nodes": [],
-     "below": false
-    }
-   ]
-  }
- },
- "chapter": "sec-curve-estimates",
- "unit": "sk-thm-br",
- "split_report": {
-  "date": "2026-10-11",
-  "item": "lem-sc-brauer-zero",
-  "worker": "stage1",
-  "summary": "Repaired the returned split by removing the unused field Brauer comparison and adding the missing open-curve G_m direct-image cohomology comparison. The affine step now cites finite direct-image exactness and cohomology, point cohomology, and the new open-curve comparison.",
-  "blueprint": "The steps realize the three paragraphs under ## Proof of the blueprint node: the proper-or-affine reduction, the proper case, and the affine case.",
+  },
+  "chapter": "sec-curve-estimates",
+  "unit": "sk-thm-br",
+  "split_report": {
+    "date": "2026-10-11",
+    "item": "lem-sc-brauer-zero",
+    "worker": "stage1",
+    "summary": "Repaired the returned split by removing the unused field Brauer comparison and adding the missing open-curve G_m direct-image cohomology comparison. The affine step now cites finite direct-image exactness and cohomology, point cohomology, and the new open-curve comparison.",
+    "blueprint": "The steps realize the three paragraphs under ## Proof of the blueprint node: the proper-or-affine reduction, the proper case, and the affine case.",
+    "tool_uses": [
+      {
+        "node": "lem-weil-pbc-finite-pushforward-cohomology",
+        "why": "The affine step uses the general finite-morphism edge-map isomorphism to identify cohomology of i_{P*}Z with cohomology on Spec k; the route has no same-unit replacement."
+      }
+    ]
+  },
   "tool_uses": [
-   {
-    "node": "lem-weil-pbc-finite-pushforward-cohomology",
-    "why": "The affine step uses the general finite-morphism edge-map isomorphism to identify cohomology of i_{P*}Z with cohomology on Spec k; the route has no same-unit replacement."
-   }
-  ]
- },
- "tool_uses": [
-  "lem-weil-pbc-finite-pushforward-cohomology",
-  "lemma-weil-pbc-finite-direct-image-exact",
-  "lem-weil-pbc-finite-pushforward-cohomology"
- ],
- "reviewed": {
-  "date": "2026-10-10",
-  "by": "L",
-  "reviewer": "R-bz4",
-  "group": "E1",
-  "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-bz4 (reviewer sub-agent of L); spot-checked: Re-push after the 16:24 return; all three points repaired: (1) lem-sc-field-brauer-cohomology-equivalence deleted, step 2 cites only [lem-sc-brauer-injectivity] (H^2(C,G_m) injects into H^2(k(C),G_m) for integral regular noetherian C) and [lem-sc-tsen] (Br(k(C))=H^2(Spec k(C),G_m)=0 for a connected curve over algebraically closed k); (2) new statement-only node lem-sc-open-curve-gm-direct-image-cohomology (H^q(Cbar,j_*G_m) -> H^q(C,G_m) iso for q<=2) cited in step 3; checked true: stalks of R^q j_*G_m at P in S are H^q of the fraction field of the strictly henselian DVR O^sh_P, zero for q=1 (Hilbert 90) and q=2 (Br of that field vanishes, the discussion preceding Stacks 03RM), so Leray gives iso in degrees <=2; no duplicate in DAG (lem-sc-generic-r1-gm-vanishing is for the generic point), blueprint_refs search 'direct image G_m open curve' 0 hits; (3) inline closed-pushforward argument replaced by [lemma-weil-pbc-finite-direct-image-exact], [lem-weil-pbc-finite-pushforward-cohomology] (edge map iso for finite f), k(P)=k and [lem-sc-point-z-cohomology]. Step 1: [lem-sc-compactification], [lem-sc-affine-open-proper]; step 3 also [lem-sc-divisor-exact-sequence] (hypotheses Cbar proper smooth connected, S finite closed points: met), [lem-sc-dim0-finite], [lem-sc-proper-affine-finite]. Small case: C=A^1, Cbar=P^1, S={infinity}. FIX: dag/nodes/sec-curve-estimates/lem-sc-brauer-zero.json: proof[2].text: missing closing $ in the final formula, and the exact sequence H^2(Cbar,G_m)->H^2(C,G_m)->H^2(Cbar,+i_{P*}Z) written out with the identification named; dag/nodes/sec-curve-estimates/lem-sc-open-curve-gm-direct-image-cohomology.json: stmt_deps: added def-weil-open-immersion (cited in the statement); source.place: points to the stalk computation preceding 03RM (Stacks 03RM itself uses the generic point, not the open complement). Tool uses: lem-weil-pbc-finite-pushforward-cohomology (declared) and lemma-weil-pbc-finite-direct-image-exact (off-unit sk-prop-cd, undeclared), both generic black boxes. Start Sat Oct 10 04:38:38 PM UTC 2026, end Sat Oct 10 04:39:43 PM UTC 2026.; 2 file(s) fixed by the reviewer"
- }
+    "lem-weil-pbc-finite-pushforward-cohomology",
+    "lemma-weil-pbc-finite-direct-image-exact",
+    "lem-weil-pbc-finite-pushforward-cohomology"
+  ],
+  "reviewed": {
+    "date": "2026-10-10",
+    "by": "L",
+    "reviewer": "R-bz4",
+    "group": "E1",
+    "result": "pass",
+    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-bz4 (reviewer sub-agent of L); spot-checked: Re-push after the 16:24 return; all three points repaired: (1) lem-sc-field-brauer-cohomology-equivalence deleted, step 2 cites only [lem-sc-brauer-injectivity] (H^2(C,G_m) injects into H^2(k(C),G_m) for integral regular noetherian C) and [lem-sc-tsen] (Br(k(C))=H^2(Spec k(C),G_m)=0 for a connected curve over algebraically closed k); (2) new statement-only node lem-sc-open-curve-gm-direct-image-cohomology (H^q(Cbar,j_*G_m) -> H^q(C,G_m) iso for q<=2) cited in step 3; checked true: stalks of R^q j_*G_m at P in S are H^q of the fraction field of the strictly henselian DVR O^sh_P, zero for q=1 (Hilbert 90) and q=2 (Br of that field vanishes, the discussion preceding Stacks 03RM), so Leray gives iso in degrees <=2; no duplicate in DAG (lem-sc-generic-r1-gm-vanishing is for the generic point), blueprint_refs search 'direct image G_m open curve' 0 hits; (3) inline closed-pushforward argument replaced by [lemma-weil-pbc-finite-direct-image-exact], [lem-weil-pbc-finite-pushforward-cohomology] (edge map iso for finite f), k(P)=k and [lem-sc-point-z-cohomology]. Step 1: [lem-sc-compactification], [lem-sc-affine-open-proper]; step 3 also [lem-sc-divisor-exact-sequence] (hypotheses Cbar proper smooth connected, S finite closed points: met), [lem-sc-dim0-finite], [lem-sc-proper-affine-finite]. Small case: C=A^1, Cbar=P^1, S={infinity}. FIX: dag/nodes/sec-curve-estimates/lem-sc-brauer-zero.json: proof[2].text: missing closing $ in the final formula, and the exact sequence H^2(Cbar,G_m)->H^2(C,G_m)->H^2(Cbar,+i_{P*}Z) written out with the identification named; dag/nodes/sec-curve-estimates/lem-sc-open-curve-gm-direct-image-cohomology.json: stmt_deps: added def-weil-open-immersion (cited in the statement); source.place: points to the stalk computation preceding 03RM (Stacks 03RM itself uses the generic point, not the open complement). Tool uses: lem-weil-pbc-finite-pushforward-cohomology (declared) and lemma-weil-pbc-finite-direct-image-exact (off-unit sk-prop-cd, undeclared), both generic black boxes. Start Sat Oct 10 04:38:38 PM UTC 2026, end Sat Oct 10 04:39:43 PM UTC 2026.; 2 file(s) fixed by the reviewer"
+  },
+  "lean": {
+    "module": "WeilConjectures.AlgebraicGeometry.Curve.Brauer",
+    "declaration": "AlgebraicGeometry.IsCurve.subsingleton_cohomologicalBrauerGroup_of_connectedSpace",
+    "branch": "slopmaster2",
+    "line": 116,
+    "declarations": [
+      "AlgebraicGeometry.IsCurve.subsingleton_cohomologicalBrauerGroup_of_connectedSpace"
+    ],
+    "sorry_free": false,
+    "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state rests_on_sorry)"
+  }
 }
