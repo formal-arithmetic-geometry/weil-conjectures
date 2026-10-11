@@ -145,26 +145,31 @@ lemma mem_range_of_mono_cokernelMap (Φ : 𝒜 ⥤ ModuleCat.{v} R) [PreservesFi
   rw [← Φ.map_comp, cokernel.condition, Φ.map_zero]
   rfl
 
-/-- Let `τ : S ⟶ T` be a natural transformation between functors to an additive category,
-with `T` additive, and let `Φ` be an additive functor to modules. An element of
-`Φ (T (G₁ ⊞ G₂))` whose two components are in the ranges of `Φ τ` is in the range of
-`Φ τ`. -/
-lemma mem_range_of_biprod {𝒞 : Type*} [Category* 𝒞] [Preadditive 𝒞] [HasBinaryBiproducts 𝒞]
+/-- Let `τ` be a natural family of morphisms `S.obj G ⟶ T.obj G` between functors to an
+additive category, with `T` additive, let `Φ` be an additive functor to modules, and let `G` be
+a direct sum of `G₁` and `G₂`, witnessed by `p₁ ≫ i₁ + p₂ ≫ i₂ = 𝟙 G`. An element of
+`Φ (T G)` whose two components are in the ranges of `Φ τ` is in the range of `Φ τ`. The direct
+sum is not required to be a chosen biproduct, so that the lemma applies to any instance of
+zero morphisms on `𝒞`. -/
+lemma mem_range_of_decomp {𝒞 : Type*} [Category* 𝒞] [Preadditive 𝒞]
     {ℬ : Type*} [Category* ℬ] [Preadditive ℬ] (Φ : ℬ ⥤ ModuleCat.{v} R) [Φ.Additive]
-    {S T : 𝒞 ⥤ ℬ} [T.Additive] (τ : S ⟶ T) {G₁ G₂ : 𝒞} (x : Φ.obj (T.obj (G₁ ⊞ G₂)))
-    (h₁ : (Φ.map (T.map biprod.fst)).hom x ∈ Set.range (Φ.map (τ.app G₁)).hom)
-    (h₂ : (Φ.map (T.map biprod.snd)).hom x ∈ Set.range (Φ.map (τ.app G₂)).hom) :
-    x ∈ Set.range (Φ.map (τ.app (G₁ ⊞ G₂))).hom := by
+    {S T : 𝒞 ⥤ ℬ} [T.Additive] (τ : ∀ G, S.obj G ⟶ T.obj G)
+    (hτ : ∀ {G G' : 𝒞} (b : G ⟶ G'), τ G ≫ T.map b = S.map b ≫ τ G') {G₁ G₂ G : 𝒞}
+    (p₁ : G ⟶ G₁) (p₂ : G ⟶ G₂) (i₁ : G₁ ⟶ G) (i₂ : G₂ ⟶ G)
+    (htot : p₁ ≫ i₁ + p₂ ≫ i₂ = 𝟙 G) (x : Φ.obj (T.obj G))
+    (h₁ : (Φ.map (T.map p₁)).hom x ∈ Set.range (Φ.map (τ G₁)).hom)
+    (h₂ : (Φ.map (T.map p₂)).hom x ∈ Set.range (Φ.map (τ G₂)).hom) :
+    x ∈ Set.range (Φ.map (τ G)).hom := by
   obtain ⟨y₁, hy₁⟩ := h₁
   obtain ⟨y₂, hy₂⟩ := h₂
-  refine ⟨(Φ.map (S.map biprod.inl)).hom y₁ + (Φ.map (S.map biprod.inr)).hom y₂, ?_⟩
-  have e (G : 𝒞) (b : G ⟶ G₁ ⊞ G₂) (y : Φ.obj (S.obj G)) :
-      (Φ.map (τ.app (G₁ ⊞ G₂))).hom ((Φ.map (S.map b)).hom y) =
-        (Φ.map (T.map b)).hom ((Φ.map (τ.app G)).hom y) := by
-    rw [← ModuleCat.comp_apply, ← Φ.map_comp, τ.naturality, Φ.map_comp, ModuleCat.comp_apply]
+  refine ⟨(Φ.map (S.map i₁)).hom y₁ + (Φ.map (S.map i₂)).hom y₂, ?_⟩
+  have e (G' : 𝒞) (b : G' ⟶ G) (y : Φ.obj (S.obj G')) :
+      (Φ.map (τ G)).hom ((Φ.map (S.map b)).hom y) =
+        (Φ.map (T.map b)).hom ((Φ.map (τ G')).hom y) := by
+    rw [← ModuleCat.comp_apply, ← Φ.map_comp, ← hτ, Φ.map_comp, ModuleCat.comp_apply]
   rw [map_add, e, e, hy₁, hy₂, ← ModuleCat.comp_apply, ← ModuleCat.comp_apply, ← Φ.map_comp,
     ← Φ.map_comp, ← T.map_comp, ← T.map_comp, ← LinearMap.add_apply, ← ModuleCat.hom_add,
-    ← Φ.map_add, ← T.map_add, biprod.total, T.map_id, Φ.map_id]
+    ← Φ.map_add, ← T.map_add, htot, T.map_id, Φ.map_id]
   rfl
 
 end CategoryTheory

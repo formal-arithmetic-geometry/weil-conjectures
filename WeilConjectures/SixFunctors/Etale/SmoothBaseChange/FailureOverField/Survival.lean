@@ -6,6 +6,7 @@ Authors: Nailin Guan
 module
 
 public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
+public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.FailureOverField.ClosedOpen
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.FailureOverField.Limit
 
 /-!
@@ -349,8 +350,121 @@ theorem Etale.survivesBaseChange_or_of_isClosedImmersion [IsAffine S] (q : ℤ) 
     (V : T'.Opens) (hV : IsCompact (V : Set T')) (i : Z ⟶ T') [IsClosedImmersion i]
     (hi : Set.range i.base = (V : Set T')ᶜ) (hf : Etale.SurvivesBaseChange Λ q sq F x ξ f) :
     Etale.SurvivesBaseChange Λ q sq F x ξ (V.ι ≫ f) ∨
-      Etale.SurvivesBaseChange Λ q sq F x ξ (i ≫ f) :=
-  sorry
+      Etale.SurvivesBaseChange Λ q sq F x ξ (i ≫ f) := by
+  have : LocallySmall.{u + 1} X.Etale := locallySmall_max.{u + 1, u}
+  have : PreservesFiniteLimits ((X.uliftPointSmallEtale x).sheafFiber
+    (A := ModuleCat.{u + 1} Λ)) := inferInstance
+  have : PreservesFiniteColimits ((X.uliftPointSmallEtale x).sheafFiber
+    (A := ModuleCat.{u + 1} Λ)) := inferInstance
+  have : ((X.uliftPointSmallEtale x).sheafFiber (A := ModuleCat.{u + 1} Λ)).Additive :=
+    Functor.additive_of_preserves_binary_products _
+  -- quasi-compactness and quasi-separatedness
+  have : QuasiCompact (f ≫ g) := (quasiCompact_iff_compactSpace _).2 inferInstance
+  have : QuasiSeparated (f ≫ g) :=
+    (HasAffineProperty.iff_of_isAffine (P := @QuasiSeparated)).2 inferInstance
+  have : CompactSpace V := isCompact_iff_compactSpace.1 hV
+  have : QuasiCompact V.ι := (quasiCompact_iff_compactSpace _).2 inferInstance
+  have hrange : Set.range i.base = (Set.range V.ι.base)ᶜ := by
+    rw [hi]
+    congr
+    exact (Scheme.Opens.range_ι V).symm
+  -- the base-change properties in lower degrees
+  have hprev' : Etale.BaseChangeProperty Λ p (q - 1) :=
+    (hprev (q - 1) (by lia)).baseChangeProperty
+  have sq₂ := IsPullback.of_hasPullback (f ≫ g) p
+  have hbc : ∀ a < q, Etale.BaseChangeProperty Λ (pullback.fst (f ≫ g) p) a :=
+    fun a ha ↦ hprev a ha _ _ _ sq₂.flip
+  have : (Etale.baseChangeTargetFunctor Λ (pullback.fst (f ≫ g) p) (pullback.snd (f ≫ g) p)
+      q).Additive := by
+    unfold Etale.baseChangeTargetFunctor
+    infer_instance
+  -- the fibre products over `V` and over `Z`
+  have sqV : IsPullback (pullback.fst ((V.ι ≫ f) ≫ g) p)
+      (pullback.lift (pullback.fst ((V.ι ≫ f) ≫ g) p ≫ V.ι) (pullback.snd ((V.ι ≫ f) ≫ g) p)
+        (by simpa using (pullback.condition :
+          pullback.fst ((V.ι ≫ f) ≫ g) p ≫ (V.ι ≫ f) ≫ g = _))) V.ι
+      (pullback.fst (f ≫ g) p) := by
+    refine IsPullback.of_bot ?_ (pullback.lift_fst _ _ _).symm (IsPullback.of_hasPullback (f ≫ g) p)
+    rw [pullback.lift_snd, ← Category.assoc]
+    exact IsPullback.of_hasPullback _ _
+  have sqZ : IsPullback (pullback.fst ((i ≫ f) ≫ g) p)
+      (pullback.lift (pullback.fst ((i ≫ f) ≫ g) p ≫ i) (pullback.snd ((i ≫ f) ≫ g) p)
+        (by simpa using (pullback.condition :
+          pullback.fst ((i ≫ f) ≫ g) p ≫ (i ≫ f) ≫ g = _))) i
+      (pullback.fst (f ≫ g) p) := by
+    refine IsPullback.of_bot ?_ (pullback.lift_fst _ _ _).symm (IsPullback.of_hasPullback (f ≫ g) p)
+    rw [pullback.lift_snd, ← Category.assoc]
+    exact IsPullback.of_hasPullback _ _
+  obtain ⟨βV, hβViso, hβV⟩ := Etale.exists_baseChangeTargetTransition_comp_eq Λ q F f
+    (sq.lift (pullback.fst (f ≫ g) p ≫ f) (pullback.snd (f ≫ g) p)
+      (by rw [Category.assoc]; exact pullback.condition)) (sq.lift_fst _ _ _) (sq.lift_snd _ _ _)
+    V.ι (sq.lift (pullback.fst ((V.ι ≫ f) ≫ g) p ≫ V.ι ≫ f) (pullback.snd ((V.ι ≫ f) ≫ g) p)
+      ((Category.assoc _ _ _).trans pullback.condition)) (sq.lift_fst _ _ _) (sq.lift_snd _ _ _)
+    _ (pullback.lift_fst _ _ _) (pullback.lift_snd _ _ _)
+    (sq.hom_ext (by simp) (by simp)) sqV.toCommSq
+  obtain ⟨βZ, hβZiso, hβZ⟩ := Etale.exists_baseChangeTargetTransition_comp_eq Λ q F f
+    (sq.lift (pullback.fst (f ≫ g) p ≫ f) (pullback.snd (f ≫ g) p)
+      (by rw [Category.assoc]; exact pullback.condition)) (sq.lift_fst _ _ _) (sq.lift_snd _ _ _)
+    i (sq.lift (pullback.fst ((i ≫ f) ≫ g) p ≫ i ≫ f) (pullback.snd ((i ≫ f) ≫ g) p)
+      ((Category.assoc _ _ _).trans pullback.condition)) (sq.lift_fst _ _ _) (sq.lift_snd _ _ _)
+    _ (pullback.lift_fst _ _ _) (pullback.lift_snd _ _ _)
+    (sq.hom_ext (by simp) (by simp)) sqZ.toCommSq
+  -- the injective sheaf on `V`
+  let ι := Injective.ι (((V.ι ≫ f)^*[ModuleCat.{u + 1} Λ]).obj F)
+  have : Mono ι := Injective.ι_mono _
+  have hα₁ : ((V.ι)^*[ModuleCat.{u + 1} Λ]).map (βV ≫ ((V.ι)_*[ModuleCat.{u + 1} Λ]).map ι) ≫
+      (Etale.upperStarLowerStarAdjunction _ V.ι).counit.app (Injective.under (((V.ι ≫ f)^*[ModuleCat.{u + 1} Λ]).obj F)) =
+      (((V.ι)^*[ModuleCat.{u + 1} Λ]).map βV ≫
+        (Etale.upperStarLowerStarAdjunction _ V.ι).counit.app (((V.ι ≫ f)^*[ModuleCat.{u + 1} Λ]).obj F)) ≫ ι := by
+    rw [Functor.map_comp, Category.assoc]
+    erw [(Etale.upperStarLowerStarAdjunction _ V.ι).counit.naturality ι]
+    rw [Category.assoc]
+    rfl
+  have : Mono (((V.ι)^*[ModuleCat.{u + 1} Λ]).map (βV ≫ ((V.ι)_*[ModuleCat.{u + 1} Λ]).map ι) ≫
+      (Etale.upperStarLowerStarAdjunction _ V.ι).counit.app (Injective.under (((V.ι ≫ f)^*[ModuleCat.{u + 1} Λ]).obj F))) := by
+    have := hβViso
+    rw [hα₁]
+    infer_instance
+  have := hβZiso
+  have hα := Etale.mono_biprod_lift Λ V.ι i hrange (βV ≫ ((V.ι)_*[ModuleCat.{u + 1} Λ]).map ι) βZ
+  have hcok := Etale.mono_cokernelMap Λ q hq hprev' (IsPullback.of_hasPullback (f ≫ g) p)
+    (biprod.lift (βV ≫ ((V.ι)_*[ModuleCat.{u + 1} Λ]).map ι) βZ)
+  unfold Etale.SurvivesBaseChange at hf ⊢
+  have key := fun y ↦ mem_range_of_mono_cokernelMap
+    ((X.uliftPointSmallEtale x).sheafFiber (A := ModuleCat.{u + 1} Λ))
+    (Etale.baseChangeHomologyMap Λ (IsPullback.of_hasPullback (f ≫ g) p) q
+      (((f)^*[ModuleCat.{u + 1} Λ]).obj F))
+    (Etale.baseChangeHomologyMap Λ (IsPullback.of_hasPullback (f ≫ g) p) q _)
+    ((Etale.baseChangeSourceFunctor Λ p (f ≫ g) q).map (biprod.lift (βV ≫ ((V.ι)_*[ModuleCat.{u + 1} Λ]).map ι) βZ))
+    ((Etale.baseChangeTargetFunctor Λ (pullback.fst (f ≫ g) p) (pullback.snd (f ≫ g) p) q).map
+      (biprod.lift (βV ≫ ((V.ι)_*[ModuleCat.{u + 1} Λ]).map ι) βZ))
+    (Etale.baseChangeHomologyMap_naturality Λ _ q _) y
+  have hη := fun hmem ↦ hf (key _ hmem)
+  by_contra hcon
+  rw [not_or, not_not, not_not] at hcon
+  obtain ⟨hVin, hZin⟩ := hcon
+  rw [← hβV, Functor.map_comp, Functor.map_comp, ModuleCat.hom_comp, ModuleCat.hom_comp,
+    LinearMap.comp_apply, LinearMap.comp_apply] at hVin
+  rw [← hβZ, Functor.map_comp, Functor.map_comp, ModuleCat.hom_comp, ModuleCat.hom_comp,
+    LinearMap.comp_apply, LinearMap.comp_apply] at hZin
+  apply hη
+  refine mem_range_of_decomp ((X.uliftPointSmallEtale x).sheafFiber (A := ModuleCat.{u + 1} Λ))
+    (fun G ↦ Etale.baseChangeHomologyMap Λ (IsPullback.of_hasPullback (f ≫ g) p) q G)
+    (Etale.baseChangeHomologyMap_naturality Λ _ q) biprod.fst biprod.snd
+    biprod.inl biprod.inr biprod.total _ ?_ ?_
+  · by_contra hA
+    refine Etale.not_mem_range_of_baseChangeProperty Λ (IsPullback.of_hasPullback (f ≫ g) p)
+      V.ι ((V.ι ≫ f) ≫ g) (Category.assoc _ _ _).symm (IsPullback.of_hasPullback _ _) _
+      (pullback.lift_snd _ _ _) sqV q hq hbc βV x _ ?_ hVin
+    rw [← ModuleCat.comp_apply, ← Functor.map_comp, ← Functor.map_comp]
+    rw [← ModuleCat.comp_apply, ← Functor.map_comp, ← Functor.map_comp, biprod.lift_fst] at hA
+    exact hA
+  · by_contra hB
+    refine Etale.not_mem_range_of_isFinite Λ (IsPullback.of_hasPullback (f ≫ g) p)
+      i ((i ≫ f) ≫ g) (Category.assoc _ _ _).symm (IsPullback.of_hasPullback _ _) _
+      (pullback.lift_fst _ _ _) (pullback.lift_snd _ _ _) sqZ q βZ x _ ?_ hZin
+    rw [← ModuleCat.comp_apply, ← Functor.map_comp, ← Functor.map_comp, biprod.lift_snd] at hB
+    exact hB
 
 /-- Step (4) of blueprint `sbc-lem-bc-failure-field`: nothing survives over the empty scheme,
 since there the fibre `T' ×_S X` is empty and `R^q h'_* e'⁻¹ π⁻¹ F` vanishes. -/
