@@ -5224,3 +5224,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 15:26 L: merged deliver/E1/lem-weil-pbc-retract-supplied (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.EtaleInjectiveRetract AlgebraicGeometry.Etale.exists_injective_retract_of_surjective)
 - 15:26 L: merged deliver/T1/lem-weil-pbc-grothendieck-existence-projective (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.GrothendieckExistenceProjective AlgebraicGeometry.completion_isEquivalence_of_projective_embedding)
 - 15:26 L: merged deliver/G1/def-weil-pbc-strict-henselization-limit (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.StrictHenselization AlgebraicGeometry.Scheme.strictHenselizationRing)
+- 15:27 L: merged deliver/P1/lem-weil-pbc-coherent-support-power-ideal-kills (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.CoherentSupportPowerIdealKills AlgebraicGeometry.Scheme.coherent_support_power_ideal_kills)

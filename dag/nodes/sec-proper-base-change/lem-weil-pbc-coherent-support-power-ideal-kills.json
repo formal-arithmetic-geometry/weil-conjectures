@@ -206,5 +206,23 @@
   "by": "L",
   "result": "pass",
   "note": "Seven steps along Stacks 01Y9 with 00L6 written out from existing leaves (00E0, 00IM): finite Noetherian affine cover, F(U_i) finite, sections of K^t F on affines, vanishing checked on the cover via tilde/Gamma, support and zero set on affines (new unsplit node: V(K) cap U = V(K(U)) for a quasi-coherent ideal, 01HM/01IN/01HP), uniform t. Correct. Statement: the affine description of V(K) now cites the new node and K^0 F = F is fixed."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CoherentSupportPowerIdealKills",
+  "declaration": "AlgebraicGeometry.Scheme.coherent_support_power_ideal_kills",
+  "file": "lean/Sheaf/AlgebraicGeometry/CoherentSupportPowerIdealKills.lean",
+  "statement": "theorem coherent_support_power_ideal_kills (X : Scheme.{u}) [IsNoetherian X] (F : X.Modules) (hF : RingedSpace.IsCoherent X.toRingedSpace F) (K : X.IdealSheafData) : (∃ t : ℕ, IsZero (idealModuleProduct (idealSheafPower K.toModulesι t).2 F)) ↔ {x : X | ¬ Subsingleton (F.presheaf.stalk x)} ⊆ {x : X | ¬ Function.Surjective ((RingedSpace.moduleStalkFunctor X.toRingedSpace x).map K.toModulesι).hom}",
+  "branch": "sheaf-dag",
+  "by": "P1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-cpk",
+  "group": "P1",
+  "result": "pass",
+  "note": "IsNoetherian X; F : X.Modules + RingedSpace.IsCoherent; K : X.IdealSheafData; K^t F = IsZero (idealModuleProduct (idealSheafPower K.toModulesι t).2 F), t : ℕ incl. 0 (idealSheafPower 0 = O_X); Supp inline ¬Subsingleton stalk; V(K) = recorded non-surjective moduleStalkFunctor set of quasi_coherent_ideal_zero_set_affine; iff with ⊆"
  }
 }
