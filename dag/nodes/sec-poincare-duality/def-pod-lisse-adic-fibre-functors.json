@@ -1,0 +1,106 @@
+{
+ "id": "def-pod-lisse-adic-fibre-functors",
+ "kind": "definition",
+ "title": "Fibre functors of lisse O_E-, E- and Qlbar-sheaves",
+ "statement": "Let $\\ell$ be a prime, let $Y$ be a Noetherian separated scheme on which $\\ell$ is invertible, and let $\\bar y:\\operatorname{Spec}\\Omega\\to Y$ be a geometric point. Let $E/\\mathbf Q_\\ell$ be finite, with ring of integers $\\mathcal O_E$, and use the lisse integral and rational sheaf categories and their fibre objects of [def-pod-lisse-l-adic-sheaves], with geometric stalks as in [def-weil-pbc-geometric-stalks]. These fibres extend to functors as follows.\n\n1. The integral fibre functor sends $\\mathcal F$ to $\\varprojlim_n(\\mathcal F_n)_{\\bar y}$ and a compatible family of morphisms $(f_n)_n$ to $\\varprojlim_n(f_n)_{\\bar y}$, as a functor to $\\mathcal O_E$-modules.\n2. The rational fibre functor sends $\\mathcal F\\otimes E$ to $\\mathcal F_{\\bar y}\\otimes_{\\mathcal O_E}E$. On the rationalized Hom module $E\\otimes_{\\mathcal O_E}\\operatorname{Hom}(\\mathcal F,\\mathcal G)$ it sends $a\\otimes f$ to $a\\cdot(f_{\\bar y}\\otimes 1)$, as a functor to $E$-vector spaces.\n3. Fix an algebraic closure $\\overline{\\mathbf Q}_\\ell$ of $\\mathbf Q_\\ell$. The algebraic fibre functor on the coefficient 2-colimit of [def-pod-lisse-l-adic-sheaves] sends a coefficient model $(E,\\mathcal F)$ to $\\mathcal F_{\\bar y}\\otimes_E\\overline{\\mathbf Q}_\\ell$. The canonical inclusion of each rational model category into the coefficient 2-colimit is functorial; its composite with the algebraic fibre functor is naturally isomorphic to the rational fibre functor followed by scalar extension to $\\overline{\\mathbf Q}_\\ell$, with the canonical identification on pure tensors. Thus the algebraic functor is induced through the coefficient 2-colimit with scalar extension on each rational model.",
+ "source": {
+  "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+  "place": "Weil II (1.1.1) b)-d), pp. 146-147; SGA 5 VI (1.4.2)"
+ },
+ "stmt_deps": [
+  "def-pod-lisse-l-adic-sheaves",
+  "def-weil-pbc-geometric-stalks"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "lisse integral rational algebraic sheaf geometric fiber functor",
+   "results": "UNAVAILABLE: service unavailable: Internal Server Error; 0 hits.",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.lim, CategoryTheory.Functor.whiskeringRight",
+   "results": "12 hits: limYoneda, preservesLimitNatIso and its component lemmas, limCompFlipIsoWhiskerLim, limIsoFlipCompWhiskerLim and their component lemmas, whiskeringLimYonedaIsoCones, opHomCompWhiskeringLimYonedaIsoCocones. Generic limits and whiskering; no lisse-adic fibre functor.",
+   "date": "2026-10-11",
+   "verdict": "no specialized match; reuse generic limit and whiskering functors"
+  },
+  {
+   "tool": "grep",
+   "query": "lisseIntegralFiberFunctor|lisseRationalFiberFunctor|lisseAlgebraicFiberFunctor|lisseAlgebraicModelFunctor",
+   "results": "Launcher Mathlib grep: OK 0 hits. Direct rg with the same pattern in WeilConjectures, lean/Sheaf and dag/nodes: 0 hits. DAG text search for lisse fibre functors found only this corollary and def-wf-fundamental-representation; neither defines these functors. tools/blueprint_refs.py search fibre functor returned eight nodes, none carrying these specialized functors.",
+   "date": "2026-10-11",
+   "verdict": "no existing specialized functor node or declaration"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "cor-galois-lisse-representations",
+  "group": "Q1",
+  "date": "2026-10-11"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "cor-galois-lisse-representations",
+   "place": "Part (2) and proof steps 7-9: natural fibre functors on integral, rational and algebraic coefficients",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-lem-finite",
+ "lean": {
+  "module": "Sheaf.Paper.LisseAdicFiberFunctors",
+  "declaration": "AlgebraicGeometry.Scheme.lisseIntegralFiberFunctor",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.lisseIntegralFiberFunctor",
+   "AlgebraicGeometry.Scheme.lisseRationalFiberFunctor_exists",
+   "AlgebraicGeometry.Scheme.lisseRationalFiberFunctor",
+   "AlgebraicGeometry.Scheme.lisseRationalFiberFunctor_obj",
+   "AlgebraicGeometry.Scheme.lisseAlgebraicModelMap",
+   "AlgebraicGeometry.Scheme.lisseAlgebraicModelMap_id",
+   "AlgebraicGeometry.Scheme.lisseAlgebraicModelMap_comp",
+   "AlgebraicGeometry.Scheme.lisseAlgebraicModelFunctor",
+   "AlgebraicGeometry.Scheme.lisseAlgebraicFiber_ofModel",
+   "AlgebraicGeometry.Scheme.lisseAlgebraicFiberFunctor_exists",
+   "AlgebraicGeometry.Scheme.lisseAlgebraicFiberFunctor",
+   "AlgebraicGeometry.Scheme.lisseAlgebraicFiberFunctor_obj"
+  ],
+  "statement": "def lisseIntegralFiberFunctor :\n    LisseIntegralSheaf l E Y ⥤ ModuleCat.{d + 1} (Padic.coefficientExtensionIntegers l E)",
+  "branch": "sheaf-dag",
+  "by": "Q1",
+  "date": "2026-10-11",
+  "existing": true
+ },
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "X-4c9fd",
+  "group": "Q1",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "X-4c9fd",
+  "group": "Q1",
+  "result": "pass",
+  "note": "independent Codex review: Matched all finite and adic hypotheses, evaluation actions, equivalences, abelianity/exactness, tensor/unit and scalar-extension clauses to the corrected node; shared witnesses survive the refactor, the new node records the landed fibre functors, packet compilation is clean, and scratch serialization succeeded in 58.66 s."
+ }
+}
