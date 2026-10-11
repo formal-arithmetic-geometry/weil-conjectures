@@ -26,7 +26,8 @@
   "def-weil-proper-morphism",
   "def-weil-scheme-over-base",
   "def-sbc-locally-finite-presentation",
-  "def-pc-base-change"
+  "def-pc-base-change",
+  "def-sc-structure-sheaf-cohomology-pullback"
  ],
  "proof": [
   {
@@ -157,5 +158,24 @@
   "group": "H1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-pml0004 (reviewer sub-agent of L); spot-checked: Statement unchanged vs Tag 0BF2 (Z subset of intersection stated as hypothesis, always true). C4: lem-pc-rf-perfect-base-change hypotheses met (L invertible on flat X is fp and S-flat; f proper fp); lem-sc-picard-diagonal-locally-closed universal property handles every T->S, base-change of S to the intersection keeps all hypotheses (E ok); residue model gives ranks via step 2; proper-closed-image is a mathlib leaf; step 5 trivialization elementary. Class d: picard nodes under sec-abelian-varieties read, no duplicate, no new nodes. FIX more, RETURN less: (1) step 3 said the map E->E_i is lifted 'after replacing the finite free models by quasi-isomorphic ones', which would destroy the rank shape step 4 needs; rewritten as a chain map between the fixed models (finite free source on an affine, quasi-coherent target), with h_0=h_{i,0}=1 from the pushforward hypothesis at Spec k(s) and h_j=0 for j<0; (2) stmt_deps gained def-pc-base-change, cited in the statement text. Second reading missed (1) and wrongly claims step 5 cites lem-weil-pbc-nonvanishing-section-trivializes (it does not; left uncited since that node is another unit's split node and the step is elementary). tool_uses lem-pc-rf-perfect-base-change accepted (generic perfect base change).; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.PicardH1MultipleLocus",
+  "declaration": "AlgebraicGeometry.Scheme.picard_h1_multiple_locus",
+  "file": "lean/Sheaf/AlgebraicGeometry/PicardH1MultipleLocus.lean",
+  "statement": "theorem picard_h1_multiple_locus {X S : Scheme.{v}} (f : X ⟶ S) {n : ℕ} (Xi : Fin n → Scheme.{v}) (fi : ∀ i, Xi i ⟶ S) [Flat f] [IsProper f] [LocallyOfFinitePresentation f] [∀ i, Flat (fi i)] [∀ i, IsProper (fi i)] [∀ i, LocallyOfFinitePresentation (fi i)] (ui : ∀ i, Xi i ⟶ X) (hui : ∀ i, ui i ≫ f = fi i) (hO : ∀ {T : Scheme.{v}} (g : T ⟶ S), IsIso ((Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction (pullback.snd f g))).unit.app (SheafOfModules.unit T.ringCatSheaf))) (hOi : ∀ i, ∀ {T : Scheme.{v}} (g : T ⟶ S), IsIso ((Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction (pullback.snd (fi i) g))).unit.app (SheafOfModules.unit T.ringCatSheaf))) (L : X.Modules) [L.IsInvertible] (Z : Scheme.{v}) (j : Z ⟶ S) [IsImmersion j] (Zi : Fin n → Scheme.{v}) (ji : ∀ i, Zi i ⟶ S) [∀ i, IsImmersion (ji i)] (hZ : ∀ {T : Scheme.{v}} (g : T ⟶ S), (∃ h : T ⟶ Z, h ≫ j = g) ↔ ∃ (N : T.Modules) (_ : N.IsFiniteLocallyFree), Nonempty ((Modules.tensorPullback (pullback.fst f g)).obj L ≅ (Modules.tensorPullback (pullback.snd f g)).obj N)) (hZi : ∀ i, ∀ {T : Scheme.{v}} (g : T ⟶ S), (∃ h : T ⟶ Zi i, h ≫ ji i = g) ↔ ∃ (N : T.Modules) (_ : N.IsFiniteLocallyFree), Nonempty ((Modules.tensorPullback (pullback.fst (fi i) g)).obj ((Modules.tensorPullback (ui i)).obj L) ≅ (Modules.tensorPullback (pullback.snd (fi i) g)).obj N)) (hsub : ∀ {T : Scheme.{v}} (g : T ⟶ S), (∃ h : T ⟶ Z, h ≫ j = g) → ∀ i, ∃ h : T ⟶ Zi i, h ≫ ji i = g) (s : S) (hs : s ∈ Set.range j) (hH : Function.Injective (fun x : Sheaf.H (structureSheafAb (pullback f (S.fromSpecResidueField s))) 1 ↦ fun i ↦ structureSheafCohomologyPullback (((Over.pullback (S.fromSpecResidueField s)).map (Over.homMk (U := Over.mk (fi i)) (V := Over.mk f) (ui i) (hui i))).left) 1 x)) : ∃ U : S.Opens, s ∈ U ∧ ∀ {T : Scheme.{v}} (g : T ⟶ U.toScheme), (∃ h : T ⟶ Z, h ≫ j = g ≫ U.ι) ↔ ∀ i, ∃ h : T ⟶ Zi i, h ≫ ji i = g ≫ U.ι",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-phm1408"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-phm1408",
+  "group": "C1",
+  "result": "fix",
+  "note": "f,fi flat/proper/lfp; ui over S (hui); hO/hOi every T (aligned to tensorPullback adjunction unit); L invertible, L_i = tensorPullback ui L; Z,Zi immersions with diagonal-lemma universal property (aligned to IsFiniteLocallyFree N); hsub = scheme containment in intersection; s in Z; hH joint H1 injectivity via landed structureSheafCohomologyPullback on Over.pullback fibre maps X_i,s -> X_s; conclusion: open U ∋ s with equal subfunctors over U; n=0 checked"
  }
 }
