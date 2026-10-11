@@ -227,5 +227,23 @@
   "by": "L",
   "result": "accepted",
   "note": "7 steps following Stacks 07E6 with its gaps written out: A_0 = k[y]_p Noetherian local with residue field K_0 inside F; Omega_{A_0/k} free on the dy_i and Omega (x) K_0 = Omega_{K_0/k} by pushing to Omega_{F/k}; A_0 geometrically regular (polynomial rings smooth over fields, localization); 07E5 (1)=>(3) for A_0 (the item being split in parallel) plus the Jacobi-Zariski sequence give an isomorphism onto m_0/m_0^2; the commutative square with the new unsplit 07E2 node (transitivity, injectivity of H_1 (x) M -> H_1) and 07E5 for A gives injectivity of m_0/m_0^2 (x) K -> m/m^2; a regular system of parameters of A_0 maps to part of one for A (Nakayama, 00KQ, 00NQ); flatness by the 07DY node. Source tag corrected: 07DY, not 00R4."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.GeometricallyRegularOverFieldFlat",
+  "declaration": "Algebra.exists_flat_polynomialLocalization_of_isGeometricallyRegular",
+  "file": "lean/Sheaf/RingTheory/GeometricallyRegularOverFieldFlat.lean",
+  "statement": "theorem exists_flat_polynomialLocalization_of_isGeometricallyRegular (k : Type u) (A : Type v) [Field k] [CommRing A] [Algebra k A] [IsLocalRing A] [IsNoetherianRing A] (pchar : ℕ) [Fact pchar.Prime] [CharP k pchar] (hreg : IsGeometricallyRegular k A) (F : IntermediateField k (IsLocalRing.ResidueField A)) (hF : F.FG) (m : ℕ) (φ : MvPolynomial (Fin m) k →ₐ[k] A) (a : Fin m → F) (ha : ∀ i : Fin m, (a i : IsLocalRing.ResidueField A) = IsLocalRing.residue A (φ (MvPolynomial.X i))) (b : Module.Basis (Fin m) F (KaehlerDifferential k F)) (hb : ∀ i : Fin m, b i = KaehlerDifferential.D k F (a i)) : let p := (IsLocalRing.maximalIdeal A).comap φ.toRingHom ∃ ψ : Localization.AtPrime p →+* A, ψ.comp (algebraMap (MvPolynomial (Fin m) k) (Localization.AtPrime p)) = φ.toRingHom ∧ ψ.Flat ∧ IsRegularLocalRing (A ⧸ p.map φ.toRingHom)",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-grf1100",
+  "group": "K1",
+  "result": "pass",
+  "note": "char p via Fact pchar.Prime+CharP k; Noetherian local A with recorded Algebra.IsGeometricallyRegular (Type (max u v) tests); F IntermediateField of ResidueField A with F.FG (field-adjoin); phi k-alg hom from MvPolynomial (Fin m) k; residues a i in F (ha); b basis of Omega[F/k] with b i = D(a i); p = comap of maximal ideal; psi the unique extension through Localization.AtPrime p, RingHom.Flat; IsRegularLocalRing (A / pA); k-alg on residue field rfl-checked; m=0 fine; no hollow hyps; no statement change"
  }
 }
