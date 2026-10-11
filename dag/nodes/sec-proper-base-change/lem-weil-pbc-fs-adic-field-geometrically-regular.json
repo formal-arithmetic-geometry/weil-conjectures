@@ -181,5 +181,23 @@
   "item": "lem-weil-pbc-fs-adic-field-geometrically-regular",
   "worker": "stage1",
   "summary": "Read Stacks 07EL (theorem-regular-fs), 07EG (lemma-base-change-fs), and 07EI (lemma-fs-implies-regular). Kept the statement and its dependencies. Reused the existing purely inseparable base-change locality node, adic base-change node, regular-local localization node, and tensor-product public universal property. Wrote the needed topology change directly as a square-zero lifting argument from I contained in the new maximal ideal; no cofinality claim is assumed. Created only the strictly smaller 07EI regular-local helper, with three kinds of Mathlib search and no proof. The argument handles both characteristics and the degree-one extension."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.FormallySmoothAdicGeometricallyRegular",
+  "declaration": "Algebra.isGeometricallyRegular_of_formallySmoothAdic",
+  "file": "lean/Sheaf/RingTheory/FormallySmoothAdicGeometricallyRegular.lean",
+  "statement": "theorem isGeometricallyRegular_of_formallySmoothAdic (k : Type u) (C : Type v) [Field k] [CommRing C] [Algebra k C] [IsNoetherianRing C] [IsLocalRing C] (h : FormallySmoothAdic k C (IsLocalRing.maximalIdeal C)) : IsGeometricallyRegular k C",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-ffg1041",
+  "group": "H1",
+  "result": "pass",
+  "note": "k:Type u [Field k]; C:Type v [CommRing C][IsNoetherianRing C][IsLocalRing C]; k->C as [Algebra k C]; m-adic FS = recorded Algebra.FormallySmoothAdic k C (maximalIdeal C) (test rings Type (max u v)); conclusion = recorded Algebra.IsGeometricallyRegular (Noetherian + all finite purely inseparable k':Type (max u v), IsRegularRing (k' ⊗[k] C)); no Lean dep on J1 regular-local node; #check ok"
  }
 }
