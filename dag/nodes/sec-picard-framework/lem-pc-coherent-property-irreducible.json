@@ -27,7 +27,8 @@
   "def-weil-closed-immersion",
   "def-pc-integral-scheme",
   "def-pc-module-pullback",
-  "def-weil-residue-field"
+  "def-weil-residue-field",
+  "def-pc-module-stalk-functor"
  ],
  "proof": [
   {
@@ -184,5 +185,24 @@
   "group": "H1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-cpi0035 (reviewer sub-agent of L); spot-checked: Statement vs coherent.tex 01YH clause by clause (agrees; (2) as closed immersion of integral Z with i(Z) strictly in T); citer lem-pc-coherent-property-devissage step 4 uses exactly (1),(2),(3); no duplicate of 01YM node; cited statements checked for hypotheses. FIX more, RETURN less: (C1) Step 3 used an undefined integral Z with generic point over xi: now introduced as T_red via lem-weil-pbc-reduced-induced-closed-subscheme(2), integral by def-pc-integral-scheme; (C1) Step 6 'equality with T is covered by Step 5' needed that an integral Z_j with i_j(Z_j)=T is Z over X: now cites uniqueness clause (3) of the same node and transports the ideal; Step 5 dangling 'failure of goodness' sentence replaced by the conclusion for all ideals. Second reading by H1 missed both.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CoherentPropertyIrreducible",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.coherent_property_irreducible",
+  "file": "lean/Sheaf/AlgebraicGeometry/CoherentPropertyIrreducible.lean",
+  "statement": "theorem coherent_property_irreducible (X : Scheme.{u}) [IsNoetherian X] (T : Set X) (hTclosed : IsClosed T) (hTirreducible : IsIrreducible T) (ξ : X) (hξ : IsGenericPoint ξ T) (P : X.Modules → Prop) (hshort : ∀ S : ShortComplex X.Modules, S.ShortExact → RingedSpace.IsCoherent X.toRingedSpace S.X₁ → RingedSpace.IsCoherent X.toRingedSpace S.X₂ → RingedSpace.IsCoherent X.toRingedSpace S.X₃ → {x : X | ¬ Subsingleton (S.X₁.presheaf.stalk x)} ⊆ T → {x : X | ¬ Subsingleton (S.X₂.presheaf.stalk x)} ⊆ T → {x : X | ¬ Subsingleton (S.X₃.presheaf.stalk x)} ⊆ T → ((P S.X₁ ∧ P S.X₂) → P S.X₃) ∧ ((P S.X₁ ∧ P S.X₃) → P S.X₂) ∧ ((P S.X₂ ∧ P S.X₃) → P S.X₁)) (hsmaller : ∀ (Z : Scheme.{u}) (i : Z ⟶ X), IsClosedImmersion i → IsIntegral Z → Set.range i.base ⊂ T → ∀ I : Z.IdealSheafData, P ((pushforward i).obj I.toModules)) (hG : ∃ G : X.Modules, RingedSpace.IsCoherent X.toRingedSpace G ∧ {x : X | ¬ Subsingleton (G.presheaf.stalk x)} = T ∧ (∀ a ∈ IsLocalRing.maximalIdeal (X.presheaf.stalk ξ), ∀ v : (RingedSpace.moduleStalkFunctor X.toRingedSpace ξ).obj G, a • v = 0) ∧ (∃ inst : Module (X.residueField ξ) ((RingedSpace.moduleStalkFunctor X.toRingedSpace ξ).obj G), (∀ (a : X.presheaf.stalk ξ) (v : (RingedSpace.moduleStalkFunctor X.toRingedSpace ξ).obj G), a • v = (X.residue ξ) a • v) ∧ Module.finrank (X.residueField ξ) ((RingedSpace.moduleStalkFunctor X.toRingedSpace ξ).obj G) = 1) ∧ P G) : ∀ F : X.Modules, RingedSpace.IsCoherent X.toRingedSpace F → {x : X | ¬ Subsingleton (F.presheaf.stalk x)} ⊆ T → P F",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-cpi"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-cpi",
+  "group": "C1",
+  "result": "fix",
+  "note": "Noetherian X, closed irreducible T with generic point, P on X.Modules; (1) two-of-three over ShortExact with coherence+inline support in T on all three; (2) closed immersion of integral Z (same universe) with range ⊂ T, every Z.IdealSheafData pushed forward; (3) coherent G, support = T, m_xi kills G_xi via moduleStalkFunctor, compatible kappa(xi)-structure finrank 1, P G; conclusion every coherent F with support ⊆ T. Added stmt_dep def-pc-module-stalk-functor is used. FIX: ideal sheaves to IdealSheafData (QUASI-COHERENT IDEAL SHEAVES), [IsNoetherian X] (NOETHERIAN SCHEME)"
  }
 }
