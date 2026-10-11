@@ -1,18 +1,17 @@
 # Work queue
 
-507 items; claim with `tools/claim.py next <group> [--stage N]`.
+503 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (507)
+## Stage 2: nodes to state (503)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
 | `def-pc-derived-category` | 1 | state |
 | `def-weil-pbc-koszul-complex` | 1 | state |
 | `cor-galois-lisse-representations` | 1 | state |
-| `lem-pc-chi-zero-dim-support` | 1 | state |
 | `lem-pc-derived-tensor-transitivity` | 1 | state |
 | `lem-pc-finite-flat-pushforward-locally-free` | 1 | state |
 | `lem-pc-flf-properties` | 1 | state |
@@ -27,7 +26,7 @@
 | `lem-sc-ass-weakass-fg-stalk` | 1 | state |
 | `lem-sc-base-change-curve` | 1 | state |
 | `lem-sc-closed-subset-qc-ideal` | 1 | state |
-| `lem-sc-coherent-free-stalks-locally-free` | 1 | state |
+| `lem-sc-derived-open-restriction-adjunction-exact` | 1 | state |
 | `lem-sc-ext-evaluation` | 1 | state |
 | `lem-sc-ext-tensor-exact` | 1 | state |
 | `lem-sc-finite-locally-free-residue-isomorphism` | 1 | state |
@@ -86,11 +85,8 @@
 | `lem-weil-pbc-module-finite-type-submodule-extension` | 1 | state |
 | `lem-weil-pbc-module-pullback-affine-sections` | 1 | state |
 | `lem-weil-pbc-module-pullback-finite-type` | 1 | state |
-| `lem-weil-pbc-module-stalk-exact` | 1 | state |
-| `lem-weil-pbc-module-stalk-tensor` | 1 | state |
 | `lem-weil-pbc-n2-ascends-finite-domain-extension` | 1 | state |
 | `lem-weil-pbc-noetherian-acc-quasi-coherent` | 1 | state |
-| `lem-weil-pbc-nonvanishing-section-trivializes` | 1 | state |
 | `lem-weil-pbc-normal-nagata-monogenic-n1` | 1 | state |
 | `lem-weil-pbc-normal-ring-integrally-closed-total` | 1 | state |
 | `lem-weil-pbc-normalization-in-residue-field-extension` | 1 | state |
@@ -517,7 +513,7 @@
 | `lem-pc-essentially-constant-pro-hom-colimit` | 4 | state |
 | `lem-pur-essential-constant-pro-criterion-05py` | 4 | state |
 
-Not open yet: 40 nodes that wait for stage 1, 628 nodes that wait for a statement dependency.
+Not open yet: 40 nodes that wait for stage 1, 627 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
