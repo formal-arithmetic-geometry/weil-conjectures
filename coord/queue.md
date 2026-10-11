@@ -1,18 +1,17 @@
 # Work queue
 
-868 items; claim with `tools/claim.py next <group> [--stage N]`.
+870 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (868)
+## Stage 2: nodes to state (870)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
 | `def-sbc-smooth-morphisms` | 1 | state |
-| `def-sc-function-field` | 1 | state |
+| `def-sc-divisor` | 1 | state |
 | `def-sc-kahler-differentials` | 1 | state |
-| `def-sc-ringed-space-module-cohomology` | 1 | state |
 | `def-sc-scheme-tangent-space` | 1 | state |
 | `def-sp-kinjective-bridge` | 1 | state |
 | `def-weil-l-adic-coefficient-extension` | 1 | state |
@@ -21,12 +20,17 @@
 | `lem-pc-derived-tensor-transitivity` | 1 | state |
 | `lem-pc-module-pullback-identity-composition` | 1 | state |
 | `lem-pc-pre-derived-adjoint-functors-general` | 1 | state |
-| `lem-pur-rhom-well-defined` | 1 | state |
+| `lem-pc-ringed-space-derived-products` | 1 | state |
 | `lem-sc-base-change-curve` | 1 | state |
 | `lem-sc-dimension-locally-algebraic` | 1 | state |
 | `lem-sc-fibre-dimension-after-base-change` | 1 | state |
+| `lem-sc-invertible-module-generic-stalk` | 1 | state |
+| `lem-sc-mayer-vietoris-ringed-space` | 1 | state |
 | `lem-sc-p1-ext-locally-free-naturality` | 1 | state |
 | `lem-sc-picard-product-open` | 1 | state |
+| `lem-sc-separated-affine-function-field-surjective` | 1 | state |
+| `lem-sc-smooth-connected-curve-local-rings` | 1 | state |
+| `lem-sc-vector-bundle-line-subbundle` | 1 | state |
 | `lem-sp-cartan-eilenberg-comparison-independence` | 1 | state |
 | `lem-sp-cartan-eilenberg-double-complex-homotopy` | 1 | state |
 | `lem-sp-ce-horizontal-lift` | 1 | state |
@@ -35,13 +39,11 @@
 | `lem-weil-pbc-artinian-ideal-length-one-filtration` | 1 | state |
 | `lem-weil-pbc-associated-module-pullback` | 1 | state |
 | `lem-weil-pbc-associated-prime-localize-at-prime` | 1 | state |
-| `lem-weil-pbc-associated-primes-flat-base-change` | 1 | state |
 | `lem-weil-pbc-basis-sheaf-sections-germs` | 1 | state |
 | `lem-weil-pbc-cartesian-eilenberg-functorial` | 1 | state |
 | `lem-weil-pbc-cech-vanishing-criterion` | 1 | state |
 | `lem-weil-pbc-change-ideal-completion` | 1 | state |
 | `lem-weil-pbc-charpoly-locally-free-existence` | 1 | state |
-| `lem-weil-pbc-closed-immersion-pushforward-fully-faithful` | 1 | state |
 | `lem-weil-pbc-closed-immersion-unit-quotient` | 1 | state |
 | `lem-weil-pbc-closed-pushforward-constant-restriction` | 1 | state |
 | `lem-weil-pbc-closed-pushforward-stalks` | 1 | state |
@@ -878,7 +880,7 @@
 | `lem-sc-normalization-properties` | 3 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 885 nodes that wait for a statement dependency, 40 nodes that wait for stage 1.
+Not open yet: 878 nodes that wait for a statement dependency, 40 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
