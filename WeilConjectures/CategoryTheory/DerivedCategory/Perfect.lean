@@ -433,8 +433,23 @@ bounded complex `P` of finitely generated projective modules, `C^∨` is represe
 termwise dual complex `Hom_R(P^{-i}, R)`, again bounded with finitely generated projective
 terms. -/
 theorem IsPerfect.ihom_unit {C : DerivedCategory (ModuleCat.{u} R)} (hC : C.IsPerfect) :
-    ((ihom C).obj (𝟙_ _)).IsPerfect :=
-  sorry
+    ((ihom C).obj (𝟙_ _)).IsPerfect := by
+  obtain ⟨P, a, b, _, _, hP, ⟨e⟩⟩ := hC
+  let _ (n : ℤ) : HasRightDual (P.X n) :=
+    have := (hP n).1
+    have := (hP n).2
+    (ModuleCat.isDualizable_of_projective (P.X n)).some
+  obtain ⟨_⟩ := nonempty_exactPairing_Q_obj P a b
+  obtain ⟨_⟩ := nonempty_braidedCategory (ModuleCat.{u} R)
+  let _ := BraidedCategory.exactPairing_swap (Q.obj P) (Q.obj P.rightDual)
+  let _ : ExactPairing (Q.obj P.rightDual) C := exactPairingCongrRight e
+  refine (isPerfect_Q_obj P.rightDual (-b) (-a) fun n ↦ ?_).of_iso
+    (MonoidalClosed.ihomObjUnitIso (Q.obj P.rightDual) C).symm
+  have := (hP (-n)).1
+  have := (hP (-n)).2
+  let f : (P.rightDual.X n) ≃ₗ[R] Module.Dual R (P.X (-n)) :=
+    (ihomUnitIsoRightDual (P.X (-n))).toLinearEquiv.symm ≪≫ₗ ModuleCat.homLinearEquiv
+  exact ⟨Module.Projective.of_equiv f.symm, Module.Finite.equiv f.symm⟩
 
 omit [HasDerivedCategory.{u} (ModuleCat.{u} R)] in
 /-- A complex of modules over a semisimple ring (for example a field) is quasi-isomorphic to the

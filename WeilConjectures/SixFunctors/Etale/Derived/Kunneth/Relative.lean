@@ -17,6 +17,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekTransport
 public import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula
 public import WeilConjectures.SixFunctors.Etale.Derived.Stability
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar
+public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.ClosedImmersion
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Defs
 
 /-!
@@ -140,39 +141,83 @@ theorem nonempty_iso_rightDerivedLowerShriek_externalProduct (f : X ⟶ B) (g : 
       (R(f)_![A]).obj K ⊗ (R(g)_![A]).obj M) :=
   sorry
 
+omit [HasSmallSiteSheafify A] in
 /-- The external product is compatible with pullback: for morphisms `i : Z ⟶ X`, `j : W ⟶ Y`
 over `B`, with product `i ×_B j : Z ×_B W ⟶ X ×_B Y`,
 
 `L(i ×_B j)^* (K ⊠ L) ≅ Li^* K ⊠ Lj^* L`,
 
 the external product on the right being taken along `i ≫ f` and `j ≫ g`. -/
-theorem nonempty_iso_leftDerivedUpperStar_externalProduct (f : X ⟶ B) (g : Y ⟶ B)
-    {Z W : Scheme.{u}} (i : Z ⟶ X) (j : W ⟶ Y)
+theorem nonempty_iso_leftDerivedUpperStar_externalProduct [UpperStarPreservesFlat A]
+    (f : X ⟶ B) (g : Y ⟶ B) {Z W : Scheme.{u}} (i : Z ⟶ X) (j : W ⟶ Y)
     (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A))
     (L : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology A)) :
     Nonempty ((L((pullback.mapOverBase i j f g)^*[A])).obj (externalProduct A f g K L) ≅
-      externalProduct A (i ≫ f) (j ≫ g) ((L((i)^*[A])).obj K) ((L((j)^*[A])).obj L)) :=
-  -- Proof sketch: `K ⊠ L = Lp^* K ⊗ᴸ Lq^* L`; the derived pullback is monoidal, and
+      externalProduct A (i ≫ f) (j ≫ g) ((L((i)^*[A])).obj K) ((L((j)^*[A])).obj L)) := by
+  -- `K ⊠ L = Lp^* K ⊗ᴸ Lq^* L`; the derived pullback is monoidal, and
   -- `p ∘ (i ×_B j) = i ∘ p'`, `q ∘ (i ×_B j) = j ∘ q'` for the projections `p'`, `q'` of
   -- `Z ×_B W`.
-  sorry
+  let e : pullback (i ≫ f) (j ≫ g) ⟶ pullback f g := pullback.mapOverBase i j f g
+  let pb₁ : (L((e)^*[A])).obj ((L((pullback.fst f g)^*[A])).obj K) ≅
+      (L((pullback.fst (i ≫ f) (j ≫ g))^*[A])).obj ((L((i)^*[A])).obj K) :=
+    ((leftDerivedUpperStarComp A e (pullback.fst _ _)).app K).symm ≪≫
+      (leftDerivedUpperStarComp A _ _ (e ≫ pullback.fst _ _) (by simp [e])).app K
+  let pb₂ : (L((e)^*[A])).obj ((L((pullback.snd f g)^*[A])).obj L) ≅
+      (L((pullback.snd (i ≫ f) (j ≫ g))^*[A])).obj ((L((j)^*[A])).obj L) :=
+    ((leftDerivedUpperStarComp A e (pullback.snd _ _)).app L).symm ≪≫
+      (leftDerivedUpperStarComp A _ _ (e ≫ pullback.snd _ _) (by simp [e])).app L
+  exact ⟨leftDerivedUpperStarTensorIso A e _ _ ≪≫ ((derivedTensor A _).mapIso pb₁).app _ ≪≫
+    ((derivedTensor A _).obj _).mapIso pb₂⟩
 
+omit [HasSmallSiteSheafify A] in
 /-- The external product is compatible with restriction to closed subschemes: for closed
 immersions `i : Z ⟶ X`, `j : W ⟶ Y` over `B`, with product `i ×_B j : Z ×_B W ⟶ X ×_B Y`,
 
 `(i ×_B j)_* (i ×_B j)^* (K ⊠ L) ≅ i_* i^* K ⊠ j_* j^* L`. -/
-theorem nonempty_iso_externalProduct_closedImmersion (f : X ⟶ B) (g : Y ⟶ B)
+theorem nonempty_iso_externalProduct_closedImmersion [UpperStarPreservesFlat A]
+    (f : X ⟶ B) (g : Y ⟶ B)
     {Z W : Scheme.{u}} (i : Z ⟶ X) (j : W ⟶ Y) [IsClosedImmersion i] [IsClosedImmersion j]
     (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A))
     (L : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology A)) :
     Nonempty ((R((pullback.mapOverBase i j f g)_*[A])).obj
         ((L((pullback.mapOverBase i j f g)^*[A])).obj (externalProduct A f g K L)) ≅
       externalProduct A f g ((R((i)_*[A])).obj ((L((i)^*[A])).obj K))
-        ((R((j)_*[A])).obj ((L((j)^*[A])).obj L))) :=
-  -- Proof sketch: both sides are `K ⊠ L` tensored with the constant sheaf of the closed
-  -- subscheme `Z ×_B W = p⁻¹ Z ∩ q⁻¹ W`, by the projection formula for closed immersions and
-  -- proper base change along the projections `p`, `q`.
-  sorry
+        ((R((j)_*[A])).obj ((L((j)^*[A])).obj L))) := by
+  -- Restrict in two steps: `i_* i^* K ⊠ j_* j^* L` is supported on `Z ×_B Y`, where it is
+  -- `i^* K ⊠ j_* j^* L`, which is supported on `Z ×_B W`, where it is `i^* K ⊠ j^* L`
+  -- (`nonempty_iso_derivedTensor_leftDerivedUpperStar_rightDerivedLowerStar`).
+  let s : pullback (i ≫ f) g ⟶ pullback f g :=
+    pullback.map (i ≫ f) g f g i (𝟙 Y) (𝟙 B) (by simp) (by simp)
+  let s' : pullback (i ≫ f) (j ≫ g) ⟶ pullback (i ≫ f) g :=
+    pullback.map (i ≫ f) (j ≫ g) (i ≫ f) g (𝟙 Z) j (𝟙 B) (by simp) (by simp)
+  have hsq : s ≫ pullback.snd f g = pullback.snd (i ≫ f) g := by simp [s]
+  have hs : IsPullback (pullback.fst (i ≫ f) g) s i (pullback.fst f g) :=
+    (IsPullback.of_right (by rw [hsq]; exact (IsPullback.of_hasPullback (i ≫ f) g).flip)
+      (by simp [s]) (IsPullback.of_hasPullback f g).flip).flip
+  have hs' : IsPullback (pullback.snd (i ≫ f) (j ≫ g)) s' j (pullback.snd (i ≫ f) g) :=
+    (IsPullback.of_right (by simpa [s'] using IsPullback.of_hasPullback (i ≫ f) (j ≫ g))
+      (by simp [s']) (IsPullback.of_hasPullback (i ≫ f) g)).flip
+  have hc : s' ≫ s = pullback.mapOverBase i j f g := by
+    ext <;> simp [s, s']
+  obtain ⟨e₁⟩ := nonempty_iso_derivedTensor_leftDerivedUpperStar_rightDerivedLowerStar A
+    (pullback.fst f g) i s _ hs ((L((i)^*[A])).obj K)
+    ((L((pullback.snd f g)^*[A])).obj ((R((j)_*[A])).obj ((L((j)^*[A])).obj L)))
+  let e₂ : (L((s)^*[A])).obj
+      ((L((pullback.snd f g)^*[A])).obj ((R((j)_*[A])).obj ((L((j)^*[A])).obj L))) ≅
+      (L((pullback.snd (i ≫ f) g)^*[A])).obj ((R((j)_*[A])).obj ((L((j)^*[A])).obj L)) :=
+    ((leftDerivedUpperStarComp A s (pullback.snd f g) _ hsq.symm).app _).symm
+  obtain ⟨e₃⟩ := nonempty_iso_derivedTensor_leftDerivedUpperStar_rightDerivedLowerStar' A
+    (pullback.snd (i ≫ f) g) j s' _ hs' ((L((j)^*[A])).obj L)
+    ((L((pullback.fst (i ≫ f) g)^*[A])).obj ((L((i)^*[A])).obj K))
+  let e₄ : (L((s')^*[A])).obj
+      ((L((pullback.fst (i ≫ f) g)^*[A])).obj ((L((i)^*[A])).obj K)) ≅
+      (L((pullback.fst (i ≫ f) (j ≫ g))^*[A])).obj ((L((i)^*[A])).obj K) :=
+    ((leftDerivedUpperStarComp A s' (pullback.fst (i ≫ f) g) _ (by simp [s'])).app _).symm
+  obtain ⟨e₅⟩ := nonempty_iso_leftDerivedUpperStar_externalProduct A f g i j K L
+  exact ⟨(e₁ ≪≫ (R((s)_*[A])).mapIso (((derivedTensor A _).obj _).mapIso e₂ ≪≫ e₃ ≪≫
+      (R((s')_*[A])).mapIso (((derivedTensor A _).mapIso e₄).app _)) ≪≫
+    (rightDerivedLowerStarComp A s' s).app _ ≪≫ (rightDerivedLowerStarCongr A hc).app _ ≪≫
+    (R((pullback.mapOverBase i j f g)_*[A])).mapIso e₅.symm).symm⟩
 
 /-- Blueprint `sk-thm-product`: Supported product over a relative base.
 

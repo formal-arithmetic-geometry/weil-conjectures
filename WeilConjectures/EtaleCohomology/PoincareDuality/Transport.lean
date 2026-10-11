@@ -5,7 +5,7 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.EtaleCohomology.PoincareDuality.Pairing
+public import WeilConjectures.EtaleCohomology.PoincareDuality.InvertibleTwist
 
 /-!
 # Transport through the coefficient stages
@@ -21,7 +21,8 @@ This file states the genuinely new content of `sk-thm-transport` that the API ca
 ## Main statements
 
 - `AlgebraicGeometry.Etale.isPerfectPairing_poincarePairing_reductionModIdeal`: the derived
-  Poincaré pairing of the reduction `K ⊗ᴸ (Λ/J)_X` is perfect whenever that of `K` is.
+  Poincaré pairing of the reduction `K ⊗ᴸ (Λ/J)_X` is perfect, as is that of every complex at a
+  finite coefficient ring.
 
 The other ingredients of `sk-thm-transport` are stated where they belong:
 `AlgebraicGeometry.Etale.nonempty_iso_reductionModIdeal_rightDerivedLowerShriek` and
@@ -58,22 +59,22 @@ open Scheme
 namespace Etale
 
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] [HasTateTwist Λ] {X Y : Scheme.{u}}
-  [HasInvertibleExponent Λ Y] {a : X ⟶ Y} [HasCompactification a] {d : ℕ}
+  {a : X ⟶ Y} [HasCompactification a] {d : ℕ}
 
 /-- Blueprint `sk-thm-transport`: Transport through the coefficient stages.
 
 **The duality is compatible with finite reduction.** For an ideal `J` of the finite
-coefficient ring `Λ`, a Tate orientation `γ` and `K ∈ D^b_{ctf}(X, Λ)`: if the derived
-Poincaré pairing `β_K` is perfect, then so is the pairing `β_{K ⊗ᴸ (Λ/J)}` of the reduction of
-`K`. The reduction of a perfect complex need not be perfect over `Λ`, so this is not an
-instance of `AlgebraicGeometry.Etale.TateOrientation.isPerfectPairing_poincarePairing` for
-`K ⊗ᴸ (Λ/J)` itself: it is the passage from the integral level to the finite levels. -/
+coefficient ring `Λ`, a Tate orientation `γ` and `K ∈ D(X_ét, Λ)`, the derived Poincaré pairing
+`β_{K ⊗ᴸ (Λ/J)}` of the reduction of `K` is perfect. The reduction of a perfect complex need not
+be perfect over `Λ`, so this is not an instance of
+`AlgebraicGeometry.Etale.TateOrientation.isPerfectPairing_poincarePairing` for `K ⊗ᴸ (Λ/J)`
+itself; it holds because at a finite coefficient ring the derived Poincaré pairing is perfect
+for every complex, the Tate twist being invertible
+(`AlgebraicGeometry.Etale.TateOrientation.isPerfectPairing_poincarePairing_of_finite`). -/
 theorem isPerfectPairing_poincarePairing_reductionModIdeal (γ : TateOrientation Λ a d)
-    (J : Ideal Λ) {K : DerivedCategoryModule Λ X}
-    (hK : DerivedCategory.boundedConstructibleFiniteTor Λ X K)
-    (hβ : IsPerfectPairing (γ.poincarePairing K)) :
+    (J : Ideal Λ) (K : DerivedCategoryModule Λ X) :
     IsPerfectPairing (γ.poincarePairing ((reductionModIdeal Λ X J).obj K)) :=
-  sorry
+  γ.isPerfectPairing_poincarePairing_of_finite _
 
 end Etale
 
