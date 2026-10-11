@@ -557,6 +557,63 @@ lemma ι_deformationSpaceProj (U : V.AffineZariskiSite) {W : B.Opens} (hW : IsAf
       (s.ker.siteIdeal U).toExtendedReesAlgebra (Polynomial.map _ Polynomial.X)
     rw [Polynomial.map_X]
 
+variable {g s} in
+/-- A chart of the deformation space on which `g̃` is smooth of relative dimension `d`. -/
+lemma smoothOfRelativeDimension_ι_deformationSpaceProj (d : ℕ) (U : V.AffineZariskiSite)
+    {W : B.Opens} (hW : IsAffineOpen W) (hUW : U.1 ≤ g ⁻¹ᵁ W)
+    (h : SmoothOfRelativeDimension d (Spec.map (CommRingCat.ofHom
+      ((s.ker.siteIdeal U).toExtendedReesAlgebra.comp (mapRingHom (g.appLE W U.1 hUW).hom))))) :
+    SmoothOfRelativeDimension d
+      (colimit.ι (relativeGluingData s.ker.coequifibered_toReesPresheaf).functor U ≫
+        deformationSpaceProj g s) := by
+  rw [ι_deformationSpaceProj g s U hW hUW]
+  have : SmoothOfRelativeDimension (d + 0) (Spec.map (CommRingCat.ofHom
+      ((s.ker.siteIdeal U).toExtendedReesAlgebra.comp (mapRingHom (g.appLE W U.1 hUW).hom))) ≫
+      affineLineChart hW) := inferInstance
+  rwa [add_zero] at this
+
+/-- The standard smooth charts of `g` can be shrunk around a point of the source to basic
+opens. -/
+lemma exists_isStandardSmooth_appLE_basicOpen (d : ℕ) [SmoothOfRelativeDimension d g] (v : V)
+    (O : V.Opens) (hvO : v ∈ O) :
+    ∃ (W : B.Opens) (hW : IsAffineOpen W) (U : V.Opens) (hU : IsAffineOpen U) (_ : v ∈ U)
+      (_ : U ≤ O) (hUW : U ≤ g ⁻¹ᵁ W),
+      (g.appLE W U hUW).hom.IsStandardSmoothOfRelativeDimension d := by
+  obtain ⟨W, hW, U₀, hU₀, hvU₀, e, hQ⟩ :=
+    SmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension (n := d) (f := g) v
+  obtain ⟨r, hrO, hvr⟩ := hU₀.exists_basicOpen_le (V := O) ⟨v, hvO⟩ hvU₀
+  refine ⟨W, hW, V.basicOpen r, hU₀.basicOpen r, hvr, hrO, (V.basicOpen_le r).trans e, ?_⟩
+  have := hU₀.isLocalization_basicOpen r
+  have h := (RingHom.isStandardSmoothOfRelativeDimension_stableUnderCompositionWithLocalizationAway
+    d).right Γ(V, V.basicOpen r) r _ hQ
+  rwa [RingHom.algebraMap_toAlgebra, ← CommRingCat.hom_comp, Scheme.Hom.appLE_map] at h
+
+lemma smoothOfRelativeDimension_specMap_of_isStandardSmooth {R S : CommRingCat.{u}} (d : ℕ)
+    (φ : R ⟶ S) (h : φ.hom.IsStandardSmoothOfRelativeDimension d) :
+    SmoothOfRelativeDimension d (Spec.map φ) := by
+  rw [HasRingHomProperty.Spec_iff (P := @SmoothOfRelativeDimension d)]
+  exact RingHom.locally_of RingHom.isStandardSmoothOfRelativeDimension_respectsIso _ h
+
+/-- **Charts away from the section.** Away from `s(B)` the deformation space is
+`V ×_B 𝔾_{m,B}`, so `g̃` is smooth there. -/
+lemma exists_chart_of_notMem_range (d : ℕ) [SmoothOfRelativeDimension d g] [IsClosedImmersion s]
+    (v : V) (hv : v ∉ Set.range s) :
+    ∃ U : V.AffineZariskiSite, v ∈ U.1 ∧ SmoothOfRelativeDimension d
+      (colimit.ι (relativeGluingData s.ker.coequifibered_toReesPresheaf).functor U ≫
+        deformationSpaceProj g s) := by
+  let O : V.Opens := ⟨(Set.range s)ᶜ, s.isClosedEmbedding.isClosed_range.isOpen_compl⟩
+  obtain ⟨W, hW, U, hU, hvU, hUO, hUW, hQ⟩ := exists_isStandardSmooth_appLE_basicOpen g d v O hv
+  refine ⟨⟨U, hU⟩, hvU, smoothOfRelativeDimension_ι_deformationSpaceProj d ⟨U, hU⟩ hW hUW ?_⟩
+  have hI : s.ker.siteIdeal ⟨U, hU⟩ = ⊤ := by
+    rw [IdealSheafData.siteIdeal, Scheme.Hom.ker_apply, Ideal.eq_top_iff_one, RingHom.mem_ker]
+    have : s ⁻¹ᵁ U = ⊥ := eq_bot_iff.mpr fun b hb ↦ hUO hb ⟨b, rfl⟩
+    have : Subsingleton Γ(B, s ⁻¹ᵁ U) := by
+      rw [this]; infer_instance
+    exact Subsingleton.elim _ _
+  rw [hI]
+  exact smoothOfRelativeDimension_extendedReesAlgebra_top _
+    (smoothOfRelativeDimension_specMap_of_isStandardSmooth d _ hQ)
+
 end Charts
 
 section Smooth
