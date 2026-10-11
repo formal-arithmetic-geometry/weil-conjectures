@@ -23,7 +23,9 @@
   "def-pc-derived-category",
   "def-pc-derived-direct-image",
   "def-pur-derived-internal-hom",
-  "lem-pc-ringed-spaces-derived-adjoint-general"
+  "lem-pc-ringed-spaces-derived-adjoint-general",
+  "def-pc-derived-pullback",
+  "def-pc-scheme-derived-tensor-structure"
  ],
  "proof": [
   {
@@ -129,5 +131,23 @@
   "group": "K1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-rpf3142 (reviewer sub-agent of L); spot-checked: Statement (Rf_*RHom(L,M)->RHom(Rf_*L,Rf_*M), no iso claim) matches cohomology.tex remark-projection-formula-for-internal-hom (specialized ringed spaces->schemes) and is the form the citer lem-pc-qcqs-sheaf-rhom-adjunction step 1 uses with M=a(K); def-pur-derived-internal-hom in stmt_deps. Step 2 mate construction checked: alpha:A->Rf_*RHom -> Lf^*A(x)L->M, precomposed with 1(x)counit after Lf^*(A(x)Rf_*L)=Lf^*A(x)Lf^*Rf_*L, transposed to A(x)Rf_*L->Rf_*M, natural in A, then tensor-Hom node on Y + Yoneda; equivalent to Stacks' cup-product route, no K-injective argument needed. Cited statements say what is used (C4 ok, Y scheme for tensor-Hom node). No new nodes; rhom node names grepped, no duplicate of global-hom/qcqs-sheaf-rhom-adjunction/pur-rhom nodes. No fault beyond the second reading. FIX more, RETURN less: no repairs needed."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.DerivedDirectImageInternalHom",
+  "declaration": "AlgebraicGeometry.exists_derivedDirectImage_internalHom_comparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/DerivedDirectImageInternalHom.lean",
+  "statement": "theorem exists_derivedDirectImage_internalHom_comparison {X Y : Scheme.{u}} (f : X ⟶ Y) [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))] : ∃ (a : derivedPullback f ⊣ schemeDerivedDirectImage f) (bX : ∀ L : schemeDerivedCategory X, tensorRight L ⊣ (Functor.curry.obj (derivedInternalHom (Opens.grothendieckTopology X) X.toRingedSpace.sheaf)).obj (op L)) (bY : ∀ L : schemeDerivedCategory Y, tensorRight L ⊣ (Functor.curry.obj (derivedInternalHom (Opens.grothendieckTopology Y) Y.toRingedSpace.sheaf)).obj (op L)) (t : tensor (schemeDerivedCategory Y) ⋙ derivedPullback f ≅ (derivedPullback f).prod (derivedPullback f) ⋙ tensor (schemeDerivedCategory X)) (c : derivedInternalHom (Opens.grothendieckTopology X) X.toRingedSpace.sheaf ⋙ schemeDerivedDirectImage f ⟶ (schemeDerivedDirectImage f).op.prod (schemeDerivedDirectImage f) ⋙ derivedInternalHom (Opens.grothendieckTopology Y) Y.toRingedSpace.sheaf), ∀ (L M : schemeDerivedCategory X) (A : schemeDerivedCategory Y) (α : A ⟶ (schemeDerivedDirectImage f).obj ((derivedInternalHom (Opens.grothendieckTopology X) X.toRingedSpace.sheaf).obj (op L, M))), ((bY ((schemeDerivedDirectImage f).obj L)).homEquiv A ((schemeDerivedDirectImage f).obj M)).symm (α ≫ c.app (op L, M)) = a.homEquiv (A ⊗ (schemeDerivedDirectImage f).obj L) M (t.hom.app (A, (schemeDerivedDirectImage f).obj L) ≫ (𝟙 ((derivedPullback f).obj A) ⊗ₘ a.counit.app L) ≫ ((bX L).homEquiv ((derivedPullback f).obj A) M).symm ((a.homEquiv A ((derivedInternalHom (Opens.grothendieckTopology X) X.toRingedSpace.sheaf).obj (op L, M))).symm α))",
+  "branch": "sheaf-dag",
+  "by": "Q1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-rpf",
+  "group": "Q1",
+  "result": "pass",
+  "note": "f:X->Y any scheme morphism; D(O_X),D(O_Y) = schemeDerivedCategory with shared HasDerivedCategory.{w} binders; Rf_* = schemeDerivedDirectImage, RHom = derivedInternalHom on Opens/X.sheaf (STATE form); c natural on D(O_X)^op x D(O_X) from Rf_*RHom(L,M) to RHom(Rf_*L,Rf_*M), no IsIso; c tied by the mate equation for every A, alpha to a (Lf* -| Rf_*), bX/bY (- (x) L -| RHom(L,-)), t (Lf*(A(x)B) = Lf*A(x)Lf*B) and the counit; global schemeDerivedTensorMonoidal; no let/local instance/notation; stmt_deps gain only the landed def-pc-derived-pullback and def-pc-scheme-derived-tensor-structure, both used; check_dag clean (no new cycle)"
  }
 }
