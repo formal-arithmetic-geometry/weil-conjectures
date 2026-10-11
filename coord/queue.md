@@ -1,11 +1,11 @@
 # Work queue
 
-478 items; claim with `tools/claim.py next <group> [--stage N]`.
+476 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (478)
+## Stage 2: nodes to state (476)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -45,7 +45,6 @@
 | `lem-sc-picard-kunneth-qcoh` | 1 | state |
 | `lem-sc-qc-open-derived-lift` | 1 | state |
 | `lem-sc-regular-curve-torsionfree-free` | 1 | state |
-| `lem-sc-torsion-sections-generic` | 1 | state |
 | `lem-sc-valuation-proper-coherent-higher-direct-images` | 1 | state |
 | `lem-weil-derived-limit-roos-complex` | 1 | state |
 | `lem-weil-pbc-affine-module-finite-type` | 1 | state |
@@ -62,7 +61,6 @@
 | `lem-weil-pbc-module-pullback-finite-type` | 1 | state |
 | `lem-weil-pbc-noetherian-acc-quasi-coherent` | 1 | state |
 | `lem-weil-pbc-normalization-in-residue-field-extension` | 1 | state |
-| `lem-weil-pbc-open-restriction-pullback-unit` | 1 | state |
 | `lem-weil-pbc-open-subscheme-fpqc-descent` | 1 | state |
 | `lem-weil-pbc-openness-of-flatness` | 1 | state |
 | `lem-weil-pbc-p-basis-differentials-basis` | 1 | state |
