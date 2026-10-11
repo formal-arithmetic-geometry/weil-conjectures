@@ -3212,3 +3212,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 01:13 UTC L: attachment by C1 of lem-pc-affine-sections-finite-locally-free-criterion (isFiniteLocallyFree_of_isAffineOpen, ad2d1b0d1) verified by L: sorry-free (sorryfree.py OK), statement read against LocallyFreeAffine.lean:224-227 and matches.
 - 01:14 L: returned deliver/H1/lem-pc-derived-tensor-transitivity (reviewer RETURN: Reviewer R-dtt0114 at a712da6fe. 1. E7: the delivered statement is NOT the one L restated at 02df7db2c; the delivery ove)
 - 01:14 UTC L: returned: H1 derived-tensor-transitivity c886a0c40 (R-dtt0114: the push replaced L's restatement 02df7db2c with the older weaker statement; flat-C clause unproved).
+- 01:15 UTC L: attachment by E1 of lem-pc-finite-flat-affine-sections-projective (finitePresentation_projective_sections, 681ba71c3) verified by L: sorry-free, statement read against LocallyFreeAffine.lean:71-73 and matches.
