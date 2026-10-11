@@ -117,6 +117,56 @@ end Plus
 
 end CategoryTheory.Adjunction
 
+section MonoRightDerived
+
+open Pretriangulated
+
+namespace CategoryTheory.Functor
+
+variable {C D : Type*} [Category* C] [Category* D] [Abelian C] [Abelian D]
+  [HasDerivedCategory C] [HasDerivedCategory D] [EnoughInjectives C]
+
+/-- Let `c : K ⟶ L` be a morphism of the bounded below derived category which is an
+isomorphism on `H^i` for `i < n` and a monomorphism on `H^n`. Then `R⁺F(c)` is a monomorphism
+on `H^n`: the cone of `c` is cohomologically `≥ n`, hence so is its image under `R⁺F`. -/
+theorem mono_homologyFunctor_map_rightDerivedFunctorPlus_map (F : C ⥤ D) [F.Additive]
+    {K L : DerivedCategory.Plus C} (c : K ⟶ L) (n : ℤ)
+    (h₁ : ∀ i < n, IsIso ((DerivedCategory.Plus.homologyFunctor C i).map c))
+    (h₂ : Mono ((DerivedCategory.Plus.homologyFunctor C n).map c)) :
+    Mono ((DerivedCategory.Plus.homologyFunctor D n).map (F.rightDerivedFunctorPlus.map c)) := by
+  obtain ⟨Z, g, δ, hT⟩ := distinguished_cocone_triangle c
+  have hZ : ∀ i < n, IsZero ((DerivedCategory.Plus.homologyFunctor C i).obj Z) := by
+    intro i hi
+    have hg : (DerivedCategory.Plus.homologyFunctor C i).map g = 0 := by
+      have := h₁ i hi
+      exact ((DerivedCategory.Plus.homologyFunctor C 0).homologySequence_epi_shift_map_mor₁_iff
+        _ hT i).1 (inferInstanceAs (Epi ((DerivedCategory.Plus.homologyFunctor C i).map c)))
+    have hδ : (DerivedCategory.Plus.homologyFunctor C 0).homologySequenceδ
+        (Triangle.mk c g δ) i (i + 1) rfl = 0 := by
+      refine ((DerivedCategory.Plus.homologyFunctor C 0).homologySequence_mono_shift_map_mor₁_iff
+        _ hT i (i + 1) rfl).1 ?_
+      change Mono ((DerivedCategory.Plus.homologyFunctor C (i + 1)).map c)
+      rcases (show i + 1 < n ∨ i + 1 = n by lia) with h | h
+      · have := h₁ _ h
+        infer_instance
+      · rw [h]
+        exact h₂
+    exact ((DerivedCategory.Plus.homologyFunctor C 0).homologySequence_exact₃ _ hT i (i + 1)
+      rfl).isZero_of_both_zeros hg hδ
+  have : Z.IsGE n := by
+    rw [← DerivedCategory.Plus.isGE_ι_obj_iff, DerivedCategory.isGE_iff]
+    exact hZ
+  have hT' := F.rightDerivedFunctorPlus.map_distinguished _ hT
+  have hz := F.isZero_homologyFunctor_rightDerivedFunctorPlus_obj_of_isGE Z n
+    (show n - 1 < n by lia)
+  refine ((DerivedCategory.Plus.homologyFunctor D 0).homologySequence_mono_shift_map_mor₁_iff
+    _ hT' (n - 1) n (by lia)).2 ?_
+  exact hz.eq_of_src _ _
+
+end CategoryTheory.Functor
+
+end MonoRightDerived
+
 namespace AlgebraicGeometry
 
 variable (Λ : Type (u + 1)) [CommRing Λ]
@@ -459,5 +509,232 @@ lemma Etale.targetTransitionPlus_comp_map {X T Y T' Y' : Scheme.{u}} (e : Y ⟶ 
     (Etale.baseChange (ModuleCat.{u + 1} Λ) sqk) _ ψ _ _ hu
 
 end TransitionFormula
+
+section Pushforward
+
+variable {X S T Y T' Y' : Scheme.{u}}
+
+omit [CommRing Λ] in
+/-- The naturality of a natural transformation between composites, evaluated at objects, stated
+for abstract functors so that its instances are checked syntactically. -/
+lemma natTrans_app_comp_map_map {𝒜 ℬ ℬ' 𝒞 : Type*} [Category* 𝒜] [Category* ℬ]
+    [Category* ℬ'] [Category* 𝒞] {F₁ : 𝒜 ⥤ ℬ} {F₂ : ℬ ⥤ 𝒞} {G₁ : 𝒜 ⥤ ℬ'} {G₂ : ℬ' ⥤ 𝒞}
+    (β : F₁ ⋙ F₂ ⟶ G₁ ⋙ G₂) {A A' : 𝒜} (f : A ⟶ A') :
+    β.app A ≫ G₂.map (G₁.map f) = F₂.map (F₁.map f) ≫ β.app A' :=
+  (β.naturality f).symm
+
+set_option maxHeartbeats 60000 in
+/-- The derived base-change maps over `T` and over `T'` commute with the comparison maps of a
+complex `K` on `T` and a complex `L` on `T'` attached to a morphism `ψ : k^* K ⟶ L`. -/
+theorem Etale.baseChange_app_comp_pushforward {p : X ⟶ S} {g : T ⟶ S}
+    {e : Y ⟶ T} {h : Y ⟶ X} (sq : CommSq e h g p) (k : T' ⟶ T) {e' : Y' ⟶ T'}
+    {h' : Y' ⟶ X} (g' : T' ⟶ S) (hg : k ≫ g = g') (sq' : CommSq e' h' g' p) (a : Y' ⟶ Y)
+    (wa : a ≫ e = e' ≫ k) (wh : a ≫ h = h') (sqk : CommSq e' a k e)
+    (K : DerivedCategory.Plus (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
+    (L : DerivedCategory.Plus (Sheaf T'.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
+    (ψ : D+((k)^*[ModuleCat.{u + 1} Λ]).obj K ⟶ L) :
+    (Etale.baseChange (ModuleCat.{u + 1} Λ) sq).app K ≫
+        R+((h)_*[ModuleCat.{u + 1} Λ]).map
+          (D+((e)^*[ModuleCat.{u + 1} Λ]).map
+              ((Etale.derivedUpperStarLowerStarAdjunctionPlus _ k).unit.app K) ≫
+            D+((e)^*[ModuleCat.{u + 1} Λ]).map (R+((k)_*[ModuleCat.{u + 1} Λ]).map ψ) ≫
+            (Etale.baseChange (ModuleCat.{u + 1} Λ) sqk).app L) ≫
+        (Etale.lowerStarPlusCompIso Λ a h h' wh).hom.app (D+((e')^*[ModuleCat.{u + 1} Λ]).obj L) =
+      D+((p)^*[ModuleCat.{u + 1} Λ]).map
+          (R+((g)_*[ModuleCat.{u + 1} Λ]).map
+              ((Etale.derivedUpperStarLowerStarAdjunctionPlus _ k).unit.app K ≫
+                R+((k)_*[ModuleCat.{u + 1} Λ]).map ψ) ≫
+            (Etale.lowerStarPlusCompIso Λ k g g' hg).hom.app L) ≫
+        (Etale.baseChange (ModuleCat.{u + 1} Λ) sq').app L := by
+  rw [← Etale.targetTransitionPlus_comp_map Λ e h k a e' h' wa wh sqk K L ψ,
+    reassoc_of% (Etale.baseChange_app_comp_targetTransitionPlus Λ sq k g' hg sq' a wa wh K),
+    natTrans_app_comp_map_map (Etale.baseChange (ModuleCat.{u + 1} Λ) sq'),
+    ← Functor.map_comp_assoc, Etale.lowerStarPlusTransition_comp_map]
+
+/-- The comparison `k_* N[0] ⟶ Rk_*(N[0])` is the unit followed by `Rk_*` of the counit. -/
+lemma Etale.singleLowerStarComparison_eq (k : T' ⟶ T)
+    (N : Sheaf T'.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
+    Etale.singleLowerStarComparison Λ k N =
+      (Etale.derivedUpperStarLowerStarAdjunctionPlus _ k).unit.app
+          ((DerivedCategory.Plus.singleFunctor _ 0).obj (((k)_*[ModuleCat.{u + 1} Λ]).obj N)) ≫
+        R+((k)_*[ModuleCat.{u + 1} Λ]).map
+          ((((k)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlusSingleFunctor 0).hom.app _ ≫
+            (DerivedCategory.Plus.singleFunctor _ 0).map
+              ((Etale.upperStarLowerStarAdjunction _ k).counit.app N)) := rfl
+
+/-- `e^*` of the comparison `k_* N[0] ⟶ Rk_*(N[0])` is `e^*` of the unit followed by `e^*` of
+`Rk_*` of the counit. -/
+lemma Etale.upperStar_map_singleLowerStarComparison (e : Y ⟶ T) (k : T' ⟶ T)
+    (N : Sheaf T'.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
+    D+((e)^*[ModuleCat.{u + 1} Λ]).map (Etale.singleLowerStarComparison Λ k N) =
+      D+((e)^*[ModuleCat.{u + 1} Λ]).map
+          ((Etale.derivedUpperStarLowerStarAdjunctionPlus _ k).unit.app
+            ((DerivedCategory.Plus.singleFunctor _ 0).obj (((k)_*[ModuleCat.{u + 1} Λ]).obj N))) ≫
+        D+((e)^*[ModuleCat.{u + 1} Λ]).map (R+((k)_*[ModuleCat.{u + 1} Λ]).map
+          ((((k)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlusSingleFunctor 0).hom.app _ ≫
+            (DerivedCategory.Plus.singleFunctor _ 0).map
+              ((Etale.upperStarLowerStarAdjunction _ k).counit.app N))) :=
+  CategoryTheory.Functor.map_comp _ _ _
+
+set_option maxHeartbeats 60000 in
+/-- The base-change maps commute with the comparisons of the sources and of the targets for a
+sheaf pushed forward along `k : T' ⟶ T`. -/
+theorem Etale.baseChangeHomologyMap_comp_pushforward {p : X ⟶ S} {g : T ⟶ S}
+    {e : Y ⟶ T} {h : Y ⟶ X} (sq : IsPullback e h g p) (k : T' ⟶ T) {e' : Y' ⟶ T'}
+    {h' : Y' ⟶ X} (g' : T' ⟶ S) (hg : k ≫ g = g') (sq' : IsPullback e' h' g' p) (a : Y' ⟶ Y)
+    (wa : a ≫ e = e' ≫ k) (wh : a ≫ h = h') (sqk : CommSq e' a k e) (q : ℤ)
+    (N : Sheaf T'.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
+    Etale.baseChangeHomologyMap Λ sq q (((k)_*[ModuleCat.{u + 1} Λ]).obj N) ≫
+        (DerivedCategory.Plus.homologyFunctor _ q).map
+          (R+((h)_*[ModuleCat.{u + 1} Λ]).map
+              (D+((e)^*[ModuleCat.{u + 1} Λ]).map (Etale.singleLowerStarComparison Λ k N) ≫
+                (Etale.baseChange (ModuleCat.{u + 1} Λ) sqk).app
+                  ((DerivedCategory.Plus.singleFunctor _ 0).obj N)) ≫
+            (Etale.lowerStarPlusCompIso Λ a h h' wh).hom.app
+              (D+((e')^*[ModuleCat.{u + 1} Λ]).obj
+                ((DerivedCategory.Plus.singleFunctor _ 0).obj N))) =
+      (DerivedCategory.Plus.homologyFunctor _ q).map
+          (D+((p)^*[ModuleCat.{u + 1} Λ]).map
+            (R+((g)_*[ModuleCat.{u + 1} Λ]).map (Etale.singleLowerStarComparison Λ k N) ≫
+              (Etale.lowerStarPlusCompIso Λ k g g' hg).hom.app
+                ((DerivedCategory.Plus.singleFunctor _ 0).obj N))) ≫
+        Etale.baseChangeHomologyMap Λ sq' q N := by
+  rw [Etale.baseChangeHomologyMap_eq_homologyFunctor_map,
+    Etale.baseChangeHomologyMap_eq_homologyFunctor_map, ← Functor.map_comp, ← Functor.map_comp,
+    Etale.upperStar_map_singleLowerStarComparison, Category.assoc,
+    Etale.singleLowerStarComparison_eq]
+  congr 1
+  refine Eq.trans ?_ (Eq.trans (Etale.baseChange_app_comp_pushforward Λ sq.toCommSq k g' hg
+    sq'.toCommSq a wa wh sqk
+    ((DerivedCategory.Plus.singleFunctor _ 0).obj (((k)_*[ModuleCat.{u + 1} Λ]).obj N))
+    ((DerivedCategory.Plus.singleFunctor _ 0).obj N)
+    ((((k)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlusSingleFunctor 0).hom.app _ ≫
+      (DerivedCategory.Plus.singleFunctor _ 0).map
+        ((Etale.upperStarLowerStarAdjunction _ k).counit.app N))) ?_) <;> rfl
+
+
+/-- The image of a morphism of sheaves under the target functor of the base-change map. -/
+lemma Etale.baseChangeTargetFunctor_map (e : Y ⟶ T) (h : Y ⟶ X) (q : ℤ)
+    {A B : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)} (f : A ⟶ B) :
+    (Etale.baseChangeTargetFunctor Λ e h q).map f =
+      (DerivedCategory.Plus.homologyFunctor _ q).map (R+((h)_*[ModuleCat.{u + 1} Λ]).map
+        (D+((e)^*[ModuleCat.{u + 1} Λ]).map ((DerivedCategory.Plus.singleFunctor _ 0).map f))) :=
+  rfl
+
+omit [CommRing Λ] in
+/-- The naturality of a natural transformation out of a composite, stated for abstract functors
+so that its instances are checked syntactically. -/
+lemma natTrans_app_comp_map {𝒜 ℬ 𝒞 : Type*} [Category* 𝒜] [Category* ℬ] [Category* 𝒞]
+    {F₁ : 𝒜 ⥤ ℬ} {F₂ : ℬ ⥤ 𝒞} {G : 𝒜 ⥤ 𝒞} (β : F₁ ⋙ F₂ ⟶ G) {A A' : 𝒜} (f : A ⟶ A') :
+    β.app A ≫ G.map f = F₂.map (F₁.map f) ≫ β.app A' :=
+  (β.naturality f).symm
+
+omit [CommRing Λ] in
+/-- Two equal composites stay equal under a functor. -/
+lemma map_comp_map_eq_map_comp_map {𝒞 𝒟 : Type*} [Category* 𝒞] [Category* 𝒟] (G : 𝒞 ⥤ 𝒟)
+    {A B B' C : 𝒞} {f₁ : A ⟶ B} {f₂ : B ⟶ C} {g₁ : A ⟶ B'} {g₂ : B' ⟶ C}
+    (w : f₁ ≫ f₂ = g₁ ≫ g₂) : G.map f₁ ≫ G.map f₂ = G.map g₁ ≫ G.map g₂ := by
+  rw [← G.map_comp, w, G.map_comp]
+
+/-- The comparison of the targets for a pushed forward sheaf is natural in the sheaf. -/
+lemma Etale.targetPushforward_naturality (e : Y ⟶ T) (h : Y ⟶ X) (k : T' ⟶ T) (a : Y' ⟶ Y)
+    (e' : Y' ⟶ T') (h' : Y' ⟶ X) (wh : a ≫ h = h') (sqk : CommSq e' a k e) (q : ℤ)
+    {N N' : Sheaf T'.smallEtaleTopology (ModuleCat.{u + 1} Λ)} (φ : N ⟶ N') :
+    (DerivedCategory.Plus.homologyFunctor _ q).map (R+((h)_*[ModuleCat.{u + 1} Λ]).map
+        (D+((e)^*[ModuleCat.{u + 1} Λ]).map ((DerivedCategory.Plus.singleFunctor _ 0).map
+          (((k)_*[ModuleCat.{u + 1} Λ]).map φ)))) ≫
+      (DerivedCategory.Plus.homologyFunctor _ q).map
+          (R+((h)_*[ModuleCat.{u + 1} Λ]).map
+              (D+((e)^*[ModuleCat.{u + 1} Λ]).map (Etale.singleLowerStarComparison Λ k N') ≫
+                (Etale.baseChange (ModuleCat.{u + 1} Λ) sqk).app
+                  ((DerivedCategory.Plus.singleFunctor _ 0).obj N')) ≫
+            (Etale.lowerStarPlusCompIso Λ a h h' wh).hom.app
+              (D+((e')^*[ModuleCat.{u + 1} Λ]).obj
+                ((DerivedCategory.Plus.singleFunctor _ 0).obj N'))) =
+    (DerivedCategory.Plus.homologyFunctor _ q).map
+          (R+((h)_*[ModuleCat.{u + 1} Λ]).map
+              (D+((e)^*[ModuleCat.{u + 1} Λ]).map (Etale.singleLowerStarComparison Λ k N) ≫
+                (Etale.baseChange (ModuleCat.{u + 1} Λ) sqk).app
+                  ((DerivedCategory.Plus.singleFunctor _ 0).obj N)) ≫
+            (Etale.lowerStarPlusCompIso Λ a h h' wh).hom.app
+              (D+((e')^*[ModuleCat.{u + 1} Λ]).obj
+                ((DerivedCategory.Plus.singleFunctor _ 0).obj N))) ≫
+      (DerivedCategory.Plus.homologyFunctor _ q).map (R+((h')_*[ModuleCat.{u + 1} Λ]).map
+        (D+((e')^*[ModuleCat.{u + 1} Λ]).map ((DerivedCategory.Plus.singleFunctor _ 0).map φ))) := by
+  have h₁ := map_comp_map_eq_map_comp_map D+((e)^*[ModuleCat.{u + 1} Λ])
+    (Etale.singleLowerStarComparison_naturality Λ k φ).symm
+  rw [← Functor.map_comp, ← Functor.map_comp]
+  congr 1
+  rw [Category.assoc, natTrans_app_comp_map (Etale.lowerStarPlusCompIso Λ a h h' wh).hom,
+    ← Functor.map_comp_assoc (R+((h)_*[ModuleCat.{u + 1} Λ])),
+    ← Functor.map_comp_assoc (R+((h)_*[ModuleCat.{u + 1} Λ])), reassoc_of% h₁, Category.assoc,
+    natTrans_app_comp_map_map (Etale.baseChange (ModuleCat.{u + 1} Λ) sqk)]
+
+/-- The comparison of the targets for a pushed forward sheaf is an isomorphism when the
+comparison `k_* N[0] ⟶ Rk_*(N[0])` and the derived base-change map at `N[0]` are. -/
+lemma Etale.isIso_targetPushforward (e : Y ⟶ T) (h : Y ⟶ X) (k : T' ⟶ T) (a : Y' ⟶ Y)
+    (e' : Y' ⟶ T') (h' : Y' ⟶ X) (wh : a ≫ h = h') (sqk : CommSq e' a k e) (q : ℤ)
+    (N : Sheaf T'.smallEtaleTopology (ModuleCat.{u + 1} Λ))
+    [IsIso (Etale.singleLowerStarComparison Λ k N)]
+    [IsIso ((Etale.baseChange (ModuleCat.{u + 1} Λ) sqk).app
+      ((DerivedCategory.Plus.singleFunctor _ 0).obj N))] :
+    IsIso ((DerivedCategory.Plus.homologyFunctor _ q).map
+          (R+((h)_*[ModuleCat.{u + 1} Λ]).map
+              (D+((e)^*[ModuleCat.{u + 1} Λ]).map (Etale.singleLowerStarComparison Λ k N) ≫
+                (Etale.baseChange (ModuleCat.{u + 1} Λ) sqk).app
+                  ((DerivedCategory.Plus.singleFunctor _ 0).obj N)) ≫
+            (Etale.lowerStarPlusCompIso Λ a h h' wh).hom.app
+              (D+((e')^*[ModuleCat.{u + 1} Λ]).obj
+                ((DerivedCategory.Plus.singleFunctor _ 0).obj N)))) :=
+  inferInstance
+
+/-- The comparison of the sources for a pushed forward sheaf is an isomorphism when the
+comparison `k_* N[0] ⟶ Rk_*(N[0])` is. -/
+lemma Etale.isIso_sourcePushforward (p : X ⟶ S) (g : T ⟶ S) (k : T' ⟶ T) (g' : T' ⟶ S)
+    (hg : k ≫ g = g') (q : ℤ) (N : Sheaf T'.smallEtaleTopology (ModuleCat.{u + 1} Λ))
+    [IsIso (Etale.singleLowerStarComparison Λ k N)] :
+    IsIso ((DerivedCategory.Plus.homologyFunctor _ q).map
+          (D+((p)^*[ModuleCat.{u + 1} Λ]).map
+            (R+((g)_*[ModuleCat.{u + 1} Λ]).map (Etale.singleLowerStarComparison Λ k N) ≫
+              (Etale.lowerStarPlusCompIso Λ k g g' hg).hom.app
+                ((DerivedCategory.Plus.singleFunctor _ 0).obj N)))) :=
+  inferInstance
+
+/-- The comparison of the targets for a pushed forward sheaf is a monomorphism when the
+comparison `k_* N[0] ⟶ Rk_*(N[0])` is an isomorphism and the derived base-change map at `N[0]`
+is an isomorphism in degrees `< q` and a monomorphism in degree `q`. -/
+lemma Etale.mono_targetPushforward (e : Y ⟶ T) (h : Y ⟶ X) (k : T' ⟶ T) (a : Y' ⟶ Y)
+    (e' : Y' ⟶ T') (h' : Y' ⟶ X) (wh : a ≫ h = h') (sqk : CommSq e' a k e) (q : ℤ)
+    (N : Sheaf T'.smallEtaleTopology (ModuleCat.{u + 1} Λ))
+    [IsIso (Etale.singleLowerStarComparison Λ k N)]
+    (h₁ : ∀ i < q, IsIso ((DerivedCategory.Plus.homologyFunctor _ i).map
+      ((Etale.baseChange (ModuleCat.{u + 1} Λ) sqk).app
+        ((DerivedCategory.Plus.singleFunctor _ 0).obj N))))
+    (h₂ : Mono ((DerivedCategory.Plus.homologyFunctor _ q).map
+      ((Etale.baseChange (ModuleCat.{u + 1} Λ) sqk).app
+        ((DerivedCategory.Plus.singleFunctor _ 0).obj N)))) :
+    Mono ((DerivedCategory.Plus.homologyFunctor _ q).map
+          (R+((h)_*[ModuleCat.{u + 1} Λ]).map
+              (D+((e)^*[ModuleCat.{u + 1} Λ]).map (Etale.singleLowerStarComparison Λ k N) ≫
+                (Etale.baseChange (ModuleCat.{u + 1} Λ) sqk).app
+                  ((DerivedCategory.Plus.singleFunctor _ 0).obj N)) ≫
+            (Etale.lowerStarPlusCompIso Λ a h h' wh).hom.app
+              (D+((e')^*[ModuleCat.{u + 1} Λ]).obj
+                ((DerivedCategory.Plus.singleFunctor _ 0).obj N)))) := by
+  rw [Functor.map_comp]
+  have : Mono ((DerivedCategory.Plus.homologyFunctor _ q).map
+      (R+((h)_*[ModuleCat.{u + 1} Λ]).map
+        (D+((e)^*[ModuleCat.{u + 1} Λ]).map (Etale.singleLowerStarComparison Λ k N) ≫
+          (Etale.baseChange (ModuleCat.{u + 1} Λ) sqk).app
+            ((DerivedCategory.Plus.singleFunctor _ 0).obj N)))) := by
+    refine Functor.mono_homologyFunctor_map_rightDerivedFunctorPlus_map _ _ q (fun i hi ↦ ?_) ?_
+    · have := h₁ i hi
+      rw [Functor.map_comp]
+      infer_instance
+    · rw [Functor.map_comp]
+      infer_instance
+  infer_instance
+
+end Pushforward
 
 end AlgebraicGeometry
