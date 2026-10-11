@@ -178,5 +178,23 @@
   "summary": "Read Stacks Algebra 00MT (line 24608), 00MY (line 24678), 00MV (line 24722), 00MW (line 24739) and their proofs; tags checked in tags/tags. Not a Mathlib leaf: no McCoy-type or maximal-minor criterion for rectangular matrices (LeanSearch, LeanFinder, Loogle, grep recorded). Followed the direct route rather than the source's induction with 00MT, which would need the invariance of the ideal of minors under change of bases: Step 1 sets up z with Ann(z) = m and kappa = R/m; Step 2 shows the reduction of A is injective over kappa (the 00MY idea: z kills exactly m); Step 3 applies the new unsplit node lem-weil-pbc-field-injective-matrix-nonzero-maximal-minor (over a field an injective p x n matrix has n <= p and a nonzero n x n row minor); Step 4 lifts: det commutes with reduction, an element outside m is a unit in a local ring; Step 5 the ideal formulation. Statement unchanged. The citer lem-weil-pbc-exact-free-complex-last-minors-regular-sequence uses exactly this statement for the localized last map (R_q Noetherian local with q R_q associated), which matches.",
   "blueprint": "the item serves thm-weil-pbc-finite-etale-lifting at step 7 of its split (source: Lemma 0GS2, proof: the essential-surjectivity paragraphs) (via 9 created nodes); its steps realize: the item serves 00MY applied to 0 -> R^n -> R^p (agent route: reduction mod m with z killing m, then the field case) (entry written by L at review; the worker predates the rule of 2026-10-10)"
  },
- "reviewed": "2026-10-10 L: 5 steps checked (agent route): z with Ann(z) = m, reduction of A mod m stays injective since z kills m, field case (new node: nonzero maximal minor), lift of the minor is a unit; citer exact-free-complex-last-minors step matches"
+ "reviewed": "2026-10-10 L: 5 steps checked (agent route): z with Ann(z) = m, reduction of A mod m stays injective since z kills m, field case (new node: nonzero maximal minor), lift of the minor is a unit; citer exact-free-complex-last-minors step matches",
+ "lean": {
+  "module": "Sheaf.RingTheory.UnitMaximalMinorOfDepthZero",
+  "declaration": "Matrix.exists_isUnit_maximal_minor_of_annihilator_eq_maximalIdeal",
+  "file": "lean/Sheaf/RingTheory/UnitMaximalMinorOfDepthZero.lean",
+  "statement": "theorem exists_isUnit_maximal_minor_of_annihilator_eq_maximalIdeal {R : Type u} [CommRing R] [IsNoetherianRing R] [IsLocalRing R] {n p : ℕ} (A : Matrix (Fin p) (Fin n) R) (hdepth : ∃ z : R, ∀ a : R, a * z = 0 ↔ a ∈ IsLocalRing.maximalIdeal R) (hinj : Function.Injective A.mulVec) : n ≤ p ∧ (∃ r : Fin n → Fin p, StrictMono r ∧ IsUnit (A.submatrix r id).det) ∧ Ideal.span {d : R | ∃ r : Fin n → Fin p, StrictMono r ∧ d = (A.submatrix r id).det} = ⊤",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-dzu0936",
+  "group": "H1",
+  "result": "pass",
+  "note": "CommRing+IsNoetherianRing+IsLocalRing = Noetherian local; hdepth (a*z=0 iff a in maximalIdeal) = node's explicit Ann(z)=m witness (node states no depth, so no IsLocalRing.depth); A : Matrix (Fin p) (Fin n) R, Injective A.mulVec (= toLin' on Fin n -> R) = injective v->Av; n<=p; StrictMono r : Fin n -> Fin p with IsUnit (A.submatrix r id).det = unit n x n row minor; Ideal.span of these minors = top = equivalent form; n=0 empty det 1, p=0<n vacuous via Nontrivial"
+ }
 }
