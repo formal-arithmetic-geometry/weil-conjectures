@@ -141,5 +141,23 @@
   "worker": "stage1",
   "summary": "Two steps following the remark after Stacks 01TD ('Trivially...'): unpack pqf-def-quasifinite (1)-(2) to get, around every point, an affine pair with a finite type ring map (the quasi-finiteness is dropped); then the pointwise criterion for local finite type. In Stacks this criterion is the definition 01T1; in the DAG locally of finite type is the affine-cover form of def-weil-finite-type-morphism, so the agreement (01T1 with 01T2) is cited as the new Mathlib leaf lem-weil-pbc-lft-pointwise-criterion = HasRingHomProperty.iff_exists_appLE for LocallyOfFiniteType / RingHom.FiniteType (RingHomProperties.lean:651, read). The existing lem-weil-pbc-lft-affine-pairs (all affine pairs, 01T2 (1)<=>(2)) does not give the pointwise direction. Statement kept; stmt_deps completed with def-weil-affine-spectrum, def-weil-pbc-finite-type-algebra, def-weil-pbc-ring-map-quasi-finite-at-prime (notions the statement uses). Mathlib: no LocallyQuasiFinite => LocallyOfFiniteType (Mathlib's LocallyQuasiFinite omits finite type, QuasiFinite.lean:57), so the item is not a leaf."
  },
- "reviewed": "Reviewed by L 2026-10-10: 'trivially' in the source rests on Stacks' pointwise definition 01T1; the DAG's cover definition needs the pointwise criterion of 01T2, now a Mathlib leaf (HasRingHomProperty.iff_exists_appLE). Statement gained citations only. Not a leaf itself (Mathlib's LocallyQuasiFinite is a different notion, B8)."
+ "reviewed": "Reviewed by L 2026-10-10: 'trivially' in the source rests on Stacks' pointwise definition 01T1; the DAG's cover definition needs the pointwise criterion of 01T2, now a Mathlib leaf (HasRingHomProperty.iff_exists_appLE). Statement gained citations only. Not a leaf itself (Mathlib's LocallyQuasiFinite is a different notion, B8).",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.LocallyOfFiniteTypeOfIsLocallyQuasiFinite",
+  "declaration": "AlgebraicGeometry.Scheme.Hom.locallyOfFiniteType_of_isLocallyQuasiFinite",
+  "file": "lean/Sheaf/AlgebraicGeometry/LocallyOfFiniteTypeOfIsLocallyQuasiFinite.lean",
+  "statement": "theorem locallyOfFiniteType_of_isLocallyQuasiFinite {X S : Scheme.{u}} (f : X ⟶ S) (hf : f.IsLocallyQuasiFinite) : LocallyOfFiniteType f",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-lqf1143",
+  "group": "M1",
+  "result": "pass",
+  "note": "X S : Scheme.{u} (dependency's universe), f : X ⟶ S, hf : f.IsLocallyQuasiFinite = landed C1 pqf-def-quasifinite (∀ x, IsQuasiFiniteAtPoint: affine U∋x, affine V, U ≤ f⁻¹ᵁV, appLE algebra FiniteType + IsQuasiFiniteAtPrime), conclusion Mathlib LocallyOfFiniteType f; #check resolves to AlgebraicGeometry.LocallyOfFiniteType; no hollow hyp, no new defs; direct consequence of finite type built into IsQuasiFiniteAtPoint + iff_exists_appLE"
+ }
 }
