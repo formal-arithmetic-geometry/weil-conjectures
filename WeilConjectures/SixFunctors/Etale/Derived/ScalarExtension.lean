@@ -105,6 +105,43 @@ lemma integersShrinkMap_flat [Algebra ℚ_[l] E] [IsScalarTower ℚ_[l] E (Padic
     exact mul_left_cancel₀ hr0 hxy⟩
   infer_instance
 
+section DVR
+
+variable (L : Type w) [Field L] [Algebra L (PadicAlgCl l)] [Algebra ℚ_[l] L]
+  [IsScalarTower ℚ_[l] L (PadicAlgCl l)] [FiniteDimensional ℚ_[l] L] [Small.{u + 1} L]
+
+instance isLocalRing_shrink_integers : IsLocalRing (Shrink.{u + 1} (integers l L)) :=
+  IsLocalRing.of_surjective' (shrinkRingEquiv l L).toRingHom (shrinkRingEquiv l L).surjective
+
+instance isPrincipalIdealRing_shrink_integers :
+    IsPrincipalIdealRing (Shrink.{u + 1} (integers l L)) :=
+  IsPrincipalIdealRing.of_surjective (shrinkRingEquiv l L).toRingHom
+    (shrinkRingEquiv l L).surjective
+
+lemma maximalIdeal_shrink_integers :
+    IsLocalRing.maximalIdeal (Shrink.{u + 1} (integers l L)) = maximalIdealShrink l L :=
+  (IsLocalRing.map_ringEquiv_maximalIdeal (shrinkRingEquiv l L)).symm
+
+instance isDiscreteValuationRing_shrink_integers :
+    IsDiscreteValuationRing (Shrink.{u + 1} (integers l L)) where
+  not_a_field' := by
+    rw [maximalIdeal_shrink_integers]
+    intro h
+    exact maximalIdeal_integers_ne_bot l L
+      ((Ideal.map_eq_bot_iff_of_injective (shrinkRingEquiv l L).injective).1 h)
+
+/-- In `𝒪_L`, every nonzero element divides a power of a uniformizer. -/
+lemma exists_pow_eq_mul {ϖ : Shrink.{u + 1} (integers l L)}
+    (hϖ : ϖ ∈ nonZeroDivisors _) (hI : maximalIdealShrink l L = Ideal.span {ϖ})
+    {x : Shrink.{u + 1} (integers l L)} (hx : x ≠ 0) : ∃ (n : ℕ) (v : _), ϖ ^ n = x * v := by
+  have hirr : Irreducible ϖ := IsDiscreteValuationRing.irreducible_of_span_eq_maximalIdeal ϖ
+    (nonZeroDivisors.ne_zero hϖ) (by rw [maximalIdeal_shrink_integers, hI])
+  obtain ⟨n, u, rfl⟩ := IsDiscreteValuationRing.eq_unit_mul_pow_irreducible hx hirr
+  exact ⟨n, ↑u⁻¹, by rw [mul_comm (u : Shrink.{u + 1} (integers l L)), mul_assoc,
+    Units.mul_inv, mul_one]⟩
+
+end DVR
+
 end PadicAlgCl
 
 namespace CategoryTheory.Rationalization
@@ -608,6 +645,92 @@ noncomputable def derivedCompleteRationalScalarExtensionFromIntegralIso
     (derivedCompleteRationalScalarExtension h hc)).app K
 
 end
+
+section Completeness
+
+/-- An object which is a retract of a derived complete object up to a scalar `c` acting
+invertibly on every object on which `ϖ` acts invertibly is derived complete. -/
+theorem _root_.DerivedCategory.derivedComplete_of_comp_eq_smul {C : Type (u + 1)}
+    [Category.{u} C] [EssentiallySmall.{u + 1} C] {J : GrothendieckTopology C}
+    {R : Type (u + 1)} [CommRing R] {I : Ideal R} {ϖ : R} (hϖ : ϖ ∈ nonZeroDivisors R)
+    (hI : I = Ideal.span {ϖ}) {M N : _root_.DerivedCategory (Sheaf J (ModuleCat.{u + 1} R))}
+    (hN : _root_.DerivedCategory.derivedComplete J I N) (β : M ⟶ N) (α : N ⟶ M) (c : R)
+    (h : β ≫ α = c • 𝟙 M)
+    (hc : ∀ Z : _root_.DerivedCategory (Sheaf J (ModuleCat.{u + 1} R)), IsIso (ϖ • 𝟙 Z) →
+      IsIso (c • 𝟙 Z)) :
+    _root_.DerivedCategory.derivedComplete J I M := by
+  rw [_root_.DerivedCategory.derivedComplete_iff_rightOrthogonal hϖ hI] at hN ⊢
+  intro Z φ hZ
+  have := hc Z hZ
+  have h0 : φ ≫ β = 0 := hN (φ ≫ β) hZ
+  have h1 : (c • 𝟙 Z) ≫ φ = 0 := by
+    have : (c • 𝟙 Z) ≫ φ = φ ≫ β ≫ α := by
+      rw [h, Linear.comp_smul, Linear.smul_comp, Category.id_comp, Category.comp_id]
+    rw [this, ← Category.assoc, h0, zero_comp]
+  rw [← cancel_epi (c • 𝟙 Z), h1, comp_zero]
+
+/-- In an `R`-linear category, if `ϖ` acts invertibly on `Z` and `ϖⁿ = x v`, then `x` acts
+invertibly on `Z`. -/
+lemma _root_.CategoryTheory.isIso_smul_id_of_pow_eq_mul {R : Type*} [CommRing R] {C : Type*}
+    [Category C] [Preadditive C] [Linear R C] {Z : C} {ϖ x v : R} (hZ : IsIso (ϖ • 𝟙 Z))
+    {n : ℕ} (hn : ϖ ^ n = x * v) : IsIso (x • 𝟙 Z) := by
+  have hp : ∀ k : ℕ, IsIso ((ϖ ^ k) • 𝟙 Z) := by
+    intro k
+    induction k with
+    | zero => simpa using (inferInstance : IsIso (𝟙 Z))
+    | succ k ih =>
+      have : (ϖ ^ (k + 1)) • 𝟙 Z = ((ϖ ^ k) • 𝟙 Z) ≫ (ϖ • 𝟙 Z) := by
+        rw [Linear.smul_comp, Linear.comp_smul, Category.comp_id, smul_smul, pow_succ]
+      rw [this]
+      infer_instance
+  have hn' : v * x = ϖ ^ n := by rw [mul_comm, hn]
+  refine isIso_of_isIso_comp_of_isIso_comp _ (v • 𝟙 Z) ?_ ?_
+  · rw [Linear.smul_comp, Linear.comp_smul, Category.comp_id, smul_smul,
+      show x * v = ϖ ^ n from hn.symm]
+    exact hp n
+  · rw [Linear.smul_comp, Linear.comp_smul, Category.comp_id, smul_smul, hn']
+    exact hp n
+
+variable (Y) in
+/-- The derived coextension of scalars `R coext K = RHom_{𝒪_E}(𝒪_L, K)` of a derived complete
+object `K` of `D(Y_ét, 𝒪_E)` is derived complete: it is right adjoint to restriction of scalars,
+which carries objects on which a uniformizer of `𝒪_L` acts invertibly to objects on which a
+uniformizer of `𝒪_E` acts invertibly. -/
+theorem derivedCompleteIntegral_rightDerivedFunctor_coextendScalars
+    (K : 𝐃(Y, Shrink.{u + 1} (PadicAlgCl.integers l E)))
+    (hK : _root_.DerivedCategory.derivedCompleteIntegral Y.smallEtaleTopology l E K) :
+    _root_.DerivedCategory.derivedCompleteIntegral Y.smallEtaleTopology l L
+      ((coextendScalars (PadicAlgCl.integersShrinkMap l E L) Y).rightDerivedFunctor.obj K) := by
+  let φ := PadicAlgCl.integersShrinkMap.{w, u} l E L
+  obtain ⟨ϖE, hϖE, hIE⟩ :=
+    PadicAlgCl.exists_mem_nonZeroDivisors_maximalIdealShrink_eq_span.{w, u} l E
+  obtain ⟨ϖL, hϖL, hIL⟩ :=
+    PadicAlgCl.exists_mem_nonZeroDivisors_maximalIdealShrink_eq_span.{w, u} l L
+  change _root_.DerivedCategory.derivedComplete _ (PadicAlgCl.maximalIdealShrink l E) _ at hK
+  change _root_.DerivedCategory.derivedComplete _ (PadicAlgCl.maximalIdealShrink l L) _
+  rw [_root_.DerivedCategory.derivedComplete_iff_rightOrthogonal hϖE hIE] at hK
+  rw [_root_.DerivedCategory.derivedComplete_iff_rightOrthogonal hϖL hIL]
+  intro Z f (hZ : IsIso (ϖL • 𝟙 Z))
+  have : PreservesFiniteColimits (Sheaf.restrictScalars Y.smallEtaleTopology φ) :=
+    have := (Sheaf.restrictCoextendScalarsAdj Y.smallEtaleTopology φ).leftAdjoint_preservesColimits
+    inferInstance
+  have : PreservesFiniteLimits (Sheaf.restrictScalars Y.smallEtaleTopology φ) :=
+    have := (sheafExtendRestrictScalarsAdj φ Y).rightAdjoint_preservesLimits
+    inferInstance
+  let adj := (Sheaf.restrictCoextendScalarsAdj Y.smallEtaleTopology φ)
+    |>.mapDerivedCategoryRightDerivedAdjunction
+  have hx : φ ϖE ≠ 0 := nonZeroDivisors.ne_zero
+    (PadicAlgCl.integersShrinkMap_mem_nonZeroDivisors l E L hϖE)
+  obtain ⟨n, v, hnv⟩ := PadicAlgCl.exists_pow_eq_mul l L hϖL hIL hx
+  have hZ' : IsIso (φ ϖE • 𝟙 Z) := isIso_smul_id_of_pow_eq_mul hZ hnv
+  have hRes : IsIso (ϖE • 𝟙 ((derivedRestrictScalars φ Y).obj Z)) := by
+    rw [← derivedRestrictScalars_map_smul_id]
+    infer_instance
+  have h0 : (adj.homEquiv Z K).symm f = 0 := hK _ hRes
+  rw [← (adj.homEquiv Z K).apply_symm_apply f, h0, Adjunction.homEquiv_unit,
+    Functor.map_zero, comp_zero]
+
+end Completeness
 
 variable (Y) in
 /-- Derived base change along `𝒪_E ⟶ 𝒪_L` carries derived complete objects to derived complete
