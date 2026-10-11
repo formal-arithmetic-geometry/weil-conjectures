@@ -192,4 +192,90 @@ noncomputable def Etale.etaleLowerShriekShiftedHomIso
 
 end Restriction
 
+/-- The final object of the small étale site of `Z`, the identity of `Z`. -/
+noncomputable abbrev Etale.finalObject (Z : Scheme.{u}) : Z.Etale :=
+  MorphismProperty.Over.mk ⊤ (𝟙 Z) (inferInstance : Etale (𝟙 Z))
+
+/-- Blueprint `lem-weil-pbc-cohomology-filtered-colimit` (a node of `sk-prop-h2`), for sheaves
+of modules over a fixed constant ring: étale cohomology of a quasi-compact and quasi-separated
+scheme commutes with filtered colimits. Here the cohomology `Hᵠ(Z, N)` of a sheaf `N` of
+`Λ`-modules on `Z_ét` is `Hom(Λ_Z[0], N[0]⟦q⟧)` in `D⁺(Z_ét, Λ)`, where `Λ_Z` is the free sheaf
+on the final object of `Z_ét`, i.e. the constant sheaf `Λ`. The abelian version is
+`AlgebraicGeometry.Scheme.H_map_isColimit_of_isFiltered`. -/
+@[stacks 03Q6]
+theorem Etale.preservesColimitsOfShape_shiftedHomFunctor_freeSheaf_finalObject (Z : Scheme.{u})
+    [CompactSpace Z] [QuasiSeparatedSpace Z] (q : ℤ) (J : Type u) [SmallCategory J]
+    [IsFiltered J] :
+    PreservesColimitsOfShape J
+      (Etale.shiftedHomFunctor Λ ((Etale.freeSheaf Λ Z).obj (Etale.finalObject Z)) q) :=
+  sorry
+
+/-- An isomorphism `A ≅ A'` identifies the functors `N ↦ Hom(A[0], N[0]⟦q⟧)` and
+`N ↦ Hom(A'[0], N[0]⟦q⟧)`. -/
+noncomputable def Etale.shiftedHomFunctorMapIso {Z : Scheme.{u}}
+    {A A' : Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} Λ)} (e : A ≅ A') (q : ℤ) :
+    Etale.shiftedHomFunctor Λ A q ≅ Etale.shiftedHomFunctor Λ A' q :=
+  Functor.isoWhiskerLeft (DerivedCategory.Plus.singleFunctor _ 0 ⋙ shiftFunctor _ q)
+    (preadditiveCoyoneda.mapIso
+      ((DerivedCategory.Plus.singleFunctor _ 0).mapIso e).symm.op)
+
+section Pullback
+
+variable {X Y : Scheme.{u}} (h : Y ⟶ X)
+
+/-- An étale `Y`-scheme `W`, as an étale scheme over itself extended along its structure
+morphism, is `W`. -/
+noncomputable def Etale.overMapFinalObjectIso (W : Y.Etale) :
+    (MorphismProperty.Over.map ⊤ W.prop).obj (Etale.finalObject W.left) ≅ W :=
+  MorphismProperty.Over.isoMk (Iso.refl _) rfl
+
+/-- The functor `N ↦ Hom((h^* Λ[W])[0], N[0]⟦q⟧)` is the cohomology functor of `W ×_X Y`
+precomposed with restriction. -/
+noncomputable def Etale.shiftedHomFunctorUpperStarFreeSheafIso (W : X.Etale) (q : ℤ) :
+    Etale.shiftedHomFunctor Λ ((h)^*[ModuleCat.{u + 1} Λ].obj ((Etale.freeSheaf Λ X).obj W)) q ≅
+      (((MorphismProperty.Over.pullback @Etale ⊤ h).obj W).hom)^*[ModuleCat.{u + 1} Λ] ⋙
+        Etale.shiftedHomFunctor Λ
+          ((Etale.freeSheaf Λ ((MorphismProperty.Over.pullback @Etale ⊤ h).obj W).left).obj
+            (Etale.finalObject _)) q :=
+  Etale.shiftedHomFunctorMapIso Λ (Etale.upperStarFreeSheafIso Λ h W ≪≫
+    (Etale.freeSheaf Λ Y).mapIso (Etale.overMapFinalObjectIso _).symm ≪≫
+    (Etale.etaleLowerShriekFreeSheafIso Λ _ ((MorphismProperty.Over.pullback @Etale ⊤ h).obj W).prop
+      (Etale.finalObject _)).symm) q ≪≫
+  Etale.etaleLowerShriekShiftedHomIso Λ _ ((MorphismProperty.Over.pullback @Etale ⊤ h).obj W).prop
+    _ q
+
+/-- For `h` quasi-compact and quasi-separated and `W` affine, the functor
+`N ↦ Hom((h^* Λ[W])[0], N[0]⟦q⟧) = Hᵠ(W ×_X Y, N)` commutes with filtered colimits. -/
+theorem Etale.preservesColimitsOfShape_shiftedHomFunctor_upperStarFreeSheaf [QuasiCompact h]
+    [QuasiSeparated h] (W : X.Etale) [IsAffine W.left] (q : ℤ) (J : Type u) [SmallCategory J]
+    [IsFiltered J] :
+    PreservesColimitsOfShape J (Etale.shiftedHomFunctor Λ
+      ((h)^*[ModuleCat.{u + 1} Λ].obj ((Etale.freeSheaf Λ X).obj W)) q) := by
+  have : IsAffine ((𝟭 Scheme).obj W.left) := ‹IsAffine W.left›
+  have : CompactSpace ((MorphismProperty.Over.pullback @Etale ⊤ h).obj W).left :=
+    QuasiCompact.compactSpace_of_compactSpace (Limits.pullback.fst W.hom h)
+  have : QuasiSeparatedSpace ((MorphismProperty.Over.pullback @Etale ⊤ h).obj W).left :=
+    quasiSeparatedSpace_of_quasiSeparated (Limits.pullback.fst W.hom h)
+  have hN := Etale.preservesColimitsOfShape_shiftedHomFunctor_freeSheaf_finalObject Λ
+    ((MorphismProperty.Over.pullback @Etale ⊤ h).obj W).left q J
+  have : PreservesColimitsOfSize.{u, u}
+      ((((MorphismProperty.Over.pullback @Etale ⊤ h).obj W).hom)^*[ModuleCat.{u + 1} Λ]) :=
+    (Etale.upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) _).leftAdjoint_preservesColimits
+  have hN2 : PreservesColimitsOfShape J (Etale.shiftedHomFunctor Λ ((Etale.freeSheaf Λ
+      ((MorphismProperty.Over.pullback @Etale ⊤ h).obj W).left).obj (Etale.finalObject _)) q) :=
+    hN
+  have hA : PreservesColimitsOfShape J
+      ((((MorphismProperty.Over.pullback @Etale ⊤ h).obj W).hom)^*[ModuleCat.{u + 1} Λ]) :=
+    inferInstance
+  have h3 : PreservesColimitsOfShape J
+      ((((MorphismProperty.Over.pullback @Etale ⊤ h).obj W).hom)^*[ModuleCat.{u + 1} Λ] ⋙
+        Etale.shiftedHomFunctor Λ ((Etale.freeSheaf Λ
+          ((MorphismProperty.Over.pullback @Etale ⊤ h).obj W).left).obj (Etale.finalObject _)) q) :=
+    ⟨fun {K} ↦ ⟨fun {c} hc ↦ ⟨(hN2.preservesColimit (K := K ⋙ _)).preserves
+      ((hA.preservesColimit (K := K)).preserves hc).some |>.some⟩⟩⟩
+  exact preservesColimitsOfShape_of_natIso
+    (Etale.shiftedHomFunctorUpperStarFreeSheafIso Λ h W q).symm
+
+end Pullback
+
 end AlgebraicGeometry
