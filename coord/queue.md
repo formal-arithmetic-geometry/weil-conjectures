@@ -1,11 +1,11 @@
 # Work queue
 
-1017 items; claim with `tools/claim.py next <group> [--stage N]`.
+1015 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (1017)
+## Stage 2: nodes to state (1015)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -16,7 +16,6 @@
 | `def-sp-double-complex-total` | 1 | state |
 | `def-sp-image-filtration` | 1 | state |
 | `def-weil-derived-limit` | 1 | state |
-| `def-weil-extension-by-zero-presheaf` | 1 | state |
 | `def-weil-pbc-associated-module` | 1 | state |
 | `def-weil-pbc-etale-sheaves` | 1 | state |
 | `def-weil-pbc-formal-glueing-data` | 1 | state |
@@ -47,10 +46,8 @@
 | `lem-galois-constant-sheaf-sets-representable` | 1 | state |
 | `lem-galois-descent` | 1 | state |
 | `lem-galois-descent-datum-diagonal-identity` | 1 | state |
-| `lem-galois-flc-set-stalk-finite` | 1 | state |
 | `lem-galois-fpqc-descend-etale` | 1 | state |
 | `lem-galois-fpqc-descend-open-immersion` | 1 | state |
-| `lem-galois-fpqc-descending-types-morphisms` | 1 | state |
 | `lem-galois-fpqc-morphisms-descend` | 1 | state |
 | `lem-galois-fpqc-pullback-canonical-iso` | 1 | state |
 | `lem-galois-fpqc-singleton-affine-refinement` | 1 | state |
@@ -59,7 +56,6 @@
 | `lem-kun-closed-point-field` | 1 | state |
 | `lem-kun-fg-separable-smooth` | 1 | state |
 | `lem-kun-fibre-product-limits` | 1 | state |
-| `lem-kun-finite-closed-subscheme` | 1 | state |
 | `lem-kun-stalks-commute-colimits` | 1 | state |
 | `lem-kun-support-geometric-point-independent` | 1 | state |
 | `lem-pc-affine-containment-ideal` | 1 | state |
@@ -166,6 +162,7 @@
 | `lem-pur-kinjective-set-iso-classes-bounded-size` | 1 | state |
 | `lem-pur-left-derived-from-kflat-class` | 1 | state |
 | `lem-pur-quasi-isos-saturated-triangulated` | 1 | state |
+| `lem-pur-ringed-site-grothendieck-abelian` | 1 | state |
 | `lem-pur-sheaf-hom-cover-gluing` | 1 | state |
 | `lem-pur-sheaf-hom-is-sheaf` | 1 | state |
 | `lem-sc-acyclic-comparison-natural` | 1 | state |
@@ -991,6 +988,7 @@
 | `pqf-lem-qs-intersection-qc` | 1 | state |
 | `pqf-lem-sheaf-zero-stalks` | 1 | state |
 | `prop-pur-kinjective-objects-small` | 1 | state |
+| `prop-pur-kinjective-resolutions-exist` | 1 | state |
 | `prop-weil-pbc-composition-stability` | 1 | state |
 | `prop-weil-pbc-inverse-image-exact` | 1 | state |
 | `thm-galois-abstract-equivalence` | 1 | state |
@@ -1027,7 +1025,7 @@
 | `lem-sc-normalization-properties` | 3 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 1156 nodes that wait for a statement dependency, 40 nodes that wait for stage 1.
+Not open yet: 1154 nodes that wait for a statement dependency, 40 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
