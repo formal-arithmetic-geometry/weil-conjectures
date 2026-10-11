@@ -100,5 +100,24 @@
   "group": "H1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-kdf2944 (reviewer sub-agent of L); spot-checked: Mathlib grep (cotangentSheaf, Hom.Ω, sheafOfKaehler, relativeDifferentials): only the unsheafified presheaf relativeDifferentials' (ModuleCat/Differentials/Presheaf.lean:193), no scheme-level definition; no duplicate differentials definition in the DAG (lem-sc-smooth-proper-diagonal-conormal-differentials is the comparison lemma, not a definition); citers (lem-sc-canonical-sheaf, lem-sc-finite-duality, lem-sc-canonical-degree) use it for a curve over k; the general-X/S citer already defines Omega inline. Diagonal is a closed immersion since def-sc-curves curves are separated. FIX more, RETURN less: (1) C1: the 'equivalently' affine description is a non-elementary fact stated bare; now cited to existing lem-sc-smooth-proper-diagonal-conormal-differentials (applied to C->Spec k), added to stmt_deps; (2) B3: inline citations [def-sc-curves], [def-pc-module-pullback], [def-weil-pbc-kahler-differentials] added (def-sc-curves was in uses_not_cited; Omega_{A/k} was undefined), stmt_deps updated, closed-immersion remark added; mathlib_searches gains the reviewer grep.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "WeilConjectures.AlgebraicGeometry.Modules.Differentials",
+  "declaration": "AlgebraicGeometry.Scheme.Hom.relativeDifferentials",
+  "statement": "def relativeDifferentials : X.Modules",
+  "branch": "slopmaster2",
+  "by": "K1",
+  "date": "2026-10-11",
+  "existing": true,
+  "note": "Omega^1_{C/k} = omega_C is f.relativeDifferentials for f = C ↘ Spec (.of k) (or f : C ⟶ Spec (.of k)) with [IsCurve f] [Smooth f], the declaration recorded on def-sc-relative-differential-sheaf and used by the source for Ω¹ and ω (Scheme.Hom.genus, ProjectiveLine duality). The node's defining formula Δ^*(I/I²) is AlgebraicGeometry.diagonalConormal f (def-sc-diagonal-conormal); its canonical identification is AlgebraicGeometry.diagonalConormal_iso_relativeDifferentials (lem-sc-smooth-proper-diagonal-conormal-differentials). No third definition, no private canonicalSheaf.",
+  "fixed_by": "R-dkd1542"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-dkd1542",
+  "group": "K1",
+  "result": "fix",
+  "note": "Omega^1_{C/k}=omega_C for smooth curve C/k = f.relativeDifferentials (def-sc-relative-differential-sheaf); Delta^*(I/I^2)=diagonalConormal f, iso by landed diagonalConormal_iso_relativeDifferentials; aliases kahlerDifferentials/canonicalSheaf and restated iso dropped (H4/H12); left out new module(s) lean/Sheaf/AlgebraicGeometry/KahlerDifferentials.lean (--drop-files, or a record fixed to existing: true)"
  }
 }
