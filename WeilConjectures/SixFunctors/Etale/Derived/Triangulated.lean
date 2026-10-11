@@ -27,6 +27,7 @@ the commutations with shifts of `WeilConjectures.SixFunctors.Etale.Derived.Shift
 - `AlgebraicGeometry.Etale.isTriangulated_rightDerivedLowerStar`
 - `AlgebraicGeometry.Etale.isTriangulated_rightDerivedLowerShriek`
 - `AlgebraicGeometry.Etale.isTriangulated_derivedTensorRight`
+- `AlgebraicGeometry.Etale.isTriangulated_derivedTensor_obj`
 -/
 
 @[expose] public section
@@ -77,6 +78,20 @@ instance isTriangulated_derivedTensorRight
     (derivedTensorRight A X K).IsTriangulated :=
   inferInstanceAs
     (((curriedTensor (DerivedCategory (Sheaf X.smallEtaleTopology A))).flip.obj K).IsTriangulated)
+
+attribute [local instance] Sheaf.monoidalCategory in
+/-- Tensoring on the left with a fixed complex, `M ↦ K ⊗ᴸ M`, is triangulated. -/
+instance isTriangulated_derivedTensor_obj
+    (K : DerivedCategory (Sheaf X.smallEtaleTopology A)) :
+    ((derivedTensor A X).obj K).IsTriangulated :=
+  inferInstanceAs
+    (((curriedTensor (DerivedCategory (Sheaf X.smallEtaleTopology A))).obj K).IsTriangulated)
+
+/-- Tensoring on the right with a fixed complex, `M ↦ M ⊗ᴸ K`, is triangulated. -/
+instance isTriangulated_derivedTensor_flip_obj
+    (K : DerivedCategory (Sheaf X.smallEtaleTopology A)) :
+    ((derivedTensor A X).flip.obj K).IsTriangulated :=
+  inferInstanceAs (derivedTensorRight A X K).IsTriangulated
 
 end Monoidal
 

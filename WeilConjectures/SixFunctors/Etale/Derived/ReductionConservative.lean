@@ -35,7 +35,7 @@ are conservative on derived-complete complexes").
 
 @[expose] public section
 
-universe u' u
+universe u
 
 open CategoryTheory Limits MonoidalCategory Pretriangulated Opposite
 
@@ -44,28 +44,6 @@ namespace AlgebraicGeometry
 open Scheme
 
 namespace Etale
-
-section Triangulated
-
-variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
-  [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
-  [Abelian.HasFunctorialFlatResolution A] {X : Scheme.{u}}
-
-attribute [local instance] Sheaf.monoidalCategory in
-/-- Tensoring on the left with a fixed complex, `M ↦ K ⊗ᴸ M`, is triangulated. -/
-instance isTriangulated_derivedTensor_obj
-    (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) :
-    ((derivedTensor A X).obj K).IsTriangulated :=
-  inferInstanceAs
-    (((curriedTensor (_root_.DerivedCategory (Sheaf X.smallEtaleTopology A))).obj K).IsTriangulated)
-
-/-- Tensoring on the right with a fixed complex, `M ↦ M ⊗ᴸ K`, is triangulated. -/
-instance isTriangulated_derivedTensor_flip_obj
-    (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) :
-    ((derivedTensor A X).flip.obj K).IsTriangulated :=
-  inferInstanceAs (derivedTensorRight A X K).IsTriangulated
-
-end Triangulated
 
 /-- The small étale site of a scheme is essentially small. Instance search does not find this
 in the presence of the imports of this file. -/
