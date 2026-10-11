@@ -1,11 +1,11 @@
 # Work queue
 
-823 items; claim with `tools/claim.py next <group> [--stage N]`.
+819 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (823)
+## Stage 2: nodes to state (819)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -20,15 +20,12 @@
 | `lem-pc-ringed-space-product-kinjective` | 1 | state |
 | `lem-pod-adic-limit-finite-modules` | 1 | state |
 | `lem-pod-lattice-stabilizer-open` | 1 | state |
-| `lem-pod-profinite-stable-lattice` | 1 | state |
 | `lem-sc-base-change-curve` | 1 | state |
 | `lem-sc-curve-base-change-relative-dimension-one` | 1 | state |
 | `lem-sc-divisor-module-local` | 1 | state |
 | `lem-sc-finite-flat-unramified-tangent-criterion` | 1 | state |
 | `lem-sc-hilb-dominating-power` | 1 | state |
-| `lem-sc-mayer-vietoris-ringed-space` | 1 | state |
 | `lem-sc-p1-rhom-hom-derived-connecting` | 1 | state |
-| `lem-sc-point-tangent-cotangent-surjective` | 1 | state |
 | `lem-sc-product-tangent-space-direct-sum` | 1 | state |
 | `lem-sc-rational-point-tangent-derivation-identification` | 1 | state |
 | `lem-sc-rational-section-order` | 1 | state |
@@ -51,7 +48,6 @@
 | `lem-weil-pbc-coskeleton-free-homology-comparison` | 1 | state |
 | `lem-weil-pbc-cotangent-complex-symmetric-algebra` | 1 | state |
 | `lem-weil-pbc-cover-module-exact` | 1 | state |
-| `lem-weil-pbc-criterion-flatness-fibre` | 1 | state |
 | `lem-weil-pbc-criterion-flatness-fibre-noetherian` | 1 | state |
 | `lem-weil-pbc-curve-assertions-finite-pushforward` | 1 | state |
 | `lem-weil-pbc-cyclic-extension-cocycle` | 1 | state |
