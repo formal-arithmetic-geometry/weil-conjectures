@@ -12,6 +12,10 @@ import Mathlib.Algebra.Homology.DerivedCategory.Ext.Map
 
 Source: Weil conjectures blueprint, `lem-sc-ext-locally-free`, proof
 (blueprint: lem-sc-ext-locally-free).
+
+That `dualTensorHom F G` is an isomorphism for a finite locally free `F` is the upstream
+instance `AlgebraicGeometry.Scheme.Modules.isIso_dualTensorHom_of_isFiniteLocallyFree`
+(`WeilConjectures.AlgebraicGeometry.Modules.HomTensor.LocallyFree`), used below.
 -/
 
 universe u
@@ -22,16 +26,6 @@ open scoped AlgebraicGeometry.Scheme.Modules
 namespace AlgebraicGeometry.Scheme.Modules
 
 noncomputable section
-
-/-- The evaluation morphism `dualTensorHom F G : Fᵛ ⊗ G ⟶ Hom(F,G)` of the source is an
-isomorphism when the first module is finite locally free.
-Source: blueprint `lem-sc-ext-locally-free`, proof, first sentence.
-Proof: on an open where F is free of finite rank, the tensor-dual and Hom are both finite
-copies of G, and evaluation sends the dual basis to the coordinate maps. These local
-isomorphisms imply the sheaf morphism is an isomorphism, by lem-sc-ext-evaluation.
-(blueprint: lem-sc-ext-locally-free). -/
-theorem isIso_dualTensorHom_of_isFiniteLocallyFree {X : Scheme.{u}} (F G : X.Modules)
-    [F.IsFiniteLocallyFree] : IsIso (dualTensorHom F G) := sorry
 
 /-- The additive functor `G ↦ Hom(F,G)` followed by forgetting module structure.
 Source: blueprint `lem-sc-ext-locally-free`, proof, first sentence
@@ -65,7 +59,6 @@ def locallyFreeExtComparison {X : Scheme.{u}} [HasExt.{u} X.Modules]
     (locallyFreeHomAbelianFunctor_exact F).2.1
   letI : PreservesFiniteColimits (locallyFreeHomAbelianFunctor F) :=
     (locallyFreeHomAbelianFunctor_exact F).2.2
-  letI := isIso_dualTensorHom_of_isFiniteLocallyFree F G
   let η := (H.zeroLinearEquiv (homObj F F)).symm
     (((SheafOfModules.homObjSectionsEquiv F F).symm (𝟙 F)).val (op ⊤))
   (H.map (inv (dualTensorHom F G)) i).comp
