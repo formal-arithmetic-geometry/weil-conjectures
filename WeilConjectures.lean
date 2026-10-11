@@ -57,6 +57,7 @@ public import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.AffineMorphism
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.Cech
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.CechAcyclic
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.Leray
+public import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.Vanishing
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Clopen
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Defs
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage
@@ -1195,6 +1196,7 @@ public import WeilConjectures.Mathlib.LinearAlgebra.TensorProduct.Pi
 public import WeilConjectures.Mathlib.LinearAlgebra.TensorProduct.Vanishing
 public import WeilConjectures.Mathlib.NumberTheory.Cyclotomic.CyclotomicCharacter
 public import WeilConjectures.Mathlib.NumberTheory.Padics.Complex
+public import WeilConjectures.Mathlib.NumberTheory.Padics.PadicIntegers
 public import WeilConjectures.Mathlib.NumberTheory.Padics.RingHoms
 public import WeilConjectures.Mathlib.NumberTheory.RamificationInertia.Galois
 public import WeilConjectures.Mathlib.Order.BooleanAlgebra.Set
@@ -1741,6 +1743,7 @@ public import WeilConjectures.Topology.Sheaves.CechCohomology
 public import WeilConjectures.Topology.Sheaves.CechComparison
 public import WeilConjectures.Topology.Sheaves.CechCriterion
 public import WeilConjectures.Topology.Sheaves.CechFlasque
+public import WeilConjectures.Topology.Sheaves.MayerVietorisVanishing
 public import WeilConjectures.Topology.Sheaves.PushforwardCohomology
 public import WeilConjectures.Topology.Sheaves.SpectralRestriction
 public import WeilConjectures.Topology.SpectralSpace.ConnectedComponent
