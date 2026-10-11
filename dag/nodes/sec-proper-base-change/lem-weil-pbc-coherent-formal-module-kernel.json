@@ -177,5 +177,23 @@
   "group": "F1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of F1; spot-checked by L: L read the five steps (087X kernels via 087W and Artin-Rees on each affine of a finite cover): stabilization of the images, the quotient system K/I^nK, the factorization and its uniqueness at delayed level n+c."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CoherentFormalModuleKernel",
+  "declaration": "AlgebraicGeometry.coherentFormalModule_kernel",
+  "file": "lean/Sheaf/AlgebraicGeometry/CoherentFormalModuleKernel.lean",
+  "statement": "theorem coherentFormalModule_kernel {X : Scheme.{u}} [IsNoetherian X] (I : X.IdealSheafData) (F H : CoherentFormalModule X I) (α : F ⟶ H) : ∃ c : ℕ, (∀ (l m : ℕ) (h : m + c ≤ l), Subobject.mk (Abelian.image.ι (kernel.ι (α.hom.app (op l)) ≫ F.obj.map (homOfLE (Nat.le_trans (Nat.le_add_right m c) h)).op)) = Subobject.mk (Abelian.image.ι (kernel.ι (α.hom.app (op (m + c))) ≫ F.obj.map (homOfLE (Nat.le_add_right m c)).op))) ∧ ∃ (S : ℕᵒᵖ ⥤ X.Modules) (j : S ⟶ F.obj), (∀ m : ℕ, ∃ e : S.obj (op m) ≅ Abelian.image (kernel.ι (α.hom.app (op (m + c))) ≫ F.obj.map (homOfLE (Nat.le_add_right m c)).op), e.hom ≫ Abelian.image.ι (kernel.ι (α.hom.app (op (m + c))) ≫ F.obj.map (homOfLE (Nat.le_add_right m c)).op) = j.app (op m)) ∧ ∃ (K : CoherentFormalModule X I) (ι : K ⟶ F) (e : ∀ n : ℕ, formalModuleQuotient I (n + 1) (S.obj (op (n + c))) ≅ K.obj.obj (op n)), (∀ n : ℕ, formalModuleQuotientπ I (n + 2) (S.obj (op (n + 1 + c))) ≫ (e (n + 1)).hom ≫ K.obj.map (homOfLE (Nat.le_succ n)).op = S.map (homOfLE (Nat.add_le_add_right (Nat.le_succ n) c)).op ≫ formalModuleQuotientπ I (n + 1) (S.obj (op (n + c))) ≫ (e n).hom) ∧ (∀ n : ℕ, formalModuleQuotientπ I (n + 1) (S.obj (op (n + c))) ≫ (e n).hom ≫ ι.hom.app (op n) = j.app (op (n + c)) ≫ F.obj.map (homOfLE (Nat.le_add_right n c)).op) ∧ ι ≫ α = 0 ∧ (∀ (T : CoherentFormalModule X I) (γ : T ⟶ F), γ ≫ α = 0 → ∃! δ : T ⟶ K, δ ≫ ι = γ)",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "J1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }
