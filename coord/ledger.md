@@ -3231,3 +3231,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 01:28 UTC L: E1 finite-flat-restriction-projective FIX fe7aa41fe (R-ffr0125; wrongly filed Mathlib leaf turned into a three-step proof); lem-pc-module-finite-presentation-transitive (Module.FinitePresentation.trans, FinitePresentation.lean:323) and lem-pc-module-flat-transitive (Module.Flat.trans, Flat/Stability.lean:62) set to mathlib by L.
 - 01:28 UTC L: deleted stale branch deliver/F1/lem-pc-derived-tensor-localization-cohomology (claim now G1's); notice quoting the pruned return in coord/returns/F1.md.
 - 01:28 L: merged deliver/H1/lem-pur-kinjective-homotopy-limit-vanishing (reviewer FIX; first push; new nodes: 1)
+- 01:29 UTC L: H1 kinjective-homotopy-limit-vanishing FIX 596ea7567 (R-hlv0127; new ML-over-ordinals node).
