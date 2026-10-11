@@ -219,4 +219,40 @@ theorem finiteDimensional_H_of_isClosedImmersion [Finite n] (i : X ⟶ ℙ(n; Sp
   exact Module.Finite.equiv (R := k) (M := ((pushforward i).obj ℱ).H q)
     (e.app ⟨ℱ, inferInstance⟩).toLinearEquiv.symm
 
+/-- The cohomology groups of every coherent sheaf on the `k`-scheme `X` are finite-dimensional.
+This holds for closed subschemes of projective space
+(`AlgebraicGeometry.Scheme.Modules.FiniteDimensionalH.of_isClosedImmersion`), in particular for a
+`k`-scheme carrying an ample module (`AlgebraicGeometry.IsAmple.finiteDimensionalH`), and for every
+proper `k`-scheme. -/
+class FiniteDimensionalH (k : Type u) [Field k] (X : Scheme.{u}) [X.Over (Spec (.of k))] : Prop
+    where
+  finiteDimensional_H (ℱ : X.Modules) [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) ℱ]
+    [SheafOfModules.IsFinitePresentation (R := X.ringCatSheaf) ℱ] (q : ℕ) :
+    FiniteDimensional k (ℱ.H q)
+
+/-- A closed subscheme of `ℙᵈ_k` has finite-dimensional coherent cohomology. -/
+theorem FiniteDimensionalH.of_isClosedImmersion [Finite n] (i : X ⟶ ℙ(n; Spec (.of k)))
+    [IsClosedImmersion i] [i.IsOver (Spec (.of k))] : FiniteDimensionalH k X :=
+  ⟨fun ℱ _ _ q ↦ finiteDimensional_H_of_isClosedImmersion k i ℱ q⟩
+
 end AlgebraicGeometry.Scheme.Modules
+
+namespace AlgebraicGeometry
+
+/-- A `k`-scheme carrying a very ample module, that is, a closed subscheme of `ℙᵈ_k`, has
+finite-dimensional coherent cohomology. -/
+theorem IsVeryAmple.finiteDimensionalH {X : Scheme.{u}} {k : Type u} [Field k]
+    [X.Over (Spec (.of k))] {M : X.Modules} (h : IsVeryAmple (X ↘ Spec (.of k)) M) :
+    Scheme.Modules.FiniteDimensionalH k X := by
+  obtain ⟨n, i, _, _, hi, -⟩ := h
+  have : i.IsOver (Spec (.of k)) := ⟨hi⟩
+  exact .of_isClosedImmersion k i
+
+/-- A `k`-scheme carrying an ample module, that is, a closed subscheme of `ℙᵈ_k`, has
+finite-dimensional coherent cohomology. -/
+theorem IsAmple.finiteDimensionalH {X : Scheme.{u}} {k : Type u} [Field k]
+    [X.Over (Spec (.of k))] {M : X.Modules} (h : IsAmple (X ↘ Spec (.of k)) M) :
+    Scheme.Modules.FiniteDimensionalH k X :=
+  h.2.choose_spec.2.finiteDimensionalH
+
+end AlgebraicGeometry

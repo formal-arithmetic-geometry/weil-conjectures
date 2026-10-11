@@ -116,9 +116,9 @@ theorem ProjectiveSpace.nonempty_cechComplex_twist_iso_monomialCechComplex (k : 
 
 /-- **Cohomology vanishes above the number of projective coordinates.** For a commutative
 ring `A`, `n` with `Nat.card n = d + 1` and a quasi-coherent module `ℱ` on `ℙᵈ_A = ℙ(n; Spec A)`,
-`H^q(ℙᵈ_A, ℱ) = 0` for `q > d`: `ℙᵈ_A` is separated and covered by the `d + 1` affine standard opens, so this is
-`AlgebraicGeometry.Scheme.Modules.subsingleton_H_of_card_le` (a Mayer-Vietoris induction on the
-number of affine opens).
+`H^q(ℙᵈ_A, ℱ) = 0` for `q > d`: `ℙᵈ_A` is separated and covered by the `d + 1` affine standard
+opens, so this is `AlgebraicGeometry.Scheme.Modules.subsingleton_H_of_card_le` (a
+Mayer-Vietoris induction on the number of affine opens).
 
 (blueprint: `lem-pc-projective-space-cohomology-bound`) -/
 theorem ProjectiveSpace.subsingleton_H_of_lt (A : Type u) [CommRing A] [Finite n] {d : ℕ}
