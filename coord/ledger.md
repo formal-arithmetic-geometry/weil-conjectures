@@ -3923,3 +3923,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 08:59 L: merged deliver/J1/lem-weil-pbc-associated-module-hom (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.AssociatedModuleHom AlgebraicGeometry.associatedModuleHom_bijective)
 - 09:00 L: merged deliver/M1/lem-weil-pbc-closed-point-dimension-local-ring (stage 2; reviewer PASS; first push; Sheaf.RingTheory.ClosedPointDimensionLocalRing AlgebraicGeometry.topologicalKrullDimAt_eq_ringKrullDim_localizationAtMaximal)
 - 09:01 L: merged deliver/C1/lem-sc-picard-h1-multiple-locus (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.PicardH1MultipleLocus AlgebraicGeometry.Scheme.picard_h1_multiple_locus)
+- 09:01 L: merged deliver/H1/lem-weil-pbc-chow-finite-type (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.ChowFiniteType AlgebraicGeometry.exists_chow_finite_type)
