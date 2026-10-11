@@ -130,5 +130,24 @@
   "group": "C1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of C1; spot-checked by L: L: 5 steps (base change of the covering, compatible morphism to W, representable descent, over S, base change equals beta) read; new Mathlib leaf for pullback-stability of fpqc coverings"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FpqcMorphismsDescend",
+  "declaration": "AlgebraicGeometry.Scheme.fpqc_morphisms_descend",
+  "file": "lean/Sheaf/AlgebraicGeometry/FpqcMorphismsDescend.lean",
+  "statement": "theorem fpqc_morphisms_descend (f : X ⟶ S) (hfpqc : Presieve.singleton f ∈ Scheme.fpqcPrecoverage S) (pU : U ⟶ S) (pW : W ⟶ S) : Function.Bijective (fun (α : {α : U ⟶ W // α ≫ pW = pU}) => ⟨baseChangeMap pU pW f α α.property.symm, baseChangeMap_compatible pU pW f α α.property.symm⟩ : {α : U ⟶ W // α ≫ pW = pU} → {β : pullback pU f ⟶ pullback pW f // ∃ hβ : β ≫ pullback.snd pW f = pullback.snd pU f, pullback.map (pullback.snd pU f) (pullback.fst f f) (pullback.snd pW f) (pullback.fst f f) β (𝟙 _) (𝟙 _) (by simpa using hβ.symm) (by simp) ≫ (canonicalDescentIso pW f).hom = (canonicalDescentIso pU f).hom ≫ pullback.map (pullback.snd pU f) (pullback.snd f f) (pullback.snd pW f) (pullback.snd f f) β (𝟙 _) (𝟙 _) (by simpa using hβ.symm) (by simp)})",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-fmd0822"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-fmd0822",
+  "group": "E1",
+  "result": "fix",
+  "note": "f, singleton f ∈ fpqcPrecoverage S, pU pW; domain α ≫ pW = pU; codomain β over X (≫ snd) with pr₀*β ≫ can_W = can_U ≫ pr₁*β via pullback.map; Function.Bijective; can now the explicit canonical iso through U ×ₛ X₂"
  }
 }
