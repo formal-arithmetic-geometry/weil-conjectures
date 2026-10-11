@@ -561,7 +561,8 @@ the identification `Rf_* = Rf_!` for proper `f`, composition of exceptional dire
 `!`-base change, the projection formula, the monoidal structure of the pullback `Lf^*`, braided
 for `DerivedBraiding`, and the invertibility of two canonical maps: the biduality map
 `K ⟶ D_X D_X K` on `Dᵇctf`, and the Künneth-Verdier map `kunnethVerdierMapOf`. The
-identity isomorphism `R(𝟙 X)_! ≃ 𝟭` is tied to `lowerShriekComp` by unit axioms;
+identity isomorphism `R(𝟙 X)_! ≃ 𝟭` is tied to `lowerShriekComp` by unit axioms, and
+`lowerShriekComp` is associative;
 `properComparison`, `dualizingBase`, `dualizingComp` and the unit of `Lf^*` are tied to the
 identity isomorphisms at `f = 𝟙`; `properComparison` and `dualizingComp`
 are compatible with composition, and `baseChange` with vertical pasting.
@@ -635,6 +636,36 @@ structure GeometricOperations (s : Scheme.{u}) extends GeometricCoefficients A s
     lowerShriekComp f (𝟙 Y) hf hY hf' =
       Functor.isoWhiskerLeft _ (lowerShriekId Y hY) ≪≫ Functor.rightUnitor _ ≪≫
         ctfLowerShriekCongr (Category.comp_id f).symm _ _
+  /-- associativity of the composition isomorphisms of the exceptional direct images: for
+  `f : X ⟶ Y`, `g : Y ⟶ Z` and `h : Z ⟶ W`, the two isomorphisms
+  `Rh_! Rg_! Rf_! ≃ R((f ≫ g) ≫ h)_!` built from `lowerShriekComp` agree at every object of
+  `Dᵇctf(X)`, that is, the square
+
+  ```
+    Rh_! Rg_! Rf_! ──Rh_! (lowerShriekComp f g)──▶ Rh_! R(f ≫ g)_!
+          │                                              │
+    lowerShriekComp g h                     lowerShriekComp (f ≫ g) h
+          ▼                                              ▼
+    R(g ≫ h)_! Rf_! ──lowerShriekComp f (g ≫ h)──▶ R(f ≫ g ≫ h)_! = R((f ≫ g) ≫ h)_!
+  ```
+
+  commutes (blueprint `def-trf-global-operator`, item 3: the composition law is an
+  isomorphism of functors with the associativity compatibility). -/
+  lowerShriekComp_assoc {X Y Z W : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) (h : Z ⟶ W)
+      (hf : IsGeometricHom s f) (hg : IsGeometricHom s g) (hh : IsGeometricHom s h)
+      (hfg : IsGeometricHom s (f ≫ g)) (hgh : IsGeometricHom s (g ≫ h))
+      (hfgh : IsGeometricHom s (f ≫ g ≫ h)) (hfgh' : IsGeometricHom s ((f ≫ g) ≫ h))
+      [HasCompactification f] [HasCompactification g] [HasCompactification h]
+      [HasCompactification (f ≫ g)] [HasCompactification (g ≫ h)]
+      [HasCompactification (f ≫ g ≫ h)] [HasCompactification ((f ≫ g) ≫ h)] (K : Ctf A X) :
+    (rightDerivedLowerShriek A h).map ((lowerShriekComp f g hf hg hfg).hom.app K).hom ≫
+        ((lowerShriekComp (f ≫ g) h hfg hh hfgh').hom.app K).hom =
+      ((lowerShriekComp g h hg hh hgh).hom.app
+          ((toGeometricCoefficients.lowerShriekCtf f hf).obj K)).hom ≫
+        ((lowerShriekComp f (g ≫ h) hf hgh hfgh).hom.app K).hom ≫
+        ((ctfLowerShriekCongr (Category.assoc f g h).symm
+          (fun _ hK ↦ toGeometricCoefficients.ctf_lowerShriek _ hfgh hK)
+          (fun _ hK ↦ toGeometricCoefficients.ctf_lowerShriek _ hfgh' hK)).hom.app K).hom
   /-- for `f = 𝟙 X`, `properComparison` is the composite
   `R(𝟙 X)_! ≃ 𝟭 ≃ R(𝟙 X)_*` of `lowerShriekId` and the identity isomorphism of `R(𝟙 X)_*`,
   the conjugate of `leftDerivedUpperStarId`, at every object of `Dᵇctf(X)`. -/
