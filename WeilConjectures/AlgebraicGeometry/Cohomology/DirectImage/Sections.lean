@@ -230,6 +230,69 @@ lemma sectionsHigherDirectImageZeroAddEquiv_naturality (𝒢 : X.Modules)
 
 end Comparison
 
+section RightDerivedGlobalSections
+
+variable (X) in
+/-- The global sections functor `X.Modules ⥤ Ab`. -/
+noncomputable def globalSectionsFunctor : X.Modules ⥤ Ab.{u} :=
+  Modules.toPresheaf X ⋙ (CategoryTheory.evaluation _ _).obj (Opposite.op ⊤)
+
+instance : (globalSectionsFunctor X).Additive where
+  map_add := rfl
+
+instance : PreservesFiniteLimits (globalSectionsFunctor X) :=
+  have : PreservesFiniteLimits (SheafOfModules.evaluation X.ringCatSheaf (Opposite.op ⊤) ⋙
+      forget₂ (ModuleCat Γ(X, ⊤)) Ab) := comp_preservesFiniteLimits _ _
+  preservesFiniteLimits_of_natIso (Iso.refl _ :
+    SheafOfModules.evaluation X.ringCatSheaf (Opposite.op ⊤) ⋙ forget₂ (ModuleCat Γ(X, ⊤)) Ab ≅
+      globalSectionsFunctor X)
+
+/-- In the complex of global sections of `K`, the image of `Γ(Kⁿ)` among the cocycles of degree
+`n + 1` is the subgroup of coboundaries. -/
+lemma range_abToCycles_globalSections (K : CochainComplex X.Modules ℕ) (n : ℕ) :
+    AddMonoidHom.range
+        ((((globalSectionsFunctor X).mapHomologicalComplex _).obj K).sc' n (n + 1)
+          (n + 2)).abToCycles = sectionsBoundaries K n := by
+  ext ⟨x, hx⟩
+  simp only [AddMonoidHom.mem_range, AddSubgroup.mem_addSubgroupOf]
+  constructor
+  · rintro ⟨y, hy⟩
+    exact ⟨y, congrArg Subtype.val hy⟩
+  · rintro ⟨y, hy⟩
+    exact ⟨y, Subtype.ext hy⟩
+
+variable [HasInjectiveResolutions X.Modules]
+
+/-- **Sheaf cohomology is the right derived functor of global sections**:
+`R^{n+1} Γ(X, ℱ) ≅ H^{n+1}(X, ℱ)`, computed with an injective resolution `I` of `ℱ`. Both sides
+are the cohomology of the complex `Γ(X, I)`, the right side because injective `𝒪_X`-modules
+are acyclic. -/
+noncomputable def rightDerivedGlobalSectionsSuccAddEquiv (I : InjectiveResolution ℱ) (n : ℕ) :
+    ((globalSectionsFunctor X).rightDerived (n + 1)).obj ℱ ≃+ ℱ.H (n + 1) :=
+  let C := ((globalSectionsFunctor X).mapHomologicalComplex _).obj I.cocomplex
+  ((I.isoRightDerivedObj (globalSectionsFunctor X) (n + 1)) ≪≫
+    C.homologyIsoSc' n (n + 1) (n + 2) (by simp) (by simp) ≪≫
+    (C.sc' n (n + 1) (n + 2)).abHomologyIso).addCommGroupIsoToAddEquiv.trans <|
+  (QuotientAddGroup.quotientAddEquivOfEq
+    (range_abToCycles_globalSections I.cocomplex n)).trans <|
+  (cyclesQuotientAddEquiv I.cocomplex n).symm.trans <|
+  (H.cyclesZeroSuccAddEquiv I.cocomplex I.cocomplex_exactAt_succ
+    (fun _ m ↦ subsingleton_H_of_injective _ m) n).symm.trans <|
+  H.mapAddEquiv I.isoCyclesZero.symm (n + 1)
+
+
+/-- **Sheaf cohomology is the right derived functor of global sections**: for every `q`,
+`R^q Γ(X, ℱ) ≅ H^q(X, ℱ)` (in degree `0` both sides are `Γ(X, ℱ)`). -/
+theorem nonempty_rightDerived_globalSections_addEquiv_H (q : ℕ) :
+    Nonempty (((globalSectionsFunctor X).rightDerived q).obj ℱ ≃+ ℱ.H q) := by
+  cases q with
+  | zero =>
+    exact ⟨((globalSectionsFunctor X).rightDerivedZeroIsoSelf.app ℱ).addCommGroupIsoToAddEquiv.trans
+      (H.zeroLinearEquiv ℱ).symm.toAddEquiv⟩
+  | succ n => exact ⟨rightDerivedGlobalSectionsSuccAddEquiv ℱ (injectiveResolution ℱ) n⟩
+
+end RightDerivedGlobalSections
+
 /-- **The sections of the higher direct images over an affine base, naturally.** Over an affine
 base, for `f` quasi-compact and separated, the global sections of `R^q f_* ℱ` are the sheaf
 cohomology `H^q(X, ℱ)`, by additive isomorphisms natural in the quasi-coherent module `ℱ`.
