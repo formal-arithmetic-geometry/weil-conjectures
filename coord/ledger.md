@@ -4812,3 +4812,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 13:50 L: merged deliver/J1/lem-pc-perfect-descend-morphisms (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.PerfectDescendMorphisms AlgebraicGeometry.perfect_descend_morphisms)
 - 13:51 L: merged deliver/G1/lem-weil-pbc-quotient-by-power-torsion-no-torsion (stage 2; reviewer PASS; first push; Sheaf.Algebra.Module.QuotientPrimaryComponentNoTorsion Ideal.eq_zero_of_annihilated_quotient_primaryComponent)
 - 13:51 L: merged deliver/G1/lem-pc-perfect-complex-descent (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.PerfectComplexDescent AlgebraicGeometry.perfect_complex_descends; statement correction reverted (statement, statement_change))
+- 13:51 L: merged deliver/K1/lem-sc-perfect-finite-free-residue-model (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.PerfectFiniteFreeResidueModel AlgebraicGeometry.Scheme.exists_finiteFreeResidueModel)

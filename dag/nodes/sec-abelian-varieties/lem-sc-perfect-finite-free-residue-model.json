@@ -21,7 +21,10 @@
  "stmt_deps": [
   "def-pc-scheme",
   "def-pc-perfect-complex",
-  "def-pc-derived-category"
+  "def-pc-derived-category",
+  "def-pc-derived-pullback",
+  "def-weil-pbc-module-residue-fiber",
+  "def-weil-residue-field"
  ],
  "proof": [
   {
@@ -144,5 +147,24 @@
   "group": "G1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-pfr0052 (reviewer sub-agent of L); spot-checked: Read packet whole: item vs Tag 0BCD agrees (d_i via Li_x^*E, affine U, terms O^{d_i}); new nodes vs 066W and 0BCC true, no duplicates (grep 066W/0BCC/pull-perfect/residue-model; lem-sc-affine-pseudo-coherent-lift is 08EE, different); citers jump-loci/degree-zero-fibre-criterion/cut-complex use the stated clauses (d_i=0 for i<0 gives model in degrees >=0). FIX more, RETURN less: (1) C4/C7 Step 1: lem-pod-perfect-point-complex-field is the Poincare-duality point-category lemma (finite coefficient point), not D(kappa(p)), and was not in uses; dropped as tool use, finite-dimensionality folded into Step 1 as elementary from perfectness over a field; Step 1 now picks Spec A inside the strictly perfect locus (def-pc-perfect-complex, 08EB) so E is a bounded finite projective complex P. (2) C1 Step 3: colimit-descent gives only a complex Q over A_f with Q tensor A_p = F, not that Q represents E near x; added lem-pc-affine-perfect-hom-colimit (Tag 09RE affine, generic tool) to spread the iso F=P_p and its inverse to some A_h, then free-cover with ranks d_i; Step 2 pseudo-coherence made explicit (finite projective over local = free, 00NZ). (3) B3: lem-sc-perfect-local-pseudocoherent-free-model had empty stmt_deps though citing def-pc-derived-category, def-pur-pseudo-coherent-complex; added. G1's second reading missed (1) and (2).; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.PerfectFiniteFreeResidueModel",
+  "declaration": "AlgebraicGeometry.Scheme.exists_finiteFreeResidueModel",
+  "file": "lean/Sheaf/AlgebraicGeometry/PerfectFiniteFreeResidueModel.lean",
+  "statement": "theorem exists_finiteFreeResidueModel (X : Scheme.{u}) [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] [∀ U : X.Opens, HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))] [∀ x : X, HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings (Spec (X.residueField x)).toRingedSpace))] (E : schemeDerivedCategory X) (hE : IsPerfect X E) (x : X) : (∀ i : ℤ, Module.Finite (X.residueField x) (derivedFiberCohomology X E i x)) ∧ (∃ a b : ℤ, ∀ i : ℤ, i < a ∨ b < i → derivedFiberBetti X E i x = 0) ∧ ∃ U : X.Opens, x ∈ U ∧ IsAffineOpen U ∧ ∃ K : CochainComplex (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)) ℤ, (∃ a b : ℤ, ∀ i : ℤ, i < a ∨ b < i → IsZero (K.X i)) ∧ (∀ i : ℤ, Nonempty (K.X i ≅ SheafOfModules.free (R := (moduleRings X.toRingedSpace).over U) (ULift.{u} (Fin (derivedFiberBetti X E i x))))) ∧ Nonempty ((SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) U).mapDerivedCategory.obj E ≅ DerivedCategory.Q.obj K)",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-pfr1348"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-pfr1348",
+  "group": "K1",
+  "result": "fix",
+  "note": "X scheme, E : schemeDerivedCategory with IsPerfect, x : X; d_i = derivedFiberBetti X E i x (H1 def-sc-derived-fiber-betti) replacing the second residueFiber-on-Spec-kappa form; finiteness via derivedFiberCohomology; finite support; affine U containing x; bounded K with terms free (ULift (Fin d_i)); overFunctor mapDerivedCategory iso to Q.obj K; all binders used and tied; compiled clean"
  }
 }
