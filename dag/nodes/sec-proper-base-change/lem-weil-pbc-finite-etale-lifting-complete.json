@@ -240,5 +240,24 @@
   "by": "L",
   "result": "pass",
   "note": "Statement made precise and the redundant henselian hypothesis dropped (the proof never uses it; complete pairs are henselian anyway, 0ALJ); eight steps along the complete Noetherian paragraph of Stacks 0GS2/0A48: thickenings are universal homeomorphisms (new node lem-weil-pbc-surjective-closed-immersion-universal-homeomorphism; Lean instance of UniversalHomeomorphism.lean:111 attached, sorry-free, stated for the source repository's definition integral + universally injective + surjective, which the node records alongside the topological one); lifting V to a compatible system via the closed lemma-weil-pbc-universal-homeomorphism-site-equivalence (04DZ, generalizing 039R); finiteness along thickenings (new node lem-weil-pbc-thickening-finite-cartesian, 09ZW (8)); properness of V; algebraization (new node lem-weil-pbc-algebraize-finite-over-proper, Grothendieck existence for finite morphisms, 09ZT); etaleness along U_0 (new node lem-weil-pbc-etale-infinitesimal-neighbourhoods, 0A43 (2)); W = U via I in the Jacobson radical (new Mathlib leaf lem-weil-pbc-adic-complete-jacobson-radical: IsAdicComplete.le_jacobson_bot AdicCompletion/Basic.lean:870, verified) and properness, correcting the parent's 'proper over the local base'; conclusion. New definition leaf def-weil-pbc-adically-complete-ring (IsAdicComplete, Basic.lean:55, @[stacks 0317], verified); it overlaps def-weil-pbc-adic-completion created today by the approximation worker (stage-3 merge candidate). Cited from outside the route without flags: lem-weil-pbc-proper-base-change, pqf-lem-locnoeth-lft, pqf-def-locnoeth, the sk-def-smooth thickening definitions."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteEtaleLiftingComplete",
+  "declaration": "AlgebraicGeometry.Scheme.exists_finiteEtale_lift_of_isAdicComplete",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteEtaleLiftingComplete.lean",
+  "statement": "theorem Scheme.exists_finiteEtale_lift_of_isAdicComplete {A : Type u} [CommRing A] [IsNoetherianRing A] (I : Ideal A) [IsAdicComplete I A] {Y : Scheme.{u}} (f : Y ⟶ Spec (.of A)) [IsProper f] (V : (@IsFinite ⊓ @Etale : MorphismProperty Scheme.{u}).Over ⊤ (pullback f (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I))))) : ∃ U : (@IsFinite ⊓ @Etale : MorphismProperty Scheme.{u}).Over ⊤ Y, Nonempty (Over.mk (pullback.snd U.hom (pullback.fst f (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I))))) ≅ Over.mk V.hom)",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-flc1015"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-flc1015",
+  "group": "M1",
+  "result": "fix",
+  "note": "A Noetherian (IsNoetherianRing), I-adically complete (IsAdicComplete I A, Hausdorff+precomplete), f proper over Spec A, Y0 = pullback f (Spec.map (Quotient.mk I)), V in (IsFinite ⊓ Etale).Over ⊤ Y0, exists U in (IsFinite ⊓ Etale).Over ⊤ Y with Over.mk (pullback.snd U.hom (pullback.fst f j)) ≅ Over.mk V.hom in Over Y0; no henselian/G-ring binder; I=0, I=A, empty Y/V allowed; restated in K1 bf4691187 bundled spelling"
  }
 }
