@@ -1,11 +1,11 @@
 # Work queue
 
-965 items; claim with `tools/claim.py next <group> [--stage N]`.
+962 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (965)
+## Stage 2: nodes to state (962)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -14,18 +14,15 @@
 | `def-weil-pbc-ample-invertible-module` | 1 | state |
 | `def-weil-pbc-etale-sheaves` | 1 | state |
 | `def-weil-pbc-formal-glueing-data` | 1 | state |
-| `lem-exc-discrete-modules-abelian` | 1 | state |
+| `lem-exc-cochains-derived-invariants` | 1 | state |
+| `lem-exc-continuous-cochains-short-exact` | 1 | state |
 | `lem-exc-etale-sheaves-gsets-point` | 1 | state |
-| `lem-exc-rg-discrete-modules-functorial-injective-embeddings` | 1 | state |
-| `lem-exc-rg-open-stabilizer-adjoint` | 1 | state |
-| `lem-fin-etale-normal-components` | 1 | state |
 | `lem-fin-normal-generic-constant` | 1 | state |
 | `lem-galois-fpqc-pullback-canonical-iso` | 1 | state |
 | `lem-pc-balanced-derived-tensor-model` | 1 | state |
 | `lem-pc-derived-adjoint-functors` | 1 | state |
 | `lem-pc-derived-limit-milnor-sequence` | 1 | state |
 | `lem-pc-derived-tensor-flat-second-localization` | 1 | state |
-| `lem-pc-finite-projective-tor-acyclic` | 1 | state |
 | `lem-pc-flat-tensor-complex-cohom` | 1 | state |
 | `lem-pc-fppf-affine-sheafification-restriction` | 1 | state |
 | `lem-pc-kflat-pullback-preservation` | 1 | state |
@@ -47,7 +44,6 @@
 | `lem-pod-etale-stalk-tensor-scalar` | 1 | state |
 | `lem-pod-lisse-tensor-and-scalar-extension` | 1 | state |
 | `lem-pur-kinjective-degreewise-existence` | 1 | state |
-| `lem-pur-kinjective-functorial-injective` | 1 | state |
 | `lem-pur-kinjective-homotopy-limit-vanishing` | 1 | state |
 | `lem-pur-kinjective-set-iso-classes-bounded-size` | 1 | state |
 | `lem-pur-left-derived-from-kflat-class` | 1 | state |
@@ -945,6 +941,7 @@
 | `def-pc-essentially-constant-ind-diagram` | 2 | state |
 | `def-sc-group-scheme` | 2 | state |
 | `def-sp-convergence` | 2 | state |
+| `lem-exc-coinduced-discrete-embedding` | 2 | state |
 | `lem-kun-etale-lfp` | 2 | state |
 | `lem-pc-finite-projective-cokernel-localization` | 2 | state |
 | `lem-pc-ring-pseudo-coherent-summand` | 2 | state |
@@ -975,7 +972,7 @@
 | `lem-sc-normalization-properties` | 3 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 1077 nodes that wait for a statement dependency, 40 nodes that wait for stage 1.
+Not open yet: 1074 nodes that wait for a statement dependency, 40 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
