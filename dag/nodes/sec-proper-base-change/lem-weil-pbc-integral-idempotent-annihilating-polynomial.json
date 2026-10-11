@@ -144,5 +144,23 @@
   "item": "lem-weil-pbc-integral-idempotent-annihilating-polynomial",
   "worker": "stage1",
   "summary": "Read More on Algebra 09XG (more-algebra.tex:1959-1975) and Algebra 00H5 (algebra.tex:8421) with the definition of 'integral over I'. Split along Stacks' three sentences: z=b^2-b in IB (elementary); 00H5 gives a monic g with non-leading coefficients in I and g(z)=0 (new Mathlib leaf lem-weil-pbc-integral-extended-ideal-element-monic = Polynomial.exists_monic_aeval_eq_zero_forall_mem_of_mem_map, @[stacks 00H5], source read); f=g(x^2-x) is monic of degree 2d, f(b)=0, f≡x^d(x-1)^d mod I (elementary, Mathlib tools named). Added the case deg g=0 (then B=0; replace g by xg) which Stacks omits, to get d≥1. lem-weil-pbc-integral-algebra-ideal-in-radical is not 00H5 (it is about the Jacobson radical), so a new leaf was needed. No 09XG in Mathlib or in slopmaster2 (grep)."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.IntegralIdempotentAnnihilatingPolynomial",
+  "declaration": "Polynomial.exists_monic_aeval_eq_zero_map_eq_of_isIdempotentElem_quotient",
+  "file": "lean/Sheaf/RingTheory/IntegralIdempotentAnnihilatingPolynomial.lean",
+  "statement": "theorem exists_monic_aeval_eq_zero_map_eq_of_isIdempotentElem_quotient {A : Type u} {B : Type v} [CommRing A] [CommRing B] [Algebra A B] [Algebra.IsIntegral A B] (I : Ideal A) (b : B) (hb : IsIdempotentElem (Ideal.Quotient.mk (I.map (algebraMap A B)) b)) : ∃ (d : ℕ) (f : A[X]), 1 ≤ d ∧ f.Monic ∧ aeval b f = 0 ∧ f.map (Ideal.Quotient.mk I) = (X : (A ⧸ I)[X]) ^ d * (X - 1) ^ d",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-iap1057",
+  "group": "G1",
+  "result": "pass",
+  "note": "CommRing A,B + Algebra A B = ring map; Algebra.IsIntegral A B = B integral; hb IsIdempotentElem of Ideal.Quotient.mk (I.map algebraMap) b = image in B/IB idempotent; ∃ d≥1, f Monic, aeval b f = 0, f.map (Quotient.mk I) = X^d*(X-1)^d as polynomial equality; edge cases zero rings, I=⊤, d=0 excluded; no hollow hyps, no universe quantification"
  }
 }

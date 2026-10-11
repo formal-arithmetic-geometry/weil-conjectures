@@ -4348,3 +4348,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 10:57 L: merged deliver/E1/lem-weil-pbc-immersion-fibre-degree-one (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.ImmersionFiberDegreeOne AlgebraicGeometry.Scheme.Hom.immersion_fiber_degree_one)
 - 10:57 L: merged deliver/M1/lem-weil-pbc-injective-resolution-ses (stage 2; reviewer PASS; first push; Sheaf.CategoryTheory.Abelian.HorseshoeResolutions CategoryTheory.InjectiveResolution.exists_horseshoe_resolutions)
 - 10:57 L: merged deliver/J1/lem-weil-pbc-henselian-pair-approximation (stage 2; reviewer FIX; first push; Sheaf.RingTheory.HenselianPairApproximation henselian_pair_approximation)
+- 10:57 L: merged deliver/G1/lem-weil-pbc-integral-idempotent-annihilating-polynomial (stage 2; reviewer PASS; first push; Sheaf.RingTheory.IntegralIdempotentAnnihilatingPolynomial Polynomial.exists_monic_aeval_eq_zero_map_eq_of_isIdempotentElem_quotient)
