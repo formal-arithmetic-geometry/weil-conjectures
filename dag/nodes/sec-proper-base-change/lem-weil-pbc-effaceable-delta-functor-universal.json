@@ -252,5 +252,23 @@
   "item": "lem-weil-pbc-effaceable-delta-functor-universal",
   "worker": "stage1",
   "summary": "Statement checked against Stacks Homology Lemma 010T (homology.tex l.2705): unchanged ('injective morphism' = monomorphism, Lemma 010C). Proof written in 11 steps following 010T: effacing sequences exist (cokernel of the effacing mono), delta_F of an effacing sequence is epi and a cokernel of F^n(g), t^{n+1}_A defined by the cokernel property (Stacks' square), recursion and uniqueness by cancelling the epimorphism delta_F. The parts Stacks omits are written out (Steps 4-9): a comparison lemma along a morphism of effacing sequences, the direct-sum device (w = i1 u + i2 u' a, effacing by additivity of F^{n+1}) giving independence of the choice and naturality of t^{n+1}, and the pushout device (B' with the effacing mono u, j mono by the pushout of a mono) mapping every short exact sequence to an effacing one with the same left object, giving the delta-compatibility for ALL short exact sequences. No elements or Freyd-Mitchell: only cokernels, epis, biproducts, pushouts. New node: lem-weil-pbc-abelian-exact-epi-cokernel (Mathlib leaf, one declaration per clause: ShortComplex.Exact.gIsCokernel, Exact.epi_f, cokernelSequence_exact + ShortExact.mk', Abelian.hasPushouts). Mathlib: no delta-functors (three ways); Pseudoelement recorded, unused. Source repository: no effaceable/universal delta-functor declaration."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.EffaceableDeltaFunctorUniversal",
+  "declaration": "CategoryTheory.effaceable_deltaFunctor_isUniversal",
+  "file": "lean/Sheaf/CategoryTheory/EffaceableDeltaFunctorUniversal.lean",
+  "statement": "theorem effaceable_deltaFunctor_isUniversal {A : Type u₁} {B : Type u₂} [Category.{v₁} A] [Abelian A] [Category.{v₂} B] [Abelian B] (F : CohomologicalDeltaFunctor A B) (hF : ∀ (n : ℕ), 0 < n → ∀ (X : A), ∃ (Y : A) (u : X ⟶ Y), Mono u ∧ (F.F n).map u = 0) : F.IsUniversal",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-edu0953",
+  "group": "M1",
+  "result": "pass",
+  "note": "A,B abelian = binders+[Abelian]; F = CohomologicalDeltaFunctor (def-weil-pbc-delta-functor); hF: n>0, all X, ∃ Y, mono u, (F.F n).map u = 0 matches the node's effacement; conclusion = recorded IsUniversal (∀ G, t : F⁰⟶G⁰, ∃! Hom with app 0 = t); no duplicate on sheaf-dag"
  }
 }
