@@ -313,4 +313,26 @@ lemma shComp'_id_right (j : X ⟶ Y) [IsOpenImmersion j] :
 
 end ExtensionByZeroUnit
 
+
+section Restriction
+
+variable {U' U Z' Z : Scheme.{u}}
+
+/-- The base change map of the extension by zero becomes an isomorphism after restriction to the
+open `l : U' ⟶ Z'`, when the extensions by zero along `l` and `r` are fully faithful. -/
+lemma isIso_map_baseChange_app (t : U' ⟶ U) (l : U' ⟶ Z') (r : U ⟶ Z) (b : Z' ⟶ Z)
+    [IsOpenImmersion l] [IsOpenImmersion r] (w : t ≫ r = l ≫ b) [IsIso (F.shAdj r).unit]
+    [IsIso (F.shAdj l).unit] (M : F.obj U) :
+    IsIso ((F.pb l).map ((F.baseChange t l r b w).natTrans.app M)) := by
+  have h := unit_mateEquiv_symm (F.shAdj r) (F.shAdj l) (F.sqIso t l r b w).hom M
+  have h' : (F.pb l).map ((F.baseChange t l r b w).natTrans.app M) =
+      inv ((F.shAdj l).unit.app _) ≫ (F.pb t).map ((F.shAdj r).unit.app M) ≫
+        (F.sqIso t l r b w).hom.app _ := by
+    rw [IsIso.eq_inv_comp]
+    exact h.symm
+  rw [h']
+  infer_instance
+
+end Restriction
+
 end AlgebraicGeometry.CompactSupportFormalism
