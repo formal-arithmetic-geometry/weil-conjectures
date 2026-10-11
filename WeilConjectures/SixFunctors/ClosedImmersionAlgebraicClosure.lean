@@ -170,7 +170,8 @@ theorem boundedConstructibleRational_rationalBaseChangeTransition (Y : Scheme.{u
       (integralBaseChangeTransition Y h ⋙
         Rationalization.Q (nonZeroDivisors (Shrink.{u + 1} (integers l L.field)))
           (DerivedCategoryDerivedCompleteIntegral Y.smallEtaleTopology l L.field))
-      (rationalBaseChangeTransition Y h)).app K').symm ≪≫ (rationalBaseChangeTransition Y h).mapIso e⟩⟩
+      (rationalBaseChangeTransition Y h)).app K').symm ≪≫
+        (rationalBaseChangeTransition Y h).mapIso e⟩⟩
 
 /-- The directed system of the categories `Dᵇc(Y, E)`, `E ⊆ ℚ̄_ℓ` finite over `ℚ_ℓ`, with the
 transition functors `K ↦ K ⊗_E L` (`boundedConstructibleRational_rationalBaseChangeTransition`). -/
