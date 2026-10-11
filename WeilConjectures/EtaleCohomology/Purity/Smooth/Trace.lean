@@ -354,6 +354,31 @@ theorem smoothTrace_baseChange {d : ℕ} (sq : IsPullback g f' f v)
 
 end BaseChange
 
+section DualizingComplex
+
+/-- Blueprint `cor-pur-finite-stage-smooth-dualizing-complex`: Finite-stage smooth dualizing
+complex
+
+Let `a : X ⟶ Spec k` be smooth separated, locally of finite type, of pure dimension `d`. The
+dualizing complex `ω_X = Ra^! Λ` has an identification `γ : Λ_X(d)[2d] = La^* Λ(d)[2d] ≅ ω_X`
+coming from finite-coefficient smooth purity
+(`AlgebraicGeometry.Etale.nonempty_iso_dualizingComplex_twistShift`), and under it the counit
+`Ra_! ω_X ⟶ Λ` of `Ra_! ⊣ Ra^!` is the smooth trace `Tr^sm_{a,Λ} : RΓ_c(X, Λ(d)[2d]) ⟶ Λ`. -/
+theorem exists_counit_eq_smoothTrace [HasTateTwist.IsNormalized Λ] {k : Type u} [Field k]
+    {X : Scheme.{u}} {d : ℕ} (a : X ⟶ Spec (.of k)) [IsSeparated a] [LocallyOfFiniteType a]
+    [SmoothOfRelativeDimension d a] [HasCompactification a] [HasInvertibleExponent Λ X] :
+    ∃ γ : (twistShift Λ X d).obj
+        ((L((a)^*[ModuleCat.{u + 1} Λ])).obj (constantComplex Λ (Spec (.of k)))) ≅
+      (R(a)^![ModuleCat.{u + 1} Λ]).obj (constantComplex Λ (Spec (.of k))),
+      (rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) a).counit.app
+          (constantComplex Λ (Spec (.of k))) =
+        (R(a)_![ModuleCat.{u + 1} Λ]).map γ.inv ≫ smoothTrace Λ d a γ := by
+  obtain ⟨θ⟩ := nonempty_iso_dualizingComplex_twistShift Λ (d := d) a (𝟙 _)
+  exact ⟨(twistShift Λ X d).mapIso (leftDerivedUpperStarConstantComplexIso Λ a) ≪≫ θ.symm,
+    rightDerivedUpperShriekAdjunction_counit_app_eq_smoothTrace _⟩
+
+end DualizingComplex
+
 end Etale
 
 end AlgebraicGeometry
