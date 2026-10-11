@@ -439,6 +439,65 @@ lemma H.cyclesShiftAddEquiv_naturality : ∀ (m k : ℕ) (x : (K.cycles k).H (m 
     exact congrArg (H.map · 1)
       (eqToHom_comp_cyclesMap ψ (a := k + 1 + m) (b := k + (m + 1)) (by omega)).symm
 
+/-- A chain map commutes with the maps `Kⁿ ⟶ Zⁿ⁺¹`. -/
+@[reassoc]
+lemma toCycles_cyclesMap (n : ℕ) :
+    K.toCycles n (n + 1) ≫ HomologicalComplex.cyclesMap ψ (n + 1) =
+      ψ.f n ≫ K'.toCycles n (n + 1) := by
+  rw [← cancel_mono (K'.iCycles (n + 1))]
+  simp
+
+lemma range_app_toCycles_le_comap (n : ℕ) :
+    ((K.toCycles n (n + 1)).app ⊤).hom.range ≤
+      (((K'.toCycles n (n + 1)).app ⊤).hom.range).comap
+        ((HomologicalComplex.cyclesMap ψ (n + 1)).app ⊤).hom := by
+  rintro _ ⟨z, rfl⟩
+  refine ⟨(ψ.f n).app ⊤ z, ?_⟩
+  change ((ψ.f n ≫ K'.toCycles n (n + 1)).app ⊤) z =
+    ((K.toCycles n (n + 1) ≫ HomologicalComplex.cyclesMap ψ (n + 1)).app ⊤) z
+  rw [toCycles_cyclesMap]
+
+include hK hacyc in
+lemma H.cyclesOneAddEquiv_cyclesδZero (n : ℕ) (s : Γ(K.cycles (n + 1), ⊤)) :
+    H.cyclesOneAddEquiv K hK hacyc n (H.cyclesδZero K hK n s) = QuotientAddGroup.mk s := by
+  rw [H.cyclesOneAddEquiv, AddEquiv.symm_apply_eq, AddEquiv.trans_apply]
+  exact (QuotientAddGroup.kerLift_mk (H.cyclesδZero K hK n) s).symm
+
+lemma H.map_cyclesδZero (n : ℕ) (s : Γ(K.cycles (n + 1), ⊤)) :
+    H.map (HomologicalComplex.cyclesMap ψ n) 1 (H.cyclesδZero K hK n s) =
+      H.cyclesδZero K' hK' n ((HomologicalComplex.cyclesMap ψ (n + 1)).app ⊤ s) := by
+  have h0 : H.map (HomologicalComplex.cyclesMap ψ (n + 1)) 0 ((H.zeroLinearEquiv _).symm s) =
+      (H.zeroLinearEquiv _).symm ((HomologicalComplex.cyclesMap ψ (n + 1)).app ⊤ s) := by
+    rw [LinearEquiv.eq_symm_apply, H.zeroLinearEquiv_map, LinearEquiv.apply_symm_apply]
+  have := H.δ_naturality (shortExact_cyclesShortComplex K hK n)
+    (shortExact_cyclesShortComplex K' hK' n) (cyclesShortComplexMap ψ n) 0
+    ((H.zeroLinearEquiv _).symm s)
+  rw [cyclesShortComplexMap_τ₃, cyclesShortComplexMap_τ₁] at this
+  erw [h0] at this
+  exact this.symm
+
+include hK hacyc hK' hacyc' in
+/-- **Naturality of the cohomology computed by an acyclic resolution.** -/
+lemma H.cyclesZeroSuccAddEquiv_naturality (n : ℕ) (w : (K.cycles 0).H (n + 1)) :
+    H.cyclesZeroSuccAddEquiv K' hK' hacyc' n
+        (H.map (HomologicalComplex.cyclesMap ψ 0) (n + 1) w) =
+      QuotientAddGroup.map _ _ ((HomologicalComplex.cyclesMap ψ (n + 1)).app ⊤).hom
+        (range_app_toCycles_le_comap ψ n) (H.cyclesZeroSuccAddEquiv K hK hacyc n w) := by
+  set v : (K.cycles n).H 1 :=
+    H.mapAddEquiv (eqToIso (by rw [Nat.zero_add])) 1 (H.cyclesShiftAddEquiv K hK hacyc n 0 w)
+    with hv
+  obtain ⟨s, hs⟩ := H.surjective_cyclesδZero K hK hacyc n v
+  have hw : H.cyclesZeroSuccAddEquiv K hK hacyc n w = QuotientAddGroup.mk s := by
+    change H.cyclesOneAddEquiv K hK hacyc n v = _
+    rw [← hs, H.cyclesOneAddEquiv_cyclesδZero]
+  rw [hw, QuotientAddGroup.map_mk]
+  change H.cyclesOneAddEquiv K' hK' hacyc' n (H.map _ 1 (H.cyclesShiftAddEquiv K' hK' hacyc' n 0
+    (H.map (HomologicalComplex.cyclesMap ψ 0) (n + 1) w))) = _
+  rw [H.cyclesShiftAddEquiv_naturality ψ hK hacyc hK' hacyc', ← H.map_comp_apply, eqToIso.hom,
+    ← eqToHom_comp_cyclesMap ψ (a := 0 + n) (b := n) (by omega), H.map_comp_apply]
+  change H.cyclesOneAddEquiv K' hK' hacyc' n (H.map (HomologicalComplex.cyclesMap ψ n) 1 v) = _
+  rw [← hs, H.map_cyclesδZero ψ hK hK', H.cyclesOneAddEquiv_cyclesδZero]
+
 end Naturality
 
 end AlgebraicGeometry.Scheme.Modules
