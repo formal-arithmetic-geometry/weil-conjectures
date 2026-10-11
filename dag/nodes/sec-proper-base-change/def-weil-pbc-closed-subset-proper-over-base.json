@@ -190,5 +190,28 @@
   "item": "def-weil-pbc-closed-subset-proper-over-base",
   "worker": "stage1",
   "summary": "Checked against Stacks coherent.tex 0CYL/0CYM and the paragraph before 0CYS, schemes.tex 01J3/01J4 and modules.tex 01AT (tags verified in tags/tags: 0CYL, 0CYM, 0CYS, 01J3, 01J4, 01AT, 056J). The statement used 'the unique reduced closed subscheme' without a node for its existence and uniqueness (the leaf lem-weil-pbc-closed-subset-closed-subscheme gives only some closed subscheme with underlying set Z), so the definition was not self-contained: created lem-weil-pbc-reduced-induced-closed-subscheme (Schemes 01J3 + 01J4: the ideal sheaf of sections vanishing on Z, quasi-coherent, reduced subscheme with set Z, unique up to unique isomorphism over X), unsplit, and the definition takes its well-definedness from it. Added def-pc-reduced-scheme and the new lemma to stmt_deps. Wrote four construction steps (data, condition (1) and its independence of the choice, support via stalks, condition (3) with the closedness requirement noting that it extends Stacks's finite-type quasi-coherent case). No Mathlib match: no notion of closed subset proper over a base, no support of a sheaf of modules on a scheme (only Module.support over a ring and IdealSheafData.support); searches recorded with all three kinds."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ClosedSubsetProperOverBase",
+  "declaration": "AlgebraicGeometry.Scheme.IsClosedSubsetProperOver",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.IsClosedSubsetProperOver",
+   "AlgebraicGeometry.Scheme.Modules.HasSupportProperOver"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ClosedSubsetProperOverBase.lean",
+  "statement": "def IsClosedSubsetProperOver {X S : Scheme.{u}} (f : X ⟶ S) [LocallyOfFiniteType f] (Z : TopologicalSpace.Closeds X) : Prop",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": false,
+  "note": "Support is the inline nonzero-stalk locus {x | ¬ Subsingleton (F.presheaf.stalk x)} (STATE SUPPORT OF A MODULE convention); the existential Closeds witness encodes closedness of exactly that locus.",
+  "fixed_by": "R-csp"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-csp",
+  "group": "H1",
+  "result": "fix"
  }
 }
