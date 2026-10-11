@@ -5067,3 +5067,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 14:51 L: merged deliver/Q1/lem-weil-pbc-standard-smooth-over-field-dimension-at-points (stage 2; reviewer PASS; first push; Sheaf.RingTheory.StandardSmoothDimensionAtPoints Algebra.SubmersivePresentation.topologicalKrullDimAt_spec_eq)
 - 14:51 L: merged deliver/V1/lem-weil-pbc-tensor-finite-type-limit (stage 2; reviewer PASS; first push; Sheaf.RingTheory.TensorFiniteTypeLimit Algebra.tensor_finite_type_limit)
 - 14:51 L: merged deliver/E1/thm-sp-half-plane-convergence (stage 2; reviewer PASS; first push; Sheaf.CategoryTheory.HalfPlaneConvergence CategoryTheory.BigradedExactCouple.halfPlaneConvergence)
+- 14:51 L: merged deliver/V1/lem-weil-pbc-thickening-affine-scheme (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.ThickeningAffineScheme AlgebraicGeometry.isAffine_of_isThickening)
