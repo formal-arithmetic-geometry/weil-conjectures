@@ -4702,3 +4702,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 13:04 L: merged deliver/K1/lem-weil-pbc-power-in-base-after-localization (stage 2; reviewer PASS; first push; Sheaf.FieldTheory.PowerInBaseAfterLocalization RingTheory.power_in_base_after_localization)
 - 13:04 L: merged deliver/M1/lem-sc-complex-lift-class-projective (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.ComplexLiftClassProjective AlgebraicGeometry.complex_lift_class_projective; statement corrected (1 citers))
 - 13:04 L: merged deliver/G1/lem-sc-affine-pseudo-coherent-lift (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.AffinePseudoCoherentLift AlgebraicGeometry.Scheme.exists_boundedAbove_finiteFree_lift)
+- 13:05 L: merged deliver/H1/lem-weil-pbc-power-series-universal-property-complete (stage 2; reviewer FIX; first push; Sheaf.RingTheory.PowerSeriesUniversalPropertyComplete MvPowerSeries.exists_ringHom_of_isAdicComplete)

@@ -182,5 +182,24 @@
   "worker": "stage1",
   "summary": "Statement kept (checked against its uses: lem-weil-pbc-complete-local-flat-presentation step 3 uses existence with the values on Lambda and x_i, step 4 the uniqueness among all ring maps; lem-weil-pbc-cohen-structure-power-series-surjection step 5 uses existence and the values, step 6 only that Phi is a ring map with Phi(x^E)=y^E). No sorry-free slopmaster2 declaration states it (grep of WeilConjectures for the id, MvPowerSeries with eval/IsAdicComplete: none). No Stacks lemma states it (used without statement in 07NL, 07NN, 032A), so the proof is written by an agent from the two definition nodes, in six elementary steps: (1) partial sums P_m(F) and P_m' - P_m in a^m; (2) completeness (bijectivity of T -> lim T/a^m) gives Phi(F) with Phi(F) = P_m(F) mod a^m, unique, and the intersection of the a^m is 0; (3) Phi additive, unital, multiplicative via P_m(F)P_m(G) = P_m(FG) mod a^m; (4) Phi(lambda)=alpha(lambda), Phi(x_i)=t_i; (5) a series with no terms of degree < m is a finite sum of x^E g_E with |E|=m (explicit g_E); (6) any ring map Phi' with these values satisfies Phi'(F) = P_m(F) mod a^m, hence Phi'=Phi, no continuity assumed. Source line numbers corrected: 07NN map phi' is at more-algebra.tex line 9812 (not 9769), 032A's map at algebra.tex line 45014 (not 44929). Mathlib: candidate eval₂Hom/eval₂_unique kept (topological, not one line); Loogle and a grep added. No new nodes.",
   "blueprint": "The blueprint ancestor thm-weil-pbc-finite-etale-lifting is reached only through the chain in blueprint.from.via; the steps realize the universal property of power series used without statement at the place recorded in from.place (step 7 of its split, Lemma 0GS2 essential-surjectivity paragraphs) via lem-weil-pbc-complete-local-flat-presentation steps 3-4 (construction of phi' and commutativity of the square by uniqueness). same_as: [] (blueprint_refs search 'universal property power series', 'power series complete homomorphism', 'power series ring', 'adically complete', '032A', '07NN': no blueprint node states it)."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.PowerSeriesUniversalPropertyComplete",
+  "declaration": "MvPowerSeries.exists_ringHom_of_isAdicComplete",
+  "file": "lean/Sheaf/RingTheory/PowerSeriesUniversalPropertyComplete.lean",
+  "statement": "theorem exists_ringHom_of_isAdicComplete {Λ : Type u} {T : Type v} [CommRing Λ] [CommRing T] (a : Ideal T) [IsAdicComplete a T] (α : Λ →+* T) (n : ℕ) (t : Fin n → T) (ht : ∀ i : Fin n, t i ∈ a) : ∃ Φ : MvPowerSeries (Fin n) Λ →+* T, (∀ r : Λ, Φ (C r) = α r) ∧ (∀ i : Fin n, Φ (X i) = t i) ∧ (∀ (F : MvPowerSeries (Fin n) Λ) (y : T), (∀ m : ℕ, 1 ≤ m → Ideal.Quotient.mk (a ^ m) y = Ideal.Quotient.mk (a ^ m) (MvPolynomial.eval₂ α t (F.truncTotal m))) ↔ y = Φ F) ∧ (∀ Ψ : MvPowerSeries (Fin n) Λ →+* T, (∀ r : Λ, Ψ (C r) = α r) → (∀ i : Fin n, Ψ (X i) = t i) → Ψ = Φ)",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-pup1323"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-pup1323",
+  "group": "H1",
+  "result": "fix",
+  "note": "Λ,T CommRing indep. universes; a ideal, IsAdicComplete a T; α ring hom; n, t : Fin n → T, t i ∈ a; ∃Φ tied: Φ∘C = α, Φ(X i)=t i, ∀F y (∀m≥1 mk(a^m) y = mk(a^m)(eval₂ α t (truncTotal m F))) ↔ y=Φ F, uniqueness among all ring maps (no continuity); n=0, m=1 checked; partial sums restated to C1 form"
  }
 }
