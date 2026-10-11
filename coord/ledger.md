@@ -3264,3 +3264,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 01:51 UTC L: E1 derived-functor-inverts-05sb FIX eb5b511aa (R-dfi0150).
 - 01:57 L: merged deliver/F1/lem-pur-derived-functor-shift-05su (reviewer PASS; first push; new nodes: 0)
 - 01:58 L: merged deliver/E1/lem-pur-derived-functor-morphisms-05sa (reviewer FIX; first push; new nodes: 0)
+- 01:58 L: merged deliver/H1/lem-sc-qcoh-cech-total-tensor-iso (reviewer FIX; first push; new nodes: 0)

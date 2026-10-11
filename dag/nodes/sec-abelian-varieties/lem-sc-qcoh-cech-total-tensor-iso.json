@@ -13,7 +13,7 @@
  },
  "kind": "statement",
  "title": "Algebraic Kunneth formula for tensor products of complexes",
- "statement": "Let k be a field [def-weil-field], and let A^\\bullet and B^\\bullet be cochain complexes of k-vector spaces that are bounded below. Form the total tensor-product cochain complex with (A \\otimes_k B)^n = \\bigoplus_{p+q=n} A^p \\otimes_k B^q and differential d_A \\otimes 1 + (-1)^p 1 \\otimes d_B on A^p \\otimes B^q. For every integer n, the canonical map \\bigoplus_{p+q=n} H^p(A) \\otimes_k H^q(B) \\longrightarrow H^n(A \\otimes_k B), sending [a] \\otimes [b] to [a \\otimes b], is an isomorphism.",
+ "statement": "Let $k$ be a field [def-weil-field]. A cochain complex of $k$-vector spaces is a family of $k$-vector spaces $A^p$ ($p\\in\\mathbf Z$) with $k$-linear maps $d_A^p:A^p\\to A^{p+1}$ and $d_A^{p+1}d_A^p=0$; it is bounded below if $A^p=0$ for all $p$ below some integer. Put $Z^p(A)=\\ker(d_A^p)$, $B^p(A)=\\operatorname{im}(d_A^{p-1})$ and $H^p(A)=Z^p(A)/B^p(A)$, and similarly for $B$. For two bounded-below complexes $A$ and $B$, form the total tensor-product complex with $(A\\otimes_k B)^n=\\bigoplus_{p+q=n}A^p\\otimes_k B^q$ and differential $d_A\\otimes 1+(-1)^p\\,1\\otimes d_B$ on $A^p\\otimes_k B^q$. For every integer $n$, the map $\\bigoplus_{p+q=n}H^p(A)\\otimes_k H^q(B)\\to H^n(A\\otimes_k B)$, sending $[a]\\otimes[b]$ to $[a\\otimes b]$, is well defined and is an isomorphism.",
  "source": {
   "document": "literature/stacks-project/varieties.tex",
   "place": "Varieties, Lemma varieties-lemma-kunneth, tensor-total Cech step and field-linear algebra Kunneth identification"
@@ -21,9 +21,41 @@
  "stmt_deps": [
   "def-weil-field"
  ],
- "proof": [],
+ "proof": [
+  {
+   "text": "For each degree $p$ put $Z_A^p=\\ker(d_A^p)$ and $B_A^p=\\operatorname{im}(d_A^{p-1})$, and similarly for $B$. Since $k$ is a field, choose a complement $H_A^p$ of $B_A^p$ in $Z_A^p$ and a complement $C_A^p$ of $Z_A^p$ in $A^p$, so $A^p=B_A^p\\oplus H_A^p\\oplus C_A^p$. Then $d_A^p$ restricts to an isomorphism $C_A^p\\xrightarrow{\\sim}B_A^{p+1}$: it is injective because $C_A^p\\cap\\ker(d_A^p)=C_A^p\\cap Z_A^p=0$, and surjective because $d_A^p(A^p)=d_A^p(C_A^p)$ and $B_A^{p+1}=\\operatorname{im}(d_A^p)$. Hence $A$ is the direct sum of the subcomplexes $H_A^p[-p]$ (zero differential, as $H_A^p\\subset Z_A^p$) and the two-term subcomplexes $C_A^p\\to B_A^{p+1}$, and similarly for $B$; on each two-term piece, the inverse $h_A=(d_A^p|_{C_A^p})^{-1}:B_A^{p+1}\\to C_A^p$, extended by $0$, satisfies $d_Ah_A+h_Ad_A=1$. (The bounded-below hypothesis is not needed for this argument, since $(A\\otimes_kB)^n$ is defined as a direct sum; it is harmless.)",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Stacks Project, Tag 0BED, label lemma-kunneth, field-linear algebra argument following equation equation-kunneth-on-cech"
+   }
+  },
+  {
+   "text": "Distributing the direct sums of Step 1 decomposes the total complex $A\\otimes_kB$ as a direct sum of subcomplexes: $H_A\\otimes_kH_B$, and tensor products in which at least one factor is a two-term piece. On a summand whose $A$-factor is a two-term piece with homotopy $h_A$ of degree $-1$, $d_Ah_A+h_Ad_A=1$, put $H(a\\otimes b)=h_A(a)\\otimes b$ for $a\\in A^p$. In $(d_A\\otimes1+(-1)^{\\bullet}1\\otimes d_B)H+H(d_A\\otimes1+(-1)^{\\bullet}1\\otimes d_B)$ applied to $a\\otimes b$, the mixed terms are $(-1)^{p-1}h_A(a)\\otimes d_Bb$ and $(-1)^ph_A(a)\\otimes d_Bb$ and cancel, leaving $(d_Ah_A+h_Ad_A)(a)\\otimes b=a\\otimes b$. On a summand whose $B$-factor is a two-term piece, $H(a\\otimes b)=(-1)^pa\\otimes h_B(b)$ for $a\\in A^p$ gives, by the same calculation, $d_A a\\otimes h_Bb$ terms with signs $(-1)^p$ and $(-1)^{p+1}$ cancelling and $a\\otimes(d_Bh_B+h_Bd_B)(b)=a\\otimes b$ remaining. Hence every such summand is contractible, so acyclic, while $H_A\\otimes_kH_B$ has zero differential.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Stacks Project, Tag 0BED, label lemma-kunneth, tensor-total complex decomposition"
+   }
+  },
+  {
+   "text": "The map is well defined: for cocycles $a\\in Z^p(A)$, $b\\in Z^q(B)$ one has $d(a\\otimes b)=d_Aa\\otimes b+(-1)^pa\\otimes d_Bb=0$, and $d(a'\\otimes b)=d_Aa'\\otimes b$ for $a'\\in A^{p-1}$, $d(a\\otimes b')=(-1)^pa\\otimes d_Bb'$ for $b'\\in B^{q-1}$, so changing $a$ or $b$ by a coboundary changes $a\\otimes b$ by a coboundary; the class $[a\\otimes b]$ is bilinear in $([a],[b])$, hence defines the map on $H^p(A)\\otimes_kH^q(B)$. By Step 2, $H^n(A\\otimes_kB)$ is the cohomology of the summand $H_A\\otimes_kH_B$, which in degree $n$ is $\\bigoplus_{p+q=n}H_A^p\\otimes_kH_B^q$, the isomorphism being induced by the inclusion of this summand. Under the isomorphisms $H_A^p\\xrightarrow{\\sim}H^p(A)$, $a\\mapsto[a]$, and $H_B^q\\xrightarrow{\\sim}H^q(B)$ (from $Z_A^p=B_A^p\\oplus H_A^p$), this inclusion sends $[a]\\otimes[b]$ to $[a\\otimes b]$; so it is the map of the statement, which is therefore an isomorphism for every $n$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Stacks Project, Tag 0BED, label lemma-kunneth, equation equation-kunneth-on-cech and field-linear conclusion"
+   }
+  }
+ ],
  "proof_deps": [],
- "proof_origin": null,
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Stacks Project, Tag 0BED, label lemma-kunneth, field-linear algebra Kunneth identification"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -55,12 +87,27 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-picard-kunneth-qcoh",
   "by": "worker",
   "date": "2026-10-11"
  },
  "chapter": "sec-abelian-varieties",
- "unit": "sk-prop-av-cube"
+ "unit": "sk-prop-av-cube",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-qcoh-cech-total-tensor-iso",
+  "worker": "stage1",
+  "summary": "Split the field-linear bounded-below complex Kunneth statement into an explicit complement decomposition, contraction of tensor summands containing an acyclic two-term factor, and identification of the surviving cohomology summand with the canonical class map. No new nodes were needed; the steps are elementary linear algebra over a field.",
+  "blueprint": "Realizes the field-linear Kunneth identification in the proof of thm-sc-theorem-of-cube, specifically the tensor-total Cech step and equation equation-kunneth-on-cech."
+ },
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-cti0157",
+  "group": "H1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-cti0157 (reviewer sub-agent of L); spot-checked: Map well defined (Leibniz sign), splitting Z=B+H, A=Z+C with d:C->B iso, signed tensor homotopies for both factor cases checked; sign convention matches def-pc-tensor-complex-sheaves used by citer lem-sc-picard-kunneth-qcoh step 2; bounded-below unnecessary but harmless (noted); no duplicate (grep kunneth node names), no Mathlib Kunneth (grep). FIX more, RETURN less: (1) B4 plain-text arrows and plain 'tensor' in steps rewritten in TeX; (2) C1/E: well-definedness and bilinearity of [a]x[b] -> [a x b] added to step 3 (missed by second reading); (3) node source.place still named varieties-lemma-kunneth despite second reading claiming the change: set to Tag 0BED label lemma-kunneth; statement TeX-ified, 'is well defined and' added (E7: makes the implicit well-definedness explicit).; 1 file(s) fixed by the reviewer"
+ }
 }
