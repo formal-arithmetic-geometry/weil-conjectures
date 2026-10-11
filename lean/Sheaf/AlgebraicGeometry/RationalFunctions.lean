@@ -7,7 +7,10 @@ import Mathlib.AlgebraicGeometry.Scheme
 import Mathlib.Algebra.Category.Ring.Colimits
 
 /-!
-# Rational functions on a scheme
+# Dense opens and their section diagram
+
+The colimit ring itself is `Scheme.rationalFunctionRing` in
+`Sheaf.AlgebraicGeometry.RationalFunctionRing` (universe polymorphic).
 
 Source: Stacks Project, Morphisms, Definitions 01RS, 01RT, 01RU and Lemma 01RV
 (blueprint: def-sc-rational-functions).
@@ -45,18 +48,6 @@ def denseOpensInclusion (X : Scheme) : DenseOpens X ⥤ X.Opens where
 (blueprint: def-sc-rational-functions)). -/
 def denseOpenSections (X : Scheme) : (DenseOpens X)ᵒᵖ ⥤ CommRingCat :=
   (denseOpensInclusion X).op ⋙ X.presheaf
-
-/-- The ring of rational functions on `X`: sections on dense opens, identified when they
-agree after restriction to a smaller dense open. Its ring operations are induced by
-restriction and the ring operations on sections (Stacks, Tags 01RT and 01RU;
-(blueprint: def-sc-rational-functions)). -/
-noncomputable def rationalFunctions (X : Scheme) : CommRingCat :=
-  colimit (denseOpenSections X)
-
-/-- A rational function is an element of the ring of rational functions
-(Stacks, Tags 01RT and 01RU;
-(blueprint: def-sc-rational-functions)). -/
-abbrev RationalFunction (X : Scheme) := (rationalFunctions X : Type _)
 
 end Scheme
 
