@@ -21,7 +21,8 @@
  "stmt_deps": [
   "def-pc-scheme",
   "def-pd-descent-datum",
-  "def-pc-fibre-product"
+  "def-pc-fibre-product",
+  "lem-galois-fpqc-singleton-fully-faithful-0241"
  ],
  "proof": [
   {
@@ -115,5 +116,24 @@
   "group": "M1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-fpc (reviewer sub-agent of L); spot-checked: Source: Stacks descent.tex Tag 023Y (lemma-pullback) parts (1)-(3) and its proof, Tag 02VS (lemma-pullback-family) part (3), read locally (the report's claim that descent.tex is absent is wrong; it is present). The statement agrees: two maps r_0,r_1:T->X over S (Stacks: f_0,f_1 fitting the same square with h=id) give canonically isomorphic pullback functors DD(X/S)->DD(T/S); the composition clause follows from the construction in 023Y(1). Step 1: (r_0,r_1):T->X x_S X by the universal property in def-pc-fibre-product, pulling back phi of def-pd-descent-datum gives T x_{r_0} V = T x_{r_1} V, exactly the Stacks proof; naturality in alpha is the pullback of the morphism condition stated in the item. Step 2: I checked the morphism-of-descent-data identity pointwise on T x_S T: both sides equal phi at (r_0 t, r_1 t') by the cocycle of def-pd-descent-datum pulled back along (r_0 t, r_1 t, r_1 t') and (r_0 t, r_0 t', r_1 t') into X_3. Step 3: associativity iso and (rt x rt)^*phi = (t x t)^*(r x r)^*phi from the unique-iso and functoriality clauses of def-pc-fibre-product. Small case r_0=r_1: comparison is the pullback of phi along the diagonal, the identity by the cocycle. Both deps are generic definitions already in stmt_deps (C7/C8 fine). No new nodes, no Mathlib leaf. FIX: dag/nodes/sec-curve-estimates/lem-galois-fpqc-pullback-canonical-iso.json: proof[0].source.place and proof[1].source.place: 02VS(3) replaced by 023Y(2) and its proof (where the argument actually is), 02VS(3) kept as the family version. Start Sat Oct 10 03:30:13 PM UTC 2026, end Sat Oct 10 03:30:40 PM UTC 2026.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.DescentPullbackCanonicalIso",
+  "declaration": "AlgebraicGeometry.descent_pullback_canonical_iso",
+  "file": "lean/Sheaf/AlgebraicGeometry/DescentPullbackCanonicalIso.lean",
+  "statement": "theorem descent_pullback_canonical_iso (S : Scheme.{v}) : ∃ (pull : ∀ ⦃X T : Scheme.{v}⦄ (a : X ⟶ S) (b : T ⟶ S) (r : T ⟶ X) (hr : r ≫ a = b), Over.DescentDataCategory a ⥤ Over.DescentDataCategory b) (q : ∀ ⦃X T : Scheme.{v}⦄ (a : X ⟶ S) (b : T ⟶ S) (r : T ⟶ X) (hr : r ≫ a = b) (D : Over.DescentDataCategory a), ((pull a b r hr).obj D).V.left ⟶ D.V.left) (hq : ∀ ⦃X T : Scheme.{v}⦄ (a : X ⟶ S) (b : T ⟶ S) (r : T ⟶ X) (hr : r ≫ a = b) (D : Over.DescentDataCategory a), q a b r hr D ≫ D.V.hom = ((pull a b r hr).obj D).V.hom ≫ r), (∀ ⦃X T : Scheme.{v}⦄ (a : X ⟶ S) (b : T ⟶ S) (r : T ⟶ X) (hr : r ≫ a = b) (D : Over.DescentDataCategory a), IsPullback (q a b r hr D) ((pull a b r hr).obj D).V.hom D.V.hom r ∧ Over.DescentDatum.IsBaseChange (hr) (hq a b r hr D) D.datum ((pull a b r hr).obj D).datum) ∧ (∀ ⦃X T : Scheme.{v}⦄ (a : X ⟶ S) (b : T ⟶ S) (r : T ⟶ X) (hr : r ≫ a = b) (D E : Over.DescentDataCategory a) (m : D ⟶ E), ((pull a b r hr).map m).hom.left ≫ q a b r hr E = q a b r hr D ≫ m.hom.left) ∧ (∀ ⦃X T : Scheme.{v}⦄ (a : X ⟶ S) (b : T ⟶ S) (r₀ r₁ : T ⟶ X) (h₀ : r₀ ≫ a = b) (h₁ : r₁ ≫ a = b), ∃ e : pull a b r₀ h₀ ≅ pull a b r₁ h₁, ∀ D : Over.DescentDataCategory a, (e.hom.app D).hom.left ≫ q a b r₁ h₁ D = (D.datum.transport (((pull a b r₀ h₀).obj D).V.hom ≫ r₀) (((pull a b r₀ h₀).obj D).V.hom ≫ r₁) (by rw [Category.assoc, Category.assoc, h₀, h₁]) (Over.homMk (q a b r₀ h₀ D) (hq a b r₀ h₀ D))).left) ∧ (∀ ⦃X T U : Scheme.{v}⦄ (a : X ⟶ S) (b : T ⟶ S) (c : U ⟶ S) (r : T ⟶ X) (t : U ⟶ T) (hr : r ≫ a = b) (ht : t ≫ b = c) (hrt : (t ≫ r) ≫ a = c), ∃ e : pull a c (t ≫ r) hrt ≅ pull a b r hr ⋙ pull b c t ht, ∀ D : Over.DescentDataCategory a, (e.hom.app D).hom.left ≫ q b c t ht ((pull a b r hr).obj D) ≫ q a b r hr D = q a c (t ≫ r) hrt D)",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": false,
+  "note": "Reuses Over.DescentDataCategory and its morphisms from the landed singleton module; the added dependency cites those declarations only, without imposing its fpqc hypothesis. The pullback functors are characterized by their universal squares, base-changed transport and map equations. Both comparisons have component equations specifying their canonical maps."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-fpc0933",
+  "group": "F1",
+  "result": "pass",
+  "note": "S:Scheme.{v} arbitrary; r0,r1:T->X with h0,h1 over S, no fpqc hyp; DD(X/S)=landed Over.DescentDataCategory; pull characterized by IsPullback(q,V.hom,D.V.hom,r) (T x_X V), IsBaseChange hr (= (r x r)^*phi), map eq (= id_T x_X alpha); two-map iso component = D.datum.transport along (P0.hom≫r0, P0.hom≫r1) of the universal point = pullback of phi along (r0,r1) as in 023Y(2) proof (descent.tex l.8316), unique by over-T + pullback; composition iso component over U with q_t≫q_r = q_{tr}, unique = associativity; docstring carries node steps 1-3; no cycle via the added landed dep (singleton node's deps omit this item); source DescentDatum.lean has no pullback functor/comparison (no H4)"
  }
 }
