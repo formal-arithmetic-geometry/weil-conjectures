@@ -158,5 +158,24 @@
   "item": "lem-weil-pbc-free-complex-maps-to-resolution",
   "worker": "stage1",
   "summary": "Read Stacks 00LS (lemma-compare-resolutions), part (1) and its proof, plus 05CF (lemma-characterize-projective), free-projective implication. Statement unchanged. Wrote the degree-zero lift, first kernel factorization, explicit induction claim and extension, and recursive selection of a compatible infinite family. One genuinely smaller new Mathlib leaf: free modules are projective; the existing projective-module definition supplies its public lifting characterization. No exactness of the source, finiteness, or projectivity of target terms is assumed. Checked zero modules, empty/infinite bases, finite target resolutions padded by zeros. Three search kinds recorded on the new node; official current-head Mathlib source read with exact revision, project-pin limitation recorded."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FreeComplexMapsToResolution",
+  "declaration": "free_complex_maps_to_resolution",
+  "file": "lean/Sheaf/Paper/FreeComplexMapsToResolution.lean",
+  "statement": "theorem free_complex_maps_to_resolution (R : Type u) [CommRing R] (M N : ModuleCat R) (φ : M ⟶ N) (N' : ℕ → ModuleCat R) (d : ∀ i : ℕ, N' (i + 1) ⟶ N' i) (η : N' 0 ⟶ N) (hd0 : d 0 ≫ η = 0) (hd : ∀ i : ℕ, d (i + 1) ≫ d i = 0) (hη : Function.Surjective η) (hex0 : (ShortComplex.mk (d 0) η hd0).Exact) (hex : ∀ i : ℕ, (ShortComplex.mk (d (i + 1)) (d i) (hd i)).Exact) (F : ℕ → ModuleCat R) (δ : ∀ i : ℕ, F (i + 1) ⟶ F i) (π : F 0 ⟶ M) (hδ0 : (δ 0) ≫ π = 0) (hδ : ∀ i : ℕ, (δ (i + 1)) ≫ (δ i) = 0) (hfree : ∀ i : ℕ, Module.Free R (F i)) : ∃ α : ∀ i : ℕ, F i ⟶ N' i, α 0 ≫ η = π ≫ φ ∧ (∀ i : ℕ, (α (i + 1)) ≫ d i = (δ i) ≫ α i)",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-fcr1058"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-fcr1058",
+  "group": "J1",
+  "result": "fix",
+  "note": "R CommRing; φ:M⟶N; N' with d (index-shifted ∂_{i+1}), η, complex clauses hd0/hd, exactness at N (hη surj), N_0 (hex0), N_{i+1} (hex); F with δ_{i+1}, π, hδ0=π∘δ_1=0, hδ=δ_{i+1}δ_{i+2}=0, free every F i (not hollow: inferInstance fails); conclusion α_i, η∘α_0=φ∘π, ∂_{i+1}α_{i+1}=α_iδ_{i+1}; no source exactness; ShortComplex/ModuleCat form as landed Tor/zigzag siblings; added node proof in words to docstring"
  }
 }
