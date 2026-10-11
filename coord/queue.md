@@ -1,11 +1,11 @@
 # Work queue
 
-914 items; claim with `tools/claim.py next <group> [--stage N]`.
+911 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (914)
+## Stage 2: nodes to state (911)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -30,13 +30,11 @@
 | `lem-sc-derived-hom-tensor-total` | 1 | state |
 | `lem-sc-etale-faithfully-flat-local` | 1 | state |
 | `lem-sc-p1-ext-locally-free-naturality` | 1 | state |
-| `lem-sc-p1-ext-yoneda-associativity` | 1 | state |
 | `lem-sc-picard-h1-multiple-locus` | 1 | state |
 | `lem-sc-picard-h1-product-injective` | 1 | state |
 | `lem-sc-picard-locus-closed` | 1 | state |
 | `lem-sc-picard-product-open` | 1 | state |
 | `lem-sc-qcoh-cech-total-tensor-iso` | 1 | state |
-| `lem-sc-ringed-space-injective-restriction-surjective` | 1 | state |
 | `lem-sc-ringed-space-restrict-injective-resolution` | 1 | state |
 | `lem-sc-smooth-proper-diagonal-conormal-differentials` | 1 | state |
 | `lem-sc-strict-henselization-dimension` | 1 | state |
@@ -44,7 +42,6 @@
 | `lem-sc-tensor-generating-sections` | 1 | state |
 | `lem-sc-tensor-section-affine-open` | 1 | state |
 | `lem-sc-valuation-zero-section-relative-cartier` | 1 | state |
-| `lem-sc-zariski-contracted-power-torsor` | 1 | state |
 | `lem-sp-cart-eilenberg-left-exact-cohomology` | 1 | state |
 | `lem-sp-cartan-eilenberg-exists` | 1 | state |
 | `lem-sp-cartan-eilenberg-properties` | 1 | state |
