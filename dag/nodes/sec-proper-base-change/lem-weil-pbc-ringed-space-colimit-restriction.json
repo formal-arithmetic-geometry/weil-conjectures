@@ -182,5 +182,24 @@
   "by": "L",
   "result": "accepted",
   "note": "4 steps (Modules 01AH (2), 01AJ (2)): restriction is a functor and carries cocones; clause (1) by a new unsplit node for the adjunction restriction -| j_* (Sheaves 0096 for the open inclusion, Mathlib candidate recorded, B8) and the left-adjoints-preserve-colimits leaf; the sheafified sectionwise colimit is a colimit by the two universal properties (sectionwise presheaf colimit leaf of sk-thm-reduction, module sheafification definition); clause (2) by uniqueness of colimits. Statement rewritten: j^{-1} replaced by the explicit restriction W -> M(W), the tag sentence removed (B7), clause (2) made precise. Tags 0096, 00A0, 01AH, 01AJ verified."
+ },
+ "lean": {
+  "module": "Sheaf.Topology.ModuleColimitRestriction",
+  "declaration": "TopologicalSpace.Opens.module_colimit_restriction",
+  "file": "lean/Sheaf/Topology/ModuleColimitRestriction.lean",
+  "statement": "theorem module_colimit_restriction (X : RingedSpace.{u}) (U : Opens X) (I : Type u) [SmallCategory I] (D : I ⥤ SheafOfModules.{u} (moduleRings X)) (c : Cocone D) (hc : IsColimit c) : Nonempty (IsColimit ((SheafOfModules.overFunctor.{u} (moduleRings X) U).mapCocone c)) ∧ ∃ u : (PresheafOfModules.sheafification.{u} (𝟙 ((moduleRings X).over U).obj)).obj (PresheafOfModules.colimitPresheafOfModules (D ⋙ SheafOfModules.overFunctor.{u} (moduleRings X) U ⋙ SheafOfModules.forget ((moduleRings X).over U))) ⟶ (SheafOfModules.overFunctor.{u} (moduleRings X) U).obj c.pt, IsIso u ∧ (∀ i : I, (PresheafOfModules.colimitCocone (D ⋙ SheafOfModules.overFunctor.{u} (moduleRings X) U ⋙ SheafOfModules.forget ((moduleRings X).over U))).ι.app i ≫ PresheafOfModules.sheafificationHomEquiv.{u} (𝟙 ((moduleRings X).over U).obj) u = (SheafOfModules.forget ((moduleRings X).over U)).map ((SheafOfModules.overFunctor.{u} (moduleRings X) U).map (c.ι.app i))) ∧ ∀ v : (PresheafOfModules.sheafification.{u} (𝟙 ((moduleRings X).over U).obj)).obj (PresheafOfModules.colimitPresheafOfModules (D ⋙ SheafOfModules.overFunctor.{u} (moduleRings X) U ⋙ SheafOfModules.forget ((moduleRings X).over U))) ⟶ (SheafOfModules.overFunctor.{u} (moduleRings X) U).obj c.pt, (∀ i : I, (PresheafOfModules.colimitCocone (D ⋙ SheafOfModules.overFunctor.{u} (moduleRings X) U ⋙ SheafOfModules.forget ((moduleRings X).over U))).ι.app i ≫ PresheafOfModules.sheafificationHomEquiv.{u} (𝟙 ((moduleRings X).over U).obj) v = (SheafOfModules.forget ((moduleRings X).over U)).map ((SheafOfModules.overFunctor.{u} (moduleRings X) U).map (c.ι.app i))) → v = u",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-rcr"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-rcr",
+  "group": "J1",
+  "result": "fix",
+  "note": "FIX: file-local notations O/OU/res/P/pc removed (STATE FILE-LOCAL NOTATION); X : RingedSpace on landed moduleRings X; restriction = plain SheafOfModules.overFunctor (moduleRings X) U into (moduleRings X).over U (K1 b7bd91fa9, G1 3fcb1ccf8) instead of TopCat+sheafCompose and the sheafOfModulesEquivOver composite"
  }
 }
