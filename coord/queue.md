@@ -1,11 +1,11 @@
 # Work queue
 
-894 items; claim with `tools/claim.py next <group> [--stage N]`.
+891 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (894)
+## Stage 2: nodes to state (891)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -14,7 +14,7 @@
 | `def-sc-ringed-space-module-cohomology` | 1 | state |
 | `def-sp-kinjective-bridge` | 1 | state |
 | `def-weil-l-adic-coefficient-extension` | 1 | state |
-| `lem-kun-04ca` | 1 | state |
+| `lem-kun-cp-approximation` | 1 | state |
 | `lem-pc-derived-adjoint-functors` | 1 | state |
 | `lem-pc-derived-tensor-transitivity` | 1 | state |
 | `lem-pc-filtered-colimit-derived-tensor` | 1 | state |
@@ -24,7 +24,6 @@
 | `lem-pur-rhom-into-kinjective-local` | 1 | state |
 | `lem-pur-rhom-well-defined` | 1 | state |
 | `lem-sc-base-change-curve` | 1 | state |
-| `lem-sc-bounded-above-finite-free-hom-acyclic` | 1 | state |
 | `lem-sc-derived-hom-tensor-total` | 1 | state |
 | `lem-sc-dimension-locally-algebraic` | 1 | state |
 | `lem-sc-fibre-dimension-after-base-change` | 1 | state |
@@ -38,13 +37,11 @@
 | `lem-sp-cartan-eilenberg-double-complex-homotopy` | 1 | state |
 | `lem-sp-ce-horizontal-lift` | 1 | state |
 | `lem-sp-ce-vertical-nullhomotopy` | 1 | state |
-| `lem-weil-derived-limit-existence` | 1 | state |
 | `lem-weil-derived-limit-roos-complex` | 1 | state |
 | `lem-weil-pbc-affine-formally-smooth-iff-ring-lifting` | 1 | state |
 | `lem-weil-pbc-affine-tilde-tensor` | 1 | state |
 | `lem-weil-pbc-algebraize-finite-over-proper` | 1 | state |
 | `lem-weil-pbc-ample-very-ample-immersion-affine-base` | 1 | state |
-| `lem-weil-pbc-arbitrary-ring-torsion-sheaf-base-change` | 1 | state |
 | `lem-weil-pbc-artinian-ideal-length-one-filtration` | 1 | state |
 | `lem-weil-pbc-artinian-local-essentially-finite-type-residue` | 1 | state |
 | `lem-weil-pbc-associated-module-hom` | 1 | state |
@@ -904,7 +901,7 @@
 | `lem-sc-normalization-properties` | 3 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 888 nodes that wait for a statement dependency, 40 nodes that wait for stage 1.
+Not open yet: 887 nodes that wait for a statement dependency, 40 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
