@@ -127,5 +127,23 @@
   "group": "G1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-pec1753 (reviewer sub-agent of L); spot-checked: Read extClass_naturality at ExtClass.lean:131-137: h1.extClass.comp (mk0 f.tau1) = (mk0 f.tau3).comp h2.extClass; with tau1=id_A, tau3=u it gives delta(u*E)=delta(E) o u, so step 2 is a direct use of the existing leaf lem-sc-p1-ext-class-naturality (status mathlib, exact). Item stays split: Mathlib has no pullback-of-extension declaration, step 1 (stalkwise fiber product SES and morphism (1,q,u)) is elementary. No new nodes; second reading's removal of the duplicate leaf confirmed. Edge cases u=id, u=0 fine. FIX more, RETURN less: (1) split_report.summary still claimed a new Mathlib leaf after the duplicate was dropped, rewritten to name the existing leaf and no new nodes; (2) step 3 said the statement names Ext^1(u,A)(delta), but it names delta o u, text corrected.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.Modules.PullbackExtensionClass",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.pullback_extClass_precompose",
+  "file": "lean/Sheaf/AlgebraicGeometry/Modules/PullbackExtensionClass.lean",
+  "statement": "theorem pullback_extClass_precompose {X : Scheme.{u}} [HasExt.{u} X.Modules] (S : ShortComplex X.Modules) (hS : S.ShortExact) {C' : X.Modules} (u : C' ⟶ S.X₃) : ∃ j : S.X₁ ⟶ Limits.pullback S.g u, ∃ hz : j ≫ pullback.snd S.g u = 0, j ≫ pullback.fst S.g u = S.f ∧ ∃ hp : (ShortComplex.mk j (pullback.snd S.g u) hz).ShortExact, (hp.extClass : Ext C' S.X₁ 1) = (Abelian.Ext.mk₀ u).comp hS.extClass (zero_add 1)",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "H1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }
