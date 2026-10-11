@@ -161,5 +161,23 @@
   "by": "L",
   "result": "pass",
   "note": "four steps, each a Mathlib leaf (locally Artinian finite discrete by Artinian.lean:66/95 with IsArtinianScheme.finite; residue fields by residueFieldIsoBase (AlgClosed/Basic.lean:33/46); points of the fibre product by Pullback.carrierEquiv (PullbackCarrier.lean:265/282); the base change discrete and of dimension ≤ 0 by quasi-finiteness (QuasiFinite.lean:142/161) with discreteTopology and topologicalKrullDim_zero_of_discreteTopology, accepted as one lemma per clause); 4 new Mathlib leaves verified by the lead; the hypotheses separated and k' algebraically closed are unused (kept as stated)"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ZeroDimensionalBaseChangePoints",
+  "declaration": "AlgebraicGeometry.zeroDimensional_baseChange_points",
+  "file": "lean/Sheaf/AlgebraicGeometry/ZeroDimensionalBaseChangePoints.lean",
+  "statement": "theorem zeroDimensional_baseChange_points (k k' : Type v) [Field k] [Field k'] [IsAlgClosed k] [Algebra k k'] (C : Scheme.{v}) [C.Over (Spec (.of k))] [IsSeparated (C ↘ Spec (.of k))] [LocallyOfFiniteType (C ↘ Spec (.of k))] [QuasiCompact (C ↘ Spec (.of k))] (hC : topologicalKrullDim C ≤ 0) : Finite C ∧ DiscreteTopology C ∧ (∀ c : C, c ∈ closedPoints C ∧ IsIso ((C ↘ Spec (.of k)).residueFieldMap c)) ∧ (∀ c : C, ∃! z : (pullback (C ↘ Spec (.of k)) (Spec.map (CommRingCat.ofHom (algebraMap k k'))) : Scheme.{v}), (pullback.fst (C ↘ Spec (.of k)) (Spec.map (CommRingCat.ofHom (algebraMap k k')))).base z = c) ∧ topologicalKrullDim (pullback (C ↘ Spec (.of k)) (Spec.map (CommRingCat.ofHom (algebraMap k k'))) : Scheme.{v}) ≤ 0 ∧ IsHomeomorph (pullback.fst (C ↘ Spec (.of k)) (Spec.map (CommRingCat.ofHom (algebraMap k k')))).base",
+  "branch": "sheaf-dag",
+  "by": "Q1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-zbp",
+  "group": "Q1",
+  "result": "pass",
+  "note": "reverted the delivery's change of existing node(s) def-pc-base-change (--revert-nodes; kept as on sheaf-dag)"
  }
 }
