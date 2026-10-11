@@ -1,0 +1,60 @@
+{
+ "id": "def-pur-saturated-triangulated-localization",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-derived-complete-integral-detailed",
+   "place": "Situation 05S8: the definition of a saturated multiplicative system compatible with the triangulated structure and its localization",
+   "via": [
+    "lem-pur-left-derived-exact-when-defined"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "definition",
+ "title": "Saturated multiplicative systems compatible with triangulation",
+ "statement": "Let $\\mathcal D$ be a triangulated category [def-weil-triangulated-category]. A set $S$ of morphisms of $\\mathcal D$ is a \\emph{multiplicative system} (Stacks Categories Definition Tag 04VB) if: (MS1) every identity lies in $S$ and $S$ is closed under composition; (MS2) for $t:X\\to Z$ in $S$ and $g:X\\to Y$ there are $s:Y\\to W$ in $S$ and $f:Z\\to W$ with $s\\circ g=f\\circ t$, and for $s:Y\\to W$ in $S$ and $f:Z\\to W$ there are $t:V\\to Z$ in $S$ and $g:V\\to Y$ with $f\\circ t=s\\circ g$; (MS3) if $f,g:X\\to Y$ and $t\\in S$ with target $X$ satisfy $f\\circ t=g\\circ t$, then $s\\circ f=s\\circ g$ for some $s\\in S$ with source $Y$, and if $s\\in S$ with source $Y$ satisfies $s\\circ f=s\\circ g$, then $f\\circ t=g\\circ t$ for some $t\\in S$ with target $X$. It is \\emph{saturated} (Tag 04VD) if moreover (MS4) for composable morphisms $f,g,h$ with $f\\circ g\\in S$ and $g\\circ h\\in S$ one has $g\\in S$. It is \\emph{compatible with the triangulated structure} (Tag 05R2) if (MS5) $f\\in S\\iff f[1]\\in S$, and (MS6) given distinguished triangles $X\\xrightarrow{u}Y\\xrightarrow{v}Z\\xrightarrow{w}X[1]$ and $X'\\xrightarrow{u'}Y'\\xrightarrow{v'}Z'\\xrightarrow{w'}X'[1]$ and $s:X\\to X'$, $s':Y\\to Y'$ in $S$ with $s'\\circ u=u'\\circ s$, there is $s'':Z\\to Z'$ in $S$ with $s''\\circ v=v'\\circ s'$ and $s[1]\\circ w=w'\\circ s''$. The \\emph{localization} of $\\mathcal D$ at $S$ is a functor $Q:\\mathcal D\\to S^{-1}\\mathcal D$ with $Q(s)$ invertible for all $s\\in S$ such that for every category $\\mathcal C$ composition with $Q$ is a bijection from functors $S^{-1}\\mathcal D\\to\\mathcal C$ to functors $\\mathcal D\\to\\mathcal C$ inverting $S$, and from natural transformations between two functors $G,G':S^{-1}\\mathcal D\\to\\mathcal C$ to natural transformations $G\\circ Q\\to G'\\circ Q$. \\emph{Situation 05S8}: $\\mathcal D,\\mathcal D'$ are triangulated categories, $F:\\mathcal D\\to\\mathcal D'$ is an exact functor, and $S$ is a saturated multiplicative system in $\\mathcal D$ compatible with the triangulated structure. In this situation, for an object $X$ of $\\mathcal D$ let $S/X$ be the category of arrows $s:X'\\to X$ in $S$ (morphisms the commuting triangles); the \\emph{left derived functor $LF$ is defined at $X$} (Tag 05S9) if the pro-object $S/X\\to\\mathcal D'$, $(s:X'\\to X)\\mapsto F(X')$, is essentially constant [def-pc-essentially-constant-pro-diagram], and its value $LF(X)\\in\\mathcal D'$ is then called the value of $LF$ at $X$.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Categories Definitions Tags 04VB and 04VD (categories.tex lines 3906ff, 4779); Derived Categories Definition Tag 05R2, Situation Tag 05S8, Definition Tag 05S9"
+ },
+ "stmt_deps": [
+  "def-weil-triangulated-category",
+  "def-pc-essentially-constant-pro-diagram"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "saturated multiplicative system triangulated compatibility MS1 MS6",
+   "results": "CategoryTheory.Triangulated.Localization.isTriangulated and ObjectProperty triangulation instances; no definition of Stacks MS1--MS6 saturation",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "saturated",
+   "results": "Unknown identifier saturated",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "MorphismProperty|IsLocalization in Mathlib/CategoryTheory/Localization",
+   "results": "localization and morphism-property APIs, but no Stacks saturation definition",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "item": "lem-pur-left-derived-exact-when-defined",
+  "by": "worker",
+  "date": "2026-10-11"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations"
+}

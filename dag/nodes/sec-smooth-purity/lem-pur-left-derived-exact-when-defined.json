@@ -13,18 +13,90 @@
  },
  "kind": "statement",
  "title": "Everywhere-defined left derived functors are exact",
- "statement": "Let $D$ and $D'$ be triangulated categories [def-weil-triangulated-category], let $F:D\\to D'$ be an exact functor, and let $S$ be a saturated multiplicative system in $D$ compatible with the triangulated structure. Let $Q:D\\to S^{-1}D$ be the localization [def-weil-abstract-derived-category]. If the left derived functor $LF:S^{-1}D\\to D'$ is defined at every object of $D$ in the sense of Definition Tag 05S9, then the functor $LF$ characterized by the universal property (equation derived-equation-everywhere) is exact as a functor of triangulated categories.",
+ "statement": "Let $D$ and $D'$ be triangulated categories [def-weil-triangulated-category], let $F:D\\to D'$ be an exact functor, and let $S$ be a saturated multiplicative system in $D$ compatible with the triangulated structure in the sense of [def-pur-saturated-triangulated-localization]. Let $Q:D\\to S^{-1}D$ be an abstract localization with the universal property in [def-pur-saturated-triangulated-localization] (and the derived-category specialization [def-weil-abstract-derived-category]). If the left derived functor $LF:S^{-1}D\\to D'$ is defined at every object of $D$ in the sense of Definition Tag 05S9, then the functor $LF$ characterized by the universal property (equation derived-equation-everywhere) is exact as a functor of triangulated categories.",
  "source": {
   "document": "literature/stacks-project/derived.tex",
   "place": "Definition Tag 05S9 (definition-derived-functor) and Proposition Tag 05SE (proposition-derived-functor), LF part"
  },
  "stmt_deps": [
   "def-weil-triangulated-category",
-  "def-weil-abstract-derived-category"
+  "def-weil-abstract-derived-category",
+  "def-pur-saturated-triangulated-localization"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The everywhere-defined values of LF are functorial on morphisms by Lemma 05SA(2), so they define the morphism part of LF.",
+   "uses": [
+    "lem-pur-derived-functor-morphisms-05sa"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "/home/ubuntu/c1-stacks-review/derived.tex",
+    "place": "Lemma 05SA(2)"
+   }
+  },
+  {
+   "text": "For every s in S, Lemma 05SB(2) says that LF(s) is an isomorphism, so the value construction factors through the abstract localization Q by its universal property.",
+   "uses": [
+    "lem-pur-derived-functor-inverts-05sb",
+    "def-pur-saturated-triangulated-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "/home/ubuntu/c1-stacks-review/derived.tex",
+    "place": "Lemma 05SB(2) and the localization universal property"
+   }
+  },
+  {
+   "text": "Lemma 05SU(2) supplies canonical isomorphisms LF(X)[n] \\to LF(X[n]) for every integer n, hence LF is compatible with the shift.",
+   "uses": [
+    "lem-pur-derived-functor-shift-05su"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "/home/ubuntu/c1-stacks-review/derived.tex",
+    "place": "Lemma 05SU(2)"
+   }
+  },
+  {
+   "text": "Applying Lemma 05SC to any distinguished triangle $(X,Y,Z,f,g,h)$ of $D$ (where $LF$ is defined at all objects) shows that $(LF(X),LF(Y),LF(Z),LF(f),LF(g),LF(h))$, with $LF(X[1])$ identified with $LF(X)[1]$ by the shift isomorphism of Step 3, is distinguished in $D'$. Thus $LF\\circ Q$, with the shift isomorphisms of Step 3, sends distinguished triangles of $D$ to distinguished triangles of $D'$.",
+   "uses": [
+    "lem-pur-derived-functor-triangles-05sc",
+    "lem-pur-derived-functor-morphisms-05sa",
+    "lem-pur-derived-functor-shift-05su"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "/home/ubuntu/c1-stacks-review/derived.tex",
+    "place": "Lemma 05SC, LF clause"
+   }
+  },
+  {
+   "text": "By Proposition 05R6, $S^{-1}D$ carries the triangulated structure with $[1]\\circ Q=Q\\circ[1]$, and every distinguished triangle of $S^{-1}D$ is isomorphic to $Q$ applied to a distinguished triangle of $D$. The shift isomorphisms of Step 3 for $LF\\circ Q$ descend to $LF$ by the universal property for natural transformations in [def-pur-saturated-triangulated-localization]; an isomorphic triangle of a distinguished triangle is distinguished (TR1 in $D'$), so Step 4 shows that $LF$ sends every distinguished triangle of $S^{-1}D$ to a distinguished triangle, and $LF$ is exact.",
+   "uses": [
+    "lem-pur-localization-triangles-05r6",
+    "def-pur-saturated-triangulated-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "/home/ubuntu/c1-stacks-review/derived.tex",
+    "place": "Proposition 05R6 and Proposition 05SE, LF part"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-derived-functor-morphisms-05sa",
+  "lem-pur-derived-functor-inverts-05sb",
+  "lem-pur-derived-functor-shift-05su",
+  "lem-pur-derived-functor-triangles-05sc",
+  "lem-pur-localization-triangles-05r6",
+  "def-pur-saturated-triangulated-localization"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Definition Tag 05S9, Lemma Tag 05SA, and Proposition Tag 05SE in Situation Tag 05S8"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -56,12 +128,27 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pur-left-derived-from-kflat-class",
   "by": "worker",
   "date": "2026-10-11"
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-def-sf-operations"
+ "unit": "sk-def-sf-operations",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pur-left-derived-exact-when-defined",
+  "worker": "stage1",
+  "summary": "Replaced the invalid one-step appeal to Proposition 05SE by the five ingredients of its proof: 05SA functoriality, 05SB inversion of S, 05SU shift compatibility, 05SC preservation of distinguished triangles, and 05R6 localization triangle normal form. Added an explicit definition node for saturated triangulated-compatible multiplicative systems and abstract localizations.",
+  "blueprint": "The two steps realize the exactness clause in the construction of the everywhere-defined exact left derived functor (Proposition Tag 05SE, LF part), via the 05S9 pointwise-Kan passage."
+ },
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-lde0132",
+  "group": "C1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-lde0132 (reviewer sub-agent of L); spot-checked: Both return points repaired: steps now follow 05SE proof via 05SA(2), 05SB(2), 05SU(2), 05SC, 05R6 (05R7 argument done inline in steps 2/5); abstract localization and 05R2 now defined in a node. Citers kflat-class (uses LF part exactness for D(A)=S^{-1}K(A)) and Kan bridge (does not cite item) consistent; no duplicates among same-tag nodes. FIX more, RETURN less: (1) C4 05SC node: dropped the added clause 'in particular the everywhere-defined LF is an exact functor' (not in 05SC; it is 05SE(2), the item's own content) and made the shift identification of LF(h) explicit; (2) C4 def-pur-saturated-triangulated-localization: saturation was mis-stated (MS4 labelled Ore/cancellation, 'closed under retracts', saturation via Q circularly); restated MS1-MS3 (04VB), MS4 (04VD), MS5-MS6 (05R2) from Stacks, the localization universal property, Situation 05S8 and Definition 05S9 (LF defined at X), stmt_dep def-pc-essentially-constant-pro-diagram added; (3) B8 05R6 leaf: distTriang_iff is at line 256 not 151; added [1]Q=Q[1], Q exact, uniqueness clauses from the 05R6 statement and named pretriangulated/isTriangulated_functor/isTriangulated (199/208/218) for clause 1; (4) B3 05SA/05SB/05SU/05SC: TeX, self-contained via the def node, 05SA comparison diagram and 05SB/05SU iff clauses stated as in Stacks; item steps 4-5 now state the triangle and the descent of the shift isomorphism. Second reading by C1 missed (1)-(3).; 7 file(s) fixed by the reviewer"
+ }
 }
