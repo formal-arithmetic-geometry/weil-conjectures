@@ -114,5 +114,29 @@
   "group": "M1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ddc2924 (reviewer sub-agent of L); spot-checked: E7/C4: statement diffed against sheaf-dag: text identical apart from four added citations [def-pc-scheme, def-weil-abstract-derived-category, def-weil-sheaf-of-modules-category, pqf-def-coherent]; no mathematical clause changed, so citers (lem-pc-perfect-generator-exists, lem-pc-qcqs-derived-direct-image-right-adjoint, lem-pc-derived-mayer-vietoris-triangle, lem-pc-affine-qcoh-derived-equivalence) unaffected; derived-category construction cites def-weil-abstract-derived-category (class b reuse); abelian category of O_X-modules is the clause of def-weil-sheaf-of-modules-category; quasi-coherent is clause 1 of pqf-def-coherent (Tag 01BE), no cycle; no triangulated-subcategory claim (Tag 08DL-area) smuggled in; def-pc-derived-direct-image and def-pc-global-derived-rhom consistent. Mathlib grep DerivedCategory+Scheme/SheafOfModules/Modules: 0 hits, not a leaf. FIX more, RETURN less: none needed."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.DerivedCategory",
+  "declaration": "AlgebraicGeometry.schemeDerivedCategory",
+  "declarations": [
+   "AlgebraicGeometry.schemeDerivedCategory",
+   "AlgebraicGeometry.schemeDerivedQCohProperty",
+   "AlgebraicGeometry.schemeDerivedQCohCategory"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/DerivedCategory.lean",
+  "statement": "abbrev schemeDerivedCategory (X : Scheme.{u}) [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] : Type _",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-pdc1201"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-pdc1201",
+  "group": "E1",
+  "result": "fix",
+  "note": "scheme X = Scheme.{u}; Mod(O_X) = SheafOfModules (moduleRings X.toRingedSpace) (shared carrier; X.Modules gives a second HasDerivedCategory, tested); D(O_X) = DerivedCategory with shared HasDerivedCategory.{w} binder; D_QCoh = FullSubcategory of forall n:Z IsQuasicoherent (homologyFunctor n).obj K; citers checked: IsCoherent on H^n, overFunctor.mapDerivedCategory, RingedSpace.derivedProducts, D_QCoh obj"
  }
 }
