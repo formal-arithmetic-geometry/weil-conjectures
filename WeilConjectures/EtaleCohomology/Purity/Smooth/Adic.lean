@@ -1,0 +1,99 @@
+/-
+Copyright (c) 2026 Claude. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Claude
+-/
+module
+
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.Reduction
+public import WeilConjectures.SixFunctors.Etale.Derived.NormalizedTowerRealization
+
+/-!
+# Adic reconstruction of smooth purity
+
+ADICDOC
+-/
+
+@[expose] public section
+
+universe u
+
+open CategoryTheory Limits
+
+open scoped CategoryTheory.Functor
+
+namespace AlgebraicGeometry
+
+open Scheme
+
+namespace Etale
+
+/-- The small étale site of a scheme is essentially small. Instance search does not find this
+in the presence of the imports of this file. -/
+local instance (X : Scheme.{u}) : EssentiallySmall.{u + 1} X.Etale :=
+  have : LocallySmall.{u + 1} X.Etale :=
+    @locallySmall_of_univLE X.Etale _ (@univLE_of_max.{u, u + 1} UnivLE.self)
+  essentiallySmall_of_small_of_locallySmall _
+
+section Adic
+
+open Opposite
+
+set_option hygiene false in
+/-- The derived category `D(X_ét, Λ)` of étale sheaves of `Λ`-modules on `X`. -/
+local notation "𝐃(" X ", " Λ ")" =>
+  _root_.DerivedCategory (Sheaf (Scheme.smallEtaleTopology X) (ModuleCat.{u + 1} Λ))
+
+variable {R : Type (u + 1)} [CommRing R] {I : Ideal R} [∀ n : ℕ, Finite (R ⧸ I ^ (n + 1))]
+  [∀ n : ℕ, HasTateTwist (R ⧸ I ^ (n + 1))] {X Y : Scheme.{u}} (d : ℤ) (f : X ⟶ Y)
+  [HasCompactification f]
+
+/-- The level `Lf^* K_n(d)[2d] ∈ D(X_ét, R ⧸ Iⁿ⁺¹)` of the source of the adic purity map of a
+normalized system `K = (K_n)_n` on `Y`. -/
+noncomputable abbrev twistShiftPullbackLevel (K : NormalizedTower I Y) (n : ℕ) :
+    𝐃(X, R ⧸ I ^ (n + 1)) :=
+  (twistShift (R ⧸ I ^ (n + 1)) X d).obj
+    ((L((f)^*[ModuleCat.{u + 1} (R ⧸ I ^ (n + 1))])).obj (K.obj n))
+
+/-- The level `Rf^! K_n ∈ D(X_ét, R ⧸ Iⁿ⁺¹)` of the target of the adic purity map of a
+normalized system `K = (K_n)_n` on `Y`. -/
+noncomputable abbrev upperShriekLevel (K : NormalizedTower I Y) (n : ℕ) :
+    𝐃(X, R ⧸ I ^ (n + 1)) :=
+  (R(f)^![ModuleCat.{u + 1} (R ⧸ I ^ (n + 1))]).obj (K.obj n)
+
+/-- Blueprint `thm-pur-adic-reconstruction`: Adic reconstruction
+
+Let `K = (K_n)_n` be a normalized system on `Y` (`AlgebraicGeometry.Etale.NormalizedTower`,
+levels `K_n ∈ D(Y_ét, A_n)`, `A_n = R ⧸ Iⁿ⁺¹`, the intended case being `R = 𝒪_E`), and let
+`f : X ⟶ Y` be smooth separated of relative dimension `d`. Let the levels `Lf^* K_n(d)[2d]` and
+`Rf^! K_n` carry their normalized-system structures (transition maps `tS`, `tT` exhibiting each
+level as the derived base change of the next), and let `γ_{f,K_n}` be the finite-coefficient
+purity isomorphisms (`thm-pur-finite-coefficient-smooth-purity`). If they commute with the
+transition maps — the finite reduction of purity, `thm-pur-finite-reduction-of-purity`
+(`AlgebraicGeometry.Etale.map_smoothPurityIso_hom_comp`) — they form a morphism of normalized
+systems, and they induce an isomorphism
+
+`Lf^* K(d)[2d] = R lim_n Lf^* K_n(d)[2d] ≅ R lim_n Rf^! K_n = Rf^! K`
+
+of the derived limits (the points of homotopy limit cones `cS`, `cT`) whose reduction at every
+level `n` is exactly `γ_{f,K_n}`. Both derived limits are derived complete for `I = (ϖ)`, i.e.
+the isomorphism lives at the integral stage. -/
+theorem exists_iso_realization_twistShiftPullbackLevel (K : NormalizedTower I Y)
+    (S T : NormalizedTower I X) (eS : ∀ n : ℕ, S.obj n ≅ twistShiftPullbackLevel d f K n)
+    (eT : ∀ n : ℕ, T.obj n ≅ upperShriekLevel f K n)
+    (γ : ∀ n : ℕ, twistShiftPullbackLevel d f K n ≅ upperShriekLevel f K n)
+    (hγ : ∀ n : ℕ, S.map n ≫ (derivedRestrictScalars (quotientPowSuccFactor I n) X).map
+        (eS n ≪≫ γ n ≪≫ (eT n).symm).hom =
+      (eS (n + 1) ≪≫ γ (n + 1) ≪≫ (eT (n + 1)).symm).hom ≫ T.map n)
+    {cS : Cone S.restrict} (hcS : Pretriangulated.IsHomotopyLimit cS)
+    {cT : Cone T.restrict} (hcT : Pretriangulated.IsHomotopyLimit cT) :
+    ∃ e : cS.pt ≅ cT.pt, ∀ n : ℕ, e.hom ≫ cT.π.app (Opposite.op n) =
+      cS.π.app (Opposite.op n) ≫ (derivedRestrictScalars (Ideal.Quotient.mk (I ^ (n + 1))) X).map
+        (eS n ≪≫ γ n ≪≫ (eT n).symm).hom :=
+  NormalizedTower.exists_iso_of_isHomotopyLimit S T _ hγ hcS hcT
+
+end Adic
+
+end Etale
+
+end AlgebraicGeometry
