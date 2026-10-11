@@ -20,7 +20,9 @@
   "document": "literature/stacks-project/more-algebra.tex",
   "place": "Tag 064X (more-algebra-lemma-summands-pseudo-coherent); the last clause through Tag 064T (more-algebra-lemma-pseudo-coherent: pseudo-coherent iff m-pseudo-coherent for every m)"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "def-pc-ring-m-pseudo-coherent"
+ ],
  "proof": [
   {
    "text": "Assume $K^\\bullet\\oplus L^\\bullet$ is $m$-pseudo-coherent. Since a witness $E^\\bullet$ is a bounded complex of projective modules, morphisms $E^\\bullet\\to C^\\bullet$ in $D(R)$ are represented by maps of complexes (Stacks, Derived Categories, Tag 064B), so for a complex the definition of the statement agrees with the one in $D(R)$ of the triangle lemma, and it is invariant under isomorphism in $D(R)$. The witness has $H^i(E^\\bullet)=0$ for $i$ large, so $H^i(K^\\bullet\\oplus L^\\bullet)=0$ for $i$ large; as cohomology commutes with finite direct sums, $K^\\bullet$ and $L^\\bullet$ are bounded above. The triangle $(K^\\bullet\\oplus L^\\bullet,\\,K^\\bullet\\oplus L^\\bullet,\\,L^\\bullet\\oplus L^\\bullet[1])$, with first map $\\mathrm{id}\\oplus 0$, is distinguished as the direct sum of the distinguished triangles $(K^\\bullet,K^\\bullet,0)$ and $(L^\\bullet,L^\\bullet,L^\\bullet\\oplus L^\\bullet[1])$ (Stacks, Derived Categories, Tag 05QS). An $m$-pseudo-coherent object is $(m+1)$-pseudo-coherent, since the same witness works. So the first term is $(m+1)$-pseudo-coherent and the second $m$-pseudo-coherent, and the first clause of [lem-pc-ring-pseudo-coherent-distinguished-triangle] shows that $L^\\bullet\\oplus L^\\bullet[1]$ is $m$-pseudo-coherent.",
@@ -118,5 +120,28 @@
   "group": "J1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-pcs3137 (reviewer sub-agent of L); spot-checked: Checked steps against Stacks 064X/064R/064W/064S/064U (tags/tags); proof correct, triangle node is a real ring-level lemma (scheme node lem-pc-pseudo-coherent-distinguished-triangle is not a duplicate; localization-glue is unrelated); no node defines ring m-pseudo-coherence. FIX more, RETURN less: (1) B/class d: lem-pc-ring-pseudo-coherent-recognize is elementary (zero-complex witness), folded into step 2 and dropped; (2) B3/C4: triangle node did not define m-pseudo-coherent and cited the scheme-level def-pc-derived-category for D(R): rewrote in TeX with the definition inline, stmt_deps def-weil-abstract-derived-category; (3) B4: step 3 plain arrow and all steps rewritten in TeX, step 3 now justifies finiteness of H^{n-1} of the cone (Tag 064S) and step 1 notes D(R) vs complex-map definitions agree (Tag 064B); (4) source tags corrected: cone lemma is 064R not 064W, criterion is 064U not 064T.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.RingPseudoCoherentSummand",
+  "declaration": "DerivedCategory.mPseudoCoherent_summand",
+  "file": "lean/Sheaf/Algebra/Homology/RingPseudoCoherentSummand.lean",
+  "statement": "theorem mPseudoCoherent_summand {R : Type u} [CommRing R] [HasDerivedCategory.{w} (ModuleCat.{v} R)] (m : ℤ) (K L : DerivedCategory (ModuleCat.{v} R)) (h : IsMPseudoCoherent m (K ⊞ L)) : IsMPseudoCoherent m K ∧ IsMPseudoCoherent m L",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-11",
+  "existing": false,
+  "declarations": [
+   "DerivedCategory.mPseudoCoherent_summand",
+   "DerivedCategory.pseudoCoherent_summand"
+  ],
+  "fixed_by": "R-pcs"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-pcs",
+  "group": "M1",
+  "result": "fix",
+  "note": "ring R CommRing, m : ℤ, K L in D(R)=DerivedCategory (ModuleCat.{v} R), K ⊞ L biproduct, IsMPseudoCoherent (landed def-pc-ring-m-pseudo-coherent) hypothesis and conjunction; consequence clause restated with landed DerivedCategory.IsPseudoCoherent instead of a hand-written bounded-above finite-free existential (H4); docstrings given the node proof"
  }
 }

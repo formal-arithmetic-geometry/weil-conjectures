@@ -5230,3 +5230,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 15:27 L: merged deliver/F1/lem-sc-generic-vanishing-acyclic (stage 2; reviewer PASS; first push; WeilConjectures.AlgebraicGeometry.Curve.GenericComparison AlgebraicGeometry.IsCurve.subsingleton_H_of_genericVanishing; existing declaration)
 - 15:27 L: merged deliver/U1/lem-weil-pbc-closed-immersion-coherent-equivalence (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.ClosedImmersionCoherentEquivalence AlgebraicGeometry.closedImmersion_coherent_equivalence)
 - 15:27 L: merged deliver/V1/lem-sp-exact-functor-couple (stage 2; reviewer PASS; first push; Sheaf.CategoryTheory.ExactFunctorCouple CategoryTheory.BigradedExactCouple.exactFunctor_couple)
+- 15:28 L: merged deliver/M1/lem-pc-ring-pseudo-coherent-summand (stage 2; reviewer FIX; first push; Sheaf.Algebra.Homology.RingPseudoCoherentSummand DerivedCategory.mPseudoCoherent_summand)
