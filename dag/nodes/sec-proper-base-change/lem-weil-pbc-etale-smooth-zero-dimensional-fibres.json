@@ -154,5 +154,25 @@
   "item": "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
   "worker": "stage1",
   "summary": "Statement kept (correct against the remark after Stacks 02GI). Argued from def-weil-etale-morphism (locally of finite presentation + flat + unramified with open-immersion diagonal), not from the second notion of etale in def-sbc-smooth-morphisms ('smooth of relative dimension zero'), which is what the statement proves. Smoothness is taken in the DAG's sense (lfp + formally smooth), so the route is Stacks More on Morphisms 02HM/04FF (flat + unramified => formally etale => formally smooth) rather than 02GK + 02H6, which would need the affine-local Stacks notions of etale/smooth (01V5) and the 02H6 identification as extra nodes; the fibre part uses Morphisms 02GL(2) (fibres discrete, points are spectra of finite separable extensions) and an elementary computation of dim_x from def-kun-dimension. Tag check: 02GK = lemma-etale-smooth-unramified, 02GL = lemma-etale-over-field, 02GM = lemma-etale-flat-etale-fibres (the converse criterion, not 'etale implies smooth'), 02G8 = lemma-unramified-etale-fibres, 02GF = lemma-unramified-at-point, 02G1 = lemma-smooth-omega-finite-locally-free, 02G4 = definition-unramified, 02GE = lemma-diagonal-unramified-morphism, 04FF = more-morphisms-lemma-unramified-flat-formally-etale, 02HM = more-morphisms-lemma-etale-formally-etale. stmt_deps unchanged. New nodes: lem-weil-pbc-flat-unramified-formally-etale (04FF) and lem-weil-pbc-etale-fibre-discrete-separable-points (02GL(2)), both unsplit, no Mathlib match."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleSmoothZeroDimensionalFibres",
+  "declaration": "AlgebraicGeometry.smooth_and_fibre_dimension_zero_of_etale",
+  "statement": "theorem smooth_and_fibre_dimension_zero_of_etale {X S : Scheme.{u}} (f : X ⟶ S) [Etale f] : Smooth f ∧ (∀ x : X, topologicalKrullDimAt (f.asFiber x) = 0) ∧ SmoothOfRelativeDimension 0 f",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": false,
+  "note": "Reviewer R-esz1002 fix: the delivered existing:true record (Mathlib instance Etale -> SmoothOfRelativeDimension 0) states only the node's 'in other words' clause; the node's explicit clauses Smooth f and dim_{x'} X_s = 0 (fibre f.fiber (f x), point f.asFiber x, topologicalKrullDimAt, as E1 4799d3421) are not definitionally that predicate (Mathlib's is standard-smooth charts; identification is Stacks 02G1). New statement gives all three clauses as a conjunction.",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleSmoothZeroDimensionalFibres.lean",
+  "fixed_by": "R-esz1002"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-esz1002",
+  "group": "F1",
+  "result": "fix",
+  "note": "arbitrary f : X ⟶ S with [Etale f] (def-weil-etale-morphism); Smooth f; ∀ x, topologicalKrullDimAt (f.asFiber x) = 0 on f.fiber (f x) = X ×_S Spec κ(f x); SmoothOfRelativeDimension 0 f for the in-other-words clause; empty X vacuous"
  }
 }
