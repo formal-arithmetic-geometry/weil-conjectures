@@ -5519,3 +5519,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 18:16 L: merged deliver/S1/lem-sc-derived-internal-hom-stalk-localization (stage 2; reviewer FIX; first push; Sheaf.Paper.DerivedInternalHomStalkLocalization AlgebraicGeometry.derivedInternalHom_stalk_localization; statement correction reverted (statement, statement_change))
 - 18:17 L: merged deliver/R1/lem-pc-rf-base-change-complex (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.RelativelyFlatDerivedBaseChangeComplex AlgebraicGeometry.relativelyFlat_derivedBaseChange_complex)
 - 18:17 L: returned deliver/Q1/cor-galois-lisse-representations (reviewer RETURN: Stage-2 review R-glr of aa136832c. (H7) The statement correction puts 'Noetherian, separated, ell invertible' in the PRE)
+- 18:18 L: merged deliver/C1/lem-pc-global-hom-adjunction (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.GlobalHomAdjunction AlgebraicGeometry.schemeGlobalDerivedHom_adjunction)

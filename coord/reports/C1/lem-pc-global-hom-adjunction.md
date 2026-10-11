@@ -1,73 +1,189 @@
-Files written:
+## Worker report
 
-- `dag/nodes/sec-picard-framework/lem-pc-global-hom-adjunction.json` (statement, split proof; no new nodes; Mathlib searches found no exact scheme-level declaration).
+The module `Sheaf.AlgebraicGeometry.GlobalHomAdjunction` states
+`AlgebraicGeometry.schemeGlobalDerivedHom_adjunction`, with a `sorry` proof.
+There are no new definitions or additional nodes.
 
-Attachments:
+Hypotheses and clauses:
 
-- None.
+- X and Y are schemes: `(X Y : Scheme.{u})`.
+- X and Y are quasi-compact and quasi-separated: `[CompactSpace X]`,
+  `[QuasiSeparatedSpace X]`, `[CompactSpace Y]`, `[QuasiSeparatedSpace Y]`.
+- f is a quasi-compact and quasi-separated scheme morphism: `(f : X ⟶ Y)`,
+  `[QuasiCompact f]`, `[QuasiSeparated f]`.
+- Rf_* preserves D_QCoh: `hpres` is the preservation witness, with the exact
+  signature used by `schemeDerivedDirectImage_qcqs_hasRightAdjoint`.
+- a is its right adjoint: `a : schemeDerivedQCohCategory Y ⥤ schemeDerivedQCohCategory X`
+  and `_adj` is an adjunction from the full-subcategory lift of the shared
+  `schemeDerivedDirectImage f` to a. These are supplied as binders because the
+  node starts with the right adjoint already given; their existence is exactly
+  the dependency theorem. The result holds for any such preservation witness and adjunction.
+- P belongs to D_QCoh(X) and K to D_QCoh(Y): the source of each comparison
+  functor is `schemeDerivedQCohCategory X` opposite times `schemeDerivedQCohCategory Y`.
+  Its full-subcategory inclusions send P and a(K) into D(O_X), and Rf_*P and K
+  into D(O_Y), respectively.
+- The global derived Hom complexes are the shared `schemeGlobalDerivedHom X`
+  and `schemeGlobalDerivedHom Y`. The left side is followed by
+  `(ModuleCat.restrictScalars f.appTop.hom).mapDerivedCategory` (with explicit
+  ring and localization universe parameters). This is the scalar restriction
+  along Γ(Y,O_Y) → Γ(X,O_X) expressly specified in step 2 of the node's proof.
+  Without that restriction the two complexes live in different categories.
+- Existence and naturality: `Nonempty (leftFunctor ≅ rightFunctor)` is an
+  isomorphism of functors, hence a single comparison natural contravariantly
+  in P and covariantly in K, rather than a collection of unrelated object isomorphisms.
+- `HasDerivedCategory` binders provide the four localizations, with independent
+  morphism universes `wX`, `wY`, `wAX`, `wAY`. They are the infrastructure
+  binders of the dependency definitions, not extra geometric assumptions.
+  All universes and variables are explicitly bound.
 
-WANTED:
+Dependencies read and used:
 
-- None.
+- `Sheaf.AlgebraicGeometry.DerivedCategory`: `schemeDerivedCategory`,
+  `schemeDerivedQCohProperty`, `schemeDerivedQCohCategory`, with full-subcategory
+  inclusion `.ι` and Mathlib's object-property `.lift`.
+- `Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage`: `schemeDerivedDirectImage`.
+- `Sheaf.AlgebraicGeometry.QCqsDerivedDirectImageRightAdjoint`:
+  `schemeDerivedDirectImage_qcqs_hasRightAdjoint`; its statement supplies precisely
+  the preservation witness and the existence of an adjunction used here.
+- `Sheaf.AlgebraicGeometry.GlobalDerivedHom`: `schemeGlobalDerivedHom`; its full
+  definition is shared derived internal Hom followed by `schemeDerivedGlobalSections`.
+- Mathlib `ModuleCat.restrictScalars`, `Functor.mapDerivedCategory`, and `Functor.prod`
+  supply exact scalar restriction on derived categories and the product bifunctors.
 
-What was checked and corrected:
+Edge cases checked before writing: the empty scheme and zero complexes are not
+excluded; no nonempty hypothesis is imposed. There is no boundedness, perfectness,
+properness, flatness or Noetherian assumption. Independent localization universes
+are retained; the scalar restriction uses the same universe-u modules as the global
+Hom definition. For f the identity the comparison is the ordinary global Hom functor
+comparison (up to the identity restriction and choice of right adjoint). For affine
+schemes the scalar restriction is the usual restriction along the base ring map.
 
-- The target node and its source route were read against Stacks Project `duality.tex`, Tag 0AA8 (Lemma 48.6.2), case (1). The slopmaster2 source was searched for the blueprint tag and the relevant global RHom/right-adjoint declarations; no sorry-free project declaration states this item.
-- The statement already has the correct qcqs hypotheses, restricted derived direct image, supplied right adjoint, and natural global RHom conclusion, so I left it unchanged. Its existing statement dependencies are exactly the notions used in the statement.
-- Step 1 uses `lem-pc-qcqs-derived-direct-image-right-adjoint`; that node explicitly states both preservation of `D_QCoh` and existence of the restricted right adjoint. I verified that its source is Stacks Tag 0A9E and that it is not a definition or a weaker preservation-only fact.
-- Step 2 uses `def-pc-global-derived-rhom` for the definition and functoriality of global RHom, together with the same right-adjoint node for the adjunction data. The step spells out that the derived adjunction comparison is transported through derived global sections and is natural in both variables, which is the exact content required by the target.
-- I searched the whole DAG and blueprint for global RHom adjunction variants and found no duplicate node. The mandated Mathlib searches were run for LeanFinder, Loogle, and Mathlib grep; LeanFinder returned only generic `CategoryTheory.Adjunction.derived`, Loogle had no usable hit, and grep found no scheme-level RHom theorem. The existing search records and these fresh searches consistently give no exact Mathlib match.
-- Edge cases checked: taking `f` to be an identity morphism reduces the statement to the identity RHom isomorphism; taking `P=0` or `K=0` gives the zero complex on both sides. Naturality follows from the adjunction and the functoriality in the global RHom definition.
+Source read: https://stacks.math.columbia.edu/tag/0B6I (lemma-iso-global-hom,
+currently Lemma 48.3.10). The local literature checkout is absent, so the tag was
+read online. It states the global Hom isomorphism and proves it by global sections
+of the coherator comparison. The module docstring carries both node proof steps,
+including the ringed-space composition and coherator detection. No statement
+correction or disputed statement is needed; scalar restriction is already spelled
+out in the node's proof.
 
-## Review by C1
+Searches for existing declarations:
 
-I read the target node, `def-pc-global-derived-rhom`, `lem-pc-qcqs-derived-direct-image-right-adjoint`, and the relevant Tag 0AA8 route in the blueprint. For Step 1, the cited statement supplies exactly the qcqs preservation and right-adjoint hypotheses used. For Step 2, the cited definition supplies global derived sections of internal Hom and functoriality, while the right-adjoint statement supplies the natural adjunction comparison. I checked that no step relies on an uncited child lemma, that no created node duplicates an existing DAG or blueprint statement, and that the item’s blueprint ancestor/place fields remain the imported Tag 0AA8 case (1). The only correction was replacing the empty proof with these two explicit steps and marking the item `split`; no source or statement error was found.
+- msearch leansearch, `global derived Hom adjunction scheme pushforward`:
+  unavailable, Internal Server Error.
+- msearch leanfinder, `global derived Hom adjunction right adjoint of scheme derived
+  pushforward`: eight hits, all ordinary module/sheaf pushforward adjunctions;
+  none states the global derived Hom comparison for a right adjoint to Rf_*.
+- msearch loogle, `ModuleCat.restrictScalars, Functor.prod`: no hits, unknown
+  identifier `Functor.prod`. Direct source reading found these generic constructions.
+- msearch grep, `derived.*[Hh]om.*[Aa]djunction|global.*[Hh]om` in AlgebraicGeometry:
+  four unrelated projective-spectrum/global-sections hits, no matching theorem.
+- rg in upstream WeilConjectures and project lean/Sheaf,
+  `lem-pc-global-hom-adjunction|globalDerivedHom|global.*[Hh]om.*[Aa]djunction`:
+  only the project ProperFlatRightAdjointAffineBaseChange proof-docstring reference;
+  no matching declaration. Broader searches for GlobalDerivedHom/restrictScalars
+  located the shared definition and generic scalar-restriction material.
+- Read the full recorded declarations and docstrings of all four statement dependencies,
+  and Mathlib ChangeOfRings, Products.Basic and DerivedCategory.ExactFunctor.
 
-What could not be finished:
-
-- Nothing; no new node was required.
-
-## Repair R-gha2726
-
-- The returned child statement was false: Tag 0A9Q proves the sheaf trace comparison only after applying (DQ_Y). I changed `lem-pc-qcqs-sheaf-rhom-adjunction` to state the counit-induced map and its (DQ_Y)-isomorphism, and added `lem-pc-dq-coherator-adjunction` for the coherator right adjoint and its global-section detection consequence.
-- The target proof now names the counit/sheafy trace in Step 1. Step 2 explicitly uses the derived Leray identity (R\Gamma(Y,-)\circ Rf_*=R\Gamma(X,-)), then applies the (DQ_Y) detection argument (H^i(Y,E)=\operatorname{Hom}(\mathcal O_Y[-i],DQ_YE)) from Tag 0B6I.
-- I read `/home/ubuntu/c1-stacks-review/duality.tex` at lines 558--607 and 660--690: Tag 0A9Q gives the coherated sheaf map, while Tag 0B6I constructs the counit map and derives the global statement. I also reread the statements of `lem-pc-qcqs-derived-direct-image-right-adjoint`, `def-pc-global-derived-rhom`, and `lem-pc-projection-formula`; no projection formula is needed in this corrected route.
-- The new coherator node is statement-only and self-contained, cites `def-pc-derived-category`, records LeanFinder/Loogle/grep searches (with the unavailable LeanSearch service not misreported), and has the required blueprint ancestor/place. Search of all DAG nodes and `blueprint_refs.py` found no duplicate coherator node.
-
-## Source error
-
-The earlier child statement omitted (DQ_Y) and asserted an isomorphism in (D(\mathcal O_Y)). This is exactly the false assertion ruled out by the example immediately after Tag 0A9Q (for (Y=\operatorname{Spec}(R)), (X=\mathbf A^1_R), the right side can be a non-quasi-coherent product). The corrected statement follows the source and avoids that counterexample.
-
-## Review by C1 (repair)
-
-I checked the corrected item and both child nodes against the cited source text. Step 1 uses the right-adjoint statement only for preservation and existence, and the corrected child statement supplies precisely the counit-induced map and the post-(DQ_Y) isomorphism. Step 2 uses the global RHom definition for both identifications, treats the Leray composition as the elementary derived-direct-image identity, and uses the new coherator node for the non-elementary passage from a (DQ_Y)-isomorphism to a quasi-isomorphism on derived global sections. The hypotheses (f) qcqs, (P,L\in D_{\mathrm{QCoh}}(X)), and (K\in D_{\mathrm{QCoh}}(Y)) are present at each application; the identity morphism and zero complexes remain immediate edge cases. I replaced every stale citation quote in `citations.json` with verbatim text from the repaired node statements and verified the new node's three mandated Mathlib searches were actually run.
+Validation: local lcompile passes without warnings. The final delivery dry run
+runs the server compile and preflight; the independent second reading is left
+for the dispatcher-appointed second reader.
 
 ## Second reading by C1
 
-- Item statement: checked against Stacks Tag 0B6I (Lemma 48.1.1, `lemma-iso-global-hom`); the original 0AA8 source pointer was incorrect and is repaired.
-- Step 1: checked qcqs right-adjoint input and the sheaf-level RHom comparison against the statements of `lem-pc-qcqs-derived-direct-image-right-adjoint` and the new child node; verdict: repaired.
-- Step 2: checked the passage from the sheaf-level comparison to global RHom against Tag 0B6I and `def-pc-global-derived-rhom`; verdict: repaired.
-- New node `lem-pc-qcqs-sheaf-rhom-adjunction`: checked self-contained hypotheses, exact sheaf-level conclusion, Tag 0B6I source, edge cases including identity and zero complexes; verdict: needed non-elementary intermediate statement.
-- Changes: corrected all item source locations from Tag 0AA8 to Tag 0B6I; added the sheaf-level RHom child node and citations; rewrote both proof steps so the global-complex isomorphism follows through derived global sections rather than directly from categorical Hom bijections.
+I independently opened the node, the delivered module, all four statement-dependency
+nodes and their recorded source modules. The local Stacks checkout is absent. I read
+[Tag 0B6I](https://stacks.math.columbia.edu/tag/0B6I) and the original
+[duality.tex](https://raw.githubusercontent.com/stacks/stacks-project/master/duality.tex),
+including `lemma-twisted-inverse-image`, `equation-sheafy-trace`,
+`lemma-iso-on-RSheafHom` and `lemma-iso-global-hom`. The section uses qcqs schemes,
+the right adjoint of the restricted unbounded direct image, and quasi-coherent
+cohomology, without Noetherian, properness, boundedness or perfectness assumptions.
+The node explicitly assumes f qcqs; this adds no geometric restriction beyond its
+qcqs source and target. The source specifies the counit-induced comparison; the
+node asks for existence of a natural isomorphism, and this is exactly the delivered
+conclusion. Its proof docstring describes that canonical construction.
 
-The source-field correction is recorded in the sandbox copy, but `source` is a maintainer-owned field and the delivery tool preserves the repository's existing 0AA8 metadata. The source text read for this second reading is `/home/ubuntu/c1-stacks-review/duality.tex`: the sheaf comparison is `lemma-iso-on-RSheafHom` (Tag 0A9Q), and the global statement is `lemma-iso-global-hom` (Tag 0B6I). The maintainer should update the imported source metadata when accepting this delivery. I also checked that the right-adjoint dependency carries the stronger quasi-compact/quasi-separated hypotheses on both schemes; the item's explicit premise that the restricted right adjoint exists is the premise used by both proof steps, so no additional hypothesis was silently inserted here.
+Object, hypothesis and conclusion checklist (each verdict is PASS):
 
-## Repair R-gha2856
+1. X and Y are schemes: `(X Y : Scheme.{u})`. This is Mathlib's scheme, not a
+   ringed-space replacement or an affine specialization.
+2. X is quasi-compact and quasi-separated: `[CompactSpace X]` and
+   `[QuasiSeparatedSpace X]`. Y has the same two binders. These render the node's
+   four geometric conditions without a separation or Noetherian strengthening.
+3. f is a morphism X to Y: `(f : X ⟶ Y)`, with `[QuasiCompact f]` and
+   `[QuasiSeparated f]` as expressly stated by the node.
+4. D_QCoh is the full subcategory of D(O) of complexes with quasi-coherent
+   cohomology: `schemeDerivedQCohCategory`, via `schemeDerivedQCohProperty` and
+   `.ι`, read in `DerivedCategory.lean`. It is not D(QCoh) substituted for this
+   full subcategory, and no boundedness constraint is imposed.
+5. Rf_* is the recorded `schemeDerivedDirectImage f`, read in
+   `SchemeDerivedDirectImage.lean`: the unbounded derived direct image of
+   `f.toLRSHom.toShHom`. `hpres` and the ObjectProperty `.lift` give its restriction
+   to D_QCoh, precisely as in `schemeDerivedDirectImage_qcqs_hasRightAdjoint`.
+   This preservation witness is supplied by the cited theorem, not an additional
+   mathematical hypothesis.
+6. a is the given right adjoint: `(a : schemeDerivedQCohCategory Y ⥤
+   schemeDerivedQCohCategory X)` and `_adj : restricted_Rf_* ⊣ a`. The quantifiers
+   allow any such right adjoint and adjunction; existence is supplied by the
+   dependency, so no choice or stronger adjunction is imposed.
+7. P ranges over all D_QCoh(X), and K over all D_QCoh(Y): both functors have domain
+   `(schemeDerivedQCohCategory X)ᵒᵖ × schemeDerivedQCohCategory Y`.
+   `.ι.op.prod (a ⋙ .ι)` sends `(op P,K)` to `(op P,a(K))`; the other `.op.prod .ι`
+   sends it to `(op (Rf_*P),K)`. Reading Mathlib `Functor.prod` confirms the order.
+8. Global RHom is the shared `schemeGlobalDerivedHom` in `GlobalDerivedHom.lean`:
+   derived internal Hom followed by unbounded `schemeDerivedGlobalSections`, with
+   values in D(Γ(X,O_X)) or D(Γ(Y,O_Y)). I also read the underlying
+   `derivedInternalHom` construction; no private notion is introduced.
+9. Both global Hom sides have the correct common coefficient ring:
+   `(ModuleCat.restrictScalars f.appTop.hom).mapDerivedCategory` on the X side
+   restricts Γ(X,O_X)-modules to Γ(Y,O_Y)-modules. Its ring-map direction agrees
+   with Mathlib ChangeOfRings and with the explicit scalar restriction in node
+   proof step 2. It changes no Hom object by tensor extension.
+10. Existence and naturality of the isomorphism: `Nonempty (leftFunctor ≅
+    rightFunctor)` provides one natural comparison, contravariant in P and
+    covariant in K, for every pair simultaneously. It is not merely an
+    objectwise collection, nor does it assert an uncohered sheaf-Hom isomorphism.
+11. The four `HasDerivedCategory` binders are exactly the infrastructure needed
+    by the recorded scheme and module derived categories. Their morphism
+    universes `wX wY wAX wAY` are independent and explicitly bound, as is `u`.
+    They do not add geometric assumptions or force the four localizations into
+    the same morphism universe. The common scheme universe loses no pair of
+    schemes, since both can be represented in a common ambient universe.
 
-- Added the missing hypothesis that both X and Y are quasi-compact and quasi-separated to the item and to `lem-pc-qcqs-sheaf-rhom-adjunction`. This is the hypothesis required by Tag 0B6I/0A9Q and by the right-adjoint dependency.
-- Corrected `lem-pc-dq-coherator-adjunction` so its source scheme Y is explicitly quasi-compact and quasi-separated, matching the perfect.tex `lemma-better-coherator` source.
-- Added `lem-pc-derived-direct-image-composition` to Step 2, `proof_deps`, and `citations.json`. Step 2 now spells out the structure morphisms, the canonical composition isomorphism, and restriction of scalars along `Gamma(Y,O_Y) -> Gamma(X,O_X)` before using the derived Leray identity. The citation quote is copied verbatim from that node's statement.
+Edge cases: empty schemes satisfy the geometric hypotheses and are not excluded;
+zero complexes are included in both full subcategories. No characteristic is
+specified and the coefficient rings may be zero. There is no index-set binder or
+integer parameter that could remove the empty-index or n = 0 cases. Unbounded
+complexes and all integer cohomological degrees are retained. Identity morphisms
+and affine schemes give the usual comparisons, with ordinary scalar restriction.
 
-## Review by C1 (repair R-gha2856)
+Independent searches, using different phrases from the worker:
 
-I reread the item, both child statements, the existing right-adjoint node, and `lem-pc-derived-direct-image-composition`. The item and sheaf child now introduce qcqs X and Y before invoking the right adjoint; the coherator child now has the qcqs Y hypothesis required by its `lemma-better-coherator` source. For Step 1, the right-adjoint and sheaf comparison statements still supply exactly the preservation, counit, and post-DQ_Y isomorphism used. For Step 2, I checked that the composition node states the canonical `R(f o p)_* = Rf_* o Rp_*` isomorphism used for the structure morphisms, and that the global RHom definition and coherator detection statement cover the remaining identifications. I added the composition node to `uses` and `proof_deps`, and added its verbatim statement sentence to `citations.json`; JSON parsing succeeds for all edited files.
+- `msearch leanfinder "Grothendieck duality global Ext comparison right adjoint
+  direct image"`: eight results, ordinary sheaf adjunctions, Gabriel-Popescu and
+  condensed modules; none is the scheme global derived-Hom comparison.
+- `msearch loogle '"rightAdjoint", "Hom"'`: twelve results, algebra forgetful
+  adjoints and generic uniqueness of right adjoints; none states this comparison.
+- `msearch grep 'globalDerivedHom|iso_global_hom|derivedHom.*[Aa]djunction'`:
+  zero matches.
+- Direct `rg` over Mathlib, upstream WeilConjectures and project lean/Sheaf with
+  `globalDerivedHom|iso_global_hom|derivedHom.*[Aa]djunction|globalHom.*[Aa]djunction`:
+  no matching theorem. Broader Hom/adjunction and global Hom searches found the
+  shared global Hom definition, generic tensor-Hom results and an étale category
+  adjunction, all different from this theorem.
+- `msearch leansearch "global Ext duality isomorphism for right adjoint to derived
+  pushforward"`: service unavailable (Internal Server Error), recorded without a
+  mathematical verdict. The successful semantic, type/name and direct searches
+  above provide the independent existing-declaration check.
 
-## Second reading by C1
-
-- Item statement: checked against `duality.tex`, Tag 0B6I, label `lemma-iso-global-hom`; qcqs hypotheses and both global RHom objects agree, verdict: pass.
-- Step 1: checked against the right-adjoint statement and Tag 0A9Q child statement; corrected the description to use the stated counit-induced comparison rather than an unsupported “apply Rf_*” construction, verdict: repaired.
-- Step 2: checked against Tag 0B6I proof, `def-pc-global-derived-rhom`, the coherator child, and the derived direct-image composition statement; the Leray and DQ_Y detection applications have the needed qcqs hypotheses, verdict: pass.
-- `lem-pc-qcqs-sheaf-rhom-adjunction`: checked against `duality.tex`, Tag 0A9Q, label `lemma-iso-on-RSheafHom`; the map and post-coherator isomorphism match, verdict: pass.
-- `lem-pc-dq-coherator-adjunction`: checked against `perfect.tex`, label `lemma-better-coherator`, and the final paragraph of Tag 0B6I; right adjunction and global-section detection are stated with qcqs Y, verdict: pass.
-- `lem-pc-derived-direct-image-composition`: checked against `cohomology.tex`, Lemma 20.28.2 (Tag 0D5T); its canonical composition isomorphism is exactly what Step 2 uses, verdict: pass.
-- Changes: rewrote Step 1 to match the cited child statement and appended this review; no statement or dependency changes were needed.
+No new nodes or dependency modules are present or needed. No statement correction
+is present or necessary, so the correction/citer audit does not apply. I found no
+mismatch and changed no Lean or node content. The declaration uses only `by sorry`,
+introduces no definition, and has no hollow data or additional proved lemma. Both
+source docstrings and the two-step proof match the node, including the coherator
+and ringed-space composition arguments. Imports serve the adjunction, global Hom,
+scalar restriction and product functors; no local notation or hidden let is used.
+All variables and universes are bound. The node's recorded signature agrees with
+the file. Local lcompile returned exit code 0 without warnings. Final server
+compilation and preflight are run by deliver2 below.
