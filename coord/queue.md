@@ -1,11 +1,11 @@
 # Work queue
 
-132 items; claim with `tools/claim.py next <group> [--stage N]`.
+128 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (132)
+## Stage 2: nodes to state (128)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
@@ -50,7 +50,6 @@
 | `lem-pc-noetherian-perfect-direct-image` | 1 | state | 0 |
 | `lem-pc-projection-locality` | 1 | state | 0 |
 | `lem-pc-proper-derived-direct-image-composition` | 1 | state | 0 |
-| `lem-pc-proper-direct-image-finite-tor` | 1 | state | 0 |
 | `lem-pc-proper-perfect-direct-image-perfect` | 1 | state | 0 |
 | `lem-pc-qcqs-sheaf-rhom-adjunction` | 1 | state | 0 |
 | `lem-pc-rf-base-change-complex` | 1 | state | 0 |
@@ -68,7 +67,6 @@
 | `lem-sc-affine-koszul-cech-derived-comparison` | 1 | state | 0 |
 | `lem-sc-affine-perfect-derived-tensor-hom` | 1 | state | 0 |
 | `lem-sc-affine-projective-complex-derived-hom` | 1 | state | 0 |
-| `lem-sc-affine-rhom-qcoherent` | 1 | state | 0 |
 | `lem-sc-boundary-derivation-square-zero` | 1 | state | 0 |
 | `lem-sc-derived-internal-hom-stalk-localization` | 1 | state | 0 |
 | `lem-sc-ext-sheaf-to-global-spectral-sequence` | 1 | state | 0 |
@@ -95,14 +93,12 @@
 | `lem-sc-qcoh-acyclic-derived-pushforward-cohomology` | 1 | state | 0 |
 | `lem-sc-qcoh-acyclic-derived-sections-comparison` | 1 | state | 0 |
 | `lem-sc-sheaf-ext-coherent` | 1 | state | 0 |
-| `lem-sc-smooth-proper-curve-dualizing` | 1 | state | 0 |
 | `lem-sc-smooth-proper-diagonal-basechange-upper-shriek` | 1 | state | 0 |
 | `lem-sc-smooth-proper-diagonal-koszul-dual` | 1 | state | 0 |
 | `lem-sc-smooth-proper-diagonal-pushforward-structure` | 1 | state | 0 |
 | `lem-sc-smooth-proper-diagonal-tensor-formula` | 1 | state | 0 |
 | `lem-sc-smooth-proper-relative-dualizing-general` | 1 | state | 0 |
 | `lem-sc-smooth-proper-tensor-perfect-case` | 1 | state | 0 |
-| `lem-sc-strict-henselization-dvr` | 1 | state | 0 |
 | `lem-weil-pbc-coherent-formal-modules-local-exactness` | 1 | state | 0 |
 | `lem-weil-pbc-coherent-formal-short-exact-levels` | 1 | state | 0 |
 | `lem-weil-pbc-cohomology-powers-ideal-application` | 1 | state | 0 |
