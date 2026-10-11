@@ -169,10 +169,10 @@ noncomputable def rightDerivedUpperShriekCompIsoOfLowerShriek
     (rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) g))
     (rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) (f ≫ g)) α
 
+omit [HasTateTwist Λ] in
 /-- The counit of `R(f ≫ g)_! ⊣ R(f ≫ g)^!`, read through the conjugate composition
 isomorphisms, is the counit `Rg_! Rf_! Rf^! Rg^! ⟶ Rg_! Rg^! ⟶ 𝟭` of the composite
 adjunction. -/
-omit [HasTateTwist Λ] in
 lemma rightDerivedUpperShriekCompIsoOfLowerShriek_hom_app_counit
     (α : R(f ≫ g)_![ModuleCat.{u + 1} Λ] ≅
       R(f)_![ModuleCat.{u + 1} Λ] ⋙ R(g)_![ModuleCat.{u + 1} Λ])
@@ -278,6 +278,81 @@ theorem smoothTrace_comp (d e : ℤ) (α : R(f ≫ g)_![ModuleCat.{u + 1} Λ] �
   rfl
 
 end Composition
+
+section BaseChange
+
+variable {X Y X' Y' : Scheme.{u}} {g : X' ⟶ X} {f' : X' ⟶ Y'} {f : X ⟶ Y} {v : Y' ⟶ Y}
+  [HasCompactification f] [HasCompactification f']
+
+/-- The exchange `Lg^* Rf^! ⟶ Rf'^! Lv^*` of a commutative square `g ≫ f = f' ≫ v`
+conjugate to a compact-support base change isomorphism `β : Lg^* ⋙ Rf'_! ≅ Rf_! ⋙ Lv^*`: the
+adjoint of `Rf'_! Lg^* Rf^! K ≅ Lv^* Rf_! Rf^! K ⟶ Lv^* K`. -/
+noncomputable def upperShriekBaseChangeOfLowerShriek
+    (β : L((g)^*[ModuleCat.{u + 1} Λ]) ⋙ R(f')_![ModuleCat.{u + 1} Λ] ≅
+      R(f)_![ModuleCat.{u + 1} Λ] ⋙ L((v)^*[ModuleCat.{u + 1} Λ]))
+    (K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
+    (L((g)^*[ModuleCat.{u + 1} Λ])).obj ((R(f)^![ModuleCat.{u + 1} Λ]).obj K) ⟶
+      (R(f')^![ModuleCat.{u + 1} Λ]).obj ((L((v)^*[ModuleCat.{u + 1} Λ])).obj K) :=
+  (rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) f').homEquiv _ _
+    (β.hom.app _ ≫ (L((v)^*[ModuleCat.{u + 1} Λ])).map
+      ((rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) f).counit.app K))
+
+omit [HasTateTwist Λ] in
+/-- The defining property of the conjugate exchange: the counit of `Rf'_! ⊣ Rf'^!` after
+`Rf'_!` of the exchange is the base change of the counit of `Rf_! ⊣ Rf^!`. -/
+lemma rightDerivedLowerShriek_map_upperShriekBaseChangeOfLowerShriek_comp_counit
+    (β : L((g)^*[ModuleCat.{u + 1} Λ]) ⋙ R(f')_![ModuleCat.{u + 1} Λ] ≅
+      R(f)_![ModuleCat.{u + 1} Λ] ⋙ L((v)^*[ModuleCat.{u + 1} Λ]))
+    (K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
+    (R(f')_![ModuleCat.{u + 1} Λ]).map (upperShriekBaseChangeOfLowerShriek Λ β K) ≫
+        (rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) f').counit.app _ =
+      β.hom.app _ ≫ (L((v)^*[ModuleCat.{u + 1} Λ])).map
+        ((rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) f).counit.app K) := by
+  have h := ((rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) f').homEquiv_counit
+    (g := upperShriekBaseChangeOfLowerShriek Λ β K)).symm
+  rwa [upperShriekBaseChangeOfLowerShriek, Equiv.symm_apply_apply] at h
+
+/-- Blueprint `thm-pur-trace-normalization-transitivity`: Trace normalization and transitivity
+
+**Base change of the smooth traces.** Let `g ≫ f = f' ≫ v` be a cartesian square with `f`
+smooth separated of relative dimension `d`, let `β : Lg^* ⋙ Rf'_! ≅ Rf_! ⋙ Lv^*` be the
+compact-support base change, and let the purity maps `γ_{f,K}` and `γ_{f',Lv^* K}` satisfy the
+smooth base-change coherence `thm-pur-smooth-base-change-coherence` with respect to the exchange
+`Lg^* Rf^! ⟶ Rf'^! Lv^*` conjugate to `β`
+(`AlgebraicGeometry.Etale.upperShriekBaseChangeOfLowerShriek`). Then the smooth trace is
+compatible with the base change: the square
+
+```
+Rf'_! Lg^*(Lf^* K(d)[2d]) ──β──▶ Lv^* Rf_! Lf^* K(d)[2d]
+        │ ≅                              │ Lv^* Tr^sm_{f,K}
+        ▼                                ▼
+Rf'_! Lf'^* Lv^* K(d)[2d] ──Tr^sm_{f',Lv^* K}──▶ Lv^* K
+```
+
+commutes. -/
+theorem smoothTrace_baseChange {d : ℕ} (sq : IsPullback g f' f v)
+    (β : L((g)^*[ModuleCat.{u + 1} Λ]) ⋙ R(f')_![ModuleCat.{u + 1} Λ] ≅
+      R(f)_![ModuleCat.{u + 1} Λ] ⋙ L((v)^*[ModuleCat.{u + 1} Λ]))
+    {K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
+    (γ : (twistShift Λ X d).obj ((L((f)^*[ModuleCat.{u + 1} Λ])).obj K) ≅
+      (R(f)^![ModuleCat.{u + 1} Λ]).obj K)
+    (γ' : (twistShift Λ X' d).obj ((L((f')^*[ModuleCat.{u + 1} Λ])).obj
+        ((L((v)^*[ModuleCat.{u + 1} Λ])).obj K)) ≅
+      (R(f')^![ModuleCat.{u + 1} Λ]).obj ((L((v)^*[ModuleCat.{u + 1} Λ])).obj K))
+    (hγ : (L((g)^*[ModuleCat.{u + 1} Λ])).map γ.hom ≫
+        upperShriekBaseChangeOfLowerShriek Λ β K =
+      (leftDerivedUpperStarTwistShiftBaseChangeIso Λ d f sq.toCommSq K).hom ≫ γ'.hom) :
+    (R(f')_![ModuleCat.{u + 1} Λ]).map
+        (leftDerivedUpperStarTwistShiftBaseChangeIso Λ d f sq.toCommSq K).hom ≫
+      smoothTrace Λ d f' γ' =
+    β.hom.app _ ≫ (L((v)^*[ModuleCat.{u + 1} Λ])).map (smoothTrace Λ d f γ) := by
+  have hβ := β.hom.naturality γ.hom
+  simp only [Functor.comp_obj, Functor.comp_map] at hβ
+  rw [smoothTrace, ← Functor.map_comp_assoc, ← hγ, Functor.map_comp_assoc,
+    rightDerivedLowerShriek_map_upperShriekBaseChangeOfLowerShriek_comp_counit,
+    reassoc_of% hβ, smoothTrace, Functor.map_comp]
+
+end BaseChange
 
 end Etale
 
