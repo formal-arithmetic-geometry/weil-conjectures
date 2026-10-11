@@ -185,5 +185,24 @@
   "item": "lem-weil-pbc-site-equivalence-is-morphism-of-sites",
   "worker": "stage1",
   "summary": "Checked the statement against sites.tex Definitions 00VH, 00WV, 00X1 and Lemmas 00WW, 00WX: correct as written (clause (4) asks exactness on sheaves of sets, as 00X1 does; the quasi-inverse claims hold on sets and abelian sheaves). Proof in 7 steps: (1) via the isomorphic-family lemma and naturality of epsilon, which also makes the hypotheses symmetric in (p,p'); fibre products preserved since p is a right adjoint of p' (new Mathlib leaf lem-weil-pbc-quasi-inverse-adjoint, Equivalence.mk + toAdjunction) and right adjoints preserve limits; continuity; p^s, p'^s quasi-inverse via 00WW node and epsilon, eta; p_s iso to p'^s by uniqueness of left adjoints (conjugate-iso node), hence quasi-inverse; exactness: left adjoint gives colimits, the iso with the right adjoint p'^s gives limits; p' by symmetry. Lemma 03A0 is not needed. Mathlib: no statement for Stacks family-sites (searches of the creator, all three kinds, still valid); Equivalence.sheafCongr covers only clause (3) for Grothendieck topologies."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SiteEquivalenceMorphismOfSites",
+  "declaration": "CategoryTheory.site_equivalence_is_morphism_of_sites",
+  "file": "lean/Sheaf/CategoryTheory/SiteEquivalenceMorphismOfSites.lean",
+  "statement": "theorem site_equivalence_is_morphism_of_sites {A C : Type u} [SmallCategory A] [SmallCategory C] (JA : Precoverage A) (JC : Precoverage C) [JA.HasIsos] [JA.IsStableUnderComposition] [JA.IsStableUnderBaseChange] [JA.HasPullbacks] [JC.HasIsos] [JC.IsStableUnderComposition] [JC.IsStableUnderBaseChange] [JC.HasPullbacks] (p : A ⥤ C) [p.IsEquivalence] (p' : C ⥤ A) (eta : 𝟭 A ≅ p ⋙ p') (epsilon : p' ⋙ p ≅ 𝟭 C) (hcover : ∀ (X : A) (R : Presieve X), R ∈ JA X ↔ R.map p ∈ JC (p.obj X)) : (∀ (Y : C) (R : Presieve Y), R ∈ JC Y ↔ R.map p' ∈ JA (p'.obj Y)) ∧ (∀ (X Y Z : A) (R : Presieve X), R ∈ JA X → ∀ (f : Y ⟶ X) (g : Z ⟶ X), R f → PreservesLimit (cospan f g) p) ∧ (∀ (X Y Z : C) (R : Presieve X), R ∈ JC X → ∀ (f : Y ⟶ X) (g : Z ⟶ X), R f → PreservesLimit (cospan f g) p') ∧ ∃ (hp : p.IsContinuous JA.toGrothendieck JC.toGrothendieck), ∃ (hp' : p'.IsContinuous JC.toGrothendieck JA.toGrothendieck), Nonempty (p.sheafPushforwardContinuous (Type u) JA.toGrothendieck JC.toGrothendieck ⋙ p'.sheafPushforwardContinuous (Type u) JC.toGrothendieck JA.toGrothendieck ≅ 𝟭 (Sheaf JC.toGrothendieck (Type u))) ∧ Nonempty (p'.sheafPushforwardContinuous (Type u) JC.toGrothendieck JA.toGrothendieck ⋙ p.sheafPushforwardContinuous (Type u) JA.toGrothendieck JC.toGrothendieck ≅ 𝟭 (Sheaf JA.toGrothendieck (Type u))) ∧ Nonempty (p.sheafPushforwardContinuous (AddCommGrpCat.{u}) JA.toGrothendieck JC.toGrothendieck ⋙ p'.sheafPushforwardContinuous (AddCommGrpCat.{u}) JC.toGrothendieck JA.toGrothendieck ≅ 𝟭 (Sheaf JC.toGrothendieck (AddCommGrpCat.{u}))) ∧ Nonempty (p'.sheafPushforwardContinuous (AddCommGrpCat.{u}) JC.toGrothendieck JA.toGrothendieck ⋙ p.sheafPushforwardContinuous (AddCommGrpCat.{u}) JA.toGrothendieck JC.toGrothendieck ≅ 𝟭 (Sheaf JA.toGrothendieck (AddCommGrpCat.{u}))) ∧ PreservesFiniteLimits (Functor.sheafPullback p (Type u) JA.toGrothendieck JC.toGrothendieck) ∧ PreservesFiniteColimits (Functor.sheafPullback p (Type u) JA.toGrothendieck JC.toGrothendieck) ∧ PreservesFiniteLimits (Functor.sheafPullback p' (Type u) JC.toGrothendieck JA.toGrothendieck) ∧ PreservesFiniteColimits (Functor.sheafPullback p' (Type u) JC.toGrothendieck JA.toGrothendieck) ∧ Nonempty (Functor.sheafPullback p (Type u) JA.toGrothendieck JC.toGrothendieck ⋙ p.sheafPushforwardContinuous (Type u) JA.toGrothendieck JC.toGrothendieck ≅ 𝟭 (Sheaf JA.toGrothendieck (Type u))) ∧ Nonempty (p.sheafPushforwardContinuous (Type u) JA.toGrothendieck JC.toGrothendieck ⋙ Functor.sheafPullback p (Type u) JA.toGrothendieck JC.toGrothendieck ≅ 𝟭 (Sheaf JC.toGrothendieck (Type u))) ∧ Nonempty (Functor.sheafPullback p' (Type u) JC.toGrothendieck JA.toGrothendieck ⋙ p'.sheafPushforwardContinuous (Type u) JC.toGrothendieck JA.toGrothendieck ≅ 𝟭 (Sheaf JC.toGrothendieck (Type u))) ∧ Nonempty (p'.sheafPushforwardContinuous (Type u) JC.toGrothendieck JA.toGrothendieck ⋙ Functor.sheafPullback p' (Type u) JC.toGrothendieck JA.toGrothendieck ≅ 𝟭 (Sheaf JA.toGrothendieck (Type u)))",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-12",
+  "existing": false,
+  "fixed_by": "R-sem"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-sem",
+  "group": "G1",
+  "result": "fix",
+  "note": "sites=Precoverage+4 axiom classes, SmallCategory; p equivalence, p', eta, epsilon, covering iff for p; (1) iff for p'; (2) 00WV fibre-product clauses (PreservesLimit cospan) for p and p' added + IsContinuous; (3) four pushforward quasi-inverse isos (Type, Ab); (4) exactness of sheafPullback p, p' and p_s/p^s, p'_s/p'^s quasi-inverse isos (replacing p_s/p'_s isos)"
  }
 }
