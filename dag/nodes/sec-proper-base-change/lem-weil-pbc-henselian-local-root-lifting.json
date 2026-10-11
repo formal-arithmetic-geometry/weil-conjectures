@@ -172,5 +172,24 @@
   "by": "L",
   "result": "pass",
   "note": "five steps along Stacks 04GG (uniqueness of idempotent lifts via the Jacobson radical; (i)⇒(ii) through R[T]/(f) and the lifted idempotent, written out; (ii)⇒(8) and (8)⇒(10) as two new statement nodes; (10)⇒(i) written out); 5 new nodes, three Mathlib leaves verified by the lead (LocalRing/Module.lean:304, AdjoinRoot.lean:633, GoingUp.lean:204); the brief's pointer to lem-weil-pbc-henselian-etale-retraction for (1)⇒(8) would have closed a cycle, replaced by lem-weil-pbc-root-lifting-etale-retraction"
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.HenselianLocalRootLifting",
+  "declaration": "IsLocalRing.idempotent_lifting_iff_monic_simple_root_lifting",
+  "file": "lean/Sheaf/RingTheory/HenselianLocalRootLifting.lean",
+  "statement": "theorem idempotent_lifting_iff_monic_simple_root_lifting (R : Type u) [CommRing R] [IsLocalRing R] : (∀ (B : Type (max u v)) [CommRing B] [Algebra R B] [Module.Finite R B], ∀ e₀ : B ⧸ (maximalIdeal R).map (algebraMap R B), IsIdempotentElem e₀ → ∃! e : B, IsIdempotentElem e ∧ Ideal.Quotient.mk ((maximalIdeal R).map (algebraMap R B)) e = e₀) ↔ (∀ f : Polynomial R, f.Monic → ∀ a₀ : ResidueField R, Polynomial.aeval a₀ f = 0 → Polynomial.aeval a₀ f.derivative ≠ 0 → ∃ a : R, f.IsRoot a ∧ residue R a = a₀)",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-11",
+  "existing": false,
+  "note": "The idempotent condition is spelled out inline, as directed by the lean.note of def-weil-pbc-henselian-terminology; the other side spells out the residue-field condition of HenselianLocalRing.TFAE. No private henselian predicate is introduced."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-hrl1115",
+  "group": "J1",
+  "result": "pass",
+  "note": "local ring R = [CommRing R][IsLocalRing R]; (i) inline idempotent lifting over finite B : Type (max u v) mod (maximalIdeal R).map, ∃! idempotent lift, same form as landed StrictlyHenselianOfDimensionZero/HenselianIntegralIdempotentLifting per def-weil-pbc-henselian-terminology note; (ii) monic f, a0 in ResidueField, aeval a0 f = 0, aeval a0 f' ≠ 0, ∃ a, IsRoot ∧ residue a = a0 = HenselianLocalRing.TFAE item 2; not Mathlib's is_henselian (an iff with the idempotent form); #check ok, compiles"
  }
 }
