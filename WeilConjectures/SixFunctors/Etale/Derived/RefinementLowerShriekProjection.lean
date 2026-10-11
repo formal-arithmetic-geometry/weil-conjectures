@@ -150,6 +150,60 @@ lemma refinementLowerShriekProjectionMap_baseChange (hcart : IsPullback c.i (�
       exact refinementSquareMap_tensor A r M N) K M
   rw [NatTrans.id_app, NatTrans.id_app, CategoryTheory.Functor.map_id, Category.id_comp] at h
   exact h
+
+section Iso
+
+variable {FC : A → A → Type*} {CC : A → Type (u + 1)}
+  [∀ (P Q : A), FunLike (FC P Q) (CC P) (CC Q)] [ConcreteCategory.{u + 1} A FC]
+  [(CategoryTheory.forget A).ReflectsIsomorphisms]
+  [PreservesFilteredColimitsOfSize.{u + 1, u + 1} (CategoryTheory.forget A)]
+  [∀ Z : Scheme.{u}, Z.smallEtaleTopology.HasSheafCompose (CategoryTheory.forget A)]
+
+/-- The inverse form of `refinementLowerShriekProjectionMap_baseChange`, with the projection
+map `j_!K ⊗ᴸ M ⟶ j_!(K ⊗ᴸ Lj^*M)`. -/
+lemma refinementLowerShriekProjectionIso_inv_baseChange (hcart : IsPullback c.i (𝟙 X) r.hom d.i)
+    (K : DerivedCategory (Sheaf X.smallEtaleTopology A))
+    (M : DerivedCategory (Sheaf d.Z.smallEtaleTopology A)) :
+    L((r.hom)^*[A]).map (((derivedOpenImmersionLowerShriekProjectionIso A d.i).inv.app K).app M) ≫
+        (refinementLowerShriekBaseChangeLeftDerivedIso A r hcart).inv.app
+          (((-⊗ᴸ-(X)[A]).obj K).obj (L((d.i)^*[A]).obj M)) =
+      ((leftDerivedUpperStarTensorComparison A r.hom).app (D((d.i)_!open[A]).obj K)).app M ≫
+        ((-⊗ᴸ-(c.Z)[A]).map ((refinementLowerShriekBaseChangeLeftDerivedIso A r hcart).inv.app
+          K)).app (L((r.hom)^*[A]).obj M) ≫
+        ((derivedOpenImmersionLowerShriekProjectionIso A c.i).inv.app K).app
+          (L((r.hom)^*[A]).obj M) ≫
+        D((c.i)_!open[A]).map (((-⊗ᴸ-(X)[A]).obj K).map
+          ((leftDerivedUpperStarComp A c.i r.hom d.i r.i_hom.symm).inv.app M)) := by
+  have h := refinementLowerShriekProjectionMap_baseChange A r hcart K M
+  rw [← cancel_epi (L((r.hom)^*[A]).map
+      (((derivedOpenImmersionLowerShriekProjectionIso A d.i).hom.app K).app M)),
+    ← Functor.map_comp_assoc, Iso.hom_inv_id_app_app, CategoryTheory.Functor.map_id,
+    Category.id_comp,
+    ← cancel_epi ((refinementLowerShriekBaseChangeLeftDerivedIso A r hcart).hom.app
+      (((-⊗ᴸ-(X)[A]).obj K).obj (L((d.i)^*[A]).obj M))), Iso.hom_inv_id_app,
+    derivedOpenImmersionLowerShriekProjectionIso_hom]
+  erw [reassoc_of% h]
+  have e₁ : ((-⊗ᴸ-(c.Z)[A]).map ((refinementLowerShriekBaseChangeLeftDerivedIso A r hcart).hom.app
+        K)).app (L((r.hom)^*[A]).obj M) ≫
+      ((-⊗ᴸ-(c.Z)[A]).map ((refinementLowerShriekBaseChangeLeftDerivedIso A r hcart).inv.app
+        K)).app (L((r.hom)^*[A]).obj M) = 𝟙 _ := by
+    rw [← NatTrans.comp_app, ← Functor.map_comp, Iso.hom_inv_id_app]
+    erw [CategoryTheory.Functor.map_id]
+    rfl
+  have e₂ : ((derivedOpenImmersionLowerShriekProjectionMap A c.i).app K).app
+        (L((r.hom)^*[A]).obj M) ≫
+      ((derivedOpenImmersionLowerShriekProjectionIso A c.i).inv.app K).app
+        (L((r.hom)^*[A]).obj M) = 𝟙 _ := by
+    rw [← derivedOpenImmersionLowerShriekProjectionIso_hom, Iso.hom_inv_id_app_app]
+  have e₃ : D((c.i)_!open[A]).map (((-⊗ᴸ-(X)[A]).obj K).map
+        ((leftDerivedUpperStarComp A c.i r.hom d.i r.i_hom.symm).hom.app M)) ≫
+      D((c.i)_!open[A]).map (((-⊗ᴸ-(X)[A]).obj K).map
+        ((leftDerivedUpperStarComp A c.i r.hom d.i r.i_hom.symm).inv.app M)) = 𝟙 _ := by
+    rw [← Functor.map_comp, ← Functor.map_comp, Iso.hom_inv_id_app]
+    erw [CategoryTheory.Functor.map_id, CategoryTheory.Functor.map_id]
+  rw [reassoc_of% e₁, reassoc_of% e₂, e₃]
+
+end Iso
 end Etale
 
 end AlgebraicGeometry
