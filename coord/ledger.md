@@ -4378,3 +4378,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 11:04 L: merged deliver/K1/lem-weil-pbc-integral-closure-zariski-main-away (stage 2; reviewer PASS; first push; Sheaf.RingTheory.ZariskisMainAway Algebra.zariskisMainProperty_of_isQuasiFiniteAtPrime)
 - 11:05 L: merged deliver/C1/lem-weil-pbc-intersection-subfields-differentials (stage 2; reviewer FIX; first push; Sheaf.FieldTheory.IntersectionSubfieldsDifferentials FieldTheory.intersection_subfields_differentials)
 - 11:05 L: merged deliver/M1/lem-weil-pbc-jacobi-zariski-regular-sequence-left-injective (stage 2; reviewer PASS; first push; Sheaf.RingTheory.JacobiZariskiRegularSequenceLeftInjective Algebra.jacobiZariski_left_injective_of_regularSequence)
+- 11:05 L: merged deliver/K1/lem-weil-pbc-kollar-local-dichotomy (stage 2; reviewer PASS; first push; Sheaf.RingTheory.KollarLocalDichotomy IsLocalRing.kollar_local_dichotomy)

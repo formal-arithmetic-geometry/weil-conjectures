@@ -233,5 +233,23 @@
   "worker": "stage1",
   "summary": "Checked against Stacks Algebra 0BHZ (lemma-hart-serre-loc-thm, line 28923) and its proof; tags 0BHZ, 05BT, 00LL, 00LX, 00KJ verified in tags/tags. Not a Mathlib leaf (pinned Mathlib has no depth; LeanSearch/LeanFinder/Loogle/grep recorded). Proof in 9 steps following the source: Artinian case; J = largest ideal killed by a power of m (Noetherian => J = Ann(m^n)); J != 0 gives (4) with R/J (the checks R/J != 0 and m not associated to R/J, omitted in the source, written out); J = 0 gives a nonzerodivisor x via 00LL; m not associated to R/xR gives depth >= 2; else y with y m in xR: if y m in x m the determinantal trick (new Mathlib leaf for 05BT) makes R[y/x] in R_x a finite extension as in (4) with n = 1; otherwise m = (t) and dim R = 1 (upper bound by 00KQ node, lower bound via minimal primes being associated, J = 0), so (2). (ii): the kernel is killed by f^n for a nonzerodivisor f, and the cokernel has depth >= 1 by the depth lemma 00LX node and is killed by m^n, hence 0. Statement unchanged except that 'finitely generated' now cites def-weil-finitely-generated-module (added to stmt_deps). One new node: lem-weil-pbc-endomorphism-finite-module-monic (05BT), Mathlib leaf LinearMap.exists_monic_and_aeval_eq_zero."
  },
- "reviewed": "pass (L, 2026-10-10): 9 steps follow 0BHZ: not Artinian means no power of m vanishes; J = Ann(m^n) is the largest ideal killed by a power of m; J nonzero gives (4) with R/J; J = 0 gives a nonzerodivisor x in m; either m is not associated to R/xR (depth >= 2, (3)) or y with ym in xR exists; ym in xm gives (4) via R[y/x] (determinantal trick, new leaf 05BT) and ym not in xm gives m = (t), regular of dimension 1 ((2)); (ii): the kernel dies and the cokernel has depth >= 1 by 00LX yet is killed by m^n. Source gaps written out."
+ "reviewed": "pass (L, 2026-10-10): 9 steps follow 0BHZ: not Artinian means no power of m vanishes; J = Ann(m^n) is the largest ideal killed by a power of m; J nonzero gives (4) with R/J; J = 0 gives a nonzerodivisor x in m; either m is not associated to R/xR (depth >= 2, (3)) or y with ym in xR exists; ym in xm gives (4) via R[y/x] (determinantal trick, new leaf 05BT) and ym not in xm gives m = (t), regular of dimension 1 ((2)); (ii): the kernel dies and the cokernel has depth >= 1 by 00LX yet is killed by m^n. Source gaps written out.",
+ "lean": {
+  "module": "Sheaf.RingTheory.KollarLocalDichotomy",
+  "declaration": "IsLocalRing.kollar_local_dichotomy",
+  "file": "lean/Sheaf/RingTheory/KollarLocalDichotomy.lean",
+  "statement": "theorem kollar_local_dichotomy (R : Type u) [CommRing R] [IsLocalRing R] [IsNoetherianRing R] : let extension : Prop := ∃ (S : Type (max u v)) (sRing : CommRing S), letI := sRing ∃ φ : R →+* S, letI := φ.toAlgebra Nontrivial S ∧ Module.Finite R S ∧ ¬ Function.Bijective φ ∧ (∃ n : ℕ, 1 ≤ n ∧ (maximalIdeal R) ^ n * RingHom.ker φ = ⊥ ∧ ∀ z ∈ Ideal.map φ ((maximalIdeal R) ^ n), z ∈ φ.range) ∧ ¬ ∃ z : S, ∀ a : R, φ a * z = 0 ↔ a ∈ maximalIdeal R (IsArtinianRing R ∨ (IsRegularLocalRing R ∧ ringKrullDim R = 1) ∨ (2 : ℕ∞) ≤ depth (R := R) R ∨ extension) ∧ ¬ ((2 : ℕ∞) ≤ depth (R := R) R ∧ extension)",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-kld1105",
+  "group": "K1",
+  "result": "pass",
+  "note": "Noetherian local R as [CommRing][IsLocalRing][IsNoetherianRing]; (1) IsArtinianRing; (2) Mathlib IsRegularLocalRing (regular-scheme mathlib_match) and ringKrullDim R = 1; (3) 2 <= IsLocalRing.depth R (#print confirms namespace resolution); (4) S : Type (max u v) nontrivial, Module.Finite via phi.toAlgebra, not bijective, n>=1 with m^n*ker=bot and map phi m^n in range, no z with annihilator exactly m; (i) four-way disjunction, (ii) not (3 and 4); statement fields unchanged; no hollow hypotheses"
+ }
 }
