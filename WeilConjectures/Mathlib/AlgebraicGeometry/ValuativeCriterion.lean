@@ -7,6 +7,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine
 public import Mathlib.AlgebraicGeometry.ValuativeCriterion
+public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
 
 /-!
 # The existence part of the valuative criterion is local at the target
@@ -18,6 +19,10 @@ version of `SpecializingMap`, which is local at the target; we record the result
 We also prove an affineness criterion for opens of universally closed schemes,
 `AlgebraicGeometry.IsAffineOpen.of_universallyClosed`, by checking the valuative criterion for
 the canonical map `U ⟶ Spec Γ(X, U)`.
+
+Finally, every specialization `y' ⤳ y` in a scheme is the image of the specialization in
+`Spec A` for a valuation ring `A` whose fraction field is the algebraic closure of `κ(y')`
+(`AlgebraicGeometry.Scheme.exists_valuationSubring_of_specializes`).
 -/
 
 @[expose] public section
@@ -201,5 +206,34 @@ theorem IsAffineOpen.of_universallyClosed {X S : Scheme.{u}} (f : X ⟶ S) [Univ
   · rintro _ ⟨j, rfl⟩
     rw [hgD, ha]
     exact (hD j).basicOpen _
+
+section Specialization
+
+open IsLocalRing
+
+/-- **A specialization comes from a valuation ring.** If `y' ⤳ y` in a scheme `Y`, there are a
+valuation ring `A` with fraction field the algebraic closure `Ω` of `κ(y')` and a morphism
+`ρ : Spec A ⟶ Y` sending the closed point to `y` and whose restriction to `Spec Ω` is
+`Spec Ω ⟶ Spec κ(y') ⟶ Y`. -/
+lemma Scheme.exists_valuationSubring_of_specializes {Y : Scheme.{u}} {y' y : Y} (h : y' ⤳ y) :
+    ∃ (A : ValuationSubring (AlgebraicClosure (Y.residueField y'))) (ρ : Spec (.of A) ⟶ Y),
+      ρ (closedPoint A) = y ∧
+      Spec.map (CommRingCat.ofHom (algebraMap A (AlgebraicClosure (Y.residueField y')))) ≫ ρ =
+        Spec.map (CommRingCat.ofHom (algebraMap (Y.residueField y')
+          (AlgebraicClosure (Y.residueField y')))) ≫ Y.fromSpecResidueField y' := by
+  let φ : Y.presheaf.stalk y ⟶ .of (AlgebraicClosure (Y.residueField y')) :=
+    Y.presheaf.stalkSpecializes h ≫ Y.residue y' ≫
+      CommRingCat.ofHom (algebraMap (Y.residueField y') (AlgebraicClosure (Y.residueField y')))
+  obtain ⟨A, hA, hA_local⟩ := IsLocalRing.exists_factor_valuationRing φ.hom
+  let ψ : Y.presheaf.stalk y ⟶ .of A := CommRingCat.ofHom (φ.hom.codRestrict _ hA)
+  refine ⟨A, Spec.map ψ ≫ Y.fromSpecStalk y, ?_, ?_⟩
+  · have : Spec.map ψ (closedPoint A) = closedPoint (Y.presheaf.stalk y) :=
+      IsLocalRing.comap_closedPoint (S := A) (φ.hom.codRestrict A.toSubring hA)
+    rw [Scheme.Hom.comp_apply, this, Y.fromSpecStalk_closedPoint]
+  · rw [Scheme.fromSpecResidueField, ← Scheme.SpecMap_stalkSpecializes_fromSpecStalk h]
+    simp_rw [← Spec.map_comp_assoc]
+    rfl
+
+end Specialization
 
 end AlgebraicGeometry
