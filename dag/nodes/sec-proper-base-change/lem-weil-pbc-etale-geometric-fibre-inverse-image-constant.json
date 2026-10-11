@@ -137,5 +137,23 @@
   "group": "H1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-gfc1730 (reviewer sub-agent of L); spot-checked: No cycle: item no longer cites lem-weil-pbc-etale-geometric-fibre-constant-sections; new node (Spec of alg. closed field: every etale sheaf constant, stalk at id = global sections) is true, not a duplicate of the 03P5/0A3H nodes listed, not elementary. FIX more, RETURN less: C1 - the proof only treated G=sbar^{-1}F on Spec Omega and never passed to U; added step 3 using composition-units c_{sbar,h,F} and existing lem-weil-pbc-sets-etale-inverse-image-constant-sheaf (gamma_h: h^{-1} const = const), and rewrote the naturality step to use its uniqueness clause and associativity; proof_deps updated.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleGeometricFibreInverseImageConstant",
+  "declaration": "AlgebraicGeometry.etaleGeometricFibreInverseImageConstant",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleGeometricFibreInverseImageConstant.lean",
+  "statement": "theorem etaleGeometricFibreInverseImageConstant (S : Scheme.{u}) (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S) : ∃ α : ∀ (U : Scheme.{u}) (h : U ⟶ Spec (.of Ω)), Scheme.etaleSetPullback (h ≫ s) ≅ (Scheme.pointSmallEtale s).sheafFiber ⋙ constantSheaf U.smallEtaleTopology (Type (u + 1)), (∀ (F : Sheaf S.smallEtaleTopology (Type (u + 1))) (W : S.Etale) (t : (Scheme.pointSmallEtale s).fiber.obj W) (a : Scheme.Etale.mk (𝟙 (Spec (.of Ω))) ⟶ (MorphismProperty.Over.pullback @Etale ⊤ (𝟙 (Spec (.of Ω)) ≫ s)).obj W) (σ : F.obj.obj (op W)), a.left ≫ CategoryTheory.Limits.pullback.fst W.hom (𝟙 (Spec (.of Ω)) ≫ s) = t.left → ((α (Spec (.of Ω)) (𝟙 _)).hom.app F).hom.app (op (Scheme.Etale.mk (𝟙 (Spec (.of Ω))))) (((Scheme.etaleSetPullback (𝟙 (Spec (.of Ω)) ≫ s)).obj F).obj.map a.op (((Functor.sheafPullbackConstruction.sheafAdjunctionContinuous (MorphismProperty.Over.pullback @Etale ⊤ (𝟙 (Spec (.of Ω)) ≫ s)) (Type (u + 1)) (S.smallGrothendieckTopology @Etale) ((Spec (.of Ω)).smallGrothendieckTopology @Etale)).unit.app F).hom.app (op W) σ)) = (toSheafify (Spec (.of Ω)).smallEtaleTopology ((Functor.const (Spec (.of Ω)).Etaleᵒᵖ).obj ((Scheme.pointSmallEtale s).sheafFiber.obj F))).app (op (Scheme.Etale.mk (𝟙 (Spec (.of Ω))))) ((Scheme.pointSmallEtale s).toPresheafFiber W t F.obj σ)) ∧ ∀ (U V : Scheme.{u}) (h : U ⟶ Spec (.of Ω)) (v : V ⟶ U) (F : Sheaf S.smallEtaleTopology (Type (u + 1))) (W : U.Etale) (e : (Scheme.pointSmallEtale s).sheafFiber.obj F), (((Classical.choose etaleSetInverseImageCompositionUnits.2.2) S U V (h ≫ s) v).hom.app F).hom.app (op ((MorphismProperty.Over.pullback @Etale ⊤ v).obj W)) (((Functor.sheafPullbackConstruction.sheafAdjunctionContinuous (MorphismProperty.Over.pullback @Etale ⊤ v) (Type (u + 1)) (U.smallGrothendieckTopology @Etale) (V.smallGrothendieckTopology @Etale)).unit.app ((Scheme.etaleSetPullback (h ≫ s)).obj F)).hom.app (op W) (((α U h).inv.app F).hom.app (op W) ((toSheafify U.smallEtaleTopology ((Functor.const U.Etaleᵒᵖ).obj ((Scheme.pointSmallEtale s).sheafFiber.obj F))).app (op W) e))) = (((α V (v ≫ h)).inv.app F ≫ eqToHom (congrArg (fun k : V ⟶ S => (Scheme.etaleSetPullback k).obj F) (Category.assoc v h s))).hom.app (op ((MorphismProperty.Over.pullback @Etale ⊤ v).obj W))) ((toSheafify V.smallEtaleTopology ((Functor.const V.Etaleᵒᵖ).obj ((Scheme.pointSmallEtale s).sheafFiber.obj F))).app (op ((MorphismProperty.Over.pullback @Etale ⊤ v).obj W)) e)",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "M1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }
