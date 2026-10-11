@@ -157,5 +157,24 @@
   "date": "2026-10-09",
   "by": "L",
   "result": "pass"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.InjectiveModuleDirectImageAcyclic",
+  "declaration": "AlgebraicGeometry.Etale.isZero_higherDirectImage_of_injective_module",
+  "file": "lean/Sheaf/AlgebraicGeometry/InjectiveModuleDirectImageAcyclic.lean",
+  "statement": "theorem isZero_higherDirectImage_of_injective_module {X S : Scheme.{u}} (p : X ⟶ S) (R : Type u) [CommRing R] (I : SheafOfModules.{u + 1} ((constantSheaf X.smallEtaleTopology RingCat.{u + 1}).obj (RingCat.of (ULift.{u + 1, u} R)))) [Injective I] (q : ℕ) (hq : 0 < q) : IsZero ((DerivedCategory.Plus.homologyFunctor (Sheaf S.smallEtaleTopology AddCommGrpCat.{u + 1}) (q : ℤ)).obj ((rightDerivedLowerStarPlus AddCommGrpCat.{u + 1} p).obj ((DerivedCategory.Plus.singleFunctor (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) 0).obj ((SheafOfModules.toSheaf _).obj I))))",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-ida1058"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-ida1058",
+  "group": "M1",
+  "result": "fix",
+  "note": "p:X⟶S arbitrary; R commutative (Type u, ULift as recorded SheafOfModules encoding of def-weil-pbc-etale-sheaves, same as K1 sibling); I : SheafOfModules over constantSheaf, [Injective I] in module category (inferInstance fails: not hollow); toSheaf underlying abelian sheaf; R^q p_* = homologyFunctor q ∘ rightDerivedLowerStarPlus ∘ singleFunctor 0 (def-weil-pbc-direct-image); q:ℕ, 0<q; IsZero in Sheaf S AddCommGrpCat"
  }
 }
