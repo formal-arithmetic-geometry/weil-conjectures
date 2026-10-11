@@ -14,7 +14,7 @@
 | `def-pc-global-derived-rhom` | 1 | state | 4 |
 | `def-pc-derived-rhom-algebra-module` | 1 | state | 2 |
 | `def-weil-pbc-etale-shriek-to-star-map` | 1 | state | 2 |
-| `lem-sc-etale-qcoherent-presheaf-functorial` | 1 | state | 8 |
+| `lem-sc-etale-qcoherent-descent` | 1 | state | 6 |
 | `lem-pc-cech-resolution` | 1 | state | 1 |
 | `lem-pc-perfect-rhom-tensor-comparison` | 1 | state | 1 |
 | `cor-galois-lisse-representations` | 1 | state | 0 |
@@ -25,12 +25,12 @@
 | `lem-pc-rf-base-change-single-complex-criterion` | 1 | state | 0 |
 | `lem-sc-affine-koszul-cech-derived-comparison` | 1 | state | 0 |
 | `lem-sc-derived-internal-hom-stalk-localization` | 1 | state | 0 |
+| `lem-sc-etale-qcoherent-descent-fpqc-sections` | 1 | state | 0 |
 | `lem-sc-finite-affine-derived-equivalence` | 1 | state | 0 |
 | `lem-sc-finite-duality-derived-hom` | 1 | state | 0 |
 | `lem-sc-finite-flat-duality-evaluation` | 1 | state | 0 |
 | `lem-sc-finite-sheafhom-affine-adjoint` | 1 | state | 0 |
 | `lem-sc-hilb-dominating-power` | 1 | state | 0 |
-| `lem-sc-hilbert-embedded-points-gluing` | 1 | state | 0 |
 | `lem-sc-proper-flat-right-adjoint-restriction-open` | 1 | state | 0 |
 | `lem-weil-pbc-etale-mayer-vietoris-pullback` | 1 | state | 0 |
 | `lem-weil-pbc-henselization-colimit` | 1 | state | 0 |
@@ -47,7 +47,7 @@
 | `lem-sc-p1-proj-shifted-free-twist` | 2 | state | 0 |
 | `lem-weil-pbc-henselization-pair-g-ring` | 2 | state | 0 |
 
-Not open yet: 40 nodes that wait for stage 1, 161 nodes that wait for a statement dependency.
+Not open yet: 40 nodes that wait for stage 1, 159 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
