@@ -1,11 +1,11 @@
 # Work queue
 
-539 items; claim with `tools/claim.py next <group> [--stage N]`.
+536 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (539)
+## Stage 2: nodes to state (536)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -39,7 +39,6 @@
 | `lem-weil-pbc-grothendieck-spectral-sequence` | 1 | state |
 | `lem-weil-pbc-h0-spectral-closed-restriction` | 1 | state |
 | `lem-weil-pbc-h1-injective-differentials-injective-char-p` | 1 | state |
-| `lem-weil-pbc-helper-g-ring-char-p` | 1 | state |
 | `lem-weil-pbc-henselian-etale-retraction` | 1 | state |
 | `lem-weil-pbc-henselian-factorization-criterion` | 1 | state |
 | `lem-weil-pbc-henselian-pair-approximation` | 1 | state |
@@ -48,9 +47,7 @@
 | `lem-weil-pbc-horseshoe-morphism-lift` | 1 | state |
 | `lem-weil-pbc-hypersurface-derivation-regular` | 1 | state |
 | `lem-weil-pbc-ideal-module-product-stalk` | 1 | state |
-| `lem-weil-pbc-idempotent-endomorphism-charpoly-field` | 1 | state |
 | `lem-weil-pbc-idempotent-endomorphism-image-base-change` | 1 | state |
-| `lem-weil-pbc-idempotents-determined-modulo-radical` | 1 | state |
 | `lem-weil-pbc-immersion-affine-constructible-pieces` | 1 | state |
 | `lem-weil-pbc-immersion-fibre-degree-one` | 1 | state |
 | `lem-weil-pbc-improve-presentation` | 1 | state |
