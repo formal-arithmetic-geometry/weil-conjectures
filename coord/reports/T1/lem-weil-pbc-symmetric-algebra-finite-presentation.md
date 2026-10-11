@@ -1,0 +1,175 @@
+## Worker report
+
+The module `Sheaf.RingTheory.SymmetricAlgebraFinitePresentation` states
+`SymmetricAlgebra.generators_and_finitePresentation`, with a single `sorry` proof.
+The node is unchanged except for its `lean` record. No definitions, dependency modules,
+new nodes, or statement corrections are needed.
+
+Hypothesis and clause correspondence:
+
+- The commutative ring is `(R : Type u) [CommRing R]`; the module is
+  `(M : Type v) [AddCommGroup M] [Module R M]`. The independent universes are explicit;
+  the symmetric algebra has universe `max u v` as in Mathlib. There is no Noetherian,
+  nonzero-ring, field, characteristic, or freeness assumption.
+- `SymmetricAlgebra R M` is exactly the concrete symmetric algebra supplied by the
+  statement dependency. `SymmetricAlgebra.ι R M` is its canonical linear inclusion.
+  The graded description in the node names this same algebra, rather than extra
+  grading data or a different object that requires a new definition.
+- Clause (a)'s arbitrary finite family is `∀ (n : ℕ) (x : Fin n → M)`.
+  Its hypothesis is `Submodule.span R (Set.range x) = ⊤`, meaning these elements
+  generate the module. Its conclusion is
+  `Algebra.adjoin R (Set.range (fun i : Fin n ↦ ι R M (x i))) = ⊤`, meaning exactly
+  that their canonical images generate the symmetric algebra over R.
+- Clause (b)'s hypothesis is the implication antecedent `Module.FinitePresentation R M`.
+  Mathlib's class means a finite spanning set whose presentation kernel is finitely
+  generated. `Module.FinitePresentation.exists_fin'` in
+  `Mathlib.Algebra.Module.FinitePresentation` provides the exact finite-free sequence
+  of Stacks Definition 0518; conversely any such sequence gives the class by a finite
+  spanning family and its finitely generated kernel. No finite presentation of the
+  symmetric algebra as an R-module is assumed.
+- Clause (b)'s first conclusion is
+  `Algebra.FinitePresentation R (SymmetricAlgebra R M)`, using the existing algebra
+  finite-presentation class, defined by a surjection from a finite-variable polynomial
+  algebra with finitely generated kernel.
+- The explicit linear-relations presentation in the parenthetical is retained as a
+  separate conjunct: `∃ (n m : ℕ) (a : Fin m → Fin n → R), Nonempty (... ≃ₐ[R] ...)`.
+  The quotient is `MvPolynomial (Fin n) R` modulo `Ideal.span` of the range of
+  `fun j : Fin m ↦ ∑ i : Fin n, a j i • (MvPolynomial.X i : MvPolynomial (Fin n) R)`.
+  These are precisely m homogeneous linear forms with coefficients in R, with no
+  constant terms. The algebra equivalence is R-linear as required. The node does
+  not prescribe a particular chosen module presentation or identify its variables
+  with a family from (a), so no additional compatibility clause is imposed.
+- Clause (b)'s final conclusion is
+  `∀ I : Ideal (SymmetricAlgebra R M), I.FG →
+    Algebra.FinitePresentation R (SymmetricAlgebra R M ⧸ I)`.
+  This quantifies over every ideal, under precisely its finite-generation hypothesis,
+  and gives finite presentation over the original R via the canonical quotient algebra.
+  All three conclusions of (b) lie under the same module finite-presentation assumption.
+
+Dependency declarations read and used:
+
+The only stmt_dep, `lem-weil-pbc-symmetric-algebra-universal-property`, is a Mathlib
+leaf with no `lean` record. Its recorded module is
+`Mathlib.LinearAlgebra.SymmetricAlgebra.Basic`. I read its full declaration context:
+`SymmetricAlgebra` is the quotient by `TensorAlgebra.symRingCon`; `SymmetricAlgebra.ι`
+is the canonical linear map; the commutative ring and algebra instances supply the
+structures used in the signature. `SymmetricAlgebra.lift`, `lift_ι_apply`, and
+`algHom_ext` provide the universal property and uniqueness cited in proof steps 1–2.
+They need not occur in the signature since they concern the eventual proof.
+The other two imports provide existing `Module.FinitePresentation`,
+`Algebra.FinitePresentation`, polynomial algebras, ideal quotients, and `Ideal.FG`.
+`Algebra.FinitePresentation.quotient` was read and matches the final proof step.
+Every theorem remains unproved at this stage; the docstring records all five DAG steps
+and their cited nodes.
+
+Source checking:
+
+The local `literature/stacks-project/algebra.tex` is absent on this machine. I read
+[Stacks 00DM](https://stacks.math.columbia.edu/tag/00DM),
+[00DO](https://stacks.math.columbia.edu/tag/00DO),
+[0518](https://stacks.math.columbia.edu/tag/0518), and
+[00F3](https://stacks.math.columbia.edu/tag/00F3) directly online. They support the
+symmetric-algebra construction, passage from a finite module presentation to linear
+relations, and the two finite-presentation notions. The node's proof gives the full
+argument assembled from these sources, including the quotient step.
+
+Edge cases checked before writing:
+
+- `n = 0` in (a): span of the empty range is zero; the hypothesis says M is zero,
+  and its symmetric algebra is R, generated by the empty set over R.
+- Zero M in (b): n = m = 0 gives the zero-variable polynomial algebra R with zero
+  relation ideal. All finitely generated quotients of R are finitely presented over R.
+- `m = 0`: the empty relation ideal is zero, so finite free modules admit a polynomial
+  presentation without relations. Zero linear relations are allowed.
+- The zero ring and zero quotient are included: neither Nontrivial nor proper-ideal
+  hypotheses occur. The ideal `I = ⊤` gives the zero algebra, still finitely presented.
+- Nonfree finitely presented modules are included: for example Z/2Z has symmetric
+  algebra Z[X]/(2X), which confirms that linear relations need not be monic and that
+  no finite-generation assumption on Sym as a module should be added.
+- In every characteristic (including 2), the symmetric algebra uses commutativity
+  relations, not exterior-algebra relations; the statement uses no division.
+
+Searches actually run (2026-10-11):
+
+1. `msearch.py ... leansearch "symmetric algebra finitely presented module finite
+   presentation algebra"`: service unavailable, Internal Server Error; recorded as
+   unavailable, not as a negative result.
+2. `msearch.py ... leanfinder "symmetric algebra of a finitely presented module is
+   finitely presented and generated by images of module generators"`: 8 hits. These
+   include SymmetricAlgebra, its free-module polynomial universal property, and
+   general finite algebra/module presentation results. None states this node.
+3. `msearch.py ... loogle "SymmetricAlgebra, Algebra.FinitePresentation"`: zero hits.
+4. `msearch.py ... grep "FinitePresentation|FiniteType|adjoin"
+   LinearAlgebra/SymmetricAlgebra`: zero hits.
+5. `rg -n 'SymmetricAlgebra|symmetric.algebra'` in the source project's
+   WeilConjectures and this project's lean/Sheaf: the source has only a ProjectiveSpace
+   docstring; landed modules discuss or cite the item but do not state it. The
+   ImprovePresentation, CotangentComplexSymmetricAlgebra, and
+   QuasiCoherentSymmetricAlgebra declarations concern different statements.
+6. `grep -rn 'lem-weil-pbc-symmetric-algebra-finite-presentation'` in source
+   WeilConjectures: no result. Searching `dag/lean_names_upstream.json` by the item id
+   also gives no result.
+7. `rg -n 'generators_and_finitePresentation|SymmetricAlgebraFinitePresentation'`
+   in Mathlib, source WeilConjectures, lean/Sheaf, and dag/lean_names_upstream.json:
+   no preexisting declaration or module with the chosen name.
+
+Validation: the first server compile required an explicit polynomial type on X to
+resolve scalar-action inference in the relation ideal. That annotation changes no
+mathematical content. The final server compile is clean; the delivery dry run result
+is recorded below after running it. No statement dispute or node fault was found.
+
+The server compiled the final 57-line module in 1.4 seconds with no warnings.
+`deliver2.py T1 lem-weil-pbc-symmetric-algebra-finite-presentation --no-push` printed
+`OK (dry run)`: the commit compiles and passes preflight except for the independent
+second reading, which the second reader writes. Nothing was pushed, and I have not
+written a second-reading section.
+
+
+## Second reading by T1
+
+I reread the node statement, its source place, the dependency declaration, and
+`Sheaf.RingTheory.SymmetricAlgebraFinitePresentation` independently.
+
+The object list and Lean rendering agree as follows. The commutative ring and
+module are `(R : Type u) (M : Type v) [CommRing R] [AddCommGroup M] [Module R M]`,
+with no nonzero, Noetherian, field, characteristic, freeness, or universe
+restriction. `SymmetricAlgebra R M` and `ι R M` are Mathlib's concrete symmetric
+algebra and canonical linear map, matching the node's `Sym_R(M)` and `ι_M`.
+
+For (a), `∀ (n : ℕ) (x : Fin n → M), Submodule.span R (Set.range x) = ⊤ →`
+`Algebra.adjoin R (Set.range (fun i : Fin n ↦ ι R M (x i))) = ⊤` exactly renders
+an arbitrary finite generating family and the asserted algebra generation. For
+(b), the antecedent `Module.FinitePresentation R M` is the stated finite module
+presentation condition. Its first conjunct is
+`Algebra.FinitePresentation R (SymmetricAlgebra R M)`. The parenthesized explicit
+presentation is the existential over `n m` and coefficient matrix `a`, with the
+quotient of `MvPolynomial (Fin n) R` by the ideal generated by the `m` homogeneous
+linear forms `∑ i, a j i • X i`, and an `R`-algebra equivalence to the symmetric
+algebra. The final conjunct quantifies every ideal `I`, assumes exactly `I.FG`,
+and concludes finite presentation of the canonical quotient algebra. Quantifier
+order and conjunction nesting match the node.
+
+The dependency `lem-weil-pbc-symmetric-algebra-universal-property` is Mathlib's
+`SymmetricAlgebra`/`SymmetricAlgebra.ι` universal-property leaf; no private or
+specialized replacement is used. The remaining names in the module are standard
+Mathlib structures used in the signature.
+
+Edge cases checked: `n = 0` makes the span hypothesis say `M = 0`; `m = 0`
+allows no relations; `M = 0` gives the zero-variable polynomial algebra; the
+zero ring, zero quotient, and `I = ⊤` are admitted; all characteristics,
+including characteristic two, are covered; independent universes `u` and `v`
+do not exclude any case in the node.
+
+Independent searches found no existing declaration: LeanFinder returned only
+the general finite-presentation and free-module symmetric-algebra results;
+Loogle returned no result; `rg` over Mathlib, `WeilConjectures`, and `lean/Sheaf`
+found no theorem or module with this statement. The source definitions and
+lemmas (Stacks 00DM, 00DO, 0518, 00F3, 00R2) support the same hypotheses and
+three conclusion clauses.
+
+No mismatch was found, so no source, node, or Lean change was necessary. The
+module compiles cleanly with `scompile.py`.
+
+## Reviewer fix (R-sap, stage 2)
+
+The parenthetical presentation of clause (b) is restated through Mathlib's `Algebra.Presentation` (the convention for presentations, as in Q1 d264e6c5e) instead of an inline `Nonempty (MvPolynomial (Fin n) R ⧸ Ideal.span … ≃ₐ[R] SymmetricAlgebra R M)`. The conjunct is now `∃ (n m : ℕ) (P : Algebra.Presentation R (SymmetricAlgebra R M) (Fin n) (Fin m)) (a : Fin m → Fin n → R), ∀ j, P.relation j = ∑ i, a j i • X i`; `P.quotientEquiv` (via `span_range_relation_eq_ker`), restricted to R-scalars, gives the R-algebra isomorphism R[x_1..x_n]/(g_1..g_m) ≅ Sym_R(M) of the node, with g_j linear forms without constant term. Clause (a), the finite-presentation conjunct and the quotient clause are unchanged; the declaration name is unchanged.
