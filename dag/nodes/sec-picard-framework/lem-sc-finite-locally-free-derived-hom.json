@@ -110,5 +110,24 @@
   "group": "E1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-fld1702 (reviewer sub-agent of L); spot-checked: Source Stacks Tag 08DQ (cohomology-lemma-dual-perfect-complex), special case K=P[0]; statement change def-pc-scheme -> def-amb-finite-locally-free-module named in the report (E7), agrees hypothesis by hypothesis (open-cover finite local freeness, arbitrary L in degree 0). Delivered step 2 used K^vee = P^vee[0] and L tensor^L P^vee = L tensor P^vee with no node (C1/C4; the first is the item itself for L=O). FIX more, RETURN less: dag/nodes/sec-picard-framework/lem-sc-finite-locally-free-derived-hom.json: proof, proof_deps, proof_origin, split_report.summary: replaced by the audit route: step 1 Hom(P,-) = P^vee tensor - (lem-sc-ext-evaluation, natural in G) is exact (lem-sc-ext-tensor-exact, P^vee finite locally free by def-pur-sheaf-hom on the cover as in lem-sc-ext-locally-free step 2); step 2 elementary: by def-pur-derived-internal-hom RHom(P,L)=T(I^bullet) for a K-injective resolution, exact T commutes with cohomology, so cohomology is Hom(P,L) in degree 0 only, and truncation gives the isomorphism in D. statement/stmt_deps: added citations [def-pur-derived-internal-hom], [def-pur-sheaf-hom] for notions used. New node lem-sc-perfect-derived-hom-tensor-dual dropped (--drop-nodes; no longer cited, Tag 08DQ not needed for this one-line fact). Small cases: d=0 gives 0=0, P=O gives RHom(O,L)=L. No tool uses. Start Sat Oct 10 04:59:59 PM UTC 2026, end Sat Oct 10 05:00:58 PM UTC 2026.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteLocallyFreeDerivedHom",
+  "declaration": "AlgebraicGeometry.finiteLocallyFree_derivedInternalHom_single",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteLocallyFreeDerivedHom.lean",
+  "statement": "theorem finiteLocallyFree_derivedInternalHom_single (Y : Scheme.{u}) [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))] (P L : SheafOfModules.{u} (moduleRings Y.toRingedSpace)) [SheafOfModules.IsFiniteLocallyFree.{u, u, u} P] : Nonempty ((derivedInternalHom (Opens.grothendieckTopology Y) Y.toRingedSpace.sheaf).obj (op ((DerivedCategory.singleFunctor (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0).obj P), (DerivedCategory.singleFunctor (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0).obj L) ≅ (DerivedCategory.singleFunctor (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0).obj (SheafOfModules.homObj (R := Y.toRingedSpace.sheaf) P L)) ∧ ∀ i : ℤ, 0 < i → IsZero ((DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) i).obj ((derivedInternalHom (Opens.grothendieckTopology Y) Y.toRingedSpace.sheaf).obj (op ((DerivedCategory.singleFunctor (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0).obj P), (DerivedCategory.singleFunctor (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0).obj L)))",
+  "branch": "sheaf-dag",
+  "by": "Q1",
+  "date": "2026-10-11",
+  "existing": false,
+  "note": "Uses the shared D(O_Y), derived internal Hom on the open site, and existing variable-rank IsFiniteLocallyFree from the recorded local-freeness dependency module. The node uses constant-rank local models, not one global rank. No statement correction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "Q1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }
