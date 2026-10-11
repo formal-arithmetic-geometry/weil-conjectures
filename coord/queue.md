@@ -1,11 +1,11 @@
 # Work queue
 
-851 items; claim with `tools/claim.py next <group> [--stage N]`.
+848 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (851)
+## Stage 2: nodes to state (848)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -15,7 +15,6 @@
 | `def-sc-kahler-differentials` | 1 | state |
 | `def-sp-kinjective-bridge` | 1 | state |
 | `def-weil-pbc-charpoly-locally-free` | 1 | state |
-| `lem-kun-cp-approximation` | 1 | state |
 | `lem-pc-clopen-smooth-proper-curve` | 1 | state |
 | `lem-pc-derived-adjoint-functors` | 1 | state |
 | `lem-pc-derived-tensor-transitivity` | 1 | state |
@@ -56,9 +55,7 @@
 | `lem-weil-pbc-completed-module-associated-graded-generators` | 1 | state |
 | `lem-weil-pbc-completion-at-quasi-finite-prime` | 1 | state |
 | `lem-weil-pbc-completion-dimension` | 1 | state |
-| `lem-weil-pbc-completion-finite-extension` | 1 | state |
 | `lem-weil-pbc-complex-spectral-sequence-comparison` | 1 | state |
-| `lem-weil-pbc-composition-fibre-degree-bound` | 1 | state |
 | `lem-weil-pbc-constant-group-scheme-morphism-clopen` | 1 | state |
 | `lem-weil-pbc-constant-group-scheme-multiplication` | 1 | state |
 | `lem-weil-pbc-constant-sheaf-geometric-stalk` | 1 | state |

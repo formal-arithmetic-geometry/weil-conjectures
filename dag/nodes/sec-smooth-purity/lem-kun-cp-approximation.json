@@ -22,7 +22,9 @@
   "lem-kun-04ca",
   "def-kun-separably-closed",
   "def-weil-pbc-etale-sheaves",
-  "def-weil-pbc-scheme-conventions"
+  "def-weil-pbc-scheme-conventions",
+  "def-kun-finitely-generated-etale-subsheaf",
+  "def-kun-support"
  ],
  "proof": [
   {
@@ -162,5 +164,23 @@
   "group": "M1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-cpa3048 (reviewer sub-agent of L); spot-checked: Both R-cpa2914 points repaired: finitely generated now uses Tag 03SA generators over quasi-compact charts, Step 2 proves finiteness upstairs in U (closed support, residue fields finite over K via lem-weil-pbc-etale-residue-field-extension-separable + lem-kun-closed-point-field, lem-kun-finite-closed-subscheme) and maps to X; i_*(G|_Z) form via lem-kun-04ca honest for separably closed K; citers lem-kun-0f1f-vanish/-gen use it as written. FIX more, RETURN less: (1) E7/B3 wording: 'U_j->X affine' read as an affine morphism makes the colimit clause false for non-separated X (plane with doubled origin: no etale U->X that is an affine morphism hits a doubled origin, so a skyscraper there is not generated); restated as 'U_j an affine scheme, U_j->X etale (quasi-compact as X is Noetherian)', Step 1 cover = affine opens of U; (2) C1: Step 2 now justifies quasi-compactness of U->X needed by lem-kun-etale-lfp and cites lem-kun-closed-point-field (a) on U for closedness of u; (3) C1: 'stalk formula for extension by zero' replaced by the elementary stalk description of the generated subsheaf with Tag 03SA.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ClosedPointSheafApproximation",
+  "declaration": "AlgebraicGeometry.Scheme.closedPointSheaf_filteredColimit_finiteSupport",
+  "file": "lean/Sheaf/AlgebraicGeometry/ClosedPointSheafApproximation.lean",
+  "statement": "theorem closedPointSheaf_filteredColimit_finiteSupport {K : Type v} [Field K] [IsSepClosed K] (X : Scheme.{v}) [X.Over (Spec (.of K))] [LocallyOfFiniteType (X ↘ Spec (.of K))] [QuasiCompact (X ↘ Spec (.of K))] (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{v + 1}) (hF : etaleSheafSupport F ⊆ {x | IsClosed ({x} : Set X)}) : let P : ObjectProperty (Subobject F) := IsFinitelyGeneratedEtaleSubsheaf IsFiltered P.FullSubcategory ∧ (∃ (c : Cocone (P.ι ⋙ Subobject.underlying)) (e : c.pt ≅ F), Nonempty (IsColimit c) ∧ ∀ G : P.FullSubcategory, c.ι.app G ≫ e.hom = G.obj.arrow) ∧ ∀ G : Subobject F, IsFinitelyGeneratedEtaleSubsheaf G → (etaleSheafSupport (G : Sheaf X.smallEtaleTopology AddCommGrpCat.{v + 1})).Finite ∧ etaleSheafSupport (G : Sheaf X.smallEtaleTopology AddCommGrpCat.{v + 1}) ⊆ {x | IsClosed ({x} : Set X)} ∧ ∃ (Z : Scheme.{v}) (i : Z ⟶ X) (_ : IsClosedImmersion i) (_ : IsReduced Z), Set.range i.base = etaleSheafSupport (G : Sheaf X.smallEtaleTopology AddCommGrpCat.{v + 1}) ∧ Nonempty ((G : Sheaf X.smallEtaleTopology AddCommGrpCat.{v + 1}) ≅ (Etale.lowerStar AddCommGrpCat.{v + 1} i).obj ((Etale.upperStar AddCommGrpCat.{v + 1} i).obj (G : Sheaf X.smallEtaleTopology AddCommGrpCat.{v + 1})))",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-kca1515",
+  "group": "H1",
+  "result": "pass",
+  "note": "IsSepClosed K; finite type = [X.Over Spec K]+LocallyOfFiniteType+QuasiCompact of X↘Spec K; F abelian etale sheaf AddCommGrpCat.{v+1}; etaleSheafSupport F ⊆ closed points; new def = least Subobject containing finitely many sections on affine X.Etale charts (n=0 gives ⊥); IsFiltered over all f.g. subobjects + colimit cocone whose legs compose to G.arrow; each f.g. G: support finite and closed, reduced closed immersion with range = support (unique up to iso), G ≅ i_* i^{-1} G via Etale.lowerStar/upperStar as in lem-kun-04ca; both modules compile together"
  }
 }

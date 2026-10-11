@@ -18,7 +18,7 @@ and, by the rule STAGE 2 EXTRA NODES (decision of the human, 2026-10-11 05:55 UT
   (A) NEW DEFINITION NODES dag/nodes/<chapter of the item>/<id>.json, absent on the base, with the fields of
       check_new_node (kind definition, status split, created.item = the item, created.group = G, ...), each with its
       own module and `lean` record (or `existing: true` and no module), cited by the item;
-  (B) DEPENDENCY MODULES: for a node in the item's stmt_deps on the base, its node file changed only in `lean` (the
+  (B) DEPENDENCY MODULES: for a node in the item's stmt_deps on the base (or added by its statement correction), its node file changed only in `lean` (the
       module's record, with `lean.note` saying why the recorded declaration or mathlib_match was unusable) and its
       module.
 Every module is the lean.file of exactly one of these nodes; a module may import a sibling module of the delivery
@@ -683,6 +683,10 @@ def read_delivery(git: Git, ref: str, base: str, group: str, item: str, max_comm
         bnode = json.loads(base_text)
     D["base_node"] = bnode
     base_deps = list(bnode.get("stmt_deps") or [])
+    # a STATEMENT CORRECTION of the item may add base nodes to its stmt_deps; their dependency modules may come along
+    # (T-depcorr 2026-10-11, after lem-pc-derived-adjoint-functors): stmt_deps of the corrected node (or a fixed one)
+    corr_deps = [x for x in (node.get("stmt_deps") or []) if isinstance(x, str) and x not in base_deps] \
+        if base_text is not None and correction_fields(bnode, node) else []
     # classify the other node files: new definition nodes and dependency nodes
     drop = set(drop or ())
     revert = set(revert or ())
@@ -725,9 +729,10 @@ def read_delivery(git: Git, ref: str, base: str, group: str, item: str, max_comm
         if nid in base_paths:
             if base_paths[nid] != p:
                 f("b", f"{p}: the node {nid} is {base_paths[nid]} on the base"); continue
-            if nid not in base_deps:
-                f("b", f"{p}: the node {nid} exists on the base and is not in the item's stmt_deps there: a delivery changes "
-                       "only the item, new definition nodes and dependency nodes of the item")
+            if nid not in base_deps and nid not in corr_deps:
+                f("b", f"{p}: the node {nid} exists on the base and is not in the item's stmt_deps there nor in those of "
+                       "its statement correction: a delivery changes only the item, new definition nodes and dependency "
+                       "nodes of the item")
                 continue
             bd = json.loads(git.show(base, p) or "{}")
             D["deps"][nid] = {"path": p, "node": nd, "base_node": bd}
@@ -783,6 +788,10 @@ def read_delivery(git: Git, ref: str, base: str, group: str, item: str, max_comm
             D["node"] = node
             D["statement_reverted"] = ch
             D["stmt_deps_reverted"] = [x for x in dsd if x not in (node.get("stmt_deps") or [])]
+            for x in D["stmt_deps_reverted"]:
+                if x in D["deps"] and x not in base_deps:
+                    f("b", f"--revert-statement: the dependency node {x} was in the item's stmt_deps only by the "
+                           f"statement correction (leave its module out with --revert-nodes {x})")
             D["roles"].insert(0, f"the item's statement correction is REVERTED (--revert-statement: {', '.join(ch)} as on "
                                  "sheaf-dag" + (f"; stmt_deps keep the new node(s) {', '.join(keep)}" if keep else "")
                                  + (f"; stmt_deps lose {', '.join(D['stmt_deps_reverted'])}" if D["stmt_deps_reverted"] else "")
