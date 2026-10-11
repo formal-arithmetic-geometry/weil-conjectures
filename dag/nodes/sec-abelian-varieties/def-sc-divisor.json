@@ -88,5 +88,34 @@
   "group": "F1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of F1; spot-checked by L: L: definition split (divisors, principal divisors via the DVR valuations of a smooth curve, Cl); new node for the finiteness of the support"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.DivisorModule",
+  "declaration": "AlgebraicGeometry.Scheme.Divisor.moduleOfSmoothConnectedCurve",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Divisor.associatedModule",
+   "AlgebraicGeometry.Scheme.Divisor.sectionModule",
+   "AlgebraicGeometry.Scheme.Divisor.sectionCondition",
+   "AlgebraicGeometry.Scheme.Divisor",
+   "AlgebraicGeometry.Scheme.div",
+   "AlgebraicGeometry.Scheme.principalDivisors",
+   "AlgebraicGeometry.Scheme.DivisorClassGroup",
+   "AlgebraicGeometry.Scheme.Divisor.degree"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/DivisorModule.lean",
+  "statement": "def moduleOfSmoothConnectedCurve (k : Type u) [Field k] [IsAlgClosed k] (C : Scheme.{u}) (f : C ⟶ Spec (.of k)) [IsConnectedCurve f] [Smooth f] (D : C.Divisor) : C.Modules",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": false,
+  "note": "Mixed record: existing source declarations supply divisors, principal divisors, class group and degree; the new module supplies the explicit associated O_C-module. The integral-scheme function field uses the generic-stalk clause of def-sc-function-field; constantSheaf is used for the ambient constant sheaf."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-ddv1530",
+  "group": "E1",
+  "result": "pass",
+  "note": "k alg closed [Field][IsAlgClosed]; smooth connected curve via f with IsConnectedCurve f + Smooth f; Div/div/Cl/deg reused from source Curve.Divisor (closedPoints →₀ ℤ, Additive K^x, range quotient, coefficient sum); O_C(D)(U) = locally constant U→k(C) with s=0 ∨ ord+n_P≥0 at closed P∈U, zero on empty open; source Picard.lean confirms O_C(D) missing upstream"
  }
 }
