@@ -214,6 +214,126 @@ lemma derivedOpenImmersionLowerShriekProjectionMap_rightUnitality
     (mapDerivedCategoryUpperStarDerivedTensorIso_rightUnitality A j) K
 
 end OpenImmersion
+section LowerStar
+
+variable {X Y : Scheme.{u}} (p : X ⟶ Y)
+
+/-- **Associativity of the projection map of `Rp_*`**: the projection map
+`π : Rp_*M ⊗ᴸ L ⟶ Rp_*(M ⊗ᴸ Lp^*L)` satisfies `(π ▷ L') ≫ π ≫ Rp_*(α) = α ≫ π ≫ Rp_*(M ◁ μ)`,
+for the tensor comparison `μ` of `Lp^*`. -/
+@[reassoc]
+lemma rightDerivedLowerStarProjectionMap_associativity
+    (M : DerivedCategory (Sheaf X.smallEtaleTopology A))
+    (L L' : DerivedCategory (Sheaf Y.smallEtaleTopology A)) :
+    ((rightDerivedLowerStarProjectionMap A p).app M).app L ▷ L' ≫
+        ((rightDerivedLowerStarProjectionMap A p).app (M ⊗ L((p)^*[A]).obj L)).app L' ≫
+        R((p)_*[A]).map (α_ _ _ _).hom =
+      (α_ _ _ _).hom ≫ ((rightDerivedLowerStarProjectionMap A p).app M).app (L ⊗ L') ≫
+        R((p)_*[A]).map (M ◁ ((leftDerivedUpperStarTensorComparison A p).app L).app L') :=
+  (derivedUpperStarLowerStarAdjunction A p).rightAdjointProjectionMap_associativity _
+    (leftDerivedUpperStarTensorComparison_associativity A p) M L L'
+
+/-- **Right unitality of the projection map of `Rp_*`**:
+`π ≫ Rp_*(M ◁ ε) ≫ Rp_*(ρ) = ρ` for the projection map `π : Rp_*M ⊗ᴸ Λ ⟶ Rp_*(M ⊗ᴸ Lp^*Λ)` and
+the unit comparison `ε : Lp^* Λ_Y ≅ Λ_X`. -/
+lemma rightDerivedLowerStarProjectionMap_rightUnitality
+    (M : DerivedCategory (Sheaf X.smallEtaleTopology A)) :
+    ((rightDerivedLowerStarProjectionMap A p).app M).app (𝟙_ _) ≫
+        R((p)_*[A]).map (M ◁ (leftDerivedUpperStarUnitIso A p).hom) ≫
+        R((p)_*[A]).map (ρ_ M).hom =
+      (ρ_ _).hom :=
+  (derivedUpperStarLowerStarAdjunction A p).rightAdjointProjectionMap_rightUnitality _ _
+    (leftDerivedUpperStarTensorComparison_rightUnitor_hom A p) M
+
+end LowerStar
+
+section Compactification
+
+variable {X Y Z : Scheme.{u}}
+
+omit [Etale.UpperStarPreservesFlat A] in
+lemma leftDerivedUpperStarComp_symm_trans_eqToIso (g₁ : X ⟶ Z) (g₂ : Z ⟶ Y) (f : X ⟶ Y)
+    (h : f = g₁ ≫ g₂) :
+    (leftDerivedUpperStarComp A g₁ g₂).symm ≪≫
+        eqToIso (congrArg (fun h ↦ L((h)^*[A])) h.symm) =
+      (leftDerivedUpperStarComp A g₁ g₂ f h).symm := by
+  subst h
+  ext
+  simp
+
+variable {f : X ⟶ Y} (c : Compactification f)
+
+omit [Etale.UpperStarPreservesFlat A] in
+/-- The isomorphism `Lg^* ⋙ Li^* ≅ Lf^*` of a compactification `c = (X ⟶[i] Z ⟶[g] Y)` of `f` is
+the inverse of the composition isomorphism `Lf^* ≅ Lg^* ⋙ Li^*` along `f = i ≫ g`. -/
+lemma leftDerivedUpperStarCompactificationIso_eq :
+    leftDerivedUpperStarCompactificationIso A c =
+      (leftDerivedUpperStarComp A c.i c.g f c.comm).symm :=
+  leftDerivedUpperStarComp_symm_trans_eqToIso A c.i c.g f c.comm
+
+/-- The isomorphism `Lg^* ⋙ Li^* ≅ Lf^*` of a compactification is monoidal: it commutes with the
+tensor comparisons. -/
+@[reassoc]
+lemma leftDerivedUpperStarCompactificationIso_hom_app_tensor
+    (L L' : DerivedCategory (Sheaf Y.smallEtaleTopology A)) :
+    (leftDerivedUpperStarCompactificationIso A c).hom.app (L ⊗ L') ≫
+        ((leftDerivedUpperStarTensorComparison A f).app L).app L' =
+      L((c.i)^*[A]).map (((leftDerivedUpperStarTensorComparison A c.g).app L).app L') ≫
+        ((leftDerivedUpperStarTensorComparison A c.i).app _).app _ ≫
+        ((leftDerivedUpperStarCompactificationIso A c).hom.app L ⊗ₘ
+          (leftDerivedUpperStarCompactificationIso A c).hom.app L') := by
+  rw [leftDerivedUpperStarCompactificationIso_eq, Iso.symm_hom,
+    ← cancel_mono ((leftDerivedUpperStarComp A c.i c.g f c.comm).hom.app L ⊗ₘ
+      (leftDerivedUpperStarComp A c.i c.g f c.comm).hom.app L'),
+    Category.assoc, leftDerivedUpperStarTensorComparison_comp, Iso.inv_hom_id_app_assoc,
+    Category.assoc, Category.assoc, tensorHom_comp_tensorHom, Iso.inv_hom_id_app,
+    Iso.inv_hom_id_app]
+  erw [id_tensorHom_id, Category.comp_id]
+
+/-- The isomorphism `Lg^* ⋙ Li^* ≅ Lf^*` of a compactification commutes with the unit
+comparisons. -/
+@[reassoc]
+lemma leftDerivedUpperStarCompactificationIso_hom_app_unit :
+    (leftDerivedUpperStarCompactificationIso A c).hom.app (𝟙_ _) ≫
+        (leftDerivedUpperStarUnitIso A f).hom =
+      L((c.i)^*[A]).map (leftDerivedUpperStarUnitIso A c.g).hom ≫
+        (leftDerivedUpperStarUnitIso A c.i).hom := by
+  suffices key : (leftDerivedUpperStarUnitIso A f).hom =
+      (leftDerivedUpperStarCompactificationIso A c).inv.app (𝟙_ _) ≫
+        L((c.i)^*[A]).map (leftDerivedUpperStarUnitIso A c.g).hom ≫
+        (leftDerivedUpperStarUnitIso A c.i).hom by
+    rw [key, Iso.hom_inv_id_app_assoc]
+  refine Functor.eq_of_leftUnitality (F := L((f)^*[A]))
+    (((leftDerivedUpperStarTensorComparison A f).app (𝟙_ _)).app (𝟙_ _)) _ _
+    (leftDerivedUpperStarTensorComparison_leftUnitor_hom A f _) ?_
+  have h₁ : ((leftDerivedUpperStarTensorComparison A f).app (𝟙_ _)).app (𝟙_ _) =
+      (leftDerivedUpperStarCompactificationIso A c).inv.app (𝟙_ _ ⊗ 𝟙_ _) ≫ L((c.i)^*[A]).map
+        (((leftDerivedUpperStarTensorComparison A c.g).app (𝟙_ _)).app (𝟙_ _)) ≫
+        ((leftDerivedUpperStarTensorComparison A c.i).app _).app _ ≫
+        ((leftDerivedUpperStarCompactificationIso A c).hom.app (𝟙_ _) ⊗ₘ
+          (leftDerivedUpperStarCompactificationIso A c).hom.app (𝟙_ _)) :=
+    (Iso.eq_inv_comp ((leftDerivedUpperStarCompactificationIso A c).app (𝟙_ _ ⊗ 𝟙_ _))).2
+      (leftDerivedUpperStarCompactificationIso_hom_app_tensor A c _ _)
+  have h₂ := NatTrans.congr_app ((leftDerivedUpperStarTensorComparison A c.i).naturality
+    (leftDerivedUpperStarUnitIso A c.g).hom) (L((c.g)^*[A]).obj (𝟙_ _))
+  dsimp at h₂
+  have h₃ := leftDerivedUpperStarTensorComparison_leftUnitor_hom A c.i
+    (L((c.g)^*[A]).obj (𝟙_ _))
+  have h₄ := leftDerivedUpperStarTensorComparison_leftUnitor_hom A c.g (𝟙_ _)
+  have h₅ := (leftDerivedUpperStarCompactificationIso A c).hom.naturality (λ_ (𝟙_ _)).hom
+  dsimp at h₅
+  rw [h₁, Category.assoc, Category.assoc, Category.assoc, tensorHom_def_assoc]
+  erw [whisker_exchange_assoc]
+  rw [← comp_whiskerRight_assoc, Iso.hom_inv_id_app_assoc, leftUnitor_naturality,
+    comp_whiskerRight_assoc]
+  erw [← reassoc_of% h₂]
+  rw [← Functor.map_comp_assoc]
+  erw [reassoc_of% h₃]
+  rw [← Functor.map_comp_assoc]
+  simp only [Category.assoc]
+  erw [h₄, h₅, Iso.inv_hom_id_app_assoc]
+
+end Compactification
 
 end Etale
 
