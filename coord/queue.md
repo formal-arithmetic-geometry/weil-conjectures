@@ -1,17 +1,16 @@
 # Work queue
 
-409 items; claim with `tools/claim.py next <group> [--stage N]`.
+403 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (409)
+## Stage 2: nodes to state (403)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
 | `def-weil-pbc-proj-twisting-sheaf` | 2 | state |
 | `cor-galois-lisse-representations` | 1 | state |
-| `lem-pc-affine-perfect-colimit-descent` | 1 | state |
 | `lem-pc-affine-perfect-cut-degree-zero` | 1 | state |
 | `lem-pc-derived-qcoh-perfect-generation` | 1 | state |
 | `lem-pc-derived-tensor-transitivity` | 1 | state |
@@ -20,7 +19,6 @@
 | `lem-pc-perfect-affine-bounded-projective` | 1 | state |
 | `lem-pc-perfect-complex-descent` | 1 | state |
 | `lem-pc-perfect-descend-morphisms` | 1 | state |
-| `lem-pc-perfect-generation-affine-base` | 1 | state |
 | `lem-pc-perfect-generation-koszul-orthogonal` | 1 | state |
 | `lem-pc-perfect-generation-open-induction-step` | 1 | state |
 | `lem-pc-perfect-generator-exists` | 1 | state |
@@ -63,14 +61,10 @@
 | `lem-sc-pseudo-coherent-support-annihilation` | 1 | state |
 | `lem-sc-smooth-proper-diagonal-koszul-regular` | 1 | state |
 | `lem-sc-valuation-limit-qcoh-section-descent` | 1 | state |
-| `lem-sc-valuation-proper-coherent-higher-direct-images` | 1 | state |
 | `lem-weil-derived-limit-roos-complex` | 1 | state |
 | `lem-weil-pbc-closed-immersion-conormal-flat-base-change` | 1 | state |
 | `lem-weil-pbc-pair-henselization` | 1 | state |
-| `lem-weil-pbc-popescu-solution-modulo-choose` | 1 | state |
-| `lem-weil-pbc-power-series-parameter-quotient` | 1 | state |
 | `lem-weil-pbc-projective-space-functor-of-points` | 1 | state |
-| `lem-weil-pbc-purely-inseparable-base-change-local-ring` | 1 | state |
 | `lem-weil-pbc-purely-inseparable-pth-root-tower` | 1 | state |
 | `lem-weil-pbc-quasi-coherence-scalar-restriction` | 1 | state |
 | `lem-weil-pbc-quasi-coherent-algebra-colimit` | 1 | state |
