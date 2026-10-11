@@ -177,5 +177,23 @@
   "worker": "stage1",
   "summary": "Split Stacks Descent Lemma 02KS through the existing fpqc-local-on-base criterion 02KP. The four criterion conditions for universally closed morphisms are supplied by three new Mathlib leaves for invariance under isomorphism, Zariski locality on the target, and affine flat-surjective descent, together with the existing universal-closedness base-change leaf; the final step applies 02KP to the given fpqc covering. The item statement and its Stacks source were retained.",
   "blueprint": "The five proof steps realize the 02KS universally-closed half of the ancestor blueprint node lemma-weil-pbc-h1-constructible-representation, at the item's recorded step-2 place where 02L9 is obtained by combining 02KS and 02L5. The new nodes serve conditions (0), (2), and (3) of the 02KP criterion; the existing base-change leaf serves condition (1)."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.UniversallyClosedOfFpqcCover",
+  "declaration": "AlgebraicGeometry.universallyClosed_of_fpqc_cover",
+  "file": "lean/Sheaf/AlgebraicGeometry/UniversallyClosedOfFpqcCover.lean",
+  "statement": "theorem universallyClosed_of_fpqc_cover {X S : Scheme.{u}} (f : X ⟶ S) {I : Type v} (S' : I → Scheme.{u}) (g : ∀ i, S' i ⟶ S) (hg : Presieve.ofArrows S' g ∈ Scheme.fpqcPrecoverage S) (h : ∀ i, UniversallyClosed (pullback.snd f (g i))) : UniversallyClosed f",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-fdu1039",
+  "group": "H1",
+  "result": "pass",
+  "note": "f:X->S, I:Type v arbitrary, S' i/g i, ofArrows in fpqcPrecoverage (flat + finite affine image covers), pullback.snd f (g i) targets S_i, UniversallyClosed hyp and concl; binder form identical to f7dc0d331 with P:=UniversallyClosed; family statement so not Mathlib's single-morphism descendsAlong (existing:false right); #check clean"
  }
 }
