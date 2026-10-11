@@ -24,6 +24,7 @@ deformation.
 - `AlgebraicGeometry.Etale.nonempty_iso_leftDerivedUpperStar_zeroSection_familyObject`
 - `AlgebraicGeometry.Etale.nonempty_iso_leftDerivedUpperStar_puncturedLine_familyObject`
 - `AlgebraicGeometry.Etale.nonempty_iso_familyObject_standardPair`
+- `AlgebraicGeometry.Etale.nonempty_iso_familyObject_standardPair_twistShift`
 -/
 
 @[expose] public section
@@ -177,6 +178,32 @@ theorem nonempty_iso_familyObject_standardPair
     (leftDerivedUpperStarComp _ a (AffineSpace.zeroSection n B) _ hm).app _⟩
 
 end StandardPair
+/-- Blueprint `sk-lem-geometry` (4), the family object of the standard pair, made explicit: for
+the zero section of `𝔸^c_B ⟶ B` over a separated scheme of finite type over a field, the
+family object is the constant Tate twist,
+
+`ℱ ≃ a^* (0^* ω_{𝔸^c_B / B}) ≃ a^* Λ_B(c)[2c] ≃ Λ_{𝔸¹_B}(c)[2c]`,
+
+where `0^* ω = Λ(c)[2c]` is vector-bundle purity for the trivial bundle
+(`AlgebraicGeometry.Etale.nonempty_iso_sectionInvariant_affineSpace`). -/
+theorem nonempty_iso_familyObject_standardPair_twistShift [HasTateTwist.IsNormalized Λ]
+    {k : Type u} [Field k] (c : ℕ) (B : Scheme.{u}) (aB : B ⟶ Spec (.of k)) [IsSeparated aB]
+    [LocallyOfFiniteType aB] [HasInvertibleExponent Λ B]
+    [SmoothOfRelativeDimension c (𝔸(ULift.{u} (Fin c); B) ↘ B)]
+    [HasInvertibleExponent Λ 𝔸(ULift.{u} (Fin c); B)]
+    [HasCompactification (Scheme.Hom.deformationSpaceProj (𝔸(ULift.{u} (Fin c); B) ↘ B)
+      (AffineSpace.zeroSection (ULift.{u} (Fin c)) B))] :
+    Nonempty (sectionInvariant Λ
+        (Scheme.Hom.deformationSpaceProj (𝔸(ULift.{u} (Fin c); B) ↘ B)
+          (AffineSpace.zeroSection (ULift.{u} (Fin c)) B))
+        (AffineSpace.zeroSection (ULift.{u} (Fin c)) B).deformationSpaceSection ≅
+      (twistShift Λ 𝔸(ULift.{u} (Fin 1); B) c).obj
+        (constantComplex Λ 𝔸(ULift.{u} (Fin 1); B))) := by
+  obtain ⟨e₁⟩ := nonempty_iso_familyObject_standardPair Λ (ULift.{u} (Fin c)) B (d := c)
+  obtain ⟨e₂⟩ := nonempty_iso_sectionInvariant_affineSpace Λ c B aB
+  exact ⟨e₁ ≪≫ (L((𝔸(ULift.{u} (Fin 1); B) ↘ B)^*[ModuleCat.{u + 1} Λ])).mapIso
+      (e₂ ≪≫ twistShiftConstantComplexIso Λ B c) ≪≫
+    leftDerivedUpperStarTateShiftIso Λ _ c ≪≫ (twistShiftConstantComplexIso Λ _ c).symm⟩
 
 end Etale
 
