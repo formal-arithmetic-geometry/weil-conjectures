@@ -283,5 +283,22 @@
   "worker": "stage1",
   "summary": "Split following Stacks 032P (Tate) line by line: x=0 trivial; char 0 via 032L + separability (as 032M); char p via 032N to finite purely inseparable L; enlargement of L to contain y=x^{1/q} with L^q in K written out; S^q in R by normality; q=yS shown directly to be a prime over p=xR (the source's appeal to 0BRA for uniqueness is not needed); R_p Noetherian local of dimension 1 via the principal-ideal height bound (the source's DVR/Krull–Akizuki remarks about R_p and S_q are not used by the argument and are not stated); κ(q)/κ(p) finite by 031F (new node); S/yS finite via N-2 of R/xR; S/x S finite by the y-adic filtration (new Mathlib-leaf node for 0519(1)); ∩x^nS=0 from the separatedness included in completeness (the source cites 00IP, a local-ring statement, although R need not be local); conclusion by 031D. Statement unchanged.",
   "blueprint": "The steps realize the use of Lemma 032P (lemma-tate-japanese) in the blueprint ancestor lem-weil-pbc-normal-constant-generic, step 4 of its split (Tag 09Z5, proof of (1)), through the proof of 032W (complete local rings are Nagata): 'Applying Lemma lemma-tate-japanese once more with x = p in Lambda we reduce yet again to the case of a field'. The ancestor's proof gives no argument for Tate's lemma itself; Steps 1-12 supply it from Stacks 032P."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.TateN2CompletePrincipal",
+  "declaration": "tate_n2_complete_principal",
+  "file": "lean/Sheaf/RingTheory/TateN2CompletePrincipal.lean",
+  "statement": "theorem tate_n2_complete_principal (R : Type u) (K : Type v) [CommRing R] [IsDomain R] [Field K] [Algebra R K] [IsFractionRing R K] [IsNoetherianRing R] (x : R) (hnormal : IsIntegrallyClosed R) [IsAdicComplete (Ideal.span ({x} : Set R)) R] [IsDomain (R ⧸ Ideal.span ({x} : Set R))] (hquot : IsN2 (R ⧸ Ideal.span ({x} : Set R)) (FractionRing (R ⧸ Ideal.span ({x} : Set R)))) : IsN2 R K",
+  "branch": "sheaf-dag",
+  "by": "V1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-tnc",
+  "group": "V1",
+  "result": "pass"
  }
 }

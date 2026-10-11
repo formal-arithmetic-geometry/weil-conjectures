@@ -5054,3 +5054,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 14:48 L: merged deliver/M1/lemma-nagata-filtered-colimit-finite-data (stage 2; reviewer PASS; first push; Sheaf.RingTheory.FilteredColimitFiniteData CommRingCat.exists_finite_data_stage)
 - 14:48 L: merged deliver/M1/prop-weil-pbc-inverse-image-exact (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.EtaleInverseImageExact AlgebraicGeometry.Etale.upperStar_abelian_exact)
 - 14:49 L: merged deliver/M1/def-weil-pbc-coherent-formal-module (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.CoherentFormalModule AlgebraicGeometry.CoherentFormalModule)
+- 14:49 L: merged deliver/V1/lem-weil-pbc-tate-n2-complete-principal (stage 2; reviewer PASS; first push; Sheaf.RingTheory.TateN2CompletePrincipal tate_n2_complete_principal)
