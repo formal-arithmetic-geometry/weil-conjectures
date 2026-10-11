@@ -191,5 +191,23 @@
   "by": "L",
   "result": "accepted",
   "note": "5 steps following More on Algebra 07PR, built on the third E1 delivery (3edab980f; steps 1, 2, 4, 5 and five new nodes accepted at the third return) with step 3 repaired by L's worker: the radicial node restated without normality (c^p in R, unique prime over each prime; candidate 0BR8 recorded), the substitution z -> sz, f -> s^p f written out, A normal via regular-ring-normal and a new 030B leaf (of_localization_maximal, line 69 verified by L), C free over B, C a domain with fraction field L, C_q = C (x)_B B_r local, the completion-finite-quotient node, the two 07N9 identifications (*) and (**) written. Step 4 now checks the hypotheses of 07PH for B. Seven new nodes; the E1 nodes carry created.item = this item and their origin in split_report."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.PowerSeriesPolynomialFormalFiber",
+  "declaration": "MvPowerSeries.formalFiber_polynomial_isGeometricallyRegular",
+  "file": "lean/Sheaf/RingTheory/PowerSeriesPolynomialFormalFiber.lean",
+  "statement": "theorem formalFiber_polynomial_isGeometricallyRegular (k : Type u) [Field k] (p : ℕ) [Fact p.Prime] [CharP k p] (n m : ℕ) (q : Ideal (MvPolynomial (Fin m) (MvPowerSeries (Fin n) k))) [q.IsPrime] : let A := MvPolynomial (Fin m) (MvPowerSeries (Fin n) k) let C := AdicCompletion (IsLocalRing.maximalIdeal (Localization.AtPrime q)) (Localization.AtPrime q) IsNoetherianRing ((⊥ : Ideal A).Fiber C) ∧ Algebra.IsGeometricallyRegular (⊥ : Ideal A).ResidueField ((⊥ : Ideal A).Fiber C)",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-hgc1119",
+  "group": "E1",
+  "result": "pass",
+  "note": "k field Type u, char p as [Fact p.Prime][CharP k p], n m : ℕ incl. 0, A = MvPolynomial (Fin m) (MvPowerSeries (Fin n) k), arbitrary prime q, C = AdicCompletion at maxIdeal of A_q (A-algebra map checked = A→A_q→C by rfl), K = (⊥).ResidueField (⊥ prime via NoZeroDivisors), fibre (⊥).Fiber C, Noetherian ∧ IsGeometricallyRegular K, same form as landed PolynomialFormalFiber; no extra hypotheses"
  }
 }
