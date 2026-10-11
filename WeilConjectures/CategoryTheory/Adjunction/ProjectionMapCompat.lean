@@ -126,4 +126,75 @@ lemma rightAdjointProjectionMap_mate
 
 end RightAdjoint
 
+section LeftAdjoint
+
+variable {C₁ D₁ C₂ D₂ : Type*} [Category* C₁] [Category* D₁] [Category* C₂] [Category* D₂]
+  {F₁ : C₁ ⥤ D₁} {G₁ : D₁ ⥤ C₁} (adj₁ : F₁ ⊣ G₁) {F₂ : C₂ ⥤ D₂} {G₂ : D₂ ⥤ C₂} (adj₂ : F₂ ⊣ G₂)
+  (G'₁ : D₁ ⥤ C₁) (G'₂ : D₂ ⥤ C₂)
+  {T₁ : C₁ ⥤ C₁ ⥤ C₁} {T'₁ : D₁ ⥤ D₁ ⥤ D₁} {T₂ : C₂ ⥤ C₂ ⥤ C₂} {T'₂ : D₂ ⥤ D₂ ⥤ D₂}
+  (δ₁ : (((whiskeringLeft₂ C₁).obj G₁).obj G'₁).obj T₁ ⟶ (postcompose₂.obj G₁).obj T'₁)
+  (δ₂ : (((whiskeringLeft₂ C₂).obj G₂).obj G'₂).obj T₂ ⟶ (postcompose₂.obj G₂).obj T'₂)
+  {U : C₁ ⥤ C₂} {V : D₁ ⥤ D₂}
+  (ψU : (postcompose₂.obj U).obj T₁ ⟶ (((whiskeringLeft₂ C₂).obj U).obj U).obj T₂)
+  (ψV : (postcompose₂.obj V).obj T'₁ ⟶ (((whiskeringLeft₂ D₂).obj V).obj V).obj T'₂)
+  (τ : G₁ ⋙ U ⟶ V ⋙ G₂) (τ' : G'₁ ⋙ U ⟶ V ⋙ G'₂) (β : U ⋙ F₂ ⟶ F₁ ⋙ V)
+
+lemma projectionMapTranspose_app_app (K : C₁) (M : D₁) :
+    ((adj₁.projectionMapTranspose G'₁ T₁ T'₁ δ₁).app K).app M =
+      (T₁.map (adj₁.unit.app K)).app (G'₁.obj M) ≫ (δ₁.app (F₁.obj K)).app M :=
+  rfl
+
+/-- **The projection map of a left adjoint is compatible with mates.** Let `β : U F₂ ⟶ F₁ V` be
+the mate of `τ : G₁ ⋙ U ⟶ V ⋙ G₂` (hypothesis `hβ`), and let `τ`, `τ'` be compatible with the
+comparisons `δ₁`, `δ₂`, `ψ_U`, `ψ_V` (hypothesis `hδ`). Then the square
+```
+F₂ U (K ⊗ G'₁ M) --β--> V F₁ (K ⊗ G'₁ M) --V π₁--> V (F₁ K ⊗ M) --ψ_V--> V F₁ K ⊗ V M
+       |                                                                  ‖
+ F₂ ψ_U ≫ F₂(1 ⊗ τ')                                                       ‖
+       v                                                                  ‖
+F₂ (U K ⊗ G'₂ V M) ------------π₂------------> F₂ U K ⊗ V M ---β ⊗ 1---> V F₁ K ⊗ V M
+```
+commutes. For the extension by zero along an open immersion this is the compatibility of the
+projection formula with base change. -/
+lemma projectionMap_mate
+    (hβ : ∀ K, adj₂.unit.app (U.obj K) ≫ G₂.map (β.app K) =
+      U.map (adj₁.unit.app K) ≫ τ.app (F₁.obj K))
+    (hδ : ∀ X Y, U.map ((δ₁.app X).app Y) ≫ τ.app ((T'₁.obj X).obj Y) ≫
+        G₂.map ((ψV.app X).app Y) =
+      (ψU.app (G₁.obj X)).app (G'₁.obj Y) ≫ (T₂.map (τ.app X)).app _ ≫
+        (T₂.obj _).map (τ'.app Y) ≫ (δ₂.app (V.obj X)).app (V.obj Y))
+    (K : C₁) (M : D₁) :
+    β.app ((T₁.obj K).obj (G'₁.obj M)) ≫
+        V.map (((adj₁.projectionMap G'₁ T₁ T'₁ δ₁).app K).app M) ≫
+        (ψV.app (F₁.obj K)).app M =
+      F₂.map ((ψU.app K).app (G'₁.obj M)) ≫ F₂.map ((T₂.obj (U.obj K)).map (τ'.app M)) ≫
+        ((adj₂.projectionMap G'₂ T₂ T'₂ δ₂).app (U.obj K)).app (V.obj M) ≫
+        (T'₂.map (β.app K)).app (V.obj M) := by
+  apply (adj₂.homEquiv _ _).injective
+  simp only [homEquiv_unit, Functor.map_comp]
+  dsimp
+  -- the left hand side
+  rw [reassoc_of% (hβ _)]
+  have h₁ := τ.naturality (((adj₁.projectionMap G'₁ T₁ T'₁ δ₁).app K).app M)
+  dsimp at h₁
+  rw [← reassoc_of% h₁, ← U.map_comp_assoc]
+  erw [unit_app_comp_map_projectionMap_app_app]
+  rw [projectionMapTranspose_app_app, U.map_comp_assoc, hδ]
+  -- the right hand side
+  rw [adj₂.unit_naturality_assoc, adj₂.unit_naturality_assoc]
+  erw [unit_app_comp_map_projectionMap_app_app_assoc]
+  rw [projectionMapTranspose_app_app]
+  have h₂ := NatTrans.congr_app (δ₂.naturality (β.app K)) (V.obj M)
+  dsimp at h₂
+  rw [Category.assoc, ← h₂, ← NatTrans.comp_app_assoc, ← T₂.map_comp, hβ]
+  have h₃ := NatTrans.congr_app (ψU.naturality (adj₁.unit.app K)) (G'₁.obj M)
+  dsimp at h₃
+  rw [reassoc_of% h₃, T₂.map_comp, NatTrans.comp_app_assoc]
+  congr 1
+  conv_lhs => rw [← NatTrans.comp_app_assoc, ← T₂.map_comp]
+  conv_rhs => rw [← NatTrans.comp_app_assoc, ← T₂.map_comp]
+  exact ((T₂.map (U.map (adj₁.unit.app K) ≫ τ.app (F₁.obj K))).naturality_assoc (τ'.app M) _).symm
+
+end LeftAdjoint
+
 end CategoryTheory.Adjunction
