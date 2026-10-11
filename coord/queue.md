@@ -1,14 +1,15 @@
 # Work queue
 
-375 items; claim with `tools/claim.py next <group> [--stage N]`.
+373 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (375)
+## Stage 2: nodes to state (373)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
+| `def-weil-pbc-closed-subset-proper-over-base` | 1 | state |
 | `def-weil-pbc-morphism-to-projective-space-by-sections` | 1 | state |
 | `cor-galois-lisse-representations` | 1 | state |
 | `lem-pc-complete-linear-system-closed` | 1 | state |
@@ -23,7 +24,6 @@
 | `lem-sc-affine-koszul-cech-derived-comparison` | 1 | state |
 | `lem-sc-affine-perfect-koszul-principal-unit` | 1 | state |
 | `lem-sc-affine-perfect-open-represent-cohomology` | 1 | state |
-| `lem-sc-affine-perfect-support-extension` | 1 | state |
 | `lem-sc-affine-support-iterated-cones` | 1 | state |
 | `lem-sc-base-change-curve` | 1 | state |
 | `lem-sc-coherent-affine-free-resolution` | 1 | state |
@@ -52,11 +52,9 @@
 | `lem-weil-pbc-quasi-finite-at-finite-subalgebra-away` | 1 | state |
 | `lem-weil-pbc-quasi-finite-at-point-isolated` | 1 | state |
 | `lem-weil-pbc-quasi-finite-over-polynomial-algebra` | 1 | state |
-| `lem-weil-pbc-quasi-finite-ring-map-integral-closure-open` | 1 | state |
 | `lem-weil-pbc-quotient-base-change-closed-immersion-ideal` | 1 | state |
 | `lem-weil-pbc-quotient-by-power-torsion-no-torsion` | 1 | state |
 | `lem-weil-pbc-reduced-curve-normalization` | 1 | state |
-| `lem-weil-pbc-reduced-induced-closed-subscheme` | 1 | state |
 | `lem-weil-pbc-reduced-noetherian-total-ring-fractions` | 1 | state |
 | `lem-weil-pbc-reduced-normal-iff-integrally-closed-total-fractions` | 1 | state |
 | `lem-weil-pbc-reduced-source-factors-through-closed-subscheme` | 1 | state |
@@ -385,7 +383,7 @@
 | `lem-pc-essentially-constant-pro-hom-colimit` | 4 | state |
 | `lem-pur-essential-constant-pro-criterion-05py` | 4 | state |
 
-Not open yet: 40 nodes that wait for stage 1, 504 nodes that wait for a statement dependency.
+Not open yet: 40 nodes that wait for stage 1, 503 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
