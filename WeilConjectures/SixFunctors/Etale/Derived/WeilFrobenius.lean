@@ -6,7 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
-public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekBaseChange
+public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekBaseChangeShift
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekProjection
 public import WeilConjectures.SixFunctors.Etale.Derived.PoincarePairing
 public import WeilConjectures.SixFunctors.Etale.Derived.Shift
@@ -363,11 +363,19 @@ lemma isWeilMorphism_rightDerivedLowerShriek_commShiftIso_inv [QuasiCompact a]
     (sq : IsPullback g a a h) (φ : (L((g)^*[ModuleCat.{u + 1} Λ])).obj K ⟶ K) (n : ℤ) :
     IsWeilMorphism h (shiftWeilDatum h (lowerShriekWeilDatum sq φ) n)
       (lowerShriekWeilDatum sq (shiftWeilDatum g φ n))
-      (((R(a)_![ModuleCat.{u + 1} Λ]).commShiftIso n).inv.app K) :=
-  -- `Ex_!` is built from the derived base change map of a proper morphism and the base change
-  -- isomorphism of an extension by zero, both of which commute with the shifts, being mates or
-  -- derived functors of maps of complexes; the commutation is not formalised yet.
-  sorry
+      (((R(a)_![ModuleCat.{u + 1} Λ]).commShiftIso n).inv.app K) := by
+  have hEx := NatTrans.shift_app_comm (rightDerivedLowerShriekBaseChangeMap (X' := X) (Y' := Y)
+    (g' := g) (f' := a) (f := a) (g := h) Λ sq) n K
+  simp only [Functor.comp_obj, Functor.commShiftIso_comp_hom_app, Category.assoc] at hEx
+  have h' := ((R(a)_![ModuleCat.{u + 1} Λ]).commShiftIso n).inv.naturality φ
+  dsimp at h'
+  unfold IsWeilMorphism shiftWeilDatum lowerShriekWeilDatum
+  rw [← cancel_epi ((L((h)^*[ModuleCat.{u + 1} Λ])).map
+    (((R(a)_![ModuleCat.{u + 1} Λ]).commShiftIso n).hom.app K))]
+  rw [← Functor.map_comp_assoc, Iso.hom_inv_id_app, CategoryTheory.Functor.map_id,
+    Category.id_comp]
+  simp only [Functor.map_comp, Category.assoc]
+  rw [reassoc_of% hEx, h', Iso.hom_inv_id_app_assoc]
 
 /-- Blueprint `lem-fix-weil-operations` (the cup product part).
 
