@@ -158,5 +158,23 @@
   "by": "L",
   "result": "accepted",
   "note": "5 steps follow Stacks 04KU with 0388 as a new unsplit node (no quasi-separatedness assumed, as in Stacks); finitely generated k-subalgebra of an algebraic extension is a finite field via two Mathlib leaves (one of unit sk-thm-reduction, a leaf hence a tool); p o sigma_X = p by functoriality. Tags 04KU, 0388 verified."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GaloisBaseChangeQCOpenDescends",
+  "declaration": "AlgebraicGeometry.galois_baseChange_qc_open_descends",
+  "file": "lean/Sheaf/AlgebraicGeometry/GaloisBaseChangeQCOpenDescends.lean",
+  "statement": "theorem galois_baseChange_qc_open_descends (k L : Type u) [Field k] [Field L] [Algebra k L] [IsGalois k L] (X : Scheme.{u}) (f : X ⟶ Spec (.of k)) (V : (pullback f (Spec.map (CommRingCat.ofHom (algebraMap k L)))).Opens) (hV : IsCompact V.1) : let σX := fun σ : L ≃ₐ[k] L ↦ baseChangeMap f (specAlgEquivOver σ) (∀ σ : L ≃ₐ[k] L, IsIso (σX σ)) ∧ (∀ σ τ : L ≃ₐ[k] L, σX (σ * τ) = σX σ ≫ σX τ) ∧ ∃ K : IntermediateField k L, FiniteDimensional k K ∧ ∃ V' : (pullback f (Spec.map (CommRingCat.ofHom (algebraMap k K)))).Opens, IsCompact V'.1 ∧ ∃ p : pullback f (Spec.map (CommRingCat.ofHom (algebraMap k L))) ⟶ pullback f (Spec.map (CommRingCat.ofHom (algebraMap k K))), p = baseChangeMap f (Over.homMk (Spec.map (CommRingCat.ofHom K.toSubalgebra.val)) (by change Spec.map (CommRingCat.ofHom K.toSubalgebra.val) ≫ Spec.map (CommRingCat.ofHom (algebraMap k K)) = Spec.map (CommRingCat.ofHom (algebraMap k L)) rw [← Spec.map_comp] congr 1) : Over.mk (Spec.map (CommRingCat.ofHom (algebraMap k L))) ⟶ Over.mk (Spec.map (CommRingCat.ofHom (algebraMap k K)))) ∧ V = p ⁻¹ᵁ V' ∧ ∀ σ : L ≃ₐ[k] L, (∀ x : K, σ (x : L) = (x : L)) → (σX σ) '' V.1 = V.1",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-gbq1051",
+  "group": "F1",
+  "result": "pass",
+  "note": "k,L Type u Field+Algebra+IsGalois (sep+normal, no finiteness = possibly infinite); f : X ⟶ Spec k explicit (base change); X_L = pullback f Spec.map(algebraMap) as landed DescendQCOpenFGSubalgebra; V Opens + IsCompact V.1; σX = baseChangeMap f (specAlgEquivOver σ) = id×Spec σ, IsIso, σX(σ*τ)=σX σ ≫ σX τ matches (στ)_X=τ_X∘σ_X; ∃ IntermediateField K FiniteDimensional, ∃ V' compact on X_K, p = baseChangeMap of K.val inclusion, V = p⁻¹ᵁV'; (2) same K, σ fixing K pointwise → image V = V; same spellings as H1 sibling delivery"
  }
 }
