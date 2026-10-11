@@ -21,39 +21,69 @@
  "stmt_deps": [
   "def-weil-abstract-derived-category"
  ],
- "proof": [],
+ "proof": [
+  {
+   "text": "Take the bounded complex $E^\\bullet=0$ of finite free $R$-modules and its zero morphism to $C$ in $D(R)$. For every $i>m$, the hypothesis gives $H^i(C)=0$, so $H^i(E^\\bullet)=0\\to H^i(C)$ is an isomorphism. In degree $m$, the same hypothesis gives $H^m(C)=0$, so $H^m(E^\\bullet)=0\\to H^m(C)$ is surjective. Thus this morphism witnesses that $C$ is $m$-pseudo-coherent (Stacks, More on Algebra, Tag 064W, part (1)).",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, Lemma 15.66.5 (Tag 064W), part (1)"
+   }
+  }
+ ],
  "proof_deps": [],
- "proof_origin": null,
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "More on Algebra, Lemma 15.66.5 (Tag 064W), part (1)"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
-   "query": "bounded-above finite-free complex glues from localizations generating unit ideal",
-   "results": "No pseudo-coherence declaration; generic bounded support results only",
+   "query": "If a derived object over a ring has vanishing cohomology in every degree at least m, it is m-pseudo-coherent",
+   "results": "DerivedCategory.isGE_iff; DerivedCategory.isLE_iff; DerivedCategory.isZero_of_isLE; DerivedCategory.isZero_of_isGE; no pseudo-coherence declaration",
    "date": "2026-10-11",
    "verdict": "no match"
   },
   {
    "tool": "loogle",
-   "query": "Module.FinitePresentation, Localization, Ideal.span",
-   "results": "No matching declaration",
+   "query": "PseudoCoherent, Cohomology, IsZero",
+   "results": "Unknown identifier PseudoCoherent; no matching declaration",
    "date": "2026-10-11",
    "verdict": "no match"
   },
   {
    "tool": "grep",
-   "query": "pseudo.?coherent|PseudoCoherent",
-   "results": "no matches in Mathlib/Algebra/Homology",
+   "query": "pseudo.?coherent|PseudoCoherent Mathlib/Algebra/Homology",
+   "results": "0 matches in Mathlib/Algebra/Homology",
    "date": "2026-10-11",
    "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pc-ring-pseudo-coherent-localization-glue",
   "by": "worker",
   "date": "2026-10-11"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality"
+ "unit": "sk-thm-picard-duality",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-ring-m-pseudo-coherent-vanishing-base",
+  "worker": "stage1",
+  "summary": "No sorry-free Lean declaration states this item. The Tag 064W base case is proved directly by taking the zero bounded finite-free complex: vanishing of H^i(C) for every i >= m makes the zero map an isomorphism above m and a surjection in degree m. No new node is needed.",
+  "blueprint": "Realizes the ancestor proof clause 'm-pseudo-coherence induction: the case n<m' by the Tag 064W zero-complex base case.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-pvb0049",
+  "group": "G1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-pvb0049 (reviewer sub-agent of L); spot-checked: Statement is Tag 064W(1) with the inline 064N m-pseudo-coherence wording, unchanged (C4). Proof is the zero-complex witness: E=0 bounded finite free, zero map gives 0=H^i(C) isos for i>m and surjection onto H^m(C)=0; elementary, no citations, D complete. Preflight '! step 1 quotes 064W' fine: 064W is the item's own source. Only citer (grep): lem-pc-ring-pseudo-coherent-localization-glue, case n<m uses exactly H^j(K)=0 for all j>=m => m-pc (C4 ok). No duplicate among 21 pseudo-coherent nodes (class b/d none). Second reading missed nothing."
+ }
 }
