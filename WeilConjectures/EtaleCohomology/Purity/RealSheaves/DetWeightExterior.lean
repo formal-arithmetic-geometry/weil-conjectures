@@ -125,7 +125,8 @@ theorem hasFiniteGeometricDet_subquotient_tprod (hρ : W.IsLisse l ρ) (A : Subr
   exact W.finite_range_of_continuous _ (IsLisse.continuous_det_apply
     ((IsLisse.of_equiv e.symm ((hρ.exteriorPower r).subquotient _ _)).subquotient S U))
 
-/-- The forward induction step for `AlgebraicGeometry.WeilGroup.detWeight_subquotient_exteriorPower`:
+/-- The forward induction step for
+`AlgebraicGeometry.WeilGroup.detWeight_subquotient_exteriorPower`:
 if the constituents of all exterior powers of a subrepresentation `A` and of the quotient `ρ / A`
 have determinant weights which are sums of entries of their rank-counted lists, then so do those
 of `⋀^r ρ`. A constituent of `⋀^r ρ` is a constituent of a step `⋀^j A ⊗ ⋀^{r - j} (ρ / A)` of
@@ -152,7 +153,7 @@ theorem exists_le_rankDetWeightMultiset_of_subrepresentation (hρ : W.IsLisse l 
   have hjr : j ≤ r := Nat.lt_succ_iff.1 hj
   obtain ⟨e⟩ := Representation.nonempty_equiv_exteriorPowerFiltration A hjr
   obtain ⟨U'', S'', ⟨e₂⟩⟩ := Subrepresentation.exists_subquotient_equiv_of_equiv e U' S'
-  let f := e₂.trans e₁
+  have f := e₂.trans e₁
   obtain ⟨UV, SV, UE, SE, -, -, hV, hE, -, -, heq⟩ :=
     Representation.exists_detWeight_eq_add_of_subquotient_tprod
       (weightCharacter ι (Nat.card K)) W.deg W.frobeniusLift _ _
@@ -163,11 +164,14 @@ theorem exists_le_rankDetWeightMultiset_of_subrepresentation (hρ : W.IsLisse l 
       (f.isIrreducible_iff.2 hirr) (hasFiniteGeometricDet_subquotient_tprod hρ A hjr U'' S'')
   obtain ⟨T₁, hT₁, hc₁, hs₁⟩ := hA j UV SV hV
   obtain ⟨T₂, hT₂, hc₂, hs₂⟩ := hQ (r - j) UE SE hE
-  refine ⟨T₁ + T₂, (rankDetWeightMultiset_eq_add ι A) ▸ add_le_add hT₁ hT₂,
-    by rw [Multiset.card_add, hc₁, hc₂]; omega, ?_⟩
-  rw [Multiset.sum_add, ← hs₁, ← hs₂, detWeight_of_equiv ι f,
-    detWeight_eq_detWeight_weightCharacter, heq, detWeight_eq_detWeight_weightCharacter,
-    detWeight_eq_detWeight_weightCharacter]
+  refine ⟨T₁ + T₂, ?_, ?_, ?_⟩
+  · rw [rankDetWeightMultiset_eq_add ι A]
+    exact add_le_add hT₁ hT₂
+  · rw [Multiset.card_add, hc₁, hc₂]; omega
+  rw [Multiset.sum_add, ← hs₁, ← hs₂, detWeight_of_equiv ι f]
+  exact (detWeight_eq_detWeight_weightCharacter ι _).trans (heq.trans (congrArg₂ (· + ·)
+    (detWeight_eq_detWeight_weightCharacter ι _).symm
+    (detWeight_eq_detWeight_weightCharacter ι _).symm))
 
 /-- The converse induction step for
 `AlgebraicGeometry.WeilGroup.detWeight_subquotient_exteriorPower`: if every sum of `j` entries of
@@ -183,7 +187,8 @@ theorem exists_detWeight_eq_sum_of_subrepresentation (hρ : W.IsLisse l ρ)
     (hQ : ∀ (j : ℕ) (T : Multiset ℝ), T ≤ W.rankDetWeightMultiset l A.quotient ι →
       Multiset.card T = j → ∃ U S : Subrepresentation (A.quotient.exteriorPower j),
         (S.subquotient U).IsIrreducible ∧ W.detWeight l (S.subquotient U) ι = T.sum)
-    {r : ℕ} {T : Multiset ℝ} (hT : T ≤ W.rankDetWeightMultiset l ρ ι) (hcard : Multiset.card T = r) :
+    {r : ℕ} {T : Multiset ℝ} (hT : T ≤ W.rankDetWeightMultiset l ρ ι)
+    (hcard : Multiset.card T = r) :
     ∃ U S : Subrepresentation (ρ.exteriorPower r), (S.subquotient U).IsIrreducible ∧
       W.detWeight l (S.subquotient U) ι = T.sum := by
   rw [rankDetWeightMultiset_eq_add ι A] at hT
@@ -209,9 +214,11 @@ theorem exists_detWeight_eq_sum_of_subrepresentation (hρ : W.IsLisse l ρ)
   obtain ⟨U, S, ⟨e₃⟩⟩ := Subrepresentation.exists_subquotient_equiv_of_subquotient U' S'
   let f := e₃.trans e₂
   refine ⟨U, S, f.isIrreducible_iff.2 hQ'', ?_⟩
-  rw [← add_tsub_cancel_of_le hT₁T, Multiset.sum_add, ← hs₁, ← hs₂, ← detWeight_of_equiv ι f,
-    detWeight_eq_detWeight_weightCharacter, heq, detWeight_eq_detWeight_weightCharacter,
-    detWeight_eq_detWeight_weightCharacter]
+  have h := (detWeight_eq_detWeight_weightCharacter ι _).trans (heq.trans (congrArg₂ (· + ·)
+    (detWeight_eq_detWeight_weightCharacter ι _).symm
+    (detWeight_eq_detWeight_weightCharacter ι _).symm))
+  exact (detWeight_of_equiv ι f).symm.trans (h.trans ((congrArg₂ (· + ·) hs₁ hs₂).trans
+    ((Multiset.sum_add _ _).symm.trans (congrArg Multiset.sum (add_tsub_cancel_of_le hT₁T)))))
 
 /-- The constituents of an exterior power of a nonzero lisse Weil sheaf, by induction on the rank:
 see `AlgebraicGeometry.WeilGroup.detWeight_subquotient_exteriorPower`. -/
