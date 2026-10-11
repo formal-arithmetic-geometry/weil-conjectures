@@ -126,5 +126,24 @@
   "group": "M1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-czi (reviewer sub-agent of L); spot-checked: Source: Stacks Varieties Remark 09NW (varieties-remark-conductor, varieties.tex l.8070) and its use in Lemma 09NX; the item statement (unchanged, R-cds) agrees with it: A reduced, V(I) u V(J)=Spec A, I cap J=0, I -> IB iso, IP=I(P/JP) specialised to invertible M^m. New node lem-sc-reduced-ideals-zero-intersection states exactly the first two clauses of 09NW with its hypotheses (reduced, V(I) u V(J)=Spec A); true (an element of I cap J lies in every prime, so is nilpotent, so 0); small case A=k[x,y]/(xy), I=(x), J=(y): (x) cap (y)=(xy)=0, checked; Mathlib searches of three kinds recorded, blueprint same_as [] with from copied. Step 1: def-weil-closed-immersion and def-sbc-closed-immersion-ideal-sheaf give I(U)=I, J_1(U)=J_1 on affine U, components cover so V(I) u V(J_1)=Spec A, A reduced by def-pc-reduced-scheme. Step 2: carried by the new node plus the ideal-sheaf node. Step 3: def-sc-invertible-module (locally free rank one) and def-pur-sheaf-tensor-product. Checked r=1 (I=O_Y) and m=0. FIX: dag/nodes/sec-curve-estimates/lem-sc-conductor-ideal-zero-intersection.json: proof[1].text: the passage from affine opens to arbitrary U now goes through the sheaf morphism I -> i_{1,*}I_1 being bijective on affine opens, hence an isomorphism of sheaves (the delivered text inferred surjectivity on arbitrary U from the affine-local identification); proof[2].text: replaced 'tensor the bijection of sections with (M|Z1)^m' (sections do not commute with tensor) by the local-trivialisation argument over opens V with M|_V = O_V, reducing to Step 2 and concluding by isomorphism of sheaves; proof[2].source.place reworded. Same route and same cited nodes; uses and proof_deps unchanged. No tool_uses. Start Sat Oct 10 03:36:27 PM UTC 2026, end Sat Oct 10 03:37:24 PM UTC 2026.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ConductorIdealZeroIntersection",
+  "declaration": "AlgebraicGeometry.conductorIdealZeroIntersection",
+  "file": "lean/Sheaf/AlgebraicGeometry/ConductorIdealZeroIntersection.lean",
+  "statement": "theorem conductorIdealZeroIntersection {Y : Scheme.{u}} [IsReduced Y] {ι : Type v} [Finite ι] (C : ι → Scheme.{u}) (i : ∀ b : ι, C b ⟶ Y) [∀ b : ι, IsReduced (C b)] [∀ b : ι, IsClosedImmersion (i b)] (hcomponents : ∀ b : ι, Set.range (i b) ∈ irreducibleComponents Y) (hdistinct : Function.Injective fun b : ι => Set.range (i b)) (hcover : (⋃ b : ι, Set.range (i b)) = Set.univ) (a : ι) {Z : Scheme.{u}} [IsReduced Z] (j : Z ⟶ Y) [IsClosedImmersion j] (hZ : Set.range j = ⋃ b : ι, ⋃ (_ : b ≠ a), Set.range (i b)) : let I : Y.IdealSheafData := j.ker let J₁ : Y.IdealSheafData := (i a).ker let adj := Classical.choice (Modules.nonempty_tensorPullbackAdjunction (i a)) let φ := (adj.homEquiv I.toModules (SheafOfModules.unit (C a).ringCatSheaf)).symm (I.toModulesι ≫ SheafOfModules.unitToPushforwardObjUnit (i a).toRingCatSheafHom) (∀ U : Y.Opens, I.idealOfOpens U ⊓ J₁.idealOfOpens U = ⊥) ∧ ∀ (M : Y.Modules) [M.IsInvertible] (m : ℕ) (e : (Modules.tensorPullback (i a)).obj (M.tensorPow m) ≅ ((Modules.tensorPullback (i a)).obj M).tensorPow m), let μ := I.toModulesι ▷ M.tensorPow m ≫ (λ_ (M.tensorPow m)).hom let μ₁ := image.ι φ ▷ ((Modules.tensorPullback (i a)).obj M).tensorPow m ≫ (λ_ (((Modules.tensorPullback (i a)).obj M).tensorPow m)).hom ∃ ρ : image μ ⟶ (Modules.pushforward (i a)).obj (image μ₁), ρ ≫ (Modules.pushforward (i a)).map (image.ι μ₁) = image.ι μ ≫ adj.unit.app (M.tensorPow m) ≫ (Modules.pushforward (i a)).map e.hom ∧ ∀ U : Y.Opens, Function.Bijective (ρ.app U)",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-czi1148"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-czi1148",
+  "group": "H1",
+  "result": "fix",
+  "note": "G1-form components (reduced closed immersions, irreducibleComponents, injective, cover), reduced complement j with hZ, I=j.ker, J1=(i a).ker, I1=image phi; clause 1 per open via idealOfOpens; clause 2 IM^m, I1 M1^m as images of multiplication, rho factoring unit+e, bijective on every open, m=0 included"
  }
 }
