@@ -1,33 +1,61 @@
 # Work queue
 
-429 items; claim with `tools/claim.py next <group> [--stage N]`.
+469 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (429)
+## Stage 2: nodes to state (469)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
-| `def-pc-derived-category-qcoh-algebra` | 1 | state |
-| `def-pc-perfect-complex` | 1 | state |
 | `def-weil-pbc-koszul-regular-sequence` | 1 | state |
 | `cor-galois-lisse-representations` | 1 | state |
+| `lem-pc-affine-perfect-colimit-descent` | 1 | state |
+| `lem-pc-affine-perfect-cut-degree-zero` | 1 | state |
 | `lem-pc-derived-module-free-generation` | 1 | state |
 | `lem-pc-derived-pullback-tensor-product` | 1 | state |
 | `lem-pc-derived-pullback-tensor-qcoh` | 1 | state |
 | `lem-pc-derived-pullback-tor-independent-flat-complex` | 1 | state |
+| `lem-pc-derived-qcoh-perfect-generation` | 1 | state |
 | `lem-pc-derived-tensor-transitivity` | 1 | state |
 | `lem-pc-flat-complex-derived-pullback` | 1 | state |
+| `lem-pc-koszul-affine-detection` | 1 | state |
 | `lem-pc-module-pullback-identity-composition` | 1 | state |
 | `lem-pc-noetherian-bounded-coherent-pseudo-coherent` | 1 | state |
+| `lem-pc-perfect-affine-bounded-projective` | 1 | state |
+| `lem-pc-perfect-complex-descent` | 1 | state |
+| `lem-pc-perfect-complexes-compact-set` | 1 | state |
+| `lem-pc-perfect-descend-morphisms` | 1 | state |
+| `lem-pc-perfect-generation-affine-base` | 1 | state |
+| `lem-pc-perfect-generation-koszul-orthogonal` | 1 | state |
+| `lem-pc-perfect-generation-open-induction-step` | 1 | state |
+| `lem-pc-perfect-generator-exists` | 1 | state |
+| `lem-pc-perfect-object-compact` | 1 | state |
+| `lem-pc-perfect-pseudo-coherent-locally-finite-tor` | 1 | state |
+| `lem-pc-perfect-summand` | 1 | state |
+| `lem-pc-perfect-tensor-hom-duality` | 1 | state |
+| `lem-pc-perfect-thick-closure` | 1 | state |
+| `lem-pc-perfect-two-out-of-three` | 1 | state |
 | `lem-pc-pseudo-coherent-distinguished-triangle` | 1 | state |
+| `lem-pc-pseudo-coherent-finite-tor-perfect` | 1 | state |
 | `lem-pc-pseudo-coherent-summand` | 1 | state |
+| `lem-pc-ring-pseudo-coherent-finite-tor-perfect` | 1 | state |
 | `lem-pc-ringed-spaces-derived-pullback-composition` | 1 | state |
+| `lem-pc-supported-perfect-generator` | 1 | state |
+| `lem-pc-tor-independent-perfect-pullback-comparison` | 1 | state |
 | `lem-sc-affine-koszul-cech-derived-comparison` | 1 | state |
+| `lem-sc-affine-perfect-koszul-principal-unit` | 1 | state |
+| `lem-sc-affine-perfect-map-lift` | 1 | state |
+| `lem-sc-affine-perfect-open-represent-cohomology` | 1 | state |
+| `lem-sc-affine-perfect-plus-locally-free` | 1 | state |
+| `lem-sc-affine-perfect-plus-shift` | 1 | state |
+| `lem-sc-affine-perfect-support-extension` | 1 | state |
 | `lem-sc-affine-pseudo-coherent-lift` | 1 | state |
+| `lem-sc-affine-support-iterated-cones` | 1 | state |
 | `lem-sc-base-change-curve` | 1 | state |
 | `lem-sc-coherent-pseudo-coherent` | 1 | state |
+| `lem-sc-coherent-ring-perfect-complex-cohomology` | 1 | state |
 | `lem-sc-complex-lift-class-projective` | 1 | state |
 | `lem-sc-derived-k-injective-restrict-open` | 1 | state |
 | `lem-sc-derived-open-gluing` | 1 | state |
@@ -37,8 +65,19 @@
 | `lem-sc-hilbert-embedded-points-gluing` | 1 | state |
 | `lem-sc-intersection-effective-cartier` | 1 | state |
 | `lem-sc-module-extension-by-zero-stalk-maps` | 1 | state |
+| `lem-sc-perfect-cut-complex-degree-zero` | 1 | state |
+| `lem-sc-perfect-degree-zero-fibre-criterion` | 1 | state |
+| `lem-sc-perfect-derived-tensor-perfect` | 1 | state |
+| `lem-sc-perfect-ext-bounded-qcoh-vanishing` | 1 | state |
+| `lem-sc-perfect-finite-free-residue-model` | 1 | state |
+| `lem-sc-perfect-h0-locally-closed` | 1 | state |
+| `lem-sc-perfect-hypercohomology-gap` | 1 | state |
+| `lem-sc-perfect-into-support-on-T` | 1 | state |
+| `lem-sc-perfect-jump-loci` | 1 | state |
+| `lem-sc-perfect-support-map-lift` | 1 | state |
 | `lem-sc-picard-kunneth-qcoh` | 1 | state |
 | `lem-sc-pseudo-coherent-qcoh` | 1 | state |
+| `lem-sc-pseudo-coherent-support-annihilation` | 1 | state |
 | `lem-sc-valuation-limit-affine-pushforward-colimit` | 1 | state |
 | `lem-sc-valuation-proper-coherent-higher-direct-images` | 1 | state |
 | `lem-weil-derived-limit-roos-complex` | 1 | state |
@@ -50,11 +89,9 @@
 | `lem-weil-pbc-popescu-lift-nilpotent` | 1 | state |
 | `lem-weil-pbc-popescu-lift-solution` | 1 | state |
 | `lem-weil-pbc-popescu-lifting` | 1 | state |
-| `lem-weil-pbc-popescu-product` | 1 | state |
 | `lem-weil-pbc-popescu-reduce-to-field` | 1 | state |
 | `lem-weil-pbc-popescu-solution-modulo-choose` | 1 | state |
 | `lem-weil-pbc-power-in-base-after-localization` | 1 | state |
-| `lem-weil-pbc-power-series-cohen-formally-smooth-adic` | 1 | state |
 | `lem-weil-pbc-power-series-complete-over-complete-base` | 1 | state |
 | `lem-weil-pbc-power-series-field-cohen-fs-adic` | 1 | state |
 | `lem-weil-pbc-power-series-field-cohen-regular-complete` | 1 | state |
@@ -386,6 +423,7 @@
 | `lem-exc-coinduced-discrete-embedding` | 2 | state |
 | `lem-exc-etale-algebra-lift` | 2 | state |
 | `lem-kun-etale-lfp` | 2 | state |
+| `lem-pc-affine-perfect-hom-colimit` | 2 | state |
 | `lem-pc-bounded-above-flat-kflat` | 2 | state |
 | `lem-pc-brown-representability-right-adjoint` | 2 | state |
 | `lem-pc-degree-zero-properties` | 2 | state |
@@ -412,10 +450,12 @@
 | `lem-sc-p1-graded-kernel-finite` | 2 | state |
 | `lem-sc-p1-graded-nakayama-generation` | 2 | state |
 | `lem-sc-p1-twist-exists` | 2 | state |
+| `lem-sc-perfect-pullback-perfect-residue` | 2 | state |
 | `lem-sc-pic-affine-quotient` | 2 | state |
 | `lem-sc-pic-restriction-boundary` | 2 | state |
 | `lem-sc-picard-valuation-probe-closure` | 2 | state |
 | `lem-sc-pseudo-coherent-lift-stably-free-complex` | 2 | state |
+| `lem-sc-supported-derived-generated-perfect` | 2 | state |
 | `lem-sc-valuation-closed-fibre-section-vanishing` | 2 | state |
 | `lem-sc-valuation-proper-coherent-sections` | 2 | state |
 | `lem-sc-very-ample-separation-criterion` | 2 | state |
@@ -439,7 +479,7 @@
 | `lem-pc-essentially-constant-pro-hom-colimit` | 4 | state |
 | `lem-pur-essential-constant-pro-criterion-05py` | 4 | state |
 
-Not open yet: 40 nodes that wait for stage 1, 574 nodes that wait for a statement dependency.
+Not open yet: 40 nodes that wait for stage 1, 530 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
