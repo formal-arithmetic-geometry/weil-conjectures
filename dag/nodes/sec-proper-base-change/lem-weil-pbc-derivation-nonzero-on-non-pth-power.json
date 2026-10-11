@@ -216,5 +216,23 @@
   "by": "L",
   "result": "accepted",
   "note": "6 steps following More on Algebra 07PH: R_0 replaced by its image (0325 node), then by a power series ring over a field (032D node; the Cohen-ring case excluded since p = 0); Noether normalization over a domain (new 07NA node) and f' = g^{pN} f in B'; reduction to B' by a new node for the last sentence of 07PE with D(f') = g^{pN} D(f) computed inside B; the subfield K_J via new nodes for 031W, 07P1/07P2 (p-basis), 07P5 and 07P4 (the hidden use of 07P4 (1), (2) written out); a derivation of M from a linear form (new leaf exists_dual_ne_zero, Dual/Lemmas.lean:196 verified by L) scaled into B'. Source line corrected (11860). The duplicate node lem-weil-pbc-find-derivation-not-pth-power (same statement, created by the 07PM split) is merged into this one by L: its citer repointed, the node deleted."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.Derivation.DetectNonPthPower",
+  "declaration": "Derivation.exists_apply_ne_zero_of_not_pth_power",
+  "file": "lean/Sheaf/RingTheory/Derivation/DetectNonPthPower.lean",
+  "statement": "theorem exists_apply_ne_zero_of_not_pth_power (p : ℕ) [Fact p.Prime] (B : Type u) [CommRing B] [IsDomain B] [CharP B p] (M : Type v) [Field M] [Algebra B M] [IsFractionRing B M] (R₀ : Type w) [CommRing R₀] [IsNoetherianRing R₀] [IsLocalRing R₀] [IsAdicComplete (IsLocalRing.maximalIdeal R₀) R₀] [Algebra R₀ B] [Algebra.FiniteType R₀ B] (f : B) (hf : ¬ ∃ x : M, x ^ p = algebraMap B M f) : ∃ D : Derivation ℤ B B, D f ≠ 0",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-dnp0936",
+  "group": "M1",
+  "result": "pass",
+  "note": "p prime=Fact p.Prime; B domain p=0=IsDomain+CharP B p; M=IsFractionRing B M; R0 Noetherian local m0-adically complete=IsNoetherianRing+IsLocalRing+IsAdicComplete (maximalIdeal R0) R0; R0->B finite type=Algebra.FiniteType; f not pth power in M=not exists x:M, x^p=algebraMap f; additive Leibniz D:B->B with D f /= 0 = exists D : Derivation Z B B"
  }
 }
