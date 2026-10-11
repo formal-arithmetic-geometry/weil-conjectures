@@ -5439,3 +5439,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 16:40 L: merged deliver/S1/lem-sc-smooth-proper-diagonal-tensor-formula (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.SmoothProperDiagonalTensorFormula AlgebraicGeometry.smooth_proper_diagonal_tensor_formula)
 - 16:40 L: merged deliver/F1/lem-weil-pbc-etale-shriek-base-change-modules (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.EtaleLowerShriekBaseChangeModules AlgebraicGeometry.Etale.isIso_etaleLowerShriekBaseChangeMap)
 - 16:40 L: merged deliver/C1/def-weil-pbc-truncation-exact-couples (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.TruncationExchangeCouple CategoryTheory.TruncationExchange.D; existing declaration)
+- 16:40 L: merged deliver/Q1/lem-weil-pbc-grothendieck-existence-easy (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.GrothendieckExistenceEasy AlgebraicGeometry.grothendieckExistenceEasy)

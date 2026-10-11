@@ -261,5 +261,23 @@
   "by": "L",
   "result": "accepted",
   "note": "9 steps following Stacks 0889 with the two omitted parts written out (uniqueness up to unique isomorphism, and part (2)): restriction to opens; the affine dictionary (087W, 00MA); the formal-glueing hypotheses for A -> A^ (00MB); existence and uniqueness over an affine via new unsplit nodes for 0ALK, 05EK and 05EU; a basis of Noetherian affine opens; gluing of isomorphisms and of triples (new unsplit node for 04TN/00AL/00AM). Statement gained the definition of an isomorphism of triples. 0889 does not depend on the erroneous 0884 (checked by the worker: inputs 087W, 00MA, 00MB, 0ALK, 05EU, 05EK)."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GrothendieckExistenceEasy",
+  "declaration": "AlgebraicGeometry.grothendieckExistenceEasy",
+  "file": "lean/Sheaf/AlgebraicGeometry/GrothendieckExistenceEasy.lean",
+  "statement": "theorem grothendieckExistenceEasy (X : Scheme.{u}) [IsNoetherian X] (I : X.IdealSheafData) (G : CoherentModules X) (F : CoherentFormalModule X I) : (∀ (α : F ⟶ (completion X I).obj G), (∃ t : ℕ, 1 ≤ t ∧ ∀ n : ℕ, IsZero (Scheme.idealModuleProduct (Scheme.idealSheafPower I.toModulesι t).2 (kernel (α.hom.app (op n)))) ∧ IsZero (Scheme.idealModuleProduct (Scheme.idealSheafPower I.toModulesι t).2 (cokernel (α.hom.app (op n))))) → ∃ (H : CoherentModules X) (a : H ⟶ G) (β : F ≅ (completion X I).obj H), α = β.hom ≫ (completion X I).map a ∧ ∀ (H' : CoherentModules X) (a' : H' ⟶ G) (β' : F ≅ (completion X I).obj H'), α = β'.hom ≫ (completion X I).map a' → ∃! γ : H ≅ H', γ.hom ≫ a' = a ∧ β.hom ≫ (completion X I).map γ.hom = β'.hom) ∧ (∀ (α : (completion X I).obj G ⟶ F), (∃ t : ℕ, 1 ≤ t ∧ ∀ n : ℕ, IsZero (Scheme.idealModuleProduct (Scheme.idealSheafPower I.toModulesι t).2 (kernel (α.hom.app (op n)))) ∧ IsZero (Scheme.idealModuleProduct (Scheme.idealSheafPower I.toModulesι t).2 (cokernel (α.hom.app (op n))))) → ∃ (H : CoherentModules X) (a : G ⟶ H) (β : (completion X I).obj H ≅ F), α = (completion X I).map a ≫ β.hom ∧ ∀ (H' : CoherentModules X) (a' : G ⟶ H') (β' : (completion X I).obj H' ≅ F), α = (completion X I).map a' ≫ β'.hom → ∃! γ : H ≅ H', a ≫ γ.hom = a' ∧ (completion X I).map γ.hom ≫ β'.hom = β.hom)",
+  "branch": "sheaf-dag",
+  "by": "Q1",
+  "date": "2026-10-12",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "Q1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }
