@@ -98,5 +98,23 @@
   "summary": "Definition split. Rule 0: no slopmaster2 declaration states the node (grep by id and by smallEtale/Modules/quasi): the closest is Scheme.Modules.etaleHom M N (Sites/EtaleHom.lean:156, V ↦ Hom(V^*M,V^*N) on X.Etale, a sheaf by isSheaf_etaleHom:160 for quasi-coherent M, N), which with M = O_X is isomorphic to, not the same as, V ↦ Γ(V,V^*F); not attached (it is the natural Lean candidate for this node and for lem-sc-etale-qcoherent-descent). Checked against Stacks Descent Section 35.8 (Tag 03DR, eq. 35.8.1) and Definition 35.8.2 (Tag 03DU, label definition-structure-sheaf, item 4: the sheaf F^a on S_etale, (f:T→S) ↦ Γ(T,f^*F)), whose sheaf property is Lemma 35.8.1 (Tag 03DT), i.e. the existing node lem-sc-etale-qcoherent-descent (cited, not duplicated; it does not cite this node, so no cycle). Every notion now cites a node: scheme def-pc-scheme, quasi-coherent pqf-def-coherent, module sheaf def-weil-sheaf-of-modules-category, small etale site def-weil-pbc-etale-site, module pullback def-pc-module-pullback, abelian etale sheaves def-weil-pbc-abelian-etale-sheaves (Mathlib leaf). The 'usual pullback restrictions' are now written out: ρ_g(s) = c_{g,u}(g^*s) with the unit of lem-pc-module-pullback-adjunction and the composition iso of lem-pc-module-pullback-identity-composition. The claim hidden in the definition (these maps are additive and compose, so the assignment is a presheaf; Stacks takes it for granted in eq. 35.8.1) is the new unsplit statement lem-sc-etale-qcoherent-presheaf-functorial (Mathlib candidate: Pseudofunctor.presheafHom with Scheme.Modules.pseudofunctor, isomorphic not equal). Statement change: the text 'with the usual pullback restrictions' is made explicit and the notions are cited; nothing else changed. stmt_deps: added def-pc-scheme, pqf-def-coherent, def-weil-sheaf-of-modules-category, def-pc-module-pullback, the two pullback lemmas, the new node and def-weil-pbc-abelian-etale-sheaves.",
   "blueprint": "the item is itself the blueprint node (a definition, no proof): its clauses 'assigns to u the group Γ(U,u^*F)' (def-pc-module-pullback, def-weil-pbc-etale-site), 'with the usual pullback restrictions' (lem-pc-module-pullback-adjunction, lem-pc-module-pullback-identity-composition, new lem-sc-etale-qcoherent-presheaf-functorial) and 'that this presheaf is already a sheaf ... is the descent property' (lem-sc-etale-qcoherent-descent, def-weil-pbc-abelian-etale-sheaves) are realized by the stmt_deps; blueprint search (tools/blueprint_refs.py search 'quasi-coherent', 'pullback restrictions', 'sections of the pullback', 03DU, 03DT) found no other blueprint node stating it, same_as []"
  },
- "reviewed": "2026-10-10 L: definition split: the pullback restrictions written out through the unit and the composition isomorphisms, the presheaf functoriality moved into a new statement node, the sheaf property cited to lem-sc-etale-qcoherent-descent; slopmaster2's Modules.etaleHom recorded as the natural candidate (isomorphic, not equal); 1 new node"
+ "reviewed": "2026-10-10 L: definition split: the pullback restrictions written out through the unit and the composition isomorphisms, the presheaf functoriality moved into a new statement node, the sheaf property cited to lem-sc-etale-qcoherent-descent; slopmaster2's Modules.etaleHom recorded as the natural candidate (isomorphic, not equal); 1 new node",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleTensorSectionsSheaf",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.etaleTensorSectionsSheaf",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleTensorSectionsSheaf.lean",
+  "statement": "def etaleTensorSectionsSheaf {X : Scheme.{u}} (F : X.Modules) [F.IsQuasicoherent] : Sheaf X.smallEtaleTopology AddCommGrpCat.{u}",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-eqm",
+  "group": "E1",
+  "result": "pass",
+  "note": "X : Scheme.{u}, F : X.Modules, [F.IsQuasicoherent] (Zariski SheafOfModules.IsQuasicoherent); value Sheaf X.smallEtaleTopology AddCommGrpCat.{u} with underlying presheaf exactly the landed etaleTensorSectionsPresheaf (Γ(U,u^*F), ρ_g = c_{g,u}(g^*s)), sheaf field the landed isSheaf_etaleTensorSectionsPresheaf; no sheafification, no let/local instance/notation; no upstream equal declaration (slopmaster2 Modules.etaleHom is Hom-valued, isomorphic only); Sheaf.H of it elaborates at universe u for citers"
+ }
 }

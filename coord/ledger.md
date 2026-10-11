@@ -5525,3 +5525,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 18:21 L: merged deliver/Q1/lem-pc-base-change-rhom-perfect (stage 2; reviewer FIX; first push; Sheaf.Algebra.Homology.BaseChangeRHomPerfect CategoryTheory.baseChangeRHomPerfect; new nodes: def-pc-perfect-rhom-base-change-map)
 - 18:22 L: merged deliver/U1/lem-sc-finite-sheafhom-affine-adjoint (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.FiniteSheafHomAffineAdjoint AlgebraicGeometry.exists_affine_derivedSheafHom_adjunction)
 - 18:22 L: merged deliver/M1/lem-weil-pbc-sheaves-injective-directed-colimit-qc-sections (stage 2; reviewer PASS; first push; Sheaf.Topology.SheavesInjectiveDirectedColimitSections TopCat.sheaves_injective_directedColimit_sections)
+- 18:22 L: merged deliver/E1/def-sc-etale-qcoherent-module (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.EtaleTensorSectionsSheaf AlgebraicGeometry.Scheme.Modules.etaleTensorSectionsSheaf)
