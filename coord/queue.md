@@ -1,11 +1,11 @@
 # Work queue
 
-364 items; claim with `tools/claim.py next <group> [--stage N]`.
+362 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (364)
+## Stage 2: nodes to state (362)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -45,7 +45,6 @@
 | `lem-weil-pbc-quasi-coherent-module-colimit-affine-sections` | 1 | state |
 | `lem-weil-pbc-quasi-coherent-symmetric-algebra` | 1 | state |
 | `lem-weil-pbc-quasi-coherent-tensor-product-affine-sections` | 1 | state |
-| `lem-weil-pbc-quasi-finite-at-finite-subalgebra-away` | 1 | state |
 | `lem-weil-pbc-quasi-finite-at-point-isolated` | 1 | state |
 | `lem-weil-pbc-quotient-base-change-closed-immersion-ideal` | 1 | state |
 | `lem-weil-pbc-reduced-noetherian-total-ring-fractions` | 1 | state |
@@ -55,7 +54,6 @@
 | `lem-weil-pbc-regular-base-change` | 1 | state |
 | `lem-weil-pbc-regular-composition` | 1 | state |
 | `lem-weil-pbc-regular-local-dim-one-iff-normal` | 1 | state |
-| `lem-weil-pbc-regular-local-finite-gl-dim` | 1 | state |
 | `lem-weil-pbc-regular-local-generators-regular-sequence` | 1 | state |
 | `lem-weil-pbc-regular-local-localization` | 1 | state |
 | `lem-weil-pbc-regular-local-maximal` | 1 | state |
