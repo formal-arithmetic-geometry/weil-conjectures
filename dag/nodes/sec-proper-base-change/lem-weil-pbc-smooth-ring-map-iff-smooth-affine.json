@@ -180,5 +180,23 @@
   "by": "L",
   "result": "pass",
   "note": "Reviewed by the lead (opus-relaunch6). Five steps (the affine case of More on Morphisms 02H6): the ring map of Spec phi, finite presentation (01TQ leaf), formal smoothness of Spec phi iff the square-zero lifting property of phi (new unsplit node, 02H4) and lifting plus finite presentation gives a smooth ring map (new Mathlib leaf Algebra.FormallySmooth.of_comp_surjective Smooth/Basic.lean:346 with Smooth.mk, verified; Stacks 00TN), the converse by the square-zero lifting leaf committed today. Not a leaf via HasRingHomProperty.Spec_iff because def-sbc-smooth-morphisms is 'lfp + formally smooth', identified with Mathlib's affine-local Smooth only through 02H6. Stage-3 note: lem-weil-pbc-smooth-restrict-open-subschemes treats def-sbc-smooth-morphisms as AlgebraicGeometry.Smooth in one line; the two conventions should be reconciled. Brief errors: 00T7 standard-smooth, 02GU etale-at-point, 031J characterize-formally-smooth; the proposition is 00TN."
+ },
+ "lean": {
+  "module": "Mathlib.AlgebraicGeometry.Morphisms.RingHomProperties",
+  "declaration": "AlgebraicGeometry.HasRingHomProperty.Spec_iff",
+  "statement": "theorem Spec_iff {R S : CommRingCat.{u}} {φ : R ⟶ S} :\n    P (Spec.map φ) ↔ Q φ.hom",
+  "branch": "mathlib",
+  "by": "J1",
+  "date": "2026-10-11",
+  "existing": true,
+  "note": "Specialize P := @AlgebraicGeometry.Smooth and Q := RingHom.Smooth, using the HasRingHomProperty instance in Mathlib.AlgebraicGeometry.Morphisms.Smooth. This is exactly Smooth (Spec.map φ) ↔ RingHom.Smooth φ.hom. The recorded def-sbc-smooth-morphisms uses this Smooth via Stacks 02H6; RingHom.Smooth is Algebra.Smooth for φ.hom.toAlgebra, the recorded def-weil-pbc-smooth-ring-map. The prior stage-1 no-match judgment predates the current dependency lean records. No new module or definition is needed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-ssa",
+  "group": "J1",
+  "result": "pass",
+  "note": "R S : CommRingCat.{u}, φ : R ⟶ S (any comm rings, common universe harmless); Spec φ = Spec.map φ; scheme smooth = AlgebraicGeometry.Smooth (recorded def-sbc-smooth-morphisms); ring smooth = RingHom.Smooth φ.hom, Iff.rfl to Algebra.Smooth R S under φ.hom.toAlgebra (recorded def-weil-pbc-smooth-ring-map); both directions via ↔ of HasRingHomProperty.Spec_iff with the Mathlib instance HasRingHomProperty @Smooth RingHom.Smooth (Morphisms/Smooth.lean:73); specialization and Iff.rfl compile clean on L"
  }
 }
