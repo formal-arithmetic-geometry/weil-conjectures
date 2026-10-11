@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Picard.Group
 public import WeilConjectures.AlgebraicGeometry.Picard.Jacobian
+public import WeilConjectures.Mathlib.CategoryTheory.Yoneda
 
 /-!
 # The degree decomposition of the Picard scheme: group structures and translations
@@ -249,16 +250,6 @@ section Translation
 
 variable {k : Type u} [Field k] {X : Scheme.{u}} [X.Over (Spec (.of k))]
   [SmoothOfRelativeDimension 1 (X ↘ Spec (.of k))] [IsProper (X ↘ Spec (.of k))]
-
-/-- For representations `e`, `e'` of the same functor, the comparison isomorphism
-`e.uniqueUpToIso e'` turns `e` into `e'`. -/
-lemma _root_.CategoryTheory.Functor.RepresentableBy.homEquiv_comp_uniqueUpToIso_hom
-    {C : Type*} [Category C] {F : Cᵒᵖ ⥤ Type*} {Y Y' : C} (e : F.RepresentableBy Y)
-    (e' : F.RepresentableBy Y') {Z : C} (a : Z ⟶ Y) :
-    e'.homEquiv (a ≫ (e.uniqueUpToIso e').hom) = e.homEquiv a := by
-  rw [e'.homEquiv_comp,
-    show (e.uniqueUpToIso e').hom = e'.homEquiv.symm (e.homEquiv (𝟙 Y)) from rfl,
-    Equiv.apply_symm_apply, ← e.homEquiv_comp, Category.comp_id]
 
 /-- **Translation by a class of degree `e`.** Let `M ∈ Pic X` have degree `e` and `d' = d + e`.
 Schemes `P`, `P'` representing `Pic^d_{X/k}` and `Pic^{d'}_{X/k}` are isomorphic through an

@@ -8,6 +8,7 @@ module
 public import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
 public import Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
 public import WeilConjectures.RingTheory.Flat.ShortExact
+public import WeilConjectures.Mathlib.RingTheory.Flat.Equalizer
 
 /-!
 # Complexes of flat modules and base change
@@ -78,8 +79,8 @@ variable {C}
 lemma flat_ker_d_of_flat_ker_d_succ (k : ℤ) [Module.Flat A (C.X k)] (hk : C.ExactAt (k + 1))
     (h : Module.Flat A (LinearMap.ker (C.d (k + 1) (k + 1 + 1)).hom)) :
     Module.Flat A (LinearMap.ker (C.d k (k + 1)).hom) :=
-  Module.Flat.of_exact_of_flat_of_flat Subtype.val_injective (C.exact_subtype_dToKer k)
-    (C.surjective_dToKer k hk)
+  Module.Flat.of_exact_of_flat_of_flat_right _ _ Subtype.val_injective (C.surjective_dToKer k hk)
+    (C.exact_subtype_dToKer k)
 
 /-- **Flatness of the cycles propagates downwards.** Let `C` be a complex of flat modules, exact
 in degrees `≥ m`, whose cycles `Zᵏ` are flat for `k ≥ N`. Then `Zᵏ` is flat for all
@@ -105,8 +106,8 @@ variable (P : Type u) [AddCommGroup P] [Module A P]
 lemma injective_lTensor_subtype_ker_d (k : ℤ) (hk : C.ExactAt (k + 1))
     [Module.Flat A (LinearMap.ker (C.d (k + 1) (k + 1 + 1)).hom)] :
     Function.Injective ((LinearMap.ker (C.d k (k + 1)).hom).subtype.lTensor P) :=
-  Module.Flat.lTensor_injective_of_exact Subtype.val_injective (C.exact_subtype_dToKer k)
-    (C.surjective_dToKer k hk) P
+  LinearMap.lTensor_injective_of_exact_of_flat _ (C.surjective_dToKer k hk) _ Subtype.val_injective
+    (C.exact_subtype_dToKer k) P
 
 /-- **Cycles after base change.** If `C` is exact in degrees `k + 1` and `k + 2`, and `Cᵏ⁺¹`,
 `Zᵏ⁺²` are flat, then the cycles of `P ⊗ C` in degree `k` are `P ⊗ Zᵏ`. -/
