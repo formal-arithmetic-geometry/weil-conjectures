@@ -28,7 +28,8 @@ namespace CategoryTheory.Adjunction
 
 attribute [local instance] comp_preservesFiniteLimits comp_preservesFiniteColimits
 
-variable {C : Type u₁} {D : Type u₂} {E : Type u₃} [Category.{v} C] [Category.{v} D] [Category.{v} E]
+variable {C : Type u₁} {D : Type u₂} {E : Type u₃}
+  [Category.{v} C] [Category.{v} D] [Category.{v} E]
   [Abelian C] [Abelian D] [Abelian E]
   [HasDerivedCategory C] [HasDerivedCategory D] [HasDerivedCategory E]
   [HasKInjectiveResolutions C] [HasKInjectiveResolutions D]
@@ -60,7 +61,9 @@ lemma rightDerivedFunctorCompIso'_hom_eq_conjugateEquiv (e : F ⋙ G ≅ H) (eL 
       Functor.rightDerivedFunctorNatIso]
   simp only [NatTrans.comp_app, Functor.whiskerLeft_app]
   rw [hL]
-  simp [Functor.rightDerivedFunctorNatTrans, conjugateEquiv_apply_app]
+  simp only [Functor.comp_obj, Iso.trans_hom, conjugateEquiv_apply_app, NatTrans.comp_app,
+    Functor.map_comp, comp_counit_app, Category.assoc, Functor.rightDerivedFunctorNatTrans,
+    Functor.rightDerivedNatTrans_app, Functor.whiskerRight_app, NatTrans.mapHomotopyCategory_app]
   erw [adj.mapDerivedCategoryRightDerivedAdjunction.unit.naturality_assoc]
   simp only [Functor.comp_map, ← Functor.map_comp]
   let Z := ((F ⋙ G).mapHomotopyCategory (.up ℤ)).obj X
@@ -88,7 +91,74 @@ lemma rightDerivedFunctorCompIso'_hom_eq_conjugateEquiv (e : F ⋙ G ≅ H) (eL 
           (F.rightDerivedFunctor.obj (DerivedCategory.Qh.obj X))) ≫
         adj₁.mapDerivedCategoryRightDerivedAdjunction.counit.app (DerivedCategory.Qh.obj X) =
       DerivedCategory.Qh.map m := by
-    sorry
+    have hσ : ∀ {a b : DerivedCategory E} (f : a ⟶ b),
+        L.mapDerivedCategory.map f ≫ (Functor.mapDerivedCategoryNatIso eL).hom.app b ≫
+          (L₂.mapDerivedCategoryCompIso L₁).hom.app b =
+        (Functor.mapDerivedCategoryNatIso eL).hom.app a ≫
+          (L₂.mapDerivedCategoryCompIso L₁).hom.app a ≫
+            L₁.mapDerivedCategory.map (L₂.mapDerivedCategory.map f) := by
+      intro a b f
+      rw [NatTrans.naturality_assoc, NatTrans.naturality]
+      rfl
+    have hcU : (Functor.rightDerivedFunctorCompUnit F G).app X =
+        DerivedCategory.Qh.map
+          ((Functor.mapHomotopyCategoryCompIso (Iso.refl (F ⋙ G)) (.up ℤ)).inv.app X) ≫
+          G.rightDerivedFunctorUnit.app ((F.mapHomotopyCategory (.up ℤ)).obj X) ≫
+          G.rightDerivedFunctor.map (F.rightDerivedFunctorUnit.app X) := by
+      simp [Functor.rightDerivedFunctorCompUnit]
+    have hε₁ : L₁.mapDerivedCategory.map (F.rightDerivedFunctorUnit.app X) ≫
+        adj₁.mapDerivedCategoryRightDerivedAdjunction.counit.app (DerivedCategory.Qh.obj X) =
+          L₁.mapDerivedCategoryFactorsh.hom.app ((F.mapHomotopyCategory (.up ℤ)).obj X) ≫
+            DerivedCategory.Qh.map ((adj₁.mapHomotopyCategory (.up ℤ)).counit.app X) :=
+      (adj₁.mapHomotopyCategory (.up ℤ)).derivedε_fac_app (HomotopyCategory.quasiIso C (.up ℤ))
+        L₁.mapDerivedCategoryFactorsh.hom F.rightDerivedFunctorUnit X
+    have hε₂ : L₂.mapDerivedCategory.map
+        (G.rightDerivedFunctorUnit.app ((F.mapHomotopyCategory (.up ℤ)).obj X)) ≫
+        adj₂.mapDerivedCategoryRightDerivedAdjunction.counit.app
+          (DerivedCategory.Qh.obj ((F.mapHomotopyCategory (.up ℤ)).obj X)) =
+          L₂.mapDerivedCategoryFactorsh.hom.app
+              ((G.mapHomotopyCategory (.up ℤ)).obj ((F.mapHomotopyCategory (.up ℤ)).obj X)) ≫
+            DerivedCategory.Qh.map ((adj₂.mapHomotopyCategory (.up ℤ)).counit.app
+              ((F.mapHomotopyCategory (.up ℤ)).obj X)) :=
+      (adj₂.mapHomotopyCategory (.up ℤ)).derivedε_fac_app (HomotopyCategory.quasiIso D (.up ℤ))
+        L₂.mapDerivedCategoryFactorsh.hom G.rightDerivedFunctorUnit _
+    erw [reassoc_of% hσ]
+    rw [hcU]
+    have h₂ : L₂.mapDerivedCategory.map (DerivedCategory.Qh.map
+          ((Functor.mapHomotopyCategoryCompIso (Iso.refl (F ⋙ G)) (.up ℤ)).inv.app X) ≫
+          G.rightDerivedFunctorUnit.app ((F.mapHomotopyCategory (.up ℤ)).obj X) ≫
+          G.rightDerivedFunctor.map (F.rightDerivedFunctorUnit.app X)) ≫
+        adj₂.mapDerivedCategoryRightDerivedAdjunction.counit.app
+          (F.rightDerivedFunctor.obj (DerivedCategory.Qh.obj X)) =
+        L₂.mapDerivedCategory.map (DerivedCategory.Qh.map
+          ((Functor.mapHomotopyCategoryCompIso (Iso.refl (F ⋙ G)) (.up ℤ)).inv.app X)) ≫
+          L₂.mapDerivedCategoryFactorsh.hom.app
+              ((G.mapHomotopyCategory (.up ℤ)).obj ((F.mapHomotopyCategory (.up ℤ)).obj X)) ≫
+            DerivedCategory.Qh.map ((adj₂.mapHomotopyCategory (.up ℤ)).counit.app
+              ((F.mapHomotopyCategory (.up ℤ)).obj X)) ≫
+          F.rightDerivedFunctorUnit.app X := by
+      rw [Functor.map_comp, Functor.map_comp, Category.assoc, Category.assoc]
+      erw [adj₂.mapDerivedCategoryRightDerivedAdjunction.counit.naturality
+        (F.rightDerivedFunctorUnit.app X)]
+      erw [reassoc_of% hε₂]
+      rfl
+    rw [← Functor.map_comp_assoc, h₂]
+    simp only [Functor.map_comp, Category.assoc]
+    erw [hε₁]
+    erw [L₁.mapDerivedCategoryFactorsh.hom.naturality_assoc]
+    rw [← Functor.map_comp_assoc L₁.mapDerivedCategory]
+    erw [L₂.mapDerivedCategoryFactorsh.hom.naturality]
+    rw [Functor.comp_map, Functor.map_comp, Category.assoc]
+    erw [L₁.mapDerivedCategoryFactorsh.hom.naturality_assoc]
+    have hc := Functor.mapDerivedCategoryCompIso_fach L₂ L₁ Z
+    rw [Functor.mapHomotopyCategoryCompIso_refl_hom_app] at hc
+    erw [CategoryTheory.Functor.map_id, Category.comp_id] at hc
+    erw [reassoc_of% hc, reassoc_of% (Functor.mapDerivedCategoryNatIso_fach eL Z),
+      Iso.inv_hom_id_app_assoc]
+    simp only [m, Functor.comp_map, Functor.map_comp,
+      Functor.mapHomotopyCategoryCompIso_refl_hom_app]
+    repeat erw [CategoryTheory.Functor.map_id]
+    repeat erw [Category.id_comp]
   have hK : (HomotopyCategory.quotient E (.up ℤ)).map
       ((NatTrans.mapHomologicalComplex e.hom (.up ℤ)).app X.as) =
         (adj.mapHomotopyCategory (.up ℤ)).unit.app Z ≫ (H.mapHomotopyCategory (.up ℤ)).map m := by
