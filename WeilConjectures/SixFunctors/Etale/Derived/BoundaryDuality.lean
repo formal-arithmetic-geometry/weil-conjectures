@@ -11,7 +11,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.TensorHom
 public import WeilConjectures.SixFunctors.Etale.Derived.TensorStructure
 
 /-!
-# The Verdier dual on `Dctf`: Tor bound and boundary exchange
+# The Verdier dual on `Dctf`: boundary exchange
 
 For a finite coefficient ring `Λ` whose exponent is invertible on a field `k` and schemes
 separated of finite type over `k`, this file states
@@ -20,7 +20,12 @@ separated of finite type over `k`, this file states
   (`lem-weil-closed-costalk-duality`): `Ri^! 𝔻_T K ≅ 𝔻_Z (i^* K)`;
 - `AlgebraicGeometry.Etale.nonempty_iso_leftDerivedUpperStar_verdierDual`
   (`cor-weil-boundary-duality-discharge`): for a closed immersion `i : Z ⟶ T` the boundary
-  exchange `i^* 𝔻_T L ≅ 𝔻_Z Ri^! L` holds on `Dctf(T)`.
+  exchange `i^* 𝔻_T L ≅ 𝔻_Z Ri^! L` holds on `Dctf(T)`;
+- `AlgebraicGeometry.Etale.HasBoundaryDuality` (`def-weil-boundary-duality-input`) and
+  `AlgebraicGeometry.Etale.hasBoundaryDuality` (`cor-weil-boundary-duality-discharge`): the
+  finite-stage boundary duality input, and that it holds over an algebraically closed field;
+- `AlgebraicGeometry.Etale.verdierDual_finiteStage` (`thm-sf-biduality-class`, finite stages):
+  `𝔻_X` is an involution of `Dctf(X, Λ)` with the Tor bound `[-b - 2d, -a]`.
 
 The canonical exchange map of the blueprint is not constructed; the exchange is stated as the
 existence of an isomorphism, as in `WeilConjectures.SixFunctors.Etale.Derived.Dualizing`.
@@ -135,6 +140,81 @@ theorem nonempty_iso_leftDerivedUpperStar_verdierDual [IsAlgClosed k] {Z T : Sch
         (op L)))) ≅ (R(i)^![ModuleCat.{u + 1} Λ]).obj L :=
     e₁ ≪≫ (R(i)^![ModuleCat.{u + 1} Λ]).mapIso b₁.symm
   exact ⟨b₂ ≪≫ (verdierDual (ModuleCat.{u + 1} Λ) (i ≫ aT)).mapIso e.symm.op⟩
+
+/-- Blueprint `def-weil-boundary-duality-input`: The finite-stage boundary duality input.
+
+For a finite coefficient ring `Λ` and a scheme `Y` with structure morphism `a_Y : Y ⟶ Spec k`,
+the boundary duality input for `(Y, Λ)` consists of two assertions about the locally closed
+pieces `s : T ⟶ Y` of `Y` (quasi-compact immersions, with `a_T = s ≫ a_Y` admitting a
+compactification), with `ω_T = Ra_T^! Λ` and `𝔻_T = RHom(-, ω_T)`:
+
+1. `𝔻_T` carries `Dctf(T, Λ)` into itself;
+2. for every closed immersion `i : Z ⟶ T` between such pieces and every `L ∈ Dctf(T, Λ)`, the
+   ordinary and exceptional restrictions are exchanged: `i^* 𝔻_T L ≅ 𝔻_Z Ri^! L`.
+
+The blueprint's second clause is about a specific map, the boundary exchange `β_L`, and adds its
+compatibility with evaluation; here it asserts the existence of an isomorphism, as do
+`AlgebraicGeometry.Etale.nonempty_iso_leftDerivedUpperStar_verdierDual` and
+`AlgebraicGeometry.Etale.nonempty_iso_verdierDual_verdierDual`. -/
+def HasBoundaryDuality {Y : Scheme.{u}} (aY : Y ⟶ Spec (.of k)) : Prop :=
+  (∀ {T : Scheme.{u}} (s : T ⟶ Y) [IsImmersion s] [QuasiCompact s]
+      [HasCompactification (s ≫ aY)]
+      {K : _root_.DerivedCategory (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ))},
+      constructibleFiniteTor (ModuleCat.{u + 1} Λ) T K →
+        constructibleFiniteTor (ModuleCat.{u + 1} Λ) T
+          ((verdierDual (ModuleCat.{u + 1} Λ) (s ≫ aY)).obj (op K))) ∧
+  ∀ {Z T : Scheme.{u}} (s : T ⟶ Y) [IsImmersion s] [QuasiCompact s]
+    [HasCompactification (s ≫ aY)] (i : Z ⟶ T) [IsClosedImmersion i] [HasCompactification i]
+    [HasCompactification (i ≫ s ≫ aY)]
+    {L : _root_.DerivedCategory (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ))},
+    constructibleFiniteTor (ModuleCat.{u + 1} Λ) T L →
+      Nonempty ((L((i)^*[ModuleCat.{u + 1} Λ])).obj
+          ((verdierDual (ModuleCat.{u + 1} Λ) (s ≫ aY)).obj (op L)) ≅
+        (verdierDual (ModuleCat.{u + 1} Λ) (i ≫ s ≫ aY)).obj
+          (op ((R(i)^![ModuleCat.{u + 1} Λ]).obj L)))
+
+/-- Blueprint `cor-weil-boundary-duality-discharge`: The finite-stage boundary input is a
+consequence.
+
+For `k` algebraically closed, a finite coefficient ring `Λ` whose exponent is invertible on `k`
+and `Y` separated of finite type over `k`, the boundary duality input
+`AlgebraicGeometry.Etale.HasBoundaryDuality` holds: its first clause is the preservation
+`AlgebraicGeometry.Etale.constructibleFiniteTor_verdierDual`, its second the boundary exchange
+`AlgebraicGeometry.Etale.nonempty_iso_leftDerivedUpperStar_verdierDual`, on the pieces `T`,
+which are again separated of finite type over `k`. -/
+theorem hasBoundaryDuality [IsAlgClosed k] {Y : Scheme.{u}} (aY : Y ⟶ Spec (.of k))
+    [IsSeparated aY] [LocallyOfFiniteType aY] [QuasiCompact aY] :
+    HasBoundaryDuality Λ aY := by
+  refine ⟨fun s _ _ _ K hK ↦ ?_, fun s _ _ _ i _ _ _ L hL ↦ ?_⟩
+  · have : IsSeparated s := inferInstance
+    exact constructibleFiniteTor_verdierDual Λ (s ≫ aY) hK
+  · have : IsSeparated s := inferInstance
+    exact nonempty_iso_leftDerivedUpperStar_verdierDual Λ (s ≫ aY) i hL
+
+/-- Blueprint `thm-sf-biduality-class`: Verdier biduality on the coefficient class, at the finite
+stages `Λ = A_{E,n}`.
+
+For `X` separated of finite type over a field `k` with `dim X ≤ d` and a finite coefficient ring
+`Λ` whose exponent is invertible on `k`, the Verdier dual `𝔻_X = RHom(-, ω_X)` preserves
+`Dctf(X, Λ)` and the evaluation-defined double-dual map `δ_K : K ⟶ 𝔻_X 𝔻_X K` is an isomorphism
+on it, so that `𝔻_X` is an anti-equivalence of `Dctf(X, Λ)`
+(`AlgebraicGeometry.Etale.verdierDualEquivalence`); an input Tor interval `[a, b]` gives the
+interval `[-b - 2d, -a]` for the dual. -/
+theorem verdierDual_finiteStage {X : Scheme.{u}} (aX : X ⟶ Spec (.of k)) [IsSeparated aX]
+    [LocallyOfFiniteType aX] [QuasiCompact aX] [HasCompactification aX] (d : ℕ)
+    (hd : topologicalKrullDim X ≤ (d : WithBot ℕ∞)) :
+    (∀ {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))},
+      constructibleFiniteTor (ModuleCat.{u + 1} Λ) X K →
+        constructibleFiniteTor (ModuleCat.{u + 1} Λ) X
+            ((verdierDual (ModuleCat.{u + 1} Λ) aX).obj (op K)) ∧
+          IsIso ((verdierDualDoubleDual (ModuleCat.{u + 1} Λ) aX).app K)) ∧
+    ∀ (a b : ℤ) {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))},
+      boundedConstructible (ModuleCat.{u + 1} Λ) X K →
+        torAmplitudeIn (ModuleCat.{u + 1} Λ) X a b K →
+          torAmplitudeIn (ModuleCat.{u + 1} Λ) X (-b - 2 * (d : ℤ)) (-a)
+            ((verdierDual (ModuleCat.{u + 1} Λ) aX).obj (op K)) :=
+  ⟨fun hK ↦ ⟨constructibleFiniteTor_verdierDual Λ aX hK, isIso_verdierDualDoubleDual_app Λ aX hK⟩,
+    fun a b _ hK hKt ↦ torAmplitudeIn_verdierDual Λ aX d hd a b hK hKt⟩
 
 end Etale
 

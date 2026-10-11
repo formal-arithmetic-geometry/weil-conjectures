@@ -141,7 +141,8 @@ at `(M, N)` of the natural isomorphism
 `AlgebraicGeometry.Etale.derivedHomRightDerivedLowerShriekIso` (`lem-sf-tensor-hom`), the
 projection formula holding at finite coefficients
 (`AlgebraicGeometry.Etale.isIso_projectionMap_of_finite`). For torsion coefficients no
-finiteness hypothesis on `M` and `N` is needed. -/
+finiteness hypothesis on `M` and `N` is needed. This is also blueprint
+`fix-lem-tensor-adjunction`. -/
 theorem nonempty_iso_derivedHom_rightDerivedLowerShriek
     (M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
     (N : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
@@ -185,7 +186,7 @@ extraordinary and the ordinary direct image: for torsion coefficients and every 
 
 As in the blueprint this is the tensor–Hom exchange
 `nonempty_iso_derivedHom_rightDerivedLowerShriek` at `N = ω_Y`, combined with
-`Rf^! ω_Y ≅ ω_X`. -/
+`Rf^! ω_Y ≅ ω_X`. This is also blueprint `fix-cor-verdier-exchange`. -/
 theorem nonempty_iso_verdierDual_rightDerivedLowerShriek
     (M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
     Nonempty ((verdierDual _ aY).obj (op ((R(f)_![ModuleCat.{u + 1} Λ]).obj M)) ≅
