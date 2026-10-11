@@ -224,5 +224,24 @@
   "by": "L",
   "result": "accepted",
   "note": "10 steps follow Stacks 09XH (middle part): T = V(IB) cap D(e-tilde), phi^{-1}V(IB') = V(IB), phi(T) open via the homeomorphism over U and closed via integrality (finite-is-integral, integral-spec-closed-map), idempotent epsilon' (clopen node; new 00E5 leaf, line set by L), phi^{-1}(phi(T)) = T, epsilon' -> epsilon by clopen uniqueness, g chosen as in choose-g, B'_g = B_g, C'_1 = C_1 modulo (I, 1-g). Statement made precise (epsilon', C'_i defined; lemma ids dropped from stmt_deps). L removed the unused hypothesis C'_1 = C_1 from choose-g so that steps 8-9 could cite it (stage 3). Tags 09XH, 00E5, 00EM, 00HZ, 00GU verified."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.IntegralClosureFiniteFibreImageClopen",
+  "declaration": "AlgebraicGeometry.integralClosure_finiteFibre_image_clopen",
+  "file": "lean/Sheaf/AlgebraicGeometry/IntegralClosureFiniteFibreImageClopen.lean",
+  "statement": "theorem integralClosure_finiteFibre_image_clopen {A : Type v} {B : Type u} [CommRing A] [CommRing B] [Algebra A B] [Algebra.FiniteType A B] (I : Ideal A) {C₁ : Type w} {C₂ : Type z} [CommRing C₁] [CommRing C₂] [Algebra (A ⧸ I) C₁] [Module.Finite (A ⧸ I) C₁] (e : (B ⧸ Ideal.map (algebraMap A B) I) ≃+* C₁ × C₂) (hcompat : ∀ a : A, algebraMap (A ⧸ I) C₁ (Ideal.Quotient.mk I a) = (e (Ideal.Quotient.mk _ (algebraMap A B a))).1) (U : (Spec (.of (integralClosure A B))).Opens) (hiso : IsIso (Spec.map (CommRingCat.ofHom (algebraMap (integralClosure A B) B)) ∣_ U)) : let R := B ⧸ Ideal.map (algebraMap A B) I let R' := (integralClosure A B) ⧸ Ideal.map (algebraMap A (integralClosure A B)) I let π := Ideal.Quotient.mk (Ideal.map (algebraMap A B) I) let π' := Ideal.Quotient.mk (Ideal.map (algebraMap A (integralClosure A B)) I) let ι := algebraMap (integralClosure A B) B let φ := PrimeSpectrum.comap ι let β := (RingHom.fst C₁ C₂).comp (e.toRingHom.comp π) let T := Set.range (PrimeSpectrum.comap β) T ⊆ φ ⁻¹' U.1 → ∃ (f : R' →+* R), (∀ b, f (π' b) = π (ι b)) ∧ IsClopen ((PrimeSpectrum.comap π') ⁻¹' (φ '' T)) ∧ φ ⁻¹' (φ '' T) = T ∧ ∃ (ε' : R'), IsIdempotentElem ε' ∧ φ '' T = PrimeSpectrum.comap π' '' (PrimeSpectrum.basicOpen ε' : Set _) ∧ (∀ δ : R', IsIdempotentElem δ → φ '' T = PrimeSpectrum.comap π' '' (PrimeSpectrum.basicOpen δ : Set _) → δ = ε') ∧ f ε' = e.symm (1, 0) ∧ ∃ (C'₁ C'₂ : Type u) (_ : CommRing C'₁) (_ : CommRing C'₂) (e' : R' ≃+* C'₁ × C'₂) (g : C'₁ ≃+* C₁) (h : C'₂ →+* C₂), e' ε' = (1, 0) ∧ ∀ r : R', e (f r) = (g (e' r).1, h (e' r).2)",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-11",
+  "existing": false,
+  "note": "Second reading repaired the isomorphism hypothesis, quotient compatibility, relative clopenness, unique idempotent, and induced component maps; no change to the mathematical node."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-icf1116",
+  "group": "J1",
+  "result": "pass",
+  "note": "finite-type A->B, I, e: B/IB = C1 x C2 with A/I-action on C1 pinned by hcompat and Module.Finite; B' = integralClosure A B, phi = comap of inclusion, T = range comap(fst o e o pi); U opens of Spec B', IsIso (Spec.map iota |_ U) in Scheme (= LRS iso); T in phi^-1 U; conclusions: f induced map, IsClopen in Spec(B'/IB'), phi^-1 phi T = T, unique idempotent eps' with phi T = V(IB') cap D(eps'), f eps' = e.symm(1,0), e'/g/h factor maps with g ring iso; #check elaborated, no new defs, no hollow hyps"
  }
 }
