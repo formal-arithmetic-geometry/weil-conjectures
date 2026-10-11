@@ -191,5 +191,24 @@
   "item": "lem-weil-pbc-etale-colimit-normal-local-domain",
   "worker": "stage1",
   "summary": "Split along Stacks 06DI (checked in more-algebra.tex l.11110-11129: R^sh is a filtered colimit of etale hence smooth R-algebras; Algebra 033C normal goes up along smooth maps, l.46563; Algebra 037D directed colimit of normal rings is normal, l.8312, no condition on transition maps; local normal ring = normal domain, Definition 00GV). Steps: (1) the A-algebra colimit is a ring colimit (existing elementwise node); (2) each B_i normal (new unsplit node lem-weil-pbc-etale-over-normal-ring-normal, 033C + 00U9 + 02GJ); (3) C normal (new unsplit node lem-weil-pbc-filtered-colimit-normal-ring, 037D + Categories 0032 for filtered vs directed); (4) a local normal ring is a normal domain (elementary from the new definition node def-weil-pbc-normal-ring, Mathlib leaf as a conjunction); (5)-(6) injectivity of A -> C: flatness of etale algebras (new Mathlib leaf lem-weil-pbc-etale-algebra-flat: Spec_iff + etale_algebraMap + Etale=>Smooth instance + Algebra.Smooth.flat) makes a nonzero a act injectively on each B_i, and if a died in C it would die at a stage B_k (new Mathlib leaf lem-weil-pbc-filtered-colimit-rings-zero), forcing B_k = 0 and C = 0, impossible for a local ring. The brief's suggestion that A -> B_i is injective for every i is false when B_i = 0 (the zero algebra is etale); the proof uses that C is nonzero instead. Statement unchanged except for citing def-weil-pbc-normal-ring. No Lean exists on either branch (checked: no strict henselization or normality-ascent declaration in slopmaster2; the user AlgebraicGeometry.Etale.isIso_unit_constantSheaf_of_isIntegrallyClosed has its own sorry)."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.EtaleColimitNormalLocalDomain",
+  "declaration": "CommAlgCat.isDomain_isIntegrallyClosed_injective_of_etale_colimit",
+  "file": "lean/Sheaf/RingTheory/EtaleColimitNormalLocalDomain.lean",
+  "statement": "theorem isDomain_isIntegrallyClosed_injective_of_etale_colimit (A : Type u) [CommRing A] [IsDomain A] (hA : ∀ (p : Ideal A) [p.IsPrime], IsDomain (Localization.AtPrime p) ∧ IsIntegrallyClosed (Localization.AtPrime p)) {I : Type w} [SmallCategory I] [IsFiltered I] (B : I ⥤ CommAlgCat.{v} A) [HasColimit B] (hB : ∀ i : I, Algebra.Etale A (B.obj i)) [IsLocalRing ↥(colimit B)] : (IsDomain ↥(colimit B) ∧ IsIntegrallyClosed ↥(colimit B)) ∧ Function.Injective (algebraMap A ↥(colimit B))",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-ecn0955"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-ecn0955",
+  "group": "K1",
+  "result": "fix",
+  "note": "A domain + hA literal normal-ring conjunction (def-weil-pbc-normal-ring mathlib_match); I small filtered category, B : I ⥤ CommAlgCat A, C = recorded colimit B (fixed from Cocone/IsColimit, Category.{w'}); hB Algebra.Etale per ETALE RING MAPS; IsLocalRing C; (a) IsDomain ∧ IsIntegrallyClosed; (b) injective algebraMap"
  }
 }
