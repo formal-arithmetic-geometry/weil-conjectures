@@ -19,7 +19,8 @@
   "def-pc-scheme",
   "pqf-def-coherent",
   "lem-sc-cech-comparison-map-naturality",
-  "lem-pc-cech-computes"
+  "lem-pc-cech-computes",
+  "def-sc-module-cech-comparison"
  ],
  "source": {
   "document": "literature/stacks-project/coherent.tex",
@@ -116,5 +117,23 @@
   "group": "K1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ccia1657 (reviewer sub-agent of L); spot-checked: Source Stacks 01XD (coherent-lemma-cech-cohomology-quasi-coherent): X scheme, cover with all finite intersections affine, F quasi-coherent, the map of 01EQ is an isomorphism; the item's statement agrees hypothesis by hypothesis. lem-pc-cech-computes states exactly this (tag 01XD, same hypotheses) and lem-sc-cech-comparison-map-naturality defines c_F (01EQ). FIX more, RETURN less (per audit coord/audit-new-nodes.md 16:50): the delivered two-step route (spectral sequence lem-sc-cech-spectral, stated for the etale site, plus new node lem-sc-cech-edge-map-identification) duplicated lem-pc-cech-computes; dag/nodes/sec-picard-framework/lem-sc-cech-comparison-map-iso-affine.json: proof: replaced by one elementary step citing lem-sc-cech-comparison-map-naturality and lem-pc-cech-computes; proof_deps, proof_origin, split_report.summary/tool_uses updated accordingly; mathlib_searches: unlogged pre-17:00 leansearch/leanfinder records removed, reviewer leanfinder query and grep (no match) recorded; new node lem-sc-cech-edge-map-identification dropped (--drop-nodes), tool use lem-sc-cech-spectral dropped. Tool use lem-pc-cech-computes accepted (generic black box). Small case: affine X with one-open cover, both sides are Gamma in degree 0 and 0 above. Start Sat Oct 10 04:57:40 PM UTC 2026, end Sat Oct 10 04:58:38 PM UTC 2026; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ModuleCechComparisonIsoAffine",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.moduleCechComparison_isIso_of_affine",
+  "file": "lean/Sheaf/AlgebraicGeometry/ModuleCechComparisonIsoAffine.lean",
+  "statement": "theorem moduleCechComparison_isIso_of_affine (X : Scheme.{u}) {ι : Type u} (U : ι → X.Opens) (hU : ∀ (n : ℕ) (y : Fin (n + 1) → ι), IsAffineOpen (⨅ l, U (y l))) (hcover : iSup U = ⊤) (F : X.Modules) [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) F] (p : ℕ) (c : ((CategoryTheory.cechComplexFunctor U).obj F.presheafModuleCat).homology p ⟶ (RingedSpace.moduleCohomology X.toRingedSpace p).obj F) (hc : IsModuleCechComparison U F p c) : IsIso c",
+  "branch": "sheaf-dag",
+  "by": "T1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-h260bf",
+  "group": "T1",
+  "result": "pass",
+  "note": "headless review: X : Scheme.{u} = scheme; {ι : Type u} (U : ι → X.Opens) + hcover : iSup U = ⊤ = open covering; hU ∀ n (y : Fin (n+1) → ι), IsAffineOpen (⨅ l, U (y l)) = all U_{i0..ip} affine, p≥0 (same form as landed sibling moduleCechComparison_natural_affine); [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) F] = F quasi-coherent; p : ℕ = every p≥0; c : Čech homology p ⟶ RingedSpace.moduleCohomology X p with hc : IsModuleCechComparison U F p c = the canonical 01EQ comparison of lem-sc-cech-comparison-map-naturality (same predicate, unique as H(α) invertible); conclusion IsIso c = c is an isomorphism"
  }
 }
