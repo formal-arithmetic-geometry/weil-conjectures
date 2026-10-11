@@ -1,11 +1,11 @@
 # Work queue
 
-777 items; claim with `tools/claim.py next <group> [--stage N]`.
+775 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (777)
+## Stage 2: nodes to state (775)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -37,8 +37,6 @@
 | `lem-weil-pbc-differential-zero-iff-pth-power` | 1 | state |
 | `lem-weil-pbc-dimension-at-point-components` | 1 | state |
 | `lem-weil-pbc-dimension-at-point-field-extension` | 1 | state |
-| `lem-weil-pbc-dimension-preserved-field-extension` | 1 | state |
-| `lem-weil-pbc-dimension-quasi-finite-over-polynomial-algebra` | 1 | state |
 | `lem-weil-pbc-dimension-supremum-local-dimensions` | 1 | state |
 | `lem-weil-pbc-dimension-zero-local-strictly-henselian` | 1 | state |
 | `lem-weil-pbc-direct-image-preserves-injectives` | 1 | state |
