@@ -246,5 +246,24 @@
   "worker": "stage1",
   "summary": "Split following Modules Section 17.3 and Lemma 01AG in 9 steps: conventions (sectionwise kernel, functoriality of stalk maps, independence of the choice of kernel/cokernel); (1) and (2) by germ computations; the cokernel as the module sheafification of the sectionwise cokernel, with its cokernel property checked from the universal property (Sheaves 0089); stalks of the presheaf cokernel by germs; stalks commute with sheafification (Sheaves 007Z, existing Mathlib leaf lem-weil-pbc-stalk-sheafification-space); (3) by composition; (4) from (2) applied to the cokernel map and (3); (5) from the reviewed local-lifting criterion lem-weil-pbc-ringed-space-module-exactness-local-lifting (2) plus germ computations in both directions. No new nodes. Added def-weil-pbc-exact-sequence to stmt_deps (clause (5) uses exactness). Mathlib: abelian-sheaf stalk exactness exists (Topology/Sheaves/Abelian.lean:103), the O_X-module version does not (no colimit preservation of SheafOfModules.toSheaf), so not a leaf."
  },
- "reviewed": "Reviewed by L 2026-10-10: faithful to Modules 01AF/01AG with every germ calculation written out; the cokernel is the module sheafification of the sectionwise cokernel (step 3), stalks commute with sheafification (existing leaf, tool), clause (5) via the local-lifting node. No new nodes; not a Mathlib leaf (SheafOfModules stalk exactness absent, B8)."
+ "reviewed": "Reviewed by L 2026-10-10: faithful to Modules 01AF/01AG with every germ calculation written out; the cokernel is the module sheafification of the sectionwise cokernel (step 3), stalks commute with sheafification (existing leaf, tool), clause (5) via the local-lifting node. No new nodes; not a Mathlib leaf (SheafOfModules stalk exactness absent, B8).",
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.ModuleStalkExact",
+  "declaration": "AlgebraicGeometry.RingedSpace.module_stalk_exact",
+  "file": "lean/Sheaf/Algebra/Homology/ModuleStalkExact.lean",
+  "statement": "theorem module_stalk_exact (X : RingedSpace.{u}) {F G : SheafOfModules.{u} (moduleRings X)} (φ : F ⟶ G) : ((∀ (U : Opens X), Function.Injective (ConcreteCategory.hom (φ.val.app (Opposite.op U)))) → ∀ (x : X), Mono ((moduleStalkFunctor X x).map φ)) ∧ (∀ (x : X), Mono ((moduleStalkFunctor X x).map (kernel.ι φ)) ∧ ((ShortComplex.mk ((moduleStalkFunctor X x).map (kernel.ι φ)) ((moduleStalkFunctor X x).map φ) (by rw [← (moduleStalkFunctor X x).map_comp] simp)).Exact)) ∧ (∀ (x : X), Epi ((moduleStalkFunctor X x).map (cokernel.π φ)) ∧ ((ShortComplex.mk ((moduleStalkFunctor X x).map φ) ((moduleStalkFunctor X x).map (cokernel.π φ)) (by rw [← (moduleStalkFunctor X x).map_comp] simp)).Exact)) ∧ (∀ (x : X), Epi ((moduleStalkFunctor X x).map (Abelian.factorThruImage φ)) ∧ Mono ((moduleStalkFunctor X x).map (Abelian.image.ι φ)) ∧ LinearMap.range ((moduleStalkFunctor X x).map (Abelian.image.ι φ)).hom = LinearMap.range ((moduleStalkFunctor X x).map φ).hom) ∧ (∀ (H : SheafOfModules.{u} (moduleRings X)) (χ : F ⟶ G) (ψ : G ⟶ H), ∀ (h : χ ≫ ψ = 0), (ShortComplex.mk χ ψ h).Exact ↔ ∀ (x : X), ((ShortComplex.mk χ ψ h).map (moduleStalkFunctor X x)).Exact)",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-mse1202"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-mse1202",
+  "group": "H1",
+  "result": "fix",
+  "note": "X : RingedSpace.{u} (scheme via underlying ringed space); F G : SheafOfModules (moduleRings X), phi; (1) sectionwise injective -> Mono stalk map; (2) Mono k_x and Exact(k_x, phi_x); (3) Epi c_x and Exact(phi_x, c_x); (4) Epi bar-phi_x, Mono iota_x, range iota_x = range phi_x (FIX: was Exact(iota_x,c_x)); (5) ShortComplex.Exact iff stalkwise Exact for all x; moduleStalkFunctor landed; no hollow hyps, no let"
+ }
 }
