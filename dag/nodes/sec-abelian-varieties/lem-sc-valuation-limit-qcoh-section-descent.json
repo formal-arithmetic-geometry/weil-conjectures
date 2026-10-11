@@ -23,11 +23,67 @@
   "def-weil-pbc-scheme-conventions",
   "pqf-def-affine-morphism",
   "lem-weil-pbc-limit-affine-transition",
-  "pqf-def-coherent"
+  "pqf-def-coherent",
+  "lem-sc-valuation-limit-affine-pushforward-colimit"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Replace the directed system by the cofinal tail $I_{\\ge i}$. The projections $g_j:X_j\\to X_i$ and $g:X\\to X_i$ remain affine, and the limit construction applies to this tail by [lem-weil-pbc-limit-affine-transition].",
+   "uses": [
+    "lem-weil-pbc-limit-affine-transition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Limits, Lemma 01Z0 proof, first paragraph"
+   }
+  },
+  {
+   "text": "Apply [lem-sc-valuation-limit-affine-pushforward-colimit] with $S_0=X_i$ and $\\mathcal F_0=\\mathcal F_i$. Writing $\\mathcal A_j=(g_j)_*\\mathcal O_{X_j}$, $\\mathcal A=\\varinjlim_{j\\ge i}\\mathcal A_j$, $\\mathcal M_j=\\mathcal F_i\\otimes_{\\mathcal O_{X_i}}\\mathcal A_j$ and $\\mathcal M=\\mathcal F_i\\otimes_{\\mathcal O_{X_i}}\\mathcal A$, it identifies $g_*\\mathcal F$ with $\\mathcal M$ and $(g_j)_*\\mathcal F_j$ with $\\mathcal M_j$, and identifies $\\mathcal M$ with the directed colimit of the $\\mathcal M_j$ in the category of $\\mathcal O_{X_i}$-modules.",
+   "uses": [
+    "lem-sc-valuation-limit-affine-pushforward-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Limits, Lemma 01Z0 proof, first and second paragraphs"
+   }
+  },
+  {
+   "text": "The scheme $X_i$ is quasi-compact and quasi-separated, so its quasi-compact opens form a basis and the intersection of two quasi-compact opens is quasi-compact. Apply [lem-weil-pbc-qs-scheme-cohomology-directed-colimit] with $q=0$ and $U=X_i$ to the directed system $(\\mathcal M_j)_{j\\ge i}$ with colimit $\\mathcal M$ (Step 2); since $H^0(X_i,-)=\\Gamma(X_i,-)$, the canonical map $\\varinjlim_{j\\ge i}\\Gamma(X_i,\\mathcal M_j)\\to\\Gamma(X_i,\\mathcal M)$ is bijective (Limits 01Z0 uses Sheaves 009F with Topology 0069 here).",
+   "uses": [
+    "lem-weil-pbc-qs-scheme-cohomology-directed-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Limits, Lemma 01Z0 proof, third equality"
+   }
+  },
+  {
+   "text": "For every $j\\ge i$, the identification of Step 2 gives $\\Gamma(X_i,\\mathcal M_j)=\\Gamma(X_i,(g_j)_*\\mathcal F_j)=\\Gamma(X_j,\\mathcal F_j)$, and likewise $\\Gamma(X_i,\\mathcal M)=\\Gamma(X,\\mathcal F)$. Substituting these identifications into Step 3 yields the canonical bijection $\\varinjlim_{j\\ge i}\\Gamma(X_j,\\mathcal F_j)\\to\\Gamma(X,\\mathcal F)$. The final assertion follows from the zero criterion for a directed colimit of modules [lem-weil-pbc-filtered-colimit-modules-elementwise]: a section at stage $i$ whose image in $\\Gamma(X,\\mathcal F)$ is zero has zero image in the colimit, hence becomes zero in $\\Gamma(X_j,\\mathcal F_j)$ for some $j\\ge i$.",
+   "uses": [
+    "lem-sc-valuation-limit-affine-pushforward-colimit",
+    "lem-weil-pbc-filtered-colimit-modules-elementwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Limits, Lemma 01Z0 proof, displayed chain and colimit zero criterion"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-limit-affine-transition",
+  "lem-sc-valuation-limit-affine-pushforward-colimit",
+  "lem-weil-pbc-qs-scheme-cohomology-directed-colimit",
+  "lem-weil-pbc-filtered-colimit-modules-elementwise"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Limits, Lemma 01Z0 (lemma-descend-section), proof"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -52,12 +108,45 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-valuation-closed-fibre-section-vanishing",
   "by": "worker",
   "date": "2026-10-11"
  },
  "chapter": "sec-abelian-varieties",
- "unit": "sk-prop-av-cube"
+ "unit": "sk-prop-av-cube",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-valuation-limit-qcoh-section-descent",
+  "worker": "stage1",
+  "summary": "Split Stacks Limits Lemma 01Z0 into four steps: pass to the cofinal tail and retain the affine limit, apply a supporting affine pushforward/tensor-colimit statement, commute global sections with the resulting directed colimit of quasi-coherent modules, and identify the stage and limit sections, including the eventual-zero clause. The supporting statement is new and intentionally unsplit.",
+  "blueprint": [
+   "proof clause: a section vanishing on the closed fibre over a valuation ring already vanishes modulo a nonzero element of the maximal ideal"
+  ],
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-limit-affine-transition",
+    "why": "The proof needs the generic affine-transition limit and affine projection infrastructure, which is outside this theorem-of-the-cube unit."
+   },
+   {
+    "node": "lem-weil-pbc-qs-scheme-cohomology-directed-colimit",
+    "why": "The proof needs the generic statement that sections over a quasi-compact open of a qcqs scheme commute with directed colimits of modules (Stacks 01FF, q=0), which is outside this unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-limit-affine-transition",
+  "lem-weil-pbc-qs-scheme-cohomology-directed-colimit",
+  "lem-weil-pbc-limit-affine-transition",
+  "lem-weil-pbc-qs-scheme-cohomology-directed-colimit"
+ ],
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-lsd0148",
+  "group": "C1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-lsd0148 (reviewer sub-agent of L); spot-checked: Item vs Limits 01Z0 (hypotheses agree; citer lem-sc-valuation-closed-fibre-section-vanishing uses exactly the eventual-zero clause); new node true (01YX proof: S = Spec_{S_0}(colim A_i); affine projection formula; tensor commutes with directed colimits), not a duplicate of lem-weil-pbc-limit-global-sections-colimit (structure sheaf only) nor of the nagata/descend limit nodes; grep of Mathlib AlgebraicGeometry for relativeSpec: no match. FIX more, RETURN less: (1) C4 Step 3 cited lem-weil-pbc-quasi-coherent-module-colimit-affine-sections (affine opens only) for global sections on the non-affine qcqs X_i, which the Second reading claimed repaired but was not: now cites lem-weil-pbc-qs-scheme-cohomology-directed-colimit (01FF, q=0, U=X_i), tool_uses updated; (2) B4 new node plain text with '->': rewritten in TeX; (3) class (b) new node's qcqs global-sections clause duplicated Sheaves 009F / Cohomology 01FF nodes: dropped, colimit of algebras made explicit; item source corrected to 01Z0 only (01ZR is the finite-presentation lemma, not used).; 2 file(s) fixed by the reviewer"
+ }
 }
