@@ -140,5 +140,24 @@
   "group": "E1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-pab2756 (reviewer sub-agent of L); spot-checked: Statement text identical to sheaf-dag (E7 ok). Step 3 converse and ring criterion 0658 citation ok; no duplicate of perfect-two-out-of-three/summand. FIX more, RETURN less: (1) E7: delivery added lem-pc-affine-qcoh-derived-equivalence to stmt_deps though the statement does not mention it; reverted stmt_deps to sheaf-dag. (2) C1: Step 2 asserted 'perfect gives pseudo-coherence and finite Tor amplitude' without a node; added statement-only lem-pc-perfect-pseudo-coherent-locally-finite-tor (Cohomology 08CQ (1)=>(2)) and folded the quasi-compactness bound (finite cover, min/max, locality of tensor) into Step 2 as text. (3) C1: transport of pseudo-coherence from E to M in D(A) (Tag 08E7, nontrivial) was uncited; added statement-only lem-pc-affine-pseudo-coherent-criterion (08E7) and cited it before the ring criterion. Step 1 trimmed to the identification it actually uses. One LeanFinder query recorded on both new nodes: no match. The E1 second reading missed (2) and (3).; 3 file(s) fixed by the reviewer; 2 statement node(s) added by the reviewer (FIX more, RETURN less)"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.PerfectAffineBoundedProjective",
+  "declaration": "AlgebraicGeometry.perfect_iff_affine_bounded_projective",
+  "file": "lean/Sheaf/AlgebraicGeometry/PerfectAffineBoundedProjective.lean",
+  "statement": "theorem perfect_iff_affine_bounded_projective (A : Type u) [CommRing A] [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace))] [∀ U : (Spec (.of A)).Opens, HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings (Spec (.of A)).toRingedSpace).over U))] (E : schemeDerivedQCohCategory (Spec (.of A))) : Scheme.IsPerfect (Spec (.of A)) E.obj ↔ ∃ P : CochainComplex (ModuleCat.{u} A) ℤ, (∃ a b : ℤ, ∀ n : ℤ, n < a ∨ b < n → IsZero (P.X n)) ∧ (∀ n : ℤ, Module.Finite A (P.X n)) ∧ (∀ n : ℤ, Module.Projective A (P.X n)) ∧ Nonempty (E.obj ≅ DerivedCategory.Q.obj ((@Functor.mapHomologicalComplex ℤ (ModuleCat.{u} A) (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace)) _ _ _ _ (tilde.functor (.of A)) ⟨fun _ _ ↦ tilde.map_zero⟩ (ComplexShape.up ℤ)).obj P))",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-pab1512"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-pab1512",
+  "group": "C1",
+  "result": "fix",
+  "note": "A ring, Y=Spec A, E in D_QCoh (schemeDerivedQCohCategory, E.obj in D(O_Y)), Scheme.IsPerfect (def-pc-perfect-complex) <-> exists bounded P with termwise Module.Finite+Module.Projective (landed F1 65ea9cc4f/J1 c12d4a27c form, replacing a retract-of-A^m second form) and E.obj ≅ Q.obj(tilde P) via the landed inline @mapHomologicalComplex ⟨tilde.map_zero⟩ form (dropped the new global PreservesZeroMorphisms instance); universes u,w ok; no hollow binders"
  }
 }
