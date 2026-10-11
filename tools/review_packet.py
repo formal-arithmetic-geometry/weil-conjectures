@@ -93,8 +93,8 @@ def main_stage2(g, item) -> int:
         n = nodes.get(u)
         if n is None: w(f"- **[{u}]** DOES NOT EXIST on sheaf-dag\n"); continue
         l = n.get("lean") if isinstance(n.get("lean"), dict) else None
-        lean = (f"`{l.get('module')}` / `{l.get('declaration')}`" + (f"\n  - statement: `{l.get('statement')}`" if l.get("statement") else "")
-                + (f"\n  - branch {l.get('branch')}" if l.get("branch") else "")) if l else "**no Lean declaration recorded**"
+        lean = (f"convention node, no Lean notion (L): {l.get('note')}" if l and l.get("convention") else (f"`{l.get('module')}` / `{l.get('declaration')}`" + (f"\n  - statement: `{l.get('statement')}`" if l.get("statement") else "")
+                + (f"\n  - branch {l.get('branch')}" if l.get("branch") else "")) if l else "**no Lean declaration recorded**")
         w(f"- **[{u}]** ({n.get('kind')}): {n.get('statement')}\n  - lean: {lean}\n")
     w("## 3. The delivered `lean` record\n\n```json\n" + json.dumps(D["rec"], indent=1, ensure_ascii=False) + "\n```\n")
     if D["fails"] or D["notes"]:

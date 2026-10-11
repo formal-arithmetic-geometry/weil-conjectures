@@ -118,6 +118,8 @@ def has_decl(d) -> bool:
     if field(d, "module"):
         return True
     l = field(d, "lean")
+    if isinstance(l, dict) and l.get("convention"):   # a convention node (L, 2026-10-11): fixes no notion, stands for no declaration
+        return True
     return bool(l.get("module") if isinstance(l, dict) else l)
 
 

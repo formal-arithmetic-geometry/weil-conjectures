@@ -10,6 +10,11 @@ Usage:
   tools/claim.py release <group> <module> <reason>   give the item back, stuck or abandoned
   tools/claim.py mine <group> | list           the group's claims | all claims with their age
   tools/claim.py expire                        release every claim not renewed for SHEAF_CLAIM_TTL hours (the maintainer)
+  tools/claim.py parked                        the items parked in stage 2 (abandoned by some group), their reasons, resolved or open
+
+Stage-2 parking (launcher's order 2026-10-11 05:50 UTC): an item released with 'abandon:' after stage 2 opened
+(2026-10-11T05:05Z) whose stage in coord/queue.tsv is 2 (or which the queue no longer lists) is parked for EVERY
+group: `next` skips it and `take` refuses it until coord/stage2-parked.md has a line `- <item> | ...` carrying RESOLVED.
 
 A claim is the file coord/claims/<module>.lock, created atomically, so two agents can never both obtain it.
 A group holds at most SHEAF_CLAIMS_PER_GROUP claims (default 10). A claim not renewed for SHEAF_CLAIM_TTL hours
@@ -99,6 +104,10 @@ def sorries(m):
 
 
 def take(who, m, quiet=False) -> bool:
+    if stage2_parked(m):   # launcher's order 2026-10-11 05:50 UTC: parked for every group until L resolves it
+        if not quiet:
+            print(f"{m} is parked in stage 2 (abandoned; see tools/claim.py parked and coord/stage2-parked.md); nothing to claim")
+        return False
     if node_finished(m):   # launcher's order 2026-10-10 20:55 UTC: refuse a node already split, matched or attached
         if not quiet:
             print(f"{m} is already split, matched or attached; nothing to claim")
@@ -156,6 +165,8 @@ def node_finished(m: str, stage=None) -> bool:
         l = d.get("lean")
         if isinstance(l, dict) and l.get("module"):
             return True
+        if isinstance(l, dict) and l.get("convention"):   # a convention node (L, 2026-10-11): no Lean notion, not an item
+            return True
         return d.get("status") in ("mathlib", "merged")
     # launcher's order 2026-10-10 20:55 UTC: a node whose status is split, mathlib or merged is finished whether or not
     # `reviewed` is set (L's own split of lem-pc-ringed-space-module-stalk-tensor at 19:58 carried no `reviewed`, so
@@ -191,6 +202,49 @@ def attachment_pending(m: str) -> bool:
         if re.search(rf"{re.escape(m)} NOT attached|attachment refused.*{re.escape(m)}|{re.escape(m)}.*attachment refused", tail):
             return False
     return True
+
+
+STAGE2_OPEN = "2026-10-11T05:05"
+PARKED = WORK / "stage2-parked.md"
+
+
+def stage2_abandonments() -> dict[str, list[tuple[str, str, str]]]:
+    """item -> [(time, group, reason)] of the 'abandon:' releases in coord/deliveries.log after stage 2 opened, for items
+    whose stage in coord/queue.tsv is 2 or which the queue no longer lists (an item of stage 1 is not parked)."""
+    p = WORK / "deliveries.log"
+    out: dict[str, list] = {}
+    if not p.exists():
+        return out
+    q = WORK / "queue.tsv"
+    stages = {}
+    if q.exists():
+        for l in q.read_text().splitlines():
+            r = l.split("\t")
+            if len(r) > 1 and not l.startswith("#"):
+                stages[r[0]] = r[1]
+    for line in p.read_text().splitlines():
+        mm = re.match(r"(\S+)Z (\S+) abandoned (\S+): (abandon:.*)$", line)
+        if not mm or mm.group(1) < STAGE2_OPEN:
+            continue
+        if stages.get(mm.group(3), "2") != "2":
+            continue
+        out.setdefault(mm.group(3), []).append((mm.group(1), mm.group(2), mm.group(4)))
+    return out
+
+
+def parked_resolved() -> set[str]:
+    """Items whose line `- <item> | ...` in coord/stage2-parked.md carries RESOLVED."""
+    out = set()
+    if PARKED.exists():
+        for line in PARKED.read_text().splitlines():
+            mm = re.match(r"- (\S+) \|", line)
+            if mm and "RESOLVED" in line:
+                out.add(mm.group(1))
+    return out
+
+
+def stage2_parked(m: str) -> bool:
+    return m in stage2_abandonments() and m not in parked_resolved()
 
 
 def queue(stage: str | None = None):
@@ -236,6 +290,7 @@ def main() -> int:
         stage = a[a.index("--stage") + 1] if "--stage" in a else None
         n = min(n, LIMIT - len(held_by(who)))
         got = 0
+        parked = set(stage2_abandonments()) - parked_resolved()
         skip = abandoned_recently(who)   # launcher's finding, 2026-10-10 15:30 UTC: C1 abandoned one item 29 times in half an
         for m in queue(stage):           # hour because next handed it straight back; a group skips its own abandonments for 24 h
             if got >= n:
@@ -247,6 +302,8 @@ def main() -> int:
             if node_finished(m):  # a DAG node split, matched or Lean-attached since the queue was written (stale queue.tsv)
                 continue
             if attachment_pending(m):  # an attachment release L has not verified yet (launcher, 2026-10-10 17:30 UTC)
+                continue
+            if m in parked:  # abandoned in stage 2 by any group and not resolved by L (launcher, 2026-10-11 05:50 UTC)
                 continue
             r = read(m)
             if (r is None or expired(r)) and take(who, m, quiet=True):
@@ -302,6 +359,12 @@ def main() -> int:
             r = read(p.stem.replace("__", "/")) or {}
             age = (time.time() - r.get("t", 0)) / 3600
             print(f"{p.stem.replace("__", "/")}\t{r.get('who')}\t{r.get('since')}\t{age:.1f} h" + ("\texpired" if expired(r) else ""))
+    elif cmd == "parked":
+        res = parked_resolved()
+        for m, ab in sorted(stage2_abandonments().items()):
+            print(f"{m}\t{'RESOLVED' if m in res else 'OPEN'}\t{len(ab)} abandonment(s)")
+            for t, g, why in ab:
+                print(f"  {t}Z {g}: {why}")
     elif cmd == "expire":
         for p in sorted(C.glob("*.lock")):
             r = read(p.stem.replace("__", "/"))

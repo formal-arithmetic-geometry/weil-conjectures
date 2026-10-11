@@ -104,12 +104,12 @@ def main() -> None:
         tags = list(d["import_flags"]) + (["stage2_open"] if i in stage2 else [])
         attrs = {"title": d["title"], "order": d["blueprint_order"], "tags": tags}
         if ln:
-            attrs["lean"] = [x for x in d.get("blueprint_lean", [ln["declaration"]]) if x not in d.get("blueprint_lean_not_found", [])]
+            attrs["lean"] = [x for x in d.get("blueprint_lean", [ln["declaration"]] if ln.get("declaration") else []) if x not in d.get("blueprint_lean_not_found", [])]
         objects.append({"source": {"file": d["source"]["document"], "anonymous": False}, "kind": kind, "id": i,
                         "depth": 0, "boundary": [], "body": body_of(d, i in queued), "attrs": attrs})
         if not unreachable:
             status[i] = ("proved_with_axioms" if d["status"] == "mathlib" else "missing" if i in queued
-                         else ("proved" if ln["sorry_free"] else "stated") if ln else "absent")
+                         else ("proved" if ln.get("sorry_free") else "stated") if ln else "absent")
         stmt = [t for t in dict.fromkeys(d["stmt_deps"]) if t in nodes and t != i]
         proof = [t for t in dict.fromkeys(d["proof_deps"]) if t in nodes and t != i and t not in stmt]
         for k, ts in (("stmt_dep", stmt), ("proof_dep", proof)):
