@@ -124,5 +124,24 @@
   "group": "E1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ssc0013 (reviewer sub-agent of L); spot-checked: Statement vs homology.tex Def 12.18.1/Rem 12.18.2 and proof of Lemma 12.19.2 (Tag 012K): A^{p,q}=F^{p+1}K^{p+1+q}, d of bidegree (0,1), alpha:A->A[-1,1] the inclusion into F^pK^{p+1+q} (=A[-1,1]^{p,q}), S=[0,1], T=[1,-1], T^rS=[r,1-r], E_0=Coker=gr^pK^{p+q} with d_0 induced by d: exact match (C4). Step 2 quotes only Rem 12.18.2, the item's own source construction, not another lemma; steps 1-3 elementary from def-sp-abelian/def-sp-filtration/def-sp-spectral-sequence. Citer lem-sp-filtered-complex-ZB-description step 1 uses exactly this statement; checked its Z_r,B_r against Rem 12.18.2 by hand (r=1: Z_1 from F^pK^{p+q} cap d^{-1}F^{p+1}K^{p+q+1}, B_1 from d(F^pK^{p+q-1}); general r: alpha^r image F^{p+r}, preimage F^{p-r+1}): agree. No new nodes; no duplicate (def-sp-exact-couple has fixed Stacks 12.21 bidegrees, not the self-map couple). No repairs."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.FilteredComplexSpectralSequence",
+  "declaration": "CategoryTheory.filteredComplex_associated_spectralSequence",
+  "file": "lean/Sheaf/CategoryTheory/FilteredComplexSpectralSequence.lean",
+  "statement": "theorem filteredComplex_associated_spectralSequence (K : CochainComplex C ℤ) (F : DecreasingFiltration K) : ∃ (E : CohomologicalSpectralSequence C 0) (e : ∀ p q : ℤ, (E.page 0).X (p, q) ≅ (F.gradedPiece p).X (p + q)), (∀ p q : ℤ, (E.page 0).d (p, q) (p, q + 1) ≫ (e p (q + 1)).hom = (e p q).hom ≫ (F.gradedPiece p).d (p + q) (p + (q + 1))) ∧ ∀ (p q r : ℤ) (hr : 1 ≤ r), ∃ hBZ : F.complexBoundaries p (p + q) r ≤ F.complexCycles p (p + q) r, Nonempty ((E.page r).X (p, q) ≅ cokernel (Subobject.ofLE _ _ hBZ))",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-fss1319"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-fss1319",
+  "group": "F1",
+  "result": "fix",
+  "note": "node vs Lean: abelian C = [Abelian C]; K cochain complex = CochainComplex C ℤ; filtration by subcomplexes = DecreasingFiltration K (was private ι/α family); bidegree (r,1-r) = CohomologicalSpectralSequence C 0; E_0^{p,q} = gr^pK^{p+q} with d_0 induced by d = isos e intertwining differentials (was bare Nonempty); associated to α (Def 12.18.1) = E_r ≅ Z_r/B_r with landed complexCycles/complexBoundaries for r≥1"
  }
 }
