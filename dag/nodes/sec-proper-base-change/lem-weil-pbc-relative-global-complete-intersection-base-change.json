@@ -165,5 +165,24 @@
   "worker": "stage1",
   "summary": "Read 00SS (algebra.tex line 36639) and its proof, 00P3 (line 28290) and its proof (Noether normalization), Definition 00SP (line 36506); tags 00SS, 00P3, 00SP verified in tags/tags. Statement kept. Five steps: (1) part (a) from the presentation base-change leaf plus the swap; (2) the residue field map lambda: kappa(p) -> kappa(p') with p = rho^{-1}(p') from the residue-field leaf (a),(d); (3) the fibre F' of S' is K (x)_k F (swaps, step 1, tensor-cancel-base-change twice), Spec homeomorphic, and F' != 0 forces F != 0; (4) F is of finite type over k (presentation base change); (5) conclusion by the new node for 00P3. New node lem-weil-pbc-dimension-preserved-field-extension (00P3, unsplit; same_as the blueprint nodes lem-pc-dim-base-change and lem-kun-dimension-extension, which state it with another dimension notion (def-pc-dimension, local rings) plus a curve clause, resp. for schemes with kundim, in other units, so it was not cited). No DAG node stated 00P3 (grep '00P3', 'dimension-preserved'); lem-weil-pbc-dimension-at-point-field-extension is 00P4 (dimension at a point), not 00P3. Item searches recorded at creation (no Mathlib notion of relative global complete intersection).",
   "blueprint": "No blueprint node is this item; its ancestor thm-weil-pbc-finite-etale-lifting, step 7 of its split (0GS2, essential surjectivity): the steps realize the base-change clause of 00SS (1) used in the relative-global-complete-intersection chain below that step: step 1 the presentation identity, steps 2-5 the fibre-dimension argument through 00P3."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.RelativeGlobalCompleteIntersectionBaseChange",
+  "declaration": "Algebra.relativeGlobalCompleteIntersection_baseChange",
+  "file": "lean/Sheaf/Paper/RelativeGlobalCompleteIntersectionBaseChange.lean",
+  "statement": "theorem relativeGlobalCompleteIntersection_baseChange (R : Type u) (R' : Type v) [CommRing R] [CommRing R'] [Algebra R R'] (n c : ℕ) (f : Fin c → MvPolynomial (Fin n) R) : (∃ e : (MvPolynomial (Fin n) R' ⧸ Ideal.span (Set.range (fun i => MvPolynomial.map (algebraMap R R') (f i)))) ≃ₐ[R'] (R' ⊗[R] (MvPolynomial (Fin n) R ⧸ Ideal.span (Set.range f))), ∀ j : Fin n, e (Ideal.Quotient.mk (Ideal.span (Set.range (fun i => MvPolynomial.map (algebraMap R R') (f i)))) (MvPolynomial.X j)) = (1 : R') ⊗ₜ[R] (Ideal.Quotient.mk (Ideal.span (Set.range f)) (MvPolynomial.X j))) ∧ (IsRelativeGlobalCompleteIntersectionPresentation f → IsRelativeGlobalCompleteIntersectionPresentation (fun i => MvPolynomial.map (algebraMap R R') (f i)))",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-gbc"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-gbc",
+  "group": "H1",
+  "result": "fix",
+  "note": "rho as [Algebra R R'] with MvPolynomial.map (algebraMap R R') (no letI/toAlgebra); f : Fin c -> R[x_1..x_n], images f'; (a) R'-algebra equiv R'[x]/(f') = R' ⊗_R R[x]/(f) tied by x_j |-> 1 ⊗ x_j; (b) hypothesis/conclusion on the given presentations via landed IsRelativeGlobalCompleteIntersectionPresentation f -> ... (map f) (was ring-map existential IsRelativeGlobalCompleteIntersection of Ideal.Quotient.mk, which forgets the presentation)"
  }
 }

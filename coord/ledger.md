@@ -4889,3 +4889,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 14:15 L: merged deliver/G1/lem-weil-pbc-ringed-space-open-restriction-adjunction (stage 2; reviewer FIX; first push; Sheaf.Topology.OpenRestrictionAdjunction TopologicalSpace.Opens.exists_openRestrictionAdjunction)
 - 14:15 L: merged deliver/C1/lem-weil-pbc-schanuel (stage 2; reviewer FIX; first push; Sheaf.Algebra.Schanuel Module.schanuel)
 - 14:16 L: merged deliver/C1/lem-weil-pbc-relative-spec-base-change (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.RelativeSpecBaseChange AlgebraicGeometry.relative_spec_base_change)
+- 14:16 L: merged deliver/H1/lem-weil-pbc-relative-global-complete-intersection-base-change (stage 2; reviewer FIX; first push; Sheaf.Paper.RelativeGlobalCompleteIntersectionBaseChange Algebra.relativeGlobalCompleteIntersection_baseChange)
