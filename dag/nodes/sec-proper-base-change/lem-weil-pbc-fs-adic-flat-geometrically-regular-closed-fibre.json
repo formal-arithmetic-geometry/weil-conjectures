@@ -164,5 +164,24 @@
   "worker": "stage1",
   "summary": "Proof of Stacks 07NQ (3) => (1) through (2), following its proof: flatness by a new unsplit node for Lemma 07NP (lem-weil-pbc-fs-adic-local-flat); the closed fibre B/m_A B identified with B (x)_A k as Noetherian local k-algebras (existing leaves quotient-local-structure, surjective-image-noetherian, tensor-quotient-base-change), formally smooth over k for the m_{B-bar}-adic topology by lem-weil-pbc-fs-adic-base-change (07EG) with the transfer along the isomorphism written out; geometric regularity by a new unsplit node for Theorem 07EL (2) => (1) (lem-weil-pbc-fs-adic-field-geometrically-regular). No translation of the topology on A is needed: 07NI is defined by the equivalent conditions (2)(a)/(2)(b) of 07EC and (2)(b) (A discrete) is def-weil-pbc-formally-smooth-adic. Statement kept; checked against the citer lem-weil-pbc-formally-smooth-complete-local-regular, which uses exactly flatness and geometric regularity of B/m_A B. Mathlib: adic formal smoothness and geometric regularity absent (leansearch, leanfinder, loogle, grep, local_search); only the discrete analogue Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing of the flatness clause."
  },
- "reviewed": "Reviewed by L 2026-10-10: faithful to More on Algebra 07NQ (3)=>(1): flatness by 07NP (new node), the closed fibre identified with B⊗_A k and its formal smoothness over k by lem-weil-pbc-fs-adic-base-change with the transfer along the isomorphism written out (steps 2-3), geometric regularity by 07EL (2)=>(1) (new node). The DAG's definition is 07EC (2)(b), so 07NI needs no translation. No Mathlib match."
+ "reviewed": "Reviewed by L 2026-10-10: faithful to More on Algebra 07NQ (3)=>(1): flatness by 07NP (new node), the closed fibre identified with B⊗_A k and its formal smoothness over k by lem-weil-pbc-fs-adic-base-change with the transfer along the isomorphism written out (steps 2-3), geometric regularity by 07EL (2)=>(1) (new node). The DAG's definition is 07EC (2)(b), so 07NI needs no translation. No Mathlib match.",
+ "lean": {
+  "module": "Sheaf.RingTheory.FormallySmoothAdicClosedFiber",
+  "declaration": "RingHom.flat_and_isGeometricallyRegular_closedFiber_of_formallySmoothAdic",
+  "file": "lean/Sheaf/RingTheory/FormallySmoothAdicClosedFiber.lean",
+  "statement": "theorem flat_and_isGeometricallyRegular_closedFiber_of_formallySmoothAdic {A : Type u} {B : Type v} [CommRing A] [CommRing B] [IsNoetherianRing A] [IsNoetherianRing B] [IsLocalRing A] [IsLocalRing B] (φ : A →+* B) [IsLocalHom φ] : letI : Algebra A B := φ.toAlgebra letI : Field (A ⧸ maximalIdeal A) := Ideal.Quotient.field (maximalIdeal A) let I : Ideal B := Ideal.map φ (maximalIdeal A) letI : Algebra (A ⧸ maximalIdeal A) (B ⧸ I) := Ideal.Quotient.algebraQuotientOfLEComap (Ideal.le_comap_map : maximalIdeal A ≤ I.comap (algebraMap A B)) Algebra.FormallySmoothAdic A B (maximalIdeal B) → φ.Flat ∧ Algebra.IsGeometricallyRegular (A ⧸ maximalIdeal A) (B ⧸ I)",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-ffc1042"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-ffc1042",
+  "group": "J1",
+  "result": "fix",
+  "note": "Noetherian local A,B; IsLocalHom φ; φ.toAlgebra; FormallySmoothAdic A B m_B antecedent; φ.Flat; IsGeometricallyRegular (A⧸m_A) (B⧸m_A B) via algebraQuotientOfLEComap as H1 e7cc28ce7; Noetherian fibre clause inside recorded predicate; k' universe max u v"
+ }
 }
