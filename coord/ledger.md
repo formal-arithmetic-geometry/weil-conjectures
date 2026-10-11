@@ -5708,3 +5708,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 20:30 L: merged deliver/K1/lemma-nagata-morphism-descends (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.NagataMorphismDescends AlgebraicGeometry.nagataMorphismDescends)
 - 20:33 L: returned deliver/C1/lem-pc-global-hom-pullback-adjunction (reviewer RETURN: (reviewer X-1b584, head 1b5847af9) the reviewer passed it, but the landing failed: NOT MERGED lem-pc-global-hom-pullback)
 - 20:33 L: returned deliver/U1/lem-sc-closed-pushforward-boundary-naturality (reviewer RETURN: (reviewer X-34a83, head 34a838dd1) H11: In coord/reports/U1/lem-sc-closed-pushforward-boundary-naturality.md, delete the)
+- 20:35 L: returned deliver/C1/lem-pc-affine-morphism-hom-out-of-perfect (reviewer RETURN: (reviewer X-248f2, head 248f231a6) H3/H12: In AffineGlobalHomBaseChangeMap.lean, canonicalPullbackAdjunction and canonic)
