@@ -1645,7 +1645,7 @@ Of the hypothesis `H⁰(X, 𝒪_X) = k`, only `h⁰(X, 𝒪_X) = 1` is used, thr
 `χ(𝒪_{X_ℂ}) = 2` rather than `1 - g = 1`, and the line bundle that is `𝒪(-1)` on one copy and
 `𝒪` on the other has `χ(ℒ) = 1`, hence `deg ℒ = 1 - 2 = -1 ≠ g = 0`.
 
-(blueprint: `sk-cor-picard-degree-g`) -/
+(blueprint: `sk-cor-picard-degree-g`, `cor-picard-degree-g`) -/
 theorem degree_eq_genus [GlobalSectionsBijective k X]
     (ℒ : (Limits.pullback (X ↘ Spec (.of k))
       (Spec.map (CommRingCat.ofHom (algebraMap k K)))).Modules)
