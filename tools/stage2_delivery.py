@@ -747,21 +747,27 @@ def read_delivery(git: Git, ref: str, base: str, group: str, item: str, max_comm
         except ValueError:
             raw = {}
         miss = object()
-        ch = [k for k in STAGE2_ITEM_CORRECTION if raw.get(k, miss) != bnode.get(k, miss)]
+        dsd = [x for x in (node.get("stmt_deps") or []) if isinstance(x, str)]
+        sd = list(bnode.get("stmt_deps") or [])
+        keep = [x for x in dsd if x in D["new"] and x not in sd]
+        rnode = dict(node)
+        for k in STAGE2_ITEM_CORRECTION:
+            if k in bnode:
+                rnode[k] = json.loads(json.dumps(bnode[k]))
+            else:
+                rnode.pop(k, None)
+        if keep:
+            rnode["stmt_deps"] = sd + keep
+        # what the branch changes, beyond adding new nodes to stmt_deps and the citations of dropped nodes
+        for k in ("stmt_deps", "proof_deps"):
+            if isinstance(raw.get(k), list):
+                raw[k] = [x for x in raw[k] if x not in D["dropped"]]
+        ch = [k for k in STAGE2_ITEM_CORRECTION if raw.get(k, miss) != rnode.get(k, miss)]
         if not ch:
-            f("b", "--revert-statement: the delivery does not change the item's " + ", ".join(STAGE2_ITEM_CORRECTION))
+            f("b", "--revert-statement: the delivery does not change the item's " + ", ".join(STAGE2_ITEM_CORRECTION)
+                   + " (beyond adding its new nodes to stmt_deps)")
         else:
-            node = dict(node)
-            dsd = [x for x in (node.get("stmt_deps") or []) if isinstance(x, str)]
-            for k in STAGE2_ITEM_CORRECTION:
-                if k in bnode:
-                    node[k] = json.loads(json.dumps(bnode[k]))
-                else:
-                    node.pop(k, None)
-            sd = list(bnode.get("stmt_deps") or [])
-            keep = [x for x in dsd if x in D["new"] and x not in sd]
-            if keep:
-                node["stmt_deps"] = sd + keep
+            node = rnode
             D["node"] = node
             D["statement_reverted"] = ch
             D["stmt_deps_reverted"] = [x for x in dsd if x not in (node.get("stmt_deps") or [])]
