@@ -216,5 +216,23 @@
   "by": "L",
   "result": "accepted",
   "note": "6 steps following Stacks 0884: X Noetherian and I O_X quasi-coherent; B = (+) I^n/I^{n+1} finitely generated; a surjection f^* B~ -> (+) I^n/I^{n+1} (Stacks' equality is false in general, as the worker shows); the kernels a finite graded module (087Z node); uniform H^1 vanishing (0897 node; its ampleness citation repaired by L to 01PS); retract to each summand. Statement: ampleness restated through def-weil-pbc-ample-invertible-module (f-ample = ample over an affine base), F_0 = 0 convention, stmt_deps corrected."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.VanishingProjective",
+  "declaration": "AlgebraicGeometry.coherentFormalModule_kernel_twist_vanishing",
+  "file": "lean/Sheaf/AlgebraicGeometry/VanishingProjective.lean",
+  "statement": "theorem coherentFormalModule_kernel_twist_vanishing {A : Type u} [CommRing A] [IsNoetherianRing A] (I : Ideal A) {X : Scheme.{u}} (f : X ⟶ Spec (CommRingCat.of A)) [IsProper f] (L : X.Modules) [L.IsInvertible] (hL : Scheme.Modules.IsAmple X L) (F : @CoherentFormalModule X (isNoetherian_of_locallyOfFiniteType f) ((Scheme.IdealSheafData.ofIdealTop (I.map (Scheme.ΓSpecIso (CommRingCat.of A)).inv.hom)).comap f)) : ∃ d₀ : ℤ, ∀ (n d : ℕ), d₀ ≤ (d : ℤ) → IsZero ((RingedSpace.moduleCohomology X.toRingedSpace 1).obj (Scheme.Modules.tensorObj (match n with | 0 => F.obj.obj (op 0) | k + 1 => kernel (F.obj.map (homOfLE (Nat.le_succ k)).op)) (L.tensorPow d)))",
+  "branch": "sheaf-dag",
+  "by": "V1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-vpj",
+  "group": "V1",
+  "result": "pass",
+  "note": "A Noetherian, I arbitrary, f proper to Spec A, L invertible + IsAmple (01PS), I O_X = (ofIdealTop (I.map ΓSpecIso.inv)).comap f per STATE COHERENT THICKENING line, F in CoherentFormalModule with landed @-Noetherian pattern, n=0 branch F_1 = ker(F_1->0), kernels of F_(k+2)->F_(k+1), tensorObj with L.tensorPow d, single d0 for all n,d, H^1 via RingedSpace.moduleCohomology IsZero"
  }
 }
