@@ -76,16 +76,6 @@ noncomputable def lowerShriekCompIso (f : X ⟶ Y) (g : Y ⟶ S) [HasCompactific
       (F.shriekIso _ (Compactification.Triangle.ofHasCompactification f g).cf) _ ≪≫
     F.compIso (Compactification.Triangle.ofHasCompactification f g) ≪≫ F.shriekIso _ _
 
-lemma whiskerRight_eq_hcomp {A B C : Type*} [Category* A] [Category* B] [Category* C]
-    {G G' : A ⥤ B} (α : G ⟶ G') (H : B ⥤ C) :
-    Functor.whiskerRight α H = NatTrans.hcomp α (𝟙 H) := by
-  ext; simp
-
-lemma whiskerLeft_eq_hcomp {A B C : Type*} [Category* A] [Category* B] [Category* C]
-    (G : A ⥤ B) {H H' : B ⥤ C} (β : H ⟶ H') :
-    Functor.whiskerLeft G β = NatTrans.hcomp (𝟙 G) β := by
-  ext; simp
-
 /-- **Independence of all compactification choices**: the composition isomorphism is computed
 by any triangle of compactifications `T` of `(f, g)`, up to the comparison isomorphisms
 `F.shriekIso` between the compactifications of `T` and the chosen ones.
@@ -97,7 +87,7 @@ theorem lowerShriekCompIso_hom_eq {f : X ⟶ Y} {g : Y ⟶ S} [HasCompactificati
       NatTrans.hcomp (F.shriekIso _ T.cf).hom (F.shriekIso _ T.cg).hom ≫
         (F.compIso T).hom ≫ (F.shriekIso T.cfg _).hom := by
   rw [lowerShriekCompIso, Iso.trans_hom, Iso.trans_hom, Functor.isoWhiskerRight_hom,
-    F.compIso_hom_eq _ T, whiskerRight_eq_hcomp]
+    F.compIso_hom_eq _ T, ← Functor.hcomp_id]
   simp only [Category.assoc]
   rw [← Category.assoc (NatTrans.hcomp _ _), ← NatTrans.exchange, Category.id_comp]
   have h₁ := congrArg Iso.hom (F.shriekIso_trans (HasCompactification.compactification f)
@@ -131,7 +121,7 @@ theorem lowerShriekCompIso_id_left (f : X ⟶ Y) [HasCompactification f]
       (F.shriekIso ((HasCompactification.compactification f).copy (Category.id_comp f))
         (HasCompactification.compactification (𝟙 X ≫ f))).hom = _
   rw [shriekIso_refl, F.shriekIso_copy (Category.id_comp f), lowerShriekId, Iso.trans_hom,
-    Functor.whiskerRight_comp, whiskerRight_eq_hcomp, whiskerRight_eq_hcomp]
+    Functor.whiskerRight_comp, ← Functor.hcomp_id, ← Functor.hcomp_id]
   simp only [Iso.refl_hom, Category.assoc]
 
 /-- **The right unit law** of the composition isomorphism.
@@ -151,7 +141,7 @@ theorem lowerShriekCompIso_id_right (f : X ⟶ Y) [HasCompactification f]
       (F.shriekIso ((HasCompactification.compactification f).copy (Category.comp_id f))
         (HasCompactification.compactification (f ≫ 𝟙 Y))).hom = _
   rw [shriekIso_refl, F.shriekIso_copy (Category.comp_id f), lowerShriekId, Iso.trans_hom,
-    Functor.whiskerLeft_comp, whiskerLeft_eq_hcomp, whiskerLeft_eq_hcomp]
+    Functor.whiskerLeft_comp, ← Functor.id_hcomp, ← Functor.id_hcomp]
   simp only [Iso.refl_hom, Category.assoc]
 
 end AlgebraicGeometry.CompactSupportFormalism

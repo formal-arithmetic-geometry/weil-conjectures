@@ -1428,6 +1428,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekComparison.De
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekComparison.IdentityLaw
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekComposition
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekFormalism
+public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekFormalismComparison
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekIndependence
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekIndependenceUnbounded
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekProjection

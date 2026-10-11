@@ -165,11 +165,11 @@ theorem lowerShriekCompIso_assoc (f : X ⟶ Y) (g : Y ⟶ S) (h : S ⟶ T) [HasC
   simp only [Iso.trans_hom] at hc
   rw [← F.shriekIso_symm 𝒯.cfg, ← F.shriekIso_symm 𝒯.cgh]
   simp only [Iso.symm_hom, Functor.whiskerRight_comp, Functor.whiskerLeft_comp, Category.assoc]
-  slice_lhs 3 4 => rw [whiskerRight_comp_hcomp, Iso.hom_inv_id, ← whiskerLeft_eq_hcomp]
+  slice_lhs 3 4 => rw [whiskerRight_comp_hcomp, Iso.hom_inv_id, Functor.id_hcomp]
   slice_lhs 2 3 => rw [← hcomp_eq_whiskerRight_comp_whiskerLeft,
     hcomp_eq_whiskerLeft_comp_whiskerRight]
   slice_lhs 1 2 => rw [← hcomp_eq_whiskerRight_comp_whiskerLeft]
-  slice_rhs 4 5 => rw [whiskerLeft_comp_hcomp, Iso.hom_inv_id, ← whiskerRight_eq_hcomp]
+  slice_rhs 4 5 => rw [whiskerLeft_comp_hcomp, Iso.hom_inv_id, Functor.hcomp_id]
   slice_rhs 3 4 => rw [← hcomp_eq_whiskerLeft_comp_whiskerRight,
     hcomp_eq_whiskerRight_comp_whiskerLeft]
   slice_rhs 2 3 => rw [← hcomp_eq_whiskerLeft_comp_whiskerRight]

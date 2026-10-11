@@ -36,6 +36,8 @@ and it is the latter that one wants when transporting the coherence of a pseudof
 - `CategoryTheory.Adjunction.whiskerRight_comp_conjugateIsoEquiv_hom`: for an adjoint triple
   `L ⊣ M ⊣ R`, the comparison `L ⟶ R` commutes with the exchange isomorphisms obtained by
   conjugating an isomorphism `ED ⋙ M ≅ M ⋙ EC` for self-equivalences `EC` and `ED`.
+- `CategoryTheory.mateEquiv_eq_of_unit`, `CategoryTheory.conjugateEquiv_eq_of_unit`: a mate, resp. a
+  conjugate, is determined by its compatibility with the units.
 -/
 
 @[expose] public section
@@ -321,5 +323,65 @@ lemma mateEquiv_whiskerTop_whiskerBottom (α : TwoSquare G L₁ L₂ H) (σ : G'
   rw [Adjunction.unit_naturality_assoc, ← R₂.map_comp, ← τ.naturality, R₂.map_comp]
 
 end MateWhisker
+
+section MateUnitors
+
+variable {L : A ⥤ B} {R : B ⥤ A}
+
+/-- The mate of the unitor square `𝟭 ⋙ L ⟶ L ⋙ 𝟭` is the unitor square `R ⋙ 𝟭 ⟶ 𝟭 ⋙ R`. -/
+lemma mateEquiv_unitors (adj : L ⊣ R) :
+    mateEquiv adj adj (TwoSquare.mk (𝟭 A) L L (𝟭 B)
+      ((Functor.leftUnitor L).hom ≫ (Functor.rightUnitor L).inv)) =
+      TwoSquare.mk R (𝟭 B) (𝟭 A) R ((Functor.rightUnitor R).hom ≫ (Functor.leftUnitor R).inv) := by
+  ext X
+  simp
+
+/-- The mate of the unitor square `L ⋙ 𝟭 ⟶ 𝟭 ⋙ L` with respect to the identity adjunctions is
+the unitor square `𝟭 ⋙ L ⟶ L ⋙ 𝟭`. -/
+lemma mateEquiv_id_id_unitors (L : A ⥤ B) :
+    mateEquiv Adjunction.id Adjunction.id (TwoSquare.mk L (𝟭 A) (𝟭 B) L
+      ((Functor.rightUnitor L).hom ≫ (Functor.leftUnitor L).inv)) =
+      TwoSquare.mk (𝟭 A) L L (𝟭 B) ((Functor.leftUnitor L).hom ≫ (Functor.rightUnitor L).inv) := by
+  ext X
+  simp [Adjunction.id]
+
+end MateUnitors
+
+section MateUnit
+
+variable {G : A ⥤ C} {H : B ⥤ D} {L₁ : A ⥤ B} {R₁ : B ⥤ A} {L₂ : C ⥤ D} {R₂ : D ⥤ C}
+  (adj₁ : L₁ ⊣ R₁) (adj₂ : L₂ ⊣ R₂)
+
+/-- The mate of a 2-square `α : G ⋙ L₂ ⟶ L₁ ⋙ H` is determined by its compatibility with the
+units (`CategoryTheory.unit_mateEquiv`): a 2-square `γ : R₁ ⋙ G ⟶ H ⋙ R₂` satisfying it is the
+mate of `α`. -/
+lemma mateEquiv_eq_of_unit (α : TwoSquare G L₁ L₂ H) (γ : TwoSquare R₁ H G R₂)
+    (h : ∀ a, G.map (adj₁.unit.app a) ≫ γ.app (L₁.obj a) =
+      adj₂.unit.app (G.obj a) ≫ R₂.map (α.app a)) :
+    mateEquiv adj₁ adj₂ α = γ := by
+  rw [← Equiv.eq_symm_apply]
+  ext a
+  apply (adj₂.homEquiv _ _).injective
+  rw [Adjunction.homEquiv_unit, Adjunction.homEquiv_unit, ← h, unit_mateEquiv_symm adj₁ adj₂]
+  rfl
+
+end MateUnit
+
+section ConjugateUnit
+
+variable {L₁ L₂ : A ⥤ B} {R₁ R₂ : B ⥤ A} (adj₁ : L₁ ⊣ R₁) (adj₂ : L₂ ⊣ R₂)
+
+/-- The conjugate of `α : L₂ ⟶ L₁` is determined by its compatibility with the units
+(`CategoryTheory.unit_conjugateEquiv`): a natural transformation `β : R₁ ⟶ R₂` satisfying it is
+the conjugate of `α`. -/
+lemma conjugateEquiv_eq_of_unit (α : L₂ ⟶ L₁) (β : R₁ ⟶ R₂)
+    (h : ∀ a, adj₁.unit.app a ≫ β.app (L₁.obj a) = adj₂.unit.app a ≫ R₂.map (α.app a)) :
+    conjugateEquiv adj₁ adj₂ α = β := by
+  rw [← Equiv.eq_symm_apply]
+  ext a
+  apply (adj₂.homEquiv _ _).injective
+  rw [Adjunction.homEquiv_unit, Adjunction.homEquiv_unit, ← h, unit_conjugateEquiv_symm adj₁ adj₂]
+
+end ConjugateUnit
 
 end CategoryTheory

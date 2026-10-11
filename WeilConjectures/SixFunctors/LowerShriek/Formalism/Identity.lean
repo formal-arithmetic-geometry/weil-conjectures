@@ -21,29 +21,6 @@ universe w v u
 
 open CategoryTheory Limits TwoSquare
 
-namespace CategoryTheory
-
-variable {A B : Type*} [Category* A] [Category* B] {L : A ⥤ B} {R : B ⥤ A}
-
-/-- The mate of the unitor square `𝟭 ⋙ L ⟶ L ⋙ 𝟭` is the unitor square `R ⋙ 𝟭 ⟶ 𝟭 ⋙ R`. -/
-lemma mateEquiv_unitors (adj : L ⊣ R) :
-    mateEquiv adj adj (TwoSquare.mk (𝟭 A) L L (𝟭 B)
-      ((Functor.leftUnitor L).hom ≫ (Functor.rightUnitor L).inv)) =
-      TwoSquare.mk R (𝟭 B) (𝟭 A) R ((Functor.rightUnitor R).hom ≫ (Functor.leftUnitor R).inv) := by
-  ext X
-  simp
-
-/-- The mate of the unitor square `L ⋙ 𝟭 ⟶ 𝟭 ⋙ L` with respect to the identity adjunctions is
-the unitor square `𝟭 ⋙ L ⟶ L ⋙ 𝟭`. -/
-lemma mateEquiv_id_id_unitors (L : A ⥤ B) :
-    mateEquiv Adjunction.id Adjunction.id (TwoSquare.mk L (𝟭 A) (𝟭 B) L
-      ((Functor.rightUnitor L).hom ≫ (Functor.leftUnitor L).inv)) =
-      TwoSquare.mk (𝟭 A) L L (𝟭 B) ((Functor.leftUnitor L).hom ≫ (Functor.rightUnitor L).inv) := by
-  ext X
-  simp [Adjunction.id]
-
-end CategoryTheory
-
 namespace AlgebraicGeometry.CompactSupportFormalism
 
 variable (F : CompactSupportFormalism.{w, v, u})

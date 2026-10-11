@@ -100,18 +100,6 @@ lemma derivedPlusFormalism_lowerShriek [HasCompactification f] :
 
 section Torsion
 
-omit [HasSmallSiteSheafify A] [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A]
-  [MonoidalClosed A] [Abelian.HasFunctorialFlatResolution A] in
-/-- In a cartesian square `t ≫ r = l ≫ b`, a point of `Z'` whose image under `b` lies in the
-range of `r` lies in the range of `l`. -/
-lemma mem_range_of_isPullback {U' U Z' Z : Scheme.{u}} {t : U' ⟶ U} {l : U' ⟶ Z'}
-    {r : U ⟶ Z} {b : Z' ⟶ Z} (h : IsPullback t l r b) {z : Z'} (hz : b z ∈ Set.range r) :
-    z ∈ Set.range l := by
-  obtain ⟨a, ha⟩ : z ∈ Set.range (pullback.snd r b) := by
-    rw [Scheme.Pullback.range_snd]; exact hz
-  refine ⟨h.isoPullback.inv a, ?_⟩
-  rw [← Scheme.Hom.comp_apply, h.isoPullback_inv_snd, ha]
-
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
 
 omit [Finite Λ] in
@@ -160,7 +148,9 @@ instance : (derivedPlusFormalism (ModuleCat.{u + 1} Λ)).HasBaseChange where
     have hdisj' : Disjoint (Set.range (l.closedComplement ≫ b).base) (Set.range r.base) := by
       rw [Set.disjoint_left]
       rintro _ ⟨w, rfl⟩ hw
-      have hl := mem_range_of_isPullback h hw
+      have hl : l.closedComplement w ∈ Set.range l := by
+        rw [Scheme.range_snd_of_isPullback h]
+        exact hw
       have hw' : l.closedComplement.base w ∈ (Set.range l.base)ᶜ := by
         rw [← l.range_closedComplement]; exact ⟨w, rfl⟩
       exact hw' hl

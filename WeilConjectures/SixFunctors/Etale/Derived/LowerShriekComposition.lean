@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.Compactification.Comp
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekFormalism
+public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekFormalismComparison
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekIndependenceUnbounded
 public import WeilConjectures.SixFunctors.Etale.Derived.OpenImmersionLowerShriekLowerStarExchange
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Comp
@@ -182,17 +183,6 @@ section Plus
 
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {X Y S T : Scheme.{u}}
 
-/-- The comparison isomorphism `Rf_!(c)[Λ]+ ≅ Rf_!(d)[Λ]+` between the bounded below compactly
-supported direct images attached to two compactifications of a quasi-compact morphism: the one of
-the compact support formalism `AlgebraicGeometry.Etale.derivedPlusFormalism`, obtained through
-the common refinement `Compactification.inf c d` and satisfying the coherences of blueprint
-`sk-prop-sf-comp-coherence` (`CompactSupportFormalism.shriekIso_eq`,
-`CompactSupportFormalism.shriekIso_trans`). -/
-noncomputable abbrev rightDerivedLowerShriekPlusCompactificationIso {f : X ⟶ Y} [QuasiCompact f]
-    (c d : Compactification f) :
-    Rf_!(c)[ModuleCat.{u + 1} Λ]+ ≅ Rf_!(d)[ModuleCat.{u + 1} Λ]+ :=
-  (derivedPlusFormalism (ModuleCat.{u + 1} Λ)).shriekIso c d
-
 /-- The isomorphism `R(f)_![Λ]+ ≅ R(f')_![Λ]+` for `f = f'`. -/
 noncomputable abbrev rightDerivedLowerShriekPlusCongr {f f' : X ⟶ Y} [HasCompactification f]
     [HasCompactification f'] (h : f = f') :
@@ -224,21 +214,24 @@ noncomputable def rightDerivedLowerShriekPlusCompIso (f : X ⟶ Y) (g : Y ⟶ S)
 /-- Blueprint `sk-thm-sf-comp-composition`: **independence of all compactification choices**. The
 composition isomorphism is computed by any triangle of compactifications `T` of `(f, g)`
 (compactifications of `f`, `g`, `f ≫ g` linked by a cartesian square): it is the composition
-isomorphism of `T`, conjugated by the comparison isomorphisms between the compactifications of
-`T` and the chosen ones. -/
+isomorphism of `T`, conjugated by the comparison isomorphisms
+`AlgebraicGeometry.Etale.rightDerivedLowerShriekOfCompactificationPlusIso` between the
+compactifications of `T` and the chosen ones. -/
 theorem rightDerivedLowerShriekPlusCompIso_hom_eq {f : X ⟶ Y} {g : Y ⟶ S}
     [HasCompactification f] [HasCompactification g] [HasCompactification (f ≫ g)]
     [QuasiCompact f] [QuasiCompact g] [QuasiCompact (f ≫ g)] (T : Compactification.Triangle f g) :
     (rightDerivedLowerShriekPlusCompIso Λ f g).hom =
       NatTrans.hcomp
-          (rightDerivedLowerShriekPlusCompactificationIso Λ
+          (rightDerivedLowerShriekOfCompactificationPlusIso Λ
             (HasCompactification.compactification f) T.cf).hom
-          (rightDerivedLowerShriekPlusCompactificationIso Λ
+          (rightDerivedLowerShriekOfCompactificationPlusIso Λ
             (HasCompactification.compactification g) T.cg).hom ≫
         ((derivedPlusFormalism (ModuleCat.{u + 1} Λ)).compIso T).hom ≫
-          (rightDerivedLowerShriekPlusCompactificationIso Λ T.cfg
-            (HasCompactification.compactification (f ≫ g))).hom :=
-  (derivedPlusFormalism (ModuleCat.{u + 1} Λ)).lowerShriekCompIso_hom_eq T
+          (rightDerivedLowerShriekOfCompactificationPlusIso Λ T.cfg
+            (HasCompactification.compactification (f ≫ g))).hom := by
+  have h := (derivedPlusFormalism (ModuleCat.{u + 1} Λ)).lowerShriekCompIso_hom_eq T
+  simp only [derivedPlusFormalism_shriekIso] at h
+  exact h
 
 /-- Blueprint `sk-thm-sf-comp-composition`: **the composition isomorphism is the identity when
 `f` is an identity**. -/

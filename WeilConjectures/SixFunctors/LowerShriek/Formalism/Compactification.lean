@@ -132,6 +132,46 @@ lemma refinementComparison_comp (r : c.Refinement d) (s : d.Refinement e)
   simp only [Category.assoc, Functor.map_comp]
   rw [← reassoc_of% hnat2, hassoc', reassoc_of% hnat]
 
+/-- **The comparison along a refinement, through a base change isomorphism**: if the base change
+map of the square of `r` is `β : c.i_! ≅ d.i_! ⋙ r^*` up to `(𝟙 X)^* ≅ 𝟭`, then the comparison
+along `r` is the unit of `r^* ⊣ r_*`, followed by `β⁻¹` and by `r_* ⋙ (d.g)_* ≅ (c.g)_*`. -/
+lemma refinementComparison_eq_of_baseChange (r : c.Refinement d)
+    (hr : IsPullback c.i (𝟙 X) r.hom d.i) (β : F.sh c.i ≅ F.sh d.i ⋙ F.pb r.hom)
+    (hβ : (F.baseChange (𝟙 X) c.i d.i r.hom hr.flip.w).natTrans =
+      Functor.whiskerRight (F.pbId X).hom (F.sh c.i) ≫ (Functor.leftUnitor _).hom ≫ β.hom) :
+    F.refinementComparison r hr =
+      Functor.whiskerRight (Functor.whiskerLeft (F.sh d.i) (F.adj r.hom).unit) (F.pf d.g) ≫
+        Functor.whiskerRight β.inv (F.pf r.hom ⋙ F.pf d.g) ≫
+        Functor.whiskerLeft (F.sh c.i) (F.pfComp' r.hom d.g c.g r.hom_g).inv := by
+  have := HasBaseChange.isIso_baseChange (F := F) hr.flip
+  have hinv : inv (F.baseChange (𝟙 X) c.i d.i r.hom hr.flip.w).natTrans =
+      β.inv ≫ (Functor.leftUnitor _).inv ≫ Functor.whiskerRight (F.pbId X).inv (F.sh c.i) := by
+    rw [IsIso.inv_eq_of_hom_inv_id]
+    rw [hβ]
+    ext K
+    simp [← Functor.map_comp]
+  ext K
+  have key : (F.sh d.i).map ((F.pfId X).inv.app K) ≫
+      (F.exchange (𝟙 X) c.i d.i r.hom hr.flip.w).natTrans.app K =
+      (F.adj r.hom).unit.app ((F.sh d.i).obj K) ≫ (F.pf r.hom).map (β.inv.app K) := by
+    have hc := conjugateEquiv_counit Adjunction.id (F.adj (𝟙 X)) (F.pbId X).hom K
+    rw [← pfId_inv] at hc
+    simp only [exchange, mateEquiv_apply, hinv, NatTrans.comp_app]
+    dsimp [TwoSquare.natTrans]
+    simp only [Category.id_comp, Category.comp_id, Functor.map_comp, Category.assoc]
+    have hc' : (F.pbId X).inv.app ((F.pf (𝟙 X)).obj K) ≫ (F.adj (𝟙 X)).counit.app K =
+        (F.pfId X).hom.app K := by
+      rw [← cancel_epi ((F.pfId X).inv.app K)]
+      erw [(F.pbId X).inv.naturality_assoc, hc]
+      simp
+    simp only [← Functor.map_comp, hc']
+    rw [← β.inv.naturality, Functor.map_comp, Functor.comp_map, Adjunction.unit_naturality_assoc,
+      ← Functor.map_comp_assoc, Iso.inv_hom_id_app]
+    simp
+  rw [refinementComparison_app, key]
+  simp
+
+
 end Refinement
 
 
