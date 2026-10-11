@@ -146,5 +146,23 @@
   "group": "G1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-fsr1840 (reviewer sub-agent of L); spot-checked: Step 1 = 022B clause applied to U=T (finite a:J->I, images cover T, empty case ok); step 2: affine criterion hypotheses met (g(V_j) in T, both affine), finite-product flat leaf incl. empty product; step 3: prime pulled back via coordinate projection contracts to p, then 00HQ leaf; all cited nodes are existing mathlib leaves/defs, none depends on the item or on open-subscheme/etale-sections fpqc descent nodes, so no cycle; quasi-compactness is supplied by the definition's finite n. Second reading: no missed fault. No repairs."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FpqcAffineStandardRefinement",
+  "declaration": "AlgebraicGeometry.Scheme.exists_fpqc_affine_standard_refinement",
+  "file": "lean/Sheaf/AlgebraicGeometry/FpqcAffineStandardRefinement.lean",
+  "statement": "theorem exists_fpqc_affine_standard_refinement (R : CommRingCat.{u}) {I : Type v} (T : I → Scheme.{u}) (f : ∀ i, T i ⟶ Spec R) (hf : Presieve.ofArrows T f ∈ fpqcPrecoverage (Spec R)) : ∃ (n : ℕ) (a : Fin n → I) (V : ∀ j, (T (a j)).Opens), (∀ j, IsAffineOpen (V j)) ∧ (RingHom.pi (fun j : Fin n ↦ ((ΓSpecIso R).inv ≫ ((V j).ι ≫ f (a j)).appTop).hom)).FaithfullyFlat",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-fas1035",
+  "group": "F1",
+  "result": "pass",
+  "note": "T=Spec R literal (R : CommRingCat.{u}); family {I : Type v} T f : T i ⟶ Spec R with hf : Presieve.ofArrows T f ∈ Scheme.fpqcPrecoverage (spelling of 4f60fa32f); J finite as Fin n (n=0 allowed, zero ring ok); a : Fin n → I; V j : (T (a j)).Opens with IsAffineOpen, A_j = Γ(V_j) canonical; R→A_j = (ΓSpecIso R).inv ≫ ((V j).ι ≫ f (a j)).appTop; RingHom.pi ... FaithfullyFlat = recorded def-weil-pbc-faithfully-flat-ring-map; names #check-resolved to Mathlib; no Mathlib lemma states this (Sites/Fpqc, Sites/QuasiCompact, Cover/QuasiCompact grepped)"
  }
 }
