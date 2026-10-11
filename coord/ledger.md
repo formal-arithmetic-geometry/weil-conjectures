@@ -5209,3 +5209,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 15:22 L: merged deliver/R1/lem-weil-tower-split-envelope (stage 2; reviewer PASS; first push; Sheaf.CategoryTheory.TowerSplitEnvelope CategoryTheory.tower_split_envelope)
 - 15:22 L: merged deliver/G1/lem-pur-derived-functor-triangles-05sc (stage 2; reviewer FIX; first push; Sheaf.CategoryTheory.DerivedFunctorTriangles CategoryTheory.Functor.leftDerived_map_distinguished_of_two_defined)
 - 15:22 L: merged deliver/J1/lem-pc-bounded-above-flat-kflat (stage 2; reviewer PASS; first push; Sheaf.Algebra.Homology.BoundedAboveFlatRingedSpaceKFlat CochainComplex.isKFlat_of_boundedAbove_flat_ringedSpace)
+- 15:22 L: merged deliver/S1/lem-pc-finite-projective-cokernel-localization (stage 2; reviewer PASS; first push; Sheaf.RingTheory.FiniteProjectiveCokernelLocalization Module.finiteProjectiveCokernel_residue_localization)

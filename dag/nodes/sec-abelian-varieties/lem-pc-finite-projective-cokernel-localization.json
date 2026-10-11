@@ -114,5 +114,23 @@
   "group": "F1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-pcl0145 (reviewer sub-agent of L); spot-checked: Step 1 cites lem-weil-pbc-finite-projective-prime-local-free (Tag 00NX) exactly; residue field of pR_g is kappa(p), composite principal localization R_{ga} stays outside p. Step 2 new finite-free node: true (m x m minor unit at p, invert it, split identity block, cokernel free; iso case m=n, det unit); Coker(phi)_f = Coker(phi_f) by exactness of localization. Isomorphism clause correct. Citer 0756c63f7 uses the isomorphism clause for R^{r+s+t}->K^0 and the injective clause for R^t->K^1, matching. No duplicate: lem-sc-finite-locally-free-residue-isomorphism is scheme-level all-points iso only; lem-sc-perfect-degree-zero-fibre-criterion and lem-weil-pbc-split-injection-after-completion differ. Mathlib: Module.FinitePresentation.exists_notMem_bijective needs bijectivity at the stalk, not the fibre; not a match. Second reading by F1: no missed fault found."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.FiniteProjectiveCokernelLocalization",
+  "declaration": "Module.finiteProjectiveCokernel_residue_localization",
+  "file": "lean/Sheaf/RingTheory/FiniteProjectiveCokernelLocalization.lean",
+  "statement": "theorem finiteProjectiveCokernel_residue_localization {R : Type u} [CommRing R] {P₁ : Type v} [AddCommGroup P₁] [Module R P₁] [Module.Finite R P₁] [Module.Projective R P₁] {P₂ : Type w} [AddCommGroup P₂] [Module R P₂] [Module.Finite R P₂] [Module.Projective R P₂] (φ : P₁ →ₗ[R] P₂) (p : Ideal R) [p.IsPrime] : (Function.Injective (φ.baseChange p.ResidueField) → ∃ f : R, f ∉ p ∧ Function.Injective (φ.baseChange (Localization.Away f)) ∧ Module.Finite (Localization.Away f) (TensorProduct R (Localization.Away f) P₂ ⧸ LinearMap.range (φ.baseChange (Localization.Away f))) ∧ Module.Projective (Localization.Away f) (TensorProduct R (Localization.Away f) P₂ ⧸ LinearMap.range (φ.baseChange (Localization.Away f)))) ∧ (Function.Bijective (φ.baseChange p.ResidueField) → ∃ f : R, f ∉ p ∧ Function.Bijective (φ.baseChange (Localization.Away f)))",
+  "branch": "sheaf-dag",
+  "by": "S1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "S1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }
