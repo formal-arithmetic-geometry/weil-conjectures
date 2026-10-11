@@ -156,5 +156,27 @@
  "tool_uses": [
   "lem-weil-pbc-small-etale-representable-presheaf-sheaf"
  ],
- "reviewed": "2026-10-10 L: 4 steps (h_{U_E} a sheaf, sections as clopen decompositions by the new set version of 03YW, the universal property of the sheafification checked directly, the isomorphism); 1 tool use accepted; 1 new node"
+ "reviewed": "2026-10-10 L: 4 steps (h_{U_E} a sheaf, sections as clopen decompositions by the new set version of 03YW, the universal property of the sheafification checked directly, the isomorphism); 1 tool use accepted; 1 new node",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ConstantSheafSetsRepresentable",
+  "declaration": "AlgebraicGeometry.Scheme.constantSheaf_sets_representable",
+  "file": "lean/Sheaf/AlgebraicGeometry/ConstantSheafSetsRepresentable.lean",
+  "statement": "theorem constantSheaf_sets_representable (U : Scheme.{u}) (E : Type u) : ∃ (hH : Presheaf.IsSheaf (smallEtaleTopology U) (constantSetCoproductPresheaf U E)) (c : (Functor.const U.Etaleᵒᵖ).obj (ULift.{u + 1, u} E) ⟶ constantSetCoproductPresheaf U E), (∀ (W : U.Etale) (e : E), ((c.app (Opposite.op W)) ⟨e⟩).down.left = W.hom ≫ Sigma.ι (fun _ : E => U) e) ∧ ∃ φ : (constantSheaf (smallEtaleTopology U) (Type (max u (u + 1)))).obj (ULift.{u + 1, u} E) ⟶ ⟨constantSetCoproductPresheaf U E, hH⟩, (toSheafify (smallEtaleTopology U) ((Functor.const U.Etaleᵒᵖ).obj (ULift.{u + 1, u} E))) ≫ φ.hom = c ∧ IsIso φ ∧ ∀ ψ : (constantSheaf (smallEtaleTopology U) (Type (max u (u + 1)))).obj (ULift.{u + 1, u} E) ⟶ ⟨constantSetCoproductPresheaf U E, hH⟩, (toSheafify (smallEtaleTopology U) ((Functor.const U.Etaleᵒᵖ).obj (ULift.{u + 1, u} E))) ≫ ψ.hom = c → ψ = φ",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": false,
+  "declarations": [
+   "AlgebraicGeometry.Scheme.constantSetCoproductPresheaf",
+   "AlgebraicGeometry.Scheme.constantSheaf_sets_representable"
+  ]
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-csr0715",
+  "group": "H1",
+  "result": "pass",
+  "note": "U scheme, E : Type u (empty allowed), U_E = ∐ copies via Mathlib Sigma, codiagonal Sigma.desc 𝟙 as Over.mk, h_{U_E} = yoneda on Over U along Etale.forget (ulift), smallEtaleTopology, constantSheaf/toSheafify = eta, hH IsSheaf, c spec iota_e∘s, unique φ with c = φ∘eta, IsIso φ; imports needed (LeftExact gives HasSheafify Type)"
+ }
 }
