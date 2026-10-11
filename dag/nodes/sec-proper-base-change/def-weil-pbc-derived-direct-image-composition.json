@@ -112,5 +112,27 @@
   "by": "L",
   "result": "pass",
   "note": "direction of the identity clause corrected (conjugation reverses direction); 1 new Mathlib leaf (composite adjunction); the Lean rightDerivedFunctorPlusCompIso with derivedPlus_comp_unit shows the Lean composition isomorphism is the conjugate, kept as a note for a future agreement node"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.DerivedDirectImageComposition",
+  "declarations": [
+   "AlgebraicGeometry.Etale.derivedDirectImageComposition",
+   "AlgebraicGeometry.Etale.derivedDirectImageIdentity"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/DerivedDirectImageComposition.lean",
+  "statement": "def derivedDirectImageComposition {X Y Z : Scheme.{u}} (u₀ : Y ⟶ X) (v₀ : Z ⟶ Y) : rightDerivedLowerStarPlus AddCommGrpCat.{u + 1} (v₀ ≫ u₀) ≅ rightDerivedLowerStarPlus AddCommGrpCat.{u + 1} v₀ ⋙ rightDerivedLowerStarPlus AddCommGrpCat.{u + 1} u₀",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": false,
+  "declaration": "AlgebraicGeometry.Etale.derivedDirectImageComposition"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-ddc1018",
+  "group": "H1",
+  "result": "pass",
+  "note": "schemes u:Y->X, v:Z->Y arbitrary; Ru_* etc = recorded rightDerivedLowerStarPlus AddCommGrpCat; adjunctions = upperStarLowerStarAdjunction.derivedPlus, composite = Adjunction.comp (Ru_*Rv_* = Rv⋙Ru), identity = Adjunction.id; cD = upperStarCompDerivedPlus(v,u).symm, eD = upperStarIdDerivedPlus; d = conjugateIsoEquiv adj_uv (adj_u.comp adj_v) cD (L2≅L1 -> R1≅R2, direction R(uv)->RuRv), dX = (conjugateIsoEquiv id adj_id eD).symm = conjugate of eD^-1; no upstream D+ conjugate (upstream rightDerivedLowerStarComp is unbounded D; D+ comp is generic rightDerivedFunctorPlusCompIso'), no second derived functor"
  }
 }
