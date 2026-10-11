@@ -155,5 +155,23 @@
   "group": "C1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-rkt3147 (reviewer sub-agent of L); spot-checked: Hypothesis (L ample on f^{-1}(V) for every affine V, Tag 01VG form) is exactly what Step 1 feeds to lem-weil-pbc-coherent-serre-vanishing (affine Noetherian base, proper, coherent, ample; C4 ok; that node's proof_deps do not include this item, no cycle). Step 2: cohomology-sections-affine-base (qc+separated from proper), finite-support-hi (1) quasi-coherence, tilde counit (3): C1 ok. Step 3 restrict-derived-direct-image-open for R^p f_*|_V. Step 4 finite affine cover from Noetherian, n0 = max (E ok). No new nodes; grep kill-by-twisting/02O1 finds only the affine specialization, not a duplicate. tool_uses accepted. No repairs."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RelativeSerreVanishing",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_isZero_higherDirectImage_tensorPow_of_relatively_ample",
+  "file": "lean/Sheaf/AlgebraicGeometry/RelativeSerreVanishing.lean",
+  "statement": "theorem exists_isZero_higherDirectImage_tensorPow_of_relatively_ample {X S : Scheme.{u}} [IsNoetherian S] (f : X ⟶ S) [IsProper f] (F : X.Modules) [F.IsQuasicoherent] (hF : RingedSpace.IsCoherent X.toRingedSpace F) (L : X.Modules) [L.IsInvertible] (hL : ∀ V : S.Opens, IsAffineOpen V → ∃ h : (L.restrict (f ⁻¹ᵁ V).ι).IsInvertible, @IsAmple (f ⁻¹ᵁ V).toScheme (L.restrict (f ⁻¹ᵁ V).ι) h) : letI : EnoughInjectives X.Modules := (RingedSpace.moduleSheaves_abelian_enoughInjectives X.toRingedSpace).2 ∃ n₀ : ℕ, ∀ n : ℕ, n₀ ≤ n → ∀ p : ℕ, 0 < p → IsZero ((higherDirectImage f p).obj (F ⊗ L.tensorPow n))",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-rkt1202",
+  "group": "M1",
+  "result": "pass",
+  "note": "IsNoetherian S (NOETHERIAN SCHEME); IsProper f; F IsQuasicoherent + RingedSpace.IsCoherent; L IsInvertible; hL over every affine V: Scheme.Modules.IsAmple on L.restrict (f⁻¹ᵁV).ι (no restrict-invertible instance exists, so ∃h needed; #check pp.fullNames confirms Modules.IsAmple not AlgebraicGeometry.IsAmple); ∃n₀:ℕ ∀n≥n₀ ∀p>0 IsZero (higherDirectImage f p).obj (F ⊗ L.tensorPow n) with source monoidal instance; letI is a Prop EnoughInjectives, elaborated away; one universe"
  }
 }

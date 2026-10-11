@@ -4555,3 +4555,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 12:03 L: merged deliver/C1/lem-weil-pbc-nonvanishing-section-trivializes (stage 2; reviewer FIX; first push; Sheaf.Paper.NonvanishingSectionTrivializes AlgebraicGeometry.Scheme.Modules.nonvanishing_section_trivializes)
 - 12:04 L: merged deliver/M1/lem-weil-pbc-n2-ascends-finite-domain-extension (stage 2; reviewer FIX; first push; Sheaf.RingTheory.N2AscendsFiniteDomainExtension isN2_of_finite_domain_extension)
 - 12:04 L: merged deliver/E1/def-pc-derived-category (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.DerivedCategory AlgebraicGeometry.schemeDerivedCategory)
+- 12:04 L: merged deliver/M1/lem-pc-relative-kill-by-twisting (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.RelativeSerreVanishing AlgebraicGeometry.Scheme.Modules.exists_isZero_higherDirectImage_tensorPow_of_relatively_ample)
