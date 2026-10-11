@@ -39,8 +39,12 @@ Usage (from the project root; by the lead, or by a reviewer sub-agent of the lea
                         lean.declarations filtered to the names it declares; refused if lean.declaration is not in it,
                         unless the record file renames it), <item>.lean-record.json (keys merged over the item's `lean`,
                         theirs winning; `by`, `date` stay), <new node id>.json (replaces that new node file whole),
-                        <item>.report.md (replaces the report). A changed record gets `fixed_by: <ID>`; the whole
-                        delivery is checked again on the fixed versions.
+                        <item>.report.md (replaces the report), <item>.statement-change.json (replaces the item's
+                        statement_change). A changed record gets `fixed_by: <ID>`; the whole delivery is checked
+                        again on the fixed versions. A CORRECTED item (coord/STATE.md, STAGE 2 STATEMENT CORRECTION;
+                        node_fields.check_statement_change) gets statement, stmt_deps, proof, proof_deps and
+                        statement_change from the branch (refused if they moved on sheaf-dag since the base), and
+                        `reviewed_lean.statement_corrected: true`.
   tools/merge_delivery.py return <group> <item> REASONS write the reasons into coord/returns/<group>.md, the ledger
                                                         line, and commit; the claim and the branch stay with the group
 
@@ -80,7 +84,7 @@ import time
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 import leanindex as li  # noqa: E402
-from node_fields import SPLIT_OWNS, SPLIT_OWNS_BLUEPRINT  # noqa: E402
+from node_fields import SPLIT_OWNS, SPLIT_OWNS_BLUEPRINT, STAGE2_ITEM_CORRECTION  # noqa: E402
 
 ROOT = li.ROOT
 MAIN = "sheaf-dag"
@@ -654,13 +658,21 @@ def cmd_merge2(o):
             for m in D["modules"]:
                 bybase.setdefault(pathlib.PurePosixPath(m["file"]).name, []).append(m)
             rec_name, rep_name = f"{item}.lean-record.json", f"{item}.report.md"
-            texts, override, nodefix, overrides = {}, None, {}, {}
+            sc_name = f"{item}.statement-change.json"
+            texts, override, nodefix, overrides, scfix = {}, None, {}, {}, None
             for p in sorted(x for x in fixdir.rglob("*") if x.is_file()):
                 r = p.relative_to(fixdir).as_posix()
                 if r in bybase:
                     if len(bybase[r]) > 1:
                         raise Fail(f"--apply-fixes: {r}: several modules of the delivery have this basename")
                     texts[bybase[r][0]["file"]] = p.read_text()
+                elif r == sc_name:
+                    try:
+                        scfix = json.loads(p.read_text())
+                    except ValueError as e:
+                        raise Fail(f"--apply-fixes: {r}: not valid JSON ({e})")
+                    if not isinstance(scfix, dict):
+                        raise Fail(f"--apply-fixes: {r}: not a JSON object")
                 elif r == rec_name or (r.endswith(".json") and r[:-5] in D["new"]):
                     try:
                         x = json.loads(p.read_text())
@@ -676,7 +688,7 @@ def cmd_merge2(o):
                     overrides[D["report_path"]] = p.read_text()
                 else:
                     raise Fail(f"--apply-fixes: {r}: a stage-2 fix is only DIR/<basename of a module>.lean "
-                               f"({', '.join(sorted(bybase)) or 'no module'}), DIR/{rec_name}, DIR/<new node id>.json "
+                               f"({', '.join(sorted(bybase)) or 'no module'}), DIR/{rec_name}, DIR/{sc_name}, DIR/<new node id>.json "
                                f"({', '.join(D['new']) or 'no new node'}) or DIR/{rep_name}")
                 nfix += 1
             # the node files with their refitted records
@@ -687,6 +699,10 @@ def cmd_merge2(o):
                 nodes[nid] = (x["path"], json.loads(json.dumps(x["node"])))
             for nid in nodefix:
                 overrides[nodes[nid][0]] = dump(nodes[nid][1])
+            if scfix is not None:
+                # the reviewer's statement_change replaces the delivered one (checked again by read_delivery)
+                nodes[item][1]["statement_change"] = scfix
+                overrides[nodes[item][0]] = dump(nodes[item][1])
             for nid, (path, nd) in nodes.items():
                 rec = nd.get("lean")
                 if not isinstance(rec, dict):
@@ -719,6 +735,12 @@ def cmd_merge2(o):
         for nid, x in new.items():
             if node_path(nid) is not None or exists_at("HEAD", x["path"]):
                 raise Fail(f"the new node {nid} exists on {MAIN} now (another delivery created it): return the delivery")
+        if D.get("corrected"):
+            curi = json.loads((ROOT / node_rel).read_text())
+            moved = [k for k in STAGE2_ITEM_CORRECTION if curi.get(k) != D["base_node"].get(k)]
+            if moved:
+                raise Fail(f"the item is corrected by the delivery but its {', '.join(moved)} changed on {MAIN} since the "
+                           "delivery's base: the reviewer decides and the group re-pushes")
         for nid, x in deps.items():
             if node_path(nid) != x["path"]:
                 raise Fail(f"the dependency node {nid} is not {x['path']} on {MAIN}")
@@ -764,13 +786,24 @@ def cmd_merge2(o):
             # the new nodes written whole with `reviewed` and `reviewed_lean`; the item's stmt_deps gain the new nodes
             cur = json.loads((ROOT / node_rel).read_text())
             cur["lean"] = records[item]
-            cur["reviewed_lean"] = reviewed
-            if D.get("added_deps"):
+            cur["reviewed_lean"] = dict(reviewed, statement_corrected=True) if D.get("corrected") else reviewed
+            if D.get("corrected"):
+                # STAGE 2 STATEMENT CORRECTION: the corrected fields from the delivered node (checked against the base
+                # by node_fields.check_statement_change; unchanged on MAIN since the base, checked above)
+                for k in STAGE2_ITEM_CORRECTION:
+                    if k in D["node"]:
+                        cur[k] = D["node"][k]
+                    else:
+                        cur.pop(k, None)
+                say(f"set {node_rel}: the corrected statement, stmt_deps, proof, proof_deps and statement_change "
+                    f"({len(D.get('citers') or [])} citer(s), "
+                    f"{sum(1 for c in D.get('citer_marks') or [] if c.get('holds') is False)} marked holds:false)")
+            elif D.get("added_deps"):
                 sd = list(cur.get("stmt_deps") or [])
                 cur["stmt_deps"] = sd + [x for x in D["added_deps"] if x not in sd]
                 say(f"set {node_rel}: stmt_deps = {cur['stmt_deps']} (added {D['added_deps']})")
             docs[item] = cur
-            say(f"set {node_rel}: reviewed_lean = {json.dumps(reviewed, ensure_ascii=False)}")
+            say(f"set {node_rel}: reviewed_lean = {json.dumps(cur['reviewed_lean'], ensure_ascii=False)}")
             put(item)
             for nid, x in new.items():
                 nd = dict(x["node"])
@@ -829,12 +862,14 @@ def cmd_merge2(o):
             returned = rtext is not None and len(keep) != len(parts)
             claim = ROOT / "coord" / "claims" / (item.replace("/", "__") + ".lock")
             rec = records[item]
-            extra = (f"; new nodes: {', '.join(new)}" if new else "") + (f"; dependency modules: {', '.join(deps)}" if deps else "")
+            extra = (f"; new nodes: {', '.join(new)}" if new else "") + (f"; dependency modules: {', '.join(deps)}" if deps else "") \
+                + (f"; statement corrected ({len(D.get('citers') or [])} citers)" if D.get("corrected") else "")
             ltext = (f"merged {br} (stage 2; reviewer {verdict}; {'after a return' if returned else 'first push'}; "
                      f"{rec.get('module')} {rec.get('declaration')}{'; existing declaration' if rec.get('existing') else ''}{extra})")
             author = git("show", "-s", "--format=%an <%ae>", D["commits"][-1]) if D["commits"] else "L"
             paths = list(paths_nodes.values()) + [report_rel, "coord/ledger.md", "coord/deliveries.log"] + [m["file"] for m in mods]
-            msg = (f"State {item} ({group}, reviewed by {rid})" + (f"; new nodes: {', '.join(new)}" if new else "")
+            msg = (f"State {item} ({group}, reviewed by {rid})" + ("; statement corrected" if D.get("corrected") else "")
+                   + (f"; new nodes: {', '.join(new)}" if new else "")
                    + f"\n\nDelivered by group {group} ({br}, {git('rev-parse', '--short', br)}); "
                    f"reviewer {rid}: {verdict}; merged by tools/merge_delivery.py --stage 2 for L."
                    + (("\nDependency modules: " + ", ".join(f"{k} ({records[k].get('module')})" for k in deps) + ".") if deps else ""))
