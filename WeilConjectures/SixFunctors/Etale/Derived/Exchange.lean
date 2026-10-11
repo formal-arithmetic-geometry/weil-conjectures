@@ -17,6 +17,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.Triangulated.Functor
 public import WeilConjectures.SixFunctors.Etale.Derived.Invertible
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerStarProjectionShift
 public import WeilConjectures.SixFunctors.Etale.Derived.TensorRightUnitor
+public import WeilConjectures.SixFunctors.Etale.Derived.OpenImmersionLowerShriekTensorRight
 
 /-!
 # Compact-support base change, the projection formula and finite reduction
@@ -222,6 +223,21 @@ theorem nonempty_iso_reductionModIdeal_rightDerivedLowerShriek (J : Ideal Λ) :
       reductionModIdeal Λ X J ⋙ R(f)_![ModuleCat.{u + 1} Λ]) :=
   sorry
 
+/-- **`Rf_!` commutes with reduction for a finite coefficient ring.** This is the case of
+`AlgebraicGeometry.Etale.nonempty_iso_reductionModIdeal_rightDerivedLowerShriek` where `Λ` is
+finite: the projection map `Rf_!K ⊗ᴸ (Λ/J)_Y ⟶ Rf_!(K ⊗ᴸ Lf^*(Λ/J)_Y)` is an isomorphism by
+`AlgebraicGeometry.Etale.hasProjectionFormula_of_finite`, and `Lf^*(Λ/J)_Y ≅ (Λ/J)_X`. -/
+theorem nonempty_iso_reductionModIdeal_rightDerivedLowerShriek_of_finite [Finite Λ]
+    (J : Ideal Λ) :
+    Nonempty (R(f)_![ModuleCat.{u + 1} Λ] ⋙ reductionModIdeal Λ Y J ≅
+      reductionModIdeal Λ X J ⋙ R(f)_![ModuleCat.{u + 1} Λ]) := by
+  obtain ⟨e⟩ := nonempty_iso_rightDerivedLowerShriek_comp_derivedTensorRight _ f
+    ((_root_.DerivedCategory.singleFunctor _ 0).obj
+      ((constantSheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj (ModuleCat.of Λ (Λ ⧸ J))))
+    (fun K ↦ hasProjectionFormula_of_finite Λ f K _)
+  exact ⟨e ≪≫ Functor.isoWhiskerRight ((-⊗ᴸ-(X)[ModuleCat.{u + 1} Λ]).flip.mapIso
+    (leftDerivedUpperStarSingleConstantSheafIso Λ f _)) _⟩
+
 omit [HasCompactification f] in
 /-- Blueprint `sk-prop-sf-pf-reduction`: Projection formula: compatibility with finite
 reduction
@@ -363,6 +379,27 @@ theorem nonempty_iso_reductionModIdeal_rightDerivedLowerStar (f : X ⟶ Y) [IsDo
   exact ⟨rightDerivedLowerStarProjectionIsoQuot f hπ' ≪≫
     Functor.isoWhiskerRight ((-⊗ᴸ-(X)[ModuleCat.{u + 1} Λ]).flip.mapIso
       (leftDerivedUpperStarSingleConstantSheafIso Λ f _)) _⟩
+
+/-- **`Rf_!` commutes with reduction modulo a principal ideal of a domain.** This is the case of
+`AlgebraicGeometry.Etale.nonempty_iso_reductionModIdeal_rightDerivedLowerShriek` where `Λ/J` is a
+perfect `Λ`-module. For a compactification `f = g ∘ j`, the extension by zero `j_!` commutes with
+tensoring by any constant complex (the projection formula for an open immersion), and `Rg_*`
+commutes with the reduction by
+`AlgebraicGeometry.Etale.nonempty_iso_reductionModIdeal_rightDerivedLowerStar`. -/
+theorem nonempty_iso_reductionModIdeal_rightDerivedLowerShriek_of_isPrincipal (f : X ⟶ Y)
+    [HasCompactification f] [IsDomain Λ] (J : Ideal Λ) (hJ : J.IsPrincipal) :
+    Nonempty (R(f)_![ModuleCat.{u + 1} Λ] ⋙ reductionModIdeal Λ Y J ≅
+      reductionModIdeal Λ X J ⋙ R(f)_![ModuleCat.{u + 1} Λ]) := by
+  let c := HasCompactification.compactification f
+  obtain ⟨e⟩ := nonempty_iso_reductionModIdeal_rightDerivedLowerStar Λ c.g J hJ
+  let eo : reductionModIdeal Λ X J ⋙ D((c.i)_!open[ModuleCat.{u + 1} Λ]) ≅
+      D((c.i)_!open[ModuleCat.{u + 1} Λ]) ⋙ reductionModIdeal Λ c.Z J :=
+    Functor.isoWhiskerRight ((-⊗ᴸ-(X)[ModuleCat.{u + 1} Λ]).flip.mapIso
+        (leftDerivedUpperStarSingleConstantSheafIso Λ c.i (ModuleCat.of Λ (Λ ⧸ J)))).symm _ ≪≫
+      derivedTensorRightCompOpenImmersionLowerShriekIso _ c.i _
+  exact ⟨Functor.associator _ _ _ ≪≫ Functor.isoWhiskerLeft _ e ≪≫
+    (Functor.associator _ _ _).symm ≪≫ Functor.isoWhiskerRight eo.symm _ ≪≫
+    Functor.associator _ _ _⟩
 
 end LowerStar
 
