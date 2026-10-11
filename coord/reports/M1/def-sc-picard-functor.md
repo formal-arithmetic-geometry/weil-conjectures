@@ -1,31 +1,96 @@
-# def-sc-picard-functor
+## Worker report
 
-## Files written
+The module defines `AlgebraicGeometry.curvePicardFunctor`, the fppf sheafification
+of the Picard presheaf for a smooth projective geometrically integral curve, by
+using `AlgebraicGeometry.picardFunctor`. It also defines
+`AlgebraicGeometry.curvePicardFunctorDegree`, the fppf sheafification of the
+fibrewise degree-`d` subfunctor, using `AlgebraicGeometry.picardFunctorDegree`.
 
-- `dag/nodes/sec-abelian-varieties/def-sc-picard-functor.json`: repaired definition split; no new nodes and no Mathlib leaves. The curve hypothesis now explicitly says smooth projective and geometrically integral, with the corresponding existing definition nodes cited. Pic^d is defined as `deg^{-1}(d)`, namely the classes whose degree function is identically d.
+The field hypothesis is rendered by `[Field k]`. The curve hypothesis is the
+explicit structure morphism `f : C ⟶ Spec (.of k)` with
+`[f.IsSmoothProjectiveCurve]`, which supplies smoothness, projectivity, and the
+curve conditions. Geometric integrality is rendered by `[GeometricallyIntegral f]`.
+The Picard functor clause is exactly `picardFunctor f`, whose definition is the
+fppf sheafification of `picardPresheaf f`. The degree clause is exactly
+`picardFunctorDegree f d`, whose defining subfunctor requires fibrewise degree
+identically `d` on every field-valued point. No representability, openness, or
+closedness claim is introduced.
 
-## Attachments
+Dependencies used: `WeilConjectures.AlgebraicGeometry.Picard.Defs`, through the
+recorded declaration `AlgebraicGeometry.picardFunctor`; and
+`WeilConjectures.AlgebraicGeometry.Picard.Jacobian`, through
+`AlgebraicGeometry.picardFunctorDegree`. The smooth-projective curve class is
+`Sheaf.AlgebraicGeometry.SmoothProjectiveCurve`, declaration
+`AlgebraicGeometry.Scheme.Hom.IsSmoothProjectiveCurve`. Geometric integrality is
+Mathlib's `AlgebraicGeometry.GeometricallyIntegral`.
 
-None. The source declarations checked below are related constructions but do not state this item exactly.
+Edge cases checked: `d = 0` gives the degree-zero sheaf; an empty test scheme
+makes the fibrewise condition vacuous, as in `picardSubfunctorDegree`; arbitrary
+field extensions are covered by the field-valued-point quantifier in the
+upstream degree subfunctor. Universe `u` is shared by `k`, `C`, and the site.
 
-## WANTED
+Searches: `rg -n 'Picard|picardFunctor'` in `WeilConjectures` and `lean/Sheaf`,
+which found the generic `picardFunctor` and `picardFunctorDegree`; inspection of
+their declarations showed that they provide the general constructions but not
+this specialized curve statement. `msearch.py leanfinder`/`loogle` searches for
+smooth-projective Picard functors found no declaration matching the specialized
+notion. Mathlib grep found no specialized curve Picard functor.
 
-None.
+## Earlier second reading (a previous round; superseded)
 
-## What was checked
+Reading the node and module together: the field, smooth-projective, and
+geometrically-integral hypotheses are all present as explicit binders. The
+Picard functor is the recorded fppf sheafification, and `Pic^d` is defined by
+the recorded degree subfunctor sheafification. The module makes no
+representability or geometric-subfunctor claim, so every clause of the node is
+accounted for.
 
-The current node has `lean_audit.slopmaster2.state = none`. I searched the read-only source with `grep -rn` for `def-sc-picard-functor`, `Picard functor`, `Pic^d`, `picardFunctor`, and the exact blueprint marker `(blueprint: def-sc-picard-functor)` under `/home/ubuntu/weil-src-slopmaster2/WeilConjectures`. There is no declaration carrying the item marker. `AlgebraicGeometry.picardFunctor` in `WeilConjectures/AlgebraicGeometry/Picard/Defs.lean:180-182` is the fppf sheafification of the generic relative Picard presheaf for an arbitrary morphism `f : X ⟶ S`; it does not impose the item's proper smooth connected curve hypotheses, use the k-algebra presentation, or define the degree-d subfunctors. `AlgebraicGeometry.picardFunctorDegree` in `WeilConjectures/AlgebraicGeometry/Picard/Jacobian.lean:222-231` sheafifies a field-valued degree subfunctor for `f : X ⟶ Spec k`, but has no smooth/proper/connected assumptions in its declaration and is marked `sk-prop-picard-degree-decomposition`, not this definition. Its support `picardFibreDegree` is at lines 180-196. The source's `picardPresheaf` (`PicardFunctor.lean:331-344`), `picardPresheafDegree` (`Picard/Degree.lean:76-87`), and `picardDegree` (`Picard/Degree.lean:161-170`) were also read; none states the item as a whole. The source sorry map therefore supplies no exact declaration to attach.
+## Second reading by M1
 
-Before editing, I searched the DAG and the full blueprint. Existing nodes `def-pc-smooth-projective-curve`, `def-pc-geometrically-irreducible`, `def-pc-picard-functor`, `def-pc-picard-presheaf`, `def-pc-fppf-site`, `def-pc-subfunctor`, `def-pd-fibrewise-degree`, and `def-pd-degree-morphism` already state the component notions, so no duplicate node was created. Blueprint search found the generic `def-pc-picard-functor` as the only same-as reference retained; the degree-decomposition proposition was removed because it contains later representability and translation conclusions rather than the definition itself.
+I reread the node statement (source place: blueprint node `def-sc-picard-functor`,
+order 447) as the following list.  It introduces a field `k`; a smooth projective
+curve `C` over `k`; geometric integrality of `C` over `k`; the Picard functor
+`Pic_{C/k}`; its fppf sheafification construction from the presheaf
+`R ↦ Pic(C ×_k Spec R)`; the fibrewise degree on residue-field fibres; and, for
+each integer `d`, the degree subfunctor `Pic^d_{C/k}`.  It concludes only these
+definitions and explicitly makes no representability, openness, or closedness
+claim.
 
-## Review by M1
+The field is rendered by `[Field k]` in `PicardFunctor.lean`.  The curve and its
+smooth/projective/curve hypotheses are rendered by the explicit morphism
+`f : C ⟶ Spec (.of k)` and `[f.IsSmoothProjectiveCurve]`; this class extends
+`IsCurveOverField`, `Smooth`, and `IsProjective` in
+`Sheaf.AlgebraicGeometry.SmoothProjectiveCurve`.  Geometric integrality is the
+Mathlib class `[GeometricallyIntegral f]`.  The Picard functor clause is rendered
+by `curvePicardFunctor f := picardFunctor f`; the dependency declaration is the
+fppf sheafification of `picardPresheaf f`.  The degree clause is rendered by
+`curvePicardFunctorDegree f d := picardFunctorDegree f d`; the dependency's
+`picardSubfunctorDegree` quantifies over every field-valued point and requires
+the fibre degree to equal `d`.  Thus every object, hypothesis, and conclusion
+clause is present with the same quantifier scope.  The Lean declarations are
+definitions with concrete data and contain no `sorry`.
 
-I read the imported master definition (source place `sec-abelian-varieties/sk-def-av-jacobian/def-sc-picard-functor.md`, node order 447) and checked each clause against its dependencies. The repaired first sentence now introduces a field k, a smooth projective curve, and geometric integrality through `def-pc-smooth-projective-curve` and `def-pc-geometrically-irreducible`; this is the E7 correction to the earlier vague “proper smooth connected curve” wording. The sheafification clause uses `def-pc-picard-presheaf`, `def-pc-fppf-site`, and `def-pc-picard-functor`; Picard values and invertible modules use `def-sc-picard-group` and `def-sc-invertible-module`. The second clause explicitly refers to residue-field fibres through `def-pd-fibrewise-degree`, the degree morphism through `def-pd-degree-morphism`, and the inverse-image subfunctor through `def-pc-subfunctor`; it defines Pic^d as `deg^{-1}(d)` and says its classes have identically d degree on every base. These are definitions, so no proof steps are required and no elementary claim is hidden in a proof.
+Edge cases checked: `d = 0` gives the degree-zero sheaf; on an empty test scheme
+the fibrewise condition is vacuous, as in `picardSubfunctorDegree`; arbitrary
+field extensions are included by its field-valued-point quantifier; the shared
+universe `u` covers `k`, `C`, and the fppf site; no zero or characteristic
+hypothesis is added.
 
-I checked the existing component node statements, rather than relying on their names: `def-pc-smooth-projective-curve` introduces the smooth/projective curve over a field, `def-pc-geometrically-irreducible` defines geometric integrality via all field extensions, `def-pc-picard-functor` explicitly says fppf sheafification of the relative Picard presheaf, `def-pd-fibrewise-degree` defines the degree on residue-field fibres, and `def-pd-degree-morphism` defines the sheaf-valued degree. The broader `prop-pd-picard-degree-decomposition` was removed from `same_as` because it asserts representability, openness/closedness, subgroup, and translation conclusions not present here. No new node was needed, hence B1-B7 and C1-C7 introduce no new-node obligations. The definition does not assume representability or openness/closedness, and I preserved those limits.
+Searches were repeated with `rg` over `WeilConjectures`, `lean/Sheaf`, and Mathlib,
+and with `msearch.py` LeanFinder/Loogle queries for smooth-projective Picard
+functors.  Only the generic `picardFunctor` and `picardFunctorDegree` declarations
+were found; neither states this specialized curve definition, so the module is
+needed.  No mismatch was found and no source or node field was changed.  The
+module compiles cleanly with `scompile.py`.
 
-I checked the small cases required by E: `d = 0` gives the degree-zero inverse image; negative `d` is still an integer fibre-degree condition; an empty test base makes the pointwise condition vacuous; and disconnected bases are handled by the degree function on each residue-field fibre. No representability or openness/closedness is inferred. The source declarations mentioned above do not match these hypotheses, so I did not attach them under the Lean-closure rule. The sandbox contains only this repaired item node and this report; no source checkout was written and no build was run.
+## Reviewer fix (R-dpf1133, stage 2)
 
-## Repair of 9d9b9f3b
-
-I repaired every returned point. For E1/B3 and E7, the hypothesis now says “smooth projective curve over a field k which is geometrically integral,” citing `def-pc-smooth-projective-curve` and `def-pc-geometrically-irreducible`; the earlier vague proper/smooth/connected wording is gone. For C4/E4, Pic^d is now explicitly `deg^{-1}(d)` and its elements are classes whose degree function is identically d, with no claim that a global representative is already an invertible module. For C1/C4, the definition names residue-field fibres and cites `def-pd-fibrewise-degree` and `def-pd-degree-morphism`. For B9, `same_as` now retains only `def-pc-picard-functor`; `prop-pd-picard-degree-decomposition` was removed. The source audit and the review above were reread after these edits, and the exact source declarations remain non-attachments.
+The delivered module `Sheaf.AlgebraicGeometry.PicardFunctor` only restated source definitions:
+`curvePicardFunctor f := picardFunctor f` and `curvePicardFunctorDegree f d := picardFunctorDegree f d`,
+with `[f.IsSmoothProjectiveCurve] [GeometricallyIntegral f]` binders the bodies never use. A second
+name for an existing notion fails H4/H12, and every citer (`IsJacobian` of def-sc-jacobian,
+`exists_jacobian_pullback`, `exists_commGrpObj_representableBy_picardFunctorDegree`) already writes
+Pic^0_{C/k} as `picardFunctorDegree f 0`. The record is switched to `existing: true`:
+Pic_{C/k} = `AlgebraicGeometry.picardFunctor f` (Picard.Defs, also the record of def-pc-picard-functor),
+Pic^d_{C/k} = `AlgebraicGeometry.picardFunctorDegree f d` (Picard.Jacobian, the fppf sheafification of
+the fibrewise-degree-d subpresheaf `picardSubfunctorDegree`). The module is left out.

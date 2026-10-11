@@ -78,5 +78,28 @@
   "group": "M1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-scpic2 (reviewer sub-agent of L); spot-checked: Re-push after the return of 13:40 UTC; each returned point checked against the branch node and the cited statements. E1/B3: the hypothesis is now 'k a field, C a smooth projective curve over k [def-pc-smooth-projective-curve] geometrically integral [def-pc-geometrically-irreducible]'; read both statements (integral separated finite type dim 1, smooth and projective; geometrically integral = X_{k'} integral for all k'/k), and this is exactly the hypothesis of def-pd-fibrewise-degree and def-pd-degree-morphism, so the degree is defined for every C the node admits (P^1_C over R excluded). C4/E4: Pic^d := deg^{-1}(d), classes whose degree function is identically d, with deg the morphism Pic_{C/k} -> Z-underline of def-pd-degree-morphism (read: glued from fppf-local representatives via def-pd-fibrewise-degree), consistent with that node's Pic^0 := ker(deg) and with def-pc-subfunctor (inverse image of a subsheaf is a subfunctor); no claim that a class is a global invertible module. C1: the degree is on residue-field fibres C_{kappa(t)} as in def-pd-fibrewise-degree; the 'geometric fibre' wording is gone. B9: same_as = [def-pc-picard-functor] only (read: fppf sheafification of the Picard presheaf T -> Pic(X_T) of def-pc-picard-presheaf on (Sch/S)_fppf of def-pc-fppf-site, Pic_{X/k} for S = Spec k), prop-pd-picard-degree-decomposition removed. E7: the report's 'Repair of 9d9b9f3b' section names the changed hypothesis and the new Pic^d definition with reasons. Agreement with the master blueprint def-sc-picard-functor.md (order 447) apart from those named corrections; the k-algebra presentation is the restriction to affine T of the sheaf on (Sch/k)_fppf. Shape: two files (node, report), one commit, review section present; changed fields only status, statement, stmt_deps, split_report, blueprint.same_as (all split-owned); node unchanged on sheaf-dag since the merge base. Definition, no proof steps; small cases d=0 (Pic^0 of def-pd-degree-morphism), empty T vacuous. Leftover stmt_deps def-sc-curves and def-sc-pic0 (from the import) are no longer cited in the text; harmless. 14:02-14:06 UTC."
+ },
+ "lean": {
+  "module": "WeilConjectures.AlgebraicGeometry.Picard.Jacobian",
+  "declaration": "AlgebraicGeometry.picardFunctorDegree",
+  "declarations": [
+   "AlgebraicGeometry.picardFunctorDegree",
+   "AlgebraicGeometry.picardFunctor"
+  ],
+  "statement": "def picardFunctorDegree (f : X ⟶ Spec (.of k)) (d : ℤ) : Sheaf (Scheme.fppfTopology.over (Spec (.of k))) (Type (u + 1))",
+  "branch": "slopmaster2",
+  "by": "M1",
+  "date": "2026-10-11",
+  "existing": true,
+  "note": "R-dpf1133 stage-2 FIX: Pic_{C/k} is the source's AlgebraicGeometry.picardFunctor f (WeilConjectures.AlgebraicGeometry.Picard.Defs, recorded at def-pc-picard-functor), Pic^d_{C/k} is AlgebraicGeometry.picardFunctorDegree f d (Picard.Jacobian; Pic^0 = picardFunctorDegree f 0 as in IsJacobian of def-sc-jacobian and exists_jacobian_pullback); the delivered wrappers curvePicardFunctor/curvePicardFunctorDegree (bodies := picardFunctor f / picardFunctorDegree f d, with unused instance binders) were private copies (H4/H12) and are left out. The smooth-projective/geometrically-integral hypotheses are supplied by citers as instances on f.",
+  "fixed_by": "R-dpf1133"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-dpf1133",
+  "group": "M1",
+  "result": "fix",
+  "note": "node: Pic_{C/k} = fppf sheafification of T -> Pic(C_T) and Pic^d = classes of fibrewise degree identically d; source picardFunctor f is exactly the former, picardFunctorDegree f d (sheafified field-point degree-d subpresheaf) the latter as used by IsJacobian/exists_jacobian_pullback for Pic^0; delivered curvePicardFunctor(Degree) were defeq wrappers with unused instance binders: switched to existing:true, module left out; left out new module(s) lean/Sheaf/AlgebraicGeometry/PicardFunctor.lean (--drop-files, or a record fixed to existing: true)"
  }
 }
