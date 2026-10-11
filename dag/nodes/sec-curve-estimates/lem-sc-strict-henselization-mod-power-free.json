@@ -21,7 +21,8 @@
  "stmt_deps": [
   "def-weil-pbc-noetherian-ring",
   "lem-weil-pbc-strict-henselization-triples",
-  "def-weil-pbc-adic-completion"
+  "def-weil-pbc-adic-completion",
+  "def-sc-ring-strict-henselization"
  ],
  "proof": [
   {
@@ -133,5 +134,25 @@
   "group": "J1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-shm0122 (reviewer sub-agent of L); spot-checked: Statement vs Stacks 07QM(4) and 06LJ(c): agrees; statement change (module completion made explicit, since def-weil-pbc-adic-completion is ring-level; ring-completion clause added) is named in the second reading (E7). Step 1 hypotheses vs faithfully-flat, triples (m_C = nA^sh, residue K) and 051F node (nilpotent max ideal, flat, residue basis): hold. Step 3 inverse-limit identification compatible in r; matches citer da814487e step 2 usage (C4). No duplicate (checked henselization nodes incl. henselization-flat-quotients, etale-triple-to-sh-completion-flat). Tool uses accepted (generic pbc ring lemmas). FIX more, RETURN less: (1) B4 step 1 plain-text arrows -> and >= rewritten in TeX; (2) step 1 made explicit (nA^sh)^r = n^rA^sh and flat base change (Tag 00HI) and the 051F instantiation R, M; (3) step 3 now proves the added statement clause that T is the ring completion of A^sh (definitional by def-weil-pbc-adic-completion with ideal nA^sh), which the second reading missed.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.StrictHenselizationModPowerFree",
+  "declaration": "Algebra.strictHenselization_mod_power_free",
+  "file": "lean/Sheaf/RingTheory/StrictHenselizationModPowerFree.lean",
+  "statement": "theorem strictHenselization_mod_power_free (A K C : Type u) [CommRing A] [IsLocalRing A] [IsNoetherianRing A] [Field K] [Algebra (IsLocalRing.ResidueField A) K] [IsSepClosure (IsLocalRing.ResidueField A) K] [Algebra A K] [IsScalarTower A (IsLocalRing.ResidueField A) K] [CommRing C] [Algebra A C] (hC : IsStrictHenselization A K C) : ∃ (X : Type u) (x : X → C) (e : ∀ (r : ℕ), 1 ≤ r → (X →₀ A ⧸ (IsLocalRing.maximalIdeal A) ^ r) ≃ₗ[A] C ⧸ ((IsLocalRing.maximalIdeal A).map (algebraMap A C)) ^ r), (∀ (r : ℕ) (hr : 1 ≤ r) (i : X), e r hr (Finsupp.single i 1) = Ideal.Quotient.mk (((IsLocalRing.maximalIdeal A).map (algebraMap A C)) ^ r) (x i)) ∧ ∃ E : AdicCompletion (IsLocalRing.maximalIdeal A) (X →₀ A) ≃ₗ[A] AdicCompletion ((IsLocalRing.maximalIdeal A).map (algebraMap A C)) C, ∀ (r : ℕ) (hr : 1 ≤ r) (z : AdicCompletion (IsLocalRing.maximalIdeal A) (X →₀ A)) (f : X →₀ A), AdicCompletion.eval (IsLocalRing.maximalIdeal A) (X →₀ A) r z = ((IsLocalRing.maximalIdeal A) ^ r • (⊤ : Submodule A (X →₀ A))).mkQ f → AdicCompletion.evalₐ ((IsLocalRing.maximalIdeal A).map (algebraMap A C)) r (E z) = e r hr (f.mapRange (Ideal.Quotient.mk ((IsLocalRing.maximalIdeal A) ^ r)) (map_zero (Ideal.Quotient.mk ((IsLocalRing.maximalIdeal A) ^ r))))",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-11",
+  "existing": false,
+  "note": "Uses the landed def-sc-ring-strict-henselization predicate for the local-ring specialization of the triples construction. Quotient freeness is represented by A-linear equivalences from finitely supported base-quotient coefficients; these are precisely base-quotient-linear, because the actions factor through A/n^r. The completed equivalence is fixed coordinatewise by these quotient isomorphisms.",
+  "fixed_by": "R-smp"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-smp",
+  "group": "C1",
+  "result": "fix",
+  "note": "Statement vs node: A noetherian local, K sep closure via IsScalarTower, C via landed Algebra.IsStrictHenselization A K C (same form as landed completion-flat-over-base); one X with fixed lifts, bases of C/(nC)^r over A/n^r as A-linear equivs from X->0 A/n^r pinned on singles; E tied coordinatewise; T = AdicCompletion (nC) C. Added stmt_dep used. Fix: removed unused 'open Classical in' before the statement."
  }
 }
