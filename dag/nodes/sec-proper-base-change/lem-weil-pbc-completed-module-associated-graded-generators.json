@@ -177,5 +177,25 @@
   "worker": "stage1",
   "summary": "Source 087Z (coherent.tex 6612-6630) says only 'clearly'; the argument is written out. Statement kept, except that B now cites def-weil-pbc-associated-graded-ring (same ring, explicit description kept). Proof in 5 steps: (1) objects and well-definedness of the action, elementary; (2) I finitely generated, Â/IÂ = A/I via lem-weil-pbc-adic-completion-mod-ideal (05GG), hence Â = ι(A)+IÂ and M/IM finite over A/I; (3) (JÂ)M equals the A-submodule J·M, and M = f(A^t)+I·M for f:(c_j) ↦ Σ c_j x_j, elementary; (4) new Mathlib leaf lem-weil-pbc-module-graded-lift-mod-ideal-power (AdicCompletion.exists_smodEq_pow_add_one_smul) gives a_j ∈ I^n with y − Σ a_j x_j ∈ I^{n+1}M, n = 0 included; (5) generation of G in degree zero, elementary. Item not a Mathlib leaf: Mathlib has no associated graded module, and the leaf covers only step 4. Citer lem-weil-pbc-formal-systems-kernel-rees-finite step 3 uses exactly the generation in degree zero: consistent."
  },
- "reviewed": "pass (L, 2026-10-10): 5 steps write out the \"clearly\" of 087Z: B is gr_I(A) (definition node), M/IM finite over A/I via 05GG, (J A-hat)M = J.M, the lifting congruence y - sum a_j x_j in I^{n+1}M from the new leaf, generation in degree zero."
+ "reviewed": "pass (L, 2026-10-10): 5 steps write out the \"clearly\" of 087Z: B is gr_I(A) (definition node), M/IM finite over A/I via 05GG, (J A-hat)M = J.M, the lifting congruence y - sum a_j x_j in I^{n+1}M from the new leaf, generation in degree zero.",
+ "lean": {
+  "module": "Sheaf.RingTheory.CompletedModuleAssociatedGradedGenerators",
+  "declaration": "AdicCompletion.completedModule_associatedGraded_generators",
+  "file": "lean/Sheaf/RingTheory/CompletedModuleAssociatedGradedGenerators.lean",
+  "statement": "theorem completedModule_associatedGraded_generators {A : Type u} [CommRing A] [IsNoetherianRing A] (I : Ideal A) (M : Type v) [AddCommGroup M] [Module (AdicCompletion I A) M] [Module.Finite (AdicCompletion I A) M] : letI : Module A M := Module.compHom M (algebraMap A (AdicCompletion I A)) Module.Finite (A ⧸ I) (M ⧸ (I • ⊤ : Submodule A M)) ∧ (∀ (t : ℕ) (xbar : Fin t → M ⧸ (I • ⊤ : Submodule A M)), Submodule.span (A ⧸ I) (Set.range xbar) = ⊤ → ∀ (x : Fin t → M), (∀ j, Submodule.Quotient.mk (x j) = xbar j) → ∀ (n : ℕ) (y : M), y ∈ (I ^ n • (⊤ : Submodule A M)) → ∃ (b : Fin t → Ideal.associatedGradedPiece I n) (a : Fin t → (I ^ n : Ideal A)), (∀ j, b j = Submodule.Quotient.mk (a j)) ∧ y - ∑ j, (a j : A) • x j ∈ (I ^ (n + 1) • (⊤ : Submodule A M)))",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-11",
+  "existing": false,
+  "note": "The explicit representative formulation of both conclusions. Finite generation over A/I is expressed by finitely many lifts spanning modulo IM; homogeneous coefficients b_j in the recorded associated graded pieces are supplied together with representatives a_j in I^n. The degreewise congruence is equivalent to generation of the finite-support direct sum over gr_I(A).",
+  "fixed_by": "R-cmg1517"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-cmg1517",
+  "group": "M1",
+  "result": "fix",
+  "note": "CommRing+IsNoetherianRing A; I; M finite over AdicCompletion I A with A-action by compHom (I^n•⊤ = (IÂ)^nM, n=0 = M); M/IM finite over A/I now Module.Finite (A⧸I) (M⧸I•⊤); every spanning xbar over A⧸I (Submodule.span) and every lift x; ∀ n, y ∈ I^nM ∃ a_j ∈ I^n, y-Σa_jx_j ∈ I^(n+1)M; b_j classes in associatedGradedPiece; no assoc-graded module in Mathlib/landed"
+ }
 }
