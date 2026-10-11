@@ -167,5 +167,23 @@
   "by": "L",
   "result": "accepted",
   "note": "4 steps follow Stacks 01B6: reduction to U = f^{-1}V via the open-immersion pullback leaves, pullback of the surjection is an epimorphism (new leaf: pullback is a left adjoint), f^* O_V^n = O_U^n (new leaf (2) + structure-sheaf leaf), epimorphism = surjective via the exactness node. Tags 01B6, 01AJ, 01B3, 0097 verified; Mathlib lines verified."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ModulePullbackFiniteType",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.tensorPullback_isFiniteType",
+  "statement": "theorem tensorPullback_isFiniteType (X Y : Scheme.{u}) (f : X ⟶ Y) (G : Y.Modules) [G.IsFiniteType] : ((tensorPullback f).obj G).IsFiniteType ∧ ∀ (V : Y.Opens) (n : ℕ) (φ : SheafOfModules.free (R := Y.ringCatSheaf.over V) (ULift.{u} (Fin n)) ⟶ G.over V), Epi φ → ∃ ψ : SheafOfModules.free (R := X.ringCatSheaf.over ((TopologicalSpace.Opens.map f.base).obj V)) (ULift.{u} (Fin n)) ⟶ ((tensorPullback f).obj G).over ((TopologicalSpace.Opens.map f.base).obj V), Epi ψ",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-11",
+  "existing": false,
+  "file": "lean/Sheaf/AlgebraicGeometry/ModulePullbackFiniteType.lean"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-pft1247",
+  "group": "C1",
+  "result": "pass",
+  "note": "X Y : Scheme.{u}, f : X ⟶ Y, G : Y.Modules with [G.IsFiniteType] (Mathlib, as Coherent.lean); conclusion IsFiniteType of (tensorPullback f).obj G; parenthetical U=f⁻¹V same n as second conjunct (Epi from free ULift (Fin n) on V gives Epi on (Opens.map f.base).obj V), true; #check resolves tensorPullback to the recorded declaration; node statement unchanged; no let, no hollow binder"
  }
 }
