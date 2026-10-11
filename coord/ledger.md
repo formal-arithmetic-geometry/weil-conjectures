@@ -4068,3 +4068,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 09:41 L: merged deliver/J1/lem-weil-pbc-derivation-extends-finite-type-extension (stage 2; reviewer FIX; first push; Sheaf.Paper.DerivationExtendsFiniteType RingTheory.derivation_extends_finite_type_extension)
 - 09:41 L: merged deliver/J1/lem-weil-pbc-depth-in-ses (stage 2; reviewer FIX; first push; Sheaf.RingTheory.DepthInSES IsLocalRing.depth_in_short_exact)
 - 09:41 L: merged deliver/K1/lem-weil-pbc-dim-one-residue-field-extensions-finite (stage 2; reviewer PASS; first push; Sheaf.RingTheory.DimOneResidueFieldsFinite Ideal.dim_one_residue_fields_finite)
+- 09:42 L: merged deliver/C1/lem-weil-pbc-dimension-inequality-quasi-finite (stage 2; reviewer PASS; first push; Sheaf.RingTheory.QuasiFiniteLocalDimension Algebra.ringKrullDim_le_of_isQuasiFiniteAtPrime)
