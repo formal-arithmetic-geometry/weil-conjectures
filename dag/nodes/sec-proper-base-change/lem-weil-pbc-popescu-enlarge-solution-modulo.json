@@ -244,5 +244,23 @@
   "by": "L",
   "result": "accepted",
   "note": "10 steps follow Stacks 07FI with the omitted details written out: the p-power claim ((1+eps)^q = 1 + eps^q, q a p-power >= n), the trivial case, the transcendental case (D[lambda-bar] polynomial via a new 051F node; D' = D[t]_m local Artinian essentially smooth; flatness via a new 00MP node), the algebraic case (p-power making alpha separable, finite etale lift via new 06RS and 04GK nodes, factorization through the henselian Lambda-bar via the retraction node, flatness via 00MP). New Artinian leaf (HopkinsLevitzki.lean:141/184 verified). Tags 07FI, 06RS, 04GK, 00MP, 051F, 00KH, 00J8 verified."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.PopescuEnlargeSolutionModulo",
+  "declaration": "Algebra.exists_essentiallySmooth_artinian_enlargement",
+  "file": "lean/Sheaf/RingTheory/PopescuEnlargeSolutionModulo.lean",
+  "statement": "theorem exists_essentiallySmooth_artinian_enlargement (k : Type u) (Λ : Type v) [Field k] [CommRing Λ] [Algebra k Λ] [IsNoetherianRing Λ] (p : ℕ) [CharP k p] (hp : 0 < p) (hreg : IsGeometricallyRegular k Λ) (q : Ideal Λ) [q.IsPrime] (n : ℕ) (hn : 1 ≤ n) (m : ℕ) (φ : MvPolynomial (Fin m) k →ₐ[k] Λ) (ψ : Localization.AtPrime (q.comap φ.toRingHom) →+* Localization.AtPrime q) (hψ : ψ.comp (algebraMap (MvPolynomial (Fin m) k) (Localization.AtPrime (q.comap φ.toRingHom))) = (algebraMap Λ (Localization.AtPrime q)).comp φ.toRingHom) (hideal : q.map (algebraMap Λ (Localization.AtPrime q)) = (q.comap φ.toRingHom).map ((algebraMap Λ (Localization.AtPrime q)).comp φ.toRingHom)) (hflat : ψ.Flat) [IsLocalRing (Localization.AtPrime (q.comap φ.toRingHom) ⧸ ((q.comap φ.toRingHom).map (algebraMap (MvPolynomial (Fin m) k) (Localization.AtPrime (q.comap φ.toRingHom)))) ^ n)] [IsArtinianRing (Localization.AtPrime (q.comap φ.toRingHom) ⧸ ((q.comap φ.toRingHom).map (algebraMap (MvPolynomial (Fin m) k) (Localization.AtPrime (q.comap φ.toRingHom)))) ^ n)] [IsLocalRing (Localization.AtPrime q ⧸ (q.map (algebraMap Λ (Localization.AtPrime q))) ^ n)] [IsArtinianRing (Localization.AtPrime q ⧸ (q.map (algebraMap Λ (Localization.AtPrime q))) ^ n)] (D : Type w) [CommRing D] [IsLocalRing D] [IsArtinianRing D] [Algebra (Localization.AtPrime (q.comap φ.toRingHom) ⧸ ((q.comap φ.toRingHom).map (algebraMap (MvPolynomial (Fin m) k) (Localization.AtPrime (q.comap φ.toRingHom)))) ^ n) D] (g : D →+* (Localization.AtPrime q ⧸ (q.map (algebraMap Λ (Localization.AtPrime q))) ^ n)) [IsLocalHom (algebraMap (Localization.AtPrime (q.comap φ.toRingHom) ⧸ ((q.comap φ.toRingHom).map (algebraMap (MvPolynomial (Fin m) k) (Localization.AtPrime (q.comap φ.toRingHom)))) ^ n) D)] [IsLocalHom g] (hsmooth : EssentiallySmooth (Localization.AtPrime (q.comap φ.toRingHom) ⧸ ((q.comap φ.toRingHom).map (algebraMap (MvPolynomial (Fin m) k) (Localization.AtPrime (q.comap φ.toRingHom)))) ^ n) D) (hgflat : g.Flat) (hfactor : (g.comp (algebraMap (Localization.AtPrime (q.comap φ.toRingHom) ⧸ ((q.comap φ.toRingHom).map (algebraMap (MvPolynomial (Fin m) k) (Localization.AtPrime (q.comap φ.toRingHom)))) ^ n) D)).comp (Ideal.Quotient.mk (((q.comap φ.toRingHom).map (algebraMap (MvPolynomial (Fin m) k) (Localization.AtPrime (q.comap φ.toRingHom)))) ^ n)) = (Ideal.Quotient.mk ((q.map (algebraMap Λ (Localization.AtPrime q))) ^ n)).comp ψ) (l : Λ) (hl : l ∉ q) : ∃ (r : ℕ), 0 < r ∧ ∃ (D' : Type (max u v w)) (_ : CommRing D') (_ : Algebra D D') (g' : D' →+* (Localization.AtPrime q ⧸ (q.map (algebraMap Λ (Localization.AtPrime q))) ^ n)), IsLocalRing D' ∧ IsArtinianRing D' ∧ IsLocalHom (algebraMap D D') ∧ IsLocalHom g' ∧ EssentiallySmooth D D' ∧ g'.Flat ∧ g'.comp (algebraMap D D') = g ∧ (Ideal.Quotient.mk ((q.map (algebraMap Λ (Localization.AtPrime q))) ^ n)) ((algebraMap Λ (Localization.AtPrime q)) (l ^ r)) ∈ Set.range g'",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-pes1433",
+  "group": "F1",
+  "result": "pass",
+  "note": "k field CharP p>0, Λ Noetherian geom. regular, q prime, n≥1, φ/ψ/hψ/hideal/hflat and Pbar/Lbar local Artinian exactly the J1 sibling's conclusion (tied obtain-and-apply test compiles); D local Artinian, Pbar→D local ess. smooth, g local flat, hfactor; l∉q; ∃ r>0, tied ∃ D' : Type (max u v w) CommRing Algebra D D' g', local Artinian, local homs, EssentiallySmooth D D', g'.Flat, g'∘alg = g, image of l^r in range g'; no let; Pbar/Lbar instances not inferInstance; node unchanged except lean; 10 proof steps verbatim"
  }
 }
