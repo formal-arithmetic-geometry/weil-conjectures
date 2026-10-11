@@ -125,5 +125,28 @@
   "group": "J1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-etd (reviewer sub-agent of L); spot-checked: Source: blueprint lem-sc-riemann-roch.md determinant paragraph (lines 144-147, local splitting and top exterior power of a direct sum); item statement unchanged (R commutative, M,N free of ranks r,s, canonical map, naturality). Step 1 carried by lem-weil-pbc-exterior-power-free-basis (wedges of increasing subsets form a basis, rank binom(r,n)) applied to M, N and the concatenated basis of M+N, and by new leaf lem-sc-tensor-product-free-basis; step 2: rank-1 free modules, basis vector to basis vector, iso; step 3 from multilinearity/alternation/anticommutation in def-weil-pbc-exterior-algebra and the universal property in def-weil-pbc-module-tensor-product. Mathlib leaf verified with sed: Module.Basis.tensorProduct at Mathlib/LinearAlgebra/TensorProduct/Basis.lean:38 (Basis (ι×κ) S (M⊗[R]N), S=R), tensorProduct_apply at :46. Blueprint search 'tensor product basis' and 'exterior power direct sum' found no same_as. Small cases r,s in {0,1}: R⊗R=R, M⊗R=M, R⊗N=N, (m,0)∧(0,n) for rank 1. Fixes: dag/nodes/sec-picard-framework/lem-sc-tensor-product-free-basis.json: mathlib_match.line: 29 -> 38 and mathlib_match.how: line numbers corrected to 38/46 (source.place 'lines 28-44' also off but is a maintainer field, left). FIX more, RETURN less: dag/nodes/sec-picard-framework/lem-sc-exterior-top-direct-sum.json: proof[2].text: added the expansion showing the basis-defined map satisfies the stated formula on arbitrary wedges (common scalar c, d from multilinearity, alternation and v^w=-w^v), which the step asserted without justification (C2). Start Sat Oct 10 03:34:22 PM UTC 2026, end Sat Oct 10 03:35:25 PM UTC 2026.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.LinearAlgebra.ExteriorTopDirectSum",
+  "declaration": "exteriorPower.existsUnique_topDirectSum",
+  "declarations": [
+   "exteriorPower.existsUnique_topDirectSum",
+   "exteriorPower.topDirectSum_natural"
+  ],
+  "file": "lean/Sheaf/LinearAlgebra/ExteriorTopDirectSum.lean",
+  "statement": "theorem existsUnique_topDirectSum {R : Type u} [CommRing R] {M : Type v} [AddCommGroup M] [Module R M] {N : Type w} [AddCommGroup N] [Module R N] (r s : ℕ) (_bM : Module.Basis (Fin r) R M) (_bN : Module.Basis (Fin s) R N) : ∃! e : (⋀[R]^(r + s) (M × N)) ≃ₗ[R] ((⋀[R]^r M) ⊗[R] (⋀[R]^s N)), ∀ (m : Fin r → M) (n : Fin s → N), e.symm ((ιMulti R r m) ⊗ₜ[R] (ιMulti R s n)) = ιMulti R (r + s) (Fin.append (fun i ↦ (m i, 0)) (fun j ↦ (0, n j)))",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": false,
+  "note": "The first theorem gives the unique isomorphism characterized by its inverse on pure wedges; the second states naturality for every pair of isomorphisms and every two isomorphisms with that characterization. The binary module direct sum is represented by its standard product model."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-etd1027",
+  "group": "H1",
+  "result": "pass",
+  "note": "CommRing R; M,N with Module.Basis (Fin r)/(Fin s) = free with r,s-element bases; ⋀[R]^n Mathlib exteriorPower, M×N binary direct sum, ⊗[R] Mathlib; ∃! iso ⋀^(r+s)(M×N) ≃ ⋀^r M ⊗ ⋀^s N with e.symm(ιMulti m ⊗ ιMulti n)=ιMulti(Fin.append (m,0) (0,n)) for all tuples (M factors first, +1); naturality as separate theorem for arbitrary f,g isos and any e,e' with the characterization, checked true without bases (pure tensors of wedges span); edge r=0/s=0, zero ring, char 2 fine; Mathlib ExteriorPower/ExteriorAlgebra has no direct-sum top-degree iso (only CliffordAlgebra graded prodEquiv), existing:false correct"
  }
 }
