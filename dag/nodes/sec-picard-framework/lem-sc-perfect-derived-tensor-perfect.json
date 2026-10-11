@@ -146,5 +146,24 @@
   "group": "F1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ptp2826 (reviewer sub-agent of L); spot-checked: Statement matches lem-sc-affine-perfect-map-lift step 3 use (A, I perfect on scheme X). FIX more, RETURN less: (1) C4: lem-pc-perfect-affine-bounded-projective needs E in D_QCoh, not shown for K|_U; replaced the affine-model route by strictly perfect models from def-pc-perfect-complex on a common refinement W=U_i cap V_j (sheaf-level, no QCoh needed); (2) C1: restriction of derived tensor to opens was uncited; now cites lem-pc-affine-derived-pullback-tensor-tilde (1), declared as tool use; (3) B4: plain-text 'P tensor_A Q' etc. rewritten in TeX. Step 2 K-flat via lem-pc-bounded-above-flat-kflat checked; step 3 elementary termwise summand argument kept. The Second reading by F1 missed faults (1) and (2).; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.PerfectDerivedTensor",
+  "declaration": "AlgebraicGeometry.perfect_derivedTensor",
+  "file": "lean/Sheaf/AlgebraicGeometry/PerfectDerivedTensor.lean",
+  "statement": "theorem perfect_derivedTensor (X : Scheme.{uT}) [HasDerivedCategory.{wT} (SheafOfModules.{uT} (moduleRings X.toRingedSpace))] [∀ U : X.Opens, HasDerivedCategory.{wT} (SheafOfModules.{uT} ((moduleRings X.toRingedSpace).over U))] (K L : schemeDerivedCategory X) (hK : Scheme.IsPerfect X K) (hL : Scheme.IsPerfect X L) (P N : CochainComplex (SheafOfModules.{uT} (moduleRings X.toRingedSpace)) ℤ) (hP : CochainComplex.IsKFlat (R := X.sheaf) P) (hN : CochainComplex.IsKFlat (R := X.sheaf) N) (eP : DerivedCategory.Q.obj P ≅ K) (eN : DerivedCategory.Q.obj N ≅ L) : Scheme.IsPerfect X (DerivedCategory.Q.obj (CochainComplex.mapBifunctor P N (@curriedTensor _ _ (SheafOfModules.monoidalCategory X.sheaf))))",
+  "by": "G1",
+  "date": "2026-10-11",
+  "branch": "sheaf-dag",
+  "existing": false,
+  "fixed_by": "R-pdt"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-pdt",
+  "group": "G1",
+  "result": "fix",
+  "note": "X scheme; K,L perfect (Scheme.IsPerfect); K-flat reps P,N tied by eP,eN; conclusion IsPerfect of Q(Tot(P⊗N)) with SheafOfModules.monoidalCategory X.sheaf; dropped duplicate new node(s) def-pc-derived-tensor-object (--drop-nodes; not merged, the item points at the landed declaration); left out new module(s) lean/Sheaf/AlgebraicGeometry/DerivedTensorObject.lean (--drop-files, or a record fixed to existing: true); reverted the delivery's statement correction of the item (statement, statement_change kept as on sheaf-dag; --revert-statement)"
  }
 }
