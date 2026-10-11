@@ -3964,3 +3964,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 09:13 L: merged deliver/G1/lem-weil-pbc-colimit-etale-ring-map (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.EtaleDirectedColimitDescent AlgebraicGeometry.Etale.exists_stage_of_directedColimit)
 - 09:13 L: merged deliver/C1/def-weil-l-adic-coefficient-extension (stage 2; reviewer PASS; first push; Sheaf.NumberTheory.Padics.CoefficientExtension Padic.coefficientExtensionIntegers)
 - 09:13 L: merged deliver/E1/lem-weil-pbc-associated-prime-localize-at-prime (stage 2; reviewer PASS; first push; Sheaf.RingTheory.AssociatedPrimeLocalizeAtPrime Module.associated_prime_localize_at_prime)
+- 09:13 L: merged deliver/K1/def-sbc-smooth-morphisms (stage 2; reviewer PASS; first push; Mathlib.AlgebraicGeometry.Morphisms.Smooth AlgebraicGeometry.Smooth; existing declaration)
