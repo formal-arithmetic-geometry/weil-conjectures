@@ -21,9 +21,54 @@
  "stmt_deps": [
   "def-weil-abstract-derived-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By the bounded-above projective-complex comparison in [lem-pc-ring-derived-map-representative], the canonical localization map identifies morphisms from $P^\\bullet$ in the homotopy category with morphisms from $Q(P^\\bullet)$ in $D(\\mathcal A)$. Thus it is enough to prove that every homotopy-class morphism $P^\\bullet\\to K^\\bullet$ is zero.",
+   "uses": [
+    "lem-pc-ring-derived-map-representative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 064D proof, first equality via Tag 064B (lemma-morphisms-from-projective-complex)"
+   }
+  },
+  {
+   "text": "Represent the canonical truncation triangle [lem-sf-derived-truncation-triangle] at the bound $n$ by the standard truncation complexes $\\tau_{\\le n-1}K^\\bullet\\to K^\\bullet\\to\\tau_{\\ge n}K^\\bullet\\to$. The hypothesis $H^i(K^\\bullet)=0$ for every $i\\ge n$ makes the upper truncation acyclic, while the lower truncation is zero in degrees $i\\ge n$. Applying the homological functor $\\operatorname{Hom}_{D(\\mathcal A)}(Q(P^\\bullet),-)$ to this distinguished triangle, using [lem-weil-pbc-hom-into-triangle-exact], and then the comparison bijection of Step 1, reduces the desired vanishing to the two homotopy-category groups $\\operatorname{Hom}_{K(\\mathcal A)}(P^\\bullet,\\tau_{\\le n-1}K^\\bullet)$ and $\\operatorname{Hom}_{K(\\mathcal A)}(P^\\bullet,\\tau_{\\ge n}K^\\bullet)$.",
+   "uses": [
+    "lem-sf-derived-truncation-triangle",
+    "lem-weil-pbc-hom-into-triangle-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 064D proof, truncation triangle and reduction by Lemma 0149 (lemma-representable-homological)"
+   }
+  },
+  {
+   "text": "For the concrete standard truncations in Step 2, every chain map $P^\\bullet\\to\\tau_{\\le n-1}K^\\bullet$ is zero degreewise: $P^i=0$ for $i<n$, and $\\tau_{\\le n-1}K^\\bullet{}^i=0$ for $i\\ge n$. Thus $\\operatorname{Hom}_{K(\\mathcal A)}(P^\\bullet,\\tau_{\\le n-1}K^\\bullet)=0$. The upper truncation is acyclic by Step 2, so [lem-pc-ring-projective-into-acyclic-zero] makes every map $P^\\bullet\\to\\tau_{\\ge n}K^\\bullet$ homotopic to zero. The exact Hom sequence from [lem-weil-pbc-hom-into-triangle-exact] then gives $\\operatorname{Hom}_{K(\\mathcal A)}(P^\\bullet,K^\\bullet)=0$, and Step 1 gives the asserted derived-category vanishing.",
+   "uses": [
+    "lem-pc-ring-projective-into-acyclic-zero",
+    "lem-weil-pbc-hom-into-triangle-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 064D proof, the two vanishing groups after the truncation triangle"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-ring-derived-map-representative",
+  "lem-sf-derived-truncation-triangle",
+  "lem-weil-pbc-hom-into-triangle-exact",
+  "lem-pc-ring-projective-into-acyclic-zero"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 064D (lemma-precise-vanishing), proof"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -55,12 +100,28 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pc-ring-derived-map-lift",
   "by": "worker",
   "date": "2026-10-11"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality"
+ "unit": "sk-thm-picard-duality",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-ring-precise-vanishing",
+  "worker": "stage1",
+  "summary": "Split Tag 064D into the projective-to-derived comparison, the canonical truncation reduction, and the two homotopy-category vanishings. The only new dependency is the exact Mathlib null-homotopy theorem for maps from K-projective complexes to acyclic complexes; the comparison and truncation triangle are existing nodes.",
+  "blueprint": "Realizes the ancestor proof route used to lift maps between finite-free witnesses: the precise vanishing step in the derived-category argument.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-rpv0148",
+  "group": "K1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-rpv0148 (reviewer sub-agent of L); spot-checked: Statement = Stacks 064D (bounded projective P, P^i=0 for i<n, H^i(K)=0 for i>=n) incl. abelian generality; steps follow the 064D proof; cited representative node (Qh_map_bijective + isKProjective_of_projective) is for arbitrary abelian C; new leaf read at KProjective.lean:48 and :113 (Abelian C, IsStrictlyLE + projective terms), one-line specialization; vs lem-sc-bounded-above-projective-kprojective: different formulation (Hom-complex acyclicity), new leaf states Mathlib's defining null-homotopy form, kept; citer lem-pc-ring-derived-map-lift uses exactly these hypotheses. No repairs."
+ }
 }
