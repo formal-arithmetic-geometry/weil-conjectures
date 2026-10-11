@@ -3164,3 +3164,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 00:50 L: merged deliver/H1/lem-pc-derived-mayer-vietoris-functorial (reviewer FIX; after a return; new nodes: 1)
 - 00:50 L: merged deliver/G1/lem-pc-ring-pseudo-coherent-iff-all-m (reviewer FIX; first push; new nodes: 0)
 - 00:50 L: returned deliver/K1/lem-pur-kinjective-characterize-K-injective (reviewer RETURN: 1. E (false new statement): lem-pur-kinjective-homotopy-limit-vanishing is false as stated (vanishing of H^0 only). Coun)
+- 00:50 UTC L: H1 derived-mayer-vietoris-functorial FIX cab86b3fb re-push (R-mvf0047; injective terms required, E7 named; new node lem-pc-derived-functor-termwise-split-ses-triangle).
