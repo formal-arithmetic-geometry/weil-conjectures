@@ -1,11 +1,11 @@
 # Work queue
 
-433 items; claim with `tools/claim.py next <group> [--stage N]`.
+429 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (433)
+## Stage 2: nodes to state (429)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -39,23 +39,19 @@
 | `lem-sc-module-extension-by-zero-stalk-maps` | 1 | state |
 | `lem-sc-picard-kunneth-qcoh` | 1 | state |
 | `lem-sc-pseudo-coherent-qcoh` | 1 | state |
-| `lem-sc-top-dimensional-reduction-intersection` | 1 | state |
 | `lem-sc-valuation-limit-affine-pushforward-colimit` | 1 | state |
 | `lem-sc-valuation-proper-coherent-higher-direct-images` | 1 | state |
 | `lem-weil-derived-limit-roos-complex` | 1 | state |
 | `lem-weil-pbc-closed-immersion-conormal-functorial` | 1 | state |
 | `lem-weil-pbc-pair-henselization` | 1 | state |
 | `lem-weil-pbc-polynomial-ideal-coefficients-monomial` | 1 | state |
-| `lem-weil-pbc-popescu-delocalize-weak-localization-smooth` | 1 | state |
 | `lem-weil-pbc-popescu-desingularize-lifting-apply` | 1 | state |
-| `lem-weil-pbc-popescu-height-zero-auxiliary-algebra-localizations` | 1 | state |
+| `lem-weil-pbc-popescu-enlarge-solution-modulo` | 1 | state |
 | `lem-weil-pbc-popescu-lift-nilpotent` | 1 | state |
 | `lem-weil-pbc-popescu-lift-solution` | 1 | state |
 | `lem-weil-pbc-popescu-lifting` | 1 | state |
 | `lem-weil-pbc-popescu-product` | 1 | state |
 | `lem-weil-pbc-popescu-reduce-to-field` | 1 | state |
-| `lem-weil-pbc-popescu-smoothing` | 1 | state |
-| `lem-weil-pbc-popescu-solution-modulo` | 1 | state |
 | `lem-weil-pbc-popescu-solution-modulo-choose` | 1 | state |
 | `lem-weil-pbc-power-in-base-after-localization` | 1 | state |
 | `lem-weil-pbc-power-series-cohen-formally-smooth-adic` | 1 | state |
@@ -443,7 +439,7 @@
 | `lem-pc-essentially-constant-pro-hom-colimit` | 4 | state |
 | `lem-pur-essential-constant-pro-criterion-05py` | 4 | state |
 
-Not open yet: 40 nodes that wait for stage 1, 575 nodes that wait for a statement dependency.
+Not open yet: 40 nodes that wait for stage 1, 574 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
