@@ -1,11 +1,11 @@
 # Work queue
 
-973 items; claim with `tools/claim.py next <group> [--stage N]`.
+969 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (973)
+## Stage 2: nodes to state (969)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -44,15 +44,11 @@
 | `lem-pc-ringed-space-module-stalk-tensor` | 1 | state |
 | `lem-pc-skyscraper-complex` | 1 | state |
 | `lem-pc-stalk-tensor-complex` | 1 | state |
-| `lem-pc-termwise-tor-acyclic-derived-tensor` | 1 | state |
 | `lem-pc-tor-independent-projective-complex-tensor` | 1 | state |
 | `lem-pc-tower-enough-injectives` | 1 | state |
-| `lem-pc-tower-limit-left-exact` | 1 | state |
-| `lem-pod-adic-tower-reconstruction` | 1 | state |
 | `lem-pod-equivalence-induces-module-objects` | 1 | state |
 | `lem-pod-etale-stalk-tensor-scalar` | 1 | state |
 | `lem-pod-lisse-tensor-and-scalar-extension` | 1 | state |
-| `lem-pur-kinjective-characterize-K-injective` | 1 | state |
 | `lem-pur-kinjective-degreewise-existence` | 1 | state |
 | `lem-pur-kinjective-functorial-homotopies` | 1 | state |
 | `lem-pur-kinjective-functorial-injective` | 1 | state |
