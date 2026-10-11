@@ -79,6 +79,36 @@ lemma globalSectionsTransport_globalSectionsToUpperStar_oneGlobalSection
   refine e.trans (n.symm.trans ?_)
   exact congrArg _ (Γ_map_adicUpperStarUnitIso_globalSectionsToUpperStar_oneGlobalSection g)
 
+/-- The comparison `ℚ̄_ℓ,V ⟶ g_* ℚ̄_ℓ,W` pulls functions back along `V' ×_V W ⟶ V'`. -/
+lemma adicConstantSheafToLowerStar_hom_app {V W : Scheme.{u}} (g : W ⟶ V) (U : V.ProEtᵒᵖ) :
+    (adicConstantSheafToLowerStar l g).hom.app U =
+      (adicFunctionsPresheaf l).map (pullback.fst U.unop.hom g).op :=
+  rfl
+
+/-- The inverse of `e_* ℚ̄_ℓ ≅ ℚ̄_ℓ` is the pullback of functions along `e`. -/
+lemma adicConstantSheafLowerStarIso_inv {X Y : Scheme.{u}} (e : X ≅ Y) :
+    (adicConstantSheafLowerStarIso l e).inv = adicConstantSheafToLowerStar l e.hom := by
+  ext V : 3
+  rw [adicConstantSheafLowerStarIso_inv_hom_app, adicConstantSheafToLowerStar_hom_app]
+
+/-- Adjoint transposes of morphisms out of pullbacks along equal morphisms. -/
+lemma homEquiv_upperStarCongr_hom_app_comp {A : Type*} [Category.{u + 1} A] [Abelian A]
+    [IsGrothendieckAbelian.{u + 1} A] {Z W : Scheme.{u}} {a b : Z ⟶ W} (p : a = b)
+    {M : Sheaf (Scheme.ProEt.topology W) A} {N : Sheaf (Scheme.ProEt.topology Z) A}
+    (f : (b)^*[A].obj M ⟶ N) :
+    ((upperStarLowerStarAdjunction A a).homEquiv _ _) ((upperStarCongr A p).hom.app M ≫ f) =
+      ((upperStarLowerStarAdjunction A b).homEquiv _ _) f ≫ (lowerStarCongr A p.symm).hom.app N := by
+  subst p
+  simp [upperStarCongr, lowerStarCongr]
+
+/-- The components of the factorisation isomorphism `a^* ≅ c^* ⋙ b^*` of pullbacks. -/
+lemma upperStarFactor_hom_app {A : Type*} [Category.{u + 1} A] [Abelian A]
+    [IsGrothendieckAbelian.{u + 1} A] {P Z Y : Scheme.{u}} {a : P ⟶ Y} {b : P ⟶ Z} {c : Z ⟶ Y}
+    (e : b ≫ c = a) (M : Sheaf (Scheme.ProEt.topology Y) A) :
+    (upperStarFactor A e).hom.app M =
+      (upperStarCongr A e.symm).hom.app M ≫ (upperStarComp A b c).hom.app M :=
+  rfl
+
 /-- The adjoint transpose, along `a^* ⊣ a_*`, of the morphism `a^* M ≅ b^* c^* M ⟶ b^* b_* N ⟶ N`
 induced by `β : c^* M ⟶ b_* N` and a factorisation `b ≫ c = a` is `M ⟶ c_* c^* M ⟶ c_* b_* N ≅
 a_* N`. -/
@@ -153,5 +183,18 @@ lemma frobeniusPowStr_adicConstant (m : ℕ) (hm : 1 ≤ m) :
       ProEtale.upperStarFactor, Iso.trans_hom, NatTrans.comp_app, Category.assoc]
     exact (congrArg (_ ≫ ·) (ProEtale.upperStarAdicConstantSheafHom_comp l _ _)).trans
       (ProEtale.upperStarCongr_hom_app_comp_upperStarAdicConstantSheafHom _)
+
+
+/-- The Weil structures `Fr^* F ⟶ F` on underlying sheaves are natural in `F`. -/
+lemma frobeniusStr_naturality {F G : WeilSheaf k₀ l X} (f : F ⟶ G) :
+    ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.hom)^*[WeilCoefficients.{u} l].map
+        f.hom.hom.f.hom ≫ G.frobeniusStr = F.frobeniusStr ≫ f.hom.hom.f.hom := by
+  have n := (ProEtale.upperStarIsoLowerStarInv (WeilCoefficients.{u} l)
+    (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius).hom.naturality f.hom.hom.f.hom
+  rw [frobeniusStr, frobeniusStr, ← Category.assoc, n, Category.assoc, Category.assoc]
+  congr 1
+  have h := congrArg (fun g ↦ g.hom) f.hom.hom.h
+  simp only [Mod.comp_hom'] at h
+  exact h
 
 end AlgebraicGeometry.WeilSheaf
