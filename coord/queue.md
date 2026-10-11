@@ -1,20 +1,18 @@
 # Work queue
 
-829 items; claim with `tools/claim.py next <group> [--stage N]`.
+827 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (829)
+## Stage 2: nodes to state (827)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
 | `def-pod-l-adic-representations` | 1 | state |
 | `def-pod-lisse-l-adic-sheaves` | 1 | state |
 | `def-sc-constant-sheaves` | 1 | state |
-| `def-sc-kahler-differentials` | 1 | state |
 | `def-sp-truncation-couple` | 1 | state |
-| `lem-pc-clopen-smooth-proper-curve` | 1 | state |
 | `lem-pc-derived-adjoint-functors` | 1 | state |
 | `lem-pc-derived-tensor-transitivity` | 1 | state |
 | `lem-pc-module-pullback-identity-composition` | 1 | state |
