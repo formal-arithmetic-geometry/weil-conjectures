@@ -9,6 +9,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import WeilConjectures.DeligneLaumon.AffineLine.Defs
 public import WeilConjectures.WeilSheaf.OpenClosedTriangle
 public import WeilConjectures.WeilSheaf.UpperStarLowerStar
+public import WeilConjectures.DeligneLaumon.AffineLine.FiniteBoundary
 public import WeilConjectures.ZetaLinearAlgebra.FrobeniusModule.Trace
 
 /-!

@@ -40,8 +40,6 @@ Frobenius.
 
 ## Main statements
 
-- `AlgebraicGeometry.WeilSheaf.subsingleton_compactlySupportedCohomology_of_isFinite`: the
-  compactly supported cohomology of a finite `k₀`-scheme is concentrated in degree zero.
 - `AlgebraicGeometry.WeilSheaf.subsingleton_compactlySupportedCohomology_of_isAffine`: the
   compactly supported cohomology of a smooth affine curve is concentrated in degrees `0, 1, 2`.
 -/
@@ -115,17 +113,6 @@ Frobenius: that of the Weil complex `F` concentrated in degree zero. -/
 noncomputable def compactlySupportedCohomology (F : WeilSheaf k₀ l X) (r : ℤ) :
     FrobeniusModule.{u + 1, 0} (PadicAlgCl l) :=
   (toComplex.obj F).compactlySupportedCohomology r
-
-/-- *Cohomology of a finite boundary.* If `X` is finite over `k₀`, then the compactly supported
-cohomology `H_c^r(X ⊗ k̄, G)` of a Weil sheaf `G` on `X` vanishes for `r ≠ 0`: after geometric
-base change `X` becomes a finite discrete space, whose cohomology is concentrated in degree
-zero. The blueprint states this for `G` with stalk weights at most some `w`; the weights play
-no role.
-(blueprint: `lem-a1-finite-boundary-cohomology`) -/
-theorem subsingleton_compactlySupportedCohomology_of_isFinite
-    [IsFinite (X ↘ Spec (CommRingCat.of k₀))] (G : WeilSheaf k₀ l X) {r : ℤ} (hr : r ≠ 0) :
-    Subsingleton (G.compactlySupportedCohomology r).carrier :=
-  sorry
 
 /-- *Cohomological range of an affine curve.* If `X` is a smooth affine curve over `k₀` and `G`
 is a constructible Weil sheaf on `X`, then `H_c^r(X ⊗ k̄, G) = 0` for `r ∉ {0, 1, 2}`: after a
