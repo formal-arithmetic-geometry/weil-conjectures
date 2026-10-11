@@ -1,11 +1,11 @@
 # Work queue
 
-158 items; claim with `tools/claim.py next <group> [--stage N]`.
+154 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (158)
+## Stage 2: nodes to state (154)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
@@ -14,7 +14,6 @@
 | `def-weil-pbc-cohomology-pullback` | 1 | state | 23 |
 | `def-nagata-qc-open-equality-stage` | 1 | state | 13 |
 | `def-pc-global-derived-rhom` | 1 | state | 4 |
-| `def-weil-pbc-sheaf-ext` | 1 | state | 4 |
 | `def-weil-pbc-simplicial-hom-object` | 1 | state | 4 |
 | `def-pc-derived-rhom-algebra-module` | 1 | state | 2 |
 | `def-weil-pbc-hypercohomology-filtrations` | 1 | state | 2 |
@@ -81,6 +80,7 @@
 | `lem-sc-derived-hom-projective-resolution` | 1 | state | 0 |
 | `lem-sc-derived-internal-hom-stalk-localization` | 1 | state | 0 |
 | `lem-sc-etale-torsor-inverse-image-extension` | 1 | state | 0 |
+| `lem-sc-ext-stalk-localization` | 1 | state | 0 |
 | `lem-sc-finite-affine-derived-equivalence` | 1 | state | 0 |
 | `lem-sc-finite-duality-derived-hom` | 1 | state | 0 |
 | `lem-sc-finite-flat-duality-evaluation` | 1 | state | 0 |
@@ -93,7 +93,6 @@
 | `lem-sc-open-curve-gm-direct-image-cohomology` | 1 | state | 0 |
 | `lem-sc-open-restriction-support-triangle` | 1 | state | 0 |
 | `lem-sc-p1-proj-sheafification-exact` | 1 | state | 0 |
-| `lem-sc-p1-pullback-extension-class` | 1 | state | 0 |
 | `lem-sc-proper-flat-right-adjoint-basechange` | 1 | state | 0 |
 | `lem-sc-proper-flat-right-adjoint-direct-sums` | 1 | state | 0 |
 | `lem-sc-proper-flat-right-adjoint-open-support` | 1 | state | 0 |
@@ -101,6 +100,7 @@
 | `lem-sc-proper-upper-shriek-composition` | 1 | state | 0 |
 | `lem-sc-qcoh-acyclic-derived-pushforward-cohomology` | 1 | state | 0 |
 | `lem-sc-qcoh-acyclic-derived-sections-comparison` | 1 | state | 0 |
+| `lem-sc-sheaf-ext-coherent` | 1 | state | 0 |
 | `lem-sc-smooth-proper-curve-dualizing` | 1 | state | 0 |
 | `lem-sc-smooth-proper-diagonal-basechange-upper-shriek` | 1 | state | 0 |
 | `lem-sc-smooth-proper-diagonal-koszul-dual` | 1 | state | 0 |
@@ -121,7 +121,6 @@
 | `lem-weil-pbc-integral-cover-trivial-cohomology` | 1 | state | 0 |
 | `lem-weil-pbc-inverse-image-composition-module-linear` | 1 | state | 0 |
 | `lem-weil-pbc-inverse-image-free-etale-module` | 1 | state | 0 |
-| `lem-weil-pbc-limit-pullback-sections-colimit` | 1 | state | 0 |
 | `lem-weil-pbc-module-pullback-ideal-quotient` | 1 | state | 0 |
 | `lem-weil-pbc-projective-space-twisting-sheaf-charts` | 1 | state | 0 |
 | `lem-weil-pbc-sets-pushforward-stalk-strict-henselization` | 1 | state | 0 |
@@ -131,7 +130,6 @@
 | `lem-weil-pbc-symmetric-product-finite` | 1 | state | 0 |
 | `lem-weil-pbc-symmetric-product-over-base` | 1 | state | 0 |
 | `lem-weil-pbc-symmetric-product-surjective` | 1 | state | 0 |
-| `lem-weil-pbc-truncated-coskeleton-finite-limits` | 1 | state | 0 |
 | `lem-weil-pbc-universal-thickening-flat-base-change` | 1 | state | 0 |
 | `lem-weil-pbc-universal-thickening-open-restriction` | 1 | state | 0 |
 | `lem-weil-pbc-unrestricted-strict-henselization-stalk` | 1 | state | 0 |
@@ -145,7 +143,6 @@
 | `lem-pc-rf-single-complex-inherited-tensor-condition` | 2 | state | 0 |
 | `lem-pc-supported-open-pushforward` | 2 | state | 0 |
 | `lem-sc-finite-locally-free-derived-hom` | 2 | state | 0 |
-| `lem-sc-hom-etale-locus-translation` | 2 | state | 0 |
 | `lem-sc-mult-n-tangent-differential` | 2 | state | 0 |
 | `lem-sc-p1-boundary-extension-composition` | 2 | state | 0 |
 | `lem-sc-p1-finite-homogeneous-generators` | 2 | state | 0 |
@@ -166,9 +163,8 @@
 | `lem-weil-pbc-henselian-finite-type-product-decomposition` | 2 | state | 0 |
 | `lem-weil-pbc-integral-closure-finite-fibre-part-localization` | 2 | state | 0 |
 | `lemma-weil-pbc-etale-cohomology-continuity` | 2 | state | 0 |
-| `lem-pur-essential-constant-pro-criterion-05py` | 4 | state | 0 |
 
-Not open yet: 40 nodes that wait for stage 1, 276 nodes that wait for a statement dependency.
+Not open yet: 40 nodes that wait for stage 1, 274 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
