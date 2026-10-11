@@ -21,7 +21,7 @@ Usage (from the project root; by the lead, or by a reviewer sub-agent of the lea
       --verdict PASS|FIX    for the ledger line (default FIX with --apply-fixes, else PASS)
       --head SHA            refuse unless the branch head is SHA (the commit the reviewer read)
   tools/merge_delivery.py <group> <item> --stage 2 --reviewer ID --head SHA [--apply-fixes DIR] [--spot-checked NOTE]
-                        [--verdict PASS|FIX] [--dry-run]
+                        [--drop-nodes ID[,ID...]] [--verdict PASS|FIX] [--dry-run]
                                                         a stage-2 delivery (tools/README.md "Stage 2"): the mechanical
                         checks of tools/stage2_delivery.py (item, new definition nodes, dependency nodes: coord/STATE.md
                         "STAGE 2 EXTRA NODES"); with several modules, those importing no sibling are compiled first in
@@ -44,7 +44,11 @@ Usage (from the project root; by the lead, or by a reviewer sub-agent of the lea
                         again on the fixed versions. A CORRECTED item (coord/STATE.md, STAGE 2 STATEMENT CORRECTION;
                         node_fields.check_statement_change) gets statement, stmt_deps, proof, proof_deps and
                         statement_change from the branch (refused if they moved on sheaf-dag since the base), and
-                        `reviewed_lean.statement_corrected: true`.
+                        `reviewed_lean.statement_corrected: true`. --drop-nodes ID[,ID...] (stage 2): each ID must be a
+                        NEW node of the delivery (a duplicate of a landed node); its node file and every module whose
+                        only owner it is are left out, the item's stmt_deps/proof_deps lose it, the fixes (DIR) repoint
+                        the item's module and record at the landed declaration; the checks run on the result;
+                        reviewed_lean.note, the ledger line and the commit message name the dropped ids.
   tools/merge_delivery.py return <group> <item> REASONS write the reasons into coord/returns/<group>.md, the ledger
                                                         line, and commit; the claim and the branch stay with the group
 
@@ -651,7 +655,8 @@ def cmd_merge2(o):
         if age > MAX_AGE:
             raise Fail(f"base {base[:7]} is {age/3600:.0f} h behind {MAIN}: pull {MAIN}, rebase, push again")
         G = s2.Git(ROOT)
-        D = s2.read_delivery(G, br, base, group, item)
+        drop = [x.strip() for x in (o.drop_nodes or "").split(",") if x.strip()]
+        D = s2.read_delivery(G, br, base, group, item, drop=drop)
         nfix, fixnotes = 0, []
         if o.apply_fixes:
             # DIR: <basename>.lean for any module of the delivery, <item>.lean-record.json (the item's record),
@@ -728,7 +733,7 @@ def cmd_merge2(o):
                     overrides[path] = dump(nd)
             for fpath, text in texts.items():
                 overrides[fpath] = text
-            D = s2.read_delivery(G, br, base, group, item, overrides=overrides)
+            D = s2.read_delivery(G, br, base, group, item, overrides=overrides, drop=drop)
         fails = list(D["fails"])
         if fails:
             raise Fail("stage-2 checks: " + " | ".join(f"({L}) {x}" for L, x in fails))
@@ -773,8 +778,11 @@ def cmd_merge2(o):
         rid = o.reviewer
         verdict = (o.verdict or ("FIX" if nfix else "PASS")).upper()
         reviewed = {"date": today(), "by": "L", "reviewer": rid, "group": group, "result": verdict.lower()}
-        if o.spot_checked:
-            reviewed["note"] = o.spot_checked
+        dropped = list(D.get("dropped") or {})
+        dnote = (f"dropped duplicate new node(s) {', '.join(dropped)} (--drop-nodes; not merged, the item points at the "
+                 "landed declaration)") if dropped else ""
+        if o.spot_checked or dnote:
+            reviewed["note"] = "; ".join(x for x in (o.spot_checked, dnote) if x)
         reviewed_new = {"date": today(), "by": "L", "reviewer": rid, "group": group, "result": verdict.lower(),
                         "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"}
         tree = Tree()
@@ -868,7 +876,7 @@ def cmd_merge2(o):
             returned = rtext is not None and len(keep) != len(parts)
             claim = ROOT / "coord" / "claims" / (item.replace("/", "__") + ".lock")
             rec = records[item]
-            extra = (f"; new nodes: {', '.join(new)}" if new else "") + (f"; dependency modules: {', '.join(deps)}" if deps else "") \
+            extra = (f"; new nodes: {', '.join(new)}" if new else "") + (f"; dropped nodes: {', '.join(dropped)}" if dropped else "") + (f"; dependency modules: {', '.join(deps)}" if deps else "") \
                 + (f"; statement corrected ({len(D.get('citers') or [])} citers)" if D.get("corrected") else "")
             ltext = (f"merged {br} (stage 2; reviewer {verdict}; {'after a return' if returned else 'first push'}; "
                      f"{rec.get('module')} {rec.get('declaration')}{'; existing declaration' if rec.get('existing') else ''}{extra})")
@@ -876,6 +884,7 @@ def cmd_merge2(o):
             paths = list(paths_nodes.values()) + [report_rel, "coord/ledger.md", "coord/deliveries.log"] + [m["file"] for m in mods]
             msg = (f"State {item} ({group}, reviewed by {rid})" + ("; statement corrected" if D.get("corrected") else "")
                    + (f"; new nodes: {', '.join(new)}" if new else "")
+                   + (f"; dropped: {', '.join(dropped)}" if dropped else "")
                    + f"\n\nDelivered by group {group} ({br}, {git('rev-parse', '--short', br)}); "
                    f"reviewer {rid}: {verdict}; merged by tools/merge_delivery.py --stage 2 for L."
                    + (("\nDependency modules: " + ", ".join(f"{k} ({records[k].get('module')})" for k in deps) + ".") if deps else ""))
