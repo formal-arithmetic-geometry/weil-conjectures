@@ -306,6 +306,46 @@ theorem eulerChar_eq_sum_of_pairwise_disjoint [IsNoetherian X] {n : ℕ}
   refine Finset.sum_congr rfl fun i _ ↦ ?_
   rw [eulerChar_eq_sum_range k _ ((topologicalKrullDim_subspace_le X (U i)).trans hn)]
 
+
+/-- If `h^q(X, M) = 0` for `q > n`, the Euler characteristic is the finite sum
+`∑_{q ≤ n} (-1)^q h^q(X, M)`. -/
+theorem eulerChar_eq_sum_range_of_finrankH_eq_zero (M : X.Modules) {n : ℕ}
+    (hn : ∀ q, n < q → M.finrankH k q = 0) :
+    M.eulerChar k = ∑ q ∈ Finset.range (n + 1), (-1) ^ q * (M.finrankH k q : ℤ) := by
+  refine finsum_eq_sum_of_support_subset _ fun q hq ↦ ?_
+  by_contra h
+  refine hq ?_
+  change (-1) ^ q * (M.finrankH k q : ℤ) = 0
+  simp only [Finset.coe_range, Set.mem_Iio, not_lt] at h
+  rw [hn q (by omega), Nat.cast_zero, mul_zero]
+
+/-- **The Euler characteristic is additive over a finite disjoint union**, for a module whose
+cohomology is finite-dimensional and vanishes in degrees `q > D`: then
+`χ(X, M) = ∑ᵢ χ(U i, M|_{U i})`. Unlike
+`AlgebraicGeometry.Scheme.Modules.eulerChar_eq_sum_of_pairwise_disjoint`, this does not use
+Grothendieck vanishing. -/
+theorem eulerChar_eq_sum_of_pairwise_disjoint_of_subsingleton {D : ℕ} {ι : Type*} [Fintype ι]
+    (U : ι → X.Opens) (hU : _root_.Pairwise (Disjoint on U)) (hcover : ⨆ i, U i = ⊤)
+    (M : X.Modules) [∀ q, FiniteDimensional k (M.H q)]
+    (hD : ∀ q, D < q → Subsingleton (M.H q)) :
+    M.eulerChar k = ∑ i,
+      letI : (U i).toScheme.Over (Spec (.of k)) := ⟨(U i).ι ≫ X ↘ Spec (.of k)⟩
+      ((Scheme.Modules.pullback (U i).ι).obj M).eulerChar k := by
+  let (i : ι) : (U i).toScheme.Over (Spec (.of k)) := ⟨(U i).ι ≫ X ↘ Spec (.of k)⟩
+  have hzero (q : ℕ) (hq : D < q) : M.finrankH k q = 0 :=
+    have := hD q hq
+    Module.finrank_zero_of_subsingleton
+  have hzero' (i : ι) (q : ℕ) (hq : D < q) :
+      ((Scheme.Modules.pullback (U i).ι).obj M).finrankH k q = 0 := by
+    have h := finrankH_eq_sum_of_pairwise_disjoint k U hU hcover M q
+    rw [hzero q hq] at h
+    exact Finset.sum_eq_zero_iff.mp h.symm i (Finset.mem_univ _)
+  rw [eulerChar_eq_sum_range_of_finrankH_eq_zero k M hzero]
+  simp_rw [finrankH_eq_sum_of_pairwise_disjoint k U hU hcover M, Nat.cast_sum, Finset.mul_sum]
+  rw [Finset.sum_comm]
+  refine Finset.sum_congr rfl fun i _ ↦ ?_
+  rw [eulerChar_eq_sum_range_of_finrankH_eq_zero k _ (hzero' i)]
+
 end Additivity
 
 end Modules
