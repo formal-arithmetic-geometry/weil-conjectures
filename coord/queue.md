@@ -1,19 +1,17 @@
 # Work queue
 
-543 items; claim with `tools/claim.py next <group> [--stage N]`.
+537 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (543)
+## Stage 2: nodes to state (537)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
 | `def-amb-finite-locally-free-module` | 1 | state |
 | `def-pc-derived-category` | 1 | state |
-| `def-nagata-finite-type-closed-in-fp` | 3 | state |
 | `cor-galois-lisse-representations` | 1 | state |
-| `lem-pc-base-change-closure-components` | 1 | state |
 | `lem-pc-chi-zero-dim-support` | 1 | state |
 | `lem-pc-derived-tensor-transitivity` | 1 | state |
 | `lem-pc-fp-complex-descent` | 1 | state |
@@ -38,7 +36,6 @@
 | `lem-sc-hilbert-difference` | 1 | state |
 | `lem-sc-hilbert-embedded-points-gluing` | 1 | state |
 | `lem-sc-invertible-tensor-qcoherent` | 1 | state |
-| `lem-sc-meromorphic-sheaf-generic-product` | 1 | state |
 | `lem-sc-meromorphic-weakass-generic-product` | 1 | state |
 | `lem-sc-numerical-polynomial-leading-term` | 1 | state |
 | `lem-sc-p1-ext-coherent-dim-one-vanishing` | 1 | state |
@@ -72,7 +69,6 @@
 | `lem-weil-pbc-coherent-stalk-map-extends` | 1 | state |
 | `lem-weil-pbc-coherent-twist-global-generation` | 1 | state |
 | `lem-weil-pbc-descend-closed-immersion` | 1 | state |
-| `lem-weil-pbc-descend-finite` | 1 | state |
 | `lem-weil-pbc-descend-finite-locally-free` | 1 | state |
 | `lem-weil-pbc-etale-finite-data-descent` | 1 | state |
 | `lem-weil-pbc-etale-infinitesimal-neighbourhoods` | 1 | state |
@@ -83,11 +79,9 @@
 | `lem-weil-pbc-ideal-times-quasi-coherent-affine-sections` | 1 | state |
 | `lem-weil-pbc-integral-algebra-directed-colimit-finite` | 1 | state |
 | `lem-weil-pbc-integral-scheme-ideal-generic-stalk` | 1 | state |
-| `lem-weil-pbc-jacobi-zariski-connecting-map-naturality` | 1 | state |
 | `lem-weil-pbc-koszul-differential-square-zero` | 1 | state |
 | `lem-weil-pbc-lift-projective-module-etale` | 1 | state |
 | `lem-weil-pbc-limit-fibre-products` | 1 | state |
-| `lem-weil-pbc-lqf-qc-source-bounded-fibres` | 1 | state |
 | `lem-weil-pbc-module-directed-colimit-finite-presentation` | 1 | state |
 | `lem-weil-pbc-module-filtered-colimit-finite-presentation` | 1 | state |
 | `lem-weil-pbc-module-finite-presentation-extension` | 1 | state |
