@@ -112,5 +112,23 @@
   "group": "K1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-spq (reviewer sub-agent of L); spot-checked: Source: Stacks Tag 00U3 (algebra-lemma-etale-over-field, algebra.tex), whose separable case writes k'=k[x]/(P) and decomposes it; item statement unchanged from sheaf-dag (F field, P monic separable deg n per def-pc-separable-polynomial, Omega algebraically closed over F per def-weil-algebraic-closure). Step 1 carried by new child lem-pc-separable-polynomial-distinct-roots-alg-closed (exactly n pairwise distinct roots, P = prod (T-rho) in Omega[T]; hypotheses identical to the item's). Step 2 carried by new child lem-pc-polynomial-quotient-distinct-linear-crt (Omega field, pairwise distinct rho_i, evaluation Omega[T]/(prod(T-rho_i)) = prod Omega), hypotheses supplied by step 1 with Q=P. Step 3 elementary reindexing by the root set with count from step 1. Both children self-contained, stmt_deps exist (def-weil-field, def-weil-polynomial-ring, def-pc-separable-polynomial, def-weil-algebraic-closure), same_as [] confirmed by blueprint_refs search (separable polynomial chinese remainder: 0; chinese remainder: 0; distinct roots: only lem-sc-primitive-root, unrelated), from = lem-pc-ample-positive-degree (exists). Mathlib: no single declaration states either child or the item; Polynomial.card_rootSet_eq_natDegree (FieldTheory/Separable.lean:442) gives only the root count, CRT in Mathlib is Ideal.quotientInfRingEquivPiQuotient / Dedekind quotientEquivPiOfProdEq, not the evaluation isomorphism; no slopmaster2 sorry-map declaration states it (B10 n/a). Small cases: n=0 (P=1, R=0, empty product) and n=1 (Omega[T]/(T-rho)=Omega via evaluation) both hold for item and CRT child. Report mentions a citations.json not in the delivery (harmless). Start Sat Oct 10 04:44:08 PM UTC 2026, end Sat Oct 10 04:44:43 PM UTC 2026."
+ },
+ "lean": {
+  "module": "Sheaf.FieldTheory.SeparableQuotientProduct",
+  "declaration": "Polynomial.exists_eval_quotient_algEquiv_pi_of_separable",
+  "file": "lean/Sheaf/FieldTheory/SeparableQuotientProduct.lean",
+  "statement": "theorem exists_eval_quotient_algEquiv_pi_of_separable {F : Type u} [Field F] {Ω : Type v} [Field Ω] [Algebra F Ω] [IsAlgClosed Ω] (P : F[X]) (n : ℕ) (hmonic : P.Monic) (hsep : P.Separable) (hdegree : P.natDegree = n) : Nat.card {ρ : Ω // (P.map (algebraMap F Ω)).eval ρ = 0} = n ∧ ∃ e : (Ω[X] ⧸ Ideal.span {P.map (algebraMap F Ω)}) ≃ₐ[Ω] ({ρ : Ω // (P.map (algebraMap F Ω)).eval ρ = 0} → Ω), ∀ (q : Ω[X]) (ρ : {ρ : Ω // (P.map (algebraMap F Ω)).eval ρ = 0}), e (Ideal.Quotient.mk (Ideal.span {P.map (algebraMap F Ω)}) q) ρ = q.eval ρ.val",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-spq0853",
+  "group": "G1",
+  "result": "pass",
+  "note": "F field {F:Type u}[Field F]; P:F[X] Monic, Separable (Mathlib = coprime with derivative), natDegree = n; Omega {Type v}[Field][Algebra F Omega][IsAlgClosed Omega] = algebraically closed field containing F (node says containing, not algebraic over F; IsAlgClosed as in sibling distinct-roots match); R = Omega[X]/span{P.map algebraMap} as E1 sibling's Ideal.span/Ideal.Quotient.mk form; index set = root subtype of the mapped P, Nat.card = n (finite since P monic nonzero); product = subtype -> Omega; AlgEquiv over Omega with e [q] rho = q.eval rho for all q, rho; n=0 (P=1, both trivial), char p fine; docstring carries 3 proof steps citing distinct-roots and E1 CRT siblings; Mathlib: card_rootSet_eq_natDegree count only, quotientInfRingEquivPiQuotient general CRT, no exact match; lines<=100, sorry only"
  }
 }
