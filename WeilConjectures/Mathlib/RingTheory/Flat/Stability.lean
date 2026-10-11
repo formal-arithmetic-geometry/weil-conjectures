@@ -88,7 +88,8 @@ theorem map_inf_of_flat {A B : Type*} [CommRing A] [CommRing B] [Algebra A B] [M
     apply Module.Flat.rTensor_preserves_injective_linearMap (M := B) ψ hψ
     rw [LinearMap.rTensor_tmul, map_zero]
     have : ψ (Ideal.Quotient.mk (I ⊓ J) 1) =
-        LinearMap.inl A _ _ (Ideal.Quotient.mk I 1) + LinearMap.inr A _ _ (Ideal.Quotient.mk J 1) := by
+        LinearMap.inl A _ _ (Ideal.Quotient.mk I 1) +
+          LinearMap.inr A _ _ (Ideal.Quotient.mk J 1) := by
       ext
       · simpa [ψ] using Submodule.factor_mk (inf_le_left : I ⊓ J ≤ I) (1 : A)
       · simpa [ψ] using Submodule.factor_mk (inf_le_right : I ⊓ J ≤ J) (1 : A)

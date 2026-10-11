@@ -116,7 +116,6 @@ theorem exists_forall_exists_app_eq_sub_of_subsingleton_H_one (g : X ⟶ S) [IsS
     (fun i ↦ homOfLE le_top) hcov.ge _ hcompat
   refine ⟨t, fun i ↦ ⟨-b' i, ?_⟩⟩
   rw [map_neg]
-  change _ = ℒ.presheaf.map (homOfLE le_top).op t - s i
   have h := ht i
   change ℒ.presheaf.map (homOfLE le_top).op t = s i - ι.app _ (b' i) at h
   rw [h]

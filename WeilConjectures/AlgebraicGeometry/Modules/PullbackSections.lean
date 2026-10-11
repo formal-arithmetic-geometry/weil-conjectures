@@ -225,4 +225,29 @@ instance isFinitePresentation_pullback {X Y : Scheme.{u}} (g : X ⟶ Y) (M : Y.M
   obtain ⟨i, hi⟩ := hU.exists_mem (g.base x)
   exact Opens.mem_iSup.mpr ⟨i, hi⟩
 
+section PullbackSection
+
+variable {A B : Scheme.{u}} (g : A ⟶ B)
+
+/-- Pullbacks of sections are natural in the module. -/
+lemma pullback_map_app_pullbackSection {M N : B.Modules} (ψ : M ⟶ N) {U : B.Opens}
+    (m : Γ(M, U)) :
+    ((Modules.pullback g).map ψ).app (g ⁻¹ᵁ U) (pullbackSection g m) =
+      pullbackSection g (ψ.app U m) := by
+  have h := (pullbackPushforwardAdjunction g).unit.naturality ψ
+  exact (congrArg (fun φ ↦ φ.app U m) h).symm
+
+set_option backward.isDefEq.respectTransparency.types false in
+/-- The pullback of a function `r` on `U`, under `g^* 𝒪_B ≅ 𝒪_A`, is `g^♯ r`. -/
+lemma pullbackObjUnitIso_hom_app_pullbackSection {U : B.Opens} (r : Γ(B, U)) :
+    (pullbackObjUnitIso g).hom.app (g ⁻¹ᵁ U) (pullbackSection g (M := Modules.unit B) r) =
+      g.app U r := by
+  have h2 : (pullbackPushforwardAdjunction g).homEquiv _ _ (pullbackObjUnitIso g).hom =
+      SheafOfModules.unitToPushforwardObjUnit g.toRingCatSheafHom :=
+    SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit _
+  rw [Adjunction.homEquiv_unit] at h2
+  exact congrArg (fun φ : Modules.unit B ⟶ (pushforward g).obj (Modules.unit A) ↦ φ.app U r) h2
+
+end PullbackSection
+
 end AlgebraicGeometry.Scheme.Modules

@@ -12,6 +12,7 @@ public import WeilConjectures.AlgebraicGeometry.Modules.PullbackSections
 public import WeilConjectures.Mathlib.AlgebraicGeometry.PullbackCarrier
 public import WeilConjectures.Mathlib.RingTheory.Flat.Stability
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat
+public import WeilConjectures.AlgebraicGeometry.Modules.ProjectionFormula
 
 /-!
 # Flatness of a module over the base is local
@@ -158,5 +159,37 @@ theorem flat_sections_pullback_fst {K : Type u} [Field K] {W Z : Scheme.{u}}
   exact Module.Flat.of_linearEquiv (((AlgebraTensorModule.cancelBaseChange Γ(W, UW)
     Γ(Limits.pullback gW gZ, Ω) Γ(Limits.pullback gW gZ, U) Γ(Limits.pullback gW gZ, U)
     Γ(ℱ, UW)).trans e).restrictScalars Γ(Z, V)).symm
+
+set_option backward.isDefEq.respectTransparency false in
+/-- **Twists of pullbacks from a factor are flat over the other factor.** Let `W`, `Z` be schemes
+over a field `K`, `ℱ` a quasi-coherent module on `W` and `L` an invertible module on
+`W ×_K Z`. Then `pr_W^* ℱ ⊗ L` is flat over `Z`. -/
+theorem isFlatOver_pullback_fst_tensorObj {K : Type u} [Field K] {W Z : Scheme.{u}}
+    (gW : W ⟶ Spec (.of K)) (gZ : Z ⟶ Spec (.of K)) (ℱ : W.Modules) [ℱ.IsQuasicoherent]
+    (L : (Limits.pullback gW gZ).Modules) [L.IsInvertible] :
+    (MonoidalCategory.tensorObj ((Modules.pullback (Limits.pullback.fst gW gZ)).obj ℱ) L).IsFlatOver
+      (Limits.pullback.snd gW gZ) := by
+  set F := (Modules.pullback (Limits.pullback.fst gW gZ)).obj ℱ
+  have : SheafOfModules.IsInvertible.{u, u, u} L := IsInvertible.sheafOfModules_isInvertible L
+  have : (MonoidalCategory.tensorObj F L).IsQuasicoherent := isQuasicoherent_tensorObj F L
+  refine isFlatOver_of_forall_exists _ _ fun V p _ ↦ ?_
+  obtain ⟨UW, hpUW, -, -⟩ := exists_isFreeGenerator (Modules.unit W)
+    (TopologicalSpace.Opens.mem_top (Limits.pullback.fst gW gZ p))
+  obtain ⟨N, hpN, -, ℓ, hℓ⟩ := exists_isFreeGenerator L (TopologicalSpace.Opens.mem_top p)
+  refine ⟨N.1 ⊓ Limits.pullback.fst gW gZ ⁻¹ᵁ UW.1, ⟨hpN, hpUW⟩, fun U e hUN ↦ ?_⟩
+  have hUN' : U.1 ≤ N.1 := hUN.trans inf_le_left
+  have hflat := flat_sections_pullback_fst gW gZ ℱ UW.2 V.2 U.2
+    (le_inf (hUN.trans inf_le_right) e)
+  let : Module Γ(Z, V.1) Γ(F, U.1) :=
+    Module.compHom _ ((Limits.pullback.snd gW gZ).appLE V.1 U.1 e).hom
+  let : Module Γ(Z, V.1) Γ(MonoidalCategory.tensorObj F L, U.1) :=
+    Module.compHom _ ((Limits.pullback.snd gW gZ).appLE V.1 U.1 e).hom
+  let φ : Γ(F, U.1) →ₗ[Γ(Z, V.1)] Γ(MonoidalCategory.tensorObj F L, U.1) :=
+    { toFun t := tmulSection t (L.presheaf.map (homOfLE hUN').op ℓ)
+      map_add' a b := add_tmulSection a b _
+      map_smul' r a := smul_tmulSection _ a _ }
+  exact Module.Flat.of_linearEquiv
+    (LinearEquiv.ofBijective φ (hℓ.bijective_tmulSection_right hUN')).symm
+
 
 end AlgebraicGeometry.Scheme.Modules

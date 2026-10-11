@@ -404,7 +404,7 @@ public import WeilConjectures.AlgebraicGeometry.Sites.UnitsTorsor
 public import WeilConjectures.AlgebraicGeometry.SpecAlgebraicClosure
 public import WeilConjectures.AlgebraicGeometry.TangentSpace
 public import WeilConjectures.AlgebraicGeometry.TheoremOfCube
-public import WeilConjectures.AlgebraicGeometry.TheoremOfCube.Assembly
+public import WeilConjectures.AlgebraicGeometry.TheoremOfCube.CrossIdeal
 public import WeilConjectures.AlgebraicGeometry.TheoremOfCube.Slices
 public import WeilConjectures.AlgebraicGeometry.TheoremOfCube.SpreadOut
 public import WeilConjectures.AnalyticAux
@@ -818,6 +818,7 @@ public import WeilConjectures.GroupTheory.TateModule
 public import WeilConjectures.GroupTheory.TorsionCharacter
 public import WeilConjectures.GroupTheory.WeilGroup
 public import WeilConjectures.LinearAlgebra.SemilinearFrobenius
+public import WeilConjectures.LinearAlgebra.TensorProduct.Kunneth
 public import WeilConjectures.Mathlib.Algebra.Algebra.Hom
 public import WeilConjectures.Mathlib.Algebra.Algebra.Pi
 public import WeilConjectures.Mathlib.Algebra.BigOperators.GroupWithZero.Finset
@@ -1208,8 +1209,8 @@ public import WeilConjectures.Mathlib.LinearAlgebra.TensorProduct.Associator
 public import WeilConjectures.Mathlib.LinearAlgebra.TensorProduct.Basic
 public import WeilConjectures.Mathlib.LinearAlgebra.TensorProduct.Basis
 public import WeilConjectures.Mathlib.LinearAlgebra.TensorProduct.Finiteness
-public import WeilConjectures.Mathlib.LinearAlgebra.TensorProduct.Kunneth
 public import WeilConjectures.Mathlib.LinearAlgebra.TensorProduct.Pi
+public import WeilConjectures.Mathlib.LinearAlgebra.TensorProduct.RightExactness
 public import WeilConjectures.Mathlib.LinearAlgebra.TensorProduct.Submodule
 public import WeilConjectures.Mathlib.LinearAlgebra.TensorProduct.Vanishing
 public import WeilConjectures.Mathlib.NumberTheory.Cyclotomic.CyclotomicCharacter

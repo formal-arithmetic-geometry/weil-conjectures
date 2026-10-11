@@ -12,7 +12,8 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Affine
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 public import WeilConjectures.Mathlib.AlgebraicGeometry.PullbackCarrier
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Scheme
-public import WeilConjectures.Mathlib.LinearAlgebra.TensorProduct.Kunneth
+public import WeilConjectures.LinearAlgebra.TensorProduct.Kunneth
+public import WeilConjectures.Mathlib.LinearAlgebra.TensorProduct.RightExactness
 
 /-!
 # Vanishing of `H¹` of a product of ideal sheaves
@@ -193,7 +194,8 @@ lemma range_mulIdeal {U : X.Opens} {V : Y.Opens} (hU : IsAffineOpen U) (hV : IsA
 
 /-- Restriction of sections of an ideal sheaf, as a `Γ(Spec K, ⊤)`-linear map. -/
 noncomputable def resIdeal {Z : Scheme.{u}} [Z.Over (Spec (.of K))] (I : Z.IdealSheafData)
-    {U U' : Z.Opens} (h : U' ≤ U) : idealSub (K := K) I U →ₗ[Γ(Spec (.of K), ⊤)] idealSub (K := K) I U' where
+    {U U' : Z.Opens} (h : U' ≤ U) :
+    idealSub (K := K) I U →ₗ[Γ(Spec (.of K), ⊤)] idealSub (K := K) I U' where
   toFun a := ⟨Z.presheaf.map (homOfLE h).op a.1, by
     have := a.2
     change a.1 ∈ I.idealOfOpens U at this
@@ -217,7 +219,8 @@ lemma map_mulIdeal {U U' : X.Opens} {V V' : Y.Opens} (hU : U' ≤ U) (hV : V' �
     (w : idealSub (K := K) I U ⊗[Γ(Spec (.of K), ⊤)] idealSub (K := K) I' V) :
     (prod K X Y).presheaf.map (homOfLE (inf_le_inf ((prodFst K X Y).preimage_mono hU)
       ((prodSnd K X Y).preimage_mono hV))).op (mulIdeal I I' U V w) =
-      mulIdeal I I' U' V' (TensorProduct.map (resIdeal (K := K) I hU) (resIdeal (K := K) I' hV) w) := by
+      mulIdeal I I' U' V'
+        (TensorProduct.map (resIdeal (K := K) I hU) (resIdeal (K := K) I' hV) w) := by
   induction w using TensorProduct.induction_on with
   | zero => simp
   | add x y hx hy => simp only [map_add, hx, hy]
@@ -278,9 +281,9 @@ lemma eq_of_presheaf_map_eq {Z : Scheme.{u}} {O₁ O₂ : Z.Opens} (h : O₂ = O
     rfl
   rw [← key s, ← key t, hst]
 
-variable [IsSeparated (X ↘ Spec (.of K))] [IsSeparated (Y ↘ Spec (.of K))]
 
 set_option maxHeartbeats 1600000 in
+-- the proof checks many index cases of the Čech cocycle condition
 /-- **The Künneth argument on Čech cochains.** Let `U` and `V` be finite affine open covers
 of `X` and `Y`, with affine pairwise intersections. If `I` and `I'` have no nonzero global
 sections, the Čech complex of `pr_X⁻¹ I ⊓ pr_Y⁻¹ I'` for the cover `U × V` of `X ×_K Y` is
@@ -519,6 +522,7 @@ lemma exists_finite_affine_cover (Z : Scheme.{u}) [CompactSpace Z] :
 a field `K`, and let `I`, `I'` be ideal sheaves on `X`, `Y` without nonzero global sections.
 Then `H¹(X ×_K Y, pr_X⁻¹ I ⊓ pr_Y⁻¹ I') = 0` (the Künneth formula in degree one). -/
 theorem subsingleton_H_one_toModules_prodIdeal [CompactSpace X] [CompactSpace Y]
+    [IsSeparated (X ↘ Spec (.of K))] [IsSeparated (Y ↘ Spec (.of K))]
     (hI : ∀ s ∈ I.idealOfOpens ⊤, s = 0) (hI' : ∀ s ∈ I'.idealOfOpens ⊤, s = 0) :
     Subsingleton ((prodIdeal (K := K) I I').toModules.H 1) := by
   have : IsSeparated (terminal.from X) := by

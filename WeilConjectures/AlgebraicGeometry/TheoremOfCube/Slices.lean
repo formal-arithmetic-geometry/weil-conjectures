@@ -92,12 +92,12 @@ lemma isPullback_slice_right (y : 𝟙_ (Over S) ⟶ Y) :
     ((Over.forget S).mapIso ((α_ Y X Z).symm ≪≫ whiskerRightIso (β_ Y X) Z)) (Iso.refl _)
     (Iso.refl _) ?_ ?_ ?_ ?_
   · simp only [Iso.refl_hom, Category.id_comp, Functor.mapIso_hom, Over.forget_map,
-      Iso.symm_hom, ← Over.comp_left]
+      ← Over.comp_left]
     congr 1
     ext <;> simp
   · simp
   · simp only [Iso.refl_hom, Category.comp_id, Functor.mapIso_hom, Over.forget_map,
-      Iso.symm_hom, ← Over.comp_left]
+      ← Over.comp_left]
     congr 1
     simp
   · simp

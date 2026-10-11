@@ -11,7 +11,7 @@ public import WeilConjectures.AlgebraicGeometry.GlobalSectionsBijective
 public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 public import WeilConjectures.AlgebraicGeometry.Modules.Rigidification
 public import WeilConjectures.AlgebraicGeometry.Seesaw
-public import WeilConjectures.AlgebraicGeometry.TheoremOfCube.Assembly
+public import WeilConjectures.AlgebraicGeometry.TheoremOfCube.SpreadOut
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Geometrically.Integral
 
 /-!
