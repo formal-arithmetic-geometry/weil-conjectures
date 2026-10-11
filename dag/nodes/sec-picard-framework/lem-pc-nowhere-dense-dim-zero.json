@@ -152,5 +152,23 @@
   "group": "H1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-nd2 (reviewer sub-agent of L); spot-checked: Re-push after the 15:06 return (commit 9b39bdd2d): both points repaired, and only step 2 of the proof changed against the returned head f7b39ff9f (plus created.by/date, now the same as sheaf-dag). Point 1 (E3/E5): step 2 now has the two cases. (a) W_1 strictly inside C_i gives a length-2 chain in X. (b) W_1 = C_i gives C_i in Z, so the nonempty open U_i from step 1 lies in the closed set Z, which contradicts nowhere density. Point 2 (C4): step 2 now opens by applying lem-pc-scheme-dimension-local-rings to X, which turns dim X <= 1 in the def-pc-dimension sense into topological Krull dimension <= 1 (def-kun-topological-krull-dimension). The empty X is handled in step 1, so def-pc-dimension's nonempty assumption holds. The source is Stacks Varieties Tag 0AYY, proof sentence 'Since D is nowhere dense in X we see that dim(D) <= 0'. The statement is unchanged from sheaf-dag. Statements of the cited nodes re-read: lem-weil-pbc-finite-type-over-noetherian (finite type over a Noetherian base gives Noetherian), lem-weil-pbc-noetherian-finitely-many-components, lem-sc-irreducible-components-cover (an irreducible subset lies in a component), lem-pc-scheme-dimension-local-rings, and lem-sc-dim0-finite (a closed subset of dim <= 0 is a finite set of closed points of X, hence closed in Z). The topology in step 1 (a component is not contained in the union of the others, by irreducibility and maximality) is elementary. tool_uses accepted as generic black boxes. Only the item's own fields changed against sheaf-dag (proof, proof_deps, proof_origin, split_report, status). Small cases: Spec k[t] with Z=V(t), and Z=C_i a whole component of k[x,y]/(xy), which is not nowhere dense and so is correctly excluded. Start Sat Oct 10 03:14:04 PM UTC 2026, end Sat Oct 10 03:14:29 PM UTC 2026."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.NowhereDenseDimZero",
+  "declaration": "AlgebraicGeometry.dim_le_zero_of_isNowhereDense",
+  "file": "lean/Sheaf/AlgebraicGeometry/NowhereDenseDimZero.lean",
+  "statement": "theorem dim_le_zero_of_isNowhereDense {k : Type u} [Field k] {X Z : Scheme.{u}} (f : X ⟶ Spec (.of k)) [LocallyOfFiniteType f] [QuasiCompact f] (i : Z ⟶ X) [IsClosedImmersion i] (hX : X.dim ≤ 1) (hnow : IsNowhereDense (Set.range i.base)) : Z.dim ≤ 0 ∧ ∀ z : Z, IsClosed ({z} : Set Z)",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-ndz0822",
+  "group": "E1",
+  "result": "pass",
+  "note": "field k Type u; X finite type over k as f : X ⟶ Spec (.of k) with LocallyOfFiniteType+QuasiCompact (as H1 proper_dim_zero_finite_over_field); hX : X.dim ≤ 1 (landed Scheme.dim, empty = ⊥); Z closed subscheme as i : Z ⟶ X [IsClosedImmersion i] (node's def-weil-closed-immersion; G1 J.subschemeι instantiates it); nowhere dense as IsNowhereDense (Set.range i.base); conclusions Z.dim ≤ 0 ∧ ∀ z, IsClosed {z} in Z; docstring = node's 3 proof steps; header/tag/no Sheaf. prefix/lines ≤100/imports used/proof sorry; no Mathlib topologicalKrullDim+nowhere-dense lemma"
  }
 }
