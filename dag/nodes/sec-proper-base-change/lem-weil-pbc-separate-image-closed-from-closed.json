@@ -133,5 +133,23 @@
   "item": "lem-weil-pbc-separate-image-closed-from-closed",
   "worker": "stage1",
   "summary": "Read the Stacks proof of 07M3 (more-algebra.tex 1938-1957) and Algebra 00E0 / the proof of 00FL. Three steps: (1) take I' = phi^{-1}(J); the closure of the image of V(J) is V(I') [new Mathlib leaf lem-weil-pbc-closure-image-spec-zero-locus = PrimeSpectrum.closure_image_comap_zeroLocus, exact, no integrality hypothesis]; (2) V(I) ∩ V(I') = ∅ gives I + I' = R and 1 = g + f [new Mathlib leaf lem-weil-pbc-spec-zero-loci-disjoint-unit-ideal = zeroLocus_sup + zeroLocus_empty_iff_eq_top, element form Ideal.isCoprime_tfae; Stacks 00E0 (8),(10)]; (3) elementary: f = 1 - g is 1 mod I and phi(f) in J. Stacks allows any I' with V(I') = closure and then needs a power f^n (00E0 (7)); with the choice I' = phi^{-1}(J) the power is n = 1 and is not needed, said in the step. Mathlib has no 07M3 as one declaration (searches recorded on the item, three kinds, plus one grep added). Source repository slopmaster2: no 07M3, 07M4 or closure_image_comap_zeroLocus in WeilConjectures/."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.SeparateImageClosedFromClosed",
+  "declaration": "PrimeSpectrum.exists_one_mod_mem_of_disjoint_closure_image_zeroLocus",
+  "file": "lean/Sheaf/RingTheory/SeparateImageClosedFromClosed.lean",
+  "statement": "theorem exists_one_mod_mem_of_disjoint_closure_image_zeroLocus {R : Type u} {S : Type v} [CommRing R] [CommRing S] (φ : R →+* S) (I : Ideal R) (J : Ideal S) (h : Disjoint (closure (comap φ '' zeroLocus (J : Set S))) (zeroLocus (I : Set R))) : ∃ f : R, Ideal.Quotient.mk I f = 1 ∧ φ f ∈ J",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-sic2",
+  "group": "E1",
+  "result": "pass",
+  "note": "R,S arbitrary CommRing in independent universes; phi : R →+* S; ideals I,J; hypothesis Disjoint (closure (comap phi '' zeroLocus J)) (zeroLocus I); conclusion ∃ f, mk I f = 1 ∧ phi f ∈ J; no extra hypotheses, edge cases I/J = ⊤/⊥ fine"
  }
 }

@@ -4884,3 +4884,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 14:13 L: merged deliver/K1/lem-weil-pbc-root-lifting-etale-retraction (stage 2; reviewer PASS; first push; Sheaf.RingTheory.RootLiftingEtaleRetraction IsLocalRing.existsUnique_algHom_of_monic_simple_root_lifting_etale)
 - 14:14 L: merged deliver/M1/lem-sc-p1-serre-section-module-comparison (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.SerreSectionModuleComparison AlgebraicGeometry.serreSectionModuleComparison)
 - 14:14 L: merged deliver/H1/def-weil-pbc-closed-subset-proper-over-base (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.ClosedSubsetProperOverBase AlgebraicGeometry.Scheme.IsClosedSubsetProperOver)
+- 14:14 L: merged deliver/E1/lem-weil-pbc-separate-image-closed-from-closed (stage 2; reviewer PASS; first push; Sheaf.RingTheory.SeparateImageClosedFromClosed PrimeSpectrum.exists_one_mod_mem_of_disjoint_closure_image_zeroLocus)
