@@ -59,7 +59,75 @@ end Independence
 section Exchange
 
 variable {X' X Y' Y : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'} {f : X ⟶ Y} {g : Y' ⟶ Y}
-  [HasCompactification f] [HasCompactification f'] [QuasiCompact f']
+  (sq : CommSq g' f' f g) (c : Compactification f) (c' : Compactification f') (q : c'.Z ⟶ c.Z)
+  (hi : IsPullback g' c'.i c.i q) (hp : CommSq q c'.g c.g g)
+  [HasCompactification f'] [QuasiCompact f']
+
+/-- The exchange map `Lg^* Rf_!(c) ⟶ R(f')_! Lg'^*` for a compactification `c'` of the base change
+lying over `c`: `rightDerivedLowerShriekOfCompactificationBaseChangeMap'` followed by the
+comparison isomorphism `Rf'_!(c') ≅ R(f')_!`. For `c` the chosen compactification of `f` and
+`c' = c.ofIsPullback sq` it is `rightDerivedLowerShriekBaseChangeMap`. -/
+noncomputable def rightDerivedLowerShriekBaseChangeMap' :
+    Rf_!(c)[ModuleCat.{u + 1} Λ] ⋙ L((g)^*[ModuleCat.{u + 1} Λ]) ⟶
+      L((g')^*[ModuleCat.{u + 1} Λ]) ⋙ R(f')_![ModuleCat.{u + 1} Λ] :=
+  rightDerivedLowerShriekOfCompactificationBaseChangeMap' _ c c' q hi hp ≫
+    Functor.whiskerLeft _ (rightDerivedLowerShriekIso Λ c').hom
+
+lemma rightDerivedLowerShriekBaseChangeMap_eq [HasCompactification f] (sq : IsPullback g' f' f g) :
+    rightDerivedLowerShriekBaseChangeMap Λ sq =
+      rightDerivedLowerShriekBaseChangeMap' Λ (HasCompactification.compactification f)
+        ((HasCompactification.compactification f).ofIsPullback sq)
+        (pullback.fst (HasCompactification.compactification f).g g)
+        ((HasCompactification.compactification f).isPullback_i_ofIsPullback sq)
+        (IsPullback.of_hasPullback (HasCompactification.compactification f).g g).toCommSq :=
+  rfl
+
+/-- The projection map commutes with the exchange map `rightDerivedLowerShriekBaseChangeMap'`. -/
+theorem projectionMapOfCompactification_rightDerivedLowerShriekBaseChangeMap'
+    (K : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
+    (L : DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
+    L((g)^*[ModuleCat.{u + 1} Λ]).map (((projectionMapOfCompactification _ c).app K).app L) ≫
+        (rightDerivedLowerShriekBaseChangeMap' Λ c c' q hi hp).app
+          (((-⊗ᴸ-(X)[ModuleCat.{u + 1} Λ]).obj K).obj (L((f)^*[ModuleCat.{u + 1} Λ]).obj L)) ≫
+        (R(f')_![ModuleCat.{u + 1} Λ]).map
+          (((leftDerivedUpperStarTensorComparison _ g').app K).app
+            (L((f)^*[ModuleCat.{u + 1} Λ]).obj L)) ≫
+        (R(f')_![ModuleCat.{u + 1} Λ]).map
+          (((-⊗ᴸ-(X')[ModuleCat.{u + 1} Λ]).obj (L((g')^*[ModuleCat.{u + 1} Λ]).obj K)).map
+            ((derivedSquareUpperStarIso _ sq).inv.app L)) =
+      ((leftDerivedUpperStarTensorComparison _ g).app
+          ((Rf_!(c)[ModuleCat.{u + 1} Λ]).obj K)).app L ≫
+        ((-⊗ᴸ-(Y')[ModuleCat.{u + 1} Λ]).map
+          ((rightDerivedLowerShriekBaseChangeMap' Λ c c' q hi hp).app K)).app
+            (L((g)^*[ModuleCat.{u + 1} Λ]).obj L) ≫
+        ((projectionMap _ f').app (L((g')^*[ModuleCat.{u + 1} Λ]).obj K)).app
+          (L((g)^*[ModuleCat.{u + 1} Λ]).obj L) := by
+  have thm := projectionMapOfCompactification_baseChange' (ModuleCat.{u + 1} Λ) sq c c' q hi hp
+    K L
+  have hD' : ((projectionMapOfCompactification (ModuleCat.{u + 1} Λ) c').app
+        (L((g')^*[ModuleCat.{u + 1} Λ]).obj K)).app (L((g)^*[ModuleCat.{u + 1} Λ]).obj L) ≫
+      (rightDerivedLowerShriekOfCompactificationIso Λ c'
+        (HasCompactification.compactification f')).hom.app
+          (((-⊗ᴸ-(X')[ModuleCat.{u + 1} Λ]).obj (L((g')^*[ModuleCat.{u + 1} Λ]).obj K)).obj
+            (L((f')^*[ModuleCat.{u + 1} Λ]).obj (L((g)^*[ModuleCat.{u + 1} Λ]).obj L))) =
+      ((-⊗ᴸ-(Y')[ModuleCat.{u + 1} Λ]).map
+          ((rightDerivedLowerShriekOfCompactificationIso Λ c'
+            (HasCompactification.compactification f')).hom.app
+              (L((g')^*[ModuleCat.{u + 1} Λ]).obj K))).app (L((g)^*[ModuleCat.{u + 1} Λ]).obj L) ≫
+        ((projectionMapOfCompactification (ModuleCat.{u + 1} Λ)
+          (HasCompactification.compactification f')).app
+            (L((g')^*[ModuleCat.{u + 1} Λ]).obj K)).app (L((g)^*[ModuleCat.{u + 1} Λ]).obj L) :=
+    projectionMapOfCompactification_rightDerivedLowerShriekOfCompactificationIso Λ c'
+      (HasCompactification.compactification f') _ _
+  simp only [rightDerivedLowerShriekBaseChangeMap', NatTrans.comp_app, Functor.whiskerLeft_app,
+    Functor.map_comp, Category.assoc]
+  rw [← NatTrans.naturality_assoc (rightDerivedLowerShriekIso Λ c').hom,
+    ← NatTrans.naturality (rightDerivedLowerShriekIso Λ c').hom]
+  erw [reassoc_of% thm]
+  rw [show rightDerivedLowerShriekIso Λ c' = rightDerivedLowerShriekOfCompactificationIso Λ c'
+      (HasCompactification.compactification f') from rfl]
+  dsimp only [Functor.comp_obj]
+  sorry
 
 /-- **The projection map commutes with the exchange map `Ex_!`**: for a cartesian square
 `g' ≫ f = f' ≫ g`, the square
@@ -71,7 +139,8 @@ Lg^*Rf_!K ⊗ᴸ Lg^*L ──Ex_! ⊗ 1──▶ Rf'_!Lg'^*K ⊗ᴸ Lg^*L ──
 ```
 commutes, where the vertical arrows are the tensor comparisons of the derived pullbacks, the
 right one followed by `Lg'^*Lf^* ≅ Lf'^*Lg^*`. -/
-theorem projectionMap_rightDerivedLowerShriekBaseChangeMap (sq : IsPullback g' f' f g)
+theorem projectionMap_rightDerivedLowerShriekBaseChangeMap [HasCompactification f]
+    (sq : IsPullback g' f' f g)
     (K : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
     (L : DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
     L((g)^*[ModuleCat.{u + 1} Λ]).map (((projectionMap _ f).app K).app L) ≫
@@ -90,54 +159,6 @@ theorem projectionMap_rightDerivedLowerShriekBaseChangeMap (sq : IsPullback g' f
             (L((g)^*[ModuleCat.{u + 1} Λ]).obj L) ≫
         ((projectionMap _ f').app (L((g')^*[ModuleCat.{u + 1} Λ]).obj K)).app
           (L((g)^*[ModuleCat.{u + 1} Λ]).obj L) := by
-  have thm := projectionMapOfCompactification_baseChange' (ModuleCat.{u + 1} Λ) sq.toCommSq
-    (HasCompactification.compactification f)
-    ((HasCompactification.compactification f).ofIsPullback sq)
-    (pullback.fst (HasCompactification.compactification f).g g)
-    ((HasCompactification.compactification f).isPullback_i_ofIsPullback sq)
-    (IsPullback.of_hasPullback (HasCompactification.compactification f).g g).toCommSq K L
-  rw [← rightDerivedLowerShriekOfCompactificationBaseChangeMap_eq] at thm
-  have hD := projectionMapOfCompactification_rightDerivedLowerShriekOfCompactificationIso Λ
-    ((HasCompactification.compactification f).ofIsPullback sq) (HasCompactification.compactification f')
-    (L((g')^*[ModuleCat.{u + 1} Λ]).obj K) (L((g)^*[ModuleCat.{u + 1} Λ]).obj L)
-  have k₁ : (rightDerivedLowerShriekIso Λ
-      ((HasCompactification.compactification f).ofIsPullback sq)).hom.app
-        (L((g')^*[ModuleCat.{u + 1} Λ]).obj (((-⊗ᴸ-(X)[ModuleCat.{u + 1} Λ]).obj K).obj
-          (L((f)^*[ModuleCat.{u + 1} Λ]).obj L))) ≫
-      (R(f')_![ModuleCat.{u + 1} Λ]).map
-        (((leftDerivedUpperStarTensorComparison _ g').app K).app
-          (L((f)^*[ModuleCat.{u + 1} Λ]).obj L)) =
-      (Rf_!((HasCompactification.compactification f).ofIsPullback sq)[ModuleCat.{u + 1} Λ]).map
-        (((leftDerivedUpperStarTensorComparison _ g').app K).app
-          (L((f)^*[ModuleCat.{u + 1} Λ]).obj L)) ≫
-      (rightDerivedLowerShriekIso Λ
-        ((HasCompactification.compactification f).ofIsPullback sq)).hom.app _ :=
-    ((rightDerivedLowerShriekIso Λ
-      ((HasCompactification.compactification f).ofIsPullback sq)).hom.naturality _).symm
-  have k₂ : (rightDerivedLowerShriekIso Λ
-      ((HasCompactification.compactification f).ofIsPullback sq)).hom.app
-        (((derivedTensorLeftDerivedUpperStar _ g').obj K).obj (L((f)^*[ModuleCat.{u + 1} Λ]).obj L)) ≫
-      (R(f')_![ModuleCat.{u + 1} Λ]).map
-        (((-⊗ᴸ-(X')[ModuleCat.{u + 1} Λ]).obj (L((g')^*[ModuleCat.{u + 1} Λ]).obj K)).map
-          ((derivedSquareUpperStarIso _ sq.toCommSq).inv.app L)) =
-      (Rf_!((HasCompactification.compactification f).ofIsPullback sq)[ModuleCat.{u + 1} Λ]).map
-        (((-⊗ᴸ-(X')[ModuleCat.{u + 1} Λ]).obj (L((g')^*[ModuleCat.{u + 1} Λ]).obj K)).map
-          ((derivedSquareUpperStarIso _ sq.toCommSq).inv.app L)) ≫
-      (rightDerivedLowerShriekIso Λ
-        ((HasCompactification.compactification f).ofIsPullback sq)).hom.app _ :=
-    ((rightDerivedLowerShriekIso Λ
-      ((HasCompactification.compactification f).ofIsPullback sq)).hom.naturality _).symm
-  simp only [rightDerivedLowerShriekBaseChangeMap, NatTrans.comp_app, Functor.whiskerLeft_app,
-    Functor.map_comp, Category.assoc]
-  rw [← NatTrans.naturality_assoc (rightDerivedLowerShriekIso Λ
-    ((HasCompactification.compactification f).ofIsPullback sq)).hom,
-    ← NatTrans.naturality (rightDerivedLowerShriekIso Λ
-    ((HasCompactification.compactification f).ofIsPullback sq)).hom]
-  erw [reassoc_of% thm]
-  rw [show rightDerivedLowerShriekIso Λ ((HasCompactification.compactification f).ofIsPullback sq) =
-    rightDerivedLowerShriekOfCompactificationIso Λ
-      ((HasCompactification.compactification f).ofIsPullback sq)
-      (HasCompactification.compactification f') from rfl]
   sorry
 
 end Exchange
