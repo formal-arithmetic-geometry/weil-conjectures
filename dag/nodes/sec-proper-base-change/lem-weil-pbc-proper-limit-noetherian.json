@@ -264,5 +264,24 @@
  "tool_uses": [
   "lem-weil-pbc-closed-immersion-from-composite",
   "thm-pd-spreading-out"
- ]
+ ],
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProperLimitNoetherian",
+  "declaration": "AlgebraicGeometry.exists_proper_limit_noetherian",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProperLimitNoetherian.lean",
+  "statement": "theorem exists_proper_limit_noetherian {X S : Scheme.{u}} (f : X ⟶ S) [IsProper f] [CompactSpace S] [QuasiSeparatedSpace S] : ∃ (Λ : Type u) (_ : Preorder Λ) (_ : Nonempty Λ) (_ : IsDirected Λ (· ≤ ·)) (Xs Ss : Λᵒᵖ ⥤ Scheme.{u}) (fs : Xs ⟶ Ss) (πX : (Functor.const Λᵒᵖ).obj X ⟶ Xs) (πS : (Functor.const Λᵒᵖ).obj S ⟶ Ss), Nonempty (IsLimit (Cone.mk X πX)) ∧ Nonempty (IsLimit (Cone.mk S πS)) ∧ (∀ (i j : Λᵒᵖ) (a : i ⟶ j), IsAffineHom (Xs.map a) ∧ IsAffineHom (Ss.map a)) ∧ (∀ i : Λᵒᵖ, IsProper (fs.app i)) ∧ (∀ i : Λᵒᵖ, LocallyOfFiniteType (specULiftZIsTerminal.from (Ss.obj i)) ∧ QuasiCompact (specULiftZIsTerminal.from (Ss.obj i))) ∧ (∀ i : Λᵒᵖ, πX.app i ≫ fs.app i = f ≫ πS.app i) ∧ (IsAffine S → (∀ i : Λᵒᵖ, IsAffine (Ss.obj i) ∧ RingHom.FiniteType (algebraMap ℤ (Scheme.Γ.obj (Opposite.op (Ss.obj i))))) ∧ Nonempty (IsColimit (Scheme.Γ.mapCocone (Cone.mk S πS).op)))",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-pln1424"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-pln1424",
+  "group": "K1",
+  "result": "fix",
+  "note": "f proper, S qc+qs instances; Λ : Type u Preorder+Nonempty+IsDirected; X/S limits as IsLimit (Cone.mk X πX)/(Cone.mk S πS) (G1 4d583e21e form, replaced cX.pt = X eqToHom); affine transitions both systems; f_λ proper; S_λ finite type over Spec ULift ℤ as LFT+QuasiCompact of terminal map; πX ≫ f_λ = f ≫ πS; affine clause as IsAffine S → affine stages, Γ f.g. over ℤ, Γ-cocone of the S cone colimit (unused A/CommRing/iso binders removed)"
+ }
 }

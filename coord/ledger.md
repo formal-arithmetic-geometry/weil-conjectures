@@ -4744,3 +4744,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 13:19 L: merged deliver/H1/lem-weil-pbc-projective-dimension-well-defined (stage 2; reviewer FIX; first push; Sheaf.Algebra.ProjectiveDimensionWellDefined ModuleCat.projective_and_global_dimension_well_defined)
 - 13:19 L: merged deliver/E1/lem-sc-module-extension-by-zero-stalk-maps (stage 2; reviewer FIX; first push; Sheaf.Algebra.Homology.ModuleExtensionByZeroStalkMaps AlgebraicGeometry.module_extensionByZero_stalk_maps)
 - 13:19 L: merged deliver/K1/lem-weil-pbc-quasi-coherent-algebra-change-of-rings (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.QuasiCoherentAlgebraChangeOfRings AlgebraicGeometry.Scheme.Modules.quasiCoherent_algebra_changeOfRings)
+- 13:19 L: merged deliver/K1/lem-weil-pbc-proper-limit-noetherian (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.ProperLimitNoetherian AlgebraicGeometry.exists_proper_limit_noetherian)
