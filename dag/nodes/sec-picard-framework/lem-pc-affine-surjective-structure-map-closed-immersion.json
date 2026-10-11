@@ -160,5 +160,23 @@
   "group": "E1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-asc (reviewer sub-agent of L); spot-checked: Source Stacks Morphisms 01QO (3)=>(1) with 01SA; the item statement (affine f, every stalk map O_{Y,y}->(f_*O_X)_y surjective => closed immersion) is unchanged and true. Step 2 (pqf-def-affine-morphism: preimage of affine open affine) and Step 3 (lem-weil-pbc-closed-immersion-affine-cover-criterion part (2), covering by all affine opens) are carried by the cited statements, hypotheses checked. FIX more, RETURN less: dag/nodes/sec-picard-framework/lem-pc-affine-surjective-structure-map-closed-immersion.json: proof[0].text, uses, proof_deps: Step 1 inferred surjectivity of O_Y(V)->O_X(f^{-1}V) on affine V from local surjectivity alone, which is false without quasi-coherence (C1/C4); now cites lem-pc-affine-morphism-hi (f_*O_X quasi-coherent for f affine) and lem-weil-pbc-quasi-coherent-module-cokernel-image (3) ((Im phi)(U)=phi_U(F(U)) on affine U) after the stalk node gives Im f^sharp = f_*O_X; both added to split_report.tool_uses as generic off-unit tools (C8). Mathlib: grep of pinned ClosedImmersion.lean (of_surjective_of_isAffine:121 needs affine source and target; isClosedImmersion_iff_isAffineHom:370 is the affine-sections form) and SurjectiveOnStalks.lean (stalkMap is O_{Y,f(x)}->O_{X,x}, not the pushforward stalk): no exact statement, so not a leaf. Small case: Y=Spec A, X=Spec B, A->B with A_p->B_p onto for all p gives A->B onto, consistent. Start Sat Oct 10 04:42:26 PM UTC 2026, end Sat Oct 10 04:43:42 PM UTC 2026; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.ClosedImmersionOfSurjectiveStructureStalks",
+  "declaration": "AlgebraicGeometry.isClosedImmersion_of_isAffineHom_of_surjective_structureStalks",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/ClosedImmersionOfSurjectiveStructureStalks.lean",
+  "statement": "theorem isClosedImmersion_of_isAffineHom_of_surjective_structureStalks {X Y : Scheme.{u}} (f : X ⟶ Y) [IsAffineHom f] (hf : ∀ y : Y, Function.Surjective ((TopCat.Presheaf.stalkFunctor CommRingCat y).map f.c)) : IsClosedImmersion f",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-ssc0719",
+  "group": "G1",
+  "result": "pass",
+  "note": "X Y : Scheme.{u}, f : X ⟶ Y = morphism of schemes; [IsAffineHom f] = pqf-def-affine-morphism; hf ∀ y : Y surjective (stalkFunctor CommRingCat y).map f.c = O_{Y,y} -> (f_*O_X)_y over all y in Y (not stalkMap over X); conclusion IsClosedImmersion f, one direction as in node; no exact decl in pinned Mathlib ClosedImmersion.lean (spec_of_surjective/of_surjective_of_isAffine/isClosedImmersion_iff_isAffineHom are section-level) nor WeilConjectures; docstring carries 3 proof steps; header, tag, lines<=100, proof sorry"
  }
 }
