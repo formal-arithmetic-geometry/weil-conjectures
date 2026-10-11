@@ -368,6 +368,14 @@ lemma nonempty_iso_biproduct_fin_succ {n : ℕ} (S : Fin (n + 1) → AdicSheaf l
     (biprodBiproductSumIso (fun t : Fin n ⊕ Fin 1 ↦ S (finSumFinEquiv t))).symm ≪≫
     biprod.mapIso (Iso.refl _) (biproductUniqueIso _)⟩
 
+omit [IrreducibleSpace Y] in
+/-- A finite direct sum of lisse sheaves is lisse. -/
+theorem IsAdicLisseSheaf.biproduct_fin :
+    ∀ (n : ℕ) (S : Fin n → AdicSheaf l Y), (∀ i, IsAdicLisseSheaf (S i)) → IsAdicLisseSheaf (⨁ S)
+  | 0, S, _ => .of_isZero (isZero_biproduct_fin_zero S)
+  | n + 1, S, h => ((IsAdicLisseSheaf.biproduct_fin n _ fun i ↦ h i.castSucc).biprod
+      (h (Fin.last n))).of_iso (nonempty_iso_biproduct_fin_succ S).some.symm
+
 /-- **A constituent of a sum of irreducible local systems is one of the summands.** On an
 irreducible scheme, if an irreducible local system `Q` is a quotient of a lisse subsheaf `E` of
 `S₀ ⊕ ⋯ ⊕ S_{n-1}`, with the `Sᵢ` irreducible local systems, then some `Sᵢ` has a nonzero

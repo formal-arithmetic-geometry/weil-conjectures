@@ -8,6 +8,7 @@ module
 public import WeilConjectures.DeligneLaumon.AffineLine.Defs
 public import WeilConjectures.WeilSheaf.Constant
 public import WeilConjectures.WeilSheaf.Fourier
+public import WeilConjectures.WeilSheaf.GeometricConstituent
 
 /-!
 # The trivial geometric constituent
@@ -232,6 +233,21 @@ theorem hasLinearArtinSchreierConstituent_zero_of_isGeometricallyConstant
       fun _ ↦ ⟨⟨0⟩, fun _ ↦ biproduct.hom_ext _ _ fun j ↦ Fin.elim0 j⟩⟩
   exact ⟨_, 𝟙 _, e.hom ≫ biproduct.π _ ⟨0, Nat.pos_of_ne_zero hn⟩ ≫ eT.inv, D.lisse,
     inferInstance, inferInstance⟩
+
+/-- **A trivial geometric constituent forces geometric constancy.** If the trivial rank-one
+sheaf `ℒ_{ψ(0 · x)} = ℚ̄_ℓ` is a geometric constituent of an irreducible lisse sheaf `M`, then
+`M` is geometrically constant: this is the sheaf-theoretic Clifford theorem
+`AlgebraicGeometry.WeilSheaf.IsIrreducibleLisse.exists_iso_biproduct_unit` on the irreducible
+`Ū`. -/
+theorem isGeometricallyConstant_of_hasLinearArtinSchreierConstituent_zero
+    (hD : D.sheaf.IsIrreducibleLisse) (h : D.sheaf.HasLinearArtinSchreierConstituent ψ 0 D.j) :
+    D.IsGeometricallyConstant := by
+  have := D.irreducibleSpace_geometricFiber
+  obtain ⟨B, i, p, hB, hi, hp⟩ := h
+  obtain ⟨eT⟩ := D.nonempty_iso_geometricConstituent_zero ψ
+  obtain ⟨n, ⟨e⟩⟩ := hD.exists_iso_biproduct_unit hB i (p ≫ eT.hom)
+  intro V _
+  exact ⟨n, ⟨(V.ι)^*ᵃ[l].mapIso e ≪≫ ProEtale.AdicSheaf.freeUpperStarIso l (Fin n) V.ι⟩⟩
 
 end WeilSheaf.LisseOnDenseOpen
 
