@@ -132,5 +132,23 @@
   "group": "H1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-cif (reviewer sub-agent of L); spot-checked: Source Varieties 09NX (varieties-lemma-dim-1-noetherian-reduced-separated-has-ample), proof first paragraph: Noetherian, dim 1, finitely many components Z_i, T = union of Z_i cap Z_j (i ne j) finite of closed points, x not in T on a unique Z_i; the item statement agrees hypothesis by hypothesis (dim <= 1 topological). Step 1 carried by lem-weil-pbc-noetherian-finitely-many-components (Mathlib leaf finite_irreducibleComponents_of_isNoetherian, declared tool use, accepted). Step 2 carried by lem-sc-dim-one-point-outside-open-closed (irreducible, Kolmogorov, dim <= 1, point outside nonempty open is closed; checked true; off-unit sk-prop-cd generic topological tool, added via --tool-uses); dim inheritance and closedness transfer elementary from def-kun-topological-krull-dimension. Step 3 carried by the new node lem-sc-noetherian-closed-points-finite (statement checked true: components of the closed subset are finitely many by 0BA8, each irreducible closed with all points closed is a singleton since schemes are T0; TeX, created.item correct, three searches, no slopmaster2 declaration states it, blueprint search found nothing). Small cases: empty scheme, a point, an integral curve, two lines meeting in a point, point disjoint union curve. FIX more, RETURN less: (1) C1 step 2 used existence of generic points and the Kolmogorov property of schemes with no node: cite lem-sc-scheme-sober (existence and uniqueness of generic points, which gives T0) and say why Z_i is Kolmogorov; (2) C1 step 3 used that every point lies on some irreducible component with no node: cite lem-sc-irreducible-components-cover. dag/nodes/sec-curve-estimates/lem-sc-component-intersections-finite.json: proof[1].text, proof[1].uses, proof[2].text, proof[2].uses, proof_deps: the two citations added and the step texts rewritten in TeX (unicode eta, <=, ne removed). Start Sat Oct 10 03:14:15 PM UTC 2026, end Sat Oct 10 03:15:28 PM UTC 2026.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ComponentIntersectionsFinite",
+  "declaration": "AlgebraicGeometry.component_intersections_finite",
+  "file": "lean/Sheaf/AlgebraicGeometry/ComponentIntersectionsFinite.lean",
+  "statement": "theorem component_intersections_finite (Y : Scheme.{u}) [IsLocallyNoetherian Y] [CompactSpace Y] (h_dim : topologicalKrullDim Y ≤ 1) : let T : Set Y := {y | ∃ Z₁ ∈ irreducibleComponents Y, ∃ Z₂ ∈ irreducibleComponents Y, Z₁ ≠ Z₂ ∧ y ∈ Z₁ ∩ Z₂} (irreducibleComponents Y).Finite ∧ (∀ Z₁ ∈ irreducibleComponents Y, ∀ Z₂ ∈ irreducibleComponents Y, Z₁ ≠ Z₂ → (Z₁ ∩ Z₂).Finite ∧ ∀ y ∈ Z₁ ∩ Z₂, IsClosed ({y} : Set Y)) ∧ T.Finite ∧ (∀ y ∈ T, IsClosed ({y} : Set Y)) ∧ ∀ y : Y, y ∉ T → ∃! Z : Set Y, Z ∈ irreducibleComponents Y ∧ y ∈ Z",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-cif1123",
+  "group": "M1",
+  "result": "pass",
+  "note": "Y : Scheme.{u} with [IsLocallyNoetherian Y] [CompactSpace Y] = Noetherian via the two stmt_deps (pqf-def-locnoeth, def-weil-pbc-quasi-compact-scheme; same pair form as landed AffineComplementFiniteOnIntegralCurve), topologicalKrullDim Y <= 1 (WithBot, empty allowed), (irreducibleComponents Y).Finite, distinct Z1 Z2: (Z1 ∩ Z2).Finite and IsClosed {y} in Y, T = let-bound union over distinct pairs, T.Finite, closed points, y ∉ T -> ∃! component; no hollow hypotheses, single universe, no private copies; compiled clean, axioms only sorryAx+std"
  }
 }
