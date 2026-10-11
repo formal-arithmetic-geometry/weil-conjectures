@@ -10,8 +10,8 @@
 | `lem-weil-pbc-arbitrary-ring-torsion-sheaf-base-change` | 2003 | none |
 | `lem-pc-ringed-space-module-stalk-tensor` | 3013 | none |
 | `lem-pc-ring-pseudo-coherent-localization-glue` | 3016 | none |
-| `lem-sc-derived-open-mayer-vietoris-ses` | 3017 | none |
 | `lem-pc-module-opcycles-tor-surjection` | 3018 | none |
+| `lem-sc-module-extension-by-zero-stalk-maps` | 3018 | none |
 | `lem-pc-tor-independent-projective-complex-tensor` | 3022 | none |
 | `lem-sc-affine-koszul-hom-alternating-cech` | 3022 | none |
 | `lem-sc-qcoh-complex-alternating-cech-derived-sections` | 3022 | none |
@@ -871,7 +871,7 @@
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 1712 nodes that wait for a statement dependency, 87 nodes that wait for stage 1.
+Not open yet: 1713 nodes that wait for a statement dependency, 87 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
