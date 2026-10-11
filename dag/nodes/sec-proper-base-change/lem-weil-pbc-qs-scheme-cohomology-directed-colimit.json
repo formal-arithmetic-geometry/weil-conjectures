@@ -33,7 +33,8 @@
   "def-weil-pbc-quasi-compact-scheme",
   "def-weil-sheaf-of-modules-category",
   "def-weil-pbc-category-colimit",
-  "pqf-def-cohomology"
+  "pqf-def-cohomology",
+  "def-sc-open-module-cohomology"
  ],
  "proof": [
   {
@@ -263,5 +264,24 @@
   "summary": "Read Stacks 01FF (cohomology.tex 3194-3310) and every lemma its proof cites: 0069 (topology.tex 5470, proof omitted), 009F (sheaves.tex 3444), 01DI (injectives.tex 498), 00DB, 01EP (cohomology.tex 1408), 01EW (cohomology.tex 1696), Sheaves 009D/009E (stalks and colimits); all tags verified in tags/tags. Statement kept (it is 01FF for the ringed space underlying a scheme, stated elementwise). Proof written in 10 steps following the source: setup of H^q(U,-) via restriction to U (01E1 node) and the delta-functor; 0069 (3) written out (elementary, step 2); degree 0 by the existing 009F node; system of injectives by functorial injective embeddings (new node, 01DI); colimit sequence exact on stalks (existing stalk/colimit nodes, 00DB leaf); the claim by 01EW (new node) with the existing 01EP node and 00DB; the snake-lemma step written out as an explicit chase (steps 8-9). No Lean on slopmaster2 states the item (grep of the id, of 01FF and of colimit/cohomology names; the only cohomology-colimit file, AlgebraicGeometry/Sites/CohomologyColimit.lean, is about etale cohomology). Two new nodes: lem-weil-pbc-scheme-modules-functorial-injective-embeddings (unsplit; the needed SheafOfModules Grothendieck instance exists only in a newer Mathlib) and lem-weil-pbc-module-cech-vanishing-basis (unsplit).",
   "blueprint": "The item serves the blueprint node thm-weil-pbc-finite-etale-lifting at the place recorded in blueprint.from.place (the passage from finite partial direct sums to the whole direct sum, Stacks 01FF, used through lem-weil-pbc-qcqs-cohomology-direct-sum); steps 1-10 realize that place completely: steps 3 and 9-10 give the elementwise statement (a)/(b) which the direct-sum node uses with U = X, steps 4-8 the dimension-shifting input of the source."
  },
- "reviewed": "2026-10-10 L: 10 steps following 01FF (derived functors over U, 0069 written out, degree 0 by 009F, the system of injectives by functorial embeddings (new node 01DI), exactness of the colimit sequence on stalks, vanishing on the basis by 01EW (new node) and 01EP, the comparison diagram and the chase, induction); 2 new nodes; same_as of the Cech node recorded"
+ "reviewed": "2026-10-10 L: 10 steps following 01FF (derived functors over U, 0069 written out, degree 0 by 009F, the system of injectives by functorial embeddings (new node 01DI), exactness of the colimit sequence on stalks, vanishing on the basis by 01EW (new node) and 01EP, the comparison diagram and the chase, induction); 2 new nodes; same_as of the Cech node recorded",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.OpenModuleCohomologyDirectedColimit",
+  "declaration": "AlgebraicGeometry.openModuleCohomology_directedColimit",
+  "file": "lean/Sheaf/AlgebraicGeometry/OpenModuleCohomologyDirectedColimit.lean",
+  "statement": "theorem openModuleCohomology_directedColimit (X : Scheme.{u}) (hBasis : IsTopologicalBasis {V : Set X | IsOpen V ∧ IsCompact V}) [QuasiSeparatedSpace X] {I : Type u} [Preorder I] [Nonempty I] [IsDirected I (· ≤ ·)] (D : I ⥤ SheafOfModules.{u} (moduleRings X.toRingedSpace)) (c : Cocone D) (hc : IsColimit c) (U : Opens X) (hU : IsCompact (U : Set X)) (q : ℕ) : (∀ x : (RingedSpace.openModuleCohomology X.toRingedSpace q U).obj c.pt, ∃ (i : I) (y : (RingedSpace.openModuleCohomology X.toRingedSpace q U).obj (D.obj i)), ((RingedSpace.openModuleCohomology X.toRingedSpace q U).map (c.ι.app i)).hom y = x) ∧ (∀ (i : I) (y : (RingedSpace.openModuleCohomology X.toRingedSpace q U).obj (D.obj i)), ((RingedSpace.openModuleCohomology X.toRingedSpace q U).map (c.ι.app i)).hom y = 0 → ∃ (j : I) (hij : i ≤ j), ((RingedSpace.openModuleCohomology X.toRingedSpace q U).map (D.map (homOfLE hij))).hom y = 0)",
+  "branch": "sheaf-dag",
+  "by": "U1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-qsc"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-qsc",
+  "group": "U1",
+  "result": "fix",
+  "note": "X Scheme; (1) hBasis IsTopologicalBasis of compact opens; (2) hInter replaced by Mathlib [QuasiSeparatedSpace X] (same predicate); directed I Preorder/Nonempty/IsDirected; D functor to SheafOfModules (moduleRings X); c Cocone + IsColimit; U compact open; q : N; H^q(U,-) = landed RingedSpace.openModuleCohomology (stmt_dep added, landed, reviewed); (a) surjectivity elementwise tied to c.ι.app i; (b) kernel vanishing tied to D.map (homOfLE hij); proof unchanged"
+ }
 }
