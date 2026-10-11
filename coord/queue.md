@@ -1,11 +1,11 @@
 # Work queue
 
-433 items; claim with `tools/claim.py next <group> [--stage N]`.
+431 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (433)
+## Stage 2: nodes to state (431)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -33,7 +33,6 @@
 | `lem-pc-perfect-two-out-of-three` | 1 | state |
 | `lem-pc-pseudo-coherent-finite-tor-perfect` | 1 | state |
 | `lem-pc-ring-pseudo-coherent-finite-tor-perfect` | 1 | state |
-| `lem-pc-ringed-spaces-derived-pullback-composition` | 1 | state |
 | `lem-pc-supported-perfect-generator` | 1 | state |
 | `lem-pc-tor-independent-perfect-pullback-comparison` | 1 | state |
 | `lem-sc-affine-koszul-cech-derived-comparison` | 1 | state |
@@ -46,7 +45,6 @@
 | `lem-sc-affine-support-iterated-cones` | 1 | state |
 | `lem-sc-base-change-curve` | 1 | state |
 | `lem-sc-coherent-ring-perfect-complex-cohomology` | 1 | state |
-| `lem-sc-derived-k-injective-restrict-open` | 1 | state |
 | `lem-sc-derived-mayer-vietoris-triangle` | 1 | state |
 | `lem-sc-derived-open-gluing` | 1 | state |
 | `lem-sc-hilb-dominating-power` | 1 | state |
@@ -79,7 +77,6 @@
 | `lem-weil-pbc-presheaf-module-stalk-filtered-colimit` | 1 | state |
 | `lem-weil-pbc-principal-localization-naive-cotangent` | 1 | state |
 | `lem-weil-pbc-proj-graded-module-sheaf-exists` | 1 | state |
-| `lem-weil-pbc-proj-polynomial-twist-chart` | 1 | state |
 | `lem-weil-pbc-projective-dimension-well-defined` | 1 | state |
 | `lem-weil-pbc-projective-space-functor-of-points` | 1 | state |
 | `lem-weil-pbc-projective-space-standard-charts` | 1 | state |
@@ -177,6 +174,7 @@
 | `lem-weil-pbc-scheme-theoretic-union` | 1 | state |
 | `lem-weil-pbc-sections-annihilated-by-ideal` | 1 | state |
 | `lem-weil-pbc-sections-base-field-extension` | 1 | state |
+| `lem-weil-pbc-sections-morphism-to-proj-polynomial-ring` | 1 | state |
 | `lem-weil-pbc-sections-over-quasi-compact-open` | 1 | state |
 | `lem-weil-pbc-sections-over-quasi-compact-open-in-affine` | 1 | state |
 | `lem-weil-pbc-separable-extension-fraction-field-of-smooth-algebra` | 1 | state |
@@ -443,7 +441,7 @@
 | `lem-pc-essentially-constant-pro-hom-colimit` | 4 | state |
 | `lem-pur-essential-constant-pro-criterion-05py` | 4 | state |
 
-Not open yet: 40 nodes that wait for stage 1, 524 nodes that wait for a statement dependency.
+Not open yet: 40 nodes that wait for stage 1, 523 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
