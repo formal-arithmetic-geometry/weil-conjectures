@@ -4563,3 +4563,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 12:06 L: merged deliver/H1/lem-sc-picard-qcoh-finite-cd (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.QuasicoherentFiniteCohomologicalDimension AlgebraicGeometry.Scheme.exists_quasicoherent_cohomology_bound)
 - 12:06 L: merged deliver/M1/lem-sc-picard-qcoh-universal-delta-embedding (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.QuasicoherentAcyclicEmbedding AlgebraicGeometry.Scheme.exists_quasicoherent_acyclic_embedding)
 - 12:07 L: merged deliver/C1/lem-sc-torsion-subsheaf-quotient (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.TorsionSubsheafQuotient AlgebraicGeometry.Scheme.Modules.torsion_subsheaf_quotient)
+- 12:07 L: merged deliver/E1/lem-sc-affine-cap-section-open-dictionary (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.AffineCapSectionOpenDictionary AlgebraicGeometry.Scheme.Modules.affine_cap_section_open_dictionary)

@@ -23,7 +23,8 @@
   "def-sc-invertible-module",
   "pqf-def-coherent",
   "lem-weil-pbc-affine-tilde-gamma-adjunction",
-  "lem-weil-pbc-finite-projective-rank-locally-constant"
+  "lem-weil-pbc-finite-projective-rank-locally-constant",
+  "def-weil-pbc-ample-invertible-module"
  ],
  "proof": [
   {
@@ -136,5 +137,23 @@
   "group": "J1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-acd2 (reviewer sub-agent of L); spot-checked: Re-push after the 15:58 return (head da5102d15): point 1 (D1) repaired, both relabelling nodes deleted, the argument now in steps 2 and 3; no existing node states 00NX (7)=>(2) (lem-weil-pbc-finite-projective-standard-free-cover is the converse direction), so the new statement-only node lem-sc-affine-standard-cover-finite-projective is justified, checked against algebra.tex lemma-finite-projective (7) finite locally free => (2)/(3), true; the new lem-sc-affine-finite-projective-prime-membership is a pure-module fact strictly smaller than the item, true (N a summand of F=R^n with projection pi: s in pF implies s=pi(s) in pN; for F free coordinates in pR_p cap R = p), tested N=R, s=0, N=R^2. Point 2 (E7) repaired: stmt_deps restored. Point 3 repaired (report names schemes.tex 01IA/01IB, modules.tex 01CY). Point 4 moot: per tools/README.md a delivered node carries created.item only, by/date are filled at merge. Steps: 1 counit iso from lem-weil-pbc-affine-tilde-gamma-adjunction (3) for M quasi-coherent (def-sc-invertible-module); 2 local rank-one trivialisations on standard opens, finite unit-ideal cover by lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact, N_{f_i}=tilde N(D(f_i)) by lem-weil-pbc-spec-module-tilde-sections, finite projective by the 00NX node, rank one by localising; 3 M_p=N_p with s_p=s/1 by lem-weil-pbc-spec-tilde-stalk-localization, membership node, m_p=pR_p and X_s by lem-weil-pbc-nonvanishing-section-trivializes (off-unit, accepted as tool use: definition of the nonvanishing locus). FIX: dag/nodes/sec-curve-estimates/lem-sc-affine-cap-section-open-dictionary.json: statement: reverted to the committed text (the re-push had added an unreported citation bracket [lem-weil-pbc-affine-tilde-gamma-adjunction], already in stmt_deps; E7); dag/nodes/sec-curve-estimates/lem-sc-affine-standard-cover-finite-projective.json: stmt_deps: added def-weil-pbc-projective-module, cited in the statement. Start Sat Oct 10 04:23:17 PM UTC 2026, end Sat Oct 10 04:24:12 PM UTC 2026.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AffineCapSectionOpenDictionary",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.affine_cap_section_open_dictionary",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineCapSectionOpenDictionary.lean",
+  "statement": "theorem affine_cap_section_open_dictionary {R : Type u} [CommRing R] (M : (Spec (.of R)).Modules) [M.IsInvertible] (s : ((moduleSpecΓFunctor (R := CommRingCat.of R)).obj M)) : IsIso (Scheme.Modules.fromTildeΓ (R := CommRingCat.of R) M) ∧ (Module.Finite R ((moduleSpecΓFunctor (R := CommRingCat.of R)).obj M) ∧ Module.Projective R ((moduleSpecΓFunctor (R := CommRingCat.of R)).obj M)) ∧ (∀ (p : Ideal R) [p.IsPrime], Nonempty (((LocalizedModule p.primeCompl ((moduleSpecΓFunctor (R := CommRingCat.of R)).obj M)) ≃ₗ[Localization.AtPrime p] (Localization.AtPrime p))) ∧ (LocalizedModule.mk s 1 ∈ (Ideal.map (algebraMap R (Localization.AtPrime p)) p) • (⊤ : Submodule (Localization.AtPrime p) (LocalizedModule p.primeCompl ((moduleSpecΓFunctor (R := CommRingCat.of R)).obj M))) ↔ s ∈ p • (⊤ : Submodule R ((moduleSpecΓFunctor (R := CommRingCat.of R)).obj M)))) ∧ (nonvanishingLocus M s = {p : PrimeSpectrum R | ¬ s ∈ p.asIdeal • (⊤ : Submodule R ((moduleSpecΓFunctor (R := CommRingCat.of R)).obj M))})",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-acs1206",
+  "group": "E1",
+  "result": "pass",
+  "note": "R:Type u CommRing; M:(Spec (.of R)).Modules [IsInvertible] (slopmaster2 class = def-sc-invertible-module); N = moduleSpecΓFunctor.obj M; counit IsIso fromTildeΓ (#check: tilde(Γ M) ⟶ M); Module.Finite ∧ Projective; rank 1 as N_p ≃ R_p at every prime; s/1 ∈ pR_p•⊤ ↔ s ∈ p•⊤ (true: N/pN torsion-free over R/p); nonvanishingLocus M s (landed Ample def, Set X, carrier PrimeSpectrum R) = {p | s ∉ p•⊤}; stmt_deps gain of landed def-weil-pbc-ample-invertible-module justified; compiles"
  }
 }
