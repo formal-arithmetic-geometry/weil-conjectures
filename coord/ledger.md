@@ -3337,3 +3337,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 03:03 L: cor-pc-sigma-pic-iso merged by R-spi0304 (FIX 702744054: representability both ways; false split_report summary); second reading by K1 missed the false summary
 - 03:07 L: reviewer R-atr0306 launched (K1 prop-av-tate-rank, head c7f4f81ff; second of the items unblocked at 02:31)
 - 03:08 L: merged deliver/K1/prop-av-tate-rank (reviewer FIX; first push; new nodes: 2)
+- 03:09 L: prop-av-tate-rank merged by R-atr0306 (FIX 38743a24e: two new nodes attached to sorry-free slopmaster2 declarations the delivery had not recorded; second reading by K1 missed it); reviewers R-cla0309 (J1 lem-sc-complex-lift-acyclic-projective, 20cabb32c; statement inlined definitions without a record) and R-vad0309 (K1 lem-pc-vanishing-above-dim, 74e0460eb; whitespace and a TeX nit) launched
