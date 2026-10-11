@@ -132,5 +132,23 @@
   "group": "K1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-smt2342 (reviewer sub-agent of L); spot-checked: Checked steps 1-4 against Stacks 03EK/03EO and cited statements; def-pur-sheaf-hom is the site (localized-site) SheafHom (C4 ok); 03EO quote in step 3 is the item's own source (fine); no class (b) restatement. FIX more, RETURN less: (1) C1 step 2 invoked 'the existing sheaf-Hom lemma' without citing it: cited lem-pur-sheaf-hom-is-sheaf (another unit's node, generic tool: SheafHom is a sheaf of O-modules, declared as tool use); (2) C1 step 3 used 'the tensor product represents O-bilinear morphisms', which def-pur-sheaf-tensor-product does not state: rewrote via sectionwise module tensor property (elementary) plus the sheafification universal property def-weil-presheaf-modules-sheafification, curry/evaluation maps written out; also cited the same sheafification def in step 1 for inducing sheaf morphisms; proof_deps updated. Second reading missed both (it claimed these citations/properties were present).; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorClosed",
+  "declaration": "SheafOfModules.tensorClosed",
+  "file": "lean/Sheaf/Algebra/Category/ModuleCat/Sheaf/TensorClosed.lean",
+  "statement": "theorem tensorClosed (R : Sheaf J CommRingCat.{u}) : letI := monoidalCategory R letI := symmetricCategory R Nonempty (MonoidalPreadditive (SheafOfModules.{u} (𝓡 R))) ∧ Nonempty (MonoidalClosed (SheafOfModules.{u} (𝓡 R))) ∧ ∃ e : ∀ (F G H : SheafOfModules.{u} (𝓡 R)), (F ⊗ G ⟶ H) ≃ (G ⟶ homObj F H), ∀ (F F' G G' H H' : SheafOfModules.{u} (𝓡 R)) (f : F' ⟶ F) (g : G' ⟶ G) (h : H ⟶ H') (t : F ⊗ G ⟶ H), e F' G' H' ((f ⊗ₘ g) ≫ t ≫ h) = g ≫ e F G H t ≫ homObjMap f h",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-stc1227",
+  "group": "G1",
+  "result": "pass",
+  "note": "site C:Type u/Category.{u}/J + HasSheafCompose,WEqualsLocallyBijective,HasWeakSheafify = recorded tensor conventions (IsMonoidal W found upstream); R : Sheaf J CommRingCat; Mod(O)=SheafOfModules (𝓡 R); tensor/unit/assoc/symmetry = SheafOfModules.monoidalCategory+symmetricCategory; additive in each variable = MonoidalPreadditive; closed = MonoidalClosed; Hom bijection e F G H : (F⊗G⟶H)≃(G⟶homObj F H) with three-variable naturality via homObjMap (#check: SheafOfModules.homObj/homObjMap resolve to the recorded upstream decls); no extra hypotheses, zero modules/empty site kept"
  }
 }
