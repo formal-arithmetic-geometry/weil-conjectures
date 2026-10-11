@@ -107,5 +107,29 @@
   "group": "J1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-qod2822 (reviewer sub-agent of L); spot-checked: All four points of R-qod2740's 22:05 return repaired: (1) setting sentence identical to merged def-nagata-qc-open-equality-stage (directed I, S=lim S_lambda, affine transitions, Y_lambda0 qcqs as a scheme); (2) finite affine cover Y_lambda0=U_1..U_m with U_a^infty, U_{a,lambda}, so the union of D(f_{ak,lambda_W}) pulls back to W as lemma-nagata-qc-open-descends needs; (3) W cap U_a^infty qc (Y->Y_lambda0 affine, Y_lambda0 qs) and Gamma(U_a^infty)=colim Gamma(U_{a,lambda}) cited to lem-weil-pbc-limit-affine-transition / lem-weil-pbc-limit-global-sections-colimit, both in stmt_deps; (4) stages/lifts via lemma-nagata-filtered-colimit-finite-data (no equalities), lambda_W=u(...) via def-nagata-directed-finite-upper-bound with lambda_a<=lambda_W from lemma-nagata-directed-finite-upper-bound, choice dependence stated with pqf-lem-limit-qc-open-descends clause (2) (hypotheses hold: Y_lambda qcqs, affine transitions). Choice conventions match def-nagata-affine-fp-descent and def-nagata-qc-open-equality-stage; citers lemma-nagata-qc-open-descends and def-nagata-relative-gluing-datum-descent use exactly this object. Second reading by J1: no fault missed."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.NagataQCOpenDescent",
+  "declaration": "AlgebraicGeometry.nagataQCOpenDescent",
+  "declarations": [
+   "AlgebraicGeometry.nagataQCOpenDescent",
+   "AlgebraicGeometry.nagataQCOpenDescent_chart_le",
+   "AlgebraicGeometry.nagataQCOpenDescent_limit_chart_le"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/NagataQCOpenDescent.lean",
+  "statement": "def nagataQCOpenDescent {I : Type u} [Preorder I] [Nonempty I] [IsDirected I (· ≤ ·)] (D : Iᵒᵖ ⥤ Scheme.{u}) (c : Cone D) (_hc : IsLimit c) [∀ {i j : Iᵒᵖ} (t : i ⟶ j), IsAffineHom (D.map t)] (i₀ : I) {Y₀ : Scheme.{u}} (p : Y₀ ⟶ D.obj (op i₀)) [CompactSpace Y₀] [QuasiSeparatedSpace Y₀] (W : (baseChangeCone D c p).pt.Opens) (_hW : IsCompact (W : Set (baseChangeCone D c p).pt)) (m : ℕ) (U : Fin m → Y₀.Opens) (_hU : ∀ a, IsAffineOpen (U a)) (_hcover : iSup U = ⊤) (r : Fin m → ℕ) (f : ∀ a, Fin (r a) → Γ((baseChangeCone D c p).pt, pullback.fst p (c.π.app (op i₀)) ⁻¹ᵁ U a)) (_hpresentation : ∀ a, W ⊓ (pullback.fst p (c.π.app (op i₀)) ⁻¹ᵁ U a) = ⨆ k, (baseChangeCone D c p).pt.basicOpen (f a k)) (stage : Fin m → I) (ha : ∀ a, i₀ ≤ stage a) (lift : ∀ a, Fin (r a) → Γ((baseChangeDiagram D p).obj (Over.mk (homOfLE (ha a)).op), pullback.fst p (D.map (homOfLE (ha a)).op) ⁻¹ᵁ U a)) (_hlift : ∀ a k, ((baseChangeCone D c p).π.app (Over.mk (homOfLE (ha a)).op)).appLE (pullback.fst p (D.map (homOfLE (ha a)).op) ⁻¹ᵁ U a) (pullback.fst p (c.π.app (op i₀)) ⁻¹ᵁ U a) (nagataQCOpenDescent_limit_chart_le D c p (Over.mk (homOfLE (ha a)).op) (U a)) (lift a k) = f a k) (d : I → I → I) (hd : ∀ i j, i ≤ d i j ∧ j ≤ d i j) (order : LinearOrder I) : Σ' w : I, Σ' hw : i₀ ≤ w, ((baseChangeDiagram D p).obj (Over.mk (homOfLE hw).op)).Opens",
+  "branch": "sheaf-dag",
+  "by": "P1",
+  "date": "2026-10-11",
+  "existing": false,
+  "note": "Explicit chosen-cover/presentation/lift construction. The two named chart-compatibility theorems postpone only proofs, not data. The chosen representatives are input data; their existence is supplied by the recorded finite-data and section-colimit dependencies."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-qod",
+  "group": "P1",
+  "result": "pass",
+  "note": "directed Preorder I + D : Iᵒᵖ ⥤ Scheme, cone+IsLimit, IsAffineHom transitions, Y₀ qcqs, W compact open of baseChangeCone pt, finite affine cover U (IsAffineOpen, iSup = ⊤), basic-open presentation of W ⊓ U∞, stage lifts tied by appLE of the cone projection, λ_W = directedFiniteUpperBound of insert i₀ (image stage), output union of transported basicOpens; no sorry in data (chart_le lemmas are Prop, true by baseChangeDiagram_map_fst / baseChangeCone_π_app_fst)"
  }
 }
