@@ -242,6 +242,77 @@ lemma isPullback_normalConeToDeformationSpace :
       (by simp) (by simp [polynomialSpecZeroSection])
   exact h.paste_vert (isPullback_polynomialSpecZeroSection g)
 
+/-! #### The punctured trivialisation -/
+
+/-- The punctured line `𝔾_{m,B} ⊆ 𝔸¹_B`, the locus where the coordinate is invertible. -/
+noncomputable abbrev puncturedLine (B : Scheme.{u}) : (𝔸(ULift.{u} (Fin 1); B)).Opens :=
+  (𝔸(ULift.{u} (Fin 1); B)).basicOpen (AffineSpace.coord B 0)
+
+lemma coe_puncturedLine (B : Scheme.{u}) : (puncturedLine B : Set 𝔸(ULift.{u} (Fin 1); B)) =
+    (Set.range (AffineSpace.zeroSection (ULift.{u} (Fin 1)) B).base)ᶜ := by
+  ext y
+  have := congr(y ∈ $(AffineSpace.range_zeroSection (ULift.{u} (Fin 1)) B))
+  simp only [Set.mem_ofPred_eq] at this
+  rw [Set.mem_compl_iff, this]
+  simp only [SetLike.mem_coe, not_forall, not_not]
+  exact ⟨fun h ↦ ⟨0, h⟩, fun ⟨i, h⟩ ↦ by rwa [Subsingleton.elim i 0] at h⟩
+
+lemma preimage_puncturedLine :
+    (V.polynomialSpecToAffineSpace ≫ AffineSpace.map (ULift.{u} (Fin 1)) g) ⁻¹ᵁ puncturedLine B =
+      V.laurentSpecToPolynomialSpec.opensRange := by
+  rw [opensRange_laurentSpecToPolynomialSpec, Scheme.preimage_basicOpen_top,
+    Scheme.Hom.comp_appTop, CommRingCat.comp_apply, AffineSpace.map_appTop_coord]
+  rfl
+
+/-- The punctured line of `Spec_V 𝒪_V[t]` maps to the one of `𝔸¹_B`. -/
+noncomputable def laurentSpecToPuncturedLine : V.laurentSpec ⟶ puncturedLine B :=
+  IsOpenImmersion.lift (puncturedLine B).ι (V.laurentSpecToPolynomialSpec ≫
+    V.polynomialSpecToAffineSpace ≫ AffineSpace.map (ULift.{u} (Fin 1)) g) (by
+      rw [Scheme.Opens.range_ι, Scheme.Hom.comp_base, TopCat.coe_comp, Set.range_comp,
+        Set.image_subset_iff, ← Scheme.Hom.coe_opensRange, ← preimage_puncturedLine]
+      rfl)
+
+lemma isPullback_laurentSpecToPuncturedLine :
+    IsPullback V.laurentSpecToPolynomialSpec (laurentSpecToPuncturedLine g)
+      (V.polynomialSpecToAffineSpace ≫ AffineSpace.map (ULift.{u} (Fin 1)) g)
+      (puncturedLine B).ι :=
+  (IsOpenImmersion.isPullback _ _ _ _ (IsOpenImmersion.lift_fac _ _ _).symm
+    (by rw [Scheme.Opens.opensRange_ι]; exact preimage_puncturedLine g)).flip
+
+/-- The punctured line of `Spec_V 𝒪_V[t]` is `V ×_B 𝔾_{m,B}`. -/
+lemma isPullback_laurentSpec :
+    IsPullback (V.laurentSpecToPolynomialSpec ≫ V.polynomialSpecProj)
+      (laurentSpecToPuncturedLine g) g ((puncturedLine B).ι ≫ 𝔸(ULift.{u} (Fin 1); B) ↘ B) :=
+  (isPullback_laurentSpecToPuncturedLine g).paste_horiz (isPullback_polynomialSpecProj g)
+
+/-- The punctured trivialisation `κ° : V ×_B 𝔾_{m,B} ⟶ D_s V`. -/
+noncomputable def deformationSpaceGeneric :
+    pullback g ((puncturedLine B).ι ≫ 𝔸(ULift.{u} (Fin 1); B) ↘ B) ⟶ s.ker.deformationSpace :=
+  (isPullback_laurentSpec g).isoPullback.inv ≫ s.ker.laurentSpecToDeformationSpace
+
+lemma isPullback_laurentSpecToDeformationSpace :
+    IsPullback s.ker.laurentSpecToDeformationSpace (laurentSpecToPuncturedLine g)
+      (deformationSpaceProj g s) (puncturedLine B).ι := by
+  exact s.ker.isPullback_laurentSpecToDeformationSpace.paste_vert
+    (isPullback_laurentSpecToPuncturedLine g)
+
+/-- **The punctured trivialisation.** Over `𝔾_{m,B}` the deformation space is `V ×_B 𝔾_{m,B}`. -/
+lemma isPullback_deformationSpaceGeneric :
+    IsPullback (deformationSpaceGeneric g s) (pullback.snd _ _) (deformationSpaceProj g s)
+      (puncturedLine B).ι :=
+  (isPullback_laurentSpecToDeformationSpace g s).of_iso (isPullback_laurentSpec g).isoPullback
+    (Iso.refl _) (Iso.refl _) (Iso.refl _) (by simp [deformationSpaceGeneric]) (by simp)
+    (by simp) (by simp)
+
+@[reassoc (attr := simp)]
+lemma deformationSpaceGeneric_toBase :
+    deformationSpaceGeneric g s ≫ s.ker.deformationSpaceProj = pullback.fst _ _ := by
+  rw [deformationSpaceGeneric, Category.assoc, IdealSheafData.laurentSpecToDeformationSpace,
+    relativeGluingMap_toBase _ _ _ s.ker.toReesPresheaf_comp_reesToLaurent,
+    ← relativeGluingMap_toBase V.coequifibered_toPolynomialPresheaf _ _
+      IdealSheafData.toPolynomialPresheaf_comp_polynomialToLaurent]
+  exact (isPullback_laurentSpec g).isoPullback_inv_fst
+
 end Construction
 
 /-- Blueprint `sk-lem-geometry`: Geometry of the deformation of a section
