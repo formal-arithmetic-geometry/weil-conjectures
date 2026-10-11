@@ -1,11 +1,11 @@
 # Work queue
 
-986 items; claim with `tools/claim.py next <group> [--stage N]`.
+980 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (986)
+## Stage 2: nodes to state (980)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -32,13 +32,10 @@
 | `lem-pc-projective-base-change` | 1 | state |
 | `lem-pc-proper-descends-field` | 1 | state |
 | `lem-pc-sheaf-modules-tensor-closed` | 1 | state |
-| `lem-pc-tor-independent-projective-complex-tensor` | 1 | state |
 | `lem-pc-very-ample-disjoint-union` | 1 | state |
 | `lem-pc-zero-scheme-pullback` | 1 | state |
 | `lem-pur-derived-change-of-rings` | 1 | state |
 | `lem-sc-base-change-curve` | 1 | state |
-| `lem-sc-conductor-ideal-zero-intersection` | 1 | state |
-| `lem-sc-conductor-sections` | 1 | state |
 | `lem-sc-derived-hom-mayer-vietoris` | 1 | state |
 | `lem-sc-etale-base-change-geometric` | 1 | state |
 | `lem-sc-etale-faithfully-flat-local` | 1 | state |
@@ -54,7 +51,6 @@
 | `lem-sc-hilbert-denominator-ideal-nowhere-dense` | 1 | state |
 | `lem-sc-hilbert-embedded-points-affine-localization` | 1 | state |
 | `lem-sc-integral-closure-dedekind-surjective-fibres` | 1 | state |
-| `lem-sc-integral-overring-jacobson-power` | 1 | state |
 | `lem-sc-invert-s-cohomology-induction` | 1 | state |
 | `lem-sc-invert-s-cohomology-separated-induction` | 1 | state |
 | `lem-sc-irreducible-product-over-field` | 1 | state |
@@ -62,11 +58,9 @@
 | `lem-sc-krull-akizuki-noetherian` | 1 | state |
 | `lem-sc-lfp-field-extension-pointwise-descent` | 1 | state |
 | `lem-sc-local-domain-dim-one-principal-localization-fraction-field` | 1 | state |
-| `lem-sc-module-localization-filtered-colimit` | 1 | state |
 | `lem-sc-p1-ext-locally-free-naturality` | 1 | state |
 | `lem-sc-p1-ext-resolution-derived-connecting` | 1 | state |
 | `lem-sc-p1-ext-yoneda-associativity` | 1 | state |
-| `lem-sc-p1-graded-degree-component-exact` | 1 | state |
 | `lem-sc-p1-graded-submodule-finite` | 1 | state |
 | `lem-sc-p1-linear-syzygy` | 1 | state |
 | `lem-sc-p1-minimal-presentation-tor` | 1 | state |
