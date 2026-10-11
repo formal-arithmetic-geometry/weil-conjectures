@@ -23,7 +23,9 @@
   "def-pc-derived-category",
   "def-pc-derived-direct-image",
   "def-pc-perfect-complex",
-  "def-weil-pbc-closed-subset-proper-over-base"
+  "def-weil-pbc-closed-subset-proper-over-base",
+  "def-pc-finite-tor-dimension-over",
+  "pqf-def-coherent"
  ],
  "proof": [
   {
@@ -155,5 +157,22 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.BoundedCoherentFiniteTorDirectImagePerfect",
+  "declaration": "AlgebraicGeometry.Scheme.isPerfect_schemeDerivedDirectImage_of_bounded_coherent_finiteTor",
+  "file": "lean/Sheaf/AlgebraicGeometry/BoundedCoherentFiniteTorDirectImagePerfect.lean",
+  "statement": "theorem isPerfect_schemeDerivedDirectImage_of_bounded_coherent_finiteTor {X S : Scheme.{u}} [IsNoetherian S] (f : X ⟶ S) [LocallyOfFiniteType f] [HasDerivedCategory.{wX} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] [HasDerivedCategory.{wS} (SheafOfModules.{u} (moduleRings S.toRingedSpace))] [∀ U : S.Opens, HasDerivedCategory.{wS} (SheafOfModules.{u} ((moduleRings S.toRingedSpace).over U))] (E : schemeDerivedCategory X) (hbounded : ∃ a b : ℤ, ∀ i : ℤ, i < a ∨ b < i → IsZero ((DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings X.toRingedSpace)) i).obj E)) (hcoherent : ∀ i : ℤ, RingedSpace.IsCoherent X.toRingedSpace ((DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings X.toRingedSpace)) i).obj E)) (hsupport : ∀ i : ℤ, Scheme.Modules.HasSupportProperOver f ((DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings X.toRingedSpace)) i).obj E)) (hTor : HasFiniteTorDimensionOver f E) : IsPerfect S ((schemeDerivedDirectImage f).obj E)",
+  "branch": "sheaf-dag",
+  "by": "Q1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-bcp",
+  "group": "Q1",
+  "result": "pass"
  }
 }
