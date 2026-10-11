@@ -131,5 +131,23 @@
   "group": "K1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-cki0105 (reviewer sub-agent of L); spot-checked: Re-push after R-cki0048: (1) limit child now assumes and concludes Hom_K(K_beta[n],I)=0 for all n; the Ab counterexample (K_n=(1/n!)Z in deg 1, I=(Q->Q/Z)) now violates the hypothesis (Hom_K(K_n[1],I)=H^0(I)=Z!=0); with acyclic Hom complexes, surjective transitions (mono K, injective I) and continuity, Stacks homology-lemma-ML-over-ordinals gives the child, which is a real statement-only lemma whose split will cite it (C1). (2) Step 2 proves all shifts via shifted SES + exactness child (true: termwise SES of Hom complexes, LES) and hypothesis (2) on N[n]; Step 3 all shifts; Step 4 n=0. (3) Step 1 uses item's own (a) on M/K_beta; acyclic-quotient node dropped from uses. Stacks proof structure matches injectives.tex. Citer lem-pur-kinjective-degreewise-existence feeds the existential kappa into (a),(b) and verifies (1),(2): consistent (C4). No duplicates found (grep for exact-Hom/ML nodes: lem-pc-tower-surjective-lim-acyclic is countable lim^1, not this). Second reading by K1 (with its correction) missed no fault."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.GrothendieckAbelian.KInjectiveCriterion",
+  "declaration": "CochainComplex.isKInjective_of_small_acyclic",
+  "file": "lean/Sheaf/CategoryTheory/GrothendieckAbelian/KInjectiveCriterion.lean",
+  "statement": "theorem isKInjective_of_small_acyclic {C : Type u} [Category.{v} C] [Abelian C] [IsGrothendieckAbelian.{v} C] (κ : Cardinal.{v}) (h_sub : ∀ (M : CochainComplex C ℤ), M.Acyclic → ¬ IsZero M → ∃ (N : CochainComplex C ℤ) (ι : N ⟶ M), Mono ι ∧ ¬ IsZero N ∧ (∃ b : ℤ, N.IsStrictlyLE b) ∧ N.Acyclic ∧ ∀ n : ℤ, Cardinal.mk (Shrink.{v} (Subobject (N.X n))) ≤ κ) (h_quot : ∀ (M : CochainComplex C ℤ), M.Acyclic → ∃ (α : Type v) (F : α → CochainComplex C ℤ) (π : ∐ F ⟶ M), Epi π ∧ ∀ a : α, (∃ b : ℤ, (F a).IsStrictlyLE b) ∧ (F a).Acyclic ∧ ∀ n : ℤ, Cardinal.mk (Shrink.{v} (Subobject ((F a).X n))) ≤ κ) (I : CochainComplex C ℤ) (h_inj : ∀ j : ℤ, Injective (I.X j)) (h_small : ∀ (M : CochainComplex C ℤ), (∃ b : ℤ, M.IsStrictlyLE b) → M.Acyclic → (∀ n : ℤ, Cardinal.mk (Shrink.{v} (Subobject (M.X n))) ≤ κ) → ∀ f : M ⟶ I, Nonempty (Homotopy f 0)) : I.IsKInjective",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-ckj0917",
+  "group": "M1",
+  "result": "pass",
+  "note": "Grothendieck C with Category.{v}, kappa : Cardinal.{v}, size = #Shrink(Subobject X); (a) h_sub: acyclic, not IsZero M -> Mono iota, not IsZero N, exists b IsStrictlyLE b, Acyclic, termwise size <= kappa; (b) h_quot: alpha : Type v, Epi from coproduct, each member own bound/acyclic/size; (1) h_inj Injective (I.X j); (2) h_small Nonempty (Homotopy f 0); conclusion Mathlib IsKInjective = def-pur-kinjective-complex mathlib_match; no Mathlib/source match (KInjective.lean has only bounded-below, rlp, rightOrthogonal criteria)"
  }
 }
