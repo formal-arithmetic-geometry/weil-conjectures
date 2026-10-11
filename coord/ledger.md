@@ -5507,3 +5507,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 18:09 L: merged deliver/M1/lem-weil-pbc-hypercover-one-more-simplex (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.HypercoverOneMoreSimplex AlgebraicGeometry.Scheme.isSemiRepresentableCovering_simplicialHomRestriction_one_more_simplex)
 - 18:10 L: merged deliver/C1/lem-weil-pbc-henselization-colimit (stage 2; reviewer PASS; first push; Sheaf.RingTheory.HenselizationColimit RingTheory.pairHenselization_colimit)
 - 18:10 L: merged deliver/E1/lem-weil-pbc-henselization-noetherian-completion (stage 2; reviewer PASS; first push; Sheaf.RingTheory.PairHenselizationNoetherianCompletion RingTheory.pair_henselization_noetherian_completion)
+- 18:11 L: merged deliver/E1/lem-weil-pbc-henselization-universal-property (stage 2; reviewer PASS; first push; Sheaf.RingTheory.HenselizationUniversalProperty RingTheory.henselization_universal_property)

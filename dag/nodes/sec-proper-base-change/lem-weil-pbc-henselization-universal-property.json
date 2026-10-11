@@ -200,5 +200,23 @@
   "item": "lem-weil-pbc-henselization-universal-property",
   "worker": "stage1",
   "summary": "Split along the last paragraph of the proof of Stacks More on Algebra 0A02 (read in full, with 09XI, 09XF and Algebra 02FL). Statement and stmt_deps kept. Eight steps: eta = iota_B and the coprojections are B-algebra maps over a colimit that is also a colimit of rings; (A',I') has I' in the radical and Gabber's root property (09XI (1)=>(5), via the existing factorization criterion, as in lem-weil-pbc-henselian-pair-approximation step 4); C' = A' (x)_B C is etale over A' with C'/I'C' = A'/I'; existence of sections by the existing (5)=>(2) node; uniqueness of sections by the Stacks argument (idempotent of the diagonal, 09XF), where the 02FL decomposition is derived from lem-weil-pbc-etale-section-idempotent-splitting applied to the multiplication section, so no 02FL node is needed; compatibility and colim sigma_C; uniqueness of psi; psi(J^h) in I'. No new nodes: every step cites existing nodes. No Lean in slopmaster2 (no henselization there)."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.HenselizationUniversalProperty",
+  "declaration": "RingTheory.henselization_universal_property",
+  "statement": "theorem henselization_universal_property (B : Type u) [CommRing B] (J : Ideal B) (c : Cocone (ObjectProperty.ι (fun C : Under (CommRingCat.of B) ↦ AlgebraicGeometry.Etale (AlgebraicGeometry.Spec.map C.hom) ∧ Function.Bijective (Ideal.quotientMap (J.map C.hom.hom) C.hom.hom (Ideal.le_comap_map))))) (hc : Nonempty (IsColimit c)) (A' : Type u) [CommRing A'] (I' : Ideal A') [HenselianRing A' I'] (φ : B →+* A') (hφ : J.map φ ≤ I') : ∃ ψ : c.pt.right →+* A', RingHom.comp ψ (CommRingCat.Hom.hom c.pt.hom) = φ ∧ (J.map (CommRingCat.Hom.hom c.pt.hom)).map ψ ≤ I' ∧ ∀ ψ' : c.pt.right →+* A', RingHom.comp ψ' (CommRingCat.Hom.hom c.pt.hom) = φ → ψ' = ψ",
+  "by": "E1",
+  "date": "2026-10-12",
+  "existing": false,
+  "file": "lean/Sheaf/RingTheory/HenselizationUniversalProperty.lean",
+  "branch": "sheaf-dag"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "E1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }
