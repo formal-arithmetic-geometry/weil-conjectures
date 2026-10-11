@@ -222,5 +222,27 @@
   "blueprint": "Steps 1-3 realize the blueprint proof's first paragraph ('Properness': f' separated and of finite type, universally closed), replacing its valuative-criterion argument for universal closedness by the base-change leaf; steps 4-6 realize the second paragraph ('Smoothness'), with formal smoothness in place of the affine-local smooth ring maps (00T4/00T2) because def-sbc-smooth-morphisms is the formally-smooth definition; its clause 'the finite presentation property is preserved by base change' is step 4."
  },
  "reviewed": "2026-10-10 L: 6 steps checked (separated and finite type, universally closed, proper; lfp by the qcqs-permanence leaf; formally smooth written out via the fibre-product universal property, 02H2; smooth). Statement restated as two independent clauses with the DAG definitions (clause 2 no longer assumes proper; stronger and true). Not a Mathlib leaf: smoothness is the DAG's formally-smooth definition, Mathlib's Smooth agrees only through 02H6 (candidate recorded). Tags 0BX4 (a section), 00T4/00T2 (affine-local smoothness) of the blueprint noted as misdirected.",
- "lead_note": "2026-10-10 L: lem-weil-pbc-proper-base-change (sec-curve-estimates, imported) states clause (1) exactly; make it a Mathlib leaf (IsProper.isStableUnderBaseChange, Proper.lean 72) or merge at its turn."
+ "lead_note": "2026-10-10 L: lem-weil-pbc-proper-base-change (sec-curve-estimates, imported) states clause (1) exactly; make it a Mathlib leaf (IsProper.isStableUnderBaseChange, Proper.lean 72) or merge at its turn.",
+ "lean": {
+  "module": "Mathlib.AlgebraicGeometry.Morphisms.Proper",
+  "declaration": "AlgebraicGeometry.IsProper.isStableUnderBaseChange",
+  "declarations": [
+   "AlgebraicGeometry.IsProper.isStableUnderBaseChange",
+   "AlgebraicGeometry.smooth_isStableUnderBaseChange"
+  ],
+  "statement": "instance isStableUnderBaseChange : MorphismProperty.IsStableUnderBaseChange @IsProper",
+  "branch": "mathlib",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": true,
+  "note": "Two independent clauses, realized by two existing instances: IsProper.isStableUnderBaseChange in Mathlib.AlgebraicGeometry.Morphisms.Proper and smooth_isStableUnderBaseChange in Mathlib.AlgebraicGeometry.Morphisms.Smooth. The signature records the primary declaration verbatim. Apply CategoryTheory.MorphismProperty.pullback_snd to obtain the second projection formulation. The dependency def-sbc-smooth-morphisms now records Mathlib Smooth (same notion by Stacks 02H6), so the stage-1 candidate obstruction no longer applies. No new module or definition."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-pbc1540",
+  "group": "H1",
+  "result": "pass",
+  "note": "X S S' : Scheme.{u}, f g arbitrary (no extra instances); X'=pullback f g, f'=pullback.snd f g via MorphismProperty.pullback_snd; (1) IsProper f -> IsProper f' = IsProper.isStableUnderBaseChange; (2) Smooth f -> Smooth f' independently = smooth_isStableUnderBaseChange; IsStableUnderBaseChange (all cartesian squares) equivalent to chosen pullback; both #check and specialization compile clean on L; scheme morphisms only, no cohomology notion involved"
+ }
 }
