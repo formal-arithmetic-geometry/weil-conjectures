@@ -166,5 +166,24 @@
   "by": "L",
   "result": "accepted",
   "note": "5 elementary steps (agent proof of the fact Stacks omits in 0CAL): opens meet the closure of y iff they contain y; locally constant maps on V cap W are constant (direct argument through (1)); bijectivity of kappa_V in both cases; compatibility with restrictions (three cases); the pushforward of the constant sheaf is a sheaf, so kappa is an isomorphism of sheaves. No new nodes."
+ },
+ "lean": {
+  "module": "Sheaf.Topology.SkyscraperConstantOnPointClosure",
+  "declaration": "TopCat.skyscraper_constant_on_point_closure",
+  "file": "lean/Sheaf/Topology/SkyscraperConstantOnPointClosure.lean",
+  "statement": "theorem skyscraper_constant_on_point_closure (Y : TopCat.{u}) (y : Y) (A : Type u) : (∀ V : Opens Y, ((V : Set Y) ∩ closure ({y} : Set Y)).Nonempty ↔ y ∈ V) ∧ (∀ (V : Opens Y), y ∈ V → ∀ g : LocallyConstant {w : Y // w ∈ V ∧ w ∈ closure ({y} : Set Y)} A, ∃ a : A, ∀ w, g w = a) ∧ ∃ (F : Y.Sheaf (Type u)) (e : ∀ V : Opens Y, F.obj.obj (op V) ≃ LocallyConstant {w : Y // w ∈ V ∧ w ∈ closure ({y} : Set Y)} A), (∀ (U V : Opens Y) (i : U ⟶ V) (s : F.obj.obj (op V)), e U (F.obj.map i.op s) = LocallyConstant.comap ⟨fun w : {w : Y // w ∈ U ∧ w ∈ closure ({y} : Set Y)} ↦ ⟨w.1, i.le w.2.1, w.2.2⟩, continuous_subtype_val.subtype_mk _⟩ (e V s)) ∧ ∃ kappa : skyscraperSheaf y A ≅ F, (∀ V : Opens Y, Function.Bijective (kappa.hom.hom.app (op V))) ∧ (∀ (V : Opens Y) (hy : y ∈ V) (a : A), e V (kappa.hom.hom.app (op V) (cast (if_pos hy).symm a)) = LocallyConstant.const _ a) ∧ (∀ (V : Opens Y), y ∉ V → ∀ (s : (skyscraperSheaf y A).obj.obj (op V)) (g : LocallyConstant {w : Y // w ∈ V ∧ w ∈ closure ({y} : Set Y)} A), e V (kappa.hom.hom.app (op V) s) = g)",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-11",
+  "existing": false,
+  "note": "The existential sheaf F and section equivalences e, explicitly commuting with restrictions, specify the locally-constant-map direct image without introducing a duplicate definition. kappa is prescribed on every section, including the empty-intersection case."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "G1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }
