@@ -134,5 +134,24 @@
   "by": "L",
   "result": "pass",
   "note": "Definition checked against Sites 00XJ, 03A0 (1)-(5) and 03CG; made self-contained (refinement after 00VT); the claim that it agrees with 03CG moved from the statement to a remark step (the converse direction is 03A0, a pointer, no node needed yet). Not a Mathlib leaf: only (a) is a single Mathlib predicate (Functor.IsCocontinuous, CoverLifting.lean:75); (b) is Stacks 00WV (stronger than Functor.IsContinuous); (c),(d) are source-side conditions, not IsLocallyFaithful/IsLocallyFull (target-side); (e) implies IsCoverDense; together they imply IsCocontinuous and IsDenseSubsite, a theorem. The brief's guesses on (b)-(d) corrected by the worker."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SpecialCocontinuousFunctor",
+  "declaration": "CategoryTheory.Functor.IsSpecialCocontinuous",
+  "file": "lean/Sheaf/CategoryTheory/SpecialCocontinuousFunctor.lean",
+  "statement": "def IsSpecialCocontinuous {C : Type u₁} [Category.{v₁} C] {D : Type u₂} [Category.{v₂} D] (J : Precoverage C) (K : Precoverage D) [J.HasIsos] [J.IsStableUnderComposition] [J.IsStableUnderBaseChange] [J.HasPullbacks] [K.HasIsos] [K.IsStableUnderComposition] [K.IsStableUnderBaseChange] [K.HasPullbacks] (F : C ⥤ D) : Prop",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": false,
+  "note": "Cocontinuity (1) is Mathlib Functor.IsCocontinuous on the generated topologies J.toGrothendieck, K.toGrothendieck; the new definition packages (2)(a)-(e): (a) IsCocontinuous, (b) Stacks continuity inline as hcover/hpullback of siteContinuous_pushforward_isSheaf, (c),(d) on actual source coverings, (e) an actual covering by image objects. Categories of arbitrary size (R-scf) so that the citer lem-weil-pbc-affine-etale-site-topos can apply it to the inclusion into X.Etale.",
+  "fixed_by": "R-scf"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-scf",
+  "group": "F1",
+  "result": "fix"
  }
 }

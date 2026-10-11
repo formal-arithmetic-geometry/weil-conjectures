@@ -5532,3 +5532,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 18:23 L: merged deliver/H1/lem-pc-sites-module-sheafification-tensor (stage 2; reviewer PASS; first push; Sheaf.Algebra.Category.ModuleCat.Presheaf.SheafificationTensor PresheafOfModules.exists_sheafificationTensorIso)
 - 18:23 L: merged deliver/K1/lem-weil-pbc-image-presheaf-sheafification-iso (stage 2; reviewer PASS; first push; Sheaf.Paper.ImagePresheafSheafificationIso CategoryTheory.imagePresheaf_sheafification_iso)
 - 18:23 L: merged deliver/M1/lem-weil-pbc-sets-etale-inverse-image-exact (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.EtaleSetInverseImageExact AlgebraicGeometry.etaleSetInverseImage_exact)
+- 18:24 L: merged deliver/F1/def-weil-pbc-special-cocontinuous-functor (stage 2; reviewer FIX; first push; Sheaf.CategoryTheory.SpecialCocontinuousFunctor CategoryTheory.Functor.IsSpecialCocontinuous)
