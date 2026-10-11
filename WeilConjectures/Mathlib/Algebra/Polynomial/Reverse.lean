@@ -16,6 +16,8 @@ public import Mathlib.Algebra.Polynomial.Reverse
   coefficient.
 - `Polynomial.reverse_map` — reversal commutes with the coefficient map along an injective ring
   homomorphism.
+- `Polynomial.monic_reverse_of_coeff_zero_eq_one` — the reverse of a polynomial with constant
+  coefficient `1` is monic.
 - `Polynomial.reverse_prod_of_domain` — over a domain, reversal is multiplicative on finite
   products.
 - `Polynomial.reverse_multiset_prod_X_sub_C` — the reverse of a product `∏ (X - aᵢ)` of monic
@@ -42,6 +44,12 @@ theorem reverse_reverse {p : R[X]} (hp : p.natTrailingDegree = 0) : p.reverse.re
 theorem reverse_map {f : R →+* S} (hf : Function.Injective f) (p : R[X]) :
     (p.map f).reverse = p.reverse.map f := by
   simp only [reverse, reflect_map, natDegree_map_eq_of_injective hf]
+
+/-- The reverse of a polynomial with constant coefficient `1` is monic. -/
+theorem monic_reverse_of_coeff_zero_eq_one [Nontrivial R] {p : R[X]} (hp : p.coeff 0 = 1) :
+    p.reverse.Monic := by
+  rw [Monic, reverse_leadingCoeff, trailingCoeff_eq_coeff_zero (by rw [hp]; exact one_ne_zero),
+    hp]
 
 end Semiring
 

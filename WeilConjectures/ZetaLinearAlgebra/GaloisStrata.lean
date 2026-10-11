@@ -10,6 +10,7 @@ public import Mathlib.FieldTheory.AlgebraicClosure
 public import Mathlib.FieldTheory.Galois.Infinite
 public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
 public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
+public import WeilConjectures.Mathlib.Algebra.Polynomial.Reverse
 public import WeilConjectures.ZetaLinearAlgebra.ReciprocalRoots
 public import WeilConjectures.ZetaLinearAlgebra.WeilNumbers
 
@@ -143,10 +144,6 @@ theorem map_weilStratumPoly_algEquiv (C : ℤ[X])
   rw [map_multiset_prod_one_sub_C_mul_X]
   exact congrArg (fun s ↦ (s.map fun α ↦ 1 - Polynomial.C α * X).prod)
     (map_weilStratum_algEquiv q i C σ)
-
-/-- For `C(0) = 1`, the reversed polynomial `C^#` is monic. -/
-theorem monic_reverse_of_coeff_zero_eq_one {C : ℤ[X]} (hC : C.coeff 0 = 1) : C.reverse.Monic := by
-  rw [Monic, reverse_leadingCoeff, trailingCoeff_eq_coeff_zero (by rw [hC]; exact one_ne_zero), hC]
 
 /-- For `C(0) = 1`, the reciprocal roots of `C` are algebraic integers. -/
 theorem isIntegral_of_mem_weilStratum {C : ℤ[X]} (hC : C.coeff 0 = 1) {α : AlgebraicClosure ℚ}
