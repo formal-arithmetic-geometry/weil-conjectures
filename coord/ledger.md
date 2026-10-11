@@ -5198,3 +5198,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 15:19 L: merged deliver/P1/prop-weil-pbc-composition-stability (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.ProperBaseChangeCompositionStability AlgebraicGeometry.Etale.prop_weil_pbc_composition_stability)
 - 15:19 L: merged deliver/N1/lem-sc-etale-triple-strict-henselization-identification (stage 2; reviewer FIX; first push; Sheaf.RingTheory.EtaleTripleStrictHenselizationIdentification AlgebraicGeometry.Scheme.etaleTriple_strictHenselization_identification)
 - 15:19 L: merged deliver/Q1/lem-weil-pbc-completion-internal-hom (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.CompletionInternalHom AlgebraicGeometry.completion_internal_hom_bijective)
+- 15:19 L: merged deliver/Q1/lem-sc-strict-henselization-completion-flat (stage 2; reviewer PASS; first push; Sheaf.RingTheory.StrictHenselizationCompletionFlat Algebra.strictHenselization_completion_flat)

@@ -22,7 +22,8 @@
  "stmt_deps": [
   "lem-weil-pbc-strict-henselization-triples",
   "def-weil-pbc-adic-completion",
-  "def-weil-pbc-flat-ring-map"
+  "def-weil-pbc-flat-ring-map",
+  "def-sc-ring-strict-henselization"
  ],
  "proof": [
   {
@@ -146,5 +147,23 @@
   "group": "E1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-shf2509 (reviewer sub-agent of L); spot-checked: Read packet whole. No cycle: item and new node do not cite lem-sc-strict-henselization-noetherian or -completion-noetherian; new node is statement-only (empty proof); sibling completion-noetherian cites the item with identical hypotheses (R Noetherian local, completion at mR^sh) (C4 ok). New node lem-sc-etale-triple-to-sh-completion-flat is true and a real lemma (S->S_q localization flat, (S_q)^sh=R^sh, completion flat over the Noetherian local S_q by the completed-free-module argument of 06LJ(c)); not a duplicate of lem-weil-pbc-noetherian-completion-flat; Mathlib has no strict henselization. Step 4 colimit flatness matches lem-weil-pbc-colimit-rings-flat. FIX more, RETURN less: removed vestigial step 2 (S Noetherian), used by no later step after E1's second-reading rewrite of step 3, and dropped its two proof_deps/tool_uses (lfp-affine-opens, finite-type-noetherian).; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.StrictHenselizationCompletionFlat",
+  "declaration": "Algebra.strictHenselization_completion_flat",
+  "file": "lean/Sheaf/RingTheory/StrictHenselizationCompletionFlat.lean",
+  "statement": "theorem strictHenselization_completion_flat (R K C : Type v) [CommRing R] [IsLocalRing R] [IsNoetherianRing R] [Field K] [Algebra (IsLocalRing.ResidueField R) K] [IsSepClosure (IsLocalRing.ResidueField R) K] [Algebra R K] [IsScalarTower R (IsLocalRing.ResidueField R) K] [CommRing C] [Algebra R C] (hC : IsStrictHenselization R K C) : (algebraMap C (AdicCompletion ((IsLocalRing.maximalIdeal R).map (algebraMap R C)) C)).Flat",
+  "branch": "sheaf-dag",
+  "by": "Q1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-scf3",
+  "group": "Q1",
+  "result": "pass",
+  "note": "R CommRing+IsLocalRing+IsNoetherianRing; K IsSepClosure of ResidueField R with R-tower; C with IsStrictHenselization R K C (added stmt_dep used); ideal m.map algebraMap R C = mR^sh; AdicCompletion; RingHom.Flat of algebraMap C _; same form as landed sibling completion-flat-over-base"
  }
 }
