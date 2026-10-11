@@ -335,4 +335,84 @@ lemma exists_glue_of_isConnected_inter [CompactSpace X] [QuasiSeparatedSpace X] 
 
 end Glue
 
+section HenselianPair
+
+variable {A : Type u} [CommRing A] (I : Ideal A)
+
+lemma range_specMap_quotientMk :
+    Set.range (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I))) =
+      PrimeSpectrum.zeroLocus (I : Set A) := by
+  have := range_comap_of_surjective (A ⧸ I) (Ideal.Quotient.mk I) Ideal.Quotient.mk_surjective
+  rw [Ideal.mk_ker] at this
+  exact this
+
+variable {Y Y₀ : Scheme.{u}} (p : Y ⟶ Spec (.of A)) (i : Y₀ ⟶ Y)
+  (p₀ : Y₀ ⟶ Spec (.of (A ⧸ I)))
+  (h : IsPullback i p₀ p (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I))))
+
+include h in
+/-- The closed fibre over `V(I)` of a scheme over `Spec A` is the preimage of `V(I)`. -/
+lemma range_eq_preimage_zeroLocus_of_isPullback :
+    Set.range i = p ⁻¹' PrimeSpectrum.zeroLocus (I : Set A) := by
+  rw [← h.isoPullback_hom_fst, Scheme.Hom.comp_base, TopCat.coe_comp, Set.range_comp,
+    Set.range_eq_univ.2 h.isoPullback.hom.surjective, Set.image_univ, Scheme.Pullback.range_fst,
+    range_specMap_quotientMk]
+
+include h in
+/-- The closed fibre over `V(I)` is a closed immersion. -/
+lemma isClosedImmersion_of_isPullback : IsClosedImmersion i :=
+  MorphismProperty.of_isPullback h.flip
+    (IsClosedImmersion.spec_of_surjective (CommRingCat.ofHom (Ideal.Quotient.mk I))
+      Ideal.Quotient.mk_surjective)
+
+end HenselianPair
+
+/-- Two sections of an étale sheaf over an étale scheme with no points agree. -/
+lemma eq_of_isEmpty {X : Scheme.{u}} (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})
+    {V : X.Etale} [IsEmpty V.left] (s₁ s₂ : F.obj.obj (op V)) : s₁ = s₂ :=
+  eq_of_forall_exists_map_eq F _ _ fun x ↦ isEmptyElim x
+
+section SigmaClosedFibre
+
+variable {Y Y₀ : Scheme.{u}} (i : Y₀ ⟶ Y) (G : Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1})
+  (t : ((i)^*[AddCommGrpCat.{u + 1}].obj G).obj.obj (op (Scheme.Etale.mk (𝟙 Y₀))))
+
+set_option backward.isDefEq.respectTransparency false in
+/-- If sections `g_k` over étale `E_k ⟶ Y` restrict to `t` on the `E_k ×_Y Y₀`, then so does the
+section they induce on the disjoint union of the `E_k`. -/
+lemma pullSection_sigmaEtale_eq {ι : Type u} (E : ι → Y.Etale) (gE : ∀ k, G.obj.obj (op (E k)))
+    (hE : ∀ k, pullSection i G (V := (MorphismProperty.Over.pullback @Etale ⊤ i).obj (E k))
+        (pullback.fst (E k).hom i) pullback.condition (gE k) =
+      ((i)^*[AddCommGrpCat.{u + 1}].obj G).obj.map (toTerminalOfPullback i (E k)).op t)
+    (gt : G.obj.obj (op (sigmaEtale E))) (hgt : ∀ k, G.obj.map (sigmaEtaleι E k).op gt = gE k) :
+    pullSection i G (V := (MorphismProperty.Over.pullback @Etale ⊤ i).obj (sigmaEtale E))
+        (pullback.fst (sigmaEtale E).hom i) pullback.condition gt =
+      ((i)^*[AddCommGrpCat.{u + 1}].obj G).obj.map
+        (toTerminalOfPullback i (sigmaEtale E)).op t := by
+  refine eq_of_forall_exists_map_eq _ _ _ fun z ↦ ?_
+  obtain ⟨⟨k, y⟩, hky⟩ := (sigmaMk fun k ↦ (E k).left).surjective
+    (pullback.fst (sigmaEtale E).hom i z)
+  let c := (MorphismProperty.Over.pullback @Etale ⊤ i).map (sigmaEtaleι E k)
+  have hc : c.left = pullback.map (E k).hom i (sigmaEtale E).hom i (sigmaEtaleι E k).left (𝟙 _)
+      (𝟙 _) (by simp [sigmaEtaleι, sigmaEtale]) (by simp) := by
+    apply pullback.hom_ext <;> simp [c]
+  have hz : z ∈ Set.range c.left := by
+    have hr := Scheme.Pullback.range_map (E k).hom i (sigmaEtale E).hom i
+      (sigmaEtaleι E k).left (𝟙 _) (𝟙 _) (by simp [sigmaEtaleι, sigmaEtale]) (by simp)
+    have hmem : z ∈
+        pullback.fst (sigmaEtale E).hom i ⁻¹' Set.range (sigmaEtaleι E k).left ∩
+          pullback.snd (sigmaEtale E).hom i ⁻¹' Set.range (𝟙 Y₀) := by
+      refine ⟨⟨y, ?_⟩, ⟨pullback.snd (sigmaEtale E).hom i z, rfl⟩⟩
+      rw [← hky, sigmaMk_mk]
+      rfl
+    rw [hc]
+    exact hr.symm ▸ hmem
+  refine ⟨_, c, hz, ?_⟩
+  rw [map_pullSection, ← ConcreteCategory.comp_apply, ← Functor.map_comp, ← op_comp,
+    Scheme.Etale.hom_ext_mk_id (c ≫ toTerminalOfPullback i (sigmaEtale E))
+      (toTerminalOfPullback i (E k)), ← hE k, ← hgt k, ← pullSection_comp]
+  exact pullSection_congr _ _ _ (by simp [c, sigmaEtaleι]) _
+
+end SigmaClosedFibre
+
 end AlgebraicGeometry.Etale
