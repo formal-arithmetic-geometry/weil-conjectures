@@ -42,9 +42,15 @@ testing for geometric irreducibility below.
 
 ## TODO
 
-Prove `AlgebraicGeometry.WeilSheaf.exists_isClosedImmersion_isIrreducibleLocalSystem_upperStar`
-and `AlgebraicGeometry.WeilSheaf.IsReal.isMixed`, stated with `sorry`, along the reduction above,
-once the category is redefined (`sk-d-real-weil`).
+`AlgebraicGeometry.WeilSheaf.IsReal.isMixed` is proved here by Noetherian induction from
+`AlgebraicGeometry.WeilSheaf.IsReal.exists_isMixed_upperStar_opensι` (mixedness on a nonempty
+open), which is stated with `sorry`, as is curve testing
+`AlgebraicGeometry.WeilSheaf.exists_isClosedImmersion_isIrreducibleLocalSystem_upperStar`. Both
+need infrastructure that does not exist yet: the dictionary between lisse pro-étale Weil sheaves
+and representations of the Weil group (`def-wf-fundamental-representation`) on a base of any
+dimension, finite constant-field extensions of Weil sheaves, and the Bertini theorem
+`AlgebraicGeometry.Scheme.Hom.exists_isClosedImmersion_connectedSpace_pullback`. The curve case
+is `AlgebraicGeometry.WeilSheaf.IsReal.isMixed_of_isLisse`.
 
 ## References
 
