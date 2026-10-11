@@ -118,5 +118,23 @@
   "group": "F1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-fma2944 (reviewer sub-agent of L); spot-checked: Both 22:39 return points repaired: Step 2 (E5) and Step 3 (E3) now use the target presentation R_N, witnesses b with (coefficient vector)=R_N b over A, lifted by clause (1) and equalized at a later stage by clause (2) of lem-pc-filtered-colimit-commrings-elementwise (C1 ok, Tag 05N7 via 00QO-type argument). C4: clauses (objects/maps/equality) give K1 lem-pc-affine-perfect-colimit-descent (summand splitting, differentials, d^2=0), F1 lem-pc-fp-module-map-descent (affine case and Zariski gluing), H1 lem-pc-affine-perfect-hom-colimit (degreewise Hom colimit, cycles) exactly what they use; J1 lem-pc-fp-relation-descent does not cite this node. No new nodes; no duplicate (lem-pc-noetherian-approximation-data is different). created.item = parent item is correct (second reading's claimed edit not present, harmless). FIX more, RETURN less: precision only, Step 2 names the stage vector d_t^{(j)} whose coordinates are compared and the final stage j'; Step 3 takes c_k in A_i^q (difference lives in N_i) and compares its pushforward with R_N b_k.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.FinitePresentationColimit",
+  "declaration": "ModuleCat.finitePresentation_descent_directedColimit",
+  "file": "lean/Sheaf/Algebra/FinitePresentationColimit.lean",
+  "statement": "theorem finitePresentation_descent_directedColimit {I : Type u} [PartialOrder I] [Nonempty I] [IsDirected I (· ≤ ·)] (F : I ⥤ CommRingCat) : (∀ (N : ModuleCat (colimit F : CommRingCat)), Module.FinitePresentation (colimit F : CommRingCat) N → ∃ (i : I) (M : ModuleCat (F.obj i)), Module.FinitePresentation (F.obj i) M ∧ Nonempty ((extendScalars (CommRingCat.Hom.hom (colimit.ι F i))).obj M ≅ N)) ∧ (∀ (i : I) (M N : ModuleCat (F.obj i)), Module.FinitePresentation (F.obj i) M → Module.FinitePresentation (F.obj i) N → ∀ (f : (extendScalars (CommRingCat.Hom.hom (colimit.ι F i))).obj M ⟶ (extendScalars (CommRingCat.Hom.hom (colimit.ι F i))).obj N), ∃ (j : I) (hij : i ≤ j), let rij := CommRingCat.Hom.hom (F.map (homOfLE hij)) let rj := CommRingCat.Hom.hom (colimit.ι F j) let ri := CommRingCat.Hom.hom (colimit.ι F i) ∃ (g : (extendScalars rij).obj M ⟶ (extendScalars rij).obj N) (eM : (extendScalars ri).obj M ≅ (extendScalars rj).obj ((extendScalars rij).obj M)) (eN : (extendScalars ri).obj N ≅ (extendScalars rj).obj ((extendScalars rij).obj N)), (∀ m : M, eM.hom ((1 : ↑(colimit F : CommRingCat)) ⊗ₜ[F.obj i, ri] m) = (1 : ↑(colimit F : CommRingCat)) ⊗ₜ[F.obj j, rj] ((1 : ↑(F.obj j)) ⊗ₜ[F.obj i, rij] m)) ∧ (∀ n : N, eN.hom ((1 : ↑(colimit F : CommRingCat)) ⊗ₜ[F.obj i, ri] n) = (1 : ↑(colimit F : CommRingCat)) ⊗ₜ[F.obj j, rj] ((1 : ↑(F.obj j)) ⊗ₜ[F.obj i, rij] n)) ∧ f ≫ eN.hom = eM.hom ≫ (extendScalars rj).map g) ∧ (∀ (i : I) (M N : ModuleCat (F.obj i)), Module.FinitePresentation (F.obj i) M → Module.FinitePresentation (F.obj i) N → ∀ (f g : M ⟶ N), (extendScalars (CommRingCat.Hom.hom (colimit.ι F i))).map f = (extendScalars (CommRingCat.Hom.hom (colimit.ι F i))).map g → ∃ (j : I) (hij : i ≤ j), (extendScalars (CommRingCat.Hom.hom (F.map (homOfLE hij)))).map f = (extendScalars (CommRingCat.Hom.hom (F.map (homOfLE hij)))).map g)",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-fmd0750",
+  "group": "E1",
+  "result": "pass",
+  "note": "I nonempty directed poset Type u, F : I ⥤ CommRingCat.{u}, A = colimit F; (1) every fp A-module (ModuleCat.{max u v}) iso to extendScalars of fp M_i; (2) map between fixed base changes descends to g at j>=i, eM/eN pinned to canonical iterated base change by pure tensors, square commutes; (3) stage maps equal over A equal at some j>=i; Mathlib/source have no module-level descent (only ring fp under colimits, exists_lift_of_isLocalizedModule); docstring follows node's 3 proof steps; lines<=100; imports used; proof sorry"
  }
 }
