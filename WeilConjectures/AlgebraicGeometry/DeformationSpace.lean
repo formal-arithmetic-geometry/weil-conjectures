@@ -225,7 +225,7 @@ variable {X} (I : X.IdealSheafData)
 abbrev siteIdeal (U : X.AffineZariskiSite) : Ideal Γ(X, U.1) :=
   I.ideal ⟨U.1, U.2⟩
 
-lemma map_siteIdeal {U V : X.AffineZariskiSiteᵒᵖ} (i : U ⟶ V) :
+lemma map_siteIdeal ⦃U V : X.AffineZariskiSiteᵒᵖ⦄ (i : U ⟶ V) :
     (I.siteIdeal U.unop).map (X.affineStructurePresheaf.map i).hom = I.siteIdeal V.unop :=
   I.map_ideal' (U := ⟨V.unop.1, V.unop.2⟩) (V := ⟨U.unop.1, U.unop.2⟩) _
 
@@ -343,6 +343,77 @@ noncomputable def polynomialZeroToNormalCone :
     change Ideal.Quotient.mk _ ((I.polynomialToRees.app V).hom ((X.polynomialPresheaf.map i).hom x)) =
       Ideal.Quotient.mk _ ((I.reesPresheaf.map i).hom ((I.polynomialToRees.app U).hom x))
     exact congrArg _ (I.polynomialToRees.naturality_apply i x)
+
+/-! ### The closed subscheme and its relative affine line -/
+
+/-- The quasi-coherent algebra `𝒪_X / I`. -/
+noncomputable abbrev quotientAlgebra : X.AffineZariskiSiteᵒᵖ ⥤ CommRingCat.{u} :=
+  quotientPresheaf (F := X.affineStructurePresheaf) (fun U ↦ I.siteIdeal U.unop) I.map_siteIdeal
+
+/-- The quotient map `𝒪_X ⟶ 𝒪_X / I`. -/
+noncomputable abbrev toQuotientAlgebra : X.affineStructurePresheaf ⟶ I.quotientAlgebra :=
+  toQuotientPresheaf _ I.map_siteIdeal
+
+lemma coequifibered_toQuotientAlgebra : I.toQuotientAlgebra.Coequifibered :=
+  coequifibered_toQuotientPresheaf _ _
+
+/-- The closed subscheme `V(I) = Spec_X (𝒪_X / I)`, as a relative spectrum. -/
+noncomputable abbrev quotientSpec : Scheme.{u} :=
+  (relativeGluingData I.coequifibered_toQuotientAlgebra).glued
+
+/-- The quasi-coherent algebra `(𝒪_X / I)[t]`. -/
+noncomputable abbrev quotientPolynomialAlgebra : X.AffineZariskiSiteᵒᵖ ⥤ CommRingCat.{u} :=
+  I.quotientAlgebra ⋙ CommRingCat.polynomialFunctor
+
+/-- The structure map `𝒪_X ⟶ (𝒪_X / I)[t]`. -/
+noncomputable abbrev toQuotientPolynomialAlgebra :
+    X.affineStructurePresheaf ⟶ I.quotientPolynomialAlgebra :=
+  I.toQuotientAlgebra ≫ I.quotientAlgebra.whiskerLeft CommRingCat.polynomialC
+
+lemma coequifibered_toQuotientPolynomialAlgebra : I.toQuotientPolynomialAlgebra.Coequifibered :=
+  NatTrans.Coequifibered.comp I.coequifibered_toQuotientAlgebra
+    (CommRingCat.coequifibered_polynomialC.whiskerLeft _)
+
+/-- The relative affine line `𝔸¹_{V(I)} = Spec_X (𝒪_X / I)[t]`. -/
+noncomputable abbrev quotientAffineLine : Scheme.{u} :=
+  (relativeGluingData I.coequifibered_toQuotientPolynomialAlgebra).glued
+
+/-- The map `𝒪_X[t, I t⁻¹] ⟶ (𝒪_X / I)[t]`, `t ↦ t`, `x t⁻¹ ↦ 0` for `x ∈ I`. -/
+@[simps]
+noncomputable def reesToQuotientPolynomial : I.reesPresheaf ⟶ I.quotientPolynomialAlgebra where
+  app U := CommRingCat.ofHom ((I.siteIdeal U.unop).extendedReesAlgebraToPolynomial
+    (Ideal.Quotient.mk _) Ideal.mk_ker.ge)
+  naturality U V i := by
+    refine CommRingCat.hom_ext ?_
+    exact Ideal.extendedReesAlgebraToPolynomial_comp_extendedReesAlgebraMap _ _
+      (I.map_siteIdeal i).le _ Ideal.mk_ker.ge _ Ideal.mk_ker.ge _
+      (Ideal.quotientMap_comp_mk (le_comap_quotientPresheaf _ I.map_siteIdeal i))
+
+/-- `t ↦ 0`: the restriction of `(𝒪_X / I)[t]` to the zero section. -/
+@[simps]
+noncomputable def quotientPolynomialEvalZero : I.quotientPolynomialAlgebra ⟶ I.quotientAlgebra where
+  app U := CommRingCat.ofHom (Polynomial.evalRingHom 0)
+  naturality U V i := by
+    refine CommRingCat.hom_ext (RingHom.ext fun p ↦ ?_)
+    exact Polynomial.eval_zero_map _ p
+
+lemma toExtendedReesAlgebraT_mem_tIdeal (U : X.AffineZariskiSiteᵒᵖ) :
+    (I.siteIdeal U.unop).extendedReesAlgebraT ∈ I.tIdeal U :=
+  Ideal.subset_span rfl
+
+/-- The projection `⨁_{r ≥ 0} I^r / I^{r+1} ⟶ 𝒪_X / I` to the degree-zero part. -/
+
+noncomputable def normalConeToQuotient : I.normalConePresheaf ⟶ I.quotientAlgebra where
+  app U := CommRingCat.ofHom (Ideal.Quotient.lift _
+    ((Polynomial.evalRingHom 0).comp (I.reesToQuotientPolynomial.app U).hom)
+    fun _ ha ↦ Ideal.span_T_le_ker_extendedReesAlgebraToPolynomial (Ideal.Quotient.mk _)
+      Ideal.mk_ker.ge ha)
+  naturality U V i := by
+    refine CommRingCat.hom_ext (Ideal.Quotient.ringHom_ext (RingHom.ext fun x ↦ ?_))
+    change Polynomial.eval 0 ((I.reesToQuotientPolynomial.app V).hom ((I.reesPresheaf.map i).hom x)) =
+      (I.quotientAlgebra.map i).hom (Polynomial.eval 0 ((I.reesToQuotientPolynomial.app U).hom x))
+    exact (congrArg (Polynomial.eval 0) (I.reesToQuotientPolynomial.naturality_apply i x)).trans
+      (Polynomial.eval_zero_map _ _)
 
 end IdealSheafData
 

@@ -436,6 +436,23 @@ lemma extendedReesAlgebraToPolynomial_T (φ : R →+* S) (h : I ≤ RingHom.ker 
   apply toLaurent_injective
   simp
 
+lemma extendedReesAlgebraToPolynomial_comp_extendedReesAlgebraMap {R' S' : Type*} [CommRing R']
+    [CommRing S'] (φ : R →+* S) (J : Ideal S) (h : I.map φ ≤ J) (π₀ : R →+* R')
+    (h₀ : I ≤ RingHom.ker π₀) (π : S →+* S') (hπ : J ≤ RingHom.ker π) (θ : R' →+* S')
+    (hθ : θ.comp π₀ = π.comp φ) :
+    (J.extendedReesAlgebraToPolynomial π hπ).comp (I.extendedReesAlgebraMap φ J h) =
+      (Polynomial.mapRingHom θ).comp (I.extendedReesAlgebraToPolynomial π₀ h₀) := by
+  refine RingHom.ext fun x ↦ toLaurent_injective ?_
+  simp only [RingHom.comp_apply, toLaurent_extendedReesAlgebraToPolynomial,
+    coe_extendedReesAlgebraMap, Polynomial.coe_mapRingHom, ← laurentMap_toLaurent,
+    laurentMap_laurentMap, hθ]
+
+lemma span_T_le_ker_extendedReesAlgebraToPolynomial (φ : R →+* S) (h : I ≤ RingHom.ker φ) :
+    Ideal.span {I.extendedReesAlgebraT} ≤
+      RingHom.ker ((Polynomial.evalRingHom 0).comp (I.extendedReesAlgebraToPolynomial φ h)) := by
+  rw [Ideal.span_singleton_le_iff_mem, RingHom.mem_ker]
+  simp
+
 lemma extendedReesAlgebraToPolynomial_C_mul_T_neg_one (φ : R →+* S) (h : I ≤ RingHom.ker φ)
     {x : R} (hx : x ∈ I) :
     I.extendedReesAlgebraToPolynomial φ h ⟨_, C_mul_T_neg_one_mem_extendedReesAlgebra hx⟩ = 0 := by
