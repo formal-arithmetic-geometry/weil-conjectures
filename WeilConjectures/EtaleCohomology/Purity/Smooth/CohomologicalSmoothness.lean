@@ -49,6 +49,7 @@ passes through every `Rf^!`
 ## Main statements
 
 - `AlgebraicGeometry.Etale.isCohomologicallySmooth_of_smoothOfRelativeDimension`
+- `AlgebraicGeometry.Etale.nonempty_iso_leftDerivedUpperStar_obj_rightDerivedUpperShriek_obj`
 - `AlgebraicGeometry.Etale.IsCohomologicallySmooth.comp`,
   `AlgebraicGeometry.Etale.IsCohomologicallySmooth.nonempty_iso_dualizingComplex_comp`
 - `AlgebraicGeometry.Etale.isCohomologicallySmooth_of_etale`,
@@ -200,6 +201,35 @@ theorem IsCohomologicallySmooth.comp {X Y Z : Scheme.{u}} {f : X ⟶ Y} {g : Y �
 /-! ### Smooth morphisms -/
 
 variable (Λ)
+
+/-- Blueprint `lem-pur-smb-extraordinary`: Smooth base change for the exceptional inverse image.
+
+For a cartesian square
+
+```
+  X' --u--> X
+  |          |
+  f'         f
+  ↓          ↓
+  Y' --v--> Y
+```
+
+in which `f` is smooth of pure relative dimension `d`, `v` is arbitrary and `f'` admits a
+compactification, and every `K ∈ D^b_{ctf}(Y, Λ)`, the comparison
+`Lu^* Rf^! K ≅ Rf'^! Lv^* K` is an isomorphism. This is the component at `K` of smooth base
+change for `R^!`
+(`AlgebraicGeometry.Etale.nonempty_iso_leftDerivedUpperStar_comp_rightDerivedUpperShriek`),
+which holds for every `K`. -/
+theorem nonempty_iso_leftDerivedUpperStar_obj_rightDerivedUpperShriek_obj {X Y X' Y' : Scheme.{u}}
+    (f : X ⟶ Y) [HasCompactification f] (d : ℕ) [SmoothOfRelativeDimension d f]
+    [HasInvertibleExponent Λ X] {v : Y' ⟶ Y} {f' : X' ⟶ Y'} {u : X' ⟶ X}
+    (sq : IsPullback u f' f v) [HasCompactification f']
+    (K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
+    (_hK : DerivedCategory.boundedConstructibleFiniteTor Λ Y K) :
+    Nonempty ((L((u)^*[ModuleCat.{u + 1} Λ])).obj ((R(f)^![ModuleCat.{u + 1} Λ]).obj K) ≅
+      (R(f')^![ModuleCat.{u + 1} Λ]).obj ((L((v)^*[ModuleCat.{u + 1} Λ])).obj K)) := by
+  obtain ⟨e⟩ := nonempty_iso_leftDerivedUpperStar_comp_rightDerivedUpperShriek Λ (d := d) f sq
+  exact ⟨e.app K⟩
 
 /-- Blueprint `thm-pur-cohomological-smoothness`: Cohomological smoothness of smooth morphisms.
 
