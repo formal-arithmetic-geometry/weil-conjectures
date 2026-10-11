@@ -1397,6 +1397,7 @@ public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.TorsionSheaf
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.UnderivedExchange
 public import WeilConjectures.SixFunctors.Etale.Derived.Adjunctions
 public import WeilConjectures.SixFunctors.Etale.Derived.AlgClosedField
+public import WeilConjectures.SixFunctors.Etale.Derived.AlgebraicClosureLowerStar
 public import WeilConjectures.SixFunctors.Etale.Derived.AlgebraicClosureStage
 public import WeilConjectures.SixFunctors.Etale.Derived.CoefficientExtension
 public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
