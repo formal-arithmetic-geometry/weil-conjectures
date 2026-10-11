@@ -186,6 +186,108 @@ lemma Etale.existsUnique_glue_sup (hV : V₁ ⊔ V₂ = ⊤)
       rfl)
   exact ⟨s, ⟨hs' true, hs' false⟩, fun s' ⟨h₁, h₂⟩ ↦ hsu s' fun b ↦ by cases b <;> assumption⟩
 
+
+/-- The map `(v ∘ ι')_! Λ ⟶ (v ∘ ι'')_! Λ` induced by an inclusion of opens `V' ≤ V''`. -/
+noncomputable def Etale.lowerShriekUnitHomOfLE {V' V'' : W.Opens} (hle : V' ≤ V'') :
+    Etale.lowerShriekUnit (Λ := Λ) (V'.ι ≫ v) inferInstance ⟶
+      Etale.lowerShriekUnit (V''.ι ≫ v) inferInstance :=
+  Etale.sectionHom _ (V'.ι ≫ v) inferInstance
+    ((Etale.lowerShriekUnit (V''.ι ≫ v) inferInstance).obj.map
+      (Etale.selfOpenHomOfLE v h hle).op (Etale.unitSection (V''.ι ≫ v) inferInstance))
+
+lemma Etale.lowerShriekUnitHomOfLE_comp {V' V'' : W.Opens} (hle : V' ≤ V'')
+    {G : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)}
+    (g : Etale.lowerShriekUnit (V''.ι ≫ v) inferInstance ⟶ G) :
+    Etale.lowerShriekUnitHomOfLE v h hle ≫ g = Etale.sectionHom G (V'.ι ≫ v) inferInstance
+      (G.obj.map (Etale.selfOpenHomOfLE v h hle).op
+        (g.hom.app _ (Etale.unitSection (V''.ι ≫ v) inferInstance))) := by
+  rw [Etale.lowerShriekUnitHomOfLE, Etale.sectionHom_comp, NatTrans.naturality_apply]
+
+/-- **Mayer–Vietoris for extensions by zero.** If `W = V₁ ∪ V₂`, then `v_! Λ` is the cokernel
+of `(v₁₂)_! Λ ⟶ (v₁)_! Λ ⊞ (v₂)_! Λ`. -/
+theorem Etale.exists_isColimit_cokernelCofork_lowerShriekUnit (hV : V₁ ⊔ V₂ = ⊤) :
+    let α := biprod.lift (Etale.lowerShriekUnitHomOfLE (Λ := Λ) v h inf_le_left)
+      (-Etale.lowerShriekUnitHomOfLE (Λ := Λ) v h inf_le_right)
+    let π := biprod.desc (Etale.lowerShriekUnitOpenHom (Λ := Λ) v h V₁)
+      (Etale.lowerShriekUnitOpenHom (Λ := Λ) v h V₂)
+    ∃ w : α ≫ π = 0, Nonempty (IsColimit (CokernelCofork.ofπ π w)) := by
+  intro α π
+  -- restrictions of sections
+  have key {G : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)} (g : _ ⟶ G) (V' : W.Opens)
+      (hle : V₁ ⊓ V₂ ≤ V') :
+      Etale.lowerShriekUnitHomOfLE v h hle ≫ Etale.lowerShriekUnitOpenHom v h V' ≫ g =
+        Etale.sectionHom G _ inferInstance (G.obj.map (Etale.selfOpenHom v h (V₁ ⊓ V₂)).op
+          (g.hom.app _ (Etale.unitSection v h))) := by
+    rw [Etale.lowerShriekUnitHomOfLE_comp, Etale.lowerShriekUnitOpenHom_comp,
+      Etale.sectionHom_app_unitSection, ← ConcreteCategory.comp_apply, ← Functor.map_comp,
+      ← op_comp, Etale.selfOpenHomOfLE_comp]
+  have hw : α ≫ π = 0 := by
+    simp only [α, π, biprod.lift_desc, Preadditive.neg_comp]
+    rw [← Category.comp_id (Etale.lowerShriekUnitOpenHom v h V₁),
+      ← Category.comp_id (Etale.lowerShriekUnitOpenHom v h V₂), key, key, add_neg_cancel]
+  -- the sections attached to a map out of `(v₁)_! Λ ⊞ (v₂)_! Λ` killing `α` are compatible
+  have hcompat {G : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)} (g : _ ⟶ G)
+      (hg : α ≫ g = 0) :
+      G.obj.map (Etale.selfOpenHomOfLE v h (inf_le_left : V₁ ⊓ V₂ ≤ V₁)).op
+          ((biprod.inl ≫ g).hom.app _ (Etale.unitSection _ inferInstance)) =
+        G.obj.map (Etale.selfOpenHomOfLE v h (inf_le_right : V₁ ⊓ V₂ ≤ V₂)).op
+          ((biprod.inr ≫ g).hom.app _ (Etale.unitSection _ inferInstance)) := by
+    have h0 : Etale.lowerShriekUnitHomOfLE v h inf_le_left ≫ biprod.inl ≫ g =
+        Etale.lowerShriekUnitHomOfLE v h inf_le_right ≫ biprod.inr ≫ g := by
+      have e : α ≫ g = Etale.lowerShriekUnitHomOfLE v h inf_le_left ≫ biprod.inl ≫ g -
+          Etale.lowerShriekUnitHomOfLE v h inf_le_right ≫ biprod.inr ≫ g := by
+        simp only [α, biprod.lift_eq, Preadditive.add_comp, Preadditive.neg_comp,
+          Category.assoc, sub_eq_add_neg]
+      rw [e, sub_eq_zero] at hg
+      exact hg
+    rw [Etale.lowerShriekUnitHomOfLE_comp, Etale.lowerShriekUnitHomOfLE_comp] at h0
+    exact Etale.sectionHom_injective G _ inferInstance h0
+  let s {G : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)} (g : _ ⟶ G) (hg : α ≫ g = 0) :
+      G.obj.obj (op (Etale.self v h)) :=
+    (Etale.existsUnique_glue_sup v h V₁ V₂ hV G _ _ (hcompat g hg)).exists.choose
+  have hs {G : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)} (g : _ ⟶ G) (hg : α ≫ g = 0) :=
+    (Etale.existsUnique_glue_sup v h V₁ V₂ hV G _ _ (hcompat g hg)).exists.choose_spec
+  refine ⟨hw, ⟨CokernelCofork.IsColimit.ofπ π hw (fun {G} g hg ↦ Etale.sectionHom G v h (s g hg))
+    (fun {G} g hg ↦ ?_) (fun {G} g hg m hm ↦ ?_)⟩⟩
+  · refine biprod.hom_ext' _ _ ?_ ?_
+    · rw [← Category.assoc, biprod.inl_desc, Etale.lowerShriekUnitOpenHom_comp,
+        Etale.sectionHom_app_unitSection, (hs g hg).1, ← Etale.eq_sectionHom]
+    · rw [← Category.assoc, biprod.inr_desc, Etale.lowerShriekUnitOpenHom_comp,
+        Etale.sectionHom_app_unitSection, (hs g hg).2, ← Etale.eq_sectionHom]
+  · rw [Etale.eq_sectionHom v h m]
+    congr 1
+    refine (Etale.existsUnique_glue_sup v h V₁ V₂ hV G _ _ (hcompat g hg)).unique ⟨?_, ?_⟩
+      (hs g hg)
+    · apply Etale.sectionHom_injective G _ inferInstance
+      rw [← Etale.lowerShriekUnitOpenHom_comp, ← biprod.inl_desc_assoc
+        (Etale.lowerShriekUnitOpenHom v h V₁) (Etale.lowerShriekUnitOpenHom v h V₂)]
+      change biprod.inl ≫ π ≫ m = _
+      rw [hm, ← Etale.eq_sectionHom]
+    · apply Etale.sectionHom_injective G _ inferInstance
+      rw [← Etale.lowerShriekUnitOpenHom_comp, ← biprod.inr_desc_assoc
+        (Etale.lowerShriekUnitOpenHom v h V₁) (Etale.lowerShriekUnitOpenHom v h V₂)]
+      change biprod.inr ≫ π ≫ m = _
+      rw [hm, ← Etale.eq_sectionHom]
+
+/-- **Extensions by zero along a union of two opens.** If `W = V₁ ∪ V₂` and the extensions by
+zero of `Λ` along `V₁`, `V₂` and `V₁ ∩ V₂` are constructible, so is `v_! Λ`. -/
+theorem Etale.isConstructibleSheaf_lowerShriekUnit_of_sup (hV : V₁ ⊔ V₂ = ⊤)
+    (h₁ : IsConstructibleSheaf (Etale.lowerShriekUnit (Λ := Λ) (V₁.ι ≫ v) inferInstance))
+    (h₂ : IsConstructibleSheaf (Etale.lowerShriekUnit (Λ := Λ) (V₂.ι ≫ v) inferInstance))
+    (h₁₂ : IsConstructibleSheaf
+      (Etale.lowerShriekUnit (Λ := Λ) ((V₁ ⊓ V₂).ι ≫ v) inferInstance)) :
+    IsConstructibleSheaf (Etale.lowerShriekUnit (Λ := Λ) v h) := by
+  obtain ⟨w, ⟨hc⟩⟩ := Etale.exists_isColimit_cokernelCofork_lowerShriekUnit (Λ := Λ) v h V₁ V₂ hV
+  have := IsConstructibleSheaf.biprod (F := Etale.lowerShriekUnit (Λ := Λ) (V₁.ι ≫ v)
+    inferInstance) (G := Etale.lowerShriekUnit (Λ := Λ) (V₂.ι ≫ v) inferInstance)
+  have := IsConstructibleSheaf.cokernel (biprod.lift
+    (Etale.lowerShriekUnitHomOfLE (Λ := Λ) v h (inf_le_left : V₁ ⊓ V₂ ≤ V₁))
+    (-Etale.lowerShriekUnitHomOfLE (Λ := Λ) v h (inf_le_right : V₁ ⊓ V₂ ≤ V₂)))
+  exact IsConstructibleSheaf.of_iso (F := cokernel (biprod.lift
+    (Etale.lowerShriekUnitHomOfLE (Λ := Λ) v h (inf_le_left : V₁ ⊓ V₂ ≤ V₁))
+    (-Etale.lowerShriekUnitHomOfLE (Λ := Λ) v h (inf_le_right : V₁ ⊓ V₂ ≤ V₂))))
+    ((cokernelIsCokernel _).coconePointUniqueUpToIso hc)
+
 end Glue
 
 end AlgebraicGeometry
