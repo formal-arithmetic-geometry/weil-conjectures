@@ -143,8 +143,8 @@ lemma kunnethMap_naturality (p : W ⟶ X) (q : W ⟶ Y) (f : X ⟶ S) (g : Y ⟶
     congr 2
     exact (derivedUpperStarLowerStarAdjunction A _).counit.naturality _
   simp only [derivedTensor, curriedTensor_obj_map, curriedTensor_map_app, NatTrans.comp_app,
-    Category.assoc, leftDerivedUpperStarDerivedTensor, derivedTensorLeftDerivedUpperStar] at
-    h₁ h₂ hu hv ⊢
+    Category.assoc, leftDerivedUpperStarDerivedTensor,
+    derivedTensorLeftDerivedUpperStar] at h₁ h₂ hu hv ⊢
   have h₁' : L((c)^*[A]).map (R((f)_*[A]).map φ ▷ R((g)_*[A]).obj K) ≫
       ((leftDerivedUpperStarTensorComparison A c).app (R((f)_*[A]).obj E')).app
         (R((g)_*[A]).obj K) =
