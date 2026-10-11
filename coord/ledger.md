@@ -4991,3 +4991,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 14:37 L: merged deliver/E1/lem-weil-pbc-module-support-proper-over-base (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.ModuleSupportProperOverBase AlgebraicGeometry.Scheme.Modules.module_support_proper_over_base)
 - 14:37 L: merged deliver/E1/lem-weil-pbc-spectral-constructible-finite-intersection (stage 2; reviewer PASS; first push; Sheaf.Topology.SpectralConstructibleFiniteIntersection finite_subfamily_iInter_eq_empty_of_isConstructible)
 - 14:37 L: merged deliver/J1/lem-weil-pbc-matching-object-coskeleton (stage 2; reviewer PASS; first push; Sheaf.CategoryTheory.MatchingObjectCoskeleton CategoryTheory.matching_object_coskeleton)
+- 14:38 L: merged deliver/G1/lem-pc-noetherian-approximation-data (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.NoetherianApproximationData AlgebraicGeometry.noetherian_approximation_data)

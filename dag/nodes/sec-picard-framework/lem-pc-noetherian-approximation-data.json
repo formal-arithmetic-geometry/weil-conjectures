@@ -134,5 +134,23 @@
   "group": "H1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-nad2213 (reviewer sub-agent of L); spot-checked: C1/C4: step 1 uses thm-pd-spreading-out (01ZM) clause 1 with S_i=Spec R_i affine qcqs, affine transitions; steps 2-3 cite the two new nodes whose statements give exactly G_i (bounded, fp, R_i-flat, proper support, base-change iso) and perfect E_i on X_i (09RF situation: X_i qcqs, affine transitions); step 4 directed common stage, base change preserves flatness/proper support/perfectness - elementary. C4 vs citer lem-pc-proper-support-perfect-direct-image: its Noetherian-approximation step uses exactly X_i, G_i, E_i with identifications. Class (b): grepped dag/nodes for 01ZR/05LY/081G/09RF/05N7/0A0P/081F/noetherian-approximation; lem-weil-pbc-eventually-proper (081F), lem-weil-pbc-proper-limit-noetherian (0A0P), lem-weil-pbc-limit-module-finite-presentation (00R1), lem-weil-pbc-etale-finite-data-descent state different facts, no duplicate; (c)/(d): no Mathlib geometric descent, neither node elementary. No repairs. Note: report says stale blueprint tags 0C0C/09RK replaced, but item blueprint.from.place still lists them (metadata only, not a fault)."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.NoetherianApproximationData",
+  "declaration": "AlgebraicGeometry.noetherian_approximation_data",
+  "file": "lean/Sheaf/AlgebraicGeometry/NoetherianApproximationData.lean",
+  "statement": "theorem noetherian_approximation_data {I : Type u} [SmallCategory I] [IsFiltered I] (R : I ⥤ CommRingCat.{u}) [∀ i : I, IsNoetherianRing (R.obj i)] (c : Cocone R) (hc : IsColimit c) (X : Scheme.{u}) (f : X ⟶ Spec c.pt) [LocallyOfFinitePresentation f] [QuasiCompact f] [QuasiSeparated f] [∀ (Z : Scheme.{u}), HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))] [∀ (Z : Scheme.{u}) (U : Z.Opens), HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings Z.toRingedSpace).over U))] {G : CochainComplex X.Modules ℤ} (hGb : ∃ a b : ℤ, ∀ n : ℤ, n < a ∨ b < n → IsZero (G.X n)) [∀ n : ℤ, (G.X n).IsFinitePresentation] (hGflat : ∀ n : ℤ, (G.X n).IsFlatOver f) (hGproper : ∀ n : ℤ, Scheme.Modules.HasSupportProperOver f (G.X n)) (E : schemeDerivedCategory X) (hE : X.IsPerfect E) : ∃ (i : I) (Xi : Scheme.{u}) (fi : Xi ⟶ Spec (R.obj i)), LocallyOfFinitePresentation fi ∧ QuasiCompact fi ∧ QuasiSeparated fi ∧ ∃ (hfi : LocallyOfFiniteType fi) (g : X ⟶ Xi), IsPullback g f fi (Spec.map (c.ι.app i)) ∧ ∃ (Gi : CochainComplex Xi.Modules ℤ), (∃ a b : ℤ, ∀ n : ℤ, n < a ∨ b < n → IsZero (Gi.X n)) ∧ (∀ n : ℤ, (Gi.X n).IsFinitePresentation) ∧ (∀ n : ℤ, (Gi.X n).IsFlatOver fi) ∧ (∀ n : ℤ, @Scheme.Modules.HasSupportProperOver _ _ fi hfi (Gi.X n)) ∧ ∃ e : ∀ n : ℤ, Scheme.Modules.tensorPullbackObj g (Gi.X n) ≅ G.X n, (∀ n m : ℤ, Scheme.Modules.tensorPullbackMap g (Gi.d n m) ≫ (e m).hom = (e n).hom ≫ G.d n m) ∧ ∃ (Ei : schemeDerivedCategory Xi), Xi.IsPerfect Ei ∧ Nonempty ((derivedPullback g).obj Ei ≅ E)",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "G1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }
