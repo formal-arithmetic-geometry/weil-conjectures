@@ -1,11 +1,11 @@
 # Work queue
 
-971 items; claim with `tools/claim.py next <group> [--stage N]`.
+967 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (971)
+## Stage 2: nodes to state (967)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -30,8 +30,6 @@
 | `lem-galois-descent-datum-diagonal-identity` | 1 | state |
 | `lem-galois-fpqc-morphisms-descend` | 1 | state |
 | `lem-galois-fpqc-pullback-canonical-iso` | 1 | state |
-| `lem-kun-support-geometric-point-independent` | 1 | state |
-| `lem-pc-affine-flat-module-descent` | 1 | state |
 | `lem-pc-affine-tilde-kflat` | 1 | state |
 | `lem-pc-balanced-derived-tensor-model` | 1 | state |
 | `lem-pc-compact-hom-hocolim` | 1 | state |
@@ -51,12 +49,10 @@
 | `lem-pc-kflat-tensor-cone-two-out-of-three` | 1 | state |
 | `lem-pc-kflat-tensor-quasi-iso` | 1 | state |
 | `lem-pc-module-bounded-flat-kflat` | 1 | state |
-| `lem-pc-module-opcycles-tor-surjection` | 1 | state |
 | `lem-pc-monomial-cech-complex-homology` | 1 | state |
 | `lem-pc-nonzero-section-integral-cartier` | 1 | state |
 | `lem-pc-nowhere-dense-dim-zero` | 1 | state |
 | `lem-pc-pic-of-field` | 1 | state |
-| `lem-pc-polynomial-quotient-distinct-linear-crt` | 1 | state |
 | `lem-pc-pre-derived-adjoint-functors-general` | 1 | state |
 | `lem-pc-presheaf-change-of-rings-adjunction` | 1 | state |
 | `lem-pc-presheaf-module-inverse-image-adjunction` | 1 | state |
