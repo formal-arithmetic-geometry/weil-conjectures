@@ -114,5 +114,23 @@
   "group": "J1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-pso (reviewer sub-agent of L); spot-checked: Source: Stacks Algebra Lemma 00JP (algebra.tex label lemma-topology-proj) item 'The open sets D_+(f) form a basis for the topology of Proj(S)' and Constructions Lemma 01MB (label lemma-proj-scheme) 'The standard opens D_+(f) are affine opens'; item statement unchanged and agrees (graded ring S as in def-pc-proj, nonnegatively graded; D_+(f), f homogeneous of positive degree). Step 1 carried by lem-weil-pbc-proj-standard-open-inclusion clause (0), whose statement says exactly that the standard opens D_+(f), f homogeneous of positive degree, form a basis of Proj(S) for an N-graded commutative ring S; off-unit (sk-thm-reduction) generic Proj-topology fact used as a black box, accepted as tool use (C8). Step 2 carried by def-nagata-affine-proj, whose statement identifies D_+(f) (f homogeneous of positive degree) with Spec(R_(f),0) via Proj.basicOpenIsoSpec, hence affine (def-pc-proj says the same). No new nodes. Mathlib (pinned) checked: ProjectiveSpectrum.isTopologicalBasis_basic_opens (Topology.lean:391) and Proj.isBasis_basicOpen (Basic.lean:79) range over basicOpen r for all r : A, not positive-degree homogeneous f, so they do not state clause 1 exactly; Proj.isAffineOpen_basicOpen (Basic.lean:201) states the affine clause only; no slopmaster2 declaration states the basis claim; split rather than leaf is right. Small cases: S=0 (Proj empty, vacuous); k[x0,x1] (D_+(x0), D_+(x1) affine lines, basis). Note: report mentions a citations.json not in the delivery (harmless). Start Sat Oct 10 04:28:40 PM UTC 2026, end Sat Oct 10 04:29:09 PM UTC 2026."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProjStandardOpenBasis",
+  "declaration": "AlgebraicGeometry.Proj.isBasis_positiveDegree_basicOpen_and_isAffineOpen",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjStandardOpenBasis.lean",
+  "statement": "theorem isBasis_positiveDegree_basicOpen_and_isAffineOpen {S : Type u} {σ : Type v} [CommRing S] [SetLike σ S] [AddSubgroupClass σ S] (𝒮 : ℕ → σ) [GradedRing 𝒮] : TopologicalSpace.Opens.IsBasis {U : (Proj 𝒮).Opens | ∃ (f : S) (d : ℕ), 0 < d ∧ f ∈ 𝒮 d ∧ U = basicOpen 𝒮 f} ∧ (∀ (f : S) (d : ℕ), 0 < d → f ∈ 𝒮 d → IsAffineOpen (basicOpen 𝒮 f))",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-psb1212",
+  "group": "C1",
+  "result": "pass",
+  "note": "S: CommRing + 𝒮 : ℕ → σ GradedRing (Mathlib Proj interface, instantiates to the siblings' ℕ → AddSubgroup S); X = Mathlib Proj 𝒮; family = Proj.basicOpen 𝒮 f with f ∈ 𝒮 d, 0 < d (positive-degree homogeneous, zero included); Opens.IsBasis of exactly that family (Mathlib Proj.isBasis_basicOpen ranges over all f, so not existing); second conjunct IsAffineOpen for the same f; no extra hypotheses; S=0 and degree-0-concentrated cases fine; clause (0) of lem-weil-pbc-proj-standard-open-inclusion has no landed Lean, so no duplicate"
  }
 }
