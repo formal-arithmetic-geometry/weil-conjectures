@@ -211,7 +211,10 @@ def check_lean_text(text: str, rec: dict, item: str, check_statement: bool = Tru
             f(f"lean.statement differs from the signature in the file:\n      recorded: {normalize(rec.get('statement'))}\n      in file:  {found['statement']}")
     for extra in rec.get("declarations") or []:
         if isinstance(extra, str) and extra not in byname:
-            f(f"lean.declarations names {extra}, which the file does not declare")
+            if upstream_has(extra):
+                pass  # an existing Mathlib/source declaration recorded next to the module's own (mixed record, 2026-10-11)
+            else:
+                f(f"lean.declarations names {extra}, which the file does not declare and which neither Mathlib nor the source has")
     for n in [decl] + [x for x in (rec.get("declarations") or []) if isinstance(x, str)]:
         if isinstance(n, str) and n in byname:
             hit = upstream_has(n)
@@ -303,7 +306,10 @@ def check_existing(rec: dict) -> tuple[list[tuple[str, str]], list[str]]:
     text = p.read_text(errors="ignore")
     short = decl.split(".")[-1]
     grep = re.search(r"\b(theorem|lemma|def|structure|class|abbrev|instance|inductive)\s+(?:[\w.'«»]*\.)?" + re.escape(short) + r"(?![\w.'])", text)
-    if not grep and (_names() and _MODULE_OF.get(decl) == mod):
+    field = (not grep) and re.search(r"^\s+(?:\(\s*)?" + re.escape(short) + r"\s*[:({\[]", text, re.M)
+    if not grep and field:
+        notes.append(f"existing declaration: {decl} is a structure/class field of {p.name} (not found by the declaration grep)")
+    elif not grep and (_names() and _MODULE_OF.get(decl) == mod):
         notes.append(f"existing declaration: {decl} is not found by the grep in {p.name} (a structure field or a generated "
                      f"name) but local/library_names_mathlib.tsv.gz lists it in {mod}")
     elif not grep:
