@@ -250,5 +250,29 @@
   "by": "L",
   "result": "pass",
   "note": "Reviewed by the lead (opus-relaunch6). Nine steps along the first paragraph of the proof of Stacks 0F4L, no new node: the objects and the graph in U_et, the graph open and closed (section of the etale separated p_V, via finite => affine => separated and the etale-section-clopen leaf, 01KT), the sheaf condition for the clopen covering written out, module structures, e_phi and its uniqueness, compatibility of graphs with base change along a (morphism-factors-through-open-subscheme node), extension by zero commutes with restriction, c^p_M a presheaf map, naturality in M. Stage-3 note: the clopen sheaf-condition argument is written inline here and in direct-image-split-cover-product. Tags verified (0F4L, 01KT)."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleGraphSectionExtensionMap",
+  "declaration": "AlgebraicGeometry.etale_graph_section_extension_map",
+  "declarations": [
+   "AlgebraicGeometry.etale_graph_clopen",
+   "AlgebraicGeometry.etale_graph_section_extension_map",
+   "AlgebraicGeometry.etale_graph_preimage"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleGraphSectionExtensionMap.lean",
+  "statement": "theorem etale_graph_section_extension_map {X U : Scheme.{u}} (π : U ⟶ X) [IsFinite π] [Etale π] (Λ : Type (u + 1)) [CommRing Λ] : let L := MorphismProperty.Over.map (P := @Etale) ⊤ (inferInstance : Etale π) let B := MorphismProperty.Over.pullback @Etale ⊤ π let P := sheafToPresheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ) ⋙ L.op.lan let D := Etale.lowerStar (ModuleCat.{u + 1} Λ) π ⋙ sheafToPresheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ) ∃ c : P ⟶ D, ∀ (M : Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (W : U.Etale), let γ : W ⟶ B.obj (L.obj W) := (MorphismProperty.Over.mapPullbackAdj @Etale ⊤ π inferInstance trivial).unit.app W let e : M.obj.obj (op W) ⟶ M.obj.obj (op (B.obj (L.obj W))) := (L.op.lanUnit.app M.obj).app (op W) ≫ (c.app M).app (op (L.obj W)) ∀ (s : M.obj.obj (op W)) (t : M.obj.obj (op (B.obj (L.obj W)))), (M.obj.map γ.op t = s ∧ ∀ (T : U.Etale) (j : T ⟶ B.obj (L.obj W)), IsOpenImmersion j.left → Set.range j.left = (Set.range γ.left)ᶜ → M.obj.map j.op t = 0) ↔ t = e s",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-11",
+  "existing": false,
+  "note": "Three statements jointly render the node: graph geometry, unique linear extension and natural presheaf comparison, and the graph-preimage identity. The sum presheaf is the existing left Kan extension underlying etaleLowerShriek; the constant-coefficient ModuleCat encoding is authorized by def-weil-pbc-etale-sheaves."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-egs1017",
+  "group": "K1",
+  "result": "pass",
+  "note": "finite etale pi = IsFinite+Etale; M Sheaf smallEtaleTopology ModuleCat.{u+1} Lambda as etaleLowerShriek/lowerStar; graph = pullback.lift (id, phi) = mapPullbackAdj unit; clopen via IsOpenImmersion+IsClosedImmersion+open-subscheme iso; unique linear extension as iff over all complement open immersions; P = sheafToPresheaf ⋙ L.op.lan (exactly sheafPullbackConstruction body), D = lowerStar, c a nat trans pinned on lanUnit summands; preimage clause; #check names"
  }
 }
