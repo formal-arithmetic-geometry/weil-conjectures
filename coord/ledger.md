@@ -3200,3 +3200,5 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 01:06 UTC L: E1 termwise-tor-acyclic-derived-tensor FIX 5971d132a re-push (R-tta0103; derived tensor via lem-pur-derived-change-of-rings on the one-point site).
 - 01:08 L: merged deliver/C1/lem-pur-quasi-isos-saturated-triangulated (reviewer FIX+NODE(1); first push; new nodes: 2)
 - 01:08 L: merged deliver/K1/lem-sc-valuation-closed-fibre-section-vanishing (reviewer PASS; after a return; new nodes: 1)
+- 01:08 UTC L: C1 quasi-isos-saturated-triangulated FIX c87c23f21 (R-qst0105; MS1-MS6 spelled out inline), K1 valuation-closed-fibre-section-vanishing PASS 4fa15694f re-push (R-cfs0107); lem-pur-homotopy-category-triangulated set to mathlib (HomotopyCategory IsTriangulated instance Triangulated.lean:208 + Qh.IsTriangulated DerivedCategory/Basic.lean:173) by L; field-case line added by L to step 1 of lem-sc-picard-locus-closed-valuation-triviality.
+- 01:08 L: merged deliver/G1/lem-sc-coherent-ring-perfect-complex-cohomology (reviewer FIX; first push; new nodes: 1)

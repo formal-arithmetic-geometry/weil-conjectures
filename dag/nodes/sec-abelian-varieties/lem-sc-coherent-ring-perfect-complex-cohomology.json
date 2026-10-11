@@ -4,7 +4,7 @@
   "is": null,
   "from": {
    "node": "thm-sc-theorem-of-cube",
-   "place": "proof: properness over a valuation ring makes global sections of an invertible module finitely presented",
+   "place": "proof: properness over a valuation ring makes global sections of an invertible module finitely presented; coherent-ring algebraic input",
    "via": [
     "lem-sc-general-theorem-of-cube",
     "lem-sc-valuation-proper-coherent-higher-direct-images"
@@ -22,14 +22,45 @@
  "stmt_deps": [
   "def-pc-perfect-complex"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Each finite projective term P^q is finitely presented [lem-weil-pbc-finite-projective-finitely-presented]. Since R is coherent, [lem-sc-coherent-ring-fp-kernel-cokernel] applies to every differential d^q:P^q\\to P^{q+1}, so Z^q=\\operatorname{Ker}(d^q) and B^q=\\operatorname{Im}(d^{q-1}) are finitely presented.",
+   "uses": [
+    "lem-weil-pbc-finite-projective-finitely-presented",
+    "lem-sc-coherent-ring-fp-kernel-cokernel"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Lemmas 05CW and 05CX applied to the differentials"
+   }
+  },
+  {
+   "text": "The inclusion B^q\\hookrightarrow Z^q is a map between finitely presented modules. Applying [lem-sc-coherent-ring-fp-kernel-cokernel] shows its cokernel is finitely presented; this cokernel is H^q(P^\\bullet)=Z^q/B^q.",
+   "uses": [
+    "lem-sc-coherent-ring-fp-kernel-cokernel"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Lemmas 05CW and 05CX, closure under cokernels"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-coherent-ring-fp-kernel-cokernel",
+  "lem-weil-pbc-finite-projective-finitely-presented"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Lemmas 05CW and 05CX"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
    "query": "cohomology of a bounded finite free complex over a coherent ring is finitely presented",
-   "results": "Algebra.instFiniteH1CotangentOfFinitePresentationOfProjectiveKaehlerDifferential and unrelated group-cohomology declarations; no coherent-ring complex theorem",
+   "results": "No coherent-ring complex theorem",
    "date": "2026-10-11",
    "verdict": "no match"
   },
@@ -60,15 +91,41 @@
    "results": "no hits",
    "date": "2026-10-11",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsCoherentRing|CoherentRing|class IsCoherent in ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+   "results": "0 hits",
+   "date": "2026-10-11",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-valuation-proper-coherent-higher-direct-images",
   "by": "worker",
   "date": "2026-10-11"
  },
  "chapter": "sec-abelian-varieties",
- "unit": "sk-prop-av-cube"
+ "unit": "sk-prop-av-cube",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-coherent-ring-perfect-complex-cohomology",
+  "worker": "stage1",
+  "summary": "No sorry-free Lean declaration states the item. Added the coherent-ring finite-presentation closure child and applied it to cycles, boundaries, and cohomology quotients.",
+  "blueprint": "The steps realize the ancestor clause that properness over a valuation ring yields finitely presented global sections via the coherent-ring perfect-complex calculation.",
+  "tool_uses": []
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-projective-finitely-presented"
+ ],
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-crp0108",
+  "group": "G1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-crp0108 (reviewer sub-agent of L); spot-checked: Item statement matches 0EWZ/05CX affine specialization (coherent = f.g. ideals f.p., Tag 05CU); child matches 05CW(3)+05CX incl. Im (finite submodule of coherent); steps 1-2 give Z,B,H f.p.; citer higher-direct-images uses exactly this; no duplicate node; Mathlib grep IsCoherentRing/CoherentRing 0 hits. FIX more, RETURN less: C1 step 1 'finite projective is finitely presented' was uncited, now cites existing generic leaf lem-weil-pbc-finite-projective-finitely-presented (declared tool use); Mathlib grep recorded on item.; 1 file(s) fixed by the reviewer"
+ }
 }
