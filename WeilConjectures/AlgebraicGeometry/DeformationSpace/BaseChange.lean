@@ -153,4 +153,84 @@ lemma reesComapMap_naturality {U V : X'.AffineZariskiSite} (i : U ⟶ V) :
   congr 3
   exact Scheme.Hom.appIso_hom_naturality h (homOfLE (toOpens_mono i.le)).op
 
+/-- The chart `Spec Γ(U)[t, (h^* I) t⁻¹] ≅ Spec Γ(h(U))[t, I t⁻¹] ⟶ D_I X`. -/
+noncomputable def deformationSpaceComapChart (U : X'.AffineZariskiSite) :
+    (relativeGluingData (I.comap h).coequifibered_toReesPresheaf).functor.obj U ⟶
+      I.deformationSpace :=
+  Spec.map (reesComapMap h I U) ≫
+    colimit.ι (relativeGluingData I.coequifibered_toReesPresheaf).functor (imageSite h U)
+
+lemma map_comp_deformationSpaceComapChart {U V : X'.AffineZariskiSite} (i : U ⟶ V) :
+    (relativeGluingData (I.comap h).coequifibered_toReesPresheaf).functor.map i ≫
+      deformationSpaceComapChart h I V = deformationSpaceComapChart h I U := by
+  rw [deformationSpaceComapChart, deformationSpaceComapChart,
+    ← colimit.w (relativeGluingData I.coequifibered_toReesPresheaf).functor
+      (homOfLE (imageSite_mono h i.le))]
+  change Spec.map _ ≫ Spec.map _ ≫ _ = Spec.map _ ≫ Spec.map _ ≫ _
+  rw [← Spec.map_comp_assoc, ← Spec.map_comp_assoc]
+  congr 2
+  exact (reesComapMap_naturality h I i).symm
+
+/-- The comparison morphism `D_{h^* I} X' ⟶ D_I X` along an open immersion `h : X' ⟶ X`. -/
+noncomputable def deformationSpaceComap : (I.comap h).deformationSpace ⟶ I.deformationSpace :=
+  colimit.desc _
+    { pt := _
+      ι := { app U := deformationSpaceComapChart h I U
+             naturality _ _ i := (map_comp_deformationSpaceComapChart h I i).trans
+              (Category.comp_id _).symm } }
+
+@[reassoc (attr := simp)]
+lemma ι_deformationSpaceComap (U : X'.AffineZariskiSite) :
+    colimit.ι (relativeGluingData (I.comap h).coequifibered_toReesPresheaf).functor U ≫
+      deformationSpaceComap h I = deformationSpaceComapChart h I U :=
+  colimit.ι_desc _ _
+
+set_option backward.isDefEq.respectTransparency false in
+@[reassoc]
+lemma deformationSpaceComap_toBase :
+    deformationSpaceComap h I ≫ (relativeGluingData I.coequifibered_toReesPresheaf).toBase =
+      (relativeGluingData (I.comap h).coequifibered_toReesPresheaf).toBase ≫ h := by
+  refine colimit.hom_ext fun U ↦ ?_
+  rw [ι_deformationSpaceComap_assoc, deformationSpaceComapChart, Category.assoc, ι_toBase,
+    ι_toBase_assoc, ← IsAffineOpen.SpecMap_appLE_fromSpec h (imageSite h U).2 U.2
+      (Scheme.Hom.preimage_image_eq h U.1).ge,
+    ← Spec.map_comp_assoc, ← Spec.map_comp_assoc]
+  congr 2
+  ext x : 2
+  refine (Ideal.extendedReesAlgebraMap_algebraMap (h.appIso U.1).hom.hom _
+    (map_siteIdeal_imageSite h I U).le x).trans ?_
+  simp only [Scheme.Hom.appIso_hom']
+  rfl
+
+instance (U : X'.AffineZariskiSite) : IsIso (Spec.map (reesComapMap h I U)) := by
+  have : IsIso (reesComapMap h I U) :=
+    (ConcreteCategory.isIso_iff_bijective _).mpr (bijective_reesComapMap h I U)
+  infer_instance
+
+set_option backward.isDefEq.respectTransparency false in
+/-- **The deformation space commutes with restriction to opens**: along an open immersion
+`h : X' ⟶ X`, `D_{h^* I} X' = D_I X ×_X X'`. -/
+lemma isPullback_deformationSpaceComap :
+    IsPullback (deformationSpaceComap h I)
+      (relativeGluingData (I.comap h).coequifibered_toReesPresheaf).toBase
+      (relativeGluingData I.coequifibered_toReesPresheaf).toBase h := by
+  set G' := relativeGluingData (I.comap h).coequifibered_toReesPresheaf
+  set G := relativeGluingData I.coequifibered_toReesPresheaf
+  refine (Scheme.isPullback_of_openCover_of_isPullback _ _ _ _ (directedCover X')
+    (fun U ↦ G'.functor.obj U) (fun U ↦ colimit.ι G'.functor U) (fun U ↦ G'.natTrans.app U)
+    (fun U ↦ (G'.isPullback_natTrans_ι_toBase U).flip) fun U ↦ ?_).flip
+  have Q := G.isPullback_natTrans_ι_toBase (imageSite h U)
+  have top : IsPullback (G'.natTrans.app U) (Spec.map (reesComapMap h I U))
+      (h.isoImage U.1).hom (G.natTrans.app (imageSite h U)) := by
+    refine IsPullback.of_vert_isIso ⟨?_⟩
+    rw [← cancel_mono ((directedCover X).f (imageSite h U)), Category.assoc, Category.assoc, Q.w]
+    erw [Scheme.Hom.isoImage_hom_ι]
+    rw [reassoc_of% (G'.isPullback_natTrans_ι_toBase U).w, ← deformationSpaceComap_toBase,
+      ι_deformationSpaceComap_assoc, deformationSpaceComapChart, Category.assoc]
+  have := top.paste_vert Q
+  rw [ι_deformationSpaceComap, deformationSpaceComapChart]
+  rw [show (directedCover X').f U ≫ h = (h.isoImage U.1).hom ≫ (directedCover X).f (imageSite h U)
+    from (Scheme.Hom.isoImage_hom_ι h U.1).symm]
+  exact this
+
 end AlgebraicGeometry.Scheme.IdealSheafData
