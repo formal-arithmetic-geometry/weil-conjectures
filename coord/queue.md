@@ -1,17 +1,16 @@
 # Work queue
 
-816 items; claim with `tools/claim.py next <group> [--stage N]`.
+817 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (816)
+## Stage 2: nodes to state (817)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
 | `def-pc-compactly-generated` | 1 | state |
 | `def-pc-field-tower` | 1 | state |
-| `def-pur-sheaf-modules-hom-module` | 1 | state |
 | `def-pur-sheaf-tensor-product` | 1 | state |
 | `def-sbc-first-order-thickening` | 1 | state |
 | `def-sc-perfect-closed-immersion` | 1 | state |
@@ -181,6 +180,8 @@
 | `lem-pur-kinjective-set-iso-classes-bounded-size` | 1 | state |
 | `lem-pur-left-derived-from-kflat-class` | 1 | state |
 | `lem-pur-quasi-isos-saturated-triangulated` | 1 | state |
+| `lem-pur-sheaf-hom-cover-gluing` | 1 | state |
+| `lem-pur-sheaf-hom-is-sheaf` | 1 | state |
 | `lem-sc-acyclic-comparison-natural` | 1 | state |
 | `lem-sc-affine-cap-section-open-algebra` | 1 | state |
 | `lem-sc-affine-finite-module-free-locus` | 1 | state |
@@ -826,7 +827,7 @@
 | `lem-sc-normalization-properties` | 3 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 1402 nodes that wait for a statement dependency, 40 nodes that wait for stage 1.
+Not open yet: 1400 nodes that wait for a statement dependency, 40 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
