@@ -1,11 +1,11 @@
 # Work queue
 
-318 items; claim with `tools/claim.py next <group> [--stage N]`.
+311 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (318)
+## Stage 2: nodes to state (311)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -54,7 +54,6 @@
 | `lem-weil-pbc-sections-annihilated-by-ideal` | 1 | state |
 | `lem-weil-pbc-sections-base-field-extension` | 1 | state |
 | `lem-weil-pbc-sections-morphism-to-proj-polynomial-ring` | 1 | state |
-| `lem-weil-pbc-sections-over-quasi-compact-open` | 1 | state |
 | `lem-weil-pbc-sections-over-quasi-compact-open-in-affine` | 1 | state |
 | `lem-weil-pbc-separable-extension-fraction-field-of-smooth-algebra` | 1 | state |
 | `lem-weil-pbc-separable-polynomial-quotient-reduced` | 1 | state |
@@ -67,9 +66,7 @@
 | `lem-weil-pbc-separated-affine-cover-criterion` | 1 | state |
 | `lem-weil-pbc-separated-lqf-base-change` | 1 | state |
 | `lem-weil-pbc-separating-transcendence-basis-finite-subextension` | 1 | state |
-| `lem-weil-pbc-serre-criterion-normal` | 1 | state |
 | `lem-weil-pbc-serre-criterion-reduced` | 1 | state |
-| `lem-weil-pbc-ses-cech-h1-surjective` | 1 | state |
 | `lem-weil-pbc-set-cech-nerve-free-resolution` | 1 | state |
 | `lem-weil-pbc-sets-etale-inverse-image-constant-sheaf` | 1 | state |
 | `lem-weil-pbc-sets-etale-inverse-image-restriction` | 1 | state |
@@ -82,13 +79,10 @@
 | `lem-weil-pbc-sheaf-algebras-directed-colimit` | 1 | state |
 | `lem-weil-pbc-sheaf-cokernel-local-image` | 1 | state |
 | `lem-weil-pbc-sheaf-hom-finite-presentation-kernel` | 1 | state |
-| `lem-weil-pbc-sheaf-hom-finite-presentation-quasi-coherent` | 1 | state |
 | `lem-weil-pbc-sheaf-isomorphism-local-open-cover` | 1 | state |
 | `lem-weil-pbc-sheaf-of-modules-from-basis` | 1 | state |
-| `lem-weil-pbc-sheaf-on-basis-extends` | 1 | state |
 | `lem-weil-pbc-sheaves-directed-colimit-sections` | 1 | state |
 | `lem-weil-pbc-sheaves-killed-by-n-zmod-modules` | 1 | state |
-| `lem-weil-pbc-simplicial-index-finite-initial` | 1 | state |
 | `lem-weil-pbc-simplicial-matching-object` | 1 | state |
 | `lem-weil-pbc-simplicial-set-add-simplices` | 1 | state |
 | `lem-weil-pbc-simplicial-set-glue-simplex` | 1 | state |
@@ -97,7 +91,6 @@
 | `lem-weil-pbc-small-etale-representable-presheaf-sheaf` | 1 | state |
 | `lem-weil-pbc-smooth-algebra-filtered-colimit-descent` | 1 | state |
 | `lem-weil-pbc-smooth-artinian-lifting-at-point` | 1 | state |
-| `lem-weil-pbc-smooth-at-generic-point-over-field` | 1 | state |
 | `lem-weil-pbc-smooth-at-maximal-ideal-alg-closed-differentials-bound` | 1 | state |
 | `lem-weil-pbc-smooth-at-prime-artinian-lifting` | 1 | state |
 | `lem-weil-pbc-smooth-at-prime-field-extension-descent` | 1 | state |
