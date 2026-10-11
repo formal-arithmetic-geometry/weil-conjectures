@@ -190,5 +190,24 @@
   "item": "lem-weil-pbc-limit-contained-in-constructible",
   "worker": "stage1",
   "summary": "Split in seven steps along Stacks' proof of Limits 05F4 (limits.tex line 530), checked against the source and the cited lemmas (tags verified in tags/tags: 05F4, 05F3, 01Z2, 01YX, 01YZ, 086P, 00F8, 005J, 054C, 01JT). Affine case (Steps 1-5): the complement of E is constructible and is the image of an affine W (new Mathlib leaf lem-weil-pbc-constructible-is-image = PrimeSpectrum.exists_range_eq_of_isConstructible, @[stacks 00F8] without finite presentation); W x T is empty; W x T = lim W x T_i' with affine transitions (lem-weil-pbc-scheme-over-limit, 01YZ), the W x T_i' affine (lem-weil-pbc-affine-morphism-permanence); by 01Z2 (new Mathlib leaf lem-weil-pbc-limit-nonempty = Scheme.nonempty_of_isLimit) some W x T_i' is empty (this is Stacks 05F3, written out rather than made a node); points of fibre products (lem-weil-pbc-fibre-product-points) give the inclusion. Reduction (Steps 6-7): finite affine cover of T_i, limits of the preimage opens (lem-weil-pbc-limit-cone-affine-projections-opens), E cap U_j constructible in U_j (new Mathlib leaf lem-weil-pbc-constructible-open-restriction = IsConstructible.preimage_of_isOpenEmbedding, @[stacks 005J]; Stacks cites 054C because its E is only locally constructible). Statement and stmt_deps kept. The quasi-separatedness of the T_i is not used by the proof (only quasi-compactness of T_i); it is kept because it is the hypothesis of Situation 086P. lem-weil-pbc-limit-affine-stage is not needed and not cited."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.LimitContainedInConstructible",
+  "declaration": "AlgebraicGeometry.exists_eventually_range_subset_of_isConstructible",
+  "file": "lean/Sheaf/AlgebraicGeometry/LimitContainedInConstructible.lean",
+  "statement": "theorem exists_eventually_range_subset_of_isConstructible {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I] (D : Iᵒᵖ ⥤ Scheme.{u}) [∀ j : Iᵒᵖ, CompactSpace (D.obj j)] [∀ j : Iᵒᵖ, QuasiSeparatedSpace (D.obj j)] [∀ {j k : Iᵒᵖ} (f : j ⟶ k), IsAffineHom (D.map f)] (c : Cone D) (hc : IsLimit c) (i : I) (E : Set (D.obj (op i))) (hE : Topology.IsConstructible E) (himage : Set.range (c.π.app (op i)) ⊆ E) : ∃ i₁ : I, ∃ hi₁ : i ≤ i₁, ∀ (j : I) (hj : i₁ ≤ j), Set.range (D.map (homOfLE (hi₁.trans hj)).op) ⊆ E",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-lcc1110"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-lcc1110",
+  "group": "C1",
+  "result": "fix",
+  "note": "directed preorder I (now Type u, Nonempty), D : Iᵒᵖ ⥤ Scheme, qc+qs stages, IsAffineHom transitions, Cone+IsLimit, Topology.IsConstructible E, range t_i ⊆ E, ∃ i₁ ≥ i ∀ j ≥ i₁ range t_ji ⊆ E; universe counterexample for w > u"
  }
 }
