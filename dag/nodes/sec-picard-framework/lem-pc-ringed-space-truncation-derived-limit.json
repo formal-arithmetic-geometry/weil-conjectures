@@ -109,5 +109,23 @@
   "group": "G1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-rtd2347 (reviewer sub-agent of L); spot-checked: Step 1 bound p_x(m)=d+max(0,m) verified against 0D62/0D64 (all m,p cases); child matches Tag 0D62. FIX more, RETURN less: (1) C1/C4 products in D(O_X) (08D5 caveat): neither the item nor the child gave existence of prod_n tau_{>=-n}E in D(O_X), which def-weil-derived-limit requires; added statement-only node lem-pc-ringed-space-derived-products (Stacks 07D9 + remark-existence-D 079Q; LeanFinder no match) and cited it with lem-weil-derived-limit-existence (1) as a generic tool (C7/C8: existence of a derived limit once the product exists, triangulated-category generality). (2) C4: child's 'the canonical map E->Rlim' was ill-defined for the non-canonical derived limit; restated it per Stacks 0H72: for every derived limit (K,p,delta) some c with pr_n p c = c_n exists and every such c is an iso; item step now transports the Roos triangle along c (isomorphic triangles, def-weil-triangulated-category) to get (E,p,delta) a derived limit. No Milnor/ML needed here: that argument lives inside the unsplit child (0D62).; 3 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.TruncationDerivedLimit",
+  "declaration": "AlgebraicGeometry.truncation_isDerivedLimitTriangle_of_local_bound",
+  "file": "lean/Sheaf/AlgebraicGeometry/TruncationDerivedLimit.lean",
+  "statement": "theorem truncation_isDerivedLimitTriangle_of_local_bound (X : Scheme.{u}) [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] (E : schemeDerivedCategory X) (hE : ∃ (d : ℕ) (B : Set (Opens X)), IsTopologicalBasis ((fun U : Opens X => (U : Set X)) '' B) ∧ ∀ (U : Opens X), U ∈ B → ∀ (p : ℕ), d < p → ∀ (q : ℤ), q < 0 → IsZero ((RingedSpace.openModuleCohomology X.toRingedSpace p U).obj ((DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings X.toRingedSpace)) q).obj E))) : ∃ (_ : HasProduct (fun n : ℕ => ((DerivedCategory.TStructure.t (C := SheafOfModules.{u} (moduleRings X.toRingedSpace))).truncGE (-(n : ℤ))).obj E)), ∃ δ : (∏ᶜ (fun n : ℕ => ((DerivedCategory.TStructure.t (C := SheafOfModules.{u} (moduleRings X.toRingedSpace))).truncGE (-(n : ℤ))).obj E)) ⟶ E⟦(1 : ℤ)⟧, IsDerivedLimitTriangle (fun n : ℕ => ((DerivedCategory.TStructure.t (C := SheafOfModules.{u} (moduleRings X.toRingedSpace))).natTransTruncGEOfLE (-((n + 1 : ℕ) : ℤ)) (-(n : ℤ)) (by omega)).app E) E (Pi.lift (fun n : ℕ => ((DerivedCategory.TStructure.t (C := SheafOfModules.{u} (moduleRings X.toRingedSpace))).truncGEπ (-(n : ℤ))).app E)) δ",
+  "branch": "sheaf-dag",
+  "by": "U1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "U1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }
