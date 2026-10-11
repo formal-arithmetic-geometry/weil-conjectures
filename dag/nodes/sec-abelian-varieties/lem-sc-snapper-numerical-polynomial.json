@@ -191,5 +191,23 @@
   "group": "E1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-snp2453 (reviewer sub-agent of L); spot-checked: Steps 1-5 against 0BEM and every cited statement (hypotheses: proper over k gives Noetherian, finite-dim; Z proper). FIX more, RETURN less: (1) C1 step 3 used a regular meromorphic section of L_j without citing its existence: cited lem-sc-regular-meromorphic-section-exists (generic tool, added to tool_uses); (2) C4 that node needs X without embedded points, which step 2 never showed for the scheme-theoretic support Z: added Ass(O_Z) in Ass(G) argument (as in lem-sc-hilbert-polynomial step 1); source place corrected to Lemma 0BEM. Second reading by E1 missed (1)-(2). Degree bound/total degree match citers; nothing restates lem-sc-hilbert-polynomial; step 4 0BEM quote is the item's own source.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SnapperNumericalPolynomial",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_mvPolynomial_eulerChar_tensorPowers",
+  "file": "lean/Sheaf/AlgebraicGeometry/SnapperNumericalPolynomial.lean",
+  "statement": "theorem exists_mvPolynomial_eulerChar_tensorPowers (k : Type u) [Field k] (X : Scheme.{u}) [X.Over (Spec (.of k))] [IsProper (X ↘ Spec (.of k))] (F : X.Modules) (hF : RingedSpace.IsCoherent X.toRingedSpace F) (r : ℕ) (L : Fin r → X.Modules) [∀ i : Fin r, (L i).IsInvertible] : ∃ P : MvPolynomial (Fin r) ℚ, (P = 0 ∨ ((P.totalDegree : ℕ∞) : WithBot ℕ∞) ≤ topologicalKrullDim {x : X | ¬ Subsingleton ↑(TopCat.Presheaf.stalk F.val.presheaf x)}) ∧ ∀ n : Fin r → ℤ, MvPolynomial.eval (fun i => (n i : ℚ)) P = (((List.ofFn fun i : Fin r => if 0 ≤ n i then (L i).tensorPow (n i).toNat else (L i).dual.tensorPow (-n i).toNat).foldl (fun M N : X.Modules => M ⊗ N) F).eulerChar k : ℚ)",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-snp1206",
+  "group": "H1",
+  "result": "pass",
+  "note": "k Field; X.Over Spec k + IsProper (X ↘ Spec k); F X.Modules with RingedSpace.IsCoherent; r, L : Fin r → X.Modules [IsInvertible]; ∀ n : Fin r → ℤ with tensorPow / dual.tensorPow for negatives folded from F in order; eulerChar k cast to ℚ = MvPolynomial.eval; totalDegree ≤ topologicalKrullDim of nonzero-stalk support (P=0 for -∞); #check dual/tensorPow/eulerChar/IsCoherent; support defeq (rfl) to J1's landed F.presheaf.stalk form"
  }
 }
