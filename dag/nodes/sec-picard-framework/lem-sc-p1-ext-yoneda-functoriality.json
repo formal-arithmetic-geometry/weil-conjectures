@@ -151,5 +151,24 @@
   "group": "K1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-eyf1706 (reviewer sub-agent of L); spot-checked: Source Stacks 06XP/06XR (derived.tex) and 01DZ: the item's statement is unchanged (only stmt_deps edited). Lead's question: the item cannot be a Mathlib leaf. Clause 1 holds by definition in Mathlib (CategoryTheory.Abelian.extFunctor / extFunctorObj, Ext/Basic.lean:437/421, maps defined as composition with Ext.mk0). Clause 2 is not in Mathlib or slopmaster2: there Scheme.Modules.H is Sheaf.H of the underlying abelian sheaf (Cohomology/Defs.lean:81), not Ext(O_X,-), and the comparison nonempty_ext_addEquiv_H is a sorried Nonempty with no naturality. Step 1 uses the def-pc-ext a^*, b_* formulas; the bridge lem-weil-pbc-ext-via-injective-resolution goes with the known def-sc-ext-sheaf correction (lead_note R-elf). Step 2 uses lem-sc-ext-yoneda-composition-derived. Step 3 uses lem-sc-ext-locally-free-second-naturality with F=O_X, plus O_X^v(x)G=G and functoriality of H^i (C2). The new second-naturality node is true (Hom(F,-)=Gamma(F^v(x)-), and F^v(x)- is exact and keeps injectives) and is sheaf-specific: my grep of Mathlib AlgebraicGeometry/Sites/ModuleCat/Sheaf for Abelian.Ext found nothing. Accepted tool uses def-pc-ext and lem-weil-pbc-ext-via-injective-resolution (generic black boxes). FIXES: dag/nodes/sec-picard-framework/lem-sc-ext-yoneda-composition-derived.json made a Mathlib leaf after my loogle 'CategoryTheory.Abelian.Ext.hom, CategoryTheory.Abelian.Ext.comp': status mathlib, mathlib_match CategoryTheory.Abelian.Ext.comp_hom Ext/Basic.lean:171, with degree-zero clauses Ext.mk0_comp_mk0 Basic.lean:191, Ext.singleFunctor_map_comp_hom ExactSequences.lean:183 and Ext.hom_comp_singleFunctor_map_shift ExactSequences.lean:40, and ShiftedHom.comp at ShiftedHom.lean:40, all read with sed; the search is recorded. Same node, statement: a TeX typo fixed ('a; $[..]$' to 'a$; [..]'). Same node, stmt_deps: added def-sp-abelian and lem-sc-p1-ext-yoneda-associativity, both cited in its statement. dag/nodes/sec-picard-framework/lem-sc-p1-ext-yoneda-functoriality.json: stmt_deps: removed lem-sc-ext-locally-free-second-naturality, which the statement does not cite (it stays in proof_deps). Small cases: i=0 (ordinary composition), u=id, F=O_X. Start Sat Oct 10 05:06:22 PM UTC 2026, end Sat Oct 10 05:08:27 PM UTC 2026; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.Modules.ExtYonedaFunctoriality",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.ext_yoneda_functoriality",
+  "file": "lean/Sheaf/AlgebraicGeometry/Modules/ExtYonedaFunctoriality.lean",
+  "statement": "theorem ext_yoneda_functoriality {X : Scheme.{u₁}} [HasExt.{u₁} X.Modules] (F F' G G' : X.Modules) (i : ℕ) (e : Ext F G i) (u : F' ⟶ F) (φ : G ⟶ G') : (((Abelian.extFunctor (C := X.Modules) i).map u.op).app G) e = (Abelian.Ext.mk₀ (C := X.Modules) u).comp e (zero_add i) ∧ ((Abelian.extFunctorObj (C := X.Modules) F i).map φ) e = e.comp (Abelian.Ext.mk₀ (C := X.Modules) φ) (add_zero i) ∧ (∀ a : Ext (SheafOfModules.unit X.ringCatSheaf) G i, locallyFreeUnitExtAddEquivH (X := X) G' i (((Abelian.extFunctorObj (C := X.Modules) (SheafOfModules.unit X.ringCatSheaf) i).map φ) a) = H.map φ i (locallyFreeUnitExtAddEquivH (X := X) G i a)) ∧ (∀ x : G.H i, H.map φ i x = locallyFreeUnitExtAddEquivH (X := X) G' i (((locallyFreeUnitExtAddEquivH (X := X) G i).symm x).comp (Abelian.Ext.mk₀ (C := X.Modules) φ) (add_zero i)))",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-eyf"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-eyf",
+  "group": "E1",
+  "result": "fix",
+  "note": "Clauses 1-2 (extFunctor.map u.op = mk0 u comp e; extFunctorObj.map phi = e comp mk0 phi, diagrammatic Ext.comp) match the node. The delivery re-recorded landed dependency lem-sc-ext-locally-free (F1, fixed_by R-eln1433: canonical locallyFreeExtAddEquivH, target Scheme.Modules.H) with a second comparison locallyFreeExtModuleAddEquiv/unitExtModuleAddEquiv (Classical.choose, target moduleCohomology): a second definition of a landed notion (H4/H12) and a restatement STATE COHOMOLOGY OF O_X-MODULES forbids for landed uses (stage 3 bridges). Reverted the node and left out LocallyFreeExtModuleCohomology.lean; clauses 3-4 restated with the landed locallyFreeUnitExtAddEquivH and H.map phi i, as the landed sibling lem-sc-ext-locally-free-second-naturality (E1) does; compiled.; reverted the delivery's change of existing node(s) lem-sc-ext-locally-free (--revert-nodes; kept as on sheaf-dag)"
  }
 }

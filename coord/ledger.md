@@ -5141,3 +5141,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 15:07 L: merged deliver/Q1/prop-weil-pbc-formal-glueing-equivalence (stage 2; reviewer PASS; first push; Sheaf.RingTheory.FormalGlueingEquivalence FormalGlueing.exists_canonical_equivalence)
 - 15:07 L: merged deliver/R1/lem-wf-mixed-commutator-tangent (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.MixedCommutatorTangent AlgebraicGeometry.GeneralLinearGroup.mixedCommutator_tangent)
 - 15:08 L: merged deliver/U1/lem-pc-flat-sheaf-stalk-flat (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.FlatSheafStalk AlgebraicGeometry.RingedSpace.flat_stalk_of_isFlat; statement corrected (1 citers))
+- 15:08 L: merged deliver/E1/lem-sc-p1-ext-yoneda-functoriality (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.Modules.ExtYonedaFunctoriality AlgebraicGeometry.Scheme.Modules.ext_yoneda_functoriality; reverted nodes: lem-sc-ext-locally-free)
