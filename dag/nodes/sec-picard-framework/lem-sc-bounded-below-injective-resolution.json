@@ -13,13 +13,12 @@
  },
  "kind": "statement",
  "title": "Bounded-below complexes admit bounded-below K-injective resolutions",
- "statement": "Let $(U,\\mathcal O_U)$ be a ringed site with small underlying category [def-weil-locally-ringed-space-morphism], and let $\\mathcal G^\\bullet$ be a bounded-below cochain complex of $\\mathcal O_U$-modules [def-weil-sheaf-of-modules-category]. Then there is a quasi-isomorphism $\\mathcal G^\\bullet\\to\\mathcal I^\\bullet$ to a bounded-below cochain complex whose terms are injective $\\mathcal O_U$-modules, and $\\mathcal I^\\bullet$ is K-injective [def-pur-kinjective-complex].",
+ "statement": "Let $(U,\\mathcal O_U)$ be a ringed site with small underlying category, and let $\\mathcal G^\\bullet$ be a bounded-below cochain complex of $\\mathcal O_U$-modules [def-weil-sheaf-of-modules-category]. Then there is a quasi-isomorphism $\\mathcal G^\\bullet\\to\\mathcal I^\\bullet$ to a bounded-below cochain complex whose terms are injective $\\mathcal O_U$-modules, and $\\mathcal I^\\bullet$ is K-injective [def-pur-kinjective-complex].",
  "source": {
   "document": "literature/stacks-project/sites-cohomology.tex; literature/stacks-project/injectives.tex",
   "place": "Tag 07A5 (Section 21.19, sites-cohomology-section-unbounded), using Tag 079P (Theorem 19.12.6, injectives-theorem-K-injective-embedding-grothendieck); the bounded-below form is obtained by the standard truncation of the construction at the lower bound"
  },
  "stmt_deps": [
-  "def-weil-locally-ringed-space-morphism",
   "def-weil-sheaf-of-modules-category",
   "def-pur-kinjective-complex"
  ],
@@ -130,5 +129,46 @@
   "group": "J1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-bbi1924 (reviewer sub-agent of L); spot-checked: Item statement unchanged; read CochainComplex.Plus.exists_quasiIso_injective (DerivabilityStructureInjectives.lean:61-69): exact match for the new existence leaf (generic abelian + EnoughInjectives, IsStrictlyGE n, quasiIso to injective terms); step 3 leaf lem-weil-pbc-bounded-below-injectives-kinjective fits; no cycle. Checked dag for existing bounded-below injective-resolution nodes: lem-weil-pbc-dplus-injective-representative gives only an iso in D+, not a chain quasi-iso, so the new leaf is kept. FIX more, RETURN less: (B, class b/d) new node lem-sc-ringed-site-module-sheaves-enough-injectives is the first clause of existing prop-pur-kinjective-resolutions-exist (Mod(O) Grothendieck abelian on a small ringed site) plus existing leaf lem-sp-grothendieck-enough-injectives; dropped it and step 1 now cites those two nodes as generic tools (tool_uses, as already done by lem-sc-ext-sheaf-to-global-spectral-sequence in this unit; neither reaches the item); proof_deps updated. The second reading's Not-duplicates entry vs prop-pur missed this.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.BoundedBelowInjectiveResolution",
+  "declaration": "SheafOfModules.exists_boundedBelow_injective_resolution",
+  "file": "lean/Sheaf/Algebra/Homology/BoundedBelowInjectiveResolution.lean",
+  "statement": "theorem exists_boundedBelow_injective_resolution {C : Type u} [SmallCategory C] (J : GrothendieckTopology C) (R : Sheaf J CommRingCat.{u}) (G : CochainComplex (SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) ℤ) (hG : ∃ n : ℤ, G.IsStrictlyGE n) : ∃ (I : CochainComplex (SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) ℤ) (i : G ⟶ I), QuasiIso i ∧ (∃ n : ℤ, I.IsStrictlyGE n) ∧ (∀ n : ℤ, Injective (I.X n)) ∧ I.IsKInjective",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-bbi0951",
+  "group": "C1",
+  "result": "pass",
+  "note": "small site C/J, R : Sheaf J CommRingCat, G : CochainComplex (SheafOfModules) ℤ, bounded below = ∃ n, IsStrictlyGE n; ∃ I, i : G ⟶ I, QuasiIso, ∃ n IsStrictlyGE, ∀ n Injective (I.X n), IsKInjective; correction drops wrong locally-ringed-space citation only",
+  "statement_corrected": true
+ },
+ "statement_change": {
+  "date": "2026-10-11",
+  "by": "C1 stage 2",
+  "old_statement": "Let $(U,\\mathcal O_U)$ be a ringed site with small underlying category [def-weil-locally-ringed-space-morphism], and let $\\mathcal G^\\bullet$ be a bounded-below cochain complex of $\\mathcal O_U$-modules [def-weil-sheaf-of-modules-category]. Then there is a quasi-isomorphism $\\mathcal G^\\bullet\\to\\mathcal I^\\bullet$ to a bounded-below cochain complex whose terms are injective $\\mathcal O_U$-modules, and $\\mathcal I^\\bullet$ is K-injective [def-pur-kinjective-complex].",
+  "what": "The cited dependency defines morphisms of locally ringed topological spaces, while this theorem assumes a small ringed site. The Lean binders C, J, and R already state the required ringed-site data, so the incorrect citation was removed without changing the mathematical hypotheses or conclusion.",
+  "source": {
+   "document": "literature/stacks-project/sites-cohomology.tex; literature/stacks-project/injectives.tex",
+   "place": "Tag 07A5 (Section 21.19), with Tag 079P"
+  },
+  "citers": [
+   {
+    "id": "lem-sc-derived-hom-finite-free-model",
+    "holds": true,
+    "note": "Uses the theorem only for its quasi-isomorphism, bounded-below, termwise-injective, and K-injective conclusion."
+   }
+  ],
+  "old_stmt_deps": [
+   "def-weil-locally-ringed-space-morphism",
+   "def-weil-sheaf-of-modules-category",
+   "def-pur-kinjective-complex"
+  ]
  }
 }
