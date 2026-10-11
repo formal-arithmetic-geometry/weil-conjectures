@@ -1,11 +1,11 @@
 # Work queue
 
-971 items; claim with `tools/claim.py next <group> [--stage N]`.
+969 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (971)
+## Stage 2: nodes to state (969)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -32,7 +32,6 @@
 | `lem-pc-proper-descends-field` | 1 | state |
 | `lem-pc-sheaf-modules-tensor-closed` | 1 | state |
 | `lem-pc-very-ample-disjoint-union` | 1 | state |
-| `lem-pc-zero-scheme-pullback` | 1 | state |
 | `lem-pur-derived-change-of-rings` | 1 | state |
 | `lem-sc-base-change-curve` | 1 | state |
 | `lem-sc-etale-base-change-geometric` | 1 | state |
@@ -42,7 +41,6 @@
 | `lem-sc-general-theorem-of-cube` | 1 | state |
 | `lem-sc-geometrically-irreducible-product` | 1 | state |
 | `lem-sc-glue-component-transition-cocycle` | 1 | state |
-| `lem-sc-graded-localization-exact` | 1 | state |
 | `lem-sc-hilbert-denominator-ideal-nowhere-dense` | 1 | state |
 | `lem-sc-hilbert-embedded-points-affine-localization` | 1 | state |
 | `lem-sc-integral-closure-dedekind-surjective-fibres` | 1 | state |
