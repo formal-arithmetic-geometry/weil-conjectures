@@ -3687,3 +3687,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 07:46 L: merged deliver/G1/lem-sc-etale-coproduct-etale (stage 2; reviewer PASS; first push; Mathlib.AlgebraicGeometry.Morphisms.Basic AlgebraicGeometry.IsZariskiLocalAtSource.sigmaDesc; existing declaration)
 - 07:46 L: merged deliver/G1/lem-sc-dim-one-quasi-projective (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.DimOneQuasiProjective AlgebraicGeometry.exists_closed_open_immersion_projectiveSpace_of_dim_le_one)
 - 07:46 L: merged deliver/F1/lem-sc-etale-local-dimension (stage 2; reviewer PASS; first push; Sheaf.RingTheory.Etale.LocalDimension RingHom.Etale.ringKrullDim_localization_eq)
+- 07:47 L: merged deliver/H1/lem-sc-dual-number-scheme-pushout (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.DualNumberSchemePushout AlgebraicGeometry.existsUnique_dualNumberScheme_extension; new nodes: def-sc-trivial-square-zero-extension)
