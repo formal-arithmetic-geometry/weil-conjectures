@@ -5,10 +5,12 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.EtaleCohomology.Purity.Smooth.Conventions
 public import WeilConjectures.CategoryTheory.Adjunction.TensorInvertible
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.Conventions
 public import WeilConjectures.SixFunctors.Etale.Derived.CoefficientsShift
+public import WeilConjectures.SixFunctors.Etale.Derived.InvertiblePullback
 public import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula
+public import WeilConjectures.SixFunctors.Etale.Derived.TensorStructure
 
 /-!
 # Co-projection for a closed immersion
@@ -19,9 +21,20 @@ This is the input that moves twists through the exceptional inverse image of a z
 the model purity (`WeilConjectures.EtaleCohomology.Purity.Smooth.AffineSpace`) and in purity
 for regular closed immersions (`WeilConjectures.EtaleCohomology.Purity.Smooth.RegularImmersion`).
 
+The co-projection is formal: both `Ri^! (- ⊗^L L)` and `Ri^! (-) ⊗^L Li^* L` are right
+adjoints, of `Ri_!(-) ⊗^L L⁻¹` and of `Ri_!(- ⊗^L Li^* L⁻¹)`, which the projection formula at
+the dualizable object `L⁻¹` identifies. The argument works for any `i` admitting a
+compactification.
+
 ## Main statements
 
-- `AlgebraicGeometry.Etale.nonempty_iso_rightDerivedUpperShriek_derivedTensor_of_isInvertible`
+- `AlgebraicGeometry.Etale.derivedTensorRightCompRightDerivedUpperShriekIso`: the co-projection
+  `Rf^! (- ⊗^L L) ≅ Rf^! (-) ⊗^L Lf^* L` for `L` invertible (blueprint `lem-pur-coprojection`).
+- `AlgebraicGeometry.Etale.nonempty_iso_rightDerivedUpperShriek_derivedTensor_of_isInvertible`:
+  the subsection statement `sk-lem-coprojection`.
+- `AlgebraicGeometry.Etale.nonempty_iso_rightDerivedUpperShriek_derivedTensor_shiftTateObject`:
+  the case of the Tate twists, `Ri^! (K ⊗^L Λ(m)[2m]) ≅ Ri^! K ⊗^L Λ(m)[2m]`
+  (blueprint `lem-pur-immersion-twist`).
 -/
 
 @[expose] public section
@@ -76,7 +89,6 @@ noncomputable def derivedTensorRightCompRightDerivedUpperShriekIsoOfTensorIso
 
 end General
 
-
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] [HasTateTwist Λ] {X Z : Scheme.{u}}
 
 section Coprojection
@@ -123,11 +135,20 @@ For a closed immersion `i : Z ⟶ X`, a complex `K ∈ D^b_{ctf}(X, Λ)` and an 
 is an isomorphism: an invertible tensor factor passes through `i^!` at the cost of restricting
 it. Testing against an arbitrary `A ∈ D^b_{ctf}(Z, Λ)` and using `Ri_! = Ri_*`, the projection
 formula for `Ri_*` and invertibility of `L`, the two Hom-functors agree naturally in `A`, so
-Yoneda gives the isomorphism.
+Yoneda gives the isomorphism. Here it is the component at `K` of the co-projection
+`AlgebraicGeometry.Etale.derivedTensorRightCompRightDerivedUpperShriekIso`
+(blueprint `lem-pur-coprojection`), which needs neither that `i` is a closed immersion nor that
+`K` and `L` lie in `D^b_{ctf}`.
 
 Taking `L = Λ_X(m)[2m]`, whose restriction is `Λ_Z(m)[2m]`, this reads
-`Ri^!(K(m)[2m]) ≅ (Ri^! K)(m)[2m]`; taking `L = Lf^* B` for `B` invertible on `Y` and
-`f' = f ∘ i` it reads `Ri^!(K ⊗ Lf^* B) ≅ Ri^! K ⊗ Lf'^* B`. -/
+`Ri^!(K(m)[2m]) ≅ (Ri^! K)(m)[2m]`
+(`AlgebraicGeometry.Etale.nonempty_iso_rightDerivedUpperShriek_derivedTensor_shiftTateObject`);
+taking `L = Lf^* B` for `B` invertible on `Y` and `f' = f ∘ i` it reads
+`Ri^!(K ⊗ Lf^* B) ≅ Ri^! K ⊗ Lf'^* B`
+(`nonempty_iso_rightDerivedUpperShriek_derivedTensor_leftDerivedUpperStar`);
+the diagonal identity is
+`nonempty_iso_rightDerivedUpperShriek_derivedTensor_leftDerivedUpperStar_pair`.
+-/
 theorem nonempty_iso_rightDerivedUpperShriek_derivedTensor_of_isInvertible
     (i : Z ⟶ X) [IsClosedImmersion i] [HasCompactification i]
     (K L : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
@@ -141,6 +162,85 @@ theorem nonempty_iso_rightDerivedUpperShriek_derivedTensor_of_isInvertible
         ((L((i)^*[ModuleCat.{u + 1} Λ])).obj L)) :=
   have ⟨M, ⟨e'⟩, ⟨e⟩⟩ := hL
   ⟨(derivedTensorRightCompRightDerivedUpperShriekIso Λ i L M e e').app K⟩
+
+section Consequences
+
+variable {Y W : Scheme.{u}}
+
+omit [HasTateTwist Λ] in
+/-- Blueprint `sk-lem-coprojection`, invertible factor pulled back from the base: for
+`i : Z ⟶ X`, `f : X ⟶ Y`, `K ∈ D(X_ét, Λ)` and `B` invertible on `Y`,
+
+`Ri^! (K ⊗^L Lf^* B) ≅ Ri^! K ⊗^L L(i ≫ f)^* B`.
+
+This is the co-projection for the invertible object `L = Lf^* B`, followed by
+`Li^* Lf^* B ≅ L(i ≫ f)^* B`. -/
+theorem nonempty_iso_rightDerivedUpperShriek_derivedTensor_leftDerivedUpperStar (i : Z ⟶ X)
+    [HasCompactification i] (f : X ⟶ Y)
+    (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
+    {B : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
+    (hB : DerivedCategory.isInvertible Λ Y B) :
+    Nonempty ((R(i)^![ModuleCat.{u + 1} Λ]).obj
+        (((derivedTensor (ModuleCat.{u + 1} Λ) X).obj K).obj
+          ((L((f)^*[ModuleCat.{u + 1} Λ])).obj B)) ≅
+      ((derivedTensor (ModuleCat.{u + 1} Λ) Z).obj ((R(i)^![ModuleCat.{u + 1} Λ]).obj K)).obj
+        ((L((i ≫ f)^*[ModuleCat.{u + 1} Λ])).obj B)) :=
+  have ⟨M, ⟨e'⟩, ⟨e⟩⟩ := hB.leftDerivedUpperStar f
+  ⟨(derivedTensorRightCompRightDerivedUpperShriekIso Λ i _ M e e').app K ≪≫
+    ((derivedTensor (ModuleCat.{u + 1} Λ) Z).obj _).mapIso
+      ((leftDerivedUpperStarComp (ModuleCat.{u + 1} Λ) i f).app B).symm⟩
+
+omit [HasTateTwist Λ] in
+/-- Blueprint `sk-lem-coprojection`, two invertible factors: for `i : Z ⟶ W` and `L₁`, `L₂`
+invertible on `W`, applying the co-projection twice (to `L₁ ⊗^L L₂ ≅ (Λ_W ⊗^L L₁) ⊗^L L₂`)
+gives
+
+`Ri^! (L₁ ⊗^L L₂) ≅ (Ri^! Λ_W ⊗^L Li^* L₁) ⊗^L Li^* L₂`. -/
+theorem nonempty_iso_rightDerivedUpperShriek_derivedTensor_of_isInvertible_of_isInvertible
+    (i : Z ⟶ W) [HasCompactification i]
+    {L₁ L₂ : _root_.DerivedCategory (Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
+    (h₁ : DerivedCategory.isInvertible Λ W L₁) (h₂ : DerivedCategory.isInvertible Λ W L₂) :
+    Nonempty ((R(i)^![ModuleCat.{u + 1} Λ]).obj
+        (((derivedTensor (ModuleCat.{u + 1} Λ) W).obj L₁).obj L₂) ≅
+      ((derivedTensor (ModuleCat.{u + 1} Λ) Z).obj
+          (((derivedTensor (ModuleCat.{u + 1} Λ) Z).obj
+              ((R(i)^![ModuleCat.{u + 1} Λ]).obj (constantComplex Λ W))).obj
+            ((L((i)^*[ModuleCat.{u + 1} Λ])).obj L₁))).obj
+        ((L((i)^*[ModuleCat.{u + 1} Λ])).obj L₂)) :=
+  have ⟨M₁, ⟨e₁'⟩, ⟨e₁⟩⟩ := h₁
+  have ⟨M₂, ⟨e₂'⟩, ⟨e₂⟩⟩ := h₂
+  ⟨(R(i)^![ModuleCat.{u + 1} Λ]).mapIso
+      (((derivedTensor (ModuleCat.{u + 1} Λ) W).mapIso
+        (derivedTensorLeftUnitor (ModuleCat.{u + 1} Λ) W L₁).symm).app L₂) ≪≫
+    (derivedTensorRightCompRightDerivedUpperShriekIso Λ i L₂ M₂ e₂ e₂').app _ ≪≫
+    ((derivedTensor (ModuleCat.{u + 1} Λ) Z).mapIso
+      ((derivedTensorRightCompRightDerivedUpperShriekIso Λ i L₁ M₁ e₁ e₁').app _)).app _⟩
+
+omit [HasTateTwist Λ] in
+/-- Blueprint `sk-lem-coprojection`, the diagonal identity: for `Δ : X ⟶ W` and
+`p₁, p₂ : W ⟶ X` (in the blueprint, the diagonal of `X ⟶ Y` and the two projections of
+`W = X ×_Y X`) and `ω` invertible on `X`,
+
+`RΔ^! (Lp₁^* ω ⊗^L Lp₂^* ω) ≅ (RΔ^! Λ_W ⊗^L LΔ^* Lp₁^* ω) ⊗^L LΔ^* Lp₂^* ω`.
+
+The objects `Lp₁^* ω` and `Lp₂^* ω` are invertible as pullbacks of an invertible object. -/
+theorem nonempty_iso_rightDerivedUpperShriek_derivedTensor_leftDerivedUpperStar_pair
+    (Δ : X ⟶ W) [HasCompactification Δ] (p₁ p₂ : W ⟶ X)
+    {ω : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
+    (hω : DerivedCategory.isInvertible Λ X ω) :
+    Nonempty ((R(Δ)^![ModuleCat.{u + 1} Λ]).obj
+        (((derivedTensor (ModuleCat.{u + 1} Λ) W).obj
+            ((L((p₁)^*[ModuleCat.{u + 1} Λ])).obj ω)).obj
+          ((L((p₂)^*[ModuleCat.{u + 1} Λ])).obj ω)) ≅
+      ((derivedTensor (ModuleCat.{u + 1} Λ) X).obj
+          (((derivedTensor (ModuleCat.{u + 1} Λ) X).obj
+              ((R(Δ)^![ModuleCat.{u + 1} Λ]).obj (constantComplex Λ W))).obj
+            ((L((Δ)^*[ModuleCat.{u + 1} Λ])).obj ((L((p₁)^*[ModuleCat.{u + 1} Λ])).obj ω)))).obj
+        ((L((Δ)^*[ModuleCat.{u + 1} Λ])).obj ((L((p₂)^*[ModuleCat.{u + 1} Λ])).obj ω))) :=
+  nonempty_iso_rightDerivedUpperShriek_derivedTensor_of_isInvertible_of_isInvertible Λ Δ
+    (hω.leftDerivedUpperStar p₁) (hω.leftDerivedUpperStar p₂)
+
+end Consequences
 
 /-- Blueprint `lem-pur-immersion-twist`: The co-projection for the twist
 

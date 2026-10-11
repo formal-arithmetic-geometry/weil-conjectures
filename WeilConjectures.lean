@@ -454,6 +454,7 @@ public import WeilConjectures.CategoryTheory.Abelian.RightDerived.LongExactSeque
 public import WeilConjectures.CategoryTheory.Adjunction.ProjectionMap
 public import WeilConjectures.CategoryTheory.Adjunction.ProjectionMapCompat
 public import WeilConjectures.CategoryTheory.Adjunction.ProjectionMapDualizable
+public import WeilConjectures.CategoryTheory.Adjunction.TensorInvertible
 public import WeilConjectures.CategoryTheory.Comma.ArrowRefinement
 public import WeilConjectures.CategoryTheory.Comma.Over.DescentDatum
 public import WeilConjectures.CategoryTheory.ConcreteCategory.FinitelyGenerated
@@ -1447,6 +1448,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.GlobalSections
 public import WeilConjectures.SixFunctors.Etale.Derived.Hom
 public import WeilConjectures.SixFunctors.Etale.Derived.IntegralCoefficients
 public import WeilConjectures.SixFunctors.Etale.Derived.Invertible
+public import WeilConjectures.SixFunctors.Etale.Derived.InvertiblePullback
 public import WeilConjectures.SixFunctors.Etale.Derived.InvertibleRestriction
 public import WeilConjectures.SixFunctors.Etale.Derived.KernelTransform
 public import WeilConjectures.SixFunctors.Etale.Derived.KernelTransform.Composition
