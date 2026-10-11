@@ -162,6 +162,13 @@ theorem factorMultiset_eq [FiniteDimensional k V] {α : Type*}
   have h := (exists_compositionSeries (ρ := ρ)).choose_spec.choose_spec
   map_univ_eq_of_compositionSeries f hf h.1 h.2.1 h.2.2 hF0 hFn hF
 
+/-- Subquotients can be transported along an equivalence of representations `e : ρ ≅ σ`: every
+subquotient `S / U` of `σ` is equivalent to a subquotient `S' / U'` of `ρ`. -/
+theorem exists_subquotient_equiv_of_equiv {V' : Type*} [AddCommGroup V'] [Module k V']
+    {σ : Representation k G V'} (e : ρ.Equiv σ) (U S : Subrepresentation σ) :
+    ∃ U' S' : Subrepresentation ρ, Nonempty ((S'.subquotient U').Equiv (S.subquotient U)) :=
+  ⟨_, _, ⟨(subquotientEquiv e.symm S U).symm⟩⟩
+
 /-- The dimensions of the factors `F (i + 1) / F i` of a chain `0 = F 0 ≤ F 1 ≤ ⋯ ≤ F n` of
 subrepresentations add up to the dimension of `F n`. -/
 theorem sum_finrank_subquotient [FiniteDimensional k V] {n : ℕ} {F : ℕ → Subrepresentation ρ}
