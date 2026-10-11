@@ -168,5 +168,23 @@
   "group": "E1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-esv (reviewer sub-agent of L); spot-checked: Reviewer R-esv: statement true with the sheaf Ext of def-weil-pbc-sheaf-ext (the item does not cite def-sc-ext-sheaf); fixes: C1 step 3 coherence of SheafExt^q by the added statement node lem-sc-sheaf-ext-coherent (Stacks 0D0C); C4 step 3 cites lem-sc-zariski-module-abelian-cohomology-agree; step 2 reordered (closedness of the support before generic points); the two off-unit citations are generic tools (01XZ coherent = quasi-coherent finite type; module vs abelian cohomology) accepted by L, who reran the merge at 16:28 UTC after the route check refused the reviewer's own citation; 3 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ExtSupportCohomologyVanishing",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.ext_support_cohomology_vanishing",
+  "file": "lean/Sheaf/AlgebraicGeometry/ExtSupportCohomologyVanishing.lean",
+  "statement": "theorem ext_support_cohomology_vanishing (X : Scheme.{u}) [CompactSpace X] [IsLocallyNoetherian X] [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] (hregular : ∀ x : X, ∃ U : X.affineOpens, x ∈ U.1 ∧ IsRegularRing Γ(X, U)) (d : ℕ) (hdim : X.dim = (d : WithBot ℕ∞)) (F G : X.Modules) (hF : RingedSpace.IsCoherent X.toRingedSpace F) (hG : RingedSpace.IsCoherent X.toRingedSpace G) (q : ℤ) (hq : 0 ≤ q) : (q ≤ (d : ℤ) → topologicalKrullDim {x : X // ¬ Subsingleton ((Scheme.Modules.presheaf (AlgebraicGeometry.moduleSheafExt X q F G)).stalk x)} ≤ (((d : ℤ) - q).toNat : WithBot ℕ∞)) ∧ ((d : ℤ) < q → (∀ x : X, Subsingleton ((Scheme.Modules.presheaf (AlgebraicGeometry.moduleSheafExt X q F G)).stalk x))) ∧ (∀ p : ℤ, (d : ℤ) - q < p → IsZero (if 0 ≤ p then (RingedSpace.moduleCohomology X.toRingedSpace p.toNat).obj (AlgebraicGeometry.moduleSheafExt X q F G) else 0))",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "C1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }
