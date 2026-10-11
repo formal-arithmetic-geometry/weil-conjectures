@@ -185,5 +185,24 @@
  },
  "tool_uses": [
   "lem-weil-pbc-spec-module-tilde-sections"
- ]
+ ],
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.QuasiCoherentAffineSectionBaseChange",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.quasiCoherent_affine_section_baseChange",
+  "file": "lean/Sheaf/AlgebraicGeometry/QuasiCoherentAffineSectionBaseChange.lean",
+  "statement": "theorem quasiCoherent_affine_section_baseChange (X : Scheme.{u}) (F : X.Modules) [F.IsQuasicoherent] (U V : X.affineOpens) (hUV : U.1 ≤ V.1) : letI : Algebra Γ(X, V.1) Γ(X, U.1) := (X.presheaf.map (homOfLE hUV).op).hom.toAlgebra letI : Module Γ(X, V.1) Γ(F, U.1) := Module.compHom _ (X.presheaf.map (homOfLE hUV).op).hom ∃ c : (Γ(F, V.1) ⊗[Γ(X, V.1)] Γ(X, U.1)) →ₗ[Γ(X, V.1)] Γ(F, U.1), Function.Bijective c ∧ (∀ (r : Γ(X, U.1)) (t : Γ(F, V.1) ⊗[Γ(X, V.1)] Γ(X, U.1)), c ((TensorProduct.comm Γ(X, V.1) Γ(F, V.1) Γ(X, U.1)).symm (r • TensorProduct.comm Γ(X, V.1) Γ(F, V.1) Γ(X, U.1) t)) = r • c t) ∧ (∀ (m : Γ(F, V.1)) (r : Γ(X, U.1)), c (m ⊗ₜ[Γ(X, V.1)] r) = r • F.presheaf.map (homOfLE hUV).op m)",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-qab1438"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-qab1438",
+  "group": "H1",
+  "result": "fix",
+  "note": "X scheme, F quasi-coherent [F.IsQuasicoherent], U V : affineOpens with U.1 ≤ V.1, restriction algebra/module letIs; conclusion restated in M1 b9579ee07 form: ∃ c : M'⊗[R']R →ₗ[R'] M, Bijective c ∧ R-linearity on second factor (comm-swap) ∧ c(m⊗r)=r•m|_U; single universe; no let/hollow hyps"
+ }
 }
