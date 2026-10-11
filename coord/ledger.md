@@ -4218,3 +4218,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 10:23 L: merged deliver/G1/lem-weil-pbc-finite-after-completion (stage 2; reviewer FIX; first push; Sheaf.RingTheory.FiniteAfterCompletion AdicCompletion.finite_after_completion)
 - 10:23 L: merged deliver/M1/lem-weil-pbc-finite-over-nagata-nagata (stage 2; reviewer PASS; first push; Sheaf.RingTheory.FiniteOverNagata finite_over_nagata_is_nagata)
 - 10:23 L: merged deliver/J1/lem-weil-pbc-finite-separable-tensor-field-reduced (stage 2; reviewer PASS; first push; Sheaf.FieldTheory.FiniteSeparableTensorFieldReduced Algebra.isReduced_tensorProduct_of_finiteSeparable)
+- 10:24 L: merged deliver/C1/lem-pur-triangle-common-refinement-ms3-05r9 (stage 2; reviewer PASS; first push; Sheaf.CategoryTheory.TriangleCommonRefinement CategoryTheory.triangle_common_refinement_and_equalization)

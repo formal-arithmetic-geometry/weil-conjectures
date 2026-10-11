@@ -122,5 +122,23 @@
   "group": "E1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-tcr0314 (reviewer sub-agent of L); spot-checked: Checked Step 1 (dual of Stacks 05R9 condition (2)): S/X cofiltered is asserted by the def node; completion node hypotheses; f-square equality s_{2,Y}f_2a=f s_{1,X}=s_{2,Y}b f_P and second MS3 clause; g/h by rotation (MS5 for shifted components); empty family via identity/MS1. Step 2: s_{2,X}a=s_{1,X}=s_{2,X}a', second MS3 clause, completion, persistence under precomposition. Step 3 elementary. Only split fields changed; no new nodes; Mathlib none. FIX more, RETURN less: E/C4 (missed by the Second reading) Step 1 called the S/X-arrow X_3->X_1 an S-arrow and never showed the T_2-side components a,b,c lie in S (needed for the completion node and for arrows of I; S/X arrows are only commuting triangles); folded in the elementary saturation argument (second MS2 clause, second MS3 clause, MS1, MS4) into Step 1. Note: the Second reading's claim to have repaired created.item is untrue but harmless (created.item correctly stays lem-pur-triangle-morphism-category-05r9).; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.TriangleCommonRefinement",
+  "declaration": "CategoryTheory.triangle_common_refinement_and_equalization",
+  "file": "lean/Sheaf/CategoryTheory/TriangleCommonRefinement.lean",
+  "statement": "theorem triangle_common_refinement_and_equalization {C : Type u} [Category.{v} C] [HasZeroObject C] [HasShift C ℤ] [Preadditive C] [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C] (S : MorphismProperty C) (hS : S.IsSaturatedMultiplicativeSystem) [S.IsCompatibleWithTriangulation] (T : Triangle C) (hT : T ∈ distTriang C) : (∀ (I : Type w) [Finite I] (D : I → Triangle C) (s : ∀ i : I, D i ⟶ T), (∀ i : I, D i ∈ distTriang C) → (∀ i : I, S (s i).hom₁ ∧ S (s i).hom₂ ∧ S (s i).hom₃) → ∃ (U : Triangle C) (t : U ⟶ T), U ∈ distTriang C ∧ S t.hom₁ ∧ S t.hom₂ ∧ S t.hom₃ ∧ ∀ i : I, ∃ a : U ⟶ D i, S a.hom₁ ∧ S a.hom₂ ∧ S a.hom₃ ∧ a ≫ s i = t) ∧ (∀ (D E : Triangle C) (s : D ⟶ T) (t : E ⟶ T), D ∈ distTriang C → E ∈ distTriang C → S s.hom₁ → S s.hom₂ → S s.hom₃ → S t.hom₁ → S t.hom₂ → S t.hom₃ → ∀ a b : D ⟶ E, S a.hom₁ → S a.hom₂ → S a.hom₃ → S b.hom₁ → S b.hom₂ → S b.hom₃ → a ≫ t = s → b ≫ t = s → ∃ (U : Triangle C) (r : U ⟶ T) (q : U ⟶ D), U ∈ distTriang C ∧ S r.hom₁ ∧ S r.hom₂ ∧ S r.hom₃ ∧ S q.hom₁ ∧ S q.hom₂ ∧ S q.hom₃ ∧ q ≫ s = r ∧ q.hom₁ ≫ a.hom₁ = q.hom₁ ≫ b.hom₁ ∧ q.hom₂ ≫ a.hom₂ = q.hom₂ ≫ b.hom₂ ∧ q.hom₃ ≫ a.hom₃ = q.hom₃ ≫ b.hom₃)",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-tcr1023",
+  "group": "C1",
+  "result": "pass",
+  "note": "C pre-triangulated (no TR4, as node/Stacks 05R9); S via landed IsSaturatedMultiplicativeSystem (MS1-MS4) + Mathlib IsCompatibleWithTriangulation (MS5-MS6) = the two conjuncts of the recorded predicate, checked by #print; T distinguished; I-objects = distinguished D with D->T all components in S; I-arrows a with S components and a>>s=t; finite family [Finite I] incl. empty (identity, MS1); equalizer clause q:U->D over T, componentwise equalities proved equivalent to q>>a=q>>b by a compiled example"
  }
 }
