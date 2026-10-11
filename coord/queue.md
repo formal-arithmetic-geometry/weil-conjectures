@@ -1,17 +1,16 @@
 # Work queue
 
-737 items; claim with `tools/claim.py next <group> [--stage N]`.
+732 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (737)
+## Stage 2: nodes to state (732)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
 | `def-pod-lisse-l-adic-sheaves` | 1 | state |
 | `def-pur-saturated-triangulated-localization` | 1 | state |
-| `def-sc-rational-section-divisor` | 1 | state |
 | `def-weil-pbc-derived-direct-image-composition` | 1 | state |
 | `lem-pc-derived-tensor-transitivity` | 1 | state |
 | `lem-pc-module-pullback-identity-composition` | 1 | state |
@@ -29,15 +28,12 @@
 | `lem-weil-pbc-direct-image-split-cover-product` | 1 | state |
 | `lem-weil-pbc-directed-colimit-base-change-elementwise` | 1 | state |
 | `lem-weil-pbc-double-complex-cokernel-homology-iso` | 1 | state |
-| `lem-weil-pbc-etale-algebra-filtered-colimit-descent` | 1 | state |
 | `lem-weil-pbc-etale-fibre-specialization-bound` | 1 | state |
 | `lem-weil-pbc-etale-graph-section-extension-map` | 1 | state |
 | `lem-weil-pbc-etale-inverse-image-algebraic-structures` | 1 | state |
-| `lem-weil-pbc-etale-local-finite-multiple-points` | 1 | state |
 | `lem-weil-pbc-etale-local-finite-multiple-points-elementary` | 1 | state |
 | `lem-weil-pbc-etale-local-ring-triples` | 1 | state |
 | `lem-weil-pbc-etale-localize-upstairs` | 1 | state |
-| `lem-weil-pbc-etale-over-normal-ring-normal` | 1 | state |
 | `lem-weil-pbc-etale-qcqs-cofinal-finite-coverings` | 1 | state |
 | `lem-weil-pbc-etale-qcqs-sections-filtered-colimit` | 1 | state |
 | `lem-weil-pbc-etale-residue-polynomial-lift` | 1 | state |
@@ -46,7 +42,6 @@
 | `lem-weil-pbc-etale-retraction-finite-type-splitting` | 1 | state |
 | `lem-weil-pbc-etale-ring-map-conormal-criterion` | 1 | state |
 | `lem-weil-pbc-etale-ring-map-prescribed-residue-field` | 1 | state |
-| `lem-weil-pbc-etale-ring-map-quasi-finite` | 1 | state |
 | `lem-weil-pbc-etale-section-idempotent-splitting` | 1 | state |
 | `lem-weil-pbc-etale-section-lifting-henselian-pair` | 1 | state |
 | `lem-weil-pbc-etale-separated-stratified-finite` | 1 | state |
