@@ -114,4 +114,15 @@ lemma isIso_map_ihomUnitTensorToIhom (A Z : C) [IsIso (projectionMap adj A)]
     (G.map (ihomUnitTensorToIhom A Z) ≫ (ihomComparison G A).natTrans.app Z)
   exact IsIso.of_isIso_comp_right _ ((ihomComparison G A).natTrans.app Z)
 
+/-- Conversely, if `G` commutes with internal homs out of `A`, the projection map
+`L (G A ⊗ T) ⟶ A ⊗ L T` of its left adjoint is an isomorphism. -/
+lemma isIso_projectionMap_of_isIso_ihomComparison (A : C)
+    [IsIso (ihomComparison G A).natTrans] : IsIso (projectionMap adj A) := by
+  have : IsIso (conjugateEquiv (adj.comp (ihom.adjunction A))
+      ((ihom.adjunction (G.obj A)).comp adj) (projectionMap adj A)) := by
+    rw [conjugateEquiv_projectionMap]
+    infer_instance
+  exact conjugateEquiv_of_iso (adj.comp (ihom.adjunction A))
+    ((ihom.adjunction (G.obj A)).comp adj) _
+
 end CategoryTheory.Functor.Monoidal

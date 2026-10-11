@@ -12,6 +12,8 @@ public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar
 public import WeilConjectures.CategoryTheory.Functor.KanExtension.ProjectionFormula
 public import WeilConjectures.CategoryTheory.Abelian.Flat.PreservesFlat
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.InternalHom
+public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Closed.IhomUnitTensor
 
 /-!
 # Extension by zero along an étale morphism: derived adjunction and projection formula
@@ -240,6 +242,20 @@ instance Etale.preservesFlat_etaleLowerShriek :
     exact ⟨hl, (exactFunctor_iff _).2
       ⟨preservesFiniteLimits_of_natIso (BraidedCategory.tensorLeftIsoTensorRight _),
         preservesFiniteColimits_of_natIso (BraidedCategory.tensorLeftIsoTensorRight _)⟩⟩
+
+omit [HasSmallSiteSheafify A] in
+/-- **The projection formula for extension by zero along an étale morphism**, as the
+invertibility of the projection map `f_!(f^*G ⊗ F) ⟶ G ⊗ f_!F` of the adjunction `f_! ⊣ f^*`
+(`CategoryTheory.Functor.Monoidal.projectionMap`). It is conjugate to the internal-hom comparison
+of `f^*`, which is an isomorphism (`AlgebraicGeometry.Etale.isIso_ihomComparison_upperStar`). -/
+theorem Etale.isIso_projectionMap_etaleLowerShriek
+    [∀ M : A, PreservesFilteredColimitsOfSize.{u, u + 1} (tensorLeft M)]
+    [(U.smallEtaleTopology.W (A := A)).IsMonoidal] [(V.smallEtaleTopology.W (A := A)).IsMonoidal]
+    (G : Sheaf U.smallEtaleTopology A) :
+    IsIso (Functor.Monoidal.projectionMap (Etale.etaleLowerShriekUpperStarAdjunction A f h) G) := by
+  have : Etale f := h
+  have := Etale.isIso_ihomComparison_upperStar A f G
+  exact Functor.Monoidal.isIso_projectionMap_of_isIso_ihomComparison _ G
 
 end Projection
 
