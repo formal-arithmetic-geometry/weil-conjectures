@@ -177,5 +177,23 @@
   "by": "L",
   "result": "accepted",
   "note": "7 steps following Stacks 070E: kernels, images and the four short exact sequences of systems; kernels commute with limits; the image systems are ML (new unsplit 02N1 (2),(3) node); Z^{-1} is ML via 070D (new unsplit node, with the essentially-constant definition as a new unsplit definition node, Categories 05PU (2)); the image of the limit differential; the limit of (d) is short exact (existing tower node for left exactness, 02N1 (3) for surjectivity); conclusion. New definition leaf def-weil-pbc-mittag-leffler-system (Functor.IsMittagLeffler, CofilteredSystem.lean:132; agreement with Stacks' condition is the one-line remark that the images decrease, so accepted as a leaf under B8). Statement now cites the three definitions."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.MittagLefflerLimitHomology",
+  "declaration": "HomologicalComplex.isIso_limitPost_homology_of_mittagLeffler",
+  "file": "lean/Sheaf/Algebra/Homology/MittagLefflerLimitHomology.lean",
+  "statement": "theorem isIso_limitPost_homology_of_mittagLeffler : let c : ComplexShape (Fin 4) := { Rel := fun i j => i.val + 1 = j.val next_eq := fun h h' => Fin.ext (h.symm.trans h') prev_eq := fun h h' => Fin.ext (Nat.add_right_cancel (h.trans h'.symm)) } ∀ (K : ℕᵒᵖ ⥤ HomologicalComplex AddCommGrpCat.{u} c), (K ⋙ eval AddCommGrpCat c 0 ⋙ CategoryTheory.forget AddCommGrpCat).IsMittagLeffler → (K ⋙ eval AddCommGrpCat c 1 ⋙ CategoryTheory.forget AddCommGrpCat).IsMittagLeffler → (K ⋙ homologyFunctor AddCommGrpCat c 1).IsEssentiallyConstant → IsIso (limit.post K (homologyFunctor AddCommGrpCat c 2))",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-mlh1122",
+  "group": "K1",
+  "result": "pass",
+  "note": "K: ℕᵒᵖ ⥤ HomologicalComplex AddCommGrpCat c on Fin 4 (Rel i+1=j; checked prev 1=0, next 1=2, prev 2=1, next 2=3, no 3→0 or 0→2 arrow) = tower of A^{-2..1} complexes; ML on eval 0,1 ⋙ forget = A^{-2},A^{-1} ML (same form as landed 070D module); IsEssentiallyConstant on homology 1 = H^{-1}_i using recorded G1 def; limit.post K (homologyFunctor c 2) : H^0(lim K) ⟶ lim H^0_i, the canonical class map; no statement change; hypotheses not hollow; single universe u"
  }
 }
