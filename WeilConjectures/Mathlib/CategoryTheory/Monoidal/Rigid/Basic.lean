@@ -82,6 +82,13 @@ theorem IsDualizable.of_iso {X Y : C} (e : X ≅ Y) (hX : IsDualizable X) : IsDu
   obtain ⟨_⟩ := hX
   exact ⟨{ rightDual := Xᘁ, exact := exactPairingCongrLeft e.symm }⟩
 
+/-- The counit of the adjunction `- ⊗ Y ⊣ - ⊗ Y'` of an exact pairing of `Y` and `Y'` is the
+evaluation `(X ⊗ Y') ⊗ Y ≅ X ⊗ (Y' ⊗ Y) ⟶ X`. -/
+theorem tensorRightAdjunction_counit_app (Y Y' : C) [ExactPairing Y Y'] (X : C) :
+    (tensorRightAdjunction Y Y').counit.app X =
+      (α_ X Y' Y).hom ≫ X ◁ ε_ Y Y' ≫ (ρ_ X).hom := by
+  simp [tensorRightAdjunction, tensorRightHomEquiv]
+
 /-- An object `X` of a monoidal category is *invertible* if it admits a two-sided tensor
 inverse, that is, an object `Y` with `X ⊗ Y ≅ 𝟙_ C` and `Y ⊗ X ≅ 𝟙_ C`. The Tate twists of the
 `ℓ`-adic formalism are the motivating example.
