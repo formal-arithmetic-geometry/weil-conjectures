@@ -174,5 +174,24 @@
   "by": "L",
   "result": "pass",
   "note": "Five steps: (1) by the separated node, (2) F^{++} a sheaf by a new unsplit node (separated G: G -> G^+ injective and G^+ a sheaf, 00WB(2)), (3) existence of the factorization through F^{++} via G = G^{++} for a sheaf (new unsplit 00WB(3) node) and functoriality of plus (new unsplit 00W5 node), (4) uniqueness by local surjectivity of theta (00W9, from the presheaf/colimit node) and separatedness of sheaves, (5) the unique isomorphism with F^#. Correct. Statement rewritten to the Stacks plus construction (cites def-weil-pbc-site-plus-construction) with the universal property made explicit (00WH); the earlier inline description was not F^+. Mathlib sieve-based plus/sheafify recorded, not leaves (site convention)."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.Sites.SheafificationPlusTheorem",
+  "declaration": "CategoryTheory.GrothendieckTopology.plus_sheafification_theorem",
+  "file": "lean/Sheaf/CategoryTheory/Sites/SheafificationPlusTheorem.lean",
+  "statement": "theorem plus_sheafification_theorem {C : Type u} [SmallCategory C] (J : Precoverage C) [J.HasIsos] [J.IsStableUnderComposition] [J.IsStableUnderBaseChange] [J.HasPullbacks] (P : Cᵒᵖ ⥤ Type (max u w)) : (∀ (U : C) (E : Precoverage.ZeroHypercover.{max u w} J U) (s s' : (J.toGrothendieck.plusObj P).obj (op U)), (∀ i : E.I₀, (J.toGrothendieck.plusObj P).map (E.f i).op s = (J.toGrothendieck.plusObj P).map (E.f i).op s') → s = s') ∧ (∀ U : C, Function.Injective ((J.toGrothendieck.toPlus (J.toGrothendieck.plusObj P)).app (op U))) ∧ Presheaf.IsSheaf J.toGrothendieck (J.toGrothendieck.plusObj (J.toGrothendieck.plusObj P)) ∧ (∀ (G : Sheaf J.toGrothendieck (Type (max u w))) (φ : P ⟶ G.obj), ∃! φ' : J.toGrothendieck.plusObj (J.toGrothendieck.plusObj P) ⟶ G.obj, (J.toGrothendieck.toPlus P ≫ J.toGrothendieck.toPlus (J.toGrothendieck.plusObj P)) ≫ φ' = φ) ∧ (∀ (Q : Sheaf J.toGrothendieck (Type (max u w))) (θ : P ⟶ Q.obj), (∀ (G : Sheaf J.toGrothendieck (Type (max u w))) (φ : P ⟶ G.obj), ∃! ψ : Q.obj ⟶ G.obj, θ ≫ ψ = φ) → ∃! e : J.toGrothendieck.plusObj (J.toGrothendieck.plusObj P) ≅ Q.obj, (J.toGrothendieck.toPlus P ≫ J.toGrothendieck.toPlus (J.toGrothendieck.plusObj P)) ≫ e.hom = θ)",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": false,
+  "note": "Uses the dependency records plusObj/toPlus on the generated topology. Includes separatedness on covering families, objectwise injectivity, the double-plus sheaf property, unique factorization, and the unique comparison isomorphism with every universal-property sheafification."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "F1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }
