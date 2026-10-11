@@ -1,11 +1,11 @@
 # Work queue
 
-848 items; claim with `tools/claim.py next <group> [--stage N]`.
+847 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (848)
+## Stage 2: nodes to state (847)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -26,7 +26,6 @@
 | `lem-sc-fibre-dimension-after-base-change` | 1 | state |
 | `lem-sc-invertible-module-generic-stalk` | 1 | state |
 | `lem-sc-mayer-vietoris-ringed-space` | 1 | state |
-| `lem-sc-p1-ext-locally-free-naturality` | 1 | state |
 | `lem-sc-separated-affine-function-field-surjective` | 1 | state |
 | `lem-sc-smooth-connected-curve-local-rings` | 1 | state |
 | `lem-sc-vector-bundle-line-subbundle` | 1 | state |
