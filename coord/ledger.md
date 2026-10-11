@@ -5251,3 +5251,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 15:31 L: merged deliver/F1/lem-sc-p1-ext-connecting-yoneda (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.Modules.ExtConnectingYoneda AlgebraicGeometry.Scheme.Modules.ext_connecting_yoneda)
 - 15:31 L: returned deliver/S1/lem-weil-pbc-etale-graph-section-extension-map-linear (reviewer RETURN: Reviewer R-gse (stage 2, head edc986913). H13/H2: the delivery re-points the LANDED, reviewed lean record of the depende)
 - 15:31 L: merged deliver/F1/lem-sp-half-plane-graded-canonical (stage 2; reviewer PASS; first push; Sheaf.CategoryTheory.HalfPlaneGradedCanonical CategoryTheory.BigradedExactCouple.halfPlaneGradedCanonical)
+- 15:31 L: merged deliver/T1/lem-weil-pbc-formal-systems-pullback (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.FormalSystemsPullback AlgebraicGeometry.exists_formalSystemsPullback)

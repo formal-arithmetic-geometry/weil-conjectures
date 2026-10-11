@@ -190,5 +190,23 @@
   "by": "L",
   "result": "pass",
   "note": "Reviewed by the lead (opus-relaunch6). Seven steps along the proof of Stacks 0887 and the identity used in 088B: the ideal I = J O_X and f^*(G/J^nG) = f^*G/I^n f^*G (new unsplit node, from the displayed computation of 0887 with 01AJ right exactness and 00DF; Stacks swaps I and J in the display), pullbacks coherent (01XZ, 01BG, 01B6 via existing nodes; pqf-lem-coherent-ft-locnoeth already on the route of def-weil-pbc-coherent-formal-module), I^n f^*G_n = 0, transition maps induce isomorphisms, functoriality (elementary), part (2) natural in G, the open-subscheme case. Statement kept (narrower than 0887: no exactness claims; the two citers use only what is stated). Tags verified by the worker (0887, 088B, 01AJ, 01BG, 01B6, 01XZ, 00DF)."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FormalSystemsPullback",
+  "declaration": "AlgebraicGeometry.exists_formalSystemsPullback",
+  "file": "lean/Sheaf/AlgebraicGeometry/FormalSystemsPullback.lean",
+  "statement": "theorem exists_formalSystemsPullback {X Y : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y] (f : X ⟶ Y) (J : Y.IdealSheafData) : (∃ (P : CoherentFormalModule Y J ⥤ CoherentFormalModule X (J.comap f)) (C : CoherentModules Y ⥤ CoherentModules X), P ⋙ ObjectProperty.ι (IsCoherentFormalModule (J.comap f)) = ObjectProperty.ι (IsCoherentFormalModule J) ⋙ (Functor.whiskeringRight ℕᵒᵖ Y.Modules X.Modules).obj (Scheme.Modules.tensorPullback f) ∧ C ⋙ ObjectProperty.ι (RingedSpace.IsCoherent X.toRingedSpace) = ObjectProperty.ι (RingedSpace.IsCoherent Y.toRingedSpace) ⋙ Scheme.Modules.tensorPullback f ∧ Nonempty (completion Y J ⋙ P ≅ C ⋙ completion X (J.comap f))) ∧ (∀ U : Y.Opens, Nonempty (Scheme.Modules.tensorPullback U.ι ≅ Scheme.Modules.restrictFunctor U.ι) ∧ Nonempty ( (ObjectProperty.ι (RingedSpace.IsCoherent Y.toRingedSpace) ⋙ formalCompletionFunctor J) ⋙ (Functor.whiskeringRight ℕᵒᵖ Y.Modules U.toScheme.Modules).obj (Scheme.Modules.restrictFunctor U.ι) ≅ (ObjectProperty.ι (RingedSpace.IsCoherent Y.toRingedSpace) ⋙ Scheme.Modules.restrictFunctor U.ι) ⋙ formalCompletionFunctor (J.comap U.ι)))",
+  "branch": "sheaf-dag",
+  "by": "T1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-fsp",
+  "group": "T1",
+  "result": "pass",
+  "note": "X,Y Noetherian, f, J IdealSheafData, I = J.comap f (recorded def-nagata-extended-ideal); (1) P tied to termwise tensorPullback f by equality after ι; (2) C tied to tensorPullback on coherent modules, natural iso completion Y J ⋙ P ≅ C ⋙ completion X (J.comap f); open case tensorPullback U.ι ≅ restrictFunctor U.ι and natural iso of restricted completions with J.comap U.ι"
  }
 }
