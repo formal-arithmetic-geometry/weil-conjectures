@@ -152,5 +152,23 @@
   "group": "J1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-bhv1836 (reviewer sub-agent of L); spot-checked: No cycle (new nodes and cited lem-sc-brauer-algebraic-function-field-zero/tsen/c1-brauer-trivial/smooth-connected-curve-local-rings do not reach the item); stalk computation cites the new 03Q9 G_m node (existing prop is torsion-only, so not a duplicate); tool uses accepted. FIX more, RETURN less: (1) C4 Step 1 used H^q(fibre, G_m) but the cited stalk node gives p^{-1}G_m: added to that new node the identification p^{-1}G_m = G_m on the limit (Tag 09YQ), Step 1 cites it; (2) C1 Step 3 applied the ring-level DVR node to O^sh_{Cbar,xbar} without identifying it with (O_{Cbar,P})^sh and used injectivity/flatness of A -> A^sh for the generic-point claim uncited: restated lem-sc-strict-henselization-dvr scheme-wise (04HX + 0AP3 + 07QM: iota flat local, DVR iff DVR), Step 3 rewritten to use it; one LeanFinder query recorded.; 3 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.Curve.OpenCurveBoundaryHigherDirectImageVanishing",
+  "declaration": "AlgebraicGeometry.isZero_gm_higherDirectImage_stalk_of_open_curve_boundary",
+  "file": "lean/Sheaf/AlgebraicGeometry/Curve/OpenCurveBoundaryHigherDirectImageVanishing.lean",
+  "statement": "theorem isZero_gm_higherDirectImage_stalk_of_open_curve_boundary {k : Type u} [Field k] [IsAlgClosed k] {Cbar C : Scheme.{u}} (f : Cbar ⟶ Spec (.of k)) [IsConnectedCurve f] [Smooth f] [IsProper f] (S : Set Cbar) (hS : S.Finite) (hclosed : ∀ P ∈ S, IsClosed ({P} : Set Cbar)) (j : C ⟶ Cbar) [IsOpenImmersion j] (hj : Set.range j.base = Sᶜ) {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (xbar : Spec (.of Ω) ⟶ Cbar) (q : ℕ) (hq : q = 1 ∨ q = 2) : IsZero (((Scheme.pointSmallEtale xbar).sheafFiber (A := AddCommGrpCat.{u + 1})).obj ((DerivedCategory.Plus.homologyFunctor (Sheaf Cbar.smallEtaleTopology AddCommGrpCat.{u + 1}) (q : ℤ)).obj ((Etale.rightDerivedLowerStarPlus AddCommGrpCat.{u + 1} j).obj ((DerivedCategory.Plus.singleFunctor (Sheaf C.smallEtaleTopology AddCommGrpCat.{u + 1}) 0).obj C.gmSheaf))))",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "F1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }
