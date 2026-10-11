@@ -1,0 +1,124 @@
+{
+ "id": "def-sc-section-generating-locus",
+ "kind": "definition",
+ "title": "Open locus where a global section freely generates",
+ "status": "split",
+ "statement": "Let $X$ be a scheme [def-pc-scheme], $M$ an $\\mathcal O_X$-module and $s\\in\\Gamma(X,M)$. The generating locus of $s$ is the open union of all $U\\subseteq X$ on which $s|_U$ is a free generator: for every open $V\\subseteq U$, the map $\\Gamma(V,\\mathcal O_X)\\to\\Gamma(V,M)$, $r\\mapsto r s|_V$, is bijective. For invertible $M$ [def-sc-invertible-module], this is the nonvanishing open $X_s$, i.e. the locus where the image of $s$ in $M\\otimes\\kappa(x)$ is nonzero.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sc-invertible-module"
+ ],
+ "source": {
+  "document": "literature/stacks-project/modules.tex",
+  "place": "Tag 01CY, nonvanishing locus and local trivialization by a section"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "section ring tensor powers invertible sheaf",
+   "results": "{\"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: Internal Server Error\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "nonvanishing open of a global section of an invertible module free generator",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.LocallyRingedSpace.Γevaluation_ne_zero_iff_mem_basicOpen\", \"AlgebraicGeometry.Scheme.evaluation_ne_zero_iff_mem_basicOpen\", \"AlgebraicGeometry.LocallyRingedSpace.evaluation_ne_zero_iff_mem_basicOpen\", \"AlgebraicGeometry.RingedSpace.mem_basicOpen'\", \"AlgebraicGeometry.RingedSpace.basicOpen\", \"AlgebraicGeometry.RingedSpace.mem_top_basicOpen\", \"AlgebraicGeometry.RingedSpace.mem_basicOpen\", \"AlgebraicGeometry.Scheme.mem_basicOpen'\"], \"digest\": \"32068d6e1d605ae9\"}",
+   "date": "2026-10-11",
+   "verdict": "No exact Mathlib declaration; see local source searches."
+  },
+  {
+   "tool": "leansearch",
+   "query": "nonvanishing open of a section of an invertible module",
+   "results": "{\"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: Internal Server Error\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "generatingLocus|nonvanishing [AlgebraicGeometry]",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-11",
+   "verdict": "No exact Mathlib declaration; see local source searches."
+  },
+  {
+   "tool": "grep",
+   "query": "rg sectionRing|SectionRing|section ring|tensorPower|TensorPower in WeilConjectures and lean/Sheaf; rg generatingLocus|nonvanishing in WeilConjectures and lean/Sheaf",
+   "results": "No graded section ring. Existing tensorPow, tensorPowAddIso and tmulSection in Modules/Invertible.lean and TensorSection.lean. GeneratingLocus.lean:56 defines generatingLocus exactly, already used by Sheaf/AlgebraicGeometry/AmpleOfAffineGeneratingLoci.lean but not recorded on a definition node.",
+   "date": "2026-10-11",
+   "verdict": "Use existing tensor APIs and generatingLocus; define only the missing section ring."
+  },
+  {
+   "tool": "grep",
+   "query": "rg section ring|section-ring|sectionRing|generatingLocus dag/nodes; blueprint_refs.py search 'section ring'; blueprint_refs.py search 'nonvanishing'",
+   "results": "No definition node for either notion. Blueprint searches both returned 0 matches. Statement nodes mention section rings and generatingLocus but do not define them.",
+   "date": "2026-10-11",
+   "verdict": "New definition records needed."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sc-ample-proj-canonical-map",
+  "date": "2026-10-11",
+  "group": "M1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-pic-proper-ntorsion",
+   "place": "Canonical section-ring morphism and its nonvanishing affine charts in the ample-Proj construction.",
+   "via": [
+    "lem-sc-ample-proj-canonical-map",
+    "lem-sc-ample-proj-local-chart",
+    "lem-sc-ample-proj-open",
+    "lem-sc-ample-finite-set-affine",
+    "lem-sc-ample-finite-principal-affine",
+    "lem-sc-reduced-dim-le-one-ample",
+    "lem-sc-dim-one-ample-invertible",
+    "lem-sc-dim-one-quasi-projective",
+    "lem-sc-proper-dim-one-projective"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-curveestimate",
+ "lean": {
+  "module": "WeilConjectures.AlgebraicGeometry.Modules.GeneratingLocus",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.generatingLocus",
+  "statement": "def generatingLocus (σ : Γ(M, ⊤)) : X.Opens",
+  "branch": "slopmaster2",
+  "by": "M1",
+  "date": "2026-10-11",
+  "existing": true,
+  "note": "The source definition works for every module; on an invertible module its generating locus equals its nonvanishing locus, by the local coefficient criterion generatesAt_iff_mem_basicOpen (Stacks 01CY)."
+ },
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-apc1020",
+  "group": "M1",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-apc1020",
+  "group": "M1",
+  "result": "pass",
+  "note": "X:Scheme.{v}; L with recorded IsInvertible; S = ⨁ Γ(L.tensorPow n,⊤) with tmulSection/tensorPowAddIso.inv mul, unit in degree 0, grade = range of DirectSum.of; X_s = source generatingLocus (IsFreeGenerator on all V⊆U, = 01CY nonvanishing for invertible); hcover pointwise any d>0; ∃ f : X ⟶ Proj S; ∀ d>0 s: f⁻¹ D+(s) = X_s and f.app∘awayToSection(Away.mk ξ/s^n) · s^n|= ξ| (determines s^{-n}ξ since s^n free generator on X_s; Away.mk surjective); edge cases n=0, s=0, empty X; no Mathlib/DAG duplicate of section ring"
+ }
+}

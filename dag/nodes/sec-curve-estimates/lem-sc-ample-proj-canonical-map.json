@@ -23,7 +23,9 @@
  "stmt_deps": [
   "def-pc-scheme",
   "def-sc-invertible-module",
-  "def-pc-proj"
+  "def-pc-proj",
+  "def-sc-invertible-section-ring",
+  "def-sc-section-generating-locus"
  ],
  "proof": [
   {
@@ -160,5 +162,26 @@
   "group": "G1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-apm1812 (reviewer sub-agent of L); spot-checked: Statement vs Stacks 01PZ existence+(1) and 01N8 local formula: agrees. Steps 1-4 checked: rho_s well defined via unit s on X_s; overlap via t^d/s^e and s^e/t^d for unequal degrees correct; agreement on D_+(st) by rho_st composites (S_(st) a localization of S_(s), per def-pc-proj restriction maps); gluing node applies to assumed cover; inverse image both inclusions. Cited statements (nonvanishing-trivializes, morphism-into-affine incl. inverse-image clause, def-pc-proj charts, gluing) say what is used; tool_uses accepted as generic. No cycle: item cites none of lem-sc-ample-proj-local-chart/-open/-finite-affine-cover; local-chart uses this item (it contains the item's clauses plus the iso clause, which is the consumer's matter, not a restatement by this item). Mathlib grep ProjectiveSpectrum: only Proj.fromOfGlobalSections (Basic.lean:443/459/496), trivial-bundle case, not an exact attachment. Second reading's repairs verified; no further fault found. No repairs."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AmpleProjCanonicalMap",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_sectionRing_proj_morphism",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.exists_sectionRing_proj_morphism"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/AmpleProjCanonicalMap.lean",
+  "statement": "theorem exists_sectionRing_proj_morphism (X : Scheme.{v}) (L : X.Modules) [L.IsInvertible] (hcover : ∀ x : X, ∃ (d : ℕ) (s : sectionRingGrade L d), 0 < d ∧ x ∈ generatingLocus (s.val d)) : ∃ f : X ⟶ Proj (sectionRingGrade L), ∀ (d : ℕ) (_hd : 0 < d) (s : sectionRingGrade L d), f ⁻¹ᵁ Proj.basicOpen (sectionRingGrade L) s.val = generatingLocus (s.val d) ∧ ∀ (n : ℕ) (ξ : sectionRingGrade L (n • d)), (f.app (Proj.basicOpen (sectionRingGrade L) s.val) (Proj.awayToSection (sectionRingGrade L) s.val (HomogeneousLocalization.Away.mk (sectionRingGrade L) s.property n ξ.val ξ.property))) • (L.tensorPow (n • d)).presheaf.map (homOfLE (le_top : f ⁻¹ᵁ Proj.basicOpen (sectionRingGrade L) s.val ≤ ⊤)).op ((s.val ^ n) (n • d)) = (L.tensorPow (n • d)).presheaf.map (homOfLE (le_top : f ⁻¹ᵁ Proj.basicOpen (sectionRingGrade L) s.val ≤ ⊤)).op (ξ.val (n • d))",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-apc1020",
+  "group": "M1",
+  "result": "pass",
+  "note": "X:Scheme.{v}; L with recorded IsInvertible; S = ⨁ Γ(L.tensorPow n,⊤) with tmulSection/tensorPowAddIso.inv mul, unit in degree 0, grade = range of DirectSum.of; X_s = source generatingLocus (IsFreeGenerator on all V⊆U, = 01CY nonvanishing for invertible); hcover pointwise any d>0; ∃ f : X ⟶ Proj S; ∀ d>0 s: f⁻¹ D+(s) = X_s and f.app∘awayToSection(Away.mk ξ/s^n) · s^n|= ξ| (determines s^{-n}ξ since s^n free generator on X_s; Away.mk surjective); edge cases n=0, s=0, empty X; no Mathlib/DAG duplicate of section ring"
  }
 }
