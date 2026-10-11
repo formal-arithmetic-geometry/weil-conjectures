@@ -159,5 +159,23 @@
   "group": "H1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-peb0000 (reviewer sub-agent of L); spot-checked: Interval arithmetic by hand: Tor amp [u,v] of K^vee gives H^j(K^vee(x)L)=0 if H^q(L)=0 on [j-v,j-u]; union over j in [-N,0] is [-v-N,-u], a=-v-N<=b=-u; gap node statement true (C4 ok); Step 1 comparison+global-sections nodes match; Leray/affine route for H^q(X,G)=0, q>=N, fine. Citer lem-sc-affine-perfect-plus-locally-free uses it on qcqs U as stated. FIX more, RETURN less: (1) class (d) new node lem-sc-perfect-qcoh-global-sections-truncation dropped: it is three lines from existing lem-pc-unbounded-derived-functor-cohomological-bound (Tag 08D4(3), b=-N-1) + truncation triangle + lem-weil-pbc-derived-functor-negative-vanishing (05TC, declared tool use); Step 3 rewritten with these, N:=max(n,0) to meet the N>=0 hypothesis (missed by second reading).; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.PerfectHomGap",
+  "declaration": "AlgebraicGeometry.Scheme.exists_subsingleton_hom_of_isPerfect",
+  "file": "lean/Sheaf/AlgebraicGeometry/PerfectHomGap.lean",
+  "statement": "theorem exists_subsingleton_hom_of_isPerfect (X : Scheme.{u}) [CompactSpace X] [QuasiSeparatedSpace X] [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] [∀ U : X.Opens, HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))] (K : schemeDerivedCategory X) (hK : IsPerfect X K) : ∃ a b : ℤ, a ≤ b ∧ ∀ L : schemeDerivedCategory X, schemeDerivedQCohProperty X L → (∀ i : ℤ, a ≤ i → i ≤ b → IsZero ((DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings X.toRingedSpace)) i).obj L)) → Subsingleton (K ⟶ L)",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-peb1504",
+  "group": "G1",
+  "result": "pass",
+  "note": "qcqs as [CompactSpace X][QuasiSeparatedSpace X] (as PerfectObjectCompact); K : schemeDerivedCategory X with IsPerfect X K and its HasDerivedCategory binders only; ∃ a b : ℤ, a ≤ b before ∀ L (a,b independent of L); L in D_QCoh via schemeDerivedQCohProperty, no boundedness; H^i(L) zero via IsZero of homologyFunctor object (a sheaf, not a Type) for i in closed [a,b]; Hom(K,L)=0 as Subsingleton (K ⟶ L); node diff only adds lean; no new defs/nodes"
  }
 }
