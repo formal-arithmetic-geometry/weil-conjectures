@@ -3995,3 +3995,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 09:21 L: merged deliver/F1/lem-weil-pbc-completion-dimension (stage 2; reviewer PASS; first push; Sheaf.RingTheory.CompletionDimension RingTheory.completion_dimension)
 - 09:21 L: merged deliver/H1/def-sp-kinjective-bridge (stage 2; reviewer PASS; first push; Sheaf.CategoryTheory.KInjectiveBridge CategoryTheory.Functor.rightDerivedComplexWithResolution)
 - 09:21 L: merged deliver/G1/lem-weil-pbc-complete-local-quotient (stage 2; reviewer PASS; first push; Sheaf.RingTheory.CompleteLocalQuotient quotient_complete_local)
+- 09:21 L: merged deliver/G1/lem-weil-pbc-constructible-in-retrocompact-open (stage 2; reviewer PASS; first push; Sheaf.Topology.ConstructibleInConstructible Topology.isConstructible_of_isConstructible_subspace)
