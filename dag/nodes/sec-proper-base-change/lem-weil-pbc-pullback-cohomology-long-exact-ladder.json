@@ -299,5 +299,24 @@
   "by": "L",
   "result": "pass",
   "note": "statement made precise (δ^q as H^q of the shift of RΓ of the mapping-cone map w); eleven steps (exactness of u^{-1}; the two triangles; RΓ triangulated and the long exact sequence; identification of terms; the start in degree 0 via a bounded below injective representative; u^{-1} carries the triangle to the pulled-back triangle by the new leaf (Ext/Map.lean:81/109, verified); naturality of u^* on D^+ from the derived-unit description; compatibility with the shift written out; a morphism of triangles; H^q(θ) is the pullback; the ladder); 1 new Mathlib leaf; the generic prop-weil-pbc-inverse-image-exact and lem-weil-pbc-module-sheaves-enough-injectives accepted as tool uses"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.PullbackCohomologyLongExactLadder",
+  "declaration": "AlgebraicGeometry.Etale.pullbackCohomology_longExact_ladder",
+  "file": "lean/Sheaf/AlgebraicGeometry/PullbackCohomologyLongExactLadder.lean",
+  "statement": "theorem pullbackCohomology_longExact_ladder {X Y : Scheme.{u}} (f : Y ⟶ X) (S : ShortComplex (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})) (hS : S.ShortExact) : ∃ hY : (S.map ((f)^*[AddCommGrpCat.{u + 1}])).ShortExact, ∃ δX : ∀ q : ℕ, Sheaf.H S.X₃ q →+ Sheaf.H S.X₁ (q + 1), ∃ δY : ∀ q : ℕ, Sheaf.H (((f)^*[AddCommGrpCat.{u + 1}]).obj S.X₃) q →+ Sheaf.H (((f)^*[AddCommGrpCat.{u + 1}]).obj S.X₁) (q + 1), (∀ (q : ℕ) (x : Sheaf.H S.X₃ q), δX q x = x.comp hS.extClass rfl) ∧ (∀ (q : ℕ) (x : Sheaf.H (((f)^*[AddCommGrpCat.{u + 1}]).obj S.X₃) q), δY q x = x.comp hY.extClass rfl) ∧ Function.Injective (Sheaf.H.map S.f 0) ∧ Function.Injective (Sheaf.H.map (((f)^*[AddCommGrpCat.{u + 1}]).map S.f) 0) ∧ (∀ q : ℕ, Function.Exact (Sheaf.H.map S.f q) (Sheaf.H.map S.g q) ∧ Function.Exact (Sheaf.H.map S.g q) (δX q) ∧ Function.Exact (δX q) (Sheaf.H.map S.f (q + 1))) ∧ (∀ q : ℕ, Function.Exact (Sheaf.H.map (((f)^*[AddCommGrpCat.{u + 1}]).map S.f) q) (Sheaf.H.map (((f)^*[AddCommGrpCat.{u + 1}]).map S.g) q) ∧ Function.Exact (Sheaf.H.map (((f)^*[AddCommGrpCat.{u + 1}]).map S.g) q) (δY q) ∧ Function.Exact (δY q) (Sheaf.H.map (((f)^*[AddCommGrpCat.{u + 1}]).map S.f) (q + 1))) ∧ (∀ (q : ℕ) (x : Sheaf.H S.X₁ q), cohomologyMap f S.X₂ q (Sheaf.H.map S.f q x) = Sheaf.H.map (((f)^*[AddCommGrpCat.{u + 1}]).map S.f) q (cohomologyMap f S.X₁ q x)) ∧ (∀ (q : ℕ) (x : Sheaf.H S.X₂ q), cohomologyMap f S.X₃ q (Sheaf.H.map S.g q x) = Sheaf.H.map (((f)^*[AddCommGrpCat.{u + 1}]).map S.g) q (cohomologyMap f S.X₂ q x)) ∧ (∀ (q : ℕ) (x : Sheaf.H S.X₃ q), cohomologyMap f S.X₁ (q + 1) (δX q x) = δY q (cohomologyMap f S.X₃ q x))",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-11",
+  "existing": false,
+  "note": "Uses the existing Sheaf.H/cohomologyMap encoding specified by the recorded cohomology and pullback nodes. The connecting maps are explicitly postcomposition with the canonical extClass, whose derived morphism is singleδ (ShortExact.extClass_hom), hence the prescribed mapping-cone connecting map under the derived-global-sections identification. No new cohomology or pullback definition."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-lel",
+  "group": "J1",
+  "result": "pass",
+  "note": "arbitrary f:Y->X; S ShortComplex of Ab(X_et) + hS.ShortExact; clause1 S.map upperStar ShortExact; deltaX/deltaY tied to x.comp extClass rfl (extClass_hom = singleδ); H0 injections + three Function.Exact per q on X and Y; alpha/beta/delta squares with cohomologyMap (node clause 3, not copied from landed records)"
  }
 }
