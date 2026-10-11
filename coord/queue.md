@@ -1,11 +1,11 @@
 # Work queue
 
-986 items; claim with `tools/claim.py next <group> [--stage N]`.
+983 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (986)
+## Stage 2: nodes to state (983)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -33,7 +33,6 @@
 | `lem-galois-fpqc-morphisms-descend` | 1 | state |
 | `lem-galois-fpqc-pullback-canonical-iso` | 1 | state |
 | `lem-kun-separable-smooth-colimit` | 1 | state |
-| `lem-kun-stalks-commute-colimits` | 1 | state |
 | `lem-kun-support-geometric-point-independent` | 1 | state |
 | `lem-pc-affine-flat-module-descent` | 1 | state |
 | `lem-pc-affine-tilde-kflat` | 1 | state |
@@ -46,7 +45,6 @@
 | `lem-pc-derived-lower-truncation-step-triangle` | 1 | state |
 | `lem-pc-derived-splitting-unique` | 1 | state |
 | `lem-pc-derived-tensor-flat-second-localization` | 1 | state |
-| `lem-pc-derived-total-resolution-quasi-iso` | 1 | state |
 | `lem-pc-dim-zero-finite-over-field` | 1 | state |
 | `lem-pc-finite-affine-fibre-sections` | 1 | state |
 | `lem-pc-finite-flat-restriction-projective` | 1 | state |
@@ -56,7 +54,6 @@
 | `lem-pc-fppf-affine-sheafification-restriction` | 1 | state |
 | `lem-pc-fppf-affine-site-topos-equivalence` | 1 | state |
 | `lem-pc-h0-proper-variety` | 1 | state |
-| `lem-pc-inseparable-tensor-nilpotent` | 1 | state |
 | `lem-pc-kflat-cone-direct-sum` | 1 | state |
 | `lem-pc-kflat-hocolim-truncations` | 1 | state |
 | `lem-pc-kflat-stalk-criterion` | 1 | state |
