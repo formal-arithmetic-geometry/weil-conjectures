@@ -171,5 +171,24 @@
   "by": "L",
   "result": "pass",
   "note": "Five steps along Stacks 09ZM with the unchecked hypotheses of 01Z6 written out (qcqs pieces, the limit of the preimages of an affine open is the preimage in the limit via the 01YX node), 01Z6 by the existing leaf, affineness local on the target (01S8 tool). Correct; 0 new nodes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EventuallyAffine",
+  "declaration": "AlgebraicGeometry.eventually_affine",
+  "file": "lean/Sheaf/AlgebraicGeometry/EventuallyAffine.lean",
+  "statement": "theorem eventually_affine {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I] (T : Scheme.{u}) [CompactSpace T] [QuasiSeparatedSpace T] (D : Iᵒᵖ ⥤ Scheme.{u}) [∀ i : Iᵒᵖ, CompactSpace (D.obj i)] [∀ i : Iᵒᵖ, QuasiSeparatedSpace (D.obj i)] [∀ {i j : Iᵒᵖ} (f : i ⟶ j), IsAffineHom (D.map f)] (h : D ⟶ (Functor.const Iᵒᵖ).obj T) (c : Cone D) (_hc : IsLimit c) (f : c.pt ⟶ T) (_hf : ∀ i : Iᵒᵖ, c.π.app i ≫ h.app i = f) [IsAffineHom f] : ∃ i : I, ∀ j : I, i ≤ j → IsAffineHom (h.app (op j))",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-eva1145"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-eva1145",
+  "group": "H1",
+  "result": "fix",
+  "note": "I : Type u (was independent w: INDEX UNIVERSES), nonempty directed preorder, qcqs T and stages, IsAffineHom transitions, Cone+IsLimit, inverse system over T as K1 6fc533ce2 (h : D ⟶ const T, f, c.π ≫ h = f), IsAffineHom f non-hollow, conclusion ∃ i ∀ j ≥ i IsAffineHom (h.app (op j))"
  }
 }
