@@ -175,13 +175,14 @@ theorem X_pow_dvd_lFactorLogDeriv (ι : PadicAlgCl l →+* ℂ) (F : WeilSheaf k
 
 /-- The coefficients of the logarithmic derivative of a local factor:
 `d(x) ι tr(Fₓ^{n / d(x)})` in degrees `n ≥ 1` divisible by `d(x)`, and `0` otherwise. -/
-theorem coeff_lFactorLogDeriv (ι : PadicAlgCl l →+* ℂ) (F : WeilSheaf k₀ l X) (x : X.finitePoints)
-    (n : ℕ) : coeff n (F.lFactorLogDeriv ι x) =
-    if (X ↘ Spec (CommRingCat.of k₀)).degreeOver x.1 ∣ n ∧ n ≠ 0 then
-      ((X ↘ Spec (CommRingCat.of k₀)).degreeOver x.1 : ℂ) *
-        ι (LinearMap.trace (PadicAlgCl l) _ ((F.stalk x).frobeniusEnd ^
-          (n / (X ↘ Spec (CommRingCat.of k₀)).degreeOver x.1)))
-    else 0 := by
+theorem coeff_lFactorLogDeriv (ι : PadicAlgCl l →+* ℂ) (F : WeilSheaf k₀ l X)
+    (x : X.finitePoints) (n : ℕ) :
+    coeff n (F.lFactorLogDeriv ι x) =
+      if (X ↘ Spec (CommRingCat.of k₀)).degreeOver x.1 ∣ n ∧ n ≠ 0 then
+        ((X ↘ Spec (CommRingCat.of k₀)).degreeOver x.1 : ℂ) *
+          ι (LinearMap.trace (PadicAlgCl l) _ ((F.stalk x).frobeniusEnd ^
+            (n / (X ↘ Spec (CommRingCat.of k₀)).degreeOver x.1)))
+      else 0 := by
   have hd := (X ↘ Spec (CommRingCat.of k₀)).degreeOver_ne_zero x.2
   rw [lFactorLogDeriv, coeff_C_mul, coeff_expand]
   by_cases h₁ : (X ↘ Spec (CommRingCat.of k₀)).degreeOver x.1 ∣ n

@@ -8,6 +8,8 @@ module
 public import Mathlib.Analysis.Analytic.ConvergenceRadius
 public import Mathlib.Analysis.Analytic.OfScalars
 public import Mathlib.Analysis.Complex.Basic
+public import Mathlib.Analysis.Complex.Polynomial.Basic
+public import Mathlib.RingTheory.EuclideanDomain
 public import Mathlib.Analysis.Normed.Ring.InfiniteSum
 public import Mathlib.Analysis.SpecificLimits.Normed
 public import Mathlib.RingTheory.PowerSeries.Derivative
@@ -317,6 +319,49 @@ theorem radius_le_of_mul_eq {f : 𝕜⟦X⟧} {P Q : Polynomial 𝕜} (h : f * (
   rw [hQ, mul_zero] at this
   exact hP this.symm
 
+
+/-- **A rational function which is not a polynomial has a pole.** If `f D = N` for polynomials
+`N` and `D ≠ 0` over `ℂ`, every zero of `D` has absolute value at most `R`, and `f` is not
+everywhere convergent, then the radius of convergence of `f` is at most `R`: in lowest terms
+`f = N₀ / D₀` the denominator `D₀` divides `D` and is not constant, and a zero of `D₀` is not a
+zero of `N₀`. -/
+theorem radius_le_of_mul_coe_eq {f : ℂ⟦X⟧} {N D : Polynomial ℂ} (h : f * D = N) (hD : D ≠ 0)
+    {R : ℝ≥0} (hroots : ∀ z, D.eval z = 0 → ‖z‖₊ ≤ R) (hf : f.radius ≠ ⊤) : f.radius ≤ R := by
+  classical
+  set g := GCDMonoid.gcd N D
+  have hg : g ≠ 0 := gcd_ne_zero_of_right hD
+  set N₀ := N / g
+  set D₀ := D / g
+  have hN : g * N₀ = N := EuclideanDomain.mul_div_cancel' hg (gcd_dvd_left _ _)
+  have hD' : g * D₀ = D := EuclideanDomain.mul_div_cancel' hg (gcd_dvd_right _ _)
+  have hcop : IsCoprime N₀ D₀ := isCoprime_div_gcd_div_gcd hD
+  have h₀ : f * D₀ = N₀ := by
+    have hg' : (g : ℂ⟦X⟧) ≠ 0 := by
+      rw [Ne, Polynomial.coe_eq_zero_iff]
+      exact hg
+    refine sub_eq_zero.1 ((mul_eq_zero.1 ?_).resolve_left hg')
+    rw [mul_sub, ← mul_assoc, mul_comm (g : ℂ⟦X⟧) f, mul_assoc, ← Polynomial.coe_mul, hD',
+      ← Polynomial.coe_mul, hN, h, sub_self]
+  by_cases hdeg : D₀.degree = 0
+  · exfalso
+    have hc := Polynomial.eq_C_of_degree_eq_zero hdeg
+    set c := D₀.coeff 0
+    have hc0 : c ≠ 0 := fun h0 ↦ hD (by rw [<- hD', hc, h0, map_zero, mul_zero])
+    refine hf ?_
+    have hf' : f = ((N₀ * Polynomial.C c⁻¹ : Polynomial ℂ) : ℂ⟦X⟧) := by
+      rw [Polynomial.coe_mul, <- h₀, hc, Polynomial.coe_C, Polynomial.coe_C, mul_assoc, <- map_mul,
+        mul_inv_cancel₀ hc0, map_one, mul_one]
+    rw [hf', radius_coe]
+  · obtain ⟨z, hz⟩ := IsAlgClosed.exists_root D₀ hdeg
+    have hNz : N₀.eval z ≠ 0 := by
+      obtain ⟨a, b, hab⟩ := hcop
+      intro h0
+      have := congrArg (Polynomial.eval z) hab
+      rw [Polynomial.eval_add, Polynomial.eval_mul, Polynomial.eval_mul, h0, hz.eq_zero,
+        mul_zero, mul_zero, add_zero, Polynomial.eval_one] at this
+      exact zero_ne_one this
+    refine (radius_le_of_mul_eq h₀ hz.eq_zero hNz).trans ?_
+    exact_mod_cast hroots z (by rw [← hD', Polynomial.eval_mul, hz.eq_zero, mul_zero])
 end Pole
 
 section LogDerivative

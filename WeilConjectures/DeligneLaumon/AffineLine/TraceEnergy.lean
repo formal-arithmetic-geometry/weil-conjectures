@@ -19,7 +19,10 @@ public import Mathlib.RingTheory.PowerSeries.PiTopology
 public import WeilConjectures.DeligneLaumon.AffineLine.Endpoints
 public import WeilConjectures.WeilSheaf.StalkFunctor
 public import WeilConjectures.WeilSheaf.StalkConstantTwist
+public import WeilConjectures.WeilSheaf.EulerProduct
+public import WeilConjectures.WeilSheaf.LowerStarId
 public import WeilConjectures.WeilSheaf.LSeries
+public import WeilConjectures.WeilSheaf.TateTwistCohomology
 public import WeilConjectures.WeilSheaf.StalkTensor
 public import WeilConjectures.WeilSheaf.Tensor
 public import WeilConjectures.WeilSheaf.TraceFunction
@@ -70,12 +73,11 @@ passing to the normalized real envelope `N⁰ ⊕ (N⁰)^∨` of the constant tw
 The analytic part (the `L²`-weight, its radius characterisation and the energy bound) is proved
 in general.
 
-## TODO
-
-Prove the inputs about Weil sheaves, stated with `sorry`: the traces of twists, envelopes and
-tensor products, the trace energy bound from an upper
-weight bound, the decomposition of the trace energy of `j_*M` and the bound on its boundary
-part, and the `L²`-rigidity for real sheaves.
+The `L²`-rigidity for real sheaves uses the Euler product of the `L`-series of `G ⊗ G` on the
+curve (`AlgebraicGeometry.WeilSheaf.lSeries_mul_localPolynomial_compactlySupportedCohomology_two`,
+the Grothendieck–Lefschetz trace formula) and the purity of `H_c²`
+(`AlgebraicGeometry.isPureOfWeightOver_compactlySupportedCohomology_directImage_two` for the
+identity of the curve).
 -/
 
 @[expose] public section
@@ -638,8 +640,82 @@ theorem l2Weight_eq_of_isReal (ι : PadicAlgCl l →+* ℂ) {V : Scheme.{u}}
     [GeometricallyConnected (V ↘ Spec (CommRingCat.of k₀))]
     (G : WeilSheaf k₀ l V) (hG : ¬ Limits.IsZero G) (hlisse : G.IsLisse) (hreal : G.IsReal ι)
     {w : ℝ} (hpure : G.IsPunctuallyPureOfWeight ι w) :
-    G.l2Weight ι = w :=
-  sorry
+    G.l2Weight ι = w := by
+  have : QuasiCompact (V ↘ Spec (CommRingCat.of k₀)) := inferInstance
+  have hq : (1 : ℝ) < Nat.card k₀ := by exact_mod_cast Finite.one_lt_card
+  set T := G.tensorObj G hlisse
+  have hTl : T.IsLisse := hlisse.tensorObj hlisse
+  have hTp : T.IsPunctuallyPureOfWeight ι (w + w) := hpure.tensorObj hlisse hpure
+  -- `φ_G = L'/L` for the `L`-series of `G ⊗ G`
+  have hconj : ∀ x : V.finitePoints, (G.stalk x).localPolynomial.map ι =
+      ((G.stalk x).localPolynomial.map ι).map (starRingEnd ℂ) := fun x ↦ by
+    ext n
+    rw [Polynomial.coeff_map, Polynomial.coeff_map, Polynomial.coeff_map, hreal x n]
+  have hφL := (traceFunction_tensorObj_and_l2Series_mul_lSeries ι G G hlisse hconj).2
+  have hrad1 : (G.l2Series ι).radius ≤ (T.lSeries ι).radius := by
+    rw [l2Series, FormalMultilinearSeries.radius_ofScalars_real_eq]
+    exact PowerSeries.radius_le_radius_of_derivative_eq_mul hφL.symm
+  -- the `L`-series is not a polynomial: it dominates a local factor of positive degree
+  have hLtop : (T.lSeries ι).radius ≠ ⊤ := by
+    obtain ⟨x, hx⟩ := G.exists_nontrivial_stalk_of_not_isZero hG
+    have hle := PowerSeries.radius_tprod_le_radius
+      (hreal.hasNonnegCoeffs_lFactor_tensorObj hlisse) (constantCoeff_lFactor ι T)
+      (multipliable_lFactor ι T) x
+    set d := (V ↘ Spec (CommRingCat.of k₀)).degreeOver x.1
+    set Q : Polynomial ℂ := ((T.stalk x).localPolynomial.map ι).comp (Polynomial.X ^ d)
+    have hd : d ≠ 0 := (V ↘ Spec (CommRingCat.of k₀)).degreeOver_ne_zero x.2
+    have hrank : Module.finrank (PadicAlgCl l) (T.stalk x).carrier ≠ 0 := by
+      have e₁ : (T.stalk x).carrier ≃ₗ[PadicAlgCl l]
+          (((G.dual hlisse).stalk x).carrier →ₗ[PadicAlgCl l] (G.stalk x).carrier) :=
+        stalkAtTensorObjEquiv _ _ _ G G hlisse
+      have e₂ : ((G.dual hlisse).stalk x).carrier ≃ₗ[PadicAlgCl l]
+          Module.Dual (PadicAlgCl l) (G.stalk x).carrier :=
+        (stalkAtDualEquiv _ _ _ G hlisse).toLinearEquiv
+      rw [e₁.finrank_eq, Module.finrank_linearMap, e₂.finrank_eq, Subspace.dual_finrank_eq]
+      exact mul_ne_zero Module.finrank_pos.ne' Module.finrank_pos.ne'
+    have hQdeg : Q.degree ≠ 0 := by
+      refine fun h0 ↦ mul_ne_zero ?_ (by simpa using hd)
+        (Polynomial.natDegree_eq_zero_iff_degree_le_zero.2 h0.le |>
+          (Polynomial.natDegree_comp.symm.trans ·))
+      rw [Polynomial.natDegree_map, FrobeniusModule.natDegree_localPolynomial]
+      exact hrank
+    obtain ⟨z, hz⟩ := IsAlgClosed.exists_root Q hQdeg
+    have hQ0 : Q.coeff 0 ≠ 0 := by
+      rw [Polynomial.coeff_zero_eq_eval_zero, Polynomial.eval_comp, Polynomial.eval_pow,
+        Polynomial.eval_X, zero_pow hd, ← Polynomial.coeff_zero_eq_eval_zero,
+        Polynomial.coeff_map, FrobeniusModule.coeff_zero_localPolynomial, map_one]
+      exact one_ne_zero
+    have hzr : (T.lFactor ι x).radius ≤ ‖z‖₊ := by
+      by_contra h
+      exact PowerSeries.eval_ne_zero_of_lt_radius_inv hQ0 (not_le.1 h) hz.eq_zero
+    exact ne_top_of_le_ne_top ENNReal.coe_ne_top (hle.trans hzr)
+  -- the denominator `det(1 - Ft | H_c²)` has its zeros on `|t| = q^{-w-1}`
+  set R : ℝ := (Nat.card k₀ : ℝ) ^ (-(w + 1))
+  have h2 : (T.compactlySupportedCohomology 2).IsPureOfWeight ι (Nat.card k₀) (w + w + 2) :=
+    FrobeniusModule.IsPureOfWeight.of_equiv
+      (compactlySupportedCohomologyEquivOfIso (lowerStarIdIso T).symm 2)
+      (isPureOfWeightOver_compactlySupportedCohomology_directImage_two (𝟙 V) T ι hTl hTp)
+  have hD : ((T.compactlySupportedCohomology 2).localPolynomial.map ι) ≠ 0 := fun h0 ↦ by
+    have := congrArg (Polynomial.coeff · 0) h0
+    simp [FrobeniusModule.coeff_zero_localPolynomial] at this
+  have hroots : ∀ z : ℂ, ((T.compactlySupportedCohomology 2).localPolynomial.map ι).eval z = 0 →
+      ‖z‖₊ ≤ R.toNNReal := fun z hz ↦ by
+    rw [← NNReal.coe_le_coe, coe_nnnorm, h2.norm_eq_of_eval_map_localPolynomial_eq_zero hz,
+      Real.coe_toNNReal _ (by positivity)]
+    exact le_of_eq (by congr 1; ring)
+  have hLR : (T.lSeries ι).radius ≤ ENNReal.ofReal R :=
+    PowerSeries.radius_le_of_mul_coe_eq
+      (lSeries_mul_localPolynomial_compactlySupportedCohomology_two ι T hTl) hD hroots hLtop
+  -- conclusion
+  refine le_antisymm (l2Weight_le_of_hasWeightsAtMost ι G hlisse hpure.hasWeightsAtMost) ?_
+  by_contra hlt
+  rw [not_le] at hlt
+  obtain ⟨β, hβ1, hβ2⟩ := EReal.lt_iff_exists_real_btwn.1 hlt
+  have hβw : β < w := EReal.coe_lt_coe_iff.1 hβ2
+  have hβ := (lt_l2Weight_iff ι G β).2 ((hrad1.trans hLR).trans_lt
+    ((ENNReal.ofReal_lt_ofReal_iff (by positivity)).2
+      (Real.rpow_lt_rpow_of_exponent_lt hq (by linarith))))
+  exact hβ1.not_gt hβ
 
 /-- The *`L²`-weight of a punctually pure lisse sheaf equals its weight*: let `G` be a nonzero
 lisse Weil sheaf on the smooth geometrically connected affine curve `X₀`, punctually `ι`-pure

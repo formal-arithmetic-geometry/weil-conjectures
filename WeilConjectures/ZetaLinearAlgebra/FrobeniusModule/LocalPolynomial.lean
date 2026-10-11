@@ -5,6 +5,9 @@ Authors: Claude
 -/
 module
 
+public import Mathlib.Analysis.Complex.Basic
+public import WeilConjectures.Mathlib.Algebra.Polynomial.FieldDivision
+public import WeilConjectures.Mathlib.LinearAlgebra.Matrix.Charpoly.Eigs
 public import WeilConjectures.ZetaLinearAlgebra.FrobeniusModule.TraceSeries
 
 /-!
@@ -87,5 +90,27 @@ theorem map_trace_frobeniusEnd_pow_eq_of_map_localPolynomial_eq (M : FrobeniusMo
       natDegree_localPolynomial] at hd
     simp [LinearMap.trace_one, hd]
   · exact LinearMap.map_trace_pow_eq_of_map_charpolyRev_eq _ _ φ ψ h hn
+
+/-- The zeros of the image under `ι` of the local polynomial `det(1 - T F)` of a module pure of
+weight `w` relative to `q` have absolute value `q^{-w/2}`: they are the inverses of the images of
+the eigenvalues of `F`. -/
+theorem IsPureOfWeight.norm_eq_of_eval_map_localPolynomial_eq_zero [IsAlgClosed K] {ι : K →+* ℂ}
+    {q : ℕ} {M : FrobeniusModule.{u} K} {w : ℝ} (h : M.IsPureOfWeight ι q w) {z : ℂ}
+    (hz : (M.localPolynomial.map ι).eval z = 0) : ‖z‖ = (q : ℝ) ^ (-(w / 2)) := by
+  rw [localPolynomial, LinearMap.charpolyRev_eq_prod_roots,
+    Polynomial.map_multiset_prod_one_sub_C_mul_X, Polynomial.eval_multiset_prod,
+    Multiset.prod_eq_zero_iff, Multiset.map_map] at hz
+  obtain ⟨a, ha, hza⟩ := Multiset.mem_map.1 hz
+  simp only [Function.comp_apply, Polynomial.eval_sub, Polynomial.eval_one,
+    Polynomial.eval_mul, Polynomial.eval_C, Polynomial.eval_X] at hza
+  obtain ⟨b, hb, rfl⟩ := Multiset.mem_map.1 ha
+  have hb' : M.frobeniusEnd.HasEigenvalue b := by
+    rw [Module.End.hasEigenvalue_iff_isRoot_charpoly]
+    exact (Polynomial.mem_roots (LinearMap.charpoly_monic _).ne_zero).1 hb
+  have hnorm := h b hb'
+  have h1 : ι b * z = 1 := (sub_eq_zero.1 hza).symm
+  have h2 : ‖ι b‖ * ‖z‖ = 1 := by rw [← norm_mul, h1, norm_one]
+  rw [Real.rpow_neg (Nat.cast_nonneg q), ← hnorm]
+  exact eq_inv_of_mul_eq_one_right h2
 
 end FrobeniusModule
