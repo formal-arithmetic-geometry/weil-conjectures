@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import Mathlib.Algebra.Category.ModuleCat.Biproducts
 public import Mathlib.LinearAlgebra.TensorProduct.Basis
 public import WeilConjectures.CategoryTheory.Sites.FlatLocalRelations
 
@@ -77,6 +78,63 @@ lemma ModuleCat.ExtendScalars.equivFinsuppOfBasisLeft_smul (s : S)
   exact TensorProduct.equivFinsuppOfBasisLeft_apply_tmul_apply b _ _ m
 
 end Coordinates
+
+section Unit
+
+variable {R S : Type u} [CommRing R] [CommRing S] (φ : R →+* S) {ι : Type} [Finite ι]
+  (b : Module.Basis ι R ((ModuleCat.restrictScalars φ).obj (ModuleCat.of S S)))
+
+/-- For a basis `b` of `S` over `R` and an `R`-module `M`, the maps `m ↦ b i ⊗ m`, that is the
+unit `m ↦ 1 ⊗ m` of extension of scalars followed by multiplication by `b i`, exhibit `S ⊗_R M`
+as a sum of copies of `M`. -/
+lemma ModuleCat.ExtendScalars.isIso_biproductDesc_unit_comp_map_smul (M : ModuleCat.{u} R) :
+    IsIso (biproduct.desc fun i ↦
+      (ModuleCat.extendRestrictScalarsAdj.{u, u, u} φ).unit.app M ≫
+        (ModuleCat.restrictScalars.{u} φ).map
+          (ModuleCat.restrictScalarsSelfVal φ (b i) • 𝟙 ((ModuleCat.extendScalars φ).obj M))) := by
+  classical
+  have := Fintype.ofFinite ι
+  -- the coordinates in the basis `b`, as `R`-linear maps
+  let coord (i : ι) : (ModuleCat.restrictScalars φ).obj ((ModuleCat.extendScalars φ).obj M) ⟶ M :=
+    ModuleCat.ofHom (X := (ModuleCat.restrictScalars φ).obj ((ModuleCat.extendScalars φ).obj M))
+      { toFun y := TensorProduct.equivFinsuppOfBasisLeft b y i
+        map_add' y y' := by simp
+        map_smul' r y := by
+          change TensorProduct.equivFinsuppOfBasisLeft b (φ r • y) i = _
+          rw [ModuleCat.ExtendScalars.equivFinsuppOfBasisLeft_smul φ b]
+          have e (k : ι) : b.repr (φ r * ModuleCat.restrictScalarsSelfVal φ (b k)) =
+              r • Finsupp.single k 1 := by
+            change b.repr (r • b k) = _
+            rw [map_smul, Module.Basis.repr_self]
+          simp only [e, Finsupp.smul_apply, Finsupp.single_apply, smul_eq_mul, mul_ite, mul_one,
+            mul_zero, ite_smul, zero_smul, Finset.sum_ite_eq', Finset.mem_univ, if_true,
+            RingHom.id_apply] }
+  refine ⟨biproduct.lift coord, ?_, ?_⟩
+  · apply biproduct.hom_ext'
+    intro j
+    apply biproduct.hom_ext
+    intro k
+    simp only [biproduct.ι_desc_assoc, Category.assoc, biproduct.lift_π, Category.id_comp,
+      biproduct.ι_π]
+    ext m
+    change TensorProduct.equivFinsuppOfBasisLeft b
+      ((ModuleCat.restrictScalarsSelfVal φ (b j) * 1) ⊗ₜ[R, φ] m) k = _
+    rw [mul_one, TensorProduct.equivFinsuppOfBasisLeft_apply_tmul_apply, Module.Basis.repr_self,
+      Finsupp.single_apply]
+    by_cases h : j = k
+    · subst h
+      simp
+    · simp [h]
+  · rw [biproduct.lift_desc]
+    ext y
+    conv_rhs => rw [← ModuleCat.ExtendScalars.sum_basis_tmul_equivFinsuppOfBasisLeft φ b y]
+    simp only [ModuleCat.hom_sum, LinearMap.sum_apply, ModuleCat.hom_id, LinearMap.id_apply]
+    refine Finset.sum_congr rfl fun j _ ↦ ?_
+    change (ModuleCat.restrictScalarsSelfVal φ (b j) * 1) ⊗ₜ[R, φ] _ = _
+    rw [mul_one]
+    rfl
+
+end Unit
 
 namespace Presheaf
 
