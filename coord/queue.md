@@ -1,11 +1,11 @@
 # Work queue
 
-331 items; claim with `tools/claim.py next <group> [--stage N]`.
+326 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (331)
+## Stage 2: nodes to state (326)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -22,7 +22,6 @@
 | `lem-sc-derived-mayer-vietoris-triangle` | 1 | state |
 | `lem-sc-hilb-dominating-power` | 1 | state |
 | `lem-sc-hilbert-embedded-points-gluing` | 1 | state |
-| `lem-sc-koszul-regular-sequence-dual-complex` | 1 | state |
 | `lem-sc-p1-graded-nakayama-free` | 1 | state |
 | `lem-sc-p1-graded-syzygy` | 1 | state |
 | `lem-sc-p1-koszul-resolution` | 1 | state |
@@ -33,13 +32,9 @@
 | `lem-weil-pbc-pair-henselization` | 1 | state |
 | `lem-weil-pbc-projective-ample-invertible` | 1 | state |
 | `lem-weil-pbc-projective-space-twisting-sheaf-charts` | 1 | state |
-| `lem-weil-pbc-reduction-universal-homeomorphism` | 1 | state |
 | `lem-weil-pbc-regular-base-change` | 1 | state |
 | `lem-weil-pbc-regular-local-quotient-kernel-parameters` | 1 | state |
-| `lem-weil-pbc-regular-local-separable-residue-smooth` | 1 | state |
-| `lem-weil-pbc-regular-ring-local-criterion` | 1 | state |
 | `lem-weil-pbc-regular-sequence-conormal-free` | 1 | state |
-| `lem-weil-pbc-regular-sequence-koszul-regular` | 1 | state |
 | `lem-weil-pbc-regular-sequence-short-exact-sequence` | 1 | state |
 | `lem-weil-pbc-regular-through-localization` | 1 | state |
 | `lem-weil-pbc-regularity-rk-goes-up` | 1 | state |
