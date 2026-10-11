@@ -153,5 +153,23 @@
   "group": "F1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-atr2834 (reviewer sub-agent of L); spot-checked: Statement unchanged from sheaf-dag and still assumes I finitely generated (E7); matches Stacks 09B8 plus separatedness/topology clauses; M1 Step 1 uses only quotient iso, topology and separatedness with I=(varpi_E) principal (C4 met). Mathlib grep of RingTheory/AdicCompletion (AdicCompletion, IsAdicComplete, of_mk_eq): only AdicCompletion.isAdicComplete (Completeness.lean:185) for the completion itself, no tower theorem. FIX more, RETURN less: (1) C1: old Step 2 used I-adic completeness of M (Stacks 09B7, where I f.g. enters via 05GG) as an uncited elementary fact, and Step 3 then re-derived completeness from it; new Step 2 proves completeness by the 09B7 retract argument citing lem-weil-pbc-module-completion-complete (05GG, generic tool use) and def-weil-pbc-adic-completion; kernel argument is now Step 3 using ker(r)=0; proof_deps updated. (2) B4: plain-text arrows in all steps rewritten in TeX.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.AdicTowerReconstruction",
+  "declaration": "Ideal.adic_tower_reconstruction",
+  "file": "lean/Sheaf/Paper/AdicTowerReconstruction.lean",
+  "statement": "theorem adic_tower_reconstruction {A : Type u} [CommRing A] (I : Ideal A) (hI : I.FG) (N : ℕ → Type v) [∀ n, AddCommGroup (N n)] [∀ n, Module A (N n)] (t : ∀ n, N (n + 1) →ₗ[A] N n) (hN : ∀ n, (I ^ (n + 1) • ⊤ : Submodule A (N n)) = ⊥) (ht : ∀ n, Function.Surjective (t n) ∧ (t n).ker = (I ^ (n + 1) • ⊤ : Submodule A (N (n + 1)))) (L : Type w) [AddCommGroup L] [Module A L] (p : ∀ n, L →ₗ[A] N n) (hp : ∀ n, (t n).comp (p (n + 1)) = p n) (hlim : ∀ x : ∀ n, N n, (∀ n, t n (x (n + 1)) = x n) → ∃! y : L, ∀ n, p n y = x n) : (∀ n, ∃ e : (L ⧸ (I ^ (n + 1) • ⊤ : Submodule A L)) ≃ₗ[A] N n, ∀ y : L, e ((I ^ (n + 1) • ⊤ : Submodule A L).mkQ y) = p n y) ∧ IsAdicComplete I L ∧ IsHausdorff I L ∧ (⨅ n, TopologicalSpace.induced (p n) (⊥ : TopologicalSpace (N n))) = I.adicModuleTopology L",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-atr0921",
+  "group": "H1",
+  "result": "pass",
+  "note": "Stacks 09B8 module (not derived) statement: N n = M_(n+1) reindex; hN = A/I^(n+1)-module; ht surj + ker = I^(n+1)N(n+1) = quotient iso; L,p,hp,hlim = linear bijection onto compatible tuples; conclusions: L/I^(n+1)L ≃ N n compatible with p, IsAdicComplete, IsHausdorff, ⨅ induced p ⊥ (Mathlib order: initial topology) = adicModuleTopology; I.FG kept; universes u v w free; H4: Mathlib AdicCompletion/* and WeilConjectures (only derived IsNormalizedTower/derivedCompletionDiagram in TraceFormula/Adic) have no module tower theorem"
  }
 }
