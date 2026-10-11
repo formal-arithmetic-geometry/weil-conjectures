@@ -74,5 +74,28 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-dfe2402 (reviewer sub-agent of L); spot-checked: Statement vs blueprint (matches, no proof steps); compared with def-pc-field-extension and def-pc-base-change (not class b: different notion, def-pc is the generic one); Mathlib grep for etale cohomology (none, recorded). FIX more, RETURN less: C1 - statement used field extension, base change, etale sheaf, inverse image, etale cohomology and the cohomology pullback map without citing the existing nodes; added [def-pc-field-extension] [def-pc-base-change] [def-weil-pbc-abelian-etale-sheaves] [def-weil-pbc-inverse-image] [def-weil-pbc-etale-cohomology] [def-weil-pbc-cohomology-pullback] to the text and stmt_deps, cited [def-sc-curves] in the text, emptied uses_not_cited, recorded the mathlib search.; 1 file(s) fixed by the reviewer"
  },
- "lead_note": "2026-10-10 L (R-dfe2402): def-sc-field-extension is not a duplicate of def-pc-field-extension (that is the generic field-extension notion, status mathlib; this is the curve-level base change C_{k'}, sheaf pullback and cohomology map rho^q for algebraically closed k'/k); the statement now cites def-pc-field-extension as primary for the field-extension notion."
+ "lead_note": "2026-10-10 L (R-dfe2402): def-sc-field-extension is not a duplicate of def-pc-field-extension (that is the generic field-extension notion, status mathlib; this is the curve-level base change C_{k'}, sheaf pullback and cohomology map rho^q for algebraically closed k'/k); the statement now cites def-pc-field-extension as primary for the field-extension notion.",
+ "lean": {
+  "module": "WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance",
+  "declaration": "AlgebraicGeometry.Etale.cohomologyMap",
+  "declarations": [
+   "AlgebraicGeometry.Etale.cohomologyMap",
+   "CategoryTheory.Limits.pullback",
+   "CategoryTheory.Limits.pullback.fst",
+   "AlgebraicGeometry.Etale.upperStar"
+  ],
+  "statement": "noncomputable def cohomologyMap :\n    Sheaf.H F n →+ Sheaf.H (((f)^*[AddCommGrpCat.{u + 1}]).obj F) n",
+  "branch": "slopmaster2",
+  "by": "C1",
+  "date": "2026-10-11",
+  "existing": true,
+  "note": "Bundle of field-extension notation, all given by existing dependency declarations: for [Field k] [IsAlgClosed k] [Field k'] [IsAlgClosed k'] [Algebra k k'] and f : C ⟶ Spec (.of k) with [IsCurve f], put i = Spec.map (CommRingCat.ofHom (algebraMap k k')). Then C_k' is Limits.pullback f i, pi_k' is pullback.fst f i, F_k' is (Etale.upperStar AddCommGrpCat.{u+1} (pullback.fst f i)).obj F, and rho^q is Etale.cohomologyMap (pullback.fst f i) F q. No new structure or duplicate aliases are required. Sheaf.H is the existing sheaf-level cohomology encoding used by the recorded cohomology-pullback dependency; the comparison with the K-injective definition is the stage-3 bridge already documented by that dependency and def-weil-pbc-etale-cohomology."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-dfe",
+  "group": "C1",
+  "result": "pass"
+ }
 }
