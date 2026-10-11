@@ -247,5 +247,23 @@
   "by": "L",
   "result": "accepted",
   "note": "10 steps following Stacks 07E5 (1)=>(2)=>(4)=>(3) with the implicit parts written out: A regular (k' = k) and dim A = dim m/m^2 (new composed leaf: iff_finrank_cotangentSpace Defs.lean:75, ringKrullDim_le_spanFinrank_maximalIdeal KrullsHeightTheorem.lean:490, spanFinrank_maximalIdeal_eq_finrank_cotangentSpace SpanRankOperations.lean:93, verified by L); reduction to (4) via the Jacobi-Zariski connecting map, its naturality (new unsplit node) and H_1(L_{K/F_p}) = 0 (new unsplit 0322 node); reduction to finite p-independent families; k' of degree p^n (new unsplit 07DZ node); A' = A (x) k' local finite free regular of the same dimension (new unsplit node; 00ON, not 00OM as Stacks cites); differentials of A[x]/(x^p - a) (new unsplit node); conormal rows; gamma via Cartier equality (new unsplit 07E1 node); snake lemma and dimension count; descent of linear independence to K."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.GeometricallyRegularH1Injective",
+  "declaration": "Algebra.isRegularLocalRing_and_injective_h1Cotangent_of_isGeometricallyRegular",
+  "file": "lean/Sheaf/RingTheory/GeometricallyRegularH1Injective.lean",
+  "statement": "theorem isRegularLocalRing_and_injective_h1Cotangent_of_isGeometricallyRegular (k : Type u) (A : Type v) [Field k] [CommRing A] [Algebra k A] [IsLocalRing A] [IsNoetherianRing A] (p : ℕ) [Fact p.Prime] [CharP k p] (hA : IsGeometricallyRegular k A) : let K := IsLocalRing.ResidueField A let P := Extension.ofSurjective (Algebra.ofId A K) (IsLocalRing.residue_surjective) IsRegularLocalRing A ∧ Function.Injective (P.h1CotangentEquivCotangent.toLinearMap.comp (H1Cotangent.map k A K K))",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-ghi1054",
+  "group": "J1",
+  "result": "pass",
+  "note": "k Field Type u; A Type v local Noetherian k-algebra; char p via Fact p.Prime+CharP k p; recorded Algebra.IsGeometricallyRegular (Type (max u v) tests); K = ResidueField with Algebra k K = ResidueField.algebra (scalar tower k->A->K, #synth); IsRegularLocalRing A; H1Cotangent.map k A K K : H1(L_{K/k}) ->_K H1(L_{K/A}) via defaultHom of Generators.self (X x -> X x); h1CotangentEquivCotangent of ofSurjective A->K onto m/m^2 per recorded mathlib_matches; injectivity of composite; only lean record added to node"
  }
 }
