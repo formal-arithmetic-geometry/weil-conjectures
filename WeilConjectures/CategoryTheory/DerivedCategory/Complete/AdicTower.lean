@@ -280,4 +280,35 @@ lemma ρ_desc_cokerIso_hom (hT : IsNormalizedAdicTower ϖ T) (n : ℕ) :
       π_cokerIso_hom]
     rfl
 
+lemma coneToLevel_comp_map (hT : IsNormalizedAdicTower ϖ T) {k k' n N : ℕ} (hk : k ≤ n)
+    (hN : k ≤ N) (hk' : k' ≤ k) :
+    hT.coneToLevel hk hN ≫ T.map (homOfLE hk').op =
+      hT.coneToLevel (hk'.trans hk) (hk'.trans hN) := by
+  refine mappingCone_hom_ext (fun p q hpq ↦ ?_) ?_
+  · simp only [HomologicalComplex.comp_f, inl_v_coneToLevel_f_assoc, zero_comp,
+      inl_v_coneToLevel_f]
+  · simp only [inr_coneToLevel_assoc, inr_coneToLevel, ← Functor.map_comp]
+    rfl
+
+lemma map_map_coneToLevel (hT : IsNormalizedAdicTower ϖ T) {k n N N' : ℕ} (hk : k ≤ n)
+    (hN' : k ≤ N') (h : N' ≤ N) :
+    mappingCone.map (ϖ ^ n • 𝟙 (T.obj (op N))) (ϖ ^ n • 𝟙 (T.obj (op N')))
+        (T.map (homOfLE h).op) (T.map (homOfLE h).op) (by simp) ≫
+      hT.coneToLevel hk hN' = hT.coneToLevel hk (hN'.trans h) := by
+  refine mappingCone_hom_ext (fun p q hpq ↦ ?_) ?_
+  · simp [mappingCone.map]
+  · simp only [mappingCone.map, mappingCone.inr_desc_assoc, assoc, inr_coneToLevel,
+      ← Functor.map_comp]
+    rfl
+
+lemma map_smul_coneToLevel (hT : IsNormalizedAdicTower ϖ T) {k n n' N : ℕ} (hk : k ≤ n')
+    (hn : n' ≤ n) (hN : k ≤ N) :
+    mappingCone.map (ϖ ^ n • 𝟙 (T.obj (op N))) (ϖ ^ n' • 𝟙 (T.obj (op N)))
+        (ϖ ^ (n - n') • 𝟙 _) (𝟙 _) (by
+          rw [comp_id, Linear.smul_comp, id_comp, smul_smul, ← pow_add, Nat.sub_add_cancel hn]) ≫
+      hT.coneToLevel hk hN = hT.coneToLevel (hk.trans hn) hN := by
+  refine mappingCone_hom_ext (fun p q hpq ↦ ?_) ?_
+  · simp [mappingCone.map]
+  · simp [mappingCone.map]
+
 end CochainComplex.IsNormalizedAdicTower
