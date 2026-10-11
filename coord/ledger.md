@@ -3150,3 +3150,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 00:44 L: merged deliver/F1/lem-sc-valuation-proper-coherent-higher-direct-images (reviewer FIX; first push; new nodes: 1)
 - 00:44 UTC L: F1 valuation-proper-coherent-higher-direct-images FIX a72195463 (R-vhd0043).
 - 00:45 L: merged deliver/J1/lem-sc-finite-locally-free-residue-isomorphism (reviewer FIX; first push; new nodes: 0)
+- 00:46 UTC L: J1 finite-locally-free-residue-isomorphism FIX 84f08dd01 (R-fri0045; 'locally of constant rank' per def-amb-finite-locally-free-module).
