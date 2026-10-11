@@ -267,7 +267,8 @@ theorem RationalHom.evalAlgHom_points_zeroLocusMulEquiv (r : RationalHom (subgro
 /-- A matrix over `k[ε]` reducing to the identity is `1 + ε • X`. -/
 theorem eq_one_add_eps_smul_of_map_fst_eq_one {N : Matrix m m (DualNumber k)}
     (hN : N.map fst = 1) :
-    N = 1 + (DualNumber.eps : DualNumber k) • (algebraMap k (DualNumber k)).mapMatrix (N.map snd) := by
+    N = 1 + (DualNumber.eps : DualNumber k) •
+      (algebraMap k (DualNumber k)).mapMatrix (N.map snd) := by
   rw [← coe_dualUnit_eq_one_add_eps_smul, coe_dualUnit]
   exact Matrix.eq_one_add_map_inr_of_map_fst_eq_one hN
 
@@ -276,7 +277,8 @@ reduces to the identity. -/
 theorem RationalHom.map_fst_points_eq_one (r : RationalHom (subgroupScheme I) m) [IsMonHom r]
     {p : AlgebraicGeometry.points (subgroupScheme I) (DualNumber k)}
     (hp : p ∈ tangentGroup (subgroupScheme I)) :
-    ((r.points (DualNumber k) p : GL m (DualNumber k)) : Matrix m m (DualNumber k)).map fst = 1 := by
+    ((r.points (DualNumber k) p : GL m (DualNumber k)) : Matrix m m (DualNumber k)).map fst =
+      1 := by
   have := congrArg (fun g : GL m k ↦ (g : Matrix m m k)) (r.map_points (fstHom k k k) p)
   rw [(mem_tangentGroup _).1 hp, MonoidHom.map_one, Units.val_one] at this
   refine Matrix.ext fun i j ↦ ?_

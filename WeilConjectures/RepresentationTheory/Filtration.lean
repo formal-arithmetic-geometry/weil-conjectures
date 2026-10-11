@@ -164,6 +164,19 @@ def RepProp.IsInvariant (P : RepProp.{u, v} k W) : Prop :=
   ∀ {Y Y' : Type v} {_ : AddCommGroup Y} {_ : Module k Y} {_ : AddCommGroup Y'} {_ : Module k Y'}
     {σ : Representation k W Y} {σ' : Representation k W Y'}, σ.Equiv σ' → P σ → P σ'
 
+/-- A chosen equivalence `σ ≃ τ` from `EquivTo τ σ`. -/
+noncomputable def EquivTo.equiv {X : Type*} {Y : Type v} [AddCommGroup X] [Module k X]
+    [AddCommGroup Y] [Module k Y] {τ : Representation k W X} {σ : Representation k W Y}
+    (h : EquivTo.{u, v} τ σ) :
+    σ.Equiv τ :=
+  Classical.choice h
+
+theorem EquivTo.trans {X Z : Type*} {Y : Type v} [AddCommGroup X] [Module k X] [AddCommGroup Y]
+    [Module k Y]
+    [AddCommGroup Z] [Module k Z] {τ : Representation k W X} {σ : Representation k W Y}
+    {τ' : Representation k W Z} (h : EquivTo.{u, v} τ σ) (e : τ.Equiv τ') : EquivTo.{u, v} τ' σ :=
+  ⟨h.equiv.trans e⟩
+
 theorem isInvariant_equivTo {X : Type*} [AddCommGroup X] [Module k X]
     (τ : Representation k W X) : RepProp.IsInvariant (EquivTo.{u, v} τ) :=
   fun e ⟨f⟩ ↦ ⟨e.symm.trans f⟩
