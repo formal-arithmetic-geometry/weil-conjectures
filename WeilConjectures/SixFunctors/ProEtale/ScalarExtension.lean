@@ -16,8 +16,8 @@ public import WeilConjectures.SixFunctors.ProEtale.Derived.ProjectionFormula
 For a ring morphism `φ : R →+* S` and a scheme `X`, extension of scalars
 `S ⊗_R - : Sh(X_proét, R) ⥤ Sh(X_proét, S)` is the sheafified postcomposition with
 `ModuleCat.extendScalars φ`. It is left adjoint to restriction of scalars. These are the
-transition functors `𝒪_E ⟶ 𝒪_{E'}` between the `ℓ`-adic coefficient stages, through which the
-`ℚ̄_ℓ` stage of `sk-thm-sf-pf-proetale` is reached.
+transition functors `𝒪_E ⟶ 𝒪_{E'}` between the `ℓ`-adic coefficient stages, through which
+the `ℚ̄_ℓ` stage of `sk-thm-sf-pf-proetale` is reached.
 
 ## Main definitions
 
@@ -95,7 +95,8 @@ noncomputable def comparisonLowerStarCompSheafComposeRestrictScalarsIso :
         ν_*(X)[ModuleCat.{u + 1} R] :=
   Iso.refl _
 
-/-- Extension of scalars commutes with the comparison `ν^*`: `ν^*(S ⊗_R F) ≅ S ⊗_R ν^* F`. -/
+/-- Extension of scalars commutes with the comparison `ν^*`:
+`ν^*(S ⊗_R F) ≅ S ⊗_R ν^* F`. -/
 noncomputable def etaleSheafExtendScalarsCompComparisonUpperStarIso :
     etaleSheafExtendScalars φ X ⋙ ν^*(X)[ModuleCat.{u + 1} S] ≅
       ν^*(X)[ModuleCat.{u + 1} R] ⋙ sheafExtendScalars φ X :=
@@ -117,7 +118,8 @@ lemma preservesFiniteLimits_sheafExtendScalars (hφ : φ.Flat) :
     infer_instance
   unfold sheafExtendScalars Sheaf.composeAndSheafify
   have := Limits.comp_preservesFiniteLimits
-    ((Functor.whiskeringRight X.ProEtᵒᵖ _ _).obj (ModuleCat.extendScalars.{u + 1, u + 1, u + 1} φ))
+    ((Functor.whiskeringRight X.ProEtᵒᵖ _ _).obj
+      (ModuleCat.extendScalars.{u + 1, u + 1, u + 1} φ))
     (presheafToSheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} S))
   exact Limits.comp_preservesFiniteLimits _ _
 
