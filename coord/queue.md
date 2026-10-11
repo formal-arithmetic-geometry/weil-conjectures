@@ -1,11 +1,11 @@
 # Work queue
 
-93 items; claim with `tools/claim.py next <group> [--stage N]`.
+90 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (93)
+## Stage 2: nodes to state (90)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
@@ -25,7 +25,6 @@
 | `lem-weil-pbc-pair-henselization` | 1 | state | 5 |
 | `lem-sc-derived-internal-hom-adjunction` | 1 | state | 4 |
 | `lem-weil-pbc-etale-graph-section-extension-map-linear` | 1 | state | 3 |
-| `lem-pc-affine-tor-amplitude-criterion` | 1 | state | 2 |
 | `lem-pc-derived-mayer-vietoris-triangle` | 1 | state | 2 |
 | `lem-sc-local-dvr-base-change` | 2 | state | 2 |
 | `lem-pc-affine-derived-pullback-tensor-tilde` | 1 | state | 1 |
@@ -52,6 +51,8 @@
 | `lem-sc-affine-koszul-cech-derived-comparison` | 1 | state | 0 |
 | `lem-sc-affine-perfect-derived-tensor-hom` | 1 | state | 0 |
 | `lem-sc-affine-projective-complex-derived-hom` | 1 | state | 0 |
+| `lem-sc-affine-truncation-kernel-finite-locally-free` | 1 | state | 0 |
+| `lem-sc-affine-truncation-kernel-flat` | 1 | state | 0 |
 | `lem-sc-boundary-derivation-square-zero` | 1 | state | 0 |
 | `lem-sc-derived-internal-hom-stalk-localization` | 1 | state | 0 |
 | `lem-sc-ext-sheaf-to-global-spectral-sequence` | 1 | state | 0 |
@@ -63,7 +64,6 @@
 | `lem-sc-hilb-dominating-power` | 1 | state | 0 |
 | `lem-sc-hilbert-embedded-points-gluing` | 1 | state | 0 |
 | `lem-sc-invert-s-cohomology-affine-case` | 1 | state | 0 |
-| `lem-sc-invert-s-cohomology-gluing` | 1 | state | 0 |
 | `lem-sc-invert-s-cohomology-mayer-vietoris-diagram` | 1 | state | 0 |
 | `lem-sc-koszul-regular-immersion-derived-hom` | 1 | state | 0 |
 | `lem-sc-open-restriction-support-triangle` | 1 | state | 0 |
@@ -83,11 +83,9 @@
 | `lem-weil-pbc-formal-systems-proper-support-serre` | 1 | state | 0 |
 | `lem-weil-pbc-gabber-criterion` | 1 | state | 0 |
 | `lem-weil-pbc-gm-strict-henselization-stalk-formula` | 1 | state | 0 |
-| `lem-weil-pbc-graded-finiteness-cohomology` | 1 | state | 0 |
 | `lem-weil-pbc-grothendieck-existence-devissage` | 1 | state | 0 |
 | `lem-weil-pbc-grothendieck-existence-easy` | 1 | state | 0 |
 | `lem-weil-pbc-hypercohomology-e1-pullback-functorial` | 1 | state | 0 |
-| `lem-weil-pbc-ml-cohomology-powers-ideal` | 1 | state | 0 |
 | `lem-weil-pbc-projective-space-twisting-sheaf-charts` | 1 | state | 0 |
 | `lem-weil-pbc-sets-pushforward-stalk-strict-henselization` | 1 | state | 0 |
 | `lem-weil-pbc-strict-henselization-functoriality` | 1 | state | 0 |
@@ -100,10 +98,9 @@
 | `lem-sc-p1-proj-shifted-free-twist` | 2 | state | 0 |
 | `lem-sc-right-adjoint-open-support-criterion` | 2 | state | 0 |
 | `lemma-weil-pbc-hypercohomology-convergence` | 2 | state | 0 |
-| `pqf-lem-affine-vanishing` | 2 | state | 0 |
 | `pqf-lem-leray-lowdegree` | 2 | state | 0 |
 
-Not open yet: 40 nodes that wait for stage 1, 201 nodes that wait for a statement dependency.
+Not open yet: 40 nodes that wait for stage 1, 199 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
