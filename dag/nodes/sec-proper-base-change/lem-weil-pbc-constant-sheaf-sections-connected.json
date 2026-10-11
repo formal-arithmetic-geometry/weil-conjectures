@@ -135,5 +135,23 @@
   "group": "C1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of C1; spot-checked by L: Repaired as asked at 20:14: the 03P5 identification node is statement-only with the tags (03P5, 03O3, 03YW) and defines the Zariski-locally-constant maps; the Mathlib leaf names IsLocallyConstant.apply_eq_of_preconnectedSpace at Topology/LocallyConstant/Basic.lean:147 (verified) with iff_isOpen_fiber :101 for the fibre formulation. Three steps: identification, constancy on a connected space, bijectivity and additivity."
+ },
+ "lean": {
+  "module": "WeilConjectures.AlgebraicGeometry.Sites.ConstantSheafSections",
+  "declaration": "AlgebraicGeometry.Scheme.bijective_toSheafify_app_terminal",
+  "statement": "theorem bijective_toSheafify_app_terminal [ConnectedSpace X] :\n    Function.Bijective\n      ((CategoryTheory.toSheafify X.smallEtaleTopology ((Functor.const X.Etaleᵒᵖ).obj M)).app\n        (op (Etale.mk (𝟙 X))))",
+  "branch": "slopmaster2",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": true,
+  "note": "Exact canonical-map statement: in context (X : Scheme.{u}) (M : AddCommGrpCat.{u + 1}), ConnectedSpace X implies bijectivity of the toSheafify component at op (Etale.mk (𝟙 X)). Bijectivity is equivalent to IsIso in AddCommGrpCat by ConcreteCategory.isIso_iff_bijective. Second reading removed the duplicate module (H4)."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-csc1521",
+  "group": "F1",
+  "result": "pass",
+  "note": "existing slopmaster2 AlgebraicGeometry.Scheme.bijective_toSheafify_app_terminal read in full: X : Scheme.{u} = T; [ConnectedSpace X] = connected incl. nonempty; M : AddCommGrpCat.{u+1} arbitrary abelian group (universe bookkeeping only); Functor.const X.Etaleᵒᵖ obj M = constant presheaf, toSheafify on X.smallEtaleTopology = canonical map to constant sheaf (constantSheaf = const ⋙ presheafToSheaf); app at op (Etale.mk (𝟙 X)) = final object; Function.Bijective in AddCommGrpCat = iso of abelian groups (isIso_iff_bijective)"
  }
 }
