@@ -4511,3 +4511,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 11:50 L: merged deliver/G1/lem-weil-pbc-n1-descends-finite-domain-extension (stage 2; reviewer PASS; first push; Sheaf.RingTheory.IsN1OfFiniteDomainExtension isN1_of_finite_domain_extension)
 - 11:51 L: merged deliver/E1/lem-sp-page-induction (stage 2; reviewer FIX; first push; Sheaf.CategoryTheory.SpectralSequencePageInduction CategoryTheory.spectralSequence_page_induction)
 - 11:51 L: merged deliver/F1/lem-weil-pbc-flat-fp-lqf-bounded-stratification (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.FlatFpLqfBoundedStratification AlgebraicGeometry.Scheme.Hom.exists_flat_fp_lqf_bounded_stratification)
+- 11:51 L: merged deliver/G1/lem-weil-pbc-etale-infinitesimal-neighbourhoods (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.EtaleInfinitesimalNeighbourhoods AlgebraicGeometry.etale_on_open_of_etale_infinitesimal_neighbourhoods)
