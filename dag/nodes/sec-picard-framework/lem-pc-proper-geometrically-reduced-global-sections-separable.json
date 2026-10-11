@@ -142,5 +142,24 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-pgr1659 (reviewer sub-agent of L); spot-checked: Repaired re-push after the 16:45 return. Point 1 repaired: the product node is gone; the proof follows Stacks 0BUG (varieties.tex 1933-1988, lemma-proper-geometrically-reduced-global-sections) clauses (1),(3),(4): step 1 lem-pc-euler-characteristic-well-defined (F=O_X, i=0) gives dim_k A finite; step 2 lem-weil-pbc-flat-base-change-global-sections-qcqs with Spec kbar->Spec k flat and X qcqs by lem-weil-pbc-qcqs-over-affine (hypotheses checked against the statements); step 3 X_kbar reduced by def-pc-geometrically-irreducible (k'=kbar), Gamma reduced by def-pc-reduced-scheme; step 4 new node. New node lem-pc-finite-extension-tensor-algebraic-closure-reduced-separable checked against Stacks 030W (4)=>(1) with 030V (4)=>(5) (algebra.tex 10360, 10425): true (char 0 trivial; char p via k^{1/p} in kbar), finite hypothesis harmless; with def-weil-pbc-separable-field-extension a finite separable algebraic extension is separably generated with empty basis. My Mathlib check (pushed 16:57 UTC, before 17:00): loogle 'Algebra.IsSeparable, IsReduced, TensorProduct' empty; grep finds only RingTheory/Nilpotent/GeometricallyReduced.lean, no separability converse: stays unsplit. Point 2 repaired in proof_origin.document/step sources; the report still names a nonexistent path /home/ubuntu/c1-stacks-review. FIX more, RETURN less / fixes: dag/nodes/sec-picard-framework/lem-pc-proper-geometrically-reduced-global-sections-separable.json: statement: restored the committed TeX statement (the delivery rewrote it to plain text without naming an E7 change; mathematics identical); mathlib_searches[0]: restored results 'service unavailable (HTTP 500)' and verdict 'unavailable' (the delivery had rewritten it to 'No exact declaration'); proof_origin.place and split_report.summary: path replaced by literature/stacks-project/varieties.tex. dag/nodes/sec-picard-framework/lem-pc-finite-extension-tensor-algebraic-closure-reduced-separable.json: mathlib_searches: added my loogle and grep records. Start 2026-10-10 16:58:45 UTC (Sat Oct 10 04:58:45 PM UTC 2026), end Sat Oct 10 04:59:31 PM UTC 2026.; 2 file(s) fixed by the reviewer"
  },
- "lead_note": "2026-10-10 L (R-pgr1659): Source of lem-pc-finite-extension-tensor-algebraic-closure-reduced-separable names Tag 030V with the wrong label (lemma-separable-algebraic-extension); 030V is algebra-lemma-geometrically-reduced-finite-purely-inseparable-extension (algebra.tex 10425)."
+ "lead_note": "2026-10-10 L (R-pgr1659): Source of lem-pc-finite-extension-tensor-algebraic-closure-reduced-separable names Tag 030V with the wrong label (lemma-separable-algebraic-extension); 030V is algebra-lemma-geometrically-reduced-finite-purely-inseparable-extension (algebra.tex 10425).",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProperGeometricallyReducedGlobalSectionsSeparable",
+  "declaration": "AlgebraicGeometry.proper_geometricallyReduced_globalSections_isSeparable",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProperGeometricallyReducedGlobalSectionsSeparable.lean",
+  "statement": "theorem proper_geometricallyReduced_globalSections_isSeparable (k : Type u) [Field k] (X : Scheme.{u}) [X.Over (Spec (.of k))] [IsProper (X ↘ Spec (.of k))] [GeometricallyReduced (X ↘ Spec (.of k))] (hA : IsField Γ(X, ⊤)) : @Algebra.IsSeparableExtension k Γ(X, ⊤) _ hA.toField (Scheme.globalSectionsRingHom k (X := X)).toAlgebra",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-grs0900"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-grs0900",
+  "group": "C1",
+  "result": "fix",
+  "note": "k field; X over Spec k with IsProper, GeometricallyReduced of X ↘ Spec k (as H1/K1); A=Γ(X,⊤) field via IsField hypothesis; k-algebra = globalSectionsRingHom (structure map; delivered free [Algebra]/[Field] instances made the statement false, Frobenius counterexample); conclusion Algebra.IsSeparableExtension (recorded dep). No Mathlib/source match (Geometrically/Reduced.lean, GlobalSectionsBijective.lean, Cohomology/Defs.lean)."
+ }
 }
