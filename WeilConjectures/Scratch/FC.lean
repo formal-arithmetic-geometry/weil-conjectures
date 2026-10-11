@@ -52,56 +52,75 @@ noncomputable def Etale.higherDirectImagePresheafMap {X Y : Scheme.{u}} (h : Y �
     Etale.higherDirectImagePresheaf Λ h q K ⟶ Etale.higherDirectImagePresheaf Λ h q K' :=
   Functor.whiskerLeft _ (preadditiveYoneda.map ((shiftFunctor _ q).map φ))
 
+
+/-- The shift identification `H⁰((Rh_* K)[q]) ≅ Hᵠ(Rh_* K)`. -/
+noncomputable abbrev Etale.homologyShiftComparison {X Y : Scheme.{u}} (h : Y ⟶ X) (q : ℤ)
+    (K : DerivedCategory.Plus (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
+    (DerivedCategory.Plus.homologyFunctor _ 0).obj (R+((h)_*[ModuleCat.{u + 1} Λ]).obj (K⟦q⟧)) ⟶
+      (DerivedCategory.Plus.homologyFunctor _ q).obj (R+((h)_*[ModuleCat.{u + 1} Λ]).obj K) :=
+  (DerivedCategory.Plus.homologyFunctor _ 0).map
+      ((R+((h)_*[ModuleCat.{u + 1} Λ]).commShiftIso q).hom.app K) ≫
+    ((DerivedCategory.Plus.homologyFunctor _ 0).isoShiftZero ℤ).inv.app _ ≫
+      ((DerivedCategory.Plus.homologyFunctor _ 0).shiftIso q 0 q (add_zero q)).hom.app _
+
+lemma Etale.higherDirectImagePresheafToHom_app_apply {X Y : Scheme.{u}} (h : Y ⟶ X) (q : ℤ)
+    (K : DerivedCategory.Plus (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
+    (W : X.Etaleᵒᵖ) (β : (DerivedCategory.Plus.singleFunctor _ 0).obj
+      ((h)^*[ModuleCat.{u + 1} Λ].obj ((Etale.freeSheaf Λ X).obj W.unop)) ⟶ K⟦q⟧) :
+    (Etale.higherDirectImagePresheafToHom Λ h q K).app W β =
+      (DerivedCategory.Plus.singleFunctorCompHomologyFunctorIso 0).inv.app _ ≫
+        (DerivedCategory.Plus.homologyFunctor _ 0).map
+          ((Etale.derivedUpperStarLowerStarAdjunctionPlus (ModuleCat.{u + 1} Λ) h).homEquiv _ _
+            ((((h)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlusSingleFunctor 0).hom.app
+              ((Etale.freeSheaf Λ X).obj W.unop) ≫ β)) ≫
+        Etale.homologyShiftComparison Λ h q K := by
+  simp only [Etale.higherDirectImagePresheafToHom, NatTrans.comp_app, ConcreteCategory.comp_apply,
+    Etale.derivedHomToHomology_app_apply, Category.assoc]
+  rfl
+
+lemma Etale.homologyShiftComparison_naturality {X Y : Scheme.{u}} (h : Y ⟶ X) (q : ℤ)
+    {K K' : DerivedCategory.Plus (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
+    (φ : K ⟶ K') :
+    (DerivedCategory.Plus.homologyFunctor _ 0).map
+        (R+((h)_*[ModuleCat.{u + 1} Λ]).map ((shiftFunctor _ q).map φ)) ≫
+      Etale.homologyShiftComparison Λ h q K' =
+    Etale.homologyShiftComparison Λ h q K ≫
+      (DerivedCategory.Plus.homologyFunctor _ q).map (R+((h)_*[ModuleCat.{u + 1} Λ]).map φ) := by
+  simp only [Etale.homologyShiftComparison]
+  rw [← Functor.map_comp_assoc, Functor.commShiftIso_hom_naturality, Functor.map_comp_assoc]
+  simp only [Category.assoc]
+  congr 1
+  have n₁ := ((DerivedCategory.Plus.homologyFunctor _ 0).isoShiftZero ℤ).inv.naturality
+    ((shiftFunctor _ q).map (R+((h)_*[ModuleCat.{u + 1} Λ]).map φ))
+  have n₂ := ((DerivedCategory.Plus.homologyFunctor _ 0).shiftIso q 0 q (add_zero q)).hom.naturality
+    (R+((h)_*[ModuleCat.{u + 1} Λ]).map φ)
+  erw [reassoc_of% n₁, n₂]
+  rfl
+
 lemma Etale.higherDirectImagePresheafToSheaf_naturality {X Y : Scheme.{u}} (h : Y ⟶ X) (q : ℤ)
     {K K' : DerivedCategory.Plus (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     (φ : K ⟶ K') :
     Etale.higherDirectImagePresheafMap Λ h q φ ≫ Etale.higherDirectImagePresheafToSheaf Λ h q K' =
       Etale.higherDirectImagePresheafToSheaf Λ h q K ≫ Etale.sectionsMap
         ((DerivedCategory.Plus.homologyFunctor _ q).map (R+((h)_*[ModuleCat.{u + 1} Λ]).map φ)) := by
-  simp only [Etale.higherDirectImagePresheafToSheaf, Etale.higherDirectImagePresheafToHom,
-    Category.assoc, Etale.freeSheafSections_naturality]
-  simp only [← Category.assoc]
-  congr 1
-  ext W β
-  dsimp [Etale.higherDirectImagePresheafMap, Etale.higherDirectImagePresheafIso,
-    Etale.derivedHomToHomology, preadditiveYoneda]
-  have key : ∀ x : (h)^*[ModuleCat.{u + 1} Λ].mapDerivedCategoryPlus.obj
-      ((DerivedCategory.Plus.singleFunctor _ 0).obj ((Etale.freeSheaf Λ X).obj W.unop)) ⟶ K⟦q⟧,
-      (DerivedCategory.Plus.homologyFunctor _ 0).map
-        ((Etale.derivedUpperStarLowerStarAdjunctionPlus (ModuleCat.{u + 1} Λ) h).homEquiv _ _
-          (x ≫ (shiftFunctor _ q).map φ)) ≫
-        (DerivedCategory.Plus.homologyFunctor _ 0).map
-            ((R+((h)_*[ModuleCat.{u + 1} Λ]).commShiftIso q).hom.app K') ≫
-          ((DerivedCategory.Plus.homologyFunctor _ 0).isoShiftZero ℤ).inv.app _ ≫
-            ((DerivedCategory.Plus.homologyFunctor _ 0).shiftIso q 0 q (add_zero q)).hom.app _ =
-      ((DerivedCategory.Plus.homologyFunctor _ 0).map
-        ((Etale.derivedUpperStarLowerStarAdjunctionPlus (ModuleCat.{u + 1} Λ) h).homEquiv _ _ x) ≫
-        (DerivedCategory.Plus.homologyFunctor _ 0).map
-            ((R+((h)_*[ModuleCat.{u + 1} Λ]).commShiftIso q).hom.app K) ≫
-          ((DerivedCategory.Plus.homologyFunctor _ 0).isoShiftZero ℤ).inv.app _ ≫
-            ((DerivedCategory.Plus.homologyFunctor _ 0).shiftIso q 0 q (add_zero q)).hom.app _) ≫
-        (DerivedCategory.Plus.homologyFunctor _ q).map (R+((h)_*[ModuleCat.{u + 1} Λ]).map φ) := by
-    intro x
-    rw [Adjunction.homEquiv_naturality_right]
-    simp only [Functor.map_comp, Category.assoc]
-    congr 1
-    rw [← Functor.map_comp_assoc, Functor.commShiftIso_hom_naturality, Functor.map_comp_assoc]
-    congr 1
-    have n₁ := ((DerivedCategory.Plus.homologyFunctor _ 0).isoShiftZero ℤ).inv.naturality
-      ((shiftFunctor _ q).map (R+((h)_*[ModuleCat.{u + 1} Λ]).map φ))
-    have n₂ := ((DerivedCategory.Plus.homologyFunctor _ 0).shiftIso q 0 q (add_zero q)).hom.naturality
-      (R+((h)_*[ModuleCat.{u + 1} Λ]).map φ)
-    erw [reassoc_of% n₁, n₂]
-    rfl
-  have k₂ := congrArg (fun t ↦ (DerivedCategory.Plus.singleFunctorCompHomologyFunctorIso
-    (C := Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) 0).inv.app
-      ((Etale.freeSheaf Λ X).obj W.unop) ≫ t)
-    (key (((NatIso.op ((Etale.freeSheaf Λ X).isoWhiskerLeft
-      ((h)^*[ModuleCat.{u + 1} Λ].mapDerivedCategoryPlusSingleFunctor 0))).hom.app W).unop ≫ β))
-  simp only [Category.assoc] at k₂
-  refine Eq.trans ?_ (k₂.trans ?_)
-  · simp only [Category.assoc]
-    rfl
-  · simp only [Category.assoc]
-    rfl
+  have h₁ : ∀ L, Etale.higherDirectImagePresheafToSheaf Λ h q L =
+      Etale.higherDirectImagePresheafToHom Λ h q L ≫ Etale.freeSheafSections Λ _ := fun _ ↦ rfl
+  have h₂ : Etale.higherDirectImagePresheafMap Λ h q φ ≫ Etale.higherDirectImagePresheafToHom Λ h q K' =
+      Etale.higherDirectImagePresheafToHom Λ h q K ≫ Functor.whiskerLeft (Etale.freeSheaf Λ X).op
+        (preadditiveYoneda.map ((DerivedCategory.Plus.homologyFunctor _ q).map
+          (R+((h)_*[ModuleCat.{u + 1} Λ]).map φ))) := by
+    ext W β
+    have e₁ : (Etale.higherDirectImagePresheafMap Λ h q φ).app W β =
+        β ≫ (shiftFunctor _ q).map φ := rfl
+    rw [NatTrans.comp_app, NatTrans.comp_app, ConcreteCategory.comp_apply,
+      ConcreteCategory.comp_apply, e₁, Etale.higherDirectImagePresheafToHom_app_apply,
+      Etale.higherDirectImagePresheafToHom_app_apply]
+    change _ = _ ≫ _
+    rw [← Category.assoc _ β, Adjunction.homEquiv_naturality_right, Functor.map_comp]
+    simp only [Category.assoc]
+    congr 2
+    exact Etale.homologyShiftComparison_naturality Λ h q φ
+  rw [h₁, h₁, Category.assoc, Etale.freeSheafSections_naturality, ← Category.assoc,
+    ← Category.assoc, h₂]
+
 end AlgebraicGeometry
