@@ -105,5 +105,24 @@
   "group": "J1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-fpl (reviewer sub-agent of L); spot-checked: Source Stacks 060K (homology-lemma-product-abelian-groups-exact, homology.tex 7921: products of complexes of abelian groups, homology is the product) read; the statement (unchanged, pre-existing) takes finite I, abelian A_i [def-sp-abelian], additive left exact Gamma_i [def-sp-left-exact-additive], all notions cited. Step 1: zero object, finite biproducts and kernels of the product category componentwise from the componentwise universal properties, given def-sp-abelian in each A_i (elementary, C2). Step 2: def-sp-left-exact-additive says additive = preserves finite products and left exact = additive + preserves kernels; Gamma of a biproduct is a product of products (products commute), and prod_i ker Gamma_i(f_i) = ker prod_i Gamma_i(f_i) in Ab elementwise (the finite case of 060K), checkable in a few lines from the cited definitions. Only fields the split owns changed (proof, proof_deps, proof_origin, status, split_report); no new nodes. Mathlib: Limits/Pi.lean (coneOfConeEvalIsLimit, hasLimit_of_hasLimit_comp_eval) gives componentwise limits in the Pi category and Adjunction/Limits.lean:216 gives lim preserves limits, but no declaration states the Gamma clause (Functor.pi composed with the product over Discrete I) exactly, so not a leaf. Small cases: I empty gives the zero functor on the terminal category; I singleton gives Gamma_i. Start: Sat Oct 10 04:48:03 PM UTC 2026; end: Sat Oct 10 04:48:46 PM UTC 2026."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.FiniteProductFunctorLeftExact",
+  "declaration": "CategoryTheory.finite_product_functor_left_exact",
+  "file": "lean/Sheaf/CategoryTheory/FiniteProductFunctorLeftExact.lean",
+  "statement": "theorem finite_product_functor_left_exact (I : Type u) [Finite I] (A : I → Type v) [∀ i, Category.{w} (A i)] [∀ i, Abelian (A i)] (Γi : (i : I) → A i ⥤ AddCommGrpCat.{z}) [∀ i, (Γi i).Additive] [∀ i, PreservesFiniteLimits (Γi i)] : let Γ := Functor.pi Γi ⋙ Pi.functor I ∃ hAb : Abelian (∀ i, A i), letI := hAb (∀ i, ∃ hEvalAdd : (Pi.eval A i).Additive, letI := hEvalAdd PreservesFiniteBiproducts (Pi.eval A i) ∧ ∀ (X Y : ∀ i, A i) (f : X ⟶ Y), PreservesLimit (parallelPair f 0) (Pi.eval A i)) ∧ Γ.Additive ∧ PreservesFiniteLimits Γ",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-fle1024"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-fle1024",
+  "group": "M1",
+  "result": "fix",
+  "note": "FIX: product-category structure restated in the shared existential form ∃ hAb : Abelian (∀ i, A i), letI (as H1 6a6d5fc0b / M1 5ddd119d4) instead of ∃ Preadditive + ∃ eval-Additive + Nonempty HasFiniteBiproducts/HasKernels (now carried by hAb); componentwise clauses kept per i as ∃ (Pi.eval A i).Additive with PreservesFiniteBiproducts and PreservesLimit (parallelPair f 0); matched finite I, abelian A_i, Γi Additive + PreservesFiniteLimits, Γ = Functor.pi Γi ⋙ Pi.functor I (#check), Γ.Additive ∧ PreservesFiniteLimits Γ; empty I, universes u v w z independent as in H1"
  }
 }
