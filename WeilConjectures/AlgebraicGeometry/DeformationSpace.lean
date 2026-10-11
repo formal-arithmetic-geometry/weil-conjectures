@@ -9,7 +9,7 @@ public import Mathlib.AlgebraicGeometry.IdealSheaf.Basic
 public import Mathlib.RingTheory.PolynomialAlgebra
 public import Mathlib.RingTheory.Polynomial.Quotient
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-public import Mathlib.AlgebraicGeometry.AffineSpace
+public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineSpace
 public import WeilConjectures.Mathlib.Algebra.Category.Ring.Constructions
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.SmallAffineZariski
 public import WeilConjectures.Mathlib.RingTheory.ReesAlgebra
@@ -591,5 +591,67 @@ lemma polynomialSpecToAffineSpace_over :
   refine colimit.hom_ext fun U ↦ ?_
   rw [ι_polynomialSpecToAffineSpace_assoc, polynomialSpecChart, AffineSpace.homOfVector_over,
     natTrans_app_comp_ι, ι_toBase]
+
+instance {S T : Scheme.{u}} (n : Type u) (f : S ⟶ T) [IsIso f] : IsIso (AffineSpace.map n f) :=
+  ⟨⟨AffineSpace.map n (inv f), by rw [← AffineSpace.map_comp, IsIso.hom_inv_id,
+    AffineSpace.map_id], by rw [← AffineSpace.map_comp, IsIso.inv_hom_id, AffineSpace.map_id]⟩⟩
+
+set_option backward.isDefEq.respectTransparency false in
+instance (U : X.AffineZariskiSite) :
+    IsIso (AffineSpace.homOfVector
+      ((relativeGluingData X.coequifibered_toPolynomialPresheaf).natTrans.app U)
+      fun _ : ULift.{u} (Fin 1) ↦ (ΓSpecIso (X.polynomialPresheaf.obj (.op U))).inv Polynomial.X) := by
+  have : (relativeGluingData X.coequifibered_toPolynomialPresheaf).natTrans.app U =
+      Spec.map (CommRingCat.ofHom (C : Γ(X, U.1) →+* Γ(X, U.1)[X])) ≫ U.2.isoSpec.inv := rfl
+  rw [this, ← AffineSpace.homOfVector_map]
+  have : IsIso (AffineSpace.homOfVector (Spec.map (CommRingCat.ofHom (Polynomial.C : Γ(X, U.1) →+* _)))
+      fun _ : ULift.{u} (Fin 1) ↦
+        (ΓSpecIso (X.polynomialPresheaf.obj (.op U))).inv Polynomial.X) :=
+    isIso_homOfVector_specPolynomial Γ(X, U.1)
+  infer_instance
+
+/-- The chart `Spec Γ(X, U)[t]` of `Spec_X 𝒪_X[t]` maps to the affine line over `U`. -/
+noncomputable def polynomialSpecChartLift (U : X.AffineZariskiSite) :
+    (relativeGluingData X.coequifibered_toPolynomialPresheaf).functor.obj U ⟶
+      pullback (𝔸(ULift.{u} (Fin 1); X) ↘ X) U.1.ι :=
+  pullback.lift (X.polynomialSpecChart U)
+    ((relativeGluingData X.coequifibered_toPolynomialPresheaf).natTrans.app U)
+    (by rw [polynomialSpecChart, AffineSpace.homOfVector_over])
+
+instance (U : X.AffineZariskiSite) : IsIso (X.polynomialSpecChartLift U) := by
+  have : X.polynomialSpecChartLift U = AffineSpace.homOfVector
+      ((relativeGluingData X.coequifibered_toPolynomialPresheaf).natTrans.app U)
+      (fun _ : ULift.{u} (Fin 1) ↦ (ΓSpecIso (X.polynomialPresheaf.obj (.op U))).inv Polynomial.X) ≫
+        (AffineSpace.isPullback_map (n := ULift.{u} (Fin 1)) U.1.ι).isoPullback.hom := by
+    refine pullback.hom_ext ?_ ?_
+    · rw [polynomialSpecChartLift, pullback.lift_fst, Category.assoc,
+        IsPullback.isoPullback_hom_fst, AffineSpace.homOfVector_map, polynomialSpecChart]
+    · rw [polynomialSpecChartLift, pullback.lift_snd, Category.assoc,
+        IsPullback.isoPullback_hom_snd, AffineSpace.homOfVector_over]
+  rw [this]
+  infer_instance
+
+lemma isPullback_ι_polynomialSpecToAffineSpace (U : X.AffineZariskiSite) :
+    IsPullback (colimit.ι (relativeGluingData X.coequifibered_toPolynomialPresheaf).functor U)
+      (X.polynomialSpecChartLift U) X.polynomialSpecToAffineSpace
+      (pullback.fst (𝔸(ULift.{u} (Fin 1); X) ↘ X) U.1.ι) := by
+  refine IsPullback.of_bot ?_ (by rw [polynomialSpecChartLift, pullback.lift_fst,
+    ι_polynomialSpecToAffineSpace])
+    (IsPullback.of_hasPullback (𝔸(ULift.{u} (Fin 1); X) ↘ X) U.1.ι)
+  rw [polynomialSpecChartLift, pullback.lift_snd, polynomialSpecToAffineSpace_over]
+  exact ((relativeGluingData X.coequifibered_toPolynomialPresheaf).isPullback_natTrans_ι_toBase
+    U).flip
+
+/-- **`Spec_X 𝒪_X[t]` is the affine line over `X`.** -/
+instance : IsIso X.polynomialSpecToAffineSpace := by
+  refine IsZariskiLocalAtTarget.of_openCover (P := .isomorphisms _)
+    ((directedCover X).pullback₁ (𝔸(ULift.{u} (Fin 1); X) ↘ X)) fun U ↦ ?_
+  have h := X.isPullback_ι_polynomialSpecToAffineSpace U
+  have : Cover.pullbackHom ((directedCover X).pullback₁ (𝔸(ULift.{u} (Fin 1); X) ↘ X))
+      X.polynomialSpecToAffineSpace U = h.isoPullback.inv ≫ X.polynomialSpecChartLift U := by
+    simp only [Cover.pullbackHom, IsPullback.isoPullback_inv_snd]
+    rfl
+  rw [MorphismProperty.isomorphisms.iff, this]
+  infer_instance
 
 end AlgebraicGeometry.Scheme
