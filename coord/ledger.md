@@ -4924,3 +4924,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 14:22 L: merged deliver/H1/lem-weil-pbc-small-etale-representable-presheaf-sheaf (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.Sites.SmallEtaleRepresentablePresheafSheaf AlgebraicGeometry.smallEtaleRepresentablePresheaf_isSheaf)
 - 14:22 L: merged deliver/J1/lem-weil-pbc-scheme-theoretic-union (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.SchemeTheoreticUnion AlgebraicGeometry.scheme_theoretic_union)
 - 14:22 L: merged deliver/J1/lem-weil-pbc-separable-tensor-purely-inseparable-field (stage 2; reviewer PASS; first push; Sheaf.FieldTheory.SeparableTensorPurelyInseparable separableTensor_purelyInseparable_isField)
+- 14:22 L: merged deliver/J1/lem-weil-pbc-separated-lqf-base-change (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.SeparatedLqfBaseChange AlgebraicGeometry.separated_lqf_base_change)

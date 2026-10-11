@@ -171,5 +171,23 @@
   "worker": "stage1",
   "summary": "Split into 5 steps. (1) is the new Mathlib leaf lem-weil-pbc-separated-base-change (AlgebraicGeometry.IsSeparated.instSndScheme, Separated.lean:96, via isStableUnderBaseChange :82). (2) follows Stacks 01TM's proof (00PP plus 01T4) through existing reviewed nodes of unit sk-thm-p1: lqf implies lft (lem-weil-pbc-lqf-locally-finite-type), lft base change (lem-weil-pbc-lft-base-change), quasi-finite at x gives an isolated fibre point (lem-weil-pbc-quasi-finite-at-point-isolated, 01TH), isolated fibre points persist under base change (lem-weil-pbc-isolated-fibre-point-base-change, 00PP/01TM(1)), an affine pair around x' (lem-weil-pbc-affine-opens-basis) and the affine-pair criterion (lem-weil-pbc-isolated-fibre-point-quasi-finite-affine-pairs) giving quasi-finiteness at x' in the sense of pqf-def-quasifinite. Mathlib's LocallyQuasiFinite (QuasiFinite.lean:71, instance IsStableUnderBaseChange :115) is not a one-line match for pqf-def-quasifinite (no finite-type clause, RingHom.QuasiFinite on all affine pairs), so (2) is not made a leaf. Statement unchanged."
  },
- "reviewed": "pass (L, 2026-10-10): 5 steps; (1) by the new 01KU (3) leaf, (2) follows 01TM via lft base change, isolation of points in fibres (01TH + base change) and the affine-pairs criterion; Mathlib LocallyQuasiFinite differs from pqf-def-quasifinite (B8), so (2) is proved."
+ "reviewed": "pass (L, 2026-10-10): 5 steps; (1) by the new 01KU (3) leaf, (2) follows 01TM via lft base change, isolation of points in fibres (01TH + base change) and the affine-pairs criterion; Mathlib LocallyQuasiFinite differs from pqf-def-quasifinite (B8), so (2) is proved.",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SeparatedLqfBaseChange",
+  "declaration": "AlgebraicGeometry.separated_lqf_base_change",
+  "statement": "theorem separated_lqf_base_change {X S S' : Scheme.{u}} (f : X ⟶ S) (g : S' ⟶ S) : (IsSeparated f → IsSeparated (pullback.snd f g)) ∧ (Scheme.Hom.IsLocallyQuasiFinite f → Scheme.Hom.IsLocallyQuasiFinite (pullback.snd f g))",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-11",
+  "existing": false,
+  "file": "lean/Sheaf/AlgebraicGeometry/SeparatedLqfBaseChange.lean"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "J1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ }
 }
