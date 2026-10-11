@@ -3228,3 +3228,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 01:26 UTC L: H1 kinjective-homotopy-exact-injective-target FIX 86c51a2f5 (R-hei0125; elementary child folded in).
 - 01:27 L: merged deliver/E1/lem-pc-finite-flat-restriction-projective (reviewer FIX+NODE(2); first push; new nodes: 2)
 - 01:27 UTC L: deleted C1's second re-push of the Mathlib leaf pqf-lem-affine-open-locnoeth (4c6be90b1), notice in coord/returns/C1.md. NOTE: C1 re-claimed/re-pushed a status-mathlib node despite the claim.py refusal rule; check claim.py's status check at stage 3.
+- 01:28 UTC L: E1 finite-flat-restriction-projective FIX fe7aa41fe (R-ffr0125; wrongly filed Mathlib leaf turned into a three-step proof); lem-pc-module-finite-presentation-transitive (Module.FinitePresentation.trans, FinitePresentation.lean:323) and lem-pc-module-flat-transitive (Module.Flat.trans, Flat/Stability.lean:62) set to mathlib by L.
