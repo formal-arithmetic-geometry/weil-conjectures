@@ -404,6 +404,7 @@ lemma _root_.CategoryTheory.isIso_of_isIso_comp_of_isIso_comp {C : Type*} [Categ
 
 variable {Y : Scheme.{u}}
 
+omit [Algebra ℚ_[l] L] [IsScalarTower ℚ_[l] L (PadicAlgCl l)] [FiniteDimensional ℚ_[l] L] in
 variable (Y) in
 /-- Every object of `D(Y_ét, 𝒪_E)` has a derived base change along `𝒪_E ⟶ 𝒪_L`, the latter being
 flat (`PadicAlgCl.integersShrinkMap_flat`). -/
@@ -577,13 +578,8 @@ noncomputable abbrev derivedCompleteRationalScalarExtension :
     integersShrinkMap_nonZeroDivisors_le (derivedCompleteIntegralScalarExtension h hc)
     derivedCompleteIntegralScalarExtension_map_smul
 
-/-- Blueprint `lem-weil-scalar-extension-exact-triangulated`: Scalar extension is an exact
-triangulated functor.
-
-Let `E ⊆ L` be finite extensions of `ℚ_ℓ` inside `ℚ̄_ℓ`. Assume, as in the definition of the
-scalar extension (`def-weil-rationalization-karoubi`), that the derived base change
-`K ↦ K ⊗ᴸ_{𝒪_E} 𝒪_L` exists on `D(Y_ét, 𝒪_E)` (`h`) and carries derived complete objects to
-derived complete objects (`hc`). Then the scalar extension `- ⊗_E L : D_comp(Y_ét, E) ⥤
+/-- Given that the derived base change `K ↦ K ⊗ᴸ_{𝒪_E} 𝒪_L` exists on `D(Y_ét, 𝒪_E)` (`h`) and
+carries derived complete objects to derived complete objects (`hc`), the scalar extension `- ⊗_E L : D_comp(Y_ét, E) ⥤
 D_comp(Y_ét, L)`, induced on the rationalizations by the derived base change, is a triangulated
 functor: it commutes with shifts and carries distinguished triangles to distinguished triangles.
 
@@ -611,6 +607,43 @@ noncomputable def derivedCompleteRationalScalarExtensionFromIntegralIso
     (derivedCompleteRationalScalarExtension h hc)).app K
 
 end
+
+variable (Y) in
+/-- Derived base change along `𝒪_E ⟶ 𝒪_L` carries derived complete objects to derived complete
+objects. This is the completeness part of the definition of the scalar extension
+(`def-weil-rationalization-karoubi`); see the implementation notes of this file for its status. -/
+theorem derivedCompleteIntegral_derivedBaseChange_integers
+    (K : 𝐃(Y, Shrink.{u + 1} (PadicAlgCl.integers l E)))
+    (hK : _root_.DerivedCategory.derivedCompleteIntegral Y.smallEtaleTopology l E K) :
+    _root_.DerivedCategory.derivedCompleteIntegral Y.smallEtaleTopology l L
+      ((derivedBaseChange (PadicAlgCl.integersShrinkMap l E L) Y
+        (exists_isDerivedBaseChange_integers l E L Y)).obj K) :=
+  sorry
+
+variable (Y) in
+/-- The scalar extension `- ⊗_E L : D_comp(Y_ét, E) ⥤ D_comp(Y_ét, L)` of blueprint
+`def-weil-rationalization-karoubi`: on an integral representative `K`, the rationalization of
+the derived base change `K ⊗ᴸ_{𝒪_E} 𝒪_L`. -/
+noncomputable abbrev rationalScalarExtension :
+    DerivedCategoryDerivedCompleteRational Y.smallEtaleTopology l E ⥤
+      DerivedCategoryDerivedCompleteRational Y.smallEtaleTopology l L :=
+  derivedCompleteRationalScalarExtension (exists_isDerivedBaseChange_integers l E L Y)
+    (derivedCompleteIntegral_derivedBaseChange_integers l E L Y)
+
+/-- Blueprint `lem-weil-scalar-extension-exact-triangulated`: Scalar extension is an exact
+triangulated functor.
+
+Let `E ⊆ L` be finite extensions of `ℚ_ℓ` inside `ℚ̄_ℓ`. The scalar extension
+`- ⊗_E L : D_comp(Y_ét, E) ⥤ D_comp(Y_ét, L)`
+(`AlgebraicGeometry.Etale.rationalScalarExtension`) is a triangulated functor: it commutes with shifts and carries distinguished triangles to
+distinguished triangles. As in the blueprint, it is the composite of the derived base change,
+triangulated as the left adjoint of the triangulated restriction of scalars, and of the
+rationalization (`CategoryTheory.Rationalization.isTriangulated_mapOfRingHom`); by
+`AlgebraicGeometry.Etale.nonempty_iso_fromIntegral_of_isDerivedBaseChange` it does not depend on
+the integral representatives. -/
+instance isTriangulated_rationalScalarExtension :
+    (rationalScalarExtension l E L Y).IsTriangulated :=
+  inferInstance
 
 end Rational
 
