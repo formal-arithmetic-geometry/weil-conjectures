@@ -195,5 +195,23 @@
   "worker": "stage1",
   "summary": "Split following Stacks 01B7 (modules.tex line 855) and its proof, read with Definition 01B5. Five elementary steps: (1) generation by finitely many sections tested on sections over a covering, from the existing same-unit lemma lem-weil-pbc-ringed-space-module-exactness-local-lifting (1) on (U,O_U); (2) clause (1): images of generators along an epimorphism generate ('trivial' in the source, written out with two refinements of coverings); (3) the image of a morphism with finite type source, via the cokernel and lem-weil-pbc-abelian-exact-iff-epi-kernel-lift, as the citers use it; (4)-(5) clause (2): sections of F_3 locally lift (local-lifting (1)), and the kernel of g is locally in the image of f (local-lifting (2)), so the generators of F_1 and the lifts of those of F_3 generate F_2 over a small open; the source's 'result for modules over a ring applied to stalks' is carried out on sections over coverings, which avoids stalks and any new node. Statement: kept, with the finite type notion now cited to def-weil-pbc-module-finite-type-presentation (1) (pqf-def-coherent is for schemes only) and the image made explicit as Ker(H -> Coker). No new nodes. Mathlib: SheafOfModules.IsFiniteType exists (definition only), recorded as mathlib_candidate; no lemma for images or extensions."
  },
- "reviewed": "Reviewed by L 2026-10-10: faithful to Modules 01B7 with both parts written out on sections over coverings via lem-weil-pbc-ringed-space-module-exactness-local-lifting (no stalk or ring-level node needed); the finite-type notion now cites the ringed-space definition node. No new nodes; Mathlib candidate recorded (B8)."
+ "reviewed": "Reviewed by L 2026-10-10: faithful to Modules 01B7 with both parts written out on sections over coverings via lem-weil-pbc-ringed-space-module-exactness-local-lifting (no stalk or ring-level node needed); the finite-type notion now cites the ringed-space definition node. No new nodes; Mathlib candidate recorded (B8).",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ModuleFiniteTypeImageExtension",
+  "declaration": "AlgebraicGeometry.RingedSpace.finiteType_image_extension",
+  "file": "lean/Sheaf/AlgebraicGeometry/ModuleFiniteTypeImageExtension.lean",
+  "statement": "theorem finiteType_image_extension (X : RingedSpace.{u}) : (∀ {F G : SheafOfModules.{u} (moduleRings X)} (p : F ⟶ G), [Epi p] → [F.IsFiniteType] → G.IsFiniteType) ∧ (∀ {F H : SheafOfModules.{u} (moduleRings X)} (φ : F ⟶ H), [F.IsFiniteType] → (Abelian.image φ).IsFiniteType) ∧ (∀ (S : ShortComplex (SheafOfModules.{u} (moduleRings X))), S.ShortExact → [S.X₁.IsFiniteType] → [S.X₃.IsFiniteType] → S.X₂.IsFiniteType)",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-fti1242",
+  "group": "J1",
+  "result": "pass",
+  "note": "RingedSpace.{u} + SheafOfModules (moduleRings X) = Mod(O_X); (1) Epi p, F.IsFiniteType -> G.IsFiniteType; (1') Abelian.image phi = kernel (cokernel.π phi) = node's Ker(H->Coker phi) (#print), F finite type; (2) ShortComplex.ShortExact with X1,X3 IsFiniteType -> X2; Mathlib IsFiniteType = def-weil-pbc-module-finite-type-presentation (1); no hollow hyps, single universe, no let"
+ }
 }
