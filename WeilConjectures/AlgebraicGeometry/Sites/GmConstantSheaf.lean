@@ -66,7 +66,8 @@ noncomputable def gmSectionsPullback (g : X ⟶ Y) : gmSections Y ⟶ gmSections
 
 /-- The pullback of sections of `𝔾ₘ` over the terminal objects is the pullback of units. -/
 lemma gmSectionsPullback_gmSection (g : X ⟶ Y) (u : Γ(Y, ⊤)ˣ) :
-    gmSectionsPullback g (gmSection u) = gmSection (Units.map g.appTop.hom.toMonoidHom u) := by
+    (gmSectionsPullback g).hom (gmSection u) =
+      gmSection (Units.map g.appTop.hom.toMonoidHom u) := by
   apply ULift.ext
   apply Additive.toMul.injective
   apply Units.ext
