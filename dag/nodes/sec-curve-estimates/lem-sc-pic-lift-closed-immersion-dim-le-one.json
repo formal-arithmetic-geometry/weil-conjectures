@@ -159,5 +159,23 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-pl2 (reviewer sub-agent of L); spot-checked: Re-review of the 14:57 return (head a7c19b263): all four points repaired. 1 (B3/C4): new def-sc-topological-abelian-cohomology defines H^p on Ab(X) of a topological space with the long exact sequence and identifies the scheme case with def-sc-zariski-cohomology; both new nodes and steps 2-3 cite it. 2: lem-sc-noetherian-cohomology-vanishing-abelian-dim-one now uses the minimal-closed-subset definition of Noetherian; agrees with 02UZ at d=1, p=2. 3: lem-sc-cohomology-closed-immersion-pushforward defines a topological closed embedding and i_* sectionwise and states a natural iso H^p(Z,F)=H^p(X,i_*F), as 02UV. 4: new lem-sc-picard-h1-restriction-compatibility states the commutation of L|->i^*L with the 03P8/thm-sc-hilbert-90 isomorphisms and the H^1 map; true (functoriality of the Isom-torsor class), cited in step 4. Item statement unchanged against sheaf-dag (09NY, hypotheses: Noetherian space, dim<=1, closed immersion). Steps: 1 short exact sequence of units from def-weil-closed-immersion (stalkwise lifting along surjective local maps); 2 vanishing node + LES give H^1 surjection; 3 pushforward node p=1, F=O_Z^*; 4 thm-sc-hilbert-90 for X and Z plus compatibility node. All cited nodes read (thm-sc-hilbert-90, def-sc-zariski-cohomology, def-sc-zariski-site, def-sc-gm-torsor, def-sc-picard-group, def-kun-topological-krull-dimension, def-pc-module-pullback, def-sc-invertible-module, def-weil-closed-immersion, def-pc-scheme). Declared tool use thm-sc-hilbert-90 (unit sk-prop-hilbert90) accepted as generic 09NU/03P8 identification. No Mathlib leaf. Small cases: Z=X (identity), Z empty, dim 0. Start Sat Oct 10 03:18:56 PM UTC 2026, end Sat Oct 10 03:19:38 PM UTC 2026."
  },
- "lead_note": "2026-10-10 L (R-pl2): def-sc-topological-abelian-cohomology: source.place cites Lemmas 03FD/03F3 (sites-cohomology.tex, not cohomology.tex); the definition is Cohomology Section 01DZ (cohomology.tex line 33, section-cohomology-sheaves) - maintainer may correct source. Report still lists WANTED Stacks TeX that is present (varieties.tex 8138, cohomology.tex); ignore."
+ "lead_note": "2026-10-10 L (R-pl2): def-sc-topological-abelian-cohomology: source.place cites Lemmas 03FD/03F3 (sites-cohomology.tex, not cohomology.tex); the definition is Cohomology Section 01DZ (cohomology.tex line 33, section-cohomology-sheaves) - maintainer may correct source. Report still lists WANTED Stacks TeX that is present (varieties.tex 8138, cohomology.tex); ignore.",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.PicardLift",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_isInvertible_tensorPullback_iso_of_isClosedImmersion",
+  "file": "lean/Sheaf/AlgebraicGeometry/PicardLift.lean",
+  "statement": "theorem exists_isInvertible_tensorPullback_iso_of_isClosedImmersion {X Z : Scheme.{u}} [NoetherianSpace X] (i : Z ⟶ X) [IsClosedImmersion i] (hdim : topologicalKrullDim X ≤ 1) : ∀ (N : Z.Modules), N.IsInvertible → ∃ (L : X.Modules), L.IsInvertible ∧ Nonempty ((tensorPullback i).obj L ≅ N)",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-plc1221",
+  "group": "G1",
+  "result": "pass",
+  "note": "X Z : Scheme; [NoetherianSpace X] = topological Noetherian; (i) [IsClosedImmersion i]; topologicalKrullDim X ≤ 1 (H1 form); ∀ N : Z.Modules, N.IsInvertible → ∃ L : X.Modules, L.IsInvertible ∧ Nonempty ((tensorPullback i).obj L ≅ N); #check confirmed Scheme.Modules.IsInvertible and Scheme.Modules.tensorPullback; Pic clause is the node's 'that is' gloss, no Pic stmt_dep"
+ }
 }
