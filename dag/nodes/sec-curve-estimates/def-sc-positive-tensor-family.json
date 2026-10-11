@@ -1,0 +1,107 @@
+{
+ "id": "def-sc-positive-tensor-family",
+ "kind": "definition",
+ "title": "Positive ordered tensor products of modules and their global sections",
+ "statement": "Let $X$ be a scheme [def-pc-scheme]. For $n\\geq 1$ and an ordered family $\\mathcal F_1,\\ldots,\\mathcal F_n$ of $\\mathcal O_X$-modules, define the left-associated tensor product [def-pur-sheaf-tensor-product] by $T_1=\\mathcal F_1$ and $T_{k+1}=T_k\\otimes_{\\mathcal O_X}\\mathcal F_{k+1}$. For global sections $s_i$ of $\\mathcal F_i$, define their pure tensor section recursively by $t_1=s_1$ and $t_{k+1}=t_k\\otimes s_{k+1}$, where the binary section tensor is the image of the presheaf pure tensor under the sheafification map. In particular families indexed by sets $I_i$ induce a section of $T_n$ for every tuple $(j_i)\\in\\prod_i I_i$.",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 09NC, lemma-enough-globally-generated-ample, displayed L and tau_J"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "status": "split",
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "iterated tensor product of a finite family of sheaves of modules and their sections",
+   "results": "{\"t\": \"2026-10-11T08:21:32Z\", \"tool\": \"leansearch\", \"query\": \"iterated tensor product of a finite family of sheaves of modules and their sections\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: Internal Server Error\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "iterated tensor product of a finite family of sheaves of modules and their sections",
+   "results": "{\"t\": \"2026-10-11T08:21:32Z\", \"tool\": \"leanfinder\", \"query\": \"iterated tensor product of a finite family of sheaves of modules and their sections\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.tensorProd_isSheaf\", \"PresheafOfModules.Monoidal.tensorObj_obj\", \"PresheafOfModules.Monoidal.tensorObj\", \"PresheafOfModules.Monoidal.tensorObj_map_tmul\", \"PresheafOfModules.Monoidal.tensorObjMap\", \"LightCondensed.instMonoidalLightCondSetLightCondModFree\", \"PresheafOfModules.Monoidal.tensorHom_app\", \"LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat\"], \"digest\": \"03d0f92a0defce25\"}",
+   "date": "2026-10-11",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "tensorFamily|iteratedTensor|tensorList|tensorSections",
+   "results": "{\"t\": \"2026-10-11T08:21:32Z\", \"tool\": \"grep\", \"query\": \"tensorFamily|iteratedTensor|tensorList|tensorSections\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-11",
+   "verdict": "no exact match"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sc-tensor-globally-generated",
+  "date": "2026-10-11",
+  "group": "H1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-pic-proper-ntorsion",
+   "place": "09NC proof, displayed left-associated tensor product and the pure tensor sections tau_J",
+   "via": [
+    "lem-sc-tensor-globally-generated",
+    "lem-sc-enough-globally-generated-ample",
+    "lem-sc-integral-dim-one-ample",
+    "lem-sc-reduced-dim-le-one-ample",
+    "lem-sc-dim-one-ample-invertible",
+    "lem-sc-dim-one-quasi-projective",
+    "lem-sc-proper-dim-one-projective"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-curveestimate",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.PositiveTensorFamily",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.positiveTensorFamily",
+  "file": "lean/Sheaf/AlgebraicGeometry/PositiveTensorFamily.lean",
+  "statement": "def positiveTensorFamily {X : Scheme.{u}} : (n : ℕ) → (Fin (n + 1) → X.Modules) → X.Modules",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": false,
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.positiveTensorFamily",
+   "AlgebraicGeometry.Scheme.Modules.tensorGlobalSections_naturality",
+   "AlgebraicGeometry.Scheme.Modules.tensorGlobalSections",
+   "AlgebraicGeometry.Scheme.Modules.positiveTensorFamilySection"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-tgg1310",
+  "group": "H1",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-tgg1310",
+  "group": "H1",
+  "result": "pass",
+  "note": "QC=[CompactSpace X]; n>=1 as Fin (n+1); hL Scheme.Modules.IsInvertible; hG Nonempty GeneratingSections; product positiveTensorFamily (T1=L0, T_{k+1}=T_k ⊗ L_{k+1}, ⊗ = instMonoidalCategory_weilConjectures = SheafOfModules.monoidalCategory X.sheaf, checked by #synth); conj1 invertible, conj2 GG, conj3 finite-type families exist, conj4 every finite-type choice: Epi freeHomEquiv.symm of pure tensors over Π i,(σ i).I = GeneratingSections.epi form; sections via tmulSection (sheafified pure tensor); sorry only in Prop naturality"
+ }
+}
