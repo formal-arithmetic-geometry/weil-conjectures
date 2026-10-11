@@ -155,5 +155,23 @@
   "by": "L",
   "result": "accepted",
   "note": "2 steps following Stacks 00OJ: chains of primes contract to strict chains by incomparability (new leaf, Ideal.IsIntegral.comap_lt_comap, GoingUp.lean:221 verified by L); maximal contracts to maximal (new leaf, GoingUp.lean:211 verified). New definition leaf def-weil-pbc-krull-dimension-ring (ringKrullDim, KrullDimension/Basic.lean:30 verified). Statement now cites the definitions (was empty stmt_deps). Stage 3: the imported pqf-lem-incomparability (unit sk-prop-av-pqf-finite) states the same fact as the new 00GT leaf."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.IntegralExtensionDimension",
+  "declaration": "RingHom.integralExtensionDimension",
+  "file": "lean/Sheaf/RingTheory/IntegralExtensionDimension.lean",
+  "statement": "theorem integralExtensionDimension {R : Type u} {S : Type v} [CommRing R] [CommRing S] (f : R →+* S) (hf : f.IsIntegral) : ringKrullDim S ≤ ringKrullDim R ∧ ∀ (I : Ideal S), I.IsMaximal → (I.comap f).IsMaximal",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-ied1101",
+  "group": "F1",
+  "result": "pass",
+  "note": "ring map f : R →+* S of CommRings (no injectivity, as node); B integral over A = f.IsIntegral (Mathlib ring-map form, ∀ x, f.IsIntegralElem x; non-hollow); dim B ≤ dim A = ringKrullDim S ≤ ringKrullDim R (ring dimension, node wording); maximal of B over maximal of A = ∀ I maximal, (I.comap f).IsMaximal; #check resolves root ringKrullDim; no Mathlib theorem states the dimension inequality"
  }
 }
