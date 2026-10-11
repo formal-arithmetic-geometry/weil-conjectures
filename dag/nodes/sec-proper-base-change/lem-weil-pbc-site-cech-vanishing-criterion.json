@@ -210,5 +210,23 @@
   "by": "L",
   "result": "accepted",
   "note": "Seven steps along Stacks 03F9 (label lemma-cech-vanish-collection, corrected by the worker): induction over all Cech-acyclic sheaves, embedding into an injective, 03AW (lem-weil-pbc-site-injective-cech-acyclic, claimed by C), sections over B exact via the long exact sequence, R^0 ≅ Γ and the new node lem-weil-pbc-site-ses-cech-h1-surjective (03F8, unsplit), short exact sequence of Cech complexes degreewise by hypothesis (1) (the worker notes correctly that exactness of the Cech functor on presheaves does not apply), Q Cech-acyclic by the long exact sequence of complexes, dimension shifting. Checked. Statement made precise (chosen fibre products; cofinal spelled out)."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SiteCechVanishingCriterion",
+  "declaration": "CategoryTheory.Sheaf.isZero_H'_of_siteCech_vanishing",
+  "file": "lean/Sheaf/CategoryTheory/SiteCechVanishingCriterion.lean",
+  "statement": "theorem isZero_H'_of_siteCech_vanishing {C : Type u} [SmallCategory C] (J : Precoverage C) [J.HasIsos] [J.IsStableUnderComposition] [J.IsStableUnderBaseChange] [J.HasPullbacks] [HasSheafify J.toGrothendieck AddCommGrpCat.{u}] [HasExt.{r} (Sheaf J.toGrothendieck AddCommGrpCat.{u})] (B : Set C) (Cov : ∀ (U : C) (T : Type u) (V : T → C), (∀ t, V t ⟶ U) → Prop) (S : ∀ (U : C) (T : Type u) (V : T → C) (f : ∀ t, V t ⟶ U), Cov U T V f → SiteCechComplex V f) (F : Sheaf J.toGrothendieck AddCommGrpCat.{u}) (hcover : ∀ (U : C) (T : Type u) (V : T → C) (f : ∀ t, V t ⟶ U), Cov U T V f → Presieve.ofArrows V f ∈ J U) (hB : ∀ (U : C) (T : Type u) (V : T → C) (f : ∀ t, V t ⟶ U) (h : Cov U T V f), U ∈ B ∧ (∀ t, V t ∈ B) ∧ ∀ (p : ℕ) (a : Fin (p + 1) → T), (S U T V f h).W p a ∈ B) (hcofinal : ∀ (U : C), U ∈ B → ∀ (T : Type u) (V : T → C) (f : ∀ t, V t ⟶ U), Presieve.ofArrows V f ∈ J U → ∃ (K : Type u) (W : K → C) (g : ∀ k, W k ⟶ U), Cov U K W g ∧ ∀ k, ∃ (t : T) (a : W k ⟶ V t), a ≫ f t = g k) (hcech : ∀ (U : C) (T : Type u) (V : T → C) (f : ∀ t, V t ⟶ U) (h : Cov U T V f) (p : ℕ), 0 < p → IsZero (((S U T V f h).cohomologyFunctor p).obj F.obj)) : ∀ (U : C), U ∈ B → ∀ (p : ℕ), 0 < p → IsZero (H' F p U)",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "E1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }
