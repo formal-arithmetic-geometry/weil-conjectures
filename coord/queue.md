@@ -1,11 +1,11 @@
 # Work queue
 
-973 items; claim with `tools/claim.py next <group> [--stage N]`.
+971 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (973)
+## Stage 2: nodes to state (971)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -24,7 +24,6 @@
 | `lem-exc-etale-sheaves-gsets-point` | 1 | state |
 | `lem-exc-field-sections-stalk-invariants` | 1 | state |
 | `lem-exc-finite-galois-sheaf-sections-coproduct` | 1 | state |
-| `lem-exc-rg-adjoint-transfer-functorial-injectives` | 1 | state |
 | `lem-exc-rg-discrete-modules-functorial-injective-embeddings` | 1 | state |
 | `lem-exc-rg-open-stabilizer-adjoint` | 1 | state |
 | `lem-galois-descent` | 1 | state |
@@ -42,7 +41,6 @@
 | `lem-pc-derived-limit-roos-abelian-groups` | 1 | state |
 | `lem-pc-derived-lower-truncation-step-triangle` | 1 | state |
 | `lem-pc-derived-tensor-flat-second-localization` | 1 | state |
-| `lem-pc-finite-flat-restriction-projective` | 1 | state |
 | `lem-pc-finite-projective-tor-acyclic` | 1 | state |
 | `lem-pc-flat-tensor-complex-cohom` | 1 | state |
 | `lem-pc-fppf-affine-sheafification-restriction` | 1 | state |
