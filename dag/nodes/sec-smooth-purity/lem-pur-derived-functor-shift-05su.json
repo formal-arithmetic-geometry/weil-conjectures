@@ -1,130 +1,133 @@
 {
- "id": "lem-pur-derived-functor-shift-05su",
- "blueprint": {
-  "is": null,
-  "from": {
-   "node": "def-weil-derived-complete-integral-detailed",
-   "place": "Lemma 05SU(2): LF is compatible with shifts",
-   "via": [
-    "lem-pur-left-derived-exact-when-defined"
-   ]
+  "id": "lem-pur-derived-functor-shift-05su",
+  "blueprint": {
+    "is": null,
+    "from": {
+      "node": "def-weil-derived-complete-integral-detailed",
+      "place": "Lemma 05SU(2): LF is compatible with shifts",
+      "via": [
+        "lem-pur-left-derived-exact-when-defined"
+      ]
+    },
+    "same_as": []
   },
-  "same_as": []
- },
- "kind": "statement",
- "title": "Left derived values commute with shifts",
- "statement": "In Situation 05S8 [def-pur-saturated-triangulated-localization], let $X$ be an object of $\\mathcal D$ and $n\\in\\mathbf Z$. Then $LF$ is defined at $X$ if and only if it is defined at $X[n]$, and in this case there is a canonical isomorphism $LF(X)[n]\\to LF(X[n])$ between values.",
- "source": {
-  "document": "literature/stacks-project/derived.tex",
-  "place": "Lemma 05SU(2)"
- },
- "stmt_deps": [
-  "def-pur-saturated-triangulated-localization"
- ],
- "proof": [
-  {
-   "text": "For every integer n, sending a denominator s:X'\\to X in S/X to its shifted morphism s[n]:X'[n]\\to X[n] defines an equivalence S/X\\simeq S/X[n]. The forward implication that s[n] lies in S is the shift-compatibility axiom (MS5) in [def-pur-saturated-triangulated-localization], and the reverse implication follows by applying the same axiom to -n; identities and commuting triangles are preserved by the shift automorphism.",
-   "uses": [
+  "kind": "statement",
+  "title": "Left derived values commute with shifts",
+  "statement": "In Situation 05S8 [def-pur-saturated-triangulated-localization], let $X$ be an object of $\\mathcal D$ and $n\\in\\mathbf Z$. Then $LF$ is defined at $X$ if and only if it is defined at $X[n]$, and in this case there is a canonical isomorphism $LF(X)[n]\\to LF(X[n])$ between values.",
+  "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Lemma 05SU(2)"
+  },
+  "stmt_deps": [
+    "def-pur-saturated-triangulated-localization"
+  ],
+  "proof": [
+    {
+      "text": "For every integer n, sending a denominator s:X'\\to X in S/X to its shifted morphism s[n]:X'[n]\\to X[n] defines an equivalence S/X\\simeq S/X[n]. The forward implication that s[n] lies in S is the shift-compatibility axiom (MS5) in [def-pur-saturated-triangulated-localization], and the reverse implication follows by applying the same axiom to -n; identities and commuting triangles are preserved by the shift automorphism.",
+      "uses": [
+        "def-pur-saturated-triangulated-localization",
+        "def-weil-triangulated-category"
+      ],
+      "elementary": true,
+      "source": {
+        "document": "literature/stacks-project/derived.tex",
+        "place": "Lemma 05SU(2), proof from the shift automorphism and MS5"
+      }
+    },
+    {
+      "text": "Write G:S/X\\to\\mathcal D' for s:X'\\mapsto F(X') and G_n:S/X[n]\\to\\mathcal D' for t:X''\\mapsto F(X''). Exactness of F supplies the canonical shift isomorphisms F(X')[n]\\cong F(X'[n]); hence, after the equivalence in Step 1, G_n is naturally isomorphic to the postcomposition of G by the shift [n] on \\mathcal D'. Postcomposition by this automorphism preserves the cone, retraction, and factorization conditions in the definition of an essentially constant pro-object. Therefore G is essentially constant with value LF(X) if and only if G_n is essentially constant with value LF(X)[n].",
+      "uses": [
+        "def-weil-triangulated-category",
+        "def-pc-essentially-constant-pro-diagram",
+        "lem-pc-essentially-constant-pro-hom-colimit"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/derived.tex",
+        "place": "Lemma 05SU(2), proof of the LF clause"
+      }
+    },
+    {
+      "text": "The equivalence of denominator categories and the transported cone identify the value at X[n] with LF(X)[n]. This gives the canonical isomorphism LF(X)[n]\\to LF(X[n]); applying the construction with -n gives the converse implication, so LF is defined at X exactly when it is defined at X[n].",
+      "uses": [
+        "def-weil-triangulated-category",
+        "def-pc-essentially-constant-pro-diagram",
+        "lem-pc-essentially-constant-pro-hom-colimit"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/derived.tex",
+        "place": "Lemma 05SU(2), conclusion of the LF clause"
+      }
+    }
+  ],
+  "proof_deps": [
     "def-pur-saturated-triangulated-localization",
-    "def-weil-triangulated-category"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Lemma 05SU(2), proof from the shift automorphism and MS5"
-   }
-  },
-  {
-   "text": "Write G:S/X\\to\\mathcal D' for s:X'\\mapsto F(X') and G_n:S/X[n]\\to\\mathcal D' for t:X''\\mapsto F(X''). Exactness of F supplies the canonical shift isomorphisms F(X')[n]\\cong F(X'[n]); hence, after the equivalence in Step 1, G_n is naturally isomorphic to the postcomposition of G by the shift [n] on \\mathcal D'. Postcomposition by this automorphism preserves the cone, retraction, and factorization conditions in the definition of an essentially constant pro-object. Therefore G is essentially constant with value LF(X) if and only if G_n is essentially constant with value LF(X)[n].",
-   "uses": [
     "def-weil-triangulated-category",
     "def-pc-essentially-constant-pro-diagram",
     "lem-pc-essentially-constant-pro-hom-colimit"
-   ],
-   "elementary": false,
-   "source": {
+  ],
+  "proof_origin": {
+    "by": "document",
     "document": "literature/stacks-project/derived.tex",
-    "place": "Lemma 05SU(2), proof of the LF clause"
-   }
+    "place": "Lemma 05SU(2)"
   },
-  {
-   "text": "The equivalence of denominator categories and the transported cone identify the value at X[n] with LF(X)[n]. This gives the canonical isomorphism LF(X)[n]\\to LF(X[n]); applying the construction with -n gives the converse implication, so LF is defined at X exactly when it is defined at X[n].",
-   "uses": [
-    "def-weil-triangulated-category",
-    "def-pc-essentially-constant-pro-diagram",
-    "lem-pc-essentially-constant-pro-hom-colimit"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Lemma 05SU(2), conclusion of the LF clause"
-   }
-  }
- ],
- "proof_deps": [
-  "def-pur-saturated-triangulated-localization",
-  "def-weil-triangulated-category",
-  "def-pc-essentially-constant-pro-diagram",
-  "lem-pc-essentially-constant-pro-hom-colimit"
- ],
- "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/derived.tex",
-  "place": "Lemma 05SU(2)"
- },
- "mathlib_searches": [
-  {
-   "tool": "leanfinder",
-   "query": "left derived functor defined at X iff defined at shifted object and canonical shift isomorphism",
-   "results": "CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt and related CommShift instances; no Stacks 05SU statement",
-   "date": "2026-10-11",
-   "verdict": "no match"
+  "mathlib_searches": [
+    {
+      "tool": "leanfinder",
+      "query": "left derived functor defined at X iff defined at shifted object and canonical shift isomorphism",
+      "results": "CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt and related CommShift instances; no Stacks 05SU statement",
+      "date": "2026-10-11",
+      "verdict": "no match"
+    },
+    {
+      "tool": "loogle",
+      "query": "CommShift, DerivedCategory.shiftIso, leftDerivedFunctor",
+      "results": "loogle: unknown identifier 'CommShift', 0 hits",
+      "date": "2026-10-11",
+      "verdict": "unavailable"
+    },
+    {
+      "tool": "grep",
+      "query": "shiftIso|CommShift|derived.*shift Mathlib/CategoryTheory",
+      "results": "0 hits in the requested Mathlib/CategoryTheory directory",
+      "date": "2026-10-11",
+      "verdict": "no match"
+    },
+    {
+      "tool": "leansearch",
+      "query": "derived functor commutes with shifts",
+      "results": "service unavailable: Internal Server Error",
+      "date": "2026-10-11",
+      "verdict": "unavailable"
+    }
+  ],
+  "mathlib_match": null,
+  "status": "split",
+  "created": {
+    "item": "lem-pur-left-derived-exact-when-defined",
+    "by": "worker",
+    "date": "2026-10-11"
   },
-  {
-   "tool": "loogle",
-   "query": "CommShift, DerivedCategory.shiftIso, leftDerivedFunctor",
-   "results": "loogle: unknown identifier 'CommShift', 0 hits",
-   "date": "2026-10-11",
-   "verdict": "unavailable"
+  "chapter": "sec-smooth-purity",
+  "unit": "sk-def-sf-operations",
+  "split_report": {
+    "date": "2026-10-11",
+    "item": "lem-pur-derived-functor-shift-05su",
+    "worker": "stage1",
+    "summary": "Checked the LF shift statement against Stacks Derived Categories Lemma 05SU(2). The split proves it by shifting the denominator category using MS5, transporting the essentially constant pro-object cone through the exact functor's shift isomorphism, and applying the same construction with the inverse shift. No new node was needed; all supporting notions are stated by existing definition nodes.",
+    "blueprint": "Realizes the ancestor proof place 'Lemma 05SU(2): LF is compatible with shifts' through the denominator-category equivalence and transport of essential constancy.",
+    "tool_uses": []
   },
-  {
-   "tool": "grep",
-   "query": "shiftIso|CommShift|derived.*shift Mathlib/CategoryTheory",
-   "results": "0 hits in the requested Mathlib/CategoryTheory directory",
-   "date": "2026-10-11",
-   "verdict": "no match"
+  "reviewed": {
+    "date": "2026-10-11",
+    "by": "L",
+    "reviewer": "R-dfs0156",
+    "group": "F1",
+    "result": "pass",
+    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-dfs0156 (reviewer sub-agent of L); spot-checked: Statement matches derived.tex 05SU(2) verbatim in Situation 05S8 (C4 ok). Step 1 uses MS5 (shift-stability, f in S iff f[1] in S; the def node labels it MS5, not MS4) plus [1] an automorphism: S/X iso S/X[n] (C4 ok). Step 2 uses the exact-functor clause of def-weil-triangulated-category, which does include the natural iso F(X[1]) = F(X)[1] (iterated/inverted for [n]), and the cone/retraction/factorization clauses of def-pc-essentially-constant-pro-diagram, both invariant under natural iso and precomposition by an isomorphism of index categories (C4 ok). Step 3: the canonical iso LF(X)[n] -> LF(X[n]) is defined as the comparison of two values of the same essentially constant pro-object, unique by lem-pc-essentially-constant-pro-hom-colimit (E ok). Citers lem-pur-left-derived-exact-when-defined (Steps 3-4) and lem-pur-derived-functor-triangles-05sc (statement) use exactly the per-object canonical iso. No duplicate: no other 05su/derived-functor-shift node; the 05SU mentions in sec-proper-base-change are RF on D^+ inside other lemmas. No repairs needed; Second reading by F1 missed no fault."
   },
-  {
-   "tool": "leansearch",
-   "query": "derived functor commutes with shifts",
-   "results": "service unavailable: Internal Server Error",
-   "date": "2026-10-11",
-   "verdict": "unavailable"
-  }
- ],
- "mathlib_match": null,
- "status": "split",
- "created": {
-  "item": "lem-pur-left-derived-exact-when-defined",
-  "by": "worker",
-  "date": "2026-10-11"
- },
- "chapter": "sec-smooth-purity",
- "unit": "sk-def-sf-operations",
- "split_report": {
-  "date": "2026-10-11",
-  "item": "lem-pur-derived-functor-shift-05su",
-  "worker": "stage1",
-  "summary": "Checked the LF shift statement against Stacks Derived Categories Lemma 05SU(2). The split proves it by shifting the denominator category using MS5, transporting the essentially constant pro-object cone through the exact functor's shift isomorphism, and applying the same construction with the inverse shift. No new node was needed; all supporting notions are stated by existing definition nodes.",
-  "blueprint": "Realizes the ancestor proof place 'Lemma 05SU(2): LF is compatible with shifts' through the denominator-category equivalence and transport of essential constancy.",
-  "tool_uses": []
- },
- "reviewed": {
-  "date": "2026-10-11",
-  "by": "L",
-  "reviewer": "R-dfs0156",
-  "group": "F1",
-  "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-dfs0156 (reviewer sub-agent of L); spot-checked: Statement matches derived.tex 05SU(2) verbatim in Situation 05S8 (C4 ok). Step 1 uses MS5 (shift-stability, f in S iff f[1] in S; the def node labels it MS5, not MS4) plus [1] an automorphism: S/X iso S/X[n] (C4 ok). Step 2 uses the exact-functor clause of def-weil-triangulated-category, which does include the natural iso F(X[1]) = F(X)[1] (iterated/inverted for [n]), and the cone/retraction/factorization clauses of def-pc-essentially-constant-pro-diagram, both invariant under natural iso and precomposition by an isomorphism of index categories (C4 ok). Step 3: the canonical iso LF(X)[n] -> LF(X[n]) is defined as the comparison of two values of the same essentially constant pro-object, unique by lem-pc-essentially-constant-pro-hom-colimit (E ok). Citers lem-pur-left-derived-exact-when-defined (Steps 3-4) and lem-pur-derived-functor-triangles-05sc (statement) use exactly the per-object canonical iso. No duplicate: no other 05su/derived-functor-shift node; the 05SU mentions in sec-proper-base-change are RF on D^+ inside other lemmas. No repairs needed; Second reading by F1 missed no fault."
- }
+  "lead_notes": [
+    "L (02:00 UTC), after reviewer R-dfs0156 (F1 delivery 5d33973fa, merged 4edc41ef9): the isomorphisms $LF(X)[n]\\to LF(X[n])$ are natural in $X$ (for $f\\colon X\\to Y$ with $LF$ defined at $X$ and $Y$, the square with $LF(f)[n]$ and $LF(f[n])$ commutes, because both composites are the unique map of lem-pur-derived-functor-morphisms-05sa compatible with the cone maps $u_s[n]$ and $u_{s[n]}$); the citer lem-pur-left-derived-exact-when-defined step 4 uses this naturality; Stacks 05SU(2) states the isomorphism object by object, as this node does. A re-statement adding the naturality clause is welcome but not required."
+  ]
 }
