@@ -4,7 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
 import Sheaf.AlgebraicGeometry.InvertibleSectionRing
-import WeilConjectures.AlgebraicGeometry.Modules.GeneratingLocus
+import Sheaf.AlgebraicGeometry.Ample
 import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic
 
 /-!
@@ -46,10 +46,11 @@ section `s^n` equals the numerator. Multiplication by this section is bijective,
 is precisely the quotient `s^{-n} ξ`, including when the nonvanishing open is empty. -/
 theorem exists_sectionRing_proj_morphism (X : Scheme.{v}) (L : X.Modules) [L.IsInvertible]
     (hcover : ∀ x : X, ∃ (d : ℕ) (s : sectionRingGrade L d),
-      0 < d ∧ x ∈ generatingLocus (s.val d)) :
+      0 < d ∧ x ∈ nonvanishingLocus (L.tensorPow d) (s.val d)) :
     ∃ f : X ⟶ Proj (sectionRingGrade L),
       ∀ (d : ℕ) (_hd : 0 < d) (s : sectionRingGrade L d),
-        f ⁻¹ᵁ Proj.basicOpen (sectionRingGrade L) s.val = generatingLocus (s.val d) ∧
+        (f ⁻¹ᵁ Proj.basicOpen (sectionRingGrade L) s.val : Set X) =
+          nonvanishingLocus (L.tensorPow d) (s.val d) ∧
         ∀ (n : ℕ) (ξ : sectionRingGrade L (n • d)),
           (f.app (Proj.basicOpen (sectionRingGrade L) s.val)
             (Proj.awayToSection (sectionRingGrade L) s.val
