@@ -7,6 +7,8 @@ module
 
 public import WeilConjectures.DeligneLaumon.AffineLine.FourierWeight
 public import WeilConjectures.DeligneLaumon.AffineLine.Purity
+public import WeilConjectures.WeilSheaf.HomologyShift
+public import WeilConjectures.WeilSheaf.StalkIso
 
 /-!
 # The degree-one estimate for an irreducible factor
@@ -35,7 +37,9 @@ bound holds for every irreducible, non-geometrically-constant `M` unramified at 
   the stationary-phase identification `H_c^1(A, j_*M) ≃ (j'_*M')_{0'}` and the vanishing of
   `H_c^2(A, j_*M)`.
 - `AlgebraicGeometry.hasWeightsAtMost_compactlySupportedCohomology_one`: the degree-one bound
-  for an irreducible nonexceptional sheaf pure of weight `w`.
+  for an irreducible nonexceptional sheaf pure of weight `w`, and
+  `AlgebraicGeometry.hasWeightsAtMost_compactlySupportedCohomology_one_of_isUnramifiedAtInfinity`
+  for an irreducible sheaf unramified at infinity and not geometrically constant.
 
 ## Implementation notes
 
@@ -46,11 +50,10 @@ phase
 
 ## TODO
 
-Prove the two inputs of the degree-one bound:
-- the boundary semicontinuity
-  `AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.hasWeightsAtMost_directImage`;
-- the stationary phase
-  `AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.nonempty_equiv_stalk_origin_of_isFourierPartner`.
+Prove the boundary semicontinuity
+`AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.hasWeightsAtMost_directImage`
+(`lem-wf-boundary-semicontinuity`) and the stalk formula at the origin
+(`lem-fd-stalk-at-origin`), which are stated with `sorry`.
 -/
 
 @[expose] public section
@@ -138,7 +141,20 @@ theorem nonempty_equiv_stalk_origin_of_isFourierPartner (ψ : AddChar k₀ (Padi
     Nonempty ((D.directImage.compactlySupportedCohomology 1).Equiv
         (D'.directImage.stalk (affineLine.origin k₀))) ∧
       Subsingleton (D.directImage.compactlySupportedCohomology 2).carrier := by
-  sorry
+  obtain ⟨e⟩ := hFT
+  -- the fibre of the transform at `0'` is `RΓ_c(𝔸¹, j_*M)[2]`
+  obtain ⟨⟨e₁⟩, ⟨e₂⟩, -⟩ := D.nonempty_equiv_stalk_fourierTransform_middleExtension_origin ψ
+  -- the fibre of `(j'_*M')[1]` is the stalk `(j'_*M')_{0'}` placed in degree `-1`
+  obtain ⟨e₃⟩ := WeilSheaf.nonempty_equiv_stalk_of_iso
+    ((WeilComplex.homologySheaf (-1)).mapIso e ≪≫
+      D'.directImage.homologySheafShiftToComplexIso 1) (affineLine.origin k₀)
+  refine ⟨⟨e₁.symm.trans e₃⟩, ?_⟩
+  have h₀ : Limits.IsZero ((WeilComplex.homologySheaf 0).obj
+      ((fourierTransform ψ).obj D.middleExtension)) :=
+    (WeilSheaf.isZero_homologySheaf_shift_toComplex D'.directImage (n := 1) (a := 0)
+      (by norm_num)).of_iso ((WeilComplex.homologySheaf 0).mapIso e)
+  have := WeilSheaf.subsingleton_stalk_of_isZero h₀ (affineLine.origin k₀)
+  exact e₂.symm.toLinearEquiv.toEquiv.subsingleton
 
 end WeilSheaf.LisseOnDenseOpen
 
@@ -164,5 +180,18 @@ theorem hasWeightsAtMost_compactlySupportedCohomology_one (ι : PadicAlgCl l →
   have h0 := hM' (affineLine.origin k₀)
   rw [affineLine.residueCard_origin] at h0
   exact h0.of_equiv e
+
+/-- If `M` is irreducible, unramified at infinity, not geometrically constant and punctually
+`ι`-pure of weight `w` on a dense open `U₀` of the affine line, then `H_c^1(A, j_*M)` has weights
+at most `w + 1`: such an `M` is nonexceptional for every nontrivial `ψ`
+(`AlgebraicGeometry.isNonexceptional_of_isUnramifiedAtInfinity`). (blueprint: `sk-c-dl-a1-hc1`) -/
+theorem hasWeightsAtMost_compactlySupportedCohomology_one_of_isUnramifiedAtInfinity
+    (ι : PadicAlgCl l →+* ℂ) (hψ : ψ ≠ 1) (D : WeilSheaf.LisseOnDenseOpen k₀ l)
+    (hD : D.sheaf.IsIrreducibleLisse) (hinf : D.IsUnramifiedAtInfinity)
+    (hconst : ¬ D.IsGeometricallyConstant) {w : ℝ}
+    (hw : D.sheaf.IsPunctuallyPureOfWeight ι w) :
+    (D.directImage.compactlySupportedCohomology 1).HasWeightsAtMostOver k₀ ι (w + 1) :=
+  hasWeightsAtMost_compactlySupportedCohomology_one ψ ι hψ D hD
+    (isNonexceptional_of_isUnramifiedAtInfinity ψ hψ D hD hinf hconst) hw
 
 end AlgebraicGeometry
