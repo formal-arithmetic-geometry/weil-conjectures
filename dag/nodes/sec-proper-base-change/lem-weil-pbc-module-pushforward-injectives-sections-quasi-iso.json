@@ -178,5 +178,24 @@
   "worker": "stage1",
   "summary": "Statement checked against Stacks Remark 01FB (cohomology.tex 2391: 'the vertical arrow is a quasi-isomorphism by Lemma 01EZ') and Remark 01F0 (2147: Gamma(Y,f_*I) represents RGamma(Y,Rf_*F) by Leray's acyclicity lemma 015E and Lemma 01EX, plus Gamma(X,I)=Gamma(Y,f_*I)); statement kept. Proof in 5 steps: setting (Mod(O_Y) has enough injectives, Gamma(Y,-) left exact via the sectionwise-limits leaf), h_*I^n Gamma(Y,-)-acyclic by lem-weil-pbc-module-pushforward-injective-acyclic (01EX (2), V=Y), J'^n acyclic as injectives (leaf lem-weil-pbc-derived-functor-injective-vanishing), Leray acyclicity applied to lambda (new unsplit node lem-weil-pbc-leray-acyclicity-quasi-iso, Derived Categories 015E in the form of complexes, both complexes F-acyclic), and the identification Gamma(Y,h_*I)=Gamma(X,I) (elementary). Searched DAG for 015E/leray/acyclic quasi-iso: lemma-weil-pbc-leray-acyclicity (unit sk-thm-acyclicity, imported) states resolutions of an object and a K-injective version for Grothendieck categories, not this form, so not used. The new node is stated exactly by the sorry-free slopmaster2 theorem CategoryTheory.Functor.quasiIso_map_of_rightAcyclic (WeilConjectures/CategoryTheory/Abelian/RightDerived/Acyclic.lean 208-230), for the lead to attach; not in Mathlib (rightDerivedFunctorPlus unit iso only on injective complexes)."
  },
- "reviewed": "Reviewed by L 2026-10-10: faithful to Cohomology 01FB/01EZ/01F0: Γ(Y,−) left exact additive with derived functors H^q(Y,−) (step 1, limits sectionwise leaf as a tool), h_*I^n acyclic by 01EX (2) (today's node), injectives acyclic (existing leaf), Leray acyclicity 015E (new node, Lean attached by L), the identification Γ(Y,h_*I) = Γ(X,I). No Mathlib match; candidate recorded (B8)."
+ "reviewed": "Reviewed by L 2026-10-10: faithful to Cohomology 01FB/01EZ/01F0: Γ(Y,−) left exact additive with derived functors H^q(Y,−) (step 1, limits sectionwise leaf as a tool), h_*I^n acyclic by 01EX (2) (today's node), injectives acyclic (existing leaf), Leray acyclicity 015E (new node, Lean attached by L), the identification Γ(Y,h_*I) = Γ(X,I). No Mathlib match; candidate recorded (B8).",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.PushforwardInjectivesSectionsQuasiIso",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.quasiIso_globalSections_pushforward_injectives",
+  "file": "lean/Sheaf/AlgebraicGeometry/PushforwardInjectivesSectionsQuasiIso.lean",
+  "statement": "theorem quasiIso_globalSections_pushforward_injectives {X Y : Scheme.{u}} (h : X ⟶ Y) (I : CochainComplex X.Modules ℤ) (J : CochainComplex Y.Modules ℤ) (hI : ∀ n : ℤ, Injective (I.X n)) (hJ : ∀ n : ℤ, Injective (J.X n)) (hI0 : ∀ n : ℤ, n < 0 → IsZero (I.X n)) (hJ0 : ∀ n : ℤ, n < 0 → IsZero (J.X n)) (φ : ((pushforward h).mapHomologicalComplex (ComplexShape.up ℤ)).obj I ⟶ J) (hφ : QuasiIso φ) : QuasiIso (((SheafOfModules.evaluation.{u} Y.ringCatSheaf (op (⊤ : Y.Opens))).mapHomologicalComplex (ComplexShape.up ℤ)).map φ) ∧ QuasiIso (((SheafOfModules.evaluation.{u} Y.ringCatSheaf (op (⊤ : Y.Opens)) ⋙ forget₂ (ModuleCat.{u} (Y.ringCatSheaf.obj.obj (op (⊤ : Y.Opens)))) AddCommGrpCat.{u}).mapHomologicalComplex (ComplexShape.up ℤ)).map φ)",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-mpi1153"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-mpi1153",
+  "group": "H1",
+  "result": "fix",
+  "note": "h:X⟶Y arbitrary; I,J : CochainComplex _.Modules ℤ with Injective terms (Mathlib Injective) and IsZero below 0; φ from termwise Scheme.Modules.pushforward (#check) with QuasiIso φ; conclusion QuasiIso of Γ(Y,φ) via SheafOfModules.evaluation at ⊤ over O_Y(Y) and after forget₂ to Ab; let G removed (stage-3 opaque), defeq to delivered G checked by rfl"
+ }
 }

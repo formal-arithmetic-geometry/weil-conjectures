@@ -4526,3 +4526,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 11:54 L: merged deliver/C1/lem-pqf-leray-five-term (stage 2; reviewer FIX; first push; Sheaf.CategoryTheory.LerayFiveTerm CategoryTheory.BigradedExactCouple.lerayFiveTerm)
 - 11:55 L: merged deliver/K1/lem-weil-pbc-n1-local-characterization (stage 2; reviewer PASS; first push; Sheaf.RingTheory.IsN1OfLocalCharacterization isN1_of_local_characterization)
 - 11:55 L: merged deliver/C1/lem-weil-pbc-descend-finite-locally-free (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.DescendFiniteLocallyFree AlgebraicGeometry.descend_finite_locally_free)
+- 11:56 L: merged deliver/H1/lem-weil-pbc-module-pushforward-injectives-sections-quasi-iso (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.PushforwardInjectivesSectionsQuasiIso AlgebraicGeometry.Scheme.Modules.quasiIso_globalSections_pushforward_injectives)
