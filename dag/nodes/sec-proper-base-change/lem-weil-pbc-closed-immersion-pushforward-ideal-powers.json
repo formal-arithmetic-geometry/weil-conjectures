@@ -223,5 +223,23 @@
   "by": "L",
   "result": "pass",
   "note": "Nine steps on affine opens of X (agent proof for the facts Stacks uses without mention in 088A): i^{-1}(Spec R) = Spec(R/J(V)) by the affine-cover criterion leaf, part (1) from module-pullback-ideal-quotient (1) with i^sharp surjective, quasi-coherence and affine sections of products, powers and quotients from the ideal-times-quasi-coherent node, the module identity (aR-bar)^n M = a^n M, subsheaves equal on a basis, the induced map rho bijective on affine opens, naturality. Correct; 0 new nodes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ClosedImmersionPushforwardIdealPowers",
+  "declaration": "AlgebraicGeometry.Scheme.closedImmersion_pushforward_idealPowers",
+  "file": "lean/Sheaf/AlgebraicGeometry/ClosedImmersionPushforwardIdealPowers.lean",
+  "statement": "theorem closedImmersion_pushforward_idealPowers {X Z : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i] (I : X.IdealSheafData) : (I.comap i).toModules.IsQuasicoherent ∧ (∀ U : X.affineOpens, ∃ (V : Z.affineOpens) (hV : V.1 = i ⁻¹ᵁ U.1), (I.comap i).ideal V = (I.ideal U).map (i.appLE U.1 V.1 (by simp [hV])).hom) ∧ (∀ (G : Z.Modules) [G.IsQuasicoherent] (n : ℕ), 1 ≤ n → Subobject.mk (image.ι ((Modules.pushforward i).map (idealModuleProductι (idealSheafPower (I.comap i).toModulesι n).2 G))) = Subobject.mk (image.ι (idealModuleProductι (idealSheafPower I.toModulesι n).2 ((Modules.pushforward i).obj G)))) ∧ ∃ ρ : (∀ (G : Z.Modules) [G.IsQuasicoherent] (n : ℕ), 1 ≤ n → (formalModuleQuotient I n ((Modules.pushforward i).obj G) ≅ (Modules.pushforward i).obj (formalModuleQuotient (I.comap i) n G))), (∀ (G : Z.Modules) [G.IsQuasicoherent] (n : ℕ) (hn : 1 ≤ n), formalModuleQuotientπ I n ((Modules.pushforward i).obj G) ≫ (ρ G n hn).hom = (Modules.pushforward i).map (formalModuleQuotientπ (I.comap i) n G)) ∧ (∀ (G H : Z.Modules) [G.IsQuasicoherent] [H.IsQuasicoherent] (u : G ⟶ H) (n : ℕ) (hn : 1 ≤ n), formalModuleQuotientMap I ((Modules.pushforward i).map u) (Nat.le_refl n) ≫ (ρ H n hn).hom = (ρ G n hn).hom ≫ (Modules.pushforward i).map (formalModuleQuotientMap (I.comap i) u (Nat.le_refl n))) ∧ (∀ (G : Z.Modules) [G.IsQuasicoherent] (m n : ℕ) (h : n ≤ m) (hn : 1 ≤ n), formalModuleQuotientMap I (𝟙 ((Modules.pushforward i).obj G)) h ≫ (ρ G n hn).hom = (ρ G m (le_trans hn h)).hom ≫ (Modules.pushforward i).map (formalModuleQuotientMap (I.comap i) (𝟙 G) h))",
+  "branch": "sheaf-dag",
+  "by": "V1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-cip",
+  "group": "V1",
+  "result": "pass",
+  "note": "closed immersion i + I : X.IdealSheafData; (1) (I.comap i).toModules quasi-coherent + affine formula with V tied to i⁻¹U via appLE image; (2) subobject equality of i_*((IO_Z)^n G) and I^n i_*G for qcoh G, n≥1; (3) ρ tied by π≫ρ = i_*π, naturality in u, level compatibility n≤m"
  }
 }
