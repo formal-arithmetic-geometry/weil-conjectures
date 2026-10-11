@@ -1,11 +1,11 @@
 # Work queue
 
-334 items; claim with `tools/claim.py next <group> [--stage N]`.
+331 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (334)
+## Stage 2: nodes to state (331)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -28,8 +28,8 @@
 | `lem-sc-p1-koszul-resolution` | 1 | state |
 | `lem-sc-p1-serre-section-module-comparison` | 1 | state |
 | `lem-sc-picard-kunneth-qcoh` | 1 | state |
-| `lem-sc-pseudo-coherent-support-annihilation` | 1 | state |
 | `lem-weil-derived-limit-roos-complex` | 1 | state |
+| `lem-weil-pbc-geometrically-regular-descent` | 1 | state |
 | `lem-weil-pbc-pair-henselization` | 1 | state |
 | `lem-weil-pbc-projective-ample-invertible` | 1 | state |
 | `lem-weil-pbc-projective-space-twisting-sheaf-charts` | 1 | state |
@@ -37,13 +37,10 @@
 | `lem-weil-pbc-regular-base-change` | 1 | state |
 | `lem-weil-pbc-regular-local-quotient-kernel-parameters` | 1 | state |
 | `lem-weil-pbc-regular-local-separable-residue-smooth` | 1 | state |
-| `lem-weil-pbc-regular-ring-faithfully-flat-descent` | 1 | state |
 | `lem-weil-pbc-regular-ring-local-criterion` | 1 | state |
 | `lem-weil-pbc-regular-sequence-conormal-free` | 1 | state |
 | `lem-weil-pbc-regular-sequence-koszul-regular` | 1 | state |
-| `lem-weil-pbc-regular-sequence-powers` | 1 | state |
 | `lem-weil-pbc-regular-sequence-short-exact-sequence` | 1 | state |
-| `lem-weil-pbc-regular-sequence-swap-two` | 1 | state |
 | `lem-weil-pbc-regular-through-localization` | 1 | state |
 | `lem-weil-pbc-regularity-rk-goes-up` | 1 | state |
 | `lem-weil-pbc-relative-global-complete-intersection-base-change` | 1 | state |
@@ -344,7 +341,7 @@
 | `lem-pc-essentially-constant-pro-hom-colimit` | 4 | state |
 | `lem-pur-essential-constant-pro-criterion-05py` | 4 | state |
 
-Not open yet: 40 nodes that wait for stage 1, 503 nodes that wait for a statement dependency.
+Not open yet: 40 nodes that wait for stage 1, 502 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
