@@ -4857,3 +4857,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 14:03 L: merged deliver/G1/lem-weil-pbc-regular-local-separable-residue-smooth (stage 2; reviewer PASS; first push; Sheaf.RingTheory.RegularLocalSeparableResidueSmooth Algebra.regularLocal_iff_smoothAtPrime)
 - 14:03 L: merged deliver/M1/lem-weil-pbc-reduction-universal-homeomorphism (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.ReductionUniversalHomeomorphism AlgebraicGeometry.reduction_isReduced_isClosedImmersion_isSurjective_isUniversalHomeomorphism)
 - 14:03 L: merged deliver/E1/lem-weil-pbc-regular-base-change (stage 2; reviewer FIX; first push; Sheaf.RingTheory.RegularBaseChange RingHom.regular_base_change)
+- 14:04 L: merged deliver/G1/lem-weil-pbc-regular-sequence-conormal-free (stage 2; reviewer PASS; first push; Sheaf.RingTheory.RegularSequenceConormal RingTheory.Sequence.regularSequence_conormal_free)

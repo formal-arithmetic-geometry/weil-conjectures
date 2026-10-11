@@ -190,5 +190,23 @@
   "worker": "stage1",
   "summary": "Checked the statement against Stacks 00LN (1), Definition 061P and the map (equation-quasi-regular) in degree 1, and against both citers (lem-weil-pbc-cartier-equality step on NL(alpha), lem-weil-pbc-lci-conormal-free-rank-codimension step 'regular sequence at q'''): both use exactly the stated basis of J/J^2. Statement unchanged in substance; [def-weil-pbc-free-module] added to the text and stmt_deps (the notion 'free with basis' had no definition node cited). Route: the source's induction on c needs quasi-regularity of f_1..f_{c-1} in all degrees, so the degree-1 claim alone does not carry the induction; the proof therefore proves inside the item the full claim Q(c) of 00LN (1) (all degrees, stated elementarily without the graded map, so no definition node for quasi-regular is needed) and reads it in degree 1. Five steps following the source: reduction of a relation in J^{n+1} to a relation = 0 and base c = 0 (not written in the source); the prefix f_1..f_{c-1} is regular and f_c is a nonzerodivisor on R/J' (iterated to f_c^m); the source's inner induction on l with the claim P(l) stated explicitly and the rewriting a_{I',l} = sum g_{I',k} f_k written out (b_{K'} defined); the regrouping by the exponent of f_c; the degree-1 reading as a basis per [def-weil-pbc-free-module]. The source cites no lemma, so no new node; all steps elementary from [def-weil-pbc-regular-sequence] and [def-weil-pbc-free-module]. Mathlib: quasi-regular sequences are a TODO in RegularSequence.lean (line 21); no statement of freeness of I/I^2 for a regular sequence; searches recorded (leansearch, leanfinder, loogle, grep; local_search index unavailable)."
  },
- "reviewed": "Reviewed by L 2026-10-10: faithful to the proof of Algebra 00LN (1) (quasi-regularity, proved in full as the claim Q(c) by the double induction, since degree 1 alone does not induct), then read in degree 1; base case and the inner induction written out. Statement gained a citation only. No new nodes; no Mathlib match."
+ "reviewed": "Reviewed by L 2026-10-10: faithful to the proof of Algebra 00LN (1) (quasi-regularity, proved in full as the claim Q(c) by the double induction, since degree 1 alone does not induct), then read in degree 1; base case and the inner induction written out. Statement gained a citation only. No new nodes; no Mathlib match.",
+ "lean": {
+  "module": "Sheaf.RingTheory.RegularSequenceConormal",
+  "declaration": "RingTheory.Sequence.regularSequence_conormal_free",
+  "file": "lean/Sheaf/RingTheory/RegularSequenceConormal.lean",
+  "statement": "theorem regularSequence_conormal_free (R : Type u) [CommRing R] (c : ℕ) (f : Fin c → R) (hreg : RingTheory.Sequence.IsRegular R (List.ofFn f)) : Module.Free (R ⧸ Ideal.span (Set.range f)) (Ideal.span (Set.range f)).Cotangent ∧ (∃ b : Module.Basis (Fin c) (R ⧸ Ideal.span (Set.range f)) (Ideal.span (Set.range f)).Cotangent, ∀ i : Fin c, b i = (Ideal.span (Set.range f)).toCotangent ⟨f i, Ideal.subset_span ⟨i, rfl⟩⟩) ∧ Nonempty ((Ideal.span (Set.range f)).Cotangent ≃ₗ[R ⧸ Ideal.span (Set.range f)] (Fin c →₀ (R ⧸ Ideal.span (Set.range f))))",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-scf",
+  "group": "G1",
+  "result": "pass",
+  "note": "CommRing R universe u; c:ℕ, f:Fin c→R ordered via List.ofFn; IsRegular R = def-weil-pbc-regular-sequence (incl. R/J≠0); J=Ideal.span (range f) = ofList; J/J^2 = Ideal.Cotangent over R⧸J; Module.Free + basis b i = toCotangent f_i + ≃ₗ Fin c →₀ R/J; c=0 edge; node diff: lean record only (no H7)"
+ }
 }
