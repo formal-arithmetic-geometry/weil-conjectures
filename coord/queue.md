@@ -1,11 +1,11 @@
 # Work queue
 
-988 items; claim with `tools/claim.py next <group> [--stage N]`.
+982 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (988)
+## Stage 2: nodes to state (982)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -28,7 +28,6 @@
 | `lem-pc-kflat-pullback-preservation` | 1 | state |
 | `lem-pc-kflat-resolution` | 1 | state |
 | `lem-pc-module-change-of-rings-adjunction` | 1 | state |
-| `lem-pc-module-filtered-colimits-tensor` | 1 | state |
 | `lem-pc-module-inverse-image-adjunction` | 1 | state |
 | `lem-pc-module-pullback-adjunction` | 1 | state |
 | `lem-pc-module-pullback-identity-composition` | 1 | state |
@@ -45,12 +44,9 @@
 | `lem-pod-lisse-module-sheaves-as-module-objects` | 1 | state |
 | `lem-pod-lisse-tensor-and-scalar-extension` | 1 | state |
 | `lem-pur-kinjective-acyclic-quotient-complexes-bounded-size` | 1 | state |
-| `lem-pur-kinjective-homotopy-limit-vanishing` | 1 | state |
 | `lem-pur-kinjective-surjection-bounded-size` | 1 | state |
-| `lem-sc-acyclic-comparison-natural` | 1 | state |
 | `lem-sc-affine-cap-section-open` | 1 | state |
 | `lem-sc-affine-finite-module-free-locus` | 1 | state |
-| `lem-sc-affine-finite-projective-prime-membership` | 1 | state |
 | `lem-sc-affine-weakass-nonzerodivisors` | 1 | state |
 | `lem-sc-ample-finite-affine-cover` | 1 | state |
 | `lem-sc-ample-finite-principal-affine` | 1 | state |
@@ -58,8 +54,6 @@
 | `lem-sc-ample-proj-canonical-map` | 1 | state |
 | `lem-sc-ample-proj-local-chart` | 1 | state |
 | `lem-sc-ample-proj-open` | 1 | state |
-| `lem-sc-bounded-below-injective-resolution` | 1 | state |
-| `lem-sc-closed-affine-union-affine` | 1 | state |
 | `lem-sc-complex-lift-acyclic-projective` | 1 | state |
 | `lem-sc-conductor-sections` | 1 | state |
 | `lem-sc-cone-pseudo-coherent` | 1 | state |
