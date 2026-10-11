@@ -168,6 +168,43 @@ lemma mapHomotopyCategoryPlus_baseChangeMap_restrictScalars (sq : CommSq g' f' f
   refine HomologicalComplex.hom_ext _ _ fun n ↦ ?_
   exact baseChangeMap_app_restrictScalars φ sq (K.X n)
 
+/-- The underived part `g^* f_* K ⟶ f'_* g'^* K ⟶ R⁺f'_*(g'^* K)` of the derived base change
+map over `Λ` at `res K` is an isomorphism if and only if the one over `Λ'` at `K` is one. -/
+lemma isIso_comp_rightDerivedFunctorPlusUnit_restrictScalars_iff (sq : CommSq g' f' f g)
+    (K : HomotopyCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ'))) :
+    IsIso (DerivedCategory.Plus.Qh.map ((NatTrans.mapHomotopyCategoryPlus
+          (baseChangeMap (ModuleCat.{u + 1} Λ) sq)).app
+          ((Sheaf.restrictScalars X.smallEtaleTopology φ).mapHomotopyCategoryPlus.obj K)) ≫
+        (f')_*[ModuleCat.{u + 1} Λ].rightDerivedFunctorPlusUnit.app
+          (((g')^*[ModuleCat.{u + 1} Λ]).mapHomotopyCategoryPlus.obj
+            ((Sheaf.restrictScalars X.smallEtaleTopology φ).mapHomotopyCategoryPlus.obj K))) ↔
+      IsIso (DerivedCategory.Plus.Qh.map ((NatTrans.mapHomotopyCategoryPlus
+          (baseChangeMap (ModuleCat.{u + 1} Λ') sq)).app K) ≫
+        (f')_*[ModuleCat.{u + 1} Λ'].rightDerivedFunctorPlusUnit.app
+          (((g')^*[ModuleCat.{u + 1} Λ']).mapHomotopyCategoryPlus.obj K)) := by
+  rw [← isIso_restrictScalars_mapDerivedCategoryPlus_map_iff φ,
+    ← isIso_comp_right_iff _ ((rightDerivedLowerStarRestrictScalars φ f').app
+      (DerivedCategory.Plus.Qh.obj (((g')^*[ModuleCat.{u + 1} Λ']).mapHomotopyCategoryPlus.obj K))),
+    Functor.map_comp, Category.assoc, restrictScalars_map_rightDerivedFunctorPlusUnit_app]
+  have h₁ := (Sheaf.restrictScalars Y'.smallEtaleTopology φ).mapDerivedCategoryPlusFactorsh.hom.naturality
+    ((NatTrans.mapHomotopyCategoryPlus (baseChangeMap (ModuleCat.{u + 1} Λ') sq)).app K)
+  simp only [Functor.comp_map] at h₁
+  erw [reassoc_of% h₁]
+  conv_rhs => rw [isIso_comp_left_iff, ← Category.assoc, isIso_comp_right_iff]
+  have h₂ := mapHomotopyCategoryPlus_baseChangeMap_restrictScalars φ sq K
+  have h₃ := ((f')_*[ModuleCat.{u + 1} Λ]).rightDerivedFunctorPlusUnit.naturality
+    ((NatTrans.mapHomotopyCategoryPlus (upperStarRestrictScalars φ g').natTrans).app K)
+  simp only [Functor.comp_map] at h₃
+  conv_rhs => rw [← isIso_comp_left_iff (DerivedCategory.Plus.Qh.map ((NatTrans.mapHomotopyCategoryPlus
+      (upperStarRestrictScalars φ g).natTrans).app
+        (((f)_*[ModuleCat.{u + 1} Λ']).mapHomotopyCategoryPlus.obj K))),
+    ← Category.assoc, ← Functor.map_comp]
+  conv_rhs => erw [← h₂]
+  conv_rhs => rw [Functor.map_comp, Category.assoc]
+  conv_rhs => erw [h₃]
+  conv_rhs => rw [← Category.assoc]
+  exact (isIso_comp_right_iff _ _).symm
+
 end BaseChange
 
 end Etale
