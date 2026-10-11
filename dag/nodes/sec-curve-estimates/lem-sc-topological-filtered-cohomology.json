@@ -204,5 +204,23 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.Topology.TopologicalFilteredCohomology",
+  "declaration": "TopCat.topological_filtered_cohomology",
+  "file": "lean/Sheaf/Topology/TopologicalFilteredCohomology.lean",
+  "statement": "theorem topological_filtered_cohomology (X : Type u) [TopologicalSpace X] (hbas : ∀ (U : Set X), IsOpen U → ∀ x ∈ U, ∃ V : Set X, IsOpen V ∧ IsCompact V ∧ x ∈ V ∧ V ⊆ U) (hint : ∀ (U V : Set X), IsOpen U → IsOpen V → IsCompact U → IsCompact V → IsCompact (U ∩ V)) (I : Type u) [Preorder I] [Nonempty I] [IsDirected I (· ≤ ·)] (F : I ⥤ CategoryTheory.Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}) (q : ℕ) (U : TopologicalSpace.Opens X) (hU : IsCompact (U : Set X)) [HasExt.{u} (CategoryTheory.Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u})] : IsIso (colimit.desc (F ⋙ CategoryTheory.Sheaf.cohomologyPresheafFunctor (Opens.grothendieckTopology X) q ⋙ (evaluation (Opens X)ᵒᵖ (AddCommGrpCat.{u})).obj (op U)) ((CategoryTheory.Sheaf.cohomologyPresheafFunctor (Opens.grothendieckTopology X) q ⋙ (evaluation (Opens X)ᵒᵖ (AddCommGrpCat.{u})).obj (op U)).mapCocone (colimit.cocone F)))",
+  "branch": "sheaf-dag",
+  "by": "V1",
+  "date": "2026-10-12",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "V1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }
