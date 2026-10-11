@@ -150,5 +150,23 @@
   "group": "H1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-icd1945 (reviewer sub-agent of L); spot-checked: Reviewed at 5d162c859; c1179ce21 is a rebase with byte-identical delivery files. Statement vs Stacks 09IG; steps 1-3 cite 00PG node, 00OK node, normality leaf, lying-over leaf (RingHom.IsIntegral.comap_surjective, Topology.lean:1226; GoingUp.lean:327 confirmed by grep) - cited, not reproved; 031F hypotheses after localization; incomparability for generic fibre. Krull-Akizuki new node: grep -i akizuki over Mathlib, no hit, not a leaf. FIX more, RETURN less: (1) C1 step 4 asserted the localization prime correspondence and residue-field isomorphism without a cited statement; now cites lem-weil-pbc-localization-prime-residue-field-iso (1),(3) as a tool (no node of sk-thm-curveestimate states it); (2) E step 4 wrongly said primes of C disjoint from A\\m are exactly those over m; corrected to those contracting to (0) or m, with primes over mA_m corresponding to primes over m.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.IntegralClosureDedekindSurjectiveFibres",
+  "declaration": "AlgebraicGeometry.integralClosure_isDedekind_surjective_finite_fibres",
+  "file": "lean/Sheaf/AlgebraicGeometry/IntegralClosureDedekindSurjectiveFibres.lean",
+  "statement": "theorem integralClosure_isDedekind_surjective_finite_fibres (A L : Type u) (K : Type v) [CommRing A] [IsDomain A] [Field K] [Field L] [Algebra A K] [IsFractionRing A K] [Algebra K L] [Algebra A L] [IsScalarTower A K L] [FiniteDimensional K L] [IsNoetherianRing A] (hA : ringKrullDim A = 1) : let C := integralClosure A L let f : Spec (CommRingCat.of C) ⟶ Spec (CommRingCat.of A) := Spec.map (CommRingCat.ofHom (algebraMap A C)) IsDedekindDomain C ∧ ringKrullDim C = 1 ∧ Function.Surjective f.base ∧ (∀ y : Spec (CommRingCat.of A), Finite (f ⁻¹' {y})) ∧ (∀ x : Spec (CommRingCat.of C), (f.residueFieldMap x).hom.Finite)",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-icd1206",
+  "group": "F1",
+  "result": "pass",
+  "note": "A CommRing+IsDomain+IsNoetherianRing+ringKrullDim=1; K IsFractionRing; L Field, FiniteDimensional K L, tower A-K-L; C=integralClosure A L; IsDedekindDomain C ∧ dim C=1; Spec.map surjective on base; finite preimages of points; residueFieldMap κ(f x)→κ(x) RingHom.Finite; no Krull-Akizuki in Mathlib/upstream"
  }
 }
