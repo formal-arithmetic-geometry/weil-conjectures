@@ -22,7 +22,9 @@
   "def-pc-scheme",
   "def-weil-pbc-abelian-etale-sheaves",
   "lem-sc-torsor-h1",
-  "def-sc-gm-torsor"
+  "def-sc-gm-torsor",
+  "def-sc-torsor-extension-presentation",
+  "def-sc-contracted-product-presentation"
  ],
  "proof": [
   {
@@ -129,5 +131,24 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-tpe0036 (reviewer sub-agent of L); spot-checked: FIX more, RETURN less: (1) C4: lem-sc-abelian-sheaf-short-exact-stalkwise is for sheaves on a topological space, not S_Et; removed from Steps 2-3, torsor property of the fibre now from Step 1 exactness plus local nonemptiness of T (elementary). (2) E/C4 for citer: citer step 4 needs pushout ~= E_{T wedge G'} as extensions, not only the fibre; added to statement (E7) with elementary Step 3 (Z[T'] -> pushout respects [h.s]=[s]+h, five lemma). (3) B4: plain-text arrows and ASCII math rewritten in TeX; Step 2 identification written on sections: (t,g') -> [g',[t]], G-invariance via the relation (phi(g),-iota(g)), G'-equivariance. Fibre over 1 of E_T is T via t -> [t] (lem-sc-torsor-h1, Stacks 03AJ direction checked). Contracted product now defined in the statement, matching the parent's clause (2). Duplicate check: lem-sc-torsor-h1-ext-pushout is the Zariski analogue, not a duplicate. Tool use of lem-weil-pbc-pushout-short-exact-sequence accepted (generic abelian-category pushout).; 1 file(s) fixed by the reviewer"
  },
- "lead_note": "2026-10-11 L (R-tpe0036): Statement strengthened (E7): pushout defined explicitly, morphism of SES stated, contracted product defined inline, and isomorphism with E_{T wedge^G G'} added, which the citer lem-sc-etale-torsor-h1-functoriality step 4 needs to apply the representative description of lem-sc-torsor-h1."
+ "lead_note": "2026-10-11 L (R-tpe0036): Statement strengthened (E7): pushout defined explicitly, morphism of SES stated, contracted product defined inline, and isomorphism with E_{T wedge^G G'} added, which the citer lem-sc-etale-torsor-h1-functoriality step 4 needs to apply the representative description of lem-sc-torsor-h1.",
+ "lean": {
+  "module": "Sheaf.CategoryTheory.Sites.EtaleTorsorPushoutExtension",
+  "declaration": "CategoryTheory.Sheaf.Torsor.etale_pushout_extension",
+  "file": "lean/Sheaf/CategoryTheory/Sites/EtaleTorsorPushoutExtension.lean",
+  "statement": "theorem etale_pushout_extension (S : AlgebraicGeometry.Scheme.{uP}) {G G' : Sheaf S.smallEtaleTopology AddCommGrpCat.{max uP wP + 1}} (φ : G ⟶ G') (T : Torsor G) (E : ExtensionPresentation.{uP, wP} S T) (T' : Torsor G') (q : ContractedProductPresentation.{uP, wP} S φ T T') (E' : ExtensionPresentation.{uP, wP} S T') : ∃ σ' : pushout φ E.inclusion ⟶ (constantSheaf S.smallEtaleTopology AddCommGrpCat.{max uP wP + 1}).obj (AddCommGrpCat.of (ULift.{max uP wP + 1} ℤ)), (pushout.inr φ E.inclusion ≫ σ' = E.projection ∧ pushout.inl φ E.inclusion ≫ σ' = 0) ∧ (∀ τ : pushout φ E.inclusion ⟶ (constantSheaf S.smallEtaleTopology AddCommGrpCat.{max uP wP + 1}).obj (AddCommGrpCat.of (ULift.{max uP wP + 1} ℤ)), pushout.inr φ E.inclusion ≫ τ = E.projection → pushout.inl φ E.inclusion ≫ τ = 0 → τ = σ') ∧ ∃ hz : pushout.inl φ E.inclusion ≫ σ' = 0, (ShortComplex.mk (pushout.inl φ E.inclusion) σ' hz).ShortExact ∧ (φ ≫ pushout.inl φ E.inclusion = E.inclusion ≫ pushout.inr φ E.inclusion) ∧ ∃ (a : ∀ U : S.Etaleᵒᵖ, T'.sheaf.obj.obj U → (pushout φ E.inclusion).obj.obj U), (∀ ⦃U V : S.Etaleᵒᵖ⦄ (f : U ⟶ V) (t : T'.sheaf.obj.obj U), (pushout φ E.inclusion).obj.map f (a U t) = a V (T'.sheaf.obj.map f t)) ∧ (∀ U : S.Etaleᵒᵖ, Set.BijOn (a U) Set.univ {x | σ'.hom.app U x = (toSheafify S.smallEtaleTopology ((Functor.const S.Etaleᵒᵖ).obj (AddCommGrpCat.of (ULift.{max uP wP + 1} ℤ)))).app U ⟨1⟩}) ∧ (∀ (U : S.Etaleᵒᵖ) (h : G'.obj.obj U) (t : T'.sheaf.obj.obj U), a U (T'.vadd U h t) = a U t + (pushout.inl φ E.inclusion).hom.app U h) ∧ (∀ (U : S.Etaleᵒᵖ) (t : T.sheaf.obj.obj U) (h : G'.obj.obj U), a U (q.quotient U t h) = (pushout.inl φ E.inclusion).hom.app U h + (pushout.inr φ E.inclusion).hom.app U (E.generator U t)) ∧ ∃ e : E'.middle ≅ pushout φ E.inclusion, E'.inclusion ≫ e.hom = pushout.inl φ E.inclusion ∧ e.hom ≫ σ' = E'.projection ∧ ∀ (U : S.Etaleᵒᵖ) (t : T'.sheaf.obj.obj U), e.hom.hom.app U (E'.generator U t) = a U t",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-tpe1050"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-tpe1050",
+  "group": "M1",
+  "result": "fix",
+  "note": "FIX: dropped hypothesis hE (short exactness of E_T): the node takes it as the content of lem-sc-torsor-h1, not as an assumption, and ExtensionPresentation's universal property forces it; proof step (0) added. Matched S, G/G'/phi, Torsor (recorded def-sc-gm-torsor), E_T via ExtensionPresentation (universal property = Stacks 03AJ pushout of Z[T]), pushout inl/inr, unique sigma' with both composites, short exactness, (phi,v,id) squares, fibre over 1 via natural a + BijOn + translation + q-canonicity, T wedge G' via ContractedProductPresentation (relation (g.t,h-phi g), G' on second factor, sheaf-quotient UP), iso with E_{T'} fixing i', sigma', generators; universes max uP wP + 1; combined 3-module compile clean"
+ }
 }
