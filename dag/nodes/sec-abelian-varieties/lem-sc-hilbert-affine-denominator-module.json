@@ -13,14 +13,14 @@
  },
  "kind": "statement",
  "title": "Affine denominator maps are injective on a full-support module without embedded primes",
- "statement": "Let A be a Noetherian commutative ring [def-weil-pbc-noetherian-ring] and M a finite A-module [def-weil-pbc-module-finite-type-presentation] whose support is Spec(A) and whose associated primes are all minimal primes of A. Let a and b be non-zero-divisors of A, let q be the localization of A at the multiplicative set of all non-zero-divisors (the total quotient ring), and put I = {x in A | x(a/b) belongs to A inside q}. Then I is an ideal of A (and hence is finitely generated), multiplication gives an injective A-linear map I M \\to M, and the rule x m \\mapsto (a/b)(x m), interpreted in the localization M_b and using that b is a non-zero-divisor on M, gives an injective A-linear map I M \\to M. The cokernel of the first map is annihilated by I, and the cokernel of the second map is annihilated by the submodule (a/b)I of A.",
+ "statement": "Let A be a Noetherian commutative ring [def-weil-pbc-noetherian-ring] and M a finite A-module [def-weil-finitely-generated-module] whose support is Spec(A) and whose associated primes are all minimal primes of A. Let a and b be non-zero-divisors of A, let q be the localization of A at the multiplicative set of all non-zero-divisors (the total quotient ring), and put I = {x in A | x(a/b) belongs to A inside q}. Then I is an ideal of A (and hence is finitely generated), multiplication gives an injective A-linear map I M \\to M, and the rule x m \\mapsto (a/b)(x m), interpreted in the localization M_b and using that b is a non-zero-divisor on M, gives an injective A-linear map I M \\to M. The cokernel of the first map is annihilated by I, and the cokernel of the second map is annihilated by the submodule (a/b)I of A.",
  "source": {
   "document": "literature/stacks-project/divisors.tex",
   "place": "Tag 02P2 (Lemma 31.25.5), affine proof after writing s=a/b"
  },
  "stmt_deps": [
   "def-weil-pbc-noetherian-ring",
-  "def-weil-pbc-module-finite-type-presentation"
+  "def-weil-finitely-generated-module"
  ],
  "proof": [
   {
@@ -135,5 +135,45 @@
   "group": "H1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-adm2550 (reviewer sub-agent of L); spot-checked: Statement vs Tag 02P2 affine proof and vs citer lem-sc-hilbert-difference (affine step: full support + no embedded primes => Ass(M) = minimal primes of A; maps IM->M, cokernels killed by I and (a/b)I): matches (C4). Steps 1,4,5 elementary and correct; total quotient ring now defined (E7 reason given). FIX more, RETURN less: new node lem-sc-hilbert-module-regular-from-minimal-assoc is class (d), two lines from existing lem-pc-minimal-prime-avoids-nonzerodivisor (nzd avoids minimal primes) and lem-weil-pbc-noetherian-module-zerodivisors-union-associated-primes (M-zerodivisors = union of Ass(M)); dropped it, step 2 now cites those two nodes with the argument written out, step 3 made elementary (uses step 2), proof_deps updated.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.HilbertAffineDenominatorModule",
+  "declaration": "Module.hilbert_affine_denominator_module",
+  "file": "lean/Sheaf/RingTheory/HilbertAffineDenominatorModule.lean",
+  "statement": "theorem hilbert_affine_denominator_module (A : Type u) [CommRing A] [IsNoetherianRing A] (M : Type v) [AddCommGroup M] [Module A M] [Module.Finite A M] (hSupport : Module.support A M = Set.univ) (hAssoc : associatedPrimes A M ⊆ minimalPrimes A) (a b : A) (ha : a ∈ nonZeroDivisors A) (hb : b ∈ nonZeroDivisors A) : let Q := Localization (nonZeroDivisors A) let s : Q := IsLocalization.mk' Q a ⟨b, hb⟩ ∃ (I J : Ideal A), (∀ x : A, x ∈ I ↔ ∃ c : A, algebraMap A Q c = s * algebraMap A Q x) ∧ I.FG ∧ (∀ c : A, c ∈ J ↔ ∃ x ∈ I, algebraMap A Q c = s * algebraMap A Q x) ∧ IsSMulRegular M b ∧ Function.Injective (LocalizedModule.mkLinearMap (Submonoid.powers b) M) ∧ let N : Submodule A M := I • (⊤ : Submodule A M) Function.Injective N.subtype ∧ ∃ f : N →ₗ[A] M, (∀ z : N, b • f z = a • (z : M)) ∧ Function.Injective f ∧ I ≤ Module.annihilator A (M ⧸ LinearMap.range N.subtype) ∧ J ≤ Module.annihilator A (M ⧸ LinearMap.range f)",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-had1139",
+  "group": "M1",
+  "result": "pass",
+  "note": "Noetherian CommRing A, Module.Finite M (corrected citation def-weil-finitely-generated-module, mathlib leaf), support=univ, Ass(M) ⊆ minimalPrimes A (Mathlib associatedPrimes = annihilator form under Noetherian, as sibling G1 RemoveEmbeddedPrimes), a,b nonZeroDivisors; Q=Localization nonZeroDivisors, s=mk' a b; I and J=sI pinned by membership iffs, I.FG; N=I•⊤ product submodule; f pinned by b•f z=a•z (regular b), injective; I and J kill M/N and M/range f; root names checked by elaboration; single citer lem-sc-hilbert-difference holds",
+  "statement_corrected": true
+ },
+ "statement_change": {
+  "date": "2026-10-11",
+  "by": "M1 stage 2",
+  "old_statement": "Let A be a Noetherian commutative ring [def-weil-pbc-noetherian-ring] and M a finite A-module [def-weil-pbc-module-finite-type-presentation] whose support is Spec(A) and whose associated primes are all minimal primes of A. Let a and b be non-zero-divisors of A, let q be the localization of A at the multiplicative set of all non-zero-divisors (the total quotient ring), and put I = {x in A | x(a/b) belongs to A inside q}. Then I is an ideal of A (and hence is finitely generated), multiplication gives an injective A-linear map I M \\to M, and the rule x m \\mapsto (a/b)(x m), interpreted in the localization M_b and using that b is a non-zero-divisor on M, gives an injective A-linear map I M \\to M. The cokernel of the first map is annihilated by I, and the cokernel of the second map is annihilated by the submodule (a/b)I of A.",
+  "what": "The finite A-module hypothesis cited a sheaf finite-type/finite-presentation definition on a ringed space, which cannot be applied to the algebraic module M. Replace only that citation by the existing algebraic finitely generated module definition; no mathematical hypothesis or conclusion changes.",
+  "source": {
+   "document": "literature/stacks-project/divisors.tex",
+   "place": "Tag 02P2 (Lemma 31.25.5), affine proof: write F as the sheaf associated to M, with F coherent on Spec(A)."
+  },
+  "citers": [
+   {
+    "id": "lem-sc-hilbert-difference",
+    "holds": true,
+    "note": "Its affine step uses a finite A-module of sections of a coherent sheaf, exactly the unchanged mathematical hypothesis; correcting the definition citation preserves this use."
+   }
+  ],
+  "old_stmt_deps": [
+   "def-weil-pbc-noetherian-ring",
+   "def-weil-pbc-module-finite-type-presentation"
+  ]
  }
 }
