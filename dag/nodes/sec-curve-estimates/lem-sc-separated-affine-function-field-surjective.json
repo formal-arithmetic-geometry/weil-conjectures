@@ -150,5 +150,23 @@
   "group": "J1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-sfs1704 (reviewer sub-agent of L); spot-checked: Repaired re-push after the 16:44 return; the four C1 points were each repaired: (1) Step 1 cites lem-weil-pbc-spec-local-ring-canonical-morphism clause (1) (c(y')=y, image = generalizations), so c^{-1}(U)={(0)} since Spec(B)={(0),m_B} and c((0))=eta in U; (2) lem-weil-pbc-open-immersion-base-change for U x_X Spec(B) as the open subscheme on c^{-1}(U); (3) D(f)={(0)} for 0!=f in m_B, lem-weil-pbc-principal-localization-open-immersion for D(f)=Spec(B_f), lem-weil-pbc-primes-of-localization (2) (with R=B, p=m_B, R_p=B) for the primes of B_f, and the new statement-only node lem-sc-local-domain-dim-one-principal-localization-fraction-field for B_f=K; (4) lem-weil-pbc-fibre-product-affine-spectra with R=Z in Steps 1-3, and the statement now writes A otimes_Z B (statement change requested by the return and named in the report, E7). Steps 2-3 and the statement were accepted by the earlier reviewer and not reopened. New node checked: B local domain of dim 1 has primes (0) and m only, primes of B_f are those avoiding f, i.e. (0), so B_f is a domain with only prime (0), a field between B and K, hence K; tested on k[t]_(t) with f=t and on Z_(p) with f=p. Statement self-contained, cites def-weil-pbc-krull-dimension-ring and def-weil-ring-localization-away. tool_uses lem-weil-pbc-spec-local-ring-canonical-morphism (sk-thm-p1, split) accepted as a generic black-box tool. Delivery committed 16:59 UTC, before 17:00, so its search records were treated as not run; I ran one LeanFinder query for the standard new node: no match. FIX: dag/nodes/sec-curve-estimates/lem-sc-local-domain-dim-one-principal-localization-fraction-field.json: mathlib_searches: added the reviewer's LeanFinder query, verdict no match. Start Sat Oct 10 05:00:48 PM UTC 2026, end Sat Oct 10 05:01:34 PM UTC 2026.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SeparatedAffineFunctionFieldSurjective",
+  "declaration": "AlgebraicGeometry.Scheme.separated_affine_functionField_surjective",
+  "file": "lean/Sheaf/AlgebraicGeometry/SeparatedAffineFunctionFieldSurjective.lean",
+  "statement": "theorem Scheme.separated_affine_functionField_surjective (X : Scheme.{u}) [IsIntegral X] [hsep : X.IsSeparated] (U : X.Opens) (hU : IsAffineOpen U) [hUn : Nonempty U] (x : X) (hx : x ∉ U) [IsNoetherianRing (X.presheaf.stalk x)] (hdim : ringKrullDim (X.presheaf.stalk x) = 1) : let A : Type u := Γ(X, U) let B : Type u := X.presheaf.stalk x let K : Type u := X.functionField let φ : TensorProduct ℤ A B →ₐ[ℤ] K := Algebra.TensorProduct.lift (X.germToFunctionField U).hom.toIntAlgHom (algebraMap B K).toIntAlgHom (fun _ _ => Commute.all _ _) Function.Surjective φ",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-saf0940",
+  "group": "E1",
+  "result": "pass",
+  "note": "X : Scheme.{u} [IsIntegral X] (AlgebraicGeometry.IsIntegral, def-pc-integral-scheme); [X.IsSeparated] = IsSeparated (terminal.from X), absolute separatedness of def-weil-proper-morphism; U : X.Opens, IsAffineOpen U, [Nonempty U], A = Γ(X,U); x ∉ U; B = X.presheaf.stalk x with [IsNoetherianRing B], ringKrullDim B = 1 exactly; K = X.functionField = stalk at genericPoint, the integral-scheme clause k(X)=O_{X,eta} of def-sc-function-field as its record note and landed DivisorModule/InvertibleModuleGenericStalk/SmoothConnectedCurveLocalRings use (no second definition); A->K germToFunctionField U (germ at eta), B->K algebraMap = stalkSpecializes to eta (rho_x of lem-sc-integral-scheme-stalks-in-function-field), checked by #print; phi = Algebra.TensorProduct.lift over Z of the two inclusions; conclusion Function.Surjective phi; docstring carries the three proof steps; single commit, node diff only adds lean record"
  }
 }
