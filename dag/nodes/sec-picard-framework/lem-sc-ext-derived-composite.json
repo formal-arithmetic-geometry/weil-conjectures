@@ -129,5 +129,23 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-edc (reviewer sub-agent of L); spot-checked: Source Stacks 015M (derived.tex lemma-compose-derived-functors) read with its proof: A,B,C abelian, F,G left exact, A and B enough injectives, F(I) G-acyclic for injective I; the restated item has the same hypotheses with T exact (hence left exact, RT=T) and its degreewise conclusion is the H^i of 015M(2) on an object. Statement true; the 14:35 Z/4 counterexample (forgetful, Hom_Z(Z/2,-)) is excluded since Ext^1_Z(Z/2,Z/4)=Z/2 is nonzero; T=0, T=id, U=id checked. Step 1: def-sp-injective-resolutions plus exactness of T (elementary). Step 2: item 2 of lemma-weil-pbc-leray-acyclicity with v=U, F=T(M), resolution T(I^bullet), hypotheses (I^m=0 for m<0, augmented exact, termwise acyclic) met. Step 3: left exactness of U o T and the formula of def-sp-left-exact-additive (A has enough injectives). Only split fields changed; no new nodes; tool use lemma-weil-pbc-leray-acyclicity accepted as generic tool (C8). FIX more, RETURN less: dag/nodes/sec-picard-framework/lem-sc-ext-derived-composite.json: proof[2].text/uses, proof_deps, split_report.tool_uses: removed the citation of lem-sp-derived-well-defined (C4: it is stated for Grothendieck abelian categories only, the item has only enough injectives); canonicity now taken from the natural map of item 2 of lemma-weil-pbc-leray-acyclicity, def-sp-injective-resolutions added to uses; tool use dropped. Start Sat Oct 10 03:38:03 PM UTC 2026, end Sat Oct 10 03:38:46 PM UTC 2026.; 1 file(s) fixed by the reviewer"
  },
- "lead_note": "16:22 UTC (reviewer R-edn): the statement calls its isomorphism \"canonical\" only; step 3 of its proof says it is the Leray comparison of lemma-weil-pbc-leray-acyclicity; say so in the statement so citers need not borrow the proof (C3)."
+ "lead_note": "16:22 UTC (reviewer R-edn): the statement calls its isomorphism \"canonical\" only; step 3 of its proof says it is the Leray comparison of lemma-weil-pbc-leray-acyclicity; say so in the statement so citers need not borrow the proof (C3).",
+ "lean": {
+  "module": "Sheaf.CategoryTheory.RightDerivedExactComposite",
+  "declaration": "CategoryTheory.Functor.exists_rightDerived_exact_comp_iso",
+  "file": "lean/Sheaf/CategoryTheory/RightDerivedExactComposite.lean",
+  "statement": "theorem exists_rightDerived_exact_comp_iso {A : Type u₁} {B : Type u₂} {C : Type u₃} [Category.{v₁} A] [Category.{v₂} B] [Category.{v₃} C] [Abelian A] [Abelian B] [Abelian C] [EnoughInjectives A] [EnoughInjectives B] (T : A ⥤ B) (U : B ⥤ C) [T.Additive] [PreservesFiniteLimits T] [PreservesFiniteColimits T] [U.Additive] [PreservesFiniteLimits U] (hTU : ∀ (I : A), Injective I → U.rightAcyclic (T.obj I)) (M : A) (i : ℕ) : ∃ e : ((T ⋙ U).rightDerived i).obj M ≅ (U.rightDerived i).obj (T.obj M), ∀ (I : InjectiveResolution M) (J : InjectiveResolution (T.obj M)) (φ : (T.mapHomologicalComplex (ComplexShape.up ℕ)).obj I.cocomplex ⟶ J.cocomplex), T.map (I.ι.f 0) ≫ φ.f 0 = J.ι.f 0 → e.hom = (I.isoRightDerivedObj (T ⋙ U) i).hom ≫ HomologicalComplex.homologyMap ((mapHomologicalComplexCompIso (Iso.refl (T ⋙ U)) (ComplexShape.up ℕ)).inv.app I.cocomplex) i ≫ HomologicalComplex.homologyMap ((U.mapHomologicalComplex (ComplexShape.up ℕ)).map φ) i ≫ (J.isoRightDerivedObj U i).inv",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-edc1027",
+  "group": "H1",
+  "result": "pass",
+  "note": "abelian A,B,C; EnoughInjectives A,B only; exact T = Additive+PreservesFiniteLimits+PreservesFiniteColimits; left exact U = Additive+PreservesFiniteLimits (sibling form); hTU via landed rightAcyclic (all q+1); M, i:ℕ incl. 0; e : R^i(T⋙U) M ≅ R^iU(TM); canonical clause = proof step 3 lift over id_{TM}, lift condition f 0 suffices, compIso inv direction correct; lifts exist so not vacuous"
+ }
 }
