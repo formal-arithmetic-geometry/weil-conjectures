@@ -204,5 +204,23 @@
   "item": "lem-weil-pbc-cm-local-dimension-drop-regular-sequence",
   "worker": "stage1",
   "summary": "Read Algebra 00N6 (proposition-CM-module) and its proof, with 00N5, 00N4, 00KW, 0B52, 00N3, 00LK; tags verified in tags/tags. Not a Mathlib leaf (no Cohen-Macaulay or depth-vs-dimension in the pinned Mathlib; searches recorded). Proof follows the first paragraph of the 00N6 proof for M = R in five steps: quotients M_i = R/(g_1..g_i) with Supp = V(g_1..g_i) and dim Supp = dim R/(g_1..g_i) (support-annihilator node); 0B52 right inequality (existing Mathlib leaf node) forces each step to drop dimension by exactly one; R is CM as a module (depth <= dim Supp, 00LK node, plus the hypothesis); induction applying the existing 00N5 node; conclusion from the definition. No new nodes. Statement unchanged; both citers (global-complete-intersection-local-regular-sequence step 4, miracle-flatness step 7) use exactly this statement."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.IsRegularOfDimensionDrop",
+  "declaration": "RingTheory.Sequence.isRegular_of_dimension_drop",
+  "file": "lean/Sheaf/RingTheory/IsRegularOfDimensionDrop.lean",
+  "statement": "theorem isRegular_of_dimension_drop {R : Type u} [CommRing R] [IsNoetherianRing R] [IsLocalRing R] (d : ℕ) (hd : ringKrullDim R = (d : WithBot ℕ∞)) (hdepth : (d : ℕ∞) ≤ IsLocalRing.depth (R := R) R) (gs : List R) (hmem : ∀ g ∈ gs, g ∈ IsLocalRing.maximalIdeal R) (hdrop : ringKrullDim (R ⧸ Ideal.ofList gs) + (gs.length : WithBot ℕ∞) = (d : WithBot ℕ∞)) : IsRegular R gs",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-cdr1424",
+  "group": "J1",
+  "result": "pass",
+  "note": "Noetherian local R; d:ℕ with ringKrullDim R = d (finite dim); CM inline as d ≤ IsLocalRing.depth R (as H1 e10ccd492); gs : List R, c = length; all g ∈ maximalIdeal; dim R⧸Ideal.ofList gs (reducible = Ideal.span {r | r ∈ gs}) + c = d in WithBot ℕ∞ (= integer d-c, quotient nonzero so no ⊥/⊤ case); conclusion Mathlib RingTheory.Sequence.IsRegular R gs (weakly regular + final quotient nonzero); #check clean"
  }
 }
