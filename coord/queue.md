@@ -1,11 +1,11 @@
 # Work queue
 
-769 items; claim with `tools/claim.py next <group> [--stage N]`.
+766 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (769)
+## Stage 2: nodes to state (766)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -21,18 +21,15 @@
 | `lem-sc-p1-rhom-hom-derived-connecting` | 1 | state |
 | `lem-sc-product-tangent-space-direct-sum` | 1 | state |
 | `lem-sc-rational-unramified-cotangent-criterion` | 1 | state |
-| `lem-sp-kinjective-computes` | 1 | state |
 | `lem-sp-shift-identification` | 1 | state |
 | `lem-weil-derived-limit-roos-complex` | 1 | state |
 | `lem-weil-pbc-complex-spectral-sequence-comparison` | 1 | state |
 | `lem-weil-pbc-cotangent-complex-symmetric-algebra` | 1 | state |
 | `lem-weil-pbc-criterion-flatness-fibre-noetherian` | 1 | state |
 | `lem-weil-pbc-derived-exchange-termwise` | 1 | state |
-| `lem-weil-pbc-derived-finite-product` | 1 | state |
 | `lem-weil-pbc-derived-inverse-image-composition` | 1 | state |
 | `lem-weil-pbc-descend-qc-open-fg-subalgebra` | 1 | state |
 | `lem-weil-pbc-dimension-at-point-components` | 1 | state |
-| `lem-weil-pbc-dimension-at-point-field-extension` | 1 | state |
 | `lem-weil-pbc-direct-image-preserves-injectives` | 1 | state |
 | `lem-weil-pbc-direct-image-split-cover-product` | 1 | state |
 | `lem-weil-pbc-direct-sum-extension-assembly` | 1 | state |
