@@ -5636,3 +5636,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 19:09 L: merged deliver/F1/lem-weil-pbc-sheafification-plus-theorem (stage 2; reviewer PASS; first push; Sheaf.CategoryTheory.Sites.SheafificationPlusTheorem CategoryTheory.GrothendieckTopology.plus_sheafification_theorem)
 - 19:12 L: merged deliver/F1/lem-weil-pbc-sheaf-finite-truncation-colimit (stage 2; reviewer PASS; first push; Sheaf.Topology.SheafFiniteTruncationColimit TopCat.sheaf_finite_truncation_colimit)
 - 19:27 L: merged deliver/C1/def-weil-pbc-finite-split-hypercover (stage 2; reviewer PASS; first push; Sheaf.Paper.FiniteSplitEtaleHypercover AlgebraicGeometry.FiniteSplitEtaleHypercover)
+- 19:28 L: returned deliver/C1/lem-pc-affine-morphism-hom-out-of-perfect (reviewer RETURN: (reviewer R-h61a43, head 61a43ae6c) H3+H12: the conclusion IsIso (affineGlobalHomBaseChangeMap f g M K hM hK) is not abo)
