@@ -3777,3 +3777,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 08:11 L: merged deliver/G1/lem-sc-integral-overring-jacobson-power (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.IntegralOverringJacobsonPower integral_overring_jacobson_power)
 - 08:11 L: merged deliver/C1/lem-sc-p1-graded-degree-component-exact (stage 2; reviewer PASS; first push; Sheaf.RingTheory.GradedAlgebra.ShortExactGradedComponent DirectSum.shortExact_graded_component)
 - 08:11 L: merged deliver/C1/lem-sc-module-localization-filtered-colimit (stage 2; reviewer PASS; first push; Sheaf.RingTheory.ModuleLocalizationFilteredColimit ModuleCat.localization_away_colimit)
+- 08:12 L: merged deliver/J1/lem-pc-tor-independent-projective-complex-tensor (stage 2; reviewer FIX; first push; Sheaf.Algebra.Homology.TorIndependentProjectiveComplexTensor ModuleCat.torIndependent_projectiveComplex_tensor; new nodes: def-pc-base-derived-tensor-cohomology-model)
