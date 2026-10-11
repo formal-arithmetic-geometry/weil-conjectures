@@ -1,11 +1,11 @@
 # Work queue
 
-752 items; claim with `tools/claim.py next <group> [--stage N]`.
+745 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (752)
+## Stage 2: nodes to state (745)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -21,7 +21,6 @@
 | `lem-sc-hilb-dominating-power` | 1 | state |
 | `lem-sc-p1-rhom-hom-derived-connecting` | 1 | state |
 | `lem-sc-product-tangent-space-direct-sum` | 1 | state |
-| `lem-sc-rational-unramified-cotangent-criterion` | 1 | state |
 | `lem-sp-truncation-couple-exact` | 1 | state |
 | `lem-weil-derived-limit-roos-complex` | 1 | state |
 | `lem-weil-pbc-complex-spectral-sequence-comparison` | 1 | state |
@@ -30,20 +29,14 @@
 | `lem-weil-pbc-descend-qc-open-fg-subalgebra` | 1 | state |
 | `lem-weil-pbc-direct-image-split-cover-product` | 1 | state |
 | `lem-weil-pbc-directed-colimit-base-change-elementwise` | 1 | state |
-| `lem-weil-pbc-directed-union-subrings-flat-module` | 1 | state |
 | `lem-weil-pbc-double-complex-cokernel-homology-iso` | 1 | state |
-| `lem-weil-pbc-double-complex-zigzag-to-row-cokernel-map` | 1 | state |
 | `lem-weil-pbc-double-complex-zigzag-trivial-if-row-boundary` | 1 | state |
-| `lem-weil-pbc-equation-count-localize-relative-global-complete-intersection` | 1 | state |
 | `lem-weil-pbc-essentially-smooth-factors-through-smooth` | 1 | state |
 | `lem-weil-pbc-etale-algebra-filtered-colimit-descent` | 1 | state |
-| `lem-weil-pbc-etale-colimit-normal-local-domain` | 1 | state |
 | `lem-weil-pbc-etale-cover-detects-iso` | 1 | state |
-| `lem-weil-pbc-etale-fibre-discrete-separable-points` | 1 | state |
 | `lem-weil-pbc-etale-fibre-specialization-bound` | 1 | state |
 | `lem-weil-pbc-etale-graph-section-extension-map` | 1 | state |
 | `lem-weil-pbc-etale-inverse-image-algebraic-structures` | 1 | state |
-| `lem-weil-pbc-etale-local-finite-at-point-elementary` | 1 | state |
 | `lem-weil-pbc-etale-local-finite-multiple-points` | 1 | state |
 | `lem-weil-pbc-etale-local-finite-multiple-points-elementary` | 1 | state |
 | `lem-weil-pbc-etale-local-ring-triples` | 1 | state |
