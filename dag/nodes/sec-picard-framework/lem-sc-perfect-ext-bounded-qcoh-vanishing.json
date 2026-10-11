@@ -24,9 +24,70 @@
   "def-pc-derived-category",
   "def-pc-perfect-complex"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By the perfect tensor-Hom comparison [lem-pc-perfect-rhom-tensor-comparison], the dual K^\\vee is perfect and has a finite Tor-amplitude interval [u,v]. The comparison identifies K^\\vee\\otimes^L L with R\\mathcal Hom(K,L), and [lem-pur-rhom-global-sections] identifies H^0(X,R\\mathcal Hom(K,L)) with Hom_{D(\\mathcal O_X)}(K,L).",
+   "uses": [
+    "lem-pc-perfect-rhom-tensor-comparison",
+    "lem-pur-rhom-global-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 09M4 proof, lines identifying Hom(K,L) with H^0(X,K^vee tensor^L L) and choosing the Tor-amplitude interval"
+   }
+  },
+  {
+   "text": "Apply the hypercohomology spectral-sequence gap statement [lem-sc-perfect-hypercohomology-gap] to P=K^\\vee. If H^q(L)=0 for q in [j-v,j-u], then H^j(K^\\vee\\otimes^L L)=0; in particular, for j=-N,...,0 it is enough that H^i(L)=0 for every i in [-v-N,-u].",
+   "uses": [
+    "lem-sc-perfect-hypercohomology-gap"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 09M4 proof, spectral sequence and the subsequent choice of the interval [-b-N,-a]"
+   }
+  },
+  {
+   "text": "Take f:X\\to \\operatorname{Spec}(\\mathbb Z). Since X is quasi-compact and quasi-separated, f is quasi-compact and quasi-separated, and its base is affine. Clause (1) of [lem-pc-finite-support-hi] makes R^qf_*G quasi-coherent for every quasi-coherent G. Thus [lem-pc-affine-vanishing] gives H^p(\\operatorname{Spec}(\\mathbb Z),R^qf_*G)=0 for p>0. The edge-map assertion [lem-pc-leray-degenerate-sections] then identifies H^q(X,G) with \\Gamma(\\operatorname{Spec}(\\mathbb Z),R^qf_*G). Clause (2) of [lem-pc-finite-support-hi] supplies n with R^qf_*G=0 for q>=n; put N=\\max(n,0), so H^q(X,G)=0 for every quasi-coherent G and q>=N. Let E=K^\\vee\\otimes^L L; it lies in D_QCoh(\\mathcal O_X) (Tag 09M4: tensor of objects with quasi-coherent cohomology, a perfect complex having quasi-coherent cohomology), and assume H^i(E)=0 for -N<=i<=0. Consider the standard truncation triangle \\tau_{\\le -N-1}E\\to E\\to\\tau_{\\ge -N}E\\to [def-sbc-standard-tstructure-derived-category] and the exact sequence H^0(X,\\tau_{\\le -N-1}E)\\to H^0(X,E)\\to H^0(X,\\tau_{\\ge -N}E). The global sections functor \\Gamma(X,-)=\\operatorname{Hom}(\\mathcal O_X,-) commutes with products and its derived functors on quasi-coherent modules vanish in degrees >=N, so [lem-pc-unbounded-derived-functor-cohomological-bound] with b=-N-1 gives H^i(X,\\tau_{\\le -N-1}E)=0 for i>-2, in particular for i=0. By the assumed vanishing, \\tau_{\\ge -N}E\\cong\\tau_{\\ge 1}E is bounded below with cohomology only in degrees >=1, so [lem-weil-pbc-derived-functor-negative-vanishing] (applied to \\Gamma(X,-):\\operatorname{Mod}(\\mathcal O_X)\\to\\operatorname{Ab}) gives H^0(X,\\tau_{\\ge -N}E)=0. Hence H^0(X,E)=0.",
+   "uses": [
+    "lem-pc-finite-support-hi",
+    "lem-pc-affine-vanishing",
+    "lem-pc-leray-degenerate-sections",
+    "lem-pc-unbounded-derived-functor-cohomological-bound",
+    "lem-weil-pbc-derived-functor-negative-vanishing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 09M4 proof, invocation of Cohomology of Schemes Lemma 30.4.4, Lemma 36.3.5 (Tag 08D4) and Derived Categories Lemma 13.16.1"
+   }
+  },
+  {
+   "text": "Set a=-v-N and b=-u. Then a<=b, and for every L whose H^i(L) vanish for i in [a,b], Step 2 makes H^j(K^\\vee\\otimes^L L)=0 for j=-N,...,0, while Step 3 gives H^0(X,K^\\vee\\otimes^L L)=0. The identification in Step 1 therefore gives Hom_{D(\\mathcal O_X)}(K,L)=0.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 09M4 proof, final sentence"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-perfect-rhom-tensor-comparison",
+  "lem-pur-rhom-global-sections",
+  "lem-sc-perfect-hypercohomology-gap",
+  "lem-pc-finite-support-hi",
+  "lem-pc-affine-vanishing",
+  "lem-pc-leray-degenerate-sections",
+  "lem-pc-unbounded-derived-functor-cohomological-bound",
+  "lem-weil-pbc-derived-functor-negative-vanishing"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 09M4 (Lemma 36.13.5), proof of part (1)"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -51,12 +112,52 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-affine-perfect-plus-locally-free",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality"
+ "unit": "sk-thm-picard-duality",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-perfect-ext-bounded-qcoh-vanishing",
+  "worker": "stage1",
+  "summary": "Split Stacks Tag 09M4 into the perfect-dual hypercohomology gap; the qcqs cohomology bound is supplied by existing finite-support, affine-acyclicity, and Leray nodes. The item proof identifies Hom from K with global H^0 of K-dual tensor L, applies the spectral-sequence gap over the interval [-v-N,-u], and uses the cohomological bound plus truncation to force H^0 to vanish.",
+  "blueprint": "Realizes the proper-flat support proof clause of lem-sc-finite-duality: choose the truncation index sufficiently negative so the extension class into the bounded quasi-coherent tail vanishes.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-rhom-global-sections",
+    "why": "The final identification of derived global H^0 of the internal Hom with the Hom set in D(O_X) is a generic site-level tool, not supplied by this Picard-duality route."
+   },
+   {
+    "node": "lem-pc-finite-support-hi",
+    "why": "The spectral-sequence proof needs the generic qcqs uniform higher-direct-image bound; this unit has no replacement for that cohomological-dimension tool."
+   },
+   {
+    "node": "lem-pc-leray-degenerate-sections",
+    "why": "The generic Leray edge-map isomorphism converts the quasi-coherent higher-direct-image bound on the affine base into global cohomology vanishing for the qcqs morphism X to Spec(Z)."
+   },
+   {
+    "node": "lem-weil-pbc-derived-functor-negative-vanishing",
+    "why": "Generic left-exact-functor fact: the right derived functor of Gamma(X,-) kills degree 0 on a bounded-below complex concentrated in degrees >=1 (Stacks 05TC)."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-derived-functor-negative-vanishing",
+  "lem-pur-rhom-global-sections",
+  "lem-pc-finite-support-hi",
+  "lem-pc-leray-degenerate-sections",
+  "lem-weil-pbc-derived-functor-negative-vanishing"
+ ],
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-peb0000",
+  "group": "H1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-peb0000 (reviewer sub-agent of L); spot-checked: Interval arithmetic by hand: Tor amp [u,v] of K^vee gives H^j(K^vee(x)L)=0 if H^q(L)=0 on [j-v,j-u]; union over j in [-N,0] is [-v-N,-u], a=-v-N<=b=-u; gap node statement true (C4 ok); Step 1 comparison+global-sections nodes match; Leray/affine route for H^q(X,G)=0, q>=N, fine. Citer lem-sc-affine-perfect-plus-locally-free uses it on qcqs U as stated. FIX more, RETURN less: (1) class (d) new node lem-sc-perfect-qcoh-global-sections-truncation dropped: it is three lines from existing lem-pc-unbounded-derived-functor-cohomological-bound (Tag 08D4(3), b=-N-1) + truncation triangle + lem-weil-pbc-derived-functor-negative-vanishing (05TC, declared tool use); Step 3 rewritten with these, N:=max(n,0) to meet the N>=0 hypothesis (missed by second reading).; 1 file(s) fixed by the reviewer"
+ }
 }
