@@ -211,5 +211,28 @@
   "by": "L",
   "result": "accepted",
   "note": "6 elementary steps (Algebra 0596-0598, 03CA; Homology 02N1 (1), (3)): (a) by recursive lifts and images; the induced maps; injectivity; exactness at lim B by uniqueness of preimages; surjectivity by the recursive correction b_{n+1} = b' - u(k'); conclusion. Statement unchanged; stmt_deps gained the inverse-system and exact-sequence definitions. The ML node lem-weil-pbc-mittag-leffler-limit-exact deliberately not cited (its own split may cite this item). Stage-3 note: citer coherent-formal-modules-affine's step references 'step 3' for a fact proved in its step 2."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Category.ModuleCat.TowerLimitExactSurjectiveKernels",
+  "declaration": "CategoryTheory.tower_limit_exact_surjective_kernels",
+  "file": "lean/Sheaf/Algebra/Category/ModuleCat/TowerLimitExactSurjectiveKernels.lean",
+  "statement": "theorem tower_limit_exact_surjective_kernels (R : Type u) [CommRing R] (F : ℕᵒᵖ ⥤ ModuleCat.{v} R) (G : ℕᵒᵖ ⥤ ModuleCat.{w} R) (H : ℕᵒᵖ ⥤ ModuleCat.{t} R) (α : ∀ n : ℕ, F.obj (Opposite.op n) →ₗ[R] G.obj (Opposite.op n)) (β : ∀ n : ℕ, G.obj (Opposite.op n) →ₗ[R] H.obj (Opposite.op n)) (hα : ∀ (n : ℕ) (x : F.obj (Opposite.op (n + 1))), G.map (homOfLE (Nat.le_add_right n 1)).op (α (n + 1) x) = α n (F.map (homOfLE (Nat.le_add_right n 1)).op x)) (hβ : ∀ (n : ℕ) (x : G.obj (Opposite.op (n + 1))), H.map (homOfLE (Nat.le_add_right n 1)).op (β (n + 1) x) = β n (G.map (homOfLE (Nat.le_add_right n 1)).op x)) (hshort : ∀ n : ℕ, Function.Injective (α n) ∧ Function.Exact (α n) (β n) ∧ Function.Surjective (β n)) : ∃ (U : ↑(limit F) →ₗ[R] ↑(limit G)) (V : ↑(limit G) →ₗ[R] ↑(limit H)), (∀ (n : ℕ) (x : ↑(limit F)), limit.π G (Opposite.op n) (U x) = α n (limit.π F (Opposite.op n) x)) ∧ (∀ (n : ℕ) (x : ↑(limit G)), limit.π H (Opposite.op n) (V x) = β n (limit.π G (Opposite.op n) x)) ∧ Function.Injective U ∧ Function.Exact U V ∧ ((∀ n : ℕ, Function.Surjective (F.map (homOfLE (Nat.le_add_right n 1)).op)) → Function.Surjective V)",
+  "branch": "sheaf-dag",
+  "by": "Q1",
+  "date": "2026-10-11",
+  "existing": false,
+  "declarations": [
+   "CategoryTheory.tower_limit_projection_surjective",
+   "CategoryTheory.tower_limit_exact_surjective_kernels"
+  ],
+  "note": "Part (a) is tower_limit_projection_surjective. Part (b) uses independent module universes, Function.Exact, and induced linear maps uniquely characterized by coordinate projections; no duplicate inverse-limit definition."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "Q1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }
