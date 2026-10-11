@@ -3325,3 +3325,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 02:52 L: merged deliver/J1/lem-pur-triangle-morphism-category-05r9 (reviewer FIX; first push; new nodes: 2)
 - 02:52 L: lem-pur-triangle-morphism-category-05r9 merged by R-tmc0250 (FIX cede62207: new node's clause direction reversed, step 3 rewritten in the cofiltered form, a JSON \t had turned \to into a tab); the 05SA-05SC foundations batch (05SA, 05SB, 05SC, 05SU, 05R9, 05PY, 0A1S/0A1T) is now merged; second reading by J1 missed two faults
 - 02:53 L: def-sc-finitely-presented-module: three literal tabs ('\t'+'o' from a JSON-escaped \to) in the statement repaired to \to; a scan of every node's statement and step text finds no other tab
+- 02:54 L: reviewers R-dsf0254 (C1 lem-pc-derived-tensor-second-factor-functor, d461d00eb) and R-ude0254 (J1 lem-sc-picard-qcoh-universal-delta-embedding, e6a3f3582) launched
