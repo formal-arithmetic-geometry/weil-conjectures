@@ -90,7 +90,8 @@ lemma smul_left_injective {m : R} (hm : m ∈ M) {A B : Rationalization M C} :
 
 variable (M) (F : C ⥤ D) [F.CommShift ℤ] [F.IsTriangulated] [F.Linear R]
 
-omit [IsTriangulated C] [IsTriangulated D] in
+omit [IsTriangulated C] [IsTriangulated D] [∀ n : ℤ, (shiftFunctor C n).Linear R]
+  [∀ n : ℤ, (shiftFunctor D n).Linear R] in
 /-- An `R`-linear triangulated functor preserves the morphisms with `M`-torsion mapping cone. -/
 lemma W_map {X Y : C} {s : X ⟶ Y} (hs : W M C s) : W M D (F.map s) := by
   obtain ⟨Z, g, h, hT, m, hm, hZ⟩ := hs
@@ -124,13 +125,19 @@ noncomputable def mapHom {X Y : C} (φ : (Q M C).obj X ⟶ (Q M C).obj Y) :
     (Q M D).obj (F.obj X) ⟶ (Q M D).obj (F.obj Y) :=
   (mapFac M F).inv.app X ≫ (map M F).map φ ≫ (mapFac M F).hom.app Y
 
+omit [IsTriangulated C] [IsTriangulated D] [∀ n : ℤ, (shiftFunctor C n).Linear R]
+  [∀ n : ℤ, (shiftFunctor D n).Linear R] in
 lemma mapHom_map {X Y : C} (f : X ⟶ Y) : mapHom F ((Q M C).map f) = (Q M D).map (F.map f) := by
   simp [mapHom, ← Functor.comp_map, (mapFac M F).hom.naturality f]
 
+omit [IsTriangulated C] [IsTriangulated D] [∀ n : ℤ, (shiftFunctor C n).Linear R]
+  [∀ n : ℤ, (shiftFunctor D n).Linear R] in
 lemma mapHom_comp {X Y Z : C} (φ : (Q M C).obj X ⟶ (Q M C).obj Y)
     (ψ : (Q M C).obj Y ⟶ (Q M C).obj Z) : mapHom F (φ ≫ ψ) = mapHom F φ ≫ mapHom F ψ := by
   simp [mapHom]
 
+omit [IsTriangulated C] [IsTriangulated D] [∀ n : ℤ, (shiftFunctor C n).Linear R]
+  [∀ n : ℤ, (shiftFunctor D n).Linear R] in
 @[simp]
 lemma mapHom_id (X : C) : mapHom F (𝟙 ((Q M C).obj X)) = 𝟙 _ := by
   simp [mapHom]
