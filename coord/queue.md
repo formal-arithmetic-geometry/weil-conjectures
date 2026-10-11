@@ -1,17 +1,18 @@
 # Work queue
 
-909 items; claim with `tools/claim.py next <group> [--stage N]`.
+905 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (909)
+## Stage 2: nodes to state (905)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
 | `def-kun-dimension` | 1 | state |
 | `def-sc-function-field` | 1 | state |
 | `def-sc-ringed-space-module-cohomology` | 1 | state |
+| `def-weil-l-adic-coefficient-extension` | 1 | state |
 | `def-weil-pbc-kinjective-resolutions` | 1 | state |
 | `lem-exc-field-discrete-modules` | 1 | state |
 | `lem-galois-pi1-finite-etale-image-stabilizer` | 1 | state |
@@ -39,24 +40,19 @@
 | `lem-sc-tensor-generating-sections` | 1 | state |
 | `lem-sc-tensor-section-affine-open` | 1 | state |
 | `lem-sc-valuation-zero-section-relative-cartier` | 1 | state |
-| `lem-sp-cart-eilenberg-left-exact-cohomology` | 1 | state |
 | `lem-sp-cartan-eilenberg-comparison-independence` | 1 | state |
 | `lem-sp-cartan-eilenberg-double-complex-homotopy` | 1 | state |
 | `lem-sp-ce-horizontal-lift` | 1 | state |
 | `lem-sp-ce-vertical-nullhomotopy` | 1 | state |
-| `lem-sp-filtered-complex-ZB-description` | 1 | state |
 | `lem-sp-filtered-complex-associated-spectral-sequence-construction` | 1 | state |
 | `lem-weil-derived-limit-existence` | 1 | state |
 | `lem-weil-geometrically-connected-check-after-extension` | 1 | state |
-| `lem-weil-l-adic-extension-integers-dvr` | 1 | state |
 | `lem-weil-pbc-adjunction-lifts-group-ring-objects` | 1 | state |
 | `lem-weil-pbc-affine-basic-set-difference` | 1 | state |
-| `lem-weil-pbc-affine-basic-sets-disjoint-refinement` | 1 | state |
 | `lem-weil-pbc-affine-formally-smooth-iff-ring-lifting` | 1 | state |
 | `lem-weil-pbc-affine-tilde-tensor` | 1 | state |
 | `lem-weil-pbc-algebra-colimit-fp-algebras-over-it` | 1 | state |
 | `lem-weil-pbc-algebraize-finite-over-proper` | 1 | state |
-| `lem-weil-pbc-ample-scheme-separated` | 1 | state |
 | `lem-weil-pbc-ample-very-ample-immersion-affine-base` | 1 | state |
 | `lem-weil-pbc-analytic-unramified-principal-criterion` | 1 | state |
 | `lem-weil-pbc-analytically-unramified-n1` | 1 | state |
@@ -919,7 +915,7 @@
 | `lem-sc-normalization-properties` | 3 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 899 nodes that wait for a statement dependency, 40 nodes that wait for stage 1.
+Not open yet: 898 nodes that wait for a statement dependency, 40 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
