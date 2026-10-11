@@ -5661,3 +5661,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 19:36 L: merged deliver/K1/lem-weil-pbc-hypercover-refinement (stage 2; reviewer PASS; first push; Sheaf.Paper.FiniteSplitHypercoverRefinement AlgebraicGeometry.FiniteSplitEtaleHypercover.exists_and_cofiltered)
 - 19:36 L: merged deliver/U1/lem-sc-noetherian-open-closed-cohomology-sequence (stage 2; reviewer PASS; first push; Sheaf.Topology.NoetherianOpenClosedCohomologySequence TopCat.noetherian_open_closed_cohomology_sequence)
 - 19:38 L: returned deliver/C1/lem-pc-global-hom-pullback-adjunction (reviewer RETURN: (reviewer X-c63cc, head c63cce45a) H3: In GlobalHomPullbackAdjunction.lean, the equation defining p uses `Classical.choo)
+- 19:38 L: returned deliver/C1/lem-sc-cech-comparison-map-naturality (reviewer RETURN: (reviewer X-a467e, head a467e4193) the reviewer passed it, but the landing failed: NOT MERGED lem-sc-cech-comparison-map)
