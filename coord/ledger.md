@@ -3071,3 +3071,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 00:14 L: merged deliver/J1/lem-sc-perfect-degree-zero-fibre-criterion (reviewer FIX; first push; new nodes: 2)
 - 00:14 UTC L: J1 perfect-degree-zero-fibre-criterion FIX 39b45cf6e (R-dzf0012; flatness of H^0(K) argued on the summand, counterexample Ann(x) over k[x,y]/(xy) noted).
 - 00:14 L: returned deliver/M1/lem-sp-ce-vertical-nullhomotopy (reviewer RETURN: R-cvn0013 (head 0bd464f16). 1. E (false new statement): lem-sp-ce-compatible-homotopy-assembly is false as stated. It as)
+- 00:14 UTC L: returned: M1 ce-vertical-nullhomotopy ada4de874 (R-cvn0013: assembly node false as stated, the 0->B->Z->H->0 compatibility never built; needs Weibel's induction on p).
