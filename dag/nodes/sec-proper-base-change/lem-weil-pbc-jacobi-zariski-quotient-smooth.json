@@ -145,5 +145,23 @@
   "group": "F1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of F1; spot-checked by L: L: 3rd delivery repairs the return: 5 statement-only nodes (00S2 sequence with the Tor_1=Tor_2=0 base-change clause as in Stacks, 07BP H_1 = I/I^2 and Omega = 0 leaf, 00RU maps), steps cite nodes only; route correct. Defect fixed by L after merge: the leaf's Mathlib line is 247, not 277 (KaehlerDifferential.subsingleton_of_surjective)."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.JacobiZariskiQuotientSmooth",
+  "declaration": "Algebra.jacobiZariski_quotient_smooth",
+  "file": "lean/Sheaf/RingTheory/JacobiZariskiQuotientSmooth.lean",
+  "statement": "theorem jacobiZariski_quotient_smooth (A : Type u) (B : Type v) [CommRing A] [CommRing B] [Algebra A B] [Subsingleton (H1Cotangent A B)] [Module.Projective B (KaehlerDifferential A B)] (a : Ideal B) : let C := B ⧸ a ∃ (i : H1Cotangent A C →ₗ[C] a.Cotangent) (δ : a.Cotangent →ₗ[C] C ⊗[B] KaehlerDifferential A B) (w : C ⊗[B] KaehlerDifferential A B →ₗ[C] KaehlerDifferential A C), Function.Injective i ∧ Function.Exact i δ ∧ Function.Exact δ w ∧ Function.Surjective w ∧ (∀ x : a, δ (a.toCotangent x) = 1 ⊗ₜ[B] KaehlerDifferential.D A B x) ∧ (∀ (c : C) (b : B), w (c ⊗ₜ[B] KaehlerDifferential.D A B b) = c • KaehlerDifferential.D A C (Ideal.Quotient.mk a b))",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-jzq1116",
+  "group": "K1",
+  "result": "pass",
+  "note": "A,B CommRing+Algebra (any ring map); H1(L_B/A)=0 as Subsingleton (H1Cotangent A B) = Generators.self kernel (non-hollow, no instance); Omega projective as Module.Projective B Ω[B/A] (same spelling as landed JacobiZariskiLeftTermVanishing); C = B/a with Ideal.instAlgebraQuotient; a/a^2 = a.Cotangent with instModuleQuotientCotangent; C⊗[B]Ω leftModule; all three maps C-linear; Injective i, Exact i δ, Exact δ w, Surjective w = 0->...->0; δ(a mod a^2)=1⊗da, w(c⊗db)=c·d(b̄); i existential as node gives no formula (downstream smooth-localization-conormal-split uses exactness only); compiled clean on L"
  }
 }
