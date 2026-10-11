@@ -3608,3 +3608,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 07:13 L: merged deliver/K1/lem-pc-kflat-stalk-criterion (stage 2; reviewer FIX; first push; Sheaf.Algebra.Homology.KFlatStalkCriterion AlgebraicGeometry.RingedSpace.isKFlat_iff_stalk_isKFlat; new nodes: def-pc-module-stalk-functor)
 - 07:15 L: merged deliver/H1/def-weil-pbc-henselian-terminology (stage 2; reviewer FIX; first push; Sheaf.RingTheory.HenselianTerminology IsStrictlyHenselianLocalRing)
 - 07:16 L: merged deliver/M1/lem-pur-kinjective-characterize-injective (stage 2; reviewer PASS; first push; Sheaf.CategoryTheory.InjectiveIffExtendsSubobjectGenerator CategoryTheory.injective_iff_extends_subobject_generator)
+- 07:16 L: merged deliver/J1/lem-pur-kinjective-ML-ordinals (stage 2; reviewer PASS; first push; Sheaf.Algebra.Homology.AcyclicLimitOrdinal CochainComplex.acyclic_limit_of_surjective_initialSegments)

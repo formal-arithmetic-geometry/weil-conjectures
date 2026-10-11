@@ -128,5 +128,23 @@
   "group": "M1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-mlo0144 (reviewer sub-agent of L); spot-checked: Statement vs Homology Tag 0AAT lines 7861-7872 clause by clause (ordinal index, acyclic stages, termwise surjectivity K_beta^n -> lim_{gamma<beta} K_gamma^n, acyclic limit): match. Steps 1-5 follow the Stacks transfinite proof (base, successor with degree -2 lift, limit with induction hypothesis on lim_{gamma<beta}, shift). Citer lem-pur-kinjective-homotopy-limit-vanishing uses exactly hypotheses and conclusion. No duplicate (pbc mittag-leffler nodes are N-indexed towers). FIX more, RETURN less: E/C step 4 justified d(u_beta)=x_beta by 'surjectivity in degree -1'; it follows from acyclicity of K_beta since x_beta is a degree-0 cocycle; text corrected (missed by the Second reading).; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.AcyclicLimitOrdinal",
+  "declaration": "CochainComplex.acyclic_limit_of_surjective_initialSegments",
+  "file": "lean/Sheaf/Algebra/Homology/AcyclicLimitOrdinal.lean",
+  "statement": "theorem acyclic_limit_of_surjective_initialSegments (α : Ordinal.{u}) (K : α.ToTypeᵒᵖ ⥤ CochainComplex AddCommGrpCat.{max u v} ℤ) (hacyclic : ∀ β : α.ToType, (K.obj (op β)).Acyclic) (hsurj : ∀ (β : α.ToType) (n : ℤ) (x : ∀ γ : Set.Iio β, (K.obj (op γ.val)).X n), (∀ (γ δ : Set.Iio β) (h : γ ≤ δ), (K.map (homOfLE (show γ.val ≤ δ.val from h)).op).f n (x δ) = x γ) → ∃ y : (K.obj (op β)).X n, ∀ γ : Set.Iio β, (K.map (homOfLE (le_of_lt γ.property)).op).f n y = x γ) : (limit K).Acyclic",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-kml0917",
+  "group": "J1",
+  "result": "pass",
+  "note": "Ordinal alpha as α.ToType (≃o Set.Iio α); complexes of abelian groups as CochainComplex AddCommGrpCat ℤ; inverse system as functor from α.ToTypeᵒᵖ; stagewise Acyclic; hsurj = lifting of compatible families on Set.Iio β in each degree (surjectivity onto lim_{γ<β}, trivial at least β); conclusion (limit K).Acyclic; universes u / max u v; docstring carries all 5 proof steps; no Mathlib/source duplicate (IsMittagLeffler, IsKInjective unrelated)"
  }
 }
