@@ -152,5 +152,23 @@
   "by": "L",
   "result": "accepted",
   "note": "4 steps prove the final assertion of Stacks 00S2 via flatness instead of Tor: the two short exact sequences from NL (new 00S0 leaf for coker delta = Omega, Cotangent/Basic.lean:330), M flat by the new 00HM node (unsplit), tensoring with C exact by the new 00HL leaf (Equalizer.lean:192), projective => flat leaf (Flat/Basic.lean:227); all lines verified with sed. Statement reworded as a plain statement; the wrong tag 07M7 dropped from the source. Tags 00S2, 00HL, 00HM, 00S0 verified."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.JacobiZariskiLeftTermVanishing",
+  "declaration": "Algebra.jacobiZariski_leftTerm_vanishing",
+  "file": "lean/Sheaf/RingTheory/JacobiZariskiLeftTermVanishing.lean",
+  "statement": "theorem jacobiZariski_leftTerm_vanishing (A : Type u) (B : Type v) [CommRing A] [CommRing B] [Algebra A B] [Subsingleton (H1Cotangent A B)] [Module.Projective B (KaehlerDifferential A B)] (a : Ideal B) : let P := (Generators.self A B).toExtension let δ := P.cotangentComplex.rTensor (B ⧸ a) let ι := P.h1Cotangentι.rTensor (B ⧸ a) Function.Injective ι ∧ LinearMap.range ι = LinearMap.ker δ ∧ Nonempty ((LinearMap.ker δ) ≃ₗ[B] (H1Cotangent A B ⊗[B] (B ⧸ a))) ∧ Subsingleton (H1Cotangent A B ⊗[B] (B ⧸ a)) ∧ Subsingleton (LinearMap.ker δ)",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-jzl1103",
+  "group": "J1",
+  "result": "pass",
+  "note": "A->B any ring map (CommRing A B, Algebra A B); H1(L)=0 as Subsingleton (Algebra.H1Cotangent A B = (Generators.self A B).toExtension.H1Cotangent, abbrev); Omega projective as Module.Projective B (KaehlerDifferential A B); C = B/a; NL = cotangentComplex of canonical presentation Generators.self (N1 = I/I^2, N0 = S (x) Omega[A[B]/A] free on d[b]); delta(x)id_C and (ker delta incl)(x)id_C via rTensor; injective + range = ker + iso + both zero; no extra hypotheses, universes independent, no new definitions"
  }
 }
