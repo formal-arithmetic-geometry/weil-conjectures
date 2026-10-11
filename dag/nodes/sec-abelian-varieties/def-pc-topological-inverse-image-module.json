@@ -1,0 +1,105 @@
+{
+ "id": "def-pc-topological-inverse-image-module",
+ "kind": "definition",
+ "title": "Canonical module structure on a topological inverse image",
+ "status": "split",
+ "statement": "Let $f:X\\to Y$ be a continuous map, $\\mathcal R$ a sheaf of commutative rings on $Y$, and $\\mathcal M$ a sheaf of $\\mathcal R$-modules [def-weil-sheaf-of-modules-category]. On the inverse-image sheaf of abelian groups $f^{-1}\\mathcal M$ [def-weil-pbc-topological-inverse-image], give each section group its canonical $f^{-1}\\mathcal R$-module structure: multiply local representatives on a common open before sheafification. Restrictions are semilinear. The unit $\\eta_{\\mathcal M}:\\mathcal M\\to f_*f^{-1}\\mathcal M$ is semilinear over $\\eta_{\\mathcal R}$. For an $\\mathcal R$-linear morphism $a$, the underlying inverse-image abelian sheaf map $f^{-1}a$ is $f^{-1}\\mathcal R$-linear.",
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-topological-inverse-image"
+ ],
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 008X, Lemma 6.24.6 (canonical inverse-image module structure); Tag 008Y (semilinear unit)"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "canonical module structure on topological inverse image sheaf of modules",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "canonical module structure on topological inverse image sheaf of modules",
+   "results": "8 hits: ModuleCat.tilde, SheafOfModules.pushforwardSections, AlgebraicGeometry.Scheme.Modules.instModuleCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensCarrierAbPresheaf, SheafOfModules.over, SheafOfModules.restrictScalars, ModuleCat.instModuleCarrierObjOppositeOpensCarrierCarrierCommRingCatSpecOfRingCatValRingCatSheafTopTildeInType, AlgebraicGeometry.Scheme.Modules.map_smul, PresheafOfModules.Sheafify.SMulCandidate",
+   "date": "2026-10-11",
+   "verdict": "no exact match: no definition of the canonical topological inverse-image module"
+  },
+  {
+   "tool": "grep",
+   "query": "inverseImageModule|inverse.image.*module",
+   "results": "0 hits: ",
+   "date": "2026-10-11",
+   "verdict": "no exact match: no definition of the canonical topological inverse-image module"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "def-pc-module-pullback",
+  "date": "2026-10-11",
+  "group": "H1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-pc-base-change",
+   "place": "module base change: the canonical inverse-image module in the tensor formula",
+   "via": [
+    "def-pc-module-pullback"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-def-av-jacobian",
+ "lean": {
+  "module": "Sheaf.Topology.InverseImageModule",
+  "declaration": "TopCat.Sheaf.inverseImageModule",
+  "declarations": [
+   "TopCat.Sheaf.inverseImageConstruction",
+   "TopCat.Sheaf.inverseImageRing",
+   "TopCat.Sheaf.inverseImageAb",
+   "TopCat.Sheaf.exists_inverseImageModuleInstances",
+   "TopCat.Sheaf.inverseImageModuleInstances",
+   "TopCat.Sheaf.inverseImageModule",
+   "TopCat.Sheaf.inverseImageMap_smul",
+   "TopCat.Sheaf.inverseImageModuleMap"
+  ],
+  "file": "lean/Sheaf/Topology/InverseImageModule.lean",
+  "statement": "def inverseImageModule : SheafOfModules.{u} ((sheafCompose (Opens.grothendieckTopology X) (forget₂ CommRingCat.{u} RingCat.{u})).obj (inverseImageRing f R))",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-mpb0951",
+  "group": "H1",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-mpb0951",
+  "group": "H1",
+  "result": "pass",
+  "note": "schemes g:X->Y (Scheme.{w}); ring map g^-1 O_Y -> O_X = homEquiv.symm of g.c in the explicit sheafPullbackConstruction CommRingCat adjunction; M : Y.Modules (Zariski); g^-1 M = explicit Lan+sheafify abelian inverse image with 008X module structure (new node def-pc-topological-inverse-image-module, instances chosen from a named existence theorem whose restriction+unit semilinearity pin them uniquely); object = landed SheafOfModules.changeOfRings (reuse); maps = sheafified extendScalars.map of g^-1 a; functor, left adjoint to Scheme.Modules.pushforward, id/comp isos as the node states; combined compile clean"
+ }
+}

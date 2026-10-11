@@ -26,7 +26,8 @@
   "def-pc-scheme",
   "def-weil-sheaf-of-modules-category",
   "def-weil-pbc-topological-inverse-image",
-  "def-pur-sheaf-tensor-product"
+  "def-pur-sheaf-tensor-product",
+  "def-pc-topological-inverse-image-module"
  ],
  "proof": [
   {
@@ -151,5 +152,35 @@
   "group": "F1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of F1; spot-checked by L: L: 0095/0096/0097 for the Zariski pullback of modules; adjunction and composition as new nodes"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.TensorPullback",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.tensorPullback",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.tensorPullbackRingMap",
+   "AlgebraicGeometry.Scheme.Modules.tensorPullbackObj",
+   "AlgebraicGeometry.Scheme.Modules.tensorPullbackPresheafMap_naturality",
+   "AlgebraicGeometry.Scheme.Modules.tensorPullbackMap",
+   "AlgebraicGeometry.Scheme.Modules.tensorPullbackMap_id",
+   "AlgebraicGeometry.Scheme.Modules.tensorPullbackMap_comp",
+   "AlgebraicGeometry.Scheme.Modules.tensorPullback",
+   "AlgebraicGeometry.Scheme.Modules.nonempty_tensorPullbackAdjunction",
+   "AlgebraicGeometry.Scheme.Modules.nonempty_tensorPullbackId",
+   "AlgebraicGeometry.Scheme.Modules.nonempty_tensorPullbackComp"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/TensorPullback.lean",
+  "statement": "def tensorPullback : Y.Modules ⥤ X.Modules",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-mpb0951",
+  "group": "H1",
+  "result": "pass",
+  "note": "schemes g:X->Y (Scheme.{w}); ring map g^-1 O_Y -> O_X = homEquiv.symm of g.c in the explicit sheafPullbackConstruction CommRingCat adjunction; M : Y.Modules (Zariski); g^-1 M = explicit Lan+sheafify abelian inverse image with 008X module structure (new node def-pc-topological-inverse-image-module, instances chosen from a named existence theorem whose restriction+unit semilinearity pin them uniquely); object = landed SheafOfModules.changeOfRings (reuse); maps = sheafified extendScalars.map of g^-1 a; functor, left adjoint to Scheme.Modules.pushforward, id/comp isos as the node states; combined compile clean"
  }
 }
