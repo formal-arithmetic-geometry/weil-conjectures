@@ -152,5 +152,24 @@
   "item": "lem-weil-pbc-p-independent-differentials-independent",
   "worker": "stage1",
   "summary": "Read Stacks 07P1 and the whole proof of 07P2 (tags verified in tags/tags). The source proves (1) => (2) exactly by extending a p-independent subset to a maximal one by Zorn, showing it is a p-basis, and applying (a) => (b); the split follows this route in three steps: extension to a p-basis (new unsplit node lem-weil-pbc-p-independent-extends-to-p-basis, the relative version of 07P2's Zorn claim with a given family to extend; the existing lem-weil-pbc-p-basis-exists is only the absolute case F_p -> k with no prescribed family), the existing unsplit lem-weil-pbc-p-basis-differentials-basis ((a) => (b)), and the elementary fact that a subfamily of a basis is independent. The direct comparison Omega_{L/k} (x)_L K -> Omega_{K/k} for L = kK^p(x_i) was not used since that map need not be injective. Statement unchanged; it matches the citer lem-weil-pbc-intersection-subfields-differentials (step 2 applies it to K/K_alpha and a finite subfamily, independence over K). Mathlib: no p-independence or p-basis notion; three kinds of search recorded."
+ },
+ "lean": {
+  "module": "Sheaf.FieldTheory.PIndependentDifferentialsIndependent",
+  "declaration": "FieldTheory.pIndependent_differentials_linearIndependent",
+  "file": "lean/Sheaf/FieldTheory/PIndependentDifferentialsIndependent.lean",
+  "statement": "theorem pIndependent_differentials_linearIndependent (p : ℕ) [Fact p.Prime] (k : Type u) (K : Type v) [Field k] [Field K] [Algebra k K] [CharP k p] [CharP K p] {I : Type w} (x : I → K) (h : LinearIndependent (IntermediateField.adjoin k (Set.range (fun a : K ↦ a ^ p))) (fun E : {E : I →₀ ℕ // ∀ i : I, E i < p} ↦ E.val.prod (fun i e ↦ x i ^ e))) : LinearIndependent K (fun i : I => KaehlerDifferential.D k K (x i))",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-pdi1323"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-pdi1323",
+  "group": "E1",
+  "result": "fix",
+  "note": "p prime + CharP k,K; kK^p = IntermediateField.adjoin k (range (·^p)); E : {E : I →₀ ℕ // ∀ i : I, E i < p}, x^E = E.val.prod; p-independence = LinearIndependent over kK^p (H1 af372485c spelling); conclusion LinearIndependent K (D k K (x i)); I arbitrary universe ok (no limit index); no let, no new defs, node statement untouched"
  }
 }
