@@ -179,5 +179,23 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GmPicardPullback",
+  "declaration": "AlgebraicGeometry.Scheme.picard_cohomology_pullback",
+  "file": "lean/Sheaf/AlgebraicGeometry/GmPicardPullback.lean",
+  "statement": "theorem picard_cohomology_pullback (k k' : Type u) [Field k] [IsAlgClosed k] [Field k'] [IsAlgClosed k'] (X Y : Scheme.{u}) [X.Over (Spec (.of k))] [Y.Over (Spec (.of k'))] [IsCurve (X ↘ Spec (.of k))] [IsCurve (Y ↘ Spec (.of k'))] (u : Y ⟶ X) : (∀ (L : X.Modules) [L.IsInvertible], ∃ h : ((Modules.tensorPullback u).obj L).IsInvertible, Sheaf.H.map (upperStarGmSheafToGmSheaf u) 1 (Etale.cohomologyMap u X.gmSheaf 1 (Pic.toCohomologicalPicardGroup X (Pic.ofIsInvertible L))) = Pic.toCohomologicalPicardGroup Y (@Pic.ofIsInvertible Y ((Modules.tensorPullback u).obj L) h)) ∧ (∀ a : Γ(X, ⊤)ˣ, Sheaf.H.equiv₀ Y.gmSheaf (MorphismProperty.Over.mkIdTerminal @Etale Y) (Sheaf.H.map (upperStarGmSheafToGmSheaf u) 0 (Etale.cohomologyMap u X.gmSheaf 0 ((Sheaf.H.equiv₀ X.gmSheaf (MorphismProperty.Over.mkIdTerminal @Etale X)).symm (ULift.up (Additive.ofMul a))))) = ULift.up (Additive.ofMul (Units.map u.appTop.hom.toMonoidHom a)))",
+  "branch": "sheaf-dag",
+  "by": "V1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "V1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }
