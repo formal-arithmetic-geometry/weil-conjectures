@@ -128,5 +128,23 @@
   "group": "H1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-prb0020 (reviewer sub-agent of L); spot-checked: Read packet whole. Step 1: lem-sc-divisor-class-curve applies to both connected smooth curves; extension by zero gives surjectivity, same function field gives kernel = <[P]:P in S> (E ok). Step 2: lem-sc-pic-proper-decomposition + def-sc-pic0 (P0 k-rational, k alg. closed); q(x)=x-deg(x)[P0], q(B)=Lambda, Lambda subset B gives Pic/B = Pic0/Lambda (checked). Step 3 composition ok. Citer lem-sc-pic-affine-base-change-compatibility uses surjectivity, boundary kernel, quotient iso and that the map is restriction of invertible modules: all stated (C4 ok). Not a duplicate of lem-sc-pic-affine / lem-sc-pic-affine-quotient (those give only an abstract iso; this is the restriction/boundary half), no cycle (neither is cited). FIX more, RETURN less: (1) C1/E step 1: the proof built r on divisor classes but never identified it with restriction of invertible modules, which the statement and the citer's step 3 use; added the elementary identification O(D)|_C = O_C(D|_C). Second reading missed this.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.Curve.PicRestrictionBoundary",
+  "declaration": "AlgebraicGeometry.Scheme.Hom.pic_restriction_boundary",
+  "file": "lean/Sheaf/AlgebraicGeometry/Curve/PicRestrictionBoundary.lean",
+  "statement": "theorem Scheme.Hom.pic_restriction_boundary {k : Type u} [Field k] [IsAlgClosed k] {C : Scheme.{u}} (f : C ⟶ Spec (.of k)) [IsConnectedCurve f] [Smooth f] [IsAffine C] (c : Compactification f) [IsConnectedCurve c.g] [hsm : SmoothOfRelativeDimension 1 c.g] : Function.Surjective (Scheme.Pic.mapHom c.i) ∧ (Scheme.Pic.mapHom c.i).ker = Subgroup.closure {L | ∃ P : closedPoints c.Z, P.val ∉ Set.range c.i.base ∧ L = @Scheme.Pic.ofClosedPoint k _ c.Z ⟨c.g⟩ hsm P} ∧ ∀ (P₀ : closedPoints c.Z), P₀.val ∉ Set.range c.i.base → ∃ (G : Subgroup c.Z.Pic) (_ : (G : Set c.Z.Pic) = c.g.picZero) (Λ : Subgroup G), Subgroup.map G.subtype Λ = Subgroup.closure {L | ∃ P : closedPoints c.Z, P.val ∉ Set.range c.i.base ∧ L = @Scheme.Pic.ofClosedPoint k _ c.Z ⟨c.g⟩ hsm P / @Scheme.Pic.ofClosedPoint k _ c.Z ⟨c.g⟩ hsm P₀} ∧ ∃ e : (G ⧸ Λ) ≃* C.Pic, ∀ L : G, e (QuotientGroup.mk L) = Scheme.Pic.mapHom c.i L.val",
+  "branch": "sheaf-dag",
+  "by": "S1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "S1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }
