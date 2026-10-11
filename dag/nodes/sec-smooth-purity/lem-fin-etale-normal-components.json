@@ -133,5 +133,23 @@
   "group": "G1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-enc2846 (reviewer sub-agent of L); spot-checked: Read packet; sibling F1 lem-fin-normal-generic-constant uses this node only for finitely many open-closed normal integral components W_a of a Noetherian etale W (C4 ok; connected => one integral component); sibling adds no duplicate helper; Noetherian used honestly in Step 2 (finitely many components). FIX more, RETURN less: (1) C4/C1 Step 1: the item's etale is def-weil-etale-morphism (lfp+flat+unramified, via conventions), but the step took smoothness from the definition in def-sbc-smooth-morphisms (another notion of etale; the bridge is lem-weil-pbc-etale-smooth-zero-dimensional-fibres) and passed from a smooth morphism to a smooth ring map in the H_1(L) sense of def-weil-pbc-smooth-ring-map without lem-weil-pbc-smooth-ring-map-iff-smooth-affine; replaced by the existing exact node lem-weil-pbc-etale-over-normal-ring-normal on affine opens (declared as tool use; the smooth-ring tool use dropped), uses/proof_deps corrected. The Second reading missed this.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleNormalComponents",
+  "declaration": "AlgebraicGeometry.Etale.exists_clopen_normal_integral_components",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleNormalComponents.lean",
+  "statement": "theorem Etale.exists_clopen_normal_integral_components {W Y : Scheme.{u}} (f : W ⟶ Y) [Etale f] [IsNoetherian W] (hY : IsNormalScheme Y) : ∃ (n : ℕ) (U : Fin n → W.Opens), (∀ i, IsClosed (U i : Set W)) ∧ (∀ i j, i ≠ j → Disjoint (U i) (U j)) ∧ (⨆ i, U i) = ⊤ ∧ (∀ i, IsNormalScheme (U i).toScheme)",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-enc0928",
+  "group": "C1",
+  "result": "pass",
+  "note": "Read packet; node is plain etale (not finite): [Etale f] W⟶Y, [IsNoetherian W], hY : IsNormalScheme Y (J1, includes IsIntegral); conclusion ∃ n, U : Fin n → W.Opens clopen, pairwise disjoint, ⨆=⊤, each IsNormalScheme (U i).toScheme = finite disjoint union of open-and-closed normal integral; n=0 for empty W ok; true (étale over normal ⇒ normal stalks, Noetherian ⇒ finitely many disjoint components); no normal-scheme notion in Mathlib or source; docstring follows both proof steps; conventions ok"
  }
 }
