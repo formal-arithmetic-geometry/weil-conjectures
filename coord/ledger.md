@@ -3652,3 +3652,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 07:33 L: merged deliver/E1/def-pc-flat-sheaf-modules (stage 2; reviewer FIX; first push; Sheaf.Algebra.Category.ModuleCat.Sheaf.Flat SheafOfModules.IsFlat)
 - 07:34 L: merged deliver/F1/lem-pur-left-derived-from-kflat-class (stage 2; reviewer FIX; first push; Sheaf.CategoryTheory.DerivedCategory.LeftDerivedFromResolvingClass CategoryTheory.Functor.leftDerived_from_resolvingClass)
 - 07:34 L: merged deliver/K1/lem-pc-derived-limit-milnor-sequence (stage 2; reviewer PASS; first push; Sheaf.CategoryTheory.Triangulated.MilnorSequence CategoryTheory.milnor_shortExact)
+- 07:34 L: returned deliver/F1/lem-pc-kflat-pullback-preservation (reviewer RETURN: Reviewer R-kpp0940 (head 8804d5442). H3+H4: the pulled-back complex is not the node's object. The node defines f^*K term)
