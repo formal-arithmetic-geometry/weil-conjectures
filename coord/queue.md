@@ -1,8 +1,8 @@
 # Work queue
 
-860 items; claim with `tools/claim.py next <group> [--stage N]`.
+861 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (31)
+## Stage 1: nodes to split (32)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -23,10 +23,11 @@
 | `lem-pc-derived-functor-termwise-split-ses-triangle` | 5018 | none |
 | `lem-sp-ce-compatible-homotopy-assembly` | 6009 | none |
 | `pqf-lem-serre-criterion` | 6013 | none |
-| `lem-sc-perfect-finite-free-residue-model` | 6014 | none |
 | `lem-sc-picard-kunneth-qcoh` | 6014 | none |
 | `lem-sc-valuation-closed-fibre-section-vanishing` | 6014 | none |
 | `lem-pc-recd-fibre-cartier-local` | 6015 | none |
+| `lem-sc-perfect-local-pseudocoherent-free-model` | 6015 | none |
+| `lem-sc-perfect-pullback-perfect-residue` | 6015 | none |
 | `lem-pc-affine-perfect-cut-degree-zero` | 6016 | none |
 | `lem-sc-coherent-ring-perfect-complex-cohomology` | 6016 | none |
 | `lem-sc-base-change-curve` | - | none |
@@ -872,7 +873,7 @@
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 1742 nodes that wait for a statement dependency, 72 nodes that wait for stage 1.
+Not open yet: 1743 nodes that wait for a statement dependency, 73 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
