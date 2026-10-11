@@ -143,5 +143,24 @@
   "group": "C1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-pge2728 (reviewer sub-agent of L); spot-checked: Read packet whole; Step 1 affine base (09IS affine case), Step 2 merged open-induction-step node, Step 3 qcqs induction principle lem-sc-invert-s-cohomology-induction (Tag 08DR, generic tool, accepted) with P(U)=>P(U union V) matching its premise, Step 4 compactness + telescope node give the localizing retract-closed clause; generator = def-pc-generators as citers (lem-sc-proper-flat-right-adjoint-affine-basechange, lem-pc-perfect-generator-pullback) use it; no new nodes, no duplicate of the merged induction-step/koszul-orthogonal/supported-generator nodes. FIX more, RETURN less: (1) C1/C4 Step 2: the induction step yields Q+K' perfect in D(O_X), but the statement and lem-pc-perfect-object-compact need G in D_QCoh; added the elementary fact that perfect objects have quasi-coherent cohomology; (2) C1 Step 4: lem-pc-derived-qcoh-direct-sums gives only sums, lem-pc-compact-generators-build-objects needs D_QCoh triangulated; added the elementary closure under shifts/cones (QCoh weak Serre). Second reading missed both.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.PerfectGeneratorExists",
+  "declaration": "AlgebraicGeometry.exists_perfect_generator",
+  "statement": "theorem exists_perfect_generator (X : Scheme.{u}) [CompactSpace X] [QuasiSeparatedSpace X] [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] [∀ U : X.Opens, HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))] : ∃ P : schemeDerivedCategory X, Scheme.IsPerfect X P ∧ schemeDerivedQCohProperty X P ∧ (∀ E : schemeDerivedQCohCategory X, IsZero E.obj ↔ ∀ n : ℤ, Subsingleton (P⟦n⟧ ⟶ E.obj)) ∧ ∀ Q : ObjectProperty (schemeDerivedCategory X), Q.IsTriangulated → Q.IsStableUnderRetracts → (∀ I : Type u, Q.IsClosedUnderColimitsOfShape (Discrete I)) → Q P → ∀ E : schemeDerivedQCohCategory X, Q E.obj",
+  "by": "C1",
+  "date": "2026-10-11",
+  "file": "lean/Sheaf/AlgebraicGeometry/PerfectGeneratorExists.lean",
+  "branch": "sheaf-dag",
+  "existing": false,
+  "fixed_by": "R-pge1508"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-pge1508",
+  "group": "C1",
+  "result": "fix",
+  "note": "qcqs = [CompactSpace X] [QuasiSeparatedSpace X]; tied ∃ P : schemeDerivedCategory X, Scheme.IsPerfect X P ∧ schemeDerivedQCohProperty X P; def-pc-generators inline as affine-base 773f742f5 (∀ E : schemeDerivedQCohCategory X, IsZero E.obj ↔ ∀ n:ℤ, Subsingleton (P⟦n⟧ ⟶ E.obj)); localizing retract-closed clause in D(O_X) (Q.IsTriangulated, IsStableUnderRetracts, ∀ I : Type u Discrete-colimit closed, Q P → Q E.obj for all E in D_QCoh), equivalent since D_QCoh is triangulated and sum-closed; extra IsTriangulated conjunct and ∀[htri] binder removed; no let; compiled clean"
  }
 }
