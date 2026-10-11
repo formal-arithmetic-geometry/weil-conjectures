@@ -65,8 +65,12 @@ def main() -> int:
         r = own[o]; recs.append({"name": o, "module": r["module"], "lines": [r["l1"], r["l2"]], "kind": r["kind"], "sorry": False})
     if bad: print("REFUSED:\n " + "\n ".join(bad)); return 1
     lockf = ROOT / "coord" / ".merge.lock"
+    import mergelock
     with open(lockf, "a") as lf:
-        fcntl.flock(lf, fcntl.LOCK_EX)
+        try:
+            mergelock.acquire(lf, lockf)
+        except mergelock.LockTimeout as e:
+            print(f"REFUSED: {e}"); return 1
         p = hits[0]; d = json.loads(p.read_text())
         cl = ROOT / "coord" / "claims" / f"{nid}.lock"
         who = json.loads(cl.read_text()).get("who") if cl.exists() else None

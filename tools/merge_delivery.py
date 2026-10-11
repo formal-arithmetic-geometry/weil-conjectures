@@ -53,6 +53,7 @@ Output: exactly one line, `MERGED <item> <commit>` / `RETURNED <item> <commit>`,
 
 Every path that writes the working tree or commits holds an exclusive flock on coord/.merge.lock (not committed), so
 several reviewers can run the tool at once; the lead's own commits can take it too: `flock coord/.merge.lock git ...`.
+The tool itself is NEVER run under `flock coord/.merge.lock`: it gives up after SHEAF_LOCK_TIMEOUT (120) s naming the holder.
 
 The merge works by files on the current tip, never by cherry-pick, so it cannot conflict: (1) the branch is based on
 sheaf-dag and its base is at most SHEAF_DELIVERY_MAX_AGE_HOURS old (default 48); (2) it changes only the item's node,
@@ -117,13 +118,18 @@ def git_retry(*a):
 
 @contextlib.contextmanager
 def merge_lock():
-    LOCK.parent.mkdir(parents=True, exist_ok=True)
-    with open(LOCK, "a") as f:
-        fcntl.flock(f, fcntl.LOCK_EX)
-        try:
-            yield
-        finally:
-            fcntl.flock(f, fcntl.LOCK_UN)
+    """coord/.merge.lock, given up after SHEAF_LOCK_TIMEOUT (120) s with the holder named: never run this tool
+    under `flock coord/.merge.lock`, it would wait for itself."""
+    import mergelock
+    try:
+        cm = mergelock.merge_lock(LOCK)
+        cm.__enter__()
+    except mergelock.LockTimeout as e:
+        raise Fail(str(e))
+    try:
+        yield
+    finally:
+        cm.__exit__(None, None, None)
 
 
 def branch_of(group, item):
@@ -633,7 +639,7 @@ def cmd_merge2(o):
         raise Fail("--stage 2 needs --head SHA (the commit the reviewer read)")
     if git("symbolic-ref", "-q", "--short", "HEAD", check=False) != MAIN:
         raise Fail(f"the working tree is not on {MAIN}")
-    lock = contextlib.nullcontext() if dry else merge_lock()
+    lock = merge_lock()  # a dry run too: it reads the tree a merge may be writing
     with lock:
         # (1) the branch and its head
         if not has_ref(f"refs/heads/{br}"):
