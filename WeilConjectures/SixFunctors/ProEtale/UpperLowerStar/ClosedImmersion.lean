@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.ClosedSiteLift
 public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.Detection
 public import WeilConjectures.SixFunctors.ProEtale.LowerShriek.OpenImmersion.Complement
 
@@ -62,26 +63,23 @@ variable (R : Type (u + 1)) [Ring R] {Z U X : Scheme.{u}}
 /-- Blueprint `lem-exc-proetale-closed-fully-faithful` (subsection
 `sk-prop-sf-open-closed-triangle`): for a closed immersion `i : Z ⟶ X` the counit
 `i^* i_* G ⟶ G` of the pro-étale adjunction `i^* ⊣ i_*` is an isomorphism on all pro-étale
-sheaves of modules; so `i_*` is fully faithful, without a constructibility hypothesis. -/
+sheaves of modules; so `i_*` is fully faithful, without a constructibility hypothesis.
+
+The right adjoint `i_*` is full and faithful
+(`AlgebraicGeometry.ProEtale.full_lowerStar_of_isClosedImmersion`,
+`AlgebraicGeometry.ProEtale.faithful_lowerStar_of_isClosedImmersion`): after restriction to the
+affine pro-étale site of `X` it is precomposition with base change to `Z`, which is cover dense
+and locally full by the lifting of affine objects along `i`
+(`AlgebraicGeometry.ProEtale.exists_closedSiteLift`). -/
 theorem isIso_upperStarLowerStarAdjunction_counit (i : Z ⟶ X) [IsClosedImmersion i] :
     IsIso (upperStarLowerStarAdjunction (ModuleCat.{u + 1} R) i).counit :=
-  sorry
-
-attribute [instance] isIso_upperStarLowerStarAdjunction_counit
+  inferInstance
 
 /-- The pushforward along a closed immersion is fully faithful on pro-étale sheaves of
 modules. -/
 noncomputable def fullyFaithfulLowerStar (i : Z ⟶ X) [IsClosedImmersion i] :
     ((i)_*[ModuleCat.{u + 1} R]).FullyFaithful :=
-  (upperStarLowerStarAdjunction (ModuleCat.{u + 1} R) i).fullyFaithfulROfIsIsoCounit
-
-instance full_lowerStar (i : Z ⟶ X) [IsClosedImmersion i] :
-    ((i)_*[ModuleCat.{u + 1} R]).Full :=
-  (fullyFaithfulLowerStar R i).full
-
-instance faithful_lowerStar (i : Z ⟶ X) [IsClosedImmersion i] :
-    ((i)_*[ModuleCat.{u + 1} R]).Faithful :=
-  (fullyFaithfulLowerStar R i).faithful
+  .ofFullyFaithful _
 
 section Disjoint
 
