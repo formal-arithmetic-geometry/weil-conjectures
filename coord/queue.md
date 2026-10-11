@@ -1,11 +1,11 @@
 # Work queue
 
-899 items; claim with `tools/claim.py next <group> [--stage N]`.
+894 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (899)
+## Stage 2: nodes to state (894)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -21,7 +21,6 @@
 | `lem-pc-flat-bounded-complex-descent` | 1 | state |
 | `lem-pc-module-pullback-identity-composition` | 1 | state |
 | `lem-pc-pre-derived-adjoint-functors-general` | 1 | state |
-| `lem-pur-hom-kflat-into-kinjective` | 1 | state |
 | `lem-pur-rhom-into-kinjective-local` | 1 | state |
 | `lem-pur-rhom-well-defined` | 1 | state |
 | `lem-sc-base-change-curve` | 1 | state |
@@ -33,8 +32,6 @@
 | `lem-sc-picard-h1-multiple-locus` | 1 | state |
 | `lem-sc-picard-locus-closed` | 1 | state |
 | `lem-sc-picard-product-open` | 1 | state |
-| `lem-sc-qcoh-cech-total-tensor-iso` | 1 | state |
-| `lem-sc-ringed-space-restrict-injective-resolution` | 1 | state |
 | `lem-sc-smooth-proper-diagonal-conormal-differentials` | 1 | state |
 | `lem-sc-tangent-map-linear` | 1 | state |
 | `lem-sc-valuation-zero-section-relative-cartier` | 1 | state |
@@ -49,9 +46,7 @@
 | `lem-weil-pbc-affine-tilde-tensor` | 1 | state |
 | `lem-weil-pbc-algebraize-finite-over-proper` | 1 | state |
 | `lem-weil-pbc-ample-very-ample-immersion-affine-base` | 1 | state |
-| `lem-weil-pbc-annihilator-element-flat-base-change` | 1 | state |
 | `lem-weil-pbc-annihilator-localization-finite` | 1 | state |
-| `lem-weil-pbc-another-helper-g-ring` | 1 | state |
 | `lem-weil-pbc-arbitrary-ring-torsion-sheaf-base-change` | 1 | state |
 | `lem-weil-pbc-artinian-ideal-length-one-filtration` | 1 | state |
 | `lem-weil-pbc-artinian-local-essentially-finite-type-residue` | 1 | state |
