@@ -219,4 +219,86 @@ lemma relativeGluingMap_appLE_sectionsIso_hom {β : (toOpensFunctor X).op ⋙ X.
   rw [Scheme.Hom.appTop, Scheme.Hom.app_eq_appLE, Scheme.Hom.appLE_comp_appLE_assoc]
   rfl
 
+section Pullback
+
+variable {β : (toOpensFunctor X).op ⋙ X.presheaf ⟶ G} (H' : β.Coequifibered)
+
+set_option backward.isDefEq.respectTransparency false in
+@[reassoc]
+lemma specMap_comp_natTrans_app (φ : F ⟶ G) (hφ : α ≫ φ = β) (U : X.AffineZariskiSite) :
+    Spec.map (φ.app (.op U)) ≫ (relativeGluingData H).natTrans.app U =
+      (relativeGluingData H').natTrans.app U := by
+  change Spec.map _ ≫ (Spec.map (α.app (.op U)) ≫ (restrictIsoSpec X).inv.app U) =
+    Spec.map (β.app (.op U)) ≫ (restrictIsoSpec X).inv.app U
+  rw [← Spec.map_comp_assoc, ← NatTrans.comp_app, hφ]
+
+/-- The chart of `Spec_X G` over an affine open `U` is the base change of the chart of `Spec_X F`
+along the morphism induced by `φ : F ⟶ G`. -/
+lemma isPullback_ι_relativeGluingMap (φ : F ⟶ G) (hφ : α ≫ φ = β) (U : X.AffineZariskiSite) :
+    IsPullback (colimit.ι (relativeGluingData H').functor U) (Spec.map (φ.app (.op U)))
+      (relativeGluingMap H H' φ) (colimit.ι (relativeGluingData H).functor U) := by
+  refine IsPullback.of_bot ?_ (ι_relativeGluingMap H H' φ U)
+    ((relativeGluingData H).isPullback_natTrans_ι_toBase U).flip
+  rw [specMap_comp_natTrans_app H H' φ hφ, relativeGluingMap_toBase H H' φ hφ]
+  exact ((relativeGluingData H').isPullback_natTrans_ι_toBase U).flip
+
+/-- A variant of `AlgebraicGeometry.Scheme.isPullback_of_openCover` in which the pullbacks of the
+cover are given by arbitrary pullback squares. -/
+lemma _root_.AlgebraicGeometry.Scheme.isPullback_of_openCover' {W Y Z X' : Scheme.{u}}
+    (fWX : W ⟶ X') (fWY : W ⟶ Y) (fXZ : X' ⟶ Z) (fYZ : Y ⟶ Z) (𝒰 : X'.OpenCover)
+    (W' : 𝒰.I₀ → Scheme.{u}) (a : ∀ i, W' i ⟶ W) (b : ∀ i, W' i ⟶ 𝒰.X i)
+    (ha : ∀ i, IsPullback (a i) (b i) fWX (𝒰.f i))
+    (H : ∀ i, IsPullback (b i) (a i ≫ fWY) (𝒰.f i ≫ fXZ) fYZ) :
+    IsPullback fWX fWY fXZ fYZ := by
+  refine Scheme.isPullback_of_openCover fWX fWY fXZ fYZ 𝒰 fun i ↦ ?_
+  refine (H i).of_iso (ha i).isoPullback (Iso.refl _) (Iso.refl _)
+    (Iso.refl _) ?_ ?_ (by simp) (by simp)
+  · simp [Cover.pullbackHom]
+  · exact (Category.comp_id _).trans (congrArg (· ≫ fWY) (ha i).isoPullback_hom_fst.symm)
+
+/-- **Pushouts of quasi-coherent algebras give pullbacks of relative spectra.** If a commutative
+square of quasi-coherent `𝒪_X`-algebras is a pushout over every affine open, the square of their
+relative spectra is a pullback. -/
+theorem isPullback_relativeGluingMap {F₀ F₁ F₂ F₃ : X.AffineZariskiSiteᵒᵖ ⥤ CommRingCat.{u}}
+    {α₀ : (toOpensFunctor X).op ⋙ X.presheaf ⟶ F₀} {α₁ : (toOpensFunctor X).op ⋙ X.presheaf ⟶ F₁}
+    {α₂ : (toOpensFunctor X).op ⋙ X.presheaf ⟶ F₂} {α₃ : (toOpensFunctor X).op ⋙ X.presheaf ⟶ F₃}
+    (H₀ : α₀.Coequifibered) (H₁ : α₁.Coequifibered) (H₂ : α₂.Coequifibered)
+    (H₃ : α₃.Coequifibered) (a : F₀ ⟶ F₁) (b : F₀ ⟶ F₂) (c : F₁ ⟶ F₃) (e : F₂ ⟶ F₃)
+    (hb : α₀ ≫ b = α₂) (hc : α₁ ≫ c = α₃)
+    (h : ∀ U, IsPushout (a.app (.op U)) (b.app (.op U)) (c.app (.op U)) (e.app (.op U))) :
+    IsPullback (relativeGluingMap H₁ H₃ c) (relativeGluingMap H₂ H₃ e)
+      (relativeGluingMap H₀ H₁ a) (relativeGluingMap H₀ H₂ b) := by
+  refine Scheme.isPullback_of_openCover' _ _ _ _ (relativeGluingData H₁).cover
+    (fun U ↦ Spec (F₃.obj (.op U))) (fun U ↦ colimit.ι (relativeGluingData H₃).functor U)
+    (fun U ↦ Spec.map (c.app (.op U))) (fun U ↦ isPullback_ι_relativeGluingMap H₁ H₃ c hc U)
+    fun U ↦ ?_
+  change IsPullback (Spec.map (c.app (.op U)))
+    (colimit.ι (relativeGluingData H₃).functor U ≫ relativeGluingMap H₂ H₃ e)
+    (colimit.ι (relativeGluingData H₁).functor U ≫ relativeGluingMap H₀ H₁ a) _
+  rw [ι_relativeGluingMap, ι_relativeGluingMap]
+  exact ((isPullback_SpecMap_of_isPushout _ _ _ _ (h U)).flip.paste_horiz
+    (isPullback_ι_relativeGluingMap H₀ H₂ b hb U)).flip
+
+end Pullback
+
+section Local
+
+set_option backward.isDefEq.respectTransparency false in
+/-- A property of morphisms which is local on the target holds for `Spec_X F ⟶ X` as soon as it
+holds for the maps `Spec F(U) ⟶ Spec Γ(X, U)`. -/
+lemma toBase_of_forall (P : MorphismProperty Scheme.{u}) [IsZariskiLocalAtTarget P]
+    (h : ∀ U : X.AffineZariskiSite, P (Spec.map (α.app (.op U)))) :
+    P (relativeGluingData H).toBase := by
+  refine IsZariskiLocalAtTarget.of_openCover (directedCover X) fun U ↦ ?_
+  have hU := ((relativeGluingData H).isPullback_natTrans_ι_toBase U).flip
+  have e : Arrow.mk ((directedCover X).pullbackHom (relativeGluingData H).toBase U) ≅
+      Arrow.mk ((relativeGluingData H).natTrans.app U) :=
+    Arrow.isoMk hU.isoPullback.symm (Iso.refl _) (by simp [Cover.pullbackHom])
+  rw [P.arrow_mk_iso_iff e]
+  change P (Spec.map (α.app (.op U)) ≫ (restrictIsoSpec X).inv.app U)
+  rw [P.cancel_right_of_respectsIso]
+  exact h U
+
+end Local
+
 end AlgebraicGeometry.Scheme.AffineZariskiSite
