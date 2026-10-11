@@ -4543,3 +4543,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 11:59 L: merged deliver/J1/lem-weil-pbc-normal-locus-open (stage 2; reviewer PASS; first push; Sheaf.Paper.NormalLocusOpen AlgebraicGeometry.normal_locus_isOpen)
 - 12:00 L: merged deliver/C1/lem-weil-pbc-nonzerodivisor-if-maximal-not-associated (stage 2; reviewer FIX; first push; Sheaf.RingTheory.NonzerodivisorIfMaximalNotAssociated exists_mem_maximalIdeal_smul_injective)
 - 12:00 L: merged deliver/H1/lem-sc-regular-meromorphic-section-exists (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.RegularMeromorphicSectionExists AlgebraicGeometry.exists_regularMeromorphicSection; new nodes: def-sc-associated-points, def-sc-no-embedded-points)
+- 12:01 L: merged deliver/M1/lem-pc-quasi-coherent-extension (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.Modules.QuasicoherentExtension AlgebraicGeometry.Scheme.Modules.isQuasicoherent_of_shortExact)
