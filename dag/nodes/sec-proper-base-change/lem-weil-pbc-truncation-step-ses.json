@@ -191,5 +191,23 @@
   "date": "2026-10-09",
   "by": "L",
   "result": "pass"
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.UpperTruncationStepSES",
+  "declaration": "CochainComplex.exists_upperTruncationStepSES",
+  "statement": "theorem exists_upperTruncationStepSES {C : Type u} [Category.{v} C] [Abelian C] : ∃ (i : ∀ (K : CochainComplex C ℤ) (q : ℤ), K.truncLE (q - 1) ⟶ K.truncLE q) (j : ∀ (K : CochainComplex C ℤ) (q : ℤ), K.truncLE q ⟶ (singleFunctor C q).obj (K.homology q)) (barj : ∀ (K : CochainComplex C ℤ) (q : ℤ), cokernel (i K q) ⟶ (singleFunctor C q).obj (K.homology q)), (∀ (K : CochainComplex C ℤ) (q : ℤ), i K q ≫ K.ιTruncLE q = K.ιTruncLE (q - 1)) ∧ (∀ (K : CochainComplex C ℤ) (q : ℤ), (ShortComplex.mk (i K q) (cokernel.π (i K q)) (cokernel.condition (i K q))).ShortExact) ∧ (∀ (K : CochainComplex C ℤ) (q r : ℤ), r ≠ q - 1 → r ≠ q → IsZero ((cokernel (i K q)).X r)) ∧ (∀ (K : CochainComplex C ℤ) (q : ℤ), ∃ (e₀ : (cokernel (i K q)).X (q - 1) ≅ cokernel (kernel.ι (K.d (q - 1) q))) (e₁ : (cokernel (i K q)).X q ≅ K.cycles q), (cokernel.π (i K q)).f (q - 1) ≫ e₀.hom = (K.ιTruncLE q).f (q - 1) ≫ cokernel.π (kernel.ι (K.d (q - 1) q)) ∧ (cokernel.π (i K q)).f q ≫ e₁.hom = (K.truncLEXIsoCycles q).hom ∧ cokernel.π (kernel.ι (K.d (q - 1) q)) ≫ e₀.inv ≫ (cokernel (i K q)).d (q - 1) q ≫ e₁.hom ≫ K.iCycles q = K.d (q - 1) q ∧ Mono ((cokernel (i K q)).d (q - 1) q) ∧ e₁.inv ≫ (barj K q).f q ≫ (HomologicalComplex.singleObjXSelf (ComplexShape.up ℤ) q (K.homology q)).hom = K.homologyπ q) ∧ (∀ (K : CochainComplex C ℤ) (q : ℤ), (j K q).f q ≫ (HomologicalComplex.singleObjXSelf (ComplexShape.up ℤ) q (K.homology q)).hom = (K.truncLEXIsoCycles q).hom ≫ K.homologyπ q ∧ (∀ r : ℤ, r ≠ q → (j K q).f r = 0) ∧ j K q = cokernel.π (i K q) ≫ barj K q ∧ (∀ b : cokernel (i K q) ⟶ (singleFunctor C q).obj (K.homology q), cokernel.π (i K q) ≫ b = j K q → b = barj K q) ∧ IsZero ((cokernel (i K q)).homology (q - 1)) ∧ QuasiIso (barj K q)) ∧ (∀ {K L : CochainComplex C ℤ} (f : K ⟶ L) (q : ℤ), truncLEMap f (q - 1) ≫ i L q = i K q ≫ truncLEMap f q ∧ ∃ (g : cokernel (i K q) ⟶ cokernel (i L q)), truncLEMap f q ≫ cokernel.π (i L q) = cokernel.π (i K q) ≫ g ∧ barj K q ≫ (singleFunctor C q).map (HomologicalComplex.homologyMap f q) = g ≫ barj L q)",
+  "by": "U1",
+  "date": "2026-10-11",
+  "existing": false,
+  "file": "lean/Sheaf/Algebra/Homology/UpperTruncationStepSES.lean",
+  "branch": "sheaf-dag"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "U1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }

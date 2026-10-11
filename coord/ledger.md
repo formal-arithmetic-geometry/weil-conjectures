@@ -5148,3 +5148,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 15:09 L: merged deliver/T1/lemma-weil-pbc-chow-factorization (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.ChowFactorization AlgebraicGeometry.exists_chow_factorization_of_isAffine)
 - 15:09 L: merged deliver/T1/thm-pqf-finite-iff-proper-finite-fibres (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.FiniteIffProperFiniteFibres AlgebraicGeometry.isFinite_iff_isProper_and_hasFiniteFibres)
 - 15:09 L: merged deliver/U1/lem-weil-pbc-tor-ideal-kernel-naturality (stage 2; reviewer PASS; first push; Sheaf.RingTheory.TorIdealKernelNaturality ModuleCat.exists_tor_ideal_kernel_naturality)
+- 15:09 L: merged deliver/U1/lem-weil-pbc-truncation-step-ses (stage 2; reviewer PASS; first push; Sheaf.Algebra.Homology.UpperTruncationStepSES CochainComplex.exists_upperTruncationStepSES)
