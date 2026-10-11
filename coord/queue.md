@@ -1,17 +1,16 @@
 # Work queue
 
-403 items; claim with `tools/claim.py next <group> [--stage N]`.
+402 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (403)
+## Stage 2: nodes to state (402)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
 | `def-weil-pbc-proj-twisting-sheaf` | 2 | state |
 | `cor-galois-lisse-representations` | 1 | state |
-| `lem-pc-affine-perfect-cut-degree-zero` | 1 | state |
 | `lem-pc-derived-qcoh-perfect-generation` | 1 | state |
 | `lem-pc-derived-tensor-transitivity` | 1 | state |
 | `lem-pc-koszul-affine-detection` | 1 | state |
