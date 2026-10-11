@@ -310,3 +310,44 @@ theorem nonempty_rightDerivedObjIso_homology_of_acyclic (hI : ∀ n, F.rightAcyc
 end Functor
 
 end CategoryTheory
+
+namespace CategoryTheory.Functor
+
+open Limits
+
+variable {C D : Type*} [Category* C] [Category* D] [Abelian C] [HasInjectiveResolutions C]
+  [Abelian D] (F : C ⥤ D) [F.Additive] [PreservesFiniteLimits F]
+
+/-- **A criterion for acyclicity.** Let `P` be a property of objects of `C` which holds for the
+injective objects and passes to the cokernel of a monomorphism between objects of `P`, and such
+that `F` sends every short exact sequence `0 ⟶ A ⟶ B ⟶ C ⟶ 0` with `A` in `P` to an
+epimorphism `F B ⟶ F C`. Then every object of `P` is `F`-acyclic.
+
+Embed `A` into an injective object `I`, with cokernel `Q` in `P`. In the long exact sequence
+`R^q F I ⟶ R^q F Q ⟶ R^{q+1} F A ⟶ R^{q+1} F I = 0`, the first map is an epimorphism for
+`q = 0`, and `R^q F Q = 0` for `q > 0` by induction. -/
+theorem rightAcyclic_of_epi_map_g (P : ObjectProperty C) (hinj : ∀ (I : C) [Injective I], P I)
+    (hX₃ : ∀ S : ShortComplex C, S.ShortExact → P S.X₁ → P S.X₂ → P S.X₃)
+    (hepi : ∀ S : ShortComplex C, S.ShortExact → P S.X₁ → Epi (F.map S.g)) {A : C}
+    (hA : P A) : F.rightAcyclic A := by
+  have := enoughInjectives_of_hasInjectiveResolutions (C := C)
+  intro q
+  induction q generalizing A with
+  | zero =>
+    let S := ShortComplex.mk (Injective.ι A) (cokernel.π (Injective.ι A)) (cokernel.condition _)
+    have hS : S.ShortExact := .mk' (ShortComplex.exact_cokernel _) inferInstance inferInstance
+    obtain ⟨δ, w₁, w₂, h₁, h₂⟩ := hS.exists_rightDerived_δ_exact F 0
+    have : Epi ((F.rightDerived 0).map S.g) := by
+      rw [← NatIso.naturality_2 F.rightDerivedZeroIsoSelf S.g]
+      have := hepi S hS hA
+      infer_instance
+    exact h₂.isZero_X₂_iff.2 ⟨h₁.epi_f_iff.1 this,
+      (F.isZero_rightDerived_obj_injective_succ 0 S.X₂).eq_of_tgt _ _⟩
+  | succ q ih =>
+    let S := ShortComplex.mk (Injective.ι A) (cokernel.π (Injective.ι A)) (cokernel.condition _)
+    have hS : S.ShortExact := .mk' (ShortComplex.exact_cokernel _) inferInstance inferInstance
+    obtain ⟨δ, w₁, w₂, -, h₂⟩ := hS.exists_rightDerived_δ_exact F (q + 1)
+    exact h₂.isZero_X₂_iff.2 ⟨(ih (hX₃ S hS hA (hinj _))).eq_of_src _ _,
+      (F.isZero_rightDerived_obj_injective_succ (q + 1) S.X₂).eq_of_tgt _ _⟩
+
+end CategoryTheory.Functor

@@ -9,6 +9,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.RingTheory.Henselian
 public import Mathlib.Topology.Spectral.Basic
+public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.AffineMorphism
 public import WeilConjectures.Mathlib.AlgebraicGeometry.GammaSpecAdjunction
 
 /-!
@@ -56,8 +57,27 @@ factorization is finite. For a general affine base this is not proved in the blu
 @[stacks 02O5]
 theorem Scheme.Hom.isFinite_steinFactorizationBase {A : Type u} [CommRing A]
     [IsNoetherianRing A] {Y : Scheme.{u}} (p : Y ⟶ Spec (.of A)) [IsProper p] :
-    IsFinite p.steinFactorizationBase :=
-  sorry
+    IsFinite p.steinFactorizationBase := by
+  have := Modules.isGrothendieckAbelian Y
+  have : IsNoetherianRing Γ(Spec (.of A), ⊤) :=
+    isNoetherianRing_of_ringEquiv _ (Scheme.ΓSpecIso (.of A)).commRingCatIsoToRingEquiv.symm
+  let O : Y.Modules := SheafOfModules.unit Y.ringCatSheaf
+  have : (SheafOfModules.unit Y.ringCatSheaf).IsFinitePresentation :=
+    SheafOfModules.IsFiniteLocallyFree.isFinitePresentation.{u, u, u} _
+  obtain ⟨e, he⟩ := Modules.exists_bijective_semilinearMap_sections_higherDirectImage_H p O 0
+  have := Modules.finite_sections_higherDirectImage p O 0
+  let := p.appTop.hom.toAlgebra
+  let e' : Γ((Modules.higherDirectImage p 0).obj O, ⊤) →ₗ[Γ(Spec (.of A), ⊤)] Γ(Y, ⊤) :=
+    { toFun x := Modules.H.zeroLinearEquiv O (e x)
+      map_add' x y := by simp
+      map_smul' a x := by
+        rw [e.map_smulₛₗ, LinearEquiv.map_smul]
+        rfl }
+  have hp : p.appTop.hom.Finite :=
+    Module.Finite.of_surjective e' ((Modules.H.zeroLinearEquiv O).surjective.comp he.2)
+  rw [Scheme.Hom.steinFactorizationBase, IsFinite.SpecMap_iff, CommRingCat.hom_comp]
+  exact hp.comp (RingHom.Finite.of_surjective _
+    (ConcreteCategory.bijective_of_isIso (Scheme.ΓSpecIso (.of A)).inv).2)
 
 /-- **Connectedness of the closed fibre** (input (ii) of the two classical inputs of Stein
 connectedness): let `(A, I)` be a henselian pair and `p : Y ⟶ Spec A` proper. Every

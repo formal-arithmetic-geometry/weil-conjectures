@@ -32,6 +32,7 @@ involves no comparison at all.
 
 - `AlgebraicGeometry.Etale.derivedTensorAssociator`: `(K ⊗ᴸ M) ⊗ᴸ N ≅ K ⊗ᴸ (M ⊗ᴸ N)`.
 - `AlgebraicGeometry.Etale.derivedTensorLeftUnitor`: `Λ_X ⊗ᴸ K ≅ K`.
+- `AlgebraicGeometry.Etale.derivedTensorLeftUnitorNatIso`: `Λ_X ⊗ᴸ - ≅ 𝟭`.
 - `AlgebraicGeometry.Etale.derivedTensorRightUnitor`: `K ⊗ᴸ Λ_X ≅ K`.
 - `AlgebraicGeometry.Etale.IsPerfectPairing`: perfectness of a pairing `C ⊗ᴸ D ⟶ Λ_X`.
 
@@ -74,6 +75,12 @@ noncomputable def derivedTensorLeftUnitor
     (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) :
     ((derivedTensor A X).obj (𝟙_ _)).obj K ≅ K :=
   λ_ K
+
+/-- The left unitor `Λ_X ⊗ᴸ K ≅ K` of the derived tensor product, as a natural isomorphism
+`Λ_X ⊗ᴸ - ≅ 𝟭`. -/
+noncomputable def derivedTensorLeftUnitorNatIso :
+    (derivedTensor A X).obj (𝟙_ _) ≅ 𝟭 (_root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) :=
+  NatIso.ofComponents (derivedTensorLeftUnitor A X) fun f ↦ leftUnitor_naturality f
 
 /-- The right unitor `K ⊗ᴸ Λ_X ≅ K` of the derived tensor product, `Λ_X = 𝟙_` being the
 constant complex. -/
