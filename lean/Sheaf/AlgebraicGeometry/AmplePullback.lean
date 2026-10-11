@@ -1,0 +1,46 @@
+/-
+Copyright (c) 2026 The SHEAF contributors. All rights reserved.
+Released under Apache 2.0 license as described in file LICENSE.
+Authors: SHEAF group F1
+-/
+import Mathlib.AlgebraicGeometry.Morphisms.Affine
+import Sheaf.AlgebraicGeometry.Ample
+import Sheaf.AlgebraicGeometry.TensorPullback
+import Sheaf.AlgebraicGeometry.Modules.InvertiblePullbackTensor
+import WeilConjectures.AlgebraicGeometry.Modules.Invertible
+
+/-! # Pullback of an ample invertible module
+
+Source: Stacks Project, Morphisms, Lemma 0892, part (2)
+(blueprint: lem-weil-pbc-pullback-ample-invertible).
+-/
+
+open CategoryTheory
+open AlgebraicGeometry
+
+namespace AlgebraicGeometry.Scheme.Modules
+
+universe u
+
+/-- An affine pullback preserves ampleness.
+Source: Stacks Project, Morphisms, Lemma 0892, part (2), specialized to an affine
+morphism; the affine nonvanishing-locus criterion is Properties Definition 01PS
+(blueprint: lem-weil-pbc-pullback-ample-invertible).
+Proof, following the node's two steps:
+1. The pullback is invertible and commutes with tensor powers by
+`lem-weil-pbc-invertible-pullback-tensor`. Its fibre formula sends a section value to
+that value tensored with one. Extension of residue fields preserves nonzero vectors,
+so the pulled-back nonvanishing locus is the inverse image of the original locus.
+2. By `hL` and `def-weil-pbc-ample-invertible-module`, `X` is quasi-compact and is
+covered by affine nonvanishing loci of positive tensor powers. Choose a finite cover.
+Its inverse images cover `Y` and are affine by clauses (1) and (2) of
+`lem-weil-pbc-affine-morphism-permanence`. Each is quasi-compact by
+`lem-weil-pbc-affine-scheme-qcqs`; their finite union is quasi-compact. These loci
+therefore satisfy the same ampleness criterion on `Y`.
+-/
+theorem isAmple_tensorPullback_of_isAffineHom {X Y : Scheme.{u}} (g : Y ⟶ X)
+    [IsAffineHom g] (L : X.Modules) [L.IsInvertible] (hL : IsAmple X L) :
+    @IsAmple Y ((tensorPullback g).obj L) ((invertible_pullback_tensor g).1 L).2 := by
+  sorry
+
+end AlgebraicGeometry.Scheme.Modules

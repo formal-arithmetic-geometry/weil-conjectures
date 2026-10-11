@@ -136,5 +136,23 @@
   "group": "G1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-pbamp (reviewer sub-agent of L); spot-checked: Source: Stacks Morphisms Lemma 0892(2) (label morphisms-lemma-pullback-ample-tensor-relatively-ample; the local morphisms.tex lacks the label, recorded WANTED) with absolute ampleness Properties Definition 01PS; the item's statement (g affine, L ample invertible on X, then g^*L ample) is the affine special case of 0892(2), no hypothesis added or dropped; statement unchanged, only proof fields and same_as=[] changed. Step 1: clauses (1)-(3) of lem-weil-pbc-invertible-pullback-tensor give invertibility of g^*L, the iso g^*(L^n) = (g^*L)^n carrying g^*s to the tensor of pulled-back sections, and (g^*s)(y)=s(g(y)) tensor 1; a nonzero vector in a 1-dim kappa(g(y))-space stays nonzero after field extension, so Y_{g^*s}=g^{-1}(X_s), matching the definition of X_s in def-weil-pbc-ample-invertible-module. Step 2: conditions (1),(2) of def-weil-pbc-ample-invertible-module; lem-weil-pbc-affine-morphism-permanence (1),(2) make g^{-1}(X_s) affine (also direct from pqf-def-affine-morphism); finite affine cover gives quasi-compactness of Y. Tool use lem-weil-pbc-invertible-pullback-tensor (sk-thm-reduction) accepted as a generic black box (C8). Small cases: Y empty (vacuous, quasi-compact), g identity, g an open immersion of an affine open (non-surjective) all consistent. FIX: dag/nodes/sec-proper-base-change/lem-weil-pbc-pullback-ample-invertible.json: proof[1].text, proof[1].uses, proof_deps: added citation of lem-weil-pbc-affine-scheme-qcqs (affine schemes are quasi-compact) for the step 'finite affine open cover implies Y quasi-compact' (C1). 14:28-14:30 UTC (date -u).; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AmplePullback",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.isAmple_tensorPullback_of_isAffineHom",
+  "file": "lean/Sheaf/AlgebraicGeometry/AmplePullback.lean",
+  "statement": "theorem isAmple_tensorPullback_of_isAffineHom {X Y : Scheme.{u}} (g : Y ⟶ X) [IsAffineHom g] (L : X.Modules) [L.IsInvertible] (hL : IsAmple X L) : @IsAmple Y ((tensorPullback g).obj L) ((invertible_pullback_tensor g).1 L).2",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-pai1413",
+  "group": "F1",
+  "result": "pass",
+  "note": "g : Y ⟶ X with [IsAffineHom g] (#print: preimages of affine opens affine = pqf-def-affine-morphism); L : X.Modules [L.IsInvertible]; hL : IsAmple X L, which #check/rfl resolves to Scheme.Modules.IsAmple (absolute 01PS, not upstream AlgebraicGeometry.IsAmple as packet §5 says); conclusion IsAmple Y ((tensorPullback g).obj L) with the instance from invertible_pullback_tensor clause (1) (IsInvertible is a Prop class, no instance is found by infer_instance so the explicit @ is required and proof-irrelevant); single universe forced by the morphism; no let, no hollow hypothesis; only the lean record changed in the node"
  }
 }
