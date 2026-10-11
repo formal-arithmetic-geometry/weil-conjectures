@@ -3956,3 +3956,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 09:09 L: merged deliver/G1/lem-weil-pbc-cohen-coefficient-ring-exists (stage 2; reviewer PASS; first push; Sheaf.RingTheory.ExistsCoefficientSubring IsLocalRing.exists_coefficient_subring)
 - 09:10 L: merged deliver/K1/lem-weil-pbc-colimit-standard-smooth-algebras (stage 2; reviewer FIX; first push; Sheaf.RingTheory.IndStandardSmooth Algebra.ind_isStandardSmooth_of_ind_smooth)
 - 09:10 L: merged deliver/J1/lem-weil-pbc-colimit-finite-ring-map (stage 2; reviewer FIX; first push; Sheaf.RingTheory.FiniteMapColimitDescent RingHom.exists_finite_tensorProductMap_of_colimit)
+- 09:10 L: merged deliver/K1/lem-weil-pbc-cartesian-eilenberg-functorial (stage 2; reviewer FIX; first push; Sheaf.CategoryTheory.CartanEilenbergFunctorial CategoryTheory.cartanEilenberg_lift; dropped nodes: def-weil-pbc-cartan-eilenberg-resolution)
