@@ -39,6 +39,14 @@ attribute [local instance] precompModule precompModule_isScalarTower
 
 section Factors
 
+/-- In a reduced ring, an element lying in every minimal prime is zero. -/
+theorem _root_.Ideal.eq_zero_of_forall_mem_minimalPrimes {A : Type*} [CommRing A] [IsReduced A]
+    (x : A) (hx : ∀ P ∈ minimalPrimes A, x ∈ P) : x = 0 := by
+  have : x ∈ sInf (minimalPrimes A) := Submodule.mem_sInf.2 fun P hP ↦ hx P hP
+  rw [minimalPrimes, Ideal.sInf_minimalPrimes] at this
+  obtain ⟨n, hn⟩ := this
+  exact IsReduced.eq_zero x ⟨n, by simpa using hn⟩
+
 /-- Over a ring whose localizations at maximal ideals are domains, distinct minimal primes are
 coprime: a maximal ideal containing both would contain two minimal primes of a local domain. -/
 theorem _root_.Ideal.isCoprime_of_mem_minimalPrimes {A : Type*} [CommRing A]
@@ -67,11 +75,7 @@ theorem _root_.Ideal.exists_isIdempotentElem_span_eq {A : Type*} [CommRing A] [I
     {P₀ : Ideal A} (hP₀ : P₀ ∈ minimalPrimes A) :
     ∃ e : A, IsIdempotentElem e ∧ Ideal.span {1 - e} = P₀ := by
   classical
-  have hzero (x : A) (hx : ∀ P ∈ minimalPrimes A, x ∈ P) : x = 0 := by
-    have : x ∈ sInf (minimalPrimes A) := Submodule.mem_sInf.2 fun P hP ↦ hx P hP
-    rw [minimalPrimes, Ideal.sInf_minimalPrimes] at this
-    obtain ⟨n, hn⟩ := this
-    exact IsReduced.eq_zero x ⟨n, by simpa using hn⟩
+  have hzero := Ideal.eq_zero_of_forall_mem_minimalPrimes (A := A)
   obtain ⟨a, ha, b, hb, hab⟩ := Ideal.isCoprime_iff_exists.1
     (Ideal.isCoprime_biInf (s := hfin.toFinset.erase P₀) (J := _root_.id) fun P hP ↦ hcop _ hP₀ P
       (hfin.mem_toFinset.1 (Finset.mem_of_mem_erase hP)) (Finset.ne_of_mem_erase hP).symm)
@@ -245,6 +249,94 @@ theorem bijective_liftKaehlerDifferential_traceDerivation_of_perfectField [Perfe
     bijective_liftKaehlerDifferential_traceDerivation_quotient D hR t ht hsm hunr he hJ⟩
 
 end Perfect
+
+section Unramified
+
+/-- A reduced noetherian algebra of finite type over `R` which is formally unramified over `R` at
+its minimal primes has `Ω_{B/R}` killed by a nonzerodivisor: the annihilator of `Ω_{B/R}` is not
+contained in any minimal prime, hence (prime avoidance) not in their union, which is the set of
+zero divisors. -/
+theorem _root_.KaehlerDifferential.exists_mem_nonZeroDivisors_smul_eq_zero {R B : Type*}
+    [CommRing R] [CommRing B] [Algebra R B] [Algebra.FiniteType R B] [IsReduced B]
+    [IsNoetherianRing B]
+    (h : ∀ (P : Ideal B) [P.IsPrime], P ∈ minimalPrimes B →
+      Algebra.FormallyUnramified R (Localization.AtPrime P)) :
+    ∃ s ∈ nonZeroDivisors B, ∀ ω : Ω[B⁄R], s • ω = 0 := by
+  classical
+  have hfin := minimalPrimes.finite_of_isNoetherianRing B
+  have hI (P : Ideal B) (hP : P ∈ minimalPrimes B) :
+      ¬ Module.annihilator B Ω[B⁄R] ≤ P := by
+    have := hP.1.1
+    have := h P hP
+    have : Subsingleton (LocalizedModule P.primeCompl Ω[B⁄R]) :=
+      (IsLocalizedModule.iso P.primeCompl
+        (KaehlerDifferential.map R R B (Localization.AtPrime P))).toEquiv.subsingleton
+    have hns : (⟨P, inferInstance⟩ : PrimeSpectrum B) ∉ Module.support B Ω[B⁄R] :=
+      Module.notMem_support_iff.2 this
+    rwa [Module.mem_support_iff_of_finite] at hns
+  have hav : ¬ ((Module.annihilator B Ω[B⁄R] : Set B) ⊆
+      ⋃ P ∈ (hfin.toFinset : Set (Ideal B)), ((_root_.id P : Ideal B) : Set B)) := by
+    intro hsub
+    obtain ⟨P, hP, hle⟩ := (Ideal.subset_union_prime (f := _root_.id) ⊥ ⊥
+      fun P hP _ _ ↦ (hfin.mem_toFinset.1 hP).1.1).1 hsub
+    exact hI P (hfin.mem_toFinset.1 hP) hle
+  obtain ⟨s, hsI, hs⟩ := Set.not_subset.1 hav
+  simp only [Set.mem_iUnion, Set.Finite.coe_toFinset, _root_.id, not_exists] at hs
+  refine ⟨s, mem_nonZeroDivisors_iff_right.2 fun y hy ↦ ?_,
+    fun ω ↦ Module.mem_annihilator.1 hsI ω⟩
+  refine Ideal.eq_zero_of_forall_mem_minimalPrimes y fun P hP ↦ ?_
+  have := hP.1.1
+  exact (this.mem_or_mem (hy ▸ P.zero_mem : y * s ∈ P)).resolve_right (hs P hP)
+
+end Unramified
+
+section LocalizationPolynomial
+
+/-- A localization of a principal ideal ring is a principal ideal ring. -/
+theorem _root_.IsLocalization.isPrincipalIdealRing {A S : Type*} [CommRing A] [CommRing S]
+    [Algebra A S] (M : Submonoid A) [IsLocalization M S] [IsPrincipalIdealRing A] :
+    IsPrincipalIdealRing S where
+  principal J := by
+    obtain ⟨a, ha⟩ := Submodule.IsPrincipal.principal (Ideal.under A J)
+    refine ⟨⟨algebraMap A S a, ?_⟩⟩
+    rw [← IsLocalization.map_comap M S J]
+    change Ideal.map _ (Ideal.under A J) = _
+    rw [ha, Ideal.map_span, Set.image_singleton]
+
+/-- The localization `K[X]_f` of a polynomial ring over an infinite field at a nonzero `f` is not a
+field: `X - c` is not invertible for `f(c) ≠ 0`. -/
+theorem _root_.Polynomial.not_isField_localization_away {K : Type*} [Field K] [Infinite K]
+    {f : K[X]} (hf : f ≠ 0) : ¬ IsField (Localization.Away f) := by
+  obtain ⟨c, hc⟩ : ∃ c, f.eval c ≠ 0 := by
+    by_contra! h
+    exact hf (Polynomial.zero_of_eval_zero f h)
+  let ev : Localization.Away f →+* K :=
+    IsLocalization.Away.lift f (g := Polynomial.evalRingHom c) (isUnit_iff_ne_zero.2 hc)
+  intro hfield
+  have hne : algebraMap K[X] (Localization.Away f) (X - C c) ≠ 0 :=
+    (map_ne_zero_iff _ (IsLocalization.injective _
+      (powers_le_nonZeroDivisors_of_noZeroDivisors hf))).2 (X_sub_C_ne_zero c)
+  obtain ⟨b, hb⟩ := hfield.mul_inv_cancel hne
+  have := congrArg ev hb
+  rw [map_mul, map_one] at this
+  simp [ev, IsLocalization.Away.lift, IsLocalization.lift_eq] at this
+
+open TensorProduct in
+/-- For `R = k[X]_g`, the base change `k' ⊗[k] R` is the localization `k'[X]_g`. -/
+noncomputable def _root_.Polynomial.tensorLocalizationAwayEquiv (k k' : Type*) [Field k]
+    [Field k'] [Algebra k k'] (R : Type*) [CommRing R] [Algebra k R] [Algebra k[X] R]
+    [IsScalarTower k k[X] R] (g : k[X]) [IsLocalization.Away g R] :
+    k' ⊗[k] R ≃+* Localization.Away (g.map (algebraMap k k')) :=
+  (IsLocalization.Away.tensorProductEquivTMulRight k k' g R).toRingEquiv.trans
+    (IsLocalization.ringEquivOfRingEquiv (M := Submonoid.powers ((1 : k') ⊗ₜ[k] g))
+      (T := Submonoid.powers (g.map (algebraMap k k'))) _ _
+      (polyEquivTensor k k').symm.toRingEquiv (by
+        rw [Submonoid.map_powers]
+        congr 1
+        change (polyEquivTensor k k').symm ((1 : k') ⊗ₜ[k] g) = _
+        rw [polyEquivTensor_symm_apply_tmul_eq_smul, one_smul]))
+
+end LocalizationPolynomial
 
 /-- **Duality for the trace of differentials over an arbitrary field.** Let `R = k[t]_g` be a
 localization of `k[t]` at a nonzero polynomial `g`, with a `k`-derivation `D` of `R` such that
