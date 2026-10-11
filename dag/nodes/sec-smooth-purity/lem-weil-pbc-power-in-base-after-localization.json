@@ -130,5 +130,23 @@
   "group": "E1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-pbl2944 (reviewer sub-agent of L); spot-checked: Read whole packet; checked math: A' not normal handled since e_i^{p^N} in K' is written b_i/t_i and s=prod t_i clears denominators; statement matches what lem-weil-pbc-spread-purely-inseparable-factors step 2 uses (nonzero s' in A', E_1=A'_1 in char 0, x^{p^n} in A'_1 in char p). FIX more, RETURN less: (1) E/step 3: x=sum a_i e_i was asserted with e_i chosen as ALGEBRA generators (false; missed by second reading) - step 1 now chooses A'-MODULE generators from finiteness, step 3 uses them; (2) D1/step 1: elementary false quoting the item's own source 0BR5 - rewritten as an explicit elementary denominator-clearing argument (injectivity A'->E->L, common exponent N, s=prod t_i) with elementary true; (3) C1/B3: statement and step 1 cited pqf-lem-finite-integral-lft (finite morphisms are integral) for 'finite A'-algebra' - replaced by definition node def-weil-finite-integral-morphism in statement, stmt_deps, uses, proof_deps; also corrected source/proof_origin, which still named nonexistent label algebra-lemma-purely-inseparable as Lemma 0BR5 although the second reading said it was fixed (0BR5 is the section, 0BR8 algebra-lemma-powers is the consumer).; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.FieldTheory.PowerInBaseAfterLocalization",
+  "declaration": "RingTheory.power_in_base_after_localization",
+  "file": "lean/Sheaf/FieldTheory/PowerInBaseAfterLocalization.lean",
+  "statement": "theorem power_in_base_after_localization (A' : Type u) (K' : Type v) (E : Type w) (L : Type z) [CommRing A'] [IsDomain A'] [IsNoetherianRing A'] [Field K'] [Field L] [CommRing E] [IsDomain E] [Algebra A' E] [Module.Finite A' E] [Algebra A' K'] [Algebra E L] [Algebra K' L] [Algebra A' L] [IsScalarTower A' E L] [IsScalarTower A' K' L] [Module.Finite K' L] [IsPurelyInseparable K' L] [IsFractionRing A' K'] [IsFractionRing E L] : ∃ s : A', s ≠ 0 ∧ (CharZero K' → Function.Surjective (Algebra.TensorProduct.includeRight (R := A') (A := E) (B := Localization.Away s) : Localization.Away s → E ⊗[A'] Localization.Away s)) ∧ (∀ p : ℕ, Nat.Prime p → CharP K' p → ∀ x : E ⊗[A'] Localization.Away s, ∃ n : ℕ, ∃ a : Localization.Away s, Algebra.TensorProduct.includeRight (R := A') (A := E) (B := Localization.Away s) a = x ^ (p ^ n))",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-pbl1320",
+  "group": "K1",
+  "result": "pass",
+  "note": "Matched A' Noetherian domain/IsFractionRing A' K'/E domain Module.Finite (precedent: landed Module.Finite citers of def-weil-finite-integral-morphism)/IsFractionRing E L/towers A'->E->L, A'->K'->L (force A'->E injective as the node's L/K' presupposes)/Module.Finite+IsPurelyInseparable K' L; one s≠0 tied to both clauses; char 0 surjectivity of includeRight = E''=A'' (injective by flatness); char p: per-x n and a, n=0 allowed, not tautological, true by module generators + Frobenius with s=prod t_i; no let, no hollow binder, independent universes harmless (no quantification); node json only gains lean record"
  }
 }
