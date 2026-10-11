@@ -201,5 +201,23 @@
   "by": "L",
   "result": "pass",
   "note": "Reviewed by the lead (opus-relaunch6). Five steps along Stacks 02GL(2): the fibre is etale over kappa(s) by base change (02GO), an affine open around y is Spec of an etale kappa(s)-algebra, hence a finite product of finite separable extensions (00U3 leaf), Spec of a finite product of fields is discrete with each point the open subscheme Spec L_j (new unsplit node; Stacks 00ED/00EC/00E4; the worker reports Mathlib pieces for every clause: Spec.map (Pi.evalRingHom i) open immersion Limits.lean:615, IsIso (sigmaSpec R) for finite index Limits.lean:641, sigmaToPiHomeo, Spec of a field one point; its reviewer may make it a leaf of several lemmas), discreteness from open points (01TE not needed), residue field kappa(y) = L_j. Statement citations changed only (def-pc-scheme-fibre instead of def-pc-base-change; def-pc-field-extension and def-pc-scheme added), mathematics unchanged. Lean candidate reported, not attached: LocallyQuasiFinite.of_etale (QuasiFinite.lean:43, sorry-free) gives only discreteness of f^{-1}(s)."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleFibreDiscreteSeparablePoints",
+  "declaration": "AlgebraicGeometry.Scheme.Hom.etale_fibre_discrete_separable_points",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleFibreDiscreteSeparablePoints.lean",
+  "statement": "theorem Scheme.Hom.etale_fibre_discrete_separable_points {X S : Scheme.{u}} (f : X ⟶ S) [Etale f] (s : S) : DiscreteTopology (f.fiber s) ∧ ∀ y : f.fiber s, let i := Spec.homEquiv ((f.fiber s).fromSpecResidueField y ≫ f.fiberToSpecResidueField s) letI := i.hom.toAlgebra Module.Finite (S.residueField s) ((f.fiber s).residueField y) ∧ (∀ a : (f.fiber s).residueField y, ∃ p : Polynomial (S.residueField s), p.Separable ∧ Polynomial.aeval a p = 0) ∧ ∃ U : (f.fiber s).Opens, (U : Set (f.fiber s)) = {y} ∧ ∃ e : U.toScheme ≅ Spec ((f.fiber s).residueField y), e.hom ≫ Spec.map i = U.ι ≫ f.fiberToSpecResidueField s",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-efd0955",
+  "group": "F1",
+  "result": "pass",
+  "note": "[Etale f] on arbitrary schemes/universe; f.fiber s with fiberToSpecResidueField; DiscreteTopology; canonical i = Spec.homEquiv(fromSpecResidueField y ≫ fiberToSpecResidueField s) as algebra (algebraMap = i.hom rfl); Module.Finite; every element root of Polynomial.Separable (node's literal wording, equiv. to Algebra.IsSeparable); open U = {y} with U.toScheme ≅ Spec κ(y) over Spec κ(s); no Mathlib combined statement (only FormallyUnramified residue separability, LocallyQuasiFinite discreteness)"
  }
 }
