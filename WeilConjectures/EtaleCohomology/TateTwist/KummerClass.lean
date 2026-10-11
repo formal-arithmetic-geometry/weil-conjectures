@@ -250,6 +250,76 @@ lemma kummerClassOf_mul (u v : Γ(X, ⊤)ˣ) :
     Functor.map_add, Functor.map_add, Preadditive.add_comp, Preadditive.add_comp,
     Preadditive.comp_add]
 
+section Naturality
+
+variable {Y : Scheme.{u}} [HasInvertibleExponent Λ Y] (f : X ⟶ Y)
+
+lemma zmodToGmSections_zero_comp_gmSectionsPullback (v : Γ(Y, ⊤)ˣ) :
+    zmodToGmSections 0 v (pow_zero v) ≫ gmSectionsPullback f =
+      zmodToGmSections 0 (Units.map f.appTop.hom.toMonoidHom v) (pow_zero _) := by
+  apply AddCommGrpCat.hom_ext_uliftInt
+  have h1 := zmodToGmSections_natCast 0 v (pow_zero v) 1
+  have h2 := zmodToGmSections_natCast 0 (Units.map f.appTop.hom.toMonoidHom v) (pow_zero _) 1
+  simp only [Nat.cast_one, pow_one] at h1 h2
+  rw [AddCommGrpCat.hom_comp, AddMonoidHom.comp_apply, h1, h2, gmSectionsPullback_gmSection]
+
+/-- The morphisms `ℤ ⟶ 𝔾ₘ` given by units are compatible with pullback. -/
+lemma upperStar_map_unitToGmSheaf_comp (v : Γ(Y, ⊤)ˣ) :
+    (Etale.upperStar AddCommGrpCat.{u + 1} f).map (unitToGmSheaf v) ≫
+        upperStarGmSheafToGmSheaf f =
+      (upperStarConstantSheafIso AddCommGrpCat.{u + 1} f).hom.app _ ≫
+        unitToGmSheaf (Units.map f.appTop.hom.toMonoidHom v) := by
+  rw [unitToGmSheaf, upperStar_map_constantSheafAdj_homEquiv_symm_comp,
+    zmodToGmSections_zero_comp_gmSectionsPullback]
+  rfl
+
+/-- The comparison `g^* 𝔾ₘ ⟶ 𝔾ₘ` commutes with the `n`-th power maps. -/
+lemma upperStarGmSheafToGmSheaf_comp_nsmul (m : ℕ) :
+    upperStarGmSheafToGmSheaf f ≫ (m • 𝟙 X.gmSheaf) =
+      (Etale.upperStar AddCommGrpCat.{u + 1} f).map (m • 𝟙 Y.gmSheaf) ≫
+        upperStarGmSheafToGmSheaf f := by
+  rw [Functor.map_nsmul, CategoryTheory.Functor.map_id, Preadditive.nsmul_comp,
+    Preadditive.comp_nsmul, Category.comp_id, Category.id_comp]
+
+/-- The comparison map from the pullback of the Kummer sequence pulled back along `v` to the
+Kummer sequence pulled back along the pullback of `v`, on the middle terms. -/
+noncomputable def upperStarKummerPullbackX₂ (v : Γ(Y, ⊤)ˣ) :
+    (Etale.upperStar AddCommGrpCat.{u + 1} f).obj
+        ((Y.kummerSequence (ringChar Λ)).pullback (unitToGmSheaf v)).X₂ ⟶
+      ((X.kummerSequence (ringChar Λ)).pullback
+        (unitToGmSheaf (Units.map f.appTop.hom.toMonoidHom v))).X₂ :=
+  pullback.lift ((Etale.upperStar _ f).map (pullback.fst _ _) ≫ upperStarGmSheafToGmSheaf f)
+    ((Etale.upperStar _ f).map (pullback.snd _ _) ≫
+      (upperStarConstantSheafIso AddCommGrpCat.{u + 1} f).hom.app _) (by
+    change _ ≫ (ringChar Λ • 𝟙 X.gmSheaf) = _
+    rw [Category.assoc, Category.assoc, upperStarGmSheafToGmSheaf_comp_nsmul,
+      ← upperStar_map_unitToGmSheaf_comp, ← Functor.map_comp_assoc, ← Functor.map_comp_assoc]
+    congr 2
+    exact pullback.condition)
+
+/-- The comparison from the pullback of the Kummer sequence pulled back along `v` to the Kummer
+sequence pulled back along the pullback of `v`. -/
+noncomputable def upperStarKummerPullbackHom (v : Γ(Y, ⊤)ˣ) :
+    ((Y.kummerSequence (ringChar Λ)).pullback (unitToGmSheaf v)).map
+        (Etale.upperStar AddCommGrpCat.{u + 1} f) ⟶
+      (X.kummerSequence (ringChar Λ)).pullback
+        (unitToGmSheaf (Units.map f.appTop.hom.toMonoidHom v)) where
+  τ₁ := upperStarRootsOfUnitySheafToRootsOfUnitySheaf _ f
+  τ₂ := upperStarKummerPullbackX₂ Λ f v
+  τ₃ := (upperStarConstantSheafIso AddCommGrpCat.{u + 1} f).hom.app _
+  comm₁₂ := by
+    apply pullback.hom_ext
+    · simp only [Category.assoc, upperStarKummerPullbackX₂, pullback.lift_fst,
+        ShortComplex.map_f, ShortComplex.pullback, ← Functor.map_comp_assoc]
+      exact upperStarRootsOfUnitySheafToRootsOfUnitySheaf_ι _ f
+    · simp only [Category.assoc, upperStarKummerPullbackX₂, pullback.lift_snd,
+        ShortComplex.map_f, ShortComplex.pullback, ← Functor.map_comp_assoc]
+      simp
+  comm₂₃ := by
+    simp [upperStarKummerPullbackX₂, ShortComplex.pullback]
+
+end Naturality
+
 end Etale
 
 end AlgebraicGeometry
