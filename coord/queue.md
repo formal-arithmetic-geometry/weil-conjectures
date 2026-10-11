@@ -1,17 +1,16 @@
 # Work queue
 
-529 items; claim with `tools/claim.py next <group> [--stage N]`.
+527 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (529)
+## Stage 2: nodes to state (527)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
 | `def-sc-picard-functor` | 1 | state |
 | `pqf-def-coherent` | 1 | state |
-| `def-nagata-final-noetherian-base-system` | 2 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 | `cor-galois-lisse-representations` | 1 | state |
 | `lem-pc-arrow-iso-pullback-counit` | 1 | state |
@@ -84,7 +83,6 @@
 | `lem-weil-pbc-limit-residue-field` | 1 | state |
 | `lem-weil-pbc-limit-tower-essentially-finite-presentation` | 1 | state |
 | `lem-weil-pbc-lisse-generic-kernel` | 1 | state |
-| `lem-weil-pbc-local-dimension-zero-henselian` | 1 | state |
 | `lem-weil-pbc-locally-constant-finite-values-finite-type` | 1 | state |
 | `lem-weil-pbc-lqf-locally-finite-type` | 1 | state |
 | `lem-weil-pbc-lqf-qc-source-bounded-fibres` | 1 | state |
@@ -93,7 +91,6 @@
 | `lem-weil-pbc-make-separably-generated` | 1 | state |
 | `lem-weil-pbc-map-into-henselian-colimit` | 1 | state |
 | `lem-weil-pbc-minimal-finite-free-resolution-local` | 1 | state |
-| `lem-weil-pbc-miracle-flatness` | 1 | state |
 | `lem-weil-pbc-mittag-leffler-complex-limit-homology` | 1 | state |
 | `lem-weil-pbc-mittag-leffler-limit-exact` | 1 | state |
 | `lem-weil-pbc-ml-sets-tower-limit-nonempty` | 1 | state |
@@ -528,6 +525,7 @@
 | `lem-weil-pbc-henselian-finite-type-product-decomposition` | 2 | state |
 | `lem-weil-pbc-integral-closure-finite-fibre-part-localization` | 2 | state |
 | `lem-weil-pbc-quotient-henselian-pair` | 2 | state |
+| `lemma-nagata-final-noetherian-base-system` | 2 | state |
 | `lemma-weil-pbc-etale-cohomology-continuity` | 2 | state |
 | `pqf-lem-pushforward-qcoh` | 2 | state |
 | `pqf-lem-qf-locqf-qc` | 2 | state |
@@ -539,7 +537,7 @@
 | `lem-pc-essentially-constant-pro-hom-colimit` | 4 | state |
 | `lem-pur-essential-constant-pro-criterion-05py` | 4 | state |
 
-Not open yet: 40 nodes that wait for stage 1, 726 nodes that wait for a statement dependency.
+Not open yet: 40 nodes that wait for stage 1, 725 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 

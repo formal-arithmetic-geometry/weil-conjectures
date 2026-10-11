@@ -248,7 +248,7 @@ class Dag:
             if not all(self.stated(c) for c in self.deps(i, "stmt")):
                 why["waits for a statement dependency"] += 1; continue
             items.append((0 if early and i in tsc else 1, self.h(i), i))
-        # launcher, 2026-10-11 11:55 UTC (STAGE 2 ORDER: DEFINITIONS FIRST): a statement cannot be written before its
+        # launcher, 2026-10-11 10:50 UTC (STAGE 2 ORDER: DEFINITIONS FIRST): a statement cannot be written before its
         # definitions, so within the open items the definitions come first, then the statements, each by the order above
         return sorted(items, key=lambda t: (t[0], not is_def(self.live[t[2]]), t[1], t[2])), why
 
