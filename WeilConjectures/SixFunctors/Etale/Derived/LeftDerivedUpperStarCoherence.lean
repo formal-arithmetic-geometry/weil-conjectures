@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.Counit
+public import WeilConjectures.SixFunctors.BaseChange.Pasting
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
 
@@ -80,28 +81,6 @@ lemma leftDerivedUpperStarComp_hom_app_comp_counit {T S R : Scheme.{u}} (g₁ : 
     Functor.leftDerivedFunctorCompIso_hom_app_comp_counit,
     Functor.leftDerivedFunctorNatIso_hom_app_comp_counit_assoc, Functor.map_comp]
 
-omit [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
-  [Abelian.HasFunctorialFlatResolution A] in
-/-- The associativity law for `AlgebraicGeometry.Etale.upperStarComp` in the form of an
-equality of natural transformations, with all three composites of the morphisms named. -/
-lemma upperStarComp_assoc' {X Y Z W : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) (h : Z ⟶ W)
-    (fg : X ⟶ Z) (gh : Y ⟶ W) (fgh : X ⟶ W) (hfg : fg = f ≫ g) (hgh : gh = g ≫ h)
-    (hfgh : fgh = fg ≫ h) :
-    (Etale.upperStarComp A fg h fgh hfgh).hom ≫
-        Functor.whiskerLeft (h)^*[A] (Etale.upperStarComp A f g fg hfg).hom =
-      (Etale.upperStarComp A f gh fgh (by rw [hfgh, hfg, hgh, Category.assoc])).hom ≫
-        Functor.whiskerRight (Etale.upperStarComp A g h gh hgh).hom (f)^*[A] := by
-  subst hfg hgh hfgh
-  have key := congrArg Iso.hom
-    (Etale.upperStarComp_assoc A f g h ((f ≫ g) ≫ h) (Category.assoc f g h))
-  ext G : 2
-  have := NatTrans.congr_app key G
-  simp only [Iso.trans_hom, NatTrans.comp_app, Functor.isoWhiskerRight_hom,
-    Functor.whiskerRight_app, Functor.associator_hom_app, Category.comp_id,
-    Functor.isoWhiskerLeft_hom, Functor.whiskerLeft_app] at this
-  simp only [NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app]
-  exact this.symm
-
 /-- The associativity law of the composition isomorphisms of the derived pullbacks: for
 `f : X ⟶ Y`, `g : Y ⟶ Z` and `h : Z ⟶ W`, the two identifications
 `L(fgh)^* ≅ Lh^* ⋙ Lg^* ⋙ Lf^*` agree.
@@ -149,7 +128,7 @@ lemma leftDerivedUpperStarComp_assoc {X Y Z W : Scheme.{u}} (f : X ⟶ Y) (g : Y
   simp only [← Functor.map_comp, Category.assoc]
   congr 2
   obtain ⟨K, rfl⟩ := HomotopyCategory.quotient_obj_surjective K
-  have key := NatTrans.congr_app (upperStarComp_assoc' A f g h fg gh fgh hfg hgh hfgh)
+  have key := NatTrans.congr_app (Etale.upperStarComp_assoc' A f g h fg gh fgh hfg hgh hfgh).symm
   simp only [NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app] at key
   simp only [mapHomotopyCategoryCompIso_inv_app_quotient, mapHomotopyCategory_app_quotient]
   erw [mapHomotopyCategoryCompIso_inv_app_quotient, mapHomotopyCategory_app_quotient]
