@@ -104,5 +104,23 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ckc0142 (reviewer sub-agent of L); spot-checked: Statement hypothesis = Stacks Def 05CU coherent ring (fg ideals fp), conclusions Ker/Im/Coker match 05CW(2),(3)+05CX and the citer cc39d75af steps 0-1 (Ker, Im, Coker of maps of fp modules) exactly; Im covered as fg submodule of coherent N; step 3 quotient presentation correct; no duplicate (lem-weil-pbc-*finitely-presented* nodes concern projective/flat/algebra cases; only coherent-ring nodes are the item and its parent); Mathlib grep 'coherent' in Mathlib/RingTheory: only Grassmannian.lean, no IsCoherentRing. FIX more, RETURN less: C1 step 1 rewritten to write the chain Def 05CU -> R^n coherent by 05CW(4) -> fp = coker(R^a->R^b) coherent by 05CW(3) (05CX argument) -> Ker finite by 05CW(2) -> fp as fg submodule of coherent M; step 2 cites coherence of N from step 1 and Def 05CU; step 3 cross-reference tidied.; 1 file(s) fixed by the reviewer"
  },
- "lead_note": "2026-10-11 L (R-ckc0142): Second reading by C1 is stale: describes two child nodes and citations.json that the final delivery deleted; it did not note that steps 1-2 cited '05CW and 05CX clauses' without writing the 05CX chain."
+ "lead_note": "2026-10-11 L (R-ckc0142): Second reading by C1 is stale: describes two child nodes and citations.json that the final delivery deleted; it did not note that steps 1-2 cited '05CW and 05CX clauses' without writing the 05CX chain.",
+ "lean": {
+  "module": "Sheaf.RingTheory.FinitePresentationKerRangeCokernel",
+  "declaration": "Module.finitePresentation_ker_range_cokernel_of_fg_ideals",
+  "file": "lean/Sheaf/RingTheory/FinitePresentationKerRangeCokernel.lean",
+  "statement": "theorem finitePresentation_ker_range_cokernel_of_fg_ideals {R : Type u} [CommRing R] (hR : ∀ (I : Ideal R), I.FG → Module.FinitePresentation R I) {M : Type v} {N : Type w} [AddCommGroup M] [Module R M] [AddCommGroup N] [Module R N] [Module.FinitePresentation R M] [Module.FinitePresentation R N] (f : M →ₗ[R] N) : Module.FinitePresentation R (LinearMap.ker f) ∧ Module.FinitePresentation R (LinearMap.range f) ∧ Module.FinitePresentation R (N ⧸ LinearMap.range f)",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-cfk0946",
+  "group": "G1",
+  "result": "pass",
+  "note": "CommRing R; hR = every FG ideal is Module.FinitePresentation as R-module (Stacks 05CU coherent, no Mathlib/source coherent-ring notion: grep finds only topological IsCoherentWith); M,N fp via Mathlib class = dep def-sc-finitely-presented-module; f linear; Ker = LinearMap.ker, Im = LinearMap.range, Coker = N / range f; independent universes, zero ring/zero map allowed; docstring blueprint id + 3-step 05CW/05CX proof"
+ }
 }

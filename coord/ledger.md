@@ -3665,3 +3665,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 07:41 L: merged deliver/J1/lem-pur-ringed-site-grothendieck-abelian (stage 2; reviewer PASS; first push; Sheaf.CategoryTheory.RingedSiteGrothendieckAbelian SheafOfModules.grothendieckAbelian_with_localized_generator)
 - 07:41 L: merged deliver/C1/lem-pod-etale-stalk-tensor-scalar (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.EtaleStalkTensorScalar AlgebraicGeometry.Scheme.etale_stalk_tensor_unique)
 - 07:41 L: merged deliver/K1/def-weil-pbc-ample-invertible-module (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.Ample AlgebraicGeometry.Scheme.Modules.IsAmple)
+- 07:42 L: merged deliver/G1/lem-sc-coherent-ring-fp-kernel-cokernel (stage 2; reviewer PASS; first push; Sheaf.RingTheory.FinitePresentationKerRangeCokernel Module.finitePresentation_ker_range_cokernel_of_fg_ideals)
