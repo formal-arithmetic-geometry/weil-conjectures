@@ -149,5 +149,24 @@
   "by": "L",
   "result": "pass",
   "note": "Reviewed by the lead (opus-relaunch6). Two new Mathlib leaves and three elementary steps: part (1) is PrimeSpectrum.preimageOrderIsoFiber (ResidueField/Fiber.lean:182, with preimageEquivFiber line 155 and its simps lemmas; line verified); part (2) from RingHom.SurjectiveOnStalks.residueFieldMap_bijective (ResidueField/Ideal.lean:50) applied to the base change of Ideal.surjectiveOnStalks_residueField (Ideal.lean:161, SurjectiveOnStalks.lean:169; lines verified), the identification of psi_q with the composite C -> kappa(Q) -> kappa(q) checked on b (x) 1, on 1 (x) kappa(p) (ring maps out of kappa(p) are determined on A) and on pure tensors. Brief error noted: the identification C = S^{-1}B/pS^{-1}B is not a clause of this node (it is lem-weil-pbc-fibre-ring-localization-quotient). Tags: 00E6 remark-fundamental-diagram, 0H9M remark-local-ring-fibre."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.FibrePrimesResidueFields",
+  "declaration": "PrimeSpectrum.fibre_primes_residue_fields",
+  "file": "lean/Sheaf/RingTheory/FibrePrimesResidueFields.lean",
+  "statement": "theorem fibre_primes_residue_fields (A : Type u) (B : Type v) [CommRing A] [CommRing B] [Algebra A B] (p : PrimeSpectrum A) : let j : B →+* p.asIdeal.Fiber B := Algebra.TensorProduct.includeRight.toRingHom let F := PrimeSpectrum.comap (algebraMap A B) ⁻¹' {p} let ψ : (q : F) → p.asIdeal.Fiber B →+* q.1.asIdeal.ResidueField := fun q ↦ (Algebra.TensorProduct.lift (Ideal.ResidueField.mapₐ p.asIdeal q.1.asIdeal (Algebra.ofId A B) congr($(q.2.symm).asIdeal)) (IsScalarTower.toAlgHom A B q.1.asIdeal.ResidueField) (fun _ _ ↦ Commute.all _ _)).toRingHom ∃ e : PrimeSpectrum (p.asIdeal.Fiber B) ≃o F, (∀ Q, (e Q).1.asIdeal = Q.asIdeal.comap j) ∧ (∀ q, (e.symm q).asIdeal = RingHom.ker (ψ q)) ∧ (∀ q, ∃ θ : (e.symm q).asIdeal.ResidueField ≃+* q.1.asIdeal.ResidueField, θ.toRingHom.comp (algebraMap (p.asIdeal.Fiber B) (e.symm q).asIdeal.ResidueField) = ψ q)",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-frp1010"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-frp1010",
+  "group": "K1",
+  "result": "fix",
+  "note": "A,B CommRing + Algebra A B = phi; p : PrimeSpectrum A; C = p.asIdeal.Fiber B, j = includeRight; F = primes over p; psi_q = lift(mapₐ, toAlgHom) (rfl vs preimageEquivFiber kernel); (1) e : Spec C ≃o F with e Q = comap j Q, e.symm q = ker psi_q; (2) ∃ θ : κ(Q) ≃+* κ(q), θ ∘ algebraMap = psi_q; empty fibre vacuous"
  }
 }
