@@ -3932,3 +3932,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 09:03 L: merged deliver/F1/lem-weil-pbc-cartier-equality (stage 2; reviewer FIX; first push; Sheaf.Paper.CartierEquality cartier_equality)
 - 09:03 L: merged deliver/E1/def-sc-function-field (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.FunctionField AlgebraicGeometry.Scheme.functionFieldOfComponents)
 - 09:03 L: merged deliver/C1/lem-weil-pbc-closed-immersion-pushforward-fully-faithful (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.ClosedImmersionPushforwardFullyFaithful AlgebraicGeometry.closedImmersion_pushforward_fullyFaithful)
+- 09:03 L: merged deliver/J1/lem-pur-rhom-well-defined (stage 2; reviewer FIX; first push; Sheaf.Algebra.Homology.QuasiIsoHomComplexMap CategoryTheory.quasiIso_homComplex_map)
