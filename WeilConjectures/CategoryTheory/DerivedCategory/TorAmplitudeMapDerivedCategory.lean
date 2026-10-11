@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.CategoryTheory.Abelian.Flat.PreservesFlat
 public import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
@@ -53,17 +54,17 @@ variable [IsGrothendieckAbelian.{v₁} C] [MonoidalCategory C] [MonoidalPreaddit
   [MonoidalClosed C] [BraidedCategory C] [Abelian.HasFunctorialFlatResolution C]
   [IsGrothendieckAbelian.{v₂} D] [MonoidalCategory D] [MonoidalPreadditive D]
   [MonoidalClosed D] [BraidedCategory D] [Abelian.HasFunctorialFlatResolution D]
+  [F.PreservesFlat]
 
 /-- An exact functor sending flat objects to flat objects preserves Tor amplitude: it sends a
 flat model in degrees `[a, b]` to a flat model in degrees `[a, b]`. -/
 lemma torAmplitudeIn_mapDerivedCategory_obj
-    (hF : ∀ X : C, ObjectProperty.flat X → ObjectProperty.flat (F.obj X))
     {a b : ℤ} {K : DerivedCategory C} (hK : torAmplitudeIn C a b K) :
     torAmplitudeIn D a b (F.mapDerivedCategory.obj K) := by
   obtain ⟨P, _, _, hP, ⟨e⟩⟩ := (torAmplitudeIn_iff_exists_iso_Q_obj_flat a b K).1 hK
   exact (torAmplitudeIn_iff_exists_iso_Q_obj_flat a b _).2
     ⟨(F.mapHomologicalComplex _).obj P, inferInstance, inferInstance,
-      fun n ↦ hF _ (hP n),
+      fun n ↦ Functor.PreservesFlat.flat_obj (hP n),
       ⟨(F.mapDerivedCategoryFactors.app P).symm ≪≫ F.mapDerivedCategory.mapIso e⟩⟩
 
 variable [F.Monoidal]
@@ -82,7 +83,6 @@ noncomputable def mapHomologicalComplexTensorRightIso (P : CochainComplex C ℤ)
 /-- An exact, faithful, strong monoidal functor sending flat objects to flat objects reflects
 Tor amplitude. -/
 lemma torAmplitudeIn_of_torAmplitudeIn_mapDerivedCategory_obj [F.Faithful]
-    (hF : ∀ X : C, ObjectProperty.flat X → ObjectProperty.flat (F.obj X))
     {a b : ℤ} {K : DerivedCategory C} (hK : torAmplitudeIn D a b (F.mapDerivedCategory.obj K)) :
     torAmplitudeIn C a b K := by
   -- `K` is concentrated in `[a, b]`, so it has a bounded above flat model `P`
@@ -97,7 +97,8 @@ lemma torAmplitudeIn_of_torAmplitudeIn_mapDerivedCategory_obj [F.Faithful]
   let P' := (F.mapHomologicalComplex (.up ℤ)).obj P
   have : CochainComplex.IsStrictlyLE P' b :=
     (CochainComplex.isStrictlyLE_mapHomologicalComplex_obj_iff _ _ b).2 inferInstance
-  have hP'k := CochainComplex.kFlat_of_isStrictlyLE_of_flat P' b (fun n ↦ hF _ (hP n))
+  have hP'k := CochainComplex.kFlat_of_isStrictlyLE_of_flat P' b
+    (fun n ↦ Functor.PreservesFlat.flat_obj (hP n))
   let e'' : Q.obj P' ≅ F.mapDerivedCategory.obj K :=
     (F.mapDerivedCategoryFactors.app P).symm ≪≫ F.mapDerivedCategory.mapIso e'
   intro N
@@ -116,10 +117,9 @@ lemma torAmplitudeIn_of_torAmplitudeIn_mapDerivedCategory_obj [F.Faithful]
 functor sending flat objects to flat objects preserves and reflects Tor amplitude: `K` has Tor
 amplitude in `[a, b]` if and only if `D(F) K` has. -/
 lemma torAmplitudeIn_mapDerivedCategory_obj_iff [F.Faithful]
-    (hF : ∀ X : C, ObjectProperty.flat X → ObjectProperty.flat (F.obj X))
     (a b : ℤ) (K : DerivedCategory C) :
     torAmplitudeIn D a b (F.mapDerivedCategory.obj K) ↔ torAmplitudeIn C a b K :=
-  ⟨torAmplitudeIn_of_torAmplitudeIn_mapDerivedCategory_obj F hF,
-    torAmplitudeIn_mapDerivedCategory_obj F hF⟩
+  ⟨torAmplitudeIn_of_torAmplitudeIn_mapDerivedCategory_obj F,
+    torAmplitudeIn_mapDerivedCategory_obj F⟩
 
 end DerivedCategory
