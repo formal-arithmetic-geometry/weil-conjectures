@@ -145,6 +145,7 @@ theorem isZero_homology_multiplicativeGroup [HasTateTwist.IsNormalized Λ]
         ((tateTwist Λ G 1).obj (constantComplex Λ G)))) :=
   sorry
 
+include aY in
 /-- Blueprint `sk-prop-a1`: Rank-one orientation: the fundamental class of the zero section
 
 For the zero section `s : Y ↪ 𝔸¹_Y` the complex `Rs^! Λ(1)[2]` is concentrated in degree zero
