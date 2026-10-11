@@ -8,6 +8,7 @@ module
 public import WeilConjectures.CategoryTheory.Adjunction.ProjectionMapAssoc
 public import WeilConjectures.SixFunctors.Etale.Derived.OpenImmersionLowerShriekProjection
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekProjection
+public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Comp
 
 /-!
 # Associativity of the projection formula
@@ -104,6 +105,28 @@ lemma derivedOpenImmersionLowerShriekProjectionMap_assoc
     (mapDerivedCategoryUpperStarDerivedTensorIso A j).hom
     (mapDerivedCategoryUpperStarDerivedTensorIso_assoc A j) K M M'
 
+section Comp
+
+variable {T S R : Scheme.{u}} (g₁ : T ⟶ S) (g₂ : S ⟶ R) (g₁₂ : T ⟶ R) (hg : g₁₂ = g₁ ≫ g₂)
+
+/-- The inverse of the composition isomorphism `L(g₁ ≫ g₂)^* ≅ Lg₂^* ⋙ Lg₁^*` commutes with the
+tensor comparisons. -/
+lemma leftDerivedUpperStarComp_inv_app_tensor_comp
+    (K M : DerivedCategory (Sheaf R.smallEtaleTopology A)) :
+    (leftDerivedUpperStarComp A g₁ g₂ g₁₂ hg).inv.app (K ⊗ M) ≫
+        ((leftDerivedUpperStarTensorComparison A g₁₂).app K).app M =
+      L((g₁)^*[A]).map (((leftDerivedUpperStarTensorComparison A g₂).app K).app M) ≫
+        ((leftDerivedUpperStarTensorComparison A g₁).app _).app _ ≫
+          ((leftDerivedUpperStarComp A g₁ g₂ g₁₂ hg).inv.app K ⊗ₘ
+            (leftDerivedUpperStarComp A g₁ g₂ g₁₂ hg).inv.app M) := by
+  rw [← cancel_epi ((leftDerivedUpperStarComp A g₁ g₂ g₁₂ hg).hom.app (K ⊗ M)),
+    Iso.hom_inv_id_app_assoc,
+    ← reassoc_of% (leftDerivedUpperStarTensorComparison_comp A g₁ g₂ g₁₂ hg K M),
+    tensorHom_comp_tensorHom, Iso.hom_inv_id_app, Iso.hom_inv_id_app]
+  erw [id_tensorHom_id, Category.comp_id]
+
+end Comp
+
 section Compactification
 
 variable {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)
@@ -124,7 +147,7 @@ theorem projectionMapOfCompactification_assoc (M : DerivedCategory (Sheaf X.smal
       (α_ ((Rf_!(c)[A]).obj M) L L').inv ≫
         (((projectionMapOfCompactification A c).app M).app L ▷ L') ≫
           ((projectionMapOfCompactification A c).app (M ⊗ L((f)^*[A]).obj L)).app L' := by
-  letI := leftDerivedUpperStarOplaxMonoidal A f
+  let := leftDerivedUpperStarOplaxMonoidal A f
   simp only [projectionMapOfCompactification_app_app]
   have hnat {M₁ M₂ : DerivedCategory (Sheaf c.Z.smallEtaleTopology A)} (x : M₁ ⟶ M₂)
       {W : DerivedCategory (Sheaf Y.smallEtaleTopology A)}
