@@ -9,6 +9,7 @@ public import WeilConjectures.SixFunctors.ProEtale.Adic.AlgClosedFieldExact
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseStalk
 public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.Germ
 public import WeilConjectures.WeilSheaf.Fourier
+public import WeilConjectures.WeilSheaf.StalkFunctor
 
 /-!
 # Inertia at infinity acts on the Artin–Schreier sheaf through a character of order `p`
@@ -231,5 +232,39 @@ lemma affineLine.germ_artinSchreierSplitSection (ψ : AddChar k₀ (PadicAlgCl l
   exact congrArg ULift.up (by rw [← AddChar.map_add_eq_mul, neg_add_cancel_left])
 
 end GlobalSections
+section ConstantStalk
+
+/-- Every section of the pullback `y^* ℚ̄_ℓ,V` of the constant sheaf to the spectrum of a field is
+a multiple of the restriction of the unit section `1`. -/
+lemma ProEtale.exists_eq_smul_globalSectionsToUpperStar_oneGlobalSection {Ω : Type u} [Field Ω]
+    {V : Scheme.{u}} (y : Spec (.of Ω) ⟶ V)
+    (v : (Sheaf.Γ (Scheme.ProEt.topology (Spec (.of Ω))) (WeilCoefficients.{u} l)).obj
+      ((y)^*[WeilCoefficients.{u} l].obj (ProEtale.adicConstantSheaf l V))) :
+    ∃ c : ULift.{u + 1} (PadicAlgCl l), v = c • ((ProEtale.globalSectionsToUpperStar _ y).app
+      (ProEtale.adicConstantSheaf l V)).hom (ProEtale.oneGlobalSection V) := by
+  let φ := (Sheaf.Γ (Scheme.ProEt.topology (Spec (.of Ω))) (WeilCoefficients.{u} l)).map
+    (ProEtale.upperStarAdicConstantSheafHom l y)
+  have hφ : Function.Injective φ.hom :=
+    (ConcreteCategory.bijective_of_isIso φ).1
+  let e := (Sheaf.ΓNatIsoSheafSections (Scheme.ProEt.topology (Spec (.of Ω)))
+    (WeilCoefficients.{u} l) (Scheme.ProEt.isTerminalMkId _)).app
+      (ProEtale.adicConstantSheaf l (Spec (.of Ω)))
+  let f : PadicAlgCl.locallyFiniteFunctions l (Spec (.of Ω)) := (e.hom.hom (φ.hom v)).down
+  have hv : φ.hom v = ProEtale.adicConstantGlobalSection f := by
+    change _ = e.inv.hom (ULift.up f)
+    exact (congrArg (fun ψ ↦ ψ.hom (φ.hom v)) e.hom_inv_id).symm
+  have : PreconnectedSpace (Spec (.of Ω)) := inferInstance
+  have hf := PadicAlgCl.locallyFiniteFunctions_eq_algebraMap f (IsLocalRing.closedPoint Ω)
+  obtain ⟨a, ha⟩ : ∃ a, f = algebraMap (PadicAlgCl l) _ a := ⟨_, hf⟩
+  have h1 : PadicAlgCl.locallyFiniteFunctionsComp l y.base.hom 1 = 1 := rfl
+  refine ⟨ULift.up a, hφ ?_⟩
+  rw [map_smul, ProEtale.oneGlobalSection_eq,
+    ProEtale.globalSectionsToUpperStar_adicConstantGlobalSection, hv, ha,
+    Algebra.algebraMap_eq_smul_one, h1]
+  unfold ProEtale.adicConstantGlobalSection
+  rw [← map_smul]
+  rfl
+
+end ConstantStalk
 
 end AlgebraicGeometry
