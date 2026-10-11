@@ -13,14 +13,17 @@
  "title": "Transitivity of derived tensor products under base change",
  "chapter": "sec-picard-framework",
  "unit": "sk-thm-picard-semicon",
- "statement": "Let $R$ be a commutative ring, let $A$ and $B$ be commutative $R$-algebras, let $C$ be a commutative $(A\\otimes_R B)$-algebra, let $E$ and $K$ be complexes of $A$-modules [def-pc-cochain-complex-modules], and let $K'$ be a complex of $C$-modules [def-pc-cochain-complex-modules]. The canonical associativity and base-change isomorphisms in the derived categories [def-pc-derived-category] identify the two complexes $((E\\otimes_A^L K)\\otimes_R^L B)\\otimes_{A\\otimes_R B}^L C$ and $(E\\otimes_A^L(K\\otimes_R^L B))\\otimes_{A\\otimes_R B}^L C$, naturally in $E$, $K$, and $C$; under this identification, tensoring any morphism $K\\otimes_R^L B\\to K'$ by $E$ gives the corresponding morphism from the first complex to $E\\otimes_A^L K'$ (with all tensor products derived over the displayed rings).",
+ "statement": "Let $R$ be a commutative ring, let $A$ and $B$ be commutative $R$-algebras, and put $T=A\\otimes_R B$. For a commutative ring $\\Lambda$, regard $\\Lambda$ as a sheaf of rings on the one-point site, so that complexes of $\\Lambda$-modules [def-pc-cochain-complex-modules], K-flat complexes and K-flat resolutions [def-pc-kflat-complex] (which exist [lem-pc-kflat-resolution]) and total tensor complexes [def-pc-tensor-complex-sheaves] apply, and write $D(\\Lambda)$ for the derived category [def-weil-abstract-derived-category] of $\\Lambda$-modules. For complexes $E,K$ of $A$-modules put $E\\otimes_A^{L}K=P_E\\otimes_A K\\in D(A)$, where $P_E\\to E$ is a K-flat resolution over $A$, and $K\\otimes_R^{L}B=K\\otimes_R Q\\in D(A)$, where $Q\\to B$ is a K-flat resolution of $B$ over $R$ ($A$ acts through $K$; this object lives in $D(A)$, not in general in $D(T)$). Each $b\\in B$ acts on $K\\otimes_R^{L}B$ in $D(A)$ through the endomorphism of $B$ in $D(R)$ given by multiplication by $b$; with the action of $A$ this makes every $H^i(K\\otimes_R^{L}B)$ a $T$-module. (1) There is an isomorphism $\\alpha_{E,K}:(E\\otimes_A^{L}K)\\otimes_R^{L}B\\cong E\\otimes_A^{L}(K\\otimes_R^{L}B)$ in $D(A)$, natural in $E$ and $K$, which commutes with the action of every $b\\in B$ (on the right side through $K\\otimes_R^{L}B$); hence each $H^i(\\alpha_{E,K})$ is a $T$-linear isomorphism, and for every commutative $T$-algebra $C$ the maps $H^i(\\alpha_{E,K})\\otimes_T C$ are isomorphisms. (2) Let $C$ be a commutative $T$-algebra, $K'$ a complex of $C$-modules, and $\\psi:K\\otimes_A^{L}C\\to K'$ a morphism in $D(C)$. Let $c_K:K\\otimes_R^{L}B\\to K\\otimes_A^{L}C$ be the comparison morphism in $D(A)$ represented by $P_K\\otimes_R Q\\to P_K\\otimes_R B=P_K\\otimes_A T\\to P_K\\otimes_A C$ ($P_K\\to K$ a K-flat resolution over $A$), and put $\\varphi_K=\\psi\\circ c_K:K\\otimes_R^{L}B\\to K'$ in $D(A)$ ($K'$ regarded as a complex of $A$-modules). Then $\\varphi_K$ commutes with the action of every $b\\in B$ (acting on $K'$ through $B\\to C$), so $H^i(\\varphi_K)$ is $T$-linear and induces a $C$-linear map $\\beta^i_K:H^i(K\\otimes_R^{L}B)\\otimes_T C\\to H^i(K')$. For a complex $E$ of $A$-modules, $E\\otimes_A^{L}K'=P_E\\otimes_A K'$ is a complex of $C$-modules, isomorphic in $D(A)$ to $(E\\otimes_A^{L}C)\\otimes_C^{L}K'$ compatibly with the $C$-module structures on cohomology; let $\\varphi_{E,K}=(1_E\\otimes\\varphi_K)\\circ\\alpha_{E,K}:(E\\otimes_A^{L}K)\\otimes_R^{L}B\\to E\\otimes_A^{L}K'$. Then $\\varphi_{E,K}$ equals the composite of $c_{E\\otimes_A^{L}K}$, the associativity isomorphism $(E\\otimes_A^{L}K)\\otimes_A^{L}C\\cong E\\otimes_A^{L}(K\\otimes_A^{L}C)$ and $1_E\\otimes\\psi$; it commutes with the action of $B$, so it induces $C$-linear maps $\\beta^i_{E,K}:H^i((E\\otimes_A^{L}K)\\otimes_R^{L}B)\\otimes_T C\\to H^i(E\\otimes_A^{L}K')$. If $C$ is flat over $T$ and $\\beta^i_K$ is an isomorphism for every $i\\in\\mathbf Z$, then $\\beta^i_{E,K}$ is an isomorphism for every $i\\in\\mathbf Z$ and every complex $E$ of $A$-modules.",
  "source": {
   "document": "literature/stacks-project/more-algebra.tex",
   "place": "Tag 0BYJ (more-algebra-lemma-triple-tensor-product), transitivity of derived tensor products"
  },
  "stmt_deps": [
-  "def-pc-derived-category",
-  "def-pc-cochain-complex-modules"
+  "def-pc-cochain-complex-modules",
+  "def-weil-abstract-derived-category",
+  "def-pc-kflat-complex",
+  "lem-pc-kflat-resolution",
+  "def-pc-tensor-complex-sheaves"
  ],
  "proof": [],
  "proof_deps": [],
@@ -61,5 +64,14 @@
   "item": "lem-pc-rf-single-complex-inherited-tensor-condition",
   "by": "worker",
   "date": "2026-10-10"
- }
+ },
+ "statement_change": {
+  "date": "2026-10-11",
+  "by": "L",
+  "what": "restated in the D(A) form (R-dtt3144's recommendation) after three returns for an ill-typed statement (R-dtt3144, R-dtt0007, R-dtt0053): K (x)^L_R B and (E (x)^L_A K) (x)^L_R B are objects of D(A), not of D(A (x)_R B), unless A or B is R-flat, so the old derived tensor over A (x)_R B with C and the morphism K (x)^L_R B -> K' 'in D(C)' were undefined. New: (1) the D(A) isomorphism (E (x)^L_A K) (x)^L_R B = E (x)^L_A (K (x)^L_R B), natural in E, K, B-equivariant, so A (x)_R B-linear on H^i and compatible with H^i(-) (x)_{A(x)B} C for any C; (2) for a morphism psi: K (x)^L_A C -> K' in D(C), the comparison phi_K = psi o c_K and phi_{E,K} = (1_E (x) phi_K) o alpha_{E,K} (equal to the canonical map for E (x)^L_A K), and for C flat over A (x)_R B: if H^i(K (x)^L_R B) (x) C -> H^i(K') are isomorphisms for all i, so are H^i((E (x)^L_A K) (x)^L_R B) (x) C -> H^i(E (x)^L_A K') for every E. Exactly what the only citer lem-pc-rf-single-complex-inherited-tensor-condition step 2 uses.",
+  "old_statement": "Let $R$ be a commutative ring, let $A$ and $B$ be commutative $R$-algebras, let $C$ be a commutative $(A\\otimes_R B)$-algebra, let $E$ and $K$ be complexes of $A$-modules [def-pc-cochain-complex-modules], and let $K'$ be a complex of $C$-modules [def-pc-cochain-complex-modules]. The canonical associativity and base-change isomorphisms in the derived categories [def-pc-derived-category] identify the two complexes $((E\\otimes_A^L K)\\otimes_R^L B)\\otimes_{A\\otimes_R B}^L C$ and $(E\\otimes_A^L(K\\otimes_R^L B))\\otimes_{A\\otimes_R B}^L C$, naturally in $E$, $K$, and $C$; under this identification, tensoring any morphism $K\\otimes_R^L B\\to K'$ by $E$ gives the corresponding morphism from the first complex to $E\\otimes_A^L K'$ (with all tensor products derived over the displayed rings)."
+ },
+ "lead_notes": [
+  "2026-10-11 00:58 UTC L: statement restated in the D(A) form by L (R-dtr0054) after the third return for the ill-typed statement (R-dtt3144, R-dtt0007, R-dtt0053); claim held by H1 unchanged; old statement in statement_change.old_statement. Proof hint for (1)-(2) besides Tag 0BYJ with K-flat models: the flat clause of (2) is a localizing-subcategory argument (E -> H^i(E (x)^L_A (K (x)^L_R B)) (x)_T C and E -> H^i(E (x)^L_A K') are homological in E with T-linear connecting maps (C flat over T) and commute with direct sums; they agree on E = A[n] by hypothesis; D(A) is the smallest localizing subcategory containing A)."
+ ]
 }
