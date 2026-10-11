@@ -22,39 +22,91 @@
  "stmt_deps": [
   "def-weil-pbc-tor-modules"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For each i>0, compute Tor_i^R(A^m,B) using the finite direct sum of m copies of a projective resolution of A. Tensoring this resolution with B and taking homology commute with finite direct sums, so Tor_i^R(A^m,B) is the direct sum of m copies of Tor_i^R(A,B), hence is zero by the hypothesis.",
+   "uses": [
+    "def-weil-pbc-tor-modules"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 08IB, lemma-compare-base-change: Tor-independent comparison of derived tensors"
+   }
+  },
+  {
+   "text": "Choose $A$-linear maps $s\\colon P\\to A^m$ and $r\\colon A^m\\to P$ with $r\\circ s=\\mathrm{id}_P$. Functoriality of $\\operatorname{Tor}$ in its first module [def-weil-pbc-tor-modules] carries these to maps $\\operatorname{Tor}_i^R(P,B)\\to\\operatorname{Tor}_i^R(A^m,B)\\to\\operatorname{Tor}_i^R(P,B)$ whose composite is the identity. Thus $\\operatorname{Tor}_i^R(P,B)$ is a direct summand of the zero module $\\operatorname{Tor}_i^R(A^m,B)$ (Step 1), and is therefore zero for every $i>0$.",
+   "uses": [
+    "def-weil-pbc-tor-modules"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 08IB, lemma-compare-base-change: Tor-independent comparison of derived tensors"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-tor-modules"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 08IB, lemma-compare-base-change: Tor-independent comparison of derived tensors"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
-   "query": "finite projective module over an algebra Tor vanishing from Tor independent algebras",
-   "results": "Algebra.FormallyUnramified.projective_of_restrictScalars; Module.Projective.tensorProduct; no algebra Tor-independence statement",
+   "query": "finite projective module direct summand Tor vanishing from Tor independent algebras",
+   "results": "Module.free_of_lTensor_residueField_injective; Module.free_of_maximalIdeal_rTensor_injective; TensorProduct.forall_vanishesTrivially_iff_forall_fg_rTensor_injective; Module.Flat.tfae_equational_criterion; Module.Projective.tensorProduct; Algebra.FormallyUnramified.projective_of_restrictScalars; Module.Flat.iff_rTensor_injective; Module.Flat.of_projective; no Tor-independence theorem",
    "date": "2026-10-11",
    "verdict": "no match"
   },
   {
    "tool": "loogle",
-   "query": "Tor, Projective, direct summand",
+   "query": "Tor, Module.Projective, direct summand",
    "results": "0 hits; unknown identifier Tor",
    "date": "2026-10-11",
    "verdict": "no match"
   },
   {
    "tool": "grep",
-   "query": "isZero_Tor.*projective|Tor.*direct summand",
-   "results": "0 matches in Mathlib/CategoryTheory",
+   "query": "Tor.*direct summand|Tor.*finite projective in Mathlib",
+   "results": "0 matches in Mathlib",
    "date": "2026-10-11",
    "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "finite projective direct summand Tor vanishing under Tor independent algebras",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pc-tor-independent-projective-complex-tensor",
   "by": "worker",
   "date": "2026-10-11"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality"
+ "unit": "sk-thm-picard-duality",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-finite-projective-tor-acyclic",
+  "worker": "stage1",
+  "summary": "Split the Tor-vanishing claim into the finite-direct-sum computation for A^m and the split-retract argument for P. Both steps use only the Tor definition and its functoriality; no new node was needed.",
+  "blueprint": "Realizes the Tag 0AVW/08IB clause that Tor independence gives Tor-acyclicity for each finite projective term.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-fpt0039",
+  "group": "C1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-fpt0039 (reviewer sub-agent of L); spot-checked: Proof is the two-line argument: Step 1 additivity of Tor over finite direct sums derived elementarily from the resolution definition in def-weil-pbc-tor-modules (C1 ok: finite sum of projective resolutions, tensor/homology commute with finite sums); Step 2 split retract via functoriality clause of the same node. Statement gloss matches def-weil-pbc-tor-modules (projective-resolution homology, C4 ok). Citer lem-pc-tor-independent-projective-complex-tensor step 1 uses exactly this (Q^n finite projective summand of A^m, Tor_i^R(Q^n,B)=0). Duplicate check (class d): grepped tor node names; lem-sc-p1-tor-free-vanishing is the free/arbitrary-R case, not this; no duplicate. Mathlib: grep for Tor with biprod/sum, no single declaration. FIX more, RETURN less: B4 step 2 plain-text arrows rewritten in TeX (s: P to A^m, r: A^m to P, r s = id), with explicit citation of def-weil-pbc-tor-modules and Step 1.; 1 file(s) fixed by the reviewer"
+ }
 }
