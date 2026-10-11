@@ -242,5 +242,27 @@
   "worker": "stage1",
   "summary": "Read Stacks Morphisms 03J4 (definition-universally-bounded), 03J5 and its proof (line 15339), 03J7 (line 15422), the definition node def-weil-pbc-fibre-degree-bound, and how the citer lem-weil-pbc-flat-fp-lqf-bounded-stratification uses the item (steps 0, 3, 4, 6, 8, 9: finiteness of (X_T)_t and degree equal to that of X_{g(t)}), which the statement gives. Statement kept. Proof in 8 steps following 03J5: (X_T)_t is the base change of X_s along Spec kappa(t) -> Spec kappa(s) (lem-weil-pbc-fibre-of-base-change); X_s = Spec B, dim B = d (lem-weil-pbc-finite-over-field-affine-finite-dim); corner replacement by the universal property; (X_T)_t = Spec(B tensor kappa(t)) over kappa(t) (lem-weil-pbc-fibre-product-affine-spectra and uniqueness of fibre products); dimension by a basis tensored up (def-weil-vector-space-scalar-extension); finiteness (lem-weil-pbc-spec-finite-ring-map-finite, -isomorphism-finite, -finite-composition); global sections with their kappa(t)-structure (lem-weil-pbc-spec-map-global-sections); the bound (03J7). Every cited node exists; no new node was needed. Mathlib: no match (searches recorded); the source repository has Scheme.Hom.fiberDegree_of_isPullback (FiberDegree.lean:330, sorry-free) but only for morphisms affine globally, so it is not attached."
  },
- "reviewed": "Reviewed by L 2026-10-10: faithful to Morphisms 03J5/03J7; the fibre is identified with Spec(B tensor kappa(t)) through lem-weil-pbc-fibre-of-base-change, lem-weil-pbc-finite-over-field-affine-finite-dim and lem-weil-pbc-fibre-product-affine-spectra, the dimension through def-weil-vector-space-scalar-extension. No new nodes; no Mathlib match (Scheme.Hom.finrank_pullback_snd needs flatness)."
+ "reviewed": "Reviewed by L 2026-10-10: faithful to Morphisms 03J5/03J7; the fibre is identified with Spec(B tensor kappa(t)) through lem-weil-pbc-fibre-of-base-change, lem-weil-pbc-finite-over-field-affine-finite-dim and lem-weil-pbc-fibre-product-affine-spectra, the dimension through def-weil-vector-space-scalar-extension. No new nodes; no Mathlib match (Scheme.Hom.finrank_pullback_snd needs flatness).",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteFiberDegreeBaseChange",
+  "declaration": "AlgebraicGeometry.Scheme.Hom.finite_fiber_degree_pullback",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Hom.finite_fiber_degree_pullback",
+   "AlgebraicGeometry.Scheme.Hom.boundsFiberDegrees_pullback_snd"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteFiberDegreeBaseChange.lean",
+  "statement": "lemma finite_fiber_degree_pullback {X S T : Scheme.{u}} (f : X ⟶ S) (g : T ⟶ S) (t : T) (hf : IsFinite (f.fiberToSpecResidueField (g t))) : IsFinite ((pullback.snd f g).fiberToSpecResidueField t) ∧ ((pullback.snd f g).fiberToSpecResidueField t).finrankΓ = (f.fiberToSpecResidueField (g t)).finrankΓ",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-fdb1004",
+  "group": "M1",
+  "result": "pass",
+  "note": "X,S,T,f,g arbitrary = Scheme.{u}/⟶; X_T,f_T = pullback f g/pullback.snd; s=g t; X_s finite over κ(s) = IsFinite (f.fiberToSpecResidueField (g t)); degree = recorded finrankΓ (via BoundsFiberDegrees body); conclusions IsFinite + finrankΓ equality at t; n : ℕ bound = BoundsFiberDegrees f n -> BoundsFiberDegrees (pullback.snd f g) n; names #check'ed fully qualified"
+ }
 }
