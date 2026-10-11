@@ -70,5 +70,24 @@
   "group": "H1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-nft2316 (reviewer sub-agent of L); spot-checked: Statement verbatim vs blueprint node (order 396), B3 ok; X qcqs follows from S qcqs + X->S separated finite type, so FP(X/S) of def-nagata-finite-type-fp-model-system applies, and lemma-nagata-fixed-base-separated-stage-exists hypotheses (X->S separated, S qs) hold so alpha_sep is defined; stmt_deps both present; citers (def-nagata-final-fp-envelope, prop-nagata-finite-type-closed-in-fp, three sec-proper-base-change nodes) use the same Env_fp pair (C4); no other node defines Env_fp (class b); definition, no proof steps; no repairs needed; no fault missed by Second reading."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.NagataFinitePresentationEnvelope",
+  "declaration": "AlgebraicGeometry.nagataFinitePresentationEnvelope",
+  "file": "lean/Sheaf/AlgebraicGeometry/NagataFinitePresentationEnvelope.lean",
+  "statement": "def nagataFinitePresentationEnvelope {X S : Scheme.{u}} (f : X ⟶ S) [CompactSpace S] [QuasiSeparatedSpace S] [LocallyOfFiniteType f] [QuasiCompact f] [IsSeparated f] : Σ Y : Over S, X ⟶ Y.left",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-nfc1146"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-nfc1146",
+  "group": "K1",
+  "result": "fix",
+  "note": "S qcqs=[CompactSpace S][QuasiSeparatedSpace S]; separated finite type=[IsSeparated f][LocallyOfFiniteType f][QuasiCompact f]; X qcqs derived; FP(X/S)=choice of recorded Scheme.Hom.FinitePresentationApproximation (Type u index); alpha_sep=nagataSeparatedStage F.isLimit F.p i0 (M1 spelling); FIX: pair type Σ Y : Scheme, X ⟶ Y -> Σ Y : Over S, X ⟶ Y.left (X^fp keeps its structure map p.app alpha_sep, which citer prop-nagata-finite-type-closed-in-fp needs: 'the constructed morphism X^fp -> S'); tested that citer's statement (separated, LFP, qc of .1.hom, closed immersion .2, .2 ≫ .1.hom = f) is provable by unfolding; no sorry, axioms std"
  }
 }
