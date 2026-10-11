@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.Vanishing
 public import WeilConjectures.AlgebraicGeometry.Cohomology.LongExact
 public import WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Serre
@@ -266,14 +267,16 @@ lemma isNoetherian_of_isProper : IsNoetherian X := by
   exact {}
 
 include K in
-/-- On a proper scheme over a field all cohomology vanishes above some degree, by Grothendieck
-vanishing. -/
+/-- On a proper scheme over a field all quasi-coherent cohomology vanishes above some degree:
+above the number of affine opens in a finite affine open covering. -/
 lemma exists_forall_subsingleton_H :
-    ∃ D : ℕ, ∀ (M : X.Modules) (q : ℕ), D < q → Subsingleton (M.H q) := by
-  have := isNoetherian_of_isProper K (X := X)
-  obtain ⟨d, hd⟩ := exists_topologicalKrullDim_le (X ↘ Spec (.of K))
-  exact ⟨d, fun M q hq ↦ subsingleton_H_of_topologicalKrullDim_lt M
-    (hd.trans_lt (by exact_mod_cast hq))⟩
+    ∃ D : ℕ, ∀ (M : X.Modules) [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) M]
+      (q : ℕ), D < q → Subsingleton (M.H q) := by
+  have := QuasiCompact.compactSpace_of_compactSpace (X ↘ Spec (.of K))
+  have : IsSeparated (terminal.from X) := by
+    rw [← terminal.comp_from (X ↘ Spec (.of K))]
+    infer_instance
+  exact exists_forall_subsingleton_H_of_isQuasicoherent
 
 omit [IsProper (X ↘ Spec (.of K))] in
 /-- The Euler characteristic of the zero module is zero. -/

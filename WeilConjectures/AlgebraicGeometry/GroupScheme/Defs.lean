@@ -202,22 +202,6 @@ noncomputable instance (G : Over (Spec (.of K))) [GrpObj G] [IsCommMonObj G] (n 
     GrpObj (torsionSubgroupScheme G n) :=
   inferInstanceAs (GrpObj (GrpObj.ker (𝟙 G ^ n)))
 
-/-- The `K`-points of the `n`-torsion subgroup scheme `G[n]` of a commutative group scheme `G`
-are the `n`-torsion points of `G`: the `n`-torsion of the group `G(K)`, written additively, is
-in bijection with `𝟙_ (Over (Spec (.of K))) ⟶ G[n]`, a point `x` of `G[n]` corresponding to
-its image `x ≫ GrpObj.kerι (𝟙 G ^ n)` in `G(K)`. -/
-noncomputable def torsionByEquiv (G : Over (Spec (.of K))) [GrpObj G] [IsCommMonObj G] (n : ℕ) :
-    AddSubgroup.torsionBy (Additive (𝟙_ (Over (Spec (.of K))) ⟶ G)) (n : ℤ) ≃
-      (𝟙_ (Over (Spec (.of K))) ⟶ torsionSubgroupScheme G n) :=
-  (Equiv.subtypeEquiv (p := fun x ↦ x ∈ AddSubgroup.torsionBy _ (n : ℤ))
-    (q := fun x ↦ x ∈ MonoidHom.ker (IsMonHom.monoidHom (𝟙 G ^ n) (𝟙_ _))) Additive.toMul
-    fun x ↦ by
-      rw [MonoidHom.mem_ker, AddSubgroup.torsionBy, Submodule.mem_toAddSubgroup,
-        Submodule.mem_torsionBy_iff, natCast_zsmul]
-      change n • x = 0 ↔ x.toMul ≫ 𝟙 G ^ n = 1
-      rw [comp_pow, Category.comp_id]
-      rfl).trans (GrpObj.kerRepresentableBy (𝟙 G ^ n)).homEquiv.symm
-
 /-- The inclusion `G[n] ⟶ G` of the `n`-torsion subgroup scheme, that is,
 `CategoryTheory.GrpObj.kerι (𝟙 G ^ n)`. -/
 noncomputable def torsionSubgroupScheme.ι (G : Over (Spec (.of K))) [GrpObj G] (n : ℕ) :
@@ -258,6 +242,16 @@ noncomputable def torsionByPointsEquiv (G : Over (Spec (.of K))) [GrpObj G] [IsC
       change n • x = 0 ↔ x.toMul ≫ 𝟙 G ^ n = 1
       rw [comp_pow, Category.comp_id]
       rfl).trans (GrpObj.kerRepresentableBy (𝟙 G ^ n)).homEquiv.symm
+
+/-- The `K`-points of the `n`-torsion subgroup scheme `G[n]` of a commutative group scheme `G`
+are the `n`-torsion points of `G`: the `n`-torsion of the group `G(K)`, written additively, is
+in bijection with `𝟙_ (Over (Spec (.of K))) ⟶ G[n]`, a point `x` of `G[n]` corresponding to
+its image `x ≫ GrpObj.kerι (𝟙 G ^ n)` in `G(K)`. This is the case `T = Spec K` of
+`AlgebraicGeometry.torsionByPointsEquiv`. -/
+noncomputable def torsionByEquiv (G : Over (Spec (.of K))) [GrpObj G] [IsCommMonObj G] (n : ℕ) :
+    AddSubgroup.torsionBy (Additive (𝟙_ (Over (Spec (.of K))) ⟶ G)) (n : ℤ) ≃
+      (𝟙_ (Over (Spec (.of K))) ⟶ torsionSubgroupScheme G n) :=
+  torsionByPointsEquiv G n (𝟙_ _)
 
 @[simp]
 theorem torsionByPointsEquiv_comp_ι (G : Over (Spec (.of K))) [GrpObj G] [IsCommMonObj G]
