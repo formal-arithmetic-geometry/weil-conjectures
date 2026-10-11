@@ -168,5 +168,23 @@
   "worker": "stage1",
   "summary": "Expanded 032G via the existing 0307 Mathlib leaf: explicitly identified the unchanged fraction field and localizations of extension fields, and proved finite generation by the displayed generator calculation. No new nodes, no additional Noetherian or separability hypotheses. Normalized doubled TeX escapes.",
   "blueprint": "Realizes the N-2 localization ingredient of the Nagata-localization chain below step 4 (normality of the strict henselization) of blueprint lem-weil-pbc-normal-constant-generic, through the existing blueprint.from.via list. Proof follows 032G via 0307. Whole-blueprint searches for 032G and localization N-2 returned no matching imported node; same_as remains []."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.LocalizationJapaneseDomain",
+  "declaration": "localization_isN1_isN2",
+  "file": "lean/Sheaf/RingTheory/LocalizationJapaneseDomain.lean",
+  "statement": "theorem localization_isN1_isN2 (R : Type u) (K : Type v) [CommRing R] [IsDomain R] [Field K] [Algebra R K] [IsFractionRing R K] (S : Submonoid R) (hS : (0 : R) ∉ S) : ∃ (hD : IsDomain (Localization S)) (a : Algebra (Localization S) K), letI := hD letI := a ∃ (hF : IsFractionRing (Localization S) K), letI := hF IsScalarTower R (Localization S) K ∧ Function.Injective (algebraMap (Localization S) K) ∧ (∀ (r : R) (s : S), algebraMap (Localization S) K (IsLocalization.mk' (Localization S) r s) = algebraMap R K r / algebraMap R K (s : R)) ∧ (IsN1 R K → IsN1 (Localization S) K) ∧ (IsN2 R K → IsN2 (Localization S) K)",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-lnd1112",
+  "group": "H1",
+  "result": "pass",
+  "note": "R domain/K fraction field via IsFractionRing; S Submonoid with 0∉S; Localization S (= LocalizedModule S R defeq); conclusions: IsDomain, canonical map pinned by mk' r s ↦ r/s formula + scalar tower, injective, IsFractionRing (Localization S) K, N-1 and N-2 implications with recorded IsN1/IsN2"
  }
 }
