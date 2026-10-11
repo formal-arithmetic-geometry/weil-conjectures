@@ -5308,3 +5308,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 15:53 L: merged deliver/S1/lem-sc-valuation-closed-fibre-section-vanishing (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.ValuationClosedFibreSectionVanishing AlgebraicGeometry.Scheme.Modules.exists_nonzero_maximalIdeal_section_eq_zero)
 - 15:53 L: merged deliver/S1/lem-weil-pbc-symmetric-degree-exact (stage 2; reviewer PASS; first push; Sheaf.LinearAlgebra.SymmetricAlgebra.DegreeExact SymmetricAlgebra.symmetric_degree_exact)
 - 15:53 L: merged deliver/P1/lemma-nagata-qc-open-descends (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.NagataQCOpenDescentSpec AlgebraicGeometry.nagataQCOpenDescent_spec)
+- 15:53 L: merged deliver/T1/lem-pc-ringed-spaces-derived-adjoint-general (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.RingedSpaceDerivedAdjunctionGeneral AlgebraicGeometry.RingedSpace.derivedModulePullback_adjunction)

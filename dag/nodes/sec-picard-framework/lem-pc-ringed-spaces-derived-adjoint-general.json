@@ -166,5 +166,23 @@
   "group": "J1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-rda2039 (reviewer sub-agent of L); spot-checked: Statement: Tag 079W for an arbitrary morphism of ringed spaces; not a restatement of lem-pc-ringed-spaces-derived-adjoint (that node is for morphisms of schemes with scheme-level def-pc-derived-pullback/direct-image; this one is the general ringed-space form with Rg_* from def-pc-ringed-spaces-derived-direct-image); naturality stated as bifunctorial bijections. E7 change (morphism citation corrected to def-weil-locally-ringed-space-morphism) is named in the second reading. Step 1 (008A/008Y composite adjunction) and Step 3 checked; K-injective resolutions cited (def-pc-ringed-spaces-derived-direct-image, prop-pur-kinjective-resolutions-exist). Tool uses accepted as generic. FIX more, RETURN less: (1) C1 Step 2: Lg^* being the left derived functor of the underived pullback needed K-flat resolutions to exist and g^{-1} of a K-flat complex to be K-flat over g^{-1}B, neither cited (missed by the second reading); now cites lem-pc-kflat-resolution and lem-pc-kflat-pullback-preservation (applied to (g,id):(X,g^{-1}B)->(Y,B)), added to uses/proof_deps and tool_uses. (2) stmt_deps lacked def-weil-locally-ringed-space-morphism cited by the changed statement; added.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RingedSpaceDerivedAdjunctionGeneral",
+  "declaration": "AlgebraicGeometry.RingedSpace.derivedModulePullback_adjunction",
+  "file": "lean/Sheaf/AlgebraicGeometry/RingedSpaceDerivedAdjunctionGeneral.lean",
+  "statement": "theorem derivedModulePullback_adjunction {X Y : RingedSpace.{u}} [HasDerivedCategory.{wX} (SheafOfModules.{u} (moduleRings X))] [HasDerivedCategory.{wY} (SheafOfModules.{u} (moduleRings Y))] (g : X ⟶ Y) : ∃ (P : SheafOfModules.{u} (moduleRings Y) ⥤ SheafOfModules.{u} (moduleRings X)) (h : ∀ M : SheafOfModules.{u} (moduleRings Y), P.obj M = SheafOfModules.changeOfRings.{u, u, u} (CochainComplex.tensorPullbackRingMap g.hom.base X.sheaf Y.sheaf ⟨g.hom.c⟩) (TopCat.Sheaf.inverseImageModule g.hom.base Y.sheaf M)) (_ : ∀ {M N : SheafOfModules.{u} (moduleRings Y)} (a : M ⟶ N), P.map a = eqToHom (h M) ≫ SheafOfModules.changeOfRingsHom.{u, u, u} (CochainComplex.tensorPullbackRingMap g.hom.base X.sheaf Y.sheaf ⟨g.hom.c⟩) (TopCat.Sheaf.inverseImageModule g.hom.base Y.sheaf M) (TopCat.Sheaf.inverseImageModuleMap g.hom.base Y.sheaf M a) ≫ eqToHom (h N).symm) (_ : P.Additive), ∃ (L : DerivedCategory (SheafOfModules.{u} (moduleRings Y)) ⥤ DerivedCategory (SheafOfModules.{u} (moduleRings X))) (ε : DerivedCategory.Qh ⋙ L ⟶ P.mapHomotopyCategory (ComplexShape.up ℤ) ⋙ DerivedCategory.Qh), L.IsLeftDerivedFunctor ε (HomotopyCategory.quasiIso (SheafOfModules.{u} (moduleRings Y)) (ComplexShape.up ℤ)) ∧ (∀ K : CochainComplex (SheafOfModules.{u} (moduleRings Y)) ℤ, K.IsKFlat → IsIso (ε.app ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj K))) ∧ Nonempty (L ⊣ derivedModuleDirectImage g)",
+  "branch": "sheaf-dag",
+  "by": "T1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "T1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }
