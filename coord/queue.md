@@ -1,11 +1,11 @@
 # Work queue
 
-434 items; claim with `tools/claim.py next <group> [--stage N]`.
+433 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (434)
+## Stage 2: nodes to state (433)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -47,7 +47,6 @@
 | `lem-weil-pbc-pair-henselization` | 1 | state |
 | `lem-weil-pbc-polynomial-ideal-coefficients-monomial` | 1 | state |
 | `lem-weil-pbc-popescu-delocalize-weak-localization-smooth` | 1 | state |
-| `lem-weil-pbc-popescu-desingularize` | 1 | state |
 | `lem-weil-pbc-popescu-desingularize-lifting-apply` | 1 | state |
 | `lem-weil-pbc-popescu-height-zero-auxiliary-algebra-localizations` | 1 | state |
 | `lem-weil-pbc-popescu-lift-nilpotent` | 1 | state |
