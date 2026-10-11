@@ -5311,3 +5311,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 15:53 L: merged deliver/T1/lem-pc-ringed-spaces-derived-adjoint-general (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.RingedSpaceDerivedAdjunctionGeneral AlgebraicGeometry.RingedSpace.derivedModulePullback_adjunction)
 - 15:54 L: merged deliver/U1/lem-pc-ringed-space-sheafification-cohomology (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.RingedSpaceSheafificationCohomology AlgebraicGeometry.RingedSpace.sheafification_cohomology)
 - 15:54 L: merged deliver/U1/lem-weil-pbc-symmetric-product-finite (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.SymmetricProductFinite AlgebraicGeometry.symmetricProduct_finite)
+- 15:54 L: merged deliver/U1/lem-weil-pbc-symmetric-product-over-base (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.SymmetricProductOverBase AlgebraicGeometry.symmetricProduct_over_base)
