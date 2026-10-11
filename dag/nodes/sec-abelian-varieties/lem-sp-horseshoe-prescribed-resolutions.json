@@ -142,5 +142,24 @@
   "group": "H1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-hpr2338 (reviewer sub-agent of L); spot-checked: Statement prescribes both outer resolutions, indices q>=0 and augmentations as used by lem-sp-cartan-eilenberg-exists (C4 ok; it only needs the A-side prescribed, both is stronger). Not a restatement of lem-weil-pbc-injective-resolution-ses (b: that one only asserts some three resolutions exist; this one fixes the outer two). Mathlib grep 'horseshoe': 0 hits. FIX more, RETURN less: (1) C5/C1 all four steps cited the statement of lem-weil-pbc-injective-resolution-ses for its proof (pushout/cokernel induction), which its existence-only statement cannot give with prescribed ends, and injectivity was not cited; rewrote the proof degree by degree (extension through f via injectivity of I_A^n [def-sp-injective-resolutions], I_B^n=I_A^n+I_C^n, snake lemma [lem-weil-pbc-snake-lemma-abelian] for the cokernel sequence, induction with prescribed e_A^n,e_C^n, verification), proof_deps and tool_uses changed accordingly (dropped lem-weil-pbc-injective-resolution-ses). (2) source.place still attributed a nonexistent 'last sentence' to 013T although the second reading said it was corrected; corrected source and proof_origin.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.Abelian.HorseshoePrescribedResolutions",
+  "declaration": "CategoryTheory.InjectiveResolution.exists_horseshoe_prescribed_resolutions",
+  "file": "lean/Sheaf/CategoryTheory/Abelian/HorseshoePrescribedResolutions.lean",
+  "statement": "theorem exists_horseshoe_prescribed_resolutions {C : Type u} [Category.{v} C] [Abelian C] [EnoughInjectives C] (S : ShortComplex C) (hS : S.ShortExact) (IA : InjectiveResolution S.X₁) (IC : InjectiveResolution S.X₃) : ∃ (IB : InjectiveResolution S.X₂) (α : IA.cocomplex ⟶ IB.cocomplex) (β : IB.cocomplex ⟶ IC.cocomplex), IA.ι ≫ α = (CochainComplex.single₀ C).map S.f ≫ IB.ι ∧ IB.ι ≫ β = (CochainComplex.single₀ C).map S.g ≫ IC.ι ∧ ∃ (hαβ : α ≫ β = 0), ∀ n : ℕ, ((ShortComplex.mk α β hαβ).map (HomologicalComplex.eval C (ComplexShape.up ℕ) n)).ShortExact ∧ ∃ e : IB.cocomplex.X n ≅ IA.cocomplex.X n ⊞ IC.cocomplex.X n, α.f n ≫ e.hom = biprod.inl ∧ β.f n = e.hom ≫ biprod.snd",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-hpr1305"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-hpr1305",
+  "group": "C1",
+  "result": "fix",
+  "note": "abelian+EnoughInjectives, S.ShortExact, prescribed IA/IC as InjectiveResolution data, ∃ IB α β, augmentation squares = H1 extMk_resolution_connecting_eq_triangle form, ℕ-indexing = vanishing n<0 incl. n=0, biproduct parenthetical as ∃ iso with inl/snd; Mathlib grep horseshoe 0 hits so existing:false. FIX: rows restated from per-degree ∃ hn : α.f n ≫ β.f n = 0 to global ∃ hαβ : α ≫ β = 0 with (ShortComplex.mk α β hαβ).map (eval n) ShortExact, the form of landed H1 b5e12db53 and sibling K1 exists_compatible_nullHomotopies"
  }
 }
