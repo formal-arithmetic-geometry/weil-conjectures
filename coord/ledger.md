@@ -5529,3 +5529,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 18:22 L: merged deliver/F1/lem-weil-pbc-site-filtered-colimit-sections-finite-coverings (stage 2; reviewer PASS; first push; Sheaf.CategoryTheory.SiteFilteredColimitSections CategoryTheory.siteFilteredColimit_sections_bijective)
 - 18:23 L: merged deliver/F1/lem-weil-pbc-site-pullback-abelian-exact (stage 2; reviewer PASS; first push; Sheaf.CategoryTheory.SitePullbackAbelianExact CategoryTheory.sitePullback_abelian_exact)
 - 18:23 L: merged deliver/G1/lem-weil-pbc-zariski-open-restriction-injectives (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.ZariskiOpenRestrictionInjectives AlgebraicGeometry.zariski_open_restriction_injectives)
+- 18:23 L: merged deliver/H1/lem-pc-sites-module-sheafification-tensor (stage 2; reviewer PASS; first push; Sheaf.Algebra.Category.ModuleCat.Presheaf.SheafificationTensor PresheafOfModules.exists_sheafificationTensorIso)
