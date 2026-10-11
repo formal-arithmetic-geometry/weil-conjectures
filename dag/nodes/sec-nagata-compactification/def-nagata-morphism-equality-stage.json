@@ -128,5 +128,27 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-nme2738 (reviewer sub-agent of L); spot-checked: 21:52 points: (1) E setting now stated (directed I, affine transitions, S=lim, S_lambda0 qcqs, X,Y fp) - repaired; (2) consistent with G1 re-push 564db66bc (opens of a scheme qcqs over S_lambda0 with equal inverse images; X_lambda0 fits); (3) C4 equalizer step now cites lem-pc-filtered-colimit-commrings-elementwise clause (2) - repaired. FIX more, RETURN less: (a) C4/E 'finite affine cover of the common inverse image' used W_{1,lambda}=W_{2,lambda}, which def-nagata-qc-open-equality-stage does not state (its u(F) property is separate): cover W_{1,lambda} cap W_{2,lambda} instead (qc as X_lambda qcqs) and name x,y as the pullbacks of b along the two composites; (b) 'chosen lifts' replaced by the images of x,y at stage mu; (c) justified qc of W_i (phi quasi-compact: X qc, Y qs), affineness of U_{jkl,mu} and the colimit identification via lem-weil-pbc-spec-colimit-limit plus uniqueness of limits; (d) removed lemma-nagata-filtered-colimit-finite-data from stmt_deps (no longer used).; 1 file(s) fixed by the reviewer"
  },
- "lead_note": "2026-10-10 L (R-nme2738): consistent with G1's re-pushed def-nagata-qc-open-equality-stage (564db66bc): applied with X_lambda0 (qcqs over S_lambda0 by finite presentation) in the role of its Y_lambda0; stage only meaningful once that re-push merges"
+ "lead_note": "2026-10-10 L (R-nme2738): consistent with G1's re-pushed def-nagata-qc-open-equality-stage (564db66bc): applied with X_lambda0 (qcqs over S_lambda0 by finite presentation) in the role of its Y_lambda0; stage only meaningful once that re-push merges",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.NagataMorphismEqualityStage",
+  "declaration": "AlgebraicGeometry.nagataMorphismEqualityStage",
+  "file": "lean/Sheaf/AlgebraicGeometry/NagataMorphismEqualityStage.lean",
+  "statement": "def nagataMorphismEqualityStage {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I] {D : Iᵒᵖ ⥤ Scheme.{u}} {c : Cone D} {hc : IsLimit c} [∀ {i j : Iᵒᵖ} (f : i ⟶ j), IsAffineHom (D.map f)] {i₀ : I} [CompactSpace (D.obj (op i₀))] [QuasiSeparatedSpace (D.obj (op i₀))] {X₀ Y₀ : Scheme.{u}} [CompactSpace X₀] [QuasiSeparatedSpace X₀] {p : X₀ ⟶ D.obj (op i₀)} {q : Y₀ ⟶ D.obj (op i₀)} [LocallyOfFinitePresentation p] [QuasiCompact p] [QuasiSeparated p] [LocallyOfFinitePresentation q] [QuasiCompact q] [QuasiSeparated q] {phi psi : X₀ ⟶ Y₀} {hphi : phi ≫ q = p} {hpsi : psi ≫ q = p} {d : I → I → I} {r : LinearOrder I} (data : NagataMorphismEqualityStageData D c hc i₀ p q phi psi hphi hpsi d r) : I",
+  "branch": "sheaf-dag",
+  "by": "T1",
+  "date": "2026-10-12",
+  "existing": false,
+  "declarations": [
+   "AlgebraicGeometry.NagataMorphismEqualityStageData",
+   "AlgebraicGeometry.nagataMorphismEqualityStage"
+  ]
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-sub-D",
+  "group": "T1",
+  "result": "pass",
+  "note": "stage = directedFiniteUpperBound i0 d r of {i0, all lambda_jk, all mu_jklb} as the node; choice data as a record: T_j, V_jk over T_j with f.p. ring maps, generators G_jk (subring closure), W1,W2 = phi/psi preimages with lambda_jk forced equal to the landed nagataQCOpenEqualityStage, affine cover U_jkl of the intersection in X_lambda (baseChangeDiagram), phiU/psiU factorizations, mu in Over(op lambda_jk) with equality of the two pullbacks of each b on U x_{S_lambda} S_mu; binders: directed nonempty preorder, affine transitions, limit cone, S_i0 qcqs, p,q finite presentation, phi,psi over S_i0, equal base change as fst-composites; no sorry, compile 3.2 s. Existence of the data is not asserted (left to citers)"
+ }
 }
