@@ -5585,3 +5585,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 18:41 L: merged deliver/C1/lem-weil-pbc-site-extension-by-zero-presheaf-adjoint (stage 2; reviewer PASS; first push; Sheaf.CategoryTheory.SiteExtensionByZeroPresheafAdjoint CategoryTheory.siteExtensionByZeroPresheaf_adjunction)
 - 18:41 L: merged deliver/E1/lem-weil-pbc-site-cech-vanishing-criterion (stage 2; reviewer PASS; first push; Sheaf.CategoryTheory.SiteCechVanishingCriterion CategoryTheory.Sheaf.isZero_H'_of_siteCech_vanishing)
 - 18:41 L: merged deliver/E1/def-weil-pbc-sets-extension-by-empty (stage 2; reviewer FIX; first push; Sheaf.Topology.SetsExtensionByEmpty TopCat.extensionByEmpty)
+- 18:41 L: merged deliver/E1/lem-weil-pbc-site-system-strictification (stage 2; reviewer PASS; first push; Sheaf.CategoryTheory.SiteSystemStrictification CategoryTheory.exists_site_system_strictification)
