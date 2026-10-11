@@ -302,7 +302,11 @@ theorem topologicalKrullDim_eq_of_smoothOfRelativeDimension {K : Type u} [Field 
 open Limits in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- **Affine space is smooth** (blueprint `sbc-lem-affine-space-smooth`). The affine space
-`𝔸(n; S)` over `S` in finitely many variables is smooth of relative dimension `#n` over `S`. -/
+`𝔸(n; S)` over `S` in finitely many variables is smooth of relative dimension `#n` over `S`.
+
+The affine space of blueprint `def-sbc-affine-space` is Mathlib's `AlgebraicGeometry.AffineSpace`,
+and the smooth morphisms (of relative dimension `n`) of blueprint `def-sbc-smooth-morphisms` are
+Mathlib's `AlgebraicGeometry.Smooth` and `AlgebraicGeometry.SmoothOfRelativeDimension`. -/
 instance AffineSpace.smoothOfRelativeDimension_over (n : Type u) [Finite n] (S : Scheme.{u}) :
     SmoothOfRelativeDimension (Nat.card n) (𝔸(n; S) ↘ S) :=
   have := smoothOfRelativeDimension_isStableUnderBaseChange (n := Nat.card n)

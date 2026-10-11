@@ -65,6 +65,13 @@ The proof is the second, shorter proof of the Stacks Project.
 Compare `AlgebraicGeometry.Etale.isIso_baseChange_of_isProper`, the proper base change
 theorem, in which the roles of the two legs of the square are exchanged.
 
+The seams of the argument (blueprint `sk-rem-seams`, `rem-seams`): a first failure in degree `q`
+produces a universal curve-test datum with `R^q h_* (ℤ/dℤ) ≠ 0`
+(`AlgebraicGeometry.Etale.exists_curveTestDatum`), while the curve-test lane makes this sheaf
+vanish (`AlgebraicGeometry.Etale.CurveTestDatum.isZero_higherDirectImage_constantSheaf`), using
+the field-extension invariance, the torsor translation and the spreading of Galois covers in
+degree one only. These are Stacks 0F06, 0F07, 0F08 and the theorem is Stacks 0EYU.
+
 ## Main statements
 
 - `AlgebraicGeometry.Etale.baseChangeProperty_of_smooth_of_relativeDimension_one`: the
