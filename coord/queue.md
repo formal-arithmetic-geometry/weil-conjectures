@@ -1,11 +1,11 @@
 # Work queue
 
-1011 items; claim with `tools/claim.py next <group> [--stage N]`.
+1008 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (1011)
+## Stage 2: nodes to state (1008)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -36,7 +36,6 @@
 | `lem-exc-rg-discrete-modules-functorial-injective-embeddings` | 1 | state |
 | `lem-exc-rg-open-stabilizer-adjoint` | 1 | state |
 | `lem-fin-dense-normal-open` | 1 | state |
-| `lem-galois-constant-sheaf-sets-representable` | 1 | state |
 | `lem-galois-descent` | 1 | state |
 | `lem-galois-descent-datum-diagonal-identity` | 1 | state |
 | `lem-galois-fpqc-morphisms-descend` | 1 | state |
@@ -51,9 +50,6 @@
 | `lem-kun-support-geometric-point-independent` | 1 | state |
 | `lem-pc-affine-containment-ideal` | 1 | state |
 | `lem-pc-affine-flat-module-descent` | 1 | state |
-| `lem-pc-affine-flat-module-local-criterion` | 1 | state |
-| `lem-pc-affine-nonzerodivisor-complement-dense` | 1 | state |
-| `lem-pc-affine-surjective-structure-map-closed-immersion` | 1 | state |
 | `lem-pc-affine-tilde-kflat` | 1 | state |
 | `lem-pc-ample-affine-loci-criterion` | 1 | state |
 | `lem-pc-balanced-derived-tensor-model` | 1 | state |
@@ -354,6 +350,7 @@
 | `lem-weil-pbc-constant-sheaf-geometric-stalk` | 1 | state |
 | `lem-weil-pbc-constant-sheaf-sections-connected` | 1 | state |
 | `lem-weil-pbc-constant-sheaf-sections-locally-constant` | 1 | state |
+| `lem-weil-pbc-constant-sheaf-set-sections-connected-natural` | 1 | state |
 | `lem-weil-pbc-constant-subsheaf-generic` | 1 | state |
 | `lem-weil-pbc-constructible-in-retrocompact-open` | 1 | state |
 | `lem-weil-pbc-constructible-intersection-in-constructible` | 1 | state |
@@ -1021,7 +1018,7 @@
 | `lem-sc-normalization-properties` | 3 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 1144 nodes that wait for a statement dependency, 40 nodes that wait for stage 1.
+Not open yet: 1143 nodes that wait for a statement dependency, 40 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
