@@ -105,5 +105,22 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-dds1854 (reviewer sub-agent of L); spot-checked: Class b check: item statement equals lem-pc-derived-direct-image-preserves-direct-sums (qcqs f, all set-indexed families in D_QCoh, canonical comparison iso; Tag 08DZ both). Split is one citation of that node, C1/C4 hold. No cycle: F1 node created from lem-pc-noetherian-derived-direct-image-right-adjoint, its proof_deps do not include this item. Report and second reading claim a citations.json entry, but the diff touches only the node and report; harmless, no citation needed for a node-to-node step."
  },
- "lead_note": "2026-10-10 L (R-dds1854): Report/second reading claim citations.json was written; the branch diff has no citations.json change."
+ "lead_note": "2026-10-10 L (R-dds1854): Report/second reading claim citations.json was written; the branch diff has no citations.json change.",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.DerivedDirectImagePreservesDirectSums",
+  "declaration": "AlgebraicGeometry.derivedDirectImagePreservesDirectSums",
+  "statement": "theorem derivedDirectImagePreservesDirectSums {X Y : Scheme.{u₁}} (f : X ⟶ Y) [QuasiCompact f] [QuasiSeparated f] [HasDerivedCategory.{w₁} (SheafOfModules.{u₁} (moduleRings X.toRingedSpace))] [HasDerivedCategory.{w₂} (SheafOfModules.{u₁} (moduleRings Y.toRingedSpace))] : ∀ (I : Type u₁) (E : I → schemeDerivedQCohCategory X), PreservesColimit (Discrete.functor (fun i => (E i).obj)) (schemeDerivedDirectImage f)",
+  "branch": "sheaf-dag",
+  "by": "V1",
+  "date": "2026-10-11",
+  "existing": true,
+  "note": "Reuses the landed declaration for lem-pc-derived-direct-image-preserves-direct-sums. PreservesColimit of the discrete quasi-coherent family is equivalent to invertibility of the canonical direct-sum comparison (Mathlib PreservesCoproduct); ambient derived coproducts exist by lem-pc-derived-ambient-direct-sums."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-dds",
+  "group": "V1",
+  "result": "pass"
+ }
 }
