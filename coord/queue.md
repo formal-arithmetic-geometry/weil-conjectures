@@ -1,11 +1,11 @@
 # Work queue
 
-919 items; claim with `tools/claim.py next <group> [--stage N]`.
+914 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (919)
+## Stage 2: nodes to state (914)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -16,7 +16,6 @@
 | `lem-exc-field-discrete-modules` | 1 | state |
 | `lem-galois-pi1-finite-etale-image-stabilizer` | 1 | state |
 | `lem-kun-04ca` | 1 | state |
-| `lem-pc-base-change-product` | 1 | state |
 | `lem-pc-derived-adjoint-functors` | 1 | state |
 | `lem-pc-derived-tensor-transitivity` | 1 | state |
 | `lem-pc-filtered-colimit-derived-tensor` | 1 | state |
@@ -41,7 +40,6 @@
 | `lem-sc-ringed-space-restrict-injective-resolution` | 1 | state |
 | `lem-sc-smooth-proper-diagonal-conormal-differentials` | 1 | state |
 | `lem-sc-strict-henselization-dimension` | 1 | state |
-| `lem-sc-sylow-module-filtration` | 1 | state |
 | `lem-sc-tangent-map-linear` | 1 | state |
 | `lem-sc-tensor-generating-sections` | 1 | state |
 | `lem-sc-tensor-section-affine-open` | 1 | state |
@@ -50,15 +48,12 @@
 | `lem-sp-cart-eilenberg-left-exact-cohomology` | 1 | state |
 | `lem-sp-cartan-eilenberg-exists` | 1 | state |
 | `lem-sp-cartan-eilenberg-properties` | 1 | state |
-| `lem-sp-derived-couple-exact` | 1 | state |
 | `lem-sp-filtered-complex-ZB-description` | 1 | state |
 | `lem-sp-filtered-complex-associated-spectral-sequence-construction` | 1 | state |
 | `lem-sp-finite-filtration-induction` | 1 | state |
-| `lem-weil-degreewise-epi-kernel-cocone-qis` | 1 | state |
 | `lem-weil-derived-limit-existence` | 1 | state |
 | `lem-weil-geometrically-connected-check-after-extension` | 1 | state |
 | `lem-weil-l-adic-extension-integers-dvr` | 1 | state |
-| `lem-weil-pbc-adic-completion-noetherian` | 1 | state |
 | `lem-weil-pbc-adjunction-lifts-group-ring-objects` | 1 | state |
 | `lem-weil-pbc-affine-basic-set-difference` | 1 | state |
 | `lem-weil-pbc-affine-basic-sets-disjoint-refinement` | 1 | state |
