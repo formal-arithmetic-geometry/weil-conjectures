@@ -1,0 +1,120 @@
+{
+ "id": "def-sc-derived-global-scalar",
+ "kind": "definition",
+ "title": "Global functions acting on derived morphisms of module sheaves",
+ "status": "split",
+ "statement": "Let $X$ be a scheme [def-pc-scheme], and let $E,E\\prime\\in D(\\mathcal O_X)$ [def-pc-derived-category]. Encode a global function $f$ as a compatible family of local sections, equivalently as an element of $\\Gamma(X,\\mathcal O_X)$ by evaluation at the top open. The canonical scalar multiple $f\\alpha$ of a morphism $\\alpha:E\\to E\\prime$ is obtained by localizing the sectionwise scalar action on morphisms of module sheaves [def-pur-sheaf-modules-hom-module] to their derived category.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pur-sheaf-modules-hom-module"
+ ],
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 08EJ (Lemma 36.13.9), the expression f^n alpha and the global-function linearity in its proof"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "global.*scalar|scalar.*global|sectionsSubring",
+   "results": "0 hits: ",
+   "date": "2026-10-11",
+   "verdict": "no exact match; generic components reused"
+  },
+  {
+   "tool": "leansearch",
+   "query": "canonical action of global functions on morphisms in the derived category of module sheaves on a scheme",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory.Q, SMul",
+   "results": "0 hits: ",
+   "date": "2026-10-11",
+   "verdict": "no exact match; generic components reused"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "canonical action of global functions on morphisms in the derived category of module sheaves on a scheme",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.Hom.app_smul, AlgebraicGeometry.Scheme.Modules.Hom, AlgebraicGeometry.Scheme.Modules.map_smul, AlgebraicGeometry.Scheme.Modules.Hom.mapPresheaf, AlgebraicGeometry.Scheme.Modules.Hom.app, AlgebraicGeometry.Scheme.Modules.toPresheaf_map, AlgebraicGeometry.Scheme.Modules.mapPresheaf_app, SheafOfModules.sectionsMap",
+   "date": "2026-10-11",
+   "verdict": "no exact match; generic components reused"
+  },
+  {
+   "tool": "grep",
+   "query": "schemeDerivedScalar|global.*scalar|scalar.*global|sectionsSubring in WeilConjectures and lean/Sheaf; blueprint_refs.py search global scalar derived; rg -l global.*scalar|scalar.*global|multiplication by.*global dag/nodes",
+   "results": "No derived global-function scalar definition. def-pur-sheaf-modules-hom-module supplies the non-derived action and is reused. WeilConjectures Scheme.Modules.smulHom is non-derived and uses the distinct Scheme.Modules category instance. Mathlib DerivedCategory.Linear is the generic localization structure and is reused.",
+   "date": "2026-10-11",
+   "verdict": "no specialized definition; reuse shared components"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sc-perfect-into-support-on-T",
+  "date": "2026-10-11",
+  "group": "J1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "proper-flat support proof: the canonical global-function scalar action on derived morphisms, used in the power-annihilation conclusion",
+   "via": [
+    "lem-sc-perfect-into-support-on-T",
+    "lem-sc-affine-perfect-support-extension",
+    "lem-sc-perfect-support-map-lift",
+    "lem-sc-proper-flat-right-adjoint-open-support",
+    "lem-sc-proper-flat-right-adjoint-restriction-open",
+    "lem-sc-proper-flat-right-adjoint-basechange",
+    "lem-sc-smooth-proper-diagonal-basechange-upper-shriek",
+    "lem-sc-smooth-proper-diagonal-pushforward-structure",
+    "lem-sc-smooth-proper-relative-dualizing-general",
+    "lem-sc-smooth-proper-curve-dualizing",
+    "lem-sc-finite-duality-trace"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.DerivedGlobalScalar",
+  "declaration": "AlgebraicGeometry.schemeDerivedScalar",
+  "file": "lean/Sheaf/AlgebraicGeometry/DerivedGlobalScalar.lean",
+  "statement": "def schemeDerivedScalar (X : Scheme.{v}) [HasDerivedCategory.{z} (SheafOfModules.{v} (moduleRings X.toRingedSpace))] {E E' : schemeDerivedCategory X} (f : RingCat.sectionsSubring (X.sheaf.obj ⋙ forget₂ CommRingCat RingCat.{v})) (α : E ⟶ E') : E ⟶ E'",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-pst1543",
+  "group": "J1",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-pst1543",
+  "group": "J1",
+  "result": "fix",
+  "note": "qcqs as CompactSpace+QuasiSeparatedSpace; f global function as sectionsSubring with f.val (op ⊤) (= Γ(X,⊤)); E,E' in schemeDerivedQCohCategory, alpha any map; hE X.IsPerfect E.obj; support FIXED from IsZero of overFunctor-restriction to D(f) to landed M1 35947b58d form: every cohomology stalk Subsingleton for x ∉ X.zeroLocus {f} (T=V(f), checked ↔ x ∈ basicOpen by simp); ∃ n : ℕ, schemeDerivedScalar X (f^n) α.hom = 0; new def-sc-derived-global-scalar = homLinear (def-pur-sheaf-modules-hom-module) localized via Mathlib DerivedCategory.instLinear, no duplicate found, letI only in def body"
+ }
+}

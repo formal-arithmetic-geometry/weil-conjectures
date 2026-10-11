@@ -21,7 +21,8 @@
  "stmt_deps": [
   "def-pc-scheme",
   "def-pc-derived-category",
-  "def-pc-perfect-complex"
+  "def-pc-perfect-complex",
+  "def-sc-derived-global-scalar"
  ],
  "proof": [
   {
@@ -129,5 +130,24 @@
   "group": "C1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-pst2936 (reviewer sub-agent of L); spot-checked: Return points of 22:14 repaired: MV-for-Hom (lem-sc-derived-hom-mayer-vietoris, Tag 08BW, C4 ok: LES with preceding Ext^-1 term) and qcqs induction (lem-sc-invert-s-cohomology-induction, Tag 08DR) replace the false local-vanishing step; qcqs now used; affine case via finite projective model + stupid truncation is honest; C4 use in lem-sc-affine-perfect-support-extension (f^n alpha=0 on qc open U of affine, alpha=id_F) ok. FIX more, RETURN less: (1) E5/C5 globalization step rewritten explicitly (f^a alpha|_U=f^a alpha|_V=0 => f^a alpha=image of beta in Hom(E|UV,E'[-1]|UV), f^b beta=0 by P(U cap V), so f^{a+b} alpha=0; induction property P stated on qc opens); (2) affine step spelled out (Hom(P,M)=Hom_A(P,H^0 M) by projectivity; H^0(M)_f=0; truncation exponents add); (3) dropped unused Step 1 (RHom/adjunction, uncited Tag 08DH identification) and lem-sc-rhom-supported-qcoherent from proof_deps; steps reordered affine-then-glue. Second reading by C1 missed that Step 1 was dead and that Step 2 did not state the factorization through the U cap V term.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.PerfectIntoSupportPowerTorsion",
+  "declaration": "AlgebraicGeometry.Scheme.exists_pow_smul_eq_zero_of_perfect_supported",
+  "file": "lean/Sheaf/AlgebraicGeometry/PerfectIntoSupportPowerTorsion.lean",
+  "statement": "theorem exists_pow_smul_eq_zero_of_perfect_supported (X : Scheme.{u}) [CompactSpace X] [QuasiSeparatedSpace X] [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] [∀ U : X.Opens, HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))] (f : RingCat.sectionsSubring (X.sheaf.obj ⋙ forget₂ CommRingCat RingCat.{u})) (E E' : schemeDerivedQCohCategory X) (α : E ⟶ E') (hE : X.IsPerfect E.obj) (hSupport : ∀ (i : ℤ) (x : X), x ∉ X.zeroLocus (U := ⊤) {f.val (op ⊤)} → Subsingleton (↑(TopCat.Presheaf.stalk ((DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings X.toRingedSpace)) i).obj E'.obj).val.presheaf x))) : ∃ n : ℕ, schemeDerivedScalar X (f ^ n) α.hom = 0",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-pst1543"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-pst1543",
+  "group": "J1",
+  "result": "fix",
+  "note": "qcqs as CompactSpace+QuasiSeparatedSpace; f global function as sectionsSubring with f.val (op ⊤) (= Γ(X,⊤)); E,E' in schemeDerivedQCohCategory, alpha any map; hE X.IsPerfect E.obj; support FIXED from IsZero of overFunctor-restriction to D(f) to landed M1 35947b58d form: every cohomology stalk Subsingleton for x ∉ X.zeroLocus {f} (T=V(f), checked ↔ x ∈ basicOpen by simp); ∃ n : ℕ, schemeDerivedScalar X (f^n) α.hom = 0; new def-sc-derived-global-scalar = homLinear (def-pur-sheaf-modules-hom-module) localized via Mathlib DerivedCategory.instLinear, no duplicate found, letI only in def body"
  }
 }
