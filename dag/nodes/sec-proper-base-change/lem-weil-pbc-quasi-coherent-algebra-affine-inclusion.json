@@ -25,7 +25,8 @@
   "def-weil-sheaf-of-modules-category",
   "pqf-def-coherent",
   "def-weil-affine-spectrum",
-  "def-pc-fibre-product"
+  "def-pc-fibre-product",
+  "def-weil-pbc-comm-algebra-sheaf"
  ],
  "proof": [
   {
@@ -128,5 +129,24 @@
   "group": "D",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of D; spot-checked by L: L read the three steps against Constructions 01LN/01LO: the module base-change statement isolated as a self-contained new node, the cartesian square from the reviewed leaves lem-weil-pbc-fibre-product-affine-spectra and lem-weil-pbc-open-preimage-fibre-product, transitivity elementary. Correct; D's review here says what it checked (the first acceptable D delivery)."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.QuasiCoherentAlgebraAffineInclusion",
+  "declaration": "AlgebraicGeometry.quasi_coherent_algebra_affine_inclusion",
+  "file": "lean/Sheaf/AlgebraicGeometry/QuasiCoherentAlgebraAffineInclusion.lean",
+  "statement": "theorem quasi_coherent_algebra_affine_inclusion (S : Scheme.{u}) (A : S.CommAlgebraSheaf) (hA : A.toModule.IsQuasicoherent) : (∀ (U V : S.affineOpens) (hUV : U.1 ≤ V.1), IsPushout (A.hom.hom.app (op V.1)) (S.presheaf.map (homOfLE hUV).op) (A.right.obj.map (homOfLE hUV).op) (A.hom.hom.app (op U.1)) ∧ IsPullback (Spec.map (A.right.obj.map (homOfLE hUV).op)) (Spec.map (A.hom.hom.app (op U.1)) ≫ U.2.isoSpec.inv) (Spec.map (A.hom.hom.app (op V.1)) ≫ V.2.isoSpec.inv) (S.homOfLE hUV) ∧ IsOpenImmersion (Spec.map (A.right.obj.map (homOfLE hUV).op)) ∧ Set.range (Spec.map (A.right.obj.map (homOfLE hUV).op)).base = (Spec.map (A.hom.hom.app (op V.1)) ≫ V.2.isoSpec.inv).base ⁻¹' Set.range (S.homOfLE hUV).base) ∧ (∀ (U V W : S.affineOpens) (hUV : U.1 ≤ V.1) (hVW : V.1 ≤ W.1), Spec.map (A.right.obj.map (homOfLE hUV).op) ≫ Spec.map (A.right.obj.map (homOfLE hVW).op) = Spec.map (A.right.obj.map (homOfLE (hUV.trans hVW)).op)) ∧ (∀ U : S.affineOpens, Spec.map (A.right.obj.map (homOfLE (le_refl U.1)).op) = 𝟙 (Spec (A.right.obj.obj (op U.1))))",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-11",
+  "existing": false,
+  "note": "The tensor-map isomorphism is stated equivalently as IsPushout for the exact section-ring square; CommRingCat.isPushout_tensorProduct identifies its pushout with the tensor product and its comparison with a tensor r ↦ res(a) * σ_U(r). Uses the landed def-weil-pbc-comm-algebra-sheaf, added to stmt_deps."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-qai1427",
+  "group": "J1",
+  "result": "pass",
+  "note": "S : Scheme, A : S.CommAlgebraSheaf + A.toModule.IsQuasicoherent (STATE QC-algebra line, hA not instance-derivable); U V : S.affineOpens, U.1 ≤ V.1; (i) IsPushout σ_V res_O res_A σ_U = A(V)⊗_{O(V)}O(U) ≅ A(U) via isPushout_tensorProduct; (ii) IsPullback Spec res_A / Spec σ ≫ isoSpec.inv / S.homOfLE, IsOpenImmersion, range = preimage; (iii) Spec contravariant composition and identity; names #check'd to Mathlib"
  }
 }
