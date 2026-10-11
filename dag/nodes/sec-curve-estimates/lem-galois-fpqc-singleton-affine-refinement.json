@@ -148,5 +148,23 @@
   "group": "M1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-sar (reviewer sub-agent of L); spot-checked: Source: Stacks Topologies Lemma 022E (topologies-lemma-fpqc-affine, topologies.tex line 3151, read locally) and Definition 022B (line 2888); the item's statement (affine S, singleton fpqc {f}, finite affine opens X_j of X, coproduct X' affine, g=f h flat and surjective, {g} fpqc) is 022E for a one-member family plus the coproduct packaging, hypothesis by hypothesis; statement, stmt_deps, blueprint and maintainer fields unchanged, only proof/proof_deps/proof_origin/split_report/status changed. Step 1: def-weil-pbc-fpqc-covering applied to V=S gives flatness of f and affine opens V_j of X with union of images S (singleton family, so all V_j in X). Step 2: lem-weil-pbc-scheme-coproduct-family gives h with h iota_j=e_j and open coprojections covering X'; clause (4) of lem-weil-pbc-affine-morphism-permanence gives X' affine. Step 3: surjectivity from X'=union iota_j(X_j) and g iota_j=f|X_j (def-weil-surjective-morphism); flatness by identifying local rings along open immersions (def-weil-open-immersion, def-weil-flat-morphism), elementary from the cited statements. Step 4: lem-weil-pbc-morphism-affine-schemes-affine / pqf-def-affine-morphism give g^{-1}(U) affine for affine U, and surjectivity gives g(g^{-1}(U))=U, which is exactly the finite-image clause of def-weil-pbc-fpqc-covering. All cited nodes are mathlib/imported leaves whose statements I read and which say what each step takes (C1-C4); no off-unit tool use beyond generic definitions/leaves; no new nodes, no Mathlib leaf to verify. Small cases: S empty (m=0, X'=Spec 0, vacuous), f=id on affine S (m=1), f flat surjective of affines (X_1=X). Start 2026-10-10 Sat Oct 10 02:49:22 PM UTC 2026, end Sat Oct 10 02:49:44 PM UTC 2026."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FpqcSingletonAffineRefinement",
+  "declaration": "AlgebraicGeometry.Scheme.exists_fpqc_singleton_affine_refinement",
+  "file": "lean/Sheaf/AlgebraicGeometry/FpqcSingletonAffineRefinement.lean",
+  "statement": "theorem exists_fpqc_singleton_affine_refinement {X S : Scheme.{u}} [IsAffine S] (f : X ⟶ S) (hf : Presieve.singleton f ∈ fpqcPrecoverage S) : ∃ (n : ℕ) (U : Fin n → X.Opens), (∀ j, IsAffineOpen (U j)) ∧ (let X' := ∐ (fun j : Fin n ↦ (U j).toScheme); ∃ (h : X' ⟶ X) (g : X' ⟶ S), (∀ j, Sigma.ι (fun k ↦ (U k).toScheme) j ≫ h = (U j).ι) ∧ g = h ≫ f ∧ IsAffine X' ∧ Flat g ∧ Surjective g ∧ Presieve.singleton g ∈ fpqcPrecoverage S)",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-sar0641",
+  "group": "E1",
+  "result": "pass",
+  "note": "affine S = [IsAffine S]; singleton fpqc {f} = Presieve.singleton f ∈ fpqcPrecoverage S (propQCPrecoverage Flat: flat + QuasiCompactCover 022B + jointly surjective); m>=0 affine opens X_j of X = n : ℕ, U : Fin n → X.Opens, IsAffineOpen; X' = ∐ (U j).toScheme (Fin 0 allowed for empty S); h induced by open inclusions = Sigma.ι j ≫ h = (U j).ι; g = h ≫ f (h over S); IsAffine X', Flat g, Surjective g, {g} ∈ fpqcPrecoverage S; one universe u; docstring = node proof steps 1-4; no duplicate: QuasiCompactCover.exists_hom and source exists_finite_affine_flat_of_mem_fpqcTopology give abstract affine covers/sieve members, not opens of X with coproduct and h"
  }
 }
