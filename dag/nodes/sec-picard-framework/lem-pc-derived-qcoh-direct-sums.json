@@ -138,5 +138,27 @@
   "group": "F1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-dds1802 (reviewer sub-agent of L); spot-checked: Steps 1-3 against cited statements: ambient termwise sum + cohomology identity (07D9 + exactness of sums, 08DT proof), finite-subset directed system with binary-sum induction and directed-colimit closure, full-subcategory restriction of coproduct bijection; statement change (qcqs dropped) matches 08DT; new ambient node not a duplicate (no 07D9/derived-products node in DAG), not elementary; my grep of mathlib Algebra/Homology/DerivedCategory and HomotopyCategory for HasCoproducts: no match; no cycle with compact-generation/Brown representability (item cites neither); tool_uses of the two weil-pbc quasi-coherent module lemmas accepted as generic tools. No fault beyond second reading."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.DerivedQCohDirectSums",
+  "declaration": "AlgebraicGeometry.derivedQCohDirectSums",
+  "declarations": [
+   "AlgebraicGeometry.derivedQCohDirectSums"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/DerivedQCohDirectSums.lean",
+  "statement": "theorem derivedQCohDirectSums (X : Scheme.{u}) [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] : HasCoproducts.{u} (schemeDerivedQCohCategory X)",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-dqs1249"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-dqs1249",
+  "group": "M1",
+  "result": "fix",
+  "note": "X : Scheme.{u} (def-pc-scheme, Mathlib); shared HasDerivedCategory.{w} binder on SheafOfModules (moduleRings X.toRingedSpace); D_QCoh = landed schemeDerivedQCohCategory (E1 form, no fresh D on X.Modules); conclusion HasCoproducts.{u} with index in objects' universe, matching H1 derivedAmbientDirectSums and C1 compact-generation citation; no added qcqs hypothesis (08DT); empty/singleton families included; FIX: independent universe v -> u"
  }
 }
