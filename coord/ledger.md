@@ -4230,3 +4230,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 10:26 L: merged deliver/M1/lem-weil-pbc-finite-galois-receiving-separable-extensions (stage 2; reviewer PASS; first push; Sheaf.FieldTheory.FiniteGaloisReceivingSeparableExtensions finite_galois_receiving_separable_extensions)
 - 10:26 L: merged deliver/G1/lem-weil-pbc-finite-type-etale-finite-factor-decomposition (stage 2; reviewer PASS; first push; Sheaf.RingTheory.EtaleFiniteFactorDecomposition Algebra.exists_etale_finiteFactor_decomposition)
 - 10:26 L: merged deliver/C1/lem-pur-triangle-completion-ms6-05r9 (stage 2; reviewer FIX; first push; Sheaf.CategoryTheory.Triangulated.DenominatorTriangleCompletion CategoryTheory.denominator_triangle_completion)
+- 10:26 L: merged deliver/K1/lem-weil-pbc-finite-type-domain-dimension-local-ring (stage 2; reviewer PASS; first push; Sheaf.RingTheory.FiniteTypeDomainDimensionLocalRing finiteTypeDomain_ringKrullDim_localizationAtMaximal)

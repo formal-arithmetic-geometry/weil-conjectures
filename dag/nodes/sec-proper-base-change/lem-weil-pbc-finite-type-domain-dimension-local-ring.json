@@ -261,5 +261,23 @@
   "worker": "stage1",
   "summary": "Split following Stacks Algebra 00OS (algebra.tex line 27763), tags 00OS/00OQ/00OR/00OP verified in tags/tags. Mathlib has no statement that every maximal ideal of a finite type domain over a field has height dim S (only Ideal.exists_isMaximal_height: some maximal ideal), nor catenarity; the source repository has none either. Proof: S = k[x_1..x_n]/p (step 1, correspondence of primes); chains of P have length <= n via dim P_M = n (00OP/00OQ, existing node) (step 2); ht(M) = n (step 3); a longest chain below m is saturated from (0) to m, its preimage a maximal chain from p to M, so dim S_m = n - ht(p) by 00OR (new unsplit node) (step 4); dim S = n - ht(p) (step 5); the maximal-chain formulation (step 6). New nodes: lem-weil-pbc-polynomial-ring-maximal-chain-height-difference (00OR, unsplit) and lem-weil-pbc-proper-ideal-contained-in-maximal (00E0, Mathlib leaf Ideal.exists_le_maximal). Statement unchanged in substance; clarified 'maximal chain' and that the dimension is a non-negative integer."
  },
- "reviewed": "pass (L, 2026-10-10): 6 steps follow 00OS: chains in P = k[x] have length <= n (00OP/00OQ localization dimension, new leaf for maximal ideals), ht(M) = n, every maximal chain from p to M has length n - ht(p) (00OR, new unsplit node), so dim S_m = n - ht(p) = dim S. Statement wording clarified only."
+ "reviewed": "pass (L, 2026-10-10): 6 steps follow 00OS: chains in P = k[x] have length <= n (00OP/00OQ localization dimension, new leaf for maximal ideals), ht(M) = n, every maximal chain from p to M has length n - ht(p) (00OR, new unsplit node), so dim S_m = n - ht(p) = dim S. Statement wording clarified only.",
+ "lean": {
+  "module": "Sheaf.RingTheory.FiniteTypeDomainDimensionLocalRing",
+  "declaration": "finiteTypeDomain_ringKrullDim_localizationAtMaximal",
+  "file": "lean/Sheaf/RingTheory/FiniteTypeDomainDimensionLocalRing.lean",
+  "statement": "theorem finiteTypeDomain_ringKrullDim_localizationAtMaximal {k : Type u} [Field k] {S : Type v} [CommRing S] [Algebra k S] [Algebra.FiniteType k S] [IsDomain S] : (∀ (m : Ideal S) [m.IsMaximal], ringKrullDim (Localization.AtPrime m) = ringKrullDim S) ∧ (∃ (d : ℕ), ringKrullDim S = (d : WithBot ℕ∞) ∧ ∀ (p : LTSeries (PrimeSpectrum S)), IsMaxChain (fun q r : PrimeSpectrum S ↦ q ≤ r) (Set.range p) → p.length = d)",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-ftd1026",
+  "group": "K1",
+  "result": "pass",
+  "note": "field k, CommRing S, Algebra k S, Algebra.FiniteType, IsDomain; forall maximal m: ringKrullDim (Localization.AtPrime m) = ringKrullDim S; exists d:N with ringKrullDim S = d and every LTSeries with IsMaxChain (<=) range has length d (= no insertion before/between/after); no Mathlib/project equivalent found (grep Mathlib FiniteType+ringKrullDim, IsMaxChain in RingTheory)"
+ }
 }
