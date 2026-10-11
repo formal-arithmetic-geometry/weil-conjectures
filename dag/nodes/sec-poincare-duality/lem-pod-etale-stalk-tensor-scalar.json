@@ -149,5 +149,33 @@
   "group": "C1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ets2924 (reviewer sub-agent of L); spot-checked: Statement identical to sheaf-dag (K1/R-lts2812 restatement kept, no E7 revert); K1 steps use clauses (1),(2) exactly (C4 ok); sheafification-stalk node and def-weil-pbc-geometric-stalks checked. FIX more, RETURN less: (1) C4 Step 2/3 cited lem-weil-pbc-filtered-colimit-tensor-varying-rings, stated for a directed set, on the filtered category N^op of pointed etale neighbourhoods: replaced by lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered plus the elementary Tag 00DD two-way comparison on pure tensors; Step 3 naturality/coherence now on pure germs, uses []. (2) C4/E Step 4 applied the same commutative-rings lemma to noncommutative Lambda->Lambda': replaced by the direct balanced-map argument with the (Lambda',Lambda)-bimodule (left adjoint of restriction), Lambda'-linearity from the sheafification map. proof_deps updated. Second reading by C1 missed both.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleStalkTensorScalar",
+  "declaration": "AlgebraicGeometry.Scheme.etale_stalk_tensor_unique",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.etale_stalk_tensor_unique",
+   "AlgebraicGeometry.Scheme.etale_stalk_tensor_natural",
+   "AlgebraicGeometry.Scheme.etale_stalk_tensor_coherence",
+   "AlgebraicGeometry.Scheme.etale_scalar_extension_exists",
+   "AlgebraicGeometry.Scheme.etale_stalk_scalar_unique",
+   "AlgebraicGeometry.Scheme.etale_stalk_scalar_component_unique",
+   "AlgebraicGeometry.Scheme.etale_stalk_scalar_iteration"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleStalkTensorScalar.lean",
+  "statement": "theorem etale_stalk_tensor_unique (F G : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} R)) : (let p := (pointSmallEtale y).ulift.{u + 1} let T := p.sheafFiber (A := ModuleCat.{u + 1} R) letI : T.Monoidal := inferInstanceAs ((pointSmallEtale y).ulift.{u + 1}.sheafFiber (A := ModuleCat.{u + 1} R)).Monoidal letI := (sheafificationAdjunction Y.smallEtaleTopology (ModuleCat.{u + 1} R)).rightAdjointLaxMonoidal let P := fun f : T.obj F ⊗ T.obj G ⟶ T.obj (F ⊗ G) ↦ ∀ (U : Y.Etale) (x : p.fiber.obj U), (p.toPresheafFiber U x F.obj ⊗ₘ p.toPresheafFiber U x G.obj) ≫ f = (Functor.LaxMonoidal.μ (sheafToPresheaf Y.smallEtaleTopology (ModuleCat.{u + 1} R)) F G).app (op U) ≫ p.toPresheafFiber U x (F ⊗ G).obj (∃! f, P f) ∧ P (Functor.LaxMonoidal.μ T F G) ∧ IsIso (Functor.LaxMonoidal.μ T F G))",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-11",
+  "existing": false,
+  "note": "Seven sorry-only statements render the tensor and scalar clauses, including individual-map uniqueness and every coherence diagram. Noncommutative scalar extension is specified by its universal property E ⊣ ModuleCat.restrictScalars f, not by Mathlib.extendScalars (which requires commutative rings)."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-sts0938",
+  "group": "C1",
+  "result": "pass",
+  "note": "Y arbitrary scheme, Omega IsAlgClosed point (node's convention), stalks (pointSmallEtale y).ulift.{u+1}.sheafFiber as source StalkMonoidal; cl.1 CommRing R, germ predicate via mu(sheafToPresheaf), Exists-unique over all maps + P(mu) + iso, naturality, assoc/braid/both units, unit sheaf = constantSheaf (checked rfl); cl.2 Ring R,S arbitrary f, E left adjoint to restrictScalars, sheafify(F.obj comp E), germ eq at unit, nat-trans and componentwise uniqueness+iso, iteration via leftAdjointUniq with sheaf b pinned by sections and stalk square"
  }
 }
