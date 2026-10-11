@@ -25,9 +25,66 @@
   "def-pc-quasi-iso-modules",
   "def-pur-kinjective-complex"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For each indexed complex, take its mapping cone on the identity. The canonical inclusion into this cone is termwise monic, and the cone identity has a contracting homotopy by [lem-pur-kinjective-cone-contractible]; hence the identity and the zero morphism of the cone induce the same map on every cohomology object by [lem-weil-pbc-homotopic-maps-equal-cohomology] (b), so the cone is acyclic, and the inclusion becomes homotopic to zero after composing with the contracting homotopy.",
+   "uses": [
+    "lem-pur-kinjective-cone-contractible",
+    "def-pc-cochain-complex-modules",
+    "def-pc-acyclic-complex-modules",
+    "def-pur-kinjective-complex",
+    "lem-weil-pbc-homotopic-maps-equal-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/injectives.tex",
+    "place": "Lemma lemma-functorial-homotopies proof, first paragraph"
+   }
+  },
+  {
+   "text": "For a complex M, form the coproduct over all indexed complexes and all maps from them to M, and take the pushout of the resulting map to M along the chosen maps into the cones. The category of complexes is abelian and has the required small colimits because the Grothendieck category is abelian and has small colimits. The pushout universal property, applied to a morphism M → M', sends each summand indexed by w to the summand indexed by its composite with M → M', so it defines the action on morphisms; the universal property then proves identity and composition and gives the natural map j from M to the pushout.",
+   "uses": [
+    "def-sp-grothendieck-abelian",
+    "def-pc-cochain-complex-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/injectives.tex",
+    "place": "Lemma lemma-functorial-homotopies proof, pushout diagram"
+   }
+  },
+  {
+   "text": "In each degree, write the pushout in the abelian category as the cokernel of (a,-b) from the coproduct of the K_i into the coproduct of the L_i and M. The induced map from M is monic: if an element of M maps to zero in this cokernel, its image comes from the coproduct of the K_i, and monicity of each K_i → L_i makes that element already zero in M. The cokernel of this pushout map is the coproduct of the cokernels Q_i = coker(K_i → L_i), by taking the cokernel once more in this presentation. Each sequence 0 → K_i → L_i → Q_i → 0 is exact degreewise; the long exact cohomology sequence [lem-weil-pbc-complex-ses-homology-long-exact] gives Q_i acyclic because K_i and L_i are acyclic. Arbitrary coproducts are exact: express a coproduct as the filtered colimit of its finite partial coproducts and use exactness of filtered colimits; finite coproducts are exact in an abelian category. Therefore the coproduct of the Q_i is acyclic, so the cokernel of j is acyclic and, by [lem-weil-pbc-complex-ses-homology-long-exact] applied to the degreewise short exact sequence 0 → M → \\mathbf M(M) → coker(j) → 0, j induces isomorphisms on cohomology, hence is a quasi-isomorphism by [def-pc-quasi-iso-modules]. Finally, for an indexed map w:K_i → M, the pushout relation gives j ∘ w = b_i ∘ a_i, where a_i:K_i → L_i is the chosen cone inclusion and b_i:L_i → \\mathbf M(M) is the canonical map. Since a_i is homotopic to zero by the contracting homotopy in step 1, composition with b_i is homotopic to zero, proving the second clause.",
+   "uses": [
+    "def-sp-grothendieck-abelian",
+    "def-pc-acyclic-complex-modules",
+    "def-pc-quasi-iso-modules",
+    "lem-pur-kinjective-cone-contractible",
+    "def-pur-kinjective-complex",
+    "lem-weil-pbc-complex-ses-homology-long-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/injectives.tex",
+    "place": "Lemma lemma-functorial-homotopies proof, final paragraph"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-kinjective-cone-contractible",
+  "def-pc-cochain-complex-modules",
+  "def-pc-acyclic-complex-modules",
+  "def-pur-kinjective-complex",
+  "def-sp-grothendieck-abelian",
+  "def-pc-quasi-iso-modules",
+  "lem-weil-pbc-homotopic-maps-equal-cohomology",
+  "lem-weil-pbc-complex-ses-homology-long-exact"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/injectives.tex",
+  "place": "Lemma lemma-functorial-homotopies"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -52,12 +109,28 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pur-kinjective-degreewise-existence",
   "by": "worker",
   "date": "2026-10-11"
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-def-sf-operations"
+ "unit": "sk-def-sf-operations",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pur-kinjective-functorial-homotopies",
+  "worker": "stage1",
+  "summary": "Split the Stacks functorial-homotopies construction into the cone-contractibility ingredient and three explicit steps covering the pushout functor, its termwise monomorphic quasi-isomorphism, and the null-homotopy property.",
+  "blueprint": "Realizes the Lemma lemma-functorial-homotopies construction cited by the parent blueprint node def-weil-derived-pullback-tensor-hom.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-kfh0054",
+  "group": "K1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-kfh0054 (reviewer sub-agent of L); spot-checked: Read Stacks lemma-functorial-homotopies (injectives.tex 1704-1741): statement matches clause by clause; Mathlib homotopyToZeroOfId at Pretriangulated.lean:93 exact (variable K, Homotopy (1 (mappingCone (1 K))) 0); citer lem-pur-kinjective-degreewise-existence uses the functor M, termwise-mono j and clause (2) only; no duplicate functorial-homotopies/cone-contractible node. FIX more, RETURN less: (1) C1 step 3 used the long exact cohomology sequence uncited (Q_i acyclic; acyclic cokernel => j quasi-iso): cited Mathlib leaf lem-weil-pbc-complex-ses-homology-long-exact; (2) C1 step 1 'contractible hence acyclic' uncited: cited Mathlib leaf lem-weil-pbc-homotopic-maps-equal-cohomology (b); (3) B3 new leaf lem-pur-kinjective-cone-contractible had stmt_deps [] while citing three nodes: set to def-sp-abelian, def-pc-cochain-complex-modules, def-pur-kinjective-complex. Both added citations are mathlib-status nodes of unit sk-thm-p1 (generic tools). The K1 second reading missed (1) and (2).; 2 file(s) fixed by the reviewer"
+ }
 }
