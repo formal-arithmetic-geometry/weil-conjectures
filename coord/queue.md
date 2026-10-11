@@ -1,11 +1,11 @@
 # Work queue
 
-66 items; claim with `tools/claim.py next <group> [--stage N]`.
+64 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (66)
+## Stage 2: nodes to state (64)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
@@ -57,11 +57,9 @@
 | `lem-weil-pbc-etale-cohomology-local-ring-colimit` | 1 | state | 0 |
 | `lem-weil-pbc-etale-mayer-vietoris-pullback` | 1 | state | 0 |
 | `lem-weil-pbc-gabber-zariski-etale-restriction-injective` | 1 | state | 0 |
-| `lem-weil-pbc-module-cech-vanishing-basis` | 1 | state | 0 |
 | `lem-weil-pbc-module-cech-vanishing-criterion` | 1 | state | 0 |
 | `lem-weil-pbc-module-injective-open-cover-cech-acyclic` | 1 | state | 0 |
 | `lem-weil-pbc-module-ses-cech-h1-surjective` | 1 | state | 0 |
-| `lem-weil-pbc-projective-space-twisting-sheaf-charts` | 1 | state | 0 |
 | `lem-weil-pbc-ringed-site-injective-module-cech-acyclic` | 1 | state | 0 |
 | `lem-weil-pbc-site-covering-morphisms-same-h0-map` | 1 | state | 0 |
 | `lem-weil-pbc-site-extension-by-zero-presheaf-adjoint` | 1 | state | 0 |
