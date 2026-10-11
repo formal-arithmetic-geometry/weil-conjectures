@@ -3723,3 +3723,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 07:56 L: merged deliver/C1/lem-pc-kflat-resolution (stage 2; reviewer PASS; first push; Sheaf.Algebra.Homology.KFlatResolution CochainComplex.exists_isKFlatResolution)
 - 07:56 L: merged deliver/C1/lem-pc-bounded-above-flat-kflat-site (stage 2; reviewer PASS; first push; Sheaf.Algebra.Homology.BoundedAboveFlatSheafKFlat CochainComplex.isKFlat_of_boundedAbove_flat)
 - 07:56 L: merged deliver/G1/lem-sc-finite-type-nonclosed-closure-closed-points (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.InfiniteClosedPointsInterClosureSingleton AlgebraicGeometry.infinite_closedPoints_inter_closure_singleton)
+- 07:56 L: merged deliver/K1/lem-sc-ample-finite-affine-cover (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.AmpleFiniteAffineCover AlgebraicGeometry.Scheme.Modules.IsAmple.exists_finite_affine_cover)
