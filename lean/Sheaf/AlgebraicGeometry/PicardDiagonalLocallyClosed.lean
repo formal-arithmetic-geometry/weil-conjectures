@@ -4,6 +4,7 @@ import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 import Mathlib.AlgebraicGeometry.Morphisms.Immersion
 import Mathlib.AlgebraicGeometry.Modules.Sheaf
 import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
+import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
 
 /-!
 # Universal locally closed pullback locus for a finite locally free module
@@ -37,16 +38,17 @@ namespace AlgebraicGeometry.Scheme
 theorem picard_diagonal_locally_closed {X S : Scheme.{u}} (f : X ⟶ S)
     [Flat f] [IsProper f] [LocallyOfFinitePresentation f]
     (hO : ∀ {T : Scheme.{u}} (g : T ⟶ S),
-      IsIso ((Scheme.Modules.pullbackPushforwardAdjunction (pullback.snd f g)).unit.app
-        (SheafOfModules.unit T.ringCatSheaf)))
+      IsIso ((Classical.choose
+        (Scheme.Modules.exists_tensorPullbackAdjunction (pullback.snd f g))).unit.app
+          (SheafOfModules.unit T.ringCatSheaf)))
     (E : X.Modules) [E.IsFiniteLocallyFree] :
     ∃ (Z : Scheme.{u}) (j : Z ⟶ S), IsImmersion j ∧ LocallyOfFinitePresentation j ∧
       QuasiCompact j ∧ QuasiSeparated j ∧
       ∀ {T : Scheme.{u}} (g : T ⟶ S),
         (∃ (h : T ⟶ Z), h ≫ j = g) ↔
           ∃ (N : T.Modules) (_ : N.IsFiniteLocallyFree),
-            Nonempty (((Scheme.Modules.pullback (pullback.fst f g)).obj E) ≅
-              ((Scheme.Modules.pullback (pullback.snd f g)).obj N)) := by
+            Nonempty (((Scheme.Modules.tensorPullback (pullback.fst f g)).obj E) ≅
+              ((Scheme.Modules.tensorPullback (pullback.snd f g)).obj N)) := by
   sorry
 
 end AlgebraicGeometry.Scheme
