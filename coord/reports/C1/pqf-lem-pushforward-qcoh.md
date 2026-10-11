@@ -1,26 +1,90 @@
-Files written:
+## Worker report
 
-- `dag/nodes/sec-abelian-varieties/pqf-lem-pushforward-qcoh.json`: statement split; no new nodes; Mathlib search found only the affine special case.
+The module `Sheaf.AlgebraicGeometry.QuasicoherentPushforwardQcqs` states
+`AlgebraicGeometry.Scheme.Modules.isQuasicoherent_pushforward_of_quasiCompact_quasiSeparated`.
+Its only proof is `sorry`; no definitions or extra nodes were necessary. The node is unchanged
+except for its `lean` record. Its `stmt_deps` is empty, so there are no dependency records to
+repair or dependency modules to import.
 
-Attachments: none.
+Clause-by-clause correspondence:
 
-WANTED: `literature/stacks-project/schemes.tex`, Schemes Lemma 01LC, for the exact source text (the repository contains the imported citation and Tag 01LC but not the Stacks checkout).
+- Schemes X and S: `{X S : Scheme.{u}}`, with the universe `u` declared explicitly.
+- Morphism f from X to S: `(f : X ⟶ S)`.
+- Quasi-compactness of f: `[QuasiCompact f]`.
+- Quasi-separatedness of f: `[QuasiSeparated f]`, the relative diagonal condition,
+  without imposing absolute quasi-separatedness on either scheme.
+- Every quasi-coherent O_X-module: `(F : X.Modules) [F.IsQuasicoherent]`.
+- Its direct image is a quasi-coherent O_S-module:
+  `((pushforward f).obj F).IsQuasicoherent`. The existing pushforward functor lands in
+  `S.Modules`, and its section formula is sections on the inverse image open.
 
-The source proof was checked against the imported Tag 01LC route. Step 1 reduces to an affine target, chooses a finite affine cover of the inverse image by quasi-compactness, and uses the existing Mathlib-backed node `lem-weil-pbc-quasi-separated-affine-cover-criterion` for quasi-compact pairwise intersections. The convention node supplies the qcqs hypotheses and `pqf-def-coherent` supplies the local associated-sheaf meaning. Step 2 is the sheaf equalizer for sections and is explicitly marked elementary. Step 3 applies the existing associated-sections localization node; exactness of localization and preservation of finite products are the elementary algebra used to identify kernels. Step 4 uses the definition of quasi-coherence on the principal-open basis. I verified every citation against the cited node statements and recorded verbatim quotes in `citations.json`. The cross-unit criterion is declared as a generic tool use because this unit has no replacement node. Small cases checked: an affine morphism (one affine in the cover), the identity morphism, and the empty scheme.
+Definitions used, with full signatures and docstrings read in the source:
 
-No statement or source clause was changed. No new node was created because the only non-elementary auxiliary fact needed, quasi-separatedness giving quasi-compact affine intersections, already exists as a Mathlib leaf.
+- `Mathlib.AlgebraicGeometry.Modules.Sheaf`:
+  `AlgebraicGeometry.Scheme.Modules` and `AlgebraicGeometry.Scheme.Modules.pushforward`.
+- `Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent`:
+  `SheafOfModules.IsQuasicoherent`, locally a cokernel of maps between sums of the ring sheaf.
+- `Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated`:
+  `AlgebraicGeometry.QuasiSeparated`, quasi-compactness of the relative diagonal.
+  Its imported `Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact` gives
+  `AlgebraicGeometry.QuasiCompact`, compactness of inverse images of compact opens.
 
-## Review by C1
+The statement was checked against [Stacks Tag 01LC](https://stacks.math.columbia.edu/tag/01LC),
+Lemma 26.24.1. The local Stacks checkout is absent on this machine, so the source was opened
+online. The docstring supplies all four steps of the node's proof, including the recorded
+proof dependencies and the principal-open localization argument.
 
-I read the imported item and the Tag 01LC proof route. Step 1 uses the conventions, quasi-coherent definition, and the existing affine-intersection criterion exactly as quoted; the qcqs hypotheses are present. Step 2 is the section sheaf equalizer and is elementary from the sheaf axiom. Step 3 uses the associated-sections localization statement and only elementary exactness of localization and finite products. Step 4 applies the quasi-coherence definition on principal opens. I corrected the imported proof by making the previously uncited affine-intersection fact explicit and by adding source locations, citations, blueprint metadata, and the declared tool use.
+Edge cases checked before writing: the empty source gives the zero pushforward; the empty
+target permits only the empty source; zero modules remain quasi-coherent; identity maps
+recover the input; arbitrary base schemes need no Noetherian, affine, separated, finite-type,
+field or characteristic hypothesis. Empty finite covers in the proof are allowed. There is
+no nonempty binder. `Scheme.{u}` and its standard `Modules` category follow Mathlib's encoding,
+with arbitrary explicitly bound `u`; no independent test-object universe occurs.
+
+Searches made with `/home/ubuntu/weil-launcher/msearch.py C1 pqf-lem-pushforward-qcoh`:
+
+- leanfinder: `pushforward of quasi coherent modules along quasi compact quasi separated
+  scheme morphism is quasi coherent`. Eight hits, including the existing pushforward functor,
+  composition and adjoint facts, and quasi-compactness lemmas; no qcqs quasi-coherence theorem.
+- loogle: `QuasiCompact, QuasiSeparated, IsQuasicoherent`. Zero hits; the service reported
+  unknown identifier `QuasiCompact`.
+- grep: `isQuasicoherent_pushforward|pushforward.*quasi.?coherent` in `AlgebraicGeometry`.
+  Two Mathlib Tilde.lean hits: the affine TODO at line 567 and the open-immersion restriction
+  proof using a sheaf-level adjoint result at line 587; neither states this theorem.
+- leansearch: `pushforward quasi coherent module quasi compact quasi separated schemes`.
+  Service unavailable (Internal Server Error); recorded as unavailable.
+
+Direct `rg` searches of `WeilConjectures` and `lean/Sheaf` for
+`pushforward.*[Qq]uasi|isQuasicoherent_pushforward|pqf-lem-pushforward-qcoh` found the affine
+and closed-immersion statements, general-site adjoint results, unrelated Weil-sheaf
+pushforwards, and references to this node in proof docstrings. No matching general theorem.
+The source grep for the exact node id gives no existing theorem attached to it. The new
+full declaration name was searched in `dag/lean_names_upstream.json`, `WeilConjectures`, and
+`lean/Sheaf`, with no hits. Mathlib's relevant signatures and definitions were read directly.
+
+No statement fault or disputed statement was found. No source statement correction,
+new definition node, or dependency module is needed.
 
 ## Second reading by C1
 
-- Item statement: checked against Schemes Lemma 26.24.1, Tag 01LC (the exact `lemma-push-forward-quasi-coherent` statement); the quasi-compact and quasi-separated hypotheses and the quasi-coherent conclusion agree.
-- Step 1: checked against Tag 01LC, lines 4778--4784, and the statements of `def-weil-pbc-scheme-conventions`, `pqf-def-coherent`, and `lem-weil-pbc-quasi-separated-affine-cover-criterion`; finite affine covers and quasi-compact overlaps are justified under the stated hypotheses.
-- Step 2: checked against the equalizer calculation in Tag 01LC, lines 4785--4793; the sheaf gluing argument is elementary for the finite affine cover.
-- Step 3: checked against Tag 01LC, lines 4794--4812, and `pqf-lem-associated-sections-localize`; each affine section localizes, and exact localization plus preservation of finite products identifies the kernels.
-- Step 4: checked against Tag 01LC, lines 4813--4819, and `pqf-def-coherent`; the principal-open identifications give the associated sheaf on each affine target.
-- New nodes: none; there are no new statements to audit under B1--B7. The only auxiliary non-elementary fact is the existing Mathlib-backed affine-intersection criterion, searched and cited rather than duplicated.
-- Edge cases: verified the affine morphism (one affine in the cover), identity morphism, empty scheme, zero module, and the cases $n=0$ and $n=1$ of the finite cover/equalizer construction.
-- Changes: no mathematical or node changes were needed; this section records the source comparison, citation verification, blueprint/tool-use check, and edge-case audit.
+The node introduces schemes `X` and `S`, a morphism `f : X ⟶ S`, hypotheses
+`[QuasiCompact f]` and `[QuasiSeparated f]`, and an arbitrary quasi-coherent module
+`F : X.Modules` with `[F.IsQuasicoherent]`. Its sole conclusion is that the module
+`((pushforward f).obj F)` is quasi-coherent on `S`. The Lean theorem renders these as
+`{X S : Scheme.{u}}`, `(f : X ⟶ S)`, the two relative morphism classes, and
+`(F : X.Modules) [F.IsQuasicoherent]`, concluding
+`((pushforward f).obj F).IsQuasicoherent`. Each object, hypothesis, quantifier, and
+conclusion clause matches the node and Stacks Tag 01LC. The shared universe is the
+project's `Scheme.{u}` encoding and does not add a mathematical finiteness or
+separation assumption.
+
+Edge cases remain covered: empty source and target, zero modules, identity morphisms,
+empty affine covers, and arbitrary characteristic. No nonempty index, Noetherian,
+affine, separated, finite-type, or field assumption is present.
+
+I rechecked the recorded Mathlib and source searches, including the pushforward and
+quasi-coherence declarations and the affine-only results in `Tilde.lean`; no existing
+qcqs pushforward theorem or duplicate project declaration was found. The source
+statement is Tag 01LC and the proof docstring records its four proof steps. No mismatch
+was found, so no Lean or node correction was necessary. The module compiled cleanly
+with only its permitted `sorry` proof warning.
