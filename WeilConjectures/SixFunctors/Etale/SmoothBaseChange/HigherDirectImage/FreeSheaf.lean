@@ -199,8 +199,8 @@ theorem Etale.preservesColimitsOfShape_shiftedHomFunctor_freeSheaf_finalObject (
     [IsFiltered J] :
     PreservesColimitsOfShape J
       (Etale.shiftedHomFunctor Λ ((Etale.freeSheaf Λ Z).obj (Etale.finalObject Z)) q) := by
-  have := preservesFilteredColimitsOfSize_shrink.{u, u, u + 1, u + 1}
-    (CategoryTheory.forget AddCommGrpCat.{u + 1})
+  have : PreservesFilteredColimitsOfSize.{u, u} (CategoryTheory.forget AddCommGrpCat.{u + 1}) :=
+    preservesFilteredColimitsOfSize_shrink.{u, u + 1, u, u + 1} _
   have : CompactSpace (Etale.finalObject Z).left := ‹_›
   have : QuasiSeparatedSpace (Etale.finalObject Z).left := ‹_›
   exact DerivedCategory.Plus.preservesColimitsOfShape_shiftedHom _ q fun n _ _ hc ↦
