@@ -109,5 +109,24 @@
   "group": "G1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-tds (reviewer sub-agent of L); spot-checked: Source: blueprint lem-sc-p1-graded-resolution proof (dimension shifting) and Stacks Algebra 00S2 proof (the free-presentation shift sentence) with section 00LY; the item statement is unchanged (commutative ring S, S-module k, two exact sequences with F_0,F_1 free, Tor of def-weil-pbc-tor-modules). Steps 1-2: the dimension shift at i=1 for 0->K_2->F_1->K_1->0 and at i=2 for 0->K_1->F_0->M->0, composed; hypotheses (F free, i>=1) checked. Step 3: def-weil-pbc-tor-modules computes Tor_3 from a projective resolution of length <=2, whose degree-3 term is 0, so Tor_3(M,k)=0; checked on M projective (length 0) and length 2. Downstream lem-sc-p1-graded-syzygy uses only the isomorphism and the vanishing. FIX more, RETURN less: the statement claims a NATURAL isomorphism but the cited lem-weil-pbc-tor-dimension-shift-free states only an isomorphism (C4); added statement-only node lem-sc-p1-tor-dimension-shift-natural (the shift natural in the second variable N; Stacks 00LY/00LZ/00M0, 00S2; Mathlib searched: loogle CategoryTheory.Tor and grep of Monoidal/Tor.lean, no match, leansearch HTTP 500) and dag/nodes/sec-picard-framework/lem-sc-p1-tor-dimension-shifting.json: proof[0], proof[1]: text and uses cite it, naturality in k stated for the composite; proof_deps: lem-weil-pbc-tor-dimension-shift-free replaced by the new node; split_report.tool_uses removed (the off-unit tool is no longer cited; --drop-tool-uses). Start Sat Oct 10 04:07:45 PM UTC 2026, end Sat Oct 10 04:09:56 PM UTC 2026.; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.TorDimensionShifting",
+  "declaration": "CategoryTheory.tor_dimension_shifting",
+  "file": "lean/Sheaf/Algebra/TorDimensionShifting.lean",
+  "statement": "theorem tor_dimension_shifting {S : Type u} [CommRing S] (k : ModuleCat.{u} S) (E₀ E₁ : ShortComplex (ModuleCat.{u} S)) (hE₀ : E₀.ShortExact) (hE₁ : E₁.ShortExact) (hK₁ : E₁.X₃ = E₀.X₁) [Module.Free S E₀.X₂] [Module.Free S E₁.X₂] : (∃ θ : ∀ N : ModuleCat.{u} S, (((Tor' (ModuleCat.{u} S) 1).obj E₁.X₁).obj N) ≅ (((Tor' (ModuleCat.{u} S) 3).obj E₀.X₃).obj N), ∀ (N N' : ModuleCat.{u} S) (g : N ⟶ N'), ((Tor' (ModuleCat.{u} S) 1).obj E₁.X₁).map g ≫ (θ N').hom = (θ N).hom ≫ ((Tor' (ModuleCat.{u} S) 3).obj E₀.X₃).map g) ∧ (HasProjectiveDimensionLE E₀.X₃ 2 → IsZero (((Tor' (ModuleCat.{u} S) 1).obj E₁.X₁).obj k))",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-tdg1241"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-tdg1241",
+  "group": "H1",
+  "result": "fix",
+  "note": "ring S, k, two SES as ShortComplex.ShortExact glued at K1 (E1.X3 = E0.X1), F0 F1 Module.Free on X2, Tor' first-variable (def-weil-pbc-tor-modules), natural family theta N : Tor1(K2,N) = Tor3(M,N) with F1-order naturality equation, component at k; pd(M)<=2 as HasProjectiveDimensionLE (Ext>=3 vanishing) -> IsZero Tor1(K2,k); edge cases zero modules/zero ring/pd 0,1"
  }
 }
