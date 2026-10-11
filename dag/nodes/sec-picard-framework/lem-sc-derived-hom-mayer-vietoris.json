@@ -14,7 +14,7 @@
  },
  "kind": "statement",
  "title": "Mayer–Vietoris sequence for derived Hom on a two-open cover",
- "statement": "Let (X, O_X) be a ringed space [def-weil-locally-ringed-space-morphism] covered by open subspaces U and V, and let D(O_X) be the derived category of sheaves of O_X-modules [def-weil-sheaf-of-modules-category, def-weil-abstract-derived-category], and likewise for the opens. For any two objects E and F of D(O_X), there is an exact sequence from global Hom(E,F) to the direct sum of Hom between their restrictions to U and V, then to Hom between their restrictions to the intersection; the second map is the difference of restrictions, and this is the beginning of the Mayer–Vietoris long exact sequence with a preceding negative Ext term.",
+ "statement": "Let (X, O_X) be a ringed space [def-weil-locally-ringed-space-morphism] covered by open subspaces U and V, and let D(O_X) be the derived category of sheaves of O_X-modules [def-weil-sheaf-of-modules-category, def-weil-abstract-derived-category], and likewise for the opens. For any two objects E and F of D(O_X), there is an exact sequence from global Hom(E,F) to the direct sum of Hom between their restrictions to U and V, then to Hom between their restrictions to the intersection; the second map is the difference of restrictions. Exactness is asserted at global Hom (with the preceding negative Ext term) and at the direct-sum term (with the difference map), as in the beginning of the Mayer–Vietoris long exact sequence.",
  "source": {
   "document": "literature/stacks-project/cohomology.tex",
   "place": "Tag 08BW (Cohomology, Lemma 20.33.3, lemma-mayer-vietoris-hom)"
@@ -117,5 +117,56 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-dhm3038 (reviewer sub-agent of L); spot-checked: Checked both steps against Tag 08BW: clause (ii) of lem-weil-pbc-hom-out-of-triangle-exact (Triangle.yoneda_exact3) gives exactness at Hom(E,F) with the Ext^-1 term, clause (i) at the middle; adjunction node gives the three identifications; both citers (lem-sc-perfect-into-support-on-T, lem-sc-derived-open-gluing) use exactly these two exactness points. Triangle node is Tag 08BU (lower-shriek), not a duplicate of the qcqs j_* lem-pc-derived-mayer-vietoris-triangle; adjunction node kept (Tag 08BT, not two lines from lem-sc-derived-adjunction-from-underived). FIX more, RETURN less: (1) E7/C4 item statement and stmt_deps cited the scheme-only def-pc-derived-category for a ringed space, replaced by def-weil-locally-ringed-space-morphism, def-weil-sheaf-of-modules-category, def-weil-abstract-derived-category (the second reading claimed this fix but had not made it); (2) C7 declared tool_uses named the unused lem-weil-pbc-hom-into-triangle-exact, replaced by the actually cited lem-weil-pbc-hom-out-of-triangle-exact; (3) B3 triangle node and step 1 source said Tag 08BV (the j_* triangle) for lemma-exact-sequence-lower-shriek, corrected to Tag 08BU.; 2 file(s) fixed by the reviewer"
  },
- "lead_note": "2026-10-10 L (R-dhm3038): Item statement generalized in its deps from scheme-only def-pc-derived-category to ringed-space D(O_X) (E7: the item is for an arbitrary ringed space; both citers use it on schemes, a special case)."
+ "lead_note": "2026-10-10 L (R-dhm3038): Item statement generalized in its deps from scheme-only def-pc-derived-category to ringed-space D(O_X) (E7: the item is for an arbitrary ringed space; both citers use it on schemes, a special case).",
+ "lean": {
+  "module": "Sheaf.Paper.DerivedHomMayerVietoris",
+  "declaration": "AlgebraicGeometry.derived_hom_mayer_vietoris",
+  "file": "lean/Sheaf/Paper/DerivedHomMayerVietoris.lean",
+  "statement": "theorem derived_hom_mayer_vietoris (X : RingedSpace.{u}) (U V : Opens X) (hcover : U ⊔ V = ⊤) [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X))] [HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X).over U))] [HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X).over V))] [HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X).over (U ⊓ V)))] (E F : DerivedCategory (SheafOfModules.{u} (moduleRings X))) : let R_U := (SheafOfModules.overFunctor.{u} (moduleRings X) U).mapDerivedCategory let R_V := (SheafOfModules.overFunctor.{u} (moduleRings X) V).mapDerivedCategory let R_UV := (SheafOfModules.overFunctor.{u} (moduleRings X) (U ⊓ V)).mapDerivedCategory ∃ (negExt : (R_UV.obj E ⟶ (R_UV.obj F)⟦(-1 : ℤ)⟧) →+ (E ⟶ F)), Function.Exact negExt (fun f => (R_U.map f, R_V.map f)) ∧ Function.Exact (fun f : E ⟶ F => (R_U.map f, R_V.map f)) (fun p : (R_U.obj E ⟶ R_U.obj F) × (R_V.obj E ⟶ R_V.obj F) => derivedOpenHomRestriction X (homOfLE inf_le_left) p.1 - derivedOpenHomRestriction X (homOfLE inf_le_right) p.2)",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-11",
+  "existing": false,
+  "declarations": [
+   "AlgebraicGeometry.derived_hom_mayer_vietoris",
+   "AlgebraicGeometry.derivedOpenHomRestriction",
+   "AlgebraicGeometry.moduleOverFunctor_additive_proof",
+   "AlgebraicGeometry.moduleOverFunctor_limits_proof",
+   "AlgebraicGeometry.moduleOverFunctor_colimits_proof",
+   "AlgebraicGeometry.moduleOverMap_additive_proof",
+   "AlgebraicGeometry.moduleOverMap_limits_proof",
+   "AlgebraicGeometry.moduleOverMap_colimits_proof"
+  ]
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-dmv1201",
+  "group": "K1",
+  "result": "pass",
+  "note": "Return R-dmv1022 points 1-5 repaired: X : RingedSpace.{u}, U V : Opens X with U ⊔ V = ⊤; E F in D(SheafOfModules (sheafCompose ... X.sheaf)) as landed ModuleStalkFunctor; opens via R.over U/V/U⊓V; R_U R_V R_UV = overFunctor.mapDerivedCategory with Prop-valued sorry'd exactness instances; overlap maps = overMap.mapDerivedCategory transported by upstream mapDerivedCategoryCompIso/NatIso of overFunctorMap (directions checked); only additive negExt from Hom(E|UV, F|UV[-1]) existential; Function.Exact at Hom(E,F) and at the pair, no surjectivity at the overlap, as Tag 08BW (cohomology.tex 8167); no landed derived open restriction to conflict with",
+  "statement_corrected": true
+ },
+ "statement_change": {
+  "date": "2026-10-11",
+  "by": "K1 stage 2",
+  "old_statement": "Let (X, O_X) be a ringed space [def-weil-locally-ringed-space-morphism] covered by open subspaces U and V, and let D(O_X) be the derived category of sheaves of O_X-modules [def-weil-sheaf-of-modules-category, def-weil-abstract-derived-category], and likewise for the opens. For any two objects E and F of D(O_X), there is an exact sequence from global Hom(E,F) to the direct sum of Hom between their restrictions to U and V, then to Hom between their restrictions to the intersection; the second map is the difference of restrictions, and this is the beginning of the Mayer–Vietoris long exact sequence with a preceding negative Ext term.",
+  "what": "The original statement did not specify the exactness locations, and the Lean encoded exactness of the difference followed by zero, incorrectly requiring surjectivity onto the intersection. Tag 08BW gives exactness at global Hom and at the direct-sum term; the statement and Lean were corrected accordingly.",
+  "source": {
+   "document": "literature/stacks-project/cohomology.tex",
+   "place": "Tag 08BW (Cohomology, Lemma 20.33.3, lemma-mayer-vietoris-hom)"
+  },
+  "citers": [
+   {
+    "id": "lem-sc-derived-open-gluing",
+    "holds": true,
+    "note": "Uses lifting from the exact global-to-pair segment, which remains exactly the corrected clause."
+   },
+   {
+    "id": "lem-sc-perfect-into-support-on-T",
+    "holds": true,
+    "note": "Uses exactness at global Hom to obtain the overlap negative-Ext preimage; this remains stated."
+   }
+  ]
+ }
 }
