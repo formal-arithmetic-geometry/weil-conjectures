@@ -81,7 +81,8 @@ theorem charpoly_roots_eq_of_mul_charpolyRev_eq (f : Module.End K V) (g : Module
       rintro rfl
       simp at hp
   have hroots := congrArg Polynomial.roots hrev
-  rw [roots_mul (hne _ _ (coeff_zero_charpolyRev f)), roots_mul (hne _ _ (coeff_zero_charpolyRev g)),
+  rw [roots_mul (hne _ _ (coeff_zero_charpolyRev f)),
+    roots_mul (hne _ _ (coeff_zero_charpolyRev g)),
     roots_multiset_prod_X_sub_C, roots_multiset_prod_X_sub_C, hrf, hrg] at hroots
   have hmemf : ∀ x ∈ f.charpoly.roots, ¬ P x := fun x hx ↦
     hPf x ((Module.End.hasEigenvalue_iff_isRoot_charpoly _ _).2 (isRoot_of_mem_roots hx))
@@ -174,7 +175,8 @@ theorem isPureOfWeightOver_compactlySupportedCohomology_two_adicConstant
     ((adicConstant k₀ l C).compactlySupportedCohomology 2).IsPureOfWeightOver k₀ ι 2 := by
   have e := (compactlySupportedCohomologyEquivOfIso (lowerStarIdIso (adicConstant k₀ l C)) 2)
   have h := isPureOfWeightOver_compactlySupportedCohomology_directImage_two (j := 𝟙 C)
-    (F := adicConstant k₀ l C) ι (isLisse_adicConstant k₀ l C) (isPunctuallyPureOfWeight_adicConstant k₀ l C ι)
+    (F := adicConstant k₀ l C) ι (isLisse_adicConstant k₀ l C)
+    (isPunctuallyPureOfWeight_adicConstant k₀ l C ι)
   rw [zero_add] at h
   exact fun α hα ↦ h α (e.symm.hasEigenvalue hα)
 
@@ -246,7 +248,8 @@ theorem charpoly_roots_compactlySupportedCohomology_of_curve {S : Multiset (Padi
   set H := (adicConstant k₀ l C).compactlySupportedCohomology
   have hq : (1 : ℝ) < Nat.card k₀ := by exact_mod_cast Finite.one_lt_card
   have hid := map_zetaSeries_mul_charpolyRev_two_of_curve k₀ l C
-  have hpoly : (1 - Polynomial.C (Nat.card k₀ : PadicAlgCl l) * X) * (H 1).frobeniusEnd.charpolyRev =
+  have hpoly :
+      (1 - Polynomial.C (Nat.card k₀ : PadicAlgCl l) * X) * (H 1).frobeniusEnd.charpolyRev =
       (S.map fun c ↦ 1 - Polynomial.C c * X).prod * (H 2).frobeniusEnd.charpolyRev := by
     refine Polynomial.coe_inj.1 ?_
     rw [Polynomial.coe_mul, Polynomial.coe_mul, ← hid, ← hZ]
@@ -269,6 +272,8 @@ end WeilSheaf
 
 section Examples
 
+open WeilSheaf
+
 variable (k : Type u) [Field k] [Finite k] (l : ℕ) [Fact l.Prime] [Fact (ringChar k ≠ l)]
 
 open _root_.Polynomial in
@@ -279,10 +284,10 @@ other `H_cⁱ(𝔸¹ ⊗ k̄, ℚ̄_ℓ)` vanish. With the trace formula this re
 `AlgebraicGeometry.zetaSeries_affineLine`), from which it is derived. -/
 theorem compactlySupportedCohomology_affineLine :
     (∀ i : ℤ, i ≠ 2 → Subsingleton
-      ((WeilSheaf.adicConstant k l (affineLine k)).compactlySupportedCohomology i).carrier) ∧
+      ((adicConstant k l (affineLine k)).compactlySupportedCohomology i).carrier) ∧
     Module.finrank (PadicAlgCl l)
-      ((WeilSheaf.adicConstant k l (affineLine k)).compactlySupportedCohomology 2).carrier = 1 ∧
-    ((WeilSheaf.adicConstant k l (affineLine k)).compactlySupportedCohomology 2).frobeniusEnd =
+      ((adicConstant k l (affineLine k)).compactlySupportedCohomology 2).carrier = 1 ∧
+    ((adicConstant k l (affineLine k)).compactlySupportedCohomology 2).frobeniusEnd =
       (Nat.card k : PadicAlgCl l) • 1 := by
   obtain ⟨ι⟩ := PadicAlgCl.nonempty_ringHom_complex l
   have hZ : PowerSeries.map (algebraMap ℚ (PadicAlgCl l)) (affineLine k ↘ Spec (.of k)).zetaSeries *
@@ -311,16 +316,16 @@ group): `H_c¹(𝔾_m ⊗ k̄, ℚ̄_ℓ) ≅ ℚ̄_ℓ` is a line on which the 
 `AlgebraicGeometry.zetaSeries_multiplicativeGroup`), from which it is derived. -/
 theorem compactlySupportedCohomology_multiplicativeGroup :
     (∀ i : ℤ, i ≠ 1 → i ≠ 2 → Subsingleton
-      ((WeilSheaf.adicConstant k l (multiplicativeGroup k)).compactlySupportedCohomology i).carrier) ∧
+      ((adicConstant k l (multiplicativeGroup k)).compactlySupportedCohomology i).carrier) ∧
     Module.finrank (PadicAlgCl l)
-      ((WeilSheaf.adicConstant k l (multiplicativeGroup k)).compactlySupportedCohomology 1).carrier =
+      ((adicConstant k l (multiplicativeGroup k)).compactlySupportedCohomology 1).carrier =
         1 ∧
-    ((WeilSheaf.adicConstant k l (multiplicativeGroup k)).compactlySupportedCohomology 1).frobeniusEnd =
+    ((adicConstant k l (multiplicativeGroup k)).compactlySupportedCohomology 1).frobeniusEnd =
       1 ∧
     Module.finrank (PadicAlgCl l)
-      ((WeilSheaf.adicConstant k l (multiplicativeGroup k)).compactlySupportedCohomology 2).carrier =
+      ((adicConstant k l (multiplicativeGroup k)).compactlySupportedCohomology 2).carrier =
         1 ∧
-    ((WeilSheaf.adicConstant k l (multiplicativeGroup k)).compactlySupportedCohomology 2).frobeniusEnd =
+    ((adicConstant k l (multiplicativeGroup k)).compactlySupportedCohomology 2).frobeniusEnd =
       (Nat.card k : PadicAlgCl l) • 1 := by
   obtain ⟨ι⟩ := PadicAlgCl.nonempty_ringHom_complex l
   have hZ : PowerSeries.map (algebraMap ℚ (PadicAlgCl l))
