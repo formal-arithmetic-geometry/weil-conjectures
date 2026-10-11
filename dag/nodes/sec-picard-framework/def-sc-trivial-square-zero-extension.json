@@ -1,0 +1,111 @@
+{
+ "id": "def-sc-trivial-square-zero-extension",
+ "kind": "definition",
+ "title": "Trivial square-zero extension of a ring by a module",
+ "status": "split",
+ "statement": "For a commutative ring $R$ and an $R$-module $M$, the trivial square-zero extension $R\\oplus M$ is the $R$-algebra with underlying set $R\\times M$, componentwise addition, unit $(1,0)$, and multiplication $(r,m)(s,t)=(rs,rt+sm)$. It is Mathlib's `TrivSqZeroExt R M`, with constants `TrivSqZeroExt.inl` and infinitesimals `TrivSqZeroExt.inr`. The projection to $R$ is `TrivSqZeroExt.fstHom`; an $R$-linear map $M\\to N$ induces the algebra map `TrivSqZeroExt.map`. In particular, for a field $K$ and a natural number $n$, `TrivSqZeroExt K (Fin n → K)` is the algebra with basis $1,\\epsilon_1,\\dots,\\epsilon_n$ and $\\epsilon_i\\epsilon_j=0$; `TrivSqZeroExt.map (LinearMap.proj i)` keeps the $i$th infinitesimal coordinate.",
+ "stmt_deps": [],
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0B2B, varieties-lemma-tangent-space, the square-zero algebra in the pushout calculation; its general construction is Mathlib.Algebra.TrivSqZeroExt.Basic"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "trivial square zero extension ring R direct sum M multiplication (r,m)(s,n)=(rs,r n+s m)",
+   "results": "8 hits: TrivSqZeroExt.mul, TrivSqZeroExt.ring, TrivSqZeroExt.snd_mul, TrivSqZeroExt.nonAssocSemiring, TrivSqZeroExt, TrivSqZeroExt.nonAssocRing, TrivSqZeroExt.inl_mul_inr, TrivSqZeroExt.mulOneClass",
+   "date": "2026-10-11",
+   "verdict": "existing construction found"
+  },
+  {
+   "tool": "grep",
+   "query": "def map|def fstHom|structure TrivSqZeroExt",
+   "results": "2 hits: Mathlib/Algebra/TrivSqZeroExt/Basic.lean, Mathlib/Algebra/TrivSqZeroExt/Basic.lean",
+   "date": "2026-10-11",
+   "verdict": "existing construction found"
+  },
+  {
+   "tool": "leansearch",
+   "query": "trivial square zero extension of a commutative ring by a module",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "TrivSqZeroExt",
+   "results": "12 hits: TrivSqZeroExt, TrivSqZeroExt.fst, TrivSqZeroExt.snd, TrivSqZeroExt.inl, TrivSqZeroExt.inr, TrivSqZeroExt.add, TrivSqZeroExt.addCommGroup, TrivSqZeroExt.addCommMonoid",
+   "date": "2026-10-11",
+   "verdict": "existing construction found"
+  },
+  {
+   "tool": "grep",
+   "query": "TrivSqZeroExt in WeilConjectures/AlgebraicGeometry/DualNumbers.lean and lean/Sheaf; square-zero in tools/blueprint_refs.py search and dag/nodes",
+   "results": "Source imports and uses Mathlib TrivSqZeroExt; no independent definition in lean/Sheaf, no definition node for the general trivial square-zero extension. blueprint search gave one unrelated setup node.",
+   "date": "2026-10-11",
+   "verdict": "no duplicate DAG notion"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sc-dual-number-scheme-pushout",
+  "date": "2026-10-11",
+  "group": "H1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-degree-2g1-very-ample",
+   "place": "proof, third paragraph: square-zero algebra in the dual-number scheme pushout",
+   "via": [
+    "lem-sc-dual-number-scheme-pushout",
+    "lem-sc-tangent-space-vector-space",
+    "def-sc-scheme-tangent-space",
+    "lem-sc-point-tangent-cotangent-surjective",
+    "lem-sc-point-tangent-separation-closed-immersion",
+    "lem-sc-very-ample-separation-criterion"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-rr",
+ "lean": {
+  "module": "Mathlib.Algebra.TrivSqZeroExt.Basic",
+  "declaration": "TrivSqZeroExt",
+  "statement": "def TrivSqZeroExt (R : Type u) (M : Type v)",
+  "branch": "mathlib",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": true,
+  "note": "Existing general construction, used directly at R = K and M = Fin n → K; fstHom and map give the stated projections. No replacement definition or new module."
+ },
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-dnp1008",
+  "group": "H1",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-dnp1008",
+  "group": "H1",
+  "result": "pass",
+  "note": "K field (Type u, Field); K[eps]=DualNumber K; n>=1 as hn; K[eps_1..eps_n]=TrivSqZeroExt K (Fin n->K) (all eps_i eps_j=0); j_i=Spec.map of map(proj i) (eps_i->eps, others->0); c=Spec.map fstHom; X arbitrary Scheme.{u}; theta_i: Spec D -> X; pairwise c>>theta_i equal (= chain for n>=1); exists-unique Theta with j_i>>Theta=theta_i; new node def-sc-trivial-square-zero-extension = Mathlib TrivSqZeroExt existing:true, no other DAG/delivery node records it"
+ }
+}

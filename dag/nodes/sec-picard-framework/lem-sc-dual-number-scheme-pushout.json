@@ -21,7 +21,8 @@
  "stmt_deps": [
   "def-weil-pbc-scheme-conventions",
   "def-sc-dual-numbers",
-  "def-weil-affine-spectrum"
+  "def-weil-affine-spectrum",
+  "def-sc-trivial-square-zero-extension"
  ],
  "proof": [
   {
@@ -177,5 +178,23 @@
   "group": "J1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-dsp1753 (reviewer sub-agent of L); spot-checked: Statement is the n-fold wide pushout of n copies of c: Spec K -> Spec K[eps] (n>=1), as requested by R-tsv1745. Proof argues via local rings exactly as Stacks 0B2B does (A_n local, 01J6 bijection) rather than 0B7M/0E25; valid since Spec A_n is Spec of a local ring. Step 1 fibre-product identification checked as rings (needed since phi_i are ring maps, not K-algebra maps); residue map of phi is psi, so phi local. Steps 2-3: existence and uniqueness via 01J6 plus naturality of the correspondence under precomposition with Spec of local maps (definitional from phi_f = eps^-1 o f^#_z). No new nodes, no tool_uses. PASS, no repairs."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.DualNumberSchemePushout",
+  "declaration": "AlgebraicGeometry.existsUnique_dualNumberScheme_extension",
+  "file": "lean/Sheaf/AlgebraicGeometry/DualNumberSchemePushout.lean",
+  "statement": "theorem existsUnique_dualNumberScheme_extension (K : Type u) [Field K] (n : ℕ) (hn : 1 ≤ n) (X : Scheme.{u}) (θ : Fin n → (Spec (.of (DualNumber K)) ⟶ X)) (hθ : ∀ i j : Fin n, Spec.map (CommRingCat.ofHom (TrivSqZeroExt.fstHom K K K).toRingHom) ≫ θ i = Spec.map (CommRingCat.ofHom (TrivSqZeroExt.fstHom K K K).toRingHom) ≫ θ j) : ∃! Θ : Spec (.of (TrivSqZeroExt K (Fin n → K))) ⟶ X, ∀ i : Fin n, Spec.map (CommRingCat.ofHom (TrivSqZeroExt.map (LinearMap.proj i : (Fin n → K) →ₗ[K] K)).toRingHom) ≫ Θ = θ i",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-dnp1008",
+  "group": "H1",
+  "result": "pass",
+  "note": "K field (Type u, Field); K[eps]=DualNumber K; n>=1 as hn; K[eps_1..eps_n]=TrivSqZeroExt K (Fin n->K) (all eps_i eps_j=0); j_i=Spec.map of map(proj i) (eps_i->eps, others->0); c=Spec.map fstHom; X arbitrary Scheme.{u}; theta_i: Spec D -> X; pairwise c>>theta_i equal (= chain for n>=1); exists-unique Theta with j_i>>Theta=theta_i; new node def-sc-trivial-square-zero-extension = Mathlib TrivSqZeroExt existing:true, no other DAG/delivery node records it"
  }
 }
