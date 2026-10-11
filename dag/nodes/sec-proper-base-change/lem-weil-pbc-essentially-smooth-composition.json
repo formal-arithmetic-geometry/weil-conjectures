@@ -159,5 +159,23 @@
   "by": "L",
   "result": "pass",
   "note": "Five steps (agent proof; Stacks uses the lemma without statement): A = S^{-1}P is the filtered colimit of the principal localizations P_f (new unsplit 00CR node), the smooth A-algebra Q descends to a smooth P_s-algebra Q_0 (new unsplit 0CAQ node), Q_0 smooth over R, Q and then B are localizations of Q_0 (new leaf: localization of a localization, LocalizationLocalization.lean:110/194 verified, one declaration per clause). Correct."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.EssentiallySmoothComp",
+  "declaration": "RingHom.essentiallySmooth_comp",
+  "file": "lean/Sheaf/RingTheory/EssentiallySmoothComp.lean",
+  "statement": "theorem essentiallySmooth_comp {R : Type u} {A : Type v} {B : Type w} [CommRing R] [CommRing A] [CommRing B] (f : R →+* A) (g : A →+* B) (hf : letI : Algebra R A := f.toAlgebra; Algebra.EssentiallySmooth R A) (hg : letI : Algebra A B := g.toAlgebra; Algebra.EssentiallySmooth A B) : letI : Algebra R B := (g.comp f).toAlgebra Algebra.EssentiallySmooth R B",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-esc0951",
+  "group": "F1",
+  "result": "pass",
+  "note": "R,A,B CommRing in independent universes; f:R→+*A, g:A→+*B; hf/hg = recorded Algebra.EssentiallySmooth under f.toAlgebra/g.toAlgebra; conclusion EssentiallySmooth R B under (g.comp f).toAlgebra; no extra hypotheses; name free (#check)"
  }
 }
