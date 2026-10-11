@@ -676,6 +676,7 @@ public import WeilConjectures.DeligneLaumon.Reduction.FibreCohomology
 public import WeilConjectures.DeligneLaumon.Reduction.FiniteMiddleExtension
 public import WeilConjectures.DeligneLaumon.Reduction.FormalSteps
 public import WeilConjectures.DeligneLaumon.Reduction.OpenLine
+public import WeilConjectures.DeligneLaumon.Reduction.QuasiFiniteMixed
 public import WeilConjectures.DeligneLaumon.Reduction.QuasiFiniteStalk
 public import WeilConjectures.DeligneLaumon.Reduction.QuasiFiniteWeights
 public import WeilConjectures.DeligneLaumon.Reduction.RealSheaves
