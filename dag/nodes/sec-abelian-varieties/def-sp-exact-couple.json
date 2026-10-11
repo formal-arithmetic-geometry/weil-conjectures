@@ -125,5 +125,29 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-dec1853 (reviewer sub-agent of L); spot-checked: Read all clauses vs Stacks 011Q/011R/011S/0AMJ; bidegrees of alpha,f,g,d, d^2=0, f',g' well-definedness checked; grep ExactCouple in Mathlib: 0 hits (only SpectralObject), no leaf; lem-sp-derived-couple-exact exists with stmt_deps def-sp-exact-couple, so citing it would be a cycle. FIX more, RETURN less: (1) E: recursion E_{r+1}=E'_r was ill-typed (derived couple has g' of bidegree (+1,-1), not (0,0)) and silently assumed the derived couple exact -- restated with type-s couples, g' bidegree, f(im d)=0 added, exactness referred to lem-sp-derived-couple-exact without dependency edge; (2) source.external still listed Tag 011U though the statement now says 0AMJ -- changed to 0AMJ.; 1 file(s) fixed by the reviewer"
  },
- "lead_note": "2026-10-10 L (R-dec1853): E7 statement change (wording only, r=2 data unchanged): derived couple's g' typed as bidegree (+1,-1) and the page recursion stated through couples of type s, with exactness of iterates deferred to lem-sp-derived-couple-exact (not a stmt_dep: it depends on this def)."
+ "lead_note": "2026-10-10 L (R-dec1853): E7 statement change (wording only, r=2 data unchanged): derived couple's g' typed as bidegree (+1,-1) and the page recursion stated through couples of type s, with exactness of iterates deferred to lem-sp-derived-couple-exact (not a stmt_dep: it depends on this def).",
+ "lean": {
+  "module": "Sheaf.CategoryTheory.ExactCouple",
+  "declaration": "CategoryTheory.BigradedExactCouple",
+  "declarations": [
+   "CategoryTheory.BigradedExactCouple",
+   "CategoryTheory.BigradedExactCouple.derived",
+   "CategoryTheory.BigradedExactCouple.pageCouple",
+   "CategoryTheory.BigradedExactCouple.pageDifferential"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/ExactCouple.lean",
+  "statement": "structure BigradedExactCouple (C : Type u) [Category.{v} C] [Abelian C] (s : ℕ)",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-exc0620",
+  "group": "E1",
+  "result": "fix",
+  "note": "C abelian, u v free; D,E : Z->Z->C; alpha(-1,+1), f(+2,-1), g(s,-s), type 0 = node; 3 zero composites, 3 ker=im as subobjects of one object; d=g.f (s+2,-s-1); D'=im alpha, E'=ker d/im d; alpha',f',g' unique via comm fields, g' (s+1,-s-1); C_2=C, C_{r+1}=C_r', d_r (r,1-r); no ExactCouple in Mathlib/source; FIX: unused LeftHomology import dropped, dInto_comp_d proof in words"
+ }
 }
