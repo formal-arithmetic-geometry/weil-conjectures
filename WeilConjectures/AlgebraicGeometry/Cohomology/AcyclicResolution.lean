@@ -325,5 +325,63 @@ noncomputable def homologySectionsAddEquiv (q : ℕ) :
     (QuotientAddGroup.quotientKerEquivOfSurjective _
       (surjective_app_homologyπ L hL hH q))).symm
 end CohomologySheaves
+/-- Global sections are injective along a monomorphism of `𝒪_X`-modules. -/
+lemma injective_app_of_mono {M N : X.Modules} (f : M ⟶ N) [Mono f] :
+    Function.Injective (f.app ⊤).hom := by
+  have hS : (ShortComplex.mk f (cokernel.π f) (cokernel.condition f)).ShortExact :=
+    { exact := ShortComplex.exact_cokernel f }
+  intro s t hst
+  refine (H.zeroLinearEquiv M).symm.injective (H.injective_map_zero_of_shortExact hS ?_)
+  refine (H.zeroLinearEquiv N).injective ?_
+  change H.zeroLinearEquiv N (H.map f 0 _) = H.zeroLinearEquiv N (H.map f 0 _)
+  rw [H.zeroLinearEquiv_map, H.zeroLinearEquiv_map, LinearEquiv.apply_symm_apply,
+    LinearEquiv.apply_symm_apply]
+  exact hst
+
+/-- The sections of the cycles `Zⁿ⁺¹` of a complex `K` are the global sections of `Kⁿ⁺¹` killed
+by the differential. -/
+lemma range_app_iCycles (K : CochainComplex X.Modules ℕ) (n : ℕ) :
+    ((K.iCycles (n + 1)).app ⊤).hom.range = ((K.d (n + 1) (n + 2)).app ⊤).hom.ker := by
+  refine (range_app_f_eq_ker_app_g (shortExact_cyclesBoundariesShortComplex K (n + 1))).trans ?_
+  have hd : K.d (n + 1) (n + 2) = factorThruImage (K.toCycles (n + 1) (n + 2)) ≫
+      (Limits.image.ι (K.toCycles (n + 1) (n + 2)) ≫ K.iCycles (n + 2)) := by
+    rw [← Category.assoc, Limits.image.fac, HomologicalComplex.toCycles_i]
+  have : Mono (Limits.image.ι (K.toCycles (n + 1) (n + 2)) ≫ K.iCycles (n + 2)) := mono_comp _ _
+  rw [hd, Hom.comp_app, AddCommGrpCat.hom_comp,
+    AddMonoidHom.ker_comp_of_injective _ _ (injective_app_of_mono _)]
+  rfl
+variable (L : CochainComplex X.Modules ℕ)
+
+/-- The cocycles `ker(Γ(Lⁿ⁺¹) ⟶ Γ(Lⁿ⁺²))` of the complex of global sections of `L`. -/
+noncomputable abbrev sectionsCycles (n : ℕ) : AddSubgroup Γ(L.X (n + 1), ⊤) :=
+  ((L.d (n + 1) (n + 2)).app ⊤).hom.ker
+
+/-- The coboundaries `im(Γ(Lⁿ) ⟶ Γ(Lⁿ⁺¹))` among the cocycles of the complex of global sections of
+`L`. -/
+noncomputable abbrev sectionsBoundaries (n : ℕ) : AddSubgroup (sectionsCycles L n) :=
+  ((L.d n (n + 1)).app ⊤).hom.range.addSubgroupOf (sectionsCycles L n)
+
+/-- `Γ(X, Zⁿ⁺¹) / Γ(X, Lⁿ) ≅ ker Γ(d) / im Γ(d)`: the cycles of `L` have as sections the cocycles of
+the complex of global sections. -/
+noncomputable def cyclesQuotientAddEquiv (n : ℕ) :
+    Γ(L.cycles (n + 1), ⊤) ⧸ ((L.toCycles n (n + 1)).app ⊤).hom.range ≃+
+      sectionsCycles L n ⧸ sectionsBoundaries L n :=
+  QuotientAddGroup.congr _ _
+    ((AddMonoidHom.ofInjective (injective_app_of_mono (L.iCycles (n + 1)))).trans
+      (AddEquiv.addSubgroupCongr (range_app_iCycles L n))) (by
+    ext ⟨x, hx⟩
+    simp only [AddSubgroup.mem_map, AddMonoidHom.mem_range, AddSubgroup.mem_addSubgroupOf]
+    constructor
+    · rintro ⟨_, ⟨z, rfl⟩, hz⟩
+      refine ⟨z, ?_⟩
+      have := congrArg Subtype.val hz
+      refine Eq.trans ?_ this
+      change _ = ((L.toCycles n (n + 1) ≫ L.iCycles (n + 1)).app ⊤) z
+      rw [HomologicalComplex.toCycles_i]
+    · rintro ⟨z, hz⟩
+      refine ⟨_, ⟨z, rfl⟩, Subtype.ext ?_⟩
+      change ((L.toCycles n (n + 1) ≫ L.iCycles (n + 1)).app ⊤) z = x
+      rw [HomologicalComplex.toCycles_i]
+      exact hz)
 
 end AlgebraicGeometry.Scheme.Modules
