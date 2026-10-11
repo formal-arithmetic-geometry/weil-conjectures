@@ -3992,3 +3992,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 09:20 L: merged deliver/M1/lem-weil-pbc-completed-module-associated-graded-generators (stage 2; reviewer FIX; first push; Sheaf.RingTheory.CompletedModuleAssociatedGradedGenerators AdicCompletion.completedModule_associatedGraded_generators)
 - 09:20 L: merged deliver/H1/lem-weil-pbc-complete-pair-henselian (stage 2; reviewer PASS; first push; Mathlib.RingTheory.Henselian IsAdicComplete.henselianRing; existing declaration)
 - 09:21 L: merged deliver/F1/lem-weil-pbc-constant-sheaf-sections-connected (stage 2; reviewer PASS; first push; WeilConjectures.AlgebraicGeometry.Sites.ConstantSheafSections AlgebraicGeometry.Scheme.bijective_toSheafify_app_terminal; existing declaration)
+- 09:21 L: merged deliver/F1/lem-weil-pbc-completion-dimension (stage 2; reviewer PASS; first push; Sheaf.RingTheory.CompletionDimension RingTheory.completion_dimension)
