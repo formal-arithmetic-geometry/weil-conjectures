@@ -181,5 +181,23 @@
   "by": "L",
   "result": "pass",
   "note": "Five steps along Stacks 0882 with the map and the gluing written out: the map is a morphism of sheaves compatible with restriction, sections over an affine open (Gamma fully faithful on quasi-coherent, sheaf Hom coherent), transport through 087W, bijectivity by 00MA(3) (new leaf AdicCompletion.ofTensorProduct(EquivOfFiniteNoetherian) AsTensorProduct.lean:57/328 verified), 00MB(1) and 087R(1) (new leaf Module.FinitePresentation.isBaseChange_map FinitePresentation.lean:696 verified), gluing from affines. Correct."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CompletionInternalHom",
+  "declaration": "AlgebraicGeometry.completion_internal_hom_bijective",
+  "file": "lean/Sheaf/AlgebraicGeometry/CompletionInternalHom.lean",
+  "statement": "theorem completion_internal_hom_bijective {X : Scheme.{u}} [IsNoetherian X] (I : X.IdealSheafData) (F G : CoherentModules X) : (∀ n : ℕ, Scheme.idealModuleProductι (Scheme.idealSheafPower I.toModulesι (n + 1)).2 (SheafOfModules.homObj (R := X.toRingedSpace.sheaf) G.obj F.obj) ≫ SheafOfModules.homObjMap (R := X.toRingedSpace.sheaf) (𝟙 G.obj) (formalModuleQuotientπ I (n + 1) F.obj) = 0) ∧ (∀ n : ℕ, IsIso (SheafOfModules.homObjMap (R := X.toRingedSpace.sheaf) (formalModuleQuotientπ I (n + 1) G.obj) (𝟙 (formalModuleQuotient I (n + 1) F.obj)))) ∧ ∃ e : ∀ n : ℕᵒᵖ, formalModuleQuotient I (n.unop + 1) (SheafOfModules.homObj (R := X.toRingedSpace.sheaf) G.obj F.obj) ⟶ SheafOfModules.homObj (R := X.toRingedSpace.sheaf) (formalModuleQuotient I (n.unop + 1) G.obj) (formalModuleQuotient I (n.unop + 1) F.obj), (∀ n : ℕᵒᵖ, formalModuleQuotientπ I (n.unop + 1) (SheafOfModules.homObj (R := X.toRingedSpace.sheaf) G.obj F.obj) ≫ e n ≫ SheafOfModules.homObjMap (R := X.toRingedSpace.sheaf) (formalModuleQuotientπ I (n.unop + 1) G.obj) (𝟙 (formalModuleQuotient I (n.unop + 1) F.obj)) = SheafOfModules.homObjMap (R := X.toRingedSpace.sheaf) (𝟙 G.obj) (formalModuleQuotientπ I (n.unop + 1) F.obj)) ∧ (∀ (a b : ℕᵒᵖ) (f : a ⟶ b), e a ≫ SheafOfModules.homObjMap (R := X.toRingedSpace.sheaf) (𝟙 (formalModuleQuotient I (a.unop + 1) G.obj)) ((formalCompletionSystem I F.obj).map f) = (formalCompletionSystem I (SheafOfModules.homObj (R := X.toRingedSpace.sheaf) G.obj F.obj)).map f ≫ e b ≫ SheafOfModules.homObjMap (R := X.toRingedSpace.sheaf) ((formalCompletionSystem I G.obj).map f) (𝟙 (formalModuleQuotient I (b.unop + 1) F.obj))) ∧ ∃ Φ : {s : ∀ n : ℕᵒᵖ, (formalModuleQuotient I (n.unop + 1) (SheafOfModules.homObj (R := X.toRingedSpace.sheaf) G.obj F.obj)).sections // ∀ (a b : ℕᵒᵖ) (f : a ⟶ b), SheafOfModules.sectionsMap ((formalCompletionSystem I (SheafOfModules.homObj (R := X.toRingedSpace.sheaf) G.obj F.obj)).map f) (s a) = s b} → ((completion X I).obj G ⟶ (completion X I).obj F), (∀ s n, (Φ s).hom.app n = SheafOfModules.homObjSectionsEquiv (R := X.toRingedSpace.sheaf) (formalModuleQuotient I (n.unop + 1) G.obj) (formalModuleQuotient I (n.unop + 1) F.obj) (SheafOfModules.sectionsMap (e n) (s.val n))) ∧ Function.Bijective Φ",
+  "branch": "sheaf-dag",
+  "by": "Q1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "Q1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }
