@@ -4,7 +4,7 @@
   "is": null,
   "from": {
    "node": "def-weil-derived-pullback-tensor-hom",
-   "place": "Theorem lemma-theorem construction, criterion reducing K-injectivity to bounded-above small acyclic complexes",
+   "place": "Lemma lemma-characterize-K-injective: transfinite filtration of an arbitrary acyclic complex and the successor and limit Hom-vanishing arguments",
    "via": [
     "lem-pur-kinjective-degreewise-existence"
    ]
@@ -25,9 +25,66 @@
   "def-sp-injective-resolutions",
   "def-pur-kinjective-complex"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let $M^\\bullet$ be any acyclic complex. By transfinite recursion construct acyclic subcomplexes $K_\\alpha^\\bullet\\subset M^\\bullet$: set $K_0^\\bullet=0$; at a successor $\\alpha=\\beta+1$, if $K_\\beta^\\bullet=M^\\bullet$ keep it unchanged, and otherwise apply assumption (a) in the statement to the nonzero acyclic quotient $M^\\bullet/K_\\beta^\\bullet$ and take the inverse image of the resulting nonzero bounded-above acyclic subcomplex; at a limit ordinal take the colimit of the earlier subcomplexes. The inverse image is acyclic because it is an extension of acyclic complexes, filtered colimits preserve exactness in a Grothendieck category, and a strictly increasing chain of subobjects of the set of subobjects of each $M^n$ cannot continue indefinitely. Thus the process reaches $M^\\bullet$ at some ordinal.",
+   "uses": [
+    "def-sp-grothendieck-abelian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/injectives.tex",
+    "place": "Lemma lemma-characterize-K-injective, proof: transfinite construction of K_alpha"
+   }
+  },
+  {
+   "text": "We prove by transfinite induction, simultaneously for every $n\\in\\mathbb Z$, that $\\operatorname{Hom}_{K(\\mathcal A)}(K_\\alpha^\\bullet[n],I^\\bullet)=0$. The assertion is immediate for $K_0^\\bullet=0$. At a successor where the chain has already reached $M^\\bullet$ it is unchanged. Otherwise there is a short exact sequence $0\\to K_\\beta^\\bullet\\to K_{\\beta+1}^\\bullet\\to N_{\\beta+1}^\\bullet\\to0$ with $N_{\\beta+1}^\\bullet$ bounded above, acyclic, and termwise of size at most $\\kappa$. Shifting this sequence by $n$ and applying [lem-pur-kinjective-homotopy-exact-injective-target] with target $I^\\bullet$ gives an exact Hom sequence. The left term vanishes by induction. The right term vanishes by hypothesis (2) applied to the shifted bounded-above acyclic complex $N_{\\beta+1}^\\bullet[n]$, whose term sizes are unchanged. Hence the middle term vanishes for every $n$.",
+   "uses": [
+    "lem-pur-kinjective-homotopy-exact-injective-target",
+    "def-sp-injective-resolutions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/injectives.tex",
+    "place": "Lemma lemma-characterize-K-injective, proof: successor step"
+   }
+  },
+  {
+   "text": "At a limit ordinal $\\lambda$, the Hom complexes $\\operatorname{Hom}^\\bullet(K_\\lambda^\\bullet,I^\\bullet)$ are the inverse limit of the Hom complexes $\\operatorname{Hom}^\\bullet(K_\\beta^\\bullet,I^\\bullet)$, and their transition maps are surjective because every term of $I^\\bullet$ is injective. Therefore [lem-pur-kinjective-homotopy-limit-vanishing] applies: the induction hypothesis gives $\\operatorname{Hom}_{K(\\mathcal A)}(K_\\beta^\\bullet[n],I^\\bullet)=0$ for every earlier $\\beta$ and every shift $n$, so it gives the same conclusion for $K_\\lambda^\\bullet$.",
+   "uses": [
+    "lem-pur-kinjective-homotopy-limit-vanishing",
+    "def-sp-injective-resolutions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/injectives.tex",
+    "place": "Lemma lemma-characterize-K-injective, proof: limit step using Homology Lemma homology-lemma-ML-over-ordinals"
+   }
+  },
+  {
+   "text": "Choose an ordinal at which the construction has reached $M^\\bullet$. The preceding induction gives $\\operatorname{Hom}_{K(\\mathcal A)}(M^\\bullet,I^\\bullet[n])=0$ for every $n$, so in particular the case $n=0$ says $\\operatorname{Hom}_{K(\\mathcal A)}(M^\\bullet,I^\\bullet)=0$. By [def-pur-kinjective-complex] this is equivalent to every morphism from the acyclic complex $M^\\bullet$ to $I^\\bullet$ being homotopic to zero. Since $M^\\bullet$ was arbitrary, $I^\\bullet$ is K-injective.",
+   "uses": [
+    "def-pur-kinjective-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/injectives.tex",
+    "place": "Lemma lemma-characterize-K-injective, conclusion"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sp-grothendieck-abelian",
+  "lem-pur-kinjective-homotopy-exact-injective-target",
+  "lem-pur-kinjective-homotopy-limit-vanishing",
+  "def-sp-injective-resolutions",
+  "def-pur-kinjective-complex"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/injectives.tex",
+  "place": "Lemma lemma-characterize-K-injective"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -52,12 +109,27 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pur-kinjective-degreewise-existence",
   "by": "worker",
   "date": "2026-10-11"
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-def-sf-operations"
+ "unit": "sk-def-sf-operations",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pur-kinjective-characterize-K-injective",
+  "worker": "stage1",
+  "summary": "Repaired the transfinite proof after review: the filtration uses the item's own clause (a), the induction proves vanishing for every shift, and the limit child now has the required all-shifts hypothesis and conclusion. The successor induction uses the exactness child for shifted injective targets, and the final step specializes to shift zero to obtain K-injectivity.",
+  "blueprint": "Realizes the criterion reducing K-injectivity to bounded-above small acyclic complexes in the ancestor proof."
+ },
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-cki0105",
+  "group": "K1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-cki0105 (reviewer sub-agent of L); spot-checked: Re-push after R-cki0048: (1) limit child now assumes and concludes Hom_K(K_beta[n],I)=0 for all n; the Ab counterexample (K_n=(1/n!)Z in deg 1, I=(Q->Q/Z)) now violates the hypothesis (Hom_K(K_n[1],I)=H^0(I)=Z!=0); with acyclic Hom complexes, surjective transitions (mono K, injective I) and continuity, Stacks homology-lemma-ML-over-ordinals gives the child, which is a real statement-only lemma whose split will cite it (C1). (2) Step 2 proves all shifts via shifted SES + exactness child (true: termwise SES of Hom complexes, LES) and hypothesis (2) on N[n]; Step 3 all shifts; Step 4 n=0. (3) Step 1 uses item's own (a) on M/K_beta; acyclic-quotient node dropped from uses. Stacks proof structure matches injectives.tex. Citer lem-pur-kinjective-degreewise-existence feeds the existential kappa into (a),(b) and verifies (1),(2): consistent (C4). No duplicates found (grep for exact-Hom/ML nodes: lem-pc-tower-surjective-lim-acyclic is countable lim^1, not this). Second reading by K1 (with its correction) missed no fault."
+ }
 }
