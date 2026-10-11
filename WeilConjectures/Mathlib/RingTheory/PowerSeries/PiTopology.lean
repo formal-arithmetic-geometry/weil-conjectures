@@ -7,6 +7,7 @@ module
 
 public import Mathlib.Analysis.Complex.Basic
 public import Mathlib.RingTheory.PowerSeries.PiTopology
+public import WeilConjectures.Mathlib.RingTheory.PowerSeries.Expand
 public import WeilConjectures.Mathlib.RingTheory.PowerSeries.Inverse
 public import WeilConjectures.Mathlib.RingTheory.PowerSeries.WellKnown
 
@@ -190,6 +191,61 @@ theorem tprod_inv_one_sub_X_pow_ne_coe {β : Type*} [Nonempty β] {e : β → �
   · exact absurd h₁ (zero_lt_one (α := ℂ)).not_ge
   · calc R.natDegree < R.natDegree + 1 := Nat.lt_succ_self _
       _ ≤ e b₀ * (R.natDegree + 1) := Nat.le_mul_of_pos_left _ (Nat.pos_of_ne_zero (he b₀))
+
+end WithPiTopology
+
+end PowerSeries
+
+namespace PowerSeries
+
+variable {R : Type*} [CommRing R]
+
+/-- The logarithmic derivative of a finite product is the sum of the logarithmic derivatives of
+the factors: if `X fⱼ' = aⱼ fⱼ` for all `j`, then `X (∏ fⱼ)' = (∑ aⱼ) ∏ fⱼ`. -/
+theorem X_mul_derivative_prod {J : Type*} {f a : J → R⟦X⟧}
+    (hf : ∀ j, X * derivative R (f j) = a j * f j) (s : Finset J) :
+    X * derivative R (∏ j ∈ s, f j) = (∑ j ∈ s, a j) * ∏ j ∈ s, f j := by
+  classical
+  induction s using Finset.induction_on with
+  | empty => simp
+  | insert j s hj ih =>
+    rw [Finset.prod_insert hj, Finset.sum_insert hj, Derivation.leibniz, smul_eq_mul,
+      smul_eq_mul]
+    linear_combination (f j) * ih + (∏ i ∈ s, f i) * hf j
+
+namespace WithPiTopology
+
+open scoped PowerSeries.WithPiTopology
+
+variable [TopologicalSpace R] [T2Space R]
+
+/-- The logarithmic derivative of a locally finite product: if `X fⱼ' = aⱼ fⱼ` for all `j`, and
+for every `n` all `fⱼ` with `j` outside the finite set `S n` are congruent to `1`, and all `aⱼ`
+to `0`, modulo `X ^ (n + 1)`, then `X (∏' fⱼ)' = A ∏' fⱼ` for the sum `A = ∑ aⱼ`, whose `n`-th
+coefficient is that of the finite sum over `S n`. -/
+theorem X_mul_derivative_tprod_of_X_pow_dvd_sub_one {J : Type*} {f a : J → R⟦X⟧}
+    (S : ℕ → Finset J) (hS : ∀ n, ∀ j ∉ S n, X ^ (n + 1) ∣ f j - 1)
+    (ha : ∀ n, ∀ j ∉ S n, X ^ (n + 1) ∣ a j)
+    (hf : ∀ j, X * derivative R (f j) = a j * f j) {A : R⟦X⟧}
+    (hA : ∀ n, coeff n A = ∑ j ∈ S n, coeff n (a j)) :
+    X * derivative R (∏' j, f j) = A * ∏' j, f j := by
+  classical
+  ext n
+  have hP (k : ℕ) (hk : k ≤ n) : coeff k (∏' j, f j) = coeff k (∏ j ∈ S n, f j) :=
+    coeff_tprod_of_X_pow_dvd_sub_one S hS (S n) (hS n) hk
+  have hcoeff (i : ℕ) (hi : i ≤ n) : coeff i A = coeff i (∑ j ∈ S n, a j) := by
+    have hz (m : ℕ) (hm : i ≤ m) (j : J) (hj : j ∉ S m) : coeff i (a j) = 0 :=
+      (X_pow_dvd_iff.1 ((pow_dvd_pow X (by omega : i + 1 ≤ m + 1)).trans (ha m j hj))) i
+        (Nat.lt_succ_self i)
+    rw [hA, map_sum]
+    exact (Finset.sum_subset (Finset.subset_union_left (s₂ := S n))
+      fun j _ hj ↦ hz i le_rfl j hj).trans (Finset.sum_subset
+        (Finset.subset_union_right (s₁ := S i)) fun j _ hj ↦ hz n hi j hj).symm
+  rw [coeff_X_mul_derivative, hP n le_rfl, ← coeff_X_mul_derivative, X_mul_derivative_prod hf,
+    coeff_mul, coeff_mul]
+  refine Finset.sum_congr rfl fun p hp ↦ ?_
+  have h := Finset.mem_antidiagonal.1 hp
+  rw [hcoeff p.1 (by omega), hP p.2 (by omega)]
 
 end WithPiTopology
 

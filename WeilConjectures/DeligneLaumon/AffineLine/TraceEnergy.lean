@@ -19,6 +19,8 @@ public import Mathlib.RingTheory.PowerSeries.PiTopology
 public import WeilConjectures.DeligneLaumon.AffineLine.Endpoints
 public import WeilConjectures.WeilSheaf.StalkFunctor
 public import WeilConjectures.WeilSheaf.StalkConstantTwist
+public import WeilConjectures.WeilSheaf.LSeries
+public import WeilConjectures.WeilSheaf.StalkTensor
 public import WeilConjectures.WeilSheaf.Tensor
 public import WeilConjectures.WeilSheaf.TraceFunction
 public import WeilConjectures.WeilSheaf.UpperStarLowerStar
@@ -544,7 +546,6 @@ theorem exists_traceEnergy_le_of_hasWeightsAtMost (ι : PadicAlgCl l →+* ℂ) 
     _ ≤ (d * (Nat.card k₀ : ℝ) ^ n) * ((N : ℝ) * ((Nat.card k₀ : ℝ) ^ (w / 2)) ^ n) ^ 2 := by
         gcongr
     _ = ((d : ℝ) * (N : ℝ) ^ 2) * (Nat.card k₀ : ℝ) ^ ((n : ℝ) * (w + 1)) := by
-        push_cast
         rw [mul_pow, ← pow_mul, ← Real.rpow_natCast _ (n * 2), ← Real.rpow_mul hq.le,
           ← Real.rpow_natCast (Nat.card k₀ : ℝ) n, show (n : ℝ) * (w + 1) = n + (w / 2 * ↑(n * 2))
             by push_cast; ring, Real.rpow_add hq]
@@ -563,16 +564,6 @@ theorem l2Weight_le_of_hasWeightsAtMost (ι : PadicAlgCl l →+* ℂ) {V : Schem
     F.l2Weight ι ≤ w := by
   obtain ⟨C, hC⟩ := exists_traceEnergy_le_of_hasWeightsAtMost ι F hlisse h
   simpa using F.l2Weight_le_of_traceEnergy_le ι hC
-
-/-- The `L`-series `L(X₀, F, t) = ∏_{x ∈ |X₀|} det(1 - Fₓ t^{d(x)} | F_x̄)⁻¹ ∈ ℂ⟦t⟧` of a Weil
-sheaf, the product over the closed points of `X₀` of the inverses of the local polynomials
-`FrobeniusModule.localPolynomial` of the stalks, transported to `ℂ` along `ι` and substituted
-into `t^{d(x)}` for the degree `d(x) = [κ(x) : k₀]`. It is taken in the product topology on
-`ℂ⟦t⟧`, in which it converges for `X₀` of finite type over `k₀`. -/
-noncomputable def lSeries (ι : PadicAlgCl l →+* ℂ) (F : WeilSheaf k₀ l X) : PowerSeries ℂ :=
-  ∏' x : X.finitePoints, ((((F.stalk x).localPolynomial.map ι).comp
-    (Polynomial.X ^ (X ↘ Spec (CommRingCat.of k₀)).degreeOver x.1) : Polynomial ℂ) :
-      PowerSeries ℂ)⁻¹
 
 /-- Let `F` be a lisse Weil sheaf on the smooth geometrically connected affine curve `X₀` and
 `F'` a Weil sheaf whose local eigenvalues are the complex conjugates of those of `F` (the sheaf
@@ -598,7 +589,38 @@ theorem traceFunction_tensorObj_and_l2Series_mul_lSeries (ι : PadicAlgCl l →+
       ι ((F.tensorObj F' hlisse).traceFunction n y) = ((‖ι (F.traceFunction n y)‖ ^ 2 : ℝ) : ℂ)) ∧
     PowerSeries.mk (fun m ↦ (F.traceEnergy ι (m + 1) : ℂ)) * (F.tensorObj F' hlisse).lSeries ι =
       PowerSeries.derivative ℂ ((F.tensorObj F' hlisse).lSeries ι) := by
-  sorry
+  have : QuasiCompact (V ↘ Spec (CommRingCat.of k₀)) := inferInstance
+  have hy (n : ℕ) (y : (V ↘ Spec (CommRingCat.of k₀)).fieldPoints
+      (FiniteField.galoisExtension k₀ n)) :
+      ι ((F.tensorObj F' hlisse).traceFunction n y) =
+        ((‖ι (F.traceFunction n y)‖ ^ 2 : ℝ) : ℂ) := by
+    rw [traceFunction_tensorObj, map_mul, traceFunction_eq_trace F', traceFunction_eq_trace F,
+      FrobeniusModule.map_trace_frobeniusEnd_pow_eq_of_map_localPolynomial_eq
+        (F.stalk (finitePointOfFieldPoint y)) (F'.stalk (finitePointOfFieldPoint y)) ι
+        ((starRingEnd ℂ).comp ι) (by rw [hconj, Polynomial.map_map]), RingHom.comp_apply,
+      Complex.conj_mul']
+    push_cast
+    rfl
+  refine ⟨hy, ?_⟩
+  set L := (F.tensorObj F' hlisse).lSeries ι
+  have h := (F.tensorObj F' hlisse).X_mul_derivative_lSeries ι
+  have hA : PowerSeries.mk (fun n ↦ if n = 0 then 0 else
+      ∑ᶠ y, ι ((F.tensorObj F' hlisse).traceFunction n y)) =
+      PowerSeries.X * PowerSeries.mk (fun m ↦ (F.traceEnergy ι (m + 1) : ℂ)) := by
+    ext n
+    rcases n with _ | n
+    · simp
+    rw [PowerSeries.coeff_mk, if_neg n.succ_ne_zero, PowerSeries.coeff_succ_X_mul,
+      PowerSeries.coeff_mk, traceEnergy]
+    have : Finite (FiniteField.galoisExtension k₀ (n + 1)) := Module.finite_of_finite k₀
+    have := (V ↘ Spec (CommRingCat.of k₀)).finite_fieldPoints
+      (FiniteField.galoisExtension k₀ (n + 1))
+    let : Fintype ((V ↘ Spec (CommRingCat.of k₀)).fieldPoints
+      (FiniteField.galoisExtension k₀ (n + 1))) := Fintype.ofFinite _
+    rw [finsum_eq_sum_of_fintype, finsum_eq_sum_of_fintype, Complex.ofReal_sum]
+    exact Finset.sum_congr rfl fun y _ ↦ hy _ y
+  rw [hA, mul_assoc] at h
+  exact (mul_left_cancel₀ PowerSeries.X_ne_zero h).symm
 
 /-- The *`L²`-rigidity* for real sheaves: let `G` be a nonzero lisse `ι`-real Weil sheaf on the
 smooth geometrically connected affine curve `X₀`, punctually `ι`-pure of weight `w`. Then
@@ -732,7 +754,7 @@ theorem mem_range_mapFieldPoints_iff (D : LisseOnDenseOpen k₀ l) (m : ℕ)
 
 lemma injective_mapFieldPoints (D : LisseOnDenseOpen k₀ l) (m : ℕ) :
     Function.Injective (D.j.mapFieldPoints (k₀ := k₀) (K := FiniteField.galoisExtension k₀ m)) :=
-  fun y y' h ↦ Subtype.ext ((cancel_mono D.j).1 (congrArg Subtype.val h))
+  fun _ _ h ↦ Subtype.ext ((cancel_mono D.j).1 (congrArg Subtype.val h))
 
 /-- The trace energy of the direct image `j_*M` is that of `M` plus the boundary contribution
 `E_m`: since `j^*j_*M ≅ M`, the trace functions of `j_*M` and `M` agree at the points of `U₀`.
@@ -794,7 +816,8 @@ theorem exists_boundaryEnergy_le (ι : PadicAlgCl l →+* ℂ) (D : LisseOnDense
   have hterm (y) (hy : y ∈ s) : ‖ι (D.directImage.traceFunction m y)‖ ^ 2 ≤
       (N : ℝ) ^ 2 * (Nat.card k₀ : ℝ) ^ ((m : ℝ) * w) := by
     have hb := norm_map_traceFunction_le hJ m y
-    have hN : Module.finrank (PadicAlgCl l) (D.directImage.stalk (finitePointOfFieldPoint y)).carrier
+    have hN : Module.finrank (PadicAlgCl l)
+        (D.directImage.stalk (finitePointOfFieldPoint y)).carrier
         ≤ N := Finset.le_sup (f := fun x ↦ Module.finrank (PadicAlgCl l)
           (D.directImage.stalk x).carrier) ((hB _).2 hy)
     have hpow : ((Nat.card k₀ : ℝ) ^ (w / 2)) ^ m * ((Nat.card k₀ : ℝ) ^ (w / 2)) ^ m =
@@ -817,7 +840,8 @@ theorem exists_boundaryEnergy_le (ι : PadicAlgCl l →+* ℂ) (D : LisseOnDense
           (FiniteField.galoisExtension k₀ m) // p.1.base (IsLocalRing.closedPoint _) = x.1} := by
           rw [← Nat.card_eq_finsetCard]
           refine Nat.card_le_card_of_injective (fun p ↦ ⟨p.1, congrArg Subtype.val
-            (Finset.mem_filter.1 p.2).2⟩) fun p p' h ↦ Subtype.ext (by simpa using congrArg Subtype.val h)
+            (Finset.mem_filter.1 p.2).2⟩) fun p p' h ↦
+              Subtype.ext (by simpa using congrArg Subtype.val h)
       _ ≤ _ := (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).card_fieldPoints_base_eq_le _ x.2
   rw [boundaryEnergy]
   change ∑ᶠ y ∈ s, _ ≤ _
@@ -829,7 +853,7 @@ theorem exists_boundaryEnergy_le (ι : PadicAlgCl l →+* ℂ) (D : LisseOnDense
         rw [Finset.sum_const, nsmul_eq_mul]
     _ ≤ d * ((N : ℝ) ^ 2 * (Nat.card k₀ : ℝ) ^ ((m : ℝ) * w)) := by
         gcongr
-    _ = _ := by push_cast; ring
+    _ = _ := by ring
 
 /-- The trace energies of the lisse sheaf `M` on the dense open `U₀` are at most those of its
 direct image `j_*M` on the affine line, the boundary contribution being nonnegative. -/

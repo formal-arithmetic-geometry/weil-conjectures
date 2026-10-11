@@ -10,6 +10,7 @@ public import Mathlib.Analysis.Analytic.OfScalars
 public import Mathlib.Analysis.Complex.Basic
 public import Mathlib.Analysis.Normed.Ring.InfiniteSum
 public import Mathlib.Analysis.SpecificLimits.Normed
+public import Mathlib.RingTheory.PowerSeries.Derivative
 public import Mathlib.RingTheory.PowerSeries.Inverse
 public import Mathlib.RingTheory.PowerSeries.PiTopology
 
@@ -274,4 +275,201 @@ theorem radius_tprod_le_radius {J : Type*} {f : J → ℂ⟦X⟧} (hf : ∀ j, (
 
 end Nonneg
 
+section Pole
+
+variable {𝕜 : Type*} [NontriviallyNormedField 𝕜] [CompleteSpace 𝕜]
+
+/-- If `f Q = P` for polynomials `P` and `Q`, then inside the disc of convergence of `f` the
+sum of `f` at `z` times `Q (z)` is `P (z)`: the Cauchy product of the two absolutely convergent
+series. -/
+theorem tsum_mul_eval_eq_eval_of_mul_eq {f : 𝕜⟦X⟧} {P Q : Polynomial 𝕜}
+    (h : f * (Q : 𝕜⟦X⟧) = P) {z : 𝕜} (hz : (‖z‖₊ : ℝ≥0∞) < f.radius) :
+    (∑' n, coeff n f * z ^ n) * Q.eval z = P.eval z := by
+  have hQ : Summable fun n ↦ ‖Q.coeff n * z ^ n‖ :=
+    summable_of_ne_finset_zero (s := Finset.range (Q.natDegree + 1)) fun n hn ↦ by
+      rw [Polynomial.coeff_eq_zero_of_natDegree_lt (by simpa [Nat.lt_succ_iff] using hn),
+        zero_mul, norm_zero]
+  have hf : Summable fun n ↦ ‖coeff n f * z ^ n‖ := by
+    simpa [norm_mul, norm_pow] using summable_norm_coeff_mul_pow hz
+  have key := tsum_mul_tsum_eq_tsum_sum_antidiagonal_of_summable_norm hf hQ
+  have hQe : ∑' n, Q.coeff n * z ^ n = Q.eval z := by
+    rw [tsum_eq_sum (s := Finset.range (Q.natDegree + 1)) fun n hn ↦ by
+      rw [Polynomial.coeff_eq_zero_of_natDegree_lt (by simpa [Nat.lt_succ_iff] using hn),
+        zero_mul], Polynomial.eval_eq_sum_range]
+  have h1 (n : ℕ) : ∑ p ∈ Finset.antidiagonal n, coeff p.1 f * z ^ p.1 * (Q.coeff p.2 * z ^ p.2)
+      = P.coeff n * z ^ n := by
+    rw [← Polynomial.coeff_coe P, ← h, coeff_mul, Finset.sum_mul]
+    refine Finset.sum_congr rfl fun p hp ↦ ?_
+    rw [← Finset.mem_antidiagonal.1 hp, pow_add, Polynomial.coeff_coe]
+    ring
+  simp_rw [h1] at key
+  rw [← hQe, key, tsum_eq_sum (s := Finset.range (P.natDegree + 1)) fun n hn ↦ by
+      rw [Polynomial.coeff_eq_zero_of_natDegree_lt (by simpa [Nat.lt_succ_iff] using hn),
+        zero_mul], Polynomial.eval_eq_sum_range]
+
+/-- **A pole bounds the radius.** If `f Q = P` for polynomials `P` and `Q` and `z` is a zero of
+`Q` which is not a zero of `P`, then the radius of convergence of `f` is at most `‖z‖`. -/
+theorem radius_le_of_mul_eq {f : 𝕜⟦X⟧} {P Q : Polynomial 𝕜} (h : f * (Q : 𝕜⟦X⟧) = P) {z : 𝕜}
+    (hQ : Q.eval z = 0) (hP : P.eval z ≠ 0) : f.radius ≤ ‖z‖₊ := by
+  by_contra hz
+  rw [not_le] at hz
+  have := tsum_mul_eval_eq_eval_of_mul_eq h hz
+  rw [hQ, mul_zero] at this
+  exact hP this.symm
+
+end Pole
+
+section LogDerivative
+
+/-- **The solution of `f' = g f` converges where `g` does.** If `f' = g f`, then the radius of
+convergence of `f` is at least that of `g`: writing `mₙ = ‖fₙ‖ rⁿ` for `r` inside the disc of
+`g`, the recursion `(n + 1) f_{n + 1} = ∑_{i + j = n} gᵢ fⱼ` gives
+`(n + 1) m_{n + 1} ≤ r C (m₀ + ⋯ + mₙ)` with `C = ∑ ‖gᵢ‖ rⁱ`, so the partial sums of the `mₙ`
+grow more slowly than any exponential `(1 + ε)ⁿ`. -/
+theorem radius_le_radius_of_derivative_eq_mul {f g : ℂ⟦X⟧} (h : derivative ℂ f = g * f) :
+    g.radius ≤ f.radius := by
+  refine ENNReal.le_of_forall_nnreal_lt fun r hr ↦ ENNReal.le_of_forall_nnreal_lt fun ρ hρ ↦ ?_
+  have hρr : (ρ : ℝ) < r := by exact_mod_cast hρ
+  rcases eq_or_ne ρ 0 with rfl | hρ0
+  · simp
+  have hρ0' : (0 : ℝ) < ρ := by positivity
+  have hr0 : (0 : ℝ) < r := hρ0'.trans hρr
+  set C := ∑' n, ‖coeff n g‖ * (r : ℝ) ^ n
+  have hgs := summable_norm_coeff_mul_pow hr
+  have hC : ∀ s : Finset ℕ, ∑ i ∈ s, ‖coeff i g‖ * (r : ℝ) ^ i ≤ C := fun s ↦
+    hgs.sum_le_tsum s fun _ _ ↦ by positivity
+  have hC0 : 0 ≤ C := tsum_nonneg fun _ ↦ by positivity
+  set m : ℕ → ℝ := fun n ↦ ‖coeff n f‖ * (r : ℝ) ^ n
+  set M : ℕ → ℝ := fun n ↦ ∑ j ∈ Finset.range (n + 1), m j
+  have hm0 : ∀ n, 0 ≤ m n := fun n ↦ by positivity
+  have hM0 : ∀ n, 0 ≤ M n := fun n ↦ Finset.sum_nonneg fun j _ ↦ hm0 j
+  -- the recursion
+  have hrec : ∀ n : ℕ, ((n : ℝ) + 1) * m (n + 1) ≤ r * C * M n := by
+    intro n
+    have hc := congrArg (coeff n) h
+    rw [coeff_derivative, coeff_mul] at hc
+    have h1 : ((n : ℝ) + 1) * ‖coeff (n + 1) f‖ ≤
+        ∑ p ∈ Finset.antidiagonal n, ‖coeff p.1 g‖ * ‖coeff p.2 f‖ := by
+      calc ((n : ℝ) + 1) * ‖coeff (n + 1) f‖ = ‖coeff (n + 1) f * ((n : ℂ) + 1)‖ := by
+            rw [norm_mul, mul_comm]
+            congr 1
+            exact_mod_cast (Complex.norm_natCast (n + 1)).symm
+        _ = ‖∑ p ∈ Finset.antidiagonal n, coeff p.1 g * coeff p.2 f‖ := by rw [hc]
+        _ ≤ _ := (norm_sum_le _ _).trans (Finset.sum_le_sum fun _ _ ↦ norm_mul_le _ _)
+    calc ((n : ℝ) + 1) * m (n + 1)
+        = r * (((n : ℝ) + 1) * ‖coeff (n + 1) f‖ * (r : ℝ) ^ n) := by
+          simp only [m]; ring
+      _ ≤ r * ((∑ p ∈ Finset.antidiagonal n, ‖coeff p.1 g‖ * ‖coeff p.2 f‖) * (r : ℝ) ^ n) := by
+          gcongr
+      _ = r * ∑ p ∈ Finset.antidiagonal n, (‖coeff p.1 g‖ * (r : ℝ) ^ p.1) * m p.2 := by
+          rw [Finset.sum_mul]
+          congr 1
+          refine Finset.sum_congr rfl fun p hp ↦ ?_
+          rw [← Finset.mem_antidiagonal.1 hp, pow_add]
+          simp only [m]
+          ring
+      _ ≤ r * ∑ p ∈ Finset.antidiagonal n, (‖coeff p.1 g‖ * (r : ℝ) ^ p.1) * M n := by
+          gcongr with p hp
+          exact Finset.single_le_sum (fun j _ ↦ hm0 j)
+            (Finset.mem_range.2 (by have := Finset.mem_antidiagonal.1 hp; omega))
+      _ = r * (∑ i ∈ Finset.range (n + 1), ‖coeff i g‖ * (r : ℝ) ^ i) * M n := by
+          rw [← Finset.sum_mul, Finset.Nat.sum_antidiagonal_eq_sum_range_succ_mk]
+          ring
+      _ ≤ r * C * M n :=
+          mul_le_mul_of_nonneg_right (mul_le_mul_of_nonneg_left (hC _) hr0.le) (hM0 n)
+  -- the partial sums grow subexponentially
+  set ε : ℝ := r / ρ - 1
+  have hε : 0 < ε := by
+    simp only [ε, sub_pos]
+    rw [one_lt_div hρ0']
+    exact hρr
+  obtain ⟨N, hN⟩ : ∃ N : ℕ, r * C ≤ ε * ((N : ℝ) + 1) := by
+    obtain ⟨N, hN⟩ := exists_nat_ge (r * C / ε)
+    refine ⟨N, ?_⟩
+    rw [div_le_iff₀ hε] at hN
+    nlinarith
+  have hstep : ∀ n, N ≤ n → M (n + 1) ≤ (1 + ε) * M n := by
+    intro n hn
+    have h1 := hrec n
+    have h2 : r * C ≤ ε * ((n : ℝ) + 1) := hN.trans (by gcongr)
+    have h3 : ((n : ℝ) + 1) * m (n + 1) ≤ ((n : ℝ) + 1) * (ε * M n) := by
+      nlinarith [hM0 n]
+    have h4 : m (n + 1) ≤ ε * M n := le_of_mul_le_mul_left h3 (by positivity)
+    simp only [M, Finset.sum_range_succ] at h4 ⊢
+    linarith
+  have hbound : ∀ n, M n ≤ M N * (1 + ε) ^ n := by
+    intro n
+    induction n with
+    | zero =>
+      have : M 0 ≤ M N := Finset.sum_le_sum_of_subset_of_nonneg
+        (Finset.range_subset_range.2 (by omega)) fun j _ _ ↦ hm0 j
+      simpa using this
+    | succ n ih =>
+      rcases lt_or_ge n N with hn | hn
+      · have : M (n + 1) ≤ M N := Finset.sum_le_sum_of_subset_of_nonneg
+          (Finset.range_subset_range.2 (by omega)) fun j _ _ ↦ hm0 j
+        exact this.trans (le_mul_of_one_le_right (hM0 N) (one_le_pow₀ (by linarith)))
+      · calc M (n + 1) ≤ (1 + ε) * M n := hstep n hn
+          _ ≤ (1 + ε) * (M N * (1 + ε) ^ n) := by gcongr
+          _ = M N * (1 + ε) ^ (n + 1) := by ring
+  have hρε : (ρ : ℝ) = r / (1 + ε) := by
+    simp only [ε, add_sub_cancel]
+    field_simp
+  refine le_radius_of_bound (M N) fun n ↦ ?_
+  have hmn : m n ≤ M n := Finset.single_le_sum (fun j _ ↦ hm0 j) (Finset.self_mem_range_succ n)
+  calc ‖coeff n f‖ * (ρ : ℝ) ^ n = m n / (1 + ε) ^ n := by
+        rw [hρε, div_pow]
+        simp only [m]
+        ring
+    _ ≤ M n / (1 + ε) ^ n := by gcongr
+    _ ≤ M N := by
+        rw [div_le_iff₀ (by positivity)]
+        exact hbound n
+
+end LogDerivative
+
+section NonnegRecursion
+
+open scoped ComplexOrder
+
+/-- If `X G' = S G` with `S` having nonnegative coefficients and no constant term, and `G` has a
+nonnegative constant coefficient, then all the coefficients of `G` are nonnegative: the
+recursion `n gₙ = ∑_{i + j = n, i ≥ 1} sᵢ gⱼ` preserves nonnegativity. -/
+theorem coeff_nonneg_of_X_mul_derivative_eq {G S : ℂ⟦X⟧} (h : X * derivative ℂ G = S * G)
+    (hS : ∀ n, 0 ≤ coeff n S) (hS0 : coeff 0 S = 0) (hG0 : 0 ≤ coeff 0 G) (k : ℕ) :
+    0 ≤ coeff k G := by
+  induction k using Nat.strong_induction_on with
+  | _ k ih =>
+  rcases k with _ | k
+  · exact hG0
+  · have hc := congrArg (coeff (k + 1)) h
+    rw [coeff_succ_X_mul, coeff_derivative, coeff_mul] at hc
+    have hsum : 0 ≤ ∑ p ∈ Finset.antidiagonal (k + 1), coeff p.1 S * coeff p.2 G := by
+      refine Finset.sum_nonneg fun p hp ↦ ?_
+      rcases eq_or_ne p.1 0 with h0 | h0
+      · simp [h0, hS0]
+      · have hi : p.2 < k + 1 := by
+          have := Finset.mem_antidiagonal.1 hp
+          omega
+        exact mul_nonneg (hS _) (ih p.2 hi)
+    have hk : coeff (k + 1) G = (((k + 1 : ℕ) : ℝ)⁻¹ : ℝ) *
+        ∑ p ∈ Finset.antidiagonal (k + 1), coeff p.1 S * coeff p.2 G := by
+      rw [← hc]
+      push_cast
+      field_simp
+    rw [hk]
+    exact mul_nonneg (Complex.zero_le_real.2 (by positivity)) hsum
+
+end NonnegRecursion
+
 end PowerSeries
+
+namespace FormalMultilinearSeries
+
+/-- The radius of convergence of a real scalar series is that of the same series over `ℂ`. -/
+theorem radius_ofScalars_real_eq (c : ℕ → ℝ) :
+    (ofScalars ℝ c).radius = PowerSeries.radius (PowerSeries.mk fun n ↦ (c n : ℂ)) := by
+  simp only [PowerSeries.radius, FormalMultilinearSeries.radius, ofScalars_norm,
+    PowerSeries.coeff_mk, Complex.norm_real]
+
+end FormalMultilinearSeries
