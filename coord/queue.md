@@ -1,11 +1,11 @@
 # Work queue
 
-139 items; claim with `tools/claim.py next <group> [--stage N]`.
+134 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (139)
+## Stage 2: nodes to state (134)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
@@ -33,7 +33,6 @@
 | `thm-sp-spectral-object-yields` | 1 | state | 1 |
 | `lem-exc-coinduced-homotopy-continuous` | 2 | state | 1 |
 | `lem-sc-group-addition-tangent-differential` | 2 | state | 1 |
-| `lem-sp-couple-morphism` | 2 | state | 1 |
 | `cor-galois-lisse-representations` | 1 | state | 0 |
 | `lem-pc-ringed-space-rgamma-derived-limit` | 1 | state | 0 |
 | `lem-pur-derived-functor-triangles-05sc` | 1 | state | 0 |
@@ -91,11 +90,9 @@
 | `lem-weil-pbc-vanishing-descends-retract` | 1 | state | 0 |
 | `lem-weil-pbc-zero-dimensional-base-change-points` | 1 | state | 0 |
 | `lem-weil-tower-split-envelope` | 1 | state | 0 |
-| `lemma-weil-pbc-torsion-filtered-union` | 1 | state | 0 |
 | `prop-weil-pbc-composition-stability` | 1 | state | 0 |
 | `prop-weil-pbc-grothendieck-existence-proper` | 1 | state | 0 |
 | `thm-galois-fundamental` | 1 | state | 0 |
-| `thm-pqf-zmt-factorization` | 1 | state | 0 |
 | `lem-exc-coinduced-continuous-acyclic` | 2 | state | 0 |
 | `lem-pc-affine-perfect-hom-colimit` | 2 | state | 0 |
 | `lem-pc-bounded-above-flat-kflat` | 2 | state | 0 |
@@ -104,8 +101,6 @@
 | `lem-pc-kflat-closure` | 2 | state | 0 |
 | `lem-pc-rf-single-complex-inherited-tensor-condition` | 2 | state | 0 |
 | `lem-pc-ring-pseudo-coherent-summand` | 2 | state | 0 |
-| `lem-pc-sigma-k-points` | 2 | state | 0 |
-| `lem-pc-sites-modules-coproduct-flat` | 2 | state | 0 |
 | `lem-pur-derived-functor-inverts-05sb` | 2 | state | 0 |
 | `lem-sc-generic-rank-leading-degree` | 2 | state | 0 |
 | `lem-sc-hilbert-embedded-points` | 2 | state | 0 |
