@@ -1,0 +1,106 @@
+{
+ "id": "def-pc-complex-scalar-extension-hom",
+ "kind": "definition",
+ "title": "Scalar extension of maps between base-extended complexes",
+ "status": "split",
+ "statement": "Let R, S, T be commutative rings, f:R→S, g:S→T, h:R→T ring homomorphisms with h=g∘f, and P,Q cochain complexes of R-modules (the one-point-site specialization of [def-pc-cochain-complex-modules]). For a chain map a:S⊗_R P→S⊗_R Q, define its scalar extension to T, as a map T⊗_R P→T⊗_R Q, by applying T⊗_S− termwise to a and conjugating by the canonical composite scalar-extension comparison of [def-pod-ring-scalar-extension], using h=g∘f to identify the direct extensions. The comparison is the one induced by uniqueness of left adjoints to restriction of scalars.",
+ "stmt_deps": [
+  "def-pc-cochain-complex-modules",
+  "def-pod-ring-scalar-extension"
+ ],
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Derived Categories of Schemes, Tag 09RE, lemma-descend-homomorphisms, affine scalar-extension comparison"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "canonical scalar extension of chain maps between base extended complexes",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-11",
+   "verdict": "unavailable; used LeanFinder, Loogle and grep"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "canonical extension of scalars of chain map between two complexes extended from a base ring",
+   "results": "HomologicalComplex.extendMap concerns shape embeddings; ModuleCat.ExtendScalars.map' concerns a single scalar extension.",
+   "date": "2026-10-11",
+   "verdict": "no exact composite chain-map comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "ModuleCat.extendScalarsComp",
+   "results": "Canonical associativity at module-functor level; NatIso.mapHomologicalComplex gives its complex-level components.",
+   "date": "2026-10-11",
+   "verdict": "components exist; transported map not a named declaration"
+  },
+  {
+   "tool": "grep",
+   "query": "scalarExtensionHom|baseChangeHom|extendScalarsComp in dag/nodes, Mathlib homology, WeilConjectures and lean/Sheaf; blueprint_refs.py search scalar extension",
+   "results": "No transported chain-map declaration. RingTensorCohomology contains a module comparison; def-pod-ring-scalar-extension supplies general scalar extension and its associativity.",
+   "date": "2026-10-11",
+   "verdict": "no exact notion; reuse components and cite existing scalar-extension node"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-pc-affine-perfect-hom-colimit",
+  "date": "2026-10-11",
+  "group": "J1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Affine scalar-extension maps used by the Hom-colimit comparison",
+   "via": [
+    "lem-pc-affine-perfect-hom-colimit",
+    "lem-pc-perfect-descend-morphisms",
+    "lem-pc-perfect-complex-descent",
+    "lem-pc-noetherian-approximation-data",
+    "lem-pc-proper-support-perfect-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.ScalarExtensionHom",
+  "declaration": "CochainComplex.scalarExtensionHom",
+  "file": "lean/Sheaf/Algebra/Homology/ScalarExtensionHom.lean",
+  "statement": "def scalarExtensionHom {R S T : Type u₁} [CommRing R] [CommRing S] [CommRing T] (f : R →+* S) (g : S →+* T) (h : R →+* T) (hc : h = g.comp f) (P Q : CochainComplex (ModuleCat.{u₁} R) ℤ) (a : ((ModuleCat.extendScalars f).mapHomologicalComplex (.up ℤ)).obj P ⟶ ((ModuleCat.extendScalars f).mapHomologicalComplex (.up ℤ)).obj Q) : ((ModuleCat.extendScalars h).mapHomologicalComplex (.up ℤ)).obj P ⟶ ((ModuleCat.extendScalars h).mapHomologicalComplex (.up ℤ)).obj Q",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-aph",
+  "group": "J1",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-aph",
+  "group": "J1",
+  "result": "fix",
+  "note": "Statement matches node clause by clause (stage tail Set.Ici i0, E_i/K_i/E/K by termwise extendScalars along F.map / colimit.iota, bounded finite projective E0,K0); H/ident/c/e are pinned by htransition/hcanonical on all chain representatives (bounded projective source: Q.map full), satisfiable; removed hollow [HasColimit F] (STATE FILTERED COLIMITS OF RINGS, I : Type u). New node def-pc-complex-scalar-extension-hom: transport of a chain map along extendScalarsComp and h = g.comp f; no Mathlib/slopmaster2/landed declaration gives it (RingTensorCohomology.extendCompIso is the algebraMap-tower functor iso, not the map transport; U1's filteredScalarComplex is termwise extension, no overlap); check_dag clean on the branch tree; no existing node changed besides the item's stmt_deps/lean."
+ }
+}
