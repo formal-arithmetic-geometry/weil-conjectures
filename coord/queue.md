@@ -1,15 +1,14 @@
 # Work queue
 
-495 items; claim with `tools/claim.py next <group> [--stage N]`.
+494 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (495)
+## Stage 2: nodes to state (494)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
-| `def-sc-picard-functor` | 1 | state |
 | `pqf-def-coherent` | 1 | state |
 | `def-nagata-finite-type-closed-in-fp` | 3 | state |
 | `cor-galois-lisse-representations` | 1 | state |
@@ -17,6 +16,7 @@
 | `lem-pc-base-change-closure-components` | 1 | state |
 | `lem-pc-derived-tensor-transitivity` | 1 | state |
 | `lem-pc-module-pullback-identity-composition` | 1 | state |
+| `lem-pc-picard-functor-agrees-sc` | 1 | state |
 | `lem-pc-zero-scheme-adjunction-base-change` | 1 | state |
 | `lem-pqf-leray-five-term` | 1 | state |
 | `lem-sc-ample-square-zero-thickening` | 1 | state |
@@ -28,7 +28,6 @@
 | `lem-sc-zero-dim-noetherian-affine` | 1 | state |
 | `lem-sp-page-induction` | 1 | state |
 | `lem-weil-derived-limit-roos-complex` | 1 | state |
-| `lem-weil-pbc-constructible-module-limit-descent` | 1 | state |
 | `lem-weil-pbc-constructible-module-noetherian-descent` | 1 | state |
 | `lem-weil-pbc-constructible-torsion-modules-agree` | 1 | state |
 | `lem-weil-pbc-curve-assertions-dense-open` | 1 | state |
@@ -505,7 +504,7 @@
 | `lem-pc-essentially-constant-pro-hom-colimit` | 4 | state |
 | `lem-pur-essential-constant-pro-criterion-05py` | 4 | state |
 
-Not open yet: 40 nodes that wait for stage 1, 724 nodes that wait for a statement dependency.
+Not open yet: 40 nodes that wait for stage 1, 723 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
