@@ -14,7 +14,7 @@
  },
  "kind": "statement",
  "title": "The lower truncation kernel of a perfect affine lift is finite locally free",
- "statement": "Let X = Spec(A) be affine [def-pc-scheme] and let P^\\bullet be a bounded-above complex of finite free A-modules [def-pc-perfect-complex] whose restriction to a quasi-compact open U represents a perfect object E of D(\\mathcal O_U) [def-pc-derived-category, def-pc-perfect-complex] of Tor amplitude in [a,b] [lem-pc-affine-tor-amplitude-criterion]. For any r<a, put K = Im(P^{r-1} \\to P^r); on U the sheaf \\widetilde K|_U coincides with the kernel of \\widetilde{P^r}|_U \\to \\widetilde{P^{r+1}}|_U (the two A-modules Ker(P^r \\to P^{r+1}) and Im(P^{r-1} \\to P^r) need not agree on X). The restriction to U of the quasi-coherent sheaf \\widetilde K associated to K is flat and of finite presentation, hence finite locally free [def-pc-finite-locally-free].",
+ "statement": "Let X = Spec(A) be affine [def-pc-scheme] and let P^\\bullet be a bounded-above complex of finite free A-modules [def-pc-perfect-complex] whose restriction to a quasi-compact open U represents a perfect object E of D(\\mathcal O_U) [def-pc-derived-category, def-pc-perfect-complex] of Tor amplitude in [a,b] [lem-pc-affine-tor-amplitude-criterion]. For any r<a, put K = Im(P^{r-1} \\to P^r); on U the sheaf \\widetilde K|_U coincides with the kernel of \\widetilde{P^r}|_U \\to \\widetilde{P^{r+1}}|_U (the two A-modules Ker(P^r \\to P^{r+1}) and Im(P^{r-1} \\to P^r) need not agree on X). The restriction to U of the quasi-coherent sheaf \\widetilde K associated to K is flat [def-pc-flat-sheaf-modules] and of finite presentation, hence finite locally free [def-sc-finite-locally-free-sheaf].",
  "source": {
   "document": "literature/stacks-project/perfect.tex",
   "place": "Tag 08ED proof, paragraphs defining K and proving flatness and finite local freeness"
@@ -24,7 +24,8 @@
   "def-pc-derived-category",
   "def-pc-perfect-complex",
   "lem-pc-affine-tor-amplitude-criterion",
-  "def-pc-finite-locally-free"
+  "def-pc-flat-sheaf-modules",
+  "def-sc-finite-locally-free-sheaf"
  ],
  "proof": [
   {
@@ -155,5 +156,47 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AffineTruncationKernelFiniteLocallyFree",
+  "declaration": "AlgebraicGeometry.affine_truncationKernel_finiteLocallyFree",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineTruncationKernelFiniteLocallyFree.lean",
+  "statement": "theorem affine_truncationKernel_finiteLocallyFree (A : Type u) [CommRing A] (U : (Spec (.of A)).Opens) (hU : IsCompact (U : Set (Spec (.of A)))) [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))] [∀ V : U.toScheme.Opens, HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings U.toScheme.toRingedSpace).over V))] (P : CochainComplex (ModuleCat.{u} A) ℤ) (hbounded : ∃ N : ℤ, ∀ i : ℤ, N < i → IsZero (P.X i)) (hfree : ∀ i : ℤ, Module.Free A (P.X i) ∧ Module.Finite A (P.X i)) (E : schemeDerivedCategory U.toScheme) (hperfect : Scheme.IsPerfect U.toScheme E) (hrep : Nonempty (DerivedCategory.Q.obj ((@Functor.mapHomologicalComplex ℤ (ModuleCat.{u} A) (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)) _ _ _ _ ((@id (ModuleCat.{u} A ⥤ SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace)) (tilde.functor (.of A))) ⋙ SheafOfModules.overFunctor (moduleRings (Spec (.of A)).toRingedSpace) U ⋙ Equivalence.functor (C := SheafOfModules.{u} ((moduleRings (Spec (.of A)).toRingedSpace).over U)) (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)) (Scheme.Modules.overEquiv U)) ⟨fun _ _ ↦ by simp⟩ (ComplexShape.up ℤ)).obj P) ≅ E)) (a b : ℤ) (hab : a ≤ b) (htor : ∀ G : SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace), ∀ i : ℤ, i < a ∨ b < i → schemeDerivedTensorCohomologyVanishes U.toScheme E G i) (r : ℤ) (hr : r < a) : (∃ e : ((@id (ModuleCat.{u} A ⥤ SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace)) (tilde.functor (.of A))) ⋙ SheafOfModules.overFunctor (moduleRings (Spec (.of A)).toRingedSpace) U ⋙ Equivalence.functor (C := SheafOfModules.{u} ((moduleRings (Spec (.of A)).toRingedSpace).over U)) (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)) (Scheme.Modules.overEquiv U)).obj (image (P.d (r - 1) r)) ≅ kernel (((@id (ModuleCat.{u} A ⥤ SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace)) (tilde.functor (.of A))) ⋙ SheafOfModules.overFunctor (moduleRings (Spec (.of A)).toRingedSpace) U ⋙ Equivalence.functor (C := SheafOfModules.{u} ((moduleRings (Spec (.of A)).toRingedSpace).over U)) (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)) (Scheme.Modules.overEquiv U)).map (P.d r (r + 1))), e.hom ≫ kernel.ι (((@id (ModuleCat.{u} A ⥤ SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace)) (tilde.functor (.of A))) ⋙ SheafOfModules.overFunctor (moduleRings (Spec (.of A)).toRingedSpace) U ⋙ Equivalence.functor (C := SheafOfModules.{u} ((moduleRings (Spec (.of A)).toRingedSpace).over U)) (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)) (Scheme.Modules.overEquiv U)).map (P.d r (r + 1))) = ((@id (ModuleCat.{u} A ⥤ SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace)) (tilde.functor (.of A))) ⋙ SheafOfModules.overFunctor (moduleRings (Spec (.of A)).toRingedSpace) U ⋙ Equivalence.functor (C := SheafOfModules.{u} ((moduleRings (Spec (.of A)).toRingedSpace).over U)) (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)) (Scheme.Modules.overEquiv U)).map (image.ι (P.d (r - 1) r))) ∧ SheafOfModules.IsFlat (((@id (ModuleCat.{u} A ⥤ SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace)) (tilde.functor (.of A))) ⋙ SheafOfModules.overFunctor (moduleRings (Spec (.of A)).toRingedSpace) U ⋙ Equivalence.functor (C := SheafOfModules.{u} ((moduleRings (Spec (.of A)).toRingedSpace).over U)) (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)) (Scheme.Modules.overEquiv U)).obj (image (P.d (r - 1) r))) ∧ SheafOfModules.IsFinitePresentation (((@id (ModuleCat.{u} A ⥤ SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace)) (tilde.functor (.of A))) ⋙ SheafOfModules.overFunctor (moduleRings (Spec (.of A)).toRingedSpace) U ⋙ Equivalence.functor (C := SheafOfModules.{u} ((moduleRings (Spec (.of A)).toRingedSpace).over U)) (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)) (Scheme.Modules.overEquiv U)).obj (image (P.d (r - 1) r))) ∧ SheafOfModules.IsFiniteLocallyFree.{u, u, u} (((@id (ModuleCat.{u} A ⥤ SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace)) (tilde.functor (.of A))) ⋙ SheafOfModules.overFunctor (moduleRings (Spec (.of A)).toRingedSpace) U ⋙ Equivalence.functor (C := SheafOfModules.{u} ((moduleRings (Spec (.of A)).toRingedSpace).over U)) (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)) (Scheme.Modules.overEquiv U)).obj (image (P.d (r - 1) r)))",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-atk",
+  "group": "E1",
+  "result": "fix",
+  "statement_corrected": true
+ },
+ "statement_change": {
+  "date": "2026-10-11",
+  "by": "E1 stage 2",
+  "old_statement": "Let X = Spec(A) be affine [def-pc-scheme] and let P^\\bullet be a bounded-above complex of finite free A-modules [def-pc-perfect-complex] whose restriction to a quasi-compact open U represents a perfect object E of D(\\mathcal O_U) [def-pc-derived-category, def-pc-perfect-complex] of Tor amplitude in [a,b] [lem-pc-affine-tor-amplitude-criterion]. For any r<a, put K = Im(P^{r-1} \\to P^r); on U the sheaf \\widetilde K|_U coincides with the kernel of \\widetilde{P^r}|_U \\to \\widetilde{P^{r+1}}|_U (the two A-modules Ker(P^r \\to P^{r+1}) and Im(P^{r-1} \\to P^r) need not agree on X). The restriction to U of the quasi-coherent sheaf \\widetilde K associated to K is flat and of finite presentation, hence finite locally free [def-pc-finite-locally-free].",
+  "what": "The final reference def-pc-finite-locally-free defines a property of scheme morphisms, not of module sheaves, and cannot type the sheaf conclusion. Replace that reference by the existing variable-rank module-sheaf definition def-sc-finite-locally-free-sheaf, and cite the existing sheaf-flatness definition. No mathematical hypothesis or conclusion changes. The recorded source tag 08ED is a miscitation: this argument occurs in Tag 08EG.",
+  "source": {
+   "document": "literature/stacks-project/perfect.tex",
+   "place": "Tag 08EG, proof of Lemma 36.13.6, paragraphs defining K and proving flatness and finite local freeness"
+  },
+  "citers": [
+   {
+    "id": "lem-sc-affine-perfect-plus-locally-free",
+    "holds": true,
+    "note": "Only definition references are corrected; the same restricted image sheaf remains finite locally free, so its use is unchanged."
+   }
+  ],
+  "old_stmt_deps": [
+   "def-pc-scheme",
+   "def-pc-derived-category",
+   "def-pc-perfect-complex",
+   "lem-pc-affine-tor-amplitude-criterion",
+   "def-pc-finite-locally-free"
+  ]
  }
 }
