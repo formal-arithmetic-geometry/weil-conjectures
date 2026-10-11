@@ -184,5 +184,23 @@
   "by": "L",
   "result": "pass",
   "note": "Six steps along Stacks 08KS first paragraph: reduction to stalks, surjectivity of the local ring map of a closed immersion (from the stalks node and local surjectivity), triangle identity, the stalk of the counit computed via 0098 (tool use) and the 00AE stalks node with the quotient-ring tensor written out, isomorphism on stalks, full faithfulness from a counit isomorphism (new leaf Adjunction.fullyFaithfulROfIsIsoCounit FullyFaithful.lean:164 verified). Correct."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ClosedImmersionPushforwardFullyFaithful",
+  "declaration": "AlgebraicGeometry.closedImmersion_pushforward_fullyFaithful",
+  "file": "lean/Sheaf/AlgebraicGeometry/ClosedImmersionPushforwardFullyFaithful.lean",
+  "statement": "theorem closedImmersion_pushforward_fullyFaithful {X Z : Scheme.{w}} (i : Z ⟶ X) [IsClosedImmersion i] : let e : Scheme.Modules.tensorPullback i ⊣ Scheme.Modules.pushforward i := Classical.choice (Scheme.Modules.nonempty_tensorPullbackAdjunction i) (∀ (G : Z.Modules), IsIso (e.counit.app G)) ∧ ∀ (G G' : Z.Modules), Function.Bijective (fun (φ : G ⟶ G') => (Scheme.Modules.pushforward i).map φ)",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-cpf1420",
+  "group": "C1",
+  "result": "pass",
+  "note": "Z,X schemes + i:Z⟶X [IsClosedImmersion i]; i^*=tensorPullback (not abstract pullback) ⊣ Scheme.Modules.pushforward via recorded nonempty adjunction (counit-iso independent of choice); ∀G IsIso counit; ∀G G' Bijective φ↦i_*φ; O_X-module version, not a duplicate of étale 04CA"
  }
 }
