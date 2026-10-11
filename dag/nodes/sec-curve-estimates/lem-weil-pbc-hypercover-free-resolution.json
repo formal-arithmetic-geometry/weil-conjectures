@@ -142,5 +142,29 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of E1; spot-checked by L: L: reviewed in full by a reviewer sub-agent (FIX: citations of the simplicial/coskeleton nodes and line numbers): 01GC/01GD/01GE/01GW read, 4 steps checked, small cases tested"
  },
- "lead_note": "2026-10-10 L: reviewer note on step 2, case n = 1: K^0 is 1-coskeletal (a tuple of F^{m+1} whose pairs lie over one point of G is a point of the fibre power; Stacks simplicial lemma-cosk-minus-one), not 0-coskeletal in the absolute sense; the claim is true, the sentence is missing."
+ "lead_note": "2026-10-10 L: reviewer note on step 2, case n = 1: K^0 is 1-coskeletal (a tuple of F^{m+1} whose pairs lie over one point of G is a point of the fibre power; Stacks simplicial lemma-cosk-minus-one), not 0-coskeletal in the absolute sense; the claim is true, the sentence is missing.",
+ "lean": {
+  "module": "Sheaf.Paper.HypercoverFreeResolution",
+  "declaration": "AlgebraicGeometry.SplitEtaleHypercover.freeAbelian_augmentation_quasiIso",
+  "declarations": [
+   "AlgebraicGeometry.SplitEtaleHypercover.freeAbelian_augmentation_quasiIso",
+   "AlgebraicGeometry.SplitEtaleHypercover.injective_abelian_section_cohomology",
+   "AlgebraicGeometry.SplitEtaleHypercover.freeModule_augmentation_quasiIso",
+   "AlgebraicGeometry.SplitEtaleHypercover.injective_module_section_cohomology"
+  ],
+  "file": "lean/Sheaf/Paper/HypercoverFreeResolution.lean",
+  "statement": "theorem freeAbelian_augmentation_quasiIso {X : Scheme.{w}} [CompactSpace X] [QuasiSeparatedSpace X] (U : SplitEtaleHypercover X) : QuasiIso (AlgebraicTopology.AlternatingFaceMapComplex.ε.app ((SimplicialObject.Augmented.whiskeringObj X.Etale _ (uliftYoneda.{w + 1} ⋙ (Functor.whiskeringRight X.Etaleᵒᵖ (Type (w + 1)) AddCommGrpCat.{w + 1}).obj AddCommGrpCat.free ⋙ presheafToSheaf X.smallEtaleTopology AddCommGrpCat.{w + 1})).obj (U.simplicial.augmentOfIsTerminal (terminalIsTerminal (C := X.Etale)))))",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "X-e099f",
+  "group": "K1",
+  "result": "pass",
+  "note": "independent Codex review: e099fc725696: matched qcqs base, unrestricted split hypercover, sheafified free alternating-face augmented exactness, canonical H^0 section identification, positive-degree vanishing, and constant-ring versions; H3/H11 repairs complete. Delivered modules and an existing dependency importer compiled cleanly in scratch."
+ }
 }

@@ -27,7 +27,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry
 
-/-- A split étale hypercover, finite in each degree, over a qcqs scheme.
+/-- A split étale hypercover over a qcqs scheme.
 Source: blueprint definition of finite split étale hypercovers, order 946;
 Stacks Hypercoverings `example-hypercovering-in-C`, Simplicial Methods `definition-split`.
 The matching projections run over all lower simplices. The universal property is exactly
@@ -36,7 +36,7 @@ its limit). In degree zero it is the terminal object over `X`; in degree one it 
 product of the two vertices over `X`. All structure maps are over `X`, including the
 augmentation and simplicial identities. No choices of matching maps are unconstrained.
 (blueprint: def-weil-pbc-finite-split-hypercover) -/
-structure FiniteSplitEtaleHypercover (X : Scheme.{u})
+structure SplitEtaleHypercover (X : Scheme.{u})
     [CompactSpace X] [QuasiSeparatedSpace X] where
   simplicial : SimplicialObject X.Etale
   splitting : simplicial.Splitting
@@ -62,6 +62,11 @@ structure FiniteSplitEtaleHypercover (X : Scheme.{u})
     (θ : Δ ⟶ SimplexCategory.mk n),
     matchingMap n ≫ projection n Δ h θ = simplicial.map θ.op
   matching_cover : ∀ n, Surjective (matchingMap n).left
+
+/-- A split étale hypercover finite in each degree. Source: blueprint order 946.
+(blueprint: def-weil-pbc-finite-split-hypercover) -/
+structure FiniteSplitEtaleHypercover (X : Scheme.{u})
+    [CompactSpace X] [QuasiSeparatedSpace X] extends SplitEtaleHypercover X where
   finite_each_degree : ∀ n, ∃ (k : ℕ) (V : Fin k → X.Etale)
     (ι : ∀ i, V i ⟶ splitting.N n),
     Nonempty (IsColimit (Cofan.mk (splitting.N n) ι)) ∧
