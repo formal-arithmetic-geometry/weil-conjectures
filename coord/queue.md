@@ -1,11 +1,11 @@
 # Work queue
 
-402 items; claim with `tools/claim.py next <group> [--stage N]`.
+397 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (402)
+## Stage 2: nodes to state (397)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -13,7 +13,6 @@
 | `cor-galois-lisse-representations` | 1 | state |
 | `lem-pc-derived-qcoh-perfect-generation` | 1 | state |
 | `lem-pc-derived-tensor-transitivity` | 1 | state |
-| `lem-pc-koszul-affine-detection` | 1 | state |
 | `lem-pc-module-pullback-identity-composition` | 1 | state |
 | `lem-pc-perfect-affine-bounded-projective` | 1 | state |
 | `lem-pc-perfect-complex-descent` | 1 | state |
@@ -23,11 +22,9 @@
 | `lem-pc-perfect-generator-exists` | 1 | state |
 | `lem-pc-perfect-object-compact` | 1 | state |
 | `lem-pc-perfect-pseudo-coherent-locally-finite-tor` | 1 | state |
-| `lem-pc-perfect-summand` | 1 | state |
 | `lem-pc-perfect-tensor-hom-duality` | 1 | state |
 | `lem-pc-perfect-thick-closure` | 1 | state |
 | `lem-pc-pseudo-coherent-finite-tor-perfect` | 1 | state |
-| `lem-pc-ring-pseudo-coherent-finite-tor-perfect` | 1 | state |
 | `lem-pc-supported-perfect-generator` | 1 | state |
 | `lem-pc-tor-independent-perfect-pullback-comparison` | 1 | state |
 | `lem-sc-affine-koszul-cech-derived-comparison` | 1 | state |
@@ -65,9 +62,7 @@
 | `lem-weil-pbc-pair-henselization` | 1 | state |
 | `lem-weil-pbc-projective-space-functor-of-points` | 1 | state |
 | `lem-weil-pbc-purely-inseparable-pth-root-tower` | 1 | state |
-| `lem-weil-pbc-quasi-coherence-scalar-restriction` | 1 | state |
 | `lem-weil-pbc-quasi-coherent-algebra-colimit` | 1 | state |
-| `lem-weil-pbc-quasi-coherent-algebra-kernel-image-ideal` | 1 | state |
 | `lem-weil-pbc-quasi-coherent-finite-type-affine` | 1 | state |
 | `lem-weil-pbc-quasi-coherent-ideal-zero-set-affine` | 1 | state |
 | `lem-weil-pbc-quasi-coherent-iso-on-affine-cover` | 1 | state |
