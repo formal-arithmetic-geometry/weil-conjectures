@@ -4964,3 +4964,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 14:30 L: merged deliver/K1/lem-weil-pbc-sheaves-directed-colimit-sections (stage 2; reviewer PASS; first push; Sheaf.Topology.SheavesDirectedColimitSections TopCat.sheaves_directedColimit_sections)
 - 14:30 L: merged deliver/K1/lem-weil-pbc-smooth-localization-conormal-split (stage 2; reviewer PASS; first push; Sheaf.RingTheory.SmoothLocalizationConormalSplit Algebra.smooth_localization_conormal_split)
 - 14:30 L: merged deliver/M1/lem-weil-pbc-sections-morphism-to-proj-polynomial-ring (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.SectionsMorphismToProjPolynomialRing AlgebraicGeometry.sections_morphism_to_proj_polynomial_ring)
+- 14:31 L: merged deliver/M1/lem-weil-pbc-sections-over-quasi-compact-open-in-affine (stage 2; reviewer PASS; first push; Sheaf.Paper.SectionsOverQuasiCompactOpen AlgebraicGeometry.sections_over_quasiCompactOpen_of_affine)

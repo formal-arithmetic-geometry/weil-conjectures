@@ -207,5 +207,23 @@
   "worker": "stage1",
   "summary": "Read Properties 01PM (properties.tex 3941) with its proof and Example 01PN (4092); tag 01PM verified in tags/tags line 2235. Statement kept (it takes the source's algebraic description of the canonical maps as definition, so the source's omitted comparison with the sheaf-theoretic map is not needed). Proof in 8 steps following the source: the cover D = U D(f_i) (1), the sheaf axiom for M~ on basic opens as the source's exact sequence (2), construction and transition-compatibility of c_n, c'_n (3, omitted in the source), a power of I inside (f_1^k,...,f_t^k) via the existing Mathlib leaf lem-weil-pbc-fg-ideal-radical-power (4; the source's pigeonhole exponent t(k-1)+1 is not needed), injectivity of (1) (5), injectivity of (2) (6, omitted in the source), surjectivity of (2) by the source's construction of phi: I^N -> M/K_n, phrased with the generators f_i^n of J_n instead of monomials (7), the torsion-free case (8). No new nodes: all cited nodes are existing Mathlib leaves (tilde sections, sheaf of modules, localization away, colimit, filtered-colimit elementwise, fg-ideal-radical-power). No slopmaster2 declaration states the item (grep by id, tag 01PM and key words); no blueprint node states it (blueprint_refs search).",
   "blueprint": "Realizes, through lem-weil-pbc-sections-over-quasi-compact-open (01PQ), the place in blueprint.from.place: Steps 1-5 give the injectivity used in 'It is injective by Properties, Lemma 01PQ', Steps 6-7 the bijection on affine W used in 'The lemma guarantees that we have a bijection ... for any such affine open W' (01PQ proof) and hence in 'the top horizontal arrow ... is a bijection' (01YB, step 7 of the split of thm-weil-pbc-finite-etale-lifting)."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.SectionsOverQuasiCompactOpen",
+  "declaration": "AlgebraicGeometry.sections_over_quasiCompactOpen_of_affine",
+  "file": "lean/Sheaf/Paper/SectionsOverQuasiCompactOpen.lean",
+  "statement": "theorem sections_over_quasiCompactOpen_of_affine {A : Type u} [CommRing A] {M : Type u} [AddCommGroup M] [Module A M] (I : Ideal A) (hIfg : I.FG) (D : (Spec (CommRingCat.of A)).Opens) (hD : ∀ (p : PrimeSpectrum A), p ∈ D ↔ ¬ ∀ a : A, a ∈ I → a ∈ p.asIdeal) (N : ℕ → Submodule A M) (hN : ∀ n x, x ∈ N n ↔ ∀ a : A, a ∈ I ^ n → a • x = 0) : ∃ c : (Σ n : ℕ, ((ModuleCat.of A (I ^ n : Ideal A)) ⟶ ModuleCat.of A M)) → Γ(tilde (ModuleCat.of A M), D), ∃ c' : (Σ n : ℕ, ((ModuleCat.of A (I ^ n : Ideal A)) ⟶ ModuleCat.of A (M ⧸ N n))) → Γ(tilde (ModuleCat.of A M), D), Function.Injective c ∧ Function.Bijective c' ∧ ((∀ x : M, (∀ a : A, a ∈ I → a • x = 0) → x = 0) → Function.Bijective c)",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "M1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }
