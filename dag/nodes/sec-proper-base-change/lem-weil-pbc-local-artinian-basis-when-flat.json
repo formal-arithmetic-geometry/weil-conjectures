@@ -195,5 +195,23 @@
   "by": "L",
   "result": "accepted",
   "note": "6 steps following Stacks 051F: notation; (2)=>(1); surjectivity by Nakayama for a nilpotent ideal (existing node, no finiteness); the short exact sequence stays exact after tensoring with kappa by flatness (00HL leaf); K/mK = 0 via the identification kappa (x) P = P/mP (existing leaf); K = 0 by Nakayama again. No new nodes; source tag corrected (00HL for lemma-flat-tor-zero, not 00M5)."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.BasisIffBasisQuotientOfNilpotent",
+  "declaration": "Module.basis_iff_basisQuotient_of_nilpotent",
+  "file": "lean/Sheaf/RingTheory/BasisIffBasisQuotientOfNilpotent.lean",
+  "statement": "theorem basis_iff_basisQuotient_of_nilpotent {R : Type u} [CommRing R] [IsLocalRing R] {M : Type v} [AddCommGroup M] [Module R M] [Module.Flat R M] (hm : IsNilpotent (IsLocalRing.maximalIdeal R)) {A : Type w} (x : A → M) : (∃ b : Basis A (R ⧸ IsLocalRing.maximalIdeal R) (M ⧸ (IsLocalRing.maximalIdeal R • (⊤ : Submodule R M))), ∀ a : A, b a = (IsLocalRing.maximalIdeal R • (⊤ : Submodule R M)).mkQ (x a)) ↔ (∃ b : Basis A R M, ∀ a : A, b a = x a)",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-lab1116",
+  "group": "C1",
+  "result": "pass",
+  "note": "R-lab1116 matched: local ring IsLocalRing (nontrivial, Stacks convention); m nilpotent as hm : IsNilpotent (maximalIdeal R) (a real Prop hypothesis, not instance-derivable; no Artinian added); arbitrary flat M with Module.Flat (recorded dep), no finiteness; A : Type w arbitrary incl. empty, x : A -> M; M/mM as M ⧸ (m • ⊤) with Mathlib's canonical Module (R ⧸ m) instance (no Module (ResidueField R) instance on that quotient exists, so R ⧸ m is the node's literal R/m); clause (1) Basis over R ⧸ m pinned to mkQ (x a), clause (2) Module.Basis A R M pinned to x a (= direct-sum iso); iff. Basis resolves to Module.Basis (#check). Not Mathlib verbatim: Mathlib's versions need Module.Finite/FinitePresentation. Edge cases: A empty (both say M=0 via nilpotent Nakayama), m=0. Compile clean."
  }
 }
