@@ -127,5 +127,25 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-pfg2946 (reviewer sub-agent of L); spot-checked: Criterion vs Tag 0E62 (clause (a) only, hypotheses match; no existing 0E62 node, no duplicate); Step 1 hypotheses of lem-pc-h0-geom-connected (proper over kappa(s), geometrically reduced, geometrically connected); citer lem-sc-general-theorem-of-cube step 2 supplies geometrically reduced+connected fibres over k; tool use lem-pc-h0-geom-connected accepted. FIX more, RETURN less: (1) C4/C1: statement said 'every geometric fibre reduced and connected' but cited def-pc-geometrically-irreducible (every-extension form) and Step 1 claimed the definition alone converts geometric fibres to geometrically reduced/connected X_s (needs Tags 0387/035X-type lemmas); restated hypothesis as fibres X_s geometrically reduced and connected over kappa(s), Step 1 now uses it by hypothesis; (2) B3: stmt_deps listed def-weil-connected-scheme though statement cites def-pc-geometrically-irreducible; replaced, added def-weil-residue-field.; 1 file(s) fixed by the reviewer"
  },
- "lead_note": "2026-10-10 L (R-pfg2946): Item hypothesis restated as 'every fibre X_s geometrically reduced and geometrically connected over kappa(s)' (Stacks-equivalent to geometric fibres reduced and connected; exactly what lem-sc-general-theorem-of-cube supplies); later citers must supply that form."
+ "lead_note": "2026-10-10 L (R-pfg2946): Item hypothesis restated as 'every fibre X_s geometrically reduced and geometrically connected over kappa(s)' (Stacks-equivalent to geometric fibres reduced and connected; exactly what lem-sc-general-theorem-of-cube supplies); later citers must supply that form.",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProperFlatGlobalSections",
+  "declaration": "AlgebraicGeometry.isIso_structureSheafMap_of_proper_flat_geometricallyReduced_connected_fibers",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProperFlatGlobalSections.lean",
+  "statement": "theorem isIso_structureSheafMap_of_proper_flat_geometricallyReduced_connected_fibers {X S : Scheme.{u}} (f : X ⟶ S) [IsProper f] [Flat f] [LocallyOfFinitePresentation f] (hred : ∀ s : S, GeometricallyReduced (f.fiberToSpecResidueField s)) (hconn : ∀ s : S, GeometricallyConnected (f.fiberToSpecResidueField s)) : IsIso ((Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction f)).unit.app (SheafOfModules.unit S.ringCatSheaf)) ∧ ∀ {T : Scheme.{u}} (g : T ⟶ S), IsIso ((Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction (pullback.snd f g))).unit.app (SheafOfModules.unit T.ringCatSheaf))",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-11",
+  "existing": false,
+  "note": "Reviewer R-pfs1244 FIX: conclusion `IsIso f.c ∧ ∀ T g, IsIso (pullback.snd f g).c` (ring-presheaf map) replaced by the project form of O_T → p_* O_{X_T}: the unit at SheafOfModules.unit of Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction p), for p = f and for p = pullback.snd f g with implicit {T}, so the second conjunct is literally hypothesis hO of lem-sc-picard-diagonal-locally-closed (checked: it elaborates as that argument). Hypotheses unchanged: IsProper, Flat, LocallyOfFinitePresentation (= finite presentation with properness), ∀ s, GeometricallyReduced/GeometricallyConnected of f.fiberToSpecResidueField s (def-pc-geometrically-irreducible mathlib_match).",
+  "fixed_by": "R-pfs1244"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-pfs1244",
+  "group": "G1",
+  "result": "fix",
+  "note": "f:X→S proper/flat/lfp(+proper=fp) = IsProper/Flat/LocallyOfFinitePresentation; ∀ s, X_s geom. reduced/connected over κ(s) = GeometricallyReduced/GeometricallyConnected (f.fiberToSpecResidueField s); f_*O_X≅O_S and after every T→S = tensorPullback-adjunction unit at O_S / O_T for f and pullback.snd f g (= landed hO and C1 criterion conclusion)"
+ }
 }
