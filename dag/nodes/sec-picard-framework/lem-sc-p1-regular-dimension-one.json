@@ -151,5 +151,23 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-prd2 (reviewer sub-agent of L); spot-checked: Repaired re-push after the 16:22 return; all three points repaired: (1) the relabelling nodes lem-sc-p1-noetherian / lem-sc-p1-local-regular are gone, steps 1-2 argue from the standard cover of def-sc-p1-standard (U_0=Spec k[t], U_1=Spec k[s]): quasi-compact by lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact(iii) plus finite union, locally Noetherian by pqf-def-locnoeth with lem-sc-p1-polynomial-noetherian, regular by the affine-neighbourhood clause of def-weil-regular-scheme with lem-sc-p1-polynomial-regular (whose statement includes Noetherian); (2) the P({0,1}) topological-dimension node is no longer used; step 3 computes def-pc-dimension (sup of dim O_{X,x}) via lem-weil-pbc-affine-open-stalk-localization(c) (O_{X,x} = (A_i)_p), lem-weil-pbc-localization-dimension-chains-below-prime (dim = ht p), lem-pc-ring-dimension-supremum-heights (ht p <= dim A_i) and lem-sc-p1-polynomial-dimension-one, lower bound from the chain (0) subsetneq (t) in k[t] at the point (t); lem-sc-p1-dimension-lower-bound deleted; all off-unit citations are generic Mathlib-status facts or definitions (C8 black-box use); (3) step 4 is the definitional assembly of the item's own clauses (Noetherian = qc + locally Noetherian as stated). Source Stacks 01JE (schemes-example-projective-line), 00OQ (k[x_1..x_n] regular), 00KG. Mathlib leaves verified at the pinned Mathlib: Polynomial.isNoetherianRing RingTheory/Polynomial/Basic.lean:759, Polynomial.isRegularRing_of_isRegularRing RingTheory/RegularLocalRing/Polynomial.lean:78 (with IsRegularRing extends IsNoetherianRing, Defs.lean:92, and the field node lem-weil-pbc-field-regular-ring), IsPrincipalIdealRing.ringKrullDim_eq_one RingTheory/KrullDimension/PID.lean:37 (domain, PID, not a field: k[t]). Small cases: k[t]_(t) has dimension 1, k[t]_(0) dimension 0, chart symmetry t<->s. Start Sat Oct 10 04:48:29 PM UTC 2026, end Sat Oct 10 04:49:15 PM UTC 2026."
  },
- "lead_note": "2026-10-10 L (R-prd2): new node lem-sc-p1-polynomial-noetherian: source.place cites Tag 00EN (a glueing section); the Hilbert basis lemma is Tag 00FN (algebra-lemma-Noetherian-permanence). source is a maintainer field, not corrected by the reviewer."
+ "lead_note": "2026-10-10 L (R-prd2): new node lem-sc-p1-polynomial-noetherian: source.place cites Tag 00EN (a glueing section); the Hilbert basis lemma is Tag 00FN (algebra-lemma-Noetherian-permanence). source is a maintainer field, not corrected by the reviewer.",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProjectiveLineRegularDimensionOne",
+  "declaration": "AlgebraicGeometry.ProjectiveLine.noetherian_regular_dim_one",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjectiveLineRegularDimensionOne.lean",
+  "statement": "theorem noetherian_regular_dim_one (k : Type u) [Field k] : let X := ProjectiveLine (Spec (.of k)) CompactSpace X ∧ IsLocallyNoetherian X ∧ (∀ x : X, ∃ U : X.affineOpens, x ∈ (U : X.Opens) ∧ IsRegularRing Γ(X, U)) ∧ X.dim = 1",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-prd1130",
+  "group": "G1",
+  "result": "pass",
+  "note": "k:Type u [Field k] = field; P1_k = recorded ProjectiveLine (Spec (.of k)) = ℙ(ULift (Fin 2); Spec k) of def-sc-p1-standard; quasi-compact = CompactSpace (mathlib_match); locally Noetherian = IsLocallyNoetherian; regular = def-weil-regular-scheme mathlib_match one-line form ∀x ∃U affine, x∈U ∧ IsRegularRing Γ(X,U) (extends IsNoetherianRing); dim = recorded Scheme.dim = 1 in WithBot ℕ∞; node diff only adds lean record; no hollow hyps, single universe"
+ }
 }
