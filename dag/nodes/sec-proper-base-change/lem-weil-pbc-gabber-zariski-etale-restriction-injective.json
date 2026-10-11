@@ -206,5 +206,23 @@
   "lem-weil-pbc-site-sheafification-sections-local",
   "lem-weil-pbc-zariski-etale-inclusion-morphism-of-sites"
  ],
- "reviewed": "2026-10-10 L: 6 steps following the first two paragraphs of 09ZF (the base-change map by adjunction, the unit inside the presheaf inverse image, the key argument by a filtered-colimit representative and the open image of an etale U, injectivity on stalks hence on sections, the factorization); 2 tool uses accepted; 0 new nodes"
+ "reviewed": "2026-10-10 L: 6 steps following the first two paragraphs of 09ZF (the base-change map by adjunction, the unit inside the presheaf inverse image, the key argument by a filtered-colimit representative and the open image of an etale U, injectivity on stalks hence on sections, the factorization); 2 tool uses accepted; 0 new nodes",
+ "lean": {
+  "module": "Sheaf.Paper.GabberZariskiEtaleRestrictionInjective",
+  "declaration": "AlgebraicGeometry.gabber_zariski_etale_restriction_injective",
+  "by": "N1",
+  "date": "2026-10-12",
+  "file": "lean/Sheaf/Paper/GabberZariskiEtaleRestrictionInjective.lean",
+  "statement": "theorem gabber_zariski_etale_restriction_injective {X Z : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i] (F : Sheaf X.smallEtaleTopology (Type (max (u + 1) v))) (Fzar : TopCat.Sheaf (Type (max (u + 1) v)) X.carrier) (eX : Fzar.obj ≅ (MorphismProperty.Comma.lift (P := @Etale) (Q := ⊤) (W := ⊤) X.restrictFunctor (fun U => (inferInstance : Etale U.ι)) (fun _ => trivial) (fun _ => trivial)).op ⋙ F.obj) (iFzar : TopCat.Sheaf (Type (max (u + 1) v)) Z.carrier) (eZ : iFzar.obj ≅ (MorphismProperty.Comma.lift (P := @Etale) (Q := ⊤) (W := ⊤) Z.restrictFunctor (fun U => (inferInstance : Etale U.ι)) (fun _ => trivial) (fun _ => trivial)).op ⋙ ((Functor.sheafPullbackConstruction.sheafPullback (MorphismProperty.Over.pullback @Etale ⊤ i) (Type (max (u + 1) v)) (X.smallGrothendieckTopology @Etale) (Z.smallGrothendieckTopology @Etale)).obj F).obj) (a : ∀ W : X.Opens, Scheme.Etale.mk (i ⁻¹ᵁ W).ι ≅ (MorphismProperty.Over.pullback @Etale ⊤ i).obj (Scheme.Etale.mk W.ι)) (ha : ∀ W : X.Opens, (a W).hom.left ≫ pullback.fst W.ι i = i ∣_ W) : ∃ beta : (Functor.sheafPullbackConstruction.sheafPullback (Opens.map i.base) (Type (max (u + 1) v)) (Opens.grothendieckTopology X.carrier) (Opens.grothendieckTopology Z.carrier)).obj Fzar ⟶ iFzar, (∀ V : Z.Opens, Function.Injective (beta.hom.app (op V))) ∧ ∀ beta' : (Functor.sheafPullbackConstruction.sheafPullback (Opens.map i.base) (Type (max (u + 1) v)) (Opens.grothendieckTopology X.carrier) (Opens.grothendieckTopology Z.carrier)).obj Fzar ⟶ iFzar, (∀ (W : X.Opens) (s : Fzar.obj.obj (op W)), beta'.hom.app (op (i ⁻¹ᵁ W)) (((Functor.sheafPullbackConstruction.sheafAdjunctionContinuous (Opens.map i.base) (Type (max (u + 1) v)) (Opens.grothendieckTopology X.carrier) (Opens.grothendieckTopology Z.carrier)).unit.app Fzar).hom.app (op W) s) = eZ.inv.app (op (i ⁻¹ᵁ W)) (((Functor.sheafPullbackConstruction.sheafPullback (MorphismProperty.Over.pullback @Etale ⊤ i) (Type (max (u + 1) v)) (X.smallGrothendieckTopology @Etale) (Z.smallGrothendieckTopology @Etale)).obj F).obj.map (a W).hom.op (((Functor.sheafPullbackConstruction.sheafAdjunctionContinuous (MorphismProperty.Over.pullback @Etale ⊤ i) (Type (max (u + 1) v)) (X.smallGrothendieckTopology @Etale) (Z.smallGrothendieckTopology @Etale)).unit.app F).hom.app (op (Scheme.Etale.mk W.ι)) (eX.hom.app (op W) s)))) ↔ beta' = beta",
+  "branch": "sheaf-dag",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "N1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ }
 }

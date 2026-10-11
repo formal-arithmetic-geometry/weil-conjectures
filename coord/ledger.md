@@ -5591,3 +5591,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 18:42 L: merged deliver/U1/lem-sc-as-sequence (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.ArtinSchreierSequence AlgebraicGeometry.artinSchreier_shortExact)
 - 18:43 L: merged deliver/C1/lem-sc-rhom-supported-qcoherent (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.RHomSupportedQuasiCoherent AlgebraicGeometry.rhom_supported_quasiCoherent)
 - 18:43 L: merged deliver/G1/lem-weil-pbc-module-ses-cech-h1-surjective (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.ModuleSectionsSurjectiveOfCechH1 AlgebraicGeometry.Scheme.module_sections_surjective_of_cech_h1_vanishing)
+- 18:43 L: merged deliver/N1/lem-weil-pbc-gabber-zariski-etale-restriction-injective (stage 2; reviewer PASS; first push; Sheaf.Paper.GabberZariskiEtaleRestrictionInjective AlgebraicGeometry.gabber_zariski_etale_restriction_injective)
