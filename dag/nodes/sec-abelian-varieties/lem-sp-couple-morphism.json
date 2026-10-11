@@ -143,5 +143,23 @@
   "group": "G1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-cpm1907 (reviewer sub-agent of L); spot-checked: Bidegrees vs merged def-sp-exact-couple (type-s recursion), def-sp-convergence, thm-sp-half-plane-convergence; no cycle (lem-sp-derived-couple-exact deps are def-sp-abelian, def-sp-exact-couple, lem-sp-abelian-refinements); Mathlib SpectralSequence.Hom (Basic.lean:52) only defines the target notion, no exact couples in Mathlib, so no leaf for the page clause. FIX more, RETURN less: (1) C4 Step 2 misquoted the filtration as im(D^{n-p,p}) (that is G_p, increasing); corrected to F^p=G_{n-p}=im(alpha^p:D^{p,n-p}->D^{0,n}); (2) C4 Step 3 used naturality of the E_infty~gr iso, which thm-sp-half-plane-convergence states only abstractly; added statement-only node lem-sp-half-plane-graded-canonical (iso induced by g and alpha^p, Tags 011T/012F; LeanFinder no match) and made the comparison explicit; (3) item statement said the graded map is t_E (a map on E_2); restated as the E_infty map induced by t_E, stmt_deps + def-sp-convergence (E7: type correction). Also closed a missing $ in Step 1. Second reading missed (1)-(3).; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.ExactCoupleMorphism",
+  "declaration": "CategoryTheory.BigradedExactCouple.coupleMorphism",
+  "file": "lean/Sheaf/CategoryTheory/ExactCoupleMorphism.lean",
+  "statement": "theorem coupleMorphism (X Y : BigradedExactCouple C 0) (tD : ∀ p q : ℤ, X.D p q ⟶ Y.D p q) (tE : ∀ p q : ℤ, X.E p q ⟶ Y.E p q) (hα : ∀ p q : ℤ, X.alpha p q ≫ tD (p - 1) (q + 1) = tD p q ≫ Y.alpha p q) (hf : ∀ p q : ℤ, X.f p q ≫ tD (p + 2) (q - 1) = tE p q ≫ Y.f p q) (hg : ∀ p q : ℤ, X.initialG p q ≫ tE p q = tD p q ≫ Y.initialG p q) : ∃ t : ∀ (r : ℕ) (p q : ℤ), (X.pageCouple r).E p q ⟶ (Y.pageCouple r).E p q, (∀ p q : ℤ, t 0 p q = tE p q) ∧ (∀ (r : ℕ) (p q : ℤ), (X.pageCouple r).d p q ≫ t r (p + 2 + r) (q - 1 - r) = t r p q ≫ (Y.pageCouple r).d p q) ∧ (∀ (r : ℕ) (p q : ℤ), ∃ k : kernel ((X.pageCouple r).d p q) ⟶ kernel ((Y.pageCouple r).d p q), k ≫ kernel.ι ((Y.pageCouple r).d p q) = kernel.ι ((X.pageCouple r).d p q) ≫ t r p q ∧ (X.pageCouple r).derivedEProjection p q ≫ t (r + 1) p q = k ≫ (Y.pageCouple r).derivedEProjection p q) ∧ (∀ a b : ℤ, (∀ p q : ℤ, q < a → IsZero (X.D p q)) → (∀ p q : ℤ, (p < 0 ∨ q < a) → IsZero (X.E p q)) → (∀ p q : ℤ, q < b → IsZero (Y.D p q)) → (∀ p q : ℤ, (p < 0 ∨ q < b) → IsZero (Y.E p q)) → ∃ L : LimitSubobjects X, ∃ M : LimitSubobjects Y, ∃ A : ∀ n : ℤ, AlphaColimit X n, ∃ B : ∀ n : ℤ, AlphaColimit Y n, ∃ hA : ∀ n : ℤ, (A n).obj = X.D 0 n, ∃ hB : ∀ n : ℤ, (B n).obj = Y.D 0 n, (∀ n : ℤ, (A n).ι 0 ≫ eqToHom (hA n) = eqToHom (by congr 1; omega)) ∧ (∀ n : ℤ, (B n).ι 0 ≫ eqToHom (hB n) = eqToHom (by congr 1; omega)) ∧ ∃ f : ∀ n : ℤ, FilteredObject.Hom (⟨(A n).obj, X.imageFiltration n (A n)⟩ : FilteredObject C) (⟨(B n).obj, Y.imageFiltration n (B n)⟩ : FilteredObject C), (∀ n : ℤ, (f n).hom = eqToHom (hA n) ≫ tD 0 n ≫ eqToHom (hB n).symm) ∧ (∀ n p : ℤ, (A n).ι p ≫ (f n).hom = tD p (n - p) ≫ (B n).ι p) ∧ ∃ z : ∀ p q : ℤ, (L.Z p q : C) ⟶ (M.Z p q : C), ∃ tInf : ∀ p q : ℤ, X.pageInfinity L p q ⟶ Y.pageInfinity M p q, ∃ gr : ∀ p q : ℤ, (X.imageFiltration (p + q) (A (p + q))).gradedPiece p ⟶ (Y.imageFiltration (p + q) (B (p + q))).gradedPiece p, ∃ e : ∀ p q : ℤ, X.pageInfinity L p q ≅ (X.imageFiltration (p + q) (A (p + q))).gradedPiece p, ∃ e' : ∀ p q : ℤ, Y.pageInfinity M p q ≅ (Y.imageFiltration (p + q) (B (p + q))).gradedPiece p, (∀ p q : ℤ, z p q ≫ (M.Z p q).arrow = (L.Z p q).arrow ≫ tE p q) ∧ (∀ p q : ℤ, cokernel.π (Subobject.ofLE (L.B p q) (L.Z p q) (limitBoundary_le_cycle X L p q)) ≫ tInf p q = z p q ≫ cokernel.π (Subobject.ofLE (M.B p q) (M.Z p q) (limitBoundary_le_cycle Y M p q))) ∧ (∀ p q : ℤ, X.toGradedPiece A p q ≫ gr p q = tD p q ≫ Y.toGradedPiece B p q) ∧ (∀ p q : ℤ, X.toPageInfinity L p q ≫ (e p q).hom = X.toGradedPiece A p q) ∧ (∀ p q : ℤ, Y.toPageInfinity M p q ≫ (e' p q).hom = Y.toGradedPiece B p q) ∧ (∀ p q : ℤ, (e p q).hom ≫ gr p q = tInf p q ≫ (e' p q).hom))",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "C1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }
