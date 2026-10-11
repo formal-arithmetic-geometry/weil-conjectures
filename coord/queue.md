@@ -1,11 +1,11 @@
 # Work queue
 
-699 items; claim with `tools/claim.py next <group> [--stage N]`.
+693 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (699)
+## Stage 2: nodes to state (693)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -24,7 +24,6 @@
 | `lem-weil-derived-limit-roos-complex` | 1 | state |
 | `lem-weil-pbc-derived-square-iso-pasting` | 1 | state |
 | `lem-weil-pbc-descend-qc-open-fg-subalgebra` | 1 | state |
-| `lem-weil-pbc-etale-fibre-specialization-bound` | 1 | state |
 | `lem-weil-pbc-etale-graph-section-extension-map` | 1 | state |
 | `lem-weil-pbc-etale-inverse-image-algebraic-structures` | 1 | state |
 | `lem-weil-pbc-etale-qcqs-sections-filtered-colimit` | 1 | state |
@@ -33,15 +32,10 @@
 | `lem-weil-pbc-exact-free-complex-last-minors-regular-sequence` | 1 | state |
 | `lem-weil-pbc-ext-one-direct-sum` | 1 | state |
 | `lem-weil-pbc-fibre-dimension-bounded-open-upstairs` | 1 | state |
-| `lem-weil-pbc-fibre-ring-primes-residue-fields` | 1 | state |
 | `lem-weil-pbc-field-cohen-power-series-formally-smooth` | 1 | state |
 | `lem-weil-pbc-field-extension-complete-intersection-subalgebras` | 1 | state |
 | `lem-weil-pbc-field-point-factors-through-closed-immersion` | 1 | state |
-| `lem-weil-pbc-field-point-factors-through-immersion` | 1 | state |
-| `lem-weil-pbc-field-tensor-irreducible` | 1 | state |
-| `lem-weil-pbc-filtered-category-directed-cofinal` | 1 | state |
 | `lem-weil-pbc-filtered-colimit-algebras-tensor-elementwise` | 1 | state |
-| `lem-weil-pbc-filtered-colimit-algebras-underlying-module` | 1 | state |
 | `lem-weil-pbc-filtered-colimit-categories` | 1 | state |
 | `lem-weil-pbc-filtered-colimit-flat-modules` | 1 | state |
 | `lem-weil-pbc-filtered-colimit-henselian-pair` | 1 | state |
