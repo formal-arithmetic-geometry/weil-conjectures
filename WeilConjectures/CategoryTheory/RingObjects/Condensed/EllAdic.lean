@@ -45,8 +45,8 @@ postcomposition with them gives morphisms of condensed rings.
 * `Profinite.padicIntCondensedRing`, `Profinite.padicCondensedRing`: the condensed rings
   `ℤ̲_ℓ` and `ℚ̲_ℓ`.
 * `Profinite.padicSubfieldCondensedRing`, `Profinite.padicIntegersCondensedRing`: the condensed
-  rings `E̲` and `𝒪̲_E`, and `Profinite.padicSubfieldRingObj`, `Profinite.padicIntegersRingObj`:
-  their underlying ring objects of condensed abelian groups.
+  rings `E̲` and `𝒪̲_E`, and `Profinite.padicIntegersRingObj`: the ring object of condensed
+  abelian groups underlying `𝒪̲_E`.
 * `Profinite.padicIntCondensedRingToPadicCondensedRing`,
   `Profinite.padicCondensedRingToPadicSubfieldCondensedRing`,
   `Profinite.padicIntegersCondensedRingToPadicSubfieldCondensedRing` and
@@ -99,18 +99,6 @@ noncomputable abbrev padicSubfieldCondensedRing :
   letI := PadicAlgCl.normedFieldOfAlgebra ℓ E
   continuousMapRingSheaf E
 
-/-- The condensed ring `E̲` as a ring object of condensed abelian groups: the abelian sheaf
-underlying `padicSubfieldCondensedRing ℓ E`, with the ring object structure
-`CategoryTheory.Sheaf.monObj_sheafCompose_obj`. -/
-noncomputable abbrev padicSubfieldRingObj : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1} :=
-  (sheafCompose (coherentTopology Profinite.{u}) (forget₂ RingCat.{u + 1} Ab.{u + 1})).obj
-    (padicSubfieldCondensedRing ℓ E)
-
-/-- The condensed ring `E̲` is a commutative ring object of condensed abelian groups. -/
-instance isCommMonObj_padicSubfieldRingObj : IsCommMonObj (padicSubfieldRingObj.{u} ℓ E) :=
-  letI := PadicAlgCl.normedFieldOfAlgebra ℓ E
-  isCommMonObj_continuousMapRingObj E
-
 variable [Algebra ℚ_[ℓ] E] [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)]
 
 /-- The inclusion `ℚ̲_ℓ ⟶ E̲`, a morphism of condensed rings. -/
@@ -135,6 +123,12 @@ noncomputable abbrev padicIntegersCondensedRing :
   letI := PadicAlgCl.normedFieldOfAlgebra ℓ E
   continuousMapRingSheaf (PadicAlgCl.integers ℓ E)
 
+/-- The inclusion `𝒪̲_E ⟶ E̲`, a morphism of condensed rings. -/
+noncomputable def padicIntegersCondensedRingToPadicSubfieldCondensedRing :
+    padicIntegersCondensedRing.{u} ℓ E ⟶ padicSubfieldCondensedRing ℓ E :=
+  letI := PadicAlgCl.normedFieldOfAlgebra ℓ E
+  continuousMapRingSheafMap (PadicAlgCl.integers ℓ E).subtype continuous_subtype_val
+
 /-- The condensed ring `𝒪̲_E` as a ring object of condensed abelian groups: the abelian sheaf
 underlying `padicIntegersCondensedRing ℓ E`, with the ring object structure
 `CategoryTheory.Sheaf.monObj_sheafCompose_obj`. -/
@@ -146,12 +140,6 @@ noncomputable abbrev padicIntegersRingObj : Sheaf (coherentTopology Profinite.{u
 instance isCommMonObj_padicIntegersRingObj : IsCommMonObj (padicIntegersRingObj.{u} ℓ E) :=
   letI := PadicAlgCl.normedFieldOfAlgebra ℓ E
   isCommMonObj_continuousMapRingObj (PadicAlgCl.integers ℓ E)
-
-/-- The inclusion `𝒪̲_E ⟶ E̲`, a morphism of condensed rings. -/
-noncomputable def padicIntegersCondensedRingToPadicSubfieldCondensedRing :
-    padicIntegersCondensedRing.{u} ℓ E ⟶ padicSubfieldCondensedRing ℓ E :=
-  letI := PadicAlgCl.normedFieldOfAlgebra ℓ E
-  continuousMapRingSheafMap (PadicAlgCl.integers ℓ E).subtype continuous_subtype_val
 
 variable [Algebra ℚ_[ℓ] E] [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)]
 
