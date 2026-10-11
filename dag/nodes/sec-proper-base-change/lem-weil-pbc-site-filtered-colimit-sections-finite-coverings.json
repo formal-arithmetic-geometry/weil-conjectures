@@ -168,5 +168,27 @@
   "by": "L",
   "result": "pass",
   "note": "Reviewed by the lead (opus-relaunch6). Four steps, one new Mathlib leaf lem-weil-pbc-presheaf-colimits-sectionwise (00VB/03CL; combinedIsColimit, Limits/FunctorCategory/Basic.lean:154, verified). Departure from the proof of 0738(4) accepted: with all coverings finite the sectionwise colimit of sheaves is already a sheaf, since the sheaf condition is a limit over a finite category (the equalizer diagram of the covering and its fibre products) and filtered colimits commute with finite limits in sets and abelian groups (lem-weil-pbc-filtered-colimits-commute-finite-limits, the argument Stacks uses in 0F4E); so it is the colimit in the full subcategory of sheaves, and its component at U is the canonical map. Stacks' route through quasi-compact objects and the local description of sheafification is not needed."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SiteFilteredColimitSections",
+  "declaration": "CategoryTheory.siteFilteredColimit_sections_bijective",
+  "declarations": [
+   "CategoryTheory.siteFilteredColimit_sections_bijective",
+   "CategoryTheory.siteFilteredColimit_sections_isIso"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/SiteFilteredColimitSections.lean",
+  "statement": "theorem siteFilteredColimit_sections_bijective {C : Type u} [SmallCategory C] (J : Precoverage C) [J.HasIsos] [J.IsStableUnderComposition] [J.IsStableUnderBaseChange] [J.HasPullbacks] (hfinite : J ≤ Precoverage.finite C) {Λ : Type u} [SmallCategory Λ] [IsFiltered Λ] (D : Λ ⥤ Sheaf J.toGrothendieck (Type u)) (c : Cocone D) (hc : IsColimit c) (U : C) : Function.Bijective (colimit.desc (D ⋙ (sheafSections J.toGrothendieck (Type u)).obj (op U)) (((sheafSections J.toGrothendieck (Type u)).obj (op U)).mapCocone c))",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "F1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }
