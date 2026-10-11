@@ -3378,3 +3378,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 05:25 L: def-pc-divisor-line-bundle: existing source construction (O_S(D) = (z.ker.toModules)ᵛ, Scheme.Modules.dual; IsInvertible.isInvertible_dual_toModules EffectiveCartier.lean:206, whose docstring names the node) recorded as lean (existing: true) after W-dlb0545 found it and L read it; no renaming abbrev written (one definition per notion)
 - 05:26 L: claimed def-pc-projective-morphism for L, worker W-prj0530 launched (no delivery waits yet; the groups start about 05:50)
 - 05:28 L: stated def-pc-projective-morphism (own item, W-prj0530, R-prj0536 PASS): lean/Sheaf/AlgebraicGeometry/Morphisms/Projective.lean (IsHProjective, IsProjective); landed
+- 05:29 L: claimed def-pc-kflat-complex for L, worker W-kfl0542 launched (no delivery waits yet); global build started for the Projective landing
