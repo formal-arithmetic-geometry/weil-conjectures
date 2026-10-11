@@ -23,9 +23,176 @@
   "def-weil-pbc-finitely-presented-algebra",
   "def-weil-pbc-flat-ring-map"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*Step 1 (the given systems; finite presentation; Noetherian approximation).* $A_i$ is of finite type over $R_i$ (being of finite presentation [def-weil-pbc-finitely-presented-algebra]) and $B_i$ is of finite presentation over $R_i$, so $A_i\\to B_i$ is of finite presentation by [lem-weil-pbc-finite-presentation-over-finite-type-algebra]. By associativity of $\\otimes$, $B=R\\otimes_{R_i}B_i\\cong A\\otimes_{A_i}B_i$ and $B_j\\cong A_j\\otimes_{A_i}B_i$ as algebras, under which $A\\to B$, $A_j\\to B_j$ become $a\\mapsto a\\otimes1$; so $A\\to B$ and every $A_j\\to B_j$ are of finite presentation by [lem-weil-pbc-finite-presentation-base-change-composition] (1), and $B_k\\cong A_k\\otimes_{A_j}B_j$ for $i\\le j\\le k$ (also with $A,B$ in place of $A_k,B_k$). Likewise $N\\cong B\\otimes_{B_i}N_i$ and $N_j\\cong B_j\\otimes_{B_i}N_i$, finitely presented over $B$, resp. $B_j$, by [lem-pc-fp-module-base-change], and $N_k\\cong B_k\\otimes_{B_j}N_j$. By [lem-weil-pbc-directed-colimit-base-change-elementwise] (with $M_0=A_i$, $B_i$, resp. $N_i$ over the system $(R_j)_{j\\ge i}$) and [lem-weil-pbc-filtered-colimit-modules-criterion], $A$, $B$, $N$ are the colimits of the abelian groups $A_j$, $B_j$, $N_j$; for a cocone of ring maps the induced additive map is multiplicative and unital, any two elements coming from one stage, $A=\\varinjlim A_j$ and $B=\\varinjlim B_j$ as rings [def-weil-pbc-category-colimit], and $N=\\varinjlim N_j$ compatibly with the module structures. Now apply [lem-weil-pbc-limit-module-finite-presentation] to $A\\to B$ and $N$ (its $R\\to S$, $M$): a nonempty directed set $(\\Lambda,\\le)$, ring maps $R_\\lambda\\to S_\\lambda$, $S_\\lambda$-modules $M_\\lambda$, with $A=\\varinjlim R_\\lambda$, $B=\\varinjlim S_\\lambda$, $N=\\varinjlim M_\\lambda$ and its clauses (1)-(4). $\\mathbf Z$ is Noetherian (every ideal is principal), so each $R_\\lambda$ (finite type over $\\mathbf Z$) and each $S_\\lambda$ (finite type over $R_\\lambda$) is Noetherian [lem-weil-pbc-finite-type-algebra-noetherian], and $S_\\lambda$ is of finite presentation over $R_\\lambda$ [lem-weil-pbc-finite-type-noetherian-finite-presentation]; $M_\\lambda$, finite over the Noetherian $S_\\lambda$, is finitely presented [lem-sc-noetherian-finite-module-finite-presentation]. Throughout, $R_\\lambda,S_\\lambda,M_\\lambda$ denote this approximation and $A_j,B_j,N_j$ the prescribed system; for a prime $\\mathfrak q$ of $B$ write $\\mathfrak p$ for its inverse image in $A$ and $\\mathfrak q_\\lambda\\subset S_\\lambda$, $\\mathfrak p_\\lambda\\subset R_\\lambda$ for its inverse images.",
+   "uses": [
+    "lem-weil-pbc-finite-presentation-over-finite-type-algebra",
+    "lem-weil-pbc-finite-presentation-base-change-composition",
+    "lem-pc-fp-module-base-change",
+    "lem-weil-pbc-directed-colimit-base-change-elementwise",
+    "lem-weil-pbc-filtered-colimit-modules-criterion",
+    "def-weil-pbc-category-colimit",
+    "lem-weil-pbc-limit-module-finite-presentation",
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+    "lem-sc-noetherian-finite-module-finite-presentation",
+    "def-weil-pbc-finitely-presented-algebra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma 10.168.1, Tag 02JO, proof of (3), first paragraph"
+   }
+  },
+  {
+   "text": "Fix a prime q of B, with p its inverse image in A, and localize the approximation at q_λ and p_λ. The localization-colimit lemma gives colimits A_p=colim (R_λ)_{p_λ} and B_q=colim (S_λ)_{q_λ}, with local transition maps. These localized rings are Noetherian local rings; the induced map is local. Localization-tensor lemmas give the localization condition (a) for (S_λ)_{q_λ}⊗_{(R_λ)_{p_λ}}(R_μ)_{p_μ}\\to (S_μ)_{q_μ}, and the transition isomorphism for localized modules gives condition (b), (M_λ)_{q_λ}⊗_{(S_λ)_{q_λ}}(S_μ)_{q_μ}≅(M_μ)_{q_μ}. The colimit module is N_q: this follows by writing (M_λ)_{q_λ}≅M_λ⊗_{S_λ}(S_λ)_{q_λ}, applying localization-tensor-over-base, and commuting tensor with the filtered colimit B_q=colim (S_λ)_{q_λ}; the filtered-colimit module criterion then identifies the result. It is flat over A_p because N is flat over A and the only-if direction of the prime-local flatness criterion applies.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-localization-at-prime",
+    "lem-weil-pbc-localization-noetherian",
+    "def-weil-pbc-localization-at-prime",
+    "lem-weil-pbc-localization-tensor-product",
+    "lem-weil-pbc-localization-tensor-over-base",
+    "lem-weil-pbc-limit-module-finite-presentation",
+    "lem-pc-affine-flat-module-local-criterion",
+    "lem-weil-pbc-filtered-colimit-algebras-underlying-module",
+    "lem-weil-pbc-filtered-colimit-modules-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma 10.168.1, Tag 02JO, proof of (1), first paragraph"
+   }
+  },
+  {
+   "text": "The hypotheses just checked allow the local eventual-flatness lemma to be applied to the localized systems, so for this q there is λ(q) such that (M_λ(q))_{q_λ(q)} is flat over (R_λ(q))_{p_λ(q)}.",
+   "uses": [
+    "lem-weil-pbc-colimit-eventually-flat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma 10.168.1, Tag 02JO, proof of (1), first paragraph"
+   }
+  },
+  {
+   "text": "*Step 4 (the flat loci $U_\\lambda$; persistence).* For $\\lambda\\in\\Lambda$ let $U_\\lambda=\\{\\mathfrak q'\\in\\operatorname{Spec}S_\\lambda:(M_\\lambda)_{\\mathfrak q'}\\text{ is a flat }R_\\lambda\\text{-module}\\}$; it is open by [lem-weil-pbc-openness-of-flatness] ($R_\\lambda\\to S_\\lambda$ and $M_\\lambda$ of finite presentation, step 1). Claim: if $\\lambda\\le\\mu$ and $\\mathfrak q'\\in\\operatorname{Spec}S_\\mu$ has inverse image $\\mathfrak q''\\in U_\\lambda$, then $\\mathfrak q'\\in U_\\mu$. Proof: let $T=S_\\lambda\\setminus\\mathfrak q''$ and $\\mathfrak p'$ the inverse image of $\\mathfrak q'$ in $R_\\mu$. By clause (3) of [lem-weil-pbc-limit-module-finite-presentation] and associativity, $M_\\mu\\cong M_\\lambda\\otimes_{S_\\lambda}S_\\mu\\cong M_\\lambda\\otimes_{S_\\lambda}(S_\\lambda\\otimes_{R_\\lambda}R_\\mu)\\cong M_\\lambda\\otimes_{R_\\lambda}R_\\mu$ as $S_\\mu$-modules. By [lem-weil-pbc-localization-tensor-over-base] (its $R=R_\\lambda$, $A=S_\\lambda$, $M=M_\\lambda$, $N=R_\\mu$) the localization $P=T^{-1}M_\\mu$ at the image of $T$ is $(M_\\lambda)_{\\mathfrak q''}\\otimes_{R_\\lambda}R_\\mu$, a flat $R_\\mu$-module by [lem-weil-pbc-flat-module-base-change] since $(M_\\lambda)_{\\mathfrak q''}$ is $R_\\lambda$-flat. $P$ is an $S_\\mu$-module, so by [lem-pc-affine-flat-module-local-criterion] (for $R_\\mu\\to S_\\mu$ and $P$) $P_{\\mathfrak q'}$ is a flat $(R_\\mu)_{\\mathfrak p'}$-module. The image of $T$ lies in $S_\\mu\\setminus\\mathfrak q'$, so $P_{\\mathfrak q'}=(M_\\mu)_{\\mathfrak q'}$ [def-weil-pbc-localization-at-prime] (the conditions of a localization are checked directly), and since it is an $(R_\\mu)_{\\mathfrak p'}$-module, [lem-weil-pbc-flat-over-localization] makes it a flat $R_\\mu$-module: $\\mathfrak q'\\in U_\\mu$.",
+   "uses": [
+    "lem-weil-pbc-openness-of-flatness",
+    "lem-weil-pbc-limit-module-finite-presentation",
+    "lem-weil-pbc-localization-tensor-over-base",
+    "lem-weil-pbc-flat-module-base-change",
+    "lem-pc-affine-flat-module-local-criterion",
+    "def-weil-pbc-localization-at-prime",
+    "lem-weil-pbc-flat-over-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma 10.168.1, Tag 02JO, proof of (1), second paragraph"
+   }
+  },
+  {
+   "text": "*Step 5 (quasi-compactness).* For a prime $\\mathfrak q$ of $B$, step 3 gives $\\lambda(\\mathfrak q)$ with $(M_{\\lambda(\\mathfrak q)})_{\\mathfrak q_{\\lambda(\\mathfrak q)}}$ flat over $(R_{\\lambda(\\mathfrak q)})_{\\mathfrak p_{\\lambda(\\mathfrak q)}}$; it is a module over that localization (elements of $R_\\lambda\\setminus\\mathfrak p_\\lambda$ map outside $\\mathfrak q_\\lambda$), so it is flat over $R_{\\lambda(\\mathfrak q)}$ by [lem-weil-pbc-flat-over-localization], i.e. $\\mathfrak q_{\\lambda(\\mathfrak q)}\\in U_{\\lambda(\\mathfrak q)}$, and by step 4 $\\mathfrak q_\\mu\\in U_\\mu$ for all $\\mu\\ge\\lambda(\\mathfrak q)$ ($\\mathfrak q_\\lambda$ is the inverse image of $\\mathfrak q_\\mu$). Let $V_\\lambda\\subseteq\\operatorname{Spec}B$ be the inverse image of $U_\\lambda$, open (the preimage of $V(J)$ is $V(JB)$). Step 4 gives $V_\\lambda\\subseteq V_\\mu$ for $\\lambda\\le\\mu$, and the above gives $\\bigcup_\\lambda V_\\lambda=\\operatorname{Spec}B$. $\\operatorname{Spec}B$ is quasi-compact [lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact] (iii), so finitely many $V_\\lambda$ cover it; $\\Lambda$ being directed there is $\\lambda_0$ above their indices, and $V_{\\lambda_0}=\\operatorname{Spec}B$.",
+   "uses": [
+    "lem-weil-pbc-flat-over-localization",
+    "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma 10.168.1, Tag 02JO, proof of (1), second paragraph"
+   }
+  },
+  {
+   "text": "*Step 6 (a stage with full flat locus).* Write $\\operatorname{Spec}S_{\\lambda_0}\\setminus U_{\\lambda_0}=V(J)$, $J\\subseteq S_{\\lambda_0}$ an ideal. Since $V_{\\lambda_0}=\\operatorname{Spec}B$, no prime of $B$ contains the image of $J$, so by [lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact] (i) the images of the elements of $J$ generate the unit ideal of $B$: $1=\\sum_{k=1}^r\\bar f_kb_k$ with $f_k\\in J$, $b_k\\in B$. By [lem-weil-pbc-filtered-colimit-algebras-elementwise] (2) ($R=\\mathbf Z$) and directedness the $b_k$ come from some $S_{\\lambda}$, $\\lambda\\ge\\lambda_0$, and by [lem-weil-pbc-filtered-colimit-rings-zero] the relation holds in some $S_{\\lambda_1}$, $\\lambda_1\\ge\\lambda$. Every prime of $S_{\\lambda_1}$ avoids some $\\bar f_k$, so its inverse image in $S_{\\lambda_0}$ lies in $U_{\\lambda_0}$, and by step 4 it lies in $U_{\\lambda_1}$: $U_{\\lambda_1}=\\operatorname{Spec}S_{\\lambda_1}$.",
+   "uses": [
+    "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact",
+    "lem-weil-pbc-filtered-colimit-algebras-elementwise",
+    "lem-weil-pbc-filtered-colimit-rings-zero"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma 10.168.1, Tag 02JO, proof of (1), third paragraph"
+   }
+  },
+  {
+   "text": "*Step 7 (a flat Noetherian model).* Put $R'=R_{\\lambda_1}$, $S'=S_{\\lambda_1}$, $M'=M_{\\lambda_1}$. For every prime $\\mathfrak q'$ of $S'$, with inverse image $\\mathfrak p'$ in $R'$, $(M')_{\\mathfrak q'}$ is a flat $R'$-module (step 6) and an $R'_{\\mathfrak p'}$-module, hence a flat $R'_{\\mathfrak p'}$-module by [lem-weil-pbc-flat-over-localization]. By [lem-pc-affine-sections-flat-over-base] (its $A=R'$, $B=S'$, $M=M'$), $M'$ is a flat $R'$-module.",
+   "uses": [
+    "lem-weil-pbc-flat-over-localization",
+    "lem-pc-affine-sections-flat-over-base"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma 10.168.1, Tag 02JO, conclusion of (1)"
+   }
+  },
+  {
+   "text": "*Step 8 (the model reaches the prescribed system).* $R'$ is of finite presentation over $\\mathbf Z$ and $S'$ over $R'$ (step 1). By [lem-weil-pbc-finite-presentation-algebra-factors-filtered-colimit] (base $\\mathbf Z$, the system $(A_j)_{j\\ge i}$ with colimit $A$, step 1) the coprojection $R'\\to A$ factors through some $A_{j_1}$; for $j\\ge j_1$ regard $A_j$ and $B_j$ as $R'$-algebras through it. Then $(B_j)_{j\\ge j_1}$ is a system of $R'$-algebras with colimit $B$ (step 1) and $R'$-algebra coprojections, and the coprojection $S'\\to B$ is an $R'$-algebra map (clause (1) of [lem-weil-pbc-limit-module-finite-presentation]); the same node over $R'$ gives $j_2\\ge j_1$ and an $R'$-algebra map $\\sigma:S'\\to B_{j_2}$ through which $S'\\to B$ factors. Put $D=S'\\otimes_{R'}A_{j_2}$, finitely presented over $A_{j_2}$ by [lem-weil-pbc-finite-presentation-base-change-composition] (1), and $\\Psi:D\\to B_{j_2}$, $s\\otimes a\\mapsto\\sigma(s)a$, a map of $A_{j_2}$-algebras; $B_{j_2}$ is finitely presented over $A_{j_2}$ (step 1). After $-\\otimes_{A_{j_2}}A$, $D\\otimes_{A_{j_2}}A=S'\\otimes_{R'}A$ and $B_{j_2}\\otimes_{A_{j_2}}A\\cong B$ (step 1), and $\\Psi\\otimes1_A$ is the canonical map $S'\\otimes_{R'}A\\to B$, an isomorphism by clause (4) of [lem-weil-pbc-limit-module-finite-presentation]. By [lem-weil-pbc-colimit-category-fp-algebras] (2) (system $(A_j)_{j\\ge j_2}$, colimit $A$) applied to $(\\Psi\\otimes1_A)^{-1}$ there are $\\mu\\ge j_2$ and $\\chi:B_{j_2}\\otimes_{A_{j_2}}A_\\mu\\to D\\otimes_{A_{j_2}}A_\\mu$ with $\\chi\\otimes1_A=(\\Psi\\otimes1_A)^{-1}$; by its (3), applied to $\\chi\\circ(\\Psi\\otimes1_{A_\\mu})$ and the identity and to $(\\Psi\\otimes1_{A_\\mu})\\circ\\chi$ and the identity, there is $\\nu\\ge\\mu$ with $\\Psi\\otimes1_{A_\\nu}$ an isomorphism. So for $j\\ge\\nu$, $B_j\\cong S'\\otimes_{R'}A_j$ as $A_j$-algebras (step 1), compatibly with the maps to $B$. Modules: $Q=M'\\otimes_{S'}B_{\\nu}$ (via $\\sigma$) and $N_\\nu$ are finitely presented $B_\\nu$-modules by [lem-pc-fp-module-base-change] (step 1 for $M'$, $N_i$); $Q\\otimes_{B_\\nu}B=M'\\otimes_{S'}B\\cong N$ by clause (4) of [lem-weil-pbc-limit-module-finite-presentation] and $N_\\nu\\otimes_{B_\\nu}B\\cong N$ (step 1), giving a $B$-linear isomorphism $\\theta:Q\\otimes_{B_\\nu}B\\to N_\\nu\\otimes_{B_\\nu}B$. By [lem-pc-fp-module-map-descent-affine] (system $(B_j)_{j\\ge\\nu}$, colimit $B$, step 1) $\\theta$ and $\\theta^{-1}$ are base changes of $B_{j'}$-linear maps $Q\\otimes_{B_\\nu}B_{j'}\\rightleftarrows N_{j'}$ at some $j'\\ge\\nu$, and since both composites agree with the identities over $B$, its last clause makes them mutually inverse at some $j_0\\ge j'$. Hence for every $j\\ge j_0$: $B_j\\cong S'\\otimes_{R'}A_j$ and $N_j\\cong M'\\otimes_{S'}B_j\\cong M'\\otimes_{R'}A_j$ as $A_j$-modules.",
+   "uses": [
+    "lem-weil-pbc-finite-presentation-algebra-factors-filtered-colimit",
+    "lem-weil-pbc-limit-module-finite-presentation",
+    "lem-weil-pbc-finite-presentation-base-change-composition",
+    "lem-weil-pbc-colimit-category-fp-algebras",
+    "lem-pc-fp-module-base-change",
+    "lem-pc-fp-module-map-descent-affine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma 10.168.1, Tag 02JO, proof of (3), final paragraph"
+   }
+  },
+  {
+   "text": "*Step 9 (conclusion).* $M'$ is a flat $R'$-module (step 7), so $M'\\otimes_{R'}A_j$ is a flat $A_j$-module for every $j\\ge j_0$ [lem-weil-pbc-flat-module-base-change]; by step 8, $N_j\\cong M'\\otimes_{R'}A_j$ as $A_j$-modules, so $N_j$ is flat over $A_j$ for every $j\\ge j_0$.",
+   "uses": [
+    "lem-weil-pbc-flat-module-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma 10.168.1, Tag 02JO, conclusion of (3)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-finitely-presented-algebra",
+  "def-weil-pbc-localization-at-prime",
+  "lem-pc-affine-flat-module-local-criterion",
+  "lem-pc-affine-sections-flat-over-base",
+  "lem-pc-fp-module-base-change",
+  "lem-pc-fp-module-map-descent-affine",
+  "lem-sc-noetherian-finite-module-finite-presentation",
+  "lem-weil-pbc-colimit-category-fp-algebras",
+  "lem-weil-pbc-colimit-eventually-flat",
+  "lem-weil-pbc-directed-colimit-base-change-elementwise",
+  "lem-weil-pbc-filtered-colimit-algebras-elementwise",
+  "lem-weil-pbc-filtered-colimit-algebras-underlying-module",
+  "lem-weil-pbc-filtered-colimit-localization-at-prime",
+  "lem-weil-pbc-filtered-colimit-modules-criterion",
+  "lem-weil-pbc-filtered-colimit-rings-zero",
+  "lem-weil-pbc-finite-presentation-algebra-factors-filtered-colimit",
+  "lem-weil-pbc-finite-presentation-base-change-composition",
+  "lem-weil-pbc-finite-presentation-over-finite-type-algebra",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+  "lem-weil-pbc-flat-module-base-change",
+  "lem-weil-pbc-flat-over-localization",
+  "lem-weil-pbc-limit-module-finite-presentation",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-weil-pbc-localization-tensor-over-base",
+  "lem-weil-pbc-localization-tensor-product",
+  "lem-weil-pbc-openness-of-flatness",
+  "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma 10.168.1, Tag 02JO, part (3)"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -64,12 +231,74 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pc-flat-module-descent",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-semicon"
+ "unit": "sk-thm-picard-semicon",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-affine-flat-module-descent",
+  "worker": "stage1",
+  "summary": "Repaired the Tag 02JO(3) proof in nine steps. The Noetherian approximation is localized with every hypothesis of the local eventual-flatness lemma checked; openness, persistence, quasi-compactness, and the unit-ideal argument produce one flat finite-type stage; finite-presentation algebra and module descent then compare that stage with the prescribed tensor system and base change gives all later flat modules.",
+  "blueprint": "Realizes the ancestor Noetherian-approximation step for eventual flatness of a finitely presented module (Tag 02JO(3)), including the localized prime argument and final comparison with the prescribed stages.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-limit-module-finite-presentation",
+    "why": "The proof uses the general finite-presentation approximation construction as a tool outside this unit."
+   },
+   {
+    "node": "lem-weil-pbc-colimit-eventually-flat",
+    "why": "The proof uses the local algebra eventual-flatness criterion as a tool for the localized systems."
+   },
+   {
+    "node": "lem-weil-pbc-openness-of-flatness",
+    "why": "The proof uses the general openness theorem for flat loci to obtain a finite affine cover."
+   },
+   {
+    "node": "lem-weil-pbc-colimit-category-fp-algebras",
+    "why": "The proof uses finite-presentation morphism descent to compare the Noetherian model algebra with prescribed stages."
+   },
+   {
+    "node": "lem-weil-pbc-directed-colimit-base-change-elementwise",
+    "why": "The proof uses elementwise colimit/base-change facts to form the prescribed comparison maps."
+   },
+   {
+    "node": "lem-weil-pbc-filtered-colimit-localization-at-prime",
+    "why": "The proof uses the general localization-of-filtered-colimit construction for the prime-local systems."
+   },
+   {
+    "node": "lem-weil-pbc-filtered-colimit-algebras-underlying-module",
+    "why": "The proof uses the underlying-module colimit statement to identify the localized module colimit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-limit-module-finite-presentation",
+  "lem-weil-pbc-colimit-eventually-flat",
+  "lem-weil-pbc-openness-of-flatness",
+  "lem-weil-pbc-colimit-category-fp-algebras",
+  "lem-weil-pbc-directed-colimit-base-change-elementwise",
+  "lem-weil-pbc-filtered-colimit-localization-at-prime",
+  "lem-weil-pbc-filtered-colimit-algebras-underlying-module",
+  "lem-weil-pbc-limit-module-finite-presentation",
+  "lem-weil-pbc-colimit-eventually-flat",
+  "lem-weil-pbc-openness-of-flatness",
+  "lem-weil-pbc-colimit-category-fp-algebras",
+  "lem-weil-pbc-directed-colimit-base-change-elementwise",
+  "lem-weil-pbc-filtered-colimit-localization-at-prime",
+  "lem-weil-pbc-filtered-colimit-algebras-underlying-module"
+ ],
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-afm0004",
+  "group": "H1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-afm0004 (reviewer sub-agent of L); spot-checked: Third push, checked against R-afm3136's six points step by step with merged sibling lem-weil-pbc-colimit-flat-ring-map. Statement (Tag 02JO(3)) unchanged and true. Fixed in head: (2) Step 2 module colimit N_q via limit-module (4)+localization-tensor-over-base+modules criterion; (5) lem-pc-affine-flat-module-local-criterion now only-if (00HT(6)), no longer duplicates the Mathlib leaf lem-pc-affine-sections-flat-over-base (my LeanFinder query: no module/ring-map prime version in Mathlib, recorded). FIX more, RETURN less: (1) C1 Step 1: A_i->B_i fp now cited to lem-weil-pbc-finite-presentation-over-finite-type-algebra, A->B and A_j->B_j fp by base-change-composition (1), N and N_j fp by new statement-only node lem-pc-fp-module-base-change (Mathlib instFinitePresentationTensorProduct, FinitePresentation.lean:338, checked by sed and #synth; for the maintainer to leaf), A=colim A_j, B=colim B_j, N=colim N_j by directed-colimit-base-change-elementwise + filtered-colimit-modules-criterion as sibling step 1; miscited lem-pc-fp-module-map-descent-affine dropped from step 1; R,S notation replaced by A,B. (3) C1 Steps 5 and 7: lem-weil-pbc-flat-over-localization cited both ways (flat over (R_l)_p => over R_l in step 5, with persistence for all later l; flat over R' => over R'_p' before lem-pc-affine-sections-flat-over-base in step 7); step 5 now cites step 4 for persistence; Spec S -> Spec B in steps 5-6. (4) C4 Step 4: lem-weil-pbc-flat-ring-map-comp and localization-flat dropped; persistence rewritten for modules: M_m = M_l (x)_{R_l} R_m, T^{-1}M_m = (M_l)_q'' (x) R_m flat by flat-module-base-change, then the only-if criterion on R_m->S_m gives (M_m)_q' flat over (R_m)_p', then flat-over-localization. (6) Step 8: D fp by base-change-composition (1), both modules fp by lem-pc-fp-module-base-change, clauses (2)+(3) of colimit-category-fp-algebras and the descent of theta and theta^-1 by lem-pc-fp-module-map-descent-affine spelled out; Step 9 transports via N_j = M' (x)_{R'} A_j. Also repaired broken TeX tab-o -> \\to in steps 2 and 8. proof_deps recomputed. tool_uses: all 7 foreign split nodes (sk-thm-p1) declared, generic algebra tools; the rest are Mathlib leaves. Second reading by H1 missed faults (1),(3),(4),(6).; 3 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+ },
+ "lead_note": "2026-10-11 L (R-afm0004): new statement-only node lem-pc-fp-module-base-change (unsplit) is exactly the Mathlib instance instFinitePresentationTensorProduct, Mathlib/Algebra/Module/FinitePresentation.lean:338: attach it as a leaf"
 }
