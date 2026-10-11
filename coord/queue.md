@@ -9,7 +9,6 @@
 
 | node | distance to Mathlib | kind |
 |---|---|---|
-| `def-pc-divisor-line-bundle` | 1 | state |
 | `def-pc-field-tower` | 1 | state |
 | `def-pc-generators` | 1 | state |
 | `def-pc-kflat-complex` | 1 | state |
@@ -136,6 +135,7 @@
 | `lem-pc-module-flat-opcycles-tor-criterion` | 1 | state |
 | `lem-pc-module-opcycles-tor-surjection` | 1 | state |
 | `lem-pc-monomial-cech-complex-homology` | 1 | state |
+| `lem-pc-nonzero-section-integral-cartier` | 1 | state |
 | `lem-pc-nowhere-dense-dim-zero` | 1 | state |
 | `lem-pc-pic-of-field` | 1 | state |
 | `lem-pc-polynomial-quotient-distinct-linear-crt` | 1 | state |
@@ -820,7 +820,7 @@
 | `lem-sc-normalization-properties` | 3 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 1413 nodes that wait for a statement dependency, 40 nodes that wait for stage 1.
+Not open yet: 1412 nodes that wait for a statement dependency, 40 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
