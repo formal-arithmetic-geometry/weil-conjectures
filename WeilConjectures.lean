@@ -930,6 +930,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Fiber
 public import WeilConjectures.Mathlib.AlgebraicGeometry.FunctionField
 public import WeilConjectures.Mathlib.AlgebraicGeometry.GammaSpecAdjunction
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Geometrically.Connected
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Geometrically.Integral
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Geometrically.Irreducible
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Geometrically.Reduced
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Gluing
@@ -1415,6 +1416,8 @@ public import WeilConjectures.RingTheory.RelativeComponentGeneralization
 public import WeilConjectures.RingTheory.Spectrum.Prime.LocallyConstant
 public import WeilConjectures.RingTheory.TensorLocalizationAway
 public import WeilConjectures.RingTheory.TensorProduct.Hilbert90
+public import WeilConjectures.Scratch.Frontier
+public import WeilConjectures.Scratch.Q1
 public import WeilConjectures.SixFunctors.BaseChange.Derived
 public import WeilConjectures.SixFunctors.BaseChange.DerivedComparison
 public import WeilConjectures.SixFunctors.BaseChange.DerivedPasting
@@ -1820,8 +1823,14 @@ public import WeilConjectures.WeilSheaf.Triangle
 public import WeilConjectures.ZetaFunction
 public import WeilConjectures.ZetaFunction.BettiNumbers
 public import WeilConjectures.ZetaFunction.ClassicalFunctionalEquation
+public import WeilConjectures.ZetaFunction.CohomologicalFamily
 public import WeilConjectures.ZetaFunction.HasseWeil
 public import WeilConjectures.ZetaFunction.IntegralFactors
+public import WeilConjectures.ZetaFunction.Rationality
+public import WeilConjectures.ZetaFunction.SmoothProper
+public import WeilConjectures.ZetaFunction.TraceFormula
+public import WeilConjectures.ZetaFunction.Weights
+public import WeilConjectures.ZetaFunction.WeilFactorization
 public import WeilConjectures.ZetaIntegrality
 public import WeilConjectures.ZetaLinearAlgebra.DetTrace
 public import WeilConjectures.ZetaLinearAlgebra.Fatou
@@ -1841,6 +1850,7 @@ public import WeilConjectures.ZetaLinearAlgebra.Recovery
 public import WeilConjectures.ZetaLinearAlgebra.ShiftSpan
 public import WeilConjectures.ZetaLinearAlgebra.TraceCup
 public import WeilConjectures.ZetaLinearAlgebra.TraceDatum
+public import WeilConjectures.ZetaLinearAlgebra.UniversalPurity
 public import WeilConjectures.ZetaLinearAlgebra.WeightStrata
 public import WeilConjectures.ZetaLinearAlgebra.Weights
 public import WeilConjectures.ZetaLinearAlgebra.WeilFactorization

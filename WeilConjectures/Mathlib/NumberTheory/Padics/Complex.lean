@@ -73,3 +73,21 @@ theorem PadicAlgCl.nonempty_ringEquiv_complex : Nonempty (PadicAlgCl p ≃+* ℂ
 /-- There is a field embedding `ℚ̄_p →+* ℂ`. -/
 theorem PadicAlgCl.nonempty_ringHom_complex : Nonempty (PadicAlgCl p →+* ℂ) :=
   (PadicAlgCl.nonempty_ringEquiv_complex p).map RingEquiv.toRingHom
+
+/-- Blueprint `lem-embedding-extension` (extension of embeddings): every field embedding
+`σ : L → ℂ` of a number field `L ⊆ ℚ̄_p` extends to an abstract field isomorphism
+`ι : ℚ̄_p ≃ ℂ`. Both fields are algebraically closed of characteristic zero with transcendence
+bases of cardinality `𝔠` over the countable algebraic closures of `L` and of `σ L`
+(`IsAlgClosed.exists_ringEquiv_extend`). -/
+theorem PadicAlgCl.exists_ringEquiv_complex_extend (L : IntermediateField ℚ (PadicAlgCl p))
+    [FiniteDimensional ℚ L] (σ : L →ₐ[ℚ] ℂ) :
+    ∃ ι : PadicAlgCl p ≃+* ℂ, ∀ x : L, ι x = σ x :=
+  sorry
+
+/-- An element `β ∈ ℚ̄_p` algebraic over `ℚ` can be sent by a field embedding `ℚ̄_p →+* ℂ` to any
+complex root of its minimal polynomial over `ℚ`: embed `ℚ(β)` by `β ↦ z` and extend
+(`PadicAlgCl.exists_ringEquiv_complex_extend`, blueprint `lem-embedding-extension`). -/
+theorem PadicAlgCl.exists_ringHom_complex_apply_eq {β : PadicAlgCl p} (hβ : IsIntegral ℚ β)
+    {z : ℂ} (hz : Polynomial.aeval z (minpoly ℚ β) = 0) :
+    ∃ ι : PadicAlgCl p →+* ℂ, ι β = z :=
+  sorry
