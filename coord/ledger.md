@@ -3146,3 +3146,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 00:43 L: merged deliver/F1/lem-pc-affine-derived-base-change-comparison-map (reviewer FIX; after a return; new nodes: 1)
 - 00:43 UTC L: F1 affine-derived-base-change-comparison-map FIX 780f1520a re-push (R-cmp0042; duplicate K-flat node dropped, cites lem-pur-derived-change-of-rings).
 - 00:44 L: returned deliver/K1/lem-pur-kinjective-surjection-bounded-size (reviewer RETURN: 1. E (Step 1, wrong mathematics): 'lift u_{N'} through pi to phi_{N'}:U->M' is false in general: U is only a generator, )
+- 00:44 UTC L: returned: K1 kinjective-surjection-bounded-size 8f88ca421 (R-sbs0044: lifts U -> N through pi as if U were projective; |M'| bound for a quotient of the direct sum).
