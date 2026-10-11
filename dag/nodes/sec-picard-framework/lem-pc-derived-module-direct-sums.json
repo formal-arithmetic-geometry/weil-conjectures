@@ -113,5 +113,23 @@
   "group": "E1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-dds2028 (reviewer sub-agent of L); spot-checked: Mathlib grep of DerivedCategory/HomotopyCategory for coproduct/HasCoproducts/PreservesColimitsOfShape: no match, so not a leaf. Statement matches Stacks 07D9 (1)-(2) for Mod(A). FIX more, RETURN less: C1 step 2 assumed exactness of direct sums in Mod(A): now cites lem-weil-pbc-ring-modules-grothendieck-abelian (Mathlib IsGrothendieckAbelian ModuleCat) with direct sum = filtered colimit of finite sums; C1 step 3 assumed K-injective resolutions ('the cited Stacks lemma' = 079P) and Hom_D=Hom_K for K-injective targets: now cites lem-weil-pbc-kinjective-functorial-existence and lem-weil-pbc-kinjective-hom-derived (generic tools, tool_uses), with the Hom-complex-acyclic vs null-homotopic K-injective definitions reconciled in the step; proof_deps updated; reviewer grep recorded in mathlib_searches.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.DerivedModuleDirectSums",
+  "declaration": "CategoryTheory.derivedModuleDirectSums",
+  "file": "lean/Sheaf/CategoryTheory/DerivedModuleDirectSums.lean",
+  "statement": "theorem derivedModuleDirectSums (R : Type u) [Ring R] [HasDerivedCategory (ModuleCat.{max u v} R)] (I : Type v) (K : I → CochainComplex (ModuleCat.{max u v} R) ℤ) : Nonempty (IsColimit (Cofan.mk (DerivedCategory.Q.obj (∐ K)) (fun i => DerivedCategory.Q.map (Sigma.ι K i))))",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-dms0750",
+  "group": "H1",
+  "result": "pass",
+  "note": "R:Type u [Ring R] (contains Stacks' commutative A); D(A)=Mathlib DerivedCategory via [HasDerivedCategory (ModuleCat.{max u v} R)] (dep node status mathlib, no record); I:Type v arbitrary incl. empty; K: I -> CochainComplex _ Z; termwise sum = ∐ K with Sigma.ι (degreewise HomologicalComplex colimits); conclusion Nonempty IsColimit of Cofan.mk (Q.obj ∐K) (Q.map ι_i); docstring = node's 3 proof steps; Mathlib/WeilConjectures grep (DerivedCategory, HomotopyCategory, Localization: only finite products/Pi) no arbitrary-coproduct result, existing false correct"
  }
 }
