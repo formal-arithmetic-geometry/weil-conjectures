@@ -250,5 +250,42 @@
   "by": "L",
   "result": "pass",
   "note": "lem-sp-couple-morphism (sk-prop-av-pqf-finite) accepted as a tool use; the three sequences and the choice \"after g^{-1}\" match Step 4 of the target"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.HypercohomologyFiltrations",
+  "declaration": "AlgebraicGeometry.Etale.hypercohomologyFiltrations",
+  "declarations": [
+   "CategoryTheory.hypercohomologyD",
+   "CategoryTheory.hypercohomologyE",
+   "CategoryTheory.hypercohomologyAlpha",
+   "CategoryTheory.hypercohomologyG",
+   "CategoryTheory.hypercohomologyBoundary",
+   "CategoryTheory.hypercohomology_maps_exact",
+   "CategoryTheory.hypercohomologyCouple",
+   "CategoryTheory.hypercohomologyAbutmentMap",
+   "CategoryTheory.hypercohomology_images_antitone",
+   "CategoryTheory.hypercohomologyFiltration",
+   "AlgebraicGeometry.Etale.hypercohomologyFirstFunctor",
+   "AlgebraicGeometry.Etale.hypercohomologyBaseChangeFunctor",
+   "AlgebraicGeometry.Etale.hypercohomologySecondFunctor",
+   "AlgebraicGeometry.Etale.hypercohomologyFiltrations",
+   "AlgebraicGeometry.Etale.hypercohomologyFiltrations_spec"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/HypercohomologyFiltrations.lean",
+  "statement": "def hypercohomologyFiltrations (n : ℤ) : DecreasingFiltration ((DerivedCategory.homologyFunctor _ n).obj ((hypercohomologyFirstFunctor f).obj (DerivedCategory.Q.obj K.obj))) × DecreasingFiltration ((DerivedCategory.homologyFunctor _ n).obj ((hypercohomologyBaseChangeFunctor f g).obj (DerivedCategory.Q.obj K.obj))) × DecreasingFiltration ((DerivedCategory.homologyFunctor _ n).obj ((hypercohomologySecondFunctor f' g').obj (DerivedCategory.Q.obj K.obj)))",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-11",
+  "existing": false,
+  "note": "Definitions give all three image filtrations and explicit cohomological truncation couples (the couple of a triangulated functor applied to the truncation triangles of def-sp-truncation-couple; the form def-weil-pbc-truncation-exact-couples needs). hypercohomologyFiltrations_spec states the E2 terms, finite bounds, convergence, termwise inverse-image compatibility, canonical base-change comparisons, and ties the first couple to the recorded TruncationCouple.alpha/f/g through TruncationCouple.bridgeIso. The cartesian square is an IsPullback witness (STATE CARTESIAN SQUARES); reviewer R-hcf.",
+  "fixed_by": "R-hcf"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-hcf",
+  "group": "C1",
+  "result": "fix",
+  "note": "three filtrations = node's image filtrations F^p H^n = im(H^n(Phi tau<=n-p K) -> H^n(Phi K)) for Phi = Rf_*, g^-1 Rf_*, Rf'_* g'^-1; couples D,E,alpha,f,g match node displays; spec: E2 terms, bounds a<=q<=n, finiteness, ConvergesTo tied to abutment maps, termwise g'^-1 truncation, g^-1 comparison of all pages and filtration; fixed: CartesianSquare structure (H13, re-recorded existing node) -> IsPullback per STATE, reverted node and dropped module; added bridgeIso clauses tying couple (1) to recorded TruncationCouple.alpha/f/g; reverted the delivery's change of existing node(s) def-weil-pbc-cartesian-square (--revert-nodes; kept as on sheaf-dag); left out new module(s) lean/Sheaf/AlgebraicGeometry/EtaleCartesianSquare.lean (--drop-files, or a record fixed to existing: true)"
  }
 }
