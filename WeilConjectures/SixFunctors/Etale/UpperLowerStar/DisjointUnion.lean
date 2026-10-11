@@ -217,6 +217,24 @@ theorem isIso_pi_lift_lowerStarTrivialCoverFoldToRestriction
     piComparison E _) := h₁ ▸ h₂
   exact IsIso.of_isIso_comp_right _ (piComparison E _)
 
+/-- The pushforward of the constant sheaf at `M` along a finite trivial cover `∐ₛ U ⟶ U` is the
+constant sheaf at `Mˢ`. -/
+noncomputable def lowerStarTrivialCoverFoldConstantIso [Finite S] (M : ModuleCat.{u + 1} Λ) :
+    (Etale.lowerStar (ModuleCat.{u + 1} Λ) (trivialCoverFold U S)).obj
+      ((constantSheaf (∐ fun _ : S ↦ U).smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj M) ≅
+      (constantSheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj (∏ᶜ fun _ : S ↦ M) :=
+  have := Fintype.ofFinite S
+  have := isIso_pi_lift_lowerStarTrivialCoverFoldToRestriction
+    ((constantSheaf (∐ fun _ : S ↦ U).smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj M)
+  asIso (Pi.lift (lowerStarTrivialCoverFoldToRestriction
+    ((constantSheaf (∐ fun _ : S ↦ U).smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj M))) ≪≫
+    Pi.mapIso (fun s ↦
+      ((GrothendieckTopology.upperStarIsoLocalizationRestriction (ModuleCat.{u + 1} Λ) @Etale
+        @Etale le_rfl (Sigma.ι (fun _ : S ↦ U) s) inferInstance).app _).symm ≪≫
+      (upperStarConstantSheafIso (ModuleCat.{u + 1} Λ)
+        (Sigma.ι (fun _ : S ↦ U) s)).app M) ≪≫
+    (PreservesProduct.iso (constantSheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ)) _).symm
+
 /-- **The pushforward of a constant sheaf along a finite trivial cover is constant**: it is the
 product over the copies of the restrictions, each of which is constant. -/
 theorem isConstant_lowerStar_trivialCoverFold [Finite S] (M : ModuleCat.{u + 1} Λ) :

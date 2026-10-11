@@ -7,6 +7,8 @@ module
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.DisjointUnion
 public import WeilConjectures.SixFunctors.Finite.BaseChange
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.LocallyTrivial
+public import WeilConjectures.Mathlib.CategoryTheory.Sites.Point.ConstantSheaf
+public import Mathlib.Algebra.Category.ModuleCat.Products
 
 /-!
 # Pushforwards of constant sheaves along finite étale morphisms
@@ -61,5 +63,64 @@ theorem isLocallyConstantSheaf_lowerStar_constantSheaf (π : V ⟶ X) [IsFinite 
     ((Etale.lowerStar _ (trivialCoverFold (U x) (S x))).mapIso
       ((upperStarConstantSheafIso (ModuleCat.{u + 1} Λ) (fst x)).app M).symm ≪≫
       (asIso ((Etale.baseChangeMap (ModuleCat.{u + 1} Λ) (hpb x).toCommSq).app _)).symm)
+
+/-- **Geometric points lift along étale morphisms**: a point `Spec Ω ⟶ X` with `Ω` separably
+closed whose image lies in the image of an étale `g : U ⟶ X` factors through `g`, the residue
+field extensions of `g` being separable. -/
+lemma exists_comp_eq_of_etale {U X : Scheme.{u}} (g : U ⟶ X) [Etale g] {Ω : Type u} [Field Ω]
+    [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ X) (hs : s (IsLocalRing.closedPoint _) ∈ Set.range g) :
+    ∃ s' : Spec (.of Ω) ⟶ U, s' ≫ g = s := by
+  obtain ⟨⟨x, φ⟩, rfl⟩ := (SpecToEquivOfField Ω X).symm.surjective s
+  obtain ⟨w, hw⟩ := hs
+  simp only [SpecToEquivOfField_symm_apply, Hom.comp_apply, fromSpecResidueField_apply] at hw
+  subst hw
+  let : Algebra (X.residueField (g w)) (U.residueField w) := (g.residueFieldMap w).hom.toAlgebra
+  let : Algebra (X.residueField (g w)) Ω := φ.hom.toAlgebra
+  let ψ : U.residueField w →ₐ[X.residueField (g w)] Ω := IsSepClosed.lift
+  refine ⟨Spec.map (CommRingCat.ofHom ψ.toRingHom) ≫ U.fromSpecResidueField w, ?_⟩
+  simp only [SpecToEquivOfField_symm_apply]
+  rw [Category.assoc, ← Hom.SpecMap_residueFieldMap_fromSpecResidueField, ← Category.assoc,
+    ← Spec.map_comp]
+  congr 2
+  ext a
+  exact ψ.commutes a
+
+/-- Limits of size `u` exist in `ModuleCat.{u + 1} Λ`. -/
+local instance {Λ : Type (u + 1)} [CommRing Λ] : HasLimitsOfSize.{u, u} (ModuleCat.{u + 1} Λ) :=
+  hasLimitsOfSizeShrink.{u, u, u + 1, u + 1} _
+
+/-- The forgetful functor of `ModuleCat.{u + 1} Λ` preserves filtered colimits of size `u`. -/
+local instance {Λ : Type (u + 1)} [CommRing Λ] :
+    PreservesFilteredColimitsOfSize.{u, u} (CategoryTheory.forget (ModuleCat.{u + 1} Λ)) :=
+  preservesFilteredColimitsOfSize_shrink.{u, u + 1, u, u + 1} _
+
+/-- **The pushforward of a finite constant sheaf along a finite étale morphism is finite locally
+constant.** Its stalk at a geometric point is, after lifting the point to a member of a
+trivialising étale cover, the value `Mˢ` of a constant sheaf. -/
+theorem isFiniteLocallyConstantSheaf_lowerStar_constantSheaf {V X : Scheme.{u}}
+    {Λ : Type (u + 1)} [CommRing Λ] (π : V ⟶ X) [IsFinite π] [Etale π]
+    (M : ModuleCat.{u + 1} Λ) [Module.Finite Λ M] :
+    IsFiniteLocallyConstantSheaf ((Etale.lowerStar (ModuleCat.{u + 1} Λ) π).obj
+      ((constantSheaf V.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj M)) where
+  toIsLocallyConstantSheaf := isLocallyConstantSheaf_lowerStar_constantSheaf π M
+  toIsFiniteSheaf := ⟨fun Ω _ _ s ↦ by
+    let P : X.FiniteEtale := ⟨MorphismProperty.Over.mk ⊤ π inferInstance,
+      (inferInstance : IsFinite π)⟩
+    have : IsFinite P.obj.hom := (inferInstance : IsFinite π)
+    obtain ⟨U, g, hg, S, hS, fst, hx, hpb⟩ :=
+      FiniteEtale.exists_etale_isPullback_sigma P (s (IsLocalRing.closedPoint _))
+    obtain ⟨s', rfl⟩ := exists_comp_eq_of_etale g s hx
+    have := Etale.isIso_baseChangeMap_of_isFinite (ModuleCat.{u + 1} Λ) hpb
+    let e := ((Etale.upperStarCompSheafFiberIso (ModuleCat.{u + 1} Λ) g s').app _).symm ≪≫
+      (pointSmallEtale s').sheafFiber.mapIso
+        (asIso ((Etale.baseChangeMap (ModuleCat.{u + 1} Λ) hpb.toCommSq).app _) ≪≫
+          (Etale.lowerStar _ (trivialCoverFold U S)).mapIso
+            ((upperStarConstantSheafIso (ModuleCat.{u + 1} Λ) fst).app M) ≪≫
+          lowerStarTrivialCoverFoldConstantIso M) ≪≫
+      (pointSmallEtale s').sheafFiberConstantSheafIso _ ≪≫
+      ModuleCat.piIsoPi.{u + 1, u, u + 1} (fun _ : S ↦ M)
+    have : Module.Finite Λ (S → M) := Module.Finite.pi
+    exact ((ModuleCat.isFinitelyGenerated_iff (ModuleCat.of Λ (S → M))).2 this).of_iso e.symm⟩
+
 
 end AlgebraicGeometry.Scheme
