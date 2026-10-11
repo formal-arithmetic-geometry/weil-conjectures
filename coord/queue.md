@@ -1,11 +1,11 @@
 # Work queue
 
-974 items; claim with `tools/claim.py next <group> [--stage N]`.
+969 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (974)
+## Stage 2: nodes to state (969)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -17,7 +17,6 @@
 | `def-weil-pbc-finite-torsors` | 1 | state |
 | `lem-exc-abelian-sheaves-gmodules` | 1 | state |
 | `lem-kun-03sa` | 1 | state |
-| `lem-pc-bounded-above-flat-tensor-acyclic` | 1 | state |
 | `lem-pc-derived-adjoint-functors` | 1 | state |
 | `lem-pc-derived-tensor-second-factor-functor` | 1 | state |
 | `lem-pc-derived-tensor-transitivity` | 1 | state |
@@ -35,7 +34,6 @@
 | `lem-pc-tower-surjective-lim-acyclic` | 1 | state |
 | `lem-pc-very-ample-disjoint-union` | 1 | state |
 | `lem-pc-zero-scheme-pullback` | 1 | state |
-| `lem-pc-zero-scheme-pullback-local-coefficient` | 1 | state |
 | `lem-pod-lisse-module-sheaves-as-module-objects` | 1 | state |
 | `lem-pur-derived-change-of-rings` | 1 | state |
 | `lem-sc-ample-proj-local-chart` | 1 | state |
@@ -46,12 +44,9 @@
 | `lem-sc-dvr-valuation-ring-characterization` | 1 | state |
 | `lem-sc-ext-derived-composite-natural` | 1 | state |
 | `lem-sc-finite-free-internal-hom-exact` | 1 | state |
-| `lem-sc-finite-pushforward-locally-free` | 1 | state |
 | `lem-sc-finite-sections-cover-qc` | 1 | state |
 | `lem-sc-finite-sheafhom-affine` | 1 | state |
 | `lem-sc-free-prime-membership` | 1 | state |
-| `lem-sc-generic-stalk-finite-length` | 1 | state |
-| `lem-sc-generic-vanishing-kernel-colimit` | 1 | state |
 | `lem-sc-genus-invariant` | 1 | state |
 | `lem-sc-global-generation-nonvanishing-cover` | 1 | state |
 | `lem-sc-global-sections-left-exact` | 1 | state |
