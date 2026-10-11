@@ -1,0 +1,113 @@
+{
+ "id": "def-weil-pbc-arrows-functor",
+ "kind": "definition",
+ "title": "The functor taking a category to its set of arrows",
+ "status": "split",
+ "statement": "For a category $C$ whose objects and morphisms are sets, let $\\mathrm{Arrows}(C)$ be the set of triples $(X,Y,f)$ with $f:X\\to Y$. For a functor $v:C\\to D$, put $\\mathrm{Arrows}(v)(X,Y,f)=(vX,vY,vf)$. These maps define the functor $\\mathrm{Arrows}:\\mathit{Cat}\\to\\mathit{Sets}$ used to form the arrow-set diagram of a strict system of categories.",
+ "stmt_deps": [],
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "proof of Lemma Tag 09YL, first paragraph: the colimit of the arrow sets"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "functor from Cat to types taking category to its set of arrows",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Cat.arrows",
+   "results": "loogle: unknown identifier 'CategoryTheory.Cat.arrows'",
+   "date": "2026-10-11",
+   "verdict": "no match: the arrow set functor on Cat is not supplied"
+  },
+  {
+   "tool": "grep",
+   "query": "def arrows|Cat.arrows|def objects",
+   "results": "Mathlib/CategoryTheory/Category/Cat.lean",
+   "date": "2026-10-11",
+   "verdict": "no match: the arrow set functor on Cat is not supplied"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "functor Cat to Type taking a category to its set of arrows and a functor to the image of each arrow",
+   "results": "CategoryTheory.Functor.mapArrowFunctor_obj, CategoryTheory.Arrow.leftFunc, CategoryTheory.Cat.Hom.toFunctor, CategoryTheory.instCategoryArrow, CategoryTheory.Functor.toCatHom, CategoryTheory.CostructuredArrow.functor_obj, CategoryTheory.Functor.mapArrowFunctor, CategoryTheory.Arrow",
+   "date": "2026-10-11",
+   "verdict": "no match: the arrow set functor on Cat is not supplied"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n Cat.arrows|def arrows WeilConjectures lean/Sheaf; blueprint_refs.py search arrows functor; rg -l set of all arrows|set of arrows as a functor dag/nodes",
+   "results": "No declarations or matching definition nodes; unrelated uses of arrows and functors only.",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-filtered-colimit-categories",
+  "date": "2026-10-11",
+  "group": "F1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-injective-restriction-acyclicity",
+   "place": "The arrow-set diagram in clause (1) of lem-weil-pbc-filtered-colimit-categories, used by the finite-stage argument of Tag 09YL.",
+   "via": [
+    "lem-weil-pbc-filtered-colimit-categories",
+    "lem-weil-pbc-colimit-of-sites",
+    "lem-weil-pbc-etale-cohomology-limit-of-schemes"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "module": "Sheaf.CategoryTheory.ArrowsFunctor",
+  "declaration": "CategoryTheory.Cat.arrows",
+  "file": "lean/Sheaf/CategoryTheory/ArrowsFunctor.lean",
+  "statement": "def arrows : Cat.{v, u} ⥤ Type (max u v)",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": false,
+  "declarations": [
+   "CategoryTheory.Cat.arrows_map_id",
+   "CategoryTheory.Cat.arrows_map_comp",
+   "CategoryTheory.Cat.arrows"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-fcc1016",
+  "group": "F1",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-fcc1016",
+  "group": "F1",
+  "result": "pass",
+  "note": "J small filtered; F : J ⥤ Cat strict laws; O = colimit (F⋙Cat.objects); ∃ Category O, V j functors with obj=colimit.ι, (F.map f)⋙V k = V j; arrows colimit cocone ≃ Arrow O via mapArrow; (2) finite lists lift with src/tgt/comp/id relations, eventual equality, FinCategory functors lift; (3) Hom colimit over j/J elementwise (surj + eq iff refinement with f≫h=g≫i); (4) iso iff iso representative; new node Cat.arrows not in Mathlib (only objects/connectedComponents/isomorphismClasses)"
+ }
+}
