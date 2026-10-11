@@ -5345,3 +5345,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 16:03 L: merged deliver/R1/lem-weil-pbc-formal-systems-surjective (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.CoherentFormalModuleEpi AlgebraicGeometry.coherentFormalModule_epi_iff_first_component)
 - 16:03 L: merged deliver/T1/lem-weil-pbc-qcqs-cohomology-direct-sum (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.QcqsCohomologyDirectSum AlgebraicGeometry.Scheme.moduleCohomology_directSum_bijective)
 - 16:04 L: merged deliver/M1/lem-sc-ext-stalk-localization (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.SheafExtStalkLocalization AlgebraicGeometry.nonempty_moduleSheafExt_stalk_linearEquiv)
+- 16:04 L: merged deliver/V1/lem-sc-ext-coherent-hom-injective-acyclic (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.CoherentHomInjectiveAcyclic AlgebraicGeometry.coherent_hom_injective_acyclic)
