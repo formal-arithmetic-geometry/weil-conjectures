@@ -4780,3 +4780,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 13:34 L: merged deliver/F1/lem-sc-affine-perfect-plus-shift (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.AffinePerfectPlusShift AlgebraicGeometry.exists_perfect_restrict_iso_directSum_shift)
 - 13:34 L: merged deliver/C1/lem-sc-perfect-degree-zero-fibre-criterion (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.PerfectDegreeZeroFibreCriterion AlgebraicGeometry.perfect_degreeZero_fibre_criterion)
 - 13:34 L: returned deliver/G1/lem-sc-picard-kunneth-qcoh (reviewer RETURN: H10 (head 61a26ce2c, reviewer R-pkq1437): lean/Sheaf/AlgebraicGeometry/FieldLinearModuleCohomologyOperations.lean does n)
+- 13:34 L: merged deliver/H1/lem-weil-pbc-quasi-coherent-algebra-colimit (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.QuasiCoherentAlgebraColimit AlgebraicGeometry.Scheme.quasiCoherentAlgebra_colimit)

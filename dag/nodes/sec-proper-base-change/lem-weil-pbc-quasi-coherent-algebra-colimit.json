@@ -175,5 +175,24 @@
  },
  "tool_uses": [
   "lem-weil-pbc-spec-module-tilde-sections"
- ]
+ ],
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.QuasiCoherentAlgebraColimit",
+  "declaration": "AlgebraicGeometry.Scheme.quasiCoherentAlgebra_colimit",
+  "statement": "theorem quasiCoherentAlgebra_colimit (X : Scheme.{u}) (I : Type u) [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I] (F : I ⥤ X.CommAlgebraSheaf) (hF : ∀ i : I, X.IsQuasiCoherentAlgebra (F.obj i)) : ∃ (c : Cocone F), Nonempty (IsColimit c) ∧ X.IsQuasiCoherentAlgebra c.pt ∧ (∃ (p : Cocone (F ⋙ Under.forget X.sheaf ⋙ sheafToPresheaf (Opens.grothendieckTopology X) CommRingCat)), Nonempty (IsColimit p) ∧ ∃ (e : (presheafToSheaf (Opens.grothendieckTopology X) CommRingCat).obj p.pt ≅ c.pt.right), ∀ i : I, p.ι.app i ≫ toSheafify (Opens.grothendieckTopology X) p.pt ≫ e.hom.hom = (c.ι.app i).right.hom) ∧ (∀ (U : X.Opens), IsAffineOpen U → Nonempty (IsColimit (((evaluation X.Opensᵒᵖ CommRingCat).obj (op U)).mapCocone ((sheafToPresheaf (Opens.grothendieckTopology X) CommRingCat).mapCocone ((Under.forget X.sheaf).mapCocone c))))) ∧ (∀ (V : X.Opens), Nonempty (IsColimit ((Under.post ((Opens.grothendieckTopology X).overPullback CommRingCat V)).mapCocone c)))",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": false,
+  "file": "lean/Sheaf/AlgebraicGeometry/QuasiCoherentAlgebraColimit.lean",
+  "branch": "sheaf-dag",
+  "fixed_by": "R-qac1512"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-qac1512",
+  "group": "H1",
+  "result": "fix",
+  "note": "X : Scheme.{u}; I : Type u directed preorder + Nonempty (index in scheme universe); F : I ⥤ X.CommAlgebraSheaf; hF = toModule.IsQuasicoherent (not hollow); colimit cocone + IsColimit in algebra sheaves with QC vertex (full subcategory); presheaf-colimit sheafification iso tied to legs; affine section cocone IsColimit; restriction to V via overPullback/Under.post IsColimit; removed show..from and helper sectionDiagram"
+ }
 }
