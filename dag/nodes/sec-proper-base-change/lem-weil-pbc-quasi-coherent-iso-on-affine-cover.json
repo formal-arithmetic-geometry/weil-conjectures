@@ -186,5 +186,24 @@
   "worker": "stage1",
   "summary": "Read Schemes 01IA, 01IB (schemes.tex lines 1279, 1390), 01I7, and Sheaves 04TN (sheaves.tex line 5078); tags verified in tags/tags (007X named in the brief is sheaves-section-sheafification, not an iso-on-cover lemma, so it is not used). Statement and stmt_deps unchanged. Proof in 4 steps, citing only existing nodes, all of unit sk-thm-p1 apart from definitions: (1) each affine W_a is transported to X_a = Spec O_Y(W_a) by an isomorphism inducing the identity on global sections, and the restrictions of F, G along X_a -> Y are quasi-coherent (lem-weil-pbc-module-restriction-open-immersion-colimits (2)), with phi on global sections equal to phi_{W_a}; (2) on X_a, naturality of the counit (derived from the natural bijection of lem-weil-pbc-affine-tilde-gamma-adjunction (1)) and the counit isomorphisms (3) give phi|_{X_a} = eps o (phi_{W_a})~ o eps^{-1}, an isomorphism; (3) restricting back along the inverse isomorphism W_a -> X_a (a functor) gives that phi|_{W_a} is an isomorphism; (4) lem-weil-pbc-sheaf-isomorphism-local-open-cover (gluing of the local inverses, Sheaves 04TN) concludes. No new node. Not a Mathlib leaf (LeanSearch, LeanFinder, Loogle, local_search, grep recorded): Mathlib has the affine counit (Tilde.lean:850) and the all-opens and stalk criteria, not the affine-cover statement. Citer lem-weil-pbc-affine-module-correspondence steps 6 and 7 use exactly this statement (covers u^{-1}V of U and all affine opens of X, maps between quasi-coherent modules bijective on those sections)."
  },
- "reviewed": "2026-10-10 L: 4 steps checked (transport to Spec O(W_a) with identity on global sections, counit naturality derived from the tilde-Gamma adjunction clause (1), phi|_{X_a} = eps (phi_{W_a})~ eps^{-1} an isomorphism, back to W_a along the inverse isomorphism, glue by sheaf-isomorphism-local-open-cover); proof assembled by the agent since Stacks uses the fact inside 01SB without stating it; citer affine-module-correspondence steps 6-7 match"
+ "reviewed": "2026-10-10 L: 4 steps checked (transport to Spec O(W_a) with identity on global sections, counit naturality derived from the tilde-Gamma adjunction clause (1), phi|_{X_a} = eps (phi_{W_a})~ eps^{-1} an isomorphism, back to W_a along the inverse isomorphism, glue by sheaf-isomorphism-local-open-cover); proof assembled by the agent since Stacks uses the fact inside 01SB without stating it; citer affine-module-correspondence steps 6-7 match",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.QuasiCoherentIsoOnAffineCover",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.Hom.isIso_of_bijective_on_affine_open_cover",
+  "file": "lean/Sheaf/AlgebraicGeometry/QuasiCoherentIsoOnAffineCover.lean",
+  "statement": "theorem Hom.isIso_of_bijective_on_affine_open_cover {Y : Scheme.{u}} {F G : Y.Modules} [F.IsQuasicoherent] [G.IsQuasicoherent] (φ : F ⟶ G) {A : Type u} (W : A → Y.Opens) (hcover : ⨆ a, W a = ⊤) (haffine : ∀ a : A, IsAffineOpen (W a)) (hbijective : ∀ a : A, Function.Bijective (φ.app (W a))) : IsIso φ",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-qia1523"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-qia1523",
+  "group": "E1",
+  "result": "fix",
+  "note": "Y Scheme.{u}; F G : Y.Modules with Mathlib SheafOfModules.IsQuasicoherent (#check); φ : F ⟶ G; affine cover A : Type u, W : A → Y.Opens, ⨆ a, W a = ⊤ (OPEN COVERS form, was iSup W with independent Type v), IsAffineOpen (W a); Function.Bijective (φ.app (W a)); IsIso φ; no lets, no hollow hypotheses, no node re-records"
+ }
 }
