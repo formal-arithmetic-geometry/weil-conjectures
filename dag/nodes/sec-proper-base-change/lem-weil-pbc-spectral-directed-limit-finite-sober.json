@@ -165,5 +165,23 @@
   "by": "L",
   "result": "accepted",
   "note": "5 steps following Topology 09XX with the setup of 09XW: the system of finite images X_J in Sierpinski products indexed by finite sets of quasi-compact opens; X_J is T_0 hence sober by a new unsplit node (finite T_0 spaces are sober, the claim 09XX asserts without proof); injectivity from sobriety and the basis of quasi-compact opens; surjectivity onto compatible families from the quasi-compactness of the constructible topology (0901 leaf) in place of 09XW, which L accepts (the closedness of 09XW rests on it); the coarsest topology. Statement: the tag sentence removed (B7), sober spelled out."
+ },
+ "lean": {
+  "module": "Sheaf.Topology.SpectralDirectedLimitFiniteSober",
+  "declaration": "Topology.exists_directed_inverseLimit_finite_sober",
+  "file": "lean/Sheaf/Topology/SpectralDirectedLimitFiniteSober.lean",
+  "statement": "theorem exists_directed_inverseLimit_finite_sober (X : Type u) [tX : TopologicalSpace X] [SpectralSpace X] : ∃ (I : Type u) (_ : Preorder I), Nonempty I ∧ IsDirected I (· ≤ ·) ∧ ∃ (Y : I → TopCat.{u}) (f : ∀ i j : I, i ≤ j → C(Y j, Y i)) (p : ∀ i : I, C(X, Y i)), (∀ i : I, Finite (Y i)) ∧ (∀ (i : I) (Z : Set (Y i)), IsIrreducible Z → IsClosed Z → ∃! η : Y i, IsGenericPoint η Z) ∧ (∀ i : I, f i i le_rfl = ContinuousMap.id (Y i)) ∧ (∀ (i j k : I) (hij : i ≤ j) (hjk : j ≤ k), (f i j hij).comp (f j k hjk) = f i k (hij.trans hjk)) ∧ (∀ (i j : I) (hij : i ≤ j), (f i j hij).comp (p j) = p i) ∧ Function.Injective (fun x : X => fun i : I => p i x) ∧ (∀ y : ∀ i : I, Y i, (∀ (i j : I) (hij : i ≤ j), f i j hij (y j) = y i) → ∃ x : X, ∀ i : I, p i x = y i) ∧ tX = ⨅ i : I, TopologicalSpace.induced (p i) (Y i).str",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "J1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }
