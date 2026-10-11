@@ -146,5 +146,30 @@
   "by": "L",
   "result": "pass",
   "note": "Reviewed by the lead (opus-relaunch6). Four steps: a filtered colimit of commutative R-algebras is the colimit of the underlying R-modules (new unsplit node; no tag of its own; its proof is step 2 of lem-weil-pbc-directed-colimit-base-change-elementwise made filtered), tensoring with N by the 00DD leaf (the 'equivalently' clause), the elementwise description by the filtered-colimit-modules-elementwise node (clauses (1) and (2)), f (x) id a ring map (new Mathlib leaf Algebra.TensorProduct.rTensor, TensorProduct/Maps.lean:614 with map_tmul line 548; lines verified). Categories 0032 not needed. Tags verified by the worker (00DD, 00D6, 00D7, 0AH1)."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.FilteredColimitAlgebrasTensorElementwise",
+  "declaration": "CommAlgCat.filteredColimit_tensorProduct_elementwise",
+  "declarations": [
+   "CommAlgCat.filteredColimit_tensorProduct_elementwise",
+   "CommAlgCat.filteredColimit_tensorProduct_universal",
+   "CommAlgCat.filteredColimit_tensorProduct_ringHom"
+  ],
+  "file": "lean/Sheaf/RingTheory/FilteredColimitAlgebrasTensorElementwise.lean",
+  "statement": "theorem filteredColimit_tensorProduct_elementwise (R : Type uR) [CommRing R] {I : Type uI} [SmallCategory I] [IsFiltered I] (F : I ⥤ CommAlgCat.{vA, uR} R) [HasColimit F] (N : Type uN) [AddCommGroup N] [Module R N] : (∀ (x : (colimit F : CommAlgCat R) ⊗[R] N), ∃ (i : I) (t : (F.obj i : Type vA) ⊗[R] N), LinearMap.rTensor N (colimit.ι F i).hom.toLinearMap t = x) ∧ (∀ (i : I) (t : (F.obj i : Type vA) ⊗[R] N), LinearMap.rTensor N (colimit.ι F i).hom.toLinearMap t = 0 → ∃ (j : I) (u : i ⟶ j), LinearMap.rTensor N (F.map u).hom.toLinearMap t = 0)",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": false,
+  "note": "The main declaration states (1) and (2); the universal declaration states the parenthetical module-colimit clause, and the ringHom declaration states the conditional ring-homomorphism clause.",
+  "fixed_by": "R-fte1025"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-fte1025",
+  "group": "E1",
+  "result": "fix",
+  "note": "R CommRing; I small filtered as {I : Type uI} [SmallCategory I] [IsFiltered I] (was Category.{vI,uI}, STATE FILTERED COLIMITS/F1 6ebcba30e); F : I ⥤ CommAlgCat R, HasColimit, colimit.ι; N arbitrary R-module; gamma_i/gamma_u as LinearMap.rTensor N (G1 85ed66817 form, defeq to TensorProduct.map f id); (1) lift, (2) vanishing along some u : i ⟶ j; parenthetical as ∃! factorization (matches F1); ring-hom clause non-hollow, witnessed by Algebra.TensorProduct.map ... |>.toRingHom with rfl"
  }
 }
