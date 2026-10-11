@@ -3382,3 +3382,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 05:32 L: FIRST STAGE-2 DELIVERY: deliver/C1/def-pc-generators (ff00d330c; stage-2 preflight OK, compile 1.1 s); reviewer R-gen0531 launched with the stage-2 packet; lead worker W-kfl0542 (def-pc-kflat-complex) still running, no further lead item will be claimed while deliveries wait
 - 05:32 L: merged deliver/C1/def-pc-generators (stage 2; reviewer PASS; first push; Sheaf.CategoryTheory.WeakTriangulatedGenerator CategoryTheory.IsWeakTriangulatedGenerator)
 - 05:35 L: deliver/C1/def-pc-representable-functor (dee858c94, existing: true -> Mathlib Functor.IsRepresentable; preflight OK) reviewer R-rep0535 launched; Monitor re-armed 05:35
+- 05:35 L: merged deliver/C1/def-pc-representable-functor (stage 2; reviewer PASS; first push; Mathlib.CategoryTheory.Yoneda CategoryTheory.Functor.IsRepresentable; existing declaration)
