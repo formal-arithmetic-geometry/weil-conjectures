@@ -160,5 +160,23 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AffineKoszulHomAlternatingCech",
+  "declaration": "AlgebraicGeometry.affineKoszulHomAlternatingCech",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineKoszulHomAlternatingCech.lean",
+  "statement": "theorem affineKoszulHomAlternatingCech (A : Type u) [CommRing A] (r : ℕ) (f : Fin r → A) (M : CochainComplex (ModuleCat.{u} A) ℤ) : ∃ D : ℕ ⥤ CochainComplex AddCommGrpCat.{u} ℤ, (∀ e : ℕ, D.obj e = CochainComplex.HomComplex (shiftedKoszulComplex A r (fun i ↦ f i ^ (e + 1))) M) ∧ ∃ T : CochainComplex AddCommGrpCat.{u} ℤ, ∃ eIso : (∀ n : ℤ, T.X n ≅ AddCommGrpCat.of (DirectSum (Fin r) (fun p ↦ ∀ t : {t : Fin (p.val + 1) → Fin r // StrictMono t}, LocalizedModule.Away (∏ i : Fin (p.val + 1), f (t.1 i)) (M.X (n - (p.val : ℤ)))))) , ∃ Φ : (Limits.colimit D) ⟶ T, (∀ n : ℤ, IsIso (Φ.f n)) ∧ IsIso Φ",
+  "branch": "sheaf-dag",
+  "by": "U1",
+  "date": "2026-10-12",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "U1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }
