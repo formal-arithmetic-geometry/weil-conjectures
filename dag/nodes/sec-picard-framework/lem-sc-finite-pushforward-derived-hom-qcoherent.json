@@ -124,5 +124,23 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FinitePushforwardDerivedHomQCoherent",
+  "declaration": "AlgebraicGeometry.finite_pushforward_derivedHom_qcoherent",
+  "file": "lean/Sheaf/AlgebraicGeometry/FinitePushforwardDerivedHomQCoherent.lean",
+  "statement": "theorem finite_pushforward_derivedHom_qcoherent {X Y : Scheme.{u}} (f : X ⟶ Y) [IsFinite f] [IsNoetherian X] [IsNoetherian Y] (B : Y.CommAlgebraSheaf) (hBf : B = Under.mk (⟨f.c⟩ : Y.sheaf ⟶ (TopCat.Sheaf.pushforward CommRingCat.{u} f.base).obj X.sheaf)) [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))] [∀ U : Y.Opens, HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings Y.toRingedSpace).over U))] [HasDerivedCategory.{wB} (SheafOfModules.{u} ((sheafCompose (Opens.grothendieckTopology Y) (forget₂ CommRingCat RingCat)).obj B.right))] (K : schemeDerivedQCohCategory Y) (hK : ∃ n : ℤ, K.obj.IsGE n) : ∃ hB : B.toModule.IsQuasicoherent, Scheme.IsPseudoCoherent Y ((DerivedCategory.singleFunctor (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0).obj B.toModule) ∧ sheafAlgebraDerivedQCohProperty Y B hB ((derivedRHomAlgebraModule Y B hB).obj K.obj) ∧ schemeDerivedQCohProperty Y ((SheafOfModules.restrictScalars.{u} ((sheafCompose (Opens.grothendieckTopology Y) (forget₂ CommRingCat RingCat)).map B.hom)).mapDerivedCategory.obj ((derivedRHomAlgebraModule Y B hB).obj K.obj)) ∧ ∃ n : ℤ, ((SheafOfModules.restrictScalars.{u} ((sheafCompose (Opens.grothendieckTopology Y) (forget₂ CommRingCat RingCat)).map B.hom)).mapDerivedCategory.obj ((derivedRHomAlgebraModule Y B hB).obj K.obj)).IsGE n",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "H1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }
