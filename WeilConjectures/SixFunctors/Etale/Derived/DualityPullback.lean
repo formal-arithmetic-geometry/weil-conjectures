@@ -34,7 +34,7 @@ products, `𝔻_{X×Y}(M ⊠ N) ≅ 𝔻_X M ⊠ 𝔻_Y N`, which is not formal.
 - `AlgebraicGeometry.Etale.nonempty_rightDerivedUpperShriek_derivedHom_iso`
   (`cor-sf-duality-pullback`): `Rf^! RHom_Y(K, N) ≅ RHom_X(Lf^* K, Rf^! N)`, for a general
   coefficient category in which the projection formula holds.
-- `AlgebraicGeometry.Etale.nonempty_iso_rightDerivedUpperShriek_derivedHom`
+- `AlgebraicGeometry.Etale.nonempty_rightDerivedUpperShriek_derivedHom_iso_of_finite`
   (`cor-sf-duality-pullback`): the same at finite coefficients.
 - `AlgebraicGeometry.Etale.nonempty_iso_verdierDual_leftDerivedUpperStar`
   (`cor-sf-duality-pullback`): `𝔻_X Lf^* ≅ Rf^! 𝔻_Y` as functors on `D(Y_ét, Λ)ᵒᵖ`.
@@ -109,26 +109,10 @@ theorem nonempty_rightDerivedUpperShriek_derivedHom_iso [IsIso (projectionMap A 
         (Functor.whiskeringRight _ _ _).obj R(f)_![A] ≅
       -⊗ᴸ-(Y)[A] ⋙ (Functor.whiskeringLeft _ _ _).obj R(f)_![A] ⋙
         (Functor.whiskeringRight _ _ _).obj (𝟭 _) :=
-    NatIso.ofComponents (fun K ↦ NatIso.ofComponents (fun M ↦
-      (R(f)_![A]).mapIso ((βX.app _).app M) ≪≫
-        (asIso (((projectionMap A f).app M).app K)).symm ≪≫ (βY.app _).app K)
-      (fun {M M'} g ↦ by
-        have h₁ := (βX.hom.app (L((f)^*[A]).obj K)).naturality g
-        have h₂ := congr_app ((projectionMap A f).naturality g) K
-        have h₃ := congr_app (βY.hom.naturality ((R(f)_![A]).map g)) K
-        dsimp at h₁ h₂ h₃ ⊢
-        simp only [Category.assoc, ← Functor.map_comp_assoc, h₁]
-        rw [Functor.map_comp_assoc, IsIso.eq_inv_comp, ← reassoc_of% h₂]
-        simp [h₃]))
-      (fun {K K'} g ↦ by
-        ext M
-        have h₁ := congr_app (βX.hom.naturality (L((f)^*[A]).map g)) M
-        have h₂ := ((projectionMap A f).app M).naturality g
-        have h₃ := (βY.hom.app ((R(f)_![A]).obj M)).naturality g
-        dsimp at h₁ h₂ h₃ ⊢
-        simp only [Category.assoc, ← Functor.map_comp_assoc, h₁]
-        rw [Functor.map_comp_assoc, IsIso.eq_inv_comp, ← reassoc_of% h₂]
-        simp [h₃])
+    Functor.isoWhiskerRight (Functor.isoWhiskerLeft L((f)^*[A]) βX)
+        ((Functor.whiskeringRight _ _ _).obj R(f)_![A]) ≪≫
+      (asIso ((flipFunctor _ _ _).map (projectionMap A f))).symm ≪≫
+      Functor.isoWhiskerRight βY.symm ((Functor.whiskeringLeft _ _ _).obj R(f)_![A])
   exact ⟨((derivedTensorHomAdjunction₂ A Y).comp (rightDerivedUpperShriekAdjunction A f)
       Adjunction.id).conjugateIso
     (((derivedTensorHomAdjunction₂ A X).precomp L((f)^*[A])).comp Adjunction.id
@@ -151,7 +135,7 @@ naturally in `K` and `N`. This is
 `AlgebraicGeometry.Etale.nonempty_rightDerivedUpperShriek_derivedHom_iso` at
 `A = ModuleCat Λ`, the projection formula holding at finite coefficients
 (`AlgebraicGeometry.Etale.isIso_projectionMap_of_finite`). -/
-theorem nonempty_iso_rightDerivedUpperShriek_derivedHom :
+theorem nonempty_rightDerivedUpperShriek_derivedHom_iso_of_finite :
     Nonempty (RHom(Y)[ModuleCat.{u + 1} Λ] ⋙
         (Functor.whiskeringRight _ _ _).obj R(f)^![ModuleCat.{u + 1} Λ] ≅
       L((f)^*[ModuleCat.{u + 1} Λ]).op ⋙ RHom(X)[ModuleCat.{u + 1} Λ] ⋙
@@ -177,14 +161,14 @@ The blueprint deduces this from the Verdier exchange `𝔻_Y Rf_! ≅ Rf_* 𝔻_
 adjoint of `𝔻_Y` with `𝔻_Y`, and so states it on `Dᵇctf`. The same mate calculus applied to
 the projection formula gives the internal-Hom form
 `Rf^! RHom_Y(K, N) ≅ RHom_X(Lf^* K, Rf^! N)`
-(`AlgebraicGeometry.Etale.nonempty_iso_rightDerivedUpperShriek_derivedHom`) without
+(`AlgebraicGeometry.Etale.nonempty_rightDerivedUpperShriek_derivedHom_iso_of_finite`) without
 biduality; at `N = ω_Y`, with `Rf^! ω_Y ≅ ω_X`
 (`AlgebraicGeometry.Etale.nonempty_iso_rightDerivedUpperShriek_dualizingComplex`), it is the
 statement, on all of `D(Y_ét, Λ)`. -/
 theorem nonempty_iso_verdierDual_leftDerivedUpperStar :
     Nonempty (L((f)^*[ModuleCat.{u + 1} Λ]).op ⋙ verdierDual _ (f ≫ aY) ≅
       verdierDual _ aY ⋙ R(f)^![ModuleCat.{u + 1} Λ]) := by
-  obtain ⟨e₁⟩ := nonempty_iso_rightDerivedUpperShriek_derivedHom Λ f
+  obtain ⟨e₁⟩ := nonempty_rightDerivedUpperShriek_derivedHom_iso_of_finite Λ f
   obtain ⟨e₂⟩ := nonempty_iso_rightDerivedUpperShriek_dualizingComplex Λ f aY
   exact ⟨NatIso.ofComponents
     (fun K ↦ ((RHom(X)[ModuleCat.{u + 1} Λ]).obj

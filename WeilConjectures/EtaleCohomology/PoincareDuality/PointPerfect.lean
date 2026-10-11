@@ -190,6 +190,31 @@ theorem isPerfect_ihom_rightDerivedGlobalSections [QuasiCompact aX]
       (𝟙_ _)).IsPerfect :=
   (isPerfect_rightDerivedGlobalSections Λ aX K hK).ihom_unit
 
+/-- Blueprint `thm-pod-point-perfectness`: Point perfectness of global sections, the finite
+stage `Λ = A_{E,n}`.
+
+Let `Λ` be a finite ring whose exponent is invertible in the separably closed field `k`, let `X`
+be separated of finite type over `k` (neither proper nor smooth) and `K ∈ Dctf(X, Λ)`. Then the
+four complexes `RΓ(X, K)`, `RΓ_c(X, K)`, `RΓ(X, K)^∨` and `RΓ_c(X, K)^∨` are perfect point
+complexes: bounded complexes of finite projective `Λ`-modules up to quasi-isomorphism. For
+proper `X` the two cases are identified by
+`AlgebraicGeometry.Etale.compactlySupportedGlobalSectionsIsoOfIsProper`.
+
+The explicit Tor amplitude `[a, b + 2d]` of the blueprint is not recorded. -/
+theorem isPerfect_globalSections [QuasiCompact aX]
+    (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
+    (hK : DerivedCategory.boundedConstructibleFiniteTor Λ X K) :
+    ((rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) X).obj K).IsPerfect ∧
+      ((compactlySupportedGlobalSections (ModuleCat.{u + 1} Λ) aX).obj K).IsPerfect ∧
+      ((ihom ((rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) X).obj K)).obj
+        (𝟙_ _)).IsPerfect ∧
+      ((ihom ((compactlySupportedGlobalSections (ModuleCat.{u + 1} Λ) aX).obj K)).obj
+        (𝟙_ _)).IsPerfect :=
+  ⟨isPerfect_rightDerivedGlobalSections Λ aX K hK,
+    isPerfect_compactlySupportedGlobalSections Λ aX K hK,
+    isPerfect_ihom_rightDerivedGlobalSections Λ aX K hK,
+    isPerfect_ihom_compactlySupportedGlobalSections Λ aX K hK⟩
+
 end Finite
 
 section Integral
@@ -307,6 +332,8 @@ theorem isPerfect_ihom_rightDerivedGlobalSections_integral [QuasiCompact aX]
   (isPerfect_rightDerivedGlobalSections_integral I aX hI K hK).ihom_unit
 
 /-- Blueprint `sk-lem-finite`: Finiteness: the global sections are perfect at the point.
+This is also blueprint `thm-pod-point-perfectness` (Point perfectness of global sections), at
+the field stage `E`.
 
 **The rational stage.** In the situation of
 `AlgebraicGeometry.Etale.isPerfect_compactlySupportedGlobalSections_integral`, let `E` be a
@@ -337,6 +364,29 @@ theorem rationalHomology_globalSections [QuasiCompact aX] (hI : I.IsPrincipal)
   · exact (isPerfect_ihom_compactlySupportedGlobalSections_integral I aX hI K hK).tensor_homology
       E
   · exact (isPerfect_ihom_rightDerivedGlobalSections_integral I aX hI K hK).tensor_homology E
+
+/-- Blueprint `thm-pod-point-perfectness`: Point perfectness of global sections, the integral
+stage `Λ = 𝒪_E`.
+
+In the situation of `AlgebraicGeometry.Etale.isPerfect_compactlySupportedGlobalSections_integral`
+(`Λ` a complete Noetherian domain for a principal ideal `I` with finite residue ring of exponent
+invertible in `k`, and `K ∈ D^b_c(X, Λ)`), the four complexes `RΓ(X, K)`, `RΓ_c(X, K)` and their
+duals are perfect complexes of `Λ`-modules. The field stage `E` is
+`AlgebraicGeometry.Etale.rationalHomology_globalSections`. -/
+theorem isPerfect_globalSections_integral [QuasiCompact aX]
+    (hI : I.IsPrincipal)
+    (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
+    (hK : DerivedCategory.boundedConstructibleIntegral I X K) :
+    ((rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) X).obj K).IsPerfect ∧
+      ((compactlySupportedGlobalSections (ModuleCat.{u + 1} Λ) aX).obj K).IsPerfect ∧
+      ((ihom ((rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) X).obj K)).obj
+        (𝟙_ _)).IsPerfect ∧
+      ((ihom ((compactlySupportedGlobalSections (ModuleCat.{u + 1} Λ) aX).obj K)).obj
+        (𝟙_ _)).IsPerfect :=
+  ⟨isPerfect_rightDerivedGlobalSections_integral I aX hI K hK,
+    isPerfect_compactlySupportedGlobalSections_integral I aX hI K hK,
+    isPerfect_ihom_rightDerivedGlobalSections_integral I aX hI K hK,
+    isPerfect_ihom_compactlySupportedGlobalSections_integral I aX hI K hK⟩
 
 end Integral
 
@@ -400,6 +450,29 @@ theorem isPerfect_ihom_rightDerivedGlobalSections_adic [QuasiCompact aX]
       ((ProEtale.AdicSheaf.forget X).mapDerivedCategory.obj K))).obj
       (𝟙_ _)).IsPerfect :=
   (isPerfect_rightDerivedGlobalSections_adic l aX K hK).ihom_unit
+
+
+/-- Blueprint `thm-pod-point-perfectness`: Point perfectness of global sections, the stage
+`ℚ̄_ℓ`.
+
+For `ℓ` different from the characteristic of `k` and `K ∈ D^b_c(X, ℚ̄_ℓ)`, the four complexes
+`RΓ(X, K)`, `RΓ_c(X, K)` and their duals are perfect complexes of `ℚ̄_ℓ`-vector spaces: bounded
+with finite-dimensional cohomology. -/
+theorem isPerfect_globalSections_adic [QuasiCompact aX]
+    (K : _root_.DerivedCategory (ProEtale.AdicSheaf l X))
+    (hK : DerivedCategory.boundedAdicConstructible l X K) :
+    ((rightDerivedGlobalSections (WeilCoefficients.{u} l) X).obj
+        ((ProEtale.AdicSheaf.forget X).mapDerivedCategory.obj K)).IsPerfect ∧
+      ((compactlySupportedGlobalSections (WeilCoefficients.{u} l) aX).obj
+        ((ProEtale.AdicSheaf.forget X).mapDerivedCategory.obj K)).IsPerfect ∧
+      ((ihom ((rightDerivedGlobalSections (WeilCoefficients.{u} l) X).obj
+        ((ProEtale.AdicSheaf.forget X).mapDerivedCategory.obj K))).obj (𝟙_ _)).IsPerfect ∧
+      ((ihom ((compactlySupportedGlobalSections (WeilCoefficients.{u} l) aX).obj
+        ((ProEtale.AdicSheaf.forget X).mapDerivedCategory.obj K))).obj (𝟙_ _)).IsPerfect :=
+  ⟨isPerfect_rightDerivedGlobalSections_adic l aX K hK,
+    isPerfect_compactlySupportedGlobalSections_adic l aX K hK,
+    isPerfect_ihom_rightDerivedGlobalSections_adic l aX K hK,
+    isPerfect_ihom_compactlySupportedGlobalSections_adic l aX K hK⟩
 
 end Adic
 

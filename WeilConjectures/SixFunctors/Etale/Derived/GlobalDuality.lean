@@ -10,6 +10,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 public import WeilConjectures.SixFunctors.Etale.Derived.Orientation
 public import WeilConjectures.SixFunctors.Etale.Derived.Shift
+public import WeilConjectures.SixFunctors.Etale.Derived.GlobalVerdierDuality
 public import WeilConjectures.SixFunctors.Etale.Derived.TensorHom
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar
 

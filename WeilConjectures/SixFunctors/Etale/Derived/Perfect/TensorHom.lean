@@ -52,6 +52,20 @@ universe u' u
 
 open CategoryTheory MonoidalCategory MonoidalClosed Opposite
 
+namespace CategoryTheory.MonoidalClosed
+
+/-- The comparison map `[X, 𝟙_ C] ⊗ Z ⟶ [X, Z]` is natural in `Z`. -/
+lemma whiskerLeft_comp_ihomUnitTensorToIhom {C : Type*} [Category* C] [MonoidalCategory C]
+    [MonoidalClosed C] (X : C) {Z Z' : C} (f : Z ⟶ Z') :
+    (ihom X).obj (𝟙_ C) ◁ f ≫ ihomUnitTensorToIhom X Z' =
+      ihomUnitTensorToIhom X Z ≫ (ihom X).map f := by
+  rw [ihomUnitTensorToIhom, ihomUnitTensorToIhom, ← curry_natural_left, ← curry_natural_right]
+  congr 1
+  rw [associator_inv_naturality_right_assoc, whisker_exchange_assoc]
+  simp
+
+end CategoryTheory.MonoidalClosed
+
 namespace AlgebraicGeometry
 
 open Scheme
@@ -94,11 +108,7 @@ theorem coefficientDualTensorToDerivedHom_naturality_right
     ((derivedTensor A X).obj ((coefficientDual A X).obj (op P))).map f ≫
         coefficientDualTensorToDerivedHom P N' =
       coefficientDualTensorToDerivedHom P N ≫ (RHom(X)[A].obj (op P)).map f := by
-  change _ ◁ f ≫ curry _ = curry _ ≫ (ihom P).map f
-  rw [← curry_natural_left, ← curry_natural_right]
-  congr 1
-  simp only [Category.assoc, associator_inv_naturality_right_assoc, whisker_exchange_assoc,
-    leftUnitor_naturality]
+  exact whiskerLeft_comp_ihomUnitTensorToIhom P f
 
 /-- Blueprint `lem-pod-finite-projective-tensor-hom`: Internal Hom with a finite projective
 module, naturality in `P`. -/
