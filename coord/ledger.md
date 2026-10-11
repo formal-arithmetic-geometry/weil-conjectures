@@ -3329,3 +3329,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 02:55 L: merged deliver/J1/lem-sc-picard-qcoh-universal-delta-embedding (reviewer PASS; first push; new nodes: 0)
 - 02:55 L: merged deliver/C1/lem-pc-derived-tensor-second-factor-functor (reviewer FIX; first push; new nodes: 1)
 - 02:56 L: merged by reviewers: J1 lem-sc-picard-qcoh-universal-delta-embedding (R-ude0254 PASS, 93cd051e7; second reading missed nothing but claimed a created.item change it did not make), C1 lem-pc-derived-tensor-second-factor-functor (R-dsf0254 FIX 295e0cf95: derived functor via lem-pur-left-derived-from-kflat-class as a tool use, tensor-slot swap, new node lem-pc-kflat-tensor-quasi-iso in TeX; second reading by C1 missed three faults)
+- 02:56 L: claimed lem-pc-kflat-tensor-quasi-iso (new from 295e0cf95) for L and launched worker W-ktq0257

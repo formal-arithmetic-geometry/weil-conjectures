@@ -13,8 +13,8 @@
 | `prop-av-tate-rank` | 4008 | rests_on_sorry |
 | `cor-pc-sigma-pic-iso` | 4009 | rests_on_sorry |
 | `lem-pc-vanishing-above-dim` | 4009 | rests_on_sorry |
-| `lem-pc-derived-tensor-second-factor-functor` | 5017 | none |
 | `lem-pc-derived-tensor-flat-second-localization` | 5018 | none |
+| `lem-pc-kflat-tensor-quasi-iso` | 5018 | none |
 | `lem-sc-complex-lift-acyclic-projective` | 6018 | none |
 | `lem-sc-base-change-curve` | - | none |
 | `lem-sc-global-functions` | - | rests_on_sorry |
@@ -876,7 +876,7 @@
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 1780 nodes that wait for a statement dependency, 55 nodes that wait for stage 1.
+Not open yet: 1781 nodes that wait for a statement dependency, 55 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
