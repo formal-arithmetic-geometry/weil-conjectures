@@ -11,7 +11,7 @@ public import Mathlib.CategoryTheory.Sites.LocallyInjective
 public import Mathlib.CategoryTheory.Sites.LocallySurjective
 public import WeilConjectures.Mathlib.CategoryTheory.Limits.MorphismProperty
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Pullback
-public import WeilConjectures.AlgebraicGeometry.Sites.SectionContinuity
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
 
 /-!
 # Sections of the inverse image of an étale sheaf
@@ -40,6 +40,40 @@ open CategoryTheory Limits Opposite
 namespace AlgebraicGeometry
 
 namespace Etale
+
+section Comparison
+
+variable {R S T : Scheme.{u}}
+
+/-- The comparison map `h₂_* h₂^* G ⟶ h₁₂_* h₁₂^* G` for `h₁₂ = h₁ ≫ h₂`, induced by the unit of
+`h₁^* ⊣ h₁_*` at `h₂^* G` and the composition isomorphisms of pushforwards and pullbacks. -/
+noncomputable def unitComparison (h₁ : T ⟶ S) (h₂ : S ⟶ R) (h₁₂ : T ⟶ R)
+    (hh₁₂ : h₁₂ = h₁ ≫ h₂) (G : Sheaf R.smallEtaleTopology AddCommGrpCat.{u + 1}) :
+    (h₂)_*[AddCommGrpCat.{u + 1}].obj ((h₂)^*[AddCommGrpCat.{u + 1}].obj G) ⟶
+      (h₁₂)_*[AddCommGrpCat.{u + 1}].obj ((h₁₂)^*[AddCommGrpCat.{u + 1}].obj G) :=
+  (h₂)_*[AddCommGrpCat.{u + 1}].map
+      ((upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} h₁).unit.app
+        ((h₂)^*[AddCommGrpCat.{u + 1}].obj G)) ≫
+    (lowerStarComp AddCommGrpCat.{u + 1} h₁ h₂ h₁₂ hh₁₂).hom.app _ ≫
+      (h₁₂)_*[AddCommGrpCat.{u + 1}].map
+        ((upperStarComp AddCommGrpCat.{u + 1} h₁ h₂ h₁₂ hh₁₂).inv.app G)
+
+/-- The comparison map is compatible with the units: the unit of `h₂` followed by the comparison
+map is the unit of `h₁ ≫ h₂`. -/
+@[reassoc]
+lemma unit_app_comp_unitComparison (h₁ : T ⟶ S) (h₂ : S ⟶ R) (h₁₂ : T ⟶ R)
+    (hh₁₂ : h₁₂ = h₁ ≫ h₂) (G : Sheaf R.smallEtaleTopology AddCommGrpCat.{u + 1}) :
+    (upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} h₂).unit.app G ≫
+        unitComparison h₁ h₂ h₁₂ hh₁₂ G =
+      (upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} h₁₂).unit.app G := by
+  have h := upperStarComp_hom_app_unit_app AddCommGrpCat.{u + 1} h₁ h₂ G h₁₂ hh₁₂
+  rw [Adjunction.comp_unit_app] at h
+  rw [← cancel_mono ((h₁₂)_*[AddCommGrpCat.{u + 1}].map
+    ((upperStarComp AddCommGrpCat.{u + 1} h₁ h₂ h₁₂ hh₁₂).hom.app G)), h, unitComparison]
+  simp only [Category.assoc, ← Functor.map_comp, Iso.inv_hom_id_app, Functor.comp_obj,
+    CategoryTheory.Functor.map_id, Category.comp_id]
+
+end Comparison
 
 variable {R T : Scheme.{u}} (t : T ⟶ R)
 

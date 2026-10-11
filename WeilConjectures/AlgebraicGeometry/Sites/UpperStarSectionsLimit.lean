@@ -299,9 +299,11 @@ theorem exists_restrictAlong_eq_zero_of_isLimit [∀ {i j} (f : i ⟶ j), IsAffi
       ∀ (V' : (D.obj k'').Etale) (m' : V'.left ⟶ Y.left) (hm' : m' ≫ Y.hom = V'.hom ≫ D.map g),
         restrictAlong (π.app k) G (D.map g) (π.app k'') (app_eq_map_comp_app π g) m' hm' s = 0 := by
   have : CompactSpace c.pt := Scheme.compactSpace_of_isLimit D c hc
-  have : QuasiCompact V.hom :=
-    MorphismProperty.of_isPullback hm (inferInstance : QuasiCompact Y.hom)
-  have : CompactSpace V.left := QuasiCompact.compactSpace_of_compactSpace V.hom
+  have : QuasiCompact Y.hom := @quasiCompact_of_compactSpace _ _ Y.hom
+    (inferInstanceAs (CompactSpace Y.left)) (inferInstanceAs (QuasiSeparatedSpace (D.obj k)))
+  have : QuasiCompact V.hom := MorphismProperty.of_isPullback hm this
+  have : CompactSpace V.left := @QuasiCompact.compactSpace_of_compactSpace _ _ V.hom _
+    (inferInstanceAs (CompactSpace c.pt))
   choose k₁ f₁ E e he hvan Z u hu v hv hx using
     exists_local_restrictAlong_eq_zero_of_isLimit hc π P hP G Y m hm.w s hs
   obtain ⟨t, ht⟩ := isCompact_univ.elim_finite_subcover (fun x ↦ Set.range (v x).left)
@@ -320,32 +322,30 @@ theorem exists_restrictAlong_eq_zero_of_isLimit [∀ {i j} (f : i ⟶ j), IsAffi
       rw [pullback.lift_snd]
       infer_instance
     exact Etale.of_comp (τ i) (pullback.snd Y.hom (D.map (f₁ i)))
-  let λ' (i : t) : V'.left ⟶ pullback Y.hom (D.map (f₁ i)) :=
+  let Λ' (i : t) : V'.left ⟶ pullback Y.hom (D.map (f₁ i)) :=
     pullback.lift m' (V'.hom ≫ D.map (g' ≫ g₀ i))
       (by rw [hm', Category.assoc, ← Functor.map_comp, Category.assoc, hg₀])
   let W (i : t) : (D.obj k'').Etale :=
-    MorphismProperty.Over.mk ⊤ (pullback.fst (λ' i) (τ i) ≫ V'.hom) inferInstance
-  let a (i : t) : W i ⟶ V' := MorphismProperty.Over.homMk (pullback.fst (λ' i) (τ i)) rfl
+    MorphismProperty.Over.mk ⊤ (pullback.fst (Λ' i) (τ i) ≫ V'.hom) inferInstance
+  let a (i : t) : W i ⟶ V' := MorphismProperty.Over.homMk (pullback.fst (Λ' i) (τ i)) rfl
   refine eq_zero_of_forall_map_eq_zero _ a (fun y ↦ ?_) _ (fun i ↦ ?_)
   · obtain ⟨i, hi⟩ := H g' V' m' hm' y
     refine ⟨i, ?_⟩
-    rw [MorphismProperty.Over.homMk_left, Scheme.Pullback.range_fst]
+    show y ∈ Set.range (pullback.fst (Λ' i) (τ i))
+    rw [Scheme.Pullback.range_fst]
     exact hi
-  · have hsnd : pullback.snd (λ' i) (τ i) ≫ (E i).hom = (W i).hom ≫ D.map (g' ≫ g₀ i) := by
-      have := pullback.condition (f := λ' i) (g := τ i) =≫ pullback.snd _ _
-      simpa [τ, λ', W] using this.symm
-    have hfst : (a i).left ≫ m' = pullback.snd (λ' i) (τ i) ≫ e i := by
-      have := pullback.condition (f := λ' i) (g := τ i) =≫ pullback.fst _ _
-      simpa [τ, λ', a] using this
-    rw [map_restrictAlong]
-    calc _ = restrictAlong (π.app k) G (D.map (g' ≫ g₀ i) ≫ D.map (f₁ i)) (π.app k'')
-          (by rw [← Functor.map_comp, ← app_eq_map_comp_app])
-          (pullback.snd (λ' i) (τ i) ≫ e i)
-          (by rw [Category.assoc, he, reassoc_of% hsnd]) s := by
-          rw [restrictAlong_congr_hom _ _ _ _ (by rw [← Functor.map_comp, Category.assoc, hg₀])]
-          exact ConcreteCategory.congr_hom (restrictAlong_congr _ _ _ _ _ _ hfst) s
-      _ = _ := (restrictAlong_restrictAlong _ _ _ _ _ _ _ _ _ _ hsnd s).symm
-      _ = 0 := by rw [hvan, map_zero]
+  · have hsnd : pullback.snd (Λ' i) (τ i) ≫ (E i).hom = (W i).hom ≫ D.map (g' ≫ g₀ i) := by
+      have := pullback.condition (f := Λ' i) (g := τ i) =≫ pullback.snd _ _
+      simpa [τ, Λ', W] using this.symm
+    have hfst : (a i).left ≫ m' = pullback.snd (Λ' i) (τ i) ≫ e i := by
+      have := pullback.condition (f := Λ' i) (g := τ i) =≫ pullback.fst _ _
+      simpa [τ, Λ', a] using this
+    have e₁ : D.map (g' ≫ h) = D.map (g' ≫ g₀ i) ≫ D.map (f₁ i) := by
+      rw [← Functor.map_comp, Category.assoc, hg₀]
+    rw [map_restrictAlong, restrictAlong_congr_hom G (π.app k) (π.app k'') _ e₁,
+      restrictAlong_congr (h := hfst), ← restrictAlong_restrictAlong (π.app k) G (D.map (f₁ i))
+        (π.app (k₁ i)) (app_eq_map_comp_app π _) (D.map (g' ≫ g₀ i)) (π.app k'')
+        (app_eq_map_comp_app π _) (e i) (he i) _ hsnd s, hvan, map_zero]
 
 end Etale
 
