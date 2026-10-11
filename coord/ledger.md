@@ -4985,3 +4985,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 14:35 L: merged deliver/H1/lem-weil-pbc-smooth-over-field-regular-local (stage 2; reviewer PASS; first push; Sheaf.RingTheory.SmoothOverFieldRegularLocal Algebra.smooth_over_field_regular_local)
 - 14:35 L: merged deliver/C1/lem-weil-pbc-smooth-over-product-ring (stage 2; reviewer PASS; first push; Sheaf.RingTheory.SmoothOverProductRing Algebra.smooth_over_product_ring)
 - 14:35 L: merged deliver/J1/lem-weil-pbc-spectral-directed-limit-finite-sober (stage 2; reviewer PASS; first push; Sheaf.Topology.SpectralDirectedLimitFiniteSober Topology.exists_directed_inverseLimit_finite_sober)
+- 14:36 L: merged deliver/J1/lem-weil-pbc-spectral-directed-limit-spectral (stage 2; reviewer PASS; first push; Sheaf.Topology.SpectralDirectedLimit Topology.spectralSpace_directedLimit)

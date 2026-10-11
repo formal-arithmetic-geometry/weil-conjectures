@@ -195,5 +195,23 @@
   "by": "L",
   "result": "accepted",
   "note": "6 steps following Topology 0A2Z: the basis p_i^{-1}(U_i) (0A2P in the directed case, written out); quasi-compactness of the basic opens and of X by a new node for 0A2V (1), (2) (the 'formal argument' made explicit with Z_j); every quasi-compact open comes from a stage (0A2Y written out, so that 0A30 is not cited); quasi-separatedness and spectrality of the p_i; generic points via two new Mathlib leaves (IsIrreducible.image line 228, IsIrreducible.closure line 84, verified by L) and the compatible family of generic points; uniqueness (omitted in Stacks). Statement unchanged; tags verified."
+ },
+ "lean": {
+  "module": "Sheaf.Topology.SpectralDirectedLimit",
+  "declaration": "Topology.spectralSpace_directedLimit",
+  "file": "lean/Sheaf/Topology/SpectralDirectedLimit.lean",
+  "statement": "theorem spectralSpace_directedLimit {I : Type u} [Preorder I] [Nonempty I] [IsDirected I (· ≤ ·)] (Y : I → Type u) [∀ i : I, TopologicalSpace (Y i)] [∀ i : I, SpectralSpace (Y i)] (f : ∀ (i j : I), i ≤ j → Y j → Y i) (hf : ∀ (i j : I) (h : i ≤ j), IsSpectralMap (f i j h)) (hf_id : ∀ i : I, f i i le_rfl = id) (hf_comp : ∀ (i j k : I) (hij : i ≤ j) (hjk : j ≤ k), f i j hij ∘ f j k hjk = f i k (le_trans hij hjk)) (X : Type v) [tX : TopologicalSpace X] (p : ∀ i : I, X → Y i) (hp : ∀ i : I, Continuous (p i)) (hp_compat : ∀ (i j : I) (h : i ≤ j), f i j h ∘ p j = p i) (hp_injective : Function.Injective (fun x : X => fun i : I => p i x)) (hp_surjective : ∀ s : ∀ i : I, Y i, (∀ (i j : I) (h : i ≤ j), f i j h (s j) = s i) → ∃ x : X, ∀ i : I, p i x = s i) (h_initial : tX = ⨅ i : I, TopologicalSpace.induced (p i) inferInstance) : SpectralSpace X ∧ ∀ i : I, IsSpectralMap (p i)",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "J1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }
