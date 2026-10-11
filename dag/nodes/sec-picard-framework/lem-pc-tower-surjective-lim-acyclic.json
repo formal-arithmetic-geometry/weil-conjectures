@@ -152,5 +152,23 @@
   "group": "K1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-tsl2822 (reviewer sub-agent of L); spot-checked: Re-push after 21:39 return: D repaired, non-circular dimension shift (B into M1 split-injective tower I, Q=I/B surjective, lim I->lim Q onto by tower-limit-exact-surjective-kernels (b), LES, induction over all surjective towers); new node lem-pc-injective-split-tower-injective is a real lemma (argument only inline in F1's proof, no node states it), not (b)/(c)/(d); C4 for citer lem-pc-derived-limit-roos-abelian-groups OK, statement unchanged. FIX more, RETURN less: C4/C1 the long exact sequence is part (2) of lem-weil-pbc-horseshoe-delta-functor (accepted as generic tool use: derived-functor LES), not lem-sc-p1-right-derived-triangle-connecting (which only identifies connecting maps) - recited in Steps 2-3 with uses/proof_deps; added lem-pc-tower-enough-injectives and lem-pc-tower-limit-left-exact for its hypotheses. K1 second reading missed this C4.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SurjectiveTowerLimitAcyclic",
+  "declaration": "CategoryTheory.surjectiveTowerLimitAcyclic",
+  "file": "lean/Sheaf/CategoryTheory/SurjectiveTowerLimitAcyclic.lean",
+  "statement": "theorem surjectiveTowerLimitAcyclic (B : ℕᵒᵖ ⥤ AddCommGrpCat.{u}) (hB : ∀ n : ℕ, Function.Surjective (B.map (homOfLE (Nat.le_add_right n 1)).op)) : ∀ q : ℕ, 1 ≤ q → IsZero (((lim : (ℕᵒᵖ ⥤ AddCommGrpCat.{u}) ⥤ AddCommGrpCat.{u}).rightDerived q).obj B)",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-tsl1138",
+  "group": "F1",
+  "result": "pass",
+  "note": "B : ℕᵒᵖ ⥤ AddCommGrpCat.{u} = tower of abelian groups (def-weil-inverse-system, levels n≥1 as n:ℕ); hB surjectivity of B.map (homOfLE (n≤n+1)).op = g_n : B_{n+1}→B_n, same idiom as landed InjectiveSplitTower/InjectiveTowerEmbedding; R^q lim = Mathlib Functor.rightDerived of lim with HasInjectiveResolutions from stmt_dep roosTowerEnoughInjectives (lem-pc-tower-enough-injectives) and Additive from stmt_dep towerLimitAdditiveLeftExact.1 (Prop classes, no diamond with roosLimitAdditive); conclusion ∀ q ≥ 1 IsZero, q=1 included, q=0 excluded; same rightDerived expression as landed Roos theorem; docstring carries the node's three steps"
  }
 }
