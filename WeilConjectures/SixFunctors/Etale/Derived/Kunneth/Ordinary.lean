@@ -9,6 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.InvertibleExponent
 public import WeilConjectures.AlgebraicGeometry.Sites.PointCohomology
 public import WeilConjectures.SixFunctors.Etale.Derived.GlobalSections
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerStarProjection
+public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarId
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FlatModuleCat
 
 /-!
@@ -83,11 +84,13 @@ For a commutative square `p ≫ f = c = q ≫ g` (with `p : W ⟶ X`, `q : W ⟶
 
 is the transpose along `Lc^* ⊣ Rc_*` of the composite
 
-`Lc^*(Rf_* E ⊗ᴸ Rg_* K) ≅ Lc^* Rf_* E ⊗ᴸ Lc^* Rg_* K ≅ Lp^* Lf^* Rf_* E ⊗ᴸ Lq^* Lg^* Rg_* K
-  ⟶ Lp^* E ⊗ᴸ Lq^* K`
+`Lc^*(Rf_* E ⊗ᴸ Rg_* K) ≅ Lp^* Lf^* (Rf_* E ⊗ᴸ Rg_* K) ≅ Lp^* Lf^* Rf_* E ⊗ᴸ Lp^* Lf^* Rg_* K
+  ≅ Lp^* Lf^* Rf_* E ⊗ᴸ Lq^* Lg^* Rg_* K ⟶ Lp^* E ⊗ᴸ Lq^* K`
 
-of the monoidality of `Lc^*`, the composition isomorphisms `Lc^* ≅ Lp^* Lf^*`,
-`Lc^* ≅ Lq^* Lg^*`, and the counits of `Lf^* ⊣ Rf_*` and `Lg^* ⊣ Rg_*`. -/
+of the composition isomorphism `Lc^* ≅ Lp^* Lf^*`, the monoidality of `Lf^*` and of `Lp^*`, the
+composition isomorphisms `Lp^* Lf^* ≅ Lc^* ≅ Lq^* Lg^*`, and the counits of `Lf^* ⊣ Rf_*` and
+`Lg^* ⊣ Rg_*`. The monoidality isomorphism of `Lc^*` of the blueprint is taken here in the form
+`Lc^* ≅ Lp^* Lf^*` followed by the monoidality of `Lf^*` and `Lp^*`. -/
 noncomputable def kunnethMap (p : W ⟶ X) (q : W ⟶ Y) (f : X ⟶ S) (g : Y ⟶ S) (c : W ⟶ S)
     (hp : p ≫ f = c) (hq : q ≫ g = c)
     (E : DerivedCategory (Sheaf X.smallEtaleTopology A))
@@ -95,73 +98,14 @@ noncomputable def kunnethMap (p : W ⟶ X) (q : W ⟶ Y) (f : X ⟶ S) (g : Y �
     ((-⊗ᴸ-(S)[A]).obj (R((f)_*[A]).obj E)).obj (R((g)_*[A]).obj K) ⟶
       R((c)_*[A]).obj (((-⊗ᴸ-(W)[A]).obj (L((p)^*[A]).obj E)).obj (L((q)^*[A]).obj K)) :=
   (derivedUpperStarLowerStarAdjunction A c).homEquiv _ _
-    (((leftDerivedUpperStarTensorComparison A c).app _).app _ ≫
-      ((-⊗ᴸ-(W)[A]).map ((leftDerivedUpperStarComp A p f c hp.symm).hom.app _ ≫
-          L((p)^*[A]).map ((derivedUpperStarLowerStarAdjunction A f).counit.app E))).app _ ≫
-      ((-⊗ᴸ-(W)[A]).obj _).map ((leftDerivedUpperStarComp A q g c hq.symm).hom.app _ ≫
-          L((q)^*[A]).map ((derivedUpperStarLowerStarAdjunction A g).counit.app K)))
-
-/-- Blueprint `lem-kun-kunneth-map-natural`: the Künneth map is natural in both variables. -/
-@[reassoc]
-lemma kunnethMap_naturality (p : W ⟶ X) (q : W ⟶ Y) (f : X ⟶ S) (g : Y ⟶ S) (c : W ⟶ S)
-    (hp : p ≫ f = c) (hq : q ≫ g = c)
-    {E E' : DerivedCategory (Sheaf X.smallEtaleTopology A)}
-    {K K' : DerivedCategory (Sheaf Y.smallEtaleTopology A)} (φ : E ⟶ E') (ψ : K ⟶ K') :
-    ((-⊗ᴸ-(S)[A]).map (R((f)_*[A]).map φ)).app _ ≫
-        ((-⊗ᴸ-(S)[A]).obj _).map (R((g)_*[A]).map ψ) ≫ kunnethMap A p q f g c hp hq E' K' =
-      kunnethMap A p q f g c hp hq E K ≫ R((c)_*[A]).map
-        (((-⊗ᴸ-(W)[A]).map (L((p)^*[A]).map φ)).app _ ≫
-          ((-⊗ᴸ-(W)[A]).obj _).map (L((q)^*[A]).map ψ)) := by
-  rw [kunnethMap, kunnethMap, ← Adjunction.homEquiv_naturality_left,
-    ← Adjunction.homEquiv_naturality_left, ← Adjunction.homEquiv_naturality_right]
-  congr 1
-  have h₁ := NatTrans.congr_app ((leftDerivedUpperStarTensorComparison A c).naturality
-    (R((f)_*[A]).map φ)) (R((g)_*[A]).obj K)
-  have h₂ := ((leftDerivedUpperStarTensorComparison A c).app
-    (R((f)_*[A]).obj E')).naturality (R((g)_*[A]).map ψ)
-  simp only [Functor.map_comp, Category.assoc] at h₁ h₂ ⊢
-  have hu : ∀ {E E' : DerivedCategory (Sheaf X.smallEtaleTopology A)} (φ : E ⟶ E'),
-      L((c)^*[A]).map (R((f)_*[A]).map φ) ≫
-        (leftDerivedUpperStarComp A p f c hp.symm).hom.app _ ≫
-          L((p)^*[A]).map ((derivedUpperStarLowerStarAdjunction A f).counit.app E') =
-      ((leftDerivedUpperStarComp A p f c hp.symm).hom.app _ ≫
-          L((p)^*[A]).map ((derivedUpperStarLowerStarAdjunction A f).counit.app E)) ≫
-        L((p)^*[A]).map φ := fun φ ↦ by
-    rw [NatTrans.naturality_assoc]
-    simp only [Functor.comp_map, Category.assoc, ← Functor.map_comp]
-    congr 2
-    exact (derivedUpperStarLowerStarAdjunction A _).counit.naturality _
-  have hv : ∀ {K K' : DerivedCategory (Sheaf Y.smallEtaleTopology A)} (ψ : K ⟶ K'),
-      L((c)^*[A]).map (R((g)_*[A]).map ψ) ≫
+    ((leftDerivedUpperStarComp A p f c hp.symm).hom.app _ ≫
+      L((p)^*[A]).map (((leftDerivedUpperStarTensorComparison A f).app _).app _) ≫
+      ((leftDerivedUpperStarTensorComparison A p).app _).app _ ≫
+      ((-⊗ᴸ-(W)[A]).map
+        (L((p)^*[A]).map ((derivedUpperStarLowerStarAdjunction A f).counit.app E))).app _ ≫
+      ((-⊗ᴸ-(W)[A]).obj _).map ((leftDerivedUpperStarComp A p f c hp.symm).inv.app _ ≫
         (leftDerivedUpperStarComp A q g c hq.symm).hom.app _ ≫
-          L((q)^*[A]).map ((derivedUpperStarLowerStarAdjunction A g).counit.app K') =
-      ((leftDerivedUpperStarComp A q g c hq.symm).hom.app _ ≫
-          L((q)^*[A]).map ((derivedUpperStarLowerStarAdjunction A g).counit.app K)) ≫
-        L((q)^*[A]).map ψ := fun ψ ↦ by
-    rw [NatTrans.naturality_assoc]
-    simp only [Functor.comp_map, Category.assoc, ← Functor.map_comp]
-    congr 2
-    exact (derivedUpperStarLowerStarAdjunction A _).counit.naturality _
-  simp only [derivedTensor, curriedTensor_obj_map, curriedTensor_map_app, NatTrans.comp_app,
-    Category.assoc, leftDerivedUpperStarDerivedTensor,
-    derivedTensorLeftDerivedUpperStar] at h₁ h₂ hu hv ⊢
-  have h₁' : L((c)^*[A]).map (R((f)_*[A]).map φ ▷ R((g)_*[A]).obj K) ≫
-      ((leftDerivedUpperStarTensorComparison A c).app (R((f)_*[A]).obj E')).app
-        (R((g)_*[A]).obj K) =
-      ((leftDerivedUpperStarTensorComparison A c).app (R((f)_*[A]).obj E)).app
-        (R((g)_*[A]).obj K) ≫
-        L((c)^*[A]).map (R((f)_*[A]).map φ) ▷ L((c)^*[A]).obj (R((g)_*[A]).obj K) := h₁
-  have h₂' : L((c)^*[A]).map (R((f)_*[A]).obj E' ◁ R((g)_*[A]).map ψ) ≫
-      ((leftDerivedUpperStarTensorComparison A c).app (R((f)_*[A]).obj E')).app
-        (R((g)_*[A]).obj K') =
-      ((leftDerivedUpperStarTensorComparison A c).app (R((f)_*[A]).obj E')).app
-        (R((g)_*[A]).obj K) ≫
-        L((c)^*[A]).obj (R((f)_*[A]).obj E') ◁ L((c)^*[A]).map (R((g)_*[A]).map ψ) := h₂
-  rw [reassoc_of% h₂', reassoc_of% h₁']
-  congr 1
-  simp only [Functor.id_obj, whisker_exchange_assoc]
-  simp only [← comp_whiskerRight_assoc, ← whiskerLeft_comp]
-  rw [hu, hv]
+          L((q)^*[A]).map ((derivedUpperStarLowerStarAdjunction A g).counit.app K)))
 
 variable {X' S' T : Scheme.{u}}
 
@@ -188,6 +132,176 @@ noncomputable def tensorBaseChangeMap (h : Y ⟶ X') (e : Y ⟶ T) (f' : X' ⟶ 
       ((-⊗ᴸ-(Y)[A]).obj _).map ((leftDerivedUpperStarComp A h f').inv.app _ ≫
         (leftDerivedUpperStarComp A e g (h ≫ f') w).hom.app _ ≫
           L((e)^*[A]).map ((derivedUpperStarLowerStarAdjunction A g).counit.app F)))
+
+/-- The base change map `M ⊗ᴸ Lf'^* Rg_* F ⟶ Rh_* (Lh^* M ⊗ᴸ Le^* F)` is natural in `M` and
+`F`. -/
+@[reassoc]
+lemma tensorBaseChangeMap_naturality (h : Y ⟶ X') (e : Y ⟶ T) (f' : X' ⟶ S') (g : T ⟶ S')
+    (w : h ≫ f' = e ≫ g) {M M' : DerivedCategory (Sheaf X'.smallEtaleTopology A)}
+    {F F' : DerivedCategory (Sheaf T.smallEtaleTopology A)} (φ : M ⟶ M') (ψ : F ⟶ F') :
+    ((-⊗ᴸ-(X')[A]).map φ).app _ ≫
+        ((-⊗ᴸ-(X')[A]).obj M').map (L((f')^*[A]).map (R((g)_*[A]).map ψ)) ≫
+          tensorBaseChangeMap A h e f' g w M' F' =
+      tensorBaseChangeMap A h e f' g w M F ≫ R((h)_*[A]).map
+        (((-⊗ᴸ-(Y)[A]).map (L((h)^*[A]).map φ)).app _ ≫
+          ((-⊗ᴸ-(Y)[A]).obj _).map (L((e)^*[A]).map ψ)) := by
+  rw [tensorBaseChangeMap, tensorBaseChangeMap, ← Adjunction.homEquiv_naturality_left,
+    ← Adjunction.homEquiv_naturality_left, ← Adjunction.homEquiv_naturality_right]
+  congr 1
+  have h₁ := NatTrans.congr_app ((leftDerivedUpperStarTensorComparison A h).naturality φ)
+    (L((f')^*[A]).obj (R((g)_*[A]).obj F))
+  have h₂ := ((leftDerivedUpperStarTensorComparison A h).app M').naturality
+    (L((f')^*[A]).map (R((g)_*[A]).map ψ))
+  have hv : L((h)^*[A]).map (L((f')^*[A]).map (R((g)_*[A]).map ψ)) ≫
+      (leftDerivedUpperStarComp A h f').inv.app _ ≫
+        (leftDerivedUpperStarComp A e g (h ≫ f') w).hom.app _ ≫
+          L((e)^*[A]).map ((derivedUpperStarLowerStarAdjunction A g).counit.app F') =
+      ((leftDerivedUpperStarComp A h f').inv.app _ ≫
+        (leftDerivedUpperStarComp A e g (h ≫ f') w).hom.app _ ≫
+          L((e)^*[A]).map ((derivedUpperStarLowerStarAdjunction A g).counit.app F)) ≫
+        L((e)^*[A]).map ψ := by
+    have n₁ := (leftDerivedUpperStarComp A h f').inv.naturality (R((g)_*[A]).map ψ)
+    have n₂ := (leftDerivedUpperStarComp A e g (h ≫ f') w).hom.naturality (R((g)_*[A]).map ψ)
+    simp only [Functor.comp_map] at n₁ n₂
+    rw [reassoc_of% n₁, reassoc_of% n₂]
+    simp only [Category.assoc, ← Functor.map_comp]
+    congr 3
+    exact (derivedUpperStarLowerStarAdjunction A _).counit.naturality _
+  simp only [derivedTensor, curriedTensor_obj_map, curriedTensor_map_app,
+    Category.assoc, leftDerivedUpperStarDerivedTensor,
+    derivedTensorLeftDerivedUpperStar] at h₁ h₂ hv ⊢
+  have h₁' : L((h)^*[A]).map (φ ▷ L((f')^*[A]).obj (R((g)_*[A]).obj F)) ≫
+      ((leftDerivedUpperStarTensorComparison A h).app M').app
+        (L((f')^*[A]).obj (R((g)_*[A]).obj F)) =
+      ((leftDerivedUpperStarTensorComparison A h).app M).app
+          (L((f')^*[A]).obj (R((g)_*[A]).obj F)) ≫
+        L((h)^*[A]).map φ ▷ L((h)^*[A]).obj (L((f')^*[A]).obj (R((g)_*[A]).obj F)) := h₁
+  have h₂' : L((h)^*[A]).map (M' ◁ L((f')^*[A]).map (R((g)_*[A]).map ψ)) ≫
+      ((leftDerivedUpperStarTensorComparison A h).app M').app
+        (L((f')^*[A]).obj (R((g)_*[A]).obj F')) =
+      ((leftDerivedUpperStarTensorComparison A h).app M').app
+          (L((f')^*[A]).obj (R((g)_*[A]).obj F)) ≫
+        L((h)^*[A]).obj M' ◁ L((h)^*[A]).map (L((f')^*[A]).map (R((g)_*[A]).map ψ)) := h₂
+  rw [reassoc_of% h₂', reassoc_of% h₁']
+  congr 1
+  rw [← whiskerLeft_comp, hv, whiskerLeft_comp, whisker_exchange_assoc]
+  simp only [whiskerLeft_comp, Category.assoc]
+
+
+/-- The composition isomorphism `Rp_* ⋙ Rf_* ≅ Rc_*` for `p ≫ f = c`: the conjugate of the
+composition isomorphism `Lc^* ≅ Lf^* ⋙ Lp^*` (`AlgebraicGeometry.Etale.leftDerivedUpperStarComp`)
+under the derived adjunctions `Lc^* ⊣ Rc_*` and `Lf^* ⋙ Lp^* ⊣ Rp_* ⋙ Rf_*`. -/
+noncomputable def rightDerivedLowerStarCompIsoOfComp (p : W ⟶ X) (f : X ⟶ S) (c : W ⟶ S)
+    (hp : p ≫ f = c) : R((p)_*[A]) ⋙ R((f)_*[A]) ≅ R((c)_*[A]) :=
+  conjugateIsoEquiv ((derivedUpperStarLowerStarAdjunction A f).comp
+      (derivedUpperStarLowerStarAdjunction A p)) (derivedUpperStarLowerStarAdjunction A c)
+    (leftDerivedUpperStarComp A p f c hp.symm)
+
+/-- The counit of `Lc^* ⊣ Rc_*` composed with `Lc^*` of the composition isomorphism
+`Rf_* Rp_* ≅ Rc_*` is the counit of the composite adjunction `Lf^* ⋙ Lp^* ⊣ Rp_* ⋙ Rf_*`. -/
+@[reassoc]
+lemma map_rightDerivedLowerStarCompIsoOfComp_hom_app_comp_counit (p : W ⟶ X) (f : X ⟶ S)
+    (c : W ⟶ S) (hp : p ≫ f = c) (M : DerivedCategory (Sheaf W.smallEtaleTopology A)) :
+    L((c)^*[A]).map ((rightDerivedLowerStarCompIsoOfComp A p f c hp).hom.app M) ≫
+        (derivedUpperStarLowerStarAdjunction A c).counit.app M =
+      (leftDerivedUpperStarComp A p f c hp.symm).hom.app _ ≫
+        L((p)^*[A]).map ((derivedUpperStarLowerStarAdjunction A f).counit.app _) ≫
+          (derivedUpperStarLowerStarAdjunction A p).counit.app M := by
+  rw [rightDerivedLowerStarCompIsoOfComp, conjugateIsoEquiv_apply_hom, conjugateEquiv_counit,
+    Adjunction.comp_counit_app]
+  rfl
+
+/-- Blueprint `lem-kun-kunneth-via-0f1n`: the Künneth map `Rf_* E ⊗ᴸ Rg_* K ⟶ Rc_* (Lp^* E ⊗ᴸ
+Lq^* K)` is the composite of the projection map `Rf_* E ⊗ᴸ Rg_* K ⟶ Rf_*(E ⊗ᴸ Lf^* Rg_* K)`
+(`AlgebraicGeometry.Etale.rightDerivedLowerStarProjectionMap`), of `Rf_*` applied to the base
+change map `E ⊗ᴸ Lf^* Rg_* K ⟶ Rp_*(Lp^* E ⊗ᴸ Lq^* K)` of
+`AlgebraicGeometry.Etale.tensorBaseChangeMap`, and of the composition isomorphism
+`Rf_* Rp_* ≅ Rc_*`. -/
+lemma kunnethMap_eq (p : W ⟶ X) (q : W ⟶ Y) (f : X ⟶ S) (g : Y ⟶ S) (c : W ⟶ S)
+    (hp : p ≫ f = c) (hq : q ≫ g = c)
+    (E : DerivedCategory (Sheaf X.smallEtaleTopology A))
+    (K : DerivedCategory (Sheaf Y.smallEtaleTopology A)) :
+    kunnethMap A p q f g c hp hq E K =
+      ((rightDerivedLowerStarProjectionMap A f).app E).app (R((g)_*[A]).obj K) ≫
+        R((f)_*[A]).map (tensorBaseChangeMap A p q f g (hp.trans hq.symm) E K) ≫
+          (rightDerivedLowerStarCompIsoOfComp A p f c hp).hom.app _ := by
+  subst hp
+  apply ((derivedUpperStarLowerStarAdjunction A (p ≫ f)).homEquiv _ _).symm.injective
+  rw [kunnethMap, Equiv.symm_apply_apply, Adjunction.homEquiv_counit]
+  simp only [Functor.map_comp, Category.assoc,
+    map_rightDerivedLowerStarCompIsoOfComp_hom_app_comp_counit]
+  simp only [NatTrans.naturality_assoc, Functor.comp_map]
+  congr 1
+  have hε := (derivedUpperStarLowerStarAdjunction A f).counit.naturality
+    (tensorBaseChangeMap A p q f g (rfl.trans hq.symm) E K)
+  simp only [Functor.comp_map, Functor.id_map] at hε
+  rw [← Functor.map_comp_assoc, ← Functor.map_comp_assoc, ← Functor.map_comp_assoc,
+    Category.assoc]
+  erw [hε]
+  have hpc : L((f)^*[A]).map (((rightDerivedLowerStarProjectionMap A f).app E).app
+        (R((g)_*[A]).obj K)) ≫ (derivedUpperStarLowerStarAdjunction A f).counit.app
+          (((-⊗ᴸ-(X)[A]).obj E).obj (L((f)^*[A]).obj (R((g)_*[A]).obj K))) =
+      ((leftDerivedUpperStarTensorComparison A f).app (R((f)_*[A]).obj E)).app
+          (R((g)_*[A]).obj K) ≫
+        ((-⊗ᴸ-(X)[A]).map ((derivedUpperStarLowerStarAdjunction A f).counit.app E)).app
+          (L((f)^*[A]).obj (R((g)_*[A]).obj K)) :=
+    map_rightDerivedLowerStarProjectionMap_comp_counit A f E _
+  rw [reassoc_of% hpc]
+  have hT : L((p)^*[A]).map (tensorBaseChangeMap A p q f g (rfl.trans hq.symm) E K) ≫
+      (derivedUpperStarLowerStarAdjunction A p).counit.app _ =
+      ((derivedUpperStarLowerStarAdjunction A p).homEquiv _ _).symm
+        (tensorBaseChangeMap A p q f g (rfl.trans hq.symm) E K) := by
+    rw [Adjunction.homEquiv_counit]
+  rw [Functor.map_comp_assoc, Functor.map_comp_assoc, Functor.map_comp_assoc, hT,
+    tensorBaseChangeMap,
+    Equiv.symm_apply_apply]
+  congr 1
+  have hn : L((p)^*[A]).map (((-⊗ᴸ-(X)[A]).map
+        ((derivedUpperStarLowerStarAdjunction A f).counit.app E)).app
+          (L((f)^*[A]).obj (R((g)_*[A]).obj K))) ≫
+      ((leftDerivedUpperStarTensorComparison A p).app E).app
+        (L((f)^*[A]).obj (R((g)_*[A]).obj K)) =
+      ((leftDerivedUpperStarTensorComparison A p).app
+          (L((f)^*[A]).obj (R((f)_*[A]).obj E))).app (L((f)^*[A]).obj (R((g)_*[A]).obj K)) ≫
+        ((-⊗ᴸ-(W)[A]).map
+          (L((p)^*[A]).map ((derivedUpperStarLowerStarAdjunction A f).counit.app E))).app
+            (L((p)^*[A]).obj (L((f)^*[A]).obj (R((g)_*[A]).obj K))) :=
+    NatTrans.congr_app ((leftDerivedUpperStarTensorComparison A p).naturality
+      ((derivedUpperStarLowerStarAdjunction A f).counit.app E))
+      (L((f)^*[A]).obj (R((g)_*[A]).obj K))
+  rw [reassoc_of% hn]
+  simp only [Functor.map_comp, Functor.id_obj]
+
+/-- Blueprint `lem-kun-kunneth-map-natural`: the Künneth map is natural in both variables. -/
+@[reassoc]
+lemma kunnethMap_naturality (p : W ⟶ X) (q : W ⟶ Y) (f : X ⟶ S) (g : Y ⟶ S) (c : W ⟶ S)
+    (hp : p ≫ f = c) (hq : q ≫ g = c)
+    {E E' : DerivedCategory (Sheaf X.smallEtaleTopology A)}
+    {K K' : DerivedCategory (Sheaf Y.smallEtaleTopology A)} (φ : E ⟶ E') (ψ : K ⟶ K') :
+    ((-⊗ᴸ-(S)[A]).map (R((f)_*[A]).map φ)).app _ ≫
+        ((-⊗ᴸ-(S)[A]).obj _).map (R((g)_*[A]).map ψ) ≫ kunnethMap A p q f g c hp hq E' K' =
+      kunnethMap A p q f g c hp hq E K ≫ R((c)_*[A]).map
+        (((-⊗ᴸ-(W)[A]).map (L((p)^*[A]).map φ)).app _ ≫
+          ((-⊗ᴸ-(W)[A]).obj _).map (L((q)^*[A]).map ψ)) := by
+  have h₁ : ((-⊗ᴸ-(S)[A]).map (R((f)_*[A]).map φ)).app (R((g)_*[A]).obj K) ≫
+      ((rightDerivedLowerStarProjectionMap A f).app E').app (R((g)_*[A]).obj K) =
+      ((rightDerivedLowerStarProjectionMap A f).app E).app (R((g)_*[A]).obj K) ≫
+        R((f)_*[A]).map (((-⊗ᴸ-(X)[A]).map φ).app (L((f)^*[A]).obj (R((g)_*[A]).obj K))) :=
+    NatTrans.congr_app ((rightDerivedLowerStarProjectionMap A f).naturality φ) _
+  have h₂ : ((-⊗ᴸ-(S)[A]).obj (R((f)_*[A]).obj E')).map (R((g)_*[A]).map ψ) ≫
+      ((rightDerivedLowerStarProjectionMap A f).app E').app (R((g)_*[A]).obj K') =
+      ((rightDerivedLowerStarProjectionMap A f).app E').app (R((g)_*[A]).obj K) ≫
+        R((f)_*[A]).map (((-⊗ᴸ-(X)[A]).obj E').map (L((f)^*[A]).map (R((g)_*[A]).map ψ))) :=
+    ((rightDerivedLowerStarProjectionMap A f).app E').naturality _
+  have h₃ := (rightDerivedLowerStarCompIsoOfComp A p f c hp).hom.naturality
+    (((-⊗ᴸ-(W)[A]).map (L((p)^*[A]).map φ)).app _ ≫
+      ((-⊗ᴸ-(W)[A]).obj _).map (L((q)^*[A]).map ψ))
+  simp only [Functor.comp_map] at h₃
+  rw [kunnethMap_eq, kunnethMap_eq, reassoc_of% h₂, reassoc_of% h₁]
+  simp only [Category.assoc]
+  rw [← h₃,
+    ← Functor.map_comp_assoc, ← Functor.map_comp_assoc, ← Functor.map_comp_assoc,
+    Category.assoc, tensorBaseChangeMap_naturality, Functor.map_comp_assoc]
 
 end Maps
 
@@ -243,13 +357,6 @@ namespace Etale
 
 variable (Λ : Type (u + 1)) [CommRing Λ]
 
-/-- The derived pullback along the identity is the identity: `L(𝟙 X)^* ≅ 𝟭`. -/
-noncomputable def leftDerivedUpperStarId (X : Scheme.{u}) :
-    L((𝟙 X)^*[ModuleCat.{u + 1} Λ]) ≅ 𝟭 _ :=
-  leftDerivedUpperStarIsoMapDerivedCategory _ (𝟙 X) ≪≫
-    Functor.mapDerivedCategoryNatIso (Etale.upperStarId _ X) ≪≫
-      Functor.mapDerivedCategoryIdIso _
-
 section Inputs
 
 /-- Blueprint `lem-kun-0f10`: finite cohomological dimension of finite-type morphisms, part (1).
@@ -277,20 +384,26 @@ theorem hasFiniteCohomologicalDimension_of_isSepClosed (hΛ : IsAddTorsion Λ) {
 
 /-- Blueprint `lem-kun-0f12`: tensor product with a constant complex.
 
-Let `X` be a quasi-compact quasi-separated scheme of finite cohomological dimension and `Λ` a
-torsion ring. For `E ∈ D(X_ét, Λ)` and `C ∈ D(Λ)`,
+Let `k` be a separably closed field, `Λ` a torsion ring, and `a : X ⟶ Spec k` a morphism from a
+quasi-compact quasi-separated scheme `X` of finite cohomological dimension. For
+`E ∈ D(X_ét, Λ)` and `C ∈ D((Spec k)_ét, Λ)` the projection map
+(`AlgebraicGeometry.Etale.rightDerivedLowerStarProjectionMap`)
 
-`RΓ(X, E) ⊗ᴸ C ≅ RΓ(X, E ⊗ᴸ C_X)`,
+`Ra_* E ⊗ᴸ C ⟶ Ra_*(E ⊗ᴸ La^* C)`
 
-where `C_X` is the constant complex (`AlgebraicGeometry.Etale.constantFunctor`). -/
-theorem nonempty_iso_rightDerivedGlobalSections_derivedTensor_constantFunctor
-    (hΛ : IsAddTorsion Λ) (X : Scheme.{u}) [CompactSpace X] [QuasiSeparatedSpace X]
-    (hX : HasFiniteCohomologicalDimension Λ X)
+is an isomorphism. Under the equivalence of étale sheaves on `Spec k` with `Λ`-modules
+(`AlgebraicGeometry.Etale.constantSheafEquivalenceOfIsSepClosed`), `Ra_*` is `RΓ(X, -)` and
+`La^*` is the constant complex functor `C ↦ C_X`
+(`AlgebraicGeometry.Etale.constantFunctorCompLeftDerivedUpperStarIso`), and the projection map
+is the canonical map `RΓ(X, E) ⊗ᴸ C ⟶ RΓ(X, E ⊗ᴸ C_X)` of the blueprint: it is adjoint to
+`La^*(Ra_* E ⊗ᴸ C) ≅ La^* Ra_* E ⊗ᴸ La^* C ⟶ E ⊗ᴸ La^* C`, as in the proof of
+`lem-kun-kunneth-via-0f1n`. -/
+theorem isIso_rightDerivedLowerStarProjectionMap_of_isSepClosed (hΛ : IsAddTorsion Λ)
+    {k : Type u} [Field k] [IsSepClosed k] {X : Scheme.{u}} (a : X ⟶ Spec (.of k))
+    [CompactSpace X] [QuasiSeparatedSpace X] (hX : HasFiniteCohomologicalDimension Λ X)
     (E : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
-    (C : DerivedCategory (ModuleCat.{u + 1} Λ)) :
-    Nonempty ((rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) X).obj E ⊗ C ≅
-      (rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) X).obj
-        (((derivedTensor (ModuleCat.{u + 1} Λ) X).obj E).obj ((constantFunctor Λ X).obj C))) :=
+    (C : DerivedCategory (Sheaf (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
+    IsIso (((rightDerivedLowerStarProjectionMap (ModuleCat.{u + 1} Λ) a).app E).app C) :=
   sorry
 
 /-- Blueprint `lem-kun-0f11`: direct sums and finite cohomological dimension.
@@ -606,6 +719,17 @@ theorem isGloballyGenerated_of_isSepClosed
     globalSectionsEvaluation, Sigma.ι_desc, ← h]
   simp only [ModuleCat.hom_ofHom]
   exact one_smul Λ s
+/-- Over a separably closed field `k`, the derived global sections
+`RΓ(Spec k, -) : D((Spec k)_ét, Λ) ⥤ D(Λ)` are compatible with the derived tensor products:
+`RΓ(Spec k, C ⊗ᴸ C') ≅ RΓ(Spec k, C) ⊗ᴸ RΓ(Spec k, C')`. -/
+theorem nonempty_iso_rightDerivedGlobalSections_derivedTensor_of_isSepClosed
+    (C C' : DerivedCategory (Sheaf (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
+    Nonempty ((rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) (Spec (.of k))).obj
+        (((derivedTensor (ModuleCat.{u + 1} Λ) (Spec (.of k))).obj C).obj C') ≅
+      (rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) (Spec (.of k))).obj C ⊗
+        (rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) (Spec (.of k))).obj C') :=
+  sorry
+
 end Point
 
 end Inputs
@@ -618,9 +742,22 @@ variable [Finite Λ] {k : Type u} [Field k] [IsSepClosed k]
   [LocallyOfFiniteType aX] [QuasiCompact aX] [LocallyOfFiniteType aY] [QuasiCompact aY]
 
 omit [HasInvertibleExponent Λ (Spec (.of k))] in
-/-- `RΓ(X, E ⊗ᴸ La_X^* C) ≅ RΓ(X, E) ⊗ᴸ RΓ(Spec k, C)` for a finite-type scheme `X` over a
-separably closed field `k`: the tensor product with a constant complex
-(`lem-kun-0f12`), through the identification of complexes on `Spec k` with constant complexes. -/
+/-- The projection map `Ra_{X*} E ⊗ᴸ C ⟶ Ra_{X*}(E ⊗ᴸ La_X^* C)` is an isomorphism for a
+finite-type scheme `X` over a separably closed field `k` (`lem-kun-0f12`, with `lem-kun-0f10`). -/
+instance isIso_rightDerivedLowerStarProjectionMap_app_app
+    (E : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
+    (C : DerivedCategory (Sheaf (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
+    IsIso (((rightDerivedLowerStarProjectionMap (ModuleCat.{u + 1} Λ) aX).app E).app C) :=
+  have hΛ : IsAddTorsion Λ := isAddTorsion_of_finite
+  have : CompactSpace X := QuasiCompact.compactSpace_of_compactSpace aX
+  have : IsLocallyNoetherian X := LocallyOfFiniteType.isLocallyNoetherian aX
+  isIso_rightDerivedLowerStarProjectionMap_of_isSepClosed Λ hΛ aX
+    (hasFiniteCohomologicalDimension_of_isSepClosed Λ hΛ aX) E C
+
+omit [HasInvertibleExponent Λ (Spec (.of k))] in
+/-- `RΓ(X, E) ⊗ᴸ RΓ(Spec k, C) ≅ RΓ(X, E ⊗ᴸ La_X^* C)` for a finite-type scheme `X` over a
+separably closed field `k`: the tensor product with a constant complex (`lem-kun-0f12`), read
+in `D(Λ)` through `RΓ(Spec k, -)`. -/
 theorem nonempty_iso_rightDerivedGlobalSections_derivedTensor_leftDerivedUpperStar
     (E : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
     (C : DerivedCategory (Sheaf (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
@@ -629,16 +766,13 @@ theorem nonempty_iso_rightDerivedGlobalSections_derivedTensor_leftDerivedUpperSt
       (rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) X).obj
         (((derivedTensor (ModuleCat.{u + 1} Λ) X).obj E).obj
           ((L((aX)^*[ModuleCat.{u + 1} Λ])).obj C))) := by
-  have hΛ : IsAddTorsion Λ := isAddTorsion_of_finite
-  have : CompactSpace X := QuasiCompact.compactSpace_of_compactSpace aX
-  have : IsLocallyNoetherian X := LocallyOfFiniteType.isLocallyNoetherian aX
-  obtain ⟨e₁⟩ := nonempty_iso_rightDerivedGlobalSections_derivedTensor_constantFunctor Λ hΛ X
-    (hasFiniteCohomologicalDimension_of_isSepClosed Λ hΛ aX) E
-    ((rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) (Spec (.of k))).obj C)
-  obtain ⟨e₂⟩ := nonempty_iso_constantFunctor_rightDerivedGlobalSections_of_isSepClosed Λ C
-  exact ⟨e₁ ≪≫ (rightDerivedGlobalSections _ X).mapIso (((derivedTensor _ X).obj E).mapIso
-    (((constantFunctorCompLeftDerivedUpperStarIso Λ aX).app _).symm ≪≫
-      (L((aX)^*[ModuleCat.{u + 1} Λ])).mapIso e₂.symm))⟩
+  obtain ⟨e⟩ := nonempty_iso_rightDerivedGlobalSections_derivedTensor_of_isSepClosed Λ
+    ((R((aX)_*[ModuleCat.{u + 1} Λ])).obj E) C
+  exact ⟨whiskerRightIso
+      ((rightDerivedLowerStarCompRightDerivedGlobalSectionsIso _ aX).app E).symm _ ≪≫ e.symm ≪≫
+    (rightDerivedGlobalSections _ (Spec (.of k))).mapIso
+      (asIso (((rightDerivedLowerStarProjectionMap (ModuleCat.{u + 1} Λ) aX).app E).app C)) ≪≫
+    (rightDerivedLowerStarCompRightDerivedGlobalSectionsIso _ aX).app _⟩
 
 /-- Blueprint `thm-kun-0f1p`: the Künneth formula in étale cohomology.
 
@@ -653,13 +787,42 @@ Let `k` be a separably closed field, `Λ` a finite ring whose exponent is invert
   X --a_X-> Spec k
 ```
 
-and all `E ∈ D(X_ét, Λ)`, `K ∈ D(Y_ét, Λ)`, unbounded,
+and all `E ∈ D(X_ét, Λ)`, `K ∈ D(Y_ét, Λ)`, unbounded, the Künneth map
+(`AlgebraicGeometry.Etale.kunnethMap`)
 
-`RΓ(X, E) ⊗ᴸ RΓ(Y, K) ≅ RΓ(W, Lp₁^* E ⊗ᴸ Lp₂^* K)`.
+`κ_{E,K} : Ra_{X*} E ⊗ᴸ Ra_{Y*} K ⟶ Rc_*(Lp₁^* E ⊗ᴸ Lp₂^* K)`, `c = p₁ ≫ a_X`,
 
-Following the blueprint, it is the composite of the tensor product with a constant complex
-(`lem-kun-0f12`), of `RΓ(X, -)` applied to the base change map of `lem-kun-0f1n` for the
-diagram `X = X ⟵ W`, `Spec k = Spec k ⟵ Y`, and of the Leray isomorphisms. -/
+is an isomorphism in `D((Spec k)_ét, Λ)`; through `RΓ(Spec k, -)` it is the map
+`RΓ(X, E) ⊗ᴸ RΓ(Y, K) ⟶ RΓ(W, Lp₁^* E ⊗ᴸ Lp₂^* K)`
+(`AlgebraicGeometry.Etale.nonempty_iso_kunneth_of_isSepClosed`).
+
+Following the blueprint, `κ_{E,K}` is the composite (`lem-kun-kunneth-via-0f1n`,
+`AlgebraicGeometry.Etale.kunnethMap_eq`) of the projection map of `a_X`, an isomorphism by
+`lem-kun-0f12`, of `Ra_{X*}` applied to the base change map of `lem-kun-0f1n` for the diagram
+`X = X ⟵ W`, `Spec k = Spec k ⟵ Y`, and of the composition isomorphism
+`Ra_{X*} Rp₁_* ≅ Rc_*`. -/
+theorem isIso_kunnethMap_of_isSepClosed {W : Scheme.{u}} (p₁ : W ⟶ X) (p₂ : W ⟶ Y)
+    (sq : IsPullback p₁ p₂ aX aY)
+    (E : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
+    (K : DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
+    IsIso (kunnethMap (ModuleCat.{u + 1} Λ) p₁ p₂ aX aY (p₁ ≫ aX) rfl sq.w.symm E K) := by
+  have h := isIso_tensorBaseChangeMap Λ aX (𝟙 _) aY (𝟙 X) aX p₁ p₂ aY (Category.comp_id _)
+    (IsPullback.of_horiz_isIso (by simp)) sq E K
+  let ι := (leftDerivedUpperStarId (ModuleCat.{u + 1} Λ) X).app E
+  have hn := tensorBaseChangeMap_naturality (ModuleCat.{u + 1} Λ) p₁ p₂ aX aY sq.w ι.hom
+    (𝟙 K)
+  have : IsIso (tensorBaseChangeMap (ModuleCat.{u + 1} Λ) p₁ p₂ aX aY sq.w E K) :=
+    have := IsIso.of_isIso_fac_left hn
+    @IsIso.of_isIso_comp_left _ _ _ _ _ ((-⊗ᴸ-(X)[ModuleCat.{u + 1} Λ].obj E).map
+      (L((aX)^*[ModuleCat.{u + 1} Λ]).map (R((aY)_*[ModuleCat.{u + 1} Λ]).map (𝟙 K)))) _ _ this
+  rw [kunnethMap_eq]
+  infer_instance
+
+/-- Blueprint `thm-kun-0f1p`, in `D(Λ)`: the Künneth formula
+`RΓ(X, E) ⊗ᴸ RΓ(Y, K) ≅ RΓ(W, Lp₁^* E ⊗ᴸ Lp₂^* K)` for schemes `X`, `Y` of finite type over a
+separably closed field `k`, `W = X ×_k Y`, and all `E ∈ D(X_ét, Λ)`, `K ∈ D(Y_ét, Λ)`. It is
+`RΓ(Spec k, -)` applied to the Künneth map (`isIso_kunnethMap_of_isSepClosed`), together with
+the Leray isomorphisms and the compatibility of `RΓ(Spec k, -)` with `⊗ᴸ`. -/
 theorem nonempty_iso_kunneth_of_isSepClosed {W : Scheme.{u}} (p₁ : W ⟶ X) (p₂ : W ⟶ Y)
     (sq : IsPullback p₁ p₂ aX aY)
     (E : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
@@ -670,20 +833,14 @@ theorem nonempty_iso_kunneth_of_isSepClosed {W : Scheme.{u}} (p₁ : W ⟶ X) (p
         (((derivedTensor (ModuleCat.{u + 1} Λ) W).obj
             ((L((p₁)^*[ModuleCat.{u + 1} Λ])).obj E)).obj
           ((L((p₂)^*[ModuleCat.{u + 1} Λ])).obj K))) := by
-  have := isIso_tensorBaseChangeMap Λ aX (𝟙 _) aY (𝟙 X) aX p₁ p₂ aY (Category.comp_id _)
-    (IsPullback.of_horiz_isIso (by simp)) sq E K
-  obtain ⟨e₁⟩ := nonempty_iso_rightDerivedGlobalSections_derivedTensor_leftDerivedUpperStar Λ aX
-    E ((R((aY)_*[ModuleCat.{u + 1} Λ])).obj K)
-  let RΓ := rightDerivedGlobalSections (ModuleCat.{u + 1} Λ)
-  let ι := leftDerivedUpperStarId Λ X
-  refine ⟨whiskerLeftIso _
-      ((rightDerivedLowerStarCompRightDerivedGlobalSectionsIso _ aY).app K).symm ≪≫ e₁ ≪≫
-    (RΓ X).mapIso (((derivedTensor _ X).mapIso (ι.app E).symm).app _ ≪≫
-      asIso (tensorBaseChangeMap (ModuleCat.{u + 1} Λ) p₁ p₂ aX aY sq.w
-        ((L((𝟙 X)^*[ModuleCat.{u + 1} Λ])).obj E) K)) ≪≫
-    (rightDerivedLowerStarCompRightDerivedGlobalSectionsIso _ p₁).app _ ≪≫
-    (RΓ W).mapIso (((derivedTensor _ W).mapIso
-      ((L((p₁)^*[ModuleCat.{u + 1} Λ])).mapIso (ι.app E))).app _)⟩
+  have := isIso_kunnethMap_of_isSepClosed Λ aX aY p₁ p₂ sq E K
+  obtain ⟨e⟩ := nonempty_iso_rightDerivedGlobalSections_derivedTensor_of_isSepClosed Λ
+    ((R((aX)_*[ModuleCat.{u + 1} Λ])).obj E) ((R((aY)_*[ModuleCat.{u + 1} Λ])).obj K)
+  exact ⟨(((rightDerivedLowerStarCompRightDerivedGlobalSectionsIso _ aX).app E).symm ⊗ᵢ
+      ((rightDerivedLowerStarCompRightDerivedGlobalSectionsIso _ aY).app K).symm) ≪≫ e.symm ≪≫
+    (rightDerivedGlobalSections _ (Spec (.of k))).mapIso
+      (asIso (kunnethMap (ModuleCat.{u + 1} Λ) p₁ p₂ aX aY (p₁ ≫ aX) rfl sq.w.symm E K)) ≪≫
+    (rightDerivedLowerStarCompRightDerivedGlobalSectionsIso _ (p₁ ≫ aX)).app _⟩
 
 end Kunneth
 
