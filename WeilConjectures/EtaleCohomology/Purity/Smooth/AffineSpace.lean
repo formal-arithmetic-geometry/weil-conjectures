@@ -66,12 +66,6 @@ open Scheme
 
 namespace Etale
 
-/-- The characteristic of `Λ` is invertible on relative affine space over a scheme on which it
-is invertible. -/
-instance hasInvertibleExponent_affineSpace {Λ : Type (u + 1)} [CommRing Λ] {n : Type u}
-    {B : Scheme.{u}} [HasInvertibleExponent Λ B] : HasInvertibleExponent Λ 𝔸(n; B) :=
-  .of_hom (𝔸(n; B) ↘ B)
-
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] [HasTateTwist Λ]
 
 /-! ### Twists of pulled-back objects -/

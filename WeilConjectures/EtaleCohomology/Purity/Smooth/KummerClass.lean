@@ -74,6 +74,12 @@ open Scheme
 
 namespace Etale
 
+/-- The characteristic of `Λ` is invertible on relative affine space over a scheme on which it
+is invertible. -/
+instance hasInvertibleExponent_affineSpace {Λ : Type (u + 1)} [CommRing Λ] {n : Type u}
+    {B : Scheme.{u}} [HasInvertibleExponent Λ B] : HasInvertibleExponent Λ 𝔸(n; B) :=
+  .of_hom (𝔸(n; B) ↘ B)
+
 variable (Λ : Type (u + 1)) [CommRing Λ]
 
 /-- Blueprint `sk-def-purity-conv`: Purity conventions and the rank-one datum
@@ -208,6 +214,7 @@ noncomputable def supportedClassMap (i : Z ⟶ X) [IsClosedImmersion i]
   (compactificationConstantComplexIso Λ i).inv ≫
     rightDerivedLowerShriekTranspose (ModuleCat.{u + 1} Λ) i γ
 
+omit [HasKummerClass Λ] in
 /-- Blueprint `sk-prop-a1`: Rank-one orientation: the fundamental class of the zero section
 
 *Classes with supports are morphisms out of the constant complex of the support.* For a closed
