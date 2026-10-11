@@ -286,30 +286,42 @@ def existing_file(module: str) -> pathlib.Path | None:
     return None
 
 
-def check_existing(rec: dict) -> tuple[list[tuple[str, str]], list[str]]:
-    """Check (d). Returns (failures, notes)."""
+def check_existing(rec: dict, git: "Git | None" = None, base: str | None = None) -> tuple[list[tuple[str, str]], list[str]]:
+    """Check (d). Returns (failures, notes). A declaration of this project (module Sheaf.*, branch sheaf-dag: another
+    node already states the statement or defines the notion) is read from lean/Sheaf/<path>.lean on `base` (default
+    the working tree's HEAD); no module is compiled for it."""
     fails, notes = [], []
     mod, decl = str(rec.get("module") or ""), str(rec.get("declaration") or "")
-    if not mod.startswith(("Mathlib.", "WeilConjectures.")):
-        fails.append(("d", f"lean.existing is true but lean.module {mod!r} is neither Mathlib.* nor WeilConjectures.*"))
+    if not mod.startswith(("Mathlib.", "WeilConjectures.", "Sheaf.")):
+        fails.append(("d", f"lean.existing is true but lean.module {mod!r} is neither Mathlib.*, WeilConjectures.* nor Sheaf.*"))
         return fails, notes
-    want = "mathlib" if mod.startswith("Mathlib.") else "slopmaster2"
+    want = {"Mathlib": "mathlib", "WeilConjectures": "slopmaster2", "Sheaf": "sheaf-dag"}[mod.split(".")[0]]
     if rec.get("branch") != want:
         fails.append(("d", f"lean.branch is {rec.get('branch')!r}; a declaration of {mod.split('.')[0]} has branch {want!r}"))
-    p = existing_file(mod)
-    if not SOURCE.is_dir():
-        notes.append(f"existing declaration: not checked here (no source checkout {SOURCE}; set SHEAF_SOURCE_REPO)")
-        return fails, notes
-    if p is None or not p.exists():
-        fails.append(("d", f"lean.module {mod}: no file {p}"))
-        return fails, notes
-    text = p.read_text(errors="ignore")
+    if mod.startswith("Sheaf."):
+        if decl.startswith("Sheaf."):
+            fails.append(("d", f"declaration {decl}: names carry no `Sheaf.` prefix (only the module path is Sheaf.<...>)"))
+        rel = "lean/" + mod.replace(".", "/") + ".lean"
+        text = (git or Git(ROOT)).show(base or "HEAD", rel)
+        if text is None:
+            fails.append(("d", f"lean.module {mod}: no file {rel} on {(base or 'HEAD')[:10]} (an existing project declaration is landed on sheaf-dag)"))
+            return fails, notes
+        p = pathlib.Path(rel)
+    else:
+        p = existing_file(mod)
+        if not SOURCE.is_dir():
+            notes.append(f"existing declaration: not checked here (no source checkout {SOURCE}; set SHEAF_SOURCE_REPO)")
+            return fails, notes
+        if p is None or not p.exists():
+            fails.append(("d", f"lean.module {mod}: no file {p}"))
+            return fails, notes
+        text = p.read_text(errors="ignore")
     short = decl.split(".")[-1]
     grep = re.search(r"\b(theorem|lemma|def|structure|class|abbrev|instance|inductive)\s+(?:[\w.'«»]*\.)?" + re.escape(short) + r"(?![\w.'])", text)
     field = (not grep) and re.search(r"^\s+(?:\(\s*)?" + re.escape(short) + r"\s*[:({\[]", text, re.M)
     if not grep and field:
         notes.append(f"existing declaration: {decl} is a structure/class field of {p.name} (not found by the declaration grep)")
-    elif not grep and (_names() and _MODULE_OF.get(decl) == mod):
+    elif not grep and not mod.startswith("Sheaf.") and (_names() and _MODULE_OF.get(decl) == mod):
         notes.append(f"existing declaration: {decl} is not found by the grep in {p.name} (a structure field or a generated "
                      f"name) but local/library_names_mathlib.tsv.gz lists it in {mod}")
     elif not grep:
@@ -760,8 +772,9 @@ def read_delivery(git: Git, ref: str, base: str, group: str, item: str, max_comm
         r = nd.get("lean")
         fails.extend(check_record(r, group, f"dependency node {nid}"))
         if isinstance(r, dict):
-            if r.get("existing") is not False:
-                f("b", f"dependency node {nid}: lean.existing must be false (a dependency module states the notion)")
+            if r.get("existing") is not False and not (r.get("existing") is True and str(r.get("module") or "").startswith("Sheaf.")):
+                f("b", f"dependency node {nid}: lean.existing must be false (a dependency module states the notion), or true "
+                       "with branch sheaf-dag and module Sheaf.<...> (a declaration another node of this project already landed)")
             if not str(r.get("note") or "").strip():
                 f("b", f"dependency node {nid}: lean.note missing: why the recorded declaration or mathlib_match is unusable "
                        "and what the module states")
@@ -777,7 +790,7 @@ def read_delivery(git: Git, ref: str, base: str, group: str, item: str, max_comm
         if r.get("existing") is True:
             if role == "item" and lean_files and not D["new"] and not D["deps"]:
                 f("d", f"lean.existing is true but the commit has Lean file(s) {', '.join(lean_files)}")
-            df, notes = check_existing(r)
+            df, notes = check_existing(r, git, base)
             fails.extend((L, x if role == "item" else f"{who}: {x}") for L, x in df)
             D["notes"] += [x if role == "item" else f"{who}: {x}" for x in notes]
             continue
