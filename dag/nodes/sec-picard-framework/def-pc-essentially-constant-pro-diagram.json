@@ -79,5 +79,25 @@
   "group": "H1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ecp2208 (reviewer sub-agent of L); spot-checked: Statement checked clause by clause against Stacks 05PU(2) (cone, j0 and retraction r, factorization through k->j0, k->j); stmt_dep def-pc-essentially-constant-ind-diagram kept; definition with no proof steps or proof_deps, status split. FIX more, RETURN less: B (dishonest search records, missed by the second reading) - grep record said '0 hits' but Mathlib/CategoryTheory/Limits/Constructions/EventuallyConstant.lean has Functor.IsEventuallyConstantTo/From and IsCofiltered/IsFiltered.IsEventuallyConstant; rewrote it with the real hits; replaced the loogle record (claimed 'unknown identifier IsEventuallyConstantFrom', which exists) by my own loogle query CategoryTheory.Functor.IsEventuallyConstantFrom; verdicts harmonised to 'no match' (eventual isomorphisms, not the retract-and-factorization notion), as in the merged ind definition.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.DerivedCategory.EssentiallyConstantPro",
+  "declaration": "CategoryTheory.IsEssentiallyConstantProDiagram",
+  "file": "lean/Sheaf/CategoryTheory/DerivedCategory/EssentiallyConstantPro.lean",
+  "statement": "def IsEssentiallyConstantProDiagram {J : Type uJp} {C : Type uCp} [Category.{vJp} J] [Category.{vCp} C] (D : J ⥤ C) (X : C) : Prop",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": false,
+  "note": "The dependency had no Lean declaration. This module states its general Stacks 05PU criterion, including IsCofiltered J and the cone, retraction, and common-stage factorization. The indexing condition is part of the predicate, so no additional instance binder is needed by users.",
+  "fixed_by": "R-daf0947"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-daf0947",
+  "group": "E1",
+  "result": "fix",
+  "note": "Corrected statement vs 09T5/05S9/05PU: cites ind/pro nodes, citers hold. A,B Abelian, HasDerivedCategory.{wA}/{wB}, F,G additive, adj : G ⊣ F; hR/hL over all K/M in K(A)/K(B), denominators W.Under/W.Over ⊤ (all commuting triangles), F/G on homotopy cat then Qh; conclusion RF, LG, β, α with IsRight/LeftDerivedFunctor, d : LG ⊣ RF compatible with adj.mapHomotopyCategory.homEquiv. Dependency modules matched to 05PU(1)/(2) clause by clause (natural p_j/u_j, section/retraction direction, common stage k, filtered/cofiltered J as conjunct). FIX (H13): both predicates lacked the node's value X (existential cocone/cone point); now take (X : C) with p : D ⟶ const X / u : const X ⟶ D; item hypotheses become ∃ X, ...; item docstring updated. Compiled; names #checked."
  }
 }

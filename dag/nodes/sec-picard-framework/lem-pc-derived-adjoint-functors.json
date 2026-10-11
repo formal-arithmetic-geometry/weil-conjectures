@@ -14,14 +14,16 @@
  },
  "kind": "statement",
  "title": "Derived functors of adjoint functors are adjoint",
- "statement": "Let $\\mathcal A$ and $\\mathcal B$ be abelian categories [def-sp-abelian] with derived categories $D(\\mathcal A)$, $D(\\mathcal B)$ [def-weil-abstract-derived-category], and let $F:\\mathcal A\\to\\mathcal B$ and $G:\\mathcal B\\to\\mathcal A$ be additive functors with $G$ left adjoint to $F$. Say the right derived functor $RF$ is defined at a complex $K$ of $\\mathcal A$ if the ind-system $(F(K'))_{K\\to K'}$ of $D(\\mathcal B)$, indexed by the quasi-isomorphisms $K\\to K'$ in the homotopy category $K(\\mathcal A)$, is essentially constant, with value $RF(K)$; dually, $LG$ is defined at a complex $M$ of $\\mathcal B$ if the pro-system $(G(M'))_{M'\\to M}$ over the quasi-isomorphisms $M'\\to M$ in $K(\\mathcal B)$ is essentially constant, with value $LG(M)$. If $RF$ is defined at every complex of $\\mathcal A$ and $LG$ at every complex of $\\mathcal B$, then $RF:D(\\mathcal A)\\to D(\\mathcal B)$ and $LG:D(\\mathcal B)\\to D(\\mathcal A)$ are functors with $LG$ left adjoint to $RF$: there is a canonical bijection $\\operatorname{Hom}_{D(\\mathcal A)}(LG(M),K)\\cong\\operatorname{Hom}_{D(\\mathcal B)}(M,RF(K))$, functorial in both $K\\in D(\\mathcal A)$ and $M\\in D(\\mathcal B)$.",
+ "statement": "Let $\\mathcal A$ and $\\mathcal B$ be abelian categories [def-sp-abelian] with derived categories $D(\\mathcal A)$, $D(\\mathcal B)$ [def-weil-abstract-derived-category], and let $F:\\mathcal A\\to\\mathcal B$ and $G:\\mathcal B\\to\\mathcal A$ be additive functors with $G$ left adjoint to $F$. Say the right derived functor $RF$ is defined at a complex $K$ of $\\mathcal A$ if the ind-system $(F(K'))_{K\\to K'}$ of $D(\\mathcal B)$, indexed by the quasi-isomorphisms $K\\to K'$ in the homotopy category $K(\\mathcal A)$, satisfies [def-pc-essentially-constant-ind-diagram] with value $RF(K)$; dually, $LG$ is defined at a complex $M$ of $\\mathcal B$ if the pro-system $(G(M'))_{M'\\to M}$ over the quasi-isomorphisms $M'\\to M$ in $K(\\mathcal B)$ satisfies [def-pc-essentially-constant-pro-diagram] with value $LG(M)$. If $RF$ is defined at every complex of $\\mathcal A$ and $LG$ at every complex of $\\mathcal B$, then $RF:D(\\mathcal A)\\to D(\\mathcal B)$ and $LG:D(\\mathcal B)\\to D(\\mathcal A)$ are functors with $LG$ left adjoint to $RF$: there is a canonical bijection $\\operatorname{Hom}_{D(\\mathcal A)}(LG(M),K)\\cong \\operatorname{Hom}_{D(\\mathcal B)}(M,RF(K))$, functorial in both $K\\in D(\\mathcal A)$ and $M\\in D(\\mathcal B)$.",
  "source": {
   "document": "literature/stacks-project/derived.tex",
   "place": "Derived Categories, Lemma 09T5 (lemma-derived-adjoint-functors, line 9596), via Lemma 0DVC (lemma-pre-derived-adjoint-functors) for the functoriality; 'defined at' as in Derived Categories, Definition 05S9"
  },
  "stmt_deps": [
   "def-sp-abelian",
-  "def-weil-abstract-derived-category"
+  "def-weil-abstract-derived-category",
+  "def-pc-essentially-constant-ind-diagram",
+  "def-pc-essentially-constant-pro-diagram"
  ],
  "proof": [
   {
@@ -116,5 +118,51 @@
   "group": "F1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-daf1828 (reviewer sub-agent of L); spot-checked: Item vs 09T5 and new node vs 0DVC/0FND (Stacks text in packet); steps 1-2 cite the node's Hom bijection and bifunctoriality, hypotheses match (adjoints between abelian categories are additive). Compared with leaf lem-sc-derived-adjunction-from-underived (Mathlib Adjunction.derived line 144 / derivedε_fac_app line 125): not the same statement -- the leaf needs absolute Mathlib derived functors with comparison maps, the item has Stacks everywhere-defined essentially-constant derived functors; bridging is not a one-line specialization, so no class b/c; no cycle (new node is pointwise 0DVC, does not cite the item or lem-pc-ringed-spaces-derived-adjoint). FIX more, RETURN less: new node's source corrected from 0FND to 0DVC (its statement is the abelian-category 0DVC form, not the general multiplicative-system 0FND); reviewer Mathlib grep recorded.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.DerivedCategory.AdjointFunctors",
+  "declaration": "CategoryTheory.Adjunction.exists_derived_adjunction_of_essentially_constant",
+  "file": "lean/Sheaf/CategoryTheory/DerivedCategory/AdjointFunctors.lean",
+  "statement": "theorem exists_derived_adjunction_of_essentially_constant {A : Type uA} {B : Type uB} [Category.{vA} A] [Category.{vB} B] [Abelian A] [Abelian B] [HasDerivedCategory.{wA} A] [HasDerivedCategory.{wB} B] (F : A ⥤ B) (G : B ⥤ A) [F.Additive] [G.Additive] (adj : G ⊣ F) (hR : ∀ K : HomotopyCategory A (ComplexShape.up ℤ), let W := HomotopyCategory.quasiIso A (ComplexShape.up ℤ) let D := MorphismProperty.Under.forget W ⊤ K ⋙ Under.forget K ⋙ F.mapHomotopyCategory (ComplexShape.up ℤ) ⋙ DerivedCategory.Qh ∃ X : DerivedCategory B, IsEssentiallyConstantIndDiagram D X) (hL : ∀ M : HomotopyCategory B (ComplexShape.up ℤ), let W := HomotopyCategory.quasiIso B (ComplexShape.up ℤ) let D := MorphismProperty.Over.forget W ⊤ M ⋙ Over.forget M ⋙ G.mapHomotopyCategory (ComplexShape.up ℤ) ⋙ DerivedCategory.Qh ∃ X : DerivedCategory A, IsEssentiallyConstantProDiagram D X) : ∃ (RF : DerivedCategory A ⥤ DerivedCategory B) (LG : DerivedCategory B ⥤ DerivedCategory A) (β : F.mapHomotopyCategory (ComplexShape.up ℤ) ⋙ DerivedCategory.Qh ⟶ DerivedCategory.Qh ⋙ RF) (α : DerivedCategory.Qh ⋙ LG ⟶ G.mapHomotopyCategory (ComplexShape.up ℤ) ⋙ DerivedCategory.Qh), RF.IsRightDerivedFunctor β (HomotopyCategory.quasiIso A (ComplexShape.up ℤ)) ∧ LG.IsLeftDerivedFunctor α (HomotopyCategory.quasiIso B (ComplexShape.up ℤ)) ∧ ∃ d : LG ⊣ RF, ∀ (M : HomotopyCategory B (ComplexShape.up ℤ)) (K : HomotopyCategory A (ComplexShape.up ℤ)) (f : (G.mapHomotopyCategory (ComplexShape.up ℤ)).obj M ⟶ K), d.homEquiv (DerivedCategory.Qh.obj M) (DerivedCategory.Qh.obj K) (α.app M ≫ DerivedCategory.Qh.map f) = DerivedCategory.Qh.map ((adj.mapHomotopyCategory (ComplexShape.up ℤ)).homEquiv M K f) ≫ β.app K",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-daf0947"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-daf0947",
+  "group": "E1",
+  "result": "fix",
+  "note": "Corrected statement vs 09T5/05S9/05PU: cites ind/pro nodes, citers hold. A,B Abelian, HasDerivedCategory.{wA}/{wB}, F,G additive, adj : G ⊣ F; hR/hL over all K/M in K(A)/K(B), denominators W.Under/W.Over ⊤ (all commuting triangles), F/G on homotopy cat then Qh; conclusion RF, LG, β, α with IsRight/LeftDerivedFunctor, d : LG ⊣ RF compatible with adj.mapHomotopyCategory.homEquiv. Dependency modules matched to 05PU(1)/(2) clause by clause (natural p_j/u_j, section/retraction direction, common stage k, filtered/cofiltered J as conjunct). FIX (H13): both predicates lacked the node's value X (existential cocone/cone point); now take (X : C) with p : D ⟶ const X / u : const X ⟶ D; item hypotheses become ∃ X, ...; item docstring updated. Compiled; names #checked.",
+  "statement_corrected": true
+ },
+ "statement_change": {
+  "date": "2026-10-11",
+  "by": "E1 stage 2",
+  "old_statement": "Let $\\mathcal A$ and $\\mathcal B$ be abelian categories [def-sp-abelian] with derived categories $D(\\mathcal A)$, $D(\\mathcal B)$ [def-weil-abstract-derived-category], and let $F:\\mathcal A\\to\\mathcal B$ and $G:\\mathcal B\\to\\mathcal A$ be additive functors with $G$ left adjoint to $F$. Say the right derived functor $RF$ is defined at a complex $K$ of $\\mathcal A$ if the ind-system $(F(K'))_{K\\to K'}$ of $D(\\mathcal B)$, indexed by the quasi-isomorphisms $K\\to K'$ in the homotopy category $K(\\mathcal A)$, is essentially constant, with value $RF(K)$; dually, $LG$ is defined at a complex $M$ of $\\mathcal B$ if the pro-system $(G(M'))_{M'\\to M}$ over the quasi-isomorphisms $M'\\to M$ in $K(\\mathcal B)$ is essentially constant, with value $LG(M)$. If $RF$ is defined at every complex of $\\mathcal A$ and $LG$ at every complex of $\\mathcal B$, then $RF:D(\\mathcal A)\\to D(\\mathcal B)$ and $LG:D(\\mathcal B)\\to D(\\mathcal A)$ are functors with $LG$ left adjoint to $RF$: there is a canonical bijection $\\operatorname{Hom}_{D(\\mathcal A)}(LG(M),K)\\cong\\operatorname{Hom}_{D(\\mathcal B)}(M,RF(K))$, functorial in both $K\\in D(\\mathcal A)$ and $M\\in D(\\mathcal B)$.",
+  "what": "The original Lean expanded the Stacks 05PU essential-constancy predicates inline in hR and hL, creating a second definition and leaving the reusable notions uncited. The corrected statement cites the two predicate nodes and uses those predicates for the ind and pro systems.",
+  "source": {
+   "document": "literature/stacks-project/categories.tex",
+   "place": "Categories, Definition 05PU(1)/(2), via Derived Categories Definition 05S9 (tag 05S9)"
+  },
+  "citers": [
+   {
+    "id": "lem-sc-derived-open-shriek-derived-adjunction",
+    "holds": true,
+    "note": "Uses the item only for the everywhere-defined derived adjunction conclusion; the corrected essential-constancy formulation still supplies that hypothesis."
+   },
+   {
+    "id": "lem-pc-ringed-spaces-derived-adjoint",
+    "holds": true,
+    "note": "Uses the item only for the derived pullback/direct-image adjunction and its functorial Hom bijection; the corrected statement preserves both."
+   }
+  ],
+  "old_stmt_deps": [
+   "def-sp-abelian",
+   "def-weil-abstract-derived-category"
+  ]
  }
 }
