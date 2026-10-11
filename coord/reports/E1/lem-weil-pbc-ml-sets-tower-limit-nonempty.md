@@ -1,29 +1,76 @@
-# lem-weil-pbc-ml-sets-tower-limit-nonempty
+## Worker report
 
-## Files written
+The module states `nonempty_limit_of_mittag_leffler_tower` in
+`Sheaf.AlgebraicGeometry.MLSetsTowerLimitNonempty`. It uses `E : ℕ → Type u` for the
+sets, `f i : E (i+1) → E i` for transitions, and `φ i k` for the composite from level
+`k` to level `i`. `hφ_self` renders the identity composite clause, `hφ_comp` renders
+composition of composites, and `hφ_succ` identifies one-step composites with `f`.
+`hE` states every level is nonempty. `c` and `hc` render the stabilizing index
+`c(i) ≥ i`; `hML` states equality of the image at every `k ≥ c(i)` with the stable
+image at `c(i)`. The conclusion is a sequence `x` with
+`f i (x (i+1)) = x i` for every level, i.e. a point of the inverse limit.
 
-- `dag/nodes/sec-proper-base-change/lem-weil-pbc-ml-sets-tower-limit-nonempty.json`: split the existing statement into three steps; no new nodes. Mathlib verdict remains no single matching declaration, with the earlier five-declaration candidate chain retained.
+The dependency notion is the inverse-system definition `def-weil-inverse-system`;
+its recorded Mathlib match is `CategoryTheory.Functor.ofOpSequence` (the theorem is
+written directly with the associated sets, maps, and composites).
 
-## Attachments
+Edge cases checked: empty levels are excluded by `hE`; stabilization at `c(i)=i`
+is allowed; `i=0` is included as the harmless shift of the positive-integer tower;
+identity composites and one-step composites are explicitly constrained.
 
-None. The item has no Lean declaration in either source branch.
+Searches read from the node were checked: LeanSearch for a countable nonempty
+Mittag--Leffler inverse limit (no exact match); LeanFinder for sections of a
+countable Mittag--Leffler system (only finite/compact variants); Loogle for
+`Functor.IsMittagLeffler` and sections (no match); grep of Mathlib's
+`CategoryTheory/CofilteredSystem.lean` and `Limits/Types/Images.lean` (composite
+candidate only); and local search for
+`surjective_π_app_zero_of_surjective_map` (declarations found, but not the full
+specialized statement).
 
-## WANTED
+## Earlier second reading (a previous round; superseded)
 
-None. Stacks Project `algebra.tex`, Definition 0595 (`definition-ML-system`), Example 0596 (`example-ML-surjective-maps`), and Lemma 0597 (`lemma-ML-limit-nonempty`) were read in the local source checkout; the tags were checked in `tags/tags`.
+Reading the node and file independently, every node clause has a corresponding
+binder or conclusion: the levels and transition maps are `E` and `f`, composites
+and their identity/composition laws are `φ`, nonemptiness is `hE`, stabilization is
+`c`, `hc`, and `hML`, and compatibility is the final equality. No proof content is
+included; the theorem body is `sorry`.
 
-## Corrections and checks
+## Second reading by E1
 
-The item was unsplit, with no proof steps. The statement agrees with 0597 specialized to positive integers and with the ML definition 0595. Stacks 0596 asserts surjectivity of transitions on stable images without writing the element argument; Step 2 now chooses an index at least `max(c(i), c(i+1), i+1)` and checks both membership and surjectivity. Step 3 writes the dependent-choice recursion behind Stacks' appeal to the axiom of choice. The existing `def-weil-inverse-system` states the only cited notion. No proof step uses the statement of another node, and no new node duplicates one already in the DAG.
+The node introduces a tower of sets indexed by positive integers, transition maps
+$f_i:E_{i+1}\to E_i$, composites $\varphi_{k,i}$ for $k\ge i$ with identity and
+composition laws, nonempty levels, stabilizing indices $c(i)\ge i$, and equality of
+stable images for every later $k$. Its conclusion is a compatible sequence in the
+inverse limit. The first file used `ℕ`, which introduced an unintended level zero;
+I changed the signature to use Mathlib `ℕ+` throughout, including the successor order
+proof, so every object and quantifier now has the node's positive-integer index. The
+node statement was clarified with $\mathbb N_{>0}$ and records this correction.
 
-Edge cases checked: `c(i)=i` yields `B_i=E_i` at that level; an empty stable image cannot occur because every `E_k` is nonempty; transitions need not be surjective on the original `E_i`, only on the `B_i`; the proof does not require a monotone choice of `c(i)`. A one-point tower and towers with temporarily larger images both satisfy the argument.
+Edge cases checked: each positive level may be nonempty without requiring a level zero;
+$c(i)=i$ is allowed; the identity and one-step composite hypotheses cover all indices;
+there is no empty-index case and no characteristic or universe restriction beyond the
+single universe `u`. Searches (LeanSearch, LeanFinder, Loogle, grep of Mathlib and the
+source project) found no exact theorem or existing project declaration; Mathlib's
+Mittag-Leffler/eventual-range results require additional finiteness and do not state
+this section theorem. The inverse-system dependency remains the recorded
+`CategoryTheory.Functor.ofOpSequence` match.
 
-## Unfinished
+The sole citer `lem-weil-pbc-mittag-leffler-limit-exact` still holds because it uses the
+abstract Mittag-Leffler limit result and does not depend on a zero-index level.
 
-None for this split. The node remains a non-Mathlib statement for later formalization.
+## Statement corrected
 
-## Review by E1
+Old statement: the Lean signature indexed `E`, `f`, `φ`, `c`, and the limit by `ℕ`.
+This added level zero although the source Lemma 0597 and node concern only positive
+integers. Following Algebra, Lemma 0597 (algebra.tex lines 20748--20767), the node is
+clarified with $\mathbb N_{>0}$ and the Lean uses `ℕ+`. Citer
+`lem-weil-pbc-mittag-leffler-limit-exact`: holds, since its use is abstract and remains
+valid for the positive-index tower.
 
-I read Algebra Definition 0595 (`definition-ML-system`), Example 0596 (`example-ML-surjective-maps`), and Lemma 0597 (`lemma-ML-limit-nonempty`) in `algebra.tex`. The item statement is the positive-integer specialization of 0597, with the inverse-system composite and stabilization hypothesis stated explicitly. No new nodes were added; the current DAG search found only the cited `def-weil-inverse-system`, whose statement defines exactly the sets, transition maps, composites, and compatibility used.
+## Reviewer fix (R-mlt1138, stage 2)
 
-Step 1 defines stable images and uses only the inverse-system composite identity; nonemptiness follows from the nonempty source level. Step 2 uses the same identity and a common index at least `max(c(i), c(i+1), i+1)` to prove both well-definedness and surjectivity, then checks that compatible sequences in the restricted tower and original tower coincide. Step 3 is the positive-integer dependent-choice construction from 0597's final sentence. Every non-elementary source fact is either the item's hypothesis or the cited inverse-system definition; the argument does not treat the Mathlib composite candidate as a leaf. I checked c(i)=i, one-point towers, temporary image growth, and non-surjective original transitions. No A-F issue remains and no worker revision was required.
+The delivery is merged as a FIX.
+
+- Statement correction reverted (`--revert-statement`). The base statement already indexes the tower by i >= 1, so no correction was needed. The delivered text also had its backslashes eaten: `\t` and `\v` turned into control characters ("$f_i:E_{i+1}<TAB>o E_i$", "<VT>arphi", "<TAB>ext"), which broke the node's TeX.
+- The Lean is restated in the recorded form for Mittag-Leffler towers of sets: `F : ℕᵒᵖ ⥤ Type u`, with index n standing for n+1 as in the landed 070D module and in K1 `isIso_limitPost_homology_of_mittagLeffler`. The ML condition is Mathlib's `F.IsMittagLeffler`, which for ℕᵒᵖ is equivalent to the node's c(i) stabilisation. Nonempty levels are `[∀ n, Nonempty (F.obj n)]`. The conclusion `F.sections.Nonempty` is the node's limit of compatible sequences. This replaces the hand-rolled ℕ+ encoding, whose φ/hφ_self/hφ_comp/hφ_succ/c/hML gave a private second form of the inverse-system and ML notions (H4/H12).
+- Mathlib has no countable version: `exact?` fails, and `nonempty_sections_of_finite_cofiltered_system` needs finite levels.
