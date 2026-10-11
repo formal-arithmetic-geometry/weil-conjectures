@@ -1,8 +1,8 @@
 # Work queue
 
-866 items; claim with `tools/claim.py next <group> [--stage N]`.
+865 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (50)
+## Stage 1: nodes to split (48)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -51,13 +51,11 @@
 | `lem-pur-kinjective-functorial-homotopies` | - | none |
 | `lem-pur-kinjective-functorial-injective` | - | none |
 | `lem-pur-kinjective-set-iso-classes-bounded-size` | - | none |
-| `prop-pur-kinjective-objects-small` | - | none |
 | `lem-pur-left-derived-from-kflat-class` | - | none |
 | `lem-pc-finite-affine-fibre-sections` | - | none |
 | `lem-pc-finite-flat-pushforward-locally-free` | - | none |
-| `lem-pur-site-restriction-module-adjunction-exact` | - | none |
 
-## Stage 2: nodes to state (816)
+## Stage 2: nodes to state (817)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -836,6 +834,7 @@
 | `pqf-lem-proper-basic` | 1 | state |
 | `pqf-lem-qf-finitefibres` | 1 | state |
 | `pqf-lem-sheaf-zero-stalks` | 1 | state |
+| `prop-pur-kinjective-objects-small` | 1 | state |
 | `thm-pqf-zmt-factorization` | 1 | state |
 | `def-nagata-glued-limit-comparison` | 2 | state |
 | `lem-fd-finite-pushforward-cohomology` | 2 | state |
@@ -878,7 +877,7 @@
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 1723 nodes that wait for a statement dependency, 91 nodes that wait for stage 1.
+Not open yet: 1724 nodes that wait for a statement dependency, 89 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
