@@ -150,5 +150,28 @@
   "group": "H1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ef2 (reviewer sub-agent of L); spot-checked: Re-push after return 15:31 (c85387dd5): all three points repaired: (1) steps 1-2 now follow the 07RZ route named in the proof of 09Z0 (more-morphisms-lemma-there-is-a-scheme-integral-over, sentence 'the degree of the fibres of a quasi-compact separated etale morphism does not go up under specialization', citing 07RY/07RZ = lemma-stratify-flat-fp-qf), no Zariski finite-etale shrinking; (2) strict clause now from closedness of Z_{d-1} on each affine open containing the dense open, no generization quantifier; (3) the idempotent node is gone and step/item sources name 07RZ. Statement unchanged. Step 1: flat and lfp from def-weil-etale-morphism and the cited etale-algebra leaves, locally quasi-finite from lem-weil-pbc-etale-ring-map-quasi-finite (isolated in fibre ring per def-weil-pbc-ring-map-quasi-finite-at-prime), plus quasi-compact gives quasi-finite per pqf-def-quasifinite; separated by hypothesis; hypotheses of lem-weil-pbc-flat-fp-qf-stratification checked one by one; an affine open containing y_sp contains y_gen. Step 2: universal property with T=Spec kappa(y) gives degree r iff y in S_r, S = disjoint union so every fibre finite; Z_r = S_0 u...u S_r. Step 3 elementary (closed sets stable under specialization). Step 4: Z_{d-1} closed in V and contains the dense subset U n V, so equals V. Tool uses (sk-thm-p1 nodes: etale-ring-map-quasi-finite, flat-fp-qf-stratification, etale-algebra-over-field-product) are generic black boxes, accepted. Small cases: empty fibre, identity, the A^1 example of the return (two points over y=0, one point removed: degrees 2 generic, 1 at y=0, consistent). FIX more, RETURN less (C1): dag/nodes/sec-proper-base-change/lem-weil-pbc-etale-fibre-specialization-bound.json: proof[1].text/uses and proof_deps: added the citation of the existing leaf lem-weil-pbc-etale-scheme-base-change (02GO) for the etaleness of the fibre X_y -> Spec kappa(y) and the sentence that X_y is finite hence affine, needed to apply lem-weil-pbc-etale-algebra-over-field-product. Note: the report lists a citations.json that is not in the commit. Start Sat Oct 10 03:54:25 PM UTC 2026, end Sat Oct 10 03:55:15 PM UTC 2026.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleFibreSpecialization",
+  "declaration": "AlgebraicGeometry.etale_geometricFiber_card_le_of_specializes",
+  "declarations": [
+   "AlgebraicGeometry.etale_geometricFiber_card_le_of_specializes",
+   "AlgebraicGeometry.etale_geometricFiber_card_lt_of_dense_open"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleFibreSpecialization.lean",
+  "statement": "theorem etale_geometricFiber_card_le_of_specializes {X Y : Scheme.{u}} (f : X ⟶ Y) [QuasiCompact f] [IsSeparated f] [Etale f] {Ωgen Ωsp : Type u} [Field Ωgen] [IsAlgClosed Ωgen] [Field Ωsp] [IsAlgClosed Ωsp] (ygen : Spec (.of Ωgen) ⟶ Y) (ysp : Spec (.of Ωsp) ⟶ Y) (hsp : ygen (default : Spec (.of Ωgen)) ⤳ ysp (default : Spec (.of Ωsp))) [Finite ↥(pullback f ygen : Scheme.{u})] : Finite ↥(pullback f ysp : Scheme.{u}) ∧ Nat.card ↥(pullback f ysp : Scheme.{u}) ≤ Nat.card ↥(pullback f ygen : Scheme.{u})",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-efs1009"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-efs1009",
+  "group": "J1",
+  "result": "fix",
+  "note": "QuasiCompact/IsSeparated/Etale f; geometric points Spec Ω ⟶ Y, Ω alg. closed in universe u; ⤳ of underlying points generic→special; finite generic fibre ⇒ finite special and Nat.card ≤; dense open U with IsOpen/Dense, d : ℕ, < d over U ⇒ < d everywhere; FIX: geometric fibre = points of pullback f ȳ (def-weil-geometric-fibre) instead of Ω-lifts GeometricFiber (def-weil-pbc-geometric-fibre, not a stmt_dep); proofs in docstrings"
  }
 }

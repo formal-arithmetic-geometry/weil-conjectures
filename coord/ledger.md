@@ -4169,3 +4169,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 10:10 L: merged deliver/K1/lem-weil-pbc-fibre-ring-primes-residue-fields (stage 2; reviewer FIX; first push; Sheaf.RingTheory.FibrePrimesResidueFields PrimeSpectrum.fibre_primes_residue_fields)
 - 10:10 L: merged deliver/J1/lem-weil-pbc-filtered-category-directed-cofinal (stage 2; reviewer PASS; first push; Sheaf.CategoryTheory.ExistsDirectedReindexing CategoryTheory.exists_directed_reindexing)
 - 10:10 L: merged deliver/F1/lem-weil-pbc-filtered-colimit-algebras-underlying-module (stage 2; reviewer FIX; first push; Sheaf.RingTheory.FilteredColimitAlgebrasUnderlyingModule CommAlgCat.filtered_colimit_algebras_underlying_module)
+- 10:10 L: merged deliver/J1/lem-weil-pbc-etale-fibre-specialization-bound (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.EtaleFibreSpecialization AlgebraicGeometry.etale_geometricFiber_card_le_of_specializes)
