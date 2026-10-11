@@ -5657,3 +5657,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 19:34 L: returned deliver/E1/lem-sc-zariski-contracted-power-extension (reviewer RETURN: (reviewer R-h38f2b, head 38f2b150c) H3 + H12 (lean/Sheaf/CategoryTheory/Sites/ZariskiContractedPowerExtensionPresentatio)
 - 19:35 L: returned deliver/Q1/cor-galois-lisse-representations (reviewer RETURN: (reviewer R-h1f302, head 1f3026ba4) H13 (re-pointed record of an existing node; STATE RECURRING FAULTS 're-pointed or re)
 - 19:35 L: returned deliver/Q1/lem-weil-pbc-cohomology-colimit-of-sites (reviewer RETURN: (reviewer R-hc07f5, head c07f5a99c) H3/H6: the theorem is a tautology: binder `(hcanonical : IsIso κ)` with conclusion `)
+- 19:35 L: merged deliver/H1/lem-sc-pseudo-coherent-rhom-qcoherent (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.PseudoCoherentRHomQuasiCoherent AlgebraicGeometry.pseudoCoherentRHomQuasiCoherent)
