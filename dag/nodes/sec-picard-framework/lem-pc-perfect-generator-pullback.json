@@ -126,5 +126,22 @@
   "group": "F1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-pgp2710 (reviewer sub-agent of L); spot-checked: Steps 1-3 against cited statements: adjunction (lem-pc-ringed-spaces-derived-adjoint-general) restricted via full subcategories, Rg_* lands in D_QCoh by lem-sc-finite-affine-derived-equivalence, def-pc-generators shift indexing, conservativity applied to 0->E. FIX more, RETURN less: (1) C1 Lg^*M in D_QCoh(X') (needed for def-pc-generators, which requires the generator to be an object of the category) was uncited; cited existing lem-pc-derived-pullback-tensor-qcoh (generic tool, Tag 08DW, accepted as tool_use) in Step 1 and proof_deps. (2) B3 source.document named nonexistent derived-categories-of-schemes.tex and all sources gave Tag 09IS for remark-pullback-generator, whose tag is 0BQT (09IS is Bondal-van den Bergh); corrected to perfect.tex, Tag 0BQT. Second reading by F1 missed both and claimed the source fix that was not in the file.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.PerfectGeneratorPullback",
+  "declaration": "AlgebraicGeometry.perfect_generator_pullback",
+  "file": "lean/Sheaf/AlgebraicGeometry/PerfectGeneratorPullback.lean",
+  "statement": "theorem perfect_generator_pullback {X X' : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X] [CompactSpace X'] [QuasiSeparatedSpace X'] [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X'.toRingedSpace))] [∀ U : X.Opens, HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))] (g : X' ⟶ X) [IsAffineHom g] (M : schemeDerivedQCohCategory X) (hperfect : Scheme.IsPerfect X M.obj) (hgen : ∀ E : schemeDerivedQCohCategory X, IsZero E.obj ↔ ∀ n : ℤ, Subsingleton (M.obj⟦n⟧ ⟶ E.obj)) : schemeDerivedQCohProperty X' ((derivedPullback g).obj M.obj) ∧ ∀ E : schemeDerivedQCohCategory X', IsZero E.obj ↔ ∀ n : ℤ, Subsingleton (((derivedPullback g).obj M.obj)⟦n⟧ ⟶ E.obj)",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-pgp",
+  "group": "C1",
+  "result": "pass"
  }
 }

@@ -4838,3 +4838,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 13:58 L: merged deliver/J1/lem-weil-pbc-reduced-noetherian-total-ring-fractions (stage 2; reviewer FIX; first push; Sheaf.RingTheory.ReducedNoetherianTotalRingFractions reduced_noetherian_total_ring_fractions)
 - 13:58 L: merged deliver/M1/lem-weil-pbc-regular-local-mcm-free (stage 2; reviewer PASS; first push; Sheaf.RingTheory.RegularLocalMaximalCohenMacaulayFree IsRegularLocalRing.free_of_depth_eq_ringKrullDim)
 - 13:58 L: merged deliver/F1/lem-weil-pbc-regular-sequence-polynomial-variables (stage 2; reviewer PASS; first push; Sheaf.RingTheory.RegularSequencePolynomialVariables RingTheory.Sequence.isRegular_permutations_subsequences_polynomial_iff)
+- 13:59 L: merged deliver/C1/lem-pc-perfect-generator-pullback (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.PerfectGeneratorPullback AlgebraicGeometry.perfect_generator_pullback)
