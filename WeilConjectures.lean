@@ -136,6 +136,7 @@ public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.EtaleDescent
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.ExtendOverInertia
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.ExtendOverPoints
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Extension
+public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.FiniteColimits
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.FiniteEtale
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.FiniteLocallyConstant
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Frobenius
@@ -575,6 +576,7 @@ public import WeilConjectures.CategoryTheory.Idempotents.Pretriangulated
 public import WeilConjectures.CategoryTheory.Idempotents.Shift
 public import WeilConjectures.CategoryTheory.Idempotents.TStructure
 public import WeilConjectures.CategoryTheory.Idempotents.Triangulated
+public import WeilConjectures.CategoryTheory.Limits.CoequalizerOfMonoidQuotient
 public import WeilConjectures.CategoryTheory.Monoidal.Closed.Preadditive
 public import WeilConjectures.CategoryTheory.Monoidal.Closed.ProjectionPairing
 public import WeilConjectures.CategoryTheory.Monoidal.Conjugate
