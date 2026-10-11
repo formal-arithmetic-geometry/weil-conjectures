@@ -4771,3 +4771,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 13:30 L: merged deliver/H1/lem-pc-perfect-object-compact (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.PerfectObjectCompact AlgebraicGeometry.perfectObjectCompact)
 - 13:31 L: merged deliver/G1/lem-sc-coherent-ring-perfect-complex-cohomology (stage 2; reviewer PASS; first push; Sheaf.RingTheory.CoherentRingPerfectComplexCohomology CochainComplex.finitePresentation_homology_of_coherent)
 - 13:31 L: merged deliver/G1/lem-sc-perfect-ext-bounded-qcoh-vanishing (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.PerfectHomGap AlgebraicGeometry.Scheme.exists_subsingleton_hom_of_isPerfect)
+- 13:31 L: merged deliver/K1/lem-sc-koszul-regular-closed-immersion-perfect (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.KoszulRegularClosedImmersionPerfect AlgebraicGeometry.koszulRegular_closedImmersion_perfect)

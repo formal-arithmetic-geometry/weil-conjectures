@@ -140,5 +140,24 @@
   "group": "M1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-kcp1852 (reviewer sub-agent of L); spot-checked: Read packet whole. No cycle: item deps exclude K1 parent lem-sc-smooth-proper-diagonal-koszul-regular. Koszul-complex-resolves step needs no 062F node: def-weil-pbc-koszul-regular-sequence defines Koszul-regular as H_i(K)=0 for i!=0, and H_0=A/I from d_1(e_i)=f_i (elementary). No Noetherian hypothesis, matching 068C. Steps 1-4 hypotheses checked; tilde exactness and refinement to free terms elementary. New def-sc-perfect-closed-immersion: affine-local quotient-resolution form of 0687/068Y for closed immersions, not false, no duplicate, searches recorded. No repairs; second reading by M1 missed no fault."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.KoszulRegularClosedImmersionPerfect",
+  "declaration": "AlgebraicGeometry.koszulRegular_closedImmersion_perfect",
+  "file": "lean/Sheaf/AlgebraicGeometry/KoszulRegularClosedImmersionPerfect.lean",
+  "statement": "theorem koszulRegular_closedImmersion_perfect {Z Y : Scheme.{u}} (i : Z ⟶ Y) [IsClosedImmersion i] [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))] [∀ U : Y.Opens, HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings Y.toRingedSpace).over U))] (h : ∀ y : Y, ∃ U : Y.Opens, y ∈ U ∧ IsAffineOpen U ∧ ∃ (I : Ideal (Γ(Y, U))) (r : ℕ) (f : Fin r → Γ(Y, U)), I = Ideal.span (Set.range f) ∧ RingTheory.Sequence.IsKoszulRegular f ∧ ∃ e : Scheme.Opens.toScheme (i ⁻¹ᵁ U) ≅ Spec (CommRingCat.of ((Γ(Y, U) : Type u) ⧸ I)), i ∣_ U ≫ U.toSpecΓ = e.hom ≫ Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I))) : (∀ (U : Y.Opens) (hU : IsAffineOpen U), ∀ (I : Ideal (Γ(Y, U))) (r : ℕ) (f : Fin r → Γ(Y, U)), I = Ideal.span (Set.range f) → RingTheory.Sequence.IsKoszulRegular f → ∀ e : Scheme.Opens.toScheme (i ⁻¹ᵁ U) ≅ Spec (CommRingCat.of ((Γ(Y, U) : Type u) ⧸ I)), i ∣_ U ≫ U.toSpecΓ = e.hom ≫ Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I)) → (∃ q : ((tilde.functor Γ(Y, U) ⋙ Scheme.Modules.restrictFunctor hU.isoSpec.hom).mapHomologicalComplex (ComplexShape.down ℕ)).obj (ExteriorAlgebra.koszulComplex (Γ(Y, U) : Type u) r f) ⟶ (ChainComplex.single₀ U.toScheme.Modules).obj ((Scheme.Modules.restrictFunctor U.ι).obj ((Scheme.Modules.pushforward i).obj (SheafOfModules.unit Z.ringCatSheaf))), QuasiIso q) ∧ (∀ n : ℕ, Module.Free (Γ(Y, U) : Type u) ((ExteriorAlgebra.koszulComplex (Γ(Y, U) : Type u) r f).X n) ∧ Module.Finite (Γ(Y, U) : Type u) ((ExteriorAlgebra.koszulComplex (Γ(Y, U) : Type u) r f).X n)) ∧ (∀ n : ℕ, r < n → IsZero ((ExteriorAlgebra.koszulComplex (Γ(Y, U) : Type u) r f).X n))) ∧ IsPerfectClosedImmersion i ∧ Scheme.IsPerfect Y ((DerivedCategory.singleFunctor (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0).obj ((Scheme.Modules.pushforward i).obj (SheafOfModules.unit Z.ringCatSheaf)))",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-kci1504"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-kci1504",
+  "group": "K1",
+  "result": "fix",
+  "note": "Packet read whole. Y,Z,i+IsClosedImmersion; h = affine nbhd, I=span(range f) with r finite, IsKoszulRegular f (J1 form), quotient presentation e over U in the IsPerfectClosedImmersion form; clause 1 universal over qualifying charts, tilde+restrict along isoSpec of ExteriorAlgebra.koszulComplex quasi-iso to single0 of restricted i_*O_Z; terms Free+Finite, zero above r (ModuleCat IsZero); IsPerfectClosedImmersion i; Scheme.IsPerfect of singleFunctor 0 of i_*O_Z. HasDerivedCategory binders required by IsPerfect. FIX: final clause respelled from SheafOfModules.pushforward i.toRingCatSheafHom / unit (moduleRings Z) to Scheme.Modules.pushforward i / unit Z.ringCatSheaf (checked rfl), one spelling of i_*O_Z as in clause 1 and landed modules."
  }
 }
