@@ -3089,3 +3089,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 00:20 UTC L: H1 def-pc-derived-base-change-map FIX f3c938956 (R-dbc0019; composite retyped, source moved to cohomology.tex Remark 08HY).
 - 00:21 L: merged deliver/H1/lem-sc-pic-restriction-boundary (reviewer FIX; first push; new nodes: 0)
 - 00:21 UTC L: H1 pic-restriction-boundary FIX 06530a3ec (R-prb0020).
+- 00:21 L: returned deliver/C1/lem-sc-picard-valuation-probe-specializes (reviewer RETURN: Not a fault: the node was attached by L at 23:56 UTC (commit becdd3ebc) to the sorry-free slopmaster2 declaration Algebr)
