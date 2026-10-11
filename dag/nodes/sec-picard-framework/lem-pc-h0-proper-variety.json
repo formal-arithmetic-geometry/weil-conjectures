@@ -137,5 +137,28 @@
   "group": "K1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-h0pv (reviewer sub-agent of L); spot-checked: Source: Stacks varieties.tex Tag 04L2 (lemma-regular-functions-proper-variety; proper variety = integral, separated, finite type, as def-pc-curve) clauses (1) and (4), and Tag 0BUG (lemma-proper-geometrically-reduced-global-sections) with its proof (finiteness, flat base change); the statement agrees hypothesis by hypothesis (k field, X proper; (1) variety; (2) geometrically integral, A=k), the change removing 'e.g. connected and integral' and adding 'as k-algebras' is named in the report and weakens nothing. Step (1): finiteness from the finite-dimensionality clause of lem-pc-euler-characteristic-well-defined (same unit, proper over k, O_X coherent); integrality from def-pc-curve; injectivity of O_X(X)->k(X) from the 'in particular' of lem-sc-integral-scheme-stalks-in-function-field (X nonempty, so A nonzero domain); field from lem-weil-pbc-finite-dimensional-domain-is-field. Step (2): lem-sc-flat-base-change-coherent (X proper, O_X quasi-coherent, k->kbar flat) gives the kbar-linear iso H^0(X_kbar)=A(x)kbar; X_kbar integral by def-pc-geometrically-irreducible, proper by lem-pc-proper-base-change (1), hence a variety, so (1) and lem-pc-finite-extension-alg-closed give dim_kbar=1; lem-pc-finrank-field-base-change gives dim_k A=1; unit map k->A injective, hence A=k (elementary). No cycle (transitive closure of all cited nodes checked); off-unit citations are definitions or Mathlib leaves. Mathlib: Morphisms/Proper.lean:150 isField_of_universallyClosed and :161 finite_appTop_of_universallyClosed read, cover (1) only; slopmaster2 GlobalSectionsBijective.of_geometricallyIntegral states (2) but is not sorry-free (sorryfree.py: SORRY via finite_sections_higherDirectImage), so no B10 attachment. Small cases: P^1_k (A=k); Spec L for L/k finite (A=L, not geometrically integral when L!=k); P^1_C over R (A=C). Fix: dag/nodes/sec-picard-framework/lem-pc-h0-proper-variety.json: proof[0].source.place and proof[1].source.place: Stacks labels corrected to lemma-regular-functions-proper-variety (04L2) and lemma-proper-geometrically-reduced-global-sections (0BUG). 14:10-14:11 UTC; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GlobalSectionsProperVariety",
+  "declaration": "AlgebraicGeometry.globalSections_finite_field_of_isVariety",
+  "declarations": [
+   "AlgebraicGeometry.globalSections_finite_field_of_isVariety",
+   "AlgebraicGeometry.Scheme.GlobalSectionsBijective.of_geometricallyIntegral"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/GlobalSectionsProperVariety.lean",
+  "statement": "theorem globalSections_finite_field_of_isVariety [IsProper (X ↘ Spec (.of k))] [Scheme.Hom.IsVariety (X ↘ Spec (.of k))] : (Scheme.globalSectionsRingHom k (X := X)).Finite ∧ IsField Γ(X, ⊤)",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-hpv0830"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-hpv0830",
+  "group": "K1",
+  "result": "fix",
+  "note": "proper (IsProper) both clauses; (1) IsVariety -> globalSectionsRingHom Finite and IsField Gamma(X,top); (2) GeometricallyIntegral -> GlobalSectionsBijective = source of_geometricallyIntegral (recorded, local copy removed, H4)"
  }
 }
