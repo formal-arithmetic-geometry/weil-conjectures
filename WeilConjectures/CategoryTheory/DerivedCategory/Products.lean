@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.Algebra.Homology.HomotopyCategory.Products
 public import WeilConjectures.CategoryTheory.DerivedCategory.Coproducts
 
 /-!
@@ -40,7 +41,7 @@ lemma isKInjective_of_isLimitFan {β : Type*} {I : β → CochainComplex C ℤ}
     [∀ j, (I j).IsKInjective] {t : Fan I} (ht : IsLimit t) : t.pt.IsKInjective := by
   rw [isKInjective_iff_rightOrthogonal]
   intro A f hA
-  refine Fan.IsLimit.hom_ext (HomotopyCategory.isLimitFanQuotient ht) _ _ fun j ↦ ?_
+  refine Fan.IsLimit.hom_ext (HomotopyCategory.isLimitFanQuotient _ _ ht) _ _ fun j ↦ ?_
   rw [zero_comp]
   exact IsKInjective.rightOrthogonal (I j) _ hA
 
@@ -57,7 +58,7 @@ noncomputable def isLimitFanMkQObjOfIsKInjective {I : β → CochainComplex C �
   have := CochainComplex.isKInjective_of_isLimitFan ht
   refine Fan.IsLimit.ofBijective _ fun Y ↦ ?_
   refine Fan.bijective_of_iso _ (Q.objObjPreimageIso Y) ?_
-  have h := Fan.IsLimit.bijective (HomotopyCategory.isLimitFanQuotient ht)
+  have h := Fan.IsLimit.bijective (HomotopyCategory.isLimitFanQuotient _ _ ht)
     ((HomotopyCategory.quotient C (.up ℤ)).obj (Q.objPreimage Y))
   have : (fun (g : Q.obj (Q.objPreimage Y) ⟶ Q.obj t.pt) (j : β) ↦ g ≫ Q.map (t.proj j)) =
       (Equiv.piCongrRight fun j ↦ homEquivOfIsKInjective (Q.objPreimage Y) (I j)) ∘

@@ -25,8 +25,8 @@ are computed degreewise.
 * If colimits (resp. limits) of shape `J` are exact in an abelian category `C`, then the homology
   functors preserve them.
 * If in each degree at most one summand is nonzero, a coproduct of complexes is also a product.
-* Homotopies can be glued along coproducts and products, so that the quotient functor to the
-  homotopy category preserves coproducts and products.
+* Homotopies can be glued along coproducts, so that the quotient functor to the homotopy
+  category preserves coproducts. (For products, see `HomotopyCategory.isLimitFanQuotient`.)
 
 ## Main statements
 
@@ -36,8 +36,8 @@ are computed degreewise.
   nonzero summand in each degree is also a product.
 - `CochainComplex.eq_of_not_isZero_singleFunctor_obj_shift_X`: the complexes `F[0]⟦n⟧` for
   `n : ℕ` satisfy this support condition.
-- `HomotopyCategory.isColimitCofanQuotient`, `HomotopyCategory.isLimitFanQuotient`: the quotient
-  functor to the homotopy category preserves coproducts and products.
+- `HomotopyCategory.isColimitCofanQuotient`: the quotient functor to the homotopy category
+  preserves coproducts which are computed degreewise.
 -/
 
 @[expose] public section
@@ -297,19 +297,6 @@ noncomputable def ofIsColimitCofan [∀ i, PreservesColimit (Discrete.functor K)
     simp only [comp_f] at this
     simp [dNext, prevD, this]
 
-/-- Homotopies between morphisms to a product of complexes (computed degreewise) can be
-glued from homotopies on the factors. -/
-noncomputable def ofIsLimitFan [∀ i, PreservesLimit (Discrete.functor K) (eval C c i)]
-    {s : Fan K} (hs : IsLimit s) {L : HomologicalComplex C c} {f g : L ⟶ s.pt}
-    (h : ∀ j, Homotopy (f ≫ s.proj j) (g ≫ s.proj j)) : Homotopy f g where
-  hom p q := Fan.IsLimit.lift (isLimitFanMkX hs q) fun j ↦ (h j).hom p q
-  zero p q hpq := Fan.IsLimit.hom_ext (isLimitFanMkX hs q) _ _ fun j ↦ by
-    simpa using (h j).zero p q hpq
-  comm p := Fan.IsLimit.hom_ext (isLimitFanMkX hs p) _ _ fun j ↦ by
-    have := (h j).comm p
-    simp only [comp_f] at this
-    simp [dNext, prevD, this, ← Hom.comm]
-
 end Homotopy
 
 namespace HomotopyCategory
@@ -335,22 +322,5 @@ noncomputable def isColimitCofanQuotient
       refine eq_of_homotopy _ _ (Homotopy.ofIsColimitCofan hs fun j ↦ homotopyOfEq _ _ ?_)
       exact ((quotient C c).map_comp _ _).trans
         ((congrArg (_ ≫ ·) (quotient_map_out m)).trans ((hm j).trans (fac t j).symm)))
-
-/-- The quotient functor to the homotopy category preserves products of complexes which are
-computed degreewise. -/
-noncomputable def isLimitFanQuotient
-    [∀ i, PreservesLimit (Discrete.functor K) (eval C c i)] {s : Fan K} (hs : IsLimit s) :
-    IsLimit (Fan.mk ((quotient C c).obj s.pt) fun j ↦ (quotient C c).map (s.proj j)) :=
-  have fac (t : Fan fun j ↦ (quotient C c).obj (K j)) (j : β) :
-      (quotient C c).map ((Fan.IsLimit.lift hs fun j ↦ (t.proj j).out) ≫ s.proj j) = t.proj j :=
-    (congrArg (quotient C c).map (Fan.IsLimit.fac hs _ j)).trans (quotient_map_out _)
-  Fan.IsLimit.mk _
-    (fun t ↦ (quotient C c).map (Fan.IsLimit.lift hs fun j ↦ (t.proj j).out))
-    (fun t j ↦ ((quotient C c).map_comp _ _).symm.trans (fac t j))
-    (fun t m hm ↦ by
-      rw [← quotient_map_out m]
-      refine eq_of_homotopy _ _ (Homotopy.ofIsLimitFan hs fun j ↦ homotopyOfEq _ _ ?_)
-      exact ((quotient C c).map_comp _ _).trans
-        ((congrArg (· ≫ _) (quotient_map_out m)).trans ((hm j).trans (fac t j).symm)))
 
 end HomotopyCategory

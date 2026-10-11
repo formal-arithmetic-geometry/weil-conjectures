@@ -389,19 +389,3 @@ theorem exists_injective_kummer_free {K : Type u} [Field K] {r : ℕ} (hr : r.Pr
         (∀ (m : ℕ) (β : SeparableClosure K), β ^ (r ^ m) = algebraMap K _ (f i) →
           φ x β = β) → x = 1 :=
   exists_injective_kummer_free_of_isSepClosed hr hrK hζ f hf0 hf
-
-/-- Variant of `exists_injective_kummer_free` with the free abelian group `ℕ →₀ ℤ`. -/
-theorem exists_injective_kummer_free' {K : Type u} [Field K] {r : ℕ} (hr : r.Prime)
-    (hrK : (r : K) ≠ 0) (hζ : ∀ m, ∃ ζ : K, IsPrimitiveRoot ζ (r ^ m)) {ι : Type*} [Finite ι]
-    (f : ι → K) (hf0 : ∀ i, f i ≠ 0) (hf : ∀ i, ¬∃ u : K, u ^ r = f i) :
-    ∃ φ : Multiplicative (ℕ →₀ ℤ) →* (SeparableClosure K ≃ₐ[K] SeparableClosure K),
-      ∀ i (x : Multiplicative (ℕ →₀ ℤ)),
-        (∀ (m : ℕ) (β : SeparableClosure K), β ^ (r ^ m) = algebraMap K _ (f i) →
-          φ x β = β) → x = 1 := by
-  obtain ⟨φ, hφ⟩ := exists_injective_kummer_free.{u, 0} hr hrK hζ f hf0 hf
-  let e : Multiplicative (ℕ →₀ ℤ) →* Multiplicative (ULift.{0} ℕ →₀ ℤ) :=
-    (Finsupp.domCongr Equiv.ulift.symm).toAddMonoidHom.toMultiplicative
-  refine ⟨φ.comp e, fun i x hx ↦ ?_⟩
-  have he : Function.Injective e := fun a b h ↦
-    (Finsupp.domCongr Equiv.ulift.symm).injective (Multiplicative.ofAdd.injective h)
-  exact he ((hφ i (e x) hx).trans (map_one e).symm)
