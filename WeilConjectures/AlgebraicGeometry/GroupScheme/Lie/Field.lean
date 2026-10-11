@@ -39,13 +39,33 @@ variable {k : Type u} [Field k]
 /-- A morphism of schemes locally of finite type over an algebraically closed field `k` which is
 surjective on underlying spaces is surjective on `k`-points.
 
-Proof sketch (not formalised): the fibre of `f` over the closed point `y` is a nonempty scheme
-locally of finite type over `k`; by the Nullstellensatz its closed points have residue field `k`,
-and such a point is a `k`-point of `X` over `y`. -/
+The point `y` is a section of `Y → Spec k`, hence a closed immersion, so the fibre
+`X ×_Y Spec k` is a closed subscheme of `X`, nonempty since `f` is surjective and locally of finite
+type over `k`; a closed point of it has residue field `k`, giving a `k`-point of `X` over `y`. -/
 theorem exists_points_comp_eq_of_surjective [IsAlgClosed k] {X Y : Over (Spec (.of k))}
     [LocallyOfFiniteType X.hom] (f : X ⟶ Y) (hf : Function.Surjective f.left.base)
     (y : points Y k) : ∃ x : points X k, x ≫ f = y := by
-  sorry
+  let g : Spec (.of k) ⟶ Y.left := y.left
+  have hg : g ≫ Y.hom = 𝟙 (Spec (.of k)) := by
+    rw [Over.w y]
+    exact Spec.map_id _
+  have := isClosedImmersion_of_comp_eq_id _ _ hg
+  have hsnd : Limits.pullback.fst f.left g ≫ X.hom = Limits.pullback.snd f.left g := by
+    rw [← Over.w f, Limits.pullback.condition_assoc, hg, Category.comp_id]
+  have : LocallyOfFiniteType (Limits.pullback.snd f.left g) := by
+    rw [← hsnd]
+    infer_instance
+  have := LocallyOfFiniteType.jacobsonSpace (Limits.pullback.snd f.left g)
+  obtain ⟨x₀, hx₀⟩ := hf (g (IsLocalRing.closedPoint k))
+  obtain ⟨z, -, -⟩ := Scheme.Pullback.exists_preimage_pullback x₀ _ hx₀
+  obtain ⟨p, -, hp⟩ := nonempty_inter_closedPoints (Set.nonempty_of_mem (Set.mem_univ z))
+    isClosed_univ.isLocallyClosed
+  refine ⟨Over.homMk (pointOfClosedPoint (Limits.pullback.snd f.left g) p hp ≫
+    Limits.pullback.fst f.left g) ?_, ?_⟩
+  · rw [Category.assoc, hsnd, pointOfClosedPoint_comp]
+    exact (Spec.map_id _).symm
+  · ext1
+    simp [Limits.pullback.condition, g]
 
 /-! ### Affine charts at the identity
 
