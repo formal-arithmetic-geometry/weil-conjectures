@@ -1,21 +1,21 @@
 # Work queue
 
-985 items; claim with `tools/claim.py next <group> [--stage N]`.
+981 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (985)
+## Stage 2: nodes to state (981)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
+| `def-exc-continuous-cohomology` | 1 | state |
 | `def-pc-base-change` | 1 | state |
 | `def-pur-hom-complex` | 1 | state |
 | `def-weil-derived-tensor` | 1 | state |
 | `def-weil-pbc-derived-categories` | 1 | state |
 | `def-weil-pbc-finite-torsors` | 1 | state |
 | `lem-exc-abelian-sheaves-gmodules` | 1 | state |
-| `lem-exc-cochains-derived-invariants` | 1 | state |
 | `lem-kun-03sa` | 1 | state |
 | `lem-pc-bounded-above-flat-tensor-acyclic` | 1 | state |
 | `lem-pc-closed-subscheme-base-change-ideal-image` | 1 | state |
@@ -32,7 +32,6 @@
 | `lem-pc-ring-pseudo-coherent-iff-all-m` | 1 | state |
 | `lem-pc-sheaf-modules-tensor-closed` | 1 | state |
 | `lem-pc-sites-modules-j-shriek-flat` | 1 | state |
-| `lem-pc-sites-modules-sheafification-flat` | 1 | state |
 | `lem-pc-skyscraper-complex` | 1 | state |
 | `lem-pc-stalk-tensor-complex` | 1 | state |
 | `lem-pc-tor-independent-projective-complex-tensor` | 1 | state |
@@ -42,7 +41,6 @@
 | `lem-pc-zero-scheme-pullback-local-coefficient` | 1 | state |
 | `lem-pod-lisse-module-sheaves-as-module-objects` | 1 | state |
 | `lem-pur-derived-change-of-rings` | 1 | state |
-| `lem-sc-ample-finite-principal-affine` | 1 | state |
 | `lem-sc-ample-finite-set-affine` | 1 | state |
 | `lem-sc-ample-proj-local-chart` | 1 | state |
 | `lem-sc-ample-proj-open` | 1 | state |
@@ -53,10 +51,8 @@
 | `lem-sc-dim-one-ample-invertible` | 1 | state |
 | `lem-sc-dvr-valuation-ring-characterization` | 1 | state |
 | `lem-sc-enough-globally-generated-ample` | 1 | state |
-| `lem-sc-etale-torsor-pushout-extension` | 1 | state |
 | `lem-sc-ext-derived-composite-natural` | 1 | state |
 | `lem-sc-finite-free-internal-hom-exact` | 1 | state |
-| `lem-sc-finite-maximals-over-element` | 1 | state |
 | `lem-sc-finite-pushforward-locally-free` | 1 | state |
 | `lem-sc-finite-sections-cover-qc` | 1 | state |
 | `lem-sc-finite-sheafhom-affine` | 1 | state |
@@ -995,7 +991,7 @@
 | `lem-sc-normalization-properties` | 3 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 965 nodes that wait for a statement dependency, 40 nodes that wait for stage 1.
+Not open yet: 964 nodes that wait for a statement dependency, 40 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
