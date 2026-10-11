@@ -4453,3 +4453,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 11:29 L: merged deliver/J1/lem-sc-quasi-finite-points-open (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.QuasiFiniteLocusOpen AlgebraicGeometry.Scheme.Hom.isOpen_quasiFiniteAtPoint)
 - 11:30 L: merged deliver/F1/lem-pc-curves-are-sc (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.SmoothProjectiveCurveConnected AlgebraicGeometry.Scheme.Hom.isConnectedCurve_of_isSmoothProjectiveCurve)
 - 11:30 L: merged deliver/F1/lem-sc-noetherian-closed-points-finite (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.FiniteOfIsClosedOfClosedPoints AlgebraicGeometry.finite_of_isClosed_of_closed_points)
+- 11:31 L: merged deliver/M1/lem-weil-pbc-make-separable (stage 2; reviewer PASS; first push; Sheaf.FieldTheory.MakeSeparable Algebra.exists_finite_purelyInseparable_separable_extension)

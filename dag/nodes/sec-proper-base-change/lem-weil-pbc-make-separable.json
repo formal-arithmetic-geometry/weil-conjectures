@@ -121,5 +121,23 @@
   "by": "L",
   "result": "accepted",
   "note": "2 steps follow Stacks 030R: the square from a new 04KM node (whose statement is exactly Stacks' diagram), separably generated => separable by a new 030X node. Tags 030R, 04KM, 030X verified."
+ },
+ "lean": {
+  "module": "Sheaf.FieldTheory.MakeSeparable",
+  "declaration": "Algebra.exists_finite_purelyInseparable_separable_extension",
+  "file": "lean/Sheaf/FieldTheory/MakeSeparable.lean",
+  "statement": "theorem exists_finite_purelyInseparable_separable_extension (k : Type u) (K : Type v) [Field k] [Field K] [Algebra k K] (hK : (⊤ : IntermediateField k K).FG) : ∃ (k' K' : Type (max u v)) (_ : Field k') (_ : Field K') (_ : Algebra k k') (_ : Algebra k K') (_ : Algebra k' K') (_ : Algebra K K') (_ : IsScalarTower k k' K') (_ : IsScalarTower k K K') (_ : Module.Finite k k') (_ : IsPurelyInseparable k k') (_ : Module.Finite K K') (_ : IsPurelyInseparable K K'), Algebra.IsSeparableExtension k' K'",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-mks1130",
+  "group": "M1",
+  "result": "pass",
+  "note": "hK=(⊤:IntermediateField k K).FG for finitely generated; k',K' fields in Type (max u v) with Algebra k k', K K', k' K', k K'; IsScalarTower k k' K' and k K K' give the commuting square (k into k' inside K'); Module.Finite+IsPurelyInseparable for k'/k and K'/K (char-free, char 0 trivial, as sibling C1 4fb39de05); Algebra.IsSeparableExtension k' K' = recorded def-weil-pbc-separable-field-extension; no hollow binders, no extra universe"
  }
 }
