@@ -1,0 +1,103 @@
+{
+ "id": "def-weil-pbc-comm-algebra-sheaf",
+ "kind": "definition",
+ "title": "Sheaves of commutative algebras on a scheme and their underlying modules",
+ "statement": "Let $X$ be a scheme [def-pc-scheme]. A sheaf of commutative $\\mathcal O_X$-algebras is a sheaf $\\mathcal A$ of commutative rings on the open-set site of $X$, together with a morphism of ring sheaves $\\mathcal O_X\\to\\mathcal A$. Morphisms are ring-sheaf morphisms commuting with these structure morphisms; equivalently this category is the under category of $\\mathcal O_X$ in sheaves of commutative rings. Its underlying $\\mathcal O_X$-module [def-weil-sheaf-of-modules-category] is $\\mathcal A$, viewed as the rank-one module over itself and restricted along $\\mathcal O_X\\to\\mathcal A$.",
+ "source": {
+  "document": "literature/stacks-project/properties.tex",
+  "place": "Properties, Lemma 05JT (lemma-algebra-directed-colimit-finite-type) and the definition of finite type quasi-coherent algebras immediately before it"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "sheaf of commutative algebras over a sheaf of rings",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable (no mathematical search verdict)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "category of sheaves of commutative algebras on a ringed space and underlying module restriction of scalars",
+   "results": "SheafOfModules.restrictScalars_obj_val, SheafOfModules.restrictScalars, SheafOfModules.forget, SheafOfModules.toSheaf, AlgebraicGeometry.Scheme.Modules.toPresheaf, AlgebraicGeometry.Scheme.Modules.toPresheafOfModules, SheafOfModules.val, AlgebraicGeometry.Scheme.Modules.toPresheaf_obj: underlying-module tools, no algebra-sheaf category declaration.",
+   "date": "2026-10-11",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'SheafOfAlgebras|CommAlgebraSheaf|finiteTypeQuasiCoherentSubalgebras|quasi.?coherent.*[Ss]ubalgebra' /home/ubuntu/weil-src-slopmaster2/.lake/packages/mathlib/Mathlib /home/ubuntu/weil-src-slopmaster2/WeilConjectures lean/Sheaf dag/nodes; python3 tools/blueprint_refs.py search 'algebra sheaf'; python3 tools/blueprint_refs.py search 'subalgebra'",
+   "results": "No matching declaration in Mathlib, WeilConjectures, or lean/Sheaf. DAG matches are statements using these notions, not definition nodes providing them. Blueprint search algebra sheaf: def-nagata-sheaf-rees-algebra (specific Rees algebra). Subalgebra search: ring-level and Lie-algebra nodes, no sheaf subalgebra definition.",
+   "date": "2026-10-11",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-algebra-directed-colimit-finite-type",
+  "date": "2026-10-11",
+  "group": "F1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-h1-constructible-representation",
+   "place": "The algebra sheaf and its finite type quasi-coherent subalgebras used in Stacks 05JT, in the finite approximation of integral algebras.",
+   "via": [
+    "lem-weil-pbc-algebra-directed-colimit-finite-type",
+    "lem-weil-pbc-integral-algebra-directed-colimit-finite",
+    "lem-weil-pbc-integral-morphism-limit-of-finite",
+    "lem-weil-pbc-constructible-module-finite-pushforward-noetherian",
+    "lem-weil-pbc-constructible-module-finite-pushforward-embedding"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CommAlgebraSheaf",
+  "declaration": "AlgebraicGeometry.Scheme.CommAlgebraSheaf",
+  "file": "lean/Sheaf/AlgebraicGeometry/CommAlgebraSheaf.lean",
+  "statement": "abbrev CommAlgebraSheaf (X : Scheme.{uA})",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": false,
+  "declarations": [
+   "AlgebraicGeometry.Scheme.CommAlgebraSheaf",
+   "AlgebraicGeometry.Scheme.CommAlgebraSheaf.toModule"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-adc1216",
+  "group": "F1",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-adc1216",
+  "group": "F1",
+  "result": "pass",
+  "note": "X Scheme.{uC} + [CompactSpace X][QuasiSeparatedSpace X] = qcqs; A : Under X.sheaf with toModule (restrictScalars of unit) IsQuasicoherent = qc algebra; Sigma = Subobject A with qc module and RingHom.FiniteType O_X(U)->B(U) on affine U, order rfl = Subobject order; (a) Nonempty + Directed; (b) cocone tied by c.pt = A and c.ι.app B ≫ eqToHom h = arrow, IsColimit in all algebra sheaves; (c) affine sections in some B via arrow equation; no let, no hollow hyp; combined compile + #check clean"
+ }
+}

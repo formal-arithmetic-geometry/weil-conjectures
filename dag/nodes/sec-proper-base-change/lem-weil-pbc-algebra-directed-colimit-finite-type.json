@@ -26,7 +26,9 @@
   "def-weil-pbc-scheme-conventions",
   "def-weil-sheaf-of-modules-category",
   "pqf-def-coherent",
-  "def-weil-pbc-category-colimit"
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-comm-algebra-sheaf",
+  "def-weil-pbc-finite-type-quasi-coherent-subalgebras"
  ],
  "proof": [
   {
@@ -177,5 +179,23 @@
   "item": "lem-weil-pbc-algebra-directed-colimit-finite-type",
   "worker": "stage1",
   "summary": "Checked the statement against Properties 05JT and the definition of finite type quasi-coherent algebras (lines 3341-3346); tags 05JT and 05JS verified in stacks-project/tags/tags. Statement kept. Proof in four steps following the Stacks proof: (1) the image of the multiplication map A1 (x) A2 -> A is a finite type quasi-coherent subalgebra containing A1, A2 (the details Stacks omits written out with the existing tensor-product and module-image nodes); (2) the images of Sym(F_i) -> A, F_i from Properties 01PK, are finite type subalgebras and every section over an affine open lies in one (this is the part of the 05JS route that 05JT uses: Im(A_ij -> A) = Im(Sym(F_i) -> A), so no node for 05JS was needed); (3) directedness; (4) the colimit, checked on affine sections with the existing colimit and basis nodes. No new node created; all cited nodes are in unit sk-thm-p1 or are definitions/Mathlib leaves. Mathlib has no quasi-coherent algebras (searches already on the node, one LeanSearch added); no Lean candidate in slopmaster2."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AlgebraDirectedColimitFiniteType",
+  "declaration": "AlgebraicGeometry.Scheme.CommAlgebraSheaf.directed_colimit_finiteType",
+  "file": "lean/Sheaf/AlgebraicGeometry/AlgebraDirectedColimitFiniteType.lean",
+  "statement": "theorem CommAlgebraSheaf.directed_colimit_finiteType (X : Scheme.{uC}) [CompactSpace X] [QuasiSeparatedSpace X] (A : X.CommAlgebraSheaf) (hA : A.toModule.IsQuasicoherent) : (Nonempty A.finiteTypeQuasiCoherentSubalgebras ∧ Directed (· ≤ ·) (fun B : A.finiteTypeQuasiCoherentSubalgebras ↦ B)) ∧ (∃ c : Cocone A.finiteTypeQuasiCoherentSubalgebraDiagram, ∃ h : c.pt = A, Nonempty (IsColimit c) ∧ ∀ B : A.finiteTypeQuasiCoherentSubalgebras, c.ι.app B ≫ eqToHom h = Subobject.arrow B.val) ∧ (∀ (U : X.Opens), IsAffineOpen U → ∀ a : A.right.obj.obj (op U), ∃ B : A.finiteTypeQuasiCoherentSubalgebras, ∃ b : (B.val : X.CommAlgebraSheaf).right.obj.obj (op U), (Subobject.arrow B.val).right.hom.app (op U) b = a)",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-adc1216",
+  "group": "F1",
+  "result": "pass",
+  "note": "X Scheme.{uC} + [CompactSpace X][QuasiSeparatedSpace X] = qcqs; A : Under X.sheaf with toModule (restrictScalars of unit) IsQuasicoherent = qc algebra; Sigma = Subobject A with qc module and RingHom.FiniteType O_X(U)->B(U) on affine U, order rfl = Subobject order; (a) Nonempty + Directed; (b) cocone tied by c.pt = A and c.ι.app B ≫ eqToHom h = arrow, IsColimit in all algebra sheaves; (c) affine sections in some B via arrow equation; no let, no hollow hyp; combined compile + #check clean"
  }
 }

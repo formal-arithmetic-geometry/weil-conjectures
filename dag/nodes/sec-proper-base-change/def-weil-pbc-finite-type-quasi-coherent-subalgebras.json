@@ -1,0 +1,104 @@
+{
+ "id": "def-weil-pbc-finite-type-quasi-coherent-subalgebras",
+ "kind": "definition",
+ "title": "Finite type quasi-coherent subalgebras and their inclusion diagram",
+ "statement": "Let $X$ be a scheme [def-pc-scheme] and $\\mathcal A$ a sheaf of commutative $\\mathcal O_X$-algebras [def-weil-pbc-comm-algebra-sheaf]. Define $\\Sigma(\\mathcal A)$ to be the inclusion-ordered set of subsheaves of $\\mathcal O_X$-algebras $\\mathcal B\\subseteq\\mathcal A$ whose underlying module is quasi-coherent [pqf-def-coherent] and for which $\\mathcal B(U)$ is a finitely generated $\\mathcal O_X(U)$-algebra for every affine open $U\\subseteq X$. Equivalently these are the subobjects of $\\mathcal A$ in the category of algebra sheaves satisfying these two properties. Its diagram sends $\\mathcal B$ to that algebra sheaf and $\\mathcal B\\subseteq\\mathcal B'$ to the inclusion map.",
+ "source": {
+  "document": "literature/stacks-project/properties.tex",
+  "place": "Properties, Lemma 05JT (lemma-algebra-directed-colimit-finite-type) and the definition of finite type quasi-coherent algebras immediately before it"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-comm-algebra-sheaf",
+  "pqf-def-coherent"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite type quasi coherent subalgebras of a sheaf of algebras",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable (no mathematical search verdict)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite type quasi coherent subalgebras of an algebra sheaf ordered by inclusion",
+   "results": "SheafOfModules.IsFiniteType, SheafOfModules.GeneratingSections.IsFiniteType, SheafOfModules.GeneratingSections.IsFiniteType.finite, SheafOfModules.LocalGeneratorsData.IsFiniteType.isFiniteType, SheafOfModules.LocalGeneratorsData.IsFiniteType, SheafOfModules.IsFiniteType.exists_localGeneratorsData, SheafOfModules.QuasicoherentData.instIsFiniteTypeLocalGeneratorsDataOfIsFinitePresentation, SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation: module finiteness only, not algebra finiteness or a subalgebra diagram.",
+   "date": "2026-10-11",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'SheafOfAlgebras|CommAlgebraSheaf|finiteTypeQuasiCoherentSubalgebras|quasi.?coherent.*[Ss]ubalgebra' /home/ubuntu/weil-src-slopmaster2/.lake/packages/mathlib/Mathlib /home/ubuntu/weil-src-slopmaster2/WeilConjectures lean/Sheaf dag/nodes; python3 tools/blueprint_refs.py search 'algebra sheaf'; python3 tools/blueprint_refs.py search 'subalgebra'",
+   "results": "No matching declaration in Mathlib, WeilConjectures, or lean/Sheaf. DAG matches are statements using these notions, not definition nodes providing them. Blueprint search algebra sheaf: def-nagata-sheaf-rees-algebra (specific Rees algebra). Subalgebra search: ring-level and Lie-algebra nodes, no sheaf subalgebra definition.",
+   "date": "2026-10-11",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-algebra-directed-colimit-finite-type",
+  "date": "2026-10-11",
+  "group": "F1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-h1-constructible-representation",
+   "place": "The algebra sheaf and its finite type quasi-coherent subalgebras used in Stacks 05JT, in the finite approximation of integral algebras.",
+   "via": [
+    "lem-weil-pbc-algebra-directed-colimit-finite-type",
+    "lem-weil-pbc-integral-algebra-directed-colimit-finite",
+    "lem-weil-pbc-integral-morphism-limit-of-finite",
+    "lem-weil-pbc-constructible-module-finite-pushforward-noetherian",
+    "lem-weil-pbc-constructible-module-finite-pushforward-embedding"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteTypeQuasiCoherentSubalgebras",
+  "declaration": "AlgebraicGeometry.Scheme.CommAlgebraSheaf.finiteTypeQuasiCoherentSubalgebras",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteTypeQuasiCoherentSubalgebras.lean",
+  "statement": "abbrev CommAlgebraSheaf.finiteTypeQuasiCoherentSubalgebras {X : Scheme.{uB}} (A : X.CommAlgebraSheaf)",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": false,
+  "declarations": [
+   "AlgebraicGeometry.Scheme.CommAlgebraSheaf.finiteTypeQuasiCoherentSubalgebras",
+   "AlgebraicGeometry.Scheme.CommAlgebraSheaf.finiteTypeQuasiCoherentSubalgebraDiagram"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-adc1216",
+  "group": "F1",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-adc1216",
+  "group": "F1",
+  "result": "pass",
+  "note": "X Scheme.{uC} + [CompactSpace X][QuasiSeparatedSpace X] = qcqs; A : Under X.sheaf with toModule (restrictScalars of unit) IsQuasicoherent = qc algebra; Sigma = Subobject A with qc module and RingHom.FiniteType O_X(U)->B(U) on affine U, order rfl = Subobject order; (a) Nonempty + Directed; (b) cocone tied by c.pt = A and c.ι.app B ≫ eqToHom h = arrow, IsColimit in all algebra sheaves; (c) affine sections in some B via arrow equation; no let, no hollow hyp; combined compile + #check clean"
+ }
+}
