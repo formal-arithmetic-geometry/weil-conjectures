@@ -4184,3 +4184,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 10:13 L: merged deliver/G1/lem-weil-pbc-exact-free-complex-last-minors-regular-sequence (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.ExactFreeComplexLastMinors exact_free_complex_last_minors_regular_sequence)
 - 10:13 L: merged deliver/E1/lem-weil-pbc-field-cohen-power-series-formally-smooth (stage 2; reviewer PASS; first push; Sheaf.RingTheory.FieldCohenPowerSeriesFormallySmooth MvPowerSeries.field_cohen_power_series_formally_smooth)
 - 10:13 L: merged deliver/C1/lem-weil-pbc-finite-gl-dim-regular-local (stage 2; reviewer PASS; first push; Sheaf.RingTheory.RegularLocalOfFiniteGlobalDimension IsRegularLocalRing.of_hasFiniteGlobalDimension)
+- 10:14 L: merged deliver/J1/lem-weil-pbc-finite-free-resolution-noetherian (stage 2; reviewer PASS; first push; Sheaf.RingTheory.FiniteFreeResolution Module.exists_finite_free_resolution)
