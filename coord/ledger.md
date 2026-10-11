@@ -3930,3 +3930,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 09:02 L: merged deliver/H1/lem-pur-rhom-into-kinjective-local (stage 2; reviewer FIX; first push; Sheaf.Algebra.Homology.RhomIntoKInjectiveLocal CategoryTheory.rhom_into_kinjective_local)
 - 09:03 L: merged deliver/E1/lem-weil-pbc-ample-very-ample-immersion-affine-base (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.AmpleImmersionAffineBase AlgebraicGeometry.Scheme.Modules.IsAmple.exists_immersion_affine_base; reverted nodes: def-pc-projective-space-twist; dropped files: lean/Sheaf/AlgebraicGeometry/PolynomialProjectiveTwist.lean)
 - 09:03 L: merged deliver/F1/lem-weil-pbc-cartier-equality (stage 2; reviewer FIX; first push; Sheaf.Paper.CartierEquality cartier_equality)
+- 09:03 L: merged deliver/E1/def-sc-function-field (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.FunctionField AlgebraicGeometry.Scheme.functionFieldOfComponents)

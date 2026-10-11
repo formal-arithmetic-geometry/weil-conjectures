@@ -101,5 +101,24 @@
   "lem-weil-pbc-finite-type-over-noetherian",
   "lem-weil-pbc-noetherian-finite-components"
  ],
- "lead_note": "2026-10-10 L: def-sc-curves defines curves over an algebraically closed field only, while the unit sk-def-av-pic and the citers lem-sc-rational-function-morphism, lem-sc-line-bundle-rational-section use curves over any field; the definition works verbatim over any field (noted by the worker; check at def-sc-curves). def-weil-irreducible-components asserts that components are closed without a node."
+ "lead_note": "2026-10-10 L: def-sc-curves defines curves over an algebraically closed field only, while the unit sk-def-av-pic and the citers lem-sc-rational-function-morphism, lem-sc-line-bundle-rational-section use curves over any field; the definition works verbatim over any field (noted by the worker; check at def-sc-curves). def-weil-irreducible-components asserts that components are closed without a node.",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FunctionField",
+  "declaration": "AlgebraicGeometry.Scheme.functionFieldOfComponents",
+  "file": "lean/Sheaf/AlgebraicGeometry/FunctionField.lean",
+  "statement": "def Scheme.functionFieldOfComponents (X : Scheme.{u}) : CommRingCat.{u}",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": false,
+  "note": "The new declaration supplies the missing component-product definition. The arbitrary integral-scheme clause reuses Mathlib Scheme.functionField (the generic stalk); the germ isomorphism and fraction-field properties are the separately cited dependency declarations, not new definitions or copied theorems."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-dff1414",
+  "group": "E1",
+  "result": "pass",
+  "note": "product over the subtype irreducibleComponents X (all components, closed, so IsIrreducible.genericPoint is the component's unique generic point) of X.presheaf.stalk = node's O_{C,eta_1} x...x O_{C,eta_n}; arbitrary X specializes to curves; empty scheme gives the zero ring (n=0); not Mathlib Scheme.functionField (needs IrreducibleSpace, so misses reducible curves) nor rationalFunctionRing (R(X), identified only by the cited lem-sc-rational-functions-generic-stalks iso); integral clause cites Mathlib functionField + functionField_isFractionRing_of_isAffineOpen (#check'd); universe u throughout; compile clean"
+ }
 }
