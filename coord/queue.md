@@ -1,11 +1,11 @@
 # Work queue
 
-1005 items; claim with `tools/claim.py next <group> [--stage N]`.
+1006 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (1005)
+## Stage 2: nodes to state (1006)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -13,7 +13,6 @@
 | `def-pur-sheaf-tensor-product` | 1 | state |
 | `def-sbc-normal-dominant-galois` | 1 | state |
 | `def-sp-double-complex-total` | 1 | state |
-| `def-weil-derived-limit` | 1 | state |
 | `def-weil-pbc-associated-module` | 1 | state |
 | `def-weil-pbc-etale-sheaves` | 1 | state |
 | `def-weil-pbc-formal-glueing-data` | 1 | state |
@@ -38,7 +37,6 @@
 | `lem-galois-descent-datum-diagonal-identity` | 1 | state |
 | `lem-galois-fpqc-morphisms-descend` | 1 | state |
 | `lem-galois-fpqc-pullback-canonical-iso` | 1 | state |
-| `lem-galois-fpqc-singleton-fully-faithful-0241` | 1 | state |
 | `lem-galois-object-exists` | 1 | state |
 | `lem-kun-closed-point-field` | 1 | state |
 | `lem-kun-separable-smooth-colimit` | 1 | state |
@@ -56,6 +54,8 @@
 | `lem-pc-derived-adjoint-functors` | 1 | state |
 | `lem-pc-derived-filtered-free-resolution` | 1 | state |
 | `lem-pc-derived-free-complex-cover` | 1 | state |
+| `lem-pc-derived-functor-commutes-derived-limit` | 1 | state |
+| `lem-pc-derived-limit-milnor-sequence` | 1 | state |
 | `lem-pc-derived-limit-roos-abelian-groups` | 1 | state |
 | `lem-pc-derived-lower-truncation-step-ses` | 1 | state |
 | `lem-pc-derived-module-direct-sums` | 1 | state |
@@ -265,6 +265,7 @@
 | `lem-sp-horseshoe-prescribed-resolutions` | 1 | state |
 | `lem-weil-common-extension-fields` | 1 | state |
 | `lem-weil-degreewise-epi-kernel-cocone-qis` | 1 | state |
+| `lem-weil-derived-limit-existence` | 1 | state |
 | `lem-weil-l-adic-extension-integers-dvr` | 1 | state |
 | `lem-weil-pbc-adic-completion-noetherian` | 1 | state |
 | `lem-weil-pbc-adjunction-lifts-group-ring-objects` | 1 | state |
@@ -1015,7 +1016,7 @@
 | `lem-sc-normalization-properties` | 3 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 1139 nodes that wait for a statement dependency, 40 nodes that wait for stage 1.
+Not open yet: 1136 nodes that wait for a statement dependency, 40 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
