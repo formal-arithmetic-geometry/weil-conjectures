@@ -1,11 +1,11 @@
 # Work queue
 
-564 items; claim with `tools/claim.py next <group> [--stage N]`.
+560 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (564)
+## Stage 2: nodes to state (560)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -22,7 +22,6 @@
 | `lem-pc-picard-functor-agrees-sc` | 1 | state |
 | `lem-pc-quasi-coherent-extension` | 1 | state |
 | `lem-pc-relative-kill-by-twisting` | 1 | state |
-| `lem-pc-zero-scheme-adjunction-base-change` | 1 | state |
 | `lem-pc-zero-support-finite-scheme` | 1 | state |
 | `lem-pqf-leray-five-term` | 1 | state |
 | `lem-sc-affine-cap-section-open-dictionary` | 1 | state |
@@ -83,8 +82,6 @@
 | `lem-weil-pbc-etale-finite-data-descent` | 1 | state |
 | `lem-weil-pbc-etale-infinitesimal-neighbourhoods` | 1 | state |
 | `lem-weil-pbc-eventually-affine` | 1 | state |
-| `lem-weil-pbc-eventually-closed-immersion` | 1 | state |
-| `lem-weil-pbc-eventually-proper` | 1 | state |
 | `lem-weil-pbc-finite-presentation-kernel-surjection-finite-type` | 1 | state |
 | `lem-weil-pbc-finite-pushforward-coherent` | 1 | state |
 | `lem-weil-pbc-finite-pushforward-constructible-descent` | 1 | state |
@@ -98,7 +95,6 @@
 | `lem-weil-pbc-integral-scheme-ideal-generic-stalk` | 1 | state |
 | `lem-weil-pbc-jacobi-zariski-connecting-map-naturality` | 1 | state |
 | `lem-weil-pbc-koszul-differential-square-zero` | 1 | state |
-| `lem-weil-pbc-lift-idempotent-upstairs` | 1 | state |
 | `lem-weil-pbc-lift-projective-module-etale` | 1 | state |
 | `lem-weil-pbc-limit-residue-field` | 1 | state |
 | `lem-weil-pbc-limit-tower-essentially-finite-presentation` | 1 | state |
