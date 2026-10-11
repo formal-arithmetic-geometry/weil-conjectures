@@ -11,7 +11,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekProjection
 public import WeilConjectures.SixFunctors.Etale.Derived.PoincarePairing
 public import WeilConjectures.SixFunctors.Etale.Derived.Shift
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal
-public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Shift
+public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Pairing
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FlatModuleCat
 
 /-!
@@ -292,14 +292,9 @@ lemma IsWeilPairing.degreewisePairing_frobeniusOperator {A B C : DerivedCategory
     (x : 𝟙_ (DerivedCategoryModule Λ Y) ⟶ A⟦i⟧) (y : 𝟙_ (DerivedCategoryModule Λ Y) ⟶ B⟦j⟧) :
     degreewisePairing Q i j (frobeniusOperator h (shiftWeilDatum h ψA i) x)
         (frobeniusOperator h (shiftWeilDatum h ψB j) y) =
-      frobeniusOperator h (shiftWeilDatum h ψC (i + j)) (degreewisePairing Q i j x y) :=
-  -- Apply `Lh^*` to the defining composite of `⟨x, y⟩`: the tensor comparison of `Lh^*` turns
-  -- `Lh^*(x ⊗ y)` into `Lh^* x ⊗ Lh^* y`, it is compatible with the unitor `λ` and the unit
-  -- comparison `ε`, and with the shift isomorphisms, and `hQ` (shifted by `i + j`) moves the
-  -- datum `ψ_C` across `Q`. These compatibilities of the derived pullback with the monoidal
-  -- and shift structures (`AlgebraicGeometry.Etale.nonempty_monoidal_leftDerivedUpperStar`)
-  -- are not formalised yet.
-  sorry
+      frobeniusOperator h (shiftWeilDatum h ψC (i + j)) (degreewisePairing Q i j x y) := by
+  simpa only [degreewisePairing_apply, frobeniusOperator_apply, shiftWeilDatum] using
+    leftDerivedUpperStar_pairing_comm _ h ψA ψB ψC Q hQ i j x y
 
 end Morphism
 
