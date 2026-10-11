@@ -169,4 +169,19 @@ lemma surjective_app_toCycles_restrict_of_isAffineOpen [ℱ.IsQuasicoherent]
     hq.injective (Subsingleton.elim _ _)
   exact (QuotientAddGroup.eq_zero_iff s).mp h0
 
+/-- A class represented by a section `s` of the cycles `Zⁿ⁺¹` of `I` vanishes on the open
+subscheme `X` if and only if the restriction of `s` comes from `Iⁿ` over `X`. -/
+lemma H.restrictSucc_eq_zero_iff (I : InjectiveResolution ℱ) (n : ℕ)
+    (s : Γ(I.cocomplex.cycles (n + 1), ⊤)) :
+    H.restrictSucc f I n (H.map I.isoCyclesZero.inv (n + 1)
+        ((H.cyclesZeroSuccAddEquiv I.cocomplex I.cocomplex_exactAt_succ
+          (fun _ m ↦ subsingleton_H_of_injective _ m) n).symm (QuotientAddGroup.mk s))) = 0 ↔
+      restrictCyclesSections f I.cocomplex n s ∈
+        (((restrictComplex f I.cocomplex).toCycles n (n + 1)).app ⊤).hom.range := by
+  rw [H.restrictSucc_apply, ← QuotientAddGroup.eq_zero_iff]
+  let e := H.mapAddEquiv ((restrictCyclesIso f I.cocomplex 0) ≪≫
+    (restrictFunctor f).mapIso I.isoCyclesZero.symm) (n + 1)
+  change e _ = 0 ↔ _
+  rw [map_eq_zero_iff e e.injective, AddEquiv.map_eq_zero_iff]
+
 end AlgebraicGeometry.Scheme.Modules
