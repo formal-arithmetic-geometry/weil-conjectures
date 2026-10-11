@@ -16,8 +16,8 @@ public import WeilConjectures.SixFunctors.Etale.Derived.TensorStructure
 For a finite coefficient ring `Λ` whose exponent is invertible on a field `k` and schemes
 separated of finite type over `k`, this file states
 
-- `AlgebraicGeometry.Etale.torAmplitudeIn_verdierDual` (`lem-weil-verdier-preservation-strata`):
-  the Verdier dual `𝔻_X` sends Tor amplitude `[a, b]` to `[-b - 2d, -a]` when `dim X ≤ d`;
+- `AlgebraicGeometry.Etale.nonempty_iso_rightDerivedUpperShriek_verdierDual`
+  (`lem-weil-closed-costalk-duality`): `Ri^! 𝔻_T K ≅ 𝔻_Z (i^* K)`;
 - `AlgebraicGeometry.Etale.nonempty_iso_leftDerivedUpperStar_verdierDual`
   (`cor-weil-boundary-duality-discharge`): for a closed immersion `i : Z ⟶ T` the boundary
   exchange `i^* 𝔻_T L ≅ 𝔻_Z Ri^! L` holds on `Dctf(T)`.
@@ -77,22 +77,26 @@ theorem nonempty_iso_rightDerivedUpperShriek_derivedHom {X Y : Scheme.{u}} (f : 
     Functor.isoWhiskerRight (βX.app _).symm (R(f)_![ModuleCat.{u + 1} Λ])
   exact ⟨(adj₁.rightAdjointUniq (adj₂.ofNatIsoLeft e.symm)).app N⟩
 
-/-- Blueprint `lem-weil-verdier-preservation-strata`: Verdier duality preserves `Dctf`.
+/-- Blueprint `lem-weil-closed-costalk-duality`: Exceptional restriction of a Verdier dual.
 
-Let `X` be separated of finite type over `k`, `ω_X = Ra_X^! Λ` and `𝔻_X = RHom(-, ω_X)`. Then
-`𝔻_X` carries `Dctf(X, Λ)` into itself, and more precisely, if `dim X ≤ d` and `K ∈ Dctf(X, Λ)`
-has Tor amplitude in `[a, b]`, then `𝔻_X K` has Tor amplitude in `[-b - 2d, -a]`. The bound is
-independent of the exponent of `Λ`. The first half is
-`AlgebraicGeometry.Etale.constructibleFiniteTor_verdierDual`. -/
-theorem torAmplitudeIn_verdierDual {X : Scheme.{u}} (aX : X ⟶ Spec (.of k)) [IsSeparated aX]
-    [LocallyOfFiniteType aX] [QuasiCompact aX] [HasCompactification aX] (d : ℕ)
-    (hd : topologicalKrullDim X ≤ (d : WithBot ℕ∞)) (a b : ℤ)
-    {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
-    (hK : boundedConstructible (ModuleCat.{u + 1} Λ) X K)
-    (hKt : torAmplitudeIn (ModuleCat.{u + 1} Λ) X a b K) :
-    torAmplitudeIn (ModuleCat.{u + 1} Λ) X (-b - 2 * (d : ℤ)) (-a)
-      ((verdierDual (ModuleCat.{u + 1} Λ) aX).obj (op K)) :=
-  sorry
+For a morphism `i : Z ⟶ T` (in the blueprint a closed immersion) such that `i`, the structure
+morphism `a_T : T ⟶ S` and `a_Z = i ≫ a_T` admit compactifications, and finite coefficients `Λ`,
+there is an isomorphism `α_K : Ri^! 𝔻_T K ≅ 𝔻_Z (i^* K)` for every `K`, where
+`𝔻_T = RHom(-, ω_T)` and `𝔻_Z = RHom(-, ω_Z)`. It is the exchange
+`Ri^! RHom(K, ω_T) ≅ RHom(i^* K, Ri^! ω_T)`
+(`AlgebraicGeometry.Etale.nonempty_iso_rightDerivedUpperShriek_derivedHom`) combined with
+`Ri^! ω_T ≅ ω_Z` (`AlgebraicGeometry.Etale.nonempty_iso_rightDerivedUpperShriek_dualizingComplex`).
+No finiteness of `K` is needed. -/
+theorem nonempty_iso_rightDerivedUpperShriek_verdierDual {Z T S : Scheme.{u}} (aT : T ⟶ S)
+    [HasCompactification aT] (i : Z ⟶ T) [HasCompactification i] [HasCompactification (i ≫ aT)]
+    (K : _root_.DerivedCategory (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
+    Nonempty ((R(i)^![ModuleCat.{u + 1} Λ]).obj
+        ((verdierDual (ModuleCat.{u + 1} Λ) aT).obj (op K)) ≅
+      (verdierDual (ModuleCat.{u + 1} Λ) (i ≫ aT)).obj
+        (op ((L((i)^*[ModuleCat.{u + 1} Λ])).obj K))) := by
+  obtain ⟨e₁⟩ := nonempty_iso_rightDerivedUpperShriek_derivedHom Λ i K (dualizingComplex _ aT)
+  obtain ⟨e₂⟩ := nonempty_iso_rightDerivedUpperShriek_dualizingComplex Λ i aT
+  exact ⟨e₁ ≪≫ ((RHom(Z)[ModuleCat.{u + 1} Λ]).obj _).mapIso e₂⟩
 
 /-- Blueprint `cor-weil-boundary-duality-discharge`: Discharge of the boundary duality input.
 
@@ -114,13 +118,8 @@ theorem nonempty_iso_leftDerivedUpperStar_verdierDual [IsAlgClosed k] {Z T : Sch
         (op ((R(i)^![ModuleCat.{u + 1} Λ]).obj L))) := by
   -- `𝔻_Z (i^* K) ≅ Ri^! 𝔻_T K`, from `Ri^! RHom(K, ω_T) ≅ RHom(i^* K, Ri^! ω_T)` and
   -- `Ri^! ω_T ≅ ω_Z`
-  have hex (K : _root_.DerivedCategory (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
-      Nonempty ((verdierDual (ModuleCat.{u + 1} Λ) (i ≫ aT)).obj
-          (op ((L((i)^*[ModuleCat.{u + 1} Λ])).obj K)) ≅
-        (R(i)^![ModuleCat.{u + 1} Λ]).obj ((verdierDual (ModuleCat.{u + 1} Λ) aT).obj (op K))) := by
-    obtain ⟨e₁⟩ := nonempty_iso_rightDerivedUpperShriek_derivedHom Λ i K (dualizingComplex _ aT)
-    obtain ⟨e₂⟩ := nonempty_iso_rightDerivedUpperShriek_dualizingComplex Λ i aT
-    exact ⟨((RHom(Z)[ModuleCat.{u + 1} Λ]).obj _).mapIso e₂.symm ≪≫ e₁.symm⟩
+  have hex (K : _root_.DerivedCategory (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :=
+    (nonempty_iso_rightDerivedUpperShriek_verdierDual Λ aT i K).map Iso.symm
   have hD : constructibleFiniteTor (ModuleCat.{u + 1} Λ) T
       ((verdierDual (ModuleCat.{u + 1} Λ) aT).obj (op L)) :=
     constructibleFiniteTor_verdierDual Λ aT hL

@@ -25,16 +25,21 @@ the *Verdier dual* is `𝔻_X = RHom_X(-, ω_X)`.
 
 - `AlgebraicGeometry.Etale.dualizingComplex`: `ω_X = Ra^! Λ_S`.
 - `AlgebraicGeometry.Etale.verdierDual`: `𝔻_X = RHom_X(-, ω_X)`.
+- `AlgebraicGeometry.Etale.verdierDualEvaluation`, `AlgebraicGeometry.Etale.verdierDualDoubleDual`
+  (`lem-weil-duality-pairing`): the evaluation pairing `K ⊗ᴸ 𝔻_X K ⟶ ω_X` and the double-dual
+  morphism `δ_K : K ⟶ 𝔻_X 𝔻_X K`, its transpose.
+- `AlgebraicGeometry.Etale.verdierDualEquivalence` (`sk-prop-sf-biduality-general`): the
+  anti-equivalence `𝔻_X : Dctf(X, Λ)ᵒᵖ ≌ Dctf(X, Λ)`.
 
 ## Main statements
 
-- `AlgebraicGeometry.Etale.constructibleFiniteTor_verdierDual`
-  (`sk-prop-sf-biduality-general`): `𝔻_X` carries `Dctf(X, Λ)` into itself.
-- `AlgebraicGeometry.Etale.nonempty_iso_verdierDual_verdierDual`
-  (`sk-prop-sf-biduality-general`): general Verdier biduality, `𝔻_X 𝔻_X ≅ id` on `Dctf(X, Λ)`.
-- `AlgebraicGeometry.Etale.constructibleFiniteTor_derivedHom_of_isSeparated`
-  (`cor-weil-finite-constructible-hom`): `RHom(K, L)` lies in `Dctf(X, Λ)`, with the Tor
-  interval `[r - q - 2d, s - p + 2d]`.
+- `AlgebraicGeometry.Etale.isIso_verdierDualDoubleDual_app` (`sk-prop-sf-biduality-general`):
+  general Verdier biduality, `δ_K` is an isomorphism on `Dctf(X, Λ)`; hence
+  `AlgebraicGeometry.Etale.nonempty_iso_verdierDual_verdierDual`.
+- `AlgebraicGeometry.Etale.constructibleFiniteTor_verdierDual`,
+  `AlgebraicGeometry.Etale.torAmplitudeIn_verdierDual` (`lem-weil-verdier-preservation-strata`):
+  `𝔻_X` carries `Dctf(X, Λ)` into itself, sending the Tor interval `[a, b]` to
+  `[-b - 2d, -a]` when `dim X ≤ d`.
 
 ## Implementation notes
 
@@ -194,29 +199,33 @@ noncomputable def verdierDualEquivalence :
     (verdierDualDoubleDual (ModuleCat.{u + 1} Λ) a)
     (fun _ hK ↦ isIso_verdierDualDoubleDual_app Λ a hK)
 
-include a in
-/-- Blueprint `cor-weil-finite-constructible-hom`: Internal Hom for arbitrary finite-stage
-constructible complexes.
+end Field
 
-For `X` separated of finite type over a field `k` with `dim X ≤ d`, a finite coefficient ring `Λ`
-whose exponent is invertible on `k`, and `K, L ∈ Dctf(X, Λ)` with Tor intervals `[p, q]` and
-`[r, s]`, the internal hom `RHom(K, L)` is bounded constructible with Tor amplitude in
-`[r - q - 2d, s - p + 2d]`. The blueprint proof writes `RHom(K, L) ≅ 𝔻_X(K ⊗ᴸ 𝔻_X L)` and uses
-that `𝔻_X` carries the Tor interval `[r, s]` into `[-s - 2d, -r]`. -/
-theorem constructibleFiniteTor_derivedHom_of_isSeparated (d : ℕ)
-    (hd : topologicalKrullDim X ≤ (d : WithBot ℕ∞)) {p q r s : ℤ}
-    {K L : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
-    (hK : DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) X K)
-    (hKt : DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} Λ) X p q K)
-    (hL : DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) X L)
-    (hLt : DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} Λ) X r s L) :
-    DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) X
-        ((RHom(X)[ModuleCat.{u + 1} Λ].obj (op K)).obj L) ∧
-      DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} Λ) X (r - q - 2 * (d : ℤ))
-        (s - p + 2 * (d : ℤ)) ((RHom(X)[ModuleCat.{u + 1} Λ].obj (op K)).obj L) :=
+section Preservation
+
+variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {k : Type u} [Field k]
+  [HasInvertibleExponent Λ (Spec (.of k))]
+
+open _root_.AlgebraicGeometry.Etale.DerivedCategory
+
+/-- Blueprint `lem-weil-verdier-preservation-strata`: Verdier duality preserves `Dctf`.
+
+Let `X` be separated of finite type over `k`, `ω_X = Ra_X^! Λ` and `𝔻_X = RHom(-, ω_X)`. Then
+`𝔻_X` carries `Dctf(X, Λ)` into itself, and more precisely, if `dim X ≤ d` and `K ∈ Dctf(X, Λ)`
+has Tor amplitude in `[a, b]`, then `𝔻_X K` has Tor amplitude in `[-b - 2d, -a]`. The bound is
+independent of the exponent of `Λ`. The first half is
+`AlgebraicGeometry.Etale.constructibleFiniteTor_verdierDual`. -/
+theorem torAmplitudeIn_verdierDual {X : Scheme.{u}} (aX : X ⟶ Spec (.of k)) [IsSeparated aX]
+    [LocallyOfFiniteType aX] [QuasiCompact aX] [HasCompactification aX] (d : ℕ)
+    (hd : topologicalKrullDim X ≤ (d : WithBot ℕ∞)) (a b : ℤ)
+    {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
+    (hK : boundedConstructible (ModuleCat.{u + 1} Λ) X K)
+    (hKt : torAmplitudeIn (ModuleCat.{u + 1} Λ) X a b K) :
+    torAmplitudeIn (ModuleCat.{u + 1} Λ) X (-b - 2 * (d : ℤ)) (-a)
+      ((verdierDual (ModuleCat.{u + 1} Λ) aX).obj (op K)) :=
   sorry
 
-end Field
+end Preservation
 
 end Etale
 
