@@ -183,5 +183,28 @@
   "by": "L",
   "result": "pass",
   "note": "derived laws from the sheaf-level ones through the localization; the sheaf-level laws in a new node closed by Lean; def-weil-pbc-cartesian-square claims the compatibility without proof, now carried by that node"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.DerivedSquareIsoPasting",
+  "declaration": "AlgebraicGeometry.Etale.derivedSquareIsoPasting",
+  "declarations": [
+   "AlgebraicGeometry.Etale.derivedSquareIsoPasting"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/DerivedSquareIsoPasting.lean",
+  "statement": "theorem derivedSquareIsoPasting : let A := AddCommGrpCat.{u + 1} let P := fun {S T : Scheme.{u}} (q : S ⟶ T) => (upperStar A q).mapDerivedCategoryPlus let θ := fun {S T S' T' : Scheme.{u}} {a : S' ⟶ S} {b : S' ⟶ T'} {c : S ⟶ T} {d : T' ⟶ T} (sq : CommSq a b c d) => pullbackSquareComparison A sq let c := fun {R S T : Scheme.{u}} (a : T ⟶ S) (b : S ⟶ R) => (upperStarCompDerivedPlus A a b).symm let i := fun S : Scheme.{u} => upperStarIdDerivedPlus A S (∀ {X Y : Scheme.{u}} (f : X ⟶ Y) (K : DerivedCategory.Plus (Sheaf Y.smallEtaleTopology A)), (θ (IsPullback.id_horiz f).toCommSq).hom.app K = (P f).map ((i Y).hom.app K) ≫ (i X).inv.app ((P f).obj K)) ∧ (∀ {X Y X' Y' X'' Y'' : Scheme.{u}} {f : X ⟶ Y} {f' : X' ⟶ Y'} {g : Y' ⟶ Y} {g' : X' ⟶ X} {f'' : X'' ⟶ Y''} {h : Y'' ⟶ Y'} {h' : X'' ⟶ X'} (sq₁ : IsPullback g' f' f g) (sq₂ : IsPullback h' f'' f' h) (K : DerivedCategory.Plus (Sheaf Y.smallEtaleTopology A)), (P f'').map ((c h g).hom.app K) ≫ (θ (sq₂.paste_horiz sq₁).toCommSq).hom.app K = (θ sq₂.toCommSq).hom.app ((P g).obj K) ≫ (P h').map ((θ sq₁.toCommSq).hom.app K) ≫ (c h' g').hom.app ((P f).obj K)) ∧ (∀ {X Y X' Y' W W' : Scheme.{u}} {f : X ⟶ Y} {f' : X' ⟶ Y'} {g : Y' ⟶ Y} {g' : X' ⟶ X} {e : W ⟶ X} {e' : W' ⟶ X'} {g'' : W' ⟶ W} (sq₁ : IsPullback g' f' f g) (sq₃ : IsPullback g'' e' e g') (K : DerivedCategory.Plus (Sheaf Y.smallEtaleTopology A)), (c e' f').hom.app ((P g).obj K) ≫ (θ (sq₃.paste_vert sq₁).toCommSq).hom.app K = (P e').map ((θ sq₁.toCommSq).hom.app K) ≫ (θ sq₃.toCommSq).hom.app ((P f).obj K) ≫ (P g'').map ((c e f).hom.app K))",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-11",
+  "existing": false,
+  "note": "Three componentwise laws on D+ (identity, horizontal, vertical pasting), each conjunct with only its own squares bound. The node's closing sheaf-level sentence is the source's squareUpperStarIso_id / squareUpperStarIso_paste_horiz_hom / squareUpperStarIso_paste_vert_hom (node lem-weil-pbc-square-iso-pasting, existing); reviewer R-dsp1023 dropped C1's restatement sheafSquareIsoPasting (H4).",
+  "fixed_by": "R-dsp1023"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-dsp1023",
+  "group": "C1",
+  "result": "fix",
+  "note": "sq₁/sq₂/sq₃ = IsPullback g' f' f g / h' f'' f' h / g'' e' e g'; θ = pullbackSquareComparison A sq.toCommSq (f'^*g^* ≅ g'^*f^*); c = (upperStarCompDerivedPlus a b).symm = cD of derivedInverseImageComposition, i = upperStarIdDerivedPlus = eD; id_horiz f = (f,f,id,id); paste_horiz/paste_vert give (g'h', f'', f, hg) and (g'', e'f', ef, g); all three equations in diagrammatic order match; sheaf restatement dropped for existing squareUpperStarIso_* lemmas"
  }
 }
