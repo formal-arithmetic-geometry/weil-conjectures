@@ -115,5 +115,28 @@
   "group": "G1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-chc2244 (reviewer sub-agent of L); spot-checked: Statement vs Stacks 0949 (derived.tex 10352): agrees; no hocolim definition node exists, so the inline definition restates nothing (no class b). Step 1 injectivity of 1-shift and cokernel = termwise colimit: elementary, correct (C1 ok). FIX more, RETURN less: (1) C1/E: Step 2 contracting homotopy (a,b)->(0,a) was ill-degreed and wrong (missed by the Second reading); replaced by h(u(c),k)=(0,c) with dh+hd=1 verified. (2) C4: cone rewritten in the convention of def-weil-abstract-derived-category, C(u)^r=A^r+A^{r+1}, d=(d_L, u; 0, -d); quasi-iso concluded by the long exact cohomology sequence (Stacks 0117, elementary) of 0->K->C(u)->coker->0; step marked elementary, uses/proof_deps add def-weil-abstract-derived-category. (3) source/proof_origin still named 06YS (K-flat resolution) despite the Second reading's claim; corrected to derived.tex Lemma 0949.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.TelescopeColimit",
+  "declaration": "CochainComplex.quasiIso_telescopeColimit",
+  "file": "lean/Sheaf/Algebra/Homology/TelescopeColimit.lean",
+  "statement": "theorem quasiIso_telescopeColimit : ∃ f : mappingCone (telescopeShift R E) ⟶ colimit E, mappingCone.inr (telescopeShift R E) ≫ f = telescopeToColimit R E ∧ (mappingCone.inl (telescopeShift R E)).comp (Cochain.ofHom f) (add_zero _) = 0 ∧ QuasiIso f",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-11",
+  "existing": false,
+  "declarations": [
+   "CochainComplex.telescopeShift",
+   "CochainComplex.telescopeToColimit",
+   "CochainComplex.quasiIso_telescopeColimit"
+  ]
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-hcc0750",
+  "group": "K1",
+  "result": "pass",
+  "note": "site C:Type u/Category.{u}/J and R:Sheaf J CommRingCat.{u} as in merged KFlat.lean; E: ℕ ⥤ CochainComplex(SheafOfModules) ℤ = the sequence; telescopeShift = Sigma.desc(ι_n - E.map(n≤n+1)≫ι_{n+1}) = 1-shift; mappingCone = node's cone (components swapped vs node's C(u)^r=A^r+A^{r+1}, cosmetic); f fixed by inr≫f = Sigma.desc colimit.ι and inl-component 0 = node's pi (l,k)->[l], unique; colimit E degreewise; QuasiIso = def-pc-quasi-iso-modules; true since Mod(O) is AB5; H4 grep hocolim/telescope in Mathlib Homology+Triangulated and WeilConjectures: none; imports: HomologicalComplexLimits transitively redundant, rest needed"
  }
 }
