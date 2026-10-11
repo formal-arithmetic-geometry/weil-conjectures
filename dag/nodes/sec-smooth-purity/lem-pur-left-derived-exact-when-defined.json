@@ -150,5 +150,23 @@
   "group": "C1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-lde0132 (reviewer sub-agent of L); spot-checked: Both return points repaired: steps now follow 05SE proof via 05SA(2), 05SB(2), 05SU(2), 05SC, 05R6 (05R7 argument done inline in steps 2/5); abstract localization and 05R2 now defined in a node. Citers kflat-class (uses LF part exactness for D(A)=S^{-1}K(A)) and Kan bridge (does not cite item) consistent; no duplicates among same-tag nodes. FIX more, RETURN less: (1) C4 05SC node: dropped the added clause 'in particular the everywhere-defined LF is an exact functor' (not in 05SC; it is 05SE(2), the item's own content) and made the shift identification of LF(h) explicit; (2) C4 def-pur-saturated-triangulated-localization: saturation was mis-stated (MS4 labelled Ore/cancellation, 'closed under retracts', saturation via Q circularly); restated MS1-MS3 (04VB), MS4 (04VD), MS5-MS6 (05R2) from Stacks, the localization universal property, Situation 05S8 and Definition 05S9 (LF defined at X), stmt_dep def-pc-essentially-constant-pro-diagram added; (3) B8 05R6 leaf: distTriang_iff is at line 256 not 151; added [1]Q=Q[1], Q exact, uniqueness clauses from the 05R6 statement and named pretriangulated/isTriangulated_functor/isTriangulated (199/208/218) for clause 1; (4) B3 05SA/05SB/05SU/05SC: TeX, self-contained via the def node, 05SA comparison diagram and 05SB/05SU iff clauses stated as in Stacks; item steps 4-5 now state the triangle and the descent of the shift isomorphism. Second reading by C1 missed (1)-(3).; 7 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.LeftDerivedExactWhenDefined",
+  "declaration": "CategoryTheory.Functor.leftDerived_exact_when_defined",
+  "file": "lean/Sheaf/CategoryTheory/LeftDerivedExactWhenDefined.lean",
+  "statement": "theorem leftDerived_exact_when_defined (D : Type u) [Category.{v} D] [HasZeroObject D] [HasShift D ℤ] [Preadditive D] [∀ n : ℤ, (shiftFunctor D n).Additive] [Pretriangulated D] [CategoryTheory.IsTriangulated D] (D' : Type u') [Category.{v'} D'] [HasZeroObject D'] [HasShift D' ℤ] [Preadditive D'] [∀ n : ℤ, (shiftFunctor D' n).Additive] [Pretriangulated D'] [CategoryTheory.IsTriangulated D'] (L : Type u'') [Category.{v''} L] [HasZeroObject L] [HasShift L ℤ] [Preadditive L] [∀ n : ℤ, (shiftFunctor L n).Additive] [Pretriangulated L] [CategoryTheory.IsTriangulated L] (F : D ⥤ D') [F.CommShift ℤ] [F.IsTriangulated] (S : MorphismProperty D) (hS : S.IsSaturatedTriangulatedMultiplicativeSystem) (Q : D ⥤ L) [Q.CommShift ℤ] [Q.IsTriangulated] (hQ : Q.IsStrictLocalizationAt S) (LF : L ⥤ D') (α : Q ⋙ LF ⟶ F) (hLF : LF.IsRightKanExtension α) (hdefined : ∀ X : D, F.IsTriangulatedLeftDerivedDefinedAt S hS X) : ∃ (_ : LF.CommShift ℤ), LF.IsTriangulated",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-lde1035",
+  "group": "G1",
+  "result": "pass",
+  "note": "D,D' triangulated (IsTriangulated binders); F exact = CommShift+IsTriangulated (additivity by instance, checked); S = recorded IsSaturatedTriangulatedMultiplicativeSystem; Q strict localization (recorded IsStrictLocalizationAt, free target universes) with L triangulated and Q exact = the 05R6 induced triangulation (dist. classes coincide via TR3); LF via IsRightKanExtension alpha (Q⋙LF⟶F; matches Kan-bridge sibling, unique up to iso); hdefined = recorded IsTriangulatedLeftDerivedDefinedAt at every X; conclusion ∃ CommShift, IsTriangulated = exact"
  }
 }
