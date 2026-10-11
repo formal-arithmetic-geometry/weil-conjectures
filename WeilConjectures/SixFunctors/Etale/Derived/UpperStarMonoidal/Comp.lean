@@ -190,6 +190,80 @@ lemma leftDerivedUpperStarTensorComparison_comp_aux
   dsimp only [Functor.comp_map] at hc
   rw [reassoc_of% hc, Functor.map_comp]
 
+attribute [local instance] isLeftDerivedFunctor₂_derivedTensor_leftDerivedUpperStar
+  isLeftDerivedFunctor₂_leftDerivedUpperStar_derivedTensor
+
+/-- The composite `L(g₁ ≫ g₂)^*(K ⊗ᴸ M) ≅ Lg₁^*Lg₂^*(K ⊗ᴸ M) ⟶ Lg₁^*(Lg₂^*K ⊗ᴸ Lg₂^*M) ⟶
+Lg₁^*Lg₂^*K ⊗ᴸ Lg₁^*Lg₂^*M ≅ L(g₁ ≫ g₂)^*K ⊗ᴸ L(g₁ ≫ g₂)^*M` of the tensor comparisons of `Lg₂^*`
+and `Lg₁^*`, read through the composition isomorphism. It is the tensor comparison of
+`L(g₁ ≫ g₂)^*` (`leftDerivedUpperStarTensorComparison_eq_comp`). -/
+noncomputable def leftDerivedUpperStarTensorComparisonComp :
+    leftDerivedUpperStarDerivedTensor A g₁₂ ⟶ derivedTensorLeftDerivedUpperStar A g₁₂ :=
+  (Functor.postcompose₂.map (leftDerivedUpperStarComp A g₁ g₂ g₁₂ hg).hom).app (-⊗ᴸ-(R)[A]) ≫
+    (Functor.postcompose₂.obj L((g₁)^*[A])).map (leftDerivedUpperStarTensorComparison A g₂) ≫
+    (((Functor.whiskeringLeft₂ _).obj L((g₂)^*[A])).obj L((g₂)^*[A])).map
+      (leftDerivedUpperStarTensorComparison A g₁) ≫
+    (((Functor.whiskeringLeft₂ _).map (leftDerivedUpperStarComp A g₁ g₂ g₁₂ hg).inv).app
+      (L((g₂)^*[A]) ⋙ L((g₁)^*[A]))).app (-⊗ᴸ-(T)[A]) ≫
+    (((Functor.whiskeringLeft₂ _).obj L((g₁₂)^*[A])).map (leftDerivedUpperStarComp A g₁ g₂ g₁₂ hg).inv).app
+      (-⊗ᴸ-(T)[A])
+
+lemma leftDerivedUpperStarTensorComparisonComp_app_app
+    (K M : DerivedCategory (Sheaf R.smallEtaleTopology A)) :
+    ((leftDerivedUpperStarTensorComparisonComp A g₁ g₂ g₁₂ hg).app K).app M =
+      (leftDerivedUpperStarComp A g₁ g₂ g₁₂ hg).hom.app (K ⊗ M) ≫
+        L((g₁)^*[A]).map (((leftDerivedUpperStarTensorComparison A g₂).app K).app M) ≫
+        ((leftDerivedUpperStarTensorComparison A g₁).app _).app _ ≫
+        ((leftDerivedUpperStarComp A g₁ g₂ g₁₂ hg).inv.app K ⊗ₘ
+          (leftDerivedUpperStarComp A g₁ g₂ g₁₂ hg).inv.app M) := by
+  rw [tensorHom_def]
+  rfl
+
+/-- The tensor comparison of `L(g₁ ≫ g₂)^*` is that of `Lg₂^*` followed by that of `Lg₁^*`, read
+through the composition isomorphism. -/
+lemma leftDerivedUpperStarTensorComparison_eq_comp :
+    leftDerivedUpperStarTensorComparison A g₁₂ =
+      leftDerivedUpperStarTensorComparisonComp A g₁ g₂ g₁₂ hg := by
+  refine Functor.leftDerived₂_ext _ (derivedTensorLeftDerivedUpperStarCounit A g₁₂)
+    (HomotopyCategory.quasiIso _ (.up ℤ)) (HomotopyCategory.quasiIso _ (.up ℤ)) _ _ _ ?_
+  ext X Y
+  have e₁ : ((derivedTensorLeftDerivedUpperStarCounit A g₁₂).app X).app Y =
+      ((g₁₂)^*[A].leftDerivedFunctorCounit.app X ⊗ₘ (g₁₂)^*[A].leftDerivedFunctorCounit.app Y) ≫
+        μ Qh (((g₁₂)^*[A].mapHomotopyCategory (.up ℤ)).obj X)
+          (((g₁₂)^*[A].mapHomotopyCategory (.up ℤ)).obj Y) := by
+    rw [tensorHom_def]
+    dsimp [derivedTensorLeftDerivedUpperStarCounit, derivedTensor]
+    rw [Category.assoc]
+    rfl
+  have := leftDerivedUpperStarTensorComparison_comp_aux A g₁ g₂ g₁₂ hg X Y
+  rw [← leftDerivedUpperStarTensorComparisonComp_app_app] at this
+  simp only [NatTrans.comp_app, Functor.whiskeringLeft₂_map_app_app_app_app]
+  rw [e₁]
+  exact this
+
+/-- **The composition isomorphism `L(g₁ ≫ g₂)^* ≅ Lg₂^* ⋙ Lg₁^*` is monoidal**: it commutes with
+the tensor comparisons,
+```
+  L(g₁ ≫ g₂)^*(K ⊗ᴸ M) ──────────────────▶ L(g₁ ≫ g₂)^*K ⊗ᴸ L(g₁ ≫ g₂)^*M
+          │                                           │
+          ▼                                           ▼
+  Lg₁^*Lg₂^*(K ⊗ᴸ M) ──▶ Lg₁^*(Lg₂^*K ⊗ᴸ Lg₂^*M) ──▶ Lg₁^*Lg₂^*K ⊗ᴸ Lg₁^*Lg₂^*M
+```
+-/
+@[reassoc]
+lemma leftDerivedUpperStarTensorComparison_comp
+    (K M : DerivedCategory (Sheaf R.smallEtaleTopology A)) :
+    ((leftDerivedUpperStarTensorComparison A g₁₂).app K).app M ≫
+        ((leftDerivedUpperStarComp A g₁ g₂ g₁₂ hg).hom.app K ⊗ₘ
+          (leftDerivedUpperStarComp A g₁ g₂ g₁₂ hg).hom.app M) =
+      (leftDerivedUpperStarComp A g₁ g₂ g₁₂ hg).hom.app (K ⊗ M) ≫
+        L((g₁)^*[A]).map (((leftDerivedUpperStarTensorComparison A g₂).app K).app M) ≫
+        ((leftDerivedUpperStarTensorComparison A g₁).app _).app _ := by
+  rw [leftDerivedUpperStarTensorComparison_eq_comp A g₁ g₂ g₁₂ hg,
+    leftDerivedUpperStarTensorComparisonComp_app_app]
+  simp only [Category.assoc, tensorHom_comp_tensorHom, Iso.inv_hom_id_app]
+  erw [id_tensorHom_id, Category.comp_id]
+
 end Etale
 
 end AlgebraicGeometry
