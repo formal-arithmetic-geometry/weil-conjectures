@@ -178,5 +178,23 @@
   "by": "L",
   "result": "pass",
   "note": "generalized to Lambda-module sheaves as Stacks 0730, as the reviewed users need"
+ },
+ "lean": {
+  "module": "WeilConjectures.SixFunctors.BaseChange.DerivedPasting",
+  "declaration": "AlgebraicGeometry.Etale.preservesInjectiveObjects_lowerStar",
+  "statement": "instance Etale.preservesInjectiveObjects_lowerStar : ((f)_*[A]).PreservesInjectiveObjects",
+  "branch": "slopmaster2",
+  "by": "C1",
+  "date": "2026-10-11",
+  "existing": true,
+  "note": "Existing upstream instance at line 96. Specialize A to ModuleCat.{u + 1} Λ for the constant-coefficient module clause and to AddCommGrpCat.{u + 1} for the abelian clause. Module-valued sheaves are equivalently modules over the constant ring sheaf: the constant scalar action extends uniquely to locally constant scalars by sheaf gluing. lowerStar is exactly precomposition with étale base change. All coefficient-category assumptions are instances, not geometric hypotheses."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-dpi0948",
+  "group": "C1",
+  "result": "pass",
+  "note": "u:U->V arbitrary = {X Y : Scheme.{u}} (f : X ⟶ Y), no property; Mod(T_et,Λ) = Sheaf T.smallEtaleTopology (ModuleCat.{u+1} Λ) (STATE two-encodings line, six-functor area); u_* = recorded Etale.lowerStar; proof = Mathlib preservesInjectiveObjects_of_adjunction_of_preservesMonomorphisms on recorded upperStarLowerStarAdjunction; Ab clause = A := AddCommGrpCat.{u+1}; both specializations #check'd by inferInstance"
  }
 }
