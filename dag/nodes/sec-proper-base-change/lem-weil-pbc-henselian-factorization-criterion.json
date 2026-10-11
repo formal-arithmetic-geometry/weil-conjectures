@@ -186,5 +186,24 @@
   "by": "L",
   "result": "accepted",
   "note": "Six steps along Stacks 09XI: the DAG′s definition is condition (3) (idempotents of finite algebras lift uniquely), Stacks′ 09XE is (1); the statement restated as (3) ⇔ (1) with the old form kept as the in-particular clause (the users lem-weil-pbc-complete-pair-henselian step 4 and lem-weil-pbc-henselian-factorization-locally-nilpotent step 3 remain valid). (3)⇒(1)(i) by the CRT argument, (3)⇒(1)(ii) via B = A[T]/(f) (reviewed leaf lem-weil-pbc-monic-quotient-free) and the new unsplit node lem-weil-pbc-idempotent-splitting-monic-factorization (Stacks′ \"details omitted\": characteristic polynomials on eB, (1−e)B), (1)⇒(5) written out including A/I = 0, (5)⇒(2) as the new unsplit node lem-weil-pbc-gabber-root-criterion-etale-section-lifting (0EM0, 0ELZ, 09XH, 00U7/00U8), (2)⇒(3) by the reviewed lem-weil-pbc-etale-section-lifting-henselian-pair. Checked. review_split′s lean_audit complaint comes from the lead′s lean_status runs."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.HenselianFactorizationCriterion",
+  "declaration": "henselianRing_iff_factorization_criterion",
+  "file": "lean/Sheaf/RingTheory/HenselianFactorizationCriterion.lean",
+  "statement": "theorem henselianRing_iff_factorization_criterion (A : Type u) [CommRing A] (I : Ideal A) : (HenselianRing A I ↔ (I ≤ Ideal.jacobson (⊥ : Ideal A) ∧ ∀ (f : A[X]), f.Monic → ∀ (g₀ h₀ : (A ⧸ I)[X]), g₀.Monic → h₀.Monic → IsCoprime g₀ h₀ → f.map (Ideal.Quotient.mk I) = g₀ * h₀ → ∃ g h : A[X], g.Monic ∧ h.Monic ∧ f = g * h ∧ g.map (Ideal.Quotient.mk I) = g₀ ∧ h.map (Ideal.Quotient.mk I) = h₀)) ∧ (I ≤ Ideal.jacobson (⊥ : Ideal A) → (HenselianRing A I ↔ ∀ (f : A[X]), f.Monic → ∀ (g₀ h₀ : (A ⧸ I)[X]), g₀.Monic → h₀.Monic → IsCoprime g₀ h₀ → f.map (Ideal.Quotient.mk I) = g₀ * h₀ → ∃ g h : A[X], g.Monic ∧ h.Monic ∧ f = g * h ∧ g.map (Ideal.Quotient.mk I) = g₀ ∧ h.map (Ideal.Quotient.mk I) = h₀))",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-hfc1101"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-hfc1101",
+  "group": "G1",
+  "result": "fix",
+  "note": "A, I arbitrary; henselian = recorded HenselianRing A I; (i) I ≤ jacobson ⊥; (ii) monic f, monic g₀ h₀, IsCoprime, f.map mk I = g₀*h₀ → ∃ monic g h, f = g*h, reductions g₀ h₀ (∃, no uniqueness as 09XE); iff bracketed; particular case as conjunct; reverted the delivery's change of existing node(s) def-weil-pbc-henselian-terminology (--revert-nodes; kept as on sheaf-dag); left out new module(s) lean/Sheaf/RingTheory/HenselianPair.lean (--drop-files, or a record fixed to existing: true)"
  }
 }
