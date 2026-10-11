@@ -64,4 +64,17 @@ lemma ShortExact.pullback (hS : S.ShortExact) : (S.pullback φ).ShortExact := by
     · simp only [ShortComplex.pullback, Category.assoc, Limits.pullback.lift_snd, comp_zero]
       exact ht
 
+variable (S) in
+/-- For `ψ : Y' ⟶ Y` and `φ : Y ⟶ X₃`, the morphism from the pullback of a short complex along
+`ψ ≫ φ` to its pullback along `φ`, which is the identity on `X₁`. -/
+@[simps]
+noncomputable def pullbackMap {Y' : C} (ψ : Y' ⟶ Y) : S.pullback (ψ ≫ φ) ⟶ S.pullback φ where
+  τ₁ := 𝟙 _
+  τ₂ := Limits.pullback.lift (Limits.pullback.fst _ _) (Limits.pullback.snd _ _ ≫ ψ)
+    (by rw [Limits.pullback.condition, Category.assoc])
+  τ₃ := ψ
+  comm₁₂ := by
+    apply Limits.pullback.hom_ext <;> simp [ShortComplex.pullback]
+  comm₂₃ := by simp [ShortComplex.pullback]
+
 end CategoryTheory.ShortComplex
