@@ -4842,3 +4842,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 13:59 L: merged deliver/J1/lem-weil-pbc-regular-local-generators-regular-sequence (stage 2; reviewer FIX; first push; Sheaf.RingTheory.RegularLocalGeneratorsRegularSequence IsRegularLocalRing.isRegular_and_quotients_of_generators)
 - 13:59 L: merged deliver/K1/lem-weil-pbc-regular-local-localization (stage 2; reviewer PASS; first push; Sheaf.RingTheory.RegularLocalLocalization IsRegularLocalRing.localization_at_prime_and_isRegularRing)
 - 13:59 L: merged deliver/C1/lem-weil-pbc-regular-ring-normal (stage 2; reviewer PASS; first push; Sheaf.RingTheory.RegularRingNormal IsRegularRing.isNormalRing)
+- 14:00 L: merged deliver/C1/lem-weil-pbc-quasi-coherent-symmetric-algebra (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.QuasiCoherentSymmetricAlgebra AlgebraicGeometry.exists_quasiCoherentSymmetricAlgebra)

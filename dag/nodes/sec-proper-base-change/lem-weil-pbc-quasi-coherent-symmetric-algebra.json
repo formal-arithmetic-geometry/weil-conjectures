@@ -214,5 +214,23 @@
   "item": "lem-weil-pbc-quasi-coherent-symmetric-algebra",
   "worker": "stage1",
   "summary": "Split by one level, following Stacks Modules 01CF/01CG (Sym(F) defined as the sheafification, as a presheaf of commutative rings, of U -> Sym_{O(U)}(F(U)), as the proof of 01CG suggests), 01CH/01CL and Schemes 01I8; Stacks omits all proofs and does not state the universal property, so the steps are agent-written. Steps: (1) the presheaf P (restrictions from the universal property of Sym, new Mathlib leaf lem-weil-pbc-symmetric-algebra-universal-property: SymmetricAlgebra.lift/algHom_ext); (2) Sym(F) = P^# via the reviewed ring-sheafification leaf, j = theta o iota, theta_U is the algebra map extending j_U; (3) universal property (a) and functoriality from the sectionwise universal property and that of sheafification; (4)-(6) on an affine U = Spec R: the tilde adjunction gives alpha: (Sym_R F(U))~ -> Sym(F)|_U with alpha_U tau_U = theta_U; on affine V in U both sides have sections R_V (x)_R Sym_R(M) before sheafification (reviewed lem-weil-pbc-quasi-coherent-affine-section-base-change for F and for the tilde, plus the new unsplit node lem-weil-pbc-symmetric-algebra-base-change, Stacks Algebra 0C6F in base-change form), and a germ argument with the reviewed stalk-of-sheafification and iso-on-stalks leaves shows alpha is an isomorphism; (7) quasi-coherence and (b). Statement unchanged; stmt_deps gained the Sym leaf. Mathlib: no sheaf-level Sym (confirmed by LeanSearch, LeanFinder and grep)."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.QuasiCoherentSymmetricAlgebra",
+  "declaration": "AlgebraicGeometry.exists_quasiCoherentSymmetricAlgebra",
+  "file": "lean/Sheaf/AlgebraicGeometry/QuasiCoherentSymmetricAlgebra.lean",
+  "statement": "theorem exists_quasiCoherentSymmetricAlgebra (X : Scheme.{u}) (F : X.Modules) [F.IsQuasicoherent] : ∃ (S : X.CommAlgebraSheaf) (j : F ⟶ S.toModule), S.toModule.IsQuasicoherent ∧ (∀ (B : X.CommAlgebraSheaf) (f : F ⟶ B.toModule), ∃! t : S ⟶ B, ∀ (U : X.Opens) (x : F.val.obj (op U)), (t.right.hom.app (op U)) (j.val.app (op U) x) = f.val.app (op U) x) ∧ (∀ (U : X.affineOpens), ∃ e : SymmetricAlgebra (X.presheaf.obj (op U.1)) (F.val.obj (op U.1)) ≃+* S.right.obj.obj (op U.1), (∀ r : X.presheaf.obj (op U.1), e (algebraMap (X.presheaf.obj (op U.1)) (SymmetricAlgebra (X.presheaf.obj (op U.1)) (F.val.obj (op U.1))) r) = S.hom.hom.app (op U.1) r) ∧ (∀ x : F.val.obj (op U.1), e (SymmetricAlgebra.ι (X.presheaf.obj (op U.1)) (F.val.obj (op U.1)) x) = j.val.app (op U.1) x))",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-qsa",
+  "group": "C1",
+  "result": "pass",
+  "note": "X scheme, F X.Modules [IsQuasicoherent]; S : X.CommAlgebraSheaf with toModule quasi-coherent (STATE QC O_X-ALGEBRAS); j O_X-linear; (a) forall B, f: exists! t : S ⟶ B with t∘j = f sectionwise; (b) every affine U: ring equiv Sym_{O(U)}(F(U)) ≃ S(U) commuting with algebraMap and ι (= canonical lift); no existing sheaf Sym in lean/ or upstream"
  }
 }
