@@ -29,7 +29,8 @@
   "def-weil-sheaf-of-modules-category",
   "pqf-def-coherent",
   "def-pc-module-pullback",
-  "def-pur-sheaf-tensor-product"
+  "def-pur-sheaf-tensor-product",
+  "lem-pc-module-pullback-adjunction"
  ],
  "proof": [
   {
@@ -252,5 +253,24 @@
   "worker": "stage1",
   "summary": "Read Morphisms 01SB and its proof, and 0H88 which its final clause cites. Statement corrected in wording: the sentence defining finite type over a sheaf of algebras was dropped (finite type is the sibling lem-weil-pbc-affine-module-finite-type; that node keeps its own definition), and the statement now defines A-modules, quasi-coherence as an A-module (local presentation by direct sums of A), the A-module structure of u_*F, the algebra u^*A, the u^*A-module structure of u^*G and the algebra map u^*A -> O_U along which h is the change of rings, and names the two natural maps; content unchanged (Stacks' equivalence, quasi-inverse h, and the 0H88 clause). stmt_deps: added def-weil-sheaf-of-modules-category and def-pur-sheaf-tensor-product. Proof in 8 steps following Stacks: (1) the 0H88 clause from the new node lem-weil-pbc-quasi-coherence-scalar-restriction and quasi-coherence of u_*O_U; (2) u_* lands in quasi-coherent A-modules (affine pushforward is quasi-coherent); (3) construction of h, its quasi-coherence and affine sections by the new node lem-weil-pbc-quasi-coherent-algebra-change-of-rings, and the maps alpha, beta; (4) sections over u^{-1}(V) via lem-weil-pbc-module-pullback-affine-sections; (5) the algebra identity (N tensor_R B) tensor_{B tensor_R B} B = N, which Stacks omits, written out; (6), (7) alpha and beta are isomorphisms by the new node lem-weil-pbc-quasi-coherent-iso-on-affine-cover, beta A-linear; (8) equivalence. Not a Mathlib leaf (searched with LeanSearch, LeanFinder, Loogle, grep)."
  },
- "reviewed": "pass (L, 2026-10-10): 8 steps follow 01SB: quasi-coherence over A equals quasi-coherence over O_X (new unsplit node 0H88), u_* lands in quasi-coherent A-modules, the quasi-inverse h(G) = u^*G tensor_{u^*A} O_U with its affine sections (new unsplit change-of-rings node), the algebra identity (N tensor_R B) tensor_{B tensor B} B = N written out, and both natural maps are isomorphisms checked on an affine cover (new unsplit node). Statement rewritten to define A-modules and quasi-coherence over A precisely."
+ "reviewed": "pass (L, 2026-10-10): 8 steps follow 01SB: quasi-coherence over A equals quasi-coherence over O_X (new unsplit node 0H88), u_* lands in quasi-coherent A-modules, the quasi-inverse h(G) = u^*G tensor_{u^*A} O_U with its affine sections (new unsplit change-of-rings node), the algebra identity (N tensor_R B) tensor_{B tensor B} B = N written out, and both natural maps are isomorphisms checked on an affine cover (new unsplit node). Statement rewritten to define A-modules and quasi-coherence over A precisely.",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AffineModuleCorrespondence",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.affine_module_correspondence",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineModuleCorrespondence.lean",
+  "statement": "theorem affine_module_correspondence [IsAffineHom f] : (∀ G : SheafOfModules.{u} (𝓡 A), G.IsQuasicoherent ↔ ((S).obj G).IsQuasicoherent) ∧ (∀ F : U.Modules, F.IsQuasicoherent → ((R).obj F).IsQuasicoherent) ∧ ∃ (B : U.toTopCat.Sheaf CommRingCat.{u}) (b : U.sheaf ⟶ B) (t : IA ⟶ B) (ε : B ⟶ U.sheaf), IsPushout r₀ t₀ b t ∧ b ≫ ε = 𝟙 U.sheaf ∧ t ≫ ε = e₀ ∧ ∃ (P : SheafOfModules.{u} (𝓡 A) ⥤ SheafOfModules.{u} (𝓡 B)) (pobj : ∀ G, P.obj G = SheafOfModules.changeOfRings.{u, u, u} t (I G)) (κ : P ⋙ SheafOfModules.restrictScalars (𝓻 b) ≅ S ⋙ tensorPullback f), (∀ (G G' : SheafOfModules.{u} (𝓡 A)) (a : G ⟶ G'), P.map a = eqToHom (pobj G) ≫ SheafOfModules.changeOfRingsHom.{u, u, u} t (I G) (TopCat.Sheaf.inverseImageModuleMap f.base A G a) ≫ eqToHom (pobj G').symm) ∧ (∀ (G : SheafOfModules.{u} (𝓡 A)) (V : (Opens X)ᵒᵖ) (g : G.val.obj V), ((eqToHom (pobj G)).val.app ((Opens.map f.base).op.obj V)) ((κ.inv.app G).val.app ((Opens.map f.base).op.obj V) (((adj₀).unit.app ((S).obj G)).val.app V g)) = ((PresheafOfModules.sheafificationAdjunction (𝟙 (𝓡 B).obj)).unit.app (SheafOfModules.changeOfRingsPresheaf.{u, u, u} t (I G))).app ((Opens.map f.base).op.obj V) ((1 : B.obj.obj ((Opens.map f.base).op.obj V)) ⊗ₜ[ (IA).obj.obj ((Opens.map f.base).op.obj V), (t.hom.app ((Opens.map f.base).op.obj V)).hom] (((Functor.sheafPullbackConstruction.sheafAdjunctionContinuous (Opens.map f.base) AddCommGrpCat.{u} (𝓙 X) (𝓙 U)).unit.app ((SheafOfModules.toSheaf (𝓡 A)).obj G)).hom.app V g))) ∧ ∃ (H : SheafOfModules.{u} (𝓡 A) ⥤ U.Modules) (hobj : ∀ G, H.obj G = SheafOfModules.changeOfRings.{u, u, u} ε (P.obj G)) (γ : S ⋙ tensorPullback f ⟶ H), (∀ (G G' : SheafOfModules.{u} (𝓡 A)) (a : G ⟶ G'), H.map a = eqToHom (hobj G) ≫ SheafOfModules.changeOfRingsHom.{u, u, u} ε (P.obj G) (P.map a) ≫ eqToHom (hobj G').symm) ∧ (∀ (G : SheafOfModules.{u} (𝓡 A)) (W : (Opens U)ᵒᵖ) (p : (P.obj G).val.obj W), ((eqToHom (hobj G)).val.app W) ((γ.app G).val.app W ((κ.hom.app G).val.app W p)) = ((PresheafOfModules.sheafificationAdjunction (𝟙 U.ringCatSheaf.obj)).unit.app (SheafOfModules.changeOfRingsPresheaf.{u, u, u} ε (P.obj G))).app W ((1 : U.sheaf.obj.obj W) ⊗ₜ[B.obj.obj W, (ε.hom.app W).hom] p)) ∧ (∀ G : SheafOfModules.{u} (𝓡 A), G.IsQuasicoherent → (H.obj G).IsQuasicoherent) ∧ ∃ (α : R ⋙ H ⟶ 𝟭 U.Modules) (β : 𝟭 (SheafOfModules.{u} (𝓡 A)) ⟶ H ⋙ R), (∀ F : U.Modules, γ.app ((R).obj F) ≫ α.app F = (adj₀).counit.app F) ∧ (∀ G : SheafOfModules.{u} (𝓡 A), (S).map (β.app G) = ((adj₀).homEquiv ((S).obj G) (H.obj G)) (γ.app G)) ∧ (∀ F : U.Modules, F.IsQuasicoherent → IsIso (α.app F)) ∧ (∀ G : SheafOfModules.{u} (𝓡 A), G.IsQuasicoherent → IsIso (β.app G)) ∧ ∃ E : (qU).FullSubcategory ≌ (qA).FullSubcategory, Nonempty (E.functor ⋙ (qA).ι ≅ (qU).ι ⋙ R) ∧ Nonempty (E.inverse ⋙ (qU).ι ≅ (qA).ι ⋙ H)",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-11",
+  "existing": false,
+  "note": "The pulled-back commutative algebra is specified by IsPushout (the tensor-product universal property). P is the sheafified extension of scalars from the inverse-image algebra; its canonical underlying-module comparison κ is pinned on pullback units. H is the second change of rings. Equations pin α and β to the recorded tensor-pullback adjunction. Local notation only abbreviates existing operations; there are no new definitions."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-amc1224",
+  "group": "K1",
+  "result": "pass",
+  "note": "IsAffineHom f sole hyp; A=f_*O_U CommRingCat pushforward, S=restrictScalars f^#, R=pushforward id; (1) iff qc over A vs O_X; (2) R preserves qc + E between qc full subcats with E.functor≅R; (3) B pinned by IsPushout r0 t0 (r0≫id=t0≫e0 consistent), ε by b≫ε=1,t≫ε=e0; P,H pinned by obj/map eqs; κ,γ pinned on generating sections; α pinned (γ epi), β pinned (S faithful); IsIso α/β on qc; E.inverse≅H; all universes u; stmt_dep added landed"
+ }
 }
