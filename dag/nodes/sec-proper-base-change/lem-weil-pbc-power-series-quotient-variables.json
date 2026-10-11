@@ -201,5 +201,23 @@
   "worker": "stage1",
   "summary": "Statement kept (checked against its use in lem-weil-pbc-power-series-field-cohen-regular-complete steps 3, 4, 7: F -> F(0) a ring map with kernel (X_1..X_d), R/(X_1..X_i) = A[[X_{i+1}..X_d]] via pi_i, pi_i(X_{i+1}) = X_{i+1}). Proof written by an agent from def-weil-pbc-multivariate-power-series (families N^d -> A, coefficientwise sum, Cauchy product with finite inner sums), six elementary steps: (1) R_i is a subring, since E+E' lies in S={e_1=..=e_i=0} iff E and E' do; (2) pi_i is A-linear, unital and multiplicative by the same remark; (3) identity on R_i, hence surjective; (4) (X_1..X_i) in ker since pi_i(X_j)=0; (5) ker in (X_1..X_i): F = sum_j X_j G_j by grouping exponents by the least j <= i with e_j >= 1, G_j the shifted coefficients, checked with the product formula; (6) first isomorphism theorem and the case i=d. No new nodes. Mathlib re-searched three ways (leansearch, loogle, leanfinder, grep, local_search): killCompl gives the map, identity on the subring and X_j -> 0, but no kernel statement exists (not even ker constantCoeff in several variables); candidate kept with lines 241, 269, 276, 280."
  },
- "reviewed": "Reviewed by L 2026-10-10: proof by agent from the definition of the power series ring (coefficientwise product); the kernel computation groups exponents by the least index with a positive entry (step 5, checked). No new nodes; Mathlib candidate kept (killCompl gives all but the kernel clause, B8)."
+ "reviewed": "Reviewed by L 2026-10-10: proof by agent from the definition of the power series ring (coefficientwise product); the kernel computation groups exponents by the least index with a positive entry (step 5, checked). No new nodes; Mathlib candidate kept (killCompl gives all but the kernel clause, B8).",
+ "lean": {
+  "module": "Sheaf.RingTheory.PowerSeriesQuotientVariables",
+  "declaration": "MvPowerSeries.quotient_first_variables",
+  "file": "lean/Sheaf/RingTheory/PowerSeriesQuotientVariables.lean",
+  "statement": "theorem quotient_first_variables (A : Type u) [CommRing A] (d i : ℕ) (_hi : i ≤ d) : Function.Surjective (killCompl (R := A) (Function.Embedding.subtype (fun j : Fin d ↦ i ≤ j.val))) ∧ (∀ f : MvPowerSeries {j : Fin d // i ≤ j.val} A, killCompl (Function.Embedding.subtype (fun j : Fin d ↦ i ≤ j.val)) (rename (Function.Embedding.subtype (fun j : Fin d ↦ i ≤ j.val)) f) = f) ∧ RingHom.ker (killCompl (R := A) (Function.Embedding.subtype (fun j : Fin d ↦ i ≤ j.val))).toRingHom = Ideal.span {x : MvPowerSeries (Fin d) A | ∃ j : Fin d, j.val < i ∧ x = X j} ∧ Function.Surjective (constantCoeff : MvPowerSeries (Fin d) A →+* A) ∧ RingHom.ker (constantCoeff : MvPowerSeries (Fin d) A →+* A) = Ideal.span (Set.range (X : Fin d → MvPowerSeries (Fin d) A)) ∧ ∃ e : (MvPowerSeries (Fin d) A ⧸ Ideal.span {x : MvPowerSeries (Fin d) A | ∃ j : Fin d, j.val < i ∧ x = X j}) ≃ₐ[A] MvPowerSeries {j : Fin d // i ≤ j.val} A, ∀ f : MvPowerSeries (Fin d) A, e (Ideal.Quotient.mk _ f) = killCompl (Function.Embedding.subtype (fun j : Fin d ↦ i ≤ j.val)) f",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-pqv1320",
+  "group": "F1",
+  "result": "pass",
+  "note": "A:Type u CommRing (no extra instances), d i:ℕ, i≤d; R=MvPowerSeries (Fin d) A; R_i=MvPowerSeries {j // i≤j} A included by rename of the subtype embedding; pi_i=Mathlib killCompl (AlgHom, coeff at embDomain = node's coefficient formula, read Rename.lean 211-250); surjective; killCompl∘rename=id; ker=span{X j | j<i}; constantCoeff surjective, ker=span(range X); quotient ≃ₐ[A] R_i tied to killCompl on every mk f; #check namespaces resolved to MvPowerSeries.X/constantCoeff; no let, no hollow hyp, single universe fine"
+ }
 }
