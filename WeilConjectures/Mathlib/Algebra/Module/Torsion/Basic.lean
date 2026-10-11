@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import Mathlib.Algebra.Exact.Basic
 public import Mathlib.Algebra.Field.ZMod
 public import Mathlib.Data.Nat.Factorization.Induction
 public import Mathlib.Data.ZMod.Basic
@@ -12,6 +13,7 @@ public import Mathlib.Algebra.Module.Torsion.Basic
 public import Mathlib.FieldTheory.Finiteness
 public import Mathlib.GroupTheory.Divisible
 public import Mathlib.GroupTheory.FiniteAbelian.Basic
+public import Mathlib.GroupTheory.Index
 public import Mathlib.LinearAlgebra.Dimension.Free
 public import Mathlib.LinearAlgebra.Finsupp.LinearCombination
 
@@ -527,3 +529,187 @@ theorem AddMonoidHom.finite_quotient_range_zsmul_of_ker_le {A F : Type*} [AddCom
   refine ⟨c + b, ?_⟩
   simp only [zsmulAddGroupHom_apply] at hc ⊢
   rw [smul_add, hc, sub_add_cancel]
+
+namespace AddSubgroup
+
+section HerbrandQuotient
+
+variable {Y : Type*} [AddCommGroup Y]
+
+/-- `|X / nX|` is the relative index of `nX` in `X`. -/
+theorem natCard_quotient_range_zsmul_eq_relIndex (X : AddSubgroup Y) (n : ℤ) :
+    Nat.card (X ⧸ (zsmulAddGroupHom (α := X) n).range) =
+      (X.map (zsmulAddGroupHom (α := Y) n)).relIndex X := by
+  rw [relIndex, index_eq_card]
+  congr 3
+  ext ⟨x, hx⟩
+  simp only [mem_addSubgroupOf, mem_map, zsmulAddGroupHom_apply, AddMonoidHom.mem_range]
+  constructor
+  · rintro ⟨y, hy⟩
+    exact ⟨y.1, y.2, congrArg Subtype.val hy⟩
+  · rintro ⟨y, hy, rfl⟩
+    exact ⟨⟨y, hy⟩, rfl⟩
+
+/-- **Multiplicativity of the Herbrand-type quotient of multiplication by `n`.** For a subgroup
+`X` of an abelian group `Y` with quotient `Z = Y ⧸ X` and `n : ℤ`,
+`|X / nX| · |Z / nZ| · |Y[n]| = |Y / nY| · |X[n]| · |Z[n]|` (as natural numbers, with the
+convention that infinite cardinals are `0`). This is the snake lemma for multiplication by `n` on
+`0 → X → Y → Z → 0`. -/
+theorem natCard_quotient_range_zsmul_mul_eq (X : AddSubgroup Y) (n : ℤ) :
+    Nat.card (X ⧸ (zsmulAddGroupHom (α := X) n).range) *
+        Nat.card ((Y ⧸ X) ⧸ (zsmulAddGroupHom (α := Y ⧸ X) n).range) *
+        Nat.card (torsionBy Y n) =
+      Nat.card (Y ⧸ (zsmulAddGroupHom (α := Y) n).range) * Nat.card (torsionBy X n) *
+        Nat.card (torsionBy (Y ⧸ X) n) := by
+  set φ := zsmulAddGroupHom (α := Y) n
+  set T := φ.ker
+  set Xn := X.comap φ
+  have hT : torsionBy Y n = T := by
+    ext y
+    simp [T, φ, Submodule.mem_torsionBy_iff]
+  -- `|Z / nZ| = [Y : nY + X]`
+  have hB : Nat.card ((Y ⧸ X) ⧸ (zsmulAddGroupHom (α := Y ⧸ X) n).range) =
+      (φ.range ⊔ X).index := by
+    rw [← index_eq_card, ← index_comap_of_surjective _ (QuotientAddGroup.mk'_surjective X)]
+    congr 1
+    ext y
+    simp only [mem_comap, AddMonoidHom.mem_range, zsmulAddGroupHom_apply,
+      QuotientAddGroup.mk'_apply, mem_sup]
+    constructor
+    · rintro ⟨z, hz⟩
+      induction z using QuotientAddGroup.induction_on with
+      | H z =>
+      rw [← QuotientAddGroup.mk_zsmul, QuotientAddGroup.eq] at hz
+      exact ⟨n • z, ⟨z, rfl⟩, -(n • z) + y, hz, by abel⟩
+    · rintro ⟨_, ⟨z, rfl⟩, x, hx, rfl⟩
+      refine ⟨z, ?_⟩
+      rw [← QuotientAddGroup.mk_zsmul, QuotientAddGroup.eq]
+      simpa [φ] using hx
+  -- `|Z[n]| = [n⁻¹X : X]`
+  have hZ : Nat.card (torsionBy (Y ⧸ X) n) = X.relIndex Xn := by
+    let ψ : Xn →+ torsionBy (Y ⧸ X) n :=
+      { toFun y := ⟨y.1, by
+          change n • (y.1 : Y ⧸ X) = 0
+          rw [← QuotientAddGroup.mk_zsmul, QuotientAddGroup.eq_zero_iff]
+          exact y.2⟩
+        map_zero' := rfl
+        map_add' _ _ := rfl }
+    have hψ : Function.Surjective ψ := by
+      rintro ⟨z, hz⟩
+      induction z using QuotientAddGroup.induction_on with
+      | H z =>
+      refine ⟨⟨z, ?_⟩, rfl⟩
+      change n • (z : Y ⧸ X) = 0 at hz
+      rwa [← QuotientAddGroup.mk_zsmul, QuotientAddGroup.eq_zero_iff] at hz
+    have hker : ψ.ker = X.addSubgroupOf Xn := by
+      ext y
+      simp [ψ, mem_addSubgroupOf]
+    rw [relIndex, index_eq_card, ← hker]
+    exact (Nat.card_congr (QuotientAddGroup.quotientKerEquivOfSurjective ψ hψ).toEquiv).symm
+  -- `|Y[n]| = [Y[n] : X[n]] · |X[n]|`
+  have hX : Nat.card (torsionBy X n) = Nat.card (X.addSubgroupOf T) := by
+    refine Nat.card_congr
+      { toFun y := ⟨⟨y.1.1, congrArg Subtype.val (show n • y.1 = 0 from y.2)⟩, y.1.2⟩
+        invFun y := ⟨⟨y.1.1, y.2⟩, Subtype.ext (show n • y.1.1 = 0 from y.1.2)⟩
+        left_inv _ := rfl
+        right_inv _ := rfl }
+  have hY : Nat.card (torsionBy Y n) = X.relIndex T * Nat.card (torsionBy X n) := by
+    rw [hT, hX, relIndex, mul_comm, card_mul_index]
+  rw [natCard_quotient_range_zsmul_eq_relIndex, hB, hZ, hY, ← index_eq_card]
+  -- index computations inside `Y`
+  have h1 : φ.range.index = φ.range.relIndex X * (φ.range ⊔ X).index := by
+    rw [← relIndex_sup_left, relIndex_mul_index le_sup_left]
+  have h2 : (X.map φ).relIndex X = (X ⊔ T).relIndex Xn * φ.range.relIndex X := by
+    have hle : X.map φ ≤ φ.range ⊓ X := le_inf (map_le_range φ X) fun _ ⟨y, hy, e⟩ ↦
+      e ▸ X.zsmul_mem hy n
+    rw [← relIndex_mul_relIndex _ _ _ hle inf_le_right, inf_relIndex_right, ← comap_map_eq,
+      relIndex_comap, map_comap_eq]
+  have h3 : X.relIndex Xn = X.relIndex T * (X ⊔ T).relIndex Xn := by
+    have hXT : X ⊔ T ≤ Xn := sup_le (fun y hy ↦ X.zsmul_mem hy n) fun y hy ↦ by
+      change n • y ∈ X
+      rw [show n • y = 0 from hy]
+      exact X.zero_mem
+    rw [← relIndex_sup_left T X, relIndex_mul_relIndex _ _ _ le_sup_left hXT]
+  rw [h1, h2, h3]
+  ring
+
+
+/-- If the kernel of `D : A →+ B` consists of multiples of `n`, then `A / nA ≅ D(A) / n D(A)`. -/
+theorem natCard_quotient_range_zsmul_eq_of_ker_le {A B : Type*} [AddCommGroup A]
+    [AddCommGroup B] (D : A →+ B) (n : ℤ) (hker : D.ker ≤ (zsmulAddGroupHom (α := A) n).range) :
+    Nat.card (A ⧸ (zsmulAddGroupHom (α := A) n).range) =
+      Nat.card (D.range ⧸ (zsmulAddGroupHom (α := D.range) n).range) := by
+  let φ : A →+ D.range ⧸ (zsmulAddGroupHom (α := D.range) n).range :=
+    (QuotientAddGroup.mk' _).comp D.rangeRestrict
+  have hφ : Function.Surjective φ :=
+    (QuotientAddGroup.mk'_surjective _).comp D.rangeRestrict_surjective
+  have hker' : φ.ker = (zsmulAddGroupHom (α := A) n).range := by
+    ext a
+    simp only [φ, AddMonoidHom.mem_ker, AddMonoidHom.comp_apply, QuotientAddGroup.mk'_apply,
+      QuotientAddGroup.eq_zero_iff, AddMonoidHom.mem_range, zsmulAddGroupHom_apply]
+    constructor
+    · rintro ⟨⟨_, b, rfl⟩, hb⟩
+      have hb' : D (n • b) = D a := by
+        rw [map_zsmul]
+        exact congrArg Subtype.val hb
+      obtain ⟨c, hc⟩ := hker (show a - n • b ∈ D.ker by
+        rw [AddMonoidHom.mem_ker, map_sub, hb', sub_self])
+      refine ⟨c + b, ?_⟩
+      simp only [zsmulAddGroupHom_apply] at hc
+      rw [smul_add, hc, sub_add_cancel]
+    · rintro ⟨b, rfl⟩
+      exact ⟨D.rangeRestrict b, by simp⟩
+  rw [← hker']
+  exact Nat.card_congr (QuotientAddGroup.quotientKerEquivOfSurjective φ hφ).toEquiv
+
+/-- The order of the middle term of an exact sequence `A → H → B`. -/
+theorem natCard_eq_of_exact {A H B : Type*} [AddCommGroup A] [AddCommGroup H] [AddCommGroup B]
+    {α : A →+ H} {β : H →+ B} (hαβ : Function.Exact α β) :
+    Nat.card H = Nat.card (A ⧸ α.ker) * Nat.card β.range := by
+  have hk : β.ker = α.range := by
+    ext x
+    exact hαβ x
+  rw [AddSubgroup.card_eq_card_quotient_mul_card_addSubgroup β.ker, mul_comm,
+    Nat.card_congr (QuotientAddGroup.quotientKerEquivRange β).toEquiv, hk,
+    Nat.card_congr (QuotientAddGroup.quotientKerEquivRange α).toEquiv]
+
+/-- `ℤ^S / n ℤ^S` has order `n ^ |S|`. -/
+theorem natCard_quotient_range_zsmul_pi {S : Type*} [Finite S] (n : ℕ) :
+    Nat.card ((S → ℤ) ⧸ (zsmulAddGroupHom (α := S → ℤ) n).range) = n ^ Nat.card S := by
+  let φ : (S → ℤ) →+ (S → ZMod n) :=
+    { toFun v s := v s
+      map_zero' := by ext; simp
+      map_add' _ _ := by ext; simp }
+  have hφ : Function.Surjective φ := fun v ↦ ⟨fun s ↦ (v s).cast, by ext s; simp [φ]⟩
+  have hker : φ.ker = (zsmulAddGroupHom (α := S → ℤ) n).range := by
+    ext v
+    simp only [AddMonoidHom.mem_ker, AddMonoidHom.mem_range, zsmulAddGroupHom_apply]
+    constructor
+    · intro h
+      refine ⟨fun s ↦ v s / n, funext fun s ↦ ?_⟩
+      have h' : ((v s : ℤ) : ZMod n) = 0 := congr_fun h s
+      rw [ZMod.intCast_zmod_eq_zero_iff_dvd] at h'
+      simp only [Pi.smul_apply, smul_eq_mul]
+      exact Int.mul_ediv_cancel' h'
+    · rintro ⟨w, rfl⟩
+      ext s
+      simp [φ]
+  rw [← hker, Nat.card_congr (QuotientAddGroup.quotientKerEquivOfSurjective φ hφ).toEquiv,
+    Nat.card_fun, Nat.card_zmod]
+
+/-- `ℤ^S` has no `n`-torsion for `n ≠ 0`, hence neither has any subgroup of it. -/
+theorem natCard_torsionBy_eq_one_of_le_pi {S : Type*} (X : AddSubgroup (S → ℤ)) {n : ℤ}
+    (hn : n ≠ 0) : Nat.card (torsionBy X n) = 1 := by
+  rw [Nat.card_eq_one_iff_unique]
+  refine ⟨⟨fun x y ↦ ?_⟩, ⟨0⟩⟩
+  have h (z : torsionBy X n) : z = 0 := by
+    have hz : n • z.1.1 = 0 := congrArg Subtype.val z.2
+    refine Subtype.ext (Subtype.ext (funext fun s ↦ ?_))
+    have := congr_fun hz s
+    simp only [Pi.smul_apply, smul_eq_mul, Pi.zero_apply, mul_eq_zero, hn, false_or] at this
+    exact this
+  rw [h x, h y]
+
+end HerbrandQuotient
+
+end AddSubgroup
