@@ -287,4 +287,116 @@ lemma presheafTensorStalkEquiv_germ_ptmul {U : X.Opens} (hx : x ∈ U) (m : Γ(M
 
 end PresheafStalk
 
+/-- A locally injective morphism of presheaves of abelian groups on a topological space is
+injective on stalks. -/
+lemma _root_.TopCat.Presheaf.injective_stalkFunctor_map_of_isLocallyInjective
+    {Y : TopCat.{u}} {F G : TopCat.Presheaf Ab.{u} Y} (T : F ⟶ G)
+    [Presheaf.IsLocallyInjective (Opens.grothendieckTopology Y) T] (y : Y) :
+    Function.Injective ((TopCat.Presheaf.stalkFunctor Ab.{u} y).map T) := by
+  refine (injective_iff_map_eq_zero _).2 fun s hs ↦ ?_
+  obtain ⟨U, hyU, a, rfl⟩ := F.exists_germ_eq s
+  rw [TopCat.Presheaf.stalkFunctor_map_germ_apply,
+    ← map_zero (ConcreteCategory.hom (G.germ U y hyU))] at hs
+  obtain ⟨W, hyW, iU, iU', hW⟩ := G.germ_eq y hyU hyU _ _ hs
+  rw [map_zero] at hW
+  have hT : T.app (op W) (F.map iU.op a) = T.app (op W) 0 := by
+    rw [← ConcreteCategory.comp_apply, T.naturality, ConcreteCategory.comp_apply, hW, map_zero]
+  obtain ⟨V, iV, hV, hyV⟩ := Presheaf.equalizerSieve_mem (Opens.grothendieckTopology Y) T _ _ hT
+    y hyW
+  rw [← F.germ_res_apply iU y hyW, ← F.germ_res_apply iV y hyV]
+  simp only [Presheaf.equalizerSieve_apply] at hV
+  rw [hV, map_zero, map_zero]
+
+attribute [local instance] forgetToPresheafOfModulesLaxMonoidal
+
+/-- The map from the presheaf tensor product to the underlying presheaf of `M ⊗ N`, sending
+`m ⊗ n` to `tmulSection m n`. It is locally bijective. -/
+noncomputable abbrev presheafTensorToTensor : presheafTensor M N ⟶ (M ⊗ N).presheaf :=
+  (_root_.PresheafOfModules.toPresheaf _).map
+    (Functor.LaxMonoidal.μ (forgetToPresheafOfModules X) M N)
+
+variable {M N} in
+lemma presheafTensorToTensor_app_ptmul {U : X.Opens} (m : Γ(M, U)) (n : Γ(N, U)) :
+    (presheafTensorToTensor M N).app (op U) (ptmul m n) = tmulSection m n :=
+  rfl
+
+lemma bijective_stalkFunctor_map_presheafTensorToTensor :
+    Function.Bijective
+      ((TopCat.Presheaf.stalkFunctor Ab.{u} x).map (presheafTensorToTensor M N)) :=
+  ⟨TopCat.Presheaf.injective_stalkFunctor_map_of_isLocallyInjective _ x,
+    (TopCat.Presheaf.locally_surjective_iff_surjective_on_stalks _).1
+      (inferInstanceAs (Presheaf.IsLocallySurjective (Opens.grothendieckTopology X)
+        (presheafTensorToTensor M N))) x⟩
+
+/-- **The stalk of a tensor product is the tensor product of the stalks.** For `𝒪_X`-modules
+`M` and `N` and a point `x`, `(M ⊗ N)_x ≅ M_x ⊗_{𝒪_{X,x}} N_x`, with `germ (m ⊗ n)` corresponding
+to `germ m ⊗ germ n`. -/
+noncomputable def stalkTensorEquiv :
+    (M ⊗ N).presheaf.stalk x ≃+ M.presheaf.stalk x ⊗[X.presheaf.stalk x] N.presheaf.stalk x :=
+  (AddEquiv.ofBijective _ (bijective_stalkFunctor_map_presheafTensorToTensor M N x)).symm.trans
+    (presheafTensorStalkEquiv M N x)
+
+variable {M N x} in
+lemma germ_tmulSection_eq {U : X.Opens} (hx : x ∈ U) (m : Γ(M, U)) (n : Γ(N, U)) :
+    (M ⊗ N).presheaf.germ U x hx (tmulSection m n) =
+      (TopCat.Presheaf.stalkFunctor Ab.{u} x).map (presheafTensorToTensor M N)
+        ((presheafTensor M N).germ U x hx (ptmul m n)) := by
+  rw [TopCat.Presheaf.stalkFunctor_map_germ_apply, presheafTensorToTensor_app_ptmul]
+
+variable {M N x} in
+@[simp]
+lemma stalkTensorEquiv_germ_tmulSection {U : X.Opens} (hx : x ∈ U) (m : Γ(M, U))
+    (n : Γ(N, U)) :
+    stalkTensorEquiv M N x ((M ⊗ N).presheaf.germ U x hx (tmulSection m n)) =
+      M.presheaf.germ U x hx m ⊗ₜ N.presheaf.germ U x hx n := by
+  rw [stalkTensorEquiv, AddEquiv.trans_apply, germ_tmulSection_eq]
+  erw [(AddEquiv.ofBijective _
+    (bijective_stalkFunctor_map_presheafTensorToTensor M N x)).symm_apply_apply]
+  exact presheafTensorStalkEquiv_germ_ptmul hx m n
+
+variable {M N x} in
+/-- Every element of the stalk of `M ⊗ N` is a sum of germs of sections `m ⊗ n`. -/
+lemma stalk_tensor_induction {p : (M ⊗ N).presheaf.stalk x → Prop}
+    (z : (M ⊗ N).presheaf.stalk x) (zero : p 0) (add : ∀ a b, p a → p b → p (a + b))
+    (tmul : ∀ (U : X.Opens) (hx : x ∈ U) (m : Γ(M, U)) (n : Γ(N, U)),
+      p ((M ⊗ N).presheaf.germ U x hx (tmulSection m n))) : p z := by
+  obtain ⟨w, rfl⟩ := (bijective_stalkFunctor_map_presheafTensorToTensor M N x).2 z
+  obtain ⟨U, hx, y, rfl⟩ := (presheafTensor M N).exists_germ_eq w
+  induction y using TensorProduct.induction_on with
+  | zero => rwa [map_zero, map_zero]
+  | tmul m n => exact (germ_tmulSection_eq hx m n) ▸ tmul U hx m n
+  | add y y' hy hy' => rw [map_add, map_add]; exact add _ _ hy hy'
+
+variable {M N} in
+/-- Naturality of `AlgebraicGeometry.Scheme.Modules.stalkTensorEquiv` in the first variable. -/
+lemma stalkTensorEquiv_naturality {M' : X.Modules} (φ : M ⟶ M')
+    (z : (M ⊗ N).presheaf.stalk x) :
+    stalkTensorEquiv M' N x ((φ ▷ N).stalkLinearMap x z) =
+      LinearMap.rTensor _ (φ.stalkLinearMap x) (stalkTensorEquiv M N x z) := by
+  induction z using stalk_tensor_induction with
+  | zero => rw [map_zero, map_zero, map_zero, map_zero]
+  | add a b ha hb => rw [map_add, map_add, map_add, map_add, ha, hb]
+  | tmul U hx m n =>
+    rw [Hom.stalkLinearMap_germ, whiskerRight_app_tmulSection, stalkTensorEquiv_germ_tmulSection,
+      stalkTensorEquiv_germ_tmulSection, LinearMap.rTensor_tmul, Hom.stalkLinearMap_germ]
+
+
+section Skyscraper
+
+variable (I : Type u) [AddCommGroup I] [Module (X.presheaf.stalk x) I]
+
+/-- The stalk at `x` of the skyscraper module at `x` with value `I` is `I`. -/
+noncomputable def skyscraperStalkLinearEquiv :
+    (skyscraper x I).presheaf.stalk x ≃ₗ[X.presheaf.stalk x] I :=
+  LinearEquiv.ofBijective (skyscraperStalkEval x I) <| by
+    refine ⟨(injective_iff_map_eq_zero _).2 fun s hs ↦ ?_, fun i ↦ ?_⟩
+    · obtain ⟨U, hxU, s, rfl⟩ := (skyscraper x I).presheaf.exists_germ_eq s
+      rw [skyscraperStalkEval_germ] at hs
+      have : s = 0 := SkyscraperSections.ext fun hx ↦ hs
+      rw [this, map_zero]
+    · exact ⟨(skyscraper x I).presheaf.germ ⊤ x (by trivial) (fun _ ↦ i),
+        skyscraperStalkEval_germ x I (by trivial) _⟩
+
+end Skyscraper
+
 end AlgebraicGeometry.Scheme.Modules

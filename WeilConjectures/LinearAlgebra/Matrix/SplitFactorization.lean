@@ -153,7 +153,7 @@ lemma mul_eq_zero_of_split (h : A₂ * A₁ = 0) (hA₁ : A₁ = L₁ * M₁) (h
     (hA₂ : A₂ = L₂ * M₂) (hL₂ : L₂' * L₂ = 1) : M₂ * L₁ = 0 :=
   calc M₂ * L₁ = L₂' * L₂ * M₂ * L₁ * (M₁ * M₁') := by
         rw [hL₂, hM₁, Matrix.one_mul, Matrix.mul_one]
-    _ = L₂' * (A₂ * A₁) * M₁' := by rw [hA₁, hA₂]; simp only [Matrix.mul_assoc]
+    _ = L₂' * (A₂ * A₁) * M₁' := by simp only [hA₁, hA₂, Matrix.mul_assoc]
     _ = 0 := by rw [h, Matrix.mul_zero, Matrix.zero_mul]
 
 variable (L₁ L₁' M₂ M₂') in

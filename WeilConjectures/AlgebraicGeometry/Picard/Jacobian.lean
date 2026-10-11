@@ -15,8 +15,11 @@ public import WeilConjectures.AlgebraicGeometry.Curve.RiemannRoch
 public import WeilConjectures.AlgebraicGeometry.DualNumbers
 public import WeilConjectures.AlgebraicGeometry.DualNumbersBaseChange
 public import WeilConjectures.AlgebraicGeometry.Picard.DualNumbers
+public import WeilConjectures.AlgebraicGeometry.DescentFiniteLevel
 public import WeilConjectures.AlgebraicGeometry.EffectiveDescent
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.Lie
+public import WeilConjectures.AlgebraicGeometry.GroupScheme.QuasiProjective
+public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.AffineNeighbourhood
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.Separated
 public import WeilConjectures.AlgebraicGeometry.Picard.Degree
 public import WeilConjectures.AlgebraicGeometry.Picard.FpqcSheaf
@@ -1742,6 +1745,60 @@ lemma specMap_algebraMap_comp_specMap_algebraMap (k K L : Type u) [CommRing k] [
       Spec.map (CommRingCat.ofHom (algebraMap k L)) := by
   rw [← Spec.map_comp, ← CommRingCat.ofHom_comp, ← IsScalarTower.algebraMap_eq]
 
+/-- **`Pic^0_{C/k}` satisfies the sheaf condition for a faithfully flat quasi-compact
+morphism.** For a smooth projective geometrically integral curve `C` over `k` and a flat
+surjective quasi-compact morphism `π : T' ⟶ T` of `k`-schemes, for instance the base change
+`T_K ⟶ T` of a field extension `K / k`, the degree-zero part of the Picard functor satisfies the
+sheaf condition for `π`.
+
+`Pic_{C/k}` does (`AlgebraicGeometry.isSheafFor_singleton_picardFunctor`), `Pic^0_{C/k}` is a
+subsheaf of it, and a section of `Pic_{C/k}` whose pullback along `π` has degree zero has degree
+zero everywhere, `π` being surjective, hence is locally, and so globally, in `Pic^0_{C/k}`. -/
+theorem isSheafFor_singleton_picardFunctorDegree (C : Scheme.{u}) [C.Over (Spec (.of k))]
+    [SmoothOfRelativeDimension 1 (C ↘ Spec (.of k))] [IsProper (C ↘ Spec (.of k))]
+    [GeometricallyIntegral (C ↘ Spec (.of k))] {T T' : Over (Spec (.of k))} (π : T' ⟶ T)
+    [Flat π.left] [Surjective π.left] [QuasiCompact π.left] :
+    Presieve.IsSheafFor (picardFunctorDegree (C ↘ Spec (.of k)) 0).obj (.singleton π) := by
+  set f := C ↘ Spec (.of k)
+  have : Smooth f := SmoothOfRelativeDimension.smooth 1 f
+  let J' := fppfTopology.over (Spec (.of k))
+  let S := picardSubfunctorDegree f 0
+  -- the comparison `β : Pic^0_{C/k} ⟶ Pic_{C/k}` is injective on sections
+  let α : S.toFunctor ⟶ (picardFunctor f).obj := S.ι ≫ toPicardFunctor f
+  let β : picardFunctorDegree f 0 ⟶ picardFunctor f :=
+    ⟨sheafifyLift J' α (picardFunctor f).property⟩
+  have fac : toSheafify J' S.toFunctor ≫ β.hom = α := toSheafify_sheafifyLift J' α _
+  have : Presheaf.IsLocallyInjective J' α := inferInstance
+  have : Presheaf.IsLocallyInjective J' β.hom :=
+    Presheaf.isLocallyInjective_of_isLocallyInjective_of_isLocallySurjective_fac J' α fac
+  have hβ (U : (Over (Spec (.of k)))ᵒᵖ) : Function.Injective (β.hom.app U) :=
+    (Sheaf.isLocallyInjective_iff_injective β).1 this _
+  have hβS {T : Over (Spec (.of k))} (M : S.toFunctor.obj (.op T)) :
+      β.hom.app _ ((toSheafify J' S.toFunctor).app _ M) = (toPicardFunctor f).app _ M.1 :=
+    ConcreteCategory.congr_hom (NatTrans.congr_app fac (.op T)) M
+  -- sections of `Pic^0_{C/k}` have fibrewise degree zero
+  have hdeg {T : Over (Spec (.of k))} (s : (picardFunctorDegree f 0).obj.obj (.op T))
+      (t : T.left) : picardDegree f (β.hom.app _ s) t = 0 := by
+    obtain ⟨Z, g, ⟨a, ha⟩, -, -, z, rfl⟩ := exists_flat_mem_of_mem_fppfTopology_over
+      (Presheaf.imageSieve_mem J' (toSheafify J' S.toFunctor) s) t
+    rw [← picardDegree_map, ← NatTrans.naturality_apply β.hom]
+    erw [← ha]
+    rw [hβS, picardDegree_toPicardFunctor]
+    exact (mem_picardSubfunctorDegree_iff f 0 a.1).1 a.2 z
+  refine Presieve.isSheafFor_singleton_of_injective β.hom hβ
+    (isSheafFor_singleton_picardFunctor π) fun s ⟨x, hx⟩ ↦ ?_
+  refine Presieve.mem_range_of_imageSieve_mem J'
+    ((isSheaf_iff_isSheaf_of_type _ _).1 (picardFunctorDegree f 0).property)
+    ((isSheaf_iff_isSheaf_of_type _ _).1 (picardFunctor f).property) β.hom hβ s
+    (J'.superset_covering ?_ (Presheaf.imageSieve_mem J' (toPicardFunctor f) s))
+  rintro Z g ⟨M, hM⟩
+  have hMS : M ∈ S.obj (.op Z) := (mem_picardSubfunctorDegree_iff f 0 M).2 fun z ↦ by
+    rw [← picardDegree_toPicardFunctor, hM, picardDegree_map]
+    obtain ⟨t', ht'⟩ := π.left.surjective (g.left z)
+    rw [← ht', ← picardDegree_map, ← hx]
+    exact hdeg x t'
+  exact ⟨(toSheafify J' S.toFunctor).app _ ⟨M, hMS⟩, by rw [hβS, hM]⟩
+
 /-- **The descent datum is defined at a finite separable level.** Let `C` be a smooth projective
 geometrically integral curve over `k`, let `k_s` be a separable closure of `k` and let `J_s`
 represent the restriction of `Pic^0_{C/k}` to schemes over `k_s`, so that `J_s` carries the
@@ -1770,8 +1827,30 @@ theorem exists_intermediateField_descentDatum {ks : Type u} [Field ks] [Algebra 
         (D : Over.DescentDatum (Spec.map (CommRingCat.ofHom (algebraMap k K))) JK),
         D.IsBaseChange (specMap_algebraMap_comp_specMap_algebraMap k K ks) hq.w
             rs.overDescentDatum ∧
-          ∀ s : Set JK.left, s.Finite → ∃ U : JK.left.Opens, IsAffineOpen U ∧ s ⊆ U :=
-  sorry
+          ∀ s : Set JK.left, s.Finite → ∃ U : JK.left.Opens, IsAffineOpen U ∧ s ⊆ U := by
+  have : Algebra.IsAlgebraic k ks := IsSepClosure.separable.isAlgebraic
+  -- `Js` is the Jacobian of `C_{k_s}`: it is of finite presentation and quasi-projective
+  obtain ⟨J', _, e', hJ'P, hJ'S, -, -, -⟩ := exists_jacobian_pullback (k := k) ks C _ rfl
+  obtain ⟨e⟩ := nonempty_picardFunctorDegree_iso_of_isPullback (K := ks) (C := C)
+    (C' := pullback (C ↘ Spec (.of k)) (Spec.map (CommRingCat.ofHom (algebraMap k ks))))
+    (pullback.fst _ _) (IsPullback.of_hasPullback _ _) 0
+  let i : Js ≅ J' := (rs.ofIso e).uniqueUpToIso e'
+  have hi : Js.hom = i.hom.left ≫ J'.hom := (Over.w i.hom).symm
+  have : Smooth J'.hom := SmoothOfRelativeDimension.smooth _ J'.hom
+  have : LocallyOfFinitePresentation Js.hom := by rw [hi]; infer_instance
+  have : QuasiCompact Js.hom := by rw [hi]; infer_instance
+  have : QuasiSeparated Js.hom := by rw [hi]; infer_instance
+  obtain ⟨α, _, j, hj, hjJ⟩ := GrpObj.exists_isImmersion_projectiveSpace J'
+  -- the descent datum at a finite level
+  obtain ⟨K, hK, JK, q, hq, D, hD⟩ := exists_intermediateField_isBaseChange rs
+    fun π _ _ _ ↦ isSheafFor_singleton_picardFunctorDegree (k := k) C π
+  refine ⟨K, hK, Algebra.isSeparable_tower_bot_of_isSeparable k K ks, JK, q, hq, D, hD, ?_⟩
+  -- `J_K` is quasi-projective, since `J_K ×_K k_s ≅ Js` is
+  have : IsImmersion (hq.isoPullback.inv ≫ i.hom.left ≫ j) := inferInstance
+  obtain ⟨β, _, j', hj', hj'K⟩ := exists_isImmersion_projectiveSpace_of_pullback JK.hom
+    (hq.isoPullback.inv ≫ i.hom.left ≫ j) (by
+      rw [Category.assoc, Category.assoc, hjJ, ← hi, IsPullback.isoPullback_inv_snd])
+  exact IsQuasiProjective.exists_isAffineOpen_superset ⟨β, inferInstance, j', hj', hj'K⟩
 
 /-- **`Pic^0_{C/k}` is represented by the descended scheme.** Let `K/k` be a field extension, let
 `J_K` represent the restriction of `Pic^0_{C/k}` to schemes over `K`, and let `J` be a `k`-scheme
@@ -1801,63 +1880,23 @@ theorem nonempty_representableBy_picardFunctorDegree_of_isPullback {K : Type u} 
         f₂ ≫ Spec.map (CommRingCat.ofHom (algebraMap k K))) (a : Over.mk f₁ ⟶ JK),
       (r.overTransport f₁ f₂ h a).left ≫ q = a.left ≫ q) :
     Nonempty ((picardFunctorDegree (C ↘ Spec (.of k)) 0).obj.RepresentableBy J) := by
-  set f := C ↘ Spec (.of k)
   set p := Spec.map (CommRingCat.ofHom (algebraMap k K))
   have : Flat p := Flat.SpecMap_iff.mpr (RingHom.flat_algebraMap_iff.mpr inferInstance)
   have : Surjective p := ⟨fun _ ↦ ⟨default, Subsingleton.elim _ _⟩⟩
-  have : Smooth f := SmoothOfRelativeDimension.smooth 1 f
-  let J' := fppfTopology.over (Spec (.of k))
-  let S := picardSubfunctorDegree f 0
-  -- the comparison `β : Pic^0_{C/k} ⟶ Pic_{C/k}` is injective on sections
-  let α : S.toFunctor ⟶ (picardFunctor f).obj := S.ι ≫ toPicardFunctor f
-  let β : picardFunctorDegree f 0 ⟶ picardFunctor f :=
-    ⟨sheafifyLift J' α (picardFunctor f).property⟩
-  have fac : toSheafify J' S.toFunctor ≫ β.hom = α := toSheafify_sheafifyLift J' α _
-  have : Presheaf.IsLocallyInjective J' α := inferInstance
-  have : Presheaf.IsLocallyInjective J' β.hom :=
-    Presheaf.isLocallyInjective_of_isLocallyInjective_of_isLocallySurjective_fac J' α fac
-  have hβ (U : (Over (Spec (.of k)))ᵒᵖ) : Function.Injective (β.hom.app U) :=
-    (Sheaf.isLocallyInjective_iff_injective β).1 this _
-  have hβS {T : Over (Spec (.of k))} (M : S.toFunctor.obj (.op T)) :
-      β.hom.app _ ((toSheafify J' S.toFunctor).app _ M) = (toPicardFunctor f).app _ M.1 :=
-    ConcreteCategory.congr_hom (NatTrans.congr_app fac (.op T)) M
-  -- sections of `Pic^0_{C/k}` have fibrewise degree zero
-  have hdeg {T : Over (Spec (.of k))} (s : (picardFunctorDegree f 0).obj.obj (.op T))
-      (t : T.left) : picardDegree f (β.hom.app _ s) t = 0 := by
-    obtain ⟨Z, g, ⟨a, ha⟩, -, -, z, rfl⟩ := exists_flat_mem_of_mem_fppfTopology_over
-      (Presheaf.imageSieve_mem J' (toSheafify J' S.toFunctor) s) t
-    rw [← picardDegree_map, ← NatTrans.naturality_apply β.hom]
-    erw [← ha]
-    rw [hβS, picardDegree_toPicardFunctor]
-    exact (mem_picardSubfunctorDegree_iff f 0 a.1).1 a.2 z
-  -- `Pic^0_{C/k}` satisfies the sheaf condition for `T ×_k K ⟶ T`
-  have hF (T : Over (Spec (.of k))) : Presieve.IsSheafFor (picardFunctorDegree f 0).obj
-      (.singleton (Over.baseChangeπ p T)) := by
-    have : Flat (Over.baseChangeπ p T).left := inferInstanceAs (Flat (pullback.fst _ _))
-    have : Surjective (Over.baseChangeπ p T).left :=
-      inferInstanceAs (Surjective (pullback.fst _ _))
-    have : QuasiCompact (Over.baseChangeπ p T).left :=
-      inferInstanceAs (QuasiCompact (pullback.fst _ _))
-    refine Presieve.isSheafFor_singleton_of_injective β.hom hβ
-      (isSheafFor_singleton_picardFunctor _) fun s ⟨x, hx⟩ ↦ ?_
-    refine Presieve.mem_range_of_imageSieve_mem J'
-      ((isSheaf_iff_isSheaf_of_type _ _).1 (picardFunctorDegree f 0).property)
-      ((isSheaf_iff_isSheaf_of_type _ _).1 (picardFunctor f).property) β.hom hβ s
-      (J'.superset_covering ?_ (Presheaf.imageSieve_mem J' (toPicardFunctor f) s))
-    rintro Z g ⟨M, hM⟩
-    have hMS : M ∈ S.obj (.op Z) := (mem_picardSubfunctorDegree_iff f 0 M).2 fun z ↦ by
-      rw [← picardDegree_toPicardFunctor, hM, picardDegree_map]
-      obtain ⟨t', ht'⟩ := (Over.baseChangeπ p T).left.surjective (g.left z)
-      rw [← ht', ← picardDegree_map, ← hx]
-      exact hdeg x t'
-    exact ⟨(toSheafify J' S.toFunctor).app _ ⟨M, hMS⟩, by rw [hβS, hM]⟩
-  obtain ⟨e, -⟩ := Functor.RepresentableBy.exists_representableBy_of_isPullback hq hinv hF
+  have hπ (T : Over (Spec (.of k))) : Flat (Over.baseChangeπ p T).left ∧
+      Surjective (Over.baseChangeπ p T).left ∧ QuasiCompact (Over.baseChangeπ p T).left :=
+    ⟨inferInstanceAs (Flat (pullback.fst _ _)), inferInstanceAs (Surjective (pullback.fst _ _)),
+      inferInstanceAs (QuasiCompact (pullback.fst _ _))⟩
+  obtain ⟨e, -⟩ := Functor.RepresentableBy.exists_representableBy_of_isPullback hq hinv
+    (fun T ↦
+      have := (hπ T).1
+      have := (hπ T).2.1
+      have := (hπ T).2.2
+      isSheafFor_singleton_picardFunctorDegree C (Over.baseChangeπ p T))
     fun T ↦
-      have : Flat (Over.baseChangeπ p T).left := inferInstanceAs (Flat (pullback.fst _ _))
-      have : Surjective (Over.baseChangeπ p T).left :=
-        inferInstanceAs (Surjective (pullback.fst _ _))
-      have : QuasiCompact (Over.baseChangeπ p T).left :=
-        inferInstanceAs (QuasiCompact (pullback.fst _ _))
+      have := (hπ T).1
+      have := (hπ T).2.1
+      have := (hπ T).2.2
       isSheafFor_singleton_yoneda J (Over.baseChangeπ p T)
   exact ⟨e⟩
 

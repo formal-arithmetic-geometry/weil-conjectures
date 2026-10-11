@@ -204,10 +204,17 @@ theorem exists_intermediateField_isBaseChange [LocallyOfFinitePresentation Js.ho
   refine ⟨K.1, K.2, JK, q, hq, rK.overDescentDatum, fun T f₁ f₂ hf a ↦ ?_⟩
   -- the canonical transport of `rK` lifts that of `rs`
   let b := rs.overTransport f₁ f₂ hf a
-  have hb : b = r'.overTransport f₁ f₂ (by
-      rw [← Over.w (Over.homMk (𝟙 T) : Over.mk f₁ ⟶ Over.mk f₁)]
-      sorry) a := by
-    sorry
-  sorry
+  have key : rK.overTransport (f₁ ≫ ιK) (f₂ ≫ ιK) (by simpa [hs] using hf)
+      (Over.homMk (a.left ≫ q) (by rw [Category.assoc, hq.w, ← Category.assoc, Over.w a]; rfl) :
+        Over.mk (f₁ ≫ ιK) ⟶ JK) =
+        (Over.homMk (b.left ≫ q) (by rw [Category.assoc, hq.w, ← Category.assoc, Over.w b]; rfl) :
+          Over.mk (f₂ ≫ ιK) ⟶ JK) := by
+    apply rK.homEquiv.injective
+    erw [homEquiv_overTransport, hrK f₁ a, hrK f₂ b]
+    rw [overMapComp_homEquiv, overMapComp_homEquiv]
+    erw [homEquiv_overTransport]
+    erw [← Functor.map_comp_apply F, ← Functor.map_comp_apply F]
+    exact congrArg (fun φ ↦ F.map φ _) (Quiver.Hom.unop_inj (by ext; simp))
+  exact congrArg CommaMorphism.left key
 
 end AlgebraicGeometry

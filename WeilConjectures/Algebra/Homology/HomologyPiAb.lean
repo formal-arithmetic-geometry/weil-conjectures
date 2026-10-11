@@ -55,6 +55,18 @@ lemma ab_homologyπ_eq_zero_iff (i : ι) (z : M.cycles i) :
     rw [← ConcreteCategory.comp_apply, toCycles_comp_homologyπ]
     rfl
 
+/-- A variant of `ab_exists_iCycles_eq` with an explicit next index. -/
+lemma ab_exists_iCycles_eq' (i j : ι) (hij : c.next i = j) (x : M.X i) (hx : M.d i j x = 0) :
+    ∃ z : M.cycles i, M.iCycles i z = x := by
+  subst hij
+  exact M.ab_exists_iCycles_eq i x hx
+
+/-- A variant of `ab_homologyπ_eq_zero_iff` with an explicit previous index. -/
+lemma ab_homologyπ_eq_zero_iff' (i j : ι) (hij : c.prev j = i) (z : M.cycles j) :
+    M.homologyπ j z = 0 ↔ ∃ y : M.X i, M.toCycles i j y = z := by
+  subst hij
+  exact M.ab_homologyπ_eq_zero_iff j z
+
 lemma ab_homologyπ_surjective (i : ι) : Function.Surjective (M.homologyπ i) :=
   (AddCommGrpCat.epi_iff_surjective _).1 inferInstance
 
@@ -78,15 +90,15 @@ lemma ab_pi_X_exists (i : ι) (y : ∀ j, (K j).X i) :
     (AddCommGrpCat.epi_iff_surjective _).1 inferInstance
   obtain ⟨x, hx⟩ := hsurj ((Concrete.productEquiv _).symm y)
   refine ⟨x, fun j ↦ ?_⟩
-  have := congrArg (Pi.π (fun j ↦ (K j).X i) j) hx
+  have := congrArg (Pi.π (fun b ↦ (eval AddCommGrpCat.{u} c i).obj (K b)) j) hx
   erw [Concrete.productEquiv_symm_apply_π] at this
   rw [← ConcreteCategory.comp_apply, piComparison_comp_π] at this
   exact this
 
 lemma ab_bijective_piComparison_homologyFunctor (i : ι) :
     Function.Bijective (piComparison (homologyFunctor AddCommGrpCat.{u} c i) K) := by
-  have hπ (j : κ) (h : (∏ᶜ K).homology i) :
-      Pi.π (fun j ↦ (K j).homology i) j
+  have hπ (j : κ) (h : (homologyFunctor AddCommGrpCat.{u} c i).obj (∏ᶜ K)) :
+      Pi.π (fun b ↦ (homologyFunctor AddCommGrpCat.{u} c i).obj (K b)) j
         (piComparison (homologyFunctor AddCommGrpCat.{u} c i) K h) =
         homologyMap (Pi.π K j) i h := by
     rw [← ConcreteCategory.comp_apply, piComparison_comp_π]
@@ -118,13 +130,14 @@ lemma ab_bijective_piComparison_homologyFunctor (i : ι) :
           rw [hY, ← ConcreteCategory.comp_apply, toCycles_i]
       _ = _ := by rw [hy, hi]
   · intro w
-    have (j : κ) := ab_homologyπ_surjective _ i (Pi.π _ j w)
+    have (j : κ) := ab_homologyπ_surjective _ i
+      (Pi.π (fun b ↦ (homologyFunctor AddCommGrpCat.{u} c i).obj (K b)) j w)
     choose z hz using this
     obtain ⟨X, hX⟩ := ab_pi_X_exists K i fun j ↦ (K j).iCycles i (z j)
     obtain ⟨Z, hZ⟩ := ab_exists_iCycles_eq _ i X (ab_pi_X_ext K _ fun j ↦ by
-      rw [← ConcreteCategory.comp_apply, Hom.comm, ConcreteCategory.comp_apply, hX,
-        ← ConcreteCategory.comp_apply, iCycles_d, map_zero]
-      rfl)
+      rw [← ConcreteCategory.comp_apply, ← Hom.comm, ConcreteCategory.comp_apply, hX,
+        ← ConcreteCategory.comp_apply, iCycles_d]
+      simp)
     refine ⟨(∏ᶜ K).homologyπ i Z, (Concrete.productEquiv _).injective (funext fun j ↦ ?_)⟩
     simp only [Concrete.productEquiv_apply_apply]
     rw [hπ, hπz, ← hz j]
