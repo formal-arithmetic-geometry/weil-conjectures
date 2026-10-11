@@ -1,11 +1,11 @@
 # Work queue
 
-394 items; claim with `tools/claim.py next <group> [--stage N]`.
+391 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (394)
+## Stage 2: nodes to state (391)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -34,17 +34,14 @@
 | `lem-sc-affine-perfect-support-extension` | 1 | state |
 | `lem-sc-affine-support-iterated-cones` | 1 | state |
 | `lem-sc-base-change-curve` | 1 | state |
-| `lem-sc-coherent-ring-perfect-complex-cohomology` | 1 | state |
 | `lem-sc-derived-mayer-vietoris-triangle` | 1 | state |
 | `lem-sc-hilb-dominating-power` | 1 | state |
 | `lem-sc-hilbert-embedded-points-gluing` | 1 | state |
-| `lem-sc-koszul-regular-closed-immersion-perfect` | 1 | state |
 | `lem-sc-koszul-regular-sequence-dual-complex` | 1 | state |
 | `lem-sc-p1-ext-pushout-postcompose` | 1 | state |
 | `lem-sc-perfect-cut-complex-degree-zero` | 1 | state |
 | `lem-sc-perfect-degree-zero-fibre-criterion` | 1 | state |
 | `lem-sc-perfect-derived-tensor-perfect` | 1 | state |
-| `lem-sc-perfect-ext-bounded-qcoh-vanishing` | 1 | state |
 | `lem-sc-perfect-finite-free-residue-model` | 1 | state |
 | `lem-sc-perfect-h0-locally-closed` | 1 | state |
 | `lem-sc-perfect-hypercohomology-gap` | 1 | state |
