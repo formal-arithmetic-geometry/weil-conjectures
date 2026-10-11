@@ -1,11 +1,11 @@
 # Work queue
 
-871 items; claim with `tools/claim.py next <group> [--stage N]`.
+868 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (871)
+## Stage 2: nodes to state (868)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -21,7 +21,6 @@
 | `lem-pc-derived-tensor-transitivity` | 1 | state |
 | `lem-pc-module-pullback-identity-composition` | 1 | state |
 | `lem-pc-pre-derived-adjoint-functors-general` | 1 | state |
-| `lem-pur-rhom-into-kinjective-local` | 1 | state |
 | `lem-pur-rhom-well-defined` | 1 | state |
 | `lem-sc-base-change-curve` | 1 | state |
 | `lem-sc-dimension-locally-algebraic` | 1 | state |
@@ -33,14 +32,12 @@
 | `lem-sp-ce-horizontal-lift` | 1 | state |
 | `lem-sp-ce-vertical-nullhomotopy` | 1 | state |
 | `lem-weil-derived-limit-roos-complex` | 1 | state |
-| `lem-weil-pbc-ample-very-ample-immersion-affine-base` | 1 | state |
 | `lem-weil-pbc-artinian-ideal-length-one-filtration` | 1 | state |
 | `lem-weil-pbc-associated-module-pullback` | 1 | state |
 | `lem-weil-pbc-associated-prime-localize-at-prime` | 1 | state |
 | `lem-weil-pbc-associated-primes-flat-base-change` | 1 | state |
 | `lem-weil-pbc-basis-sheaf-sections-germs` | 1 | state |
 | `lem-weil-pbc-cartesian-eilenberg-functorial` | 1 | state |
-| `lem-weil-pbc-cartier-equality` | 1 | state |
 | `lem-weil-pbc-cech-vanishing-criterion` | 1 | state |
 | `lem-weil-pbc-change-ideal-completion` | 1 | state |
 | `lem-weil-pbc-charpoly-locally-free-existence` | 1 | state |
