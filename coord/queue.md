@@ -1,11 +1,11 @@
 # Work queue
 
-514 items; claim with `tools/claim.py next <group> [--stage N]`.
+511 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (514)
+## Stage 2: nodes to state (511)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -13,6 +13,7 @@
 | `def-pc-derived-pullback` | 1 | state |
 | `def-pc-perfect-complex` | 1 | state |
 | `def-pur-pseudo-coherent-complex` | 1 | state |
+| `def-sc-intersection-number` | 1 | state |
 | `def-weil-pbc-koszul-complex` | 1 | state |
 | `cor-galois-lisse-representations` | 1 | state |
 | `lem-pc-affine-derived-base-change-comparison-map` | 1 | state |
@@ -59,19 +60,16 @@
 | `lem-sc-qc-open-derived-lift` | 1 | state |
 | `lem-sc-regular-curve-torsionfree-free` | 1 | state |
 | `lem-sc-smooth-omega-finite-locally-free` | 1 | state |
-| `lem-sc-snapper-numerical-polynomial` | 1 | state |
 | `lem-sc-torsion-sections-generic` | 1 | state |
 | `lem-sc-valuation-proper-coherent-higher-direct-images` | 1 | state |
 | `lem-weil-derived-limit-roos-complex` | 1 | state |
 | `lem-weil-pbc-affine-conormal-sections` | 1 | state |
-| `lem-weil-pbc-affine-finite-type-generating-sections` | 1 | state |
 | `lem-weil-pbc-affine-module-correspondence` | 1 | state |
 | `lem-weil-pbc-affine-morphism-relative-spec` | 1 | state |
 | `lem-weil-pbc-affine-pushforward-base-change` | 1 | state |
 | `lem-weil-pbc-affine-pushforward-ideal-product` | 1 | state |
 | `lem-weil-pbc-algebra-directed-colimit-finite-type` | 1 | state |
 | `lem-weil-pbc-closed-immersion-pushforward-annihilated` | 1 | state |
-| `lem-weil-pbc-coherent-filtration-integral-subschemes` | 1 | state |
 | `lem-weil-pbc-coherent-generic-point-ideal-inclusion` | 1 | state |
 | `lem-weil-pbc-coherent-local-isomorphism` | 1 | state |
 | `lem-weil-pbc-coherent-module-local-on-open-cover` | 1 | state |
@@ -79,7 +77,6 @@
 | `lem-weil-pbc-coherent-sheaf-hom-coherent` | 1 | state |
 | `lem-weil-pbc-coherent-stalk-map-extends` | 1 | state |
 | `lem-weil-pbc-coherent-twist-global-generation` | 1 | state |
-| `lem-weil-pbc-etale-finite-data-descent` | 1 | state |
 | `lem-weil-pbc-finite-presentation-kernel-surjection-finite-type` | 1 | state |
 | `lem-weil-pbc-finite-pushforward-coherent` | 1 | state |
 | `lem-weil-pbc-ideal-times-quasi-coherent-affine-sections` | 1 | state |
@@ -524,7 +521,7 @@
 | `lem-pc-essentially-constant-pro-hom-colimit` | 4 | state |
 | `lem-pur-essential-constant-pro-criterion-05py` | 4 | state |
 
-Not open yet: 40 nodes that wait for stage 1, 602 nodes that wait for a statement dependency.
+Not open yet: 40 nodes that wait for stage 1, 601 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
