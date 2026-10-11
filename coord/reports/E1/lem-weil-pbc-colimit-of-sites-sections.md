@@ -1,28 +1,69 @@
-# Stage 1 report: lem-weil-pbc-colimit-of-sites-sections
+## Worker report
 
-## Files written
+The module `Sheaf.CategoryTheory.ColimitSiteSections` states the degree-zero
+sections comparison for the colimit site.  The index `J` is the filtered opposite
+of the node's cofiltered category, `F` is the site diagram, and `V` is its
+colimit cocone.  `Q` is the covering precoverage on the colimit category and
+`hfinite` renders finite covering families.  The object `U : F.obj i` is sent to
+the colimit-site object `(V.ι.app i).toFunctor.obj U`.  The diagram `D` on
+`Under i` represents the inverse-image sheaves `f_j^{-1} F_j`, while `c` and
+`hc` are their colimit cocone and universal property.  The displayed
+`Function.Bijective` is the canonical map from the filtered colimit of sections
+to sections of the colimit sheaf.  The second declaration
+`colimitSite_sections_isIso` gives the identical clause for abelian sheaves and
+uses `IsIso` of the canonical map of section groups.
 
-- `dag/nodes/sec-proper-base-change/lem-weil-pbc-colimit-of-sites-sections.json`: corrected statement, four proof steps, dependencies, source provenance, and `status: split`.
-- `dag/nodes/sec-proper-base-change/lem-weil-pbc-site-filtered-colimit-sections-finite-coverings.json`: new unsplit statement node; Mathlib verdict `no match` after LeanSearch, LeanFinder, and Mathlib grep.
+The hypotheses and clauses are rendered as follows.  `[SmallCategory J]` and
+`[IsFiltered J]` express the cofiltered index after passage to the opposite;
+`F : J ⥤ Cat` and `V : Cocone F` express the sites and canonical colimit
+functors; `Q` with its four typeclass assumptions is the colimit site; and
+`hfinite : Q ≤ Precoverage.finite V.pt` says every covering presieve is finite.
+The stage object is exactly `(V.ι.app i).toFunctor.obj U`.  `D` is the filtered
+system of inverse-image sheaves, `c : Cocone D` and `hc : IsColimit c` are the
+colimit sheaf and its universal property.  `colimit.desc` followed by the
+section functor is the canonical map described in the node; `Function.Bijective`
+expresses its bijectivity.  Replacing `Type u` by `AddCommGrpCat.{u}` and
+`Function.Bijective` by `IsIso` renders the abelian clause.
 
-## Attachments
+Dependency declarations used: `Sheaf.CategoryTheory.ColimitSites`,
+`CategoryTheory.exists_colimit_site`; `Sheaf.CategoryTheory.SiteFilteredColimitSections`,
+`CategoryTheory.siteFilteredColimit_sections_bijective` and
+`CategoryTheory.siteFilteredColimit_sections_isIso`; and Mathlib's
+`CategoryTheory.Limits.colimit`, `Cocone`, `IsColimit`, `colimit.desc`,
+`CategoryTheory.IsFiltered`, `CategoryTheory.Precoverage`, and
+`CategoryTheory.sheafSections`.
 
-None. The item has no Lean declaration in either audited branch.
+Edge cases checked: filteredness supplies a nonempty index; `Under i` is the
+filtered presentation category; empty finite covering presieves are allowed by
+`Precoverage.finite`; and the abelian statement uses the same site and object
+with no extra nonemptiness, separation, or characteristic assumptions.
 
-## WANTED
+Searches made: `msearch.py leanfinder` for “sections of a filtered colimit of
+sheaves over a colimit of sites” returned only extensive-topology and pointwise
+colimit results; `msearch.py loogle` for `Sheaf colimit sections Under` returned
+no exact result; grep of Mathlib `CategoryTheory/Sites` found only
+`Sheaf.createsColimitOfIsSheaf`, `isSheaf_pointwiseColimit`, and point results;
+`rg` over `WeilConjectures` and project `lean/Sheaf` found no declaration for
+this item before this module.  The nearest project declarations are the two
+finite-covering section theorems recorded above.
 
-None. The cited Stacks sources are available in the project's fetched literature on the source clone.
+No statement correction or `STATEMENT-DISPUTED` flag was needed.
 
-## Corrections and checks
+## Earlier second reading (a previous round; superseded)
 
-The imported statement omitted `phi_id = id`. Its cocycle equation only implies that `phi_id` is idempotent. A terminal index category with a one-object site and a nonidentity idempotent endomorphism gives a counterexample: the displayed transitions do not define a diagram over the identity arrow, so the claimed filtered colimit is not even formed. The statement now includes the identity condition and the proof records why it is needed. This is a correction below the unit route, not a route change.
+I reread the node, all four statement dependencies, their recorded declarations,
+and the module after compilation.  The Lean signature binds every object in the
+node's setup, carries the finite-covering condition, evaluates at the canonical
+image of the stage object, and states both the set bijection and abelian-group
+isomorphism.  No hypothesis or conclusion was added beyond the explicit
+colimit-site encoding; no mismatch was found.
 
-The Stacks proof's phrase “A formal argument shows” was expanded into the two comparison maps and their compatibility, with the filtered-colimit element criterion cited. The inverse-image formula is Tag 0A35, and the final section evaluation is split into the new finite-cover-site node from Tag 0738 (with the abelian Tag 03CO clause).
+## Second reading by E1
 
-## Could not finish
+I reread the node statement, its Stacks source (Sites, Lemma 09YN, with the inverse-image formula of 0A35 and the abelian analogue 03CO), all statement dependencies, and `ColimitSiteSections.lean`.
 
-No Lean was written or compiled, as required for Stage 1. The new finite-cover-site node remains `unsplit` and is queued for a later worker.
+The node's setup is rendered by the Lean signature as follows. The cofiltered index, written in its filtered opposite, is `{J : Type u} [SmallCategory J] [IsFiltered J]`; the site diagram and its colimit are `F : J ⥤ Cat.{u,u}` and `V : Cocone F`. The colimit-site covering is `Q : Precoverage V.pt` with `HasIsos`, stability under composition and base change, and pullbacks; finite coverings are `hfinite : Q ≤ Precoverage.finite V.pt`. The stage object is `(V.ι.app i).toFunctor.obj U` for `i : J` and `U : F.obj i`. The system of inverse-image sheaves (including its transition maps) is represented by `D : Under i ⥤ Sheaf Q.toGrothendieck (Type u)` (the corresponding abelian system uses `AddCommGrpCat.{u}`), with colimit cocone `c : Cocone D` and `hc : IsColimit c`. The displayed `colimit.desc` on `sheafSections ... (op ((V.ι.app i).toFunctor.obj U))` is the canonical map from the filtered colimit of stage sections to sections of the colimit sheaf; its conclusion is `Function.Bijective`, and the abelian clause is `IsIso` for the same canonical map. Every binder is explicit and uses the common universe of the site and coefficient category.
 
-## Review by E1
+The dependency declarations match their nodes: `CategoryTheory.exists_colimit_site` from `Sheaf.CategoryTheory.ColimitSites`, and `CategoryTheory.siteFilteredColimit_sections_bijective`/`siteFilteredColimit_sections_isIso` from `Sheaf.CategoryTheory.SiteFilteredColimitSections`; the remaining colimit and section notions are Mathlib declarations recorded by the dependency nodes. No extra Noetherian, separation, characteristic, or nonemptiness hypothesis is present. Empty finite covering presieves are permitted, and filteredness gives the required nonempty index; the zero abelian object and the `n = 0` finite cover case remain included. The object `U` and all sheaf values are in the same universe `u`, so no universe restriction is introduced.
 
-I confirmed the statement defect: with only the cocycle equation, the identity transition may be a nonidentity idempotent, so the claimed family is not a diagram. A terminal one-object index category with a nonidentity idempotent gives the counterexample described in the report. Adding `φ_id = id` is therefore a mathematically necessary correction, not a weakening; the corrected proof follows 09YN, 0A35, 0738, and 03CO and stays on `sk-thm-p1`. The finite-cover sections result is a separate public unsplit node with its own searches. I accept the corrected split and the statement defect should be surfaced to the human review.
+I searched Mathlib's Sites files and the source/project trees for the section comparison under alternate names, and ran LeanFinder/Loogle searches for filtered-colimit sections on a colimit site. The only matches were the two project dependency theorems and general pointwise/sheaf-colimit results; no existing declaration states this node. The module compiles with `lcompile.py` without errors or warnings other than the intentional `sorry` proof markers. No mismatch was found and no source, node, or Lean statement was changed in this second reading.

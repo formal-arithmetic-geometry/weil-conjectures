@@ -144,5 +144,27 @@
   "group": "E1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of E1; spot-checked by L: L read the corrected statement (the missing phi_id = id is a genuine defect of the created node: without it the transition maps are not a diagram) and the four steps (the diagram, the iterated-colimit comparison, the 0A35 inverse-image formula, 0738/03CO for sections of a filtered colimit on a site with finite coverings, isolated as a new self-contained node): correct; the E1 review verifies the counterexample"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.ColimitSiteSections",
+  "declaration": "CategoryTheory.colimitSite_sections_bijective",
+  "declarations": [
+   "CategoryTheory.colimitSite_sections_bijective",
+   "CategoryTheory.colimitSite_sections_isIso"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/ColimitSiteSections.lean",
+  "statement": "theorem colimitSite_sections_bijective {J : Type u} [SmallCategory J] [IsFiltered J] {F : J ⥤ Cat.{u, u}} (V : Cocone F) {Q : Precoverage V.pt} [Q.HasIsos] [Q.IsStableUnderComposition] [Q.IsStableUnderBaseChange] [Q.HasPullbacks] (hfinite : Q ≤ Precoverage.finite V.pt) (i : J) (U : F.obj i) (D : Under i ⥤ Sheaf Q.toGrothendieck (Type u)) (c : Cocone D) (hc : IsColimit c) : Function.Bijective (colimit.desc (D ⋙ (sheafSections Q.toGrothendieck (Type u)).obj (op ((V.ι.app i).toFunctor.obj U))) (((sheafSections Q.toGrothendieck (Type u)).obj (op ((V.ι.app i).toFunctor.obj U))).mapCocone c))",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-12",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "E1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }
