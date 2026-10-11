@@ -112,7 +112,8 @@ theorem flatModel_reduction (I : Ideal Λ) {a b : ℤ}
     (e : K ≅ (_root_.DerivedCategory.Q).obj P) :
     ((∀ q : ℤ, q < a ∨ b < q →
         IsZero ((((Sheaf.quotSMulTop _ I).mapHomologicalComplex _).obj P).X q)) ∧
-      ∀ q : ℤ, ObjectProperty.flat ((((Sheaf.quotSMulTop _ I).mapHomologicalComplex _).obj P).X q)) ∧
+      ∀ q : ℤ,
+        ObjectProperty.flat ((((Sheaf.quotSMulTop _ I).mapHomologicalComplex _).obj P).X q)) ∧
       Nonempty (((derivedTensor (ModuleCat.{u + 1} Λ) X).obj K).obj
           ((_root_.DerivedCategory.singleFunctor _ 0).obj
             ((constantSheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ)).obj
@@ -128,7 +129,8 @@ theorem flatModel_reduction (I : Ideal Λ) {a b : ℤ}
             ((constantSheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ)).obj
               (ModuleCat.of Λ (Λ ⧸ I))))) ∧
       DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} (Λ ⧸ I)) X a b
-        ((_root_.DerivedCategory.Q).obj (((Sheaf.quotSMulTop _ I).mapHomologicalComplex _).obj P)) := by
+        ((_root_.DerivedCategory.Q).obj
+          (((Sheaf.quotSMulTop _ I).mapHomologicalComplex _).obj P)) := by
   obtain ⟨h₁, h₂⟩ := hP
   have : P.IsStrictlyGE a := by
     rw [CochainComplex.isStrictlyGE_iff]

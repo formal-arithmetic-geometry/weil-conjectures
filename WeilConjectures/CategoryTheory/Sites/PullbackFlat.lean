@@ -20,16 +20,14 @@ Let `G : C ⥤ D` be a representably flat, cover-preserving functor between site
 a Noetherian commutative ring. The pullback `G^* F = (Lan_{G} F)^#` of a flat sheaf `F` of
 `R`-modules is flat (`CategoryTheory.flat_sheafPullback_obj`).
 
-Tensoring with a sheafification is the sheafification of the presheaf tensor product, so it
-suffices that `Lan_G F ⊗ M ⟶ Lan_G F ⊗ N` is locally injective for every injection `M ⟶ N`
-of presheaves. The left Kan extension is a filtered colimit
-`(Lan_G F)(U) = colim_{U ⟶ G V} F(V)`. A section of `Lan_G F ⊗ M` over `U` killed in
-`Lan_G F ⊗ N` vanishes there through finitely many `R`-linear relations between finitely many
-elements of `(Lan_G F)(U)` (`TensorProduct.exists_relations_of_sum_tmul_eq_zero`); these come
-from one stage `F(V)` where the relations already hold (`ModuleCat.exists_lift_of_isColimit`).
-Since `F` is flat, the relations are trivial locally on `V`
-(`CategoryTheory.Sheaf.exists_factorization_of_flat`), and pulling the covering back to `U`
-along `G` makes the section vanish locally.
+By the relation criterion for flatness
+(`CategoryTheory.Presheaf.flat_presheafToSheaf_obj_of_hasLocallyTrivialRelations`) it suffices
+that linear relations between sections of `Lan_G F` are locally trivial. The left Kan extension
+is a filtered colimit `(Lan_G F)(U) = colim_{U ⟶ G V} F(V)`, so finitely many relations between
+finitely many sections over `U` come from one stage `F(V)` where they already hold
+(`ModuleCat.exists_lift_of_isColimit`). Since `F` is flat they are trivial locally on `V`
+(`CategoryTheory.Sheaf.hasLocallyTrivialRelations_of_flat`), and pulling the covering back to
+`U` along `G` makes them trivial locally on `U`.
 
 This is the argument of blueprint `lem-exc-constant-inverse-image-flat` (the relation criterion
 for flatness transported by an exact inverse image), at the level of an arbitrary flat
@@ -37,8 +35,8 @@ cover-preserving functor.
 
 ## Main results
 
-- `CategoryTheory.Sheaf.equalizerSieve_lan_whiskerLeft_mem`: the local injectivity of
-  `Lan_G F ⊗ M ⟶ Lan_G F ⊗ N`.
+- `CategoryTheory.Sheaf.hasLocallyTrivialRelations_lan`: `Lan_G F` has locally trivial
+  relations.
 - `CategoryTheory.flat_sheafPullback_obj`: the pullback of a flat sheaf of modules along a
   representably flat cover-preserving functor is flat.
 -/

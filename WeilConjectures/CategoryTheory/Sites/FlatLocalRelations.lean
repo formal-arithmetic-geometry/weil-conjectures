@@ -21,20 +21,26 @@ public import WeilConjectures.Mathlib.LinearAlgebra.TensorProduct.Vanishing
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Monoidal
 
 /-!
-# Local triviality of linear relations in flat sheaves of modules
+# The relation criterion for flatness of sheaves of modules
 
-Let `F` be a flat sheaf of modules over a Noetherian commutative ring `R` on a site. Every
-finite system of `R`-linear relations `∑ⱼ eₗⱼ yⱼ = 0` between sections `yⱼ` of `F` over `V` is
-*locally trivial*: locally on `V`, the `yⱼ` are `R`-linear combinations `yⱼ = ∑ₘ bⱼₘ zₘ` with
-`∑ⱼ eₗⱼ bⱼₘ = 0` (`CategoryTheory.Sheaf.exists_factorization_of_flat`). This is the sheaf
-version of the equational criterion for flatness.
+A presheaf of modules over a commutative ring `R` *has locally trivial relations*
+(`CategoryTheory.Presheaf.HasLocallyTrivialRelations`) if every finite system of `R`-linear
+relations `∑ⱼ eₗⱼ yⱼ = 0` between sections `yⱼ` over `V` is trivial locally on `V`: there the
+`yⱼ` are combinations `yⱼ = ∑ₘ bⱼₘ zₘ` with `∑ⱼ eₗⱼ bⱼₘ = 0`. This is the local form of the
+equational criterion for flatness, and over a Noetherian ring it characterizes flat sheaves
+(`CategoryTheory.Sheaf.flat_iff_hasLocallyTrivialRelations`).
 
-The proof tensors the exact sequence `R^t ⟶ R^s ⟶ R^q` (the kernel of `e` being finitely
-generated) with `F`. By flatness the resulting sequence of sheaves is exact, and it is the
-sheafification of the sequence of presheaves `F(-) ⊗ R^t ⟶ F(-) ⊗ R^s ⟶ F(-) ⊗ R^q`. Exactness
-of the sheafification means local exactness of the presheaves
-(`CategoryTheory.Presheaf.imageSieve_mem_of_exact_map_presheafToSheaf`), which is the
-statement.
+* If `P` has locally trivial relations, its sheafification is flat
+  (`CategoryTheory.Presheaf.flat_presheafToSheaf_obj_of_hasLocallyTrivialRelations`): a section
+  `∑ₖ mₖ ⊗ gₖ` of `P ⊗ M` killed in `P ⊗ N` vanishes through finitely many relations between
+  the `mₖ` (`TensorProduct.exists_relations_of_sum_tmul_eq_zero`), which are locally trivial, so
+  tensoring with `P` is locally injective.
+* If `F` is flat, tensoring the exact sequence `R^t ⟶ R^s ⟶ R^q` (the kernel of `e` being
+  finitely generated) with `F` gives an exact sequence of sheaves, the sheafification of
+  `F(-) ⊗ R^t ⟶ F(-) ⊗ R^s ⟶ F(-) ⊗ R^q`; exactness of the sheafification means local
+  exactness of the presheaves
+  (`CategoryTheory.Presheaf.imageSieve_mem_of_exact_map_presheafToSheaf`), which is the local
+  triviality of the relations (`CategoryTheory.Sheaf.hasLocallyTrivialRelations_of_flat`).
 
 ## Main results
 
@@ -42,8 +48,9 @@ statement.
   a section of the middle term killed by the second map is locally in the image of the first.
 - `CategoryTheory.Presheaf.imageSieve_mem_of_exact_map_presheafToSheaf`: the same for a short
   complex of presheaves whose sheafification is exact.
-- `CategoryTheory.Sheaf.exists_factorization_of_flat`: linear relations between sections of a
-  flat sheaf of modules are locally trivial.
+- `CategoryTheory.Presheaf.flat_presheafToSheaf_obj_of_hasLocallyTrivialRelations` and
+  `CategoryTheory.Sheaf.hasLocallyTrivialRelations_of_flat`: the two directions of the relation
+  criterion `CategoryTheory.Sheaf.flat_iff_hasLocallyTrivialRelations`.
 -/
 
 @[expose] public section
@@ -90,7 +97,8 @@ theorem Sheaf.imageSieve_mem_of_exact {S : ShortComplex (Sheaf J (ModuleCat.{w} 
   refine ⟨z, ?_⟩
   have h := congrArg (fun g ↦ g.hom.app (op W) z) S.toCycles_i
   dsimp only at h
-  rw [← h, ObjectProperty.FullSubcategory.comp_hom, NatTrans.comp_app, ConcreteCategory.comp_apply, hz,
+  rw [← h, ObjectProperty.FullSubcategory.comp_hom, NatTrans.comp_app,
+    ConcreteCategory.comp_apply, hz,
     NatTrans.naturality_apply, hc]
 
 /-- **Short complexes of presheaves with exact sheafification are locally exact.** If `S` is a

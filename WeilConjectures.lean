@@ -4,6 +4,7 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Presheaf.Bidual
 public import WeilConjectures.Algebra.Category.ModuleCat.Presheaf.InternalHom
 public import WeilConjectures.Algebra.Category.ModuleCat.Presheaf.InternalHomOver
 public import WeilConjectures.Algebra.Category.ModuleCat.Presheaf.InternalHomUnit
+public import WeilConjectures.Algebra.Category.ModuleCat.QuotSMulTop
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Bidual
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHomFree
@@ -539,13 +540,17 @@ public import WeilConjectures.CategoryTheory.Pro.HypercoverColimit
 public import WeilConjectures.CategoryTheory.Pro.PresheafColimit
 public import WeilConjectures.CategoryTheory.Sites.CechComplex
 public import WeilConjectures.CategoryTheory.Sites.CechCriterion
+public import WeilConjectures.CategoryTheory.Sites.FlatLocalRelations
 public import WeilConjectures.CategoryTheory.Sites.InjectiveSheafSmulEpi
 public import WeilConjectures.CategoryTheory.Sites.MonObj
 public import WeilConjectures.CategoryTheory.Sites.Point.Flat
 public import WeilConjectures.CategoryTheory.Sites.Point.Linear
 public import WeilConjectures.CategoryTheory.Sites.Point.Torsion
+public import WeilConjectures.CategoryTheory.Sites.PullbackFlat
 public import WeilConjectures.CategoryTheory.Sites.PullbackIsoOfLocallyGenerated
 public import WeilConjectures.CategoryTheory.Sites.PushforwardMonoidal
+public import WeilConjectures.CategoryTheory.Sites.ReductionFlat
+public import WeilConjectures.CategoryTheory.Sites.ReductionFlatModel
 public import WeilConjectures.CategoryTheory.Sites.SheafCohomologyBijective
 public import WeilConjectures.CategoryTheory.Sites.SheafCohomologyTorsion
 public import WeilConjectures.CategoryTheory.Sites.SheafifyGrp
@@ -1140,6 +1145,7 @@ public import WeilConjectures.Mathlib.LinearAlgebra.TensorProduct.Associator
 public import WeilConjectures.Mathlib.LinearAlgebra.TensorProduct.Basic
 public import WeilConjectures.Mathlib.LinearAlgebra.TensorProduct.Basis
 public import WeilConjectures.Mathlib.LinearAlgebra.TensorProduct.Finiteness
+public import WeilConjectures.Mathlib.LinearAlgebra.TensorProduct.Vanishing
 public import WeilConjectures.Mathlib.NumberTheory.Cyclotomic.CyclotomicCharacter
 public import WeilConjectures.Mathlib.NumberTheory.Padics.Complex
 public import WeilConjectures.Mathlib.NumberTheory.Padics.RingHoms
@@ -1388,6 +1394,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.CompactSupport
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.DirectImage
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.FlatModel
+public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.FlatModelReduction
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.Kunneth
 public import WeilConjectures.SixFunctors.Etale.Derived.GlobalDuality
 public import WeilConjectures.SixFunctors.Etale.Derived.GlobalSections
@@ -1572,6 +1579,7 @@ public import WeilConjectures.SixFunctors.ProEtale.BaseChange.WeaklyEtale
 public import WeilConjectures.SixFunctors.ProEtale.Comparison
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.Continuity
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.Defs
+public import WeilConjectures.SixFunctors.ProEtale.Comparison.Flat
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.FullyFaithful
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.LowerStar
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.LowerStarAcyclic
@@ -1582,6 +1590,7 @@ public import WeilConjectures.SixFunctors.ProEtale.Derived.Comparison
 public import WeilConjectures.SixFunctors.ProEtale.Derived.Constructible
 public import WeilConjectures.SixFunctors.ProEtale.Derived.Duality
 public import WeilConjectures.SixFunctors.ProEtale.Derived.ExternalProduct
+public import WeilConjectures.SixFunctors.ProEtale.Derived.FlatModel
 public import WeilConjectures.SixFunctors.ProEtale.Derived.Hom
 public import WeilConjectures.SixFunctors.ProEtale.Derived.HomComparison
 public import WeilConjectures.SixFunctors.ProEtale.Derived.LowerShriek

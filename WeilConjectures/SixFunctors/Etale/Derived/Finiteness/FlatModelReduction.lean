@@ -98,7 +98,8 @@ theorem reductionModIdeal_flatModel (I : Ideal Λ) {a b : ℤ}
   have e₂ : (reductionModIdeal Λ X I).obj K ≅ (_root_.DerivedCategory.Q).obj
       (((tensorRight ((constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj
         (ModuleCat.of Λ (Λ ⧸ I)))).mapHomologicalComplex _).obj P) :=
-    ((derivedTensor _ X).mapIso e).app _ ≪≫ derivedTensorQObjSingleFunctorObjIso (a := a) (b := b) P h₃ _
+    ((derivedTensor _ X).mapIso e).app _ ≪≫
+      derivedTensorQObjSingleFunctorObjIso (a := a) (b := b) P h₃ _
   exact ⟨isBoundedFlatComplex_iff.2 ⟨hGE, hLE, hflat⟩, ⟨e₂⟩, ⟨e' ≪≫ e₂.symm⟩,
     DerivedCategory.hasTorAmplitudeIn_iff_torAmplitudeIn.2 htor⟩
 

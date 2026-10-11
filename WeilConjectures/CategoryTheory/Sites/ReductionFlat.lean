@@ -19,7 +19,8 @@ Its reduction `F / I F`, the sheafification of `U ↦ F(U) / I F(U)`
 reduction (`CategoryTheory.Sheaf.flat_quotSMulTop_obj`): a linear relation between sections of
 `F / I F` lifts, after adding the generators of `I` as coefficients, to a linear relation
 between sections of `F`, which is locally trivial since `F` is flat. Restricting the scalars of
-the reduction back to `R` gives `F ⊗ (R ⧸ I)` (`CategoryTheory.Sheaf.quotSMulTopCompRestrictScalarsIso`).
+the reduction back to `R` gives `F ⊗ (R ⧸ I)`
+(`CategoryTheory.Sheaf.quotSMulTopCompRestrictScalarsIso`).
 
 ## Main results
 
@@ -158,7 +159,8 @@ noncomputable def Sheaf.quotSMulTopCompRestrictScalarsIso :
     Sheaf.quotSMulTop J I ⋙ Sheaf.restrictScalars J (Ideal.Quotient.mk I) ≅
       tensorRight ((constantSheaf J (ModuleCat.{u + 1} R)).obj (ModuleCat.of R (R ⧸ I))) :=
   haveI : J.PreservesSheafification (ModuleCat.restrictScalars.{u + 1} (Ideal.Quotient.mk I)) :=
-    preservesSheafification_of_adjunction J (ModuleCat.restrictCoextendScalarsAdj.{u + 1, u + 1, u + 1} _)
+    preservesSheafification_of_adjunction J
+      (ModuleCat.restrictCoextendScalarsAdj.{u + 1, u + 1, u + 1} _)
   haveI : HasWeakSheafify J (ModuleCat.{u + 1} (R ⧸ I)) := inferInstance
   haveI : HasWeakSheafify J (ModuleCat.{u + 1} R) := inferInstance
   let S := sheafToPresheaf J (ModuleCat.{u + 1} R)

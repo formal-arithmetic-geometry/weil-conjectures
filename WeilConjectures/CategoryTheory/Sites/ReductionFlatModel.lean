@@ -57,8 +57,8 @@ theorem Sheaf.flatModel_quotSMulTop {a b : ℤ}
         (DerivedCategory.Q.obj (((Sheaf.quotSMulTop J I).mapHomologicalComplex _).obj P)) ∧
       Nonempty ((Sheaf.restrictScalars J (Ideal.Quotient.mk I)).mapDerivedCategory.obj
           (DerivedCategory.Q.obj (((Sheaf.quotSMulTop J I).mapHomologicalComplex _).obj P)) ≅
-        DerivedCategory.Q.obj (((tensorRight
-          ((constantSheaf J (ModuleCat.{u + 1} R)).obj (ModuleCat.of R (R ⧸ I)))).mapHomologicalComplex
+        DerivedCategory.Q.obj (((tensorRight ((constantSheaf J (ModuleCat.{u + 1} R)).obj
+          (ModuleCat.of R (R ⧸ I)))).mapHomologicalComplex
             _).obj P)) := by
   let ρ := Sheaf.quotSMulTop J I
   let P' := (ρ.mapHomologicalComplex (.up ℤ)).obj P
