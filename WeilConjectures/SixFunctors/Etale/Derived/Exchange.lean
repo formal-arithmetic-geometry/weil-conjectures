@@ -17,7 +17,9 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FlatModuleCat
 public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.QuotPowTriangle
 public import WeilConjectures.Mathlib.CategoryTheory.Triangulated.Functor
 public import WeilConjectures.SixFunctors.Etale.Derived.Invertible
-public import WeilConjectures.SixFunctors.Etale.Derived.LowerStarProjectionShift
+public import WeilConjectures.SixFunctors.Etale.Derived.LowerStarProjectionUnit
+public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekProjectionShift
+public import WeilConjectures.SixFunctors.Etale.Derived.Triangulated
 public import WeilConjectures.SixFunctors.Etale.Derived.TensorRightUnitor
 public import WeilConjectures.SixFunctors.Etale.Derived.OpenImmersionLowerShriekTensorRight
 
@@ -257,7 +259,7 @@ lemma isIso_rightDerivedLowerStarProjectionMap_app_app_quotPowTriangle_obj₃ (f
       (L((f)^*[ModuleCat.{u + 1} Λ]) ⋙ (-⊗ᴸ-(X)[ModuleCat.{u + 1} Λ]).obj K) ⋙
         R((f)_*[ModuleCat.{u + 1} Λ]) :=
     (rightDerivedLowerStarProjectionMap (ModuleCat.{u + 1} Λ) f).app K
-  have : NatTrans.CommShift τ ℤ := rightDerivedLowerStarProjectionMap_app_commShift _ f K
+  have : NatTrans.CommShift τ ℤ := commShift_rightDerivedLowerStarProjectionMap_app _ f K
   have hunit : IsIso (τ.app (𝟙_ _)) :=
     isIso_rightDerivedLowerStarProjectionMap_app_app_tensorUnit _ f K
   let e := singleFunctorObjUnitIso (ModuleCat.{u + 1} Λ) Y
