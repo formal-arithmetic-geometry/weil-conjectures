@@ -25,41 +25,116 @@
   "def-weil-abstract-derived-category",
   "lem-pc-derived-tensor-second-factor-functor"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Regard $M$ as a complex of $R$-modules and choose a K-flat $R$-resolution $e:E\\to M$ [lem-pc-kflat-resolution]. For any complex $T$ of $R$-modules choose a K-flat $R$-resolution $f:F\\to T$. Clause (2) of [lem-pc-derived-tensor-second-factor-functor] represents $M\\otimes_R^{\\mathbf L}T$ in $D(A)$ by $\\operatorname{Tot}(F\\otimes_R M)$, with its strict $A$-action through $M$. After forgetting the $A$-action, the two maps $$\\operatorname{Tot}(F\\otimes_R M)\\xleftarrow{1_F\\otimes e}\\operatorname{Tot}(F\\otimes_R E)\\xrightarrow{f\\otimes 1_E}\\operatorname{Tot}(T\\otimes_R E)$$ are quasi-isomorphisms of $R$-complexes. Indeed, the cones of $e$ and $f$ are acyclic by [lem-pur-quasi-iso-cone-acyclic]; the cone of each tensor map is its tensor with that acyclic cone by [lem-pc-tensor-mapping-cone-iso], up to the sign symmetry of total tensor complexes. The K-flatness of $F$ and $E$ [def-pc-kflat-complex] makes both tensor cones acyclic. Thus this zigzag gives a canonical identification in $D(R)$ between the underlying complex of $M\\otimes_R^{\\mathbf L}T$ and $\\operatorname{Tot}(T\\otimes_R E)$.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-pc-derived-tensor-second-factor-functor",
+    "lem-pur-quasi-iso-cone-acyclic",
+    "lem-pc-tensor-mapping-cone-iso",
+    "def-pc-kflat-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tags 06Y6 and 06Y0, balanced K-flat comparison"
+   }
+  },
+  {
+   "text": "Apply Step 1 to every $T=N_i$ and to $T=N$. The comparison zigzags commute with every chain map $T\\to T'$ when the same resolution $E\\to M$ is held fixed: the total tensor maps $1_F\\otimes e$ and $f\\otimes 1_E$ are natural for maps of resolutions, and the canonical comparison between K-flat resolutions in [lem-pc-derived-tensor-second-factor-functor] (2) removes the choices of $F$. Consequently the maps induced by $\\iota_i$ correspond in $D(R)$ to the actual chain maps $\\operatorname{Tot}(N_i\\otimes_R E)\\to\\operatorname{Tot}(N\\otimes_R E)$. On the one-point site, [lem-pc-module-filtered-colimits-tensor] gives a chain isomorphism $$\\varinjlim_i\\operatorname{Tot}(N_i\\otimes_R E)\\cong\\operatorname{Tot}((\\varinjlim_iN_i)\\otimes_R E)=\\operatorname{Tot}(N\\otimes_R E),$$ under which the structure maps are precisely $\\operatorname{Tot}(\\iota_i\\otimes 1_E)$.",
+   "uses": [
+    "lem-pc-derived-tensor-second-factor-functor",
+    "lem-pc-module-filtered-colimits-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YR, proof, termwise tensor-colimit interchange; specialized here to modules on the one-point site"
+   }
+  },
+  {
+   "text": "The exactness clause of [lem-pc-module-filtered-colimits-tensor] on the one-point site says filtered colimits of $R$-modules are exact. Apply it in the three consecutive degrees $n-1,n,n+1$ of the complexes $\\operatorname{Tot}(N_i\\otimes_R E)$: exactness preserves the kernel of $d^n$ and the image of $d^{n-1}$, so it identifies $\\varinjlim_i\\ker(d_i^n)/\\operatorname{im}(d_i^{n-1})$ with $\\ker(d^n)/\\operatorname{im}(d^{n-1})$. With Step 2 this is the canonical isomorphism $\\varinjlim_iH^n(\\operatorname{Tot}(N_i\\otimes_R E))\\cong H^n(\\operatorname{Tot}(N\\otimes_R E))$ of $R$-modules. The calculation is valid for every integer $n$ without boundedness assumptions.",
+   "uses": [
+    "lem-pc-module-filtered-colimits-tensor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00DB (directed colimits commute with homology), applied degreewise to filtered diagrams"
+   }
+  },
+  {
+   "text": "Combine Step 3 with the canonical zigzags of Step 1. By Step 2, the resulting $R$-module isomorphism is induced by the original coprojection maps under the functor of [lem-pc-derived-tensor-second-factor-functor], so it is the displayed canonical map in the statement. That map is $A$-linear because each map $H^n(M\\otimes_R^{\\mathbf L}\\iota_i)$ is $A$-linear, and a bijective $A$-linear map has an $A$-linear inverse. Its naturality in the diagram follows from functoriality of tensor, colimits, and cohomology. For a chain map $u:M\\to M'$ of $A$-complexes, clause (3) of [lem-pc-derived-tensor-second-factor-functor] gives a natural transformation represented on each K-flat resolution $F$ by $1_F\\otimes u$; its compatibility with the coprojections $\\iota_i$ makes the square between the two canonical colimit maps commute. Thus their inverses are natural in $M$ as well.",
+   "uses": [
+    "lem-pc-derived-tensor-second-factor-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 06Y6, functoriality and independence of K-flat resolutions, combined with Tag 00DB"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-kflat-resolution",
+  "lem-pc-derived-tensor-second-factor-functor",
+  "lem-pur-quasi-iso-cone-acyclic",
+  "lem-pc-tensor-mapping-cone-iso",
+  "def-pc-kflat-complex",
+  "lem-pc-module-filtered-colimits-tensor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tags 06Y6 and 06Y0, combined with Tags 06YR and 00DB"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
-   "query": "filtered colimit of K-flat complexes over a ring remains K-flat",
-   "results": "HomologicalComplex.instHasFilteredColimitsOfSize and HomologicalComplex.ab5OfSize in Mathlib/Algebra/Homology/GrothendieckAbelian; no K-flat declaration",
+   "query": "cohomology of derived tensor product with fixed complex commutes with filtered colimits in other complex",
+   "results": "CategoryTheory.Tor'_obj_obj, CategoryTheory.Tor', CategoryTheory.Tor and HomologicalComplex.instHasGoodTensor₁₂OfHasGoodTensor₁₂TensorX; no statement for unbounded complexes and fixed A-complex",
    "date": "2026-10-11",
-   "verdict": "generalization: filtered colimits of complexes only"
+   "verdict": "no match"
   },
   {
    "tool": "loogle",
-   "query": "KFlat filtered colimit HomologicalComplex",
-   "results": "0 hits; loogle: Unknown identifier KFlat",
+   "query": "CategoryTheory.Tor, HomologicalComplex, colimit",
+   "results": "0 hits; loogle: unknown identifier 'colimit'",
    "date": "2026-10-11",
    "verdict": "no match"
   },
   {
    "tool": "grep",
-   "query": "KFlat|filtered.*colimit|colimit.*K-flat Mathlib/Algebra/Homology",
-   "results": "filtered-colimit infrastructure in Mathlib/Algebra/Homology/GrothendieckAbelian.lean; no K-flat or derived-tensor colimit theorem",
+   "query": "derivedTensor.*colimit|Tor.*colimit|colimit.*Tor Mathlib/Algebra/Homology",
+   "results": "No derived-tensor filtered-colimit theorem; hits concern unrelated colimits",
    "date": "2026-10-11",
    "verdict": "no match"
   },
   {
    "tool": "leansearch",
-   "query": "filtered colimits of K-flat complexes and cohomology commute with filtered colimits",
-   "results": "service unavailable",
+   "query": "filtered colimits commute with derived tensor and homology",
+   "results": "service unavailable: Internal Server Error",
    "date": "2026-10-11",
    "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "left derived tensor functor preserves filtered colimits and homology of complexes commutes with filtered colimits",
+   "results": "CategoryTheory.Tor, CategoryTheory.Tor', CategoryTheory.Functor.leftDerived; none states the filtered-colimit claim",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "preservesColimits.*tensor|tensor.*preservesColimits|homology.*filtered Mathlib/Algebra/Homology",
+   "results": "Generic tensor-colimit preservation for underived modules/presheaves; no derived-tensor cohomology theorem",
+   "date": "2026-10-11",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pc-derived-tensor-flat-second-localization",
   "by": "worker",
@@ -67,5 +142,30 @@
  },
  "lead_notes": [
   "R-dfl0338 (reviewer, 03:45 UTC): statement narrowed to the cohomology clause, with M (x)^L_R N defined as the value of the functor of lem-pc-derived-tensor-second-factor-functor (2) and the isomorphism specified by the coprojections. The delivered clause 'M (x)^L_R colim N_i = colim (M (x)^L_R N_i) in D(A)' was dropped: a filtered colimit in D(A) is not defined in general, and the item uses only the cohomology clause. Proof sketch for the worker: take a K-flat R-resolution E -> M (restriction of scalars); Tot(F_N (x) M) <- Tot(F_N (x) E) -> Tot(N (x) E) are quasi-isomorphisms naturally in N, Tot(E (x) colim N_i) = colim Tot(E (x) N_i) termwise, and H^n commutes with filtered colimits [lem-weil-pbc-filtered-colimit-abelian-groups-exact]."
- ]
+ ],
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-filtered-colimit-derived-tensor",
+  "worker": "stage1",
+  "summary": "Checked the cohomology-only statement against Stacks Tags 06Y6, 06Y0, 06YR and 00DB. A K-flat R-resolution of the underlying complex M computes the underlying derived tensor through a natural zigzag; ordinary tensor totalization and cohomology commute with filtered colimits. No new node is needed. Corrected the source attribution: 06YR is in sites-cohomology.tex and concerns K-flatness of a colimit, while 06Y6 is in more-algebra.tex.",
+  "blueprint": "Steps 1-2 realize the K-flat model and termwise filtered-colimit interchange in the proof place of lem-pc-rf-perfect-base-change; Step 3 realizes cohomology commutation, and Step 4 identifies the canonical A-linear map and its naturality.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-quasi-iso-cone-acyclic",
+    "why": "Its cone criterion identifies the two tensor maps as quasi-isomorphisms; this generic criterion is not in a node of the item unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-quasi-iso-cone-acyclic",
+  "lem-pur-quasi-iso-cone-acyclic"
+ ],
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-fcd0355",
+  "group": "F1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-fcd0355 (reviewer sub-agent of L); spot-checked: C4/E per step: Step1 zigzag Tot(F(x)M)<-Tot(F(x)E)->Tot(T(x)E) is quasi-iso of underlying R-complexes via cone criterion (generic tool, accepted), lem-pc-tensor-mapping-cone-iso (first-factor fixed; symmetry stated for f(x)1_E), K-flat def (acyclic first slot; symmetry for F); second-factor clause (2) computes D(A) value via K-flat resolution of first factor; A-linearity not claimed of the resolution. Step2 lem-pc-module-filtered-colimits-tensor colimit in first factor with E fixed on small one-point site matches; naturality in T via canonical comparison of resolutions (Tot(-(x)E) descends to D(R) since E K-flat). Step3 exactness clause, every n. Step4 A-linearity from A-linear components of the canonical map (statement's own induced maps), naturality in M from clause (3) natural transformation commuting with coprojections; matches citer C4 use. Diff 2 files, no new nodes, no Mathlib leaf. No fault found beyond second reading."
+ }
 }
