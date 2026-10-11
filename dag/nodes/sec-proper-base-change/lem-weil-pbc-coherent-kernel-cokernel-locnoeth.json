@@ -153,5 +153,23 @@
   "group": "G1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of G1; spot-checked by L: L: 3 steps, 0 new nodes: affine reduction with coherent = quasi-coherent of finite type on a locally Noetherian scheme (pqf node), kernels/cokernels/sums computed on affine sections (existing quasi-coherent kernel and cokernel nodes), finite generation of submodules and quotients over a Noetherian ring (existing node); part (2) likewise (01Y0, 01Y1). Correct. Stage-3 note: overlaps the new general 01BY node lem-weil-pbc-coherent-modules-kernel-cokernel-sum."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CoherentKernelCokernelLocallyNoetherian",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.isCoherent_kernel_cokernel_biprod_and_submodule",
+  "file": "lean/Sheaf/AlgebraicGeometry/CoherentKernelCokernelLocallyNoetherian.lean",
+  "statement": "theorem isCoherent_kernel_cokernel_biprod_and_submodule (X : Scheme.{u}) [IsLocallyNoetherian X] : (∀ (F G : X.Modules), RingedSpace.IsCoherent X.toRingedSpace F → RingedSpace.IsCoherent X.toRingedSpace G → (∀ (φ : F ⟶ G), RingedSpace.IsCoherent X.toRingedSpace (kernel φ) ∧ RingedSpace.IsCoherent X.toRingedSpace (cokernel φ)) ∧ RingedSpace.IsCoherent X.toRingedSpace (F ⊞ G)) ∧ (∀ (F F' : X.Modules) (i : F' ⟶ F), RingedSpace.IsCoherent X.toRingedSpace F → Mono i → SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) F' → RingedSpace.IsCoherent X.toRingedSpace F' ∧ RingedSpace.IsCoherent X.toRingedSpace (cokernel i))",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-ckc1207",
+  "group": "G1",
+  "result": "pass",
+  "note": "X : Scheme.{u} + [IsLocallyNoetherian X] (not inferInstance); Mod(O_X)=X.Modules, kernel/cokernel rfl-equal to those in SheafOfModules (moduleRings X.toRingedSpace); (1) coherent F,G -> IsCoherent kernel phi, cokernel phi, F ⊞ G; (2) coherent F, Mono i, F' quasi-coherent (Iff.rfl with F'.IsQuasicoherent) -> F' and cokernel i coherent; only the lean field changed"
  }
 }
