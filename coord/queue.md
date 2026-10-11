@@ -1,11 +1,11 @@
 # Work queue
 
-99 items; claim with `tools/claim.py next <group> [--stage N]`.
+97 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (99)
+## Stage 2: nodes to state (97)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
@@ -27,7 +27,6 @@
 | `lem-weil-pbc-etale-graph-section-extension-map-linear` | 1 | state | 3 |
 | `lem-pc-affine-tor-amplitude-criterion` | 1 | state | 2 |
 | `lem-pc-derived-mayer-vietoris-triangle` | 1 | state | 2 |
-| `lem-weil-pbc-formal-systems-annihilated-by-power` | 1 | state | 2 |
 | `lem-sc-local-dvr-base-change` | 2 | state | 2 |
 | `lem-pc-affine-derived-pullback-tensor-tilde` | 1 | state | 1 |
 | `lem-pc-cech-resolution` | 1 | state | 1 |
@@ -70,7 +69,6 @@
 | `lem-sc-invert-s-cohomology-gluing` | 1 | state | 0 |
 | `lem-sc-invert-s-cohomology-mayer-vietoris-diagram` | 1 | state | 0 |
 | `lem-sc-koszul-regular-immersion-derived-hom` | 1 | state | 0 |
-| `lem-sc-mayer-vietoris-open-cover` | 1 | state | 0 |
 | `lem-sc-open-restriction-support-triangle` | 1 | state | 0 |
 | `lem-sc-pic-affine-base-change-compatibility` | 1 | state | 0 |
 | `lem-sc-proper-flat-right-adjoint-basechange` | 1 | state | 0 |
@@ -89,10 +87,11 @@
 | `lem-weil-pbc-gabber-criterion` | 1 | state | 0 |
 | `lem-weil-pbc-gm-strict-henselization-stalk-formula` | 1 | state | 0 |
 | `lem-weil-pbc-graded-finiteness-cohomology` | 1 | state | 0 |
+| `lem-weil-pbc-grothendieck-existence-devissage` | 1 | state | 0 |
+| `lem-weil-pbc-grothendieck-existence-easy` | 1 | state | 0 |
 | `lem-weil-pbc-hypercohomology-e1-pullback-functorial` | 1 | state | 0 |
 | `lem-weil-pbc-ml-cohomology-powers-ideal` | 1 | state | 0 |
 | `lem-weil-pbc-projective-space-twisting-sheaf-charts` | 1 | state | 0 |
-| `lem-weil-pbc-qs-scheme-cohomology-directed-colimit` | 1 | state | 0 |
 | `lem-weil-pbc-sets-pushforward-stalk-strict-henselization` | 1 | state | 0 |
 | `lem-weil-pbc-strict-henselization-functoriality` | 1 | state | 0 |
 | `lem-weil-pbc-theorem-formal-functions` | 1 | state | 0 |
@@ -100,7 +99,6 @@
 | `pqf-lem-fff-vanishing` | 1 | state | 0 |
 | `prop-weil-pbc-strict-henselization-stalk-formula` | 1 | state | 0 |
 | `thm-sc-constant-invariance` | 1 | state | 0 |
-| `lem-pc-proper-support-perfect-direct-image` | 2 | state | 0 |
 | `lem-pc-rf-single-complex-inherited-tensor-condition` | 2 | state | 0 |
 | `lem-pc-supported-open-pushforward` | 2 | state | 0 |
 | `lem-sc-p1-proj-shifted-free-twist` | 2 | state | 0 |
@@ -109,7 +107,7 @@
 | `pqf-lem-affine-vanishing` | 2 | state | 0 |
 | `pqf-lem-leray-lowdegree` | 2 | state | 0 |
 
-Not open yet: 40 nodes that wait for stage 1, 203 nodes that wait for a statement dependency.
+Not open yet: 40 nodes that wait for stage 1, 201 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
