@@ -150,5 +150,23 @@
   "group": "G1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-gip (reviewer sub-agent of L); spot-checked: Source: varieties.tex Tag 038F (lemma-bijection-irreducible-components: X geometrically irreducible, Y any k-scheme, X x_k Y -> Y bijective on irreducible components) and Tag 054P (lemma-geometrically-irreducible-check-after-extension); item statement unchanged against sheaf-dag. New node lem-sc-irreducible-product-over-field is 038F specialised to Y irreducible (both factors assumed geometrically irreducible, stronger than needed, true; nonempty irreducible from the single component). New node lem-pc-base-change-product: (X x_k Y) x_k k' = X_k' x_k' Y_k', general fibre-product category theory, true; no existing node states it (grep of dag/nodes for the identification, 038F/054P/038G). Step 1 carried by lem-pc-base-change-product; step 2 by def-pc-geometrically-irreducible plus the transitivity X_T' = X_T x_T T' stated in def-pc-base-change; step 3 by lem-sc-irreducible-product-over-field over k' and transport along the step-1 isomorphism. Not a relabelling: the new node concludes irreducibility only, the item geometric irreducibility via base change. Mathlib candidate GeometricallyIrreducible.comp verified at Geometrically/Irreducible.lean:124-130 (needs UniversallyOpen; product instances 110-117 likewise), correctly not a leaf; blueprint_refs search 'geometrically irreducible product' 0 hits, ancestor thm-sc-jacobian-representability matches from.node; no GeometricallyIrreducible product declaration in slopmaster2 WeilConjectures (B10). Small cases: k'=k, one factor Spec k. FIX: dag/nodes/sec-picard-framework/lem-sc-geometrically-irreducible-product.json: proof[1].text/uses and proof_deps: cite [def-pc-base-change] for the identification (X_k')_K = X_K that step 2 used uncited (C4). Note: lem-pc-base-change-product source.place names 038F/054P though the fact is general category theory (maintainer's field, left). Start 15:22:37 UTC, end 15:23:45 UTC (Sat Oct 10 03:23:45 PM UTC 2026).; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GeometricallyIrreducibleProduct",
+  "declaration": "AlgebraicGeometry.geometricallyIrreducible_pullback_over_field",
+  "file": "lean/Sheaf/AlgebraicGeometry/GeometricallyIrreducibleProduct.lean",
+  "statement": "theorem geometricallyIrreducible_pullback_over_field (k : Type u) [Field k] (X Y : Scheme.{u}) [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))] [GeometricallyIrreducible (X ↘ Spec (.of k))] [GeometricallyIrreducible (Y ↘ Spec (.of k))] : GeometricallyIrreducible (pullback.fst (X ↘ Spec (.of k)) (Y ↘ Spec (.of k)) ≫ (X ↘ Spec (.of k)))",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-gip1227",
+  "group": "K1",
+  "result": "pass",
+  "note": "k field=(k:Type u)[Field k]; X,Y over k=[X.Over (Spec (.of k))],[Y.Over ..] (E1 form); geom. irreducible each=Mathlib GeometricallyIrreducible on structure maps; X x_k Y=Limits.pullback of structure maps, structure map pullback.fst ≫ (X ↘ Spec k) (= snd ≫ via pullback.condition, 'either projection'); conclusion GeometricallyIrreducible = IrreducibleSpace after every field ext; not duplicate of E1 irreducibleSpace_pullback_of_geometricallyIrreducible (its k'=k case only); docstring carries 3 proof steps"
  }
 }
