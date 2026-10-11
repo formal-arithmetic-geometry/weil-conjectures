@@ -205,5 +205,23 @@
   "worker": "stage1",
   "summary": "Read Stacks 07NA (algebra.tex, lemma-Noether-normalization-over-a-domain) and its proof, and 00OY, 00GK, 02JJ which it cites. Statement kept (it is 07NA with 'S' finite over R[y]' as a finitely generated module and S'_f = S_f as bijectivity of the induced map). Proof in seven steps following 07NA: S_K = U^{-1}S (U = R minus 0) is a nonzero finite type K-algebra; Noether normalization over K (new Mathlib leaf lem-weil-pbc-noether-normalization-field, exact match exists_finite_inj_algHom_of_fg) with the y_j moved into S by rescaling the variables (instead of the 'Moreover' of 00OY, which Mathlib lacks); injectivity of R[Y] -> S; monic equations over K[Y] by lem-weil-pbc-finite-algebra-is-integral; clearing denominators written out in K and in S; S' finite by lem-weil-pbc-finite-of-integral-generators (Mathlib leaf); S'_f -> S_f bijective written out directly. All three clauses are used by the citer lem-weil-pbc-derivation-nonzero-on-non-pth-power (Step 3). The existing node lem-zl-noether-normalization-field (unit sk-i-real-normalization, outside this unit's route, unsplit) states the same field case; the new leaf is in this unit and the duplication is reported."
  },
- "reviewed": "Reviewed by L 2026-10-10: faithful to Algebra 07NA via the generic fibre: Noether normalization over K (00OY, new exact Mathlib leaf) with the y_j moved into S by rescaling the variables (instead of the 'Moreover' clause of 00OY), injectivity of R[y] → S written out, denominators cleared explicitly, S' finite by integral generators (leaf), S'_f = S_f directly. Tool uses are Mathlib leaves. No Mathlib match for the domain case."
+ "reviewed": "Reviewed by L 2026-10-10: faithful to Algebra 07NA via the generic fibre: Noether normalization over K (00OY, new exact Mathlib leaf) with the y_j moved into S by rescaling the variables (instead of the 'Moreover' clause of 00OY), injectivity of R[y] → S written out, denominators cleared explicitly, S' finite by integral generators (leaf), S'_f = S_f directly. Tool uses are Mathlib leaves. No Mathlib match for the domain case.",
+ "lean": {
+  "module": "Sheaf.RingTheory.NoetherNormalizationOverDomain",
+  "declaration": "Algebra.FiniteType.exists_finite_subalgebra_away",
+  "file": "lean/Sheaf/RingTheory/NoetherNormalizationOverDomain.lean",
+  "statement": "theorem exists_finite_subalgebra_away (R : Type u) (S : Type v) [CommRing R] [IsDomain R] [CommRing S] [Algebra R S] [Algebra.FiniteType R S] (hinj : Function.Injective (algebraMap R S)) : ∃ (d : ℕ) (y : Fin d → S) (S' : Subalgebra R S), Function.Injective (MvPolynomial.aeval (R := R) y) ∧ ∃ h : (MvPolynomial.aeval (R := R) y).range ≤ S', (letI := (Subalgebra.inclusion h).toRingHom.toAlgebra Module.Finite (MvPolynomial.aeval (R := R) y).range S') ∧ ∃ f : R, f ≠ 0 ∧ Function.Bijective (IsLocalization.Away.map (Localization.Away (algebraMap R S' f)) (Localization.Away (S'.val (algebraMap R S' f))) S'.val.toRingHom (algebraMap R S' f))",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-nnd1156",
+  "group": "C1",
+  "result": "pass",
+  "note": "domain R, injective finite-type algebraMap, d:ℕ, y:Fin d→S, S':Subalgebra; (1) aeval y injective + range ≤ S'; (2) Module.Finite range S' via inclusion algebra (rfl-checked, letI inlined); (3) f≠0, IsLocalization.Away.map S'_f→S_f (target defeq Localization.Away (algebraMap R S f)) bijective; not in Mathlib, upstream exists_finite_aeval_away is a different shape"
+ }
 }
