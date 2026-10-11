@@ -142,5 +142,23 @@
   "group": "F1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of F1; spot-checked by L: Reviewed four proof steps and new degreewise exactness node against Stacks 00DO; missing source is marked WANTED and required searches are present."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.SymmetricAlgebraQuotientModule",
+  "declaration": "symmetricAlgebra_quotient_module",
+  "file": "lean/Sheaf/RingTheory/SymmetricAlgebraQuotientModule.lean",
+  "statement": "theorem symmetricAlgebra_quotient_module (R : Type u) [CommRing R] (N : Type v) (M : Type w) [AddCommGroup N] [AddCommGroup M] [Module R N] [Module R M] (p : N →ₗ[R] M) (hp : Function.Surjective p) : Function.Surjective (SymmetricAlgebra.lift ((SymmetricAlgebra.ι R M).comp p)) ∧ RingHom.ker (SymmetricAlgebra.lift ((SymmetricAlgebra.ι R M).comp p)).toRingHom = Ideal.span (SymmetricAlgebra.ι R N '' (LinearMap.ker p : Set N)) ∧ ∃ e : (SymmetricAlgebra R N ⧸ Ideal.span (SymmetricAlgebra.ι R N '' (LinearMap.ker p : Set N))) ≃ₐ[R] SymmetricAlgebra R M, e.toAlgHom.comp (Ideal.Quotient.mkₐ R (Ideal.span (SymmetricAlgebra.ι R N '' (LinearMap.ker p : Set N)))) = SymmetricAlgebra.lift ((SymmetricAlgebra.ι R M).comp p)",
+  "branch": "sheaf-dag",
+  "by": "U1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-sqm",
+  "group": "U1",
+  "result": "pass",
+  "note": "R CommRing; N,M independent universes; p linear + surjective; Sym(p) = SymmetricAlgebra.lift (ι R M ∘ p) (canonical, per dep's mathlib_match); surjective; RingHom.ker = Ideal.span (ι R N '' ker p); ∃ AlgEquiv from quotient with e ∘ mkₐ = Sym(p)"
  }
 }
