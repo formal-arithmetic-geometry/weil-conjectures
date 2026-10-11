@@ -1348,6 +1348,8 @@ public import WeilConjectures.Mathlib.Topology.Constructions
 public import WeilConjectures.Mathlib.Topology.Inseparable
 public import WeilConjectures.Mathlib.Topology.JacobsonSpace
 public import WeilConjectures.Mathlib.Topology.KrullDimension
+public import WeilConjectures.Mathlib.Topology.KrullDimension.Specialization
+public import WeilConjectures.Mathlib.Topology.LocallyClosed
 public import WeilConjectures.Mathlib.Topology.Maps.Basic
 public import WeilConjectures.Mathlib.Topology.NoetherianSpace
 public import WeilConjectures.Mathlib.Topology.QuasiSeparated
@@ -1584,8 +1586,10 @@ public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Finite
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Flat
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.FullyFaithful
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.Proper
+public import WeilConjectures.SixFunctors.Etale.Perverse.AffinePushforward
 public import WeilConjectures.SixFunctors.Etale.Perverse.Basic
 public import WeilConjectures.SixFunctors.Etale.Perverse.Operations
+public import WeilConjectures.SixFunctors.Etale.Perverse.StalkSupport
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.AlgClosedExtension
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Coefficients
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.CurveTestDatum

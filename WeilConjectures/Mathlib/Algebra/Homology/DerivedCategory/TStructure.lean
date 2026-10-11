@@ -172,6 +172,74 @@ lemma prop_of_bounded (Q : ObjectProperty (DerivedCategory C)) [Q.IsTriangulated
     TStructure.t.isLE_of_le M b _ (by lia)
   exact prop_of_isGE_of_isLE Q P hP (b - a + 1).toNat a M ha this fun q _ _ ↦ hMP q
 
+/-- **Dévissage of bounded complexes, degreewise version.** Let `Q` be a property of objects of
+`D(C)` closed under isomorphisms and extensions (for a distinguished triangle
+`X₁ ⟶ X₂ ⟶ X₃ ⟶ X₁⟦1⟧`, `Q X₁` and `Q X₃` imply `Q X₂`) and satisfied by zero objects, and let
+`P q` be a property of objects of `C` for every degree `q` such that `Q` contains the objects
+satisfying `P q` placed in degree `q`. Then `Q` contains every object whose homology is
+concentrated in `[a, a + n - 1]` with `P q` holding for the homology in degree `q`. Unlike
+`DerivedCategory.prop_of_isGE_of_isLE`, `Q` need not be stable under shifts. -/
+lemma prop_of_isGE_of_isLE_of_degreewise (Q : ObjectProperty (DerivedCategory C))
+    [Q.IsClosedUnderIsomorphisms] (hQ₀ : ∀ M, IsZero M → Q M)
+    (hQ : ∀ T ∈ distTriang (DerivedCategory C), Q T.obj₁ → Q T.obj₃ → Q T.obj₂)
+    (P : ℤ → ObjectProperty C) [∀ q, (P q).IsClosedUnderIsomorphisms]
+    (hP : ∀ q X, P q X → Q ((singleFunctor C q).obj X)) (n : ℕ) :
+    ∀ (a : ℤ) (M : DerivedCategory C), M.IsGE a → M.IsLE (a + n - 1) →
+      (∀ q, a ≤ q → q < a + n → P q ((homologyFunctor C q).obj M)) → Q M := by
+  induction n with
+  | zero =>
+    intro a M _ _ _
+    have : M.IsLE (a - 1) := by simpa using ‹M.IsLE (a + ↑(0 : ℕ) - 1)›
+    exact hQ₀ M (TStructure.t.isZero M (a - 1) a (by lia))
+  | succ n ih =>
+    intro a M _ _ hM
+    set b : ℤ := a + n
+    have hT := TStructure.t.triangleLTGE_distinguished b M
+    -- the third term is `H^b M` placed in degree `b`
+    have : ((TStructure.t.triangleLTGE b).obj M).obj₃.IsLE b := by
+      have : M.IsLE b := TStructure.t.isLE_of_le M (a + ↑(n + 1) - 1) _ (by lia)
+      exact inferInstanceAs (TStructure.t.IsLE ((TStructure.t.truncGE b).obj M) b)
+    have : ((TStructure.t.triangleLTGE b).obj M).obj₃.IsGE b := by
+      infer_instance
+    obtain ⟨Y, ⟨e⟩⟩ := exists_iso_singleFunctor_obj_of_isGE_of_isLE
+      ((TStructure.t.triangleLTGE b).obj M).obj₃ b
+    have h₁ : IsZero ((homologyFunctor C (b + 1)).obj ((TStructure.t.triangleLTGE b).obj M).obj₁) :=
+      isZero_of_isLE _ (b - 1) _ (by lia)
+    have h₀ : IsZero ((homologyFunctor C b).obj ((TStructure.t.triangleLTGE b).obj M).obj₁) :=
+      isZero_of_isLE _ (b - 1) _ (by lia)
+    have := isIso_homologyMap_mor₂ _ hT b (b + 1) rfl h₀ h₁
+    have hY : P b Y := (P b).prop_of_iso
+      (asIso ((homologyFunctor C b).map ((TStructure.t.triangleLTGE b).obj M).mor₂) ≪≫
+        (homologyFunctor C b).mapIso e ≪≫ (singleFunctorCompHomologyFunctorIso C b).app Y)
+      (hM b (by lia) (by lia))
+    have h₃ : Q ((TStructure.t.triangleLTGE b).obj M).obj₃ := Q.prop_of_iso e.symm (hP b Y hY)
+    -- the first term is handled by induction
+    have h₁ : Q ((TStructure.t.triangleLTGE b).obj M).obj₁ := by
+      refine ih a _ ?_ ?_ fun q hq hq' ↦ ?_
+      · exact inferInstanceAs (TStructure.t.IsGE ((TStructure.t.truncLT b).obj M) a)
+      · exact TStructure.t.isLE_truncLT_obj _ _ _ (by lia)
+      · have : IsIso ((homologyFunctor C q).map ((TStructure.t.triangleLTGE b).obj M).mor₁) :=
+          isIso_homologyMap_mor₁ _ hT (q - 1) q (by lia)
+            (isZero_of_isGE _ b _ (by lia)) (isZero_of_isGE _ b _ (by lia))
+        exact (P q).prop_of_iso
+          (asIso ((homologyFunctor C q).map ((TStructure.t.triangleLTGE b).obj M).mor₁)).symm
+          (hM q hq (by lia))
+    exact hQ _ hT h₁ h₃
+
+/-- **Dévissage of bounded complexes, degreewise version**, for bounded objects: see
+`DerivedCategory.prop_of_isGE_of_isLE_of_degreewise`. -/
+lemma prop_of_bounded_of_degreewise (Q : ObjectProperty (DerivedCategory C))
+    [Q.IsClosedUnderIsomorphisms] (hQ₀ : ∀ M, IsZero M → Q M)
+    (hQ : ∀ T ∈ distTriang (DerivedCategory C), Q T.obj₁ → Q T.obj₃ → Q T.obj₂)
+    (P : ℤ → ObjectProperty C) [∀ q, (P q).IsClosedUnderIsomorphisms]
+    (hP : ∀ q X, P q X → Q ((singleFunctor C q).obj X)) (M : DerivedCategory C)
+    (hM : TStructure.t.bounded M) (hMP : ∀ q, P q ((homologyFunctor C q).obj M)) : Q M := by
+  obtain ⟨⟨a, ha⟩, ⟨b, hb⟩⟩ := hM
+  have : M.IsLE (a + ↑(b - a + 1).toNat - 1) :=
+    TStructure.t.isLE_of_le M b _ (by lia)
+  exact prop_of_isGE_of_isLE_of_degreewise Q hQ₀ hQ P hP (b - a + 1).toNat a M ha this
+    fun q _ _ ↦ hMP q
+
 section Heart
 
 open Category
