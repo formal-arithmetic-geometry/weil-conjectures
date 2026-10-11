@@ -5214,3 +5214,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 15:23 L: merged deliver/G1/lem-weil-pbc-finite-type-lift-nilpotent (stage 2; reviewer PASS; first push; Sheaf.Algebra.FiniteTypeLiftNilpotent finiteType_of_quotient_finiteType_nilpotent)
 - 15:23 L: merged deliver/M1/lem-sc-group-addition-tangent-differential (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.GroupAdditionTangentDifferential AlgebraicGeometry.group_addition_tangent_differential)
 - 15:24 L: merged deliver/C1/pqf-lem-qf-locqf-qc (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.QuasiFiniteLocallyQuasiFinite AlgebraicGeometry.Scheme.Hom.isQuasiFinite_iff_isLocallyQuasiFinite_and_quasiCompact)
+- 15:24 L: merged deliver/J1/lem-sc-p1-boundary-one-extension-class (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.BoundaryUnitExtensionClass AlgebraicGeometry.Scheme.Modules.boundary_unit_eq_extensionClass)

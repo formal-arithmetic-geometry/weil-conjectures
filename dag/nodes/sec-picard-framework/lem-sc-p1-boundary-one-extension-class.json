@@ -122,5 +122,24 @@
   "group": "F1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-boe1758 (reviewer sub-agent of L); spot-checked: FIX more, RETURN less: C1/D at Step 2 - the delivered proof built the Stacks 0B3A inverse (bijectivity) and asserted without any cited statement that the pulled-back extension's Yoneda class corresponds to delta(1) under the lem-sc-ext-locally-free identification, which is the item itself; lem-sc-p1-ext-yoneda-functoriality says nothing about connecting maps. Repair: proof rewritten in two steps - (1) Ext^i(O_X,-)=H^i(X,-) as universal delta-functors of Hom(O_X,-)=Gamma (lem-sc-ext-locally-free, def-sc-ext-sheaf, pqf-def-cohomology, tool use lem-weil-pbc-right-derived-universal-delta-functor, generic derived-functor tool as in lem-sc-p1-boundary-connecting-naturality), so connecting maps agree and 1 corresponds to id; (2) new statement-only node lem-sc-p1-ext-connecting-yoneda (resolution-Ext connecting map Hom(F,C)->Ext^1(F,A) is s |-> delta o s; Mathlib has only the derived-category form preadditiveCoyoneda_homologySequenceδ_singleTriangle_apply, ExactSequences.lean:49, with no comparison to def-sc-ext-sheaf's resolution delta, so no leaf) gives id |-> e o id = e by lem-sc-p1-ext-yoneda-functoriality. proof_deps updated. The second reading missed this fault; its claimed created.item correction was not made (the value is right anyway).; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.BoundaryUnitExtensionClass",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.boundary_unit_eq_extensionClass",
+  "file": "lean/Sheaf/AlgebraicGeometry/BoundaryUnitExtensionClass.lean",
+  "statement": "theorem boundary_unit_eq_extensionClass {X : Scheme.{u}} [HasExt.{u} X.Modules] (A E : X.Modules) (f : A ⟶ E) (g : E ⟶ SheafOfModules.unit X.ringCatSheaf) (w : f ≫ g = 0) (hS : (ShortComplex.mk f g w).ShortExact) : H.δ hS 0 ((H.zeroLinearEquiv (SheafOfModules.unit X.ringCatSheaf)).symm (unitSectionsEquiv ⊤ 1)) = locallyFreeUnitExtAddEquivH A 1 hS.extClass",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-bec"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-bec",
+  "group": "J1",
+  "result": "fix",
+  "note": "FIX: the unit section 1 of H^0(X,O_X) was a second spelling ((O.unitHomEquiv (𝟙 O)).val (op ⊤)); replaced by the landed spelling unitSectionsEquiv ⊤ 1 (WeilConjectures TensorSection; used in InvertibleSectionRing, LocallyFreeExtNaturality). Rest checked against the node: arbitrary scheme, SES via ShortComplex.ShortExact ending in the unit, e = hS.extClass, canonical H.δ, canonical locallyFreeUnitExtAddEquivH; Scheme.Modules.H as the target of locallyFreeExtAddEquivH (COHOMOLOGY OF O_X-MODULES, B-1521 exception)."
  }
 }
