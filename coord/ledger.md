@@ -3391,3 +3391,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 05:44 L: stage-2 checks now run against the delivery's merge-base when sheaf-dag has moved on (C1's def-pc-compactly-generated failed (a) only for the moved tip); preflight re-run OK
 - 05:45 L: merged deliver/C1/def-pur-sheaf-modules-hom-module (stage 2; reviewer FIX; first push; Sheaf.Algebra.Category.ModuleCat.Sheaf.HomModule SheafOfModules.homModule)
 - 05:46 L: merged deliver/C1/def-pc-compactly-generated (stage 2; reviewer PASS; first push; Sheaf.CategoryTheory.CompactlyGenerated CategoryTheory.IsCompactlyGeneratedTriangulated)
+- 05:46 L: merged deliver/G1/def-weil-pbc-essentially-constant-system (stage 2; reviewer FIX; first push; Sheaf.CategoryTheory.EssentiallyConstantSystem CategoryTheory.Functor.IsEssentiallyConstant)
