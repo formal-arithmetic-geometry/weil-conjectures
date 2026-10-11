@@ -1,11 +1,11 @@
 # Work queue
 
-683 items; claim with `tools/claim.py next <group> [--stage N]`.
+679 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (683)
+## Stage 2: nodes to state (679)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -36,13 +36,9 @@
 | `lem-weil-pbc-filtered-colimit-tensor-varying-rings` | 1 | state |
 | `lem-weil-pbc-finite-after-completion` | 1 | state |
 | `lem-weil-pbc-finite-etale-etale-local-split` | 1 | state |
-| `lem-weil-pbc-finite-etale-lifting-complete` | 1 | state |
-| `lem-weil-pbc-finite-etale-lifting-essential-surjectivity` | 1 | state |
 | `lem-weil-pbc-finite-etale-lifting-limit-descent` | 1 | state |
 | `lem-weil-pbc-finite-etale-trace-exists` | 1 | state |
-| `lem-weil-pbc-finite-free-resolution-noetherian` | 1 | state |
 | `lem-weil-pbc-finite-galois-receiving-separable-extensions` | 1 | state |
-| `lem-weil-pbc-finite-gl-dim-regular-local` | 1 | state |
 | `lem-weil-pbc-finite-locally-constant-module-values` | 1 | state |
 | `lem-weil-pbc-finite-locally-free-degree-etale-descent` | 1 | state |
 | `lem-weil-pbc-finite-locally-free-degree-locally-constant` | 1 | state |
