@@ -1727,7 +1727,9 @@ public import WeilConjectures.SixFunctors.ProEtale.Derived.UpperStarMonoidal.KFl
 public import WeilConjectures.SixFunctors.ProEtale.Derived.UpperStarMonoidal.Vanishing
 public import WeilConjectures.SixFunctors.ProEtale.Derived.WeilComplex
 public import WeilConjectures.SixFunctors.ProEtale.ExceptionalAdjoint
+public import WeilConjectures.SixFunctors.ProEtale.GenericPoint
 public import WeilConjectures.SixFunctors.ProEtale.GeometricFrobenius
+public import WeilConjectures.SixFunctors.ProEtale.KummerCover
 public import WeilConjectures.SixFunctors.ProEtale.LowerShriek.Comparison
 public import WeilConjectures.SixFunctors.ProEtale.LowerShriek.Defs
 public import WeilConjectures.SixFunctors.ProEtale.LowerShriek.OpenImmersion.Complement
