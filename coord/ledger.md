@@ -5500,3 +5500,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 18:08 L: returned deliver/S1/lem-sc-affine-koszul-cech-derived-comparison (reviewer RETURN: Reviewer R-kcd (stage 2, head b044f040d). H7: the statement correction names no error in the node ('What was wrong' desc)
 - 18:08 L: merged deliver/E1/lem-weil-pbc-henselization-pair-g-ring (stage 2; reviewer PASS; first push; Sheaf.RingTheory.HenselizationPairGRing RingTheory.isGRing_of_pair_henselization)
 - 18:08 L: merged deliver/C1/lem-pc-dualizable-evaluation-criterion (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.DualizableEvaluationCriterion AlgebraicGeometry.dualizable_evaluation_criterion)
+- 18:08 L: merged deliver/C1/lem-pc-rf-single-complex-inherited-tensor-condition (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.SingleComplexInheritedTensorCondition AlgebraicGeometry.singleComplexInheritedTensorCondition)
