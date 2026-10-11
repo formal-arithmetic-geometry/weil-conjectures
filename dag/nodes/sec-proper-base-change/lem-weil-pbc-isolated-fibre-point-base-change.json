@@ -177,5 +177,23 @@
   "by": "L",
   "result": "pass",
   "note": "Reviewed by the lead (opus-relaunch6). Four steps on the scheme fibres following Algebra 00PP(1): the fibre of the base change is the base change of the fibre (new Mathlib leaf isPullback_fiberToSpecResidueField_of_isPullback, AlgebraicGeometry/Fiber.lean:65, verified), the open point as a discrete lft scheme over kappa(s), its base change to kappa(s') discrete by the existing leaf (00P4 dimension-0 case) and identified with the open preimage, topology (elementary). Route through quasi-finiteness (01TH) not needed. Brief errors: the algebra lemma is 00PP; 00PL/00PM/00PN/01TG are other statements."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.IsolatedFibrePointBaseChange",
+  "declaration": "AlgebraicGeometry.isolated_fiber_point_base_change",
+  "file": "lean/Sheaf/AlgebraicGeometry/IsolatedFibrePointBaseChange.lean",
+  "statement": "theorem isolated_fiber_point_base_change {X S S' : Scheme.{u}} (f : X ⟶ S) [LocallyOfFiniteType f] (g : S' ⟶ S) (x' : ↥(pullback f g)) (hx : IsOpen ({f.asFiber (pullback.fst f g x')} : Set (f.fiber (f (pullback.fst f g x'))))) : IsOpen ({(pullback.snd f g).asFiber x'} : Set ((pullback.snd f g).fiber ((pullback.snd f g) x')))",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-ifb1103",
+  "group": "M1",
+  "result": "pass",
+  "note": "f : X ⟶ S [LocallyOfFiniteType f] (lft, not finite type); g : S' ⟶ S arbitrary; X' = pullback f g, g' = pullback.fst, f' = pullback.snd; hx open singleton f.asFiber x in f.fiber (f x) (= pullback f (fromSpecResidueField), landed spelling of EtaleLocalFiniteAtPoint/FiniteDimensionalResidueFieldOfIsolatedFiberPoint); conclusion open singleton (pullback.snd f g).asFiber x' in fiber at s'; one universe u; no hollow binders"
  }
 }
