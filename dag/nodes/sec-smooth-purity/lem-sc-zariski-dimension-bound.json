@@ -139,5 +139,23 @@
   "group": "J1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-zdb2930 (reviewer sub-agent of L); spot-checked: Read lem-sc-noetherian-topological-cohomology-vanishing (02UZ, dim<=d, any abelian sheaf), def-sc-topological-abelian-cohomology (identifies with def-sc-zariski-cohomology), both citers (lem-sc-noetherian-cohomology-above-dimension, thm-sc-finite-type-torsion-cd); tool use accepted; Mathlib grep (Grothendieck vanishing / NoetherianSpace cohomology): no match. FIX more, RETURN less: (1) C4/E7 statement 'Noetherian scheme of finite dimension d' cited no node for Noetherian scheme or dimension: now cites def-pc-scheme, def-weil-pbc-quasi-compact-scheme, pqf-def-locnoeth and def-kun-topological-krull-dimension with dim X<=d (stronger than =d, includes empty X; both citers' uses still match); stmt_deps updated, unused def-weil-pbc-scheme-conventions dropped. (2) C1 step 1 used 'underlying space is Noetherian' uncited: now cites lem-weil-pbc-noetherian-scheme-closed-subsets-minimal (01OZ). (3) C1 step 1 identified topological and Zariski-site cohomology uncited: now cites def-sc-topological-abelian-cohomology, whose statement makes that identification; uses/proof_deps updated. Note: Second reading claimed the source was changed to Stacks 02UZ but the delivered file still has the blueprint source; left as is.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ZariskiDimensionBound",
+  "declaration": "AlgebraicGeometry.isZero_zariskiCohomology_of_dimension_bound",
+  "file": "lean/Sheaf/AlgebraicGeometry/ZariskiDimensionBound.lean",
+  "statement": "theorem isZero_zariskiCohomology_of_dimension_bound (X : Scheme.{u}) [CompactSpace X] [IsLocallyNoetherian X] (d : ℕ) (hdim : topologicalKrullDim X ≤ (d : WithBot ℕ∞)) (F : Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}) (q : ℕ) (hq : d < q) : IsZero (Sheaf.H' F q (⊤ : X.Opens))",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "M1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }
