@@ -4698,3 +4698,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 13:03 L: merged deliver/C1/lem-weil-pbc-popescu-reduce-to-field (stage 2; reviewer FIX; first push; Sheaf.RingTheory.PopescuReduceToField popescu_reduce_to_field)
 - 13:03 L: merged deliver/H1/lem-weil-pbc-popescu-lifting (stage 2; reviewer PASS; first push; Sheaf.RingTheory.PopescuLifting Algebra.popescu_lifting)
 - 13:03 L: merged deliver/F1/lem-weil-pbc-power-series-quotient-variables (stage 2; reviewer PASS; first push; Sheaf.RingTheory.PowerSeriesQuotientVariables MvPowerSeries.quotient_first_variables)
+- 13:04 L: merged deliver/J1/lem-weil-pbc-closed-immersion-conormal-functorial (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.ClosedImmersionConormalFunctorial AlgebraicGeometry.Scheme.Modules.closedImmersion_conormal_functorial)
