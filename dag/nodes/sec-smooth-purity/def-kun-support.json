@@ -117,5 +117,32 @@
   "result": "pass"
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-kunneth-ordinary"
+ "unit": "sk-prop-sf-kunneth-ordinary",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleSupport",
+  "declaration": "AlgebraicGeometry.Scheme.etaleSheafSupport",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.etaleSheafSupport",
+   "AlgebraicGeometry.Scheme.etaleComplexSupport",
+   "AlgebraicGeometry.Scheme.Hom.pointsOfTrdegLE",
+   "closedPoints",
+   "Algebra.trdeg"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleSupport.lean",
+  "statement": "def etaleSheafSupport {X : Scheme.{u}} (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) : Set X",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": false,
+  "note": "The three new definitions are E_a(X), support of an abelian etale sheaf, and support of a derived abelian etale sheaf. Closed points and transcendence degree reuse closedPoints and Algebra.trdeg. The support constructions need no finite-type or base-field arguments; their restriction to the schemes of the node is exactly the stated support.",
+  "fixed_by": "R-dks1249"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-dks1249",
+  "group": "E1",
+  "result": "fix",
+  "note": "K field, X/K via p : X ⟶ Spec k with LocallyOfFiniteType+QuasiCompact (as landed ClosedPointField); kappa(x) as k-algebra via p.residueFieldAlgebraMap; E_a = {x | Algebra.trdeg k kappa(x) <= (a:Cardinal)}, a:ℕ; F in Sheaf X.smallEtaleTopology Ab.{u+1}; supp = exists alg. closed Omega, s : Spec Omega ⟶ X with s default = x and not IsZero of (pointSmallEtale s).sheafFiber F (same stalk form as landed GeometricStalkSupport/EtaleSheaves); supp K = Union over q:ℤ of supp of DerivedCategory.homologyFunctor q; no existing support in Mathlib/source/lean/Sheaf; record main declaration switched to etaleSheafSupport"
+ }
 }
