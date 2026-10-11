@@ -139,5 +139,23 @@
   "group": "E1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-afl2810 (reviewer sub-agent of L); spot-checked: Statement matches merged def-nagata-affine-fp-descent on sheaf-dag (B_{lambda_B}=A_{lambda_B}[x]/(r_{j,lambda_B}), beta_B the x_i->x_i map on the displayed base-changed presentation); step 1 finite presentation by construction (elementary); step 2 coefficient transport phi_{lambda_B} o phi_{lambda_k lambda_B}=phi_{lambda_k} and the displayed tensor quotient (base change of a presentation, right exactness of tensor, elementary) are in the definition's statement (C4 ok); step 3 identity on presentations so iso; citer def-nagata-relative-gluing-datum-descent uses it only to pick a descent stage, consistent with statement. No repairs. Second reading by E1 accurate; no missed fault found."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.NagataAffineFpDescends",
+  "declaration": "AlgebraicGeometry.nagata_affine_fp_descends",
+  "file": "lean/Sheaf/AlgebraicGeometry/NagataAffineFpDescends.lean",
+  "statement": "theorem nagata_affine_fp_descends {I : Type v} [Preorder I] [IsDirected I (· ≤ ·)] (F : I ⥤ CommRingCat.{v}) (lambda0 : I) (n m : ℕ) (relations : Fin m → MvPolynomial (Fin n) (↑(colimit F))) (E : NagataAffineFpDescent F lambda0 n m relations) : Algebra.FinitePresentation (F.obj E.stage) E.stageAlgebra ∧ ∃ e : (↑(colimit F) ⊗[F.obj E.stage] E.stageAlgebra) ≃ₐ[↑(colimit F)] E.algebra, e.toAlgHom = E.beta",
+  "branch": "sheaf-dag",
+  "by": "P1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "P1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }
