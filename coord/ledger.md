@@ -3770,3 +3770,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 08:09 L: merged deliver/K1/lem-sc-local-ring-artin-schreier-kernel (stage 2; reviewer PASS; first push; Sheaf.RingTheory.LocalRing.ArtinSchreierKernel IsLocalRing.pow_eq_self_iff_existsUnique_zmod)
 - 08:09 L: merged deliver/K1/lem-sc-genus-invariant (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.GenusInvariant AlgebraicGeometry.genus_jacobian_invariant)
 - 08:09 L: merged deliver/F1/lem-sc-going-down-surjective-dimension (stage 2; reviewer FIX; first push; Sheaf.RingTheory.KrullDimension.GoingDown ringKrullDim_le_of_goingDown_of_surjective)
+- 08:10 L: merged deliver/M1/lem-sc-glue-component-reduced-cover-sections (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.GlueComponentReducedCoverSections AlgebraicGeometry.glue_component_reduced_cover_sections)

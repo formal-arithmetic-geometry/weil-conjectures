@@ -120,5 +120,24 @@
   "group": "C1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-grc (reviewer sub-agent of L); spot-checked: Source: Stacks Varieties Lemma 09NE (label varieties lemma-glue-invertible-sheaves, varieties.tex l.7990ff), read locally: proof sets T, 'As X is reduced we have X minus T = union (Z_i minus T) as schemes', and uses O_X(U)=prod O_{Z_i}(U cap Z_i) for opens off T. Statement unchanged by the delivery; hypotheses reduced X, finitely many closed Z_i covering X set-theoretically are exactly those the proof needs (discreteness of Z_i cap Z_j is only for the parent). Step 1 (elementary): closedness of images from def-weil-closed-immersion; finite-union topology checked, r=0,1 included. Step 2: def-weil-closed-immersion affine clause (i^{-1}U = Spec R/I), def-sbc-closed-immersion-ideal-sheaf (I(U)=I), lem-weil-pbc-zero-locus-eq-iff-radical-eq (V(I)=V(0) iff sqrt I = sqrt 0), def-pc-reduced-scheme (O_X(U) reduced for every open) carry it: I subset nilradical = 0, so Z_i minus T = W_i. Step 3 (elementary): sheaf axiom of O_X on the disjoint cover U cap W_i plus step 2. proof_deps equals the union of uses. All cited nodes are status mathlib (definitions and one commutative-algebra leaf), so no tool_uses needed. No new nodes, no Mathlib leaf. Small cases: Spec k[x,y]/(xy) with the two axes (one given ideal (x^2)), two disjoint points, r=1. Note: the report says the local Stacks source is absent; it is present on the server and agrees with the web text quoted; proof_origin by agent kept since the affine ideal argument is the worker's. Start Sat Oct 10 03:24:59 PM UTC 2026, end Sat Oct 10 03:25:35 PM UTC 2026."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GlueComponentReducedCoverSections",
+  "declaration": "AlgebraicGeometry.glue_component_reduced_cover_sections",
+  "file": "lean/Sheaf/AlgebraicGeometry/GlueComponentReducedCoverSections.lean",
+  "statement": "theorem glue_component_reduced_cover_sections {X : Scheme.{u}} [IsReduced X] {ι : Type v} [Finite ι] (Z : ι → Scheme.{u}) (i : ∀ a : ι, Z a ⟶ X) [∀ a : ι, IsClosedImmersion (i a)] (hcover : (⋃ a : ι, Set.range (i a)) = Set.univ) : let T : Set X := ⋃ a : ι, ⋃ b : ι, ⋃ (_ : b ≠ a), Set.range (i a) ∩ Set.range (i b) IsClosed T ∧ (∀ a : ι, IsOpen (Tᶜ ∩ Set.range (i a))) ∧ Pairwise (fun a b : ι => Disjoint (Tᶜ ∩ Set.range (i a)) (Tᶜ ∩ Set.range (i b))) ∧ (⋃ a : ι, Tᶜ ∩ Set.range (i a)) = Tᶜ ∧ ∀ V : X.Opens, (V : Set X) ⊆ Tᶜ → Function.Bijective (fun s : Γ(X, V) => fun a : ι => ((i a).app V).hom s : Γ(X, V) → ∀ a : ι, Γ(Z a, (i a) ⁻¹ᵁ V))",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-gcr1151"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-gcr1151",
+  "group": "M1",
+  "result": "fix",
+  "note": "X reduced, finite family of closed immersions covering X, T = union over a≠b of Z_a∩Z_b (closed), Z_a\\T open/pairwise disjoint/covering X\\T, restriction map Γ(X,V)→Π Γ(Z_a,(i a)⁻¹V) bijective for every open V⊆X\\T; FIX: abstract RingEquiv replaced by the restriction map, IsOpen clause added, Fin r -> Finite ι and hcover in G1 form"
  }
 }
