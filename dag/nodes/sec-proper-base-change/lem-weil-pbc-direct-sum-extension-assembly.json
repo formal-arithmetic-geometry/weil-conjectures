@@ -141,5 +141,24 @@
   "group": "H1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ds3 (reviewer sub-agent of L); spot-checked: Re-review of the repaired push after the 14:35 return (R-dsa, head 84e01c1ab). Return point 1 repaired: step 1 now pulls back the given S-extension T along iota_j(x)S to get T_j, takes E_j from the item hypothesis, builds E by surjectivity of Phi_R of lem-weil-pbc-ext-one-direct-sum, and states that equivalences base-change via def-weil-module-base-change (compatible with composition and identities, checked in its statement); step 2 identifies P(x)S with the direct sum of C_j(x)S via lem-weil-pbc-tensor-commutes-with-colimits, gets exactness of E(x)S from lem-weil-pbc-flat-tensor-exact and lem-weil-pbc-tensor-right-exact, proves (E x_P C_j)(x)S = (E(x)S) x (C_j(x)S) by the kernel of E+C_j->P and flat exactness, and concludes by injectivity of Phi_S; every cited statement read and says what is used. Return point 2 repaired: the new node's via is the item followed by the item's whole via chain, nearest first. Report TeX now single backslashes. Source: More on Algebra 05EG (lemma-neighbourhood-extensions), more-algebra.tex lines 24504-24527, 'compatibility of Ext with direct sums (details omitted)'; the item states it for an arbitrary family with fixed-end-term equivalence, as needed there. New node lem-weil-pbc-ext-one-direct-sum: Yoneda Ext^1 of an arbitrary direct sum is the product, true for any J; checked J empty (one class, the split zero quotient) and J a singleton (identity). Mathlib: only finite Ext.biproductAddEquiv, so unsplit is right; blueprint_refs search 'Ext direct sum extension' found nothing relevant (same_as [] correct). Only the maintainer fields untouched; branch based on a recent sheaf-dag with no conflicting files. Start Sat Oct 10 02:52:48 PM UTC 2026, end Sat Oct 10 02:53:23 PM UTC 2026."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.DirectSumExtensionAssembly",
+  "declaration": "LinearMap.extension_descends_of_summands",
+  "file": "lean/Sheaf/RingTheory/DirectSumExtensionAssembly.lean",
+  "statement": "theorem extension_descends_of_summands {R : Type u} {S : Type v} [CommRing R] [CommRing S] [Algebra R S] (_hflat : (algebraMap R S).Flat) {N : Type w} [AddCommGroup N] [Module R N] {J : Type x} (C : J → Type y) [∀ j, AddCommGroup (C j)] [∀ j, Module R (C j)] (_hC : ∀ (j : J) (T : Type z) [AddCommGroup T] [Module S T] (a : S ⊗[R] N →ₗ[S] T) (b : T →ₗ[S] S ⊗[R] C j), Function.Injective a → Function.Exact a b → Function.Surjective b → ∃ (E : Type (max w y)) (_ : AddCommGroup E) (_ : Module R E) (i : N →ₗ[R] E) (q : E →ₗ[R] C j), Function.Injective i ∧ Function.Exact i q ∧ Function.Surjective q ∧ ∃ θ : S ⊗[R] E ≃ₗ[S] T, θ.toLinearMap.comp (i.baseChange S) = a ∧ b.comp θ.toLinearMap = q.baseChange S) {T : Type z} [AddCommGroup T] [Module S T] (a : S ⊗[R] N →ₗ[S] T) (b : T →ₗ[S] S ⊗[R] (⨁ j, C j)) (_ha : Function.Injective a) (_hab : Function.Exact a b) (_hb : Function.Surjective b) : ∃ (E : Type (max w x y)) (_ : AddCommGroup E) (_ : Module R E) (i : N →ₗ[R] E) (q : E →ₗ[R] (⨁ j, C j)), Function.Injective i ∧ Function.Exact i q ∧ Function.Surjective q ∧ ∃ θ : S ⊗[R] E ≃ₗ[S] T, θ.toLinearMap.comp (i.baseChange S) = a ∧ b.comp θ.toLinearMap = q.baseChange S",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-dse0948"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-dse0948",
+  "group": "K1",
+  "result": "fix",
+  "note": "flat R->S = (algebraMap R S).Flat; N, family C over arbitrary J (no Fintype/DecidableEq), P = ⨁ j, C j; summand hypothesis over every S-extension T (injective/Function.Exact/surjective) gives E_j, a, q short exact and θ : S⊗E ≃ T with both ends fixed (θ∘a_S = a, b∘θ = q_S); conclusion same for P; base change S ⊗[R] - as LinearMap.baseChange; J empty / zero N / zero S checked; FIX: ModuleCat+ShortComplex.ShortExact restated unbundled as G1 b04a0ec5b, let expanded, renamed LinearMap.extension_descends_of_summands"
  }
 }
