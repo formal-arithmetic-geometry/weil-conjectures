@@ -3489,3 +3489,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 06:22 L: merged deliver/J1/def-weil-derived-limit (stage 2; reviewer PASS; first push; Sheaf.CategoryTheory.Triangulated.DerivedLimit CategoryTheory.IsDerivedLimit)
 - 06:22 L: merged deliver/F1/lem-galois-fpqc-singleton-fully-faithful-0241 (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.FpqcSingletonFullyFaithful CategoryTheory.fpqc_singleton_pullback_fullyFaithful)
 - 06:22 L: merged deliver/K1/def-weil-pbc-torsion-etale-sheaf (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.TorsionEtaleSheaf AlgebraicGeometry.Scheme.IsTorsionAbelianSheaf)
+- 06:23 L: merged deliver/M1/lem-kun-closed-point-field (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.ClosedPointField AlgebraicGeometry.closedPoint_iff_residueField_trdeg_zero_and_finite)
