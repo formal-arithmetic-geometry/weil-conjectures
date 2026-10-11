@@ -172,5 +172,23 @@
   "item": "lem-weil-pbc-charpoly-locally-free-direct-sum",
   "worker": "stage1",
   "summary": "Split into five steps, written out by the agent since Stacks 09XI omits the details: (1) the products g_ij = f^(1)_i f^(2)_j generate the unit ideal (elementary); (2) M_k ⊗ A_{g_ij} is free of rank n_k, from (M_k)_f free via the new leaves lem-weil-pbc-localization-away-tensor-iso (M_f = M ⊗ A_f, Stacks 00DK, IsLocalizedModule.isBaseChange) and lem-weil-pbc-free-base-change-tower (A → A_f → A_g, Stacks 00D2/00DD, Basis.baseChange + cancelBaseChange); (3) (M_1⊕M_2) ⊗ A_g splits as the direct sum, compatibly with φ⊗1, hence is free of rank n_1+n_2, and so is M_g: first assertion; (4) by the characterizing property of def-weil-pbc-charpoly-locally-free and the new leaf lem-weil-pbc-charpoly-direct-sum-free (LinearMap.charpoly_prodMap) the two sides agree in A_g[T]; (5) coefficientwise they agree in A by lem-weil-pbc-localized-span-eq-zero. The brief's warning was followed: the characterizing property is applied only on the covering by the products, where all three modules are free. stmt_deps gained def-weil-pbc-module-localization-away (the statement uses localizations M_f). Statement unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.LocallyFreeCharpolyProdMap",
+  "declaration": "Algebra.locallyFreeCharpoly_prodMap",
+  "file": "lean/Sheaf/Algebra/LocallyFreeCharpolyProdMap.lean",
+  "statement": "theorem locallyFreeCharpoly_prodMap {A : Type u} {M₁ : Type v₁} {M₂ : Type v₂} [CommRing A] [AddCommGroup M₁] [Module A M₁] [AddCommGroup M₂] [Module A M₂] {n₁ n₂ r₁ r₂ : ℕ} (f₁ : Fin r₁ → A) (f₂ : Fin r₂ → A) (hgen₁ : Ideal.span (Set.range f₁) = ⊤) (hgen₂ : Ideal.span (Set.range f₂) = ⊤) (hfree₁ : ∀ i : Fin r₁, ∃ _e : Module.Basis (Fin n₁) (Localization.Away (f₁ i)) (LocalizedModule.Away (f₁ i) M₁), True) (hfree₂ : ∀ j : Fin r₂, ∃ _e : Module.Basis (Fin n₂) (Localization.Away (f₂ j)) (LocalizedModule.Away (f₂ j) M₂), True) (φ₁ : M₁ →ₗ[A] M₁) (φ₂ : M₂ →ₗ[A] M₂) : let g : Fin (r₁ * r₂) → A := fun k ↦ f₁ (finProdFinEquiv.symm k).1 * f₂ (finProdFinEquiv.symm k).2; ∃ (hggen : Ideal.span (Set.range g) = ⊤) (hgfree : ∀ k : Fin (r₁ * r₂), ∃ _e : Module.Basis (Fin (n₁ + n₂)) (Localization.Away (g k)) (LocalizedModule.Away (g k) (M₁ × M₂)), True), locallyFreeCharpoly g hggen hgfree (φ₁.prodMap φ₂) = locallyFreeCharpoly f₁ hgen₁ hfree₁ φ₁ * locallyFreeCharpoly f₂ hgen₂ hfree₂ φ₂",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-cld0942",
+  "group": "E1",
+  "result": "pass",
+  "note": "A CommRing no extra hyps; M1,M2 independent universes; covers f1,f2 Fin-indexed with unit-ideal + Fin nk bases of LocalizedModule.Away over Localization.Away exactly as J1 locallyFreeCharpoly binders; conclusion: product cover via finProdFinEquiv, hggen + Fin(n1+n2) bases on M1×M2 (local freeness clause), locallyFreeCharpoly of prodMap = product; not LinearMap.charpoly_prodMap (free only); edge r=0,n=0 fine"
  }
 }
