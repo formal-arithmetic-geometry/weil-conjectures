@@ -137,5 +137,23 @@
   "group": "J1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-dek0240 (reviewer sub-agent of L); spot-checked: Statement signs checked against def-weil-abstract-derived-category (Cone(f)[-1] differential correct); kappa chain map OK; Mathlib grep: only CochainComplex.mappingCone.quasiIso_descShortComplex (cone of first map), no kernel/shifted-cone decl. FIX more, RETURN less: (1) C4/D gap missed by J1's second reading: step 3 claimed the TR3 morphism (via lem-weil-pbc-triangle-morphism-extension) from the ses triangle to the rotated cone triangle with identities on P,Q has first component Q(kappa); TR3/that lemma only give some morphism, uniqueness needs Hom(K[1],Q)=0, and the third square kappa[1]delta=i needs delta, which lem-weil-pbc-complex-ses-triangle does not specify. Replaced steps 2-3: ses 0->K->Cone(f)[-1]->Cone(id_Q)[-1]->0 (degreewise direct sum of id and the kernel sequence), Cone(id_Q)[-1] contractible via h(y,q)=(0,-y) (elementary), then its triangle compared with the TR1 triangle K=K->0 by lem-sf-triangle-morphism-iso gives Q(kappa) iso, hence quasi-iso via H^r o Q = H^r. Dropped lem-weil-pbc-triangle-morphism-extension from uses/proof_deps. (2) B4: all steps rewritten in TeX.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.KernelShiftedMappingCone",
+  "declaration": "CochainComplex.exists_kernel_to_shifted_mappingCone_of_degreewise_epi",
+  "file": "lean/Sheaf/Algebra/Homology/KernelShiftedMappingCone.lean",
+  "statement": "theorem exists_kernel_to_shifted_mappingCone_of_degreewise_epi {C : Type u} [Category.{v} C] [Abelian C] [HasDerivedCategory.{w} C] {P Q : CochainComplex C ℤ} (f : P ⟶ Q) (hf : ∀ p : ℤ, Epi (f.f p)) : ∃ κ : kernel f ⟶ (mappingCone f)⟦(-1 : ℤ)⟧, (∀ p : ℤ, κ.f p ≫ ((mappingCone f).shiftFunctorObjXIso (-1) p (p - 1) (by omega)).hom ≫ homotopyCofiber.sndX f (p - 1) = 0 ∧ κ.f p ≫ ((mappingCone f).shiftFunctorObjXIso (-1) p (p - 1) (by omega)).hom ≫ homotopyCofiber.fstX f (p - 1) p (by change p - 1 + 1 = p; omega) = (kernel.ι f).f p) ∧ QuasiIso κ ∧ Nonempty ((DerivedCategory.Q.obj (kernel f)) ≅ DerivedCategory.Q.obj ((mappingCone f)⟦(-1 : ℤ)⟧))",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-dek1311",
+  "group": "K1",
+  "result": "pass",
+  "note": "Abelian C; P Q : CochainComplex C ℤ, f; ∀ p Epi (f.f p); K = kernel f, ι = kernel.ι f (termwise limits); Cone(f)[-1] = (mappingCone f)⟦-1⟧ with d_fstX/d_sndX and negOnePow shift sign matching the node's differential after summand swap; κ pinned to (0,ι) by fstX/sndX projections (ext_to_X jointly monic); QuasiIso κ; Nonempty iso of Q.obj in D(A) with HasDerivedCategory.{w} as in landed siblings"
  }
 }
