@@ -205,5 +205,24 @@
   "worker": "stage1",
   "summary": "Checked against Stacks Algebra 030W (line 10360), proof of (4) => (3) => (2) => (1) (lines 10376-10407), the definition of k^{1/p} (lines 10352-10357) and 0H71 (line 10296). Statement unchanged in content; the tensor product K ⊗_k L now cites def-weil-vector-space-scalar-extension and its ring structure is written out. Five steps: (1) k^{1/p} as {μ in an algebraic closure : μ^p in k}, with unique p-th roots c^{1/p}; (2) (4) => (3) with L = k^{1/p}; (3) the source's x^p = m(x) ⊗ 1, computed for x = Σ b_i ⊗ c_i^{1/p} by the Frobenius of A (the map m itself is not needed); (4) (3) => (2): x^p = (Σ c_i b_i^p) ⊗ 1 = 0 gives x = 0, and the b_i ⊗ 1 are L-independent by extending to a k-basis (lem-weil-pbc-vector-space-basis-through-vector) and the basis clause of def-weil-vector-space-scalar-extension; (5) (2) => (1): the condition passes to finitely generated subextensions K', and the new Mathlib leaf lem-weil-pbc-p-power-independence-separably-generated (Mathlib exists_isTranscendenceBasis_and_isSeparable_of_linearIndepOn_pow_of_essFiniteType, tagged 030W (2) => (1) f.g. case, carrying the source's minimal-inseparability argument with 0H71) makes K' separably generated. No node for 0H71 is needed. Mathlib has no (3) => (2) (searches recorded)."
  },
- "reviewed": "Reviewed by L 2026-10-10: faithful to Algebra 030W (4)=>(3)=>(2)=>(1): k^{1/p} constructed in an algebraic closure (step 1), the Frobenius identity x^p = m(x)⊗1 evaluated without constructing m (step 3), (3)=>(2) via the basis clause of the scalar-extension definition (step 4), (2)=>(1) for finitely generated subextensions by the new Mathlib leaf (030W (2)=>(1), Mathlib's own stacks tag). Statement gained a citation for the ring structure of K⊗L only."
+ "reviewed": "Reviewed by L 2026-10-10: faithful to Algebra 030W (4)=>(3)=>(2)=>(1): k^{1/p} constructed in an algebraic closure (step 1), the Frobenius identity x^p = m(x)⊗1 evaluated without constructing m (step 3), (3)=>(2) via the basis clause of the scalar-extension definition (step 4), (2)=>(1) for finitely generated subextensions by the new Mathlib leaf (030W (2)=>(1), Mathlib's own stacks tag). Statement gained a citation for the ring structure of K⊗L only.",
+ "lean": {
+  "module": "Sheaf.FieldTheory.GeometricallyReducedExtensionSeparable",
+  "declaration": "Algebra.isSeparableExtension_of_forall_isReduced_tensorProduct",
+  "file": "lean/Sheaf/FieldTheory/GeometricallyReducedExtensionSeparable.lean",
+  "statement": "theorem isSeparableExtension_of_forall_isReduced_tensorProduct (k : Type u) (K : Type v) [Field k] [Field K] [Algebra k K] (p : ℕ) [Fact p.Prime] [CharP k p] (hred : ∀ (L : Type (max u v)) [Field L] [Algebra k L], IsReduced (K ⊗[k] L)) : Algebra.IsSeparableExtension k K",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-grs1051"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-grs1051",
+  "group": "M1",
+  "result": "fix",
+  "note": "p prime (Fact p.Prime), k field char p (CharP k p), K/k Algebra, hred over all fields L/k in Type (max u v) (w dropped), IsReduced (K ⊗[k] L) with Mathlib tensor ring, conclusion recorded Algebra.IsSeparableExtension (FG intermediate fields separably generated); not hollow"
+ }
 }
