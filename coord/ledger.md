@@ -5078,3 +5078,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 14:53 L: merged deliver/G1/lem-weil-pbc-unramified-quasi-finite-at-points (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.UnramifiedQuasiFinite AlgebraicGeometry.Scheme.Hom.isLocallyQuasiFinite_of_unramified)
 - 14:53 L: merged deliver/T1/lem-weil-pbc-support-pullback-finite-type (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.FiniteTypeModuleSupportPullback AlgebraicGeometry.Scheme.Modules.finiteType_module_support_pullback; statement correction reverted (stmt_deps))
 - 14:53 L: merged deliver/H1/lem-exc-coinduced-discrete-embedding (stage 2; reviewer PASS; first push; Sheaf.RepresentationTheory.CoinducedDiscreteEmbedding Rep.exists_coinduced_discrete_embedding)
+- 14:54 L: merged deliver/H1/lem-weil-pbc-smooth-section-etale-lift (stage 2; reviewer PASS; first push; Sheaf.Paper.SmoothSectionEtaleLift AlgebraicGeometry.exists_etale_lift_of_smooth)

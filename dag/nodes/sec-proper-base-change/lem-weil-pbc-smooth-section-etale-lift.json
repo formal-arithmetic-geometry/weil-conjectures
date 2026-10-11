@@ -244,5 +244,23 @@
   "item": "lem-weil-pbc-smooth-section-etale-lift",
   "worker": "stage1",
   "summary": "Proof written in 10 steps following Stacks 07M7 exactly (reduction to smooth ring maps; conormal module via 06A9; free case: C = B/(f), Jacobi-Zariski sequence, rank/Nakayama/05G8 at primes containing NC, etale at those primes (07BU), 07M0 localization, idempotent splitting (00U7/00U8) and A' = C_{hg}; case (H) via B (x) Sym(Q) (07M6, 00T4, 00TD) with the conormal computation written out; general case via 07M5 and base change of differentials (00RV)). The DAG had no node for smooth ring maps (Stacks 00T2) or for the identification with def-sbc-smooth-morphisms (01V6/02H6): created def-weil-pbc-smooth-ring-map (Mathlib leaf Algebra.Smooth) and lem-weil-pbc-smooth-ring-map-iff-smooth-affine (unsplit). Created 9 further nodes for the cited Stacks lemmas (06A9, 07M5, 07M6, 00T4+00TD, 00RV, 00S2 specialised, 05G8, 07BU+00U1, 07M0); 3 of them Mathlib leaves. Existing nodes reused: finite-projective-rank-locally-constant (00NX), nakayama-local-generators (00DV), etale-quotient-base-change, etale-section-idempotent-splitting (00U7/00U8), lift-invertible-element, etale-composition-cancellation, symmetric-algebra-universal-property. Statement and stmt_deps unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.SmoothSectionEtaleLift",
+  "declaration": "AlgebraicGeometry.exists_etale_lift_of_smooth",
+  "statement": "theorem exists_etale_lift_of_smooth (A B : Type u) [CommRing A] [CommRing B] [Algebra A B] (J : Ideal A) (σ : B →ₐ[A] A ⧸ J) (hB : Smooth (Scheme.Spec.map (CommRingCat.ofHom (algebraMap A B)).op)) : ∃ (A' : CommAlgCat.{u} A), Etale (Scheme.Spec.map (CommRingCat.ofHom (algebraMap A A')).op) ∧ ∃ (α : A ⧸ J →ₐ[A] A' ⧸ (J.map (algebraMap A A'))), Function.Bijective α ∧ ∃ (tildeσ : B →ₐ[A] A'), Ideal.Quotient.mk (J.map (algebraMap A A')) ∘ tildeσ = α.toRingHom ∘ σ.toRingHom",
+  "by": "H1",
+  "date": "2026-10-11",
+  "file": "lean/Sheaf/Paper/SmoothSectionEtaleLift.lean",
+  "branch": "sheaf-dag",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "H1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }
