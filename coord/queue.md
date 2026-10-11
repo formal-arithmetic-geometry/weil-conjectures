@@ -1,11 +1,11 @@
 # Work queue
 
-573 items; claim with `tools/claim.py next <group> [--stage N]`.
+568 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (573)
+## Stage 2: nodes to state (568)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -19,7 +19,6 @@
 | `lem-weil-pbc-finite-etale-trace-degree` | 1 | state |
 | `lem-weil-pbc-flat-completion` | 1 | state |
 | `lem-weil-pbc-flat-mod-injective` | 1 | state |
-| `lem-weil-pbc-formal-glueing-H0-localization` | 1 | state |
 | `lem-weil-pbc-formal-glueing-canonical-maps` | 1 | state |
 | `lem-weil-pbc-fpqc-finer-than-etale` | 1 | state |
 | `lem-weil-pbc-fpqc-local-on-base-criterion` | 1 | state |
@@ -27,13 +26,9 @@
 | `lem-weil-pbc-free-complex-maps-to-resolution` | 1 | state |
 | `lem-weil-pbc-free-complex-mod-nonzerodivisor-exact` | 1 | state |
 | `lem-weil-pbc-fs-adic-base-change` | 1 | state |
-| `lem-weil-pbc-fs-adic-complete-source-target` | 1 | state |
-| `lem-weil-pbc-fs-adic-field-differentials-injective` | 1 | state |
 | `lem-weil-pbc-fs-adic-lift-from-residue-field` | 1 | state |
 | `lem-weil-pbc-fs-adic-lift-over-finite-coefficient-map` | 1 | state |
-| `lem-weil-pbc-g-ring-check-pairs-of-primes` | 1 | state |
 | `lem-weil-pbc-g-ring-maximal-ideal-criterion` | 1 | state |
-| `lem-weil-pbc-gabber-finite-etale-section` | 1 | state |
 | `lem-weil-pbc-gabber-h0-etale-criterion` | 1 | state |
 | `lem-weil-pbc-galois-base-change-qc-open-descends` | 1 | state |
 | `lem-weil-pbc-galois-invariant-closed-subset-descends` | 1 | state |
