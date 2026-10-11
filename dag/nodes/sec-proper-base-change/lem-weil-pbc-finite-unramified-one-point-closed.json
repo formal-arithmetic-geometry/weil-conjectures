@@ -220,5 +220,23 @@
   "by": "L",
   "result": "pass",
   "note": "Reviewed by the lead (opus-relaunch6). Seven steps along Stacks 04DG (etale.tex 722-743): reduction to the affine case, the fibre ring unramified over kappa(p) hence a finite product of finite separable extensions (new unsplit node for Morphisms 02G7(1) affine case / Algebra 00UW proof; Mathlib has a composite route via FormallyEtale.iff_formallyUnramified_of_field Etale/Field.lean:185 and iff_exists_algEquiv_prod :194, left unsplit), one factor equal to kappa(q) (fibre-ring nodes), separable and purely inseparable forces equality (elementary; Mathlib FormallyUnramified.range_eq_top_of_isPurelyInseparable noted), Nakayama over A_p, spreading out through the annihilator of B/phi(A) (00L2 leaf) instead of Stacks' 00EA, the closed-immersion criterion 01QO over D(f). Two tool uses recorded. Brief errors: 00UW is unramified-at-prime; the over-a-field lemma is 02G7."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteUnramifiedOnePointClosed",
+  "declaration": "AlgebraicGeometry.finite_unramified_one_point_closed",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteUnramifiedOnePointClosed.lean",
+  "statement": "theorem finite_unramified_one_point_closed {X S : Scheme.{u}} (π : X ⟶ S) (s : S) (x : X) (hx : π x = s) (hunique : ∀ y : X, π y = s → y = x) (hfinite : IsFinite π) (hunramified : LocallyOfFiniteType π ∧ IsOpenImmersion (pullback.diagonal π)) (hpure : letI : Algebra (S.residueField (π x)) (X.residueField x) := (π.residueFieldMap x).hom.toAlgebra IsPurelyInseparable (S.residueField (π x)) (X.residueField x)) : ∃ U : S.Opens, s ∈ U ∧ IsClosedImmersion (π ∣_ U)",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-fuo1031",
+  "group": "K1",
+  "result": "pass",
+  "note": "X S π s x binders; hx+hunique = topological fibre π⁻¹(s)={x} (node's primary form); IsFinite π; unramified = recorded def-weil-unramified-morphism conjunction LocallyOfFiniteType ∧ IsOpenImmersion (pullback.diagonal π); IsPurelyInseparable over residueFieldMap algebra κ(π x)→κ(x), no finiteness added; ∃ U ∋ s, IsClosedImmersion (π ∣_ U); no Mathlib 04DG (grep Morphisms/Finite, FormallyUnramified, QuasiFinite)"
  }
 }

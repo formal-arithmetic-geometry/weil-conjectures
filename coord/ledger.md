@@ -4255,3 +4255,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 10:31 L: merged deliver/M1/lem-weil-pbc-first-quadrant-row-collapse (stage 2; reviewer PASS; first push; Sheaf.CategoryTheory.FirstQuadrantRowCollapse CategoryTheory.first_quadrant_row_collapse)
 - 10:31 L: merged deliver/E1/lem-weil-pbc-flat-module-powers (stage 2; reviewer PASS; first push; Sheaf.RingTheory.Flat.FlatModulePowers Module.Flat.flat_of_flat_quotients_powers)
 - 10:32 L: merged deliver/M1/lem-weil-pbc-first-order-thickening-base-change (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.FirstOrderThickeningBaseChange AlgebraicGeometry.IsFirstOrderThickening.baseChange)
+- 10:32 L: merged deliver/K1/lem-weil-pbc-finite-unramified-one-point-closed (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.FiniteUnramifiedOnePointClosed AlgebraicGeometry.finite_unramified_one_point_closed)
