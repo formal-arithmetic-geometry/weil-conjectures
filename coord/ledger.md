@@ -4084,3 +4084,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 09:47 L: merged deliver/K1/lem-weil-pbc-derived-square-iso-commshift (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.DerivedSquareIsoCommShift AlgebraicGeometry.derivedSquareIso_commShift)
 - 09:47 L: merged deliver/K1/lem-sp-kinjective-computes (stage 2; reviewer FIX; first push; Sheaf.CategoryTheory.KInjectiveComputes CategoryTheory.Functor.kInjective_computes)
 - 09:47 L: merged deliver/F1/lem-weil-pbc-dimension-at-point-field-extension (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.DimensionAtPointFieldExtension AlgebraicGeometry.topologicalKrullDimAt_spec_tensorProduct_field_extension)
+- 09:48 L: merged deliver/H1/lem-weil-pbc-derived-finite-product (stage 2; reviewer PASS; first push; Sheaf.CategoryTheory.DerivedFiniteProduct CategoryTheory.rightDerived_finite_product)

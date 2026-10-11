@@ -123,5 +123,23 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-dfp (reviewer sub-agent of L); spot-checked: Start Sat Oct 10 04:31:05 PM UTC 2026. Item statement (finite I, abelian A_i with enough injectives, additive left exact Gamma_i; Gamma left exact and R^q Gamma = prod R^q Gamma_i) checked against def-sp-abelian, def-sp-injective-resolutions, def-sp-left-exact-additive (R^n v := H^n(v(I)) for an injective resolution). Step 1 carried by lem-weil-pbc-finite-product-injective-resolutions (finite product of abelian categories is abelian with enough injectives, injectives and resolutions componentwise; true, tested I empty and singleton); step 2 by lem-weil-pbc-finite-product-complex-cohomology (true; finite products of complexes of Ab) plus def-sp-left-exact-additive. Mathlib grep: no product-category abelian/EnoughInjectives instance nor derived-functor product statement, so no leaf; homology-of-biproduct only as generalization via homologyFunctor Additive. FIX more, RETURN less: the clause 'Gamma is additive and left exact' of the item (also needed for R^q Gamma to be defined) was proved by no step (C1): added statement-only node lem-weil-pbc-finite-product-functor-left-exact (source Stacks 060K plus componentwise kernels) and cited it in step 1 (text, uses, proof_deps). Fixes: lem-weil-pbc-finite-product-injective-resolutions.json: stmt_deps: removed lem-weil-pbc-product-injectives (a lemma not cited by the statement); source.place: Stacks 015M (composition of derived functors, irrelevant) replaced by Section 0156; lem-weil-pbc-derived-finite-product.json: step 1 source.place and proof_origin.place: 015M replaced by Section 0156 (the worker's claim that derived.tex is absent is wrong); tool_uses lem-weil-pbc-product-injectives dropped (the item's proof does not cite it). End Sat Oct 10 04:32:28 PM UTC 2026.; 3 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
  },
- "lead_note": "2026-10-10 L (R-dfp): Mathlib has no product-category abelian/enough-injectives/derived-functor statement; the complex-cohomology node follows from HomologicalComplex.homologyFunctor being Additive (Mathlib/Algebra/Homology/ShortComplex/HomologicalComplex.lean:791) hence preserving finite biproducts, a generalization, not an exact leaf."
+ "lead_note": "2026-10-10 L (R-dfp): Mathlib has no product-category abelian/enough-injectives/derived-functor statement; the complex-cohomology node follows from HomologicalComplex.homologyFunctor being Additive (Mathlib/Algebra/Homology/ShortComplex/HomologicalComplex.lean:791) hence preserving finite biproducts, a generalization, not an exact leaf.",
+ "lean": {
+  "module": "Sheaf.CategoryTheory.DerivedFiniteProduct",
+  "declaration": "CategoryTheory.rightDerived_finite_product",
+  "file": "lean/Sheaf/CategoryTheory/DerivedFiniteProduct.lean",
+  "statement": "theorem rightDerived_finite_product (I : Type u) [Finite I] (A : I → Type v) [∀ i, Category.{w} (A i)] [∀ i, Abelian (A i)] [∀ i, HasInjectiveResolutions (A i)] (Γi : (i : I) → A i ⥤ AddCommGrpCat.{z}) [∀ i, (Γi i).Additive] [∀ i, PreservesFiniteLimits (Γi i)] : let Γ := Functor.pi Γi ⋙ Pi.functor I ∃ hAb : Abelian (∀ i, A i), letI := hAb ∃ hRes : HasInjectiveResolutions (∀ i, A i), ∃ hAdd : Γ.Additive, PreservesFiniteLimits Γ ∧ (letI := hRes letI := hAdd ∀ q : ℕ, Nonempty (Γ.rightDerived q ≅ Functor.pi (fun i ↦ (Γi i).rightDerived q) ⋙ Pi.functor I))",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-dfp0947",
+  "group": "H1",
+  "result": "pass",
+  "note": "finite I ([Finite I], empty allowed); A_i abelian (Abelian) with enough injectives (HasInjectiveResolutions, as landed FiniteAcyclicResolution/AcyclicComparisonNatural); Gamma_i additive + left exact (Additive, PreservesFiniteLimits) into AddCommGrpCat; Gamma = Functor.pi Gamma_i ⋙ Pi.functor I (componentwise product, objects and maps); conclusion: Gamma additive and left exact, and for all q:ℕ a natural iso Gamma.rightDerived q ≅ Functor.pi (R^q Gamma_i) ⋙ Pi.functor I; product-category Abelian/resolutions existential since Mathlib has no pi Abelian instance (preadditive structure unique, so no weakening)"
+ }
 }
