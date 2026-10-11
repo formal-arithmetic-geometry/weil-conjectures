@@ -228,4 +228,5 @@ theorem sum_inverse_mul_prod_erase_eq_one (hn : 0 < n)
       exact mul_eq_zero_of_right _
         (Finset.prod_eq_zero (Finset.mem_erase.2 ⟨Ne.symm hri, hi⟩) (sub_self _))
     · intro h; exact absurd hi h
+
 end Polynomial

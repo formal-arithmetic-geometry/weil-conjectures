@@ -263,8 +263,6 @@ class HasKummerClass.IsNormalized : Prop where
   isIso_supportedClassMap_kummerBoundary_coord {k : Type u} [Field k] (B : Scheme.{u})
       (aB : B ⟶ Spec (.of k)) [IsSeparated aB] [LocallyOfFiniteType aB]
       [HasInvertibleExponent Λ B] :
-    haveI : HasInvertibleExponent Λ 𝔸(ULift.{u} (Fin 1); B) :=
-      .of_hom (𝔸(ULift.{u} (Fin 1); B) ↘ B)
     IsIso (supportedClassMap Λ (𝔸(ULift.{u} (Fin 1); B).zeroLocusSubschemeι
         {AffineSpace.coord B (ULift.up 0)})
       (shiftSupportedClass (ModuleCat.{u + 1} Λ) _ 2
