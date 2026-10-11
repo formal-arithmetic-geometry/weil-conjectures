@@ -1,11 +1,11 @@
 # Work queue
 
-123 items; claim with `tools/claim.py next <group> [--stage N]`.
+117 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (123)
+## Stage 2: nodes to state (117)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
@@ -68,7 +68,6 @@
 | `lem-sc-strict-henselization-cotangent-dimension` | 1 | state | 0 |
 | `lem-sc-strict-henselization-dvr` | 1 | state | 0 |
 | `lem-weil-pbc-closed-immersion-pushforward-ideal-powers` | 1 | state | 0 |
-| `lem-weil-pbc-coherent-homs-over-open` | 1 | state | 0 |
 | `lem-weil-pbc-cohomology-filtered-colimit` | 1 | state | 0 |
 | `lem-weil-pbc-derived-etale-cohomology-limit` | 1 | state | 0 |
 | `lem-weil-pbc-finite-coproduct-cohomology-assembly` | 1 | state | 0 |
@@ -91,17 +90,14 @@
 | `lem-weil-pbc-symmetric-product-finite` | 1 | state | 0 |
 | `lem-weil-pbc-symmetric-product-over-base` | 1 | state | 0 |
 | `lem-weil-pbc-symmetric-product-surjective` | 1 | state | 0 |
-| `lem-weil-pbc-torsion-submodule-flat-base-change-iso` | 1 | state | 0 |
 | `lem-weil-pbc-truncated-coskeleton-finite-limits` | 1 | state | 0 |
 | `lem-weil-pbc-universal-thickening-flat-base-change` | 1 | state | 0 |
 | `lem-weil-pbc-universal-thickening-open-restriction` | 1 | state | 0 |
 | `lem-weil-pbc-unrestricted-strict-henselization-stalk` | 1 | state | 0 |
-| `lem-weil-pbc-zero-dimensional-base-change-points` | 1 | state | 0 |
 | `lem-weil-pbc-zero-dimensional-cohomology` | 1 | state | 0 |
 | `lemma-weil-pbc-fibre-product-limit` | 1 | state | 0 |
 | `prop-weil-pbc-strict-henselization-stalk-formula` | 1 | state | 0 |
 | `sbc-lem-higher-direct-image-presheaf` | 1 | state | 0 |
-| `lem-exc-coinduced-continuous-acyclic` | 2 | state | 0 |
 | `lem-pc-affine-perfect-hom-colimit` | 2 | state | 0 |
 | `lem-pc-rf-single-complex-inherited-tensor-condition` | 2 | state | 0 |
 | `lem-sc-finite-locally-free-derived-hom` | 2 | state | 0 |
@@ -113,7 +109,6 @@
 | `lem-sc-p1-proj-shifted-free-twist` | 2 | state | 0 |
 | `lem-sc-p1-serre-section-module-finite` | 2 | state | 0 |
 | `lem-sc-p1-twist-multiplication` | 2 | state | 0 |
-| `lem-sc-perfect-pullback-perfect-residue` | 2 | state | 0 |
 | `lem-sc-pic-affine-quotient` | 2 | state | 0 |
 | `lem-sc-picard-valuation-probe-closure` | 2 | state | 0 |
 | `lem-sc-second-kummer-divisors` | 2 | state | 0 |
@@ -127,7 +122,6 @@
 | `lem-weil-pbc-henselian-finite-type-product-decomposition` | 2 | state | 0 |
 | `lem-weil-pbc-integral-closure-finite-fibre-part-localization` | 2 | state | 0 |
 | `lemma-weil-pbc-etale-cohomology-continuity` | 2 | state | 0 |
-| `thm-sc-proper-cohomology` | 2 | state | 0 |
 | `lem-pc-essentially-constant-ind-hom-colimit` | 3 | state | 0 |
 | `lem-sc-normalization-properties` | 3 | state | 0 |
 | `lem-pc-essentially-constant-pro-hom-colimit` | 4 | state | 0 |
