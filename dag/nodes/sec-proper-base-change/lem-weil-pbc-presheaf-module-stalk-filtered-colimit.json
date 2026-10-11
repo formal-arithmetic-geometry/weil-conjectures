@@ -191,5 +191,23 @@
   "worker": "stage1",
   "summary": "Statement checked against Sheaves 009D item (4) (the node's source said item (5), which is the item of 009E for sheaves; place corrected) and Modules 01AH proof of (2); kept. The source gives no proof ('The proofs are all easy'); the proof is written out elementwise: (1) the stalks of the P_i form a diagram of O_x-modules with cocone ((p_i)_x) (stalk functoriality from def-weil-pbc-module-stalk; p_i morphisms of presheaves by the Mathlib leaf lem-weil-pbc-presheaf-modules-colimits-sectionwise); (2) every germ of P comes from a germ of some P_i (existing leaf lem-weil-pbc-filtered-colimit-modules-elementwise (1) on P(U)); (3) a germ of P_i killed in P_x is killed by some transition map (equality of germs, then lem-weil-pbc-filtered-colimit-modules-elementwise (2) on P(W)); (4) the new Mathlib leaf lem-weil-pbc-filtered-colimit-modules-criterion (the converse, recognition direction, which the elementwise node does not state) concludes. Mathlib re-searched (leansearch, leanfinder, loogle, grep, local_search): no stalk functor for presheaves of modules, item not a leaf; mathlib_candidate updated."
  },
- "reviewed": "Reviewed by L 2026-10-10: proof by agent (Sheaves 009D item (4), 'easy'): the stalk cocone satisfies the elementwise criterion for filtered colimits of modules (steps 2-3 from the elementwise node on P(U), P(W)), which is a new composed Mathlib leaf. No Mathlib match for the item (no stalk functor for presheaves of modules into O_x-modules, candidate kept)."
+ "reviewed": "Reviewed by L 2026-10-10: proof by agent (Sheaves 009D item (4), 'easy'): the stalk cocone satisfies the elementwise criterion for filtered colimits of modules (steps 2-3 from the elementwise node on P(U), P(W)), which is a new composed Mathlib leaf. No Mathlib match for the item (no stalk functor for presheaves of modules into O_x-modules, candidate kept).",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.PresheafModuleStalkFilteredColimit",
+  "declaration": "TopCat.Presheaf.isColimit_stalk_mapCocone",
+  "file": "lean/Sheaf/AlgebraicGeometry/PresheafModuleStalkFilteredColimit.lean",
+  "statement": "theorem isColimit_stalk_mapCocone (X : TopCat.{v}) (R : TopCat.Presheaf CommRingCat.{v} X) (x : X) {I : Type v} [SmallCategory I] [IsFiltered I] (D : I ⥤ PresheafOfModules.{v} (R ⋙ forget₂ CommRingCat RingCat)) (c : Cocone D) (hc : ∀ (U : TopologicalSpace.Opens X), IsColimit ((PresheafOfModules.evaluation (R ⋙ forget₂ CommRingCat RingCat) (Opposite.op U)).mapCocone c)) : Nonempty (IsColimit ((PresheafOfModules.moduleStalkFunctor (R ⋙ forget₂ CommRingCat RingCat) x).mapCocone c))",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-psf1420",
+  "group": "E1",
+  "result": "pass",
+  "note": "X:TopCat, R presheaf CommRingCat (no sheaf cond), x, I:Type v small filtered (index in module universe), D:I⥤PresheafOfModules(R⋙forget₂), c+hc sectionwise IsColimit via evaluation (op U) for all U = node's P(U),p_i; conclusion Nonempty IsColimit of moduleStalkFunctor.mapCocone c as sibling ModuleStalkFilteredColimit; dep def-weil-pbc-module-stalk re-recorded existing:true sheaf-only RingedSpace.moduleStalkFunctor -> presheaf-general PresheafOfModules.moduleStalkFunctor (node is presheaf-level), carrier rfl-equal to RingedSpace one on sheaves (tested), no sorry in data; universes print single v"
+ }
 }

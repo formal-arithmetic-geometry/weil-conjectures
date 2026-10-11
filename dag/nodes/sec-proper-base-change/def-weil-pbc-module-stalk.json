@@ -88,13 +88,30 @@
   "note": "Mathlib leaf created by the split of lem-weil-pbc-module-stalk-tensor; match verified by the lead against the Mathlib source"
  },
  "lean": {
-  "module": "Sheaf.Algebra.Homology.ModuleStalkFunctor",
-  "declaration": "AlgebraicGeometry.RingedSpace.moduleStalkFunctor",
-  "statement": "def moduleStalkFunctor : Modules X ⥤ ModuleCat.{u} (X.presheaf.stalk x)",
+  "module": "Sheaf.Topology.PresheafModuleStalkFunctor",
+  "declaration": "PresheafOfModules.moduleStalkFunctor",
+  "file": "lean/Sheaf/Topology/PresheafModuleStalkFunctor.lean",
+  "statement": "def moduleStalkFunctor {X : TopCat.{u}} (R : TopCat.Presheaf RingCat.{u} X) (x : X) : PresheafOfModules.{u} R ⥤ ModuleCat.{u} (R.stalk x)",
   "branch": "sheaf-dag",
-  "by": "L",
+  "by": "E1",
   "date": "2026-10-11",
-  "existing": true,
-  "note": "Stalk of an O_X-module as an O_{X,x}-module: RingedSpace.moduleStalkFunctor (def-pc-module-stalk-functor, K1); germ-level statements use F.presheaf.stalk/germ, the same carrier (STATE line MODULE STALKS; K1 8d1472101). Lead note 2026-10-11 12:34 UTC: recorded by bookkeeping agent B-1251 of L; name and signature read in the pinned Mathlib (0df444a360) of the slopmaster2 checkout or on sheaf-dag."
+  "existing": false,
+  "declarations": [
+   "PresheafOfModules.stalkObj",
+   "PresheafOfModules.stalkAddMap",
+   "PresheafOfModules.stalkMap_linear",
+   "PresheafOfModules.stalkMap",
+   "PresheafOfModules.stalkMap_id",
+   "PresheafOfModules.stalkMap_comp"
+  ],
+  "note": "The recorded RingedSpace.moduleStalkFunctor only accepts sheaves over a ringed space, whereas this node includes arbitrary presheaves of modules over a presheaf of rings. Mathlib provides the stalk carrier and module structure but not the linear stalk maps and functor in that generality. This module bundles those existing stalks into a functor for arbitrary ring presheaves."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-psf1420",
+  "group": "E1",
+  "result": "pass",
+  "note": "X:TopCat, R presheaf CommRingCat (no sheaf cond), x, I:Type v small filtered (index in module universe), D:I⥤PresheafOfModules(R⋙forget₂), c+hc sectionwise IsColimit via evaluation (op U) for all U = node's P(U),p_i; conclusion Nonempty IsColimit of moduleStalkFunctor.mapCocone c as sibling ModuleStalkFilteredColimit; dep def-weil-pbc-module-stalk re-recorded existing:true sheaf-only RingedSpace.moduleStalkFunctor -> presheaf-general PresheafOfModules.moduleStalkFunctor (node is presheaf-level), carrier rfl-equal to RingedSpace one on sheaves (tested), no sorry in data; universes print single v"
  }
 }
