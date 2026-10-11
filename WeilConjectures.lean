@@ -497,6 +497,7 @@ public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasLeftKanExten
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasLeftKanExtension.AxiomCensus
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution
+public import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolutionInjective
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.Defs
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolution
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.TensorColimits
@@ -1363,6 +1364,7 @@ public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.TorsionSheaf
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.UnderivedExchange
 public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
 public import WeilConjectures.SixFunctors.Etale.Derived.CoefficientsShift
+public import WeilConjectures.SixFunctors.Etale.Derived.CoextendScalars
 public import WeilConjectures.SixFunctors.Etale.Derived.Composition
 public import WeilConjectures.SixFunctors.Etale.Derived.DerivedComplete
 public import WeilConjectures.SixFunctors.Etale.Derived.Dualizing
