@@ -48,6 +48,19 @@ lemma opensRange_map_ι (W : S.Opens) :
   rw [h, this, Scheme.Opens.range_ι]
   rfl
 
+lemma opensRange_map {X : Scheme.{u}} (f : X ⟶ S) [IsOpenImmersion f] :
+    (map m f).opensRange = (𝔸(m; S) ↘ S) ⁻¹ᵁ f.opensRange := by
+  ext x
+  have := Scheme.Pullback.range_fst (𝔸(m; S) ↘ S) f
+  have h : Set.range (map m f) = Set.range (pullback.fst (𝔸(m; S) ↘ S) f) := by
+    rw [← (isPullback_map (n := m) f).isoPullback_hom_fst, Scheme.Hom.comp_base,
+      TopCat.coe_comp, Set.range_comp,
+      Set.range_eq_univ.mpr (ConcreteCategory.bijective_of_isIso
+        (isPullback_map (n := m) f).isoPullback.hom.base).2, Set.image_univ]
+  change x ∈ Set.range _ ↔ _
+  rw [h, this]
+  rfl
+
 lemma preimage_preimage_map_ι (W : S.Opens) :
     map m W.ι ⁻¹ᵁ ((𝔸(m; S) ↘ S) ⁻¹ᵁ W) = ⊤ := by
   rw [← opensRange_map_ι, Scheme.Hom.preimage_opensRange]
