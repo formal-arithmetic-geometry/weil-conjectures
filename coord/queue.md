@@ -1,11 +1,11 @@
 # Work queue
 
-145 items; claim with `tools/claim.py next <group> [--stage N]`.
+143 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (145)
+## Stage 2: nodes to state (143)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
@@ -39,7 +39,6 @@
 | `lem-pc-derived-tensor-transitivity` | 1 | state | 1 |
 | `lem-pc-grothendieck-ss-double-complex-model` | 1 | state | 1 |
 | `lem-pc-restrict-derived-direct-image-open` | 1 | state | 1 |
-| `lem-pur-rhom-global-sections` | 1 | state | 1 |
 | `lem-sc-affine-pseudo-coherent-rhom-qcoherent` | 1 | state | 1 |
 | `lem-sc-derived-internal-hom-restrict-open` | 1 | state | 1 |
 | `lem-weil-pbc-etale-mayer-vietoris` | 1 | state | 1 |
@@ -116,7 +115,6 @@
 | `lem-weil-pbc-gm-strict-henselization-stalk-formula` | 1 | state | 0 |
 | `lem-weil-pbc-hypercohomology-e1-pullback-functorial` | 1 | state | 0 |
 | `lem-weil-pbc-integral-cover-kills-constant-cohomology` | 1 | state | 0 |
-| `lem-weil-pbc-integral-cover-trivial-cohomology` | 1 | state | 0 |
 | `lem-weil-pbc-inverse-image-composition-module-linear` | 1 | state | 0 |
 | `lem-weil-pbc-inverse-image-free-etale-module` | 1 | state | 0 |
 | `lem-weil-pbc-projective-space-twisting-sheaf-charts` | 1 | state | 0 |
