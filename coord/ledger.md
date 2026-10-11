@@ -4048,3 +4048,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 09:36 L: merged deliver/F1/def-pod-l-adic-representations (stage 2; reviewer FIX; first push; Sheaf.RepresentationTheory.LAdic Representation.IsLAdic)
 - 09:36 L: merged deliver/K1/lem-weil-pbc-depth-le-dim-associated-prime (stage 2; reviewer FIX; first push; Sheaf.RingTheory.DepthLeDimAssociatedPrime IsLocalRing.depth_le_ringKrullDim_quotient_of_mem_associatedPrimes)
 - 09:37 L: merged deliver/M1/lem-weil-pbc-depth-le-support-dimension (stage 2; reviewer PASS; first push; Sheaf.RingTheory.DepthLeSupportDimension IsLocalRing.depth_le_supportDim)
+- 09:37 L: merged deliver/F1/lem-weil-pbc-depth-ext (stage 2; reviewer PASS; first push; Sheaf.RingTheory.DepthExt IsLocalRing.exists_depth_eq_ext_degree)
