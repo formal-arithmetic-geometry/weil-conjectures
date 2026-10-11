@@ -109,5 +109,23 @@
   "group": "F1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ebg2342 (reviewer sub-agent of L); spot-checked: Step 1 cites lem-weil-pbc-etale-scheme-base-change (02GO, any base change), applied to U_K, an open nbhd of x_K: correct. Step 2 cites the new child lem-sc-etale-faithfully-flat-local, a real pointwise lemma, not a special case of lem-galois-fpqc-descend-etale (02VN is global: f_i etale everywhere), not elementary, not in Mathlib; checked the child for Y=Spec k by hand (x isolated with O_{X,x}=kappa(x), kappa(x) forced finite over k). C4: statement matches lem-sc-hom-etale-locus-translation step 2 (K/k any extension, x_K any point above x). FIX more, RETURN less: (1) C4: step 2 text justified the child with Tag 036N (fppf local on source; Spec K -> Spec k is fpqc, not fppf) and the global Tags 02VN/02VM, which do not give the pointwise statement; rewrote step 2 to invoke the child via 0C4Y and noted 02VN is only the global analogue; child source place corrected likewise. (2) B4: plain-text arrows in step 2 and the item source place replaced by \\to. (3) B3: item statement now cites [def-pc-field-extension] (added to stmt_deps), as the child does.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleAtFieldExtension",
+  "declaration": "AlgebraicGeometry.etaleAt_iff_fieldExtension",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleAtFieldExtension.lean",
+  "statement": "theorem etaleAt_iff_fieldExtension (k K : Type u) [Field k] [Field K] [Algebra k K] {X Y : Over (Spec (CommRingCat.of k))} (f : X ⟶ Y) (x : X.left) (xK : (pullback X.hom (Spec.map (CommRingCat.ofHom (algebraMap k K))) : Scheme)) (hx : (pullback.fst X.hom (Spec.map (CommRingCat.ofHom (algebraMap k K)))) xK = x) : (∃ U : X.left.Opens, x ∈ U ∧ Etale (U.ι ≫ f.left)) ↔ (let fK := ((Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap k K)))).map f).left ∃ U : (pullback X.hom (Spec.map (CommRingCat.ofHom (algebraMap k K)))).Opens, xK ∈ U ∧ Etale (U.ι ≫ fK))",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-ebg1239",
+  "group": "E1",
+  "result": "pass",
+  "note": "k K Type u fields with Algebra k K = K/k; X Y : Over (Spec k) and f : X ⟶ Y = morphism of k-schemes (bundled form); X_K = Limits.pullback X.hom (Spec.map algebraMap), fK = (Over.pullback g).map f .left, checked rfl-equal to pullback.map f.left id id; xK above x via pullback.fst = f_T; étale at a point = ∃ open U ∋ x, Etale (U.ι ≫ f) on both sides, iff for every x and xK; no extra finiteness/char hypotheses; docstring follows both proof steps; pullback resolves to CategoryTheory.Limits.pullback"
  }
 }
