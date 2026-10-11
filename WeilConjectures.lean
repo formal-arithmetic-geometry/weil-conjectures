@@ -115,6 +115,7 @@ public import WeilConjectures.AlgebraicGeometry.EtaleFiniteRefinement.FinitePres
 public import WeilConjectures.AlgebraicGeometry.EtaleFiniteRefinement.GeometricLifts
 public import WeilConjectures.AlgebraicGeometry.EtaleFiniteRefinement.Induction
 public import WeilConjectures.AlgebraicGeometry.EtaleFiniteRefinement.Specialization
+public import WeilConjectures.AlgebraicGeometry.FieldBaseChangeDimension
 public import WeilConjectures.AlgebraicGeometry.FieldBaseChangeSections
 public import WeilConjectures.AlgebraicGeometry.FiniteOverField
 public import WeilConjectures.AlgebraicGeometry.Frobenius
