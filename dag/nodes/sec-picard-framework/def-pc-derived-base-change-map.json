@@ -13,7 +13,7 @@
  },
  "kind": "definition",
  "title": "Canonical derived base-change morphism",
- "statement": "For a cartesian square of schemes [def-pc-scheme, def-pc-base-change] X' \\to X over S' \\to S and a morphism f:X \\to S with base change f':X' \\to S', the canonical derived base-change morphism for E in D_QCoh(O_X) [def-pc-derived-category] is the adjoint under Lg^* \\dashv Rg_* [def-pc-derived-pullback, def-pc-derived-direct-image] of the composite Rf_*E \\to Rf_*Rg_*Rf'_*Lg'^*E = Rg_*Rf'_*Lg'^*E induced by the unit E \\to Rg'_*Lg'^*E and the canonical composition isomorphisms for derived direct images [lem-pc-derived-direct-image-composition]. For an open W\\subseteq X with W'=(g')^{-1}(W), the same construction applied to the cartesian square formed by f|_W, f'|_{W'}, g and g'|_{W'} gives the derived base-change morphism Lg^*R(f|_W)_*(E|_W) \\to R(f'|_{W'})_*L(g'|_{W'})^*(E|_W).",
+ "statement": "Let f:X\\to S and g:S'\\to S be morphisms of schemes, let X'=X\\times_S S' with projections f':X'\\to S' and g':X'\\to X, so that X'\\xrightarrow{g'}X over S'\\xrightarrow{g}S is a cartesian square with f\\circ g'=g\\circ f' [def-pc-scheme, def-pc-base-change]. For E in D_QCoh(O_X) [def-pc-derived-category], the canonical derived base-change morphism Lg^*Rf_*E\\to Rf'_*Lg'^*E is the adjoint under Lg^*\\dashv Rg_* [lem-pc-ringed-spaces-derived-adjoint, def-pc-derived-pullback, def-pc-derived-direct-image] of the composite Rf_*E\\to Rf_*Rg'_*Lg'^*E\\cong R(f\\circ g')_*Lg'^*E=R(g\\circ f')_*Lg'^*E\\cong Rg_*Rf'_*Lg'^*E, whose first arrow is Rf_* of the unit E\\to Rg'_*Lg'^*E of the adjunction Lg'^*\\dashv Rg'_* [lem-pc-ringed-spaces-derived-adjoint] and whose isomorphisms are the canonical composition isomorphisms for derived direct images [lem-pc-derived-direct-image-composition]. For an open W\\subseteq X with W'=(g')^{-1}(W), the same construction applied to the cartesian square formed by f|_W, f'|_{W'}, g and g'|_{W'} gives the derived base-change morphism Lg^*R(f|_W)_*(E|_W)\\to R(f'|_{W'})_*L(g'|_{W'})^*(E|_W).",
  "source": {
   "document": "literature/stacks-project/etale-cohomology.tex",
   "place": "Remark 07A7 and Lemma 0736: base-change map as the adjoint of the derived counit/unit construction"
@@ -24,7 +24,8 @@
   "def-pc-derived-category",
   "def-pc-derived-pullback",
   "def-pc-derived-direct-image",
-  "lem-pc-derived-direct-image-composition"
+  "lem-pc-derived-direct-image-composition",
+  "lem-pc-ringed-spaces-derived-adjoint"
  ],
  "proof": [],
  "proof_deps": [],
@@ -53,12 +54,29 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pc-rf-mv-triangle-naturality",
   "by": "worker",
   "date": "2026-10-11"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-semicon"
+ "unit": "sk-thm-picard-semicon",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "def-pc-derived-base-change-map",
+  "worker": "stage1",
+  "summary": "Checked the canonical derived base-change definition against the Stacks base-change construction and the project DAG. No sorry-free project declaration with this blueprint tag or exact general scheme-level statement exists in WeilConjectures; the source Lean declaration is a bounded-below etale-specific construction and does not state this coherent D_QCoh definition. The imported definition is self-contained after adding the existing derived pullback/direct-image adjunction node, which explicitly supplies Lg* ⊣ Rg_*. No child node is needed: this is a definition, and its restriction-to-open clause is part of the same construction. Mathlib searches found only generic/underived pullback and pushforward APIs, not a derived scheme base-change map.",
+  "blueprint": "Realizes the ancestor proof clause “the canonical base-change morphism used in each alpha_W” from the proof of lem-pc-rf-perfect-base-change: define the map as the adjoint mate of the unit composite and apply the same construction to each open W.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-dbc0019",
+  "group": "H1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-dbc0019 (reviewer sub-agent of L); spot-checked: Read lem-pc-ringed-spaces-derived-adjoint (Lg^* -| Rg_* Hom bijection on all of D(O); unit is the image of id, elementary), lem-pc-derived-direct-image-composition (canonical natural iso R(f o p)_* = Rf_* Rp_*, C4 ok), def-pc-derived-pullback/-direct-image/-category; restriction clause: W'=(g')^{-1}W = X' x_X W is cartesian over S'->S (elementary); D_QCoh restriction harmless, construction works on all of D(O_X); citer lem-pc-rf-mv-triangle-naturality uses exactly this unit/mate form (merged parent single-complex MV does not cite it directly); no duplicate (sbc-def-base-change-map is etale Lambda-sheaves). FIX more, RETURN less: (1) E/B: composite Rf_*E -> Rf_*Rg_*Rf'_*Lg'^*E was ill-typed, corrected to Rf_*Rg'_*Lg'^*E = R(f o g')_* = R(g o f')_* = Rg_*Rf'_*; (2) B3: g:S'->S, g':X'->X, f' and f o g' = g o f' now named in the statement, and the unit cited to lem-pc-ringed-spaces-derived-adjoint; (3) C/source: etale-cohomology.tex holds neither 07A7 nor 0736 (both sites-cohomology); replaced by the O-module version cohomology.tex Remark 08HY with the unit-form construction of Lemma 02N7; 1 file(s) fixed by the reviewer"
+ },
+ "lead_note": "2026-10-11 L (R-dbc0019): Second reading by H1 claimed a source correction to sites-cohomology/07A7 that is not in the delivered file and missed the ill-typed composite Rf_*Rg_*Rf'_*; both repaired by reviewer."
 }
