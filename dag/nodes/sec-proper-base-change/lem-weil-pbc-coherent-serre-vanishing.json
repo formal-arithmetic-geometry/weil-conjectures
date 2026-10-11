@@ -219,5 +219,23 @@
   "lem-pc-closed-immersion-coherent-cohomology",
   "lem-pc-twist-tensor"
  ],
- "reviewed": "pass (L, 2026-10-10): 7 steps follow 0B5T (4) over an affine Noetherian base: a power of L is i^*O(1) for an immersion into P^N_A (new unsplit node 01VS), which is closed since P^N_A is separated (new leaf) and f proper; coherence of the twists, projection formula for the closed immersion (picard nodes), cohomology transfers along the affine morphism, Serre vanishing on P^N_A (picard node) with a bound per residue class mod d. Tool uses lem-pc-projective-space-serre-vanishing, lem-pc-closed-immersion-coherent-cohomology, lem-pc-twist-tensor (sk-thm-picard-serre-b / sk-thm-picard-pn) recorded by L."
+ "reviewed": "pass (L, 2026-10-10): 7 steps follow 0B5T (4) over an affine Noetherian base: a power of L is i^*O(1) for an immersion into P^N_A (new unsplit node 01VS), which is closed since P^N_A is separated (new leaf) and f proper; coherence of the twists, projection formula for the closed immersion (picard nodes), cohomology transfers along the affine morphism, Serre vanishing on P^N_A (picard node) with a bound per residue class mod d. Tool uses lem-pc-projective-space-serre-vanishing, lem-pc-closed-immersion-coherent-cohomology, lem-pc-twist-tensor (sk-thm-picard-serre-b / sk-thm-picard-pn) recorded by L.",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CoherentSerreVanishing",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_isZero_moduleCohomology_tensorPow_of_ample",
+  "file": "lean/Sheaf/AlgebraicGeometry/CoherentSerreVanishing.lean",
+  "statement": "theorem exists_isZero_moduleCohomology_tensorPow_of_ample (A : Type u) [CommRing A] [IsNoetherianRing A] {X : Scheme.{u}} (f : X ⟶ Spec (CommRingCat.of A)) [IsProper f] (F : X.Modules) (hF : RingedSpace.IsCoherent X.toRingedSpace F) (L : X.Modules) [L.IsInvertible] (hL : IsAmple X L) : ∃ n₀ : ℕ, ∀ (p n : ℕ), 0 < p → n₀ ≤ n → IsZero ((RingedSpace.moduleCohomology X.toRingedSpace p).obj (tensorObj F (L.tensorPow n)))",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "J1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ }
 }
