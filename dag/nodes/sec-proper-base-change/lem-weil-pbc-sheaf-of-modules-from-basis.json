@@ -188,5 +188,23 @@
   "by": "L",
   "result": "accepted",
   "note": "Five steps along Stacks 009H (009L cofinality as the new node lem-weil-pbc-basis-sheaf-cofinal-coverings; extension 009N as the new node lem-weil-pbc-sheaf-on-basis-extends, with the Mathlib comparison-lemma route recorded; module structure and morphisms through the reviewed leaf lem-weil-pbc-sheaf-morphism-on-basis, axioms checked as equalities of morphisms of presheaves of sets; stalks via the new leaf lem-weil-pbc-stalk-germs-on-basis, exists_mem_germ_eq_of_isBasis :484 / germ_eq_of_isBasis :491, checked). Statement made precise: finite coverings with n ≥ 0 (the empty covering of ∅ forces F(∅) = 0, otherwise ι_∅ cannot exist); refinement defined. Tags corrected by the worker (009N extension, 009T module structure, 009U equivalence)."
+ },
+ "lean": {
+  "module": "Sheaf.Topology.SheafOfModulesFromBasis",
+  "declaration": "TopologicalSpace.Opens.exists_sheafOfModules_from_basis",
+  "file": "lean/Sheaf/Topology/SheafOfModulesFromBasis.lean",
+  "statement": "theorem exists_sheafOfModules_from_basis (X : TopCat.{u}) (B : Set (Opens X)) (hB : IsBasis B) (hcap : ∀ U V : B, U.val ⊓ V.val ∈ B) (hrefine : ∀ (U : B) (C : Set B), (∀ V ∈ C, V.val ≤ U.val) → (⨆ V ∈ C, V.val) = U.val → ∃ (n : ℕ) (W : Fin n → B), (⨆ i, (W i).val) = U.val ∧ ∀ i, ∃ V ∈ C, (W i).val ≤ V.val) (R : TopCat.Sheaf RingCat.{u} X) (F : ∀ U : B, ModuleCat.{u} (R.obj.obj (op U.val))) (r : ∀ (U V : B), V.val ≤ U.val → F U →+ F V) (rid : ∀ (U : B) (s : F U), r U U le_rfl s = s) (rcomp : ∀ (U V W : B) (hVU : V.val ≤ U.val) (hWV : W.val ≤ V.val) (s : F U), r V W hWV (r U V hVU s) = r U W (hWV.trans hVU) s) (rsmul : ∀ (U V : B) (h : V.val ≤ U.val) (a : R.obj.obj (op U.val)) (s : F U), r U V h (a • s) = R.obj.map (homOfLE h).op a • r U V h s) (hglue : ∀ (U : B) (n : ℕ) (V : Fin n → B) (hV : ∀ i, (V i).val ≤ U.val), (⨆ i, (V i).val) = U.val → ∀ s : ∀ i, F (V i), (∀ i j, r (V i) ⟨(V i).val ⊓ (V j).val, hcap (V i) (V j)⟩ inf_le_left (s i) = r (V j) ⟨(V i).val ⊓ (V j).val, hcap (V i) (V j)⟩ inf_le_right (s j)) → ∃! t : F U, ∀ i, r U (V i) (hV i) t = s i) : ∃ (E : SheafOfModules.{u} R) (ι : ∀ U : B, E.val.obj (op U.val) ≃ₗ[R.obj.obj (op U.val)] F U), (∀ (U V : B) (h : V.val ≤ U.val) (t : E.val.obj (op U.val)), ι V (E.val.map (homOfLE h).op t) = r U V h (ι U t)) ∧ (∀ (G : SheafOfModules.{u} R) (ψ : ∀ U : B, F U →ₗ[R.obj.obj (op U.val)] G.val.obj (op U.val)), (∀ (U V : B) (h : V.val ≤ U.val) (s : F U), ψ V (r U V h s) = G.val.map (homOfLE h).op (ψ U s)) → (∃! Ψ : E ⟶ G, ∀ (U : B) (t : E.val.obj (op U.val)), Ψ.val.app (op U.val) t = ψ U (ι U t)) ∧ (∀ (Ψ : E ⟶ G), (∀ (U : B) (t : E.val.obj (op U.val)), Ψ.val.app (op U.val) t = ψ U (ι U t)) → (∀ U : B, Function.Bijective (ψ U)) → IsIso Ψ)) ∧ (∀ (G : SheafOfModules.{u} R) (j : ∀ U : B, G.val.obj (op U.val) ≃ₗ[R.obj.obj (op U.val)] F U), (∀ (U V : B) (h : V.val ≤ U.val) (t : G.val.obj (op U.val)), j V (G.val.map (homOfLE h).op t) = r U V h (j U t)) → ∃! e : E ≅ G, ∀ (U : B) (t : E.val.obj (op U.val)), j U (e.hom.val.app (op U.val) t) = ι U t) ∧ (∀ (x : X) (A : AddCommGrpCat.{u}) (φ : ∀ U : {U : B // x ∈ U.val}, F U.val →+ A), (∀ (U V : {U : B // x ∈ U.val}) (h : V.val.val ≤ U.val.val) (s : F U.val), φ V (r U.val V.val h s) = φ U s) → ∃! f : PresheafOfModules.stalkObj R.obj x E.val →+ A, ∀ (U : {U : B // x ∈ U.val}) (s : F U.val), f ((TopCat.Presheaf.germ (X := X) E.val.presheaf U.val.val x U.property).hom ((ι U.val).symm s)) = φ U s) ∧ (∀ (x : X) (U : B) (hx : x ∈ U.val) (a : R.obj.obj (op U.val)) (s : F U), (TopCat.Presheaf.germ (X := X) E.val.presheaf U.val x hx).hom ((ι U).symm (a • s)) = TopCat.Presheaf.germ (X := X) R.obj U.val x hx a • (TopCat.Presheaf.germ (X := X) E.val.presheaf U.val x hx).hom ((ι U).symm s))",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "M1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }
