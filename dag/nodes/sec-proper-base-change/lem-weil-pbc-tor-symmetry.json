@@ -218,5 +218,23 @@
   "summary": "Read Stacks 00M3 (lemma-tor-left-right) with its proof, 00M1 (lemma-no-spectral-sequence), 00LS (lemma-compare-resolutions), 00LZ and Section 00LY; tags verified in tags/tags. No Mathlib declaration states Tor symmetry (Mathlib/CategoryTheory/Monoidal/Tor.lean says Tor ≅ Tor' is not proved) and no slopmaster2 declaration states it (grep by id and key words), so the node is split. Seven steps follow the proof of 00M3: the double complex P⊗Q, exactness of rows/columns by flatness of projectives, identification of the two cokernel complexes by right exactness of ⊗, the 00M1 comparison, the swap V⊗W≅W⊗V, the composite, and the functoriality paragraph (lifts of φ, ψ, the morphism α⊗β of double complexes, the 00M1 functoriality and Tor maps via lifts). Stacks uses free resolutions; the DAG's definition uses projective ones, and only flatness and lifting are used, so the proof is written for projective resolutions (lift: new leaf lem-weil-pbc-projective-resolution-lift instead of the free-case node lem-weil-pbc-free-complex-maps-to-resolution). Remark 00M2 (signs) is not needed: any isomorphism is natural as constructed. Statement kept. New nodes: lem-weil-pbc-double-complex-cokernel-homology-iso (00M1, unsplit), lem-weil-pbc-module-tensor-comm (Mathlib leaf), lem-weil-pbc-projective-resolution-lift (Mathlib leaf). Existing leaves cited: lem-weil-pbc-projective-module-flat, lem-weil-pbc-flat-tensor-exact, lem-weil-pbc-tensor-right-exact, lem-weil-pbc-tor-map-via-resolution-lift.",
   "blueprint": "The item is not a blueprint node; its blueprint ancestor lem-weil-pbc-normal-constant-generic (via the chain in blueprint.from.via) uses Tor symmetry only through the flat-module injectivity input of its step 4 (normality of the strict henselization, Stacks 09Z5). Steps 1-7 realize that single use, the statement Tor_i(M,N) ≅ Tor_i(N,M) natural in (M,N); no blueprint node states Tor symmetry (blueprint_refs search 'Tor', '00M3', '00M1', 'double complex', 'zig-zag', 'tensor product commutative': only def-sp-double-complex-total and thm-sp-double-complex-spectral-sequences of sec-abelian-varieties, which are the spectral-sequence route the source avoids, not the same statement)."
  },
- "reviewed": "2026-10-10 L: 7 steps following 00M3 with projective resolutions (the double complex, exactness by flatness of projectives, the cokernel complexes M tensor Q and P tensor N, 00M1 as a new node, the commutativity of the tensor product and the lift of maps to resolutions as Mathlib leaves, naturality); 3 new nodes"
+ "reviewed": "2026-10-10 L: 7 steps following 00M3 with projective resolutions (the double complex, exactness by flatness of projectives, the cokernel complexes M tensor Q and P tensor N, 00M1 as a new node, the commutativity of the tensor product and the lift of maps to resolutions as Mathlib leaves, naturality); 3 new nodes",
+ "lean": {
+  "module": "Sheaf.Algebra.Category.ModuleCat.TorSymmetry",
+  "declaration": "CategoryTheory.nonempty_tor'_flip_iso",
+  "file": "lean/Sheaf/Algebra/Category/ModuleCat/TorSymmetry.lean",
+  "statement": "theorem nonempty_tor'_flip_iso (R : Type u) [CommRing R] (i : ℕ) : Nonempty (Tor' (ModuleCat.{u} R) i ≅ (Tor' (ModuleCat.{u} R) i).flip)",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "K1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ }
 }

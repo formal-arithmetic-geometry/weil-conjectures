@@ -5083,3 +5083,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 14:54 L: merged deliver/J1/lem-weil-pbc-tor-strictly-pro-zero (stage 2; reviewer PASS; first push; Sheaf.RingTheory.TorStrictlyProZero ModuleCat.tor_quotient_pow_strictly_pro_zero)
 - 14:54 L: merged deliver/R1/lem-weil-pbc-strict-henselization-triples (stage 2; reviewer FIX; first push; Sheaf.RingTheory.StrictHenselizationTriples AlgebraicGeometry.Scheme.strictHenselization_triples)
 - 14:54 L: merged deliver/H1/pqf-lem-locqf-fibre-discrete (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.FiniteDiscreteFiber AlgebraicGeometry.Scheme.Hom.finite_discrete_fiber_and_isQuasiFiniteAtPoint)
+- 14:55 L: merged deliver/K1/lem-weil-pbc-tor-symmetry (stage 2; reviewer PASS; first push; Sheaf.Algebra.Category.ModuleCat.TorSymmetry CategoryTheory.nonempty_tor'_flip_iso)
