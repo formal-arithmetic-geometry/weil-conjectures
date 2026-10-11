@@ -1,0 +1,147 @@
+## Worker report
+
+The module states `Topology.isConstructible_inter_subtype`. It assumes a topological
+space `X` with a basis `B` such that every `U ∈ B` is compact (quasi-compact and
+open by `IsTopologicalBasis`), and constructible subsets `E` and `E'` of `X`. Its
+conclusion is constructibility in the subspace `E` of the inverse image of `E'`
+under `Subtype.val`, exactly the subset `E ∩ E'` with the induced topology.
+
+The Lean rendering of each clause is:
+
+- “X is a topological space” is `{X : Type u} [TopologicalSpace X]`.
+- “X has a basis consisting of quasi-compact open subsets” is
+  `hbasis : ∃ B : Set (Set X), IsTopologicalBasis B ∧ ∀ U : Set X, U ∈ B → IsCompact U`.
+- “E and E' are constructible subsets of X” are respectively
+  `hE : IsConstructible E` and `hE' : IsConstructible E'`.
+- “E ∩ E' is constructible in E with the subspace topology” is
+  `IsConstructible (Subtype.val ⁻¹' E' : Set E)`; the subtype topology is
+  induced by `TopologicalSpace`.
+
+The dependency notion is Mathlib's `Topology.IsConstructible` from
+`Mathlib.Topology.Constructible` (the DAG dependency `def-weil-constructible-subset`
+records this exact match). The theorem proof is `sorry`, as required at stage 2;
+its docstring records the Stacks Tags 09YF, 09YH, and 005I proof route.
+
+Edge cases checked: `E = ∅`, `E' = ∅`, `E = univ`, and `E' = univ` are all
+well-typed; the existential basis allows arbitrary basis types and does not impose
+a separation or nonemptiness hypothesis; `IsCompact` is Mathlib's quasi-compact
+notion and the induced subtype topology handles empty subspaces.
+
+Searches for an existing declaration: `msearch.py ... leanfinder` for “intersection
+of constructible sets in constructible subspace” found only general
+`Topology.IsConstructible` lemmas; `msearch.py ... loogle` for
+`Topology.IsConstructible, Subtype.val` found no match; grep of Mathlib's
+`Topology/Constructible.lean` found no Tag 09YI theorem (only preimage lemmas
+005I, 005J, and 09YE); `rg` over `WeilConjectures/` and `lean/Sheaf` found no
+matching declaration. Thus a new statement module is needed.
+
+No statement fault or `STATEMENT-DISPUTED` applies.
+
+## Earlier second reading (a previous round; superseded)
+
+The node and module were read together. The hypothesis on the basis is represented
+by an existential topological basis and compactness of each basis member; the two
+constructibility hypotheses are explicit. The conclusion uses the subtype preimage
+of `E'`, which is definitionally the intersection with `E` in the subspace. No
+hypothesis or conclusion clause is omitted, and no extra structure is imposed.
+
+
+## Second reading by G1
+
+I independently opened the item node, its sole statement dependency
+`def-weil-constructible-subset`, and the delivered module. I read the Stacks
+source from the local checkout `/home/ubuntu/c1-stacks-review/topology.tex`:
+Definition 005G, Lemmas 005H, 005I, 09YF, 09YH, and 09YI (labels verified in
+that checkout's `tags/tags`). The repository's literature checkout is absent;
+this alternate local checkout contains the cited source labels and line places.
+The constructible-sets section has no standing separation, finiteness, or
+Noetherian assumption. Tag 09YI says exactly the node's statement.
+
+Object, hypothesis, and conclusion checklist:
+
+- Ambient object: a topological space `X` is rendered by `{X : Type u}` and
+  `[TopologicalSpace X]`. Verdict: exact, with arbitrary universe `u`.
+- Basis hypothesis: `hbasis : ∃ B : Set (Set X), IsTopologicalBasis B ∧
+  ∀ U : Set X, U ∈ B → IsCompact U`. I read `IsTopologicalBasis` in
+  Mathlib's `Topology/Bases.lean`: it covers `X` and generates its topology,
+  and its members are open. `IsCompact` is quasi-compactness without any
+  Hausdorff assumption. Verdict: exactly a basis of quasi-compact opens.
+- Subsets: `{E E' : Set X}` introduces the two arbitrary subsets of that same
+  space. Verdict: exact, no open or closed restriction.
+- First constructibility hypothesis: `hE : IsConstructible E`. Verdict: exact.
+- Second constructibility hypothesis: `hE' : IsConstructible E'`. Verdict: exact.
+- Conclusion: `IsConstructible (Subtype.val ⁻¹' E' : Set E)` is constructibility
+  in the subtype `E` with its canonical induced topology. A point is a pair
+  `(x, hx : x ∈ E)` and lies in this preimage precisely when `x ∈ E'`;
+  thus this is precisely `E ∩ E'` as a subset of `E`. Verdict: exact. It does
+  not merely assert constructibility of the intersection in `X`.
+- Quantifier order: the ambient space and basis hypothesis precede the two
+  subsets and their constructibility hypotheses, followed by the one stated
+  conclusion. There are no additional instances or hypotheses.
+
+Dependency audit: the dependency records Mathlib's `Topology.IsConstructible`
+(`Mathlib.Topology.Constructible`) in `mathlib_match`, not a private definition.
+I read its actual signature `def IsConstructible (s : Set X) : Prop` and body,
+which is membership in the Boolean subalgebra generated by open retrocompact
+sets. I also read `IsRetrocompact`, whose body requires compact intersection
+with every compact open. The finite-union-of-differences definition of Stacks
+005G agrees: `BooleanSubalgebra.mem_closure_iff_sup_sdiff` gives that normal
+form, since the open retrocompact sets contain empty and univ and are closed
+under finite union and intersection (`IsRetrocompact.inter_isOpen`, without
+T2). Thus both occurrences in the hypotheses and the subtype conclusion use
+exactly the dependency's notion. No new nodes or dependency modules occur.
+There is no statement correction, so no correction-citer audit applies.
+
+Edge cases: `X` empty, `E` empty, `E'` empty, either subset equal to univ, and
+`E = E'` are all covered. The empty space can have an empty basis; no nonempty
+basis-index instance is required. Finite unions in the constructible notion
+include the empty union. No index set is introduced in the signature, and
+there is no ring, characteristic, zero-object, or integer parameter to restrict.
+The basis is a set of subsets of arbitrary `Type u`, so there is no universe
+restriction beyond that inherent in Mathlib topological spaces.
+
+Independent searches (recorded in `searches.jsonl`):
+
+- LeanSearch: “Restriction of a constructible subset to a constructible subspace
+  of a space with compact open basis is constructible”. The service returned
+  Internal Server Error; this search is unavailable, not a negative result.
+- LeanFinder: “A constructible subspace inclusion pulls back constructible sets
+  when the ambient topology has a basis of quasi compact opens”. Returned
+  general preimage and open/closed-embedding lemmas, and scheme-specific
+  preimage lemmas; none states the arbitrary constructible-subspace case.
+- Loogle: `Topology.IsConstructible, "preimage"`. Returned five results:
+  generic preimage with the extra retrocompact-open inverse-image condition,
+  open embedding, closed embedding with compact complement, open-embedding
+  equivalence, and scheme morphism preimage. I opened the topological
+  declarations: none has exactly this statement. An earlier unqualified
+  `IsConstructible` query was rejected as an unknown identifier and does not
+  establish absence.
+- Mathlib grep: `09YI|09YF|IsConstructible.*(subtype|induc|restrict)` found only
+  induction principles, not the theorem. I read the preimage statements in
+  `Topology/Constructible.lean`, including their actual hypotheses.
+- Project and upstream grep: `IsConstructible.*(subtype|preimage|induc)` and
+  `constructible.*(trace|subspace)` over `WeilConjectures/` and `lean/Sheaf`
+  found no matching theorem. I opened upstream
+  `WeilConjectures/Mathlib/Topology/Constructible.lean`; it contains dense-set
+  and Noetherian-space results, not this general subspace statement.
+
+Mismatches and repairs: no mathematical signature mismatch was found. The
+module lacked the standard copyright/license/authorship header (H9), which I
+added. Its proof docstring only said to combine three tags, omitting the node's
+four-step proof and the finite-subcover argument (H8). I expanded it to all
+four steps, naming the proof-dependency nodes, retaining the source and
+blueprint marker. The signature and the node's `lean.statement` remain
+verbatim equal. There are no definitions, hollow data, or proved theorems;
+the sole proof remains `by sorry`. The import is used, all variables and the
+universe are bound, and all module lines meet the 100-character convention.
+
+## Reviewer fix (R-cii1534)
+
+The basis hypothesis `hbasis : ∃ B : Set (Set X), IsTopologicalBasis B ∧ ∀ U ∈ B, IsCompact U`
+was replaced by `hBasis : IsTopologicalBasis {U : Set X | IsOpen U ∧ IsCompact U}`, the form
+of the landed sibling `Topology.isConstructible_of_isConstructible_subspace` (Tag 09YJ, G1,
+2017e67fa), whose proof applies this lemma; the two forms are equivalent (a basis of
+quasi-compact opens exists iff the quasi-compact opens form a basis). The conclusion is written
+`IsConstructible ((Subtype.val : E → X) ⁻¹' E')` as in that sibling (same term). Mathlib has no
+exact statement (`IsConstructible.inter` is in one space; `IsConstructible.preimage` needs the
+retrocompact-open pullback hypothesis), so `existing: false` stands.
