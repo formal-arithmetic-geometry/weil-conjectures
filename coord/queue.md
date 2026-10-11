@@ -1,11 +1,11 @@
 # Work queue
 
-745 items; claim with `tools/claim.py next <group> [--stage N]`.
+742 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (745)
+## Stage 2: nodes to state (742)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -30,7 +30,6 @@
 | `lem-weil-pbc-direct-image-split-cover-product` | 1 | state |
 | `lem-weil-pbc-directed-colimit-base-change-elementwise` | 1 | state |
 | `lem-weil-pbc-double-complex-cokernel-homology-iso` | 1 | state |
-| `lem-weil-pbc-double-complex-zigzag-trivial-if-row-boundary` | 1 | state |
 | `lem-weil-pbc-essentially-smooth-factors-through-smooth` | 1 | state |
 | `lem-weil-pbc-etale-algebra-filtered-colimit-descent` | 1 | state |
 | `lem-weil-pbc-etale-cover-detects-iso` | 1 | state |
@@ -42,9 +41,7 @@
 | `lem-weil-pbc-etale-local-ring-triples` | 1 | state |
 | `lem-weil-pbc-etale-localize-upstairs` | 1 | state |
 | `lem-weil-pbc-etale-near-point-smooth-zero-fibre-dimension` | 1 | state |
-| `lem-weil-pbc-etale-near-prime-naive-cotangent-vanishing` | 1 | state |
 | `lem-weil-pbc-etale-neighbourhood-prescribed-residue-field` | 1 | state |
-| `lem-weil-pbc-etale-open-fpqc-descent` | 1 | state |
 | `lem-weil-pbc-etale-over-normal-ring-normal` | 1 | state |
 | `lem-weil-pbc-etale-qcqs-cofinal-finite-coverings` | 1 | state |
 | `lem-weil-pbc-etale-qcqs-sections-filtered-colimit` | 1 | state |
