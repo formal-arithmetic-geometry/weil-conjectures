@@ -191,5 +191,24 @@
   "group": "C1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of C1; spot-checked by L: L: 07NN read with 07NL/07NJ/032A; the three new nodes refine lem-weil-pbc-cohen-structure-power-series-surjection, lem-weil-pbc-power-series-cohen-formally-smooth-adic and lem-weil-pbc-power-series-universal-property-complete (accepted 09:39), lead notes added so their splits cite those"
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.CompleteLocalMapRegularPresentation",
+  "declaration": "RingHom.exists_complete_local_map_regular_presentation",
+  "file": "lean/Sheaf/RingTheory/CompleteLocalMapRegularPresentation.lean",
+  "statement": "theorem exists_complete_local_map_regular_presentation {A : Type u} {B : Type v} [CommRing A] [CommRing B] [IsLocalRing A] [IsLocalRing B] [IsNoetherianRing A] [IsNoetherianRing B] [IsAdicComplete (IsLocalRing.maximalIdeal A) A] [IsAdicComplete (IsLocalRing.maximalIdeal B) B] (f : A →+* B) [IsLocalHom f] : ∃ (R S : Type (max u v)) (_ : CommRing R) (_ : CommRing S) (_ : IsRegularLocalRing R) (_ : IsRegularLocalRing S), IsAdicComplete (IsLocalRing.maximalIdeal R) R ∧ IsAdicComplete (IsLocalRing.maximalIdeal S) S ∧ ∃ (q : R →+* A) (v : S →+* B) (u : R →+* S), Function.Surjective q ∧ IsLocalHom q ∧ Function.Surjective v ∧ IsLocalHom v ∧ IsLocalHom u ∧ v.comp u = f.comp q ∧ (∃ e : (R ⧸ IsLocalRing.maximalIdeal R) ≃+* (A ⧸ IsLocalRing.maximalIdeal A), ∀ r : R, e (Ideal.Quotient.mk (IsLocalRing.maximalIdeal R) r) = Ideal.Quotient.mk (IsLocalRing.maximalIdeal A) (q r)) ∧ (∃ (t : List R) (z : List S), IsLocalRing.IsRegularSystemOfParameters t ∧ IsLocalRing.IsRegularSystemOfParameters (t.map u ++ z)) ∧ u.Flat ∧ IsRegularLocalRing (S ⧸ (IsLocalRing.maximalIdeal R).map u)",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-crp1523"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-crp1523",
+  "group": "M1",
+  "result": "fix",
+  "note": "A,B CommRing/IsLocalRing/IsNoetherianRing/IsAdicComplete maximalIdeal, f [IsLocalHom f]; R,S : Type (max u v) IsRegularLocalRing + IsAdicComplete maximalIdeal (was Type u/Type v with redundant local/Noetherian existentials); q,v surjective IsLocalHom, u IsLocalHom, vu=fq; residue iso e compatible with q; t RSOP of R, t.map u ++ z RSOP of S via landed IsLocalRing.IsRegularSystemOfParameters (was inlined Fin d/ringKrullDim/span, H4/H12); u.Flat; IsRegularLocalRing (S/m_R S); renamed RingHom.exists_complete_local_map_regular_presentation, implicit A B, as the Cohen sibling"
  }
 }
