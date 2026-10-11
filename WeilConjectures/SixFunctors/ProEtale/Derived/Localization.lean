@@ -287,7 +287,8 @@ theorem existsUnique_distTriang_closedSupportTriangle [QuasiCompact j]
     (hij : IsCompl (Set.range i.base) (Set.range j.base))
     (K : DerivedCategory (Sheaf (ProEt.topology X) (ModuleCat.{u + 1} R))) :
     ∃! w, closedSupportTriangle i j hij K w ∈ distTriang _ := by
-  obtain ⟨w, hw⟩ := exists_distTriang_derivedLowerStarClosedUpperShriekAdjunction_counit i j hij K
+  obtain ⟨w, hw⟩ :=
+    exists_distTriang_derivedLowerStarClosedUpperShriekAdjunction_counit i j hij K
   refine ⟨w, hw, fun w' hw' ↦ ?_⟩
   have : Subsingleton ((closedSupportTriangle i j hij K w').obj₁⟦(1 : ℤ)⟧ ⟶
       (closedSupportTriangle i j hij K w).obj₃) :=
