@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "cor-pc-sigma-pic-iso",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "$\\operatorname{Pic}_{X/k,\\sigma}$ is isomorphic to $\\operatorname{Pic}_{X/k}$",
@@ -18,14 +18,40 @@
  ],
  "proof": [
   {
-   "text": "By [lem-pc-rational-hyp] and [thm-pc-pic-split],\n$\\operatorname{Pic}_{X/k}$ is the fppf sheafification of the presheaf\n$K(T)=\\operatorname{Ker}(\\sigma_T^*)$, and by [lem-pc-k-sheaf] the\npresheaf $K$ is itself an fppf sheaf; since\n$\\operatorname{Pic}_{X/k,\\sigma}=K$ ([def-pc-pic-sigma-functor]), the two functors\nare naturally isomorphic. [The reference is the discussion in Stacks\nProject, Picard Schemes of Curves, Section 44.6, after Lemma 44.6.1.]",
+   "text": "By [lem-pc-rational-hyp], the rational-point curve satisfies the section and pushforward hypotheses of [thm-pc-pic-split].",
    "uses": [
     "lem-pc-rational-hyp",
+    "thm-pc-pic-split"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-prop-picard-pic-split/cor-pc-sigma-pic-iso.md",
+    "place": "## Proof, first paragraph"
+   }
+  },
+  {
+   "text": "By [thm-pc-pic-split], Pic_{X/k} is the fppf sheafification of the presheaf K(T)=Ker(σ_T^*), and by [lem-pc-k-sheaf] the presheaf K is itself an fppf sheaf; since Pic_{X/k,σ}=K by [def-pc-pic-sigma-functor], the canonical inclusion followed by sheafification is a natural isomorphism of functors.",
+   "uses": [
     "thm-pc-pic-split",
     "lem-pc-k-sheaf",
     "def-pc-pic-sigma-functor"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-prop-picard-pic-split/cor-pc-sigma-pic-iso.md",
+    "place": "## Proof"
+   }
+  },
+  {
+   "text": "A functor naturally isomorphic to a representable functor is representable, by transporting the Yoneda element across the natural isomorphism. Since the isomorphism of step 2 goes both ways, $\\operatorname{Pic}_{X/k,\\sigma}$ is representable once $\\operatorname{Pic}_{X/k}$ is, and conversely $\\operatorname{Pic}_{X/k}$ is representable once $\\operatorname{Pic}_{X/k,\\sigma}$ is; the group structure of $K(T)=\\operatorname{Ker}\\sigma_T^*\\subset\\operatorname{Pic}(X_T)$ from [thm-pc-pic-split] is compatible with the isomorphism and so transports to the representing object.",
+   "uses": [
+    "thm-pc-pic-split"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-prop-picard-pic-split/cor-pc-sigma-pic-iso.md",
+    "place": "statement's final representability clause"
+   }
   }
  ],
  "proof_deps": [
@@ -41,7 +67,7 @@
  },
  "mathlib_searches": [],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "proof_cites_literature"
@@ -125,5 +151,21 @@
   }
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-prop-picard-pic-split"
+ "unit": "sk-prop-picard-pic-split",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "cor-pc-sigma-pic-iso",
+  "worker": "stage1",
+  "summary": "Rejected the proposed Lean attachment because it requires GeometricallyIntegral and omits the statement's representability covariance clause. Split the Stacks/blueprint sheafification argument into: the rational-point hypotheses of the split theorem, the identification of the normalized functor with the kernel sheaf and hence with its sheafification, and the representability transport argument. No new node was added.",
+  "blueprint": "the paragraph after Lemma 44.6.1 in the blueprint node cor-pc-sigma-pic-iso",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-spi0304",
+  "group": "K1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-spi0304 (reviewer sub-agent of L); spot-checked: C4/E: step 1 lem-pc-rational-hyp gives section+pushforward hyps of thm-pc-pic-split; step 2 thm-pc-pic-split says Pic_{X/S}=fppf sheafification of K, lem-pc-k-sheaf says K is fppf sheaf, def-pc-pic-sigma-functor says Pic_{X/k,sigma}=K (classes of actual invertible modules, so the prop-pd-picard-degree-decomposition step 4 citer is supported); def-pc-picard-functor = sheafification of Picard presheaf, consistent. Diff vs base touches only the item and its report; other files are sheaf-dag having moved on. No new nodes. FIX more, RETURN less: (1) step 3 stated only one representability direction; rewritten to give both directions and say which group structure transports; (2) split_report summary falsely claimed a 'cohomological auxiliary input' step and an added statement-only node; corrected. Second reading missed (2) and claimed blueprint.from was set though it is still null (left null, not a fault).; 1 file(s) fixed by the reviewer"
+ }
 }
