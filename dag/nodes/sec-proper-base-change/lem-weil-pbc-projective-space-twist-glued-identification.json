@@ -139,5 +139,24 @@
   "result": "pass",
   "note": "Two steps: the objects match those of clause (v) of lem-weil-pbc-projective-space-twisting-sheaf-charts (A = Z, d = 1), and clause (v) gives the unique isomorphism with the sections; no cycle (the charts node does not use this node). The node restates clause (v): merge candidate for stage 3, after which lem-weil-pbc-projective-space-standard-charts step 1 should cite clause (v) directly. stmt_deps completed (def-weil-pbc-proj-twisting-sheaf, def-nagata-homogeneous-localization-degree-zero)."
  },
- "lead_note": "2026-10-09 L: duplicate of clause (v) of lem-weil-pbc-projective-space-twisting-sheaf-charts; merge candidate for stage 3."
+ "lead_note": "2026-10-09 L: duplicate of clause (v) of lem-weil-pbc-projective-space-twisting-sheaf-charts; merge candidate for stage 3.",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProjectiveSpaceTwistGluedIdentification",
+  "declaration": "AlgebraicGeometry.Proj.existsUnique_polynomial_twist_glued_identification",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjectiveSpaceTwistGluedIdentification.lean",
+  "statement": "theorem existsUnique_polynomial_twist_glued_identification (n : Type u) [Finite n] [Nonempty n] : ∃! θ : (Scheme.Modules.pushforward (ProjectiveSpace.toProjInt n (Spec (CommRingCat.of (ULift.{u} ℤ))))).obj (ProjectiveSpace.twist n (Spec (CommRingCat.of (ULift.{u} ℤ))) 1) ≅ Proj.twist (MvPolynomial.homogeneousSubmodule n (ULift.{u} ℤ)) 1, (∀ i : n, θ.hom.app (Proj.basicOpen (MvPolynomial.homogeneousSubmodule n (ULift.{u} ℤ)) (MvPolynomial.X i)) ((ProjectiveSpace.twist n (Spec (CommRingCat.of (ULift.{u} ℤ))) 1).presheaf.map (homOfLE (le_top : ProjectiveSpace.toProjInt n (Spec (CommRingCat.of (ULift.{u} ℤ))) ⁻¹ᵁ Proj.basicOpen (MvPolynomial.homogeneousSubmodule n (ULift.{u} ℤ)) (MvPolynomial.X i) ≤ ⊤)).op (ProjectiveSpace.twistOneSection n (Spec (CommRingCat.of (ULift.{u} ℤ))) i)) = Proj.twistPowSection 1 (MvPolynomial.isHomogeneous_X (ULift.{u} ℤ) i)) ∧ (∀ k : n, θ.hom.app ⊤ (ProjectiveSpace.twistOneSection n (Spec (CommRingCat.of (ULift.{u} ℤ))) k) = (Proj.unitToTwist (MvPolynomial.isHomogeneous_X (ULift.{u} ℤ) k)).app ⊤ (1 : Γ(Proj (MvPolynomial.homogeneousSubmodule n (ULift.{u} ℤ)), ⊤)))",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-tgi"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-tgi",
+  "group": "K1",
+  "result": "fix",
+  "note": "def-pc-projective-space-twist re-record (PolynomialTwistData) reverted to landed ProjectiveSpace.twist; item restated: n finite nonempty, O_P(1) = pushforward along toProjInt of ProjectiveSpace.twist n (Spec Z) 1, e_i = twistOneSection i restricted to D+(T_i), T^gl_k = twistOneSection k, target Proj.twist _ 1, theta(e_i) = twistPowSection 1, theta(T^gl_k) = unitToTwist(1), ExistsUnique; reverted the delivery's change of existing node(s) def-pc-projective-space-twist (--revert-nodes; kept as on sheaf-dag); left out new module(s) lean/Sheaf/AlgebraicGeometry/ProjPolynomialTwistData.lean (--drop-files, or a record fixed to existing: true)"
+ }
 }
