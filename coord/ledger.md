@@ -3398,3 +3398,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 05:49 L: merged deliver/J1/def-weil-pbc-ring-map-quasi-finite-at-prime (stage 2; reviewer PASS; first push; Sheaf.RingTheory.QuasiFiniteAtPrime Algebra.IsQuasiFiniteAtPrime)
 - 05:49 L: merged deliver/K1/def-weil-pbc-singular-ideal (stage 2; reviewer PASS; first push; Sheaf.RingTheory.SingularIdeal Algebra.singularIdeal)
 - 05:49 L: merged deliver/K1/def-weil-pbc-separable-field-extension (stage 2; reviewer FIX; first push; Sheaf.FieldTheory.SeparableExtension Algebra.IsSeparableExtension)
+- 05:49 L: merged deliver/F1/def-weil-pbc-analytically-unramified (stage 2; reviewer FIX; first push; Sheaf.RingTheory.AnalyticallyUnramified IsAnalyticallyUnramified)
