@@ -192,5 +192,23 @@
   "group": "C1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of C1; spot-checked by L: L: 090R(1) chain read (Nakayama, 00LK bound, Ext long exact sequence and 00LV, Rees); Mathlib Ext/Basic.lean:35 and Depth/Rees.lean:158 read"
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.DepthQuotSMulTop",
+  "declaration": "IsLocalRing.depth_quotSMulTop_of_isSMulRegular",
+  "file": "lean/Sheaf/RingTheory/DepthQuotSMulTop.lean",
+  "statement": "theorem depth_quotSMulTop_of_isSMulRegular {R : Type u} [CommRing R] [IsNoetherianRing R] [IsLocalRing R] (M : Type v) [AddCommGroup M] [Module R M] [Module.Finite R M] [Nontrivial M] (x : R) (hx : x ∈ maximalIdeal R) (hreg : IsSMulRegular M x) : Nontrivial (QuotSMulTop x M) ∧ ∃ d : ℕ, 1 ≤ d ∧ depth (R := R) M = (d : ℕ∞) ∧ depth (R := R) (QuotSMulTop x M) = ((d - 1 : ℕ) : ℕ∞)",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-ddo0934",
+  "group": "J1",
+  "result": "pass",
+  "note": "R: CommRing+IsNoetherianRing+IsLocalRing; M: Module.Finite, Nontrivial; x in maximalIdeal, IsSMulRegular M x; conclusions Nontrivial (QuotSMulTop x M), exists d>=1 with IsLocalRing.depth M = d and depth (QuotSMulTop x M) = d-1 over the same R; #check confirms depth = IsLocalRing.depth (recorded def-weil-pbc-depth)"
  }
 }
