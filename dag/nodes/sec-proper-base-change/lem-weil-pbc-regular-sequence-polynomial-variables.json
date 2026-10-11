@@ -177,5 +177,23 @@
   "by": "L",
   "result": "accepted",
   "note": "6 steps following Stacks 07DW with two corrections (misprint f_{i+1}x_i; (3)=>(2) needs multi-indices supported on the subsequence to get every subsequence). (2)=>(1) by induction with the swap lemma (new node: a,b regular and b a nonzerodivisor => b,a regular); (3) via the new node on coefficients of (g_1x_1,...,g_ix_i) (P/J = direct sum of R/I_E x^E). Checked steps 2-6. Mathlib has a TODO for 07DW (RegularSequence.lean:590)."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.RegularSequencePolynomialVariables",
+  "declaration": "RingTheory.Sequence.isRegular_permutations_subsequences_polynomial_iff",
+  "file": "lean/Sheaf/RingTheory/RegularSequencePolynomialVariables.lean",
+  "statement": "theorem isRegular_permutations_subsequences_polynomial_iff {R : Type u} [CommRing R] (r : ℕ) (f : Fin r → R) (hproper : Ideal.ofList (List.ofFn f) ≠ ⊤) : ((∀ l : List R, (List.ofFn f).Perm l → IsRegular R l) ↔ (∀ l : List R, l.Sublist (List.ofFn f) → IsRegular R l)) ∧ ((∀ l : List R, l.Sublist (List.ofFn f) → IsRegular R l) ↔ IsRegular (MvPolynomial (Fin r) R) (List.ofFn (fun i : Fin r ↦ MvPolynomial.C (f i) * MvPolynomial.X i)))",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-spv",
+  "group": "F1",
+  "result": "pass",
+  "note": "R CommRing any universe; f : Fin r -> R via List.ofFn; proper ideal = Ideal.ofList ne top; (1) List.Perm, (2) List.Sublist, (3) IsRegular on MvPolynomial (Fin r) R of C(f i)*X i; IsRegular elaborates to RingTheory.Sequence.IsRegular; (A<->B)/\\(B<->C); matches sibling ideal_coefficients_monomial form"
  }
 }
