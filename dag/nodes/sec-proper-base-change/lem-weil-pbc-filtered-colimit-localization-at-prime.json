@@ -189,5 +189,23 @@
   "by": "L",
   "result": "pass",
   "note": "Five steps (agent proof; Stacks asserts it in 037D): contractions compatible and the induced maps functorial, kappa_i well defined and a cocone, every element of R_p comes from a stage, equality criterion lifting the witness u to a stage (elementwise and rings-zero leaves), universal property. Correct; 0 new nodes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FilteredColimitLocalizationAtPrime",
+  "declaration": "AlgebraicGeometry.filteredColimitLocalizationAtPrime",
+  "file": "lean/Sheaf/AlgebraicGeometry/FilteredColimitLocalizationAtPrime.lean",
+  "statement": "theorem filteredColimitLocalizationAtPrime {I : Type u} [SmallCategory I] [IsFiltered I] (F : I ⥤ CommRingCat.{v}) [HasColimit F] (p : Ideal ((colimit F : CommRingCat) : Type v)) [hp : p.IsPrime] : let ι : ∀ i : I, (F.obj i) ⟶ colimit F := fun i => colimit.ι F i let pᵢ : ∀ i : I, Ideal ((F.obj i : CommRingCat) : Type v) := fun i => Ideal.comap (ι i).hom p (∀ i : I, (pᵢ i).IsPrime) ∧ (∀ (i j : I) (a : i ⟶ j), Ideal.comap (F.map a).hom (pᵢ j) = pᵢ i) ∧ ∃ (D : I ⥤ CommRingCat.{v}) (hD : ∀ i : I, D.obj i = CommRingCat.of (Localization.AtPrime (pᵢ i))), (∀ (i j : I) (a : i ⟶ j), CommRingCat.ofHom (algebraMap (F.obj i) (Localization.AtPrime (pᵢ i))) ≫ eqToHom (hD i).symm ≫ D.map a = F.map a ≫ CommRingCat.ofHom (algebraMap (F.obj j) (Localization.AtPrime (pᵢ j))) ≫ eqToHom (hD j).symm) ∧ ∃ (c : Cocone D) (hc : c.pt = CommRingCat.of (Localization.AtPrime p)), (∀ i : I, CommRingCat.ofHom (algebraMap (F.obj i) (Localization.AtPrime (pᵢ i))) ≫ eqToHom (hD i).symm ≫ c.ι.app i ≫ eqToHom hc = ι i ≫ CommRingCat.ofHom (algebraMap ((colimit F : CommRingCat) : Type v) (Localization.AtPrime p))) ∧ Nonempty (IsColimit c)",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-fcl1030",
+  "group": "C1",
+  "result": "pass",
+  "note": "SmallCategory+IsFiltered I, F:I⥤CommRingCat, HasColimit/colimit/colimit.ι per STATE; p prime of colimit F; p_i=comap ι_i p prime; clause1 comap F.map a p_j = p_i and functor D on Localization.AtPrime p_i with D.map pinned by algebraMap restriction (localization epi => x/s↦F(a)x/F(a)s); clause2 cocone legs pinned to ι_i then algebraMap, vertex R_p, IsColimit; compiled, no hollow hyps"
  }
 }
