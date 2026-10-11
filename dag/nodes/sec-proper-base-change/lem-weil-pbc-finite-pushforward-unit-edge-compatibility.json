@@ -238,5 +238,23 @@
   "item": "lem-weil-pbc-finite-pushforward-unit-edge-compatibility",
   "worker": "stage1",
   "summary": "Statement kept; kappa made explicit as c_{pi,i_Y'}^{-1} o c_{i_Y,pi_Z} (the only reading of 'the composition isomorphism for i_Y pi_Z = pi i_Y''). Agent-written proof in eight steps, not via the reduction to i = id suggested in the statement (both sides are computed directly): (1) conventions (one morphism k for all composites, fixed resolutions, functoriality of H^q in the sheaf); (2) Phi_square = H^q(phi_square) o h'^*, phi_square = i'^{-1}(eps_h) o theta, by the adjunct-counit identity and clause 3 of lem-weil-pbc-cohomology-pullback-functorial; (3) both sides become H^q(...) o f'_Z^* by clauses 3 and 4 (composition for f'_Z = f_Z pi_Z), reducing to an identity (star) of sheaf morphisms; (4) eps_{f'} o f'^{-1}(u) = pi^{-1}(eps_f) o c_{f,pi}^{-1} from the unit equation of c_{f,pi}, naturality of eta_pi and the triangle identity; (5), (6) naturality of the c's and of kappa; (7) the remaining identity of composition isomorphisms from the associativity of c (lem-weil-pbc-derived-inverse-image-composition (1), on the route through sk-def-exchange) applied to (f,pi,i_Y'), (f,i_Y,pi_Z), (i,f_Z,pi_Z); (8) conclusion. No new nodes. Mathlib searched three ways (leansearch, leanfinder, loogle, grep): no match. Source repository (slopmaster2): no declaration states this compatibility; closest sorry-free: Etale.baseChangeMap_paste_vert(_app), baseChangeMap_paste_horiz(_app) (BaseChange/Pasting.lean), upperStarComp_assoc, upperStarComp_hom_app_unit_app (Etale/UpperLowerStar/Coherence.lean), cohomologyMap_map (TopologicalInvariance.lean), cohomologyMap_eq_map_counit_comp (EdgeMap.lean); the Lean of the user (Etale.exists_mono_map_eq_zero_of_henselianRing, Gabber.lean) has its own sorry."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleFinitePushforwardUnitEdgeCompatibility",
+  "declaration": "AlgebraicGeometry.Etale.cohomology_baseChange_unit_edge_compatibility",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleFinitePushforwardUnitEdgeCompatibility.lean",
+  "statement": "theorem cohomology_baseChange_unit_edge_compatibility {X Y Y' Z YZ YZ' : Scheme.{u}} (f : Y ⟶ X) (π : Y' ⟶ Y) (i : Z ⟶ X) (iY : YZ ⟶ Y) (fZ : YZ ⟶ Z) (iY' : YZ' ⟶ Y') (fZ' : YZ' ⟶ Z) (πZ : YZ' ⟶ YZ) (sq : IsPullback iY fZ f i) (sq' : IsPullback iY' fZ' (π ≫ f) i) (sqπ : CommSq iY' πZ π iY) (hZ : πZ ≫ fZ = fZ') (G : Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}) (q : ℕ) : (Sheaf.H.map ((upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} fZ').counit.app ((upperStar AddCommGrpCat.{u + 1} iY').obj ((upperStar AddCommGrpCat.{u + 1} π).obj G))) q).comp ((cohomologyMap fZ' ((lowerStar AddCommGrpCat.{u + 1} fZ').obj ((upperStar AddCommGrpCat.{u + 1} iY').obj ((upperStar AddCommGrpCat.{u + 1} π).obj G))) q).comp ((Sheaf.H.map ((baseChangeMap AddCommGrpCat.{u + 1} sq'.toCommSq).app ((upperStar AddCommGrpCat.{u + 1} π).obj G)) q).comp (Sheaf.H.map ((upperStar AddCommGrpCat.{u + 1} i).map ((lowerStar AddCommGrpCat.{u + 1} f).map ((upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} π).unit.app G) ≫ (lowerStarComp AddCommGrpCat.{u + 1} π f).hom.app ((upperStar AddCommGrpCat.{u + 1} π).obj G))) q))) = (Sheaf.H.map ((squareUpperStarIso AddCommGrpCat.{u + 1} sqπ).hom.app G) q).comp ((cohomologyMap πZ ((upperStar AddCommGrpCat.{u + 1} iY).obj G) q).comp ((Sheaf.H.map ((upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} fZ).counit.app ((upperStar AddCommGrpCat.{u + 1} iY).obj G)) q).comp ((cohomologyMap fZ ((lowerStar AddCommGrpCat.{u + 1} fZ).obj ((upperStar AddCommGrpCat.{u + 1} iY).obj G)) q).comp (Sheaf.H.map ((baseChangeMap AddCommGrpCat.{u + 1} sq.toCommSq).app G) q))))",
+  "branch": "sheaf-dag",
+  "by": "P1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "P1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }
