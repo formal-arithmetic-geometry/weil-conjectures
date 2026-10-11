@@ -1,11 +1,11 @@
 # Work queue
 
-149 items; claim with `tools/claim.py next <group> [--stage N]`.
+146 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (149)
+## Stage 2: nodes to state (146)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
@@ -16,14 +16,14 @@
 | `def-pc-global-derived-rhom` | 1 | state | 4 |
 | `def-weil-pbc-simplicial-hom-object` | 1 | state | 4 |
 | `def-pc-derived-rhom-algebra-module` | 1 | state | 2 |
+| `def-sc-duality-equation-base-change-map` | 1 | state | 2 |
 | `def-weil-pbc-hypercohomology-filtrations` | 1 | state | 2 |
+| `def-pc-derived-base-change-map` | 1 | state | 1 |
 | `def-weil-pbc-etale-shriek-base-change-map` | 1 | state | 1 |
 | `def-pc-upper-shriek-right-adjoint` | 1 | state | 0 |
 | `lem-pc-module-pullback-identity-composition` | 1 | state | 10 |
 | `lem-weil-pbc-cohomology-pullback-functorial` | 1 | state | 8 |
-| `lem-pc-ringed-spaces-derived-adjoint` | 1 | state | 6 |
 | `lem-weil-pbc-pair-henselization` | 1 | state | 5 |
-| `lem-pc-derived-direct-image-composition` | 1 | state | 4 |
 | `lem-sc-derived-internal-hom-adjunction` | 1 | state | 4 |
 | `lem-pc-derived-direct-image-preserves-qcoh` | 1 | state | 3 |
 | `lem-weil-pbc-etale-graph-section-extension-map-linear` | 1 | state | 3 |
@@ -76,7 +76,6 @@
 | `lem-sc-affine-projective-complex-derived-hom` | 1 | state | 0 |
 | `lem-sc-affine-rhom-qcoherent` | 1 | state | 0 |
 | `lem-sc-boundary-derivation-square-zero` | 1 | state | 0 |
-| `lem-sc-derived-hom-projective-resolution` | 1 | state | 0 |
 | `lem-sc-derived-internal-hom-stalk-localization` | 1 | state | 0 |
 | `lem-sc-ext-coherent-hom-injective-acyclic` | 1 | state | 0 |
 | `lem-sc-ext-sheaf-to-global-spectral-sequence` | 1 | state | 0 |
@@ -113,7 +112,6 @@
 | `lem-sc-smooth-proper-relative-dualizing-general` | 1 | state | 0 |
 | `lem-sc-smooth-proper-tensor-direct-sums` | 1 | state | 0 |
 | `lem-sc-smooth-proper-tensor-perfect-case` | 1 | state | 0 |
-| `lem-sc-strict-henselization-cotangent-dimension` | 1 | state | 0 |
 | `lem-sc-strict-henselization-dvr` | 1 | state | 0 |
 | `lem-weil-pbc-coherent-formal-modules-local-exactness` | 1 | state | 0 |
 | `lem-weil-pbc-coherent-formal-short-exact-levels` | 1 | state | 0 |
@@ -154,12 +152,11 @@
 | `lem-pc-rf-base-change-flat-module` | 2 | state | 0 |
 | `lem-pc-rf-single-complex-inherited-tensor-condition` | 2 | state | 0 |
 | `lem-pc-supported-open-pushforward` | 2 | state | 0 |
-| `lem-sc-mult-n-tangent-differential` | 2 | state | 0 |
 | `lem-sc-p1-proj-shifted-free-twist` | 2 | state | 0 |
 | `lem-sc-right-adjoint-open-support-criterion` | 2 | state | 0 |
 | `pqf-lem-affine-vanishing` | 2 | state | 0 |
 
-Not open yet: 40 nodes that wait for stage 1, 212 nodes that wait for a statement dependency.
+Not open yet: 40 nodes that wait for stage 1, 210 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
