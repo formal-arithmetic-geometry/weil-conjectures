@@ -3203,3 +3203,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 01:08 UTC L: C1 quasi-isos-saturated-triangulated FIX c87c23f21 (R-qst0105; MS1-MS6 spelled out inline), K1 valuation-closed-fibre-section-vanishing PASS 4fa15694f re-push (R-cfs0107); lem-pur-homotopy-category-triangulated set to mathlib (HomotopyCategory IsTriangulated instance Triangulated.lean:208 + Qh.IsTriangulated DerivedCategory/Basic.lean:173) by L; field-case line added by L to step 1 of lem-sc-picard-locus-closed-valuation-triviality.
 - 01:08 L: merged deliver/G1/lem-sc-coherent-ring-perfect-complex-cohomology (reviewer FIX; first push; new nodes: 1)
 - 01:09 L: merged deliver/M1/lem-pc-finite-flat-pushforward-locally-free (reviewer FIX; first push; new nodes: 3)
+- 01:09 UTC L: G1 coherent-ring-perfect-complex-cohomology FIX cc39d75af (R-crp0108).
