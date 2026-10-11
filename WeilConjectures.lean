@@ -1529,6 +1529,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStarCoherence
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperShriek
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperShriekIso
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarCompCoherence
+public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarIdCoherence
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Comp
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Comparison

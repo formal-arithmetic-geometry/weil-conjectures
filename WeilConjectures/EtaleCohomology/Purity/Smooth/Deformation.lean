@@ -13,6 +13,7 @@ public import WeilConjectures.EtaleCohomology.Purity.Smooth.CohomologicalSmoothn
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.FullyFaithful
 public import WeilConjectures.SixFunctors.Etale.Derived.Concentrated
 public import WeilConjectures.SixFunctors.Etale.Derived.GeometricPoint
+public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarIdCoherence
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.StalkMonoidal
 
 /-!
@@ -44,12 +45,17 @@ standard pair `(𝔸^d → B, 0)`, which is pulled back from the base (`lem-pur-
 used through
 `AlgebraicGeometry.Scheme.Hom.DeformationToNormalConeData.exists_etale_nonempty_iso_familyObject`.
 
-Since every isomorphism here is only known to exist, the compatibility of the comparison with
-étale localization and base change in `B` (the last clause of the blueprint statements) cannot
-be expressed: it is a statement about a chosen isomorphism. Likewise the normalization of the
-DNC isomorphism "in coordinates" refers to coordinate charts that are not formalised. The
-normalization at `t = 1` of the family comparison, and its uniqueness, are stated in
-`AlgebraicGeometry.Scheme.Hom.DeformationToNormalConeData.existsUnique_familyObject_iso`.
+The family comparison `κ : F ≅ La^* 𝒞(g, s)` is pinned down by its restriction `θ` at `t = 1`
+(`AlgebraicGeometry.Scheme.Hom.DeformationToNormalConeData.existsUnique_familyObject_iso`), so
+its compatibility with base change in `B` is a statement about this unique comparison:
+restricted along any `u : B' ⟶ B` it is the unique comparison normalized against `Lu^* θ`
+(`Scheme.Hom.DeformationToNormalConeData.leftDerivedUpperStar_familyObject_iso_baseChange`).
+
+The fibre identifications `i₁^* F ≅ 𝒞(g, s)` and `i₀^* F ≅ 𝒞(π_N, 0_N)` come from the base
+change isomorphism of `sk-prop-cohsm` (c), which is only known to exist. The normalization of
+the DNC isomorphism "in coordinates", and the uniqueness it gives, compare such
+identifications over different bases, and are not expressible until that isomorphism is a
+chosen one (the `TODO(unify)` of `sk-prop-cohsm`).
 
 ## Main definitions
 
@@ -68,6 +74,8 @@ In the list below, `DeformationToNormalConeData` abbreviates
 - `DeformationToNormalConeData.exists_nonempty_iso_familyObject_twistShift`,
   `DeformationToNormalConeData.exists_nonempty_iso_sectionInvariant_twistShift`:
   the family object and the section invariant are lisse rank-one sheaves, twisted and shifted.
+- `DeformationToNormalConeData.leftDerivedUpperStar_familyObject_iso_baseChange`: the
+  comparison commutes with base change.
 - `DeformationToNormalConeData.nonempty_iso_familyObject_leftDerivedUpperStar`,
   `DeformationToNormalConeData.existsUnique_familyObject_iso`:
   the family is constant along `𝔸¹_B`, by a comparison that is unique once normalized at
@@ -432,6 +440,82 @@ theorem existsUnique_familyObject_iso
   rw [← cancel_mono (ε.hom.app _)]
   exact hκ.trans ((key κ₀ ψ).trans hψ).symm
 
+
+omit [HasTateTwist.IsNormalized Λ] in
+/-- Blueprint `prop-pur-dnc-family-constancy`: The deformation family is constant along the
+affine line
+
+*Clause (4), base change.* The normalized comparison commutes with arbitrary base change
+`u : B' ⟶ B`, in particular with étale localization on `B`. Let `κ : F ≅ La^* 𝒞(g, s)` restrict
+to `θ` at `t = 1` (clause (3)), and let `v₁ : 𝔸¹_{B'} ⟶ 𝔸¹_B` be the base change of `u`. Then
+the restriction `κ|_{B'} : Lv₁^* F ≅ Lv₁^* La^* 𝒞(g, s) ≅ La'^* Lu^* 𝒞(g, s)` restricts at
+`t = 1` to the restriction `Lu^* θ` of `θ`, and it is the only comparison
+`Lv₁^* F ≅ La'^* Lu^* 𝒞(g, s)` doing so. -/
+theorem leftDerivedUpperStar_familyObject_iso_baseChange
+    (θ : (L((AffineSpace.oneSection (ULift.{u} (Fin 1)) B)^*[ModuleCat.{u + 1} Λ])).obj
+      (D.familyObject Λ) ≅ sectionInvariant Λ g s)
+    (κ : D.familyObject Λ ≅
+      (L((𝔸(ULift.{u} (Fin 1); B) ↘ B)^*[ModuleCat.{u + 1} Λ])).obj (sectionInvariant Λ g s))
+    (hκ : (L((AffineSpace.oneSection (ULift.{u} (Fin 1)) B)^*[ModuleCat.{u + 1} Λ])).map κ.hom ≫
+        (leftDerivedUpperStarCompSectionIso _ _ _
+          (AffineSpace.oneSection_comp_over (ULift.{u} (Fin 1)) B)).hom.app _ = θ.hom)
+    {B' : Scheme.{u}} (u : B' ⟶ B)
+    (κ' : (L((AffineSpace.map (ULift.{u} (Fin 1)) u)^*[ModuleCat.{u + 1} Λ])).obj
+        (D.familyObject Λ) ≅
+      (L((𝔸(ULift.{u} (Fin 1); B') ↘ B')^*[ModuleCat.{u + 1} Λ])).obj
+        ((L((u)^*[ModuleCat.{u + 1} Λ])).obj (sectionInvariant Λ g s))) :
+    (L((AffineSpace.oneSection (ULift.{u} (Fin 1)) B')^*[ModuleCat.{u + 1} Λ])).map κ'.hom ≫
+        (leftDerivedUpperStarCompSectionIso _ _ _
+          (AffineSpace.oneSection_comp_over (ULift.{u} (Fin 1)) B')).hom.app _ =
+      ((leftDerivedUpperStarComp _ (AffineSpace.oneSection (ULift.{u} (Fin 1)) B')
+          (AffineSpace.map (ULift.{u} (Fin 1)) u)).inv.app _ ≫
+        (leftDerivedUpperStarComp _ u (AffineSpace.oneSection (ULift.{u} (Fin 1)) B) _
+          (AffineSpace.oneSection_comp_map u)).hom.app _) ≫
+        (L((u)^*[ModuleCat.{u + 1} Λ])).map θ.hom ↔
+    κ'.hom = (L((AffineSpace.map (ULift.{u} (Fin 1)) u)^*[ModuleCat.{u + 1} Λ])).map κ.hom ≫
+      (leftDerivedUpperStarComp _ (AffineSpace.map (ULift.{u} (Fin 1)) u)
+          (𝔸(ULift.{u} (Fin 1); B) ↘ B)).inv.app _ ≫
+        (leftDerivedUpperStarComp _ (𝔸(ULift.{u} (Fin 1); B') ↘ B') u _
+          (AffineSpace.map_over (n := ULift.{u} (Fin 1)) u)).hom.app _ := by
+  let i₁' := L((AffineSpace.oneSection (ULift.{u} (Fin 1)) B')^*[ModuleCat.{u + 1} Λ])
+  let ε' := leftDerivedUpperStarCompSectionIso (ModuleCat.{u + 1} Λ) _ _
+    (AffineSpace.oneSection_comp_over (ULift.{u} (Fin 1)) B')
+  -- the restriction of `κ` is normalized against `Lu^* θ`
+  have hres : i₁'.map ((L((AffineSpace.map (ULift.{u} (Fin 1)) u)^*[ModuleCat.{u + 1} Λ])).map
+        κ.hom ≫ (leftDerivedUpperStarComp _ (AffineSpace.map (ULift.{u} (Fin 1)) u)
+          (𝔸(ULift.{u} (Fin 1); B) ↘ B)).inv.app _ ≫
+        (leftDerivedUpperStarComp _ (𝔸(ULift.{u} (Fin 1); B') ↘ B') u _
+          (AffineSpace.map_over (n := ULift.{u} (Fin 1)) u)).hom.app _) ≫ ε'.hom.app _ =
+      ((leftDerivedUpperStarComp _ (AffineSpace.oneSection (ULift.{u} (Fin 1)) B')
+          (AffineSpace.map (ULift.{u} (Fin 1)) u)).inv.app _ ≫
+        (leftDerivedUpperStarComp _ u (AffineSpace.oneSection (ULift.{u} (Fin 1)) B) _
+          (AffineSpace.oneSection_comp_map u)).hom.app _) ≫
+        (L((u)^*[ModuleCat.{u + 1} Λ])).map θ.hom := by
+    rw [Functor.map_comp, Category.assoc,
+      leftDerivedUpperStar_map_comp_compSectionIso _ u _ _ _ _ _ (AffineSpace.map_over u)
+        (AffineSpace.oneSection_comp_map u) (AffineSpace.oneSection_comp_over _ B)
+        (AffineSpace.oneSection_comp_over _ B')]
+    have n₁ := (leftDerivedUpperStarComp (ModuleCat.{u + 1} Λ)
+      (AffineSpace.oneSection (ULift.{u} (Fin 1)) B')
+      (AffineSpace.map (ULift.{u} (Fin 1)) u)).inv.naturality κ.hom
+    have n₂ := (leftDerivedUpperStarComp (ModuleCat.{u + 1} Λ) u
+      (AffineSpace.oneSection (ULift.{u} (Fin 1)) B) _
+      (AffineSpace.oneSection_comp_map u)).hom.naturality κ.hom
+    simp only [Functor.comp_map] at n₁ n₂
+    simp only [Category.assoc]
+    erw [reassoc_of% n₁, reassoc_of% n₂]
+    rw [← Functor.map_comp, hκ]
+  refine ⟨fun h ↦ ?_, fun h ↦ h ▸ hres⟩
+  let κr := (L((AffineSpace.map (ULift.{u} (Fin 1)) u)^*[ModuleCat.{u + 1} Λ])).mapIso κ ≪≫
+    ((leftDerivedUpperStarComp _ (AffineSpace.map (ULift.{u} (Fin 1)) u)
+      (𝔸(ULift.{u} (Fin 1); B) ↘ B)).app _).symm ≪≫
+    (leftDerivedUpperStarComp _ (𝔸(ULift.{u} (Fin 1); B') ↘ B') u _
+      (AffineSpace.map_over (n := ULift.{u} (Fin 1)) u)).app _
+  have : HasInvertibleExponent Λ B' := .of_hom u
+  have := eq_of_leftDerivedUpperStar_oneSection_eq Λ _ _
+    (DerivedCategory.isInvertible_leftDerivedUpperStar_obj Λ _ (D.isInvertible_familyObject Λ))
+    κ' κr (by rw [← cancel_mono (ε'.hom.app _)]; exact h.trans hres.symm)
+  exact congrArg Iso.hom this
 end Scheme.Hom.DeformationToNormalConeData
 
 namespace Etale
@@ -450,7 +534,8 @@ Let `g : V ⟶ B` be smooth of pure relative dimension `d` with a closed section
 between the two section invariants. It is `i₀^*` of the comparison `κ : F ≅ La^* 𝒞(g, s)` of
 `prop-pur-dnc-family-constancy` (2), the fibre `i₀^* F` being `𝒞(π_N, 0_N)` by base change
 (`lem-pur-dnc-section-geometry` (1)). This is also blueprint `thm-pur-dnc-invariance`. -/
--- TODO(unify): sk-thm-dnc — add the normalization in coordinates and the base-change clause.
+-- TODO(unify): sk-thm-dnc — add the normalization in coordinates once the base change
+-- isomorphism of `sk-prop-cohsm` (c) is a chosen one.
 theorem nonempty_iso_sectionInvariant_normalCone [HasTateTwist.IsNormalized Λ] (d : ℕ)
     (g : V ⟶ B) [SmoothOfRelativeDimension d g] [HasCompactification g] (s : B ⟶ V)
     (N : Scheme.Hom.NormalConeData d s) [HasCompactification N.proj]

@@ -190,6 +190,40 @@ lemma leftDerivedUpperStarComp_id_left_hom_app (p : Y ⟶ X)
     Category.comp_id,
     Category.id_comp]
 
+
+/-- **Sections commute with base change.** Let `a : P ⟶ B` have a section `i`, let `a' : P' ⟶ B'`
+have a section `i'`, and let `v : P' ⟶ P` lie over `u : B' ⟶ B` and carry `i'` to `i`. Then the
+two identifications `Li'^* Lv^* La^* C ≅ Lu^* C` — through `Lv^* La^* ≅ La'^* Lu^*` and
+`Li'^* La'^* ≅ 𝟭`, or through `Li'^* Lv^* ≅ Lu^* Li^*` and `Li^* La^* ≅ 𝟭` — agree. -/
+lemma leftDerivedUpperStar_map_comp_compSectionIso {B B' P P' : Scheme.{u}} (u : B' ⟶ B)
+    (a : P ⟶ B) (a' : P' ⟶ B') (v : P' ⟶ P) (i : B ⟶ P) (i' : B' ⟶ P')
+    (hv : v ≫ a = a' ≫ u) (hi : i' ≫ v = u ≫ i) (h : i ≫ a = 𝟙 B) (h' : i' ≫ a' = 𝟙 B')
+    (C : _root_.DerivedCategory (Sheaf B.smallEtaleTopology A)) :
+    L((i')^*[A]).map ((leftDerivedUpperStarComp A v a).inv.app C ≫
+          (leftDerivedUpperStarComp A a' u (v ≫ a) hv).hom.app C) ≫
+        (leftDerivedUpperStarCompSectionIso A i' a' h').hom.app _ =
+      ((leftDerivedUpperStarComp A i' v).inv.app _ ≫
+          (leftDerivedUpperStarComp A u i (i' ≫ v) hi).hom.app _) ≫
+        L((u)^*[A]).map ((leftDerivedUpperStarCompSectionIso A i a h).hom.app C) := by
+  have hu : u = i' ≫ v ≫ a := by rw [hv, ← Category.assoc, h', Category.id_comp]
+  -- the three associativity squares and the two unit laws
+  have A1 := leftDerivedUpperStarComp_assoc'_app A i' a' u (𝟙 B') (v ≫ a) u h'.symm hv
+    (Category.id_comp u).symm C
+  have A2 := leftDerivedUpperStarComp_assoc'_app A i' v a (i' ≫ v) (v ≫ a) u rfl rfl
+    (by rw [hu, Category.assoc]) C
+  have A3 := leftDerivedUpperStarComp_assoc'_app A u i a (i' ≫ v) (𝟙 B) u hi h.symm
+    (by rw [hu, Category.assoc]) C
+  have UL := leftDerivedUpperStarComp_id_left_hom_app A u C
+  have UR := leftDerivedUpperStarComp_id_right_hom_app A u C
+  rw [← cancel_epi ((leftDerivedUpperStarComp A i' (v ≫ a) u hu).hom.app C ≫
+    L((i')^*[A]).map ((leftDerivedUpperStarComp A v a).hom.app C))]
+  simp only [leftDerivedUpperStarCompSectionIso, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
+    Category.assoc, Functor.map_comp]
+  rw [← Functor.map_comp_assoc, Iso.hom_inv_id_app, CategoryTheory.Functor.map_id,
+    Category.id_comp,
+    reassoc_of% A1, Iso.hom_inv_id_app_assoc, UL, reassoc_of% A2, Iso.hom_inv_id_app_assoc]
+  rw [← reassoc_of% A3, ← Functor.map_comp_assoc, Iso.hom_inv_id_app,
+    CategoryTheory.Functor.map_id, Category.id_comp, UR]
 end Etale
 
 end AlgebraicGeometry
