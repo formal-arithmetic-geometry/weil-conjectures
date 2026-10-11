@@ -313,5 +313,22 @@
   "worker": "stage1",
   "summary": "Not a Mathlib leaf (Mathlib has neither (R_k)/(S_k) nor normal rings; searched with LeanSearch, LeanFinder, Loogle and grep). Statement kept (checked against 031S; both directions are used by the citers lem-weil-pbc-flat-normal-fibres-noetherian-normal and lem-weil-pbc-regular-ring-normal). Proof split in 10 steps following the proof of 031S: Step 0 writes out the localization of (R_k)/(S_k) that Stacks uses silently; (1)=>(2) treats d<=1 directly for normal domains (the content Stacks takes from 031R and 00PD) and d>=2 via Kollar's lemma 0BHZ with the nonzerodivisor lemma 00LL; (2)=>(1) is the induction on dimension via 031R, 00PD, 030C and 0BHZ, with the step R_q = R'_q and the check that m is not associated to R' written out, and 00L6 replaced by its proof from existing nodes (radical = intersection of primes, power of a f.g. ideal). New unsplit nodes: lem-weil-pbc-serre-criterion-reduced (031R), lem-weil-pbc-regular-local-dim-one-iff-normal (00PD (3)<=>(5)), lem-weil-pbc-kollar-local-dichotomy (0BHZ, the two parts used), lem-weil-pbc-reduced-normal-iff-integrally-closed-total-fractions (030C), lem-weil-pbc-nonzerodivisor-if-maximal-not-associated (00LL for I = m)."
  },
- "reviewed": "pass (L, 2026-10-10): 10 steps follow 031S with the gaps written out: localizations inherit (R_k)/(S_k); (1)=>(2) by the dimension 0,1 cases directly and Kollar's dichotomy (0BHZ, new node) for d>=2 with the embedding of the finite extension into Frac(A); (2)=>(1) by strong induction on dimension via 031R (new node), 00PD (new node), 030C (new node), agreement of A and A[x] at non-maximal primes, a power of m killing A[x]/A, and the exclusion (3)/(4) of 0BHZ. New 00LL node for the nonzerodivisor."
+ "reviewed": "pass (L, 2026-10-10): 10 steps follow 031S with the gaps written out: localizations inherit (R_k)/(S_k); (1)=>(2) by the dimension 0,1 cases directly and Kollar's dichotomy (0BHZ, new node) for d>=2 with the embedding of the finite extension into Frac(A); (2)=>(1) by strong induction on dimension via 031R (new node), 00PD (new node), 030C (new node), agreement of A and A[x] at non-maximal primes, a power of m killing A[x]/A, and the exclusion (3)/(4) of 0BHZ. New 00LL node for the nonzerodivisor.",
+ "lean": {
+  "module": "Sheaf.RingTheory.SerreCriterionNormal",
+  "declaration": "Ring.serreCriterionNormal",
+  "file": "lean/Sheaf/RingTheory/SerreCriterionNormal.lean",
+  "statement": "theorem serreCriterionNormal (R : Type u) [CommRing R] [IsNoetherianRing R] : (∀ (p : Ideal R) [p.IsPrime], IsDomain (Localization.AtPrime p) ∧ IsIntegrallyClosed (Localization.AtPrime p)) ↔ IsSerreR R 1 ∧ IsSerreS R 2",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-scn",
+  "group": "M1",
+  "result": "pass"
+ }
 }
