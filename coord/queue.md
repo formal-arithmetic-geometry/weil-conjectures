@@ -2,14 +2,13 @@
 
 862 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (28)
+## Stage 1: nodes to split (27)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
 | `lem-weil-derived-limit-roos-complex` | 15 | none |
 | `lem-pc-ringed-space-module-stalk-tensor` | 3013 | none |
 | `lem-pc-ring-derived-map-lift` | 3018 | none |
-| `lem-pc-termwise-tor-acyclic-derived-tensor` | 3023 | none |
 | `lem-sc-module-localization-filtered-colimit` | 3023 | none |
 | `lem-pc-genus-agrees-sc` | 4007 | rests_on_sorry |
 | `prop-av-tate-rank` | 4008 | rests_on_sorry |
@@ -33,9 +32,9 @@
 | `lem-pur-kinjective-homotopy-limit-vanishing` | - | none |
 | `lem-pc-finite-flat-pushforward-locally-free` | - | none |
 | `lem-pur-left-derived-exact-when-defined` | - | none |
-| `lem-pur-quasi-isos-saturated-triangulated` | - | none |
+| `lem-pur-homotopy-category-triangulated` | - | none |
 
-## Stage 2: nodes to state (834)
+## Stage 2: nodes to state (835)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -201,6 +200,7 @@
 | `lem-pc-stalk-direct-sums` | 1 | state |
 | `lem-pc-stalk-tensor-complex` | 1 | state |
 | `lem-pc-tensor-mapping-cone-iso` | 1 | state |
+| `lem-pc-termwise-tor-acyclic-derived-tensor` | 1 | state |
 | `lem-pc-tor-independent-projective-complex-tensor` | 1 | state |
 | `lem-pc-tower-enough-injectives` | 1 | state |
 | `lem-pc-tower-injective-embedding` | 1 | state |
@@ -874,7 +874,7 @@
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 1746 nodes that wait for a statement dependency, 69 nodes that wait for stage 1.
+Not open yet: 1747 nodes that wait for a statement dependency, 68 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
