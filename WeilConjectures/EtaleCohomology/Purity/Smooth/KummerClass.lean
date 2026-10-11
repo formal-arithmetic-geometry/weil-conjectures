@@ -208,6 +208,29 @@ noncomputable def supportedClassMap (i : Z ⟶ X) [IsClosedImmersion i]
   (compactificationConstantComplexIso Λ i).inv ≫
     rightDerivedLowerShriekTranspose (ModuleCat.{u + 1} Λ) i γ
 
+/-- Blueprint `sk-prop-a1`: Rank-one orientation: the fundamental class of the zero section
+
+*Classes with supports are morphisms out of the constant complex of the support.* For a closed
+immersion `i : Z ⟶ X` and `L ∈ D(X_ét, Λ)`, the adjoint `γ ↦ (Λ_Z ⟶ Ri^! L)`
+(`AlgebraicGeometry.Etale.supportedClassMap`) is a bijection
+
+`H_Z(X, L) = Hom(Λ_X, Ri_! Ri^! L) ≅ Hom(Λ_Z, Ri^! L)`.
+
+For the zero section of the affine line and `L = Λ(1)[2]` this is the identification of the
+global sections `Hom(Λ_Y, Rs^! Λ(1)[2])` with the module `H²_{s(Y)}(𝔸¹_Y, Λ(1))`. The
+forget-supports map `Ri_! ⟶ Ri_*` is invertible since `i` is proper, and `Li^* ⊣ Ri_*`. -/
+theorem supportedClassMap_bijective (i : Z ⟶ X) [IsClosedImmersion i]
+    (L : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
+    Function.Bijective (supportedClassMap Λ i (L := L)) := by
+  let E := ((Iso.refl _).homCongr (asIso ((rightDerivedLowerShriekToLowerStarComp
+      (ModuleCat.{u + 1} Λ) i).app ((R(i)^![ModuleCat.{u + 1} Λ]).obj L)))).trans
+    ((((derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) _).comp
+      (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) _)).homEquiv _ _).symm.trans
+        ((compactificationConstantComplexIso Λ i).homCongr (Iso.refl _)))
+  convert E.bijective using 1
+  ext γ
+  simp [E, supportedClassMap, rightDerivedLowerShriekTranspose]
+
 /-- Blueprint `sk-def-purity-conv`: Purity conventions and the rank-one datum
 
 The *rank-one normalisation* of the Kummer classes. For every scheme `B` separated and locally
