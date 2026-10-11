@@ -122,5 +122,23 @@
   "group": "G1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ncp (reviewer sub-agent of L); spot-checked: Source Properties Lemma 0BA8 (first paragraph): Noetherian X, closed E all of whose points are closed => E finite; item statement agrees hypothesis by hypothesis. Step 1 carried by new leaf lem-sc-noetherian-closed-subset-finite-components (components of E are closed in E, hence in X since E closed); step 2 by lem-sc-scheme-sober (irreducible closed Z in X has generic point xi with Z = closure{xi}; xi in E so closed, Z = {xi}); step 3 elementary finite union. Mathlib verified: NoetherianSpace.finite_irreducibleComponents at Topology/NoetherianSpace.lean:193, NoetherianSpace.set instance :76, sUnion_irreducibleComponents Topology/Irreducible.lean:353, finite_irreducibleComponents_of_isNoetherian AlgebraicGeometry/Noetherian.lean:364. Small cases: E empty, E a closed point, E = an integral curve (generic point not closed, hypothesis fails), finite discrete scheme. FIX: dag/nodes/sec-curve-estimates/lem-sc-noetherian-closed-subset-finite-components.json: mathlib_match.how: cited a nonexistent noetherianSpace_of_isClosed at lines 120-126; replaced with NoetherianSpace.set (:76), the scheme-to-space step and sUnion_irreducibleComponents for the covering clause. Tool uses: added lem-sc-scheme-sober (off-unit sk-def-av-pic, generic sobriety, C8 accepted); dropped the declared lem-sc-noetherian-closed-subset-finite-components (same-unit new node, not an off-unit tool). Start Sat Oct 10 03:35:14 PM UTC 2026, end Sat Oct 10 03:35:42 PM UTC 2026.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteOfIsClosedOfClosedPoints",
+  "declaration": "AlgebraicGeometry.finite_of_isClosed_of_closed_points",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteOfIsClosedOfClosedPoints.lean",
+  "statement": "theorem finite_of_isClosed_of_closed_points (X : Scheme.{u}) [IsLocallyNoetherian X] [CompactSpace X] (E : Set X) (hE : IsClosed E) (hpoints : ∀ x ∈ E, IsClosed ({x} : Set X)) : E.Finite",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-ncp1129",
+  "group": "F1",
+  "result": "pass",
+  "note": "Noetherian X = [IsLocallyNoetherian X] [CompactSpace X] (sc-family form, both stmt_deps' declarations); closed E = IsClosed E; every point of E closed in X = ∀ x ∈ E, IsClosed ({x} : Set X) (ambient); conclusion E.Finite; no dimension/field/nonempty hypothesis added (node has none); docstring carries the 3-step proof; no duplicate in lean/Sheaf"
  }
 }
