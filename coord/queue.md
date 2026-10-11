@@ -1,17 +1,17 @@
 # Work queue
 
-526 items; claim with `tools/claim.py next <group> [--stage N]`.
+523 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (526)
+## Stage 2: nodes to state (523)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
 | `def-sc-picard-functor` | 1 | state |
 | `pqf-def-coherent` | 1 | state |
-| `def-nagata-fixed-base-separated-stage` | 6 | state |
+| `def-nagata-finite-type-closed-in-fp` | 3 | state |
 | `cor-galois-lisse-representations` | 1 | state |
 | `lem-pc-arrow-iso-pullback-counit` | 1 | state |
 | `lem-pc-base-change-closure-components` | 1 | state |
@@ -89,8 +89,6 @@
 | `lem-weil-pbc-make-separable` | 1 | state |
 | `lem-weil-pbc-make-separably-generated` | 1 | state |
 | `lem-weil-pbc-map-into-henselian-colimit` | 1 | state |
-| `lem-weil-pbc-minimal-finite-free-resolution-local` | 1 | state |
-| `lem-weil-pbc-mittag-leffler-complex-limit-homology` | 1 | state |
 | `lem-weil-pbc-mittag-leffler-limit-exact` | 1 | state |
 | `lem-weil-pbc-ml-sets-tower-limit-nonempty` | 1 | state |
 | `lem-weil-pbc-module-base-change-map-open-restriction` | 1 | state |
@@ -98,7 +96,6 @@
 | `lem-weil-pbc-module-directed-colimit-underlying-sets` | 1 | state |
 | `lem-weil-pbc-module-extension-by-zero-adjunction` | 1 | state |
 | `lem-weil-pbc-module-finite-presentation-cokernel` | 1 | state |
-| `lem-weil-pbc-module-finite-presentation-direct-sum` | 1 | state |
 | `lem-weil-pbc-module-finite-presentation-representatives` | 1 | state |
 | `lem-weil-pbc-module-finite-type-surjective-on-stalk` | 1 | state |
 | `lem-weil-pbc-module-injects-localizations-associated-primes` | 1 | state |
@@ -536,7 +533,7 @@
 | `lem-pc-essentially-constant-pro-hom-colimit` | 4 | state |
 | `lem-pur-essential-constant-pro-criterion-05py` | 4 | state |
 
-Not open yet: 40 nodes that wait for stage 1, 725 nodes that wait for a statement dependency.
+Not open yet: 40 nodes that wait for stage 1, 724 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
