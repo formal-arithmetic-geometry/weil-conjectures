@@ -151,5 +151,23 @@
   "group": "C1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-dbc2541 (reviewer sub-agent of L); spot-checked: Read packet whole. Statement matches Tag 08E2; proper-support notion is def-weil-pbc-closed-subset-proper-over-base, the same one the citer lem-pc-bounded-coherent-finite-tor-proper-pushforward-perfect passes (C4 ok). The proof follows Stacks' own spectral-sequence argument, not a length induction; Step 2's 08DS child generalizes lem-pc-coherent-hi (02O5) to proper support, a real lemma, kept; qc-support-reduction (08EV paragraph) a real lemma, kept; Step 5 hypotheses of lem-pc-derived-direct-image-uniform-truncation-bound (qcqs f', S qc, D_QCoh, shift) checked. FIX more, RETURN less: (1) class (b): lem-pc-derived-direct-image-hypercohomology-ss is the special case v=f_* of thm-sp-truncation-e2 (E2 page, quadrant, finite filtration, convergence); dropped, Steps 1/3/4 and proof_deps now cite thm-sp-truncation-e2 as generic tool (tool_uses). (2) B4: Step 1 plain '=>' rewritten as TeX \\Rightarrow; Steps 1/3/4 math put in TeX. Second reading missed (1); its claimed label/created.item edits are not in the file (created.item correctly stays the F1 citer).; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.DirectImageBoundedCoherent",
+  "declaration": "AlgebraicGeometry.Scheme.directImage_isBounded_coherent",
+  "file": "lean/Sheaf/AlgebraicGeometry/DirectImageBoundedCoherent.lean",
+  "statement": "theorem directImage_isBounded_coherent {X S : Scheme.{u}} [IsNoetherian S] (f : X ⟶ S) [LocallyOfFiniteType f] [HasDerivedCategory.{wX} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] [HasDerivedCategory.{wS} (SheafOfModules.{u} (moduleRings S.toRingedSpace))] (E : schemeDerivedCategory X) (hbounded : ∃ a b : ℤ, ∀ i : ℤ, i < a ∨ b < i → IsZero ((DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings X.toRingedSpace)) i).obj E)) (hcoherent : ∀ i : ℤ, RingedSpace.IsCoherent X.toRingedSpace ((DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings X.toRingedSpace)) i).obj E)) (hsupport : ∀ i : ℤ, Scheme.Modules.HasSupportProperOver f ((DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings X.toRingedSpace)) i).obj E)) : (∃ a b : ℤ, ∀ i : ℤ, i < a ∨ b < i → IsZero ((DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings S.toRingedSpace)) i).obj ((schemeDerivedDirectImage f).obj E))) ∧ (∀ i : ℤ, RingedSpace.IsCoherent S.toRingedSpace ((DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings S.toRingedSpace)) i).obj ((schemeDerivedDirectImage f).obj E)))",
+  "branch": "sheaf-dag",
+  "by": "V1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "V1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }
