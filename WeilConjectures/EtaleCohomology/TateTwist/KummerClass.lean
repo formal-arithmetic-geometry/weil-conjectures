@@ -128,6 +128,7 @@ variable {X : Scheme.{u}}
 
 lemma projective_sheafFiber_constantSheafInt (P : X.smallEtaleTopology.Point.{u + 1}) :
     Projective (P.sheafFiber.obj X.constantSheafInt) :=
+  have : LocallySmall.{u + 1} X.Etale := locallySmall_max.{u + 1, u}
   Projective.of_iso (P.sheafFiberConstantSheafIso _).symm inferInstance
 
 variable (Λ : Type (u + 1)) [CommRing Λ] [HasInvertibleExponent Λ X]
@@ -260,6 +261,7 @@ variable (X) in
 /-- The Kummer class is additive: `κ(uv) = κ(u) + κ(v)`. -/
 lemma kummerClassOf_mul (u v : Γ(X, ⊤)ˣ) :
     kummerClassOf X Λ (u * v) = kummerClassOf X Λ u + kummerClassOf X Λ v := by
+  have : LocallySmall.{u + 1} X.Etale := locallySmall_max.{u + 1, u}
   let A := AddCommGrpCat.of (ULift.{u + 1} (ZMod 0))
   let adj := constantSheafAdj X.smallEtaleTopology AddCommGrpCat.{u + 1} terminalIsTerminal
   let φ₂ : (constantSheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}).obj (A ⊞ A) ⟶
