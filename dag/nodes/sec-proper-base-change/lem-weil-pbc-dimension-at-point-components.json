@@ -267,5 +267,24 @@
   "summary": "Read Algebra 00OT (statement and whole proof, lines 27787-27852), 00OS, 00ES, 00ET, 00G1, 00E5, 00KE in algebra.tex and the citers' uses (lem-weil-pbc-polynomial-quotient-dimension-at-point-height-difference step 5 and lem-weil-pbc-dimension-at-point-local-ring-trdeg step 4 use dim_x X = max dim(S/q_i) over the minimal primes q_i contained in p; neither uses the min over maximal ideals). Not a Mathlib leaf (no dimension at a point in Mathlib). Statement kept in substance; made explicit: the subspace topology on components, the definition of minimal prime, t >= 1, the value is a non-negative integer, the minimum is attained; added stmt_deps def-weil-irreducible-components and def-kun-subspace-topology. Proof in nine steps following 00OT: components = V(q_j) for the finitely many minimal primes; dim V(q_j) = dim S/q_j (homeomorphism with Spec S/q_j); chain counting through S/q_j with 00OS; lower bound dim S_m >= N; every neighbourhood of p contains a maximal ideal over p (Jacobson + basic open); lower bound dim W >= N; U = X minus the components not through x has dim U <= N; dim_x X = N; a maximal m_0 over p in U has dim S_m0 = N, so the minimum is N. Two new Mathlib leaves: lem-weil-pbc-spec-irreducible-components-minimal-primes (00ES (3), PrimeSpectrum.zeroLocus_minimalPrimes) and lem-weil-pbc-spec-topological-krull-dimension-ring (PrimeSpectrum.topologicalKrullDim_eq_ringKrullDim). No citer, nor anything citing it, is used.",
   "blueprint": "This node is not a blueprint node; its nearest blueprint ancestor is thm-weil-pbc-finite-etale-lifting (step 7 of its split, the essential-surjectivity paragraphs of Lemma 0GS2), reached through the created chain recorded in blueprint.from.via. No blueprint node states 00OT or proves it (tools/blueprint_refs.py search 00OT; 'dimension point irreducible components'; 'irreducible component dimension'; 'dim_x'; 'minimal prime': no node with the same statement; lem-kun-dimension-formula and def-kun-dimension of sec-smooth-purity are the dimension formula dim_x = dim O_x + trdeg and the definition, not this lemma), so same_as = [] and the steps realize no blueprint proof text directly; they follow Stacks 00OT."
  },
- "reviewed": "2026-10-10 L: 9 steps checked against the 00OT proof: finitely many minimal primes and components V(q_j) (new leaf zeroLocus_minimalPrimes, Topology.lean:1267), dim V(q_j) = dim S/q_j (new leaf topologicalKrullDim_eq_ringKrullDim, :1361), chains through minimal primes with 00OS, a maximal ideal over p in every neighbourhood, upper bound on U, minimum over maximal ideals attained; no citer cited, no cycle; statement made precise without change of content"
+ "reviewed": "2026-10-10 L: 9 steps checked against the 00OT proof: finitely many minimal primes and components V(q_j) (new leaf zeroLocus_minimalPrimes, Topology.lean:1267), dim V(q_j) = dim S/q_j (new leaf topologicalKrullDim_eq_ringKrullDim, :1361), chains through minimal primes with 00OS, a maximal ideal over p in every neighbourhood, upper bound on U, minimum over maximal ideals attained; no citer cited, no cycle; statement made precise without change of content",
+ "lean": {
+  "module": "Sheaf.RingTheory.DimensionAtPointComponents",
+  "declaration": "AlgebraicGeometry.dimension_at_point_components",
+  "file": "lean/Sheaf/RingTheory/DimensionAtPointComponents.lean",
+  "statement": "theorem dimension_at_point_components {k : Type u} [Field k] {S : Type v} [CommRing S] [Algebra k S] [Algebra.FiniteType k S] (p : Ideal S) [p.IsPrime] : let X := Spec (CommRingCat.of S) let x : X := ⟨p, inferInstance⟩ ∃ qs : Finset (Ideal S), (∀ q : Ideal S, q ∈ qs ↔ q.IsPrime ∧ q ≤ p ∧ ∀ r : Ideal S, r.IsPrime → r ≤ q → r = q) ∧ qs.Nonempty ∧ ∃ n : ℕ, topologicalKrullDimAt x = n ∧ (∀ Z : Set X, Z ∈ irreducibleComponents X → x ∈ Z → topologicalKrullDim Z ≤ n) ∧ (∃ Z : Set X, Z ∈ irreducibleComponents X ∧ x ∈ Z ∧ topologicalKrullDim Z = n) ∧ (∀ q ∈ qs, ringKrullDim (S ⧸ q) ≤ n) ∧ (∃ q ∈ qs, ringKrullDim (S ⧸ q) = n) ∧ (∀ (m : Ideal S) [m.IsMaximal], p ≤ m → (n : WithBot ℕ∞) ≤ ringKrullDim (Localization.AtPrime m)) ∧ (∃ (m : Ideal S) (_ : m.IsMaximal), p ≤ m ∧ ringKrullDim (Localization.AtPrime m) = n)",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-dpc0948"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-dpc0948",
+  "group": "C1",
+  "result": "fix",
+  "note": "k field, S finite-type k-algebra, p prime -> x in Spec S; qs = minimal primes <= p, nonempty (t>=1); n:N = dim_x X (topologicalKrullDimAt); max over irreducibleComponents through x (subspace topologicalKrullDim) upper bound + attained; FIXED quotient clause from all-equal to max (<= n + attained); min over maximal m >= p of dim S_m lower bound + attained"
+ }
 }
