@@ -191,19 +191,20 @@
   "module": "Sheaf.Paper.CechComparisonMapNaturality",
   "declaration": "AlgebraicGeometry.Scheme.Modules.cechComparisonMapNaturality",
   "file": "lean/Sheaf/Paper/CechComparisonMapNaturality.lean",
-  "statement": "theorem cechComparisonMapNaturality (X : Scheme.{u}) {ι : Type u} (U : ι → X.Opens) (hcover : iSup U = ⊤) : (∀ (F : X.Modules) (I : InjectiveResolution F), QuasiIso (moduleCechAlpha U I)) ∧ ∀ p : ℕ, (∀ F : X.Modules, ∃ c : ((CategoryTheory.cechComplexFunctor U).obj F.presheafModuleCat).homology p ⟶ (RingedSpace.moduleCohomology X.toRingedSpace p).obj F, IsModuleCechComparison U F p c) ∧ ∀ (F G : X.Modules) (φ : F ⟶ G) (cF : ((CategoryTheory.cechComplexFunctor U).obj F.presheafModuleCat).homology p ⟶ (RingedSpace.moduleCohomology X.toRingedSpace p).obj F) (cG : ((CategoryTheory.cechComplexFunctor U).obj G.presheafModuleCat).homology p ⟶ (RingedSpace.moduleCohomology X.toRingedSpace p).obj G), IsModuleCechComparison U F p cF → IsModuleCechComparison U G p cG → HomologicalComplex.homologyMap ((CategoryTheory.cechComplexFunctor U).map ((PresheafOfModules.forgetToPresheafModuleCat (op ⊤) isTerminalTop.op).map φ.val)) p ≫ cG = cF ≫ (RingedSpace.moduleCohomology X.toRingedSpace p).map φ",
+  "statement": "theorem cechComparisonMapNaturality (X : Scheme.{u}) {ι : Type u} (U : ι → X.Opens) (hcover : iSup U = ⊤) : (∀ (F : X.Modules) (I : InjectiveResolution F), QuasiIso (moduleCechAlpha U I)) ∧ ∀ p : ℕ, (∀ F : X.Modules, ∃ c : ((CategoryTheory.cechComplexFunctor U).obj F.presheafModuleCat).homology p ⟶ (RingedSpace.moduleCohomology X.toRingedSpace p).obj F, IsModuleCechComparison U F p c) ∧ (∀ (F G : X.Modules) (φ : F ⟶ G) (cF : ((CategoryTheory.cechComplexFunctor U).obj F.presheafModuleCat).homology p ⟶ (RingedSpace.moduleCohomology X.toRingedSpace p).obj F) (cG : ((CategoryTheory.cechComplexFunctor U).obj G.presheafModuleCat).homology p ⟶ (RingedSpace.moduleCohomology X.toRingedSpace p).obj G), IsModuleCechComparison U F p cF → IsModuleCechComparison U G p cG → HomologicalComplex.homologyMap ((CategoryTheory.cechComplexFunctor U).map ((PresheafOfModules.forgetToPresheafModuleCat (op ⊤) isTerminalTop.op).map φ.val)) p ≫ cG = cF ≫ (RingedSpace.moduleCohomology X.toRingedSpace p).map φ)",
   "branch": "sheaf-dag",
   "by": "C1",
   "date": "2026-10-12",
   "existing": false,
-  "fixed_by": "R-ccm"
+  "fixed_by": "R-ccm",
+  "note": "Second reading aligned the stale sandbox signature with the authoritative per-module existential and predicate-guarded naturality statement."
  },
  "reviewed_lean": {
   "date": "2026-10-11",
   "by": "L",
-  "reviewer": "R-ccm",
+  "reviewer": "X-a249b",
   "group": "C1",
-  "result": "fix",
-  "note": "X scheme, U open cover (iSup U = ⊤), O_X-modules, injective resolutions, alpha quasi-iso, comparison via IsModuleCechComparison (existence = resolution independence), naturality square for every phi and every p for all predicate-satisfying cF cG; Cech map via cechComplexFunctor.map of forgetToPresheafModuleCat; H^p via RingedSpace.moduleCohomology; stmt_deps += landed def-sc-module-cech-comparison justified (used, same unit, no cycle). FIX: ∃! of a chosen natural family replaced by ∃ per F plus naturality for all maps satisfying IsModuleCechComparison (STATE ČECH COMPARISON); uniqueness clause dropped (derivable from moduleCechAlpha_isIso)."
+  "result": "pass",
+  "note": "independent Codex review: Matched X, indexed open cover, module coefficients, alpha quasi-isomorphism, per-module comparison predicate, and predicate-guarded naturality square to the node clause by clause; compile is clean."
  }
 }

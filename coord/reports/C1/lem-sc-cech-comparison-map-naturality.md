@@ -14,7 +14,7 @@ Earlier concern (resolved by this second reading): the source-level construction
 
 Read the node and module independently. Every explicit Lean hypothesis and conclusion is accounted for: scheme, degree, coefficient-module category, Cech and cohomology functors, comparison family, and naturality equation. No additional mathematical side condition is introduced.
 
-## Second reading by C1
+## Earlier second reading (a previous round; superseded)
 
 Read the node, Stacks Cohomology Tag 01EQ (lemma-cech-cohomology and its proof),
 and the signatures and data of each dependency independently. Source text was read
@@ -102,3 +102,155 @@ Validation: lcompile.py compiled the final statement cleanly; every theorem proo
 in the delivery is sorry. No hollow definition, local notation, unbound universe or
 extra instance binder is present. The shared comparison predicate contains actual
 alpha/beta constructions and a universal characterization, not assumed naturality.
+
+## Earlier second reading (a previous round; superseded)
+
+I read the authoritative node in `dag/nodes/sec-picard-framework/` and the final
+module item by item. The objects and hypotheses render as follows, with no extra
+assumptions: `X : Scheme.{u}` is the scheme; `{ι : Type u}`, `U : ι → X.Opens`, and
+`hcover : iSup U = ⊤` are the indexed Zariski open cover; `F : X.Modules` is an
+`O_X`-module; `cechComplexFunctor U` and its `.homology p` are the stated Cech
+complex and Cech cohomology; `RingedSpace.moduleCohomology X.toRingedSpace p` is
+the stated sheaf cohomology; and `InjectiveResolution F`, `moduleCechAlpha`, and
+`IsModuleCechComparison` are exactly the recorded dependency declarations.
+
+The first conclusion clause is exactly `∀ F I, QuasiIso (moduleCechAlpha U I)`.
+For every `p : ℕ`, the second clause is `∀ F, ∃ c, IsModuleCechComparison U F p c`,
+which supplies the canonical map and resolution independence through the dependency
+predicate. The final clause quantifies `F G`, `φ`, and arbitrary `cF cG` of the
+correct source and target types, then assumes both comparison predicates and states
+the naturality square in categorical composition order. This matches every clause of
+the node, including its quantifier order and the explicit Cech morphism induced by
+`φ.val`.
+
+The prior sandbox signature incorrectly used `∃! c : ∀ F, ...` and bundled
+naturality into the uniqueness witness. The repository node had already been repaired
+to the per-module existential and predicate-guarded naturality form; I changed the
+module signature and copied that authoritative node into the delivery. I also removed
+the stale docstring claim that uniqueness was asserted. No statement correction or
+new dependency node was needed.
+
+Edge cases remain covered: `p = 0`, zero modules, an empty scheme, and an empty index
+type are admitted; `hcover` expresses the required empty-cover condition when
+appropriate. The only universe is `u`, shared by the scheme, opens, and index. No
+field, characteristic, Noetherian, separatedness, finiteness, or nonemptiness
+hypothesis is added.
+
+Searches were rechecked with `rg` in Mathlib, `WeilConjectures`, and `lean/Sheaf`,
+plus LeanFinder/LeanSearch queries recorded by the worker. The only related
+declaration is the shared `IsModuleCechComparison`; no existing naturality theorem
+duplicates this item. `lcompile.py` compiles the repaired module cleanly.
+
+## Earlier second reading (a previous round; superseded)
+
+I reread the authoritative node statement and the module signature item by item. The
+scheme is `X : Scheme.{u}`; the indexed open covering is `U : ι → X.Opens` with
+`hcover : iSup U = ⊤`; and the index universe is shared with `X`, so no case is
+excluded. The coefficient objects are `F G : X.Modules` and `φ : F ⟶ G`. Cech
+cohomology is rendered by
+`((CategoryTheory.cechComplexFunctor U).obj F.presheafModuleCat).homology p`, while
+sheaf cohomology is
+`(RingedSpace.moduleCohomology X.toRingedSpace p).obj F`. Injective resolutions are
+`I : InjectiveResolution F`, and the first conclusion is exactly
+`∀ F I, QuasiIso (moduleCechAlpha U I)`. For each `p : ℕ`, the second conclusion is
+`∀ F, ∃ c, IsModuleCechComparison U F p c`, expressing the canonical map and its
+resolution-independent characterization. The final clause quantifies every `F`, `G`,
+`φ`, and comparison maps `cF`, `cG`, assumes both comparison predicates, and states
+`homologyMap(Cech.map φ) ≫ cG = cF ≫ moduleCohomology.map φ`, matching the node's
+naturality equation and quantifier order. No hypothesis is stronger or missing.
+
+The zero degree `p = 0`, zero module, empty scheme, and empty index type are admitted;
+`hcover` is the sole cover condition. No characteristic, finiteness, separatedness,
+Noetherian, or nonemptiness assumption appears. I searched Mathlib, `WeilConjectures`,
+and `lean/Sheaf` for Cech comparison naturality under alternate terms, and checked the
+recorded LeanFinder and LeanSearch searches; only the shared `IsModuleCechComparison`
+construction exists, so this module is not a duplicate. The dependency declaration was
+read and agrees with the node. The only mismatch was the stale sandbox file from the
+first worker, which used an arbitrary pair of functors and assumed naturality as `hc`;
+it was replaced with the authoritative construction-based signature above. The node's
+statement and `lean.statement` now match the signature verbatim. `lcompile.py` passes.
+
+## Second reading by C1
+
+Independent review of the current delivery on 2026-10-12. Read the node, its
+four proof steps, all nine statement dependency records, and their declarations.
+Read Stacks cohomology.tex, lemma-cech-cohomology (01EQ), its complete proof,
+and preceding lemma-injective-trivial-cech (01EP), in the local literature copy.
+The source assumes an arbitrary ringed space and arbitrary open cover; this node
+specializes to a scheme and the whole-space open. No additional ambient hypothesis
+is required. There is no statement_change, new definition node, or dependency module.
+
+Inventory, Lean rendering, and verdict:
+
+- Scheme X: `X : Scheme.{u}` uses Mathlib Scheme extending LocallyRingedSpace.
+  Correct; no geometric property is assumed.
+- Indexed Zariski cover: `{ι : Type u}`, `U : ι → X.Opens`, and
+  `hcover : iSup U = ⊤`. Read Opens.grothendieckTopology: covering sieves cover
+  each point. Thus this is the stated covering, with no finite-cover restriction.
+- Coefficients and morphisms: `F G : X.Modules`, `φ : F ⟶ G`, with Modules
+  defined as SheafOfModules X.ringCatSheaf. Correct, not only quasi-coherent sheaves.
+- Cech complex and cohomology: `(cechComplexFunctor U).obj F.presheafModuleCat`
+  and `.homology p`. Read Mathlib cechComplexFunctor and upstream
+  presheafModuleCat: degree p is the product of section modules on intersections
+  of (p+1)-tuples, with alternating restriction differential. The categorical
+  products of opens are their intersections. This specializes the general-site
+  dependency, whose SiteCechComplex records iterated fibre products and the same
+  alternating formula; no private construction is substituted.
+- Nonnegative degree: `∀ p : ℕ`. Correct, including degree zero.
+- Injective resolution: `I : InjectiveResolution F`, with cocomplex, injectivity,
+  augmentation from single₀, and quasi-isomorphism fields. EnoughInjectives
+  is supplied by the shared module-sheaf declarations; the statement adds no
+  instance assumption. Read the recorded scheme enoughInjectives signature too.
+- Total complex and alpha/beta: read moduleCechDouble, moduleCechZero,
+  moduleCechAlphaComponent, moduleCechAlpha, moduleCechBetaComponent, and
+  moduleCechBeta. They apply the Cech functor termwise to the resolution,
+  use restriction of global sections and the augmentation, and take Mathlib total.
+  Resolution degree is first; the sign (-1)^(pq) interchanges the source's indices
+  while fixing both axes. Correct; the total is first quadrant and finite diagonally.
+- Alpha quasi-isomorphism: first conjunct `∀ F I, QuasiIso (moduleCechAlpha U I)`.
+  Correct, asserted for every resolution, not assumed as a hypothesis.
+- Sheaf cohomology: `RingedSpace.moduleCohomology X.toRingedSpace p`.
+  Read its definition as rightDerived of evaluation/globalSectionsFunctor in module
+  sheaves, and the PQFCohomology record and declaration. Correct module cohomology.
+- Comparison existence and resolution independence: for each p and F,
+  `∃ c, IsModuleCechComparison U F p c`. Read the predicate body: for EVERY
+  InjectiveResolution F, c composed with isoRightDerivedObj.hom and H(alpha)
+  equals H(beta). Since alpha is invertible for a cover, this is exactly the
+  specified inverse formula and resolution independence. No arbitrary comparison
+  or arbitrary functor remains; no extra uniqueness conjunct is asserted.
+- Naturality: for each p, F, G, φ and each pair cF, cG satisfying the comparison
+  predicate, `homologyMap (cechComplexFunctor.map (...map φ.val)) p ≫ cG =
+  cF ≫ moduleCohomology.map φ`. The forgotten morphism has the same componentwise
+  module maps; upstream cechComplexFunctor_map_f_π verifies this. Correct equation
+  and quantifier order, without a hypothesis asserting naturality itself.
+
+Edge cases: zero modules, empty scheme, p = 0, and an empty index set are admitted.
+For an empty index set the cover equality requires the whole space to be empty,
+as in the source. There are no characteristic, field, Noetherian, separatedness,
+nonemptiness, or finiteness binders. All universe variables are explicitly bound;
+u is arbitrary and shared by Scheme, its module category, and the cover index as
+in the established comparison construction. Larger set-sized data use a larger
+ambient universe; no fixed small universe is selected.
+
+Independent searches: LeanFinder query "open covering derived global sections
+comparison morphism functorial in coefficients" returned eight unrelated open-cover
+and global-section declarations. LeanSearch query "injective resolution total complex
+canonical map from Cech cohomology to sheaf cohomology" was unavailable (HTTP 500),
+recorded as unavailable, not as evidence of absence. Grep with
+`cech.*(comparison|natur)|comparison.*cech` in Mathlib, WeilConjectures and lean/Sheaf
+found the shared ModuleCechComparison predicate, CechH1MapNatural (only degree one),
+AffineModuleCechComparisonNatural (only affine-intersection/quasi-coherent case), and
+upstream CechComparison. Read upstream cechComplexFunctorHomologyIso_hom_naturality:
+it compares two models of Cech cohomology, not Cech with derived module cohomology.
+None replaces this full theorem. No duplicate definition is needed.
+
+No mathematical mismatch remains in the current module, and its correct signature
+was retained. Checked the node lean.statement against the authoritative signature
+reader and synchronized that field verbatim. The earlier arbitrary-functor/hc issue
+belongs to superseded versions, not this file. All four node proof steps are in the
+docstring, including acyclicity, finite spectral-sequence filtration comparison,
+resolution independence through a lift of identity, and naturality through a lift of φ.
+There are no hollow definitions, extra declarations, local notation, or unbound names.
+The sole theorem proof is sorry. lcompile.py compiled cleanly (exit 0, 2.5 seconds).
+The latest return was a landing-lock failure after reviewer acceptance; this delivery
+uses deliver2.py to rebase, preflight and compile on the server as requested there.
