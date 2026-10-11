@@ -235,5 +235,23 @@
   "by": "L",
   "result": "pass",
   "note": "Reviewed by the lead (opus-relaunch6). Node created by C1; statement made precise by the worker (the condition is 'R_m -> (R_m)^ regular in the sense of def-weil-pbc-g-ring', Stacks' phrase 'geometrically regular formal fibres' kept as a gloss). Nine steps along the proof of 07PT with Stacks' implicit claims as nodes: six new nodes, one Mathlib leaf (00HR/00HQ flat local homomorphisms are faithfully flat: FaithfullyFlat.of_flat_of_isLocalHom Flat/FaithfullyFlat/Algebra.lean:60, verified) and five unsplit (07PS complete Noetherian local rings are G-rings; 07QI composition of regular maps with Noetherian fibres; localization maps are regular; regularity descends through a localization; 0C4G flatness of the map of completions). Argument: for a prime p in a maximal m, A = R_m, A^ complete local hence a G-ring, so B = (A^)_{p'} -> B^ regular; the composite R_p -> B^ regular by composition and descent through the localization; (R_p)^ -> B^ flat and surjective on spectra (0C4G, 00HR), so 07NT gives R_p -> (R_p)^ regular. Stage-3 note: lem-weil-pbc-flat-completion (0C4G, local rings) and lem-weil-pbc-flat-module-completion-flat (0AGW, modules) are related but distinct."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.GRingMaximalIdealCriterion",
+  "declaration": "isGRing_iff_maximalIdeal",
+  "statement": "theorem isGRing_iff_maximalIdeal (R : Type w) [CommRing R] [IsNoetherianRing R] : IsGRing R ↔ ∀ (m : Ideal R) [m.IsMaximal], RingHom.IsRegular (algebraMap (Localization.AtPrime m) (AdicCompletion (IsLocalRing.maximalIdeal (Localization.AtPrime m)) (Localization.AtPrime m)))",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-11",
+  "file": "lean/Sheaf/RingTheory/GRingMaximalIdealCriterion.lean",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-gmc1055",
+  "group": "K1",
+  "result": "pass",
+  "note": "Noetherian [IsNoetherianRing R]; IsGRing R (landed H1 def); iff; every maximal m via [m.IsMaximal]; R_m = Localization.AtPrime m; completion AdicCompletion at maximalIdeal of R_m with canonical algebraMap, same form as IsGRing body; RingHom.IsRegular landed (p.Fiber); zero ring/field edge cases; universe w single, no vacuity"
  }
 }

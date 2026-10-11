@@ -4338,3 +4338,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 10:55 L: merged deliver/C1/lem-weil-pbc-idempotent-endomorphism-charpoly-field (stage 2; reviewer FIX; first push; Sheaf.LinearAlgebra.IdempotentEndomorphismCharpolyField LinearMap.charpoly_toMatrix_of_idempotent)
 - 10:55 L: merged deliver/G1/lem-weil-pbc-idempotents-determined-modulo-radical (stage 2; reviewer PASS; first push; Sheaf.RingTheory.IdempotentsDeterminedModuloRadical IsIdempotentElem.eq_of_sub_mem_of_le_jacobson)
 - 10:55 L: merged deliver/E1/lem-weil-pbc-helper-g-ring-char-p (stage 2; reviewer PASS; first push; Sheaf.RingTheory.PowerSeriesPolynomialFormalFiber MvPowerSeries.formalFiber_polynomial_isGeometricallyRegular)
+- 10:55 L: merged deliver/K1/lem-weil-pbc-g-ring-maximal-ideal-criterion (stage 2; reviewer PASS; first push; Sheaf.RingTheory.GRingMaximalIdealCriterion isGRing_iff_maximalIdeal)
