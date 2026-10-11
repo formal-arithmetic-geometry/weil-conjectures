@@ -185,5 +185,24 @@
  "reviewed": "Reviewed by L 2026-10-10: faithful to Properties 01PE (3): H = Ker(F ⊕ j_*G → j_*(F|_U)) with the sign fixed, quasi-coherence from 01LC (pqf-lem-pushforward-qcoh, used as a tool as in affine-pushforward-base-change), the kernel node and a new unsplit direct-sum node; the identification over U written out. No Mathlib match.",
  "tool_uses": [
   "pqf-lem-pushforward-qcoh"
- ]
+ ],
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.QuasiCoherentExtensionQcOpen",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_quasiCoherent_extension_of_quasiCompact_open",
+  "file": "lean/Sheaf/AlgebraicGeometry/QuasiCoherentExtensionQcOpen.lean",
+  "statement": "theorem exists_quasiCoherent_extension_of_quasiCompact_open (X : Scheme.{u}) (U : X.Opens) (hU : QuasiCompact U.ι) (F : SheafOfModules.{u} (moduleRings X.toRingedSpace)) [F.IsQuasicoherent] (G : SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)) [G.IsQuasicoherent] (φ : G ⟶ F.over U) : ∃ (H : SheafOfModules.{u} (moduleRings X.toRingedSpace)), H.IsQuasicoherent ∧ ∃ (ψ : H ⟶ F) (α : H.over U ≅ G), (SheafOfModules.overFunctor (moduleRings X.toRingedSpace) U).map ψ = α.hom ≫ φ",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-qeo1430"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-qeo1430",
+  "group": "M1",
+  "result": "fix",
+  "note": "X scheme, U open, hU QuasiCompact U.ι (node's quasi-compact j, X not qcqs), F qcoh on moduleRings, G qcoh on over U, φ : G ⟶ F.over U; ∃ H qcoh, ψ : H ⟶ F, α : H.over U ≅ G, overFunctor.map ψ = α.hom ≫ φ (φ∘α = ψ|_U)"
+ }
 }
