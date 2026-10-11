@@ -26,6 +26,8 @@ weight `i`: every eigenvalue `α` of the geometric Frobenius satisfies `|ι α| 
 
 ## Main statements
 
+- `AlgebraicGeometry.WeilComplex.properCompactCoincidence`: `Ra_! ≅ Ra_*` and `H_c^i ≅ Hⁱ` for a
+  proper `k₀`-scheme (`prop-weil-proper-compact-coincidence`).
 - `AlgebraicGeometry.WeilSheaf.isPunctuallyPureOfWeight_adicConstant`: the constant Weil sheaf is
   punctually pure of weight `0` (`lem-zl-constant-sheaf-weight-zero`).
 - `AlgebraicGeometry.WeilSheaf.isMixedOfWeightsAtMost_toComplex_adicConstant`: the constant Weil
@@ -51,6 +53,24 @@ open CategoryTheory Limits
 namespace AlgebraicGeometry
 
 variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]
+
+namespace WeilComplex
+
+variable {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
+  [IsProper (X ↘ Spec (CommRingCat.of k₀))]
+
+/-- Blueprint `prop-weil-proper-compact-coincidence` (proper coincidence): for `Y` proper over
+`k₀` with structure morphism `a`, the compactly supported direct image is the ordinary direct
+image, `Ra_! K ≅ Ra_* K` (the identity is a compactification of `a`), and hence
+`H_c^i(Y ⊗ k̄, K) ≅ Hⁱ(Y ⊗ k̄, K)` Frobenius-equivariantly for every Weil complex `K` and every
+`i`. -/
+theorem properCompactCoincidence (K : WeilComplex k₀ l X) :
+    Nonempty ((derivedLowerShriek k₀ l (X ↘ Spec (CommRingCat.of k₀))).obj K ≅
+      (derivedLowerStar (X ↘ Spec (CommRingCat.of k₀))).obj K) ∧
+    ∀ i : ℤ, Nonempty ((K.compactlySupportedCohomology i).Equiv (K.cohomology i)) :=
+  ⟨⟨derivedLowerShriekObjIsoOfIsProper K⟩, nonempty_equiv_compactlySupportedCohomology_cohomology K⟩
+
+end WeilComplex
 
 namespace WeilSheaf
 
