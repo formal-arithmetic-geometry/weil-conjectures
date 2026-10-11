@@ -5120,3 +5120,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 15:03 L: merged deliver/E1/pqf-lem-finite-qf (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.FiniteIsQuasiFinite AlgebraicGeometry.Scheme.Hom.isQuasiFinite_of_isFinite)
 - 15:03 L: merged deliver/F1/pqf-lem-finite-type-algebra-finite-spectrum (stage 2; reviewer PASS; first push; Sheaf.RingTheory.FiniteTypeAlgebraFiniteSpectrum Algebra.finiteType_finiteSpectrum)
 - 15:03 L: merged deliver/H1/lem-kun-etale-lfp (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.EtaleLfpAndFiniteType AlgebraicGeometry.etale_lfp_and_finiteType_over_field)
+- 15:03 L: merged deliver/H1/lem-weil-pbc-valuation-ring-normal (stage 2; reviewer PASS; first push; Sheaf.RingTheory.ValuationRingNormal isDomain_isIntegrallyClosed_of_fractionField_element_or_inverse)
