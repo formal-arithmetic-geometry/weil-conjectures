@@ -3267,3 +3267,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 01:58 L: merged deliver/H1/lem-sc-qcoh-cech-total-tensor-iso (reviewer FIX; first push; new nodes: 0)
 - 02:00 L: lead note on lem-pur-derived-functor-shift-05su: naturality in X of the shift isomorphisms (used by lem-pur-left-derived-exact-when-defined step 4; R-dfs0156's DOUBTFUL point); stated nowhere in the node or Stacks 05SU(2), follows from the uniqueness of lem-pur-derived-functor-morphisms-05sa
 - 02:00 L: second readings: F1 05SU missed nothing; E1 05SA missed the wrong first object in step 3 (fixed by R-dfm0157); H1 cech-total-tensor-iso missed the well-definedness of the Künneth map and a stale source.place (fixed by R-cti0157)
+- 02:01 L: merged deliver/G1/lem-pc-finite-free-map-residue-localization (reviewer PASS; first push; new nodes: 0)

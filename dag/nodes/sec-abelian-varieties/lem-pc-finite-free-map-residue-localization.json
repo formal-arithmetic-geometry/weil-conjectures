@@ -13,16 +13,36 @@
  },
  "kind": "statement",
  "title": "Residue-field rank criterion for maps of finite free modules",
- "statement": "Let $R$ be a ring, let $u:R^{\\oplus m}\\to R^{\\oplus n}$ be a homomorphism of finite free $R$-modules [def-weil-pbc-projective-module], and let $\\mathfrak p$ be a prime ideal. If $u\\otimes_R\\kappa(\\mathfrak p)$ is injective, then there is $f\\notin\\mathfrak p$ such that $u_f$ is injective and $\\operatorname{Coker}(u_f)$ is finite free over $R_f$ [def-weil-pbc-module-localization-away]. If $u\\otimes_R\\kappa(\\mathfrak p)$ is an isomorphism, then there is $f\\notin\\mathfrak p$ such that $u_f$ is an isomorphism.",
+ "statement": "Let $R$ be a ring, let $u:R^{\\oplus m}\\to R^{\\oplus n}$ be a homomorphism of finite free $R$-modules [def-weil-pbc-free-module, def-weil-pbc-projective-module], and let $\\mathfrak p$ be a prime ideal. If $u\\otimes_R\\kappa(\\mathfrak p)$ is injective, then there is $f\\notin\\mathfrak p$ such that $u_f$ is injective and $\\operatorname{Coker}(u_f)$ is finite free over $R_f$ [def-weil-pbc-module-localization-away]. If $u\\otimes_R\\kappa(\\mathfrak p)$ is an isomorphism, then there is $f\\notin\\mathfrak p$ such that $u_f$ is an isomorphism.",
  "source": {
   "document": "literature/stacks-project/algebra.tex",
   "place": "Tag 00O0, Lemma cokernel-flat, parts (1) and (3), finite-free matrix calculation"
  },
  "stmt_deps": [
+  "def-weil-pbc-free-module",
   "def-weil-pbc-module-localization-away",
   "def-weil-pbc-projective-module"
  ],
- "proof": [],
+ "proof": [
+  {
+   "text": "Assume that the induced map on the residue field is injective. Represent u by an n by m matrix. Injectivity over the field kappa(p) means that some m by m minor has nonzero determinant modulo p; let Delta be the corresponding determinant. Then Delta is not in p, and after localizing at Delta that minor is a unit. Elementary row and column operations over R_Delta put the matrix into the block form [I_m; 0]. Hence u_Delta has a left inverse and is injective, while its cokernel is identified with the free module R_Delta^(n-m). Thus Coker(u_Delta), equivalently Coker(u)_Delta because localization is exact, is finite free.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00O0, Lemma cokernel-flat, part (1), finite-free matrix calculation"
+   }
+  },
+  {
+   "text": "If the residue-field map is an isomorphism, then m=n and the determinant of the matrix is nonzero modulo p. Localize at this determinant, which is outside p. The determinant is then a unit, so the adjugate matrix gives a two-sided inverse; therefore u_f is an isomorphism.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00O0, Lemma cokernel-flat, part (3), finite-free matrix calculation"
+   }
+  }
+ ],
  "proof_deps": [],
  "proof_origin": {
   "by": "document",
@@ -60,12 +80,27 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pc-finite-projective-cokernel-localization",
   "by": "worker",
   "date": "2026-10-11"
  },
  "chapter": "sec-abelian-varieties",
- "unit": "sk-prop-av-cube"
+ "unit": "sk-prop-av-cube",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-finite-free-map-residue-localization",
+  "worker": "stage1",
+  "summary": "Checked the finite-free specialization of Stacks Tag 00O0. The proof is the finite matrix minor argument: an injective residue-field map has a nonvanishing maximal minor, whose determinant becomes a unit after principal localization and yields an identity block and finite-free cokernel; in the equal-rank isomorphism case the determinant itself becomes a unit and the adjugate gives the inverse. No smaller independent lemma was introduced because these are the item’s own elementary matrix steps.",
+  "blueprint": "Realizes the proof clause of thm-sc-theorem-of-cube used by lem-pc-affine-perfect-cut-degree-zero: localize so that the selected differential has a finite-projective cokernel."
+ },
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-ffr0201",
+  "group": "G1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ffr0201 (reviewer sub-agent of L); spot-checked: Statement matches Stacks 00O0 (1),(3) specialized to finite free and parent lem-pc-finite-projective-cokernel-localization step 3's use (C4 ok; finite free -> finite projective in parent). Step 1: nonzero maximal minor over kappa(p), det outside p, invertible over R_Delta, block form [I_m;0] gives left inverse and Coker ~ R^(n-m) (E ok, m=0 fine). Step 2: m=n by dimension, det unit, adjugate inverse (E ok). Definitions: def-weil-pbc-free-module, -projective-module, -module-localization-away correct. No duplicate (grep Coker(u_f)/cokernel-flat: parent, scheme-level lem-sc-finite-locally-free-residue-isomorphism, unrelated). Mathlib grep RingTheory/Localization cokernel and Flat IsLocalizedModule: no Mathlib match. Second reading missed no fault."
+ }
 }
