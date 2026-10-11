@@ -226,5 +226,23 @@
   "worker": "stage1",
   "summary": "Read Stacks 01TH (morphisms.tex 3664-3727): (2)=>(4) is the last paragraph, which rests on the third paragraph's identification of Spec(A tensor_R kappa(p)) with the open U_s of X_s; 01T2 gives finite type. def-weil-pbc-ring-map-quasi-finite-at-prime is the isolated-point form ({q-bar} open in Spec(A tensor_R kappa(p)), for a finite type map), so no algebraic equivalence (00PJ/00PM) is needed: the proof is the fibre identification. Six steps mirroring the already split converse lem-weil-pbc-quasi-finite-at-point-isolated: finite type (lem-weil-pbc-lft-affine-pairs); affine charts, f_U o a = b o Spec(phi) and phi^{-1}(q)=p (affine-open-spec-points, affine-opens-induced-ring-map-spec-square); p^{-1}(U) open in X_s is U x_V Spec kappa(s) (open-fibre-product, residue-field-point-naturality); that fibre product is Spec F (spec-residue-field-identification, fibre-product-affine-spectra); xi = h(q-bar) and {q-bar} = h^{-1}{xi} open (fibre-ring-primes-bijection); conclusion by the definition. All cited nodes exist; no new node. Statement unchanged. Mathlib: re-searched (leansearch, loogle, leanfinder, local_search, grep); candidate kept and extended by PrimeSpectrum.preimageHomeomorphFiber and finiteType_appLE, not a leaf (B8)."
  },
- "reviewed": "Reviewed by L 2026-10-10: faithful to Morphisms 01TH (2)=>(4) with the identification of the fibre of f|_U with Spec(A⊗_R κ(p)) (third paragraph of the proof) written out via existing fibre nodes; the DAG's quasi-finite-at-prime definition is the isolated-point form, so no 00PJ/00PM is needed. No new nodes; Mathlib candidate kept (composite of four declarations, B8). Tool uses are Mathlib leaves of sk-thm-reduction."
+ "reviewed": "Reviewed by L 2026-10-10: faithful to Morphisms 01TH (2)=>(4) with the identification of the fibre of f|_U with Spec(A⊗_R κ(p)) (third paragraph of the proof) written out via existing fibre nodes; the DAG's quasi-finite-at-prime definition is the isolated-point form, so no 00PJ/00PM is needed. No new nodes; Mathlib candidate kept (composite of four declarations, B8). Tool uses are Mathlib leaves of sk-thm-reduction.",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.IsolatedFiberPointQuasiFiniteAffinePairs",
+  "declaration": "AlgebraicGeometry.Scheme.Hom.isQuasiFiniteAtPrime_of_isOpen_singleton_asFiber",
+  "file": "lean/Sheaf/AlgebraicGeometry/IsolatedFiberPointQuasiFiniteAffinePairs.lean",
+  "statement": "theorem Scheme.Hom.isQuasiFiniteAtPrime_of_isOpen_singleton_asFiber {X S : Scheme.{u}} (f : X ⟶ S) [LocallyOfFiniteType f] (x : X) (hisolated : IsOpen ({f.asFiber x} : Set (f.fiber (f x)))) (U : X.Opens) (V : S.Opens) (hU : IsAffineOpen U) (hV : IsAffineOpen V) (hx : x ∈ U) (hUV : U ≤ f ⁻¹ᵁ V) : letI := (f.appLE V U hUV).hom.toAlgebra ∃ hft : Algebra.FiniteType Γ(S, V) Γ(X, U), letI := hft Algebra.IsQuasiFiniteAtPrime Γ(S, V) Γ(X, U) (hU.primeIdealOf ⟨x, hx⟩)",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-ifq1103",
+  "group": "H1",
+  "result": "pass",
+  "note": "f:X⟶S [LocallyOfFiniteType f]; xi=f.asFiber x in f.fiber (f x), isolated as IsOpen {f.asFiber x} (landed spelling, EtaleLocalFiniteAtPoint/FiniteDimensionalResidueField); U,V IsAffineOpen, hx, hUV : U ≤ f⁻¹ᵁ V; φ=(f.appLE V U hUV).hom.toAlgebra; q=hU.primeIdealOf ⟨x,hx⟩ : PrimeSpectrum Γ(X,U); conclusion ∃ FiniteType witness ∧ recorded Algebra.IsQuasiFiniteAtPrime (p.Fiber S form); #check confirmed names; one universe u forced by Hom"
+ }
 }
