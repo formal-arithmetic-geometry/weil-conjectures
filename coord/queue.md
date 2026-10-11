@@ -1,11 +1,11 @@
 # Work queue
 
-978 items; claim with `tools/claim.py next <group> [--stage N]`.
+975 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (978)
+## Stage 2: nodes to state (975)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -31,7 +31,6 @@
 | `lem-galois-descent-datum-diagonal-identity` | 1 | state |
 | `lem-galois-fpqc-morphisms-descend` | 1 | state |
 | `lem-galois-fpqc-pullback-canonical-iso` | 1 | state |
-| `lem-kun-separable-smooth-colimit` | 1 | state |
 | `lem-kun-support-geometric-point-independent` | 1 | state |
 | `lem-pc-affine-flat-module-descent` | 1 | state |
 | `lem-pc-affine-tilde-kflat` | 1 | state |
@@ -49,11 +48,9 @@
 | `lem-pc-fppf-affine-sheafification-restriction` | 1 | state |
 | `lem-pc-fppf-affine-site-topos-equivalence` | 1 | state |
 | `lem-pc-h0-proper-variety` | 1 | state |
-| `lem-pc-kflat-cone-direct-sum` | 1 | state |
 | `lem-pc-kflat-hocolim-truncations` | 1 | state |
 | `lem-pc-kflat-stalk-criterion` | 1 | state |
 | `lem-pc-kflat-tensor-cone-two-out-of-three` | 1 | state |
-| `lem-pc-kflat-tensor-product` | 1 | state |
 | `lem-pc-kflat-tensor-quasi-iso` | 1 | state |
 | `lem-pc-module-bounded-flat-kflat` | 1 | state |
 | `lem-pc-module-flat-opcycles-tor-criterion` | 1 | state |
