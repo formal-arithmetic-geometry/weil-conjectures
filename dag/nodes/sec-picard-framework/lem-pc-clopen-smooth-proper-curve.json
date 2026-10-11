@@ -118,5 +118,23 @@
   "group": "K1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-csp (reviewer sub-agent of L); spot-checked: Source: Stacks Morphisms 01VC (lemma-open-immersion-smooth), 01VA (lemma-composition-smooth), 01W5 (lemma-closed-immersion-proper), 01W3 (lemma-composition-proper), tags verified in tags/tags. Item statement reworded from 'open-and-closed subscheme' to a morphism i:Z->Y that is an open and a closed immersion (E7, named in the report); equivalent, and the only consumer lem-pc-base-change-closure-components (open-and-closed restrictions X_j of X_Omega) supplies exactly this; stmt_deps def-weil-open-immersion/def-weil-closed-immersion exist. Step 1: new leaf lem-pc-open-immersion-smooth-composition (open immersion followed by smooth is smooth) applied to i and Y->Spec K, hypotheses match. Step 2: lem-weil-pbc-closed-immersion-proper clause (b) (closed immersion followed by proper is proper) applied to i and Y->Spec K; off-unit (sk-thm-br) Mathlib leaf used as a generic black box, tool_use accepted (C8). Nonemptiness hypothesis unused, harmless. Small cases: Z=Y; Z a component of Y1 disjoint-union Y2. Checked no existing node states the leaf exactly (lem-weil-pbc-smooth-restrict-open-subschemes is about open-subscheme inclusions, different shape); blueprint_refs search 'open immersion smooth' found nothing. FIX: dag/nodes/sec-picard-framework/lem-pc-open-immersion-smooth-composition.json: mathlib_match: declarations were SmoothOfRelativeDimension.smooth and smoothOfRelativeDimension_comp (Smooth.lean:181/207; the latter is the relative-dimension composite and does not apply to an arbitrary smooth f), replaced by AlgebraicGeometry.instSmoothOfIsOpenImmersion (Smooth.lean:183-184) and AlgebraicGeometry.smooth_comp (Smooth.lean:109-111), both read with sed and names checked in library_names_mathlib; file field made a plain path, line 183. Start Sat Oct 10 04:12:14 PM UTC 2026, end Sat Oct 10 04:13:11 PM UTC 2026.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ClopenSmoothProper",
+  "declaration": "AlgebraicGeometry.smooth_and_isProper_of_clopen_immersion",
+  "file": "lean/Sheaf/AlgebraicGeometry/ClopenSmoothProper.lean",
+  "statement": "theorem smooth_and_isProper_of_clopen_immersion {K : Type u} [Field K] {Y Z : Scheme.{u}} [Nonempty Z] (f : Y ⟶ Spec (.of K)) [Smooth f] [IsProper f] (i : Z ⟶ Y) [IsOpenImmersion i] [IsClosedImmersion i] : Smooth (i ≫ f) ∧ IsProper (i ≫ f)",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-csp0929",
+  "group": "H1",
+  "result": "pass",
+  "note": "K field=[Field K] in Type u; Y with smooth proper structure morphism = (f : Y ⟶ Spec (.of K)) [Smooth f] [IsProper f] (recorded decls of def-sbc-smooth-morphisms/def-weil-proper-morphism; explicit f fine since Z's structure morphism is the composite); Z nonempty=[Nonempty Z] (underlying space, #check shows ↥Z); i open and closed immersion=[IsOpenImmersion i] [IsClosedImmersion i]; conclusion Smooth (i ≫ f) ∧ IsProper (i ≫ f); no dimension/curve hypothesis, as the node; statement fields unchanged vs sheaf-dag; names #checked in L mirror"
  }
 }
