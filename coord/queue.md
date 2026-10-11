@@ -1,15 +1,14 @@
 # Work queue
 
-811 items; claim with `tools/claim.py next <group> [--stage N]`.
+810 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (811)
+## Stage 2: nodes to state (810)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
-| `def-pc-curve` | 1 | state |
 | `def-pc-divisor-line-bundle` | 1 | state |
 | `def-pc-field-tower` | 1 | state |
 | `def-pc-generators` | 1 | state |
