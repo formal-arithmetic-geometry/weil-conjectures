@@ -169,5 +169,24 @@
   "by": "L",
   "result": "accepted",
   "note": "5 steps following Stacks 00IQ (1): N finitely generated (00IK leaf); Krull intersection over R_p via the existing Jacobson-radical leaf (Filtration.lean:416); the image of N in M_p is zero; one f outside p kills N (today's 076A node); N_f = 0. No new nodes; source tag corrected (00IK, not 00FN)."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.KrullIntersectionLocalization",
+  "declaration": "RingTheory.krull_intersection_localization",
+  "file": "lean/Sheaf/RingTheory/KrullIntersectionLocalization.lean",
+  "statement": "theorem krull_intersection_localization (R : Type u) [CommRing R] [IsNoetherianRing R] (I : Ideal R) (M : Type v) [AddCommGroup M] [Module R M] [Module.Finite R M] (p : Ideal R) [p.IsPrime] (hIp : I ≤ p) : let N : Submodule R M := ⨅ n : ℕ, I ^ n • ⊤ ∃ f : R, f ∉ p ∧ Subsingleton (LocalizedModule.Away f N)",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-kil1112"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-kil1112",
+  "group": "E1",
+  "result": "fix",
+  "note": "R CommRing+IsNoetherianRing, I ideal, M Module.Finite, N = ⨅ n, I^n • ⊤ (n=0 incl.), ∀ prime p ⊇ I, ∃ f ∉ p; conclusion refit from annihilator form to the stmt_dep's LocalizedModule.Away f N (Subsingleton), equivalence checked via LocalizedModule.subsingleton_iff"
  }
 }
