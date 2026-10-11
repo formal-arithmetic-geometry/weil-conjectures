@@ -20,7 +20,8 @@
  },
  "stmt_deps": [
   "def-pc-scheme",
-  "def-pc-derived-category"
+  "def-pc-derived-category",
+  "def-pc-compactly-generated"
  ],
  "proof": [
   {
@@ -126,5 +127,23 @@
   "group": "C1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-dcg2024 (reviewer sub-agent of L); spot-checked: Read packet; checked step 1 against lem-pc-derived-qcoh-perfect-generation, step 2/3 against def-pc-generators, def-pc-compactly-generated, def-pc-compact-object, lem-pc-perfect-object-compact; searched pc nodes for duplicates of new node (none; not restating lem-pc-compact-generators-build-objects or lem-pc-compact-hom-hocolim); new node is a real lemma, statement-only. FIX more, RETURN less: (1) C1 step 2: 'localizing subcategory = all, hence coproduct is a generator by def-pc-generators' is not stated by the definition; wrote out the orthogonal-class argument (closure under shifts, retracts, sums, cones via lem-weil-pbc-hom-out-of-triangle-exact (ii)) and cited it; (2) C4/E step 2-3: existence of set-indexed coproducts in D_QCoh, required by def-pc-compactly-generated and for the coproduct of the E_i, now cites lem-pc-derived-qcoh-direct-sums; proof_deps updated; (3) new node source place corrected to the set-of-representatives input (Second reading claimed it was corrected but it still named compactness). Second reading missed (1) and (2).; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.DerivedQCohCompactGeneration",
+  "declaration": "AlgebraicGeometry.schemeDerivedQCoh_compactlyGenerated",
+  "file": "lean/Sheaf/AlgebraicGeometry/DerivedQCohCompactGeneration.lean",
+  "statement": "theorem schemeDerivedQCoh_compactlyGenerated (X : Scheme.{u}) [CompactSpace X] [QuasiSeparatedSpace X] [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] : ∃ htri : (schemeDerivedQCohProperty X).IsTriangulated, letI := htri ∃ hsums : HasCoproducts.{u} (schemeDerivedQCohCategory X), letI := hsums IsCompactlyGeneratedTriangulated.{u} (schemeDerivedQCohCategory X)",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-dcg1240",
+  "group": "C1",
+  "result": "pass",
+  "note": "X:Scheme.{u} any scheme; qc=[CompactSpace X], qs=[QuasiSeparatedSpace X]; D_QCoh = landed schemeDerivedQCohCategory on DerivedCategory(SheafOfModules (moduleRings X)) via HasDerivedCategory.{w} binder; conclusion = landed IsCompactlyGeneratedTriangulated.{u} with IsTriangulated/HasCoproducts.{u} as existential Prop conclusions (not inferable: inferInstance fails; true by QCoh weak Serre + 36.3.1); letI inlined, #print shows no let; pp.universes: compact-object and generator index universes all u_1; stmt_dep def-pc-compactly-generated landed"
  }
 }
