@@ -149,5 +149,23 @@
   "group": "M1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-fpc2410 (reviewer sub-agent of L); spot-checked: No cycle (generic node and finite-exchange do not cite the item); Noetherian induction, reducible/irreducible cases, generic-node hypotheses (integral Noetherian affine Q, finite V_Q->Q, dense open in irreducible T) checked; constructibility notion of def-weil-pbc-etale-sheaves matches generic node and citers. FIX more, RETURN less: (1) C1: Step 1 called pullback-preserves-constructibility elementary although prop-constructible-pullback states it; now cited (tool use, other unit), with the note that its stratification notion agrees with the constructible-subset one on Noetherian schemes (Stacks 005L). (2) C4: final partition must consist of constructible subsets per def-weil-pbc-etale-sheaves; Step 3 now says so via def-weil-constructible-subset (U Noetherian).; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FinitePushforwardConstructibleNoetherian",
+  "declaration": "AlgebraicGeometry.Scheme.isConstructibleEtaleSheafOfSets_lowerStar_of_isNoetherian",
+  "file": "lean/Sheaf/AlgebraicGeometry/FinitePushforwardConstructibleNoetherian.lean",
+  "statement": "theorem isConstructibleEtaleSheafOfSets_lowerStar_of_isNoetherian {U V : Scheme.{u}} [IsNoetherian U] (h : V ⟶ U) [IsFinite h] (E : Sheaf V.smallEtaleTopology AddCommGrpCat.{u + 1}) (hE : IsConstructibleEtaleSheafOfSets ((sheafCompose V.smallEtaleTopology (CategoryTheory.forget AddCommGrpCat.{u + 1})).obj E)) : IsConstructibleEtaleSheafOfSets ((sheafCompose U.smallEtaleTopology (CategoryTheory.forget AddCommGrpCat.{u + 1})).obj ((Etale.lowerStar AddCommGrpCat.{u + 1} h).obj E))",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-fpc1022",
+  "group": "K1",
+  "result": "pass",
+  "note": "U Noetherian=[IsNoetherian U]; h finite=[IsFinite h]; E abelian etale sheaf on V=Sheaf V.smallEtaleTopology AddCommGrpCat.{u+1}; constructible=recorded IsConstructibleEtaleSheafOfSets (def-weil-pbc-etale-sheaves, the stmt_dep) on the underlying set sheaf, as landed ConstructibleFiniteSelection; h_*=AlgebraicGeometry.Etale.lowerStar (#check); no source finite-pushforward constructibility (only closed immersion, different IsConstructibleSheaf) so existing:false"
  }
 }
