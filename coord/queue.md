@@ -1,11 +1,11 @@
 # Work queue
 
-53 items; claim with `tools/claim.py next <group> [--stage N]`.
+47 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (53)
+## Stage 2: nodes to state (47)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
@@ -30,7 +30,6 @@
 | `lem-pc-derived-internal-hom-pullback-adjunction` | 1 | state | 0 |
 | `lem-pc-global-hom-pullback-adjunction` | 1 | state | 0 |
 | `lem-pc-sites-sheaf-tensor-bilinear-universal` | 1 | state | 0 |
-| `lem-pur-site-restriction-module-adjunction-exact` | 1 | state | 0 |
 | `lem-sc-affine-koszul-cech-derived-comparison` | 1 | state | 0 |
 | `lem-sc-as-sequence` | 1 | state | 0 |
 | `lem-sc-etale-affine-qcoherent` | 1 | state | 0 |
@@ -39,9 +38,7 @@
 | `lem-sc-ga-cohomology` | 1 | state | 0 |
 | `lem-sc-hilb-dominating-power` | 1 | state | 0 |
 | `lem-sc-injective-module-abelian-acyclic-zariski` | 1 | state | 0 |
-| `lem-sc-irreducible-constant-sections` | 1 | state | 0 |
 | `lem-weil-pbc-cech-nerve-free-homology` | 1 | state | 0 |
-| `lem-weil-pbc-closed-pushforward-constant-stalks` | 1 | state | 0 |
 | `lem-weil-pbc-cohomology-over-object-localization` | 1 | state | 0 |
 | `lem-weil-pbc-etale-cohomology-local-ring-colimit` | 1 | state | 0 |
 | `lem-weil-pbc-etale-cohomology-over-open` | 1 | state | 0 |
@@ -49,9 +46,6 @@
 | `lem-weil-pbc-etale-shriek-star-finite-modules` | 1 | state | 0 |
 | `lem-weil-pbc-etale-shriek-to-star-injective` | 1 | state | 0 |
 | `lem-weil-pbc-projective-space-twisting-sheaf-charts` | 1 | state | 0 |
-| `lem-weil-pbc-ringed-site-free-cech-complex-exact` | 1 | state | 0 |
-| `lem-weil-pbc-ringed-site-injective-module-injective-presheaf` | 1 | state | 0 |
-| `lem-weil-pbc-sheaf-surjection-kernel-pair-coequalizer` | 1 | state | 0 |
 | `lem-weil-pbc-site-equivalence-morphism-transport` | 1 | state | 0 |
 | `lem-weil-pbc-site-higher-direct-image-sheafified-presheaf` | 1 | state | 0 |
 | `lem-weil-pbc-site-module-sheafification-lift-injective` | 1 | state | 0 |
