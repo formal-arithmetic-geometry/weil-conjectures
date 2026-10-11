@@ -163,6 +163,19 @@ theorem hasEigenvalue_inv_of_eval_charpolyRev_eq_zero {W : Type*} [AddCommGroup 
   rw [← eq_inv_of_mul_eq_one_left hat, Module.End.hasEigenvalue_iff_isRoot_charpoly]
   exact (Polynomial.mem_roots (charpoly_monic B).ne_zero).1 ha'
 
+omit [FiniteDimensional K V] in
+/-- Over an algebraically closed field, the inverse of a nonzero eigenvalue `β` of `B` is a root
+of `det (1 - T B)`. -/
+theorem eval_inv_charpolyRev_eq_zero_of_hasEigenvalue {W : Type*} [AddCommGroup W] [Module K W]
+    [FiniteDimensional K W] (B : Module.End K W) {β : K} (hβ : B.HasEigenvalue β)
+    (hβ0 : β ≠ 0) : Polynomial.eval β⁻¹ B.charpolyRev = 0 := by
+  rw [charpolyRev_eq_prod_roots, Polynomial.eval_multiset_prod, Multiset.prod_eq_zero_iff,
+    Multiset.mem_map]
+  refine ⟨1 - Polynomial.C β * Polynomial.X, Multiset.mem_map.2 ⟨β, ?_, rfl⟩, ?_⟩
+  · rw [Module.End.hasEigenvalue_iff_isRoot_charpoly] at hβ
+    exact (Polynomial.mem_roots (charpoly_monic B).ne_zero).2 hβ
+  · simp [hβ0]
+
 /-- If `det (1 - T A) = ∏_{i ∈ s} det (1 - T^{eᵢ} Bᵢ)`, then for every nonzero eigenvalue `β`
 of `A` some power `β^{eᵢ}` is an eigenvalue of `Bᵢ`. -/
 theorem exists_hasEigenvalue_pow_of_charpolyRev_eq (A : Module.End K V)
@@ -170,18 +183,57 @@ theorem exists_hasEigenvalue_pow_of_charpolyRev_eq (A : Module.End K V)
     [∀ i, FiniteDimensional K (W i)] (B : ∀ i, Module.End K (W i)) (e : ι → ℕ)
     (hA : A.charpolyRev = ∏ i ∈ s, Polynomial.expand K (e i) (B i).charpolyRev) {β : K}
     (hβ : A.HasEigenvalue β) (hβ0 : β ≠ 0) : ∃ i ∈ s, (B i).HasEigenvalue (β ^ e i) := by
-  have h0 : Polynomial.eval β⁻¹ A.charpolyRev = 0 := by
-    rw [charpolyRev_eq_prod_roots, Polynomial.eval_multiset_prod, Multiset.prod_eq_zero_iff,
-      Multiset.mem_map]
-    refine ⟨1 - Polynomial.C β * Polynomial.X, Multiset.mem_map.2 ⟨β, ?_, rfl⟩, ?_⟩
-    · rw [Module.End.hasEigenvalue_iff_isRoot_charpoly] at hβ
-      exact (Polynomial.mem_roots (charpoly_monic A).ne_zero).2 hβ
-    · simp [hβ0]
+  have h0 := eval_inv_charpolyRev_eq_zero_of_hasEigenvalue A hβ hβ0
   rw [hA, Polynomial.eval_prod, Finset.prod_eq_zero_iff] at h0
   obtain ⟨i, hi, hz⟩ := h0
   rw [Polynomial.expand_eval, inv_pow] at hz
   exact ⟨i, hi, by simpa using hasEigenvalue_inv_of_eval_charpolyRev_eq_zero (B i) hz⟩
 
+/-- If `det (1 - T A) = det (1 - T^d B)` with `d ≠ 0`, then every nonzero eigenvalue `γ` of `B`
+is the `d`-th power of an eigenvalue of `A`: any `d`-th root of `γ` is one. -/
+theorem exists_hasEigenvalue_pow_eq_of_charpolyRev_eq_expand (A : Module.End K V) {W : Type*}
+    [AddCommGroup W] [Module K W] [FiniteDimensional K W] (B : Module.End K W) {d : ℕ}
+    (hd : d ≠ 0) (hA : A.charpolyRev = Polynomial.expand K d B.charpolyRev) {γ : K}
+    (hγ : B.HasEigenvalue γ) (hγ0 : γ ≠ 0) : ∃ β, A.HasEigenvalue β ∧ β ^ d = γ := by
+  obtain ⟨β, hβ⟩ := IsAlgClosed.exists_pow_nat_eq γ (Nat.pos_of_ne_zero hd)
+  refine ⟨β, ?_, hβ⟩
+  have h0 := eval_inv_charpolyRev_eq_zero_of_hasEigenvalue B hγ hγ0
+  rw [← hβ, ← inv_pow, ← Polynomial.expand_eval, ← hA] at h0
+  simpa using hasEigenvalue_inv_of_eval_charpolyRev_eq_zero A h0
+
 end IsAlgClosed
 
 end LinearMap
+
+namespace Polynomial
+
+variable {R L : Type*} [CommSemiring R] [CommSemiring L] (ι : R →+* L) (σ : L →+* L)
+
+/-- The coefficients of `P` have images under `ι` fixed by `σ` if and only if the image of `P`
+under `ι` is fixed by `σ`. -/
+theorem forall_coeff_fixed_iff_map_map (P : R[X]) :
+    (∀ n, σ (ι (P.coeff n)) = ι (P.coeff n)) ↔ (P.map ι).map σ = P.map ι := by
+  simp only [Polynomial.ext_iff, coeff_map]
+
+/-- If the coefficients of the `Pₐ` have images under `ι` fixed by `σ`, so do those of their
+product. (For `σ` the complex conjugation: a product of `ι`-real polynomials is `ι`-real.) -/
+theorem coeff_prod_fixed {α : Type*} (s : Finset α) (P : α → R[X])
+    (h : ∀ a ∈ s, ∀ n, σ (ι ((P a).coeff n)) = ι ((P a).coeff n)) (n : ℕ) :
+    σ (ι ((∏ a ∈ s, P a).coeff n)) = ι ((∏ a ∈ s, P a).coeff n) := by
+  revert n
+  rw [forall_coeff_fixed_iff_map_map, Polynomial.map_prod, Polynomial.map_prod]
+  exact Finset.prod_congr rfl fun a ha ↦ (forall_coeff_fixed_iff_map_map ι σ _).1 (h a ha)
+
+/-- The coefficients of the expansion `P (Xᵖ)`, `p ≠ 0`, have images under `ι` fixed by `σ` if
+and only if those of `P` do. -/
+theorem forall_coeff_expand_fixed_iff {p : ℕ} (hp : p ≠ 0) (P : R[X]) :
+    (∀ n, σ (ι ((expand R p P).coeff n)) = ι ((expand R p P).coeff n)) ↔
+      ∀ n, σ (ι (P.coeff n)) = ι (P.coeff n) := by
+  refine ⟨fun h n ↦ ?_, fun h n ↦ ?_⟩
+  · simpa [coeff_expand_mul (Nat.pos_of_ne_zero hp)] using h (n * p)
+  · rw [coeff_expand (Nat.pos_of_ne_zero hp)]
+    split_ifs
+    · exact h _
+    · simp
+
+end Polynomial
