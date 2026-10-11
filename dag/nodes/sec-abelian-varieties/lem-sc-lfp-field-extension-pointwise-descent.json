@@ -152,5 +152,23 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-lfe2740 (reviewer sub-agent of L); spot-checked: Statement true as written (E): checked via openness of X_K->X and faithful flatness of local maps; matches G1 step 1 use (C4). FIX more, RETURN less: (1) C4/D: step 2 applied lem-weil-pbc-finite-presentation-descends-faithfully-flat, which needs B tensor K finitely presented over A tensor K on the whole preimage, but only (B tensor K)_u is known; the 'open locus' remark does not bridge this. Replaced by a 5-step proof: charts + principal D(u) [lem-weil-pbc-lfp-affine-opens-finite-presentation]; auxiliary descent of surjectivity of module maps from D(u) via [lem-sc-scheme-over-field-universally-open], [lem-weil-pbc-field-extension-base-change-faithfully-flat], [lem-pc-local-flat-faithful-flat-reflects-surjective]; finite type; finite presentation via [lem-weil-pbc-finite-presentation-surjection-kernel-fg]; conclusion. proof_deps updated. (2) B4: plain-text arrows replaced by TeX throughout.; 1 file(s) fixed by the reviewer"
  },
- "lead_note": "2026-10-10 L (R-lfe2740): Second reading by E1 missed the step-2 fault (global faithfully-flat descent applied to data known only on D(u)); proof rewritten by reviewer."
+ "lead_note": "2026-10-10 L (R-lfe2740): Second reading by E1 missed the step-2 fault (global faithfully-flat descent applied to data known only on D(u)); proof rewritten by reviewer.",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.LocallyOfFinitePresentationNearOfFieldExtension",
+  "declaration": "AlgebraicGeometry.locallyOfFinitePresentation_near_of_fieldExtension",
+  "file": "lean/Sheaf/AlgebraicGeometry/LocallyOfFinitePresentationNearOfFieldExtension.lean",
+  "statement": "theorem locallyOfFinitePresentation_near_of_fieldExtension (k K : Type u) [Field k] [Field K] [Algebra k K] (X Y : Over (Spec (CommRingCat.of k))) (f : X ⟶ Y) (x : X.left) : let i := Spec.map (CommRingCat.ofHom (algebraMap k K)) ∀ (xK : ↥(pullback X.hom i)), pullback.fst X.hom i xK = x → (∃ W : (pullback X.hom i).Opens, xK ∈ W ∧ LocallyOfFinitePresentation (W.ι ≫ ((Over.pullback i).map f).left)) → ∃ U : X.left.Opens, x ∈ U ∧ LocallyOfFinitePresentation (U.ι ≫ f.left)",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-lfd1232",
+  "group": "C1",
+  "result": "pass",
+  "note": "k,K fields with Algebra k K; X,Y,f k-schemes/morphism as Over (Spec k) objects and hom; X_K = pullback X.hom i with i = Spec.map algebraMap; f_K = ((Over.pullback i).map f).left (recorded h_T of def-pc-base-change); xK above x via pullback.fst; hypothesis exists open W ∋ xK with W.ι ≫ f_K LocallyOfFinitePresentation; conclusion exists open U ∋ x with U.ι ≫ f.left LocallyOfFinitePresentation; #check confirms CategoryTheory.Over.pullback and AlgebraicGeometry.LocallyOfFinitePresentation"
+ }
 }
