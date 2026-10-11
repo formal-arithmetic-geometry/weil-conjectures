@@ -29,7 +29,7 @@ Not open yet: 42 nodes that wait for stage 1, 6 nodes that wait for a statement 
 | `WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.BaseChangeProperty` | 0 | 1 | proof |
 | `WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.ProjectiveLine` | 0 | 1 | proof |
 | `WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.ProjectiveLine.GeometricStalk` | 0 | 1 | proof |
-| `WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.UnderivedExchange` | 1 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.ProperGeometricPointExchange` | 2 | 1 | proof |
 | `WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar` | 2 | 2 | proof |
 | `Sheaf.AlgebraicGeometry.EtaleH0FiniteConnectedCriterion` | 3 | 1 | proof |
 | `WeilConjectures.AlgebraicGeometry.HenselianConnectedness` | 3 | 1 | proof |
