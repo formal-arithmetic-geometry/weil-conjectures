@@ -187,5 +187,26 @@
   "by": "L",
   "result": "accepted",
   "note": "5 steps following Stacks 01KP (2) with an affine base: the affine opens V_a x_S V_b = Spec(A_a (x)_R A_b) cover V x_S V (open-fibre-product and affine fibre product leaves), the diagonal pulls them back to V_a cap V_b, the induced ring map is x (x) y -> x|y|, surjective since the (x)_Z version is, closed immersion by the affine-cover criterion (2). No new nodes; statement gained the citation [def-weil-closed-immersion]."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SeparatedAffineCoverCriterion",
+  "declaration": "AlgebraicGeometry.separated_of_affine_open_cover",
+  "statement": "theorem separated_of_affine_open_cover {S V : Scheme.{u}} [IsAffine S] (f : V ⟶ S) (A : Type v) (Vₐ : A → V.Opens) (hcover : ⋃ a, (Vₐ a : Set V) = Set.univ) (haff : ∀ a, IsAffineOpen (Vₐ a)) (haffint : ∀ a b, IsAffineOpen (Vₐ a ⊓ Vₐ b)) (hsurj : ∀ (a b : A), ∃ φ : TensorProduct ℤ (Γ(V, Vₐ a)) (Γ(V, Vₐ b)) →+* Γ(V, Vₐ a ⊓ Vₐ b), Function.Surjective φ ∧ ∀ (x : Γ(V, Vₐ a)) (y : Γ(V, Vₐ b)), φ (TensorProduct.tmul ℤ x y) = (V.presheaf.map (homOfLE inf_le_left).op) x * (V.presheaf.map (homOfLE inf_le_right).op) y) : IsSeparated f",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": false,
+  "file": "lean/Sheaf/AlgebraicGeometry/SeparatedAffineCoverCriterion.lean",
+  "declarations": [
+   "AlgebraicGeometry.separated_of_affine_open_cover"
+  ]
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "H1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }
