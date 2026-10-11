@@ -186,5 +186,23 @@
   "by": "L",
   "result": "pass",
   "note": "Six steps along EGA II 4.5.5 / Stacks 01Q3 (1)=>(7): X quasi-compact and separated (new unsplit 09MP node), a finite affine cover by X_{g_i} with all g_i in one power L^m, local generators on affines (new unsplit 01PB node), extension after clearing denominators (existing imported 01PW node), global generation of the twists by mk via the trivialization tool, all large d by the residues mod m. Correct. Statement: the C1-delivered citation of def-sc-ample (ample over a field) was wrong for a general scheme; the worker created the absolute definition node 01PS and cites it. Stage-3 note: lem-weil-pbc-projective-ample-invertible and lem-weil-pbc-vanishing-projective (unsplit, from the same C1 delivery) still cite def-sc-ample for f-ample over Spec A; their splitters should conclude/assume ampleness in the sense of def-weil-pbc-ample-invertible-module (over an affine base f-ample = ample, Stacks 01VK)."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AmpleTwistGlobalGeneration",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_finite_generatingSections_tensorPow_of_isAmple",
+  "file": "lean/Sheaf/AlgebraicGeometry/AmpleTwistGlobalGeneration.lean",
+  "statement": "theorem exists_finite_generatingSections_tensorPow_of_isAmple (X : Scheme.{u}) (L F : X.Modules) [L.IsInvertible] (hL : IsAmple X L) [F.IsQuasicoherent] [F.IsFiniteType] : ∃ d₀ : ℤ, ∀ d : ℕ, d₀ ≤ (d : ℤ) → ∃ σ : (tensorObj F (L.tensorPow d)).GeneratingSections, σ.IsFiniteType",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-ctg1216",
+  "group": "J1",
+  "result": "pass",
+  "note": "X:Scheme.{u}; [L.IsInvertible]+IsAmple resolves to Scheme.Modules.IsAmple (#check, 01PS absolute); F [IsQuasicoherent][IsFiniteType] = pqf-def-coherent clauses 1-2 (non-hollow: inferInstance fails); twist tensorObj F (L.tensorPow d) as H1 358cf2ff9; d0:ℤ, d:ℕ nonneg powers incl. L^0; finitely many global sections = GeneratingSections + σ.IsFiniteType (Finite σ.I), as landed AffineFiniteTypeGeneratingSections/TensorGloballyGenerated"
  }
 }
