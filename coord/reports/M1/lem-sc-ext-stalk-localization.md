@@ -1,29 +1,100 @@
-# Stage 1 report
+## Worker report
 
-## Files written
+The module `Sheaf.AlgebraicGeometry.SheafExtStalkLocalization` states
+`AlgebraicGeometry.nonempty_moduleSheafExt_stalk_linearEquiv`, with a `sorry` proof.
+No definitions are added and the node statement is unchanged.
 
-- `dag/nodes/sec-picard-framework/lem-sc-ext-stalk-localization.json`: statement, split proof, dependencies, blueprint and audit fields.
-- `dag/nodes/sec-picard-framework/lem-sc-derived-internal-hom-stalk-localization.json`: statement-only coherent-sheaf specialization of 0GM8 and 08E8; no Mathlib match.
-- `dag/nodes/sec-picard-framework/lem-sc-rhom-cohomology-ext-ring.json`: statement-only ring derived-Hom/Ext comparison from 0A64; no Mathlib match.
+Hypothesis and clause correspondence:
 
-## Attachments
+- A scheme X: `(X : Scheme.{u})`.
+- Quasi-compactness: `[CompactSpace X]`, as recorded by
+  def-weil-pbc-quasi-compact-scheme; no separation condition is imposed.
+- Locally Noetherian: `[IsLocallyNoetherian X]`, as recorded by pqf-def-locnoeth.
+- F and G are O_X-modules: both have type
+  `SheafOfModules.{u} (moduleRings X.toRingedSpace)`.
+- Coherence of each: `hF` and `hG` use `RingedSpace.IsCoherent` from pqf-def-coherent.
+- Every point: `(x : X)` without any condition on x.
+- Every nonnegative integer degree: `(q : ℕ)` and `(q : ℤ)` in sheaf Ext.
+  This parametrizes exactly the integers q >= 0 without omitting q = 0.
+- The left side is `(RingedSpace.moduleStalkFunctor X.toRingedSpace x).obj
+  (moduleSheafExt X (q : ℤ) F G)`, the stalk of the recorded sheaf Ext of F[0],G[0].
+- The right side is `Abelian.Ext` of the two objects obtained from the same stalk functor,
+  in degree q. Its ambient module category is over `X.presheaf.stalk x`, the local ring.
+- The isomorphism is `Nonempty (... ≃ₗ[X.presheaf.stalk x] ...)`, an isomorphism of
+  modules, hence also of Ext groups. No arbitrary carrier equivalence is substituted.
+- `[HasDerivedCategory.{w} ...]` supplies the size infrastructure required by sheaf Ext;
+  it imposes no geometric condition. Module-category `HasExt` is supplied by Mathlib,
+  with no extra finiteness, regularity or derived-category hypothesis at the stalk.
 
-None. No sorry-free slopmaster2 declaration states this item.
+Dependency declarations read and used:
+`Mathlib.Topology.Defs.Filter`: `CompactSpace`;
+`Mathlib.AlgebraicGeometry.Noetherian`: `AlgebraicGeometry.IsLocallyNoetherian`;
+`Sheaf.AlgebraicGeometry.Coherent`: `AlgebraicGeometry.RingedSpace.IsCoherent`;
+`Sheaf.AlgebraicGeometry.SheafExt`: `AlgebraicGeometry.moduleSheafExt` (and its functor);
+`Mathlib.Algebra.Homology.DerivedCategory.Ext.Basic`: `CategoryTheory.Abelian.Ext`.
+The shared stalk functor is
+`AlgebraicGeometry.RingedSpace.moduleStalkFunctor` from
+`Sheaf.Algebra.Homology.ModuleStalkFunctor` (def-pc-module-stalk-functor).
+`Mathlib.Algebra.Category.ModuleCat.Ext.Basic` supplies the module-category HasExt
+instance and the Ext scalar action from `Ext.Linear`.
 
-## What was checked
+Edge cases checked mathematically before writing: the empty scheme has no points so the
+point-indexed claim is vacuous; zero F or zero G gives zero groups on both sides; q = 0
+is localization of internal Hom; F = O_X gives G_x in degree zero and zero in positive
+degrees. A one-point scheme gives the usual ring Ext comparison. No field,
+characteristic, regularity or dimension restriction is introduced.
 
-I read the actual Stacks TeX in the local source checkout: `equiv.tex` Lemma `lemma-Ext-0-regular` (0FZ3), `cohomology.tex` Lemma `lemma-stalk-internal-hom` (0GM8) and Section `section-ext` (0BQP), `perfect.tex` Lemma `lemma-identify-pseudo-coherent-noetherian` (08E8), and `more-algebra.tex` Section `section-RHom`, equation `equation-h0-RHom` (0A64). The tag index confirms these labels. I also read the Picard unit and parent blueprint node. The imported item's statement is kept: it uses sheaf Ext defined via derived internal Hom with an injective resolution of the second argument.
+Searches (2026-10-11, msearch.py, recorded in searches.jsonl):
+LeanFinder query `stalk of sheaf Ext for coherent modules is Ext over the local ring`:
+eight hits on sheaf cohomology, tilde stalk localization and local cohomology, none the
+statement. Loogle `Abelian.Ext, stalk`: no hits, unknown identifier `Abelian.Ext`.
+LeanSearch `stalk sheaf Ext coherent localization`: unavailable, Internal Server Error.
+Mathlib grep `stalk.*Ext|Ext.*stalk|SheafExt`: 25 hits, only stalk-map extensionality and
+unrelated presheaf extension names. `rg` of the same localization patterns and the node
+id in WeilConjectures gives unrelated Fourier-transform/dual-number hits, no theorem.
+`rg` in lean/Sheaf gives stalk definitions and the citer CoherentExtVanishing docstring,
+no statement of stalk Ext localization. The proposed full declaration name is absent
+from Mathlib/source/project and dag/lean_names_upstream.json.
 
-The earlier delivery cited 08DJ for a derived Ext comparison, but 08DJ is a tensor-Hom adjunction and does not say that. It also treated pseudo-coherence of a coherent module and the ring derived-Hom/Ext comparison as elementary. The revised first node incorporates the Noetherian/coherent specialization supplied by 08E8, leaving no undefined pseudo-coherence or bounded-below notions in its statement. The second node states precisely the 0A64 comparison needed by step 3. No source is WANTED; the TeX was available in `/home/ubuntu/c1-stacks-review/` on this machine, although `literature/stacks-project/` is not populated in this clone.
+Sources read online because the local Stacks TeX checkout is absent:
+[0FZ3](https://stacks.math.columbia.edu/tag/0FZ3), proof (1), explicitly gives this
+stalk comparison; [0GM8](https://stacks.math.columbia.edu/tag/0GM8), case (2), supplies
+pseudo-coherent/bounded-below derived Hom localization;
+[08E8](https://stacks.math.columbia.edu/tag/08E8) supplies pseudo-coherence of F[0];
+[0A64](https://stacks.math.columbia.edu/tag/0A64) identifies ring derived Hom cohomology
+with shifted derived-category morphisms. The module docstring carries all three proof
+steps and their DAG nodes. No statement dispute or statement correction is needed.
 
-## Review by M1
+Validation: the previous missing `SheafExt.olean` artifact cleared after the server's
+2026-10-11T15:54:50Z global build. A fresh `scompile.py M1
+lem-sc-ext-stalk-localization` run compiled the unchanged theorem cleanly (exit 0,
+no warnings). The delivery dry run is checked below before handoff.
 
-For the first new node, 0GM8 applies to a ringed space when its first complex is pseudo-coherent and its second is locally bounded below. Here a Noetherian scheme is a ringed space, 08E8 makes coherent F[0] pseudo-coherent, and G[0] is bounded below by inspection. Its statement defines the local-ring derived Hom through `def-pur-derived-internal-hom` on the one-point site, and cites the cohomology-sheaf and derived-category definitions. These are the exact hypotheses of item step 1; its only cited statement already says the resulting stalk isomorphism. At a one-point scheme this reduces to the identity comparison, and for F=O_X in degree zero it gives the expected local Hom comparison.
+## Second reading by M1
 
-For the second new node, 0A64 says `H^n(RHom_R(L,M)) = Hom_{D(R)}(L,M[n])` for every integer n. Applying it to modules in degree zero and n>=0 gives the Ext group of `def-pc-ext`. The node introduces R, M, N and n, and defines its derived Hom through the one-point site; at n=0 it reduces to Hom_R(M,N), and for M=R higher degrees vanish. Step 3 cites exactly this comparison with R=O_{X,x}; the equality with the item's Ext follows from the quoted sentence. Step 2 cites the module-specialization sentence in `def-weil-pbc-sheaf-ext`, whose preceding display explicitly defines sheaf Ext as the cohomology sheaf of derived internal Hom. Substitution of the two identifications into step 1 is elementary.
+I read the node statement and the module independently. The introduced objects and their
+rendering are: a scheme `X : Scheme.{u}`; quasi-compactness `[CompactSpace X]`; local
+Noetherianity `[IsLocallyNoetherian X]`; coherent `O_X`-modules `F G :
+SheafOfModules (moduleRings X.toRingedSpace)` with `RingedSpace.IsCoherent` hypotheses
+`hF hG`; a point `x : X`; and a nonnegative integer `q : Nat`. The module has exactly
+these binders and no separation, field, characteristic, dimension, or finiteness
+hypothesis beyond the node.
 
-I searched all DAG nodes and the whole blueprint by concept and source tag before adding the new ring node, and read the existing `lem-weil-pbc-ext-via-injective-resolution`: it computes Ext with an injective resolution but does not state a comparison with ring-valued derived internal Hom. The Lean source has no matching declaration or blueprint tag for the item or either new node. Mathlib's `Ext.homAddEquiv` and injective-resolution comparisons do not define ring-valued derived internal Hom, so neither new node is a Mathlib leaf. Both new nodes are statement-only, have self-contained objects and hypotheses, cite defining nodes for their notions, and carry the correct TeX labels. I checked every quote in `citations.json` against the statement it names and every item step against its source. The item's imported `source.place` still mentions 08DJ; that field is maintainer-owned for existing nodes in remote deliveries. Its editable proof steps and `proof_origin` now cite 08E8 and 0A64 instead.
+The conclusion is rendered clause by clause as follows. The sheaf Ext stalk is
+`(RingedSpace.moduleStalkFunctor X.toRingedSpace x).obj (moduleSheafExt X (q : Int) F G)`.
+The local coefficient ring is `X.presheaf.stalk x`, and the two local modules are the
+stalk functor applied to `F` and `G`. The right side is `Abelian.Ext` of those modules in
+degree `q`, and the displayed result is `Nonempty (... ≃ₗ[X.presheaf.stalk x] ...)`,
+exactly the node's module isomorphism. `[HasDerivedCategory.{w} ...]` supplies only the
+size infrastructure required by `moduleSheafExt`. The cast `(q : Int)` and the Nat
+degree of `Abelian.Ext` together express precisely every integer degree `q >= 0`,
+including zero.
 
-## What could not be finished
-
-No Lean compilation is part of stage 1.
+Edge cases remain covered: an empty scheme makes the point quantifier vacuous; zero
+modules and a one-point scheme are included; `q = 0` is included; no characteristic or
+universe case is excluded. I searched Mathlib, the source repository, and `lean/Sheaf`
+for sheaf-Ext stalk localization (LeanSearch, LeanFinder/Loogle, and `rg`) and found no
+existing declaration. The dependency declarations used by the module are the recorded
+`moduleSheafExt`, coherent-module predicate, module stalk functor, `CompactSpace`,
+`IsLocallyNoetherian`, and Mathlib's `Abelian.Ext`; their signatures match the node. No
+mismatch was found, so no source, statement, dependency, or module change was necessary.

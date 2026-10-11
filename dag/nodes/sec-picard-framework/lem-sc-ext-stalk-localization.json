@@ -126,5 +126,23 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-es2 (reviewer sub-agent of L); spot-checked: Repaired re-push after the 16:14 return; all five points checked. 1 (B3): lem-sc-derived-internal-hom-stalk-localization restated as recommended, X Noetherian, F coherent, G any module, no pseudo-coherence or bounded-below notions, local R Hom via def-pur-derived-internal-hom on the one-point site, H^i via def-weil-abstract-derived-category / def-weil-derived-cohomology-sheaves; true by cohomology.tex lemma-stalk-internal-hom (0GM8) case (2) (ringed space, K pseudo-coherent, M bounded below; stalks exact so H^i commutes with (-)_x) plus perfect.tex lemma-identify-pseudo-coherent-noetherian (08E8, which needs X Noetherian, as the node assumes). 2 (C1): step 1 now only applies that node with K=F, L=G. 3 (C1/C4): new node lem-sc-rhom-cohomology-ext-ring states more-algebra.tex equation-h0-RHom (0A64) H^n(R Hom_R(M,N)) = Hom_{D(R)}(M,N[n]) = Ext^n_R(M,N) [def-pc-ext] for n>=0; cited in step 3 and proof_deps. 4: step sources and proof_origin now 0GM8/08E8/0A64, 08DJ gone from editable fields; new node source.document cohomology.tex; created by/date not added by the worker, correctly per tools/README (created is the maintainer's, set at merge); item source.place still 08DJ (maintainer field, lead note). 5 (F1): report drops WANTED and names the four TeX labels read. Step 2: def-weil-pbc-sheaf-ext defines SheafExt^q(F,G)=H^q(R Hom(F[0],G[0])) with K-injective resolution of G, i.e. R^q Hom(F,-)(G), not the ill-posed def-sc-ext-sheaf; item statement unchanged and true. Tool use def-weil-pbc-sheaf-ext (unit sk-thm-p1) is a generic definition, accepted. Small cases: X a point (identity), F=O_X (both sides 0 for q>0, G_x for q=0). blueprint_refs search 'internal hom', 'RHom', 'stalk Ext': no blueprint node states either new node, same_as [] right. Start Sat Oct 10 04:28:29 PM UTC 2026, end Sat Oct 10 04:29:06 PM UTC 2026."
  },
- "lead_note": "2026-10-10 L (R-es2): source.place (maintainer field) still cites Derived Categories Tag 08DJ, which is the tensor-Hom adjunction and irrelevant; the proof uses cohomology.tex 0GM8 case (2), perfect.tex 08E8 and more-algebra.tex 0A64: correct source.place."
+ "lead_note": "2026-10-10 L (R-es2): source.place (maintainer field) still cites Derived Categories Tag 08DJ, which is the tensor-Hom adjunction and irrelevant; the proof uses cohomology.tex 0GM8 case (2), perfect.tex 08E8 and more-algebra.tex 0A64: correct source.place.",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SheafExtStalkLocalization",
+  "declaration": "AlgebraicGeometry.nonempty_moduleSheafExt_stalk_linearEquiv",
+  "file": "lean/Sheaf/AlgebraicGeometry/SheafExtStalkLocalization.lean",
+  "statement": "theorem nonempty_moduleSheafExt_stalk_linearEquiv (X : Scheme.{u}) [CompactSpace X] [IsLocallyNoetherian X] [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] (F G : SheafOfModules.{u} (moduleRings X.toRingedSpace)) (hF : RingedSpace.IsCoherent X.toRingedSpace F) (hG : RingedSpace.IsCoherent X.toRingedSpace G) (x : X) (q : ℕ) : Nonempty (((RingedSpace.moduleStalkFunctor X.toRingedSpace x).obj (moduleSheafExt X (q : ℤ) F G)) ≃ₗ[X.presheaf.stalk x] Abelian.Ext ((RingedSpace.moduleStalkFunctor X.toRingedSpace x).obj F) ((RingedSpace.moduleStalkFunctor X.toRingedSpace x).obj G) q)",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "M1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ }
 }
