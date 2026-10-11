@@ -214,35 +214,6 @@ theorem Scheme.IsFiniteLocallyConstantSheaf.isFiniteLocallyConstantSheafOfTypes
     rw [ConcreteCategory.isFinitelyGenerated_iff_finite]
     exact @Finite.of_equiv _ _ this e.symm.toEquiv
 
-/-- Blueprint `sk-i-real-galois`: Galois correspondence for finite local systems. Also
-blueprint `cor-galois-lisse-representations`: Lisse sheaves and continuous representations.
-
-The steps *sheaves and covers* and *linear structure* of the proof, for a named fundamental
-group: let `Y` be a connected scheme, `s : Spec Ω ⟶ Y` a geometric point, `Λ` a finite ring
-and `G` a fundamental group of the fibre functor `AlgebraicGeometry.Scheme.FiniteEtale.fiber s`
-on finite étale `Y`-schemes, i.e. `G = π₁(Y, s)`. Then the geometric stalk at `s` is an
-equivalence between finite locally constant sheaves of `Λ`-modules on `Y_ét` and finite
-`Λ`-modules with a continuous `G`-action.
-
-Mathematically, a finite locally constant sheaf of sets is represented by a finite étale
-`Y`-scheme, whose geometric fibre is the stalk at `s`; the Galois correspondence
-`AlgebraicGeometry.Scheme.FiniteEtale.equivalenceContAction` identifies these with finite
-continuous `G`-sets, and a `Λ`-module structure on the sheaf is transported to one on the
-`G`-set. -/
-theorem Scheme.exists_equivalence_isFiniteLocallyConstantSheaf_of_isFundamentalGroup
-    (Y : Scheme.{u}) [ConnectedSpace Y] {Ω : Type u} [Field Ω] [IsSepClosed Ω]
-    (s : Spec (.of Ω) ⟶ Y) (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] (G : ProfiniteGrp.{u})
-    [∀ P, MulAction G ((Scheme.FiniteEtale.fiber s).obj P)]
-    [PreGaloisCategory.IsFundamentalGroup (Scheme.FiniteEtale.fiber s) G] :
-    ∃ e : ObjectProperty.FullSubcategory
-            (fun F : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ) ↦
-              Scheme.IsFiniteLocallyConstantSheaf F) ≌
-          ObjectProperty.FullSubcategory (Rep.IsFiniteContinuous (Λ := Λ) (G := G)),
-      Nonempty (e.functor ⋙ ObjectProperty.ι _ ⋙
-          forget₂ (Rep.{u + 1} Λ G) (ModuleCat.{u + 1} Λ) ≅
-        ObjectProperty.ι _ ⋙ (Scheme.pointSmallEtale s).sheafFiber) := by
-  sorry
-
 
 section BiprodAux
 
@@ -783,6 +754,46 @@ lemma Scheme.galoisRepFunctor_obj_isFiniteContinuous [ConnectedSpace Y] [Topolog
 end Linear
 
 end GaloisAction
+
+/-- Blueprint `sk-i-real-galois`: Galois correspondence for finite local systems. Also
+blueprint `cor-galois-lisse-representations`: Lisse sheaves and continuous representations.
+
+The steps *sheaves and covers* and *linear structure* of the proof, for a named fundamental
+group: let `Y` be a connected scheme, `s : Spec Ω ⟶ Y` a geometric point, `Λ` a finite ring
+and `G` a fundamental group of the fibre functor `AlgebraicGeometry.Scheme.FiniteEtale.fiber s`
+on finite étale `Y`-schemes, i.e. `G = π₁(Y, s)`. Then the geometric stalk at `s` is an
+equivalence between finite locally constant sheaves of `Λ`-modules on `Y_ét` and finite
+`Λ`-modules with a continuous `G`-action.
+
+Mathematically, a finite locally constant sheaf of sets is represented by a finite étale
+`Y`-scheme, whose geometric fibre is the stalk at `s`; the Galois correspondence
+`AlgebraicGeometry.Scheme.FiniteEtale.equivalenceContAction` identifies these with finite
+continuous `G`-sets, and a `Λ`-module structure on the sheaf is transported to one on the
+`G`-set. -/
+theorem Scheme.exists_equivalence_isFiniteLocallyConstantSheaf_of_isFundamentalGroup
+    (Y : Scheme.{u}) [ConnectedSpace Y] {Ω : Type u} [Field Ω] [IsSepClosed Ω]
+    (s : Spec (.of Ω) ⟶ Y) (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] (G : ProfiniteGrp.{u})
+    [∀ P, MulAction G ((Scheme.FiniteEtale.fiber s).obj P)]
+    [PreGaloisCategory.IsFundamentalGroup (Scheme.FiniteEtale.fiber s) G] :
+    ∃ e : ObjectProperty.FullSubcategory
+            (fun F : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ) ↦
+              Scheme.IsFiniteLocallyConstantSheaf F) ≌
+          ObjectProperty.FullSubcategory (Rep.IsFiniteContinuous (Λ := Λ) (G := G)),
+      Nonempty (e.functor ⋙ ObjectProperty.ι _ ⋙
+          forget₂ (Rep.{u + 1} Λ G) (ModuleCat.{u + 1} Λ) ≅
+        ObjectProperty.ι _ ⋙ (Scheme.pointSmallEtale s).sheafFiber) := by
+  let Φ := Scheme.galoisRepFunctor (s := s) (G := G) (Λ := Λ)
+  let Φ' := ObjectProperty.lift (Rep.IsFiniteContinuous (Λ := Λ) (G := G)) Φ
+    (fun F ↦ Scheme.galoisRepFunctor_obj_isFiniteContinuous s G F)
+  have hΦ' : Φ'.FullyFaithful :=
+    (Functor.FullyFaithful.ofFullyFaithful Φ).ofCompFaithful (G := ObjectProperty.ι _)
+  have : Φ'.Full := hΦ'.full
+  have : Φ'.Faithful := hΦ'.faithful
+  -- essential surjectivity: a finite continuous `Λ[G]`-module is the stalk of a finite locally
+  -- constant sheaf of `Λ`-modules
+  have : Φ'.EssSurj := ⟨fun M ↦ sorry⟩
+  have : Φ'.IsEquivalence := { }
+  exact ⟨Φ'.asEquivalence, ⟨Scheme.galoisRepFunctorCompForget₂Iso s G⟩⟩
 
 /-- Blueprint `sk-i-real-galois`: Galois correspondence for finite local systems.
 
