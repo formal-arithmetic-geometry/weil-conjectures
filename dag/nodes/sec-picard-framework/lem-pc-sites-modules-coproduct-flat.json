@@ -123,5 +123,23 @@
   "group": "H1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-smc2356 (reviewer sub-agent of L); spot-checked: Packet read whole. Statement matches Stacks 03EU(2) (direct sums of flat sheaves of modules), flatness is def-pc-flat-sheaf-modules (exactness of G -> G (x) F), the site definition the F1 citer uses (C4 ok). Step 1: Grothendieck abelian from prop-pur-kinjective-resolutions-exist clause 1 (small site via def-weil-size-convention), symmetric monoidal closed from lem-pc-sheaf-modules-tensor-closed; exact => left exact transfers to the abstract flatness of lem-weil-pbc-flat-coproduct. Step 2: the abstract theorem (slopmaster2 Flat/Basic.lean flat_coproduct, which internally uses tensor commuting with coproducts via closedness and AB4 exactness of coproducts) gives finite-limit preservation; right exactness back comes from the left adjoint in the cited closed-structure node, so exactness follows. No new nodes, no restatement (class b none); tool_uses lem-weil-pbc-flat-coproduct and prop-pur-kinjective-resolutions-exist accepted as generic categorical tools. Second reading's size-convention repair is correct; no fault found that it missed."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatCoproduct",
+  "declaration": "SheafOfModules.isFlat_coproduct",
+  "file": "lean/Sheaf/Algebra/Category/ModuleCat/Sheaf/FlatCoproduct.lean",
+  "statement": "theorem isFlat_coproduct {C : Type u} [Category.{u} C] {J : GrothendieckTopology C} [J.WEqualsLocallyBijective AddCommGrpCat.{u}] [HasWeakSheafify J AddCommGrpCat.{u}] (R : Sheaf J CommRingCat.{u}) {B : Type u} (M : B → SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) (hflat : ∀ b : B, IsFlat (M b)) : IsFlat (∐ M)",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "E1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }
