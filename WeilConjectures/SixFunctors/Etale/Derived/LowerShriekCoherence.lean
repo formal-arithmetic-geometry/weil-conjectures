@@ -26,7 +26,13 @@ to different compactifications (blueprint `sk-prop-sf-comp-coherence`):
   (`AlgebraicGeometry.Etale.rightDerivedLowerShriekOfCompactificationPlusComparison`) is
   `R(d.g)_* α_u` followed by the composition isomorphism `R(d.g)_* Ru_* ≅ R(c.g)_*`;
 * the isomorphism `Rf_!(c) ≅ Rf_!(d)` obtained from a common refinement does not depend on
-  the chosen common refinement, and these isomorphisms satisfy the cocycle condition.
+  the chosen common refinement, and these isomorphisms satisfy the cocycle condition;
+* for an arbitrary refinement `r`, not necessarily cartesian over `X`, the comparison
+  `Rf_!(d) ≅ Rf_!(c)` is defined through the dense refinement `Compactification.inf c c ⟶ c`;
+  it agrees with the one above for cartesian `r`, satisfies the identity and transitivity
+  laws, and independence of the common refinement holds for arbitrary common refinements.
+
+The comparison `α_u` on `d.Z` is only treated for refinements with cartesian square over `X`.
 
 ## Main definitions
 
@@ -35,6 +41,8 @@ to different compactifications (blueprint `sk-prop-sf-comp-coherence`):
 - `AlgebraicGeometry.Etale.refinementOpenImmersionLowerShriekRestrictionIso`: the isomorphism
   `θ_u : (d.i)^* Ru_* (c.i)_! K ≅ K` of blueprint `rem-ptr-weil-pbc-proper-open-comparison-1`,
   whose inverse is adjoint to `α_u`.
+- `AlgebraicGeometry.Etale.rightDerivedLowerShriekOfCompactificationPlusRefinementIso`: the
+  comparison `Rf_!(d) ≅ Rf_!(c)` along an arbitrary refinement.
 
 ## Main results
 
@@ -45,6 +53,11 @@ to different compactifications (blueprint `sk-prop-sf-comp-coherence`):
   of the common refinement.
 - `AlgebraicGeometry.Etale.rightDerivedLowerShriekOfCompactificationPlusIso_trans`: the cocycle
   condition.
+- `AlgebraicGeometry.Etale.rightDerivedLowerShriekOfCompactificationPlusIso_eq_refinementIso`:
+  independence of the common refinement, for arbitrary refinements.
+- `AlgebraicGeometry.Etale.rightDerivedLowerShriekOfCompactificationPlusRefinementIso_id` and
+  `AlgebraicGeometry.Etale.rightDerivedLowerShriekOfCompactificationPlusRefinementIso_comp`:
+  identity and transitivity for arbitrary refinements.
 
 -/
 
@@ -503,3 +516,19 @@ end Independence
 end Etale
 
 end AlgebraicGeometry
+
+/-! ### Axiom census
+
+The transitivity of `α_u` depends only on the three standard axioms; the check below is run by
+the build. The statements involving the inverse of a comparison use that `α_u` is an
+isomorphism, which rests on proper base change
+(`AlgebraicGeometry.Etale.isIso_baseChange_of_isProper_of_isAddTorsion_ring`, blueprint
+`sk-thm-properbasechange`), not proved yet. -/
+
+/--
+info: 'AlgebraicGeometry.Etale.refinementOpenImmersionLowerShriekComparison_comp' depends on
+  axioms: [propext, Classical.choice, Quot.sound]
+-/
+#guard_msgs (whitespace := lax) in
+#print axioms AlgebraicGeometry.Etale.refinementOpenImmersionLowerShriekComparison_comp
+
