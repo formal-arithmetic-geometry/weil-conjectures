@@ -72,6 +72,7 @@ abbrev kFlatMap : ObjectProperty (HomotopyCategory C (.up ℤ)) :=
 
 variable [F.PreservesFlat] [PreservesColimitsOfShape ℤ F]
 
+omit [HasFunctorialFlatResolution C] [HasFunctorialFlatResolution D] in
 /-- A functor preserving flat objects and `ℤ`-indexed colimits sends the functorial flat
 resolutions to K-flat complexes. -/
 lemma kFlatMap_quotient_obj_resolutionFunctor_obj
@@ -223,6 +224,8 @@ variable {E : Type u₃} [Category.{u + 1} E] [Abelian E] [IsGrothendieckAbelian
   [MonoidalCategory E] [MonoidalPreadditive E] [MonoidalClosed E] [BraidedCategory E]
   [HasFunctorialFlatResolution E]
 
+omit [HasFunctorialFlatResolution C] [HasFunctorialFlatResolution D]
+  [HasFunctorialFlatResolution E] in
 open HomologicalComplex in
 /-- The comonoidal comparison `(F ⋙ G)(K ⊗ L) ⟶ (F ⋙ G) K ⊗ (F ⋙ G) L` of complexes is the
 comparison of `F` followed by the comparison of `G`. -/
@@ -243,6 +246,7 @@ lemma mapHomologicalComplexδNatTrans_comp (F : C ⥤ D) (G : D ⥤ E) [F.Additi
   simp
   rfl
 
+omit [HasFunctorialFlatResolution C] [HasFunctorialFlatResolution D] in
 open HomologicalComplex in
 /-- A monoidal natural transformation `τ : F ⟶ F'` commutes with the comonoidal comparisons
 of complexes. -/
@@ -279,6 +283,8 @@ variable {E : Type u₃} [Category.{u + 1} E] [Abelian E] [IsGrothendieckAbelian
   [MonoidalCategory E] [MonoidalPreadditive E] [MonoidalClosed E] [BraidedCategory E]
   [HasFunctorialFlatResolution E]
 
+omit [MonoidalCategory E] [MonoidalPreadditive E] [MonoidalClosed E] [BraidedCategory E]
+  [HasFunctorialFlatResolution E] in
 /-- The composition isomorphism `L(F ⋙ G) ≅ LF ⋙ LG` is compatible with the counits. -/
 @[reassoc]
 lemma leftDerivedFunctorCompIso_hom_app_comp_counit (F : C ⥤ D) (G : D ⥤ E) [F.Additive]
@@ -301,10 +307,12 @@ lemma leftDerivedFunctorCompIso_hom_app_comp_counit (F : C ⥤ D) (G : D ⥤ E) 
   rw [← h₁, ← h₄, ← h₂, ← h₃]
   simp only [← Category.assoc]
   congr 1
-  simp only [Category.assoc, ← Functor.map_comp, Iso.inv_hom_id_app_assoc]
+  simp only [Category.assoc]
   rw [← (G.leftDerivedFunctorIsoMapDerivedCategory.inv.naturality_assoc)]
   simp
 
+omit [MonoidalCategory D] [MonoidalPreadditive D] [MonoidalClosed D] [BraidedCategory D]
+  [HasFunctorialFlatResolution D] in
 /-- An isomorphism `F ≅ F'` of exact functors is compatible with the counits of their total
 left derived functors. -/
 @[reassoc]
@@ -322,6 +330,8 @@ lemma leftDerivedFunctorNatIso_hom_app_comp_counit {F F' : C ⥤ D} [F.Additive]
   simp only [leftDerivedFunctorNatIso, Iso.trans_hom, NatTrans.comp_app, Iso.symm_hom,
     Category.assoc]
   rw [← h₁, ← h₂, Iso.inv_hom_id_app_assoc, h₃, Category.assoc]
+
+omit [HasFunctorialFlatResolution C] [HasFunctorialFlatResolution D] in
 open HomotopyCategory in
 /-- A monoidal natural transformation `τ : F ⟶ F'` commutes with the comonoidal comparisons
 in the homotopy category. -/
@@ -346,6 +356,8 @@ lemma mapHomotopyCategoryδNatTrans_naturality {F F' : C ⥤ D} [F.Additive] [F'
   rw [mapHomotopyCategoryδNatTrans_app_app, mapHomotopyCategoryδNatTrans_app_app]
   exact h
 
+omit [HasFunctorialFlatResolution C] [HasFunctorialFlatResolution D]
+  [HasFunctorialFlatResolution E] in
 open HomotopyCategory in
 /-- The comonoidal comparison of `F ⋙ G` in the homotopy category is the comparison of `F`
 followed by the comparison of `G`. -/
@@ -383,6 +395,8 @@ lemma derivedTensorLeftDerivedCounit_app_app (X₁ X₂ : HomotopyCategory C (.u
         μ Qh ((F.mapHomotopyCategory _).obj X₁) ((F.mapHomotopyCategory _).obj X₂) := by
   simp [derivedTensorLeftDerivedCounit, tensorHom_def]
 
+omit [MonoidalCategory D] [MonoidalPreadditive D] [MonoidalClosed D] [BraidedCategory D]
+  [HasFunctorialFlatResolution D] in
 lemma leftDerivedDerivedTensorCounit_app_app (X₁ X₂ : HomotopyCategory C (.up ℤ)) :
     ((leftDerivedDerivedTensorCounit F).app X₁).app X₂ =
       F.leftDerivedFunctor.map (μ Qh X₁ X₂) ≫ F.leftDerivedFunctorCounit.app (X₁ ⊗ X₂) := by
@@ -580,10 +594,10 @@ lemma map_leftDerivedTensorComparison_comp_eq_of_iso (τ : G₁ ⋙ G₂ ≅ F�
           (G₁.leftDerivedFunctor.obj M) ≫
         ((leftDerivedFunctorCompNatIso F₁ F₂ G₁ G₂ τ).hom.app K ⊗ₘ
           (leftDerivedFunctorCompNatIso F₁ F₂ G₁ G₂ τ).hom.app M) := by
-  rw [map_leftDerivedTensorComparison_app_app_comp, map_leftDerivedTensorComparison_app_app_comp_assoc]
+  rw [map_leftDerivedTensorComparison_app_app_comp,
+    map_leftDerivedTensorComparison_app_app_comp_assoc]
   simp only [leftDerivedFunctorCompNatIso, Iso.trans_inv, Iso.trans_hom, Iso.symm_inv,
-    Iso.symm_hom, NatTrans.comp_app, Category.assoc, Iso.hom_inv_id_app_assoc,
-    tensorHom_comp_tensorHom_assoc]
+    Iso.symm_hom, NatTrans.comp_app, Category.assoc, Iso.hom_inv_id_app_assoc]
   congr 1
   rw [← cancel_epi (((G₁ ⋙ G₂).leftDerivedFunctorNatIso τ).hom.app _),
     Iso.hom_inv_id_app_assoc, leftDerivedTensorComparison_naturality_app_assoc,
