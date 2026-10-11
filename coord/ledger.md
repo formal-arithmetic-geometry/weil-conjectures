@@ -3675,3 +3675,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 07:43 L: merged deliver/H1/lem-sc-acyclic-comparison-natural (stage 2; reviewer PASS; first push; Sheaf.CategoryTheory.Abelian.RightDerived.AcyclicComparisonNatural CategoryTheory.acyclicComparison_naturality)
 - 07:44 L: merged deliver/H1/lem-sc-affine-weakass-nonzerodivisors (stage 2; reviewer FIX; first push; Sheaf.RingTheory.WeakAssZeroDivisors Ideal.zeroDivisors_eq_iUnion_weakAss; new nodes: def-sc-weakly-associated-primes)
 - 07:44 L: merged deliver/H1/def-pc-module-pullback (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.TensorPullback AlgebraicGeometry.Scheme.Modules.tensorPullback; new nodes: def-pc-topological-inverse-image-module)
+- 07:44 L: merged deliver/J1/lem-sc-complex-lift-acyclic-projective (stage 2; reviewer FIX; first push; Sheaf.Algebra.Homology.AcyclicLift CochainComplex.exists_acyclic_lift_mod_ideal)

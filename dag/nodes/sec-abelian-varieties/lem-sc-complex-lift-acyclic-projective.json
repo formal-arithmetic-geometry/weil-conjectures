@@ -111,5 +111,24 @@
   "group": "J1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-cla0309 (reviewer sub-agent of L); spot-checked: Read Tag 0BC9 statement and whole proof; steps 1-3 follow it (E): (1) for splitting/lifting, (2) for Z^i in P, (3) for surjectivity of P^{n-1}->Z^n. C4: H1 lem-sc-complex-lift-class-projective step 3 applies it to Cone(q) with (1), only-if (2), (3): matches. Diff vs merge-base: only the item and its report; the 300 deletions are sheaf-dag moving on (K1 prop-av-tate-rank). created.item unchanged (correct: node created by H1). No duplicate; one Mathlib grep, 0 hits. FIX more, RETURN less: (a) statement had been changed without statement_change (definitions inlined, citations dropped); restored sheaf-dag statement and stmt_deps verbatim; (b) B4: steps rewritten in TeX (no plain-text arrows, E^\\bullet, \\mathcal P); (c) step 2 now names Z^n in P, needed for (3), and the identification im(E^{n-1}->E^n)=Z^n/IZ^n. Second reading by J1 missed (a) and wrongly claimed it corrected created.item.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.AcyclicLift",
+  "declaration": "CochainComplex.exists_acyclic_lift_mod_ideal",
+  "file": "lean/Sheaf/Algebra/Homology/AcyclicLift.lean",
+  "statement": "theorem exists_acyclic_lift_mod_ideal (R : Type u) [CommRing R] (I : Ideal R) (P : ModuleCat.{max u v} R → Prop) (hprojective : ∀ M, P M → Projective M) (hsummand : ∀ M₁ M₂ M₁₂ : ModuleCat.{max u v} R, P M₁ → P M₁₂ → Nonempty (M₁₂ ≅ ModuleCat.of R (M₁ × M₂)) → P M₂) (hsurjective : ∀ (M₁ M₂ : ModuleCat.{max u v} R) (f : M₁ ⟶ M₂), P M₁ → P M₂ → Function.Surjective ((ModuleCat.extendScalars (Ideal.Quotient.mk I)).map f) → Function.Surjective f) (E : CochainComplex (ModuleCat.{max u v} (R ⧸ I)) ℤ) (hbounded : ∃ b : ℤ, E.IsStrictlyLE b) (hacyclic : E.Acyclic) (hterms : ∀ i : ℤ, ∃ M : ModuleCat.{max u v} R, P M ∧ Nonempty ((ModuleCat.extendScalars (Ideal.Quotient.mk I)).obj M ≅ E.X i)) : ∃ A : CochainComplex (ModuleCat.{max u v} R) ℤ, (∃ b : ℤ, A.IsStrictlyLE b) ∧ A.Acyclic ∧ (∀ i : ℤ, P (A.X i)) ∧ Nonempty (((ModuleCat.extendScalars (Ideal.Quotient.mk I)).mapHomologicalComplex (ComplexShape.up ℤ)).obj A ≅ E)",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-cla0958"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-cla0958",
+  "group": "J1",
+  "result": "fix",
+  "note": "CommRing R, I; class P on ModuleCat.{max u v} R; (1) termwise categorical Projective (fixed from Module.Projective, sibling form); (2) summand up to iso of M1×M2; (3) surjective after extendScalars to R/I => surjective; E bounded above IsStrictlyLE, Acyclic, terms ≅ P/IP; conclusion A IsStrictlyLE, Acyclic, terms in P, complex iso of mapHomologicalComplex A with E; zero terms above bound in P forced by hterms+hsurjective"
  }
 }
