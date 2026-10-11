@@ -499,5 +499,68 @@ lemma H.cyclesZeroSuccAddEquiv_naturality (n : ℕ) (w : (K.cycles 0).H (n + 1))
   rw [← hs, H.map_cyclesδZero ψ hK hK', H.cyclesOneAddEquiv_cyclesδZero]
 
 end Naturality
+section NaturalitySections
+
+variable {L L' : CochainComplex X.Modules ℕ} (χ : L ⟶ L')
+  (hL : ∀ j m, Subsingleton ((L.X j).H (m + 1)))
+  (hH : ∀ q m, Subsingleton ((L.homology q).H (m + 1)))
+  (hL' : ∀ j m, Subsingleton ((L'.X j).H (m + 1)))
+  (hH' : ∀ q m, Subsingleton ((L'.homology q).H (m + 1)))
+
+lemma homologySectionsAddEquiv_homologyπ (q : ℕ) (z : Γ(L.cycles (q + 1), ⊤)) :
+    homologySectionsAddEquiv L hL hH q ((L.homologyπ (q + 1)).app ⊤ z) = QuotientAddGroup.mk z := by
+  rw [homologySectionsAddEquiv, AddEquiv.symm_apply_eq, AddEquiv.trans_apply]
+  exact (QuotientAddGroup.kerLift_mk _ z).symm
+
+/-- `Γ(X, Hᵠ⁺¹(L)) ≅ Γ(X, Zᵠ⁺¹) / Γ(X, Lᵠ)` is natural in the complex `L`. -/
+lemma homologySectionsAddEquiv_naturality (q : ℕ) (y : Γ(L.homology (q + 1), ⊤)) :
+    homologySectionsAddEquiv L' hL' hH' q ((HomologicalComplex.homologyMap χ (q + 1)).app ⊤ y) =
+      QuotientAddGroup.map _ _ ((HomologicalComplex.cyclesMap χ (q + 1)).app ⊤).hom
+        (range_app_toCycles_le_comap χ q) (homologySectionsAddEquiv L hL hH q y) := by
+  obtain ⟨z, rfl⟩ := surjective_app_homologyπ L hL hH q y
+  rw [homologySectionsAddEquiv_homologyπ, QuotientAddGroup.map_mk]
+  have h : ((HomologicalComplex.homologyMap χ (q + 1)).app ⊤) (((L.homologyπ (q + 1)).app ⊤) z) =
+      ((L'.homologyπ (q + 1)).app ⊤) (((HomologicalComplex.cyclesMap χ (q + 1)).app ⊤) z) := by
+    change ((L.homologyπ (q + 1) ≫ HomologicalComplex.homologyMap χ (q + 1)).app ⊤) z =
+      ((HomologicalComplex.cyclesMap χ (q + 1) ≫ L'.homologyπ (q + 1)).app ⊤) z
+    rw [HomologicalComplex.homologyπ_naturality]
+  rw [h, homologySectionsAddEquiv_homologyπ]
+
+/-- A chain map induces a map on the cocycles of the complexes of global sections. -/
+noncomputable def sectionsCyclesMap (n : ℕ) : sectionsCycles L n →+ sectionsCycles L' n :=
+  (((χ.f (n + 1)).app ⊤).hom.comp (sectionsCycles L n).subtype).codRestrict _ fun x ↦ by
+    obtain ⟨x, hx⟩ := x
+    change ((χ.f (n + 1) ≫ L'.d (n + 1) (n + 2)).app ⊤) x = 0
+    rw [AddMonoidHom.mem_ker] at hx
+    rw [χ.comm, Hom.comp_app, ConcreteCategory.comp_apply]
+    erw [hx, map_zero]
+
+lemma sectionsBoundaries_le_comap (n : ℕ) :
+    sectionsBoundaries L n ≤ (sectionsBoundaries L' n).comap (sectionsCyclesMap χ n) := by
+  rintro ⟨x, hx⟩ ⟨y, hy⟩
+  refine ⟨(χ.f n).app ⊤ y, ?_⟩
+  change ((χ.f n ≫ L'.d n (n + 1)).app ⊤) y = ((χ.f (n + 1)).app ⊤) x
+  rw [χ.comm, Hom.comp_app, ConcreteCategory.comp_apply]
+  erw [hy]
+  rfl
+
+/-- `Γ(X, Zⁿ⁺¹) / Γ(X, Lⁿ) ≅ ker Γ(d) / im Γ(d)` is natural in the complex `L`. -/
+lemma cyclesQuotientAddEquiv_naturality (n : ℕ)
+    (a : Γ(L.cycles (n + 1), ⊤) ⧸ ((L.toCycles n (n + 1)).app ⊤).hom.range) :
+    cyclesQuotientAddEquiv L' n (QuotientAddGroup.map _ _
+        ((HomologicalComplex.cyclesMap χ (n + 1)).app ⊤).hom (range_app_toCycles_le_comap χ n) a) =
+      QuotientAddGroup.map _ _ (sectionsCyclesMap χ n) (sectionsBoundaries_le_comap χ n)
+        (cyclesQuotientAddEquiv L n a) := by
+  induction a using QuotientAddGroup.induction_on with | H z => ?_
+  rw [QuotientAddGroup.map_mk]
+  change QuotientAddGroup.mk _ = QuotientAddGroup.map _ _ _ _ (QuotientAddGroup.mk _)
+  rw [QuotientAddGroup.map_mk]
+  congr 1
+  refine Subtype.ext ?_
+  change ((HomologicalComplex.cyclesMap χ (n + 1) ≫ L'.iCycles (n + 1)).app ⊤) z =
+    ((L.iCycles (n + 1) ≫ χ.f (n + 1)).app ⊤) z
+  rw [HomologicalComplex.cyclesMap_i]
+
+end NaturalitySections
 
 end AlgebraicGeometry.Scheme.Modules
