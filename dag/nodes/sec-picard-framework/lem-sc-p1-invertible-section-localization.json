@@ -22,7 +22,8 @@
   "def-weil-pbc-quasi-compact-scheme",
   "def-pc-scheme",
   "def-sc-invertible-module",
-  "pqf-def-coherent"
+  "pqf-def-coherent",
+  "def-sc-section-fraction-presentation"
  ],
  "proof": [
   {
@@ -111,5 +112,24 @@
   "group": "K1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-isl1752 (reviewer sub-agent of L); spot-checked: Statement matches Stacks 01PW(2); step 1 cites new lem-sc-p1-section-restriction-s-torsion (01PW(1) kernel, module version not in Mathlib: only structure-sheaf exists_of_res_zero_of_qcqs), sound. FIX more, RETURN less: C4 in step 2 - lem-pc-section-clearing-denominators requires X separated over an affine scheme, which qcqs X need not be (Stacks uses only qcqs via quasi-compact U_j cap U_j'); repaired by adding statement-only node lem-sc-p1-section-clearing-denominators-qcqs (01PW(2) surjectivity, qcqs, LeanFinder query recorded: no match) and citing it in step 2; proof_deps updated. Not a cycle: lem-sc-invert-s-cohomology avoided as the delivery noted.; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.InvertibleSectionLocalization",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_sectionFraction_nonvanishing_equiv",
+  "file": "lean/Sheaf/AlgebraicGeometry/InvertibleSectionLocalization.lean",
+  "statement": "theorem exists_sectionFraction_nonvanishing_equiv (X : Scheme.{uL}) [CompactSpace X] [QuasiSeparatedSpace X] (L : X.Modules) [L.IsInvertible] (s : Γ(L, ⊤)) (F : X.Modules) [F.IsQuasicoherent] : ∃ U : X.Opens, (U : Set X) = nonvanishingLocus L s ∧ ∃ e : SectionFractionPresentation L F s ≃+ Γ(F, U), (∀ (r : Γ(X, ⊤)) (z : SectionFractionPresentation L F s), e (r • z) = (X.presheaf.map (homOfLE (show U ≤ ⊤ from le_top)).op r) • e z) ∧ (∀ (n : ℕ) (t : Γ(F ⊗ L.tensorPow n, ⊤)), tmulSection (e (sectionFraction L F s n t)) (tensorPowSectionOne (homOfGlobalSection L s) n U) = (F ⊗ L.tensorPow n).presheaf.map (homOfLE (show U ≤ ⊤ from le_top)).op t)",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-pis1207"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-pis1207",
+  "group": "E1",
+  "result": "fix",
+  "note": "qcqs X (CompactSpace, QuasiSeparatedSpace), invertible L, quasi-coherent F, X_s = nonvanishingLocus L s, N_(s) as direct-limit fraction presentation, A-linear equiv with t/s^n ⊗ s^n = t|_U; fixed s to Γ(L,⊤) + homOfGlobalSection"
  }
 }
