@@ -4666,3 +4666,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 12:45 L: merged deliver/K1/lem-weil-pbc-polynomial-ring-maximal-chain-height-difference (stage 2; reviewer FIX; first push; Sheaf.RingTheory.PolynomialRingMaximalChainHeightDifference MvPolynomial.maximalChain_height_difference)
 - 12:45 L: merged deliver/G1/lem-pc-derived-tensor-localization-cohomology (stage 2; reviewer PASS; first push; Sheaf.Algebra.Homology.DerivedTensorLocalizationCohomology RingTensorCohomology.derivedTensor_localization_cohomology; statement corrected (1 citers))
 - 12:45 L: merged deliver/M1/lem-weil-pbc-popescu-lift-once (stage 2; reviewer FIX; first push; Sheaf.RingTheory.PopescuLiftOnce Algebra.exists_smooth_quotient_factorization)
+- 12:46 L: merged deliver/E1/lem-weil-pbc-popescu-resolve-char-p (stage 2; reviewer FIX; first push; Sheaf.RingTheory.PopescuResolveCharP Algebra.canBePopescuResolved_of_char_pos)
