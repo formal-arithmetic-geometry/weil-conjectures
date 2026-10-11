@@ -821,7 +821,8 @@ def cmd_merge2(o):
             for n in D["notes"] + fixnotes:
                 print(f"  note: {n}")
         rid = o.reviewer
-        verdict = (o.verdict or ("FIX" if nfix else "PASS")).upper()
+        rfields = list(D.get("statement_reverted") or [])
+        verdict = (o.verdict or ("FIX" if nfix or rfields else "PASS")).upper()
         reviewed = {"date": today(), "by": "L", "reviewer": rid, "group": group, "result": verdict.lower()}
         dropped = list(D.get("dropped") or {})
         dnote = (f"dropped duplicate new node(s) {', '.join(dropped)} (--drop-nodes; not merged, the item points at the "
@@ -832,7 +833,6 @@ def cmd_merge2(o):
                                                   "(--revert-nodes; kept as on sheaf-dag)") if x)
         if dropped_files:
             dnote = "; ".join(x for x in (dnote, f"left out new module(s) {', '.join(dropped_files)} (--drop-files)") if x)
-        rfields = list(D.get("statement_reverted") or [])
         if rfields:
             dnote = "; ".join(x for x in (dnote, f"reverted the delivery's statement correction of the item ({', '.join(rfields)} "
                                                   "kept as on sheaf-dag; --revert-statement)") if x)
