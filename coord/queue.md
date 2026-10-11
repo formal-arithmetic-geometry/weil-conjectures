@@ -1,15 +1,16 @@
 # Work queue
 
-985 items; claim with `tools/claim.py next <group> [--stage N]`.
+981 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (985)
+## Stage 2: nodes to state (981)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
 | `def-pc-module-pullback` | 1 | state |
+| `def-pur-sheaf-hom` | 1 | state |
 | `def-weil-pbc-ample-invertible-module` | 1 | state |
 | `def-weil-pbc-derived-categories` | 1 | state |
 | `def-weil-pbc-etale-constructible-sheaf` | 1 | state |
@@ -20,7 +21,6 @@
 | `lem-exc-abelian-sheaves-gmodules` | 1 | state |
 | `lem-exc-cochains-derived-invariants` | 1 | state |
 | `lem-exc-continuous-cochains-short-exact` | 1 | state |
-| `lem-exc-etale-sheaves-gsets-point` | 1 | state |
 | `lem-pc-bounded-above-flat-kflat-site` | 1 | state |
 | `lem-pc-bounded-above-flat-tensor-acyclic` | 1 | state |
 | `lem-pc-derived-adjoint-functors` | 1 | state |
@@ -51,16 +51,12 @@
 | `lem-pur-kinjective-homotopy-limit-vanishing` | 1 | state |
 | `lem-pur-kinjective-surjection-bounded-size` | 1 | state |
 | `lem-pur-ringed-site-grothendieck-abelian` | 1 | state |
-| `lem-pur-sheaf-hom-is-sheaf` | 1 | state |
 | `lem-sc-acyclic-comparison-natural` | 1 | state |
 | `lem-sc-affine-finite-module-free-locus` | 1 | state |
 | `lem-sc-affine-finite-projective-prime-membership` | 1 | state |
-| `lem-sc-affine-standard-cover-finite-projective` | 1 | state |
 | `lem-sc-affine-totalquotient-minimal-product` | 1 | state |
 | `lem-sc-affine-weakass-nonzerodivisors` | 1 | state |
 | `lem-sc-ample-proj-canonical-map` | 1 | state |
-| `lem-sc-artin-schreier-k` | 1 | state |
-| `lem-sc-associated-localization-fg` | 1 | state |
 | `lem-sc-bounded-below-injective-resolution` | 1 | state |
 | `lem-sc-closed-affine-union-affine` | 1 | state |
 | `lem-sc-coherent-ring-fp-kernel-cokernel` | 1 | state |
@@ -995,7 +991,7 @@
 | `lem-sc-normalization-properties` | 3 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 1032 nodes that wait for a statement dependency, 40 nodes that wait for stage 1.
+Not open yet: 1031 nodes that wait for a statement dependency, 40 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
