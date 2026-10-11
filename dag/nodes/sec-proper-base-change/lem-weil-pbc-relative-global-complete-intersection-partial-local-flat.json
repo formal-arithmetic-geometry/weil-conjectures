@@ -212,5 +212,23 @@
   "worker": "stage1",
   "summary": "Followed the proof of part (2) of Stacks 00SV (algebra.tex 36783-36832). Noetherian case (Steps 1-3): R_p -> P_q' is a flat local map of Noetherian local rings (P free, Hilbert basis, 00HT); the f_j are a regular sequence in P_q'/pP_q' (fibre ring = k[x], 00SS(1) over k=kappa(p) gives fibre dimension n-c, then the regular-sequence lemma of 00SB/00SC, transported by the natural isomorphism of 0H9M); 00MG gives flatness over R_p, then over R. General case (Steps 4-7): Noetherian approximation 00SU, directed family of finite type Z-subrings, base change 00SS(1), the colimit identification written out, and 05UU(2) in the form of a directed union of subrings. New nodes: 00MG, 00SS(1), 00SU, 05UU(2) (subring form), and the natural-map form of 0H9M (the existing node lem-weil-pbc-fibre-ring-local-ring-iso states only an abstract isomorphism). Citer lem-weil-pbc-relative-global-complete-intersection-flat uses i=c; formulation matches. Statement unchanged."
  },
- "reviewed": "2026-10-10 L: 7 steps checked against the 00SV (2) proof: Noetherian case via the fibre k[x] (polynomial-scalar-extension, fibre primes, base change (b) of the new 00SS (1) node, global-complete-intersection-local-regular-sequence, the natural fibre isomorphism 0H9M) and Grothendieck 00MG, then flat-over-localization; general case by 00SU approximation, the directed family of finite type Z-subrings, (N) for each R_lambda and 05UU (2) with conditions (i),(ii) written out; citer rgci-flat uses i = c as stated"
+ "reviewed": "2026-10-10 L: 7 steps checked against the 00SV (2) proof: Noetherian case via the fibre k[x] (polynomial-scalar-extension, fibre primes, base change (b) of the new 00SS (1) node, global-complete-intersection-local-regular-sequence, the natural fibre isomorphism 0H9M) and Grothendieck 00MG, then flat-over-localization; general case by 00SU approximation, the directed family of finite type Z-subrings, (N) for each R_lambda and 05UU (2) with conditions (i),(ii) written out; citer rgci-flat uses i = c as stated",
+ "lean": {
+  "module": "Sheaf.RingTheory.RelativeGlobalCompleteIntersectionPartialLocalFlat",
+  "declaration": "Algebra.relativeGlobalCompleteIntersection_partial_local_flat",
+  "file": "lean/Sheaf/RingTheory/RelativeGlobalCompleteIntersectionPartialLocalFlat.lean",
+  "statement": "theorem relativeGlobalCompleteIntersection_partial_local_flat (R : Type v) [CommRing R] (n c : ℕ) (f : Fin c → MvPolynomial (Fin n) R) (h : IsRelativeGlobalCompleteIntersectionPresentation f) (q : PrimeSpectrum (MvPolynomial (Fin n) R ⧸ Ideal.span (Set.range f))) (i : ℕ) (hi : i ≤ c) : Module.Flat R (Localization.AtPrime (PrimeSpectrum.comap (Ideal.Quotient.mk (Ideal.span (Set.range f))) q).asIdeal ⧸ Ideal.map (algebraMap (MvPolynomial (Fin n) R) (Localization.AtPrime (PrimeSpectrum.comap (Ideal.Quotient.mk (Ideal.span (Set.range f))) q).asIdeal)) (Ideal.span (f '' {j : Fin c | j.val < i})))",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-plf",
+  "group": "H1",
+  "result": "fix",
+  "note": "reverted the delivery's change of existing node(s) def-weil-pbc-relative-global-complete-intersection (--revert-nodes; kept as on sheaf-dag)"
+ }
 }
