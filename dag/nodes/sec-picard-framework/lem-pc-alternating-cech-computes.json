@@ -129,5 +129,24 @@
   "group": "K1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-acc2303 (reviewer sub-agent of L); spot-checked: Read cohomology.tex Section 20.23 (01FG-01FM). Statement agrees with def-weil-pbc-site-cech-complex conventions (Zariski site is a poset, so chosen U_t are the intersections; covering of U=X); proof restates neither lem-pc-cech-computes nor lem-sc-cech-spectral; homotopy equivalence constructed explicitly (c, pi, first and second homotopies of 01FM). FIX more, RETURN less: (1) C1 step 3 named Tag 01FK for the homotopies, which is Lemma 01FM (01FK is only the projection lemma) -> retagged 01FM, steps 1/2 tagged 01FK/01FJ; (2) source/proof_origin document sites-cohomology.tex -> cohomology.tex (Section 20.23 is in Cohomology of Sheaves); (3) step 3 second-homotopy identity stated exactly as in 01FM (0 on strictly increasing, s otherwise) instead of 'dh+hd=1 on the quotient'. Second reading by K1 missed (1) and (2).; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AlternatingCechComputes",
+  "declaration": "AlgebraicGeometry.Scheme.alternatingCechComputes",
+  "file": "lean/Sheaf/AlgebraicGeometry/AlternatingCechComputes.lean",
+  "statement": "theorem alternatingCechComputes (X : Scheme.{u}) {I : Type v} [LinearOrder I] (U : I → X.Opens) (hU : iSup U = ⊤) (F : X.Opensᵒᵖ ⥤ AddCommGrpCat.{w}) (S : SiteCechComplex U (fun i ↦ homOfLE (le_top : U i ≤ ⊤))) : ∃ A : CochainComplex AddCommGrpCat.{max v w} ℕ, ∃ e : ∀ p : ℕ, A.X p ≅ AddCommGrpCat.of (∀ t : {t : Fin (p + 1) → I // StrictMono t}, F.obj (op (S.W p t.1))), ∃ r : S.complex F ⟶ A, (∀ (p : ℕ) (s : A.X p) (t : {t : Fin (p + 2) → I // StrictMono t}), (e (p + 1)).hom ((A.d p (p + 1)) s) t = ∑ j : Fin (p + 2), (-1 : ℤ) ^ j.val • F.map (S.indexMap t.1 j.succAbove).op ((e p).hom s ⟨t.1 ∘ j.succAbove, t.2.comp (Fin.strictMono_succAbove j)⟩)) ∧ (∀ (p : ℕ) (s : S.cochains F p) (t : {t : Fin (p + 1) → I // StrictMono t}), (e p).hom ((r.f p) s) t = s t.1) ∧ ∀ p : ℕ, IsIso (HomologicalComplex.homologyMap r p)",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-12",
+  "existing": false,
+  "note": "The chosen-intersection binder S uses def-weil-pbc-site-cech-complex directly; its universal properties force each W to be the actual intersection in the poset of opens. Simultaneous degree identifications pin the signed differential and restriction components; IsIso is imposed on the homologyMap of that restriction. Scheme, index, and coefficient universes are independent."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "C1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }
