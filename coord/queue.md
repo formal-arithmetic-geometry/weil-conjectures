@@ -1,11 +1,11 @@
 # Work queue
 
-179 items; claim with `tools/claim.py next <group> [--stage N]`.
+173 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (179)
+## Stage 2: nodes to state (173)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
@@ -82,7 +82,6 @@
 | `lem-weil-pbc-tor-one-surjective-change-rings` | 1 | state | 0 |
 | `lem-weil-pbc-tor-one-surjective-flat-middle` | 1 | state | 0 |
 | `lem-weil-pbc-torsion-extension-flat-descent` | 1 | state | 0 |
-| `lem-weil-pbc-torsion-hom-flat-comparison` | 1 | state | 0 |
 | `lem-weil-pbc-torsion-module-flat-base-change-iso` | 1 | state | 0 |
 | `lem-weil-pbc-torsion-submodule-flat-base-change-iso` | 1 | state | 0 |
 | `lem-weil-pbc-tower-limit-exact-surjective-kernels` | 1 | state | 0 |
@@ -90,9 +89,6 @@
 | `lem-weil-pbc-trivial-kan-homotopy-equivalence` | 1 | state | 0 |
 | `lem-weil-pbc-truncated-coskeleton-finite-limits` | 1 | state | 0 |
 | `lem-weil-pbc-truncation-step-ses` | 1 | state | 0 |
-| `lem-weil-pbc-two-term-complex-kernel-base-change` | 1 | state | 0 |
-| `lem-weil-pbc-two-term-homotopy-equivalence-direct-sum` | 1 | state | 0 |
-| `lem-weil-pbc-universal-thickening-affine-case` | 1 | state | 0 |
 | `lem-weil-pbc-universal-thickening-open-pieces` | 1 | state | 0 |
 | `lem-weil-pbc-unramified-base-change-open` | 1 | state | 0 |
 | `lem-weil-pbc-valuation-ring-normal` | 1 | state | 0 |
@@ -100,7 +96,6 @@
 | `lem-weil-pbc-well-ordered-union-projective-dimension` | 1 | state | 0 |
 | `lem-weil-pbc-z-localizations-dvr` | 1 | state | 0 |
 | `lem-weil-pbc-zariski-h0-proper-henselian-pair` | 1 | state | 0 |
-| `lem-weil-pbc-zariski-pair-flat-integral-isomorphism` | 1 | state | 0 |
 | `lem-weil-pbc-zariski-pair-rank-one-propagation` | 1 | state | 0 |
 | `lem-weil-pbc-zero-dim-integral-point` | 1 | state | 0 |
 | `lem-weil-pbc-zero-dimensional-base-change-points` | 1 | state | 0 |
@@ -135,7 +130,6 @@
 | `lem-kun-etale-lfp` | 2 | state | 0 |
 | `lem-pc-affine-perfect-hom-colimit` | 2 | state | 0 |
 | `lem-pc-bounded-above-flat-kflat` | 2 | state | 0 |
-| `lem-pc-brown-representability-right-adjoint` | 2 | state | 0 |
 | `lem-pc-degree-zero-properties` | 2 | state | 0 |
 | `lem-pc-divisor-line-bundle-agrees-sc` | 2 | state | 0 |
 | `lem-pc-finite-projective-cokernel-localization` | 2 | state | 0 |
