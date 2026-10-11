@@ -230,5 +230,24 @@
   "item": "lem-weil-pbc-injective-resolution-ses-complexes",
   "worker": "stage1",
   "summary": "Checked the statement against Stacks 013T (main assertion with part (2)); unchanged, stmt_deps kept. Wrote the proof in 11 steps following 013T Steps 1-2: resolve A (013K(3)), push out along A -> I_1 in the abelian category of complexes, quasi-isomorphism by the long exact sequence and the five lemma, termwise splitting (0136), delta : C -> I_1[1] (011J), resolve C degreewise-monomorphically (013K(3)), lift delta along f_3 (013P(2)), build I_2 = I_1 (+) I_3 with the twisted differential, the comparison E -> I_2 and its quasi-isomorphism, and compose. New nodes: lem-weil-pbc-complex-injective-resolution-mono (013K(3), unsplit; Mathlib has only the mono version one degree lower or the non-mono version), lem-weil-pbc-pushout-short-exact-sequence (Homology 010I(2)/08N4/08N3, unsplit), lem-weil-pbc-ses-injective-kernel-splits (0136, Mathlib ShortExact.splittingOfInjective), lem-weil-pbc-degreewise-split-connecting-morphism (011J, Mathlib CochainComplex.homOfDegreewiseSplit), lem-weil-pbc-lift-along-injective-quasi-iso (013P(2) for bounded below complexes, Mathlib lifting instance of the Quillen model structure on CochainComplex.Plus). Existing leaves cited: cochain-complexes-degreewise-exact, complex-ses-homology-long-exact, complex-ses-long-exact-naturality, five-lemma, product-injectives."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.InjectiveResolutionSESComplexes",
+  "declaration": "CategoryTheory.exists_injective_resolution_ses_complexes",
+  "file": "lean/Sheaf/CategoryTheory/InjectiveResolutionSESComplexes.lean",
+  "statement": "theorem exists_injective_resolution_ses_complexes {C : Type u} [Category.{v} C] [Abelian C] [EnoughInjectives C] (A B D : CochainComplex C ℤ) (f : A ⟶ B) (g : B ⟶ D) (hA : ∀ n : ℤ, n < 0 → IsZero (A.X n)) (hB : ∀ n : ℤ, n < 0 → IsZero (B.X n)) (hD : ∀ n : ℤ, n < 0 → IsZero (D.X n)) (hSES : ∃ hfg : f ≫ g = 0, ∀ n : ℤ, ((ShortComplex.mk f g hfg).map (HomologicalComplex.eval C (ComplexShape.up ℤ) n)).ShortExact) : ∃ (I₁ I₂ I₃ : CochainComplex C ℤ) (j : I₁ ⟶ I₂) (q : I₂ ⟶ I₃) (φ₁ : A ⟶ I₁) (φ₂ : B ⟶ I₂) (φ₃ : D ⟶ I₃), (∀ n : ℤ, n < 0 → IsZero (I₁.X n)) ∧ (∀ n : ℤ, n < 0 → IsZero (I₂.X n)) ∧ (∀ n : ℤ, n < 0 → IsZero (I₃.X n)) ∧ (∀ n : ℤ, Injective (I₁.X n)) ∧ (∀ n : ℤ, Injective (I₂.X n)) ∧ (∀ n : ℤ, Injective (I₃.X n)) ∧ (∃ hjq : j ≫ q = 0, ∀ n : ℤ, ((ShortComplex.mk j q hjq).map (HomologicalComplex.eval C (ComplexShape.up ℤ) n)).ShortExact) ∧ QuasiIso φ₁ ∧ QuasiIso φ₂ ∧ QuasiIso φ₃ ∧ f ≫ φ₂ = φ₁ ≫ j ∧ g ≫ φ₃ = φ₂ ≫ q",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-irc1101"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-irc1101",
+  "group": "C1",
+  "result": "fix",
+  "note": "Abelian+EnoughInjectives (u,v free); A,B,D : CochainComplex C ℤ with IsZero for n<0 (node A^n=0, n<0; as landed sibling exists_mono_quasiIso_injective_boundedBelow); degreewise SES in the landed horseshoe-family form ∃ f≫g=0, ∀ n, (mk f g _).map (eval n) ShortExact (FIX, was per-degree ∃ h on components); I_k injective termwise, zero below 0; j,q degreewise SES (same form); QuasiIso φ1 φ2 φ3; f≫φ2=φ1≫j, g≫φ3=φ2≫q; #check Injective, QuasiIso"
  }
 }
