@@ -210,5 +210,23 @@
   "worker": "stage1",
   "summary": "Mathlib re-searched with all three kinds (LeanSearch x3, LeanFinder x2, Loogle 'QuasiSober, Finite' (none) and 'QuasiSober ?α, T0Space ?α', local_search, grep of Mathlib and the proetale package): no QuasiSober instance or theorem for finite spaces exists, so the node is not a leaf; the mathlib_candidate (isIrreducible_iff_sUnion_isClosed + IsGenericPoint.eq) is kept. Stacks gives no argument (the claim inside the proof of 09XX), so the proof is written by the agent in three elementary steps citing only def-weil-irreducible-components: (1) an irreducible set contained in a finite union of closed sets lies in one of them, by induction from the two-set definition (no existing node for this; grep for irreducible-finite-union/irreducible-not-union found none); (2) Z = union of the finitely many closures of its points, so Z = closure of one point; (3) uniqueness from T_0 written out. Statement and stmt_deps unchanged; the citer lem-weil-pbc-spectral-directed-limit-finite-sober uses exactly the statement (Step 2 there)."
  },
- "reviewed": "Reviewed by L 2026-10-10: proof by agent (Stacks asserts the claim inside 09XX without argument); three elementary steps checked (irreducible set in a finite union of closed sets, finite union of point closures, T_0 uniqueness). No Mathlib match; candidate kept (B8)."
+ "reviewed": "Reviewed by L 2026-10-10: proof by agent (Stacks asserts the claim inside 09XX without argument); three elementary steps checked (irreducible set in a finite union of closed sets, finite union of point closures, T_0 uniqueness). No Mathlib match; candidate kept (B8).",
+ "lean": {
+  "module": "Sheaf.Topology.ExistsUniqueIsGenericPointOfFinite",
+  "declaration": "existsUnique_isGenericPoint_of_finite",
+  "file": "lean/Sheaf/Topology/ExistsUniqueIsGenericPointOfFinite.lean",
+  "statement": "theorem existsUnique_isGenericPoint_of_finite (Y : Type u) [TopologicalSpace Y] [Finite Y] [T0Space Y] (Z : Set Y) (hZ : IsIrreducible Z) (hclosed : IsClosed Z) : ∃! η : Y, η ∈ Z ∧ IsGenericPoint η Z",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-fts1024",
+  "group": "J1",
+  "result": "pass",
+  "note": "Y Type u + TopologicalSpace/Finite/T0Space = finite T0 space; Z : Set Y with IsIrreducible (nonempty, subspace) + IsClosed = irreducible closed subset; ∃! η, η ∈ Z ∧ IsGenericPoint η Z (closure {η} = Z in Y) = exactly one generic point; no Mathlib finite-T0 QuasiSober instance (only R1Space.quasiSober, PrimeSpectrum, schemes), so existing:false right"
+ }
 }
