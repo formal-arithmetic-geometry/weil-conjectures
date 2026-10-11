@@ -22,7 +22,8 @@
   "def-pc-scheme",
   "def-pc-derived-category",
   "def-weil-pbc-closed-subset-proper-over-base",
-  "def-pc-derived-direct-image"
+  "def-pc-derived-direct-image",
+  "def-pc-finite-tor-dimension-over"
  ],
  "proof": [
   {
@@ -179,5 +180,24 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-dft2553 (reviewer sub-agent of L); spot-checked: Statement equals the citer lem-pc-bounded-coherent-finite-tor-proper-pushforward-perfect step 3 hypotheses exactly (S Noetherian, f lft, D^b_Coh, proper supports, finite Tor over f^{-1}O_S); read all cited statements against Tag 08EV. FIX more, RETURN less: (1) C1 step 1: the proper-support reduction to a qcqs open was asserted uncited; now cites lem-pc-direct-image-qc-support-reduction and notes S Noetherian => quasi-compact for the truncation bound. (2) C4 step 2: lem-pc-kflat-resolution gives no bounded-above complex, but lem-pc-flat-complex-derived-pullback needs one, and the identity E tensor^L Lf^*F = E tensor^L_{f^{-1}O_S} f^{-1}F was not derived; now uses lem-pc-kflat-bounded-flat-replacement (N=0), lem-pc-bounded-above-flat-kflat, lem-pc-kflat-pullback-preservation, termwise associativity. (3) C4 step 3: lem-pc-projection-formula needs K in D_QCoh but F was an arbitrary O_S-module; now F quasi-coherent (D_QCoh via lem-pc-derived-pullback-tensor-qcoh), explicit bound [a,b+N-1], and new statement-only node lem-pc-tor-amplitude-qcoh-test (Tag 08EA, (2)=>(1)) plus lem-pc-direct-image-bounded-coherent extend to all O_S-modules in step 4; one Mathlib grep recorded. No Grothendieck-vanishing restatement; no pc tor-amplitude definition node exists, the statement spells the definition out. Edge cases E=0, f=id.; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
  },
- "lead_note": "2026-10-10 L (R-dft2553): Second reading by H1 claims edits (bounded-flat replacement, created.item) absent from head 3f61714ec and missed the qcoh hypothesis of the projection formula."
+ "lead_note": "2026-10-10 L (R-dft2553): Second reading by H1 claims edits (bounded-flat replacement, created.item) absent from head 3f61714ec and missed the qcoh hypothesis of the projection formula.",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProperDirectImageFiniteTor",
+  "declaration": "AlgebraicGeometry.Scheme.hasFiniteTorDimension_schemeDerivedDirectImage_of_bounded_coherent_support",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProperDirectImageFiniteTor.lean",
+  "statement": "theorem hasFiniteTorDimension_schemeDerivedDirectImage_of_bounded_coherent_support (S : Scheme.{u₁}) [IsNoetherian S] (X : Scheme.{u₁}) (f : X ⟶ S) [LocallyOfFiniteType f] [HasDerivedCategory.{w₁} (SheafOfModules.{u₁} (moduleRings X.toRingedSpace))] [HasDerivedCategory.{w₁} (SheafOfModules.{u₁} (moduleRings S.toRingedSpace))] (E : schemeDerivedCategory X) (hbounded : ∃ a b : ℤ, a ≤ b ∧ ∀ i : ℤ, i < a ∨ b < i → IsZero ((DerivedCategory.homologyFunctor (SheafOfModules.{u₁} (moduleRings X.toRingedSpace)) i).obj E)) (hcoherent : ∀ i : ℤ, RingedSpace.IsCoherent X.toRingedSpace ((DerivedCategory.homologyFunctor (SheafOfModules.{u₁} (moduleRings X.toRingedSpace)) i).obj E)) (hsupport : ∀ i : ℤ, Scheme.Modules.HasSupportProperOver f ((DerivedCategory.homologyFunctor (SheafOfModules.{u₁} (moduleRings X.toRingedSpace)) i).obj E)) (hTor : HasFiniteTorDimensionOver f E) : HasFiniteTorDimension S ((schemeDerivedDirectImage f).obj E)",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-pft"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-pft",
+  "group": "E1",
+  "result": "fix",
+  "note": "S Noetherian, f lft, bounded (a<=b), coherent H^i, H^i support proper over S, finite Tor over f^{-1}O_S (new def, genuinely new: no landed ringed-space/derived tensor over f^{-1}O_S; upstream finiteTorAmplitude needs a derived monoidal structure absent here), conclusion Scheme.HasFiniteTorDimension of schemeDerivedDirectImage f; def rewritten without let/letI and without HasDerivedCategory.standard (K-flat resolution as a quasi-iso P -> K|_{f^{-1}O_S}, tensor instance passed explicitly)"
+ }
 }

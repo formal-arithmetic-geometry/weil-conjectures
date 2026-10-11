@@ -5350,3 +5350,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 16:05 L: merged deliver/P1/lem-sc-smooth-proper-curve-dualizing (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.SmoothProperCurveDualizing AlgebraicGeometry.smoothProperCurve_dualizing)
 - 16:05 L: merged deliver/P1/lem-sc-strict-henselization-dvr (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.StrictHenselizationDVR AlgebraicGeometry.Scheme.strictHenselization_dvr)
 - 16:06 L: merged deliver/K1/lem-sc-affine-rhom-qcoherent (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.AffineRHomQuasiCoherent AlgebraicGeometry.affineRHomQuasiCoherent)
+- 16:06 L: merged deliver/E1/lem-pc-proper-direct-image-finite-tor (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.ProperDirectImageFiniteTor AlgebraicGeometry.Scheme.hasFiniteTorDimension_schemeDerivedDirectImage_of_bounded_coherent_support; new nodes: def-pc-finite-tor-dimension-over)

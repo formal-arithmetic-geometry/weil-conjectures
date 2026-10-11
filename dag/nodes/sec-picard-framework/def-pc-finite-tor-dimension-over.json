@@ -1,0 +1,102 @@
+{
+ "id": "def-pc-finite-tor-dimension-over",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "finite tor dimension hypothesis over the inverse-image structure sheaf in the Tag 08EV proof",
+   "via": [
+    "lem-pc-proper-direct-image-finite-tor",
+    "lem-pc-bounded-coherent-finite-tor-proper-pushforward-perfect",
+    "lem-pc-proper-perfect-direct-image-perfect",
+    "lem-sc-smooth-proper-tensor-direct-sums",
+    "lem-sc-smooth-proper-diagonal-tensor-formula",
+    "lem-sc-smooth-proper-relative-dualizing-general",
+    "lem-sc-smooth-proper-curve-dualizing",
+    "lem-sc-finite-duality-trace"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "definition",
+ "title": "Finite Tor dimension over an inverse-image structure sheaf",
+ "statement": "Let $f:X\\to S$ be a morphism of schemes and let $E\\in D(\\mathcal O_X)$ [def-pc-derived-category]. Say that $E$ has finite Tor dimension as an object of $D(f^{-1}\\mathcal O_S)$ if, after restriction of scalars along $f^{-1}\\mathcal O_S\\to\\mathcal O_X$, it has Tor amplitude in some finite interval: there are integers $a\\le b$ such that $H^i(E\\otimes^L_{f^{-1}\\mathcal O_S}\\mathcal F)=0$ for every $f^{-1}\\mathcal O_S$-module $\\mathcal F$ and every $i\\notin[a,b]$.",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Derived Categories of Schemes, Lemma 36.27.1 (Tag 08EV), hypothesis (3), using Definition 20.48.1 (Tag 08CG)"
+ },
+ "stmt_deps": [
+  "def-pc-derived-category"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "LeanSearch",
+   "query": "finite Tor dimension over inverse-image ring sheaf",
+   "results": "unavailable",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "Loogle",
+   "query": "SheafOfModules.restrictScalars, derived tensor cohomology",
+   "results": "0 hits; unknown identifier DerivedCategory.torAmplitudeIn",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "finiteTorDim|HasFiniteTorDim|torAmplitude in Mathlib/AlgebraicGeometry and project",
+   "results": "0 hits for finiteTorDim/HasFiniteTorDim; project has only unrelated etale torAmplitude",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-pc-proper-direct-image-finite-tor",
+  "date": "2026-10-11",
+  "group": "E1"
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteTorDimensionOver",
+  "declaration": "AlgebraicGeometry.Scheme.HasFiniteTorDimensionOver",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteTorDimensionOver.lean",
+  "statement": "def HasFiniteTorDimensionOver {X S : Scheme.{u₀}} (f : X ⟶ S) [HasDerivedCategory.{w₀} (SheafOfModules.{u₀} (moduleRings X.toRingedSpace))] (E : schemeDerivedCategory X) : Prop",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-pft"
+ },
+ "status": "split",
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-pft",
+  "group": "E1",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-pft",
+  "group": "E1",
+  "result": "fix",
+  "note": "S Noetherian, f lft, bounded (a<=b), coherent H^i, H^i support proper over S, finite Tor over f^{-1}O_S (new def, genuinely new: no landed ringed-space/derived tensor over f^{-1}O_S; upstream finiteTorAmplitude needs a derived monoidal structure absent here), conclusion Scheme.HasFiniteTorDimension of schemeDerivedDirectImage f; def rewritten without let/letI and without HasDerivedCategory.standard (K-flat resolution as a quasi-iso P -> K|_{f^{-1}O_S}, tensor instance passed explicitly)"
+ }
+}
