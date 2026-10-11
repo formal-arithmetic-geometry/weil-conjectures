@@ -154,5 +154,27 @@
   "group": "C1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-cfs2806 (reviewer sub-agent of L); spot-checked: Read packet whole. Proof follows Stacks 09Z6 parenthetical partition alternative, not the ACC sentence, so no Noetherian-object/ACC node is needed (and DCC on kernels fails, as the module citer notes). Step 1 strata statement gives finite irreducible locally closed partition with finite locally constant stalks; Step 2 uses the stalk hypothesis exactly at the generic geometric points, finite choice; Step 3 lisse-generic-kernel hypotheses (S irreducible, F|S locally constant, G arbitrary, injective at generic geometric stalk) met on each S_i; Step 4 exactness + conservativity give K=0 (K->0 direction correct). No finiteness on G used. Citers (constructible-finite-pushforward-noetherian Step 6, module-finite-pushforward-noetherian finitely-many-points step, fin-finite-type-pushforward-embedding) use exactly this statement with stalk-injective families. No faults; the second reading missed none."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ConstructibleFiniteSelection",
+  "declaration": "AlgebraicGeometry.Scheme.exists_mono_biproduct_of_constructible_stalk_detection",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.exists_mono_biproduct_of_constructible_stalk_detection",
+   "AlgebraicGeometry.Scheme.exists_mono_biproduct_of_constructible_stalk_injective"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ConstructibleFiniteSelection.lean",
+  "statement": "theorem exists_mono_biproduct_of_constructible_stalk_detection (X : Scheme.{u}) [IsNoetherian X] (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (hF : IsConstructibleEtaleSheafOfSets ((sheafCompose X.smallEtaleTopology (CategoryTheory.forget AddCommGrpCat.{u + 1})).obj F)) (L : Type w) (G : L → Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (φ : ∀ l : L, F ⟶ G l) (hφ : ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ X) (v : (((pointSmallEtale s).sheafFiber (A := AddCommGrpCat.{u + 1})).obj F)), v ≠ 0 → ∃ l : L, (((pointSmallEtale s).sheafFiber (A := AddCommGrpCat.{u + 1})).map (φ l)) v ≠ 0) : ∃ L₀ : Finset L, Mono (biproduct.lift (fun l : L₀ => φ l.val))",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-cnf1538",
+  "group": "G1",
+  "result": "pass",
+  "note": "X Scheme.{u} [IsNoetherian X]; F abelian etale sheaf, constructible = dep's IsConstructibleEtaleSheafOfSets of underlying set sheaf (dep defines constructibility only for set sheaves; IsConstructibleEtaleModuleSheaf needs finite Λ, not applicable); L : Type w arbitrary, G arbitrary, φ; geometric points Ω : Type u alg closed as in dep; ∀ nonzero v in sheafFiber stalk ∃ l with (φ l)_s v ≠ 0 (l depends on s,v); ∃ L₀ : Finset L, Mono biproduct.lift; in-particular corollary ∀ s ∃ l Injective; edge cases empty L/L₀, zero F"
  }
 }
