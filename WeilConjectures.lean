@@ -16,6 +16,7 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.MonoidalFree
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.RestrictScalars
 public import WeilConjectures.Algebra.Central.ReducedNorm
 public import WeilConjectures.Algebra.Homology.BifunctorLinear
+public import WeilConjectures.Algebra.Homology.DerivedCategory.SingleHomology
 public import WeilConjectures.Algebra.Homology.HomotopyCategory.Braided
 public import WeilConjectures.Algebra.Homology.HomotopyCategory.DerivabilityStructure
 public import WeilConjectures.Algebra.Homology.HomotopyCategory.InternalHom
@@ -73,6 +74,7 @@ public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Sections
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Semicontinuity
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DualityPairing
 public import WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar
+public import WeilConjectures.AlgebraicGeometry.Cohomology.EulerCharProper
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Exact
 public import WeilConjectures.AlgebraicGeometry.Cohomology.FibreVanishing
 public import WeilConjectures.AlgebraicGeometry.Cohomology.FlatOver
@@ -80,6 +82,7 @@ public import WeilConjectures.AlgebraicGeometry.Cohomology.InjectiveFlasque
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Kunneth
 public import WeilConjectures.AlgebraicGeometry.Cohomology.LongExact
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Projective
+public import WeilConjectures.AlgebraicGeometry.Cohomology.ProjectiveFinite
 public import WeilConjectures.AlgebraicGeometry.Cohomology.ProjectiveLine
 public import WeilConjectures.AlgebraicGeometry.Cohomology.PushforwardZero
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Restriction
@@ -164,6 +167,7 @@ public import WeilConjectures.AlgebraicGeometry.GeometricFrobenius
 public import WeilConjectures.AlgebraicGeometry.GeometricFrobenius.Points
 public import WeilConjectures.AlgebraicGeometry.GeometricallyConnected
 public import WeilConjectures.AlgebraicGeometry.GlobalSectionsBijective
+public import WeilConjectures.AlgebraicGeometry.GlobalSectionsProper
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.AmpleFamily
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.AmpleFamilySmooth
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.Basic

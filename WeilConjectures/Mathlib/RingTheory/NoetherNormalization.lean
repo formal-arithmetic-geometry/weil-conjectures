@@ -38,8 +38,8 @@ extension preserves the Krull dimension, `s` is the dimension of the algebra.
   fibre to a principal open of the base.
 - `ringKrullDim_tensorProduct_eq_of_finite_inj_algHom_mvPolynomial`: the generic fibre of a
   Noether normalization over a domain has the expected dimension.
-- `ringKrullDim_tensorProduct_le_of_finiteType`: base change of a finitely generated algebra over
-  a field to a field extension does not increase the Krull dimension.
+- `ringKrullDim_tensorProduct_of_finiteType`: base change of a finitely generated algebra over
+  a field to a field extension preserves the Krull dimension.
 - `ringKrullDim_eq_of_isLocalization_away`: localizing a finitely generated domain over a field
   away from a nonzero element preserves the Krull dimension.
 
@@ -50,6 +50,7 @@ extension preserves the Krull dimension, `s` is the dimension of the algebra.
 - `lem-zl-noether-normalization-dimension`: `ringKrullDim_eq_of_finite_inj_algHom_mvPolynomial`.
 - `sk-i-geometry`: dimension drop.
 - `lem-zl-spread-normalization`: `Algebra.FiniteType.exists_finite_aeval_away`.
+- `lem-pc-dim-base-change`: `ringKrullDim_tensorProduct_of_finiteType`.
 -/
 
 @[expose] public section
@@ -406,12 +407,15 @@ theorem ringKrullDim_eq_of_isLocalization_away {K : Type*} {A B : Type u} [Field
   rw [trdeg_eq_zero (R := A) (A := B), add_zero, hA, hB] at h
   rw [hn, hm, Nat.cast_inj.1 h.symm]
 
-/-- Base change of a finitely generated algebra `A` over a field `k` to a field `K` over `k`
-does not increase the Krull dimension: a Noether normalization `k[T₁, …, Tₙ] → A` base changes
-to an integral map `K[T₁, …, Tₙ] → A ⊗[k] K`. -/
-theorem ringKrullDim_tensorProduct_le_of_finiteType (k A K : Type*) [Field k] [CommRing A]
+/-- **Base change along a field extension preserves dimension.** For a finitely generated
+algebra `A` over a field `k` and a field `K` over `k`, `dim (A ⊗[k] K) = dim A`: a Noether
+normalization `k[T₁, …, Tₙ] → A` base changes to an injective (as `K` is flat over `k`) integral
+map `K[T₁, …, Tₙ] → A ⊗[k] K`, so both rings have dimension `n`.
+
+(blueprint: `lem-pc-dim-base-change`) -/
+theorem ringKrullDim_tensorProduct_of_finiteType (k A K : Type*) [Field k] [CommRing A]
     [Algebra k A] [Algebra.FiniteType k A] [Field K] [Algebra k K] :
-    ringKrullDim (A ⊗[k] K) ≤ ringKrullDim A := by
+    ringKrullDim (A ⊗[k] K) = ringKrullDim A := by
   cases subsingleton_or_nontrivial A with
   | inl hA =>
     have : Subsingleton (A ⊗[k] K) := by
@@ -422,8 +426,12 @@ theorem ringKrullDim_tensorProduct_le_of_finiteType (k A K : Type*) [Field k] [C
     obtain ⟨n, g, hg, hfin⟩ := exists_finite_inj_algHom_of_fg k A
     rw [ringKrullDim_eq_of_finite_inj_algHom_mvPolynomial g hg hfin]
     let φ := Algebra.TensorProduct.map g (AlgHom.id k K)
+    have hφ : Function.Injective φ :=
+      Module.Flat.rTensor_preserves_injective_linearMap (M := K) g.toLinearMap hg
     algebraize [g.toRingHom, φ.toRingHom]
     have : Module.Finite (MvPolynomial (Fin n) k) A := hfin
+    have : FaithfulSMul (MvPolynomial (Fin n) k ⊗[k] K) (A ⊗[k] K) :=
+      (faithfulSMul_iff_algebraMap_injective _ _).mpr hφ
     have : Algebra.IsIntegral (MvPolynomial (Fin n) k ⊗[k] K) (A ⊗[k] K) := by
       refine ⟨fun z ↦ z.induction_on isIntegral_zero (fun a x ↦ ?_) fun _ _ ↦ .add⟩
       have ha : IsIntegral (MvPolynomial (Fin n) k ⊗[k] K) (a ⊗ₜ[k] (1 : K)) :=
@@ -435,9 +443,17 @@ theorem ringKrullDim_tensorProduct_le_of_finiteType (k A K : Type*) [Field k] [C
         simp [φ, RingHom.algebraMap_toAlgebra]
       rw [hx]
       exact ha.mul isIntegral_algebraMap
-    refine (ringKrullDim_le_of_isIntegral (MvPolynomial (Fin n) k ⊗[k] K) _).trans_eq ?_
-    rw [ringKrullDim_eq_of_ringEquiv ((Algebra.TensorProduct.comm k _ K).toRingEquiv.trans
-      (MvPolynomial.algebraTensorAlgEquiv k K).toRingEquiv),
+    rw [ringKrullDim_eq_of_isIntegral (MvPolynomial (Fin n) k ⊗[k] K) (A ⊗[k] K),
+      ringKrullDim_eq_of_ringEquiv ((Algebra.TensorProduct.comm k _ K).toRingEquiv.trans
+        (MvPolynomial.algebraTensorAlgEquiv k K).toRingEquiv),
       MvPolynomial.ringKrullDim_of_isNoetherianRing,
       ringKrullDim_eq_zero_of_isField (Field.toIsField K)]
     simp
+
+/-- Base change of a finitely generated algebra `A` over a field `k` to a field `K` over `k`
+does not increase the Krull dimension (see `ringKrullDim_tensorProduct_of_finiteType` for the
+equality). -/
+theorem ringKrullDim_tensorProduct_le_of_finiteType (k A K : Type*) [Field k] [CommRing A]
+    [Algebra k A] [Algebra.FiniteType k A] [Field K] [Algebra k K] :
+    ringKrullDim (A ⊗[k] K) ≤ ringKrullDim A :=
+  (ringKrullDim_tensorProduct_of_finiteType k A K).le

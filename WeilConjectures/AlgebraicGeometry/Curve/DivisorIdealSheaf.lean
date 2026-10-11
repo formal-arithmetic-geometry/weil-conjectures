@@ -849,7 +849,12 @@ include f in
 /-- **Every effective Cartier divisor on a smooth curve is a sum of closed points.** An
 invertible ideal sheaf `I` on a smooth integral curve is the ideal sheaf `𝒪_C(-E)` of the
 effective divisor `E = ∑_P ord_P(I) [P]`: near every point, local generators of `I` and of
-`𝒪_C(-E)` have the same orders everywhere, so they differ by a unit. -/
+`𝒪_C(-E)` have the same orders everywhere, so they differ by a unit. Here
+`𝒪_C(-E) = ∏_P 𝓘_P^{n_P}` has order `n_P` at the closed point `P`
+(`AlgebraicGeometry.Scheme.Divisor.ordAt_idealSheaf`), i.e. its stalk at `P` is `(t_P^{n_P})`
+for a uniformizer `t_P` of the discrete valuation ring `𝒪_{C,P}`, and order `0` elsewhere.
+
+(blueprint: `lem-sc-cartier-divisor-points`) -/
 theorem IdealSheafData.IsInvertible.exists_eq_idealSheaf {I : C.IdealSheafData}
     (hI : I.IsInvertible) : ∃ E : closedPoints C →₀ ℕ, I = Divisor.idealSheaf E := by
   have hfin : {P : closedPoints C | (I.ordAt P.1).toNat ≠ 0}.Finite :=

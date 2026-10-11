@@ -24,6 +24,8 @@ hence for `f : X ⟶ Y` locally of finite type and a point `Spec K ⟶ Y` with v
 
 - `AlgebraicGeometry.topologicalKrullDim_pullback_le_of_field`: base change of a scheme locally
   of finite type over a field `k` to a field extension of `k` does not increase the dimension.
+- `AlgebraicGeometry.topologicalKrullDim_pullback_eq_of_field`: base change of a scheme locally
+  of finite type over a field `k` to a field extension of `k` preserves the dimension.
 - `AlgebraicGeometry.topologicalKrullDim_pullback_le`: `dim (X ×_Y Spec K) ≤ dim X` for
   `X ⟶ Y` locally of finite type.
 -/
@@ -75,6 +77,47 @@ theorem topologicalKrullDim_pullback_le_of_field {Z : Scheme.{u}} {k K : Type u}
           (pullbackRightPullbackFstIso p q (𝒰.f i)).hom.homeomorph.isHomeomorph
         _ ≤ topologicalKrullDim (𝒰.X i) := topologicalKrullDim_pullback_le_of_field_of_spec _ q
         _ ≤ topologicalKrullDim Z := (𝒰.f i).isOpenEmbedding.isInducing.topologicalKrullDim_le
+
+/-- The affine case of `topologicalKrullDim_pullback_eq_of_field`: for `Spec A` of finite type
+over a field `k` and a field `K` over `k`, `Spec (A ⊗[k] K)` has the same dimension as `A`. -/
+theorem topologicalKrullDim_pullback_eq_of_field_of_spec {k K : Type u} [Field k] [Field K]
+    {A : CommRingCat.{u}} (p : Spec A ⟶ Spec (.of k)) [LocallyOfFiniteType p]
+    (q : Spec (.of K) ⟶ Spec (.of k)) :
+    topologicalKrullDim (pullback p q : Scheme.{u}) = topologicalKrullDim (Spec A) := by
+  obtain ⟨φ, rfl⟩ := Spec.map_surjective p
+  obtain ⟨ψ, rfl⟩ := Spec.map_surjective q
+  have hφ : φ.hom.FiniteType := HasRingHomProperty.Spec_iff.mp ‹_›
+  algebraize [φ.hom, ψ.hom]
+  calc topologicalKrullDim (pullback (Spec.map φ) (Spec.map ψ) : Scheme.{u})
+      _ = topologicalKrullDim (Spec (.of (A ⊗[k] K))) :=
+        IsHomeomorph.topologicalKrullDim_eq _ (pullbackSpecIso k A K).hom.homeomorph.isHomeomorph
+      _ = ringKrullDim (A ⊗[k] K) := PrimeSpectrum.topologicalKrullDim_eq_ringKrullDim _
+      _ = ringKrullDim A := ringKrullDim_tensorProduct_of_finiteType k A K
+      _ = topologicalKrullDim (Spec A) := (PrimeSpectrum.topologicalKrullDim_eq_ringKrullDim _).symm
+
+/-- **Base change to a field extension preserves dimension.** For a scheme `Z` locally of finite
+type over a field `k` and a field `K` over `k`, `dim (Z ×_k K) = dim Z`; for instance the base
+change `X_K` of a curve `X` over `k` has dimension `1`. On an affine open `Spec A` of `Z` this is
+`dim (A ⊗[k] K) = dim A` (`ringKrullDim_tensorProduct_of_finiteType`).
+
+(blueprint: `lem-pc-dim-base-change`) -/
+theorem topologicalKrullDim_pullback_eq_of_field {Z : Scheme.{u}} {k K : Type u} [Field k]
+    [Field K] (p : Z ⟶ Spec (.of k)) [LocallyOfFiniteType p] (q : Spec (.of K) ⟶ Spec (.of k)) :
+    topologicalKrullDim (pullback p q : Scheme.{u}) = topologicalKrullDim Z := by
+  refine le_antisymm (topologicalKrullDim_pullback_le_of_field p q) ?_
+  let 𝒰 := Z.affineCover
+  refine topologicalKrullDim_le_of_iSup_eq_top (fun i ↦ (𝒰.f i).opensRange)
+    𝒰.iSup_opensRange _ fun i ↦ ?_
+  calc topologicalKrullDim (𝒰.f i).opensRange
+      _ = topologicalKrullDim (𝒰.X i) :=
+        (𝒰.f i).isOpenEmbedding.isEmbedding.topologicalKrullDim_eq_range.symm
+      _ = topologicalKrullDim (pullback (𝒰.f i ≫ p) q : Scheme) :=
+        (topologicalKrullDim_pullback_eq_of_field_of_spec _ q).symm
+      _ = topologicalKrullDim (pullback (𝒰.f i) (pullback.fst p q) : Scheme) :=
+        IsHomeomorph.topologicalKrullDim_eq _
+          (pullbackRightPullbackFstIso p q (𝒰.f i)).inv.homeomorph.isHomeomorph
+      _ ≤ topologicalKrullDim (pullback p q : Scheme) :=
+        (pullback.snd (𝒰.f i) (pullback.fst p q)).isOpenEmbedding.isInducing.topologicalKrullDim_le
 
 /-- **Fibres over field-valued points have dimension at most that of the source.** For
 `f : X ⟶ Y` locally of finite type and `s : Spec K ⟶ Y` with `K` a field,
