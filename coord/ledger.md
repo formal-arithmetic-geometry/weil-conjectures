@@ -4820,3 +4820,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 13:52 L: merged deliver/E1/lem-weil-pbc-quasi-finite-at-finite-subalgebra-away (stage 2; reviewer PASS; first push; Sheaf.RingTheory.QuasiFiniteAtFiniteSubalgebraAway Algebra.exists_finite_subalgebra_away_of_isQuasiFiniteAtPrime)
 - 13:53 L: merged deliver/G1/lem-weil-pbc-regular-local-finite-gl-dim (stage 2; reviewer PASS; first push; Sheaf.RingTheory.RegularLocalFiniteGlobalDimension IsRegularLocalRing.hasGlobalDimensionLE_of_ringKrullDim_eq)
 - 13:53 L: merged deliver/M1/lem-weil-pbc-regular-local-maximal (stage 2; reviewer PASS; first push; Sheaf.RingTheory.RegularLocalMaximal RingHom.isRegular_iff_localRingHom_prime_and_maximal)
+- 13:54 L: merged deliver/H1/lem-pc-derived-qcoh-perfect-generation (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.DerivedQCohPerfectGeneration AlgebraicGeometry.derivedQCohPerfectGeneration; new nodes: def-pc-perfect-localizing-closure)

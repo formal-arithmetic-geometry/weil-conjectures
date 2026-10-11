@@ -1,36 +1,122 @@
-Files written:
-- `dag/nodes/sec-picard-framework/lem-pc-derived-qcoh-perfect-generation.json` (statement, split)
-- `dag/nodes/sec-picard-framework/lem-pc-perfect-generation-affine-base.json` (statement-only, Mathlib no match)
-- `dag/nodes/sec-picard-framework/lem-pc-perfect-generation-open-induction-step.json` (statement-only, Mathlib no match)
-- `dag/nodes/sec-picard-framework/lem-pc-perfect-generation-qcqs-induction-principle.json` (statement-only, Mathlib no match)
+## Worker report
 
-Attachments: none. No `WANTED` entry: the Stacks source text was available in `/home/ubuntu/c1-stacks-review/perfect.tex`.
+The module `Sheaf.AlgebraicGeometry.DerivedQCohPerfectGeneration` states the theorem that the perfect localizing closure of the quasi-coherent derived category is the whole category for a quasi-compact and quasi-separated scheme. Its hypotheses are rendered by `[CompactSpace X]` and `[QuasiSeparatedSpace X]`, together with the derived-category instances required by the dependency definitions. Its conclusion is the equality `perfectLocalizingClosure X = (⊤ : ObjectProperty (schemeDerivedQCohCategory X))`.
 
-The project source was searched for the blueprint tag and relevant declarations; no sorry-free Lean declaration states this item. The source theorem is `theorem-bondal-van-den-Bergh` in `perfect.tex`. Its affine case is represented by the affine-base child. Its induction step constructs an extension of the generator and a Koszul complex on the affine complement; this is represented by the open-induction child. The final invocation of the Cohomology of Schemes induction principle is represented by the qcqs induction-principle child. Each item proof step cites the exact child statement quoted in `citations.json`, and all hypotheses (quasi-compactness, quasi-separatedness, affine open, and quasi-coherent derived category) are carried in the statements.
+The new module `Sheaf.AlgebraicGeometry.PerfectLocalizingClosure` defines the smallest object property containing every perfect quasi-coherent object. The first conjunct is containment of `Scheme.perfectSubcategory X E.obj`; the second is strict fullness via isomorphism closure; the third is closure under integer shifts, expressed using an isomorphic quasi-coherent representative; the fourth is closure under cones through distinguished triangles in the ambient derived category; the fifth is closure under retracts; and the sixth is closure under arbitrary set-indexed coproducts, expressed by an arbitrary coproduct cocone and a quasi-coherent representative. The `sInf` over all such properties is the smallest one. Empty index sets and singleton families are included by the arbitrary coproduct cocone clause; zero/retract edge cases are included by the retract and triangle clauses.
 
-## Review by H1
+The dependency declarations used are `AlgebraicGeometry.Scheme` from `Mathlib.AlgebraicGeometry.Scheme` for schemes, `AlgebraicGeometry.schemeDerivedCategory` and `AlgebraicGeometry.schemeDerivedQCohCategory` from `Sheaf.AlgebraicGeometry.DerivedCategory`, and `AlgebraicGeometry.Scheme.perfectSubcategory` from `Sheaf.AlgebraicGeometry.PerfectComplex`. Their recorded declarations were imported directly.
 
-I read the full Stacks proof of `theorem-bondal-van-den-Bergh`, including the affine base case, the construction over an affine-open cover, and the appeal to `coherent-lemma-induction-principle`. I checked that the item statement matches the localizing formulation imported in the DAG, while the source theorem gives the stronger single-perfect-generator conclusion. The three child statements are strictly smaller: affine generation, one affine-open induction step, and the abstract qcqs induction principle. I checked every item step against the corresponding child statement and copied each citation verbatim into `citations.json`. The node's imported `unit` metadata says Serre duality, which does not match this item's perfect-generation statement; I preserved the item's source and documented this metadata inconsistency rather than changing the mathematical statement. Mathlib searches were run for the item and each child with LeanFinder, Loogle, and grep; no scheme-level theorem matched.
+Searches run: `msearch.py ... leanfinder "smallest strictly full subcategory closed under shifts cones retracts arbitrary coproducts"` returned generic `CategoryTheory.Triangulated.Subcategory`/`ObjectProperty` declarations but no scheme-level closure; `msearch.py ... loogle "ObjectProperty sInf triangulated closure coproduct"` returned zero hits (unknown `ObjectProperty`); `msearch.py ... grep "localizingClosure|perfectLocalizingClosure" Mathlib/CategoryTheory` returned zero hits. `rg` over `WeilConjectures` and project `lean/Sheaf` found no existing declaration of this notion. The two modules compile together with `scompile.py` without errors or warnings.
 
-What could not be completed: the delivery dry run still needs to be run from the sandbox and any mechanical issues repaired.
+## New nodes
+
+- `def-pc-perfect-localizing-closure`: the missing notion of the smallest strictly full subcategory generated by perfect complexes under shifts, cones, retracts, and arbitrary set-indexed direct sums. It is implemented in `lean/Sheaf/AlgebraicGeometry/PerfectLocalizingClosure.lean` and is added to the item's `stmt_deps`.
+
+## Dependency modules
+
+None; all three original dependency records were usable as recorded.
+
+## Earlier second reading (a previous round; superseded)
+
+I reread the item and new definition against their source statements. The item keeps the qcqs hypotheses and states equality with the top object property, which is the Lean rendering of “the smallest ... subcategory is all of” the quasi-coherent derived category. The new definition introduces every object and closure clause: strict fullness by isomorphisms, shifts by an ambient shift with a quasi-coherent representative, cones by distinguished ambient triangles, retracts by `Retract`, and arbitrary direct sums by a universal coproduct cocone. The recorded dependency declarations and source locations were checked against their node files. Empty and singleton coproduct families remain included by the universal cocone formulation. No statement correction was needed.
 
 ## Second reading by H1
 
-- Item statement: checked against Stacks Tag 09IS (`perfect.tex`, theorem-bondal-van-den-Bergh), including qcqs hypotheses and the generator formulation; verdict: the imported localizing-category formulation is weaker than the source's single-generator formulation but is the stated DAG target and is implied by it.
-- Step 1: checked against Tag 06Z0 and the affine paragraph of Tag 09IS; the cited affine node supplies the affine derived equivalence and the vanishing criterion; verdict: valid after source-tag correction.
-- Step 2: checked against the induction paragraph of Tag 09IS and its cited Tags 09IQ and 09IR; the extension, Koszul support, and orthogonality ingredients match the stated hypotheses; verdict: valid after making Q, K', and the closed support explicit.
-- Step 3: checked against Cohomology of Schemes Tag 08DR; the affine base and affine-open gluing hypotheses are the required induction inputs; verdict: valid after correcting the source document and tag.
-- New node `lem-pc-perfect-generation-affine-base`: checked for B1--B7, including affine scheme, derived category, perfect object, and generator definitions; tested on a field and the zero ring; verdict: statement-only and properly smaller than the item.
-- New node `lem-pc-perfect-generation-open-induction-step`: checked for B1--B7 and against Tags 09IS, 09IQ, and 09IR; tested on an affine scheme with U=X and on the empty complement; verdict: repaired to state the actual extension and Koszul construction rather than an undefined phrase.
-- New node `lem-pc-perfect-generation-qcqs-induction-principle`: checked for B1--B7 against Tag 08DR; tested on affine X and X empty; verdict: statement-only induction principle with self-contained P and qcqs hypotheses.
+I independently opened the item, its new definition node, both modules, and the recorded
+scheme, derived-category and perfect-complex dependency nodes and declarations. Verdict:
+the repaired Lean states the node exactly; the original closure definition did not.
 
-## Duplicate repairs
+Objects, hypotheses and conclusion, matched clause by clause:
 
-## Not duplicates
+- Scheme X: `(X : Scheme.{u1})`, Mathlib `AlgebraicGeometry.Scheme`, whose
+  `local_affine` field supplies locally affine locally ringed spaces. Correct, with no
+  base field, characteristic, Noetherian, separated or finiteness assumption added.
+- Quasi-compact: `[CompactSpace X]`. Correct (compactness here does not require Hausdorff).
+- Quasi-separated: `[QuasiSeparatedSpace X]`. Correct, not the stronger separated condition.
+- D(O_X): `schemeDerivedCategory X`, the shared `DerivedCategory` of
+  `SheafOfModules.{u} (moduleRings X.toRingedSpace)`. D_QCoh(O_X):
+  `schemeDerivedQCohCategory X`, its full subcategory defined by quasi-coherence of
+  every integer cohomology sheaf. I read both definitions in DerivedCategory.lean;
+  these are the exact recorded dependencies, not a derived category of QCoh sheaves.
+- Perfect objects: `Scheme.perfectSubcategory X E.obj`, defined through
+  `Scheme.IsPerfect`, local derived restriction by `overFunctor.mapDerivedCategory`
+  to a bounded complex whose terms are summands of finite free modules. I read
+  IsStrictlyPerfect, IsPerfect and perfectSubcategory in PerfectComplex.lean.
+  Global and per-open `HasDerivedCategory.{w1}` binders are the required shared
+  localization structures, without a second abelian instance or mathematical restriction.
+- Contains every perfect object: now `∀ E, Scheme.perfectSubcategory X E.obj → P E`.
+  The original clause was merely `∀ E, Scheme.perfectSubcategory X E.obj`, independent
+  of P. It wrongly asserted that every quasi-coherent complex was perfect. Repaired.
+- Strictly full: `∀ A B, P A → Nonempty (A ≅ B) → P B`; full subcategories
+  are represented by ObjectProperty, so this supplies the remaining iso closure. Correct.
+- Shifts: every `n : ℤ`, with `Nonempty (B.obj ≅ A.obj⟦n⟧) → P B`.
+  Correct: quasi-coherent representatives are used in the ambient derived category.
+- Cones: arbitrary ambient distinguished triangle with first and second objects
+  isomorphic to objects in P, and third object isomorphic to C, implies P C.
+  Correct; no morphism is fixed or omitted, and shift closure also covers rotated triangles.
+- Retracts: `P B → Nonempty (Retract A.obj B.obj) → P A`. I checked Mathlib
+  Retract's direction (`i : A ⟶ B`, `r : B ⟶ A`, `i ≫ r = 𝟙 A`). Correct.
+  Fullness makes ambient and subcategory retractions equivalent.
+- Arbitrary set-indexed sums: `∀ J : Type u, E : J → schemeDerivedQCohCategory X`,
+  an arbitrary ambient coproduct cocone `IsColimit (Cofan.mk S ι)` and iso
+  `B.obj ≅ S`, with all E j in P, imply P B. Correct relative to the shared
+  module universe; this is the same index universe as derivedQCohDirectSums.
+  It imposes neither finite nor nonempty indexing. The ambient coproduct agrees
+  with the full subcategory coproduct because its cohomology stays quasi-coherent.
+- Smallest subcategory: `sInf` of these object predicates, the pointwise intersection
+  (ObjectProperty is `C → Prop`). All clauses survive intersections and top qualifies
+  after the containment repair. Correct.
+- All of D_QCoh: `perfectLocalizingClosure X = (⊤ : ObjectProperty
+  (schemeDerivedQCohCategory X))`. Correct, every object, rather than just a
+  zero-detection or compactness assertion; quantifiers are in the right order.
 
-- `lem-pc-perfect-generation-affine-base` vs `lem-pc-affine-qcoh-derived-equivalence`: both use Tag 06Z0, but the former is the generator vanishing criterion (using that A generates D(A)), while the latter only states the affine derived equivalence and shift identification; the former is retained for the theorem's generator step.
-- `lem-pc-perfect-generation-qcqs-induction-principle` vs `lem-sc-invert-s-cohomology-induction`: both use Tag 08DR, but the former states the theorem-specific property on all qcqs schemes with the single affine-open implication, while the latter is the broader induction on quasi-compact opens requiring separate hypotheses for the overlap; the former is retained as the theorem's exact induction input.
-- `lem-pc-perfect-generation-qcqs-induction-principle` vs `lem-sc-invert-s-cohomology-separated-induction`: the new node handles arbitrary qcqs schemes and the theorem's gluing implication, whereas the existing node handles only separated quasi-compact opens as the first subinduction; neither is a special case of the other.
-- `lem-pc-perfect-generation-qcqs-induction-principle` vs `lem-kun-0f10`: the new node packages the Bondal--van den Bergh property and its affine-open premise, whereas `lem-kun-0f10` is a distinct topological induction lemma with different overlap premises; neither states the other's conclusion.
+Source reading: this checkout lacks its regenerated Stacks literature. I read the locally
+available Stacks perfect.tex at /home/ubuntu/c1-stacks-review/perfect.tex,
+Theorem theorem-bondal-van-den-Bergh (09IS), including its affine base and
+quasi-compact-open/affine-open induction proof, and derived.tex in that same directory,
+Lemma lemma-write-as-colimit (09SN), including its compact-generator tower proof.
+09IS assumes exactly qcqs and first gives zero detection by one perfect generator;
+09SN gives precisely the localizing conclusion, as the node's fourth proof step says.
+There is no additional ring, field or characteristic hypothesis in these sources.
 
-Changes made: corrected all Stacks sources to stable tags (`09IS`, `06Z0`, `08DR`); fixed the item's `created.item` ownership metadata; and made the open induction node's objects and support explicit. The imported unit metadata still names Serre duality, which is unrelated to this item, so it was left unchanged as maintainer-owned metadata.
+Edge cases: the empty index type is included, forcing the zero object through its
+empty coproduct; singleton families and all finite and infinite u-small families are
+included. Zero is perfect, shifts allow n = 0 and every negative integer, and the
+pointwise definition of perfectness covers the empty scheme without a Nonempty binder.
+There are no characteristic parameters. Scheme/module universe u and localization
+universe w remain explicit and independently bound, with the same per-open structures
+as the dependency; u-small sums match the available module category size. No proof or
+hollow definition was introduced: the only theorem remains `by sorry`.
+
+Independent searches, using different words from the first worker:
+LeanFinder via msearch.py, “triangulated category generated by perfect objects using
+coproducts”, returned generic orthogonal/triangulated-subcategory declarations only.
+Loogle via msearch.py, `ObjectProperty.IsTriangulated`, gave zero hits (unknown
+identifier). LeanSearch, “localizing subcategory generated by perfect complexes”,
+was unavailable (Internal Server Error), recorded without an inferred negative verdict.
+The grep service query `perfect.*[Gg]enerat|[Gg]enerat.*perfect` in
+Mathlib/AlgebraicGeometry returned zero hits. Direct rg for localizing/localising,
+perfect generation and generated perfect objects in Mathlib/CategoryTheory,
+WeilConjectures and project lean/Sheaf found only generic Verdier-localizing notions,
+ring-perfect-complex material and unrelated localization declarations. I opened
+Mathlib ObjectProperty.Retract: retractClosure supplies only one closure operation,
+not this closure. No exact statement or definition is already present.
+DAG rg and `tools/blueprint_refs.py search 'localizing closure'` found no definition
+node for the new notion; the other generation nodes are theorems, not definitions.
+
+New-node reading: def-pc-perfect-localizing-closure is the actual intersection closure
+used in the source's 09IS/09SN implication; all its cited definitions are recorded
+above. I changed its introductory “qcqs scheme” to “scheme” to match the general
+Lean definition: the closure can be defined on any scheme, while the item's theorem
+retains qcqs. Its chapter, unit, created fields, empty proof fields and none audits
+were checked. The ancestor is lem-sc-finite-duality; the via chain records the route
+through the relative dualizing and diagonal-tensor-formula dependencies. It is not
+an existing DAG definition. No dependency modules or statement correction are needed.
+
+Other repairs: supplied the theorem docstring's missing four proof steps and all node
+proof dependencies; supplied explicit declaration sources and standard copyright
+headers; fixed the new module docstring to name its own blueprint id and moved it
+after imports; removed unused DerivedQCohDirectSums and Triangulated.Subcategory imports.
+The declaration signatures did not change, so both lean.statement records remain
+verbatim identical. The two modules compile together with scompile.py, exit 0,
+without errors or warnings. Every variable and universe was checked as bound.
