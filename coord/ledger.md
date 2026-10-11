@@ -4276,3 +4276,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 10:38 L: merged deliver/K1/lem-weil-pbc-formal-glueing-isogeny (stage 2; reviewer FIX; first push; Sheaf.RingTheory.FormalGlueingIsogeny FormalGlueing.exists_map_to_of_torsion_baseChange)
 - 10:38 L: merged deliver/J1/lem-weil-pbc-fpqc-descend-locally-finite-presentation (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.LocallyOfFinitePresentationFpqcDescent AlgebraicGeometry.locallyOfFinitePresentation_of_fpqc_cover)
 - 10:39 L: merged deliver/E1/lem-weil-pbc-fpqc-descend-separated (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.IsSeparatedOfFlatSurjectiveBaseChange AlgebraicGeometry.isSeparated_of_flat_surjective_baseChange)
+- 10:39 L: merged deliver/K1/lem-weil-pbc-fpqc-descend-affine (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.FpqcAffineDescent AlgebraicGeometry.isAffineHom_of_fpqc_cover)
