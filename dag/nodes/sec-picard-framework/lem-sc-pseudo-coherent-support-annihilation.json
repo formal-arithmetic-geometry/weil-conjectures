@@ -151,5 +151,24 @@
   "group": "K1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-psa2544 (reviewer sub-agent of L); spot-checked: Repaired re-push after the 20:46 return: all four points repaired (false hocolim node and duplicate generator node dropped; Step 2 cites existing lem-sc-supported-derived-generated-perfect and lem-pc-compact-hom-hocolim; 09SP restored as self-contained lem-sc-supported-factor-through-thick and cited in Step 3; sources now 0A6H, 09SN/09SP/094A). Statements of all cited nodes read; 09SP proof read against the new node; rotation of the existing node's cone triangles into the 09SN form checked; n=0 case. FIX more, RETURN less: (1) C4 dag/nodes/sec-picard-framework/lem-sc-supported-factor-through-thick.json: the hypothesis that the coproduct of the E_i is a generator fails in the ambient D_QCoh(Y) where Step 3 applies it (E generates only the T-supported part, and O_Y[0] is not in it); 09SP's proof never uses generation, so the hypothesis and def-pc-generators were dropped from the statement. (2) C1 item Steps 2-3: compactness of O_Y[0] and of E in D_QCoh(Y) now cites existing lem-pc-perfect-object-compact (Tag 09M1). (3) C1 item Steps 3-4: closure of perfect complexes under cones and direct summands was uncited and is not elementary; added statement-only node lem-pc-perfect-thick-closure (Cohomology 08CR, 08CS; leanfinder no match) and cited it. The Second reading by K1 missed all three.; 3 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.PseudoCoherentSupportAnnihilation",
+  "declaration": "AlgebraicGeometry.exists_perfect_annihilator",
+  "file": "lean/Sheaf/AlgebraicGeometry/PseudoCoherentSupportAnnihilation.lean",
+  "statement": "theorem exists_perfect_annihilator (Y : Scheme.{u}) [CompactSpace Y] [QuasiSeparatedSpace Y] (V : Y.Opens) [CompactSpace (V : Set Y)] [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))] [∀ U : Y.Opens, HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings Y.toRingedSpace).over U))] (P Q : schemeDerivedQCohCategory Y) (α : P ⟶ Q) (hcase : Scheme.IsPerfect Y P.obj ∨ Scheme.IsPseudoCoherent Y P.obj ∧ ∃ n : ℤ, ∀ k : ℤ, k < n → IsZero ((DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) k).obj Q.obj)) (hQ : ∀ (k : ℤ) (x : Y), x ∈ V → Subsingleton (↑(TopCat.Presheaf.stalk ((DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) k).obj Q.obj).val.presheaf x))) : ∃ (I : schemeDerivedCategory Y) (i : I ⟶ 𝟙_ (schemeDerivedCategory Y)), Scheme.IsPerfect Y I ∧ IsIso ((SheafOfModules.overFunctor.{u} (moduleRings Y.toRingedSpace) V).mapDerivedCategory.map i) ∧ i ▷ P.obj ≫ (λ_ P.obj).hom ≫ α.hom = 0",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-psa"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-psa",
+  "group": "F1",
+  "result": "fix",
+  "note": "Y qcqs, V qc open, P,Q in D_QCoh (schemeDerivedQCohCategory), case (i)/(ii) disjunction with Q bounded below in (ii), Q supported on Y\\V stalkwise on all H^k, conclusion: perfect I, i : I -> unit of schemeDerivedTensorMonoidal, iso over V, i>P;lambda;alpha = 0; dropped duplicate new node(s) def-sc-derived-tensor-annihilates (--drop-nodes; not merged, the item points at the landed declaration)"
  }
 }
