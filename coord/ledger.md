@@ -4676,3 +4676,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 12:55 L: merged deliver/C1/lem-weil-pbc-power-series-adic-evaluation (stage 2; reviewer PASS; first push; Sheaf.RingTheory.PowerSeriesAdicEvaluation MvPowerSeries.exists_unique_adic_evaluation)
 - 12:56 L: merged deliver/K1/lem-weil-pbc-popescu-desingularize (stage 2; reviewer FIX; first push; Sheaf.RingTheory.PopescuDesingularize Algebra.exists_desingularization)
 - 12:57 L: merged deliver/G1/lem-weil-pbc-popescu-smoothing (stage 2; reviewer FIX; first push; Sheaf.RingTheory.PopescuSmoothing RingHom.popescu_smoothing)
+- 12:57 L: merged deliver/H1/lem-weil-pbc-popescu-delocalize-weak-localization-smooth (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.PopescuDelocalizeWeakLocalizationSmooth Algebra.popescu_delocalize_weak_localization_smooth)

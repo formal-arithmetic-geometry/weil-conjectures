@@ -224,5 +224,23 @@
   "worker": "stage1",
   "summary": "Checked the statement against Stacks 07F9 (smoothing.tex 2189-2225) and the citer lem-weil-pbc-popescu-delocalize-weak (step 'B_b is smooth' uses exactly this statement with c<=n+m, h, s_j, F_j, d_j = total degree); statement kept. Proof in 7 steps: the dehomogenization identity F_j(u,v w,w)=w^{d_j}f_j(u,v) and its inverse form; the algebra C=R[x_0,...,x_{n+m+1},y,z]/(f_1..f_c, x_0x_{n+m+1}y-1, sz-1) (s=s_0...s_t) in which x_0, x_{n+m+1}, s_j, Delta are units and g_j=0 (hypotheses (i),(ii)); C standard smooth (00T6) with Jacobian determinant Delta*x_0x_{n+m+1}*s with respect to (x_1..x_c,y,z), using c<=n+m; explicit mutually inverse R-algebra maps B_b->C (X_{n+i}->x_{n+i}x_{n+m+1}) and C->B_b (x_{n+i}->X_{n+i}/X_{n+m+1}) via the universal properties of polynomial rings, quotients and localization away; conclusion by standard smooth => smooth (00T7 node, Mathlib leaf). No new nodes: all cited nodes are Mathlib leaves. Stacks' ring R_{s}[x_0..x_{n+m+1},1/x_0x_{n+m+1}]/(f) is read with f_j in x_1..x_{n+m} and x_{n+m+1} a free invertible variable."
  },
- "reviewed": "Reviewed by L 2026-10-10: faithful to the proof of Smoothing 07F9 with the implicit isomorphism B_b ≅ C = Q/(f, x_0 x_{n+m+1} y − 1, s z − 1) written out in both directions (dehomogenization identity, steps 1, 4-6) and C shown standard smooth by the Jacobian Δ·x_0x_{n+m+1}·s, a unit by (i) (step 3); smooth by the existing standard-smooth-is-smooth node. No new nodes; no Mathlib match."
+ "reviewed": "Reviewed by L 2026-10-10: faithful to the proof of Smoothing 07F9 with the implicit isomorphism B_b ≅ C = Q/(f, x_0 x_{n+m+1} y − 1, s z − 1) written out in both directions (dehomogenization identity, steps 1, 4-6) and C shown standard smooth by the Jacobian Δ·x_0x_{n+m+1}·s, a unit by (i) (step 3); smooth by the existing standard-smooth-is-smooth node. No new nodes; no Mathlib match.",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.PopescuDelocalizeWeakLocalizationSmooth",
+  "declaration": "Algebra.popescu_delocalize_weak_localization_smooth",
+  "file": "lean/Sheaf/AlgebraicGeometry/PopescuDelocalizeWeakLocalizationSmooth.lean",
+  "statement": "theorem popescu_delocalize_weak_localization_smooth (R : Type u) [CommRing R] (n m c t : ℕ) (hc : c ≤ n + m) (f : Fin c → MvPolynomial (Fin (n + m)) R) (g : Fin t → MvPolynomial (Fin n) R) (s : Fin (t + 1) → R) (h : MvPolynomial (Fin (n + m)) R) (hs : C (s 0) - h * Matrix.det (fun i j : Fin c => pderiv (Fin.castLE hc i) (f j)) ∈ Ideal.span (Set.range f)) (hg : ∀ j : Fin t, C (s j.succ) * rename (Fin.castLE (Nat.le_add_right n m)) (g j) ∈ Ideal.span (Set.range f)) (d : Fin c → ℕ) (hdegree : ∀ j : Fin c, ∀ e ∈ (f j).support, (∑ i : Fin (n + m), if n ≤ i.val then e i else 0) ≤ d j) (F : Fin c → MvPolynomial (Fin (n + m + 2)) R) (hF : ∀ j : Fin c, F j = ∑ e ∈ (f j).support, C ((f j).coeff e) * (∏ i : Fin (n + m), X i.castSucc.succ ^ e i) * X (Fin.last (n + m + 1)) ^ (d j - ∑ i : Fin (n + m), if n ≤ i.val then e i else 0)) : Algebra.Smooth R (Localization.Away (Ideal.Quotient.mk (Ideal.span (Set.range (fun j : Fin t => rename (fun i : Fin n => (Fin.castLE (Nat.le_add_right n m) i).castSucc.succ) (g j)) ∪ Set.range (fun j : Fin c => X (0 : Fin (n + m + 2)) * F j))) (X (0 : Fin (n + m + 2)) * X (Fin.last (n + m + 1)) * C (∏ j : Fin (t + 1), s j))))",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-pdl1300",
+  "group": "H1",
+  "result": "pass",
+  "note": "R:Type u CommRing; n m c t, hc c≤n+m; f,g,s,h; hs (s0 - hΔ ∈ (f), Δ=det pderiv over first c vars via castLE); hg (s_{j}·g_j ∈ (f), g renamed to first n vars); d with hdegree on last-m exponents ⇔ a_{j,e}≠0 bound; F tied by hF = partial homogenization in X_last; B = quotient by g (vars 1..n) and x0·F; b = x0·X_{n+m+1}·∏s incl s0; Localization.Away, Algebra.Smooth, R-algebra via IsScalarTower; #check: C,X,rename,pderiv resolve to MvPolynomial; no let/hollow/universe issues"
+ }
 }
