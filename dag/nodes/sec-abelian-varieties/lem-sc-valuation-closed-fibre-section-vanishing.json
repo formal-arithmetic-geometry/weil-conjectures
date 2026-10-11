@@ -13,7 +13,7 @@
  },
  "kind": "statement",
  "title": "Vanishing on the closed fibre over a valuation ring descends to some A/pi",
- "statement": "Let A be a valuation ring with maximal ideal \\mathfrak m, let f:X\\to\\operatorname{Spec}(A) be of finite presentation [def-weil-scheme-morphism-properties], let X_0 be the closed fibre, let L be an invertible module on X [def-sc-invertible-module], and let s\\in\\Gamma(X,L) with s|_{X_0}=0. Then there is a nonzero \\pi\\in\\mathfrak m such that s restricts to zero on X\\times_{\\operatorname{Spec}(A)}\\operatorname{Spec}(A/\\pi).",
+ "statement": "Let A be a valuation ring with maximal ideal \\mathfrak m, assume A is not a field, let f:X\\to\\operatorname{Spec}(A) be of finite presentation [def-weil-scheme-morphism-properties], let X_0 be the closed fibre, let L be an invertible module on X [def-sc-invertible-module], and let s\\in\\Gamma(X,L) with s|_{X_0}=0. Then there is a nonzero \\pi\\in\\mathfrak m such that s restricts to zero on X\\times_{\\operatorname{Spec}(A)}\\operatorname{Spec}(A/\\pi).",
  "source": {
   "document": "literature/stacks-project/more-on-morphisms.tex",
   "place": "More on Morphisms, Lemma lemma-triviality-generic-fibre-valuation-ring, Tag 0EX8, proof sentence 'kappa = colim A/pi ... see Limits, Lemma limits-lemma-descend-section'"
@@ -22,23 +22,85 @@
   "def-weil-scheme-morphism-properties",
   "def-sc-invertible-module"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Since A is not a field, its maximal ideal m contains a nonzero element. Order the nonzero elements of m by divisibility. Because A is a valuation ring, this is a directed index system, A/m is the filtered colimit of the quotients A/pi, and Spec(A/m) is the inverse limit of the affine schemes Spec(A/pi). Base change of the finitely presented morphism f along these affine maps gives an inverse system X x_Spec(A) Spec(A/pi) with affine transition maps and limit X_0. Choose one nonzero pi_0 in m and set F_{pi_0}=L|_{X x_Spec(A) Spec(A/pi_0)}; its pullbacks to later stages and to X_0 are the corresponding restrictions of L, and s restricts to a compatible system of sections.",
+   "uses": [
+    "def-weil-scheme-morphism-properties",
+    "def-sc-invertible-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-on-morphisms.tex",
+    "place": "More on Morphisms, Lemma 0EX8 proof, paragraph beginning 'Then kappa = A/m = colim A/pi'"
+   }
+  },
+  {
+   "text": "Apply [lem-sc-valuation-limit-qcoh-section-descent] to F_{pi_0} and the section s|_{X x_Spec(A) Spec(A/pi_0)}. Since the pullback of this section to X_0 is s|_{X_0}=0, the eventual-zero clause gives a later stage indexed by a nonzero pi in m for which the restriction of s to X x_Spec(A) Spec(A/pi) is zero, as required.",
+   "uses": [
+    "lem-sc-valuation-limit-qcoh-section-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-on-morphisms.tex",
+    "place": "More on Morphisms, Lemma 0EX8 proof, sentence 'If s|_{X_0} is zero, then for some pi ... Limits, Lemma limits-lemma-descend-section'"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-scheme-morphism-properties",
+  "def-sc-invertible-module",
+  "lem-sc-valuation-limit-qcoh-section-descent"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-on-morphisms.tex",
+  "place": "More on Morphisms, Lemma 0EX8"
+ },
  "mathlib_searches": [
   {
+   "tool": "leanfinder",
+   "query": "a section of an invertible sheaf vanishing on the closed fibre of a valuation ring is zero modulo a nonzero maximal ideal element",
+   "results": "generic structure-sheaf zero and limit-section declarations only",
+   "date": "2026-10-11",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "ValuationSubring, Scheme.Γ, IsLimit",
+   "results": "unknown identifier Scheme.Γ; no relevant declaration",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
    "tool": "grep",
-   "query": "descend.*section|ValuationRing.*colimit in Mathlib/AlgebraicGeometry and Mathlib/RingTheory/Valuation",
-   "results": "no scheme-theoretic limit descent of sections",
+   "query": "valuation ring|closed fibre|descend-section in Mathlib/AlgebraicGeometry",
+   "results": "ValuativeCriterion.lean and ProjectiveSpectrum/Proper.lean mention valuation rings; no section-vanishing theorem",
    "date": "2026-10-11",
    "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-picard-locus-closed-valuation-triviality"
  },
  "chapter": "sec-abelian-varieties",
- "unit": "sk-prop-av-cube"
+ "unit": "sk-prop-av-cube",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-valuation-closed-fibre-section-vanishing",
+  "worker": "stage1",
+  "summary": "Split the Tag 0EX8 closed-fibre vanishing clause into the elementary valuation-ring limit construction and one statement-only quasi-coherent section descent input. The source Lean tree has no declaration for this item.",
+  "blueprint": "Realizes the proof sentence in thm-sc-theorem-of-cube's valuation-ring argument via the item proof's two steps."
+ },
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-cfs0107",
+  "group": "K1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-cfs0107 (reviewer sub-agent of L); spot-checked: Re-push after R-cfs0053: (1) E repaired: statement now assumes A not a field, change named with reason in the report (E7); citer 03198bf1b step 1 does not supply it but the field case is trivial there (lead note). (2) C4 repaired: step 1 takes F_{pi_0}=L|_{X_{pi_0}} itself, pullbacks are restrictions of L. Step 1 elementary: nonzero elements of m totally ordered by divisibility, m = union of pi A, so A/m = colim A/pi, X_0 = lim X_pi with affine transitions, X_pi qcqs as f is of finite presentation (qc, qs) over affine Spec A. New node lem-sc-valuation-limit-qcoh-section-descent = Limits 01Z0 for a qcoh module on a qcqs affine-transition system, hypotheses at least those of Situation descent; not a duplicate (lem-weil-pbc-limit-global-sections-colimit is the structure-sheaf case only; the 01ZR pc nodes are fp-module/complex descent); not elementary. Mathlib: grep QuasiCoherent / IsLimit in Mathlib/AlgebraicGeometry (Modules/ has only Presheaf, Sheaf, Tilde): no match. Second reading by K1 found no new fault but missed the citer hypothesis gap."
+ },
+ "lead_note": "2026-10-11 L (R-cfs0107): Citer lem-sc-picard-locus-closed-valuation-triviality (03198bf1b) step 1 applies this node without supplying its new hypothesis 'A is not a field'; the field case is trivial there (m=0 so X_0=X and s|_{X_0}=s is nonzero as a generator of the rank-one free H^0(X,L)); the lead should prefix step 1 with 'If A is a field, X_0=X and s|_{X_0}=s is nonzero; otherwise' (C4 at the citer, a node outside this delivery)."
 }
