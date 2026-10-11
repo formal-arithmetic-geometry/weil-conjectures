@@ -160,5 +160,26 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-dle2900 (reviewer sub-agent of L); spot-checked: Earlier return points: (1) D2 repaired: clause (3) now = ev_n preserves K-injectives + product K-injective + new chain-level lem-weil-derived-limit-roos-complex (true, not a restatement, no duplicate among lem-pc-tower-* nodes); (2) C1 step 1 cites TR1/TR3/014A; (3) quasiisomorphism node dropped; (4) no backspace. Downstream users (J1/G1/F1/K1/M1, smooth-purity defs) use only clauses (1),(2), unchanged (C4 ok). FIX more, RETURN less: (a) class (b) lem-weil-derived-limit-product-kinjective is the countable case of lem-pc-ringed-space-product-kinjective (stated for any abelian category, also gives the D(A) product); dropped, step 3 cites it, left adjoint lambda_n of ev_n written out; (b) C1 step 2: the 07KC universal property used left fractions without a node and omitted uniqueness; rewrote existence and uniqueness with lem-pc-quasi-isomorphisms-multiplicative-system, lem-pc-left-localization-hom-colimit, def-weil-category-product, elementary false; (c) C1 steps 1/4: TR2 rotation and the cone triangle of D(A) cited (def-weil-triangulated-category, def-weil-abstract-derived-category); stale 'Step 1 gives the asserted isomorphism' sentence removed.; 1 file(s) fixed by the reviewer"
  },
- "lead_note": "2026-10-10 L (R-dle2900): Head 7184740fe is a rebase of 695913e67 with identical delivery files. Roos node statement checked true: from the termwise-exact sequence 0->I->prod_n R_n ev_n I->prod_n R_{n+1} ev_n I->0 of K-injective complexes of towers (R_n right adjoint to exact ev_n), apply lim to the resulting homotopy equivalence; its source note's 'termwise injective replacement' is not needed and not always available."
+ "lead_note": "2026-10-10 L (R-dle2900): Head 7184740fe is a rebase of 695913e67 with identical delivery files. Roos node statement checked true: from the termwise-exact sequence 0->I->prod_n R_n ev_n I->prod_n R_{n+1} ev_n I->0 of K-injective complexes of towers (R_n right adjoint to exact ev_n), apply lim to the resulting homotopy equivalence; its source note's 'termwise injective replacement' is not needed and not always available.",
+ "lean": {
+  "module": "Sheaf.CategoryTheory.Triangulated.DerivedLimitExistence",
+  "declaration": "CategoryTheory.exists_isDerivedLimit_and_iso",
+  "declarations": [
+   "CategoryTheory.derivedCategory_countableProducts_and_towerLimit"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/Triangulated/DerivedLimitExistence.lean",
+  "statement": "theorem exists_isDerivedLimit_and_iso {D : Type u} [Category.{v} D] [HasZeroObject D] [HasShift D ℤ] [Preadditive D] [∀ n : ℤ, (shiftFunctor D n).Additive] [Pretriangulated D] [IsTriangulated D] (K : ℕ → D) [HasProduct K] (f : ∀ n : ℕ, K (n + 1) ⟶ K n) : (∃ L : D, IsDerivedLimit f L) ∧ ∀ (L L' : D), IsDerivedLimit f L → IsDerivedLimit f L' → Nonempty (L ≅ L')",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-dle1333",
+  "group": "K1",
+  "result": "pass",
+  "note": "clause1: Pretriangulated+IsTriangulated D, K:ℕ→D, [HasProduct K] only, ∃ IsDerivedLimit (landed J1 pred) ∧ any two Nonempty iso; clause2: Abelian A, HasCountableProducts+CountableAB4Star (countable exact products), ∃ HasCountableProducts D(A), Q.mapCone of termwise product limit for any countable J and any representatives, homologyFunctor p preserves Discrete J limits ∀p; clause3: EnoughInjectives, I K-injective in CochainComplex (ℕᵒᵖ⥤A) ℤ, representative iso I.asFunctor⋙Q ≅ ofOpSequence f, ∃ limit cone c with IsDerivedLimit f (Q.obj c.pt); #check-verified names"
+ }
 }
