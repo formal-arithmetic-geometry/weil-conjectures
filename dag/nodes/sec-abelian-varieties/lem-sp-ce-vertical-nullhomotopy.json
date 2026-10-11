@@ -23,9 +23,48 @@
   "def-sp-injective-resolutions",
   "lem-sp-cartan-eilenberg-exists"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Because $R$ is a morphism of double complexes and is zero on the augmentation, its restrictions to the augmented boundary, cycle, and horizontal-cohomology rows are maps of augmented complexes whose composite with the source augmentation is zero. The exact sequences $0\\to B_I^p\\to Z_I^p\\to H_I^p\\to0$ and $0\\to Z_I^p\\to I^{p,\\bullet}\\to B_I^{p+1}\\to0$, together with commutation of $R$ with the horizontal differential, make the induced maps compatible with the subobject and quotient maps.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015I, compatibility of the boundary, cycle, and cohomology rows"
+   }
+  },
+  {
+   "text": "Apply the exact-source/injective-target comparison theorem to the induced maps on the boundary, cycle, and horizontal-cohomology rows. The theorem is the special case of the acyclic-to-bounded-below-injective null-homotopy result obtained by adjoining the augmentation object in degree $-1$; it gives row homotopies $h_B$, $h_Z$, and $h_H$, all zero in degree zero, satisfying $R_B=d_vh_B+h_Bd_v$, $R_Z=d_vh_Z+h_Zd_v$, and $R_H=d_vh_H+h_Hd_v$.",
+   "uses": [
+    "lem-weil-pbc-acyclic-map-to-injective-nullhomotopy"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015I, comparison construction by boundary, cycle, and cohomology rows"
+   }
+  },
+  {
+   "text": "Construct $s_2$ and homotopies $h_B^p$ of $R_B^p$ and $h_Z^p$ of $R_Z^p$, zero in vertical degree zero, by induction on $p$, keeping the invariant that $h_Z^p$ restricts to $h_B^p$ on $B_I^p$; start with $h_B^0=0$ since $B_I^0=0$ in the first quadrant. Given $h_B^p$, apply the compatible-homotopy assembly lemma to $0\\to B_I^p\\to Z_I^p\\to H_I^p\\to0$ (augmented by $0\\to B^p(K)\\to Z^p(K)\\to H^p(K)\\to0$) with target $0\\to B_J^p\\to Z_J^p\\to H_J^p\\to0$ and $s_Z=h_B^p$; it yields $h_Z^p$ with $h_Z^p\\iota=\\iota_Jh_B^p$, and the augmentation condition is $R\\epsilon_I=0$. Apply the same lemma to $0\\to Z_I^p\\to I^{p,\\bullet}\\to B_I^{p+1}\\to0$ (augmented by $0\\to Z^p(K)\\to K^p\\to B^{p+1}(K)\\to0$, the column being exact as an extension of exact rows) with target $0\\to Z_J^p\\to J^{p,\\bullet}\\to B_J^{p+1}\\to0$ (degreewise split, so $J^{p,\\bullet}$ is injective) and $s_Z=h_Z^p$; it yields $s_2^{p,\\bullet}$ with $s_2^{p,0}=0$, $R=d_vs_2+s_2d_v$ on $I^{p,\\bullet}$, $s_2i=jh_Z^p$, and a homotopy $h_B^{p+1}$ of $R_B^{p+1}$ with $\\rho s_2^p=h_B^{p+1}\\pi$. Since $d_h=i\\iota\\pi$ on both $I$ and $J$, one gets $s_2^{p+1}d_h=s_2^{p+1}i\\iota\\pi=jh_Z^{p+1}\\iota\\pi=j\\iota_Jh_B^{p+1}\\pi=j\\iota_J\\rho s_2^p=d_hs_2^p$, using the invariant at $p+1$; this completes the induction.",
+   "uses": [
+    "lem-sp-ce-compatible-homotopy-assembly"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015I, compatibility of the boundary/cycle exact sequences; Weibel Homological Algebra, Lemma 5.7.10"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sp-ce-compatible-homotopy-assembly",
+  "lem-weil-pbc-acyclic-map-to-injective-nullhomotopy"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 015I, compatibility of the boundary/cycle exact sequences; vertical null-homotopy detail from Weibel Homological Algebra Lemma 5.7.10"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -57,12 +96,28 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sp-cartan-eilenberg-double-complex-homotopy",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-abelian-varieties",
- "unit": "sk-prop-av-pqf-finite"
+ "unit": "sk-prop-av-pqf-finite",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sp-ce-vertical-nullhomotopy",
+  "worker": "stage1",
+  "summary": "Split the residual vertical null-homotopy into the exact-source/injective-target row comparison lemma and the compatible assembly lemma for the boundary-cycle short exact sequences. The item then verifies the induced row maps, applies the row lemma, and assembles the homotopies into a horizontal-compatible s_2.",
+  "blueprint": "Realizes thm-sp-grothendieck proof, final paragraph: kill the residual vertical defect through the injective boundary, cycle, and horizontal-cohomology rows, then assemble through the exact sequences.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-cvn0049",
+  "group": "M1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-cvn0049 (reviewer sub-agent of L); spot-checked: Return R-cvn0013 points: (1) assembly node now assumes exact augmented source 0->Z_0->I_0->B_0->0 and R_I eps_I=0; hand test Z=B=Q, I=Q+Q in degree 0, R_I(a,b)=(b,0): exact augmentation forces eps_I iso, so R_I eps_I=0 forces R_I=0, counterexample excluded; proof sketch (extend s_Z into J_Z, add sigma s_B pi, defect j E pi, E chain map vanishing on augmentation killed by acyclic-to-injective) checked. (2) induction on p checked: h_B^p -> h_Z^p via B->Z->H, then s2^p and h_B^{p+1} via Z->I->B; s2 d_h = d_h s2 from h_Z^{p+1} iota = iota_J h_B^{p+1} and rho s2^p = h_B^{p+1} pi. (3) parent lem-sp-cartan-eilenberg-double-complex-homotopy step 2 supplies identical hypotheses and R eps_I=0, R a double-complex map; uses exactly s2, s2^{p,0}=0, R=d_v s2+s2 d_v, s2 d_h=d_h s2. No duplicate among cartan-eilenberg/nullhomotopy nodes. FIX more, RETURN less: (a) assembly statement: removed the ill-typed horizontal-differential clause the return asked to remove (still present, unused) and stray literal \\n, made R_Ii=jR_Z, rho R_I=R_B pi explicit; (b) C1 step 1 cited lem-sp-cartan-eilenberg-exists which does not state it: now elementary, citation dropped; (c) step 3 rewritten to state the invariant, base h_B^0=0, both applications' augmentations/targets, and the s2 d_h computation (old text fed h_H^p as an input the lemma does not take); stmt_deps restored to sheaf-dag value (proof lemmas are proof_deps); (d) class (b): lem-sp-ce-row-comparison-nullhomotopy dropped, special case of lem-weil-pbc-acyclic-map-to-injective-nullhomotopy (return point 3, not done). Both Second readings missed (a), (b), (d) and claimed them repaired.; 2 file(s) fixed by the reviewer"
+ }
 }
