@@ -184,4 +184,36 @@ lemma H.restrictSucc_eq_zero_iff (I : InjectiveResolution ℱ) (n : ℕ)
   change e _ = 0 ↔ _
   rw [map_eq_zero_iff e e.injective, AddEquiv.map_eq_zero_iff]
 
+/-- **Gluing preimages.** Let `φ : M ⟶ N` be a morphism of `𝒪_Y`-modules, `(U i)` an open cover of
+`Y` and `s` a global section of `N`. If over each `U i` the restriction of `s` is the image of a
+section `t i` of `M`, and the `t i` agree on overlaps, then `s` is the image of a global section
+of `M`. -/
+lemma exists_app_top_eq_of_isCompatible {M N : Y.Modules} (φ : M ⟶ N) {ι : Type u}
+    (U : ι → Y.Opens) (hU : ⨆ i, U i = ⊤) (s : Γ(N, ⊤)) (t : ∀ i, Γ(M, U i))
+    (ht : ∀ i, φ.app (U i) (t i) = N.presheaf.map (homOfLE le_top : U i ⟶ ⊤).op s)
+    (hcompat : TopCat.Presheaf.IsCompatible M.presheaf U t) :
+    ∃ u : Γ(M, ⊤), φ.app ⊤ u = s := by
+  let 𝓜 : TopCat.Sheaf Ab Y := ⟨M.presheaf, M.isSheaf⟩
+  let 𝓝 : TopCat.Sheaf Ab Y := ⟨N.presheaf, N.isSheaf⟩
+  obtain ⟨u, hu, -⟩ := 𝓜.existsUnique_gluing' U ⊤ (fun i ↦ homOfLE le_top) hU.ge t hcompat
+  refine ⟨u, 𝓝.eq_of_locally_eq' U ⊤ (fun i ↦ homOfLE le_top) hU.ge _ _ fun i ↦ ?_⟩
+  change N.presheaf.map _ (φ.app ⊤ u) = _
+  rw [← Hom.app_presheaf_map, ← ht i]
+  exact congrArg (φ.app (U i)) (hu i)
+
+/-- A global section `s` of the cycles `Z¹` of a complex `K` which has local lifts to `K⁰` over an
+open cover, agreeing on overlaps, comes from a global section of `K⁰`. -/
+lemma mem_range_app_toCycles_of_isCompatible (K : CochainComplex Y.Modules ℕ)
+    (s : Γ(K.cycles 1, ⊤)) {ι : Type u} (U : ι → Y.Opens) (hU : ⨆ i, U i = ⊤)
+    (t : ∀ i, Γ(K.X 0, U i))
+    (ht : ∀ i, (K.d 0 1).app (U i) (t i) =
+      (K.X 1).presheaf.map (homOfLE le_top : U i ⟶ ⊤).op ((K.iCycles 1).app ⊤ s))
+    (hcompat : TopCat.Presheaf.IsCompatible (K.X 0).presheaf U t) :
+    s ∈ ((K.toCycles 0 1).app ⊤).hom.range := by
+  obtain ⟨u, hu⟩ := exists_app_top_eq_of_isCompatible (K.d 0 1) U hU _ t ht hcompat
+  refine ⟨u, injective_app_of_mono (K.iCycles 1) ?_⟩
+  change ((K.toCycles 0 1 ≫ K.iCycles 1).app ⊤) u = _
+  rw [HomologicalComplex.toCycles_i]
+  exact hu
+
 end AlgebraicGeometry.Scheme.Modules
