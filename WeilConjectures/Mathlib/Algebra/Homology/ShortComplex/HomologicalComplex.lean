@@ -73,8 +73,6 @@ lemma homologyMap_eq_app_homology (β : 𝟭 C ⟶ 𝟭 C) {K : HomologicalCompl
   rw [← cancel_epi (K.homologyπ i), homologyπ_naturality, hc]
   exact (β.naturality (K.homologyπ i)).symm
 
-<<<<<<< HEAD
-
 section CyclesMap
 
 variable {K L : HomologicalComplex C c} (φ : K ⟶ L)
@@ -95,7 +93,7 @@ lemma eqToHom_comp_cyclesMap {a b : ι}
   simp
 
 end CyclesMap
-=======
+
 /-- For a projective object `P`, there are no nonzero morphisms `P ⟶ H_j(K)` if and only if
 every morphism `P ⟶ K_j` killed by the differential factors through the incoming
 differential. -/
@@ -120,6 +118,5 @@ lemma subsingleton_hom_homology_iff_of_projective (K : HomologicalComplex C c) {
       rw [← cancel_mono (K.iCycles j), liftCycles_i]
     rw [← Projective.factorThru_comp φ (K.homologyπ j), this]
     exact K.liftCycles_homologyπ_eq_zero_of_boundary _ k hk g hg.symm
->>>>>>> origin/slopmaster2
 
 end HomologicalComplex
