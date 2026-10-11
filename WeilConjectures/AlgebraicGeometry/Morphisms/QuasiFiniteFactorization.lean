@@ -130,7 +130,7 @@ theorem Scheme.Hom.exists_isOpenImmersion_isFinite_locallyOfFinitePresentation
   have : QuasiSeparatedSpace T₀ := quasiSeparatedSpace_of_quasiSeparated p₀
   obtain ⟨A⟩ := p₀.nonempty_finitePresentationApproximation
   obtain ⟨K, hK⟩ := Scheme.exists_isFinite_of_isLimit A.D _ A.isLimit (fun K ↦ A.p.app K)
-    (fun g ↦ by simpa using A.p.naturality g) p₀ A.w
+    (fun g ↦ (A.p.naturality g).trans (Category.comp_id _)) p₀ A.w
   let ι := j₀ ≫ A.π.app K
   have : IsImmersion ι := inferInstance
   obtain ⟨U, g, hU, hg, hgU⟩ := ι.exists_isCompact_isClosedImmersion

@@ -13,6 +13,31 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.SmallAffineZariski
 /-!
 # Integral morphisms are limits of finite morphisms
 
+Let `S` be a quasi-compact quasi-separated scheme and `F` a quasi-coherent `𝒪_S`-algebra (a
+coequifibered presheaf of rings on `S.AffineZariskiSite` under `𝒪_S`) which is integral over
+`𝒪_S`. We show that the relative spectrum `Spec_S F` is the cofiltered limit of the relative
+spectra of finite quasi-coherent subalgebras of `F`, which are finite over `S`. Applied to the
+relative normalization this shows that an integral morphism `X ⟶ S` is a cofiltered limit of
+finite `S`-schemes: this is the "finite approximation tail" (Step 2) of the proof of blueprint
+`thm-pqf-zmt-factorization` (compare Stacks Project Tag 09YZ, which also asks for the stages to
+be of finite presentation; the blueprint does not claim this for these stages).
+
+The key point is that every section of `F` over an affine open lies in a finite quasi-coherent
+subalgebra (Stacks Project Tag 01PG). We deduce this from the corresponding statement for ideal
+sheaves (`AlgebraicGeometry.Scheme.IdealSheafData.exists_finiteType_le_of_mem`), applied to the
+relative spectrum `D` of `𝒪_S + ε F ⊆ F[ε]`: quasi-coherent ideals of `𝒪_D` contained in `ε F` are
+the quasi-coherent `𝒪_S`-submodules of `F`.
+
+## Main definitions and results
+
+- `AlgebraicGeometry.Scheme.Hom.FiniteApproximation`: a presentation of `f : X ⟶ S` as a
+  cofiltered limit of finite `S`-schemes.
+- `AlgebraicGeometry.isLimitOfIsLimitOpensCone'`: being a limit cone of schemes is local on a
+  stage.
+- `AlgebraicGeometry.Scheme.AffineZariskiSite.finiteApproximation`: the relative spectrum of an
+  integral quasi-coherent algebra is a limit of finite schemes.
+- `AlgebraicGeometry.Scheme.Hom.nonempty_finiteApproximation_of_isIntegralHom`: an integral
+  morphism to a quasi-compact quasi-separated scheme is a cofiltered limit of finite morphisms.
 -/
 
 @[expose] public section
@@ -204,9 +229,8 @@ lemma RingHom.isLocalization_dualSubringMap (α : R →+* A) (α' : R' →+* A')
         ← ht', hcomm, map_mul, map_pow, pow_add, ← mul_assoc]
       rw [← map_pow α' (ρR r) n, ← map_mul, hn]
     · simp only [snd_mul, fst_pow, snd_pow, DualNumber.fst_map, DualNumber.snd_map, fst_inl,
-        snd_inl, snd_add, snd_inr, fst_add, fst_inr, add_zero, smul_zero, map_mul, map_pow,
-        smul_eq_mul, op_smul_eq_mul, mul_zero, zero_add, pow_add, ← mul_assoc, ← hm, map_zero,
-        zero_mul]
+        snd_inl, snd_add, snd_inr, smul_zero, map_mul, map_pow,
+        smul_eq_mul, op_smul_eq_mul, mul_zero, zero_add, pow_add, ← mul_assoc, ← hm, map_zero]
       ring
   · intro x y hxy
     have h1 := congrArg (fun z : α'.dualSubring ↦ (z : DualNumber A').fst) hxy
@@ -220,7 +244,7 @@ lemma RingHom.isLocalization_dualSubringMap (α : R →+* A) (α' : R' →+* A')
     · simp only [fst_mul, fst_pow, fst_inl, pow_add]
       linear_combination (α r) ^ m * hn
     · simp only [snd_mul, fst_mul, fst_pow, snd_pow, fst_inl, snd_inl, smul_zero, add_zero,
-        smul_eq_mul, op_smul_eq_mul, zero_add, nsmul_zero, mul_zero, pow_add, map_zero, zero_mul]
+        smul_eq_mul, mul_zero, pow_add]
       linear_combination (α r) ^ n * hm
 
 
@@ -368,8 +392,10 @@ lemma mem_ker_dualGluedι_iff (U : S.AffineZariskiSite)
     (z : Γ((dualGlueData H).glued, (dualAffineOpen H U).1)) :
     z ∈ (dualGluedι H).ker.ideal (dualAffineOpen H U) ↔
       (dualSectionsEquiv H U z).1.fst = 0 := by
-  have hpre := relativeGluingMap_preimage (coequifibered_dualAlgMap H) H (dualAlgFst α) dualAlgMap_comp_dualAlgFst U
-  have key := ConcreteCategory.congr_hom (relativeGluingMap_appLE_sectionsIso_hom (coequifibered_dualAlgMap H) H
+  have hpre := relativeGluingMap_preimage (coequifibered_dualAlgMap H) H (dualAlgFst α)
+    dualAlgMap_comp_dualAlgFst U
+  have key := ConcreteCategory.congr_hom
+    (relativeGluingMap_appLE_sectionsIso_hom (coequifibered_dualAlgMap H) H
     (dualAlgFst α) dualAlgMap_comp_dualAlgFst U) z
   rw [Scheme.Hom.ker_apply, RingHom.mem_ker]
   have hinj : Function.Injective ((relativeGluingData H).glued.presheaf.map
@@ -464,7 +490,7 @@ lemma map_mem_subAlg (J : (dualGlueData H).glued.IdealSheafData) {U V : S.Affine
 lemma snd_dualInr_mul {U : S.AffineZariskiSite} (m : F.obj (.op U)) (y : (dualAlg α).obj (.op U)) :
     (dualInr m * y).1.snd = m * y.1.fst := by
   change (inr m * y.1 : DualNumber (F.obj (.op U))).snd = _
-  simp [DualNumber.snd_mul, mul_comm]
+  simp [mul_comm]
 
 lemma fst_dualInr_mul {U : S.AffineZariskiSite} (m : F.obj (.op U)) (y : (dualAlg α).obj (.op U)) :
     (dualInr m * y).1.fst = 0 := by
@@ -609,7 +635,8 @@ noncomputable def subAlgMap (J : (dualGlueData H).glued.IdealSheafData) :
   naturality {U V} i := by
     refine CommRingCat.hom_ext (RingHom.ext fun r ↦ Subtype.ext ?_)
     rw [CommRingCat.hom_comp, RingHom.comp_apply, CommRingCat.hom_comp, RingHom.comp_apply]
-    exact (subAlgMapApp_apply_coe H J V _).trans ((ConcreteCategory.congr_hom (α.naturality i) r).trans
+    exact (subAlgMapApp_apply_coe H J V _).trans
+      ((ConcreteCategory.congr_hom (α.naturality i) r).trans
       ((congrArg (F.map i).hom (subAlgMapApp_apply_coe H J U r)).symm.trans
         (subAlgRes_apply_coe H J i _).symm))
 
@@ -620,7 +647,8 @@ lemma subAlgMap_app (J : (dualGlueData H).glued.IdealSheafData) (U : S.AffineZar
 variable {H} in
 /-- The components of the inclusion of the subalgebras attached to `J ≤ J'`. -/
 noncomputable def subAlgInclusionApp {J J' : (dualGlueData H).glued.IdealSheafData} (h : J ≤ J')
-    (U : S.AffineZariskiSiteᵒᵖ) : CommRingCat.of (subAlg J U.unop) ⟶ CommRingCat.of (subAlg J' U.unop) :=
+    (U : S.AffineZariskiSiteᵒᵖ) :
+    CommRingCat.of (subAlg J U.unop) ⟶ CommRingCat.of (subAlg J' U.unop) :=
   CommRingCat.ofHom ((subAlg J U.unop).subtype.codRestrict _
     fun b ↦ subAlg_mono H h U.unop b.2)
 
@@ -747,7 +775,7 @@ lemma exists_finset_subAlg_eq_closure (J : (dualGlueData H).glued.IdealSheafData
       induction hx using Submodule.span_induction with
       | mem x hx =>
         exact Subring.subset_closure (Or.inr (Finset.mem_coe.mpr (Finset.mem_image_of_mem _ hx)))
-      | zero => simpa using zero_mem C
+      | zero => simp [zero_mem C]
       | add x y hx hy hx' hy' =>
         rw [map_add]
         exact add_mem hx' hy'
@@ -836,7 +864,7 @@ lemma approxπ_approxP (j : ApproxIndex H) :
 
 lemma isFinite_approxP (hα : ∀ U, (α.app U).hom.IsIntegral) (j : ApproxIndex H) :
     IsFinite (approxP H j) :=
-  isFinite_toBase _ fun U ↦ subAlgMap_app_finite H hα _ j.unop.2.1 j.unop.2.2 _
+  isFinite_toBase _ fun _ ↦ subAlgMap_app_finite H hα _ j.unop.2.1 j.unop.2.2 _
 
 
 /-- The diagram of the rings `B_J(U)`, for an affine open `U`. -/
@@ -1002,9 +1030,9 @@ schemes finite over `S` together with a limit cone with point `X` whose projecti
 compatible with `f`: it presents `X` as a cofiltered limit of finite `S`-schemes. The transition
 morphisms are then affine (`Scheme.Hom.FiniteApproximation.isAffineHom_map`).
 
-An integral morphism to a quasi-compact quasi-separated scheme admits one, with stages of
-finite presentation (`Scheme.Hom.exists_finiteApproximation_of_isIntegralHom`, Stacks Project
-Tag 09YZ). This is the "finite approximation tail" of the proof of blueprint
+An integral morphism to a quasi-compact quasi-separated scheme admits one
+(`Scheme.Hom.nonempty_finiteApproximation_of_isIntegralHom`, compare Stacks Project Tag 09YZ).
+This is the "finite approximation tail" of the proof of blueprint
 `thm-pqf-zmt-factorization`. -/
 structure Scheme.Hom.FiniteApproximation {X S : Scheme.{u}} (f : X ⟶ S) where
   /-- The index category of the inverse system. -/
