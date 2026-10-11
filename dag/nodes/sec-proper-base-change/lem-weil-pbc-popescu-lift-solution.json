@@ -198,5 +198,24 @@
   "by": "L",
   "result": "accepted",
   "note": "7 steps follow Stacks 07F8: induction claim, reduction modulo an ideal stays a resolution situation (third isomorphism theorem), singular ideals map into singular ideals under base change (written out from the definition), r = 1 via a new 07F0 node with pi in H_{B/R} (R_pi -> B_pi smooth), h_A in h_B not in q, and the inductive step with 07CC. Tags 07F8, 07F0, 07CC verified; the new node's statement matches Stacks 07F0 word for word."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.PopescuLiftSolution",
+  "declaration": "Algebra.canBePopescuResolved_of_quotient_eighth_powers",
+  "file": "lean/Sheaf/RingTheory/PopescuLiftSolution.lean",
+  "statement": "theorem canBePopescuResolved_of_quotient_eighth_powers (α : A →ₐ[R] Λ) (q : PrimeSpectrum Λ) (hr : 1 ≤ r) (hπ : ∀ i : Fin r, algebraMap R Λ (π i) ∈ q.asIdeal) (hR : ∀ (i : Fin r) (x : R ⧸ Ideal.span {y | ∃ j : Fin r, j.val < i.val ∧ y = π j ^ 8}), π i • x = 0 ↔ π i ^ 2 • x = 0) (hΛ : ∀ (i : Fin r) (x : Λ ⧸ Ideal.span {y | ∃ j : Fin r, j.val < i.val ∧ y = algebraMap R Λ (π j) ^ 8}), π i • x = 0 ↔ π i ^ 2 • x = 0) (hstandard : ∀ i : Fin r, IsStrictlyStandardElement (R := R) (algebraMap R A (π i))) (hresolved : ∃ (_ : FinitePresentation R₀ A₀) (α₀ : A₀ →ₐ[R₀] Λ₀) (q₀ : PrimeSpectrum Λ₀), α₀.toRingHom.comp (Ideal.Quotient.mk J_A) = (Ideal.Quotient.mk J_Λ).comp α.toRingHom ∧ PrimeSpectrum.comap (Ideal.Quotient.mk J_Λ) q₀ = q ∧ CanBePopescuResolved α₀ q₀) : CanBePopescuResolved α q",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-pls1312"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-pls1312",
+  "group": "C1",
+  "result": "fix",
+  "note": "Noetherian R, FP A, alpha, q prime, r>=1, pi images in q, both pointwise annihilator equalities over preceding eighth-power quotients (i=1 empty span), strict standardness via recorded def, reduced situation with Mathlib quotient algebra instances, alpha0/q0 tied by equations, CanBePopescuResolved conclusion; universes u v w, B max u v"
  }
 }
