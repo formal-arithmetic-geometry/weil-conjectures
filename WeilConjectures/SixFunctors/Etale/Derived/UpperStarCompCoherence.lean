@@ -37,7 +37,8 @@ variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
 namespace Etale
 
 lemma mapHomotopyCategoryCompHom_upperStarComp_quotient_obj {T S R : Scheme.{u}} (a : T ⟶ S)
-    (b : S ⟶ R) (ab : T ⟶ R) (hab : ab = a ≫ b) (K : CochainComplex (Sheaf R.smallEtaleTopology A) ℤ) :
+    (b : S ⟶ R) (ab : T ⟶ R) (hab : ab = a ≫ b)
+    (K : CochainComplex (Sheaf R.smallEtaleTopology A) ℤ) :
     Functor.mapHomotopyCategoryCompHom (b)^*[A] (a)^*[A] (ab)^*[A] (upperStarComp A a b ab hab)
         ((HomotopyCategory.quotient _ (.up ℤ)).obj K) =
       (HomotopyCategory.quotient _ (.up ℤ)).map
@@ -58,6 +59,8 @@ open DerivedCategory
 variable {W X Y Z : Scheme.{u}} (f : W ⟶ X) (g : X ⟶ Y) (h : Y ⟶ Z) (fg : W ⟶ Y) (gh : X ⟶ Z)
   (fgh : W ⟶ Z) (hfg : fg = f ≫ g) (hgh : gh = g ≫ h) (hfgh : fgh = fg ≫ h)
 
+omit [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
+  [Abelian.HasFunctorialFlatResolution A] in
 lemma mapHomotopyCategoryCompHom_upperStarComp_assoc
     (P : HomotopyCategory (Sheaf Z.smallEtaleTopology A) (.up ℤ)) :
     Functor.mapHomotopyCategoryCompHom (gh)^*[A] (f)^*[A] (fgh)^*[A]
@@ -160,7 +163,8 @@ lemma leftDerivedUpperStarComp_hom_app_map_leftDerivedUpperStarComp_inv_app
     (leftDerivedUpperStarComp A f g fg hfg).hom.app (L((h)^*[A]).obj K) ≫
         L((f)^*[A]).map ((leftDerivedUpperStarComp A g h gh hgh).inv.app K) =
       (leftDerivedUpperStarComp A fg h fgh hfgh).inv.app K ≫
-        (leftDerivedUpperStarComp A f gh fgh (by rw [hfgh, hfg, hgh, Category.assoc])).hom.app K := by
+        (leftDerivedUpperStarComp A f gh fgh
+          (by rw [hfgh, hfg, hgh, Category.assoc])).hom.app K := by
   rw [← cancel_epi ((leftDerivedUpperStarComp A fg h fgh hfgh).hom.app K),
     reassoc_of% (leftDerivedUpperStarComp_assoc'_app A f g h fg gh fgh hfg hgh hfgh K).symm,
     ← Functor.map_comp, Iso.hom_inv_id_app, CategoryTheory.Functor.map_id, Category.comp_id,

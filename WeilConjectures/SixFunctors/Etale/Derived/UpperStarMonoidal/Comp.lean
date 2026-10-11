@@ -118,7 +118,8 @@ open Functor.LaxMonoidal Functor.OplaxMonoidal
 lemma counit_naturality {Z Y : Scheme.{u}} (g : Z ⟶ Y)
     {P Q : HomotopyCategory (Sheaf Y.smallEtaleTopology A) (.up ℤ)} (f : P ⟶ Q) :
     L((g)^*[A]).map (Qh.map f) ≫ (g)^*[A].leftDerivedFunctorCounit.app Q =
-      (g)^*[A].leftDerivedFunctorCounit.app P ≫ Qh.map (((g)^*[A].mapHomotopyCategory (.up ℤ)).map f) :=
+      (g)^*[A].leftDerivedFunctorCounit.app P ≫
+        Qh.map (((g)^*[A].mapHomotopyCategory (.up ℤ)).map f) :=
   (g)^*[A].leftDerivedFunctorCounit.naturality f
 
 
@@ -138,6 +139,7 @@ lemma leftDerivedUpperStarTensorComparison_naturality {Z Y : Scheme.{u}} (g : Z 
   rw [tensorHom_def, tensorHom_def, Functor.map_comp, Category.assoc, ← reassoc_of% h₁, ← h₂]
 
 set_option maxHeartbeats 2000000 in
+-- One rewriting step unifies two instance paths to the tensor product of the homotopy category.
 /-- The pointwise form of `leftDerivedUpperStarTensorComparison_comp` on images of complexes,
 composed with the counit of the derived tensor bifunctor. -/
 lemma leftDerivedUpperStarTensorComparison_comp_aux
@@ -205,9 +207,11 @@ noncomputable def leftDerivedUpperStarTensorComparisonComp :
       (leftDerivedUpperStarTensorComparison A g₁) ≫
     (((Functor.whiskeringLeft₂ _).map (leftDerivedUpperStarComp A g₁ g₂ g₁₂ hg).inv).app
       (L((g₂)^*[A]) ⋙ L((g₁)^*[A]))).app (-⊗ᴸ-(T)[A]) ≫
-    (((Functor.whiskeringLeft₂ _).obj L((g₁₂)^*[A])).map (leftDerivedUpperStarComp A g₁ g₂ g₁₂ hg).inv).app
+    (((Functor.whiskeringLeft₂ _).obj L((g₁₂)^*[A])).map
+      (leftDerivedUpperStarComp A g₁ g₂ g₁₂ hg).inv).app
       (-⊗ᴸ-(T)[A])
 
+omit [(g₁₂)^*[A].PreservesFlat] in
 lemma leftDerivedUpperStarTensorComparisonComp_app_app
     (K M : DerivedCategory (Sheaf R.smallEtaleTopology A)) :
     ((leftDerivedUpperStarTensorComparisonComp A g₁ g₂ g₁₂ hg).app K).app M =
@@ -237,7 +241,7 @@ lemma leftDerivedUpperStarTensorComparison_eq_comp :
     rfl
   have := leftDerivedUpperStarTensorComparison_comp_aux A g₁ g₂ g₁₂ hg X Y
   rw [← leftDerivedUpperStarTensorComparisonComp_app_app] at this
-  simp only [NatTrans.comp_app, Functor.whiskeringLeft₂_map_app_app_app_app]
+  simp only [NatTrans.comp_app]
   rw [e₁]
   exact this
 

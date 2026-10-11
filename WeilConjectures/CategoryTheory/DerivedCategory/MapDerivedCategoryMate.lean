@@ -170,7 +170,8 @@ lemma mapDerivedCategoryAdjunction_mate_Qh_obj
   -- the left hand side
   have h₁ := adj₂.mapDerivedCategoryAdjunction.unit.naturality
     (u.mapDerivedCategoryFactorsh.inv.app X)
-  have h₂ := adj₂.mapDerivedCategoryAdjunction_unit_app_Qh_obj ((u.mapHomotopyCategory (.up ℤ)).obj X)
+  have h₂ := adj₂.mapDerivedCategoryAdjunction_unit_app_Qh_obj
+    ((u.mapHomotopyCategory (.up ℤ)).obj X)
   have h₃ := Functor.mapDerivedCategorySquareIso_hom_app_Qh_obj β X
   have h₄ := g₂.mapDerivedCategoryFactorsh.hom.naturality
     ((Functor.mapHomotopyCategoryCompIso (Iso.refl (u ⋙ f₂)) (.up ℤ)).hom.app X ≫
@@ -270,7 +271,8 @@ lemma mapDerivedCategoryAdjunction_mate_Qh_obj
         ((u.mapHomologicalComplex (.up ℤ)).obj K)) :=
     mapHomotopyCategory_unit_app_quotient _ adj₂ _
   rw [mapHomotopyCategory_unit_app_quotient, hu₂]
-  have hc : (adj₂.mapHomologicalComplex (.up ℤ)).unit.app ((u.mapHomologicalComplex (.up ℤ)).obj K) ≫
+  have hc : (adj₂.mapHomologicalComplex (.up ℤ)).unit.app
+      ((u.mapHomologicalComplex (.up ℤ)).obj K) ≫
       (g₂.mapHomologicalComplex (.up ℤ)).map
         ((Functor.mapHomologicalComplexCompIso (Iso.refl (u ⋙ f₂)) (.up ℤ)).hom.app K ≫
           (NatTrans.mapHomologicalComplex β.hom (.up ℤ)).app K ≫

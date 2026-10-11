@@ -41,7 +41,8 @@ namespace Etale
 
 lemma leftDerivedUpperStarComp_symm_trans_eqToIso {T S R : Scheme.{u}} (a : T ⟶ S) (b : S ⟶ R)
     (k : T ⟶ R) (e : k = a ≫ b) :
-    (leftDerivedUpperStarComp A a b).symm ≪≫ eqToIso (congrArg (fun h : T ⟶ R ↦ L((h)^*[A])) e.symm) =
+    (leftDerivedUpperStarComp A a b).symm ≪≫
+        eqToIso (congrArg (fun h : T ⟶ R ↦ L((h)^*[A])) e.symm) =
       (leftDerivedUpperStarComp A a b k e).symm := by
   subst e
   ext
@@ -134,7 +135,7 @@ lemma projectionMapOfCompactification_baseChange_aux
   congr 2
   congr 1
   rw [reassoc_of% e₃, ← leftDerivedUpperStarTensorIso_hom, Iso.inv_hom_id_assoc]
-  simp only [← Functor.map_comp, Category.assoc]
+  simp only [← Functor.map_comp]
   rw [hC]
 
 end
@@ -142,7 +143,8 @@ end
 /-- The component `Lg'^* Lf^* L ⟶ Lf'^* Lg^* L` of the inverse of the square isomorphism of the
 derived pullbacks of a commutative square, with source and target written without composite
 functors. -/
-noncomputable def derivedSquareUpperStarIsoInvApp (L : DerivedCategory (Sheaf Y.smallEtaleTopology A)) :
+noncomputable def derivedSquareUpperStarIsoInvApp
+    (L : DerivedCategory (Sheaf Y.smallEtaleTopology A)) :
     L((g')^*[A]).obj (L((f)^*[A]).obj L) ⟶ L((f')^*[A]).obj (L((g)^*[A]).obj L) :=
   (derivedSquareUpperStarIso A sq).inv.app L
 
@@ -183,6 +185,7 @@ variable [Etale.UpperStarPreservesFlat A] [HasSmallSiteSheafify A]
   [PreservesFilteredColimitsOfSize.{u + 1, u + 1} (CategoryTheory.forget A)]
   [∀ Z : Scheme.{u}, Z.smallEtaleTopology.HasSheafCompose (CategoryTheory.forget A)]
 
+omit [HasSmallSiteSheafify A] in
 /-- Restating an intertwining property of a morphism `κ : Rf_!(c₁) ⟶ Rf_!(c₂)` with the projection
 maps. Specialising this generic statement, rather than using a specialised proof directly, keeps
 the instance terms of the projection maps identical to those of other generic statements. -/

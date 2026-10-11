@@ -50,7 +50,7 @@ variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
 variable {U' U Z' Z : Scheme.{u}} {g' : U' ⟶ U} {j' : U' ⟶ Z'} {j : U ⟶ Z} {g'' : Z' ⟶ Z}
   [IsOpenImmersion j] [IsOpenImmersion j']
 
-omit [HasSmallSiteSheafify A] in
+omit [HasSmallSiteSheafify A] [IsOpenImmersion j] [IsOpenImmersion j'] in
 /-- The square isomorphism of pullbacks does not depend on the chosen composite. -/
 lemma upperStarComp_symm_trans_eq {k₁ k₂ : U' ⟶ Z} (h₁ : k₁ = g' ≫ j) (h₁' : k₁ = j' ≫ g'')
     (h₂ : k₂ = g' ≫ j) (h₂' : k₂ = j' ≫ g'') :
@@ -65,6 +65,7 @@ noncomputable abbrev openImmersionSquareIso (sq : CommSq g' j' j g'') :
     (j)^*[A] ⋙ (g')^*[A] ≅ (g'')^*[A] ⋙ (j')^*[A] :=
   (upperStarComp A g' j).symm ≪≫ upperStarComp A j' g'' (g' ≫ j) sq.w
 
+omit [HasSmallSiteSheafify A] in
 lemma unit_map_openImmersionLowerShriekBaseChangeMap_app' (sq : CommSq g' j' j g'')
     (F : Sheaf U.smallEtaleTopology A) :
     (openImmersionLowerShriekUpperStarAdjunction A j').unit.app ((g')^*[A].obj F) ≫
@@ -91,7 +92,8 @@ square isomorphism of pullbacks, for the adjunctions `Dj_! ⊣ Dj^*` and `Dj'_! 
 lemma mapDerivedCategoryOpenImmersionLowerShriekBaseChangeIso_mate (hsq : IsPullback g' j' j g'')
     (K : DerivedCategory (Sheaf U.smallEtaleTopology A)) :
     (derivedOpenImmersionLowerShriekUpperStarAdjunction A j').unit.app (D((g')^*[A]).obj K) ≫
-        D((j')^*[A]).map ((mapDerivedCategoryOpenImmersionLowerShriekBaseChangeIso A hsq).hom.app K) =
+        D((j')^*[A]).map
+          ((mapDerivedCategoryOpenImmersionLowerShriekBaseChangeIso A hsq).hom.app K) =
       D((g')^*[A]).map ((derivedOpenImmersionLowerShriekUpperStarAdjunction A j).unit.app K) ≫
         (Functor.mapDerivedCategorySquareIso (openImmersionSquareIso A hsq.toCommSq)).hom.app
           (D((j)_!open[A]).obj K) :=
@@ -109,6 +111,7 @@ noncomputable def derivedOpenImmersionSquareMap (sq : CommSq g' j' j g'') :
     (Functor.mapDerivedCategorySquareIso (openImmersionSquareIso A sq)).hom ≫
     Functor.whiskerRight (leftDerivedUpperStarIsoMapDerivedCategory A g'').inv D((j')^*[A])
 
+omit [HasSmallSiteSheafify A] in
 /-- The square map `Dj^* ⋙ Lg'^* ⟶ Lg''^* ⋙ Dj'^*` is the inverse of the square isomorphism
 `Lg''^* ⋙ Lj'^* ≅ Lj^* ⋙ Lg'^*` of the derived pullbacks, read through `Lj^* ≅ Dj^*` and
 `Lj'^* ≅ Dj'^*`. -/
@@ -154,6 +157,8 @@ lemma unit_map_derivedOpenImmersionLowerShriekBaseChangeIso (hsq : IsPullback g'
 variable [Etale.UpperStarPreservesFlat A]
 
 set_option maxHeartbeats 1000000 in
+-- The tensor comparisons of the derived pullbacks make this rewriting expensive.
+omit [HasSmallSiteSheafify A] in
 /-- The square map `Dj^* ⋙ Lg'^* ⟶ Lg''^* ⋙ Dj'^*` and the square isomorphism of the derived
 pullbacks are compatible with the comparisons `Dj^*X ⊗ᴸ Lj^*Y ≅ Dj^*(X ⊗ᴸ Y)` and the tensor
 comparisons of the derived pullbacks. -/
