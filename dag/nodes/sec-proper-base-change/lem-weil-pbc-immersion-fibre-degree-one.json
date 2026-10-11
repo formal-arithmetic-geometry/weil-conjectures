@@ -209,5 +209,23 @@
   "by": "L",
   "result": "accepted",
   "note": "5 steps writing out Stacks 03J9's 'n = 1 works': the fibre is the base change of the immersion (01JY leaf lem-weil-pbc-immersion-base-change-lft), an immersion into Spec kappa(x) is empty or an isomorphism (open and closed parts, elementary), the empty case is x not in j(Z), degree 0 or 1. No new nodes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ImmersionFiberDegreeOne",
+  "declaration": "AlgebraicGeometry.Scheme.Hom.immersion_fiber_degree_one",
+  "file": "lean/Sheaf/AlgebraicGeometry/ImmersionFiberDegreeOne.lean",
+  "statement": "theorem immersion_fiber_degree_one {Z X : Scheme.{u}} (j : Z ⟶ X) [IsImmersion j] : BoundsFiberDegrees j 1 ∧ (∀ x : X, (x ∉ Set.range j → IsEmpty (j.fiber x)) ∧ (x ∈ Set.range j → IsIso (j.fiberToSpecResidueField x))) ∧ HasUniversallyBoundedFibers j",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-ifd1059",
+  "group": "E1",
+  "result": "pass",
+  "note": "Z X : Scheme.{u}, j, [IsImmersion j] = closed-then-open (isImmersion_iff_exists); BoundsFiberDegrees j 1 = finite + finrankΓ<=1 for each x via fiberToSpecResidueField (fiber = pullback j (fromSpecResidueField x), rfl checked); x∉range -> IsEmpty fiber; x∈range -> IsIso of projection (Spec κ(x) over κ(x)); HasUniversallyBoundedFibers; no extra hypotheses, node unchanged"
  }
 }
