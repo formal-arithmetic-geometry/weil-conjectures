@@ -147,5 +147,23 @@
   "group": "J1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-plc2950 (reviewer sub-agent of L); spot-checked: Re-push after R-plc2846 D1: circular 0BF0 step replaced by the Stacks 0BF0 proof. New criterion node checked against 02JQ+01R8 (s in closure -> valuation ring Spec K->Z, Spec A->S centred at s; hypothesis gives s in j(Z); immersion with closed image is closed immersion): true. New triviality node matches 0EX8 exactly (valuation ring, flat proper fp, L_eta trivial, X_0 integral, H^0(X_eta,O)=K). Step 2 hypotheses: base change keeps flat/proper/fp, closed fibre integral from geometric integrality, H^0(X_K,O)=K from universal pushforward with T=Spec K, L_K trivial via universal property and Pic(K)=0 (N free, rank 1 as X_K nonempty). Step 4 N=O_A. Item statement unchanged, matches 0BF0 and lem-sc-general-theorem-of-cube step 5 (C4). Mathlib: UniversallyClosed.of_valuativeCriterion [QuasiCompact] is a multi-step generalization of the criterion node (mono lift, closed map, closed image), not an exact match; node kept. No second-reading fault missed."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.PicardLocusClosed",
+  "declaration": "AlgebraicGeometry.Scheme.picard_locus_closed",
+  "file": "lean/Sheaf/AlgebraicGeometry/PicardLocusClosed.lean",
+  "statement": "theorem picard_locus_closed {X S : Scheme.{u}} (f : X ⟶ S) [Flat f] [IsProper f] [LocallyOfFinitePresentation f] (hO : ∀ {T : Scheme.{u}} (g : T ⟶ S), IsIso ((Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction (pullback.snd f g))).unit.app (SheafOfModules.unit T.ringCatSheaf))) (E : X.Modules) [E.IsInvertible] {Z : Scheme.{u}} (j : Z ⟶ S) (hj : IsImmersion j ∧ LocallyOfFinitePresentation j ∧ QuasiCompact j ∧ QuasiSeparated j ∧ ∀ {T : Scheme.{u}} (g : T ⟶ S), (∃ (h : T ⟶ Z), h ≫ j = g) ↔ ∃ (N : T.Modules) (_ : N.IsFiniteLocallyFree), Nonempty (((Scheme.Modules.tensorPullback (pullback.fst f g)).obj E) ≅ ((Scheme.Modules.tensorPullback (pullback.snd f g)).obj N))) [GeometricallyIntegral f] : IsClosedImmersion j",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-plc1332",
+  "group": "H1",
+  "result": "pass",
+  "note": "f flat/proper/LFP (proper gives qc+qs = fp, as C1); hO = C1 unit-of-Classical.choose tensorPullbackAdjunction form; E invertible = recorded IsInvertible; j bound with C1's full conclusion verbatim (immersion, LFP, QC, QS, factorization iff with finite locally free N via tensorPullback fst/snd) = 'the j given by C1 up to unique iso'; geometric fibres integral = Mathlib GeometricallyIntegral (all field points, equiv. to algebraically closed residue fields, nonempty included as in Stacks integral; same form as landed GeneralTheoremOfCube); conclusion IsClosedImmersion j; names checked with pp.fullNames #check; docstring has blueprint tag and 0BF0 proof"
  }
 }
