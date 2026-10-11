@@ -4440,3 +4440,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 11:24 L: merged deliver/E1/lem-weil-pbc-limit-finite-presentation (stage 2; reviewer PASS; first push; Sheaf.Algebra.LimitFinitePresentation Algebra.exists_limit_finite_presentation)
 - 11:25 L: merged deliver/G1/lem-weil-pbc-inverse-image-stalk-germ (stage 2; reviewer FIX; first push; Sheaf.Paper.InverseImageStalkGerm AlgebraicGeometry.inverseImage_stalk_germ; statement correction reverted (statement, stmt_deps, proof, proof_deps, statement_change))
 - 11:25 L: merged deliver/H1/lem-weil-pbc-finite-etale-trace-degree (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.FiniteEtaleTraceDegree AlgebraicGeometry.Etale.exists_finiteEtaleTrace_degree)
+- 11:26 L: merged deliver/F1/lem-weil-pbc-higher-direct-image-sheafified-presheaf (stage 2; reviewer FIX; first push; Sheaf.Paper.HigherDirectImageSheafifiedPresheaf AlgebraicGeometry.higherDirectImageSheafifiedPresheaf)

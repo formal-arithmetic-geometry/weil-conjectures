@@ -191,5 +191,25 @@
   "by": "L",
   "result": "pass",
   "note": "Stacks 072W; presheaf fully specified; K-injective and injective resolutions aligned"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.HigherDirectImageSheafifiedPresheaf",
+  "declaration": "AlgebraicGeometry.higherDirectImageSheafifiedPresheaf",
+  "file": "lean/Sheaf/Paper/HigherDirectImageSheafifiedPresheaf.lean",
+  "statement": "theorem higherDirectImageSheafifiedPresheaf {X S : Scheme.{u}} (p : X ⟶ S) (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (q : ℕ) : Nonempty ((presheafToSheaf S.smallEtaleTopology AddCommGrpCat.{u + 1}).obj ((MorphismProperty.Over.pullback @Etale ⊤ p).op ⋙ { obj := fun U ↦ ((sheafToPresheaf X.smallEtaleTopology AddCommGrpCat.{u + 1} ⋙ (evaluation X.Etaleᵒᵖ AddCommGrpCat.{u + 1}).obj U).rightDerived q).obj F map := fun f ↦ (NatTrans.rightDerived (Functor.whiskerLeft (sheafToPresheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) ((evaluation X.Etaleᵒᵖ AddCommGrpCat.{u + 1}).map f)) q).app F map_id := fun U ↦ by simp only [CategoryTheory.Functor.map_id, Functor.whiskerLeft_id', NatTrans.rightDerived_id, NatTrans.id_app] map_comp := fun f g ↦ by simp only [CategoryTheory.Functor.map_comp, Functor.whiskerLeft_comp, NatTrans.rightDerived_comp, NatTrans.comp_app] }) ≅ (DerivedCategory.Plus.homologyFunctor (Sheaf S.smallEtaleTopology AddCommGrpCat.{u + 1}) q).obj ((Etale.rightDerivedLowerStarPlus AddCommGrpCat.{u + 1} p).obj ((DerivedCategory.Plus.singleFunctor (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) 0).obj F)))",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": false,
+  "note": "Second reading: replaced sheafification of the underlying higher-direct-image sheaf by the actual derived section-cohomology presheaf, precomposed with etale base change; higher direct image uses the recorded bounded-below derived pushforward directly.",
+  "fixed_by": "R-hdi1124"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-hdi1124",
+  "group": "F1",
+  "result": "fix",
+  "note": "p:X⟶S arbitrary, no qc/qs; F : Sheaf X.smallEtaleTopology Ab.{u+1}; q:ℕ; R^q p_* F = homologyFunctor q ∘ rightDerivedLowerStarPlus ∘ singleFunctor 0 (M1 form); H^q(U,F) now K1's rightDerived of sheafToPresheaf ⋙ evaluation U with NatTrans.rightDerived restrictions (FIX, was sheafToPresheaf.rightDerived); base change via Over.pullback @Etale ⊤ p; sheafification presheafToSheaf"
  }
 }
