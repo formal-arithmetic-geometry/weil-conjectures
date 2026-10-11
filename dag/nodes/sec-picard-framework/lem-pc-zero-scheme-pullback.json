@@ -117,5 +117,25 @@
   "group": "C1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-zsp1824 (reviewer sub-agent of L); spot-checked: Read packet; source Hom.comap_zeroLocus ZeroLocus.lean:502-533 and IsFreeGenerator.exists_pullback (new local-coefficient node true as restriction to V); no cycle with lem-pc-zero-scheme-properties/ideal-local/zero-iff/locally-principal, item not restated. FIX more, RETURN less: (1) C4: step 2 read an affine extended-ideal formula off lem-pc-closed-subscheme-base-change-ideal-image, whose statement only gives the sheaf image of g^*I (sections on affines need quasi-coherence); added statement-only node lem-pc-ideal-sheaf-comap-affine-extension (sorry-free slopmaster2 ideal_comap_appLE, Affine.lean:92-109, attachment candidate; LeanFinder no match), cited it, step 2 elementary:false, dropped the base-change tool_use. (2) C1/restatement: step 1 re-derived the common affine trivialization; now cites lem-pc-invertible-common-free-generator with the lem-pc-invertible-sheaf-instance bridge. Second reading missed (1).; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.Modules.ZeroLocusPullback",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.Hom.comap_zeroLocus_tensorPullback",
+  "statement": "theorem Hom.comap_zeroLocus_tensorPullback {X Y : Scheme.{u}} {M N : X.Modules} [M.IsInvertible] [N.IsInvertible] (g : Y ⟶ X) (φ : M ⟶ N) : φ.zeroLocus.comap g = ((tensorPullback g).map φ).zeroLocus",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-11",
+  "existing": false,
+  "note": "Pullback of modules is the recorded Sheaf AlgebraicGeometry.Scheme.Modules.tensorPullback of def-pc-module-pullback (H1, 9014b8a76), not Mathlib's abstract Scheme.Modules.pullback used by the source theorem Hom.comap_zeroLocus (ZeroLocus.lean:502-533); invertibility is Scheme.Modules.IsInvertible of def-sc-invertible-module, not the source's SheafOfModules.IsInvertible. The node's literal 'Modules.pullback' names the cited node. Agreement with the source's pullback is part of the proof, so existing:true was wrong. Reviewer R-zsp1203 restored the repair that the second reading reverted (as E1's sibling lem-pc-zero-scheme-pullback-local-coefficient).",
+  "file": "lean/Sheaf/AlgebraicGeometry/Modules/ZeroLocusPullback.lean",
+  "fixed_by": "R-zsp1203"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-zsp1203",
+  "group": "C1",
+  "result": "fix",
+  "note": "X Y : Scheme.{u}, g : Y ⟶ X unrestricted, M N : X.Modules with [Scheme.Modules.IsInvertible] (def-sc-invertible-module, checked pp.explicit), φ : M ⟶ N; conclusion φ.zeroLocus.comap g = ((tensorPullback g).map φ).zeroLocus in Y.IdealSheafData with recorded Hom.zeroLocus, IdealSheafData.comap and H1 tensorPullback (def-pc-module-pullback); existing:true on Mathlib Modules.pullback/SheafOfModules.IsInvertible replaced by new module"
  }
 }
