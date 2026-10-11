@@ -1,11 +1,11 @@
 # Work queue
 
-176 items; claim with `tools/claim.py next <group> [--stage N]`.
+171 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (176)
+## Stage 2: nodes to state (171)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
@@ -103,8 +103,6 @@
 | `lem-sc-invert-s-cohomology-mayer-vietoris-diagram` | 1 | state | 0 |
 | `lem-sc-koszul-regular-immersion-derived-hom` | 1 | state | 0 |
 | `lem-sc-mayer-vietoris-open-cover` | 1 | state | 0 |
-| `lem-sc-open-curve-etale-leray-low-degree` | 1 | state | 0 |
-| `lem-sc-open-curve-gm-direct-image-cohomology` | 1 | state | 0 |
 | `lem-sc-open-restriction-support-triangle` | 1 | state | 0 |
 | `lem-sc-proper-flat-right-adjoint-basechange` | 1 | state | 0 |
 | `lem-sc-proper-flat-right-adjoint-direct-sums` | 1 | state | 0 |
@@ -129,7 +127,6 @@
 | `lem-weil-pbc-cohomology-powers-ideal-rees-finite` | 1 | state | 0 |
 | `lem-weil-pbc-derived-etale-cohomology-limit` | 1 | state | 0 |
 | `lem-weil-pbc-etale-cohomology-limit-of-schemes` | 1 | state | 0 |
-| `lem-weil-pbc-finite-coproduct-cohomology-assembly` | 1 | state | 0 |
 | `lem-weil-pbc-finite-geometric-point-coproduct-cohomology` | 1 | state | 0 |
 | `lem-weil-pbc-formal-functions-complete-base` | 1 | state | 0 |
 | `lem-weil-pbc-formal-systems-graded-vanishing` | 1 | state | 0 |
@@ -141,7 +138,6 @@
 | `lem-weil-pbc-graded-finiteness-cohomology` | 1 | state | 0 |
 | `lem-weil-pbc-hypercohomology-e1-pullback-functorial` | 1 | state | 0 |
 | `lem-weil-pbc-integral-cover-kills-constant-cohomology` | 1 | state | 0 |
-| `lem-weil-pbc-inverse-image-free-etale-module` | 1 | state | 0 |
 | `lem-weil-pbc-ml-cohomology-powers-ideal` | 1 | state | 0 |
 | `lem-weil-pbc-module-pushforward-injective-acyclic` | 1 | state | 0 |
 | `lem-weil-pbc-projective-space-twisting-sheaf-charts` | 1 | state | 0 |
@@ -167,7 +163,6 @@
 | `prop-weil-pbc-strict-henselization-stalk-formula` | 1 | state | 0 |
 | `sbc-lem-higher-direct-image-presheaf` | 1 | state | 0 |
 | `thm-weil-pbc-universal-homeomorphism-invariance` | 1 | state | 0 |
-| `lem-pc-affine-perfect-hom-colimit` | 2 | state | 0 |
 | `lem-pc-proper-support-perfect-direct-image` | 2 | state | 0 |
 | `lem-pc-rf-base-change-flat-module` | 2 | state | 0 |
 | `lem-pc-rf-single-complex-inherited-tensor-condition` | 2 | state | 0 |
