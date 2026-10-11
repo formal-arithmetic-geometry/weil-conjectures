@@ -4235,3 +4235,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 10:26 L: merged deliver/C1/lem-weil-pbc-finite-type-over-g-ring (stage 2; reviewer PASS; first push; Sheaf.RingTheory.FiniteTypeGRing isGRing_of_finiteType)
 - 10:27 L: merged deliver/H1/lem-weil-pbc-flat-iso-mod-ideal-powers (stage 2; reviewer PASS; first push; Sheaf.RingTheory.BijectiveQuotientMapPowOfFlat RingHom.bijective_quotientMap_pow_of_flat)
 - 10:27 L: merged deliver/F1/lem-pur-derived-functor-shift-05su (stage 2; reviewer FIX; first push; Sheaf.CategoryTheory.DerivedFunctorShift CategoryTheory.Functor.isTriangulatedLeftDerivedDefinedAt_shift_iff)
+- 10:27 L: merged deliver/M1/lem-weil-pbc-finitely-generated-field-complete-intersection-model (stage 2; reviewer PASS; first push; Sheaf.FieldTheory.FinitelyGeneratedFieldCompleteIntersectionModel FieldTheory.exists_completeIntersection_fractionField_model)

@@ -236,5 +236,23 @@
   "worker": "stage1",
   "summary": "Proof written from the proof of Algebra 07BV (algebra.tex 44534-44559; tag 07BV,algebra-lemma-colimit-syntomic verified) with E = {b_1..b_m}, L = K, y_i = b_i, in ten steps: F = k(x) as fractions of k[x]; tower L_i = L_{i-1}(b_i) with minimal polynomials mu_i and the monomial F-basis b^eps of K (new Mathlib leaves for F[T]/(mu) = F(theta), Fields 09G1/09GN, and for products of bases in a tower, 09G9); lifts P_i monic in Y_i; clearing denominators by h (written out); presentation k[X,T,Y]/(hT-1, P~) of D[Y]/(P), D = k[x,1/h] (existing leaf for R[T]/(rT-1) = R_r); freeness of B_i = D[Y_<=i]/(P_<=i) over D (existing leaf monic-quotient-free); injectivity of A -> K and K = Frac A (the source only asserts A \\subset K); regular sequence: hT-1 nonzero in the domain k[X,T,Y] (it is NOT monic in T, contrary to the brief), each P~_i monic in Y_i (new leaf: monic polynomials are nonzerodivisors), quotient nonzero; n = d+1+r, c = r+1, n - c = d. Statement unchanged. Source typo: 07BV writes k(x_1,...,x_r) for k(x_1,...,x_d) twice (lines 44550-44551). Did not cite lem-weil-pbc-field-extension-complete-intersection-subalgebras (no control of n - c)."
  },
- "reviewed": "pass (L, 2026-10-10): 10 steps follow 07BV: tower of simple algebraic extensions over F = k(x) with minimal polynomials, monomial basis (new leaves 09G1, 09G9 product basis), denominators cleared by h, presentation k[X,T,Y]/(hT-1, P_i) with hT-1 a nonzerodivisor in a domain (worker corrects the brief: not monic in T) and the P_i monic in new variables (new leaf), freeness over D, injectivity into K and K the fraction field."
+ "reviewed": "pass (L, 2026-10-10): 10 steps follow 07BV: tower of simple algebraic extensions over F = k(x) with minimal polynomials, monomial basis (new leaves 09G1, 09G9 product basis), denominators cleared by h, presentation k[X,T,Y]/(hT-1, P_i) with hT-1 a nonzerodivisor in a domain (worker corrects the brief: not monic in T) and the P_i monic in new variables (new leaf), freeness over D, injectivity into K and K the fraction field.",
+ "lean": {
+  "module": "Sheaf.FieldTheory.FinitelyGeneratedFieldCompleteIntersectionModel",
+  "declaration": "FieldTheory.exists_completeIntersection_fractionField_model",
+  "file": "lean/Sheaf/FieldTheory/FinitelyGeneratedFieldCompleteIntersectionModel.lean",
+  "statement": "theorem exists_completeIntersection_fractionField_model (k : Type u) (K : Type v) [Field k] [Field K] [Algebra k K] (hfg : ∃ (m : ℕ) (b : Fin m → K), IntermediateField.adjoin k (Set.range b) = ⊤) (d : ℕ) (x : Fin d → K) (hx : IsTranscendenceBasis k x) : ∃ (n c : ℕ) (f : List (MvPolynomial (Fin n) k)), c ≤ n ∧ n - c = d ∧ f.length = c ∧ RingTheory.Sequence.IsRegular (MvPolynomial (Fin n) k) f ∧ let A := MvPolynomial (Fin n) k ⧸ Ideal.ofList f ∃ (ι : A →ₐ[k] K), Function.Injective ι ∧ (∀ z : K, ∃ a s : A, s ≠ 0 ∧ z = ι a * (ι s)⁻¹) ∧ IsDomain A ∧ ∃ e : FractionRing A ≃ₐ[k] K, ∀ (a : A) (s : nonZeroDivisors A), e (LocalizedModule.mk a s) = ι a * (ι s)⁻¹",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-fci1027",
+  "group": "M1",
+  "result": "pass",
+  "note": "k,K fields+Algebra; hfg = exists m b, adjoin k (range b) = top (node's k(b_1..b_m), eqv to (top).FG); x : Fin d -> K IsTranscendenceBasis; n c, c<=n, n-c=d, f.length=c, IsRegular on MvPolynomial (Fin n) k as E1 a94a7ab23; A = quotient by Ideal.ofList f; iota injective k-alg hom; fractions with s<>0; IsDomain A; FractionRing A ~=_k K with e(a/s)=iota a/iota s (LocalizedModule.mk = Localization.mk by rfl, nonZeroDivisors = A\\0 under IsDomain); #check names resolve to Mathlib roots; no hollow hypothesis"
+ }
 }
