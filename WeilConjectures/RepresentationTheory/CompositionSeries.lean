@@ -63,7 +63,7 @@ def ofSubquotient (S U : Subrepresentation ρ) (T : Subrepresentation (S.subquot
 
 theorem mem_ofSubquotient {S U : Subrepresentation ρ} {T : Subrepresentation (S.subquotient U)}
     (x : S.toSubmodule) : (x : V) ∈ ofSubquotient S U T ↔ Submodule.Quotient.mk x ∈ T :=
-  ⟨fun ⟨y, hy, h⟩ ↦ Subtype.ext h ▸ hy, fun h ↦ ⟨x, h, rfl⟩⟩
+  ⟨fun ⟨_, hy, h⟩ ↦ Subtype.ext h ▸ hy, fun h ↦ ⟨x, h, rfl⟩⟩
 
 theorem ofSubquotient_le (S U : Subrepresentation ρ) (T : Subrepresentation (S.subquotient U)) :
     ofSubquotient S U T ≤ S := by
@@ -274,6 +274,25 @@ theorem isIrreducible_directSumSummand (i : Fin s.length) :
 theorem isInternal_semisimplification :
     DirectSum.IsInternal fun i ↦ (directSumSummand (fun i ↦ s.factor i) i).toSubmodule :=
   isInternal_directSumSummand _
+
+/-- A composition series of a nonzero representation has positive length. -/
+theorem length_pos [Nontrivial V] : 0 < s.length := by
+  by_contra! h
+  have h0 : s.series 0 = s.series (Fin.last s.length) :=
+    congrArg s.series (Fin.ext (by simp; omega))
+  obtain ⟨x, hx⟩ := exists_ne (0 : V)
+  have hxtop : x ∈ (⊤ : Subrepresentation ρ) := Submodule.mem_top
+  rw [← s.last_eq, RelSeries.last, ← h0, ← RelSeries.head, s.head_eq] at hxtop
+  exact hx ((Submodule.mem_bot k).1 hxtop)
+
+/-- The semisimplification of a nonzero representation is nonzero. -/
+theorem nontrivial_semisimplification [Nontrivial V] :
+    Nontrivial (⨁ (i : Fin s.length), ((s.series i.succ).toSubmodule ⧸
+      (s.series i.castSucc).toSubmodule.comap (s.series i.succ).toSubmodule.subtype)) :=
+  have := (s.isIrreducible_factor ⟨0, s.length_pos⟩).nontrivial
+  (DirectSum.of_injective (β := fun i : Fin s.length ↦ ((s.series i.succ).toSubmodule ⧸
+    (s.series i.castSucc).toSubmodule.comap (s.series i.succ).toSubmodule.subtype))
+    ⟨0, s.length_pos⟩).nontrivial
 
 /-- **The semisimplification does not depend on the composition series**: the
 semisimplifications of two composition series are equivalent (Jordan–Hölder).

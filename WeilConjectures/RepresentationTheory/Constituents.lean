@@ -119,11 +119,11 @@ theorem of_surjective (f : ρ.IntertwiningMap σ) (hf : Function.Surjective f) :
 theorem of_equiv (e : ρ.Equiv σ) : ConstituentsLE ρ σ :=
   of_injective e.toIntertwiningMap e.injective
 
-/-- **Constituents of a short exact sequence.** If `σ₁ → ρ → σ₂` is exact with `ρ → σ₂`
-surjective, every constituent of `ρ` is a constituent of `σ₁` or of `σ₂`. -/
+/-- **Constituents of a short exact sequence.** If `σ₁ → ρ → σ₂` is exact, every constituent
+of `ρ` is a constituent of `σ₁` or of `σ₂`. -/
 theorem of_exact {V₁ V₂ : Type*} [AddCommGroup V₁] [Module k V₁] [AddCommGroup V₂] [Module k V₂]
     {σ₁ : Representation k W V₁} {σ₂ : Representation k W V₂} (f : σ₁.IntertwiningMap ρ)
-    (g : ρ.IntertwiningMap σ₂) (hexact : Function.Exact f g) (hg : Function.Surjective g)
+    (g : ρ.IntertwiningMap σ₂) (hexact : Function.Exact f g)
     (h₁ : ConstituentsLE σ₁ τ) (h₂ : ConstituentsLE σ₂ τ) : ConstituentsLE ρ τ := by
   intro U S hirr
   by_cases h : f.range ⊓ S ≤ U
@@ -159,7 +159,7 @@ theorem of_exact {V₁ V₂ : Type*} [AddCommGroup V₁] [Module k V₁] [AddCom
 `V ⧸ U`. -/
 theorem of_subrepresentation (U : Subrepresentation ρ) (h₁ : ConstituentsLE U.toRepresentation τ)
     (h₂ : ConstituentsLE U.quotient τ) : ConstituentsLE ρ τ :=
-  of_exact U.subtype U.mkQ U.exact_subtype_mkQ U.mkQ_surjective h₁ h₂
+  of_exact U.subtype U.mkQ U.exact_subtype_mkQ h₁ h₂
 
 /-- The zero representation has no constituents. -/
 theorem of_subsingleton [Subsingleton V] (ρ : Representation k W V) (σ : Representation k W V') :
@@ -194,7 +194,7 @@ theorem of_chain (F : ℕ → Subrepresentation ρ) (hF : ∀ j, F (j + 1) ≤ F
         ⟨Submodule.inclusion (hF j), fun _ ↦ rfl⟩
       let quot : (F j).toRepresentation.IntertwiningMap ((F j).subquotient (F (j + 1))) :=
         ⟨Submodule.mkQ _, fun _ ↦ rfl⟩
-      refine of_exact incl quot (fun y ↦ ?_) (Submodule.mkQ_surjective _) ih (h j (by omega))
+      refine of_exact incl quot (fun y ↦ ?_) ih (h j (by omega))
       change Submodule.mkQ _ y = 0 ↔ _
       rw [Submodule.mkQ_apply, Submodule.Quotient.mk_eq_zero]
       exact ⟨fun hy ↦ ⟨⟨y, hy⟩, rfl⟩, by rintro ⟨y, rfl⟩; exact y.2⟩

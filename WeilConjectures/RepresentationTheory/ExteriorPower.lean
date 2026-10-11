@@ -417,3 +417,283 @@ noncomputable def exteriorPowerGradedEquiv [FiniteDimensional k V] {j l : ℕ} (
     (P.toGraded_comp_map n hs.choose (fun x ↦ LinearMap.congr_fun hs.choose_spec x) h)
 
 end Subrepresentation
+
+namespace Subrepresentation
+
+variable {k : Type*} [Field k] {W : Type*} [Group W] {V : Type*} [AddCommGroup V] [Module k V]
+  {ρ : Representation k W V}
+
+/-- A subrepresentation `P ≤ A`, seen as a subrepresentation of `A`, is equivalent to `P`. -/
+noncomputable def comapSubtypeEquiv {P A : Subrepresentation ρ} (h : P ≤ A) :
+    (comap A.subtype P).toRepresentation.Equiv P.toRepresentation :=
+  .mk (Submodule.comapSubtypeEquivOfLe (p := P.toSubmodule) (q := A.toSubmodule) h) fun _ ↦ rfl
+
+/-- For `P ≤ A`, the quotient of `A` by `P` is the subquotient `A / P`. -/
+noncomputable def quotientComapSubtypeEquiv (P A : Subrepresentation ρ) :
+    (comap A.subtype P).quotient.Equiv (A.subquotient P) :=
+  .mk (LinearEquiv.refl k _) fun _ ↦ Submodule.linearMap_qext _ (LinearMap.ext fun _ ↦ rfl)
+
+end Subrepresentation
+
+namespace Representation
+
+variable {k : Type*} [Field k] {W : Type*} [Group W] {V : Type*} [AddCommGroup V] [Module k V]
+
+/-- The exterior power `⋀⁰ V` of a representation is the trivial representation on
+`⋀⁰ V ≃ k`. -/
+noncomputable def exteriorPowerZeroEquiv (ρ : Representation k W V) :
+    (ρ.exteriorPower 0).Equiv (Representation.trivial k W k) :=
+  .mk (_root_.exteriorPower.zeroEquiv k V) fun w ↦ LinearMap.ext fun x ↦
+    LinearMap.congr_fun (_root_.exteriorPower.zeroEquiv_naturality (ρ w)) x
+
+/-- The positive exterior powers of the zero representation have no constituents. -/
+theorem ConstituentsLE.exteriorPower_succ_of_subsingleton [Subsingleton V]
+    {V' : Type*} [AddCommGroup V'] [Module k V'] (ρ : Representation k W V)
+    (σ : Representation k W V') (n : ℕ) : ConstituentsLE (ρ.exteriorPower (n + 1)) σ := by
+  have : Subsingleton (⋀[k]^(n + 1) V) := by
+    rw [← Module.finrank_zero_iff (R := k), _root_.exteriorPower.finrank_eq,
+      Module.finrank_zero_of_subsingleton, Nat.choose_zero_succ]
+  exact ConstituentsLE.of_subsingleton _ σ
+
+end Representation
+
+/-! ### The constituents of the exterior powers of a filtered representation -/
+
+namespace Representation
+
+variable {k : Type*} [Field k] {W : Type*} [Group W]
+  {V V' V₁ V₂ : Type*} [AddCommGroup V] [Module k V] [AddCommGroup V'] [Module k V']
+  [AddCommGroup V₁] [Module k V₁] [AddCommGroup V₂] [Module k V₂]
+  {ρ : Representation k W V} {σ : Representation k W V'}
+  {ρ₁ : Representation k W V₁} {σ₁ : Representation k W V₂}
+
+/-- Equivalent representations have equivalent exterior powers. -/
+noncomputable def Equiv.exteriorPower (e : ρ.Equiv σ) (n : ℕ) :
+    (ρ.exteriorPower n).Equiv (σ.exteriorPower n) :=
+  .mk (.ofLinearMap (_root_.exteriorPower.map n (e.toLinearEquiv : V →ₗ[k] V'))
+      (_root_.exteriorPower.map n (e.toLinearEquiv.symm : V' →ₗ[k] V))
+      (by rw [← _root_.exteriorPower.map_comp, LinearEquiv.comp_coe, LinearEquiv.symm_trans_self,
+        LinearEquiv.refl_toLinearMap, _root_.exteriorPower.map_id])
+      (by rw [← _root_.exteriorPower.map_comp, LinearEquiv.comp_coe, LinearEquiv.self_trans_symm,
+        LinearEquiv.refl_toLinearMap, _root_.exteriorPower.map_id])) fun w ↦ by
+    change _root_.exteriorPower.map n _ ∘ₗ _root_.exteriorPower.map n (ρ w) =
+      _root_.exteriorPower.map n (σ w) ∘ₗ _root_.exteriorPower.map n _
+    rw [← _root_.exteriorPower.map_comp, ← _root_.exteriorPower.map_comp]
+    congr 1
+    exact e.isIntertwining' w
+
+/-- Tensor products of equivalent representations are equivalent. -/
+noncomputable def Equiv.tprodCongr (e : ρ.Equiv σ) (e₁ : ρ₁.Equiv σ₁) :
+    (ρ.tprod ρ₁).Equiv (σ.tprod σ₁) :=
+  .mk (TensorProduct.congr e.toLinearEquiv e₁.toLinearEquiv) fun w ↦ by
+    refine TensorProduct.ext' fun x y ↦ ?_
+    simp only [LinearMap.coe_comp, LinearEquiv.coe_coe, Function.comp_apply, tprod_apply,
+      TensorProduct.map_tmul, TensorProduct.congr_tmul]
+    rw [e.toLinearEquiv_apply, e₁.toLinearEquiv_apply, e.toLinearEquiv_apply,
+      e₁.toLinearEquiv_apply, e.isIntertwining, e₁.isIntertwining]
+
+namespace ConstituentsLE
+
+variable {V'' : Type*} [AddCommGroup V''] [Module k V''] {τ : Representation k W V''}
+
+/-- The constituents of a subquotient `S / U` are constituents of `ρ`. -/
+theorem subquotient (U S : Subrepresentation ρ) : ConstituentsLE (S.subquotient U) ρ :=
+  (of_surjective (σ := S.subquotient U) (ρ := S.toRepresentation) ⟨Submodule.mkQ _, fun _ ↦ rfl⟩
+    (Submodule.mkQ_surjective _)).trans (of_injective S.subtype S.subtype_injective)
+
+/-- The constituents of `⋀ⁿ V` are constituents of the pieces `⋀ʲ P ⊗ ⋀ⁿ⁻ʲ (V ⧸ P)`, for a
+subrepresentation `P`. (blueprint: `lem-mg-filtered-exterior-power`) -/
+theorem exteriorPower_of_tprod [FiniteDimensional k V] (P : Subrepresentation ρ) (n : ℕ)
+    (h : ∀ j ≤ n, ConstituentsLE
+      ((P.toRepresentation.exteriorPower j).tprod (P.quotient.exteriorPower (n - j))) τ) :
+    ConstituentsLE (ρ.exteriorPower n) τ :=
+  of_chain (P.exteriorPowerFiltration n) (P.exteriorPowerFiltration_succ_le n)
+    (P.exteriorPowerFiltration_zero n) (P.exteriorPowerFiltration_eq_bot n (Nat.lt_succ_self n))
+    fun j hj ↦ (of_equiv (P.exteriorPowerGradedEquiv n (Nat.add_sub_cancel' (by omega))).symm).trans
+      (h j (by omega))
+
+/-- The pieces `⋀ʲ P ⊗ ⋀ˡ (V ⧸ P)`, `j + l = n`, are subquotients of `⋀ⁿ V`, so their constituents
+are constituents of `⋀ⁿ V`. -/
+theorem tprod_exteriorPower [FiniteDimensional k V] (P : Subrepresentation ρ) {n j l : ℕ}
+    (h : j + l = n) : ConstituentsLE
+      ((P.toRepresentation.exteriorPower j).tprod (P.quotient.exteriorPower l))
+      (ρ.exteriorPower n) :=
+  (of_equiv (P.exteriorPowerGradedEquiv n h)).trans (subquotient _ _)
+
+/-- **Comparing exterior powers along an extension.** Let `P ⊆ V` and `P' ⊆ V'` be
+subrepresentations such that every constituent of `⋀ʲ P` is one of `⋀ʲ P'` for all `j`, and with
+equivalent quotients `V ⧸ P ≃ V' ⧸ P'`. Then every constituent of `⋀ⁿ V` is a constituent of
+`⋀ⁿ V'`. -/
+theorem exteriorPower_of_subrepresentation [FiniteDimensional k V] [FiniteDimensional k V']
+    (P : Subrepresentation ρ) (P' : Subrepresentation σ)
+    (hP : ∀ j, ConstituentsLE (P.toRepresentation.exteriorPower j)
+      (P'.toRepresentation.exteriorPower j))
+    (e : P.quotient.Equiv P'.quotient) (n : ℕ) :
+    ConstituentsLE (ρ.exteriorPower n) (σ.exteriorPower n) :=
+  exteriorPower_of_tprod P n fun j hj ↦ ((hP j).tprod_left _).trans
+    ((of_equiv ((Equiv.refl _).tprodCongr (e.exteriorPower _))).trans
+      (tprod_exteriorPower P' (Nat.add_sub_cancel' hj)))
+
+
+/-- The constituents of the exterior powers of a representation with a finite filtration
+`0 = c₀ ≤ c₁ ≤ ⋯ ≤ c_t = A` only depend on the graded pieces: if `d` is another such filtration
+of `B ⊆ V'` with equivalent graded pieces, every constituent of `⋀ⁿ A` is one of `⋀ⁿ B`.
+(blueprint: `lem-mg-filtered-exterior-power`, `lem-mg-filtration-refinement`) -/
+theorem exteriorPower_of_chain [FiniteDimensional k V] [FiniteDimensional k V'] {t : ℕ}
+    (c : Fin (t + 1) → Subrepresentation ρ) (d : Fin (t + 1) → Subrepresentation σ)
+    (hc : ∀ i : Fin t, c i.castSucc ≤ c i.succ) (hd : ∀ i : Fin t, d i.castSucc ≤ d i.succ)
+    (hc0 : c 0 = ⊥) (hd0 : d 0 = ⊥)
+    (e : ∀ i : Fin t, Nonempty
+      (((c i.succ).subquotient (c i.castSucc)).Equiv ((d i.succ).subquotient (d i.castSucc))))
+    (n : ℕ) : ConstituentsLE ((c (Fin.last t)).toRepresentation.exteriorPower n)
+      ((d (Fin.last t)).toRepresentation.exteriorPower n) := by
+  induction t generalizing n with
+  | zero =>
+    have hc' : c (Fin.last 0) = ⊥ := hc0
+    have hd' : d (Fin.last 0) = ⊥ := hd0
+    rw [hc', hd']
+    rcases n with _ | n
+    · exact of_equiv ((exteriorPowerZeroEquiv _).trans (exteriorPowerZeroEquiv _).symm)
+    · have : Subsingleton (⊥ : Subrepresentation ρ).toSubmodule :=
+        Submodule.subsingleton_iff_eq_bot.2 rfl
+      exact exteriorPower_succ_of_subsingleton _ _ n
+  | succ t ih =>
+    let A := c (Fin.last (t + 1))
+    let B := d (Fin.last (t + 1))
+    let P := c (Fin.last t).castSucc
+    let Q := d (Fin.last t).castSucc
+    have hPA : P ≤ A := hc (Fin.last t)
+    have hQB : Q ≤ B := hd (Fin.last t)
+    have ih' := ih (fun i ↦ c i.castSucc) (fun i ↦ d i.castSucc) (fun i ↦ hc i.castSucc)
+      (fun i ↦ hd i.castSucc) hc0 hd0 (fun i ↦ e i.castSucc)
+    refine exteriorPower_of_subrepresentation (Subrepresentation.comap A.subtype P)
+      (Subrepresentation.comap B.subtype Q) (fun j ↦ ?_) ?_ n
+    · exact ((of_equiv ((Subrepresentation.comapSubtypeEquiv hPA).exteriorPower j)).trans
+        (ih' j)).trans (of_equiv ((Subrepresentation.comapSubtypeEquiv hQB).exteriorPower j).symm)
+    · exact ((Subrepresentation.quotientComapSubtypeEquiv P A).trans
+        (e (Fin.last t)).some).trans (Subrepresentation.quotientComapSubtypeEquiv Q B).symm
+end ConstituentsLE
+
+end Representation
+
+namespace Representation
+
+open DirectSum
+
+variable {k : Type*} [Field k] {W : Type*} [Group W] {t : ℕ} {V : Fin t → Type*}
+  [∀ i, AddCommGroup (V i)] [∀ i, Module k (V i)] (ρs : ∀ i, Representation k W (V i))
+
+/-- The filtration of a direct sum `⨁_{j < t} V j` by the partial sums `⨁_{j < i} V j`. -/
+noncomputable def directSumFiltration (i : ℕ) : Subrepresentation (directSum ρs) :=
+  (Finset.univ.filter fun j : Fin t ↦ (j : ℕ) < i).sup (directSumSummand ρs)
+
+theorem directSumFiltration_zero : directSumFiltration ρs 0 = ⊥ := by
+  simp [directSumFiltration]
+
+theorem directSumFiltration_succ (i : Fin t) :
+    directSumFiltration ρs (i + 1) = directSumSummand ρs i ⊔ directSumFiltration ρs i := by
+  rw [directSumFiltration, directSumFiltration, ← Finset.sup_insert]
+  congr 1
+  ext j
+  simp only [Finset.mem_filter, Finset.mem_univ, true_and, Finset.mem_insert, Fin.ext_iff]
+  omega
+
+theorem directSumFiltration_le_succ (i : ℕ) :
+    directSumFiltration ρs i ≤ directSumFiltration ρs (i + 1) :=
+  Finset.sup_mono fun j hj ↦ by
+    simp only [Finset.mem_filter, Finset.mem_univ, true_and] at hj ⊢
+    omega
+
+theorem directSumFiltration_eq_top : directSumFiltration ρs t = ⊤ := by
+  have h : (Finset.univ.filter fun j : Fin t ↦ (j : ℕ) < t) = Finset.univ :=
+    Finset.filter_true_of_mem fun j _ ↦ j.2
+  rw [directSumFiltration, h, Finset.sup_univ_eq_iSup]
+  refine Subrepresentation.toSubmodule_injective ?_
+  rw [Subrepresentation.toSubmodule_iSup, Subrepresentation.toSubmodule_top]
+  exact (isInternal_directSumSummand ρs).submodule_iSup_eq_top
+
+theorem disjoint_directSumFiltration (i : Fin t) :
+    Disjoint (directSumSummand ρs i) (directSumFiltration ρs i) := by
+  have hind := Subrepresentation.iSupIndep_toSubmodule_iff.1
+    (isInternal_directSumSummand ρs).submodule_iSupIndep
+  refine (hind i).mono_right (Finset.sup_le fun j hj ↦ ?_)
+  simp only [Finset.mem_filter, Finset.mem_univ, true_and] at hj
+  exact le_iSup₂_of_le j (fun h ↦ by subst h; omega) le_rfl
+
+/-- The graded pieces of the partial-sum filtration of a direct sum are its summands. -/
+noncomputable def directSumFiltrationEquiv (i : Fin t) :
+    (ρs i).Equiv ((directSumFiltration ρs (i + 1)).subquotient (directSumFiltration ρs i)) :=
+  ((directSumSummandEquiv ρs i).trans (Subrepresentation.subquotientBotEquiv _).symm).trans
+    (Subrepresentation.subquotientEquivOfIntertwiningMap (.id _)
+      (fun x hx ↦ by
+        rw [directSumFiltration_succ]; exact le_sup_left (a := directSumSummand ρs i) hx)
+      (fun x _ hx ↦ by
+        rw [(Submodule.mem_bot k).1 hx]
+        exact Submodule.zero_mem _)
+      (fun x hx hx' ↦ by
+        have := (disjoint_directSumFiltration ρs i).le_bot
+          (Subrepresentation.mem_inf.2 ⟨hx, hx'⟩)
+        exact this)
+      fun y hy ↦ by
+        rw [directSumFiltration_succ] at hy
+        obtain ⟨a, ha, b, hb, rfl⟩ := Submodule.mem_sup.1 hy
+        refine ⟨a, ha, ?_⟩
+        rw [IntertwiningMap.id_apply, sub_add_cancel_left]
+        exact Submodule.neg_mem _ hb)
+
+end Representation
+
+namespace Representation.CompositionSeries
+
+variable {k : Type*} [Field k] {W : Type*} [Group W] {V : Type*} [AddCommGroup V] [Module k V]
+  [FiniteDimensional k V] {ρ : Representation k W V} (s : ρ.CompositionSeries)
+
+/-- A representation is equivalent to its top subrepresentation. -/
+private noncomputable def topEquiv (ρ : Representation k W V) :
+    ρ.Equiv (⊤ : Subrepresentation ρ).toRepresentation :=
+  (Subrepresentation.topSubquotientBotEquiv ρ).symm.trans (Subrepresentation.subquotientBotEquiv ⊤)
+
+omit [FiniteDimensional k V] in
+private theorem series_zero : s.series 0 = ⊥ :=
+  s.head_eq
+
+omit [FiniteDimensional k V] in
+private theorem exteriorPower_le_of_eq_top {V' : Type*} [AddCommGroup V'] [Module k V']
+    {σ : Representation k W V'} {A : Subrepresentation σ} (hA : A = ⊤) (n : ℕ) :
+    ConstituentsLE (σ.exteriorPower n) (A.toRepresentation.exteriorPower n) := by
+  subst hA
+  exact ConstituentsLE.of_equiv ((topEquiv σ).exteriorPower n)
+
+omit [FiniteDimensional k V] in
+private theorem exteriorPower_ge_of_eq_top {V' : Type*} [AddCommGroup V'] [Module k V']
+    {σ : Representation k W V'} {A : Subrepresentation σ} (hA : A = ⊤) (n : ℕ) :
+    ConstituentsLE (A.toRepresentation.exteriorPower n) (σ.exteriorPower n) := by
+  subst hA
+  exact ConstituentsLE.of_equiv ((topEquiv σ).exteriorPower n).symm
+
+/-- **The exterior powers of a representation and of its semisimplification have the same
+constituents**, one direction: every constituent of `⋀ⁿ V` is a constituent of `⋀ⁿ V^ss`.
+(blueprint: `lem-mg-filtered-exterior-power`, `lem-mg-filtration-refinement`) -/
+theorem constituentsLE_exteriorPower_semisimplification (n : ℕ) :
+    ConstituentsLE (ρ.exteriorPower n) (s.semisimplification.exteriorPower n) := by
+  have h := ConstituentsLE.exteriorPower_of_chain s.series
+    (fun i : Fin (s.length + 1) ↦ directSumFiltration (fun i ↦ s.factor i) i)
+    (fun i ↦ (s.covBy i).le) (fun i ↦ directSumFiltration_le_succ _ _) s.series_zero
+    (directSumFiltration_zero _) (fun i ↦ ⟨directSumFiltrationEquiv (fun i ↦ s.factor i) i⟩) n
+  exact (exteriorPower_le_of_eq_top s.last_eq n).trans (h.trans
+    (exteriorPower_ge_of_eq_top (directSumFiltration_eq_top _) n))
+
+/-- **The exterior powers of a representation and of its semisimplification have the same
+constituents**, the other direction: every constituent of `⋀ⁿ V^ss` is a constituent of `⋀ⁿ V`.
+(blueprint: `lem-mg-filtered-exterior-power`, `lem-mg-filtration-refinement`) -/
+theorem constituentsLE_exteriorPower_semisimplification' (n : ℕ) :
+    ConstituentsLE (s.semisimplification.exteriorPower n) (ρ.exteriorPower n) := by
+  have h := ConstituentsLE.exteriorPower_of_chain
+    (fun i : Fin (s.length + 1) ↦ directSumFiltration (fun i ↦ s.factor i) i) s.series
+    (fun i ↦ directSumFiltration_le_succ _ _) (fun i ↦ (s.covBy i).le)
+    (directSumFiltration_zero _) s.series_zero
+    (fun i ↦ ⟨(directSumFiltrationEquiv (fun i ↦ s.factor i) i).symm⟩) n
+  exact (exteriorPower_le_of_eq_top (directSumFiltration_eq_top _) n).trans (h.trans
+    (exteriorPower_ge_of_eq_top s.last_eq n))
+
+end Representation.CompositionSeries

@@ -12,12 +12,14 @@ public import Mathlib.Data.Real.Basic
 public import Mathlib.GroupTheory.Archimedean
 public import Mathlib.RepresentationTheory.Irreducible
 public import WeilConjectures.AlgebraicGeometry.LinearAlgebraicGroup.Monodromy
+public import WeilConjectures.Mathlib.Data.Multiset.MapFold
 public import WeilConjectures.Mathlib.LinearAlgebra.Eigenspace.Basic
 public import WeilConjectures.Mathlib.LinearAlgebra.Matrix.ToLin
 public import WeilConjectures.Mathlib.RepresentationTheory.Basic
 public import WeilConjectures.Mathlib.RepresentationTheory.Subrepresentation
 public import WeilConjectures.RingTheory.HopfAlgebra.GeneralLinearGroup.ExteriorPower
 public import WeilConjectures.RingTheory.HopfAlgebra.GeneralLinearGroup.Kronecker
+public import WeilConjectures.RepresentationTheory.ExteriorPower
 
 /-!
 # Determinant weights of a degree datum
@@ -612,6 +614,145 @@ theorem DegreeDatum.exists_multiset_le_and_detWeight_eq_sum_of_exteriorPower
     refine hQ.trans ?_
     simp only [hdw, map_prod, toAdd_prod, Finset.sum_div]
 
+/-- The converse of `DegreeDatum.exists_multiset_le_and_detWeight_eq_sum_of_exteriorPower`: if all
+simple constituents of `⋀^s V` have finite geometric determinant, every sub-multiset `T` of size
+`s` of the rank-counted weight multiset is the weight `dw(Q) = T.sum` of some simple constituent
+`Q` of `⋀^s V`.  Following the blueprint: `T` is the list of weights of an `s`-element set `I` of
+basis vectors adapted to the decomposition, the central element acts on the wedge `e_I` by
+`∏_{i ∈ I} c_i`, and a simple constituent of the corresponding eigenspace has the weight
+`∑_{i ∈ I} χ(c_i) / N`. (blueprint: `prop-ag-det-weight-exterior`) -/
+theorem DegreeDatum.exists_detWeight_eq_sum_of_exteriorPower
+    {k : Type u} [Field k] [IsAlgClosed k] [CharZero k] {W : Type*} [Group W] (D₀ : DegreeDatum W)
+    (χ : RealCharacter k)
+    {V : Type*} [AddCommGroup V] [Module k V] [FiniteDimensional k V]
+    (rV : Representation k W V) (s : ℕ)
+    {ι : Type*} [Fintype ι] [DecidableEq ι] (Vs : ι → Subrepresentation rV)
+    (hsimpleVs : ∀ j, IsIrreducible (Vs j).toRepresentation)
+    (hdetVs : ∀ j, (Vs j).toRepresentation.HasFiniteGeometricDet D₀.deg)
+    (hdirect : DirectSum.IsInternal fun j ↦ (Vs j).toSubmodule)
+    (hdet : ∀ U S : Subrepresentation (rV.exteriorPower s), IsIrreducible (S.subquotient U) →
+      (S.subquotient U).HasFiniteGeometricDet D₀.deg)
+    {T : Multiset ℝ} (hT : T ≤ weightMultiset χ D₀.degreeOneElement Vs)
+    (hcard : Multiset.card T = s) :
+    ∃ U S : Subrepresentation (rV.exteriorPower s), U < S ∧ IsIrreducible (S.subquotient U) ∧
+      (S.subquotient U).detWeight χ D₀.degreeOneElement = T.sum := by
+  classical
+  -- The same setup as for `exists_multiset_le_and_detWeight_eq_sum_of_exteriorPower`.
+  let d : ι → ℕ := fun j ↦ finrank k (Vs j).toSubmodule
+  let bσ : Basis (Σ j, Fin (d j)) k V :=
+    hdirect.collectedBasis fun j ↦ Module.finBasis k (Vs j).toSubmodule
+  let eσ : ULift.{u} (Fin (Fintype.card (Σ j, Fin (d j)))) ≃ Σ j, Fin (d j) :=
+    Equiv.ulift.trans (Fintype.equivFin _).symm
+  let : DecidableEq (ULift.{u} (Fin (Fintype.card (Σ j, Fin (d j))))) :=
+    fun a b ↦ LinearOrder.toDecidableEq a b
+  let b : Basis (ULift.{u} (Fin (Fintype.card (Σ j, Fin (d j))))) k V := bσ.reindex eσ.symm
+  let idx : ULift.{u} (Fin (Fintype.card (Σ j, Fin (d j)))) → ι := fun i ↦ (eσ i).1
+  have hb_mem (i) : b i ∈ (Vs (idx i)).toSubmodule := by
+    rw [Basis.reindex_apply]
+    exact hdirect.collectedBasis_mem _ _
+  let D : RepresentedDegreeDatum W (ULift.{u} (Fin (Fintype.card (Σ j, Fin (d j))))) k :=
+    { D₀ with rep := (Units.map (LinearMap.toMatrixAlgEquiv b).toMonoidHom).comp rV.toHomUnits }
+  have hρ (w : W) : LinearMap.toMatrix b b (rV w) = (D.rep w : Matrix _ _ k) := by
+    ext i i'
+    rw [LinearMap.toMatrix_apply]
+    exact (LinearMap.toMatrixAlgEquiv_apply b (rV w) i i').symm
+  have hss : D.IsSemisimple :=
+    (Subrepresentation.orderIsoMapComap (D.basisEquiv b hρ)).complementedLattice_iff.1
+      (isSemisimpleRepresentation_of_isInternal Vs hsimpleVs hdirect)
+  obtain ⟨N, z, hz⟩ := D.exists_isPositiveCentralPair hss
+  let Z : V →ₗ[k] V := Matrix.toLin b b (z : Matrix _ _ k)
+  have hZcomm (w : W) : Z ∘ₗ rV w = rV w ∘ₗ Z := by
+    apply (LinearMap.toMatrix b b).injective
+    rw [LinearMap.toMatrix_comp b b b, LinearMap.toMatrix_comp b b b, hρ,
+      LinearMap.toMatrix_toLin, ← Units.val_mul, ← Units.val_mul, hz.commute w]
+  have hZmem (T : Subrepresentation rV) {x : V} (hx : x ∈ T) : Z x ∈ T :=
+    D.toLin_apply_mem_of_mem_zeroLocus_arithmeticMonodromy b hρ
+      hz.mem_zeroLocus_arithmeticMonodromy T hx
+  have hscalar (j : ι) : ∃ c : kˣ, (∀ x ∈ (Vs j).toSubmodule, Z x = (c : k) • x) ∧
+      (Vs j).toRepresentation.detWeight χ D₀.degreeOneElement =
+        Multiplicative.toAdd (χ c) / N := by
+    have hirr : IsIrreducible ((Vs j).subquotient ⊥) :=
+      (Subrepresentation.orderIsoMapComap
+        (Subrepresentation.subquotientBotEquiv (Vs j))).isSimpleOrder_iff.2 (hsimpleVs j)
+    obtain ⟨c, hc⟩ := Subrepresentation.exists_apply_sub_smul_mem_of_isIrreducible hirr Z
+      (fun w x ↦ LinearMap.congr_fun (hZcomm w) x) (fun x hx ↦ hZmem ⊥ hx) (fun x hx ↦ hZmem _ hx)
+    have hc' (x) (hx : x ∈ (Vs j).toSubmodule) : Z x = c • x :=
+      sub_eq_zero.1 ((Submodule.mem_bot k).1 (hc x hx))
+    have hbot : ⊥ < Vs j := (Subrepresentation.isAtom_of_isIrreducible (hsimpleVs j)).bot_lt
+    have hc0 : c ≠ 0 := by
+      rintro rfl
+      obtain ⟨x, hx, hx0⟩ := SetLike.exists_of_lt hbot
+      refine hx0 ((Submodule.mem_bot k).2 ?_)
+      have h0 : Z x = 0 := by rw [hc' x hx, zero_smul]
+      rw [Matrix.toLin_apply_eq_equivFun_symm, LinearEquiv.map_eq_zero_iff] at h0
+      have := congrArg (fun y ↦ (z⁻¹).val *ᵥ y) h0
+      simpa [Matrix.mulVec_mulVec] using this
+    have hchar := Subrepresentation.detCharacter_subquotient_bot (Vs j)
+    refine ⟨Units.mk0 c hc0, hc', ?_⟩
+    rw [← detWeight_eq_of_detCharacter_eq hchar
+      (Subrepresentation.subquotientBotEquiv (Vs j)).toLinearEquiv.finrank_eq]
+    exact D.detWeight_eq_of_isPositiveCentralPair_of_basis χ hz b hρ hbot
+      ((hasFiniteGeometricDet_iff_of_detCharacter_eq hchar).2 (hdetVs j)) _
+      fun x hx ↦ by
+        rw [Units.val_mk0, show Matrix.toLin b b (z : Matrix _ _ k) x = Z x from rfl, hc' x hx,
+          sub_self]
+        exact Submodule.zero_mem _
+  choose cs hcs hdw using hscalar
+  have hZb (i) : Z (b i) = ((cs (idx i) : kˣ) : k) • b i := hcs _ _ (hb_mem i)
+  let B := b.exteriorPower s
+  let r : GL (ULift.{u} (Fin (Fintype.card (Σ j, Fin (d j))))) k →* GL _ k :=
+    Matrix.GeneralLinearGroup.exteriorPower s
+  obtain ⟨φ, hφ⟩ := exists_algHom_comp_eq_evalAlgHom_exteriorPower (k := k)
+    (n := ULift.{u} (Fin (Fintype.card (Σ j, Fin (d j))))) s
+  have hz' := hz.map r φ hφ
+  have hρ' (w : W) : LinearMap.toMatrix B B (rV.exteriorPower s w) =
+      ((D.map r).rep w : Matrix _ _ k) := by
+    change LinearMap.toMatrix B B (exteriorPower.map s (rV w)) = _
+    rw [LinearMap.toMatrix_exteriorPower_map, hρ]
+    rfl
+  have hZ' : exteriorPower.map s Z = Matrix.toLin B B (r z : Matrix _ _ k) := by
+    apply (LinearMap.toMatrix B B).injective
+    rw [LinearMap.toMatrix_exteriorPower_map, LinearMap.toMatrix_toLin, LinearMap.toMatrix_toLin]
+    rfl
+  -- `T` is the list of weights of an `s`-element set `I` of basis vectors.
+  let f : ULift.{u} (Fin (Fintype.card (Σ j, Fin (d j)))) → ℝ :=
+    fun i ↦ (Vs (idx i)).toRepresentation.detWeight χ D₀.degreeOneElement
+  have hW : weightMultiset χ D₀.degreeOneElement Vs = Finset.univ.val.map f := by
+    rw [weightMultiset, sum_replicate_eq_map_univ_sigma, ← Finset.map_univ_equiv eσ,
+      Finset.map_val, Multiset.map_map]
+    rfl
+  obtain ⟨u, hu, rfl⟩ := Multiset.exists_le_map_eq_of_le_map (hW ▸ hT)
+  let I : Finset (ULift.{u} (Fin (Fintype.card (Σ j, Fin (d j))))) :=
+    ⟨u, Multiset.nodup_of_le hu Finset.univ.nodup⟩
+  have hI : I.card = s := by rw [← hcard, Multiset.card_map]; rfl
+  -- The eigenspace of `⋀^s Z` for `c = ∏_{i ∈ I} c_i` is a nonzero subrepresentation.
+  let c : kˣ := ∏ i ∈ I, cs (idx i)
+  let E : Subrepresentation (rV.exteriorPower s) :=
+    { toSubmodule := Module.End.eigenspace (exteriorPower.map s Z) c
+      apply_mem_toSubmodule w x hx := by
+        rw [Module.End.mem_eigenspace_iff] at hx ⊢
+        change exteriorPower.map s Z (exteriorPower.map s (rV w) x) =
+          (c : k) • exteriorPower.map s (rV w) x
+        rw [← LinearMap.comp_apply, ← exteriorPower.map_comp, hZcomm, exteriorPower.map_comp,
+          LinearMap.comp_apply, hx, map_smul] }
+  have hBI : B ⟨I, hI⟩ ∈ E := by
+    change B ⟨I, hI⟩ ∈ Module.End.eigenspace _ _
+    rw [Module.End.mem_eigenspace_iff, exteriorPower.map_basis_exteriorPower_of_diagonal b hZb,
+      Units.coe_prod]
+  have hE : E ≠ ⊥ := fun h ↦ by
+    rw [h] at hBI
+    exact B.ne_zero ⟨I, hI⟩ ((Submodule.mem_bot k).1 hBI)
+  obtain ⟨U, hUE, hirr⟩ := Subrepresentation.exists_lt_isIrreducible_subquotient hE
+  refine ⟨U, E, hUE, hirr, ?_⟩
+  have hQ := (D.map r).detWeight_eq_of_isPositiveCentralPair_of_basis χ hz' B hρ' hUE
+    (hdet U E hirr) c fun x hx ↦ by
+      rw [← hZ', (Module.End.mem_eigenspace_iff.1 hx), sub_self]
+      exact Submodule.zero_mem _
+  refine hQ.trans ?_
+  change _ = (I.val.map f).sum
+  rw [← Finset.sum_eq_multiset_sum]
+  simp only [c, map_prod, toAdd_prod, Finset.sum_div, f, hdw]
+
 /-- The tensor-product weight theorem for a degree datum `D₀` and irreducible `V` and `E`: every
 subquotient `Q` of `V ⊗ E` with finite geometric determinant has `dw(Q) = dw(V) + dw(E)`.
 Following the blueprint: a positive central pair `(N, z)` for the semisimple datum of `V ⊕ E`
@@ -799,6 +940,74 @@ theorem exists_multiset_le_and_detWeight_eq_sum_of_exteriorPower [IsAlgClosed k]
   · rw [hγ, detWeight_mul_zpow_of_mem_ker _ hdet χ D₀.degreeOneElement hu,
       Multiset.sum_map_mul_left, Multiset.map_id']
     exact congrArg _ hsum
+
+/-- The converse of `exists_multiset_le_and_detWeight_eq_sum_of_exteriorPower`: let `V` be a
+semisimple representation of a degree datum over an algebraically closed field of characteristic
+zero, written as an internal direct sum of simple subrepresentations `Vs j` with finite geometric
+determinant. If all simple constituents of `⋀^s V` have finite geometric determinant, every
+sub-multiset `T` of size `s` of the rank-counted weight multiset is the determinant weight
+`dw_χ(Q) = T.sum` of some simple constituent `Q = S / U` of `⋀^s V`. As in
+`exists_multiset_le_and_detWeight_eq_sum_of_exteriorPower`, the degree map need not be surjective
+and `γ` need not have degree one. (blueprint: `prop-ag-det-weight-exterior`) -/
+theorem exists_detWeight_eq_sum_of_exteriorPower [IsAlgClosed k] [CharZero k]
+    (χ : RealCharacter k) (deg : W →* Multiplicative ℤ) (γ : W)
+    {V : Type*} [AddCommGroup V] [Module k V] [FiniteDimensional k V]
+    (rV : Representation k W V) (s : ℕ)
+    {ι : Type*} [Fintype ι] [DecidableEq ι] (Vs : ι → Subrepresentation rV)
+    (hsimpleVs : ∀ j, IsIrreducible (Vs j).toRepresentation)
+    (hdetVs : ∀ j, (Vs j).toRepresentation.HasFiniteGeometricDet deg)
+    (hdirect : DirectSum.IsInternal fun j ↦ (Vs j).toSubmodule)
+    (hdet : ∀ U S : Subrepresentation (rV.exteriorPower s), IsIrreducible (S.subquotient U) →
+      (S.subquotient U).HasFiniteGeometricDet deg)
+    {T : Multiset ℝ} (hT : T ≤ weightMultiset χ γ Vs) (hcard : Multiset.card T = s) :
+    ∃ U S : Subrepresentation (rV.exteriorPower s), U < S ∧ IsIrreducible (S.subquotient U) ∧
+      (S.subquotient U).detWeight χ γ = T.sum := by
+  classical
+  by_cases htriv : ∀ w, deg w = 1
+  · -- Every element has degree zero: all the weights vanish.
+    have hV0 (j : ι) := detWeight_eq_zero_of_forall_deg_eq_one htriv _ (hdetVs j) χ γ
+    have hT0 : T.sum = 0 := Multiset.sum_eq_zero fun x hx ↦ by
+      obtain ⟨j, -, hj⟩ := Multiset.mem_sum.1 (Multiset.mem_of_le hT hx)
+      rw [hV0] at hj
+      exact Multiset.eq_of_mem_replicate hj
+    -- `s ≤ dim V`, so `⋀^s V` is nonzero and has a simple constituent.
+    have hcardW : Multiset.card (weightMultiset χ γ Vs) = Module.finrank k V := by
+      rw [weightMultiset, Multiset.card_sum]
+      simp only [Multiset.card_replicate]
+      rw [Module.finrank_eq_card_basis
+        (hdirect.collectedBasis fun j ↦ Module.finBasis k (Vs j).toSubmodule),
+        Fintype.card_sigma]
+      simp
+    have hs : s ≤ Module.finrank k V := hcard ▸ hcardW ▸ Multiset.card_le_card hT
+    have htop : (⊤ : Subrepresentation (rV.exteriorPower s)) ≠ ⊥ := by
+      intro h
+      have hpos : 0 < Module.finrank k (⋀[k]^s V) := by
+        rw [exteriorPower.finrank_eq]
+        exact Nat.choose_pos hs
+      obtain ⟨x, hx⟩ := Module.finrank_pos_iff_exists_ne_zero.1 hpos
+      have hxtop : x ∈ (⊤ : Subrepresentation (rV.exteriorPower s)) := Submodule.mem_top
+      rw [h] at hxtop
+      exact hx ((Submodule.mem_bot k).1 hxtop)
+    obtain ⟨U, hU, hirr⟩ := Subrepresentation.exists_lt_isIrreducible_subquotient htop
+    exact ⟨U, ⊤, hU, hirr, by
+      rw [detWeight_eq_zero_of_forall_deg_eq_one htriv _ (hdet U ⊤ hirr) χ γ, hT0]⟩
+  -- Otherwise divide the degrees by their generator to get a degree datum.
+  simp only [not_forall] at htriv
+  obtain ⟨D₀, hker, u, hu, m, hγ⟩ := DegreeDatum.exists_ker_eq_and_eq_mul_zpow deg htriv γ
+  have hW : weightMultiset χ γ Vs =
+      (weightMultiset χ D₀.degreeOneElement Vs).map fun x ↦ (m : ℝ) * x := by
+    rw [weightMultiset, weightMultiset, ← Multiset.coe_mapAddMonoidHom, map_sum]
+    refine Finset.sum_congr rfl fun j _ ↦ ?_
+    rw [Multiset.coe_mapAddMonoidHom, Multiset.map_replicate, hγ,
+      detWeight_mul_zpow_of_mem_ker _ (hdetVs j) χ D₀.degreeOneElement hu]
+  obtain ⟨T₀, hT₀, rfl⟩ := Multiset.exists_le_map_eq_of_le_map (hW ▸ hT)
+  obtain ⟨U, S, hUS, hirr, hdw⟩ := D₀.exists_detWeight_eq_sum_of_exteriorPower χ rV s Vs
+    hsimpleVs (fun j ↦ (hasFiniteGeometricDet_congr hker _).1 (hdetVs j)) hdirect
+    (fun U S h ↦ (hasFiniteGeometricDet_congr hker _).1 (hdet U S h)) hT₀
+    (by rw [← hcard, Multiset.card_map])
+  refine ⟨U, S, hUS, hirr, ?_⟩
+  rw [hγ, detWeight_mul_zpow_of_mem_ker _ (hdet U S hirr) χ D₀.degreeOneElement hu, hdw,
+    Multiset.sum_map_mul_left, Multiset.map_id']
 
 /-- The weights of the subquotients of the tensor product of two irreducible representations `V`
 and `E` of a degree datum, over an algebraically closed field of characteristic zero: if `V`, `E`
@@ -1026,3 +1235,110 @@ theorem forall_norm_eq_rpow_iff_forall (D : DegreeDatum W) (χ : W →* kˣ)
   rwa [D.norm_apply_eq_rpow_iff χ hχ ι hq t he hσ]
 
 end AlgebraicGeometry.Monodromy.DegreeDatum
+
+namespace Representation.CompositionSeries
+
+open DirectSum
+
+variable {k : Type*} [Field k] {W : Type*} [Group W] {V : Type*} [AddCommGroup V] [Module k V]
+  {ρ : Representation k W V}
+
+/-- The *rank-counted constituent weights* of a composition series: the determinant weight of each
+composition factor `A_i`, repeated `dim A_i` times. (blueprint: `d-weights`) -/
+noncomputable def weightMultiset (χ : RealCharacter k) (γ : W) (s : ρ.CompositionSeries) :
+    Multiset ℝ :=
+  ∑ i, Multiset.replicate (Module.finrank k ((s.series i.succ).toSubmodule ⧸
+    (s.series i.castSucc).toSubmodule.comap (s.series i.succ).toSubmodule.subtype))
+    ((s.factor i).detWeight χ γ)
+
+/-- The weight multiset of a composition series is that of the decomposition of its
+semisimplification into its summands. -/
+theorem weightMultiset_directSumSummand (χ : RealCharacter k) (γ : W) (s : ρ.CompositionSeries) :
+    Representation.weightMultiset χ γ (directSumSummand fun i ↦ s.factor i) =
+      s.weightMultiset χ γ := by
+  refine Finset.sum_congr rfl fun i _ ↦ ?_
+  rw [(directSumSummandEquiv (fun i ↦ s.factor i) i).finrank_eq,
+    (directSumSummandEquiv (fun i ↦ s.factor i) i).detWeight_eq]
+
+/-- An irreducible subquotient `S / U` is equivalent to `S / (U ⊓ S)`, with `U ⊓ S < S`. -/
+private theorem exists_lt_of_isIrreducible {V' : Type*} [AddCommGroup V'] [Module k V']
+    {σ : Representation k W V'} {U S : Subrepresentation σ}
+    (hirr : (S.subquotient U).IsIrreducible) :
+    U ⊓ S < S ∧ (S.subquotient (U ⊓ S)).IsIrreducible ∧
+      Nonempty ((S.subquotient (U ⊓ S)).Equiv (S.subquotient U)) :=
+  ⟨Subrepresentation.inf_lt_of_isIrreducible hirr,
+    (Subrepresentation.subquotientInfEquiv U S).isIrreducible_iff.2 hirr,
+    ⟨Subrepresentation.subquotientInfEquiv U S⟩⟩
+
+/-- The two directions of `exteriorPower_detWeight` for a representation `ρ` whose `r`-th exterior
+power has the same constituents as that of a semisimple representation `X`, decomposed into simple
+summands `Vs j`. -/
+private theorem exteriorPower_detWeight_of_constituentsLE [IsAlgClosed k] [CharZero k]
+    (χ : RealCharacter k) (deg : W →* Multiplicative ℤ) (γ : W) (r : ℕ)
+    {V' : Type*} [AddCommGroup V'] [Module k V'] [FiniteDimensional k V'] [Nontrivial V']
+    {X : Representation k W V'} {ι : Type*} [Fintype ι] [DecidableEq ι]
+    (Vs : ι → Subrepresentation X) (hsimpleVs : ∀ j, IsIrreducible (Vs j).toRepresentation)
+    (hdetVs : ∀ j, (Vs j).toRepresentation.HasFiniteGeometricDet deg)
+    (hdirect : DirectSum.IsInternal fun j ↦ (Vs j).toSubmodule) {M : Multiset ℝ}
+    (hM : Representation.weightMultiset χ γ Vs = M)
+    (h₁ : ConstituentsLE (ρ.exteriorPower r) (X.exteriorPower r))
+    (h₂ : ConstituentsLE (X.exteriorPower r) (ρ.exteriorPower r))
+    (hdet : ∀ U S : Subrepresentation (ρ.exteriorPower r), (S.subquotient U).IsIrreducible →
+      (S.subquotient U).HasFiniteGeometricDet deg) :
+    (∀ U S : Subrepresentation (ρ.exteriorPower r), (S.subquotient U).IsIrreducible →
+      ∃ T ≤ M, Multiset.card T = r ∧ (S.subquotient U).detWeight χ γ = T.sum) ∧
+    ∀ T ≤ M, Multiset.card T = r →
+      ∃ U S : Subrepresentation (ρ.exteriorPower r), U < S ∧ (S.subquotient U).IsIrreducible ∧
+        (S.subquotient U).detWeight χ γ = T.sum := by
+  subst hM
+  refine ⟨fun U S hirr ↦ ?_, fun T hT hcard ↦ ?_⟩
+  · -- `Q` is a constituent of `⋀^r X`.
+    obtain ⟨U', S', hirr', ⟨e⟩⟩ := h₁ U S hirr
+    obtain ⟨hlt, hirr'', ⟨e'⟩⟩ := exists_lt_of_isIrreducible hirr'
+    obtain ⟨T, hT, hcard, hdw⟩ := exists_multiset_le_and_detWeight_eq_sum_of_exteriorPower χ deg γ
+      X r Vs hsimpleVs hdetVs hdirect hlt hirr''
+      ((e.trans e'.symm).hasFiniteGeometricDet_iff.2 (hdet U S hirr))
+    exact ⟨T, hT, hcard, by rw [← (e.trans e'.symm).detWeight_eq, hdw]⟩
+  · -- a constituent of `⋀^r X` with the weight `T.sum`, and the same constituent of `⋀^r V`
+    obtain ⟨U, S, -, hirr, hdw⟩ := exists_detWeight_eq_sum_of_exteriorPower χ deg γ X r Vs
+      hsimpleVs hdetVs hdirect (fun U S hirr ↦ by
+        obtain ⟨U', S', hirr', ⟨e⟩⟩ := h₂ U S hirr
+        exact e.hasFiniteGeometricDet_iff.1 (hdet U' S' hirr')) hT hcard
+    obtain ⟨U', S', hirr', ⟨e⟩⟩ := h₂ U S hirr
+    obtain ⟨hlt, hirr'', ⟨e'⟩⟩ := exists_lt_of_isIrreducible hirr'
+    exact ⟨U' ⊓ S', S', hlt, hirr'', by rw [(e.trans e'.symm).detWeight_eq, hdw]⟩
+
+/-- **Determinant weights of an exterior power.** Let `V` be a nonzero finite-dimensional
+representation of `W` over an algebraically closed field of characteristic zero, with a degree
+map `deg` and an element `γ` at which the weights are taken, and let `s` be a composition series of
+`V` with composition factors `A_1, …, A_t`. Assume that every `A_i` and every simple constituent of
+`⋀^r V` has finite geometric determinant. Then
+
+* every simple constituent `Q` of `⋀^r V` has determinant weight `T.sum` for a sub-multiset `T` of
+  size `r` of the rank-counted constituent weights (in which `dw(A_i)` occurs `dim A_i` times);
+* conversely, every such sum `T.sum` is the determinant weight of some simple constituent.
+
+Grouping equal weights, a sub-multiset `T` of size `r` is a tuple `(n_γ)` indexed by the distinct
+weights `γ`, with `0 ≤ n_γ ≤ r(γ)` and `∑ n_γ = r`, of weight `∑ n_γ γ`: this is the formulation of
+the blueprint. Neither `V` nor `⋀^r V` is assumed semisimple: both directions are reduced to the
+semisimplification `V^ss = ⨁ A_i`, whose exterior powers have the same constituents
+(`constituentsLE_exteriorPower_semisimplification`). (blueprint: `prop-ag-det-weight-exterior`) -/
+theorem exteriorPower_detWeight [IsAlgClosed k] [CharZero k] [FiniteDimensional k V]
+    [Nontrivial V] (χ : RealCharacter k) (deg : W →* Multiplicative ℤ) (γ : W)
+    (s : ρ.CompositionSeries) (r : ℕ) (hdetA : ∀ i, (s.factor i).HasFiniteGeometricDet deg)
+    (hdet : ∀ U S : Subrepresentation (ρ.exteriorPower r), (S.subquotient U).IsIrreducible →
+      (S.subquotient U).HasFiniteGeometricDet deg) :
+    (∀ U S : Subrepresentation (ρ.exteriorPower r), (S.subquotient U).IsIrreducible →
+      ∃ T ≤ s.weightMultiset χ γ, Multiset.card T = r ∧
+        (S.subquotient U).detWeight χ γ = T.sum) ∧
+    ∀ T ≤ s.weightMultiset χ γ, Multiset.card T = r →
+      ∃ U S : Subrepresentation (ρ.exteriorPower r), U < S ∧ (S.subquotient U).IsIrreducible ∧
+        (S.subquotient U).detWeight χ γ = T.sum :=
+  have := s.nontrivial_semisimplification
+  exteriorPower_detWeight_of_constituentsLE χ deg γ r (X := s.semisimplification)
+    (directSumSummand fun i ↦ s.factor i) s.isIrreducible_directSumSummand
+    (fun i ↦ (directSumSummandEquiv (fun i ↦ s.factor i) i).hasFiniteGeometricDet_iff.2 (hdetA i))
+    s.isInternal_semisimplification (s.weightMultiset_directSumSummand χ γ)
+    (s.constituentsLE_exteriorPower_semisimplification r)
+    (s.constituentsLE_exteriorPower_semisimplification' r) hdet
+end Representation.CompositionSeries
