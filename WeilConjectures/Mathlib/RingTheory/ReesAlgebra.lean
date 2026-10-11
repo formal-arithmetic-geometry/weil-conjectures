@@ -229,6 +229,27 @@ lemma extendedReesAlgebraMap_T (φ : R →+* S) (J : Ideal S) (h : I.map φ ≤ 
     I.extendedReesAlgebraMap φ J h I.extendedReesAlgebraT = J.extendedReesAlgebraT :=
   Subtype.ext (laurentMap_T φ 1)
 
+
+/-- The extended Rees algebra is invariant under ring isomorphisms carrying the ideals onto each
+other. -/
+lemma bijective_extendedReesAlgebraMap (φ : R ≃+* S) (J : Ideal S) (h : I.map φ.toRingHom = J) :
+    Function.Bijective (I.extendedReesAlgebraMap φ.toRingHom J h.le) := by
+  have h' : J.map φ.symm.toRingHom ≤ I := by
+    rw [← h, Ideal.map_map, show φ.symm.toRingHom.comp φ.toRingHom = RingHom.id R by ext; simp,
+      Ideal.map_id]
+  have h₁ := extendedReesAlgebraMap_comp φ.toRingHom φ.symm.toRingHom J I h.le h'
+  have h₂ := extendedReesAlgebraMap_comp φ.symm.toRingHom φ.toRingHom I J h' h.le
+  have e₁ : φ.symm.toRingHom.comp φ.toRingHom = RingHom.id R := by ext; simp
+  have e₂ : φ.toRingHom.comp φ.symm.toRingHom = RingHom.id S := by ext; simp
+  refine ⟨fun x y hxy ↦ ?_, fun y ↦ ⟨J.extendedReesAlgebraMap φ.symm.toRingHom I h' y, ?_⟩⟩
+  · have := congr(J.extendedReesAlgebraMap φ.symm.toRingHom I h' $hxy)
+    rw [← RingHom.comp_apply, ← RingHom.comp_apply, h₁] at this
+    simp_rw [e₁] at this
+    rwa [extendedReesAlgebraMap_id] at this
+  · rw [← RingHom.comp_apply, h₂]
+    simp_rw [e₂]
+    rw [extendedReesAlgebraMap_id]
+    rfl
 end Map
 
 section BaseChange
