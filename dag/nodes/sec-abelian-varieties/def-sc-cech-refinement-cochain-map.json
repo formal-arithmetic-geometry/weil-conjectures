@@ -1,0 +1,113 @@
+{
+ "id": "def-sc-cech-refinement-cochain-map",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "the Cech/pullback cup product used to identify the Kunneth map in the cube proof",
+   "via": [
+    "lem-sc-picard-cech-cup-pullback-compat",
+    "lem-sc-picard-kunneth-qcoh",
+    "lem-sc-picard-h1-product-injective",
+    "lem-sc-picard-product-open",
+    "lem-sc-general-theorem-of-cube"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "definition",
+ "title": "Refinement cochain map along a scheme morphism",
+ "status": "split",
+ "statement": "Let f:X'\\to X be a morphism of schemes [def-pc-scheme], U=(U_i)_{i\\in I} and U'=(U'_a)_{a\\in I'} families of opens, c:I'\\to I with U'_a\\subset f^{-1}(U_{c(a)}), and F an O_X-module. Use tensor pullback [def-pc-module-pullback] and the ordered Cech complexes [def-sc-module-cech-comparison]. The refinement cochain map gamma:Cech(U,F)\\to Cech(U',f^*F), after forgetting global-section scalars, is characterized in degree n by gamma(s)_{a_0\\ldots a_n}=(f^*s_{c(a_0)\\ldots c(a_n)})|_{U'_{a_0\\ldots a_n}}, where pullback of sections is the unit of tensor pullback adjoint to pushforward. The component rule defines a unique additive cochain map for every such family and refinement; no cover or finiteness hypothesis is needed for this construction. Its cohomology map uses the canonical comparisons between homology and forgetting scalars.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-module-pullback",
+  "def-sc-module-cech-comparison"
+ ],
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 01FD, cohomology-lemma-functoriality-cech: the tuple formula defining gamma"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Sheaf cohomology cup products for modules on ringed spaces",
+   "results": "Service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Alexander Whitney product sheaf cohomology tensor pairing; Sheaf cohomology multiplication computed by acyclic resolutions",
+   "results": "Hits on sheaf tensor products, abelian sheaf H, and nonabelian 1-cochain multiplication; none defines this refinement or module-valued cup construction. Existing scalarCohomologyCup requires a field and a structure morphism to Spec k.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Cech cup product; Presheaf tensor sections cup product",
+   "results": "0 hits; identifiers Cech and Presheaf not recognized by this service.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "cupProduct|cup_product|CupProduct|Godement|godement|cechRefinement|Cech.*cup|cup.*Cech in Mathlib, WeilConjectures, lean/Sheaf and dag/nodes",
+   "results": "Existing tensor, tmulSection, Cech complexes and module cohomology reused. FieldLinearModuleCohomologyOperations is field-specific. No arbitrary-scheme refinement map or module-cohomology/Cech cup product. No other DAG definition carries these notions.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sc-picard-cech-cup-pullback-compat",
+  "date": "2026-10-12",
+  "group": "T1"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "module": "Sheaf.Paper.CechRefinementCochainMap",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.IsCechRefinementMap",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.cechRefinementIntersection",
+   "AlgebraicGeometry.Scheme.Modules.IsCechRefinementMap",
+   "AlgebraicGeometry.Scheme.Modules.exists_unique_cechRefinementMap",
+   "AlgebraicGeometry.Scheme.Modules.cechRefinementHomology"
+  ],
+  "statement": "def IsCechRefinementMap {X X' : Scheme.{uR}} (f : X' ⟶ X) {ι ι' : Type uR} (U : ι → X.Opens) (U' : ι' → X'.Opens) (refine : ι' → ι) (hrefine : ∀ i, U' i ≤ f ⁻¹ᵁ U (refine i)) (F : X.Modules) (gamma : ((forget₂ (ModuleCat.{uR} Γ(X, ⊤)) AddCommGrpCat.{uR}).mapHomologicalComplex (ComplexShape.up ℕ)).obj ((cechComplexFunctor U).obj F.presheafModuleCat) ⟶ ((forget₂ (ModuleCat.{uR} Γ(X', ⊤)) AddCommGrpCat.{uR}).mapHomologicalComplex (ComplexShape.up ℕ)).obj ((cechComplexFunctor U').obj ((tensorPullback f).obj F).presheafModuleCat)) : Prop",
+  "by": "T1",
+  "date": "2026-10-11",
+  "file": "lean/Sheaf/Paper/CechRefinementCochainMap.lean",
+  "branch": "sheaf-dag",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "X-96a81",
+  "group": "T1",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "X-96a81",
+  "group": "T1",
+  "result": "pass",
+  "note": "independent Codex review: Matched arbitrary covers, specified refinement, quasi-coherent coefficients, canonical comparisons, cup compatibility, inverse-comparison identification, and coefficient/pullback/composition naturality to the node; all three new definitions match their formulas. Both earlier-return points are repaired. Scratch compilation passed cleanly in 23.7 seconds."
+ }
+}

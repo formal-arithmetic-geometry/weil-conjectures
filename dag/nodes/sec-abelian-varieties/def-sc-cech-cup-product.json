@@ -1,0 +1,117 @@
+{
+ "id": "def-sc-cech-cup-product",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "the Cech/pullback cup product used to identify the Kunneth map in the cube proof",
+   "via": [
+    "lem-sc-picard-cech-cup-pullback-compat",
+    "lem-sc-picard-kunneth-qcoh",
+    "lem-sc-picard-h1-product-injective",
+    "lem-sc-picard-product-open",
+    "lem-sc-general-theorem-of-cube"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "definition",
+ "title": "Ordered Cech cup product",
+ "status": "split",
+ "statement": "Let X be a scheme [def-pc-scheme], U=(U_i)_{i\\in I} any family of opens, and F,G O_X-modules, with tensor product [def-pur-sheaf-tensor-product] and ordered Cech complexes [def-sc-module-cech-comparison]. The degree-(p,q) cup cochain is (a\\cup b)_{i_0\\ldots i_{p+q}}=a_{i_0\\ldots i_p}|_{U_{i_0\\ldots i_{p+q}}}\\otimes b_{i_p\\ldots i_{p+q}}|_{U_{i_0\\ldots i_{p+q}}}. This is the specialization of the signed total tensor map of Tag 07MB to sheaves in degree zero (the component sign is +1). It obeys d(a\\cup b)=da\\cup b+(-1)^p a\\cup db. Its induced cup product is the unique Gamma(X,O_X)-bilinear map check H^p(U,F)\\times check H^q(U,G)\\to check H^{p+q}(U,F\\otimes G) carrying the classes of cocycles a,b to the class of their cup cochain. Classes use the kernel-to-homology construction shared with [def-sc-module-cohomology-cup-product]. No cover or finiteness condition is imposed.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pur-sheaf-tensor-product",
+  "def-sc-module-cech-comparison",
+  "def-sc-module-cohomology-cup-product"
+ ],
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 07MB, cohomology-equation-needs-signs: degree-zero sheaf specialization and Leibniz"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Sheaf cohomology cup products for modules on ringed spaces",
+   "results": "Service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Alexander Whitney product sheaf cohomology tensor pairing; Sheaf cohomology multiplication computed by acyclic resolutions",
+   "results": "Hits on sheaf tensor products, abelian sheaf H, and nonabelian 1-cochain multiplication; none defines this refinement or module-valued cup construction. Existing scalarCohomologyCup requires a field and a structure morphism to Spec k.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Cech cup product; Presheaf tensor sections cup product",
+   "results": "0 hits; identifiers Cech and Presheaf not recognized by this service.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "cupProduct|cup_product|CupProduct|Godement|godement|cechRefinement|Cech.*cup|cup.*Cech in Mathlib, WeilConjectures, lean/Sheaf and dag/nodes",
+   "results": "Existing tensor, tmulSection, Cech complexes and module cohomology reused. FieldLinearModuleCohomologyOperations is field-specific. No arbitrary-scheme refinement map or module-cohomology/Cech cup product. No other DAG definition carries these notions.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sc-picard-cech-cup-pullback-compat",
+  "date": "2026-10-12",
+  "group": "T1"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "module": "Sheaf.Paper.CechCupProduct",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.IsCechCupProduct",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.cupFront",
+   "AlgebraicGeometry.Scheme.Modules.cupBack",
+   "AlgebraicGeometry.Scheme.Modules.cupFaceRestriction",
+   "AlgebraicGeometry.Scheme.Modules.cechCupCochain",
+   "AlgebraicGeometry.Scheme.Modules.cechCupCochain_leibniz",
+   "AlgebraicGeometry.Scheme.Modules.IsCechCupProduct",
+   "AlgebraicGeometry.Scheme.Modules.exists_unique_cechCupProduct"
+  ],
+  "statement": "def IsCechCupProduct {X : Scheme.{uC}} {ι : Type uC} (U : ι → X.Opens) (F G : X.Modules) (p q : ℕ) (cup : ((cechComplexFunctor U).obj F.presheafModuleCat).homology p →ₗ[Γ(X, ⊤)] ((cechComplexFunctor U).obj G.presheafModuleCat).homology q →ₗ[Γ(X, ⊤)] ((cechComplexFunctor U).obj (F ⊗ G).presheafModuleCat).homology (p + q)) : Prop",
+  "by": "T1",
+  "date": "2026-10-12",
+  "file": "lean/Sheaf/Paper/CechCupProduct.lean",
+  "branch": "sheaf-dag",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "X-96a81",
+  "group": "T1",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "X-96a81",
+  "group": "T1",
+  "result": "pass",
+  "note": "independent Codex review: Matched arbitrary covers, specified refinement, quasi-coherent coefficients, canonical comparisons, cup compatibility, inverse-comparison identification, and coefficient/pullback/composition naturality to the node; all three new definitions match their formulas. Both earlier-return points are repaired. Scratch compilation passed cleanly in 23.7 seconds."
+ }
+}

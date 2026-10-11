@@ -25,7 +25,14 @@
   "def-pur-sheaf-tensor-product",
   "def-pc-tensor-complex-sheaves",
   "lem-sc-cech-comparison-map-naturality",
-  "lem-sc-cech-comparison-natural"
+  "lem-sc-cech-comparison-natural",
+  "def-weil-pbc-module-cohomology-fmap",
+  "def-sc-cech-refinement-cochain-map",
+  "def-sc-cech-cup-product",
+  "def-sc-module-cohomology-cup-product",
+  "def-sc-module-cech-comparison",
+  "def-sc-ringed-space-module-cohomology",
+  "lem-weil-pbc-module-pullback-tensor"
  ],
  "proof": [
   {
@@ -164,5 +171,33 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.Paper.CechCupPullbackCompat",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.cechCupPullbackCompat",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.cechCupPullbackCompat",
+   "AlgebraicGeometry.Scheme.Modules.moduleCup_coefficient_naturality",
+   "AlgebraicGeometry.Scheme.Modules.moduleCup_pullback_naturality",
+   "AlgebraicGeometry.Scheme.Modules.cechRefinement_coefficient_naturality",
+   "AlgebraicGeometry.Scheme.Modules.cechCup_coefficient_naturality",
+   "AlgebraicGeometry.Scheme.Modules.cechRefinement_composition_naturality",
+   "AlgebraicGeometry.Scheme.Modules.cechCup_refinement_naturality"
+  ],
+  "statement": "theorem cechCupPullbackCompat (X X' : Scheme.{v}) (f : X' ⟶ X) {ι ι' : Type v} (U : ι → X.Opens) (hU : iSup U = ⊤) (U' : ι' → X'.Opens) (hU' : iSup U' = ⊤) (refine : ι' → ι) (hrefine : ∀ i, U' i ≤ f ⁻¹ᵁ U (refine i)) (F G : X.Modules) [F.IsQuasicoherent] [G.IsQuasicoherent] (p q : ℕ) (cF : ((cechComplexFunctor U).obj F.presheafModuleCat).homology p ⟶ (RingedSpace.moduleCohomology X.toRingedSpace p).obj F) (hcF : IsModuleCechComparison U F p cF) (cF' : ((cechComplexFunctor U').obj ((tensorPullback f).obj F).presheafModuleCat).homology p ⟶ (RingedSpace.moduleCohomology X'.toRingedSpace p).obj ((tensorPullback f).obj F)) (hcF' : IsModuleCechComparison U' ((tensorPullback f).obj F) p cF') (gamma : ((forget₂ (ModuleCat.{v} Γ(X, ⊤)) AddCommGrpCat.{v}).mapHomologicalComplex (ComplexShape.up ℕ)).obj ((cechComplexFunctor U).obj F.presheafModuleCat) ⟶ ((forget₂ (ModuleCat.{v} Γ(X', ⊤)) AddCommGrpCat.{v}).mapHomologicalComplex (ComplexShape.up ℕ)).obj ((cechComplexFunctor U').obj ((tensorPullback f).obj F).presheafModuleCat)) (hgamma : IsCechRefinementMap f U U' refine hrefine F gamma) (cG : ((cechComplexFunctor U).obj G.presheafModuleCat).homology q ⟶ (RingedSpace.moduleCohomology X.toRingedSpace q).obj G) (hcG : IsModuleCechComparison U G q cG) (cFG : ((cechComplexFunctor U).obj (F ⊗ G).presheafModuleCat).homology (p + q) ⟶ (RingedSpace.moduleCohomology X.toRingedSpace (p + q)).obj (@id X.Modules (F ⊗ G))) (hcFG : IsModuleCechComparison U (F ⊗ G) (p + q) cFG) (cup : ((cechComplexFunctor U).obj F.presheafModuleCat).homology p →ₗ[Γ(X, ⊤)] ((cechComplexFunctor U).obj G.presheafModuleCat).homology q →ₗ[Γ(X, ⊤)] ((cechComplexFunctor U).obj (F ⊗ G).presheafModuleCat).homology (p + q)) (hcup : IsCechCupProduct U F G p q cup) (sheafCup : (RingedSpace.moduleCohomology X.toRingedSpace p).obj F →ₗ[Γ(X, ⊤)] (RingedSpace.moduleCohomology X.toRingedSpace q).obj G →ₗ[Γ(X, ⊤)] (RingedSpace.moduleCohomology X.toRingedSpace (p + q)).obj (@id X.Modules (F ⊗ G))) (hsheafCup : IsModuleCupProduct F G p q sheafCup) : (cechRefinementHomology gamma p ≫ (forget₂ _ AddCommGrpCat).map cF' = (forget₂ _ AddCommGrpCat).map cF ≫ moduleCohomologyPullback f F p) ∧ (∀ a b, cFG (cup a b) = sheafCup (cF a) (cG b)) ∧ (∀ (hF : IsIso cF) (hG : IsIso cG) (hFG : IsIso cFG) a b, cup (inv (I := hF) cF a) (inv (I := hG) cG b) = inv (I := hFG) cFG (sheafCup a b))",
+  "by": "T1",
+  "date": "2026-10-11",
+  "file": "lean/Sheaf/Paper/CechCupPullbackCompat.lean",
+  "branch": "sheaf-dag",
+  "existing": false,
+  "note": "Includes cechRefinement_composition_naturality: specified successive refinements compose through tensorSectionsComp, with the composite comparison square and the equality of successive and composite cohomology pullbacks."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "X-96a81",
+  "group": "T1",
+  "result": "pass",
+  "note": "independent Codex review: Matched arbitrary covers, specified refinement, quasi-coherent coefficients, canonical comparisons, cup compatibility, inverse-comparison identification, and coefficient/pullback/composition naturality to the node; all three new definitions match their formulas. Both earlier-return points are repaired. Scratch compilation passed cleanly in 23.7 seconds."
  }
 }

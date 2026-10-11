@@ -1,0 +1,118 @@
+{
+ "id": "def-sc-module-cohomology-cup-product",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "the Cech/pullback cup product used to identify the Kunneth map in the cube proof",
+   "via": [
+    "lem-sc-picard-cech-cup-pullback-compat",
+    "lem-sc-picard-kunneth-qcoh",
+    "lem-sc-picard-h1-product-injective",
+    "lem-sc-picard-product-open",
+    "lem-sc-general-theorem-of-cube"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "definition",
+ "title": "Cup product on module cohomology via acyclic resolutions",
+ "status": "split",
+ "statement": "Let X be a scheme [def-pc-scheme], F,G O_X-modules [def-weil-sheaf-of-modules-category], and p,q nonnegative integers. Write H^n(X,-) for the right-derived global-sections cohomology [def-sc-ringed-space-module-cohomology] and F\\otimes G for the sheaf tensor product [def-pur-sheaf-tensor-product]. A computing resolution of F is a nonnegative complex K with a quasi-isomorphism F[0]\\to K, an injective resolution F\\to I [def-sp-injective-resolutions], and a comparison K\\to I extending the augmentation, whose global-sections map induces isomorphisms in every degree. A resolution pairing consists of computing resolutions of F,G,F\\otimes G and restriction-compatible O_X-linear bilinear maps K_F^r(V)\\times K_G^s(V)\\to K_{F\\otimes G}^{r+s}(V), obeying the signed total-tensor Leibniz rule [def-pc-tensor-complex-sheaves] and extending s\\otimes t in degree zero. The usual sheaf cup product H^p(X,F)\\times H^q(X,G)\\to H^{p+q}(X,F\\otimes G) is characterized as the unique Gamma(X,O_X)-bilinear map that, for every such resolution pairing, carries the cohomology classes of two global cocycles to the class of their paired cocycle. The classes are transported via the comparison to I and the canonical injective-resolution identification, not an arbitrary isomorphism. Equivalently, this is the map induced by RGamma(F)\\otimes^L RGamma(G)\\to RGamma(F\\otimes^L G)\\to RGamma(F\\otimes G); Godement resolutions compute the characterization.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "def-sc-ringed-space-module-cohomology",
+  "def-pur-sheaf-tensor-product",
+  "def-sp-injective-resolutions",
+  "def-pc-tensor-complex-sheaves"
+ ],
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "cohomology-section-cup-product; Tag 0FKV, cohomology-lemma-diagrams-commute and its Godement-resolution proof"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Sheaf cohomology cup products for modules on ringed spaces",
+   "results": "Service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Alexander Whitney product sheaf cohomology tensor pairing; Sheaf cohomology multiplication computed by acyclic resolutions",
+   "results": "Hits on sheaf tensor products, abelian sheaf H, and nonabelian 1-cochain multiplication; none defines this refinement or module-valued cup construction. Existing scalarCohomologyCup requires a field and a structure morphism to Spec k.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Cech cup product; Presheaf tensor sections cup product",
+   "results": "0 hits; identifiers Cech and Presheaf not recognized by this service.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "cupProduct|cup_product|CupProduct|Godement|godement|cechRefinement|Cech.*cup|cup.*Cech in Mathlib, WeilConjectures, lean/Sheaf and dag/nodes",
+   "results": "Existing tensor, tmulSection, Cech complexes and module cohomology reused. FieldLinearModuleCohomologyOperations is field-specific. No arbitrary-scheme refinement map or module-cohomology/Cech cup product. No other DAG definition carries these notions.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sc-picard-cech-cup-pullback-compat",
+  "date": "2026-10-12",
+  "group": "T1"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "module": "Sheaf.Paper.ModuleCohomologyCupProduct",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.IsModuleCupProduct",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.cupCycleClass",
+   "AlgebraicGeometry.Scheme.Modules.CupAcyclicResolution",
+   "AlgebraicGeometry.Scheme.Modules.CupAcyclicResolution.class",
+   "AlgebraicGeometry.Scheme.Modules.CupResolutionPairing",
+   "AlgebraicGeometry.Scheme.Modules.IsModuleCupProduct",
+   "AlgebraicGeometry.Scheme.Modules.exists_unique_moduleCupProduct"
+  ],
+  "statement": "def IsModuleCupProduct {X : Scheme.{uM}} (F G : X.Modules) (p q : ℕ) (cup : (RingedSpace.moduleCohomology X.toRingedSpace p).obj F →ₗ[Γ(X, ⊤)] (RingedSpace.moduleCohomology X.toRingedSpace q).obj G →ₗ[Γ(X, ⊤)] (RingedSpace.moduleCohomology X.toRingedSpace (p + q)).obj (@id X.Modules (F ⊗ G))) : Prop",
+  "by": "T1",
+  "date": "2026-10-12",
+  "file": "lean/Sheaf/Paper/ModuleCohomologyCupProduct.lean",
+  "branch": "sheaf-dag",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "X-96a81",
+  "group": "T1",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "X-96a81",
+  "group": "T1",
+  "result": "pass",
+  "note": "independent Codex review: Matched arbitrary covers, specified refinement, quasi-coherent coefficients, canonical comparisons, cup compatibility, inverse-comparison identification, and coefficient/pullback/composition naturality to the node; all three new definitions match their formulas. Both earlier-return points are repaired. Scratch compilation passed cleanly in 23.7 seconds."
+ }
+}
