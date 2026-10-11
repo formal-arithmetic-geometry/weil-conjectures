@@ -1,11 +1,11 @@
 # Work queue
 
-132 items; claim with `tools/claim.py next <group> [--stage N]`.
+127 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (132)
+## Stage 2: nodes to state (127)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
@@ -45,8 +45,6 @@
 | `lem-sc-brauer-algebraic-function-field-zero` | 1 | state | 0 |
 | `lem-sc-cohomological-dimension` | 1 | state | 0 |
 | `lem-sc-etale-torsor-inverse-image-extension` | 1 | state | 0 |
-| `lem-sc-etale-triple-strict-henselization-identification` | 1 | state | 0 |
-| `lem-sc-etale-triple-to-sh-completion-flat` | 1 | state | 0 |
 | `lem-sc-generic-vanishing-acyclic` | 1 | state | 0 |
 | `lem-sc-hilb-dominating-power` | 1 | state | 0 |
 | `lem-sc-hilbert-embedded-points-gluing` | 1 | state | 0 |
@@ -63,7 +61,6 @@
 | `lem-weil-pbc-coherent-homs-over-open` | 1 | state | 0 |
 | `lem-weil-pbc-coherent-support-power-ideal-kills` | 1 | state | 0 |
 | `lem-weil-pbc-cohomology-filtered-colimit` | 1 | state | 0 |
-| `lem-weil-pbc-completion-internal-hom` | 1 | state | 0 |
 | `lem-weil-pbc-derived-etale-cohomology-limit` | 1 | state | 0 |
 | `lem-weil-pbc-finite-coproduct-cohomology-assembly` | 1 | state | 0 |
 | `lem-weil-pbc-finite-geometric-point-coproduct-cohomology` | 1 | state | 0 |
@@ -97,7 +94,6 @@
 | `lem-weil-pbc-zero-dimensional-base-change-points` | 1 | state | 0 |
 | `lem-weil-pbc-zero-dimensional-cohomology` | 1 | state | 0 |
 | `lem-weil-tower-split-envelope` | 1 | state | 0 |
-| `prop-weil-pbc-composition-stability` | 1 | state | 0 |
 | `sbc-lem-higher-direct-image-presheaf` | 1 | state | 0 |
 | `lem-exc-coinduced-continuous-acyclic` | 2 | state | 0 |
 | `lem-exc-coinduced-homotopy-identity` | 2 | state | 0 |
@@ -109,7 +105,6 @@
 | `lem-sc-hom-etale-locus-translation` | 2 | state | 0 |
 | `lem-sc-p1-boundary-extension-composition` | 2 | state | 0 |
 | `lem-sc-p1-boundary-one-extension-class` | 2 | state | 0 |
-| `lem-sc-p1-coherent-proj-representation` | 2 | state | 0 |
 | `lem-sc-p1-finite-homogeneous-generators` | 2 | state | 0 |
 | `lem-sc-p1-graded-kernel-finite` | 2 | state | 0 |
 | `lem-sc-p1-proj-shifted-free-twist` | 2 | state | 0 |
