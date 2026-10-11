@@ -1,11 +1,11 @@
 # Work queue
 
-146 items; claim with `tools/claim.py next <group> [--stage N]`.
+149 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (146)
+## Stage 2: nodes to state (149)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
@@ -17,7 +17,6 @@
 | `def-weil-pbc-strict-henselization-limit` | 1 | state | 9 |
 | `def-nagata-affine-fp-descent` | 2 | state | 9 |
 | `lem-weil-pbc-site-morphism-composition` | 1 | state | 138 |
-| `prop-weil-pbc-inverse-image-modules-exact` | 1 | state | 44 |
 | `lem-pc-module-pullback-identity-composition` | 1 | state | 11 |
 | `lem-weil-pbc-coherent-formal-modules-abelian` | 1 | state | 9 |
 | `lem-weil-pbc-pair-henselization` | 1 | state | 5 |
@@ -25,8 +24,10 @@
 | `lem-weil-pbc-truncation-triangle` | 1 | state | 4 |
 | `lem-sp-exact-functor-couple` | 1 | state | 3 |
 | `lem-weil-pbc-coherent-formal-modules-affine` | 1 | state | 3 |
+| `lem-weil-pbc-etale-graph-section-extension-map-linear` | 1 | state | 3 |
 | `thm-sp-truncation-e2` | 1 | state | 3 |
 | `lem-sc-p1-ext-yoneda-functoriality` | 1 | state | 2 |
+| `lem-weil-pbc-underived-exchange-module-linear` | 1 | state | 2 |
 | `thm-sp-grothendieck` | 1 | state | 2 |
 | `lem-pc-derived-tensor-transitivity` | 1 | state | 1 |
 | `lem-weil-pbc-formal-systems-pullback` | 1 | state | 1 |
@@ -61,9 +62,13 @@
 | `lem-weil-pbc-formal-system-support-constant` | 1 | state | 0 |
 | `lem-weil-pbc-formal-systems-kernel-rees-finite` | 1 | state | 0 |
 | `lem-weil-pbc-grothendieck-existence-projective` | 1 | state | 0 |
+| `lem-weil-pbc-inverse-image-composition-module-linear` | 1 | state | 0 |
+| `lem-weil-pbc-inverse-image-free-etale-module` | 1 | state | 0 |
+| `lem-weil-pbc-limit-pullback-sections-colimit` | 1 | state | 0 |
 | `lem-weil-pbc-local-ring-spec-limit-affine-neighbourhoods` | 1 | state | 0 |
 | `lem-weil-pbc-module-pullback-ideal-quotient` | 1 | state | 0 |
 | `lem-weil-pbc-projective-space-twisting-sheaf-charts` | 1 | state | 0 |
+| `lem-weil-pbc-retract-supplied` | 1 | state | 0 |
 | `lem-weil-pbc-semi-representable-covering-permanence` | 1 | state | 0 |
 | `lem-weil-pbc-spec-algebraically-closed-etale-sheaf-constant` | 1 | state | 0 |
 | `lem-weil-pbc-spectral-limit-pullback-sections` | 1 | state | 0 |
@@ -90,12 +95,10 @@
 | `lem-weil-pbc-zero-dimensional-base-change-points` | 1 | state | 0 |
 | `lem-weil-tower-split-envelope` | 1 | state | 0 |
 | `lem-wf-lie-algebra-derivation-bracket` | 1 | state | 0 |
-| `lem-wf-mixed-commutator-tangent` | 1 | state | 0 |
 | `lemma-weil-pbc-chow-factorization` | 1 | state | 0 |
 | `lemma-weil-pbc-torsion-assembly` | 1 | state | 0 |
 | `lemma-weil-pbc-torsion-filtered-union` | 1 | state | 0 |
 | `prop-weil-pbc-composition-stability` | 1 | state | 0 |
-| `prop-weil-pbc-formal-glueing-equivalence` | 1 | state | 0 |
 | `prop-weil-pbc-grothendieck-existence-proper` | 1 | state | 0 |
 | `thm-galois-fundamental` | 1 | state | 0 |
 | `thm-pqf-finite-iff-proper-finite-fibres` | 1 | state | 0 |
@@ -156,7 +159,7 @@
 | `lem-pc-essentially-constant-pro-hom-colimit` | 4 | state | 0 |
 | `lem-pur-essential-constant-pro-criterion-05py` | 4 | state | 0 |
 
-Not open yet: 40 nodes that wait for stage 1, 402 nodes that wait for a statement dependency.
+Not open yet: 40 nodes that wait for stage 1, 396 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
