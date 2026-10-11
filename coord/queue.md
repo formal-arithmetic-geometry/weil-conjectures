@@ -1,11 +1,11 @@
 # Work queue
 
-623 items; claim with `tools/claim.py next <group> [--stage N]`.
+618 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (623)
+## Stage 2: nodes to state (618)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -20,21 +20,16 @@
 | `lem-weil-pbc-etale-finite-pushforward-locally-constant` | 1 | state |
 | `lem-weil-pbc-exchange-identity-pasting` | 1 | state |
 | `lem-weil-pbc-ext-one-direct-sum` | 1 | state |
-| `lem-weil-pbc-filtered-colimit-localization-at-prime` | 1 | state |
 | `lem-weil-pbc-finite-surjective-affine-target` | 1 | state |
 | `lem-weil-pbc-finite-type-domain-dimension-trdeg` | 1 | state |
 | `lem-weil-pbc-finite-type-module-sheaf-stalk-finitely-generated` | 1 | state |
-| `lem-weil-pbc-finite-type-z-domain-normalization-finite` | 1 | state |
 | `lem-weil-pbc-finite-unramified-one-point-closed` | 1 | state |
 | `lem-weil-pbc-first-order-thickening-base-change` | 1 | state |
-| `lem-weil-pbc-first-quadrant-row-collapse` | 1 | state |
 | `lem-weil-pbc-flat-completion` | 1 | state |
 | `lem-weil-pbc-flat-local-completion-iso` | 1 | state |
 | `lem-weil-pbc-flat-local-criterion-nonzerodivisor` | 1 | state |
 | `lem-weil-pbc-flat-mod-injective` | 1 | state |
 | `lem-weil-pbc-flat-module-completion-flat` | 1 | state |
-| `lem-weil-pbc-flat-module-powers` | 1 | state |
-| `lem-weil-pbc-flat-module-pullback-exact-pushforward-injective` | 1 | state |
 | `lem-weil-pbc-flat-over-regular-with-regular-fibre` | 1 | state |
 | `lem-weil-pbc-flat-permanence` | 1 | state |
 | `lem-weil-pbc-flat-smooth-fibre-smooth-at-prime` | 1 | state |
