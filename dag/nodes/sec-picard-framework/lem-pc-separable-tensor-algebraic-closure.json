@@ -142,5 +142,23 @@
   "group": "H1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-sta (reviewer sub-agent of L); spot-checked: Source: Stacks 030U (algebra-lemma-separable-extension-preserves-reducedness, proof: minimal polynomial presentation, separable quotient), 00U3 (algebra-lemma-etale-over-field), Fields 030N/09GU; item statement (finite separable k'/k, Omega alg. closed, k' tensor Omega = product of Omega over k-embeddings, [k':k] factors) unchanged and true. Step 1: primitive element (lem-weil-pbc-finite-separable-extension-primitive-element, needs finite separable algebraic), minimal polynomial as monic generator of the kernel and separable (def-weil-pbc-separable-algebraic-extension), power basis gives surjectivity of k[T]->k' hence k'=k[T]/(P) with deg P=[k':k]. Step 2: lem-weil-pbc-polynomial-scalar-extension (Omega tensor k[T]=Omega[T]) and lem-weil-pbc-tensor-quotient-base-change with A=k[T], B=Omega[T] (plus tensor associativity) give Omega[T]/(P bar). Step 3: new node lem-pc-separable-polynomial-alg-closed-quotient-product (F=k, P monic separable over F, so its hypotheses hold directly); the node is true (separable => n distinct roots in Omega, CRT; degree 0 gives the zero ring = empty product), self-contained, TeX, statement only, blueprint.from = lem-pc-ample-positive-degree (ancestor checked), same_as [] after my blueprint_refs search 'separable polynomial algebraically closed' / 'tensor algebraic closure' (nothing). Step 4: roots of P in Omega <-> k-embeddings k'=k[T]/(P)->Omega, elementary; count = deg P = [k':k]. Mathlib: Algebra.FormallyEtale.equivPiOfIsSepClosed (Mathlib/RingTheory/Etale/Field.lean:217) is a product indexed by PrimeSpectrum of an etale algebra over a sep. closed field, not the item (needs etaleness of the base change and the index identification); no exact declaration for the item or the new node; no slopmaster2 declaration by grep (B10). Small cases: k=R, k'=C, Omega=C gives C x C indexed by id and conjugation; degree 1 gives Omega. FIX more, RETURN less: dag/nodes/sec-picard-framework/lem-pc-separable-tensor-algebraic-closure.json: proof[0].text/uses, proof_deps: the item's hypothesis is separable in the sense of def-weil-pbc-separable-field-extension (separably generated f.g. subextensions) while step 1 used separable algebraic; added the derivation (finite => algebraic [def-weil-algebraic-element], empty transcendence basis [def-weil-pbc-transcendence-basis], so def-weil-pbc-separable-field-extension applied to K'=k' gives separable algebraic) and cited the three nodes (C4). Start Sat Oct 10 04:13:42 PM UTC 2026, end Sat Oct 10 04:15:13 PM UTC 2026.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.FieldTheory.SeparableTensorAlgebraicClosure",
+  "declaration": "Algebra.separable_tensor_algebraicallyClosed_equiv_pi",
+  "file": "lean/Sheaf/FieldTheory/SeparableTensorAlgebraicClosure.lean",
+  "statement": "theorem separable_tensor_algebraicallyClosed_equiv_pi (k : Type u) (K : Type v) (Ω : Type w) [Field k] [Field K] [Field Ω] [Algebra k K] [Algebra k Ω] [FiniteDimensional k K] [IsAlgClosed Ω] (hsep : Algebra.IsSeparableExtension k K) : Nonempty ((K ⊗[k] Ω) ≃ₐ[Ω] ((K →ₐ[k] Ω) → Ω)) ∧ ∃ n : ℕ, FieldExtension.degree k K = (n : WithTop ℕ) ∧ Nonempty ((K →ₐ[k] Ω) ≃ Fin n)",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-sta0905",
+  "group": "C1",
+  "result": "pass",
+  "note": "fields k K Ω, universes u v w independent; [Algebra k K] = def-pc-field-extension; [FiniteDimensional k K] = finite; hsep : Algebra.IsSeparableExtension k K = recorded dep decl (explicit Prop hypothesis); [Algebra k Ω][IsAlgClosed Ω] = alg. closed field containing k (node does not ask Ω algebraic over k, so IsAlgClosed not IsAlgClosure is right); Nonempty (K ⊗[k] Ω ≃ₐ[Ω] ((K →ₐ[k] Ω) → Ω)) with local rightAlgebra = Ω-algebra iso, one factor per k-embedding; ∃ n, FieldExtension.degree k K = n ∧ embeddings ≃ Fin n = [k':k] copies; docstring carries node proof steps 1-4; header, tag, no Sheaf. prefix, lines ≤ 100, imports used, proof sorry; Mathlib: only Algebra.FormallyEtale.equivPiOfIsSepClosed (etale, PrimeSpectrum-indexed) and AlgHom.card, no exact match, slopmaster2 grep none: existing false right"
  }
 }
