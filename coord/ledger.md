@@ -3783,3 +3783,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 08:13 L: merged deliver/C1/def-exc-continuous-cohomology (stage 2; reviewer PASS; first push; Sheaf.RepresentationTheory.DiscreteContinuousCohomology Rep.discreteContinuousCohomologyFunctor)
 - 08:13 L: merged deliver/F1/lem-sc-p1-graded-submodule-finite (stage 2; reviewer FIX; first push; Sheaf.RingTheory.GradedSubmoduleFinite MvPolynomial.graded_submodule_finite)
 - 08:13 L: merged deliver/M1/lem-sc-invert-s-cohomology-induction (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.QuasiCompactOpenInduction AlgebraicGeometry.quasiCompactOpen_induction)
+- 08:13 L: merged deliver/E1/lem-kun-03sa (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.ConstructibleGenerationFiniteType AlgebraicGeometry.constructibleGeneration_finiteType)
