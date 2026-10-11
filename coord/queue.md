@@ -1,11 +1,11 @@
 # Work queue
 
-370 items; claim with `tools/claim.py next <group> [--stage N]`.
+364 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (370)
+## Stage 2: nodes to state (364)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -16,7 +16,6 @@
 | `lem-pc-derived-qcoh-perfect-generation` | 1 | state |
 | `lem-pc-derived-tensor-transitivity` | 1 | state |
 | `lem-pc-module-pullback-identity-composition` | 1 | state |
-| `lem-pc-perfect-complex-descent` | 1 | state |
 | `lem-pc-perfect-generator-pullback` | 1 | state |
 | `lem-pc-perfect-tensor-hom-duality` | 1 | state |
 | `lem-pc-supported-perfect-generator` | 1 | state |
@@ -30,13 +29,11 @@
 | `lem-sc-hilb-dominating-power` | 1 | state |
 | `lem-sc-hilbert-embedded-points-gluing` | 1 | state |
 | `lem-sc-koszul-regular-sequence-dual-complex` | 1 | state |
-| `lem-sc-p1-ext-pushout-postcompose` | 1 | state |
 | `lem-sc-p1-graded-nakayama-free` | 1 | state |
 | `lem-sc-p1-graded-syzygy` | 1 | state |
 | `lem-sc-p1-koszul-resolution` | 1 | state |
 | `lem-sc-p1-serre-section-module-comparison` | 1 | state |
 | `lem-sc-perfect-derived-tensor-perfect` | 1 | state |
-| `lem-sc-perfect-finite-free-residue-model` | 1 | state |
 | `lem-sc-picard-kunneth-qcoh` | 1 | state |
 | `lem-sc-pseudo-coherent-support-annihilation` | 1 | state |
 | `lem-sc-valuation-limit-qcoh-section-descent` | 1 | state |
@@ -50,12 +47,9 @@
 | `lem-weil-pbc-quasi-coherent-tensor-product-affine-sections` | 1 | state |
 | `lem-weil-pbc-quasi-finite-at-finite-subalgebra-away` | 1 | state |
 | `lem-weil-pbc-quasi-finite-at-point-isolated` | 1 | state |
-| `lem-weil-pbc-quasi-finite-over-polynomial-algebra` | 1 | state |
 | `lem-weil-pbc-quotient-base-change-closed-immersion-ideal` | 1 | state |
 | `lem-weil-pbc-reduced-noetherian-total-ring-fractions` | 1 | state |
-| `lem-weil-pbc-reduced-normal-iff-integrally-closed-total-fractions` | 1 | state |
 | `lem-weil-pbc-reduced-source-factors-through-closed-subscheme` | 1 | state |
-| `lem-weil-pbc-reduced-strongly-transcendental-not-quasi-finite` | 1 | state |
 | `lem-weil-pbc-reduction-projective-space` | 1 | state |
 | `lem-weil-pbc-reduction-universal-homeomorphism` | 1 | state |
 | `lem-weil-pbc-regular-base-change` | 1 | state |
