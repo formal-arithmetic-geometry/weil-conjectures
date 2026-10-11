@@ -146,5 +146,23 @@
   "group": "G1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of G1; spot-checked by L: L read the three steps (00ST (3) flatness via 00QH, the lower dimension bound and 00SW); the 00QH child duplicates in a global-fibre form the node fibre-dimension-bounded-open-upstairs created minutes earlier; lead note added."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.EquationCountFibreDimensionFlat",
+  "declaration": "MvPolynomial.exists_flat_away_of_fibre_dimension_eq",
+  "file": "lean/Sheaf/RingTheory/EquationCountFibreDimensionFlat.lean",
+  "statement": "theorem exists_flat_away_of_fibre_dimension_eq (R : Type u) [CommRing R] (N c : ℕ) (hc : c ≤ N) (equations : Fin c → MvPolynomial (Fin N) R) : let S := MvPolynomial (Fin N) R ⧸ Ideal.span (Set.range equations) ∀ q : PrimeSpectrum S, let p := PrimeSpectrum.comap (algebraMap R S) q let Q := PrimeSpectrum.preimageEquivFiber R S p ⟨q, rfl⟩ topologicalKrullDimAt Q = ((N - c : ℕ) : WithBot ℕ∞) → (∃ g : S, g ∉ q.asIdeal ∧ Module.Flat R (Localization.Away g)) ∧ Module.Flat R (Localization.AtPrime q.asIdeal) ∧ (Localization.localRingHom p.asIdeal q.asIdeal (algebraMap R S) rfl).Flat",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-ecf0953",
+  "group": "E1",
+  "result": "pass",
+  "note": "R CommRing; N c : ℕ with c ≤ N; Fin c equations in MvPolynomial (Fin N) R; S the quotient by Ideal.span; all primes q; p = comap q; fibre p.Fiber S = κ(p)⊗S (landed RGCI/QuasiFiniteAtPrime form, swap of node's S⊗κ(p)); Q = preimageEquivFiber ⟨q,rfl⟩ = ker(λ⊗s ↦ λ̄s̄) read in Mathlib; topologicalKrullDimAt Q = N-c; conclusions ∃ g ∉ q flat Away g, flat AtPrime q, localRingHom R_p→S_q Flat"
  }
 }
