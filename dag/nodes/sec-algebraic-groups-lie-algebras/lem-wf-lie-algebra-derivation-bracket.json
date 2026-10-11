@@ -11,7 +11,7 @@
  },
  "kind": "statement",
  "title": "Bracket closure and differential compatibility for matrix group schemes",
- "statement": "Let $k$ be a field, let $V$ and $M$ be finite-dimensional $k$-vector spaces, and let $G$ be a finite-type closed subgroup scheme of $\\operatorname{GL}(V)$, so that for a commutative $k$-algebra $R$, $G(R)$ is the set of matrices in $\\operatorname{GL}(V\\otimes_kR)$ satisfying the defining equations of $G$. Put\n\n$$\n\\mathfrak g=\\{X\\in\\operatorname{End}_k(V):1+\\varepsilon X\\in G(k[\\varepsilon]/\\varepsilon^2)\\}.\n$$\n\nThen $\\mathfrak g$ is a $k$-linear subspace of $\\operatorname{End}_k(V)$ closed under the commutator $[X,Y]=XY-YX$, hence a Lie subalgebra of $\\operatorname{End}_k(V)$ in the sense of [def-wf-lie-algebra]. Moreover, if $r:G\\to\\operatorname{GL}(M)$ is a homomorphism of $k$-group schemes (a rational representation in the sense of [def-wf-algebraic-representations]), and $dr:\\mathfrak g\\to\\operatorname{End}_k(M)$ is the map with $r(1+\\varepsilon X)=1+\\varepsilon\\,dr(X)$ in $\\operatorname{GL}(M)(k[\\varepsilon]/\\varepsilon^2)$, then $dr$ is $k$-linear and\n\n$$\ndr([X,Y])=dr(X)dr(Y)-dr(Y)dr(X)\\qquad(X,Y\\in\\mathfrak g).\n$$\n\nThat is, $dr$ is a Lie representation of $\\mathfrak g$ on $M$ in the sense of [def-wf-lie-algebra].",
+ "statement": "Let $k$ be an algebraically closed field of characteristic zero, let $V$ and $M$ be finite-dimensional $k$-vector spaces, and let $G$ be a finite-type closed subgroup scheme of $\\operatorname{GL}(V)$, so that for a commutative $k$-algebra $R$, $G(R)$ is the set of matrices in $\\operatorname{GL}(V\\otimes_kR)$ satisfying the defining equations of $G$. Put\n\n$$\n\\mathfrak g=\\{X\\in\\operatorname{End}_k(V):1+\\varepsilon X\\in G(k[\\varepsilon]/\\varepsilon^2)\\}.\n$$\n\nThen $\\mathfrak g$ is a $k$-linear subspace of $\\operatorname{End}_k(V)$ closed under the commutator $[X,Y]=XY-YX$, hence a Lie subalgebra of $\\operatorname{End}_k(V)$ in the sense of [def-wf-lie-algebra]. Moreover, if $r:G\\to\\operatorname{GL}(M)$ is a homomorphism of $k$-group schemes (a rational representation in the sense of [def-wf-algebraic-representations]), and $dr:\\mathfrak g\\to\\operatorname{End}_k(M)$ is the map with $r(1+\\varepsilon X)=1+\\varepsilon\\,dr(X)$ in $\\operatorname{GL}(M)(k[\\varepsilon]/\\varepsilon^2)$, then $dr$ is $k$-linear and\n\n$$\ndr([X,Y])=dr(X)dr(Y)-dr(Y)dr(X)\\qquad(X,Y\\in\\mathfrak g).\n$$\n\nThat is, $dr$ is a Lie representation of $\\mathfrak g$ on $M$ in the sense of [def-wf-lie-algebra].",
  "source": {
   "document": "Milne, Algebraic Groups (2017)",
   "place": "Chapter 10, differential of multiplication and commutator; Lie algebra of a closed matrix subgroup"
@@ -20,9 +20,72 @@
   "def-wf-lie-algebra",
   "def-wf-algebraic-representations"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The set g is a k-linear subspace. It contains 0, since 1 is the identity of G(k[\\varepsilon]/\\varepsilon^2). For X,Y in g, since \\varepsilon^2=0 one has (1+\\varepsilon X)(1+\\varepsilon Y)=1+\\varepsilon(X+Y), a product of two elements of the group G(k[\\varepsilon]/\\varepsilon^2), so X+Y is in g. For a in k, the k-algebra endomorphism of k[\\varepsilon]/\\varepsilon^2 given by \\varepsilon\\mapsto a\\varepsilon maps G(k[\\varepsilon]/\\varepsilon^2) to itself (G(R) is cut out by the defining equations, which are preserved under k-algebra maps) and sends 1+\\varepsilon X to 1+\\varepsilon aX, so aX is in g.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "Milne, Algebraic Groups (2017)",
+    "place": "Chapter 10, Lie algebra of a closed matrix subgroup"
+   }
+  },
+  {
+   "text": "For tangent vectors X and Y, the commutator of their two-parameter infinitesimal points is a G-point and its εδ coefficient is XY−YX. Thus XY−YX is again tangent, so the subspace is closed under the commutator.",
+   "uses": [
+    "lem-wf-mixed-commutator-tangent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Milne, Algebraic Groups (2017)",
+    "place": "Chapter 10, differential of multiplication and commutator"
+   }
+  },
+  {
+   "text": "The commutator on End_k(V) is bilinear, alternating, and satisfies Jacobi by direct expansion and reassociation in the associative algebra End_k(V). Therefore the closed subspace is a Lie subalgebra in the sense of [def-wf-lie-algebra].",
+   "uses": [
+    "def-wf-lie-algebra"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "Milne, Algebraic Groups (2017)",
+    "place": "Chapter 10, Lie algebra of a closed matrix subgroup"
+   }
+  },
+  {
+   "text": "Since r is a morphism of k-group schemes [def-wf-algebraic-representations], it gives group homomorphisms r_R:G(R)\\to GL(M\\otimes_kR) natural in the k-algebra R. Linearity of dr: by naturality along \\varepsilon\\mapsto a\\varepsilon, r(1+\\varepsilon aX)=1+\\varepsilon a\\,dr(X), so dr(aX)=a\\,dr(X); and r(1+\\varepsilon(X+Y))=r(1+\\varepsilon X)r(1+\\varepsilon Y)=1+\\varepsilon(dr(X)+dr(Y)), so dr(X+Y)=dr(X)+dr(Y). Bracket: with A=k[\\varepsilon,\\delta]/(\\varepsilon^2,\\delta^2), naturality along the two inclusions k[\\varepsilon]\\to A, k[\\delta]\\to A gives r_A(1+\\varepsilon X)=1+\\varepsilon\\,dr(X) and r_A(1+\\delta Y)=1+\\delta\\,dr(Y). Since r_A is a homomorphism, r_A maps the commutator of [lem-wf-mixed-commutator-tangent] for (G,X,Y) to the commutator of 1+\\varepsilon\\,dr(X) and 1+\\delta\\,dr(Y), which by [lem-wf-mixed-commutator-tangent] applied to GL(M)\\subseteq GL(M) equals 1+\\varepsilon\\delta(dr(X)dr(Y)-dr(Y)dr(X)). On the other hand the first commutator is the image of 1+\\eta[X,Y]\\in G(k[\\eta]/\\eta^2) under \\eta\\mapsto\\varepsilon\\delta, so by naturality its r_A-image is 1+\\varepsilon\\delta\\,dr([X,Y]). Comparing \\varepsilon\\delta-coefficients gives dr([X,Y])=dr(X)dr(Y)-dr(Y)dr(X).",
+   "uses": [
+    "lem-wf-mixed-commutator-tangent",
+    "def-wf-algebraic-representations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Milne, Algebraic Groups (2017)",
+    "place": "Chapter 10, differential of a representation"
+   }
+  },
+  {
+   "text": "By the commutator definition on End_k(M), [dr(X),dr(Y)] = dr(X)dr(Y)−dr(Y)dr(X), yielding the displayed formula and the Lie-representation assertion.",
+   "uses": [
+    "def-wf-lie-algebra"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "Milne, Algebraic Groups (2017)",
+    "place": "Chapter 10, differential of a representation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-wf-mixed-commutator-tangent",
+  "def-wf-lie-algebra",
+  "def-wf-algebraic-representations"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Milne, Algebraic Groups (2017)",
+  "place": "Chapter 10, differential of multiplication and commutator; Lie algebra of a closed matrix subgroup"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -54,10 +117,26 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "def-wf-lie-algebra-derivation"
  },
  "chapter": "sec-algebraic-groups-lie-algebras",
- "unit": "sk-d-tangent"
+ "unit": "sk-d-tangent",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-wf-lie-algebra-derivation-bracket",
+  "worker": "stage1",
+  "summary": "Split the standard matrix-group Lie algebra argument into the dual-number mixed-commutator calculation and the generic LieHom bracket-preservation fact; linearity, Lie identities, and the matrix commutator expansion are elementary steps.",
+  "blueprint": "Realizes the Lie algebra paragraph's closure under [X,Y]=XY-YX and the rational-actions paragraph's assertion that dr preserves brackets.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-lab0010",
+  "group": "C1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-lab0010 (reviewer sub-agent of L); spot-checked: Checked by hand (1+eX)(1+dY)(1-eX)(1-dY)=1+ed(XY-YX) in A=k[e,d]/(e^2,d^2); G(A)-membership via functoriality of the defining equations and injectivity of k[eta]->A (new node lem-wf-mixed-commutator-tangent true, self-contained, kept as a real lemma, no lie-named duplicate: lem-wf-same-lie-closed-subgroup/lem-ag-lie-* differ). stmt_deps have no def-wf-lie-algebra-derivation (no cycle); citer 6a49c0173 uses subspace+bracket closure and dr Lie representation, in alg. closed char 0 so the narrowing (named, E7) is harmless. FIX more, RETURN less: (1) E/C step 1 claimed linearity 'inherited from End(V)' without proof: replaced by (1+eX)(1+eY)=1+e(X+Y) and the e->ae endomorphism, elementary; (2) C1 step 4 used naturality of r without citing def-wf-algebraic-representations: added to uses/proof_deps and wrote out the naturality argument (linearity, r_A on the commutator, lemma applied to GL(M), eta->ed). Second reading by C1 missed both.; 1 file(s) fixed by the reviewer"
+ }
 }
