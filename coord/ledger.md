@@ -4685,3 +4685,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 12:58 L: merged deliver/M1/lem-weil-pbc-power-series-cohen-formally-smooth-adic (stage 2; reviewer PASS; first push; Sheaf.RingTheory.PowerSeriesCohenFormallySmoothAdic MvPowerSeries.formallySmoothAdic_rat)
 - 12:58 L: merged deliver/K1/lem-weil-pbc-popescu-product (stage 2; reviewer FIX; first push; Sheaf.RingTheory.FilteredColimitSmoothProduct Algebra.ind_smooth_prod)
 - 12:59 L: merged deliver/J1/lem-weil-pbc-power-series-complete-over-complete-base (stage 2; reviewer PASS; first push; Sheaf.RingTheory.PowerSeriesCompleteOverCompleteBase power_series_complete_over_complete_base)
+- 12:59 L: merged deliver/M1/lem-weil-pbc-power-series-n2 (stage 2; reviewer FIX; first push; Sheaf.RingTheory.PowerSeriesN2 PowerSeries.noetherian_domain_isN2)

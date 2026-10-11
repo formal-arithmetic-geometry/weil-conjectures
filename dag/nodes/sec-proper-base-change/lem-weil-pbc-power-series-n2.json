@@ -194,5 +194,24 @@
   "worker": "stage1",
   "summary": "Read 032Q (algebra.tex 45592-45609) and every lemma its proof cites: 0306 (lemma-Noetherian-power-series), 0BI0 (lemma-power-series-over-Noetherian-normal-domain), 032P (lemma-tate-japanese), 032K (lemma-finite-extension-N-2); tags verified in tags/tags. Statement unchanged. Six steps following the source sentence by sentence: Noetherian (0306, Mathlib leaf) and domain (Mathlib leaf); R' = normalization of R, finite by N-2, normal (Mathlib leaf), Noetherian, N-2 (032I node, cited as statement); R'[[x]] finite over R[[x]] (written out, elementary); R'[[x]] Noetherian normal (new node for 0BI0); Tate 032P applied to x in R'[[x]] with its hypotheses R'[[x]]/x = R' (quotient-variables) and x-adic completeness (Mathlib leaf) written out; descent by 032K N-2 clause (new node; the existing 032K node covers only the N-1 clause). No slopmaster2 Lean for the item or the new nodes (grep of WeilConjectures for the ids and for Japanese/IsIntegrallyClosed on PowerSeries).",
   "blueprint": "Realizes, in the blueprint node lem-weil-pbc-normal-constant-generic (step 4 of its split, Tag 09Z5 proof of (1)), the clause 'reduce to the statement that a field is N-2 by Lemma lemma-power-series-over-N-2' (and its use in the case Lambda[[X_1,...,X_d]] via 032W): steps 1-6 are the proof of that lemma; no blueprint node states it (searches '032Q', 'N-2 power series', 'Japanese power series', 'power series normal', 'normal domain power series': none)."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.PowerSeriesN2",
+  "declaration": "PowerSeries.noetherian_domain_isN2",
+  "file": "lean/Sheaf/RingTheory/PowerSeriesN2.lean",
+  "statement": "theorem noetherian_domain_isN2 (R : Type u) [CommRing R] [IsDomain R] [IsNoetherianRing R] (hR : IsN2 R (FractionRing R)) : IsNoetherianRing (PowerSeries R) ∧ IsDomain (PowerSeries R) ∧ IsN2 (PowerSeries R) (FractionRing (PowerSeries R))",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-psn1306"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-psn1306",
+  "group": "M1",
+  "result": "fix",
+  "note": "CommRing/IsDomain/IsNoetherianRing R, hR : IsN2 R (FractionRing R) as C1 a0a22304a; conclusions Noetherian ∧ IsDomain ∧ IsN2 of PowerSeries R (one variable, switched from MvPowerSeries (Fin 1)); IsN2 L-universe = K's, landed def"
  }
 }
