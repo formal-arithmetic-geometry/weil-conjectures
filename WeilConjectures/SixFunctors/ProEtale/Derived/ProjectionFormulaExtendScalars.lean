@@ -31,6 +31,16 @@ is represented at the finite stages `E'`, is an isomorphism.
 
 ## Implementation notes
 
+The blueprint (`def-weil-algebraically-closed-coefficients`) defines `D(Y, ℚ̄_ℓ)` as the category
+`C_Y` of pairs `(E, K)`, with `Hom((E, K), (E', K'))` the colimit over finite `L ⊇ E, E'` of
+the morphisms `K ⊗_E L ⟶ K' ⊗_{E'} L` at the stage `L`, composition being computed at a common
+stage. The projection map at `ℚ̄_ℓ` of objects represented at `E` is the class of the projection
+map at any stage `E' ⊇ E` of their scalar extensions, and a morphism of `C_Y` represented by an
+isomorphism at some stage is an isomorphism of `C_Y` (its inverse is represented at the same
+stage). So the statement here, at every stage `E' ⊇ E`, is the `ℚ̄_ℓ` statement with the `Hom`
+groups of `C_Y` unfolded. The Bhatt–Scholze model `AlgebraicGeometry.ProEtale.AdicSheaf` of the
+stage `ℚ̄_ℓ` carries no derived tensor product, `Rf_!` or projection map yet.
+
 The ring `𝒪_{E'}` is a finite free algebra over the Noetherian ring `𝒪_E`
 (`PadicAlgCl.finite_integersShrinkMap`, `PadicAlgCl.free_integersShrinkMap`), so extension of
 scalars carries the projection formula over `𝒪_E` to the one over `𝒪_{E'}`
