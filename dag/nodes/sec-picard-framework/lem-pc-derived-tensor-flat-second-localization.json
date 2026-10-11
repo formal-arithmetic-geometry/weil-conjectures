@@ -22,7 +22,8 @@
  },
  "stmt_deps": [
   "def-weil-pbc-flat-ring-map",
-  "def-pc-cochain-complex-modules"
+  "def-pc-cochain-complex-modules",
+  "def-pc-ring-tensor-cohomology"
  ],
  "proof": [
   {
@@ -123,5 +124,26 @@
   "group": "J1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-dfl0338 (reviewer sub-agent of L); spot-checked: Return points of R-dfl0239: 1 (ill-typed K-flat B-resolution node) repaired: node deleted, colimit route C=colim over I_S of B; 2 (K tensor_B C ill-typed) repaired: no B-complex model used; 3 (TeX of lem-pc-flat-localization-cohomology) repaired but node now cited by nothing, dropped. FIX more, RETURN less: (a) lem-pc-filtered-colimit-derived-tensor narrowed to the cohomology clause (the D(A) filtered-colimit clause is not defined in general and unused), M tensor^L N defined via lem-pc-derived-tensor-second-factor-functor (2), isomorphism specified by coprojections; true by K-flat R-resolution E of M, termwise colimits and exactness of filtered colimits; not a duplicate of second-factor-functor (no colimit clause) or lem-pc-kflat-closure; (b) Step 1: index category of S made precise (morphisms t:s->st, filtered since s(t-t')=0), transition maps identified with the B-action; (c) Step 2: colimit isomorphism identified with the canonical map, A tensor C-linearity; (d) Step 3 (C4: balanced model is functorial only in M) replaced by naturality of the comparison map in the second factor (transformation LF->F of second-factor-functor (2), model of lem-pc-derived-tensor-action-naturality) plus C-linearity on generators x tensor 1; (e) statement_change recorded (E7), parent lem-pc-derived-tensor-localization-cohomology step 3 (R'_p -> R'_p') covered. No cycle: action-naturality, second-factor-functor, balanced-model do not depend on the item.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.DerivedTensorFlatSecondLocalization",
+  "declaration": "RingTensorCohomology.derivedTensor_flat_second_localization",
+  "declarations": [
+   "RingTensorCohomology.derivedTensor_flat_second_localization"
+  ],
+  "file": "lean/Sheaf/Algebra/Homology/DerivedTensorFlatSecondLocalization.lean",
+  "statement": "theorem derivedTensor_flat_second_localization (R A B C : Type v) [CommRing R] [CommRing A] [CommRing B] [CommRing C] [Algebra R A] [Algebra R B] [Algebra R C] [Algebra B C] [IsScalarTower R B C] (S : Submonoid B) [IsLocalization S C] (hflat : (algebraMap B C).Flat) (i : ℤ) : (∀ M : CochainComplex (ModuleCat.{v} A) ℤ, IsIso (baseChangeMap R B C hflat ((resolution R).obj ((restrict R A).obj M)) i)) ∧ (∀ (M N : CochainComplex (ModuleCat.{v} A) ℤ) (f : M ⟶ N), (ModuleCat.extendScalars (algebraMap B C)).map ((source R A B i).map f) ≫ baseChangeMap R B C hflat ((resolution R).obj ((restrict R A).obj N)) i = baseChangeMap R B C hflat ((resolution R).obj ((restrict R A).obj M)) i ≫ (source R A C i).map f) ∧ (∀ (M : CochainComplex (ModuleCat.{v} A) ℤ) (a : A), (ModuleCat.extendScalars (algebraMap B C)).map ((source R A B i).map (a • 𝟙 M)) ≫ baseChangeMap R B C hflat ((resolution R).obj ((restrict R A).obj M)) i = baseChangeMap R B C hflat ((resolution R).obj ((restrict R A).obj M)) i ≫ (source R A C i).map (a • 𝟙 M)) ∧ (∀ M : CochainComplex (ModuleCat.{v} A) ℤ, (ModuleCat.extendScalars (algebraMap B C)).map ((comparison R A B i).app M) ≫ baseChangeMap R B C hflat ((restrict R A).obj ((resolution A).obj M)) i = baseChangeMap R B C hflat ((resolution R).obj ((restrict R A).obj M)) i ≫ (comparison R A C i).app M)",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-dts0951",
+  "group": "J1",
+  "result": "fix",
+  "note": "Not a corrected item (statement unchanged): park correction realised by EXTRA NODE (A) def-pc-ring-tensor-cohomology instead of citing the unstated second-factor-functor/action-naturality. Matched: R,A,B,C commutative rings with R->A, R->B, R->B->C (Algebra+IsScalarTower), S Submonoid B, IsLocalization S C, hflat RingHom.Flat; M unbounded CochainComplex (ModuleCat A), i:Z; source = H^i(B ox_R F_R(UM)) = H^i(M ox^L_R B); baseChangeMap = inverse flat homology iso then extendScalarsComp.symm, i.e. x ox c |-> c*phi(x); conjuncts: IsIso, naturality in f, A-action a.id_M (C- and B-linearity by ModuleCat C), comparison square; comparison = inv H(spanLeft) >> H(spanRight) = Stacks equation-comparison-map (A-K-flat rep, R-K-flat resolution of its restriction) read in more-algebra.tex. Citer lem-pc-derived-tensor-localization-cohomology (R_p, A_q, R'_p -> R'_p') holds. FIX: new node cites def-weil-module-base-change (termwise extendScalars), 'reduced' spelled out; def-pc-module-kflat-complex not citable (merged after the delivery's base 4b7cefd65)."
  }
 }

@@ -1,0 +1,122 @@
+{
+ "id": "def-pc-ring-tensor-cohomology",
+ "kind": "definition",
+ "title": "Ring tensor cohomology functors and canonical comparison",
+ "status": "split",
+ "statement": "Let $R\\to A$ and $R\\to B$ be maps of commutative rings. Write $\\mathrm{CoCh}(A)$ for the category of cochain complexes of $A$-modules [def-pc-cochain-complex-modules]. Choose functorial K-flat resolutions $F_R\\to\\mathrm{id}$ and $F_A\\to\\mathrm{id}$ on $\\mathrm{CoCh}(R)$ and $\\mathrm{CoCh}(A)$ (functors preserving zero morphisms whose values are K-flat, with augmentations quasi-isomorphisms), and let $U:\\mathrm{CoCh}(A)\\to\\mathrm{CoCh}(R)$ be restriction of scalars. Define $L_B(M)=B\\otimes_R F_R(UM)$ and $T_B(M)=B\\otimes_R U(F_A M)$ by termwise base change [def-weil-module-base-change], with $B$ acting on the first factor. For $i\\in\\mathbb Z$ define the functors $H_L^i(B)(M)=H^i(L_B(M))$ and $H_T^i(B)(M)=H^i(T_B(M))$ to $B$-modules. The second is the usual model for $M\\otimes_A^{\\mathbf L}(A\\otimes_R B)$, via $B\\otimes_R P\\cong P\\otimes_A(A\\otimes_R B)$. Set $V_B(M)=B\\otimes_R F_R(UF_A M)$. The augmentations give $V_B(M)\\to L_B(M)$ and $V_B(M)\\to T_B(M)$; the former is a quasi-isomorphism. Define the canonical comparison $c_B^i:H_L^i(B)\\to H_T^i(B)$ as the inverse on cohomology of the first arrow followed by cohomology of the second. The $A$-actions are induced by the chain endomorphisms $a\\operatorname{id}_M$; the $B$-actions are those on the tensor factor. For a compatible flat map $B\\to C$ [def-weil-pbc-flat-ring-map], define, for every $R$-complex $K$, $b_K^i:C\\otimes_B H^i(B\\otimes_R K)\\to H^i(C\\otimes_R K)$ as the inverse of the exact-functor homology isomorphism followed by the homology of the associativity isomorphism $C\\otimes_B(B\\otimes_R K)\\cong C\\otimes_R K$. Here the left-sided tensor convention is identified with the right-sided convention by tensor symmetry.",
+ "stmt_deps": [
+  "def-pc-cochain-complex-modules",
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-module-base-change"
+ ],
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 06Y6 (Derived change of rings) and Tor independence, equation comparison-map; K-flat resolutions and flat cohomology base change"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "cohomology functors for derived tensor of complexes over two commutative rings canonical comparison via K-flat resolutions",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "canonical comparison map M derived tensor over R B to M derived tensor over A A tensor over R B K-flat resolutions",
+   "results": "8 hits: Module.Flat.iff_flat_tensorProduct, Module.Flat.lTensor_shortComplex_exact, Module.Flat.rTensor_shortComplex_exact, Module.Flat.of_flat_tensorProduct, Module.Flat.iff_rTensor_preserves_shortComplex_exact, Module.Flat.iff_lTensor_preserves_shortComplex_exact, Module.Flat.iff_lTensor_exact', Module.Flat.instTensorProduct. No ring-derived-tensor comparison cohomology functors.",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "derived.*tensor.*compar|tensor.*cohomology|sourceComplex|middleComplex",
+   "results": "1 hits: Mathlib/RingTheory/Flat/FaithfullyFlat/Basic.lean. No ring-derived-tensor comparison cohomology functors.",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-pc-derived-tensor-flat-second-localization",
+  "date": "2026-10-11",
+  "group": "J1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "proof of Tag 0DJ8: cohomology models and comparison maps in localization of the second derived tensor factor",
+   "via": [
+    "lem-pc-derived-tensor-flat-second-localization",
+    "lem-pc-derived-tensor-localization-cohomology",
+    "lem-pc-affine-derived-base-change-comparison-map",
+    "lem-pc-rf-single-complex-affine-base-change",
+    "lem-pc-rf-single-complex-qcqs-induction",
+    "lem-pc-rf-base-change-single-complex-criterion",
+    "lem-pc-rf-base-change-complex",
+    "lem-pc-proper-support-perfect-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.RingTensorCohomology",
+  "declaration": "RingTensorCohomology.source",
+  "declarations": [
+   "RingTensorCohomology.flatResolution",
+   "RingTensorCohomology.resolution",
+   "RingTensorCohomology.augmentation",
+   "RingTensorCohomology.restrict",
+   "RingTensorCohomology.extend",
+   "RingTensorCohomology.sourceComplex",
+   "RingTensorCohomology.targetComplex",
+   "RingTensorCohomology.source",
+   "RingTensorCohomology.target",
+   "RingTensorCohomology.middleComplex",
+   "RingTensorCohomology.spanLeft",
+   "RingTensorCohomology.spanRight",
+   "RingTensorCohomology.spanLeft_isIso",
+   "RingTensorCohomology.comparison",
+   "RingTensorCohomology.flatHomologyMap",
+   "RingTensorCohomology.extendCompIso",
+   "RingTensorCohomology.baseChangeMap"
+  ],
+  "file": "lean/Sheaf/Algebra/Homology/RingTensorCohomology.lean",
+  "statement": "def source (i : ℤ)",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-dts0951",
+  "group": "J1",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-dts0951",
+  "group": "J1",
+  "result": "fix",
+  "note": "Not a corrected item (statement unchanged): park correction realised by EXTRA NODE (A) def-pc-ring-tensor-cohomology instead of citing the unstated second-factor-functor/action-naturality. Matched: R,A,B,C commutative rings with R->A, R->B, R->B->C (Algebra+IsScalarTower), S Submonoid B, IsLocalization S C, hflat RingHom.Flat; M unbounded CochainComplex (ModuleCat A), i:Z; source = H^i(B ox_R F_R(UM)) = H^i(M ox^L_R B); baseChangeMap = inverse flat homology iso then extendScalarsComp.symm, i.e. x ox c |-> c*phi(x); conjuncts: IsIso, naturality in f, A-action a.id_M (C- and B-linearity by ModuleCat C), comparison square; comparison = inv H(spanLeft) >> H(spanRight) = Stacks equation-comparison-map (A-K-flat rep, R-K-flat resolution of its restriction) read in more-algebra.tex. Citer lem-pc-derived-tensor-localization-cohomology (R_p, A_q, R'_p -> R'_p') holds. FIX: new node cites def-weil-module-base-change (termwise extendScalars), 'reduced' spelled out; def-pc-module-kflat-complex not citable (merged after the delivery's base 4b7cefd65)."
+ }
+}
