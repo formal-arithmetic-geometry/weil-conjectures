@@ -152,5 +152,24 @@
   "summary": "Read Stacks 00M1 (algebra.tex, lemma-no-spectral-sequence; tag verified in tags/tags line 807), proof lines 18464-18481. The source's 'And so on until a full zig-zag is found' is written out as an explicit induction: claim C(k) (partial zig-zag a_{0,n},...,a_{k,n-k} starting at x), base C(0), first step C(0)=>C(1) from the cycle condition in the row cokernel (kernel of the projection onto a cokernel), general step C(k-1)=>C(k) for k>=2 from commutation of d and delta, delta^2=0 and exactness of row n-k at A_{k-1,n-k} (k-1>=1, which is where the hypothesis 'exact in positive degrees' is used; exactness at p=0 is never needed), conclusion that C(n) is a zig-zag. Case n=0 separately (Z_0=A_{0,0}). All steps elementary from the definitions; no new node. The statement is kept; checked that its indexing of the zig-zag condition agrees with def-weil-pbc-double-complex-zigzag-module as it stands (d_{p,q}(a_{p,q})=delta_{p-1,q+1}(a_{p-1,q+1})) and with the source's (d(a_{1,i-1})=delta(a_{0,i}) etc.). Edge cases: n=1 uses only step 3; no sign issue arises since the source's zig-zags have no signs. Lean: grep of slopmaster2 for the id, 'zigzag', 'no_spectral', '00M1' finds nothing relevant (only monoidal zigzag identities and category zigzags); lean_audit none.",
   "blueprint": "No blueprint node states this (blueprint_refs search 'zig-zag', 'zigzag', '00M1', 'double complex', 'double complex exact rows', 'lemma-no-spectral-sequence', 'first quadrant': only def-sp-double-complex-total and thm-sp-double-complex-spectral-sequences, which are not this). The steps realize, inside the chain recorded in blueprint.from.place (ancestor lem-weil-pbc-normal-constant-generic, step 4 of its split, through Tor symmetry 00M3 and 00M1), the sentence of 00M1's proof 'First we show that these maps are surjective ... And so on until a full zig-zag is found': steps 2-4 are the 'and so on' induction, step 3 is 'Because delta(r)=0 ... in the image of d', step 4 is 'This in turn implies ... By exactness of the rows'."
  },
- "reviewed": "2026-10-10 L: 5 elementary steps, the inductive zig-zag construction of 00M1 written out (the cycle condition at the first step, exactness of the rows at p >= 1 afterwards); 0 new nodes"
+ "reviewed": "2026-10-10 L: 5 elementary steps, the inductive zig-zag construction of 00M1 written out (the cycle condition at the first step, exactness of the rows at p >= 1 afterwards); 0 new nodes",
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.RowCycleLiftsToZigzag",
+  "declaration": "HomologicalComplex₂.row_cycle_lifts_to_zigzag",
+  "file": "lean/Sheaf/Algebra/Homology/RowCycleLiftsToZigzag.lean",
+  "statement": "theorem row_cycle_lifts_to_zigzag (A : HomologicalComplex₂ (ModuleCat R) (ComplexShape.down ℕ) (ComplexShape.down ℕ)) (hrow : ∀ (p q : ℕ), 0 < p → (ShortComplex.mk ((A.d (p + 1) p).f q) ((A.d p (p - 1)).f q) (by rw [← HomologicalComplex.comp_f, A.d_comp_d, HomologicalComplex.zero_f])).Exact) (n : ℕ) (x : (A.X 0).X n) (hcycle : ∃ c : (A.opcycles 0).cycles n, (A.opcycles 0).iCycles n c = (A.pOpcycles 0).f n x) : ∃ a : zigzagTotal A n, a ∈ zigzagCycles A n ∧ DirectSum.component R (ZigzagIndex n) (fun i : ZigzagIndex n => (A.X i.1.1).X i.1.2) ⟨(0, n), by omega⟩ a = x",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-drz0953"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-drz0953",
+  "group": "E1",
+  "result": "fix",
+  "note": "R CommRing; A HomologicalComplex₂ ModuleCat down ℕ x down ℕ (first quadrant, commuting squares); hrow ShortComplex.Exact at every q, p≥1 (not p=0); n, x ∈ A_{0,n}; π_n x cycle of A^rt = A.opcycles 0 via iCycles/pOpcycles (n=0 automatic); conclusion ∃ a ∈ zigzagCycles with (0,n) component x, recorded zigzagTotal/ZigzagIndex"
+ }
 }
