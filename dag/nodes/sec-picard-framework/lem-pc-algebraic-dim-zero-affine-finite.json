@@ -141,5 +141,23 @@
   "group": "E1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-adz (reviewer sub-agent of L); spot-checked: Source Stacks Tag 06LH (varieties.tex lemma-algebraic-scheme-dim-0), algebraic case: item statement agrees (field k, Y finite type over k, dim Y <= 0; conclusion Y affine and Y -> Spec k finite). Step 1: lem-weil-pbc-finite-type-dim-zero-artinian gives |Y| finite discrete, but its hypothesis is topological Krull dimension (def-kun-topological-krull-dimension) while the item's is def-pc-dimension (sup of local ring dimensions). Step 2: lem-weil-pbc-finite-discrete-scheme-affine gives Y = Spec Gamma(Y,O_Y). Step 3: new node lem-pc-affine-finite-type-algebra (true: Morphisms Tag 01T2 (1)=>(2)); the passage dim Y <= 0 => every prime of B maximal was uncited. Step 4: lem-weil-pbc-finite-type-algebra-dim-zero-finite (every prime maximal, finite type => finite-dimensional), then finite morphism by def-weil-finite-integral-morphism (affine over affine base, R -> A finite) - elementary. Fixes (FIX more, RETURN less): dag/nodes/sec-picard-framework/lem-pc-algebraic-dim-zero-affine-finite.json: proof[0]: C4, cite lem-pc-scheme-dimension-local-rings to pass from def-pc-dimension to the topological dimension hypothesis of the cited leaf (declared in split_report.tool_uses and --tool-uses, generic off-unit tool, same use as already accepted in lem-pc-zero-dimensional-closed-subscheme-finite); proof[2]: C1, cite lem-pc-dimension-affine-open-cover (one-member cover Y = Spec B gives dim B = dim Y <= 0, so every prime maximal; empty case B = 0); proof_deps updated. dag/nodes/sec-picard-framework/lem-pc-affine-finite-type-algebra.json: source: Tag 01PB (about quasi-coherent modules) replaced by morphisms.tex Tag 01T2 (lemma-locally-finite-type-characterize). Small cases: Spec k, Spec k[e]/(e^2), finite disjoint unions of points, empty scheme; A^1_k excluded (dim 1). No Mathlib leaf in the delivery; new node search recorded (three kinds), no exact match. Start Sat Oct 10 03:24:23 PM UTC 2026, end Sat Oct 10 03:25:38 PM UTC 2026.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.DimZeroFiniteOverField",
+  "declaration": "AlgebraicGeometry.isAffine_and_isFinite_of_dim_le_zero",
+  "file": "lean/Sheaf/AlgebraicGeometry/DimZeroFiniteOverField.lean",
+  "statement": "theorem isAffine_and_isFinite_of_dim_le_zero {k : Type u} [Field k] (Y : Scheme.{u}) [Y.Over (Spec (.of k))] [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))] (hY : Y.dim ≤ 0) : IsAffine Y ∧ IsFinite (Y ↘ Spec (.of k))",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-dza0652",
+  "group": "H1",
+  "result": "pass",
+  "note": "k field (Type u); Y : Scheme.{u} with Y.Over (Spec k); finite type = LocallyOfFiniteType + QuasiCompact of Y ↘ Spec k (def-weil-finite-type-morphism); dim Y <= 0 via landed Scheme.dim (def-pc-dimension), empty Y (⊥) included as node proof allows; conclusion IsAffine Y ∧ IsFinite (Y ↘ Spec k); docstring follows the four proof steps; Mathlib Artinian.lean has only components (of_topologicalKrullDim_le_zero, IsArtinianScheme.finite), source Curve/Reductions only curve case: existing false correct"
  }
 }

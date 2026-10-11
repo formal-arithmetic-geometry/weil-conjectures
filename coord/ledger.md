@@ -3455,3 +3455,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 06:08 L: merged: E1 fpqc-singleton-affine-refinement (R-sar0641 PASS), G1 galois-axioms (R-gax0641 FIX docstring; IsStacksGaloisObject defined there); build loop green; 3 reviewers in flight, 2 more launched
 - 06:09 L: merged deliver/E1/lem-pc-affine-flat-module-localization-preserves-flatness (stage 2; reviewer PASS; first push; Sheaf.RingTheory.Flat.LocalizationPreservesFlatness Module.Flat.localizedModule_of_algebra)
 - 06:09 L: merged deliver/C1/lem-exc-rg-group-algebra-functorial-injective-embeddings (stage 2; reviewer FIX; first push; Sheaf.GroupTheory.GroupAlgebraFunctorialInjectiveEmbeddings ModuleCat.groupAlgebra_functorialInjectiveEmbeddings)
+- 06:09 L: merged deliver/H1/lem-pc-algebraic-dim-zero-affine-finite (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.DimZeroFiniteOverField AlgebraicGeometry.isAffine_and_isFinite_of_dim_le_zero)
