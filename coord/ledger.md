@@ -5127,3 +5127,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 15:04 L: merged deliver/M1/lem-weil-pbc-torsion-extension-flat-descent (stage 2; reviewer PASS; first push; Sheaf.RingTheory.TorsionExtensionFlatDescent LinearMap.exists_torsion_extension_flat_descent)
 - 15:04 L: merged deliver/M1/pqf-lem-qs-intersection-qc (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.QuasiCompactOpenIntersection AlgebraicGeometry.compactSpace_inter_of_quasiSeparated)
 - 15:05 L: merged deliver/N1/lem-sc-base-change-curve (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.BaseChangeCurve AlgebraicGeometry.baseChange_curve)
+- 15:05 L: merged deliver/N1/lem-weil-derived-limit-roos-complex (stage 2; reviewer PASS; first push; Sheaf.Algebra.Homology.RoosComplex CategoryTheory.roosComplex_quasiIso)
