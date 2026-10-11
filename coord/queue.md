@@ -1,8 +1,8 @@
 # Work queue
 
-862 items; claim with `tools/claim.py next <group> [--stage N]`.
+861 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (26)
+## Stage 1: nodes to split (25)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -22,15 +22,14 @@
 | `lem-sc-picard-kunneth-qcoh` | 6014 | none |
 | `lem-sc-perfect-local-pseudocoherent-free-model` | 6015 | none |
 | `lem-sc-valuation-limit-qcoh-section-descent` | 6015 | none |
-| `lem-pc-affine-perfect-cut-degree-zero` | 6016 | none |
+| `lem-pc-derived-splitting-unique` | 6017 | none |
+| `lem-pc-finite-projective-cokernel-localization` | 6017 | none |
 | `lem-sc-coherent-ring-fp-kernel-cokernel` | 6017 | none |
 | `lem-sc-base-change-curve` | - | none |
 | `lem-sc-global-functions` | - | rests_on_sorry |
 | `lem-pur-kinjective-homotopy-exact-injective-target` | - | none |
 | `lem-pur-kinjective-homotopy-limit-vanishing` | - | none |
 | `lem-pur-left-derived-exact-when-defined` | - | none |
-| `lem-pc-affine-sections-finite-locally-free-criterion` | - | none |
-| `lem-pc-finite-flat-affine-sections-projective` | - | none |
 | `lem-pc-finite-flat-restriction-projective` | - | none |
 
 ## Stage 2: nodes to state (836)
@@ -874,7 +873,7 @@
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 1751 nodes that wait for a statement dependency, 67 nodes that wait for stage 1.
+Not open yet: 1754 nodes that wait for a statement dependency, 66 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
