@@ -183,5 +183,23 @@
   "group": "H1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-sh2 (reviewer sub-agent of L); spot-checked: Repaired re-push after the 14:38 return; all three points repaired. (1) Step 1 now applies lem-weil-pbc-pointed-etale-neighbourhood-affine-shrink with S=T and W=f^{-1}(U), factors f o j through U=Spec R (open immersion), gives phi: R->A with Spec(phi) etale (local rings of U and T agree) and phi^{-1}(q)=m. (2) Step 2: q over m, kappa(m)->kappa(q) finite separable by lem-weil-pbc-etale-algebra-residue-field-separable (hypotheses: Spec A -> Spec R etale, q prime), iso by lem-pc-sepclosed-finite-sep-trivial (kappa sep. closed by def-weil-pbc-henselian-terminology), R satisfies root lifting by lem-weil-pbc-henselian-local-root-lifting (i)=>(ii), so lem-weil-pbc-root-lifting-etale-retraction gives tau with tau^{-1}(m)=q; sigma=j o Spec(tau): f o sigma = incl from tau o phi = id_R, sigma(u)=v, field map alpha o sigma^# = beta o f^# o (f^#)^{-1} = beta checked by hand, so sigma: (U,tbar)->(V,vbar) is a morphism of def-weil-pbc-pointed-etale-neighbourhoods. (3) Step 3 cites lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered (same category as N_tbar; in proof_deps and tool_uses) for hypothesis (1) of lem-weil-pbc-colimit-initial-full-subcategory, the full subcategory {(U,tbar)} receives maps to all objects by step 2, End = {id} since j o h = j and j mono, and the constant connected-diagram colimit (G(U),id) identifies the canonical map with the germ map iota_(U,tbar). Statement unchanged, agrees with Stacks 03QO (etale-cohomology.tex, lemma-vanishing-etale-cohomology-strictly-henselian) for sets on the open U. Tool uses (8, all generic) accepted (C8). Shape: one commit, only item node and report, only split-owned fields changed (proof, proof_deps, proof_origin, status, split_report); report has Review by H1 and the per-step repair account. Small case: U=T=Spec R reduces to 03QO. Start Sat Oct 10 02:52:53 PM UTC 2026, end Sat Oct 10 02:53:33 PM UTC 2026."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.StrictlyHenselianOpenSectionsStalk",
+  "declaration": "AlgebraicGeometry.Scheme.strictlyHenselianOpen_toPresheafFiber_bijective",
+  "file": "lean/Sheaf/AlgebraicGeometry/StrictlyHenselianOpenSectionsStalk.lean",
+  "statement": "theorem strictlyHenselianOpen_toPresheafFiber_bijective {T : Scheme.{u}} (U : T.Opens) {R : Type u} [CommRing R] [IsLocalRing R] (hR : IsStrictlyHenselianLocalRing R) (e : U.toScheme ≅ Spec (.of R)) {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ T) (t : Spec (.of Ω) ⟶ U.toScheme) (ht : t ≫ U.ι = s) (hclosed : (t ≫ e.hom) default = IsLocalRing.closedPoint R) (G : Sheaf (smallEtaleTopology T) (Type (max u v))) : Function.Bijective ((pointSmallEtale s).toPresheafFiber (Etale.mk U.ι) (Over.homMk t ht) G.obj)",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "F1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }
