@@ -1,6 +1,6 @@
 # Work queue
 
-91 items; claim with `tools/claim.py next <group> [--stage N]`.
+89 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (1)
 
@@ -8,7 +8,7 @@
 |---|---|---|
 | `lem-pc-localization-preserves-nonzerodivisor` | 3011 | closed_part |
 
-## Stage 2: nodes to state (90)
+## Stage 2: nodes to state (88)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
@@ -19,7 +19,6 @@
 | `def-pc-derived-rhom-algebra-module` | 1 | state | 2 |
 | `def-sc-duality-equation-base-change-map` | 1 | state | 2 |
 | `def-weil-pbc-truncation-exact-couples` | 1 | state | 2 |
-| `def-weil-pbc-etale-shriek-base-change-map` | 1 | state | 1 |
 | `def-pc-upper-shriek-right-adjoint` | 1 | state | 0 |
 | `lem-pc-module-pullback-identity-composition` | 1 | state | 10 |
 | `lem-weil-pbc-pair-henselization` | 1 | state | 5 |
@@ -38,7 +37,6 @@
 | `cor-galois-lisse-representations` | 1 | state | 0 |
 | `lem-pc-base-change-rhom-perfect` | 1 | state | 0 |
 | `lem-pc-bounded-coherent-finite-tor-proper-pushforward-perfect` | 1 | state | 0 |
-| `lem-pc-genus-well-defined` | 1 | state | 0 |
 | `lem-pc-noetherian-perfect-direct-image` | 1 | state | 0 |
 | `lem-pc-projection-locality` | 1 | state | 0 |
 | `lem-pc-proper-derived-direct-image-composition` | 1 | state | 0 |
@@ -74,7 +72,6 @@
 | `lem-sc-proper-flat-right-adjoint-direct-sums` | 1 | state | 0 |
 | `lem-sc-proper-flat-right-adjoint-restriction-open` | 1 | state | 0 |
 | `lem-sc-qcoh-acyclic-derived-pushforward-cohomology` | 1 | state | 0 |
-| `lem-sc-qcoh-acyclic-derived-sections-comparison` | 1 | state | 0 |
 | `lem-sc-smooth-proper-diagonal-basechange-upper-shriek` | 1 | state | 0 |
 | `lem-sc-smooth-proper-diagonal-koszul-dual` | 1 | state | 0 |
 | `lem-sc-smooth-proper-diagonal-tensor-formula` | 1 | state | 0 |
@@ -82,6 +79,7 @@
 | `lem-weil-pbc-affine-morphism-cohomology-edge` | 1 | state | 0 |
 | `lem-weil-pbc-cohomology-pullback-derived-unit` | 1 | state | 0 |
 | `lem-weil-pbc-etale-mayer-vietoris-pullback` | 1 | state | 0 |
+| `lem-weil-pbc-etale-shriek-base-change-modules` | 1 | state | 0 |
 | `lem-weil-pbc-formal-functions-complete-base` | 1 | state | 0 |
 | `lem-weil-pbc-formal-systems-proper-support-serre` | 1 | state | 0 |
 | `lem-weil-pbc-gm-strict-henselization-stalk-formula` | 1 | state | 0 |
@@ -103,7 +101,7 @@
 | `lemma-weil-pbc-hypercohomology-convergence` | 2 | state | 0 |
 | `pqf-lem-leray-lowdegree` | 2 | state | 0 |
 
-Not open yet: 40 nodes that wait for stage 1, 189 nodes that wait for a statement dependency.
+Not open yet: 40 nodes that wait for stage 1, 188 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
