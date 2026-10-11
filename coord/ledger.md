@@ -5098,3 +5098,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 14:57 L: merged deliver/S1/lemma-weil-pbc-cancellation (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.TorsionAbelianBaseChangeCancellation AlgebraicGeometry.Etale.hasTorsionAbelianBaseChange_of_comp_of_surjective)
 - 14:58 L: merged deliver/H1/lem-exc-etale-algebra-lift (stage 2; reviewer FIX; first push; Sheaf.RingTheory.EtaleAlgebraLift Algebra.SquareJacobianPresentation.CoefficientLift.etale_and_reduction_equiv)
 - 14:58 L: merged deliver/F1/lem-weil-pbc-unramified-fibre-point-isolated (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.UnramifiedFibrePointIsolated AlgebraicGeometry.unramified_fibre_point_isolated)
+- 14:58 L: merged deliver/T1/lem-weil-pbc-etale-geometric-fibre-constant-sections (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.EtaleGeometricFibreConstantSections AlgebraicGeometry.etaleGeometricFibreConstantSections)
