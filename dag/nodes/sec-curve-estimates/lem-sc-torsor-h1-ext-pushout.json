@@ -22,7 +22,8 @@
   "def-pc-scheme",
   "def-sc-zariski-site",
   "def-sc-topological-abelian-cohomology",
-  "def-sc-gm-torsor"
+  "def-sc-gm-torsor",
+  "def-sc-zariski-contracted-product-presentation"
  ],
  "proof": [
   {
@@ -138,5 +139,23 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.Sites.ZariskiTorsorExtensionPushout",
+  "declaration": "CategoryTheory.Sheaf.Torsor.zariski_torsor_extension_pushout",
+  "file": "lean/Sheaf/CategoryTheory/Sites/ZariskiTorsorExtensionPushout.lean",
+  "statement": "theorem zariski_torsor_extension_pushout (X : AlgebraicGeometry.Scheme.{uE}) {G G' E : Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{uE}} (φ : G ⟶ G') (j : G ⟶ E) (p : E ⟶ (constantSheaf (Opens.grothendieckTopology X) AddCommGrpCat.{uE}).obj (AddCommGrpCat.of (ULift.{uE} ℤ))) (hjp : j ≫ p = 0) (hE : (ShortComplex.mk j p hjp).ShortExact) : ∃ (p' : pushout j φ ⟶ (constantSheaf (Opens.grothendieckTopology X) AddCommGrpCat.{uE}).obj (AddCommGrpCat.of (ULift.{uE} ℤ))), pushout.inl j φ ≫ p' = p ∧ ∃ (hz : pushout.inr j φ ≫ p' = 0), (ShortComplex.mk (pushout.inr j φ) p' hz).ShortExact ∧ ∃ (T : Torsor G) (T' : Torsor G') (a : ∀ U : (Opens X)ᵒᵖ, T.sheaf.obj.obj U → E.obj.obj U) (b : ∀ U : (Opens X)ᵒᵖ, T'.sheaf.obj.obj U → (pushout j φ).obj.obj U) (q : ZariskiContractedProductPresentation X φ T T'), (∀ ⦃U V : (Opens X)ᵒᵖ⦄ (f : U ⟶ V) (t : T.sheaf.obj.obj U), E.obj.map f (a U t) = a V (T.sheaf.obj.map f t)) ∧ (∀ U : (Opens X)ᵒᵖ, Set.BijOn (a U) Set.univ {e | p.hom.app U e = (toSheafify (Opens.grothendieckTopology X) ((Functor.const (Opens X)ᵒᵖ).obj (AddCommGrpCat.of (ULift.{uE} ℤ)))).app U ⟨1⟩}) ∧ (∀ (U : (Opens X)ᵒᵖ) (g : G.obj.obj U) (t : T.sheaf.obj.obj U), a U (T.vadd U g t) = a U t + j.hom.app U g) ∧ (∀ ⦃U V : (Opens X)ᵒᵖ⦄ (f : U ⟶ V) (t : T'.sheaf.obj.obj U), (pushout j φ).obj.map f (b U t) = b V (T'.sheaf.obj.map f t)) ∧ (∀ U : (Opens X)ᵒᵖ, Set.BijOn (b U) Set.univ {e | p'.hom.app U e = (toSheafify (Opens.grothendieckTopology X) ((Functor.const (Opens X)ᵒᵖ).obj (AddCommGrpCat.of (ULift.{uE} ℤ)))).app U ⟨1⟩}) ∧ (∀ (U : (Opens X)ᵒᵖ) (h : G'.obj.obj U) (t : T'.sheaf.obj.obj U), b U (T'.vadd U h t) = b U t + (pushout.inr j φ).hom.app U h) ∧ (∀ (U : (Opens X)ᵒᵖ) (t : T.sheaf.obj.obj U) (h : G'.obj.obj U), b U (q.quotient U t h) = (pushout.inl j φ).hom.app U (a U t) + (pushout.inr j φ).hom.app U h)",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-h95bf7",
+  "group": "C1",
+  "result": "pass",
+  "note": "headless review: X scheme; G,G',E abelian sheaves on Opens.grothendieckTopology X; φ:G⟶G', j:G⟶E, p to constantSheaf (ULift ℤ) with ShortExact (hjp only forms the short complex); E_φ = pushout j φ with inr as injection; ∃p' with inl≫p'=p, inr≫p'=0, new sequence ShortExact; fibres T, T' over the image of global 1 via natural a, b with BijOn onto {e | p e = 1} and translation through j and inr; T∧^G G' = ZariskiContractedProductPresentation (relation (g·t, h−φg), residual translation, unique factorisation through any sheaf of sets, i.e. sheafified orbit quotient); canonical identification b(q(t,h)) = inl(a t)+inr h, checked consistent; new def node genuine, not hollow, not a duplicate of the étale or same-group presentations; both modules compile together cleanly (reviewer recompile, 2.3 s)"
  }
 }
