@@ -125,5 +125,23 @@
   "group": "J1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-adc1700 (reviewer sub-agent of L); spot-checked: Source: Stacks perfect.tex 08I8 (lemma-affine-morphism: Rf_* reflects isomorphisms on D_QCoh, f affine) and 0AVW (lemma-affine-morphism-equivalence; its proof gives H^i(Rf_*K)=f_*H^i(K) for K in D_QCoh), plus 01XC; item statement (f affine, E in D_QCoh(X); E a QCoh sheaf in degree 0 iff Rf_*E is, sheaf f_*E) agrees hypothesis by hypothesis. Step 1: lem-pc-affine-morphism-hi (R^if_*F=0, i>0, f_*F QCoh) + def-pc-derived-direct-image (H^i(Rf_*E)=R^if_*E) carry it. Step 2: new node lem-sc-affine-derived-pushforward-t-exact gives the bounds reflection; then E has cohomology only in degree 0, so E = H^0(E)[0] (elementary truncation), quasi-coherent as E is in D_QCoh. Step 3: i=0 identification, same nodes. New node true: t-exactness from H^i(Rf_*K)=f_*H^i(K) (0AVW proof), bound reflection since f_*F=0 implies F=0 for F QCoh and f affine, iso reflection is 08I8; Rf_* lands in D_QCoh as f affine is qcqs. Tested: f=id, X=Spec A over Spec B (H^i(K) as A-modules restricted to B), zero complex. Tool use lem-pc-affine-morphism-hi (unit picard-serre-b) is a generic black box, accepted. slopmaster2 DirectImage.lean has only higher-direct-image affine lemmas (isZero_higherDirectImage_of_isAffineHom), no derived statement, so no attachment (B10). FIX more, RETURN less: dag/nodes/sec-picard-framework/lem-sc-affine-derived-pushforward-t-exact.json: statement/stmt_deps: cite def-sbc-standard-tstructure-derived-category for 'standard t-structures' and D^{<=n}, D^{>=n} (B3), and say E is an object of D_QCoh(X); mathlib_searches: added reviewer grep of pinned Mathlib AlgebraicGeometry for derived pushforward (no hits), since the remote records predate 17:00 UTC. Start Sat Oct 10 04:59:25 PM UTC 2026, end Sat Oct 10 05:00:26 PM UTC 2026.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AffineDerivedConcentration",
+  "declaration": "AlgebraicGeometry.affine_derived_concentration",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineDerivedConcentration.lean",
+  "statement": "theorem affine_derived_concentration {X Y : Scheme.{uA}} [HasDerivedCategory.{wXA} (SheafOfModules.{uA} (moduleRings X.toRingedSpace))] [HasDerivedCategory.{wYA} (SheafOfModules.{uA} (moduleRings Y.toRingedSpace))] (f : X ⟶ Y) [IsAffineHom f] (E : schemeDerivedCategory X) (hE : schemeDerivedQCohProperty X E) : ((∃ F : SheafOfModules.{uA} (moduleRings X.toRingedSpace), F.IsQuasicoherent ∧ Nonempty (E ≅ (DerivedCategory.singleFunctor (SheafOfModules.{uA} (moduleRings X.toRingedSpace)) 0).obj F)) ↔ (∃ G : SheafOfModules.{uA} (moduleRings Y.toRingedSpace), G.IsQuasicoherent ∧ Nonempty ((schemeDerivedDirectImage f).obj E ≅ (DerivedCategory.singleFunctor (SheafOfModules.{uA} (moduleRings Y.toRingedSpace)) 0).obj G))) ∧ (∀ F : SheafOfModules.{uA} (moduleRings X.toRingedSpace), F.IsQuasicoherent → Nonempty (E ≅ (DerivedCategory.singleFunctor (SheafOfModules.{uA} (moduleRings X.toRingedSpace)) 0).obj F) → Nonempty ((schemeHigherDirectImage f 0).obj E ≅ (RingedSpace.moduleDirectImage f.toLRSHom.toShHom).obj F))",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "G1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }

@@ -5336,3 +5336,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 16:00 L: merged deliver/V1/lem-pc-direct-image-bounded-coherent (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.DirectImageBoundedCoherent AlgebraicGeometry.Scheme.directImage_isBounded_coherent)
 - 16:01 L: merged deliver/H1/lem-sc-derived-internal-hom-restrict-open (stage 2; reviewer PASS; first push; Sheaf.Paper.DerivedInternalHomRestrictOpen CategoryTheory.derivedInternalHom_restrict_open)
 - 16:01 L: merged deliver/U1/lem-pc-ringed-space-truncation-derived-limit (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.TruncationDerivedLimit AlgebraicGeometry.truncation_isDerivedLimitTriangle_of_local_bound)
+- 16:02 L: merged deliver/G1/lem-sc-affine-derived-concentration (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.AffineDerivedConcentration AlgebraicGeometry.affine_derived_concentration)
