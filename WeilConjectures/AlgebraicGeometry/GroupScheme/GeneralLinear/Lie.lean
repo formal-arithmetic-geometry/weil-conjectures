@@ -47,8 +47,8 @@ comparison for invariant subspaces, for closed subgroups of `GL_n`, is
 ## Implementation notes
 
 The bracket on `Matrix n n k` is the commutator bracket `LieRing.ofAssociativeRing`, activated
-locally as in `Mathlib.Algebra.Lie.Matrix`. Following `𝔾𝕃(n; k)`, the base ring is written `k` even when it is
-only a commutative ring.
+locally as in `Mathlib.Algebra.Lie.Matrix`. Following `𝔾𝕃(n; k)`, the base ring is written `k`
+even when it is only a commutative ring.
 
 ## Blueprint
 
