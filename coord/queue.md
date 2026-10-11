@@ -1,11 +1,11 @@
 # Work queue
 
-469 items; claim with `tools/claim.py next <group> [--stage N]`.
+465 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (469)
+## Stage 2: nodes to state (465)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -37,7 +37,6 @@
 | `lem-pc-perfect-tensor-hom-duality` | 1 | state |
 | `lem-pc-perfect-thick-closure` | 1 | state |
 | `lem-pc-perfect-two-out-of-three` | 1 | state |
-| `lem-pc-pseudo-coherent-distinguished-triangle` | 1 | state |
 | `lem-pc-pseudo-coherent-finite-tor-perfect` | 1 | state |
 | `lem-pc-pseudo-coherent-summand` | 1 | state |
 | `lem-pc-ring-pseudo-coherent-finite-tor-perfect` | 1 | state |
@@ -54,7 +53,6 @@
 | `lem-sc-affine-pseudo-coherent-lift` | 1 | state |
 | `lem-sc-affine-support-iterated-cones` | 1 | state |
 | `lem-sc-base-change-curve` | 1 | state |
-| `lem-sc-coherent-pseudo-coherent` | 1 | state |
 | `lem-sc-coherent-ring-perfect-complex-cohomology` | 1 | state |
 | `lem-sc-complex-lift-class-projective` | 1 | state |
 | `lem-sc-derived-k-injective-restrict-open` | 1 | state |
@@ -92,10 +90,8 @@
 | `lem-weil-pbc-popescu-reduce-to-field` | 1 | state |
 | `lem-weil-pbc-popescu-solution-modulo-choose` | 1 | state |
 | `lem-weil-pbc-power-in-base-after-localization` | 1 | state |
-| `lem-weil-pbc-power-series-complete-over-complete-base` | 1 | state |
 | `lem-weil-pbc-power-series-field-cohen-fs-adic` | 1 | state |
 | `lem-weil-pbc-power-series-field-cohen-regular-complete` | 1 | state |
-| `lem-weil-pbc-power-series-n2` | 1 | state |
 | `lem-weil-pbc-power-series-normal-domain` | 1 | state |
 | `lem-weil-pbc-power-series-onto-completion` | 1 | state |
 | `lem-weil-pbc-power-series-parameter-quotient` | 1 | state |
