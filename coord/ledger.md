@@ -3442,3 +3442,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 06:03 L: merged deliver/G1/lem-exc-etale-open-subgroup-fixed-field (stage 2; reviewer FIX; first push; Sheaf.FieldTheory.OpenSubgroupFixedField openSubgroup_fixedField_finite_separable)
 - 06:04 L: merged deliver/J1/lem-galois-coproduct-morphism-components (stage 2; reviewer PASS; first push; Sheaf.CategoryTheory.Galois.CoproductMorphismComponents CategoryTheory.morphism_coproduct_connected_components)
 - 06:04 L: merged deliver/E1/lem-galois-fpqc-descending-types-morphisms (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.FpqcDescendingTypesMorphisms AlgebraicGeometry.fpqcDescentEffective_of_affine)
+- 06:05 L: merged deliver/E1/lem-kun-finite-closed-subscheme (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.FiniteClosedPoints AlgebraicGeometry.IsClosed.finite_of_finiteType_over_field_of_closed_points)

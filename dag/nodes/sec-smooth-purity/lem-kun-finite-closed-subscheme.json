@@ -134,5 +134,23 @@
   "group": "J1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-fcs2938 (reviewer sub-agent of L); spot-checked: Step 1: lem-weil-pbc-finite-type-over-noetherian applies (Spec K Noetherian, X->Spec K finite type) (C1/C4/E ok). Step 2: lem-sc-noetherian-closed-points-finite statement matches exactly, closed subset needs no scheme structure there; that node was created from lem-sc-component-intersections-finite and depends on lem-sc-noetherian-closed-subset-finite-components, lem-sc-scheme-sober, so no cycle (D ok). Statement text unchanged; only stmt_deps drops unrelated def-kun-support. Citers lem-kun-0f1h/lem-kun-cp-approximation use it with E=X, consistent (C4). Mathlib grep closedPoints+finite in AlgebraicGeometry: no exact match. No new nodes. Second reading missed no fault."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteClosedPoints",
+  "declaration": "AlgebraicGeometry.IsClosed.finite_of_finiteType_over_field_of_closed_points",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteClosedPoints.lean",
+  "statement": "theorem IsClosed.finite_of_finiteType_over_field_of_closed_points {K : Type u} [Field K] {X : Scheme.{u}} (f : X ⟶ Spec (.of K)) [LocallyOfFiniteType f] [QuasiCompact f] {E : Set X} (hE : IsClosed E) (hclosed : ∀ x ∈ E, IsClosed {x}) : E.Finite",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-fcs0636",
+  "group": "E1",
+  "result": "pass",
+  "note": "K arbitrary field in Type u (Spec (.of K) forces X : Scheme.{u}, Mathlib AlgClosed/Basic convention); f : X ⟶ Spec K with [LocallyOfFiniteType f] [QuasiCompact f] = finite type over K; E closed, hclosed ∀ x ∈ E, IsClosed {x} in X; conclusion E.Finite; nothing added (no Noetherian/nonempty); docstring has both proof steps (01T6 Noetherian, 0BA8); no Mathlib/WeilConjectures duplicate (only KrullDimension variant with dim hypothesis); imports used, lines ≤100, proof sorry"
  }
 }
