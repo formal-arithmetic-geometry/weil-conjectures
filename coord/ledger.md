@@ -4018,3 +4018,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 09:27 L: merged deliver/E1/lem-weil-pbc-completion-at-quasi-finite-prime (stage 2; reviewer FIX; first push; Sheaf.RingTheory.CompletionAtQuasiFinitePrime Algebra.completion_at_quasiFiniteAtPrime)
 - 09:27 L: merged deliver/H1/lem-pc-proper-base-change (stage 2; reviewer PASS; first push; Mathlib.AlgebraicGeometry.Morphisms.Proper AlgebraicGeometry.IsProper.isStableUnderBaseChange; existing declaration)
 - 09:27 L: merged deliver/K1/lem-weil-pbc-coskeleton-matching-tuples (stage 2; reviewer PASS; first push; Sheaf.CategoryTheory.CoskeletonMatchingTuples CategoryTheory.SimplicialObject.exists_coskeleton_matching_tuples)
+- 09:27 L: merged deliver/H1/lem-weil-pbc-constructible-module-finite-stalks (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.ConstructibleModuleFiniteStalks AlgebraicGeometry.Scheme.constructibleModule_finite_geometric_stalk)
