@@ -113,5 +113,23 @@
   "group": "K1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-rzi (reviewer sub-agent of L); spot-checked: Source: Varieties Remark 09NW (varieties-remark-conductor, varieties.tex:8068-8076) read locally: reduced ring A, ideals I,J with V(I) u V(J)=Spec A, B=A/J, I -> IB iso of A-modules, IB=(I+J)/J=I/(I cap J), I cap J=0; the item's statement matches hypothesis by hypothesis (reduced, covering, B=A/J), no change of statement. Only the item's node and the report changed; changed fields are split-owned (proof, proof_deps, proof_origin, status, split_report). Step 1: lem-weil-pbc-zero-locus-ideal-intersection states V(I cap J)=V(I) u V(J) for any commutative ring, Mathlib leaf PrimeSpectrum.zeroLocus_inf verified at RingTheory/Spectrum/Prime/Basic.lean:336. Step 2: lem-weil-pbc-zero-locus-eq-iff-radical-eq states sqrt I = intersection of primes containing I (leaf clause Ideal.radical_eq_sInf, Ideal/Operations.lean:932 verified), applied to I=0 gives nilradical; reducedness gives I cap J=0. Step 3 elementary: kernel of I -> A/J restricted is I cap J, image is IB. Both cited nodes are off-unit (sk-thm-p1) Mathlib leaves used as generic tools, no tool_uses needed. Small cases: A=k[x,y]/(xy), I=(x), J=(y): (x) cap (y)=0 in A; A=k[x]/(x^2) is excluded (not reduced; there I=J=(x) gives I cap J=(x) nonzero), confirming the reduced hypothesis is needed; A=0 trivial. Note: report lists a citations.json not in the commit (harmless). Start Sat Oct 10 03:44:32 PM UTC 2026, end Sat Oct 10 03:44:54 PM UTC 2026."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.ReducedIdealsZeroIntersection",
+  "declaration": "Ideal.reduced_ideals_zero_intersection",
+  "file": "lean/Sheaf/RingTheory/ReducedIdealsZeroIntersection.lean",
+  "statement": "theorem reduced_ideals_zero_intersection {A : Type u} [CommRing A] [IsReduced A] (I J : Ideal A) (hcover : PrimeSpectrum.zeroLocus (I : Set A) ∪ PrimeSpectrum.zeroLocus (J : Set A) = (Set.univ : Set (AlgebraicGeometry.Spec (CommRingCat.of A)))) : I ⊓ J = ⊥ ∧ ∃ e : I ≃ₗ[A] (Ideal.map (Ideal.Quotient.mk J) I), ∀ x : I, (e x : A ⧸ J) = Ideal.Quotient.mk J (x : A)",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-riz1235",
+  "group": "C1",
+  "result": "pass",
+  "note": "A reduced comm ring: {A : Type u} [CommRing A] [IsReduced A]; I J : Ideal A; V(I) u V(J) = Spec A: PrimeSpectrum.zeroLocus union = Set.univ of AlgebraicGeometry.Spec (CommRingCat.of A) carrier (defeq PrimeSpectrum A, recorded dep decl); I cap J = 0: I ⊓ J = ⊥; B=A/J, IB = Ideal.map (Quotient.mk J) I; canonical A-linear iso I ≃ₗ[A] IB pinned by e x = mk x (A-action on IB via Submodule.module' scalar tower); IB = I/(I cap J) implied by kernel I ⊓ J = ⊥; edge cases zero ring, I=J, dual numbers excluded by IsReduced"
  }
 }
