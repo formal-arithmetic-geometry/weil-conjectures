@@ -48,6 +48,18 @@ namespace AlgebraicGeometry.Scheme.Modules
 
 variable {X Y S T : Scheme.{u}} {g : Y ⟶ X} {iY : Y ⟶ T} {iX : X ⟶ S} {f : T ⟶ S}
 
+
+/-- In a cartesian square with `T` affine mapping into an affine open `V`, the preimage
+`g⁻¹ W = W ×_V T` of an affine open `W ⊆ iX⁻¹ V` is affine. -/
+lemma isAffineOpen_preimage_of_isPullback (H : IsPullback g iY iX f) {V : S.Opens}
+    (hV : IsAffineOpen V) [IsAffine T] (hfV : ⊤ ≤ f ⁻¹ᵁ V) {W : X.Opens} (hWV : W ≤ iX ⁻¹ᵁ V)
+    (hW : IsAffineOpen W) : IsAffineOpen (g ⁻¹ᵁ W) := by
+  have hUY : g ⁻¹ᵁ W = g ⁻¹ᵁ W ⊓ iY ⁻¹ᵁ ⊤ := by simp
+  have : IsAffine V.toScheme := hV
+  have : IsAffine (⊤ : T.Opens).toScheme := isAffineOpen_top T
+  have : IsAffine W.toScheme := hW
+  exact .of_isIso (Scheme.Hom.isPullback_resLE H hfV hWV hUY).isoPullback.hom
+
 section Sections
 
 variable (w : g ≫ iX = iY ≫ f) {V : S.Opens} (hfV : ⊤ ≤ f ⁻¹ᵁ V) (ℱ : X.Modules)
