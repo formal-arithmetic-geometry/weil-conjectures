@@ -121,5 +121,27 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-pdt0046 (reviewer sub-agent of L); spot-checked: Read 064R/064E; item statement unchanged (shared m-pc wording intact); citers bca89f654 (clause 1), summand (clause 1), localization-glue (clauses 1,2) use stated clauses; Step 2 rotations (2) index m-1 and (3) index m checked. FIX more, RETURN less: (1) C1/C4 lift: Step 1 asserted that P->A->B and E->B 'determine' a map P->E in D(R) with no node; the new node lem-pc-ring-derived-map-lift only said D(R) maps from bounded projectives are chain maps (not 064E, and sourced to more-algebra.tex). Restated the node as Tag 064E in D(R) form (P^i=0 for i<n, alpha iso above n surj at n => chain map gamma with alpha Q(gamma)=beta), source derived.tex, LeanFinder query recorded (no match); Step 1 applies it with n=m after truncation. (2) C4 four lemma: lem-sc-four-lemma (six-term 0-ended, four isos => isos) does not give surjectivity and the outer maps at i=m are only surjective; added node lem-pc-four-lemma-epi (Stacks 05QA(1), = Mathlib epi_of_epi_of_epi_of_mono), dropped lem-sc-four-lemma from uses. (3) C1: long exact cohomology sequence, its ladder and TR3 were uncited: added lem-sf-derived-homology-long-exact, lem-weil-pbc-derived-cohomology-ladder (Mathlib leaves) and def-weil-triangulated-category; five-lemma text corrected (first map only epi at i=m+1). The Second reading by E1 missed (1) and (2).; 3 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
  },
- "lead_note": "2026-10-11 L (R-pdt0046): lem-pc-four-lemma-epi is added statement-only (status unsplit) because a reviewer-added node must be; its search records an exact match CategoryTheory.Abelian.epi_of_epi_of_epi_of_mono (Mathlib/CategoryTheory/Abelian/DiagramLemmas/Four.lean:125): make it a Mathlib leaf."
+ "lead_note": "2026-10-11 L (R-pdt0046): lem-pc-four-lemma-epi is added statement-only (status unsplit) because a reviewer-added node must be; its search records an exact match CategoryTheory.Abelian.epi_of_epi_of_epi_of_mono (Mathlib/CategoryTheory/Abelian/DiagramLemmas/Four.lean:125): make it a Mathlib leaf.",
+ "lean": {
+  "module": "Sheaf.RingTheory.PseudoCoherentDistinguishedTriangle",
+  "declaration": "CategoryTheory.isMPseudoCoherent_of_distinguished_triangle",
+  "declarations": [
+   "CategoryTheory.isMPseudoCoherent_of_distinguished_triangle"
+  ],
+  "file": "lean/Sheaf/RingTheory/PseudoCoherentDistinguishedTriangle.lean",
+  "statement": "theorem isMPseudoCoherent_of_distinguished_triangle (R : Type u) [CommRing R] [HasDerivedCategory.{w} (ModuleCat.{v} R)] (m : ℤ) (T : Triangle (DerivedCategory (ModuleCat.{v} R))) (hT : T ∈ distTriang (DerivedCategory (ModuleCat.{v} R))) : (IsMPseudoCoherent (m + 1) T.obj₁ → IsMPseudoCoherent m T.obj₂ → IsMPseudoCoherent m T.obj₃) ∧ (IsMPseudoCoherent m T.obj₁ → IsMPseudoCoherent m T.obj₃ → IsMPseudoCoherent m T.obj₂) ∧ (IsMPseudoCoherent (m + 1) T.obj₂ → IsMPseudoCoherent m T.obj₃ → IsMPseudoCoherent (m + 1) T.obj₁)",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-pdt0910"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-pdt0910",
+  "group": "M1",
+  "result": "fix",
+  "note": "R CommRing, m:Z, T distinguished in DerivedCategory (ModuleCat R) (Mathlib leaf), clauses (m+1,m=>m on 3), (m,m=>m on 2), (m+1 on 2, m on 3 => m+1 on 1) exact per 064R; fix: private IsMPseudoCoherent dropped for landed DerivedCategory.IsMPseudoCoherent (H4/H12), Ring->CommRing; universes u v w independent"
+ }
 }
