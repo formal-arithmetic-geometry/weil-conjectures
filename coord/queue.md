@@ -1,15 +1,15 @@
 # Work queue
 
-905 items; claim with `tools/claim.py next <group> [--stage N]`.
+904 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (905)
+## Stage 2: nodes to state (904)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
-| `def-kun-dimension` | 1 | state |
+| `def-sbc-smooth-morphisms` | 1 | state |
 | `def-sc-function-field` | 1 | state |
 | `def-sc-ringed-space-module-cohomology` | 1 | state |
 | `def-weil-l-adic-coefficient-extension` | 1 | state |
@@ -29,6 +29,8 @@
 | `lem-sc-base-change-curve` | 1 | state |
 | `lem-sc-bounded-above-finite-free-hom-acyclic` | 1 | state |
 | `lem-sc-derived-hom-tensor-total` | 1 | state |
+| `lem-sc-dimension-locally-algebraic` | 1 | state |
+| `lem-sc-fibre-dimension-after-base-change` | 1 | state |
 | `lem-sc-p1-ext-locally-free-naturality` | 1 | state |
 | `lem-sc-picard-h1-multiple-locus` | 1 | state |
 | `lem-sc-picard-locus-closed` | 1 | state |
@@ -37,24 +39,20 @@
 | `lem-sc-ringed-space-restrict-injective-resolution` | 1 | state |
 | `lem-sc-smooth-proper-diagonal-conormal-differentials` | 1 | state |
 | `lem-sc-tangent-map-linear` | 1 | state |
-| `lem-sc-tensor-generating-sections` | 1 | state |
 | `lem-sc-tensor-section-affine-open` | 1 | state |
 | `lem-sc-valuation-zero-section-relative-cartier` | 1 | state |
 | `lem-sp-cartan-eilenberg-comparison-independence` | 1 | state |
 | `lem-sp-cartan-eilenberg-double-complex-homotopy` | 1 | state |
 | `lem-sp-ce-horizontal-lift` | 1 | state |
 | `lem-sp-ce-vertical-nullhomotopy` | 1 | state |
-| `lem-sp-filtered-complex-associated-spectral-sequence-construction` | 1 | state |
 | `lem-weil-derived-limit-existence` | 1 | state |
 | `lem-weil-geometrically-connected-check-after-extension` | 1 | state |
 | `lem-weil-pbc-adjunction-lifts-group-ring-objects` | 1 | state |
 | `lem-weil-pbc-affine-basic-set-difference` | 1 | state |
 | `lem-weil-pbc-affine-formally-smooth-iff-ring-lifting` | 1 | state |
 | `lem-weil-pbc-affine-tilde-tensor` | 1 | state |
-| `lem-weil-pbc-algebra-colimit-fp-algebras-over-it` | 1 | state |
 | `lem-weil-pbc-algebraize-finite-over-proper` | 1 | state |
 | `lem-weil-pbc-ample-very-ample-immersion-affine-base` | 1 | state |
-| `lem-weil-pbc-analytic-unramified-principal-criterion` | 1 | state |
 | `lem-weil-pbc-analytically-unramified-n1` | 1 | state |
 | `lem-weil-pbc-annihilator-element-flat-base-change` | 1 | state |
 | `lem-weil-pbc-annihilator-localization-finite` | 1 | state |
@@ -772,6 +770,7 @@
 | `lem-weil-pbc-stalk-internal-hom-finite-presentation` | 1 | state |
 | `lem-weil-pbc-standard-fpqc-quotient-topology` | 1 | state |
 | `lem-weil-pbc-standard-smooth-include-generators` | 1 | state |
+| `lem-weil-pbc-standard-smooth-over-field-dimension-at-points` | 1 | state |
 | `lem-weil-pbc-stein-factorization-affine` | 1 | state |
 | `lem-weil-pbc-stein-fibre-idempotent-image` | 1 | state |
 | `lem-weil-pbc-stein-flat-base-change-global-sections` | 1 | state |
@@ -915,7 +914,7 @@
 | `lem-sc-normalization-properties` | 3 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 898 nodes that wait for a statement dependency, 40 nodes that wait for stage 1.
+Not open yet: 894 nodes that wait for a statement dependency, 40 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
