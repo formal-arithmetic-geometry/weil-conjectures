@@ -154,5 +154,23 @@
   "group": "M1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ffp0108 (reviewer sub-agent of L); spot-checked: Read source FinitePushforward.lean 205-242 and LocallyFreeAffine 67-73/220-227; sorryfree.py OK for finitePresentation_projective_sections and isFiniteLocallyFree_of_isAffineOpen (attached, exact); Steps 1,2,4 hypotheses checked; citer lem-pc-flf-properties applies item to O_X, matches. FIX more, RETURN less: (1) C1 Step 3: finite presentation and flatness of Gamma(V)->Gamma(g^-1V) for an arbitrary affine V came from the pointwise definitions alone; now cites lem-weil-pbc-lfp-affine-opens-finite-presentation (Tag 01TQ) and lem-weil-pbc-flat-morphism-affine-criterion as tool uses; (2) B3 lem-pc-finite-flat-restriction-projective statement had a TAB where \\to was (JSON escape), restored \\to; (3) B3 lem-pc-affine-sections-finite-locally-free-criterion stmt_deps lacked def-amb-finite-locally-free-module, added. No duplicates of the three new nodes found by grep.; 3 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "WeilConjectures.AlgebraicGeometry.Modules.FinitePushforward",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.isFiniteLocallyFree_pushforward",
+  "statement": "theorem isFiniteLocallyFree_pushforward (g : X ⟶ Y) [IsFinite g] [Flat g]\n    [LocallyOfFinitePresentation g] (ℱ : X.Modules)\n    [SheafOfModules.IsFiniteLocallyFree (R := X.ringCatSheaf) ℱ] :\n    SheafOfModules.IsFiniteLocallyFree (R := Y.ringCatSheaf) ((pushforward g).obj ℱ) := by",
+  "branch": "slopmaster2",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": true,
+  "note": "Exact source-repository theorem; its finite, flat, locally finitely presented hypotheses and finite locally free module conclusion match the node."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-ffp1216",
+  "group": "F1",
+  "result": "pass",
+  "note": "existing source theorem verbatim (FinitePushforward.lean:214), #check: X Y Scheme.{u}, g : X ⟶ Y, IsFinite/Flat/LocallyOfFinitePresentation (Mathlib, not implied by IsFinite, not hollow), ℱ : X.Modules with IsFiniteLocallyFree.{u,u,u} (varying rank over a cover, = recorded def-sc-finite-locally-free-sheaf, each member constant rank via isFiniteLocallyFreeOfRank_iff_exists_over_iso_free = def-amb), conclusion IsFiniteLocallyFree.{u,u,u} of (pushforward g).obj ℱ; no Noetherian, no let, no existentials, single universe; empty X/Y and rank 0 included"
  }
 }
