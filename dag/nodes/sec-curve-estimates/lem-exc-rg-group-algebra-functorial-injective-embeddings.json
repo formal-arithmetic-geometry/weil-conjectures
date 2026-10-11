@@ -113,5 +113,23 @@
   "group": "M1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-gai (reviewer sub-agent of L); spot-checked: Source: Stacks injectives.tex Section G-modules, remark before Lemma 04JF (label injectives-lemma-G-modules), whose proof begins 'By the remark above the lemma the category Mod_{R[G]} has functorial injective embeddings'; the item's statement (G a group, R a ring, left R[G]-modules have a functor J and natural j: id -> J with monic components and injective values) agrees with that assertion. Step 1 is carried by lem-weil-pbc-ring-modules-grothendieck-abelian (Mathlib leaf instIsGrothendieckAbelianModuleCat, AB.lean line 52, for (R : Type u) [Ring R], so non-commutative R[G] is covered); step 2 by lem-weil-pbc-grothendieck-functorial-injective-embedding, whose statement gives exactly J, j, monic components, injective values. proof_deps is the union of uses; no new nodes; only the item's node and report changed. Tool uses: lem-weil-pbc-ring-modules-grothendieck-abelian (unit sk-thm-p1, generic black box) accepted; lem-weil-pbc-grothendieck-functorial-injective-embedding dropped from tool_uses because it is in the item's own unit sk-prop-h2, not off-unit. Small cases: G trivial gives Mod(R); R[G] for finite G the group algebra. Start Sat Oct 10 03:35:55 PM UTC 2026, end Sat Oct 10 03:36:17 PM UTC 2026."
+ },
+ "lean": {
+  "module": "Sheaf.GroupTheory.GroupAlgebraFunctorialInjectiveEmbeddings",
+  "declaration": "ModuleCat.groupAlgebra_functorialInjectiveEmbeddings",
+  "file": "lean/Sheaf/GroupTheory/GroupAlgebraFunctorialInjectiveEmbeddings.lean",
+  "statement": "theorem groupAlgebra_functorialInjectiveEmbeddings {G : Type v} [Group G] (R : Type u) [Ring R] : ∃ (J : ModuleCat.{max u v} (MonoidAlgebra R G) ⥤ ModuleCat.{max u v} (MonoidAlgebra R G)) (j : 𝟭 _ ⟶ J), (∀ M, Mono (j.app M)) ∧ ∀ M, Injective (J.obj M)",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-rga0648",
+  "group": "C1",
+  "result": "fix",
+  "note": "G group {G : Type v} [Group G]; R ring (noncommutative) [Ring R]; left R[G]-modules ModuleCat.{max u v} (MonoidAlgebra R G); exists endofunctor J and j : 𝟭 ⟶ J; every j.app M CategoryTheory.Mono; every J.obj M CategoryTheory.Injective (checked by #check); Mathlib has only EnoughInjectives / HasFunctorialFactorization instance, no restatement; fixed docstring paren and report's false dep-record claim"
  }
 }
