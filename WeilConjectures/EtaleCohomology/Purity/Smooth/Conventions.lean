@@ -297,6 +297,19 @@ noncomputable def leftDerivedUpperStarConstantComplexIso (f : X ⟶ Y) :
     HasTateTwist.leftDerivedUpperStarTwistObjectIso f 0 ≪≫ HasTateTwist.twistObjectZeroIso X
 
 variable (Λ) in
+/-- Derived pullback preserves ⊗-invertibility: `Lf^*(K ⊗^L M) ≅ Lf^* K ⊗^L Lf^* M` and
+`Lf^* Λ_Y ≅ Λ_X`. -/
+theorem DerivedCategory.isInvertible_leftDerivedUpperStar_obj (f : X ⟶ Y)
+    {K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
+    (hK : DerivedCategory.isInvertible Λ Y K) :
+    DerivedCategory.isInvertible Λ X ((L((f)^*[ModuleCat.{u + 1} Λ])).obj K) := by
+  obtain ⟨M, ⟨e⟩, ⟨e'⟩⟩ := hK
+  exact ⟨_, ⟨(leftDerivedUpperStarTensorIso _ f K M).symm ≪≫
+    (L((f)^*[ModuleCat.{u + 1} Λ])).mapIso e ≪≫ leftDerivedUpperStarConstantComplexIso Λ f⟩,
+    ⟨(leftDerivedUpperStarTensorIso _ f M K).symm ≪≫
+    (L((f)^*[ModuleCat.{u + 1} Λ])).mapIso e' ≪≫ leftDerivedUpperStarConstantComplexIso Λ f⟩⟩
+
+variable (Λ) in
 /-- The identification `Le^* (Λ_X(m)[2m]) ≅ Λ_U(m)[2m]`, through the shift compatibility of
 `Le^*` and the identification `Le^* Λ_X(m) ≅ Λ_U(m)` of the Tate twist datum. -/
 noncomputable def leftDerivedUpperStarTateShiftIso (f : X ⟶ Y) (m : ℤ) :

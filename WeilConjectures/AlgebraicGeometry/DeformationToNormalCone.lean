@@ -7,7 +7,6 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Morphisms.RegularImmersion
 public import WeilConjectures.Compactification.Affine
-public import WeilConjectures.EtaleCohomology.Purity.Smooth.Conventions
 public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineSpace
 
 /-!
@@ -35,7 +34,7 @@ blow-up is not yet available along an arbitrary closed subscheme of a non-affine
 deformation space cannot be constructed here. As for the normal cone in
 `WeilConjectures.AlgebraicGeometry.Morphisms.RegularImmersion`, it is carried as *data*: the
 structure `AlgebraicGeometry.Scheme.Hom.DeformationToNormalConeData` bundles the deformation
-space, the two structure morphisms and the four clauses of `sk-lem-geometry`, and the
+space, the two structure morphisms and the clauses of `sk-lem-geometry`, and the
 blueprint lemma is the statement that such a datum exists.
 
 The punctured trivialisation `κ°` of `sk-lem-geometry` (3) — the identification of the
@@ -65,8 +64,6 @@ becomes the normal cone of `s` and no field needs to be added here.
 universe u
 
 open CategoryTheory Limits
-
-open scoped CategoryTheory.Functor AlgebraicGeometry.Etale
 
 namespace AlgebraicGeometry
 
@@ -102,16 +99,19 @@ complement of the zero section, there is a cartesian square
      𝔾_{m,B} -----------> 𝔸¹_B
 ```
 
-identifying `g̃⁻¹(𝔾_{m,B})` with `V ×_B 𝔾_{m,B}` over `𝔾_{m,B}`.
+identifying `g̃⁻¹(𝔾_{m,B})` with `V ×_B 𝔾_{m,B}` over `𝔾_{m,B}`, under which `s̃` is `s × 1`.
+
+Étale-locally on `B` the deformation has coordinates (clauses (2), (4) and (5)): over a
+surjective étale `v : B' ⟶ B`, an open neighbourhood of the section in the base change
+`𝒟_s V ×_{𝔸¹_B} 𝔸¹_{B'}` maps étale to `𝔸^d_{𝔸¹_{B'}}` over `𝔸¹_{B'}`, carrying the section to
+the zero section (`exists_etale_coordinates`).
 
 The normal cone datum `N` is not yet tied to `s`; see the TODO in the module documentation.
 
 In the purity conventions every scheme is separated of finite type over the base field, so
-`g̃` is moreover separated and compactifiable; both are recorded, the second being what makes
-the dualizing complex `ω_{g̃}` defined. Clauses (2), (4) and (5) — étale-local coordinates,
-compatibility with étale localization and the standard pair — enter the purity chapter only
-through the family object `Ls̃^* ω_{g̃}`, and are recorded as its étale-local shape
-(`familyObject_locally_standard`).
+`g̃` and the coordinate chart are moreover separated and compactifiable, and every open
+immersion is quasi-compact; this is recorded, compactifiability being what makes the dualizing
+complexes defined.
 
 Mathlib has neither the relative `Spec` of the extended Rees algebra nor a blow-up along an
 arbitrary closed subscheme, so the datum cannot be constructed here; existence is
@@ -161,22 +161,29 @@ structure DeformationToNormalConeData (d : ℕ) (g : V ⟶ B) (s : B ⟶ V)
   /-- Over `𝔾_{m,B}` the deformation is `V ×_B 𝔾_{m,B}`: the square formed by `κ°`, the
   projection to `𝔾_{m,B}`, `g̃` and the inclusion `𝔾_{m,B} ⊆ 𝔸¹_B` is cartesian. -/
   isPullback_generic : IsPullback generic (pullback.snd _ _) proj puncturedLine.ι
-  /-- Clauses (2), (4) and (5) of `sk-lem-geometry`: étale-locally on `B` there are coordinates
-  carrying `(g, s)` to the standard pair `(𝔸^d → B, 0)`, the deformation commutes with étale
-  localization, and the family object of the standard pair is the pullback `a^* 0^* ω` of the
-  standard section invariant. Hence, for every coefficient ring `Λ`, there is a separated,
-  surjective étale `v : B' ⟶ B` over which the family object `Ls̃^* ω_{g̃}` is
-  `a'^* 𝒞(𝔸^d_{B'} → B', 0)`. -/
-  familyObject_locally_standard (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
-    [Etale.HasTateTwist Λ] [HasInvertibleExponent Λ B] :
-    haveI : HasCompactification proj := hasCompactification_proj
-    ∃ (B' : Scheme.{u}) (v : B' ⟶ B), _root_.AlgebraicGeometry.Etale v ∧ Surjective v ∧
-      IsSeparated v ∧
-      Nonempty ((L((AffineSpace.map (ULift.{u} (Fin 1)) v)^*[ModuleCat.{u + 1} Λ])).obj
-          (Etale.sectionInvariant Λ proj sect) ≅
-        (L((𝔸(ULift.{u} (Fin 1); B') ↘ B')^*[ModuleCat.{u + 1} Λ])).obj
-          (Etale.sectionInvariant Λ (𝔸(ULift.{u} (Fin d); B') ↘ B')
-            (AffineSpace.zeroSection (ULift.{u} (Fin d)) B')))
+  /-- Over `𝔾_{m,B}` the section `s̃` is `s × 1` (clause (3)): its restriction to the punctured
+  line is `κ° ∘ (s × 1)`, for the section `s × 1 : 𝔾_{m,B} ⟶ V ×_B 𝔾_{m,B}`. -/
+  exists_sect_generic : ∃ σ : puncturedLine.toScheme ⟶
+      pullback g (puncturedLine.ι ≫ 𝔸(ULift.{u} (Fin 1); B) ↘ B),
+    σ ≫ pullback.fst _ _ = (puncturedLine.ι ≫ 𝔸(ULift.{u} (Fin 1); B) ↘ B) ≫ s ∧
+      σ ≫ pullback.snd _ _ = 𝟙 _ ∧ σ ≫ generic = puncturedLine.ι ≫ sect
+  /-- Clauses (2), (4) and (5): étale-local coordinates on the deformation. There are a
+  separated surjective étale `v : B' ⟶ B` and, writing `v₁ : 𝔸¹_{B'} ⟶ 𝔸¹_B` for its base change
+  and `𝒟' = 𝒟_s V ×_{𝔸¹_B} 𝔸¹_{B'}` for the base change of the deformation (5), a quasi-compact
+  open `j : W ⟶ 𝒟'` containing the base-changed section `σ` together with an étale
+  `c : W ⟶ 𝔸^d_{𝔸¹_{B'}}` over `𝔸¹_{B'}` carrying `σ` to the zero section. Here `c` is the
+  chart `u_i = x_i / t` of the deformation of the standard pair `(𝔸^d_{B'} → B', 0)`, which is
+  `𝔸^d_{B'} ×_{B'} 𝔸¹_{B'}` (4), for étale coordinates `x₁, …, x_d` of `(g, s)` over `B'` (2). -/
+  exists_etale_coordinates : ∃ (B' : Scheme.{u}) (v : B' ⟶ B) (W : Scheme.{u})
+      (j : W ⟶ pullback proj (AffineSpace.map (ULift.{u} (Fin 1)) v))
+      (c : W ⟶ 𝔸(ULift.{u} (Fin d); 𝔸(ULift.{u} (Fin 1); B')))
+      (σ : 𝔸(ULift.{u} (Fin 1); B') ⟶ W),
+    _root_.AlgebraicGeometry.Etale v ∧ Surjective v ∧ IsSeparated v ∧ IsOpenImmersion j ∧
+      QuasiCompact j ∧ _root_.AlgebraicGeometry.Etale c ∧ HasCompactification c ∧
+      j ≫ pullback.snd _ _ =
+        c ≫ 𝔸(ULift.{u} (Fin d); 𝔸(ULift.{u} (Fin 1); B')) ↘ 𝔸(ULift.{u} (Fin 1); B') ∧
+      σ ≫ j ≫ pullback.fst _ _ = AffineSpace.map (ULift.{u} (Fin 1)) v ≫ sect ∧
+      σ ≫ c = AffineSpace.zeroSection (ULift.{u} (Fin d)) 𝔸(ULift.{u} (Fin 1); B')
 
 attribute [instance] DeformationToNormalConeData.smoothOfRelativeDimension_proj
   DeformationToNormalConeData.isSeparated_proj
