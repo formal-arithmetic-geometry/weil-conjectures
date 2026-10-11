@@ -390,6 +390,61 @@ theorem isIso_rightDerivedLowerStarProjectionMap_app_app_extendScalars
     (derivedUpperStarLowerStarAdjunction _ g) (derivedUpperStarLowerStarAdjunction _ g)
     (comparisonCompatible_leftDerivedSheafExtendScalarsCompUpperStarIso g) M L
 
+section OpenImmersion
+
+variable {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
+
+/-- Extension of scalars commutes with extension by zero along an open immersion `j`:
+`S ⊗_R j_! F ≅ j_! (S ⊗_R F)`. Both sides are left adjoint to the two equal composites of
+restriction of scalars and restriction along `j`, and the isomorphism is the conjugate of the
+identity. -/
+noncomputable def openImmersionLowerShriekCompSheafExtendScalarsIso :
+    (j)_!open[ModuleCat.{u + 1} R] ⋙ sheafExtendScalars (algebraMap R S) X ≅
+      sheafExtendScalars (algebraMap R S) U ⋙ (j)_!open[ModuleCat.{u + 1} S] :=
+  ((conjugateIsoEquiv
+    ((openImmersionLowerShriekAdjunction _ j).comp (sheafExtendScalarsAdjunction _ X))
+    ((sheafExtendScalarsAdjunction _ U).comp (openImmersionLowerShriekAdjunction _ j))).symm
+      (Iso.refl _)).symm
+
+end OpenImmersion
+
+/-- **Extension of scalars carries the projection formula for `Rf_!` over `R` to the one over
+`S`.** Let `S` be a finite free algebra over a Noetherian ring `R`, both Noetherian, and let
+`c = (X ⟶[i] Z ⟶[g] Y)` be a compactification of `f : X ⟶ Y`. If the projection map
+`(Rf_! K) ⊗ᴸ L ⟶ Rf_!(K ⊗ᴸ Lf^* L)` over `R` is an isomorphism, so is the one over `S` at the
+scalar extensions `(L(S ⊗_R -) K, L(S ⊗_R -) L)`: on the open part this is the commutation of
+extension of scalars with `i_!`, and on the proper part it is
+`AlgebraicGeometry.ProEtale.isIso_rightDerivedLowerStarProjectionMap_app_app_extendScalars`. -/
+theorem hasProjectionFormulaOfCompactification_extendScalars {X Y : Scheme.{u}} {f : X ⟶ Y}
+    (c : Compactification f)
+    (K : DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} R)))
+    (L : DerivedCategory (Sheaf (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} R)))
+    (h : HasProjectionFormulaOfCompactification (ModuleCat.{u + 1} R) c K L) :
+    HasProjectionFormulaOfCompactification (ModuleCat.{u + 1} S) c
+      ((L(sheafExtendScalars (algebraMap R S) X)).obj K)
+      ((L(sheafExtendScalars (algebraMap R S) Y)).obj L) := by
+  rw [HasProjectionFormulaOfCompactification, projectionMapOfCompactification_app_app] at h ⊢
+  have h' := @IsIso.of_isIso_comp_right _ _ _ _ _ _ _ _ h
+  have := isIso_rightDerivedLowerStarProjectionMap_app_app_extendScalars (S := S) c.g
+    (D((c.i)_!open[ModuleCat.{u + 1} R]).obj K) L
+  -- `i_! (S ⊗_R K) ≅ S ⊗_R (i_! K)`
+  let e : D((c.i)_!open[ModuleCat.{u + 1} S]).obj
+      ((L(sheafExtendScalars (algebraMap R S) X)).obj K) ≅
+      (L(sheafExtendScalars (algebraMap R S) c.Z)).obj
+        (D((c.i)_!open[ModuleCat.{u + 1} R]).obj K) :=
+    D((c.i)_!open[ModuleCat.{u + 1} S]).mapIso
+        ((sheafExtendScalars (algebraMap R S) X).leftDerivedFunctorIsoMapDerivedCategory.app K) ≪≫
+      ((Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+        Functor.mapDerivedCategoryNatIso
+          (openImmersionLowerShriekCompSheafExtendScalarsIso (R := R) (S := S) c.i).symm ≪≫
+        Functor.mapDerivedCategoryCompIso _ _).app K ≪≫
+      ((sheafExtendScalars (algebraMap R S) c.Z).leftDerivedFunctorIsoMapDerivedCategory.app
+        _).symm
+  have := NatTrans.isIso_app_app_of_iso
+    (rightDerivedLowerStarProjectionMap (ModuleCat.{u + 1} S) c.g) e.symm
+    (Iso.refl ((L(sheafExtendScalars (algebraMap R S) Y)).obj L))
+  infer_instance
+
 end ScalarExtension
 
 end AlgebraicGeometry.ProEtale
