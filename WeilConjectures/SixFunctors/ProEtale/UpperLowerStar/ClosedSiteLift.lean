@@ -25,6 +25,11 @@ namespace AlgebraicGeometry
 
 open Scheme
 
+@[simp, reassoc]
+lemma Scheme.ProEt.comp_left {S : Scheme.{u}} {A B C : S.ProEt} (f : A ⟶ B) (g : B ⟶ C) :
+    (f ≫ g).left = f.left ≫ g.left :=
+  rfl
+
 namespace ProEtale
 
 variable {X Z : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i]
@@ -276,14 +281,15 @@ lemma closedBaseChange_functorPushforward_imageSieve {Y₁ Y₂ : X.AffineProEt}
       (ProEt.ofOpenImmersionHom ((AffineProEt.toProEt X).obj Y₁) W₁.ι) =
         ProEt.ofOpenImmersionHom Q V.ι := by
     refine MorphismProperty.Over.Hom.ext ?_
-    refine pullback.hom_ext ?_ ?_ <;> simp [φ₁, a₁, ProEt.ofOpenImmersionHom]
+    refine pullback.hom_ext ?_ ?_ <;>
+      simp [φ₁, a₁, ProEt.ofOpenImmersionHom, ProEt.comp_left]
   have hφ₂ : φ₂ ≫ (MorphismProperty.Over.pullback @WeaklyEtale ⊤ i).map
       (ProEt.ofOpenImmersionHom ((AffineProEt.toProEt X).obj Y₂) W₂.ι) =
         ProEt.ofOpenImmersionHom Q V.ι ≫ f := by
     refine MorphismProperty.Over.Hom.ext ?_
     refine pullback.hom_ext ?_ ?_
-    · simp [φ₂, a₂, ProEt.ofOpenImmersionHom]
-    · simp [φ₂, ProEt.ofOpenImmersionHom, hf₂]
+    · simp [φ₂, a₂, ProEt.ofOpenImmersionHom, ProEt.comp_left]
+    · simp [φ₂, ProEt.ofOpenImmersionHom, ProEt.comp_left, hf₂]
   refine ⟨Y, (AffineProEt.toProEt X).preimage
       (g₁ ≫ ProEt.ofOpenImmersionHom ((AffineProEt.toProEt X).obj Y₁) W₁.ι), e.inv,
     ⟨(AffineProEt.toProEt X).preimage
@@ -332,6 +338,36 @@ instance isLocallyFull_closedBaseChange :
       (fun p ↦ ⟨p, by simpa using hpV p⟩) fun p ↦
         closedBaseChange_functorPushforward_imageSieve i f ⟨U p, hU p⟩ (W₁ p) (hW₁ p) (hW₁U p)
           (W₂ p) (hW₂ p) (hW₂U p) (V p) (hV p) (hVW p)
+
+instance isContinuous_closedBaseChange :
+    (closedBaseChange i).IsContinuous (AffineProEt.topology X) (ProEt.topology Z) :=
+  have := Scheme.ProEt.isContinuous_overPullback i
+  Functor.isContinuous_comp _ _ _
+    (ProEt.topology X) _
+
+section FullyFaithful
+
+variable (A : Type*) [Category.{u + 1} A]
+
+instance full_lowerStar : ((i)_*[A]).Full := by
+  have : ((i)_*[A] ⋙ (AffineProEt.toProEt X).sheafPushforwardContinuous A
+      (AffineProEt.topology X) (ProEt.topology X)).Full :=
+    inferInstanceAs ((closedBaseChange i).sheafPushforwardContinuous A
+      (AffineProEt.topology X) (ProEt.topology Z)).Full
+  exact Functor.Full.of_comp_faithful _
+    ((AffineProEt.toProEt X).sheafPushforwardContinuous A (AffineProEt.topology X)
+      (ProEt.topology X))
+
+instance faithful_lowerStar : ((i)_*[A]).Faithful := by
+  have : ((i)_*[A] ⋙ (AffineProEt.toProEt X).sheafPushforwardContinuous A
+      (AffineProEt.topology X) (ProEt.topology X)).Faithful :=
+    inferInstanceAs ((closedBaseChange i).sheafPushforwardContinuous A
+      (AffineProEt.topology X) (ProEt.topology Z)).Faithful
+  exact Functor.Faithful.of_comp _
+    ((AffineProEt.toProEt X).sheafPushforwardContinuous A (AffineProEt.topology X)
+      (ProEt.topology X))
+
+end FullyFaithful
 
 end ProEtale
 
