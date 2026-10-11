@@ -113,5 +113,23 @@
   "group": "F1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-cc2 (reviewer sub-agent of L); spot-checked: Repaired re-push after the 14:48 return; all three points repaired: (1) lem-exc-coinduced-homotopy-continuous now self-contained (G profinite, A finite ring, M with open stabilizers, D(M)=Cont(G,M) discrete with right translation, C^n=Cont(G^n,D(M))), stmt_deps lem-exc-discrete-modules-abelian and lem-exc-coinduced-discrete-embedding, no citation of the item; (2) lem-exc-coinduced-homotopy-identity restates all objects, writes d^0 and d^n in full and h_n, cites the continuity node only for continuity of h_nF, does not cite the item; (3) both statements and the item's three steps in TeX, step 2 sentence replaced by the surviving term (x.F(g_1..g_n))(1)=F(g_1..g_n)(x). Source: Stacks 0DVG section-continuous-group-cohomology gives the inhomogeneous differential the item uses; contraction is agent-written as recorded. Read statements of lem-exc-discrete-modules-abelian (category of A-modules with open-stabilizer G-action) and lem-exc-coinduced-discrete-embedding (D(M) with (h.f)(x)=f(xh) is again such a module): they give the objects the three statements use. Step 1 carried by homotopy-continuous (A-linearity pointwise); step 2 by homotopy-identity; step 3 elementary from the identity with d^qF=0. Item diff vs sheaf-dag: only proof, proof_deps, proof_origin, split_report, status changed. Tested identity at n=1 by hand: d^0h_1F(g)(x)=F(xg)(1)-F(x)(1), h_2d^1F(g)(x)=F(g)(x)-F(xg)(1)+F(x)(1), sum F(g)(x); continuity: F locally constant on compact G^n factors through G^n/U^n for open normal U, so h_nF does. No Mathlib leaf; no coinduced declaration in slopmaster2 WeilConjectures (B10). Start Sat Oct 10 02:55:46 PM UTC 2026, end Sat Oct 10 02:56:09 PM UTC 2026."
+ },
+ "lean": {
+  "module": "Sheaf.RepresentationTheory.CoinducedContinuousAcyclic",
+  "declaration": "Rep.coinducedContinuousCochains_isZero",
+  "file": "lean/Sheaf/RepresentationTheory/CoinducedContinuousAcyclic.lean",
+  "statement": "theorem coinducedContinuousCochains_isZero (G : Type u) [Group G] [TopologicalSpace G] [IsTopologicalGroup G] [CompactSpace G] [T2Space G] [TotallyDisconnectedSpace G] (A : Type v) [Ring A] [Finite A] (M : DiscreteContinuousRep.{v, u, w} A G) (D : DiscreteContinuousRep.{v, u, max u w} A G) (eD : D.obj.V ≃ₗ[A] LocallyConstant G M.obj.V) (hD : ∀ (h : G) (f : D.obj.V) (x : G), eD (D.obj.ρ h f) x = eD f (x * h)) (K : CochainComplex (ModuleCat.{max u w} A) ℕ) (eK : ∀ n : ℕ, K.X n ≃ₗ[A] LocallyConstant (Fin n → G) D.obj.V) (hd : ∀ (n : ℕ) (f : K.X n) (g : Fin (n + 1) → G), eK (n + 1) (K.d n (n + 1) f) g = D.obj.ρ (g 0) (eK n f (fun k ↦ g k.succ)) + ∑ k : Fin (n + 1), (-1 : ℤ) ^ (k.val + 1) • eK n f (Fin.contractNth k (· * ·) g)) : ∀ q : ℕ, 0 < q → IsZero ((HomologicalComplex.homologyFunctor (ModuleCat.{max u w} A) (ComplexShape.up ℕ) q).obj K)",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "F1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }

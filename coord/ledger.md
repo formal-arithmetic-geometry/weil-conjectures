@@ -5238,3 +5238,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 15:29 L: merged deliver/M1/lem-weil-pbc-coherent-homs-over-open (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.CoherentHomsOverOpen AlgebraicGeometry.Scheme.coherent_homs_over_open)
 - 15:29 L: merged deliver/P1/lem-weil-pbc-torsion-submodule-flat-base-change-iso (stage 2; reviewer FIX; first push; Sheaf.Algebra.Module.TorsionSubmoduleFlatBaseChangeIso Ideal.primaryComponent_baseChange_bijective)
 - 15:29 L: merged deliver/E1/thm-sc-proper-cohomology (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.Curve.ProperCohomology AlgebraicGeometry.IsConnectedCurve.sheafH_constantZMod_of_isProper)
+- 15:29 L: merged deliver/F1/lem-exc-coinduced-continuous-acyclic (stage 2; reviewer PASS; first push; Sheaf.RepresentationTheory.CoinducedContinuousAcyclic Rep.coinducedContinuousCochains_isZero)

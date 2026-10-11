@@ -1,27 +1,50 @@
-1. Files written
+## Worker report
 
-- `dag/nodes/sec-curve-estimates/lem-exc-coinduced-continuous-acyclic.json`: statement node, split into three proof steps; Mathlib verdict: no match.
-- `dag/nodes/sec-curve-estimates/lem-exc-coinduced-homotopy-continuous.json`: new unsplit statement node; Mathlib verdict: no match.
-- `dag/nodes/sec-curve-estimates/lem-exc-coinduced-homotopy-identity.json`: new unsplit statement node; Mathlib verdict: no match.
+The module states that a coinduced discrete continuous representation has vanishing positive-degree homology for any complex whose terms are linearly equivalent to continuous inhomogeneous cochains and whose differential is the displayed action-plus-alternating-sum formula. The profinite hypotheses are the topological group, compactness, Hausdorffness and total disconnectedness assumptions; `A` is a finite ring; `M` and `D` are the two discrete representation objects; `eD` and `hD` render the coinduced function module and right-translation action; `K`, `eK`, and `hd` render the cochain complex and every differential clause; the conclusion is `0 < q → IsZero ((HomologicalComplex.homologyFunctor ... q).obj K)`.
 
-2. Attachments
+Dependencies used are `Sheaf.RepresentationTheory.CoinducedDiscreteEmbedding`, declaration `Rep.exists_coinduced_discrete_embedding`, and `Sheaf.CategoryTheory.DiscreteModulesAbelian`, declaration `CategoryTheory.discreteModules_abelian` through the dependency node. The statement uses Mathlib `LocallyConstant`, `CochainComplex`, `HomologicalComplex.homologyFunctor`, and `Fin.contractNth`.
 
-None. I searched the source checkout for the item id, coinduced continuous cohomology, and the relevant contraction terminology; no sorry-free declaration states the item or either new node.
+Edge cases checked include `q = 0` being excluded by `0 < q`, the empty `Fin 0` cochain term, and the `n = 0` differential represented by the same formula. The contraction described in the docstring evaluates at the identity and cancels all terms pairwise.
 
-3. WANTED
+Searches: `msearch.py leansearch 'Continuous cohomology coinduced discrete module acyclic'` (service unavailable); `leanfinder` with the positive-degree vanishing query (no matching coinduced theorem); `loogle 'continuousCohomology'` (only general continuous cohomology declarations); `grep 'coinduc|inhomogeneous' Mathlib/RepresentationTheory/Homological` (no matching acyclicity theorem); project and source `rg` searches (no existing declaration).
 
-None. I reread Stacks Tag 0DVG online; it defines the continuous complex and states the profinite comparison but leaves this coinduced contraction as an agent-written ingredient. The local literature source tree is absent on this machine.
+## Earlier second reading (a previous round; superseded)
 
-## Review by F1
+Pending the independent second reader. The signature was checked against every clause of the node and compiles cleanly on the server.
 
-I checked Stacks Tag 0DVG, label `section-continuous-group-cohomology`, against the item and both new nodes. It gives the displayed inhomogeneous differential, including $d^0v(g)=g\cdot v-v$, and asserts the profinite comparison; the explicit coinduced contraction is an agent-written ingredient, as each node's source says. I read the statements of `lem-exc-discrete-modules-abelian` and `lem-exc-coinduced-discrete-embedding`: the former supplies the open-stabilizer condition for discrete $G$-modules, and the latter supplies $D(M)=\operatorname{Cont}(G,M)$ with discrete topology and right translation. The item and both new nodes require exactly these hypotheses. Each new node now introduces $G$, $A$, $M$, $D(M)$ and the cochain groups itself. The identity node writes both differential formulas and the homotopy formula itself; its citation of the continuity node is only for the claim that this formula lands in continuous cochains.
+## Second reading by F1
 
-For item step 1, the continuity node supplies the non-elementary claim that $h_nF$ lands in the discrete space of continuous functions; $A$-linearity follows from pointwise operations. Compactness of $G$ makes the joint map $(x,g_1,\ldots,g_{n-1})\mapsto F(x,g_1,\ldots,g_{n-1})(1)$ uniformly locally constant in the cochain variables, by a finite subcover or the tube lemma, so $g\mapsto h_nF(g)$ is continuous into discrete $D(M)$. Step 2 cites the identity node and expands its exact displayed differential: $(x\cdot F(g_1,\ldots,g_n))(1)=F(g_1,\ldots,g_n)(x)$ survives, while the $F(xg_1,\ldots)(1)$ terms, the reindexed alternating sums, and the last terms cancel in pairs. Step 3 cites the same identity: for a $q$-cocycle $d^qF=0$, whence $F=d^{q-1}h_qF$. These are precisely the two proof dependencies; the cocycle-to-coboundary inference is elementary.
+I independently opened the node and `CoinducedContinuousAcyclic.lean` and matched each item.
+The node's profinite group is rendered by `(G : Type u) [Group G] [TopologicalSpace G]
+[IsTopologicalGroup G] [CompactSpace G] [T2Space G] [TotallyDisconnectedSpace G]`;
+these are exactly the compact Hausdorff totally disconnected topological-group hypotheses.
+The finite ring is `(A : Type v) [Ring A] [Finite A]`.  The left discrete continuous
+A-module with G-action is `M : DiscreteContinuousRep A G`; the coinduced object is
+`D : DiscreteContinuousRep A G`, with `eD : D.obj.V ≃ₗ[A] LocallyConstant G M.obj.V`
+and `hD` spelling out `(h • f)(x)=f(x*h)`.  This is the node's
+`D(M)=Cont(G,M)` and right-translation action; `DiscreteContinuousRep` encodes the
+discrete topology/open-stabilizer condition.  The complex is `K :
+CochainComplex (ModuleCat A) ℕ`, with `eK n` identifying its n-th term with
+`LocallyConstant (Fin n → G) D.obj.V`.  The `hd` equation gives the action term and
+an alternating `Fin (n+1)` sum: `Fin.contractNth k (· * ·) g` is the merged-adjacent
+term for `k < n` and the final omitted-argument term for `k=n`; at `n=0` it gives
+`g₀ • f - f`, exactly the displayed `d⁰`.  Thus every differential clause and its
+quantifier order agrees with the node.  The conclusion
+`∀ q, 0 < q → IsZero ((HomologicalComplex.homologyFunctor ... q).obj K)` renders
+vanishing of H^q for every positive q.  No mismatch was found and no Lean or node
+change was needed.
 
-Before creating either node I searched the DAG and `tools/blueprint_refs.py search` for coinduced cochains and homotopies; neither had an existing statement of these facts. The recorded LeanSearch, LeanFinder, and source-grep searches found no matching Mathlib declaration. Both new nodes remain statement-only, have their own precise source place and blueprint references, and cite only notions in their statements. For small cases I checked $G=1$ (the standard alternating complex), $M=0$ (all maps zero), finite $G$ (continuity automatic), and $G=C_2$, $A=\mathbb F_2$ in degree one: $d^0h_1F+h_2d^1F=F$ pointwise. The open stabilizers and compactness needed above hold in all of these cases; in the general case they are stated explicitly. Neither new node depends on the item, so there is no cycle.
+Edge cases checked: `q=0` is excluded exactly by `0 < q`; `n=0` is handled by the
+same `Fin 1` contraction sum; the empty `Fin 0` cochain term is permitted; trivial
+and zero representations remain valid; and no universe restriction excludes the
+node's cases (`u,v,w` are explicit and the D/K carriers use `max u w`).
 
-The return identified B2 and B4 faults. I removed both backward references to the item, added `lem-exc-discrete-modules-abelian` to both new nodes' statement dependencies, and expanded the identity node's entire differential. I changed the two new statements and all three item steps to TeX. I also replaced the inaccurate “two endpoint terms” sentence in step 2 by the surviving translated term and pairwise cancellation described above. The proof route and the two unsplit supporting obligations remain the same.
+Searches were repeated with `rg` in the project and slopmaster2 source, and with
+`msearch.py`/LeanFinder/Loogle-style searches for coinduced continuous cochain
+acyclicity and inhomogeneous continuous cochains.  They found only the project's
+`Rep.exists_coinduced_discrete_embedding` and general Mathlib continuous-cohomology
+infrastructure, with no existing declaration of this statement; the recorded
+searches in the worker report remain accurate.
 
-5. What I could not finish
-
-No proof was formalized in Lean, as required for stage 1. The two supporting nodes are intentionally unsplit statement obligations for the next stage.
+No mismatch, correction, new node, or dependency module was required.  The module
+compiles cleanly with `scompile.py`.
