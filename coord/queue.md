@@ -1,11 +1,11 @@
 # Work queue
 
-149 items; claim with `tools/claim.py next <group> [--stage N]`.
+145 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (149)
+## Stage 2: nodes to state (145)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
@@ -26,7 +26,6 @@
 | `lem-weil-pbc-coherent-formal-modules-affine` | 1 | state | 3 |
 | `lem-weil-pbc-etale-graph-section-extension-map-linear` | 1 | state | 3 |
 | `thm-sp-truncation-e2` | 1 | state | 3 |
-| `lem-sc-p1-ext-yoneda-functoriality` | 1 | state | 2 |
 | `lem-weil-pbc-underived-exchange-module-linear` | 1 | state | 2 |
 | `thm-sp-grothendieck` | 1 | state | 2 |
 | `lem-pc-derived-tensor-transitivity` | 1 | state | 1 |
@@ -44,7 +43,9 @@
 | `lem-sc-etale-triple-to-sh-completion-flat` | 1 | state | 0 |
 | `lem-sc-hilb-dominating-power` | 1 | state | 0 |
 | `lem-sc-hilbert-embedded-points-gluing` | 1 | state | 0 |
+| `lem-sc-p1-ext-connecting-yoneda` | 1 | state | 0 |
 | `lem-sc-p1-proj-sheafification-exact` | 1 | state | 0 |
+| `lem-sc-p1-pullback-extension-class` | 1 | state | 0 |
 | `lem-sc-strict-henselization-completion-flat` | 1 | state | 0 |
 | `lem-sc-strict-henselization-completion-noetherian` | 1 | state | 0 |
 | `lem-sc-strict-henselization-faithfully-flat` | 1 | state | 0 |
@@ -65,14 +66,12 @@
 | `lem-weil-pbc-inverse-image-composition-module-linear` | 1 | state | 0 |
 | `lem-weil-pbc-inverse-image-free-etale-module` | 1 | state | 0 |
 | `lem-weil-pbc-limit-pullback-sections-colimit` | 1 | state | 0 |
-| `lem-weil-pbc-local-ring-spec-limit-affine-neighbourhoods` | 1 | state | 0 |
 | `lem-weil-pbc-module-pullback-ideal-quotient` | 1 | state | 0 |
 | `lem-weil-pbc-projective-space-twisting-sheaf-charts` | 1 | state | 0 |
 | `lem-weil-pbc-retract-supplied` | 1 | state | 0 |
 | `lem-weil-pbc-semi-representable-covering-permanence` | 1 | state | 0 |
 | `lem-weil-pbc-spec-algebraically-closed-etale-sheaf-constant` | 1 | state | 0 |
 | `lem-weil-pbc-spectral-limit-pullback-sections` | 1 | state | 0 |
-| `lem-weil-pbc-strictly-henselian-sections-stalk` | 1 | state | 0 |
 | `lem-weil-pbc-symmetric-degree-exact` | 1 | state | 0 |
 | `lem-weil-pbc-symmetric-product-finite` | 1 | state | 0 |
 | `lem-weil-pbc-symmetric-product-over-base` | 1 | state | 0 |
@@ -94,7 +93,6 @@
 | `lem-weil-pbc-vanishing-descends-retract` | 1 | state | 0 |
 | `lem-weil-pbc-zero-dimensional-base-change-points` | 1 | state | 0 |
 | `lem-weil-tower-split-envelope` | 1 | state | 0 |
-| `lem-wf-lie-algebra-derivation-bracket` | 1 | state | 0 |
 | `lemma-weil-pbc-chow-factorization` | 1 | state | 0 |
 | `lemma-weil-pbc-torsion-assembly` | 1 | state | 0 |
 | `lemma-weil-pbc-torsion-filtered-union` | 1 | state | 0 |
@@ -107,10 +105,8 @@
 | `lem-exc-coinduced-continuous-acyclic` | 2 | state | 0 |
 | `lem-pc-affine-perfect-hom-colimit` | 2 | state | 0 |
 | `lem-pc-bounded-above-flat-kflat` | 2 | state | 0 |
-| `lem-pc-degree-zero-properties` | 2 | state | 0 |
 | `lem-pc-divisor-line-bundle-agrees-sc` | 2 | state | 0 |
 | `lem-pc-finite-projective-cokernel-localization` | 2 | state | 0 |
-| `lem-pc-flat-sheaf-stalk-flat` | 2 | state | 0 |
 | `lem-pc-kflat-closure` | 2 | state | 0 |
 | `lem-pc-rf-single-complex-inherited-tensor-condition` | 2 | state | 0 |
 | `lem-pc-ring-pseudo-coherent-summand` | 2 | state | 0 |
@@ -159,7 +155,7 @@
 | `lem-pc-essentially-constant-pro-hom-colimit` | 4 | state | 0 |
 | `lem-pur-essential-constant-pro-criterion-05py` | 4 | state | 0 |
 
-Not open yet: 40 nodes that wait for stage 1, 396 nodes that wait for a statement dependency.
+Not open yet: 40 nodes that wait for stage 1, 394 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
