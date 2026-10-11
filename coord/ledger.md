@@ -4372,3 +4372,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 11:03 L: merged deliver/H1/lem-weil-pbc-isolated-fibre-point-quasi-finite-affine-pairs (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.IsolatedFiberPointQuasiFiniteAffinePairs AlgebraicGeometry.Scheme.Hom.isQuasiFiniteAtPrime_of_isOpen_singleton_asFiber)
 - 11:03 L: merged deliver/J1/lem-weil-pbc-jacobi-zariski-left-term-vanishing (stage 2; reviewer PASS; first push; Sheaf.RingTheory.JacobiZariskiLeftTermVanishing Algebra.jacobiZariski_leftTerm_vanishing)
 - 11:03 L: merged deliver/C1/lem-weil-pbc-inverse-image-closed-pushforward-constant (stage 2; reviewer FIX; first push; Sheaf.Topology.InverseImageClosedPushforwardConstant TopCat.inverse_image_closed_pushforward_constant)
+- 11:03 L: merged deliver/H1/lem-weil-pbc-integral-over-henselian-pair (stage 2; reviewer FIX; first push; Sheaf.RingTheory.IntegralOverHenselianPair henselianRing_of_isIntegral)

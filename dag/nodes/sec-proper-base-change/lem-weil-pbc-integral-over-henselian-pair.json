@@ -144,5 +144,24 @@
   "item": "lem-weil-pbc-integral-over-henselian-pair",
   "worker": "stage1",
   "summary": "Statement checked against More on Algebra 09XK (line 2753) in the DAG's idempotent form of henselian pairs (def-weil-pbc-henselian-terminology is 09XI (3), idempotent lifting for finite algebras); kept. Proof follows the Stacks proof (line 2758) in three steps: a finite B-algebra C is integral over A (finite implies integral, existing Mathlib leaf; transitivity of integrality, new Mathlib leaf lem-weil-pbc-integral-transitive = RingHom.IsIntegral.trans, Stacks 00GN); IC=(IB)C (elementary); bijection on idempotents for integral A-algebras over a henselian pair, i.e. 09XI (3)=>(4), new unsplit node lem-weil-pbc-henselian-pair-integral-idempotent-lifting (no existing node states it: lem-weil-pbc-etale-section-lifting-henselian-pair concludes only the finite form from (2)). Mathlib: HenselianRing is the root-lifting definition with no integral-extension instance and the idempotent-lifting lemmas need a nil kernel; recorded leansearch, leanfinder, loogle and grep. No Lean candidate in slopmaster2."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.IntegralOverHenselianPair",
+  "declaration": "henselianRing_of_isIntegral",
+  "file": "lean/Sheaf/RingTheory/IntegralOverHenselianPair.lean",
+  "statement": "theorem henselianRing_of_isIntegral (A : Type u) [CommRing A] (I : Ideal A) [HenselianRing A I] (B : Type v) [CommRing B] [Algebra A B] [Algebra.IsIntegral A B] : HenselianRing B (I.map (algebraMap A B))",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-ihp1103"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-ihp1103",
+  "group": "H1",
+  "result": "fix",
+  "note": "A comm ring, I ideal, (A,I) henselian = recorded HenselianRing A I; B comm ring integral over A = [Algebra A B] [Algebra.IsIntegral A B] (FIX from f : A →+* B, hf : f.IsIntegral per J1 100ce99e7/G1 afa3cd33f convention); IB = I.map (algebraMap A B); conclusion HenselianRing B IB; no added Nontrivial/Noetherian; universes u v independent, no test-algebra quantifier"
  }
 }
