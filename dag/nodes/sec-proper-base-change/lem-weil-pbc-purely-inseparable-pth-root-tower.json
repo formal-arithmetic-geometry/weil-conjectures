@@ -218,5 +218,23 @@
   "worker": "stage1",
   "summary": "Checked against Fields 09HI (fields.tex line 1669) and its proof, with 09HF (line 1617) and 09H4. Seven steps: strong induction on [E:F] with the claim P(d) stated and the base d=1 (step 1); choice of alpha_1 = alpha^{p^{r-1}} with r least, and t = alpha_1^p not a p-th power by the Frobenius computation the source delegates to 09H4 (step 2); [F(alpha_1):F] = p from the power-basis leaf, the division argument for the minimal polynomial written out, and the new Mathlib leaf lem-weil-pbc-x-pow-p-minus-t-irreducible (09HF, X_pow_sub_C_irreducible_of_prime, KummerPolynomial.lean:99) (step 3); E/F(alpha_1) finite purely inseparable of smaller degree by the definition and the degree-multiplicativity leaf (step 4); concatenation of the towers (step 5); the 'in particular' clause (steps 6-7, agent-written: M = F_{n-1}, M/F finite purely inseparable with [M:F] < [E:F], and E = M[z]/(z^p - beta^p) by evaluation at beta, surjective by the power basis, kernel by division). Statement unchanged except that def-weil-polynomial-ring is now cited for M[z] (added to stmt_deps). Both citers (lem-weil-pbc-finite-purely-inseparable-degree-p-intermediate, lem-weil-pbc-formally-smooth-complete-local-regular) use only clauses stated here. Mathlib: no tower statement after leansearch, leanfinder, loogle, grep and local_search."
  },
- "reviewed": "Reviewed by L 2026-10-10: faithful to Fields 09HI by strong induction on the degree with 09HF (new exact Mathlib leaf) for [F(α_1):F] = p and the power-basis leaf; the 'in particular' clauses written out (steps 6-7). Statement gained a citation only. No Mathlib match for the tower. Note: lem-weil-pbc-finite-purely-inseparable-degree-p-intermediate restates the 'in particular' clause (stage 3)."
+ "reviewed": "Reviewed by L 2026-10-10: faithful to Fields 09HI by strong induction on the degree with 09HF (new exact Mathlib leaf) for [F(α_1):F] = p and the power-basis leaf; the 'in particular' clauses written out (steps 6-7). Statement gained a citation only. No Mathlib match for the tower. Note: lem-weil-pbc-finite-purely-inseparable-degree-p-intermediate restates the 'in particular' clause (stage 3).",
+ "lean": {
+  "module": "Sheaf.FieldTheory.PurelyInseparablePthRootTower",
+  "declaration": "IsPurelyInseparable.exists_pth_root_tower",
+  "file": "lean/Sheaf/FieldTheory/PurelyInseparablePthRootTower.lean",
+  "statement": "theorem exists_pth_root_tower (F : Type u) (E : Type v) [Field F] [Field E] [Algebra F E] (p : ℕ) [Fact (Nat.Prime p)] [CharP F p] [IsPurelyInseparable F E] [FiniteDimensional F E] : ∃ (n : ℕ) (α : ℕ → E), (∀ x : E, x ∈ IntermediateField.adjoin F (Set.range (fun j : Fin n => α j))) ∧ (∀ i : ℕ, i < n → (α i) ^ p ∈ IntermediateField.adjoin F (Set.range (fun j : Fin i => α j))) ∧ (∀ i : ℕ, i < n → ¬ ∃ x : E, x ∈ IntermediateField.adjoin F (Set.range (fun j : Fin i => α j)) ∧ x ^ p = (α i) ^ p) ∧ (∀ i : ℕ, i < n → Module.finrank (IntermediateField.adjoin F (Set.range (fun j : Fin i => α j))) (IntermediateField.adjoin (IntermediateField.adjoin F (Set.range (fun j : Fin i => α j))) ({α i} : Set E)) = p) ∧ ((⊥ : IntermediateField F E) ≠ ⊤ → ∃ (M : IntermediateField F E) (β : E), 0 < n ∧ M = IntermediateField.adjoin F (Set.range (fun j : Fin (n - 1) => α j)) ∧ β = α (n - 1) ∧ M < ⊤ ∧ Module.Finite F M ∧ IsPurelyInseparable F M ∧ Module.finrank F M < Module.finrank F E ∧ (∀ x : E, x ∈ IntermediateField.adjoin M ({β} : Set E)) ∧ Module.finrank M E = p ∧ (∃ b : M, algebraMap M E b = β ^ p) ∧ (¬ ∃ x : E, x ∈ M ∧ x ^ p = β ^ p) ∧ (∃ b : M, algebraMap M E b = β ^ p ∧ Nonempty (E ≃ₐ[M] M[X] ⧸ Ideal.span {Polynomial.X ^ p - Polynomial.C b})))",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-prt1456",
+  "group": "M1",
+  "result": "pass",
+  "note": "F,E fields + Algebra, p prime [Fact] + CharP F p, IsPurelyInseparable + FiniteDimensional (=Module.Finite); alpha generation as adjoin of Fin n range (n=0 gives bot); per-step alpha_i^p in F_{i-1}, not a p-th power in F_{i-1}, finrank F_{i-1} F_{i-1}(alpha_i)=p tied to the same adjoins; E!=F as bot!=top; M=F_{n-1}, beta=alpha_{n-1}, M<top, finite+PI, [M:F]<[E:F], E=M(beta), beta^p in M not p-th power, E ≃ₐ[M] M[X]/(X^p - C b) with algebraMap b = beta^p; names #check'd with pp.fullNames"
+ }
 }
