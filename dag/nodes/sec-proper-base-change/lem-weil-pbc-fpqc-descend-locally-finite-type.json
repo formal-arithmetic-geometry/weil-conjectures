@@ -219,5 +219,24 @@
   "summary": "Split following Stacks 02KX (descent.tex line 5737) and its proof, in the shape of the accepted sibling lem-weil-pbc-fpqc-descend-locally-finite-presentation (02KY): lft is invariant under isomorphism and Zariski local on the base (01T2; elementary from the pointwise form, the Mathlib leaf lem-weil-pbc-lft-pointwise-criterion), stable under base change (01T4, the leaf lem-weil-pbc-lft-base-change), and for a flat surjective morphism of affine schemes Spec R' -> Spec R the affine-open argument (steps 3-4, same nodes as the sibling, with lem-weil-pbc-lft-affine-pairs = 01T2 (1)=>(2) in place of the lfp form) reduces to Algebra 00QP, a new Mathlib leaf lem-weil-pbc-finite-type-descends-faithfully-flat (Algebra.FiniteType.of_finiteType_tensorProduct_of_faithfullyFlat, Finiteness/Descent.lean:79-81, and Algebra.FiniteType.baseChange, FiniteStability.lean:42); then the criterion 02KP applies, cited as the statement of lem-weil-pbc-fpqc-local-on-base-criterion (unsplit, same unit sk-thm-p1, not edited), whose conditions (0)-(3) are checked for P = locally of finite type in steps 1, 2, 5. Statement unchanged (agrees with 02KX in the direction 'base changes have P => f has P' of Definition 02KO). Tags verified in tags/tags: 02KX, 02KP, 00QP, 01T2, 01T4. The Mathlib candidate (one-morphism DescendsAlong) stays a candidate (B8). Blueprint search (02KX, 00QP, 01T2, 01T4, 02KP, 'locally of finite type fpqc', 'finite type faithfully flat', 'faithfully flat finitely generated', 'fpqc local', 'finite type descends'): no blueprint node states the item or 00QP; thm-pd-fpqc-local-properties (sec-picard-framework) is only the special case of a finite field extension together with other properties, not the same statement; same_as = [] for both. The citer lem-weil-pbc-fpqc-descend-finite was not cited.",
   "blueprint": "The blueprint ancestor lemma-weil-pbc-h1-constructible-representation (Stacks 0A5H, proof, second paragraph, 'By Lemmas 03SA and 03Q5 we can find a map F -> I with F a constructible sheaf', its split step 2) is served only through the chain in via (down to lem-weil-pbc-fpqc-descend-finite, which uses this item to descend local finite type along an fpqc covering); none of the item's six steps realizes a sentence of the blueprint proof directly: they realize the proof of Stacks 02KX, and all serve that same place of the ancestor's step 2. from.place was not 'unspecified' and is kept."
  },
- "reviewed": "2026-10-10 L: 6 steps checked against 02KX via the 02KP criterion: conditions (0),(2) by the pointwise criterion 01T2, (1) by base change 01T4, (3) by faithfully flat descent of finite type 00QP (new composed leaf); citer fpqc-descend-finite matches"
+ "reviewed": "2026-10-10 L: 6 steps checked against 02KX via the 02KP criterion: conditions (0),(2) by the pointwise criterion 01T2, (1) by base change 01T4, (3) by faithfully flat descent of finite type 00QP (new composed leaf); citer fpqc-descend-finite matches",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.LocallyOfFiniteTypeOfFpqcCover",
+  "declaration": "AlgebraicGeometry.locallyOfFiniteType_of_fpqcCover",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/LocallyOfFiniteTypeOfFpqcCover.lean",
+  "statement": "theorem locallyOfFiniteType_of_fpqcCover {X S : Scheme.{u}} (f : X ⟶ S) {I : Type v} (S' : I → Scheme.{u}) (g : ∀ i, S' i ⟶ S) (hcover : Presieve.ofArrows S' g ∈ Scheme.fpqcPrecoverage S) (h : ∀ i, LocallyOfFiniteType (pullback.snd f (g i))) : LocallyOfFiniteType f",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-fdt1038"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-fdt1038",
+  "group": "J1",
+  "result": "fix",
+  "note": "f:X⟶S, arbitrary I:Type v, S' explicit family, g_i, hcover: ofArrows ∈ fpqcPrecoverage S (= def-weil-pbc-fpqc-covering), h: ∀ i LocallyOfFiniteType (pullback.snd f (g i)) (f_i = second projection), concl LocallyOfFiniteType f; binders refit to H1 f7dc0d331 FPQC DESCENT FORM; covering family, not Mathlib single-morphism DescendsAlong"
+ }
 }
