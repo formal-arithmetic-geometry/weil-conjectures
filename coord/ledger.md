@@ -3406,3 +3406,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 05:51 L: merged deliver/E1/def-sp-composite-acyclicity (stage 2; reviewer FIX; first push; Sheaf.CategoryTheory.GrothendieckComposablePair CategoryTheory.GrothendieckComposablePair)
 - 05:51 L: merged deliver/G1/def-weil-pbc-delta-functor (stage 2; reviewer PASS; first push; Sheaf.CategoryTheory.DeltaFunctor CategoryTheory.CohomologicalDeltaFunctor)
 - 05:51 L: merged deliver/H1/def-weil-pbc-fibre-degree-bound (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.FiberDegreeBound AlgebraicGeometry.Scheme.Hom.HasUniversallyBoundedFibers)
+- 05:52 L: returned deliver/J1/def-weil-pbc-generating-sections (reviewer RETURN: H4 (reviewer R-gsc0602, head 74043bdff): the notion is already defined, and the source names it as this node's rendering)
