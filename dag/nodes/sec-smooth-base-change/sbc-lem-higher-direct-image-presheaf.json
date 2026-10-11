@@ -151,5 +151,27 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-hdp2541 (reviewer sub-agent of L); spot-checked: Statement vs Stacks 03Q8 (orientation, both clauses); class b: lem-weil-pbc-higher-direct-image-presheaf is the Zariski/O_X-module 01E4 version, sites differ, no restatement; downstream users (sbc-lem-higher-direct-image-limit, sbc-thm-universal-test-vanishing, lem-weil-pbc-unrestricted-strict-henselization-stalk) use only the sheaf clause. FIX more, RETURN less: (1) C1 steps 1-2: H^q(I(U x_X Y)) = H^q(U x_X Y, F|) needed that restriction v^{-1} along the etale W->Y is exact and keeps injectives, and Gamma(W,v^{-1}I)=I(W); now cited prop-weil-pbc-inverse-image-exact (generic tool), lem-weil-pbc-etale-restriction-injectives, lem-weil-pbc-dplus-injective-representative (bounded below injectives are K-injective), lem-weil-pbc-etale-inverse-image-restriction (1); steps 1-2 merged into one resolution step plus one restriction step; (2) stmt_deps: removed lem-weil-pbc-qcqs-higher-direct-image (whose own proof cites this item: cycle risk, and the statement uses neither) and lem-weil-pbc-site-higher-direct-image-sheafified-presheaf; added def-weil-pbc-derived-categories; (3) E7 statement D(Y_Et) -> D^+(Y_Et) to match the D^+-only definitions the proof uses.; 1 file(s) fixed by the reviewer"
  },
- "lead_note": "2026-10-10 L (R-hdp2541): Statement complex clause narrowed from D(Y_Et) to D^+(Y_Et) (E7): the project's Rh_* (def-weil-pbc-direct-image) and H^q(T,K) (def-weil-pbc-etale-cohomology) are defined only on D^+, and no consumer uses unbounded K. Not a restatement of lem-weil-pbc-higher-direct-image-presheaf (Zariski site, O_X-modules, Stacks 01E4); different site. Tool use prop-weil-pbc-inverse-image-exact (exactness of etale inverse image) accepted as a generic tool (C7)."
+ "lead_note": "2026-10-10 L (R-hdp2541): Statement complex clause narrowed from D(Y_Et) to D^+(Y_Et) (E7): the project's Rh_* (def-weil-pbc-direct-image) and H^q(T,K) (def-weil-pbc-etale-cohomology) are defined only on D^+, and no consumer uses unbounded K. Not a restatement of lem-weil-pbc-higher-direct-image-presheaf (Zariski site, O_X-modules, Stacks 01E4); different site. Tool use prop-weil-pbc-inverse-image-exact (exactness of etale inverse image) accepted as a generic tool (C7).",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AbelianHigherDirectImagePresheaf",
+  "declaration": "AlgebraicGeometry.Etale.nonempty_higherDirectImage_iso_sheafification_abelian",
+  "declarations": [
+   "AlgebraicGeometry.Etale.nonempty_higherDirectImage_iso_sheafification_abelian",
+   "AlgebraicGeometry.Etale.nonempty_higherDirectImage_iso_sheafification_abelian_single"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/AbelianHigherDirectImagePresheaf.lean",
+  "statement": "theorem nonempty_higherDirectImage_iso_sheafification_abelian {X Y : Scheme.{u}} (h : Y ⟶ X) (q : ℤ) (K : DerivedCategory.Plus (Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1})) : Nonempty ((presheafToSheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}).obj (((uliftYoneda.{u + 1} ⋙ (Functor.whiskeringRight _ _ _).obj AddCommGrpCat.free ⋙ presheafToSheaf X.smallEtaleTopology AddCommGrpCat.{u + 1} ⋙ upperStar AddCommGrpCat.{u + 1} h ⋙ DerivedCategory.Plus.singleFunctor _ 0).op ⋙ preadditiveYoneda.obj (K⟦q⟧))) ≅ (DerivedCategory.Plus.homologyFunctor (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) q).obj ((rightDerivedLowerStarPlus AddCommGrpCat.{u + 1} h).obj K))",
+  "branch": "sheaf-dag",
+  "by": "N1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "N1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ }
 }

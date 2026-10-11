@@ -5298,3 +5298,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 15:50 L: merged deliver/M1/lem-sc-derived-hom-finite-free-model (stage 2; reviewer PASS; first push; Sheaf.Algebra.Homology.DerivedHomFiniteFreeModel AlgebraicGeometry.derivedInternalHom_of_boundedAbove_finiteFree)
 - 15:50 L: merged deliver/M1/lem-weil-pbc-strictly-henselian-etale-acyclic (stage 2; reviewer PASS; first push; Sheaf.Paper.StrictlyHenselianEtaleAcyclic strictlyHenselian_etale_acyclic)
 - 15:51 L: merged deliver/N1/lem-sc-second-kummer-divisors (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.SecondKummerDivisors AlgebraicGeometry.IsCurve.exists_addEquiv_secondKummer_divisors)
+- 15:51 L: merged deliver/N1/sbc-lem-higher-direct-image-presheaf (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.AbelianHigherDirectImagePresheaf AlgebraicGeometry.Etale.nonempty_higherDirectImage_iso_sheafification_abelian)
