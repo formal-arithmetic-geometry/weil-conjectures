@@ -1,11 +1,11 @@
 # Work queue
 
-760 items; claim with `tools/claim.py next <group> [--stage N]`.
+752 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (760)
+## Stage 2: nodes to state (752)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -15,7 +15,6 @@
 | `def-weil-pbc-derived-direct-image-composition` | 1 | state |
 | `lem-pc-derived-tensor-transitivity` | 1 | state |
 | `lem-pc-module-pullback-identity-composition` | 1 | state |
-| `lem-pc-pre-derived-adjoint-functors-general` | 1 | state |
 | `lem-pur-essential-constant-cofinal-0a1s` | 1 | state |
 | `lem-pur-left-derived-defined-pointwise-kan-bridge` | 1 | state |
 | `lem-sc-base-change-curve` | 1 | state |
@@ -33,22 +32,15 @@
 | `lem-weil-pbc-directed-colimit-base-change-elementwise` | 1 | state |
 | `lem-weil-pbc-directed-union-subrings-flat-module` | 1 | state |
 | `lem-weil-pbc-double-complex-cokernel-homology-iso` | 1 | state |
-| `lem-weil-pbc-double-complex-row-cycle-lifts-to-zigzag` | 1 | state |
 | `lem-weil-pbc-double-complex-zigzag-to-row-cokernel-map` | 1 | state |
 | `lem-weil-pbc-double-complex-zigzag-trivial-if-row-boundary` | 1 | state |
-| `lem-weil-pbc-effaceable-delta-functor-universal` | 1 | state |
-| `lem-weil-pbc-equation-count-fibre-dimension-flat` | 1 | state |
 | `lem-weil-pbc-equation-count-localize-relative-global-complete-intersection` | 1 | state |
-| `lem-weil-pbc-essentially-constant-splitting` | 1 | state |
-| `lem-weil-pbc-essentially-finite-presentation-over-intermediate` | 1 | state |
 | `lem-weil-pbc-essentially-smooth-factors-through-smooth` | 1 | state |
-| `lem-weil-pbc-etale-affine-cover-gluing` | 1 | state |
 | `lem-weil-pbc-etale-algebra-filtered-colimit-descent` | 1 | state |
 | `lem-weil-pbc-etale-colimit-normal-local-domain` | 1 | state |
 | `lem-weil-pbc-etale-cover-detects-iso` | 1 | state |
 | `lem-weil-pbc-etale-fibre-discrete-separable-points` | 1 | state |
 | `lem-weil-pbc-etale-fibre-specialization-bound` | 1 | state |
-| `lem-weil-pbc-etale-free-sheaf-constructible` | 1 | state |
 | `lem-weil-pbc-etale-graph-section-extension-map` | 1 | state |
 | `lem-weil-pbc-etale-inverse-image-algebraic-structures` | 1 | state |
 | `lem-weil-pbc-etale-local-finite-at-point-elementary` | 1 | state |
