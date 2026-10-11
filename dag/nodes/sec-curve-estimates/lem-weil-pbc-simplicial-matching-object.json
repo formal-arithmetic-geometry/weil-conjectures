@@ -124,5 +124,31 @@
   "group": "G1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-smo (reviewer sub-agent of L); spot-checked: Source: Stacks 0186 (simplicial lemma-formula-limit, simplicial.tex l.2337) read: the functor T -> {(f_0..f_{n+1}) : d_{j-1}f_i = d_if_j, i<j} agrees with the item's D_n(K) arrows d_{j-1}:K^(i)->K^(i,j), d_i:K^(j)->K^(i,j) and clause (2); tags 0167, 04AS, 002O verified in tags file. Statement unchanged by the split. Step 1: D_n(K) is indexed by a finite category (finite graph with no composable pairs), so def-galois-finite-limits-colimits (has finite limits) gives M_n(K); n=0 empty limit = final, n=1 = product, definitional. Step 2: cones on D_n(K) = tuples with d_{j-1}x_i=d_ix_j (component at (i,j) forced as the common composite), universal property of limit gives the bijection, naturality by precomposition; elementary. Step 3: lem-weil-pbc-simplex-face-face-identity says delta^{n+1}_j delta^n_i = delta^{n+1}_i delta^n_{j-1} for 0<=i<j<=n+1, n>=1; reindexed n->n-1 and applied through contravariant K it gives d_i d_j = d_{j-1} d_i on K_n, exactly the compatibility, then Step 2 gives mu_n; n=1, n=0 cases checked. All cited nodes in unit sk-prop-h2, no off-unit tools. B10: grep of slopmaster2 WeilConjectures for matching finds no declaration. No new nodes; blueprint from.place/same_as present, split_report.blueprint present. Small cases n=0,1,2 checked. Fix: dag/nodes/sec-curve-estimates/lem-weil-pbc-simplicial-matching-object.json: proof[2].text, proof[2].uses, proof_deps: cite def-weil-pbc-simplicial-object for transporting the Delta identity to d_{j-1}d_i=d_id_j through the contravariant functor K, with the reindexing n->n-1 written out. Times: start Sat Oct 10 02:51:12 PM UTC 2026, end Sat Oct 10 02:51:59 PM UTC 2026.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SimplicialMatchingObject",
+  "declaration": "CategoryTheory.SimplicialObject.matching_object_succ_succ",
+  "declarations": [
+   "CategoryTheory.SimplicialObject.matchingBoundaryShape",
+   "CategoryTheory.SimplicialObject.matchingBoundaryIndex",
+   "CategoryTheory.SimplicialObject.matching_object_zero",
+   "CategoryTheory.SimplicialObject.matching_object_one",
+   "CategoryTheory.SimplicialObject.matching_object_succ_succ"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/SimplicialMatchingObject.lean",
+  "statement": "theorem matching_object_succ_succ {C : Type u} [Category.{v} C] [HasFiniteLimits C] (K : SimplicialObject C) (n : ℕ) : ∃ c : Cone (matchingBoundaryIndex K n).multicospan, Nonempty (IsLimit c) ∧ (∀ (c' : Cone (matchingBoundaryIndex K n).multicospan), Nonempty (IsLimit c') → ∃! α : c.pt ≅ c'.pt, ∀ j, α.hom ≫ c'.π.app j = c.π.app j) ∧ (∃ E : ∀ W : C, (W ⟶ c.pt) ≃ {x : Fin (n + 3) → (W ⟶ K _⦋n + 1⦌) // ∀ p : (matchingBoundaryShape n).R, x p.val.1 ≫ (matchingBoundaryIndex K n).fst p = x p.val.2 ≫ (matchingBoundaryIndex K n).snd p}, (∀ (W : C) (g : W ⟶ c.pt) (i : Fin (n + 3)), (E W g).val i = g ≫ c.π.app (WalkingMulticospan.left i)) ∧ (∀ (W W' : C) (f : W' ⟶ W) (g : W ⟶ c.pt) (i : Fin (n + 3)), (E W' (f ≫ g)).val i = f ≫ (E W g).val i)) ∧ (∀ p : (matchingBoundaryShape n).R, K.δ p.val.1 ≫ (matchingBoundaryIndex K n).fst p = K.δ p.val.2 ≫ (matchingBoundaryIndex K n).snd p) ∧ (∃! μ : K _⦋n + 2⦌ ⟶ c.pt, ∀ i : Fin (n + 3), μ ≫ c.π.app (WalkingMulticospan.left i) = K.δ i)",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-11",
+  "existing": false,
+  "note": "The node is rendered jointly by matching_object_zero, matching_object_one, and matching_object_succ_succ; matchingBoundaryShape and matchingBoundaryIndex explicitly construct the diagram already introduced in this node."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "G1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }
