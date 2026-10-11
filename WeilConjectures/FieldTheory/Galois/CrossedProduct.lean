@@ -491,4 +491,54 @@ theorem exists_eq_of_isCocycle {K L : Type*} [Field K] [Field L] [Algebra K L]
   field_simp [hc0 (σ * τ)]
   exact h3
 
+/-- **Homogeneous Galois `2`-cocycles over a `C₁` field are coboundaries.** Let `L / K` be a
+finite Galois extension of a quasi-algebraically closed field `K` with group `G`, and let
+`F : G³ → Lˣ` be a homogeneous `2`-cocycle: `F (h a) (h b) (h c) = h (F a b c)` and
+`F b c d · F a c d⁻¹ · F a b d · F a b c⁻¹ = 1`. Then `F a b c = E b c · E a c⁻¹ · E a b` for
+an equivariant `E : G² → Lˣ`. -/
+theorem exists_eq_of_isHomogeneousCocycle {K L : Type*} [Field K] [Field L] [Algebra K L]
+    [FiniteDimensional K L] [IsGalois K L] [IsQuasiAlgClosed K]
+    (F : Gal(L/K) → Gal(L/K) → Gal(L/K) → Lˣ)
+    (hF : ∀ h a b c, F (h * a) (h * b) (h * c) = Units.map h.toAlgHom.toMonoidHom (F a b c))
+    (hc : ∀ a b c d, F b c d * (F a c d)⁻¹ * F a b d * (F a b c)⁻¹ = 1) :
+    ∃ E : Gal(L/K) → Gal(L/K) → Lˣ,
+      (∀ h a b, E (h * a) (h * b) = Units.map h.toAlgHom.toMonoidHom (E a b)) ∧
+      ∀ a b c, F a b c = E b c * (E a c)⁻¹ * E a b := by
+  have hmap (h : Gal(L/K)) (u : Lˣ) :
+      ((Units.map h.toAlgHom.toMonoidHom u : Lˣ) : L) = h (u : L) := rfl
+  -- the inhomogeneous cocycle `f σ τ = F 1 σ (σ τ)`
+  let f : Gal(L/K) → Gal(L/K) → Lˣ := fun σ τ ↦ F 1 σ (σ * τ)
+  have hF1 (a b c : Gal(L/K)) :
+      F a b c = Units.map a.toAlgHom.toMonoidHom (F 1 (a⁻¹ * b) (a⁻¹ * c)) := by
+    rw [← hF, mul_one, mul_inv_cancel_left, mul_inv_cancel_left]
+  have hf : ∀ σ τ ρ : Gal(L/K), σ (f τ ρ : L) * f σ (τ * ρ) = f (σ * τ) ρ * f σ τ := by
+    intro σ τ ρ
+    have h := hc 1 σ (σ * τ) (σ * τ * ρ)
+    rw [hF1 σ (σ * τ) (σ * τ * ρ), inv_mul_cancel_left,
+      show σ⁻¹ * (σ * τ * ρ) = τ * ρ by group] at h
+    rw [mul_assoc σ τ ρ] at h
+    have h' := congrArg (fun u : Lˣ ↦ (u : L)) h
+    simp only [Units.val_mul, hmap, Units.val_inv_eq_inv_val, Units.val_one] at h'
+    simp only [f]
+    rw [mul_assoc σ τ ρ]
+    have h1 := (F 1 (σ * τ) (σ * (τ * ρ))).ne_zero
+    have h2 := (F 1 σ (σ * τ)).ne_zero
+    field_simp at h'
+    linear_combination h'
+  obtain ⟨c, hc'⟩ := exists_eq_of_isCocycle f hf
+  refine ⟨fun a b ↦ Units.map a.toAlgHom.toMonoidHom (c (a⁻¹ * b)), fun h a b ↦ ?_,
+    fun a b c' ↦ ?_⟩
+  · ext
+    simp [mul_inv_rev, mul_assoc]
+  · obtain ⟨σ, rfl⟩ : ∃ σ, b = a * σ := ⟨a⁻¹ * b, by group⟩
+    obtain ⟨τ, rfl⟩ : ∃ τ, c' = a * σ * τ := ⟨(a * σ)⁻¹ * c', by group⟩
+    beta_reduce
+    rw [hF1, show a⁻¹ * (a * σ) = σ by group, show a⁻¹ * (a * σ * τ) = σ * τ by group,
+      show (a * σ)⁻¹ * (a * σ * τ) = τ by group]
+    ext
+    simp only [f] at hc'
+    simp only [Units.val_mul, hmap, Units.val_inv_eq_inv_val, hc', map_mul, map_inv₀,
+      AlgEquiv.mul_apply]
+    ring
+
 end IsQuasiAlgClosed

@@ -289,6 +289,80 @@ lemma exists_evalSection_eq {k : ℕ} (y : Fin (k + 1) → Fin 1)
 
 end Sections
 
+section Exactness
+
+variable [FiniteDimensional K M] [IsGalois K M]
+
+lemma vec_three (g : Fin 3 → Gal(M/K)) : g = ![g 0, g 1, g 2] := by
+  funext l
+  fin_cases l <;> rfl
+
+/-- **The second Čech cohomology of `𝔾ₘ` for a Galois covering of a `C₁` field vanishes.** The
+Čech complex of `𝔾ₘ` for the covering `Spec M ⟶ Spec K` is the complex of homogeneous
+cochains of `Gal(M/K)` with values in `Mˣ` (`AlgebraicGeometry.Scheme.GaloisCech.evalSection`),
+whose cohomology in degree two vanishes by
+`IsQuasiAlgClosed.exists_eq_of_isHomogeneousCocycle`. -/
+theorem exactAt_two_cechComplex_gmSheaf [IsQuasiAlgClosed K] :
+    ((cechComplex (family K M)).obj (Spec (.of K)).gmSheaf.obj).ExactAt 2 := by
+  refine (exactAt_cechComplex_iff (family K M) _ 1).2 fun c hc ↦ ?_
+  -- the homogeneous cochain `F` attached to `c`
+  let F : Gal(M/K) → Gal(M/K) → Gal(M/K) → Mˣ := fun a b d ↦
+    (evalSection (fun _ ↦ 0) ![a, b, d] (c fun _ ↦ 0)).toMul
+  have hF (h a b d : Gal(M/K)) :
+      F (h * a) (h * b) (h * d) = Units.map h.toAlgHom.toMonoidHom (F a b d) := by
+    have := evalSection_smul (fun _ ↦ (0 : Fin 1)) ![a, b, d] h (c fun _ ↦ 0)
+    have e : (fun l ↦ h * ![a, b, d] l) = ![h * a, h * b, h * d] := by
+      funext l
+      fin_cases l <;> rfl
+    rw [e] at this
+    exact congrArg Additive.toMul this
+  have hcoc (a b d e : Gal(M/K)) : F b d e * (F a d e)⁻¹ * F a b e * (F a b d)⁻¹ = 1 := by
+    have := congrArg (evalSection (fun _ ↦ (0 : Fin 1)) ![a, b, d, e]) (congrFun hc fun _ ↦ 0)
+    rw [cechComplex_d_apply, map_sum, Fin.sum_univ_four] at this
+    simp only [map_zsmul, evalSection_map] at this
+    have e0 : ![a, b, d, e] ∘ (0 : Fin 4).succAbove = ![b, d, e] := by
+      funext l; fin_cases l <;> rfl
+    have e1 : ![a, b, d, e] ∘ (1 : Fin 4).succAbove = ![a, d, e] := by
+      funext l; fin_cases l <;> rfl
+    have e2 : ![a, b, d, e] ∘ (2 : Fin 4).succAbove = ![a, b, e] := by
+      funext l; fin_cases l <;> rfl
+    have e3 : ![a, b, d, e] ∘ (3 : Fin 4).succAbove = ![a, b, d] := by
+      funext l; fin_cases l <;> rfl
+    rw [e0, e1, e2, e3, cechComplex_zero_apply, map_zero] at this
+    change (-1 : ℤ) ^ ((0 : Fin 4) : ℕ) • Additive.ofMul (F b d e) +
+      (-1 : ℤ) ^ ((1 : Fin 4) : ℕ) • Additive.ofMul (F a d e) +
+      (-1 : ℤ) ^ ((2 : Fin 4) : ℕ) • Additive.ofMul (F a b e) +
+      (-1 : ℤ) ^ ((3 : Fin 4) : ℕ) • Additive.ofMul (F a b d) = 0 at this
+    have := congrArg Additive.toMul this
+    simpa [div_eq_mul_inv, mul_assoc] using this
+  obtain ⟨E, hE, hFE⟩ := IsQuasiAlgClosed.exists_eq_of_isHomogeneousCocycle F hF hcoc
+  -- `E` glues to a cochain `b`
+  obtain ⟨b, hb⟩ := exists_evalSection_eq (fun _ : Fin 2 ↦ (0 : Fin 1))
+    (fun g ↦ E (g 0) (g 1)) fun g h ↦ hE h (g 0) (g 1)
+  refine ⟨fun y ↦ (Subsingleton.elim (fun _ ↦ (0 : Fin 1)) y) ▸ b, ?_⟩
+  funext y
+  obtain rfl : y = fun _ ↦ 0 := Subsingleton.elim _ _
+  refine eq_of_evalSection_eq _ fun g ↦ ?_
+  rw [cechComplex_d_apply, map_sum, Fin.sum_univ_three]
+  simp only [map_zsmul, evalSection_map]
+  have h0 : evalSection (fun _ ↦ (0 : Fin 1)) (g ∘ (0 : Fin 3).succAbove) b =
+      .ofMul (E (g 1) (g 2)) := hb _
+  have h1 : evalSection (fun _ ↦ (0 : Fin 1)) (g ∘ (1 : Fin 3).succAbove) b =
+      .ofMul (E (g 0) (g 2)) := hb _
+  have h2 : evalSection (fun _ ↦ (0 : Fin 1)) (g ∘ (2 : Fin 3).succAbove) b =
+      .ofMul (E (g 0) (g 1)) := hb _
+  change (-1 : ℤ) ^ ((0 : Fin 3) : ℕ) • evalSection (fun _ ↦ (0 : Fin 1)) (g ∘ (0 : Fin 3).succAbove) b +
+    (-1 : ℤ) ^ ((1 : Fin 3) : ℕ) • evalSection (fun _ ↦ (0 : Fin 1)) (g ∘ (1 : Fin 3).succAbove) b +
+    (-1 : ℤ) ^ ((2 : Fin 3) : ℕ) • evalSection (fun _ ↦ (0 : Fin 1)) (g ∘ (2 : Fin 3).succAbove) b = _
+  rw [h0, h1, h2]
+  conv_rhs => rw [vec_three g]
+  change _ = Additive.ofMul (F (g 0) (g 1) (g 2))
+  rw [hFE]
+  apply Additive.toMul.injective
+  simp [mul_assoc]
+
+end Exactness
+
 end GaloisCech
 
 end AlgebraicGeometry.Scheme
