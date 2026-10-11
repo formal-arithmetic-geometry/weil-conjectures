@@ -40,6 +40,9 @@ variable {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
   [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
   [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
 
+omit [IsSeparated (X ↘ Spec (CommRingCat.of k₀))]
+  [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
+  [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))] in
 /-- The direct image with compact support of a Weil sheaf placed in degree zero has no
 cohomology sheaves in negative degrees. -/
 theorem WeilComplex.isZero_homologySheaf_derivedLowerShriek_toComplex_of_neg
@@ -49,7 +52,8 @@ theorem WeilComplex.isZero_homologySheaf_derivedLowerShriek_toComplex_of_neg
     [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))]
     [QuasiSeparated (Y ↘ Spec (CommRingCat.of k₀))]
     (G : WeilSheaf k₀ l X) {r : ℤ} (hr : r < 0) :
-    IsZero ((homologySheaf r).obj ((derivedLowerShriek k₀ l f).obj (WeilSheaf.toComplex.obj G))) := by
+    IsZero ((homologySheaf r).obj
+      ((derivedLowerShriek k₀ l f).obj (WeilSheaf.toComplex.obj G))) := by
   rw [isZero_homologySheaf_obj_iff]
   let c := HasCompactification.compactification f (hf := hasCompactification_of_over (k₀ := k₀) f)
   let E := ProEtaleWeilSheaf.extensionByZero k₀ l c.i

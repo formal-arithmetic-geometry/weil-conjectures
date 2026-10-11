@@ -37,11 +37,6 @@ Frobenius.
   with its geometric Frobenius.
 - `AlgebraicGeometry.WeilComplex.cohomology` and `AlgebraicGeometry.WeilSheaf.cohomology`:
   ordinary cohomology `Hʳ(X ⊗ k̄, K) := Hʳ(Spec k̄, Ra_* K)` with its geometric Frobenius.
-
-## Main statements
-
-- `AlgebraicGeometry.WeilSheaf.subsingleton_compactlySupportedCohomology_of_isAffine`: the
-  compactly supported cohomology of a smooth affine curve is concentrated in degrees `0, 1, 2`.
 -/
 
 @[expose] public section
@@ -113,18 +108,6 @@ Frobenius: that of the Weil complex `F` concentrated in degree zero. -/
 noncomputable def compactlySupportedCohomology (F : WeilSheaf k₀ l X) (r : ℤ) :
     FrobeniusModule.{u + 1, 0} (PadicAlgCl l) :=
   (toComplex.obj F).compactlySupportedCohomology r
-
-/-- *Cohomological range of an affine curve.* If `X` is a smooth affine curve over `k₀` and `G`
-is a constructible Weil sheaf on `X`, then `H_c^r(X ⊗ k̄, G) = 0` for `r ∉ {0, 1, 2}`: after a
-smooth compactification `j : X ↪ X̄`, `H_c^r(X ⊗ k̄, G) = H^r(X̄ ⊗ k̄, j_!G)` is the cohomology of
-a sheaf on a proper curve, of cohomological dimension two.
-(blueprint: `lem-zl-affine-curve-range`) -/
-theorem subsingleton_compactlySupportedCohomology_of_isAffine [IsAffine X]
-    [SmoothOfRelativeDimension 1 (X ↘ Spec (CommRingCat.of k₀))] (G : WeilSheaf k₀ l X) {r : ℤ}
-    (hr : r < 0 ∨ 2 < r) :
-    Subsingleton (G.compactlySupportedCohomology r).carrier := by
-  -- TODO(adic): prove once Weil sheaves carry genuine `ℓ`-adic coefficients
-  sorry
 
 end WeilSheaf
 

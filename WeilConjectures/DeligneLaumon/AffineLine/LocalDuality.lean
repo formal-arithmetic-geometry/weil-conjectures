@@ -29,8 +29,10 @@ The second half of the same blueprint subsection, that a nonzero linear Artin–
 `ℒ_{ψ(a x)}` is ramified at infinity, is stated for the Artin–Schreier extension of the local
 field `k((t))` at infinity, where the inertia group acts:
 `LaurentSeries.exists_algEquiv_apply_eq_add_C_of_pow_sub_eq_single`. It is not stated for
-`AlgebraicGeometry.WeilSheaf.IsUnramifiedAtInfinity`, which is not yet the inertia condition of
-the blueprint.
+`AlgebraicGeometry.WeilSheaf.IsUnramifiedAtInfinity` (extension to a lisse sheaf across `∞`):
+relating that condition to the inertia action at `∞` needs the fundamental representation of a
+lisse Weil sheaf (`def-wf-fundamental-representation`), which does not exist yet, and a direct
+proof would need the triviality of lisse `ℓ`-adic sheaves on `ℙ¹_k̄`.
 
 ## Main statements
 
@@ -41,14 +43,17 @@ the blueprint.
 
 ## TODO
 
-- Prove the local boundary pairing and the boundary sequence, which are stated with `sorry`,
-  once the category is redefined (`sk-d-real-weil`).
+- Prove the local boundary pairing. The proof of the blueprint uses Verdier duality, dualizing
+  complexes and the exceptional inverse image `Ri^!` for `ℚ̄_ℓ`-Weil complexes
+  (`thm-coef-qbar-verdier`, `fix-cor-verdier-exchange`, `def-weil-exceptional-inverse-image`),
+  none of which exists yet for `AlgebraicGeometry.WeilComplex`: the pro-étale Verdier dual
+  `AlgebraicGeometry.ProEtale.verdierDual` is for sheaves with values in a fixed coefficient
+  category, not for `ℚ̄_ℓ,X`-modules with a Weil structure.
 - The maps `g` and `h` of `AlgebraicGeometry.exists_exact_compactlySupportedCohomology_boundary`
   should be the maps induced by the canonical arrow `WeilSheaf.extensionByZeroToDirectImage j`
   from `j_!F` to `j_*F`. This needs the identification `H_c(U, F) ≅ H_c(C, j_!F)` and the
   functoriality of `compactlySupportedCohomology`; once they exist, the existential statement
-  should be replaced by one about these maps. The map `δ` needs a triangulated structure on
-  Weil complexes.
+  should be replaced by one about these maps.
 -/
 
 @[expose] public section
@@ -76,7 +81,7 @@ closed point `s` of `C₀` outside `U₀`, there is a Frobenius-equivariant perf
 
 It is exhibited as a linear isomorphism of `(j_*F^∨)_s̄` onto the `ℚ̄_ℓ`-dual of `(R¹j_*F)_s̄`
 which intertwines the two local Frobenius actions up to the factor `q_s` coming from the Tate
-twist. (blueprint: `sk-i-dl-a1-local`)
+twist. (blueprint: `lem-a1-local-boundary-duality`, `sk-i-dl-a1-local`)
 -/
 theorem exists_linearEquiv_dual_stalk_higherDirectImage
     {U C : Scheme.{u}} [U.Over (Spec (CommRingCat.of k₀))] [C.Over (Spec (CommRingCat.of k₀))]
@@ -119,7 +124,7 @@ theorem exists_exact_compactlySupportedCohomology_boundary
     [QuasiCompact (C ↘ Spec (CommRingCat.of k₀))] [IsSeparated (U ↘ Spec (CommRingCat.of k₀))]
     [LocallyOfFiniteType (U ↘ Spec (CommRingCat.of k₀))]
     [QuasiCompact (U ↘ Spec (CommRingCat.of k₀))] [IsFinite (Z ↘ Spec (CommRingCat.of k₀))]
-    (F : WeilSheaf k₀ l U) (hF : F.IsLisse) :
+    (F : WeilSheaf k₀ l U) (_hF : F.IsLisse) :
     -- `j_*F` on `C` and the boundary sheaf `i^*j_*F` on `Z`
     let A := (WeilSheaf.directImage j).obj F
     let B := (WeilSheaf.upperStar i).obj A
@@ -161,7 +166,6 @@ theorem exists_exact_compactlySupportedCohomology_boundary
   have hZ (r : ℤ) (hr : r ≠ 0) : Subsingleton (T.obj₃.cohomologyFrobeniusModule r).carrier := by
     have h := WeilSheaf.subsingleton_compactlySupportedCohomology_of_isFinite B hr
     exact ⟨fun a b ↦ (EZ r).toLinearEquiv.injective (h.elim _ _)⟩
-
   refine ⟨⟨(EU 1).toLinearEquiv.toLinearMap ∘ₗ WeilComplex.cohomologyδ T 0 1 rfl ∘ₗ
       (EZ 0).toLinearEquiv.symm.toLinearMap,
     WeilComplex.cohomologyMap T.mor₁ 1 ∘ₗ (EU 1).toLinearEquiv.symm.toLinearMap, ?_, ?_, ?_, ?_⟩,

@@ -68,6 +68,13 @@ lemma sheafSupport_congr {F G : Sheaf X.smallEtaleTopology A}
     ⟨fun h ↦ h.of_iso (((U.ι)^*[A]).mapIso e).symm,
       fun h ↦ h.of_iso (((U.ι)^*[A]).mapIso e)⟩
 
+/-- The support of `F` is contained in that of `G` if `F` vanishes on every open on which `G`
+vanishes. -/
+lemma sheafSupport_subset_of_isZero {F G : Sheaf X.smallEtaleTopology A}
+    (h : ∀ U : X.Opens, IsZero (((U.ι)^*[A]).obj G) → IsZero (((U.ι)^*[A]).obj F)) :
+    sheafSupport F ⊆ sheafSupport G :=
+  fun _ hx U hU hG ↦ hx U hU (h U hG)
+
 namespace DerivedCategory
 
 /-- The *support condition* `SuppCon(K)`: for every `i : ℤ`, the support of the cohomology
@@ -83,6 +90,17 @@ lemma SupportCondition.of_iso {K L : _root_.DerivedCategory (Sheaf X.smallEtaleT
   intro i
   rw [← sheafSupport_congr ((_root_.DerivedCategory.homologyFunctor _ (-i)).mapIso e)]
   exact hK i
+
+/-- The support condition passes to an object whose cohomology sheaves have smaller supports. -/
+lemma SupportCondition.of_sheafSupport_subset
+    {K L : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)}
+    (h : ∀ i : ℤ, sheafSupport ((_root_.DerivedCategory.homologyFunctor _ (-i)).obj L) ⊆
+      sheafSupport ((_root_.DerivedCategory.homologyFunctor _ (-i)).obj K))
+    (hK : SupportCondition K) : SupportCondition L := by
+  intro i hi
+  obtain ⟨h₀, h₁⟩ := hK i (hi.mono (h i))
+  exact ⟨h₀, le_trans (Topology.IsEmbedding.inclusion (h i)).isInducing.topologicalKrullDim_le
+    h₁⟩
 
 lemma SupportCondition.map_iso {C : Type*} [Category C]
     (F : C ⥤ _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) {x y : C} (e : x ≅ y)

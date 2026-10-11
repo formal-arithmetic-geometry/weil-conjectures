@@ -8,8 +8,10 @@ module
 public import Mathlib.AlgebraicGeometry.Fiber
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import WeilConjectures.AlgebraicGeometry.InvertibleExponent
+public import WeilConjectures.CategoryTheory.DerivedCategory.TorAmplitudeHomology
 public import WeilConjectures.SixFunctors.Etale.Derived.Shift
 public import WeilConjectures.SixFunctors.Etale.Derived.Stability
+public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Flat
 public import WeilConjectures.SixFunctors.Etale.Perverse.Basic
 
 /-!
@@ -101,6 +103,45 @@ theorem nonempty_iso_verdierDual_tensor
 
 variable {a}
 
+/-- Tensoring with a complex of Tor amplitude in `[0, 0]` preserves the vanishing of a
+cohomology sheaf on an open: `L ⊗ᴸ -` commutes with the restriction to the open and is
+t-exact there. -/
+lemma isZero_upperStar_homologyFunctor_tensor
+    {L : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)} (hL : torAmplitudeIn A X 0 0 L)
+    (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) (n : ℤ) (U : X.Opens)
+    (hK : IsZero (((U.ι)^*[A]).obj ((_root_.DerivedCategory.homologyFunctor _ n).obj K))) :
+    IsZero (((U.ι)^*[A]).obj ((_root_.DerivedCategory.homologyFunctor _ n).obj (L ⊗ K))) := by
+  have hL' := torAmplitudeIn_leftDerivedUpperStar A U.ι 0 0 hL
+  have hK' := hK.of_iso ((leftDerivedUpperStarHomologyFunctorIso A U.ι n).app K).symm
+  refine (_root_.DerivedCategory.isZero_homologyFunctor_tensor_of_torAmplitudeIn hL' _ n
+    hK').of_iso ?_
+  exact (leftDerivedUpperStarHomologyFunctorIso A U.ι n).app (L ⊗ K) ≪≫
+    (_root_.DerivedCategory.homologyFunctor _ n).mapIso (leftDerivedUpperStarTensorIso A U.ι L K)
+
+/-- The support estimate behind `lem-per-lisse-tensor-permanence`: tensoring, on either side,
+with a complex of Tor amplitude in `[0, 0]` (for instance a lisse complex) preserves the support
+condition, the cohomology sheaves of `K ⊗ᴸ L` being supported in those of `K`.
+(blueprint: `lem-per-lisse-tensor-permanence`) -/
+theorem SupportCondition.tensor
+    {K L : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)}
+    (hK : SupportCondition K) (hL : torAmplitudeIn A X 0 0 L) :
+    SupportCondition (K ⊗ L) ∧ SupportCondition (L ⊗ K) := by
+  have h : SupportCondition (L ⊗ K) := hK.of_sheafSupport_subset fun i ↦
+    sheafSupport_subset_of_isZero fun U ↦ isZero_upperStar_homologyFunctor_tensor hL K (-i) U
+  obtain ⟨β⟩ := nonempty_iso_derivedTensor_flip A X
+  exact ⟨h.of_iso ((β.app L).app K), h⟩
+
+/-- The coefficient dual of a dualizable complex of Tor amplitude in `[0, 0]` has Tor amplitude
+in `[0, 0]`. -/
+theorem torAmplitudeIn_coefficientDual
+    {L : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)} (hL : IsDualizable L)
+    (hL' : torAmplitudeIn A X 0 0 L) :
+    torAmplitudeIn A X 0 0 ((coefficientDual A X).obj (op L)) := by
+  obtain ⟨_⟩ := hL
+  obtain ⟨_⟩ := nonempty_exactPairing_swap L Lᘁ
+  exact (torAmplitudeIn A X 0 0).prop_of_iso (coefficientDualIsoOfExactPairing Lᘁ L).symm
+    (_root_.DerivedCategory.torAmplitudeIn_of_exactPairing (K := L) (L := Lᘁ) hL')
+
 variable {FA : A → A → Type (u + 1)} {CA : A → Type (u + 1)}
   [∀ X Y, FunLike (FA X Y) (CA X) (CA Y)] [ConcreteCategory.{u + 1} A FA]
   [HasSmallSiteSheafify A]
@@ -116,41 +157,22 @@ def IsLisse (L : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) :
     ∃ L₀ : Sheaf X.smallEtaleTopology A, Scheme.IsLocallyConstantSheaf L₀ ∧
       Nonempty (L ≅ (_root_.DerivedCategory.singleFunctor _ 0).obj L₀)
 
-/-- The coefficient dual `L^∨` of a lisse complex is lisse: étale locally it is the linear
-dual of a finite projective coefficient module, placed in degree zero. -/
-theorem IsLisse.coefficientDual
-    {L : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)}
-    (hL : IsLisse L) : IsLisse ((coefficientDual A X).obj (op L)) :=
-  -- TODO(adic): `RHom(L, 𝟙)` of a locally free sheaf of finite rank is its linear dual
-  sorry
-
-/-- The support estimate behind `lem-per-lisse-tensor-permanence`: tensoring with a lisse
-complex, on either side, preserves the support condition, the cohomology sheaves of
-`K ⊗ᴸ L` being étale locally sums of those of `K`.
-(blueprint: `lem-per-lisse-tensor-permanence`) -/
-theorem SupportCondition.tensor
-    {K L : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)}
-    (hK : SupportCondition K) (hL : IsLisse L) :
-    SupportCondition (K ⊗ L) ∧ SupportCondition (L ⊗ K) :=
-  -- TODO(adic): étale locally `L` is a finite projective module, and supports are local
-  sorry
-
 /-- **Permanence under a lisse tensor**, support side: `K ∈ ᵖD^{≤n}` implies
 `K ⊗ᴸ L ∈ ᵖD^{≤n}` for a lisse `L`. (blueprint: `lem-per-lisse-tensor-permanence`) -/
 theorem isPerverseLE_tensor {n : ℤ}
     {K L : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)}
     (hK : IsPerverseLE n K) (hL : IsLisse L) : IsPerverseLE n (K ⊗ L) :=
-  (SupportCondition.tensor hK hL).1.of_iso (shiftTensorIso K L n)
+  (SupportCondition.tensor hK hL.2.2.1).1.of_iso (shiftTensorIso K L n)
 
 /-- **Permanence under a lisse tensor**, cosupport side: `K ∈ ᵖD^{≥n}` implies
 `K ⊗ᴸ L ∈ ᵖD^{≥n}` for a lisse `L`: by `lem-per-dual-lisse-tensor` the Verdier dual of
-`K[n] ⊗ᴸ L` is `L^∨ ⊗ᴸ 𝔻(K[n])`, and `L^∨` is again lisse.
+`K[n] ⊗ᴸ L` is `L^∨ ⊗ᴸ 𝔻(K[n])`, and `L^∨` again has Tor amplitude in `[0, 0]`.
 (blueprint: `lem-per-lisse-tensor-permanence`) -/
 theorem isPerverseGE_tensor {n : ℤ}
     {K L : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)}
     (hK : IsPerverseGE a n K) (hL : IsLisse L) : IsPerverseGE a n (K ⊗ L) :=
   CosupportCondition.of_iso (shiftTensorIso K L n)
-    ((SupportCondition.tensor hK hL.coefficientDual).2.of_iso
+    ((SupportCondition.tensor hK (torAmplitudeIn_coefficientDual hL.1 hL.2.2.1)).2.of_iso
       (nonempty_iso_verdierDual_tensor a _ L hL.1).some.symm)
 
 end Tensor
