@@ -330,10 +330,11 @@ noncomputable def compactificationConstantComplexIso (f : X ⟶ Y) [HasCompactif
 
 variable (Λ X)
 
-/-- Blueprint `sk-def-purity-conv`: Purity conventions and the rank-one datum
+/-- Blueprint `def-pur-section-invariant`: Section invariant
 
-The *section invariant* `𝒞(g, s) = Ls^* ω_g = Ls^* Rg^! Λ_B` of a morphism `g : V ⟶ B`
-together with a section `s : B ⟶ V`. For `g` smooth of pure relative dimension `d` with `s` a
+Part of blueprint `sk-def-purity-conv`. The *section invariant*
+`𝒞(g, s) = Ls^* ω_g = Ls^* Rg^! Λ_B` of a morphism `g : V ⟶ B` together with a section
+`s : B ⟶ V`. For `g` smooth of pure relative dimension `d` with `s` a
 closed section, smooth purity identifies it with `Λ_B(d)[2d]`; the deformation to the normal
 cone of the section reduces the general case to the standard pair `(𝔸^d_B → B, 0)`. -/
 noncomputable def sectionInvariant [Finite Λ] {V B : Scheme.{u}} (g : V ⟶ B)
