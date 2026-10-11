@@ -4937,3 +4937,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 14:24 L: merged deliver/K1/lem-weil-pbc-set-cech-nerve-free-resolution (stage 2; reviewer PASS; first push; Sheaf.AlgebraicTopology.SetCechNerveFreeResolution AlgebraicTopology.setCechNerve_free_resolution)
 - 14:24 L: merged deliver/E1/lem-weil-pbc-smooth-locally-standard-smooth (stage 2; reviewer PASS; first push; Mathlib.AlgebraicGeometry.Morphisms.Smooth AlgebraicGeometry.Smooth.exists_isStandardSmooth; existing declaration)
 - 14:24 L: merged deliver/M1/lem-weil-pbc-separable-split-purely-inseparable-residue-fields (stage 2; reviewer PASS; first push; Sheaf.FieldTheory.SeparableSplitPurelyInseparableResidueFields Algebra.exists_separable_split_purelyInseparable_prime_quotients)
+- 14:24 L: merged deliver/M1/lem-weil-pbc-serre-criterion-reduced (stage 2; reviewer PASS; first push; Sheaf.RingTheory.SerreCriterionReduced Ring.isReduced_iff_serreR_zero_and_serreS_one)
