@@ -215,5 +215,23 @@
   "blueprint": "The item serves the place of thm-weil-pbc-finite-etale-lifting recorded in blueprint.from.place (through its via chain), ending in the proof of Stacks 01FF: 'By Injectives, Lemma 01DI the category of O_X-modules has functorial injective embeddings. Thus for any system (F_i, phi_ii') there exists a system (I_i, phi_ii') ... F_i -> I_i'; steps 1-6 realize the first sentence (01DI), step 7 the second (the system of injective embeddings)."
  },
  "reviewed": "2026-10-10 L: 7 steps following 01DI (functorial embeddings over each local ring from the Grothendieck leaf and the new leaf ModuleCat Grothendieck abelian; skyscrapers of injectives; the product; functoriality and naturality written out); 1 new node",
- "lead_note": "2026-10-10 L: a two-step route exists: AlgebraicGeometry.Scheme.Modules.isGrothendieckAbelian (slopmaster2, sorry-free: Mod(O_X) is Grothendieck abelian) plus lem-weil-pbc-grothendieck-functorial-injective-embedding; kept the 01DI route as delivered."
+ "lead_note": "2026-10-10 L: a two-step route exists: AlgebraicGeometry.Scheme.Modules.isGrothendieckAbelian (slopmaster2, sorry-free: Mod(O_X) is Grothendieck abelian) plus lem-weil-pbc-grothendieck-functorial-injective-embedding; kept the 01DI route as delivered.",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SchemeModulesFunctorialInjectiveEmbeddings",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_functorialInjectiveEmbeddings",
+  "file": "lean/Sheaf/AlgebraicGeometry/SchemeModulesFunctorialInjectiveEmbeddings.lean",
+  "statement": "theorem exists_functorialInjectiveEmbeddings (X : Scheme.{u}) : ∃ (J : X.Modules ⥤ X.Modules) (j : 𝟭 X.Modules ⟶ J), (∀ M : X.Modules, Mono (j.app M)) ∧ (∀ M : X.Modules, Injective (J.obj M)) ∧ (∀ (I : Type v) [Preorder I] [IsDirected I (· ≤ ·)] (F : I ⥤ X.Modules), (∀ i : I, Injective ((F ⋙ J).obj i)) ∧ (∀ i : I, Mono (j.app (F.obj i))) ∧ ∀ (i i' : I) (h : i ≤ i'), j.app (F.obj i) ≫ (F ⋙ J).map (homOfLE h) = F.map (homOfLE h) ≫ j.app (F.obj i'))",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-fie",
+  "group": "F1",
+  "result": "pass",
+  "note": "X : Scheme; J functor + j : 𝟭 ⟶ J natural; Mono j.app, Injective J.obj for all M; directed I [Preorder][IsDirected] (DIRECTED SETS line), system F : I ⥤ X.Modules, F ⋙ J injective, compatibility square j ≫ J.map = F.map ≫ j"
+ }
 }
