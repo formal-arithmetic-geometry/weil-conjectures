@@ -1,11 +1,11 @@
 # Work queue
 
-387 items; claim with `tools/claim.py next <group> [--stage N]`.
+383 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (387)
+## Stage 2: nodes to state (383)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -26,7 +26,6 @@
 | `lem-sc-affine-perfect-koszul-principal-unit` | 1 | state |
 | `lem-sc-affine-perfect-map-lift` | 1 | state |
 | `lem-sc-affine-perfect-open-represent-cohomology` | 1 | state |
-| `lem-sc-affine-perfect-plus-shift` | 1 | state |
 | `lem-sc-affine-perfect-support-extension` | 1 | state |
 | `lem-sc-affine-support-iterated-cones` | 1 | state |
 | `lem-sc-base-change-curve` | 1 | state |
@@ -36,7 +35,6 @@
 | `lem-sc-koszul-regular-sequence-dual-complex` | 1 | state |
 | `lem-sc-p1-ext-pushout-postcompose` | 1 | state |
 | `lem-sc-perfect-cut-complex-degree-zero` | 1 | state |
-| `lem-sc-perfect-degree-zero-fibre-criterion` | 1 | state |
 | `lem-sc-perfect-derived-tensor-perfect` | 1 | state |
 | `lem-sc-perfect-finite-free-residue-model` | 1 | state |
 | `lem-sc-perfect-h0-locally-closed` | 1 | state |
@@ -52,13 +50,11 @@
 | `lem-weil-pbc-closed-immersion-conormal-flat-base-change` | 1 | state |
 | `lem-weil-pbc-pair-henselization` | 1 | state |
 | `lem-weil-pbc-projective-space-functor-of-points` | 1 | state |
-| `lem-weil-pbc-quasi-coherent-algebra-colimit` | 1 | state |
 | `lem-weil-pbc-quasi-coherent-finite-type-affine` | 1 | state |
 | `lem-weil-pbc-quasi-coherent-ideal-zero-set-affine` | 1 | state |
 | `lem-weil-pbc-quasi-coherent-iso-on-affine-cover` | 1 | state |
 | `lem-weil-pbc-quasi-coherent-module-cokernel-image` | 1 | state |
 | `lem-weil-pbc-quasi-coherent-module-colimit-affine-sections` | 1 | state |
-| `lem-weil-pbc-quasi-coherent-module-direct-sum` | 1 | state |
 | `lem-weil-pbc-quasi-coherent-symmetric-algebra` | 1 | state |
 | `lem-weil-pbc-quasi-coherent-tensor-product-affine-sections` | 1 | state |
 | `lem-weil-pbc-quasi-finite-affine-open-in-finite` | 1 | state |
