@@ -233,5 +233,23 @@
   "result": "pass",
   "note": "Reviewed by the lead (opus-relaunch6). Agent-formulated equivalences, eight steps: stalks as Lambda-modules (filtered colimit elementwise), stalk of a restriction along an etale map, stalk of a constant sheaf of Lambda-modules, the 'moreover' clause, (1)=>(2) via lifting geometric points through an etale covering, (2)=>(1) via a geometric point of each nonempty member, (1)=>(3) by the new unsplit node for 093N(1) 'if', (3)=>(2) by the new unsplit node 'geometric stalks of a finite type sheaf of Lambda-modules are finitely generated' (no Stacks tag; agent-formulated), with the new definition node of finite type for sheaves of modules on the etale site (Mathlib leaf SheafOfModules.IsFiniteType, Sheaf/Generators.lean:142, verified). Statement kept (citations of the notions used added; the attribution of 'finite locally constant with finite values' to 03RU corrected: 03RU covers sets and abelian groups only). Stage-3 notes: clause (3) is used by no citer (the citers use (1)=>(2) and 'moreover'); geometric points are algebraically closed in def-weil-geometric-point but separably closed in def-constructible-finite / def-kun-separably-closed and in the Lean IsFiniteSheaf: a convention to reconcile (Mathlib exists_fac_of_etale_of_isSepClosed gives the lift for separably closed points). Lean candidate reported, not attached: AlgebraicGeometry.Scheme.finite_of_isFiniteSheaf_constantSheaf (ConstructibleSheaf/KernelCokernel.lean:103, sorry-free) is the core of (2)=>(1)."
  },
- "lead_note": " L 2026-10-10 06:20: 'unreachable' flag cleared, a target now reaches this node (check_dag)."
+ "lead_note": " L 2026-10-10 06:20: 'unreachable' flag cleared, a target now reaches this node (check_dag).",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteLocallyConstantModuleValues",
+  "declaration": "AlgebraicGeometry.Scheme.finite_locally_constant_module_values_iff",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteLocallyConstantModuleValues.lean",
+  "statement": "theorem finite_locally_constant_module_values_iff {Y : Scheme.{u}} {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ] (F : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)) : let finiteValues : Prop := ∃ d : LocallyConstantDatum F, ∀ i : d.cover.I₀, ∃ M : ModuleCat.{u + 1} Λ, Finite M ∧ Nonempty (F.over (d.cover.etalePrecoverageToEtale i) ≅ (constantSheaf (Y.smallEtaleTopology.over (d.cover.etalePrecoverageToEtale i)) (ModuleCat.{u + 1} Λ)).obj M) (finiteValues ↔ IsFiniteLocallyConstantSheaf F) ∧ (finiteValues ↔ IsLocallyConstantSheaf F ∧ IsFiniteTypeEtaleModuleSheaf F) ∧ ∀ (d : LocallyConstantDatum F) (M : d.cover.I₀ → ModuleCat.{u + 1} Λ), (∀ i : d.cover.I₀, Finite (M i) ∧ Nonempty (F.over (d.cover.etalePrecoverageToEtale i) ≅ (constantSheaf (Y.smallEtaleTopology.over (d.cover.etalePrecoverageToEtale i)) (ModuleCat.{u + 1} Λ)).obj (M i))) → ∀ (i : d.cover.I₀) (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ d.cover.X i), Nonempty (((pointSmallEtale (s ≫ d.cover.f i)).sheafFiber (A := ModuleCat.{u + 1} Λ)).obj F ≅ M i)",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-flv1019",
+  "group": "H1",
+  "result": "pass",
+  "note": "Y Scheme.{u}; finite comm ring Λ:Type(u+1); F Sheaf smallEtale (ModuleCat Λ) per STATE two-encodings; (1) LocallyConstantDatum cover + Finite M + iso F.over≅constantSheaf.obj M; (2) recorded IsFiniteLocallyConstantSheaf (f.g. stalks at sep-closed pts = finite over finite Λ); (3) IsLocallyConstantSheaf ∧ IsFiniteTypeEtaleModuleSheaf (dep module: cover + epi from constant Λ^n on slice = n generating sections, H13 ok, no duplicate in lean/Sheaf); moreover over all d,M,i, alg-closed Ω, s≫f i, sheafFiber in ModuleCat ≅ M i; combined #check/#print compiled 2.4 s"
+ }
 }

@@ -84,5 +84,24 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.IsFiniteTypeEtaleModuleSheaf",
+  "declaration": "AlgebraicGeometry.Scheme.IsFiniteTypeEtaleModuleSheaf",
+  "file": "lean/Sheaf/AlgebraicGeometry/IsFiniteTypeEtaleModuleSheaf.lean",
+  "statement": "def IsFiniteTypeEtaleModuleSheaf {Y : Scheme.{v}} {Λ : Type (v + 1)} [CommRing Λ] (F : Sheaf Y.smallEtaleTopology (ModuleCat.{v + 1} Λ)) : Prop",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": false,
+  "note": "The existing SheafOfModules.IsFiniteType requires a SheafOfModules object over a ring sheaf, whereas the recorded constructible-sheaf predicates and inverse image use Sheaf Y.smallEtaleTopology (ModuleCat Λ), the coefficient-category encoding explicitly allowed by def-weil-pbc-etale-sheaves. This module states the same finite-type notion in that encoding: an etale cover and, on each localized site, an epimorphism from the constant sheaf of Λ^n for some n. By the constant-sheaf adjunction the map specifies n global sections, and the constant free sheaf is the finite direct sum of the constant ring sheaf. No local-constancy or finite-ring hypothesis is added. The original mathlib_match is retained."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-flv1019",
+  "group": "H1",
+  "result": "pass",
+  "note": "Y Scheme.{u}; finite comm ring Λ:Type(u+1); F Sheaf smallEtale (ModuleCat Λ) per STATE two-encodings; (1) LocallyConstantDatum cover + Finite M + iso F.over≅constantSheaf.obj M; (2) recorded IsFiniteLocallyConstantSheaf (f.g. stalks at sep-closed pts = finite over finite Λ); (3) IsLocallyConstantSheaf ∧ IsFiniteTypeEtaleModuleSheaf (dep module: cover + epi from constant Λ^n on slice = n generating sections, H13 ok, no duplicate in lean/Sheaf); moreover over all d,M,i, alg-closed Ω, s≫f i, sheafFiber in ModuleCat ≅ M i; combined #check/#print compiled 2.4 s"
+ }
 }
