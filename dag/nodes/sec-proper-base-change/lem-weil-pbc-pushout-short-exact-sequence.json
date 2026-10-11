@@ -171,5 +171,24 @@
   "by": "L",
   "result": "pass",
   "note": "Reviewed by the lead (opus-relaunch6). Six steps along Homology 010I(2)/08N4/08N3/05PJ: pushouts exist (abelian leaf), E = Coker((u,-f)) (elementary), p from the universal property, iota mono (pushout-mono leaf, 08N4(2)), p a cokernel of iota via the new Mathlib leaf for 08N3(2) (isIso_cokernel_map_of_isPushout, IsPullback/Kernels.lean:48, verified), short exactness. Stage-3 note confirmed by the worker: lem-weil-pbc-injective-resolution-ses step 1 justifies 'monic' wrongly and asserts a non-canonical direct sum; this item covers only its first claim."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.PushoutShortExactSequence",
+  "declaration": "CategoryTheory.pushout_short_exact_sequence",
+  "file": "lean/Sheaf/CategoryTheory/PushoutShortExactSequence.lean",
+  "statement": "theorem pushout_short_exact_sequence {𝒜 : Type u} [Category.{v} 𝒜] [Abelian 𝒜] (S : ShortComplex 𝒜) (hS : S.ShortExact) {I : 𝒜} (u : S.X₁ ⟶ I) : (∃ e : pushout u S.f ≅ cokernel (biprod.lift u (-S.f)), pushout.inl u S.f ≫ e.hom = biprod.inl ≫ cokernel.π (biprod.lift u (-S.f)) ∧ pushout.inr u S.f ≫ e.hom = biprod.inr ≫ cokernel.π (biprod.lift u (-S.f))) ∧ ∃ p : pushout u S.f ⟶ S.X₃, ∃ hz : pushout.inl u S.f ≫ p = 0, pushout.inr u S.f ≫ p = S.g ∧ (∀ q : pushout u S.f ⟶ S.X₃, pushout.inr u S.f ≫ q = S.g → pushout.inl u S.f ≫ q = 0 → q = p) ∧ (ShortComplex.mk (pushout.inl u S.f) p hz).ShortExact ∧ ∃ m : S ⟶ ShortComplex.mk (pushout.inl u S.f) p hz, m.τ₁ = u ∧ m.τ₂ = pushout.inr u S.f ∧ m.τ₃ = 𝟙 S.X₃",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-pse1420"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-pse1420",
+  "group": "C1",
+  "result": "fix",
+  "note": "Abelian 𝒜 (def-sp-abelian, Mathlib Abelian, independent universes); S ShortComplex + ShortExact = 0→A→B→C→0; u : S.X₁ ⟶ I arbitrary; E = Mathlib pushout u S.f with inl/inr (colimit of span); Coker((u,-f)) iso compatible with both inclusions; unique p with inr≫p=g, inl≫p=0; ShortComplex.mk inl p ShortExact; morphism (u,inr,id). FIX: dropped tautological conjunct u≫inl=f≫inr (= pushout.condition) and the duplicate inl≫p=0 conjunct now carried by hz"
  }
 }
