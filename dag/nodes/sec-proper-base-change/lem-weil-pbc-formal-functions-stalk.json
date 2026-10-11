@@ -31,7 +31,8 @@
   "pqf-def-cohomology",
   "def-weil-pbc-adic-completion",
   "lem-weil-pbc-higher-direct-image-presheaf",
-  "def-weil-pbc-module-cohomology-fmap"
+  "def-weil-pbc-module-cohomology-fmap",
+  "def-weil-pbc-formal-fibre-cohomology"
  ],
  "proof": [
   {
@@ -268,5 +269,28 @@
   "by": "L",
   "result": "accepted",
   "note": "9 steps follow Stacks 02OD with the omitted compatibilities written out: canonical morphism Spec O_{Y,y} -> Y (new node, 01J6/02NA/01J7, flat), base change, stalk = H^p(X',F') via 02KH (tool) and the new 02N7 sections node and the 01E4 node, infinitesimal neighbourhoods identified, theta_n = theta'_n o phi, cohomology along the affine closed immersions (new 089W edge-map node) with the new definition of maps on cohomology induced by h-maps (01F7) and their functoriality, transition compatibility, 02OC node, conclusion incl. p = 0. Six new unsplit nodes; all 19 tags verified."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FormalFunctionsStalk",
+  "declaration": "AlgebraicGeometry.formal_functions_stalk",
+  "declarations": [
+   "AlgebraicGeometry.formal_functions_stalk",
+   "AlgebraicGeometry.formal_functions_stalk_structureSheaf"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/FormalFunctionsStalk.lean",
+  "statement": "theorem formal_functions_stalk {X Y : Scheme.{uS}} (f : X ⟶ Y) [IsProper f] [IsLocallyNoetherian Y] (F : SheafOfModules.{uS} (moduleRings X.toRingedSpace)) (hF : RingedSpace.IsCoherent X.toRingedSpace F) (y : Y) (p : ℕ) : ∃ θ : ∀ n : ℕ, formalFunctionsStalk f y F p →ₗ[Y.presheaf.stalk y] formalFibreCohomologyLocal f y F p n, (∀ n : ℕ, IsFormalFunctionsTheta f y F p n (θ n)) ∧ (∀ (n : ℕ) (x : formalFunctionsStalk f y F p), formalFibreCohomologyTransition f y F p n (θ (n + 1) x) = θ n x) ∧ (∀ n : ℕ, (maximalIdeal (Y.presheaf.stalk y) ^ (n + 1) • ⊤ : Submodule (Y.presheaf.stalk y) (formalFunctionsStalk f y F p)) ≤ LinearMap.ker (θ n)) ∧ ∃ e : ModuleCat.of (AdicCompletion (maximalIdeal (Y.presheaf.stalk y)) (Y.presheaf.stalk y)) (AdicCompletion (maximalIdeal (Y.presheaf.stalk y)) (formalFunctionsStalk f y F p)) ≅ limit (formalFibreCohomologySystem f y F p), (∀ (n : ℕ) (x : AdicCompletion (maximalIdeal (Y.presheaf.stalk y)) (formalFunctionsStalk f y F p)) (z : formalFunctionsStalk f y F p), AdicCompletion.eval (maximalIdeal (Y.presheaf.stalk y)) (formalFunctionsStalk f y F p) (n + 1) x = Submodule.Quotient.mk z → (limit.π (formalFibreCohomologySystem f y F p) (op n)) (e.hom x) = θ n z) ∧ (∀ (n : ℕ) (z : formalFunctionsStalk f y F p), (limit.π (formalFibreCohomologySystem f y F p) (op n)) (e.hom (AdicCompletion.of (maximalIdeal (Y.presheaf.stalk y)) (formalFunctionsStalk f y F p) z)) = θ n z)",
+  "branch": "sheaf-dag",
+  "by": "R1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-ffs"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-ffs",
+  "group": "R1",
+  "result": "fix",
+  "note": "f proper, Y loc. Noetherian, F coherent, y, p; X_n = Spec(A/m^(n+1)) x_Y X with j_n = pullback.map; transition = fmap of the adjoint h-map; theta_n tied by IsFormalFunctionsTheta (canonical 01E4 class via landed FlatBaseChangeOpenChoices + pullback along X_n -> f^-1 V); compatibility, m^(n+1)M kill, completed-ring iso with projections; degree-zero section clause; reverted the delivery's change of existing node(s) lem-weil-pbc-higher-direct-image-presheaf (--revert-nodes; kept as on sheaf-dag)"
  }
 }
