@@ -164,7 +164,12 @@ an arrow, to the adjunction morphism `f_{T'}^* f_{T',*} ℒ_{T'} ⟶ ℒ_{T'}` o
 
 This is cohomology and base change for `F`: since `Rf_{T,*} ℒ ≅ 𝒩[0]` with `𝒩` invertible, the
 base change map `i^* f_{T,*} ℒ ⟶ f_{T',*} i'^* ℒ` is an isomorphism, and it is compatible with the
-two adjunction morphisms by construction (it is the mate of `i'^* f_T^* ≅ f_{T'}^* i^*`). -/
+two adjunction morphisms by construction (it is the mate of `i'^* f_T^* ≅ f_{T'}^* i^*`).
+
+Both sides of the base change map are invertible, so it is an isomorphism once it is nonzero on
+every fibre (`AlgebraicGeometry.Scheme.Modules.Hom.isIso_of_forall_pullback_ne_zero`); on a fibre
+it is nonzero because the adjunction morphism of `ℒ` is
+(`AlgebraicGeometry.pullback_baseChangeMap_map_counit_ne_zero`, by a Čech complex argument). -/
 theorem nonempty_arrowIso_pullback_directImageCounit
     (σ : Spec (.of k) ⟶ X) (hσ : σ ≫ X ↘ Spec (.of k) = 𝟙 (Spec (.of k)))
     [∀ T : Over (Spec (.of k)),
