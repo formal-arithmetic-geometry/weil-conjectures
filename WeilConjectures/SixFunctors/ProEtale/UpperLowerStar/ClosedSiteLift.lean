@@ -50,8 +50,8 @@ variable {X Z : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i]
 
 /-- A local form of blueprint `def-exc-closed-site-lift` and `lem-exc-closed-site-adjunction`:
 let `U ⊆ X` be an affine open and `T` an affine weakly étale `Z`-scheme over `Z ∩ U` whose ring
-is ind-étale over `Γ(Z ∩ U)`. Then `Y = Spec H_A(Γ(T))`, with `A = Γ(U)`, is a pro-affine-étale `X`-scheme whose
-base change to `Z` is `T`, and every morphism `T ⟶ W ×_X Z` to the base change of an affine
+is ind-étale over `Γ(Z ∩ U)`. Then `Y = Spec H_A(Γ(T))`, with `A = Γ(U)`, is a pro-affine-étale
+`X`-scheme whose base change to `Z` is `T`, and every morphism `T ⟶ W ×_X Z` to the base change of an affine
 `X`-scheme `W` over `U` with ind-étale ring comes from a morphism `Y ⟶ W`. -/
 theorem exists_closedSiteLift (U : X.affineOpens) (T : Z.ProEt) [IsAffine T.left]
     (t : T.left ⟶ (i ⁻¹ᵁ U.1).toScheme) (ht : t ≫ (i ⁻¹ᵁ U.1).ι = T.hom)
