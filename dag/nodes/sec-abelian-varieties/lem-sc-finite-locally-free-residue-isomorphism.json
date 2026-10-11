@@ -122,5 +122,24 @@
   "group": "J1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-fri0045 (reviewer sub-agent of L); spot-checked: Statement vs Tag 00O0(3) correct; citer lem-sc-perfect-degree-zero-fibre-criterion step uses exactly this (O_S -> H^0(K), both finite locally free); math of both steps correct; no duplicate node; Mathlib has only ring-level ingredients (LocalRing/Module.lean, e.g. IsLocalRing.split_injective_iff_lTensor_residueField_injective), no scheme-level declaration. FIX more, RETURN less: (1) C1 step 1 Nakayama now cites lem-weil-pbc-nakayama-local-generators; (2) C1 step 2 stalkwise iso now cites lem-weil-pbc-module-iso-on-stalks (mathlib leaf); (3) C4/b finite locally free now cites def-amb-finite-locally-free-module (statement and stmt_deps, locally of constant rank); also made explicit in step 1 that K tensor kappa(s) injects into E_s tensor kappa(s) by the splitting (gap the second reading missed). Tool uses: the three generic nodes from other units.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteLocallyFreeResidueIso",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.finiteLocallyFree_residueField_isIso",
+  "statement": "theorem finiteLocallyFree_residueField_isIso {S : Scheme.{u}} {E F : S.Modules} (hE : ∀ s : S, ∃ U : S.Opens, s ∈ U ∧ ∃ d : ℕ, (E.restrict U.ι).IsFiniteLocallyFreeOfRank d) (hF : ∀ s : S, ∃ U : S.Opens, s ∈ U ∧ ∃ d : ℕ, (F.restrict U.ι).IsFiniteLocallyFreeOfRank d) (v : E ⟶ F) (h : ∀ s : S, IsIso (X := residueFiber E s) (Y := residueFiber F s) ((ModuleCat.extendScalars (S.residue s).hom).map (ModuleCat.ofHom (v.stalkLinearMap s)))) : IsIso v",
+  "by": "G1",
+  "date": "2026-10-11",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteLocallyFreeResidueIso.lean",
+  "branch": "sheaf-dag",
+  "existing": false,
+  "fixed_by": "R-fri1242"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-fri1242",
+  "group": "G1",
+  "result": "fix",
+  "note": "S Scheme; E,F S.Modules; hE/hF pointwise nbhd with SheafOfModules.IsFiniteLocallyFreeOfRank d (#check resolved) = node's open cover of constant ranks; v : E ⟶ F; fibre hypothesis restated on landed residueFiber (def-weil-pbc-module-residue-fiber) as IsIso of extendScalars(residue).map of stalkLinearMap, replacing letI Algebra + hand-written lTensor (H4, let); conclusion IsIso v global as the node says"
  }
 }
