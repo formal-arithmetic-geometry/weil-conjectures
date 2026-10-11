@@ -4927,3 +4927,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 14:22 L: merged deliver/J1/lem-weil-pbc-separated-lqf-base-change (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.SeparatedLqfBaseChange AlgebraicGeometry.separated_lqf_base_change)
 - 14:22 L: merged deliver/C1/lem-weil-pbc-sheaf-hom-finite-presentation-kernel (stage 2; reviewer PASS; first push; Sheaf.Algebra.Category.ModuleCat.Sheaf.HomFinitePresentationKernel SheafOfModules.homObj_precomposition_exact)
 - 14:22 L: merged deliver/J1/lem-weil-pbc-separating-transcendence-basis-finite-subextension (stage 2; reviewer PASS; first push; Sheaf.FieldTheory.SeparatingTranscendenceBasisFiniteSubextension separating_transcendence_basis_finite_subextension)
+- 14:23 L: merged deliver/J1/lem-weil-pbc-simplicial-set-add-simplices (stage 2; reviewer PASS; first push; Sheaf.Paper.SimplicialSetAddSimplices SSet.add_simplices)

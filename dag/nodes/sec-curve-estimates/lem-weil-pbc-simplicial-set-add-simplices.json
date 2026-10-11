@@ -129,5 +129,23 @@
   "group": "E1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of E1; spot-checked by L: L: reviewed in full by a reviewer sub-agent (PASS): 018S/018R read, 4 steps checked, small cases tested"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.SimplicialSetAddSimplices",
+  "declaration": "SSet.add_simplices",
+  "file": "lean/Sheaf/Paper/SimplicialSetAddSimplices.lean",
+  "statement": "theorem add_simplices (S : SSet.{u}) (U V : S.Subcomplex) (hUV : U ≤ V) (hU_fin : ∀ (n : ℕ), Finite ((U : SSet).obj (Opposite.op (SimplexCategory.mk n)))) (hV_fin : ∀ (n : ℕ), Finite ((V : SSet).obj (Opposite.op (SimplexCategory.mk n)))) (hU_nonempty : ∀ (n : ℕ), Nonempty ((U : SSet).obj (Opposite.op (SimplexCategory.mk n)))) (hV_nonempty : ∀ (n : ℕ), Nonempty ((V : SSet).obj (Opposite.op (SimplexCategory.mk n)))) [SSet.Finite (U : SSet)] [SSet.Finite (V : SSet)] : ∃ (r : ℕ) (W : Fin (r + 1) → S.Subcomplex), W 0 = U ∧ W ⟨r, Nat.lt_succ_self r⟩ = V ∧ (∀ (k : Fin r), W k.castSucc ≤ W k.succ) ∧ (∀ (k : Fin r), ∃ (n : ℕ) (x : (W k.succ : SSet).obj (Opposite.op (SimplexCategory.mk n))), x.1 ∉ Set.range ((W k.castSucc).ι.app (Opposite.op (SimplexCategory.mk n))) ∧ (∀ (i : ℕ), i < n → Set.range ((W k.succ).ι.app (Opposite.op (SimplexCategory.mk i))) = Set.range ((W k.castSucc).ι.app (Opposite.op (SimplexCategory.mk i)))) ∧ Set.range ((W k.succ).ι.app (Opposite.op (SimplexCategory.mk n))) = Set.range ((W k.castSucc).ι.app (Opposite.op (SimplexCategory.mk n))) ∪ {x.1} ∧ (∀ (j : ℕ) (z : (W k.succ : SSet).obj (Opposite.op (SimplexCategory.mk j))), n < j → z.1 ∉ Set.range ((W k.castSucc).ι.app (Opposite.op (SimplexCategory.mk j))) → z ∈ SSet.degenerate (W k.succ : SSet) j))",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "J1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }
