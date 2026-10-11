@@ -33,6 +33,8 @@ and it is the latter that one wants when transporting the coherence of a pseudof
   `CategoryTheory.Adjunction.liftAlgebraStr : G (R (L K)) ⟶ R (L K)` along a lift of `G`.
 - `CategoryTheory.mateEquiv_whiskerBottom`: the mate of a 2-square whiskered at the bottom is
   the mate whiskered on the left.
+- `CategoryTheory.mateEquiv_whiskerTop_conjugateEquiv`: conjugates of morphisms of left
+  adjoints compatible with 2-squares are compatible with the mates of these 2-squares.
 - `CategoryTheory.Adjunction.whiskerRight_comp_conjugateIsoEquiv_hom`: for an adjoint triple
   `L ⊣ M ⊣ R`, the comparison `L ⟶ R` commutes with the exchange isomorphisms obtained by
   conjugating an isomorphism `ED ⋙ M ≅ M ⋙ EC` for self-equivalences `EC` and `ED`.
@@ -184,6 +186,29 @@ lemma mateEquiv_whiskerBottom {G : A ⥤ C} {H H' : B ⥤ D} {L₁ : A ⥤ B} {R
     mateEquiv adj₁ adj₂ (w.whiskerBottom β) = (mateEquiv adj₁ adj₂ w).whiskerLeft β := by
   ext X
   simp [mateEquiv, TwoSquare.whiskerBottom, TwoSquare.whiskerLeft, ← Functor.map_comp]
+
+/-- Conjugation is compatible with 2-squares: let `α : L₂ ⟶ L₁` and `α' : L₂' ⟶ L₁'` be
+morphisms of left adjoints, and let `w₁ : TwoSquare G L₁ L₁' H` and
+`w₂ : TwoSquare G L₂ L₂' H` be 2-squares compatible with them, `w₂ ≫ α = α' ≫ w₁`. Then the
+conjugates `R₁ ⟶ R₂` and `R₁' ⟶ R₂'` of `α` and `α'` are compatible with the mates of `w₁` and
+`w₂`:
+
+```
+R₁ ⋙ G ---conj α---> R₂ ⋙ G
+   |                    |
+mate w₁              mate w₂
+   v                    v
+H ⋙ R₁' --conj α'--> H ⋙ R₂'
+```
+-/
+lemma mateEquiv_whiskerTop_conjugateEquiv {G : A ⥤ C} {H : B ⥤ D}
+    {L₁ L₂ : A ⥤ B} {R₁ R₂ : B ⥤ A} {L₁' L₂' : C ⥤ D} {R₁' R₂' : D ⥤ C}
+    (adj₁ : L₁ ⊣ R₁) (adj₂ : L₂ ⊣ R₂) (adj₁' : L₁' ⊣ R₁') (adj₂' : L₂' ⊣ R₂')
+    (α : L₂ ⟶ L₁) (α' : L₂' ⟶ L₁') (w₁ : TwoSquare G L₁ L₁' H) (w₂ : TwoSquare G L₂ L₂' H)
+    (h : w₂.whiskerLeft α = w₁.whiskerRight α') :
+    (mateEquiv adj₂ adj₂' w₂).whiskerTop (conjugateEquiv adj₁ adj₂ α) =
+      (mateEquiv adj₁ adj₁' w₁).whiskerBottom (conjugateEquiv adj₁' adj₂' α') := by
+  rw [← conjugateEquiv_mateEquiv_vcomp, h, mateEquiv_conjugateEquiv_vcomp]
 
 section Triple
 

@@ -7,10 +7,11 @@ module
 
 public import Mathlib.AlgebraicGeometry.IdealSheaf.Basic
 public import Mathlib.RingTheory.PolynomialAlgebra
-public import Mathlib.RingTheory.Polynomial.Quotient
+public import WeilConjectures.Mathlib.RingTheory.Polynomial.Quotient
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineSpace
 public import WeilConjectures.Mathlib.Algebra.Category.Ring.Constructions
+public import WeilConjectures.Mathlib.AlgebraicGeometry.PullbackCarrier
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.SmallAffineZariski
 public import WeilConjectures.Mathlib.RingTheory.ReesAlgebra
 
@@ -48,83 +49,6 @@ between them come from pushout squares of algebras through
 universe u
 
 open CategoryTheory Limits Polynomial LaurentPolynomial
-
-namespace Polynomial
-
-variable {R S : Type*} [CommRing R] [CommRing S]
-
-lemma span_X_le_ker_mk_comp_evalRingHom_zero (J : Ideal R) :
-    Ideal.span {(X : R[X])} ≤ RingHom.ker ((Ideal.Quotient.mk J).comp (evalRingHom 0)) := by
-  rw [Ideal.span_singleton_le_iff_mem, RingHom.mem_ker]
-  simp
-
-lemma quotientMap_comp_lift_evalRingHom_zero (φ : R →+* S) (J : Ideal R) (J' : Ideal S)
-    (h : J ≤ J'.comap φ)
-    (h' : Ideal.span {(X : R[X])} ≤ (Ideal.span {(X : S[X])}).comap (mapRingHom φ)) :
-    (Ideal.quotientMap J' φ h).comp (Ideal.Quotient.lift _ _
-      (fun _ ha ↦ span_X_le_ker_mk_comp_evalRingHom_zero J ha)) =
-      (Ideal.Quotient.lift _ _ (fun _ ha ↦ span_X_le_ker_mk_comp_evalRingHom_zero J' ha)).comp
-        (Ideal.quotientMap _ (mapRingHom φ) h') := by
-  refine Ideal.Quotient.ringHom_ext (RingHom.ext fun p ↦ ?_)
-  simp [eval_zero_map]
-
-end Polynomial
-
-/-! ### Polynomial and Laurent polynomial functors -/
-
-namespace CommRingCat
-
-/-- The functor `R ↦ R[t]`. -/
-@[simps]
-noncomputable def polynomialFunctor : CommRingCat.{u} ⥤ CommRingCat.{u} where
-  obj R := .of R[X]
-  map f := ofHom (mapRingHom f.hom)
-  map_id R := by ext : 1; exact mapRingHom_id
-  map_comp f g := by ext : 1; exact (mapRingHom_comp _ _).symm
-
-/-- The inclusion of constants `R ⟶ R[t]`. -/
-@[simps]
-noncomputable def polynomialC : 𝟭 CommRingCat.{u} ⟶ polynomialFunctor where
-  app R := ofHom C
-  naturality _ _ f := by ext : 1; exact (mapRingHom_comp_C _).symm
-
-lemma coequifibered_polynomialC : polynomialC.{u}.Coequifibered := by
-  intro R S f
-  algebraize [f.hom]
-  let := Polynomial.algebra (R := R) (A := S)
-  exact CommRingCat.isPushout_of_isPushout R S R[X] S[X]
-
-/-- The functor `R ↦ R[t, t⁻¹]`. -/
-@[simps]
-noncomputable def laurentFunctor : CommRingCat.{u} ⥤ CommRingCat.{u} where
-  obj R := .of R[T;T⁻¹]
-  map f := ofHom (Ideal.laurentMap f.hom)
-  map_id R := by ext : 1; exact AddMonoidAlgebra.mapRingHom_id
-  map_comp f g := by ext : 1; exact AddMonoidAlgebra.mapRingHom_comp _ _
-
-/-- The inclusion of constants `R ⟶ R[t, t⁻¹]`. -/
-@[simps]
-noncomputable def laurentC : 𝟭 CommRingCat.{u} ⟶ laurentFunctor where
-  app R := ofHom LaurentPolynomial.C
-  naturality _ _ f := by
-    ext x
-    exact (Ideal.laurentMap_C f.hom x).symm
-
-open scoped AlgebraMonoidAlgebra in
-lemma coequifibered_laurentC : laurentC.{u}.Coequifibered := by
-  intro R S f
-  algebraize [f.hom]
-  exact CommRingCat.isPushout_of_isPushout R S R[T;T⁻¹] S[T;T⁻¹]
-
-/-- The inclusion `R[t] ⟶ R[t, t⁻¹]`. -/
-@[simps]
-noncomputable def polynomialToLaurent : polynomialFunctor.{u} ⟶ laurentFunctor where
-  app R := ofHom toLaurent
-  naturality _ _ f := by
-    ext p
-    exact (Ideal.laurentMap_toLaurent f.hom p).symm
-
-end CommRingCat
 
 namespace AlgebraicGeometry.Scheme
 
@@ -268,15 +192,15 @@ noncomputable def reesPresheaf : X.AffineZariskiSiteᵒᵖ ⥤ CommRingCat.{u} w
   map {U V} i := CommRingCat.ofHom <| (I.siteIdeal U.unop).extendedReesAlgebraMap
     (X.affineStructurePresheaf.map i).hom _ (I.map_siteIdeal i).le
   map_id U := CommRingCat.hom_ext <| RingHom.ext fun x ↦ Subtype.ext <| by
-    change Ideal.laurentMap (X.affineStructurePresheaf.map (𝟙 U)).hom x.1 = x.1
+    change LaurentPolynomial.mapRingHom (X.affineStructurePresheaf.map (𝟙 U)).hom x.1 = x.1
     rw [CategoryTheory.Functor.map_id, CommRingCat.hom_id]
-    exact Ideal.laurentMap_id _
+    exact LaurentPolynomial.mapRingHom_id _
   map_comp i j := CommRingCat.hom_ext <| RingHom.ext fun x ↦ Subtype.ext <| by
-    change Ideal.laurentMap (X.affineStructurePresheaf.map (i ≫ j)).hom x.1 =
-      Ideal.laurentMap (X.affineStructurePresheaf.map j).hom
-        (Ideal.laurentMap (X.affineStructurePresheaf.map i).hom x.1)
+    change LaurentPolynomial.mapRingHom (X.affineStructurePresheaf.map (i ≫ j)).hom x.1 =
+      LaurentPolynomial.mapRingHom (X.affineStructurePresheaf.map j).hom
+        (LaurentPolynomial.mapRingHom (X.affineStructurePresheaf.map i).hom x.1)
     rw [CategoryTheory.Functor.map_comp, CommRingCat.hom_comp]
-    exact (Ideal.laurentMap_laurentMap _ _ _).symm
+    exact (LaurentPolynomial.mapRingHom_mapRingHom _ _ _).symm
 
 /-- The structure map `𝒪_X ⟶ 𝒪_X[t, I t⁻¹]`. -/
 @[simps]
@@ -641,10 +565,6 @@ lemma polynomialSpecToAffineSpace_over :
   rw [ι_polynomialSpecToAffineSpace_assoc, polynomialSpecChart, AffineSpace.homOfVector_over,
     natTrans_app_comp_ι, ι_toBase]
 
-instance {S T : Scheme.{u}} (n : Type u) (f : S ⟶ T) [IsIso f] : IsIso (AffineSpace.map n f) :=
-  ⟨⟨AffineSpace.map n (inv f), by rw [← AffineSpace.map_comp, IsIso.hom_inv_id,
-    AffineSpace.map_id], by rw [← AffineSpace.map_comp, IsIso.inv_hom_id, AffineSpace.map_id]⟩⟩
-
 set_option backward.isDefEq.respectTransparency false in
 instance (U : X.AffineZariskiSite) :
     IsIso (AffineSpace.homOfVector
@@ -773,15 +693,6 @@ instance : IsOpenImmersion X.laurentSpecToPolynomialSpec := by
   exact IsOpenImmersion.of_isLocalization (Polynomial.X : Γ(X, U.1)[X])
 
 set_option backward.isDefEq.respectTransparency false in
-lemma _root_.CategoryTheory.IsPullback.range_snd_scheme {P X' Y Z : Scheme.{u}} {fst : P ⟶ X'}
-    {snd : P ⟶ Y} {f : X' ⟶ Z} {g : Y ⟶ Z} (h : IsPullback fst snd f g) :
-    Set.range snd = g ⁻¹' Set.range f := by
-  rw [← h.isoPullback_hom_snd, Scheme.Hom.comp_base, TopCat.coe_comp, Set.range_comp,
-    Set.range_eq_univ.mpr (ConcreteCategory.bijective_of_isIso h.isoPullback.hom.base).2,
-    Set.image_univ,
-    Scheme.Pullback.range_snd]
-
-set_option backward.isDefEq.respectTransparency false in
 /-- The punctured line `𝔾_{m,X} ⊆ 𝔸¹_X` is the locus where the coordinate `t` is invertible. -/
 lemma opensRange_laurentSpecToPolynomialSpec :
     X.laurentSpecToPolynomialSpec.opensRange =
@@ -790,7 +701,7 @@ lemma opensRange_laurentSpecToPolynomialSpec :
   have h := isPullback_ι_relativeGluingMap X.coequifibered_toPolynomialPresheaf
     X.coequifibered_toLaurentPresheaf _
     IdealSheafData.toPolynomialPresheaf_comp_polynomialToLaurent U
-  have e1 := h.range_snd_scheme
+  have e1 := Scheme.range_snd_of_isPullback h
   have e2 : Set.range (Spec.map (CommRingCat.ofHom
       (algebraMap Γ(X, U.1)[X] Γ(X, U.1)[T;T⁻¹]))) =
       (PrimeSpectrum.basicOpen (Polynomial.X : Γ(X, U.1)[X]) : Set (PrimeSpectrum Γ(X, U.1)[X])) :=
