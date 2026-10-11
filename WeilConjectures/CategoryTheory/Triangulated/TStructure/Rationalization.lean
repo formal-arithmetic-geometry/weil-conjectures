@@ -8,6 +8,7 @@ module
 public import Mathlib.CategoryTheory.Triangulated.TStructure.Heart
 public import Mathlib.CategoryTheory.Triangulated.TStructure.TruncLEGT
 public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.Rationalization
+public import WeilConjectures.CategoryTheory.Idempotents.TStructure
 
 /-!
 # The t-structure of a rationalization
@@ -177,6 +178,22 @@ lemma rationalization_heart_iff (X : Rationalization M C) :
       ⟨Triangle.π₃.mapIso e' ≪≫ e⟩⟩
   · rintro ⟨A, ⟨hA, hA'⟩, ⟨e⟩⟩
     exact ⟨⟨A, hA, ⟨e⟩⟩, ⟨A, hA', ⟨e⟩⟩⟩
+
+
+/-- If `C` carries a bounded t-structure, its rationalization `C[M⁻¹]` is idempotent complete:
+the induced t-structure is bounded. This is the formal part of blueprint
+`thm-weil-pbc-finite-stage-karoubian`. -/
+theorem isIdempotentComplete_rationalization (ht : ∀ X : C, t.bounded X) :
+    IsIdempotentComplete (Rationalization M C) :=
+  (t.rationalization M).isIdempotentComplete_of_bounded (rationalization_bounded ht)
+
+/-- If `C` carries a bounded t-structure, the canonical functor from its rationalization
+`C[M⁻¹]` to the Karoubi envelope of `C[M⁻¹]` is an equivalence of triangulated categories. -/
+theorem isEquivalence_toKaroubi_rationalization (ht : ∀ X : C, t.bounded X) :
+    (Idempotents.toKaroubi (Rationalization M C)).IsEquivalence ∧
+      (Idempotents.toKaroubi (Rationalization M C)).IsTriangulated :=
+  (t.rationalization M).isEquivalence_toKaroubi_and_isTriangulated_of_bounded
+    (rationalization_bounded ht)
 
 end Triangulated.TStructure
 
