@@ -169,5 +169,23 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-iec2616 (reviewer sub-agent of L); spot-checked: Returns 20:53/21:10: points 1,2 (d>=1, D nonempty, dim D=d-1, Step 2 support bound) repaired; E7 open. Compared consumer lem-sc-positive-ample-hilbert-degree step 6 clause by clause (D proper of dim g-1, L|_D ample, equality; also L=O(Z(s))). FIX more, RETURN less: E7/C4 repaired by option (a): statement adds 'dim D=d-1 or Z integral', conclusions (a) proper+dim d-1 via new node lem-sc-effective-cartier-dimension-drop (checked true: Hauptidealsatz + finite-type dimension theory; searches recorded), (b) M ample => M|_D ample via def-sc-ample + lem-pc-very-ample-ample (tool use declared, as the consumer in the same unit does) + composite closed immersion, (c) equality; plus the D=Z(s) case via lem-pc-zero-scheme-divisor-iso; stmt_deps completed (closed immersion, Krull dim, zero scheme, integral, ample). Second reading by G1 missed that the consumer still cites the item for conclusions it did not state.; 1 file(s) fixed by the reviewer"
  },
- "lead_note": "2026-10-10 L (R-iec2616): Item statement now carries (a) D proper with dim D=d-1 (hypothesis or Z integral), (b) restriction of an ample M to D ample, (c) the equality, and the D=Z(s) case of L_1|_Z=O_Z(D); consumer lem-sc-positive-ample-hilbert-degree step 6 is now covered clause by clause (it applies the item with Z=X integral)."
+ "lead_note": "2026-10-10 L (R-iec2616): Item statement now carries (a) D proper with dim D=d-1 (hypothesis or Z integral), (b) restriction of an ample M to D ample, (c) the equality, and the D=Z(s) case of L_1|_Z=O_Z(D); consumer lem-sc-positive-ample-hilbert-degree step 6 is now covered clause by clause (it applies the item with Z=X integral).",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.IntersectionEffectiveCartier",
+  "declaration": "AlgebraicGeometry.intersection_effectiveCartier",
+  "file": "lean/Sheaf/AlgebraicGeometry/IntersectionEffectiveCartier.lean",
+  "statement": "theorem intersection_effectiveCartier (k : Type u) [Field k] (X : Scheme.{u}) [X.Over (Spec (.of k))] [IsProper (X ↘ Spec (.of k))] (Z : Scheme.{u}) [Nonempty Z] (i : Z ⟶ X) [IsClosedImmersion i] (d : ℕ) (hd : 1 ≤ d) (hdimZ : topologicalKrullDim Z = ((d : ℕ∞) : WithBot ℕ∞)) (L : Fin d → X.Modules) [∀ j : Fin d, (L j).IsInvertible] (J : Z.IdealSheafData) (hJ : J.IsInvertible) [Nonempty J.subscheme] (hDim : topologicalKrullDim J.subscheme = (((d - 1 : ℕ) : ℕ∞) : WithBot ℕ∞) ∨ IsIntegral Z) (hIso : (Scheme.Modules.tensorPullback i).obj (L ⟨0, hd⟩) ≅ Scheme.Modules.dual J.toModules) : IsProper (J.subschemeι ≫ i ≫ X ↘ Spec (.of k)) ∧ (∃ hdimD : topologicalKrullDim J.subscheme = (((d - 1 : ℕ) : ℕ∞) : WithBot ℕ∞), (∀ (M : X.Modules), M.IsInvertible → IsAmple (X ↘ Spec (.of k)) M → IsAmple (J.subschemeι ≫ i ≫ X ↘ Spec (.of k)) ((Scheme.Modules.tensorPullback (J.subschemeι ≫ i)).obj M)) ∧ Scheme.Modules.intersectionNumber k X Z i d hdimZ L = Scheme.Modules.intersectionNumber k X J.subscheme (J.subschemeι ≫ i) (d - 1) hdimD (fun j : Fin (d - 1) ↦ L ⟨j.1 + 1, by omega⟩))",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-iec1333",
+  "group": "F1",
+  "result": "pass",
+  "note": "k field; X proper over k ([X.Over]+IsProper); Z nonempty, IsClosedImmersion i, dim Z=d>=1; L:Fin d invertible; D=J.subscheme with J.IsInvertible (affine-locally regular principal = effective Cartier), Nonempty; L1|Z=tensorPullback i ≅ dual J.toModules (O_Z(D)); hDim (dim D=d-1 ∨ AlgebraicGeometry.IsIntegral Z, #check); (a) IsProper of composite D→Z→X→Spec k + dim D=d-1 tied as proof argument; (b) IsAmple pulled back along composite; (c) intersectionNumber Z L = intersectionNumber D (L∘succ) matching F1 eadd37f6b and H1 TopDimensionalReductionIntersection form; d=1 Fin 0 edge; no lets, no new defs, node diff only adds lean record"
+ }
 }
