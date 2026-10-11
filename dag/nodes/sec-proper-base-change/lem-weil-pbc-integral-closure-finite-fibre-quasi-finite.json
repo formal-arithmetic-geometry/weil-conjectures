@@ -189,5 +189,24 @@
   "by": "L",
   "result": "accepted",
   "note": "7 steps write out Stacks' 'by looking at fibre rings' for 09XH: I in p, B/IB -> F = B tensor kappa(p), the prime Q over q via the fibre-ring bijection leaf, F/(1-e)F finite over kappa(p), finitely many maximal primes (leaf), {Q} open inside D(e). New definition node for 'quasi-finite at a prime' (00PL via 00PK(1); Mathlib's QuasiFiniteAt is defined via the localization and agrees only by a theorem, so not a leaf). Statement made precise (T defined as the image of Spec C_1; the unused tag 00PM dropped). Tags 09XH, 00PL, 00PK verified."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.FiniteQuotientComponentQuasiFinite",
+  "declaration": "Algebra.isQuasiFiniteAtPrime_of_finite_quotient_component",
+  "file": "lean/Sheaf/RingTheory/FiniteQuotientComponentQuasiFinite.lean",
+  "statement": "theorem isQuasiFiniteAtPrime_of_finite_quotient_component (A : Type u) (B : Type v) [CommRing A] [CommRing B] [Algebra A B] [Algebra.FiniteType A B] (I : Ideal A) (C₁ : Type w) (C₂ : Type z) [CommRing C₁] [CommRing C₂] [Algebra (A ⧸ I) C₁] [Module.Finite (A ⧸ I) C₁] (e : (B ⧸ I.map (algebraMap A B)) ≃+* C₁ × C₂) (hcompat : ∀ a : A, algebraMap (A ⧸ I) C₁ (Ideal.Quotient.mk I a) = (e (Ideal.Quotient.mk _ (algebraMap A B a))).1) : let π : B →+* C₁ := (RingHom.fst C₁ C₂).comp (e.toRingHom.comp (Ideal.Quotient.mk (I.map (algebraMap A B)))) let T : Set (PrimeSpectrum B) := Set.range (PrimeSpectrum.comap π) ∀ q : PrimeSpectrum B, q ∈ T → IsQuasiFiniteAtPrime A B q",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-icq1141"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-icq1141",
+  "group": "E1",
+  "result": "fix",
+  "note": "phi:A->B finite type; I, IB=I.map; B/IB = C1 x C2 as ring iso + hcompat pinning A/I-structure on C1 (Module.Finite), nothing on C2; pi = fst o e o mk; T = range comap pi; forall q in T, IsQuasiFiniteAtPrime A B q (recorded def, Fiber); edge cases I=top, C1=0 vacuous"
  }
 }
