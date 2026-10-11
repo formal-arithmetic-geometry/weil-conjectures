@@ -329,6 +329,35 @@ theorem nonempty_iso_derivedHom_rightDerivedLowerShriek
   have := isIso_projectionMap_of_finite Λ f
   exact ⟨((derivedHomRightDerivedLowerShriekIso _ f).app (op M)).app N⟩
 
+/-- Blueprint `sk-thm-sf-tensor-hom`: Tensor–Hom form of the exchange, natural in `M` and `N`
+and compatible with shifts.
+
+For a morphism `f : X ⟶ Y` admitting a compactification and torsion coefficients `Λ`, there is
+an isomorphism `Rf_* RHom_X(M, Rf^! N) ≅ RHom_Y(Rf_! M, N)` of bifunctors
+`D(X_ét, Λ)ᵒᵖ ⥤ D(Y_ét, Λ) ⥤ D(Y_ét, Λ)`, so natural in `M` and `N`, which commutes with the
+shifts in `N`. It is `AlgebraicGeometry.Etale.derivedHomRightDerivedLowerShriekIso`
+(`lem-sf-tensor-hom`) at `A = ModuleCat Λ`, the projection formula holding at finite
+coefficients (`AlgebraicGeometry.Etale.isIso_projectionMap_of_finite`); its compatibility with
+shifts is `AlgebraicGeometry.Etale.commShift_derivedHomRightDerivedLowerShriekIso_app_hom`. Its
+compatibility with changes of coefficients `Λ → Λ'` compatible with the projection map, such as
+finite reduction and scalar extension, is
+`AlgebraicGeometry.Etale.derivedHomRightDerivedLowerShriekIso_hom_app_comp_mateEquiv` at
+`A = ModuleCat Λ` and `A' = ModuleCat Λ'`. -/
+theorem exists_iso_derivedHom_rightDerivedLowerShriek_commShift :
+    ∃ e : RHom(X)[ModuleCat.{u + 1} Λ] ⋙
+        (Functor.whiskeringLeft _ _ _).obj R(f)^![ModuleCat.{u + 1} Λ] ⋙
+          (Functor.whiskeringRight _ _ _).obj R((f)_*[ModuleCat.{u + 1} Λ]) ≅
+        (R(f)_![ModuleCat.{u + 1} Λ]).op ⋙ RHom(Y)[ModuleCat.{u + 1} Λ],
+      ∀ M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)),
+        NatTrans.CommShift
+          (F₁ := (R(f)^![ModuleCat.{u + 1} Λ] ⋙ (RHom(X)[ModuleCat.{u + 1} Λ]).obj (op M)) ⋙
+            R((f)_*[ModuleCat.{u + 1} Λ]))
+          (F₂ := (RHom(Y)[ModuleCat.{u + 1} Λ]).obj (op ((R(f)_![ModuleCat.{u + 1} Λ]).obj M)))
+          (e.app (op M)).hom ℤ :=
+  have := isIso_projectionMap_of_finite Λ f
+  ⟨derivedHomRightDerivedLowerShriekIso _ f,
+    fun M ↦ commShift_derivedHomRightDerivedLowerShriekIso_app_hom _ f M⟩
+
 end TensorHom
 
 section VerdierExchange
