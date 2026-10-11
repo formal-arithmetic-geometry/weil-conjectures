@@ -13,7 +13,7 @@
  },
  "kind": "statement",
  "title": "Pullback preserves K-flat complexes",
- "statement": "Let $f:(X,\\mathcal O_X)\\to(Y,\\mathcal O_Y)$ be a morphism of ringed spaces, consisting of a continuous map $f:X\\to Y$ and a morphism of sheaves of rings $f^\\sharp:\\mathcal O_Y\\to f_*\\mathcal O_X$, with adjoint map $f^{-1}\\mathcal O_Y\\to\\mathcal O_X$. For a complex $K^\\bullet$ of $\\mathcal O_Y$-modules, let $f^*K^\\bullet$ be the termwise pullback $f^{-1}K^\\bullet\\otimes_{f^{-1}\\mathcal O_Y}\\mathcal O_X$ using inverse image [def-weil-pbc-topological-inverse-image] and sheaf tensor product [def-pur-sheaf-tensor-product]. If $K^\\bullet$ is K-flat [def-pc-kflat-complex], then $f^*K^\\bullet$ is K-flat over $\\mathcal O_X$.",
+ "statement": "Let $f:(X,\\mathcal O_X)\\to(Y,\\mathcal O_Y)$ be a morphism of ringed spaces, consisting of a continuous map $f:X\\to Y$ and a morphism of sheaves of rings $f^\\sharp:\\mathcal O_Y\\to f_*\\mathcal O_X$, with adjoint map $f^{-1}\\mathcal O_Y\\to\\mathcal O_X$. For a complex $K^\\bullet$ of $\\mathcal O_Y$-modules, let $f^*K^\\bullet$ be the termwise pullback $f^{-1}K^\\bullet\\otimes_{f^{-1}\\mathcal O_Y}\\mathcal O_X$ using inverse image [def-weil-pbc-topological-inverse-image] with its canonical module structure [def-pc-topological-inverse-image-module] and sheaf tensor product [def-pur-sheaf-tensor-product]. If $K^\\bullet$ is K-flat [def-pc-kflat-complex], then $f^*K^\\bullet$ is K-flat over $\\mathcal O_X$.",
  "source": {
   "document": "literature/stacks-project/cohomology.tex",
   "place": "Tag 06YC, Cohomology Lemma cohomology-lemma-pullback-K-flat"
@@ -21,7 +21,8 @@
  "stmt_deps": [
   "def-pc-kflat-complex",
   "def-weil-pbc-topological-inverse-image",
-  "def-pur-sheaf-tensor-product"
+  "def-pur-sheaf-tensor-product",
+  "def-pc-topological-inverse-image-module"
  ],
  "proof": [
   {
@@ -157,5 +158,85 @@
   "group": "C1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-kpp1836 (reviewer sub-agent of L); spot-checked: Item vs 06YC (general ringed-space morphism, termwise pullback); step 1 vs inverse-image stalk (abelian groups and rings) and change-of-rings tensor stalk statements; steps 2/4 use the two directions of new 06YB node; step 3 elementary 06Y1 base change (no flatness of A->B), 06Y1 warning fine as in-proof argument; no existing 06YB node in dag; no cycle: new node has only def-pc-kflat-complex as dep, not created from parent, no link to lem-pc-kflat-resolution; proof_deps match citations. No fault missed by second reading."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.KFlatPullback",
+  "declaration": "CochainComplex.isKFlat_pullback",
+  "file": "lean/Sheaf/Algebra/Homology/KFlatPullback.lean",
+  "statement": "theorem isKFlat_pullback {X Y : TopCat.{w}} (f : X ⟶ Y) (OX : Sheaf (Opens.grothendieckTopology X) CommRingCat.{w}) (OY : Sheaf (Opens.grothendieckTopology Y) CommRingCat.{w}) (φ : OY ⟶ ((Opens.map f).sheafPushforwardContinuous CommRingCat.{w} (Opens.grothendieckTopology Y) (Opens.grothendieckTopology X)).obj OX) (K : CochainComplex (SheafOfModules.{w} ((sheafCompose (Opens.grothendieckTopology Y) (forget₂ CommRingCat.{w} RingCat.{w})).obj OY)) ℤ) (hK : K.IsKFlat) : IsKFlat (R := OX) (tensorPullbackComplex f OX OY φ K)",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": false,
+  "note": "The complex is the termwise canonical module inverse image followed by sheafified sectionwise extension of scalars along the adjoint structure map. Its differentials use inverseImageModuleMap and changeOfRingsHom. No abstract module pullback or comparison theorem is used.",
+  "declarations": [
+   "CochainComplex.tensorPullbackRingMap",
+   "CochainComplex.tensorPullbackDifferential",
+   "CochainComplex.tensorPullbackDifferential_shape",
+   "CochainComplex.tensorPullbackDifferential_comp",
+   "CochainComplex.tensorPullbackComplex",
+   "CochainComplex.isKFlat_pullback"
+  ]
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-kpp1134",
+  "group": "F1",
+  "result": "pass",
+  "note": "return points repaired: terms changeOfRings(adjoint ring map f^-1OY->OX via sheafAdjunctionContinuous, same as H1) of recorded inverseImageModule, differentials inverseImageModuleMap+new changeOfRingsHom in def-pur-sheaf-tensor-product module (H13 ok), stmt_dep added by statement_change (H7 ok, 7 citers hold); binders X Y f OX OY phi(CommRingCat) K hK, IsKFlat both sides, unbounded Z, universe w, no extra hypotheses; no SheafOfModules.pullback",
+  "statement_corrected": true
+ },
+ "statement_change": {
+  "date": "2026-10-11",
+  "by": "F1 stage 2",
+  "old_statement": "Let $f:(X,\\mathcal O_X)\\to(Y,\\mathcal O_Y)$ be a morphism of ringed spaces, consisting of a continuous map $f:X\\to Y$ and a morphism of sheaves of rings $f^\\sharp:\\mathcal O_Y\\to f_*\\mathcal O_X$, with adjoint map $f^{-1}\\mathcal O_Y\\to\\mathcal O_X$. For a complex $K^\\bullet$ of $\\mathcal O_Y$-modules, let $f^*K^\\bullet$ be the termwise pullback $f^{-1}K^\\bullet\\otimes_{f^{-1}\\mathcal O_Y}\\mathcal O_X$ using inverse image [def-weil-pbc-topological-inverse-image] and sheaf tensor product [def-pur-sheaf-tensor-product]. If $K^\\bullet$ is K-flat [def-pc-kflat-complex], then $f^*K^\\bullet$ is K-flat over $\\mathcal O_X$.",
+  "what": "The inverse-image dependency supplied inverse image only for abelian sheaves and rings, not the canonical module action needed to type the tensor formula. Cite the canonical module inverse image from def-pc-topological-inverse-image-module explicitly; no mathematical hypothesis or conclusion changes.",
+  "source": {
+   "document": "literature/stacks-project/cohomology.tex",
+   "place": "Tag 06YC, Cohomology Lemma cohomology-lemma-pullback-K-flat"
+  },
+  "citers": [
+   {
+    "id": "lem-pc-derived-pullback-tensor-product",
+    "holds": true,
+    "note": "Only the canonical inverse-image module structure is made explicit; the termwise tensor pullback and preservation assertion are unchanged."
+   },
+   {
+    "id": "lem-pc-derived-tensor-localization-cohomology",
+    "holds": true,
+    "note": "Only the canonical inverse-image module structure is made explicit; the termwise tensor pullback and preservation assertion are unchanged."
+   },
+   {
+    "id": "lem-pc-proper-direct-image-finite-tor",
+    "holds": true,
+    "note": "Only the canonical inverse-image module structure is made explicit; the termwise tensor pullback and preservation assertion are unchanged."
+   },
+   {
+    "id": "lem-pc-ringed-spaces-derived-adjoint-general",
+    "holds": true,
+    "note": "Only the canonical inverse-image module structure is made explicit; the termwise tensor pullback and preservation assertion are unchanged."
+   },
+   {
+    "id": "lem-pc-affine-derived-pullback-tensor-tilde",
+    "holds": true,
+    "note": "Only the canonical inverse-image module structure is made explicit; the termwise tensor pullback and preservation assertion are unchanged."
+   },
+   {
+    "id": "lem-pc-ringed-spaces-derived-pullback-composition",
+    "holds": true,
+    "note": "Only the canonical inverse-image module structure is made explicit; the termwise tensor pullback and preservation assertion are unchanged."
+   },
+   {
+    "id": "def-pc-derived-pullback",
+    "holds": true,
+    "note": "Only the canonical inverse-image module structure is made explicit; the termwise tensor pullback and preservation assertion are unchanged."
+   }
+  ],
+  "old_stmt_deps": [
+   "def-pc-kflat-complex",
+   "def-weil-pbc-topological-inverse-image",
+   "def-pur-sheaf-tensor-product"
+  ]
  }
 }

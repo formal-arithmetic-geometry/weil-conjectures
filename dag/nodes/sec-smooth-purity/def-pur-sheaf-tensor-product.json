@@ -123,23 +123,24 @@
    "SheafOfModules.changeOfRings",
    "SheafOfModules.positiveTensorPower",
    "SheafOfModules.monoidalCategory",
-   "SheafOfModules.tensorObjIsoSheafification"
+   "SheafOfModules.tensorObjIsoSheafification",
+   "SheafOfModules.changeOfRingsHom_naturality",
+   "SheafOfModules.changeOfRingsHom"
   ],
   "file": "lean/Sheaf/Algebra/Category/ModuleCat/Sheaf/TensorProduct.lean",
   "statement": "def positiveTensorPower (R : Sheaf J CommRingCat.{u}) (M : SheafOfModules.{u} (𝓡 R)) : (n : ℕ) → 0 < n → SheafOfModules.{u} (𝓡 R)",
   "branch": "sheaf-dag",
-  "by": "C1",
+  "by": "F1",
   "date": "2026-10-11",
   "existing": false,
-  "note": "The tensor-product clause is the source's SheafOfModules.monoidalCategory R (M ⊗ N, identified with the sheafification of PresheafOfModules.Monoidal.tensorObj M.val N.val by the source's SheafOfModules.tensorObjIsoSheafification), available for a site C : Type u, Category.{u} C. New declarations: sectionwise change of rings (extendScalars sections, restriction from the named theorem exists_changeOfRingsMap, functor laws as named sorry theorems) and its sheafification, for a site in arbitrary universes; positive tensor powers built on the source tensor.",
-  "fixed_by": "R-stp0826"
+  "note": "The existing changeOfRings supplied only objects, so it could not act on the differentials of the termwise pullback complex. This dependency module retains the full tensor, change-of-rings and tensor-power definitions, and adds changeOfRingsHom, the sheafification of the sectionwise id tensor a maps, with its named naturality theorem."
  },
  "reviewed_lean": {
   "date": "2026-10-11",
   "by": "L",
-  "reviewer": "R-stp0826",
-  "group": "C1",
-  "result": "fix",
-  "note": "site (C, J + 3 sheafification instances; C : Type u for powers, general for change of rings), O = R : Sheaf J CommRingCat, F,G : SheafOfModules (𝓡 R); F ⊗ G = source monoidalCategory R (tensorObjIsoSheafification to sheafified tensorObj); change of rings = sheafification of X ↦ extendScalars α_X (M X), restriction s⊗m ↦ s|⊗m| via named theorem, map_id/map_comp named sorry theorems; powers: 0<n domain, 1 ↦ M, n+2 ↦ P(n+1) ⊗ M"
+  "reviewer": "R-kpp1134",
+  "group": "F1",
+  "result": "pass",
+  "note": "return points repaired: terms changeOfRings(adjoint ring map f^-1OY->OX via sheafAdjunctionContinuous, same as H1) of recorded inverseImageModule, differentials inverseImageModuleMap+new changeOfRingsHom in def-pur-sheaf-tensor-product module (H13 ok), stmt_dep added by statement_change (H7 ok, 7 citers hold); binders X Y f OX OY phi(CommRingCat) K hK, IsKFlat both sides, unbounded Z, universe w, no extra hypotheses; no SheafOfModules.pullback"
  }
 }
