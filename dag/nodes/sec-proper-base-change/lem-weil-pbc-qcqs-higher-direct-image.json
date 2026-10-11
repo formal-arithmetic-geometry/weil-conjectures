@@ -162,5 +162,25 @@
   "group": "M1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-qcqsR (reviewer sub-agent of L); spot-checked: Source: blueprint master sk-thm-iff/lem-weil-pbc-qcqs-higher-direct-image.md (Stacks 08BJ, 00WJ in its proof; same result as blueprint sbc-lem-higher-direct-image-presheaf = Stacks 03Q8, which holds for every morphism, so the qcqs hypothesis is harmless); statement unchanged. Step 1: def-weil-pbc-direct-image gives Ru_*K = Q(u_*I) for every K-injective resolution; Step 2: lem-weil-pbc-etale-inverse-image-restriction (j^{-1}G = G|_Y, Lean-closed), lem-weil-pbc-etale-restriction-injectives (j_! exact, j_! -| j^{-1}) and lem-weil-pbc-right-adjoint-preserves-kinjective (Lean-closed) give j^{-1}I K-injective; exactness of restriction follows in a line from j_! -| j^{-1} -| j_* in the cited statements; Step 3: def-weil-pbc-etale-cohomology + prop-weil-pbc-cohomology-resolution-independent + direct-image formula; Step 4: lem-weil-pbc-sheafification-exact, lem-weil-pbc-exact-functor-complex-cohomology on the abelian categories PAb, Ab, with C = (iota C)^# from the universal property of def-weil-pbc-sheafification; Step 5 combines. Fibre-product orientation W x_V U vs U x_V W checked (symmetry). Small cases: q=0 gives u_*F (already a sheaf); u=id gives 0 for q>0 by local vanishing; zero sheaf. slopmaster2 decls isIso_higherDirectImagePresheafToSheaf(_singleFunctor) checked with sorryfree.py: SORRY, so no attachment (B10 not applicable). FIX: dag/nodes/sec-proper-base-change/lem-weil-pbc-qcqs-higher-direct-image.json: proof[0].text, proof[0].uses, proof_deps: cite prop-weil-pbc-kinjective-resolutions-exist for the existence (and uniqueness up to homotopy) of K-injective resolutions as chain maps, which def-weil-pbc-direct-image does not state (it gives only K = QI in D); declared as tool use (sk-prop-cd, generic, cited by the blueprint proof itself). 14:19-14:22 UTC; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.QcqsHigherDirectImage",
+  "declaration": "AlgebraicGeometry.Etale.qcqs_higherDirectImage",
+  "file": "lean/Sheaf/AlgebraicGeometry/QcqsHigherDirectImage.lean",
+  "statement": "theorem qcqs_higherDirectImage {U V : Scheme.{u}} (f : U ⟶ V) [QuasiCompact f] [QuasiSeparated f] : (∀ (F : Sheaf U.smallEtaleTopology AddCommGrpCat.{u + 1}) (q : ℕ), Nonempty ((presheafToSheaf V.smallEtaleTopology AddCommGrpCat.{u + 1}).obj ((MorphismProperty.Over.pullback @Etale ⊤ f).op ⋙ { obj := fun Z ↦ ((sheafToPresheaf U.smallEtaleTopology AddCommGrpCat.{u + 1} ⋙ (evaluation U.Etaleᵒᵖ AddCommGrpCat.{u + 1}).obj Z).rightDerived q).obj F map := fun g ↦ (NatTrans.rightDerived (Functor.whiskerLeft (sheafToPresheaf U.smallEtaleTopology AddCommGrpCat.{u + 1}) ((evaluation U.Etaleᵒᵖ AddCommGrpCat.{u + 1}).map g)) q).app F map_id := fun Z ↦ by simp only [CategoryTheory.Functor.map_id, Functor.whiskerLeft_id', NatTrans.rightDerived_id, NatTrans.id_app] map_comp := fun g h ↦ by simp only [CategoryTheory.Functor.map_comp, Functor.whiskerLeft_comp, NatTrans.rightDerived_comp, NatTrans.comp_app] }) ≅ (DerivedCategory.Plus.homologyFunctor (Sheaf V.smallEtaleTopology AddCommGrpCat.{u + 1}) (q : ℤ)).obj ((rightDerivedLowerStarPlus AddCommGrpCat.{u + 1} f).obj ((DerivedCategory.Plus.singleFunctor (Sheaf U.smallEtaleTopology AddCommGrpCat.{u + 1}) 0).obj F)))) ∧ ∀ (K : DerivedCategory.Plus (Sheaf U.smallEtaleTopology AddCommGrpCat.{u + 1})) (I : CochainComplex (Sheaf U.smallEtaleTopology AddCommGrpCat.{u + 1}) ℤ), I.IsKInjective → Nonempty (DerivedCategory.Q.obj I ≅ K.obj) → ∀ q : ℤ, Nonempty ((presheafToSheaf V.smallEtaleTopology AddCommGrpCat.{u + 1}).obj ((MorphismProperty.Over.pullback @Etale ⊤ f).op ⋙ (((sheafToPresheaf U.smallEtaleTopology AddCommGrpCat.{u + 1}).mapHomologicalComplex (ComplexShape.up ℤ)).obj I).homology q) ≅ (DerivedCategory.Plus.homologyFunctor (Sheaf V.smallEtaleTopology AddCommGrpCat.{u + 1}) q).obj ((rightDerivedLowerStarPlus AddCommGrpCat.{u + 1} f).obj K))",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-11",
+  "existing": false,
+  "note": "Abelian-sheaf statement: the nonnegative-degree sheaf clause, with the cohomology presheaf in the landed form of AlgebraicGeometry.higherDirectImageSheafifiedPresheaf (right derived evaluation, derived restriction maps), and the all-degree bounded-below clause H^q(Ru_*K) = sheafified sectionwise H^q of any K-injective representative I. No new notion is defined.",
+  "fixed_by": "R-qhd1430"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-qhd1430",
+  "group": "C1",
+  "result": "fix",
+  "note": "u qcqs = [QuasiCompact f][QuasiSeparated f]; F : Sheaf U_Et Ab, q:N; R^q u_*F = Plus.homology q of rightDerivedLowerStarPlus (F[0]); presheaf W -> H^q(W x_V U,F) in landed higherDirectImageSheafifiedPresheaf form, sheafified by presheafToSheaf; D+ clause: all K, any K-injective I with Q I = K, all q:Z, sheafified sectionwise H^q(I(W x_V U)) = H^q(Ru_*K); extra Q(u_*I)=Ru_*K clause (definition formula, not in node) removed"
  }
 }
