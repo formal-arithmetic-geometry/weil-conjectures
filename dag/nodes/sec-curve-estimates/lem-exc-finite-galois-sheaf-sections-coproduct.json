@@ -113,5 +113,23 @@
   "group": "J1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-gsc1832 (reviewer sub-agent of L); spot-checked: Packet read whole. No cycle: item deps are pbc nodes only; parent tensor-decomposition and sections-descent cite it, it cites neither. Statement over general S specializes to Spec L used by parent. C1/C4 ok (coproduct-family gives open disjoint covering coprojections; etale-sheaf def gives equalizer). Mathlib grep ExtensiveSheaves.lean: isSheaf_iff_preservesFiniteProducts is for the extensive topology on an abstract extensive category, not the small etale site of a scheme; no leaf. FIX more, RETURN less: (1) proof gap missed by second reading: equalizer includes diagonal terms i=k, which the proof ignored; added that open immersions are monomorphisms so the two projections X_i x_X X_i -> X_i coincide; (2) named Stacks Tag 02GP for open immersions being etale in the elementary Step 1; (3) preflight B4: plain arrows/text math in steps 1-2 rewritten in TeX. created.item left as the maintainer's field.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.Sites.FiniteEtaleCoproductSections",
+  "declaration": "AlgebraicGeometry.Scheme.finiteEtaleCoproductSections",
+  "file": "lean/Sheaf/AlgebraicGeometry/Sites/FiniteEtaleCoproductSections.lean",
+  "statement": "theorem finiteEtaleCoproductSections (S : Scheme.{u}) (F : Sheaf S.smallEtaleTopology (Type v)) {I : Type w} [Finite I] (X : S.Etale) (Xi : I → S.Etale) (j : ∀ i, Xi i ⟶ X) (hopenclosed : ∀ i, IsOpenImmersion (j i).left ∧ IsClosedImmersion (j i).left) (hcop : IsColimit (Cofan.mk X j)) (hoverlap : ∀ ⦃i k : I⦄, i ≠ k → IsInitial (pullback (j i) (j k))) (hempty : ∀ (e : S.Etale), IsInitial e → Nonempty (F.obj.obj (op e)) ∧ Subsingleton (F.obj.obj (op e))) : Sieve.ofArrows Xi j ∈ S.smallEtaleTopology X ∧ ∃ e : F.obj.obj (op X) ≃ (∀ i, F.obj.obj (op (Xi i))), ∀ (s : F.obj.obj (op X)) (i : I), e s i = F.obj.map (j i).op s",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-fgs0900",
+  "group": "C1",
+  "result": "pass",
+  "note": "Packet read whole. Matched: S arbitrary scheme; F Mathlib Sheaf on smallEtaleTopology to Type v (sets); finite I (Type w); X, Xi, j in S.Etale; hopenclosed = open-and-closed coprojections; hcop IsColimit Cofan = coproduct (finite coproducts of etale S-schemes are etale, so site coproduct = scheme coproduct); hoverlap IsInitial of S.Etale pullback = empty scheme fibre product for i != k; hempty = F(empty) singleton, iso-invariant; conclusion covering sieve (ofArrows_mem_smallEtaleTopology_iff) and Equiv with e s i = restriction along j i (inverse = unique gluing, i-th projection). Empty I ok. Docstring carries both proof steps incl. diagonal terms; header, tag, lines<=100, no Sheaf prefix, proof sorry. H4: Mathlib Presieve.preservesProduct_of_isSheafFor / BigZariski preservesLimitsOfShape_discrete_of_isSheaf_zariskiTopology and upstream Etale.isIso_piLift_of_disjoint are proof inputs, not this statement."
  }
 }
