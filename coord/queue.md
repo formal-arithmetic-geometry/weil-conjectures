@@ -1,11 +1,11 @@
 # Work queue
 
-541 items; claim with `tools/claim.py next <group> [--stage N]`.
+538 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (541)
+## Stage 2: nodes to state (538)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -73,14 +73,12 @@
 | `lem-weil-pbc-higher-direct-image-sheafified-presheaf` | 1 | state |
 | `lem-weil-pbc-ideal-module-product-stalk` | 1 | state |
 | `lem-weil-pbc-integral-closure-finite-fibre-choose-g` | 1 | state |
-| `lem-weil-pbc-integral-closure-finite-fibre-image-clopen` | 1 | state |
 | `lem-weil-pbc-integral-closure-finite-fibre-quasi-finite` | 1 | state |
 | `lem-weil-pbc-inverse-image-stalk-germ` | 1 | state |
 | `lem-weil-pbc-jacobi-zariski-connecting-map-naturality` | 1 | state |
 | `lem-weil-pbc-jacobi-zariski-quotient-smooth` | 1 | state |
 | `lem-weil-pbc-kahler-differentials-mod-power-ideal` | 1 | state |
 | `lem-weil-pbc-koszul-differential` | 1 | state |
-| `lem-weil-pbc-lft-over-field-isolated-point-residue-finite` | 1 | state |
 | `lem-weil-pbc-lift-idempotent-upstairs` | 1 | state |
 | `lem-weil-pbc-lift-projective-module-etale` | 1 | state |
 | `lem-weil-pbc-limit-finite-presentation` | 1 | state |
@@ -88,7 +86,6 @@
 | `lem-weil-pbc-limit-module-finite-presentation` | 1 | state |
 | `lem-weil-pbc-limit-residue-field` | 1 | state |
 | `lem-weil-pbc-limit-tower-essentially-finite-presentation` | 1 | state |
-| `lem-weil-pbc-linear-equation-localization-polynomial` | 1 | state |
 | `lem-weil-pbc-lisse-generic-kernel` | 1 | state |
 | `lem-weil-pbc-local-artinian-basis-when-flat` | 1 | state |
 | `lem-weil-pbc-local-dimension-zero-henselian` | 1 | state |
