@@ -23,9 +23,52 @@
   "def-weil-finite-integral-morphism",
   "lem-weil-pbc-fibre-product-affine-spectra"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let $\\mathfrak p\\subset A$ be the prime of $s$, so $A_s=A_{\\mathfrak p}=\\mathcal O_{V,s}$. By [lem-weil-pbc-spec-tilde-free-module] with $R=B$ and $n=1$, $\\mathcal O_X\\cong\\widetilde B$ as $\\mathcal O_X$-modules. By [lem-weil-pbc-pushforward-tilde-spec] applied to $\\varphi:A\\to B$ and $N=B$, $f_*\\mathcal O_X\\cong f_*\\widetilde B\\cong\\widetilde{B_A}$, where $B_A$ is $B$ viewed as an $A$-module. By [lem-weil-pbc-spec-tilde-stalk-localization] with $R=A$, $M=B_A$, the stalk is $(f_*\\mathcal O_X)_s\\cong(B_A)_{\\mathfrak p}$ as an $A_{\\mathfrak p}$-module, and $(B_A)_{\\mathfrak p}\\cong B\\otimes_AA_{\\mathfrak p}$ (elementary). Finiteness of $B$ over $A$ is not used here or below: the identity holds for every $A$-algebra $B$; the hypothesis is kept for the citer lem-pc-flf-properties.",
+   "uses": [
+    "lem-weil-pbc-spec-tilde-free-module",
+    "lem-weil-pbc-pushforward-tilde-spec",
+    "lem-weil-pbc-spec-tilde-stalk-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02KB, affine calculation in lemma-finite-flat"
+   }
+  },
+  {
+   "text": "By the definition of the residue field, $\\kappa(s)=A_s/\\mathfrak m_sA_s$. Tensoring the quotient presentation with $B$ identifies $B\\otimes_A\\kappa(s)$ with $(B\\otimes_AA_s)\\otimes_{A_s}A_s/\\mathfrak m_sA_s$, so the stalk tensor in the statement is canonically $B\\otimes_A\\kappa(s)$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02KB, affine calculation in lemma-finite-flat"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-fibre-product-affine-spectra] with $R=A$, $B$ as the first $A$-algebra, and $\\kappa(s)$ as the second. It identifies $X\\times_V\\operatorname{Spec}\\kappa(s)$ with $\\operatorname{Spec}(B\\otimes_A\\kappa(s))$, and its final clause identifies the global sections of this affine fibre with $B\\otimes_A\\kappa(s)$. Under these identifications, the canonical map is the identity of this tensor product, hence an isomorphism.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02KB, affine calculation in lemma-finite-flat"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-spec-tilde-free-module",
+  "lem-weil-pbc-pushforward-tilde-spec",
+  "lem-weil-pbc-spec-tilde-stalk-localization",
+  "lem-weil-pbc-fibre-product-affine-spectra"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 02KB (lemma-finite-flat), affine calculation"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -57,12 +100,28 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pc-flf-properties",
   "by": "worker",
   "date": "2026-10-11"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-the-hilbert-functor--definition-1"
+ "unit": "sk-the-hilbert-functor--definition-1",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-finite-affine-fibre-sections",
+  "worker": "stage1",
+  "summary": "Split the affine fibre calculation into the stalk localization, residue-field tensor identification, and affine fibre-product global-sections steps. No new nodes were needed; the existing affine fibre-product statement supplies the sole non-elementary structural input.",
+  "blueprint": "Realizes the parent blueprint proof step: affine calculation identifies the fibre sections with the residue-field tensor product.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-ffs0029",
+  "group": "M1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ffs0029 (reviewer sub-agent of L); spot-checked: Read packet whole; step 3 matches lem-weil-pbc-fibre-product-affine-spectra (R=A, factors B, kappa(s)); step 2 elementary; no duplicate (grep fibre-sections/affine-base-change-sections: only item and citer lem-pc-flf-properties, whose step 2 uses exactly this); Mathlib grep Fiber.lean has fiber/fiberToSpecResidueField but no sections iso. FIX more, RETURN less: C1 step 1 marked elementary but used O_SpecB = B~, f_* B~ = (B_A)~ and stalk of tilde = localization; now cites lem-weil-pbc-spec-tilde-free-module (n=1), lem-weil-pbc-pushforward-tilde-spec, lem-weil-pbc-spec-tilde-stalk-localization, elementary false, proof_deps updated; C4 note: finiteness unused, kept for citer. Second reading by M1 missed this C1.; 1 file(s) fixed by the reviewer"
+ }
 }
