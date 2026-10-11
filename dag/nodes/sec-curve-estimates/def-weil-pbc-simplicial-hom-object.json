@@ -115,5 +115,31 @@
   "summary": "Read Stacks simplicial.tex 017H/017I/017J/017K and categories.tex 001Q. Definition split: the statement now names every notion it is built from: the small etale site (def-weil-pbc-etale-site, for T and {T}), SR(X), its T-points and simplicial objects of SR(X) (def-weil-pbc-semi-representable-object), Delta, simplicial sets, nondegenerate simplices and simplicial subsets (def-weil-pbc-simplicial-set, Mathlib leaf), and the new Mathlib leaf def-weil-pbc-representing-object (object representing a presheaf of sets with universal object, Stacks 001Q; CategoryTheory.Functor.IsRepresentedBy). The functor of S-families is written out (functoriality by composition), Hom(S,K)_0 is any pair representing it (Stacks 017I: 'we denote Hom(U,V) any ...'), existence is taken by name from lem-weil-pbc-simplicial-hom-object-exists (017K). Changes to the statement: removed the parenthetical claim that S-families are the morphisms of simplicial objects W x S -> K (it is the first paragraph of the proof of 017J, needs coproducts in SR(X), and no citer uses it) and the claim 'unique up to unique isomorphism' (a claim inside a definition, not used by the citers); the restriction morphism now says why (u^S_s)_{s in A} is an A-family and that rho exists uniquely by the universal property of Hom(A,K)_0. No slopmaster2 Lean exists for this notion.",
   "blueprint": "The definition serves lem-weil-pbc-hypercover-refinement, proof, fourth paragraph ('Previously chosen faces prescribe compatible boundaries; the matching covers of U lift those boundaries after finite refinement'): Hom(S,K)_0 is the object of compatible boundary data on a finite simplicial set S, its T-points are the compatible boundaries, and the restriction morphism Hom(B,K)_0 -> Hom(A,K)_0 is the map from lifts to boundaries that lem-weil-pbc-hypercover-finite-simplex-lifting shows is a covering."
  },
- "reviewed": "2026-10-10 L: definition split: S-families and the represented functor written out, the existence claim cited to its lemma, two unproved claims removed from the definition; new Mathlib leaf for representing objects; 1 new node"
+ "reviewed": "2026-10-10 L: definition split: S-families and the represented functor written out, the existence claim cited to its lemma, two unproved claims removed from the definition; new Mathlib leaf for representing objects; 1 new node",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SimplicialHomObject",
+  "declaration": "AlgebraicGeometry.Scheme.simplicialHomFamilyFunctor",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.SimplicialHomFamily",
+   "AlgebraicGeometry.Scheme.SimplicialHomFamily.precomp_compatible",
+   "AlgebraicGeometry.Scheme.SimplicialHomFamily.precomp",
+   "AlgebraicGeometry.Scheme.simplicialHomFamilyFunctor",
+   "AlgebraicGeometry.Scheme.SimplicialHomFamily.restrict",
+   "AlgebraicGeometry.Scheme.simplicialHomRestriction"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SimplicialHomObject.lean",
+  "statement": "def simplicialHomFamilyFunctor {X : Scheme.{u}} (K : SimplicialObject (FormalCoproduct.{w} X.Etale)) (S : SSet.{t}) : (FormalCoproduct.{w} X.Etale)ᵒᵖ ⥤ Type (max u w t)",
+  "branch": "sheaf-dag",
+  "by": "N1",
+  "date": "2026-10-12",
+  "existing": false,
+  "fixed_by": "R-sho"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-sho",
+  "group": "N1",
+  "result": "fix"
+ }
 }
