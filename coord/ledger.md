@@ -3195,3 +3195,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 01:02 UTC L: C1 left-derived-defined-pointwise-kan-bridge FIX 10cc24e42 (R-pkb0100; restated for any right multiplicative system, Tag 04VC inline).
 - 01:02 UTC L: G1 ce-compatible-homotopy-assembly FIX 0d4babda8 (R-cha0101; section from J_Z injective); split_report.item restored by L after the reviewer's sed slip.
 - 01:05 L: merged deliver/K1/lem-pur-kinjective-characterize-K-injective (reviewer PASS; after a return; new nodes: 2)
+- 01:06 UTC L: K1 kinjective-characterize-K-injective PASS 7e61b05ae re-push (R-cki0105).
