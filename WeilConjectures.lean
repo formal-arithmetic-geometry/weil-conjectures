@@ -461,6 +461,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Unit
 public import WeilConjectures.CategoryTheory.DerivedCategory.Perfect
 public import WeilConjectures.CategoryTheory.DerivedCategory.Perfect.Dualizable
 public import WeilConjectures.CategoryTheory.DerivedCategory.PerfectTrace
+public import WeilConjectures.CategoryTheory.DerivedCategory.ProjectiveUnit
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Additive
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Adjunction
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
@@ -1366,6 +1367,7 @@ public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.ProjectiveLin
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.Proper
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.TorsionSheaf
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.UnderivedExchange
+public import WeilConjectures.SixFunctors.Etale.Derived.AlgClosedField
 public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
 public import WeilConjectures.SixFunctors.Etale.Derived.CoefficientsShift
 public import WeilConjectures.SixFunctors.Etale.Derived.Composition
@@ -1551,6 +1553,7 @@ public import WeilConjectures.SixFunctors.ProEtale.Adic.Truncation
 public import WeilConjectures.SixFunctors.ProEtale.Adic.UnitMatrix
 public import WeilConjectures.SixFunctors.ProEtale.Adic.UnitSection
 public import WeilConjectures.SixFunctors.ProEtale.Adic.UpperStar
+public import WeilConjectures.SixFunctors.ProEtale.AlgClosedFieldSite
 public import WeilConjectures.SixFunctors.ProEtale.BaseChange.WeaklyEtale
 public import WeilConjectures.SixFunctors.ProEtale.Comparison
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.Continuity
@@ -1559,6 +1562,7 @@ public import WeilConjectures.SixFunctors.ProEtale.Comparison.FullyFaithful
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.LowerStar
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.LowerStarAcyclic
 public import WeilConjectures.SixFunctors.ProEtale.ConstructibleSheaf
+public import WeilConjectures.SixFunctors.ProEtale.Derived.AlgClosedField
 public import WeilConjectures.SixFunctors.ProEtale.Derived.ClopenIdempotent
 public import WeilConjectures.SixFunctors.ProEtale.Derived.Comparison
 public import WeilConjectures.SixFunctors.ProEtale.Derived.Constructible
@@ -1584,6 +1588,7 @@ public import WeilConjectures.SixFunctors.ProEtale.Derived.UpperStarMonoidal.Com
 public import WeilConjectures.SixFunctors.ProEtale.Derived.UpperStarMonoidal.Derived
 public import WeilConjectures.SixFunctors.ProEtale.Derived.UpperStarMonoidal.KFlat
 public import WeilConjectures.SixFunctors.ProEtale.Derived.UpperStarMonoidal.Vanishing
+public import WeilConjectures.SixFunctors.ProEtale.Derived.WeilComplex
 public import WeilConjectures.SixFunctors.ProEtale.ExceptionalAdjoint
 public import WeilConjectures.SixFunctors.ProEtale.GeometricFrobenius
 public import WeilConjectures.SixFunctors.ProEtale.LowerShriek.Comparison
