@@ -179,5 +179,23 @@
   "summary": "Split following the proof of Stacks 00MN (algebra.tex 23888--23919, tag verified in tags/tags). Step 1 base-changes the free R-resolution (freeness of the base change: new Mathlib leaf lem-weil-pbc-free-module-base-change-free; right exactness; the cancellation (F⊗_R A)⊗_A P ≅ F⊗_R P identifying the source complex). Step 2 writes out the source's resolution F_2'⊕F_2''→F_1'→F_0'→M'→0, continued in all degrees by an explicit induction. Step 3 is the source's 'clearly induces a surjection': same 1-cycles, more boundaries. Steps 4--5 are not in the source, which uses one particular resolution: since the node's statement allows any free resolution G and any lift, φ is extended to a lift a: G'→G of id_N with a∘j=φ, and lem-weil-pbc-tor-map-via-resolution-lift makes H_1(a⊗1) an isomorphism. No homotopy argument is needed. The hypothesis J=IA is not used (true for any A-module P). Statement unchanged.",
   "blueprint": "The item's blueprint ancestor thm-weil-pbc-finite-etale-lifting is served at its from.place (step 7 of its split, Lemma 0GS2, essential surjectivity, through the via chain down to the 00MO flatness criterion lem-weil-pbc-flat-another-variant-local-criterion, whose Tor-surjectivity step uses this node); the five steps realize the 00MN surjectivity used there, the blueprint proof itself having no finer text for it."
  },
- "reviewed": "2026-10-10 L: 5 steps following 00MN (base change of the free resolution, the resolution F' + E built in every degree, surjectivity on H_1 by the common cycles, the lift to an arbitrary resolution (worker's addition), conclusion by the Tor-via-lift node); 1 new Mathlib leaf (Basis.baseChange, line read)"
+ "reviewed": "2026-10-10 L: 5 steps following 00MN (base change of the free resolution, the resolution F' + E built in every degree, surjectivity on H_1 by the common cycles, the lift to an arbitrary resolution (worker's addition), conclusion by the Tor-via-lift node); 1 new Mathlib leaf (Basis.baseChange, line read)",
+ "lean": {
+  "module": "Sheaf.Algebra.TorOneSurjectiveChangeRings",
+  "declaration": "CategoryTheory.tor_one_change_of_rings_surjective",
+  "statement": "theorem tor_one_change_of_rings_surjective (R A : Type u) [CommRing R] [CommRing A] (f : R →+* A) (I : Ideal R) (M : ModuleCat.{u} R) (F : ProjectiveResolution M) (hF : ∀ i : ℕ, Module.Free R (F.complex.X i)) (G : ProjectiveResolution ((ModuleCat.extendScalars f).obj M)) (hG : ∀ i : ℕ, Module.Free A (G.complex.X i)) (φ : ((ModuleCat.extendScalars f).mapHomologicalComplex (ComplexShape.down ℕ)).obj F.complex ⟶ G.complex) (hφ : φ.f 0 ≫ G.π.f 0 = (ModuleCat.extendScalars f).map (F.π.f 0)) : Function.Surjective ((HomologicalComplex.homologyFunctor (ModuleCat.{u} A) (ComplexShape.down ℕ) 1).map ((((MonoidalCategory.tensoringRight (ModuleCat.{u} A)).obj (ModuleCat.of A (A ⧸ I.map f))).mapHomologicalComplex (ComplexShape.down ℕ)).map φ))",
+  "by": "E1",
+  "date": "2026-10-11",
+  "file": "lean/Sheaf/Algebra/TorOneSurjectiveChangeRings.lean",
+  "branch": "sheaf-dag",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "E1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ }
 }

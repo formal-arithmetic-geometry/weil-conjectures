@@ -5157,3 +5157,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 15:10 L: merged deliver/V1/lemma-weil-pbc-torsion-filtered-union (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.TorsionFilteredUnion AlgebraicGeometry.Scheme.isTorsionAbelianSheaf_of_isTorsion)
 - 15:11 L: merged deliver/E1/lem-pc-sigma-k-points (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.Picard.SigmaKPoints AlgebraicGeometry.bijective_picardFunctorNormalized_kPoints)
 - 15:11 L: merged deliver/E1/lem-pc-sites-modules-coproduct-flat (stage 2; reviewer PASS; first push; Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatCoproduct SheafOfModules.isFlat_coproduct)
+- 15:11 L: merged deliver/E1/lem-weil-pbc-tor-one-surjective-change-rings (stage 2; reviewer PASS; first push; Sheaf.Algebra.TorOneSurjectiveChangeRings CategoryTheory.tor_one_change_of_rings_surjective)
