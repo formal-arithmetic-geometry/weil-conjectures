@@ -367,6 +367,12 @@ between the two sides that is defined on `X`. The routes that were tried:
   (compatible with evaluation by `ihomComparison_ev`): it is the mate of the tensorator and is
   invertible only if `Lu^*` satisfies a projection formula with a left adjoint `Ru_!`, known in
   the library only for open immersions, which are never surjective étale covers in general;
+* clause 1 does descend for dualizable objects
+  (`AlgebraicGeometry.Etale.isInvertible_of_isInvertible_leftDerivedUpperStar`): the image of
+  the duality is exact and its coevaluation is invertible. But dualizability of `ω_f` itself
+  would have to descend through `MonoidalClosed.exactPairingOfIsIso`, i.e. through the
+  invertibility of `RHom(L, Λ) ⊗ᴸ L ⟶ RHom(L, L)`, which again needs `Lu^*` to commute with
+  `RHom`;
 * the split case is proved: if `u` has a section that is an open and closed immersion,
   `f = s ≫ (u ≫ f)` is a composite of cohomologically smooth morphisms
   (`AlgebraicGeometry.Etale.IsCohomologicallySmooth.of_comp_of_section`); a general étale
