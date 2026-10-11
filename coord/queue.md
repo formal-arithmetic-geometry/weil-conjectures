@@ -2,7 +2,7 @@
 
 869 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (27)
+## Stage 1: nodes to split (26)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -27,14 +27,13 @@
 | `lem-pc-finite-projective-cokernel-localization` | 6017 | none |
 | `lem-sc-base-change-curve` | - | none |
 | `lem-sc-global-functions` | - | rests_on_sorry |
-| `lem-pur-kinjective-ML-ordinals` | - | none |
 | `def-pur-saturated-triangulated-localization` | - | none |
 | `lem-pur-derived-functor-inverts-05sb` | - | none |
 | `lem-pur-derived-functor-morphisms-05sa` | - | none |
 | `lem-pur-derived-functor-shift-05su` | - | none |
 | `lem-pur-derived-functor-triangles-05sc` | - | none |
 
-## Stage 2: nodes to state (842)
+## Stage 2: nodes to state (843)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -216,6 +215,7 @@
 | `lem-pod-equivalence-induces-module-objects` | 1 | state |
 | `lem-pod-lisse-tensor-and-scalar-extension` | 1 | state |
 | `lem-pqf-finite-spectrum-maximal-primes` | 1 | state |
+| `lem-pur-kinjective-ML-ordinals` | 1 | state |
 | `lem-pur-kinjective-characterize-K-injective` | 1 | state |
 | `lem-pur-kinjective-characterize-injective` | 1 | state |
 | `lem-pur-kinjective-degreewise-existence` | 1 | state |
@@ -881,7 +881,7 @@
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 1759 nodes that wait for a statement dependency, 68 nodes that wait for stage 1.
+Not open yet: 1759 nodes that wait for a statement dependency, 67 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
