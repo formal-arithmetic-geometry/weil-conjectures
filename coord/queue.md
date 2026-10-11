@@ -1,11 +1,11 @@
 # Work queue
 
-465 items; claim with `tools/claim.py next <group> [--stage N]`.
+463 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (465)
+## Stage 2: nodes to state (463)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -74,14 +74,12 @@
 | `lem-sc-perfect-jump-loci` | 1 | state |
 | `lem-sc-perfect-support-map-lift` | 1 | state |
 | `lem-sc-picard-kunneth-qcoh` | 1 | state |
-| `lem-sc-pseudo-coherent-qcoh` | 1 | state |
 | `lem-sc-pseudo-coherent-support-annihilation` | 1 | state |
 | `lem-sc-valuation-limit-affine-pushforward-colimit` | 1 | state |
 | `lem-sc-valuation-proper-coherent-higher-direct-images` | 1 | state |
 | `lem-weil-derived-limit-roos-complex` | 1 | state |
 | `lem-weil-pbc-closed-immersion-conormal-functorial` | 1 | state |
 | `lem-weil-pbc-pair-henselization` | 1 | state |
-| `lem-weil-pbc-polynomial-ideal-coefficients-monomial` | 1 | state |
 | `lem-weil-pbc-popescu-desingularize-lifting-apply` | 1 | state |
 | `lem-weil-pbc-popescu-enlarge-solution-modulo` | 1 | state |
 | `lem-weil-pbc-popescu-lift-nilpotent` | 1 | state |
