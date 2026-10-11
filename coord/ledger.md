@@ -4143,3 +4143,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 10:04 L: merged deliver/F1/lem-weil-pbc-etale-sheaf-clopen-product (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.EtaleSheafClopenProduct AlgebraicGeometry.Etale.sheaf_clopen_product)
 - 10:04 L: merged deliver/M1/lem-weil-pbc-cotangent-complex-symmetric-algebra (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.CotangentComplexSymmetricAlgebra AlgebraicGeometry.cotangentComplex_symmetricAlgebra)
 - 10:04 L: merged deliver/M1/lem-weil-pbc-etale-local-ring-triples (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.EtaleLocalRingTriples AlgebraicGeometry.Scheme.etale_local_ring_triples; new nodes: def-weil-pbc-etale-residue-triples)
+- 10:04 L: merged deliver/C1/lem-weil-pbc-etale-subsheaf-final-open (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.EtaleSubsheafFinalOpen AlgebraicGeometry.Scheme.existsUnique_open_of_etale_subsheaf_final)

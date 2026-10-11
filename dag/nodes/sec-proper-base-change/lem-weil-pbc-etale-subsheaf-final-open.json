@@ -120,5 +120,24 @@
   "group": "F1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-sfo1756 (reviewer sub-agent of L); spot-checked: No cycle: sections-equal-open appears only in blueprint.from.via and created.item, not in uses/proof_deps/stmt_deps. Step1 union of etale images open via etale-open-map; Step2 cover V by V x_S U (etale, H nonempty by restriction), glue subsingleton sections by sheaf equalizer; Step3 uniqueness by testing open immersions, stalk criterion from pointed neighbourhoods (x in W gives (W,xbar) with H(W) singleton; conversely image of U contains x), filtered colimit of subsingletons is subsingleton. Matches Tag 04HV. No new nodes. Second reading missed no fault."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleSubsheafFinalOpen",
+  "declaration": "AlgebraicGeometry.Scheme.existsUnique_open_of_etale_subsheaf_final",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleSubsheafFinalOpen.lean",
+  "statement": "theorem existsUnique_open_of_etale_subsheaf_final (S : Scheme.{u}) (H : Sheaf S.smallEtaleTopology (Type (max u v))) [Mono (terminal.from H)] : ∃! W : S.Opens, (∀ U : S.Etale, (Nonempty (Unique (H.obj.obj (op U))) ↔ ∃ f : U.left ⟶ W.toScheme, f ≫ W.ι = U.hom) ∧ ((¬ ∃ f : U.left ⟶ W.toScheme, f ≫ W.ι = U.hom) → IsEmpty (H.obj.obj (op U)))) ∧ (∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (x : Spec (.of Ω) ⟶ S), (x default ∈ W ↔ Nonempty ((pointSmallEtale x).sheafFiber.obj H)) ∧ (Nonempty ((pointSmallEtale x).sheafFiber.obj H) ↔ Nonempty (Unique ((pointSmallEtale x).sheafFiber.obj H))))",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-esf1003"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-esf1003",
+  "group": "C1",
+  "result": "fix",
+  "note": "S Scheme.{u}; H sheaf of sets on S.smallEtaleTopology; subsheaf of final sheaf -> [Mono (terminal.from H)] (fixed from Subsingleton sections); ∃! W : S.Opens; ∀ U : S.Etale singleton iff factors through W.ι, empty otherwise; geometric points Ω alg closed, x default ∈ W iff sheafFiber of pointSmallEtale nonempty iff singleton; edge cases empty S/empty U/W=⊥,⊤"
  }
 }
