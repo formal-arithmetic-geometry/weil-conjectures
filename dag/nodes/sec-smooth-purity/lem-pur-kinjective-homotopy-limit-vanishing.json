@@ -113,5 +113,25 @@
   "group": "H1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-hlv0127 (reviewer sub-agent of L); spot-checked: Child lem-pur-kinjective-ML-ordinals matches homology.tex 7861-7872 (ordinal, acyclic stages, surjection onto lim_{gamma<beta}, acyclic limit); no duplicate (mittag-leffler nodes are countable towers); citer 7e61b05ae step uses exactly this statement; counterexample ((1/n!)Z, Q->Q/Z) now violates hypothesis (Hom_K(K_n[1],I)=Z). FIX more, RETURN less: (1) C4/E shift sign: Step 1 said degree-n cocycles are chain maps K[n]->I; with (K[1])^r=K^{r+1} they are chain maps K[-n]->I, H^n(Hom^.)=Hom_K(K[-n],I) - corrected (harmless as n ranges over Z); Hom complex defined inline since def-pur-hom-complex is for sheaves on a site; (2) Step 1 surjectivity argument made explicit for beta=0/successor/limit (continuity) and 'induction hypothesis' replaced by the item's hypothesis; Step 2 names alpha=lambda and the identification lim Hom^.(K_beta,I)=Hom^.(K_lambda,I).; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.HomotopyLimitVanishing",
+  "declaration": "CategoryTheory.homotopyLimitVanishing",
+  "file": "lean/Sheaf/CategoryTheory/HomotopyLimitVanishing.lean",
+  "statement": "theorem homotopyLimitVanishing {A : Type u} [Category.{v} A] [Abelian A] [IsGrothendieckAbelian.{v} A] (lam : Ordinal.{w}) (h_limit : Order.IsSuccLimit lam) (K : lam.ToType ⥤ CochainComplex A ℤ) [K.IsWellOrderContinuous] (h_mono : ∀ ⦃β γ : lam.ToType⦄ (h : β ≤ γ), Mono (K.map (homOfLE h))) (c : Cocone K) (hc : IsColimit c) (I : CochainComplex A ℤ) (hinj : ∀ n : ℤ, Injective (I.X n)) (hvanish : ∀ (β : lam.ToType) (n : ℤ) (f : (K.obj β)⟦n⟧ ⟶ I), Nonempty (Homotopy f 0)) : ∀ (n : ℤ) (f : c.pt⟦n⟧ ⟶ I), Nonempty (Homotopy f 0)",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-11",
+  "existing": false,
+  "note": "Reviewer R-hlv0948 FIX: the delivered h_system : Prop was a free, unused proposition, so K ord was unrelated to the K beta and the statement was false (H3/H5). Restated with the system as a functor K : lam.ToType ⥤ CochainComplex A ℤ (index set beta < lam, as in J1's acyclic_limit_of_surjective_initialSegments), continuity as Mathlib's Functor.IsWellOrderContinuous, monomorphic transitions h_mono, K_lambda as the point of a colimit cocone (c, hc); Hom_{K(A)}(X[n], I) = 0 rendered as every chain map X⟦n⟧ ⟶ I being null-homotopic (Nonempty (Homotopy f 0)), the form of the merged K-injective siblings.",
+  "fixed_by": "R-hlv0948"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-hlv0948",
+  "group": "M1",
+  "result": "fix",
+  "note": "h_system:Prop was free/unused (statement false) -> functor on lam.ToType + IsWellOrderContinuous + mono transitions + colimit cocone; limit ordinal; termwise injective I; Hom_K(A)=0 as Nonempty (Homotopy f 0) for all shifts, beta<lam and conclusion on c.pt; docstring now carries node proof"
  }
 }
