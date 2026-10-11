@@ -125,4 +125,27 @@ lemma isIso_projectionMap_of_isIso_ihomComparison (A : C)
   exact conjugateEquiv_of_iso (adj.comp (ihom.adjunction A))
     ((ihom.adjunction (G.obj A)).comp adj) _
 
+omit [MonoidalClosed C] [MonoidalClosed D] in
+/-- Naturality of the projection map in the first variable. -/
+@[reassoc]
+lemma projectionMap_naturality_left {A A' : C} (g : A ⟶ A') (T : D) :
+    L.map (G.map g ▷ T) ≫ (projectionMap adj A').app T =
+      (projectionMap adj A).app T ≫ g ▷ L.obj T := by
+  simp only [projectionMap, Category.assoc]
+  erw [← adj.counit_naturality (g ▷ L.obj T)]
+  rw [← L.map_comp_assoc, ← L.map_comp_assoc]
+  congr 2
+  rw [← whisker_exchange_assoc, Category.assoc]
+  erw [μ_natural_left]
+
+omit [MonoidalClosed C] [MonoidalClosed D] in
+/-- The projection map at `A` is invertible at `T` if it is so at an object isomorphic to `A`. -/
+lemma isIso_projectionMap_app_of_iso {A A' : C} (e : A ≅ A') (T : D)
+    [IsIso ((projectionMap adj A').app T)] : IsIso ((projectionMap adj A).app T) := by
+  have h : (projectionMap adj A).app T = (L.map (G.map e.hom ▷ T) ≫
+      (projectionMap adj A').app T) ≫ CategoryTheory.inv (e.hom ▷ L.obj T) := by
+    rw [projectionMap_naturality_left, Category.assoc, IsIso.hom_inv_id, Category.comp_id]
+  rw [h]
+  infer_instance
+
 end CategoryTheory.Functor.Monoidal

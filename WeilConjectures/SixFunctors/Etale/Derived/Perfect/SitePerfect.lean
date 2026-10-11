@@ -420,16 +420,60 @@ lemma isIso_projectionMap_derivedEtaleLowerShriek_app_Qh {U : Scheme.{u}} (f : U
   rw [h]
   infer_instance
 
+omit [HasSmallSiteSheafify A] in
 /-- **Derived projection formula for an étale morphism** `u : U ⟶ X`: the projection map
 `D(u_!)(Lu^*K ⊗ᴸ T) ⟶ K ⊗ᴸ D(u_!)T` of the adjunction `D(u_!) ⊣ Lu^*`, for the monoidal
 structure `leftDerivedUpperStarMonoidal` of `Lu^*`, is an isomorphism. -/
 theorem isIso_projectionMap_derivedEtaleLowerShriek {U : Scheme.{u}} (f : U ⟶ X) [Etale f]
-    [(f)^*[A].PreservesFlat] (K : DerivedCategory (Sheaf X.smallEtaleTopology A)) :
+    [(f)^*[A].PreservesFlat]
+    [∀ M : A, PreservesFilteredColimitsOfSize.{u, u + 1} (tensorLeft M)]
+    [(U.smallEtaleTopology.W (A := A)).IsMonoidal] [(X.smallEtaleTopology.W (A := A)).IsMonoidal]
+    (K : DerivedCategory (Sheaf X.smallEtaleTopology A)) :
     letI := leftDerivedUpperStarMonoidal A f
     IsIso (Functor.Monoidal.projectionMap
-      (derivedEtaleLowerShriekLeftDerivedUpperStarAdjunction (A := A) f) K) :=
-  sorry
+      (derivedEtaleLowerShriekLeftDerivedUpperStarAdjunction (A := A) f) K) := by
+  let := leftDerivedUpperStarMonoidal A f
+  let Λ := (inferInstance : Abelian.HasFunctorialFlatResolution
+    (Sheaf X.smallEtaleTopology A)).some.reduced
+  have hι := (ObjectProperty.flat (A := Sheaf X.smallEtaleTopology A)).essImage_ι_le
+  let K₀ := _root_.DerivedCategory.Q.objPreimage K
+  let K₁ := Λ.resolutionFunctor.obj K₀
+  have : IsIso (_root_.DerivedCategory.Q.map (Λ.resolutionNatTrans.app K₀)) :=
+    (_root_.DerivedCategory.isIso_Q_map_iff_quasiIso _ _).2 inferInstance
+  let eK : K ≅ _root_.DerivedCategory.Qh.obj ((HomotopyCategory.quotient _ _).obj K₁) :=
+    (_root_.DerivedCategory.Q.objObjPreimageIso K).symm ≪≫
+      (asIso (_root_.DerivedCategory.Q.map (Λ.resolutionNatTrans.app K₀))).symm ≪≫
+      (_root_.DerivedCategory.quotientCompQhIso _).symm.app K₁
+  have hK₁ := (HomotopyCategory.kFlat_quotient_obj_iff _).2 (Λ.kFlat_resolutionFunctor_obj hι K₀)
+  have hK₁' := kFlatUpperStar_quotient_obj_resolutionFunctor_obj A f Λ K₀
+  have : ∀ G, IsIso (Functor.Monoidal.projectionMap
+      (Etale.etaleLowerShriekUpperStarAdjunction A f inferInstance) G) :=
+    fun G ↦ Etale.isIso_projectionMap_etaleLowerShriek A inferInstance G
+  rw [NatTrans.isIso_iff_isIso_app]
+  intro T
+  let T₀ := _root_.DerivedCategory.Q.objPreimage T
+  let eT : T ≅ _root_.DerivedCategory.Qh.obj ((HomotopyCategory.quotient _ _).obj T₀) :=
+    (_root_.DerivedCategory.Q.objObjPreimageIso T).symm ≪≫
+      (_root_.DerivedCategory.quotientCompQhIso _).symm.app T₀
+  have : PreservesColimitsOfSize.{0, 0} (Etale.etaleLowerShriek A f inferInstance) :=
+    (Etale.etaleLowerShriekUpperStarAdjunction A f inferInstance).leftAdjoint_preservesColimits
+  have := Functor.Monoidal.isIso_projectionMap_mapHomologicalComplex (f)^*[A]
+    (Etale.etaleLowerShriekUpperStarAdjunction A f inferInstance) K₁
+  have := isIso_projectionMap_derivedEtaleLowerShriek_app_Qh (A := A) f K₁ hK₁ hK₁' T₀
+  have := Functor.Monoidal.isIso_projectionMap_app_of_iso
+    (derivedEtaleLowerShriekLeftDerivedUpperStarAdjunction (A := A) f) eK
+    (_root_.DerivedCategory.Qh.obj ((HomotopyCategory.quotient _ _).obj T₀))
+  have hn := (Functor.Monoidal.projectionMap
+    (derivedEtaleLowerShriekLeftDerivedUpperStarAdjunction (A := A) f) K).naturality eT.hom
+  have : IsIso ((Functor.Monoidal.projectionMap
+      (derivedEtaleLowerShriekLeftDerivedUpperStarAdjunction (A := A) f) K).app T ≫
+      K ◁ (Etale.etaleLowerShriek A f inferInstance).mapDerivedCategory.map eT.hom) := by
+    erw [← hn]
+    infer_instance
+  exact IsIso.of_isIso_comp_right _
+    (K ◁ (Etale.etaleLowerShriek A f inferInstance).mapDerivedCategory.map eT.hom)
 
+omit [HasSmallSiteSheafify A] in
 /-- For étale `u` and `K` with `Lu^*K` dualizable, `Lu^*` sends the comparison
 `RHom(K, 𝟙) ⊗ᴸ K ⟶ RHom(K, K)` to an isomorphism. By
 `CategoryTheory.Functor.Monoidal.isIso_map_ihomUnitTensorToIhom`, this follows from the derived
