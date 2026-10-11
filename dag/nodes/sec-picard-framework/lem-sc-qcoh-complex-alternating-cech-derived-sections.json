@@ -26,9 +26,90 @@
   "def-pc-derived-category",
   "def-pc-derived-direct-image"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For each degree q, the augmented alternating Cech complex of the sheaf F^q is exact: on an open U_i containing a given point, insertion of the index i gives a contracting homotopy. Since the cover is finite, the Cech direction is bounded (the terms vanish for p >= r), so these augmentations assemble naturally into a bounded filtration of the total complex.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Cohomology, Lemma 08C2, proof of the alternating Cech resolution"
+   }
+  },
+  {
+   "text": "For every nonempty intersection U_J, the scheme U_J is affine. Termwise affine quasi-coherent sheaf/module equivalence identifies F^\\bullet|_{U_J} with the sheaf associated to its complex of sections, and the derived global-sections quasi-inverse therefore identifies RΓ(U_J,F^\\bullet|_{U_J}) with Γ(U_J,F^\\bullet|_{U_J}). Equivalently, the cohomology of this section complex is Γ(U_J,H^q(F^\\bullet)) in every degree, naturally in F^\\bullet and in restriction maps.",
+   "uses": [
+    "lem-pc-affine-qcoh-derived-equivalence",
+    "lem-sc-qcoh-acyclic-derived-sections-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Cohomology, Lemma 08C2, hypothesis (3) from Cohomology of Schemes, Lemma 01XB"
+   }
+  },
+  {
+   "text": "Choose a functorial K-injective resolution F^\\bullet\\to I^\\bullet with every term I^q an injective O_U-module, by [prop-pur-kinjective-resolutions-exist] (U has a set of opens, so its site is small); by [def-pc-ringed-spaces-derived-direct-image] (with g the structure morphism to the one-point ringed space with ring \\Gamma(U,O_U)), R\\Gamma(U,F^\\bullet) is represented by \\Gamma(U,I^\\bullet), for any K-injective resolution. For each intersection U_J, the restriction I^\\bullet|_{U_J} is K-injective by [lem-sc-derived-k-injective-restrict-open], so F^\\bullet|_{U_J}\\to I^\\bullet|_{U_J} is a K-injective resolution and R\\Gamma(U_J,F^\\bullet|_{U_J}) is represented by \\Gamma(U_J,I^\\bullet); by Step 2 (U_J affine) the induced map \\Gamma(U_J,F^\\bullet)\\to\\Gamma(U_J,I^\\bullet) is a quasi-isomorphism, and so is the finite product over J with |J|=p+1. Filter Tot(Cech_alt(U,F^\\bullet)) and Tot(Cech_alt(U,I^\\bullet)) by Cech degree (columns p\\ge p_0); these filtrations are finite (r members, columns 0\\le p\\le r-1) and the map Tot(Cech_alt(F^\\bullet))\\toTot(Cech_alt(I^\\bullet)) induced by F^\\bullet\\to I^\\bullet respects them, with graded pieces the above products of quasi-isomorphisms (shifted by p). By [thm-sp-spectral-object-yields] the map induces a morphism of convergent spectral sequences, an isomorphism on E_1 hence on E_2, hence on E_\\infty by [lem-sp-page-induction]; so it is an isomorphism on the finite graded pieces of H^n, hence on H^n by [lem-sp-finite-filtration-induction]: the left arrow is a quasi-isomorphism.",
+   "uses": [
+    "prop-pur-kinjective-resolutions-exist",
+    "def-pc-ringed-spaces-derived-direct-image",
+    "lem-sc-derived-k-injective-restrict-open",
+    "thm-sp-spectral-object-yields",
+    "lem-sp-page-induction",
+    "lem-sp-finite-filtration-induction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Cohomology, Lemma 08C2 (cohomology-lemma-alternating-cech-complex-complex-ss)"
+   }
+  },
+  {
+   "text": "The right arrow \\Gamma(U,I^\\bullet)\\toTot(Cech_alt(U,I^\\bullet)) is the augmentation into column p=0. For each q, I^q is an injective O_U-module on the scheme U, so its ordered Cech complex for \\mathcal U has \\check H^p(\\mathcal U,I^q)=0 for p>0 by [lem-weil-pbc-module-injective-open-cover-cech-acyclic], and \\check H^0(\\mathcal U,I^q)=I^q(U) by the sheaf axiom; by [lem-pc-alternating-cech-computes] the same holds for the alternating Cech complex, i.e. each row 0\\to\\Gamma(U,I^q)\\to Cech_alt^0(\\mathcal U,I^q)\\to\\cdots\\to Cech_alt^{r-1}(\\mathcal U,I^q)\\to0 is exact. The cone of the right arrow is (up to shift and sign) the total complex of the augmented double complex, which has these exact rows and only the finitely many columns p=-1,\\dots,r-1. Such a total complex is acyclic by the elementary staircase chase: given a cocycle, its component in the top column r-1 is a row boundary, so subtracting the total differential of a cochain in column r-2 removes it; descending column by column the cocycle becomes cohomologous to one concentrated in column -1, which then vanishes as the augmentation is injective; so every cocycle is a coboundary. Hence the right arrow is a quasi-isomorphism. The two quasi-isomorphisms give the zigzag Tot(Cech_alt(F^\\bullet))\\toTot(Cech_alt(I^\\bullet))\\leftarrow\\Gamma(U,I^\\bullet), which represents R\\Gamma(U,F^\\bullet) by Step 3; the composite of the left arrow with the inverse of the right arrow is by definition the canonical map, and it is an isomorphism in D(\\Gamma(U,O_U)).",
+   "uses": [
+    "lem-weil-pbc-module-injective-open-cover-cech-acyclic",
+    "lem-pc-alternating-cech-computes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Cohomology, Lemma 08C2 (cohomology-lemma-alternating-cech-complex-complex-ss); injective modules are Cech acyclic (Cohomology, Lemma 01EV)"
+   }
+  },
+  {
+   "text": "Functoriality and independence of the resolution: the resolution F^\\bullet\\mapsto I^\\bullet of [prop-pur-kinjective-resolutions-exist] is a functor with a natural transformation from the identity, and both arrows of the zigzag are natural in the pair (F^\\bullet\\to I^\\bullet), so for a morphism F^\\bullet\\to G^\\bullet the zigzags form a commutative diagram and the isomorphism is natural in F^\\bullet. For another K-injective resolution F^\\bullet\\to J^\\bullet with injective terms, the comparison I^\\bullet\\to J^\\bullet under F^\\bullet of [def-pc-ringed-spaces-derived-direct-image] exists and is unique up to homotopy by [lem-weil-pbc-kinjective-hom-derived] (equivalently [lem-sc-kinjective-quasi-iso-comparison]) and is a homotopy equivalence, and it is compatible with both arrows of the zigzag; hence the isomorphism does not depend on the chosen resolution. The cases r=0 and F^\\bullet=0 give zero total complexes and zero derived sections, agreeing with the same construction.",
+   "uses": [
+    "prop-pur-kinjective-resolutions-exist",
+    "def-pc-ringed-spaces-derived-direct-image",
+    "lem-weil-pbc-kinjective-hom-derived",
+    "lem-sc-kinjective-quasi-iso-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Cohomology, Lemma 08C2, functoriality clause; Perfect, Lemma 08D2"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-affine-qcoh-derived-equivalence",
+  "lem-sc-qcoh-acyclic-derived-sections-comparison",
+  "prop-pur-kinjective-resolutions-exist",
+  "def-pc-ringed-spaces-derived-direct-image",
+  "lem-sc-derived-k-injective-restrict-open",
+  "thm-sp-spectral-object-yields",
+  "lem-sp-page-induction",
+  "lem-sp-finite-filtration-induction",
+  "lem-weil-pbc-module-injective-open-cover-cech-acyclic",
+  "lem-pc-alternating-cech-computes",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-sc-kinjective-quasi-iso-comparison"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Cohomology, Lemma 08C2 (cohomology-lemma-alternating-cech-complex-complex-ss), with affine-intersection hypothesis supplied by Lemma 01XB"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -39,10 +120,101 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-affine-koszul-cech-derived-comparison"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality"
+ "unit": "sk-thm-picard-duality",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-qcoh-complex-alternating-cech-derived-sections",
+  "worker": "stage1",
+  "summary": "Split Stacks Cohomology Lemma 08C2 into local exactness, affine-intersection computation, finite filtered comparison, and functoriality; no child node was created.",
+  "blueprint": "Realizes the proper-flat support proof passage in ancestor lem-sc-finite-duality: compare the alternating Cech complex with derived sections on the principal-open cover, specifically the stated comparison in the blueprint proof.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-affine-qcoh-derived-equivalence",
+    "why": "Affine derived-global-sections comparison on each affine intersection."
+   },
+   {
+    "node": "lem-sc-qcoh-acyclic-derived-sections-comparison",
+    "why": "Unbounded derived section comparison on affine intersections."
+   },
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "Functorial K-injective resolution with injective terms."
+   },
+   {
+    "node": "def-pc-ringed-spaces-derived-direct-image",
+    "why": "Derived sections modelled by a K-injective resolution."
+   },
+   {
+    "node": "lem-sc-derived-k-injective-restrict-open",
+    "why": "K-injectivity is preserved by restriction to the affine intersections."
+   },
+   {
+    "node": "thm-sp-spectral-object-yields",
+    "why": "Spectral sequence of the finite Cech-degree filtration."
+   },
+   {
+    "node": "lem-sp-page-induction",
+    "why": "E_2-isomorphism of spectral sequences gives E_infinity-isomorphism."
+   },
+   {
+    "node": "lem-sp-finite-filtration-induction",
+    "why": "Finite filtration: isomorphism on graded pieces gives isomorphism."
+   },
+   {
+    "node": "lem-weil-pbc-module-injective-open-cover-cech-acyclic",
+    "why": "Injective O_U-modules are Cech acyclic on every open cover."
+   },
+   {
+    "node": "lem-pc-alternating-cech-computes",
+    "why": "Ordered and alternating Cech complexes have the same cohomology."
+   },
+   {
+    "node": "lem-weil-pbc-kinjective-hom-derived",
+    "why": "Uniqueness up to homotopy of comparison maps into K-injective complexes."
+   },
+   {
+    "node": "lem-sc-kinjective-quasi-iso-comparison",
+    "why": "Identifies derived-category maps with maps into K-injective targets."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-affine-qcoh-derived-equivalence",
+  "lem-sc-qcoh-acyclic-derived-sections-comparison",
+  "prop-pur-kinjective-resolutions-exist",
+  "def-pc-ringed-spaces-derived-direct-image",
+  "lem-sc-derived-k-injective-restrict-open",
+  "thm-sp-spectral-object-yields",
+  "lem-sp-page-induction",
+  "lem-sp-finite-filtration-induction",
+  "lem-weil-pbc-module-injective-open-cover-cech-acyclic",
+  "lem-pc-alternating-cech-computes",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-sc-kinjective-quasi-iso-comparison",
+  "lem-pc-affine-qcoh-derived-equivalence",
+  "lem-sc-qcoh-acyclic-derived-sections-comparison",
+  "prop-pur-kinjective-resolutions-exist",
+  "def-pc-ringed-spaces-derived-direct-image",
+  "lem-sc-derived-k-injective-restrict-open",
+  "thm-sp-spectral-object-yields",
+  "lem-sp-page-induction",
+  "lem-sp-finite-filtration-induction",
+  "lem-weil-pbc-module-injective-open-cover-cech-acyclic",
+  "lem-pc-alternating-cech-computes",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-sc-kinjective-quasi-iso-comparison"
+ ],
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-qcs0046",
+  "group": "H1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-qcs0046 (reviewer sub-agent of L); spot-checked: Head eec627c46 does contain the K-injective zigzag this time (diffed node vs base: Steps 3-4 and proof_deps changed). Statement unchanged; citer lem-sc-affine-koszul-cech-derived-comparison uses exactly the canonical functorial iso. No new nodes, no duplicate. FIX more, RETURN less: (1) C1 Step 3: restriction of I to U_J being K-injective was used uncited; now cites lem-sc-derived-k-injective-restrict-open, and the finite Cech-degree filtration comparison now cites thm-sp-spectral-object-yields + lem-sp-page-induction + lem-sp-finite-filtration-induction. (2) C1/C4 right arrow: 'exact by Step 1' was wrong (Step 1 is sheaf-level exactness, says nothing about sections over U); now a separate step citing lem-weil-pbc-module-injective-open-cover-cech-acyclic (I^q injective, from prop-pur-kinjective-resolutions-exist) + lem-pc-alternating-cech-computes, cone acyclic by elementary staircase chase over finitely many columns with exact rows; canonical map defined as left arrow composed with inverse of right arrow. (3) C4 Step 4: lem-sp-kinjective-computes is stated for Ch^+ only, F unbounded; replaced by the functorial resolution of prop-pur-kinjective-resolutions-exist, the comparison clause of def-pc-ringed-spaces-derived-direct-image and lem-weil-pbc-kinjective-hom-derived / lem-sc-kinjective-quasi-iso-comparison. proof_deps and tool_uses rebuilt from the steps. Second reading by H1 missed (1)-(3).; 1 file(s) fixed by the reviewer"
+ }
 }

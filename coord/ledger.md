@@ -3152,3 +3152,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 00:45 L: merged deliver/J1/lem-sc-finite-locally-free-residue-isomorphism (reviewer FIX; first push; new nodes: 0)
 - 00:46 UTC L: J1 finite-locally-free-residue-isomorphism FIX 84f08dd01 (R-fri0045; 'locally of constant rank' per def-amb-finite-locally-free-module).
 - 00:47 L: merged deliver/C1/lemma-weil-pbc-prime-torsion-devissage (reviewer FIX; first push; new nodes: 0)
+- 00:48 L: merged deliver/H1/lem-sc-qcoh-complex-alternating-cech-derived-sections (reviewer FIX; after a return; new nodes: 0)
