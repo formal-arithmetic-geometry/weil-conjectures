@@ -6,6 +6,7 @@ Authors: Christian Merten
 module
 
 public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Shift
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triangulated
 public import WeilConjectures.SixFunctors.ProEtale.Derived.LowerShriek
 public import WeilConjectures.SixFunctors.ProEtale.Derived.TorAmplitude
 public import WeilConjectures.SixFunctors.ProEtale.Derived.UpperLowerStar
@@ -16,19 +17,18 @@ public import WeilConjectures.SixFunctors.ProEtale.Derived.UpperLowerStar
 The derived pullback, pushforward and lower shriek on the unbounded derived categories of
 pro-étale sheaves commute with the shift functors, and `Dᵇctf(X, A)` is stable under shifts:
 
-* `Lg^*` is isomorphic to the functor `D(g^*)` induced by the exact pullback
-  (`ProEtale.leftDerivedUpperStarIsoMapDerivedCategory`), which commutes with shifts;
-* `Rg_*` is right adjoint to `Lg^*` (`ProEtale.derivedUpperStarLowerStarAdjunction`), so it
-  inherits the structure by `Adjunction.rightAdjointCommShift`, compatibly with the adjunction;
+* `Rg_*` commutes with shifts as every right derived functor does;
+* `Lg^*` is left adjoint to `Rg_*` (`ProEtale.derivedUpperStarLowerStarAdjunction`), so it
+  inherits the structure by `Adjunction.leftAdjointCommShift`, compatibly with the adjunction;
 * `Rf_! = D(i_!) ⋙ R(g_*)` for the chosen compactification `(i, g)` is a composite of two
   functors commuting with shifts.
 
-The same descriptions show that the three functors are additive.
+The three functors are additive: `Lg^*` is isomorphic to the functor `D(g^*)` induced by the
+exact pullback, and `Rf_!` is a composite of additive functors.
 
 ## Main definitions
 
 - `AlgebraicGeometry.ProEtale.commShiftLeftDerivedUpperStar`
-- `AlgebraicGeometry.ProEtale.commShiftRightDerivedLowerStar`
 - `AlgebraicGeometry.ProEtale.commShiftRightDerivedLowerShriek`
 
 ## Main results
@@ -56,23 +56,18 @@ variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
 variable [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
   [Abelian.HasFunctorialFlatResolution A]
 
-/-- The derived pullback `Lg^*` commutes with shifts, being isomorphic to the functor `D(g^*)`
-induced by the exact pullback (`ProEtale.leftDerivedUpperStarIsoMapDerivedCategory`). -/
+/-- The derived pullback `Lg^*` commutes with shifts: it is left adjoint to the total right
+derived pushforward `Rg_*` (`ProEtale.derivedUpperStarLowerStarAdjunction`), which does, as
+every right derived functor does. -/
 noncomputable instance commShiftLeftDerivedUpperStar {Z Y : Scheme.{u}} (g : Z ⟶ Y) :
     (L((g)^*[A])).CommShift ℤ :=
-  Functor.CommShift.ofIso (leftDerivedUpperStarIsoMapDerivedCategory A g).symm ℤ
-
-/-- The total right derived pushforward `Rg_*` commutes with shifts: it is right adjoint to the
-derived pullback `Lg^*`, which does. -/
-noncomputable instance commShiftRightDerivedLowerStar {Z Y : Scheme.{u}} (g : Z ⟶ Y) :
-    (R((g)_*[A])).CommShift ℤ :=
-  (derivedUpperStarLowerStarAdjunction A g).rightAdjointCommShift ℤ
+  (derivedUpperStarLowerStarAdjunction A g).leftAdjointCommShift ℤ
 
 /-- The adjunction `Lg^* ⊣ Rg_*` is compatible with the commutation of both functors with the
 shifts. -/
 instance commShift_derivedUpperStarLowerStarAdjunction {Z Y : Scheme.{u}} (g : Z ⟶ Y) :
     (derivedUpperStarLowerStarAdjunction A g).CommShift ℤ :=
-  (derivedUpperStarLowerStarAdjunction A g).commShift_of_leftAdjoint ℤ
+  (derivedUpperStarLowerStarAdjunction A g).commShift_of_rightAdjoint ℤ
 
 /-- The derived lower shriek `Rf_!` commutes with shifts: for the chosen compactification
 `(i, g)` of `f` it is the composite of the functor `D(i_!)` induced by the exact extension by
@@ -87,11 +82,6 @@ the exact pullback. -/
 instance additive_leftDerivedUpperStar {Z Y : Scheme.{u}} (g : Z ⟶ Y) :
     (L((g)^*[A])).Additive :=
   Functor.additive_of_iso (leftDerivedUpperStarIsoMapDerivedCategory A g).symm
-
-/-- The total right derived pushforward `Rg_*` is additive, being right adjoint to `Lg^*`. -/
-instance additive_rightDerivedLowerStar {Z Y : Scheme.{u}} (g : Z ⟶ Y) :
-    (R((g)_*[A])).Additive :=
-  (derivedUpperStarLowerStarAdjunction A g).right_adjoint_additive
 
 /-- The derived lower shriek `Rf_! = D(i_!) ⋙ R(g_*)` is additive. -/
 instance additive_rightDerivedLowerShriek {X Y : Scheme.{u}} (f : X ⟶ Y)
