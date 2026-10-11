@@ -199,5 +199,23 @@
   "by": "L",
   "result": "accepted",
   "note": "6 steps following Algebra 00S6 via the argument of 00S5's proof (not 00S5 itself, which does not apply to K = NL(alpha) (x) S_g; the worker's cancellation counterexample noted): the two complexes and their free degree-0 terms; the presentation beta' with NL(beta') = K + (S_g -> S_g, g) by clause (3) of the 08JZ node; K homotopy equivalent to NL(beta') (g a unit); NL(beta') homotopy equivalent to NL(beta) by a new unsplit node for 00S1; composition of homotopy equivalences written out; a new unsplit node for 00S3 (two-term homotopy equivalence gives A_1 + B_0 = B_1 + A_0). Statement unchanged. Stage-3 notes: lem-weil-pbc-localization-away-tensor-iso and lem-weil-pbc-localization-module-tensor look like duplicates; citer lci-conormal-free-rank-codimension step 6 refers to the wrong step."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.ConormalModulePrincipalLocalization",
+  "declaration": "Algebra.Extension.conormalModule_principalLocalization",
+  "file": "lean/Sheaf/RingTheory/ConormalModulePrincipalLocalization.lean",
+  "statement": "theorem conormalModule_principalLocalization {R : Type u} {S : Type v} [CommRing R] [CommRing S] [Algebra R S] (g : S) (n m : ℕ) (α : MvPolynomial (Fin n) R →ₐ[R] S) (hα : Function.Surjective α) (β : MvPolynomial (Fin m) R →ₐ[R] Localization.Away g) (hβ : Function.Surjective β) : Nonempty ((LocalizedModule.Away g (ofSurjective α hα).Cotangent × (Fin m → Localization.Away g)) ≃ₗ[Localization.Away g] ((ofSurjective β hβ).Cotangent × (Fin n → Localization.Away g)))",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-cmp1507",
+  "group": "H1",
+  "result": "pass",
+  "note": "R,S CommRing+Algebra; g:S; S_g=Localization.Away g (R-algebra R->S->S_g, IsScalarTower checked); n,m:N incl 0; alpha,beta surjective AlgHoms from MvPolynomial (Fin n/m) R; I,J = (ofSurjective _).ker =rfl RingHom.ker; I/I^2,J/J^2 = Extension.Cotangent with S/S_g module (Cotangent.module); (I/I^2)_g = LocalizedModule.Away g with S_g-module; S_g^{+m},S_g^{+n} = Fin -> S_g; Nonempty S_g-linear equiv in node's order; docstring carries 6 proof steps"
  }
 }

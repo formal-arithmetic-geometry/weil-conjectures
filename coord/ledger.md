@@ -3979,3 +3979,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 09:17 L: merged deliver/E1/lem-weil-pbc-closed-pushforward-stalks (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.ClosedPushforwardStalks AlgebraicGeometry.closedImmersion_pushforward_stalks; statement correction reverted (statement, statement_change))
 - 09:17 L: merged deliver/F1/lem-weil-pbc-completion-finite-quotient (stage 2; reviewer PASS; first push; Sheaf.RingTheory.CompletionFiniteQuotient AdicCompletion.completion_finite_quotient)
 - 09:17 L: merged deliver/E1/lem-sp-ce-horizontal-lift (stage 2; reviewer PASS; first push; Sheaf.CategoryTheory.HorizontalComparisonLift CategoryTheory.horizontal_comparison_lift)
+- 09:17 L: merged deliver/H1/lem-weil-pbc-conormal-module-principal-localization (stage 2; reviewer PASS; first push; Sheaf.RingTheory.ConormalModulePrincipalLocalization Algebra.Extension.conormalModule_principalLocalization)
