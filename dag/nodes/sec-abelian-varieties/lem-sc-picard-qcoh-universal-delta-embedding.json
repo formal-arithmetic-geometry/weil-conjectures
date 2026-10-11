@@ -21,7 +21,8 @@
  "stmt_deps": [
   "def-weil-field",
   "def-pc-scheme",
-  "pqf-def-coherent"
+  "pqf-def-coherent",
+  "def-sc-ringed-space-module-cohomology"
  ],
  "proof": [
   {
@@ -155,5 +156,23 @@
   "group": "J1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ude0254 (reviewer sub-agent of L); spot-checked: Statement identical to sheaf-dag (json compare; lead note 02:16: field hypothesis unused, kept). Delivery changes 2 files (merge-base diff), no new nodes. Tag 0BDY (coherent.tex lemma-affine-diagonal-universal-delta-functor) part (1) proof vs steps 1-4: step 2 j affine via lem-sc-picard-affine-diagonal-intersections (hypothesis: X over k with affine diagonal over Spec k = item's hypothesis) + permanence (4) and pqf-def-affine-morphism (preimage of affine opens) C4 ok; step 3 stalk injectivity elementary as in Stacks; step 4 pqf-lem-affine-vanishing on U (Tag 01XB), lem-weil-pbc-affine-morphism-cohomology-edge (edge iso H^p(X,j_*G)=H^p(U,G)), lem-pc-affine-morphism-hi (j_* quasi-coherent) C4 ok; tool_uses generic, accepted. No duplicate (grep 0BDY/universal-delta: consumer lem-sc-picard-kunneth-qcoh step 5 only). Mathlib grep AlgebraicGeometry universal delta: none. Second reading's claim of correcting created.item is not reflected in the diff (created unchanged, item = lem-sc-picard-kunneth-qcoh, correct provenance); harmless. No fault found that the second reading missed."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.QuasicoherentAcyclicEmbedding",
+  "declaration": "AlgebraicGeometry.Scheme.exists_quasicoherent_acyclic_embedding",
+  "file": "lean/Sheaf/AlgebraicGeometry/QuasicoherentAcyclicEmbedding.lean",
+  "statement": "theorem exists_quasicoherent_acyclic_embedding (k : Type u) [Field k] (X : Scheme.{u}) [X.Over (Spec (CommRingCat.of k))] [CompactSpace X] [IsAffineHom (pullback.diagonal (X ↘ Spec (CommRingCat.of k)))] (F : SheafOfModules.{u} (moduleRings X.toRingedSpace)) [F.IsQuasicoherent] : ∃ F' : SheafOfModules.{u} (moduleRings X.toRingedSpace), F'.IsQuasicoherent ∧ ∃ i : F ⟶ F', Mono i ∧ ∀ p : ℕ, 1 ≤ p → IsZero ((RingedSpace.moduleCohomology X.toRingedSpace p).obj F')",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-pde1205",
+  "group": "M1",
+  "result": "pass",
+  "note": "k Field Type u; X Scheme.{u} [X.Over Spec k] (node: scheme over field, single universe, no vacuous one); quasi-compact = [CompactSpace X]; affine diagonal = IsAffineHom (diagonal of X ↘ Spec k), equivalent to absolute via isAffineHom_diagonal_iff at U=⊤, same form as landed QuasicoherentFiniteCohomologicalDimension; F SheafOfModules (moduleRings X) with Mathlib IsQuasicoherent (STATE COHERENT SHEAVES); conclusion ∃ F' quasi-coherent, ∃ mono i : F ⟶ F', ∀ p ≥ 1 IsZero (RingedSpace.moduleCohomology p F') (STATE COHOMOLOGY OF O_X-MODULES, stmt_dep added landed); F', i before p; no hollow binder, no let; #check of all names in a sandbox copy"
  }
 }
