@@ -1,11 +1,11 @@
 # Work queue
 
-55 items; claim with `tools/claim.py next <group> [--stage N]`.
+53 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (55)
+## Stage 2: nodes to state (53)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
@@ -21,7 +21,6 @@
 | `lem-pc-cech-resolution` | 1 | state | 1 |
 | `lem-pc-derived-sections-pushforward-comparison` | 1 | state | 1 |
 | `lem-pc-derived-tensor-transitivity` | 1 | state | 1 |
-| `lem-sc-affine-unit-divisor-base-change` | 2 | state | 1 |
 | `cor-galois-lisse-representations` | 1 | state | 0 |
 | `lem-pc-base-change-rhom-perfect` | 1 | state | 0 |
 | `lem-pc-bounded-coherent-finite-tor-proper-pushforward-perfect` | 1 | state | 0 |
@@ -46,7 +45,6 @@
 | `lem-sc-hilbert-embedded-points-gluing` | 1 | state | 0 |
 | `lem-sc-koszul-regular-immersion-derived-hom` | 1 | state | 0 |
 | `lem-sc-open-restriction-support-triangle` | 1 | state | 0 |
-| `lem-sc-proper-flat-right-adjoint-affine-basechange` | 1 | state | 0 |
 | `lem-sc-proper-flat-right-adjoint-basechange` | 1 | state | 0 |
 | `lem-sc-proper-flat-right-adjoint-direct-sums` | 1 | state | 0 |
 | `lem-sc-proper-flat-right-adjoint-restriction-open` | 1 | state | 0 |
@@ -54,7 +52,6 @@
 | `lem-sc-smooth-proper-diagonal-basechange-upper-shriek` | 1 | state | 0 |
 | `lem-sc-smooth-proper-relative-dualizing-general` | 1 | state | 0 |
 | `lem-weil-pbc-etale-mayer-vietoris-pullback` | 1 | state | 0 |
-| `lem-weil-pbc-exact-couple-differential` | 1 | state | 0 |
 | `lem-weil-pbc-flat-base-change-map-sections` | 1 | state | 0 |
 | `lem-weil-pbc-formal-functions-complete-base` | 1 | state | 0 |
 | `lem-weil-pbc-formal-functions-stalk` | 1 | state | 0 |
@@ -64,8 +61,9 @@
 | `lem-pc-rf-single-complex-inherited-tensor-condition` | 2 | state | 0 |
 | `lem-sc-kummer-base-change-compatibility` | 2 | state | 0 |
 | `lem-sc-p1-proj-shifted-free-twist` | 2 | state | 0 |
+| `lem-sc-units-quotient-base-change` | 2 | state | 0 |
 
-Not open yet: 40 nodes that wait for stage 1, 177 nodes that wait for a statement dependency.
+Not open yet: 40 nodes that wait for stage 1, 176 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
