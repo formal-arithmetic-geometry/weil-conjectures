@@ -178,5 +178,23 @@
   "group": "H1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of H1; spot-checked by L: L: 00QE: fibre dimension n, Noether normalization, Artinian fibre, 00QA openness node"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.QuasiFiniteOverPolynomialAlgebra",
+  "declaration": "Algebra.exists_quasiFinite_over_polynomial_algebra",
+  "file": "lean/Sheaf/Paper/QuasiFiniteOverPolynomialAlgebra.lean",
+  "statement": "theorem exists_quasiFinite_over_polynomial_algebra (R : Type u) (S : Type v) [CommRing R] [CommRing S] [Algebra R S] [Algebra.FiniteType R S] (q : PrimeSpectrum S) (n : ℕ) (hdim : topologicalKrullDimAt (X := PrimeSpectrum ((q.comap (algebraMap R S)).asIdeal.Fiber S)) ((PrimeSpectrum.preimageHomeomorphFiber R S (q.comap (algebraMap R S))) ⟨q, rfl⟩) = (n : WithBot ℕ∞)) : ∃ (g : S) (hg : g ∉ q.asIdeal) (f : MvPolynomial (Fin n) R →ₐ[R] Localization.Away g) (hft : @Algebra.FiniteType (MvPolynomial (Fin n) R) (Localization.Away g) _ _ f.toRingHom.toAlgebra), ∀ (q' : PrimeSpectrum (Localization.Away g)), @Algebra.IsQuasiFiniteAtPrime (MvPolynomial (Fin n) R) (Localization.Away g) _ _ f.toRingHom.toAlgebra hft q'",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-qfp",
+  "group": "E1",
+  "result": "pass",
+  "note": "FiniteType R S, prime q, fibre point via preimageHomeomorphFiber on p.Fiber S, topologicalKrullDimAt = n, g ∉ q, R-algHom MvPolynomial (Fin n) R → Away g, FiniteType + IsQuasiFiniteAtPrime at all q' under f.toAlgebra"
  }
 }
