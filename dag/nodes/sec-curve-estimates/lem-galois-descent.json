@@ -18,7 +18,8 @@
   "def-weil-etale-morphism",
   "def-pc-fibre-product",
   "def-weil-pbc-finite-etale-category",
-  "def-pd-descent-datum"
+  "def-pd-descent-datum",
+  "def-galois-finite-etale-descent-data"
  ],
  "proof": [
   {
@@ -185,5 +186,23 @@
   "lem-weil-pbc-fpqc-descend-finite",
   "lem-weil-pbc-fpqc-finer-than-etale"
  ],
- "reviewed": "2026-10-10 L: 6 steps along Stacks (etale surjection is fpqc, the base-change functor with its canonical datum, full faithfulness by 02W0 (new node), effectivity of affine descent data 0245 (new node), finite and etale descend by 02LA and 02VN (new node)); the imported Zariski-gluing proof replaced (wrong); statement made precise; 2 tool uses accepted; 3 new nodes"
+ "reviewed": "2026-10-10 L: 6 steps along Stacks (etale surjection is fpqc, the base-change functor with its canonical datum, full faithfulness by 02W0 (new node), effectivity of affine descent data 0245 (new node), finite and etale descend by 02LA and 02VN (new node)); the imported Zariski-gluing proof replaced (wrong); statement made precise; 2 tool uses accepted; 3 new nodes",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteEtaleDescent",
+  "declaration": "AlgebraicGeometry.finiteEtaleDescent",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteEtaleDescent.lean",
+  "statement": "theorem finiteEtaleDescent {Y Y' : Scheme.{v}} (g : Y' ⟶ Y) [Surjective g] [Etale g] : ∃ (F : Y.FiniteEtale ⥤ AlgebraicGeometry.FiniteEtaleDescentData g) (q : ∀ P : Y.FiniteEtale, (F.obj P).obj.V.left ⟶ P.obj.left), Nonempty F.IsEquivalence ∧ (∀ P : Y.FiniteEtale, ∃ hq : q P ≫ P.obj.hom = (F.obj P).obj.V.hom ≫ g, IsPullback (q P) (F.obj P).obj.V.hom P.obj.hom g ∧ ∀ {T : Scheme.{v}} (f₁ f₂ : T ⟶ Y') (h : f₁ ≫ g = f₂ ≫ g) (z : Over.mk f₁ ⟶ (F.obj P).obj.V), ((F.obj P).obj.datum.transport f₁ f₂ h z).left ≫ q P = z.left ≫ q P) ∧ ∀ P Q : Y.FiniteEtale, ∀ f : P ⟶ Q, (F.map f).hom.hom.left ≫ q Q = q P ≫ f.hom.left",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-gds0925",
+  "group": "F1",
+  "result": "pass",
+  "note": "g surjective etale (Surjective, Etale; no qc needed: singleton is fppf hence fpqc), FEt(Y)=source Y.FiniteEtale, DD = finite-etale full subcategory of Over.DescentDataCategory g (transport form of recorded Over.DescentDatum, Hom.commutes = 023V(3)), q+IsPullback gives P x_Y Y', transport equation pins can_P, map equation pins alpha x_Y Y', Nonempty IsEquivalence; universes v shared; new node fields per rule; no Mathlib/source equivalent"
+ }
 }
