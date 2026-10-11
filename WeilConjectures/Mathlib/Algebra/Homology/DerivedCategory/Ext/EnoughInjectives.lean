@@ -89,9 +89,9 @@ end
 variable {C : Type u} [Category.{v} C] [Abelian C] [HasExt.{w} C] [EnoughInjectives C]
   {D : Type u'} [Category.{v'} D] [Abelian D] [HasExt.{w'} D]
 
-/-- **Comparing `Ext`-groups along an exact functor.** Let `Φ : C ⥤ D` be an exact functor
-between abelian categories, `C` having enough injectives, and let `P : C` and `Z : D`. Assume
-that
+/-- **Comparing `Ext`-groups along an exact functor.** Let `Φ : C ⥤ D` be an additive functor
+between abelian categories which preserves short exact sequences, `C` having enough injectives,
+and let `P : C` and `Z : D`. Assume that
 
 * `Φ` sends injective objects of `C` to objects without higher `Ext` from `Z`;
 * for every short exact sequence `0 → S.X₁ → S.X₂ → S.X₃ → 0` in `C` with `S.X₂` injective and
@@ -99,8 +99,8 @@ that
 
 Then `Ext^{n + 1}(P, F) = 0` as soon as `Ext^{n + 1}(Z, Φ F) = 0`. The proof embeds `F` into an
 injective object and shifts dimensions on both sides. -/
-theorem subsingleton_of_subsingleton_map (Φ : C ⥤ D) [Φ.Additive] [PreservesFiniteLimits Φ]
-    [PreservesFiniteColimits Φ] (P : C) (Z : D)
+theorem subsingleton_of_subsingleton_map (Φ : C ⥤ D) [Φ.Additive]
+    (hΦex : ∀ (S : ShortComplex C), S.ShortExact → (S.map Φ).ShortExact) (P : C) (Z : D)
     (hΦ : ∀ (I : C) [Injective I] (n : ℕ), Subsingleton (Ext.{w'} Z (Φ.obj I) (n + 1)))
     (hsurj : ∀ (S : ShortComplex C), S.ShortExact → Injective S.X₂ →
       Subsingleton (Ext.{w'} Z (Φ.obj S.X₁) 1) →
@@ -118,7 +118,7 @@ theorem subsingleton_of_subsingleton_map (Φ : C ⥤ D) [Φ.Additive] [Preserves
     let S := ShortComplex.mk (Injective.ι F) (cokernel.π (Injective.ι F)) (cokernel.condition _)
     have hS : S.ShortExact :=
       ShortComplex.ShortExact.mk' (ShortComplex.exact_cokernel _) inferInstance inferInstance
-    have hS' : (S.map Φ).ShortExact := hS.map_of_exact Φ
+    have hS' : (S.map Φ).ShortExact := hΦex S hS
     have : Subsingleton (Ext.{w} P S.X₂ (n + 1)) := subsingleton_of_injective _ _ n
     have : Subsingleton (Ext.{w} P S.X₂ (n + 2)) := subsingleton_of_injective _ _ (n + 1)
     have : Subsingleton (Ext.{w'} Z (S.map Φ).X₂ (n + 1)) := hΦ S.X₂ n
