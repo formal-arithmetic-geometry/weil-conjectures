@@ -26,7 +26,8 @@
   "lem-sc-cohomology-closed-immersion-pushforward",
   "lem-weil-pbc-right-derived-universal-delta-functor",
   "lem-weil-pbc-effaceable-delta-functor-universal",
-  "def-weil-pbc-delta-functor"
+  "def-weil-pbc-delta-functor",
+  "def-sc-topological-abelian-cohomology-delta-functor"
  ],
  "proof": [
   {
@@ -155,5 +156,23 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.Topology.ClosedPushforwardBoundaryNaturality",
+  "declaration": "TopCat.Sheaf.closed_pushforward_boundary_naturality",
+  "file": "lean/Sheaf/Topology/ClosedPushforwardBoundaryNaturality.lean",
+  "statement": "theorem closed_pushforward_boundary_naturality {Z X : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i] : ∃ hex : ∀ (S : ShortComplex ((Z : TopCat).Sheaf AddCommGrpCat.{u})), S.ShortExact → (S.map (pushforward AddCommGrpCat.{u} (Scheme.forgetToTop.map i))).ShortExact, ∃ T : CohomologicalDeltaFunctor ((Z : TopCat).Sheaf AddCommGrpCat.{u}) AddCommGrpCat.{u + 1}, ∃ e : ∀ n : ℕ, T.F n ≅ pushforward AddCommGrpCat.{u} (Scheme.forgetToTop.map i) ⋙ abelianCohomologyFunctor (X : TopCat) n, (∀ (S : ShortComplex ((Z : TopCat).Sheaf AddCommGrpCat.{u})) (hS : S.ShortExact) (n : ℕ), T.delta S hS n ≫ (e (n + 1)).hom.app S.X₁ = (e n).hom.app S.X₃ ≫ abelianCohomologyBoundary (X : TopCat) (S.map (pushforward AddCommGrpCat.{u} (Scheme.forgetToTop.map i))) (hex S hS) n) ∧ ∃ t : CohomologicalDeltaFunctor.Hom (abelianCohomologyDeltaFunctor (Z : TopCat)) T, (∀ (D : (Z : TopCat).Sheaf AddCommGrpCat.{u}) (c : (abelianCohomologyFunctor (Z : TopCat) 0).obj D), abelianCohomologySection (X : TopCat) ((pushforward AddCommGrpCat.{u} (Scheme.forgetToTop.map i)).obj D) ((e 0).hom.app D ((t.app 0).app D c)) = abelianCohomologySection (Z : TopCat) D c) ∧ (∀ t' : CohomologicalDeltaFunctor.Hom (abelianCohomologyDeltaFunctor (Z : TopCat)) T, (∀ (D : (Z : TopCat).Sheaf AddCommGrpCat.{u}) (c : (abelianCohomologyFunctor (Z : TopCat) 0).obj D), abelianCohomologySection (X : TopCat) ((pushforward AddCommGrpCat.{u} (Scheme.forgetToTop.map i)).obj D) ((e 0).hom.app D ((t'.app 0).app D c)) = abelianCohomologySection (Z : TopCat) D c) → t' = t) ∧ (∀ n : ℕ, IsIso (t.app n)) ∧ (∀ (S : ShortComplex ((Z : TopCat).Sheaf AddCommGrpCat.{u})) (hS : S.ShortExact) (c : (abelianCohomologyFunctor (Z : TopCat) 0).obj S.X₃), (e 1).hom.app S.X₁ ((t.app 1).app S.X₁ (abelianCohomologyBoundary (Z : TopCat) S hS 0 c)) = abelianCohomologyBoundary (X : TopCat) (S.map (pushforward AddCommGrpCat.{u} (Scheme.forgetToTop.map i))) (hex S hS) 0 ((e 0).hom.app S.X₃ ((t.app 0).app S.X₃ c))) ∧ (∀ (S : ShortComplex ((Z : TopCat).Sheaf AddCommGrpCat.{u})) (hS : S.ShortExact) (a : S.X₃ ≅ (constantSheaf (Opens.grothendieckTopology Z) AddCommGrpCat.{u}).obj (AddCommGrpCat.of (ULift.{u} ℤ))) (P : ShortComplex ((X : TopCat).Sheaf AddCommGrpCat.{u})) (hP : P.ShortExact) (b : P.X₃ ≅ (constantSheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}).obj (AddCommGrpCat.of (ULift.{u} ℤ))) (φ : P ⟶ S.map (pushforward AddCommGrpCat.{u} (Scheme.forgetToTop.map i))) (hpb : IsPullback φ.τ₂ P.g ((S.map (pushforward AddCommGrpCat.{u} (Scheme.forgetToTop.map i))).g) φ.τ₃) (cZ : (abelianCohomologyFunctor (Z : TopCat) 0).obj S.X₃) (cX : (abelianCohomologyFunctor (X : TopCat) 0).obj P.X₃) (hcZ : a.hom.hom.app (op ⊤) (abelianCohomologySection (Z : TopCat) S.X₃ cZ) = ((constantSheafAdj (Opens.grothendieckTopology Z) AddCommGrpCat.{u} isTerminalTop).unit.app (AddCommGrpCat.of (ULift.{u} ℤ))) (ULift.up 1)) (hcX : b.hom.hom.app (op ⊤) (abelianCohomologySection (X : TopCat) P.X₃ cX) = ((constantSheafAdj (Opens.grothendieckTopology X) AddCommGrpCat.{u} isTerminalTop).unit.app (AddCommGrpCat.of (ULift.{u} ℤ))) (ULift.up 1)) (hu : φ.τ₃.hom.app (op ⊤) (abelianCohomologySection (X : TopCat) P.X₃ cX) = abelianCohomologySection (Z : TopCat) S.X₃ cZ), (abelianCohomologyFunctor (X : TopCat) 1).map φ.τ₁ (abelianCohomologyBoundary (X : TopCat) P hP 0 cX) = (e 1).hom.app S.X₁ ((t.app 1).app S.X₁ (abelianCohomologyBoundary (Z : TopCat) S hS 0 cZ)))",
+  "branch": "sheaf-dag",
+  "by": "U1",
+  "date": "2026-10-12",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "X-5a517",
+  "group": "U1",
+  "result": "pass",
+  "note": "independent Codex review: Matched the closed immersion, abelian sheaf short exact sequences, exact direct image, canonical H' delta-functor and boundaries, unique degree-zero identity comparison, all-degree isomorphisms, and pullback boundary of one with the node; earlier report deletion is complete."
  }
 }
