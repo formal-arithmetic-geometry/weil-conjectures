@@ -147,5 +147,24 @@
   "group": "G1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of G1; spot-checked by L: 4 elementary steps following Sites 00W5: componentwise image of compatible families, compatible with refinements, hence maps on the colimits forming a morphism of presheaves; naturality of theta on the trivial covering; identity and composition on representatives. Correct."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.PlusConstructionFunctorial",
+  "declaration": "WeilConjectures.plus_construction_functorial",
+  "file": "lean/Sheaf/Paper/PlusConstructionFunctorial.lean",
+  "statement": "theorem plus_construction_functorial {C : Type u} [Category.{v} C] (J : GrothendieckTopology C) {F G H : Cᵒᵖ ⥤ Type u} [∀ (P : Cᵒᵖ ⥤ Type u) (X : C) (S : J.Cover X), HasMultiequalizer (S.index P)] [∀ (X : C), HasColimitsOfShape (J.Cover X)ᵒᵖ (Type u)] (φ : F ⟶ G) (ψ : G ⟶ H) : (φ ≫ J.toPlus G = J.toPlus F ≫ J.plusMap φ) ∧ (J.plusMap (𝟙 F) = 𝟙 (J.plusObj F)) ∧ (J.plusMap (φ ≫ ψ) = J.plusMap φ ≫ J.plusMap ψ)",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-12",
+  "existing": false,
+  "note": "Mathlib's GrothendieckTopology.plusMap/toPlus realizes the plus construction and functoriality; the family-indexed Stacks presentation is the source-level description."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "F1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }
