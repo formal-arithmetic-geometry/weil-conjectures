@@ -19,7 +19,8 @@
   "def-sc-picard-group",
   "def-sc-divisor",
   "def-sc-invertible-module",
-  "lem-sc-divisor-module-local"
+  "lem-sc-divisor-module-local",
+  "lem-sc-smooth-connected-curve-local-rings"
  ],
  "proof": [
   {
@@ -166,5 +167,23 @@
    "note": "states the node (integral Noetherian curve; the map through duals of ideal sheaves of points) but is sorry on 71d63dcf (L, 2026-10-10)"
   }
  ],
- "reviewed": "2026-10-10 L: 6 steps following 0BE9/0BE8 (local rings DVRs: new node; O_C(D) locally t^{-n} O: new node; the map factors through Cl, is a homomorphism, surjective by the rational-section node (tool use accepted), injective with the sign corrected (D = div(f^{-1}))); 2 new nodes; the sorry declaration recorded as a candidate"
+ "reviewed": "2026-10-10 L: 6 steps following 0BE9/0BE8 (local rings DVRs: new node; O_C(D) locally t^{-n} O: new node; the map factors through Cl, is a homomorphism, surjective by the rational-section node (tool use accepted), injective with the sign corrected (D = div(f^{-1}))); 2 new nodes; the sorry declaration recorded as a candidate",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.DivisorClassCurve",
+  "declaration": "AlgebraicGeometry.Scheme.exists_divisorClassGroup_addEquiv_pic_associatedModule",
+  "file": "lean/Sheaf/AlgebraicGeometry/DivisorClassCurve.lean",
+  "statement": "theorem exists_divisorClassGroup_addEquiv_pic_associatedModule (k : Type u) [Field k] [IsAlgClosed k] (C : Scheme.{u}) (f : C ⟶ Spec (.of k)) [IsConnectedCurve f] [Smooth f] : ∃ e : (@DivisorClassGroup C (C.smooth_connected_curve_local_rings k f).choose (isNoetherian_of_locallyOfFiniteType f)) ≃+ Additive C.Pic, ∀ D : C.Divisor, Nonempty ((fromSkeleton C.Modules).obj (e (QuotientAddGroup.mk D)).toMul.val ≅ D.moduleOfSmoothConnectedCurve k C f)",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-11",
+  "existing": false,
+  "note": "Uses the explicit divisor module recorded by def-sc-divisor. The source candidate exists_divisorClassGroup_addEquiv_pic instead specifies Divisor.toPic, a product of point-ideal duals, and does not identify it with this module. No extra integral or Noetherian hypotheses: instances are supplied explicitly by recorded consequences of the curve hypotheses."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-dcc",
+  "group": "C1",
+  "result": "pass"
+ }
 }
