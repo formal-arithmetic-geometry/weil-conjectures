@@ -35,7 +35,7 @@ theorem Hom.exists_isFinite_morphismRestrict {X S : Scheme.{u}} (f : X ⟶ S)
     [LocallyQuasiFinite f] [LocallyOfFiniteType f] [IsSeparated f] [QuasiCompact f]
     [CompactSpace S] [QuasiSeparatedSpace S] :
     ∃ (T : Scheme.{u}) (j : X ⟶ T) (p : T ⟶ S) (_ : IsOpenImmersion j) (_ : IsFinite p)
-      (hjp : j ≫ p = f) (V : S.Opens),
+      (_ : j ≫ p = f) (V : S.Opens),
       (V : Set S) = (p.base '' (Set.range j.base)ᶜ)ᶜ ∧ IsFinite (f ∣_ V) := by
   obtain ⟨T, j, p, hj, -, hp, rfl⟩ := f.exists_isOpenImmersion_isFinite_of_locallyQuasiFinite
   have hZ : IsClosed (p.base '' (Set.range j.base)ᶜ) :=
