@@ -126,5 +126,22 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProperDerivedDirectImageComposition",
+  "declaration": "AlgebraicGeometry.exists_properDerivedDirectImageComposition",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProperDerivedDirectImageComposition.lean",
+  "statement": "theorem exists_properDerivedDirectImageComposition [d : ∀ X : Scheme.{u}, HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] : ∃ p : ∀ {X Y : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y] (f : X ⟶ Y) [IsProper f], ∀ E : schemeDerivedQCohCategory X, schemeDerivedQCohProperty Y ((schemeDerivedDirectImage f).obj E.obj), ∃ c : ∀ {X Y Z : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y] [IsNoetherian Z] (f : X ⟶ Y) (g : Y ⟶ Z) [IsProper f] [IsProper g], (schemeDerivedQCohProperty X).ι ⋙ (schemeDerivedDirectImage f ⋙ schemeDerivedDirectImage g) ≅ (schemeDerivedQCohProperty X).ι ⋙ schemeDerivedDirectImage (f ≫ g), (∀ {X Y Z : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y] [IsNoetherian Z] (f : X ⟶ Y) (g : Y ⟶ Z) [IsProper f] [IsProper g] (K : HomotopyCategory (SheafOfModules.{u} (moduleRings X.toRingedSpace)) (ComplexShape.up ℤ)) (hK : schemeDerivedQCohProperty X (DerivedCategory.Qh.obj K)), (RingedSpace.moduleDirectImage (f ≫ g).toLRSHom.toShHom).rightDerivedFunctorUnit.app K ≫ (c f g).inv.app ⟨DerivedCategory.Qh.obj K, hK⟩ = (RingedSpace.moduleDirectImage g.toLRSHom.toShHom).rightDerivedFunctorUnit.app (((RingedSpace.moduleDirectImage f.toLRSHom.toShHom).mapHomotopyCategory (ComplexShape.up ℤ)).obj K) ≫ (schemeDerivedDirectImage g).map ((RingedSpace.moduleDirectImage f.toLRSHom.toShHom).rightDerivedFunctorUnit.app K)) ∧ ∃ i : ∀ (X : Scheme.{u}) [IsNoetherian X], (schemeDerivedQCohProperty X).ι ⋙ schemeDerivedDirectImage (𝟙 X) ≅ (schemeDerivedQCohProperty X).ι, (∀ {X Y : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y] (f : X ⟶ Y) [IsProper f] (E : schemeDerivedQCohCategory X), (c (𝟙 X) f).hom.app E ≫ eqToHom (congrArg (fun k : X ⟶ Y => (schemeDerivedDirectImage k).obj E.obj) (Category.id_comp f)) = (schemeDerivedDirectImage f).map ((i X).hom.app E)) ∧ (∀ {X Y : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y] (f : X ⟶ Y) [IsProper f] (E : schemeDerivedQCohCategory X), (c f (𝟙 Y)).hom.app E ≫ eqToHom (congrArg (fun k : X ⟶ Y => (schemeDerivedDirectImage k).obj E.obj) (Category.comp_id f)) = (i Y).hom.app ⟨(schemeDerivedDirectImage f).obj E.obj, p f E⟩) ∧ (∀ {W X Y Z : Scheme.{u}} [IsNoetherian W] [IsNoetherian X] [IsNoetherian Y] [IsNoetherian Z] (f : W ⟶ X) (g : X ⟶ Y) (h : Y ⟶ Z) [IsProper f] [IsProper g] [IsProper h] (E : schemeDerivedQCohCategory W), (schemeDerivedDirectImage h).map ((c f g).hom.app E) ≫ (c (f ≫ g) h).hom.app E ≫ eqToHom (congrArg (fun k : W ⟶ Z => (schemeDerivedDirectImage k).obj E.obj) (Category.assoc f g h)) = (c g h).hom.app ⟨(schemeDerivedDirectImage f).obj E.obj, p f E⟩ ≫ (c f (g ≫ h)).hom.app E)",
+  "branch": "sheaf-dag",
+  "by": "R1",
+  "date": "2026-10-12",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-pdc2",
+  "group": "R1",
+  "result": "pass"
  }
 }

@@ -5492,3 +5492,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 18:01 L: merged deliver/Q1/lem-pc-projection-locality (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.ProjectionFormulaLocality AlgebraicGeometry.projectionFormula_isIso_iff_openCover)
 - 18:03 L: merged deliver/E1/lem-weil-pbc-henselization-flat-quotients (stage 2; reviewer PASS; first push; Sheaf.RingTheory.PairHenselizationFlatQuotients RingTheory.pair_henselization_flat_quotients)
 - 18:03 L: merged deliver/S1/lem-sc-affine-projective-complex-derived-hom (stage 2; reviewer FIX; first push; Sheaf.Paper.AffineProjectiveComplexDerivedHom CategoryTheory.affineProjectiveComplexDerivedHom)
+- 18:04 L: merged deliver/R1/lem-pc-proper-derived-direct-image-composition (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.ProperDerivedDirectImageComposition AlgebraicGeometry.exists_properDerivedDirectImageComposition)
