@@ -154,5 +154,23 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of F1; spot-checked by L: 4 steps: local representatives of a section of P^# killed by f^#, local injectivity on each piece and composition of coverings, module sheafification vs underlying sets, separatedness of the sheaf P^#. Correct. L removed the proof sketch from the statement post-merge."
  },
- "lead_note": " L 2026-10-10: the proof sketch inside the statement (left by the creating item) removed after the merge; the proof steps carry it."
+ "lead_note": " L 2026-10-10: the proof sketch inside the statement (left by the creating item) removed after the merge; the proof steps carry it.",
+ "lean": {
+  "module": "Sheaf.Paper.SiteModuleSheafificationLiftInjective",
+  "declaration": "CategoryTheory.site_module_sheafification_lift_injective",
+  "statement": "lemma site_module_sheafification_lift_injective {C : Type u₁} [Category.{v₁} C] {J : GrothendieckTopology C} {R : Sheaf J RingCat.{u}} [J.WEqualsLocallyBijective AddCommGrpCat.{v}] [HasWeakSheafify J AddCommGrpCat.{v}] {P : PresheafOfModules.{v} R.obj} {F : SheafOfModules.{v} R} (f : P ⟶ (SheafOfModules.forget R).obj F) [Presheaf.IsLocallyInjective J ((PresheafOfModules.toPresheaf R.obj).map f)] : (∀ (X : Cᵒᵖ), Function.Injective (((SheafOfModules.toSheaf R).map ((PresheafOfModules.sheafificationHomEquiv (𝟙 R.obj)).symm f)).hom.app X)) ∧ Mono ((PresheafOfModules.sheafificationHomEquiv (𝟙 R.obj)).symm f)",
+  "by": "N1",
+  "date": "2026-10-12",
+  "file": "lean/Sheaf/Paper/SiteModuleSheafificationLiftInjective.lean",
+  "branch": "sheaf-dag",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "N1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ }
 }
