@@ -195,5 +195,23 @@
   "by": "L",
   "result": "pass",
   "note": "Eight steps along Stacks 0CAL: reduction to a finite sober space by the 0CAK node (statement matches modules.tex 3061), embedding of G into the product of skyscrapers (sections determined by germs), skyscraper = pushforward of the constant sheaf on the closure (new node, elementary statement), then the pull-back written out: f^{-1} preserves injectivity on sections (via stalks), commutes with finite products, pulls (W->Y)_* R back to (f^{-1}W->X)_* R (new node), and f^{-1}W is constructible since Y\\W is quasi-compact. Correct. Three new unsplit nodes, no Mathlib match; tags verified."
+ },
+ "lean": {
+  "module": "Sheaf.Topology.SpectralFiniteCoequalizerEmbedsConstant",
+  "declaration": "TopCat.spectral_finite_coequalizer_embeds_constant",
+  "file": "lean/Sheaf/Topology/SpectralFiniteCoequalizerEmbedsConstant.lean",
+  "statement": "theorem spectral_finite_coequalizer_embeds_constant (X : TopCat.{u}) [SpectralSpace X] (F : X.Sheaf (Type u)) (m n : ℕ) (U : Fin n → Opens X) (V : Fin m → Opens X) (S : Fin n → Type u) (T : Fin m → Type u) (hU : ∀ a : Fin n, IsCompact (U a : Set X)) (hV : ∀ b : Fin m, IsCompact (V b : Set X)) (hS : ∀ a : Fin n, Finite (S a)) (hT : ∀ b : Fin m, Finite (T b)) (A : Cofan (fun a : Fin n => extensionByEmptyConstant (U a) (S a))) (B : Cofan (fun b : Fin m => extensionByEmptyConstant (V b) (T b))) (hA : Nonempty (IsColimit A)) (hB : Nonempty (IsColimit B)) (β γ : B.pt ⟶ A.pt) (q : A.pt ⟶ F) (hq : β ≫ q = γ ≫ q) (hcoeq : Nonempty (IsColimit (Cofork.ofπ q hq))) : ∃ (k : ℕ) (Z : Fin k → Set X) (R : Fin k → Type u), (∀ l : Fin k, IsClosed (Z l) ∧ Topology.IsConstructible (Z l) ∧ Finite (R l)) ∧ ∃ e : ∀ W : Opens X, F.obj.obj (op W) → ((l : Fin k) → LocallyConstant {x : X // x ∈ W ∧ x ∈ Z l} (R l)), (∀ W : Opens X, Function.Injective (e W)) ∧ ∀ (W W' : Opens X) (i : W' ⟶ W) (s : F.obj.obj (op W)) (l : Fin k), e W' (F.obj.map i.op s) l = LocallyConstant.comap ⟨fun x : {x : X // x ∈ W' ∧ x ∈ Z l} ↦ ⟨x.1, i.le x.2.1, x.2.2⟩, continuous_subtype_val.subtype_mk _⟩ (e W s l)",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "H1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }
