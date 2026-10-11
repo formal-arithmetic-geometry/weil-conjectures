@@ -52,8 +52,6 @@ by its global sections, since every étale `k`-scheme is covered by its `k`-poin
   modules on `Spec k` without nonzero global sections is zero.
 - `AlgebraicGeometry.Scheme.subsingleton_H_constantSheaf_of_isSepClosed`:
   `H^q(Spec k_ét, ℤ) = 0` for `q ≥ 1` and `k` separably closed.
-- `AlgebraicGeometry.Scheme.subsingleton_H_of_isSepClosed`: more generally `H^q(Spec k_ét, F) = 0`
-  for every abelian sheaf `F`, `q ≥ 1` and `k` separably closed.
 - `AlgebraicGeometry.Scheme.surjective_app_of_shortExact_constantSheaf_int`: every `ℤ`-torsor
   on `Spec K` is trivial, in the form: for `0 → ℤ → E → Q → 0` exact, `Γ(E) → Γ(Q)` is
   surjective.
@@ -208,18 +206,6 @@ the Galois group being trivial; we use directly that the constant sheaf `ℤ` is
 theorem subsingleton_H_constantSheaf_of_isSepClosed (q : ℕ) :
     Subsingleton (Sheaf.H ((constantSheaf (Spec (.of k)).smallEtaleTopology
       AddCommGrpCat.{u + 1}).obj (AddCommGrpCat.of (ULift ℤ))) (q + 1)) :=
-  Abelian.Ext.subsingleton_of_projective _ _ _
-
-/-- Blueprint `lem-kun-cd-sep-closed-point`: Cohomological dimension of a separably closed point.
-
-For a separably closed field `k`, `H^q(Spec k_ét, F) = 0` for every abelian étale sheaf `F` on
-`Spec k` and every `q ≥ 1`. In particular the torsion étale cohomological dimension of `Spec k`
-is `0`, the special case of the cohomological-dimension bound of `sk-prop-sf-finiteness`. The
-constant sheaf `ℤ` corepresents the exact global sections functor, so it is projective
-(`AlgebraicGeometry.Scheme.projective_constantSheaf_of_isSepClosed`). -/
-theorem subsingleton_H_of_isSepClosed
-    (F : Sheaf (Spec (.of k)).smallEtaleTopology AddCommGrpCat.{u + 1}) (q : ℕ) :
-    Subsingleton (Sheaf.H F (q + 1)) :=
   Abelian.Ext.subsingleton_of_projective _ _ _
 
 end IsSepClosed

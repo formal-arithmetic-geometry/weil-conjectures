@@ -47,9 +47,9 @@ and are stated here with `sorry`; they are proved there.
 - `AlgebraicGeometry.Etale.boundedConstructible_rightDerivedLowerShriek` and
   `AlgebraicGeometry.Etale.boundedConstructible_rightDerivedLowerShriek_padicAlgCl`
 - `AlgebraicGeometry.Etale.isZero_homology_rightDerivedLowerShriek`
-- `boundedConstructible_rightDerivedLowerStar_singleFunctor_of_isOpenImmersion`
-  and `AlgebraicGeometry.Etale.isZero_upperStar_homology_rightDerivedLowerStar_singleFunctor`
-  (`thm-fin-open-immersion`)
+- `thm-fin-open-immersion`, both in the namespace `AlgebraicGeometry.Etale`:
+  `boundedConstructible_rightDerivedLowerStar_singleFunctor_of_isOpenImmersion` and
+  `isZero_upperStar_homology_rightDerivedLowerStar_singleFunctor`
 -/
 
 @[expose] public section
@@ -235,18 +235,21 @@ omit [Finite Λ] in
 /-- For an open immersion `j`, restricting `Rj_* K` back along `j` gives `K` again: compute
 `Rj_*` on a K-injective complex `I` representing `K`, and use that the counit
 `j^* j_* ⟶ 𝟭` is an isomorphism, `j_*` being fully faithful. -/
-lemma nonempty_iso_mapDerivedCategory_upperStar_rightDerivedLowerStar (j : X ⟶ Y)
+noncomputable def mapDerivedCategoryUpperStarRightDerivedLowerStarIso (j : X ⟶ Y)
     [IsOpenImmersion j]
     (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
-    Nonempty (D((j)^*[ModuleCat.{u + 1} Λ]).obj ((R((j)_*[ModuleCat.{u + 1} Λ])).obj K) ≅ K) := by
-  obtain ⟨I, _, ⟨e⟩⟩ := _root_.DerivedCategory.exists_iso_Q_obj_of_isKInjective K
-  exact ⟨D((j)^*[ModuleCat.{u + 1} Λ]).mapIso
+    D((j)^*[ModuleCat.{u + 1} Λ]).obj ((R((j)_*[ModuleCat.{u + 1} Λ])).obj K) ≅ K :=
+  have h := _root_.DerivedCategory.exists_iso_Q_obj_of_isKInjective K
+  let I := h.choose
+  have : I.IsKInjective := h.choose_spec.1
+  let e : K ≅ _root_.DerivedCategory.Q.obj I := h.choose_spec.2.some
+  D((j)^*[ModuleCat.{u + 1} Λ]).mapIso
       ((R((j)_*[ModuleCat.{u + 1} Λ])).mapIso e ≪≫
         ((j)_*[ModuleCat.{u + 1} Λ]).rightDerivedFunctorObjQIso I) ≪≫
     ((j)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryFactors.app _ ≪≫
     _root_.DerivedCategory.Q.mapIso ((NatIso.mapHomologicalComplex
       (asIso (Etale.upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) j).counit) _).app I ≪≫
-        (Functor.mapHomologicalComplexIdIso _ _).app I) ≪≫ e.symm⟩
+        (Functor.mapHomologicalComplexIdIso _ _).app I) ≪≫ e.symm
 
 /-! ### Open immersions -/
 
@@ -284,7 +287,7 @@ theorem isZero_upperStar_homology_rightDerivedLowerStar_singleFunctor (j : X ⟶
     IsZero ((j)^*[ModuleCat.{u + 1} Λ].obj ((_root_.DerivedCategory.homologyFunctor _ q).obj
       ((R((j)_*[ModuleCat.{u + 1} Λ])).obj
         ((_root_.DerivedCategory.singleFunctor _ 0).obj F)))) := by
-  obtain ⟨e⟩ := nonempty_iso_mapDerivedCategory_upperStar_rightDerivedLowerStar Λ j
+  let e := mapDerivedCategoryUpperStarRightDerivedLowerStarIso Λ j
     ((_root_.DerivedCategory.singleFunctor _ 0).obj F)
   refine IsZero.of_iso ?_ ((((j)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryHomologyFunctorIso
     q).app _ ≪≫ (_root_.DerivedCategory.homologyFunctor _ q).mapIso e)
@@ -391,7 +394,11 @@ the blueprint's `Rᵠf_! 𝓕 = 0`, which is
 `AlgebraicGeometry.Etale.isZero_homology_rightDerivedLowerShriek_singleFunctor`
 (`sbc-thm-finiteness-finite-type`), and the general case follows by dévissage
 (`AlgebraicGeometry.Etale.isLE_rightDerivedLowerShriek_obj`). Some bound on the degrees of `K`
-is needed: for `f = 𝟙` the complex `K = Λ[-1]` has `H^1(Rf_! K) = Λ`. -/
+is needed: for `f = 𝟙` the complex `K = Λ[-1]` has `H^1(Rf_! K) = Λ`.
+
+The hypothesis `[QuasiCompact aY]` is stronger than needed: the vanishing is local on `Y`, so it
+holds for `Y` locally of finite type, but removing the hypothesis needs a reduction to affine
+opens of `Y` along open immersions, which is not formalised here. -/
 theorem isZero_homology_rightDerivedLowerShriek (f : X ⟶ Y) [HasCompactification f]
     [HasInvertibleExponent Λ X] (aX : X ⟶ Spec (.of k)) (aY : Y ⟶ Spec (.of k))
     [LocallyOfFiniteType aX] [LocallyOfFiniteType aY] [QuasiCompact aY] (hf : f ≫ aY = aX)
