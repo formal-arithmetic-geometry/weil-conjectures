@@ -117,5 +117,24 @@
   "group": "C1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-cce1709 (reviewer sub-agent of L); spot-checked: Source Stacks 03RX(3) / Modules on Sites 03CS, 03EI; statement unchanged (finite ring Lambda, exact sequence of finite left Lambda-modules, constant sheaves on the small etale site exact), stmt_deps gains def-weil-pbc-constant-sheaf which the statement uses. Step 1 carried by def-weil-pbc-constant-sheaf (constant sheaf = sheafification of the constant presheaf, any value category with sheafification, here Mod_Lambda) and def-weil-pbc-etale-site. Step 2 by clause (1) of lem-weil-pbc-site-r-module-presheaf-sheafification-exact (presheaves of R-modules abelian, kernels/cokernels sectionwise); its Mathlib match is ModuleCat R for any Ring R, so noncommutative finite Lambda is covered (C4 ok). Step 3 by clause (2) of the same node (sheafification exact). No torsor/local-splitting argument is used, so the 15:52/16:17 HUMAN.md issues on lemma-constructible-flc-serre do not touch it. C7/C8: both off-unit citations are Mathlib leaves used as generic tools; the unit's own lem-weil-pbc-sheafification-exact is for abelian groups only, so the R-module version is the right one; no route step replaced. No new nodes. Tested on 0 -> 2Z/4 -> Z/4 -> Z/2 -> 0 (nonsplit, sectionwise exact, stays exact after sheafification). Fixes: : proof[1].text and proof[2].text: unescaped \\to had become TAB characters (9 occurrences) restored to \\\\to; split_report.date: 2026-10-11 -> 2026-10-10 (date -u). Start Sat Oct 10 05:03:13 PM UTC 2026, end Sat Oct 10 05:04:04 PM UTC 2026.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ConstantEtaleSheafShortExact",
+  "declaration": "AlgebraicGeometry.Scheme.constantEtaleSheaf_shortExact",
+  "file": "lean/Sheaf/AlgebraicGeometry/ConstantEtaleSheafShortExact.lean",
+  "statement": "theorem constantEtaleSheaf_shortExact (X : Scheme.{u}) (Λ : Type (u + 1)) [Ring Λ] [Finite Λ] (S : ShortComplex (ModuleCat.{u + 1} Λ)) [Finite S.X₁] [Finite S.X₂] [Finite S.X₃] (hS : S.ShortExact) : (S.map (constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))).ShortExact",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": false,
+  "note": "Uses the standard fixed-coefficient realization Sheaf X.smallEtaleTopology (ModuleCat Λ), as in the source constructible-sheaf library. A sheaf of Λ-modules is equivalently a sheaf of modules over the associated constant ring sheaf: locally constant scalars act by sheaf gluing. Retains finiteness of Λ and of all three modules; ShortExact includes both zero endpoints."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-cce1035",
+  "group": "E1",
+  "result": "pass",
+  "note": "X:Scheme.{u}; finite ring = [Ring Λ][Finite Λ] (noncomm allowed, left ModuleCat); K,L,N finite = [Finite S.Xi]; 0->K->L->N->0 = S.ShortExact; K_X etc = S.map (Mathlib constantSheaf on X.smallEtaleTopology), coefficients Sheaf _ (ModuleCat.{u+1} Λ) as source ConstructibleSheaf/Defs and landed EtaleStalkTensorScalar; conclusion ShortExact; not existing: source has only generic PreservesFiniteLimits/Colimits (constantSheaf J A)"
  }
 }
