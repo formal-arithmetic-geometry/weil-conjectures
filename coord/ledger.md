@@ -4298,3 +4298,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 10:44 L: merged deliver/K1/lem-weil-pbc-fs-adic-lift-derivation (stage 2; reviewer PASS; first push; Sheaf.RingTheory.Derivation.FormallySmoothAdicExtension Derivation.exists_extension_of_formallySmoothAdic)
 - 10:44 L: merged deliver/C1/lem-weil-pbc-fpqc-descend-quasi-compact (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.FpqcDescendQuasiCompact AlgebraicGeometry.quasiCompact_of_fpqc_baseChange)
 - 10:44 L: merged deliver/C1/lem-weil-pbc-free-sheaf-flat (stage 2; reviewer PASS; first push; Sheaf.CategoryTheory.GrothendieckAbelian.Monoidal.FreeSheafFlat CategoryTheory.GrothendieckTopology.free_sheaf_flat)
+- 10:45 L: merged deliver/G1/def-pod-lisse-l-adic-sheaves (stage 2; reviewer FIX; first push; Sheaf.Paper.LisseAdicSheaves AlgebraicGeometry.Scheme.LisseIntegralSheaf; dependency modules: def-weil-finite-subextension-directed-set; statement corrected (1 citers))
