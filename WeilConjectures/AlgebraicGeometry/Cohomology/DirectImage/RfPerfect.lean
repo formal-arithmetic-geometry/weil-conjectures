@@ -1,0 +1,287 @@
+/-
+Copyright (c) 2026 Claude. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Claude
+-/
+module
+
+public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.CechFlat
+public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.FiniteFreeComplex
+public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
+public import WeilConjectures.CategoryTheory.DerivedCategory.Perfect.BaseChange
+public import WeilConjectures.CategoryTheory.DerivedCategory.Perfect.OfFlat
+
+/-!
+# Perfectness of `Rf_* ℱ` and derived base change over an affine base
+
+Let `f : X ⟶ S` be quasi-compact and separated with `S = Spec A` affine, `U` a finite cover of
+`X` by affine opens and `ℱ` a quasi-coherent `𝒪_X`-module. Over the affine base, the derived
+direct image `Rf_* ℱ` is represented in `D(A)` by the Čech complex `Č(U, ℱ)`
+(`AlgebraicGeometry.Scheme.Modules.nonempty_homology_cechModuleComplex_linearEquiv`, the
+blueprint's `lem-pc-cech-resolution`).
+
+## Main statements
+
+- `AlgebraicGeometry.Scheme.Modules.nonempty_Q_baseChange_iso_cechModuleComplex`
+  (`lem-pc-rf-base-change-flat-module`): if `ℱ` is flat over `S`, then `Rf_* ℱ` is represented
+  by a bounded complex `K` of flat `A`-modules, and for every base change `T = Spec B ⟶ S` the
+  derived pullback `Lg^* Rf_* ℱ = B ⊗[A] K` is `Rf_{T*} ℱ_T`.
+- `AlgebraicGeometry.Scheme.Modules.isPerfect_Q_cechModuleComplex_of_isClosedImmersion`
+  (`lem-pc-projective-noetherian-rf-perfect`): for `S` noetherian, `f` projective and `ℱ`
+  coherent and flat over `S`, `Rf_* ℱ` is perfect.
+- `AlgebraicGeometry.Scheme.Modules.isPerfect_Q_cechModuleComplex_baseChange_of_isClosedImmersion`
+  (`cor-pc-projective-noetherian-rf-perfect-base-change`): the derived pullback of `Rf_* ℱ` along
+  any `T = Spec B ⟶ S` is perfect and is `Rf_{T*} ℱ_T`.
+- `AlgebraicGeometry.Scheme.Modules.isPerfect_Q_cechModuleComplex_of_isProper`
+  (`lem-pc-rf-perfect-base-change`): the same for `f` proper of finite presentation and `ℱ` of
+  finite presentation and flat over `S`.
+-/
+
+@[expose] public section
+
+universe u
+
+open CategoryTheory Limits TensorProduct DerivedCategory
+
+namespace AlgebraicGeometry.Scheme.Modules
+
+variable {X S : Scheme.{u}} (f : X ⟶ S) (ℱ : X.Modules) {ι : Type u} (U : ι → X.Opens)
+
+section BaseChange
+
+variable [IsAffine S] [IsSeparated f] [Fintype ι] [Nonempty ι] (hU : ∀ i, IsAffineOpen (U i))
+  (hU' : iSup U = ⊤) [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) ℱ]
+
+include hU hU' in
+/-- The Čech complex is isomorphic in `D(A)` to its truncation, a bounded complex of flat
+modules. -/
+lemma nonempty_Q_cechModuleComplexTrunc_iso :
+    Nonempty (Q.obj (cechModuleComplexTrunc f ℱ U) ≅ Q.obj (cechModuleComplex f ℱ U)) :=
+  have := quasiIso_ιTruncLE_cechModuleComplex f ℱ U hU hU'
+  ⟨asIso (Q.map ((cechModuleComplex f ℱ U).ιTruncLE _))⟩
+
+include hU hU' in
+/-- **Derived base change for a relatively flat module.** Let `f : X ⟶ S` be quasi-compact and
+separated with `S = Spec A` affine, `U` a finite cover of `X` by affine opens and `ℱ` a
+quasi-coherent `𝒪_X`-module flat over `S`. Over the affine base, `Rf_* ℱ` is represented in
+`D(A)` by the Čech complex `Č(U, ℱ)`
+(`AlgebraicGeometry.Scheme.Modules.nonempty_homology_cechModuleComplex_linearEquiv`), hence by its
+truncation `K = τ^{≤ #ι - 1} Č(U, ℱ)`
+(`AlgebraicGeometry.Scheme.Modules.nonempty_Q_cechModuleComplexTrunc_iso`), a bounded complex of
+flat `A`-modules (`AlgebraicGeometry.Scheme.Modules.flat_cechModuleComplexTrunc_X`). The derived
+pullback along `g : T = Spec B ⟶ S` is therefore computed by the termwise base change: it is the
+image of `B ⊗[A] K` in `D(B)`.
+
+For every cartesian square
+```
+Y --g'--> X
+|         |
+f'        f
+v         v
+T --g---> S
+```
+with `T` affine, this derived pullback `Lg^* Rf_* ℱ` is isomorphic in `D(B)` to the Čech complex
+`Č(g'⁻¹ U, g'^* ℱ)`, which represents `Rf_{T*} ℱ_T` since the `g'⁻¹ U` form a finite cover of
+`Y` by affine opens. The proof: the Čech complex of `ℱ_T` is the base change of that of `ℱ`
+(`AlgebraicGeometry.Scheme.Modules.cechModuleComplexBaseChangeIso`), and the truncation stays a
+quasi-isomorphism after base change, the cycles of `Č(U, ℱ)` being flat in degrees `≥ #ι - 1`
+(`AlgebraicGeometry.Scheme.Modules.quasiIso_map_baseChange_ιTruncLE_cechModuleComplex`).
+
+(blueprint: `lem-pc-rf-base-change-flat-module`) -/
+theorem nonempty_Q_baseChange_iso_cechModuleComplex (hℱ : ℱ.IsFlatOver f) {T Y : Scheme.{u}}
+    {g : T ⟶ S} {g' : Y ⟶ X} {f' : Y ⟶ T} (H : IsPullback g' f' f g) [IsAffine T]
+    [Algebra Γ(S, ⊤) Γ(T, ⊤)] (hg : algebraMap Γ(S, ⊤) Γ(T, ⊤) = g.appTop.hom) :
+    Nonempty (Q.obj (((ModuleCat.baseChange Γ(S, ⊤) Γ(T, ⊤)).mapHomologicalComplex _).obj
+      (cechModuleComplexTrunc f ℱ U)) ≅
+      Q.obj (cechModuleComplex f' ((pullback g').obj ℱ) (fun i ↦ g' ⁻¹ᵁ U i))) :=
+  have := quasiIso_map_baseChange_ιTruncLE_cechModuleComplex f ℱ U hU hU' hℱ Γ(T, ⊤)
+  ⟨asIso (Q.map (((ModuleCat.baseChange Γ(S, ⊤) Γ(T, ⊤)).mapHomologicalComplex _).map
+      ((cechModuleComplex f ℱ U).ιTruncLE _))) ≪≫
+    Q.mapIso (cechModuleComplexBaseChangeIso H ℱ hg U
+      (isAffineOpen_iInf_of_isSeparated f U hU))⟩
+
+omit [Fintype ι] in
+include hU hU' in
+/-- **Perfectness of `Rf_* ℱ` from finiteness of the cohomology.** In the situation of
+`AlgebraicGeometry.Scheme.Modules.nonempty_Q_baseChange_iso_cechModuleComplex`, if `A` is
+noetherian and the cohomology modules `H^q(Č(U, ℱ)) = Γ(S, R^q f_* ℱ)` are finitely generated,
+then `Rf_* ℱ`, represented by the Čech complex, is perfect: it is represented by a bounded
+complex of flat modules with finitely generated cohomology over a noetherian ring
+(`DerivedCategory.isPerfect_of_flat_of_finite_homology`). -/
+theorem isPerfect_Q_cechModuleComplex [Finite ι] [IsNoetherianRing Γ(S, ⊤)]
+    (hℱ : ℱ.IsFlatOver f)
+    (hfin : ∀ q : ℕ, Module.Finite Γ(S, ⊤) ((cechModuleComplex f ℱ U).homology q)) :
+    (Q.obj (cechModuleComplex f ℱ U)).IsPerfect := by
+  have := Fintype.ofFinite ι
+  obtain ⟨e⟩ := nonempty_Q_cechModuleComplexTrunc_iso f ℱ U hU hU'
+  refine isPerfect_of_flat_of_finite_homology (cechModuleComplexTrunc f ℱ U) 0
+    ((Fintype.card ι : ℤ) - 1) (flat_cechModuleComplexTrunc_X f ℱ U hU hU' hℱ) e.symm
+    fun i ↦ ?_
+  let E := (homologyFunctorFactors (ModuleCat.{u} Γ(S, ⊤)) i).app (cechModuleComplex f ℱ U)
+  have : Module.Finite Γ(S, ⊤) ((cechModuleComplex f ℱ U).homology i) := by
+    obtain ⟨q, rfl⟩ | hi : (∃ q : ℕ, (q : ℤ) = i) ∨ i < 0 := by
+      rcases le_or_gt 0 i with h | h
+      · exact Or.inl ⟨i.toNat, by lia⟩
+      · exact Or.inr h
+    · exact hfin q
+    · have : Subsingleton ((cechModuleComplex f ℱ U).homology i) :=
+        ModuleCat.subsingleton_of_isZero
+          (((cechModuleComplex f ℱ U).exactAt_iff_isZero_homology i).1
+            (exactAt_cechModuleComplex f ℱ U hU hU' i (Or.inl hi)))
+      infer_instance
+  have : Module.Finite Γ(S, ⊤) ((HomologicalComplex.homologyFunctor (ModuleCat.{u} Γ(S, ⊤))
+      (ComplexShape.up ℤ) i).obj
+      (cechModuleComplex f ℱ U)) := this
+  exact Module.Finite.equiv E.toLinearEquiv.symm
+
+end BaseChange
+
+section Perfect
+
+variable [IsAffine S] [Finite ι] [Nonempty ι] (hU : ∀ i, IsAffineOpen (U i)) (hU' : iSup U = ⊤)
+  [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) ℱ]
+
+include hU hU' in
+/-- `Rf_* ℱ` is perfect over a noetherian affine base for `f` proper and `ℱ` coherent and flat
+over the base: the Čech complex has finitely generated cohomology `Γ(S, R^q f_* ℱ)`
+(`AlgebraicGeometry.Scheme.Modules.finite_sections_higherDirectImage`). -/
+lemma isPerfect_Q_cechModuleComplex_of_isNoetherianRing [IsNoetherianRing Γ(S, ⊤)] [IsProper f]
+    [LocallyOfFinitePresentation f] [ℱ.IsFinitePresentation] (hℱ : ℱ.IsFlatOver f) :
+    (Q.obj (cechModuleComplex f ℱ U)).IsPerfect := by
+  have := isGrothendieckAbelian X
+  have := Fintype.ofFinite ι
+  refine isPerfect_Q_cechModuleComplex f ℱ U hU hU' hℱ fun q ↦ ?_
+  obtain ⟨e⟩ := nonempty_homology_cechModuleComplex_linearEquiv f ℱ U hU hU' q
+  have := finite_sections_higherDirectImage f ℱ q
+  exact Module.Finite.equiv e.symm
+
+include hU hU' in
+/-- **Perfect direct image for a projective noetherian family.** Let `S = Spec A` be affine and
+noetherian, `f : X ⟶ S` projective, i.e. `f = i ≫ π` for a closed immersion `i : X ⟶ ℙⁿ_S`, and
+`ℱ` a coherent `𝒪_X`-module flat over `S`. Then `Rf_* ℱ`, represented over the affine base by the
+Čech complex `Č(U, ℱ)` of a finite cover `U` of `X` by affine opens
+(`AlgebraicGeometry.Scheme.Modules.nonempty_homology_cechModuleComplex_linearEquiv`), is a perfect
+object of `D(A)`.
+
+The Čech complex is quasi-isomorphic to a bounded complex of flat `A`-modules
+(`AlgebraicGeometry.Scheme.Modules.nonempty_Q_cechModuleComplexTrunc_iso`) whose cohomology
+modules `Γ(S, R^q f_* ℱ)` are finitely generated, hence is perfect
+(`DerivedCategory.isPerfect_of_flat_of_finite_homology`). The finiteness of the cohomology is the
+blueprint's `lem-pc-coherent-hi`
+(`AlgebraicGeometry.Scheme.Modules.finite_sections_higherDirectImage`),
+which covers all proper morphisms; the blueprint quotes `lem-pc-projective-coherent-finiteness`,
+its projective case.
+
+(blueprint: `lem-pc-projective-noetherian-rf-perfect`) -/
+theorem isPerfect_Q_cechModuleComplex_of_isClosedImmersion [IsLocallyNoetherian S]
+    {n : Type u} [Finite n] (i : X ⟶ ℙ(n; S)) [IsClosedImmersion i] (hi : i ≫ ℙ(n; S) ↘ S = f)
+    [ℱ.IsFinitePresentation] (hℱ : ℱ.IsFlatOver f) :
+    (Q.obj (cechModuleComplex f ℱ U)).IsPerfect := by
+  have : IsProper f := hi ▸ inferInstance
+  have : IsNoetherianRing Γ(S, ⊤) :=
+    IsLocallyNoetherian.component_noetherian ⟨⊤, isAffineOpen_top S⟩
+  exact isPerfect_Q_cechModuleComplex_of_isNoetherianRing f ℱ U hU hU' hℱ
+
+omit [Finite ι] in
+include hU hU' in
+/-- **Arbitrary base change for a perfect `Rf_* ℱ`.** If `Rf_* ℱ` (represented by the Čech
+complex) is perfect and `ℱ` is flat over `S`, then for every cartesian square with `T = Spec B`
+affine, the derived pullback `Lg^* Rf_* ℱ` (the base change `B ⊗[A] K` of the bounded flat
+truncation `K` of the Čech complex) is perfect, and so is `Rf_{T*} ℱ_T`, represented by the Čech
+complex `Č(g'⁻¹ U, g'^* ℱ)` to which it is isomorphic. -/
+theorem isPerfect_Q_cechModuleComplex_baseChange [Fintype ι] [IsSeparated f]
+    (hℱ : ℱ.IsFlatOver f)
+    (hP : (Q.obj (cechModuleComplex f ℱ U)).IsPerfect) {T Y : Scheme.{u}} {g : T ⟶ S}
+    {g' : Y ⟶ X} {f' : Y ⟶ T} (H : IsPullback g' f' f g) [IsAffine T]
+    [Algebra Γ(S, ⊤) Γ(T, ⊤)] (hg : algebraMap Γ(S, ⊤) Γ(T, ⊤) = g.appTop.hom) :
+    (Q.obj (((ModuleCat.baseChange Γ(S, ⊤) Γ(T, ⊤)).mapHomologicalComplex _).obj
+      (cechModuleComplexTrunc f ℱ U))).IsPerfect ∧
+      (Q.obj (cechModuleComplex f' ((pullback g').obj ℱ) (fun i ↦ g' ⁻¹ᵁ U i))).IsPerfect := by
+  obtain ⟨e₁⟩ := nonempty_Q_cechModuleComplexTrunc_iso f ℱ U hU hU'
+  obtain ⟨e₂⟩ := nonempty_Q_baseChange_iso_cechModuleComplex f ℱ U hU hU' hℱ H hg
+  have h := isPerfect_Q_obj_baseChange Γ(T, ⊤) (cechModuleComplexTrunc f ℱ U) 0
+    ((Fintype.card ι : ℤ) - 1) (flat_cechModuleComplexTrunc_X f ℱ U hU hU' hℱ) (hP.of_iso e₁.symm)
+  exact ⟨h, h.of_iso e₂⟩
+
+
+include hU hU' in
+/-- **Arbitrary base change for a projective noetherian family.** Let `S = Spec A` be affine and
+noetherian, `f : X ⟶ S` projective and `ℱ` a coherent `𝒪_X`-module flat over `S`. For every
+cartesian square with `T = Spec B` affine (`B` not necessarily noetherian), the canonical
+comparison identifies the derived pullback `Lg^* Rf_* ℱ` with `Rf_{T*} ℱ_T`, and both are perfect.
+
+Here `Rf_* ℱ` is represented by the bounded complex `K = τ^{≤ #ι - 1} Č(U, ℱ)` of flat
+`A`-modules, so that `Lg^* Rf_* ℱ` is represented by `B ⊗[A] K`, and `Rf_{T*} ℱ_T` by the Čech
+complex `Č(g'⁻¹ U, g'^* ℱ)`; the isomorphism is
+`AlgebraicGeometry.Scheme.Modules.nonempty_Q_baseChange_iso_cechModuleComplex`, and perfectness
+follows from `AlgebraicGeometry.Scheme.Modules.isPerfect_Q_cechModuleComplex_of_isClosedImmersion`
+since base change preserves perfect complexes (`DerivedCategory.isPerfect_Q_obj_baseChange`).
+
+(blueprint: `cor-pc-projective-noetherian-rf-perfect-base-change`) -/
+theorem isPerfect_Q_cechModuleComplex_baseChange_of_isClosedImmersion [IsLocallyNoetherian S]
+    {n : Type u} [Finite n] (i : X ⟶ ℙ(n; S)) [IsClosedImmersion i] (hi : i ≫ ℙ(n; S) ↘ S = f)
+    [Fintype ι] [ℱ.IsFinitePresentation] (hℱ : ℱ.IsFlatOver f) {T Y : Scheme.{u}}
+    {g : T ⟶ S} {g' : Y ⟶ X} {f' : Y ⟶ T} (H : IsPullback g' f' f g) [IsAffine T]
+    [Algebra Γ(S, ⊤) Γ(T, ⊤)] (hg : algebraMap Γ(S, ⊤) Γ(T, ⊤) = g.appTop.hom) :
+    Nonempty (Q.obj (((ModuleCat.baseChange Γ(S, ⊤) Γ(T, ⊤)).mapHomologicalComplex _).obj
+      (cechModuleComplexTrunc f ℱ U)) ≅
+        Q.obj (cechModuleComplex f' ((pullback g').obj ℱ) (fun i ↦ g' ⁻¹ᵁ U i))) ∧
+      (Q.obj (((ModuleCat.baseChange Γ(S, ⊤) Γ(T, ⊤)).mapHomologicalComplex _).obj
+        (cechModuleComplexTrunc f ℱ U))).IsPerfect ∧
+      (Q.obj (cechModuleComplex f' ((pullback g').obj ℱ) (fun i ↦ g' ⁻¹ᵁ U i))).IsPerfect := by
+  have : IsProper f := hi ▸ inferInstance
+  exact ⟨nonempty_Q_baseChange_iso_cechModuleComplex f ℱ U hU hU' hℱ H hg,
+    isPerfect_Q_cechModuleComplex_baseChange f ℱ U hU hU' hℱ
+      (isPerfect_Q_cechModuleComplex_of_isClosedImmersion f ℱ U hU hU' i hi hℱ) H hg⟩
+
+
+include hU hU' in
+/-- **Perfectness of `Rf_* ℱ` and base change.** Let `f : X ⟶ S` be proper of finite
+presentation with `S = Spec A` affine, and `ℱ` an `𝒪_X`-module of finite presentation, flat over
+`S`. Then `Rf_* ℱ` is perfect and its formation commutes with arbitrary base change:
+
+* locally on `S`, `Rf_* ℱ` is represented by a bounded complex of finite free modules whose
+  pullback along every `g : T' ⟶ S` computes the higher direct images of `ℱ_{T'}`; this is the
+  classical input `exists_isFiniteFreeComplex_higherDirectImage` of `sk-thm-picard-coherence`
+  [Stacks, Tag 0B91];
+* over the affine base, `Rf_* ℱ` is represented by the bounded complex `K` of flat `A`-modules
+  of `AlgebraicGeometry.Scheme.Modules.nonempty_Q_baseChange_iso_cechModuleComplex`, and for every
+  cartesian square with `T = Spec B` affine, `Lg^* Rf_* ℱ = B ⊗[A] K ≅ Rf_{T*} ℱ_T` in `D(B)`
+  (`lem-pc-rf-base-change-flat-module`; proper morphisms are quasi-compact and separated);
+* if `A` is noetherian, `Rf_* ℱ` is a perfect object of `D(A)`, and so are all its base changes
+  `Rf_{T*} ℱ_T` in `D(B)`
+  (`AlgebraicGeometry.Scheme.Modules.isPerfect_Q_cechModuleComplex_of_isNoetherianRing`,
+  `AlgebraicGeometry.Scheme.Modules.isPerfect_Q_cechModuleComplex_baseChange`).
+
+Perfectness in `D(A)` over a non-noetherian base is the classical input of the first item; it is
+not deduced here from it, as the comparison of the two representatives of `Rf_* ℱ` would need
+the finite free complexes to be quasi-isomorphic to the Čech complex.
+
+(blueprint: `lem-pc-rf-perfect-base-change`) -/
+theorem perfect_and_baseChange_cechModuleComplex_of_isProper [IsProper f]
+    [LocallyOfFinitePresentation f] [HasInjectiveResolutions X.Modules] [Fintype ι]
+    [ℱ.IsFinitePresentation] (hℱ : ℱ.IsFlatOver f) :
+    (∀ t : S, ∃ (V : S.Opens) (P : CochainComplex V.toScheme.Modules ℤ) (d : ℕ), t ∈ V ∧
+      IsFiniteFreeComplex P d ∧
+      ∀ {T' X' : Scheme.{u}} (g : T' ⟶ V.toScheme) (g' : X' ⟶ X) (f' : X' ⟶ T')
+        [HasInjectiveResolutions X'.Modules], IsPullback g' f' f (g ≫ V.ι) → ∀ q : ℕ,
+        Nonempty ((((Modules.pullback g).mapHomologicalComplex _).obj P).homology q ≅
+          (higherDirectImage f' q).obj ((Modules.pullback g').obj ℱ))) ∧
+    (∀ {T Y : Scheme.{u}} {g : T ⟶ S} {g' : Y ⟶ X} {f' : Y ⟶ T} (_ : IsPullback g' f' f g)
+      [IsAffine T] [Algebra Γ(S, ⊤) Γ(T, ⊤)] (_ : algebraMap Γ(S, ⊤) Γ(T, ⊤) = g.appTop.hom),
+      Nonempty (Q.obj (((ModuleCat.baseChange Γ(S, ⊤) Γ(T, ⊤)).mapHomologicalComplex _).obj
+        (cechModuleComplexTrunc f ℱ U)) ≅
+          Q.obj (cechModuleComplex f' ((pullback g').obj ℱ) (fun i ↦ g' ⁻¹ᵁ U i)))) ∧
+    (IsNoetherianRing Γ(S, ⊤) → (Q.obj (cechModuleComplex f ℱ U)).IsPerfect ∧
+      ∀ {T Y : Scheme.{u}} {g : T ⟶ S} {g' : Y ⟶ X} {f' : Y ⟶ T} (_ : IsPullback g' f' f g)
+        [IsAffine T] [Algebra Γ(S, ⊤) Γ(T, ⊤)] (_ : algebraMap Γ(S, ⊤) Γ(T, ⊤) = g.appTop.hom),
+        (Q.obj (cechModuleComplex f' ((pullback g').obj ℱ) (fun i ↦ g' ⁻¹ᵁ U i))).IsPerfect) := by
+  refine ⟨fun t ↦ exists_isFiniteFreeComplex_higherDirectImage f ℱ hℱ t,
+    fun H _ _ hg ↦ nonempty_Q_baseChange_iso_cechModuleComplex f ℱ U hU hU' hℱ H hg,
+    fun _ ↦ ?_⟩
+  have hP := isPerfect_Q_cechModuleComplex_of_isNoetherianRing f ℱ U hU hU' hℱ
+  exact ⟨hP, fun H _ _ hg ↦ (isPerfect_Q_cechModuleComplex_baseChange f ℱ U hU hU' hℱ hP H hg).2⟩
+
+end Perfect
+
+end AlgebraicGeometry.Scheme.Modules

@@ -16,6 +16,8 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.MonoidalFree
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.RestrictScalars
 public import WeilConjectures.Algebra.Central.ReducedNorm
 public import WeilConjectures.Algebra.Homology.BifunctorLinear
+public import WeilConjectures.Algebra.Homology.FlatComplex
+public import WeilConjectures.Algebra.Homology.FlatComplexBaseChange
 public import WeilConjectures.Algebra.Homology.HomologyPiAb
 public import WeilConjectures.Algebra.Homology.HomotopyCategory.Braided
 public import WeilConjectures.Algebra.Homology.HomotopyCategory.DerivabilityStructure
@@ -74,11 +76,15 @@ public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.AffineMor
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.BaseChange
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Basic
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.CechExact
+public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.CechFlat
+public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.CechModule
+public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.CechModuleBaseChange
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.FiniteFreeComplex
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.PerfectLocus
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.PerfectLocusOfRank
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.ProjectionFormula
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Restrict
+public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.RfPerfect
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Sections
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Semicontinuity
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DualityPairing
@@ -545,6 +551,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.ShiftCompa
 public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.ShiftUnitor
 public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Unit
 public import WeilConjectures.CategoryTheory.DerivedCategory.Perfect
+public import WeilConjectures.CategoryTheory.DerivedCategory.Perfect.BaseChange
 public import WeilConjectures.CategoryTheory.DerivedCategory.Perfect.Dualizable
 public import WeilConjectures.CategoryTheory.DerivedCategory.Perfect.OfFlat
 public import WeilConjectures.CategoryTheory.DerivedCategory.PerfectTrace
@@ -1446,6 +1453,7 @@ public import WeilConjectures.RingTheory.DiscreteValuationRing.Dominating
 public import WeilConjectures.RingTheory.DualContent
 public import WeilConjectures.RingTheory.FaithfullyFlat.Amitsur
 public import WeilConjectures.RingTheory.FaithfullyFlat.FamilyDescent
+public import WeilConjectures.RingTheory.Flat.ShortExact
 public import WeilConjectures.RingTheory.GenericConnectedness
 public import WeilConjectures.RingTheory.GenericIrreducibility
 public import WeilConjectures.RingTheory.GradedAlgebra.LinearPair

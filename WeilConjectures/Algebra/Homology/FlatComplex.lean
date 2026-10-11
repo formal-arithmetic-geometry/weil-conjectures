@@ -85,7 +85,8 @@ lemma flat_ker_d_of_flat_ker_d_succ (k : ℤ) [Module.Flat A (C.X k)] (hk : C.Ex
 in degrees `≥ m`, whose cycles `Zᵏ` are flat for `k ≥ N`. Then `Zᵏ` is flat for all
 `k ≥ m - 1`. -/
 theorem flat_ker_d_of_exactAt (hC : ∀ k, Module.Flat A (C.X k)) {m N : ℤ}
-    (hex : ∀ k, m ≤ k → C.ExactAt k) (hN : ∀ k, N ≤ k → Module.Flat A (LinearMap.ker (C.d k (k + 1)).hom))
+    (hex : ∀ k, m ≤ k → C.ExactAt k)
+    (hN : ∀ k, N ≤ k → Module.Flat A (LinearMap.ker (C.d k (k + 1)).hom))
     (k : ℤ) (hk : m - 1 ≤ k) : Module.Flat A (LinearMap.ker (C.d k (k + 1)).hom) := by
   suffices h : ∀ t : ℕ, ∀ k : ℤ, m - 1 ≤ k → N ≤ k + t →
       Module.Flat A (LinearMap.ker (C.d k (k + 1)).hom) from
@@ -115,7 +116,8 @@ lemma range_lTensor_subtype_ker_d (k : ℤ) (hk₁ : C.ExactAt (k + 1)) (hk₂ :
       LinearMap.ker ((C.d k (k + 1)).hom.lTensor P) := by
   have hinj := injective_lTensor_subtype_ker_d (C := C) P (k + 1) hk₂
   have e : (C.d k (k + 1)).hom.lTensor P =
-      (LinearMap.ker (C.d (k + 1) (k + 1 + 1)).hom).subtype.lTensor P ∘ₗ (C.dToKer k).lTensor P := by
+      (LinearMap.ker (C.d (k + 1) (k + 1 + 1)).hom).subtype.lTensor P ∘ₗ
+        (C.dToKer k).lTensor P := by
     rw [← LinearMap.lTensor_comp]
     rfl
   rw [e, LinearMap.ker_comp, LinearMap.ker_eq_bot.2 hinj, Submodule.comap_bot]
