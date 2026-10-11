@@ -26,7 +26,9 @@
   "pqf-def-locnoeth",
   "def-weil-pbc-coherent-formal-module",
   "pqf-def-coherent",
-  "def-weil-sheaf-of-modules-category"
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-graded-sheaf-structures",
+  "def-weil-pbc-formal-kernel-graded-pieces"
  ],
  "proof": [
   {
@@ -160,5 +162,26 @@
  },
  "tool_uses": [
   "pqf-lem-coherent-ft-locnoeth"
- ]
+ ],
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FormalSystemsKernelReesFinite",
+  "declaration": "AlgebraicGeometry.formalSystems_kernel_rees_finite",
+  "declarations": [
+   "AlgebraicGeometry.formalSystems_kernel_rees_finite"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/FormalSystemsKernelReesFinite.lean",
+  "statement": "theorem formalSystems_kernel_rees_finite {X : Scheme.{ut}} [IsNoetherian X] (I : X.IdealSheafData) (F : CoherentFormalModule X I) : (∐ (formalKernelPiece F)).IsQuasicoherent ∧ ∃ A : GradedSheafAlgebra (formalAssociatedGradedPiece I), A.unit = formalAssociatedGradedπ I 0 ∧ (∀ (m n : ℕ) (U : X.Opens) (a : (Scheme.idealSheafPower I.toModulesι m).1.val.obj (op U)) (b : (Scheme.idealSheafPower I.toModulesι n).1.val.obj (op U)), ∃ c : (Scheme.idealSheafPower I.toModulesι (m + n)).1.val.obj (op U), (Scheme.idealSheafPower I.toModulesι (m + n)).2.val.app (op U) c = (@id Γ(X, U) ((Scheme.idealSheafPower I.toModulesι m).2.val.app (op U) a)) * (@id Γ(X, U) ((Scheme.idealSheafPower I.toModulesι n).2.val.app (op U) b)) ∧ A.mul m n U ((formalAssociatedGradedπ I m).val.app (op U) a) ((formalAssociatedGradedπ I n).val.app (op U) b) = (formalAssociatedGradedπ I (m + n)).val.app (op U) c) ∧ ∃ M : GradedSheafModule A (formalKernelPiece F), M.IsLocallyGeneratedInDegreeZero ∧ ∀ (m n : ℕ) (U : X.Opens) (a : (Scheme.idealSheafPower I.toModulesι m).1.val.obj (op U)) (x : (formalKernelPiece F n).val.obj (op U)) (t : (F.obj.obj (op (m + n))).val.obj (op U)), (F.obj.map (homOfLE (Nat.le_add_left n m)).op).val.app (op U) t = (formalKernelι F n).val.app (op U) x → (formalKernelι F (m + n)).val.app (op U) (M.act m n U ((formalAssociatedGradedπ I m).val.app (op U) a) x) = (@id Γ(X, U) ((Scheme.idealSheafPower I.toModulesι m).2.val.app (op U) a)) • t",
+  "branch": "sheaf-dag",
+  "by": "T1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-krf",
+  "group": "T1",
+  "result": "pass",
+  "note": "Noetherian X via IsNoetherian; I as IdealSheafData; F : CoherentFormalModule X I (landed family, op n = F_(n+1)); K_0=F_1, K_(n+1)=kernel of actual transition; B_n = formalModuleQuotient I 1 of landed idealSheafPower n (I^0=O_X); A.unit = pi_0 (1 mod I); multiplication tied to section products via c in I^(m+n); action tied to local lifts a*t through kernel inclusions (mono) so A, M are determined; quasi-coherence of the coproduct via SheafOfModules.IsQuasicoherent; finite type with degree-zero generators by local generation predicate; no sorry in data, combined compile clean in 4 s"
+ }
 }

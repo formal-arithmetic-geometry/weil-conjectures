@@ -1,0 +1,113 @@
+{
+ "id": "def-weil-pbc-formal-kernel-graded-pieces",
+ "kind": "definition",
+ "title": "Homogeneous ideal quotients and successive formal-system kernel sheaves",
+ "status": "split",
+ "statement": "Let $X$ be a Noetherian scheme, $\\mathcal I$ a quasi-coherent ideal sheaf and $F=(\\mathcal F_r)_{r\\ge1}$ a coherent formal module [def-weil-pbc-coherent-formal-module], in sheaves of $\\mathcal O_X$-modules [def-weil-sheaf-of-modules-category]. Using that node's ideal powers, ideal-module products and cokernel quotients, define $B_n=\\mathcal I^n/\\mathcal I\\mathcal I^n$ for $n\\ge0$, with $\\mathcal I^0=\\mathcal O_X$, and let $\\pi_n:\\mathcal I^n\\to B_n$ be the cokernel projection. Thus $B_n=\\mathcal I^n/\\mathcal I^{n+1}$. With the convention $\\mathcal F_0=0$, define $K_0=\\mathcal F_1$ and $K_{n+1}=\\operatorname{Ker}(\\mathcal F_{n+2}\\to\\mathcal F_{n+1})$. Let $\\iota_0:K_0\\to\\mathcal F_1$ be the identity and $\\iota_{n+1}:K_{n+1}\\to\\mathcal F_{n+2}$ the kernel inclusion.",
+ "stmt_deps": [
+  "def-weil-pbc-coherent-formal-module",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Lemma 087Z (lemma-finite-over-rees-algebra), homogeneous algebra and module in the statement and affine proof; Section 0EHN (section-coherent-formal)"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "successive kernel sheaves of a coherent formal module and associated graded ideal quotient sheaves",
+   "results": "UNAVAILABLE 0 hit(s) | service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "sheaf associated graded algebra ideal coherent formal system kernels finite graded module",
+   "results": "localCohomology; Ideal.Filtration.submodule; HomogeneousIdeal.irrelevant; HomogeneousIdeal.toIdeal_irrelevant; localCohomology.ofSelfLERadical; AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.carrier.asIdeal.homogeneous; Ideal.homogeneousHull_eq_iSup; AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.carrier.asIdeal. No formal-system kernel family or sheaf ideal-power quotient family.",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.kernel, SheafOfModules",
+   "results": "12 hits on presentations and their relation kernels, not formal-system kernels or associated graded sheaf components.",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n GradedSheafAlgebra|GradedSheafModule|formalKernel|formalAssociatedGraded in Mathlib, WeilConjectures and lean/Sheaf; rg associated graded|graded sheaf|successive kernel in DAG definition nodes; blueprint_refs.py search graded sheaf / kernel formal",
+   "results": "No named graded-sheaf structures or formal-kernel piece declarations. Existing Ideal.associatedGraded is ring-level; def-nagata-sheaf-rees-algebra is the different sum of ideal powers, with no graded sheaf API. Both blueprint searches return 0 matching nodes.",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-formal-systems-kernel-rees-finite",
+  "date": "2026-10-11",
+  "group": "T1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Homogeneous algebra and kernel-module structures in Lemma 087Z, used in the kernel-Rees-finiteness step of the Grothendieck existence proof.",
+   "via": [
+    "lem-weil-pbc-formal-systems-kernel-rees-finite",
+    "lem-weil-pbc-grothendieck-existence-projective",
+    "prop-weil-pbc-grothendieck-existence",
+    "lem-weil-pbc-algebraize-finite-over-proper",
+    "lem-weil-pbc-finite-etale-lifting-complete",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FormalKernelGradedPieces",
+  "declaration": "AlgebraicGeometry.formalKernelPiece",
+  "declarations": [
+   "AlgebraicGeometry.formalAssociatedGradedPiece",
+   "AlgebraicGeometry.formalAssociatedGradedπ",
+   "AlgebraicGeometry.formalKernelPiece",
+   "AlgebraicGeometry.formalKernelι"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/FormalKernelGradedPieces.lean",
+  "statement": "def formalKernelPiece {X : Scheme.{uk}} [IsNoetherian X] {I : X.IdealSheafData} (F : CoherentFormalModule X I) : ℕ → X.Modules",
+  "branch": "sheaf-dag",
+  "by": "T1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-krf",
+  "group": "T1",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-krf",
+  "group": "T1",
+  "result": "pass",
+  "note": "Noetherian X via IsNoetherian; I as IdealSheafData; F : CoherentFormalModule X I (landed family, op n = F_(n+1)); K_0=F_1, K_(n+1)=kernel of actual transition; B_n = formalModuleQuotient I 1 of landed idealSheafPower n (I^0=O_X); A.unit = pi_0 (1 mod I); multiplication tied to section products via c in I^(m+n); action tied to local lifts a*t through kernel inclusions (mono) so A, M are determined; quasi-coherence of the coproduct via SheafOfModules.IsQuasicoherent; finite type with degree-zero generators by local generation predicate; no sorry in data, combined compile clean in 4 s"
+ }
+}
