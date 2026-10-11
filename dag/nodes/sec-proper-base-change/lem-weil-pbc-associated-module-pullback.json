@@ -170,5 +170,24 @@
   "by": "L",
   "result": "pass",
   "note": "Reviewed by the lead (opus-relaunch6). Statement made precise by the worker (the associated module F_M now a definition node, def-weil-pbc-associated-module, 01BH/01BI; the isomorphism characterized by theta(g^* c_M(m)) = c(1 (x) m), unique and natural in M) and restricted from ringed spaces to schemes since def-pc-module-pullback is for schemes; the only citer applies it to Spec phi. Five steps along the proof of 01BJ via a chain of natural bijections Hom(g^* F_M, H) = Hom(F_M, g_* H) = Hom_R(M, Gamma(Y,H)) = Hom_S(S (x) M, Gamma(Y,H)) = Hom(F_{S (x) M}, H) and co-Yoneda; two new unsplit nodes (the definition; 01BH(4) the universal property of F_M) and one Mathlib leaf (05DQ; LinearMap.liftBaseChangeEquiv RingTheory/TensorProduct/Basic.lean:52, verified earlier today). Stage-3 note: the citer lem-weil-pbc-tilde-pullback-base-change identifies F_M with tilde M by citing the tilde-Gamma adjunction alone; it needs lem-weil-pbc-associated-module-hom plus uniqueness of left adjoints."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AssociatedModulePullback",
+  "declaration": "AlgebraicGeometry.associatedModule_pullback",
+  "file": "lean/Sheaf/AlgebraicGeometry/AssociatedModulePullback.lean",
+  "statement": "theorem associatedModule_pullback {X Y : Scheme.{w}} (g : Y ⟶ X) : let adj := Classical.choice (Scheme.Modules.nonempty_tensorPullbackAdjunction g) ∃ θ : (∀ M' : ModuleCat (X.presheaf.obj (op (⊤ : Opens (X : Type w)))), (Scheme.Modules.tensorPullback g).obj (associatedModule X.toLocallyRingedSpace.toSheafedSpace M') ⟶ associatedModule Y.toLocallyRingedSpace.toSheafedSpace ((ModuleCat.extendScalars g.appTop.hom).obj M')), (∀ (M' : ModuleCat (X.presheaf.obj (op (⊤ : Opens (X : Type w))))) (θ' : (Scheme.Modules.tensorPullback g).obj (associatedModule X.toLocallyRingedSpace.toSheafedSpace M') ⟶ associatedModule Y.toLocallyRingedSpace.toSheafedSpace ((ModuleCat.extendScalars g.appTop.hom).obj M')), θ' = θ M' ↔ ∀ m : M', θ'.val.app (op (⊤ : Opens (Y : Type w))) ((adj.unit.app (associatedModule X.toLocallyRingedSpace.toSheafedSpace M')).app ((⊤ : Opens (X : Type w))) (associatedModuleCanonicalSection X.toLocallyRingedSpace.toSheafedSpace M' m)) = associatedModuleCanonicalSection Y.toLocallyRingedSpace.toSheafedSpace ((ModuleCat.extendScalars g.appTop.hom).obj M') ((ModuleCat.ExtendRestrictScalarsAdj.Unit.map g.appTop.hom) m)) ∧ (∀ M', IsIso (θ M')) ∧ (∀ {M' N' : ModuleCat (X.presheaf.obj (op (⊤ : Opens (X : Type w))))} (u : M' ⟶ N'), (Scheme.Modules.tensorPullback g).map ((associatedModuleFunctor X.toLocallyRingedSpace.toSheafedSpace).map u) ≫ θ N' = θ M' ≫ (associatedModuleFunctor Y.toLocallyRingedSpace.toSheafedSpace).map ((ModuleCat.extendScalars g.appTop.hom).map u))",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-amp1453"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-amp1453",
+  "group": "C1",
+  "result": "fix",
+  "note": "g:Y->X schemes; R,S = Gamma(top), S an R-algebra via g.appTop; F_M, c_M, F_u = landed J1 associatedModule/CanonicalSection/Functor; g^* = H1 tensorPullback, unit of the chosen nonempty_tensorPullbackAdjunction at top; S(x)_R M = extendScalars, 1(x)m = Unit.map; FIXED: per-M uniqueness among all morphisms satisfying the section equation (theta' = theta M <-> equation), was only uniqueness of the whole family satisfying all three conjuncts; iso; naturality"
  }
 }
