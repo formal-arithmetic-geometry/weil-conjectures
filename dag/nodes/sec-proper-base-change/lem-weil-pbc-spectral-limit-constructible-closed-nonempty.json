@@ -175,5 +175,23 @@
   "worker": "stage1",
   "summary": "Split following the proof of Stacks 0A2W (1) (tags 0A2W, 0901, 0A2S, 0A2R, 005C verified in tags/tags). Statement kept (directed set = cofiltered category K^op; matches the uses in lem-weil-pbc-spectral-limit-descend-opens step 4 and lem-weil-pbc-spectral-limit-pullback-sections step 7). Three steps: (1) Z_k with the subspace topology of the constructible topology is nonempty, quasi-compact (existing Mathlib leaves 0901-quasi-compactness and 005C) and Hausdorff (new unsplit node for the Hausdorff part of 0901, a TODO in Mathlib's ConstructibleTopology.lean line 27; subspace of Hausdorff written out); (2) spectral transition maps are continuous for the constructible topologies (new unsplit node, 0A2S (1), absent from Mathlib) and restrict to continuous maps Z'_{k'} -> Z'_k; (3) Konig's lemma for a directed inverse system of nonempty compact Hausdorff spaces (0A2R, new Mathlib leaf TopCat.nonempty_limitCone_of_compact_t2_cofiltered_system, Konig.lean:125, whose limitCone point is by definition the compatible families). Not a leaf itself: no single Mathlib declaration, and the Hausdorff ingredient is missing from Mathlib (B8)."
  },
- "reviewed": "pass (L, 2026-10-10): 3 steps follow 0A2W (1): the Z_k are nonempty compact Hausdorff in the constructible topology (new unsplit Hausdorff node 0901, quasi-compactness and 005C existing), spectral maps are constructible-continuous (new unsplit node 0A2S), and the new 0A2R leaf gives a compatible family."
+ "reviewed": "pass (L, 2026-10-10): 3 steps follow 0A2W (1): the Z_k are nonempty compact Hausdorff in the constructible topology (new unsplit Hausdorff node 0901, quasi-compactness and 005C existing), spectral maps are constructible-continuous (new unsplit node 0A2S), and the new 0A2R leaf gives a compatible family.",
+ "lean": {
+  "module": "Sheaf.Topology.SpectralLimitConstructibleClosedNonempty",
+  "declaration": "exists_compatible_point_of_spectral_constructible_closed",
+  "file": "lean/Sheaf/Topology/SpectralLimitConstructibleClosedNonempty.lean",
+  "statement": "theorem exists_compatible_point_of_spectral_constructible_closed {K : Type u} [Preorder K] [Nonempty K] [IsDirected K (fun k k' => k ≤ k')] (Y : K → Type u) [∀ k, TopologicalSpace (Y k)] [∀ k, SpectralSpace (Y k)] (g : ∀ k k', k ≤ k' → Y k' → Y k) (hg : ∀ k k' (h : k ≤ k'), IsSpectralMap (g k k' h)) (hgid : ∀ k, g k k (le_rfl) = id) (hcomp : ∀ k k' k'' (h : k ≤ k') (h' : k' ≤ k''), (g k k' h) ∘ (g k' k'' h') = g k k'' (le_trans h h')) (Z : ∀ k, Set (Y k)) (hZne : ∀ k, (Z k).Nonempty) (hZclosed : ∀ k, @IsClosed (Y k) (constructibleTopology (Y k)) (Z k)) (hZmap : ∀ k k' (h : k ≤ k'), Set.MapsTo (g k k' h) (Z k') (Z k)) : ∃ z : ∀ k, Y k, (∀ k, z k ∈ Z k) ∧ ∀ k k' (h : k ≤ k'), g k k' h (z k') = z k",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "E1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ }
 }
