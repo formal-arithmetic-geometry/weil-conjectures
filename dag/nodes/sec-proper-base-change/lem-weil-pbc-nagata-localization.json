@@ -148,5 +148,23 @@
   "summary": "Source read: Algebra Lemma 032U (lemma-nagata-localize, algebra.tex 45721-45727; tag verified in tags/tags), proof 'Clear from Lemma 032G'. 032G is lemma-localize-N (lines 45172-45182; the brief's '032J?' is wrong, 032G verified), whose proof cites 0307 (lemma-integral-closure-localize, lines 7596-7627, verified). The 'clear' is written out: step 1 Noetherian via the existing leaf lem-weil-pbc-localization-noetherian; step 2 primes q of T^{-1}A and (T^{-1}A)/q = T̄^{-1}(A/p) via the new Mathlib leaf lem-weil-pbc-localization-quotient-by-prime (00E3 + 00CT; existing nodes lem-weil-pbc-primes-of-localization, lem-weil-pbc-localization-quotient-commute and lem-weil-pbc-localization-at-prime-of-quotient cover only the prime and principal cases); step 3 N-2 via the new unsplit node lem-weil-pbc-localization-n2-domain (032G; its proof will use 0307 = Mathlib IsLocalization.integralClosure, Localization/Integral.lean:442), transported along the ring isomorphism; step 4 conclusion and the special cases A_p, A_f. Statement unchanged in content; added the definition of a multiplicative subset and the citations def-weil-pbc-module-localization, def-weil-pbc-localization-at-prime, def-weil-ring-localization-away to stmt_deps. Item's own Mathlib searches (three kinds) kept: no Nagata notion in Mathlib.",
   "blueprint": "The item is not a blueprint node; its blueprint ancestor is lem-weil-pbc-normal-constant-generic, from.place 'step 4 of its split (Tag 09Z5, proof of (1))' (kept, not 'unspecified'). Steps 1-4 realize, at that place, the Nagata property of localizations used by lem-weil-pbc-normal-nagata-monogenic-n1 (localizing at R_s and at maximal ideals) in the chain via lem-weil-pbc-nagata-universally-japanese ... lem-weil-pbc-etale-colimit-normal-local-domain. Blueprint searches (tools/blueprint_refs.py search: 'Nagata localization', 'Japanese', 'N-2', '032U', '032G', '0307', 'integral closure commutes', 'localization prime quotient') found no blueprint node stating the item or the two new nodes (the 'Nagata' hits are Nagata compactification nodes): same_as [] everywhere."
  },
- "reviewed": "2026-10-10 L: 4 steps checked against 032U (\"clear from 032G\", written out): Noetherian, primes of T^{-1}A and (T^{-1}A)/q = Tbar^{-1}(A/p) (new composed leaf), N-2 of A/p carried to its localization (new 032G node) and across the isomorphism"
+ "reviewed": "2026-10-10 L: 4 steps checked against 032U (\"clear from 032G\", written out): Noetherian, primes of T^{-1}A and (T^{-1}A)/q = Tbar^{-1}(A/p) (new composed leaf), N-2 of A/p carried to its localization (new 032G node) and across the isomorphism",
+ "lean": {
+  "module": "Sheaf.RingTheory.NagataLocalization",
+  "declaration": "isNagataRing_localization",
+  "file": "lean/Sheaf/RingTheory/NagataLocalization.lean",
+  "statement": "theorem isNagataRing_localization (A : Type u) [CommRing A] (T : Submonoid A) (hA : IsNagataRing A) : IsNagataRing (Localization T) ∧ (∀ (p : Ideal A) [p.IsPrime], IsNagataRing (Localization.AtPrime p)) ∧ (∀ f : A, IsNagataRing (Localization.Away f))",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-nal1156",
+  "group": "G1",
+  "result": "pass",
+  "note": "A:Type u CommRing (no domain/nontrivial), T:Submonoid (1∈T, closed under mult, may contain 0), hA root IsNagataRing (Noetherian + IsN2 of every prime quotient, single def); conclusion IsNagataRing (Localization T) = T^{-1}A (LocalizedModule ring specialization), plus ∀ prime p IsNagataRing (Localization.AtPrime p) and ∀ f IsNagataRing (Localization.Away f); node diff only adds lean record; no duplicate on sheaf-dag"
+ }
 }
