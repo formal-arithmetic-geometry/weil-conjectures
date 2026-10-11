@@ -349,6 +349,18 @@ instance [Finite Λ] :
     have := (Etale.constructibleSheaf_iff _ _ _).mp h₃
     exact (Etale.constructibleSheaf_iff _ _ _).mpr (IsConstructibleSheaf.of_shortExact hS)
 
+/-- `Dᵇc(X, Λ)` is stable under retracts, for a noetherian ring `Λ`: the homology sheaves of a
+retract are retracts of constructible sheaves (`IsConstructibleSheaf.of_retract`). -/
+instance [IsNoetherianRing Λ] :
+    (Etale.DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) X).IsStableUnderRetracts where
+  of_retract {M N} e := by
+    rintro ⟨hb, hc⟩
+    obtain ⟨a, b, hab⟩ := (DerivedCategory.exists_homologyConcentratedIn_iff_bounded N).2 hb
+    exact ⟨(DerivedCategory.exists_homologyConcentratedIn_iff_bounded M).1
+      ⟨a, b, (DerivedCategory.homologyConcentratedIn a b).prop_of_retract e hab⟩,
+      fun n ↦ have := hc n; IsConstructibleSheaf.of_retract
+        (e.map (DerivedCategory.homologyFunctor _ n))⟩
+
 end ModuleCat
 
 end AlgebraicGeometry
