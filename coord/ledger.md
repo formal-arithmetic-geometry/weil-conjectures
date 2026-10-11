@@ -3997,3 +3997,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 09:21 L: merged deliver/G1/lem-weil-pbc-complete-local-quotient (stage 2; reviewer PASS; first push; Sheaf.RingTheory.CompleteLocalQuotient quotient_complete_local)
 - 09:21 L: merged deliver/G1/lem-weil-pbc-constructible-in-retrocompact-open (stage 2; reviewer PASS; first push; Sheaf.Topology.ConstructibleInConstructible Topology.isConstructible_of_isConstructible_subspace)
 - 09:22 L: merged deliver/E1/lem-sp-cartan-eilenberg-comparison-independence (stage 2; reviewer FIX; first push; Sheaf.CategoryTheory.CartanEilenbergComparisonIndependence CategoryTheory.cartanEilenberg_comparison_independence; new nodes: def-sp-cartan-eilenberg-presentation, def-sp-filtered-page-two-model)
+- 09:22 L: merged deliver/M1/lem-weil-pbc-constructible-is-retrocompact (stage 2; reviewer PASS; first push; Sheaf.Topology.ConstructibleIsRetrocompact Topology.IsConstructible.isRetrocompact)
