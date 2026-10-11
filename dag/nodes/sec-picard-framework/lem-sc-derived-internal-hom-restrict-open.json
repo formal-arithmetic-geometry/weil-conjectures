@@ -148,5 +148,23 @@
   "group": "M1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-hro1808 (reviewer sub-agent of L); spot-checked: Item vs 08DL and new node vs 08BS (verbatim in packet): faithful; new node is a real lemma (adjoint with exact left adjoint j_! preserves K-injectives), not a duplicate (only etale-site restriction nodes share the topic), not elementary, Mathlib searches recorded. No cycle: item and new node do not cite lem-sc-derived-internal-hom-stalk-localization (it appears only in blueprint.from.via / created.item); def-pur-derived-internal-hom, prop-pur-kinjective-resolutions-exist, def-pur-kinjective-complex deps checked. Steps 1,3,4 match cited statements; tool_use prop-pur-kinjective-resolutions-exist accepted as generic. FIX more, RETURN less: C1 at Step 2 - the step asserted j^{-1}I represents L|_U without saying j^{-1}L -> j^{-1}I is still a quasi-isomorphism; added the exactness of restriction to opens (cohomology sheaves restrict) to the step text (missed by the second reading, which argued it only in its notes).; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.DerivedInternalHomRestrictOpen",
+  "declaration": "CategoryTheory.derivedInternalHom_restrict_open",
+  "file": "lean/Sheaf/Paper/DerivedInternalHomRestrictOpen.lean",
+  "statement": "theorem derivedInternalHom_restrict_open (X : RingedSpace.{u}) (U : Opens X) [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X))] [hU : HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X).over U))] (K L : DerivedCategory (SheafOfModules.{u} (moduleRings X))) : Nonempty ( (@derivedInternalHom.{u, w} (Over U) _ ((Opens.grothendieckTopology X).over U) (X.sheaf.over U) hU).obj (op ((SheafOfModules.overFunctor.{u} (moduleRings X) U).mapDerivedCategory.obj K), ((SheafOfModules.overFunctor.{u} (moduleRings X) U).mapDerivedCategory.obj L)) ≅ ((SheafOfModules.overFunctor.{u} (moduleRings X) U).mapDerivedCategory.obj ((derivedInternalHom.{u, w} (Opens.grothendieckTopology X) X.sheaf).obj (op K, L))))",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "H1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }
