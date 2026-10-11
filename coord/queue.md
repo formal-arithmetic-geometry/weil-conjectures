@@ -1,11 +1,11 @@
 # Work queue
 
-69 items; claim with `tools/claim.py next <group> [--stage N]`.
+66 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (69)
+## Stage 2: nodes to state (66)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
@@ -51,12 +51,10 @@
 | `lem-sc-torsor-h1-ext-pushout` | 1 | state | 0 |
 | `lem-sc-zariski-contracted-power-extension` | 1 | state | 0 |
 | `lem-sc-zariski-ext-torsor` | 1 | state | 0 |
-| `lem-sc-zariski-flasque-acyclic` | 1 | state | 0 |
 | `lem-sc-zariski-module-abelian-cohomology-agree` | 1 | state | 0 |
 | `lem-weil-pbc-colimit-of-sites-injective-system` | 1 | state | 0 |
 | `lem-weil-pbc-etale-cohomology-invariance-under-site-equivalence` | 1 | state | 0 |
 | `lem-weil-pbc-etale-cohomology-local-ring-colimit` | 1 | state | 0 |
-| `lem-weil-pbc-etale-cohomology-over-open` | 1 | state | 0 |
 | `lem-weil-pbc-etale-mayer-vietoris-pullback` | 1 | state | 0 |
 | `lem-weil-pbc-gabber-zariski-etale-restriction-injective` | 1 | state | 0 |
 | `lem-weil-pbc-module-cech-vanishing-basis` | 1 | state | 0 |
@@ -67,7 +65,6 @@
 | `lem-weil-pbc-ringed-site-injective-module-cech-acyclic` | 1 | state | 0 |
 | `lem-weil-pbc-site-covering-morphisms-same-h0-map` | 1 | state | 0 |
 | `lem-weil-pbc-site-extension-by-zero-presheaf-adjoint` | 1 | state | 0 |
-| `lem-weil-pbc-site-higher-direct-image-sheafified-presheaf` | 1 | state | 0 |
 | `lem-weil-pbc-site-plus-construction-functorial` | 1 | state | 0 |
 | `lem-weil-pbc-site-ses-cech-h1-surjective` | 1 | state | 0 |
 | `lem-weil-pbc-zariski-cohomology-locally-zero` | 1 | state | 0 |
