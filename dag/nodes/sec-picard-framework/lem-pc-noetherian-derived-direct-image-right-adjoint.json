@@ -168,5 +168,23 @@
   "group": "C1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ndr1727 (reviewer sub-agent of L); spot-checked: Read packet whole; Stacks 0A9E proof matches steps (direct sums 08DA-type lemma, Bondal-van den Bergh, qcqs permanence, pushforward direct sums, Brown derived-proposition-brown read at derived.tex 11428). No hypothesis dropped: Noetherian gives qc + qs (01OY node), qcqs morphism from permanence (1); new nodes state qcqs hypotheses as Stacks (direct-sums lemma holds for any scheme, qcqs is harmless). New nodes standard but absent from Mathlib (grep of slopmaster2 Mathlib/AlgebraicGeometry: no DerivedCategory/QCoh). FIX more, RETURN less: (1) C1: first clause of the item (Rf_* sends D_QCoh into D_QCoh) was proved by no step; added statement-only node lem-pc-derived-direct-image-preserves-qcoh (Stacks 08D5 part (1), qcqs f) and new step 2 citing it with lem-weil-pbc-qcqs-morphism-permanence; proof_deps updated. (2) B3/source: item source cited Tag 08DW (that is the Lf^* pullback lemma) for the first clause; corrected to 08D5. Steps 5-6 texts now name the step numbers and that D_QCoh(O_Y) has direct sums (step 3 applied to Y), as Brown needs. Start 'Sat Oct 10 05:2x PM UTC 2026', end at merge.; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.NoetherianDerivedDirectImageRightAdjoint",
+  "declaration": "AlgebraicGeometry.noetherian_schemeDerivedDirectImage_has_rightAdjoint",
+  "file": "lean/Sheaf/AlgebraicGeometry/NoetherianDerivedDirectImageRightAdjoint.lean",
+  "statement": "theorem noetherian_schemeDerivedDirectImage_has_rightAdjoint {X Y : Scheme.{u}} [IsLocallyNoetherian X] [CompactSpace X] [IsLocallyNoetherian Y] [CompactSpace Y] [HasDerivedCategory.{wX} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] [HasDerivedCategory.{wY} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))] (f : X ⟶ Y) : ∃ h : ∀ E : schemeDerivedQCohCategory X, schemeDerivedQCohProperty Y ((schemeDerivedDirectImage f).obj E.obj), ((schemeDerivedQCohProperty Y).lift ((schemeDerivedQCohProperty X).ι ⋙ schemeDerivedDirectImage f) h).IsLeftAdjoint",
+  "branch": "sheaf-dag",
+  "by": "T1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "T1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }
