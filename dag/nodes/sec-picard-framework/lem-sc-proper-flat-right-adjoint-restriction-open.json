@@ -158,5 +158,24 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProperFlatRightAdjointRestrictionOpen",
+  "declaration": "AlgebraicGeometry.proper_flat_rightAdjoint_restriction_open",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProperFlatRightAdjointRestrictionOpen.lean",
+  "statement": "theorem proper_flat_rightAdjoint_restriction_open [∀ Z : Scheme.{u}, HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))] {X Y Y' : Scheme.{u}} [CompactSpace Y] [QuasiSeparatedSpace Y] [CompactSpace Y'] [QuasiSeparatedSpace Y'] (g : Y' ⟶ Y) (f : X ⟶ Y) [IsProper f] [Flat f] [LocallyOfFinitePresentation f] (F : schemeDerivedQCohCategory X ⥤ schemeDerivedQCohCategory Y) (hF : F ⋙ ObjectProperty.ι (schemeDerivedQCohProperty Y) ≅ ObjectProperty.ι (schemeDerivedQCohProperty X) ⋙ schemeDerivedDirectImage f) (a : schemeDerivedQCohCategory Y ⥤ schemeDerivedQCohCategory X) (adj : F ⊣ a) (F' : schemeDerivedQCohCategory (pullback f g) ⥤ schemeDerivedQCohCategory Y') (hF' : F' ⋙ ObjectProperty.ι (schemeDerivedQCohProperty Y') ≅ ObjectProperty.ι (schemeDerivedQCohProperty (pullback f g)) ⋙ schemeDerivedDirectImage (pullback.snd f g)) (a' : schemeDerivedQCohCategory Y' ⥤ schemeDerivedQCohCategory (pullback f g)) (adj' : F' ⊣ a') : (∀ (V : Y.Opens) (_ : IsCompact (V : Set Y)) (adjV : (schemeOpenRestriction Y V).mapDerivedCategory ⊣ schemeDerivedDirectImage V.ι) (hV : ∀ K : schemeDerivedQCohCategory Y, schemeDerivedQCohProperty Y ((schemeDerivedDirectImage V.ι).obj ((schemeOpenRestriction Y V).mapDerivedCategory.obj K.obj))) (K : schemeDerivedQCohCategory Y), IsIso ((schemeOpenRestriction X (f ⁻¹ᵁ V)).mapDerivedCategory.map ((schemeDerivedQCohProperty X).ι.map (a.map (ObjectProperty.homMk (X := K) (Y := ⟨(schemeDerivedDirectImage V.ι).obj ((schemeOpenRestriction Y V).mapDerivedCategory.obj K.obj), hV K⟩) (adjV.unit.app K.obj)))))) ∧ (∀ (V' : Y'.Opens) (_ : IsCompact (V' : Set Y')) (adjV' : (schemeOpenRestriction Y' V').mapDerivedCategory ⊣ schemeDerivedDirectImage V'.ι) (hV' : ∀ K' : schemeDerivedQCohCategory Y', schemeDerivedQCohProperty Y' ((schemeDerivedDirectImage V'.ι).obj ((schemeOpenRestriction Y' V').mapDerivedCategory.obj K'.obj))) (K' : schemeDerivedQCohCategory Y'), IsIso ((schemeOpenRestriction (pullback f g) ((pullback.snd f g) ⁻¹ᵁ V')).mapDerivedCategory.map ((schemeDerivedQCohProperty (pullback f g)).ι.map (a'.map (ObjectProperty.homMk (X := K') (Y := ⟨(schemeDerivedDirectImage V'.ι).obj ((schemeOpenRestriction Y' V').mapDerivedCategory.obj K'.obj), hV' K'⟩) (adjV'.unit.app K'.obj))))))",
+  "branch": "sheaf-dag",
+  "by": "U1",
+  "date": "2026-10-12",
+  "existing": false,
+  "fixed_by": "R-fro"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-fro",
+  "group": "U1",
+  "result": "fix",
+  "note": "qcqs Y,Y'; f proper flat lfp; a,a' right adjoints of Rf_*,Rf'_* on D_QCoh via (F,hF,a,adj); both open clauses (V in Y for f, V' in Y' for pullback.snd f g) as the canonical open-square map in the criterion's form, every K in D_QCoh"
  }
 }
