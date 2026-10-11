@@ -58,6 +58,14 @@ Written by the launcher at the start (`1-dag`), then kept current by the maintai
 
 **ℓ-ADIC COEFFICIENT TOPOLOGY (09:34 UTC; decision of L; pod family).** A finite extension E of ℚ_ℓ gets its topology by `letI := spectralNorm.nontriviallyNormedField ℚ_[l] E` inside the statement, V gets `moduleTopology E V`, O_E / m_E are `Padic.coefficientExtensionIntegers` / `Padic.coefficientExtensionMaximalIdeal` (E1 1a2c6f80c lem-pod-profinite-stable-lattice); later pod nodes use the same form.
 
+**FUNCTION FIELD (09:49 UTC; decision of L).** For an integral scheme k(X) is Mathlib `Scheme.functionField` (the integral clause of def-sc-function-field, fe8e51bb7; landed DivisorModule, InvertibleModuleGenericStalk, SmoothConnectedCurveLocalRings, E1 79512e034 use it); for a general scheme the recorded `rationalFunctionRing` (def-sc-rational-functions). Not a third carrier.
+
+**ÉTALE AT A POINT (09:49 UTC; decision of L).** `∃ U : X.Opens, x ∈ U ∧ Etale (U.ι ≫ f)` (J1 etale_of_faithfullyFlat_fieldExtension, K1 496a0cd49); no `IsEtaleAt` node; 'étale over a neighbourhood of the image point' is a different and false reading of Stacks 0B2G.
+
+**D⁺ TRUNCATION (09:49 UTC; decision of L).** `DerivedCategory.TStructure.t.onPlus.truncLE`/`truncLEι` (F1 79f258e3d); `DerivedCategory.truncLE` does not exist in the pinned Mathlib.
+
+**ABELIAN CURVE PAIRS AND C1–C8 (09:49 UTC; decision of L).** Feed through the Ab ≃ Mod(ULift ℤ) bridge `E` of E1 7631c4992 (lem-weil-pbc-curve-assertions-finite-pushforward); no second bridge.
+
 **GENERAL-SITE RESTRICTION (09:05 UTC; decision of L).** On a general site, restriction of module sheaves to U is `SheafOfModules.overFunctor` on `J.over U`. Its zero-preservation instance is H1's `CategoryTheory.module_overFunctor_preservesZero` (node lem-pur-rhom-into-kinjective-local, lean/Sheaf/Algebra/Homology/RhomIntoKInjectiveLocal.lean, 38d166329) — cite it, never restate it. The ringed-space instances `moduleOverFunctor_additive`/`moduleOverFunctor_limits`/`moduleOverFunctor_colimits` (DERIVED RESTRICTION TO AN OPEN) are separate.
 
 **COHEN–MACAULAY (09:05 UTC; decision of L).** This Mathlib has no Cohen–Macaulay declaration. A CM local ring is stated inline exactly as H1's landed `Ideal.mem_minimalPrimes_of_depth_ge` (node lem-weil-pbc-cm-local-associated-prime-minimal, lean/Sheaf/RingTheory/AssociatedPrimeMinimalOfDepth.lean, e10ccd492) writes it: `[IsNoetherianRing T] [IsLocalRing T] (e : ℕ) (hdim : ringKrullDim T = (e : WithBot ℕ∞)) (hdepth : (e : ℕ∞) ≤ IsLocalRing.depth (R := T) T)`; maximal CM modules analogously (module depth ≥ Krull dimension of the ring). No private CM definition; a definition node may be recorded later.
