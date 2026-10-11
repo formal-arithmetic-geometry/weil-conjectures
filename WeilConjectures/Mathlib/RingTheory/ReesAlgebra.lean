@@ -41,7 +41,7 @@ is the affine piece of the deformation to the normal cone of `V(I) ⊆ Spec R`: 
 - `reesAlgebra.finiteType`: the Rees algebra of a finitely generated ideal is of finite type.
 - `Ideal.isLocalization_extendedReesAlgebra`: `R[t, t⁻¹]` is the localization of the extended
   Rees algebra at `t`.
-- `Ideal.isBaseChange_extendedReesAlgebraMap`: along a flat `R ⟶ S`, the extended Rees algebra
+- `Ideal.isBaseChange_extendedReesAlgebraAlgHom`: along a flat `R ⟶ S`, the extended Rees algebra
   of `I S` is the base change of that of `I`.
 -/
 
