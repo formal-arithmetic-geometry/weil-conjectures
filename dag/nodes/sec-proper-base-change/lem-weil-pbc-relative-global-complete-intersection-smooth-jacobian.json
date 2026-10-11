@@ -246,5 +246,24 @@
   "worker": "stage1",
   "summary": "Statement checked against Stacks 00TE and kept; the determinant now cites def-weil-pbc-matrix-determinant (added to stmt_deps) and the orientation of the minor (rows j, columns I) is written. Proof in 8 steps after the proof of 00TE. Step 1: I/I^2 free on the f_j (new unsplit node for 00SV (3)) and the maximal minors of the matrix of d are the g_I (determinant commutes with ring maps and with transposition, written out). 'Only if' (steps 2-4): smooth at q gives g not in q with S_g smooth; lem-weil-pbc-smooth-localization-conormal-split gives a left inverse of the localized d, i.e. a matrix B with B M = 1 over S_g; S_g is nonzero and c <= n (Cauchy-Binet); lem-weil-pbc-matrix-left-inverse-minors (2) (07DQ) with f = 1 gives 1 = sum b_I g_I/1 in S_g, which forces some g_I outside q (replaces Stacks' rank over kappa(q)). 'If' (steps 5-8): S_g = R[x,y]/(f, g_I y - 1) by the existing 08JZ node, the variables renamed so x_I come first and y next; the (c+1)x(c+1) Jacobian is block lower triangular with determinant g_I^2, a unit in S_g, so S_g is standard smooth (00T6) hence smooth (00T7, Mathlib leaf), as the lead's brief suggested; this realizes Stacks' 'by construction quasi-isomorphic to a free module' through the standard smooth node instead of 00S7 directly. The 'if' direction does not need the complete intersection hypothesis. Mathlib: no Jacobian criterion at a prime for complete intersections (IsSmoothAt, SubmersivePresentation, StandardSmoothOfFree read); searches added."
  },
- "reviewed": "Reviewed by L 2026-10-10: faithful to Algebra 00TE: 'only if' via the split injectivity of the localized conormal map (existing node), Cauchy-Binet for c ≤ n, and the left-inverse/minors lemma 07DQ (2) in place of the residue-field rank argument; 'if' via the standard smooth presentation of S_g (08JZ, block-triangular Jacobian with determinant g_I²) and standard-smooth-is-smooth. I/I² free for a relative global complete intersection is 00SV (3), new unsplit node. No Mathlib match for the criterion."
+ "reviewed": "Reviewed by L 2026-10-10: faithful to Algebra 00TE: 'only if' via the split injectivity of the localized conormal map (existing node), Cauchy-Binet for c ≤ n, and the left-inverse/minors lemma 07DQ (2) in place of the residue-field rank argument; 'if' via the standard smooth presentation of S_g (08JZ, block-triangular Jacobian with determinant g_I²) and standard-smooth-is-smooth. I/I² free for a relative global complete intersection is 00SV (3), new unsplit node. No Mathlib match for the criterion.",
+ "lean": {
+  "module": "Sheaf.RingTheory.RelativeGlobalCompleteIntersectionSmoothJacobian",
+  "declaration": "Algebra.isSmoothAtPrime_iff_exists_jacobian_minor",
+  "file": "lean/Sheaf/RingTheory/RelativeGlobalCompleteIntersectionSmoothJacobian.lean",
+  "statement": "theorem isSmoothAtPrime_iff_exists_jacobian_minor (R : Type v) [CommRing R] (n c : ℕ) (f : Fin c → MvPolynomial (Fin n) R) (hci : IsRelativeGlobalCompleteIntersectionPresentation f) (q : PrimeSpectrum (MvPolynomial (Fin n) R ⧸ Ideal.span (Set.range f))) : IsSmoothAtPrime R q ↔ ∃ i : Fin c → Fin n, StrictMono i ∧ Ideal.Quotient.mk (Ideal.span (Set.range f)) (Matrix.det (fun j k : Fin c ↦ MvPolynomial.pderiv (i k) (f j))) ∉ q.asIdeal",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-gsj"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-gsj",
+  "group": "M1",
+  "result": "fix",
+  "note": "R arbitrary CommRing, n c : Nat, f : Fin c -> MvPolynomial (Fin n) R, S = canonical quotient by span(range f); hci = landed implicit-{n c} IsRelativeGlobalCompleteIntersectionPresentation f (delivery's R-explicit duplicate dropped, H4); q : PrimeSpectrum S; IsSmoothAtPrime R q iff exists StrictMono i : Fin c -> Fin n with image of det(pderiv (i k) (f j)) (rows j, cols k) not in q; edge cases c=0, c>n, zero rings; reverted the delivery's change of existing node(s) def-weil-pbc-relative-global-complete-intersection (--revert-nodes; kept as on sheaf-dag); left out new module(s) lean/Sheaf/RingTheory/RelativeGlobalCompleteIntersectionPresentation.lean (--drop-files, or a record fixed to existing: true)"
+ }
 }
