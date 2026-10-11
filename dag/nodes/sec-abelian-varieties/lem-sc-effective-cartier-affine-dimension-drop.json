@@ -11,7 +11,7 @@
  },
  "kind": "statement",
  "title": "Dimension drop for a principal Cartier subscheme of an affine variety",
- "statement": "Let $k$ be a field [def-weil-field] and let $A$ be a nonzero finitely generated $k$-algebra such that $\\operatorname{Spec}(A)$ [def-weil-affine-spectrum, def-pc-integral-scheme] is integral and of finite type over $k$ [def-weil-finite-type-morphism]. If $f\\in A$ is nonzero and not a unit, then the affine scheme $\\operatorname{Spec}(A/(f))$ [def-weil-affine-spectrum, def-pc-scheme] has Krull dimension $\\dim(\\operatorname{Spec}(A))-1$ [def-kun-topological-krull-dimension].",
+ "statement": "Let $k$ be a field [def-weil-field] and let $A$ be a nonzero finitely generated $k$-algebra such that $\\operatorname{Spec}(A)$ [def-weil-affine-spectrum, def-pc-integral-scheme] is integral and of finite type over $k$ [def-weil-finite-type-morphism]. If $f\\in A$ is nonzero and not a unit, then the affine scheme $\\operatorname{Spec}(A/(f))$ [def-weil-affine-spectrum, def-pc-scheme] satisfies $\\dim(\\operatorname{Spec}(A/(f)))+1=\\dim(\\operatorname{Spec}(A))$ [def-kun-topological-krull-dimension].",
  "source": {
   "document": "literature/stacks-project/algebra.tex",
   "place": "Tags 00KV and 00KW (Krull principal ideal and height theorems), together with the finite-type dimension formula Tag 02FX"
@@ -165,5 +165,42 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ecad2914 (reviewer sub-agent of L); spot-checked: Read packet and head JSON; checked 00KW leaf hypotheses (Noetherian local, nonzerodivisor in m). FIX more, RETURN less: (1) C1/D: step 3 took the sup only over maximal ideals containing f, which equals dim A only if every maximal ideal has height dim A; cited lem-weil-pbc-finite-type-domain-dimension-local-ring (Tags 00OS/00P0) in steps 2-3; (2) C4: lem-kun-dimension-formula (dim_x X = dim O + trdeg) does not give sup of local dimensions; replaced by lem-pc-scheme-dimension-local-rings plus elementary localization monotonicity, dropped kun tool use; (3) C1: Noetherianity of A cited via pqf-lem-locnoeth-lft. Recorded Mathlib grep for Krull height theorem (KrullsHeightTheorem.lean, no affine match). Second reading's claimed repairs were not in the head.; 1 file(s) fixed by the reviewer"
  },
- "lead_note": "2026-10-10 L (R-ecad2914): Second reading by K1 claims citation repairs (pqf-lem-locnoeth-lft, lem-pc-scheme-dimension-local-rings) that are absent from head 409dd6f56; reviewer made them and fixed the missed gap."
+ "lead_note": "2026-10-10 L (R-ecad2914): Second reading by K1 claims citation repairs (pqf-lem-locnoeth-lft, lem-pc-scheme-dimension-local-rings) that are absent from head 409dd6f56; reviewer made them and fixed the missed gap.",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EffectiveCartierAffineDimensionDrop",
+  "declaration": "AlgebraicGeometry.effective_cartier_affine_dimension_drop",
+  "file": "lean/Sheaf/AlgebraicGeometry/EffectiveCartierAffineDimensionDrop.lean",
+  "statement": "theorem effective_cartier_affine_dimension_drop (k : Type u) (A : Type v) [Field k] [CommRing A] [Algebra k A] [Algebra.FiniteType k A] [IsIntegral (Spec (CommRingCat.of A))] (f : A) (hf0 : f ≠ 0) (hfu : ¬ IsUnit f) : topologicalKrullDim (AlgebraicGeometry.Spec (CommRingCat.of (A ⧸ Ideal.span ({f} : Set A)))) + 1 = topologicalKrullDim (AlgebraicGeometry.Spec (CommRingCat.of A))",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-ecd1010"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-ecd1010",
+  "group": "H1",
+  "result": "fix",
+  "note": "k field=[Field k]; A f.g. k-algebra=[CommRing A][Algebra k A][Algebra.FiniteType k A] (= Spec A finite type over k, affine so qc); Spec(A) integral + A nonzero=[IsIntegral (Spec (CommRingCat.of A))] (reviewer FIX from (hA : IsDomain A), the cited def-pc-integral-scheme form as in the merged Cartier family); f nonzero nonunit=hf0,hfu; A/(f)=A ⧸ Ideal.span {f}; dim=topologicalKrullDim (def-kun) on Spec; corrected -1 to successor form: both dims finite, dim A>=1, equivalent, not easier (H7b clear); citer K1 holds",
+  "statement_corrected": true
+ },
+ "statement_change": {
+  "date": "2026-10-11",
+  "by": "H1 stage 2",
+  "old_statement": "Let $k$ be a field [def-weil-field] and let $A$ be a nonzero finitely generated $k$-algebra such that $\\operatorname{Spec}(A)$ [def-weil-affine-spectrum, def-pc-integral-scheme] is integral and of finite type over $k$ [def-weil-finite-type-morphism]. If $f\\in A$ is nonzero and not a unit, then the affine scheme $\\operatorname{Spec}(A/(f))$ [def-weil-affine-spectrum, def-pc-scheme] has Krull dimension $\\dim(\\operatorname{Spec}(A))-1$ [def-kun-topological-krull-dimension].",
+  "what": "The original conclusion uses subtraction on the Krull-dimension codomain, but Mathlib's topologicalKrullDim has type WithBot ℕ∞, which has no subtraction operation. The equivalent successor equation is the well-typed formulation and preserves the source's dimension-one-drop claim.",
+  "source": {
+   "document": "literature/stacks-project/algebra.tex",
+   "place": "Tags 00KV and 00KW, together with finite-type dimension formula Tag 02FX"
+  },
+  "citers": [
+   {
+    "id": "lem-sc-effective-cartier-dimension-drop",
+    "holds": true,
+    "note": "The consumer uses the same dimension-one-drop conclusion for affine charts; the successor formulation is equivalent."
+   }
+  ]
+ }
 }
