@@ -383,5 +383,62 @@ noncomputable def cyclesQuotientAddEquiv (n : ℕ) :
       change ((L.toCycles n (n + 1) ≫ L.iCycles (n + 1)).app ⊤) z = x
       rw [HomologicalComplex.toCycles_i]
       exact hz)
+section Naturality
+
+variable {K K' : CochainComplex X.Modules ℕ} (ψ : K ⟶ K')
+
+/-- A chain map `ψ : K ⟶ K'` induces a morphism of the sequences `0 ⟶ Zᵏ ⟶ Kᵏ ⟶ Zᵏ⁺¹ ⟶ 0`. -/
+@[simps]
+noncomputable def cyclesShortComplexMap (k : ℕ) :
+    K.cyclesShortComplex k (k + 1) ⟶ K'.cyclesShortComplex k (k + 1) where
+  τ₁ := HomologicalComplex.cyclesMap ψ k
+  τ₂ := ψ.f k
+  τ₃ := HomologicalComplex.cyclesMap ψ (k + 1)
+  comm₁₂ := by simp
+  comm₂₃ := by
+    rw [← cancel_mono (K'.iCycles (k + 1))]
+    simp
+
+lemma eqToHom_comp_cyclesMap {a b : ℕ} (h : a = b) :
+    (eqToHom (by rw [h]) : K.cycles a ⟶ K.cycles b) ≫ HomologicalComplex.cyclesMap ψ b =
+      HomologicalComplex.cyclesMap ψ a ≫ (eqToHom (by rw [h]) : K'.cycles a ⟶ K'.cycles b) := by
+  subst h
+  simp
+
+variable (hK : ∀ j, K.ExactAt (j + 1)) (hacyc : ∀ j m, Subsingleton ((K.X j).H (m + 1)))
+  (hK' : ∀ j, K'.ExactAt (j + 1)) (hacyc' : ∀ j m, Subsingleton ((K'.X j).H (m + 1)))
+
+include hK hacyc hK' hacyc' in
+/-- **Naturality of dimension shifting** in the complex. -/
+lemma H.cyclesShiftAddEquiv_naturality : ∀ (m k : ℕ) (x : (K.cycles k).H (m + 1)),
+    H.cyclesShiftAddEquiv K' hK' hacyc' m k
+        (H.map (HomologicalComplex.cyclesMap ψ k) (m + 1) x) =
+      H.map (HomologicalComplex.cyclesMap ψ (k + m)) 1 (H.cyclesShiftAddEquiv K hK hacyc m k x)
+  | 0, _, _ => rfl
+  | m + 1, k, x => by
+    have : Subsingleton ((K.cyclesShortComplex k (k + 1)).X₂.H (m + 1)) := hacyc k m
+    have : Subsingleton ((K.cyclesShortComplex k (k + 1)).X₂.H (m + 2)) := hacyc k (m + 1)
+    have : Subsingleton ((K'.cyclesShortComplex k (k + 1)).X₂.H (m + 1)) := hacyc' k m
+    have : Subsingleton ((K'.cyclesShortComplex k (k + 1)).X₂.H (m + 2)) := hacyc' k (m + 1)
+    set y := (H.δAddEquiv (shortExact_cyclesShortComplex K hK k) m).symm x with hy
+    have hx : H.δ (shortExact_cyclesShortComplex K hK k) (m + 1) y = x :=
+      (H.δAddEquiv (shortExact_cyclesShortComplex K hK k) m).apply_symm_apply x
+    have hδ : (H.δAddEquiv (shortExact_cyclesShortComplex K' hK' k) m).symm
+        (H.map (HomologicalComplex.cyclesMap ψ k) (m + 2) x) =
+        H.map (HomologicalComplex.cyclesMap ψ (k + 1)) (m + 1) y := by
+      rw [AddEquiv.symm_apply_eq, ← hx]
+      exact (H.δ_naturality (shortExact_cyclesShortComplex K hK k)
+        (shortExact_cyclesShortComplex K' hK' k) (cyclesShortComplexMap ψ k) (m + 1) y).symm
+    change H.map _ 1 (H.cyclesShiftAddEquiv K' hK' hacyc' m (k + 1)
+        ((H.δAddEquiv (shortExact_cyclesShortComplex K' hK' k) m).symm
+          (H.map (HomologicalComplex.cyclesMap ψ k) (m + 2) x))) =
+      H.map _ 1 (H.map _ 1 (H.cyclesShiftAddEquiv K hK hacyc m (k + 1) y))
+    rw [hδ, H.cyclesShiftAddEquiv_naturality m (k + 1) y, ← H.map_comp_apply,
+      ← H.map_comp_apply]
+    congr 1
+    exact congrArg (H.map · 1)
+      (eqToHom_comp_cyclesMap ψ (a := k + 1 + m) (b := k + (m + 1)) (by omega)).symm
+
+end Naturality
 
 end AlgebraicGeometry.Scheme.Modules
