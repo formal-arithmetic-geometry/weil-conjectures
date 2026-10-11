@@ -63,6 +63,17 @@ lemma homologyConcentratedIn.mono {a b a' b' : ℤ} (ha : a' ≤ a) (hb : b ≤ 
   obtain ⟨h₁, h₂⟩ := hM
   exact ⟨TStructure.t.isGE_of_ge M a' a ha, TStructure.t.isLE_of_le M b b' hb⟩
 
+/-- A retract of an object with homology concentrated in `[a, b]` has homology concentrated in
+`[a, b]`: its homology objects are retracts of those of the bigger object. -/
+instance (a b : ℤ) : (homologyConcentratedIn (C := C) a b).IsStableUnderRetracts where
+  of_retract {_ N} e h := by
+    obtain ⟨h₁, h₂⟩ := h
+    have key (q : ℤ) (hq : IsZero ((homologyFunctor C q).obj N)) :
+        IsZero ((homologyFunctor C q).obj _) := (IsZero.iff_id_eq_zero _).2 (by
+      rw [← (e.map (homologyFunctor C q)).retract, hq.eq_of_tgt (e.map _).i 0, zero_comp])
+    exact ⟨(isGE_iff _ a).2 fun q hq ↦ key q ((isGE_iff N a).1 h₁ q hq),
+      (isLE_iff _ b).2 fun q hq ↦ key q ((isLE_iff N b).1 h₂ q hq)⟩
+
 /-- An object of `D(C)` is bounded exactly when its homology is concentrated in some
 interval. -/
 lemma exists_homologyConcentratedIn_iff_bounded (M : DerivedCategory C) :

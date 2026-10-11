@@ -79,7 +79,8 @@ lemma isBoundedFlatComplex_iff {a b : ℤ}
   · exact h₁ q hq
   · exact h₂ q hq
 
-/-- Blueprint `sk-lem-sf-flat-model`: Bounded flat model of finite Tor amplitude
+/-- Blueprint `sk-lem-sf-flat-model` (also `lem-sf-flat-model`): Bounded flat model of finite Tor
+amplitude
 
 **Finite Tor amplitude means a bounded flat model.** For `K ∈ D^b_c(X, Λ)` and integers
 `a ≤ b` the following are equivalent: `K` has Tor amplitude in `[a, b]`; and `K` is isomorphic
@@ -138,7 +139,8 @@ theorem liftsAlongEpi_flat_isConstructibleSheaf [Finite Λ] [IsNoetherian X] :
       exact exists_jointlyEpi_freeYoneda G)
 
 open ZeroObject in
-/-- Blueprint `sk-lem-sf-flat-model`: Bounded flat model of finite Tor amplitude
+/-- Blueprint `sk-lem-sf-flat-model` (also `lem-sf-flat-model`): Bounded flat model of finite Tor
+amplitude
 
 **Constructible variant.** Let `X` be Noetherian and `Λ` finite. For `K ∈ D^b_c(X, Λ)` and
 integers `a ≤ b`, `K` has Tor amplitude in `[a, b]` if and only if it is isomorphic to a bounded

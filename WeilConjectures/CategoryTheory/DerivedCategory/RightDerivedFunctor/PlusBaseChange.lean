@@ -57,11 +57,17 @@ noncomputable def rightDerivedFunctorPlusBaseChangeAux (e : G ⋙ γ ⟶ β ⋙ 
     G.mapHomotopyCategoryPlus ⋙ DerivedCategory.Plus.Qh ⋙ γ.mapDerivedCategoryPlus ⟶
       DerivedCategory.Plus.Qh ⋙ β.mapDerivedCategoryPlus ⋙ G'.rightDerivedFunctorPlus :=
   Functor.whiskerLeft G.mapHomotopyCategoryPlus γ.mapDerivedCategoryPlusFactorsh.hom ≫
-    Functor.whiskerRight ((mapHomotopyCategoryPlusCompIso (Iso.refl (G ⋙ γ))).hom ≫
-      NatTrans.mapHomotopyCategoryPlus e ≫
-      (mapHomotopyCategoryPlusCompIso (Iso.refl (β ⋙ G'))).inv) DerivedCategory.Plus.Qh ≫
+    (Functor.associator _ _ _).inv ≫
+    Functor.whiskerRight (mapHomotopyCategoryPlusCompIso (Iso.refl (G ⋙ γ))).hom
+      DerivedCategory.Plus.Qh ≫
+    Functor.whiskerRight (NatTrans.mapHomotopyCategoryPlus e) DerivedCategory.Plus.Qh ≫
+    Functor.whiskerRight (mapHomotopyCategoryPlusCompIso (Iso.refl (β ⋙ G'))).inv
+      DerivedCategory.Plus.Qh ≫
+    (Functor.associator _ _ _).hom ≫
     Functor.whiskerLeft β.mapHomotopyCategoryPlus G'.rightDerivedFunctorPlusUnit ≫
-    Functor.whiskerRight β.mapDerivedCategoryPlusFactorsh.inv G'.rightDerivedFunctorPlus
+    (Functor.associator _ _ _).inv ≫
+    Functor.whiskerRight β.mapDerivedCategoryPlusFactorsh.inv G'.rightDerivedFunctorPlus ≫
+    (Functor.associator _ _ _).hom
 
 /-- The base change morphism `R⁺G ⋙ γ⁺ ⟶ β⁺ ⋙ R⁺G'` attached to a natural transformation
 `e : G ⋙ γ ⟶ β ⋙ G'` with `β` and `γ` exact. -/
@@ -82,6 +88,64 @@ lemma rightDerivedFunctorPlusBaseChange_fac (e : G ⋙ γ ⟶ β ⋙ G') :
     rightDerivedFunctorPlusBaseChangeAux e :=
   rightDerived_fac _ _ _ _ _
 
+
+/-- **The base change morphism commutes with the shifts.** On complexes of injective objects it
+is computed by `e` and the units of the right derived functors
+(`Functor.rightDerivedFunctorPlusBaseChange_fac`), all of which commute with the shifts; every
+bounded below complex is quasi-isomorphic to a complex of injective objects. In particular the
+base change morphism is a morphism of triangulated functors. -/
+instance commShift_rightDerivedFunctorPlusBaseChange (e : G ⋙ γ ⟶ β ⋙ G') :
+    NatTrans.CommShift (rightDerivedFunctorPlusBaseChange e) ℤ := by
+  let inj := (InjectiveObject.ι B).mapHomotopyCategoryPlus
+  let α : G.mapHomotopyCategoryPlus ⋙ DerivedCategory.Plus.Qh ⋙ γ.mapDerivedCategoryPlus ⟶
+      DerivedCategory.Plus.Qh ⋙ G.rightDerivedFunctorPlus ⋙ γ.mapDerivedCategoryPlus :=
+    (Functor.associator _ _ _).inv ≫
+      Functor.whiskerRight G.rightDerivedFunctorPlusUnit γ.mapDerivedCategoryPlus ≫
+      (Functor.associator _ _ _).hom
+  have hfac : α ≫ Functor.whiskerLeft DerivedCategory.Plus.Qh
+      (rightDerivedFunctorPlusBaseChange e) = rightDerivedFunctorPlusBaseChangeAux e := by
+    rw [← rightDerivedFunctorPlusBaseChange_fac e]
+    ext K
+    simp [α]
+  have hβ : NatTrans.CommShift (rightDerivedFunctorPlusBaseChangeAux e) ℤ := by
+    dsimp only [rightDerivedFunctorPlusBaseChangeAux]
+    infer_instance
+  have hα : NatTrans.CommShift α ℤ := by
+    have := NatTrans.CommShift.whiskerRight (A := ℤ) G.rightDerivedFunctorPlusUnit
+      (G := γ.mapDerivedCategoryPlus)
+    dsimp only [α]
+    infer_instance
+  have : IsIso (Functor.whiskerLeft inj α) := by
+    refine @NatIso.isIso_of_isIso_app _ _ _ _ _ _ _ (fun K ↦ ?_)
+    dsimp [α]
+    infer_instance
+  have h₁ : NatTrans.CommShift (Functor.whiskerLeft inj
+      (Functor.whiskerLeft DerivedCategory.Plus.Qh (rightDerivedFunctorPlusBaseChange e))) ℤ := by
+    have : Functor.whiskerLeft inj
+        (Functor.whiskerLeft DerivedCategory.Plus.Qh (rightDerivedFunctorPlusBaseChange e)) =
+        CategoryTheory.inv (Functor.whiskerLeft inj α) ≫ Functor.whiskerLeft inj
+          (rightDerivedFunctorPlusBaseChangeAux e) := by
+      rw [IsIso.eq_inv_comp, ← Functor.whiskerLeft_comp, ← hfac]
+    rw [this]
+    have : NatTrans.CommShift (Functor.whiskerLeft inj α) ℤ := inferInstance
+    have : NatTrans.CommShift (CategoryTheory.inv (Functor.whiskerLeft inj α)) ℤ :=
+      NatTrans.CommShift.of_isIso _ _
+    have : NatTrans.CommShift (Functor.whiskerLeft inj (rightDerivedFunctorPlusBaseChangeAux e))
+        ℤ := inferInstance
+    infer_instance
+  have h₂ : NatTrans.CommShift
+      (Functor.whiskerLeft DerivedCategory.Plus.Qh (rightDerivedFunctorPlusBaseChange e)) ℤ := by
+    refine NatTrans.CommShift.of_whiskerLeft _ inj (fun K ↦ ?_)
+    let E := DerivedCategory.Plus.injectiveObjectEquivalence B
+    obtain ⟨f, hf⟩ := (DerivedCategory.Plus.Qh_map_bijective_of_isKInjective K
+      (inj.obj (E.inverse.obj (DerivedCategory.Plus.Qh.obj K)))
+      inferInstance).2 (E.counitIso.inv.app (DerivedCategory.Plus.Qh.obj K))
+    refine ⟨_, f, ?_⟩
+    rw [Functor.comp_map, hf]
+    infer_instance
+  refine NatTrans.CommShift.of_whiskerLeft _ DerivedCategory.Plus.Qh (fun K ↦ ?_)
+  exact ⟨_, (DerivedCategory.Plus.Qh.objObjPreimageIso K).inv, inferInstance⟩
+
 /-- The base change morphism `γ (R^p G Y) ⟶ R^p G' (β Y)` of the classical right derived
 functors, natural in `Y`, attached to a natural transformation `e : G ⋙ γ ⟶ β ⋙ G'` with `β`
 and `γ` exact. It is induced by `Functor.rightDerivedFunctorPlusBaseChange` through the
@@ -98,6 +162,64 @@ noncomputable def rightDerivedBaseChange (e : G ⋙ γ ⟶ β ⋙ G') (p : ℕ) 
     Functor.whiskerRight (β.mapDerivedCategoryPlusSingleFunctor 0).hom
       (G'.rightDerivedFunctorPlus ⋙ DerivedCategory.Plus.homologyFunctor C' p) ≫
     Functor.whiskerLeft β (G'.singleFunctorCompRightDerivedFunctorPlusCompHomologyFunctorIso p).hom
+
+lemma rightDerivedBaseChange_app (e : G ⋙ γ ⟶ β ⋙ G') (p : ℕ) (Y : B) :
+    (rightDerivedBaseChange e p).app Y =
+      γ.map ((G.singleFunctorCompRightDerivedFunctorPlusCompHomologyFunctorIso p).inv.app Y) ≫
+        (γ.mapDerivedCategoryPlusHomologyFunctorIso p).hom.app
+          (G.rightDerivedFunctorPlus.obj ((DerivedCategory.Plus.singleFunctor B 0).obj Y)) ≫
+        (DerivedCategory.Plus.homologyFunctor C' p).map
+          ((rightDerivedFunctorPlusBaseChange e).app
+            ((DerivedCategory.Plus.singleFunctor B 0).obj Y)) ≫
+        (DerivedCategory.Plus.homologyFunctor C' p).map (G'.rightDerivedFunctorPlus.map
+          ((β.mapDerivedCategoryPlusSingleFunctor 0).hom.app Y)) ≫
+        (G'.singleFunctorCompRightDerivedFunctorPlusCompHomologyFunctorIso p).hom.app
+          (β.obj Y) := by
+  simp only [rightDerivedBaseChange, NatTrans.comp_app, Iso.symm_hom, isoWhiskerRight_hom,
+    whiskerRight_app, whiskerLeft_app, Functor.comp_map]
+  rfl
+
+/-- The base change morphism is compatible with the shifts on homology: through the
+isomorphisms `H^a(K⟦m⟧) ≅ H^{a'}(K)`, the base change morphism on `H^a(R⁺G(Y⟦m⟧))` is the one on
+`H^{a'}(R⁺G(Y))`. -/
+@[reassoc]
+lemma rightDerivedFunctorPlusBaseChange_homologyFunctor_shiftIso (e : G ⋙ γ ⟶ β ⋙ G')
+    (Y : DerivedCategory.Plus B) (m a a' : ℤ) (h : m + a = a') :
+    γ.map ((DerivedCategory.Plus.homologyFunctor C a).map
+        ((G.rightDerivedFunctorPlus.commShiftIso m).hom.app Y) ≫
+        ((DerivedCategory.Plus.homologyFunctor C 0).shiftIso m a a' h).hom.app
+          (G.rightDerivedFunctorPlus.obj Y)) ≫
+      (γ.mapDerivedCategoryPlusHomologyFunctorIso a').hom.app (G.rightDerivedFunctorPlus.obj Y) ≫
+      (DerivedCategory.Plus.homologyFunctor C' a').map
+        ((rightDerivedFunctorPlusBaseChange e).app Y) =
+    (γ.mapDerivedCategoryPlusHomologyFunctorIso a).hom.app (G.rightDerivedFunctorPlus.obj (Y⟦m⟧)) ≫
+      (DerivedCategory.Plus.homologyFunctor C' a).map
+        ((rightDerivedFunctorPlusBaseChange e).app (Y⟦m⟧)) ≫
+      (DerivedCategory.Plus.homologyFunctor C' a).map
+        (G'.rightDerivedFunctorPlus.map ((β.mapDerivedCategoryPlus.commShiftIso m).hom.app Y)) ≫
+      (DerivedCategory.Plus.homologyFunctor C' a).map
+        ((G'.rightDerivedFunctorPlus.commShiftIso m).hom.app (β.mapDerivedCategoryPlus.obj Y)) ≫
+      ((DerivedCategory.Plus.homologyFunctor C' 0).shiftIso m a a' h).hom.app
+        (G'.rightDerivedFunctorPlus.obj (β.mapDerivedCategoryPlus.obj Y)) := by
+  have h₁ := γ.mapDerivedCategoryPlusHomologyFunctorIso_hom_app_shiftIso m a a' h
+    (G.rightDerivedFunctorPlus.obj Y)
+  have h₂ := NatTrans.shift_app_comm (rightDerivedFunctorPlusBaseChange e) m Y
+  simp only [Functor.comp_obj, Functor.commShiftIso_comp_hom_app, Category.assoc] at h₂
+  have h₃ := (γ.mapDerivedCategoryPlusHomologyFunctorIso a).hom.naturality
+    ((G.rightDerivedFunctorPlus.commShiftIso m).hom.app Y)
+  have h₄ : (DerivedCategory.Plus.homologyFunctor C' a).map
+      (((rightDerivedFunctorPlusBaseChange e).app Y)⟦m⟧') ≫
+      ((DerivedCategory.Plus.homologyFunctor C' 0).shiftIso m a a' h).hom.app
+        (G'.rightDerivedFunctorPlus.obj (β.mapDerivedCategoryPlus.obj Y)) =
+      ((DerivedCategory.Plus.homologyFunctor C' 0).shiftIso m a a' h).hom.app
+        (γ.mapDerivedCategoryPlus.obj (G.rightDerivedFunctorPlus.obj Y)) ≫
+      (DerivedCategory.Plus.homologyFunctor C' a').map
+        ((rightDerivedFunctorPlusBaseChange e).app Y) :=
+    (DerivedCategory.Plus.homologyFunctor C' 0).shiftIso_hom_naturality m a a' h _
+  have h₂' := congrArg (DerivedCategory.Plus.homologyFunctor C' a).map h₂
+  simp only [Functor.comp_obj, Functor.comp_map] at h₃
+  simp only [Functor.map_comp] at h₂'
+  rw [γ.map_comp, Category.assoc, reassoc_of% h₁, ← h₄, reassoc_of% h₃, reassoc_of% h₂']
 
 /-- **The base change morphism is invertible when `β` sends injectives to `G'`-acyclics.** If `G'`
 is left exact and `β` sends injective objects to `G'`-acyclic objects, then the base change

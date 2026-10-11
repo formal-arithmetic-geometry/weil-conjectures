@@ -102,7 +102,7 @@ product with the lisse rank-one kernel and the shift preserve bounded constructi
 formal reasons, while `Rp₂,!` does so by the finiteness theorem
 `AlgebraicGeometry.Etale.boundedConstructible_rightDerivedLowerShriek`. That theorem is stated
 over a base field `k`, for finite `Λ` whose exponent is invertible on the source; hence `V'` is
-assumed locally of finite type over `k`, `p₂` of finite type, and the exponent invertible on
+assumed of finite type over `k`, `p₂` of finite type, and the exponent invertible on
 `S`, which gives it on `V ×_S V'` by `AlgebraicGeometry.HasInvertibleExponent.of_hom`.
 
 TODO: neither restriction is needed for `Rf_!`. For torsion coefficients and `f` of finite

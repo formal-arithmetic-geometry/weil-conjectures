@@ -204,7 +204,7 @@ theorem finiteTorAmplitude_compactlySupportedGlobalSections
     refine _root_.DerivedCategory.isLE_obj_of_isLE (R(aX)_![ModuleCat.{u + 1} Λ]) (2 * d)
       (fun F ↦ ?_) M hM b
     rw [_root_.DerivedCategory.isLE_iff]
-    exact fun i hi ↦ isZero_homology_rightDerivedLowerShriek_singleFunctor_obj Λ aX aX (𝟙 _)
+    exact fun i hi ↦ isZero_homology_rightDerivedLowerShriek_singleFunctor Λ aX aX (𝟙 _)
       (Category.comp_id _) d (fun Ω _ _ s ↦ hd Ω s _ _ (IsPullback.of_hasPullback aX s)) F i
       (by lia)
   exact ⟨_root_.DerivedCategory.TStructure.t.isGE_of_iso e.symm a,

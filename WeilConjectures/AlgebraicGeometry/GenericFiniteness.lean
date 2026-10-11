@@ -7,17 +7,14 @@ module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 public import Mathlib.AlgebraicGeometry.ZariskisMainTheorem
-public import Mathlib.RingTheory.Ideal.MinimalPrime.Localization
-public import WeilConjectures.Mathlib.AlgebraicGeometry.ZariskisMainTheorem
+public import WeilConjectures.AlgebraicGeometry.Morphisms.QuasiFiniteFactorization
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 
 /-!
 # Generic finiteness of quasi-finite morphisms
 
 ## Main statements
 
-- `AlgebraicGeometry.Scheme.Hom.exists_specializes_of_mem_closure_range`: a point in the closure
-  of the range of a morphism from a quasi-compact scheme to an affine scheme is a specialization
-  of a point of the range.
 - `AlgebraicGeometry.Scheme.Hom.exists_isFinite_morphismRestrict_of_irreducibleSpace`: a
   separated quasi-compact locally quasi-finite morphism of finite type to an irreducible affine
   scheme is finite over a neighbourhood of the generic point (Stacks 02NW).
@@ -33,54 +30,6 @@ universe u
 open CategoryTheory Limits
 
 namespace AlgebraicGeometry
-
-/-- A point in the closure of the image of `Spec R ⟶ Spec S` is a specialization of a point of
-the image: it contains the kernel of `S ⟶ R`, hence a minimal prime over it, which is the
-contraction of a prime of `R`. -/
-lemma PrimeSpectrum.exists_comap_specializes_of_mem_closure_range {R S : Type*} [CommRing R]
-    [CommRing S] (φ : S →+* R) {t : PrimeSpectrum S}
-    (ht : t ∈ closure (Set.range (PrimeSpectrum.comap φ))) :
-    ∃ x, PrimeSpectrum.comap φ x ⤳ t := by
-  rw [PrimeSpectrum.closure_range_comap, PrimeSpectrum.mem_zeroLocus] at ht
-  obtain ⟨m, hm, hmt⟩ := Ideal.exists_minimalPrimes_le (J := t.asIdeal) ht
-  obtain ⟨p, hp, -, hpm⟩ := Ideal.exists_comap_eq_of_mem_minimalPrimes φ m
-    (by rwa [RingHom.ker_eq_comap_bot] at hm)
-  refine ⟨⟨p, hp⟩, (PrimeSpectrum.le_iff_specializes _ _).1 ?_⟩
-  change Ideal.comap φ p ≤ t.asIdeal
-  rw [hpm]
-  exact hmt
-
-/-- A point in the closure of the range of a morphism from a quasi-compact scheme to an affine
-scheme is a specialization of a point of the range. -/
-lemma Scheme.Hom.exists_specializes_of_mem_closure_range {X T : Scheme.{u}} [CompactSpace X]
-    [IsAffine T] (h : X ⟶ T) {t : T} (ht : t ∈ closure (Set.range h)) : ∃ x, h x ⤳ t := by
-  obtain ⟨R, g, hg⟩ := compactSpace_iff_exists.mp ‹CompactSpace X›
-  let k : Spec R ⟶ Spec Γ(T, ⊤) := g ≫ h ≫ T.isoSpec.hom
-  have hk : Spec.map (Spec.preimage k) = k := Spec.map_preimage k
-  have hk' (y : Spec R) :
-      PrimeSpectrum.comap (Spec.preimage k).hom y = T.isoSpec.hom (h (g y)) := by
-    rw [← Spec.map_apply, hk]
-    rfl
-  have hr : Set.range (PrimeSpectrum.comap (Spec.preimage k).hom) =
-      T.isoSpec.hom.base '' Set.range h := by
-    ext z
-    constructor
-    · rintro ⟨y, rfl⟩
-      exact ⟨h (g y), ⟨g y, rfl⟩, (hk' y).symm⟩
-    · rintro ⟨_, ⟨x, rfl⟩, rfl⟩
-      obtain ⟨y, rfl⟩ := hg x
-      exact ⟨y, hk' y⟩
-  have ht' : T.isoSpec.hom t ∈ closure (Set.range (PrimeSpectrum.comap (Spec.preimage k).hom)) :=
-    hr ▸ image_closure_subset_closure_image (f := T.isoSpec.hom.base)
-      T.isoSpec.hom.base.hom.continuous ⟨t, ht, rfl⟩
-  obtain ⟨y, hy⟩ := PrimeSpectrum.exists_comap_specializes_of_mem_closure_range _ ht'
-  refine ⟨g y, ?_⟩
-  have e (z : T) : T.isoSpec.inv (T.isoSpec.hom z) = z := by
-    rw [← Scheme.Hom.comp_apply, Iso.hom_inv_id]
-    rfl
-  have := hy.map T.isoSpec.inv.base.hom.continuous
-  rw [hk'] at this
-  simpa only [e] using this
 
 /-- Inside a fibre of a locally quasi-finite morphism there are no nontrivial specializations: the
 fibres are discrete. -/
@@ -115,7 +64,7 @@ theorem Scheme.Hom.exists_isFinite_morphismRestrict_of_irreducibleSpace {W S : S
   have hpD : IsClosed (p '' D) := p.isClosedMap D hD
   have hη : η ∉ p '' D := by
     rintro ⟨t, ⟨ht₁, ht₂⟩, hpt⟩
-    obtain ⟨x, hx⟩ := j.exists_specializes_of_mem_closure_range ht₁
+    obtain ⟨x, hx⟩ := exists_specializes_of_mem_closure_range_of_isAffine j ht₁
     have hpx : p (j x) = η := by
       have h₁ := hx.map p.continuous
       rw [hpt] at h₁

@@ -5,8 +5,9 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Mates
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
-public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekComp
+public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekComposition
 public import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperShriek
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.Proper
@@ -18,7 +19,7 @@ Two statements of the six-functor bookkeeping that the purity chapter uses: the
 identification `Rf_! ≅ Rf_*` for proper `f`, and the mate of the composition isomorphism,
 `R(g ∘ f)^! ≅ Rf^! Rg^!`. The composition isomorphism `R(g ∘ f)_! ≅ Rf_! ⋙ Rg_!` itself is
 `AlgebraicGeometry.Etale.nonempty_iso_rightDerivedLowerShriek_comp`, in
-`WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula`.
+`WeilConjectures.SixFunctors.Etale.Derived.LowerShriekComposition`.
 
 The compactification-independence that makes `Rf_!` well defined is already in the
 repository, as
@@ -27,16 +28,17 @@ together with its identity and composition coherences; it is not restated here.
 
 ## Implementation notes
 
-Each statement below records only the *existence* of the isomorphism it names. The unit and
-associativity coherences of `sk-thm-sf-comp-composition`, and the assertion of `sk-lem-sf-mate`
-that `R(gf)^! ≅ Rf^! Rg^!` is the *mate* of the composition isomorphism, cannot be phrased in
-that form; they need the isomorphism as a `def`, which in turn needs the comparison maps of
-the framework chapter. This is the same gap as the TODO already recorded in
-`WeilConjectures.SixFunctors.Etale.Derived.UpperShriek`.
+On the unbounded derived categories the composition isomorphism `R(f ≫ g)_! ≅ Rf_! ⋙ Rg_!` is
+only stated to exist, so the mate statement
+`AlgebraicGeometry.Etale.exists_rightDerivedUpperShriekAdjunction_comp_eq` is existential in it;
+being formal, it holds for every such isomorphism. The canonical composition isomorphism on the
+bounded below derived categories, with its unit and associativity laws, is
+`AlgebraicGeometry.Etale.rightDerivedLowerShriekPlusCompIso`.
 
 ## Main statements
 
 - `AlgebraicGeometry.Etale.nonempty_iso_rightDerivedLowerShriek_rightDerivedLowerStar`
+- `AlgebraicGeometry.Etale.exists_rightDerivedUpperShriekAdjunction_comp_eq`
 - `AlgebraicGeometry.Etale.nonempty_iso_rightDerivedUpperShriek_comp`
 -/
 
@@ -57,6 +59,7 @@ namespace Etale
 variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
   [HasSmallSiteSheafify A] {X Y S : Scheme.{u}}
 
+omit [HasSmallSiteSheafify A] in
 /-- Blueprint `sk-prop-sf-comp-proper`: Proper coincidence
 
 **Proper coincidence.** For `f : X ⟶ Y` proper the identity is a compactification of `f`, and
@@ -72,8 +75,44 @@ map has not been constructed, so only the existence of the derived isomorphism i
 here. -/
 theorem nonempty_iso_rightDerivedLowerShriek_rightDerivedLowerStar (f : X ⟶ Y)
     [HasCompactification f] [IsProper f] :
-    Nonempty (R(f)_![A] ≅ R((f)_*[A])) :=
-  sorry
+    Nonempty (R(f)_![A] ≅ R((f)_*[A])) := by
+  let c := HasCompactification.compactification f
+  -- the open immersion of the compactification is proper, so it has closed range and `j_! ≅ j_*`
+  have := Etale.isIso_openImmersionLowerShriekToLowerStar_of_isClosed_range A c.i
+    (c.isClopen_range_openImmersion inferInstance).isClosed
+  let ι := asIso (Etale.openImmersionLowerShriekToLowerStar A c.i)
+  have : PreservesFiniteColimits (c.i)_*[A] := preservesFiniteColimits_of_natIso ι
+  have : PreservesFiniteLimits (c.i)_*[A] := preservesFiniteLimits_of_natIso ι
+  exact ⟨Functor.isoWhiskerRight (Functor.mapDerivedCategoryNatIso ι) R((c.g)_*[A]) ≪≫
+    Functor.isoWhiskerRight ((c.i)_*[A].rightDerivedFunctorIsoMapDerivedCategory).symm
+      R((c.g)_*[A]) ≪≫ rightDerivedLowerStarComp A c.i c.g ≪≫
+    rightDerivedLowerStarCongr A c.comm.symm⟩
+
+variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] in
+/-- Blueprint `sk-lem-sf-mate`: Mate calculus for a pasted adjunction
+
+Clause (b), étale form: for composable `f : X ⟶ Y` and `g : Y ⟶ S` admitting compactifications
+and torsion coefficients, there is a composition isomorphism `e : R(f ≫ g)_! ≅ Rf_! ⋙ Rg_!`
+(`sk-thm-sf-comp-composition`) whose mate `Rg^! ⋙ Rf^! ≅ R(f ≫ g)^!` under the adjunctions
+`Rf_! ⊣ Rf^!` on the unbounded derived categories of the small étale sites carries the
+adjunction `R(f ≫ g)_! ⊣ R(f ≫ g)^!` to the composite adjunction `Rf_! ⋙ Rg_! ⊣ Rg^! ⋙ Rf^!`:
+the unit and counit of the composite adjunction are the pasted ones. The mate statement is
+formal (`CategoryTheory.Adjunction.ofNatIsoLeft_ofNatIsoRight_conjugateIsoEquiv`); the
+composition isomorphism is `AlgebraicGeometry.Etale.nonempty_iso_rightDerivedLowerShriek_comp`.
+The constructible form, on the small pro-étale sites, is
+`AlgebraicGeometry.ProEtale.exists_rightDerivedUpperShriekAdjunction_comp_eq`. -/
+theorem exists_rightDerivedUpperShriekAdjunction_comp_eq (f : X ⟶ Y) (g : Y ⟶ S)
+    [HasCompactification f] [HasCompactification g] [HasCompactification (f ≫ g)]
+    [QuasiCompact (f ≫ g)] :
+    ∃ e : R(f ≫ g)_![ModuleCat.{u + 1} Λ] ≅
+        R(f)_![ModuleCat.{u + 1} Λ] ⋙ R(g)_![ModuleCat.{u + 1} Λ],
+      ((rightDerivedUpperShriekAdjunction _ (f ≫ g)).ofNatIsoLeft e).ofNatIsoRight
+        (conjugateIsoEquiv
+          ((rightDerivedUpperShriekAdjunction _ f).comp (rightDerivedUpperShriekAdjunction _ g))
+          (rightDerivedUpperShriekAdjunction _ (f ≫ g)) e).symm =
+        (rightDerivedUpperShriekAdjunction _ f).comp (rightDerivedUpperShriekAdjunction _ g) := by
+  obtain ⟨e⟩ := nonempty_iso_rightDerivedLowerShriek_comp Λ f g
+  exact ⟨e, Adjunction.ofNatIsoLeft_ofNatIsoRight_conjugateIsoEquiv _ _ e⟩
 
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] in
 /-- Blueprint `sk-lem-sf-mate`: Mate calculus for a pasted adjunction
@@ -94,12 +133,17 @@ composite of the right adjoints. The composition isomorphism of the lower shriek
 coefficients.
 
 This is clause (b) of `sk-lem-sf-mate` in its étale form, for morphisms admitting a
-compactification (`sk-prop-sf-existence`(a)). Clause (a), the pro-étale ambient form, is not
-formalised. The hypothesis `HasCompactification (f ≫ g)` is redundant over a quasi-compact
+compactification (`sk-prop-sf-existence`(a)); that it is the mate, with the pasted unit and
+counit, is `AlgebraicGeometry.Etale.exists_rightDerivedUpperShriekAdjunction_comp_eq`. Clause
+(a), the pro-étale ambient form, is the theorem
+`ofNatIsoLeft_ofNatIsoRight_conjugateIsoEquiv` in the namespace
+`AlgebraicGeometry.ProEtale.HasAmbientExceptionalRightAdjoint`.
+The hypothesis `HasCompactification (f ≫ g)` is redundant over a quasi-compact
 quasi-separated base, by Nagata's theorem; it is kept because no composition instance for
 `HasCompactification` is available in general. -/
 theorem nonempty_iso_rightDerivedUpperShriek_comp (f : X ⟶ Y) (g : Y ⟶ S)
-    [HasCompactification f] [HasCompactification g] [HasCompactification (f ≫ g)] :
+    [HasCompactification f] [HasCompactification g] [HasCompactification (f ≫ g)]
+    [QuasiCompact (f ≫ g)] :
     Nonempty (R(f ≫ g)^![ModuleCat.{u + 1} Λ] ≅
       R(g)^![ModuleCat.{u + 1} Λ] ⋙ R(f)^![ModuleCat.{u + 1} Λ]) := by
   obtain ⟨e⟩ := nonempty_iso_rightDerivedLowerShriek_comp Λ f g

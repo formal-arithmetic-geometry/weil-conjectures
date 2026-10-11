@@ -55,6 +55,8 @@ of Frobenius modules, which is the local factor of an Euler product.
   `det (1 - t F)⁻¹ = exp (∑_{n ≥ 1} tr (F ^ n) t ^ n / n)`, over a field of characteristic
   zero. It is stated in the same shape as
   `AlgebraicGeometry.Scheme.Hom.zetaSeries`, so that the two can be compared directly.
+- `LinearMap.coeff_alternatingTraceSeries`: the coefficients
+  `(∑_i (-1) ^ i tr (F i ^ n)) / n` of the alternating trace series.
 - `LinearMap.logOf_charpolyRev`: the logarithmic form
   `log det (1 - t F) = - ∑_{n ≥ 1} tr (F ^ n) t ^ n / n`, over a field of characteristic zero.
 -/
@@ -260,6 +262,21 @@ of an endomorphism `F` of a finite dimensional vector space. Its companion ident
 noncomputable def traceSeries (F : Module.End K V) : K⟦X⟧ :=
   PowerSeries.mk fun n ↦ if n = 0 then 0 else LinearMap.trace K V (F ^ n) / n
 
+omit [FiniteDimensional K V] in
+/-- The `n`-th coefficient of the trace series is `tr (F ^ n) / n`, and `0` for `n = 0`. -/
+theorem coeff_traceSeries (F : Module.End K V) (n : ℕ) :
+    PowerSeries.coeff n (traceSeries F) =
+      if n = 0 then 0 else LinearMap.trace K V (F ^ n) / n := by
+  rw [traceSeries, PowerSeries.coeff_mk]
+
+omit [FiniteDimensional K V] in
+/-- The trace series has no constant term: it lies in `T K⟦T⟧` (blueprint:
+`def-zl-frobenius-trace-series`). -/
+@[simp]
+theorem constantCoeff_traceSeries (F : Module.End K V) :
+    PowerSeries.constantCoeff (traceSeries F) = 0 := by
+  rw [← PowerSeries.coeff_zero_eq_constantCoeff_apply, coeff_traceSeries, if_pos rfl]
+
 /-- **The determinant-trace identity**, logarithmic form: the formal logarithm of
 `det (1 - t F)` is minus the trace series,
 `log det (1 - t F) = - ∑_{n ≥ 1} tr (F ^ n) t ^ n / n`, for an endomorphism `F` of a finite
@@ -305,6 +322,32 @@ the sign being the parity of the degree `i` via `Int.negOnePow`
 (blueprint: `sk-def-frobmod`). -/
 noncomputable def alternatingTraceSeries (s : Finset ℤ) (F : ∀ i, Module.End K (W i)) : K⟦X⟧ :=
   ∑ i ∈ s, (i.negOnePow : ℤ) • traceSeries (F i)
+
+omit [∀ i, FiniteDimensional K (W i)] in
+/-- The `n`-th coefficient of the alternating trace series is
+`(∑_i (-1) ^ i tr (F i ^ n ∣ W i)) / n`, and `0` for `n = 0`: the two descriptions
+`∑_{n ≥ 1} (∑_i (-1) ^ i tr (F i ^ n)) T ^ n / n = ∑_i (-1) ^ i tr_{F i}(T)` of the
+alternating trace series agree (blueprint: `def-zl-frobenius-trace-series`). -/
+theorem coeff_alternatingTraceSeries (s : Finset ℤ) (F : ∀ i, Module.End K (W i)) (n : ℕ) :
+    PowerSeries.coeff n (alternatingTraceSeries s F) =
+      if n = 0 then 0
+      else (∑ i ∈ s, (i.negOnePow : ℤ) • LinearMap.trace K (W i) (F i ^ n)) / n := by
+  rw [alternatingTraceSeries, map_sum]
+  split_ifs with hn
+  · simp [hn]
+  · rw [div_eq_mul_inv, Finset.sum_mul]
+    refine Finset.sum_congr rfl fun i _ ↦ ?_
+    rw [PowerSeries.coeff_smul, coeff_traceSeries, if_neg hn, zsmul_eq_mul, zsmul_eq_mul,
+      div_eq_mul_inv, mul_assoc]
+
+omit [∀ i, FiniteDimensional K (W i)] in
+/-- The alternating trace series has no constant term: it lies in `T K⟦T⟧` (blueprint:
+`def-zl-frobenius-trace-series`). -/
+@[simp]
+theorem constantCoeff_alternatingTraceSeries (s : Finset ℤ) (F : ∀ i, Module.End K (W i)) :
+    PowerSeries.constantCoeff (alternatingTraceSeries s F) = 0 := by
+  rw [← PowerSeries.coeff_zero_eq_constantCoeff_apply, coeff_alternatingTraceSeries,
+    if_pos rfl]
 
 /-- The alternating determinant
 

@@ -6,6 +6,7 @@ Authors: Christian Merten
 module
 
 public import WeilConjectures.Compactification.BaseChange
+public import WeilConjectures.Compactification.Constructions
 public import WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Basic
 
 /-!
@@ -129,6 +130,49 @@ theorem isPullback_restrict : IsPullback e.restrict.g (pullback.fst e.g m) m e.g
   e.isPullback_g_ofIsPullback _
 
 end Restrict
+
+
+section OfComp
+
+variable {X Y S : Scheme.{u}} {f : X ⟶ Y} {g : Y ⟶ S}
+
+/-- The immersion `X ⟶ c.Z ×_S d.Z` with components `c.i` and `f ≫ d.i`, for a
+compactification `c` of `f ≫ g` and a compactification `d` of `g`. -/
+noncomputable def ofCompLift (c : Compactification (f ≫ g)) (d : Compactification g) :
+    X ⟶ pullback c.g d.g :=
+  pullback.lift c.i (f ≫ d.i) (by rw [← c.comm, Category.assoc, ← d.comm])
+
+@[reassoc (attr := simp)]
+lemma ofCompLift_fst (c : Compactification (f ≫ g)) (d : Compactification g) :
+    c.ofCompLift d ≫ pullback.fst c.g d.g = c.i :=
+  pullback.lift_fst _ _ _
+
+@[reassoc (attr := simp)]
+lemma ofCompLift_snd (c : Compactification (f ≫ g)) (d : Compactification g) :
+    c.ofCompLift d ≫ pullback.snd c.g d.g = f ≫ d.i :=
+  pullback.lift_snd _ _ _
+
+instance (c : Compactification (f ≫ g)) (d : Compactification g) :
+    IsImmersion (c.ofCompLift d) :=
+  have : IsImmersion (c.ofCompLift d ≫ pullback.fst c.g d.g) := by
+    rw [ofCompLift_fst]; infer_instance
+  .of_comp _ (pullback.fst c.g d.g)
+
+/-- **Compactifying `f` into a compactification of `g`**: for a quasi-compact composite
+`f ≫ g`, a compactification `c` of `f ≫ g` and a compactification `d` of `g`, the closure of
+`X` in `c.Z ×_S d.Z` (embedded by `c.i` and `f ≫ d.i`) is a compactification of `f ≫ d.i`.
+Together with `Compactification.comp` and `Compactification.restrict` this produces, out of
+compactifications of `g` and of `f ≫ g`, the compactifications of `f` and `f ≫ g` used in the
+composition law `R(f ≫ g)_! ≅ Rf_! ⋙ Rg_!` (blueprint `sk-thm-sf-comp-composition`). -/
+noncomputable def ofComp [QuasiCompact (f ≫ g)] (c : Compactification (f ≫ g))
+    (d : Compactification g) : Compactification (f ≫ d.i) :=
+  have : QuasiCompact (c.ofCompLift d) :=
+    have : QuasiCompact (c.ofCompLift d ≫ pullback.fst c.g d.g) := by
+      rw [ofCompLift_fst]; exact c.quasiCompact_openImmersion inferInstance
+    .of_comp _ (pullback.fst c.g d.g)
+  (ofIsImmersion (c.ofCompLift d) (pullback.snd c.g d.g)).copy (ofCompLift_snd c d).symm
+
+end OfComp
 
 end Compactification
 
