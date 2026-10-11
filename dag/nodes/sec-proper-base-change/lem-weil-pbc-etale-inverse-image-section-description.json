@@ -138,5 +138,22 @@
   "group": "E1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-iis1740 (reviewer sub-agent of L); spot-checked: Read whole packet; step 1 matches the inverse-image node's sheafified colimit presheaf over pairs (V/S, T'->V x_S T); step 2 is exactly the local-representative clause of the sheafification node (generic tool, accepted); step 3 uses clause (1) of the colimit-elementwise node (surjectivity of the colimit maps, which holds for any colimit of sets, so the unstated filteredness is not needed); factorization T_a->V_a x_S T->V_a over S checked. No new nodes. PASS."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleInverseImageSectionDescription",
+  "declaration": "AlgebraicGeometry.etaleInverseImageSectionDescription",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleInverseImageSectionDescription.lean",
+  "statement": "theorem etaleInverseImageSectionDescription (S T : Scheme.{u}) (g : T ⟶ S) (F : Sheaf S.smallEtaleTopology (Type (u + 1))) (s : ((Scheme.etaleSetPullback g).obj F).obj.obj (op (Scheme.Etale.mk (𝟙 T)))) : ∃ (I : Type u) (Z : I → T.Etale) (π : ∀ i : I, Z i ⟶ Scheme.Etale.mk (𝟙 T)), Sieve.ofArrows Z π ∈ T.smallEtaleTopology (Scheme.Etale.mk (𝟙 T)) ∧ ∀ i : I, ∃ (V : S.Etale) (a : Z i ⟶ (MorphismProperty.Over.pullback @Etale ⊤ g).obj V) (t : F.obj.obj (op V)), ((Scheme.etaleSetPullback g).obj F).obj.map (π i).op s = ((Scheme.etaleSetPullback g).obj F).obj.map a.op (((Functor.sheafPullbackConstruction.sheafAdjunctionContinuous (MorphismProperty.Over.pullback @Etale ⊤ g) (Type (u + 1)) (S.smallGrothendieckTopology @Etale) (T.smallGrothendieckTopology @Etale)).unit.app F).hom.app (op V) t)",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-eis",
+  "group": "E1",
+  "result": "pass"
  }
 }

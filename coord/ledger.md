@@ -4955,3 +4955,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 14:29 L: merged deliver/G1/lem-weil-pbc-sheaf-isomorphism-local-open-cover (stage 2; reviewer PASS; first push; Sheaf.Topology.SheafIsomorphismLocalOpenCover AlgebraicGeometry.sheaf_module_isIso_iff_isIso_over_open_cover)
 - 14:29 L: merged deliver/H1/lem-weil-pbc-smooth-over-field-dimension-differentials (stage 2; reviewer PASS; first push; Sheaf.RingTheory.SmoothAtPrimeDifferentialsDimension Algebra.finiteDimensional_and_finrank_kaehlerDifferential_eq_of_isSmoothAtPrime)
 - 14:29 L: merged deliver/J1/lem-weil-pbc-simplicial-set-glue-simplex (stage 2; reviewer PASS; first push; Sheaf.AlgebraicTopology.GlueSimplex SSet.glue_simplex)
+- 14:29 L: merged deliver/E1/lem-weil-pbc-etale-inverse-image-section-description (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.EtaleInverseImageSectionDescription AlgebraicGeometry.etaleInverseImageSectionDescription)
