@@ -1,11 +1,11 @@
 # Work queue
 
-248 items; claim with `tools/claim.py next <group> [--stage N]`.
+244 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (248)
+## Stage 2: nodes to state (244)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
@@ -36,7 +36,6 @@
 | `lemma-nagata-final-noetherian-base-system` | 2 | state | 2 |
 | `lem-pc-derived-tensor-transitivity` | 1 | state | 1 |
 | `lem-sc-base-change-curve` | 1 | state | 1 |
-| `lem-weil-pbc-etale-geometric-fibre-inverse-image-constant` | 1 | state | 1 |
 | `lem-weil-pbc-sets-etale-inverse-image-constant-sheaf` | 1 | state | 1 |
 | `lem-weil-pbc-symmetric-algebra-graded` | 1 | state | 1 |
 | `thm-sp-spectral-object-yields` | 1 | state | 1 |
@@ -60,9 +59,8 @@
 | `lem-weil-pbc-closed-subset-proper-over-base-properties` | 1 | state | 0 |
 | `lem-weil-pbc-closed-subset-proper-over-base-union-preimage` | 1 | state | 0 |
 | `lem-weil-pbc-coherent-property-devissage-integral-subschemes` | 1 | state | 0 |
-| `lem-weil-pbc-etale-sections-equal-open` | 1 | state | 0 |
+| `lem-weil-pbc-etale-geometric-fibre-constant-sections` | 1 | state | 0 |
 | `lem-weil-pbc-finite-surjective-coherent-generic-support` | 1 | state | 0 |
-| `lem-weil-pbc-finite-type-module-support-closed` | 1 | state | 0 |
 | `lem-weil-pbc-matching-object-proper-faces` | 1 | state | 0 |
 | `lem-weil-pbc-module-support-proper-over-base` | 1 | state | 0 |
 | `lem-weil-pbc-projective-space-twisting-sheaf-charts` | 1 | state | 0 |
@@ -74,14 +72,12 @@
 | `lem-weil-pbc-smooth-over-field-regular-local` | 1 | state | 0 |
 | `lem-weil-pbc-smooth-over-product-ring` | 1 | state | 0 |
 | `lem-weil-pbc-smooth-retract-relative-global-complete-intersection` | 1 | state | 0 |
-| `lem-weil-pbc-smooth-ring-map-iff-smooth-affine` | 1 | state | 0 |
 | `lem-weil-pbc-smooth-section-etale-lift` | 1 | state | 0 |
 | `lem-weil-pbc-smooth-zero-differentials-affine-open-etale` | 1 | state | 0 |
 | `lem-weil-pbc-spec-algebraically-closed-etale-sheaf-constant` | 1 | state | 0 |
 | `lem-weil-pbc-spec-field-point-residue-field` | 1 | state | 0 |
 | `lem-weil-pbc-spec-finite-product-fields` | 1 | state | 0 |
 | `lem-weil-pbc-spec-map-residue-field-naturality` | 1 | state | 0 |
-| `lem-weil-pbc-spec-surjective-base-change` | 1 | state | 0 |
 | `lem-weil-pbc-spectral-closed-clopen-decomposition-lift` | 1 | state | 0 |
 | `lem-weil-pbc-spectral-constructible-clopen-constructible-topology` | 1 | state | 0 |
 | `lem-weil-pbc-spectral-constructible-finite-intersection` | 1 | state | 0 |
@@ -258,7 +254,7 @@
 | `lem-pc-essentially-constant-pro-hom-colimit` | 4 | state | 0 |
 | `lem-pur-essential-constant-pro-criterion-05py` | 4 | state | 0 |
 
-Not open yet: 40 nodes that wait for stage 1, 460 nodes that wait for a statement dependency.
+Not open yet: 40 nodes that wait for stage 1, 459 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
