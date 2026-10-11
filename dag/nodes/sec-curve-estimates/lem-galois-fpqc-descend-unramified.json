@@ -196,5 +196,24 @@
   "lem-weil-pbc-fpqc-descend-locally-finite-type",
   "lemma-nagata-diagonal-base-change"
  ],
- "reviewed": "2026-10-10 L: 6 steps along 02VM checked (lft descends; the diagonal of f_i is the base change of the diagonal of f via the Nagata diagonal node and pasting, as in the separated sibling; delta_i an open immersion; the base-changed family is an fpqc covering of X x_S X; open immersions descend by the new 02L3 node; unramified). tool_uses from the declared list. New unsplit node lem-galois-fpqc-descend-open-immersion (02L3, Mathlib one-morphism candidate recorded). LeanSearch down."
+ "reviewed": "2026-10-10 L: 6 steps along 02VM checked (lft descends; the diagonal of f_i is the base change of the diagonal of f via the Nagata diagonal node and pasting, as in the separated sibling; delta_i an open immersion; the base-changed family is an fpqc covering of X x_S X; open immersions descend by the new 02L3 node; unramified). tool_uses from the declared list. New unsplit node lem-galois-fpqc-descend-open-immersion (02L3, Mathlib one-morphism candidate recorded). LeanSearch down.",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.UnramifiedDescent",
+  "declaration": "AlgebraicGeometry.locallyOfFiniteType_and_openDiagonal_of_fpqcCover",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/UnramifiedDescent.lean",
+  "statement": "theorem locallyOfFiniteType_and_openDiagonal_of_fpqcCover {S X : Scheme.{u}} {I : Type v} {S' : I → Scheme.{u}} (f : X ⟶ S) (g : ∀ i, S' i ⟶ S) (hg : Presieve.ofArrows S' g ∈ Scheme.fpqcPrecoverage S) (h : ∀ i, LocallyOfFiniteType (pullback.snd f (g i)) ∧ IsOpenImmersion (pullback.diagonal (pullback.snd f (g i)))) : LocallyOfFiniteType f ∧ IsOpenImmersion (pullback.diagonal f)",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-fdu0632"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-fdu0632",
+  "group": "C1",
+  "result": "fix",
+  "note": "S X : Scheme.{u}, I : Type v, S' family, f, g_i; fpqc covering = Presieve.ofArrows S' g ∈ Scheme.fpqcPrecoverage S (as F1 AffineFpqcDescent); f_i = pullback.snd f (g i); unramified = LocallyOfFiniteType ∧ IsOpenImmersion (pullback.diagonal _) per node def (no record); conclusion same for f; Mathlib only single-morphism FormallyUnramified descent; unused FormallyUnramified import dropped"
+ }
 }
