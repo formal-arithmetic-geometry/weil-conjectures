@@ -7,10 +7,12 @@ module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite
+public import WeilConjectures.AlgebraicGeometry.Morphisms.QuasiFiniteFactorization
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCompatibility
 public import WeilConjectures.DeligneLaumon.Reduction.Weights
 public import WeilConjectures.WeilSheaf.LowerShriekFunctoriality
 public import WeilConjectures.WeilSheaf.StalkUpperStar
+public import WeilConjectures.WeilSheaf.StalkExtensionByZero
 
 /-!
 # The formal reductions of the Deligne–Laumon direct-image bound
@@ -291,8 +293,11 @@ theorem WeilComplex.IsMixedOfWeightsAtMost.derivedLowerShriek_of_isOpenImmersion
     [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
     [QuasiSeparated (X ↘ Spec (CommRingCat.of k₀))] {w : ℝ} {K : WeilComplex k₀ l U}
     (hK : K.IsMixedOfWeightsAtMost ι w) :
-    ((WeilComplex.derivedLowerShriek k₀ l j).obj K).IsMixedOfWeightsAtMost ι w :=
-  sorry
+    ((WeilComplex.derivedLowerShriek k₀ l j).obj K).IsMixedOfWeightsAtMost ι w := by
+  refine WeilComplex.IsMixedOfWeightsAtMost.map_of_forall_toComplex _ (fun v G hG ↦ ?_) hK
+  obtain ⟨e⟩ := WeilComplex.nonempty_derivedLowerShriek_toComplex_iso_of_isOpenImmersion j G
+  exact ((WeilComplex.isMixedOfWeightsAtMost_toComplex_iff _).2
+    (hG.map (WeilSheaf.extensionByZero j) fun _ _ h ↦ h.extensionByZero j)).of_iso e.symm
 
 /-- **Finite pushforward preserves upper weights** (blueprint: `lem-zl-finite-pushforward`): for a
 finite morphism `g : Z ⟶ X` of `k₀`-schemes and a Weil complex `K` on `Z` mixed of weights at
@@ -621,6 +626,18 @@ end OpenClosed
 
 section QuasiFinite
 
+/-- **Finite direct images are exact** (blueprint: `lemma-weil-pbc-finite-direct-image-exact`,
+with the passage to `ℚ̄_ℓ`-coefficients of `def-weil-pbc-qbar-category`): for a finite morphism
+`p : T ⟶ Y` of `k₀`-schemes, the higher direct images `Rʳp₀*G` of a Weil sheaf vanish for
+`r > 0`. -/
+theorem WeilSheaf.isZero_higherLowerStar_of_isFinite {T Y : Scheme.{u}}
+    [T.Over (Spec (CommRingCat.of k₀))] [Y.Over (Spec (CommRingCat.of k₀))] (p : T ⟶ Y)
+    [IsFinite p] [p.IsOver (Spec (CommRingCat.of k₀))]
+    [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))]
+    [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))] (G : WeilSheaf k₀ l T) (r : ℕ) (hr : 0 < r) :
+    IsZero ((WeilSheaf.higherLowerStar p r).obj G) :=
+  sorry
+
 variable {X Y : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
   [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
   [Y.Over (Spec (CommRingCat.of k₀))] (f : X ⟶ Y) [f.IsOver (Spec (CommRingCat.of k₀))]
@@ -629,23 +646,65 @@ variable {X Y : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
   [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))]
   [QuasiSeparated (Y ↘ Spec (CommRingCat.of k₀))]
 
+/-- For a separated quasi-finite morphism `f : X ⟶ Y` of `k₀`-schemes and a Weil sheaf `F` on `X`,
+the complex `Rf₀!F` is concentrated in degree `0`, and it is mixed of weights at most `w` if `F`
+is (blueprint: `lem-zl-quasi-finite`, parts 1 and 2).
+
+Zariski's main theorem factors `f` as a quasi-compact open immersion `j : X ⟶ T` followed by a
+finite morphism `p : T ⟶ Y`, so that `Rf₀! ≅ Rp₀! ∘ Rj₀! ≅ Rp₀* ∘ j₀!`; the extension by zero
+`j₀!` is exact and preserves mixedness, and the finite direct image `p₀*` is exact and preserves
+mixedness (`lem-zl-finite-pushforward`). -/
+theorem WeilSheaf.isZero_higherLowerShriek_and_isMixedOfWeightsAtMost_of_quasiFinite
+    (F : WeilSheaf k₀ l X) :
+    (∀ r : ℕ, 0 < r → IsZero ((WeilSheaf.higherLowerShriek k₀ l f r).obj F)) ∧
+      ∀ (ι : PadicAlgCl l →+* ℂ) (w : ℝ), F.IsMixedOfWeightsAtMost ι w →
+        ((WeilComplex.derivedLowerShriek k₀ l f).obj
+          (WeilSheaf.toComplex.obj F)).IsMixedOfWeightsAtMost ι w := by
+  have : CompactSpace Y :=
+    QuasiCompact.compactSpace_of_compactSpace (Y ↘ Spec (CommRingCat.of k₀))
+  have : QuasiSeparatedSpace Y :=
+    quasiSeparatedSpace_of_quasiSeparated (Y ↘ Spec (CommRingCat.of k₀))
+  obtain ⟨T, j, p, hj, hjc, hp, hjp⟩ := f.exists_isOpenImmersion_isFinite_of_locallyQuasiFinite
+  let : T.Over (Spec (CommRingCat.of k₀)) := ⟨p ≫ Y ↘ Spec (CommRingCat.of k₀)⟩
+  have : p.IsOver (Spec (CommRingCat.of k₀)) := ⟨rfl⟩
+  have : j.IsOver (Spec (CommRingCat.of k₀)) := ⟨by
+    change j ≫ p ≫ Y ↘ Spec (CommRingCat.of k₀) = _
+    rw [← Category.assoc, hjp, comp_over]⟩
+  have : LocallyOfFiniteType (T ↘ Spec (CommRingCat.of k₀)) :=
+    inferInstanceAs (LocallyOfFiniteType (p ≫ _))
+  have : QuasiCompact (T ↘ Spec (CommRingCat.of k₀)) := inferInstanceAs (QuasiCompact (p ≫ _))
+  have : QuasiSeparated (T ↘ Spec (CommRingCat.of k₀)) :=
+    inferInstanceAs (QuasiSeparated (p ≫ _))
+  subst hjp
+  obtain ⟨e⟩ := WeilComplex.nonempty_derivedLowerShriekCompIso (k₀ := k₀) (l := l) j p
+  obtain ⟨e'⟩ := WeilComplex.nonempty_derivedLowerShriek_toComplex_iso_of_isOpenImmersion j F
+  let E := e.app (WeilSheaf.toComplex.obj F) ≪≫ (WeilComplex.derivedLowerShriek k₀ l p).mapIso e' ≪≫
+    WeilComplex.derivedLowerShriekObjIsoDerivedLowerStar p _
+  refine ⟨fun r hr ↦ ?_, fun ι w hF ↦ ?_⟩
+  · exact (WeilSheaf.isZero_higherLowerStar_of_isFinite p _ r hr).of_iso
+      ((WeilComplex.homologySheaf r).mapIso E)
+  · refine WeilComplex.IsMixedOfWeightsAtMost.of_iso E.symm ?_
+    exact WeilComplex.IsMixedOfWeightsAtMost.derivedLowerStar_of_isFinite p
+      ((WeilComplex.isMixedOfWeightsAtMost_toComplex_iff _).2
+        (hF.map (WeilSheaf.extensionByZero j) fun _ _ h ↦ h.extensionByZero j))
+
 /-- For a separated quasi-finite morphism `f : X ⟶ Y` of `k₀`-schemes the higher direct images
-with compact support `Rʳf₀!` vanish for `r > 0` (blueprint: `sk-l-dl-general-quasifinite`). -/
+with compact support `Rʳf₀!` vanish for `r > 0` (blueprint: `sk-l-dl-general-quasifinite`,
+`lem-zl-quasi-finite`, part 1). -/
 theorem isZero_higherLowerShriek_of_quasiFinite (r : ℕ) (hr : 0 < r) (F : WeilSheaf k₀ l X) :
     IsZero ((WeilSheaf.higherLowerShriek k₀ l f r).obj F) :=
-  -- Compact-support base change identifies the stalks of `Rʳf₀!F` with the cohomology of a
-  -- finite geometric fibre, which is concentrated in degree zero.
-  sorry
+  (WeilSheaf.isZero_higherLowerShriek_and_isMixedOfWeightsAtMost_of_quasiFinite f
+    F).1 r hr
 
 /-- For a separated quasi-finite morphism `f : X ⟶ Y` of `k₀`-schemes the exact functor `f₀!`
-preserves mixed upper weight bounds (blueprint: `sk-l-dl-general-quasifinite`). -/
+preserves mixed upper weight bounds (blueprint: `sk-l-dl-general-quasifinite`,
+`lem-zl-quasi-finite`, part 2). -/
 theorem WeilSheaf.IsMixedOfWeightsAtMost.higherLowerShriek_zero_of_quasiFinite {w : ℝ}
     {F : WeilSheaf k₀ l X} (h : F.IsMixedOfWeightsAtMost ι w) :
-    ((WeilSheaf.higherLowerShriek k₀ l f 0).obj F).IsMixedOfWeightsAtMost ι w :=
-  -- `f₀!` is exact by `isZero_higherLowerShriek_of_quasiFinite`, so it transports a mixed
-  -- filtration; its quotients stay punctually pure of the same weight by the orbit computation
-  -- of `WeilSheaf.HasWeightsAtMost.higherLowerShriek_zero_of_quasiFinite`.
-  sorry
+    ((WeilSheaf.higherLowerShriek k₀ l f 0).obj F).IsMixedOfWeightsAtMost ι w := by
+  have := (WeilSheaf.isZero_higherLowerShriek_and_isMixedOfWeightsAtMost_of_quasiFinite f
+    F).2 ι w h 0
+  exact this.mono_weight (by simp)
 
 /-- For a separated quasi-finite morphism `f : X ⟶ Y` of `k₀`-schemes the exact functor `f₀!`
 preserves punctual upper weight bounds (blueprint: `sk-l-dl-general-quasifinite`). -/
