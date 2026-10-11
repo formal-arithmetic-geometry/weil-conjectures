@@ -102,7 +102,6 @@ theorem isIso_fromIntegral_map_projectionMap (f : X ⟶ Y) [HasCompactification 
     (_root_.DerivedCategory.derivedCompleteIntegral Y.smallEtaleTopology l E).ι _ _ _ _ _
     (hasProjectionFormula_of_derivedCompleteIntegral l E f K L hKc hK hKt hLc hL hLt)
 
-
 /-- Blueprint `thm-sf-pf-field`: Rational and algebraically closed stages; the compatibility
 with finite reduction.
 
