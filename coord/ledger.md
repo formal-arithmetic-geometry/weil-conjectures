@@ -3981,3 +3981,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 09:17 L: merged deliver/E1/lem-sp-ce-horizontal-lift (stage 2; reviewer PASS; first push; Sheaf.CategoryTheory.HorizontalComparisonLift CategoryTheory.horizontal_comparison_lift)
 - 09:17 L: merged deliver/H1/lem-weil-pbc-conormal-module-principal-localization (stage 2; reviewer PASS; first push; Sheaf.RingTheory.ConormalModulePrincipalLocalization Algebra.Extension.conormalModule_principalLocalization)
 - 09:18 L: merged deliver/J1/lem-weil-pbc-complex-mapping-cylinder-split-factorization (stage 2; reviewer PASS; first push; Sheaf.Algebra.Homology.MappingCylinderSplitFactorization CochainComplex.exists_mapping_cylinder_split_factorization)
+- 09:18 L: merged deliver/C1/lem-weil-pbc-complex-injective-resolution-mono (stage 2; reviewer PASS; first push; Sheaf.Algebra.Homology.BoundedBelowInjectiveResolutionMono CochainComplex.exists_mono_quasiIso_injective_boundedBelow)
