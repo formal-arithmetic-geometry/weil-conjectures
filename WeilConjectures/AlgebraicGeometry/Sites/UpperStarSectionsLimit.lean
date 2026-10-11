@@ -106,7 +106,7 @@ lemma exists_local_descent_of_isLimit [∀ {i j} (f : i ⟶ j), IsAffineHom (D.m
     rw [pullback.lift_snd]
     infer_instance
   have : Etale β := Etale.of_comp β (pullback.snd _ _)
-  obtain ⟨k', f, E, hE, q, hq, e, he, E', π₁, π₂, hπ, γ, hγ, hz⟩ :=
+  obtain ⟨k', f, E, hE, q, hq, e, he, E', π₁, π₂, hπ, γ, -, hγ, hz⟩ :=
     exists_etale_refinement_of_isLimit D c hc Y.hom β z
   have hγ₂ : γ ≫ V''.hom = π₂ := by
     have := congrArg (· ≫ pullback.snd Y.hom (c.π.app k)) hγ
