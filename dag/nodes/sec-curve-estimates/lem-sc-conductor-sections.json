@@ -126,5 +126,24 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-cds (reviewer sub-agent of L); spot-checked: Source read: Stacks varieties.tex Remark 09NW (varieties-remark-conductor, line 8070) and Lemma 09NX proof (varieties-lemma-dim-1-noetherian-reduced-separated-has-ample, display after line 8113), which ARE in literature/stacks-project contrary to the report's WANTED lines. Item statement agrees with 09NX's display: Y reduced, finitely many components Z_1..Z_r with reduced structure, Z reduced on Z_2..Z_r, I its ideal, I_1 = I O_{Z_1}, M invertible, m>=0; true (stalkwise I_y=0 off Z_1, I_z = I_z/(I∩J_1)_z on Z_1). Delivery's new node lem-sc-conductor-ideal-restriction (i_1^*I -> I_1 iso, equivalently I∩J_1 = I J_1) is true for reduced Y (both are 0) and carries step 1 (tensor with the invertible M^m, def-sc-invertible-module). Step 3 elementary from def-sbc-closed-immersion-ideal-sheaf and the X_s definition of def-weil-pbc-ample-invertible-module. FIX more, RETURN less: C4 at step 2: passing from the pulled-back isomorphism on Z_1 to Γ(Y, I M^m) ≅ Γ(Z_1, I_1 M_1^m) needs I∩J_1 = 0 (I supported on Z_1, the heart of Remark 09NW), which no cited statement gives (i^*I ≅ I_1 alone gives only Γ(Y, I/IJ_1 ⊗ M^m)). Added statement-only node dag/nodes/sec-curve-estimates/lem-sc-conductor-ideal-zero-intersection.json (I∩J_1=0 and restriction Γ(U, I M^m) -> Γ(U∩Z_1, I_1 M_1^m) bijective for every open U; source 09NW as used in 09NX; blueprint.from copied from the delivery's node; same_as [] after blueprint_refs.py search 'conductor ideal reduced component' found 0); lem-sc-conductor-sections.json: proof[1].text rewritten to cite it, proof[1].uses = [lem-sc-conductor-ideal-zero-intersection, def-sbc-closed-immersion-ideal-sheaf], proof_deps += it. Small cases: r=1 (I=O_Y, Z_1=Y, tautological); A=k[x,y]/(xy), I=(x), J_1=(y): I∩J_1=(xy)=0 and xA ≅ x k[x] = I B; disjoint components (extension by zero). Mathlib: no 'conductor' in Mathlib/AlgebraicGeometry or slopmaster2 WeilConjectures; no attachment. Shape: one commit, three item files, report with ## Review by E1. Start Sat Oct 10 03:09:18 PM UTC 2026, end Sat Oct 10 03:11:14 PM UTC 2026.; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
  },
- "lead_note": "2026-10-10 L (R-cds): lem-sc-conductor-ideal-restriction's clause 'restriction identifies the conductor with I_1' uses the undefined word 'conductor'; whoever splits it should read it as I∩J_1 = I J_1 (both 0 for reduced Y). The report wrongly says the Stacks files are absent."
+ "lead_note": "2026-10-10 L (R-cds): lem-sc-conductor-ideal-restriction's clause 'restriction identifies the conductor with I_1' uses the undefined word 'conductor'; whoever splits it should read it as I∩J_1 = I J_1 (both 0 for reduced Y). The report wrongly says the Stacks files are absent.",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ConductorSections",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.conductor_sections",
+  "file": "lean/Sheaf/AlgebraicGeometry/ConductorSections.lean",
+  "statement": "theorem conductor_sections {Y : Scheme.{u}} [IsReduced Y] {ι : Type v} [Finite ι] (C : ι → Scheme.{u}) (i : ∀ b : ι, C b ⟶ Y) [∀ b : ι, IsReduced (C b)] [∀ b : ι, IsClosedImmersion (i b)] (hcomponents : ∀ b : ι, Set.range (i b) ∈ irreducibleComponents Y) (hdistinct : Function.Injective fun b : ι => Set.range (i b)) (hcover : (⋃ b : ι, Set.range (i b)) = Set.univ) (a : ι) {Z : Scheme.{u}} [IsReduced Z] (j : Z ⟶ Y) [IsClosedImmersion j] (hZ : Set.range j = ⋃ b : ι, ⋃ (_ : b ≠ a), Set.range (i b)) (M : Y.Modules) [M.IsInvertible] (m : ℕ) : let N := M.tensorPow m let N₁ := (tensorPullback (i a)).obj N let adj₁ := Classical.choose (exists_tensorPullbackAdjunction (i a)) let adjZ := Classical.choose (exists_tensorPullbackAdjunction j) let res₁ : Γ(N, ⊤) → Γ(N₁, ⊤) := fun t ↦ (adj₁.unit.app N).val.app (op ⊤) t let resZ : Γ(N, ⊤) → Γ((tensorPullback j).obj N, ⊤) := fun t ↦ (adjZ.unit.app N).val.app (op ⊤) t let I := j.ker let I₁ := I.comap (i a) let μ : I.toModules ⊗ N ⟶ N := I.toModulesι ▷ N ≫ (λ_ N).hom let μ₁ : I₁.toModules ⊗ N₁ ⟶ N₁ := I₁.toModulesι ▷ N₁ ≫ (λ_ N₁).hom ∃ e : Γ(I.toModules ⊗ N, ⊤) ≃+ Γ(I₁.toModules ⊗ N₁, ⊤), (∀ s, μ₁.app ⊤ (e s) = res₁ (μ.app ⊤ s)) ∧ ∀ s : Γ(I₁.toModules ⊗ N₁, ⊤), (∃! t : Γ(N, ⊤), res₁ t = μ₁.app ⊤ s ∧ resZ t = 0) ∧ ∀ t : Γ(N, ⊤), res₁ t = μ₁.app ⊤ s → resZ t = 0 → nonvanishingLocus N t = i a '' nonvanishingLocus N₁ (μ₁.app ⊤ s)",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-cse1150"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-cse1150",
+  "group": "H1",
+  "result": "fix",
+  "note": "Y reduced; finite distinct reduced closed components (ι Finite, hdistinct) covering Y, first a; Z reduced on union b≠a, I=j.ker, I₁=I.comap (i a); M invertible, m:ℕ; e restriction iso on ideal products via tensorPullback unit; ∃! extension vanishing on Z; X_t = i a '' X_s via nonvanishingLocus"
+ }
 }

@@ -3773,3 +3773,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 08:10 L: merged deliver/M1/lem-sc-glue-component-reduced-cover-sections (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.GlueComponentReducedCoverSections AlgebraicGeometry.glue_component_reduced_cover_sections)
 - 08:11 L: merged deliver/E1/def-weil-pbc-derived-categories (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.DerivedCategories AlgebraicGeometry.Etale.DerivedCategory.torsionCohomology)
 - 08:11 L: merged deliver/H1/lem-sc-conductor-ideal-zero-intersection (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.ConductorIdealZeroIntersection AlgebraicGeometry.conductorIdealZeroIntersection)
+- 08:11 L: merged deliver/H1/lem-sc-conductor-sections (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.ConductorSections AlgebraicGeometry.Scheme.Modules.conductor_sections)
