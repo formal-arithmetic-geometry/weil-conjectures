@@ -11,7 +11,8 @@
   "def-pc-scheme",
   "pqf-def-cohomology",
   "def-weil-pbc-site-cech-complex",
-  "def-weil-sheaf-of-modules-category"
+  "def-weil-sheaf-of-modules-category",
+  "def-sc-module-cech-comparison"
  ],
  "proof": [
   {
@@ -173,5 +174,24 @@
   "group": "E1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-chn (reviewer sub-agent of L); spot-checked: Source: Stacks Cohomology Lemma 01EQ (lemma-cech-cohomology, cohomology.tex 1434-1480) read in full; the item is its degree-1 case for X a scheme and a cover of X, statement unchanged (only stmt_deps added: def-weil-pbc-site-cech-complex, def-weil-sheaf-of-modules-category, both split-owned and correct). Step 1 (alpha, beta into Tot of C^p(U,I^q)): resolution from lem-weil-pbc-scheme-modules-enough-injectives + def-sp-injective-resolutions, Cech complex and its functoriality from def-weil-pbc-site-cech-complex (a)-(e), Tot and sign d_I+(-1)^p d_II from def-sp-double-complex-total; checked alpha lands in column 0 (d_I of restricted global section is 0 by presheaf identities; the text says 'gluing', harmless) and beta in row 0 (H->I^0->I^1 zero). Step 2: lem-weil-pbc-module-injective-open-cover-cech-acyclic (U=X, any index set, Zariski site intersections) gives rows exact in p>0, H^0 = I^q(X) by the sheaf axiom of def-sc-zariski-site; thm-sp-double-complex-spectral-sequences (second spectral sequence ''E_1 = H_I, finite filtrations, functorial) with comparison of the column-0 complex gives H^n(alpha) iso; the comparison of finitely filtered abutments is C2-elementary. Step 3: pqf-def-cohomology (H^1 = R^1 Gamma on O_X-modules) and lem-weil-pbc-derived-functor-map-via-lift (iota_P) define c_H; independence of resolution follows from step 4 with phi=id. Step 4: lem-weil-pbc-injective-resolution-lift-exists (phi~^0 s_H = s_H' phi) and derived-functor-map-via-lift; checked c_H' Cech(phi) = alpha'^-1 beta' Cech(phi) = alpha'^-1 T(phi~) beta = Gamma(phi~) alpha^-1 beta, identified with H^1(X,phi). Small cases: zero module, one-open cover (Cech H^1 = 0), consistent. Tool uses accepted as generic black boxes (C8): all five declared (enough injectives, injective Cech acyclicity, double-complex spectral sequences, resolution lift, derived functor map via lift); none replaces a step of the curve-estimate route. No new nodes, no leaves; no slopmaster2 attachment plausible (B10). Report: names the source and cited statements; it mentions a citations.json not in the commit (cosmetic). Start Sat Oct 10 04:12:58 PM UTC 2026, end Sat Oct 10 04:13:35 PM UTC 2026."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CechH1MapNatural",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.cechH1Map_natural",
+  "file": "lean/Sheaf/AlgebraicGeometry/CechH1MapNatural.lean",
+  "statement": "theorem cechH1Map_natural (X : Scheme.{u}) {ι : Type u} (U : ι → X.Opens) (hcover : iSup U = ⊤) : ∃ c : ∀ F : X.Modules, ((CategoryTheory.cechComplexFunctor U).obj F.presheafModuleCat).homology 1 ⟶ (RingedSpace.moduleCohomology X.toRingedSpace 1).obj F, (∀ F : X.Modules, IsModuleCechComparison U F 1 (c F)) ∧ ∀ (F F' : X.Modules) (φ : F ⟶ F'), HomologicalComplex.homologyMap ((CategoryTheory.cechComplexFunctor U).map ((PresheafOfModules.forgetToPresheafModuleCat (op ⊤) isTerminalTop.op).map φ.val)) 1 ≫ c F' = c F ≫ (RingedSpace.moduleCohomology X.toRingedSpace 1).map φ",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": false,
+  "note": "Uses the already-landed IsModuleCechComparison characterization for every injective resolution, which pins down the canonical map, rather than an arbitrary natural family. The source comparison is module-linear. Added its landed definition node to stmt_deps under brief-stage2 §5 (STMT_DEPS MAY GAIN LANDED NODES)."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-hed388",
+  "group": "E1",
+  "result": "pass",
+  "note": "headless review: scheme X : Scheme.{u}; open covering U : ι → X.Opens with iSup U = ⊤ (no added finiteness/affineness); every O_X-module H as ∀ F : X.Modules in c's type; source Čech H^1 = (cechComplexFunctor U).obj F.presheafModuleCat).homology 1; target H^1(X,H) = RingedSpace.moduleCohomology X.toRingedSpace 1; canonical c_H pinned by landed IsModuleCechComparison U F 1 (c F) (equation for every injective resolution, H^1(α) invertible); induced Čech map of φ = homologyMap of cechComplexFunctor.map (forgetToPresheafModuleCat … φ.val) at 1; naturality Ȟ^1(φ) ≫ c F' = c F ≫ H^1(X,φ), same order as the node; compile clean"
  }
 }

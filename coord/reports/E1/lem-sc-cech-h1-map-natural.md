@@ -1,30 +1,134 @@
-# lem-sc-cech-h1-map-natural
+## Worker report
 
-## Files written
+The module `Sheaf.AlgebraicGeometry.CechH1MapNatural` states
+`AlgebraicGeometry.Scheme.Modules.cechH1Map_natural`, with one `sorry` proof and no
+new definition. It asserts existence of the canonical first Čech comparison for
+all coefficient modules, together with naturality. The statement of the node is
+unchanged. Its `stmt_deps` gains the already-landed
+`def-sc-module-cech-comparison`, permitted by coord/brief-stage2.md §5,
+STMT_DEPS MAY GAIN LANDED NODES. No new node or dependency module is needed.
 
-- `dag/nodes/sec-curve-estimates/lem-sc-cech-h1-map-natural.json`: split statement, 4 proof steps; no new nodes and no Mathlib leaves.
-- `citations.json`: verbatim statement excerpts for every proof citation.
+Hypothesis and clause correspondence:
 
-## Attachments
+- X is a scheme: `(X : Scheme.{u})`, the recorded Mathlib scheme structure.
+- An open covering: `(U : ι → X.Opens)` and `(hcover : iSup U = ⊤)`.
+  Opens are not assumed affine, distinct, nonempty, or finitely many.
+- Every O_X-module H: `∀ F : X.Modules` in the type of the existential family `c`.
+  `X.Modules` is the recorded `SheafOfModules.{u} X.ringCatSheaf` category.
+  It agrees definitionally with the moduleRings carrier used by module cohomology.
+- The source is first Čech cohomology:
+  `((cechComplexFunctor U).obj F.presheafModuleCat).homology 1`.
+  `presheafModuleCat` has the original section groups and restriction maps;
+  restriction of scalars gives each group its Γ(X,O_X)-module structure.
+  Mathlib's complex uses all ordered pairs, including repeats, and the alternating
+  restriction differential. This is the open-site specialization of
+  def-weil-pbc-site-cech-complex; no separate Čech definition is introduced.
+- The target is H^1(X,H):
+  `(RingedSpace.moduleCohomology X.toRingedSpace 1).obj F`, as pqf-def-cohomology
+  specifies. It is module cohomology, not abelian-sheaf Ext cohomology.
+- There is a canonical homomorphism: `∃ c`, with
+  `∀ F, IsModuleCechComparison U F 1 (c F)`. This predicate requires the comparison
+  equation with alpha, beta and the resolution identification for EVERY injective
+  resolution. Thus the existential is constrained to the canonical comparison,
+  not just an arbitrary natural family such as zero. Morphisms in ModuleCat are
+  homomorphisms of the underlying additive groups and have precisely the scalar
+  linearity of the source's comparison (01EQ is valued in D^+(O_X(X))).
+- Every coefficient morphism: `∀ (F F' : X.Modules) (φ : F ⟶ F')`.
+- The induced cochain map applies φ to each section: the map of
+  `PresheafOfModules.forgetToPresheafModuleCat (op ⊤) isTerminalTop.op` on `φ.val`,
+  followed by `cechComplexFunctor U`. Its degree components apply the module
+  morphism to each product factor. `HomologicalComplex.homologyMap ... 1`
+  takes the resulting map on first cohomology.
+- The induced map followed by c_H' equals c_H followed by H^1(X,φ): exactly
+  `HomologicalComplex.homologyMap ... 1 ≫ c F' =
+   c F ≫ (RingedSpace.moduleCohomology X.toRingedSpace 1).map φ`.
 
-None. The slopmaster2 audit says `none`; searches for the blueprint tag, Cech/H1 naturality, and nearby comparison declarations found no sorry-free declaration stating this item. `TopCat.Sheaf.nonempty_cechCohomologyFunctor_iso_functorH` concerns acyclic sheaves and is not a natural map for every module.
+Declarations read and used:
 
-## Wanted
+- Mathlib.AlgebraicGeometry.Scheme: `AlgebraicGeometry.Scheme`.
+- Mathlib.AlgebraicGeometry.Modules.Sheaf: `Scheme.Modules` and its category.
+- WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf:
+  `Scheme.Modules.presheafModuleCat` (the sectionwise scalar restriction).
+- Mathlib.Algebra.Category.ModuleCat.Presheaf:
+  `PresheafOfModules.forgetToPresheafModuleCat` (including its map definition).
+- Mathlib.CategoryTheory.Sites.SheafCohomology.Cech:
+  `CategoryTheory.cechComplexFunctor`, the existing specialized Čech complex.
+- Sheaf.Paper.PQFCohomology: the recorded
+  `AlgebraicGeometry.sheafCohomologyAndHigherDirectImages` identifies its degree
+  functors as `RingedSpace.moduleCohomology`. Its full signature/docstring read.
+- Sheaf.Topology.RingedSpaceModuleCohomology:
+  `RingedSpace.moduleCohomology`, right-derived module-valued global sections.
+- Sheaf.CategoryTheory.SiteCechComplex: `SiteCechComplex`, `complexFunctor`,
+  `cochainsMap` and `cohomologyFunctor` read; these record the general-site notion.
+  The landed canonical-comparison module uses Mathlib's open-site specialization
+  with module coefficients, so the generic choice binder is unnecessary here.
+- Sheaf.AlgebraicGeometry.ModuleCechComparison:
+  `Scheme.Modules.IsModuleCechComparison`; its full defining equation and the
+  definitions of `moduleCechDouble`, `moduleCechAlpha`, `moduleCechBeta` were read.
+  The only import is this module, which supplies every identifier required.
 
-None. The checkout omits `literature/stacks-project/`, but the Stacks source was read from the machine's read-only copy at `/home/ubuntu/c1-stacks-review/cohomology.tex`, lines 1408-1480. The cited source path is the project's canonical literature path.
+Edge cases checked: zero module; an empty scheme and empty index type (the cover
+condition is then allowed); a one-open cover; repeated or empty opens; infinite
+covers. No Nonempty or finiteness binder is imposed. The common universe u is the
+ambient universe containing both the scheme and its set of cover indices, as in
+its landed canonical-comparison definition. All universes and variables are
+explicit; auto-bound implicits are not used. No characteristic assumptions occur.
 
-## Corrections and unfinished work
+Source read: https://stacks.math.columbia.edu/tag/01EQ, including the full proof.
+Local literature sources are absent on this clone. The source constructs the
+comparison as beta followed by inverse alpha, naturally in O_X-modules; the
+landed characterization is precisely this equation for every resolution.
+The docstring expands all four proof steps of the item's node with their DAG
+references; this stage leaves the proof as `sorry`.
 
-The imported item had no proof or Cech/module statement dependencies. I added the missing dependencies and expanded Stacks 01EQ's omitted functoriality check. The source's comparison is for a ringed space and an open subset; the item specializes to a scheme and the cover of the whole space. Nothing remains unfinished at this split level.
+Searches:
 
-## Review by E1
+- msearch.py leanfinder: "The canonical map from Cech cohomology of an open cover
+  to sheaf cohomology is natural in the sheaf of modules": eight global-section
+  naturality hits, none the comparison statement.
+- msearch.py loogle: "cechComplexFunctor, homologyFunctor": zero hits, service
+  reports unknown identifier cechComplexFunctor.
+- msearch.py grep: "cech.*(cohom|natural)|cohom.*cech": LocalCohomology and
+  Sites/SheafCohomology/Cech, neither supplies the canonical comparison map.
+- rg of WeilConjectures for Cech/cohomology/naturality: existing complexes and
+  comparison isomorphisms for acyclic classes, not this theorem for all modules.
+- rg of lean/Sheaf for canonical comparisons found the landed
+  ModuleCechComparison definition and AffineModuleCechComparisonNatural theorem.
+  The latter requires quasi-coherence and affine intersections and does not state
+  this item. The general comparison-map-naturality DAG node has no Lean record.
+- rg of WeilConjectures for the item's exact id: no hit. Search of
+  dag/lean_names_upstream.json for IsModuleCechComparison/moduleCechComparison:
+  no upstream declaration with these names.
 
-I read Cohomology Lemma 01EQ (`lemma-cech-cohomology`) in `cohomology.tex`, including the complete displayed construction of alpha and beta, plus its cited injective Cech vanishing Lemma 01EP. The item's arbitrary sheaf of O_X-modules and arbitrary open cover match 01EQ; no affine or quasi-coherent hypothesis was inserted. The statement is degree one of the source's natural maps. No new nodes were created, so B1-B8 and small-case testing of new statements are vacuous. I searched the full DAG and blueprint for 01EQ, Cech comparison, injective Cech acyclicity and double-complex totalization; `lem-sc-cech-comparison-natural` is narrower (affine cover, quasi-coherent coefficients) and cannot replace this item. The adjacent Lean source has a Cech/sheaf comparison on acyclic classes, not the arbitrary-module map. The four-step proof tests correctly for the zero module (both maps zero) and a one-open cover (Cech H1 is zero); neither requires extra hypotheses.
+Validation: lcompile.py compiled the final module cleanly (2.2 seconds).
+No STATEMENT-DISPUTED flag and no mathematical correction is necessary.
 
-Step 1 uses `lem-weil-pbc-scheme-modules-enough-injectives` to choose the resolution, `def-sp-injective-resolutions` for its shape, `def-weil-pbc-site-cech-complex` for termwise Cech maps, `def-sp-double-complex-total` for totalization, and `def-sc-zariski-site` for the open-cover sheaf condition. I checked each cited statement itself. The differentials kill the alpha and beta images by the sheaf and resolution axioms, an elementary check of the two square-zero identities. The source is 01EQ's first proof paragraph.
+## Second reading by E1
 
-Step 2 uses the exact statement of `lem-weil-pbc-module-injective-open-cover-cech-acyclic`: higher Cech cohomology vanishes for an injective O_X-module and **any** Zariski open cover. `def-sc-zariski-site` gives gluing and uniqueness in degree zero. `thm-sp-double-complex-spectral-sequences` states convergence and functoriality for a first-quadrant double complex, and `def-sp-double-complex-total` defines its finite totalization. Each row is Cech of an injective term, so the row-first spectral sequence has only the zero column. Its edge map is alpha, making alpha a quasi-isomorphism. The hypotheses hold because the resolution is nonnegative and each term injective; no finite-cover condition is used.
+I reread the node, its Stacks source (Cohomology, Lemma 01EQ), and
+`Sheaf.AlgebraicGeometry.CechH1MapNatural`. The correspondence is exact:
 
-Step 3 applies `pqf-def-cohomology`, whose statement defines H1 as derived global sections, and `lem-weil-pbc-derived-functor-map-via-lift`, whose statement identifies those groups and maps on a chosen injective resolution. `lem-weil-pbc-injective-resolution-lift-exists` supplies comparison maps for changes of resolution. Thus the inverse of alpha after beta yields the source's canonical comparison. These citations give the facts used; inversion of an isomorphism is elementary. I checked 01EQ's final paragraph where the same composite is specified.
+- The scheme is `(X : Scheme.{u})`; the common universe and explicit `ι : Type u`
+  cover the node's scheme and index family.
+- The open covering is `(U : ι → X.Opens)` with `hcover : iSup U = ⊤`.
+  No finiteness, nonemptiness, affine, or separation assumption is added.
+- An arbitrary `O_X`-module is `F : X.Modules` under the existential family
+  `c : ∀ F, ...`; its source is `(cechComplexFunctor U).obj F.presheafModuleCat`
+  and its target is `(RingedSpace.moduleCohomology X.toRingedSpace 1).obj F`.
+- Canonicality is rendered by `IsModuleCechComparison U F 1 (c F)`, which
+  quantifies over every injective resolution, using the landed dependency
+  `def-sc-module-cech-comparison`.
+- For every `F F'` and `φ : F ⟶ F'`, the displayed equation uses the Cech map
+  induced by `φ.val` and `HomologicalComplex.homologyMap ... 1`, followed by
+  `c F'`, and equals `c F` followed by the module-cohomology map. Composition
+  order and quantifiers agree with the node.
 
-Step 4 applies the **stated** lift theorem to an arbitrary module morphism, the **stated** Cech functoriality to get the horizontal cochain map, and the **stated** derived-functor map formula to identify the right side with H1(phi). The alpha square commutes by restriction; the beta square commutes by the lifting equation. Passing the two squares to cohomology gives the equation in the item. This writes out the functoriality that 01EQ explicitly omits. I found no hidden use of affine intersections, finite covers, or injectivity of the underlying abelian sheaf. The generic nodes filed in other units are declared as tool uses in `split_report`, because they provide homological machinery rather than a replacement route for the curve-estimate unit.
+Edge cases checked are zero modules, one-open covers, repeated or empty opens,
+empty index types (when the cover equation permits them), infinite covers, and
+the empty scheme. No characteristic or `n = 0` hypothesis is present; this is
+the fixed degree-one case. The module compiled with `lcompile.py` without
+errors or warnings. Searches of Mathlib, the upstream source, and `lean/Sheaf`
+found no existing theorem with this statement; the affine/quasi-coherent
+comparison theorem is a different result. The only change recorded by this
+second reading is the explicit dependency on the landed canonicality predicate;
+the Lean statement itself required no repair.
