@@ -17,7 +17,8 @@
   "place": "Tag 0A2H, label section-group-cohomology: the continuity/open-stabilizer paragraph and the R-G-module discussion following Definition 04JP"
  },
  "stmt_deps": [
-  "def-sp-abelian"
+  "def-sp-abelian",
+  "def-exc-discrete-modules-category"
  ],
  "proof": [
   {
@@ -113,5 +114,23 @@
   "group": "C1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-dma (reviewer sub-agent of L); spot-checked: Source: Stacks etale-cohomology.tex Tag 04JP (label definition-G-module-continuous, line 8786) and the following paragraph (continuity iff open stabilizers) in section Tag 0A2H; the item is the specialization R=A finite, G profinite, action by A-linear maps (automorphisms since it is a group action), morphisms equivariant A-linear, agreeing hypothesis by hypothesis. Steps 1-3 are elementary and checked line by line: zero object with unique action; M+N with componentwise action, stabilizer of (m,n) the intersection of two open subgroups, injections/projections equivariant, universal properties componentwise; kernel G-stable via f(gm)=gf(m), stabilizers unchanged, factorization equivariant since inclusion injective; cokernel N/f(M) with induced action, stabilizer of [n] contains the open stabilizer of n hence open, factor equivariant by surjectivity. Step 4 cites def-sp-abelian whose statement is exactly the preadditive/zero/biproduct/kernel/cokernel/normal mono/normal epi criterion; mono iff injective (kernel inclusion i satisfies fi=0=f0), epi iff surjective (cokernel quotient), normality via N->N/f(M) and ker f->M, image = ker(coker) = f(M), so exactness is underlying exactness. No new nodes, no Mathlib leaf, no tool_uses; proof_deps = union of step uses; no other field changed. Small cases: trivial G (ordinary modules), zero module, quotient by a stable submodule. Note: the report claims the TeX escaping and source place were corrected, but the delivered diff leaves statement and source unchanged; the committed ones were already correct (single backslashes after decoding, 0A2H/04JP place), so nothing is lost. B10 grep of WeilConjectures for discrete/open-stabilizer module categories found nothing. 14:47-14:52 UTC 2026-10-10."
+ },
+ "lean": {
+  "module": "Sheaf.RepresentationTheory.DiscreteRep",
+  "declaration": "Rep.discreteRep_abelian_structure",
+  "file": "lean/Sheaf/RepresentationTheory/DiscreteRep.lean",
+  "statement": "theorem discreteRep_abelian_structure (A : Type u) [Ring A] [Finite A] (G : Type v) [Group G] [TopologicalSpace G] [IsTopologicalGroup G] [CompactSpace G] [T2Space G] [TotallyDisconnectedSpace G] : ∃ h : CategoryTheory.Abelian (DiscreteContinuousRep.{u, v, w} A G), (letI : CategoryTheory.Abelian (DiscreteContinuousRep.{u, v, w} A G) := h let forgetDiscrete : DiscreteContinuousRep.{u, v, w} A G ⥤ ModuleCat.{w} A := (ObjectProperty.ι (fun X : Rep.{w} A G => ∀ x : X.V, IsOpen {g : G | X.ρ g x = x})) ⋙ forget₂ (Rep.{w} A G) (ModuleCat.{w} A) forgetDiscrete.Additive ∧ PreservesFiniteLimits forgetDiscrete ∧ PreservesFiniteColimits forgetDiscrete ∧ ∀ S : ShortComplex (DiscreteContinuousRep.{u, v, w} A G), S.Exact ↔ (S.map forgetDiscrete).Exact)",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-das0928",
+  "group": "M1",
+  "result": "pass",
+  "note": "Return R-das0756 addressed (private IsDiscrete/DiscreteRep gone, landed Rep.DiscreteContinuousRep imported, stmt_deps gained def-exc-discrete-modules-category); A finite ring = [Ring A] [Finite A]; G profinite = IsTopologicalGroup+CompactSpace+T2Space+TotallyDisconnectedSpace; exists Abelian h with forget (ι ⋙ forget₂ Rep ModuleCat, same open-stabilizer predicate) Additive, preserving finite limits/colimits (zero, biproducts, kernels, cokernels underlying), ShortComplex exact iff underlying exact; universes u (ring) v (group) w (modules) independent, checked with pp.universes; reviewer recompile clean; differs from sibling lem-exc-discrete-modules-abelian (adds enough injectives)"
  }
 }
