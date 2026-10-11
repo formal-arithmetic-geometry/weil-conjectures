@@ -378,10 +378,12 @@ lemma card_cokernel_lt [Finite (N.obj.obj (op (etaleSpec F L)))] (hN : IsSplitBy
 
 end Cokernel
 
-/-- A sheaf split by `L` with no sections over `Spec L` vanishes. -/
-lemma isZero_of_isSplitBy (hN : IsSplitBy N L) (h : ∀ x : N.obj.obj (op (etaleSpec F L)), x = 0) :
-    IsZero N := by
-  have hs (V : (Spec (.of F)).Etale) (s : N.obj.obj (op V)) : s = 0 := by
+variable (L) in
+/-- A section vanishes if it vanishes on every one-point étale scheme admitting a morphism to
+`Spec L`. -/
+lemma eq_zero_of_forall_map_eq_zero {V : (Spec (.of F)).Etale} (s : N.obj.obj (op V))
+    (h : ∀ (Z : (Spec (.of F)).Etale) [Subsingleton Z.left] [Nonempty Z.left] (g : Z ⟶ V),
+      (Z ⟶ etaleSpec F L) → N.obj.map g.op s = 0) : s = 0 := by
     let c := FieldTrace.counitMor F L V
     let τ : (MorphismProperty.Over.map ⊤ (inferInstance : AlgebraicGeometry.Etale
         (FieldTrace.f F L))).obj ((FieldTrace.f F L).Etale.obj V) ⟶ etaleSpec F L :=
@@ -396,12 +398,28 @@ lemma isZero_of_isSplitBy (hN : IsSplitBy N L) (h : ∀ x : N.obj.obj (op (etale
       fun _ _ ⟨_⟩ ↦ show N.obj.map c.op s = N.obj.map c.op 0 from ?_
     rw [map_zero]
     refine ext_of_pointι N fun z ↦ ?_
-    obtain ⟨m, hm⟩ := (hN _ (pointι _ z ≫ τ)).2 (N.obj.map (pointι _ z).op (N.obj.map c.op s))
-    rw [← hm, h m, map_zero, map_zero]
+    rw [map_zero, FieldTrace.map_map_apply]
+    exact h _ _ (pointι _ z ≫ τ)
+
+/-- A sheaf split by `L` with no sections over `Spec L` vanishes. -/
+lemma isZero_of_isSplitBy (hN : IsSplitBy N L) (h : ∀ x : N.obj.obj (op (etaleSpec F L)), x = 0) :
+    IsZero N := by
   rw [IsZero.iff_id_eq_zero]
   apply Sheaf.hom_ext
   ext V s
-  exact hs V.unop s
+  refine eq_zero_of_forall_map_eq_zero L s fun Z _ _ g t ↦ ?_
+  obtain ⟨m, hm⟩ := (hN _ t).2 (N.obj.map g.op s)
+  rw [← hm, h m, map_zero]
+
+/-- A sheaf split by `L` whose sections over `Spec L` are killed by `n` is killed by `n`. -/
+lemma nsmul_id_eq_zero_of_isSplitBy (hN : IsSplitBy N L) (n : ℕ)
+    (h : ∀ x : N.obj.obj (op (etaleSpec F L)), n • x = 0) : n • 𝟙 N = 0 := by
+  apply Sheaf.hom_ext
+  ext V s
+  change n • s = 0
+  refine eq_zero_of_forall_map_eq_zero L _ fun Z _ _ g t ↦ ?_
+  obtain ⟨m, hm⟩ := (hN _ t).2 (N.obj.map g.op s)
+  rw [map_nsmul, ← hm, ← map_nsmul, h m, map_zero]
 
 section FixedPoints
 
@@ -511,6 +529,44 @@ theorem IsSplitBy.induction (hP : IsPGroup ℓ (L ≃ₐ[F] L))
     exact ⟨k, by rw [← map_nsmul, hk, map_zero]⟩
 
 end FixedPoints
+
+section Restriction
+
+variable {F' : Type u} [Field F'] [Algebra F F'] [Algebra.Etale F F'] [Algebra F' L]
+  [IsScalarTower F F' L] [Algebra.Etale F' L]
+
+variable (F' L) in
+/-- `Spec L` over `Spec F'`, viewed over `Spec F`, is `Spec L` over `Spec F`. -/
+noncomputable def overMapEtaleSpecIso :
+    (MorphismProperty.Over.map ⊤ (inferInstance : AlgebraicGeometry.Etale (FieldTrace.f F F'))).obj
+      (etaleSpec F' L) ≅ etaleSpec F L :=
+  MorphismProperty.Over.isoMk (Iso.refl _) (by
+    change 𝟙 _ ≫ Spec.map _ = Spec.map _ ≫ Spec.map _
+    rw [Category.id_comp, ← Spec.map_comp, ← CommRingCat.ofHom_comp, ← IsScalarTower.algebraMap_eq])
+
+lemma bijective_map_overMapEtaleSpecIso_inv :
+    Function.Bijective (N.obj.map (overMapEtaleSpecIso L F').inv.op) :=
+  ConcreteCategory.bijective_of_isIso _
+
+/-- **Restriction of a split sheaf.** If `N` is split by `L`, so is its restriction to an
+intermediate field `F'`. -/
+lemma IsSplitBy.res (hN : IsSplitBy N L) : IsSplitBy (FieldTrace.res F F' N) L := by
+  intro Z _ _ t
+  have : Subsingleton ((MorphismProperty.Over.map ⊤ (inferInstance : AlgebraicGeometry.Etale
+      (FieldTrace.f F F'))).obj Z).left := ‹Subsingleton Z.left›
+  have : Nonempty ((MorphismProperty.Over.map ⊤ (inferInstance : AlgebraicGeometry.Etale
+      (FieldTrace.f F F'))).obj Z).left := ‹Nonempty Z.left›
+  let t' := (MorphismProperty.Over.map ⊤ (inferInstance : AlgebraicGeometry.Etale
+    (FieldTrace.f F F'))).map t ≫ (overMapEtaleSpecIso L F').hom
+  have h : ⇑((FieldTrace.res F F' N).obj.map t.op) =
+      ⇑(N.obj.map t'.op) ∘ ⇑(N.obj.map (overMapEtaleSpecIso L F').inv.op) := by
+    funext x
+    refine Eq.trans ?_ (FieldTrace.map_map_apply N.obj _ _ x).symm
+    simp [t']
+    rfl
+  exact h ▸ (hN _ t').comp bijective_map_overMapEtaleSpecIso_inv
+
+end Restriction
 
 end Split
 
