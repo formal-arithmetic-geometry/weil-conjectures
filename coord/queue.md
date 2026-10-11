@@ -22,7 +22,6 @@
 | `lem-exc-cochains-derived-invariants` | 1 | state |
 | `lem-exc-continuous-cochains-short-exact` | 1 | state |
 | `lem-exc-etale-sheaves-gsets-point` | 1 | state |
-| `lem-fin-normal-generic-constant` | 1 | state |
 | `lem-galois-fpqc-pullback-canonical-iso` | 1 | state |
 | `lem-pc-balanced-derived-tensor-model` | 1 | state |
 | `lem-pc-derived-adjoint-functors` | 1 | state |
@@ -34,10 +33,10 @@
 | `lem-pc-kflat-tensor-quasi-iso` | 1 | state |
 | `lem-pc-module-change-of-rings-adjunction` | 1 | state |
 | `lem-pc-module-filtered-colimits-tensor` | 1 | state |
+| `lem-pc-module-inverse-image-adjunction` | 1 | state |
 | `lem-pc-module-pullback-adjunction` | 1 | state |
 | `lem-pc-module-pullback-identity-composition` | 1 | state |
 | `lem-pc-pre-derived-adjoint-functors-general` | 1 | state |
-| `lem-pc-presheaf-module-inverse-image-adjunction` | 1 | state |
 | `lem-pc-right-localization-hom-colimit` | 1 | state |
 | `lem-pc-ring-pseudo-coherent-iff-all-m` | 1 | state |
 | `lem-pc-ringed-space-module-stalk-tensor` | 1 | state |
@@ -49,9 +48,10 @@
 | `lem-pod-etale-stalk-tensor-scalar` | 1 | state |
 | `lem-pod-lisse-module-sheaves-as-module-objects` | 1 | state |
 | `lem-pod-lisse-tensor-and-scalar-extension` | 1 | state |
+| `lem-pur-kinjective-acyclic-quotient-complexes-bounded-size` | 1 | state |
 | `lem-pur-kinjective-degreewise-existence` | 1 | state |
 | `lem-pur-kinjective-homotopy-limit-vanishing` | 1 | state |
-| `lem-pur-kinjective-set-iso-classes-bounded-size` | 1 | state |
+| `lem-pur-kinjective-surjection-bounded-size` | 1 | state |
 | `lem-pur-left-derived-from-kflat-class` | 1 | state |
 | `lem-pur-quasi-isos-saturated-triangulated` | 1 | state |
 | `lem-pur-ringed-site-grothendieck-abelian` | 1 | state |
@@ -1000,7 +1000,7 @@
 | `lem-sc-normalization-properties` | 3 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 1045 nodes that wait for a statement dependency, 40 nodes that wait for stage 1.
+Not open yet: 1042 nodes that wait for a statement dependency, 40 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
