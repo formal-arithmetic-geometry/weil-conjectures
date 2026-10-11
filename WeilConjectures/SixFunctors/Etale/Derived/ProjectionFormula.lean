@@ -39,8 +39,6 @@ of `AlgebraicGeometry.Etale.projectionMapOfCompactification` is an isomorphism, 
 
 ## Main statements
 
-- `AlgebraicGeometry.Etale.hasProjectionFormula_field` (`sk-thm-sf-pf-field`) : the
-  projection formula over a field of coefficients, at a dualizable object.
 - `AlgebraicGeometry.Etale.hasProjectionFormula_of_isDualizable`,
   `AlgebraicGeometry.Etale.isIso_rightDerivedLowerStarProjectionMap_app_app_of_isDualizable` :
   the projection formula holds, for any coefficients, at every `K` and every dualizable `L`.
@@ -78,18 +76,16 @@ compactification) that are not constructed yet, and are not stated.
 
 The projection formula at the integral stage `𝒪_E` (`sk-thm-sf-pf-adic`) is in
 `WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula.Integral`.
-The projection formula at the rational stage `E`, for rationalizations of integral objects
-(`thm-sf-pf-field`), is in `WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula.Rational`.
-
-`AlgebraicGeometry.Etale.hasProjectionFormula_field` is stated for an arbitrary field of
-coefficients and a dualizable second argument. The blueprint proves the two instances it needs,
-`F = E` and `F = ℚ̄_ℓ`, for constructible objects, by rationalizing the integral statement and
-passing to the `2`-colimit over the finite stages; on the étale site with discrete coefficients
-the projection formula fails for constructible objects over a field of characteristic zero, the
-skyscraper sheaves reducing it to proper base change (see the docstring of
-`AlgebraicGeometry.Etale.hasProjectionFormula_field`). For a dualizable `L` the projection
-formula is formal and holds for any coefficients
-(`AlgebraicGeometry.Etale.hasProjectionFormula_of_isDualizable`).
+The projection formula at the rational stage `E` and at the finite stages `E'` of `ℚ̄_ℓ`, for
+rationalizations of integral objects (`AlgebraicGeometry.Etale.hasProjectionFormula_field`,
+`sk-thm-sf-pf-field`), is in `WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula.Rational`.
+On the étale site with the discrete field `F` as coefficients the projection formula does not
+hold for every bounded constructible `L`: for `L = y_* F` the skyscraper at the closed point `y`
+of the spectrum `Y` of a strictly henselian discrete valuation ring, `f : X ⟶ Y` a regular proper
+curve with nodal special fibre `X_y` and `K = F_X`, the projection map is the restriction
+`RΓ(X, F) ⟶ RΓ(X_y, F)`; for `F` of characteristic zero, `H¹(X, F) = 0` since `X` is normal, while
+`H¹(X_y, F) = F`. For a dualizable `L`, however, the projection formula is formal and holds for
+any coefficients (`AlgebraicGeometry.Etale.hasProjectionFormula_of_isDualizable`).
 
 -/
 
@@ -236,41 +232,6 @@ theorem hasProjectionFormula_of_isDualizable (f : X ⟶ Y) [HasCompactification 
   hasProjectionFormulaOfCompactification_of_isDualizable A _ K hL
 
 end Dualizable
-
-section Field
-
-variable (F : Type (u + 1)) [Field F]
-
-variable {X Y : Scheme.{u}}
-
-/-- Blueprint `sk-thm-sf-pf-field`: Projection formula: rational and algebraically closed
-stages.
-
-Over a field `F` of coefficients — the blueprint names the two instances `F = E`, the
-rational stage, and `F = ℚ̄_ℓ`, the algebraically closed stage — the projection formula
-holds for `f` at any `K` and any dualizable `L`, that is, a lisse `L` (for instance a
-bounded complex with locally constant cohomology sheaves of finite rank).
-
-On the étale site with the discrete field `F` as coefficients, the projection formula does not
-hold for every bounded constructible `L`. For `L = y_* F` the skyscraper at the closed point
-`y` of the spectrum `Y` of a strictly henselian discrete valuation ring, `f : X ⟶ Y` a regular
-proper curve with nodal special fibre `X_y` and `K = F_X`, the projection map is the restriction
-`RΓ(X, F) ⟶ RΓ(X_y, F)`; for `F` of characteristic zero, `H¹(X, F) = 0` since `X` is normal,
-while `H¹(X_y, F) = F`. The blueprint reaches the constructible objects at the stages `E` and
-`ℚ̄_ℓ` through the `ℓ`-adic formalism instead: the rational stage, for rationalizations of
-integral objects, is `AlgebraicGeometry.Etale.isIso_fromIntegral_map_projectionMap`. For
-dualizable `L` the projection formula is formal and holds for any coefficients
-(`AlgebraicGeometry.Etale.hasProjectionFormula_of_isDualizable`): it holds for the open
-immersion of a compactification, and for its proper part `g` the projection map of `Rg_*` is
-the conjugate of the monoidal structure of `Lg^*`, invertible at a dualizable object. -/
-theorem hasProjectionFormula_field (f : X ⟶ Y) [HasCompactification f]
-    (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} F)))
-    (L : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} F)))
-    (hL : IsDualizable L) :
-    HasProjectionFormula (ModuleCat.{u + 1} F) f K L :=
-  hasProjectionFormula_of_isDualizable _ f K hL
-
-end Field
 
 section Finite
 
