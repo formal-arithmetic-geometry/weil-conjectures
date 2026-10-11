@@ -1,11 +1,11 @@
 # Work queue
 
-154 items; claim with `tools/claim.py next <group> [--stage N]`.
+151 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (154)
+## Stage 2: nodes to state (151)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
@@ -49,7 +49,6 @@
 | `lem-pc-derived-direct-image-direct-sums` | 1 | state | 0 |
 | `lem-pc-derived-direct-image-preserves-direct-sums` | 1 | state | 0 |
 | `lem-pc-derived-direct-image-uniform-truncation-bound` | 1 | state | 0 |
-| `lem-pc-derived-functor-termwise-split-ses-triangle` | 1 | state | 0 |
 | `lem-pc-direct-image-bounded-coherent` | 1 | state | 0 |
 | `lem-pc-direct-image-qc-support-reduction` | 1 | state | 0 |
 | `lem-pc-flat-filtered-complex-comparison` | 1 | state | 0 |
@@ -65,7 +64,6 @@
 | `lem-pc-rf-single-complex-relative-mayer-vietoris` | 1 | state | 0 |
 | `lem-pc-rhom-strict-perfect-hom` | 1 | state | 0 |
 | `lem-pc-ringed-space-sheafification-cohomology` | 1 | state | 0 |
-| `lem-pc-ringed-spaces-derived-direct-image-composition` | 1 | state | 0 |
 | `lem-pc-tor-independent-perfect-tensor-base-change` | 1 | state | 0 |
 | `lem-sc-affine-derived-cohomology` | 1 | state | 0 |
 | `lem-sc-affine-derived-concentration` | 1 | state | 0 |
@@ -160,7 +158,6 @@
 | `lem-sc-very-ample-separation-criterion` | 2 | state | 0 |
 | `lem-sp-derived-couple-functoriality` | 2 | state | 0 |
 | `lem-weil-pbc-etale-cohomology-limit-complex-systems` | 2 | state | 0 |
-| `lem-weil-pbc-henselian-finite-type-product-decomposition` | 2 | state | 0 |
 | `lem-weil-pbc-integral-closure-finite-fibre-part-localization` | 2 | state | 0 |
 | `lemma-weil-pbc-etale-cohomology-continuity` | 2 | state | 0 |
 
