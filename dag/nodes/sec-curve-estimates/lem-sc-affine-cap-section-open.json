@@ -119,5 +119,23 @@
   "group": "G1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ac2 (reviewer sub-agent of L); spot-checked: Repaired re-push after the 15:19 return: all four points repaired (1 D1/C3: steps 2-5 replaced by one black-box step citing lem-sc-affine-cap-section-open-algebra, pbc symmetric-algebra-base-change and nonvanishing-section-trivializes removed from proof_deps and tool_uses; 2 C4/C1: new unsplit node lem-sc-affine-cap-section-open-dictionary (invertible M on Spec R is tilde(N), N finite projective rank 1, s_p in pN_p iff s in pN, true since pN = N cap pF for N a summand of free F) cited in step 1 with lem-weil-pbc-affine-tilde-gamma-adjunction clause (3); 3 B3: invertible R-module defined inline, base-change dep dropped, created.by/date are filled by the merge; 4 E3: step 3 applies the first clause to M^{tensor n}, whose invertibility def-weil-pbc-ample-invertible-module states). Source Stacks Properties 01PV (properties-lemma-affine-cap-s-open, properties.tex 4288-4318) read: item statement and algebra node agree hypothesis by hypothesis (algebra node: Spec(A/(s-1)A) -> Spec R open immersion onto V). Cited statements read: def-weil-pbc-ample-invertible-module, def-sc-invertible-module, lem-weil-pbc-affine-tilde-gamma-adjunction, lem-weil-pbc-symmetric-algebra-universal-property, lem-weil-pbc-finite-projective-rank-locally-constant, pqf-def-coherent, def-weil-affine-spectrum; tags 01IA/01IB/01CY exist. Small cases: N=R, s=f gives B=R_f, V=D(f); s=0 gives B=0, V empty. No Mathlib leaf. FIXES: dag/nodes/sec-curve-estimates/lem-sc-affine-cap-section-open-algebra.json: stmt_deps: added def-weil-affine-spectrum (cited in the statement text); dag/nodes/sec-curve-estimates/lem-sc-affine-cap-section-open.json: proof[2].text: introduced n>=1 and t before use. Start Sat Oct 10 03:40:05 PM UTC 2026, end Sat Oct 10 03:40:44 PM UTC 2026.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AffineCapSectionOpen",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.affine_cap_section_open",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineCapSectionOpen.lean",
+  "statement": "theorem affine_cap_section_open (X : Scheme.{u}) (M : X.Modules) [M.IsInvertible] (s : M.val.presheaf.obj (Opposite.op ⊤)) (U : X.Opens) (hU : IsAffineOpen U) : (∃ V : X.Opens, IsAffineOpen V ∧ ∀ x : X, x ∈ V ↔ x ∈ U ∧ (TopCat.Presheaf.germ M.val.presheaf ⊤ x trivial) s ∉ (IsLocalRing.maximalIdeal (X.presheaf.stalk x)) • (⊤ : Submodule (X.presheaf.stalk x) ↑(TopCat.Presheaf.stalk M.val.presheaf x))) ∧ (∀ n : ℕ, 0 < n → ∀ t : (M.tensorPow n).val.presheaf.obj (Opposite.op ⊤), ∃ V : X.Opens, IsAffineOpen V ∧ ∀ x : X, x ∈ V ↔ x ∈ U ∧ (TopCat.Presheaf.germ (M.tensorPow n).val.presheaf ⊤ x trivial) t ∉ (IsLocalRing.maximalIdeal (X.presheaf.stalk x)) • (⊤ : Submodule (X.presheaf.stalk x) ↑(TopCat.Presheaf.stalk (M.tensorPow n).val.presheaf x)))",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-acs1102",
+  "group": "J1",
+  "result": "pass",
+  "note": "X:Scheme.{u}; M:X.Modules with recorded upstream [IsInvertible]; s:Γ(M,⊤) as presheaf.obj (op ⊤); U with IsAffineOpen; ∃V affine with x∈V ↔ x∈U ∧ germ s ∉ m_x•⊤ (verbatim the IsAmple/def-weil-pbc-ample predicate the node cites, not generatingLocus/zeroLocus); clause 2 ∀n>0 ∀t:Γ(M.tensorPow n,⊤) same, n=0 excluded, n=1 included; no ample/finiteness hypotheses; docstring carries the 3 node proof steps; empty U, s=0 edge cases fine"
  }
 }

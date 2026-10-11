@@ -3727,3 +3727,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 07:56 L: merged deliver/J1/def-pur-sheaf-hom (stage 2; reviewer PASS; first push; WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom SheafOfModules.homObj; existing declaration)
 - 07:57 L: merged deliver/E1/lem-sc-finite-duality-trace (stage 2; reviewer PASS; first push; WeilConjectures.AlgebraicGeometry.Curve.SerreDuality AlgebraicGeometry.Scheme.exists_isIso_pushforwardHomObjComparison_unit; existing declaration)
 - 07:57 L: merged deliver/J1/lem-sc-dvr-field-extension-order (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.DvrFieldExtensionOrder WeilConjectures.dvr_field_extension_order)
+- 07:57 L: merged deliver/J1/lem-sc-affine-cap-section-open (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.AffineCapSectionOpen AlgebraicGeometry.Scheme.Modules.affine_cap_section_open)
