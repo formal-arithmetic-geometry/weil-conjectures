@@ -259,5 +259,29 @@
   "by": "L",
   "result": "pass",
   "note": "statement generalized to exact couples of type s (g of bidegree (s,-s)) so that the iterated couples are covered: a gap of def-sp-exact-couple, to be fixed at its split; Part 1 of lem-sp-exact-functor-couple is to be read for type r-2 couples (same argument)"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.DerivedCoupleExact",
+  "declaration": "CategoryTheory.BigradedExactCouple.derived_couple_exact",
+  "declarations": [
+   "CategoryTheory.BigradedExactCouple.derived_couple_exact",
+   "CategoryTheory.BigradedExactCouple.pageCouple_image"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/DerivedCoupleExact.lean",
+  "statement": "theorem derived_couple_exact {C : Type u} [Category.{v} C] [Abelian C] {s : ℕ} (X : BigradedExactCouple C s) : (∀ p q : ℤ, let a : X.D (p + 3) (q - 2) ⟶ X.D (p + 2) (q - 1) := X.alpha (p + 3) (q - 2) ≫ eqToHom (by congr 1 <;> omega) kernelSubobject (X.d p q) = (Subobject.pullback (X.f p q)).obj (kernelSubobject (X.g (p + 2) (q - 1))) ∧ kernelSubobject (X.d p q) = (Subobject.pullback (X.f p q)).obj (imageSubobject a) ∧ kernelSubobject (X.g (p + 2) (q - 1)) = imageSubobject a ∧ imageSubobject (X.d p q) = imageSubobject ((imageSubobject (X.f p q)).arrow ≫ X.g (p + 2) (q - 1)) ∧ imageSubobject (X.d p q) = imageSubobject ((kernelSubobject (X.alpha (p + 2) (q - 1))).arrow ≫ X.g (p + 2) (q - 1)) ∧ imageSubobject (X.f p q) = kernelSubobject (X.alpha (p + 2) (q - 1)) ∧ imageSubobject (kernel.ι (X.d p q) ≫ X.f p q) ≤ imageSubobject a) ∧ (∀ p q : ℤ, X.gToCycles p q ≫ kernel.ι (X.d (p + s) (q - s)) = X.g p q) ∧ (∀ p q : ℤ, X.d p q ≫ X.d (p + 2 + s) (q - 1 - s) = 0) ∧ (∀ p q : ℤ, kernel.ι (factorThruImage (X.alpha (p + 1) (q - 1))) ≫ X.gToCycles (p + 1) (q - 1) ≫ X.derivedEProjection ((p + 1) + s) ((q - 1) - s) = 0) ∧ (∃ M : DerivedMaps X, (∀ (p q : ℤ) (a : X.derivedD p q ⟶ X.derivedD (p - 1) (q + 1)), a ≫ X.derivedDInclusion (p - 1) (q + 1) = X.derivedDInclusion p q ≫ X.alpha p q → a = M.alpha p q) ∧ (∀ (p q : ℤ) (b : X.derivedE p q ⟶ X.derivedD (p + 2) (q - 1)), X.derivedEProjection p q ≫ b ≫ X.derivedDInclusion (p + 2) (q - 1) = kernel.ι (X.d p q) ≫ X.f p q → b = M.f p q) ∧ (∀ (p q : ℤ) (c : X.derivedD p q ⟶ X.derivedE (p + (s + 1)) (q - (s + 1))), factorThruImage (X.alpha (p + 1) (q - 1)) ≫ c = X.gToCycles (p + 1) (q - 1) ≫ X.derivedEProjection ((p + 1) + s) ((q - 1) - s) ≫ eqToHom (by congr 1 <;> omega) → c = M.g p q))",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-11",
+  "existing": false,
+  "note": "Clauses 1–3 are stated by derived_couple_exact; clause 4 by pageCouple_image. The latter uses n = r - 2, tracking powers and canonical inclusions by their defining recurrences.",
+  "fixed_by": "R-dce1312"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-dce1312",
+  "group": "C1",
+  "result": "fix",
+  "note": "Abelian C, s:ℕ, X:BigradedExactCouple C s (bidegrees, 3 complexes, 3 exactness); clause 1 kernel/pullback and image identities (incoming form reindexed to outgoing target over all p,q); clause 2 f(ker d)≤im α, g→cycles, d∘d=0, π∘ĝ kills ker ᾱ, existence + per-map uniqueness from alpha_comm/f_comm/g_comm (fixed); clause 3 DerivedMaps exactness type s+1; clause 4 A=α^n, I mono, im I=im A, α_r restriction, E_{r+1} cycles/boundaries, degrees by pageCouple types"
  }
 }

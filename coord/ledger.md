@@ -3864,3 +3864,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 08:41 L: merged deliver/G1/lem-weil-pbc-adic-completion-noetherian (stage 2; reviewer PASS; first push; Sheaf.RingTheory.AdicCompletionNoetherian AdicCompletion.isNoetherianRing)
 - 08:41 L: merged deliver/H1/lem-pc-base-change-product (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.BaseChangeProduct AlgebraicGeometry.baseChange_product)
 - 08:41 L: merged deliver/K1/lem-sc-sylow-module-filtration (stage 2; reviewer PASS; first push; Sheaf.RepresentationTheory.SylowModuleFiltration Rep.exists_openSubgroup_primary_module_filtration)
+- 08:42 L: merged deliver/C1/lem-sp-derived-couple-exact (stage 2; reviewer FIX; first push; Sheaf.CategoryTheory.DerivedCoupleExact CategoryTheory.BigradedExactCouple.derived_couple_exact)
