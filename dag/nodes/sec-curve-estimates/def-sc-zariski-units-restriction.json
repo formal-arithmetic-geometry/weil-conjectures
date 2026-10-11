@@ -1,0 +1,111 @@
+{
+ "id": "def-sc-zariski-units-restriction",
+ "kind": "definition",
+ "title": "Canonical Zariski units restriction and pushforward cohomology comparison",
+ "status": "split",
+ "statement": "Let $i:Z\\to X$ be a morphism of schemes, and write $\\mathcal O_X^\\times$ and $\\mathcal O_Z^\\times$ for their abelian sheaves of units [def-sc-gm-torsor] on the small Zariski sites [def-sc-zariski-site]. Define $u_i:\\mathcal O_X^\\times\\to i_*\\mathcal O_Z^\\times$ on each open $U\\subseteq X$ by the units map of $i^\\sharp(U):\\mathcal O_X(U)\\to\\mathcal O_Z(i^{-1}U)$. For $p\\in\\mathbb N$, define $c_i^p:H^p(X,i_*\\mathcal O_Z^\\times)\\to H^p(Z,\\mathcal O_Z^\\times)$ [def-sc-topological-abelian-cohomology] by applying the exact abelian inverse-image functor $i^{-1}$ to an Ext class from the constant integer sheaf, identifying $i^{-1}\\mathbb Z_X$ with $\\mathbb Z_Z$, and then applying the counit $i^{-1}i_*\\mathcal O_Z^\\times\\to\\mathcal O_Z^\\times$. Thus $c_i^p\\circ H^p(u_i)$ is the canonical cohomology restriction on units.",
+ "stmt_deps": [
+  "def-sc-gm-torsor",
+  "def-sc-zariski-site",
+  "def-sc-topological-abelian-cohomology"
+ ],
+ "source": {
+  "document": "literature/stacks-project/varieties.tex; literature/stacks-project/cohomology.tex",
+  "place": "Tag 09NY, proof; Tag 01F7, functoriality of cohomology; Tag 02UV, canonical closed-immersion comparison"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Canonical restriction on Zariski cohomology of units for a scheme morphism",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Map H^p(X, f_*F) to H^p(Y, F) using inverse image and counit",
+   "results": "8 hits: TopCat.Sheaf.pullbackPushforwardAdjunction; sheafPushforwardContinuous component identities; pushforwardNatTrans identities; presheaf adjunction. No specialized units cohomology comparison.",
+   "date": "2026-10-11",
+   "verdict": "no exact match; use existing adjunction"
+  },
+  {
+   "tool": "loogle",
+   "query": "Sheaf.H.map, Scheme.Pic",
+   "results": "0 hits; unknown identifier 'Sheaf.H.map'.",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "msearch grep unitsSheaf|H.mapFunctor|cohomologyComparison; rg unitsSheaf.*(Pullback|Restriction|LowerStar)|unitsCohomology|units.*cohomology.*map in Mathlib, WeilConjectures and lean/Sheaf; rg units.*cohomology|cohomology.*units|unitsSheaf.*pullback in dag/nodes; blueprint_refs.py search units",
+   "results": "msearch Mathlib grep: 0 hits. Project sources have unitsSheaf, H.mapFunctor, constantSheafsheafPullbackIso and structureSheafCohomologyPullback, but no units counterpart. DAG/source hits for etale Picard pullback and dual-number specializations do not define this Zariski map; 34 blueprint search matches for units, none defines it.",
+   "date": "2026-10-11",
+   "verdict": "new specialization of existing exact inverse-image and Ext APIs needed"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sc-picard-h1-restriction-compatibility",
+  "date": "2026-10-11",
+  "group": "U1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-pic-proper-ntorsion",
+   "place": "the final step identifying the H^1 units map with restriction of invertible modules",
+   "via": [
+    "lem-sc-picard-h1-restriction-compatibility",
+    "lem-sc-pic-lift-closed-immersion-dim-le-one",
+    "lem-sc-dim-one-ample-invertible",
+    "lem-sc-dim-one-quasi-projective",
+    "lem-sc-proper-dim-one-projective"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-curveestimate",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ZariskiUnitsRestriction",
+  "declaration": "AlgebraicGeometry.Scheme.unitsSheafToPushforward",
+  "file": "lean/Sheaf/AlgebraicGeometry/ZariskiUnitsRestriction.lean",
+  "statement": "def unitsSheafToPushforward {Z X : Scheme.{u}} (i : Z ⟶ X) : X.unitsSheaf ⟶ ((Opens.map i.base).sheafPushforwardContinuous AddCommGrpCat.{u} (Opens.grothendieckTopology X) (Opens.grothendieckTopology Z)).obj Z.unitsSheaf",
+  "branch": "sheaf-dag",
+  "by": "U1",
+  "date": "2026-10-11",
+  "existing": false,
+  "declarations": [
+   "AlgebraicGeometry.Scheme.unitsSheafToPushforward",
+   "AlgebraicGeometry.Scheme.unitsPushforwardCohomologyComparison"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "X-eda07",
+  "group": "U1",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "X-eda07",
+  "group": "U1",
+  "result": "pass",
+  "note": "independent Codex review: Matched arbitrary schemes, closed immersion, invertible module, tensor pullback class, canonical Hilbert-90 maps, units sheaf map, inverse-image/counit cohomology comparison, and equality with the node; definitions contain no sorry. Requested import repair is present; standalone compilation passed in 18.5 s and dependency-ordered combined compilation in 23.1 s, without warnings."
+ }
+}

@@ -28,7 +28,8 @@
   "def-sc-gm-torsor",
   "def-sc-picard-group",
   "thm-sc-hilbert-90",
-  "lem-sc-cohomology-closed-immersion-pushforward"
+  "lem-sc-cohomology-closed-immersion-pushforward",
+  "def-sc-zariski-units-restriction"
  ],
  "proof": [
   {
@@ -142,5 +143,23 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.PicardH1RestrictionCompatibility",
+  "declaration": "AlgebraicGeometry.Scheme.picard_h1_restriction_compatibility",
+  "file": "lean/Sheaf/AlgebraicGeometry/PicardH1RestrictionCompatibility.lean",
+  "statement": "theorem picard_h1_restriction_compatibility {Z X : Scheme.{v}} (i : Z ⟶ X) [IsClosedImmersion i] (L : X.Modules) [Modules.IsInvertible L] : ∃ h : Modules.IsInvertible ((Modules.tensorPullback i).obj L), unitsPushforwardCohomologyComparison i 1 (Sheaf.H.map (unitsSheafToPushforward i) 1 (Pic.toH1Units X (Pic.ofIsInvertible L))) = Pic.toH1Units Z (@Pic.ofIsInvertible Z ((Modules.tensorPullback i).obj L) h)",
+  "branch": "sheaf-dag",
+  "by": "U1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "X-eda07",
+  "group": "U1",
+  "result": "pass",
+  "note": "independent Codex review: Matched arbitrary schemes, closed immersion, invertible module, tensor pullback class, canonical Hilbert-90 maps, units sheaf map, inverse-image/counit cohomology comparison, and equality with the node; definitions contain no sorry. Requested import repair is present; standalone compilation passed in 18.5 s and dependency-ordered combined compilation in 23.1 s, without warnings."
  }
 }
