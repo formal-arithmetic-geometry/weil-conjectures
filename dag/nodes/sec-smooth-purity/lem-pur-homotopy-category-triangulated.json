@@ -1,61 +1,73 @@
 {
-  "id": "lem-pur-homotopy-category-triangulated",
-  "blueprint": {
-    "is": null,
-    "from": {
-      "node": "def-weil-derived-complete-integral-detailed",
-      "place": "the triangulated category K(A) and the exact localization Q in Situation 05S8",
-      "via": [
-        "lem-pur-quasi-isos-saturated-triangulated"
-      ]
-    },
-    "same_as": []
+ "id": "lem-pur-homotopy-category-triangulated",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-derived-complete-integral-detailed",
+   "place": "the triangulated category K(A) and the exact localization Q in Situation 05S8",
+   "via": [
+    "lem-pur-quasi-isos-saturated-triangulated"
+   ]
   },
-  "kind": "statement",
-  "title": "The homotopy category of complexes is triangulated",
-  "statement": "Let $\\mathcal A$ be an abelian category [def-sp-abelian] and $K(\\mathcal A)$ the homotopy category of $\\mathbf Z$-indexed cochain complexes of $\\mathcal A$ (morphisms of complexes modulo homotopy). With the shift $(K[1])^r=K^{r+1}$, $d_{K[1]}=-d_K$, and with the distinguished triangles those isomorphic to the cone triangles $K\\xrightarrow{f}L\\xrightarrow{i}C(f)\\xrightarrow{-p}K[1]$ of morphisms of complexes $f$ (notation of [def-weil-abstract-derived-category]), $K(\\mathcal A)$ is a triangulated category [def-weil-triangulated-category]. Moreover the localization functor $Q:K(\\mathcal A)\\to D(\\mathcal A)$ commutes with the shifts and carries distinguished triangles to distinguished triangles, i.e. it is an exact functor of triangulated categories.",
-  "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Proposition proposition-homotopy-category-triangulated (K(A) is triangulated) and Section 13.11 (Tag 05RT)"
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "The homotopy category of complexes is triangulated",
+ "statement": "Let $\\mathcal A$ be an abelian category [def-sp-abelian] and $K(\\mathcal A)$ the homotopy category of $\\mathbf Z$-indexed cochain complexes of $\\mathcal A$ (morphisms of complexes modulo homotopy). With the shift $(K[1])^r=K^{r+1}$, $d_{K[1]}=-d_K$, and with the distinguished triangles those isomorphic to the cone triangles $K\\xrightarrow{f}L\\xrightarrow{i}C(f)\\xrightarrow{-p}K[1]$ of morphisms of complexes $f$ (notation of [def-weil-abstract-derived-category]), $K(\\mathcal A)$ is a triangulated category [def-weil-triangulated-category]. Moreover the localization functor $Q:K(\\mathcal A)\\to D(\\mathcal A)$ commutes with the shifts and carries distinguished triangles to distinguished triangles, i.e. it is an exact functor of triangulated categories.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Proposition proposition-homotopy-category-triangulated (K(A) is triangulated) and Section 13.11 (Tag 05RT)"
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-weil-abstract-derived-category",
+  "def-weil-triangulated-category"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "IsTriangulated in Mathlib/Algebra/Homology/HomotopyCategory/Triangulated.lean and Mathlib/Algebra/Homology/DerivedCategory/Basic.lean",
+   "results": "Triangulated.lean:208 instance IsTriangulated (HomotopyCategory C (ComplexShape.up ℤ)), with Pretriangulated.lean:579 (distinguished triangles = isomorphic to mapping-cone triangles, Pretriangulated.lean:479); Basic.lean:173 instance (Qh (C := C)).IsTriangulated (declarations HomotopyCategory.instIsTriangulatedIntUp and DerivedCategory.instIsTriangulatedHomotopyCategoryIntUpQh, names from .ilean)",
+   "date": "2026-10-11",
+   "verdict": "match: one declaration per clause, ready to become a Mathlib leaf"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "HomotopyCategory.instIsTriangulatedIntUp (anonymous instance IsTriangulated (HomotopyCategory C (ComplexShape.up ℤ))); DerivedCategory: instance (Qh).IsTriangulated",
+  "file": "Mathlib/Algebra/Homology/HomotopyCategory/Triangulated.lean",
+  "line": 208,
+  "how": "exact composite, read with sed by L (01:08 UTC) on reviewer R-qst0105's pointer (C1 delivery c87c23f21 created the node): the instance at Triangulated.lean:208 makes K(A) = HomotopyCategory A (ComplexShape.up ℤ) triangulated with the mapping-cone triangles, and the instance at Mathlib/Algebra/Homology/DerivedCategory/Basic.lean:173 makes the localization functor Qh : K(A) -> D(A) a triangulated (exact) functor."
+ },
+ "status": "mathlib",
+ "created": {
+  "item": "lem-pur-quasi-isos-saturated-triangulated"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-qst0105",
+  "group": "C1",
+  "result": "pass",
+  "note": "Mathlib leaf set by L at 01:08 UTC; no split needed."
+ },
+ "lead_notes": [
+  "01:08 UTC L: status set to mathlib (two instances, see mathlib_match) on R-qst0105's pointer."
+ ],
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
   },
-  "stmt_deps": [
-    "def-sp-abelian",
-    "def-weil-abstract-derived-category",
-    "def-weil-triangulated-category"
-  ],
-  "proof": [],
-  "proof_deps": [],
-  "proof_origin": null,
-  "mathlib_searches": [
-    {
-      "tool": "grep",
-      "query": "IsTriangulated in Mathlib/Algebra/Homology/HomotopyCategory/Triangulated.lean and Mathlib/Algebra/Homology/DerivedCategory/Basic.lean",
-      "results": "Triangulated.lean:208 instance IsTriangulated (HomotopyCategory C (ComplexShape.up ℤ)), with Pretriangulated.lean:579 (distinguished triangles = isomorphic to mapping-cone triangles, Pretriangulated.lean:479); Basic.lean:173 instance (Qh (C := C)).IsTriangulated (declarations HomotopyCategory.instIsTriangulatedIntUp and DerivedCategory.instIsTriangulatedHomotopyCategoryIntUpQh, names from .ilean)",
-      "date": "2026-10-11",
-      "verdict": "match: one declaration per clause, ready to become a Mathlib leaf"
-    }
-  ],
-  "mathlib_match": {
-    "declaration": "HomotopyCategory.instIsTriangulatedIntUp (anonymous instance IsTriangulated (HomotopyCategory C (ComplexShape.up ℤ))); DerivedCategory: instance (Qh).IsTriangulated",
-    "file": "Mathlib/Algebra/Homology/HomotopyCategory/Triangulated.lean",
-    "line": 208,
-    "how": "exact composite, read with sed by L (01:08 UTC) on reviewer R-qst0105's pointer (C1 delivery c87c23f21 created the node): the instance at Triangulated.lean:208 makes K(A) = HomotopyCategory A (ComplexShape.up ℤ) triangulated with the mapping-cone triangles, and the instance at Mathlib/Algebra/Homology/DerivedCategory/Basic.lean:173 makes the localization functor Qh : K(A) -> D(A) a triangulated (exact) functor."
-  },
-  "status": "mathlib",
-  "created": {
-    "item": "lem-pur-quasi-isos-saturated-triangulated"
-  },
-  "chapter": "sec-smooth-purity",
-  "unit": "sk-def-sf-operations",
-  "reviewed": {
-    "date": "2026-10-11",
-    "by": "L",
-    "reviewer": "R-qst0105",
-    "group": "C1",
-    "result": "pass",
-    "note": "Mathlib leaf set by L at 01:08 UTC; no split needed."
-  },
-  "lead_notes": [
-    "01:08 UTC L: status set to mathlib (two instances, see mathlib_match) on R-qst0105's pointer."
-  ]
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

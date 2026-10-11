@@ -1,95 +1,97 @@
 {
-  "id": "lem-zl-log-det-identity",
-  "blueprint": {
-    "is": "lem-zl-log-det-identity",
-    "from": null,
-    "same_as": null
-  },
-  "kind": "statement",
-  "title": "Logarithm of the Frobenius determinant",
-  "statement": "Let $(V,F)$ be a Frobenius module, as in\nthe trace-series definition.\nThen, as formal power series in $\\Qlb[[T]]$,\n\n$$\n\\log\\det(1-TF\\mid V)\n=-\\sum_{n\\geq1}\\Tr(F^n\\mid V)\\frac{T^n}{n}\n=-\\operatorname{tr}_F(T).\n$$\n\nNo semisimplicity assumption is imposed on $F$.",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-trace-formula/sk-prop-logdet/lem-zl-log-det-identity.md",
-    "place": "node lem-zl-log-det-identity, order 2392"
-  },
-  "stmt_deps": [],
-  "proof": [
-    {
-      "text": "The field $\\Qlb$ is algebraically closed, so by [p-linear-triangular] choose a basis of $V$ in\nwhich the matrix of $F$ is upper triangular; let\n\n$$\n\\lambda=(\\lambda_1,\\ldots,\\lambda_m),\\qquad m=\\dim_{\\Qlb}V,\n$$\n\nbe its diagonal entries, i.e. the eigenvalues of $F$ with algebraic\nmultiplicity. The matrix of $F^n$ is upper triangular with diagonal\n$(\\lambda_1^n,\\ldots,\\lambda_m^n)$, so\n\n$$\n\\Tr(F^n\\mid V)=\\sum_{j=1}^{m}\\lambda_j^n,\n$$\n\nand the matrix of $1-TF$ is upper triangular with diagonal\n$(1-\\lambda_1T,\\ldots,1-\\lambda_mT)$, so\n\n$$\n\\det(1-TF\\mid V)=\\prod_{j=1}^{m}(1-\\lambda_jT).\n$$",
-      "uses": [
-        "p-linear-triangular"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "Every factor lies in $1+T\\Qlb[[T]]$, where the formal logarithm is a\nhomomorphism for finite products: for\n$A,B\\in1+T\\Qlb[[T]]$ the derivative of $\\log(AB)$ is\n$(AB)'/(AB)=A'/A+B'/B$, the derivative of $\\log A+\\log B$, and both\nsides have constant term $0$. For a single factor, the definition of\nthe formal logarithm gives\n\n$$\n\\log(1-\\lambda T)=-\\sum_{n\\geq1}\\frac{\\lambda^nT^n}{n}.\n$$",
-      "uses": [],
-      "elementary": null
-    },
-    {
-      "text": "Summing over $j=1,\\ldots,m$, interchanging the two finite index ranges,\n\n$$\n\\log\\det(1-TF\\mid V)\n=-\\sum_{n\\geq1}\\left(\\sum_{j=1}^{m}\\lambda_j^n\\right)\\frac{T^n}{n}\n=-\\sum_{n\\geq1}\\Tr(F^n\\mid V)\\frac{T^n}{n},\n$$\n\nwhich is the negative of the trace series of\n[def-zl-frobenius-trace-series].",
-      "uses": [
-        "def-zl-frobenius-trace-series"
-      ],
-      "elementary": false
-    }
-  ],
-  "proof_deps": [
-    "p-linear-triangular",
-    "def-zl-frobenius-trace-series"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/blueprint/master/blueprint/sec-trace-formula/sk-prop-logdet/lem-zl-log-det-identity.md",
-    "place": "## Proof"
-  },
-  "mathlib_searches": [],
-  "mathlib_match": null,
-  "status": "imported",
-  "merged_into": null,
-  "import_flags": [],
-  "blueprint_kind": "lemma",
-  "blueprint_order": 2392,
-  "blueprint_uses": [
-    "def-zl-frobenius-trace-series",
+ "id": "lem-zl-log-det-identity",
+ "blueprint": {
+  "is": "lem-zl-log-det-identity",
+  "from": null,
+  "same_as": null
+ },
+ "kind": "statement",
+ "title": "Logarithm of the Frobenius determinant",
+ "statement": "Let $(V,F)$ be a Frobenius module, as in\nthe trace-series definition.\nThen, as formal power series in $\\Qlb[[T]]$,\n\n$$\n\\log\\det(1-TF\\mid V)\n=-\\sum_{n\\geq1}\\Tr(F^n\\mid V)\\frac{T^n}{n}\n=-\\operatorname{tr}_F(T).\n$$\n\nNo semisimplicity assumption is imposed on $F$.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-trace-formula/sk-prop-logdet/lem-zl-log-det-identity.md",
+  "place": "node lem-zl-log-det-identity, order 2392"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "The field $\\Qlb$ is algebraically closed, so by [p-linear-triangular] choose a basis of $V$ in\nwhich the matrix of $F$ is upper triangular; let\n\n$$\n\\lambda=(\\lambda_1,\\ldots,\\lambda_m),\\qquad m=\\dim_{\\Qlb}V,\n$$\n\nbe its diagonal entries, i.e. the eigenvalues of $F$ with algebraic\nmultiplicity. The matrix of $F^n$ is upper triangular with diagonal\n$(\\lambda_1^n,\\ldots,\\lambda_m^n)$, so\n\n$$\n\\Tr(F^n\\mid V)=\\sum_{j=1}^{m}\\lambda_j^n,\n$$\n\nand the matrix of $1-TF$ is upper triangular with diagonal\n$(1-\\lambda_1T,\\ldots,1-\\lambda_mT)$, so\n\n$$\n\\det(1-TF\\mid V)=\\prod_{j=1}^{m}(1-\\lambda_jT).\n$$",
+   "uses": [
     "p-linear-triangular"
-  ],
-  "proof_split_by": "paragraphs",
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "closed",
-      "decls": [
-        {
-          "name": "LinearMap.logOf_charpolyRev",
-          "module": "WeilConjectures.ZetaLinearAlgebra.DetTrace",
-          "lines": [
-            263,
-            293
-          ],
-          "kind": "theorem",
-          "sorry": false
-        }
-      ],
-      "missing": [],
-      "open": []
-    }
+   ],
+   "elementary": false
   },
-  "chapter": "sec-trace-formula",
-  "unit": "sk-prop-logdet",
-  "lean": {
-    "module": "WeilConjectures.ZetaLinearAlgebra.DetTrace",
-    "declaration": "LinearMap.logOf_charpolyRev",
-    "branch": "slopmaster2",
-    "line": 263,
-    "declarations": [
-      "LinearMap.logOf_charpolyRev"
-    ],
-    "sorry_free": true,
-    "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state closed)"
+  {
+   "text": "Every factor lies in $1+T\\Qlb[[T]]$, where the formal logarithm is a\nhomomorphism for finite products: for\n$A,B\\in1+T\\Qlb[[T]]$ the derivative of $\\log(AB)$ is\n$(AB)'/(AB)=A'/A+B'/B$, the derivative of $\\log A+\\log B$, and both\nsides have constant term $0$. For a single factor, the definition of\nthe formal logarithm gives\n\n$$\n\\log(1-\\lambda T)=-\\sum_{n\\geq1}\\frac{\\lambda^nT^n}{n}.\n$$",
+   "uses": [],
+   "elementary": null
+  },
+  {
+   "text": "Summing over $j=1,\\ldots,m$, interchanging the two finite index ranges,\n\n$$\n\\log\\det(1-TF\\mid V)\n=-\\sum_{n\\geq1}\\left(\\sum_{j=1}^{m}\\lambda_j^n\\right)\\frac{T^n}{n}\n=-\\sum_{n\\geq1}\\Tr(F^n\\mid V)\\frac{T^n}{n},\n$$\n\nwhich is the negative of the trace series of\n[def-zl-frobenius-trace-series].",
+   "uses": [
+    "def-zl-frobenius-trace-series"
+   ],
+   "elementary": false
   }
+ ],
+ "proof_deps": [
+  "p-linear-triangular",
+  "def-zl-frobenius-trace-series"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-trace-formula/sk-prop-logdet/lem-zl-log-det-identity.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 2392,
+ "blueprint_uses": [
+  "def-zl-frobenius-trace-series",
+  "p-linear-triangular"
+ ],
+ "proof_split_by": "paragraphs",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "LinearMap.logOf_charpolyRev"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "LinearMap.logOf_charpolyRev",
+     "module": "WeilConjectures.ZetaLinearAlgebra.DetTrace",
+     "lines": [
+      280,
+      310
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-prop-logdet",
+ "lean": {
+  "module": "WeilConjectures.ZetaLinearAlgebra.DetTrace",
+  "declaration": "LinearMap.logOf_charpolyRev",
+  "branch": "slopmaster2",
+  "line": 263,
+  "declarations": [
+   "LinearMap.logOf_charpolyRev"
+  ],
+  "sorry_free": true,
+  "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state closed)"
+ }
 }

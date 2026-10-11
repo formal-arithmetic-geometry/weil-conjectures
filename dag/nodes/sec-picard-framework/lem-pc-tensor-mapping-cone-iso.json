@@ -1,103 +1,115 @@
 {
-  "id": "lem-pc-tensor-mapping-cone-iso",
-  "blueprint": {
-    "is": null,
-    "from": {
-      "node": "def-weil-derived-tensor",
-      "place": "the cone description in the proof of Lemma 07A3: tensoring the cone sequence identifies the tensor of the cone with the cone of the tensor map",
-      "via": [
-        "lem-pc-kflat-cone-direct-sum"
-      ]
-    },
-    "same_as": []
+ "id": "lem-pc-tensor-mapping-cone-iso",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-derived-tensor",
+   "place": "the cone description in the proof of Lemma 07A3: tensoring the cone sequence identifies the tensor of the cone with the cone of the tensor map",
+   "via": [
+    "lem-pc-kflat-cone-direct-sum"
+   ]
   },
-  "kind": "statement",
-  "title": "Tensoring a mapping cone with a complex gives the mapping cone of the tensor map",
-  "statement": "Let $\\mathcal C$ be a site, $\\mathcal O$ a sheaf of commutative rings on $\\mathcal C$, $\\mathcal A^\\bullet$ a cochain complex of $\\mathcal O$-modules, and $K_1^\\bullet\\to K_2^\\bullet$ a morphism of cochain complexes [def-pc-cochain-complex-modules] with mapping cone $K_3^\\bullet$ [def-weil-abstract-derived-category]. Then the total tensor complex $\\operatorname{Tot}(\\mathcal A^\\bullet\\otimes_{\\mathcal O}K_3^\\bullet)$ [def-pc-tensor-complex-sheaves] is naturally isomorphic, as a complex, to the mapping cone of the induced morphism $\\operatorname{Tot}(\\mathcal A^\\bullet\\otimes_{\\mathcal O}K_1^\\bullet)\\to\\operatorname{Tot}(\\mathcal A^\\bullet\\otimes_{\\mathcal O}K_2^\\bullet)$, compatibly with the inclusions of $\\operatorname{Tot}(\\mathcal A^\\bullet\\otimes_{\\mathcal O}K_2^\\bullet)$.",
-  "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Definition 06YN and Lemma 07A3 cone comparison"
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Tensoring a mapping cone with a complex gives the mapping cone of the tensor map",
+ "statement": "Let $\\mathcal C$ be a site, $\\mathcal O$ a sheaf of commutative rings on $\\mathcal C$, $\\mathcal A^\\bullet$ a cochain complex of $\\mathcal O$-modules, and $K_1^\\bullet\\to K_2^\\bullet$ a morphism of cochain complexes [def-pc-cochain-complex-modules] with mapping cone $K_3^\\bullet$ [def-weil-abstract-derived-category]. Then the total tensor complex $\\operatorname{Tot}(\\mathcal A^\\bullet\\otimes_{\\mathcal O}K_3^\\bullet)$ [def-pc-tensor-complex-sheaves] is naturally isomorphic, as a complex, to the mapping cone of the induced morphism $\\operatorname{Tot}(\\mathcal A^\\bullet\\otimes_{\\mathcal O}K_1^\\bullet)\\to\\operatorname{Tot}(\\mathcal A^\\bullet\\otimes_{\\mathcal O}K_2^\\bullet)$, compatibly with the inclusions of $\\operatorname{Tot}(\\mathcal A^\\bullet\\otimes_{\\mathcal O}K_2^\\bullet)$.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Definition 06YN and Lemma 07A3 cone comparison"
+ },
+ "stmt_deps": [
+  "def-pc-cochain-complex-modules",
+  "def-weil-abstract-derived-category",
+  "def-pc-tensor-complex-sheaves"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "an additive tensor bifunctor sends the mapping cone of a complex morphism to the mapping cone of the tensor morphism",
+   "results": "CochainComplex.mappingCone.mapHomologicalComplexXIso and CochainComplex.mappingCone.mapHomologicalComplexIso in Mathlib/Algebra/Homology/HomotopyCategory/MappingCone",
+   "date": "2026-10-11",
+   "verdict": "match"
   },
-  "stmt_deps": [
-    "def-pc-cochain-complex-modules",
-    "def-weil-abstract-derived-category",
-    "def-pc-tensor-complex-sheaves"
-  ],
-  "proof": [],
-  "proof_deps": [],
-  "proof_origin": null,
-  "mathlib_searches": [
-    {
-      "tool": "leanfinder",
-      "query": "an additive tensor bifunctor sends the mapping cone of a complex morphism to the mapping cone of the tensor morphism",
-      "results": "CochainComplex.mappingCone.mapHomologicalComplexXIso and CochainComplex.mappingCone.mapHomologicalComplexIso in Mathlib/Algebra/Homology/HomotopyCategory/MappingCone",
-      "date": "2026-10-11",
-      "verdict": "match"
-    },
-    {
-      "tool": "loogle",
-      "query": "CochainComplex.mappingCone.mapHomologicalComplexXIso",
-      "results": "CochainComplex.mappingCone.mapHomologicalComplexXIso; CochainComplex.mappingCone.mapHomologicalComplexXIso_eq",
-      "date": "2026-10-11",
-      "verdict": "match"
-    },
-    {
-      "tool": "grep",
-      "query": "mapHomologicalComplexXIso|mappingCone",
-      "results": "mapHomologicalComplexXIso lines 624-627 and mapHomologicalComplexIso lines 641-643 in Mathlib/Algebra/Homology/HomotopyCategory/MappingCone.lean",
-      "date": "2026-10-11",
-      "verdict": "match"
-    },
-    {
-      "tool": "grep",
-      "query": "mappingCone.*(bifunctor|tensor|total)|mapBifunctor in Mathlib/Algebra/Homology; reviewer check of mapHomologicalComplexIso",
-      "results": "CochainComplex.mappingCone.mapHomologicalComplexIso (MappingCone.lean 641-643) is for a functor H : C ⥤ D applied degreewise, not for the total complex of a bifunctor, so it is not this statement; Mathlib has no mapBifunctor/mappingCone comparison. slopmaster2 has it sorry-free: CochainComplex.mapBifunctorMappingCone₂Iso (WeilConjectures/FromJoel/Algebra/Homology/BifunctorMappingCone.lean 493-497)",
-      "date": "2026-10-11",
-      "verdict": "no match"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "unsplit",
-  "created": {
-    "item": "lem-pc-kflat-tensor-cone-two-out-of-three",
-    "by": "worker",
-    "date": "2026-10-10"
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.mappingCone.mapHomologicalComplexXIso",
+   "results": "CochainComplex.mappingCone.mapHomologicalComplexXIso; CochainComplex.mappingCone.mapHomologicalComplexXIso_eq",
+   "date": "2026-10-11",
+   "verdict": "match"
   },
-  "chapter": "sec-picard-framework",
-  "unit": "sk-thm-picard-semicon",
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "closed",
-      "decls": [
-        {
-          "name": "CochainComplex.mapBifunctorMappingCone₂Iso",
-          "module": "WeilConjectures.FromJoel.Algebra.Homology.BifunctorMappingCone",
-          "lines": [
-            492,
-            497
-          ],
-          "kind": "def",
-          "sorry": false
-        }
-      ],
-      "missing": [],
-      "open": []
-    }
+  {
+   "tool": "grep",
+   "query": "mapHomologicalComplexXIso|mappingCone",
+   "results": "mapHomologicalComplexXIso lines 624-627 and mapHomologicalComplexIso lines 641-643 in Mathlib/Algebra/Homology/HomotopyCategory/MappingCone.lean",
+   "date": "2026-10-11",
+   "verdict": "match"
   },
-  "lean": {
-    "module": "WeilConjectures.FromJoel.Algebra.Homology.BifunctorMappingCone",
-    "declaration": "CochainComplex.mapBifunctorMappingCone₂Iso",
-    "branch": "slopmaster2",
-    "line": 492,
-    "declarations": [
-      "CochainComplex.mapBifunctorMappingCone₂Iso"
-    ],
-    "sorry_free": true,
-    "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state closed)"
+  {
+   "tool": "grep",
+   "query": "mappingCone.*(bifunctor|tensor|total)|mapBifunctor in Mathlib/Algebra/Homology; reviewer check of mapHomologicalComplexIso",
+   "results": "CochainComplex.mappingCone.mapHomologicalComplexIso (MappingCone.lean 641-643) is for a functor H : C ⥤ D applied degreewise, not for the total complex of a bifunctor, so it is not this statement; Mathlib has no mapBifunctor/mappingCone comparison. slopmaster2 has it sorry-free: CochainComplex.mapBifunctorMappingCone₂Iso (WeilConjectures/FromJoel/Algebra/Homology/BifunctorMappingCone.lean 493-497)",
+   "date": "2026-10-11",
+   "verdict": "no match"
   }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "item": "lem-pc-kflat-tensor-cone-two-out-of-three",
+  "by": "worker",
+  "date": "2026-10-10"
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean_audit": {
+  "master": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "CochainComplex.mapBifunctorMappingCone₂Iso",
+     "module": "WeilConjectures.FromJoel.Algebra.Homology.BifunctorMappingCone",
+     "lines": [
+      492,
+      497
+     ],
+     "kind": "def",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "CochainComplex.mapBifunctorMappingCone₂Iso",
+     "module": "WeilConjectures.FromJoel.Algebra.Homology.BifunctorMappingCone",
+     "lines": [
+      492,
+      497
+     ],
+     "kind": "def",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
+ "lean": {
+  "module": "WeilConjectures.FromJoel.Algebra.Homology.BifunctorMappingCone",
+  "declaration": "CochainComplex.mapBifunctorMappingCone₂Iso",
+  "branch": "slopmaster2",
+  "line": 492,
+  "declarations": [
+   "CochainComplex.mapBifunctorMappingCone₂Iso"
+  ],
+  "sorry_free": true,
+  "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state closed)"
+ }
 }

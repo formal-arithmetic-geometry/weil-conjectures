@@ -1,225 +1,229 @@
 {
-  "id": "lem-sc-affine-curve-h2-vanishing",
-  "blueprint": {
-    "is": null,
-    "from": {
-      "node": "lem-sc-cohomological-dimension",
-      "place": "## Proof, as a whole (degrees $q>2$): the blueprint proof concludes 'For total degree $q>2$ there are thus no differentials into or out of $H^q(C,\\eta_*M)$. It equals $H^q(k(C),M)=0$'; the split replaces this generic-point assembly by the route of the Lean proof AlgebraicGeometry.IsCurve.subsingleton_sheafH_of_three_le_of_forall (HighDegreeVanishing.lean), and this node is used in steps 4 and 5 (for $U$ and for the affine curves $V_a\\times_CU$).",
-      "via": []
-    },
-    "same_as": []
+ "id": "lem-sc-affine-curve-h2-vanishing",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-cohomological-dimension",
+   "place": "## Proof, as a whole (degrees $q>2$): the blueprint proof concludes 'For total degree $q>2$ there are thus no differentials into or out of $H^q(C,\\eta_*M)$. It equals $H^q(k(C),M)=0$'; the split replaces this generic-point assembly by the route of the Lean proof AlgebraicGeometry.IsCurve.subsingleton_sheafH_of_three_le_of_forall (HighDegreeVanishing.lean), and this node is used in steps 4 and 5 (for $U$ and for the affine curves $V_a\\times_CU$).",
+   "via": []
   },
-  "kind": "statement",
-  "title": "H^2 of a torsion sheaf on an affine curve vanishes",
-  "statement": "Let $k$ be an algebraically closed field and $C$ an affine curve over $k$ [def-sc-curves] (an affine scheme, separated and of finite type over $k$, of dimension at most one; it may be empty, disconnected, singular or have zero-dimensional components). For every torsion abelian sheaf $F$ on $C_{\\Et}$ [def-weil-pbc-etale-sheaves], $H^2(C_{\\Et},F)=0$ [def-weil-pbc-etale-cohomology].",
-  "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 03SC (theorem-vanishing-affine-curves) (2) in degree 2; Lean: WeilConjectures/AlgebraicGeometry/Curve/CohomologicalDimension.lean, AlgebraicGeometry.IsCurve.subsingleton_sheafH_two_of_isAffine, lines 386-395 (reduction AlgebraicGeometry.IsCurve.subsingleton_sheafH_two_of_isAffine_of_forall, sorry-free, to smooth affine connected curves, AlgebraicGeometry.IsConnectedCurve.subsingleton_sheafH_two_of_isAffine_of_smooth)"
-  },
-  "stmt_deps": [
-    "def-sc-curves",
-    "def-weil-pbc-etale-sheaves",
-    "def-weil-pbc-etale-cohomology"
-  ],
-  "proof": [
-    {
-      "text": "*Reduction to smooth affine connected curves.* By [lem-sc-affine-h2-smooth-reduction], applied to the affine curve $C$ and the torsion sheaf $F$, it suffices to prove: for every connected curve $C'$ over $k$ [def-sc-curves] (nonempty, connected, of dimension one) which is smooth over $k$ and an affine scheme, and every torsion abelian sheaf $F'$ on $C'_{\\Et}$ [def-weil-pbc-etale-sheaves], $H^2(C'_{\\Et},F')=0$ [def-weil-pbc-etale-cohomology]. Fix such $C'$ and $F'$ for steps 2-4.",
-      "uses": [
-        "lem-sc-affine-h2-smooth-reduction",
-        "def-sc-curves",
-        "def-weil-pbc-etale-sheaves",
-        "def-weil-pbc-etale-cohomology"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-cd/_section.md",
-        "place": "unit sk-prop-cd, Step 1 (reduce to a smooth integral curve); Lean WeilConjectures/AlgebraicGeometry/Curve/CohomologicalDimension.lean, AlgebraicGeometry.IsCurve.subsingleton_sheafH_two_of_isAffine, lines 386-395 (application of subsingleton_sheafH_two_of_isAffine_of_forall)"
-      }
-    },
-    {
-      "text": "*$C'$ is integral.* $C'$ is of finite type over $\\operatorname{Spec}k$, and $\\operatorname{Spec}k$ is Noetherian ($k$ is a field, hence a Noetherian ring [def-weil-pbc-noetherian-ring]), so $C'$ is Noetherian, in particular locally Noetherian, by [lem-weil-pbc-finite-type-over-noetherian]. $C'$ is a smooth curve over $k$, so every local ring $\\mathcal O_{C',P}$ is a regular local ring by [lem-sc-smooth-regular]; hence $C'$ is a regular scheme [def-weil-regular-scheme]. As a connected curve, $C'$ is nonempty and connected, so $C'$ is integral by [lem-sc-regular-connected-integral]. It is separated over $k$ (it is a curve), so $C'$ is a smooth integral separated, affine and connected curve over $k$; let $\\eta:\\operatorname{Spec}k(C')\\to C'$ be its generic point, $k(C')$ its function field [def-sc-function-field].",
-      "uses": [
-        "def-weil-pbc-noetherian-ring",
-        "lem-weil-pbc-finite-type-over-noetherian",
-        "lem-sc-smooth-regular",
-        "def-weil-regular-scheme",
-        "lem-sc-regular-connected-integral",
-        "def-sc-curves",
-        "def-sc-function-field"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/properties.tex",
-        "place": "Tags 0569 and 033N (regular, hence normal, locally Noetherian and connected implies integral); Lean WeilConjectures/AlgebraicGeometry/Curve/CohomologicalDimension.lean, AlgebraicGeometry.IsConnectedCurve.subsingleton_sheafH_two_of_isAffine_of_smooth, lines 357-378, first six lines (LocallyOfFiniteType.isLocallyNoetherian, IsRegular.of_smooth, IsRegular.irreducibleSpace, isIntegral_of_irreducibleSpace_of_isReduced)"
-      }
-    },
-    {
-      "text": "*Passage to the generic point.* By [lem-sc-generic-cohomology-comparison] applied to the smooth integral separated curve $C'$, the torsion sheaf $F'$ and $q=2$, the unit $F'\\to\\eta_*\\eta^{-1}F'$ of the adjunction $\\eta^{-1}\\dashv\\eta_*$ ([def-weil-pbc-inverse-image], [def-weil-pbc-direct-image]) induces an isomorphism $H^2(C'_{\\Et},F')\\xrightarrow{\\sim}H^2(C'_{\\Et},\\eta_*\\eta^{-1}F')$.",
-      "uses": [
-        "lem-sc-generic-cohomology-comparison",
-        "def-weil-pbc-inverse-image",
-        "def-weil-pbc-direct-image"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-cd/_section.md",
-        "place": "unit sk-prop-cd, Step 2 (push to the generic point: $H^q(C,F)\\cong H^q(C,\\eta_*M)$ for $q\\ge2$); Lean WeilConjectures/AlgebraicGeometry/Curve/CohomologicalDimension.lean, subsingleton_sheafH_two_of_isAffine_of_smooth, via AlgebraicGeometry.IsCurve.isIso_functorH_map_unit_fromSpecFunctionField (lines 311-325)"
-      }
-    },
-    {
-      "text": "*Vanishing at the generic point; conclusion.* $M=\\eta^{-1}F'$ is a torsion abelian sheaf on $\\operatorname{Spec}k(C')_{\\Et}$ by [lem-weil-pbc-inverse-image-torsion] (torsion in the sense of [def-weil-pbc-torsion-etale-sheaf], which agrees with that of [def-weil-pbc-etale-sheaves]: every local section is locally killed by a positive integer). By [lem-sc-affine-generic-second], applied to the smooth integral affine connected curve $C'$ of step 2 and to $M$, $H^2(C'_{\\Et},\\eta_*M)=0$. By step 3, $H^2(C'_{\\Et},F')\\cong H^2(C'_{\\Et},\\eta_*M)=0$. This is the hypothesis of step 1 for $C'$ and $F'$, so $H^2(C_{\\Et},F)=0$.",
-      "uses": [
-        "lem-weil-pbc-inverse-image-torsion",
-        "def-weil-pbc-torsion-etale-sheaf",
-        "def-weil-pbc-etale-sheaves",
-        "lem-sc-affine-generic-second"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-cd-affine/lem-sc-affine-cohomological-dimension.md",
-        "place": "proof: 'In degree two, ... apply [lem-sc-generic-cohomology-comparison] with $M=\\eta^*F$; the resulting group $H^2(C,\\eta_*M)$ vanishes by [lem-sc-affine-generic-second]'; Lean WeilConjectures/AlgebraicGeometry/Curve/CohomologicalDimension.lean, subsingleton_sheafH_two_of_isAffine_of_smooth, lines 372-378 (Etale.isTorsion_upperStar, subsingleton_sheafH_two_lowerStar)"
-      }
-    }
-  ],
-  "proof_deps": [
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "H^2 of a torsion sheaf on an affine curve vanishes",
+ "statement": "Let $k$ be an algebraically closed field and $C$ an affine curve over $k$ [def-sc-curves] (an affine scheme, separated and of finite type over $k$, of dimension at most one; it may be empty, disconnected, singular or have zero-dimensional components). For every torsion abelian sheaf $F$ on $C_{\\Et}$ [def-weil-pbc-etale-sheaves], $H^2(C_{\\Et},F)=0$ [def-weil-pbc-etale-cohomology].",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 03SC (theorem-vanishing-affine-curves) (2) in degree 2; Lean: WeilConjectures/AlgebraicGeometry/Curve/CohomologicalDimension.lean, AlgebraicGeometry.IsCurve.subsingleton_sheafH_two_of_isAffine, lines 386-395 (reduction AlgebraicGeometry.IsCurve.subsingleton_sheafH_two_of_isAffine_of_forall, sorry-free, to smooth affine connected curves, AlgebraicGeometry.IsConnectedCurve.subsingleton_sheafH_two_of_isAffine_of_smooth)"
+ },
+ "stmt_deps": [
+  "def-sc-curves",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-etale-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "*Reduction to smooth affine connected curves.* By [lem-sc-affine-h2-smooth-reduction], applied to the affine curve $C$ and the torsion sheaf $F$, it suffices to prove: for every connected curve $C'$ over $k$ [def-sc-curves] (nonempty, connected, of dimension one) which is smooth over $k$ and an affine scheme, and every torsion abelian sheaf $F'$ on $C'_{\\Et}$ [def-weil-pbc-etale-sheaves], $H^2(C'_{\\Et},F')=0$ [def-weil-pbc-etale-cohomology]. Fix such $C'$ and $F'$ for steps 2-4.",
+   "uses": [
     "lem-sc-affine-h2-smooth-reduction",
     "def-sc-curves",
     "def-weil-pbc-etale-sheaves",
-    "def-weil-pbc-etale-cohomology",
+    "def-weil-pbc-etale-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-cd/_section.md",
+    "place": "unit sk-prop-cd, Step 1 (reduce to a smooth integral curve); Lean WeilConjectures/AlgebraicGeometry/Curve/CohomologicalDimension.lean, AlgebraicGeometry.IsCurve.subsingleton_sheafH_two_of_isAffine, lines 386-395 (application of subsingleton_sheafH_two_of_isAffine_of_forall)"
+   }
+  },
+  {
+   "text": "*$C'$ is integral.* $C'$ is of finite type over $\\operatorname{Spec}k$, and $\\operatorname{Spec}k$ is Noetherian ($k$ is a field, hence a Noetherian ring [def-weil-pbc-noetherian-ring]), so $C'$ is Noetherian, in particular locally Noetherian, by [lem-weil-pbc-finite-type-over-noetherian]. $C'$ is a smooth curve over $k$, so every local ring $\\mathcal O_{C',P}$ is a regular local ring by [lem-sc-smooth-regular]; hence $C'$ is a regular scheme [def-weil-regular-scheme]. As a connected curve, $C'$ is nonempty and connected, so $C'$ is integral by [lem-sc-regular-connected-integral]. It is separated over $k$ (it is a curve), so $C'$ is a smooth integral separated, affine and connected curve over $k$; let $\\eta:\\operatorname{Spec}k(C')\\to C'$ be its generic point, $k(C')$ its function field [def-sc-function-field].",
+   "uses": [
     "def-weil-pbc-noetherian-ring",
     "lem-weil-pbc-finite-type-over-noetherian",
     "lem-sc-smooth-regular",
     "def-weil-regular-scheme",
     "lem-sc-regular-connected-integral",
-    "def-sc-function-field",
+    "def-sc-curves",
+    "def-sc-function-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tags 0569 and 033N (regular, hence normal, locally Noetherian and connected implies integral); Lean WeilConjectures/AlgebraicGeometry/Curve/CohomologicalDimension.lean, AlgebraicGeometry.IsConnectedCurve.subsingleton_sheafH_two_of_isAffine_of_smooth, lines 357-378, first six lines (LocallyOfFiniteType.isLocallyNoetherian, IsRegular.of_smooth, IsRegular.irreducibleSpace, isIntegral_of_irreducibleSpace_of_isReduced)"
+   }
+  },
+  {
+   "text": "*Passage to the generic point.* By [lem-sc-generic-cohomology-comparison] applied to the smooth integral separated curve $C'$, the torsion sheaf $F'$ and $q=2$, the unit $F'\\to\\eta_*\\eta^{-1}F'$ of the adjunction $\\eta^{-1}\\dashv\\eta_*$ ([def-weil-pbc-inverse-image], [def-weil-pbc-direct-image]) induces an isomorphism $H^2(C'_{\\Et},F')\\xrightarrow{\\sim}H^2(C'_{\\Et},\\eta_*\\eta^{-1}F')$.",
+   "uses": [
     "lem-sc-generic-cohomology-comparison",
     "def-weil-pbc-inverse-image",
-    "def-weil-pbc-direct-image",
+    "def-weil-pbc-direct-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-cd/_section.md",
+    "place": "unit sk-prop-cd, Step 2 (push to the generic point: $H^q(C,F)\\cong H^q(C,\\eta_*M)$ for $q\\ge2$); Lean WeilConjectures/AlgebraicGeometry/Curve/CohomologicalDimension.lean, subsingleton_sheafH_two_of_isAffine_of_smooth, via AlgebraicGeometry.IsCurve.isIso_functorH_map_unit_fromSpecFunctionField (lines 311-325)"
+   }
+  },
+  {
+   "text": "*Vanishing at the generic point; conclusion.* $M=\\eta^{-1}F'$ is a torsion abelian sheaf on $\\operatorname{Spec}k(C')_{\\Et}$ by [lem-weil-pbc-inverse-image-torsion] (torsion in the sense of [def-weil-pbc-torsion-etale-sheaf], which agrees with that of [def-weil-pbc-etale-sheaves]: every local section is locally killed by a positive integer). By [lem-sc-affine-generic-second], applied to the smooth integral affine connected curve $C'$ of step 2 and to $M$, $H^2(C'_{\\Et},\\eta_*M)=0$. By step 3, $H^2(C'_{\\Et},F')\\cong H^2(C'_{\\Et},\\eta_*M)=0$. This is the hypothesis of step 1 for $C'$ and $F'$, so $H^2(C_{\\Et},F)=0$.",
+   "uses": [
     "lem-weil-pbc-inverse-image-torsion",
     "def-weil-pbc-torsion-etale-sheaf",
+    "def-weil-pbc-etale-sheaves",
     "lem-sc-affine-generic-second"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-cd/_section.md",
-    "place": "unit sk-prop-cd Steps 1-2 and the degree-two sentence of sk-prop-cd-affine/lem-sc-affine-cohomological-dimension.md, along the Lean proof AlgebraicGeometry.IsCurve.subsingleton_sheafH_two_of_isAffine (WeilConjectures/AlgebraicGeometry/Curve/CohomologicalDimension.lean:386-395) and AlgebraicGeometry.IsConnectedCurve.subsingleton_sheafH_two_of_isAffine_of_smooth (:357-378); Stacks 03SC (2) proves it by a different route (constructible F_l-sheaves, j_!, trace method), not followed"
-  },
-  "mathlib_searches": [
-    {
-      "tool": "leansearch",
-      "query": "second etale cohomology of an affine curve over an algebraically closed field vanishes for torsion sheaves",
-      "results": "groupCohomology.H2π_eq_zero_iff, groupCohomology.H2, Algebra.FormallyEtale.subsingleton_h1Cotangent",
-      "date": "2026-10-10",
-      "verdict": "no match"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "H^2 etale cohomology affine curve algebraically closed field vanishes",
-      "results": "groupCohomology.H1ofAutOnUnitsUnique (Hilbert 90), FormallyEtale.subsingleton_h1Cotangent, IsStandardSmooth.subsingleton_h1Cotangent",
-      "date": "2026-10-10",
-      "verdict": "no match"
-    },
-    {
-      "tool": "grep",
-      "query": "grep -rln 'smallEtaleTopology' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib; grep -rn 'Curve' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry --include=*.lean -l",
-      "results": "no étale cohomology of curves in Mathlib; the project declaration AlgebraicGeometry.IsCurve.subsingleton_sheafH_two_of_isAffine (WeilConjectures/AlgebraicGeometry/Curve/CohomologicalDimension.lean:391) states it",
-      "date": "2026-10-10",
-      "verdict": "no match in Mathlib"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "merged_into": null,
-  "created": {
-    "by": "worker",
-    "item": "lem-sc-cohomological-dimension",
-    "date": "2026-10-10"
-  },
-  "chapter": "sec-curve-estimates",
-  "unit": "sk-prop-cd",
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "rests_on_sorry",
-      "decls": [
-        {
-          "name": "AlgebraicGeometry.IsCurve.subsingleton_sheafH_two_of_isAffine",
-          "module": "WeilConjectures.AlgebraicGeometry.Curve.CohomologicalDimension",
-          "lines": [
-            386,
-            395
-          ],
-          "kind": "theorem",
-          "sorry": false
-        }
-      ],
-      "missing": [],
-      "open": [
-        {
-          "name": "AlgebraicGeometry.Etale.unitComparison_app_isColimit_of_isLimit",
-          "module": "WeilConjectures.AlgebraicGeometry.Sites.SectionContinuity",
-          "lines": [
-            74,
-            102
-          ],
-          "kind": "theorem",
-          "nodes": [],
-          "below": false
-        },
-        {
-          "name": "AlgebraicGeometry.IsConnectedCurve.subsingleton_sheafH_two_lowerStar",
-          "module": "WeilConjectures.AlgebraicGeometry.Curve.Affine",
-          "lines": [
-            333,
-            353
-          ],
-          "kind": "theorem",
-          "nodes": [
-            "lem-sc-affine-generic-second"
-          ],
-          "below": false
-        },
-        {
-          "name": "AlgebraicGeometry.Scheme.H_map_isColimit_of_isFiltered",
-          "module": "WeilConjectures.AlgebraicGeometry.Curve.Reductions",
-          "lines": [
-            68,
-            86
-          ],
-          "kind": "theorem",
-          "nodes": [
-            "lemma-weil-pbc-curve-filtered-cohomology"
-          ],
-          "below": false
-        }
-      ]
-    }
-  },
-  "split_report": {
-    "date": "2026-10-10",
-    "item": "lem-sc-affine-curve-h2-vanishing",
-    "worker": "stage1",
-    "summary": "Split along the Lean proof of AlgebraicGeometry.IsCurve.subsingleton_sheafH_two_of_isAffine. Step 1 is the sorry-free reduction subsingleton_sheafH_two_of_isAffine_of_forall (new node lem-sc-affine-h2-smooth-reduction, Lean closed by the sorry map of 71d63dcf, not split). Steps 2-4 are the smooth case subsingleton_sheafH_two_of_isAffine_of_smooth written out: C' integral (new node lem-sc-regular-connected-integral, Lean IsRegular.isIntegral closed; with lem-sc-smooth-regular and lem-weil-pbc-finite-type-over-noetherian), generic comparison in degree 2 (lem-sc-generic-cohomology-comparison, which carries the two open declarations unitComparison_app_isColimit_of_isLimit (node lem-weil-pbc-etale-section-continuity) and H_map_isColimit_of_isFiltered (node lemma-weil-pbc-curve-filtered-cohomology) - the sorry map paths run through isIso_functorH_map_unit_fromSpecFunctionField), torsion of eta^{-1}F' (lem-weil-pbc-inverse-image-torsion) and H^2(C', eta_* M)=0 (lem-sc-affine-generic-second, the third open declaration subsingleton_sheafH_two_lowerStar). lem-sc-affine-cohomological-dimension is not cited (it cites lem-sc-cohomological-dimension, which cites this item). Statement unchanged. Stacks 03SC (2) proves the vanishing by another route (constructible F_l-sheaves and j_!); the blueprint units sk-prop-cd (Steps 1-2) and sk-prop-cd-affine are followed instead, as the Lean does.",
-    "blueprint": "The blueprint ancestor lem-sc-cohomological-dimension uses this node in its steps 4 and 5 (H^2 of the affine U and of the affine V_a x_C U); the steps here realize the H^2 vanishing used there: step 1 realizes unit sk-prop-cd Step 1 (reduce to a smooth integral curve), step 2 its closing sentence 'So assume C smooth and integral', step 3 sk-prop-cd Step 2 (push to the generic point, H^q(C,F) = H^q(C, eta_* M) for q >= 2), step 4 the degree-two sentence of the proof of lem-sc-affine-cohomological-dimension (unit sk-prop-cd-affine) via lem-sc-affine-generic-second."
-  },
-  "tool_uses": [
-    "lem-sc-affine-generic-second",
-    "lem-weil-pbc-inverse-image-torsion"
-  ],
-  "reviewed": "2026-10-10 L: 4 steps along the Lean (reduction to smooth affine connected curves: new node, closed; integrality of a connected regular scheme: new node, closed; the generic comparison in degree 2; the generic second cohomology vanishes); 2 tool uses accepted; 2 new nodes, both closed on slopmaster2; isTorsion_upperStar attached to lem-weil-pbc-inverse-image-torsion",
-  "lean": {
-    "module": "WeilConjectures.AlgebraicGeometry.Curve.CohomologicalDimension",
-    "declaration": "AlgebraicGeometry.IsCurve.subsingleton_sheafH_two_of_isAffine",
-    "branch": "slopmaster2",
-    "line": 386,
-    "declarations": [
-      "AlgebraicGeometry.IsCurve.subsingleton_sheafH_two_of_isAffine"
-    ],
-    "sorry_free": false,
-    "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state rests_on_sorry)"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-cd-affine/lem-sc-affine-cohomological-dimension.md",
+    "place": "proof: 'In degree two, ... apply [lem-sc-generic-cohomology-comparison] with $M=\\eta^*F$; the resulting group $H^2(C,\\eta_*M)$ vanishes by [lem-sc-affine-generic-second]'; Lean WeilConjectures/AlgebraicGeometry/Curve/CohomologicalDimension.lean, subsingleton_sheafH_two_of_isAffine_of_smooth, lines 372-378 (Etale.isTorsion_upperStar, subsingleton_sheafH_two_lowerStar)"
+   }
   }
+ ],
+ "proof_deps": [
+  "lem-sc-affine-h2-smooth-reduction",
+  "def-sc-curves",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-etale-cohomology",
+  "def-weil-pbc-noetherian-ring",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-sc-smooth-regular",
+  "def-weil-regular-scheme",
+  "lem-sc-regular-connected-integral",
+  "def-sc-function-field",
+  "lem-sc-generic-cohomology-comparison",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-direct-image",
+  "lem-weil-pbc-inverse-image-torsion",
+  "def-weil-pbc-torsion-etale-sheaf",
+  "lem-sc-affine-generic-second"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-cd/_section.md",
+  "place": "unit sk-prop-cd Steps 1-2 and the degree-two sentence of sk-prop-cd-affine/lem-sc-affine-cohomological-dimension.md, along the Lean proof AlgebraicGeometry.IsCurve.subsingleton_sheafH_two_of_isAffine (WeilConjectures/AlgebraicGeometry/Curve/CohomologicalDimension.lean:386-395) and AlgebraicGeometry.IsConnectedCurve.subsingleton_sheafH_two_of_isAffine_of_smooth (:357-378); Stacks 03SC (2) proves it by a different route (constructible F_l-sheaves, j_!, trace method), not followed"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "second etale cohomology of an affine curve over an algebraically closed field vanishes for torsion sheaves",
+   "results": "groupCohomology.H2π_eq_zero_iff, groupCohomology.H2, Algebra.FormallyEtale.subsingleton_h1Cotangent",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "H^2 etale cohomology affine curve algebraically closed field vanishes",
+   "results": "groupCohomology.H1ofAutOnUnitsUnique (Hilbert 90), FormallyEtale.subsingleton_h1Cotangent, IsStandardSmooth.subsingleton_h1Cotangent",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln 'smallEtaleTopology' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib; grep -rn 'Curve' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry --include=*.lean -l",
+   "results": "no étale cohomology of curves in Mathlib; the project declaration AlgebraicGeometry.IsCurve.subsingleton_sheafH_two_of_isAffine (WeilConjectures/AlgebraicGeometry/Curve/CohomologicalDimension.lean:391) states it",
+   "date": "2026-10-10",
+   "verdict": "no match in Mathlib"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-sc-cohomological-dimension",
+  "date": "2026-10-10"
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-cd",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.IsCurve.subsingleton_sheafH_two_of_isAffine"
+   ]
+  },
+  "slopmaster2": {
+   "state": "rests_on_sorry",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.IsCurve.subsingleton_sheafH_two_of_isAffine",
+     "module": "WeilConjectures.AlgebraicGeometry.Curve.CohomologicalDimension",
+     "lines": [
+      386,
+      395
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": [
+    {
+     "name": "AlgebraicGeometry.Etale.unitComparison_app_isColimit_of_isLimit",
+     "module": "WeilConjectures.AlgebraicGeometry.Sites.SectionContinuity",
+     "lines": [
+      74,
+      102
+     ],
+     "kind": "theorem",
+     "nodes": [
+      "lem-weil-pbc-etale-section-continuity"
+     ],
+     "below": true
+    },
+    {
+     "name": "AlgebraicGeometry.IsConnectedCurve.subsingleton_sheafH_two_lowerStar",
+     "module": "WeilConjectures.AlgebraicGeometry.Curve.Affine",
+     "lines": [
+      333,
+      353
+     ],
+     "kind": "theorem",
+     "nodes": [
+      "lem-sc-affine-generic-second"
+     ],
+     "below": true
+    },
+    {
+     "name": "AlgebraicGeometry.Scheme.H_map_isColimit_of_isFiltered",
+     "module": "WeilConjectures.AlgebraicGeometry.Curve.Reductions",
+     "lines": [
+      68,
+      86
+     ],
+     "kind": "theorem",
+     "nodes": [
+      "lemma-weil-pbc-curve-filtered-cohomology"
+     ],
+     "below": true
+    }
+   ]
+  }
+ },
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-sc-affine-curve-h2-vanishing",
+  "worker": "stage1",
+  "summary": "Split along the Lean proof of AlgebraicGeometry.IsCurve.subsingleton_sheafH_two_of_isAffine. Step 1 is the sorry-free reduction subsingleton_sheafH_two_of_isAffine_of_forall (new node lem-sc-affine-h2-smooth-reduction, Lean closed by the sorry map of 71d63dcf, not split). Steps 2-4 are the smooth case subsingleton_sheafH_two_of_isAffine_of_smooth written out: C' integral (new node lem-sc-regular-connected-integral, Lean IsRegular.isIntegral closed; with lem-sc-smooth-regular and lem-weil-pbc-finite-type-over-noetherian), generic comparison in degree 2 (lem-sc-generic-cohomology-comparison, which carries the two open declarations unitComparison_app_isColimit_of_isLimit (node lem-weil-pbc-etale-section-continuity) and H_map_isColimit_of_isFiltered (node lemma-weil-pbc-curve-filtered-cohomology) - the sorry map paths run through isIso_functorH_map_unit_fromSpecFunctionField), torsion of eta^{-1}F' (lem-weil-pbc-inverse-image-torsion) and H^2(C', eta_* M)=0 (lem-sc-affine-generic-second, the third open declaration subsingleton_sheafH_two_lowerStar). lem-sc-affine-cohomological-dimension is not cited (it cites lem-sc-cohomological-dimension, which cites this item). Statement unchanged. Stacks 03SC (2) proves the vanishing by another route (constructible F_l-sheaves and j_!); the blueprint units sk-prop-cd (Steps 1-2) and sk-prop-cd-affine are followed instead, as the Lean does.",
+  "blueprint": "The blueprint ancestor lem-sc-cohomological-dimension uses this node in its steps 4 and 5 (H^2 of the affine U and of the affine V_a x_C U); the steps here realize the H^2 vanishing used there: step 1 realizes unit sk-prop-cd Step 1 (reduce to a smooth integral curve), step 2 its closing sentence 'So assume C smooth and integral', step 3 sk-prop-cd Step 2 (push to the generic point, H^q(C,F) = H^q(C, eta_* M) for q >= 2), step 4 the degree-two sentence of the proof of lem-sc-affine-cohomological-dimension (unit sk-prop-cd-affine) via lem-sc-affine-generic-second."
+ },
+ "tool_uses": [
+  "lem-sc-affine-generic-second",
+  "lem-weil-pbc-inverse-image-torsion"
+ ],
+ "reviewed": "2026-10-10 L: 4 steps along the Lean (reduction to smooth affine connected curves: new node, closed; integrality of a connected regular scheme: new node, closed; the generic comparison in degree 2; the generic second cohomology vanishes); 2 tool uses accepted; 2 new nodes, both closed on slopmaster2; isTorsion_upperStar attached to lem-weil-pbc-inverse-image-torsion",
+ "lean": {
+  "module": "WeilConjectures.AlgebraicGeometry.Curve.CohomologicalDimension",
+  "declaration": "AlgebraicGeometry.IsCurve.subsingleton_sheafH_two_of_isAffine",
+  "branch": "slopmaster2",
+  "line": 386,
+  "declarations": [
+   "AlgebraicGeometry.IsCurve.subsingleton_sheafH_two_of_isAffine"
+  ],
+  "sorry_free": false,
+  "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state rests_on_sorry)"
+ }
 }

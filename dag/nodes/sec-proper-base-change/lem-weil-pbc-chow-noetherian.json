@@ -1,358 +1,358 @@
 {
-  "id": "lem-weil-pbc-chow-noetherian",
-  "blueprint": {
-    "is": null,
-    "from": {
-      "node": "thm-weil-pbc-finite-etale-lifting",
-      "place": "step 7 of its split (source: Lemma 0GS2, proof: the essential-surjectivity paragraphs)",
-      "via": [
-        "prop-weil-pbc-grothendieck-existence",
-        "lem-weil-pbc-algebraize-finite-over-proper",
-        "lem-weil-pbc-finite-etale-lifting-complete",
-        "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
-      ]
-    },
-    "same_as": null
+ "id": "lem-weil-pbc-chow-noetherian",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "step 7 of its split (source: Lemma 0GS2, proof: the essential-surjectivity paragraphs)",
+   "via": [
+    "prop-weil-pbc-grothendieck-existence",
+    "lem-weil-pbc-algebraize-finite-over-proper",
+    "lem-weil-pbc-finite-etale-lifting-complete",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
   },
-  "kind": "statement",
-  "title": "Chow's lemma over a Noetherian base",
-  "statement": "Let $S$ be a Noetherian scheme and $f:X\\to S$ a separated morphism of finite type [def-weil-proper-morphism, def-weil-finite-type-morphism]. Then there exist an integer $n\\ge0$, a scheme $X'$, a morphism $\\pi:X'\\to X$ which is proper [def-weil-proper-morphism] and surjective [def-weil-surjective-morphism], and an immersion $X'\\to\\mathbf P^n_S$ [def-weil-closed-immersion] into $\\mathbf P^n_S=S\\times_{\\operatorname{Spec}\\mathbf Z}\\mathbf P^n_{\\mathbf Z}$ [def-nagata-projective-space-base-change] such that the composite $X'\\to\\mathbf P^n_S\\to S$ equals $f\\circ\\pi$; moreover these can be chosen so that there is a dense open subscheme $U\\subseteq X$ with $\\pi^{-1}(U)\\to U$ an isomorphism.",
-  "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Cohomology of Schemes, Lemma 0200 (lemma-chow-Noetherian), Section 'Chow's Lemma'; EGA II Theorem 5.6.1(a)"
-  },
-  "stmt_deps": [
-    "def-weil-proper-morphism",
-    "def-weil-finite-type-morphism",
-    "def-weil-surjective-morphism",
-    "def-weil-closed-immersion",
-    "def-nagata-projective-space-base-change"
-  ],
-  "proof": [
-    {
-      "text": "*Noetherian conventions.* Every scheme $T$ occurring below comes with a morphism $T\\to S$ of finite type: $X$ by hypothesis, the projective spaces $\\mathbf P^r_S$ and their closed subschemes because they are proper over $S$ [lemma-nagata-projective-space-base-change-proper, lem-weil-pbc-proper-fp-permanence] (c),(a), and open subschemes $W\\subseteq T$ of these, which are quasi-compact in all cases where we use them (see below) and locally of finite type over $T$ (an open immersion is locally of finite type) [lem-weil-pbc-proper-fp-permanence] (e). Hence each such $T$ that is quasi-compact is Noetherian [lem-weil-pbc-finite-type-over-noetherian], so quasi-separated [lem-weil-pbc-locally-noetherian-quasi-separated]; an open subscheme of a quasi-separated scheme is quasi-separated, and an intersection of finitely many quasi-compact opens of a quasi-separated scheme is quasi-compact [def-weil-pbc-scheme-conventions]. A morphism from a quasi-compact scheme to a quasi-separated scheme is quasi-compact [lem-weil-pbc-qcqs-morphism-permanence] (1). If $X=\\emptyset$ take $X'=\\emptyset$, $n=0$, $U=\\emptyset$; so assume $X\\neq\\emptyset$.",
-      "uses": [
-        "lemma-nagata-projective-space-base-change-proper",
-        "lem-weil-pbc-proper-fp-permanence",
-        "lem-weil-pbc-finite-type-over-noetherian",
-        "lem-weil-pbc-locally-noetherian-quasi-separated",
-        "def-weil-pbc-scheme-conventions",
-        "lem-weil-pbc-qcqs-morphism-permanence"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/coherent.tex",
-        "place": "Cohomology of Schemes, Lemma 0200 (lemma-chow-Noetherian), proof, first paragraph (Morphisms 01T6, 01T8; Properties 01OY, 01P0)"
-      }
-    },
-    {
-      "text": "*An affine cover through the generic points.* $X$ is Noetherian (step 1), hence has finitely many irreducible components [lem-weil-pbc-noetherian-finitely-many-components] and is quasi-compact and quasi-separated. By [lemma-nagata-dense-affine-cover-exists] (Stacks Properties 01ZX applied at each point, plus quasi-compactness) there is a finite affine open covering $X=U_1\\cup\\dots\\cup U_m$, $m\\ge1$, such that every $U_i$ contains all generic points of the irreducible components of $X$, and $U:=U_1\\cap\\dots\\cap U_m$ is a dense open of $X$. $U$ is quasi-compact, as a finite intersection of affine opens in the quasi-separated $X$ (step 1).",
-      "uses": [
-        "lem-weil-pbc-noetherian-finitely-many-components",
-        "lemma-nagata-dense-affine-cover-exists",
-        "def-weil-pbc-scheme-conventions"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/coherent.tex",
-        "place": "Cohomology of Schemes, Lemma 0200 (lemma-chow-Noetherian), proof, second paragraph (Properties 0BA8, 01ZX)"
-      }
-    },
-    {
-      "text": "*Reduction to $U$ scheme-theoretically dense.* Let $c:X^*\\to X$ be the scheme-theoretic closure of $U$ in $X$ and $U_i^*=X^*\\cap U_i$. By [lem-chow-scheme-theoretic-closure] $c$ is a surjective closed immersion and an isomorphism over $U$, $U$ is scheme-theoretically dense in $X^*$, each $U_i^*$ is affine and $U_1^*\\cap\\dots\\cap U_m^*=U$. The composite $f\\circ c$ is separated and of finite type (a closed immersion is proper [lem-weil-pbc-proper-fp-permanence] (c), composites (a),(e)), and $U$ is dense in $X^*$ (its closure in $X^*$ is $X^*\\cap\\overline U=X^*$). Suppose the conclusion is proved for $f\\circ c$ with the cover $(U_i^*)$, with dense open $U$: a proper surjective $\\pi^*:X'\\to X^*$, an immersion $\\iota:X'\\to\\mathbf P^n_S$ with $p\\circ\\iota=f\\circ c\\circ\\pi^*$, and $(\\pi^*)^{-1}(U)\\to U$ an isomorphism. Then $\\pi=c\\circ\\pi^*$ is proper [lem-weil-pbc-proper-fp-permanence] (a),(c) and surjective (a composite of surjective maps [def-weil-surjective-morphism]), $p\\circ\\iota=f\\circ\\pi$, and $\\pi^{-1}(U)=(\\pi^*)^{-1}(c^{-1}(U))\\to c^{-1}(U)\\to U$ is a composite of two isomorphisms. So from now on $U$ is scheme-theoretically dense in $X$.",
-      "uses": [
-        "lem-chow-scheme-theoretic-closure",
-        "lem-weil-pbc-proper-fp-permanence",
-        "def-weil-surjective-morphism"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/coherent.tex",
-        "place": "Cohomology of Schemes, Lemma 0200 (lemma-chow-Noetherian), proof, third paragraph (Morphisms 01R7, 01RB)"
-      }
-    },
-    {
-      "text": "*Conventions on scheme-theoretic density.* Let $w:W\\to T$ be a quasi-compact open immersion. By [lem-weil-pbc-scheme-image-qc-kernel] (1) the ideal of the scheme-theoretic image of $w$ [def-nagata-scheme-theoretic-image] on an affine open $V\\subseteq T$ is $\\ker(\\mathcal O_T(V)\\to\\mathcal O_W(W\\cap V))$; so $W$ is scheme-theoretically dense in $T$ (its scheme-theoretic image is $T$) iff $\\mathcal O_T\\to w_*\\mathcal O_W$ is injective, i.e. iff $w$ is scheme-theoretically dense in the sense of [def-nagata-scheme-theoretically-dense-open] (scheme-theoretically dominant). Injectivity of a map of sheaves is inherited by restriction to an open $T'\\subseteq T$; hence if $W\\subseteq T$ is scheme-theoretically dense and $T'\\subseteq T$ is open with $W\\subseteq T'$, and $W\\to T'$ is quasi-compact, then $W$ is scheme-theoretically dense in $T'$. In what follows $W$ will be $U$, which is quasi-compact, and $T'$ will be an open subscheme of a Noetherian scheme, which is quasi-separated, so $W\\to T'$ is quasi-compact (step 1).",
-      "uses": [
-        "lem-weil-pbc-scheme-image-qc-kernel",
-        "def-nagata-scheme-theoretic-image",
-        "def-nagata-scheme-theoretically-dense-open",
-        "lem-weil-pbc-qcqs-morphism-permanence"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/coherent.tex",
-        "place": "Cohomology of Schemes, Lemma 0200 (lemma-chow-Noetherian), proof, fifth paragraph ('it is also scheme theoretically dense in the open subscheme'; Morphisms 01RB, 01R8)"
-      }
-    },
-    {
-      "text": "*Immersions of the $U_i$ into projective spaces.* Each $U_i$ is affine, hence quasi-affine, and $U_i\\to X\\xrightarrow{f}S$ is locally of finite type [lem-weil-pbc-proper-fp-permanence] (e). By [lemma-nagata-quasi-affine-immersion-affine-space-exists] there is an immersion $U_i\\to\\mathbb A^{n_i}_S$ over $S$, and composing it with the open immersion $\\mathbb A^{n_i}_S\\hookrightarrow\\mathbf P^{n_i}_S$ over $S$ of [lemma-nagata-relative-affine-space-open-immersion] gives an immersion $j_i:U_i\\to\\mathbf P^{n_i}_S$ over $S$ (composite of immersions [lem-weil-pbc-proper-fp-permanence] (e)), where $\\mathbf P^{n_i}_S$ is the projective space of [def-nagata-projective-space-base-change]. (Stacks obtains $j_i$ from Morphisms 01VS, $\\mathcal O_{U_i}$ being ample on the affine $U_i$; the closed nodes used here give the same conclusion.) Since $U_i$ is quasi-compact and $\\mathbf P^{n_i}_S$ is Noetherian, hence quasi-separated (step 1), $j_i$ is quasi-compact.",
-      "uses": [
-        "lem-weil-pbc-proper-fp-permanence",
-        "lemma-nagata-quasi-affine-immersion-affine-space-exists",
-        "lemma-nagata-relative-affine-space-open-immersion",
-        "def-nagata-projective-space-base-change",
-        "lem-weil-pbc-qcqs-morphism-permanence"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/coherent.tex",
-        "place": "Cohomology of Schemes, Lemma 0200 (lemma-chow-Noetherian), proof, fourth paragraph, first sentence (Morphisms 01VS)"
-      }
-    },
-    {
-      "text": "*Closed models $Z_i$.* Apply [lemma-nagata-immersion-open-in-scheme-image] to the quasi-compact immersion $j_i$: with $Z_i:=\\operatorname{SIm}(j_i)\\subseteq\\mathbf P^{n_i}_S$ its scheme-theoretic image [def-nagata-scheme-theoretic-image], a closed subscheme, $j_i$ factors as $U_i\\xrightarrow{j_i^{\\mathrm{im}}}Z_i\\hookrightarrow\\mathbf P^{n_i}_S$ with $j_i^{\\mathrm{im}}$ a quasi-compact open immersion. We identify $U_i$ with the open subscheme $j_i^{\\mathrm{im}}(U_i)$ of $Z_i$. $Z_i\\to S$ is proper: the closed immersion $Z_i\\to\\mathbf P^{n_i}_S$ is proper and $\\mathbf P^{n_i}_S\\to S$ is proper [lem-weil-pbc-proper-fp-permanence] (a),(c), [lemma-nagata-projective-space-base-change-proper].",
-      "uses": [
-        "lemma-nagata-immersion-open-in-scheme-image",
-        "def-nagata-scheme-theoretic-image",
-        "lem-weil-pbc-proper-fp-permanence",
-        "lemma-nagata-projective-space-base-change-proper"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/coherent.tex",
-        "place": "Cohomology of Schemes, Lemma 0200 (lemma-chow-Noetherian), proof, fourth paragraph, second and third sentences (Morphisms 01RG, 01WC)"
-      }
-    },
-    {
-      "text": "*The product and the Segre embedding.* Put $P:=\\mathbf P^{n_1}_S\\times_S\\dots\\times_S\\mathbf P^{n_m}_S$ [def-pc-fibre-product] with projections $\\mathrm{pr}_i:P\\to\\mathbf P^{n_i}_S$, and $N:=\\prod_i(n_i+1)-1$. By [lem-chow-segre] the Segre morphism $\\mathbf P^a_S\\times_S\\mathbf P^b_S\\to\\mathbf P^{(a+1)(b+1)-1}_S$ is a closed immersion; by induction on $m$, using that a base change of a closed immersion (here along a projection of a fibre product over $S$) is a closed immersion and composites of closed immersions are closed immersions [lem-weil-pbc-proper-fp-permanence] (b),(e), there is a closed immersion $\\sigma:P\\to\\mathbf P^N_S$ over $S$. Hence $P\\to S$ is proper [lem-weil-pbc-proper-fp-permanence] (a),(c), [lemma-nagata-projective-space-base-change-proper], so $P$ is Noetherian (step 1).",
-      "uses": [
-        "def-pc-fibre-product",
-        "lem-chow-segre",
-        "lem-weil-pbc-proper-fp-permanence",
-        "lemma-nagata-projective-space-base-change-proper"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/coherent.tex",
-        "place": "Cohomology of Schemes, Lemma 0200 (lemma-chow-Noetherian), proof, sixth paragraph, last two sentences (Constructions 01WD)"
-      }
-    },
-    {
-      "text": "*The diagonal model $Z$.* Let $j=(j_1|_U,\\dots,j_m|_U):U\\to P$. Since $j_1|_U$ is the composite of the open immersion $U\\subseteq U_1$ with the immersion $j_1$, it is an immersion [lem-weil-pbc-proper-fp-permanence] (e), so $j$ is an immersion by [lem-chow-tuple-immersion]; it is quasi-compact since $U$ is quasi-compact and $P$ quasi-separated [lem-weil-pbc-qcqs-morphism-permanence] (1). By [lemma-nagata-immersion-open-in-scheme-image], with $Z:=\\operatorname{SIm}(j)\\subseteq P$ [def-nagata-scheme-theoretic-image], $j$ factors as $U\\xrightarrow{j^{\\mathrm{im}}}Z\\hookrightarrow P$ with $j^{\\mathrm{im}}$ a quasi-compact open immersion whose image is scheme-theoretically dense in $Z$; we identify $U$ with this open subscheme of $Z$. $Z\\to S$ is proper (closed immersion followed by the proper $P\\to S$, [lem-weil-pbc-proper-fp-permanence] (a),(c)), so $Z$ is Noetherian, hence quasi-separated (step 1).",
-      "uses": [
-        "lem-weil-pbc-proper-fp-permanence",
-        "lem-chow-tuple-immersion",
-        "lem-weil-pbc-qcqs-morphism-permanence",
-        "lemma-nagata-immersion-open-in-scheme-image",
-        "def-nagata-scheme-theoretic-image"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/coherent.tex",
-        "place": "Cohomology of Schemes, Lemma 0200 (lemma-chow-Noetherian), proof, fourth paragraph, display of $j$ and the sentence after it (Morphisms 01RG)"
-      }
-    },
-    {
-      "text": "*The projections $p_i:Z\\to Z_i$.* Let $Z_i':=\\mathrm{pr}_i^{-1}(Z_i)=Z_i\\times_{\\mathbf P^{n_i}_S}P$, a closed subscheme of $P$ (base change of a closed immersion [lem-weil-pbc-proper-fp-permanence] (b), [def-pc-fibre-product]). Since $\\mathrm{pr}_i\\circ j=j_i|_U$ factors through $Z_i$, $j$ factors through $Z_i'$ by the universal property of the fibre product; hence every local section of the ideal of $Z_i'$ is killed by $j^\\#$, i.e. the ideal of $Z'_i$ is contained in $\\ker(\\mathcal O_P\\to j_*\\mathcal O_U)$, which is the ideal of $Z$ by [lem-weil-pbc-scheme-image-qc-kernel] (1). Applying [lem-weil-pbc-scheme-image-qc-kernel] (2) to the quasi-compact closed immersion $Z\\to P$ (whose kernel ideal is the ideal of $Z$) shows that $Z\\to P$ factors through $Z'_i$. Hence $\\mathrm{pr}_i|_Z$ factors through $Z_i$: there is $p_i:Z\\to Z_i$ with $(Z_i\\hookrightarrow\\mathbf P^{n_i}_S)\\circ p_i=\\mathrm{pr}_i|_Z$, a morphism over $S$. Composed with the closed immersion $Z_i\\hookrightarrow\\mathbf P^{n_i}_S$, which is a monomorphism ([lem-weil-pbc-scheme-image-qc-kernel] (2), uniqueness), both $p_i|_U$ and $U\\subseteq U_i\\subseteq Z_i$ give $j_i|_U$; so $p_i|_U$ is the inclusion $U\\subseteq U_i$. Finally $p_i$ is proper by [lem-weil-pbc-proper-over-separated], since $Z\\to S$ is proper and $Z_i\\to S$ is separated (step 6).",
-      "uses": [
-        "lem-weil-pbc-proper-fp-permanence",
-        "def-pc-fibre-product",
-        "lem-weil-pbc-scheme-image-qc-kernel",
-        "lem-weil-pbc-proper-over-separated"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/coherent.tex",
-        "place": "Cohomology of Schemes, Lemma 0200 (lemma-chow-Noetherian), proof, fourth paragraph, from 'Consider the $i$th projection' to 'for example' (Morphisms 01R9, 01W6)"
-      }
-    },
-    {
-      "text": "*The scheme $X'$ and its immersion.* Put $V_i:=p_i^{-1}(U_i)\\subseteq Z$, open, and $X':=V_1\\cup\\dots\\cup V_m$, an open subscheme of $Z$; by step 9, $U\\subseteq V_i$ for every $i$, so $U\\subseteq X'$. The composite $\\iota:X'\\hookrightarrow Z\\hookrightarrow P\\xrightarrow{\\sigma}\\mathbf P^N_S$ of an open immersion and two closed immersions is an immersion over $S$ [lem-weil-pbc-proper-fp-permanence] (e) [def-weil-closed-immersion]; set $n:=N$. Moreover $p_i|_{V_i}:V_i\\to U_i$ is the base change of the proper $p_i$ along the open immersion $U_i\\subseteq Z_i$ ($V_i=U_i\\times_{Z_i}Z$), hence proper [lem-weil-pbc-proper-fp-permanence] (b).",
-      "uses": [
-        "lem-weil-pbc-proper-fp-permanence",
-        "def-weil-closed-immersion"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/coherent.tex",
-        "place": "Cohomology of Schemes, Lemma 0200 (lemma-chow-Noetherian), proof, fifth paragraph"
-      }
-    },
-    {
-      "text": "*Gluing to $\\pi:X'\\to X$.* For each $i$ let $q_i:V_i\\to X$ be $p_i|_{V_i}$ followed by the inclusion $U_i\\subseteq X$; it is a morphism over $S$, because $j_i$ is over $S$ and $p_i$ is over $S$. For $i,k$ the open $V_i\\cap V_k\\subseteq Z$ contains $U$, and $U$ is scheme-theoretically dense in it (step 8 and step 4). The two morphisms $q_i|_{V_i\\cap V_k}$, $q_k|_{V_i\\cap V_k}$ into $X$ are morphisms over $S$, $f$ is separated, and both restrict on $U$ to the inclusion $U\\subseteq X$ (step 9); by [lemma-nagata-ext-scheme-theoretically-dominant-separated] they are equal. Since morphisms of schemes glue along an open cover of the source, there is a unique $\\pi:X'\\to X$ with $\\pi|_{V_i}=q_i$; $\\pi|_U$ is the inclusion $U\\subseteq X$, and $f\\circ\\pi$ is the structure morphism $X'\\to S$, which equals $p\\circ\\iota$ with $p:\\mathbf P^N_S\\to S$ since all morphisms of step 10 are over $S$.",
-      "uses": [
-        "lemma-nagata-ext-scheme-theoretically-dominant-separated"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/coherent.tex",
-        "place": "Cohomology of Schemes, Lemma 0200 (lemma-chow-Noetherian), proof, sixth paragraph (Morphisms 01RH)"
-      }
-    },
-    {
-      "text": "*$\\pi$ is separated, and $\\pi^{-1}(U_i)=V_i$.* $X'\\to S$ is separated: it is the open immersion $X'\\subseteq Z$, separated by [lem-weil-pbc-separated-cancellation] (a), followed by the proper, hence separated, $Z\\to S$ (composite [lem-weil-pbc-proper-fp-permanence] (e)). As $f\\circ\\pi$ is this morphism, $\\pi$ is separated [lem-weil-pbc-separated-cancellation] (b); likewise the restriction $\\pi_i:\\pi^{-1}(U_i)\\to U_i$ is separated, since $(U_i\\subseteq X)\\circ\\pi_i=\\pi\\circ(\\pi^{-1}(U_i)\\subseteq X')$ is a composite of separated morphisms. As $\\pi|_{V_i}=q_i$ lands in $U_i$, $V_i\\subseteq\\pi^{-1}(U_i)$; let $e_i:V_i\\to\\pi^{-1}(U_i)$ be the open immersion. Then $\\pi_i\\circ e_i=p_i|_{V_i}$ is proper (step 10) and $\\pi_i$ is separated, so $e_i$ is proper [lem-weil-pbc-proper-over-separated]. The image of $e_i$ contains $U$, which is scheme-theoretically dense in the open $\\pi^{-1}(U_i)$ of $Z$ (step 8 and step 4). By [lemma-nagata-proper-open-dense-iso] $e_i$ is an isomorphism: $V_i=\\pi^{-1}(U_i)$, and $\\pi^{-1}(U_i)\\to U_i$ is the proper morphism $p_i|_{V_i}$.",
-      "uses": [
-        "lem-weil-pbc-separated-cancellation",
-        "lem-weil-pbc-proper-fp-permanence",
-        "lem-weil-pbc-proper-over-separated",
-        "lemma-nagata-proper-open-dense-iso"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/coherent.tex",
-        "place": "Cohomology of Schemes, Lemma 0200 (lemma-chow-Noetherian), proof, seventh paragraph (Morphisms 01W6)"
-      }
-    },
-    {
-      "text": "*$\\pi$ is proper.* The $U_i$ form an open cover of $X$ and each restriction $\\pi^{-1}(U_i)\\to U_i$ is proper (step 12); by [lemma-nagata-projective-target-local] $\\pi$ is proper [def-weil-proper-morphism].",
-      "uses": [
-        "lemma-nagata-projective-target-local",
-        "def-weil-proper-morphism"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/coherent.tex",
-        "place": "Cohomology of Schemes, Lemma 0200 (lemma-chow-Noetherian), proof, eighth paragraph (Morphisms 01W2)"
-      }
-    },
-    {
-      "text": "*$\\pi^{-1}(U)\\to U$ is an isomorphism.* Since $\\pi|_U$ is the inclusion, $U\\subseteq\\pi^{-1}(U)$; let $e:U\\to\\pi^{-1}(U)$ be this open immersion and $\\pi_U:\\pi^{-1}(U)\\to U$ the restriction of $\\pi$, so $\\pi_U\\circ e=\\mathrm{id}_U$, which is proper (an isomorphism is a closed immersion [lem-weil-pbc-proper-fp-permanence] (c)). $\\pi_U$ is separated, as in step 12 [lem-weil-pbc-separated-cancellation], so $e$ is proper [lem-weil-pbc-proper-over-separated]. Its image $U$ is scheme-theoretically dense in the open $\\pi^{-1}(U)$ of $Z$ (steps 8, 4), so $e$ is an isomorphism by [lemma-nagata-proper-open-dense-iso], and $\\pi_U=e^{-1}$ is an isomorphism.",
-      "uses": [
-        "lem-weil-pbc-proper-fp-permanence",
-        "lem-weil-pbc-separated-cancellation",
-        "lem-weil-pbc-proper-over-separated",
-        "lemma-nagata-proper-open-dense-iso"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/coherent.tex",
-        "place": "Cohomology of Schemes, Lemma 0200 (lemma-chow-Noetherian), proof, last paragraph (Morphisms 01W6)"
-      }
-    },
-    {
-      "text": "*$\\pi$ is surjective, and conclusion.* $\\pi$ is proper, hence universally closed and in particular a closed map [def-weil-proper-morphism]; so $\\pi(X')$ is closed in $X$, and it contains $U$ ($\\pi|_U$ is the inclusion), which is dense in $X$ (step 2). Hence $\\pi(X')=X$: $\\pi$ is surjective [def-weil-surjective-morphism]. (Stacks leaves this to the reader.) Together, $n=N$, $X'$, the proper surjective $\\pi$, the immersion $\\iota:X'\\to\\mathbf P^n_S$ with $p\\circ\\iota=f\\circ\\pi$ (step 11) and the dense open $U$ with $\\pi^{-1}(U)\\to U$ an isomorphism (step 14) prove the lemma for $X$ with $U$ scheme-theoretically dense, hence in general by step 3.",
-      "uses": [
-        "def-weil-proper-morphism",
-        "def-weil-surjective-morphism"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/coherent.tex",
-        "place": "Cohomology of Schemes, Lemma 0200 (lemma-chow-Noetherian), proof, statement and end of proof (surjectivity is implicit in Stacks)"
-      }
-    }
-  ],
-  "proof_deps": [
+  "same_as": null
+ },
+ "kind": "statement",
+ "title": "Chow's lemma over a Noetherian base",
+ "statement": "Let $S$ be a Noetherian scheme and $f:X\\to S$ a separated morphism of finite type [def-weil-proper-morphism, def-weil-finite-type-morphism]. Then there exist an integer $n\\ge0$, a scheme $X'$, a morphism $\\pi:X'\\to X$ which is proper [def-weil-proper-morphism] and surjective [def-weil-surjective-morphism], and an immersion $X'\\to\\mathbf P^n_S$ [def-weil-closed-immersion] into $\\mathbf P^n_S=S\\times_{\\operatorname{Spec}\\mathbf Z}\\mathbf P^n_{\\mathbf Z}$ [def-nagata-projective-space-base-change] such that the composite $X'\\to\\mathbf P^n_S\\to S$ equals $f\\circ\\pi$; moreover these can be chosen so that there is a dense open subscheme $U\\subseteq X$ with $\\pi^{-1}(U)\\to U$ an isomorphism.",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Cohomology of Schemes, Lemma 0200 (lemma-chow-Noetherian), Section 'Chow's Lemma'; EGA II Theorem 5.6.1(a)"
+ },
+ "stmt_deps": [
+  "def-weil-proper-morphism",
+  "def-weil-finite-type-morphism",
+  "def-weil-surjective-morphism",
+  "def-weil-closed-immersion",
+  "def-nagata-projective-space-base-change"
+ ],
+ "proof": [
+  {
+   "text": "*Noetherian conventions.* Every scheme $T$ occurring below comes with a morphism $T\\to S$ of finite type: $X$ by hypothesis, the projective spaces $\\mathbf P^r_S$ and their closed subschemes because they are proper over $S$ [lemma-nagata-projective-space-base-change-proper, lem-weil-pbc-proper-fp-permanence] (c),(a), and open subschemes $W\\subseteq T$ of these, which are quasi-compact in all cases where we use them (see below) and locally of finite type over $T$ (an open immersion is locally of finite type) [lem-weil-pbc-proper-fp-permanence] (e). Hence each such $T$ that is quasi-compact is Noetherian [lem-weil-pbc-finite-type-over-noetherian], so quasi-separated [lem-weil-pbc-locally-noetherian-quasi-separated]; an open subscheme of a quasi-separated scheme is quasi-separated, and an intersection of finitely many quasi-compact opens of a quasi-separated scheme is quasi-compact [def-weil-pbc-scheme-conventions]. A morphism from a quasi-compact scheme to a quasi-separated scheme is quasi-compact [lem-weil-pbc-qcqs-morphism-permanence] (1). If $X=\\emptyset$ take $X'=\\emptyset$, $n=0$, $U=\\emptyset$; so assume $X\\neq\\emptyset$.",
+   "uses": [
     "lemma-nagata-projective-space-base-change-proper",
     "lem-weil-pbc-proper-fp-permanence",
     "lem-weil-pbc-finite-type-over-noetherian",
     "lem-weil-pbc-locally-noetherian-quasi-separated",
     "def-weil-pbc-scheme-conventions",
-    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-qcqs-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, Lemma 0200 (lemma-chow-Noetherian), proof, first paragraph (Morphisms 01T6, 01T8; Properties 01OY, 01P0)"
+   }
+  },
+  {
+   "text": "*An affine cover through the generic points.* $X$ is Noetherian (step 1), hence has finitely many irreducible components [lem-weil-pbc-noetherian-finitely-many-components] and is quasi-compact and quasi-separated. By [lemma-nagata-dense-affine-cover-exists] (Stacks Properties 01ZX applied at each point, plus quasi-compactness) there is a finite affine open covering $X=U_1\\cup\\dots\\cup U_m$, $m\\ge1$, such that every $U_i$ contains all generic points of the irreducible components of $X$, and $U:=U_1\\cap\\dots\\cap U_m$ is a dense open of $X$. $U$ is quasi-compact, as a finite intersection of affine opens in the quasi-separated $X$ (step 1).",
+   "uses": [
     "lem-weil-pbc-noetherian-finitely-many-components",
     "lemma-nagata-dense-affine-cover-exists",
+    "def-weil-pbc-scheme-conventions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, Lemma 0200 (lemma-chow-Noetherian), proof, second paragraph (Properties 0BA8, 01ZX)"
+   }
+  },
+  {
+   "text": "*Reduction to $U$ scheme-theoretically dense.* Let $c:X^*\\to X$ be the scheme-theoretic closure of $U$ in $X$ and $U_i^*=X^*\\cap U_i$. By [lem-chow-scheme-theoretic-closure] $c$ is a surjective closed immersion and an isomorphism over $U$, $U$ is scheme-theoretically dense in $X^*$, each $U_i^*$ is affine and $U_1^*\\cap\\dots\\cap U_m^*=U$. The composite $f\\circ c$ is separated and of finite type (a closed immersion is proper [lem-weil-pbc-proper-fp-permanence] (c), composites (a),(e)), and $U$ is dense in $X^*$ (its closure in $X^*$ is $X^*\\cap\\overline U=X^*$). Suppose the conclusion is proved for $f\\circ c$ with the cover $(U_i^*)$, with dense open $U$: a proper surjective $\\pi^*:X'\\to X^*$, an immersion $\\iota:X'\\to\\mathbf P^n_S$ with $p\\circ\\iota=f\\circ c\\circ\\pi^*$, and $(\\pi^*)^{-1}(U)\\to U$ an isomorphism. Then $\\pi=c\\circ\\pi^*$ is proper [lem-weil-pbc-proper-fp-permanence] (a),(c) and surjective (a composite of surjective maps [def-weil-surjective-morphism]), $p\\circ\\iota=f\\circ\\pi$, and $\\pi^{-1}(U)=(\\pi^*)^{-1}(c^{-1}(U))\\to c^{-1}(U)\\to U$ is a composite of two isomorphisms. So from now on $U$ is scheme-theoretically dense in $X$.",
+   "uses": [
     "lem-chow-scheme-theoretic-closure",
-    "def-weil-surjective-morphism",
+    "lem-weil-pbc-proper-fp-permanence",
+    "def-weil-surjective-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, Lemma 0200 (lemma-chow-Noetherian), proof, third paragraph (Morphisms 01R7, 01RB)"
+   }
+  },
+  {
+   "text": "*Conventions on scheme-theoretic density.* Let $w:W\\to T$ be a quasi-compact open immersion. By [lem-weil-pbc-scheme-image-qc-kernel] (1) the ideal of the scheme-theoretic image of $w$ [def-nagata-scheme-theoretic-image] on an affine open $V\\subseteq T$ is $\\ker(\\mathcal O_T(V)\\to\\mathcal O_W(W\\cap V))$; so $W$ is scheme-theoretically dense in $T$ (its scheme-theoretic image is $T$) iff $\\mathcal O_T\\to w_*\\mathcal O_W$ is injective, i.e. iff $w$ is scheme-theoretically dense in the sense of [def-nagata-scheme-theoretically-dense-open] (scheme-theoretically dominant). Injectivity of a map of sheaves is inherited by restriction to an open $T'\\subseteq T$; hence if $W\\subseteq T$ is scheme-theoretically dense and $T'\\subseteq T$ is open with $W\\subseteq T'$, and $W\\to T'$ is quasi-compact, then $W$ is scheme-theoretically dense in $T'$. In what follows $W$ will be $U$, which is quasi-compact, and $T'$ will be an open subscheme of a Noetherian scheme, which is quasi-separated, so $W\\to T'$ is quasi-compact (step 1).",
+   "uses": [
     "lem-weil-pbc-scheme-image-qc-kernel",
     "def-nagata-scheme-theoretic-image",
     "def-nagata-scheme-theoretically-dense-open",
+    "lem-weil-pbc-qcqs-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, Lemma 0200 (lemma-chow-Noetherian), proof, fifth paragraph ('it is also scheme theoretically dense in the open subscheme'; Morphisms 01RB, 01R8)"
+   }
+  },
+  {
+   "text": "*Immersions of the $U_i$ into projective spaces.* Each $U_i$ is affine, hence quasi-affine, and $U_i\\to X\\xrightarrow{f}S$ is locally of finite type [lem-weil-pbc-proper-fp-permanence] (e). By [lemma-nagata-quasi-affine-immersion-affine-space-exists] there is an immersion $U_i\\to\\mathbb A^{n_i}_S$ over $S$, and composing it with the open immersion $\\mathbb A^{n_i}_S\\hookrightarrow\\mathbf P^{n_i}_S$ over $S$ of [lemma-nagata-relative-affine-space-open-immersion] gives an immersion $j_i:U_i\\to\\mathbf P^{n_i}_S$ over $S$ (composite of immersions [lem-weil-pbc-proper-fp-permanence] (e)), where $\\mathbf P^{n_i}_S$ is the projective space of [def-nagata-projective-space-base-change]. (Stacks obtains $j_i$ from Morphisms 01VS, $\\mathcal O_{U_i}$ being ample on the affine $U_i$; the closed nodes used here give the same conclusion.) Since $U_i$ is quasi-compact and $\\mathbf P^{n_i}_S$ is Noetherian, hence quasi-separated (step 1), $j_i$ is quasi-compact.",
+   "uses": [
+    "lem-weil-pbc-proper-fp-permanence",
     "lemma-nagata-quasi-affine-immersion-affine-space-exists",
     "lemma-nagata-relative-affine-space-open-immersion",
     "def-nagata-projective-space-base-change",
+    "lem-weil-pbc-qcqs-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, Lemma 0200 (lemma-chow-Noetherian), proof, fourth paragraph, first sentence (Morphisms 01VS)"
+   }
+  },
+  {
+   "text": "*Closed models $Z_i$.* Apply [lemma-nagata-immersion-open-in-scheme-image] to the quasi-compact immersion $j_i$: with $Z_i:=\\operatorname{SIm}(j_i)\\subseteq\\mathbf P^{n_i}_S$ its scheme-theoretic image [def-nagata-scheme-theoretic-image], a closed subscheme, $j_i$ factors as $U_i\\xrightarrow{j_i^{\\mathrm{im}}}Z_i\\hookrightarrow\\mathbf P^{n_i}_S$ with $j_i^{\\mathrm{im}}$ a quasi-compact open immersion. We identify $U_i$ with the open subscheme $j_i^{\\mathrm{im}}(U_i)$ of $Z_i$. $Z_i\\to S$ is proper: the closed immersion $Z_i\\to\\mathbf P^{n_i}_S$ is proper and $\\mathbf P^{n_i}_S\\to S$ is proper [lem-weil-pbc-proper-fp-permanence] (a),(c), [lemma-nagata-projective-space-base-change-proper].",
+   "uses": [
     "lemma-nagata-immersion-open-in-scheme-image",
+    "def-nagata-scheme-theoretic-image",
+    "lem-weil-pbc-proper-fp-permanence",
+    "lemma-nagata-projective-space-base-change-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, Lemma 0200 (lemma-chow-Noetherian), proof, fourth paragraph, second and third sentences (Morphisms 01RG, 01WC)"
+   }
+  },
+  {
+   "text": "*The product and the Segre embedding.* Put $P:=\\mathbf P^{n_1}_S\\times_S\\dots\\times_S\\mathbf P^{n_m}_S$ [def-pc-fibre-product] with projections $\\mathrm{pr}_i:P\\to\\mathbf P^{n_i}_S$, and $N:=\\prod_i(n_i+1)-1$. By [lem-chow-segre] the Segre morphism $\\mathbf P^a_S\\times_S\\mathbf P^b_S\\to\\mathbf P^{(a+1)(b+1)-1}_S$ is a closed immersion; by induction on $m$, using that a base change of a closed immersion (here along a projection of a fibre product over $S$) is a closed immersion and composites of closed immersions are closed immersions [lem-weil-pbc-proper-fp-permanence] (b),(e), there is a closed immersion $\\sigma:P\\to\\mathbf P^N_S$ over $S$. Hence $P\\to S$ is proper [lem-weil-pbc-proper-fp-permanence] (a),(c), [lemma-nagata-projective-space-base-change-proper], so $P$ is Noetherian (step 1).",
+   "uses": [
     "def-pc-fibre-product",
     "lem-chow-segre",
+    "lem-weil-pbc-proper-fp-permanence",
+    "lemma-nagata-projective-space-base-change-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, Lemma 0200 (lemma-chow-Noetherian), proof, sixth paragraph, last two sentences (Constructions 01WD)"
+   }
+  },
+  {
+   "text": "*The diagonal model $Z$.* Let $j=(j_1|_U,\\dots,j_m|_U):U\\to P$. Since $j_1|_U$ is the composite of the open immersion $U\\subseteq U_1$ with the immersion $j_1$, it is an immersion [lem-weil-pbc-proper-fp-permanence] (e), so $j$ is an immersion by [lem-chow-tuple-immersion]; it is quasi-compact since $U$ is quasi-compact and $P$ quasi-separated [lem-weil-pbc-qcqs-morphism-permanence] (1). By [lemma-nagata-immersion-open-in-scheme-image], with $Z:=\\operatorname{SIm}(j)\\subseteq P$ [def-nagata-scheme-theoretic-image], $j$ factors as $U\\xrightarrow{j^{\\mathrm{im}}}Z\\hookrightarrow P$ with $j^{\\mathrm{im}}$ a quasi-compact open immersion whose image is scheme-theoretically dense in $Z$; we identify $U$ with this open subscheme of $Z$. $Z\\to S$ is proper (closed immersion followed by the proper $P\\to S$, [lem-weil-pbc-proper-fp-permanence] (a),(c)), so $Z$ is Noetherian, hence quasi-separated (step 1).",
+   "uses": [
+    "lem-weil-pbc-proper-fp-permanence",
     "lem-chow-tuple-immersion",
-    "lem-weil-pbc-proper-over-separated",
-    "def-weil-closed-immersion",
-    "lemma-nagata-ext-scheme-theoretically-dominant-separated",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lemma-nagata-immersion-open-in-scheme-image",
+    "def-nagata-scheme-theoretic-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, Lemma 0200 (lemma-chow-Noetherian), proof, fourth paragraph, display of $j$ and the sentence after it (Morphisms 01RG)"
+   }
+  },
+  {
+   "text": "*The projections $p_i:Z\\to Z_i$.* Let $Z_i':=\\mathrm{pr}_i^{-1}(Z_i)=Z_i\\times_{\\mathbf P^{n_i}_S}P$, a closed subscheme of $P$ (base change of a closed immersion [lem-weil-pbc-proper-fp-permanence] (b), [def-pc-fibre-product]). Since $\\mathrm{pr}_i\\circ j=j_i|_U$ factors through $Z_i$, $j$ factors through $Z_i'$ by the universal property of the fibre product; hence every local section of the ideal of $Z_i'$ is killed by $j^\\#$, i.e. the ideal of $Z'_i$ is contained in $\\ker(\\mathcal O_P\\to j_*\\mathcal O_U)$, which is the ideal of $Z$ by [lem-weil-pbc-scheme-image-qc-kernel] (1). Applying [lem-weil-pbc-scheme-image-qc-kernel] (2) to the quasi-compact closed immersion $Z\\to P$ (whose kernel ideal is the ideal of $Z$) shows that $Z\\to P$ factors through $Z'_i$. Hence $\\mathrm{pr}_i|_Z$ factors through $Z_i$: there is $p_i:Z\\to Z_i$ with $(Z_i\\hookrightarrow\\mathbf P^{n_i}_S)\\circ p_i=\\mathrm{pr}_i|_Z$, a morphism over $S$. Composed with the closed immersion $Z_i\\hookrightarrow\\mathbf P^{n_i}_S$, which is a monomorphism ([lem-weil-pbc-scheme-image-qc-kernel] (2), uniqueness), both $p_i|_U$ and $U\\subseteq U_i\\subseteq Z_i$ give $j_i|_U$; so $p_i|_U$ is the inclusion $U\\subseteq U_i$. Finally $p_i$ is proper by [lem-weil-pbc-proper-over-separated], since $Z\\to S$ is proper and $Z_i\\to S$ is separated (step 6).",
+   "uses": [
+    "lem-weil-pbc-proper-fp-permanence",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-scheme-image-qc-kernel",
+    "lem-weil-pbc-proper-over-separated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, Lemma 0200 (lemma-chow-Noetherian), proof, fourth paragraph, from 'Consider the $i$th projection' to 'for example' (Morphisms 01R9, 01W6)"
+   }
+  },
+  {
+   "text": "*The scheme $X'$ and its immersion.* Put $V_i:=p_i^{-1}(U_i)\\subseteq Z$, open, and $X':=V_1\\cup\\dots\\cup V_m$, an open subscheme of $Z$; by step 9, $U\\subseteq V_i$ for every $i$, so $U\\subseteq X'$. The composite $\\iota:X'\\hookrightarrow Z\\hookrightarrow P\\xrightarrow{\\sigma}\\mathbf P^N_S$ of an open immersion and two closed immersions is an immersion over $S$ [lem-weil-pbc-proper-fp-permanence] (e) [def-weil-closed-immersion]; set $n:=N$. Moreover $p_i|_{V_i}:V_i\\to U_i$ is the base change of the proper $p_i$ along the open immersion $U_i\\subseteq Z_i$ ($V_i=U_i\\times_{Z_i}Z$), hence proper [lem-weil-pbc-proper-fp-permanence] (b).",
+   "uses": [
+    "lem-weil-pbc-proper-fp-permanence",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, Lemma 0200 (lemma-chow-Noetherian), proof, fifth paragraph"
+   }
+  },
+  {
+   "text": "*Gluing to $\\pi:X'\\to X$.* For each $i$ let $q_i:V_i\\to X$ be $p_i|_{V_i}$ followed by the inclusion $U_i\\subseteq X$; it is a morphism over $S$, because $j_i$ is over $S$ and $p_i$ is over $S$. For $i,k$ the open $V_i\\cap V_k\\subseteq Z$ contains $U$, and $U$ is scheme-theoretically dense in it (step 8 and step 4). The two morphisms $q_i|_{V_i\\cap V_k}$, $q_k|_{V_i\\cap V_k}$ into $X$ are morphisms over $S$, $f$ is separated, and both restrict on $U$ to the inclusion $U\\subseteq X$ (step 9); by [lemma-nagata-ext-scheme-theoretically-dominant-separated] they are equal. Since morphisms of schemes glue along an open cover of the source, there is a unique $\\pi:X'\\to X$ with $\\pi|_{V_i}=q_i$; $\\pi|_U$ is the inclusion $U\\subseteq X$, and $f\\circ\\pi$ is the structure morphism $X'\\to S$, which equals $p\\circ\\iota$ with $p:\\mathbf P^N_S\\to S$ since all morphisms of step 10 are over $S$.",
+   "uses": [
+    "lemma-nagata-ext-scheme-theoretically-dominant-separated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, Lemma 0200 (lemma-chow-Noetherian), proof, sixth paragraph (Morphisms 01RH)"
+   }
+  },
+  {
+   "text": "*$\\pi$ is separated, and $\\pi^{-1}(U_i)=V_i$.* $X'\\to S$ is separated: it is the open immersion $X'\\subseteq Z$, separated by [lem-weil-pbc-separated-cancellation] (a), followed by the proper, hence separated, $Z\\to S$ (composite [lem-weil-pbc-proper-fp-permanence] (e)). As $f\\circ\\pi$ is this morphism, $\\pi$ is separated [lem-weil-pbc-separated-cancellation] (b); likewise the restriction $\\pi_i:\\pi^{-1}(U_i)\\to U_i$ is separated, since $(U_i\\subseteq X)\\circ\\pi_i=\\pi\\circ(\\pi^{-1}(U_i)\\subseteq X')$ is a composite of separated morphisms. As $\\pi|_{V_i}=q_i$ lands in $U_i$, $V_i\\subseteq\\pi^{-1}(U_i)$; let $e_i:V_i\\to\\pi^{-1}(U_i)$ be the open immersion. Then $\\pi_i\\circ e_i=p_i|_{V_i}$ is proper (step 10) and $\\pi_i$ is separated, so $e_i$ is proper [lem-weil-pbc-proper-over-separated]. The image of $e_i$ contains $U$, which is scheme-theoretically dense in the open $\\pi^{-1}(U_i)$ of $Z$ (step 8 and step 4). By [lemma-nagata-proper-open-dense-iso] $e_i$ is an isomorphism: $V_i=\\pi^{-1}(U_i)$, and $\\pi^{-1}(U_i)\\to U_i$ is the proper morphism $p_i|_{V_i}$.",
+   "uses": [
     "lem-weil-pbc-separated-cancellation",
-    "lemma-nagata-proper-open-dense-iso",
+    "lem-weil-pbc-proper-fp-permanence",
+    "lem-weil-pbc-proper-over-separated",
+    "lemma-nagata-proper-open-dense-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, Lemma 0200 (lemma-chow-Noetherian), proof, seventh paragraph (Morphisms 01W6)"
+   }
+  },
+  {
+   "text": "*$\\pi$ is proper.* The $U_i$ form an open cover of $X$ and each restriction $\\pi^{-1}(U_i)\\to U_i$ is proper (step 12); by [lemma-nagata-projective-target-local] $\\pi$ is proper [def-weil-proper-morphism].",
+   "uses": [
     "lemma-nagata-projective-target-local",
     "def-weil-proper-morphism"
-  ],
-  "proof_origin": {
-    "by": "document",
+   ],
+   "elementary": false,
+   "source": {
     "document": "literature/stacks-project/coherent.tex",
-    "place": "Cohomology of Schemes, Lemma 0200 (lemma-chow-Noetherian), proof; EGA II 5.6.1(a)"
+    "place": "Cohomology of Schemes, Lemma 0200 (lemma-chow-Noetherian), proof, eighth paragraph (Morphisms 01W2)"
+   }
   },
-  "mathlib_searches": [
-    {
-      "tool": "leansearch",
-      "query": "Chow's lemma: separated finite type scheme over Noetherian base dominated by proper surjective morphism from quasi-projective scheme",
-      "results": "IsProper.of_valuativeCriterion, isProper_iff, isProper_eq, IsProper.of_comp_of_isSeparated (Mathlib.AlgebraicGeometry.Morphisms.Proper): no Chow lemma",
-      "date": "2026-10-10",
-      "verdict": "no match"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "Chow lemma: proper surjective morphism from quasi-projective scheme which is an isomorphism over a dense open",
-      "results": "Proj.instIsProperToSpecZero..., Proj.instUniversallyClosedToSpecZero... (Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Proper), IsProper.of_valuativeCriterion, IsProper, isProper_iff, AffineSpace surjectivity: no Chow lemma",
-      "date": "2026-10-10",
-      "verdict": "no match"
-    },
-    {
-      "tool": "grep",
-      "query": "grep -rlE 'Coherent|coherent' / 'Chow' / 'formal function|FormalFunction|Grothendieck existence|existence theorem' / 'Supp|support' / 'Serre' / 'ProperOver|proper over' / 'IsQuasicoherent' / 'annihilat' in ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry; ls ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Modules",
-      "results": "AlgebraicGeometry/Modules has only Presheaf.lean, Sheaf.lean, Tilde.lean (sheaves of modules, pullback/pushforward, tilde, IsQuasicoherent of tilde); 'coherent' only in comments of Tilde.lean and IdealSheaf/Basic.lean; no coherent modules, no Chow, no formal functions or existence theorem, no support of a sheaf of modules (only IdealSheafData.support), no Serre subcategories in AlgebraicGeometry, no 'proper over' for closed subsets",
-      "date": "2026-10-10",
-      "verdict": "no match"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "merged_into": null,
-  "created": {
-    "by": "worker",
-    "item": "prop-weil-pbc-grothendieck-existence",
-    "date": "2026-10-10"
-  },
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": [
-        "AlgebraicGeometry.ChowModification.nonempty_data"
-      ]
-    },
-    "slopmaster2": {
-      "state": "closed",
-      "decls": [
-        {
-          "name": "AlgebraicGeometry.ChowModification.nonempty_data",
-          "module": "WeilConjectures.AlgebraicGeometry.ChowLemma",
-          "lines": [
-            131,
-            236
-          ],
-          "kind": "theorem",
-          "sorry": false
-        }
-      ],
-      "missing": [],
-      "open": []
-    }
-  },
-  "chapter": "sec-proper-base-change",
-  "unit": "sk-thm-p1",
-  "split_report": {
-    "date": "2026-10-10",
-    "item": "lem-weil-pbc-chow-noetherian",
-    "worker": "stage1",
-    "summary": "Checked against Stacks 0200 (coherent.tex, lemma-chow-Noetherian) and its cited tags (verified in tags/tags: 01T6, 01T8, 01OY, 01P0, 0BA8, 01ZX, 01R7, 01RB, 01VS, 01RG, 01WC, 01R9, 01W6, 01WD, 01RH, 01W2). thm-chow-lemma does not state this item in the DAG (its statement, via lem-chow-glue/lem-chow-graph, has Y affine and X proper over Y and no immersion into a projective space), so the split follows the Stacks proof of 0200 in 15 steps, reusing closed nodes (lemma-nagata-dense-affine-cover-exists, lem-chow-scheme-theoretic-closure, lemma-nagata-quasi-affine-immersion-affine-space-exists, lemma-nagata-relative-affine-space-open-immersion, lem-chow-segre, lem-chow-tuple-immersion, lemma-nagata-ext-scheme-theoretically-dominant-separated), Mathlib leaves, and three generic lemmas of nagata units (lemma-nagata-immersion-open-in-scheme-image = 01RG, lemma-nagata-proper-open-dense-iso, lemma-nagata-projective-target-local = 01W2). New Mathlib leaves: lem-weil-pbc-noetherian-finitely-many-components (0BA8), lem-weil-pbc-separated-cancellation (01L7, 01KV). Surjectivity of pi, implicit in Stacks, is proved in the last step. Statement and stmt_deps kept. The closed Lean AlgebraicGeometry.ChowModification.nonempty_data (slopmaster2, attached to thm-chow-lemma) states exactly this item."
-  },
-  "tool_uses": [
-    "lemma-nagata-immersion-open-in-scheme-image",
-    "lemma-nagata-projective-target-local",
+  {
+   "text": "*$\\pi^{-1}(U)\\to U$ is an isomorphism.* Since $\\pi|_U$ is the inclusion, $U\\subseteq\\pi^{-1}(U)$; let $e:U\\to\\pi^{-1}(U)$ be this open immersion and $\\pi_U:\\pi^{-1}(U)\\to U$ the restriction of $\\pi$, so $\\pi_U\\circ e=\\mathrm{id}_U$, which is proper (an isomorphism is a closed immersion [lem-weil-pbc-proper-fp-permanence] (c)). $\\pi_U$ is separated, as in step 12 [lem-weil-pbc-separated-cancellation], so $e$ is proper [lem-weil-pbc-proper-over-separated]. Its image $U$ is scheme-theoretically dense in the open $\\pi^{-1}(U)$ of $Z$ (steps 8, 4), so $e$ is an isomorphism by [lemma-nagata-proper-open-dense-iso], and $\\pi_U=e^{-1}$ is an isomorphism.",
+   "uses": [
+    "lem-weil-pbc-proper-fp-permanence",
+    "lem-weil-pbc-separated-cancellation",
+    "lem-weil-pbc-proper-over-separated",
     "lemma-nagata-proper-open-dense-iso"
-  ],
-  "lean": {
-    "module": "WeilConjectures.AlgebraicGeometry.ChowLemma",
-    "declaration": "AlgebraicGeometry.ChowModification.nonempty_data",
-    "branch": "slopmaster2",
-    "line": 131,
-    "declarations": [
-      "AlgebraicGeometry.ChowModification.nonempty_data"
-    ],
-    "sorry_free": true,
-    "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state closed)"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, Lemma 0200 (lemma-chow-Noetherian), proof, last paragraph (Morphisms 01W6)"
+   }
   },
-  "lead_note": "tool_uses: lemma-nagata-immersion-open-in-scheme-image (01RG), lemma-nagata-proper-open-dense-iso, lemma-nagata-projective-target-local (01W2), generic lemmas of the Nagata units, attached by the lead at review. Lean attached (see lean).",
-  "reviewed": {
-    "date": "2026-10-10",
-    "by": "L",
-    "result": "pass",
-    "note": "Reviewed by the lead (opus-relaunch6). Fifteen steps along the proof of 0200 (surjectivity of pi written out), two new Mathlib leaves verified by line (0BA8: finite_irreducibleComponents_of_isNoetherian Noetherian.lean:364; immersions separated and cancellation 01L7/01KV: IsSeparated.of_comp Separated.lean:256, isSeparated_of_mono :61), the closed Nagata/Chow nodes used as tools and three imported Nagata lemmas recorded as tool uses. The worker correctly found that thm-chow-lemma is stated over an affine base with X proper and does not state this item. Lean: AlgebraicGeometry.ChowModification.nonempty_data (slopmaster2, sorry-free, @[stacks 0200]) states exactly this lemma through the structure Data f; attached, so the node is closed. Stage-3 notes: thm-chow-lemma, lem-chow-closed-model and lem-chow-affine-immersion are stated more narrowly than their Lean (affine base); lem-chow-agree-on-dense-open says 'separated scheme' where Stacks 01RH is relative."
+  {
+   "text": "*$\\pi$ is surjective, and conclusion.* $\\pi$ is proper, hence universally closed and in particular a closed map [def-weil-proper-morphism]; so $\\pi(X')$ is closed in $X$, and it contains $U$ ($\\pi|_U$ is the inclusion), which is dense in $X$ (step 2). Hence $\\pi(X')=X$: $\\pi$ is surjective [def-weil-surjective-morphism]. (Stacks leaves this to the reader.) Together, $n=N$, $X'$, the proper surjective $\\pi$, the immersion $\\iota:X'\\to\\mathbf P^n_S$ with $p\\circ\\iota=f\\circ\\pi$ (step 11) and the dense open $U$ with $\\pi^{-1}(U)\\to U$ an isomorphism (step 14) prove the lemma for $X$ with $U$ scheme-theoretically dense, hence in general by step 3.",
+   "uses": [
+    "def-weil-proper-morphism",
+    "def-weil-surjective-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, Lemma 0200 (lemma-chow-Noetherian), proof, statement and end of proof (surjectivity is implicit in Stacks)"
+   }
   }
+ ],
+ "proof_deps": [
+  "lemma-nagata-projective-space-base-change-proper",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "def-weil-pbc-scheme-conventions",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-noetherian-finitely-many-components",
+  "lemma-nagata-dense-affine-cover-exists",
+  "lem-chow-scheme-theoretic-closure",
+  "def-weil-surjective-morphism",
+  "lem-weil-pbc-scheme-image-qc-kernel",
+  "def-nagata-scheme-theoretic-image",
+  "def-nagata-scheme-theoretically-dense-open",
+  "lemma-nagata-quasi-affine-immersion-affine-space-exists",
+  "lemma-nagata-relative-affine-space-open-immersion",
+  "def-nagata-projective-space-base-change",
+  "lemma-nagata-immersion-open-in-scheme-image",
+  "def-pc-fibre-product",
+  "lem-chow-segre",
+  "lem-chow-tuple-immersion",
+  "lem-weil-pbc-proper-over-separated",
+  "def-weil-closed-immersion",
+  "lemma-nagata-ext-scheme-theoretically-dominant-separated",
+  "lem-weil-pbc-separated-cancellation",
+  "lemma-nagata-proper-open-dense-iso",
+  "lemma-nagata-projective-target-local",
+  "def-weil-proper-morphism"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Cohomology of Schemes, Lemma 0200 (lemma-chow-Noetherian), proof; EGA II 5.6.1(a)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Chow's lemma: separated finite type scheme over Noetherian base dominated by proper surjective morphism from quasi-projective scheme",
+   "results": "IsProper.of_valuativeCriterion, isProper_iff, isProper_eq, IsProper.of_comp_of_isSeparated (Mathlib.AlgebraicGeometry.Morphisms.Proper): no Chow lemma",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Chow lemma: proper surjective morphism from quasi-projective scheme which is an isomorphism over a dense open",
+   "results": "Proj.instIsProperToSpecZero..., Proj.instUniversallyClosedToSpecZero... (Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Proper), IsProper.of_valuativeCriterion, IsProper, isProper_iff, AffineSpace surjectivity: no Chow lemma",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rlE 'Coherent|coherent' / 'Chow' / 'formal function|FormalFunction|Grothendieck existence|existence theorem' / 'Supp|support' / 'Serre' / 'ProperOver|proper over' / 'IsQuasicoherent' / 'annihilat' in ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry; ls ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Modules",
+   "results": "AlgebraicGeometry/Modules has only Presheaf.lean, Sheaf.lean, Tilde.lean (sheaves of modules, pullback/pushforward, tilde, IsQuasicoherent of tilde); 'coherent' only in comments of Tilde.lean and IdealSheaf/Basic.lean; no coherent modules, no Chow, no formal functions or existence theorem, no support of a sheaf of modules (only IdealSheafData.support), no Serre subcategories in AlgebraicGeometry, no 'proper over' for closed subsets",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "prop-weil-pbc-grothendieck-existence",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.ChowModification.nonempty_data"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.ChowModification.nonempty_data",
+     "module": "WeilConjectures.AlgebraicGeometry.ChowLemma",
+     "lines": [
+      259,
+      282
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-chow-noetherian",
+  "worker": "stage1",
+  "summary": "Checked against Stacks 0200 (coherent.tex, lemma-chow-Noetherian) and its cited tags (verified in tags/tags: 01T6, 01T8, 01OY, 01P0, 0BA8, 01ZX, 01R7, 01RB, 01VS, 01RG, 01WC, 01R9, 01W6, 01WD, 01RH, 01W2). thm-chow-lemma does not state this item in the DAG (its statement, via lem-chow-glue/lem-chow-graph, has Y affine and X proper over Y and no immersion into a projective space), so the split follows the Stacks proof of 0200 in 15 steps, reusing closed nodes (lemma-nagata-dense-affine-cover-exists, lem-chow-scheme-theoretic-closure, lemma-nagata-quasi-affine-immersion-affine-space-exists, lemma-nagata-relative-affine-space-open-immersion, lem-chow-segre, lem-chow-tuple-immersion, lemma-nagata-ext-scheme-theoretically-dominant-separated), Mathlib leaves, and three generic lemmas of nagata units (lemma-nagata-immersion-open-in-scheme-image = 01RG, lemma-nagata-proper-open-dense-iso, lemma-nagata-projective-target-local = 01W2). New Mathlib leaves: lem-weil-pbc-noetherian-finitely-many-components (0BA8), lem-weil-pbc-separated-cancellation (01L7, 01KV). Surjectivity of pi, implicit in Stacks, is proved in the last step. Statement and stmt_deps kept. The closed Lean AlgebraicGeometry.ChowModification.nonempty_data (slopmaster2, attached to thm-chow-lemma) states exactly this item."
+ },
+ "tool_uses": [
+  "lemma-nagata-immersion-open-in-scheme-image",
+  "lemma-nagata-projective-target-local",
+  "lemma-nagata-proper-open-dense-iso"
+ ],
+ "lean": {
+  "module": "WeilConjectures.AlgebraicGeometry.ChowLemma",
+  "declaration": "AlgebraicGeometry.ChowModification.nonempty_data",
+  "branch": "slopmaster2",
+  "line": 131,
+  "declarations": [
+   "AlgebraicGeometry.ChowModification.nonempty_data"
+  ],
+  "sorry_free": true,
+  "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state closed)"
+ },
+ "lead_note": "tool_uses: lemma-nagata-immersion-open-in-scheme-image (01RG), lemma-nagata-proper-open-dense-iso, lemma-nagata-projective-target-local (01W2), generic lemmas of the Nagata units, attached by the lead at review. Lean attached (see lean).",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "pass",
+  "note": "Reviewed by the lead (opus-relaunch6). Fifteen steps along the proof of 0200 (surjectivity of pi written out), two new Mathlib leaves verified by line (0BA8: finite_irreducibleComponents_of_isNoetherian Noetherian.lean:364; immersions separated and cancellation 01L7/01KV: IsSeparated.of_comp Separated.lean:256, isSeparated_of_mono :61), the closed Nagata/Chow nodes used as tools and three imported Nagata lemmas recorded as tool uses. The worker correctly found that thm-chow-lemma is stated over an affine base with X proper and does not state this item. Lean: AlgebraicGeometry.ChowModification.nonempty_data (slopmaster2, sorry-free, @[stacks 0200]) states exactly this lemma through the structure Data f; attached, so the node is closed. Stage-3 notes: thm-chow-lemma, lem-chow-closed-model and lem-chow-affine-immersion are stated more narrowly than their Lean (affine base); lem-chow-agree-on-dense-open says 'separated scheme' where Stacks 01RH is relative."
+ }
 }

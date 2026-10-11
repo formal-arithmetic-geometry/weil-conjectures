@@ -1,423 +1,441 @@
 {
-  "id": "thm-sc-main",
-  "blueprint": {
-    "is": "thm-sc-main",
-    "from": null,
-    "same_as": null
-  },
-  "kind": "statement",
-  "title": "Smooth-curve calculations",
-  "statement": "Let $k$ be an algebraically closed field of characteristic exponent $p$ ($p=\\operatorname{char}k$ if $\\operatorname{char}k>0$), let $C$ be a smooth separated connected curve over $k$ ([def-sc-curves]), let $r$ be a prime number, and let $\\mathbf F_r=\\underline{\\mathbf Z/r\\mathbf Z}$ be the constant etale sheaf on $C_{\\Et}$ ([def-sc-constant-sheaves]). Then $(C,\\mathbf F_r)$ is a curve coefficient pair and $\\mathbf F_r$ is constructible ([def-weil-pbc-constructible-torsion]). Consider the assertions $\\mathcal C_1(C,\\mathbf F_r),\\dots,\\mathcal C_8(C,\\mathbf F_r)$ of [def-weil-pbc-eight-curve-assertions], each read for the single pair $(C,\\mathbf F_r)$ as an implication whose conclusion is asserted when its hypotheses (affine, proper, $p$-primary, constructible and prime to $p$) hold.\n\n1. **(a)** If $r\\neq\\operatorname{char}k$ (every prime when $\\operatorname{char}k=0$), then $\\mathbf F_r$ satisfies $\\mathcal C_1$, $\\mathcal C_4$, $\\mathcal C_6$ and $\\mathcal C_8$; it satisfies $\\mathcal C_2$ when $C$ is affine and $\\mathcal C_5$, $\\mathcal C_7$ when $C$ is proper. Explicitly, fix a primitive $r$-th root of unity $\\zeta\\in k$ and the trivialization $\\theta_\\zeta:\\mathbf F_r\\xrightarrow{\\sim}\\mu_r$ ([def-sc-mu-trivialization]). Then\n$$\nH^0(C_{\\Et},\\mathbf F_r)\\cong\\mathbf Z/r\\mathbf Z,\n$$\nthere is a short exact sequence\n$$\n0\\longrightarrow\\mathcal O_C(C)^\\times/\\mathcal O_C(C)^{\\times r}\n\\longrightarrow H^1(C_{\\Et},\\mathbf F_r)\n\\longrightarrow\\operatorname{Pic}(C)[r]\\longrightarrow0\n$$\n($\\operatorname{Pic}(C)$ as in [def-sc-picard-group]), and $H^2(C_{\\Et},\\mathbf F_r)=0$ if $C$ is affine. If $C$ is proper of genus $g$ ([def-sc-genus]),\n$$\nH^0(C_{\\Et},\\mathbf F_r)\\cong\\mathbf Z/r\\mathbf Z,\\quad\nH^1(C_{\\Et},\\mathbf F_r)\\cong(\\mathbf Z/r\\mathbf Z)^{2g},\\quad\nH^2(C_{\\Et},\\mathbf F_r)\\cong\\mathbf Z/r\\mathbf Z,\\quad\nH^q(C_{\\Et},\\mathbf F_r)=0\\ (q>2).\n$$\nThese groups do not change under algebraically closed field extension: for every extension $k\\subseteq k'$ of algebraically closed fields and every $q\\ge0$ the pullback map $\\rho^q_{k'/k}(C,\\mathbf F_r):H^q(C_{\\Et},\\mathbf F_r)\\to H^q((C_{k'})_{\\Et},\\mathbf F_r)$ of [def-sc-field-extension] is an isomorphism, and the pullback of $\\theta_\\zeta$ to $C_{k'}$ is $\\theta_{\\zeta'}$ for the image $\\zeta'$ of $\\zeta$ in $k'$, again a primitive $r$-th root of unity.\n1. **(b)** If $\\operatorname{char}k=p>0$ and $r=p$, then $\\mathbf F_p$ satisfies $\\mathcal C_1$, $\\mathcal C_3$ and $\\mathcal C_8$; it satisfies $\\mathcal C_2$ when $C$ is affine and $\\mathcal C_5$, $\\mathcal C_7$ when $C$ is proper.\n1. **(c)** The maps in $\\mathcal C_6$, $\\mathcal C_7$ and $\\mathcal C_8$ for $(C,\\mathbf F_r)$ are the pullback maps $\\rho^q_{k'/k}(C,\\mathbf F_r)$ of [def-weil-pbc-extension-pullback], which are those of [def-sc-field-extension], and the restriction maps $a^*:H^2(C_{\\Et},\\mathbf F_r)\\to H^2(U_{\\Et},a^{-1}\\mathbf F_r)$ along open immersions $a:U\\hookrightarrow C$, where $a^{-1}\\mathbf F_r$ is the constant sheaf $\\underline{\\mathbf Z/r\\mathbf Z}$ on $U_{\\Et}$.\n1. **(d)** Consequently, for every prime $r$, all eight assertions $\\mathcal C(C,\\mathbf F_r)$ of [def-weil-pbc-eight-curve-assertions] hold: in case (a) $\\mathcal C_3$ holds vacuously ($\\mathbf F_r$ is not $p$-primary, or $\\operatorname{char}k=0$), in case (b) $\\mathcal C_4$ and $\\mathcal C_6$ hold vacuously ($\\mathbf F_p$ is not prime to $p$), and $\\mathcal C_2$, $\\mathcal C_5$, $\\mathcal C_7$ hold vacuously when their hypothesis on $C$ fails.",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-p1/thm-sc-main.md",
-    "place": "node thm-sc-main, order 1120"
-  },
-  "stmt_deps": [
-    "def-sc-curves",
-    "def-sc-constant-sheaves",
-    "def-weil-pbc-constructible-torsion",
-    "def-weil-pbc-eight-curve-assertions",
-    "def-sc-mu-trivialization",
-    "def-sc-picard-group",
-    "def-sc-genus",
-    "def-sc-field-extension",
-    "def-weil-pbc-extension-pullback",
-    "def-weil-pbc-inverse-image"
-  ],
-  "proof": [
-    {
-      "text": "Setting and coefficient conditions. By [def-sc-curves], $C$ is a separated scheme of finite type over $k$ of dimension one, so $\\dim C\\le1$. The constant sheaf $\\mathbf F_r=\\underline{\\mathbf Z/r\\mathbf Z}$ ([def-sc-constant-sheaves]) is killed by $r$ (multiplication by $r$ is zero on the constant presheaf, hence on its sheafification), so every local section is killed by the positive integer $r$ and $\\mathbf F_r$ is torsion ([def-weil-pbc-etale-sheaves]); thus $(C,\\mathbf F_r)$ is a curve coefficient pair ([def-weil-pbc-curve-setting]). It is constructible ([def-weil-pbc-constructible-torsion]): take the partition of $C$ into the single stratum $C$ (locally closed and constructible), on which $\\mathbf F_r$ is constant, hence locally constant, with finite stalks $\\mathbf Z/r\\mathbf Z$. Its geometric stalks are $\\mathbf Z/r\\mathbf Z$ ([def-sc-constant-sheaves]), so by [def-weil-pbc-primary-torsion]: if $r\\neq\\operatorname{char}k$, every stalk element has order dividing the prime $r$, coprime to $p$, so $\\mathbf F_r$ is prime to $p$ (no condition in characteristic $0$), and it is not $p$-primary (the class of $1$ has order $r$, not a power of $p$); if $r=p=\\operatorname{char}k>0$, every stalk element is killed by $p$, so $\\mathbf F_p$ is $p$-primary, and it is not prime to $p$ (the class of $1$ has order $p$).",
-      "uses": [
-        "def-sc-curves",
-        "def-sc-constant-sheaves",
-        "def-weil-pbc-etale-sheaves",
-        "def-weil-pbc-curve-setting",
-        "def-weil-pbc-constructible-torsion",
-        "def-weil-pbc-primary-torsion"
-      ],
-      "elementary": true,
-      "source": {
-        "document": "literature/stacks-project/etale-cohomology.tex",
-        "place": "Situation 0A52 (Tag 0A52) and the statement of Lemma 0A5B (Tag 0A5B): F = Z/lZ on a smooth X"
-      }
-    },
-    {
-      "text": "The maps (part (c)). For the pair $(C,\\mathbf F_r)$ and an algebraically closed extension $k'/k$, [def-weil-pbc-extension-pullback] and [def-sc-field-extension] define the same map: both take $\\pi_{k'}:C_{k'}=C\\times_kk'\\to C$, $F_{k'}=\\pi_{k'}^{-1}\\mathbf F_r$, and the pullback map $H^q(C_{\\Et},\\mathbf F_r)\\to H^q((C_{k'})_{\\Et},F_{k'})$ in degree $q$; and $\\pi_{k'}^{-1}\\mathbf F_r$ is the constant sheaf $\\underline{\\mathbf Z/r\\mathbf Z}$ on $C_{k'}$, because inverse image ([def-weil-pbc-inverse-image]) is the sheafification of the presheaf inverse image, and the presheaf inverse image of a constant presheaf is the constant presheaf with the same value, so by left adjointness the sheafified pullback of the constant sheaf is the constant sheaf. This is the map of $\\mathcal C_6$ and $\\mathcal C_7$ ([def-weil-pbc-C6], [def-weil-pbc-C7]) and the map $\\rho^q_{k'/k}(C,\\mathbf F_r)$ in [lem-sc-c6] and [lem-sc-c7]. For an open immersion $a:U\\hookrightarrow C$, likewise $a^{-1}\\mathbf F_r$ is the constant sheaf $\\underline{\\mathbf Z/r\\mathbf Z}$ on $U_{\\Et}$, so the map $a^*:H^2(C_{\\Et},\\mathbf F_r)\\to H^2(U_{\\Et},a^{-1}\\mathbf F_r)$ of $\\mathcal C_8$ ([def-weil-pbc-C8]) is the restriction map $H^2(C_{\\Et},\\mathbf F_r)\\to H^2(U_{\\Et},\\mathbf F_r)$ of [lem-sc-c8]. Hence the conclusions of [lem-sc-c6], [lem-sc-c7], [lem-sc-c8] are literally the conclusions of $\\mathcal C_6$, $\\mathcal C_7$, $\\mathcal C_8$ for $(C,\\mathbf F_r)$, as listed in [def-weil-pbc-eight-curve-assertions].",
-      "uses": [
-        "def-weil-pbc-extension-pullback",
-        "def-sc-field-extension",
-        "def-weil-pbc-inverse-image",
-        "def-weil-pbc-C6",
-        "def-weil-pbc-C7",
-        "def-weil-pbc-C8",
-        "def-weil-pbc-eight-curve-assertions"
-      ],
-      "elementary": true,
-      "source": {
-        "document": "literature/stacks-project/etale-cohomology.tex",
-        "place": "Situation 0A52 (Tag 0A52), items (6), (7), (8): the maps H^q(X,F) -> H^q(X_{k'},F|_{X_{k'}}) and H^2(X,F) -> H^2(U,F)"
-      }
-    },
-    {
-      "text": "Part (a), unconditional assertions ($r\\neq\\operatorname{char}k$). The hypotheses of [lem-sc-c1] ($k$ algebraically closed, $C$ smooth separated connected, $n=r$ prime) hold, so $H^q(C_{\\Et},\\mathbf F_r)=0$ for $q>2$: this is $\\mathcal C_1$ ([def-weil-pbc-C1]). Since $r$ is a prime different from $\\operatorname{char}k$, $r$ is prime to $\\operatorname{char}k$, so [lem-sc-c4] applies (with $\\mathbf F_r$ constructible by step 1) and $H^q(C_{\\Et},\\mathbf F_r)$ is finite for all $q\\ge0$: the conclusion of $\\mathcal C_4$ ([def-weil-pbc-C4]), whose hypotheses (constructible, prime to $p$) hold by step 1. [lem-sc-c6] (same hypotheses, any algebraically closed $k'\\supseteq k$) gives that $\\rho^q_{k'/k}(C,\\mathbf F_r)$ is an isomorphism for all $q$, which by step 2 is $\\mathcal C_6$ ([def-weil-pbc-C6]; its hypothesis prime to $p$ holds by step 1). [lem-sc-c8] ($r$ prime, any open immersion $j:U\\hookrightarrow C$) gives surjectivity of the restriction on $H^2$, which by step 2 is $\\mathcal C_8$ ([def-weil-pbc-C8]). (Stacks 0A5B, Case I: $\\ell\\neq\\operatorname{char}k$; vanishing and finiteness from 03RQ and 03RR, invariance from the invariance of $g$ and of the number of punctures, $\\mathcal C_8$ because a proper open $U\\subsetneq C$ is affine and has $H^2=0$.)",
-      "uses": [
-        "lem-sc-c1",
-        "lem-sc-c4",
-        "lem-sc-c6",
-        "lem-sc-c8",
-        "def-weil-pbc-C1",
-        "def-weil-pbc-C4",
-        "def-weil-pbc-C6",
-        "def-weil-pbc-C8"
-      ],
-      "elementary": true,
-      "source": {
-        "document": "literature/stacks-project/etale-cohomology.tex",
-        "place": "Lemma 0A5B (Tag 0A5B), proof, Case I; Lemmas 03RQ, 03RR"
-      }
-    },
-    {
-      "text": "Part (a), conditional assertions ($r\\neq\\operatorname{char}k$). If $C$ is affine, it is a smooth affine connected curve (affine schemes are separated), so [lem-sc-c2] with $n=r$ prime gives $H^q(C_{\\Et},\\mathbf F_r)=0$ for $q>1$: $\\mathcal C_2$ ([def-weil-pbc-C2]). If $C$ is proper, it is a smooth proper connected curve, and [lem-sc-c5] and [lem-sc-c7], which allow an arbitrary prime, in particular $r\\neq\\operatorname{char}k$, give finiteness of all $H^q(C_{\\Et},\\mathbf F_r)$ ($\\mathbf F_r$ constructible by step 1) and bijectivity of all $\\rho^q_{k'/k}(C,\\mathbf F_r)$: by step 2 these are $\\mathcal C_5$ ([def-weil-pbc-C5]) and $\\mathcal C_7$ ([def-weil-pbc-C7]).",
-      "uses": [
-        "lem-sc-c2",
-        "lem-sc-c5",
-        "lem-sc-c7",
-        "def-weil-pbc-C2",
-        "def-weil-pbc-C5",
-        "def-weil-pbc-C7"
-      ],
-      "elementary": true,
-      "source": {
-        "document": "literature/stacks-project/etale-cohomology.tex",
-        "place": "Lemma 0A5B (Tag 0A5B), proof, Case I: projective case 03RQ, affine case 03RR"
-      }
-    },
-    {
-      "text": "Part (b) ($\\operatorname{char}k=p>0$, $r=p$). [lem-sc-c1] with $n=p$ (a prime) gives $\\mathcal C_1$. [lem-sc-c3] ($\\operatorname{char}k=p>0$, $C$ smooth separated connected) gives $H^q(C_{\\Et},\\mathbf F_p)=0$ for $q>1$, the conclusion of $\\mathcal C_3$ ([def-weil-pbc-C3]), whose hypothesis ($\\mathbf F_p$ is $p$-primary) holds by step 1. [lem-sc-c8] with $r=p$ gives $\\mathcal C_8$ (via step 2). If $C$ is affine, [lem-sc-c2] with $n=p$ gives $\\mathcal C_2$. If $C$ is proper, [lem-sc-c5] and [lem-sc-c7] with $r=p$ (both allow $r=\\operatorname{char}k$) give $\\mathcal C_5$ and, via step 2, $\\mathcal C_7$. (Stacks 0A5B, Case II: vanishing by 0A3N, finiteness and invariance in the proper case by 0A3P.)",
-      "uses": [
-        "lem-sc-c1",
-        "lem-sc-c3",
-        "lem-sc-c8",
-        "lem-sc-c2",
-        "lem-sc-c5",
-        "lem-sc-c7",
-        "def-weil-pbc-C3"
-      ],
-      "elementary": true,
-      "source": {
-        "document": "literature/stacks-project/etale-cohomology.tex",
-        "place": "Lemma 0A5B (Tag 0A5B), proof, Case II; Lemmas 0A3N, 0A3P"
-      }
-    },
-    {
-      "text": "Part (a), $H^0$, the Kummer sequence and $H^2$ of an affine curve ($r\\neq\\operatorname{char}k$). Since $r$ is prime to $\\operatorname{char}k$, [lem-sc-primitive-root] gives a primitive $r$-th root of unity $\\zeta\\in k$, and the trivialization $\\theta_\\zeta:\\mathbf F_r\\to\\mu_r$, $a\\mapsto\\zeta^a$, of [def-sc-mu-trivialization] is an isomorphism of etale sheaves; applying the functors $H^q(C_{\\Et},-)$ gives isomorphisms $H^q(C_{\\Et},\\mathbf F_r)\\cong H^q(C_{\\Et},\\mu_r)$ for all $q$. As $C$ is a smooth separated connected curve, [lem-sc-brauer-zero] gives $H^2(C_{\\Et},\\mathbf G_m)=0$, which is the hypothesis of [lem-sc-kummer-les] (with $n=r$). That lemma gives, $C$ being connected, $H^0(C_{\\Et},\\mu_r)=\\mu_r(k)\\cong\\mathbf Z/r\\mathbf Z$, and, with $\\operatorname{Pic}(C)$ identified with $H^1(C_{\\Et},\\mathbf G_m)$ by [lem-sc-h1-gm-pic], the short exact sequence $0\\to\\mathcal O_C(C)^\\times/\\mathcal O_C(C)^{\\times r}\\to H^1(C_{\\Et},\\mu_r)\\to\\operatorname{Pic}(C)[r]\\to0$. Composing with $\\theta_\\zeta$ gives $H^0(C_{\\Et},\\mathbf F_r)\\cong\\mathbf Z/r\\mathbf Z$ and the stated sequence for $H^1(C_{\\Et},\\mathbf F_r)$. If $C$ is affine, $H^2(C_{\\Et},\\mathbf F_r)=0$ is the case $q=2$ of $\\mathcal C_2$ (step 4, [lem-sc-c2]).",
-      "uses": [
-        "lem-sc-primitive-root",
-        "def-sc-mu-trivialization",
-        "lem-sc-brauer-zero",
-        "lem-sc-kummer-les",
-        "lem-sc-h1-gm-pic",
-        "lem-sc-c2"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/etale-cohomology.tex",
-        "place": "Lemma 03PL (Tag 03PL, the Kummer sequence), Theorem 03RM (Tag 03RM, H^q(X,G_m)=0 for q>=2), Lemma 03RR (Tag 03RR, (1) and (3)), Lemma 03RQ (Tag 03RQ, (1))"
-      }
-    },
-    {
-      "text": "Part (a), proper case ($r\\neq\\operatorname{char}k$). If $C$ is proper, it is a smooth proper connected curve of genus $g$ ([def-sc-genus]) and $r\\ge1$ is prime to $\\operatorname{char}k$, so [thm-sc-proper-cohomology] with $n=r$ gives, under $\\theta_\\zeta$, $H^0(C_{\\Et},\\mathbf F_r)\\cong\\mathbf Z/r\\mathbf Z$, $H^1(C_{\\Et},\\mathbf F_r)\\cong(\\mathbf Z/r\\mathbf Z)^{2g}$, $H^2(C_{\\Et},\\mathbf F_r)\\cong\\mathbf Z/r\\mathbf Z$ and $H^q(C_{\\Et},\\mathbf F_r)=0$ for $q>2$.",
-      "uses": [
-        "thm-sc-proper-cohomology",
-        "def-sc-genus"
-      ],
-      "elementary": true,
-      "source": {
-        "document": "literature/stacks-project/etale-cohomology.tex",
-        "place": "Lemma 03RQ (Tag 03RQ)"
-      }
-    },
-    {
-      "text": "Part (a), field extension ($r\\neq\\operatorname{char}k$). Let $k\\subseteq k'$ be algebraically closed. By step 3 ([lem-sc-c6] and step 2), $\\rho^q_{k'/k}(C,\\mathbf F_r)$ is an isomorphism for every $q\\ge0$. By [lem-sc-primitive-root] the image $\\zeta'$ of $\\zeta$ in $k'$ is a primitive $r$-th root of unity and $\\theta_\\zeta$ is compatible with pullback along $k\\subseteq k'$: the pullback of $\\mu_r$ to $C_{k'}$ maps to $\\mu_r$ on $C_{k'}$, the section $\\zeta$ of $\\mu_r$ pulls back to the section $\\zeta'$, so $\\pi_{k'}^{-1}\\theta_\\zeta=\\theta_{\\zeta'}$ on the constant sheaf $\\pi_{k'}^{-1}\\mathbf F_r=\\underline{\\mathbf Z/r\\mathbf Z}$ (step 2). (Stacks 0A5B, Case I: invariance because the genus $g$ and the number of punctures do not change from $k$ to $k'$.)",
-      "uses": [
-        "lem-sc-c6",
-        "lem-sc-primitive-root",
-        "def-sc-mu-trivialization"
-      ],
-      "elementary": true,
-      "source": {
-        "document": "literature/stacks-project/etale-cohomology.tex",
-        "place": "Lemma 0A5B (Tag 0A5B), proof, Case I, statement (6)"
-      }
-    },
-    {
-      "text": "Part (d). By steps 3 and 4 (case $r\\neq\\operatorname{char}k$) and step 5 (case $r=\\operatorname{char}k$), every assertion whose hypotheses hold for $(C,\\mathbf F_r)$ has been proved. The remaining ones hold vacuously: $\\mathcal C_3$ in case (a) because its hypothesis requires $\\operatorname{char}k=p>0$ and $\\mathbf F_r$ $p$-primary, which fails by step 1; $\\mathcal C_4$ and $\\mathcal C_6$ in case (b) because $\\mathbf F_p$ is not prime to $p$ (step 1); $\\mathcal C_2$ when $C$ is not affine and $\\mathcal C_5$, $\\mathcal C_7$ when $C$ is not proper. Hence $\\mathcal C(C,\\mathbf F_r)$, the conjunction of [def-weil-pbc-eight-curve-assertions], holds.",
-      "uses": [
-        "def-weil-pbc-eight-curve-assertions",
-        "def-weil-pbc-C3",
-        "def-weil-pbc-C4",
-        "def-weil-pbc-C6"
-      ],
-      "elementary": true,
-      "source": {
-        "document": "literature/stacks-project/etale-cohomology.tex",
-        "place": "Lemma 0A5B (Tag 0A5B) and the convention after Situation 0A52: the statements that apply to the given situation are true"
-      }
-    }
-  ],
-  "proof_deps": [
+ "id": "thm-sc-main",
+ "blueprint": {
+  "is": "thm-sc-main",
+  "from": null,
+  "same_as": null
+ },
+ "kind": "statement",
+ "title": "Smooth-curve calculations",
+ "statement": "Let $k$ be an algebraically closed field of characteristic exponent $p$ ($p=\\operatorname{char}k$ if $\\operatorname{char}k>0$), let $C$ be a smooth separated connected curve over $k$ ([def-sc-curves]), let $r$ be a prime number, and let $\\mathbf F_r=\\underline{\\mathbf Z/r\\mathbf Z}$ be the constant etale sheaf on $C_{\\Et}$ ([def-sc-constant-sheaves]). Then $(C,\\mathbf F_r)$ is a curve coefficient pair and $\\mathbf F_r$ is constructible ([def-weil-pbc-constructible-torsion]). Consider the assertions $\\mathcal C_1(C,\\mathbf F_r),\\dots,\\mathcal C_8(C,\\mathbf F_r)$ of [def-weil-pbc-eight-curve-assertions], each read for the single pair $(C,\\mathbf F_r)$ as an implication whose conclusion is asserted when its hypotheses (affine, proper, $p$-primary, constructible and prime to $p$) hold.\n\n1. **(a)** If $r\\neq\\operatorname{char}k$ (every prime when $\\operatorname{char}k=0$), then $\\mathbf F_r$ satisfies $\\mathcal C_1$, $\\mathcal C_4$, $\\mathcal C_6$ and $\\mathcal C_8$; it satisfies $\\mathcal C_2$ when $C$ is affine and $\\mathcal C_5$, $\\mathcal C_7$ when $C$ is proper. Explicitly, fix a primitive $r$-th root of unity $\\zeta\\in k$ and the trivialization $\\theta_\\zeta:\\mathbf F_r\\xrightarrow{\\sim}\\mu_r$ ([def-sc-mu-trivialization]). Then\n$$\nH^0(C_{\\Et},\\mathbf F_r)\\cong\\mathbf Z/r\\mathbf Z,\n$$\nthere is a short exact sequence\n$$\n0\\longrightarrow\\mathcal O_C(C)^\\times/\\mathcal O_C(C)^{\\times r}\n\\longrightarrow H^1(C_{\\Et},\\mathbf F_r)\n\\longrightarrow\\operatorname{Pic}(C)[r]\\longrightarrow0\n$$\n($\\operatorname{Pic}(C)$ as in [def-sc-picard-group]), and $H^2(C_{\\Et},\\mathbf F_r)=0$ if $C$ is affine. If $C$ is proper of genus $g$ ([def-sc-genus]),\n$$\nH^0(C_{\\Et},\\mathbf F_r)\\cong\\mathbf Z/r\\mathbf Z,\\quad\nH^1(C_{\\Et},\\mathbf F_r)\\cong(\\mathbf Z/r\\mathbf Z)^{2g},\\quad\nH^2(C_{\\Et},\\mathbf F_r)\\cong\\mathbf Z/r\\mathbf Z,\\quad\nH^q(C_{\\Et},\\mathbf F_r)=0\\ (q>2).\n$$\nThese groups do not change under algebraically closed field extension: for every extension $k\\subseteq k'$ of algebraically closed fields and every $q\\ge0$ the pullback map $\\rho^q_{k'/k}(C,\\mathbf F_r):H^q(C_{\\Et},\\mathbf F_r)\\to H^q((C_{k'})_{\\Et},\\mathbf F_r)$ of [def-sc-field-extension] is an isomorphism, and the pullback of $\\theta_\\zeta$ to $C_{k'}$ is $\\theta_{\\zeta'}$ for the image $\\zeta'$ of $\\zeta$ in $k'$, again a primitive $r$-th root of unity.\n1. **(b)** If $\\operatorname{char}k=p>0$ and $r=p$, then $\\mathbf F_p$ satisfies $\\mathcal C_1$, $\\mathcal C_3$ and $\\mathcal C_8$; it satisfies $\\mathcal C_2$ when $C$ is affine and $\\mathcal C_5$, $\\mathcal C_7$ when $C$ is proper.\n1. **(c)** The maps in $\\mathcal C_6$, $\\mathcal C_7$ and $\\mathcal C_8$ for $(C,\\mathbf F_r)$ are the pullback maps $\\rho^q_{k'/k}(C,\\mathbf F_r)$ of [def-weil-pbc-extension-pullback], which are those of [def-sc-field-extension], and the restriction maps $a^*:H^2(C_{\\Et},\\mathbf F_r)\\to H^2(U_{\\Et},a^{-1}\\mathbf F_r)$ along open immersions $a:U\\hookrightarrow C$, where $a^{-1}\\mathbf F_r$ is the constant sheaf $\\underline{\\mathbf Z/r\\mathbf Z}$ on $U_{\\Et}$.\n1. **(d)** Consequently, for every prime $r$, all eight assertions $\\mathcal C(C,\\mathbf F_r)$ of [def-weil-pbc-eight-curve-assertions] hold: in case (a) $\\mathcal C_3$ holds vacuously ($\\mathbf F_r$ is not $p$-primary, or $\\operatorname{char}k=0$), in case (b) $\\mathcal C_4$ and $\\mathcal C_6$ hold vacuously ($\\mathbf F_p$ is not prime to $p$), and $\\mathcal C_2$, $\\mathcal C_5$, $\\mathcal C_7$ hold vacuously when their hypothesis on $C$ fails.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-p1/thm-sc-main.md",
+  "place": "node thm-sc-main, order 1120"
+ },
+ "stmt_deps": [
+  "def-sc-curves",
+  "def-sc-constant-sheaves",
+  "def-weil-pbc-constructible-torsion",
+  "def-weil-pbc-eight-curve-assertions",
+  "def-sc-mu-trivialization",
+  "def-sc-picard-group",
+  "def-sc-genus",
+  "def-sc-field-extension",
+  "def-weil-pbc-extension-pullback",
+  "def-weil-pbc-inverse-image"
+ ],
+ "proof": [
+  {
+   "text": "Setting and coefficient conditions. By [def-sc-curves], $C$ is a separated scheme of finite type over $k$ of dimension one, so $\\dim C\\le1$. The constant sheaf $\\mathbf F_r=\\underline{\\mathbf Z/r\\mathbf Z}$ ([def-sc-constant-sheaves]) is killed by $r$ (multiplication by $r$ is zero on the constant presheaf, hence on its sheafification), so every local section is killed by the positive integer $r$ and $\\mathbf F_r$ is torsion ([def-weil-pbc-etale-sheaves]); thus $(C,\\mathbf F_r)$ is a curve coefficient pair ([def-weil-pbc-curve-setting]). It is constructible ([def-weil-pbc-constructible-torsion]): take the partition of $C$ into the single stratum $C$ (locally closed and constructible), on which $\\mathbf F_r$ is constant, hence locally constant, with finite stalks $\\mathbf Z/r\\mathbf Z$. Its geometric stalks are $\\mathbf Z/r\\mathbf Z$ ([def-sc-constant-sheaves]), so by [def-weil-pbc-primary-torsion]: if $r\\neq\\operatorname{char}k$, every stalk element has order dividing the prime $r$, coprime to $p$, so $\\mathbf F_r$ is prime to $p$ (no condition in characteristic $0$), and it is not $p$-primary (the class of $1$ has order $r$, not a power of $p$); if $r=p=\\operatorname{char}k>0$, every stalk element is killed by $p$, so $\\mathbf F_p$ is $p$-primary, and it is not prime to $p$ (the class of $1$ has order $p$).",
+   "uses": [
     "def-sc-curves",
     "def-sc-constant-sheaves",
     "def-weil-pbc-etale-sheaves",
     "def-weil-pbc-curve-setting",
     "def-weil-pbc-constructible-torsion",
-    "def-weil-pbc-primary-torsion",
+    "def-weil-pbc-primary-torsion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Situation 0A52 (Tag 0A52) and the statement of Lemma 0A5B (Tag 0A5B): F = Z/lZ on a smooth X"
+   }
+  },
+  {
+   "text": "The maps (part (c)). For the pair $(C,\\mathbf F_r)$ and an algebraically closed extension $k'/k$, [def-weil-pbc-extension-pullback] and [def-sc-field-extension] define the same map: both take $\\pi_{k'}:C_{k'}=C\\times_kk'\\to C$, $F_{k'}=\\pi_{k'}^{-1}\\mathbf F_r$, and the pullback map $H^q(C_{\\Et},\\mathbf F_r)\\to H^q((C_{k'})_{\\Et},F_{k'})$ in degree $q$; and $\\pi_{k'}^{-1}\\mathbf F_r$ is the constant sheaf $\\underline{\\mathbf Z/r\\mathbf Z}$ on $C_{k'}$, because inverse image ([def-weil-pbc-inverse-image]) is the sheafification of the presheaf inverse image, and the presheaf inverse image of a constant presheaf is the constant presheaf with the same value, so by left adjointness the sheafified pullback of the constant sheaf is the constant sheaf. This is the map of $\\mathcal C_6$ and $\\mathcal C_7$ ([def-weil-pbc-C6], [def-weil-pbc-C7]) and the map $\\rho^q_{k'/k}(C,\\mathbf F_r)$ in [lem-sc-c6] and [lem-sc-c7]. For an open immersion $a:U\\hookrightarrow C$, likewise $a^{-1}\\mathbf F_r$ is the constant sheaf $\\underline{\\mathbf Z/r\\mathbf Z}$ on $U_{\\Et}$, so the map $a^*:H^2(C_{\\Et},\\mathbf F_r)\\to H^2(U_{\\Et},a^{-1}\\mathbf F_r)$ of $\\mathcal C_8$ ([def-weil-pbc-C8]) is the restriction map $H^2(C_{\\Et},\\mathbf F_r)\\to H^2(U_{\\Et},\\mathbf F_r)$ of [lem-sc-c8]. Hence the conclusions of [lem-sc-c6], [lem-sc-c7], [lem-sc-c8] are literally the conclusions of $\\mathcal C_6$, $\\mathcal C_7$, $\\mathcal C_8$ for $(C,\\mathbf F_r)$, as listed in [def-weil-pbc-eight-curve-assertions].",
+   "uses": [
     "def-weil-pbc-extension-pullback",
     "def-sc-field-extension",
     "def-weil-pbc-inverse-image",
     "def-weil-pbc-C6",
     "def-weil-pbc-C7",
     "def-weil-pbc-C8",
-    "def-weil-pbc-eight-curve-assertions",
+    "def-weil-pbc-eight-curve-assertions"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Situation 0A52 (Tag 0A52), items (6), (7), (8): the maps H^q(X,F) -> H^q(X_{k'},F|_{X_{k'}}) and H^2(X,F) -> H^2(U,F)"
+   }
+  },
+  {
+   "text": "Part (a), unconditional assertions ($r\\neq\\operatorname{char}k$). The hypotheses of [lem-sc-c1] ($k$ algebraically closed, $C$ smooth separated connected, $n=r$ prime) hold, so $H^q(C_{\\Et},\\mathbf F_r)=0$ for $q>2$: this is $\\mathcal C_1$ ([def-weil-pbc-C1]). Since $r$ is a prime different from $\\operatorname{char}k$, $r$ is prime to $\\operatorname{char}k$, so [lem-sc-c4] applies (with $\\mathbf F_r$ constructible by step 1) and $H^q(C_{\\Et},\\mathbf F_r)$ is finite for all $q\\ge0$: the conclusion of $\\mathcal C_4$ ([def-weil-pbc-C4]), whose hypotheses (constructible, prime to $p$) hold by step 1. [lem-sc-c6] (same hypotheses, any algebraically closed $k'\\supseteq k$) gives that $\\rho^q_{k'/k}(C,\\mathbf F_r)$ is an isomorphism for all $q$, which by step 2 is $\\mathcal C_6$ ([def-weil-pbc-C6]; its hypothesis prime to $p$ holds by step 1). [lem-sc-c8] ($r$ prime, any open immersion $j:U\\hookrightarrow C$) gives surjectivity of the restriction on $H^2$, which by step 2 is $\\mathcal C_8$ ([def-weil-pbc-C8]). (Stacks 0A5B, Case I: $\\ell\\neq\\operatorname{char}k$; vanishing and finiteness from 03RQ and 03RR, invariance from the invariance of $g$ and of the number of punctures, $\\mathcal C_8$ because a proper open $U\\subsetneq C$ is affine and has $H^2=0$.)",
+   "uses": [
     "lem-sc-c1",
     "lem-sc-c4",
     "lem-sc-c6",
     "lem-sc-c8",
     "def-weil-pbc-C1",
     "def-weil-pbc-C4",
+    "def-weil-pbc-C6",
+    "def-weil-pbc-C8"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma 0A5B (Tag 0A5B), proof, Case I; Lemmas 03RQ, 03RR"
+   }
+  },
+  {
+   "text": "Part (a), conditional assertions ($r\\neq\\operatorname{char}k$). If $C$ is affine, it is a smooth affine connected curve (affine schemes are separated), so [lem-sc-c2] with $n=r$ prime gives $H^q(C_{\\Et},\\mathbf F_r)=0$ for $q>1$: $\\mathcal C_2$ ([def-weil-pbc-C2]). If $C$ is proper, it is a smooth proper connected curve, and [lem-sc-c5] and [lem-sc-c7], which allow an arbitrary prime, in particular $r\\neq\\operatorname{char}k$, give finiteness of all $H^q(C_{\\Et},\\mathbf F_r)$ ($\\mathbf F_r$ constructible by step 1) and bijectivity of all $\\rho^q_{k'/k}(C,\\mathbf F_r)$: by step 2 these are $\\mathcal C_5$ ([def-weil-pbc-C5]) and $\\mathcal C_7$ ([def-weil-pbc-C7]).",
+   "uses": [
     "lem-sc-c2",
     "lem-sc-c5",
     "lem-sc-c7",
     "def-weil-pbc-C2",
     "def-weil-pbc-C5",
+    "def-weil-pbc-C7"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma 0A5B (Tag 0A5B), proof, Case I: projective case 03RQ, affine case 03RR"
+   }
+  },
+  {
+   "text": "Part (b) ($\\operatorname{char}k=p>0$, $r=p$). [lem-sc-c1] with $n=p$ (a prime) gives $\\mathcal C_1$. [lem-sc-c3] ($\\operatorname{char}k=p>0$, $C$ smooth separated connected) gives $H^q(C_{\\Et},\\mathbf F_p)=0$ for $q>1$, the conclusion of $\\mathcal C_3$ ([def-weil-pbc-C3]), whose hypothesis ($\\mathbf F_p$ is $p$-primary) holds by step 1. [lem-sc-c8] with $r=p$ gives $\\mathcal C_8$ (via step 2). If $C$ is affine, [lem-sc-c2] with $n=p$ gives $\\mathcal C_2$. If $C$ is proper, [lem-sc-c5] and [lem-sc-c7] with $r=p$ (both allow $r=\\operatorname{char}k$) give $\\mathcal C_5$ and, via step 2, $\\mathcal C_7$. (Stacks 0A5B, Case II: vanishing by 0A3N, finiteness and invariance in the proper case by 0A3P.)",
+   "uses": [
+    "lem-sc-c1",
     "lem-sc-c3",
-    "def-weil-pbc-C3",
+    "lem-sc-c8",
+    "lem-sc-c2",
+    "lem-sc-c5",
+    "lem-sc-c7",
+    "def-weil-pbc-C3"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma 0A5B (Tag 0A5B), proof, Case II; Lemmas 0A3N, 0A3P"
+   }
+  },
+  {
+   "text": "Part (a), $H^0$, the Kummer sequence and $H^2$ of an affine curve ($r\\neq\\operatorname{char}k$). Since $r$ is prime to $\\operatorname{char}k$, [lem-sc-primitive-root] gives a primitive $r$-th root of unity $\\zeta\\in k$, and the trivialization $\\theta_\\zeta:\\mathbf F_r\\to\\mu_r$, $a\\mapsto\\zeta^a$, of [def-sc-mu-trivialization] is an isomorphism of etale sheaves; applying the functors $H^q(C_{\\Et},-)$ gives isomorphisms $H^q(C_{\\Et},\\mathbf F_r)\\cong H^q(C_{\\Et},\\mu_r)$ for all $q$. As $C$ is a smooth separated connected curve, [lem-sc-brauer-zero] gives $H^2(C_{\\Et},\\mathbf G_m)=0$, which is the hypothesis of [lem-sc-kummer-les] (with $n=r$). That lemma gives, $C$ being connected, $H^0(C_{\\Et},\\mu_r)=\\mu_r(k)\\cong\\mathbf Z/r\\mathbf Z$, and, with $\\operatorname{Pic}(C)$ identified with $H^1(C_{\\Et},\\mathbf G_m)$ by [lem-sc-h1-gm-pic], the short exact sequence $0\\to\\mathcal O_C(C)^\\times/\\mathcal O_C(C)^{\\times r}\\to H^1(C_{\\Et},\\mu_r)\\to\\operatorname{Pic}(C)[r]\\to0$. Composing with $\\theta_\\zeta$ gives $H^0(C_{\\Et},\\mathbf F_r)\\cong\\mathbf Z/r\\mathbf Z$ and the stated sequence for $H^1(C_{\\Et},\\mathbf F_r)$. If $C$ is affine, $H^2(C_{\\Et},\\mathbf F_r)=0$ is the case $q=2$ of $\\mathcal C_2$ (step 4, [lem-sc-c2]).",
+   "uses": [
     "lem-sc-primitive-root",
     "def-sc-mu-trivialization",
     "lem-sc-brauer-zero",
     "lem-sc-kummer-les",
     "lem-sc-h1-gm-pic",
+    "lem-sc-c2"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma 03PL (Tag 03PL, the Kummer sequence), Theorem 03RM (Tag 03RM, H^q(X,G_m)=0 for q>=2), Lemma 03RR (Tag 03RR, (1) and (3)), Lemma 03RQ (Tag 03RQ, (1))"
+   }
+  },
+  {
+   "text": "Part (a), proper case ($r\\neq\\operatorname{char}k$). If $C$ is proper, it is a smooth proper connected curve of genus $g$ ([def-sc-genus]) and $r\\ge1$ is prime to $\\operatorname{char}k$, so [thm-sc-proper-cohomology] with $n=r$ gives, under $\\theta_\\zeta$, $H^0(C_{\\Et},\\mathbf F_r)\\cong\\mathbf Z/r\\mathbf Z$, $H^1(C_{\\Et},\\mathbf F_r)\\cong(\\mathbf Z/r\\mathbf Z)^{2g}$, $H^2(C_{\\Et},\\mathbf F_r)\\cong\\mathbf Z/r\\mathbf Z$ and $H^q(C_{\\Et},\\mathbf F_r)=0$ for $q>2$.",
+   "uses": [
     "thm-sc-proper-cohomology",
     "def-sc-genus"
-  ],
-  "proof_origin": {
-    "by": "document",
+   ],
+   "elementary": true,
+   "source": {
     "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma 0A5B (Tag 0A5B, lemma-constant-smooth-statements), with Situation 0A52, Lemmas 03PL, 03RM, 03RQ, 03RR, 0A3N, 0A3P"
+    "place": "Lemma 03RQ (Tag 03RQ)"
+   }
   },
-  "mathlib_searches": [
-    {
-      "tool": "leansearch",
-      "query": "etale cohomology of the constant sheaf Z/n on a smooth curve over an algebraically closed field",
-      "results": "CategoryTheory.Sheaf.H (Mathlib.CategoryTheory.Sites.SheafCohomology.Basic), AlgebraicGeometry.Scheme.smallEtaleTopology, AlgebraicGeometry.Scheme.etaleTopology (Mathlib.AlgebraicGeometry.Sites.Etale), AlgebraicGeometry.IsEtale; only the definitions of the site and of sheaf cohomology",
-      "date": "2026-10-09",
-      "verdict": "no match"
-    },
-    {
-      "tool": "leansearch",
-      "query": "Kummer exact sequence mu_n Gm Picard group n-torsion",
-      "results": "CommRing.Pic, Submodule.mulExact_unitsMap_spanSingleton_unitsToPic, Submodule.mulExact_unitsToPic_mapAlgebra (Mathlib.RingTheory.PicardGroup), groupCohomology; no etale Kummer sequence, no Pic of a scheme",
-      "date": "2026-10-09",
-      "verdict": "no match"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "sheaf cohomology Sheaf.H of a constant sheaf on a curve vanishes in degree greater than two",
-      "results": "CategoryTheory.Sheaf.H, Sheaf.cohomologyPresheaf, Sheaf.instAddCommGroupH, Sheaf.cohomologyPresheafFunctor (Mathlib.CategoryTheory.Sites.SheafCohomology.Basic), isZero_groupCohomology_succ_of_subsingleton; no vanishing theorem for curves",
-      "date": "2026-10-09",
-      "verdict": "no match"
-    },
-    {
-      "tool": "loogle",
-      "query": "CategoryTheory.Sheaf.H",
-      "results": "Sheaf.H, Sheaf.subsingleton_H_of_isZero, Sheaf.functorH_obj_coe, Sheaf.instSubsingletonHHAddNatOfNat (injective sheaves), Sheaf.H.map, Sheaf.H.equiv₀ (H^0 = sections over a terminal object), Sheaf.H.map_* (Mathlib.CategoryTheory.Sites.SheafCohomology.Basic); nothing about schemes or curves",
-      "date": "2026-10-09",
-      "verdict": "no match"
-    },
-    {
-      "tool": "grep",
-      "query": "grep -rln 'smallEtaleTopology' and 'Sheaf.H\\b|\\.H ' in Mathlib/AlgebraicGeometry; grep -rli 'kummer'; grep 'Pic.*torsion' in ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/",
-      "results": "Sites/Etale.lean, Sites/EtalePoint.lean, Sites/AffineEtale.lean (the site), Sites/ElladicCohomology.lean (only the definitions ellAdicSheaf, EllAdicCohomology, isZero_ellAdicSheaf_of_isEmpty); Kummer only in field theory and Dedekind domains (FieldTheory/KummerExtension.lean, NumberTheory/KummerDedekind.lean); no IsCurve, genus or Picard torsion of a scheme in Mathlib/AlgebraicGeometry",
-      "date": "2026-10-09",
-      "verdict": "no match"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "merged_into": null,
-  "import_flags": [],
-  "blueprint_kind": "theorem",
-  "blueprint_order": 1120,
-  "blueprint_uses": [
-    "def-sc-constant-sheaves",
-    "def-sc-curves",
-    "def-sc-field-extension",
-    "def-weil-pbc-eight-curve-assertions",
-    "lem-sc-c1",
-    "lem-sc-c2",
-    "lem-sc-c3",
-    "lem-sc-c4",
-    "lem-sc-c5",
+  {
+   "text": "Part (a), field extension ($r\\neq\\operatorname{char}k$). Let $k\\subseteq k'$ be algebraically closed. By step 3 ([lem-sc-c6] and step 2), $\\rho^q_{k'/k}(C,\\mathbf F_r)$ is an isomorphism for every $q\\ge0$. By [lem-sc-primitive-root] the image $\\zeta'$ of $\\zeta$ in $k'$ is a primitive $r$-th root of unity and $\\theta_\\zeta$ is compatible with pullback along $k\\subseteq k'$: the pullback of $\\mu_r$ to $C_{k'}$ maps to $\\mu_r$ on $C_{k'}$, the section $\\zeta$ of $\\mu_r$ pulls back to the section $\\zeta'$, so $\\pi_{k'}^{-1}\\theta_\\zeta=\\theta_{\\zeta'}$ on the constant sheaf $\\pi_{k'}^{-1}\\mathbf F_r=\\underline{\\mathbf Z/r\\mathbf Z}$ (step 2). (Stacks 0A5B, Case I: invariance because the genus $g$ and the number of punctures do not change from $k$ to $k'$.)",
+   "uses": [
     "lem-sc-c6",
-    "lem-sc-c7",
-    "lem-sc-c8",
-    "thm-sc-affine-cohomology",
-    "thm-sc-constant-invariance",
-    "thm-sc-proper-cohomology"
-  ],
-  "uses_not_cited": [
-    "def-sc-curves"
-  ],
-  "proof_split_by": "paragraphs",
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": [
-        "AlgebraicGeometry.IsCurve.constantModSheaf_curveCalculations"
-      ]
-    },
-    "slopmaster2": {
-      "state": "rests_on_sorry",
-      "decls": [
-        {
-          "name": "AlgebraicGeometry.IsCurve.constantModSheaf_curveCalculations",
-          "module": "WeilConjectures.AlgebraicGeometry.Curve.SmoothCalculations",
-          "lines": [
-            221,
-            267
-          ],
-          "kind": "theorem",
-          "sorry": false
-        }
-      ],
-      "missing": [],
-      "open": [
-        {
-          "name": "AlgebraicGeometry.Etale.unitComparison_app_isColimit_of_isLimit",
-          "module": "WeilConjectures.AlgebraicGeometry.Sites.SectionContinuity",
-          "lines": [
-            74,
-            102
-          ],
-          "kind": "theorem",
-          "nodes": [],
-          "below": false
-        },
-        {
-          "name": "AlgebraicGeometry.IsConnectedCurve.subsingleton_sheafH_two_lowerStar",
-          "module": "WeilConjectures.AlgebraicGeometry.Curve.Affine",
-          "lines": [
-            333,
-            353
-          ],
-          "kind": "theorem",
-          "nodes": [],
-          "below": false
-        },
-        {
-          "name": "AlgebraicGeometry.IsCurve.bijective_cohomologyMap_constantModSheaf_of_isProper",
-          "module": "WeilConjectures.AlgebraicGeometry.Curve.SmoothCalculations",
-          "lines": [
-            184,
-            205
-          ],
-          "kind": "theorem",
-          "nodes": [],
-          "below": false
-        },
-        {
-          "name": "AlgebraicGeometry.IsCurve.bijective_cohomologyMap_constantModSheaf_of_ne_zero",
-          "module": "WeilConjectures.AlgebraicGeometry.Curve.SmoothCalculations",
-          "lines": [
-            159,
-            182
-          ],
-          "kind": "theorem",
-          "nodes": [],
-          "below": false
-        },
-        {
-          "name": "AlgebraicGeometry.IsCurve.finite_sheafH_constantModSheaf_of_isProper",
-          "module": "WeilConjectures.AlgebraicGeometry.Curve.SmoothCalculations",
-          "lines": [
-            145,
-            157
-          ],
-          "kind": "theorem",
-          "nodes": [],
-          "below": false
-        },
-        {
-          "name": "AlgebraicGeometry.IsCurve.finite_sheafH_constantModSheaf_of_ne_zero",
-          "module": "WeilConjectures.AlgebraicGeometry.Curve.SmoothCalculations",
-          "lines": [
-            131,
-            143
-          ],
-          "kind": "theorem",
-          "nodes": [],
-          "below": false
-        },
-        {
-          "name": "AlgebraicGeometry.IsCurve.subsingleton_sheafH_constantModSheaf_of_one_lt_of_charP",
-          "module": "WeilConjectures.AlgebraicGeometry.Curve.SmoothCalculations",
-          "lines": [
-            118,
-            129
-          ],
-          "kind": "theorem",
-          "nodes": [],
-          "below": false
-        },
-        {
-          "name": "AlgebraicGeometry.IsCurve.surjective_cohomologyMap_constantModSheaf_two",
-          "module": "WeilConjectures.AlgebraicGeometry.Curve.SmoothCalculations",
-          "lines": [
-            207,
-            217
-          ],
-          "kind": "theorem",
-          "nodes": [],
-          "below": false
-        },
-        {
-          "name": "AlgebraicGeometry.Scheme.H_map_isColimit_of_isFiltered",
-          "module": "WeilConjectures.AlgebraicGeometry.Curve.Reductions",
-          "lines": [
-            68,
-            86
-          ],
-          "kind": "theorem",
-          "nodes": [],
-          "below": false
-        }
-      ]
-    }
+    "lem-sc-primitive-root",
+    "def-sc-mu-trivialization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma 0A5B (Tag 0A5B), proof, Case I, statement (6)"
+   }
   },
-  "chapter": "sec-proper-base-change",
-  "unit": "sk-thm-p1",
-  "split_report": {
-    "date": "2026-10-09",
-    "item": "thm-sc-main",
-    "worker": "stage1",
-    "summary": "Split along Stacks Lemma 0A5B (Case I r != char k, Case II r = char k) into nine steps: coefficient conditions (pair, constructible, prime to p / p-primary; elementary), identification of the maps (c) (elementary), the clause groups (a) unconditional C1 C4 C6 C8, (a) conditional C2 C5 C7, (b) C1 C3 C8 C2 C5 C7, each a conjunction of lem-sc-c1..c8 with the hypotheses matched (r prime; r != char k is r prime to char k; affine implies separated; c5 and c7 allow any prime); the explicit groups from lem-sc-kummer-les + lem-sc-brauer-zero + theta_zeta (any smooth connected C, so the Kummer sequence and H^0 hold beyond the affine case) and thm-sc-proper-cohomology; field-extension compatibility from lem-sc-c6 + lem-sc-primitive-root; and a new clause (d), the full conjunction C(C,F_r) with the vacuous assertions, which is how prop-weil-pbc-algebraically-closed-extension uses the node. Statement made precise: r prime (all cited c-lemmas but c4 and c6 need it), F_r constructible and torsion, C_j read as implications for the single pair, the vague 'all identifications compatible with field extension' replaced by the pullback isomorphisms and the compatibility of theta_zeta. thm-sc-affine-cohomology (unit sk-prop-cd-affine) and thm-sc-constant-invariance (sk-prop-ext-invariance) are no longer used: their units are not cited by sk-thm-p1, and the route nodes above cover what they gave. Proof now follows Stacks (proof_origin document). Mathlib: no etale cohomology of curves; no leaf."
-  },
-  "lean": {
-    "module": "WeilConjectures.AlgebraicGeometry.Curve.SmoothCalculations",
-    "declaration": "AlgebraicGeometry.IsCurve.constantModSheaf_curveCalculations",
-    "branch": "slopmaster2",
-    "line": 221,
-    "declarations": [
-      "AlgebraicGeometry.IsCurve.constantModSheaf_curveCalculations"
-    ],
-    "sorry_free": false,
-    "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state rests_on_sorry)"
-  },
-  "reviewed": {
-    "date": "2026-10-09",
-    "by": "L",
-    "result": "pass",
-    "note": "statement made precise (r prime; the pair and constructibility; each C_j as an implication; the Kummer sequence for every smooth connected C; field-extension clause made explicit; clause (d): all eight assertions hold); nine steps along Stacks 0A5B Cases I/II citing lem-sc-c1..c8, the Kummer sequence (brauer-zero, kummer-les, h1-gm-pic) and thm-sc-proper-cohomology; the off-route thm-sc-affine-cohomology and thm-sc-constant-invariance dropped; no new nodes; Lean attached (rests on sorry)"
+  {
+   "text": "Part (d). By steps 3 and 4 (case $r\\neq\\operatorname{char}k$) and step 5 (case $r=\\operatorname{char}k$), every assertion whose hypotheses hold for $(C,\\mathbf F_r)$ has been proved. The remaining ones hold vacuously: $\\mathcal C_3$ in case (a) because its hypothesis requires $\\operatorname{char}k=p>0$ and $\\mathbf F_r$ $p$-primary, which fails by step 1; $\\mathcal C_4$ and $\\mathcal C_6$ in case (b) because $\\mathbf F_p$ is not prime to $p$ (step 1); $\\mathcal C_2$ when $C$ is not affine and $\\mathcal C_5$, $\\mathcal C_7$ when $C$ is not proper. Hence $\\mathcal C(C,\\mathbf F_r)$, the conjunction of [def-weil-pbc-eight-curve-assertions], holds.",
+   "uses": [
+    "def-weil-pbc-eight-curve-assertions",
+    "def-weil-pbc-C3",
+    "def-weil-pbc-C4",
+    "def-weil-pbc-C6"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma 0A5B (Tag 0A5B) and the convention after Situation 0A52: the statements that apply to the given situation are true"
+   }
   }
+ ],
+ "proof_deps": [
+  "def-sc-curves",
+  "def-sc-constant-sheaves",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-curve-setting",
+  "def-weil-pbc-constructible-torsion",
+  "def-weil-pbc-primary-torsion",
+  "def-weil-pbc-extension-pullback",
+  "def-sc-field-extension",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-C6",
+  "def-weil-pbc-C7",
+  "def-weil-pbc-C8",
+  "def-weil-pbc-eight-curve-assertions",
+  "lem-sc-c1",
+  "lem-sc-c4",
+  "lem-sc-c6",
+  "lem-sc-c8",
+  "def-weil-pbc-C1",
+  "def-weil-pbc-C4",
+  "lem-sc-c2",
+  "lem-sc-c5",
+  "lem-sc-c7",
+  "def-weil-pbc-C2",
+  "def-weil-pbc-C5",
+  "lem-sc-c3",
+  "def-weil-pbc-C3",
+  "lem-sc-primitive-root",
+  "def-sc-mu-trivialization",
+  "lem-sc-brauer-zero",
+  "lem-sc-kummer-les",
+  "lem-sc-h1-gm-pic",
+  "thm-sc-proper-cohomology",
+  "def-sc-genus"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Lemma 0A5B (Tag 0A5B, lemma-constant-smooth-statements), with Situation 0A52, Lemmas 03PL, 03RM, 03RQ, 03RR, 0A3N, 0A3P"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "etale cohomology of the constant sheaf Z/n on a smooth curve over an algebraically closed field",
+   "results": "CategoryTheory.Sheaf.H (Mathlib.CategoryTheory.Sites.SheafCohomology.Basic), AlgebraicGeometry.Scheme.smallEtaleTopology, AlgebraicGeometry.Scheme.etaleTopology (Mathlib.AlgebraicGeometry.Sites.Etale), AlgebraicGeometry.IsEtale; only the definitions of the site and of sheaf cohomology",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Kummer exact sequence mu_n Gm Picard group n-torsion",
+   "results": "CommRing.Pic, Submodule.mulExact_unitsMap_spanSingleton_unitsToPic, Submodule.mulExact_unitsToPic_mapAlgebra (Mathlib.RingTheory.PicardGroup), groupCohomology; no etale Kummer sequence, no Pic of a scheme",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "sheaf cohomology Sheaf.H of a constant sheaf on a curve vanishes in degree greater than two",
+   "results": "CategoryTheory.Sheaf.H, Sheaf.cohomologyPresheaf, Sheaf.instAddCommGroupH, Sheaf.cohomologyPresheafFunctor (Mathlib.CategoryTheory.Sites.SheafCohomology.Basic), isZero_groupCohomology_succ_of_subsingleton; no vanishing theorem for curves",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf.H",
+   "results": "Sheaf.H, Sheaf.subsingleton_H_of_isZero, Sheaf.functorH_obj_coe, Sheaf.instSubsingletonHHAddNatOfNat (injective sheaves), Sheaf.H.map, Sheaf.H.equiv₀ (H^0 = sections over a terminal object), Sheaf.H.map_* (Mathlib.CategoryTheory.Sites.SheafCohomology.Basic); nothing about schemes or curves",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln 'smallEtaleTopology' and 'Sheaf.H\\b|\\.H ' in Mathlib/AlgebraicGeometry; grep -rli 'kummer'; grep 'Pic.*torsion' in ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/",
+   "results": "Sites/Etale.lean, Sites/EtalePoint.lean, Sites/AffineEtale.lean (the site), Sites/ElladicCohomology.lean (only the definitions ellAdicSheaf, EllAdicCohomology, isZero_ellAdicSheaf_of_isEmpty); Kummer only in field theory and Dedekind domains (FieldTheory/KummerExtension.lean, NumberTheory/KummerDedekind.lean); no IsCurve, genus or Picard torsion of a scheme in Mathlib/AlgebraicGeometry",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "theorem",
+ "blueprint_order": 1120,
+ "blueprint_uses": [
+  "def-sc-constant-sheaves",
+  "def-sc-curves",
+  "def-sc-field-extension",
+  "def-weil-pbc-eight-curve-assertions",
+  "lem-sc-c1",
+  "lem-sc-c2",
+  "lem-sc-c3",
+  "lem-sc-c4",
+  "lem-sc-c5",
+  "lem-sc-c6",
+  "lem-sc-c7",
+  "lem-sc-c8",
+  "thm-sc-affine-cohomology",
+  "thm-sc-constant-invariance",
+  "thm-sc-proper-cohomology"
+ ],
+ "uses_not_cited": [
+  "def-sc-curves"
+ ],
+ "proof_split_by": "paragraphs",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.IsCurve.constantModSheaf_curveCalculations"
+   ]
+  },
+  "slopmaster2": {
+   "state": "rests_on_sorry",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.IsCurve.constantModSheaf_curveCalculations",
+     "module": "WeilConjectures.AlgebraicGeometry.Curve.SmoothCalculations",
+     "lines": [
+      221,
+      267
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": [
+    {
+     "name": "AlgebraicGeometry.Etale.unitComparison_app_isColimit_of_isLimit",
+     "module": "WeilConjectures.AlgebraicGeometry.Sites.SectionContinuity",
+     "lines": [
+      74,
+      102
+     ],
+     "kind": "theorem",
+     "nodes": [
+      "lem-weil-pbc-etale-section-continuity"
+     ],
+     "below": true
+    },
+    {
+     "name": "AlgebraicGeometry.IsConnectedCurve.subsingleton_sheafH_two_lowerStar",
+     "module": "WeilConjectures.AlgebraicGeometry.Curve.Affine",
+     "lines": [
+      333,
+      353
+     ],
+     "kind": "theorem",
+     "nodes": [
+      "lem-sc-affine-generic-second"
+     ],
+     "below": true
+    },
+    {
+     "name": "AlgebraicGeometry.IsCurve.bijective_cohomologyMap_constantModSheaf_of_isProper",
+     "module": "WeilConjectures.AlgebraicGeometry.Curve.SmoothCalculations",
+     "lines": [
+      184,
+      205
+     ],
+     "kind": "theorem",
+     "nodes": [
+      "lem-sc-c7"
+     ],
+     "below": true
+    },
+    {
+     "name": "AlgebraicGeometry.IsCurve.bijective_cohomologyMap_constantModSheaf_of_ne_zero",
+     "module": "WeilConjectures.AlgebraicGeometry.Curve.SmoothCalculations",
+     "lines": [
+      159,
+      182
+     ],
+     "kind": "theorem",
+     "nodes": [
+      "lem-sc-c6"
+     ],
+     "below": true
+    },
+    {
+     "name": "AlgebraicGeometry.IsCurve.finite_sheafH_constantModSheaf_of_isProper",
+     "module": "WeilConjectures.AlgebraicGeometry.Curve.SmoothCalculations",
+     "lines": [
+      145,
+      157
+     ],
+     "kind": "theorem",
+     "nodes": [
+      "lem-sc-c5"
+     ],
+     "below": true
+    },
+    {
+     "name": "AlgebraicGeometry.IsCurve.finite_sheafH_constantModSheaf_of_ne_zero",
+     "module": "WeilConjectures.AlgebraicGeometry.Curve.SmoothCalculations",
+     "lines": [
+      131,
+      143
+     ],
+     "kind": "theorem",
+     "nodes": [
+      "lem-sc-c4"
+     ],
+     "below": true
+    },
+    {
+     "name": "AlgebraicGeometry.IsCurve.subsingleton_sheafH_constantModSheaf_of_one_lt_of_charP",
+     "module": "WeilConjectures.AlgebraicGeometry.Curve.SmoothCalculations",
+     "lines": [
+      118,
+      129
+     ],
+     "kind": "theorem",
+     "nodes": [
+      "lem-sc-c3"
+     ],
+     "below": true
+    },
+    {
+     "name": "AlgebraicGeometry.IsCurve.surjective_cohomologyMap_constantModSheaf_two",
+     "module": "WeilConjectures.AlgebraicGeometry.Curve.SmoothCalculations",
+     "lines": [
+      207,
+      217
+     ],
+     "kind": "theorem",
+     "nodes": [
+      "lem-sc-c8"
+     ],
+     "below": true
+    },
+    {
+     "name": "AlgebraicGeometry.Scheme.H_map_isColimit_of_isFiltered",
+     "module": "WeilConjectures.AlgebraicGeometry.Curve.Reductions",
+     "lines": [
+      68,
+      86
+     ],
+     "kind": "theorem",
+     "nodes": [
+      "lemma-weil-pbc-curve-filtered-cohomology"
+     ],
+     "below": true
+    }
+   ]
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-09",
+  "item": "thm-sc-main",
+  "worker": "stage1",
+  "summary": "Split along Stacks Lemma 0A5B (Case I r != char k, Case II r = char k) into nine steps: coefficient conditions (pair, constructible, prime to p / p-primary; elementary), identification of the maps (c) (elementary), the clause groups (a) unconditional C1 C4 C6 C8, (a) conditional C2 C5 C7, (b) C1 C3 C8 C2 C5 C7, each a conjunction of lem-sc-c1..c8 with the hypotheses matched (r prime; r != char k is r prime to char k; affine implies separated; c5 and c7 allow any prime); the explicit groups from lem-sc-kummer-les + lem-sc-brauer-zero + theta_zeta (any smooth connected C, so the Kummer sequence and H^0 hold beyond the affine case) and thm-sc-proper-cohomology; field-extension compatibility from lem-sc-c6 + lem-sc-primitive-root; and a new clause (d), the full conjunction C(C,F_r) with the vacuous assertions, which is how prop-weil-pbc-algebraically-closed-extension uses the node. Statement made precise: r prime (all cited c-lemmas but c4 and c6 need it), F_r constructible and torsion, C_j read as implications for the single pair, the vague 'all identifications compatible with field extension' replaced by the pullback isomorphisms and the compatibility of theta_zeta. thm-sc-affine-cohomology (unit sk-prop-cd-affine) and thm-sc-constant-invariance (sk-prop-ext-invariance) are no longer used: their units are not cited by sk-thm-p1, and the route nodes above cover what they gave. Proof now follows Stacks (proof_origin document). Mathlib: no etale cohomology of curves; no leaf."
+ },
+ "lean": {
+  "module": "WeilConjectures.AlgebraicGeometry.Curve.SmoothCalculations",
+  "declaration": "AlgebraicGeometry.IsCurve.constantModSheaf_curveCalculations",
+  "branch": "slopmaster2",
+  "line": 221,
+  "declarations": [
+   "AlgebraicGeometry.IsCurve.constantModSheaf_curveCalculations"
+  ],
+  "sorry_free": false,
+  "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state rests_on_sorry)"
+ },
+ "reviewed": {
+  "date": "2026-10-09",
+  "by": "L",
+  "result": "pass",
+  "note": "statement made precise (r prime; the pair and constructibility; each C_j as an implication; the Kummer sequence for every smooth connected C; field-extension clause made explicit; clause (d): all eight assertions hold); nine steps along Stacks 0A5B Cases I/II citing lem-sc-c1..c8, the Kummer sequence (brauer-zero, kummer-les, h1-gm-pic) and thm-sc-proper-cohomology; the off-route thm-sc-affine-cohomology and thm-sc-constant-invariance dropped; no new nodes; Lean attached (rests on sorry)"
+ }
 }

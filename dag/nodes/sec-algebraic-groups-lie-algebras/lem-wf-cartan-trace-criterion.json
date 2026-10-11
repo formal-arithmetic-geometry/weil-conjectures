@@ -1,108 +1,110 @@
 {
-  "id": "lem-wf-cartan-trace-criterion",
-  "blueprint": {
-    "is": "lem-wf-cartan-trace-criterion",
-    "from": null,
-    "same_as": null
+ "id": "lem-wf-cartan-trace-criterion",
+ "blueprint": {
+  "is": "lem-wf-cartan-trace-criterion",
+  "from": null,
+  "same_as": null
+ },
+ "kind": "statement",
+ "title": "Cartan's trace criterion",
+ "statement": "Let $M$ be a finite-dimensional vector space over $\\Qlb$, and let\n$\\mathfrak a\\subseteq\\operatorname{End}(M)$ be a\nfinite-dimensional Lie algebra. If\n\n$$\n\\operatorname{tr}(XY)=0\n\\quad\\text{for all }X\\in[\\mathfrak a,\\mathfrak a]\n\\text{ and }Y\\in\\mathfrak a,\n$$\n\nthen $\\mathfrak a$ is solvable.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-algebraic-groups-lie-algebras/sk-p-lie/lem-wf-cartan-trace-criterion.md",
+  "place": "node lem-wf-cartan-trace-criterion, order 2470"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "Let $\\mathfrak d=[\\mathfrak a,\\mathfrak a]$. We first show that\nevery $X\\in\\mathfrak d$ is nilpotent. Write the ordinary Jordan\ndecomposition of the matrix $X$ as $X=S+N$, where $S$ is\ndiagonalizable, $N$ is nilpotent, and $SN=NS$. In a basis which\ndiagonalizes $S$, the operator\n$\\operatorname{ad}X:Y\\mapsto XY-YX$ on $\\operatorname{End}(M)$\nhas Jordan decomposition\n$\\operatorname{ad}S+\\operatorname{ad}N$: the first summand is\ndiagonalizable, the second nilpotent, and they commute. For each\neigenvalue $\\delta$ of $\\operatorname{ad}X$, let $e_\\delta$ be\nthe size of its largest Jordan block. Hermite interpolation gives a\npolynomial $P$ such that\n\n$$\nP(t)\\equiv0\\pmod{t^{e_0}},\\qquad\nP(t)\\equiv\\delta\\pmod{(t-\\delta)^{e_\\delta}}\n\\quad(\\delta\\ne0).\n$$",
+   "uses": [],
+   "elementary": null
   },
-  "kind": "statement",
-  "title": "Cartan's trace criterion",
-  "statement": "Let $M$ be a finite-dimensional vector space over $\\Qlb$, and let\n$\\mathfrak a\\subseteq\\operatorname{End}(M)$ be a\nfinite-dimensional Lie algebra. If\n\n$$\n\\operatorname{tr}(XY)=0\n\\quad\\text{for all }X\\in[\\mathfrak a,\\mathfrak a]\n\\text{ and }Y\\in\\mathfrak a,\n$$\n\nthen $\\mathfrak a$ is solvable.",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-algebraic-groups-lie-algebras/sk-p-lie/lem-wf-cartan-trace-criterion.md",
-    "place": "node lem-wf-cartan-trace-criterion, order 2470"
+  {
+   "text": "Here $e_0$ is the size of the largest Jordan block for the zero\neigenvalue. On the generalized zero-eigenspace this polynomial kills\nthe whole nilpotent block, while on a generalized\n$\\delta$-eigenspace with $\\delta\\ne0$ it retains the scalar\n$\\delta$ and kills its nilpotent part; hence\n$\\operatorname{ad}S=P(\\operatorname{ad}X)$. Since $\\mathfrak d$ is\nan ideal of $\\mathfrak a$, $\\operatorname{ad}X$ carries\n$\\mathfrak a$ into $\\mathfrak d$, and hence\n$[S,\\mathfrak a]\\subseteq\\mathfrak d$. The same calculation with\ncommutators shows that $\\operatorname{ad}S$ preserves $\\mathfrak d$.",
+   "uses": [],
+   "elementary": null
   },
-  "stmt_deps": [],
-  "proof": [
-    {
-      "text": "Let $\\mathfrak d=[\\mathfrak a,\\mathfrak a]$. We first show that\nevery $X\\in\\mathfrak d$ is nilpotent. Write the ordinary Jordan\ndecomposition of the matrix $X$ as $X=S+N$, where $S$ is\ndiagonalizable, $N$ is nilpotent, and $SN=NS$. In a basis which\ndiagonalizes $S$, the operator\n$\\operatorname{ad}X:Y\\mapsto XY-YX$ on $\\operatorname{End}(M)$\nhas Jordan decomposition\n$\\operatorname{ad}S+\\operatorname{ad}N$: the first summand is\ndiagonalizable, the second nilpotent, and they commute. For each\neigenvalue $\\delta$ of $\\operatorname{ad}X$, let $e_\\delta$ be\nthe size of its largest Jordan block. Hermite interpolation gives a\npolynomial $P$ such that\n\n$$\nP(t)\\equiv0\\pmod{t^{e_0}},\\qquad\nP(t)\\equiv\\delta\\pmod{(t-\\delta)^{e_\\delta}}\n\\quad(\\delta\\ne0).\n$$",
-      "uses": [],
-      "elementary": null
-    },
-    {
-      "text": "Here $e_0$ is the size of the largest Jordan block for the zero\neigenvalue. On the generalized zero-eigenspace this polynomial kills\nthe whole nilpotent block, while on a generalized\n$\\delta$-eigenspace with $\\delta\\ne0$ it retains the scalar\n$\\delta$ and kills its nilpotent part; hence\n$\\operatorname{ad}S=P(\\operatorname{ad}X)$. Since $\\mathfrak d$ is\nan ideal of $\\mathfrak a$, $\\operatorname{ad}X$ carries\n$\\mathfrak a$ into $\\mathfrak d$, and hence\n$[S,\\mathfrak a]\\subseteq\\mathfrak d$. The same calculation with\ncommutators shows that $\\operatorname{ad}S$ preserves $\\mathfrak d$.",
-      "uses": [],
-      "elementary": null
-    },
-    {
-      "text": "Let $\\lambda_1,\\ldots,\\lambda_N$ be the eigenvalues of $S$, with\nalgebraic multiplicity, and let $E$ be their finite-dimensional\n$\\mathbf Q$-linear span. For a $\\mathbf Q$-linear map\n$f:E\\to\\Qlb$, define $Z_f$ to act by $f(\\lambda)$ on the\n$\\lambda$-eigenspace of $S$. Choose a polynomial $R_f$ satisfying\n\n$$\nR_f(\\lambda_i-\\lambda_j)=f(\\lambda_i-\\lambda_j)\n\\quad\\text{for all }i,j,\\qquad R_f(0)=0.\n$$",
-      "uses": [],
-      "elementary": null
-    },
-    {
-      "text": "This is ordinary interpolation on the finite set of differences (the\nvalue at $0$ is already $f(0)=0$). On\n$\\operatorname{Hom}(M_{\\lambda_i},M_{\\lambda_j})$, both sides have\nthe same scalar action, so\n$\\operatorname{ad}Z_f=R_f(\\operatorname{ad}S)$. Thus\n$[Z_f,\\mathfrak a]\\subseteq\\mathfrak d$.",
-      "uses": [],
-      "elementary": null
-    },
-    {
-      "text": "Write $X=\\sum_j[A_j,B_j]$. Cyclicity of trace and the preceding\ncontainment give\n\n$$\n\\operatorname{tr}(XZ_f)\n=\\sum_j\\operatorname{tr}([Z_f,A_j]B_j)=0.\n$$",
-      "uses": [],
-      "elementary": null
-    },
-    {
-      "text": "Because $N$ preserves every $S$-eigenspace and is nilpotent there,\n$\\operatorname{tr}(NZ_f)=0$; hence\n\n$$\n\\sum_{i=1}^N f(\\lambda_i)\\lambda_i\n=\\operatorname{tr}(SZ_f)=0. \\tag{*}\n$$\n\nChoose a $\\mathbf Q$-basis $e_1,\\ldots,e_d$ of $E$, write\n$\\lambda_i=\\sum_j a_{ij}e_j$ with $a_{ij}\\in\\mathbf Q$, and put\n$f_j(e_k)=\\delta_{jk}$. Comparing the coefficient of $e_j$ in\n$(*)$ for $f=f_j$ gives $\\sum_i a_{ij}^2=0$. A sum of squares\nof rational numbers is zero only when every summand is zero. Thus all\n$\\lambda_i$ vanish and $X$ is nilpotent. Hence every element of\n$\\mathfrak d$ is nilpotent; by [lem-wf-engel-matrix],\n$\\mathfrak d$ is nilpotent and hence solvable. The quotient\n$\\mathfrak a/\\mathfrak d$ is abelian. Appending the derived series\nof $\\mathfrak d$ to the first step\n$\\mathfrak a\\supseteq\\mathfrak d$ therefore gives a terminating\nderived series for $\\mathfrak a$, so $\\mathfrak a$ is solvable.",
-      "uses": [
-        "lem-wf-engel-matrix"
-      ],
-      "elementary": false
-    }
-  ],
-  "proof_deps": [
+  {
+   "text": "Let $\\lambda_1,\\ldots,\\lambda_N$ be the eigenvalues of $S$, with\nalgebraic multiplicity, and let $E$ be their finite-dimensional\n$\\mathbf Q$-linear span. For a $\\mathbf Q$-linear map\n$f:E\\to\\Qlb$, define $Z_f$ to act by $f(\\lambda)$ on the\n$\\lambda$-eigenspace of $S$. Choose a polynomial $R_f$ satisfying\n\n$$\nR_f(\\lambda_i-\\lambda_j)=f(\\lambda_i-\\lambda_j)\n\\quad\\text{for all }i,j,\\qquad R_f(0)=0.\n$$",
+   "uses": [],
+   "elementary": null
+  },
+  {
+   "text": "This is ordinary interpolation on the finite set of differences (the\nvalue at $0$ is already $f(0)=0$). On\n$\\operatorname{Hom}(M_{\\lambda_i},M_{\\lambda_j})$, both sides have\nthe same scalar action, so\n$\\operatorname{ad}Z_f=R_f(\\operatorname{ad}S)$. Thus\n$[Z_f,\\mathfrak a]\\subseteq\\mathfrak d$.",
+   "uses": [],
+   "elementary": null
+  },
+  {
+   "text": "Write $X=\\sum_j[A_j,B_j]$. Cyclicity of trace and the preceding\ncontainment give\n\n$$\n\\operatorname{tr}(XZ_f)\n=\\sum_j\\operatorname{tr}([Z_f,A_j]B_j)=0.\n$$",
+   "uses": [],
+   "elementary": null
+  },
+  {
+   "text": "Because $N$ preserves every $S$-eigenspace and is nilpotent there,\n$\\operatorname{tr}(NZ_f)=0$; hence\n\n$$\n\\sum_{i=1}^N f(\\lambda_i)\\lambda_i\n=\\operatorname{tr}(SZ_f)=0. \\tag{*}\n$$\n\nChoose a $\\mathbf Q$-basis $e_1,\\ldots,e_d$ of $E$, write\n$\\lambda_i=\\sum_j a_{ij}e_j$ with $a_{ij}\\in\\mathbf Q$, and put\n$f_j(e_k)=\\delta_{jk}$. Comparing the coefficient of $e_j$ in\n$(*)$ for $f=f_j$ gives $\\sum_i a_{ij}^2=0$. A sum of squares\nof rational numbers is zero only when every summand is zero. Thus all\n$\\lambda_i$ vanish and $X$ is nilpotent. Hence every element of\n$\\mathfrak d$ is nilpotent; by [lem-wf-engel-matrix],\n$\\mathfrak d$ is nilpotent and hence solvable. The quotient\n$\\mathfrak a/\\mathfrak d$ is abelian. Appending the derived series\nof $\\mathfrak d$ to the first step\n$\\mathfrak a\\supseteq\\mathfrak d$ therefore gives a terminating\nderived series for $\\mathfrak a$, so $\\mathfrak a$ is solvable.",
+   "uses": [
     "lem-wf-engel-matrix"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/blueprint/master/blueprint/sec-algebraic-groups-lie-algebras/sk-p-lie/lem-wf-cartan-trace-criterion.md",
-    "place": "## Proof"
-  },
-  "mathlib_searches": [],
-  "mathlib_match": null,
-  "status": "imported",
-  "merged_into": null,
-  "import_flags": [
-    "long_proof_few_deps"
-  ],
-  "blueprint_kind": "lemma",
-  "blueprint_order": 2470,
-  "blueprint_uses": [
-    "lem-wf-engel-matrix"
-  ],
-  "proof_split_by": "paragraphs",
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "closed",
-      "decls": [
-        {
-          "name": "LieSubalgebra.isSolvable_of_trace_mul_eq_zero",
-          "module": "WeilConjectures.Mathlib.Algebra.Lie.CartanCriterion",
-          "lines": [
-            44,
-            70
-          ],
-          "kind": "theorem",
-          "sorry": false
-        }
-      ],
-      "missing": [],
-      "open": []
-    }
-  },
-  "chapter": "sec-algebraic-groups-lie-algebras",
-  "unit": "sk-p-lie",
-  "lean": {
-    "module": "WeilConjectures.Mathlib.Algebra.Lie.CartanCriterion",
-    "declaration": "LieSubalgebra.isSolvable_of_trace_mul_eq_zero",
-    "branch": "slopmaster2",
-    "line": 44,
-    "declarations": [
-      "LieSubalgebra.isSolvable_of_trace_mul_eq_zero"
-    ],
-    "sorry_free": true,
-    "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state closed)"
+   ],
+   "elementary": false
   }
+ ],
+ "proof_deps": [
+  "lem-wf-engel-matrix"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-algebraic-groups-lie-algebras/sk-p-lie/lem-wf-cartan-trace-criterion.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [
+  "long_proof_few_deps"
+ ],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 2470,
+ "blueprint_uses": [
+  "lem-wf-engel-matrix"
+ ],
+ "proof_split_by": "paragraphs",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "LieSubalgebra.isSolvable_of_trace_mul_eq_zero"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "LieSubalgebra.isSolvable_of_trace_mul_eq_zero",
+     "module": "WeilConjectures.Mathlib.Algebra.Lie.CartanCriterion",
+     "lines": [
+      44,
+      70
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
+ "chapter": "sec-algebraic-groups-lie-algebras",
+ "unit": "sk-p-lie",
+ "lean": {
+  "module": "WeilConjectures.Mathlib.Algebra.Lie.CartanCriterion",
+  "declaration": "LieSubalgebra.isSolvable_of_trace_mul_eq_zero",
+  "branch": "slopmaster2",
+  "line": 44,
+  "declarations": [
+   "LieSubalgebra.isSolvable_of_trace_mul_eq_zero"
+  ],
+  "sorry_free": true,
+  "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state closed)"
+ }
 }

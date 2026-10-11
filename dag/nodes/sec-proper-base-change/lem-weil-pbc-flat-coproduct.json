@@ -1,112 +1,112 @@
 {
-  "id": "lem-weil-pbc-flat-coproduct",
-  "blueprint": {
-    "is": null,
-    "from": {
-      "node": "thm-weil-pbc-bounded-below",
-      "place": "unspecified",
-      "via": [
-        "lem-weil-pbc-sheaf-flat-separator"
-      ]
-    },
-    "same_as": null
+ "id": "lem-weil-pbc-flat-coproduct",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-bounded-below",
+   "place": "unspecified",
+   "via": [
+    "lem-weil-pbc-sheaf-flat-separator"
+   ]
   },
-  "kind": "statement",
-  "title": "A coproduct of flat objects of a Grothendieck abelian braided closed monoidal category is flat",
-  "statement": "Let $\\mathcal B$ be a Grothendieck abelian category with a braided monoidal closed structure $\\otimes$, and call an object $P$ of $\\mathcal B$ flat if the functor $P\\otimes-:\\mathcal B\\to\\mathcal B$ preserves finite limits. If $(P_i)_{i\\in I}$ is a family of flat objects indexed by a set $I$ (of the size of the Hom-sets of $\\mathcal B$), then $\\coprod_{i\\in I}P_i$ is flat.",
-  "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Lemma 03EU (lemma-colimits-flat) part (2): a direct sum of flat sheaves of modules is flat, proved from Lemma 03EP (lemma-tensor-commute-colimits) and exactness of filtered colimits; the general statement is that of the slopmaster2 Lean declaration CategoryTheory.ObjectProperty.flat_coproduct, module WeilConjectures.CategoryTheory.Abelian.Flat.Basic, lines 59-79 (sorry-free in the sorry map), whose docstring gives the proof: tensor with the coproduct is the coproduct of the tensors (closedness), and Discrete-shaped colimits are left exact by AB4"
+  "same_as": null
+ },
+ "kind": "statement",
+ "title": "A coproduct of flat objects of a Grothendieck abelian braided closed monoidal category is flat",
+ "statement": "Let $\\mathcal B$ be a Grothendieck abelian category with a braided monoidal closed structure $\\otimes$, and call an object $P$ of $\\mathcal B$ flat if the functor $P\\otimes-:\\mathcal B\\to\\mathcal B$ preserves finite limits. If $(P_i)_{i\\in I}$ is a family of flat objects indexed by a set $I$ (of the size of the Hom-sets of $\\mathcal B$), then $\\coprod_{i\\in I}P_i$ is flat.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Lemma 03EU (lemma-colimits-flat) part (2): a direct sum of flat sheaves of modules is flat, proved from Lemma 03EP (lemma-tensor-commute-colimits) and exactness of filtered colimits; the general statement is that of the slopmaster2 Lean declaration CategoryTheory.ObjectProperty.flat_coproduct, module WeilConjectures.CategoryTheory.Abelian.Flat.Basic, lines 59-79 (sorry-free in the sorry map), whose docstring gives the proof: tensor with the coproduct is the coproduct of the tensors (closedness), and Discrete-shaped colimits are left exact by AB4"
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "coproduct of objects such that tensoring preserves finite limits also has tensoring preserving finite limits",
+   "results": "FinitaryExtensive.hasFiniteCoproducts; CommRingCat.Under.instPreservesFiniteLimitsUnderTensorProdOfFlatCarrier; IsMonoidalLeftDistrib.preservesBinaryCoproducts_tensorLeft; Limits.hasFiniteCoproducts_of_hasCoproducts",
+   "date": "2026-10-09",
+   "verdict": "no match"
   },
-  "stmt_deps": [],
-  "proof": [],
-  "proof_deps": [],
-  "proof_origin": null,
-  "mathlib_searches": [
-    {
-      "tool": "leansearch",
-      "query": "coproduct of objects such that tensoring preserves finite limits also has tensoring preserving finite limits",
-      "results": "FinitaryExtensive.hasFiniteCoproducts; CommRingCat.Under.instPreservesFiniteLimitsUnderTensorProdOfFlatCarrier; IsMonoidalLeftDistrib.preservesBinaryCoproducts_tensorLeft; Limits.hasFiniteCoproducts_of_hasCoproducts",
-      "date": "2026-10-09",
-      "verdict": "no match"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "tensor product with a coproduct of objects preserves finite limits when each tensor preserves finite limits, AB4 category",
-      "results": "CategoryTheory.AB4, AB4OfSize, AB4Star, AB4Star.of_AB5Star (GrothendieckAxioms.Basic); IsSifted.colim_preservesFiniteProducts_of_isSifted",
-      "date": "2026-10-09",
-      "verdict": "no match (only the AB4 axiom that the proof uses)"
-    },
-    {
-      "tool": "loogle",
-      "query": "CategoryTheory.Limits.PreservesFiniteLimits (CategoryTheory.MonoidalCategory.tensorLeft (CategoryTheory.Limits.sigmaObj _))",
-      "results": "none",
-      "date": "2026-10-09",
-      "verdict": "no match"
-    },
-    {
-      "tool": "grep",
-      "query": "rg -n 'tensorLeft.*sigma|sigma.*tensorLeft|preservesCoLimit_curriedTensor|flat_coproduct' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib; rg -n 'class .*Flat|def .*flat' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Monoidal ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Abelian",
-      "results": "Monoidal/Limits/Preserves.lean:42 preservesCoLimit_curriedTensor (a tool of the proof); no notion of a flat object of a monoidal abelian category, no coproduct lemma",
-      "date": "2026-10-09",
-      "verdict": "no match; the sorry-free slopmaster2 declaration ObjectProperty.flat_coproduct states it (for flat = both tensor functors exact, equivalent here by ObjectProperty.flat_iff_preservesFiniteLimits, sorry-free, same module lines 49-57)"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "unsplit",
-  "merged_into": null,
-  "created": {
-    "by": "worker",
-    "item": "lem-weil-pbc-sheaf-flat-separator",
-    "date": "2026-10-09"
+  {
+   "tool": "leanfinder",
+   "query": "tensor product with a coproduct of objects preserves finite limits when each tensor preserves finite limits, AB4 category",
+   "results": "CategoryTheory.AB4, AB4OfSize, AB4Star, AB4Star.of_AB5Star (GrothendieckAxioms.Basic); IsSifted.colim_preservesFiniteProducts_of_isSifted",
+   "date": "2026-10-09",
+   "verdict": "no match (only the AB4 axiom that the proof uses)"
   },
-  "lean_audit": {
-    "master": {
-      "state": "closed",
-      "decls": [
-        {
-          "name": "CategoryTheory.ObjectProperty.flat_coproduct",
-          "module": "WeilConjectures.CategoryTheory.Abelian.Flat.Basic",
-          "lines": [
-            59,
-            79
-          ],
-          "kind": "theorem",
-          "sorry": false
-        }
-      ],
-      "missing": [],
-      "open": []
-    },
-    "slopmaster2": {
-      "state": "closed",
-      "decls": [
-        {
-          "name": "CategoryTheory.ObjectProperty.flat_coproduct",
-          "module": "WeilConjectures.CategoryTheory.Abelian.Flat.Basic",
-          "lines": [
-            65,
-            85
-          ],
-          "kind": "theorem",
-          "sorry": false
-        }
-      ],
-      "missing": [],
-      "open": []
-    }
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.PreservesFiniteLimits (CategoryTheory.MonoidalCategory.tensorLeft (CategoryTheory.Limits.sigmaObj _))",
+   "results": "none",
+   "date": "2026-10-09",
+   "verdict": "no match"
   },
-  "chapter": "sec-proper-base-change",
-  "unit": "sk-def-exchange",
-  "lean": {
-    "module": "WeilConjectures.CategoryTheory.Abelian.Flat.Basic",
-    "declaration": "CategoryTheory.ObjectProperty.flat_coproduct",
-    "branch": "slopmaster2",
-    "line": 65,
-    "declarations": [
-      "CategoryTheory.ObjectProperty.flat_coproduct"
-    ],
-    "sorry_free": true,
-    "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state closed)"
+  {
+   "tool": "grep",
+   "query": "rg -n 'tensorLeft.*sigma|sigma.*tensorLeft|preservesCoLimit_curriedTensor|flat_coproduct' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib; rg -n 'class .*Flat|def .*flat' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Monoidal ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Abelian",
+   "results": "Monoidal/Limits/Preserves.lean:42 preservesCoLimit_curriedTensor (a tool of the proof); no notion of a flat object of a monoidal abelian category, no coproduct lemma",
+   "date": "2026-10-09",
+   "verdict": "no match; the sorry-free slopmaster2 declaration ObjectProperty.flat_coproduct states it (for flat = both tensor functors exact, equivalent here by ObjectProperty.flat_iff_preservesFiniteLimits, sorry-free, same module lines 49-57)"
   }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-sheaf-flat-separator",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "CategoryTheory.ObjectProperty.flat_coproduct",
+     "module": "WeilConjectures.CategoryTheory.Abelian.Flat.Basic",
+     "lines": [
+      59,
+      79
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "CategoryTheory.ObjectProperty.flat_coproduct",
+     "module": "WeilConjectures.CategoryTheory.Abelian.Flat.Basic",
+     "lines": [
+      71,
+      91
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-def-exchange",
+ "lean": {
+  "module": "WeilConjectures.CategoryTheory.Abelian.Flat.Basic",
+  "declaration": "CategoryTheory.ObjectProperty.flat_coproduct",
+  "branch": "slopmaster2",
+  "line": 65,
+  "declarations": [
+   "CategoryTheory.ObjectProperty.flat_coproduct"
+  ],
+  "sorry_free": true,
+  "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state closed)"
+ }
 }

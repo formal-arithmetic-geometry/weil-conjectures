@@ -1,63 +1,75 @@
 {
-  "id": "lem-sc-affine-inter-principal-both",
-  "blueprint": {
-    "is": null,
-    "from": {
-      "node": "lem-sc-hilbert-polynomial",
-      "place": "proof, induction step: gluing the affine embedded-point submodules; overlaps covered by opens principal in two affines",
-      "via": [
-        "lem-sc-hilbert-embedded-points",
-        "lem-sc-hilbert-embedded-points-gluing"
-      ]
-    },
-    "same_as": []
+ "id": "lem-sc-affine-inter-principal-both",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-hilbert-polynomial",
+   "place": "proof, induction step: gluing the affine embedded-point submodules; overlaps covered by opens principal in two affines",
+   "via": [
+    "lem-sc-hilbert-embedded-points",
+    "lem-sc-hilbert-embedded-points-gluing"
+   ]
   },
-  "kind": "statement",
-  "title": "Opens principal in two affine opens form a basis of their intersection",
-  "statement": "Let $X$ be a scheme [def-pc-scheme], $U,V\\subseteq X$ affine opens and $x\\in U\\cap V$. For $f\\in\\mathcal O_X(U)$ write $D_U(f)=\\{y\\in U:f(y)\\neq0\\text{ in }\\kappa(y)\\}$ [def-weil-residue-field], and similarly $D_V(g)$ for $g\\in\\mathcal O_X(V)$. Then there are $f\\in\\mathcal O_X(U)$ and $g\\in\\mathcal O_X(V)$ with $D_U(f)=D_V(g)$ and $x\\in D_U(f)$.",
-  "source": {
-    "document": "literature/stacks-project/schemes.tex",
-    "place": "Schemes, Lemma 26.11.5, Tag 01HR"
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Opens principal in two affine opens form a basis of their intersection",
+ "statement": "Let $X$ be a scheme [def-pc-scheme], $U,V\\subseteq X$ affine opens and $x\\in U\\cap V$. For $f\\in\\mathcal O_X(U)$ write $D_U(f)=\\{y\\in U:f(y)\\neq0\\text{ in }\\kappa(y)\\}$ [def-weil-residue-field], and similarly $D_V(g)$ for $g\\in\\mathcal O_X(V)$. Then there are $f\\in\\mathcal O_X(U)$ and $g\\in\\mathcal O_X(V)$ with $D_U(f)=D_V(g)$ and $x\\in D_U(f)$.",
+ "source": {
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Schemes, Lemma 26.11.5, Tag 01HR"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-residue-field"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -rn exists_basicOpen_le_affine_inter ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry",
+   "results": "Mathlib/AlgebraicGeometry/AffineScheme.lean:764 theorem AlgebraicGeometry.exists_basicOpen_le_affine_inter (hU : IsAffineOpen U) (hV : IsAffineOpen V) (x : X) (hx : x ∈ U ⊓ V) : ∃ (f : Γ(X, U)) (g : Γ(X, V)), X.basicOpen f = X.basicOpen g ∧ x ∈ X.basicOpen f",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.exists_basicOpen_le_affine_inter",
+  "file": "Mathlib/AlgebraicGeometry/AffineScheme.lean",
+  "line": 764,
+  "how": "exact, read with sed by L (21:33 UTC) on reviewer R-epg2603's finding (M1 delivery lem-sc-hilbert-embedded-points-gluing, 38c935301): for affine opens U, V and x in U ⊓ V there are f in Γ(X,U), g in Γ(X,V) with X.basicOpen f = X.basicOpen g and x in X.basicOpen f, which is the statement (D_U(f) is X.basicOpen f)."
+ },
+ "status": "mathlib",
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-def-av-ample-degree",
+ "created": {
+  "by": "reviewer",
+  "item": "lem-sc-hilbert-embedded-points-gluing",
+  "date": "2026-10-10"
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-epg2603",
+  "group": "M1",
+  "result": "pass",
+  "note": "reviewer-added statement-only node, promoted to a Mathlib leaf by L after reading AffineScheme.lean:763-770 with sed."
+ },
+ "lead_notes": [
+  "2026-10-10 21:33 UTC L: promoted to a Mathlib leaf (AlgebraicGeometry.exists_basicOpen_le_affine_inter) on R-epg2603's finding; the merge tool accepts reviewer-added nodes only as unsplit."
+ ],
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
   },
-  "stmt_deps": [
-    "def-pc-scheme",
-    "def-weil-residue-field"
-  ],
-  "proof": [],
-  "proof_deps": [],
-  "proof_origin": null,
-  "mathlib_searches": [
-    {
-      "tool": "grep",
-      "query": "grep -rn exists_basicOpen_le_affine_inter ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry",
-      "results": "Mathlib/AlgebraicGeometry/AffineScheme.lean:764 theorem AlgebraicGeometry.exists_basicOpen_le_affine_inter (hU : IsAffineOpen U) (hV : IsAffineOpen V) (x : X) (hx : x ∈ U ⊓ V) : ∃ (f : Γ(X, U)) (g : Γ(X, V)), X.basicOpen f = X.basicOpen g ∧ x ∈ X.basicOpen f",
-      "date": "2026-10-10",
-      "verdict": "match"
-    }
-  ],
-  "mathlib_match": {
-    "declaration": "AlgebraicGeometry.exists_basicOpen_le_affine_inter",
-    "file": "Mathlib/AlgebraicGeometry/AffineScheme.lean",
-    "line": 764,
-    "how": "exact, read with sed by L (21:33 UTC) on reviewer R-epg2603's finding (M1 delivery lem-sc-hilbert-embedded-points-gluing, 38c935301): for affine opens U, V and x in U ⊓ V there are f in Γ(X,U), g in Γ(X,V) with X.basicOpen f = X.basicOpen g and x in X.basicOpen f, which is the statement (D_U(f) is X.basicOpen f)."
-  },
-  "status": "mathlib",
-  "chapter": "sec-abelian-varieties",
-  "unit": "sk-def-av-ample-degree",
-  "created": {
-    "by": "reviewer",
-    "item": "lem-sc-hilbert-embedded-points-gluing",
-    "date": "2026-10-10"
-  },
-  "reviewed": {
-    "date": "2026-10-10",
-    "by": "L",
-    "reviewer": "R-epg2603",
-    "group": "M1",
-    "result": "pass",
-    "note": "reviewer-added statement-only node, promoted to a Mathlib leaf by L after reading AffineScheme.lean:763-770 with sed."
-  },
-  "lead_notes": [
-    "2026-10-10 21:33 UTC L: promoted to a Mathlib leaf (AlgebraicGeometry.exists_basicOpen_le_affine_inter) on R-epg2603's finding; the merge tool accepts reviewer-added nodes only as unsplit."
-  ]
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

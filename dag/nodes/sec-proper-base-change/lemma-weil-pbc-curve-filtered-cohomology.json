@@ -1,213 +1,215 @@
 {
-  "id": "lemma-weil-pbc-curve-filtered-cohomology",
-  "blueprint": {
-    "is": "lemma-weil-pbc-curve-filtered-cohomology",
-    "from": null,
-    "same_as": null
-  },
-  "kind": "statement",
-  "title": "Filtered cohomology continuity on a curve",
-  "statement": "Let $k$ be an algebraically closed field [def-weil-algebraic-closure] and $C$ a scheme over $k$ [def-weil-scheme-over-base], separated and of finite type over $\\operatorname{Spec}k$, with $\\dim C\\le1$, as in a curve coefficient pair [def-weil-pbc-curve-setting]. Let $A$ be a filtered small category, $(F_a)_{a\\in A}$ a diagram $A\\to\\Ab(C_{\\Et})$ of torsion abelian sheaves [def-weil-pbc-torsion-etale-sheaf] with transition maps $F(\\alpha):F_a\\to F_b$ ($\\alpha:a\\to b$), and $(F,(\\iota_a)_a)$ its colimit in $\\Ab(C_{\\Et})$ [def-weil-pbc-abelian-etale-sheaves], [def-weil-pbc-category-colimit]. For a scheme $T$ and a morphism $\\varphi$ of abelian sheaves on $T_{\\Et}$ write $H^q(\\varphi)$ for the induced map of etale cohomology groups [def-weil-pbc-etale-cohomology] defined in the statement of [lem-weil-pbc-cohomology-pullback-functorial]. Fix $q\\ge0$.\n\n1. (Continuity.) $a\\mapsto H^q(C_{\\Et},F_a)$, with transition maps $H^q(F(\\alpha))$, is a diagram $A\\to\\mathbf{Ab}$; let $(\\varinjlim_aH^q(C_{\\Et},F_a),(\\lambda_a)_a)$ be its colimit in abelian groups. The *canonical map* $\\kappa_C:\\varinjlim_aH^q(C_{\\Et},F_a)\\to H^q(C_{\\Et},F)$, the unique homomorphism with $\\kappa_C\\circ\\lambda_a=H^q(\\iota_a)$ for all $a$, is bijective.\n\n2. (Compatibility with extension of the ground field.) Let $k'/k$ be an extension of algebraically closed fields, $C_{k'}=C\\times_{\\operatorname{Spec}k}\\operatorname{Spec}k'$ the base change [def-pc-base-change] with projection $\\pi:C_{k'}\\to C$, $\\pi^{-1}$ the inverse image [def-weil-pbc-inverse-image], and for an abelian sheaf $G$ on $C_{\\Et}$ let $\\rho^q(G)=\\pi^*:H^q(C_{\\Et},G)\\to H^q((C_{k'})_{\\Et},\\pi^{-1}G)$ be the pullback map along $\\pi$ [def-weil-pbc-cohomology-pullback]; for torsion $G$ this is the map $\\rho^q_{k'/k}(C,G)$ of [def-weil-pbc-extension-pullback]. Let $(F',(\\iota'_a)_a)$ be the colimit of the diagram $a\\mapsto\\pi^{-1}F_a$ (transition maps $\\pi^{-1}F(\\alpha)$) in $\\Ab((C_{k'})_{\\Et})$, $\\theta:F'\\to\\pi^{-1}F$ the canonical map ($\\theta\\circ\\iota'_a=\\pi^{-1}\\iota_a$), and $\\kappa_{C_{k'}}:\\varinjlim_aH^q((C_{k'})_{\\Et},\\pi^{-1}F_a)\\to H^q((C_{k'})_{\\Et},F')$ the canonical map ($\\kappa_{C_{k'}}\\circ\\lambda'_a=H^q(\\iota'_a)$, $\\lambda'_a$ the coprojections). Then $\\theta$ is an isomorphism and $\\kappa_{C_{k'}}$ is bijective; the maps $\\rho^q(F_a)$ form a morphism of diagrams $a\\mapsto H^q(C_{\\Et},F_a)$ to $a\\mapsto H^q((C_{k'})_{\\Et},\\pi^{-1}F_a)$, inducing $\\mu=\\varinjlim_a\\rho^q(F_a)$ ($\\mu\\lambda_a=\\lambda'_a\\rho^q(F_a)$); and the square commutes:\n$$\\rho^q(F)\\circ\\kappa_C=H^q(\\theta)\\circ\\kappa_{C_{k'}}\\circ\\mu .$$\nIn words: the isomorphism $\\varinjlim_aH^q(C,F_a)\\cong H^q(C,\\varinjlim_aF_a)$ commutes with the maps $\\rho^q_{k'/k}$, after identifying $\\pi^{-1}\\varinjlim_aF_a=\\varinjlim_a\\pi^{-1}F_a$ by $\\theta$.\n\nThe torsion hypothesis is not used in the proof (it only makes $(C,F_a)$ and $(C,F)$ curve coefficient pairs, so that $\\rho^q_{k'/k}$ of [def-weil-pbc-extension-pullback] applies to them); both clauses hold for any filtered diagram of abelian sheaves, and clause 1 for any quasi-compact quasi-separated scheme in place of $C$.",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-p1/lemma-weil-pbc-curve-filtered-cohomology.md",
-    "place": "node lemma-weil-pbc-curve-filtered-cohomology, order 1150"
-  },
-  "stmt_deps": [
-    "def-weil-algebraic-closure",
-    "def-weil-scheme-over-base",
-    "def-weil-pbc-curve-setting",
-    "def-weil-pbc-torsion-etale-sheaf",
-    "def-weil-pbc-abelian-etale-sheaves",
-    "def-weil-pbc-category-colimit",
-    "def-weil-pbc-etale-cohomology",
-    "lem-weil-pbc-cohomology-pullback-functorial",
-    "def-pc-base-change",
-    "def-weil-pbc-inverse-image",
-    "def-weil-pbc-cohomology-pullback",
-    "def-weil-pbc-extension-pullback"
-  ],
-  "proof": [
-    {
-      "text": "*$C$ and $C_{k'}$ are quasi-compact and quasi-separated.* $C\\to\\operatorname{Spec}k$ is separated and of finite type, hence quasi-compact and quasi-separated, with affine target, so $C$ is quasi-compact and quasi-separated [lem-weil-pbc-qcqs-over-affine]. The base change $C_{k'}\\to\\operatorname{Spec}k'$ of $C\\to\\operatorname{Spec}k$ along $\\operatorname{Spec}k'\\to\\operatorname{Spec}k$ is separated and of finite type [lem-pod-separated-finite-type-base-change], so $C_{k'}$ is quasi-compact and quasi-separated by [lem-weil-pbc-qcqs-over-affine] again. (Leaf step: both nodes are Mathlib leaves.)",
-      "uses": [
-        "lem-weil-pbc-qcqs-over-affine",
-        "lem-pod-separated-finite-type-base-change"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/etale-cohomology.tex",
-        "place": "Lemma 03Q5 (lemma-colimit) and Theorem 09YQ (theorem-colimit) assume $X$ quasi-compact and quasi-separated; the verification for $X$ and $X_{k'}$ is left implicit in the proof of Theorem 03SC; written out by the agent from literature/stacks-project/schemes.tex Lemmas 01K4, 01KN, 01KU and literature/stacks-project/morphisms.tex Lemma 01T4"
-      }
-    },
-    {
-      "text": "*Functoriality of $H^q$; the canonical maps.* For a scheme $T$, $\\varphi\\mapsto H^q(\\varphi)$ is a functor $\\Ab(T_{\\Et})\\to\\mathbf{Ab}$: by the statement of [lem-weil-pbc-cohomology-pullback-functorial] $H^q(\\varphi)$ is computed by any lift $\\tilde\\varphi$ of $\\varphi$ to K-injective resolutions; $\\mathrm{id}$ lifts $\\mathrm{id}_G$, and if $\\tilde\\varphi$ lifts $\\varphi$ and $\\tilde\\psi$ lifts $\\psi$ then $\\tilde\\psi\\tilde\\varphi$ lifts $\\psi\\varphi$, so $H^q(\\mathrm{id})=\\mathrm{id}$, $H^q(\\psi\\varphi)=H^q(\\psi)H^q(\\varphi)$ (as in step 1 of the node lem-weil-pbc-pullback-iso-prime-torsion-devissage), and $H^q(\\varphi)$ is bijective when $\\varphi$ is an isomorphism. Hence $a\\mapsto H^q(C,F_a)$ with the maps $H^q(F(\\alpha))$ is a diagram $A\\to\\mathbf{Ab}$, it has a colimit (abelian groups have all small colimits; for a directed set this is the construction of [def-weil-directed-colimit-abelian-groups]), and since $\\iota_b\\circ F(\\alpha)=\\iota_a$ the family $H^q(\\iota_a)$ is a cocone, so $\\kappa_C$ exists and is unique [def-weil-pbc-category-colimit]. The same applies on $C_{k'}$ to $a\\mapsto\\pi^{-1}F_a$ (a diagram since $\\pi^{-1}$ is a functor), giving $\\kappa_{C_{k'}}$, and to the cocone $(\\pi^{-1}F,(\\pi^{-1}\\iota_a))$, giving $\\theta$.",
-      "uses": [
-        "lem-weil-pbc-cohomology-pullback-functorial",
-        "def-weil-pbc-category-colimit",
-        "def-weil-directed-colimit-abelian-groups",
-        "def-weil-pbc-inverse-image"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/etale-cohomology.tex",
-        "place": "Lemma 03Q5 (lemma-colimit): the map $\\colim_iH^p(X,\\mathcal F_i)\\to H^p(X,\\colim_i\\mathcal F_i)$ is the one induced by the maps $\\mathcal F_i\\to\\colim\\mathcal F_i$; functoriality written out by the agent as in step 1 of lem-weil-pbc-pullback-iso-prime-torsion-devissage"
-      }
-    },
-    {
-      "text": "*Clause 1 and the bijectivity statements of clause 2.* $C$ is quasi-compact and quasi-separated (step 1), so [lem-weil-pbc-cohomology-filtered-colimit], applied to the filtered system $(F_a)$ on $C$ (no torsion hypothesis is needed there), says that the canonical map $\\varinjlim_aH^q(C,F_a)\\to H^q(C,F)$ induced by the maps $H^q(\\iota_a)$ is bijective; this is $\\kappa_C$ (step 2: it is the unique map with $\\kappa_C\\lambda_a=H^q(\\iota_a)$). Likewise $C_{k'}$ is quasi-compact and quasi-separated (step 1), and the same node applied to $(\\pi^{-1}F_a)$ on $C_{k'}$ gives that $\\kappa_{C_{k'}}$ is bijective. Finally $\\pi^{-1}$ preserves colimits [lem-weil-pbc-inverse-image-preserves-colimits]: the canonical map $\\theta:\\varinjlim_a\\pi^{-1}F_a\\to\\pi^{-1}F$ induced by the $\\pi^{-1}\\iota_a$ is an isomorphism, so $H^q(\\theta)$ is bijective (step 2).",
-      "uses": [
-        "lem-weil-pbc-cohomology-filtered-colimit",
-        "lem-weil-pbc-inverse-image-preserves-colimits"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/etale-cohomology.tex",
-        "place": "Lemma 03Q5 (lemma-colimit), special case of Theorem 09YQ (theorem-colimit) with all $X_i=X$; proof of Theorem 03SC, first paragraph ('pullback via $X_{k'}\\to X$ commutes with colimits as a left adjoint')"
-      }
-    },
-    {
-      "text": "*The compatibility square.* (a) Naturality of $\\pi^*$ in the sheaf [lem-weil-pbc-cohomology-pullback-functorial] (clause 3), applied to $F(\\alpha):F_a\\to F_b$, gives $\\rho^q(F_b)\\circ H^q(F(\\alpha))=H^q(\\pi^{-1}F(\\alpha))\\circ\\rho^q(F_a)$: the $\\rho^q(F_a)$ form a morphism of diagrams $A\\to\\mathbf{Ab}$, so the family $\\lambda'_a\\rho^q(F_a)$ is a cocone on $a\\mapsto H^q(C,F_a)$ and induces a unique $\\mu$ with $\\mu\\lambda_a=\\lambda'_a\\rho^q(F_a)$ [def-weil-pbc-category-colimit]. (b) For every $a$, using step 2 and clause 3 of [lem-weil-pbc-cohomology-pullback-functorial] for $\\iota_a:F_a\\to F$:\n$$H^q(\\theta)\\kappa_{C_{k'}}\\mu\\lambda_a=H^q(\\theta)\\kappa_{C_{k'}}\\lambda'_a\\rho^q(F_a)=H^q(\\theta)H^q(\\iota'_a)\\rho^q(F_a)=H^q(\\theta\\iota'_a)\\rho^q(F_a)=H^q(\\pi^{-1}\\iota_a)\\rho^q(F_a)=\\rho^q(F)H^q(\\iota_a)=\\rho^q(F)\\kappa_C\\lambda_a .$$\nThe two homomorphisms $H^q(\\theta)\\kappa_{C_{k'}}\\mu$ and $\\rho^q(F)\\kappa_C$ out of $\\varinjlim_aH^q(C,F_a)$ agree after every coprojection $\\lambda_a$, so they are equal by the uniqueness clause of the universal property [def-weil-pbc-category-colimit]. This is the square of clause 2. (c) Consequently, $\\kappa_C$, $\\kappa_{C_{k'}}$ and $H^q(\\theta)$ being bijective (step 3), $\\rho^q(F)$ is bijective if and only if $\\mu$ is, e.g. whenever every $\\rho^q(F_a)$ is bijective (then the inverses $\\rho^q(F_a)^{-1}$ also form a morphism of diagrams and induce the inverse of $\\mu$, by uniqueness in the universal property); this is the form in which step 3 of the node lem-weil-pbc-curve-constructible-reduction uses the lemma. The torsion hypothesis was used nowhere. The imported proof's 'pullback of the hypercovers, sections and cocycles' is replaced by this naturality argument, which needs no description of $\\kappa$ by hypercovers.",
-      "uses": [
-        "lem-weil-pbc-cohomology-pullback-functorial",
-        "def-weil-pbc-category-colimit",
-        "def-weil-pbc-cohomology-pullback"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/etale-cohomology.tex",
-        "place": "proof of Theorem 03SC (theorem-vanishing-affine-curves), first paragraph (line 15695-15700): 'Taking cohomology commutes with colimits, see Lemma 03Q5. Moreover, pullback via $X_{k'}\\to X$ commutes with colimits as a left adjoint'; the diagram chase written out by the agent as in step 4 (c)-(d) of lem-weil-pbc-pullback-iso-prime-torsion-devissage"
-      }
-    }
-  ],
-  "proof_deps": [
-    "def-weil-directed-colimit-abelian-groups",
-    "def-weil-pbc-category-colimit",
-    "def-weil-pbc-cohomology-pullback",
-    "def-weil-pbc-inverse-image",
-    "lem-pod-separated-finite-type-base-change",
-    "lem-weil-pbc-cohomology-filtered-colimit",
-    "lem-weil-pbc-cohomology-pullback-functorial",
-    "lem-weil-pbc-inverse-image-preserves-colimits",
-    "lem-weil-pbc-qcqs-over-affine"
-  ],
-  "proof_origin": {
-    "by": "document",
+ "id": "lemma-weil-pbc-curve-filtered-cohomology",
+ "blueprint": {
+  "is": "lemma-weil-pbc-curve-filtered-cohomology",
+  "from": null,
+  "same_as": null
+ },
+ "kind": "statement",
+ "title": "Filtered cohomology continuity on a curve",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-algebraic-closure] and $C$ a scheme over $k$ [def-weil-scheme-over-base], separated and of finite type over $\\operatorname{Spec}k$, with $\\dim C\\le1$, as in a curve coefficient pair [def-weil-pbc-curve-setting]. Let $A$ be a filtered small category, $(F_a)_{a\\in A}$ a diagram $A\\to\\Ab(C_{\\Et})$ of torsion abelian sheaves [def-weil-pbc-torsion-etale-sheaf] with transition maps $F(\\alpha):F_a\\to F_b$ ($\\alpha:a\\to b$), and $(F,(\\iota_a)_a)$ its colimit in $\\Ab(C_{\\Et})$ [def-weil-pbc-abelian-etale-sheaves], [def-weil-pbc-category-colimit]. For a scheme $T$ and a morphism $\\varphi$ of abelian sheaves on $T_{\\Et}$ write $H^q(\\varphi)$ for the induced map of etale cohomology groups [def-weil-pbc-etale-cohomology] defined in the statement of [lem-weil-pbc-cohomology-pullback-functorial]. Fix $q\\ge0$.\n\n1. (Continuity.) $a\\mapsto H^q(C_{\\Et},F_a)$, with transition maps $H^q(F(\\alpha))$, is a diagram $A\\to\\mathbf{Ab}$; let $(\\varinjlim_aH^q(C_{\\Et},F_a),(\\lambda_a)_a)$ be its colimit in abelian groups. The *canonical map* $\\kappa_C:\\varinjlim_aH^q(C_{\\Et},F_a)\\to H^q(C_{\\Et},F)$, the unique homomorphism with $\\kappa_C\\circ\\lambda_a=H^q(\\iota_a)$ for all $a$, is bijective.\n\n2. (Compatibility with extension of the ground field.) Let $k'/k$ be an extension of algebraically closed fields, $C_{k'}=C\\times_{\\operatorname{Spec}k}\\operatorname{Spec}k'$ the base change [def-pc-base-change] with projection $\\pi:C_{k'}\\to C$, $\\pi^{-1}$ the inverse image [def-weil-pbc-inverse-image], and for an abelian sheaf $G$ on $C_{\\Et}$ let $\\rho^q(G)=\\pi^*:H^q(C_{\\Et},G)\\to H^q((C_{k'})_{\\Et},\\pi^{-1}G)$ be the pullback map along $\\pi$ [def-weil-pbc-cohomology-pullback]; for torsion $G$ this is the map $\\rho^q_{k'/k}(C,G)$ of [def-weil-pbc-extension-pullback]. Let $(F',(\\iota'_a)_a)$ be the colimit of the diagram $a\\mapsto\\pi^{-1}F_a$ (transition maps $\\pi^{-1}F(\\alpha)$) in $\\Ab((C_{k'})_{\\Et})$, $\\theta:F'\\to\\pi^{-1}F$ the canonical map ($\\theta\\circ\\iota'_a=\\pi^{-1}\\iota_a$), and $\\kappa_{C_{k'}}:\\varinjlim_aH^q((C_{k'})_{\\Et},\\pi^{-1}F_a)\\to H^q((C_{k'})_{\\Et},F')$ the canonical map ($\\kappa_{C_{k'}}\\circ\\lambda'_a=H^q(\\iota'_a)$, $\\lambda'_a$ the coprojections). Then $\\theta$ is an isomorphism and $\\kappa_{C_{k'}}$ is bijective; the maps $\\rho^q(F_a)$ form a morphism of diagrams $a\\mapsto H^q(C_{\\Et},F_a)$ to $a\\mapsto H^q((C_{k'})_{\\Et},\\pi^{-1}F_a)$, inducing $\\mu=\\varinjlim_a\\rho^q(F_a)$ ($\\mu\\lambda_a=\\lambda'_a\\rho^q(F_a)$); and the square commutes:\n$$\\rho^q(F)\\circ\\kappa_C=H^q(\\theta)\\circ\\kappa_{C_{k'}}\\circ\\mu .$$\nIn words: the isomorphism $\\varinjlim_aH^q(C,F_a)\\cong H^q(C,\\varinjlim_aF_a)$ commutes with the maps $\\rho^q_{k'/k}$, after identifying $\\pi^{-1}\\varinjlim_aF_a=\\varinjlim_a\\pi^{-1}F_a$ by $\\theta$.\n\nThe torsion hypothesis is not used in the proof (it only makes $(C,F_a)$ and $(C,F)$ curve coefficient pairs, so that $\\rho^q_{k'/k}$ of [def-weil-pbc-extension-pullback] applies to them); both clauses hold for any filtered diagram of abelian sheaves, and clause 1 for any quasi-compact quasi-separated scheme in place of $C$.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-p1/lemma-weil-pbc-curve-filtered-cohomology.md",
+  "place": "node lemma-weil-pbc-curve-filtered-cohomology, order 1150"
+ },
+ "stmt_deps": [
+  "def-weil-algebraic-closure",
+  "def-weil-scheme-over-base",
+  "def-weil-pbc-curve-setting",
+  "def-weil-pbc-torsion-etale-sheaf",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-etale-cohomology",
+  "lem-weil-pbc-cohomology-pullback-functorial",
+  "def-pc-base-change",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-cohomology-pullback",
+  "def-weil-pbc-extension-pullback"
+ ],
+ "proof": [
+  {
+   "text": "*$C$ and $C_{k'}$ are quasi-compact and quasi-separated.* $C\\to\\operatorname{Spec}k$ is separated and of finite type, hence quasi-compact and quasi-separated, with affine target, so $C$ is quasi-compact and quasi-separated [lem-weil-pbc-qcqs-over-affine]. The base change $C_{k'}\\to\\operatorname{Spec}k'$ of $C\\to\\operatorname{Spec}k$ along $\\operatorname{Spec}k'\\to\\operatorname{Spec}k$ is separated and of finite type [lem-pod-separated-finite-type-base-change], so $C_{k'}$ is quasi-compact and quasi-separated by [lem-weil-pbc-qcqs-over-affine] again. (Leaf step: both nodes are Mathlib leaves.)",
+   "uses": [
+    "lem-weil-pbc-qcqs-over-affine",
+    "lem-pod-separated-finite-type-base-change"
+   ],
+   "elementary": false,
+   "source": {
     "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma 03Q5 (lemma-colimit) / Theorem 09YQ (theorem-colimit) for clause 1; proof of Theorem 03SC (theorem-vanishing-affine-curves), first paragraph, for clause 2, whose diagram chase the source leaves implicit and the agent wrote out (steps 2 and 4)"
+    "place": "Lemma 03Q5 (lemma-colimit) and Theorem 09YQ (theorem-colimit) assume $X$ quasi-compact and quasi-separated; the verification for $X$ and $X_{k'}$ is left implicit in the proof of Theorem 03SC; written out by the agent from literature/stacks-project/schemes.tex Lemmas 01K4, 01KN, 01KU and literature/stacks-project/morphisms.tex Lemma 01T4"
+   }
   },
-  "mathlib_searches": [
-    {
-      "tool": "leansearch",
-      "query": "sheaf cohomology commutes with filtered colimits of sheaves",
-      "results": "CategoryTheory.Sheaf.hasFilteredColimitsOfSize, CategoryTheory.Sheaf.ab5ofSize, CategoryTheory.Sheaf.hasExactColimitsOfShape (Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Sheaf), CategoryTheory.isSheaf_pointwiseColimit (Mathlib.CategoryTheory.Sites.Coherent.ExtensiveColimits), CategoryTheory.Sheaf.isColimitSheafifyCocone (Mathlib.CategoryTheory.Sites.Limits), GrothendieckTopology.Point...PreservesColimits (Mathlib.CategoryTheory.Sites.Point.Basic): existence and exactness of filtered colimits of sheaves, colimit preservation by stalk functors; nothing on cohomology",
-      "date": "2026-10-09",
-      "verdict": "no match"
-    },
-    {
-      "tool": "loogle",
-      "query": "CategoryTheory.Sheaf.H",
-      "results": "CategoryTheory.Sheaf.H, Sheaf.H.map, Sheaf.H.map_comp_apply, Sheaf.H.map_id_apply, Sheaf.H.equiv₀, Sheaf.functorH_obj_coe, Sheaf.functorH_map, Sheaf.subsingleton_H_of_isZero, instSubsingletonHHAddNatOfNat (all Mathlib.CategoryTheory.Sites.SheafCohomology.Basic): definition and functoriality of sheaf cohomology as Ext, no colimit statement",
-      "date": "2026-10-09",
-      "verdict": "no match (functoriality of H^q in the sheaf is there: Sheaf.H.map, map_comp_apply)"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "Sheaf cohomology functor Sheaf.H preserves filtered colimits on a quasi-compact quasi-separated site",
-      "results": "CategoryTheory.Sheaf.hasFilteredColimitsOfSize, CategoryTheory.Sheaf.ab5ofSize, GrothendieckTopology.Point...PreservesColimits, Condensed colimit instances, LightCondensed.instIsGrothendieckAbelianLightCondMod",
-      "date": "2026-10-09",
-      "verdict": "no match"
-    },
-    {
-      "tool": "grep",
-      "query": "grep -rn 'functorH' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib | grep -i 'preserv\\|colim'; grep -rn 'colimit\\|IsFiltered\\|AB5' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites/SheafCohomology/; grep -rln 'smallEtaleTopology' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
-      "results": "none for the first two (SheafCohomology/ has Basic.lean, Cech.lean, MayerVietoris.lean, none mentions colimits); smallEtaleTopology occurs only in AlgebraicGeometry/Sites/{Etale,EtalePoint,AffineEtale}.lean, no etale cohomology",
-      "date": "2026-10-09",
-      "verdict": "no match: Mathlib has no etale cohomology and no continuity of Sheaf.H"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "merged_into": null,
-  "import_flags": [
-    "detailed_form",
-    "two_proofs"
-  ],
-  "blueprint_kind": "lemma",
-  "blueprint_order": 1150,
-  "blueprint_uses": [
-    "def-weil-pbc-eight-curve-assertions",
-    "def-weil-pbc-etale-sheaves",
-    "lem-weil-pbc-cohomology-filtered-colimit"
-  ],
-  "uses_not_cited": [
-    "def-weil-pbc-etale-sheaves",
-    "lem-weil-pbc-cohomology-filtered-colimit"
-  ],
-  "proof_split_by": "paragraphs",
-  "blueprint_sketch": [
-    {
-      "statement": "Let $X$ be quasi-compact and quasi-separated and let $(F_\\lambda)$ be a\nfiltered system of torsion etale sheaves. For every $q\\geq0$ the canonical\nmap\n\n$$\n\\varinjlim_\\lambda H^q(X,F_\\lambda)\\longrightarrow\nH^q(X,\\varinjlim_\\lambda F_\\lambda)\n$$\n\nis an isomorphism, naturally in $X$, the system, and pullback along a field\nextension.",
-      "proof": "For $q=0$, choose a finite etale cover on which a section is represented.\nThe section and its finitely many equalizer equations on pairwise fibre\nproducts occur at one index, proving surjectivity; if two representatives\nbecome equal in the colimit, the finite cover and equality witnesses occur\nat one later index, proving injectivity.\n\nFor $q>0$, represent a class on a split etale hypercover whose\n$(q+1)$-skeleton has finitely many quasi-compact components. A cocycle uses\nfinitely many sections and face-map equations, so all occur at one index\n$\\lambda$. This proves surjectivity. If the class from $F_\\lambda$ dies in\nthe colimit, choose a finite refinement and a degree-$(q-1)$ cochain whose\ncoboundary is the cocycle. The refinement maps, cochain sections, and\ncoboundary equations occur at one $\\mu\\geq\\lambda$, so the class already\ndies in $H^q(X,F_\\mu)$. Pullback of the finite hypercover and all its face\nmaps gives the same construction over an extension field, which proves the\nstated naturality.",
-      "cites": []
-    }
-  ],
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "sorry_here",
-      "decls": [
-        {
-          "name": "AlgebraicGeometry.Scheme.H_map_isColimit_of_isFiltered",
-          "module": "WeilConjectures.AlgebraicGeometry.Curve.Reductions",
-          "lines": [
-            68,
-            86
-          ],
-          "kind": "theorem",
-          "sorry": true
-        }
-      ],
-      "missing": [],
-      "open": []
-    }
+  {
+   "text": "*Functoriality of $H^q$; the canonical maps.* For a scheme $T$, $\\varphi\\mapsto H^q(\\varphi)$ is a functor $\\Ab(T_{\\Et})\\to\\mathbf{Ab}$: by the statement of [lem-weil-pbc-cohomology-pullback-functorial] $H^q(\\varphi)$ is computed by any lift $\\tilde\\varphi$ of $\\varphi$ to K-injective resolutions; $\\mathrm{id}$ lifts $\\mathrm{id}_G$, and if $\\tilde\\varphi$ lifts $\\varphi$ and $\\tilde\\psi$ lifts $\\psi$ then $\\tilde\\psi\\tilde\\varphi$ lifts $\\psi\\varphi$, so $H^q(\\mathrm{id})=\\mathrm{id}$, $H^q(\\psi\\varphi)=H^q(\\psi)H^q(\\varphi)$ (as in step 1 of the node lem-weil-pbc-pullback-iso-prime-torsion-devissage), and $H^q(\\varphi)$ is bijective when $\\varphi$ is an isomorphism. Hence $a\\mapsto H^q(C,F_a)$ with the maps $H^q(F(\\alpha))$ is a diagram $A\\to\\mathbf{Ab}$, it has a colimit (abelian groups have all small colimits; for a directed set this is the construction of [def-weil-directed-colimit-abelian-groups]), and since $\\iota_b\\circ F(\\alpha)=\\iota_a$ the family $H^q(\\iota_a)$ is a cocone, so $\\kappa_C$ exists and is unique [def-weil-pbc-category-colimit]. The same applies on $C_{k'}$ to $a\\mapsto\\pi^{-1}F_a$ (a diagram since $\\pi^{-1}$ is a functor), giving $\\kappa_{C_{k'}}$, and to the cocone $(\\pi^{-1}F,(\\pi^{-1}\\iota_a))$, giving $\\theta$.",
+   "uses": [
+    "lem-weil-pbc-cohomology-pullback-functorial",
+    "def-weil-pbc-category-colimit",
+    "def-weil-directed-colimit-abelian-groups",
+    "def-weil-pbc-inverse-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma 03Q5 (lemma-colimit): the map $\\colim_iH^p(X,\\mathcal F_i)\\to H^p(X,\\colim_i\\mathcal F_i)$ is the one induced by the maps $\\mathcal F_i\\to\\colim\\mathcal F_i$; functoriality written out by the agent as in step 1 of lem-weil-pbc-pullback-iso-prime-torsion-devissage"
+   }
   },
-  "chapter": "sec-proper-base-change",
-  "unit": "sk-thm-p1",
-  "split_report": {
-    "date": "2026-10-09",
-    "item": "lemma-weil-pbc-curve-filtered-cohomology",
-    "worker": "stage1",
-    "summary": "Statement made precise: C separated of finite type over an algebraically closed k with dim C <= 1 (the curve setting; the users need C proper), a filtered small diagram of torsion abelian sheaves with its colimit, the canonical map kappa_C defined by H^q of the coprojections, and the compatibility with extension of the ground field as an explicit square rho^q(F) kappa_C = H^q(theta) kappa_{C_k'} mu, with theta: colim pi^{-1}F_a -> pi^{-1}F the canonical isomorphism and mu = colim rho^q(F_a). Torsion kept as a harmless hypothesis (it makes rho^q_{k'/k} of def-weil-pbc-extension-pullback applicable), stated to be unused. Proof in four steps following Stacks 03Q5/09YQ and the first paragraph of the proof of 03SC: (1) C and C_k' qcqs (new Mathlib leaf lem-weil-pbc-qcqs-over-affine, and the leaf lem-pod-separated-finite-type-base-change; a leaf step); (2) functoriality of H^q and the canonical maps; (3) bijectivity of kappa_C, kappa_C' by lem-weil-pbc-cohomology-filtered-colimit and of theta by lem-weil-pbc-inverse-image-preserves-colimits; (4) the square by naturality of pi^* (lem-weil-pbc-cohomology-pullback-functorial clause 3) and the uniqueness of the colimit map, the argument of step 4 (c)-(d) of lem-weil-pbc-pullback-iso-prime-torsion-devissage. The imported 'pullback of hypercovers, sections and cocycles' is replaced by that naturality argument; def-weil-pbc-eight-curve-assertions (cited by the import, not used) dropped from the proof; def-weil-pbc-etale-sheaves replaced in stmt_deps by the precise notions. Mathlib: no etale cohomology, no continuity of Sheaf.H (three kinds of search). Source repository: no declaration states this lemma."
-  },
-  "tool_uses": [
+  {
+   "text": "*Clause 1 and the bijectivity statements of clause 2.* $C$ is quasi-compact and quasi-separated (step 1), so [lem-weil-pbc-cohomology-filtered-colimit], applied to the filtered system $(F_a)$ on $C$ (no torsion hypothesis is needed there), says that the canonical map $\\varinjlim_aH^q(C,F_a)\\to H^q(C,F)$ induced by the maps $H^q(\\iota_a)$ is bijective; this is $\\kappa_C$ (step 2: it is the unique map with $\\kappa_C\\lambda_a=H^q(\\iota_a)$). Likewise $C_{k'}$ is quasi-compact and quasi-separated (step 1), and the same node applied to $(\\pi^{-1}F_a)$ on $C_{k'}$ gives that $\\kappa_{C_{k'}}$ is bijective. Finally $\\pi^{-1}$ preserves colimits [lem-weil-pbc-inverse-image-preserves-colimits]: the canonical map $\\theta:\\varinjlim_a\\pi^{-1}F_a\\to\\pi^{-1}F$ induced by the $\\pi^{-1}\\iota_a$ is an isomorphism, so $H^q(\\theta)$ is bijective (step 2).",
+   "uses": [
+    "lem-weil-pbc-cohomology-filtered-colimit",
     "lem-weil-pbc-inverse-image-preserves-colimits"
-  ],
-  "reviewed": {
-    "date": "2026-10-09",
-    "by": "L",
-    "result": "pass",
-    "note": "Four steps along Stacks 03Q5/09YQ and the first paragraph of 03SC; the square is the naturality chase. Mathlib leaf lem-weil-pbc-qcqs-over-affine verified (QuasiCompact.compactSpace_of_compactSpace QuasiCompact.lean:150, quasiSeparatedSpace_of_quasiSeparated QuasiSeparated.lean:155, instances compactSpace_of_isAffine, quasiSeparatedSpace_of_isAffine, IsSeparated -> QuasiSeparated Separated.lean:68). Torsion hypothesis kept and declared unused. No exact Lean (H_map_isColimit_of_isFiltered Reductions.lean:78 is clause 1 for general qcqs X, docstring names this node: candidate for lem-weil-pbc-cohomology-filtered-colimit)."
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma 03Q5 (lemma-colimit), special case of Theorem 09YQ (theorem-colimit) with all $X_i=X$; proof of Theorem 03SC, first paragraph ('pullback via $X_{k'}\\to X$ commutes with colimits as a left adjoint')"
+   }
   },
-  "lean_candidates": [
-    {
-      "name": "AlgebraicGeometry.Scheme.H_map_isColimit_of_isFiltered",
-      "module": "WeilConjectures.AlgebraicGeometry.Curve.Reductions",
-      "note": "clause 1 only (continuity on a qcqs scheme); its docstring names this node; sorry; belongs to lem-weil-pbc-cohomology-filtered-colimit"
-    }
-  ],
-  "lean": {
-    "module": "WeilConjectures.AlgebraicGeometry.Curve.Reductions",
-    "declaration": "AlgebraicGeometry.Scheme.H_map_isColimit_of_isFiltered",
-    "branch": "slopmaster2",
-    "line": 68,
-    "declarations": [
-      "AlgebraicGeometry.Scheme.H_map_isColimit_of_isFiltered"
-    ],
-    "sorry_free": false,
-    "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state sorry_here)"
+  {
+   "text": "*The compatibility square.* (a) Naturality of $\\pi^*$ in the sheaf [lem-weil-pbc-cohomology-pullback-functorial] (clause 3), applied to $F(\\alpha):F_a\\to F_b$, gives $\\rho^q(F_b)\\circ H^q(F(\\alpha))=H^q(\\pi^{-1}F(\\alpha))\\circ\\rho^q(F_a)$: the $\\rho^q(F_a)$ form a morphism of diagrams $A\\to\\mathbf{Ab}$, so the family $\\lambda'_a\\rho^q(F_a)$ is a cocone on $a\\mapsto H^q(C,F_a)$ and induces a unique $\\mu$ with $\\mu\\lambda_a=\\lambda'_a\\rho^q(F_a)$ [def-weil-pbc-category-colimit]. (b) For every $a$, using step 2 and clause 3 of [lem-weil-pbc-cohomology-pullback-functorial] for $\\iota_a:F_a\\to F$:\n$$H^q(\\theta)\\kappa_{C_{k'}}\\mu\\lambda_a=H^q(\\theta)\\kappa_{C_{k'}}\\lambda'_a\\rho^q(F_a)=H^q(\\theta)H^q(\\iota'_a)\\rho^q(F_a)=H^q(\\theta\\iota'_a)\\rho^q(F_a)=H^q(\\pi^{-1}\\iota_a)\\rho^q(F_a)=\\rho^q(F)H^q(\\iota_a)=\\rho^q(F)\\kappa_C\\lambda_a .$$\nThe two homomorphisms $H^q(\\theta)\\kappa_{C_{k'}}\\mu$ and $\\rho^q(F)\\kappa_C$ out of $\\varinjlim_aH^q(C,F_a)$ agree after every coprojection $\\lambda_a$, so they are equal by the uniqueness clause of the universal property [def-weil-pbc-category-colimit]. This is the square of clause 2. (c) Consequently, $\\kappa_C$, $\\kappa_{C_{k'}}$ and $H^q(\\theta)$ being bijective (step 3), $\\rho^q(F)$ is bijective if and only if $\\mu$ is, e.g. whenever every $\\rho^q(F_a)$ is bijective (then the inverses $\\rho^q(F_a)^{-1}$ also form a morphism of diagrams and induce the inverse of $\\mu$, by uniqueness in the universal property); this is the form in which step 3 of the node lem-weil-pbc-curve-constructible-reduction uses the lemma. The torsion hypothesis was used nowhere. The imported proof's 'pullback of the hypercovers, sections and cocycles' is replaced by this naturality argument, which needs no description of $\\kappa$ by hypercovers.",
+   "uses": [
+    "lem-weil-pbc-cohomology-pullback-functorial",
+    "def-weil-pbc-category-colimit",
+    "def-weil-pbc-cohomology-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "proof of Theorem 03SC (theorem-vanishing-affine-curves), first paragraph (line 15695-15700): 'Taking cohomology commutes with colimits, see Lemma 03Q5. Moreover, pullback via $X_{k'}\\to X$ commutes with colimits as a left adjoint'; the diagram chase written out by the agent as in step 4 (c)-(d) of lem-weil-pbc-pullback-iso-prime-torsion-devissage"
+   }
   }
+ ],
+ "proof_deps": [
+  "def-weil-directed-colimit-abelian-groups",
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-cohomology-pullback",
+  "def-weil-pbc-inverse-image",
+  "lem-pod-separated-finite-type-base-change",
+  "lem-weil-pbc-cohomology-filtered-colimit",
+  "lem-weil-pbc-cohomology-pullback-functorial",
+  "lem-weil-pbc-inverse-image-preserves-colimits",
+  "lem-weil-pbc-qcqs-over-affine"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Lemma 03Q5 (lemma-colimit) / Theorem 09YQ (theorem-colimit) for clause 1; proof of Theorem 03SC (theorem-vanishing-affine-curves), first paragraph, for clause 2, whose diagram chase the source leaves implicit and the agent wrote out (steps 2 and 4)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "sheaf cohomology commutes with filtered colimits of sheaves",
+   "results": "CategoryTheory.Sheaf.hasFilteredColimitsOfSize, CategoryTheory.Sheaf.ab5ofSize, CategoryTheory.Sheaf.hasExactColimitsOfShape (Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Sheaf), CategoryTheory.isSheaf_pointwiseColimit (Mathlib.CategoryTheory.Sites.Coherent.ExtensiveColimits), CategoryTheory.Sheaf.isColimitSheafifyCocone (Mathlib.CategoryTheory.Sites.Limits), GrothendieckTopology.Point...PreservesColimits (Mathlib.CategoryTheory.Sites.Point.Basic): existence and exactness of filtered colimits of sheaves, colimit preservation by stalk functors; nothing on cohomology",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf.H",
+   "results": "CategoryTheory.Sheaf.H, Sheaf.H.map, Sheaf.H.map_comp_apply, Sheaf.H.map_id_apply, Sheaf.H.equiv₀, Sheaf.functorH_obj_coe, Sheaf.functorH_map, Sheaf.subsingleton_H_of_isZero, instSubsingletonHHAddNatOfNat (all Mathlib.CategoryTheory.Sites.SheafCohomology.Basic): definition and functoriality of sheaf cohomology as Ext, no colimit statement",
+   "date": "2026-10-09",
+   "verdict": "no match (functoriality of H^q in the sheaf is there: Sheaf.H.map, map_comp_apply)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sheaf cohomology functor Sheaf.H preserves filtered colimits on a quasi-compact quasi-separated site",
+   "results": "CategoryTheory.Sheaf.hasFilteredColimitsOfSize, CategoryTheory.Sheaf.ab5ofSize, GrothendieckTopology.Point...PreservesColimits, Condensed colimit instances, LightCondensed.instIsGrothendieckAbelianLightCondMod",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'functorH' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib | grep -i 'preserv\\|colim'; grep -rn 'colimit\\|IsFiltered\\|AB5' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites/SheafCohomology/; grep -rln 'smallEtaleTopology' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+   "results": "none for the first two (SheafCohomology/ has Basic.lean, Cech.lean, MayerVietoris.lean, none mentions colimits); smallEtaleTopology occurs only in AlgebraicGeometry/Sites/{Etale,EtalePoint,AffineEtale}.lean, no etale cohomology",
+   "date": "2026-10-09",
+   "verdict": "no match: Mathlib has no etale cohomology and no continuity of Sheaf.H"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [
+  "detailed_form",
+  "two_proofs"
+ ],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 1150,
+ "blueprint_uses": [
+  "def-weil-pbc-eight-curve-assertions",
+  "def-weil-pbc-etale-sheaves",
+  "lem-weil-pbc-cohomology-filtered-colimit"
+ ],
+ "uses_not_cited": [
+  "def-weil-pbc-etale-sheaves",
+  "lem-weil-pbc-cohomology-filtered-colimit"
+ ],
+ "proof_split_by": "paragraphs",
+ "blueprint_sketch": [
+  {
+   "statement": "Let $X$ be quasi-compact and quasi-separated and let $(F_\\lambda)$ be a\nfiltered system of torsion etale sheaves. For every $q\\geq0$ the canonical\nmap\n\n$$\n\\varinjlim_\\lambda H^q(X,F_\\lambda)\\longrightarrow\nH^q(X,\\varinjlim_\\lambda F_\\lambda)\n$$\n\nis an isomorphism, naturally in $X$, the system, and pullback along a field\nextension.",
+   "proof": "For $q=0$, choose a finite etale cover on which a section is represented.\nThe section and its finitely many equalizer equations on pairwise fibre\nproducts occur at one index, proving surjectivity; if two representatives\nbecome equal in the colimit, the finite cover and equality witnesses occur\nat one later index, proving injectivity.\n\nFor $q>0$, represent a class on a split etale hypercover whose\n$(q+1)$-skeleton has finitely many quasi-compact components. A cocycle uses\nfinitely many sections and face-map equations, so all occur at one index\n$\\lambda$. This proves surjectivity. If the class from $F_\\lambda$ dies in\nthe colimit, choose a finite refinement and a degree-$(q-1)$ cochain whose\ncoboundary is the cocycle. The refinement maps, cochain sections, and\ncoboundary equations occur at one $\\mu\\geq\\lambda$, so the class already\ndies in $H^q(X,F_\\mu)$. Pullback of the finite hypercover and all its face\nmaps gives the same construction over an extension field, which proves the\nstated naturality.",
+   "cites": []
+  }
+ ],
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.Scheme.H_map_isColimit_of_isFiltered"
+   ]
+  },
+  "slopmaster2": {
+   "state": "sorry_here",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.Scheme.H_map_isColimit_of_isFiltered",
+     "module": "WeilConjectures.AlgebraicGeometry.Curve.Reductions",
+     "lines": [
+      68,
+      86
+     ],
+     "kind": "theorem",
+     "sorry": true
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-09",
+  "item": "lemma-weil-pbc-curve-filtered-cohomology",
+  "worker": "stage1",
+  "summary": "Statement made precise: C separated of finite type over an algebraically closed k with dim C <= 1 (the curve setting; the users need C proper), a filtered small diagram of torsion abelian sheaves with its colimit, the canonical map kappa_C defined by H^q of the coprojections, and the compatibility with extension of the ground field as an explicit square rho^q(F) kappa_C = H^q(theta) kappa_{C_k'} mu, with theta: colim pi^{-1}F_a -> pi^{-1}F the canonical isomorphism and mu = colim rho^q(F_a). Torsion kept as a harmless hypothesis (it makes rho^q_{k'/k} of def-weil-pbc-extension-pullback applicable), stated to be unused. Proof in four steps following Stacks 03Q5/09YQ and the first paragraph of the proof of 03SC: (1) C and C_k' qcqs (new Mathlib leaf lem-weil-pbc-qcqs-over-affine, and the leaf lem-pod-separated-finite-type-base-change; a leaf step); (2) functoriality of H^q and the canonical maps; (3) bijectivity of kappa_C, kappa_C' by lem-weil-pbc-cohomology-filtered-colimit and of theta by lem-weil-pbc-inverse-image-preserves-colimits; (4) the square by naturality of pi^* (lem-weil-pbc-cohomology-pullback-functorial clause 3) and the uniqueness of the colimit map, the argument of step 4 (c)-(d) of lem-weil-pbc-pullback-iso-prime-torsion-devissage. The imported 'pullback of hypercovers, sections and cocycles' is replaced by that naturality argument; def-weil-pbc-eight-curve-assertions (cited by the import, not used) dropped from the proof; def-weil-pbc-etale-sheaves replaced in stmt_deps by the precise notions. Mathlib: no etale cohomology, no continuity of Sheaf.H (three kinds of search). Source repository: no declaration states this lemma."
+ },
+ "tool_uses": [
+  "lem-weil-pbc-inverse-image-preserves-colimits"
+ ],
+ "reviewed": {
+  "date": "2026-10-09",
+  "by": "L",
+  "result": "pass",
+  "note": "Four steps along Stacks 03Q5/09YQ and the first paragraph of 03SC; the square is the naturality chase. Mathlib leaf lem-weil-pbc-qcqs-over-affine verified (QuasiCompact.compactSpace_of_compactSpace QuasiCompact.lean:150, quasiSeparatedSpace_of_quasiSeparated QuasiSeparated.lean:155, instances compactSpace_of_isAffine, quasiSeparatedSpace_of_isAffine, IsSeparated -> QuasiSeparated Separated.lean:68). Torsion hypothesis kept and declared unused. No exact Lean (H_map_isColimit_of_isFiltered Reductions.lean:78 is clause 1 for general qcqs X, docstring names this node: candidate for lem-weil-pbc-cohomology-filtered-colimit)."
+ },
+ "lean_candidates": [
+  {
+   "name": "AlgebraicGeometry.Scheme.H_map_isColimit_of_isFiltered",
+   "module": "WeilConjectures.AlgebraicGeometry.Curve.Reductions",
+   "note": "clause 1 only (continuity on a qcqs scheme); its docstring names this node; sorry; belongs to lem-weil-pbc-cohomology-filtered-colimit"
+  }
+ ],
+ "lean": {
+  "module": "WeilConjectures.AlgebraicGeometry.Curve.Reductions",
+  "declaration": "AlgebraicGeometry.Scheme.H_map_isColimit_of_isFiltered",
+  "branch": "slopmaster2",
+  "line": 68,
+  "declarations": [
+   "AlgebraicGeometry.Scheme.H_map_isColimit_of_isFiltered"
+  ],
+  "sorry_free": false,
+  "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state sorry_here)"
+ }
 }

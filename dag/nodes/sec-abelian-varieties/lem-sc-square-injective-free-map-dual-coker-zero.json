@@ -1,62 +1,74 @@
 {
-  "id": "lem-sc-square-injective-free-map-dual-coker-zero",
-  "blueprint": {
-    "is": null,
-    "from": {
-      "node": "thm-sc-theorem-of-cube",
-      "place": "proof: construct the locally closed loci on which degree-zero direct images are finite locally free",
-      "via": [
-        "lem-sc-general-theorem-of-cube",
-        "lem-sc-perfect-h0-locally-closed"
-      ]
-    },
-    "same_as": []
+ "id": "lem-sc-square-injective-free-map-dual-coker-zero",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "proof: construct the locally closed loci on which degree-zero direct images are finite locally free",
+   "via": [
+    "lem-sc-general-theorem-of-cube",
+    "lem-sc-perfect-h0-locally-closed"
+   ]
   },
-  "kind": "statement",
-  "title": "An injective endomorphism of a finite free module has cokernel with zero dual",
-  "statement": "Let $R$ be a commutative ring and $n\\ge0$ an integer. If $\\psi:R^{\\oplus n}\\to R^{\\oplus n}$ is an injective $R$-linear map of finite free $R$-modules [def-weil-pbc-free-module], then $\\mathrm{Hom}_R(\\mathrm{Coker}(\\psi),R)=0$; equivalently, the transpose $\\psi^t:R^{\\oplus n}\\to R^{\\oplus n}$ is injective.",
-  "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "More on Algebra, Lemma coker-injective-free, Tag 0EWY (more-algebra.tex line 3899)"
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "An injective endomorphism of a finite free module has cokernel with zero dual",
+ "statement": "Let $R$ be a commutative ring and $n\\ge0$ an integer. If $\\psi:R^{\\oplus n}\\to R^{\\oplus n}$ is an injective $R$-linear map of finite free $R$-modules [def-weil-pbc-free-module], then $\\mathrm{Hom}_R(\\mathrm{Coker}(\\psi),R)=0$; equivalently, the transpose $\\psi^t:R^{\\oplus n}\\to R^{\\oplus n}$ is injective.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "More on Algebra, Lemma coker-injective-free, Tag 0EWY (more-algebra.tex line 3899)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-free-module"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -rnE 'McCoy|mulVec_injective_iff|det_mem_nonZeroDivisors|injective.*nonZeroDivisors' Mathlib (slopmaster2 mathlib)",
+   "results": "Matrix.mulVec_injective_of_det_mem_nonZeroDivisors (Nondegenerate.lean:185, converse direction only), Matrix.mulVec_injective_iff (linear independence of columns), mulVec_injective_iff_isUnit over a field; no McCoy theorem and no statement that an injective square matrix has injective transpose or nonzerodivisor determinant",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Matrix.mulVec_injective_iff; Matrix.linearIndependent_col_iff_row; Matrix.vecMul_injective_iff",
+  "file": "Mathlib/LinearAlgebra/Matrix/Nonsingular.lean",
+  "line": 139,
+  "how": "exact composite, read with sed by L (23:59 UTC) after reviewer R-sif3157 (J1 delivery e7a5130d2): for the matrix A of psi over the commutative ring R, Matrix.mulVec_injective_iff (ToLin.lean:346) gives psi injective iff the columns are linearly independent, Matrix.linearIndependent_col_iff_row (Nonsingular.lean:139, Finite n) turns that into row independence, and Matrix.vecMul_injective_iff (ToLin.lean:185) is injectivity of the transpose; the clause Hom_R(Coker psi, R)=0 is the statement's own \"equivalently\" (Hom(Coker psi,R) = ker(psi^t) by left exactness of Hom(-,R))."
+ },
+ "status": "mathlib",
+ "created": {
+  "item": "lem-sc-perfect-h0-locally-closed",
+  "by": "reviewer",
+  "date": "2026-10-10"
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-sif3157",
+  "group": "J1",
+  "result": "pass",
+  "note": "Mathlib leaf set by L at 23:59 UTC; the J1 split (e7a5130d2, an adjugate argument with two leaves) is not needed and was returned as unneeded."
+ },
+ "lead_notes": [
+  "23:59 UTC L: status set to mathlib (composite of three declarations, see mathlib_match) after reviewer R-sif3157 answered MATHLIB on the J1 delivery e7a5130d2; delivery returned as unneeded."
+ ],
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
   },
-  "stmt_deps": [
-    "def-weil-pbc-free-module"
-  ],
-  "proof": [],
-  "proof_deps": [],
-  "proof_origin": null,
-  "mathlib_searches": [
-    {
-      "tool": "grep",
-      "query": "grep -rnE 'McCoy|mulVec_injective_iff|det_mem_nonZeroDivisors|injective.*nonZeroDivisors' Mathlib (slopmaster2 mathlib)",
-      "results": "Matrix.mulVec_injective_of_det_mem_nonZeroDivisors (Nondegenerate.lean:185, converse direction only), Matrix.mulVec_injective_iff (linear independence of columns), mulVec_injective_iff_isUnit over a field; no McCoy theorem and no statement that an injective square matrix has injective transpose or nonzerodivisor determinant",
-      "date": "2026-10-10",
-      "verdict": "no match"
-    }
-  ],
-  "mathlib_match": {
-    "declaration": "Matrix.mulVec_injective_iff; Matrix.linearIndependent_col_iff_row; Matrix.vecMul_injective_iff",
-    "file": "Mathlib/LinearAlgebra/Matrix/Nonsingular.lean",
-    "line": 139,
-    "how": "exact composite, read with sed by L (23:59 UTC) after reviewer R-sif3157 (J1 delivery e7a5130d2): for the matrix A of psi over the commutative ring R, Matrix.mulVec_injective_iff (ToLin.lean:346) gives psi injective iff the columns are linearly independent, Matrix.linearIndependent_col_iff_row (Nonsingular.lean:139, Finite n) turns that into row independence, and Matrix.vecMul_injective_iff (ToLin.lean:185) is injectivity of the transpose; the clause Hom_R(Coker psi, R)=0 is the statement's own \"equivalently\" (Hom(Coker psi,R) = ker(psi^t) by left exactness of Hom(-,R))."
-  },
-  "status": "mathlib",
-  "created": {
-    "item": "lem-sc-perfect-h0-locally-closed",
-    "by": "reviewer",
-    "date": "2026-10-10"
-  },
-  "chapter": "sec-abelian-varieties",
-  "unit": "sk-prop-av-cube",
-  "reviewed": {
-    "date": "2026-10-10",
-    "by": "L",
-    "reviewer": "R-sif3157",
-    "group": "J1",
-    "result": "pass",
-    "note": "Mathlib leaf set by L at 23:59 UTC; the J1 split (e7a5130d2, an adjugate argument with two leaves) is not needed and was returned as unneeded."
-  },
-  "lead_notes": [
-    "23:59 UTC L: status set to mathlib (composite of three declarations, see mathlib_match) after reviewer R-sif3157 answered MATHLIB on the J1 delivery e7a5130d2; delivery returned as unneeded."
-  ]
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

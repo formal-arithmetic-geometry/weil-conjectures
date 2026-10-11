@@ -1,97 +1,109 @@
 {
-  "id": "lem-sc-components-open-injection",
-  "blueprint": {
-    "is": null,
-    "from": {
-      "node": "lem-sc-hilbert-polynomial",
-      "place": "proof, induction step: the nowhere-dense support has dimension strictly below dim X; restrict components to the chosen open neighbourhood",
-      "via": [
-        "lem-sc-locnoeth-components-locally-finite"
-      ]
-    },
-    "same_as": []
+ "id": "lem-sc-components-open-injection",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-hilbert-polynomial",
+   "place": "proof, induction step: the nowhere-dense support has dimension strictly below dim X; restrict components to the chosen open neighbourhood",
+   "via": [
+    "lem-sc-locnoeth-components-locally-finite"
+   ]
   },
-  "kind": "statement",
-  "title": "Components meeting an open subset inject into components of that open subset",
-  "statement": "Let X be a topological space [def-pc-scheme] and let U be an open subset of X. The assignment C \\to C \\cap U sends the irreducible components C of X with C \\cap U nonempty to irreducible components of the subspace U, and this assignment is injective.",
-  "source": {
-    "document": "literature/stacks-project/topology.tex",
-    "place": "Tag 0052, topology-lemma-Noetherian, together with Definition 004V (irreducible components)"
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Components meeting an open subset inject into components of that open subset",
+ "statement": "Let X be a topological space [def-pc-scheme] and let U be an open subset of X. The assignment C \\to C \\cap U sends the irreducible components C of X with C \\cap U nonempty to irreducible components of the subspace U, and this assignment is injective.",
+ "source": {
+  "document": "literature/stacks-project/topology.tex",
+  "place": "Tag 0052, topology-lemma-Noetherian, together with Definition 004V (irreducible components)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-irreducible-components"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "irreducible components of a space intersecting an open subset inject into components of the open subset",
+   "results": "Generic irreducible-component and open-subset declarations only; no exact theorem",
+   "date": "2026-10-11",
+   "verdict": "no match"
   },
-  "stmt_deps": [
-    "def-pc-scheme",
-    "def-weil-irreducible-components"
-  ],
-  "proof": [],
-  "proof_deps": [],
-  "proof_origin": null,
-  "mathlib_searches": [
-    {
-      "tool": "leanfinder",
-      "query": "irreducible components of a space intersecting an open subset inject into components of the open subset",
-      "results": "Generic irreducible-component and open-subset declarations only; no exact theorem",
-      "date": "2026-10-11",
-      "verdict": "no match"
-    },
-    {
-      "tool": "loogle",
-      "query": "irreducibleComponents open subset",
-      "results": "0 hits; malformed/unknown pattern",
-      "date": "2026-10-11",
-      "verdict": "no match"
-    },
-    {
-      "tool": "grep",
-      "query": "irreducibleComponents.*IsOpen|IsOpen.*irreducibleComponents in Mathlib/Topology",
-      "results": "0 hits",
-      "date": "2026-10-11",
-      "verdict": "no match"
-    },
-    {
-      "tool": "leansearch",
-      "query": "intersection of an irreducible component with an open subset is an irreducible component",
-      "results": "service unavailable: Internal Server Error",
-      "date": "2026-10-11",
-      "verdict": "unavailable"
-    },
-    {
-      "tool": "grep",
-      "query": "irreducibleComponent.*open|open.*irreducibleComponent in Mathlib",
-      "results": "0 hits",
-      "date": "2026-10-11",
-      "verdict": "no match"
-    },
-    {
-      "tool": "grep",
-      "query": "preimage_mem_irreducibleComponents|subset_closure_inter_of_isPreirreducible_of_isOpen in ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Topology/Irreducible.lean",
-      "results": "preimage_mem_irreducibleComponents (Topology/Irreducible.lean:473) gives the first clause for the open embedding U -> X; injectivity follows from subset_closure_inter_of_isPreirreducible_of_isOpen (line 325) with isClosed_of_mem_irreducibleComponents (line 111): C = closure(C cap U). No single declaration states both clauses (reviewer R-lcf2752)",
-      "date": "2026-10-10",
-      "verdict": "partial match: use these declarations when splitting"
-    }
-  ],
-  "mathlib_match": {
-    "declaration": "preimage_mem_irreducibleComponents; closure_image_preimage_of_isPreirreducible",
-    "file": "Mathlib/Topology/Irreducible.lean",
-    "line": 473,
-    "how": "exact as a composite, read with sed by L (22:37 UTC) after reviewer R-coi2900 (E1 delivery f6a21d472): preimage_mem_irreducibleComponents (line 473) applied to the open embedding U → X sends an irreducible component t of X meeting U to the irreducible component t ∩ U of U; closure_image_preimage_of_isPreirreducible (line 479), applied to the same open map with s = t (closed, irreducible, t ∩ U nonempty), gives closure(t ∩ U) = t, so the assignment is injective."
+  {
+   "tool": "loogle",
+   "query": "irreducibleComponents open subset",
+   "results": "0 hits; malformed/unknown pattern",
+   "date": "2026-10-11",
+   "verdict": "no match"
   },
-  "status": "mathlib",
-  "created": {
-    "item": "lem-sc-locnoeth-components-locally-finite",
-    "by": "worker",
-    "date": "2026-10-10"
+  {
+   "tool": "grep",
+   "query": "irreducibleComponents.*IsOpen|IsOpen.*irreducibleComponents in Mathlib/Topology",
+   "results": "0 hits",
+   "date": "2026-10-11",
+   "verdict": "no match"
   },
-  "chapter": "sec-abelian-varieties",
-  "unit": "sk-def-av-ample-degree",
-  "reviewed": {
-    "date": "2026-10-10",
-    "by": "L",
-    "reviewer": "R-coi2900",
-    "group": "E1",
-    "result": "pass",
-    "note": "Mathlib composite found by the packet reviewer; L read Irreducible.lean:471-483 with sed; the E1 split (f6a21d472) is not merged because nothing remains to split."
+  {
+   "tool": "leansearch",
+   "query": "intersection of an irreducible component with an open subset is an irreducible component",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
   },
-  "lead_notes": [
-    "2026-10-10 22:37 UTC L: matched to Mathlib on R-coi2900's finding; E1 delivery returned as unneeded, not for a fault."
-  ]
+  {
+   "tool": "grep",
+   "query": "irreducibleComponent.*open|open.*irreducibleComponent in Mathlib",
+   "results": "0 hits",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "preimage_mem_irreducibleComponents|subset_closure_inter_of_isPreirreducible_of_isOpen in ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Topology/Irreducible.lean",
+   "results": "preimage_mem_irreducibleComponents (Topology/Irreducible.lean:473) gives the first clause for the open embedding U -> X; injectivity follows from subset_closure_inter_of_isPreirreducible_of_isOpen (line 325) with isClosed_of_mem_irreducibleComponents (line 111): C = closure(C cap U). No single declaration states both clauses (reviewer R-lcf2752)",
+   "date": "2026-10-10",
+   "verdict": "partial match: use these declarations when splitting"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "preimage_mem_irreducibleComponents; closure_image_preimage_of_isPreirreducible",
+  "file": "Mathlib/Topology/Irreducible.lean",
+  "line": 473,
+  "how": "exact as a composite, read with sed by L (22:37 UTC) after reviewer R-coi2900 (E1 delivery f6a21d472): preimage_mem_irreducibleComponents (line 473) applied to the open embedding U → X sends an irreducible component t of X meeting U to the irreducible component t ∩ U of U; closure_image_preimage_of_isPreirreducible (line 479), applied to the same open map with s = t (closed, irreducible, t ∩ U nonempty), gives closure(t ∩ U) = t, so the assignment is injective."
+ },
+ "status": "mathlib",
+ "created": {
+  "item": "lem-sc-locnoeth-components-locally-finite",
+  "by": "worker",
+  "date": "2026-10-10"
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-def-av-ample-degree",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-coi2900",
+  "group": "E1",
+  "result": "pass",
+  "note": "Mathlib composite found by the packet reviewer; L read Irreducible.lean:471-483 with sed; the E1 split (f6a21d472) is not merged because nothing remains to split."
+ },
+ "lead_notes": [
+  "2026-10-10 22:37 UTC L: matched to Mathlib on R-coi2900's finding; E1 delivery returned as unneeded, not for a fault."
+ ],
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

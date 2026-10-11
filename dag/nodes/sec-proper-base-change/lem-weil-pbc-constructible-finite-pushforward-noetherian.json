@@ -1,151 +1,153 @@
 {
-  "id": "lem-weil-pbc-constructible-finite-pushforward-noetherian",
-  "blueprint": {
-    "is": "lem-weil-pbc-constructible-finite-pushforward-noetherian",
-    "from": null,
-    "same_as": null
+ "id": "lem-weil-pbc-constructible-finite-pushforward-noetherian",
+ "blueprint": {
+  "is": "lem-weil-pbc-constructible-finite-pushforward-noetherian",
+  "from": null,
+  "same_as": null
+ },
+ "kind": "statement",
+ "title": "Noetherian finite-pushforward embedding",
+ "statement": "Let $U$ be Noetherian and let $C$ be a constructible torsion abelian sheaf on\n$U_{\\Et}$. There are finite morphisms $h_i:V_i\\to U$ and finite abelian groups\n$M_i$ with a monomorphism\n$C\\hookrightarrow\\bigoplus_i(h_i)_*\\underline{M_i}$.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-p1/lem-weil-pbc-constructible-finite-pushforward-noetherian.md",
+  "place": "node lem-weil-pbc-constructible-finite-pushforward-noetherian, order 1130",
+  "external": [
+   {
+    "document": "Stacks Project",
+    "place": "Tag 09Z4"
+   },
+   {
+    "document": "Stacks Project",
+    "place": "Tag 035L"
+   },
+   {
+    "document": "Stacks Project",
+    "place": "Tag 09Z6"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-weil-pbc-constructible-complexes",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-etale-sheaves"
+ ],
+ "proof": [
+  {
+   "text": "*Step 1: the local model at a point.* For every geometric point $\\bar x\\to U$,\nconstructibility gives a finite separable extension $K/\\kappa(x)$ and a finite\nabelian group $M$ for which $C$ is constant with value $M$ over\n$\\operatorname{Spec}K$. Let $Z\\subset U$ be the reduced closure of $x$, let\n$V\\to Z$ be the normalization of $Z$ in $K$, and let\n$\\operatorname{Spec}K\\to V$ be the generic inclusion. The scheme $V$ is\nintegral and normal with function field $K$; this is the classical\nnormalization of an integral scheme in a finite extension of its function\nfield (Stacks Project, Morphisms, Lemma 29.54.13, Tag\n[035L](https://stacks.math.columbia.edu/tag/035L)).",
+   "uses": [],
+   "elementary": null
   },
-  "kind": "statement",
-  "title": "Noetherian finite-pushforward embedding",
-  "statement": "Let $U$ be Noetherian and let $C$ be a constructible torsion abelian sheaf on\n$U_{\\Et}$. There are finite morphisms $h_i:V_i\\to U$ and finite abelian groups\n$M_i$ with a monomorphism\n$C\\hookrightarrow\\bigoplus_i(h_i)_*\\underline{M_i}$.",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-p1/lem-weil-pbc-constructible-finite-pushforward-noetherian.md",
-    "place": "node lem-weil-pbc-constructible-finite-pushforward-noetherian, order 1130",
-    "external": [
-      {
-        "document": "Stacks Project",
-        "place": "Tag 09Z4"
-      },
-      {
-        "document": "Stacks Project",
-        "place": "Tag 035L"
-      },
-      {
-        "document": "Stacks Project",
-        "place": "Tag 09Z6"
-      }
-    ]
-  },
-  "stmt_deps": [
-    "def-weil-pbc-constructible-complexes",
-    "def-weil-pbc-direct-image",
-    "def-weil-pbc-etale-sheaves"
-  ],
-  "proof": [
-    {
-      "text": "*Step 1: the local model at a point.* For every geometric point $\\bar x\\to U$,\nconstructibility gives a finite separable extension $K/\\kappa(x)$ and a finite\nabelian group $M$ for which $C$ is constant with value $M$ over\n$\\operatorname{Spec}K$. Let $Z\\subset U$ be the reduced closure of $x$, let\n$V\\to Z$ be the normalization of $Z$ in $K$, and let\n$\\operatorname{Spec}K\\to V$ be the generic inclusion. The scheme $V$ is\nintegral and normal with function field $K$; this is the classical\nnormalization of an integral scheme in a finite extension of its function\nfield (Stacks Project, Morphisms, Lemma 29.54.13, Tag\n[035L](https://stacks.math.columbia.edu/tag/035L)).",
-      "uses": [],
-      "elementary": null
-    },
-    {
-      "text": "*Step 2: the generic map.* The identification\n$C|_{\\operatorname{Spec}K}\\cong\\underline M$ is a map\n$C|_{\\operatorname{Spec}K}\\to\\underline M$, and\n[lem-weil-pbc-normal-constant-generic], applied to the normal integral $V$ and\nthe inclusion $g:\\operatorname{Spec}K\\to V$ of its generic point, identifies\n$g_*\\underline M$ with $\\underline M$. Hence that map adjoints to\n$C|_V\\to\\underline M$, and adjoints again to a map\n\n$$\n C\\longrightarrow h_*\\underline M,\\qquad h:V\\to U\n$$\n\nof sheaves on $U$, the morphism $h$ being the composite of the normalization\nwith $V\\to Z\\hookrightarrow U$. This is the step that the former pending note\nrecorded as unjustified: the justification is exactly the normality of $V$,\nand no locally constant sheaf is extended across a boundary.",
-      "uses": [
-        "lem-weil-pbc-normal-constant-generic"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "*Step 3: the stalk map at $\\bar x$.* Choose a lift $\\bar y$ of $\\bar x$ to\n$V$. The diagram\n\n$$\n\\begin{array}{ccc}\nC_{\\bar x}&\\xrightarrow{\\ \\sim\\ }&(C|_V)_{\\bar y}\\\\\n\\downarrow&&\\downarrow\\\\\n(h_*\\underline M)_{\\bar x}&\\longrightarrow&\\underline M_{\\bar y}\n\\end{array}\n$$\n\nis commutative, and $\\underline M_{\\bar y}=M$, so the stalk map of Step 2 is\ninjective at $\\bar x$.\n\n*Step 4: the finite approximation of $h_*\\underline M$.* The normalization map\nis integral, not finite in general: writing its affine coordinate algebra as\nthe filtered union of its finite $\\mathcal O_Z$-subalgebras, the induced\ndirect image is the filtered colimit of the corresponding finite pushforwards,\n\n$$\n h_*\\underline M=\\varinjlim_i(h_i)_*\\underline M,\n$$\n\nwhich over an etale finite-presentation object $W\\to U$ is the section formula\n$\\varinjlim_i\\underline M(W\\times_UV_i)=\\underline M(W\\times_UV)$ applied to\nthe affine limit $V=\\varprojlim_iV_i$.",
-      "uses": [],
-      "elementary": null
-    },
-    {
-      "text": "*Step 5: factorization through one finite stage.* The map $C\\to h_*\\underline\nM$ of Step 2 is a morphism from a constructible sheaf into a filtered colimit\nof sheaves, so by [lem-weil-pbc-constructible-finitely-presented] it factors\nthrough one stage: there are an index $i$ and a map $C\\to(h_i)_*\\underline M$\nwhose composite with the transition map is the given map. Hence $\\bar x$\nadmits a finite pushforward $h_i:V_i\\to U$, the morphism $V_i\\to Z$ being\nfinite by construction, detecting its stalk.",
-      "uses": [
-        "lem-weil-pbc-constructible-finitely-presented"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "*Step 6: finite selection.* The finite-selection statement\n[lem-weil-pbc-constructible-noetherian-finite-selection] now produces a finite\nset of indices for which the direct sum of the maps of Step 5 is injective on\nevery geometric stalk; a map of sheaves injective on every geometric stalk is\na monomorphism by conservativity of geometric stalks. This is the Noetherian\nconstruction of Stacks Project, Lemma 59.74.3 (Tag\n[09Z6](https://stacks.math.columbia.edu/tag/09Z6)).",
-      "uses": [
-        "lem-weil-pbc-constructible-noetherian-finite-selection"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "*Remark (the Nagata case).* If $U$ is Nagata, for instance of finite type over\na field, the normalization $V\\to Z$ is finite already, so Step 4 is\nunnecessary and the embedding is produced by Steps 1 to 3 and 6 directly. This\nis the case used in the applications below.",
-      "uses": [],
-      "elementary": null
-    }
-  ],
-  "proof_deps": [
-    "lem-weil-pbc-normal-constant-generic",
-    "lem-weil-pbc-constructible-finitely-presented",
-    "lem-weil-pbc-constructible-noetherian-finite-selection"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-p1/lem-weil-pbc-constructible-finite-pushforward-noetherian.md",
-    "place": "## Proof"
-  },
-  "mathlib_searches": [],
-  "mathlib_match": null,
-  "status": "imported",
-  "merged_into": null,
-  "import_flags": [
-    "cites_outside_uses",
-    "proof_cites_literature",
-    "long_proof_few_deps",
-    "unreachable"
-  ],
-  "blueprint_kind": "lemma",
-  "blueprint_order": 1130,
-  "blueprint_uses": [
-    "def-weil-pbc-constructible-complexes",
-    "def-weil-pbc-direct-image",
-    "def-weil-pbc-etale-sheaves",
-    "lem-weil-pbc-constructible-finitely-presented",
+  {
+   "text": "*Step 2: the generic map.* The identification\n$C|_{\\operatorname{Spec}K}\\cong\\underline M$ is a map\n$C|_{\\operatorname{Spec}K}\\to\\underline M$, and\n[lem-weil-pbc-normal-constant-generic], applied to the normal integral $V$ and\nthe inclusion $g:\\operatorname{Spec}K\\to V$ of its generic point, identifies\n$g_*\\underline M$ with $\\underline M$. Hence that map adjoints to\n$C|_V\\to\\underline M$, and adjoints again to a map\n\n$$\n C\\longrightarrow h_*\\underline M,\\qquad h:V\\to U\n$$\n\nof sheaves on $U$, the morphism $h$ being the composite of the normalization\nwith $V\\to Z\\hookrightarrow U$. This is the step that the former pending note\nrecorded as unjustified: the justification is exactly the normality of $V$,\nand no locally constant sheaf is extended across a boundary.",
+   "uses": [
     "lem-weil-pbc-normal-constant-generic"
-  ],
-  "uses_not_cited": [
-    "def-weil-pbc-constructible-complexes",
-    "def-weil-pbc-direct-image",
-    "def-weil-pbc-etale-sheaves"
-  ],
-  "proof_split_by": "labels",
-  "blueprint_notes": [
-    {
-      "label": "status",
-      "text": "**Status.** The two sub-gaps this statement used to carry are closed. (a) The\nextension of the generic map is valid because the normalization $V$ is normal:\nthe extension lemma is [lem-weil-pbc-normal-constant-generic]; no locally\nconstant sheaf is extended across a boundary, the sheaf extended is the\nconstant sheaf. (b) The factorization of $C\\to h_*\\underline M$ through one\nfinite stage is the finite-presentation property of constructible sheaves in\nthe category of sheaves, [lem-weil-pbc-constructible-finitely-presented],\nrecorded as the classical input Tag 09Z4.",
-      "where": "statement"
-    }
-  ],
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "sorry_here",
-      "decls": [
-        {
-          "name": "AlgebraicGeometry.Etale.exists_mono_biproduct_lowerStar_of_isNoetherian",
-          "module": "WeilConjectures.ConstructibleSheaf.FinitePushforward",
-          "lines": [
-            100,
-            113
-          ],
-          "kind": "theorem",
-          "sorry": true
-        }
-      ],
-      "missing": [],
-      "open": []
-    }
+   ],
+   "elementary": false
   },
-  "chapter": "sec-proper-base-change",
-  "unit": "sk-thm-p1",
-  "lean": {
-    "module": "WeilConjectures.ConstructibleSheaf.FinitePushforward",
-    "declaration": "AlgebraicGeometry.Etale.exists_mono_biproduct_lowerStar_of_isNoetherian",
-    "branch": "slopmaster2",
-    "line": 100,
-    "declarations": [
-      "AlgebraicGeometry.Etale.exists_mono_biproduct_lowerStar_of_isNoetherian"
-    ],
-    "sorry_free": false,
-    "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state sorry_here)"
+  {
+   "text": "*Step 3: the stalk map at $\\bar x$.* Choose a lift $\\bar y$ of $\\bar x$ to\n$V$. The diagram\n\n$$\n\\begin{array}{ccc}\nC_{\\bar x}&\\xrightarrow{\\ \\sim\\ }&(C|_V)_{\\bar y}\\\\\n\\downarrow&&\\downarrow\\\\\n(h_*\\underline M)_{\\bar x}&\\longrightarrow&\\underline M_{\\bar y}\n\\end{array}\n$$\n\nis commutative, and $\\underline M_{\\bar y}=M$, so the stalk map of Step 2 is\ninjective at $\\bar x$.\n\n*Step 4: the finite approximation of $h_*\\underline M$.* The normalization map\nis integral, not finite in general: writing its affine coordinate algebra as\nthe filtered union of its finite $\\mathcal O_Z$-subalgebras, the induced\ndirect image is the filtered colimit of the corresponding finite pushforwards,\n\n$$\n h_*\\underline M=\\varinjlim_i(h_i)_*\\underline M,\n$$\n\nwhich over an etale finite-presentation object $W\\to U$ is the section formula\n$\\varinjlim_i\\underline M(W\\times_UV_i)=\\underline M(W\\times_UV)$ applied to\nthe affine limit $V=\\varprojlim_iV_i$.",
+   "uses": [],
+   "elementary": null
+  },
+  {
+   "text": "*Step 5: factorization through one finite stage.* The map $C\\to h_*\\underline\nM$ of Step 2 is a morphism from a constructible sheaf into a filtered colimit\nof sheaves, so by [lem-weil-pbc-constructible-finitely-presented] it factors\nthrough one stage: there are an index $i$ and a map $C\\to(h_i)_*\\underline M$\nwhose composite with the transition map is the given map. Hence $\\bar x$\nadmits a finite pushforward $h_i:V_i\\to U$, the morphism $V_i\\to Z$ being\nfinite by construction, detecting its stalk.",
+   "uses": [
+    "lem-weil-pbc-constructible-finitely-presented"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*Step 6: finite selection.* The finite-selection statement\n[lem-weil-pbc-constructible-noetherian-finite-selection] now produces a finite\nset of indices for which the direct sum of the maps of Step 5 is injective on\nevery geometric stalk; a map of sheaves injective on every geometric stalk is\na monomorphism by conservativity of geometric stalks. This is the Noetherian\nconstruction of Stacks Project, Lemma 59.74.3 (Tag\n[09Z6](https://stacks.math.columbia.edu/tag/09Z6)).",
+   "uses": [
+    "lem-weil-pbc-constructible-noetherian-finite-selection"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*Remark (the Nagata case).* If $U$ is Nagata, for instance of finite type over\na field, the normalization $V\\to Z$ is finite already, so Step 4 is\nunnecessary and the embedding is produced by Steps 1 to 3 and 6 directly. This\nis the case used in the applications below.",
+   "uses": [],
+   "elementary": null
   }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-normal-constant-generic",
+  "lem-weil-pbc-constructible-finitely-presented",
+  "lem-weil-pbc-constructible-noetherian-finite-selection"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-p1/lem-weil-pbc-constructible-finite-pushforward-noetherian.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [
+  "cites_outside_uses",
+  "proof_cites_literature",
+  "long_proof_few_deps",
+  "unreachable"
+ ],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 1130,
+ "blueprint_uses": [
+  "def-weil-pbc-constructible-complexes",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-etale-sheaves",
+  "lem-weil-pbc-constructible-finitely-presented",
+  "lem-weil-pbc-normal-constant-generic"
+ ],
+ "uses_not_cited": [
+  "def-weil-pbc-constructible-complexes",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-etale-sheaves"
+ ],
+ "proof_split_by": "labels",
+ "blueprint_notes": [
+  {
+   "label": "status",
+   "text": "**Status.** The two sub-gaps this statement used to carry are closed. (a) The\nextension of the generic map is valid because the normalization $V$ is normal:\nthe extension lemma is [lem-weil-pbc-normal-constant-generic]; no locally\nconstant sheaf is extended across a boundary, the sheaf extended is the\nconstant sheaf. (b) The factorization of $C\\to h_*\\underline M$ through one\nfinite stage is the finite-presentation property of constructible sheaves in\nthe category of sheaves, [lem-weil-pbc-constructible-finitely-presented],\nrecorded as the classical input Tag 09Z4.",
+   "where": "statement"
+  }
+ ],
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.Etale.exists_mono_biproduct_lowerStar_of_isNoetherian"
+   ]
+  },
+  "slopmaster2": {
+   "state": "sorry_here",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.Etale.exists_mono_biproduct_lowerStar_of_isNoetherian",
+     "module": "WeilConjectures.ConstructibleSheaf.FinitePushforward",
+     "lines": [
+      100,
+      113
+     ],
+     "kind": "theorem",
+     "sorry": true
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "module": "WeilConjectures.ConstructibleSheaf.FinitePushforward",
+  "declaration": "AlgebraicGeometry.Etale.exists_mono_biproduct_lowerStar_of_isNoetherian",
+  "branch": "slopmaster2",
+  "line": 100,
+  "declarations": [
+   "AlgebraicGeometry.Etale.exists_mono_biproduct_lowerStar_of_isNoetherian"
+  ],
+  "sorry_free": false,
+  "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state sorry_here)"
+ }
 }

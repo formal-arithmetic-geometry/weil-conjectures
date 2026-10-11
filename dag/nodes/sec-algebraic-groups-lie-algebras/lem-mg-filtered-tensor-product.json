@@ -1,108 +1,112 @@
 {
-  "id": "lem-mg-filtered-tensor-product",
-  "blueprint": {
-    "is": "lem-mg-filtered-tensor-product",
-    "from": null,
-    "same_as": null
+ "id": "lem-mg-filtered-tensor-product",
+ "blueprint": {
+  "is": "lem-mg-filtered-tensor-product",
+  "from": null,
+  "same_as": null
+ },
+ "kind": "statement",
+ "title": "Tensor product of two filtered representations",
+ "statement": "Let $V_\\bullet$ and $W_\\bullet$ be\ncomposition series, and put\n$A_i=V_i/V_{i-1}$ and $B_j=W_j/W_{j-1}$. The Weil representation\n$V\\otimes W$ has a finite filtration whose successive quotients, in a\nsuitable order, are\n\n$$\nA_i\\otimes B_j\\qquad(1\\le i\\le t,\\ 1\\le j\\le u).\n$$\n\nEvery pair $(i,j)$ occurs exactly once in this displayed list of\nsuccessive quotients.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-algebraic-groups-lie-algebras/sk-r-linear-library/lem-mg-filtered-tensor-product.md",
+  "place": "node lem-mg-filtered-tensor-product, order 2545"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "First filter $V\\otimes W$ by the subspaces $V_i\\otimes W$. Tensoring\nvector spaces over a field is exact, so\n\n$$\n(V_i\\otimes W)/(V_{i-1}\\otimes W)\\simeq A_i\\otimes W.\n$$",
+   "uses": [],
+   "elementary": null
   },
-  "kind": "statement",
-  "title": "Tensor product of two filtered representations",
-  "statement": "Let $V_\\bullet$ and $W_\\bullet$ be\ncomposition series, and put\n$A_i=V_i/V_{i-1}$ and $B_j=W_j/W_{j-1}$. The Weil representation\n$V\\otimes W$ has a finite filtration whose successive quotients, in a\nsuitable order, are\n\n$$\nA_i\\otimes B_j\\qquad(1\\le i\\le t,\\ 1\\le j\\le u).\n$$\n\nEvery pair $(i,j)$ occurs exactly once in this displayed list of\nsuccessive quotients.",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-algebraic-groups-lie-algebras/sk-r-linear-library/lem-mg-filtered-tensor-product.md",
-    "place": "node lem-mg-filtered-tensor-product, order 2545"
-  },
-  "stmt_deps": [],
-  "proof": [
-    {
-      "text": "First filter $V\\otimes W$ by the subspaces $V_i\\otimes W$. Tensoring\nvector spaces over a field is exact, so\n\n$$\n(V_i\\otimes W)/(V_{i-1}\\otimes W)\\simeq A_i\\otimes W.\n$$",
-      "uses": [],
-      "elementary": null
-    },
-    {
-      "text": "Inside this quotient use the filtration\n$A_i\\otimes W_0\\subseteq\\cdots\\subseteq A_i\\otimes W_u$, whose\nsuccessive quotients are $A_i\\otimes B_j$. Pull these subspaces back to\n$V_i\\otimes W$, and do this successively for $i=1,\\ldots,t$. All\nmaps are Weil-equivariant because both series in\n[def-mg-weil-composition-series] consist of Weil-stable subspaces.\nThe resulting concatenated filtration has precisely the asserted\nquotients.",
-      "uses": [
-        "def-mg-weil-composition-series"
-      ],
-      "elementary": false
-    }
-  ],
-  "proof_deps": [
+  {
+   "text": "Inside this quotient use the filtration\n$A_i\\otimes W_0\\subseteq\\cdots\\subseteq A_i\\otimes W_u$, whose\nsuccessive quotients are $A_i\\otimes B_j$. Pull these subspaces back to\n$V_i\\otimes W$, and do this successively for $i=1,\\ldots,t$. All\nmaps are Weil-equivariant because both series in\n[def-mg-weil-composition-series] consist of Weil-stable subspaces.\nThe resulting concatenated filtration has precisely the asserted\nquotients.",
+   "uses": [
     "def-mg-weil-composition-series"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/blueprint/master/blueprint/sec-algebraic-groups-lie-algebras/sk-r-linear-library/lem-mg-filtered-tensor-product.md",
-    "place": "## Proof"
-  },
-  "mathlib_searches": [],
-  "mathlib_match": null,
-  "status": "imported",
-  "merged_into": null,
-  "import_flags": [],
-  "blueprint_kind": "lemma",
-  "blueprint_order": 2545,
-  "blueprint_uses": [
-    "def-mg-weil-composition-series"
-  ],
-  "proof_split_by": "paragraphs",
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "closed",
-      "decls": [
-        {
-          "name": "Subrepresentation.exists_subquotient_tprod_equiv_of_subrepresentation",
-          "module": "WeilConjectures.Mathlib.RepresentationTheory.Subrepresentation",
-          "lines": [
-            575,
-            638
-          ],
-          "kind": "theorem",
-          "sorry": false
-        },
-        {
-          "name": "Subrepresentation.exists_subquotient_tprod_left_equiv",
-          "module": "WeilConjectures.Mathlib.RepresentationTheory.Subrepresentation",
-          "lines": [
-            640,
-            656
-          ],
-          "kind": "theorem",
-          "sorry": false
-        },
-        {
-          "name": "Subrepresentation.exists_subquotient_tprod_equiv",
-          "module": "WeilConjectures.Mathlib.RepresentationTheory.Subrepresentation",
-          "lines": [
-            658,
-            675
-          ],
-          "kind": "theorem",
-          "sorry": false
-        }
-      ],
-      "missing": [],
-      "open": []
-    }
-  },
-  "chapter": "sec-algebraic-groups-lie-algebras",
-  "unit": "sk-r-linear-library",
-  "lean": {
-    "module": "WeilConjectures.Mathlib.RepresentationTheory.Subrepresentation",
-    "declaration": "Subrepresentation.exists_subquotient_tprod_equiv_of_subrepresentation",
-    "branch": "slopmaster2",
-    "line": 575,
-    "declarations": [
-      "Subrepresentation.exists_subquotient_tprod_equiv_of_subrepresentation",
-      "Subrepresentation.exists_subquotient_tprod_left_equiv",
-      "Subrepresentation.exists_subquotient_tprod_equiv"
-    ],
-    "sorry_free": true,
-    "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state closed)"
+   ],
+   "elementary": false
   }
+ ],
+ "proof_deps": [
+  "def-mg-weil-composition-series"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-algebraic-groups-lie-algebras/sk-r-linear-library/lem-mg-filtered-tensor-product.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 2545,
+ "blueprint_uses": [
+  "def-mg-weil-composition-series"
+ ],
+ "proof_split_by": "paragraphs",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "Subrepresentation.exists_subquotient_tprod_equiv_of_subrepresentation",
+    "Subrepresentation.exists_subquotient_tprod_left_equiv",
+    "Subrepresentation.exists_subquotient_tprod_equiv"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "Subrepresentation.exists_subquotient_tprod_equiv_of_subrepresentation",
+     "module": "WeilConjectures.Mathlib.RepresentationTheory.Subrepresentation",
+     "lines": [
+      575,
+      638
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "Subrepresentation.exists_subquotient_tprod_left_equiv",
+     "module": "WeilConjectures.Mathlib.RepresentationTheory.Subrepresentation",
+     "lines": [
+      640,
+      656
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "Subrepresentation.exists_subquotient_tprod_equiv",
+     "module": "WeilConjectures.Mathlib.RepresentationTheory.Subrepresentation",
+     "lines": [
+      658,
+      675
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
+ "chapter": "sec-algebraic-groups-lie-algebras",
+ "unit": "sk-r-linear-library",
+ "lean": {
+  "module": "WeilConjectures.Mathlib.RepresentationTheory.Subrepresentation",
+  "declaration": "Subrepresentation.exists_subquotient_tprod_equiv_of_subrepresentation",
+  "branch": "slopmaster2",
+  "line": 575,
+  "declarations": [
+   "Subrepresentation.exists_subquotient_tprod_equiv_of_subrepresentation",
+   "Subrepresentation.exists_subquotient_tprod_left_equiv",
+   "Subrepresentation.exists_subquotient_tprod_equiv"
+  ],
+  "sorry_free": true,
+  "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state closed)"
+ }
 }

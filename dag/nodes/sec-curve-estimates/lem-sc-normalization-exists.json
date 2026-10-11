@@ -1,120 +1,125 @@
 {
-  "id": "lem-sc-normalization-exists",
-  "blueprint": {
-    "is": "lem-sc-normalization-exists",
-    "from": null,
-    "same_as": null
-  },
-  "kind": "statement",
-  "title": "Existence and finiteness of the normalization",
-  "statement": "Let $X$ be an integral scheme of finite type over a field $k$\nand $\\nu:X^{\\nu}\\to X$ its normalization in $k(X)$\n([def-sc-normalization]). Then $\\nu$ is finite, surjective\nand birational; if $X$ is proper then $X^{\\nu}$ is proper; and\n$\\dim X^{\\nu}=\\dim X$.",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-thm-br/lem-sc-normalization-exists.md",
-    "place": "node lem-sc-normalization-exists, order 915",
-    "external": [
-      {
-        "document": "Stacks Project",
-        "place": "Tag 00OY"
-      }
-    ]
-  },
-  "stmt_deps": [
-    "def-sc-normalization"
-  ],
-  "proof": [
-    {
-      "text": "By construction $\\nu$ is affine and dominant, hence surjective\n(its image is closed and contains the generic point of $X$).\nFiniteness: for affine $X=\\operatorname{Spec}A$ (the general\ncase follows by gluing), the normalization is\n$\\operatorname{Spec}\\widetilde A$, where $\\widetilde A$ is the\nintegral closure of $A$ in $k(X)$; we prove that\n$\\widetilde A$ is a finite $A$-module. If $\\dim X=0$ this\nis clear ($A$ is Artinian, hence finite over $k$). Assume\n$\\dim X=1$. By Noether normalization (*reference: Stacks\nProject, Commutative Algebra,\n[Tag 00OY](https://stacks.math.columbia.edu/tag/00OY)*) there is a transcendental $x\\in A$ such that\n$A$ is finite over $k[x]$; then $\\widetilde A$ equals the\nintegral closure of $k[x]$ in $k(X)$ (the integral closures of\n$k[x]\\subseteq A$ in their common fraction field $k(X)$\ncoincide), and $n:=[k(X):k(x)]<\\infty$ (standard field theory:\n*reference: Stacks Project, Fields: transcendence degree*).\nChoose $b_1,\\dots,b_n\\in\\widetilde A$ forming a $k(x)$-basis of\n$k(X)$, and choose $0\\neq s\\in k[x]$ with\n$s\\,b_ib_j\\in\\sum_lk[x]b_l$ for all $i,j$ (clearing the\nfinitely many denominators of the multiplication table). We claim\n$\\widetilde A\\subseteq(1/s)\\sum_lk[x]b_l$. For\n$b\\in\\widetilde A$, write $b=\\sum_ic_ib_i$ with\n$c_i\\in k(x)$; for every $j$,\n\n$$\ns\\,bb_j=\\sum_ic_i(s\\,b_ib_j)\\in\\sum_lk[x]b_l,\n$$\n\nso $s\\,b\\,M\\subseteq M$ for $M:=\\sum_lk[x]b_l$, and since\n$1\\in M\\cap\\widetilde A$ we get $s\\,b=s\\,b\\cdot1\\in M$, i.e. $b\\in(1/s)M$. Thus $\\widetilde A$ is a submodule of the\nfinitely generated free $k[x]$-module $(1/s)M$; since $k[x]$\nis noetherian, $\\widetilde A$ is finitely generated over\n$k[x]$, hence over $A$. So $\\nu$ is finite and birational.\nA finite morphism is proper and preserves dimension, so if $X$\nis proper then $X^{\\nu}$ is proper, and\n$\\dim X^{\\nu}=\\dim X$.",
-      "uses": [],
-      "elementary": null
-    }
-  ],
-  "proof_deps": [],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-thm-br/lem-sc-normalization-exists.md",
-    "place": "## Proof"
-  },
-  "mathlib_searches": [],
-  "mathlib_match": null,
-  "status": "imported",
-  "merged_into": null,
-  "import_flags": [
-    "proof_cites_literature"
-  ],
-  "blueprint_kind": "lemma",
-  "blueprint_order": 915,
-  "blueprint_uses": [
-    "def-sc-normalization"
-  ],
-  "proof_split_by": "paragraphs",
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "closed",
-      "decls": [
-        {
-          "name": "AlgebraicGeometry.Scheme.surjective_fromNormalization",
-          "module": "WeilConjectures.Mathlib.AlgebraicGeometry.Normalization",
-          "lines": [
-            197,
-            202
-          ],
-          "kind": "theorem",
-          "sorry": false
-        },
-        {
-          "name": "AlgebraicGeometry.Scheme.isFinite_fromNormalization_of_locallyOfFiniteType",
-          "module": "WeilConjectures.Mathlib.AlgebraicGeometry.Normalization",
-          "lines": [
-            465,
-            478
-          ],
-          "kind": "theorem",
-          "sorry": false
-        },
-        {
-          "name": "AlgebraicGeometry.Scheme.exists_isIso_fromNormalization_restrict",
-          "module": "WeilConjectures.Mathlib.AlgebraicGeometry.Normalization",
-          "lines": [
-            480,
-            517
-          ],
-          "kind": "theorem",
-          "sorry": false
-        },
-        {
-          "name": "AlgebraicGeometry.Scheme.topologicalKrullDim_normalization",
-          "module": "WeilConjectures.Mathlib.AlgebraicGeometry.Normalization",
-          "lines": [
-            519,
-            529
-          ],
-          "kind": "theorem",
-          "sorry": false
-        }
-      ],
-      "missing": [],
-      "open": []
-    }
-  },
-  "chapter": "sec-curve-estimates",
-  "unit": "sk-thm-br",
-  "lean": {
-    "module": "WeilConjectures.Mathlib.AlgebraicGeometry.Normalization",
-    "declaration": "AlgebraicGeometry.Scheme.surjective_fromNormalization",
-    "branch": "slopmaster2",
-    "line": 197,
-    "declarations": [
-      "AlgebraicGeometry.Scheme.surjective_fromNormalization",
-      "AlgebraicGeometry.Scheme.isFinite_fromNormalization_of_locallyOfFiniteType",
-      "AlgebraicGeometry.Scheme.exists_isIso_fromNormalization_restrict",
-      "AlgebraicGeometry.Scheme.topologicalKrullDim_normalization"
-    ],
-    "sorry_free": true,
-    "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state closed)"
+ "id": "lem-sc-normalization-exists",
+ "blueprint": {
+  "is": "lem-sc-normalization-exists",
+  "from": null,
+  "same_as": null
+ },
+ "kind": "statement",
+ "title": "Existence and finiteness of the normalization",
+ "statement": "Let $X$ be an integral scheme of finite type over a field $k$\nand $\\nu:X^{\\nu}\\to X$ its normalization in $k(X)$\n([def-sc-normalization]). Then $\\nu$ is finite, surjective\nand birational; if $X$ is proper then $X^{\\nu}$ is proper; and\n$\\dim X^{\\nu}=\\dim X$.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-thm-br/lem-sc-normalization-exists.md",
+  "place": "node lem-sc-normalization-exists, order 915",
+  "external": [
+   {
+    "document": "Stacks Project",
+    "place": "Tag 00OY"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-sc-normalization"
+ ],
+ "proof": [
+  {
+   "text": "By construction $\\nu$ is affine and dominant, hence surjective\n(its image is closed and contains the generic point of $X$).\nFiniteness: for affine $X=\\operatorname{Spec}A$ (the general\ncase follows by gluing), the normalization is\n$\\operatorname{Spec}\\widetilde A$, where $\\widetilde A$ is the\nintegral closure of $A$ in $k(X)$; we prove that\n$\\widetilde A$ is a finite $A$-module. If $\\dim X=0$ this\nis clear ($A$ is Artinian, hence finite over $k$). Assume\n$\\dim X=1$. By Noether normalization (*reference: Stacks\nProject, Commutative Algebra,\n[Tag 00OY](https://stacks.math.columbia.edu/tag/00OY)*) there is a transcendental $x\\in A$ such that\n$A$ is finite over $k[x]$; then $\\widetilde A$ equals the\nintegral closure of $k[x]$ in $k(X)$ (the integral closures of\n$k[x]\\subseteq A$ in their common fraction field $k(X)$\ncoincide), and $n:=[k(X):k(x)]<\\infty$ (standard field theory:\n*reference: Stacks Project, Fields: transcendence degree*).\nChoose $b_1,\\dots,b_n\\in\\widetilde A$ forming a $k(x)$-basis of\n$k(X)$, and choose $0\\neq s\\in k[x]$ with\n$s\\,b_ib_j\\in\\sum_lk[x]b_l$ for all $i,j$ (clearing the\nfinitely many denominators of the multiplication table). We claim\n$\\widetilde A\\subseteq(1/s)\\sum_lk[x]b_l$. For\n$b\\in\\widetilde A$, write $b=\\sum_ic_ib_i$ with\n$c_i\\in k(x)$; for every $j$,\n\n$$\ns\\,bb_j=\\sum_ic_i(s\\,b_ib_j)\\in\\sum_lk[x]b_l,\n$$\n\nso $s\\,b\\,M\\subseteq M$ for $M:=\\sum_lk[x]b_l$, and since\n$1\\in M\\cap\\widetilde A$ we get $s\\,b=s\\,b\\cdot1\\in M$, i.e. $b\\in(1/s)M$. Thus $\\widetilde A$ is a submodule of the\nfinitely generated free $k[x]$-module $(1/s)M$; since $k[x]$\nis noetherian, $\\widetilde A$ is finitely generated over\n$k[x]$, hence over $A$. So $\\nu$ is finite and birational.\nA finite morphism is proper and preserves dimension, so if $X$\nis proper then $X^{\\nu}$ is proper, and\n$\\dim X^{\\nu}=\\dim X$.",
+   "uses": [],
+   "elementary": null
   }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-thm-br/lem-sc-normalization-exists.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [
+  "proof_cites_literature"
+ ],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 915,
+ "blueprint_uses": [
+  "def-sc-normalization"
+ ],
+ "proof_split_by": "paragraphs",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.Scheme.surjective_fromNormalization",
+    "AlgebraicGeometry.Scheme.isFinite_fromNormalization_of_locallyOfFiniteType",
+    "AlgebraicGeometry.Scheme.exists_isIso_fromNormalization_restrict",
+    "AlgebraicGeometry.Scheme.topologicalKrullDim_normalization"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.Scheme.surjective_fromNormalization",
+     "module": "WeilConjectures.Mathlib.AlgebraicGeometry.Normalization",
+     "lines": [
+      197,
+      202
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.Scheme.isFinite_fromNormalization_of_locallyOfFiniteType",
+     "module": "WeilConjectures.Mathlib.AlgebraicGeometry.Normalization",
+     "lines": [
+      465,
+      478
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.Scheme.exists_isIso_fromNormalization_restrict",
+     "module": "WeilConjectures.Mathlib.AlgebraicGeometry.Normalization",
+     "lines": [
+      480,
+      517
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.Scheme.topologicalKrullDim_normalization",
+     "module": "WeilConjectures.Mathlib.AlgebraicGeometry.Normalization",
+     "lines": [
+      519,
+      529
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-br",
+ "lean": {
+  "module": "WeilConjectures.Mathlib.AlgebraicGeometry.Normalization",
+  "declaration": "AlgebraicGeometry.Scheme.surjective_fromNormalization",
+  "branch": "slopmaster2",
+  "line": 197,
+  "declarations": [
+   "AlgebraicGeometry.Scheme.surjective_fromNormalization",
+   "AlgebraicGeometry.Scheme.isFinite_fromNormalization_of_locallyOfFiniteType",
+   "AlgebraicGeometry.Scheme.exists_isIso_fromNormalization_restrict",
+   "AlgebraicGeometry.Scheme.topologicalKrullDim_normalization"
+  ],
+  "sorry_free": true,
+  "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state closed)"
+ }
 }

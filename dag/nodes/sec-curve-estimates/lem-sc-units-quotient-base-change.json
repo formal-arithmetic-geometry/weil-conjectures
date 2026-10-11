@@ -1,137 +1,149 @@
 {
-  "id": "lem-sc-units-quotient-base-change",
-  "blueprint": {
-    "is": null,
-    "from": {
-      "node": "thm-sc-constant-invariance",
-      "place": "Affine case: invariance of O(C)^×/O(C)^{×n} under k ⊂ k'",
-      "via": []
-    },
-    "same_as": []
+ "id": "lem-sc-units-quotient-base-change",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-constant-invariance",
+   "place": "Affine case: invariance of O(C)^×/O(C)^{×n} under k ⊂ k'",
+   "via": []
   },
-  "kind": "statement",
-  "title": "Units modulo powers are invariant under algebraically closed base change",
-  "statement": "Let $k\\subseteq k'$ be an extension of algebraically closed fields [def-sc-field-extension], let $C$ be a smooth affine connected curve over $k$ [def-sc-curves], and let $n\\geq1$. Then pullback induces an isomorphism $\\mathcal O_C(C)^\\times/\\mathcal O_C(C)^\\times{}^{\\,n} \\xrightarrow{\\sim} \\mathcal O_{C_{k'}}(C_{k'})^\\times/\\mathcal O_{C_{k'}}(C_{k'})^\\times{}^{\\,n}$.",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-ext-invariance/thm-sc-constant-invariance.md",
-    "place": "Affine-case proof, unit quotient paragraph"
-  },
-  "stmt_deps": [
-    "def-sc-field-extension",
-    "def-sc-curves",
-    "def-sc-divisor",
-    "lem-sc-compactification",
-    "lem-sc-global-functions",
-    "lem-sc-affine-unit-divisor-base-change"
-  ],
-  "proof": [
-    {
-      "text": "Choose a smooth proper connected compactification $j:C\\hookrightarrow\\overline C$ with finite boundary $S$ by [lem-sc-compactification]. By [lem-sc-base-change-curve], base change gives a smooth proper curve $\\overline C'$ and the base-changed open immersion $C'\\hookrightarrow\\overline C'$; the boundary is $S'=\\overline C'\\setminus C'$. The identification of the free divisor groups supported on $S$ and $S'$ follows from the definitions and the fibre-product base change in [def-sc-field-extension].",
-      "uses": [
-        "lem-sc-compactification",
-        "lem-sc-base-change-curve",
-        "def-sc-field-extension"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-ext-invariance/thm-sc-constant-invariance.md",
-        "place": "Affine-case proof, compactification and boundary setup"
-      }
-    },
-    {
-      "text": "Let $L$ (respectively $L'$) be the subgroup of divisors supported on $S$ (respectively $S'$) which are boundary divisors of units on $C$ (respectively $C_{k'}$). By [lem-sc-affine-unit-divisor-base-change], the identification $\\iota$ sends $L$ isomorphically onto $L'$ and is compatible with pullback of units: $\\operatorname{div}(\\pi^*u)=\\iota(\\operatorname{div}u)$. The divisor map $\\mathcal O_C(C)^\\times\\to L$ is surjective by definition of $L$, and its kernel is $k^\\times$: taking global sections of the exact sequence $0\\to\\mathbf G_m\\to j_*\\mathbf G_m\\to\\bigoplus_{P\\in S}i_{P*}\\mathbf Z$ of [lem-sc-divisor-exact-sequence] (global sections are left exact) shows that a unit on $C$ with zero boundary divisor is a global unit on $\\overline C$, hence in $H^0(\\overline C,\\mathcal O_{\\overline C})^\\times=k^\\times$ by [lem-sc-global-functions]. The same holds over $k'$ for $C'\\subseteq\\overline C'$ (a proper smooth connected curve by step 1).",
-      "uses": [
-        "lem-sc-affine-unit-divisor-base-change",
-        "lem-sc-divisor-exact-sequence",
-        "lem-sc-global-functions"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-ext-invariance/thm-sc-constant-invariance.md",
-        "place": "Affine-case proof, divisor map and constants"
-      }
-    },
-    {
-      "text": "Every element of $k^\\times$ and $k'^\\times$ is an $n$-th power because both fields are algebraically closed. Hence the divisor maps identify $\\mathcal O_C(C)^\\times/\\mathcal O_C(C)^\\times{}^{\\,n}$ and $\\mathcal O_{C_{k'}}(C_{k'})^\\times/\\mathcal O_{C_{k'}}(C_{k'})^\\times{}^{\\,n}$ with $L/nL$ and $L'/nL'$, respectively: equality of divisor classes modulo $n$ gives a quotient by an $n$-th power up to a constant, and the constant has an $n$-th root. Since $\\operatorname{div}(\\pi^*u)=\\iota(\\operatorname{div}u)$ and $\\iota(L)=L'$ (step 2), the square formed by pullback, the two divisor maps and $\\iota$ commutes, so pullback $\\mathcal O_C(C)^\\times/n\\to\\mathcal O_{C_{k'}}(C_{k'})^\\times/n$ is identified with the isomorphism $L/nL\\cong L'/nL'$ induced by $\\iota$.",
-      "uses": [
-        "lem-sc-affine-unit-divisor-base-change"
-      ],
-      "elementary": true,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-ext-invariance/thm-sc-constant-invariance.md",
-        "place": "Affine-case proof, passage from divisors to n-th-power quotients"
-      }
-    }
-  ],
-  "proof_deps": [
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Units modulo powers are invariant under algebraically closed base change",
+ "statement": "Let $k\\subseteq k'$ be an extension of algebraically closed fields [def-sc-field-extension], let $C$ be a smooth affine connected curve over $k$ [def-sc-curves], and let $n\\geq1$. Then pullback induces an isomorphism $\\mathcal O_C(C)^\\times/\\mathcal O_C(C)^\\times{}^{\\,n} \\xrightarrow{\\sim} \\mathcal O_{C_{k'}}(C_{k'})^\\times/\\mathcal O_{C_{k'}}(C_{k'})^\\times{}^{\\,n}$.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-ext-invariance/thm-sc-constant-invariance.md",
+  "place": "Affine-case proof, unit quotient paragraph"
+ },
+ "stmt_deps": [
+  "def-sc-field-extension",
+  "def-sc-curves",
+  "def-sc-divisor",
+  "lem-sc-compactification",
+  "lem-sc-global-functions",
+  "lem-sc-affine-unit-divisor-base-change"
+ ],
+ "proof": [
+  {
+   "text": "Choose a smooth proper connected compactification $j:C\\hookrightarrow\\overline C$ with finite boundary $S$ by [lem-sc-compactification]. By [lem-sc-base-change-curve], base change gives a smooth proper curve $\\overline C'$ and the base-changed open immersion $C'\\hookrightarrow\\overline C'$; the boundary is $S'=\\overline C'\\setminus C'$. The identification of the free divisor groups supported on $S$ and $S'$ follows from the definitions and the fibre-product base change in [def-sc-field-extension].",
+   "uses": [
     "lem-sc-compactification",
     "lem-sc-base-change-curve",
-    "def-sc-field-extension",
+    "def-sc-field-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-ext-invariance/thm-sc-constant-invariance.md",
+    "place": "Affine-case proof, compactification and boundary setup"
+   }
+  },
+  {
+   "text": "Let $L$ (respectively $L'$) be the subgroup of divisors supported on $S$ (respectively $S'$) which are boundary divisors of units on $C$ (respectively $C_{k'}$). By [lem-sc-affine-unit-divisor-base-change], the identification $\\iota$ sends $L$ isomorphically onto $L'$ and is compatible with pullback of units: $\\operatorname{div}(\\pi^*u)=\\iota(\\operatorname{div}u)$. The divisor map $\\mathcal O_C(C)^\\times\\to L$ is surjective by definition of $L$, and its kernel is $k^\\times$: taking global sections of the exact sequence $0\\to\\mathbf G_m\\to j_*\\mathbf G_m\\to\\bigoplus_{P\\in S}i_{P*}\\mathbf Z$ of [lem-sc-divisor-exact-sequence] (global sections are left exact) shows that a unit on $C$ with zero boundary divisor is a global unit on $\\overline C$, hence in $H^0(\\overline C,\\mathcal O_{\\overline C})^\\times=k^\\times$ by [lem-sc-global-functions]. The same holds over $k'$ for $C'\\subseteq\\overline C'$ (a proper smooth connected curve by step 1).",
+   "uses": [
     "lem-sc-affine-unit-divisor-base-change",
     "lem-sc-divisor-exact-sequence",
     "lem-sc-global-functions"
-  ],
-  "proof_origin": {
-    "by": "agent",
+   ],
+   "elementary": false,
+   "source": {
     "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-ext-invariance/thm-sc-constant-invariance.md",
-    "place": "Affine-case proof, unit quotient paragraph"
+    "place": "Affine-case proof, divisor map and constants"
+   }
   },
-  "mathlib_searches": [
-    {
-      "tool": "leanfinder",
-      "query": "base change units modulo nth powers affine curve algebraically closed field",
-      "results": "Only unrelated WeierstrassCurve baseChange declarations.",
-      "date": "2026-10-11",
-      "verdict": "no match"
-    },
-    {
-      "tool": "loogle",
-      "query": "base change units modulo nth powers affine curve algebraically closed field",
-      "results": "0 hits; unknown identifier / parser error.",
-      "date": "2026-10-11",
-      "verdict": "no match"
-    },
-    {
-      "tool": "grep",
-      "query": "base change units modulo nth powers affine curve algebraically closed field",
-      "results": "0 hits in Mathlib source.",
-      "date": "2026-10-11",
-      "verdict": "no match"
-    },
-    {
-      "tool": "leansearch",
-      "query": "base change units modulo nth powers affine curve algebraically closed field",
-      "results": "service unavailable: Internal Server Error",
-      "date": "2026-10-11",
-      "verdict": "unavailable"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "created": {
-    "item": "thm-sc-constant-invariance",
-    "by": "worker",
-    "date": "2026-10-10"
+  {
+   "text": "Every element of $k^\\times$ and $k'^\\times$ is an $n$-th power because both fields are algebraically closed. Hence the divisor maps identify $\\mathcal O_C(C)^\\times/\\mathcal O_C(C)^\\times{}^{\\,n}$ and $\\mathcal O_{C_{k'}}(C_{k'})^\\times/\\mathcal O_{C_{k'}}(C_{k'})^\\times{}^{\\,n}$ with $L/nL$ and $L'/nL'$, respectively: equality of divisor classes modulo $n$ gives a quotient by an $n$-th power up to a constant, and the constant has an $n$-th root. Since $\\operatorname{div}(\\pi^*u)=\\iota(\\operatorname{div}u)$ and $\\iota(L)=L'$ (step 2), the square formed by pullback, the two divisor maps and $\\iota$ commutes, so pullback $\\mathcal O_C(C)^\\times/n\\to\\mathcal O_{C_{k'}}(C_{k'})^\\times/n$ is identified with the isomorphism $L/nL\\cong L'/nL'$ induced by $\\iota$.",
+   "uses": [
+    "lem-sc-affine-unit-divisor-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-ext-invariance/thm-sc-constant-invariance.md",
+    "place": "Affine-case proof, passage from divisors to n-th-power quotients"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-compactification",
+  "lem-sc-base-change-curve",
+  "def-sc-field-extension",
+  "lem-sc-affine-unit-divisor-base-change",
+  "lem-sc-divisor-exact-sequence",
+  "lem-sc-global-functions"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-ext-invariance/thm-sc-constant-invariance.md",
+  "place": "Affine-case proof, unit quotient paragraph"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "base change units modulo nth powers affine curve algebraically closed field",
+   "results": "Only unrelated WeierstrassCurve baseChange declarations.",
+   "date": "2026-10-11",
+   "verdict": "no match"
   },
-  "chapter": "sec-curve-estimates",
-  "unit": "sk-prop-ext-invariance",
-  "split_report": {
-    "date": "2026-10-11",
-    "item": "lem-sc-units-quotient-base-change",
-    "worker": "stage1",
-    "summary": "Checked that no sorry-free declaration states the base-change isomorphism; the existing Lean theorem only proves finiteness of the quotient. Added one narrower statement-only node for invariance of the boundary principal-divisor subgroup, then split the item's proof into compactification, divisor-kernel identification, and passage to n-th-power quotients.",
-    "blueprint": "Realizes the affine-case unit quotient paragraph: compactify, identify units modulo constants with boundary principal divisors, use algebraic closedness for n-th roots, and transport the quotient across base change.",
-    "tool_uses": []
+  {
+   "tool": "loogle",
+   "query": "base change units modulo nth powers affine curve algebraically closed field",
+   "results": "0 hits; unknown identifier / parser error.",
+   "date": "2026-10-11",
+   "verdict": "no match"
   },
-  "reviewed": {
-    "date": "2026-10-10",
-    "by": "L",
-    "reviewer": "R-uqb3036",
-    "group": "J1",
-    "result": "pass",
-    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-uqb3036 (reviewer sub-agent of L); spot-checked: Statement matches thm-sc-constant-invariance affine q=1 use (O^x/O^xn pullback iso, outer map of the five-lemma square) (C4 ok); compactification/base-change/global-functions citations checked; n-th-power passage elementary (constants n-divisible in alg. closed fields) ok. FIX more, RETURN less: (a) C1 step 2: 'a unit with zero boundary divisor extends to a global unit on C-bar' was uncited; now cites global sections of lem-sc-divisor-exact-sequence (0->G_m->j_*G_m->sum i_P* Z) plus lem-sc-global-functions, and surjectivity onto L made explicit; (b) C1/C4 step 3: compatibility of pullback with the divisor maps (div(pi^*u)=iota(div u)) was needed for the identification L/nL=L'/nL' to be the pullback map but was stated nowhere; added to the new node lem-sc-affine-unit-divisor-base-change's statement (with S k-rational giving iota) and used in steps 2-3; uses/proof_deps updated. New node not (b)/(c)/(d): real lemma (needs valuation invariance under base change). J1's second reading missed (a) and (b).; 2 file(s) fixed by the reviewer"
+  {
+   "tool": "grep",
+   "query": "base change units modulo nth powers affine curve algebraically closed field",
+   "results": "0 hits in Mathlib source.",
+   "date": "2026-10-11",
+   "verdict": "no match"
   },
-  "lead_notes": [
-    "L (02:33 UTC), on reviewer R-glf0233's point: step 2 calls the base change of the compactification a proper smooth connected curve; connectedness comes from clause 3 of lem-sc-base-change-curve as restated at 4f872f96b (a connected curve base-changes to a connected curve), which step 1 may cite explicitly."
-  ]
+  {
+   "tool": "leansearch",
+   "query": "base change units modulo nth powers affine curve algebraically closed field",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "item": "thm-sc-constant-invariance",
+  "by": "worker",
+  "date": "2026-10-10"
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-ext-invariance",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-units-quotient-base-change",
+  "worker": "stage1",
+  "summary": "Checked that no sorry-free declaration states the base-change isomorphism; the existing Lean theorem only proves finiteness of the quotient. Added one narrower statement-only node for invariance of the boundary principal-divisor subgroup, then split the item's proof into compactification, divisor-kernel identification, and passage to n-th-power quotients.",
+  "blueprint": "Realizes the affine-case unit quotient paragraph: compactify, identify units modulo constants with boundary principal divisors, use algebraic closedness for n-th roots, and transport the quotient across base change.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-uqb3036",
+  "group": "J1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-uqb3036 (reviewer sub-agent of L); spot-checked: Statement matches thm-sc-constant-invariance affine q=1 use (O^x/O^xn pullback iso, outer map of the five-lemma square) (C4 ok); compactification/base-change/global-functions citations checked; n-th-power passage elementary (constants n-divisible in alg. closed fields) ok. FIX more, RETURN less: (a) C1 step 2: 'a unit with zero boundary divisor extends to a global unit on C-bar' was uncited; now cites global sections of lem-sc-divisor-exact-sequence (0->G_m->j_*G_m->sum i_P* Z) plus lem-sc-global-functions, and surjectivity onto L made explicit; (b) C1/C4 step 3: compatibility of pullback with the divisor maps (div(pi^*u)=iota(div u)) was needed for the identification L/nL=L'/nL' to be the pullback map but was stated nowhere; added to the new node lem-sc-affine-unit-divisor-base-change's statement (with S k-rational giving iota) and used in steps 2-3; uses/proof_deps updated. New node not (b)/(c)/(d): real lemma (needs valuation invariance under base change). J1's second reading missed (a) and (b).; 2 file(s) fixed by the reviewer"
+ },
+ "lead_notes": [
+  "L (02:33 UTC), on reviewer R-glf0233's point: step 2 calls the base change of the compactification a proper smooth connected curve; connectedness comes from clause 3 of lem-sc-base-change-curve as restated at 4f872f96b (a connected curve base-changes to a connected curve), which step 1 may cite explicitly."
+ ],
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

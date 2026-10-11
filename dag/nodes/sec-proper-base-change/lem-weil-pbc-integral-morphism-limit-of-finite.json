@@ -1,265 +1,265 @@
 {
-  "id": "lem-weil-pbc-integral-morphism-limit-of-finite",
-  "blueprint": {
-    "is": null,
-    "from": {
-      "node": "lemma-weil-pbc-h1-constructible-representation",
-      "place": "step 4 of its split (source: Lemma 0A5H (lemma-efface-cohomology-on-fibre-by-finite-cover), etale-cohomology.tex line 16164, proof, third paragraph, 'By Lemma 09Z7 (lemma-constructible-maps-into-constant-general) and the remarks above we may assume F is of the form f_*M where M is a finite Z/lZ-module and f: Y -> X is a finite morphism of finite presentation')",
-      "via": [
-        "lem-weil-pbc-constructible-module-finite-pushforward-noetherian",
-        "lem-weil-pbc-constructible-module-finite-pushforward-embedding"
-      ]
-    },
-    "same_as": null
+ "id": "lem-weil-pbc-integral-morphism-limit-of-finite",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-h1-constructible-representation",
+   "place": "step 4 of its split (source: Lemma 0A5H (lemma-efface-cohomology-on-fibre-by-finite-cover), etale-cohomology.tex line 16164, proof, third paragraph, 'By Lemma 09Z7 (lemma-constructible-maps-into-constant-general) and the remarks above we may assume F is of the form f_*M where M is a finite Z/lZ-module and f: Y -> X is a finite morphism of finite presentation')",
+   "via": [
+    "lem-weil-pbc-constructible-module-finite-pushforward-noetherian",
+    "lem-weil-pbc-constructible-module-finite-pushforward-embedding"
+   ]
   },
-  "kind": "statement",
-  "title": "An integral morphism to a quasi-compact quasi-separated scheme is a limit of finite morphisms",
-  "statement": "Let $S$ be a quasi-compact and quasi-separated scheme [def-weil-pbc-scheme-conventions] and $\\nu:Y\\to S$ an integral morphism [def-weil-finite-integral-morphism]. Then there are a directed set $I$, an inverse system of $S$-schemes $(\\nu_i:Y_i\\to S)_{i\\in I}$ with transition morphisms $t_{i'i}:Y_{i'}\\to Y_i$ ($i'\\ge i$) over $S$, and morphisms $p_i:Y\\to Y_i$ over $S$ with $t_{i'i}\\circ p_{i'}=p_i$, such that every $\\nu_i$ is finite and of finite presentation, every $t_{i'i}$ is affine [pqf-def-affine-morphism] (indeed finite), and $(Y,(p_i)_i)$ is a limit of the system in the category of schemes. (Concretely: $\\nu_*\\mathcal O_Y$ is the filtered colimit of finite and finitely presented quasi-coherent $\\mathcal O_S$-algebras $\\mathcal A_i$, Properties 0817, and $Y_i=\\underline{\\operatorname{Spec}}_S(\\mathcal A_i)$.)",
-  "source": {
-    "document": "literature/stacks-project/limits.tex",
-    "place": "Lemma 09YZ (lemma-integral-limit-finite-and-finite-presentation), limits.tex line 1697, with Properties Lemma 0817 (properties-lemma-integral-algebra-directed-colimit-finite, properties.tex line 3424); used in etale-cohomology.tex, proof of Lemma 09Z6, lines 12999-13006 ('we write Y = lim Y_i with Y_i ... finite over Z')"
-  },
-  "stmt_deps": [
-    "def-weil-pbc-scheme-conventions",
-    "def-weil-finite-integral-morphism",
-    "pqf-def-affine-morphism",
-    "def-weil-pbc-category-colimit",
-    "lem-weil-pbc-affine-morphism-relative-spec"
-  ],
-  "proof": [
-    {
-      "text": "*Step 1 (the algebra $\\mathcal A=\\nu_*\\mathcal O_Y$ is quasi-coherent and integral).* By [def-weil-finite-integral-morphism] the integral morphism $\\nu$ is affine, so by [lem-weil-pbc-affine-morphism-relative-spec](1) $\\mathcal A:=\\nu_*\\mathcal O_Y$ is a quasi-coherent $\\mathcal O_S$-algebra (Stacks cites Schemes 01LC, push-forward along a qcqs morphism; for an affine morphism this is part (1) of the cited node). For every affine open $U\\subseteq S$ the preimage $\\nu^{-1}(U)$ is affine and $\\mathcal A(U)=\\Gamma(\\nu^{-1}(U),\\mathcal O_Y)$, and the structure map $\\mathcal O_S(U)\\to\\mathcal A(U)$ is the ring map $\\nu^\\sharp_U$, which is integral by the definition of an integral morphism [def-weil-finite-integral-morphism]. Hence $\\mathcal A$ is an integral quasi-coherent $\\mathcal O_S$-algebra in the sense of [lem-weil-pbc-integral-algebra-directed-colimit-finite].",
-      "uses": [
-        "def-weil-finite-integral-morphism",
-        "lem-weil-pbc-affine-morphism-relative-spec",
-        "lem-weil-pbc-integral-algebra-directed-colimit-finite"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/limits.tex",
-        "place": "Lemma 09YZ (lemma-integral-limit-finite-and-finite-presentation), proof, limits.tex lines 1703-1722: 'Consider the sheaf A = f_*O_X. This is a quasi-coherent sheaf of O_S-algebras'"
-      }
-    },
-    {
-      "text": "*Step 2 (Properties 0817).* $S$ is quasi-compact and quasi-separated, so by [lem-weil-pbc-integral-algebra-directed-colimit-finite](2) there are a directed set $I$, a system $(\\mathcal A_i,\\varphi_{i'i}:\\mathcal A_i\\to\\mathcal A_{i'})_{i\\le i'}$ of quasi-coherent $\\mathcal O_S$-algebras, each finite and of finite presentation, and $\\mathcal O_S$-algebra maps $\\varphi_i:\\mathcal A_i\\to\\mathcal A$ with $\\varphi_{i'}\\circ\\varphi_{i'i}=\\varphi_i$ inducing an isomorphism $\\varinjlim_i\\mathcal A_i\\cong\\mathcal A$ (the $\\varphi_i$ need not be injective). By [lem-weil-pbc-quasi-coherent-algebra-colimit] the colimit, computed in quasi-coherent $\\mathcal O_S$-algebras (= in sheaves of $\\mathcal O_S$-algebras), has sections $\\varinjlim_i\\mathcal A_i(U)$ on every affine open $U\\subseteq S$; hence for every affine open $U$ the ring maps $\\varphi_{i,U}$ induce an isomorphism $\\varinjlim_{i\\in I}\\mathcal A_i(U)\\xrightarrow{\\sim}\\mathcal A(U)$. A directed set is nonempty (Stacks, Categories 002V); fix $0\\in I$.",
-      "uses": [
-        "lem-weil-pbc-integral-algebra-directed-colimit-finite",
-        "lem-weil-pbc-quasi-coherent-algebra-colimit",
-        "def-weil-pbc-category-colimit"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/limits.tex",
-        "place": "Lemma 09YZ (lemma-integral-limit-finite-and-finite-presentation), proof, limits.tex lines 1703-1722: 'Combining Properties, Lemma 0817 we can write A = colim A_i as a filtered colimit of finite and finitely presented O_S-algebras'"
-      }
-    },
-    {
-      "text": "*Step 3 (the schemes $Y_i$, the inverse system, the cone).* By [lem-weil-pbc-affine-morphism-relative-spec](2) put $\\nu_i:Y_i:=\\underline{\\operatorname{Spec}}_S(\\mathcal A_i)\\to S$, an affine morphism with an isomorphism of $\\mathcal O_S$-algebras $\\alpha_i:\\mathcal A_i\\cong\\nu_{i,*}\\mathcal O_{Y_i}$, such that for every affine open $U\\subseteq S$, $\\nu_i^{-1}(U)\\cong\\operatorname{Spec}\\mathcal A_i(U)$ (in particular affine). Under the anti-equivalence of part (3) (affine $S$-schemes against quasi-coherent $\\mathcal O_S$-algebras), the algebra maps $\\varphi_{i'i}:\\mathcal A_i\\to\\mathcal A_{i'}$ ($i\\le i'$) correspond to $S$-morphisms $t_{i'i}:Y_{i'}\\to Y_i$, and functoriality ($\\varphi_{ii}=\\mathrm{id}$, $\\varphi_{i''i'}\\circ\\varphi_{i'i}=\\varphi_{i''i}$) gives $t_{ii}=\\mathrm{id}$ and $t_{i'i}\\circ t_{i''i'}=t_{i''i}$: an inverse system of $S$-schemes over $I$. The integral morphism $\\nu$ is affine (Step 1) and $\\nu_*\\mathcal O_Y=\\mathcal A$, so $Y$ is an object of the same category, and the maps $\\varphi_i:\\mathcal A_i\\to\\mathcal A$, composed with $\\alpha_i^{-1}$, correspond to $S$-morphisms $p_i:Y\\to Y_i$ with $t_{i'i}\\circ p_{i'}=p_i$ (from $\\varphi_{i'}\\circ\\varphi_{i'i}=\\varphi_i$). By the last clause of part (3), for every affine open $U\\subseteq S$ the restrictions $t_{i'i}|:\\nu_{i'}^{-1}(U)\\to\\nu_i^{-1}(U)$ and $p_i|:\\nu^{-1}(U)\\to\\nu_i^{-1}(U)$ are, under $\\nu_i^{-1}(U)\\cong\\operatorname{Spec}\\mathcal A_i(U)$ and $\\nu^{-1}(U)\\cong\\operatorname{Spec}\\mathcal A(U)$, the morphisms $\\operatorname{Spec}(\\varphi_{i'i,U})$ and $\\operatorname{Spec}(\\varphi_{i,U})$ (that $p_i$ maps $\\nu^{-1}(U)$ into $\\nu_i^{-1}(U)$ follows from $\\nu_i\\circ p_i=\\nu$, and likewise $\\nu_i\\circ t_{i'i}=\\nu_{i'}$).",
-      "uses": [
-        "lem-weil-pbc-affine-morphism-relative-spec"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/limits.tex",
-        "place": "Lemma 09YZ (lemma-integral-limit-finite-and-finite-presentation), proof, limits.tex lines 1703-1722: 'Then X_i = Spec_S(A_i) -> S ...'"
-      }
-    },
-    {
-      "text": "*Step 4 ($\\nu_i$ is finite).* $\\nu_i$ is affine (Step 3). For every affine open $U\\subseteq S$, $\\nu_i^{-1}(U)\\cong\\operatorname{Spec}\\mathcal A_i(U)$ and, since $\\alpha_i$ is an isomorphism of $\\mathcal O_S$-algebras, the ring map $\\mathcal O_S(U)\\to\\Gamma(\\nu_i^{-1}(U),\\mathcal O_{Y_i})$ is identified with the structure map $\\mathcal O_S(U)\\to\\mathcal A_i(U)$, which is finite because $\\mathcal A_i$ is a finite quasi-coherent $\\mathcal O_S$-algebra (Step 2, definition in [lem-weil-pbc-integral-algebra-directed-colimit-finite]). By the definition [def-weil-finite-integral-morphism], $\\nu_i$ is finite.",
-      "uses": [
-        "lem-weil-pbc-affine-morphism-relative-spec",
-        "def-weil-finite-integral-morphism",
-        "lem-weil-pbc-integral-algebra-directed-colimit-finite"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/limits.tex",
-        "place": "Lemma 09YZ (lemma-integral-limit-finite-and-finite-presentation), proof, limits.tex lines 1703-1722: 'is a finite and finitely presented morphism of schemes' (not proved there; written out)"
-      }
-    },
-    {
-      "text": "*Step 5 ($\\nu_i$ is of finite presentation).* Locally of finite presentation [def-sbc-locally-finite-presentation]: for $y\\in Y_i$ choose an affine open $U=\\operatorname{Spec}R\\ni\\nu_i(y)$ of $S$ [def-pc-scheme]; then $V=\\nu_i^{-1}(U)\\cong\\operatorname{Spec}\\mathcal A_i(U)$ is an affine open neighbourhood of $y$ with $\\nu_i(V)\\subseteq U$, and the induced ring map $R\\to\\mathcal A_i(U)$ (Step 4) is of finite presentation because $\\mathcal A_i$ is a quasi-coherent $\\mathcal O_S$-algebra of finite presentation (Step 2). Quasi-compact and quasi-separated: $\\nu_i$ is affine, hence quasi-compact and separated, in particular quasi-separated, by [lem-weil-pbc-affine-morphism-permanence](3). So $\\nu_i$ is of finite presentation in the sense of [def-weil-pbc-scheme-conventions] (Stacks 01TP: locally of finite presentation, quasi-compact, quasi-separated).",
-      "uses": [
-        "def-sbc-locally-finite-presentation",
-        "def-pc-scheme",
-        "lem-weil-pbc-affine-morphism-relative-spec",
-        "lem-weil-pbc-integral-algebra-directed-colimit-finite",
-        "lem-weil-pbc-affine-morphism-permanence",
-        "def-weil-pbc-scheme-conventions"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/limits.tex",
-        "place": "Lemma 09YZ (lemma-integral-limit-finite-and-finite-presentation), proof, limits.tex lines 1703-1722 (the claim 'finitely presented morphism', written out)"
-      }
-    },
-    {
-      "text": "*Step 6 (the transition morphisms are finite, hence affine).* For $i\\le i'$, $\\nu_i\\circ t_{i'i}=\\nu_{i'}$ is finite (Step 4) and $\\nu_i$ is separated (affine, [lem-weil-pbc-affine-morphism-permanence](3)); by [lem-weil-pbc-finite-permanence-over-separated] $t_{i'i}$ is finite, and a finite morphism is affine by definition [def-weil-finite-integral-morphism], [pqf-def-affine-morphism].",
-      "uses": [
-        "lem-weil-pbc-affine-morphism-permanence",
-        "lem-weil-pbc-finite-permanence-over-separated",
-        "def-weil-finite-integral-morphism",
-        "pqf-def-affine-morphism"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/morphisms.tex",
-        "place": "Morphisms, Lemma 035D (lemma-finite-permanence, line 11203); the affineness of the transition maps is implicit in Limits 09YZ (the limit is one of the kind of Limits 01YX)"
-      }
-    },
-    {
-      "text": "*Step 7 (the limit exists; comparison map).* The $t_{i'i}$ are affine (Step 6), so by [lem-weil-pbc-limit-affine-transition] the system $(Y_i,t_{i'i})$ has a limit $(L,(q_i)_{i\\in I})$ in the category of schemes, and for the fixed $0\\in I$ and every open $U_0\\subseteq Y_0$, $q_0^{-1}(U_0)$ with the restricted projections is the limit of $(t_{i0}^{-1}(U_0))_{i\\ge0}$. Since $(Y,(p_i))$ is a cone (Step 3), the limit property [def-weil-pbc-category-colimit] (dually: a limit in schemes is a colimit in the opposite category) gives a unique $u:Y\\to L$ with $q_i\\circ u=p_i$ for all $i$. Put $\\mu=\\nu_0\\circ q_0:L\\to S$. For every $i$ choose $j\\ge i,0$; then $\\nu_i\\circ q_i=\\nu_i\\circ t_{ji}\\circ q_j=\\nu_j\\circ q_j=\\nu_0\\circ t_{j0}\\circ q_j=\\mu$, and $\\mu\\circ u=\\nu_0\\circ p_0=\\nu$; so $u^{-1}(\\mu^{-1}(U))=\\nu^{-1}(U)$ for every open $U\\subseteq S$.",
-      "uses": [
-        "lem-weil-pbc-limit-affine-transition",
-        "def-weil-pbc-category-colimit"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/limits.tex",
-        "place": "Lemma 09YZ (lemma-integral-limit-finite-and-finite-presentation), proof, limits.tex lines 1703-1722: 'By construction X = lim_i X_i'; with Limits, Lemma 01YX (line 58) for the existence of the limit"
-      }
-    },
-    {
-      "text": "*Step 8 ($u$ is an isomorphism over every affine open of $S$).* Let $U\\subseteq S$ be affine open and $U_0=\\nu_0^{-1}(U)$, open in $Y_0$. For $i\\ge0$, $t_{i0}^{-1}(U_0)=\\nu_i^{-1}(U)$, and $q_0^{-1}(U_0)=\\mu^{-1}(U)=:L_U$; by Step 7, $(L_U,(q_i|_{L_U})_{i\\ge0})$ is a limit of the system $(\\nu_i^{-1}(U))_{i\\ge0}$, which by Step 3 is isomorphic to the system $(\\operatorname{Spec}\\mathcal A_i(U),\\operatorname{Spec}(\\varphi_{i'i,U}))_{i\\ge0}$. The subset $I_{\\ge0}$ is cofinal in the directed set $I$, so $\\varinjlim_{i\\ge0}\\mathcal A_i(U)=\\varinjlim_{i\\in I}\\mathcal A_i(U)\\cong\\mathcal A(U)$ via the $\\varphi_{i,U}$ (Step 2; restricting a directed colimit to a cofinal subset does not change it). By [lem-weil-pbc-spec-colimit-limit], $\\operatorname{Spec}\\mathcal A(U)$ with the morphisms $\\operatorname{Spec}(\\varphi_{i,U})$ is a limit of $(\\operatorname{Spec}\\mathcal A_i(U))_{i\\ge0}$; by Step 3 this is $(\\nu^{-1}(U),(p_i|_{\\nu^{-1}(U)})_{i\\ge0})$. The restriction $u_U:=u|_{\\nu^{-1}(U)}:\\nu^{-1}(U)\\to L_U$ (Step 7) satisfies $q_i|\\circ u_U=p_i|$ for $i\\ge0$, i.e. it is the comparison morphism between two limits of the same system, and is therefore an isomorphism (the unique morphism of cones between two limit cones is an isomorphism, its inverse being the comparison in the other direction [def-weil-pbc-category-colimit]).",
-      "uses": [
-        "lem-weil-pbc-spec-colimit-limit",
-        "def-weil-pbc-category-colimit"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/limits.tex",
-        "place": "Lemma 01YW (line 42) and the proof of Lemma 01YX (line 58 ff.: the limit is computed over affine opens of S_0 by 01YW); 'By construction X = lim X_i' in 09YZ written out"
-      }
-    },
-    {
-      "text": "*Step 9 ($u$ is an isomorphism; conclusion).* For each affine open $U\\subseteq S$ let $w_U:L_U\\to\\nu^{-1}(U)\\subseteq Y$ be the inverse of $u_U$ (Step 8). For affine opens $U,U'$, both $w_U$ and $w_{U'}$ restrict on $L_U\\cap L_{U'}=\\mu^{-1}(U\\cap U')$ to inverses of the restriction of $u$ to $u^{-1}(\\mu^{-1}(U\\cap U'))=\\nu^{-1}(U\\cap U')$ (Step 7; $\\nu\\circ w_U=\\mu\\circ u\\circ w_U=\\mu$, so $w_U$ maps $\\mu^{-1}(U\\cap U')$ into $\\nu^{-1}(U\\cap U')$), and an inverse is unique; so they agree. The $L_U$ cover $L$ (the affine opens $U$ cover $S$ [def-pc-scheme]), so by [lem-weil-pbc-scheme-morphism-gluing] the $w_U$ glue to $w:L\\to Y$. Then $u\\circ w$ and $\\mathrm{id}_L$ agree on every $L_U$, and $w\\circ u$ and $\\mathrm{id}_Y$ agree on every $\\nu^{-1}(U)$ (these cover $Y$), so by the uniqueness clause of the same node $u$ is an isomorphism with inverse $w$. As $q_i\\circ u=p_i$, the cone $(Y,(p_i)_{i\\in I})$ is isomorphic to the limit cone $(L,(q_i))$ and is therefore itself a limit of the system $(Y_i,t_{i'i})$ in the category of schemes [def-weil-pbc-category-colimit]. Together with Steps 3-6 ($p_i$ and $t_{i'i}$ are $S$-morphisms, $\\nu_i$ finite and of finite presentation, $t_{i'i}$ finite and affine, $Y_i=\\underline{\\operatorname{Spec}}_S(\\mathcal A_i)$ with $\\nu_*\\mathcal O_Y=\\varinjlim\\mathcal A_i$) this is the statement.",
-      "uses": [
-        "def-pc-scheme",
-        "lem-weil-pbc-scheme-morphism-gluing",
-        "def-weil-pbc-category-colimit"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/limits.tex",
-        "place": "Lemma 09YZ (lemma-integral-limit-finite-and-finite-presentation), proof, limits.tex lines 1703-1722: 'By construction X = lim_i X_i which proves the lemma' (written out)"
-      }
-    }
-  ],
-  "proof_deps": [
+  "same_as": null
+ },
+ "kind": "statement",
+ "title": "An integral morphism to a quasi-compact quasi-separated scheme is a limit of finite morphisms",
+ "statement": "Let $S$ be a quasi-compact and quasi-separated scheme [def-weil-pbc-scheme-conventions] and $\\nu:Y\\to S$ an integral morphism [def-weil-finite-integral-morphism]. Then there are a directed set $I$, an inverse system of $S$-schemes $(\\nu_i:Y_i\\to S)_{i\\in I}$ with transition morphisms $t_{i'i}:Y_{i'}\\to Y_i$ ($i'\\ge i$) over $S$, and morphisms $p_i:Y\\to Y_i$ over $S$ with $t_{i'i}\\circ p_{i'}=p_i$, such that every $\\nu_i$ is finite and of finite presentation, every $t_{i'i}$ is affine [pqf-def-affine-morphism] (indeed finite), and $(Y,(p_i)_i)$ is a limit of the system in the category of schemes. (Concretely: $\\nu_*\\mathcal O_Y$ is the filtered colimit of finite and finitely presented quasi-coherent $\\mathcal O_S$-algebras $\\mathcal A_i$, Properties 0817, and $Y_i=\\underline{\\operatorname{Spec}}_S(\\mathcal A_i)$.)",
+ "source": {
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Lemma 09YZ (lemma-integral-limit-finite-and-finite-presentation), limits.tex line 1697, with Properties Lemma 0817 (properties-lemma-integral-algebra-directed-colimit-finite, properties.tex line 3424); used in etale-cohomology.tex, proof of Lemma 09Z6, lines 12999-13006 ('we write Y = lim Y_i with Y_i ... finite over Z')"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-finite-integral-morphism",
+  "pqf-def-affine-morphism",
+  "def-weil-pbc-category-colimit",
+  "lem-weil-pbc-affine-morphism-relative-spec"
+ ],
+ "proof": [
+  {
+   "text": "*Step 1 (the algebra $\\mathcal A=\\nu_*\\mathcal O_Y$ is quasi-coherent and integral).* By [def-weil-finite-integral-morphism] the integral morphism $\\nu$ is affine, so by [lem-weil-pbc-affine-morphism-relative-spec](1) $\\mathcal A:=\\nu_*\\mathcal O_Y$ is a quasi-coherent $\\mathcal O_S$-algebra (Stacks cites Schemes 01LC, push-forward along a qcqs morphism; for an affine morphism this is part (1) of the cited node). For every affine open $U\\subseteq S$ the preimage $\\nu^{-1}(U)$ is affine and $\\mathcal A(U)=\\Gamma(\\nu^{-1}(U),\\mathcal O_Y)$, and the structure map $\\mathcal O_S(U)\\to\\mathcal A(U)$ is the ring map $\\nu^\\sharp_U$, which is integral by the definition of an integral morphism [def-weil-finite-integral-morphism]. Hence $\\mathcal A$ is an integral quasi-coherent $\\mathcal O_S$-algebra in the sense of [lem-weil-pbc-integral-algebra-directed-colimit-finite].",
+   "uses": [
     "def-weil-finite-integral-morphism",
     "lem-weil-pbc-affine-morphism-relative-spec",
+    "lem-weil-pbc-integral-algebra-directed-colimit-finite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Lemma 09YZ (lemma-integral-limit-finite-and-finite-presentation), proof, limits.tex lines 1703-1722: 'Consider the sheaf A = f_*O_X. This is a quasi-coherent sheaf of O_S-algebras'"
+   }
+  },
+  {
+   "text": "*Step 2 (Properties 0817).* $S$ is quasi-compact and quasi-separated, so by [lem-weil-pbc-integral-algebra-directed-colimit-finite](2) there are a directed set $I$, a system $(\\mathcal A_i,\\varphi_{i'i}:\\mathcal A_i\\to\\mathcal A_{i'})_{i\\le i'}$ of quasi-coherent $\\mathcal O_S$-algebras, each finite and of finite presentation, and $\\mathcal O_S$-algebra maps $\\varphi_i:\\mathcal A_i\\to\\mathcal A$ with $\\varphi_{i'}\\circ\\varphi_{i'i}=\\varphi_i$ inducing an isomorphism $\\varinjlim_i\\mathcal A_i\\cong\\mathcal A$ (the $\\varphi_i$ need not be injective). By [lem-weil-pbc-quasi-coherent-algebra-colimit] the colimit, computed in quasi-coherent $\\mathcal O_S$-algebras (= in sheaves of $\\mathcal O_S$-algebras), has sections $\\varinjlim_i\\mathcal A_i(U)$ on every affine open $U\\subseteq S$; hence for every affine open $U$ the ring maps $\\varphi_{i,U}$ induce an isomorphism $\\varinjlim_{i\\in I}\\mathcal A_i(U)\\xrightarrow{\\sim}\\mathcal A(U)$. A directed set is nonempty (Stacks, Categories 002V); fix $0\\in I$.",
+   "uses": [
     "lem-weil-pbc-integral-algebra-directed-colimit-finite",
     "lem-weil-pbc-quasi-coherent-algebra-colimit",
-    "def-weil-pbc-category-colimit",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Lemma 09YZ (lemma-integral-limit-finite-and-finite-presentation), proof, limits.tex lines 1703-1722: 'Combining Properties, Lemma 0817 we can write A = colim A_i as a filtered colimit of finite and finitely presented O_S-algebras'"
+   }
+  },
+  {
+   "text": "*Step 3 (the schemes $Y_i$, the inverse system, the cone).* By [lem-weil-pbc-affine-morphism-relative-spec](2) put $\\nu_i:Y_i:=\\underline{\\operatorname{Spec}}_S(\\mathcal A_i)\\to S$, an affine morphism with an isomorphism of $\\mathcal O_S$-algebras $\\alpha_i:\\mathcal A_i\\cong\\nu_{i,*}\\mathcal O_{Y_i}$, such that for every affine open $U\\subseteq S$, $\\nu_i^{-1}(U)\\cong\\operatorname{Spec}\\mathcal A_i(U)$ (in particular affine). Under the anti-equivalence of part (3) (affine $S$-schemes against quasi-coherent $\\mathcal O_S$-algebras), the algebra maps $\\varphi_{i'i}:\\mathcal A_i\\to\\mathcal A_{i'}$ ($i\\le i'$) correspond to $S$-morphisms $t_{i'i}:Y_{i'}\\to Y_i$, and functoriality ($\\varphi_{ii}=\\mathrm{id}$, $\\varphi_{i''i'}\\circ\\varphi_{i'i}=\\varphi_{i''i}$) gives $t_{ii}=\\mathrm{id}$ and $t_{i'i}\\circ t_{i''i'}=t_{i''i}$: an inverse system of $S$-schemes over $I$. The integral morphism $\\nu$ is affine (Step 1) and $\\nu_*\\mathcal O_Y=\\mathcal A$, so $Y$ is an object of the same category, and the maps $\\varphi_i:\\mathcal A_i\\to\\mathcal A$, composed with $\\alpha_i^{-1}$, correspond to $S$-morphisms $p_i:Y\\to Y_i$ with $t_{i'i}\\circ p_{i'}=p_i$ (from $\\varphi_{i'}\\circ\\varphi_{i'i}=\\varphi_i$). By the last clause of part (3), for every affine open $U\\subseteq S$ the restrictions $t_{i'i}|:\\nu_{i'}^{-1}(U)\\to\\nu_i^{-1}(U)$ and $p_i|:\\nu^{-1}(U)\\to\\nu_i^{-1}(U)$ are, under $\\nu_i^{-1}(U)\\cong\\operatorname{Spec}\\mathcal A_i(U)$ and $\\nu^{-1}(U)\\cong\\operatorname{Spec}\\mathcal A(U)$, the morphisms $\\operatorname{Spec}(\\varphi_{i'i,U})$ and $\\operatorname{Spec}(\\varphi_{i,U})$ (that $p_i$ maps $\\nu^{-1}(U)$ into $\\nu_i^{-1}(U)$ follows from $\\nu_i\\circ p_i=\\nu$, and likewise $\\nu_i\\circ t_{i'i}=\\nu_{i'}$).",
+   "uses": [
+    "lem-weil-pbc-affine-morphism-relative-spec"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Lemma 09YZ (lemma-integral-limit-finite-and-finite-presentation), proof, limits.tex lines 1703-1722: 'Then X_i = Spec_S(A_i) -> S ...'"
+   }
+  },
+  {
+   "text": "*Step 4 ($\\nu_i$ is finite).* $\\nu_i$ is affine (Step 3). For every affine open $U\\subseteq S$, $\\nu_i^{-1}(U)\\cong\\operatorname{Spec}\\mathcal A_i(U)$ and, since $\\alpha_i$ is an isomorphism of $\\mathcal O_S$-algebras, the ring map $\\mathcal O_S(U)\\to\\Gamma(\\nu_i^{-1}(U),\\mathcal O_{Y_i})$ is identified with the structure map $\\mathcal O_S(U)\\to\\mathcal A_i(U)$, which is finite because $\\mathcal A_i$ is a finite quasi-coherent $\\mathcal O_S$-algebra (Step 2, definition in [lem-weil-pbc-integral-algebra-directed-colimit-finite]). By the definition [def-weil-finite-integral-morphism], $\\nu_i$ is finite.",
+   "uses": [
+    "lem-weil-pbc-affine-morphism-relative-spec",
+    "def-weil-finite-integral-morphism",
+    "lem-weil-pbc-integral-algebra-directed-colimit-finite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Lemma 09YZ (lemma-integral-limit-finite-and-finite-presentation), proof, limits.tex lines 1703-1722: 'is a finite and finitely presented morphism of schemes' (not proved there; written out)"
+   }
+  },
+  {
+   "text": "*Step 5 ($\\nu_i$ is of finite presentation).* Locally of finite presentation [def-sbc-locally-finite-presentation]: for $y\\in Y_i$ choose an affine open $U=\\operatorname{Spec}R\\ni\\nu_i(y)$ of $S$ [def-pc-scheme]; then $V=\\nu_i^{-1}(U)\\cong\\operatorname{Spec}\\mathcal A_i(U)$ is an affine open neighbourhood of $y$ with $\\nu_i(V)\\subseteq U$, and the induced ring map $R\\to\\mathcal A_i(U)$ (Step 4) is of finite presentation because $\\mathcal A_i$ is a quasi-coherent $\\mathcal O_S$-algebra of finite presentation (Step 2). Quasi-compact and quasi-separated: $\\nu_i$ is affine, hence quasi-compact and separated, in particular quasi-separated, by [lem-weil-pbc-affine-morphism-permanence](3). So $\\nu_i$ is of finite presentation in the sense of [def-weil-pbc-scheme-conventions] (Stacks 01TP: locally of finite presentation, quasi-compact, quasi-separated).",
+   "uses": [
     "def-sbc-locally-finite-presentation",
     "def-pc-scheme",
+    "lem-weil-pbc-affine-morphism-relative-spec",
+    "lem-weil-pbc-integral-algebra-directed-colimit-finite",
     "lem-weil-pbc-affine-morphism-permanence",
-    "def-weil-pbc-scheme-conventions",
-    "lem-weil-pbc-finite-permanence-over-separated",
-    "pqf-def-affine-morphism",
-    "lem-weil-pbc-limit-affine-transition",
-    "lem-weil-pbc-spec-colimit-limit",
-    "lem-weil-pbc-scheme-morphism-gluing"
-  ],
-  "proof_origin": {
-    "by": "document",
+    "def-weil-pbc-scheme-conventions"
+   ],
+   "elementary": false,
+   "source": {
     "document": "literature/stacks-project/limits.tex",
-    "place": "Lemma 09YZ (limits.tex line 1697), with Properties Lemma 0817 (properties.tex line 3424); the identification 'by construction X = lim X_i' written out along Limits 01YX/01YW; steps 4-6 written out from the definitions and Morphisms 035D"
+    "place": "Lemma 09YZ (lemma-integral-limit-finite-and-finite-presentation), proof, limits.tex lines 1703-1722 (the claim 'finitely presented morphism', written out)"
+   }
   },
-  "mathlib_searches": [
-    {
-      "tool": "leansearch",
-      "query": "integral morphism of schemes is a limit of finite morphisms",
-      "results": "AlgebraicGeometry.IsIntegralHom, IsIntegralHom.mk, IsIntegralHom.hasAffineProperty (Morphisms.Integral), IsFinite.instIsIntegralHom, IsFinite.iff_isIntegralHom_and_locallyOfFiniteType (Morphisms.Finite)",
-      "date": "2026-10-10",
-      "verdict": "no match"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "integral quasi-coherent algebra is directed colimit of finite subalgebras; integral morphism is inverse limit of finite morphisms",
-      "results": "normalization locally-directed instance (Normalization), IsFinite.iff_isIntegralHom_and_locallyOfFiniteType, IsFinite.instIsIntegralHom, isIntegral_of_isAffine_of_isDomain, affine_isIntegral_iff: unrelated",
-      "date": "2026-10-10",
-      "verdict": "no match"
-    },
-    {
-      "tool": "loogle",
-      "query": "AlgebraicGeometry.IsIntegralHom, AlgebraicGeometry.IsFinite, CategoryTheory.Limits.IsLimit",
-      "results": "none",
-      "date": "2026-10-10",
-      "verdict": "no match"
-    },
-    {
-      "tool": "grep",
-      "query": "grep -rln 'cofiltered limit|IsLimit' Mathlib/AlgebraicGeometry/Morphisms/Integral.lean Mathlib/AlgebraicGeometry/Morphisms/Finite.lean; grep -rn 'integralClosure.*directed|exists.*finite.*subalgebra' Mathlib/RingTheory/IntegralClosure Mathlib/AlgebraicGeometry",
-      "results": "none (RingTheory/Adjoin/FGBaseChange.lean and Tower.lean have finitely generated subalgebra lemmas, not the integral-as-colimit statement)",
-      "date": "2026-10-10",
-      "verdict": "no match"
-    },
-    {
-      "tool": "grep",
-      "query": "grep -rn 'IsIntegralHom' over ~/weil-conjectures-slopmaster2/WeilConjectures (source repository) and grep -rn 'relativeSpec|RelativeSpec' Mathlib/",
-      "results": "source repository: AlgebraicGeometry.Scheme.Hom.exists_finiteApproximation_of_isIntegralHom (WeilConjectures/Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean:114, @[stacks 09YZ], body `sorry`), with the structure Scheme.Hom.FiniteApproximation (line 70); Mathlib: no relative Spec (only RelativeGluing.lean, Stacks 01LH)",
-      "date": "2026-10-10",
-      "verdict": "no Mathlib match; source-repository statement found (sorry)"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "merged_into": null,
-  "created": {
-    "by": "worker",
-    "item": "lem-weil-pbc-constructible-module-finite-pushforward-noetherian",
-    "date": "2026-10-10"
+  {
+   "text": "*Step 6 (the transition morphisms are finite, hence affine).* For $i\\le i'$, $\\nu_i\\circ t_{i'i}=\\nu_{i'}$ is finite (Step 4) and $\\nu_i$ is separated (affine, [lem-weil-pbc-affine-morphism-permanence](3)); by [lem-weil-pbc-finite-permanence-over-separated] $t_{i'i}$ is finite, and a finite morphism is affine by definition [def-weil-finite-integral-morphism], [pqf-def-affine-morphism].",
+   "uses": [
+    "lem-weil-pbc-affine-morphism-permanence",
+    "lem-weil-pbc-finite-permanence-over-separated",
+    "def-weil-finite-integral-morphism",
+    "pqf-def-affine-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Morphisms, Lemma 035D (lemma-finite-permanence, line 11203); the affineness of the transition maps is implicit in Limits 09YZ (the limit is one of the kind of Limits 01YX)"
+   }
   },
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": [
-        "AlgebraicGeometry.Scheme.Hom.exists_finiteApproximation_of_isIntegralHom"
-      ]
-    },
-    "slopmaster2": {
-      "state": "sorry_here",
-      "decls": [
-        {
-          "name": "AlgebraicGeometry.Scheme.Hom.exists_finiteApproximation_of_isIntegralHom",
-          "module": "WeilConjectures.Mathlib.AlgebraicGeometry.ZariskisMainTheorem",
-          "lines": [
-            112,
-            123
-          ],
-          "kind": "theorem",
-          "sorry": true
-        }
-      ],
-      "missing": [],
-      "open": []
-    }
+  {
+   "text": "*Step 7 (the limit exists; comparison map).* The $t_{i'i}$ are affine (Step 6), so by [lem-weil-pbc-limit-affine-transition] the system $(Y_i,t_{i'i})$ has a limit $(L,(q_i)_{i\\in I})$ in the category of schemes, and for the fixed $0\\in I$ and every open $U_0\\subseteq Y_0$, $q_0^{-1}(U_0)$ with the restricted projections is the limit of $(t_{i0}^{-1}(U_0))_{i\\ge0}$. Since $(Y,(p_i))$ is a cone (Step 3), the limit property [def-weil-pbc-category-colimit] (dually: a limit in schemes is a colimit in the opposite category) gives a unique $u:Y\\to L$ with $q_i\\circ u=p_i$ for all $i$. Put $\\mu=\\nu_0\\circ q_0:L\\to S$. For every $i$ choose $j\\ge i,0$; then $\\nu_i\\circ q_i=\\nu_i\\circ t_{ji}\\circ q_j=\\nu_j\\circ q_j=\\nu_0\\circ t_{j0}\\circ q_j=\\mu$, and $\\mu\\circ u=\\nu_0\\circ p_0=\\nu$; so $u^{-1}(\\mu^{-1}(U))=\\nu^{-1}(U)$ for every open $U\\subseteq S$.",
+   "uses": [
+    "lem-weil-pbc-limit-affine-transition",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Lemma 09YZ (lemma-integral-limit-finite-and-finite-presentation), proof, limits.tex lines 1703-1722: 'By construction X = lim_i X_i'; with Limits, Lemma 01YX (line 58) for the existence of the limit"
+   }
   },
-  "chapter": "sec-proper-base-change",
-  "unit": "sk-thm-p1",
-  "split_report": {
-    "date": "2026-10-10",
-    "item": "lem-weil-pbc-integral-morphism-limit-of-finite",
-    "worker": "stage1",
-    "summary": "Split along Stacks Limits 09YZ (limits.tex 1697) in nine steps: (1) nu_*O_Y quasi-coherent (relative-spec (1)) and integral (definition of integral morphism); (2) Properties 0817 (new unsplit node lem-weil-pbc-integral-algebra-directed-colimit-finite, exact Stacks statement with the definitions of finite/integral/finitely presented quasi-coherent algebras) plus sections over affines of the colimit (lem-weil-pbc-quasi-coherent-algebra-colimit); (3) Y_i = Spec_S(A_i), transition maps and the cone p_i from the anti-equivalence (relative-spec (2),(3)); (4) nu_i finite and (5) of finite presentation, from the definitions and affine-morphism permanence; (6) transition maps finite (new Mathlib leaf lem-weil-pbc-finite-permanence-over-separated, Stacks 035D, IsFinite.of_comp) hence affine; (7)-(9) 'by construction X = lim X_i' written out: the limit L exists by lem-weil-pbc-limit-affine-transition (statement only, including its open-preimage clause), the comparison u: Y -> L is an isomorphism over each affine open of S by lem-weil-pbc-spec-colimit-limit and uniqueness of limits, and globally by gluing inverses. Statement kept; stmt_deps gained def-weil-pbc-category-colimit (limit) and lem-weil-pbc-affine-morphism-relative-spec (the parenthetical's Spec_S). The source repository states it as AlgebraicGeometry.Scheme.Hom.exists_finiteApproximation_of_isIntegralHom (sorry)."
+  {
+   "text": "*Step 8 ($u$ is an isomorphism over every affine open of $S$).* Let $U\\subseteq S$ be affine open and $U_0=\\nu_0^{-1}(U)$, open in $Y_0$. For $i\\ge0$, $t_{i0}^{-1}(U_0)=\\nu_i^{-1}(U)$, and $q_0^{-1}(U_0)=\\mu^{-1}(U)=:L_U$; by Step 7, $(L_U,(q_i|_{L_U})_{i\\ge0})$ is a limit of the system $(\\nu_i^{-1}(U))_{i\\ge0}$, which by Step 3 is isomorphic to the system $(\\operatorname{Spec}\\mathcal A_i(U),\\operatorname{Spec}(\\varphi_{i'i,U}))_{i\\ge0}$. The subset $I_{\\ge0}$ is cofinal in the directed set $I$, so $\\varinjlim_{i\\ge0}\\mathcal A_i(U)=\\varinjlim_{i\\in I}\\mathcal A_i(U)\\cong\\mathcal A(U)$ via the $\\varphi_{i,U}$ (Step 2; restricting a directed colimit to a cofinal subset does not change it). By [lem-weil-pbc-spec-colimit-limit], $\\operatorname{Spec}\\mathcal A(U)$ with the morphisms $\\operatorname{Spec}(\\varphi_{i,U})$ is a limit of $(\\operatorname{Spec}\\mathcal A_i(U))_{i\\ge0}$; by Step 3 this is $(\\nu^{-1}(U),(p_i|_{\\nu^{-1}(U)})_{i\\ge0})$. The restriction $u_U:=u|_{\\nu^{-1}(U)}:\\nu^{-1}(U)\\to L_U$ (Step 7) satisfies $q_i|\\circ u_U=p_i|$ for $i\\ge0$, i.e. it is the comparison morphism between two limits of the same system, and is therefore an isomorphism (the unique morphism of cones between two limit cones is an isomorphism, its inverse being the comparison in the other direction [def-weil-pbc-category-colimit]).",
+   "uses": [
+    "lem-weil-pbc-spec-colimit-limit",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Lemma 01YW (line 42) and the proof of Lemma 01YX (line 58 ff.: the limit is computed over affine opens of S_0 by 01YW); 'By construction X = lim X_i' in 09YZ written out"
+   }
   },
-  "lean": {
-    "module": "WeilConjectures.Mathlib.AlgebraicGeometry.ZariskisMainTheorem",
-    "declaration": "AlgebraicGeometry.Scheme.Hom.exists_finiteApproximation_of_isIntegralHom",
-    "branch": "slopmaster2",
-    "line": 112,
-    "declarations": [
-      "AlgebraicGeometry.Scheme.Hom.exists_finiteApproximation_of_isIntegralHom"
-    ],
-    "sorry_free": false,
-    "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state sorry_here)"
-  },
-  "reviewed": {
-    "date": "2026-10-10",
-    "by": "L",
-    "result": "accepted",
-    "note": "Nine steps along Stacks 09YZ with 0817; the limit identification (Stacks: by construction) written out via lem-weil-pbc-limit-affine-transition, lem-weil-pbc-spec-colimit-limit and gluing; finiteness/finite presentation of the stages and finiteness of the transition maps written out. New leaf lem-weil-pbc-finite-permanence-over-separated verified (IsFinite.of_comp, Finite.lean:151); 0817 node unsplit. Lean exists_finiteApproximation_of_isIntegralHom attached (own sorry)."
+  {
+   "text": "*Step 9 ($u$ is an isomorphism; conclusion).* For each affine open $U\\subseteq S$ let $w_U:L_U\\to\\nu^{-1}(U)\\subseteq Y$ be the inverse of $u_U$ (Step 8). For affine opens $U,U'$, both $w_U$ and $w_{U'}$ restrict on $L_U\\cap L_{U'}=\\mu^{-1}(U\\cap U')$ to inverses of the restriction of $u$ to $u^{-1}(\\mu^{-1}(U\\cap U'))=\\nu^{-1}(U\\cap U')$ (Step 7; $\\nu\\circ w_U=\\mu\\circ u\\circ w_U=\\mu$, so $w_U$ maps $\\mu^{-1}(U\\cap U')$ into $\\nu^{-1}(U\\cap U')$), and an inverse is unique; so they agree. The $L_U$ cover $L$ (the affine opens $U$ cover $S$ [def-pc-scheme]), so by [lem-weil-pbc-scheme-morphism-gluing] the $w_U$ glue to $w:L\\to Y$. Then $u\\circ w$ and $\\mathrm{id}_L$ agree on every $L_U$, and $w\\circ u$ and $\\mathrm{id}_Y$ agree on every $\\nu^{-1}(U)$ (these cover $Y$), so by the uniqueness clause of the same node $u$ is an isomorphism with inverse $w$. As $q_i\\circ u=p_i$, the cone $(Y,(p_i)_{i\\in I})$ is isomorphic to the limit cone $(L,(q_i))$ and is therefore itself a limit of the system $(Y_i,t_{i'i})$ in the category of schemes [def-weil-pbc-category-colimit]. Together with Steps 3-6 ($p_i$ and $t_{i'i}$ are $S$-morphisms, $\\nu_i$ finite and of finite presentation, $t_{i'i}$ finite and affine, $Y_i=\\underline{\\operatorname{Spec}}_S(\\mathcal A_i)$ with $\\nu_*\\mathcal O_Y=\\varinjlim\\mathcal A_i$) this is the statement.",
+   "uses": [
+    "def-pc-scheme",
+    "lem-weil-pbc-scheme-morphism-gluing",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Lemma 09YZ (lemma-integral-limit-finite-and-finite-presentation), proof, limits.tex lines 1703-1722: 'By construction X = lim_i X_i which proves the lemma' (written out)"
+   }
   }
+ ],
+ "proof_deps": [
+  "def-weil-finite-integral-morphism",
+  "lem-weil-pbc-affine-morphism-relative-spec",
+  "lem-weil-pbc-integral-algebra-directed-colimit-finite",
+  "lem-weil-pbc-quasi-coherent-algebra-colimit",
+  "def-weil-pbc-category-colimit",
+  "def-sbc-locally-finite-presentation",
+  "def-pc-scheme",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "def-weil-pbc-scheme-conventions",
+  "lem-weil-pbc-finite-permanence-over-separated",
+  "pqf-def-affine-morphism",
+  "lem-weil-pbc-limit-affine-transition",
+  "lem-weil-pbc-spec-colimit-limit",
+  "lem-weil-pbc-scheme-morphism-gluing"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Lemma 09YZ (limits.tex line 1697), with Properties Lemma 0817 (properties.tex line 3424); the identification 'by construction X = lim X_i' written out along Limits 01YX/01YW; steps 4-6 written out from the definitions and Morphisms 035D"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "integral morphism of schemes is a limit of finite morphisms",
+   "results": "AlgebraicGeometry.IsIntegralHom, IsIntegralHom.mk, IsIntegralHom.hasAffineProperty (Morphisms.Integral), IsFinite.instIsIntegralHom, IsFinite.iff_isIntegralHom_and_locallyOfFiniteType (Morphisms.Finite)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "integral quasi-coherent algebra is directed colimit of finite subalgebras; integral morphism is inverse limit of finite morphisms",
+   "results": "normalization locally-directed instance (Normalization), IsFinite.iff_isIntegralHom_and_locallyOfFiniteType, IsFinite.instIsIntegralHom, isIntegral_of_isAffine_of_isDomain, affine_isIntegral_iff: unrelated",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsIntegralHom, AlgebraicGeometry.IsFinite, CategoryTheory.Limits.IsLimit",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln 'cofiltered limit|IsLimit' Mathlib/AlgebraicGeometry/Morphisms/Integral.lean Mathlib/AlgebraicGeometry/Morphisms/Finite.lean; grep -rn 'integralClosure.*directed|exists.*finite.*subalgebra' Mathlib/RingTheory/IntegralClosure Mathlib/AlgebraicGeometry",
+   "results": "none (RingTheory/Adjoin/FGBaseChange.lean and Tower.lean have finitely generated subalgebra lemmas, not the integral-as-colimit statement)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'IsIntegralHom' over ~/weil-conjectures-slopmaster2/WeilConjectures (source repository) and grep -rn 'relativeSpec|RelativeSpec' Mathlib/",
+   "results": "source repository: AlgebraicGeometry.Scheme.Hom.exists_finiteApproximation_of_isIntegralHom (WeilConjectures/Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean:114, @[stacks 09YZ], body `sorry`), with the structure Scheme.Hom.FiniteApproximation (line 70); Mathlib: no relative Spec (only RelativeGluing.lean, Stacks 01LH)",
+   "date": "2026-10-10",
+   "verdict": "no Mathlib match; source-repository statement found (sorry)"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-constructible-module-finite-pushforward-noetherian",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.Scheme.Hom.exists_finiteApproximation_of_isIntegralHom"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.Scheme.Hom.exists_finiteApproximation_of_isIntegralHom",
+     "module": "WeilConjectures.AlgebraicGeometry.Morphisms.Integral.FinitePresentationApproximation",
+     "lines": [
+      334,
+      358
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-integral-morphism-limit-of-finite",
+  "worker": "stage1",
+  "summary": "Split along Stacks Limits 09YZ (limits.tex 1697) in nine steps: (1) nu_*O_Y quasi-coherent (relative-spec (1)) and integral (definition of integral morphism); (2) Properties 0817 (new unsplit node lem-weil-pbc-integral-algebra-directed-colimit-finite, exact Stacks statement with the definitions of finite/integral/finitely presented quasi-coherent algebras) plus sections over affines of the colimit (lem-weil-pbc-quasi-coherent-algebra-colimit); (3) Y_i = Spec_S(A_i), transition maps and the cone p_i from the anti-equivalence (relative-spec (2),(3)); (4) nu_i finite and (5) of finite presentation, from the definitions and affine-morphism permanence; (6) transition maps finite (new Mathlib leaf lem-weil-pbc-finite-permanence-over-separated, Stacks 035D, IsFinite.of_comp) hence affine; (7)-(9) 'by construction X = lim X_i' written out: the limit L exists by lem-weil-pbc-limit-affine-transition (statement only, including its open-preimage clause), the comparison u: Y -> L is an isomorphism over each affine open of S by lem-weil-pbc-spec-colimit-limit and uniqueness of limits, and globally by gluing inverses. Statement kept; stmt_deps gained def-weil-pbc-category-colimit (limit) and lem-weil-pbc-affine-morphism-relative-spec (the parenthetical's Spec_S). The source repository states it as AlgebraicGeometry.Scheme.Hom.exists_finiteApproximation_of_isIntegralHom (sorry)."
+ },
+ "lean": {
+  "module": "WeilConjectures.Mathlib.AlgebraicGeometry.ZariskisMainTheorem",
+  "declaration": "AlgebraicGeometry.Scheme.Hom.exists_finiteApproximation_of_isIntegralHom",
+  "branch": "slopmaster2",
+  "line": 112,
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Hom.exists_finiteApproximation_of_isIntegralHom"
+  ],
+  "sorry_free": false,
+  "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state sorry_here)"
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Nine steps along Stacks 09YZ with 0817; the limit identification (Stacks: by construction) written out via lem-weil-pbc-limit-affine-transition, lem-weil-pbc-spec-colimit-limit and gluing; finiteness/finite presentation of the stages and finiteness of the transition maps written out. New leaf lem-weil-pbc-finite-permanence-over-separated verified (IsFinite.of_comp, Finite.lean:151); 0817 node unsplit. Lean exists_finiteApproximation_of_isIntegralHom attached (own sorry)."
+ }
 }

@@ -1,298 +1,261 @@
 {
-  "id": "lem-pc-genus-agrees-sc",
-  "blueprint": {
-    "is": "lem-pc-genus-agrees-sc",
-    "from": null,
-    "same_as": []
-  },
-  "kind": "statement",
-  "title": "Agreement with the genus of file 06",
-  "statement": "Let $k$ be an algebraically closed field and $C$ a\nsmooth projective curve over\n$k$ (or, more generally, a proper smooth connected curve in the sense of\n[def-sc-curves] with $\\dim H^0(C,\\mathcal{O}_C)=1$). Then the genus\n$g(C)$ of [def-pc-genus] equals the genus of\n[def-sc-genus].",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-prop-picard-pic-split/lem-pc-genus-agrees-sc.md",
-    "place": "node lem-pc-genus-agrees-sc, order 811",
-    "external": [
-      {
-        "document": "Stacks Project",
-        "place": "Tag 0BY7"
-      }
-    ]
-  },
-  "stmt_deps": [
-    "def-sc-curves",
-    "def-pc-genus",
-    "def-sc-genus",
-    "def-pc-smooth-projective-curve"
-  ],
-  "proof": [
-    {
-      "text": "Case (a): $C$ is a smooth projective curve over $k$ [def-pc-smooth-projective-curve]. By [def-pc-curve] $C$ is integral, separated and of finite type over $k$, of dimension exactly $1$; by [lem-pc-projective-proper] the projective morphism $C\\to\\operatorname{Spec}k$ is proper, and it is smooth by hypothesis. Being integral, $C$ is nonempty and irreducible ([def-pc-integral-scheme]), hence connected. So $C$ is a curve over the algebraically closed field $k$ in the sense of [def-sc-curves] (separated, of finite type, of dimension $\\leq1$) which is proper, smooth and connected (nonempty, connected, of dimension one). Hence [def-sc-genus] applies to $C$ and gives $g_{\\mathrm{sc}}(C)=\\dim_kH^1(C,\\mathcal O_C)$, the $k$-structure on $H^1$ being the one induced by the structure morphism $C\\to\\operatorname{Spec}k$.",
-      "uses": [
-        "def-pc-smooth-projective-curve",
-        "def-pc-curve",
-        "lem-pc-projective-proper",
-        "def-pc-integral-scheme",
-        "def-sc-curves",
-        "def-sc-genus"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/curves.tex",
-        "place": "Definition 0BY7 (label curves-definition-genus): genus of a proper scheme of dimension 1 with H^0 = k"
-      }
-    },
-    {
-      "text": "Still in case (a): $C$ is geometrically irreducible over $k$, so that [def-pc-genus] applies. An algebraically closed field is separably closed, and $C$ is nonempty and smooth over $k$, so [lem-pc-rational-points-dense] gives a $k$-rational point $\\sigma\\in C(k)$. Then [prop-pc-xk-integral] (2), applied to $(C,\\sigma)$, says that for every field extension $K/k$ the base change $C_K$ is integral, in particular irreducible ([def-pc-integral-scheme]); by [def-pc-geometrically-irreducible] $C$ is geometrically irreducible over $k$. Hence [def-pc-genus] defines $g_{\\mathrm{pc}}(C)=\\dim_kH^1(C,\\mathcal O_C)$, with the same $k$-structure.",
-      "uses": [
-        "lem-pc-rational-points-dense",
-        "prop-pc-xk-integral",
-        "def-pc-integral-scheme",
-        "def-pc-geometrically-irreducible",
-        "def-pc-genus"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/pic.tex",
-        "place": "Definition 0B9W (label pic-definition-genus): genus of a smooth projective geometrically irreducible curve"
-      }
-    },
-    {
-      "text": "Conclusion of case (a): by Steps 1 and 2 both genera are the $k$-dimension of the same $k$-vector space $H^1(C,\\mathcal O_C)$, so $g_{\\mathrm{pc}}(C)=g_{\\mathrm{sc}}(C)$. (Stacks, Algebraic Curves, remark after Definition 0BY7: the two definitions agree whenever both apply.)",
-      "uses": [
-        "def-pc-genus",
-        "def-sc-genus"
-      ],
-      "elementary": true,
-      "source": {
-        "document": "literature/stacks-project/curves.tex",
-        "place": "Definition 0BY7 and the paragraph following it"
-      }
-    },
-    {
-      "text": "Case (b): $C$ is a proper smooth connected curve over $k$ in the sense of [def-sc-curves] (the hypothesis $\\dim_kH^0(C,\\mathcal O_C)=1$ is not used). We show that $C$ is a smooth projective curve over $k$ [def-pc-smooth-projective-curve]; then case (a) applies and gives the claim. $C$ is proper over $k$ of dimension one, so it is projective over $k$ by [lem-sc-proper-dim-one-projective]. By [lem-sc-smooth-regular] every local ring $\\mathcal O_{C,P}$ is a domain; hence $C$ is reduced, and no point lies on two distinct irreducible components (the irreducible components through $P$ correspond to the minimal primes of $\\mathcal O_{C,P}$, of which a domain has one). Since $\\operatorname{Spec}k$ is Noetherian and $C$ is of finite type over it, $C$ is Noetherian by [lem-weil-pbc-finite-type-over-noetherian], so it has finitely many irreducible components; they are closed and pairwise disjoint, hence each is open, and as $C$ is connected and nonempty there is exactly one. Thus $C$ is nonempty, reduced and irreducible, i.e. integral [def-pc-integral-scheme]; it is separated and of finite type over $k$ of dimension exactly $1$, so a curve in the sense of [def-pc-curve], smooth and projective over $k$, i.e. a smooth projective curve over $k$ [def-pc-smooth-projective-curve]. Now Steps 1--3 apply to $C$.",
-      "uses": [
-        "def-sc-curves",
-        "lem-sc-proper-dim-one-projective",
-        "lem-sc-smooth-regular",
-        "lem-weil-pbc-finite-type-over-noetherian",
-        "def-pc-integral-scheme",
-        "def-pc-curve",
-        "def-pc-smooth-projective-curve"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/curves.tex",
-        "place": "Definition 0BY7; the reduction of a proper smooth connected curve to a smooth projective one written by the agent (as in lem-sc-pic-proper-ntorsion, first step)"
-      }
-    }
-  ],
-  "proof_deps": [
+ "id": "lem-pc-genus-agrees-sc",
+ "blueprint": {
+  "is": "lem-pc-genus-agrees-sc",
+  "from": null,
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Agreement with the genus of file 06",
+ "statement": "Let $k$ be an algebraically closed field and $C$ a\nsmooth projective curve over\n$k$ (or, more generally, a proper smooth connected curve in the sense of\n[def-sc-curves] with $\\dim H^0(C,\\mathcal{O}_C)=1$). Then the genus\n$g(C)$ of [def-pc-genus] equals the genus of\n[def-sc-genus].",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-prop-picard-pic-split/lem-pc-genus-agrees-sc.md",
+  "place": "node lem-pc-genus-agrees-sc, order 811",
+  "external": [
+   {
+    "document": "Stacks Project",
+    "place": "Tag 0BY7"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-sc-curves",
+  "def-pc-genus",
+  "def-sc-genus",
+  "def-pc-smooth-projective-curve"
+ ],
+ "proof": [
+  {
+   "text": "Case (a): $C$ is a smooth projective curve over $k$ [def-pc-smooth-projective-curve]. By [def-pc-curve] $C$ is integral, separated and of finite type over $k$, of dimension exactly $1$; by [lem-pc-projective-proper] the projective morphism $C\\to\\operatorname{Spec}k$ is proper, and it is smooth by hypothesis. Being integral, $C$ is nonempty and irreducible ([def-pc-integral-scheme]), hence connected. So $C$ is a curve over the algebraically closed field $k$ in the sense of [def-sc-curves] (separated, of finite type, of dimension $\\leq1$) which is proper, smooth and connected (nonempty, connected, of dimension one). Hence [def-sc-genus] applies to $C$ and gives $g_{\\mathrm{sc}}(C)=\\dim_kH^1(C,\\mathcal O_C)$, the $k$-structure on $H^1$ being the one induced by the structure morphism $C\\to\\operatorname{Spec}k$.",
+   "uses": [
     "def-pc-smooth-projective-curve",
     "def-pc-curve",
     "lem-pc-projective-proper",
     "def-pc-integral-scheme",
     "def-sc-curves",
-    "def-sc-genus",
+    "def-sc-genus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Definition 0BY7 (label curves-definition-genus): genus of a proper scheme of dimension 1 with H^0 = k"
+   }
+  },
+  {
+   "text": "Still in case (a): $C$ is geometrically irreducible over $k$, so that [def-pc-genus] applies. An algebraically closed field is separably closed, and $C$ is nonempty and smooth over $k$, so [lem-pc-rational-points-dense] gives a $k$-rational point $\\sigma\\in C(k)$. Then [prop-pc-xk-integral] (2), applied to $(C,\\sigma)$, says that for every field extension $K/k$ the base change $C_K$ is integral, in particular irreducible ([def-pc-integral-scheme]); by [def-pc-geometrically-irreducible] $C$ is geometrically irreducible over $k$. Hence [def-pc-genus] defines $g_{\\mathrm{pc}}(C)=\\dim_kH^1(C,\\mathcal O_C)$, with the same $k$-structure.",
+   "uses": [
     "lem-pc-rational-points-dense",
     "prop-pc-xk-integral",
+    "def-pc-integral-scheme",
     "def-pc-geometrically-irreducible",
+    "def-pc-genus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pic.tex",
+    "place": "Definition 0B9W (label pic-definition-genus): genus of a smooth projective geometrically irreducible curve"
+   }
+  },
+  {
+   "text": "Conclusion of case (a): by Steps 1 and 2 both genera are the $k$-dimension of the same $k$-vector space $H^1(C,\\mathcal O_C)$, so $g_{\\mathrm{pc}}(C)=g_{\\mathrm{sc}}(C)$. (Stacks, Algebraic Curves, remark after Definition 0BY7: the two definitions agree whenever both apply.)",
+   "uses": [
     "def-pc-genus",
+    "def-sc-genus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Definition 0BY7 and the paragraph following it"
+   }
+  },
+  {
+   "text": "Case (b): $C$ is a proper smooth connected curve over $k$ in the sense of [def-sc-curves] (the hypothesis $\\dim_kH^0(C,\\mathcal O_C)=1$ is not used). We show that $C$ is a smooth projective curve over $k$ [def-pc-smooth-projective-curve]; then case (a) applies and gives the claim. $C$ is proper over $k$ of dimension one, so it is projective over $k$ by [lem-sc-proper-dim-one-projective]. By [lem-sc-smooth-regular] every local ring $\\mathcal O_{C,P}$ is a domain; hence $C$ is reduced, and no point lies on two distinct irreducible components (the irreducible components through $P$ correspond to the minimal primes of $\\mathcal O_{C,P}$, of which a domain has one). Since $\\operatorname{Spec}k$ is Noetherian and $C$ is of finite type over it, $C$ is Noetherian by [lem-weil-pbc-finite-type-over-noetherian], so it has finitely many irreducible components; they are closed and pairwise disjoint, hence each is open, and as $C$ is connected and nonempty there is exactly one. Thus $C$ is nonempty, reduced and irreducible, i.e. integral [def-pc-integral-scheme]; it is separated and of finite type over $k$ of dimension exactly $1$, so a curve in the sense of [def-pc-curve], smooth and projective over $k$, i.e. a smooth projective curve over $k$ [def-pc-smooth-projective-curve]. Now Steps 1--3 apply to $C$.",
+   "uses": [
+    "def-sc-curves",
     "lem-sc-proper-dim-one-projective",
     "lem-sc-smooth-regular",
-    "lem-weil-pbc-finite-type-over-noetherian"
-  ],
-  "proof_origin": {
-    "by": "document",
-    "document": "literature/stacks-project/curves.tex",
-    "place": "Definition 0BY7 (curves-definition-genus) and the paragraph after it; pic.tex Definition 0B9W (pic-definition-genus); the verification that the hypotheses of both definitions hold is written by the agent"
-  },
-  "mathlib_searches": [],
-  "mathlib_match": null,
-  "status": "split",
-  "merged_into": null,
-  "import_flags": [
-    "proof_cites_literature"
-  ],
-  "blueprint_kind": "lemma",
-  "blueprint_order": 811,
-  "blueprint_uses": [
-    "def-pc-genus",
-    "def-pc-smooth-projective-curve",
-    "def-sc-curves",
-    "def-sc-genus"
-  ],
-  "uses_not_cited": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "def-pc-integral-scheme",
+    "def-pc-curve",
     "def-pc-smooth-projective-curve"
-  ],
-  "proof_split_by": "paragraphs",
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "rests_on_sorry",
-      "decls": [
-        {
-          "name": "AlgebraicGeometry.Scheme.genus_eq_arithmeticGenus",
-          "module": "WeilConjectures.AlgebraicGeometry.Curve.RiemannRoch",
-          "lines": [
-            972,
-            980
-          ],
-          "kind": "theorem",
-          "sorry": false
-        }
-      ],
-      "missing": [],
-      "open": [
-        {
-          "name": "AlgebraicGeometry.ProjectiveSpace.subsingleton_H_of_lt",
-          "module": "WeilConjectures.AlgebraicGeometry.Cohomology.Serre",
-          "lines": [
-            116,
-            127
-          ],
-          "kind": "theorem",
-          "nodes": [
-            "lem-pc-projective-space-cohomology-bound"
-          ],
-          "below": false
-        },
-        {
-          "name": "AlgebraicGeometry.Scheme.Hom.genus_eq_finrankH_zero",
-          "module": "WeilConjectures.AlgebraicGeometry.Curve",
-          "lines": [
-            125,
-            129
-          ],
-          "kind": "theorem",
-          "nodes": [],
-          "below": false
-        },
-        {
-          "name": "AlgebraicGeometry.Scheme.Modules.IsFiniteLocallyFree.dual",
-          "module": "WeilConjectures.AlgebraicGeometry.Modules.Dual",
-          "lines": [
-            178,
-            182
-          ],
-          "kind": "theorem",
-          "nodes": [],
-          "below": false
-        },
-        {
-          "name": "AlgebraicGeometry.Scheme.Modules.IsFiniteLocallyFree.tensorObj",
-          "module": "WeilConjectures.AlgebraicGeometry.Modules.Dual",
-          "lines": [
-            184,
-            188
-          ],
-          "kind": "theorem",
-          "nodes": [],
-          "below": false
-        },
-        {
-          "name": "AlgebraicGeometry.Scheme.Modules.exists_addEquiv_sections_higherDirectImage_H",
-          "module": "WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage",
-          "lines": [
-            307,
-            324
-          ],
-          "kind": "theorem",
-          "nodes": [],
-          "below": false
-        },
-        {
-          "name": "AlgebraicGeometry.Scheme.Modules.finite_sections_higherDirectImage",
-          "module": "WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage",
-          "lines": [
-            617,
-            632
-          ],
-          "kind": "theorem",
-          "nodes": [
-            "lem-pc-coherent-hi"
-          ],
-          "below": false
-        },
-        {
-          "name": "AlgebraicGeometry.Scheme.Modules.isQuasicoherent_higherDirectImage",
-          "module": "WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage",
-          "lines": [
-            467,
-            474
-          ],
-          "kind": "theorem",
-          "nodes": [],
-          "below": false
-        },
-        {
-          "name": "AlgebraicGeometry.Scheme.Modules.nonempty_iso_dual_tensorObj_dual_tensorObj",
-          "module": "WeilConjectures.AlgebraicGeometry.Modules.Dual",
-          "lines": [
-            204,
-            214
-          ],
-          "kind": "theorem",
-          "nodes": [],
-          "below": false
-        },
-        {
-          "name": "AlgebraicGeometry.Scheme.exists_isIso_pushforwardHomObjComparison_unit",
-          "module": "WeilConjectures.AlgebraicGeometry.Curve.SerreDuality",
-          "lines": [
-            527,
-            541
-          ],
-          "kind": "theorem",
-          "nodes": [],
-          "below": false
-        }
-      ]
-    }
-  },
-  "chapter": "sec-picard-framework",
-  "unit": "sk-prop-picard-pic-split",
-  "split_report": {
-    "date": "2026-10-11",
-    "item": "lem-pc-genus-agrees-sc",
-    "worker": "stage1 W-gen0235",
-    "summary": "Read def-pc-genus (Stacks 0B9W: dim_k H^1(X,O_X) for a smooth projective geometrically irreducible curve) and def-sc-genus (dim_k H^1(C,O_C) for a proper smooth connected curve over algebraically closed k; Stacks 0BY7, verified in tags/tags and curves.tex). Both genera are dim_k H^1(C,O_C), so the proof is the verification that C satisfies the hypotheses of both definitions: case (a) smooth projective curve: proper (lem-pc-projective-proper), connected, a curve of def-sc-curves (Step 1); geometrically irreducible via a rational point and prop-pc-xk-integral (Step 2); equality (Step 3, elementary). Case (b) proper smooth connected curve: projective (lem-sc-proper-dim-one-projective) and integral (lem-sc-smooth-regular, Noetherian, connected), reducing to case (a) (Step 4); the hypothesis dim H^0 = 1 is not needed (it is automatic, cf. lem-sc-global-functions). Statement unchanged; no new node. The citer lem-sc-pic-proper-ntorsion (step 1) applies the item to a smooth projective geometrically integral curve over algebraically closed k, which case (a) covers. Lean: AlgebraicGeometry.Scheme.genus_eq_arithmeticGenus (RiemannRoch.lean:977) states a different identity (Hom.genus = dim H^0(Omega^1), the Lean form of def-sc-genus, equals arithmeticGenus = dim H^1(O)), a Serre-duality statement, and rests on sorry (Hom.genus_eq_finrankH_zero, Curve.lean:127, is sorry); not attached.",
-    "tool_uses": [
-      {
-        "node": "prop-pc-xk-integral",
-        "why": "Step 2 takes from clause (2) that a smooth projective curve with a rational point over a separably closed field is geometrically integral, needed for def-pc-genus to apply; no node of sk-prop-picard-pic-split gives it"
-      },
-      {
-        "node": "lem-sc-proper-dim-one-projective",
-        "why": "Step 4 takes from it that a proper curve over a field is projective, to bring the def-sc-curves case under def-pc-smooth-projective-curve; no node of sk-prop-picard-pic-split gives it"
-      }
-    ],
-    "blueprint": "The blueprint proof's single sentence 'Both definitions are g = dim_k H^1(C,O_C) (Definition 44.6.3 ...; Definition 53.8.1 (Tag 0BY7)), so they agree' is realized by Steps 1-3 (the hypotheses of each definition checked, then the equality); the parenthetical 'or more generally, a proper smooth connected curve with dim H^0 = 1' of the statement is realized by Step 4."
-  },
-  "tool_uses": [
-    "prop-pc-xk-integral",
-    "lem-sc-proper-dim-one-projective"
-  ],
-  "reviewed": {
-    "date": "2026-10-11",
-    "by": "L",
-    "reviewer": "R-gen0237",
-    "group": "L",
-    "result": "pass",
-    "note": "lead item: both genera are dim H^1(C,O_C); worker W-gen0235; mathematics reviewed in full by R-gen0237 (reviewer sub-agent of L); reviewed field set by L at 04:19 UTC (the lead splits were committed without it, so the queue still counted them as open)"
-  },
-  "lean": {
-    "module": "WeilConjectures.AlgebraicGeometry.Curve.RiemannRoch",
-    "declaration": "AlgebraicGeometry.Scheme.genus_eq_arithmeticGenus",
-    "branch": "slopmaster2",
-    "line": 972,
-    "declarations": [
-      "AlgebraicGeometry.Scheme.genus_eq_arithmeticGenus"
-    ],
-    "sorry_free": false,
-    "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state rests_on_sorry)"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Definition 0BY7; the reduction of a proper smooth connected curve to a smooth projective one written by the agent (as in lem-sc-pic-proper-ntorsion, first step)"
+   }
   }
+ ],
+ "proof_deps": [
+  "def-pc-smooth-projective-curve",
+  "def-pc-curve",
+  "lem-pc-projective-proper",
+  "def-pc-integral-scheme",
+  "def-sc-curves",
+  "def-sc-genus",
+  "lem-pc-rational-points-dense",
+  "prop-pc-xk-integral",
+  "def-pc-geometrically-irreducible",
+  "def-pc-genus",
+  "lem-sc-proper-dim-one-projective",
+  "lem-sc-smooth-regular",
+  "lem-weil-pbc-finite-type-over-noetherian"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Definition 0BY7 (curves-definition-genus) and the paragraph after it; pic.tex Definition 0B9W (pic-definition-genus); the verification that the hypotheses of both definitions hold is written by the agent"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [
+  "proof_cites_literature"
+ ],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 811,
+ "blueprint_uses": [
+  "def-pc-genus",
+  "def-pc-smooth-projective-curve",
+  "def-sc-curves",
+  "def-sc-genus"
+ ],
+ "uses_not_cited": [
+  "def-pc-smooth-projective-curve"
+ ],
+ "proof_split_by": "paragraphs",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.Scheme.genus_eq_arithmeticGenus"
+   ]
+  },
+  "slopmaster2": {
+   "state": "rests_on_sorry",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.Scheme.genus_eq_arithmeticGenus",
+     "module": "WeilConjectures.AlgebraicGeometry.Curve.RiemannRoch",
+     "lines": [
+      903,
+      911
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": [
+    {
+     "name": "AlgebraicGeometry.ProjectiveSpace.subsingleton_H_of_lt",
+     "module": "WeilConjectures.AlgebraicGeometry.Cohomology.Serre",
+     "lines": [
+      116,
+      127
+     ],
+     "kind": "theorem",
+     "nodes": [
+      "lem-pc-projective-space-cohomology-bound"
+     ],
+     "below": true
+    },
+    {
+     "name": "AlgebraicGeometry.Scheme.Hom.genus_eq_finrankH_zero",
+     "module": "WeilConjectures.AlgebraicGeometry.Curve",
+     "lines": [
+      125,
+      129
+     ],
+     "kind": "theorem",
+     "nodes": [],
+     "below": false
+    },
+    {
+     "name": "AlgebraicGeometry.Scheme.Modules.exists_addEquiv_sections_higherDirectImage_H",
+     "module": "WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Sections",
+     "lines": [
+      31,
+      48
+     ],
+     "kind": "theorem",
+     "nodes": [
+      "lem-pc-cohomology-sections-affine-base"
+     ],
+     "below": true
+    },
+    {
+     "name": "AlgebraicGeometry.Scheme.Modules.finite_sections_higherDirectImage",
+     "module": "WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.FiniteFreeComplex",
+     "lines": [
+      137,
+      152
+     ],
+     "kind": "theorem",
+     "nodes": [
+      "lem-pc-coherent-hi"
+     ],
+     "below": true
+    },
+    {
+     "name": "AlgebraicGeometry.Scheme.exists_isIso_pushforwardHomObjComparison_unit",
+     "module": "WeilConjectures.AlgebraicGeometry.Curve.SerreDuality",
+     "lines": [
+      527,
+      541
+     ],
+     "kind": "theorem",
+     "nodes": [
+      "lem-sc-finite-duality",
+      "lem-sc-finite-duality-trace"
+     ],
+     "below": false
+    }
+   ]
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-prop-picard-pic-split",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-genus-agrees-sc",
+  "worker": "stage1 W-gen0235",
+  "summary": "Read def-pc-genus (Stacks 0B9W: dim_k H^1(X,O_X) for a smooth projective geometrically irreducible curve) and def-sc-genus (dim_k H^1(C,O_C) for a proper smooth connected curve over algebraically closed k; Stacks 0BY7, verified in tags/tags and curves.tex). Both genera are dim_k H^1(C,O_C), so the proof is the verification that C satisfies the hypotheses of both definitions: case (a) smooth projective curve: proper (lem-pc-projective-proper), connected, a curve of def-sc-curves (Step 1); geometrically irreducible via a rational point and prop-pc-xk-integral (Step 2); equality (Step 3, elementary). Case (b) proper smooth connected curve: projective (lem-sc-proper-dim-one-projective) and integral (lem-sc-smooth-regular, Noetherian, connected), reducing to case (a) (Step 4); the hypothesis dim H^0 = 1 is not needed (it is automatic, cf. lem-sc-global-functions). Statement unchanged; no new node. The citer lem-sc-pic-proper-ntorsion (step 1) applies the item to a smooth projective geometrically integral curve over algebraically closed k, which case (a) covers. Lean: AlgebraicGeometry.Scheme.genus_eq_arithmeticGenus (RiemannRoch.lean:977) states a different identity (Hom.genus = dim H^0(Omega^1), the Lean form of def-sc-genus, equals arithmeticGenus = dim H^1(O)), a Serre-duality statement, and rests on sorry (Hom.genus_eq_finrankH_zero, Curve.lean:127, is sorry); not attached.",
+  "tool_uses": [
+   {
+    "node": "prop-pc-xk-integral",
+    "why": "Step 2 takes from clause (2) that a smooth projective curve with a rational point over a separably closed field is geometrically integral, needed for def-pc-genus to apply; no node of sk-prop-picard-pic-split gives it"
+   },
+   {
+    "node": "lem-sc-proper-dim-one-projective",
+    "why": "Step 4 takes from it that a proper curve over a field is projective, to bring the def-sc-curves case under def-pc-smooth-projective-curve; no node of sk-prop-picard-pic-split gives it"
+   }
+  ],
+  "blueprint": "The blueprint proof's single sentence 'Both definitions are g = dim_k H^1(C,O_C) (Definition 44.6.3 ...; Definition 53.8.1 (Tag 0BY7)), so they agree' is realized by Steps 1-3 (the hypotheses of each definition checked, then the equality); the parenthetical 'or more generally, a proper smooth connected curve with dim H^0 = 1' of the statement is realized by Step 4."
+ },
+ "tool_uses": [
+  "prop-pc-xk-integral",
+  "lem-sc-proper-dim-one-projective"
+ ],
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-gen0237",
+  "group": "L",
+  "result": "pass",
+  "note": "lead item: both genera are dim H^1(C,O_C); worker W-gen0235; mathematics reviewed in full by R-gen0237 (reviewer sub-agent of L); reviewed field set by L at 04:19 UTC (the lead splits were committed without it, so the queue still counted them as open)"
+ },
+ "lean": {
+  "module": "WeilConjectures.AlgebraicGeometry.Curve.RiemannRoch",
+  "declaration": "AlgebraicGeometry.Scheme.genus_eq_arithmeticGenus",
+  "branch": "slopmaster2",
+  "line": 972,
+  "declarations": [
+   "AlgebraicGeometry.Scheme.genus_eq_arithmeticGenus"
+  ],
+  "sorry_free": false,
+  "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state rests_on_sorry)"
+ }
 }

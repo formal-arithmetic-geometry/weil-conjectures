@@ -1,98 +1,100 @@
 {
-  "id": "lem-sc-open-immersion-pushforward-fully-faithful",
-  "blueprint": {
-    "is": null,
-    "from": {
-      "node": "lem-sc-cohomological-dimension",
-      "place": "## Proof, as a whole (degrees $q>2$): the blueprint proof concludes 'For total degree $q>2$ there are thus no differentials into or out of $H^q(C,\\eta_*M)$. It equals $H^q(k(C),M)=0$'; the split replaces this generic-point assembly by the route of the Lean proof AlgebraicGeometry.IsCurve.subsingleton_sheafH_of_three_le_of_forall (HighDegreeVanishing.lean), and this node is used in steps 2 and 7 ($j^{-1}j_*\\cong\\mathrm{id}$).",
-      "via": []
-    },
-    "same_as": [
-      "lem-exc-open-fully-faithful"
-    ]
+ "id": "lem-sc-open-immersion-pushforward-fully-faithful",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-cohomological-dimension",
+   "place": "## Proof, as a whole (degrees $q>2$): the blueprint proof concludes 'For total degree $q>2$ there are thus no differentials into or out of $H^q(C,\\eta_*M)$. It equals $H^q(k(C),M)=0$'; the split replaces this generic-point assembly by the route of the Lean proof AlgebraicGeometry.IsCurve.subsingleton_sheafH_of_three_le_of_forall (HighDegreeVanishing.lean), and this node is used in steps 2 and 7 ($j^{-1}j_*\\cong\\mathrm{id}$).",
+   "via": []
   },
-  "kind": "statement",
-  "title": "Direct image along an open immersion is fully faithful on etale sheaves",
-  "statement": "Let $j:U\\to X$ be an open immersion of schemes [def-weil-open-immersion]. Then the direct image $j_*:\\Ab(U_{\\Et})\\to\\Ab(X_{\\Et})$ [def-weil-pbc-direct-image] is fully faithful; equivalently, the counit $\\varepsilon_G:j^{-1}j_*G\\to G$ of the adjunction $j^{-1}\\dashv j_*$ [def-weil-pbc-inverse-image] is an isomorphism for every $G\\in\\Ab(U_{\\Et})$ [def-weil-pbc-abelian-etale-sheaves].",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-cd/lem-sc-cohomological-dimension.md (agent-written split, following the Lean)",
-    "place": "Lean: WeilConjectures/SixFunctors/Etale/LowerShriek/OpenImmersion/FullyFaithful.lean, AlgebraicGeometry.Etale.fullyFaithfulLowerStarOfIsOpenImmersion, lines 94-99 (from AlgebraicGeometry.Etale.isIso_openImmersionRestrictionLowerStarAdjunction_counit)"
+  "same_as": [
+   "lem-exc-open-fully-faithful"
+  ]
+ },
+ "kind": "statement",
+ "title": "Direct image along an open immersion is fully faithful on etale sheaves",
+ "statement": "Let $j:U\\to X$ be an open immersion of schemes [def-weil-open-immersion]. Then the direct image $j_*:\\Ab(U_{\\Et})\\to\\Ab(X_{\\Et})$ [def-weil-pbc-direct-image] is fully faithful; equivalently, the counit $\\varepsilon_G:j^{-1}j_*G\\to G$ of the adjunction $j^{-1}\\dashv j_*$ [def-weil-pbc-inverse-image] is an isomorphism for every $G\\in\\Ab(U_{\\Et})$ [def-weil-pbc-abelian-etale-sheaves].",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-cd/lem-sc-cohomological-dimension.md (agent-written split, following the Lean)",
+  "place": "Lean: WeilConjectures/SixFunctors/Etale/LowerShriek/OpenImmersion/FullyFaithful.lean, AlgebraicGeometry.Etale.fullyFaithfulLowerStarOfIsOpenImmersion, lines 94-99 (from AlgebraicGeometry.Etale.isIso_openImmersionRestrictionLowerStarAdjunction_counit)"
+ },
+ "stmt_deps": [
+  "def-weil-open-immersion",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-abelian-etale-sheaves"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "pushforward along open immersion is fully faithful, counit of pullback pushforward adjunction is isomorphism",
+   "results": "Scheme.Modules.restrictAdjunction, Scheme.Modules.instIsIsoFunctorCounitRestrictAdjunction, Scheme.Modules.restrictFunctorAdjCounitIso (Mathlib.AlgebraicGeometry.Modules.Sheaf: Zariski O_X-modules only)",
+   "date": "2026-10-10",
+   "verdict": "no match (the Zariski O_X-module analogue, not étale abelian sheaves)"
   },
-  "stmt_deps": [
-    "def-weil-open-immersion",
-    "def-weil-pbc-direct-image",
-    "def-weil-pbc-inverse-image",
-    "def-weil-pbc-abelian-etale-sheaves"
-  ],
-  "proof": [],
-  "proof_deps": [],
-  "proof_origin": null,
-  "mathlib_searches": [
-    {
-      "tool": "leansearch",
-      "query": "pushforward along open immersion is fully faithful, counit of pullback pushforward adjunction is isomorphism",
-      "results": "Scheme.Modules.restrictAdjunction, Scheme.Modules.instIsIsoFunctorCounitRestrictAdjunction, Scheme.Modules.restrictFunctorAdjCounitIso (Mathlib.AlgebraicGeometry.Modules.Sheaf: Zariski O_X-modules only)",
-      "date": "2026-10-10",
-      "verdict": "no match (the Zariski O_X-module analogue, not étale abelian sheaves)"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "etale sheaves pushforward along open immersion fully faithful",
-      "results": "Scheme.Modules.instFullPushforward, Scheme.Etale.forgetFullyFaithful, Functor.IsCoverDense.full_sheafPushforwardContinuous",
-      "date": "2026-10-10",
-      "verdict": "no match (generalization IsCoverDense.full_sheafPushforwardContinuous gives fullness only, for a different functor; not a one-line specialization)"
-    },
-    {
-      "tool": "grep",
-      "query": "grep -rn 'IsOpenImmersion' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Sites",
-      "results": "nothing on étale sheaves; the project declaration AlgebraicGeometry.Etale.fullyFaithfulLowerStarOfIsOpenImmersion (WeilConjectures/SixFunctors/Etale/LowerShriek/OpenImmersion/FullyFaithful.lean:98) states it",
-      "date": "2026-10-10",
-      "verdict": "no match in Mathlib"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "unsplit",
-  "merged_into": null,
-  "created": {
-    "by": "worker",
-    "item": "lem-sc-cohomological-dimension",
-    "date": "2026-10-10"
+  {
+   "tool": "leanfinder",
+   "query": "etale sheaves pushforward along open immersion fully faithful",
+   "results": "Scheme.Modules.instFullPushforward, Scheme.Etale.forgetFullyFaithful, Functor.IsCoverDense.full_sheafPushforwardContinuous",
+   "date": "2026-10-10",
+   "verdict": "no match (generalization IsCoverDense.full_sheafPushforwardContinuous gives fullness only, for a different functor; not a one-line specialization)"
   },
-  "chapter": "sec-curve-estimates",
-  "unit": "sk-prop-cd",
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "closed",
-      "decls": [
-        {
-          "name": "AlgebraicGeometry.Etale.fullyFaithfulLowerStarOfIsOpenImmersion",
-          "module": "WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.FullyFaithful",
-          "lines": [
-            94,
-            99
-          ],
-          "kind": "def",
-          "sorry": false
-        }
-      ],
-      "missing": [],
-      "open": []
-    }
-  },
-  "lean": {
-    "module": "WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.FullyFaithful",
-    "declaration": "AlgebraicGeometry.Etale.fullyFaithfulLowerStarOfIsOpenImmersion",
-    "branch": "slopmaster2",
-    "line": 94,
-    "declarations": [
-      "AlgebraicGeometry.Etale.fullyFaithfulLowerStarOfIsOpenImmersion"
-    ],
-    "sorry_free": true,
-    "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state closed)"
+  {
+   "tool": "grep",
+   "query": "grep -rn 'IsOpenImmersion' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Sites",
+   "results": "nothing on étale sheaves; the project declaration AlgebraicGeometry.Etale.fullyFaithfulLowerStarOfIsOpenImmersion (WeilConjectures/SixFunctors/Etale/LowerShriek/OpenImmersion/FullyFaithful.lean:98) states it",
+   "date": "2026-10-10",
+   "verdict": "no match in Mathlib"
   }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-sc-cohomological-dimension",
+  "date": "2026-10-10"
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-cd",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.Etale.fullyFaithfulLowerStarOfIsOpenImmersion"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.Etale.fullyFaithfulLowerStarOfIsOpenImmersion",
+     "module": "WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.FullyFaithful",
+     "lines": [
+      94,
+      99
+     ],
+     "kind": "def",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
+ "lean": {
+  "module": "WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.FullyFaithful",
+  "declaration": "AlgebraicGeometry.Etale.fullyFaithfulLowerStarOfIsOpenImmersion",
+  "branch": "slopmaster2",
+  "line": 94,
+  "declarations": [
+   "AlgebraicGeometry.Etale.fullyFaithfulLowerStarOfIsOpenImmersion"
+  ],
+  "sorry_free": true,
+  "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state closed)"
+ }
 }

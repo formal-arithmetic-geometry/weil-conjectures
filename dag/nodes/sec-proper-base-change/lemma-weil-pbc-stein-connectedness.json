@@ -1,172 +1,174 @@
 {
-  "id": "lemma-weil-pbc-stein-connectedness",
-  "blueprint": {
-    "is": "lemma-weil-pbc-stein-connectedness",
-    "from": null,
-    "same_as": null
+ "id": "lemma-weil-pbc-stein-connectedness",
+ "blueprint": {
+  "is": "lemma-weil-pbc-stein-connectedness",
+  "from": null,
+  "same_as": null
+ },
+ "kind": "statement",
+ "title": "Stein connectedness for $\\mathbf P^1_A$",
+ "statement": "Let $(A,I)$ be henselian [def-weil-pbc-henselian-terminology] and let\n$p:Y\\to\\operatorname{Spec}A$ be proper\n[def-weil-pbc-scheme-conventions]. In the Stein factorization\n[def-weil-pbc-stein-factorization]\n\n$$\n  Y\\longrightarrow\\operatorname{Spec}B\\longrightarrow\\operatorname{Spec}A,\n$$\n\n$A\\to B$ is finite and $(B,IB)$ is henselian. Every irreducible closed subset\nof $Y$ meets $Y_0$ in a nonempty connected subset. Therefore the Zariski\nrestriction criterion of [lemma-weil-pbc-spectral-restriction] applies to\n$(Y,Y_0)$.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-iff/lemma-weil-pbc-stein-connectedness.md",
+  "place": "node lemma-weil-pbc-stein-connectedness, order 1077",
+  "external": [
+   {
+    "document": "Stacks Project",
+    "place": "Tag 0A0B"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-weil-pbc-henselian-terminology",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-stein-factorization",
+  "lemma-weil-pbc-spectral-restriction",
+  "def-weil-pbc-strict-henselian-setup"
+ ],
+ "proof": [
+  {
+   "text": "*Step 1 (finiteness).* The finiteness of $A\\to B$ is not proved in this\nblueprint; it is input (i) of [thm-weil-pbc-stein-inputs], where the\nNoetherian reference and the approximation route available here are recorded.\nWe use it as a hypothesis for the rest of the proof.",
+   "uses": [
+    "thm-weil-pbc-stein-inputs"
+   ],
+   "elementary": false
   },
-  "kind": "statement",
-  "title": "Stein connectedness for $\\mathbf P^1_A$",
-  "statement": "Let $(A,I)$ be henselian [def-weil-pbc-henselian-terminology] and let\n$p:Y\\to\\operatorname{Spec}A$ be proper\n[def-weil-pbc-scheme-conventions]. In the Stein factorization\n[def-weil-pbc-stein-factorization]\n\n$$\n  Y\\longrightarrow\\operatorname{Spec}B\\longrightarrow\\operatorname{Spec}A,\n$$\n\n$A\\to B$ is finite and $(B,IB)$ is henselian. Every irreducible closed subset\nof $Y$ meets $Y_0$ in a nonempty connected subset. Therefore the Zariski\nrestriction criterion of [lemma-weil-pbc-spectral-restriction] applies to\n$(Y,Y_0)$.",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-iff/lemma-weil-pbc-stein-connectedness.md",
-    "place": "node lemma-weil-pbc-stein-connectedness, order 1077",
-    "external": [
-      {
-        "document": "Stacks Project",
-        "place": "Tag 0A0B"
-      }
-    ]
-  },
-  "stmt_deps": [
-    "def-weil-pbc-henselian-terminology",
+  {
+   "text": "*Step 2 (the pair $(B,IB)$ is henselian).* This is proved here. Given a\nfinite $B$-algebra $C$, the composite $A\\to C$ is finite: finiteness is\nclosed under composition in the sense of\n[def-weil-pbc-scheme-conventions]. For such a $C$, every idempotent of $C/IC$\nlifts uniquely to an idempotent of $C$, because $(A,I)$ is henselian\n[def-weil-pbc-henselian-terminology] and a finite $A$-algebra is in\nparticular integral over $A$. That is precisely the definition of the pair\n$(B,IB)$ being henselian.",
+   "uses": [
     "def-weil-pbc-scheme-conventions",
-    "def-weil-pbc-stein-factorization",
+    "def-weil-pbc-henselian-terminology"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*Step 3 (connectedness).* This is not proved in this blueprint; it is input\n(ii) of [thm-weil-pbc-stein-inputs], the henselian-pair proper-base-change\ntheorem stating that for $Z$ proper over $\\operatorname{Spec}A$ every\nirreducible closed subset of $Z$ meets $Z\\times_AA/I$ in a nonempty connected\nsubset. Applied to $Z=Y$ it gives the connectedness clause of the statement.",
+   "uses": [
+    "thm-weil-pbc-stein-inputs"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*Step 4 (spectrality and closedness).* This is proved here. $Y$ is spectral\n[def-weil-pbc-scheme-conventions]: $p$ is separated and of finite type, so\n$Y$ is quasi-compact and quasi-separated, and the underlying space of a\nscheme is sober with a basis of quasi-compact opens. The subscheme\n$Y_0\\subset Y$ is closed, since\n$S_0=\\operatorname{Spec}(A/I)\\to\\operatorname{Spec}A$ is a closed immersion\nand closed immersions are stable under base change by\n[lem-weil-pbc-closed-immersion-products].",
+   "uses": [
+    "def-weil-pbc-scheme-conventions",
+    "lem-weil-pbc-closed-immersion-products"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*Step 5.* Steps 3 and 4 verify the hypotheses of the Zariski restriction\ncriterion [lemma-weil-pbc-spectral-restriction] for the pair $(Y,Y_0)$, so its\nconclusion applies to $(Y,Y_0)$; the last assertion of the statement follows.\nWe repeat the warning of input (iii) of [thm-weil-pbc-stein-inputs]: that\ncriterion is available for *locally constant* sheaves only, and the\nconstructible sheaf to which the degree-zero argument applies it is not known\nto be locally constant.",
+   "uses": [
     "lemma-weil-pbc-spectral-restriction",
-    "def-weil-pbc-strict-henselian-setup"
-  ],
-  "proof": [
-    {
-      "text": "*Step 1 (finiteness).* The finiteness of $A\\to B$ is not proved in this\nblueprint; it is input (i) of [thm-weil-pbc-stein-inputs], where the\nNoetherian reference and the approximation route available here are recorded.\nWe use it as a hypothesis for the rest of the proof.",
-      "uses": [
-        "thm-weil-pbc-stein-inputs"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "*Step 2 (the pair $(B,IB)$ is henselian).* This is proved here. Given a\nfinite $B$-algebra $C$, the composite $A\\to C$ is finite: finiteness is\nclosed under composition in the sense of\n[def-weil-pbc-scheme-conventions]. For such a $C$, every idempotent of $C/IC$\nlifts uniquely to an idempotent of $C$, because $(A,I)$ is henselian\n[def-weil-pbc-henselian-terminology] and a finite $A$-algebra is in\nparticular integral over $A$. That is precisely the definition of the pair\n$(B,IB)$ being henselian.",
-      "uses": [
-        "def-weil-pbc-scheme-conventions",
-        "def-weil-pbc-henselian-terminology"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "*Step 3 (connectedness).* This is not proved in this blueprint; it is input\n(ii) of [thm-weil-pbc-stein-inputs], the henselian-pair proper-base-change\ntheorem stating that for $Z$ proper over $\\operatorname{Spec}A$ every\nirreducible closed subset of $Z$ meets $Z\\times_AA/I$ in a nonempty connected\nsubset. Applied to $Z=Y$ it gives the connectedness clause of the statement.",
-      "uses": [
-        "thm-weil-pbc-stein-inputs"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "*Step 4 (spectrality and closedness).* This is proved here. $Y$ is spectral\n[def-weil-pbc-scheme-conventions]: $p$ is separated and of finite type, so\n$Y$ is quasi-compact and quasi-separated, and the underlying space of a\nscheme is sober with a basis of quasi-compact opens. The subscheme\n$Y_0\\subset Y$ is closed, since\n$S_0=\\operatorname{Spec}(A/I)\\to\\operatorname{Spec}A$ is a closed immersion\nand closed immersions are stable under base change by\n[lem-weil-pbc-closed-immersion-products].",
-      "uses": [
-        "def-weil-pbc-scheme-conventions",
-        "lem-weil-pbc-closed-immersion-products"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "*Step 5.* Steps 3 and 4 verify the hypotheses of the Zariski restriction\ncriterion [lemma-weil-pbc-spectral-restriction] for the pair $(Y,Y_0)$, so its\nconclusion applies to $(Y,Y_0)$; the last assertion of the statement follows.\nWe repeat the warning of input (iii) of [thm-weil-pbc-stein-inputs]: that\ncriterion is available for *locally constant* sheaves only, and the\nconstructible sheaf to which the degree-zero argument applies it is not known\nto be locally constant.",
-      "uses": [
-        "lemma-weil-pbc-spectral-restriction",
-        "thm-weil-pbc-stein-inputs"
-      ],
-      "elementary": false
-    }
-  ],
-  "proof_deps": [
-    "thm-weil-pbc-stein-inputs",
-    "def-weil-pbc-scheme-conventions",
-    "def-weil-pbc-henselian-terminology",
-    "lem-weil-pbc-closed-immersion-products",
-    "lemma-weil-pbc-spectral-restriction"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-iff/lemma-weil-pbc-stein-connectedness.md",
-    "place": "## Proof"
-  },
-  "mathlib_searches": [],
-  "mathlib_match": null,
-  "status": "imported",
-  "merged_into": null,
-  "import_flags": [
-    "detailed_form",
-    "two_proofs",
-    "cites_outside_uses",
-    "unreachable"
-  ],
-  "blueprint_kind": "lemma",
-  "blueprint_order": 1077,
-  "blueprint_uses": [
-    "def-weil-pbc-henselian-terminology",
-    "def-weil-pbc-scheme-conventions",
-    "def-weil-pbc-stein-factorization",
-    "def-weil-pbc-strict-henselian-setup",
-    "lem-weil-pbc-closed-immersion-products",
-    "lemma-weil-pbc-spectral-restriction"
-  ],
-  "uses_not_cited": [
-    "def-weil-pbc-strict-henselian-setup"
-  ],
-  "proof_split_by": "labels",
-  "blueprint_sketch": [
-    {
-      "statement": "Every irreducible closed subset of $X$ meets $X_0$ in a connected nonempty\nset. Consequently $\\Gamma(X,F)\\xrightarrow{\\sim}\\Gamma(X_0,F_0)$ for every\nZariski sheaf $F$.",
-      "proof": "Fix an irreducible closed subset and give it the reduced closed-subscheme\nstructure $C\\subseteq X$. The map $C\\to S$ is proper. Its Stein\nfactorization gives $C\\xrightarrow{u}\\operatorname{Spec}B \\xrightarrow{v}S$, with $A\\to B$ integral and $u$ having geometrically\nconnected fibres. Since $(A,\\mathfrak m)$ is henselian,\n$(B,\\mathfrak mB)$ is a henselian pair. The image\n$D=v(\\operatorname{Spec}B)$ is irreducible and closed because $C\\to S$ is\nproper. Henselian connectedness makes $D\\cap V(\\mathfrak m)$ connected and\nnonempty. The map\n$C\\cap X_0\\to D\\cap V(\\mathfrak m)$ is closed and surjective with connected\nfibres, so the closed-surjection connected-fibre criterion makes\n$C\\cap X_0$ connected. This expands Tag\n`0A0B`; the final equality of sections is Lemma\n[lemma-weil-pbc-spectral-restriction].",
-      "cites": [
-        "lemma-weil-pbc-spectral-restriction"
-      ]
-    }
-  ],
-  "blueprint_notes": [
-    {
-      "label": "status",
-      "text": "**Status.** This statement is a conditional assembly: its two classical\ninputs are named and isolated in the interface\n[thm-weil-pbc-stein-inputs], and everything else is proved here. Proved in\nthis blueprint: (a) given that $A\\to B$ is finite, the pair $(B,IB)$ is\nhenselian; (b) $Y$ is spectral and $Y_0$ is closed in $Y$; (c) hence the\nZariski restriction criterion applies to $(Y,Y_0)$. Outsourced to\n[thm-weil-pbc-stein-inputs]: (i) the finiteness of $A\\to B$ for an arbitrary\naffine henselian base; (ii) the connectedness input; (iii) the Zariski\ncomparison for the constructible sheaf occurring in the degree-zero argument,\nwhich the locally constant form [lemma-weil-pbc-spectral-restriction] does not\nsupply.",
-      "where": "statement"
-    }
-  ],
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "rests_on_sorry",
-      "decls": [
-        {
-          "name": "AlgebraicGeometry.Scheme.Hom.spectralSpace_and_isClosed_and_isConnected_inter",
-          "module": "WeilConjectures.AlgebraicGeometry.HenselianConnectedness",
-          "lines": [
-            75,
-            92
-          ],
-          "kind": "theorem",
-          "sorry": false
-        }
-      ],
-      "missing": [],
-      "open": [
-        {
-          "name": "AlgebraicGeometry.Scheme.Hom.isConnected_inter_preimage_zeroLocus",
-          "module": "WeilConjectures.AlgebraicGeometry.HenselianConnectedness",
-          "lines": [
-            62,
-            73
-          ],
-          "kind": "theorem",
-          "nodes": [
-            "thm-weil-pbc-stein-inputs"
-          ],
-          "below": true
-        }
-      ]
-    }
-  },
-  "chapter": "sec-proper-base-change",
-  "unit": "sk-thm-iff",
-  "lead_note": "2026-10-10 L: unreached from the target since 11:31: E1's proof of lemma-weil-pbc-etale-degree-zero follows Stacks 0A0C through the Gabber node 09ZF and no longer uses the Stein / spectral-restriction route of the imported proof. Flagged unreachable; it leaves the queue. Reached again if a citer appears.",
-  "lean": {
-    "module": "WeilConjectures.AlgebraicGeometry.HenselianConnectedness",
-    "declaration": "AlgebraicGeometry.Scheme.Hom.spectralSpace_and_isClosed_and_isConnected_inter",
-    "branch": "slopmaster2",
-    "line": 75,
-    "declarations": [
-      "AlgebraicGeometry.Scheme.Hom.spectralSpace_and_isClosed_and_isConnected_inter"
-    ],
-    "sorry_free": false,
-    "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state rests_on_sorry)"
+    "thm-weil-pbc-stein-inputs"
+   ],
+   "elementary": false
   }
+ ],
+ "proof_deps": [
+  "thm-weil-pbc-stein-inputs",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-henselian-terminology",
+  "lem-weil-pbc-closed-immersion-products",
+  "lemma-weil-pbc-spectral-restriction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-iff/lemma-weil-pbc-stein-connectedness.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [
+  "detailed_form",
+  "two_proofs",
+  "cites_outside_uses",
+  "unreachable"
+ ],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 1077,
+ "blueprint_uses": [
+  "def-weil-pbc-henselian-terminology",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-stein-factorization",
+  "def-weil-pbc-strict-henselian-setup",
+  "lem-weil-pbc-closed-immersion-products",
+  "lemma-weil-pbc-spectral-restriction"
+ ],
+ "uses_not_cited": [
+  "def-weil-pbc-strict-henselian-setup"
+ ],
+ "proof_split_by": "labels",
+ "blueprint_sketch": [
+  {
+   "statement": "Every irreducible closed subset of $X$ meets $X_0$ in a connected nonempty\nset. Consequently $\\Gamma(X,F)\\xrightarrow{\\sim}\\Gamma(X_0,F_0)$ for every\nZariski sheaf $F$.",
+   "proof": "Fix an irreducible closed subset and give it the reduced closed-subscheme\nstructure $C\\subseteq X$. The map $C\\to S$ is proper. Its Stein\nfactorization gives $C\\xrightarrow{u}\\operatorname{Spec}B \\xrightarrow{v}S$, with $A\\to B$ integral and $u$ having geometrically\nconnected fibres. Since $(A,\\mathfrak m)$ is henselian,\n$(B,\\mathfrak mB)$ is a henselian pair. The image\n$D=v(\\operatorname{Spec}B)$ is irreducible and closed because $C\\to S$ is\nproper. Henselian connectedness makes $D\\cap V(\\mathfrak m)$ connected and\nnonempty. The map\n$C\\cap X_0\\to D\\cap V(\\mathfrak m)$ is closed and surjective with connected\nfibres, so the closed-surjection connected-fibre criterion makes\n$C\\cap X_0$ connected. This expands Tag\n`0A0B`; the final equality of sections is Lemma\n[lemma-weil-pbc-spectral-restriction].",
+   "cites": [
+    "lemma-weil-pbc-spectral-restriction"
+   ]
+  }
+ ],
+ "blueprint_notes": [
+  {
+   "label": "status",
+   "text": "**Status.** This statement is a conditional assembly: its two classical\ninputs are named and isolated in the interface\n[thm-weil-pbc-stein-inputs], and everything else is proved here. Proved in\nthis blueprint: (a) given that $A\\to B$ is finite, the pair $(B,IB)$ is\nhenselian; (b) $Y$ is spectral and $Y_0$ is closed in $Y$; (c) hence the\nZariski restriction criterion applies to $(Y,Y_0)$. Outsourced to\n[thm-weil-pbc-stein-inputs]: (i) the finiteness of $A\\to B$ for an arbitrary\naffine henselian base; (ii) the connectedness input; (iii) the Zariski\ncomparison for the constructible sheaf occurring in the degree-zero argument,\nwhich the locally constant form [lemma-weil-pbc-spectral-restriction] does not\nsupply.",
+   "where": "statement"
+  }
+ ],
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.Scheme.Hom.spectralSpace_and_isClosed_and_isConnected_inter"
+   ]
+  },
+  "slopmaster2": {
+   "state": "rests_on_sorry",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.Scheme.Hom.spectralSpace_and_isClosed_and_isConnected_inter",
+     "module": "WeilConjectures.AlgebraicGeometry.HenselianConnectedness",
+     "lines": [
+      113,
+      130
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": [
+    {
+     "name": "AlgebraicGeometry.Scheme.Hom.isConnected_inter_preimage_zeroLocus",
+     "module": "WeilConjectures.AlgebraicGeometry.HenselianConnectedness",
+     "lines": [
+      98,
+      111
+     ],
+     "kind": "theorem",
+     "nodes": [
+      "thm-weil-pbc-stein-inputs"
+     ],
+     "below": true
+    }
+   ]
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-iff",
+ "lead_note": "2026-10-10 L: unreached from the target since 11:31: E1's proof of lemma-weil-pbc-etale-degree-zero follows Stacks 0A0C through the Gabber node 09ZF and no longer uses the Stein / spectral-restriction route of the imported proof. Flagged unreachable; it leaves the queue. Reached again if a citer appears.",
+ "lean": {
+  "module": "WeilConjectures.AlgebraicGeometry.HenselianConnectedness",
+  "declaration": "AlgebraicGeometry.Scheme.Hom.spectralSpace_and_isClosed_and_isConnected_inter",
+  "branch": "slopmaster2",
+  "line": 75,
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Hom.spectralSpace_and_isClosed_and_isConnected_inter"
+  ],
+  "sorry_free": false,
+  "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state rests_on_sorry)"
+ }
 }

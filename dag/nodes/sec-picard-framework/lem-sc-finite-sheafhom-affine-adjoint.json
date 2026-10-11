@@ -1,121 +1,133 @@
 {
-  "id": "lem-sc-finite-sheafhom-affine-adjoint",
-  "blueprint": {
-    "is": null,
-    "from": {
-      "node": "lem-sc-finite-duality",
-      "place": "proof, affine sheaf-Hom adjunction and its counit",
-      "via": [
-        "lem-sc-finite-duality-derived-hom"
-      ]
-    },
-    "same_as": []
+ "id": "lem-sc-finite-sheafhom-affine-adjoint",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "proof, affine sheaf-Hom adjunction and its counit",
+   "via": [
+    "lem-sc-finite-duality-derived-hom"
+   ]
   },
-  "kind": "statement",
-  "title": "Affine restriction adjunction by derived internal Hom",
-  "statement": "Let $f:Y\\to X$ be an affine morphism of schemes [def-pc-scheme] and write $A=f_*\\mathcal O_Y$. On the derived categories of $A$-modules and $\\mathcal O_X$-modules [def-pc-derived-category], restriction along $\\mathcal O_X\\to A$ has right adjoint $R\\mathcal H om_{\\mathcal O_X}(A,-)$ [def-pur-derived-internal-hom]. The counit at $K$ is the morphism $R\\mathcal H om_{\\mathcal O_X}(A,K)\\to K$ induced by evaluation at the unit section $1\\in A$ (locally, $\\varphi\\mapsto\\varphi(1)$).",
-  "source": {
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Affine restriction adjunction by derived internal Hom",
+ "statement": "Let $f:Y\\to X$ be an affine morphism of schemes [def-pc-scheme] and write $A=f_*\\mathcal O_Y$. On the derived categories of $A$-modules and $\\mathcal O_X$-modules [def-pc-derived-category], restriction along $\\mathcal O_X\\to A$ has right adjoint $R\\mathcal H om_{\\mathcal O_X}(A,-)$ [def-pur-derived-internal-hom]. The counit at $K$ is the morphism $R\\mathcal H om_{\\mathcal O_X}(A,K)\\to K$ induced by evaluation at the unit section $1\\in A$ (locally, $\\varphi\\mapsto\\varphi(1)$).",
+ "source": {
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Tag 0BV0, lemma-sheafhom-affine-adjoint, and Tag 0BUZ, lemma-compute-sheafhom-affine; Tag 0AX3, remark-trace-map-finite"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pur-derived-internal-hom",
+  "def-pc-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "For the affine morphism $f:Y\\to X$ with $A=f_*\\mathcal O_Y$, the underived sheaf-Hom functor $\\mathcal Hom_{\\mathcal O_X}(A,-)$ from $\\mathcal O_X$-modules to $A$-modules is right adjoint to restriction of scalars, and on an affine open $U=\\operatorname{Spec}(R)$ with $f^{-1}(U)=\\operatorname{Spec}(S)$ its sections are $\\operatorname{Hom}_R(S,F(U))$ with counit evaluation at $1\\in S$; this is the affine sheaf-Hom calculation of Tag 0AX2.",
+   "uses": [
+    "lem-sc-finite-sheafhom-affine"
+   ],
+   "elementary": false,
+   "source": {
     "document": "literature/stacks-project/duality.tex",
-    "place": "Tag 0BV0, lemma-sheafhom-affine-adjoint, and Tag 0BUZ, lemma-compute-sheafhom-affine; Tag 0AX3, remark-trace-map-finite"
+    "place": "Tag 0AX2, lemma-compute-sheafhom-affine"
+   }
   },
-  "stmt_deps": [
-    "def-pc-scheme",
-    "def-pur-derived-internal-hom",
-    "def-pc-derived-category"
-  ],
-  "proof": [
-    {
-      "text": "For the affine morphism $f:Y\\to X$ with $A=f_*\\mathcal O_Y$, the underived sheaf-Hom functor $\\mathcal Hom_{\\mathcal O_X}(A,-)$ from $\\mathcal O_X$-modules to $A$-modules is right adjoint to restriction of scalars, and on an affine open $U=\\operatorname{Spec}(R)$ with $f^{-1}(U)=\\operatorname{Spec}(S)$ its sections are $\\operatorname{Hom}_R(S,F(U))$ with counit evaluation at $1\\in S$; this is the affine sheaf-Hom calculation of Tag 0AX2.",
-      "uses": [
-        "lem-sc-finite-sheafhom-affine"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/duality.tex",
-        "place": "Tag 0AX2, lemma-compute-sheafhom-affine"
-      }
-    },
-    {
-      "text": "Apply the derived-adjunction theorem to the underived restriction/sheaf-Hom adjunction. Restriction of scalars is exact, so it preserves quasi-isomorphisms and induces a functor $D(A)\\to D(\\mathcal O_X)$ which is an absolute left derived functor of itself; $R\\mathcal Hom_{\\mathcal O_X}(A,-)$ is the right derived extension of $\\mathcal Hom_{\\mathcal O_X}(A,-)$, computed on K-injective resolutions, hence an absolute right derived functor. The theorem therefore gives an adjunction between restriction $D(A)\\to D(\\mathcal O_X)$ and $R\\mathcal Hom_{\\mathcal O_X}(A,-):D(\\mathcal O_X)\\to D(A)$.",
-      "uses": [
-        "lem-sc-finite-sheafhom-affine",
-        "lem-sc-derived-adjunction-from-underived"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/duality.tex",
-        "place": "Tag 0AX2, lemma-sheafhom-affine-adjoint, citing Derived Categories, lemma-derived-adjoint-functors"
-      }
-    },
-    {
-      "text": "The underived counit is evaluation at the unit: on an affine $U=\\operatorname{Spec}(R)$ with $f^{-1}(U)=\\operatorname{Spec}(S)$, the adjunction is restriction of scalars $S\\text{-Mod}\\to R\\text{-Mod}$ and $R$-linear maps $S\\to F(U)$, whose counit sends $\\varphi$ to $\\varphi(1)$. By the counit clause of [lem-sc-derived-adjunction-from-underived], the derived counit at a complex $K$ is compatible with the underived counit applied to $K$ (computed on a K-injective representative). Hence the component $R\\mathcal Hom_{\\mathcal O_X}(A,K)\\to K$ is induced by evaluation at $1\\in A$.",
-      "uses": [
-        "lem-sc-finite-sheafhom-affine",
-        "lem-sc-derived-adjunction-from-underived"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/duality.tex",
-        "place": "Tag 0AX2, lemma-sheafhom-affine-adjoint; Tag 0AX3, remark-trace-map-finite"
-      }
-    }
-  ],
-  "proof_deps": [
+  {
+   "text": "Apply the derived-adjunction theorem to the underived restriction/sheaf-Hom adjunction. Restriction of scalars is exact, so it preserves quasi-isomorphisms and induces a functor $D(A)\\to D(\\mathcal O_X)$ which is an absolute left derived functor of itself; $R\\mathcal Hom_{\\mathcal O_X}(A,-)$ is the right derived extension of $\\mathcal Hom_{\\mathcal O_X}(A,-)$, computed on K-injective resolutions, hence an absolute right derived functor. The theorem therefore gives an adjunction between restriction $D(A)\\to D(\\mathcal O_X)$ and $R\\mathcal Hom_{\\mathcal O_X}(A,-):D(\\mathcal O_X)\\to D(A)$.",
+   "uses": [
     "lem-sc-finite-sheafhom-affine",
     "lem-sc-derived-adjunction-from-underived"
-  ],
-  "proof_origin": {
-    "by": "document",
+   ],
+   "elementary": false,
+   "source": {
     "document": "literature/stacks-project/duality.tex",
-    "place": "Tags 0AX2 and 0AX3"
+    "place": "Tag 0AX2, lemma-sheafhom-affine-adjoint, citing Derived Categories, lemma-derived-adjoint-functors"
+   }
   },
-  "mathlib_searches": [
-    {
-      "tool": "leanfinder",
-      "query": "restriction of scalars derived internal Hom right adjoint counit evaluation unit",
-      "results": "ModuleCat.RestrictionCoextensionAdj.counit' and ModuleCat.RestrictionCoextensionAdj.counit'_app in Mathlib/Algebra/Category/ModuleCat/ChangeOfRings; generic ring-module analogue only",
-      "date": "2026-10-11",
-      "verdict": "generalization: generic module counit evaluates at 1, but no sheaf-derived statement"
-    },
-    {
-      "tool": "loogle",
-      "query": "CategoryTheory.Adjunction, ModuleCat",
-      "results": "ModuleCat.restrictCoextendScalarsAdj and ModuleCat.extendRestrictScalarsAdj; no sheaf-derived internal-Hom declaration",
-      "date": "2026-10-11",
-      "verdict": "generalization: generic module adjunction only"
-    },
-    {
-      "tool": "grep",
-      "query": "restriction.*scalars|sheafhom-affine-adjoint",
-      "results": "Only generic restriction-of-scalars comments in Mathlib/CategoryTheory/Monoidal/Mod.lean and Action/Continuous.lean",
-      "date": "2026-10-11",
-      "verdict": "no match: no sheaf-derived adjunction"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "created": {
-    "item": "lem-sc-finite-duality-derived-hom",
-    "by": "worker",
-    "date": "2026-10-10"
+  {
+   "text": "The underived counit is evaluation at the unit: on an affine $U=\\operatorname{Spec}(R)$ with $f^{-1}(U)=\\operatorname{Spec}(S)$, the adjunction is restriction of scalars $S\\text{-Mod}\\to R\\text{-Mod}$ and $R$-linear maps $S\\to F(U)$, whose counit sends $\\varphi$ to $\\varphi(1)$. By the counit clause of [lem-sc-derived-adjunction-from-underived], the derived counit at a complex $K$ is compatible with the underived counit applied to $K$ (computed on a K-injective representative). Hence the component $R\\mathcal Hom_{\\mathcal O_X}(A,K)\\to K$ is induced by evaluation at $1\\in A$.",
+   "uses": [
+    "lem-sc-finite-sheafhom-affine",
+    "lem-sc-derived-adjunction-from-underived"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0AX2, lemma-sheafhom-affine-adjoint; Tag 0AX3, remark-trace-map-finite"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-finite-sheafhom-affine",
+  "lem-sc-derived-adjunction-from-underived"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Tags 0AX2 and 0AX3"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "restriction of scalars derived internal Hom right adjoint counit evaluation unit",
+   "results": "ModuleCat.RestrictionCoextensionAdj.counit' and ModuleCat.RestrictionCoextensionAdj.counit'_app in Mathlib/Algebra/Category/ModuleCat/ChangeOfRings; generic ring-module analogue only",
+   "date": "2026-10-11",
+   "verdict": "generalization: generic module counit evaluates at 1, but no sheaf-derived statement"
   },
-  "chapter": "sec-picard-framework",
-  "unit": "sk-thm-picard-duality",
-  "split_report": {
-    "date": "2026-10-11",
-    "item": "lem-sc-finite-sheafhom-affine-adjoint",
-    "worker": "stage1",
-    "summary": "Split the Stacks proof into the affine underived sheaf-Hom restriction adjunction, the derived-adjunction transfer, and the inherited evaluation counit. Added one project-specific unsplit statement node and recorded the generic derived-adjunction constructor as a Mathlib leaf.",
-    "blueprint": "The steps realize the ancestor blueprint proof clause 'affine sheaf-Hom adjunction and its counit' through the underived calculation, derived extension, and evaluation compatibility.",
-    "tool_uses": []
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, ModuleCat",
+   "results": "ModuleCat.restrictCoextendScalarsAdj and ModuleCat.extendRestrictScalarsAdj; no sheaf-derived internal-Hom declaration",
+   "date": "2026-10-11",
+   "verdict": "generalization: generic module adjunction only"
   },
-  "reviewed": {
-    "date": "2026-10-10",
-    "by": "L",
-    "reviewer": "R-fsa1814",
-    "group": "F1",
-    "result": "pass",
-    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-fsa1814 (reviewer sub-agent of L); spot-checked: Read Stacks 0AX2 lemma-compute-sheafhom-affine/lemma-sheafhom-affine-adjoint and Mathlib Adjunction.derived (l.144) and derivedε_fac_app (l.125); no cycle (new nodes statement-only; lem-sc-finite-duality-derived-hom cites the item, not conversely); affine-local Hom_R(S,F(U)) statement cited in steps 1-3. FIX more, RETURN less: (1) B3 stmt_deps of item lacked def-pc-scheme though the statement cites it - added; (2) step 1 text kept the old orientation Hom_{O_Y}(f_*O_X,-) - rewritten for f:Y->X, A=f_*O_Y, with the section formula; (3) C4 step 3 used a counit compatibility that the leaf lem-sc-derived-adjunction-from-underived did not state - added the counit clause to the leaf (Mathlib derivedε_fac_app, recorded in how and searches), step 3 cites it; step 2 now checks the absoluteness hypotheses (restriction exact, RHom via K-injectives).; 2 file(s) fixed by the reviewer"
+  {
+   "tool": "grep",
+   "query": "restriction.*scalars|sheafhom-affine-adjoint",
+   "results": "Only generic restriction-of-scalars comments in Mathlib/CategoryTheory/Monoidal/Mod.lean and Action/Continuous.lean",
+   "date": "2026-10-11",
+   "verdict": "no match: no sheaf-derived adjunction"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "item": "lem-sc-finite-duality-derived-hom",
+  "by": "worker",
+  "date": "2026-10-10"
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-finite-sheafhom-affine-adjoint",
+  "worker": "stage1",
+  "summary": "Split the Stacks proof into the affine underived sheaf-Hom restriction adjunction, the derived-adjunction transfer, and the inherited evaluation counit. Added one project-specific unsplit statement node and recorded the generic derived-adjunction constructor as a Mathlib leaf.",
+  "blueprint": "The steps realize the ancestor blueprint proof clause 'affine sheaf-Hom adjunction and its counit' through the underived calculation, derived extension, and evaluation compatibility.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-fsa1814",
+  "group": "F1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-fsa1814 (reviewer sub-agent of L); spot-checked: Read Stacks 0AX2 lemma-compute-sheafhom-affine/lemma-sheafhom-affine-adjoint and Mathlib Adjunction.derived (l.144) and derivedε_fac_app (l.125); no cycle (new nodes statement-only; lem-sc-finite-duality-derived-hom cites the item, not conversely); affine-local Hom_R(S,F(U)) statement cited in steps 1-3. FIX more, RETURN less: (1) B3 stmt_deps of item lacked def-pc-scheme though the statement cites it - added; (2) step 1 text kept the old orientation Hom_{O_Y}(f_*O_X,-) - rewritten for f:Y->X, A=f_*O_Y, with the section formula; (3) C4 step 3 used a counit compatibility that the leaf lem-sc-derived-adjunction-from-underived did not state - added the counit clause to the leaf (Mathlib derivedε_fac_app, recorded in how and searches), step 3 cites it; step 2 now checks the absoluteness hypotheses (restriction exact, RHom via K-injectives).; 2 file(s) fixed by the reviewer"
+ },
+ "lead_note": " source.place tags corrected by L (18:32 UTC): lemma-sheafhom-affine-adjoint is Tag 0BV0, lemma-compute-sheafhom-affine is Tag 0BUZ (not 0AX2).",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
   },
-  "lead_note": " source.place tags corrected by L (18:32 UTC): lemma-sheafhom-affine-adjoint is Tag 0BV0, lemma-compute-sheafhom-affine is Tag 0BUZ (not 0AX2)."
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

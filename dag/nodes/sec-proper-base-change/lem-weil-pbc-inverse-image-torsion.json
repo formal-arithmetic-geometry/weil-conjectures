@@ -1,214 +1,216 @@
 {
-  "id": "lem-weil-pbc-inverse-image-torsion",
-  "blueprint": {
-    "is": null,
-    "from": {
-      "node": "lemma-weil-pbc-target-locality",
-      "place": "step 6 of its split (source: Lemma label lemma-base-change-local, Tag 0EZR, part (2), applied in the proof of Lemma label lemma-reduce-to-P1, Tag 0A4F, first paragraph)",
-      "via": []
-    },
-    "same_as": null
+ "id": "lem-weil-pbc-inverse-image-torsion",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-target-locality",
+   "place": "step 6 of its split (source: Lemma label lemma-base-change-local, Tag 0EZR, part (2), applied in the proof of Lemma label lemma-reduce-to-P1, Tag 0A4F, first paragraph)",
+   "via": []
   },
-  "kind": "statement",
-  "title": "Inverse image of a torsion etale sheaf is torsion",
-  "statement": "Let $u:U\\to V$ be a morphism of schemes [def-pc-scheme] and let $F\\in\\Ab(V_{\\Et})$ [def-weil-pbc-abelian-etale-sheaves] be a torsion abelian sheaf [def-weil-pbc-torsion-etale-sheaf]. Then its inverse image $u^{-1}F\\in\\Ab(U_{\\Et})$ [def-weil-pbc-inverse-image] is a torsion abelian sheaf.",
-  "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Etale Cohomology, Section label section-torsion, Tag 0DDB (torsion sheaves), with Lemma label lemma-stalk-pullback, Tag 03Q1 ($(u^{-1}F)_{\\bar x}=F_{u(\\bar x)}$): the stalks of $u^{-1}F$ are stalks of $F$, hence torsion; equivalently $u^{-1}$ is exact and commutes with colimits, so $u^{-1}(F[n])=(u^{-1}F)[n]$ and $u^{-1}\\varinjlim_nF[n]=\\varinjlim_n u^{-1}F[n]$. Stacks states no separate lemma; the place is where the fact is used without comment"
-  },
-  "stmt_deps": [
-    "def-pc-scheme",
-    "def-weil-pbc-abelian-etale-sheaves",
-    "def-weil-pbc-torsion-etale-sheaf",
-    "def-weil-pbc-inverse-image"
-  ],
-  "proof": [
-    {
-      "text": "Setting and additivity. Let $F\\in\\Ab(V_{\\Et})$ be torsion [def-weil-pbc-torsion-etale-sheaf]. By [prop-weil-pbc-inverse-image-exact] the functor $u^{-1}:\\Ab(V_{\\Et})\\to\\Ab(U_{\\Et})$ [def-weil-pbc-inverse-image] is exact, in particular additive: $u^{-1}(f+g)=u^{-1}f+u^{-1}g$ for parallel morphisms of abelian sheaves [def-weil-pbc-abelian-etale-sheaves], and $u^{-1}(1_F)=1_{u^{-1}F}$. Writing $n\\cdot1_F=1_F+\\dots+1_F$ ($n$ terms), induction on $n\\ge1$ gives $u^{-1}(n\\cdot1_F)=n\\cdot1_{u^{-1}F}$: multiplication by $n$ is carried to multiplication by $n$.",
-      "uses": [
-        "def-weil-pbc-torsion-etale-sheaf",
-        "prop-weil-pbc-inverse-image-exact",
-        "def-weil-pbc-inverse-image",
-        "def-weil-pbc-abelian-etale-sheaves"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/etale-cohomology.tex",
-        "place": "Section 'Torsion sheaves' (label section-torsion, Tag 0DDB, line 13888; proof of Lemma 0DDC: F = union of the F[d]) and Lemma 03Q1 (label lemma-stalk-pullback, line 4649), part (1): f^{-1} on abelian sheaves is exact"
-      }
-    },
-    {
-      "text": "$n$-torsion subsheaves are preserved. For $n\\ge1$ let $j_n:F[n]\\to F$ be the kernel of $n\\cdot1_F$ [def-pur-abelian-sheaf-kernel], and $j'_n:(u^{-1}F)[n]\\to u^{-1}F$ the kernel of $n\\cdot1_{u^{-1}F}$. By [prop-weil-pbc-inverse-image-exact] $u^{-1}$ preserves kernels, so $u^{-1}(j_n):u^{-1}(F[n])\\to u^{-1}F$ is a kernel of $u^{-1}(n\\cdot1_F)=n\\cdot1_{u^{-1}F}$ (step 1). Two kernels of the same morphism are uniquely isomorphic over the source: there is a unique isomorphism $\\theta_n:u^{-1}(F[n])\\xrightarrow{\\sim}(u^{-1}F)[n]$ with $j'_n\\circ\\theta_n=u^{-1}(j_n)$. That is, $u^{-1}(F[n])=(u^{-1}F)[n]$ as subobjects of $u^{-1}F$.",
-      "uses": [
-        "def-pur-abelian-sheaf-kernel",
-        "prop-weil-pbc-inverse-image-exact"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/etale-cohomology.tex",
-        "place": "Section 'Torsion sheaves' (label section-torsion, Tag 0DDB, line 13888; proof of Lemma 0DDC: F = union of the F[d]) and Lemma 03Q1 (label lemma-stalk-pullback, line 4649), part (1): f^{-1} on abelian sheaves is exact"
-      }
-    },
-    {
-      "text": "Compatibility with the transition maps. For $n\\mid m$ let $t_{nm}:F[n]\\to F[m]$ and $t'_{nm}:(u^{-1}F)[n]\\to(u^{-1}F)[m]$ be the inclusions of the diagrams of [def-weil-pbc-torsion-etale-sheaf], so $j_mt_{nm}=j_n$ and $j'_mt'_{nm}=j'_n$. Then $j'_m\\theta_m u^{-1}(t_{nm})=u^{-1}(j_mt_{nm})=u^{-1}(j_n)=j'_n\\theta_n=j'_mt'_{nm}\\theta_n$, and $j'_m$ is a monomorphism (a kernel), so $\\theta_m\\circ u^{-1}(t_{nm})=t'_{nm}\\circ\\theta_n$. Hence $\\theta=(\\theta_n)_n$ is an isomorphism from the diagram $n\\mapsto u^{-1}(F[n])$ (the image under $u^{-1}$ of the diagram $n\\mapsto F[n]$, indexed by the positive integers ordered by divisibility) to the diagram $n\\mapsto(u^{-1}F)[n]$, and its inverse $(\\theta_n^{-1})_n$ is again compatible with the transition maps; and $\\theta$ carries the family $(u^{-1}j_n)_n$ to the family $(j'_n)_n$ of maps to $u^{-1}F$.",
-      "uses": [
-        "def-weil-pbc-torsion-etale-sheaf"
-      ],
-      "elementary": true,
-      "source": {
-        "document": "literature/stacks-project/etale-cohomology.tex",
-        "place": "Section 'Torsion sheaves' (label section-torsion, Tag 0DDB, line 13888; proof of Lemma 0DDC: F = union of the F[d]) and Lemma 03Q1 (label lemma-stalk-pullback, line 4649), part (1): f^{-1} on abelian sheaves is exact"
-      }
-    },
-    {
-      "text": "Colimits. Let $(L,(\\iota_n)_n)$ be the chosen colimit of $n\\mapsto F[n]$ in $\\Ab(V_{\\Et})$ and $c_F:L\\to F$ the canonical map, $c_F\\iota_n=j_n$; let $(L',(\\iota'_n)_n)$ be the chosen colimit of $n\\mapsto(u^{-1}F)[n]$ in $\\Ab(U_{\\Et})$ and $c_{u^{-1}F}:L'\\to u^{-1}F$ the canonical map, $c_{u^{-1}F}\\iota'_n=j'_n$ [def-weil-pbc-torsion-etale-sheaf], [def-weil-pbc-category-colimit]. By [lem-weil-pbc-inverse-image-preserves-colimits] the cocone $(u^{-1}L,(u^{-1}\\iota_n)_n)$ is a colimit of $n\\mapsto u^{-1}(F[n])$ (the canonical map from the chosen colimit to it is an isomorphism). By step 3, $(\\iota'_n\\theta_n)_n$ is a cocone on $n\\mapsto u^{-1}(F[n])$ and $(u^{-1}(\\iota_n)\\theta_n^{-1})_n$ a cocone on $n\\mapsto(u^{-1}F)[n]$; the universal properties give $\\alpha:u^{-1}L\\to L'$ with $\\alpha\\,u^{-1}(\\iota_n)=\\iota'_n\\theta_n$ and $\\beta:L'\\to u^{-1}L$ with $\\beta\\iota'_n=u^{-1}(\\iota_n)\\theta_n^{-1}$, and $\\beta\\alpha$, $\\alpha\\beta$ agree with the identities on all coprojections, hence are the identities by uniqueness: $\\alpha$ is an isomorphism. Finally $c_{u^{-1}F}\\,\\alpha\\,u^{-1}(\\iota_n)=c_{u^{-1}F}\\iota'_n\\theta_n=j'_n\\theta_n=u^{-1}(j_n)=u^{-1}(c_F\\iota_n)=u^{-1}(c_F)\\,u^{-1}(\\iota_n)$ for all $n$ (step 2), so by uniqueness in the colimit $(u^{-1}L,(u^{-1}\\iota_n))$, $c_{u^{-1}F}\\circ\\alpha=u^{-1}(c_F)$: under $u^{-1}(\\varinjlim_nF[n])\\cong\\varinjlim_n(u^{-1}F)[n]$ the canonical map of $u^{-1}F$ is $u^{-1}$ of the canonical map of $F$.",
-      "uses": [
-        "lem-weil-pbc-inverse-image-preserves-colimits",
-        "def-weil-pbc-category-colimit",
-        "def-weil-pbc-torsion-etale-sheaf"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/categories.tex",
-        "place": "Lemma 0038 (lemma-adjoint-exact, line 3472), part (1): left adjoints commute with colimits; used for f^{-1} in etale-cohomology.tex proof of Lemma 0A4B (line 18389)"
-      }
-    },
-    {
-      "text": "Conclusion. $F$ is torsion, so $c_F$ is an isomorphism [def-weil-pbc-torsion-etale-sheaf]; a functor carries isomorphisms to isomorphisms, so $u^{-1}(c_F)$ is one, and $c_{u^{-1}F}=u^{-1}(c_F)\\circ\\alpha^{-1}$ (step 4) is an isomorphism. By [def-weil-pbc-torsion-etale-sheaf], $u^{-1}F$ is torsion.",
-      "uses": [
-        "def-weil-pbc-torsion-etale-sheaf"
-      ],
-      "elementary": true,
-      "source": {
-        "document": "literature/stacks-project/etale-cohomology.tex",
-        "place": "Section 'Torsion sheaves' (label section-torsion, Tag 0DDB, line 13888; proof of Lemma 0DDC: F = union of the F[d]) and Lemma 03Q1 (label lemma-stalk-pullback, line 4649), part (1): f^{-1} on abelian sheaves is exact"
-      }
-    }
-  ],
-  "proof_deps": [
+  "same_as": null
+ },
+ "kind": "statement",
+ "title": "Inverse image of a torsion etale sheaf is torsion",
+ "statement": "Let $u:U\\to V$ be a morphism of schemes [def-pc-scheme] and let $F\\in\\Ab(V_{\\Et})$ [def-weil-pbc-abelian-etale-sheaves] be a torsion abelian sheaf [def-weil-pbc-torsion-etale-sheaf]. Then its inverse image $u^{-1}F\\in\\Ab(U_{\\Et})$ [def-weil-pbc-inverse-image] is a torsion abelian sheaf.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Etale Cohomology, Section label section-torsion, Tag 0DDB (torsion sheaves), with Lemma label lemma-stalk-pullback, Tag 03Q1 ($(u^{-1}F)_{\\bar x}=F_{u(\\bar x)}$): the stalks of $u^{-1}F$ are stalks of $F$, hence torsion; equivalently $u^{-1}$ is exact and commutes with colimits, so $u^{-1}(F[n])=(u^{-1}F)[n]$ and $u^{-1}\\varinjlim_nF[n]=\\varinjlim_n u^{-1}F[n]$. Stacks states no separate lemma; the place is where the fact is used without comment"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-torsion-etale-sheaf",
+  "def-weil-pbc-inverse-image"
+ ],
+ "proof": [
+  {
+   "text": "Setting and additivity. Let $F\\in\\Ab(V_{\\Et})$ be torsion [def-weil-pbc-torsion-etale-sheaf]. By [prop-weil-pbc-inverse-image-exact] the functor $u^{-1}:\\Ab(V_{\\Et})\\to\\Ab(U_{\\Et})$ [def-weil-pbc-inverse-image] is exact, in particular additive: $u^{-1}(f+g)=u^{-1}f+u^{-1}g$ for parallel morphisms of abelian sheaves [def-weil-pbc-abelian-etale-sheaves], and $u^{-1}(1_F)=1_{u^{-1}F}$. Writing $n\\cdot1_F=1_F+\\dots+1_F$ ($n$ terms), induction on $n\\ge1$ gives $u^{-1}(n\\cdot1_F)=n\\cdot1_{u^{-1}F}$: multiplication by $n$ is carried to multiplication by $n$.",
+   "uses": [
     "def-weil-pbc-torsion-etale-sheaf",
     "prop-weil-pbc-inverse-image-exact",
     "def-weil-pbc-inverse-image",
-    "def-weil-pbc-abelian-etale-sheaves",
-    "def-pur-abelian-sheaf-kernel",
-    "lem-weil-pbc-inverse-image-preserves-colimits",
-    "def-weil-pbc-category-colimit"
-  ],
-  "proof_origin": {
-    "by": "agent",
+    "def-weil-pbc-abelian-etale-sheaves"
+   ],
+   "elementary": false,
+   "source": {
     "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Section 'Torsion sheaves' (Tag 0DDB, line 13888) and Lemma 03Q1 (lemma-stalk-pullback, line 4649) (1); categories.tex Lemma 0038 (1). Stacks uses that a pullback of a torsion sheaf is torsion without stating it (e.g. through F = union of F[n]); the steps from the colimit definition are the agent's"
+    "place": "Section 'Torsion sheaves' (label section-torsion, Tag 0DDB, line 13888; proof of Lemma 0DDC: F = union of the F[d]) and Lemma 03Q1 (label lemma-stalk-pullback, line 4649), part (1): f^{-1} on abelian sheaves is exact"
+   }
   },
-  "mathlib_searches": [
-    {
-      "tool": "leansearch",
-      "query": "inverse image of a torsion abelian sheaf is a torsion sheaf",
-      "results": "CategoryTheory.fullyFaithfulSheafToPresheaf_preimage_val, SheafOfModules.fullyFaithfulForget_preimage_val, AlgebraicGeometry.Scheme.inv_app, GrothendieckTopology.isoSheafify_inv, Scheme.IdealSheafData.support_comap",
-      "date": "2026-10-09",
-      "verdict": "no match"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "pullback (inverse image) functor of sheaves of abelian groups preserves torsion sheaves",
-      "results": "SheafOfModules.pullback, Scheme.Modules.instAdditivePullback, SheafOfModules.pullbackObjFreeIso, SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pullbackIso (no torsion notion for sheaves)",
-      "date": "2026-10-09",
-      "verdict": "no match"
-    },
-    {
-      "tool": "grep",
-      "query": "grep -rln 'IsTorsion\\|torsion' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Sites",
-      "results": "none: no file of CategoryTheory/Sites or AlgebraicGeometry/Sites mentions torsion",
-      "date": "2026-10-09",
-      "verdict": "no match: Mathlib has no torsion abelian sheaves"
-    },
-    {
-      "tool": "leansearch",
-      "query": "exact functor between abelian categories preserves torsion objects, pullback of torsion sheaf of abelian groups",
-      "results": "CategoryTheory.Functor.exact_tfae, CategoryTheory.exactFunctor, CategoryTheory.leftExactFunctor, CategoryTheory.ExactFunctor.of, CategoryTheory.Functor.preservesMonomorphisms_of_map_exact (Mathlib.CategoryTheory.Abelian.Exact), Ext.mapExactFunctor: exactness API only, no torsion objects",
-      "date": "2026-10-09",
-      "verdict": "no match"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "inverse image of a sheaf of torsion abelian groups on the étale site is torsion",
-      "results": "instAbelianLightCondMod, Scheme.Modules.instAbelian, SheafOfModules.instAbelian, LightCondensed/Condensed constructors: no torsion sheaves",
-      "date": "2026-10-09",
-      "verdict": "no match"
-    },
-    {
-      "tool": "loogle",
-      "query": "CategoryTheory.Sheaf, AddCommGrpCat, \"torsion\"  and  \"Torsion\", CategoryTheory.Functor",
-      "results": "none (both queries empty)",
-      "date": "2026-10-09",
-      "verdict": "no match"
-    },
-    {
-      "tool": "grep",
-      "query": "grep -rlniE torsion Mathlib/CategoryTheory/Sites Mathlib/AlgebraicGeometry Mathlib/Topology/Sheaves Mathlib/CategoryTheory/Abelian Mathlib/Algebra/Category",
-      "results": "only AlgebraicGeometry/EllipticCurve/* (torsion points) and CategoryTheory/Abelian/Preradical/{Basic,Radical,Colon}.lean (preradicals; 'torsion theory' only as a keyword, no torsion sheaves, no n-torsion colimit)",
-      "date": "2026-10-09",
-      "verdict": "no match: Mathlib has no torsion abelian sheaves (confirmed)"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "merged_into": null,
-  "created": {
-    "by": "worker",
-    "item": "lemma-weil-pbc-target-locality",
-    "date": "2026-10-09"
+  {
+   "text": "$n$-torsion subsheaves are preserved. For $n\\ge1$ let $j_n:F[n]\\to F$ be the kernel of $n\\cdot1_F$ [def-pur-abelian-sheaf-kernel], and $j'_n:(u^{-1}F)[n]\\to u^{-1}F$ the kernel of $n\\cdot1_{u^{-1}F}$. By [prop-weil-pbc-inverse-image-exact] $u^{-1}$ preserves kernels, so $u^{-1}(j_n):u^{-1}(F[n])\\to u^{-1}F$ is a kernel of $u^{-1}(n\\cdot1_F)=n\\cdot1_{u^{-1}F}$ (step 1). Two kernels of the same morphism are uniquely isomorphic over the source: there is a unique isomorphism $\\theta_n:u^{-1}(F[n])\\xrightarrow{\\sim}(u^{-1}F)[n]$ with $j'_n\\circ\\theta_n=u^{-1}(j_n)$. That is, $u^{-1}(F[n])=(u^{-1}F)[n]$ as subobjects of $u^{-1}F$.",
+   "uses": [
+    "def-pur-abelian-sheaf-kernel",
+    "prop-weil-pbc-inverse-image-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Section 'Torsion sheaves' (label section-torsion, Tag 0DDB, line 13888; proof of Lemma 0DDC: F = union of the F[d]) and Lemma 03Q1 (label lemma-stalk-pullback, line 4649), part (1): f^{-1} on abelian sheaves is exact"
+   }
   },
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "closed",
-      "decls": [
-        {
-          "name": "AlgebraicGeometry.Etale.isTorsion_upperStar",
-          "module": "WeilConjectures.AlgebraicGeometry.Sites.TorsionSheaf",
-          "lines": [
-            46,
-            58
-          ],
-          "kind": "theorem",
-          "sorry": false
-        }
-      ],
-      "missing": [],
-      "open": []
-    }
+  {
+   "text": "Compatibility with the transition maps. For $n\\mid m$ let $t_{nm}:F[n]\\to F[m]$ and $t'_{nm}:(u^{-1}F)[n]\\to(u^{-1}F)[m]$ be the inclusions of the diagrams of [def-weil-pbc-torsion-etale-sheaf], so $j_mt_{nm}=j_n$ and $j'_mt'_{nm}=j'_n$. Then $j'_m\\theta_m u^{-1}(t_{nm})=u^{-1}(j_mt_{nm})=u^{-1}(j_n)=j'_n\\theta_n=j'_mt'_{nm}\\theta_n$, and $j'_m$ is a monomorphism (a kernel), so $\\theta_m\\circ u^{-1}(t_{nm})=t'_{nm}\\circ\\theta_n$. Hence $\\theta=(\\theta_n)_n$ is an isomorphism from the diagram $n\\mapsto u^{-1}(F[n])$ (the image under $u^{-1}$ of the diagram $n\\mapsto F[n]$, indexed by the positive integers ordered by divisibility) to the diagram $n\\mapsto(u^{-1}F)[n]$, and its inverse $(\\theta_n^{-1})_n$ is again compatible with the transition maps; and $\\theta$ carries the family $(u^{-1}j_n)_n$ to the family $(j'_n)_n$ of maps to $u^{-1}F$.",
+   "uses": [
+    "def-weil-pbc-torsion-etale-sheaf"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Section 'Torsion sheaves' (label section-torsion, Tag 0DDB, line 13888; proof of Lemma 0DDC: F = union of the F[d]) and Lemma 03Q1 (label lemma-stalk-pullback, line 4649), part (1): f^{-1} on abelian sheaves is exact"
+   }
   },
-  "chapter": "sec-proper-base-change",
-  "unit": "sk-thm-reduction",
-  "split_report": {
-    "date": "2026-10-09",
-    "item": "lem-weil-pbc-inverse-image-torsion",
-    "worker": "stage1",
-    "summary": "Statement kept (checked against def-weil-pbc-torsion-etale-sheaf: torsion = canonical map colim_n F[n] -> F is an isomorphism). Stacks (etale-cohomology 0DDB, 03Q1) uses the fact without a lemma, so the proof is written by the agent from the colimit definition in five steps: u^{-1} additive, so u^{-1}(n)=n; u^{-1} preserves kernels, giving isomorphisms u^{-1}(F[n]) = (u^{-1}F)[n] over u^{-1}F; these are compatible with the divisibility transition maps; u^{-1} preserves colimits, so u^{-1}(colim F[n]) = colim (u^{-1}F)[n] and the canonical map of u^{-1}F corresponds to u^{-1}(c_F); hence it is an isomorphism. Uses the reviewed prop-weil-pbc-inverse-image-exact and lem-weil-pbc-inverse-image-preserves-colimits, both of unit sk-thm-properbasechange, which sk-thm-reduction does not cite: generic tool uses (black boxes) to be recorded in tool_uses by the lead. The alternative through lem-weil-pbc-torsion-sheaf-characterizations (1)<=>(3) (unit sk-def-pbc, on route) plus the closed stalk lemma lemma-openclosed-stalk-upperstar would be on route but rests on an unsplit lemma whose (1)<=>(3) needs the stalk criterion for isomorphisms and the exactness of stalks, more than this proof; not chosen. Mathlib searched again with LeanSearch, LeanFinder, Loogle and grep: no torsion sheaves in Mathlib. No new nodes."
+  {
+   "text": "Colimits. Let $(L,(\\iota_n)_n)$ be the chosen colimit of $n\\mapsto F[n]$ in $\\Ab(V_{\\Et})$ and $c_F:L\\to F$ the canonical map, $c_F\\iota_n=j_n$; let $(L',(\\iota'_n)_n)$ be the chosen colimit of $n\\mapsto(u^{-1}F)[n]$ in $\\Ab(U_{\\Et})$ and $c_{u^{-1}F}:L'\\to u^{-1}F$ the canonical map, $c_{u^{-1}F}\\iota'_n=j'_n$ [def-weil-pbc-torsion-etale-sheaf], [def-weil-pbc-category-colimit]. By [lem-weil-pbc-inverse-image-preserves-colimits] the cocone $(u^{-1}L,(u^{-1}\\iota_n)_n)$ is a colimit of $n\\mapsto u^{-1}(F[n])$ (the canonical map from the chosen colimit to it is an isomorphism). By step 3, $(\\iota'_n\\theta_n)_n$ is a cocone on $n\\mapsto u^{-1}(F[n])$ and $(u^{-1}(\\iota_n)\\theta_n^{-1})_n$ a cocone on $n\\mapsto(u^{-1}F)[n]$; the universal properties give $\\alpha:u^{-1}L\\to L'$ with $\\alpha\\,u^{-1}(\\iota_n)=\\iota'_n\\theta_n$ and $\\beta:L'\\to u^{-1}L$ with $\\beta\\iota'_n=u^{-1}(\\iota_n)\\theta_n^{-1}$, and $\\beta\\alpha$, $\\alpha\\beta$ agree with the identities on all coprojections, hence are the identities by uniqueness: $\\alpha$ is an isomorphism. Finally $c_{u^{-1}F}\\,\\alpha\\,u^{-1}(\\iota_n)=c_{u^{-1}F}\\iota'_n\\theta_n=j'_n\\theta_n=u^{-1}(j_n)=u^{-1}(c_F\\iota_n)=u^{-1}(c_F)\\,u^{-1}(\\iota_n)$ for all $n$ (step 2), so by uniqueness in the colimit $(u^{-1}L,(u^{-1}\\iota_n))$, $c_{u^{-1}F}\\circ\\alpha=u^{-1}(c_F)$: under $u^{-1}(\\varinjlim_nF[n])\\cong\\varinjlim_n(u^{-1}F)[n]$ the canonical map of $u^{-1}F$ is $u^{-1}$ of the canonical map of $F$.",
+   "uses": [
+    "lem-weil-pbc-inverse-image-preserves-colimits",
+    "def-weil-pbc-category-colimit",
+    "def-weil-pbc-torsion-etale-sheaf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Lemma 0038 (lemma-adjoint-exact, line 3472), part (1): left adjoints commute with colimits; used for f^{-1} in etale-cohomology.tex proof of Lemma 0A4B (line 18389)"
+   }
   },
-  "tool_uses": [
-    "prop-weil-pbc-inverse-image-exact",
-    "lem-weil-pbc-inverse-image-preserves-colimits"
-  ],
-  "reviewed": {
-    "date": "2026-10-09",
-    "by": "L",
-    "result": "pass",
-    "note": "colimit route from reviewed nodes; prop-weil-pbc-inverse-image-exact and lem-weil-pbc-inverse-image-preserves-colimits (sk-thm-properbasechange) accepted as tool uses"
-  },
-  "lean": {
-    "module": "WeilConjectures.AlgebraicGeometry.Sites.TorsionSheaf",
-    "declaration": "AlgebraicGeometry.Etale.isTorsion_upperStar",
-    "branch": "slopmaster2",
-    "line": 46,
-    "declarations": [
-      "AlgebraicGeometry.Etale.isTorsion_upperStar"
-    ],
-    "sorry_free": true,
-    "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state closed)"
+  {
+   "text": "Conclusion. $F$ is torsion, so $c_F$ is an isomorphism [def-weil-pbc-torsion-etale-sheaf]; a functor carries isomorphisms to isomorphisms, so $u^{-1}(c_F)$ is one, and $c_{u^{-1}F}=u^{-1}(c_F)\\circ\\alpha^{-1}$ (step 4) is an isomorphism. By [def-weil-pbc-torsion-etale-sheaf], $u^{-1}F$ is torsion.",
+   "uses": [
+    "def-weil-pbc-torsion-etale-sheaf"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Section 'Torsion sheaves' (label section-torsion, Tag 0DDB, line 13888; proof of Lemma 0DDC: F = union of the F[d]) and Lemma 03Q1 (label lemma-stalk-pullback, line 4649), part (1): f^{-1} on abelian sheaves is exact"
+   }
   }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-torsion-etale-sheaf",
+  "prop-weil-pbc-inverse-image-exact",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-pur-abelian-sheaf-kernel",
+  "lem-weil-pbc-inverse-image-preserves-colimits",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Section 'Torsion sheaves' (Tag 0DDB, line 13888) and Lemma 03Q1 (lemma-stalk-pullback, line 4649) (1); categories.tex Lemma 0038 (1). Stacks uses that a pullback of a torsion sheaf is torsion without stating it (e.g. through F = union of F[n]); the steps from the colimit definition are the agent's"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "inverse image of a torsion abelian sheaf is a torsion sheaf",
+   "results": "CategoryTheory.fullyFaithfulSheafToPresheaf_preimage_val, SheafOfModules.fullyFaithfulForget_preimage_val, AlgebraicGeometry.Scheme.inv_app, GrothendieckTopology.isoSheafify_inv, Scheme.IdealSheafData.support_comap",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "pullback (inverse image) functor of sheaves of abelian groups preserves torsion sheaves",
+   "results": "SheafOfModules.pullback, Scheme.Modules.instAdditivePullback, SheafOfModules.pullbackObjFreeIso, SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pullbackIso (no torsion notion for sheaves)",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln 'IsTorsion\\|torsion' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Sites",
+   "results": "none: no file of CategoryTheory/Sites or AlgebraicGeometry/Sites mentions torsion",
+   "date": "2026-10-09",
+   "verdict": "no match: Mathlib has no torsion abelian sheaves"
+  },
+  {
+   "tool": "leansearch",
+   "query": "exact functor between abelian categories preserves torsion objects, pullback of torsion sheaf of abelian groups",
+   "results": "CategoryTheory.Functor.exact_tfae, CategoryTheory.exactFunctor, CategoryTheory.leftExactFunctor, CategoryTheory.ExactFunctor.of, CategoryTheory.Functor.preservesMonomorphisms_of_map_exact (Mathlib.CategoryTheory.Abelian.Exact), Ext.mapExactFunctor: exactness API only, no torsion objects",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "inverse image of a sheaf of torsion abelian groups on the étale site is torsion",
+   "results": "instAbelianLightCondMod, Scheme.Modules.instAbelian, SheafOfModules.instAbelian, LightCondensed/Condensed constructors: no torsion sheaves",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf, AddCommGrpCat, \"torsion\"  and  \"Torsion\", CategoryTheory.Functor",
+   "results": "none (both queries empty)",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rlniE torsion Mathlib/CategoryTheory/Sites Mathlib/AlgebraicGeometry Mathlib/Topology/Sheaves Mathlib/CategoryTheory/Abelian Mathlib/Algebra/Category",
+   "results": "only AlgebraicGeometry/EllipticCurve/* (torsion points) and CategoryTheory/Abelian/Preradical/{Basic,Radical,Colon}.lean (preradicals; 'torsion theory' only as a keyword, no torsion sheaves, no n-torsion colimit)",
+   "date": "2026-10-09",
+   "verdict": "no match: Mathlib has no torsion abelian sheaves (confirmed)"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lemma-weil-pbc-target-locality",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.Etale.isTorsion_upperStar"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.Etale.isTorsion_upperStar",
+     "module": "WeilConjectures.AlgebraicGeometry.Sites.TorsionSheaf",
+     "lines": [
+      46,
+      58
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-reduction",
+ "split_report": {
+  "date": "2026-10-09",
+  "item": "lem-weil-pbc-inverse-image-torsion",
+  "worker": "stage1",
+  "summary": "Statement kept (checked against def-weil-pbc-torsion-etale-sheaf: torsion = canonical map colim_n F[n] -> F is an isomorphism). Stacks (etale-cohomology 0DDB, 03Q1) uses the fact without a lemma, so the proof is written by the agent from the colimit definition in five steps: u^{-1} additive, so u^{-1}(n)=n; u^{-1} preserves kernels, giving isomorphisms u^{-1}(F[n]) = (u^{-1}F)[n] over u^{-1}F; these are compatible with the divisibility transition maps; u^{-1} preserves colimits, so u^{-1}(colim F[n]) = colim (u^{-1}F)[n] and the canonical map of u^{-1}F corresponds to u^{-1}(c_F); hence it is an isomorphism. Uses the reviewed prop-weil-pbc-inverse-image-exact and lem-weil-pbc-inverse-image-preserves-colimits, both of unit sk-thm-properbasechange, which sk-thm-reduction does not cite: generic tool uses (black boxes) to be recorded in tool_uses by the lead. The alternative through lem-weil-pbc-torsion-sheaf-characterizations (1)<=>(3) (unit sk-def-pbc, on route) plus the closed stalk lemma lemma-openclosed-stalk-upperstar would be on route but rests on an unsplit lemma whose (1)<=>(3) needs the stalk criterion for isomorphisms and the exactness of stalks, more than this proof; not chosen. Mathlib searched again with LeanSearch, LeanFinder, Loogle and grep: no torsion sheaves in Mathlib. No new nodes."
+ },
+ "tool_uses": [
+  "prop-weil-pbc-inverse-image-exact",
+  "lem-weil-pbc-inverse-image-preserves-colimits"
+ ],
+ "reviewed": {
+  "date": "2026-10-09",
+  "by": "L",
+  "result": "pass",
+  "note": "colimit route from reviewed nodes; prop-weil-pbc-inverse-image-exact and lem-weil-pbc-inverse-image-preserves-colimits (sk-thm-properbasechange) accepted as tool uses"
+ },
+ "lean": {
+  "module": "WeilConjectures.AlgebraicGeometry.Sites.TorsionSheaf",
+  "declaration": "AlgebraicGeometry.Etale.isTorsion_upperStar",
+  "branch": "slopmaster2",
+  "line": 46,
+  "declarations": [
+   "AlgebraicGeometry.Etale.isTorsion_upperStar"
+  ],
+  "sorry_free": true,
+  "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state closed)"
+ }
 }

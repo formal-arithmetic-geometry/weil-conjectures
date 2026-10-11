@@ -1,89 +1,27 @@
 {
-  "id": "lem-sc-generic-cohomology-comparison",
-  "blueprint": {
-    "is": "lem-sc-generic-cohomology-comparison",
-    "from": null,
-    "same_as": []
-  },
-  "kind": "statement",
-  "title": "Generic replacement in degrees at least two",
-  "statement": "Let $C/k$ be a smooth integral separated\ncurve over algebraically closed $k$,\nand let $\\eta:\\operatorname{Spec}k(C)\\to C$ be its generic point,\nwith function field $k(C)$.\nFor every torsion etale sheaf\n$F$, the adjunction map induces\n\n$$\nH^q(C,F)\\ \\xrightarrow{\\ \\sim\\ }\\ H^q(C,\\eta_*\\eta^*F)\n\\qquad(q\\geq2)\n$$\n\non cohomology.",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-cd/lem-sc-generic-cohomology-comparison.md",
-    "place": "node lem-sc-generic-cohomology-comparison, order 1005"
-  },
-  "stmt_deps": [
-    "def-sc-curves",
-    "def-sc-function-field",
-    "def-weil-pbc-etale-cohomology",
-    "def-weil-pbc-etale-sheaves"
-  ],
-  "proof": [
-    {
-      "text": "*The generic point as an inverse limit.* Let $I$ be the nonempty affine opens $U$ of the integral curve $C$, ordered by reverse inclusion, with $j_U:U\\to C$. The generic point belongs to every nonempty open. For two such opens $U,V$, their intersection contains the generic point, and [lem-weil-pbc-affine-opens-basis] supplies a nonempty affine $W\\subseteq U\\cap V$; hence $I$ is directed. The function field $k(C)$ is the stalk $\\mathcal O_{C,\\eta}=\\varinjlim_{U\\in I}\\mathcal O_C(U)$ [def-sc-function-field], since affine opens are cofinal among neighbourhoods of $\\eta$. By the affine clause of [lem-weil-pbc-limit-affine-transition], $\\operatorname{Spec}k(C)=\\varprojlim_{U\\in I}U$ over $C$, with affine transition maps. The curve is quasi-compact and quasi-separated by [lem-weil-pbc-qcqs-over-affine]. Fix an affine etale object $W\\to C$. It is quasi-compact and quasi-separated; its etale map to the quasi-separated $C$ is of finite presentation by [lem-weil-pbc-qcqs-morphism-permanence] (the etale map is locally of finite presentation [def-weil-etale-morphism]). To specialize [lem-weil-pbc-etale-section-continuity], choose $U_0\\in I$, put $X_U=U$ for $U\\subseteq U_0$, $F_0=j_{U_0}^{-1}F$, and $W_0=W\\times_CU_0$; at each smaller $U$ its $W_U$ is $W\\times_CU$, and the inverse-image composition isomorphism [lem-weil-pbc-inverse-image-composition] identifies the pulled-back sheaf with $F|_U$. The lemma's hypothesis on $W_0$ holds by base change: $W_0\\to U_0$ is etale by [lem-weil-pbc-etale-base-change-finite-limits] and of finite presentation by clause (3) of [lem-weil-pbc-qcqs-morphism-permanence]. Its two clauses say that a section of $\\eta_*\\eta^{-1}F$ over $W$ comes from $j_{U*}j_U^{-1}F$ over $W$ for some $U\\subseteq U_0$, and a stage section which becomes zero over the generic point becomes zero after shrinking $U$.",
-      "uses": [
-        "lem-weil-pbc-affine-opens-basis",
-        "def-sc-function-field",
-        "lem-weil-pbc-limit-affine-transition",
-        "lem-weil-pbc-qcqs-over-affine",
-        "lem-weil-pbc-qcqs-morphism-permanence",
-        "def-weil-etale-morphism",
-        "lem-weil-pbc-inverse-image-composition",
-        "lem-weil-pbc-etale-base-change-finite-limits",
-        "lem-weil-pbc-etale-section-continuity"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-cd/lem-sc-generic-cohomology-comparison.md",
-        "place": "## Proof, first two sentences; Lean WeilConjectures/AlgebraicGeometry/FunctionFieldLimit.lean:55-123 and Curve/GenericComparison.lean:245-255; Stacks Limits Lemma 01YW (lemma-directed-inverse-system-affine-schemes-has-limit)"
-      }
-    },
-    {
-      "text": "*The kernel vanishes generically.* Write $\\epsilon:F\\to E:=\\eta_*\\eta^{-1}F$ for the adjunction unit [def-weil-pbc-inverse-image], [def-weil-pbc-direct-image] and $K=\\ker\\epsilon$. Let $s\\in K(V)$ on an etale $V\\to C$. Affine opens of $V$ form an etale cover; on each affine $W\\subseteq V$, its image $x\\in F(W)$ maps to zero under $\\epsilon$. Choose any $U_0\\in I$. The unit $F\\to j_{U_0*}j_{U_0}^{-1}F$ maps $x$ to a stage section whose image in $E(W)$ is zero. By the zero-detection clause of the continuity statement in step 1, it vanishes at a smaller nonempty affine $U\\subseteq U_0$. Naturality of the unit with the monomorphism $K\\hookrightarrow F$ then makes the unit $K\\to j_{U*}j_U^{-1}K$ kill $s|_W$: $j_U^{-1}$ preserves the monomorphism by [prop-weil-pbc-inverse-image-modules-exact] with coefficient ring $\\mathbf Z$, $j_{U*}$ is left exact [def-weil-pbc-direct-image], and the image of the section under that monomorphism is the already-zero section. Thus $K$ has generically vanishing sections in the precise sense of [lem-sc-generic-vanishing-acyclic].",
-      "uses": [
-        "def-weil-pbc-inverse-image",
-        "def-weil-pbc-direct-image",
-        "lem-weil-pbc-affine-opens-basis",
-        "lem-weil-pbc-etale-section-continuity",
-        "prop-weil-pbc-inverse-image-modules-exact",
-        "lem-sc-generic-vanishing-acyclic"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-cd/lem-sc-generic-cohomology-comparison.md",
-        "place": "## Proof, kernel clause; expanded as in Lean WeilConjectures/AlgebraicGeometry/Curve/GenericComparison.lean:259-292"
-      }
-    },
-    {
-      "text": "*The cokernel vanishes generically.* Put $Q=\\operatorname{coker}\\epsilon$. For $t\\in Q(V)$, the quotient map $E\\to Q$ is an epimorphism, hence by [lem-weil-pbc-abelian-sheaf-epi-locally-surjective] an etale cover of $V$ admits lifts of $t$ to sections of $E$. Refine that cover by affine etale objects $W$. By the surjectivity clause of continuity in step 1, each lifted section of $E(W)$ comes from a stage $j_{U*}j_U^{-1}F(W)$ for some nonempty affine $U$. Its image in $j_{U*}j_U^{-1}Q(W)$ is zero: the stage section is the unit image of a section of $F$ on $W\\times_CU$, and $F\\xrightarrow{\\epsilon}E\\to Q$ is zero. Naturality of the comparison map from the stage to $E$ therefore shows that the unit $Q\\to j_{U*}j_U^{-1}Q$ kills $t|_W$. Hence $Q$ also satisfies [lem-sc-generic-vanishing-acyclic]. This uses no unproved claim that $\\eta_*\\eta^{-1}F$ or $Q$ is torsion.",
-      "uses": [
-        "lem-weil-pbc-abelian-sheaf-epi-locally-surjective",
-        "lem-weil-pbc-affine-opens-basis",
-        "lem-weil-pbc-etale-section-continuity",
-        "def-weil-pbc-inverse-image",
-        "def-weil-pbc-direct-image",
-        "lem-sc-generic-vanishing-acyclic"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-cd/lem-sc-generic-cohomology-comparison.md",
-        "place": "## Proof, cokernel clause; expanded as in Lean WeilConjectures/AlgebraicGeometry/Curve/GenericComparison.lean:293-322"
-      }
-    },
-    {
-      "text": "*Cohomology comparison.* By [lem-sc-generic-vanishing-acyclic], applied separately to $K$ (step 2) and $Q$ (step 3), $H^i(C,K)=H^i(C,Q)=0$ for all $i>0$. Factor $\\epsilon$ as $F\\twoheadrightarrow I:=\\operatorname{im}\\epsilon\\hookrightarrow E$. The long exact sequences [lem-weil-pbc-derived-functor-long-exact] for $0\\to K\\to F\\to I\\to0$ and $0\\to I\\to E\\to Q\\to0$ show, for each $q\\ge2$, that $H^q(F)\\to H^q(I)$ is an isomorphism because $H^q(K)=H^{q+1}(K)=0$, and that $H^q(I)\\to H^q(E)$ is an isomorphism because $H^{q-1}(Q)=H^q(Q)=0$. Their composite is the map induced by $\\epsilon$, as required.",
-      "uses": [
-        "lem-sc-generic-vanishing-acyclic",
-        "lem-weil-pbc-derived-functor-long-exact"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-cd/lem-sc-generic-cohomology-comparison.md",
-        "place": "## Proof, last two sentences; Lean WeilConjectures/AlgebraicGeometry/Curve/GenericComparison.lean:255-322 and Curve/CohomologicalDimension.lean:317-325"
-      }
-    }
-  ],
-  "proof_deps": [
+ "id": "lem-sc-generic-cohomology-comparison",
+ "blueprint": {
+  "is": "lem-sc-generic-cohomology-comparison",
+  "from": null,
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Generic replacement in degrees at least two",
+ "statement": "Let $C/k$ be a smooth integral separated\ncurve over algebraically closed $k$,\nand let $\\eta:\\operatorname{Spec}k(C)\\to C$ be its generic point,\nwith function field $k(C)$.\nFor every torsion etale sheaf\n$F$, the adjunction map induces\n\n$$\nH^q(C,F)\\ \\xrightarrow{\\ \\sim\\ }\\ H^q(C,\\eta_*\\eta^*F)\n\\qquad(q\\geq2)\n$$\n\non cohomology.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-cd/lem-sc-generic-cohomology-comparison.md",
+  "place": "node lem-sc-generic-cohomology-comparison, order 1005"
+ },
+ "stmt_deps": [
+  "def-sc-curves",
+  "def-sc-function-field",
+  "def-weil-pbc-etale-cohomology",
+  "def-weil-pbc-etale-sheaves"
+ ],
+ "proof": [
+  {
+   "text": "*The generic point as an inverse limit.* Let $I$ be the nonempty affine opens $U$ of the integral curve $C$, ordered by reverse inclusion, with $j_U:U\\to C$. The generic point belongs to every nonempty open. For two such opens $U,V$, their intersection contains the generic point, and [lem-weil-pbc-affine-opens-basis] supplies a nonempty affine $W\\subseteq U\\cap V$; hence $I$ is directed. The function field $k(C)$ is the stalk $\\mathcal O_{C,\\eta}=\\varinjlim_{U\\in I}\\mathcal O_C(U)$ [def-sc-function-field], since affine opens are cofinal among neighbourhoods of $\\eta$. By the affine clause of [lem-weil-pbc-limit-affine-transition], $\\operatorname{Spec}k(C)=\\varprojlim_{U\\in I}U$ over $C$, with affine transition maps. The curve is quasi-compact and quasi-separated by [lem-weil-pbc-qcqs-over-affine]. Fix an affine etale object $W\\to C$. It is quasi-compact and quasi-separated; its etale map to the quasi-separated $C$ is of finite presentation by [lem-weil-pbc-qcqs-morphism-permanence] (the etale map is locally of finite presentation [def-weil-etale-morphism]). To specialize [lem-weil-pbc-etale-section-continuity], choose $U_0\\in I$, put $X_U=U$ for $U\\subseteq U_0$, $F_0=j_{U_0}^{-1}F$, and $W_0=W\\times_CU_0$; at each smaller $U$ its $W_U$ is $W\\times_CU$, and the inverse-image composition isomorphism [lem-weil-pbc-inverse-image-composition] identifies the pulled-back sheaf with $F|_U$. The lemma's hypothesis on $W_0$ holds by base change: $W_0\\to U_0$ is etale by [lem-weil-pbc-etale-base-change-finite-limits] and of finite presentation by clause (3) of [lem-weil-pbc-qcqs-morphism-permanence]. Its two clauses say that a section of $\\eta_*\\eta^{-1}F$ over $W$ comes from $j_{U*}j_U^{-1}F$ over $W$ for some $U\\subseteq U_0$, and a stage section which becomes zero over the generic point becomes zero after shrinking $U$.",
+   "uses": [
     "lem-weil-pbc-affine-opens-basis",
     "def-sc-function-field",
     "lem-weil-pbc-limit-affine-transition",
@@ -92,140 +30,206 @@
     "def-weil-etale-morphism",
     "lem-weil-pbc-inverse-image-composition",
     "lem-weil-pbc-etale-base-change-finite-limits",
+    "lem-weil-pbc-etale-section-continuity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-cd/lem-sc-generic-cohomology-comparison.md",
+    "place": "## Proof, first two sentences; Lean WeilConjectures/AlgebraicGeometry/FunctionFieldLimit.lean:55-123 and Curve/GenericComparison.lean:245-255; Stacks Limits Lemma 01YW (lemma-directed-inverse-system-affine-schemes-has-limit)"
+   }
+  },
+  {
+   "text": "*The kernel vanishes generically.* Write $\\epsilon:F\\to E:=\\eta_*\\eta^{-1}F$ for the adjunction unit [def-weil-pbc-inverse-image], [def-weil-pbc-direct-image] and $K=\\ker\\epsilon$. Let $s\\in K(V)$ on an etale $V\\to C$. Affine opens of $V$ form an etale cover; on each affine $W\\subseteq V$, its image $x\\in F(W)$ maps to zero under $\\epsilon$. Choose any $U_0\\in I$. The unit $F\\to j_{U_0*}j_{U_0}^{-1}F$ maps $x$ to a stage section whose image in $E(W)$ is zero. By the zero-detection clause of the continuity statement in step 1, it vanishes at a smaller nonempty affine $U\\subseteq U_0$. Naturality of the unit with the monomorphism $K\\hookrightarrow F$ then makes the unit $K\\to j_{U*}j_U^{-1}K$ kill $s|_W$: $j_U^{-1}$ preserves the monomorphism by [prop-weil-pbc-inverse-image-modules-exact] with coefficient ring $\\mathbf Z$, $j_{U*}$ is left exact [def-weil-pbc-direct-image], and the image of the section under that monomorphism is the already-zero section. Thus $K$ has generically vanishing sections in the precise sense of [lem-sc-generic-vanishing-acyclic].",
+   "uses": [
+    "def-weil-pbc-inverse-image",
+    "def-weil-pbc-direct-image",
+    "lem-weil-pbc-affine-opens-basis",
+    "lem-weil-pbc-etale-section-continuity",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-sc-generic-vanishing-acyclic"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-cd/lem-sc-generic-cohomology-comparison.md",
+    "place": "## Proof, kernel clause; expanded as in Lean WeilConjectures/AlgebraicGeometry/Curve/GenericComparison.lean:259-292"
+   }
+  },
+  {
+   "text": "*The cokernel vanishes generically.* Put $Q=\\operatorname{coker}\\epsilon$. For $t\\in Q(V)$, the quotient map $E\\to Q$ is an epimorphism, hence by [lem-weil-pbc-abelian-sheaf-epi-locally-surjective] an etale cover of $V$ admits lifts of $t$ to sections of $E$. Refine that cover by affine etale objects $W$. By the surjectivity clause of continuity in step 1, each lifted section of $E(W)$ comes from a stage $j_{U*}j_U^{-1}F(W)$ for some nonempty affine $U$. Its image in $j_{U*}j_U^{-1}Q(W)$ is zero: the stage section is the unit image of a section of $F$ on $W\\times_CU$, and $F\\xrightarrow{\\epsilon}E\\to Q$ is zero. Naturality of the comparison map from the stage to $E$ therefore shows that the unit $Q\\to j_{U*}j_U^{-1}Q$ kills $t|_W$. Hence $Q$ also satisfies [lem-sc-generic-vanishing-acyclic]. This uses no unproved claim that $\\eta_*\\eta^{-1}F$ or $Q$ is torsion.",
+   "uses": [
+    "lem-weil-pbc-abelian-sheaf-epi-locally-surjective",
+    "lem-weil-pbc-affine-opens-basis",
     "lem-weil-pbc-etale-section-continuity",
     "def-weil-pbc-inverse-image",
     "def-weil-pbc-direct-image",
-    "lem-sc-generic-vanishing-acyclic",
-    "prop-weil-pbc-inverse-image-modules-exact",
-    "lem-weil-pbc-abelian-sheaf-epi-locally-surjective",
-    "lem-weil-pbc-derived-functor-long-exact"
-  ],
-  "proof_origin": {
-    "by": "agent",
+    "lem-sc-generic-vanishing-acyclic"
+   ],
+   "elementary": false,
+   "source": {
     "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-cd/lem-sc-generic-cohomology-comparison.md",
-    "place": "## Proof"
+    "place": "## Proof, cokernel clause; expanded as in Lean WeilConjectures/AlgebraicGeometry/Curve/GenericComparison.lean:293-322"
+   }
   },
-  "mathlib_searches": [],
-  "mathlib_match": null,
-  "status": "split",
-  "merged_into": null,
-  "import_flags": [],
-  "blueprint_kind": "lemma",
-  "blueprint_order": 1005,
-  "blueprint_uses": [
-    "def-sc-curves",
-    "def-sc-function-field",
-    "def-weil-pbc-etale-cohomology",
-    "def-weil-pbc-etale-sheaves",
-    "lem-sc-zero-generic-acyclic",
-    "prop-weil-pbc-strict-henselization-stalk-formula"
-  ],
-  "uses_not_cited": [
-    "def-sc-curves",
-    "def-sc-function-field",
-    "def-weil-pbc-etale-cohomology",
-    "def-weil-pbc-etale-sheaves"
-  ],
-  "proof_split_by": "paragraphs",
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "rests_on_sorry",
-      "decls": [
-        {
-          "name": "AlgebraicGeometry.IsCurve.isIso_functorH_map_unit_fromSpecFunctionField",
-          "module": "WeilConjectures.AlgebraicGeometry.Curve.CohomologicalDimension",
-          "lines": [
-            311,
-            325
-          ],
-          "kind": "theorem",
-          "sorry": false
-        }
-      ],
-      "missing": [],
-      "open": [
-        {
-          "name": "AlgebraicGeometry.Etale.unitComparison_app_isColimit_of_isLimit",
-          "module": "WeilConjectures.AlgebraicGeometry.Sites.SectionContinuity",
-          "lines": [
-            74,
-            102
-          ],
-          "kind": "theorem",
-          "nodes": [],
-          "below": false
-        },
-        {
-          "name": "AlgebraicGeometry.Scheme.H_map_isColimit_of_isFiltered",
-          "module": "WeilConjectures.AlgebraicGeometry.Curve.Reductions",
-          "lines": [
-            68,
-            86
-          ],
-          "kind": "theorem",
-          "nodes": [
-            "lemma-weil-pbc-curve-filtered-cohomology"
-          ],
-          "below": false
-        }
-      ]
-    }
-  },
-  "chapter": "sec-curve-estimates",
-  "unit": "sk-prop-cd",
-  "split_report": {
-    "date": "2026-10-10",
-    "item": "lem-sc-generic-cohomology-comparison",
-    "worker": "stage1",
-    "summary": "The imported proof hid continuity of sections and asserted acyclicity of the kernel and cokernel using a torsion-only node without establishing torsion of the cokernel. Four steps now use the inverse limit of nonempty affine opens, the existing section-continuity node to make kernel and cokernel sections vanish after shrinking, the new unsplit generic-vanishing acyclicity node that exactly matches Lean GenericComparison.lean:140-232, and two long exact sequences. The item statement is unchanged. The Lean declaration isIso_functorH_map_unit_fromSpecFunctionField states it exactly but rests on sorry in section continuity and filtered cohomology, so it is not closed.",
-    "blueprint": "Step 1 realizes the first two sentences of ## Proof (the generic restriction is identified by continuity at the inverse limit); steps 2 and 3 realize the sentence about the kernel and cokernel; step 4 realizes the final two long-exact-sequence sentences. The new acyclicity node gives the precise untorsioned claim needed at 'They are acyclic'.",
-    "tool_uses": [
-      {
-        "node": "lem-weil-pbc-limit-affine-transition",
-        "why": "Step 1 uses the generic-point inverse-limit identification; the curve unit has no replacement for this general affine limit theorem."
-      },
-      {
-        "node": "lem-weil-pbc-etale-section-continuity",
-        "why": "Steps 1-3 require section surjectivity and zero detection at the generic inverse limit; this continuity theorem is the stated general tool."
-      },
-      {
-        "node": "prop-weil-pbc-inverse-image-modules-exact",
-        "why": "Step 2 needs inverse image to preserve the kernel monomorphism; the curve route supplies no separate exactness result."
-      },
-      {
-        "node": "lem-weil-pbc-derived-functor-long-exact",
-        "why": "Step 4 uses the long exact cohomology sequences for kernel-image and image-cokernel; this is a generic derived-functor tool."
-      }
-    ]
-  },
-  "tool_uses": [
-    "lem-weil-pbc-limit-affine-transition",
-    "lem-weil-pbc-etale-section-continuity",
-    "prop-weil-pbc-inverse-image-modules-exact",
+  {
+   "text": "*Cohomology comparison.* By [lem-sc-generic-vanishing-acyclic], applied separately to $K$ (step 2) and $Q$ (step 3), $H^i(C,K)=H^i(C,Q)=0$ for all $i>0$. Factor $\\epsilon$ as $F\\twoheadrightarrow I:=\\operatorname{im}\\epsilon\\hookrightarrow E$. The long exact sequences [lem-weil-pbc-derived-functor-long-exact] for $0\\to K\\to F\\to I\\to0$ and $0\\to I\\to E\\to Q\\to0$ show, for each $q\\ge2$, that $H^q(F)\\to H^q(I)$ is an isomorphism because $H^q(K)=H^{q+1}(K)=0$, and that $H^q(I)\\to H^q(E)$ is an isomorphism because $H^{q-1}(Q)=H^q(Q)=0$. Their composite is the map induced by $\\epsilon$, as required.",
+   "uses": [
+    "lem-sc-generic-vanishing-acyclic",
     "lem-weil-pbc-derived-functor-long-exact"
-  ],
-  "reviewed": {
-    "date": "2026-10-10",
-    "by": "L",
-    "reviewer": "R-gcc",
-    "group": "E1",
-    "result": "pass",
-    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-gcc (reviewer sub-agent of L); spot-checked: Source: master blueprint sk-prop-cd/lem-sc-generic-cohomology-comparison.md; item statement unchanged and agrees with it (smooth integral separated curve, k algebraically closed, torsion F, q>=2). The blueprint route used torsion-only lem-sc-zero-generic-acyclic on a cokernel not shown torsion; the worker's replacement by the untorsioned lem-sc-generic-vanishing-acyclic (same unit, Lean subsingleton_H_of_genericVanishing, GenericComparison.lean:140-232, read) is named in the report. Step 1: affine-opens-basis gives directedness, def-sc-function-field gives k(C)=O_{C,eta}=colim O(U), affine clause of limit-affine-transition gives Spec k(C)=lim U, qcqs-over-affine and qcqs-morphism-permanence (1) give fp of affine etale W->C, and the hypotheses of etale-section-continuity (affine transitions, qcqs stages, W_0 etale fp) checked; its colimit isomorphism gives surjectivity and zero detection. Step 2: zero detection plus inverse-image exactness and left exactness of direct image give the new node's hypothesis for K; checked at section level K(W x_C U) in F(W x_C U). Step 3: epi-locally-surjective lifts, continuity surjectivity, and e|_{WxU}=eps(y) so t dies on WxU; checked. Step 4: long exact sequences, outer groups H^q,H^{q+1}(K), H^{q-1},H^q(Q) with q-1>=1. New node tested: G with zero geometric generic stalk is a sum of skyscrapers i_{x*}M at closed points, acyclic over algebraically closed k, so true without torsion; nonzero constant sheaf fails the hypothesis. B10: sorryfree.py gives SORRY for both subsingleton_H_of_genericVanishing (H_map_isColimit_of_isFiltered) and isIso_functorH_map_unit_fromSpecFunctionField, so neither is attached. Tool uses accepted as generic black boxes: limit-affine-transition, etale-section-continuity, inverse-image-modules-exact, derived-functor-long-exact. Fixes: dag/nodes/sec-curve-estimates/lem-sc-generic-cohomology-comparison.json: proof step 1: fp of W_0->U_0 now cites qcqs-morphism-permanence (3), etale-base-change-finite-limits only for etaleness; dag/nodes/sec-curve-estimates/lem-sc-generic-vanishing-acyclic.json: statement/stmt_deps: cite def-pc-integral-scheme for integral and def-weil-pbc-etale-site for the etale covering. 2026-10-10 14:40-14:43 UTC.; 2 file(s) fixed by the reviewer"
-  },
-  "lean": {
-    "module": "WeilConjectures.AlgebraicGeometry.Curve.CohomologicalDimension",
-    "declaration": "AlgebraicGeometry.IsCurve.isIso_functorH_map_unit_fromSpecFunctionField",
-    "branch": "slopmaster2",
-    "line": 311,
-    "declarations": [
-      "AlgebraicGeometry.IsCurve.isIso_functorH_map_unit_fromSpecFunctionField"
-    ],
-    "sorry_free": false,
-    "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state rests_on_sorry)"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-cd/lem-sc-generic-cohomology-comparison.md",
+    "place": "## Proof, last two sentences; Lean WeilConjectures/AlgebraicGeometry/Curve/GenericComparison.lean:255-322 and Curve/CohomologicalDimension.lean:317-325"
+   }
   }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-affine-opens-basis",
+  "def-sc-function-field",
+  "lem-weil-pbc-limit-affine-transition",
+  "lem-weil-pbc-qcqs-over-affine",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "def-weil-etale-morphism",
+  "lem-weil-pbc-inverse-image-composition",
+  "lem-weil-pbc-etale-base-change-finite-limits",
+  "lem-weil-pbc-etale-section-continuity",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-direct-image",
+  "lem-sc-generic-vanishing-acyclic",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-weil-pbc-abelian-sheaf-epi-locally-surjective",
+  "lem-weil-pbc-derived-functor-long-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-cd/lem-sc-generic-cohomology-comparison.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 1005,
+ "blueprint_uses": [
+  "def-sc-curves",
+  "def-sc-function-field",
+  "def-weil-pbc-etale-cohomology",
+  "def-weil-pbc-etale-sheaves",
+  "lem-sc-zero-generic-acyclic",
+  "prop-weil-pbc-strict-henselization-stalk-formula"
+ ],
+ "uses_not_cited": [
+  "def-sc-curves",
+  "def-sc-function-field",
+  "def-weil-pbc-etale-cohomology",
+  "def-weil-pbc-etale-sheaves"
+ ],
+ "proof_split_by": "paragraphs",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.IsCurve.isIso_functorH_map_unit_fromSpecFunctionField"
+   ]
+  },
+  "slopmaster2": {
+   "state": "rests_on_sorry",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.IsCurve.isIso_functorH_map_unit_fromSpecFunctionField",
+     "module": "WeilConjectures.AlgebraicGeometry.Curve.CohomologicalDimension",
+     "lines": [
+      311,
+      325
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": [
+    {
+     "name": "AlgebraicGeometry.Etale.unitComparison_app_isColimit_of_isLimit",
+     "module": "WeilConjectures.AlgebraicGeometry.Sites.SectionContinuity",
+     "lines": [
+      74,
+      102
+     ],
+     "kind": "theorem",
+     "nodes": [
+      "lem-weil-pbc-etale-section-continuity"
+     ],
+     "below": true
+    },
+    {
+     "name": "AlgebraicGeometry.Scheme.H_map_isColimit_of_isFiltered",
+     "module": "WeilConjectures.AlgebraicGeometry.Curve.Reductions",
+     "lines": [
+      68,
+      86
+     ],
+     "kind": "theorem",
+     "nodes": [
+      "lemma-weil-pbc-curve-filtered-cohomology"
+     ],
+     "below": false
+    }
+   ]
+  }
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-cd",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-sc-generic-cohomology-comparison",
+  "worker": "stage1",
+  "summary": "The imported proof hid continuity of sections and asserted acyclicity of the kernel and cokernel using a torsion-only node without establishing torsion of the cokernel. Four steps now use the inverse limit of nonempty affine opens, the existing section-continuity node to make kernel and cokernel sections vanish after shrinking, the new unsplit generic-vanishing acyclicity node that exactly matches Lean GenericComparison.lean:140-232, and two long exact sequences. The item statement is unchanged. The Lean declaration isIso_functorH_map_unit_fromSpecFunctionField states it exactly but rests on sorry in section continuity and filtered cohomology, so it is not closed.",
+  "blueprint": "Step 1 realizes the first two sentences of ## Proof (the generic restriction is identified by continuity at the inverse limit); steps 2 and 3 realize the sentence about the kernel and cokernel; step 4 realizes the final two long-exact-sequence sentences. The new acyclicity node gives the precise untorsioned claim needed at 'They are acyclic'.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-limit-affine-transition",
+    "why": "Step 1 uses the generic-point inverse-limit identification; the curve unit has no replacement for this general affine limit theorem."
+   },
+   {
+    "node": "lem-weil-pbc-etale-section-continuity",
+    "why": "Steps 1-3 require section surjectivity and zero detection at the generic inverse limit; this continuity theorem is the stated general tool."
+   },
+   {
+    "node": "prop-weil-pbc-inverse-image-modules-exact",
+    "why": "Step 2 needs inverse image to preserve the kernel monomorphism; the curve route supplies no separate exactness result."
+   },
+   {
+    "node": "lem-weil-pbc-derived-functor-long-exact",
+    "why": "Step 4 uses the long exact cohomology sequences for kernel-image and image-cokernel; this is a generic derived-functor tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-limit-affine-transition",
+  "lem-weil-pbc-etale-section-continuity",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-weil-pbc-derived-functor-long-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-gcc",
+  "group": "E1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-gcc (reviewer sub-agent of L); spot-checked: Source: master blueprint sk-prop-cd/lem-sc-generic-cohomology-comparison.md; item statement unchanged and agrees with it (smooth integral separated curve, k algebraically closed, torsion F, q>=2). The blueprint route used torsion-only lem-sc-zero-generic-acyclic on a cokernel not shown torsion; the worker's replacement by the untorsioned lem-sc-generic-vanishing-acyclic (same unit, Lean subsingleton_H_of_genericVanishing, GenericComparison.lean:140-232, read) is named in the report. Step 1: affine-opens-basis gives directedness, def-sc-function-field gives k(C)=O_{C,eta}=colim O(U), affine clause of limit-affine-transition gives Spec k(C)=lim U, qcqs-over-affine and qcqs-morphism-permanence (1) give fp of affine etale W->C, and the hypotheses of etale-section-continuity (affine transitions, qcqs stages, W_0 etale fp) checked; its colimit isomorphism gives surjectivity and zero detection. Step 2: zero detection plus inverse-image exactness and left exactness of direct image give the new node's hypothesis for K; checked at section level K(W x_C U) in F(W x_C U). Step 3: epi-locally-surjective lifts, continuity surjectivity, and e|_{WxU}=eps(y) so t dies on WxU; checked. Step 4: long exact sequences, outer groups H^q,H^{q+1}(K), H^{q-1},H^q(Q) with q-1>=1. New node tested: G with zero geometric generic stalk is a sum of skyscrapers i_{x*}M at closed points, acyclic over algebraically closed k, so true without torsion; nonzero constant sheaf fails the hypothesis. B10: sorryfree.py gives SORRY for both subsingleton_H_of_genericVanishing (H_map_isColimit_of_isFiltered) and isIso_functorH_map_unit_fromSpecFunctionField, so neither is attached. Tool uses accepted as generic black boxes: limit-affine-transition, etale-section-continuity, inverse-image-modules-exact, derived-functor-long-exact. Fixes: dag/nodes/sec-curve-estimates/lem-sc-generic-cohomology-comparison.json: proof step 1: fp of W_0->U_0 now cites qcqs-morphism-permanence (3), etale-base-change-finite-limits only for etaleness; dag/nodes/sec-curve-estimates/lem-sc-generic-vanishing-acyclic.json: statement/stmt_deps: cite def-pc-integral-scheme for integral and def-weil-pbc-etale-site for the etale covering. 2026-10-10 14:40-14:43 UTC.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "WeilConjectures.AlgebraicGeometry.Curve.CohomologicalDimension",
+  "declaration": "AlgebraicGeometry.IsCurve.isIso_functorH_map_unit_fromSpecFunctionField",
+  "branch": "slopmaster2",
+  "line": 311,
+  "declarations": [
+   "AlgebraicGeometry.IsCurve.isIso_functorH_map_unit_fromSpecFunctionField"
+  ],
+  "sorry_free": false,
+  "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state rests_on_sorry)"
+ }
 }

@@ -1,214 +1,220 @@
 {
-  "id": "lem-sc-line-bundle-rational-section",
-  "blueprint": {
-    "is": "lem-sc-line-bundle-rational-section",
-    "from": null,
-    "same_as": []
-  },
-  "kind": "statement",
-  "title": "Rational sections of line bundles",
-  "statement": "Let $k$ be an algebraically closed field, $C$ a smooth connected curve over $k$ [def-sc-curves] (an integral scheme by [lem-sc-smooth-connected-curve-local-rings]) with generic point $\\eta$ and function field $k(C)=\\mathcal O_{C,\\eta}$ [def-sc-function-field], and $\\mathcal L$ an invertible $\\mathcal O_C$-module [def-sc-invertible-module]. Put $\\mathcal L\\otimes_{\\mathcal O_C}k(C):=\\mathcal L_\\eta$, the stalk at $\\eta$ [def-sc-rational-section-divisor]. Then $\\mathcal L\\otimes_{\\mathcal O_C}k(C)\\cong k(C)$ as $k(C)$-vector spaces; in particular $\\mathcal L$ has a nonzero rational section $s\\in\\mathcal L_\\eta\\setminus\\{0\\}$ [def-sc-rational-section-divisor]. For every such $s$, with divisor $D=\\operatorname{div}(s)\\in\\operatorname{Div}(C)$ [def-sc-rational-section-divisor] and $\\mathcal O_C(D)\\subseteq k(C)$ the sub-$\\mathcal O_C$-module of the constant sheaf $k(C)$ of [def-sc-divisor], the map\n\n$$\n\\mathcal O_C(\\operatorname{div}s)\\longrightarrow\\mathcal L,\n\\qquad f\\longmapsto fs,\n$$\n\nwhich sends $f\\in\\mathcal O_C(D)(U)$, $U$ a nonempty open, to the unique $\\sigma\\in\\mathcal L(U)$ whose germ at $\\eta$ is $fs\\in\\mathcal L_\\eta$ (it exists and is unique, see the proof), is an isomorphism of $\\mathcal O_C$-modules.",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-sc-line-bundle-rational-section.md",
-    "place": "node lem-sc-line-bundle-rational-section, order 712"
-  },
-  "stmt_deps": [
-    "def-sc-curves",
-    "lem-sc-smooth-connected-curve-local-rings",
-    "def-sc-function-field",
-    "def-sc-invertible-module",
-    "def-sc-rational-section-divisor",
-    "def-sc-divisor"
-  ],
-  "proof": [
-    {
-      "text": "*$\\mathcal L_\\eta\\cong k(C)$ and $s$ exists.* By [lem-sc-smooth-connected-curve-local-rings] (1) $C$ is an integral scheme and $k(C)=\\mathcal O_{C,\\eta}$ is a field. By [lem-sc-invertible-module-generic-stalk] (1) the stalk $\\mathcal L_\\eta$ is a free $\\mathcal O_{C,\\eta}=k(C)$-module of rank one, i.e. $\\mathcal L\\otimes_{\\mathcal O_C}k(C)=\\mathcal L_\\eta\\cong k(C)$ (send a basis vector to $1$). Hence $\\mathcal L_\\eta\\neq0$, and any nonzero $s\\in\\mathcal L_\\eta$ is a nonzero rational section in the sense of [def-sc-rational-section-divisor]; $s$ is then a $k(C)$-basis of $\\mathcal L_\\eta$.",
-      "uses": [
-        "lem-sc-smooth-connected-curve-local-rings",
-        "lem-sc-invertible-module-generic-stalk",
-        "def-sc-rational-section-divisor"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/divisors.tex",
-        "place": "Tag 02OZ (divisors-lemma-regular-meromorphic-section-exists), proof of case (1): '$\\dim_{\\kappa(\\eta)}\\mathcal L_\\eta=1$ we can pick a nonzero element $s\\in\\mathcal L_\\eta$'"
-      }
-    },
-    {
-      "text": "*Local criterion at a closed point.* Fix $s\\neq0$ in $\\mathcal L_\\eta$ and write $D=\\operatorname{div}(s)=\\sum_Pn_P[P]$ [def-sc-rational-section-divisor]: for each closed point $P$ choose a generator $e_P$ of $\\mathcal L_P$ and $g_P\\in k(C)^*$ with $s=g_P\\lambda_P(e_P)$, so $n_P=v_P(g_P)$ (independent of $e_P$ by [lem-sc-rational-section-order] (1), and $D\\in\\operatorname{Div}(C)$ by (2) of that lemma). Claim: for $f\\in k(C)$, $fs\\in\\lambda_P(\\mathcal L_P)$ if and only if $f=0$ or $v_P(f)+n_P\\ge0$. Indeed $fs=(fg_P)\\lambda_P(e_P)$, and by [lem-sc-invertible-module-generic-stalk] (2) $\\lambda_P(\\mathcal L_P)=\\mathcal O_{C,P}\\cdot\\lambda_P(e_P)$ with $\\lambda_P(e_P)$ a $k(C)$-basis of $\\mathcal L_\\eta$; so $fs\\in\\lambda_P(\\mathcal L_P)$ iff $fg_P\\in\\mathcal O_{C,P}$. As $\\mathcal O_{C,P}\\subseteq k(C)$ is a discrete valuation ring with valuation $v_P$ [lem-sc-smooth-connected-curve-local-rings] (3), for $f\\neq0$ this holds iff $v_P(fg_P)=v_P(f)+n_P\\ge0$, and it holds for $f=0$.",
-      "uses": [
-        "def-sc-rational-section-divisor",
-        "lem-sc-rational-section-order",
-        "lem-sc-invertible-module-generic-stalk",
-        "lem-sc-smooth-connected-curve-local-rings"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/divisors.tex",
-        "place": "proof of Tag 0BE8 (divisors-lemma-normal-c1-injective): working locally with $\\mathcal L$ trivial, 'Since $A_{\\mathfrak p}$ is a discrete valuation ring ... the condition signifies that $t\\in A_{\\mathfrak p}^*$'; here with the generator $e_P$ in place of a trivialization"
-      }
-    },
-    {
-      "text": "*The sections of $\\mathcal O_C(D)$ are the $f$ with $fs\\in\\mathcal L$.* Let $U\\subseteq C$ be a nonempty open and $f\\in k(C)$. Every point of $U$ other than $\\eta$ is a closed point [lem-sc-smooth-connected-curve-local-rings] (2), and $fs\\in\\mathcal L_\\eta=\\lambda_\\eta(\\mathcal L_\\eta)$ always. Hence, by [lem-sc-invertible-module-generic-stalk] (3), $fs$ lies in the image of the injective map $\\lambda_U:\\mathcal L(U)\\to\\mathcal L_\\eta$ iff $fs\\in\\lambda_P(\\mathcal L_P)$ for every closed $P\\in U$, iff (step 2) $f=0$ or $v_P(f)+n_P\\ge0$ for every closed $P\\in U$, iff $f\\in\\mathcal O_C(D)(U)$ by the definition of $\\mathcal O_C(D)$ in [def-sc-divisor]. So $\\varphi_U(f):=\\lambda_U^{-1}(fs)$ is a well-defined map $\\mathcal O_C(D)(U)\\to\\mathcal L(U)$; put $\\varphi_\\emptyset=0$ (both modules are $0$ over $\\emptyset$).",
-      "uses": [
-        "lem-sc-smooth-connected-curve-local-rings",
-        "lem-sc-invertible-module-generic-stalk",
-        "def-sc-divisor"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/divisors.tex",
-        "place": "Tag 01X5 (divisors-lemma-meromorphic-functions-integral-scheme) (2): $\\mathcal K_X(\\mathcal L)$ is the constant sheaf $\\mathcal L_\\eta$, so a meromorphic section $fs$ is a section of $\\mathcal L$ over $U$ iff it is so at every point of $U$"
-      }
-    },
-    {
-      "text": "*$\\varphi$ is a morphism of $\\mathcal O_C$-modules.* $\\varphi_U$ is additive since $\\lambda_U$ is. For opens $\\emptyset\\neq V\\subseteq U$, the restriction $\\mathcal O_C(D)(U)\\to\\mathcal O_C(D)(V)$ is the inclusion of subsets of $k(C)$ [def-sc-divisor], and $(\\sigma|_V)_\\eta=\\sigma_\\eta$ [def-weil-pbc-module-stalk]; so $\\varphi_U(f)|_V$ and $\\varphi_V(f)$ both have germ $fs$ at $\\eta$ and are equal by injectivity of $\\lambda_V$. For $a\\in\\mathcal O_C(U)$, $a$ acts on $\\mathcal O_C(D)(U)$ by multiplication by its germ $a_\\eta\\in k(C)$ [def-sc-divisor], and $(a\\sigma)_\\eta=a_\\eta\\sigma_\\eta$ [def-weil-pbc-module-stalk]; so $\\varphi_U(af)$ and $a\\varphi_U(f)$ both have germ $a_\\eta fs$ and are equal. Restriction to $\\emptyset$ is compatible trivially.",
-      "uses": [
-        "def-sc-divisor",
-        "def-weil-pbc-module-stalk",
-        "lem-sc-invertible-module-generic-stalk"
-      ],
-      "elementary": true,
-      "source": {
-        "document": "literature/stacks-project/divisors.tex",
-        "place": "Tag 01X5 (2): the inclusion $\\mathcal L\\subseteq\\mathcal K_X(\\mathcal L)$ is $\\mathcal O_X$-linear"
-      }
-    },
-    {
-      "text": "*$\\varphi$ is an isomorphism.* It suffices that every $\\varphi_U$ is bijective (the inverse maps then form an inverse morphism of sheaves of $\\mathcal O_C$-modules); for $U=\\emptyset$ this is clear. Let $U\\neq\\emptyset$. Injective: $\\varphi_U(f)=0$ gives $fs=\\lambda_U(0)=0$ in $\\mathcal L_\\eta$, so $f=0$, as $s\\neq0$ in the $k(C)$-vector space $\\mathcal L_\\eta$ (step 1). Surjective: let $\\sigma\\in\\mathcal L(U)$; since $s$ is a $k(C)$-basis of $\\mathcal L_\\eta$ (step 1) there is $f\\in k(C)$ with $\\sigma_\\eta=fs$. Then $fs$ lies in the image of $\\lambda_U$, so $f\\in\\mathcal O_C(D)(U)$ by step 3, and $\\varphi_U(f)=\\sigma$ because both have germ $fs$ at $\\eta$ and $\\lambda_U$ is injective [lem-sc-invertible-module-generic-stalk] (3). Hence $f\\mapsto fs$ is an isomorphism $\\mathcal O_C(\\operatorname{div}s)\\to\\mathcal L$.",
-      "uses": [
-        "lem-sc-invertible-module-generic-stalk"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/divisors.tex",
-        "place": "proof of Tag 0BE8 (divisors-lemma-normal-c1-injective): 't defines a trivialization of $\\mathcal L$'; here for $t=s$ against $\\mathcal O_C(\\operatorname{div}s)$ in place of $\\mathcal O_C$"
-      }
-    }
-  ],
-  "proof_deps": [
+ "id": "lem-sc-line-bundle-rational-section",
+ "blueprint": {
+  "is": "lem-sc-line-bundle-rational-section",
+  "from": null,
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Rational sections of line bundles",
+ "statement": "Let $k$ be an algebraically closed field, $C$ a smooth connected curve over $k$ [def-sc-curves] (an integral scheme by [lem-sc-smooth-connected-curve-local-rings]) with generic point $\\eta$ and function field $k(C)=\\mathcal O_{C,\\eta}$ [def-sc-function-field], and $\\mathcal L$ an invertible $\\mathcal O_C$-module [def-sc-invertible-module]. Put $\\mathcal L\\otimes_{\\mathcal O_C}k(C):=\\mathcal L_\\eta$, the stalk at $\\eta$ [def-sc-rational-section-divisor]. Then $\\mathcal L\\otimes_{\\mathcal O_C}k(C)\\cong k(C)$ as $k(C)$-vector spaces; in particular $\\mathcal L$ has a nonzero rational section $s\\in\\mathcal L_\\eta\\setminus\\{0\\}$ [def-sc-rational-section-divisor]. For every such $s$, with divisor $D=\\operatorname{div}(s)\\in\\operatorname{Div}(C)$ [def-sc-rational-section-divisor] and $\\mathcal O_C(D)\\subseteq k(C)$ the sub-$\\mathcal O_C$-module of the constant sheaf $k(C)$ of [def-sc-divisor], the map\n\n$$\n\\mathcal O_C(\\operatorname{div}s)\\longrightarrow\\mathcal L,\n\\qquad f\\longmapsto fs,\n$$\n\nwhich sends $f\\in\\mathcal O_C(D)(U)$, $U$ a nonempty open, to the unique $\\sigma\\in\\mathcal L(U)$ whose germ at $\\eta$ is $fs\\in\\mathcal L_\\eta$ (it exists and is unique, see the proof), is an isomorphism of $\\mathcal O_C$-modules.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-sc-line-bundle-rational-section.md",
+  "place": "node lem-sc-line-bundle-rational-section, order 712"
+ },
+ "stmt_deps": [
+  "def-sc-curves",
+  "lem-sc-smooth-connected-curve-local-rings",
+  "def-sc-function-field",
+  "def-sc-invertible-module",
+  "def-sc-rational-section-divisor",
+  "def-sc-divisor"
+ ],
+ "proof": [
+  {
+   "text": "*$\\mathcal L_\\eta\\cong k(C)$ and $s$ exists.* By [lem-sc-smooth-connected-curve-local-rings] (1) $C$ is an integral scheme and $k(C)=\\mathcal O_{C,\\eta}$ is a field. By [lem-sc-invertible-module-generic-stalk] (1) the stalk $\\mathcal L_\\eta$ is a free $\\mathcal O_{C,\\eta}=k(C)$-module of rank one, i.e. $\\mathcal L\\otimes_{\\mathcal O_C}k(C)=\\mathcal L_\\eta\\cong k(C)$ (send a basis vector to $1$). Hence $\\mathcal L_\\eta\\neq0$, and any nonzero $s\\in\\mathcal L_\\eta$ is a nonzero rational section in the sense of [def-sc-rational-section-divisor]; $s$ is then a $k(C)$-basis of $\\mathcal L_\\eta$.",
+   "uses": [
     "lem-sc-smooth-connected-curve-local-rings",
     "lem-sc-invertible-module-generic-stalk",
+    "def-sc-rational-section-divisor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 02OZ (divisors-lemma-regular-meromorphic-section-exists), proof of case (1): '$\\dim_{\\kappa(\\eta)}\\mathcal L_\\eta=1$ we can pick a nonzero element $s\\in\\mathcal L_\\eta$'"
+   }
+  },
+  {
+   "text": "*Local criterion at a closed point.* Fix $s\\neq0$ in $\\mathcal L_\\eta$ and write $D=\\operatorname{div}(s)=\\sum_Pn_P[P]$ [def-sc-rational-section-divisor]: for each closed point $P$ choose a generator $e_P$ of $\\mathcal L_P$ and $g_P\\in k(C)^*$ with $s=g_P\\lambda_P(e_P)$, so $n_P=v_P(g_P)$ (independent of $e_P$ by [lem-sc-rational-section-order] (1), and $D\\in\\operatorname{Div}(C)$ by (2) of that lemma). Claim: for $f\\in k(C)$, $fs\\in\\lambda_P(\\mathcal L_P)$ if and only if $f=0$ or $v_P(f)+n_P\\ge0$. Indeed $fs=(fg_P)\\lambda_P(e_P)$, and by [lem-sc-invertible-module-generic-stalk] (2) $\\lambda_P(\\mathcal L_P)=\\mathcal O_{C,P}\\cdot\\lambda_P(e_P)$ with $\\lambda_P(e_P)$ a $k(C)$-basis of $\\mathcal L_\\eta$; so $fs\\in\\lambda_P(\\mathcal L_P)$ iff $fg_P\\in\\mathcal O_{C,P}$. As $\\mathcal O_{C,P}\\subseteq k(C)$ is a discrete valuation ring with valuation $v_P$ [lem-sc-smooth-connected-curve-local-rings] (3), for $f\\neq0$ this holds iff $v_P(fg_P)=v_P(f)+n_P\\ge0$, and it holds for $f=0$.",
+   "uses": [
     "def-sc-rational-section-divisor",
     "lem-sc-rational-section-order",
-    "def-sc-divisor",
-    "def-weil-pbc-module-stalk"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-sc-line-bundle-rational-section.md",
-    "place": "## Proof (one paragraph), written out after Stacks divisors.tex Tags 02OZ (existence of $s$), 01X5 ($\\mathcal L$ inside the constant sheaf $\\mathcal L_\\eta$), 02SF/0BE6 (orders and $\\operatorname{div}_{\\mathcal L}(s)$) and the proof of Tag 0BE8 (a section with divisor $0$ trivializes $\\mathcal L$ on a normal scheme); Stacks has no lemma stating $\\mathcal O_X(\\operatorname{div}_{\\mathcal L}s)\\cong\\mathcal L$ itself"
-  },
-  "mathlib_searches": [],
-  "mathlib_match": null,
-  "status": "split",
-  "merged_into": null,
-  "import_flags": [],
-  "blueprint_kind": "lemma",
-  "blueprint_order": 712,
-  "blueprint_uses": [
-    "def-sc-curves",
-    "def-sc-divisor",
-    "def-sc-function-field"
-  ],
-  "uses_not_cited": [
-    "def-sc-curves"
-  ],
-  "proof_split_by": "paragraphs",
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "rests_on_sorry",
-      "decls": [
-        {
-          "name": "AlgebraicGeometry.Scheme.Modules.exists_tensorObj_dual_toModules_iso",
-          "module": "WeilConjectures.AlgebraicGeometry.Curve.RiemannRoch",
-          "lines": [
-            633,
-            656
-          ],
-          "kind": "theorem",
-          "sorry": false
-        },
-        {
-          "name": "AlgebraicGeometry.Scheme.Modules.exists_isInvertible_zeroLocus_tensorObj_dual",
-          "module": "WeilConjectures.AlgebraicGeometry.Curve.RiemannRoch",
-          "lines": [
-            508,
-            629
-          ],
-          "kind": "theorem",
-          "sorry": false,
-          "partial": "part of the proof of `lem-sc-line-bundle-rational-section`"
-        }
-      ],
-      "missing": [],
-      "open": [
-        {
-          "name": "AlgebraicGeometry.Scheme.Modules.exists_addEquiv_sections_higherDirectImage_H",
-          "module": "WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage",
-          "lines": [
-            307,
-            324
-          ],
-          "kind": "theorem",
-          "nodes": [],
-          "below": false
-        },
-        {
-          "name": "AlgebraicGeometry.Scheme.Modules.finite_sections_higherDirectImage",
-          "module": "WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage",
-          "lines": [
-            617,
-            632
-          ],
-          "kind": "theorem",
-          "nodes": [
-            "lem-pc-coherent-hi"
-          ],
-          "below": false
-        },
-        {
-          "name": "AlgebraicGeometry.Scheme.Modules.subsingleton_H_of_topologicalKrullDim_lt",
-          "module": "WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar",
-          "lines": [
-            64,
-            73
-          ],
-          "kind": "theorem",
-          "nodes": [],
-          "below": false
-        }
-      ]
-    }
-  },
-  "chapter": "sec-picard-framework",
-  "unit": "sk-thm-picard-rr",
-  "split_report": {
-    "date": "2026-10-10",
-    "item": "lem-sc-line-bundle-rational-section",
-    "worker": "stage1",
-    "summary": "Statement corrected and made self-contained: 'integral curve over $k$' replaced by 'smooth connected curve over an algebraically closed field' (def-sc-curves), because for a non-normal integral curve the claim is false (cusp: see the report) and because def-sc-divisor, which defines $\\mathcal O_C(D)$, exists only in that setting; both citers (lem-sc-divisor-class-curve, lem-sc-negative-degree-no-sections) use it only there. $\\mathcal L\\otimes k(C)$ is defined as the stalk $\\mathcal L_\\eta$, and the map $f\\mapsto fs$ is spelled out. The one-paragraph proof became five steps: existence of $s$ (Stacks 02OZ), the local criterion at a closed point (DVR), the description of $\\mathcal O_C(D)(U)$ as $\\{f: fs\\in\\mathcal L(U)\\}$ through the embedding of $\\mathcal L$ in its generic stalk, $\\mathcal O_C$-linearity, bijectivity on every open. New nodes: lem-sc-invertible-module-generic-stalk (Stacks 01X5 (2) for invertible modules), lem-sc-rational-section-order (well-definedness and finiteness of orders, Stacks 02SF context and 02SG), def-sc-rational-section-divisor (rational sections, $\\operatorname{ord}_P$, $\\operatorname{div}_{\\mathcal L}(s)$; Stacks 02SF, 0BE6). The blueprint-uses def-sc-curves is now a statement dependency. The Lean of slopmaster2 (exists_tensorObj_dual_toModules_iso, exists_isInvertible_zeroLocus_tensorObj_dual) proves a different statement ($\\mathcal L\\otimes\\mathcal O(D_2)\\cong\\mathcal O(D_1)$ on smooth proper curves, through $\\chi$ and twists by ample divisors) and was not followed; its open declarations are not used by this proof.",
-    "blueprint": "Step 1 realizes the first sentence of the blueprint proof ('$\\mathcal L_\\eta$ is a free $k(C)$-module of rank one ... a nonzero element $s$ exists'); steps 2-3 realize 'the submodule $\\mathcal O_C(D)\\subseteq k(C)$ of [def-sc-divisor] is exactly the set of $f\\in k(C)$ with $fs\\in\\mathcal L$' (via '$\\mathcal O_C(D)|_U=s^{-1}\\mathcal O_U$ by the definition of $D=\\operatorname{div}(s)$', here stalkwise at each closed point with a generator $e_P$ instead of a trivialization on $U$); steps 4-5 realize '$f\\mapsto fs$ is an isomorphism $\\mathcal O_C(D)\\to\\mathcal L$'. The phrase 'Writing $D=\\operatorname{div}(s)$ for the divisor of zeros and poles of $s$' is def-sc-rational-section-divisor with lem-sc-rational-section-order."
-  },
-  "tool_uses": [
+    "lem-sc-invertible-module-generic-stalk",
     "lem-sc-smooth-connected-curve-local-rings"
-  ],
-  "reviewed": "2026-10-10 L: 5 steps checked (L_eta free of rank one over k(C) so a nonzero rational section exists; local criterion at closed points through generators and orders; sections of O_C(div s) are the f with fs in L; phi a morphism of O_C-modules; bijective on every open). Statement made self-contained (def-sc-rational-section-divisor defines L tensor k(C), rational sections and div). tool_uses lem-sc-smooth-connected-curve-local-rings (sk-def-pic, unsplit, claimed by L). New nodes def-sc-rational-section-divisor, lem-sc-invertible-module-generic-stalk, lem-sc-rational-section-order, unsplit. Worker died at the account limit after writing; files complete.",
-  "lean": {
-    "module": "WeilConjectures.AlgebraicGeometry.Curve.RiemannRoch",
-    "declaration": "AlgebraicGeometry.Scheme.Modules.exists_tensorObj_dual_toModules_iso",
-    "branch": "slopmaster2",
-    "line": 633,
-    "declarations": [
-      "AlgebraicGeometry.Scheme.Modules.exists_tensorObj_dual_toModules_iso",
-      "AlgebraicGeometry.Scheme.Modules.exists_isInvertible_zeroLocus_tensorObj_dual"
-    ],
-    "sorry_free": false,
-    "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state rests_on_sorry)"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "proof of Tag 0BE8 (divisors-lemma-normal-c1-injective): working locally with $\\mathcal L$ trivial, 'Since $A_{\\mathfrak p}$ is a discrete valuation ring ... the condition signifies that $t\\in A_{\\mathfrak p}^*$'; here with the generator $e_P$ in place of a trivialization"
+   }
+  },
+  {
+   "text": "*The sections of $\\mathcal O_C(D)$ are the $f$ with $fs\\in\\mathcal L$.* Let $U\\subseteq C$ be a nonempty open and $f\\in k(C)$. Every point of $U$ other than $\\eta$ is a closed point [lem-sc-smooth-connected-curve-local-rings] (2), and $fs\\in\\mathcal L_\\eta=\\lambda_\\eta(\\mathcal L_\\eta)$ always. Hence, by [lem-sc-invertible-module-generic-stalk] (3), $fs$ lies in the image of the injective map $\\lambda_U:\\mathcal L(U)\\to\\mathcal L_\\eta$ iff $fs\\in\\lambda_P(\\mathcal L_P)$ for every closed $P\\in U$, iff (step 2) $f=0$ or $v_P(f)+n_P\\ge0$ for every closed $P\\in U$, iff $f\\in\\mathcal O_C(D)(U)$ by the definition of $\\mathcal O_C(D)$ in [def-sc-divisor]. So $\\varphi_U(f):=\\lambda_U^{-1}(fs)$ is a well-defined map $\\mathcal O_C(D)(U)\\to\\mathcal L(U)$; put $\\varphi_\\emptyset=0$ (both modules are $0$ over $\\emptyset$).",
+   "uses": [
+    "lem-sc-smooth-connected-curve-local-rings",
+    "lem-sc-invertible-module-generic-stalk",
+    "def-sc-divisor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 01X5 (divisors-lemma-meromorphic-functions-integral-scheme) (2): $\\mathcal K_X(\\mathcal L)$ is the constant sheaf $\\mathcal L_\\eta$, so a meromorphic section $fs$ is a section of $\\mathcal L$ over $U$ iff it is so at every point of $U$"
+   }
+  },
+  {
+   "text": "*$\\varphi$ is a morphism of $\\mathcal O_C$-modules.* $\\varphi_U$ is additive since $\\lambda_U$ is. For opens $\\emptyset\\neq V\\subseteq U$, the restriction $\\mathcal O_C(D)(U)\\to\\mathcal O_C(D)(V)$ is the inclusion of subsets of $k(C)$ [def-sc-divisor], and $(\\sigma|_V)_\\eta=\\sigma_\\eta$ [def-weil-pbc-module-stalk]; so $\\varphi_U(f)|_V$ and $\\varphi_V(f)$ both have germ $fs$ at $\\eta$ and are equal by injectivity of $\\lambda_V$. For $a\\in\\mathcal O_C(U)$, $a$ acts on $\\mathcal O_C(D)(U)$ by multiplication by its germ $a_\\eta\\in k(C)$ [def-sc-divisor], and $(a\\sigma)_\\eta=a_\\eta\\sigma_\\eta$ [def-weil-pbc-module-stalk]; so $\\varphi_U(af)$ and $a\\varphi_U(f)$ both have germ $a_\\eta fs$ and are equal. Restriction to $\\emptyset$ is compatible trivially.",
+   "uses": [
+    "def-sc-divisor",
+    "def-weil-pbc-module-stalk",
+    "lem-sc-invertible-module-generic-stalk"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 01X5 (2): the inclusion $\\mathcal L\\subseteq\\mathcal K_X(\\mathcal L)$ is $\\mathcal O_X$-linear"
+   }
+  },
+  {
+   "text": "*$\\varphi$ is an isomorphism.* It suffices that every $\\varphi_U$ is bijective (the inverse maps then form an inverse morphism of sheaves of $\\mathcal O_C$-modules); for $U=\\emptyset$ this is clear. Let $U\\neq\\emptyset$. Injective: $\\varphi_U(f)=0$ gives $fs=\\lambda_U(0)=0$ in $\\mathcal L_\\eta$, so $f=0$, as $s\\neq0$ in the $k(C)$-vector space $\\mathcal L_\\eta$ (step 1). Surjective: let $\\sigma\\in\\mathcal L(U)$; since $s$ is a $k(C)$-basis of $\\mathcal L_\\eta$ (step 1) there is $f\\in k(C)$ with $\\sigma_\\eta=fs$. Then $fs$ lies in the image of $\\lambda_U$, so $f\\in\\mathcal O_C(D)(U)$ by step 3, and $\\varphi_U(f)=\\sigma$ because both have germ $fs$ at $\\eta$ and $\\lambda_U$ is injective [lem-sc-invertible-module-generic-stalk] (3). Hence $f\\mapsto fs$ is an isomorphism $\\mathcal O_C(\\operatorname{div}s)\\to\\mathcal L$.",
+   "uses": [
+    "lem-sc-invertible-module-generic-stalk"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "proof of Tag 0BE8 (divisors-lemma-normal-c1-injective): 't defines a trivialization of $\\mathcal L$'; here for $t=s$ against $\\mathcal O_C(\\operatorname{div}s)$ in place of $\\mathcal O_C$"
+   }
   }
+ ],
+ "proof_deps": [
+  "lem-sc-smooth-connected-curve-local-rings",
+  "lem-sc-invertible-module-generic-stalk",
+  "def-sc-rational-section-divisor",
+  "lem-sc-rational-section-order",
+  "def-sc-divisor",
+  "def-weil-pbc-module-stalk"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-sc-line-bundle-rational-section.md",
+  "place": "## Proof (one paragraph), written out after Stacks divisors.tex Tags 02OZ (existence of $s$), 01X5 ($\\mathcal L$ inside the constant sheaf $\\mathcal L_\\eta$), 02SF/0BE6 (orders and $\\operatorname{div}_{\\mathcal L}(s)$) and the proof of Tag 0BE8 (a section with divisor $0$ trivializes $\\mathcal L$ on a normal scheme); Stacks has no lemma stating $\\mathcal O_X(\\operatorname{div}_{\\mathcal L}s)\\cong\\mathcal L$ itself"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 712,
+ "blueprint_uses": [
+  "def-sc-curves",
+  "def-sc-divisor",
+  "def-sc-function-field"
+ ],
+ "uses_not_cited": [
+  "def-sc-curves"
+ ],
+ "proof_split_by": "paragraphs",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.Scheme.Modules.exists_tensorObj_dual_toModules_iso",
+    "AlgebraicGeometry.Scheme.Modules.exists_isInvertible_zeroLocus_tensorObj_dual"
+   ]
+  },
+  "slopmaster2": {
+   "state": "rests_on_sorry",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.Scheme.Modules.exists_tensorObj_dual_toModules_iso",
+     "module": "WeilConjectures.AlgebraicGeometry.Curve.RiemannRoch",
+     "lines": [
+      564,
+      587
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.Scheme.Modules.exists_isInvertible_zeroLocus_tensorObj_dual",
+     "module": "WeilConjectures.AlgebraicGeometry.Curve.RiemannRoch",
+     "lines": [
+      439,
+      560
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": [
+    {
+     "name": "AlgebraicGeometry.Scheme.Modules.exists_addEquiv_sections_higherDirectImage_H",
+     "module": "WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Sections",
+     "lines": [
+      31,
+      48
+     ],
+     "kind": "theorem",
+     "nodes": [
+      "lem-pc-cohomology-sections-affine-base"
+     ],
+     "below": false
+    },
+    {
+     "name": "AlgebraicGeometry.Scheme.Modules.finite_sections_higherDirectImage",
+     "module": "WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.FiniteFreeComplex",
+     "lines": [
+      137,
+      152
+     ],
+     "kind": "theorem",
+     "nodes": [
+      "lem-pc-coherent-hi"
+     ],
+     "below": false
+    },
+    {
+     "name": "AlgebraicGeometry.Scheme.Modules.subsingleton_H_of_topologicalKrullDim_lt",
+     "module": "WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar",
+     "lines": [
+      64,
+      73
+     ],
+     "kind": "theorem",
+     "nodes": [
+      "lem-sc-noetherian-cohomology-above-dimension"
+     ],
+     "below": false
+    }
+   ]
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-rr",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-sc-line-bundle-rational-section",
+  "worker": "stage1",
+  "summary": "Statement corrected and made self-contained: 'integral curve over $k$' replaced by 'smooth connected curve over an algebraically closed field' (def-sc-curves), because for a non-normal integral curve the claim is false (cusp: see the report) and because def-sc-divisor, which defines $\\mathcal O_C(D)$, exists only in that setting; both citers (lem-sc-divisor-class-curve, lem-sc-negative-degree-no-sections) use it only there. $\\mathcal L\\otimes k(C)$ is defined as the stalk $\\mathcal L_\\eta$, and the map $f\\mapsto fs$ is spelled out. The one-paragraph proof became five steps: existence of $s$ (Stacks 02OZ), the local criterion at a closed point (DVR), the description of $\\mathcal O_C(D)(U)$ as $\\{f: fs\\in\\mathcal L(U)\\}$ through the embedding of $\\mathcal L$ in its generic stalk, $\\mathcal O_C$-linearity, bijectivity on every open. New nodes: lem-sc-invertible-module-generic-stalk (Stacks 01X5 (2) for invertible modules), lem-sc-rational-section-order (well-definedness and finiteness of orders, Stacks 02SF context and 02SG), def-sc-rational-section-divisor (rational sections, $\\operatorname{ord}_P$, $\\operatorname{div}_{\\mathcal L}(s)$; Stacks 02SF, 0BE6). The blueprint-uses def-sc-curves is now a statement dependency. The Lean of slopmaster2 (exists_tensorObj_dual_toModules_iso, exists_isInvertible_zeroLocus_tensorObj_dual) proves a different statement ($\\mathcal L\\otimes\\mathcal O(D_2)\\cong\\mathcal O(D_1)$ on smooth proper curves, through $\\chi$ and twists by ample divisors) and was not followed; its open declarations are not used by this proof.",
+  "blueprint": "Step 1 realizes the first sentence of the blueprint proof ('$\\mathcal L_\\eta$ is a free $k(C)$-module of rank one ... a nonzero element $s$ exists'); steps 2-3 realize 'the submodule $\\mathcal O_C(D)\\subseteq k(C)$ of [def-sc-divisor] is exactly the set of $f\\in k(C)$ with $fs\\in\\mathcal L$' (via '$\\mathcal O_C(D)|_U=s^{-1}\\mathcal O_U$ by the definition of $D=\\operatorname{div}(s)$', here stalkwise at each closed point with a generator $e_P$ instead of a trivialization on $U$); steps 4-5 realize '$f\\mapsto fs$ is an isomorphism $\\mathcal O_C(D)\\to\\mathcal L$'. The phrase 'Writing $D=\\operatorname{div}(s)$ for the divisor of zeros and poles of $s$' is def-sc-rational-section-divisor with lem-sc-rational-section-order."
+ },
+ "tool_uses": [
+  "lem-sc-smooth-connected-curve-local-rings"
+ ],
+ "reviewed": "2026-10-10 L: 5 steps checked (L_eta free of rank one over k(C) so a nonzero rational section exists; local criterion at closed points through generators and orders; sections of O_C(div s) are the f with fs in L; phi a morphism of O_C-modules; bijective on every open). Statement made self-contained (def-sc-rational-section-divisor defines L tensor k(C), rational sections and div). tool_uses lem-sc-smooth-connected-curve-local-rings (sk-def-pic, unsplit, claimed by L). New nodes def-sc-rational-section-divisor, lem-sc-invertible-module-generic-stalk, lem-sc-rational-section-order, unsplit. Worker died at the account limit after writing; files complete.",
+ "lean": {
+  "module": "WeilConjectures.AlgebraicGeometry.Curve.RiemannRoch",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_tensorObj_dual_toModules_iso",
+  "branch": "slopmaster2",
+  "line": 633,
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.exists_tensorObj_dual_toModules_iso",
+   "AlgebraicGeometry.Scheme.Modules.exists_isInvertible_zeroLocus_tensorObj_dual"
+  ],
+  "sorry_free": false,
+  "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state rests_on_sorry)"
+ }
 }

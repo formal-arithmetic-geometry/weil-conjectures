@@ -1,120 +1,132 @@
 {
-  "id": "def-pc-compact-object",
-  "blueprint": {
-    "is": null,
-    "from": {
-      "node": "lem-sc-finite-duality",
-      "place": "the compact-generator hypothesis in the Brown representability input",
-      "via": [
-        "lem-pc-brown-cohomological-representability"
-      ]
-    },
-    "same_as": []
+ "id": "def-pc-compact-object",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "the compact-generator hypothesis in the Brown representability input",
+   "via": [
+    "lem-pc-brown-cohomological-representability"
+   ]
   },
-  "kind": "definition",
-  "title": "Compact object in a triangulated category",
-  "statement": "Let C be an additive category [def-weil-additive-category] with arbitrary coproducts. An object K of C is compact if, for every set I and family (E_i)_{i in I}, the canonical map \\bigoplus_{i in I} Hom_C(K,E_i) \\to Hom_C(K,\\bigoplus_{i in I} E_i) is bijective.",
-  "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 07LS, Definition definition-compact-object"
+  "same_as": []
+ },
+ "kind": "definition",
+ "title": "Compact object in a triangulated category",
+ "statement": "Let C be an additive category [def-weil-additive-category] with arbitrary coproducts. An object K of C is compact if, for every set I and family (E_i)_{i in I}, the canonical map \\bigoplus_{i in I} Hom_C(K,E_i) \\to Hom_C(K,\\bigoplus_{i in I} E_i) is bijective.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 07LS, Definition definition-compact-object"
+ },
+ "stmt_deps": [
+  "def-weil-additive-category"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "compact object in an additive category with coproducts Hom from object preserves arbitrary direct sums",
+   "results": "Eight hits on finite coproducts and preadditive categories, none defining compact objects by Hom preserving arbitrary direct sums.",
+   "date": "2026-10-11",
+   "verdict": "no match"
   },
-  "stmt_deps": [
-    "def-weil-additive-category"
-  ],
-  "proof": [],
-  "proof_deps": [],
-  "proof_origin": null,
-  "mathlib_searches": [
-    {
-      "tool": "leanfinder",
-      "query": "compact object in an additive category with coproducts Hom from object preserves arbitrary direct sums",
-      "results": "Eight hits on finite coproducts and preadditive categories, none defining compact objects by Hom preserving arbitrary direct sums.",
-      "date": "2026-10-11",
-      "verdict": "no match"
-    },
-    {
-      "tool": "loogle",
-      "query": "CategoryTheory.Compact, CategoryTheory.IsCompact, PreservesColimit",
-      "results": "No hits; unknown identifier CategoryTheory.Compact.",
-      "date": "2026-10-11",
-      "verdict": "no match"
-    },
-    {
-      "tool": "grep",
-      "query": "CompactObject|IsCompactObject|CompactlyGenerated|Compact.*(Object|Coproduct|Sum)|Preserves.*(Coproduct|Sum) CategoryTheory",
-      "results": "Twenty-five hits concern preservation of finite coproducts and unrelated properties; none define compact objects.",
-      "date": "2026-10-11",
-      "verdict": "no match"
-    },
-    {
-      "tool": "leansearch",
-      "query": "compact object category Hom commutes with arbitrary coproducts",
-      "results": "Service unavailable: Internal Server Error.",
-      "date": "2026-10-11",
-      "verdict": "unavailable"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "Hom functor preserves small coproducts compact object category",
-      "results": "Eight hits include IsFinitelyPresentable, which is defined using filtered colimits, and finite-coproduct results; none match.",
-      "date": "2026-10-11",
-      "verdict": "no match"
-    },
-    {
-      "tool": "loogle",
-      "query": "Compact",
-      "results": "No hits; unknown identifier Compact.",
-      "date": "2026-10-11",
-      "verdict": "no match"
-    },
-    {
-      "tool": "grep",
-      "query": "compact object|compact objects|compactly generated|CompactObject|IsCompact CategoryTheory",
-      "results": "One unrelated topology hit in CategoryTheory/Galois/IsFundamentalgroup.lean:188.",
-      "date": "2026-10-11",
-      "verdict": "no match"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "created": {
-    "item": "lem-pc-brown-cohomological-representability",
-    "by": "worker",
-    "date": "2026-10-10"
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Compact, CategoryTheory.IsCompact, PreservesColimit",
+   "results": "No hits; unknown identifier CategoryTheory.Compact.",
+   "date": "2026-10-11",
+   "verdict": "no match"
   },
-  "chapter": "sec-picard-framework",
-  "unit": "sk-thm-picard-duality",
-  "split_report": {
-    "date": "2026-10-11",
-    "item": "def-pc-compact-object",
-    "worker": "stage1",
-    "summary": "Checked the definition against Stacks Tag 07LS. Compactness requires only an additive category with arbitrary coproducts, so the statement now cites the existing additive-category definition instead of imposing a triangulated-category hypothesis. No further notion needs a new node.",
-    "blueprint": "The compact-generator hypothesis in the Brown representability input to lem-sc-finite-duality."
+  {
+   "tool": "grep",
+   "query": "CompactObject|IsCompactObject|CompactlyGenerated|Compact.*(Object|Coproduct|Sum)|Preserves.*(Coproduct|Sum) CategoryTheory",
+   "results": "Twenty-five hits concern preservation of finite coproducts and unrelated properties; none define compact objects.",
+   "date": "2026-10-11",
+   "verdict": "no match"
   },
-  "reviewed": {
-    "date": "2026-10-10",
-    "by": "L",
-    "reviewer": "R-dco1906",
-    "group": "H1",
-    "result": "pass",
-    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-dco1906 (reviewer sub-agent of L); spot-checked: Statement matches Stacks Tag 07LS hypothesis by hypothesis: additive category with arbitrary coproducts stated explicitly, any set I (so arbitrary, not countable, coproducts; consistent with def-pc-compactly-generated and the needs of lem-pc-compact-hom-hocolim). stmt_deps def-weil-additive-category (mathlib, cites only preadditive): no cycle. Mathlib grep 'compact' in CategoryTheory/Limits and Triangulated: no hits; no IsCompact for categories. FIX more, RETURN less: title still said 'triangulated category' after the hypothesis was weakened; retitled 'Compact object in an additive category with arbitrary direct sums' (missed by the second reading).; 1 file(s) fixed by the reviewer"
+  {
+   "tool": "leansearch",
+   "query": "compact object category Hom commutes with arbitrary coproducts",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
   },
-  "lean": {
-    "module": "Sheaf.CategoryTheory.CompactObject",
-    "declaration": "CategoryTheory.IsCompactObject",
-    "file": "lean/Sheaf/CategoryTheory/CompactObject.lean",
-    "statement": "def IsCompactObject {C : Type u} [Category.{v} C] [Preadditive C] [HasCoproducts.{w} C] (K : C) : Prop",
-    "branch": "sheaf-dag",
-    "by": "L",
-    "date": "2026-10-11",
-    "existing": false
+  {
+   "tool": "leanfinder",
+   "query": "Hom functor preserves small coproducts compact object category",
+   "results": "Eight hits include IsFinitelyPresentable, which is defined using filtered colimits, and finite-coproduct results; none match.",
+   "date": "2026-10-11",
+   "verdict": "no match"
   },
-  "reviewed_lean": {
-    "date": "2026-10-11",
-    "by": "L",
-    "reviewer": "L",
-    "group": "L",
-    "result": "pass",
-    "note": "hand-made first stage-2 module (end-to-end test of lean_file.sh, land.sh, build.py at 04:52 UTC); additive with arbitrary coproducts rendered as [Preadditive C] [HasCoproducts.{w} C] (finite biproducts follow from coproducts in a preadditive category); the canonical map is DirectSum.toAddMonoid of the right compositions with the coprojections, bijectivity as in the node; classical decidable equality on the index set"
+  {
+   "tool": "loogle",
+   "query": "Compact",
+   "results": "No hits; unknown identifier Compact.",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "compact object|compact objects|compactly generated|CompactObject|IsCompact CategoryTheory",
+   "results": "One unrelated topology hit in CategoryTheory/Galois/IsFundamentalgroup.lean:188.",
+   "date": "2026-10-11",
+   "verdict": "no match"
   }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "item": "lem-pc-brown-cohomological-representability",
+  "by": "worker",
+  "date": "2026-10-10"
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "def-pc-compact-object",
+  "worker": "stage1",
+  "summary": "Checked the definition against Stacks Tag 07LS. Compactness requires only an additive category with arbitrary coproducts, so the statement now cites the existing additive-category definition instead of imposing a triangulated-category hypothesis. No further notion needs a new node.",
+  "blueprint": "The compact-generator hypothesis in the Brown representability input to lem-sc-finite-duality."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-dco1906",
+  "group": "H1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-dco1906 (reviewer sub-agent of L); spot-checked: Statement matches Stacks Tag 07LS hypothesis by hypothesis: additive category with arbitrary coproducts stated explicitly, any set I (so arbitrary, not countable, coproducts; consistent with def-pc-compactly-generated and the needs of lem-pc-compact-hom-hocolim). stmt_deps def-weil-additive-category (mathlib, cites only preadditive): no cycle. Mathlib grep 'compact' in CategoryTheory/Limits and Triangulated: no hits; no IsCompact for categories. FIX more, RETURN less: title still said 'triangulated category' after the hypothesis was weakened; retitled 'Compact object in an additive category with arbitrary direct sums' (missed by the second reading).; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.CompactObject",
+  "declaration": "CategoryTheory.IsCompactObject",
+  "file": "lean/Sheaf/CategoryTheory/CompactObject.lean",
+  "statement": "def IsCompactObject {C : Type u} [Category.{v} C] [Preadditive C] [HasCoproducts.{w} C] (K : C) : Prop",
+  "branch": "sheaf-dag",
+  "by": "L",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "L",
+  "group": "L",
+  "result": "pass",
+  "note": "hand-made first stage-2 module (end-to-end test of lean_file.sh, land.sh, build.py at 04:52 UTC); additive with arbitrary coproducts rendered as [Preadditive C] [HasCoproducts.{w} C] (finite biproducts follow from coproducts in a preadditive category); the canonical map is DirectSum.toAddMonoid of the right compositions with the coprojections, bijectivity as in the node; classical decidable equality on the index set"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

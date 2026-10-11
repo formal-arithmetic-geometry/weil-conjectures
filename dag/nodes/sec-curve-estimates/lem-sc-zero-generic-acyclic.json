@@ -1,253 +1,255 @@
 {
-  "id": "lem-sc-zero-generic-acyclic",
-  "blueprint": {
-    "is": "lem-sc-zero-generic-acyclic",
-    "from": null,
-    "same_as": []
-  },
-  "kind": "statement",
-  "title": "Acyclicity of a sheaf with zero generic restriction",
-  "statement": "Let $k$ be an algebraically closed field [def-weil-algebraic-closure] and let $C$ be a curve over $k$ [def-sc-curves] (a separated scheme of finite type over $k$ of dimension at most one) which is integral [def-pc-integral-scheme]. Then $C$ is irreducible [lem-pc-integral-scheme-irreducible]; let $\\eta\\in C$ be its unique generic point [def-sc-generic-point], [lem-sc-scheme-sober], and let $j_\\eta:\\operatorname{Spec}\\kappa(\\eta)\\to C$ be the canonical morphism ($\\operatorname{Spec}$ of the residue map $\\mathcal O_{C,\\eta}\\to\\kappa(\\eta)$ followed by the canonical $\\operatorname{Spec}\\mathcal O_{C,\\eta}\\to C$) [def-weil-residue-field], [def-weil-affine-spectrum]. Let $F\\in\\Ab(C_{\\Et})$ be an abelian etale sheaf [def-weil-pbc-abelian-etale-sheaves] which is torsion [def-weil-pbc-torsion-etale-sheaf] and whose restriction to the generic point is zero: $j_\\eta^{-1}F=0$ [def-weil-pbc-inverse-image]. Then $H^q(C_{\\Et},F)=0$ for all $q>0$, in the sense of [def-weil-pbc-etale-cohomology].",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-cd/lem-sc-zero-generic-acyclic.md",
-    "place": "node lem-sc-zero-generic-acyclic, order 1004"
-  },
-  "stmt_deps": [
-    "def-weil-algebraic-closure",
-    "def-sc-curves",
-    "def-pc-integral-scheme",
-    "lem-pc-integral-scheme-irreducible",
-    "def-sc-generic-point",
-    "lem-sc-scheme-sober",
-    "def-weil-residue-field",
-    "def-weil-affine-spectrum",
-    "def-weil-pbc-abelian-etale-sheaves",
-    "def-weil-pbc-torsion-etale-sheaf",
-    "def-weil-pbc-inverse-image",
-    "def-weil-pbc-etale-cohomology"
-  ],
-  "proof": [
-    {
-      "text": "*Every point $x\\neq\\eta$ of $C$ is closed.* $C$ is irreducible [lem-pc-integral-scheme-irreducible], and every irreducible closed subset of $C$ has exactly one generic point [lem-sc-scheme-sober]; in particular $\\overline{\\{\\eta\\}}=C$. The space of $C$ is Kolmogorov: for $x\\neq y$ the closures $\\overline{\\{x\\}}$, $\\overline{\\{y\\}}$ are irreducible closed subsets with generic points $x$ and $y$, so they differ by uniqueness of generic points; if, say, $y\\notin\\overline{\\{x\\}}$ (if $y\\in\\overline{\\{x\\}}$ and $x\\in\\overline{\\{y\\}}$ the closures would be equal), then $C\\setminus\\overline{\\{x\\}}$ is an open set containing $y$ and not $x$. The dimension in [def-sc-curves] is the Krull dimension of the underlying space [def-kun-topological-krull-dimension] (the Lean class `IsCurve` states it as `topologicalKrullDim C ≤ 1`), so $\\dim C\\le1$. Let $x\\neq\\eta$. Then $\\overline{\\{x\\}}\\neq C$, for otherwise $x$ would be a generic point of $C$, hence $x=\\eta$. So $U=C\\setminus\\overline{\\{x\\}}$ is a nonempty open subset with $x\\notin U$, and [lem-sc-dim-one-point-outside-open-closed] shows that $\\{x\\}$ is closed.",
-      "uses": [
-        "lem-pc-integral-scheme-irreducible",
-        "lem-sc-scheme-sober",
-        "def-sc-curves",
-        "def-kun-topological-krull-dimension",
-        "lem-sc-dim-one-point-outside-open-closed"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-cd/lem-sc-zero-generic-acyclic.md",
-        "place": "## Proof, first paragraph: 'the remaining points of its non-vanishing locus are closed points'; argument written by the agent"
-      }
-    },
-    {
-      "text": "*The support of $F$ consists of closed points.* Let $\\bar\\eta:\\operatorname{Spec}\\Omega\\to C$ be any geometric point lying over $\\eta$ [def-weil-geometric-point]. By [lem-weil-pbc-morphism-from-spec-field], $\\bar\\eta=j_\\eta\\circ\\operatorname{Spec}(\\varphi)$ for the field map $\\varphi:\\kappa(\\eta)\\to\\Omega$ it induces, and $\\bar\\xi=\\operatorname{Spec}(\\varphi)$ is a geometric point of $\\operatorname{Spec}\\kappa(\\eta)$. By [lem-weil-pbc-inverse-image-stalk-germ] for $f=j_\\eta$ and $\\bar y=\\bar\\xi$ we get $F_{\\bar\\eta}\\cong(j_\\eta^{-1}F)_{\\bar\\xi}$, and the right side is $0$ because $j_\\eta^{-1}F=0$ and a stalk is a colimit of groups of sections [def-weil-pbc-geometric-stalks]. Hence $\\eta$ is not in the support $\\operatorname{supp}F$ of [def-kun-support] (which applies: $C$ is of finite type over $k$), and by Step 1 every point of $\\operatorname{supp}F$ is a closed point of $C$.",
-      "uses": [
-        "def-weil-geometric-point",
-        "lem-weil-pbc-morphism-from-spec-field",
-        "lem-weil-pbc-inverse-image-stalk-germ",
-        "def-weil-pbc-geometric-stalks",
-        "def-kun-support"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/etale-cohomology.tex",
-        "place": "Lemma 0F0M (lemma-zero-in-generic-point): the hypothesis is the vanishing of the stalk $\\mathcal F_{\\bar\\eta}$; the passage from $j_\\eta^{-1}F=0$ to it is written by the agent"
-      }
-    },
-    {
-      "text": "*Approximation by sheaves supported at finitely many closed points.* The field $k$ is separably closed [def-kun-separably-closed]: if $L/k$ is a finite separable extension and $a\\in L$, the minimal polynomial of $a$ over $k$ is irreducible and has a root in $k$ because $k$ is algebraically closed [def-weil-algebraic-closure], so it has degree $1$ and $a\\in k$; thus $L=k$. As $C$ is of finite type over $k$ and $\\operatorname{supp}F$ is contained in the set of closed points (Step 2), [lem-kun-cp-approximation] (with $K=k$, $X=C$) writes $F=\\varinjlim_{G\\in I}G$ as the filtered colimit in $\\Ab(C_{\\Et})$ of the set $I$ of its finitely generated subsheaves, ordered by inclusion, with the inclusions as colimit maps; and the support of each $G\\in I$ is a finite set $Z_G$ of closed points of $C$.",
-      "uses": [
-        "def-kun-separably-closed",
-        "def-weil-algebraic-closure",
-        "lem-kun-cp-approximation"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/etale-cohomology.tex",
-        "place": "Lemma 0F1F (lemma-supported-in-closed-points), proof, first sentence: 'By Lemma 0F0N we can write F as a filtered colimit of constructible sheaves F_i ... whose supports Z_i are finite sets of closed points'"
-      }
-    },
-    {
-      "text": "*Each $G\\in I$ is acyclic.* The finite set $Z=Z_G$ of closed points [def-weil-closed-points] is closed, so $U=C\\setminus Z$ is an open subscheme with inclusion $j:U\\to C$. For a geometric point $\\bar u$ of $U$, [lem-weil-pbc-inverse-image-stalk-germ] gives $(j^{-1}G)_{\\bar u}\\cong G_{j\\circ\\bar u}$, and $j\\circ\\bar u$ lies over a point of $U$, which is not in $Z=\\operatorname{supp}G$, so this stalk is $0$ [def-kun-support]. Hence the map $0\\to j^{-1}G$ is an isomorphism on every geometric stalk, so it is an isomorphism [lemma-weil-pbc-geometric-stalk-conservative]: $j^{-1}G=0$. Every $z\\in Z$ is a closed point of the finite type $k$-scheme $C$ with $k$ separably closed (Step 3), so its residue field $\\kappa(z)$ is separably closed by [lem-kun-closed-point-field] (b). Thus $C\\setminus U=Z$ is a finite set of closed points with separably closed residue fields and $j^{-1}G=0$, and [lem-sc-finite-support-acyclic] gives $H^q(C_{\\Et},G)=0$ for all $q\\ge1$.",
-      "uses": [
-        "def-weil-closed-points",
-        "lem-weil-pbc-inverse-image-stalk-germ",
-        "def-kun-support",
-        "lemma-weil-pbc-geometric-stalk-conservative",
-        "lem-kun-closed-point-field",
-        "lem-sc-finite-support-acyclic"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/etale-cohomology.tex",
-        "place": "Lemma 0F1F (lemma-supported-in-closed-points), proof: 'such a sheaf is of the form (Z_i -> X)_*G_i ... Z_i is a finite disjoint union of spectra of separably closed fields ... H^q(Z_i,G_i) is zero for q>0' (packaged in lem-sc-finite-support-acyclic, as in the Lean proof of IsCurve.subsingleton_H_of_genericVanishing, which applies Etale.subsingleton_H_of_isZero_upperStar)"
-      }
-    },
-    {
-      "text": "*Each $G\\in I$ is torsion.* Since $F$ is torsion, every geometric stalk $F_{\\bar x}$ is a torsion group, by [lem-weil-pbc-torsion-sheaf-characterizations] ((1) implies (3)). The inclusion $G\\to F$ is a monomorphism and the stalk functor is exact [prop-weil-pbc-geometric-stalks-exact], so $G_{\\bar x}\\to F_{\\bar x}$ is injective and $G_{\\bar x}$ is torsion for every geometric point $\\bar x$; by the same lemma ((3) implies (1)) $G$ is torsion. So $(C,G)$ for $G\\in I$, and $(C,F)$, are curve coefficient pairs [def-weil-pbc-curve-setting].",
-      "uses": [
-        "lem-weil-pbc-torsion-sheaf-characterizations",
-        "prop-weil-pbc-geometric-stalks-exact",
-        "def-weil-pbc-curve-setting"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-cd/lem-sc-zero-generic-acyclic.md",
-        "place": "## Proof (the torsion hypothesis of the statement; needed only to apply the curve version of the colimit lemma); written by the agent"
-      }
-    },
-    {
-      "text": "*Passage to the colimit.* The poset $I$ (Step 3) is a filtered small category, $G\\mapsto G$ with the inclusions is a diagram of torsion abelian sheaves (Step 5), and $(F,(G\\hookrightarrow F)_{G\\in I})$ is its colimit in $\\Ab(C_{\\Et})$ [def-weil-pbc-category-colimit]. By clause 1 of [lemma-weil-pbc-curve-filtered-cohomology] the canonical map $\\varinjlim_{G\\in I}H^q(C_{\\Et},G)\\to H^q(C_{\\Et},F)$ is bijective for every $q\\ge0$. For $q>0$ every term $H^q(C_{\\Et},G)$ vanishes by Step 4, so the colimit is $0$ and $H^q(C_{\\Et},F)=0$.",
-      "uses": [
-        "def-weil-pbc-category-colimit",
-        "lemma-weil-pbc-curve-filtered-cohomology"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/etale-cohomology.tex",
-        "place": "Lemma 0F1F (lemma-supported-in-closed-points), proof: 'By Theorem 09YQ (theorem-colimit) we see that H^q(X,F)=0 for q>0'"
-      }
-    }
-  ],
-  "proof_deps": [
+ "id": "lem-sc-zero-generic-acyclic",
+ "blueprint": {
+  "is": "lem-sc-zero-generic-acyclic",
+  "from": null,
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Acyclicity of a sheaf with zero generic restriction",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-algebraic-closure] and let $C$ be a curve over $k$ [def-sc-curves] (a separated scheme of finite type over $k$ of dimension at most one) which is integral [def-pc-integral-scheme]. Then $C$ is irreducible [lem-pc-integral-scheme-irreducible]; let $\\eta\\in C$ be its unique generic point [def-sc-generic-point], [lem-sc-scheme-sober], and let $j_\\eta:\\operatorname{Spec}\\kappa(\\eta)\\to C$ be the canonical morphism ($\\operatorname{Spec}$ of the residue map $\\mathcal O_{C,\\eta}\\to\\kappa(\\eta)$ followed by the canonical $\\operatorname{Spec}\\mathcal O_{C,\\eta}\\to C$) [def-weil-residue-field], [def-weil-affine-spectrum]. Let $F\\in\\Ab(C_{\\Et})$ be an abelian etale sheaf [def-weil-pbc-abelian-etale-sheaves] which is torsion [def-weil-pbc-torsion-etale-sheaf] and whose restriction to the generic point is zero: $j_\\eta^{-1}F=0$ [def-weil-pbc-inverse-image]. Then $H^q(C_{\\Et},F)=0$ for all $q>0$, in the sense of [def-weil-pbc-etale-cohomology].",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-cd/lem-sc-zero-generic-acyclic.md",
+  "place": "node lem-sc-zero-generic-acyclic, order 1004"
+ },
+ "stmt_deps": [
+  "def-weil-algebraic-closure",
+  "def-sc-curves",
+  "def-pc-integral-scheme",
+  "lem-pc-integral-scheme-irreducible",
+  "def-sc-generic-point",
+  "lem-sc-scheme-sober",
+  "def-weil-residue-field",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-torsion-etale-sheaf",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-etale-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "*Every point $x\\neq\\eta$ of $C$ is closed.* $C$ is irreducible [lem-pc-integral-scheme-irreducible], and every irreducible closed subset of $C$ has exactly one generic point [lem-sc-scheme-sober]; in particular $\\overline{\\{\\eta\\}}=C$. The space of $C$ is Kolmogorov: for $x\\neq y$ the closures $\\overline{\\{x\\}}$, $\\overline{\\{y\\}}$ are irreducible closed subsets with generic points $x$ and $y$, so they differ by uniqueness of generic points; if, say, $y\\notin\\overline{\\{x\\}}$ (if $y\\in\\overline{\\{x\\}}$ and $x\\in\\overline{\\{y\\}}$ the closures would be equal), then $C\\setminus\\overline{\\{x\\}}$ is an open set containing $y$ and not $x$. The dimension in [def-sc-curves] is the Krull dimension of the underlying space [def-kun-topological-krull-dimension] (the Lean class `IsCurve` states it as `topologicalKrullDim C ≤ 1`), so $\\dim C\\le1$. Let $x\\neq\\eta$. Then $\\overline{\\{x\\}}\\neq C$, for otherwise $x$ would be a generic point of $C$, hence $x=\\eta$. So $U=C\\setminus\\overline{\\{x\\}}$ is a nonempty open subset with $x\\notin U$, and [lem-sc-dim-one-point-outside-open-closed] shows that $\\{x\\}$ is closed.",
+   "uses": [
     "lem-pc-integral-scheme-irreducible",
     "lem-sc-scheme-sober",
     "def-sc-curves",
     "def-kun-topological-krull-dimension",
-    "lem-sc-dim-one-point-outside-open-closed",
+    "lem-sc-dim-one-point-outside-open-closed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-cd/lem-sc-zero-generic-acyclic.md",
+    "place": "## Proof, first paragraph: 'the remaining points of its non-vanishing locus are closed points'; argument written by the agent"
+   }
+  },
+  {
+   "text": "*The support of $F$ consists of closed points.* Let $\\bar\\eta:\\operatorname{Spec}\\Omega\\to C$ be any geometric point lying over $\\eta$ [def-weil-geometric-point]. By [lem-weil-pbc-morphism-from-spec-field], $\\bar\\eta=j_\\eta\\circ\\operatorname{Spec}(\\varphi)$ for the field map $\\varphi:\\kappa(\\eta)\\to\\Omega$ it induces, and $\\bar\\xi=\\operatorname{Spec}(\\varphi)$ is a geometric point of $\\operatorname{Spec}\\kappa(\\eta)$. By [lem-weil-pbc-inverse-image-stalk-germ] for $f=j_\\eta$ and $\\bar y=\\bar\\xi$ we get $F_{\\bar\\eta}\\cong(j_\\eta^{-1}F)_{\\bar\\xi}$, and the right side is $0$ because $j_\\eta^{-1}F=0$ and a stalk is a colimit of groups of sections [def-weil-pbc-geometric-stalks]. Hence $\\eta$ is not in the support $\\operatorname{supp}F$ of [def-kun-support] (which applies: $C$ is of finite type over $k$), and by Step 1 every point of $\\operatorname{supp}F$ is a closed point of $C$.",
+   "uses": [
     "def-weil-geometric-point",
     "lem-weil-pbc-morphism-from-spec-field",
     "lem-weil-pbc-inverse-image-stalk-germ",
     "def-weil-pbc-geometric-stalks",
-    "def-kun-support",
+    "def-kun-support"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma 0F0M (lemma-zero-in-generic-point): the hypothesis is the vanishing of the stalk $\\mathcal F_{\\bar\\eta}$; the passage from $j_\\eta^{-1}F=0$ to it is written by the agent"
+   }
+  },
+  {
+   "text": "*Approximation by sheaves supported at finitely many closed points.* The field $k$ is separably closed [def-kun-separably-closed]: if $L/k$ is a finite separable extension and $a\\in L$, the minimal polynomial of $a$ over $k$ is irreducible and has a root in $k$ because $k$ is algebraically closed [def-weil-algebraic-closure], so it has degree $1$ and $a\\in k$; thus $L=k$. As $C$ is of finite type over $k$ and $\\operatorname{supp}F$ is contained in the set of closed points (Step 2), [lem-kun-cp-approximation] (with $K=k$, $X=C$) writes $F=\\varinjlim_{G\\in I}G$ as the filtered colimit in $\\Ab(C_{\\Et})$ of the set $I$ of its finitely generated subsheaves, ordered by inclusion, with the inclusions as colimit maps; and the support of each $G\\in I$ is a finite set $Z_G$ of closed points of $C$.",
+   "uses": [
     "def-kun-separably-closed",
     "def-weil-algebraic-closure",
-    "lem-kun-cp-approximation",
+    "lem-kun-cp-approximation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma 0F1F (lemma-supported-in-closed-points), proof, first sentence: 'By Lemma 0F0N we can write F as a filtered colimit of constructible sheaves F_i ... whose supports Z_i are finite sets of closed points'"
+   }
+  },
+  {
+   "text": "*Each $G\\in I$ is acyclic.* The finite set $Z=Z_G$ of closed points [def-weil-closed-points] is closed, so $U=C\\setminus Z$ is an open subscheme with inclusion $j:U\\to C$. For a geometric point $\\bar u$ of $U$, [lem-weil-pbc-inverse-image-stalk-germ] gives $(j^{-1}G)_{\\bar u}\\cong G_{j\\circ\\bar u}$, and $j\\circ\\bar u$ lies over a point of $U$, which is not in $Z=\\operatorname{supp}G$, so this stalk is $0$ [def-kun-support]. Hence the map $0\\to j^{-1}G$ is an isomorphism on every geometric stalk, so it is an isomorphism [lemma-weil-pbc-geometric-stalk-conservative]: $j^{-1}G=0$. Every $z\\in Z$ is a closed point of the finite type $k$-scheme $C$ with $k$ separably closed (Step 3), so its residue field $\\kappa(z)$ is separably closed by [lem-kun-closed-point-field] (b). Thus $C\\setminus U=Z$ is a finite set of closed points with separably closed residue fields and $j^{-1}G=0$, and [lem-sc-finite-support-acyclic] gives $H^q(C_{\\Et},G)=0$ for all $q\\ge1$.",
+   "uses": [
     "def-weil-closed-points",
+    "lem-weil-pbc-inverse-image-stalk-germ",
+    "def-kun-support",
     "lemma-weil-pbc-geometric-stalk-conservative",
     "lem-kun-closed-point-field",
-    "lem-sc-finite-support-acyclic",
+    "lem-sc-finite-support-acyclic"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma 0F1F (lemma-supported-in-closed-points), proof: 'such a sheaf is of the form (Z_i -> X)_*G_i ... Z_i is a finite disjoint union of spectra of separably closed fields ... H^q(Z_i,G_i) is zero for q>0' (packaged in lem-sc-finite-support-acyclic, as in the Lean proof of IsCurve.subsingleton_H_of_genericVanishing, which applies Etale.subsingleton_H_of_isZero_upperStar)"
+   }
+  },
+  {
+   "text": "*Each $G\\in I$ is torsion.* Since $F$ is torsion, every geometric stalk $F_{\\bar x}$ is a torsion group, by [lem-weil-pbc-torsion-sheaf-characterizations] ((1) implies (3)). The inclusion $G\\to F$ is a monomorphism and the stalk functor is exact [prop-weil-pbc-geometric-stalks-exact], so $G_{\\bar x}\\to F_{\\bar x}$ is injective and $G_{\\bar x}$ is torsion for every geometric point $\\bar x$; by the same lemma ((3) implies (1)) $G$ is torsion. So $(C,G)$ for $G\\in I$, and $(C,F)$, are curve coefficient pairs [def-weil-pbc-curve-setting].",
+   "uses": [
     "lem-weil-pbc-torsion-sheaf-characterizations",
     "prop-weil-pbc-geometric-stalks-exact",
-    "def-weil-pbc-curve-setting",
+    "def-weil-pbc-curve-setting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-cd/lem-sc-zero-generic-acyclic.md",
+    "place": "## Proof (the torsion hypothesis of the statement; needed only to apply the curve version of the colimit lemma); written by the agent"
+   }
+  },
+  {
+   "text": "*Passage to the colimit.* The poset $I$ (Step 3) is a filtered small category, $G\\mapsto G$ with the inclusions is a diagram of torsion abelian sheaves (Step 5), and $(F,(G\\hookrightarrow F)_{G\\in I})$ is its colimit in $\\Ab(C_{\\Et})$ [def-weil-pbc-category-colimit]. By clause 1 of [lemma-weil-pbc-curve-filtered-cohomology] the canonical map $\\varinjlim_{G\\in I}H^q(C_{\\Et},G)\\to H^q(C_{\\Et},F)$ is bijective for every $q\\ge0$. For $q>0$ every term $H^q(C_{\\Et},G)$ vanishes by Step 4, so the colimit is $0$ and $H^q(C_{\\Et},F)=0$.",
+   "uses": [
     "def-weil-pbc-category-colimit",
     "lemma-weil-pbc-curve-filtered-cohomology"
-  ],
-  "proof_origin": {
-    "by": "document",
+   ],
+   "elementary": false,
+   "source": {
     "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma 0F1F (tag 0F1F, lemma-supported-in-closed-points), proof (approximation 0F0N, finite support acyclic, colimit theorem 09YQ); the reduction to it (Steps 1, 2: zero generic stalk implies support in closed points on an integral curve) is written by the agent, following the blueprint proof literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-cd/lem-sc-zero-generic-acyclic.md and the Lean proof of AlgebraicGeometry.IsCurve.subsingleton_H_of_genericVanishing"
-  },
-  "mathlib_searches": [],
-  "mathlib_match": null,
-  "status": "split",
-  "merged_into": null,
-  "import_flags": [],
-  "blueprint_kind": "lemma",
-  "blueprint_order": 1004,
-  "blueprint_uses": [
-    "def-sc-curves",
-    "def-weil-pbc-etale-cohomology",
-    "def-weil-pbc-etale-sheaves",
-    "lem-weil-pbc-cohomology-filtered-colimit",
-    "lem-weil-pbc-zero-dimensional-cohomology",
-    "lemma-weil-pbc-finite-direct-image-exact",
-    "prop-weil-pbc-geometric-stalks-exact"
-  ],
-  "uses_not_cited": [
-    "def-sc-curves",
-    "def-weil-pbc-etale-sheaves"
-  ],
-  "proof_split_by": "paragraphs",
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "rests_on_sorry",
-      "decls": [
-        {
-          "name": "AlgebraicGeometry.IsCurve.subsingleton_H_of_genericVanishing",
-          "module": "WeilConjectures.AlgebraicGeometry.Curve.GenericComparison",
-          "lines": [
-            140,
-            232
-          ],
-          "kind": "theorem",
-          "sorry": false
-        }
-      ],
-      "missing": [],
-      "open": [
-        {
-          "name": "AlgebraicGeometry.Scheme.H_map_isColimit_of_isFiltered",
-          "module": "WeilConjectures.AlgebraicGeometry.Curve.Reductions",
-          "lines": [
-            68,
-            86
-          ],
-          "kind": "theorem",
-          "nodes": [
-            "lemma-weil-pbc-curve-filtered-cohomology"
-          ],
-          "below": false
-        }
-      ]
-    }
-  },
-  "chapter": "sec-curve-estimates",
-  "unit": "sk-prop-cd",
-  "split_report": {
-    "date": "2026-10-10",
-    "item": "lem-sc-zero-generic-acyclic",
-    "worker": "stage1",
-    "summary": "Checked the blueprint proof, the Lean IsCurve.subsingleton_H_of_genericVanishing (GenericComparison.lean 140-232; rests only on Scheme.H_map_isColimit_of_isFiltered, node lemma-weil-pbc-curve-filtered-cohomology) and Stacks 0F0M/0F0N/0F1F. The statement was made self-contained (k, integrality, generic point, the canonical morphism j_eta, 'restriction to the generic point is zero' as j_eta^{-1}F=0, torsion abelian sheaf); its meaning is unchanged. The proof now follows Stacks 0F1F: (1) every point other than eta is closed (new node lem-sc-dim-one-point-outside-open-closed, whose Lean IsOpen.isClosed_singleton_of_mem_compl is sorry-free); (2) F has zero stalk at every geometric point over eta, so supp F consists of closed points; (3) F is the filtered colimit of its finitely generated subsheaves, each supported on a finite set of closed points (lem-kun-cp-approximation); (4) each such subsheaf vanishes on the open complement and is acyclic by lem-sc-finite-support-acyclic (Lean closed: Etale.subsingleton_H_of_isZero_upperStar), which replaces the blueprint's finite-direct-image + zero-dimensional-cohomology argument by the unit's own node that packages it, exactly as the Lean proof does; (5) the subsheaves are torsion; (6) the curve colimit lemma lemma-weil-pbc-curve-filtered-cohomology (the node of the Lean open entry) concludes. The blueprint's first paragraph (sections vanish off finitely many closed points; 'F_eta tensor_A L' is not meaningful as written) is replaced by the general approximation lemma; the blueprint's citations lem-weil-pbc-zero-dimensional-cohomology, lemma-weil-pbc-finite-direct-image-exact, lem-weil-pbc-cohomology-filtered-colimit are no longer used directly. The torsion hypothesis is not needed mathematically (Stacks 0F1F and the Lean have none); it is kept since it is in the statement and makes the curve colimit lemma applicable.",
-    "blueprint": "Steps 1-3 realize the first paragraph of the blueprint proof ('We claim F = colim_S F_S ... the section consequently belongs to F_S(V) for some S'): each finitely generated subsheaf G lies in F_S for S = supp G, a finite set of closed points. Step 4 realizes the second paragraph's 'F_S -> i_{S*}i_S^*F_S is an isomorphism ... its cohomology is the cohomology on S ... zero in positive degrees since S is a finite disjoint union of spectra of algebraically closed fields', via lem-sc-finite-support-acyclic. Step 6 realizes 'Finally use [lem-weil-pbc-cohomology-filtered-colimit]' by the curve version lemma-weil-pbc-curve-filtered-cohomology. Step 5 makes the torsion hypothesis of that lemma explicit.",
-    "tool_uses": [
-      {
-        "node": "lem-kun-cp-approximation",
-        "why": "Step 3: a sheaf supported on closed points of a finite type scheme over a separably closed field is the filtered colimit of finitely generated subsheaves with finite support (Stacks 0F0N); the blueprint's first paragraph argues this ad hoc, and no node of sk-prop-cd states it"
-      },
-      {
-        "node": "lem-kun-closed-point-field",
-        "why": "Step 4: residue fields of closed points of a finite type scheme over a separably closed field are separably closed (hypothesis of lem-sc-finite-support-acyclic); no node of sk-prop-cd states it"
-      },
-      {
-        "node": "lem-weil-pbc-inverse-image-stalk-germ",
-        "why": "Steps 2 and 4: (f^{-1}G)_{y} = G_{f(y)} at geometric points (Stacks 03Q1 (3)); generic sheaf fact, no node of sk-prop-cd states it"
-      },
-      {
-        "node": "lemma-weil-pbc-curve-filtered-cohomology",
-        "why": "Step 6: cohomology of a curve commutes with filtered colimits; it is the node of the Lean open entry Scheme.H_map_isColimit_of_isFiltered on which the item's Lean rests, and the blueprint's lem-weil-pbc-cohomology-filtered-colimit (sk-prop-h2) is equally off-unit"
-      },
-      {
-        "node": "lem-weil-pbc-torsion-sheaf-characterizations",
-        "why": "Step 5: torsion is detected on geometric stalks, so subsheaves of a torsion sheaf are torsion; generic fact of sk-def-pbc"
-      }
-    ]
-  },
-  "tool_uses": [
-    "lem-kun-cp-approximation",
-    "lem-kun-closed-point-field",
-    "lem-weil-pbc-inverse-image-stalk-germ",
-    "lemma-weil-pbc-curve-filtered-cohomology",
-    "lem-weil-pbc-torsion-sheaf-characterizations"
-  ],
-  "reviewed": "2026-10-10 L: 6 steps along Stacks 0F1F (the blueprint and Lean route) checked (points other than eta closed, by the new leaf-like node closed in Lean; stalks at geometric points over eta vanish, so the support consists of closed points; F the filtered colimit of its finitely generated subsheaves, each supported on a finite set of closed points (lem-kun-cp-approximation); each such G acyclic by lem-sc-finite-support-acyclic with separably closed residue fields; each G torsion; filtered colimits). tool_uses from the declared list (5). Statement made self-contained. New node lem-sc-dim-one-point-outside-open-closed closed on slopmaster2 (verified). Torsion hypothesis unneeded (Stacks 0F1F), kept. lem-kun-0f1f-vanish is the Stacks generalization.",
-  "lean": {
-    "module": "WeilConjectures.AlgebraicGeometry.Curve.GenericComparison",
-    "declaration": "AlgebraicGeometry.IsCurve.subsingleton_H_of_genericVanishing",
-    "branch": "slopmaster2",
-    "line": 140,
-    "declarations": [
-      "AlgebraicGeometry.IsCurve.subsingleton_H_of_genericVanishing"
-    ],
-    "sorry_free": false,
-    "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state rests_on_sorry)"
+    "place": "Lemma 0F1F (lemma-supported-in-closed-points), proof: 'By Theorem 09YQ (theorem-colimit) we see that H^q(X,F)=0 for q>0'"
+   }
   }
+ ],
+ "proof_deps": [
+  "lem-pc-integral-scheme-irreducible",
+  "lem-sc-scheme-sober",
+  "def-sc-curves",
+  "def-kun-topological-krull-dimension",
+  "lem-sc-dim-one-point-outside-open-closed",
+  "def-weil-geometric-point",
+  "lem-weil-pbc-morphism-from-spec-field",
+  "lem-weil-pbc-inverse-image-stalk-germ",
+  "def-weil-pbc-geometric-stalks",
+  "def-kun-support",
+  "def-kun-separably-closed",
+  "def-weil-algebraic-closure",
+  "lem-kun-cp-approximation",
+  "def-weil-closed-points",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "lem-kun-closed-point-field",
+  "lem-sc-finite-support-acyclic",
+  "lem-weil-pbc-torsion-sheaf-characterizations",
+  "prop-weil-pbc-geometric-stalks-exact",
+  "def-weil-pbc-curve-setting",
+  "def-weil-pbc-category-colimit",
+  "lemma-weil-pbc-curve-filtered-cohomology"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Lemma 0F1F (tag 0F1F, lemma-supported-in-closed-points), proof (approximation 0F0N, finite support acyclic, colimit theorem 09YQ); the reduction to it (Steps 1, 2: zero generic stalk implies support in closed points on an integral curve) is written by the agent, following the blueprint proof literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-cd/lem-sc-zero-generic-acyclic.md and the Lean proof of AlgebraicGeometry.IsCurve.subsingleton_H_of_genericVanishing"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 1004,
+ "blueprint_uses": [
+  "def-sc-curves",
+  "def-weil-pbc-etale-cohomology",
+  "def-weil-pbc-etale-sheaves",
+  "lem-weil-pbc-cohomology-filtered-colimit",
+  "lem-weil-pbc-zero-dimensional-cohomology",
+  "lemma-weil-pbc-finite-direct-image-exact",
+  "prop-weil-pbc-geometric-stalks-exact"
+ ],
+ "uses_not_cited": [
+  "def-sc-curves",
+  "def-weil-pbc-etale-sheaves"
+ ],
+ "proof_split_by": "paragraphs",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.IsCurve.subsingleton_H_of_genericVanishing"
+   ]
+  },
+  "slopmaster2": {
+   "state": "rests_on_sorry",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.IsCurve.subsingleton_H_of_genericVanishing",
+     "module": "WeilConjectures.AlgebraicGeometry.Curve.GenericComparison",
+     "lines": [
+      140,
+      232
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": [
+    {
+     "name": "AlgebraicGeometry.Scheme.H_map_isColimit_of_isFiltered",
+     "module": "WeilConjectures.AlgebraicGeometry.Curve.Reductions",
+     "lines": [
+      68,
+      86
+     ],
+     "kind": "theorem",
+     "nodes": [
+      "lemma-weil-pbc-curve-filtered-cohomology"
+     ],
+     "below": true
+    }
+   ]
+  }
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-cd",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-sc-zero-generic-acyclic",
+  "worker": "stage1",
+  "summary": "Checked the blueprint proof, the Lean IsCurve.subsingleton_H_of_genericVanishing (GenericComparison.lean 140-232; rests only on Scheme.H_map_isColimit_of_isFiltered, node lemma-weil-pbc-curve-filtered-cohomology) and Stacks 0F0M/0F0N/0F1F. The statement was made self-contained (k, integrality, generic point, the canonical morphism j_eta, 'restriction to the generic point is zero' as j_eta^{-1}F=0, torsion abelian sheaf); its meaning is unchanged. The proof now follows Stacks 0F1F: (1) every point other than eta is closed (new node lem-sc-dim-one-point-outside-open-closed, whose Lean IsOpen.isClosed_singleton_of_mem_compl is sorry-free); (2) F has zero stalk at every geometric point over eta, so supp F consists of closed points; (3) F is the filtered colimit of its finitely generated subsheaves, each supported on a finite set of closed points (lem-kun-cp-approximation); (4) each such subsheaf vanishes on the open complement and is acyclic by lem-sc-finite-support-acyclic (Lean closed: Etale.subsingleton_H_of_isZero_upperStar), which replaces the blueprint's finite-direct-image + zero-dimensional-cohomology argument by the unit's own node that packages it, exactly as the Lean proof does; (5) the subsheaves are torsion; (6) the curve colimit lemma lemma-weil-pbc-curve-filtered-cohomology (the node of the Lean open entry) concludes. The blueprint's first paragraph (sections vanish off finitely many closed points; 'F_eta tensor_A L' is not meaningful as written) is replaced by the general approximation lemma; the blueprint's citations lem-weil-pbc-zero-dimensional-cohomology, lemma-weil-pbc-finite-direct-image-exact, lem-weil-pbc-cohomology-filtered-colimit are no longer used directly. The torsion hypothesis is not needed mathematically (Stacks 0F1F and the Lean have none); it is kept since it is in the statement and makes the curve colimit lemma applicable.",
+  "blueprint": "Steps 1-3 realize the first paragraph of the blueprint proof ('We claim F = colim_S F_S ... the section consequently belongs to F_S(V) for some S'): each finitely generated subsheaf G lies in F_S for S = supp G, a finite set of closed points. Step 4 realizes the second paragraph's 'F_S -> i_{S*}i_S^*F_S is an isomorphism ... its cohomology is the cohomology on S ... zero in positive degrees since S is a finite disjoint union of spectra of algebraically closed fields', via lem-sc-finite-support-acyclic. Step 6 realizes 'Finally use [lem-weil-pbc-cohomology-filtered-colimit]' by the curve version lemma-weil-pbc-curve-filtered-cohomology. Step 5 makes the torsion hypothesis of that lemma explicit.",
+  "tool_uses": [
+   {
+    "node": "lem-kun-cp-approximation",
+    "why": "Step 3: a sheaf supported on closed points of a finite type scheme over a separably closed field is the filtered colimit of finitely generated subsheaves with finite support (Stacks 0F0N); the blueprint's first paragraph argues this ad hoc, and no node of sk-prop-cd states it"
+   },
+   {
+    "node": "lem-kun-closed-point-field",
+    "why": "Step 4: residue fields of closed points of a finite type scheme over a separably closed field are separably closed (hypothesis of lem-sc-finite-support-acyclic); no node of sk-prop-cd states it"
+   },
+   {
+    "node": "lem-weil-pbc-inverse-image-stalk-germ",
+    "why": "Steps 2 and 4: (f^{-1}G)_{y} = G_{f(y)} at geometric points (Stacks 03Q1 (3)); generic sheaf fact, no node of sk-prop-cd states it"
+   },
+   {
+    "node": "lemma-weil-pbc-curve-filtered-cohomology",
+    "why": "Step 6: cohomology of a curve commutes with filtered colimits; it is the node of the Lean open entry Scheme.H_map_isColimit_of_isFiltered on which the item's Lean rests, and the blueprint's lem-weil-pbc-cohomology-filtered-colimit (sk-prop-h2) is equally off-unit"
+   },
+   {
+    "node": "lem-weil-pbc-torsion-sheaf-characterizations",
+    "why": "Step 5: torsion is detected on geometric stalks, so subsheaves of a torsion sheaf are torsion; generic fact of sk-def-pbc"
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-kun-cp-approximation",
+  "lem-kun-closed-point-field",
+  "lem-weil-pbc-inverse-image-stalk-germ",
+  "lemma-weil-pbc-curve-filtered-cohomology",
+  "lem-weil-pbc-torsion-sheaf-characterizations"
+ ],
+ "reviewed": "2026-10-10 L: 6 steps along Stacks 0F1F (the blueprint and Lean route) checked (points other than eta closed, by the new leaf-like node closed in Lean; stalks at geometric points over eta vanish, so the support consists of closed points; F the filtered colimit of its finitely generated subsheaves, each supported on a finite set of closed points (lem-kun-cp-approximation); each such G acyclic by lem-sc-finite-support-acyclic with separably closed residue fields; each G torsion; filtered colimits). tool_uses from the declared list (5). Statement made self-contained. New node lem-sc-dim-one-point-outside-open-closed closed on slopmaster2 (verified). Torsion hypothesis unneeded (Stacks 0F1F), kept. lem-kun-0f1f-vanish is the Stacks generalization.",
+ "lean": {
+  "module": "WeilConjectures.AlgebraicGeometry.Curve.GenericComparison",
+  "declaration": "AlgebraicGeometry.IsCurve.subsingleton_H_of_genericVanishing",
+  "branch": "slopmaster2",
+  "line": 140,
+  "declarations": [
+   "AlgebraicGeometry.IsCurve.subsingleton_H_of_genericVanishing"
+  ],
+  "sorry_free": false,
+  "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state rests_on_sorry)"
+ }
 }

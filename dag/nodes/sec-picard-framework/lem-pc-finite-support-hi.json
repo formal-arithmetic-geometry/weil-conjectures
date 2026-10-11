@@ -1,251 +1,253 @@
 {
-  "id": "lem-pc-finite-support-hi",
-  "blueprint": {
-    "is": "lem-pc-finite-support-hi",
-    "from": null,
-    "same_as": []
-  },
-  "kind": "statement",
-  "title": "Finite support of higher direct images",
-  "statement": "Let $f:X\\to S$ be a quasi-compact, quasi-separated morphism of schemes [def-pc-morphism-conventions, def-pc-scheme]. For every quasi-coherent $\\mathcal{O}_X$-module $\\mathcal{F}$ [pqf-def-coherent], (1) each $R^if_*\\mathcal{F}$ is quasi-coherent. If $S$ is quasi-compact, there is an integer $n=n(X,S,f)$ such that (2) $R^pf_*\\mathcal{F}=0$ for every $p\\ge n$ and every quasi-coherent $\\mathcal{F}$, and (3) for every morphism $g:S'\\to S$ of schemes, with $X'=S'\\times_S X$ [def-pc-fibre-product], projections $g':X'\\to X$ and $f':X'\\to S'$, and every quasi-coherent $\\mathcal{O}_{X'}$-module $\\mathcal{F}'$, one has $R^p f'_*\\mathcal{F}'=0$ for every $p\\ge n$.",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-coherence/lem-pc-finite-support-hi.md",
-    "place": "node lem-pc-finite-support-hi, order 642",
-    "external": [
-      {
-        "document": "Stacks Project",
-        "place": "Tag 01XJ"
-      }
-    ]
-  },
-  "stmt_deps": [
-    "def-pc-morphism-conventions",
-    "def-pc-scheme",
-    "pqf-def-coherent",
-    "def-pc-fibre-product"
-  ],
-  "proof": [
-    {
-      "text": "To prove (1), restrict the derived direct image to an affine open $V\\subseteq S$ using [lem-pc-restrict-derived-direct-image-open]. On the affine base $S$, apply [lem-sc-invert-s-cohomology-induction] to the property that every $R^if_*\\mathcal G$ is quasi-coherent for every quasi-coherent $\\mathcal G$ on a quasi-compact open. On an affine open $U$, [lem-pc-affine-morphism-hi] gives the assertion in degree zero and the cited cohomology-presheaf statement together with [lem-pc-affine-vanishing] gives vanishing in positive degrees. For $U\\cup V$ (with $U$ quasi-compact, $V$ affine, $a,b,c,g$ the restrictions of $f$ to $U,V,U\\cap V,U\\cup V$ and $\\mathcal G$ quasi-coherent on $U\\cup V$), apply [lem-sc-mayer-vietoris-open-cover] to the cover of $g^{-1}(T)$ by $a^{-1}(T)$ and $b^{-1}(T)$ for every open $T\\subseteq S$; by its naturality in inclusions of open covers these long exact sequences form a long exact sequence of presheaves of $\\mathcal O_S$-modules $T\\mapsto H^p(g^{-1}(T),\\mathcal G)$, etc. Sheafification is exact [lem-weil-pbc-module-presheaf-sheafification-exact] and by [lem-weil-pbc-higher-direct-image-presheaf] it turns these presheaves into $R^pg_*\\mathcal G$, $R^pa_*(\\mathcal G|_U)\\oplus R^pb_*(\\mathcal G|_V)$, $R^pc_*(\\mathcal G|_{U\\cap V})$, giving the relative Mayer--Vietoris long exact sequence, which expresses each cohomology sheaf as an extension of kernels and cokernels of maps between the corresponding quasi-coherent sheaves; kernels and cokernels are checked on affine opens, and [lem-pc-quasi-coherent-extension] gives quasi-coherence of the extensions. This proves (1) locally on $S$ and hence globally.",
-      "uses": [
-        "lem-pc-restrict-derived-direct-image-open",
-        "lem-sc-invert-s-cohomology-induction",
-        "lem-pc-affine-morphism-hi",
-        "lem-weil-pbc-higher-direct-image-presheaf",
-        "lem-pc-affine-vanishing",
-        "lem-sc-mayer-vietoris-open-cover",
-        "lem-weil-pbc-module-presheaf-sheafification-exact",
-        "lem-pc-quasi-coherent-extension"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/cohomology.tex",
-        "place": "Lemma 30.4.5, Tag 01XJ (1), using Lemma 08DR and Lemma 01EB"
-      }
-    },
-    {
-      "text": "For the uniform bound, when $S$ is affine define $P(U)$ for a quasi-compact open $U\\subseteq X$ to mean: there is an integer $n_U$ such that for every affine $S'\\to S$ and every quasi-coherent module $\\mathcal G$ on $S'\\times_S U$, one has $H^p(S'\\times_S U,\\mathcal G)=0$ for all $p\\ge n_U$. If $U$ is affine, then every $S'\\times_S U$ is affine, so [lem-pc-affine-vanishing] gives $n_U=1$. If $U$ is quasi-compact and $V$ is affine, then $(U\\cup V)'=U'\\cup V'$ and $(U\\cap V)'=U'\\cap V'$; applying [lem-sc-mayer-vietoris-open-cover] to the base-changed cover and the induction bounds gives the gluing property with bound one larger than the maximum. Thus [lem-sc-invert-s-cohomology-induction] gives $P(X)$.",
-      "uses": [
-        "lem-pc-affine-vanishing",
-        "lem-sc-mayer-vietoris-open-cover",
-        "lem-sc-invert-s-cohomology-induction"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/cohomology.tex",
-        "place": "Lemma 30.4.5, Tag 01XJ, finite affine-cover induction"
-      }
-    },
-    {
-      "text": "For a quasi-compact base $S$, choose a finite affine cover $S=\\bigcup_j S_j$ and apply Step 2 to each restricted morphism over $S_j$; let $n$ be the maximum of the finitely many bounds. For any base change $S'\\to S$, cover $S'$ by affine opens contained in the inverse images of the $S_j$. Each such affine open maps to one affine $S_j$, so Step 2 gives vanishing in degrees $p\\ge n$ for every quasi-coherent module on its inverse image. These opens form a basis, and hence the same $n$ works for every $S'\\to S$.",
-      "uses": [
-        "lem-sc-invert-s-cohomology-induction"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/cohomology.tex",
-        "place": "Lemma 30.4.5, Tag 01XJ, quasi-compact-base and arbitrary-base-change conclusion"
-      }
-    },
-    {
-      "text": "Fix a point $y\\in S'$. The affine open neighborhoods $V\\subseteq S'$ of $y$ contained in some $g^{-1}(S_j)$ are cofinal among all open neighborhoods of $y$ (Step 3). For such $V$, $f'^{-1}(V)=V\\times_SX=V\\times_{S_j}f^{-1}(S_j)$, so Step 2 for $f^{-1}(S_j)\\to S_j$ with the affine base change $V\\to S_j$ gives $H^p(f'^{-1}(V),\\mathcal F'|_{f'^{-1}(V)})=0$ for $p\\ge n$. Hence the filtered colimit of these groups over this cofinal system is zero. The stalk isomorphism in [lem-weil-pbc-higher-direct-image-presheaf] identifies this colimit with $(R^pf'_*\\mathcal F')_y$, so every stalk vanishes and therefore $R^pf'_*\\mathcal F'=0$.",
-      "uses": [
-        "lem-weil-pbc-higher-direct-image-presheaf"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/cohomology.tex",
-        "place": "Lemma 30.4.5, Tag 01XJ, final base-change vanishing via Lemma 01E4 stalk description"
-      }
-    }
-  ],
-  "proof_deps": [
+ "id": "lem-pc-finite-support-hi",
+ "blueprint": {
+  "is": "lem-pc-finite-support-hi",
+  "from": null,
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Finite support of higher direct images",
+ "statement": "Let $f:X\\to S$ be a quasi-compact, quasi-separated morphism of schemes [def-pc-morphism-conventions, def-pc-scheme]. For every quasi-coherent $\\mathcal{O}_X$-module $\\mathcal{F}$ [pqf-def-coherent], (1) each $R^if_*\\mathcal{F}$ is quasi-coherent. If $S$ is quasi-compact, there is an integer $n=n(X,S,f)$ such that (2) $R^pf_*\\mathcal{F}=0$ for every $p\\ge n$ and every quasi-coherent $\\mathcal{F}$, and (3) for every morphism $g:S'\\to S$ of schemes, with $X'=S'\\times_S X$ [def-pc-fibre-product], projections $g':X'\\to X$ and $f':X'\\to S'$, and every quasi-coherent $\\mathcal{O}_{X'}$-module $\\mathcal{F}'$, one has $R^p f'_*\\mathcal{F}'=0$ for every $p\\ge n$.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-coherence/lem-pc-finite-support-hi.md",
+  "place": "node lem-pc-finite-support-hi, order 642",
+  "external": [
+   {
+    "document": "Stacks Project",
+    "place": "Tag 01XJ"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-pc-morphism-conventions",
+  "def-pc-scheme",
+  "pqf-def-coherent",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "To prove (1), restrict the derived direct image to an affine open $V\\subseteq S$ using [lem-pc-restrict-derived-direct-image-open]. On the affine base $S$, apply [lem-sc-invert-s-cohomology-induction] to the property that every $R^if_*\\mathcal G$ is quasi-coherent for every quasi-coherent $\\mathcal G$ on a quasi-compact open. On an affine open $U$, [lem-pc-affine-morphism-hi] gives the assertion in degree zero and the cited cohomology-presheaf statement together with [lem-pc-affine-vanishing] gives vanishing in positive degrees. For $U\\cup V$ (with $U$ quasi-compact, $V$ affine, $a,b,c,g$ the restrictions of $f$ to $U,V,U\\cap V,U\\cup V$ and $\\mathcal G$ quasi-coherent on $U\\cup V$), apply [lem-sc-mayer-vietoris-open-cover] to the cover of $g^{-1}(T)$ by $a^{-1}(T)$ and $b^{-1}(T)$ for every open $T\\subseteq S$; by its naturality in inclusions of open covers these long exact sequences form a long exact sequence of presheaves of $\\mathcal O_S$-modules $T\\mapsto H^p(g^{-1}(T),\\mathcal G)$, etc. Sheafification is exact [lem-weil-pbc-module-presheaf-sheafification-exact] and by [lem-weil-pbc-higher-direct-image-presheaf] it turns these presheaves into $R^pg_*\\mathcal G$, $R^pa_*(\\mathcal G|_U)\\oplus R^pb_*(\\mathcal G|_V)$, $R^pc_*(\\mathcal G|_{U\\cap V})$, giving the relative Mayer--Vietoris long exact sequence, which expresses each cohomology sheaf as an extension of kernels and cokernels of maps between the corresponding quasi-coherent sheaves; kernels and cokernels are checked on affine opens, and [lem-pc-quasi-coherent-extension] gives quasi-coherence of the extensions. This proves (1) locally on $S$ and hence globally.",
+   "uses": [
     "lem-pc-restrict-derived-direct-image-open",
     "lem-sc-invert-s-cohomology-induction",
     "lem-pc-affine-morphism-hi",
     "lem-weil-pbc-higher-direct-image-presheaf",
     "lem-pc-affine-vanishing",
     "lem-sc-mayer-vietoris-open-cover",
-    "lem-pc-quasi-coherent-extension",
-    "lem-weil-pbc-module-presheaf-sheafification-exact"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-coherence/lem-pc-finite-support-hi.md",
-    "place": "## Proof"
-  },
-  "mathlib_searches": [
-    {
-      "tool": "leanfinder",
-      "query": "uniform vanishing higher direct images quasi-coherent sheaves qcqs base change",
-      "results": "AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit; AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top; no higher-direct-image theorem",
-      "date": "2026-10-10",
-      "verdict": "no match"
-    },
-    {
-      "tool": "loogle",
-      "query": "higherDirectImage IsZero QuasiCompact QuasiSeparated",
-      "results": "0 hits; unknown identifier higherDirectImage",
-      "date": "2026-10-10",
-      "verdict": "no match"
-    },
-    {
-      "tool": "grep",
-      "query": "higherDirectImage|isQuasicoherent_higherDirectImage",
-      "results": "0 hits",
-      "date": "2026-10-10",
-      "verdict": "no match"
-    },
-    {
-      "tool": "leansearch",
-      "query": "uniform cohomology vanishing bound after arbitrary base change for qcqs morphism",
-      "results": "service unavailable: Internal Server Error",
-      "date": "2026-10-10",
-      "verdict": "unavailable"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "merged_into": null,
-  "import_flags": [
-    "proof_cites_literature",
-    "long_proof_few_deps"
-  ],
-  "blueprint_kind": "lemma",
-  "blueprint_order": 642,
-  "blueprint_uses": [
-    "def-pc-morphism-conventions",
-    "def-pc-scheme",
-    "lem-pc-affine-vanishing",
-    "lem-pc-cech-computes"
-  ],
-  "uses_not_cited": [
-    "def-pc-morphism-conventions",
-    "def-pc-scheme"
-  ],
-  "proof_split_by": "paragraphs",
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "sorry_here",
-      "decls": [
-        {
-          "name": "AlgebraicGeometry.Scheme.Modules.exists_isZero_higherDirectImage_of_isPullback",
-          "module": "WeilConjectures.AlgebraicGeometry.Cohomology.Projective",
-          "lines": [
-            55,
-            73
-          ],
-          "kind": "theorem",
-          "sorry": true
-        }
-      ],
-      "missing": [],
-      "open": []
-    }
-  },
-  "chapter": "sec-picard-framework",
-  "unit": "sk-thm-picard-coherence",
-  "split_report": {
-    "date": "2026-10-11",
-    "item": "lem-pc-finite-support-hi",
-    "worker": "stage1",
-    "summary": "Dropped the clause-shaped child nodes and repaired the proof with explicit base-change-stable induction, Mayer--Vietoris gluing, and the existing cohomology-presheaf statement.",
-    "blueprint": "Realizes the item proof paragraphs: affine-local reduction and clause (1), finite-cover induction for clause (2), and preservation of the bound under base change.",
-    "tool_uses": [
-      {
-        "node": "lem-sc-invert-s-cohomology-induction",
-        "why": "The qcqs finite-affine-cover induction principle supplies the open-union induction used to obtain a finite cohomological bound."
-      },
-      {
-        "node": "lem-pc-restrict-derived-direct-image-open",
-        "why": "Restriction of derived direct image to an open base is needed for affine-locality."
-      },
-      {
-        "node": "lem-pc-affine-morphism-hi",
-        "why": "Affine morphisms provide the degree-zero quasi-coherence and higher vanishing base case."
-      },
-      {
-        "node": "lem-weil-pbc-higher-direct-image-presheaf",
-        "why": "The higher direct image is identified with the cohomology presheaf on affine opens."
-      },
-      {
-        "node": "lem-sc-mayer-vietoris-open-cover",
-        "why": "The relative Mayer--Vietoris long exact sequence supplies the gluing step."
-      },
-      {
-        "node": "lem-pc-quasi-coherent-extension",
-        "why": "Extensions of quasi-coherent sheaves remain quasi-coherent in the gluing step."
-      },
-      {
-        "node": "lem-weil-pbc-module-presheaf-sheafification-exact",
-        "why": "Exactness of sheafification turns the Mayer--Vietoris sequences of presheaves into the relative sequence of higher direct images (added by reviewer R-fsh3127)."
-      },
-      {
-        "node": "lem-pc-affine-vanishing",
-        "why": "Vanishing of higher cohomology of quasi-coherent modules on affine schemes, base case of both inductions (declared by reviewer R-fsh3127)."
-      }
-    ]
-  },
-  "tool_uses": [
-    "lem-sc-invert-s-cohomology-induction",
-    "lem-pc-restrict-derived-direct-image-open",
-    "lem-pc-affine-morphism-hi",
-    "lem-weil-pbc-higher-direct-image-presheaf",
-    "lem-sc-mayer-vietoris-open-cover",
-    "lem-pc-quasi-coherent-extension",
     "lem-weil-pbc-module-presheaf-sheafification-exact",
-    "lem-pc-affine-vanishing",
-    "lem-sc-invert-s-cohomology-induction",
-    "lem-pc-restrict-derived-direct-image-open",
-    "lem-pc-affine-morphism-hi",
-    "lem-weil-pbc-higher-direct-image-presheaf",
-    "lem-sc-mayer-vietoris-open-cover",
-    "lem-pc-quasi-coherent-extension",
-    "lem-weil-pbc-module-presheaf-sheafification-exact",
-    "lem-pc-affine-vanishing"
-  ],
-  "reviewed": {
-    "date": "2026-10-10",
-    "by": "L",
-    "reviewer": "R-fsh3127",
-    "group": "F1",
-    "result": "pass",
-    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-fsh3127 (reviewer sub-agent of L); spot-checked: All 5 points of the 22:56 return repaired: no child nodes (D2/B3 gone), clause (1) proved by 01XJ induction; no ancestor of any cited node reaches the item (transitive walk, 252 nodes); no MV-named node duplicated (G1's lem-pc-rf-single-complex-relative-mayer-vietoris is a base-change statement, not the R^p sequence); Step 2 P(U) quantifies all affine S'->S and all qcoh G on S' x_S U, gluing max+1 via MV; Step 3 finite cover max; tool_uses judged generic. FIX more, RETURN less: (1) C4 Step 1 called the absolute lem-sc-mayer-vietoris-open-cover 'relative': now applied over g^{-1}(T) for all opens T, naturality gives presheaf LES, sheafified by lem-weil-pbc-module-presheaf-sheafification-exact and identified by lem-weil-pbc-higher-direct-image-presheaf (cited, proof_deps, tool_uses); (2) C4/E Step 4 claimed vanishing on every affine V because f'^{-1}V is covered by acyclic affines (non sequitur): restricted to the cofinal system of affine V inside some g^{-1}(S_j), where f'^{-1}V = V x_{S_j} f^{-1}(S_j) and Step 2 applies directly; (3) declared tool_use lem-pc-affine-vanishing (other unit, undeclared).; 1 file(s) fixed by the reviewer"
+    "lem-pc-quasi-coherent-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Lemma 30.4.5, Tag 01XJ (1), using Lemma 08DR and Lemma 01EB"
+   }
   },
-  "lean": {
-    "module": "WeilConjectures.AlgebraicGeometry.Cohomology.Projective",
-    "declaration": "AlgebraicGeometry.Scheme.Modules.exists_isZero_higherDirectImage_of_isPullback",
-    "branch": "slopmaster2",
-    "line": 55,
-    "declarations": [
-      "AlgebraicGeometry.Scheme.Modules.exists_isZero_higherDirectImage_of_isPullback"
-    ],
-    "sorry_free": false,
-    "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state sorry_here)"
+  {
+   "text": "For the uniform bound, when $S$ is affine define $P(U)$ for a quasi-compact open $U\\subseteq X$ to mean: there is an integer $n_U$ such that for every affine $S'\\to S$ and every quasi-coherent module $\\mathcal G$ on $S'\\times_S U$, one has $H^p(S'\\times_S U,\\mathcal G)=0$ for all $p\\ge n_U$. If $U$ is affine, then every $S'\\times_S U$ is affine, so [lem-pc-affine-vanishing] gives $n_U=1$. If $U$ is quasi-compact and $V$ is affine, then $(U\\cup V)'=U'\\cup V'$ and $(U\\cap V)'=U'\\cap V'$; applying [lem-sc-mayer-vietoris-open-cover] to the base-changed cover and the induction bounds gives the gluing property with bound one larger than the maximum. Thus [lem-sc-invert-s-cohomology-induction] gives $P(X)$.",
+   "uses": [
+    "lem-pc-affine-vanishing",
+    "lem-sc-mayer-vietoris-open-cover",
+    "lem-sc-invert-s-cohomology-induction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Lemma 30.4.5, Tag 01XJ, finite affine-cover induction"
+   }
+  },
+  {
+   "text": "For a quasi-compact base $S$, choose a finite affine cover $S=\\bigcup_j S_j$ and apply Step 2 to each restricted morphism over $S_j$; let $n$ be the maximum of the finitely many bounds. For any base change $S'\\to S$, cover $S'$ by affine opens contained in the inverse images of the $S_j$. Each such affine open maps to one affine $S_j$, so Step 2 gives vanishing in degrees $p\\ge n$ for every quasi-coherent module on its inverse image. These opens form a basis, and hence the same $n$ works for every $S'\\to S$.",
+   "uses": [
+    "lem-sc-invert-s-cohomology-induction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Lemma 30.4.5, Tag 01XJ, quasi-compact-base and arbitrary-base-change conclusion"
+   }
+  },
+  {
+   "text": "Fix a point $y\\in S'$. The affine open neighborhoods $V\\subseteq S'$ of $y$ contained in some $g^{-1}(S_j)$ are cofinal among all open neighborhoods of $y$ (Step 3). For such $V$, $f'^{-1}(V)=V\\times_SX=V\\times_{S_j}f^{-1}(S_j)$, so Step 2 for $f^{-1}(S_j)\\to S_j$ with the affine base change $V\\to S_j$ gives $H^p(f'^{-1}(V),\\mathcal F'|_{f'^{-1}(V)})=0$ for $p\\ge n$. Hence the filtered colimit of these groups over this cofinal system is zero. The stalk isomorphism in [lem-weil-pbc-higher-direct-image-presheaf] identifies this colimit with $(R^pf'_*\\mathcal F')_y$, so every stalk vanishes and therefore $R^pf'_*\\mathcal F'=0$.",
+   "uses": [
+    "lem-weil-pbc-higher-direct-image-presheaf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Lemma 30.4.5, Tag 01XJ, final base-change vanishing via Lemma 01E4 stalk description"
+   }
   }
+ ],
+ "proof_deps": [
+  "lem-pc-restrict-derived-direct-image-open",
+  "lem-sc-invert-s-cohomology-induction",
+  "lem-pc-affine-morphism-hi",
+  "lem-weil-pbc-higher-direct-image-presheaf",
+  "lem-pc-affine-vanishing",
+  "lem-sc-mayer-vietoris-open-cover",
+  "lem-pc-quasi-coherent-extension",
+  "lem-weil-pbc-module-presheaf-sheafification-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-coherence/lem-pc-finite-support-hi.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "uniform vanishing higher direct images quasi-coherent sheaves qcqs base change",
+   "results": "AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit; AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top; no higher-direct-image theorem",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "higherDirectImage IsZero QuasiCompact QuasiSeparated",
+   "results": "0 hits; unknown identifier higherDirectImage",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "higherDirectImage|isQuasicoherent_higherDirectImage",
+   "results": "0 hits",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "uniform cohomology vanishing bound after arbitrary base change for qcqs morphism",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-10",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [
+  "proof_cites_literature",
+  "long_proof_few_deps"
+ ],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 642,
+ "blueprint_uses": [
+  "def-pc-morphism-conventions",
+  "def-pc-scheme",
+  "lem-pc-affine-vanishing",
+  "lem-pc-cech-computes"
+ ],
+ "uses_not_cited": [
+  "def-pc-morphism-conventions",
+  "def-pc-scheme"
+ ],
+ "proof_split_by": "paragraphs",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.Scheme.Modules.exists_isZero_higherDirectImage_of_isPullback"
+   ]
+  },
+  "slopmaster2": {
+   "state": "sorry_here",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.Scheme.Modules.exists_isZero_higherDirectImage_of_isPullback",
+     "module": "WeilConjectures.AlgebraicGeometry.Cohomology.Projective",
+     "lines": [
+      55,
+      73
+     ],
+     "kind": "theorem",
+     "sorry": true
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-coherence",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-finite-support-hi",
+  "worker": "stage1",
+  "summary": "Dropped the clause-shaped child nodes and repaired the proof with explicit base-change-stable induction, Mayer--Vietoris gluing, and the existing cohomology-presheaf statement.",
+  "blueprint": "Realizes the item proof paragraphs: affine-local reduction and clause (1), finite-cover induction for clause (2), and preservation of the bound under base change.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-invert-s-cohomology-induction",
+    "why": "The qcqs finite-affine-cover induction principle supplies the open-union induction used to obtain a finite cohomological bound."
+   },
+   {
+    "node": "lem-pc-restrict-derived-direct-image-open",
+    "why": "Restriction of derived direct image to an open base is needed for affine-locality."
+   },
+   {
+    "node": "lem-pc-affine-morphism-hi",
+    "why": "Affine morphisms provide the degree-zero quasi-coherence and higher vanishing base case."
+   },
+   {
+    "node": "lem-weil-pbc-higher-direct-image-presheaf",
+    "why": "The higher direct image is identified with the cohomology presheaf on affine opens."
+   },
+   {
+    "node": "lem-sc-mayer-vietoris-open-cover",
+    "why": "The relative Mayer--Vietoris long exact sequence supplies the gluing step."
+   },
+   {
+    "node": "lem-pc-quasi-coherent-extension",
+    "why": "Extensions of quasi-coherent sheaves remain quasi-coherent in the gluing step."
+   },
+   {
+    "node": "lem-weil-pbc-module-presheaf-sheafification-exact",
+    "why": "Exactness of sheafification turns the Mayer--Vietoris sequences of presheaves into the relative sequence of higher direct images (added by reviewer R-fsh3127)."
+   },
+   {
+    "node": "lem-pc-affine-vanishing",
+    "why": "Vanishing of higher cohomology of quasi-coherent modules on affine schemes, base case of both inductions (declared by reviewer R-fsh3127)."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-invert-s-cohomology-induction",
+  "lem-pc-restrict-derived-direct-image-open",
+  "lem-pc-affine-morphism-hi",
+  "lem-weil-pbc-higher-direct-image-presheaf",
+  "lem-sc-mayer-vietoris-open-cover",
+  "lem-pc-quasi-coherent-extension",
+  "lem-weil-pbc-module-presheaf-sheafification-exact",
+  "lem-pc-affine-vanishing",
+  "lem-sc-invert-s-cohomology-induction",
+  "lem-pc-restrict-derived-direct-image-open",
+  "lem-pc-affine-morphism-hi",
+  "lem-weil-pbc-higher-direct-image-presheaf",
+  "lem-sc-mayer-vietoris-open-cover",
+  "lem-pc-quasi-coherent-extension",
+  "lem-weil-pbc-module-presheaf-sheafification-exact",
+  "lem-pc-affine-vanishing"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-fsh3127",
+  "group": "F1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-fsh3127 (reviewer sub-agent of L); spot-checked: All 5 points of the 22:56 return repaired: no child nodes (D2/B3 gone), clause (1) proved by 01XJ induction; no ancestor of any cited node reaches the item (transitive walk, 252 nodes); no MV-named node duplicated (G1's lem-pc-rf-single-complex-relative-mayer-vietoris is a base-change statement, not the R^p sequence); Step 2 P(U) quantifies all affine S'->S and all qcoh G on S' x_S U, gluing max+1 via MV; Step 3 finite cover max; tool_uses judged generic. FIX more, RETURN less: (1) C4 Step 1 called the absolute lem-sc-mayer-vietoris-open-cover 'relative': now applied over g^{-1}(T) for all opens T, naturality gives presheaf LES, sheafified by lem-weil-pbc-module-presheaf-sheafification-exact and identified by lem-weil-pbc-higher-direct-image-presheaf (cited, proof_deps, tool_uses); (2) C4/E Step 4 claimed vanishing on every affine V because f'^{-1}V is covered by acyclic affines (non sequitur): restricted to the cofinal system of affine V inside some g^{-1}(S_j), where f'^{-1}V = V x_{S_j} f^{-1}(S_j) and Step 2 applies directly; (3) declared tool_use lem-pc-affine-vanishing (other unit, undeclared).; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "WeilConjectures.AlgebraicGeometry.Cohomology.Projective",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_isZero_higherDirectImage_of_isPullback",
+  "branch": "slopmaster2",
+  "line": 55,
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.exists_isZero_higherDirectImage_of_isPullback"
+  ],
+  "sorry_free": false,
+  "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state sorry_here)"
+ }
 }

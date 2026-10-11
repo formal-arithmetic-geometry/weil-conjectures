@@ -1,94 +1,96 @@
 {
-  "id": "lem-sc-etale-affine-over-curve",
-  "blueprint": {
-    "is": null,
-    "from": {
-      "node": "lem-sc-cohomological-dimension",
-      "place": "## Proof, as a whole (degrees $q>2$): the blueprint proof concludes 'For total degree $q>2$ there are thus no differentials into or out of $H^q(C,\\eta_*M)$. It equals $H^q(k(C),M)=0$'; the split replaces this generic-point assembly by the route of the Lean proof AlgebraicGeometry.IsCurve.subsingleton_sheafH_of_three_le_of_forall (HighDegreeVanishing.lean), and this node is used in steps 1 and 5 ($U$ and $V_a\\times_CU$ are affine curves).",
-      "via": []
-    },
-    "same_as": []
+ "id": "lem-sc-etale-affine-over-curve",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-cohomological-dimension",
+   "place": "## Proof, as a whole (degrees $q>2$): the blueprint proof concludes 'For total degree $q>2$ there are thus no differentials into or out of $H^q(C,\\eta_*M)$. It equals $H^q(k(C),M)=0$'; the split replaces this generic-point assembly by the route of the Lean proof AlgebraicGeometry.IsCurve.subsingleton_sheafH_of_three_le_of_forall (HighDegreeVanishing.lean), and this node is used in steps 1 and 5 ($U$ and $V_a\\times_CU$ are affine curves).",
+   "via": []
   },
-  "kind": "statement",
-  "title": "An affine scheme etale over an open of a curve is an affine curve",
-  "statement": "Let $k$ be an algebraically closed field, $C$ a curve over $k$ [def-sc-curves], $U\\subseteq C$ an open subscheme and $w:W\\to U$ an etale morphism [def-weil-etale-morphism] with $W$ an affine scheme. Then $W$, with the structure morphism $W\\xrightarrow{w}U\\hookrightarrow C\\to\\operatorname{Spec}k$, is an affine curve over $k$: it is separated and of finite type over $k$ and of dimension at most one.",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-cd/lem-sc-cohomological-dimension.md (agent-written split, following the Lean)",
-    "place": "Lean: WeilConjectures/AlgebraicGeometry/Curve/HighDegreeVanishing.lean, AlgebraicGeometry.IsCurve.of_etale_of_isAffine, lines 257-265 (an etale morphism has discrete fibres, so dimension does not go up; affine schemes are separated)"
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "An affine scheme etale over an open of a curve is an affine curve",
+ "statement": "Let $k$ be an algebraically closed field, $C$ a curve over $k$ [def-sc-curves], $U\\subseteq C$ an open subscheme and $w:W\\to U$ an etale morphism [def-weil-etale-morphism] with $W$ an affine scheme. Then $W$, with the structure morphism $W\\xrightarrow{w}U\\hookrightarrow C\\to\\operatorname{Spec}k$, is an affine curve over $k$: it is separated and of finite type over $k$ and of dimension at most one.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-cd/lem-sc-cohomological-dimension.md (agent-written split, following the Lean)",
+  "place": "Lean: WeilConjectures/AlgebraicGeometry/Curve/HighDegreeVanishing.lean, AlgebraicGeometry.IsCurve.of_etale_of_isAffine, lines 257-265 (an etale morphism has discrete fibres, so dimension does not go up; affine schemes are separated)"
+ },
+ "stmt_deps": [
+  "def-sc-curves",
+  "def-weil-etale-morphism"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "etale morphism does not increase Krull dimension; scheme etale over curve has dimension at most one",
+   "results": "IsInducing.topologicalKrullDim_le, IsClosedEmbedding.topologicalKrullDim_le (Mathlib.Topology.KrullDimension), AlgebraicGeometry.IsEtale",
+   "date": "2026-10-10",
+   "verdict": "no match (only for inducing maps)"
   },
-  "stmt_deps": [
-    "def-sc-curves",
-    "def-weil-etale-morphism"
-  ],
-  "proof": [],
-  "proof_deps": [],
-  "proof_origin": null,
-  "mathlib_searches": [
-    {
-      "tool": "leansearch",
-      "query": "etale morphism does not increase Krull dimension; scheme etale over curve has dimension at most one",
-      "results": "IsInducing.topologicalKrullDim_le, IsClosedEmbedding.topologicalKrullDim_le (Mathlib.Topology.KrullDimension), AlgebraicGeometry.IsEtale",
-      "date": "2026-10-10",
-      "verdict": "no match (only for inducing maps)"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "etale morphism Krull dimension of source at most dimension of target",
-      "results": "Algebra.Etale.iff_isStandardSmoothOfRelativeDimension_zero, RingHom.Etale.toAlgebra, Algebra.IsEtaleAt.comp",
-      "date": "2026-10-10",
-      "verdict": "no match"
-    },
-    {
-      "tool": "grep",
-      "query": "grep -rln 'topologicalKrullDim.*Etale\\|Etale.*KrullDim\\|krullDim_le_of_etale' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
-      "results": "none; the project declaration AlgebraicGeometry.IsCurve.of_etale_of_isAffine (WeilConjectures/AlgebraicGeometry/Curve/HighDegreeVanishing.lean:258) states it",
-      "date": "2026-10-10",
-      "verdict": "no match in Mathlib"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "unsplit",
-  "merged_into": null,
-  "created": {
-    "by": "worker",
-    "item": "lem-sc-cohomological-dimension",
-    "date": "2026-10-10"
+  {
+   "tool": "leanfinder",
+   "query": "etale morphism Krull dimension of source at most dimension of target",
+   "results": "Algebra.Etale.iff_isStandardSmoothOfRelativeDimension_zero, RingHom.Etale.toAlgebra, Algebra.IsEtaleAt.comp",
+   "date": "2026-10-10",
+   "verdict": "no match"
   },
-  "chapter": "sec-curve-estimates",
-  "unit": "sk-prop-cd",
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "closed",
-      "decls": [
-        {
-          "name": "AlgebraicGeometry.IsCurve.of_etale_of_isAffine",
-          "module": "WeilConjectures.AlgebraicGeometry.Curve.HighDegreeVanishing",
-          "lines": [
-            257,
-            265
-          ],
-          "kind": "theorem",
-          "sorry": false
-        }
-      ],
-      "missing": [],
-      "open": []
-    }
-  },
-  "lean": {
-    "module": "WeilConjectures.AlgebraicGeometry.Curve.HighDegreeVanishing",
-    "declaration": "AlgebraicGeometry.IsCurve.of_etale_of_isAffine",
-    "branch": "slopmaster2",
-    "line": 257,
-    "declarations": [
-      "AlgebraicGeometry.IsCurve.of_etale_of_isAffine"
-    ],
-    "sorry_free": true,
-    "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state closed)"
+  {
+   "tool": "grep",
+   "query": "grep -rln 'topologicalKrullDim.*Etale\\|Etale.*KrullDim\\|krullDim_le_of_etale' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+   "results": "none; the project declaration AlgebraicGeometry.IsCurve.of_etale_of_isAffine (WeilConjectures/AlgebraicGeometry/Curve/HighDegreeVanishing.lean:258) states it",
+   "date": "2026-10-10",
+   "verdict": "no match in Mathlib"
   }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-sc-cohomological-dimension",
+  "date": "2026-10-10"
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-cd",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.IsCurve.of_etale_of_isAffine"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.IsCurve.of_etale_of_isAffine",
+     "module": "WeilConjectures.AlgebraicGeometry.Curve.HighDegreeVanishing",
+     "lines": [
+      257,
+      265
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
+ "lean": {
+  "module": "WeilConjectures.AlgebraicGeometry.Curve.HighDegreeVanishing",
+  "declaration": "AlgebraicGeometry.IsCurve.of_etale_of_isAffine",
+  "branch": "slopmaster2",
+  "line": 257,
+  "declarations": [
+   "AlgebraicGeometry.IsCurve.of_etale_of_isAffine"
+  ],
+  "sorry_free": true,
+  "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state closed)"
+ }
 }

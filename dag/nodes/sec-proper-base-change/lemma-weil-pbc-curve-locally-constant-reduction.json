@@ -1,272 +1,274 @@
 {
-  "id": "lemma-weil-pbc-curve-locally-constant-reduction",
-  "blueprint": {
-    "is": "lemma-weil-pbc-curve-locally-constant-reduction",
-    "from": null,
-    "same_as": null
-  },
-  "kind": "statement",
-  "title": "Locally constant sheaf reduction",
-  "statement": "Let $r$ be a prime number and let $U$ be an irreducible scheme [def-weil-irreducible-components] (so $U$ is nonempty and connected [def-weil-connected-scheme]). Let $G$ be a finite locally constant sheaf of $\\mathbf F_r$-vector spaces on the small etale site $U_{\\Et}$ [def-weil-pbc-etale-site]: a sheaf of $\\mathbf F_r$-modules [def-weil-pbc-etale-sheaves] which is etale locally isomorphic, as a sheaf of $\\mathbf F_r$-modules, to the constant sheaf $\\underline M$ of a finite-dimensional $\\mathbf F_r$-vector space $M$ (a finite type, locally constant sheaf of $\\mathbf F_r$-modules in the sense of Stacks 03RU and 0A3R). Then there are a connected scheme $V$, a finite etale morphism $v:V\\to U$ [def-weil-pbc-scheme-conventions] and an integer $d\\ge1$ not divisible by $r$ such that:\n\n1. *(degree)* $v$ is finite locally free of degree $d$ [def-pc-finite-locally-free], and every geometric fibre of $v$ has exactly $d$ points;\n2. *(filtration)* the inverse image $v^{-1}G$ [def-weil-pbc-inverse-image] has a finite filtration $0=G_0\\subseteq G_1\\subseteq\\cdots\\subseteq G_m=v^{-1}G$ by subsheaves of $\\mathbf F_r$-modules with $G_i/G_{i-1}\\cong\\underline{\\mathbf F_r}_V$ (the constant sheaf with value $\\mathbf F_r=\\mathbf Z/r$) for $1\\le i\\le m$;\n3. *(trace splitting)* with $\\eta=\\operatorname{res}_{v,G}:G\\to v_*v^{-1}G$ the unit of the adjunction $v^{-1}\\dashv v_*$ [def-weil-pbc-direct-image] and $\\operatorname{tr}=\\operatorname{tr}_{v,G}:v_*v^{-1}G\\to G$ the trace of the finite etale $v$ [def-weil-pbc-finite-etale-trace],\n\n$$\n G\\xrightarrow{\\eta}v_*v^{-1}G\\xrightarrow{\\operatorname{tr}}G\n \\;=\\;d\\cdot\\operatorname{id}_G ,\n$$\n\nso that, $d$ being invertible on the $\\mathbf F_r$-sheaf $G$, $p=d^{-1}\\operatorname{tr}$ satisfies $p\\circ\\eta=\\operatorname{id}_G$ and $G$ is a direct summand of $v_*v^{-1}G$: $v_*v^{-1}G=\\eta(G)\\oplus\\ker p$ as sheaves of $\\mathbf F_r$-modules.",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-p1/lemma-weil-pbc-curve-locally-constant-reduction.md",
-    "place": "node lemma-weil-pbc-curve-locally-constant-reduction, order 1145"
-  },
-  "stmt_deps": [
-    "def-weil-irreducible-components",
-    "def-weil-connected-scheme",
-    "def-weil-pbc-etale-site",
-    "def-weil-pbc-etale-sheaves",
-    "def-weil-pbc-scheme-conventions",
-    "def-pc-finite-locally-free",
-    "def-weil-pbc-inverse-image",
-    "def-weil-pbc-direct-image",
-    "def-weil-pbc-finite-etale-trace"
-  ],
-  "proof": [
-    {
-      "text": "*The representation (Stacks 0A3R, proof, first paragraph).* An irreducible space is nonempty and connected (a decomposition into two disjoint nonempty open subsets would contradict that any two nonempty opens meet). Choose a point $u\\in U$ and the geometric point $\\bar u:\\operatorname{Spec}\\overline{\\kappa(u)}\\to U$ [def-weil-geometric-point], and let $\\pi_1=\\pi_1(U,\\bar u)$ be the profinite group of [def-galois-fibre-functor]. By [cor-galois-lisse-representations] (1) with $\\Lambda=\\mathbf F_r$ ($U$ connected), $\\mathcal F\\mapsto\\mathcal F_{\\bar u}$ [def-weil-pbc-geometric-stalks] is an exact equivalence between finite locally constant sheaves of $\\mathbf F_r$-modules on $U_{\\Et}$ and finite $\\mathbf F_r$-modules with a continuous $\\mathbf F_r$-linear $\\pi_1$-action, carrying $\\underline{\\mathbf F_r}_U$ to the trivial representation $\\mathbf F_r$. Put $M=G_{\\bar u}$, a finite $\\mathbf F_r$-vector space, and let $\\rho:\\pi_1\\to\\operatorname{Aut}_{\\mathbf F_r}(M)$ be the action. Its image $Q=\\rho(\\pi_1)$ is a finite group, because $\\operatorname{Aut}_{\\mathbf F_r}(M)$ is a group of permutations of the finite set $M$. Its kernel $\\ker\\rho=\\bigcap_{m\\in M}\\operatorname{Stab}_{\\pi_1}(m)$ is a finite intersection of open subgroups (the action on the discrete $M$ is continuous), hence an open normal subgroup of $\\pi_1$.",
-      "uses": [
-        "def-weil-geometric-point",
-        "def-galois-fibre-functor",
-        "cor-galois-lisse-representations",
-        "def-weil-pbc-geometric-stalks"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/etale-cohomology.tex",
-        "place": "Stacks Lemma 0A3R (lemma-pullback-filtered), proof, sentences 1-4; Lemma 0DV5 (lemma-locally-constant-on-connected) (3)"
-      }
-    },
-    {
-      "text": "*The Sylow subgroup (Stacks 0A3R, proof).* By [lem-weil-pbc-sylow-subgroup-prime-index] the finite group $Q$ has an $r$-subgroup $P$ (a finite $r$-group) with $r\\nmid[Q:P]$. Put $H=\\rho^{-1}(P)\\subseteq\\pi_1$. It is a subgroup containing the open subgroup $\\ker\\rho$, hence a union of cosets of $\\ker\\rho$, hence open. Since $\\rho:\\pi_1\\to Q$ is surjective, $gH\\mapsto\\rho(g)P$ is a bijection $\\pi_1/H\\to Q/P$, so $d:=[\\pi_1:H]=[Q:P]$ is finite, $d\\ge1$ and $r\\nmid d$.",
-      "uses": [
-        "lem-weil-pbc-sylow-subgroup-prime-index"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/etale-cohomology.tex",
-        "place": "Stacks Lemma 0A3R, proof: 'Let $H\\subset G$ be an $\\ell$-Sylow subgroup ... the degree of $T=Y/H\\to S$ is prime to $\\ell$ as it is equal to the index of $H$ in $G$'"
-      }
-    },
-    {
-      "text": "*The connected cover $v$ (Stacks 0A3R: $T=Y/H$; Fundamental Groups, Section 03SF).* The finite set $S=\\pi_1/H$ with the action by left translation is a finite $\\pi_1$-set with continuous action (the stabilizer of $gH$ is the open subgroup $gHg^{-1}$), and the action is transitive. (In Stacks, $S=G/H$ is the fibre of $T=Y/H$, $Y$ the Galois object of $\\pi_1\\to Q$; we take the object with fibre $S$ directly.) By [thm-galois-fundamental] ($U$ connected) the fibre functor $F_{\\bar u}:P\\mapsto|P_{\\bar u}|$ [def-galois-categories] is an equivalence $\\mathrm{F\\acute Et}(U)\\to\\pi_1\\text{-}\\mathbf{Set}$ compatible with finite limits and colimits, so there is a finite etale $v:V\\to U$ with an equivariant bijection $F_{\\bar u}(V)\\cong S$. $V$ is connected [def-weil-connected-scheme]: it is nonempty, since $S\\ne\\varnothing$ while $F_{\\bar u}(\\varnothing)=\\varnothing$; and if $V=V_1\\sqcup V_2$ with $V_1,V_2$ open and closed, then $V_j\\to V\\to U$ is finite etale (an open and closed immersion is finite etale), $V$ is the coproduct of $V_1,V_2$ in $\\mathrm{F\\acute Et}(U)$, so $S=F_{\\bar u}(V_1)\\sqcup F_{\\bar u}(V_2)$ as $\\pi_1$-sets; by transitivity one of them, say $F_{\\bar u}(V_2)$, is empty, so $F_{\\bar u}(V_2)\\cong F_{\\bar u}(\\varnothing)$ and, the equivalence reflecting isomorphisms, $V_2\\cong\\varnothing$. By [lem-weil-pbc-finite-etale-trace-degree] ($U$ connected) $v$ is finite locally free of some degree $d'$ and every geometric fibre of $v$ has $d'$ points; at $\\bar u$ the fibre has $\\#F_{\\bar u}(V)=\\#S=d$ points, so $d'=d$. This is assertion 1.",
-      "uses": [
-        "thm-galois-fundamental",
-        "def-galois-categories",
-        "def-weil-connected-scheme",
-        "lem-weil-pbc-finite-etale-trace-degree"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/etale-cohomology.tex",
-        "place": "Stacks Lemma 0A3R, proof ('We claim that $T=Y/H\\to S$ works'); Fundamental Groups Section 03SF (pione-section-finite-etale-under-galois) and Theorem 0BND (pione-theorem-fundamental-group)"
-      }
-    },
-    {
-      "text": "*The monodromy of $v^{-1}G$ is $P$ (Stacks 0A3R: 'the image of $\\pi_1(T,\\bar t)\\to\\pi_1(S,\\bar s)$ is $\\overline\\rho^{-1}(H)$'; Remark 0DV6).* Let $\\bar v:\\operatorname{Spec}\\overline{\\kappa(u)}\\to V$ be the geometric point over $\\bar u$ that corresponds to the coset $H\\in S\\cong F_{\\bar u}(V)$ (points of the geometric fibre $V_{\\bar u}$ are lifts of $\\bar u$). By [thm-galois-fundamental], compatibility with base change along the connected $V\\to U$: pullback $P\\mapsto P\\times_UV$ of finite etale covers, with $F_{\\bar v}(P\\times_UV)=F_{\\bar u}(P)$, induces a continuous homomorphism $\\varphi:\\pi_1(V,\\bar v)\\to\\pi_1(U,\\bar u)$ whose image is the stabilizer of the point $\\bar v$ of $F_{\\bar u}(V)$, i.e. the open subgroup $H$; and by [thm-galois-lc-etale] (compatibility with base change and with the fibre functors) the $\\pi_1(V,\\bar v)$-set $(v^{-1}\\mathcal A)_{\\bar v}$ of a finite locally constant sheaf of sets $\\mathcal A$ on $U$ is $\\mathcal A_{\\bar u}$ with $\\sigma$ acting as $\\varphi(\\sigma)$. The identification of stalks $c:(v^{-1}G)_{\\bar v}\\cong G_{\\bar u}=M$ is the isomorphism of [lem-weil-pbc-inverse-image-stalk-germ]; it is additive and $\\mathbf F_r$-linear, the module operations of $v^{-1}G$ being the inverse images of those of $G$ ($v^{-1}$ commutes with finite products). Hence the representation of $\\pi_1(V,\\bar v)$ attached to $v^{-1}G$ by [cor-galois-lisse-representations] (1) on the connected $V$ is $M$ with $\\sigma$ acting by $\\rho(\\varphi(\\sigma))\\in\\rho(H)=P$.",
-      "uses": [
-        "thm-galois-fundamental",
-        "thm-galois-lc-etale",
-        "lem-weil-pbc-inverse-image-stalk-germ",
-        "cor-galois-lisse-representations"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/etale-cohomology.tex",
-        "place": "Stacks Lemma 0A3R, proof ('the action of $\\pi_1(T,\\bar t)$ on $V$ corresponding to $f^{-1}\\mathcal F$ is through the map $\\pi_1(T,\\bar t)\\to H$'); Remark 0DV6 (remark-functorial-locally-constant-on-connected)"
-      }
-    },
-    {
-      "text": "*The filtration (Stacks 0A3R, proof; Lemma 0GIZ).* $M$ is a finite-dimensional $\\mathbf F_r[P]$-module ($P\\subseteq\\operatorname{Aut}_{\\mathbf F_r}(M)$ acting by inclusion). By [lemma-weil-pbc-finite-l-group-filtration] ($P$ a finite $r$-group) there is a $P$-stable filtration $0=M_0\\subset M_1\\subset\\cdots\\subset M_m=M$ with each $M_i/M_{i-1}$ the trivial one-dimensional representation $\\mathbf F_r$ (if $M=0$, $m=0$). As $\\pi_1(V,\\bar v)$ acts on $M$ through $P$ (step 4), each $M_i$ is a sub-representation and $M_i/M_{i-1}\\cong\\mathbf F_r$ with trivial $\\pi_1(V,\\bar v)$-action. Apply the exact equivalence of [cor-galois-lisse-representations] (1) on $V$ (connected, $\\Lambda=\\mathbf F_r$), whose kernels and cokernels are those of sheaves of $\\mathbf F_r$-modules: by essential surjectivity and full faithfulness there are finite locally constant $\\mathbf F_r$-sheaves $G'_i$ with $(G'_i)_{\\bar v}\\cong M_i$, maps $G'_{i-1}\\to G'_i$ inducing the inclusions $M_{i-1}\\subset M_i$, and $G'_m\\cong v^{-1}G$ (step 4). The kernel of $G'_{i-1}\\to G'_i$ goes to $\\ker(M_{i-1}\\to M_i)=0$, so it is $0$ and the map is a monomorphism; let $G_i\\subseteq v^{-1}G$ be the image of $G'_i$ under the composite monomorphism $G'_i\\to G'_m\\cong v^{-1}G$. The cokernel $G_i/G_{i-1}$ goes to $M_i/M_{i-1}\\cong\\mathbf F_r$ with trivial action, which is the image of $\\underline{\\mathbf F_r}_V$; by full faithfulness $G_i/G_{i-1}\\cong\\underline{\\mathbf F_r}_V$. Also $G_0=0$ and $G_m=v^{-1}G$. This is assertion 2.",
-      "uses": [
-        "lemma-weil-pbc-finite-l-group-filtration",
-        "cor-galois-lisse-representations"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/etale-cohomology.tex",
-        "place": "Stacks Lemma 0A3R, proof ('As $H$ is a finite $\\ell$-group, the irreducible constituents ... are each trivial of rank 1 ... Via the equivalence of Lemma 0DV5 this means $f^{-1}\\mathcal F$ is a successive extension of constant sheaves'); Lemma 0GIZ (lemma-action-l-group)"
-      }
-    },
-    {
-      "text": "*The trace (Stacks Section 03SH).* Let $\\eta=\\operatorname{res}_{v,G}$ be the unit of $v^{-1}\\dashv v_*$ [def-weil-pbc-inverse-image] and $\\operatorname{tr}=\\operatorname{tr}_{v,G}$ the trace of the finite etale $v$ [def-weil-pbc-finite-etale-trace], both applied to the underlying abelian sheaf of $G$. By [lem-weil-pbc-finite-etale-trace-degree] ($U$ connected, $v$ of constant degree $d$ by step 3), $\\operatorname{tr}\\circ\\eta=d\\cdot\\operatorname{id}_G$. Both maps are additive maps between sheaves of $\\mathbf Z/r=\\mathbf F_r$-modules, hence $\\mathbf F_r$-linear.",
-      "uses": [
-        "def-weil-pbc-inverse-image",
-        "def-weil-pbc-finite-etale-trace",
-        "lem-weil-pbc-finite-etale-trace-degree"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/etale-cohomology.tex",
-        "place": "Stacks Section 03SH (section-trace-method), after Definition 03SE ('if $f$ has constant degree $d$, then the composition $\\mathcal F\\to f_*f^{-1}\\mathcal F\\to\\mathcal F$ is multiplication by $d$')"
-      }
-    },
-    {
-      "text": "*Direct summand (Stacks Section 03SH: 'if multiplication by $d$ on $\\mathcal F$ is an isomorphism').* $rG=0$ and $r\\nmid d$, so there is $e\\in\\mathbf Z$ with $de\\equiv1\\pmod r$ and multiplication by $d$ on $G$ (and on $v_*v^{-1}G$) is invertible with inverse multiplication by $e$. Then $p=e\\cdot\\operatorname{tr}$ satisfies $p\\circ\\eta=ed\\cdot\\operatorname{id}_G=\\operatorname{id}_G$ by step 6, so $\\eta$ is a split monomorphism in the abelian category of sheaves of $\\mathbf F_r$-modules [def-weil-pbc-etale-sheaves], $\\eta\\circ p$ is an idempotent endomorphism of $v_*v^{-1}G$ with image $\\eta(G)\\cong G$ and kernel $\\ker p$, and $v_*v^{-1}G=\\eta(G)\\oplus\\ker p$. This is assertion 3.",
-      "uses": [
-        "def-weil-pbc-etale-sheaves"
-      ],
-      "elementary": true,
-      "source": {
-        "document": "literature/stacks-project/etale-cohomology.tex",
-        "place": "Stacks Section 03SH (section-trace-method), the 'methode de la trace' paragraph"
-      }
-    }
-  ],
-  "proof_deps": [
+ "id": "lemma-weil-pbc-curve-locally-constant-reduction",
+ "blueprint": {
+  "is": "lemma-weil-pbc-curve-locally-constant-reduction",
+  "from": null,
+  "same_as": null
+ },
+ "kind": "statement",
+ "title": "Locally constant sheaf reduction",
+ "statement": "Let $r$ be a prime number and let $U$ be an irreducible scheme [def-weil-irreducible-components] (so $U$ is nonempty and connected [def-weil-connected-scheme]). Let $G$ be a finite locally constant sheaf of $\\mathbf F_r$-vector spaces on the small etale site $U_{\\Et}$ [def-weil-pbc-etale-site]: a sheaf of $\\mathbf F_r$-modules [def-weil-pbc-etale-sheaves] which is etale locally isomorphic, as a sheaf of $\\mathbf F_r$-modules, to the constant sheaf $\\underline M$ of a finite-dimensional $\\mathbf F_r$-vector space $M$ (a finite type, locally constant sheaf of $\\mathbf F_r$-modules in the sense of Stacks 03RU and 0A3R). Then there are a connected scheme $V$, a finite etale morphism $v:V\\to U$ [def-weil-pbc-scheme-conventions] and an integer $d\\ge1$ not divisible by $r$ such that:\n\n1. *(degree)* $v$ is finite locally free of degree $d$ [def-pc-finite-locally-free], and every geometric fibre of $v$ has exactly $d$ points;\n2. *(filtration)* the inverse image $v^{-1}G$ [def-weil-pbc-inverse-image] has a finite filtration $0=G_0\\subseteq G_1\\subseteq\\cdots\\subseteq G_m=v^{-1}G$ by subsheaves of $\\mathbf F_r$-modules with $G_i/G_{i-1}\\cong\\underline{\\mathbf F_r}_V$ (the constant sheaf with value $\\mathbf F_r=\\mathbf Z/r$) for $1\\le i\\le m$;\n3. *(trace splitting)* with $\\eta=\\operatorname{res}_{v,G}:G\\to v_*v^{-1}G$ the unit of the adjunction $v^{-1}\\dashv v_*$ [def-weil-pbc-direct-image] and $\\operatorname{tr}=\\operatorname{tr}_{v,G}:v_*v^{-1}G\\to G$ the trace of the finite etale $v$ [def-weil-pbc-finite-etale-trace],\n\n$$\n G\\xrightarrow{\\eta}v_*v^{-1}G\\xrightarrow{\\operatorname{tr}}G\n \\;=\\;d\\cdot\\operatorname{id}_G ,\n$$\n\nso that, $d$ being invertible on the $\\mathbf F_r$-sheaf $G$, $p=d^{-1}\\operatorname{tr}$ satisfies $p\\circ\\eta=\\operatorname{id}_G$ and $G$ is a direct summand of $v_*v^{-1}G$: $v_*v^{-1}G=\\eta(G)\\oplus\\ker p$ as sheaves of $\\mathbf F_r$-modules.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-p1/lemma-weil-pbc-curve-locally-constant-reduction.md",
+  "place": "node lemma-weil-pbc-curve-locally-constant-reduction, order 1145"
+ },
+ "stmt_deps": [
+  "def-weil-irreducible-components",
+  "def-weil-connected-scheme",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-scheme-conventions",
+  "def-pc-finite-locally-free",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-finite-etale-trace"
+ ],
+ "proof": [
+  {
+   "text": "*The representation (Stacks 0A3R, proof, first paragraph).* An irreducible space is nonempty and connected (a decomposition into two disjoint nonempty open subsets would contradict that any two nonempty opens meet). Choose a point $u\\in U$ and the geometric point $\\bar u:\\operatorname{Spec}\\overline{\\kappa(u)}\\to U$ [def-weil-geometric-point], and let $\\pi_1=\\pi_1(U,\\bar u)$ be the profinite group of [def-galois-fibre-functor]. By [cor-galois-lisse-representations] (1) with $\\Lambda=\\mathbf F_r$ ($U$ connected), $\\mathcal F\\mapsto\\mathcal F_{\\bar u}$ [def-weil-pbc-geometric-stalks] is an exact equivalence between finite locally constant sheaves of $\\mathbf F_r$-modules on $U_{\\Et}$ and finite $\\mathbf F_r$-modules with a continuous $\\mathbf F_r$-linear $\\pi_1$-action, carrying $\\underline{\\mathbf F_r}_U$ to the trivial representation $\\mathbf F_r$. Put $M=G_{\\bar u}$, a finite $\\mathbf F_r$-vector space, and let $\\rho:\\pi_1\\to\\operatorname{Aut}_{\\mathbf F_r}(M)$ be the action. Its image $Q=\\rho(\\pi_1)$ is a finite group, because $\\operatorname{Aut}_{\\mathbf F_r}(M)$ is a group of permutations of the finite set $M$. Its kernel $\\ker\\rho=\\bigcap_{m\\in M}\\operatorname{Stab}_{\\pi_1}(m)$ is a finite intersection of open subgroups (the action on the discrete $M$ is continuous), hence an open normal subgroup of $\\pi_1$.",
+   "uses": [
     "def-weil-geometric-point",
     "def-galois-fibre-functor",
     "cor-galois-lisse-representations",
-    "def-weil-pbc-geometric-stalks",
-    "lem-weil-pbc-sylow-subgroup-prime-index",
+    "def-weil-pbc-geometric-stalks"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Stacks Lemma 0A3R (lemma-pullback-filtered), proof, sentences 1-4; Lemma 0DV5 (lemma-locally-constant-on-connected) (3)"
+   }
+  },
+  {
+   "text": "*The Sylow subgroup (Stacks 0A3R, proof).* By [lem-weil-pbc-sylow-subgroup-prime-index] the finite group $Q$ has an $r$-subgroup $P$ (a finite $r$-group) with $r\\nmid[Q:P]$. Put $H=\\rho^{-1}(P)\\subseteq\\pi_1$. It is a subgroup containing the open subgroup $\\ker\\rho$, hence a union of cosets of $\\ker\\rho$, hence open. Since $\\rho:\\pi_1\\to Q$ is surjective, $gH\\mapsto\\rho(g)P$ is a bijection $\\pi_1/H\\to Q/P$, so $d:=[\\pi_1:H]=[Q:P]$ is finite, $d\\ge1$ and $r\\nmid d$.",
+   "uses": [
+    "lem-weil-pbc-sylow-subgroup-prime-index"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Stacks Lemma 0A3R, proof: 'Let $H\\subset G$ be an $\\ell$-Sylow subgroup ... the degree of $T=Y/H\\to S$ is prime to $\\ell$ as it is equal to the index of $H$ in $G$'"
+   }
+  },
+  {
+   "text": "*The connected cover $v$ (Stacks 0A3R: $T=Y/H$; Fundamental Groups, Section 03SF).* The finite set $S=\\pi_1/H$ with the action by left translation is a finite $\\pi_1$-set with continuous action (the stabilizer of $gH$ is the open subgroup $gHg^{-1}$), and the action is transitive. (In Stacks, $S=G/H$ is the fibre of $T=Y/H$, $Y$ the Galois object of $\\pi_1\\to Q$; we take the object with fibre $S$ directly.) By [thm-galois-fundamental] ($U$ connected) the fibre functor $F_{\\bar u}:P\\mapsto|P_{\\bar u}|$ [def-galois-categories] is an equivalence $\\mathrm{F\\acute Et}(U)\\to\\pi_1\\text{-}\\mathbf{Set}$ compatible with finite limits and colimits, so there is a finite etale $v:V\\to U$ with an equivariant bijection $F_{\\bar u}(V)\\cong S$. $V$ is connected [def-weil-connected-scheme]: it is nonempty, since $S\\ne\\varnothing$ while $F_{\\bar u}(\\varnothing)=\\varnothing$; and if $V=V_1\\sqcup V_2$ with $V_1,V_2$ open and closed, then $V_j\\to V\\to U$ is finite etale (an open and closed immersion is finite etale), $V$ is the coproduct of $V_1,V_2$ in $\\mathrm{F\\acute Et}(U)$, so $S=F_{\\bar u}(V_1)\\sqcup F_{\\bar u}(V_2)$ as $\\pi_1$-sets; by transitivity one of them, say $F_{\\bar u}(V_2)$, is empty, so $F_{\\bar u}(V_2)\\cong F_{\\bar u}(\\varnothing)$ and, the equivalence reflecting isomorphisms, $V_2\\cong\\varnothing$. By [lem-weil-pbc-finite-etale-trace-degree] ($U$ connected) $v$ is finite locally free of some degree $d'$ and every geometric fibre of $v$ has $d'$ points; at $\\bar u$ the fibre has $\\#F_{\\bar u}(V)=\\#S=d$ points, so $d'=d$. This is assertion 1.",
+   "uses": [
     "thm-galois-fundamental",
     "def-galois-categories",
     "def-weil-connected-scheme",
-    "lem-weil-pbc-finite-etale-trace-degree",
+    "lem-weil-pbc-finite-etale-trace-degree"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Stacks Lemma 0A3R, proof ('We claim that $T=Y/H\\to S$ works'); Fundamental Groups Section 03SF (pione-section-finite-etale-under-galois) and Theorem 0BND (pione-theorem-fundamental-group)"
+   }
+  },
+  {
+   "text": "*The monodromy of $v^{-1}G$ is $P$ (Stacks 0A3R: 'the image of $\\pi_1(T,\\bar t)\\to\\pi_1(S,\\bar s)$ is $\\overline\\rho^{-1}(H)$'; Remark 0DV6).* Let $\\bar v:\\operatorname{Spec}\\overline{\\kappa(u)}\\to V$ be the geometric point over $\\bar u$ that corresponds to the coset $H\\in S\\cong F_{\\bar u}(V)$ (points of the geometric fibre $V_{\\bar u}$ are lifts of $\\bar u$). By [thm-galois-fundamental], compatibility with base change along the connected $V\\to U$: pullback $P\\mapsto P\\times_UV$ of finite etale covers, with $F_{\\bar v}(P\\times_UV)=F_{\\bar u}(P)$, induces a continuous homomorphism $\\varphi:\\pi_1(V,\\bar v)\\to\\pi_1(U,\\bar u)$ whose image is the stabilizer of the point $\\bar v$ of $F_{\\bar u}(V)$, i.e. the open subgroup $H$; and by [thm-galois-lc-etale] (compatibility with base change and with the fibre functors) the $\\pi_1(V,\\bar v)$-set $(v^{-1}\\mathcal A)_{\\bar v}$ of a finite locally constant sheaf of sets $\\mathcal A$ on $U$ is $\\mathcal A_{\\bar u}$ with $\\sigma$ acting as $\\varphi(\\sigma)$. The identification of stalks $c:(v^{-1}G)_{\\bar v}\\cong G_{\\bar u}=M$ is the isomorphism of [lem-weil-pbc-inverse-image-stalk-germ]; it is additive and $\\mathbf F_r$-linear, the module operations of $v^{-1}G$ being the inverse images of those of $G$ ($v^{-1}$ commutes with finite products). Hence the representation of $\\pi_1(V,\\bar v)$ attached to $v^{-1}G$ by [cor-galois-lisse-representations] (1) on the connected $V$ is $M$ with $\\sigma$ acting by $\\rho(\\varphi(\\sigma))\\in\\rho(H)=P$.",
+   "uses": [
+    "thm-galois-fundamental",
     "thm-galois-lc-etale",
     "lem-weil-pbc-inverse-image-stalk-germ",
+    "cor-galois-lisse-representations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Stacks Lemma 0A3R, proof ('the action of $\\pi_1(T,\\bar t)$ on $V$ corresponding to $f^{-1}\\mathcal F$ is through the map $\\pi_1(T,\\bar t)\\to H$'); Remark 0DV6 (remark-functorial-locally-constant-on-connected)"
+   }
+  },
+  {
+   "text": "*The filtration (Stacks 0A3R, proof; Lemma 0GIZ).* $M$ is a finite-dimensional $\\mathbf F_r[P]$-module ($P\\subseteq\\operatorname{Aut}_{\\mathbf F_r}(M)$ acting by inclusion). By [lemma-weil-pbc-finite-l-group-filtration] ($P$ a finite $r$-group) there is a $P$-stable filtration $0=M_0\\subset M_1\\subset\\cdots\\subset M_m=M$ with each $M_i/M_{i-1}$ the trivial one-dimensional representation $\\mathbf F_r$ (if $M=0$, $m=0$). As $\\pi_1(V,\\bar v)$ acts on $M$ through $P$ (step 4), each $M_i$ is a sub-representation and $M_i/M_{i-1}\\cong\\mathbf F_r$ with trivial $\\pi_1(V,\\bar v)$-action. Apply the exact equivalence of [cor-galois-lisse-representations] (1) on $V$ (connected, $\\Lambda=\\mathbf F_r$), whose kernels and cokernels are those of sheaves of $\\mathbf F_r$-modules: by essential surjectivity and full faithfulness there are finite locally constant $\\mathbf F_r$-sheaves $G'_i$ with $(G'_i)_{\\bar v}\\cong M_i$, maps $G'_{i-1}\\to G'_i$ inducing the inclusions $M_{i-1}\\subset M_i$, and $G'_m\\cong v^{-1}G$ (step 4). The kernel of $G'_{i-1}\\to G'_i$ goes to $\\ker(M_{i-1}\\to M_i)=0$, so it is $0$ and the map is a monomorphism; let $G_i\\subseteq v^{-1}G$ be the image of $G'_i$ under the composite monomorphism $G'_i\\to G'_m\\cong v^{-1}G$. The cokernel $G_i/G_{i-1}$ goes to $M_i/M_{i-1}\\cong\\mathbf F_r$ with trivial action, which is the image of $\\underline{\\mathbf F_r}_V$; by full faithfulness $G_i/G_{i-1}\\cong\\underline{\\mathbf F_r}_V$. Also $G_0=0$ and $G_m=v^{-1}G$. This is assertion 2.",
+   "uses": [
     "lemma-weil-pbc-finite-l-group-filtration",
+    "cor-galois-lisse-representations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Stacks Lemma 0A3R, proof ('As $H$ is a finite $\\ell$-group, the irreducible constituents ... are each trivial of rank 1 ... Via the equivalence of Lemma 0DV5 this means $f^{-1}\\mathcal F$ is a successive extension of constant sheaves'); Lemma 0GIZ (lemma-action-l-group)"
+   }
+  },
+  {
+   "text": "*The trace (Stacks Section 03SH).* Let $\\eta=\\operatorname{res}_{v,G}$ be the unit of $v^{-1}\\dashv v_*$ [def-weil-pbc-inverse-image] and $\\operatorname{tr}=\\operatorname{tr}_{v,G}$ the trace of the finite etale $v$ [def-weil-pbc-finite-etale-trace], both applied to the underlying abelian sheaf of $G$. By [lem-weil-pbc-finite-etale-trace-degree] ($U$ connected, $v$ of constant degree $d$ by step 3), $\\operatorname{tr}\\circ\\eta=d\\cdot\\operatorname{id}_G$. Both maps are additive maps between sheaves of $\\mathbf Z/r=\\mathbf F_r$-modules, hence $\\mathbf F_r$-linear.",
+   "uses": [
     "def-weil-pbc-inverse-image",
     "def-weil-pbc-finite-etale-trace",
-    "def-weil-pbc-etale-sheaves"
-  ],
-  "proof_origin": {
-    "by": "document",
+    "lem-weil-pbc-finite-etale-trace-degree"
+   ],
+   "elementary": false,
+   "source": {
     "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Stacks Lemma 0A3R (lemma-pullback-filtered) with its proof, Section 03SH (section-trace-method) around Definition 03SE, Lemma 0DV5 and Remark 0DV6"
+    "place": "Stacks Section 03SH (section-trace-method), after Definition 03SE ('if $f$ has constant degree $d$, then the composition $\\mathcal F\\to f_*f^{-1}\\mathcal F\\to\\mathcal F$ is multiplication by $d$')"
+   }
   },
-  "mathlib_searches": [
-    {
-      "tool": "leansearch",
-      "query": "locally constant sheaf of F_l vector spaces on connected scheme becomes successive extension of constant sheaves after finite etale cover of degree prime to l",
-      "results": "CategoryTheory.Sheaf.IsConstant, Sheaf.isConstant_iff_mem_essImage (Mathlib.CategoryTheory.Sites.ConstantSheaf), LightCondensed/CompHausLike locally constant modules (Mathlib.Condensed.*): no etale sheaves on schemes, no reduction",
-      "date": "2026-10-09",
-      "verdict": "no match"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "locally constant sheaf of vector spaces on connected scheme corresponds to representation of etale fundamental group, filtration by constant sheaves after finite etale cover",
-      "results": "CompHausLike.LocallyConstantModule.functor, LightCondMod.LocallyConstant.functor (Mathlib.Condensed.Discrete.Module), PreGaloisCategory.exists_set_ker_evaluation_subset_of_isOpen (Mathlib.CategoryTheory.Galois.Topology)",
-      "date": "2026-10-09",
-      "verdict": "no match"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "fundamental group of a Galois category, equivalence of fibre functor with finite continuous action sets",
-      "results": "PreGaloisCategory.instIsFundamentalGroupAutFunctorFintypeCat, IsFundamentalGroup, exists_lift_of_continuous (Galois.EssSurj), instIsEquivalenceContAction...functorToContAction (Galois.Equivalence), IsFundamentalGroup.transitive_of_isGalois",
-      "date": "2026-10-09",
-      "verdict": "generalization for the abstract Galois-category step only (steps 3-4 via thm-galois-fundamental); Mathlib does not make finite etale schemes a Galois category"
-    },
-    {
-      "tool": "loogle",
-      "query": "CategoryTheory.PreGaloisCategory.functorToContAction",
-      "results": "functorToContAction, its EssSurj and Faithful instances (Mathlib.CategoryTheory.Galois.Equivalence)",
-      "date": "2026-10-09",
-      "verdict": "abstract Galois theory only; no match for the node"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "p-group acting on a finite vector space over F_p has a nonzero fixed vector",
-      "results": "IsPGroup.exists_fixed_point_of_prime_dvd_card_of_fixed_point, IsPGroup.nonempty_fixed_point_of_prime_not_dvd_card, IsPGroup.card_modEq_card_fixedPoints, IsPGroup.card_orbit (Mathlib.GroupTheory.PGroup)",
-      "date": "2026-10-09",
-      "verdict": "tools for lemma-weil-pbc-finite-l-group-filtration (step 5), not for this node"
-    },
-    {
-      "tool": "loogle",
-      "query": "Sylow.not_dvd_index",
-      "results": "Sylow.not_dvd_index (Mathlib.GroupTheory.Sylow)",
-      "date": "2026-10-09",
-      "verdict": "match for step 2 (new leaf lem-weil-pbc-sylow-subgroup-prime-index)"
-    },
-    {
-      "tool": "grep",
-      "query": "grep -rn 'FiniteEtale\\|IsFiniteEtale' Mathlib; ls Mathlib/CategoryTheory/Galois Mathlib/AlgebraicGeometry/Sites; grep -rln 'LocallyConstant' Mathlib/AlgebraicGeometry Mathlib/CategoryTheory/Sites",
-      "results": "CommAlgCat.FiniteEtale (RingTheory/Etale/Finite.lean: finite etale algebras, fibre functor over a separably closed field); CategoryTheory/Galois/* (abstract Galois categories); AlgebraicGeometry/Sites/{Etale,EtalePoint,ConstantSheaf,...}; locally constant only in Morphisms/FlatRank.lean (Scheme.Hom.isLocallyConstant_finrank); no locally constant etale sheaves, no fundamental group of a scheme, no trace",
-      "date": "2026-10-09",
-      "verdict": "no match"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "merged_into": null,
-  "import_flags": [
-    "detailed_form",
-    "two_proofs"
-  ],
-  "blueprint_kind": "lemma",
-  "blueprint_order": 1145,
-  "blueprint_uses": [
-    "def-weil-pbc-etale-sheaves",
-    "def-weil-pbc-scheme-conventions",
-    "lemma-weil-pbc-finite-exchange",
-    "lemma-weil-pbc-finite-l-group-filtration",
-    "lemma-weil-pbc-finite-stalk-formula",
-    "thm-galois-lc-etale"
-  ],
-  "uses_not_cited": [
-    "def-weil-pbc-etale-sheaves",
-    "def-weil-pbc-scheme-conventions",
-    "lemma-weil-pbc-finite-exchange"
-  ],
-  "proof_split_by": "paragraphs",
-  "blueprint_sketch": [
-    {
-      "statement": "For irreducible $U$ and finite locally constant $G$ of\n$\\mathbf F_\\ell$-vector spaces, there is a finite etale\n$v:V\\to U$ of degree prime to $\\ell$ such that $v^{-1}G$ has a filtration by\nconstant $\\mathbf F_\\ell$-sheaves, and $G$ is a direct summand of\n$v_*v^{-1}G$.",
-      "proof": "Choose a geometric point $\\bar u$ of $U$. The locally constant sheaf gives\na representation\n\n$$\n\\rho:\\pi_1(U,\\bar u)\\longrightarrow\n\\operatorname{GL}_{\\mathbf F_\\ell}(G_{\\bar u})\n$$\n\nwith finite image $Q$. If $H\\subseteq Q$ is an $\\ell$-Sylow subgroup, the\ninverse image $\\rho^{-1}(H)$ defines a connected finite etale cover\n$v:V\\to U$ of degree $d=[Q:H]$, which is prime to $\\ell$. On $V$, the\nmonodromy factors through $H$.\n\nThe representation filtration gives\n$0=V_0\\subset V_1\\subset\\cdots\\subset V_m=G_{\\bar u}$ with\n$V_a/V_{a-1}\\cong\\mathbf F_\\ell$ and trivial $H$-action. Passing from\n$H$-modules to locally constant sheaves gives, for every $a$, the explicit\nshort exact sequence\n\n$$\n0\\longrightarrow G_{a-1}\\longrightarrow G_a\\longrightarrow\n\\underline{\\mathbf F_\\ell}_V\\longrightarrow0,\n\\qquad G_m=v^{-1}G.\n$$\n\nAll inclusions, quotient maps, and connecting maps commute with extension of\nthe algebraically closed ground field.\n\nThe adjunction unit and the fibrewise sum are\n\n$$\n\\eta:G\\longrightarrow v_*v^{-1}G,\\qquad\n\\operatorname{tr}:v_*v^{-1}G\\longrightarrow G.\n$$\n\nAt a geometric stalk, $\\eta(s)=(s,\\ldots,s)$ in the direct sum indexed by\nthe $d$ points of the fibre, while\n$\\operatorname{tr}(s_1,\\ldots,s_d)=\\sum_as_a$. Consequently\n$\\operatorname{tr}\\circ\\eta=d\\,\\operatorname{id}_G$. Multiplication by\n$d^{-1}\\in\\mathbf F_\\ell$ defines\n$r=d^{-1}\\operatorname{tr}$ with $r\\eta=\\operatorname{id}_G$.\nThe stalk formulas are preserved by base change, so the direct-summand\ndecomposition and every filtration exact sequence are compatible with the\ncohomology comparison maps.",
-      "cites": []
-    }
-  ],
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "sorry_here",
-      "decls": [
-        {
-          "name": "AlgebraicGeometry.Scheme.IsFiniteLocallyConstantSheaf.exists_finite_etale_reduction",
-          "module": "WeilConjectures.ConstructibleSheaf.LocallyConstantReduction",
-          "lines": [
-            38,
-            71
-          ],
-          "kind": "theorem",
-          "sorry": true
-        }
-      ],
-      "missing": [],
-      "open": []
-    }
-  },
-  "chapter": "sec-proper-base-change",
-  "unit": "sk-thm-p1",
-  "split_report": {
-    "date": "2026-10-09",
-    "item": "lemma-weil-pbc-curve-locally-constant-reduction",
-    "worker": "stage1",
-    "summary": "Statement made precise without changing the mathematics: prime r named, U a scheme (irreducible, hence nonempty and connected), G a finite locally constant sheaf of F_r-vector spaces (etale locally the constant sheaf of a finite F_r-module; Stacks 03RU/0A3R), V connected and v finite etale of degree d (finite locally free of degree d, every geometric fibre has d points) with r not dividing d, the filtration written out (0=G_0 c ... c G_m=v^{-1}G, G_i/G_{i-1} = constant F_r), eta the adjunction unit and tr the trace of a new definition node, and the direct-summand conclusion with the retraction d^{-1} tr. Proof rewritten in 7 steps following Stacks Lemma 0A3R and Section 03SH (the imported one-paragraph agent proof): representation and finite image (cor-galois-lisse-representations, a reviewed tool of sk-lem-finite), Sylow (new Mathlib leaf), the connected cover with fibre pi_1/H built directly from thm-galois-fundamental instead of the Galois object Y and the quotient Y/H, monodromy of v^{-1}G (thm-galois-fundamental, thm-galois-lc-etale, lem-weil-pbc-inverse-image-stalk-germ), filtration (lemma-weil-pbc-finite-l-group-filtration + the exact equivalence), trace (new nodes def-weil-pbc-finite-etale-trace, lem-weil-pbc-finite-etale-trace-exists, lem-weil-pbc-finite-etale-trace-degree), splitting (elementary). Dropped: lemma-weil-pbc-finite-stalk-formula (the trace computation is now in lem-weil-pbc-finite-etale-trace-degree) and lemma-weil-pbc-finite-exchange (never used), def-weil-pbc-scheme-conventions kept as statement dependency. The Lean declaration AlgebraicGeometry.Scheme.IsFiniteLocallyConstantSheaf.exists_finite_etale_reduction (slopmaster2, sorry) states this node and is not yet attached."
-  },
-  "tool_uses": [
-    "cor-galois-lisse-representations"
-  ],
-  "reviewed": {
-    "date": "2026-10-09",
-    "by": "L",
-    "result": "pass",
-    "note": "statement made precise (degree, filtration, trace splitting); seven steps along Stacks 0A3R and the trace section 03SH (representation, Sylow subgroup, the connected cover with fibre π_1/H, monodromy through P, the filtration via the exact equivalence, tr∘res = d, the splitting); 4 new nodes, one Mathlib leaf verified (Sylow.lean); the reviewed dictionary cor-galois-lisse-representations (sk-lem-finite) accepted as a tool use; Lean of Invariants.lean attached to lemma-weil-pbc-finite-l-group-filtration"
-  },
-  "lean": {
-    "module": "WeilConjectures.ConstructibleSheaf.LocallyConstantReduction",
-    "declaration": "AlgebraicGeometry.Scheme.IsFiniteLocallyConstantSheaf.exists_finite_etale_reduction",
-    "branch": "slopmaster2",
-    "line": 38,
-    "declarations": [
-      "AlgebraicGeometry.Scheme.IsFiniteLocallyConstantSheaf.exists_finite_etale_reduction"
-    ],
-    "sorry_free": false,
-    "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state sorry_here)"
+  {
+   "text": "*Direct summand (Stacks Section 03SH: 'if multiplication by $d$ on $\\mathcal F$ is an isomorphism').* $rG=0$ and $r\\nmid d$, so there is $e\\in\\mathbf Z$ with $de\\equiv1\\pmod r$ and multiplication by $d$ on $G$ (and on $v_*v^{-1}G$) is invertible with inverse multiplication by $e$. Then $p=e\\cdot\\operatorname{tr}$ satisfies $p\\circ\\eta=ed\\cdot\\operatorname{id}_G=\\operatorname{id}_G$ by step 6, so $\\eta$ is a split monomorphism in the abelian category of sheaves of $\\mathbf F_r$-modules [def-weil-pbc-etale-sheaves], $\\eta\\circ p$ is an idempotent endomorphism of $v_*v^{-1}G$ with image $\\eta(G)\\cong G$ and kernel $\\ker p$, and $v_*v^{-1}G=\\eta(G)\\oplus\\ker p$. This is assertion 3.",
+   "uses": [
+    "def-weil-pbc-etale-sheaves"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Stacks Section 03SH (section-trace-method), the 'methode de la trace' paragraph"
+   }
   }
+ ],
+ "proof_deps": [
+  "def-weil-geometric-point",
+  "def-galois-fibre-functor",
+  "cor-galois-lisse-representations",
+  "def-weil-pbc-geometric-stalks",
+  "lem-weil-pbc-sylow-subgroup-prime-index",
+  "thm-galois-fundamental",
+  "def-galois-categories",
+  "def-weil-connected-scheme",
+  "lem-weil-pbc-finite-etale-trace-degree",
+  "thm-galois-lc-etale",
+  "lem-weil-pbc-inverse-image-stalk-germ",
+  "lemma-weil-pbc-finite-l-group-filtration",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-finite-etale-trace",
+  "def-weil-pbc-etale-sheaves"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Stacks Lemma 0A3R (lemma-pullback-filtered) with its proof, Section 03SH (section-trace-method) around Definition 03SE, Lemma 0DV5 and Remark 0DV6"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "locally constant sheaf of F_l vector spaces on connected scheme becomes successive extension of constant sheaves after finite etale cover of degree prime to l",
+   "results": "CategoryTheory.Sheaf.IsConstant, Sheaf.isConstant_iff_mem_essImage (Mathlib.CategoryTheory.Sites.ConstantSheaf), LightCondensed/CompHausLike locally constant modules (Mathlib.Condensed.*): no etale sheaves on schemes, no reduction",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "locally constant sheaf of vector spaces on connected scheme corresponds to representation of etale fundamental group, filtration by constant sheaves after finite etale cover",
+   "results": "CompHausLike.LocallyConstantModule.functor, LightCondMod.LocallyConstant.functor (Mathlib.Condensed.Discrete.Module), PreGaloisCategory.exists_set_ker_evaluation_subset_of_isOpen (Mathlib.CategoryTheory.Galois.Topology)",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "fundamental group of a Galois category, equivalence of fibre functor with finite continuous action sets",
+   "results": "PreGaloisCategory.instIsFundamentalGroupAutFunctorFintypeCat, IsFundamentalGroup, exists_lift_of_continuous (Galois.EssSurj), instIsEquivalenceContAction...functorToContAction (Galois.Equivalence), IsFundamentalGroup.transitive_of_isGalois",
+   "date": "2026-10-09",
+   "verdict": "generalization for the abstract Galois-category step only (steps 3-4 via thm-galois-fundamental); Mathlib does not make finite etale schemes a Galois category"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.PreGaloisCategory.functorToContAction",
+   "results": "functorToContAction, its EssSurj and Faithful instances (Mathlib.CategoryTheory.Galois.Equivalence)",
+   "date": "2026-10-09",
+   "verdict": "abstract Galois theory only; no match for the node"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "p-group acting on a finite vector space over F_p has a nonzero fixed vector",
+   "results": "IsPGroup.exists_fixed_point_of_prime_dvd_card_of_fixed_point, IsPGroup.nonempty_fixed_point_of_prime_not_dvd_card, IsPGroup.card_modEq_card_fixedPoints, IsPGroup.card_orbit (Mathlib.GroupTheory.PGroup)",
+   "date": "2026-10-09",
+   "verdict": "tools for lemma-weil-pbc-finite-l-group-filtration (step 5), not for this node"
+  },
+  {
+   "tool": "loogle",
+   "query": "Sylow.not_dvd_index",
+   "results": "Sylow.not_dvd_index (Mathlib.GroupTheory.Sylow)",
+   "date": "2026-10-09",
+   "verdict": "match for step 2 (new leaf lem-weil-pbc-sylow-subgroup-prime-index)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'FiniteEtale\\|IsFiniteEtale' Mathlib; ls Mathlib/CategoryTheory/Galois Mathlib/AlgebraicGeometry/Sites; grep -rln 'LocallyConstant' Mathlib/AlgebraicGeometry Mathlib/CategoryTheory/Sites",
+   "results": "CommAlgCat.FiniteEtale (RingTheory/Etale/Finite.lean: finite etale algebras, fibre functor over a separably closed field); CategoryTheory/Galois/* (abstract Galois categories); AlgebraicGeometry/Sites/{Etale,EtalePoint,ConstantSheaf,...}; locally constant only in Morphisms/FlatRank.lean (Scheme.Hom.isLocallyConstant_finrank); no locally constant etale sheaves, no fundamental group of a scheme, no trace",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [
+  "detailed_form",
+  "two_proofs"
+ ],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 1145,
+ "blueprint_uses": [
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-scheme-conventions",
+  "lemma-weil-pbc-finite-exchange",
+  "lemma-weil-pbc-finite-l-group-filtration",
+  "lemma-weil-pbc-finite-stalk-formula",
+  "thm-galois-lc-etale"
+ ],
+ "uses_not_cited": [
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-scheme-conventions",
+  "lemma-weil-pbc-finite-exchange"
+ ],
+ "proof_split_by": "paragraphs",
+ "blueprint_sketch": [
+  {
+   "statement": "For irreducible $U$ and finite locally constant $G$ of\n$\\mathbf F_\\ell$-vector spaces, there is a finite etale\n$v:V\\to U$ of degree prime to $\\ell$ such that $v^{-1}G$ has a filtration by\nconstant $\\mathbf F_\\ell$-sheaves, and $G$ is a direct summand of\n$v_*v^{-1}G$.",
+   "proof": "Choose a geometric point $\\bar u$ of $U$. The locally constant sheaf gives\na representation\n\n$$\n\\rho:\\pi_1(U,\\bar u)\\longrightarrow\n\\operatorname{GL}_{\\mathbf F_\\ell}(G_{\\bar u})\n$$\n\nwith finite image $Q$. If $H\\subseteq Q$ is an $\\ell$-Sylow subgroup, the\ninverse image $\\rho^{-1}(H)$ defines a connected finite etale cover\n$v:V\\to U$ of degree $d=[Q:H]$, which is prime to $\\ell$. On $V$, the\nmonodromy factors through $H$.\n\nThe representation filtration gives\n$0=V_0\\subset V_1\\subset\\cdots\\subset V_m=G_{\\bar u}$ with\n$V_a/V_{a-1}\\cong\\mathbf F_\\ell$ and trivial $H$-action. Passing from\n$H$-modules to locally constant sheaves gives, for every $a$, the explicit\nshort exact sequence\n\n$$\n0\\longrightarrow G_{a-1}\\longrightarrow G_a\\longrightarrow\n\\underline{\\mathbf F_\\ell}_V\\longrightarrow0,\n\\qquad G_m=v^{-1}G.\n$$\n\nAll inclusions, quotient maps, and connecting maps commute with extension of\nthe algebraically closed ground field.\n\nThe adjunction unit and the fibrewise sum are\n\n$$\n\\eta:G\\longrightarrow v_*v^{-1}G,\\qquad\n\\operatorname{tr}:v_*v^{-1}G\\longrightarrow G.\n$$\n\nAt a geometric stalk, $\\eta(s)=(s,\\ldots,s)$ in the direct sum indexed by\nthe $d$ points of the fibre, while\n$\\operatorname{tr}(s_1,\\ldots,s_d)=\\sum_as_a$. Consequently\n$\\operatorname{tr}\\circ\\eta=d\\,\\operatorname{id}_G$. Multiplication by\n$d^{-1}\\in\\mathbf F_\\ell$ defines\n$r=d^{-1}\\operatorname{tr}$ with $r\\eta=\\operatorname{id}_G$.\nThe stalk formulas are preserved by base change, so the direct-summand\ndecomposition and every filtration exact sequence are compatible with the\ncohomology comparison maps.",
+   "cites": []
+  }
+ ],
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.Scheme.IsFiniteLocallyConstantSheaf.exists_finite_etale_reduction"
+   ]
+  },
+  "slopmaster2": {
+   "state": "sorry_here",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.Scheme.IsFiniteLocallyConstantSheaf.exists_finite_etale_reduction",
+     "module": "WeilConjectures.ConstructibleSheaf.LocallyConstantReduction",
+     "lines": [
+      38,
+      71
+     ],
+     "kind": "theorem",
+     "sorry": true
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-09",
+  "item": "lemma-weil-pbc-curve-locally-constant-reduction",
+  "worker": "stage1",
+  "summary": "Statement made precise without changing the mathematics: prime r named, U a scheme (irreducible, hence nonempty and connected), G a finite locally constant sheaf of F_r-vector spaces (etale locally the constant sheaf of a finite F_r-module; Stacks 03RU/0A3R), V connected and v finite etale of degree d (finite locally free of degree d, every geometric fibre has d points) with r not dividing d, the filtration written out (0=G_0 c ... c G_m=v^{-1}G, G_i/G_{i-1} = constant F_r), eta the adjunction unit and tr the trace of a new definition node, and the direct-summand conclusion with the retraction d^{-1} tr. Proof rewritten in 7 steps following Stacks Lemma 0A3R and Section 03SH (the imported one-paragraph agent proof): representation and finite image (cor-galois-lisse-representations, a reviewed tool of sk-lem-finite), Sylow (new Mathlib leaf), the connected cover with fibre pi_1/H built directly from thm-galois-fundamental instead of the Galois object Y and the quotient Y/H, monodromy of v^{-1}G (thm-galois-fundamental, thm-galois-lc-etale, lem-weil-pbc-inverse-image-stalk-germ), filtration (lemma-weil-pbc-finite-l-group-filtration + the exact equivalence), trace (new nodes def-weil-pbc-finite-etale-trace, lem-weil-pbc-finite-etale-trace-exists, lem-weil-pbc-finite-etale-trace-degree), splitting (elementary). Dropped: lemma-weil-pbc-finite-stalk-formula (the trace computation is now in lem-weil-pbc-finite-etale-trace-degree) and lemma-weil-pbc-finite-exchange (never used), def-weil-pbc-scheme-conventions kept as statement dependency. The Lean declaration AlgebraicGeometry.Scheme.IsFiniteLocallyConstantSheaf.exists_finite_etale_reduction (slopmaster2, sorry) states this node and is not yet attached."
+ },
+ "tool_uses": [
+  "cor-galois-lisse-representations"
+ ],
+ "reviewed": {
+  "date": "2026-10-09",
+  "by": "L",
+  "result": "pass",
+  "note": "statement made precise (degree, filtration, trace splitting); seven steps along Stacks 0A3R and the trace section 03SH (representation, Sylow subgroup, the connected cover with fibre π_1/H, monodromy through P, the filtration via the exact equivalence, tr∘res = d, the splitting); 4 new nodes, one Mathlib leaf verified (Sylow.lean); the reviewed dictionary cor-galois-lisse-representations (sk-lem-finite) accepted as a tool use; Lean of Invariants.lean attached to lemma-weil-pbc-finite-l-group-filtration"
+ },
+ "lean": {
+  "module": "WeilConjectures.ConstructibleSheaf.LocallyConstantReduction",
+  "declaration": "AlgebraicGeometry.Scheme.IsFiniteLocallyConstantSheaf.exists_finite_etale_reduction",
+  "branch": "slopmaster2",
+  "line": 38,
+  "declarations": [
+   "AlgebraicGeometry.Scheme.IsFiniteLocallyConstantSheaf.exists_finite_etale_reduction"
+  ],
+  "sorry_free": false,
+  "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state sorry_here)"
+ }
 }

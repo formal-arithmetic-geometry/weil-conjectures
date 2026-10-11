@@ -1,58 +1,31 @@
 {
-  "id": "lem-pc-ring-pseudo-coherent-distinguished-triangle",
-  "blueprint": {
-    "is": null,
-    "from": {
-      "node": "lem-sc-finite-duality",
-      "place": "proper-flat support proof: closure of pseudo-coherence under distinguished triangles in the affine ring reduction",
-      "via": [
-        "lem-pc-ring-pseudo-coherent-summand"
-      ]
-    },
-    "same_as": []
+ "id": "lem-pc-ring-pseudo-coherent-distinguished-triangle",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "proper-flat support proof: closure of pseudo-coherence under distinguished triangles in the affine ring reduction",
+   "via": [
+    "lem-pc-ring-pseudo-coherent-summand"
+   ]
   },
-  "kind": "statement",
-  "title": "m-pseudo-coherence in distinguished triangles of ring complexes",
-  "statement": "Let $R$ be a ring and $m$ an integer, and let $D(R)$ be the derived category [def-weil-abstract-derived-category] of the abelian category of $R$-modules. Call an object $C$ of $D(R)$ $m$-pseudo-coherent if there are a bounded complex $E^\\bullet$ of finite free $R$-modules and a morphism $E^\\bullet\\to C$ in $D(R)$ inducing isomorphisms $H^i(E^\\bullet)\\to H^i(C)$ for $i>m$ and a surjection $H^m(E^\\bullet)\\to H^m(C)$. Let $A\\to B\\to C\\to A[1]$ be a distinguished triangle in $D(R)$. If $A$ is $(m+1)$-pseudo-coherent and $B$ is $m$-pseudo-coherent, then $C$ is $m$-pseudo-coherent; if $A$ and $C$ are $m$-pseudo-coherent, then $B$ is $m$-pseudo-coherent; and if $B$ is $(m+1)$-pseudo-coherent and $C$ is $m$-pseudo-coherent, then $A$ is $(m+1)$-pseudo-coherent.",
-  "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 064R, more-algebra-lemma-cone-pseudo-coherent"
-  },
-  "stmt_deps": [
-    "def-weil-abstract-derived-category",
-    "def-pc-ring-m-pseudo-coherent"
-  ],
-  "proof": [
-    {
-      "text": "For the first clause, choose a bounded finite-free witness $P^\\bullet\\to A$ which is an isomorphism on $H^i$ for $i>m+1$ and surjective on $H^{m+1}$, and a bounded finite-free witness $\\beta:E^\\bullet\\to B$ which is an isomorphism on $H^i$ for $i>m$ and surjective on $H^m$. Replace $P^\\bullet$ by its brutal truncation $\\sigma_{\\ge m+1}P^\\bullet$ (terms of degree $\\ge m+1$): its $H^i$ agrees with that of $P^\\bullet$ for $i>m+1$ and $H^{m+1}(\\sigma_{\\ge m+1}P^\\bullet)=\\ker d^{m+1}\\to H^{m+1}(P^\\bullet)$ is surjective, so the witness conditions are unchanged and now $P^i=0$ for $i<m+1$, in particular for $i<m$. Apply [lem-pc-ring-derived-map-lift] with $n=m$, $\\alpha=\\beta:E^\\bullet\\to B$ and the composite $P^\\bullet\\to A\\to B$: it gives a chain map $\\gamma:P^\\bullet\\to E^\\bullet$ with $\\beta\\circ Q(\\gamma)$ equal to $P^\\bullet\\to A\\to B$ in $D(R)$. The cone construction in [def-weil-abstract-derived-category] gives a bounded finite-free complex $Q^\\bullet=C(\\gamma)^\\bullet$ and a distinguished triangle $P^\\bullet\\to E^\\bullet\\to Q^\\bullet\\to P^\\bullet[1]$; by (TR3) of [def-weil-triangulated-category] the commutative square extends to a morphism of distinguished triangles to $A\\to B\\to C\\to A[1]$. Take the long exact cohomology sequences of both triangles [lem-sf-derived-homology-long-exact]; the morphism of triangles gives a commutative ladder between them [lem-weil-pbc-derived-cohomology-ladder]. For every $i>m$, consider the five terms $H^i(P)\\to H^i(E)\\to H^i(Q)\\to H^{i+1}(P)\\to H^{i+1}(E)$ over the corresponding terms for $A,B,C$: the first vertical map is surjective ($i\\ge m+1$), the second, fourth and fifth are isomorphisms ($i>m$, $i+1>m+1$), so the five-lemma [lem-weil-pbc-five-lemma] gives $H^i(Q)\\cong H^i(C)$. At $i=m$, consider the four terms $H^m(E)\\to H^m(Q)\\to H^{m+1}(P)\\to H^{m+1}(E)$: the vertical maps on $H^m(E)$ and $H^{m+1}(P)$ are surjective and the one on $H^{m+1}(E)$ is an isomorphism, hence a monomorphism, so the four lemma [lem-pc-four-lemma-epi] gives surjectivity $H^m(Q)\\twoheadrightarrow H^m(C)$. Thus $Q^\\bullet\\to C$ is the required $m$-pseudo-coherent witness for $C$.",
-      "uses": [
-        "def-weil-abstract-derived-category",
-        "def-weil-triangulated-category",
-        "lem-pc-ring-derived-map-lift",
-        "lem-sf-derived-homology-long-exact",
-        "lem-weil-pbc-derived-cohomology-ladder",
-        "lem-weil-pbc-five-lemma",
-        "lem-pc-four-lemma-epi"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/more-algebra.tex",
-        "place": "Tag 064R, proof of lemma-cone-pseudo-coherent, part (1)"
-      }
-    },
-    {
-      "text": "For the second clause, rotate twice to the distinguished triangle $C\\to A[1]\\to B[1]\\to C[1]$. From $A$ being $m$-pseudo-coherent, the identity $H^i(A[1])=H^{i+1}(A)$ gives that $A[1]$ is $(m-1)$-pseudo-coherent; $C$ is $(m-1+1)$-pseudo-coherent because it is $m$-pseudo-coherent. Applying the first clause with index $m-1$ gives that $B[1]$ is $(m-1)$-pseudo-coherent, and shifting back gives that $B$ is $m$-pseudo-coherent. For the third clause, rotate to $B\\to C\\to A[1]\\to B[1]$, apply the first clause with index $m$ to obtain that $A[1]$ is $m$-pseudo-coherent, and use $H^i(A[1])=H^{i+1}(A)$ to conclude that $A$ is $(m+1)$-pseudo-coherent. Rotation preserves distinguished triangles by the triangulated structure in [def-weil-abstract-derived-category].",
-      "uses": [
-        "def-weil-abstract-derived-category"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/more-algebra.tex",
-        "place": "Tag 064R, proof of lemma-cone-pseudo-coherent, assertions (2) and (3)"
-      }
-    }
-  ],
-  "proof_deps": [
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "m-pseudo-coherence in distinguished triangles of ring complexes",
+ "statement": "Let $R$ be a ring and $m$ an integer, and let $D(R)$ be the derived category [def-weil-abstract-derived-category] of the abelian category of $R$-modules. Call an object $C$ of $D(R)$ $m$-pseudo-coherent if there are a bounded complex $E^\\bullet$ of finite free $R$-modules and a morphism $E^\\bullet\\to C$ in $D(R)$ inducing isomorphisms $H^i(E^\\bullet)\\to H^i(C)$ for $i>m$ and a surjection $H^m(E^\\bullet)\\to H^m(C)$. Let $A\\to B\\to C\\to A[1]$ be a distinguished triangle in $D(R)$. If $A$ is $(m+1)$-pseudo-coherent and $B$ is $m$-pseudo-coherent, then $C$ is $m$-pseudo-coherent; if $A$ and $C$ are $m$-pseudo-coherent, then $B$ is $m$-pseudo-coherent; and if $B$ is $(m+1)$-pseudo-coherent and $C$ is $m$-pseudo-coherent, then $A$ is $(m+1)$-pseudo-coherent.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 064R, more-algebra-lemma-cone-pseudo-coherent"
+ },
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "def-pc-ring-m-pseudo-coherent"
+ ],
+ "proof": [
+  {
+   "text": "For the first clause, choose a bounded finite-free witness $P^\\bullet\\to A$ which is an isomorphism on $H^i$ for $i>m+1$ and surjective on $H^{m+1}$, and a bounded finite-free witness $\\beta:E^\\bullet\\to B$ which is an isomorphism on $H^i$ for $i>m$ and surjective on $H^m$. Replace $P^\\bullet$ by its brutal truncation $\\sigma_{\\ge m+1}P^\\bullet$ (terms of degree $\\ge m+1$): its $H^i$ agrees with that of $P^\\bullet$ for $i>m+1$ and $H^{m+1}(\\sigma_{\\ge m+1}P^\\bullet)=\\ker d^{m+1}\\to H^{m+1}(P^\\bullet)$ is surjective, so the witness conditions are unchanged and now $P^i=0$ for $i<m+1$, in particular for $i<m$. Apply [lem-pc-ring-derived-map-lift] with $n=m$, $\\alpha=\\beta:E^\\bullet\\to B$ and the composite $P^\\bullet\\to A\\to B$: it gives a chain map $\\gamma:P^\\bullet\\to E^\\bullet$ with $\\beta\\circ Q(\\gamma)$ equal to $P^\\bullet\\to A\\to B$ in $D(R)$. The cone construction in [def-weil-abstract-derived-category] gives a bounded finite-free complex $Q^\\bullet=C(\\gamma)^\\bullet$ and a distinguished triangle $P^\\bullet\\to E^\\bullet\\to Q^\\bullet\\to P^\\bullet[1]$; by (TR3) of [def-weil-triangulated-category] the commutative square extends to a morphism of distinguished triangles to $A\\to B\\to C\\to A[1]$. Take the long exact cohomology sequences of both triangles [lem-sf-derived-homology-long-exact]; the morphism of triangles gives a commutative ladder between them [lem-weil-pbc-derived-cohomology-ladder]. For every $i>m$, consider the five terms $H^i(P)\\to H^i(E)\\to H^i(Q)\\to H^{i+1}(P)\\to H^{i+1}(E)$ over the corresponding terms for $A,B,C$: the first vertical map is surjective ($i\\ge m+1$), the second, fourth and fifth are isomorphisms ($i>m$, $i+1>m+1$), so the five-lemma [lem-weil-pbc-five-lemma] gives $H^i(Q)\\cong H^i(C)$. At $i=m$, consider the four terms $H^m(E)\\to H^m(Q)\\to H^{m+1}(P)\\to H^{m+1}(E)$: the vertical maps on $H^m(E)$ and $H^{m+1}(P)$ are surjective and the one on $H^{m+1}(E)$ is an isomorphism, hence a monomorphism, so the four lemma [lem-pc-four-lemma-epi] gives surjectivity $H^m(Q)\\twoheadrightarrow H^m(C)$. Thus $Q^\\bullet\\to C$ is the required $m$-pseudo-coherent witness for $C$.",
+   "uses": [
     "def-weil-abstract-derived-category",
     "def-weil-triangulated-category",
     "lem-pc-ring-derived-map-lift",
@@ -60,89 +33,128 @@
     "lem-weil-pbc-derived-cohomology-ladder",
     "lem-weil-pbc-five-lemma",
     "lem-pc-four-lemma-epi"
-  ],
-  "proof_origin": {
-    "by": "document",
+   ],
+   "elementary": false,
+   "source": {
     "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 064R, lemma-cone-pseudo-coherent"
+    "place": "Tag 064R, proof of lemma-cone-pseudo-coherent, part (1)"
+   }
   },
-  "mathlib_searches": [
-    {
-      "tool": "leanfinder",
-      "query": "a distinguished triangle of complexes of modules preserves m-pseudo-coherence under two out of three conditions",
-      "results": "Generic derived-category triangle declarations including DerivedCategory.triangleOfSES_distinguished and DerivedCategory.mem_distTriang_iff; no pseudo-coherence theorem",
-      "date": "2026-10-11",
-      "verdict": "no match"
-    },
-    {
-      "tool": "loogle",
-      "query": "DerivedCategory.mem_distTriang_iff",
-      "results": "DerivedCategory.mem_distTriang_iff in Mathlib/Algebra/Homology/DerivedCategory/Basic; characterizes distinguished triangles but does not state pseudo-coherence",
-      "date": "2026-10-11",
-      "verdict": "no match"
-    },
-    {
-      "tool": "grep",
-      "query": "pseudo.?coherent|mapping.?cone",
-      "results": "Mapping-cone and distinguished-triangle infrastructure in Mathlib/Algebra/Homology/HomotopyCategory and DerivedCategory; no pseudo-coherent declaration",
-      "date": "2026-10-11",
-      "verdict": "no match"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "created": {
-    "item": "lem-pc-ring-pseudo-coherent-summand",
-    "by": "worker",
-    "date": "2026-10-10"
-  },
-  "chapter": "sec-picard-framework",
-  "unit": "sk-thm-picard-duality",
-  "split_report": {
-    "date": "2026-10-11",
-    "item": "lem-pc-ring-pseudo-coherent-distinguished-triangle",
-    "worker": "stage1",
-    "summary": "Split Tag 064R into the finite-free mapping-cone argument and triangle rotation. Added a statement-only node for the derived map lift and reused the existing generic five-lemma tool. The item statement and all three clauses remain unchanged.",
-    "blueprint": "The steps realize the ancestor lem-sc-finite-duality proof place 'proper-flat support proof: closure of pseudo-coherence under distinguished triangles in the affine ring reduction'.",
-    "tool_uses": [
-      {
-        "node": "lem-weil-pbc-five-lemma",
-        "why": "The cone proof applies the generic five-lemma to finite segments of the long exact cohomology sequences; no node in this unit supplies that abelian-category tool."
-      }
-    ]
-  },
-  "tool_uses": [
-    "lem-weil-pbc-five-lemma"
-  ],
-  "reviewed": {
-    "date": "2026-10-11",
-    "by": "L",
-    "reviewer": "R-pdt0046",
-    "group": "E1",
-    "result": "pass",
-    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-pdt0046 (reviewer sub-agent of L); spot-checked: Read 064R/064E; item statement unchanged (shared m-pc wording intact); citers bca89f654 (clause 1), summand (clause 1), localization-glue (clauses 1,2) use stated clauses; Step 2 rotations (2) index m-1 and (3) index m checked. FIX more, RETURN less: (1) C1/C4 lift: Step 1 asserted that P->A->B and E->B 'determine' a map P->E in D(R) with no node; the new node lem-pc-ring-derived-map-lift only said D(R) maps from bounded projectives are chain maps (not 064E, and sourced to more-algebra.tex). Restated the node as Tag 064E in D(R) form (P^i=0 for i<n, alpha iso above n surj at n => chain map gamma with alpha Q(gamma)=beta), source derived.tex, LeanFinder query recorded (no match); Step 1 applies it with n=m after truncation. (2) C4 four lemma: lem-sc-four-lemma (six-term 0-ended, four isos => isos) does not give surjectivity and the outer maps at i=m are only surjective; added node lem-pc-four-lemma-epi (Stacks 05QA(1), = Mathlib epi_of_epi_of_epi_of_mono), dropped lem-sc-four-lemma from uses. (3) C1: long exact cohomology sequence, its ladder and TR3 were uncited: added lem-sf-derived-homology-long-exact, lem-weil-pbc-derived-cohomology-ladder (Mathlib leaves) and def-weil-triangulated-category; five-lemma text corrected (first map only epi at i=m+1). The Second reading by E1 missed (1) and (2).; 3 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
-  },
-  "lead_note": "2026-10-11 L (R-pdt0046): lem-pc-four-lemma-epi is added statement-only (status unsplit) because a reviewer-added node must be; its search records an exact match CategoryTheory.Abelian.epi_of_epi_of_epi_of_mono (Mathlib/CategoryTheory/Abelian/DiagramLemmas/Four.lean:125): make it a Mathlib leaf.",
-  "lean": {
-    "module": "Sheaf.RingTheory.PseudoCoherentDistinguishedTriangle",
-    "declaration": "CategoryTheory.isMPseudoCoherent_of_distinguished_triangle",
-    "declarations": [
-      "CategoryTheory.isMPseudoCoherent_of_distinguished_triangle"
-    ],
-    "file": "lean/Sheaf/RingTheory/PseudoCoherentDistinguishedTriangle.lean",
-    "statement": "theorem isMPseudoCoherent_of_distinguished_triangle (R : Type u) [CommRing R] [HasDerivedCategory.{w} (ModuleCat.{v} R)] (m : ℤ) (T : Triangle (DerivedCategory (ModuleCat.{v} R))) (hT : T ∈ distTriang (DerivedCategory (ModuleCat.{v} R))) : (IsMPseudoCoherent (m + 1) T.obj₁ → IsMPseudoCoherent m T.obj₂ → IsMPseudoCoherent m T.obj₃) ∧ (IsMPseudoCoherent m T.obj₁ → IsMPseudoCoherent m T.obj₃ → IsMPseudoCoherent m T.obj₂) ∧ (IsMPseudoCoherent (m + 1) T.obj₂ → IsMPseudoCoherent m T.obj₃ → IsMPseudoCoherent (m + 1) T.obj₁)",
-    "branch": "sheaf-dag",
-    "by": "M1",
-    "date": "2026-10-11",
-    "existing": false,
-    "fixed_by": "R-pdt0910"
-  },
-  "reviewed_lean": {
-    "date": "2026-10-11",
-    "by": "L",
-    "reviewer": "R-pdt0910",
-    "group": "M1",
-    "result": "fix",
-    "note": "R CommRing, m:Z, T distinguished in DerivedCategory (ModuleCat R) (Mathlib leaf), clauses (m+1,m=>m on 3), (m,m=>m on 2), (m+1 on 2, m on 3 => m+1 on 1) exact per 064R; fix: private IsMPseudoCoherent dropped for landed DerivedCategory.IsMPseudoCoherent (H4/H12), Ring->CommRing; universes u v w independent"
+  {
+   "text": "For the second clause, rotate twice to the distinguished triangle $C\\to A[1]\\to B[1]\\to C[1]$. From $A$ being $m$-pseudo-coherent, the identity $H^i(A[1])=H^{i+1}(A)$ gives that $A[1]$ is $(m-1)$-pseudo-coherent; $C$ is $(m-1+1)$-pseudo-coherent because it is $m$-pseudo-coherent. Applying the first clause with index $m-1$ gives that $B[1]$ is $(m-1)$-pseudo-coherent, and shifting back gives that $B$ is $m$-pseudo-coherent. For the third clause, rotate to $B\\to C\\to A[1]\\to B[1]$, apply the first clause with index $m$ to obtain that $A[1]$ is $m$-pseudo-coherent, and use $H^i(A[1])=H^{i+1}(A)$ to conclude that $A$ is $(m+1)$-pseudo-coherent. Rotation preserves distinguished triangles by the triangulated structure in [def-weil-abstract-derived-category].",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 064R, proof of lemma-cone-pseudo-coherent, assertions (2) and (3)"
+   }
   }
+ ],
+ "proof_deps": [
+  "def-weil-abstract-derived-category",
+  "def-weil-triangulated-category",
+  "lem-pc-ring-derived-map-lift",
+  "lem-sf-derived-homology-long-exact",
+  "lem-weil-pbc-derived-cohomology-ladder",
+  "lem-weil-pbc-five-lemma",
+  "lem-pc-four-lemma-epi"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 064R, lemma-cone-pseudo-coherent"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "a distinguished triangle of complexes of modules preserves m-pseudo-coherence under two out of three conditions",
+   "results": "Generic derived-category triangle declarations including DerivedCategory.triangleOfSES_distinguished and DerivedCategory.mem_distTriang_iff; no pseudo-coherence theorem",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory.mem_distTriang_iff",
+   "results": "DerivedCategory.mem_distTriang_iff in Mathlib/Algebra/Homology/DerivedCategory/Basic; characterizes distinguished triangles but does not state pseudo-coherence",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "pseudo.?coherent|mapping.?cone",
+   "results": "Mapping-cone and distinguished-triangle infrastructure in Mathlib/Algebra/Homology/HomotopyCategory and DerivedCategory; no pseudo-coherent declaration",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "item": "lem-pc-ring-pseudo-coherent-summand",
+  "by": "worker",
+  "date": "2026-10-10"
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-ring-pseudo-coherent-distinguished-triangle",
+  "worker": "stage1",
+  "summary": "Split Tag 064R into the finite-free mapping-cone argument and triangle rotation. Added a statement-only node for the derived map lift and reused the existing generic five-lemma tool. The item statement and all three clauses remain unchanged.",
+  "blueprint": "The steps realize the ancestor lem-sc-finite-duality proof place 'proper-flat support proof: closure of pseudo-coherence under distinguished triangles in the affine ring reduction'.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-five-lemma",
+    "why": "The cone proof applies the generic five-lemma to finite segments of the long exact cohomology sequences; no node in this unit supplies that abelian-category tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-five-lemma"
+ ],
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-pdt0046",
+  "group": "E1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-pdt0046 (reviewer sub-agent of L); spot-checked: Read 064R/064E; item statement unchanged (shared m-pc wording intact); citers bca89f654 (clause 1), summand (clause 1), localization-glue (clauses 1,2) use stated clauses; Step 2 rotations (2) index m-1 and (3) index m checked. FIX more, RETURN less: (1) C1/C4 lift: Step 1 asserted that P->A->B and E->B 'determine' a map P->E in D(R) with no node; the new node lem-pc-ring-derived-map-lift only said D(R) maps from bounded projectives are chain maps (not 064E, and sourced to more-algebra.tex). Restated the node as Tag 064E in D(R) form (P^i=0 for i<n, alpha iso above n surj at n => chain map gamma with alpha Q(gamma)=beta), source derived.tex, LeanFinder query recorded (no match); Step 1 applies it with n=m after truncation. (2) C4 four lemma: lem-sc-four-lemma (six-term 0-ended, four isos => isos) does not give surjectivity and the outer maps at i=m are only surjective; added node lem-pc-four-lemma-epi (Stacks 05QA(1), = Mathlib epi_of_epi_of_epi_of_mono), dropped lem-sc-four-lemma from uses. (3) C1: long exact cohomology sequence, its ladder and TR3 were uncited: added lem-sf-derived-homology-long-exact, lem-weil-pbc-derived-cohomology-ladder (Mathlib leaves) and def-weil-triangulated-category; five-lemma text corrected (first map only epi at i=m+1). The Second reading by E1 missed (1) and (2).; 3 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+ },
+ "lead_note": "2026-10-11 L (R-pdt0046): lem-pc-four-lemma-epi is added statement-only (status unsplit) because a reviewer-added node must be; its search records an exact match CategoryTheory.Abelian.epi_of_epi_of_epi_of_mono (Mathlib/CategoryTheory/Abelian/DiagramLemmas/Four.lean:125): make it a Mathlib leaf.",
+ "lean": {
+  "module": "Sheaf.RingTheory.PseudoCoherentDistinguishedTriangle",
+  "declaration": "CategoryTheory.isMPseudoCoherent_of_distinguished_triangle",
+  "declarations": [
+   "CategoryTheory.isMPseudoCoherent_of_distinguished_triangle"
+  ],
+  "file": "lean/Sheaf/RingTheory/PseudoCoherentDistinguishedTriangle.lean",
+  "statement": "theorem isMPseudoCoherent_of_distinguished_triangle (R : Type u) [CommRing R] [HasDerivedCategory.{w} (ModuleCat.{v} R)] (m : ℤ) (T : Triangle (DerivedCategory (ModuleCat.{v} R))) (hT : T ∈ distTriang (DerivedCategory (ModuleCat.{v} R))) : (IsMPseudoCoherent (m + 1) T.obj₁ → IsMPseudoCoherent m T.obj₂ → IsMPseudoCoherent m T.obj₃) ∧ (IsMPseudoCoherent m T.obj₁ → IsMPseudoCoherent m T.obj₃ → IsMPseudoCoherent m T.obj₂) ∧ (IsMPseudoCoherent (m + 1) T.obj₂ → IsMPseudoCoherent m T.obj₃ → IsMPseudoCoherent (m + 1) T.obj₁)",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-pdt0910"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-pdt0910",
+  "group": "M1",
+  "result": "fix",
+  "note": "R CommRing, m:Z, T distinguished in DerivedCategory (ModuleCat R) (Mathlib leaf), clauses (m+1,m=>m on 3), (m,m=>m on 2), (m+1 on 2, m on 3 => m+1 on 1) exact per 064R; fix: private IsMPseudoCoherent dropped for landed DerivedCategory.IsMPseudoCoherent (H4/H12), Ring->CommRing; universes u v w independent"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

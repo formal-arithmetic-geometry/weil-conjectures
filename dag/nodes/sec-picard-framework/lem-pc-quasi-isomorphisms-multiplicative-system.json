@@ -1,84 +1,96 @@
 {
-  "id": "lem-pc-quasi-isomorphisms-multiplicative-system",
-  "blueprint": {
-    "is": null,
-    "from": {
-      "node": "lem-sc-finite-duality",
-      "place": "the localization Hom-colimit formulas for D(A) and D(B) in the pre-derived adjunction calculation",
-      "via": [
-        "lem-pc-pre-derived-adjoint-functors-general"
-      ]
-    },
-    "same_as": []
+ "id": "lem-pc-quasi-isomorphisms-multiplicative-system",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "the localization Hom-colimit formulas for D(A) and D(B) in the pre-derived adjunction calculation",
+   "via": [
+    "lem-pc-pre-derived-adjoint-functors-general"
+   ]
   },
-  "kind": "statement",
-  "title": "Quasi-isomorphisms form a multiplicative system in the homotopy category",
-  "statement": "Let $\\mathcal A$ be an abelian category [def-sp-abelian]. In the homotopy category $K(\\mathcal A)$ of cochain complexes of $\\mathcal A$, the class of (homotopy classes of) quasi-isomorphisms [def-weil-abstract-derived-category] is a multiplicative system: it admits both a left and a right calculus of fractions, and $D(\\mathcal A)$ is the corresponding localization of $K(\\mathcal A)$.",
-  "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Derived Categories, Lemma 05RT (lemma-acyclic, line 3670)"
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Quasi-isomorphisms form a multiplicative system in the homotopy category",
+ "statement": "Let $\\mathcal A$ be an abelian category [def-sp-abelian]. In the homotopy category $K(\\mathcal A)$ of cochain complexes of $\\mathcal A$, the class of (homotopy classes of) quasi-isomorphisms [def-weil-abstract-derived-category] is a multiplicative system: it admits both a left and a right calculus of fractions, and $D(\\mathcal A)$ is the corresponding localization of $K(\\mathcal A)$.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Derived Categories, Lemma 05RT (lemma-acyclic, line 3670)"
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Derived Categories, Lemma 05RT (lemma-acyclic, line 3670)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "HasLeftCalculusOfFractions|HasRightCalculusOfFractions",
+   "results": "Mathlib/Algebra/Homology/DerivedCategory/Fractions.lean lines 34 and 38: exact left and right calculus instances for HomotopyCategory.quasiIso.",
+   "date": "2026-10-10",
+   "verdict": "match"
   },
-  "stmt_deps": [
-    "def-sp-abelian",
-    "def-weil-abstract-derived-category"
-  ],
-  "proof": [],
-  "proof_deps": [],
-  "proof_origin": {
-    "by": "document",
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Derived Categories, Lemma 05RT (lemma-acyclic, line 3670)"
+  {
+   "tool": "leanfinder",
+   "query": "quasi-isomorphisms form a multiplicative system in the homotopy category",
+   "results": "Exact left and right calculus declarations and localization declarations returned.",
+   "date": "2026-10-10",
+   "verdict": "match"
   },
-  "mathlib_searches": [
-    {
-      "tool": "grep",
-      "query": "HasLeftCalculusOfFractions|HasRightCalculusOfFractions",
-      "results": "Mathlib/Algebra/Homology/DerivedCategory/Fractions.lean lines 34 and 38: exact left and right calculus instances for HomotopyCategory.quasiIso.",
-      "date": "2026-10-10",
-      "verdict": "match"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "quasi-isomorphisms form a multiplicative system in the homotopy category",
-      "results": "Exact left and right calculus declarations and localization declarations returned.",
-      "date": "2026-10-10",
-      "verdict": "match"
-    },
-    {
-      "tool": "loogle",
-      "query": "HasLeftCalculusOfFractions",
-      "results": "No result: Loogle reported unknown identifier HasLeftCalculusOfFractions.",
-      "date": "2026-10-10",
-      "verdict": "unavailable"
-    }
-  ],
-  "status": "mathlib",
-  "created": {
-    "item": "lem-pc-pre-derived-adjoint-functors-general"
-  },
-  "chapter": "sec-picard-framework",
-  "unit": "sk-thm-picard-duality",
-  "mathlib_match": {
-    "declaration": "DerivedCategory.instHasLeftCalculusOfFractionsHomotopyCategoryIntUpQuasiIso; DerivedCategory.instHasRightCalculusOfFractionsHomotopyCategoryIntUpQuasiIso",
-    "file": "Mathlib/Algebra/Homology/DerivedCategory/Fractions.lean",
-    "line": 34,
-    "how": "one declaration per clause, lines read with sed by L (19:15 UTC): left calculus of fractions, the instance `(HomotopyCategory.quasiIso C (ComplexShape.up ℤ)).HasLeftCalculusOfFractions` at line 34; right calculus, the instance `.HasRightCalculusOfFractions` at line 38 (both for an abelian C with HasDerivedCategory); D(A) as the localization of K(A) at quasi-isomorphisms is Mathlib's definition DerivedCategory (Mathlib/Algebra/Homology/DerivedCategory/Basic.lean), cited by def-weil-abstract-derived-category. The two calculi are Mathlib's form of 'multiplicative system' (Stacks 05RT). Declaration names read from the compiled Fractions.ilean by L (19:34 UTC), correcting the guessed name (reviewer R-qim2001)."
-  },
-  "lead_note": " Promoted to a Mathlib leaf by L (19:15 UTC) per reviewer R-pda1912 (the merge tool only accepts reviewer-added nodes as unsplit).",
-  "split_report": {
-    "date": "2026-10-11",
-    "item": "lem-pc-quasi-isomorphisms-multiplicative-system",
-    "worker": "stage1",
-    "summary": "The imported item is already a Mathlib leaf. Mathlib provides both calculus-of-fractions instances for quasi-isomorphisms in the homotopy category, and defines the derived category as the localization; no smaller project node is needed.",
-    "blueprint": "The item serves the pre-derived adjunction calculation's localization Hom-colimit formulas for D(A) and D(B).",
-    "tool_uses": []
-  },
-  "reviewed": {
-    "date": "2026-10-10",
-    "by": "L",
-    "reviewer": "R-qim2001",
-    "group": "H1",
-    "result": "pass",
-    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-qim2001 (reviewer sub-agent of L); spot-checked: statement and mathlib_match byte-identical to lead commit a41d0eb25 (compared); Fractions.lean 34/38 read with sed, exact left/right calculus instances; reran the recorded LeanFinder query (returns both instances) and Loogle 'HasLeftCalculusOfFractions' (same unknown-identifier error as recorded): records honest. Note: second reading claims created.item was corrected but it still names lem-pc-pre-derived-adjoint-functors-general, which is the correct maintainer value; no repair needed. FIX more, RETURN less: none needed."
+  {
+   "tool": "loogle",
+   "query": "HasLeftCalculusOfFractions",
+   "results": "No result: Loogle reported unknown identifier HasLeftCalculusOfFractions.",
+   "date": "2026-10-10",
+   "verdict": "unavailable"
   }
+ ],
+ "status": "mathlib",
+ "created": {
+  "item": "lem-pc-pre-derived-adjoint-functors-general"
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "mathlib_match": {
+  "declaration": "DerivedCategory.instHasLeftCalculusOfFractionsHomotopyCategoryIntUpQuasiIso; DerivedCategory.instHasRightCalculusOfFractionsHomotopyCategoryIntUpQuasiIso",
+  "file": "Mathlib/Algebra/Homology/DerivedCategory/Fractions.lean",
+  "line": 34,
+  "how": "one declaration per clause, lines read with sed by L (19:15 UTC): left calculus of fractions, the instance `(HomotopyCategory.quasiIso C (ComplexShape.up ℤ)).HasLeftCalculusOfFractions` at line 34; right calculus, the instance `.HasRightCalculusOfFractions` at line 38 (both for an abelian C with HasDerivedCategory); D(A) as the localization of K(A) at quasi-isomorphisms is Mathlib's definition DerivedCategory (Mathlib/Algebra/Homology/DerivedCategory/Basic.lean), cited by def-weil-abstract-derived-category. The two calculi are Mathlib's form of 'multiplicative system' (Stacks 05RT). Declaration names read from the compiled Fractions.ilean by L (19:34 UTC), correcting the guessed name (reviewer R-qim2001)."
+ },
+ "lead_note": " Promoted to a Mathlib leaf by L (19:15 UTC) per reviewer R-pda1912 (the merge tool only accepts reviewer-added nodes as unsplit).",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-quasi-isomorphisms-multiplicative-system",
+  "worker": "stage1",
+  "summary": "The imported item is already a Mathlib leaf. Mathlib provides both calculus-of-fractions instances for quasi-isomorphisms in the homotopy category, and defines the derived category as the localization; no smaller project node is needed.",
+  "blueprint": "The item serves the pre-derived adjunction calculation's localization Hom-colimit formulas for D(A) and D(B).",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-qim2001",
+  "group": "H1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-qim2001 (reviewer sub-agent of L); spot-checked: statement and mathlib_match byte-identical to lead commit a41d0eb25 (compared); Fractions.lean 34/38 read with sed, exact left/right calculus instances; reran the recorded LeanFinder query (returns both instances) and Loogle 'HasLeftCalculusOfFractions' (same unknown-identifier error as recorded): records honest. Note: second reading claims created.item was corrected but it still names lem-pc-pre-derived-adjoint-functors-general, which is the correct maintainer value; no repair needed. FIX more, RETURN less: none needed."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

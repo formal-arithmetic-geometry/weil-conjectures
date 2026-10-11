@@ -1,129 +1,141 @@
 {
-  "id": "lem-sc-group-coinduced-acyclic",
-  "blueprint": {
-    "is": null,
-    "from": {
-      "node": "lem-sc-group-cd-one",
-      "place": "proof, third paragraph: the continuous cochain complex of a coinduced module is contractible in positive degrees",
-      "via": []
-    },
-    "same_as": []
+ "id": "lem-sc-group-coinduced-acyclic",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-group-cd-one",
+   "place": "proof, third paragraph: the continuous cochain complex of a coinduced module is contractible in positive degrees",
+   "via": []
   },
-  "kind": "statement",
-  "title": "Coinduced discrete modules are acyclic in positive continuous cohomology",
-  "statement": "Using [def-exc-continuous-cohomology], let $G$ be a profinite group, $\\ell$ a prime, and $M$ a discrete continuous $\\ell$-primary $G$-module. Let $\\operatorname{Cont}(G,M)$ be the abelian group of continuous functions $G\\to M$, with the coinduced action $(g\\cdot f)(x)=f(xg)$ by right translation. Then $\\operatorname{Cont}(G,M)$ is again discrete, continuous, and $\\ell$-primary; the map $M\\to\\operatorname{Cont}(G,M)$, $m\\mapsto(x\\mapsto xm)$, is $G$-equivariant; and $H^q(G,\\operatorname{Cont}(G,M))=0$ for every $q\\geq1$. The vanishing is given by the standard contracting homotopy on continuous homogeneous cochains.",
-  "source": {
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Coinduced discrete modules are acyclic in positive continuous cohomology",
+ "statement": "Using [def-exc-continuous-cohomology], let $G$ be a profinite group, $\\ell$ a prime, and $M$ a discrete continuous $\\ell$-primary $G$-module. Let $\\operatorname{Cont}(G,M)$ be the abelian group of continuous functions $G\\to M$, with the coinduced action $(g\\cdot f)(x)=f(xg)$ by right translation. Then $\\operatorname{Cont}(G,M)$ is again discrete, continuous, and $\\ell$-primary; the map $M\\to\\operatorname{Cont}(G,M)$, $m\\mapsto(x\\mapsto xm)$, is $G$-equivariant; and $H^q(G,\\operatorname{Cont}(G,M))=0$ for every $q\\geq1$. The vanishing is given by the standard contracting homotopy on continuous homogeneous cochains.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lem-sc-group-cd-one.md",
+  "place": "## Proof, paragraph 3"
+ },
+ "stmt_deps": [
+  "def-exc-continuous-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "Module structure. Cont(G,M) is an abelian group (an A-module if M is one) under pointwise operations, and right translation is an action by additive automorphisms. Discreteness: for f in Cont(G,M), [lem-exc-coinduced-functions-open-stabilizer] applied to f (M discrete) gives an open normal subgroup U with f(xu)=f(x) for all x and u in U, i.e. u.f=f, so the stabilizer of f is open. ell-primary: f is continuous from compact G to discrete M, so it takes finitely many values, each killed by a power of ell; hence f is killed by the largest of these powers. Equivariance: for m in M and g in G, (g.(x -> xm))(x)=xgm, which is the image of gm. The map x -> xm lies in Cont(G,M) because it is constant on left cosets x Stab(m) of the open stabilizer of m.",
+   "uses": [
+    "lem-exc-coinduced-functions-open-stabilizer"
+   ],
+   "elementary": false,
+   "source": {
     "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lem-sc-group-cd-one.md",
-    "place": "## Proof, paragraph 3"
+    "place": "proof, third paragraph: the continuous cochain complex of a coinduced module is contractible in positive degrees"
+   }
   },
-  "stmt_deps": [
-    "def-exc-continuous-cohomology"
-  ],
-  "proof": [
-    {
-      "text": "Module structure. Cont(G,M) is an abelian group (an A-module if M is one) under pointwise operations, and right translation is an action by additive automorphisms. Discreteness: for f in Cont(G,M), [lem-exc-coinduced-functions-open-stabilizer] applied to f (M discrete) gives an open normal subgroup U with f(xu)=f(x) for all x and u in U, i.e. u.f=f, so the stabilizer of f is open. ell-primary: f is continuous from compact G to discrete M, so it takes finitely many values, each killed by a power of ell; hence f is killed by the largest of these powers. Equivariance: for m in M and g in G, (g.(x -> xm))(x)=xgm, which is the image of gm. The map x -> xm lies in Cont(G,M) because it is constant on left cosets x Stab(m) of the open stabilizer of m.",
-      "uses": [
-        "lem-exc-coinduced-functions-open-stabilizer"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lem-sc-group-cd-one.md",
-        "place": "proof, third paragraph: the continuous cochain complex of a coinduced module is contractible in positive degrees"
-      }
-    },
-    {
-      "text": "For n>=1 and a continuous inhomogeneous n-cochain F with values in Cont(G,M), define h_n(F)(g_1,...,g_{n-1})(x)=F(x,g_1,...,g_{n-1})(1). Evaluation at 1 and substitution are A-linear. The resulting function is continuous: for each fixed tuple, continuity of F and discreteness of M give open neighborhoods on which the evaluated value is constant, and compactness of G supplies a finite subcover whose intersection works uniformly in x; the open-normal invariance statement [lem-exc-coinduced-functions-open-stabilizer] supplies the corresponding discrete continuity condition. Thus h_nF is a continuous (n-1)-cochain.",
-      "uses": [
-        "def-exc-continuous-cohomology",
-        "lem-exc-coinduced-functions-open-stabilizer"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lem-sc-group-cd-one.md",
-        "place": "proof, third paragraph: the continuous cochain complex of a coinduced module is contractible in positive degrees"
-      }
-    },
-    {
-      "text": "Substitute the displayed formula for h into the inhomogeneous differential. At (g_1,...,g_n) and x, the expansion of d^{n-1}h_nF has the terms F(xg_1,g_2,...,g_n)(1), the alternating interior product terms, and the final term (-1)^n F(x,g_1,...,g_{n-1})(1). The expansion of h_{n+1}d^nF has the term F(g_1,...,g_n)(x), the same translated and interior terms with opposite signs, and the endpoint term (-1)^{n+1}F(x,g_1,...,g_{n-1})(1). Hence all terms except F(g_1,...,g_n)(x) cancel, giving d^{n-1}h_nF+h_{n+1}d^nF=F.",
-      "uses": [
-        "def-exc-continuous-cohomology"
-      ],
-      "elementary": true,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lem-sc-group-cd-one.md",
-        "place": "proof, third paragraph: standard contracting homotopy on continuous homogeneous cochains"
-      }
-    },
-    {
-      "text": "If q>=1 and F is a q-cocycle, then d^qF=0. The identity in the preceding step gives F=d^{q-1}(h_qF), so F is a coboundary. Therefore the q-th continuous cohomology vanishes for every q>=1.",
-      "uses": [
-        "def-exc-continuous-cohomology"
-      ],
-      "elementary": true,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lem-sc-group-cd-one.md",
-        "place": "proof, third paragraph: the continuous cochain complex of a coinduced module is contractible in positive degrees"
-      }
-    }
-  ],
-  "proof_deps": [
+  {
+   "text": "For n>=1 and a continuous inhomogeneous n-cochain F with values in Cont(G,M), define h_n(F)(g_1,...,g_{n-1})(x)=F(x,g_1,...,g_{n-1})(1). Evaluation at 1 and substitution are A-linear. The resulting function is continuous: for each fixed tuple, continuity of F and discreteness of M give open neighborhoods on which the evaluated value is constant, and compactness of G supplies a finite subcover whose intersection works uniformly in x; the open-normal invariance statement [lem-exc-coinduced-functions-open-stabilizer] supplies the corresponding discrete continuity condition. Thus h_nF is a continuous (n-1)-cochain.",
+   "uses": [
     "def-exc-continuous-cohomology",
     "lem-exc-coinduced-functions-open-stabilizer"
-  ],
-  "proof_origin": {
-    "by": "agent",
+   ],
+   "elementary": false,
+   "source": {
     "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lem-sc-group-cd-one.md",
-    "place": "proof, third paragraph; direct contracting-homotopy argument"
+    "place": "proof, third paragraph: the continuous cochain complex of a coinduced module is contractible in positive degrees"
+   }
   },
-  "mathlib_searches": [
-    {
-      "tool": "leansearch",
-      "query": "coinduced discrete profinite G-module has vanishing positive continuous cohomology",
-      "results": "No exact theorem found; related continuous coinduced representations were returned without acyclicity.",
-      "date": "2026-10-10",
-      "verdict": "no exact match"
-    },
-    {
-      "tool": "loogle",
-      "query": "H^n(G, Coind G M) = 0",
-      "results": "Shapiro's lemma for abstract group cohomology was returned, but no theorem specialized to continuous profinite modules.",
-      "date": "2026-10-10",
-      "verdict": "generalization differs: continuity and discrete topology are absent"
-    },
-    {
-      "tool": "grep",
-      "query": "rg 'coinduced|coinduced.*cohomology|contracting homotopy' Mathlib/RepresentationTheory",
-      "results": "Coinduced representations and Shapiro files exist, but no matching continuous discrete-module acyclicity theorem was found.",
-      "date": "2026-10-10",
-      "verdict": "no exact match"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "created": {
-    "item": "lem-sc-group-cd-one",
-    "by": "worker",
-    "date": "2026-10-10"
+  {
+   "text": "Substitute the displayed formula for h into the inhomogeneous differential. At (g_1,...,g_n) and x, the expansion of d^{n-1}h_nF has the terms F(xg_1,g_2,...,g_n)(1), the alternating interior product terms, and the final term (-1)^n F(x,g_1,...,g_{n-1})(1). The expansion of h_{n+1}d^nF has the term F(g_1,...,g_n)(x), the same translated and interior terms with opposite signs, and the endpoint term (-1)^{n+1}F(x,g_1,...,g_{n-1})(1). Hence all terms except F(g_1,...,g_n)(x) cancel, giving d^{n-1}h_nF+h_{n+1}d^nF=F.",
+   "uses": [
+    "def-exc-continuous-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lem-sc-group-cd-one.md",
+    "place": "proof, third paragraph: standard contracting homotopy on continuous homogeneous cochains"
+   }
   },
-  "chapter": "sec-curve-estimates",
-  "unit": "sk-prop-h2",
-  "split_report": {
-    "date": "2026-10-11",
-    "item": "lem-sc-group-coinduced-acyclic",
-    "worker": "stage1",
-    "summary": "Checked that no exact sorry-free Lean declaration exists. The finite-ring coinduced acyclicity node is not an exact specialization because the item permits arbitrary discrete ell-primary modules, so I proved the item directly by defining the standard evaluation homotopy, expanding the inhomogeneous differential, and applying the cocycle criterion. The only non-elementary topological input is the existing open-normal-invariance node for continuous maps from profinite groups to discrete spaces.",
-    "blueprint": "Realizes the third paragraph of blueprint node lem-sc-group-cd-one: the continuous cochain complex of a coinduced module is contractible in positive degrees.",
-    "tool_uses": []
+  {
+   "text": "If q>=1 and F is a q-cocycle, then d^qF=0. The identity in the preceding step gives F=d^{q-1}(h_qF), so F is a coboundary. Therefore the q-th continuous cohomology vanishes for every q>=1.",
+   "uses": [
+    "def-exc-continuous-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lem-sc-group-cd-one.md",
+    "place": "proof, third paragraph: the continuous cochain complex of a coinduced module is contractible in positive degrees"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-exc-continuous-cohomology",
+  "lem-exc-coinduced-functions-open-stabilizer"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lem-sc-group-cd-one.md",
+  "place": "proof, third paragraph; direct contracting-homotopy argument"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "coinduced discrete profinite G-module has vanishing positive continuous cohomology",
+   "results": "No exact theorem found; related continuous coinduced representations were returned without acyclicity.",
+   "date": "2026-10-10",
+   "verdict": "no exact match"
   },
-  "reviewed": {
-    "date": "2026-10-10",
-    "by": "L",
-    "reviewer": "R-gca1748",
-    "group": "K1",
-    "result": "pass",
-    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-gca1748 (reviewer sub-agent of L); spot-checked: Checked the homotopy h_n F(g)(x)=F(x,g)(1) against the inhomogeneous differential in degree 1 and in general (d h + h d = F), the cocycle-to-coboundary step, and the continuity argument via lem-exc-coinduced-functions-open-stabilizer. Mathlib grep of RepresentationTheory (Shapiro.lean, Coinduced.lean, ContCohomology/*) found only abstract-group Shapiro and no continuous coinduced acyclicity, so no leaf. FIX more, RETURN less: D/C1 the steps proved only the vanishing; added a first step proving the other claims of the statement (Cont(G,M) discrete via lem-exc-coinduced-functions-open-stabilizer, ell-primary by compactness, m -> (x -> xm) equivariant).; 1 file(s) fixed by the reviewer"
+  {
+   "tool": "loogle",
+   "query": "H^n(G, Coind G M) = 0",
+   "results": "Shapiro's lemma for abstract group cohomology was returned, but no theorem specialized to continuous profinite modules.",
+   "date": "2026-10-10",
+   "verdict": "generalization differs: continuity and discrete topology are absent"
   },
-  "import_flags": [
-    "unreachable"
-  ]
+  {
+   "tool": "grep",
+   "query": "rg 'coinduced|coinduced.*cohomology|contracting homotopy' Mathlib/RepresentationTheory",
+   "results": "Coinduced representations and Shapiro files exist, but no matching continuous discrete-module acyclicity theorem was found.",
+   "date": "2026-10-10",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "item": "lem-sc-group-cd-one",
+  "by": "worker",
+  "date": "2026-10-10"
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-group-coinduced-acyclic",
+  "worker": "stage1",
+  "summary": "Checked that no exact sorry-free Lean declaration exists. The finite-ring coinduced acyclicity node is not an exact specialization because the item permits arbitrary discrete ell-primary modules, so I proved the item directly by defining the standard evaluation homotopy, expanding the inhomogeneous differential, and applying the cocycle criterion. The only non-elementary topological input is the existing open-normal-invariance node for continuous maps from profinite groups to discrete spaces.",
+  "blueprint": "Realizes the third paragraph of blueprint node lem-sc-group-cd-one: the continuous cochain complex of a coinduced module is contractible in positive degrees.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-gca1748",
+  "group": "K1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-gca1748 (reviewer sub-agent of L); spot-checked: Checked the homotopy h_n F(g)(x)=F(x,g)(1) against the inhomogeneous differential in degree 1 and in general (d h + h d = F), the cocycle-to-coboundary step, and the continuity argument via lem-exc-coinduced-functions-open-stabilizer. Mathlib grep of RepresentationTheory (Shapiro.lean, Coinduced.lean, ContCohomology/*) found only abstract-group Shapiro and no continuous coinduced acyclicity, so no leaf. FIX more, RETURN less: D/C1 the steps proved only the vanishing; added a first step proving the other claims of the statement (Cont(G,M) discrete via lem-exc-coinduced-functions-open-stabilizer, ell-primary by compactness, m -> (x -> xm) equivariant).; 1 file(s) fixed by the reviewer"
+ },
+ "import_flags": [
+  "unreachable"
+ ],
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

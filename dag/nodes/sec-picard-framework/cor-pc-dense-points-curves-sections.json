@@ -1,158 +1,163 @@
 {
-  "id": "cor-pc-dense-points-curves-sections",
-  "blueprint": {
-    "is": "cor-pc-dense-points-curves-sections",
-    "from": null,
-    "same_as": null
-  },
-  "kind": "statement",
-  "title": "Consequences of the density of rational points",
-  "statement": "Let $k$ be a separably closed field and let $X$ be a scheme over $k$\nwhich is smooth over $k$.\n\n1. For every field extension $K/k$ put $X_K=X\\times_{\\operatorname{Spec}k}\\operatorname{Spec}K$, and for\n$x\\in X(k)$ let $x_K=\\operatorname{Spec}(K)\\times_kx$ be the induced $K$-rational point of\n$X_K$. Then the set $\\{x_K : x\\in X(k)\\}$ is Zariski dense in $X_K$ (for $K=k$\nthis is the density of $X(k)$ in $X$).\n1. Let $\\mathcal{L}$ be an invertible $\\mathcal{O}_{X_K}$-module and\n$s\\in H^0(X_K,\\mathcal{L})$ a section which does not vanish identically, i.e.\n$s(y)\\neq0$ in $\\mathcal{L}(y)=\\mathcal{L}_y\\otimes\\kappa(y)$ for some $y\\in X_K$.\nThen there is an $x\\in X(k)$ such that $s$ does not vanish at $x_K$.\n1. If $X$ is a smooth projective curve over $k$, then $X(k)$ is infinite.\nIf moreover $K=k$, then every non-zero $s\\in H^0(X,\\mathcal{L})$, for $\\mathcal{L}$ an\ninvertible $\\mathcal{O}_X$-module, does not vanish identically, so (2) applies:\n$s(x)\\neq0$ for some $x\\in X(k)$.",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-prop-picard-dense-points/cor-pc-dense-points-curves-sections.md",
-    "place": "node cor-pc-dense-points-curves-sections, order 753",
-    "external": [
-      {
-        "document": "Stacks Project",
-        "place": "Tag 0383"
-      }
-    ]
-  },
-  "stmt_deps": [
-    "def-pc-separably-closed"
-  ],
-  "proof": [
-    {
-      "text": "(1) Let $p:X_K\\to X$ be the projection. It is the base change of\n$\\operatorname{Spec}K\\to\\operatorname{Spec}k$ along $X\\to\\operatorname{Spec}k$, and the structure morphism of any\nscheme over a field is universally open (Morphisms of Schemes,\nLemma 29.23.4, Tag [0383](https://stacks.math.columbia.edu/tag/0383));\nhence $p$ is open. Let $Z\\subseteq X_K$ be a closed subset containing every\n$x_K$, and suppose $U:=X_K\\setminus Z\\neq\\emptyset$. Then $p(U)\\subseteq X$ is a\nnonempty open subset, so by [lem-pc-rational-points-dense] it contains a\npoint $x\\in X(k)$. The fibre of $p$ over $x$ is\n$\\operatorname{Spec}(\\kappa(x)\\otimes_kK)=\\operatorname{Spec}(k\\otimes_kK)=\\operatorname{Spec}K$, a single point, namely\n$x_K$. Since $x\\in p(U)$, some point of $U$ lies over $x$, so $x_K\\in U$,\ncontradicting $x_K\\in Z$. Hence $Z=X_K$, which is the asserted density.",
-      "uses": [
-        "lem-pc-rational-points-dense"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "(2) The set $W:=\\{y\\in X_K : s(y)\\neq0\\}$ is open: on an open\n$V=\\operatorname{Spec}A\\subseteq X_K$ on which $\\mathcal{L}$ is free on a generator $e$\n([def-sc-invertible-module]) write $s|_V=a\\cdot e$ with $a\\in A$; then\n$s(y)\\neq0$ if and only if $a\\notin\\mathfrak p_y$, so $W\\cap V=D(a)$. By\nhypothesis $W\\neq\\emptyset$, so its complement is a closed subset not\ncontaining all of $X_K$; by (1) it misses some $x_K$, i.e. $x_K\\in W$.",
-      "uses": [
-        "def-sc-invertible-module"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "(3) A smooth projective curve is in particular a curve over $k$\n([def-pc-smooth-projective-curve]), hence an integral scheme of\ndimension one ([def-pc-curve]); in particular $X\\neq\\emptyset$ and its\ngeneric point $\\eta$ is not closed. Every $x\\in X(k)$ is a closed point\n(its residue field is $k$). If $X(k)$ were finite, it would be a finite\nunion of closed points, hence a closed subset of $X$ not containing\n$\\eta$; but $X(k)$ is dense in $X$ by [lem-pc-rational-points-dense], so\nits closure is $X\\ni\\eta$, a contradiction. Hence $X(k)$ is infinite.\nFor the last assertion let $0\\neq s\\in H^0(X,\\mathcal{L})$. Since $X$ is\nintegral, restriction of sections of $\\mathcal{L}$ to the generic point is\ninjective on every nonempty open (on an affine open\n$\\operatorname{Spec}A$ trivialising $\\mathcal{L}$, with $A$ a domain, $s=a\\cdot e$ and\n$a\\neq0$ in $A\\subseteq\\operatorname{Frac}A=\\kappa(\\eta)$), so $s_\\eta\\neq0$ in the\none-dimensional $\\kappa(\\eta)$-vector space $\\mathcal{L}_\\eta=\\mathcal{L}(\\eta)$; thus $s$ does not\nvanish at $\\eta$ and (2) (with $K=k$) gives $x\\in X(k)$ with $s(x)\\neq0$.",
-      "uses": [
-        "def-pc-smooth-projective-curve",
-        "def-pc-curve",
-        "lem-pc-rational-points-dense"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "*Remark on base change.* For a general extension $K/k$ the hypothesis\nof (2) holds for every non-zero $s$ as soon as $X_K$ is integral (by the\ngeneric-point argument of (3) applied on $X_K$); for a smooth projective\ncurve with a rational point this integrality is established later in\nthe twist-lemma block, where this statement is used in exactly that\nform.",
-      "uses": [],
-      "elementary": null
-    }
-  ],
-  "proof_deps": [
-    "lem-pc-rational-points-dense",
-    "def-sc-invertible-module",
-    "def-pc-smooth-projective-curve",
-    "def-pc-curve"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-prop-picard-dense-points/cor-pc-dense-points-curves-sections.md",
-    "place": "## Proof"
-  },
-  "mathlib_searches": [],
-  "mathlib_match": null,
-  "status": "imported",
-  "merged_into": null,
-  "import_flags": [
-    "proof_cites_literature"
-  ],
-  "blueprint_kind": "theorem",
-  "blueprint_order": 753,
-  "blueprint_uses": [
-    "def-pc-curve",
-    "def-pc-separably-closed",
-    "def-pc-smooth-projective-curve",
-    "def-sc-invertible-module",
+ "id": "cor-pc-dense-points-curves-sections",
+ "blueprint": {
+  "is": "cor-pc-dense-points-curves-sections",
+  "from": null,
+  "same_as": null
+ },
+ "kind": "statement",
+ "title": "Consequences of the density of rational points",
+ "statement": "Let $k$ be a separably closed field and let $X$ be a scheme over $k$\nwhich is smooth over $k$.\n\n1. For every field extension $K/k$ put $X_K=X\\times_{\\operatorname{Spec}k}\\operatorname{Spec}K$, and for\n$x\\in X(k)$ let $x_K=\\operatorname{Spec}(K)\\times_kx$ be the induced $K$-rational point of\n$X_K$. Then the set $\\{x_K : x\\in X(k)\\}$ is Zariski dense in $X_K$ (for $K=k$\nthis is the density of $X(k)$ in $X$).\n1. Let $\\mathcal{L}$ be an invertible $\\mathcal{O}_{X_K}$-module and\n$s\\in H^0(X_K,\\mathcal{L})$ a section which does not vanish identically, i.e.\n$s(y)\\neq0$ in $\\mathcal{L}(y)=\\mathcal{L}_y\\otimes\\kappa(y)$ for some $y\\in X_K$.\nThen there is an $x\\in X(k)$ such that $s$ does not vanish at $x_K$.\n1. If $X$ is a smooth projective curve over $k$, then $X(k)$ is infinite.\nIf moreover $K=k$, then every non-zero $s\\in H^0(X,\\mathcal{L})$, for $\\mathcal{L}$ an\ninvertible $\\mathcal{O}_X$-module, does not vanish identically, so (2) applies:\n$s(x)\\neq0$ for some $x\\in X(k)$.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-prop-picard-dense-points/cor-pc-dense-points-curves-sections.md",
+  "place": "node cor-pc-dense-points-curves-sections, order 753",
+  "external": [
+   {
+    "document": "Stacks Project",
+    "place": "Tag 0383"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-pc-separably-closed"
+ ],
+ "proof": [
+  {
+   "text": "(1) Let $p:X_K\\to X$ be the projection. It is the base change of\n$\\operatorname{Spec}K\\to\\operatorname{Spec}k$ along $X\\to\\operatorname{Spec}k$, and the structure morphism of any\nscheme over a field is universally open (Morphisms of Schemes,\nLemma 29.23.4, Tag [0383](https://stacks.math.columbia.edu/tag/0383));\nhence $p$ is open. Let $Z\\subseteq X_K$ be a closed subset containing every\n$x_K$, and suppose $U:=X_K\\setminus Z\\neq\\emptyset$. Then $p(U)\\subseteq X$ is a\nnonempty open subset, so by [lem-pc-rational-points-dense] it contains a\npoint $x\\in X(k)$. The fibre of $p$ over $x$ is\n$\\operatorname{Spec}(\\kappa(x)\\otimes_kK)=\\operatorname{Spec}(k\\otimes_kK)=\\operatorname{Spec}K$, a single point, namely\n$x_K$. Since $x\\in p(U)$, some point of $U$ lies over $x$, so $x_K\\in U$,\ncontradicting $x_K\\in Z$. Hence $Z=X_K$, which is the asserted density.",
+   "uses": [
     "lem-pc-rational-points-dense"
-  ],
-  "blueprint_tags": [
-    "latex:corollary"
-  ],
-  "uses_not_cited": [
-    "def-pc-separably-closed"
-  ],
-  "proof_split_by": "paragraphs",
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "closed",
-      "decls": [
-        {
-          "name": "AlgebraicGeometry.Scheme.Hom.denseRange_baseChangeFieldPoint",
-          "module": "WeilConjectures.AlgebraicGeometry.DensePoints",
-          "lines": [
-            271,
-            286
-          ],
-          "kind": "theorem",
-          "sorry": false
-        },
-        {
-          "name": "AlgebraicGeometry.Scheme.Hom.exists_baseChangeFieldPoint_notMem_support_zeroLocus",
-          "module": "WeilConjectures.AlgebraicGeometry.DensePoints",
-          "lines": [
-            289,
-            302
-          ],
-          "kind": "theorem",
-          "sorry": false
-        },
-        {
-          "name": "AlgebraicGeometry.Scheme.Hom.exists_fieldPoints_notMem_support_zeroLocus",
-          "module": "WeilConjectures.AlgebraicGeometry.DensePoints",
-          "lines": [
-            304,
-            321
-          ],
-          "kind": "theorem",
-          "sorry": false
-        },
-        {
-          "name": "AlgebraicGeometry.Scheme.Hom.infinite_fieldPoints",
-          "module": "WeilConjectures.AlgebraicGeometry.DensePoints",
-          "lines": [
-            323,
-            357
-          ],
-          "kind": "theorem",
-          "sorry": false
-        }
-      ],
-      "missing": [],
-      "open": []
-    }
+   ],
+   "elementary": false
   },
-  "chapter": "sec-picard-framework",
-  "unit": "sk-prop-picard-dense-points",
-  "lean": {
-    "module": "WeilConjectures.AlgebraicGeometry.DensePoints",
-    "declaration": "AlgebraicGeometry.Scheme.Hom.denseRange_baseChangeFieldPoint",
-    "branch": "slopmaster2",
-    "line": 271,
-    "declarations": [
-      "AlgebraicGeometry.Scheme.Hom.denseRange_baseChangeFieldPoint",
-      "AlgebraicGeometry.Scheme.Hom.exists_baseChangeFieldPoint_notMem_support_zeroLocus",
-      "AlgebraicGeometry.Scheme.Hom.exists_fieldPoints_notMem_support_zeroLocus",
-      "AlgebraicGeometry.Scheme.Hom.infinite_fieldPoints"
-    ],
-    "sorry_free": true,
-    "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state closed)"
+  {
+   "text": "(2) The set $W:=\\{y\\in X_K : s(y)\\neq0\\}$ is open: on an open\n$V=\\operatorname{Spec}A\\subseteq X_K$ on which $\\mathcal{L}$ is free on a generator $e$\n([def-sc-invertible-module]) write $s|_V=a\\cdot e$ with $a\\in A$; then\n$s(y)\\neq0$ if and only if $a\\notin\\mathfrak p_y$, so $W\\cap V=D(a)$. By\nhypothesis $W\\neq\\emptyset$, so its complement is a closed subset not\ncontaining all of $X_K$; by (1) it misses some $x_K$, i.e. $x_K\\in W$.",
+   "uses": [
+    "def-sc-invertible-module"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "(3) A smooth projective curve is in particular a curve over $k$\n([def-pc-smooth-projective-curve]), hence an integral scheme of\ndimension one ([def-pc-curve]); in particular $X\\neq\\emptyset$ and its\ngeneric point $\\eta$ is not closed. Every $x\\in X(k)$ is a closed point\n(its residue field is $k$). If $X(k)$ were finite, it would be a finite\nunion of closed points, hence a closed subset of $X$ not containing\n$\\eta$; but $X(k)$ is dense in $X$ by [lem-pc-rational-points-dense], so\nits closure is $X\\ni\\eta$, a contradiction. Hence $X(k)$ is infinite.\nFor the last assertion let $0\\neq s\\in H^0(X,\\mathcal{L})$. Since $X$ is\nintegral, restriction of sections of $\\mathcal{L}$ to the generic point is\ninjective on every nonempty open (on an affine open\n$\\operatorname{Spec}A$ trivialising $\\mathcal{L}$, with $A$ a domain, $s=a\\cdot e$ and\n$a\\neq0$ in $A\\subseteq\\operatorname{Frac}A=\\kappa(\\eta)$), so $s_\\eta\\neq0$ in the\none-dimensional $\\kappa(\\eta)$-vector space $\\mathcal{L}_\\eta=\\mathcal{L}(\\eta)$; thus $s$ does not\nvanish at $\\eta$ and (2) (with $K=k$) gives $x\\in X(k)$ with $s(x)\\neq0$.",
+   "uses": [
+    "def-pc-smooth-projective-curve",
+    "def-pc-curve",
+    "lem-pc-rational-points-dense"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*Remark on base change.* For a general extension $K/k$ the hypothesis\nof (2) holds for every non-zero $s$ as soon as $X_K$ is integral (by the\ngeneric-point argument of (3) applied on $X_K$); for a smooth projective\ncurve with a rational point this integrality is established later in\nthe twist-lemma block, where this statement is used in exactly that\nform.",
+   "uses": [],
+   "elementary": null
   }
+ ],
+ "proof_deps": [
+  "lem-pc-rational-points-dense",
+  "def-sc-invertible-module",
+  "def-pc-smooth-projective-curve",
+  "def-pc-curve"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-prop-picard-dense-points/cor-pc-dense-points-curves-sections.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [
+  "proof_cites_literature"
+ ],
+ "blueprint_kind": "theorem",
+ "blueprint_order": 753,
+ "blueprint_uses": [
+  "def-pc-curve",
+  "def-pc-separably-closed",
+  "def-pc-smooth-projective-curve",
+  "def-sc-invertible-module",
+  "lem-pc-rational-points-dense"
+ ],
+ "blueprint_tags": [
+  "latex:corollary"
+ ],
+ "uses_not_cited": [
+  "def-pc-separably-closed"
+ ],
+ "proof_split_by": "paragraphs",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.Scheme.Hom.denseRange_baseChangeFieldPoint",
+    "AlgebraicGeometry.Scheme.Hom.exists_baseChangeFieldPoint_notMem_support_zeroLocus",
+    "AlgebraicGeometry.Scheme.Hom.exists_fieldPoints_notMem_support_zeroLocus",
+    "AlgebraicGeometry.Scheme.Hom.infinite_fieldPoints"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.Scheme.Hom.denseRange_baseChangeFieldPoint",
+     "module": "WeilConjectures.AlgebraicGeometry.DensePoints",
+     "lines": [
+      271,
+      286
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.Scheme.Hom.exists_baseChangeFieldPoint_notMem_support_zeroLocus",
+     "module": "WeilConjectures.AlgebraicGeometry.DensePoints",
+     "lines": [
+      289,
+      302
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.Scheme.Hom.exists_fieldPoints_notMem_support_zeroLocus",
+     "module": "WeilConjectures.AlgebraicGeometry.DensePoints",
+     "lines": [
+      304,
+      321
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.Scheme.Hom.infinite_fieldPoints",
+     "module": "WeilConjectures.AlgebraicGeometry.DensePoints",
+     "lines": [
+      323,
+      357
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-prop-picard-dense-points",
+ "lean": {
+  "module": "WeilConjectures.AlgebraicGeometry.DensePoints",
+  "declaration": "AlgebraicGeometry.Scheme.Hom.denseRange_baseChangeFieldPoint",
+  "branch": "slopmaster2",
+  "line": 271,
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Hom.denseRange_baseChangeFieldPoint",
+   "AlgebraicGeometry.Scheme.Hom.exists_baseChangeFieldPoint_notMem_support_zeroLocus",
+   "AlgebraicGeometry.Scheme.Hom.exists_fieldPoints_notMem_support_zeroLocus",
+   "AlgebraicGeometry.Scheme.Hom.infinite_fieldPoints"
+  ],
+  "sorry_free": true,
+  "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state closed)"
+ }
 }

@@ -1,92 +1,96 @@
 {
-  "id": "lem-sc-divisor-finite-support",
-  "blueprint": {
-    "is": null,
-    "from": {
-      "node": "def-sc-divisor",
-      "place": "definition, displayed principal-divisor sum: its support must be finite",
-      "via": []
-    },
-    "same_as": []
+ "id": "lem-sc-divisor-finite-support",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-sc-divisor",
+   "place": "definition, displayed principal-divisor sum: its support must be finite",
+   "via": []
   },
-  "kind": "statement",
-  "title": "Finite support of a rational function's divisor",
-  "statement": "Let $X$ be an integral scheme [def-pc-integral-scheme] with a finite affine open cover whose coordinate rings are Noetherian. Its function field $K$ is the local ring at its unique generic point. At a point $x$ of codimension one, put $R=\\mathcal O_{X,x}$ and define $\\operatorname{ord}_x(a/b)=\\operatorname{length}_R(R/aR)-\\operatorname{length}_R(R/bR)$ for nonzero $a,b\\in R$; at other points put $\\operatorname{ord}_x(f)=0$. For every nonzero $f\\in K$, the set $\\{x\\in X:\\operatorname{ord}_x(f)\\ne0\\}$ is finite. On a smooth connected curve, this makes the sum of orders at closed points defining the principal divisor of $f$ finite.",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-def-av-pic/def-sc-divisor.md",
-    "place": "the displayed definition of the principal divisor, whose sum is finite; exact Lean statement and proof: WeilConjectures/AlgebraicGeometry/Curve/Divisor.lean:103-144"
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Finite support of a rational function's divisor",
+ "statement": "Let $X$ be an integral scheme [def-pc-integral-scheme] with a finite affine open cover whose coordinate rings are Noetherian. Its function field $K$ is the local ring at its unique generic point. At a point $x$ of codimension one, put $R=\\mathcal O_{X,x}$ and define $\\operatorname{ord}_x(a/b)=\\operatorname{length}_R(R/aR)-\\operatorname{length}_R(R/bR)$ for nonzero $a,b\\in R$; at other points put $\\operatorname{ord}_x(f)=0$. For every nonzero $f\\in K$, the set $\\{x\\in X:\\operatorname{ord}_x(f)\\ne0\\}$ is finite. On a smooth connected curve, this makes the sum of orders at closed points defining the principal divisor of $f$ finite.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-def-av-pic/def-sc-divisor.md",
+  "place": "the displayed definition of the principal divisor, whose sum is finite; exact Lean statement and proof: WeilConjectures/AlgebraicGeometry/Curve/Divisor.lean:103-144"
+ },
+ "stmt_deps": [
+  "def-pc-integral-scheme"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A rational function on a Noetherian integral curve has only finitely many zeros and poles",
+   "results": "RatFunc.mk, MeromorphicOn.divisor, FunctionField.inftyValuation_apply; no general scheme finite-support theorem",
+   "date": "2026-10-10",
+   "verdict": "no match"
   },
-  "stmt_deps": [
-    "def-pc-integral-scheme"
-  ],
-  "proof": [],
-  "proof_deps": [],
-  "proof_origin": null,
-  "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "\"finite_setOf_ord_ne_zero\"",
+   "results": "no declarations",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'finite_setOf_ord_ne_zero|finite.*support.*ord' Mathlib/AlgebraicGeometry",
+   "results": "no declaration; OrderOfVanishing.lean defines ord but not its global finite support",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-sc-divisor",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.Scheme.finite_setOf_ord_ne_zero"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
     {
-      "tool": "leansearch",
-      "query": "A rational function on a Noetherian integral curve has only finitely many zeros and poles",
-      "results": "RatFunc.mk, MeromorphicOn.divisor, FunctionField.inftyValuation_apply; no general scheme finite-support theorem",
-      "date": "2026-10-10",
-      "verdict": "no match"
-    },
-    {
-      "tool": "loogle",
-      "query": "\"finite_setOf_ord_ne_zero\"",
-      "results": "no declarations",
-      "date": "2026-10-10",
-      "verdict": "no match"
-    },
-    {
-      "tool": "grep",
-      "query": "rg -n 'finite_setOf_ord_ne_zero|finite.*support.*ord' Mathlib/AlgebraicGeometry",
-      "results": "no declaration; OrderOfVanishing.lean defines ord but not its global finite support",
-      "date": "2026-10-10",
-      "verdict": "no match"
+     "name": "AlgebraicGeometry.Scheme.finite_setOf_ord_ne_zero",
+     "module": "WeilConjectures.AlgebraicGeometry.Curve.Divisor",
+     "lines": [
+      106,
+      144
+     ],
+     "kind": "theorem",
+     "sorry": false
     }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-def-av-pic",
+ "lean": {
+  "module": "WeilConjectures.AlgebraicGeometry.Curve.Divisor",
+  "declaration": "AlgebraicGeometry.Scheme.finite_setOf_ord_ne_zero",
+  "branch": "slopmaster2",
+  "line": 106,
+  "declarations": [
+   "AlgebraicGeometry.Scheme.finite_setOf_ord_ne_zero"
   ],
-  "mathlib_match": null,
-  "status": "unsplit",
-  "merged_into": null,
-  "created": {
-    "by": "worker",
-    "item": "def-sc-divisor",
-    "date": "2026-10-10"
-  },
-  "lean_audit": {
-    "master": {
-      "state": "none"
-    },
-    "slopmaster2": {
-      "state": "closed",
-      "decls": [
-        {
-          "name": "AlgebraicGeometry.Scheme.finite_setOf_ord_ne_zero",
-          "module": "WeilConjectures.AlgebraicGeometry.Curve.Divisor",
-          "lines": [
-            106,
-            144
-          ],
-          "kind": "theorem",
-          "sorry": false
-        }
-      ],
-      "missing": [],
-      "open": []
-    }
-  },
-  "chapter": "sec-abelian-varieties",
-  "unit": "sk-def-av-pic",
-  "lean": {
-    "module": "WeilConjectures.AlgebraicGeometry.Curve.Divisor",
-    "declaration": "AlgebraicGeometry.Scheme.finite_setOf_ord_ne_zero",
-    "branch": "slopmaster2",
-    "line": 106,
-    "declarations": [
-      "AlgebraicGeometry.Scheme.finite_setOf_ord_ne_zero"
-    ],
-    "sorry_free": true,
-    "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state closed)"
-  },
-  "reviewed": "2026-10-10 L: attachment (F1 abandonment): AlgebraicGeometry.Scheme.finite_setOf_ord_ne_zero (Curve/Divisor.lean 114, IsIntegral + IsNoetherian X, finitely many x with ord_x(f) != 0), verified sorry-free; closed."
+  "sorry_free": true,
+  "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state closed)"
+ },
+ "reviewed": "2026-10-10 L: attachment (F1 abandonment): AlgebraicGeometry.Scheme.finite_setOf_ord_ne_zero (Curve/Divisor.lean 114, IsIntegral + IsNoetherian X, finitely many x with ord_x(f) != 0), verified sorry-free; closed."
 }

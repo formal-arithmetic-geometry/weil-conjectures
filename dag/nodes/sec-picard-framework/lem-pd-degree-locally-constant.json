@@ -1,229 +1,234 @@
 {
-  "id": "lem-pd-degree-locally-constant",
-  "blueprint": {
-    "is": "lem-pd-degree-locally-constant",
-    "from": null,
-    "same_as": []
-  },
-  "kind": "statement",
-  "title": "The fibrewise degree is a locally constant function, and is a base-change invariant",
-  "statement": "In the situation of [def-pd-fibrewise-degree]:\n\n1. the function $t\\mapsto\\deg_T(\\mathcal{L})(t)$ is locally constant on $T$;\n1. for every invertible\n$\\mathcal{O}_T$-module $\\mathcal{N}$ one has\n$\\deg_T(\\mathcal{L}\\otimes_{\\mathcal{O}_{C_T}}f_T^*\\mathcal{N}) =\\deg_T(\\mathcal{L})$, where $f_T:C_T\\to T$ is the structure morphism;\n1. for every morphism $g:T'\\to T$ of $k$-schemes one has\n$\\deg_{T'}\\bigl(g_{C}^*\\mathcal{L}\\bigr)=\\deg_T(\\mathcal{L})\\circ g$,\nwhere $g_C:C_{T'}\\to C_T$ is the\nbase change of $g$.",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-prop-picard-degree-decomposition/lem-pd-degree-locally-constant.md",
-    "place": "node lem-pd-degree-locally-constant, order 842"
-  },
-  "stmt_deps": [
-    "def-pd-fibrewise-degree",
-    "def-sc-invertible-module"
-  ],
-  "proof": [
-    {
-      "text": "We work throughout in the situation of [def-pd-fibrewise-degree], so\nthat the degree is the [def-pc-degree-line-bundle] and $\\chi$ is the\n[def-pc-euler-characteristic] of the fibre, and fibre products are those\nof [def-pc-base-change].",
-      "uses": [
-        "def-pd-fibrewise-degree",
-        "def-pc-degree-line-bundle",
-        "def-pc-euler-characteristic",
-        "def-pc-base-change"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "*(1) Local constancy.* Let $f_T:C_T\\to T$ be the structure morphism. It\nis the base change of the projective morphism $C\\to\\Spec(k)$, hence\nproper, flat and of finite presentation; $\\mathcal{L}$ is invertible,\nhence of finite presentation and (as $C_T$ is flat over $T$) flat over\n$T$. By [lem-pc-rf-perfect-base-change]\nthe object $E=Rf_{T,*}\\mathcal{L}$ is perfect and its formation commutes\nwith arbitrary base change. Fix $t\\in T$. By [def-pc-perfect-complex],\nafter shrinking to an affine open $U=\\Spec(A)\\ni t$ (and making the\nfinitely many projective terms free on a principal open), $E|_U$ is\nrepresented by a bounded complex $K$ with $K^i\\cong A^{n_i}$. For\n$s\\in U$ the terms of $K$ are flat, so by\n[lem-pc-flat-complex-derived-pullback] the derived pullback of $E$ along\n$\\Spec\\kappa(s)\\to T$ is $K\\otimes_A\\kappa(s)$, and by the base-change\nisomorphism it computes $H^*(C_{\\kappa(s)},\\mathcal{L}_s)$. Therefore\n\n$$\n\\chi\\bigl(C_{\\kappa(s)},\\mathcal{L}_s\\bigr)\n=\\sum_i(-1)^i\\dim_{\\kappa(s)}H^i(K\\otimes_A\\kappa(s))\n=\\sum_i(-1)^i\\dim_{\\kappa(s)}\\bigl(K^i\\otimes_A\\kappa(s)\\bigr)\n=\\sum_i(-1)^in_i ,\n$$\n\nthe middle equality being the Euler characteristic of a bounded complex\nof finite dimensional vector spaces. So $s\\mapsto\\chi(C_{\\kappa(s)},\\mathcal{L}_s)$\nis constant on $U$, hence locally constant on $T$. The same argument for\n$\\mathcal{O}_{C_T}$ shows that\n$s\\mapsto\\chi(C_{\\kappa(s)},\\mathcal{O}_{C_{\\kappa(s)}})$ is locally\nconstant. Subtracting gives (1).",
-      "uses": [
-        "lem-pc-rf-perfect-base-change",
-        "def-pc-perfect-complex",
-        "lem-pc-flat-complex-derived-pullback"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "*(2) Twisting by a pullback.* Evaluate both sides at $t\\in T$. The fibre is $\\mathcal L_t\\otimes f_t^*(\\mathcal N_t)$. The one-dimensional $\\kappa(t)$-vector space $\\mathcal N_t$ is isomorphic to $\\kappa(t)$, so $f_t^*(\\mathcal N_t)\\cong\\mathcal O_{C_{\\kappa(t)}}$. The two fibre line bundles are therefore isomorphic and have equal degree by [def-pd-fibrewise-degree]. This holds at every $t$, proving (2).",
-      "uses": [
-        "def-pd-fibrewise-degree"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "*(3) Base change.* For $t\\in T$ and $t\\prime\\in T\\prime$ mapping to $t$, [def-pc-base-change] identifies $(g_C^*\\mathcal L)_{t\\prime}$ with $(\\mathcal L_t)_{\\kappa(t\\prime)}$. Applying [lem-pc-degree-base-change](1) to the residue-field extension gives equality of their degrees. By [def-pd-fibrewise-degree], this is the asserted pointwise equality of functions.",
-      "uses": [
-        "def-pc-base-change",
-        "lem-pc-degree-base-change",
-        "def-pd-fibrewise-degree"
-      ],
-      "elementary": false
-    }
-  ],
-  "proof_deps": [
+ "id": "lem-pd-degree-locally-constant",
+ "blueprint": {
+  "is": "lem-pd-degree-locally-constant",
+  "from": null,
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "The fibrewise degree is a locally constant function, and is a base-change invariant",
+ "statement": "In the situation of [def-pd-fibrewise-degree]:\n\n1. the function $t\\mapsto\\deg_T(\\mathcal{L})(t)$ is locally constant on $T$;\n1. for every invertible\n$\\mathcal{O}_T$-module $\\mathcal{N}$ one has\n$\\deg_T(\\mathcal{L}\\otimes_{\\mathcal{O}_{C_T}}f_T^*\\mathcal{N}) =\\deg_T(\\mathcal{L})$, where $f_T:C_T\\to T$ is the structure morphism;\n1. for every morphism $g:T'\\to T$ of $k$-schemes one has\n$\\deg_{T'}\\bigl(g_{C}^*\\mathcal{L}\\bigr)=\\deg_T(\\mathcal{L})\\circ g$,\nwhere $g_C:C_{T'}\\to C_T$ is the\nbase change of $g$.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-prop-picard-degree-decomposition/lem-pd-degree-locally-constant.md",
+  "place": "node lem-pd-degree-locally-constant, order 842"
+ },
+ "stmt_deps": [
+  "def-pd-fibrewise-degree",
+  "def-sc-invertible-module"
+ ],
+ "proof": [
+  {
+   "text": "We work throughout in the situation of [def-pd-fibrewise-degree], so\nthat the degree is the [def-pc-degree-line-bundle] and $\\chi$ is the\n[def-pc-euler-characteristic] of the fibre, and fibre products are those\nof [def-pc-base-change].",
+   "uses": [
     "def-pd-fibrewise-degree",
     "def-pc-degree-line-bundle",
     "def-pc-euler-characteristic",
-    "def-pc-base-change",
+    "def-pc-base-change"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*(1) Local constancy.* Let $f_T:C_T\\to T$ be the structure morphism. It\nis the base change of the projective morphism $C\\to\\Spec(k)$, hence\nproper, flat and of finite presentation; $\\mathcal{L}$ is invertible,\nhence of finite presentation and (as $C_T$ is flat over $T$) flat over\n$T$. By [lem-pc-rf-perfect-base-change]\nthe object $E=Rf_{T,*}\\mathcal{L}$ is perfect and its formation commutes\nwith arbitrary base change. Fix $t\\in T$. By [def-pc-perfect-complex],\nafter shrinking to an affine open $U=\\Spec(A)\\ni t$ (and making the\nfinitely many projective terms free on a principal open), $E|_U$ is\nrepresented by a bounded complex $K$ with $K^i\\cong A^{n_i}$. For\n$s\\in U$ the terms of $K$ are flat, so by\n[lem-pc-flat-complex-derived-pullback] the derived pullback of $E$ along\n$\\Spec\\kappa(s)\\to T$ is $K\\otimes_A\\kappa(s)$, and by the base-change\nisomorphism it computes $H^*(C_{\\kappa(s)},\\mathcal{L}_s)$. Therefore\n\n$$\n\\chi\\bigl(C_{\\kappa(s)},\\mathcal{L}_s\\bigr)\n=\\sum_i(-1)^i\\dim_{\\kappa(s)}H^i(K\\otimes_A\\kappa(s))\n=\\sum_i(-1)^i\\dim_{\\kappa(s)}\\bigl(K^i\\otimes_A\\kappa(s)\\bigr)\n=\\sum_i(-1)^in_i ,\n$$\n\nthe middle equality being the Euler characteristic of a bounded complex\nof finite dimensional vector spaces. So $s\\mapsto\\chi(C_{\\kappa(s)},\\mathcal{L}_s)$\nis constant on $U$, hence locally constant on $T$. The same argument for\n$\\mathcal{O}_{C_T}$ shows that\n$s\\mapsto\\chi(C_{\\kappa(s)},\\mathcal{O}_{C_{\\kappa(s)}})$ is locally\nconstant. Subtracting gives (1).",
+   "uses": [
     "lem-pc-rf-perfect-base-change",
     "def-pc-perfect-complex",
-    "lem-pc-flat-complex-derived-pullback",
-    "lem-pc-degree-base-change"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-prop-picard-degree-decomposition/lem-pd-degree-locally-constant.md",
-    "place": "## Proof"
+    "lem-pc-flat-complex-derived-pullback"
+   ],
+   "elementary": false
   },
-  "mathlib_searches": [
-    {
-      "tool": "leanfinder",
-      "query": "fibrewise degree locally constant and invariant under base change for invertible modules",
-      "results": "Module.isLocallyConstant_rankAtStalk_freeLocus; Module.isLocallyConstant_rankAtStalk; Module.rankAtStalk_baseChange; related rank lemmas (Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean)",
-      "date": "2026-10-11",
-      "verdict": "no exact match"
-    },
-    {
-      "tool": "loogle",
-      "query": "IsLocallyConstant, eulerCharFiber, IsFiniteFreeComplex",
-      "results": "unknown identifier eulerCharFiber; 0 hits",
-      "date": "2026-10-11",
-      "verdict": "no match"
-    },
-    {
-      "tool": "grep",
-      "query": "eulerCharFiber|IsLocallyConstant [Mathlib/AlgebraicGeometry]",
-      "results": "Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean:31,87,232-235 (Scheme.Hom.isLocallyConstant_finrank)",
-      "date": "2026-10-11",
-      "verdict": "no exact match"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "merged_into": null,
-  "import_flags": [],
-  "blueprint_kind": "lemma",
-  "blueprint_order": 842,
-  "blueprint_uses": [
+  {
+   "text": "*(2) Twisting by a pullback.* Evaluate both sides at $t\\in T$. The fibre is $\\mathcal L_t\\otimes f_t^*(\\mathcal N_t)$. The one-dimensional $\\kappa(t)$-vector space $\\mathcal N_t$ is isomorphic to $\\kappa(t)$, so $f_t^*(\\mathcal N_t)\\cong\\mathcal O_{C_{\\kappa(t)}}$. The two fibre line bundles are therefore isomorphic and have equal degree by [def-pd-fibrewise-degree]. This holds at every $t$, proving (2).",
+   "uses": [
+    "def-pd-fibrewise-degree"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*(3) Base change.* For $t\\in T$ and $t\\prime\\in T\\prime$ mapping to $t$, [def-pc-base-change] identifies $(g_C^*\\mathcal L)_{t\\prime}$ with $(\\mathcal L_t)_{\\kappa(t\\prime)}$. Applying [lem-pc-degree-base-change](1) to the residue-field extension gives equality of their degrees. By [def-pd-fibrewise-degree], this is the asserted pointwise equality of functions.",
+   "uses": [
     "def-pc-base-change",
-    "def-pc-degree-line-bundle",
-    "def-pc-euler-characteristic",
-    "def-pd-fibrewise-degree",
-    "def-sc-invertible-module",
-    "def-pc-perfect-complex",
     "lem-pc-degree-base-change",
-    "lem-pc-euler-additive",
-    "lem-pc-flat-complex-derived-pullback",
-    "lem-pc-rf-perfect-base-change",
-    "thm-pc-semicontinuity-base-change"
-  ],
-  "uses_not_cited": [
-    "def-sc-invertible-module"
-  ],
-  "proof_split_by": "labels",
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "rests_on_sorry",
-      "decls": [
-        {
-          "name": "AlgebraicGeometry.picardPresheafDegree_map",
-          "module": "WeilConjectures.AlgebraicGeometry.Picard.Degree",
-          "lines": [
-            91,
-            111
-          ],
-          "kind": "theorem",
-          "sorry": false,
-          "partial": "`lem-pd-degree-locally-constant`, part 3"
-        },
-        {
-          "name": "AlgebraicGeometry.isLocallyConstant_picardPresheafDegree",
-          "module": "WeilConjectures.AlgebraicGeometry.Picard.Degree",
-          "lines": [
-            113,
-            127
-          ],
-          "kind": "theorem",
-          "sorry": false,
-          "partial": "`lem-pd-degree-locally-constant`, part 1"
-        },
-        {
-          "name": "AlgebraicGeometry.picardFibreDegree_eq_picardPresheafDegree",
-          "module": "WeilConjectures.AlgebraicGeometry.Picard.Jacobian",
-          "lines": [
-            233,
-            252
-          ],
-          "kind": "theorem",
-          "sorry": false,
-          "partial": "`lem-pd-degree-locally-constant`, part 3"
-        }
-      ],
-      "missing": [],
-      "open": [
-        {
-          "name": "AlgebraicGeometry.Scheme.Modules.exists_addEquiv_sections_higherDirectImage_H",
-          "module": "WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage",
-          "lines": [
-            307,
-            324
-          ],
-          "kind": "theorem",
-          "nodes": [],
-          "below": false
-        },
-        {
-          "name": "AlgebraicGeometry.Scheme.Modules.exists_isFiniteFreeComplex_higherDirectImage",
-          "module": "WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage",
-          "lines": [
-            574,
-            615
-          ],
-          "kind": "theorem",
-          "nodes": [],
-          "below": false
-        },
-        {
-          "name": "AlgebraicGeometry.Scheme.Modules.nonempty_H_pullback_linearEquiv",
-          "module": "WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar",
-          "lines": [
-            100,
-            116
-          ],
-          "kind": "theorem",
-          "nodes": [],
-          "below": false
-        }
-      ]
-    }
-  },
-  "chapter": "sec-picard-framework",
-  "unit": "sk-prop-picard-degree-decomposition",
-  "split_report": {
-    "date": "2026-10-11",
-    "item": "lem-pd-degree-locally-constant",
-    "worker": "stage1",
-    "summary": "Checked the imported three-clause statement against the blueprint and the slopmaster2 declarations. Split the proof into local constancy, pullback twisting, and residue-field base change, retaining the existing dependency nodes. The Lean checkout has sorry-free declarations for clauses (1) and (3), but explicitly omits clause (2), so the imported item is not exactly attached to a single Lean declaration.",
-    "blueprint": "the proof paragraphs headed (1) Local constancy, (2) Twisting by a pullback, and (3) Base change",
-    "tool_uses": []
-  },
-  "reviewed": {
-    "date": "2026-10-10",
-    "by": "L",
-    "reviewer": "R-dlc1749",
-    "group": "H1",
-    "result": "pass",
-    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-dlc1749 (reviewer sub-agent of L); spot-checked: Item is the fibrewise Euler-characteristic degree of a line bundle on a curve family, not the degree of a finite locally free morphism: no B8 with lem-weil-pbc-finite-locally-free-degree-locally-constant / isLocallyConstant_finrank. Step 2: hypotheses of lem-pc-rf-perfect-base-change (proper fp, L flat over T via flat C_T) checked; perfect -> local free bounded complex, flat termwise pullback, chi = sum (-1)^i n_i correct. Step 3: fibre of N one-dim, trivial pullback, isomorphic fibres equal degree. Step 4: lem-pc-degree-base-change(1) applies (C_kappa(t) proper, dim 1). B10: no slopmaster2 decl states clause (2), split correct. No new nodes. Second reading missed no fault. No repairs."
-  },
-  "lean": {
-    "module": "WeilConjectures.AlgebraicGeometry.Picard.Degree",
-    "declaration": "AlgebraicGeometry.picardPresheafDegree_map",
-    "branch": "slopmaster2",
-    "line": 91,
-    "declarations": [
-      "AlgebraicGeometry.picardPresheafDegree_map",
-      "AlgebraicGeometry.isLocallyConstant_picardPresheafDegree",
-      "AlgebraicGeometry.picardFibreDegree_eq_picardPresheafDegree"
-    ],
-    "sorry_free": false,
-    "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state rests_on_sorry)"
+    "def-pd-fibrewise-degree"
+   ],
+   "elementary": false
   }
+ ],
+ "proof_deps": [
+  "def-pd-fibrewise-degree",
+  "def-pc-degree-line-bundle",
+  "def-pc-euler-characteristic",
+  "def-pc-base-change",
+  "lem-pc-rf-perfect-base-change",
+  "def-pc-perfect-complex",
+  "lem-pc-flat-complex-derived-pullback",
+  "lem-pc-degree-base-change"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-prop-picard-degree-decomposition/lem-pd-degree-locally-constant.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "fibrewise degree locally constant and invariant under base change for invertible modules",
+   "results": "Module.isLocallyConstant_rankAtStalk_freeLocus; Module.isLocallyConstant_rankAtStalk; Module.rankAtStalk_baseChange; related rank lemmas (Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean)",
+   "date": "2026-10-11",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocallyConstant, eulerCharFiber, IsFiniteFreeComplex",
+   "results": "unknown identifier eulerCharFiber; 0 hits",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "eulerCharFiber|IsLocallyConstant [Mathlib/AlgebraicGeometry]",
+   "results": "Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean:31,87,232-235 (Scheme.Hom.isLocallyConstant_finrank)",
+   "date": "2026-10-11",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 842,
+ "blueprint_uses": [
+  "def-pc-base-change",
+  "def-pc-degree-line-bundle",
+  "def-pc-euler-characteristic",
+  "def-pd-fibrewise-degree",
+  "def-sc-invertible-module",
+  "def-pc-perfect-complex",
+  "lem-pc-degree-base-change",
+  "lem-pc-euler-additive",
+  "lem-pc-flat-complex-derived-pullback",
+  "lem-pc-rf-perfect-base-change",
+  "thm-pc-semicontinuity-base-change"
+ ],
+ "uses_not_cited": [
+  "def-sc-invertible-module"
+ ],
+ "proof_split_by": "labels",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.picardPresheafDegree_map",
+    "AlgebraicGeometry.isLocallyConstant_picardPresheafDegree",
+    "AlgebraicGeometry.picardFibreDegree_eq_picardPresheafDegree"
+   ]
+  },
+  "slopmaster2": {
+   "state": "rests_on_sorry",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.picardPresheafDegree_map",
+     "module": "WeilConjectures.AlgebraicGeometry.Picard.Degree",
+     "lines": [
+      91,
+      111
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.isLocallyConstant_picardPresheafDegree",
+     "module": "WeilConjectures.AlgebraicGeometry.Picard.Degree",
+     "lines": [
+      135,
+      149
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.picardFibreDegree_eq_picardPresheafDegree",
+     "module": "WeilConjectures.AlgebraicGeometry.Picard.Jacobian",
+     "lines": [
+      242,
+      261
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": [
+    {
+     "name": "AlgebraicGeometry.Scheme.Modules.exists_addEquiv_sections_higherDirectImage_H",
+     "module": "WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Sections",
+     "lines": [
+      31,
+      48
+     ],
+     "kind": "theorem",
+     "nodes": [
+      "lem-pc-cohomology-sections-affine-base"
+     ],
+     "below": true
+    },
+    {
+     "name": "AlgebraicGeometry.Scheme.Modules.exists_isFiniteFreeComplex_higherDirectImage",
+     "module": "WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.FiniteFreeComplex",
+     "lines": [
+      94,
+      135
+     ],
+     "kind": "theorem",
+     "nodes": [],
+     "below": false
+    },
+    {
+     "name": "AlgebraicGeometry.Scheme.Modules.nonempty_H_pullback_linearEquiv",
+     "module": "WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar",
+     "lines": [
+      100,
+      116
+     ],
+     "kind": "theorem",
+     "nodes": [
+      "lem-sc-flat-base-change-coherent"
+     ],
+     "below": true
+    }
+   ]
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-prop-picard-degree-decomposition",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pd-degree-locally-constant",
+  "worker": "stage1",
+  "summary": "Checked the imported three-clause statement against the blueprint and the slopmaster2 declarations. Split the proof into local constancy, pullback twisting, and residue-field base change, retaining the existing dependency nodes. The Lean checkout has sorry-free declarations for clauses (1) and (3), but explicitly omits clause (2), so the imported item is not exactly attached to a single Lean declaration.",
+  "blueprint": "the proof paragraphs headed (1) Local constancy, (2) Twisting by a pullback, and (3) Base change",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-dlc1749",
+  "group": "H1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-dlc1749 (reviewer sub-agent of L); spot-checked: Item is the fibrewise Euler-characteristic degree of a line bundle on a curve family, not the degree of a finite locally free morphism: no B8 with lem-weil-pbc-finite-locally-free-degree-locally-constant / isLocallyConstant_finrank. Step 2: hypotheses of lem-pc-rf-perfect-base-change (proper fp, L flat over T via flat C_T) checked; perfect -> local free bounded complex, flat termwise pullback, chi = sum (-1)^i n_i correct. Step 3: fibre of N one-dim, trivial pullback, isomorphic fibres equal degree. Step 4: lem-pc-degree-base-change(1) applies (C_kappa(t) proper, dim 1). B10: no slopmaster2 decl states clause (2), split correct. No new nodes. Second reading missed no fault. No repairs."
+ },
+ "lean": {
+  "module": "WeilConjectures.AlgebraicGeometry.Picard.Degree",
+  "declaration": "AlgebraicGeometry.picardPresheafDegree_map",
+  "branch": "slopmaster2",
+  "line": 91,
+  "declarations": [
+   "AlgebraicGeometry.picardPresheafDegree_map",
+   "AlgebraicGeometry.isLocallyConstant_picardPresheafDegree",
+   "AlgebraicGeometry.picardFibreDegree_eq_picardPresheafDegree"
+  ],
+  "sorry_free": false,
+  "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state rests_on_sorry)"
+ }
 }

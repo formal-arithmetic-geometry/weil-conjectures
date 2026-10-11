@@ -1,133 +1,137 @@
 {
-  "id": "lem-sc-irreducible-noetherian-constant-acyclic",
-  "blueprint": {
-    "is": null,
-    "from": {
-      "node": "lem-sc-pic-proper-ntorsion",
-      "place": "the d=0 irreducible case in the 02UZ induction, where constant sheaves have no higher cohomology",
-      "via": [
-        "lem-sc-noetherian-topological-cohomology-vanishing"
-      ]
-    },
-    "same_as": []
+ "id": "lem-sc-irreducible-noetherian-constant-acyclic",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-pic-proper-ntorsion",
+   "place": "the d=0 irreducible case in the 02UZ induction, where constant sheaves have no higher cohomology",
+   "via": [
+    "lem-sc-noetherian-topological-cohomology-vanishing"
+   ]
   },
-  "kind": "statement",
-  "title": "Constant sheaves are acyclic on irreducible Noetherian spaces",
-  "statement": "Let X be an irreducible Noetherian topological space (meaning every nonempty set of closed subsets has a minimal element for inclusion), and let A be an abelian group. On the site of open subsets of X with open coverings [def-weil-pbc-sites-and-cohomology], let A_X be the constant abelian sheaf, namely the sheafification of the constant presheaf with value A [def-weil-pbc-constant-sheaf]. Then H^q(X,A_X)=0 for every integer q>0 [def-sc-topological-abelian-cohomology].",
-  "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Lemma 02UW (cohomology-lemma-irreducible-constant-cohomology-zero), used in Proposition 02UZ"
-  },
-  "stmt_deps": [
-    "def-weil-pbc-sites-and-cohomology",
-    "def-weil-pbc-constant-sheaf",
-    "def-sc-topological-abelian-cohomology"
-  ],
-  "proof": [
-    {
-      "text": "For every nonempty open U of X, U is irreducible: two nonempty opens of U are nonempty opens of X and therefore meet. The constant-sheaf section calculation and restriction compatibility are exactly [lem-sc-irreducible-constant-sections]. For the empty open, the sheaf axiom gives the zero group. Thus every restriction map of A_X between opens is surjective, so A_X is flasque in the sense of [def-sc-zariski-flasque].",
-      "uses": [
-        "lem-sc-irreducible-constant-sections",
-        "def-sc-zariski-flasque"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/cohomology.tex",
-        "place": "Lemma 02UW proof: constant sheaf on an irreducible Noetherian space is flasque"
-      }
-    },
-    {
-      "text": "Apply [lem-sc-topological-flasque-acyclic] to the flasque sheaf A_X. It gives H^q(X,A_X)=0 for every q>0.",
-      "uses": [
-        "lem-sc-topological-flasque-acyclic"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/cohomology.tex",
-        "place": "Lemma 02UW, conclusion via Lemma 09SY"
-      }
-    }
-  ],
-  "proof_deps": [
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Constant sheaves are acyclic on irreducible Noetherian spaces",
+ "statement": "Let X be an irreducible Noetherian topological space (meaning every nonempty set of closed subsets has a minimal element for inclusion), and let A be an abelian group. On the site of open subsets of X with open coverings [def-weil-pbc-sites-and-cohomology], let A_X be the constant abelian sheaf, namely the sheafification of the constant presheaf with value A [def-weil-pbc-constant-sheaf]. Then H^q(X,A_X)=0 for every integer q>0 [def-sc-topological-abelian-cohomology].",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Lemma 02UW (cohomology-lemma-irreducible-constant-cohomology-zero), used in Proposition 02UZ"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-pbc-constant-sheaf",
+  "def-sc-topological-abelian-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "For every nonempty open U of X, U is irreducible: two nonempty opens of U are nonempty opens of X and therefore meet. The constant-sheaf section calculation and restriction compatibility are exactly [lem-sc-irreducible-constant-sections]. For the empty open, the sheaf axiom gives the zero group. Thus every restriction map of A_X between opens is surjective, so A_X is flasque in the sense of [def-sc-zariski-flasque].",
+   "uses": [
     "lem-sc-irreducible-constant-sections",
-    "def-sc-zariski-flasque",
-    "lem-sc-topological-flasque-acyclic"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Lemma 02UW (cohomology-lemma-constant-sheaf), with the flasque argument of Lemma 09SY"
-  },
-  "mathlib_searches": [
-    {
-      "tool": "leansearch",
-      "query": "higher cohomology of a constant abelian sheaf on an irreducible Noetherian topological space vanishes",
-      "results": "service unavailable: Internal Server Error",
-      "date": "2026-10-11",
-      "verdict": "unavailable"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "higher cohomology of a constant abelian sheaf on an irreducible Noetherian topological space vanishes",
-      "results": "CategoryTheory.Sheaf.H; no declaration for this topological statement",
-      "date": "2026-10-11",
-      "verdict": "no match"
-    },
-    {
-      "tool": "loogle",
-      "query": "CategoryTheory.Sheaf.H, constantSheaf",
-      "results": "unknown identifier 'constantSheaf'; 0 hits",
-      "date": "2026-10-11",
-      "verdict": "no match"
-    },
-    {
-      "tool": "grep",
-      "query": "rg -n 'constantSheaf.*cohomology|irreducible.*cohomology' /home/ubuntu/weil-src-slopmaster2/.lake/packages/mathlib/Mathlib",
-      "results": "0 hits",
-      "date": "2026-10-11",
-      "verdict": "no match"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "created": {
-    "item": "lem-sc-noetherian-topological-cohomology-vanishing",
-    "by": "worker",
-    "date": "2026-10-10"
-  },
-  "chapter": "sec-curve-estimates",
-  "unit": "sk-thm-curveestimate",
-  "lean_audit": {
-    "master": {
-      "state": "none"
-    },
-    "slopmaster2": {
-      "state": "none"
-    }
-  },
-  "split_report": {
-    "date": "2026-10-11",
-    "item": "lem-sc-irreducible-noetherian-constant-acyclic",
-    "worker": "stage1",
-    "summary": "Split Lemma 02UW into the constant-section calculation on irreducible spaces and the generic flasque-acyclicity input. The item proof now verifies surjective restrictions, then applies topological flasque acyclicity. No sorry-free Lean declaration states the item.",
-    "blueprint": "The d=0 irreducible clause in the proof of Proposition 02UZ: constant sheaves have no higher cohomology because they are flasque.",
-    "tool_uses": [
-      {
-        "node": "def-sc-zariski-flasque",
-        "why": "The generic definition of flasque restriction-surjectivity is used to package the restriction argument."
-      }
-    ]
-  },
-  "tool_uses": [
     "def-sc-zariski-flasque"
-  ],
-  "reviewed": {
-    "date": "2026-10-10",
-    "by": "L",
-    "reviewer": "R-ica1800",
-    "group": "J1",
-    "result": "pass",
-    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ica1800 (reviewer sub-agent of L); spot-checked: Step 1: nonempty opens of irreducible X irreducible (elementary), sections/restrictions from new lem-sc-irreducible-constant-sections (real lemma since def-weil-pbc-constant-sheaf is sheafification, not locally constant maps; not a duplicate of the four 006W nodes), empty open zero, so flasque per def-sc-zariski-flasque. Step 2: new lem-sc-topological-flasque-acyclic (09SY on opens site) with the same derived-functor convention as def-sc-topological-abelian-cohomology; not a restatement of lem-sc-zariski-flasque-acyclic, which is stated on the scheme Zariski site X_Zar via def-sc-zariski-cohomology, and is the generic form that 02UZ's d=0 step needs. No cycle: lem-sc-noetherian-topological-cohomology-vanishing cites the item, the item does not cite it. E7: statement change (explicit opens site) named. Extra Noetherian hypothesis harmless (inherited). LeanFinder 'flasque (flabby) sheaf of abelian groups on a topological space has vanishing higher cohomology': only Sheaf.H/cohomologyPresheaf, no match. Minor: source label 'cohomology-lemma-constant-sheaf' should be lemma-irreducible-constant-cohomology-zero (metadata only, missed by the second reading). No repairs."
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Lemma 02UW proof: constant sheaf on an irreducible Noetherian space is flasque"
+   }
   },
-  "lead_note": " source.place label of 02UW corrected by L (18:01 UTC) per reviewer R-ica1800 (tags/tags: 02UW = cohomology-lemma-irreducible-constant-cohomology-zero)."
+  {
+   "text": "Apply [lem-sc-topological-flasque-acyclic] to the flasque sheaf A_X. It gives H^q(X,A_X)=0 for every q>0.",
+   "uses": [
+    "lem-sc-topological-flasque-acyclic"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Lemma 02UW, conclusion via Lemma 09SY"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-irreducible-constant-sections",
+  "def-sc-zariski-flasque",
+  "lem-sc-topological-flasque-acyclic"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Lemma 02UW (cohomology-lemma-constant-sheaf), with the flasque argument of Lemma 09SY"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "higher cohomology of a constant abelian sheaf on an irreducible Noetherian topological space vanishes",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "higher cohomology of a constant abelian sheaf on an irreducible Noetherian topological space vanishes",
+   "results": "CategoryTheory.Sheaf.H; no declaration for this topological statement",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf.H, constantSheaf",
+   "results": "unknown identifier 'constantSheaf'; 0 hits",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'constantSheaf.*cohomology|irreducible.*cohomology' /home/ubuntu/weil-src-slopmaster2/.lake/packages/mathlib/Mathlib",
+   "results": "0 hits",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "item": "lem-sc-noetherian-topological-cohomology-vanishing",
+  "by": "worker",
+  "date": "2026-10-10"
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-curveestimate",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-irreducible-noetherian-constant-acyclic",
+  "worker": "stage1",
+  "summary": "Split Lemma 02UW into the constant-section calculation on irreducible spaces and the generic flasque-acyclicity input. The item proof now verifies surjective restrictions, then applies topological flasque acyclicity. No sorry-free Lean declaration states the item.",
+  "blueprint": "The d=0 irreducible clause in the proof of Proposition 02UZ: constant sheaves have no higher cohomology because they are flasque.",
+  "tool_uses": [
+   {
+    "node": "def-sc-zariski-flasque",
+    "why": "The generic definition of flasque restriction-surjectivity is used to package the restriction argument."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-sc-zariski-flasque"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-ica1800",
+  "group": "J1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ica1800 (reviewer sub-agent of L); spot-checked: Step 1: nonempty opens of irreducible X irreducible (elementary), sections/restrictions from new lem-sc-irreducible-constant-sections (real lemma since def-weil-pbc-constant-sheaf is sheafification, not locally constant maps; not a duplicate of the four 006W nodes), empty open zero, so flasque per def-sc-zariski-flasque. Step 2: new lem-sc-topological-flasque-acyclic (09SY on opens site) with the same derived-functor convention as def-sc-topological-abelian-cohomology; not a restatement of lem-sc-zariski-flasque-acyclic, which is stated on the scheme Zariski site X_Zar via def-sc-zariski-cohomology, and is the generic form that 02UZ's d=0 step needs. No cycle: lem-sc-noetherian-topological-cohomology-vanishing cites the item, the item does not cite it. E7: statement change (explicit opens site) named. Extra Noetherian hypothesis harmless (inherited). LeanFinder 'flasque (flabby) sheaf of abelian groups on a topological space has vanishing higher cohomology': only Sheaf.H/cohomologyPresheaf, no match. Minor: source label 'cohomology-lemma-constant-sheaf' should be lemma-irreducible-constant-cohomology-zero (metadata only, missed by the second reading). No repairs."
+ },
+ "lead_note": " source.place label of 02UW corrected by L (18:01 UTC) per reviewer R-ica1800 (tags/tags: 02UW = cohomology-lemma-irreducible-constant-cohomology-zero)."
 }

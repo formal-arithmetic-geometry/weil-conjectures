@@ -95,10 +95,16 @@ def tex_names(node_ids):
 
 
 def hand_names(d):
-    """Declarations a worker attached by hand to a node it created (`created` set): the names in its lean_audit decls."""
-    if not d.get("created") and not (d.get("lean") or {}).get("note", "").startswith("attached by the lead"):
-        return []
+    """Declarations a worker attached by hand to a node it created (`created` set): the names in its lean_audit decls;
+    and (2026-10-12) the declarations of a stage-2 record of an existing source declaration (`lean.branch`
+    slopmaster2, `existing` not false): the record names them, whatever its note (the stage-2 records of 2026-10-11 04:46
+    replaced the "attached by the lead" notes)."""
+    rec = d.get("lean") or {}
     out = []
+    if rec.get("branch") == "slopmaster2" and rec.get("existing") is not False:
+        out += [x for x in [rec.get("declaration")] + list(rec.get("declarations") or []) if isinstance(x, str) and x]
+    if not d.get("created") and not rec.get("note", "").startswith("attached by the lead"):
+        return out
     for a in (d.get("lean_audit") or {}).values():
         if isinstance(a, dict):
             out += [x["name"] for x in a.get("decls") or [] if isinstance(x, dict) and x.get("name")]

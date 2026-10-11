@@ -1,129 +1,207 @@
 {
-  "id": "lem-sc-pic-tangent-space",
-  "blueprint": {
-    "is": "lem-sc-pic-tangent-space",
-    "from": null,
-    "same_as": null
-  },
-  "kind": "statement",
-  "title": "The tangent space of the Picard scheme",
-  "statement": "Let $C$ be a smooth projective\ncurve over a separably closed field $k$ which is\ngeometrically integral, and let\n$\\operatorname{Pic}_{C/k}$ be\nthe Picard functor, represented by a\ngroup scheme locally of finite type over $k$ (which it is by\n[thm-pc-picard-representable]). Then\nthe tangent space of $\\operatorname{Pic}_{C/k}$ at the identity\nis canonically isomorphic to $H^1(C,\\mathcal O_C)$ as a\n$k$-vector space (a $k$-linear isomorphism).",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-prop-picard-jacobian-tangent/lem-sc-pic-tangent-space.md",
-    "place": "node lem-sc-pic-tangent-space, order 847",
-    "external": [
-      {
-        "document": "Stacks Project",
-        "place": "Tag 0B92"
-      }
-    ]
-  },
-  "stmt_deps": [
-    "thm-pc-picard-representable",
-    "def-pc-geometrically-irreducible",
-    "def-pc-smooth-projective-curve",
-    "def-sc-picard-functor"
-  ],
-  "proof": [
-    {
-      "text": "The tangent space classifies first-order deformations of the\ntrivial line bundle, i.e. line bundles on\n$C_{k[\\varepsilon]}:=C\\times_kk[\\varepsilon]$,\n$\\varepsilon^2=0$, reducing to the trivial bundle modulo\n$\\varepsilon$. Cover $C$ by affine opens $\\{U_i\\}$. Over\n$U_i$, every deformation of the trivial bundle is the trivial\nbundle (a module over $\\mathcal O(U_i)[\\varepsilon]$ that is\nprojective of rank one and reduces to $\\mathcal O(U_i)$ is\nfree), so a deformation is given by transition isomorphisms\n$1+\\varepsilon g_{ij}$ with\n$g_{ij}\\in\\Gamma(U_i\\cap U_j,\\mathcal O)$; the cocycle condition\n\n$$\n(1+\\varepsilon g_{ij})(1+\\varepsilon g_{jk})=(1+\\varepsilon g_{ik})\n$$\n\nreads $g_{ij}+g_{jk}=g_{ik}$, and changing the trivializations\non $U_i$ by $1+\\varepsilon h_i$ changes $g_{ij}$ to\n$g_{ij}+h_j-h_i$. The deformations modulo isomorphism are\ntherefore in bijection, via $(1+\\varepsilon g_{ij})\\mapsto[(g_{ij})]$,\nwith the Cech 1-cohomology classes\n\n$$\n\\check H^1(\\{U_i\\},\\mathcal O)=H^1(C,\\mathcal O_C),\n$$\n\nthe affine Cech computation of\n[lem-sc-cech-spectral].",
-      "uses": [
-        "lem-sc-cech-spectral"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "This bijection is $k$-linear for the $k$-vector space structure of\nthe tangent space\n$T_e=\\ker(\\operatorname{Pic}_{C/k}(k[\\varepsilon])\\to\\operatorname{Pic}_{C/k}(k))$:\naddition is the group law, i.e. the tensor product of line bundles,\nwhose transition functions multiply,\n$(1+\\varepsilon a)(1+\\varepsilon b)=1+\\varepsilon(a+b)$ (this agrees\nwith the addition defined through\n$k[\\varepsilon]\\times_kk[\\varepsilon]=k[\\varepsilon_1,\\varepsilon_2]/(\\varepsilon_1,\\varepsilon_2)^2$);\nand $\\lambda\\in k$ acts by pullback along the $k$-algebra map\n$\\sigma_\\lambda:k[\\varepsilon]\\to k[\\varepsilon]$,\n$\\varepsilon\\mapsto\\lambda\\varepsilon$, which sends the transition\nfunctions $1+\\varepsilon g_{ij}$ to $1+\\varepsilon\\lambda g_{ij}$, i.e.\nthe class $[(g_{ij})]$ to $\\lambda[(g_{ij})]$. (*Reference for the\ngeneral statement that the tangent space of the Picard scheme is\n$H^1(C,\\mathcal O_C)$: Stacks Project, Picard Schemes of Curves,\nChapter 44, [Tag 0B92](https://stacks.math.columbia.edu/tag/0B92).*)",
-      "uses": [],
-      "elementary": null
-    }
-  ],
-  "proof_deps": [
+ "id": "lem-sc-pic-tangent-space",
+ "blueprint": {
+  "is": "lem-sc-pic-tangent-space",
+  "from": null,
+  "same_as": null
+ },
+ "kind": "statement",
+ "title": "The tangent space of the Picard scheme",
+ "statement": "Let $C$ be a smooth projective\ncurve over a separably closed field $k$ which is\ngeometrically integral, and let\n$\\operatorname{Pic}_{C/k}$ be\nthe Picard functor, represented by a\ngroup scheme locally of finite type over $k$ (which it is by\n[thm-pc-picard-representable]). Then\nthe tangent space of $\\operatorname{Pic}_{C/k}$ at the identity\nis canonically isomorphic to $H^1(C,\\mathcal O_C)$ as a\n$k$-vector space (a $k$-linear isomorphism).",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-prop-picard-jacobian-tangent/lem-sc-pic-tangent-space.md",
+  "place": "node lem-sc-pic-tangent-space, order 847",
+  "external": [
+   {
+    "document": "Stacks Project",
+    "place": "Tag 0B92"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "thm-pc-picard-representable",
+  "def-pc-geometrically-irreducible",
+  "def-pc-smooth-projective-curve",
+  "def-sc-picard-functor"
+ ],
+ "proof": [
+  {
+   "text": "The tangent space classifies first-order deformations of the\ntrivial line bundle, i.e. line bundles on\n$C_{k[\\varepsilon]}:=C\\times_kk[\\varepsilon]$,\n$\\varepsilon^2=0$, reducing to the trivial bundle modulo\n$\\varepsilon$. Cover $C$ by affine opens $\\{U_i\\}$. Over\n$U_i$, every deformation of the trivial bundle is the trivial\nbundle (a module over $\\mathcal O(U_i)[\\varepsilon]$ that is\nprojective of rank one and reduces to $\\mathcal O(U_i)$ is\nfree), so a deformation is given by transition isomorphisms\n$1+\\varepsilon g_{ij}$ with\n$g_{ij}\\in\\Gamma(U_i\\cap U_j,\\mathcal O)$; the cocycle condition\n\n$$\n(1+\\varepsilon g_{ij})(1+\\varepsilon g_{jk})=(1+\\varepsilon g_{ik})\n$$\n\nreads $g_{ij}+g_{jk}=g_{ik}$, and changing the trivializations\non $U_i$ by $1+\\varepsilon h_i$ changes $g_{ij}$ to\n$g_{ij}+h_j-h_i$. The deformations modulo isomorphism are\ntherefore in bijection, via $(1+\\varepsilon g_{ij})\\mapsto[(g_{ij})]$,\nwith the Cech 1-cohomology classes\n\n$$\n\\check H^1(\\{U_i\\},\\mathcal O)=H^1(C,\\mathcal O_C),\n$$\n\nthe affine Cech computation of\n[lem-sc-cech-spectral].",
+   "uses": [
     "lem-sc-cech-spectral"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-prop-picard-jacobian-tangent/lem-sc-pic-tangent-space.md",
-    "place": "## Proof"
+   ],
+   "elementary": false
   },
-  "mathlib_searches": [
-    {
-      "tool": "text search of the local Mathlib checkout (0df444a360)",
-      "query": "AlgebraicGeometry.nonempty_tangentSpaceAt_equiv_H_one",
-      "results": [],
-      "date": "2026-10-08"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "imported",
-  "merged_into": null,
-  "import_flags": [
-    "proof_cites_literature",
-    "lean_not_found",
-    "unreachable"
-  ],
-  "blueprint_kind": "lemma",
-  "blueprint_order": 847,
-  "blueprint_uses": [
-    "def-pc-geometrically-irreducible",
-    "def-pc-smooth-projective-curve",
-    "def-sc-picard-functor",
-    "lem-sc-cech-spectral",
-    "thm-pc-picard-representable"
-  ],
-  "blueprint_lean": [
-    "AlgebraicGeometry.nonempty_tangentSpaceAt_equiv_H_one"
-  ],
-  "blueprint_lean_not_found": [
-    "AlgebraicGeometry.nonempty_tangentSpaceAt_equiv_H_one"
-  ],
-  "uses_not_cited": [
-    "def-pc-geometrically-irreducible",
-    "def-pc-smooth-projective-curve",
-    "def-sc-picard-functor"
-  ],
-  "proof_split_by": "paragraphs",
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": [
-        "AlgebraicGeometry.nonempty_tangentSpaceAt_equiv_H_one"
-      ]
-    },
-    "slopmaster2": {
-      "state": "sorry_here",
-      "decls": [
-        {
-          "name": "AlgebraicGeometry.nonempty_tangentSpaceAt_linearEquiv_H_one",
-          "module": "WeilConjectures.AlgebraicGeometry.Picard.Jacobian",
-          "lines": [
-            802,
-            816
-          ],
-          "kind": "theorem",
-          "sorry": true
-        }
-      ],
-      "missing": [],
-      "superseded": [
-        "AlgebraicGeometry.nonempty_tangentSpaceAt_equiv_H_one"
-      ],
-      "open": []
-    }
-  },
-  "chapter": "sec-picard-framework",
-  "unit": "sk-prop-picard-jacobian-tangent",
-  "lead_note": "2026-10-10 L: flagged unreachable: the split of thm-sc-jacobian-representability (12:46) no longer cites it (the dimension g comes from thm-sc-theorem-of-the-base); it still realizes the tangent-space clause of unit sk-prop-jacobian. Unflag if a citer on the reach appears.",
-  "lean": {
-    "module": "WeilConjectures.AlgebraicGeometry.Picard.Jacobian",
-    "declaration": "AlgebraicGeometry.nonempty_tangentSpaceAt_linearEquiv_H_one",
-    "branch": "slopmaster2",
-    "line": 802,
-    "declarations": [
-      "AlgebraicGeometry.nonempty_tangentSpaceAt_linearEquiv_H_one"
-    ],
-    "sorry_free": false,
-    "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state sorry_here)"
+  {
+   "text": "This bijection is $k$-linear for the $k$-vector space structure of\nthe tangent space\n$T_e=\\ker(\\operatorname{Pic}_{C/k}(k[\\varepsilon])\\to\\operatorname{Pic}_{C/k}(k))$:\naddition is the group law, i.e. the tensor product of line bundles,\nwhose transition functions multiply,\n$(1+\\varepsilon a)(1+\\varepsilon b)=1+\\varepsilon(a+b)$ (this agrees\nwith the addition defined through\n$k[\\varepsilon]\\times_kk[\\varepsilon]=k[\\varepsilon_1,\\varepsilon_2]/(\\varepsilon_1,\\varepsilon_2)^2$);\nand $\\lambda\\in k$ acts by pullback along the $k$-algebra map\n$\\sigma_\\lambda:k[\\varepsilon]\\to k[\\varepsilon]$,\n$\\varepsilon\\mapsto\\lambda\\varepsilon$, which sends the transition\nfunctions $1+\\varepsilon g_{ij}$ to $1+\\varepsilon\\lambda g_{ij}$, i.e.\nthe class $[(g_{ij})]$ to $\\lambda[(g_{ij})]$. (*Reference for the\ngeneral statement that the tangent space of the Picard scheme is\n$H^1(C,\\mathcal O_C)$: Stacks Project, Picard Schemes of Curves,\nChapter 44, [Tag 0B92](https://stacks.math.columbia.edu/tag/0B92).*)",
+   "uses": [],
+   "elementary": null
   }
+ ],
+ "proof_deps": [
+  "lem-sc-cech-spectral"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-prop-picard-jacobian-tangent/lem-sc-pic-tangent-space.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "text search of the local Mathlib checkout (0df444a360)",
+   "query": "AlgebraicGeometry.nonempty_tangentSpaceAt_equiv_H_one",
+   "results": [],
+   "date": "2026-10-08"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [
+  "proof_cites_literature",
+  "lean_not_found",
+  "unreachable"
+ ],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 847,
+ "blueprint_uses": [
+  "def-pc-geometrically-irreducible",
+  "def-pc-smooth-projective-curve",
+  "def-sc-picard-functor",
+  "lem-sc-cech-spectral",
+  "thm-pc-picard-representable"
+ ],
+ "blueprint_lean": [
+  "AlgebraicGeometry.nonempty_tangentSpaceAt_equiv_H_one"
+ ],
+ "blueprint_lean_not_found": [
+  "AlgebraicGeometry.nonempty_tangentSpaceAt_equiv_H_one"
+ ],
+ "uses_not_cited": [
+  "def-pc-geometrically-irreducible",
+  "def-pc-smooth-projective-curve",
+  "def-sc-picard-functor"
+ ],
+ "proof_split_by": "paragraphs",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.nonempty_tangentSpaceAt_equiv_H_one",
+    "AlgebraicGeometry.nonempty_tangentSpaceAt_linearEquiv_H_one"
+   ]
+  },
+  "slopmaster2": {
+   "state": "rests_on_sorry",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.nonempty_tangentSpaceAt_linearEquiv_H_one",
+     "module": "WeilConjectures.AlgebraicGeometry.Picard.Jacobian",
+     "lines": [
+      1328,
+      1475
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "superseded": [
+    "AlgebraicGeometry.nonempty_tangentSpaceAt_equiv_H_one"
+   ],
+   "open": [
+    {
+     "name": "AlgebraicGeometry.GrpObj.isMulCommutative_infPoints",
+     "module": "WeilConjectures.AlgebraicGeometry.GroupScheme.Lie.InfPoints",
+     "lines": [
+      63,
+      66
+     ],
+     "kind": "theorem",
+     "nodes": [],
+     "below": false
+    },
+    {
+     "name": "AlgebraicGeometry.GrpObj.lieEquiv_mul",
+     "module": "WeilConjectures.AlgebraicGeometry.GroupScheme.Lie.InfPointsEquiv",
+     "lines": [
+      96,
+      98
+     ],
+     "kind": "theorem",
+     "nodes": [
+      "lem-ag-cartier-reduced"
+     ],
+     "below": false
+    },
+    {
+     "name": "AlgebraicGeometry.Scheme.Modules.exists_addEquiv_sections_higherDirectImage_H",
+     "module": "WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Sections",
+     "lines": [
+      31,
+      48
+     ],
+     "kind": "theorem",
+     "nodes": [
+      "lem-pc-cohomology-sections-affine-base"
+     ],
+     "below": true
+    },
+    {
+     "name": "AlgebraicGeometry.Scheme.Modules.finite_sections_higherDirectImage",
+     "module": "WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.FiniteFreeComplex",
+     "lines": [
+      137,
+      152
+     ],
+     "kind": "theorem",
+     "nodes": [
+      "lem-pc-coherent-hi"
+     ],
+     "below": true
+    },
+    {
+     "name": "AlgebraicGeometry.Scheme.Modules.nonempty_H_pullback_linearEquiv",
+     "module": "WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar",
+     "lines": [
+      100,
+      116
+     ],
+     "kind": "theorem",
+     "nodes": [
+      "lem-sc-flat-base-change-coherent"
+     ],
+     "below": true
+    },
+    {
+     "name": "AlgebraicGeometry.Scheme.Modules.subsingleton_H_of_topologicalKrullDim_lt",
+     "module": "WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar",
+     "lines": [
+      64,
+      73
+     ],
+     "kind": "theorem",
+     "nodes": [
+      "lem-sc-noetherian-cohomology-above-dimension"
+     ],
+     "below": true
+    }
+   ]
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-prop-picard-jacobian-tangent",
+ "lead_note": "2026-10-10 L: flagged unreachable: the split of thm-sc-jacobian-representability (12:46) no longer cites it (the dimension g comes from thm-sc-theorem-of-the-base); it still realizes the tangent-space clause of unit sk-prop-jacobian. Unflag if a citer on the reach appears.",
+ "lean": {
+  "module": "WeilConjectures.AlgebraicGeometry.Picard.Jacobian",
+  "declaration": "AlgebraicGeometry.nonempty_tangentSpaceAt_linearEquiv_H_one",
+  "branch": "slopmaster2",
+  "line": 802,
+  "declarations": [
+   "AlgebraicGeometry.nonempty_tangentSpaceAt_linearEquiv_H_one"
+  ],
+  "sorry_free": false,
+  "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state sorry_here)"
+ }
 }

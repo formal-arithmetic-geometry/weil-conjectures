@@ -1,205 +1,207 @@
 {
-  "id": "lem-sc-line-bundle-torsor",
-  "blueprint": {
-    "is": "lem-sc-line-bundle-torsor",
-    "from": null,
-    "same_as": null
-  },
-  "kind": "statement",
-  "title": "Line bundles and $\\mathbf G_m$-torsors",
-  "statement": "Let $X$ be a scheme (for instance a curve $C$ as in\n[def-sc-curves], in which case the left-hand side below is\n$\\operatorname{Pic}(C)$ of [def-sc-picard-group]). For an invertible\n$\\mathcal O_X$-module $\\mathcal L$ ([def-sc-invertible-module]) write\n$\\mathcal L_{\\Et}$ for the etale sheaf\n$(\\varphi:U\\to X)\\mapsto\\Gamma(U,\\varphi^*\\mathcal L)$, a module over\n$\\mathcal O_{X_{\\Et}}:=(\\mathcal O_X)_{\\Et}$. The construction\n\n$$\n\\mathcal L\\longmapsto\\underline{\\operatorname{Isom}}(\\mathcal O_{X_{\\Et}},\\mathcal L_{\\Et})\n$$\n\n(with the action $u\\cdot\\varphi=u\\circ\\varphi$ of\n$\\mathbf G_m$) and the construction\n\n$$\nT\\longmapsto\\mathcal L(T),\\qquad\n\\mathcal L(T)_{\\Et}\\cong(T\\times\\mathcal O_{X_{\\Et}})/\\mathbf G_m\n$$\n\n(with the diagonal action $g\\cdot(t,a)=(g\\cdot t,g^{-1}a)$) are\nmutually inverse bijections\n\n$$\n\\{\\text{invertible }\\mathcal O_X\\text{-modules}\\}/{\\cong}\n\\;\\longleftrightarrow\\;\n\\{\\text{isomorphism classes of }\\mathbf G_m\\text{-torsors on }X_{\\Et}\\},\n$$\n\ncarrying the tensor product $\\mathcal L\\otimes\\mathcal M$ to the\ncontracted product of torsors and $\\mathcal O_X$ to the trivial\ntorsor. The same statement holds on the Zariski site, with\n$\\mathcal O_X^{\\times}$-torsors on $X_{\\mathrm{Zar}}$ and\n$\\underline{\\operatorname{Isom}}(\\mathcal O_X,\\mathcal L)$.",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-hilbert90/lem-sc-line-bundle-torsor.md",
-    "place": "node lem-sc-line-bundle-torsor, order 881"
-  },
-  "stmt_deps": [
-    "def-sc-curves",
-    "def-sc-picard-group",
-    "def-sc-invertible-module"
-  ],
-  "proof": [
-    {
-      "text": "*$\\mathcal L_{\\Et}$ is a sheaf.* For an etale covering\n$\\{U_i\\to U\\}$ of an etale $X$-scheme $U$, the sheaf condition for\n$\\mathcal L_{\\Et}$ is the statement that\n$\\operatorname{Hom}(\\mathcal O_U,\\mathcal L_U)=\\Gamma(U,\\mathcal L_U)$\nis computed by compatible families on the $U_i$; an etale covering is\nan fpqc covering, so this is the full faithfulness in part 1 of\n[lem-pc-fpqc-descent]. The same applies to $\\mathcal O_{X_{\\Et}}$.",
-      "uses": [
-        "lem-pc-fpqc-descent"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "*From modules to torsors.* For invertible $\\mathcal L$, the sheaf\n$T:=\\underline{\\operatorname{Isom}}(\\mathcal O_{X_{\\Et}},\\mathcal L_{\\Et})$ is a\n$\\mathbf G_m$-torsor ([def-sc-gm-torsor]): the action is free\nand transitive, and on a trivializing Zariski open $U$ with\n$\\mathcal L|_U\\cong\\mathcal O_U$ one has\n$T|_U\\cong\\mathbf G_m|_U$ via $\\varphi\\mapsto\\varphi(1)$.\nMoreover the map $[(\\varphi,a)]\\mapsto\\varphi(a)$ is an isomorphism\n\n$$\n(T\\times\\mathcal O_{X_{\\Et}})/\\mathbf G_m\\xrightarrow{\\ \\sim\\ }\\mathcal L_{\\Et},\n$$\n\nwell-defined because $g\\varphi(g^{-1}a)=\\varphi(a)$, and an\nisomorphism because it is so on each $U$ above (where it becomes\n$(u,a)\\mapsto ua$ on $(\\mathbf G_m\\times\\mathcal O_U)/\\mathbf G_m$).",
-      "uses": [
-        "def-sc-gm-torsor"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "*From torsors to modules (descent).* Let $T$ be a\n$\\mathbf G_m$-torsor, trivialized by sections $t_i\\in T(U_i)$ on an\netale covering $\\{U_i\\to X\\}$. On $U_{ij}:=U_i\\times_XU_j$ write\n$t_j=g_{ij}t_i$ with $g_{ij}\\in\\Gamma(U_{ij},\\mathcal O^{\\times})$;\nthen $g_{ik}=g_{jk}g_{ij}$ on $U_{ijk}$. Multiplication by $g_{ij}$\nis a descent datum on the invertible modules $\\mathcal O_{U_i}$ for\nthe fpqc covering $\\{U_i\\to X\\}$ (the cocycle condition is the\ndisplayed identity), so by part 3 of [lem-pc-fpqc-descent] there is\nan invertible $\\mathcal O_X$-module $\\mathcal L(T)$ with\ntrivializations $e_i\\in\\Gamma(U_i,\\mathcal L(T))$ satisfying\n$e_j=g_{ij}e_i$. The map $t_i\\mapsto(1\\mapsto e_i)$ is compatible on\noverlaps, hence glues (as $T$ and the $\\underline{\\operatorname{Isom}}$\nsheaf are sheaves) to a $\\mathbf G_m$-equivariant map\n$T\\to\\underline{\\operatorname{Isom}}(\\mathcal O_{X_{\\Et}},\\mathcal L(T)_{\\Et})$,\nand an equivariant map of $\\mathbf G_m$-torsors is an isomorphism\n(check locally, where it is a translation of $\\mathbf G_m$). By the\nprevious step $\\mathcal L(T)_{\\Et}\\cong(T\\times\\mathcal O_{X_{\\Et}})/\\mathbf G_m$.",
-      "uses": [
-        "lem-pc-fpqc-descent"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "*Mutually inverse.* The previous step shows every torsor is\nisomorphic to one of the form\n$\\underline{\\operatorname{Isom}}(\\mathcal O_{X_{\\Et}},\\mathcal L_{\\Et})$.\nConversely, if $\\underline{\\operatorname{Isom}}(\\mathcal O_{X_{\\Et}},\\mathcal L_{\\Et})\\cong\n\\underline{\\operatorname{Isom}}(\\mathcal O_{X_{\\Et}},\\mathcal M_{\\Et})$\nas torsors, then applying $(-\\times\\mathcal O_{X_{\\Et}})/\\mathbf G_m$\nand the isomorphism of the second step gives an\n$\\mathcal O_{X_{\\Et}}$-linear isomorphism\n$\\mathcal L_{\\Et}\\cong\\mathcal M_{\\Et}$; evaluating on Zariski opens\n$U\\subseteq X$ (where $\\mathcal L_{\\Et}(U)=\\mathcal L(U)$) yields\n$\\mathcal L\\cong\\mathcal M$. Hence the two constructions are mutually\ninverse on isomorphism classes.",
-      "uses": [],
-      "elementary": null
-    },
-    {
-      "text": "*Tensor products.* The map\n$(\\varphi,\\psi)\\mapsto\\varphi\\otimes\\psi$ from\n$\\underline{\\operatorname{Isom}}(\\mathcal O,\\mathcal L_{\\Et})\\times\n\\underline{\\operatorname{Isom}}(\\mathcal O,\\mathcal M_{\\Et})$ to\n$\\underline{\\operatorname{Isom}}(\\mathcal O,(\\mathcal L\\otimes\\mathcal M)_{\\Et})$\nis invariant under $(\\varphi,\\psi)\\mapsto(g\\varphi,g^{-1}\\psi)$ and\n$\\mathbf G_m$-equivariant, so it induces an equivariant, hence\nbijective, map from the contracted product; and\n$\\underline{\\operatorname{Isom}}(\\mathcal O,\\mathcal O)=\\mathbf G_m$.",
-      "uses": [],
-      "elementary": null
-    },
-    {
-      "text": "*Zariski.* Replacing etale coverings by Zariski open coverings,\n$\\mathcal L_{\\Et}$ by $\\mathcal L$ and $\\mathbf G_m$ by\n$\\mathcal O_X^{\\times}$, the same argument applies, the descent step\nbeing ordinary gluing of sheaves along an open covering.",
-      "uses": [],
-      "elementary": null
-    }
-  ],
-  "proof_deps": [
-    "lem-pc-fpqc-descent",
-    "def-sc-gm-torsor"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-hilbert90/lem-sc-line-bundle-torsor.md",
-    "place": "## Proof"
-  },
-  "mathlib_searches": [],
-  "mathlib_match": null,
-  "status": "imported",
-  "merged_into": null,
-  "import_flags": [
-    "cites_outside_uses",
-    "long_proof_few_deps"
-  ],
-  "blueprint_kind": "lemma",
-  "blueprint_order": 881,
-  "blueprint_uses": [
-    "def-sc-gm-torsor",
-    "def-sc-invertible-module",
-    "def-sc-picard-group",
+ "id": "lem-sc-line-bundle-torsor",
+ "blueprint": {
+  "is": "lem-sc-line-bundle-torsor",
+  "from": null,
+  "same_as": null
+ },
+ "kind": "statement",
+ "title": "Line bundles and $\\mathbf G_m$-torsors",
+ "statement": "Let $X$ be a scheme (for instance a curve $C$ as in\n[def-sc-curves], in which case the left-hand side below is\n$\\operatorname{Pic}(C)$ of [def-sc-picard-group]). For an invertible\n$\\mathcal O_X$-module $\\mathcal L$ ([def-sc-invertible-module]) write\n$\\mathcal L_{\\Et}$ for the etale sheaf\n$(\\varphi:U\\to X)\\mapsto\\Gamma(U,\\varphi^*\\mathcal L)$, a module over\n$\\mathcal O_{X_{\\Et}}:=(\\mathcal O_X)_{\\Et}$. The construction\n\n$$\n\\mathcal L\\longmapsto\\underline{\\operatorname{Isom}}(\\mathcal O_{X_{\\Et}},\\mathcal L_{\\Et})\n$$\n\n(with the action $u\\cdot\\varphi=u\\circ\\varphi$ of\n$\\mathbf G_m$) and the construction\n\n$$\nT\\longmapsto\\mathcal L(T),\\qquad\n\\mathcal L(T)_{\\Et}\\cong(T\\times\\mathcal O_{X_{\\Et}})/\\mathbf G_m\n$$\n\n(with the diagonal action $g\\cdot(t,a)=(g\\cdot t,g^{-1}a)$) are\nmutually inverse bijections\n\n$$\n\\{\\text{invertible }\\mathcal O_X\\text{-modules}\\}/{\\cong}\n\\;\\longleftrightarrow\\;\n\\{\\text{isomorphism classes of }\\mathbf G_m\\text{-torsors on }X_{\\Et}\\},\n$$\n\ncarrying the tensor product $\\mathcal L\\otimes\\mathcal M$ to the\ncontracted product of torsors and $\\mathcal O_X$ to the trivial\ntorsor. The same statement holds on the Zariski site, with\n$\\mathcal O_X^{\\times}$-torsors on $X_{\\mathrm{Zar}}$ and\n$\\underline{\\operatorname{Isom}}(\\mathcal O_X,\\mathcal L)$.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-hilbert90/lem-sc-line-bundle-torsor.md",
+  "place": "node lem-sc-line-bundle-torsor, order 881"
+ },
+ "stmt_deps": [
+  "def-sc-curves",
+  "def-sc-picard-group",
+  "def-sc-invertible-module"
+ ],
+ "proof": [
+  {
+   "text": "*$\\mathcal L_{\\Et}$ is a sheaf.* For an etale covering\n$\\{U_i\\to U\\}$ of an etale $X$-scheme $U$, the sheaf condition for\n$\\mathcal L_{\\Et}$ is the statement that\n$\\operatorname{Hom}(\\mathcal O_U,\\mathcal L_U)=\\Gamma(U,\\mathcal L_U)$\nis computed by compatible families on the $U_i$; an etale covering is\nan fpqc covering, so this is the full faithfulness in part 1 of\n[lem-pc-fpqc-descent]. The same applies to $\\mathcal O_{X_{\\Et}}$.",
+   "uses": [
     "lem-pc-fpqc-descent"
-  ],
-  "proof_split_by": "labels",
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "closed",
-      "decls": [
-        {
-          "name": "AlgebraicGeometry.Scheme.nonempty_equiv_quotient_torsor",
-          "module": "WeilConjectures.AlgebraicGeometry.Sites.GmPicard",
-          "lines": [
-            93,
-            106
-          ],
-          "kind": "theorem",
-          "sorry": false
-        },
-        {
-          "name": "AlgebraicGeometry.Scheme.Pic.surjective_etaleTorsorClass",
-          "module": "WeilConjectures.AlgebraicGeometry.Sites.GmPicard",
-          "lines": [
-            57,
-            67
-          ],
-          "kind": "theorem",
-          "sorry": false,
-          "partial": "`lem-sc-line-bundle-torsor`, étale part"
-        },
-        {
-          "name": "AlgebraicGeometry.Scheme.picEquivQuotientTorsorGmSheaf",
-          "module": "WeilConjectures.AlgebraicGeometry.Sites.GmPicard",
-          "lines": [
-            69,
-            77
-          ],
-          "kind": "def",
-          "sorry": false,
-          "partial": "`lem-sc-line-bundle-torsor`, étale part"
-        },
-        {
-          "name": "AlgebraicGeometry.Scheme.nonempty_pic_equiv_quotient_torsor_gmSheaf",
-          "module": "WeilConjectures.AlgebraicGeometry.Sites.GmPicard",
-          "lines": [
-            84,
-            91
-          ],
-          "kind": "theorem",
-          "sorry": false,
-          "partial": "`lem-sc-line-bundle-torsor`, étale part"
-        },
-        {
-          "name": "AlgebraicGeometry.Scheme.exists_app_eq_of_app_etaleSpec_eq",
-          "module": "WeilConjectures.AlgebraicGeometry.Sites.Hilbert90",
-          "lines": [
-            233,
-            323
-          ],
-          "kind": "theorem",
-          "sorry": false,
-          "partial": "`lem-sc-line-bundle-torsor`, descent step for `X = Spec K`"
-        },
-        {
-          "name": "AlgebraicGeometry.Scheme.Pic.bijective_torsorClass",
-          "module": "WeilConjectures.AlgebraicGeometry.Sites.UnitsTorsor",
-          "lines": [
-            601,
-            618
-          ],
-          "kind": "theorem",
-          "sorry": false,
-          "partial": "`lem-sc-line-bundle-torsor`, Zariski part"
-        },
-        {
-          "name": "AlgebraicGeometry.Scheme.nonempty_pic_equiv_quotient_torsor_unitsSheaf",
-          "module": "WeilConjectures.AlgebraicGeometry.Sites.UnitsTorsor",
-          "lines": [
-            640,
-            645
-          ],
-          "kind": "theorem",
-          "sorry": false,
-          "partial": "`lem-sc-line-bundle-torsor`, Zariski part"
-        },
-        {
-          "name": "Algebra.TensorProduct.exists_eq_of_cocycle",
-          "module": "WeilConjectures.RingTheory.TensorProduct.Hilbert90",
-          "lines": [
-            99,
-            129
-          ],
-          "kind": "theorem",
-          "sorry": false,
-          "partial": "`lem-sc-line-bundle-torsor`, descent step, for `X = Spec K` and the covering"
-        }
-      ],
-      "missing": [],
-      "open": []
-    }
+   ],
+   "elementary": false
   },
-  "chapter": "sec-curve-estimates",
-  "unit": "sk-prop-hilbert90",
-  "lean": {
-    "module": "WeilConjectures.AlgebraicGeometry.Sites.GmPicard",
-    "declaration": "AlgebraicGeometry.Scheme.nonempty_equiv_quotient_torsor",
-    "branch": "slopmaster2",
-    "line": 93,
-    "declarations": [
-      "AlgebraicGeometry.Scheme.nonempty_equiv_quotient_torsor",
-      "AlgebraicGeometry.Scheme.Pic.surjective_etaleTorsorClass",
-      "AlgebraicGeometry.Scheme.picEquivQuotientTorsorGmSheaf",
-      "AlgebraicGeometry.Scheme.nonempty_pic_equiv_quotient_torsor_gmSheaf",
-      "AlgebraicGeometry.Scheme.exists_app_eq_of_app_etaleSpec_eq",
-      "AlgebraicGeometry.Scheme.Pic.bijective_torsorClass",
-      "AlgebraicGeometry.Scheme.nonempty_pic_equiv_quotient_torsor_unitsSheaf",
-      "Algebra.TensorProduct.exists_eq_of_cocycle"
-    ],
-    "sorry_free": true,
-    "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state closed)"
+  {
+   "text": "*From modules to torsors.* For invertible $\\mathcal L$, the sheaf\n$T:=\\underline{\\operatorname{Isom}}(\\mathcal O_{X_{\\Et}},\\mathcal L_{\\Et})$ is a\n$\\mathbf G_m$-torsor ([def-sc-gm-torsor]): the action is free\nand transitive, and on a trivializing Zariski open $U$ with\n$\\mathcal L|_U\\cong\\mathcal O_U$ one has\n$T|_U\\cong\\mathbf G_m|_U$ via $\\varphi\\mapsto\\varphi(1)$.\nMoreover the map $[(\\varphi,a)]\\mapsto\\varphi(a)$ is an isomorphism\n\n$$\n(T\\times\\mathcal O_{X_{\\Et}})/\\mathbf G_m\\xrightarrow{\\ \\sim\\ }\\mathcal L_{\\Et},\n$$\n\nwell-defined because $g\\varphi(g^{-1}a)=\\varphi(a)$, and an\nisomorphism because it is so on each $U$ above (where it becomes\n$(u,a)\\mapsto ua$ on $(\\mathbf G_m\\times\\mathcal O_U)/\\mathbf G_m$).",
+   "uses": [
+    "def-sc-gm-torsor"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*From torsors to modules (descent).* Let $T$ be a\n$\\mathbf G_m$-torsor, trivialized by sections $t_i\\in T(U_i)$ on an\netale covering $\\{U_i\\to X\\}$. On $U_{ij}:=U_i\\times_XU_j$ write\n$t_j=g_{ij}t_i$ with $g_{ij}\\in\\Gamma(U_{ij},\\mathcal O^{\\times})$;\nthen $g_{ik}=g_{jk}g_{ij}$ on $U_{ijk}$. Multiplication by $g_{ij}$\nis a descent datum on the invertible modules $\\mathcal O_{U_i}$ for\nthe fpqc covering $\\{U_i\\to X\\}$ (the cocycle condition is the\ndisplayed identity), so by part 3 of [lem-pc-fpqc-descent] there is\nan invertible $\\mathcal O_X$-module $\\mathcal L(T)$ with\ntrivializations $e_i\\in\\Gamma(U_i,\\mathcal L(T))$ satisfying\n$e_j=g_{ij}e_i$. The map $t_i\\mapsto(1\\mapsto e_i)$ is compatible on\noverlaps, hence glues (as $T$ and the $\\underline{\\operatorname{Isom}}$\nsheaf are sheaves) to a $\\mathbf G_m$-equivariant map\n$T\\to\\underline{\\operatorname{Isom}}(\\mathcal O_{X_{\\Et}},\\mathcal L(T)_{\\Et})$,\nand an equivariant map of $\\mathbf G_m$-torsors is an isomorphism\n(check locally, where it is a translation of $\\mathbf G_m$). By the\nprevious step $\\mathcal L(T)_{\\Et}\\cong(T\\times\\mathcal O_{X_{\\Et}})/\\mathbf G_m$.",
+   "uses": [
+    "lem-pc-fpqc-descent"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*Mutually inverse.* The previous step shows every torsor is\nisomorphic to one of the form\n$\\underline{\\operatorname{Isom}}(\\mathcal O_{X_{\\Et}},\\mathcal L_{\\Et})$.\nConversely, if $\\underline{\\operatorname{Isom}}(\\mathcal O_{X_{\\Et}},\\mathcal L_{\\Et})\\cong\n\\underline{\\operatorname{Isom}}(\\mathcal O_{X_{\\Et}},\\mathcal M_{\\Et})$\nas torsors, then applying $(-\\times\\mathcal O_{X_{\\Et}})/\\mathbf G_m$\nand the isomorphism of the second step gives an\n$\\mathcal O_{X_{\\Et}}$-linear isomorphism\n$\\mathcal L_{\\Et}\\cong\\mathcal M_{\\Et}$; evaluating on Zariski opens\n$U\\subseteq X$ (where $\\mathcal L_{\\Et}(U)=\\mathcal L(U)$) yields\n$\\mathcal L\\cong\\mathcal M$. Hence the two constructions are mutually\ninverse on isomorphism classes.",
+   "uses": [],
+   "elementary": null
+  },
+  {
+   "text": "*Tensor products.* The map\n$(\\varphi,\\psi)\\mapsto\\varphi\\otimes\\psi$ from\n$\\underline{\\operatorname{Isom}}(\\mathcal O,\\mathcal L_{\\Et})\\times\n\\underline{\\operatorname{Isom}}(\\mathcal O,\\mathcal M_{\\Et})$ to\n$\\underline{\\operatorname{Isom}}(\\mathcal O,(\\mathcal L\\otimes\\mathcal M)_{\\Et})$\nis invariant under $(\\varphi,\\psi)\\mapsto(g\\varphi,g^{-1}\\psi)$ and\n$\\mathbf G_m$-equivariant, so it induces an equivariant, hence\nbijective, map from the contracted product; and\n$\\underline{\\operatorname{Isom}}(\\mathcal O,\\mathcal O)=\\mathbf G_m$.",
+   "uses": [],
+   "elementary": null
+  },
+  {
+   "text": "*Zariski.* Replacing etale coverings by Zariski open coverings,\n$\\mathcal L_{\\Et}$ by $\\mathcal L$ and $\\mathbf G_m$ by\n$\\mathcal O_X^{\\times}$, the same argument applies, the descent step\nbeing ordinary gluing of sheaves along an open covering.",
+   "uses": [],
+   "elementary": null
   }
+ ],
+ "proof_deps": [
+  "lem-pc-fpqc-descent",
+  "def-sc-gm-torsor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-hilbert90/lem-sc-line-bundle-torsor.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [
+  "cites_outside_uses",
+  "long_proof_few_deps"
+ ],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 881,
+ "blueprint_uses": [
+  "def-sc-gm-torsor",
+  "def-sc-invertible-module",
+  "def-sc-picard-group",
+  "lem-pc-fpqc-descent"
+ ],
+ "proof_split_by": "labels",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.Scheme.nonempty_equiv_quotient_torsor",
+    "AlgebraicGeometry.Scheme.Pic.surjective_etaleTorsorClass",
+    "AlgebraicGeometry.Scheme.picEquivQuotientTorsorGmSheaf",
+    "AlgebraicGeometry.Scheme.nonempty_pic_equiv_quotient_torsor_gmSheaf",
+    "AlgebraicGeometry.Scheme.exists_app_eq_of_app_etaleSpec_eq",
+    "AlgebraicGeometry.Scheme.Pic.bijective_torsorClass",
+    "AlgebraicGeometry.Scheme.nonempty_pic_equiv_quotient_torsor_unitsSheaf",
+    "Algebra.TensorProduct.exists_eq_of_cocycle"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.Scheme.nonempty_equiv_quotient_torsor",
+     "module": "WeilConjectures.AlgebraicGeometry.Sites.GmPicard",
+     "lines": [
+      93,
+      106
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.Scheme.Pic.surjective_etaleTorsorClass",
+     "module": "WeilConjectures.AlgebraicGeometry.Sites.GmPicard",
+     "lines": [
+      57,
+      67
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.Scheme.picEquivQuotientTorsorGmSheaf",
+     "module": "WeilConjectures.AlgebraicGeometry.Sites.GmPicard",
+     "lines": [
+      69,
+      77
+     ],
+     "kind": "def",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.Scheme.nonempty_pic_equiv_quotient_torsor_gmSheaf",
+     "module": "WeilConjectures.AlgebraicGeometry.Sites.GmPicard",
+     "lines": [
+      84,
+      91
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.Scheme.exists_app_eq_of_app_etaleSpec_eq",
+     "module": "WeilConjectures.AlgebraicGeometry.Sites.Hilbert90",
+     "lines": [
+      233,
+      323
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.Scheme.Pic.bijective_torsorClass",
+     "module": "WeilConjectures.AlgebraicGeometry.Sites.UnitsTorsor",
+     "lines": [
+      601,
+      618
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.Scheme.nonempty_pic_equiv_quotient_torsor_unitsSheaf",
+     "module": "WeilConjectures.AlgebraicGeometry.Sites.UnitsTorsor",
+     "lines": [
+      640,
+      645
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "Algebra.TensorProduct.exists_eq_of_cocycle",
+     "module": "WeilConjectures.RingTheory.TensorProduct.Hilbert90",
+     "lines": [
+      99,
+      129
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-hilbert90",
+ "lean": {
+  "module": "WeilConjectures.AlgebraicGeometry.Sites.GmPicard",
+  "declaration": "AlgebraicGeometry.Scheme.nonempty_equiv_quotient_torsor",
+  "branch": "slopmaster2",
+  "line": 93,
+  "declarations": [
+   "AlgebraicGeometry.Scheme.nonempty_equiv_quotient_torsor",
+   "AlgebraicGeometry.Scheme.Pic.surjective_etaleTorsorClass",
+   "AlgebraicGeometry.Scheme.picEquivQuotientTorsorGmSheaf",
+   "AlgebraicGeometry.Scheme.nonempty_pic_equiv_quotient_torsor_gmSheaf",
+   "AlgebraicGeometry.Scheme.exists_app_eq_of_app_etaleSpec_eq",
+   "AlgebraicGeometry.Scheme.Pic.bijective_torsorClass",
+   "AlgebraicGeometry.Scheme.nonempty_pic_equiv_quotient_torsor_unitsSheaf",
+   "Algebra.TensorProduct.exists_eq_of_cocycle"
+  ],
+  "sorry_free": true,
+  "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state closed)"
+ }
 }

@@ -1,113 +1,114 @@
 {
-  "id": "lem-weil-heart-short-exact-triangles",
-  "blueprint": {
-    "is": "lem-weil-heart-short-exact-triangles",
-    "from": null,
-    "same_as": null
-  },
-  "kind": "statement",
-  "title": "Short exact sequences in the heart are triangles",
-  "statement": "Let $(\\mathcal T^{\\le0},\\mathcal T^{\\ge0})$ be a t-structure on a\ntriangulated category $\\mathcal T$ in the sense of [def-weil-t-structure]\n(not necessarily bounded), and let $\\mathcal A=\\mathcal\nT^{\\le0}\\cap\\mathcal T^{\\ge0}$ be its heart, which is abelian by\n[prop-weil-heart-abelian].\n\n1. (*Truncations.*) For every $K\\in\\mathcal T$ and $n\\in\\mathbf Z$ the\n   triangle $\\tau^{\\le n}K\\to K\\to\\tau^{\\ge n+1}K\\to\\tau^{\\le n}K[1]$ with\n   $\\tau^{\\le n}K\\in\\mathcal T^{\\le n}$ and $\\tau^{\\ge n+1}K\\in\\mathcal\n   T^{\\ge n+1}$ is unique up to unique isomorphism, and $\\tau^{\\le n}$,\n   $\\tau^{\\ge n+1}$ are functors, right, respectively left, adjoint to the\n   inclusions of $\\mathcal T^{\\le n}$ and $\\mathcal T^{\\ge n+1}$. There is\n   a canonical isomorphism $\\tau^{\\ge0}\\tau^{\\le0}\\cong\\tau^{\\le0}\\tau^{\\ge0}$,\n   and $H^0:=\\tau^{\\ge0}\\tau^{\\le0}:\\mathcal T\\to\\mathcal A$; put\n   $H^i(K):=H^0(K[i])$.\n2. (*Extensions.*) $\\mathcal T^{\\le n}$, $\\mathcal T^{\\ge n}$ and\n   $\\mathcal A$ are closed under extensions: if $X\\to Y\\to Z\\to X[1]$ is\n   distinguished and $X,Z$ lie in one of them, so does $Y$.\n3. (*Kernels and cokernels.*) Let $f:X\\to Y$ be a morphism of $\\mathcal A$\n   and complete it to a distinguished triangle $X\\xrightarrow fY\\to S\\to\n   X[1]$. Then $S\\in\\mathcal T^{\\le0}\\cap\\mathcal T^{\\ge-1}$,\n   $$\n   \\ker f\\cong H^{-1}(S)=(\\tau^{\\le-1}S)[-1],\\qquad\n   \\operatorname{coker}f\\cong H^0(S)=\\tau^{\\ge0}S,\n   $$\n   with the kernel map $(\\tau^{\\le-1}S)[-1]\\to S[-1]\\to X$ and the\n   cokernel map $Y\\to S\\to\\tau^{\\ge0}S$.\n4. (*Short exact sequences.*) A sequence $0\\to X\\xrightarrow fY\n   \\xrightarrow gZ\\to0$ of $\\mathcal A$ is short exact if and only if\n   there is a morphism $\\delta:Z\\to X[1]$ such that $X\\xrightarrow fY\n   \\xrightarrow gZ\\xrightarrow\\delta X[1]$ is distinguished, and then\n   $\\delta$ is unique. In particular a distinguished triangle whose three\n   terms lie in $\\mathcal A$ is a short exact sequence of $\\mathcal A$.\n5. (*Cohomological functor.*) $H^0$ is cohomological: a distinguished\n   triangle $X\\to Y\\to Z\\to X[1]$ gives a long exact sequence in\n   $\\mathcal A$\n   $$\n   \\cdots\\to H^{i}(X)\\to H^{i}(Y)\\to H^{i}(Z)\\to H^{i+1}(X)\\to\\cdots .\n   $$\n\n(*Source: Beilinson--Bernstein--Deligne, Faisceaux pervers, 1.3.3--1.3.6\nand 1.1.9--1.1.10; no Stacks Project entry states this form, for the\nreasons recorded at [def-weil-t-structure].*)",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-rem-rest/lem-weil-heart-short-exact-triangles.md",
-    "place": "node lem-weil-heart-short-exact-triangles, order 1447"
-  },
-  "stmt_deps": [
-    "def-weil-t-structure",
-    "prop-weil-heart-abelian"
-  ],
-  "proof": [
-    {
-      "text": "Throughout, axiom 1 of [def-weil-t-structure] gives $\\mathcal T^{\\le\nn-1}\\subseteq\\mathcal T^{\\le n}$ and $\\mathcal T^{\\ge n+1}\\subseteq\n\\mathcal T^{\\ge n}$, and axiom 2, shifted, gives $\\Hom(A,B)=0$ for\n$A\\in\\mathcal T^{\\le n}$, $B\\in\\mathcal T^{\\ge n+1}$. We use the long exact\n$\\Hom$ sequences of distinguished triangles freely.",
-      "uses": [
-        "def-weil-t-structure"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "*(1).* Let $A\\to K\\to B\\to A[1]$ be a triangle as in axiom 3 (shifted to\nlevel $n$). For $A'\\in\\mathcal T^{\\le n}$ the sequence\n$\\Hom(A',B[-1])\\to\\Hom(A',A)\\to\\Hom(A',K)\\to\\Hom(A',B)$ has both outer\nterms zero ($B[-1],B\\in\\mathcal T^{\\ge n+1}$), so $A$ represents\n$\\Hom(-,K)$ on $\\mathcal T^{\\le n}$. Hence $A=:\\tau^{\\le n}K$ is unique up\nto unique isomorphism and functorial in $K$, right adjoint to the\ninclusion; dually $B=:\\tau^{\\ge n+1}K$ represents $\\Hom(K,-)$ on $\\mathcal\nT^{\\ge n+1}$. The third morphism is unique because $\\Hom(A[1],B)=0$ (the\nargument of (4) below). Two consequences: $K\\in\\mathcal T^{\\le n}$ iff\n$\\tau^{\\ge n+1}K=0$, and $K\\in\\mathcal T^{\\ge n+1}$ iff $\\Hom(A',K)=0$ for\nall $A'\\in\\mathcal T^{\\le n}$ (then $\\tau^{\\le n}K\\to K$ is zero, so\n$\\tau^{\\le n}K=0$); dually $\\mathcal T^{\\le n}$ is the left orthogonal of\n$\\mathcal T^{\\ge n+1}$. For $K\\in\\mathcal T^{\\le0}$ the object\n$\\tau^{\\ge0}K$ is an extension of $K$ and $(\\tau^{\\le-1}K)[1]$, so it lies\nin $\\mathcal T^{\\le0}$ by (2) (whose proof uses only the orthogonality just\nshown); dually $\\tau^{\\le0}$ preserves $\\mathcal T^{\\ge0}$. So $H^0$ takes\nvalues in $\\mathcal A$. For the commutation, the octahedral axiom applied\nto $\\tau^{\\le-1}K\\to\\tau^{\\le0}K\\to K$ (the first map is the truncation of\n$\\tau^{\\le0}K$, since both represent $\\Hom(-,K)$ on $\\mathcal T^{\\le-1}$)\ngives a distinguished triangle\n$\\tau^{\\ge0}\\tau^{\\le0}K\\to\\tau^{\\ge0}K\\to\\tau^{\\ge1}K\\to$, whose first\nterm lies in $\\mathcal T^{\\le0}$ and whose third lies in $\\mathcal\nT^{\\ge1}$. By uniqueness it is the truncation triangle of $\\tau^{\\ge0}K$,\nso $\\tau^{\\ge0}\\tau^{\\le0}K\\cong\\tau^{\\le0}\\tau^{\\ge0}K$.",
-      "uses": [],
-      "elementary": null
-    },
-    {
-      "text": "*(2).* By (1), $\\mathcal T^{\\ge n+1}$ is the right orthogonal of $\\mathcal\nT^{\\le n}$, and a right orthogonal is closed under extensions: for\n$A'\\in\\mathcal T^{\\le n}$ the sequence\n$\\Hom(A',X)\\to\\Hom(A',Y)\\to\\Hom(A',Z)$ is exact with zero outer terms.\nDually for $\\mathcal T^{\\le n}$, and $\\mathcal A$ is the intersection.",
-      "uses": [],
-      "elementary": null
-    },
-    {
-      "text": "*(3).* The object $S$ is an extension of $Y$ and $X[1]$, both in\n$\\mathcal T^{\\le0}\\cap\\mathcal T^{\\ge-1}$, so $S$ lies there by (2);\nconsequently $\\tau^{\\le-1}S\\in\\mathcal T^{\\le-1}\\cap\\mathcal T^{\\ge-1}$\nand $\\tau^{\\ge0}S\\in\\mathcal A$ by (1), and these are $H^{-1}(S)[1]$ and\n$H^0(S)$. Let $T\\in\\mathcal A$. The sequence\n$\\Hom(X[1],T)\\to\\Hom(S,T)\\to\\Hom(Y,T)\\to\\Hom(X,T)$ is exact with\n$\\Hom(X[1],T)=0$, and $\\Hom(\\tau^{\\ge0}S,T)=\\Hom(S,T)$ by adjunction. So\n$\\Hom(\\tau^{\\ge0}S,T)$ is the set of $h:Y\\to T$ with $hf=0$, that is,\n$Y\\to\\tau^{\\ge0}S$ is a cokernel of $f$. Dually, $\\Hom(T,Y[-1])=0$ and\n$\\Hom(T,(\\tau^{\\le-1}S)[-1])=\\Hom(T,\\tau^{\\le0}(S[-1]))=\\Hom(T,S[-1])$, so\n$\\Hom(T,(\\tau^{\\le-1}S)[-1])$ is the set of $h:T\\to X$ with $fh=0$, and\n$(\\tau^{\\le-1}S)[-1]\\to X$ is a kernel of $f$.",
-      "uses": [],
-      "elementary": null
-    },
-    {
-      "text": "*(4).* Keep the triangle of (3). If $X\\xrightarrow fY\\xrightarrow gZ\n\\xrightarrow\\delta X[1]$ is distinguished with $Z\\in\\mathcal A$, then\n$S\\cong Z\\in\\mathcal T^{\\ge0}$, so $\\tau^{\\le-1}S=0$ and $\\ker f=0$, while\n$\\tau^{\\ge0}S=S$, so $g$ is a cokernel of $f$ by (3); the sequence is short\nexact. Conversely, let $0\\to X\\to Y\\to Z\\to0$ be short exact. Then $\\ker\nf=0$ gives $\\tau^{\\le-1}S=0$ by (3), so $S\\in\\mathcal A$ and $Y\\to S$ is a\ncokernel of $f$. The unique isomorphism $S\\cong Z$ under $Y$ carries the\ntriangle of (3) to a distinguished triangle $X\\to Y\\to Z\\to X[1]$. If\n$\\delta,\\delta'$ both complete $(f,g)$, the morphism axiom gives\n$h:Z\\to Z$ with $hg=g$ and $\\delta'h=\\delta$. Then $(h-1)g=0$, so\n$h-1$ factors through $\\delta$ via some $X[1]\\to Z$; but\n$\\Hom(X[1],Z)=0$ because $X[1]\\in\\mathcal T^{\\le-1}$ and $Z\\in\\mathcal\nT^{\\ge0}$. So $h=1$ and $\\delta'=\\delta$.",
-      "uses": [],
-      "elementary": null
-    },
-    {
-      "text": "*(5).* Rotating triangles, it suffices to show that $H^0X\\to H^0Y\\to H^0Z$\nis exact at $H^0Y$ for every distinguished $X\\to Y\\to Z\\to X[1]$.\n\n(a) If $X,Y,Z\\in\\mathcal T^{\\ge0}$, then $0\\to H^0X\\to H^0Y\\to H^0Z$ is\nexact: for $K\\in\\mathcal T^{\\ge0}$ and $T\\in\\mathcal A$, (1) gives\n$H^0K=\\tau^{\\le0}K$ and $\\Hom(T,H^0K)=\\Hom(T,K)$, and\n$0=\\Hom(T,Z[-1])\\to\\Hom(T,X)\\to\\Hom(T,Y)\\to\\Hom(T,Z)$ is exact; conclude by\nYoneda in the abelian category $\\mathcal A$. Dually, if $X,Y,Z\\in\\mathcal\nT^{\\le0}$, then $H^0X\\to H^0Y\\to H^0Z\\to0$ is exact, using\n$\\Hom(H^0K,T)=\\Hom(K,T)$ for $K\\in\\mathcal T^{\\le0}$.\n\n(b) If $Z\\in\\mathcal T^{\\ge0}$, the octahedral axiom applied to\n$\\tau^{\\le-1}X\\to X\\to Y$ gives distinguished triangles\n$\\tau^{\\le-1}X\\to Y\\to Y''\\to$ and $\\tau^{\\ge0}X\\to Y''\\to Z\\to$. By (2)\n$Y''\\in\\mathcal T^{\\ge0}$, so the first is the truncation triangle and\n$Y''\\cong\\tau^{\\ge0}Y$. Since $H^0\\tau^{\\ge0}=H^0$ by the commutation in\n(1), (a) applied to $\\tau^{\\ge0}X\\to\\tau^{\\ge0}Y\\to Z$ gives the exact\nsequence $0\\to H^0X\\to H^0Y\\to H^0Z$. Dually, if $X\\in\\mathcal T^{\\le0}$,\napplying the octahedral axiom to $Y\\to Z\\to\\tau^{\\ge1}Z$ gives a\ntriangle $X\\to\\tau^{\\le0}Y\\to\\tau^{\\le0}Z\\to$ and an exact sequence\n$H^0X\\to H^0Y\\to H^0Z\\to0$.\n\n(c) In general, apply the octahedral axiom to $\\tau^{\\le0}X\\to X\\to Y$.\nIt gives distinguished triangles $\\tau^{\\le0}X\\to Y\\to W\\to$ and\n$\\tau^{\\ge1}X\\to W\\to Z\\to$, with $Y\\to W\\to Z$ equal to the given map\n$Y\\to Z$. By the second half of (b), $H^0X=H^0\\tau^{\\le0}X\\to H^0Y\\to\nH^0W\\to0$ is exact. Rotating the second triangle to $W\\to Z\\to\n(\\tau^{\\ge1}X)[1]\\to W[1]$, whose third term lies in $\\mathcal T^{\\ge0}$,\nthe first half of (b) shows that $H^0W\\to H^0Z$ is a monomorphism. Hence\n$\\ker(H^0Y\\to H^0Z)=\\ker(H^0Y\\to H^0W)=\\operatorname{im}(H^0X\\to H^0Y)$.",
-      "uses": [],
-      "elementary": null
-    }
-  ],
-  "proof_deps": [
+ "id": "lem-weil-heart-short-exact-triangles",
+ "blueprint": {
+  "is": "lem-weil-heart-short-exact-triangles",
+  "from": null,
+  "same_as": null
+ },
+ "kind": "statement",
+ "title": "Short exact sequences in the heart are triangles",
+ "statement": "Let $(\\mathcal T^{\\le0},\\mathcal T^{\\ge0})$ be a t-structure on a\ntriangulated category $\\mathcal T$ in the sense of [def-weil-t-structure]\n(not necessarily bounded), and let $\\mathcal A=\\mathcal\nT^{\\le0}\\cap\\mathcal T^{\\ge0}$ be its heart, which is abelian by\n[prop-weil-heart-abelian].\n\n1. (*Truncations.*) For every $K\\in\\mathcal T$ and $n\\in\\mathbf Z$ the\n   triangle $\\tau^{\\le n}K\\to K\\to\\tau^{\\ge n+1}K\\to\\tau^{\\le n}K[1]$ with\n   $\\tau^{\\le n}K\\in\\mathcal T^{\\le n}$ and $\\tau^{\\ge n+1}K\\in\\mathcal\n   T^{\\ge n+1}$ is unique up to unique isomorphism, and $\\tau^{\\le n}$,\n   $\\tau^{\\ge n+1}$ are functors, right, respectively left, adjoint to the\n   inclusions of $\\mathcal T^{\\le n}$ and $\\mathcal T^{\\ge n+1}$. There is\n   a canonical isomorphism $\\tau^{\\ge0}\\tau^{\\le0}\\cong\\tau^{\\le0}\\tau^{\\ge0}$,\n   and $H^0:=\\tau^{\\ge0}\\tau^{\\le0}:\\mathcal T\\to\\mathcal A$; put\n   $H^i(K):=H^0(K[i])$.\n2. (*Extensions.*) $\\mathcal T^{\\le n}$, $\\mathcal T^{\\ge n}$ and\n   $\\mathcal A$ are closed under extensions: if $X\\to Y\\to Z\\to X[1]$ is\n   distinguished and $X,Z$ lie in one of them, so does $Y$.\n3. (*Kernels and cokernels.*) Let $f:X\\to Y$ be a morphism of $\\mathcal A$\n   and complete it to a distinguished triangle $X\\xrightarrow fY\\to S\\to\n   X[1]$. Then $S\\in\\mathcal T^{\\le0}\\cap\\mathcal T^{\\ge-1}$,\n   $$\n   \\ker f\\cong H^{-1}(S)=(\\tau^{\\le-1}S)[-1],\\qquad\n   \\operatorname{coker}f\\cong H^0(S)=\\tau^{\\ge0}S,\n   $$\n   with the kernel map $(\\tau^{\\le-1}S)[-1]\\to S[-1]\\to X$ and the\n   cokernel map $Y\\to S\\to\\tau^{\\ge0}S$.\n4. (*Short exact sequences.*) A sequence $0\\to X\\xrightarrow fY\n   \\xrightarrow gZ\\to0$ of $\\mathcal A$ is short exact if and only if\n   there is a morphism $\\delta:Z\\to X[1]$ such that $X\\xrightarrow fY\n   \\xrightarrow gZ\\xrightarrow\\delta X[1]$ is distinguished, and then\n   $\\delta$ is unique. In particular a distinguished triangle whose three\n   terms lie in $\\mathcal A$ is a short exact sequence of $\\mathcal A$.\n5. (*Cohomological functor.*) $H^0$ is cohomological: a distinguished\n   triangle $X\\to Y\\to Z\\to X[1]$ gives a long exact sequence in\n   $\\mathcal A$\n   $$\n   \\cdots\\to H^{i}(X)\\to H^{i}(Y)\\to H^{i}(Z)\\to H^{i+1}(X)\\to\\cdots .\n   $$\n\n(*Source: Beilinson--Bernstein--Deligne, Faisceaux pervers, 1.3.3--1.3.6\nand 1.1.9--1.1.10; no Stacks Project entry states this form, for the\nreasons recorded at [def-weil-t-structure].*)",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-rem-rest/lem-weil-heart-short-exact-triangles.md",
+  "place": "node lem-weil-heart-short-exact-triangles, order 1447"
+ },
+ "stmt_deps": [
+  "def-weil-t-structure",
+  "prop-weil-heart-abelian"
+ ],
+ "proof": [
+  {
+   "text": "Throughout, axiom 1 of [def-weil-t-structure] gives $\\mathcal T^{\\le\nn-1}\\subseteq\\mathcal T^{\\le n}$ and $\\mathcal T^{\\ge n+1}\\subseteq\n\\mathcal T^{\\ge n}$, and axiom 2, shifted, gives $\\Hom(A,B)=0$ for\n$A\\in\\mathcal T^{\\le n}$, $B\\in\\mathcal T^{\\ge n+1}$. We use the long exact\n$\\Hom$ sequences of distinguished triangles freely.",
+   "uses": [
     "def-weil-t-structure"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-rem-rest/lem-weil-heart-short-exact-triangles.md",
-    "place": "## Proof"
+   ],
+   "elementary": false
   },
-  "mathlib_searches": [],
-  "mathlib_match": null,
-  "status": "imported",
-  "merged_into": null,
-  "import_flags": [
-    "long_proof_few_deps"
-  ],
-  "blueprint_kind": "lemma",
-  "blueprint_order": 1447,
-  "blueprint_uses": [
-    "def-weil-t-structure",
-    "prop-weil-heart-abelian"
-  ],
-  "proof_split_by": "labels",
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "sorry_here",
-      "decls": [
-        {
-          "name": "AlgebraicGeometry.WeilSheaf.exact_map_higherLowerShriek",
-          "module": "WeilConjectures.DeligneLaumon.Reduction.FormalSteps",
-          "lines": [
-            372,
-            385
-          ],
-          "kind": "theorem",
-          "sorry": true,
-          "partial": "`lem-weil-heart-short-exact-triangles` and `lem-sp-long-exact-of-triangle`, used in"
-        }
-      ],
-      "missing": [],
-      "open": []
-    }
+  {
+   "text": "*(1).* Let $A\\to K\\to B\\to A[1]$ be a triangle as in axiom 3 (shifted to\nlevel $n$). For $A'\\in\\mathcal T^{\\le n}$ the sequence\n$\\Hom(A',B[-1])\\to\\Hom(A',A)\\to\\Hom(A',K)\\to\\Hom(A',B)$ has both outer\nterms zero ($B[-1],B\\in\\mathcal T^{\\ge n+1}$), so $A$ represents\n$\\Hom(-,K)$ on $\\mathcal T^{\\le n}$. Hence $A=:\\tau^{\\le n}K$ is unique up\nto unique isomorphism and functorial in $K$, right adjoint to the\ninclusion; dually $B=:\\tau^{\\ge n+1}K$ represents $\\Hom(K,-)$ on $\\mathcal\nT^{\\ge n+1}$. The third morphism is unique because $\\Hom(A[1],B)=0$ (the\nargument of (4) below). Two consequences: $K\\in\\mathcal T^{\\le n}$ iff\n$\\tau^{\\ge n+1}K=0$, and $K\\in\\mathcal T^{\\ge n+1}$ iff $\\Hom(A',K)=0$ for\nall $A'\\in\\mathcal T^{\\le n}$ (then $\\tau^{\\le n}K\\to K$ is zero, so\n$\\tau^{\\le n}K=0$); dually $\\mathcal T^{\\le n}$ is the left orthogonal of\n$\\mathcal T^{\\ge n+1}$. For $K\\in\\mathcal T^{\\le0}$ the object\n$\\tau^{\\ge0}K$ is an extension of $K$ and $(\\tau^{\\le-1}K)[1]$, so it lies\nin $\\mathcal T^{\\le0}$ by (2) (whose proof uses only the orthogonality just\nshown); dually $\\tau^{\\le0}$ preserves $\\mathcal T^{\\ge0}$. So $H^0$ takes\nvalues in $\\mathcal A$. For the commutation, the octahedral axiom applied\nto $\\tau^{\\le-1}K\\to\\tau^{\\le0}K\\to K$ (the first map is the truncation of\n$\\tau^{\\le0}K$, since both represent $\\Hom(-,K)$ on $\\mathcal T^{\\le-1}$)\ngives a distinguished triangle\n$\\tau^{\\ge0}\\tau^{\\le0}K\\to\\tau^{\\ge0}K\\to\\tau^{\\ge1}K\\to$, whose first\nterm lies in $\\mathcal T^{\\le0}$ and whose third lies in $\\mathcal\nT^{\\ge1}$. By uniqueness it is the truncation triangle of $\\tau^{\\ge0}K$,\nso $\\tau^{\\ge0}\\tau^{\\le0}K\\cong\\tau^{\\le0}\\tau^{\\ge0}K$.",
+   "uses": [],
+   "elementary": null
   },
-  "chapter": "sec-smooth-base-change",
-  "unit": "sk-rem-rest",
-  "lean": {
-    "module": "WeilConjectures.DeligneLaumon.Reduction.FormalSteps",
-    "declaration": "AlgebraicGeometry.WeilSheaf.exact_map_higherLowerShriek",
-    "branch": "slopmaster2",
-    "line": 372,
-    "declarations": [
-      "AlgebraicGeometry.WeilSheaf.exact_map_higherLowerShriek"
-    ],
-    "sorry_free": false,
-    "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state sorry_here)"
+  {
+   "text": "*(2).* By (1), $\\mathcal T^{\\ge n+1}$ is the right orthogonal of $\\mathcal\nT^{\\le n}$, and a right orthogonal is closed under extensions: for\n$A'\\in\\mathcal T^{\\le n}$ the sequence\n$\\Hom(A',X)\\to\\Hom(A',Y)\\to\\Hom(A',Z)$ is exact with zero outer terms.\nDually for $\\mathcal T^{\\le n}$, and $\\mathcal A$ is the intersection.",
+   "uses": [],
+   "elementary": null
+  },
+  {
+   "text": "*(3).* The object $S$ is an extension of $Y$ and $X[1]$, both in\n$\\mathcal T^{\\le0}\\cap\\mathcal T^{\\ge-1}$, so $S$ lies there by (2);\nconsequently $\\tau^{\\le-1}S\\in\\mathcal T^{\\le-1}\\cap\\mathcal T^{\\ge-1}$\nand $\\tau^{\\ge0}S\\in\\mathcal A$ by (1), and these are $H^{-1}(S)[1]$ and\n$H^0(S)$. Let $T\\in\\mathcal A$. The sequence\n$\\Hom(X[1],T)\\to\\Hom(S,T)\\to\\Hom(Y,T)\\to\\Hom(X,T)$ is exact with\n$\\Hom(X[1],T)=0$, and $\\Hom(\\tau^{\\ge0}S,T)=\\Hom(S,T)$ by adjunction. So\n$\\Hom(\\tau^{\\ge0}S,T)$ is the set of $h:Y\\to T$ with $hf=0$, that is,\n$Y\\to\\tau^{\\ge0}S$ is a cokernel of $f$. Dually, $\\Hom(T,Y[-1])=0$ and\n$\\Hom(T,(\\tau^{\\le-1}S)[-1])=\\Hom(T,\\tau^{\\le0}(S[-1]))=\\Hom(T,S[-1])$, so\n$\\Hom(T,(\\tau^{\\le-1}S)[-1])$ is the set of $h:T\\to X$ with $fh=0$, and\n$(\\tau^{\\le-1}S)[-1]\\to X$ is a kernel of $f$.",
+   "uses": [],
+   "elementary": null
+  },
+  {
+   "text": "*(4).* Keep the triangle of (3). If $X\\xrightarrow fY\\xrightarrow gZ\n\\xrightarrow\\delta X[1]$ is distinguished with $Z\\in\\mathcal A$, then\n$S\\cong Z\\in\\mathcal T^{\\ge0}$, so $\\tau^{\\le-1}S=0$ and $\\ker f=0$, while\n$\\tau^{\\ge0}S=S$, so $g$ is a cokernel of $f$ by (3); the sequence is short\nexact. Conversely, let $0\\to X\\to Y\\to Z\\to0$ be short exact. Then $\\ker\nf=0$ gives $\\tau^{\\le-1}S=0$ by (3), so $S\\in\\mathcal A$ and $Y\\to S$ is a\ncokernel of $f$. The unique isomorphism $S\\cong Z$ under $Y$ carries the\ntriangle of (3) to a distinguished triangle $X\\to Y\\to Z\\to X[1]$. If\n$\\delta,\\delta'$ both complete $(f,g)$, the morphism axiom gives\n$h:Z\\to Z$ with $hg=g$ and $\\delta'h=\\delta$. Then $(h-1)g=0$, so\n$h-1$ factors through $\\delta$ via some $X[1]\\to Z$; but\n$\\Hom(X[1],Z)=0$ because $X[1]\\in\\mathcal T^{\\le-1}$ and $Z\\in\\mathcal\nT^{\\ge0}$. So $h=1$ and $\\delta'=\\delta$.",
+   "uses": [],
+   "elementary": null
+  },
+  {
+   "text": "*(5).* Rotating triangles, it suffices to show that $H^0X\\to H^0Y\\to H^0Z$\nis exact at $H^0Y$ for every distinguished $X\\to Y\\to Z\\to X[1]$.\n\n(a) If $X,Y,Z\\in\\mathcal T^{\\ge0}$, then $0\\to H^0X\\to H^0Y\\to H^0Z$ is\nexact: for $K\\in\\mathcal T^{\\ge0}$ and $T\\in\\mathcal A$, (1) gives\n$H^0K=\\tau^{\\le0}K$ and $\\Hom(T,H^0K)=\\Hom(T,K)$, and\n$0=\\Hom(T,Z[-1])\\to\\Hom(T,X)\\to\\Hom(T,Y)\\to\\Hom(T,Z)$ is exact; conclude by\nYoneda in the abelian category $\\mathcal A$. Dually, if $X,Y,Z\\in\\mathcal\nT^{\\le0}$, then $H^0X\\to H^0Y\\to H^0Z\\to0$ is exact, using\n$\\Hom(H^0K,T)=\\Hom(K,T)$ for $K\\in\\mathcal T^{\\le0}$.\n\n(b) If $Z\\in\\mathcal T^{\\ge0}$, the octahedral axiom applied to\n$\\tau^{\\le-1}X\\to X\\to Y$ gives distinguished triangles\n$\\tau^{\\le-1}X\\to Y\\to Y''\\to$ and $\\tau^{\\ge0}X\\to Y''\\to Z\\to$. By (2)\n$Y''\\in\\mathcal T^{\\ge0}$, so the first is the truncation triangle and\n$Y''\\cong\\tau^{\\ge0}Y$. Since $H^0\\tau^{\\ge0}=H^0$ by the commutation in\n(1), (a) applied to $\\tau^{\\ge0}X\\to\\tau^{\\ge0}Y\\to Z$ gives the exact\nsequence $0\\to H^0X\\to H^0Y\\to H^0Z$. Dually, if $X\\in\\mathcal T^{\\le0}$,\napplying the octahedral axiom to $Y\\to Z\\to\\tau^{\\ge1}Z$ gives a\ntriangle $X\\to\\tau^{\\le0}Y\\to\\tau^{\\le0}Z\\to$ and an exact sequence\n$H^0X\\to H^0Y\\to H^0Z\\to0$.\n\n(c) In general, apply the octahedral axiom to $\\tau^{\\le0}X\\to X\\to Y$.\nIt gives distinguished triangles $\\tau^{\\le0}X\\to Y\\to W\\to$ and\n$\\tau^{\\ge1}X\\to W\\to Z\\to$, with $Y\\to W\\to Z$ equal to the given map\n$Y\\to Z$. By the second half of (b), $H^0X=H^0\\tau^{\\le0}X\\to H^0Y\\to\nH^0W\\to0$ is exact. Rotating the second triangle to $W\\to Z\\to\n(\\tau^{\\ge1}X)[1]\\to W[1]$, whose third term lies in $\\mathcal T^{\\ge0}$,\nthe first half of (b) shows that $H^0W\\to H^0Z$ is a monomorphism. Hence\n$\\ker(H^0Y\\to H^0Z)=\\ker(H^0Y\\to H^0W)=\\operatorname{im}(H^0X\\to H^0Y)$.",
+   "uses": [],
+   "elementary": null
   }
+ ],
+ "proof_deps": [
+  "def-weil-t-structure"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-rem-rest/lem-weil-heart-short-exact-triangles.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [
+  "long_proof_few_deps"
+ ],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 1447,
+ "blueprint_uses": [
+  "def-weil-t-structure",
+  "prop-weil-heart-abelian"
+ ],
+ "proof_split_by": "labels",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.WeilSheaf.exact_map_higherLowerShriek"
+   ]
+  },
+  "slopmaster2": {
+   "state": "sorry_here",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.WeilSheaf.exact_map_higherLowerShriek",
+     "module": "WeilConjectures.DeligneLaumon.Reduction.FormalSteps",
+     "lines": [
+      372,
+      385
+     ],
+     "kind": "theorem",
+     "sorry": true
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-rem-rest",
+ "lean": {
+  "module": "WeilConjectures.DeligneLaumon.Reduction.FormalSteps",
+  "declaration": "AlgebraicGeometry.WeilSheaf.exact_map_higherLowerShriek",
+  "branch": "slopmaster2",
+  "line": 372,
+  "declarations": [
+   "AlgebraicGeometry.WeilSheaf.exact_map_higherLowerShriek"
+  ],
+  "sorry_free": false,
+  "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state sorry_here)"
+ }
 }

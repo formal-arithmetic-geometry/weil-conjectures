@@ -2,10 +2,13 @@
 
 91 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (0)
+## Stage 1: nodes to split (1)
 
+| node | distance to a target | Lean state on the done branch |
+|---|---|---|
+| `lem-pc-localization-preserves-nonzerodivisor` | 3011 | closed_part |
 
-## Stage 2: nodes to state (91)
+## Stage 2: nodes to state (90)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
@@ -96,7 +99,6 @@
 | `prop-weil-pbc-strict-henselization-stalk-formula` | 1 | state | 0 |
 | `thm-sc-constant-invariance` | 1 | state | 0 |
 | `lem-pc-rf-single-complex-inherited-tensor-condition` | 2 | state | 0 |
-| `lem-pc-supported-open-pushforward` | 2 | state | 0 |
 | `lem-sc-p1-proj-shifted-free-twist` | 2 | state | 0 |
 | `lemma-weil-pbc-hypercohomology-convergence` | 2 | state | 0 |
 | `pqf-lem-leray-lowdegree` | 2 | state | 0 |

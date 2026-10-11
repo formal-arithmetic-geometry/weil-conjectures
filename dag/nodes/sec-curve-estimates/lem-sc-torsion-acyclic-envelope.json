@@ -1,97 +1,99 @@
 {
-  "id": "lem-sc-torsion-acyclic-envelope",
-  "blueprint": {
-    "is": null,
-    "from": {
-      "node": "lem-sc-cohomological-dimension",
-      "place": "## Proof, as a whole (degrees $q>2$): the blueprint proof concludes 'For total degree $q>2$ there are thus no differentials into or out of $H^q(C,\\eta_*M)$. It equals $H^q(k(C),M)=0$'; the split replaces this generic-point assembly by the route of the Lean proof AlgebraicGeometry.IsCurve.subsingleton_sheafH_of_three_le_of_forall (HighDegreeVanishing.lean), and this node is used in steps 3 and 8 (dimension shifting within sheaves killed by $n$).",
-      "via": []
-    },
-    "same_as": []
+ "id": "lem-sc-torsion-acyclic-envelope",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-cohomological-dimension",
+   "place": "## Proof, as a whole (degrees $q>2$): the blueprint proof concludes 'For total degree $q>2$ there are thus no differentials into or out of $H^q(C,\\eta_*M)$. It equals $H^q(k(C),M)=0$'; the split replaces this generic-point assembly by the route of the Lean proof AlgebraicGeometry.IsCurve.subsingleton_sheafH_of_three_le_of_forall (HighDegreeVanishing.lean), and this node is used in steps 3 and 8 (dimension shifting within sheaves killed by $n$).",
+   "via": []
   },
-  "kind": "statement",
-  "title": "Acyclic envelopes of sheaves killed by n",
-  "statement": "Let $X$ be a scheme, $n\\ge1$ an integer and $G$ an abelian sheaf on $X_{\\Et}$ [def-weil-pbc-abelian-etale-sheaves] with $n\\cdot\\mathrm{id}_G=0$. Then there are an abelian sheaf $J$ on $X_{\\Et}$ with $n\\cdot\\mathrm{id}_J=0$ and a monomorphism $G\\hookrightarrow J$ such that: (1) $H^q(X_{\\Et},J)=0$ for all $q\\ge1$; (2) for every morphism of schemes $f:X\\to Y$, $H^q(Y_{\\Et},f_*J)=0$ for all $q\\ge1$, with $f_*$ the direct image [def-weil-pbc-direct-image]; (3) for every etale morphism [def-weil-etale-morphism] $w:W\\to X$, $H^q(W_{\\Et},w^{-1}J)=0$ for all $q\\ge1$, with $w^{-1}$ the inverse image [def-weil-pbc-inverse-image]. Cohomology is that of [def-weil-pbc-etale-cohomology]. (One may take $J=I[n]=\\ker(n:I\\to I)$ for an injective abelian sheaf $I\\supseteq G$.)",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-cd/lem-sc-cohomological-dimension.md (agent-written split, following the Lean)",
-    "place": "Lean: WeilConjectures/AlgebraicGeometry/Sites/TorsionAcyclic.lean, AlgebraicGeometry.Etale.exists_mono_acyclic_of_nsmul_eq_zero, lines 75-113 ($f_*$ and etale $w^{-1}$ preserve injectives and commute with $n$-torsion; the $n$-torsion of an injective sheaf is acyclic)"
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Acyclic envelopes of sheaves killed by n",
+ "statement": "Let $X$ be a scheme, $n\\ge1$ an integer and $G$ an abelian sheaf on $X_{\\Et}$ [def-weil-pbc-abelian-etale-sheaves] with $n\\cdot\\mathrm{id}_G=0$. Then there are an abelian sheaf $J$ on $X_{\\Et}$ with $n\\cdot\\mathrm{id}_J=0$ and a monomorphism $G\\hookrightarrow J$ such that: (1) $H^q(X_{\\Et},J)=0$ for all $q\\ge1$; (2) for every morphism of schemes $f:X\\to Y$, $H^q(Y_{\\Et},f_*J)=0$ for all $q\\ge1$, with $f_*$ the direct image [def-weil-pbc-direct-image]; (3) for every etale morphism [def-weil-etale-morphism] $w:W\\to X$, $H^q(W_{\\Et},w^{-1}J)=0$ for all $q\\ge1$, with $w^{-1}$ the inverse image [def-weil-pbc-inverse-image]. Cohomology is that of [def-weil-pbc-etale-cohomology]. (One may take $J=I[n]=\\ker(n:I\\to I)$ for an injective abelian sheaf $I\\supseteq G$.)",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-cd/lem-sc-cohomological-dimension.md (agent-written split, following the Lean)",
+  "place": "Lean: WeilConjectures/AlgebraicGeometry/Sites/TorsionAcyclic.lean, AlgebraicGeometry.Etale.exists_mono_acyclic_of_nsmul_eq_zero, lines 75-113 ($f_*$ and etale $w^{-1}$ preserve injectives and commute with $n$-torsion; the $n$-torsion of an injective sheaf is acyclic)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-direct-image",
+  "def-weil-etale-morphism",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-etale-cohomology"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "n-torsion subsheaf of an injective sheaf is acyclic; embed sheaf killed by n into acyclic sheaf killed by n",
+   "results": "Submodule.torsionBy, AddSubgroup.torsionBy, InjectiveResolution instances, Sheaf.instAddCommGroupH",
+   "date": "2026-10-10",
+   "verdict": "no match"
   },
-  "stmt_deps": [
-    "def-weil-pbc-abelian-etale-sheaves",
-    "def-weil-pbc-direct-image",
-    "def-weil-etale-morphism",
-    "def-weil-pbc-inverse-image",
-    "def-weil-pbc-etale-cohomology"
-  ],
-  "proof": [],
-  "proof_deps": [],
-  "proof_origin": null,
-  "mathlib_searches": [
-    {
-      "tool": "leansearch",
-      "query": "n-torsion subsheaf of an injective sheaf is acyclic; embed sheaf killed by n into acyclic sheaf killed by n",
-      "results": "Submodule.torsionBy, AddSubgroup.torsionBy, InjectiveResolution instances, Sheaf.instAddCommGroupH",
-      "date": "2026-10-10",
-      "verdict": "no match"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "kernel of multiplication by n on an injective object has vanishing Ext / sheaf cohomology",
-      "results": "injective_iff_subsingleton_ext_one, hasInjectiveDimensionLT_iff, HasInjectiveDimensionLT.subsingleton (Mathlib.CategoryTheory.Abelian.Injective.Dimension)",
-      "date": "2026-10-10",
-      "verdict": "no match"
-    },
-    {
-      "tool": "grep",
-      "query": "grep -rln 'kernel_nsmul\\|torsionBy.*Injective' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
-      "results": "none; the project declaration AlgebraicGeometry.Etale.exists_mono_acyclic_of_nsmul_eq_zero (WeilConjectures/AlgebraicGeometry/Sites/TorsionAcyclic.lean:79) states it",
-      "date": "2026-10-10",
-      "verdict": "no match in Mathlib"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "unsplit",
-  "merged_into": null,
-  "created": {
-    "by": "worker",
-    "item": "lem-sc-cohomological-dimension",
-    "date": "2026-10-10"
+  {
+   "tool": "leanfinder",
+   "query": "kernel of multiplication by n on an injective object has vanishing Ext / sheaf cohomology",
+   "results": "injective_iff_subsingleton_ext_one, hasInjectiveDimensionLT_iff, HasInjectiveDimensionLT.subsingleton (Mathlib.CategoryTheory.Abelian.Injective.Dimension)",
+   "date": "2026-10-10",
+   "verdict": "no match"
   },
-  "chapter": "sec-curve-estimates",
-  "unit": "sk-prop-cd",
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "closed",
-      "decls": [
-        {
-          "name": "AlgebraicGeometry.Etale.exists_mono_acyclic_of_nsmul_eq_zero",
-          "module": "WeilConjectures.AlgebraicGeometry.Sites.TorsionAcyclic",
-          "lines": [
-            75,
-            113
-          ],
-          "kind": "theorem",
-          "sorry": false
-        }
-      ],
-      "missing": [],
-      "open": []
-    }
-  },
-  "lean": {
-    "module": "WeilConjectures.AlgebraicGeometry.Sites.TorsionAcyclic",
-    "declaration": "AlgebraicGeometry.Etale.exists_mono_acyclic_of_nsmul_eq_zero",
-    "branch": "slopmaster2",
-    "line": 75,
-    "declarations": [
-      "AlgebraicGeometry.Etale.exists_mono_acyclic_of_nsmul_eq_zero"
-    ],
-    "sorry_free": true,
-    "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state closed)"
+  {
+   "tool": "grep",
+   "query": "grep -rln 'kernel_nsmul\\|torsionBy.*Injective' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+   "results": "none; the project declaration AlgebraicGeometry.Etale.exists_mono_acyclic_of_nsmul_eq_zero (WeilConjectures/AlgebraicGeometry/Sites/TorsionAcyclic.lean:79) states it",
+   "date": "2026-10-10",
+   "verdict": "no match in Mathlib"
   }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-sc-cohomological-dimension",
+  "date": "2026-10-10"
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-cd",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.Etale.exists_mono_acyclic_of_nsmul_eq_zero"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.Etale.exists_mono_acyclic_of_nsmul_eq_zero",
+     "module": "WeilConjectures.AlgebraicGeometry.Sites.TorsionAcyclic",
+     "lines": [
+      75,
+      113
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
+ "lean": {
+  "module": "WeilConjectures.AlgebraicGeometry.Sites.TorsionAcyclic",
+  "declaration": "AlgebraicGeometry.Etale.exists_mono_acyclic_of_nsmul_eq_zero",
+  "branch": "slopmaster2",
+  "line": 75,
+  "declarations": [
+   "AlgebraicGeometry.Etale.exists_mono_acyclic_of_nsmul_eq_zero"
+  ],
+  "sorry_free": true,
+  "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state closed)"
+ }
 }

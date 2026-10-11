@@ -1,140 +1,145 @@
 {
-  "id": "lem-fd-as-characters",
-  "blueprint": {
-    "is": "lem-fd-as-characters",
-    "from": null,
-    "same_as": null
-  },
-  "kind": "statement",
-  "title": "Isotypic decomposition of the Artin–Schreier pushforward",
-  "statement": "With the $\\mathbf F_p$-action of [lem-fd-as-cover], there is a canonical decomposition\n\n$$\n\\pi_*\\overline{\\mathbf Q}_\\ell\\cong\\bigoplus_{\\chi\\in\\widehat{\\mathbf F}_p}\\mathcal L_\\chi,\n$$\n\nwhere each $\\mathcal L_\\chi$ is lisse of rank one on $X_0$, and $\\mathcal L_0=1$ (for $\\chi\\neq0$ the summand $\\mathcal L_\\chi$ need not be nonconstant: all are constant when $f=0$). In particular\n$\\mathcal L_{\\psi,f}\\otimes\\mathcal L_{\\psi,g}\\cong\\mathcal L_{\\psi,f+g}$, $(\\mathcal L_{\\psi,f})^{-1}\\cong\\mathcal L_{\\psi,-f}$, and $\\mathcal L_{\\psi^{-1},f}\\cong\\mathcal L_{\\psi,-f}$.",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-fourier-transform/sk-lem-as-properties/lem-fd-as-characters.md",
-    "place": "node lem-fd-as-characters, order 2682"
-  },
-  "stmt_deps": [
-    "lem-fd-as-cover"
-  ],
-  "proof": [
-    {
-      "text": "*Step 1 (the cover trivializes itself).* By [lem-fd-as-cover],\n$\\pi$ is finite étale of degree $p$ with the $\\mathbf F_p$-action\n$y\\mapsto y+a$, and $Y=\\Spec\\mathcal O_{X_0}[T]/(T^p-T-f)$. In\n$\\mathcal O_Y[T']$ one has the identity\n\n$$\nT'^p-T'-f=\\prod_{a\\in\\mathbf F_p}\\bigl(T'-(T+a)\\bigr),\n$$\n\nbecause the right-hand side equals $(T'-T)^p-(T'-T) =T'^p-T'-(T^p-T)$ and $T^p-T=f$ in $\\mathcal O_Y$; the factors are pairwise\ncomaximal, their differences being the units $a'-a\\in\\mathbf F_p^\\times$.\nThe Chinese remainder theorem therefore gives\n\n$$\n\\mathcal O_Y\\otimes_{\\mathcal O_{X_0}}\\mathcal O_Y\n=\\mathcal O_Y[T']/(T'^p-T'-f)\\xrightarrow{\\ \\sim\\ }\n\\prod_{a\\in\\mathbf F_p}\\mathcal O_Y,\n\\qquad T'\\longmapsto(T+a)_a ,\n$$\n\nthat is $Y\\times_{X_0}Y\\cong\\mathbf F_p\\times Y$ by $(y,y')\\mapsto(y'-y,y)$.\nConsequently the $\\mathbf F_p$-action is simply transitive on the geometric\nfibres of $\\pi$, so $\\pi$ is an $\\mathbf F_p$-torsor and\n$\\underline{\\operatorname{Hom}}_{X_0}(-,Y)$ is a finite locally constant sheaf\nwith simply transitive $\\mathbf F_p$-action in the sense of\n[def-weil-pbc-finite-torsors].\n*Step 2 (the pushforward is lisse of rank $p$).* Pulling back along the\nétale cover $\\pi$ and using Step 1 identifies\n$\\pi^*\\pi_*\\overline{\\mathbf Q}_\\ell$ with the constant sheaf\n$\\overline{\\mathbf Q}_\\ell[\\mathbf F_p]$ carrying the regular representation;\nby [def-weil-pbc-etale-sheaves] a sheaf which becomes constant after an\nétale base change is locally constant, so $\\pi_*\\overline{\\mathbf Q}_\\ell$\nis lisse of rank $p$, its stalk at every geometric point being the regular\nrepresentation.\n*Step 3 (the idempotents split it).* Since $p\\neq\\ell$, the elements\n$e_\\chi=\\frac1p\\sum_{a\\in\\mathbf F_p}\\chi(-a)\\sigma_a$ of the group algebra are\nwell defined; expanding the product and substituting $c=a+b$, the coefficient\nof $\\sigma_c$ in $e_\\chi e_{\\chi'}$ is\n$\\frac1{p^2}\\chi'(-c)\\sum_{a\\in\\mathbf F_p}(\\chi^{-1}\\chi')(a) =\\frac1p\\delta_{\\chi,\\chi'}\\chi(-c)$ by the orthogonality relation\n[lem-fd-character-orthogonality]. Hence\n$e_\\chi e_{\\chi'}=\\delta_{\\chi,\\chi'}e_\\chi$ and $\\sum_\\chi e_\\chi=1$, so\n\n$$\n\\pi_*\\overline{\\mathbf Q}_\\ell=\\bigoplus_{\\chi\\in\\widehat{\\mathbf F}_p}\n\\mathcal L_\\chi,\\qquad \\mathcal L_\\chi=e_\\chi\\,\\pi_*\\overline{\\mathbf Q}_\\ell ,\n$$\n\na direct sum decomposition by idempotents, with no appeal to a splitting\ntheorem for group algebras.\n*Step 4 (each summand is lisse of rank one; $\\mathcal L_0=1$).* Pulling $\\mathcal L_\\chi$ back along $\\pi$ gives the constant\nsubsheaf $e_\\chi\\overline{\\mathbf Q}_\\ell[\\mathbf F_p]$ of the regular\nrepresentation; the rank of an idempotent equals its trace, and\n$\\operatorname{tr}\\sigma_a=p\\delta_{a,0}$, so\n$\\operatorname{tr}e_\\chi=\\chi(0)=1$. Hence $\\pi^*\\mathcal L_\\chi$ is constant\nof rank one, and $\\mathcal L_\\chi$ is lisse of rank one by\n[def-weil-pbc-etale-sheaves]. The summand $\\chi=0$ is the invariant part\n$(\\pi_*\\overline{\\mathbf Q}_\\ell)^{\\mathbf F_p}$, i.e. the invariants of the\npushforward along a torsor, which is the constant sheaf\n$\\overline{\\mathbf Q}_\\ell$; so $\\mathcal L_0=1$.\n*Step 5 (multiplicativity).* By [def-fd-artin-schreier-sheaf],\n$\\mathcal L_{\\psi,f}=e_\\Psi\\pi_*\\overline{\\mathbf Q}_\\ell$ is the summand\n$\\mathcal L_\\chi$ for $\\chi=\\Psi$, so it is lisse of rank one by Step 4. Let\n$f,g\\in\\Gamma(X_0,\\mathcal O_{X_0})$ with covers $\\pi_f:Y_f\\to X_0$,\n$\\pi_g:Y_g\\to X_0$, and put $W=Y_f\\times_{X_0}Y_g$, $\\pi_W:W\\to X_0$. At a\ngeometric point the stalk of $\\pi_{W*}\\overline{\\mathbf Q}_\\ell$ is the space\nof functions on the product of the two fibres, i.e. the tensor product of the\nstalks, so\n$\\pi_{W*}\\overline{\\mathbf Q}_\\ell\\cong\\pi_{f*}\\overline{\\mathbf Q}_\\ell\\otimes\\pi_{g*}\\overline{\\mathbf Q}_\\ell$,\ncompatibly with the action of $\\mathbf F_p\\times\\mathbf F_p$; hence\n$\\mathcal L_{\\psi,f}\\otimes\\mathcal L_{\\psi,g}$ is the rank-one subsheaf on\nwhich $(a,b)$ acts by $\\Psi(a)\\Psi(b)$. Since\n$(T_f+T_g)^p-(T_f+T_g)=f+g$, the element $T_f+T_g$ defines\n$h:W\\to Y_{f+g}$ over $X_0$ with $h\\circ\\sigma_{(a,b)}=\\sigma_{a+b}\\circ h$.\nPullback $h^*:\\pi_{f+g,*}\\overline{\\mathbf Q}_\\ell\\to\\pi_{W*}\\overline{\\mathbf Q}_\\ell$\nis injective on stalks, $h$ being surjective on geometric fibres (the action\non the fibre of $Y_{f+g}$ is transitive), and it carries a section $\\varphi$\nwith $\\sigma_c^*\\varphi=\\Psi(c)\\varphi$ to one with\n$\\sigma_{(a,b)}^*h^*\\varphi=h^*\\sigma_{a+b}^*\\varphi=\\Psi(a)\\Psi(b)\\,h^*\\varphi$.\nSo $h^*$ maps $\\mathcal L_{\\psi,f+g}$ injectively on stalks into\n$\\mathcal L_{\\psi,f}\\otimes\\mathcal L_{\\psi,g}$; both are lisse of rank one,\nso this is an isomorphism\n$\\mathcal L_{\\psi,f}\\otimes\\mathcal L_{\\psi,g}\\cong\\mathcal L_{\\psi,f+g}$.\nFor $f=0$ the covering is the trivial torsor $X_0\\times\\mathbf F_p$ and the\n$\\Psi$-isotypic part of the functions on $\\mathbf F_p$ is spanned by the\nnowhere vanishing function $a\\mapsto\\Psi(a)$, so\n$\\mathcal L_{\\psi,0}\\cong\\overline{\\mathbf Q}_\\ell$; taking $g=-f$ gives\n$\\mathcal L_{\\psi,f}\\otimes\\mathcal L_{\\psi,-f}\\cong\\overline{\\mathbf Q}_\\ell$,\ni.e. $(\\mathcal L_{\\psi,f})^{-1}\\cong\\mathcal L_{\\psi,-f}$.\nFinally, $T\\mapsto-T$ defines an isomorphism $Y_{-f}\\to Y_f$ over $X_0$\n(as $(-T)^p-(-T)=-(T^p-T)$ for $p$ odd, and $-T=T$ for $p=2$) which\nintertwines $\\sigma_a$ on $Y_f$ with $\\sigma_{-a}$ on $Y_{-f}$; it therefore\ncarries the $\\Psi^{-1}$-isotypic part of $\\pi_{f*}\\overline{\\mathbf Q}_\\ell$\nonto the $\\Psi$-isotypic part of $\\pi_{-f,*}\\overline{\\mathbf Q}_\\ell$, i.e.\n$\\mathcal L_{\\psi^{-1},f}\\cong\\mathcal L_{\\psi,-f}$.",
-      "uses": [
-        "lem-fd-as-cover",
-        "def-weil-pbc-finite-torsors",
-        "def-weil-pbc-etale-sheaves",
-        "lem-fd-character-orthogonality",
-        "def-fd-artin-schreier-sheaf"
-      ],
-      "elementary": false
-    }
-  ],
-  "proof_deps": [
+ "id": "lem-fd-as-characters",
+ "blueprint": {
+  "is": "lem-fd-as-characters",
+  "from": null,
+  "same_as": null
+ },
+ "kind": "statement",
+ "title": "Isotypic decomposition of the Artin–Schreier pushforward",
+ "statement": "With the $\\mathbf F_p$-action of [lem-fd-as-cover], there is a canonical decomposition\n\n$$\n\\pi_*\\overline{\\mathbf Q}_\\ell\\cong\\bigoplus_{\\chi\\in\\widehat{\\mathbf F}_p}\\mathcal L_\\chi,\n$$\n\nwhere each $\\mathcal L_\\chi$ is lisse of rank one on $X_0$, and $\\mathcal L_0=1$ (for $\\chi\\neq0$ the summand $\\mathcal L_\\chi$ need not be nonconstant: all are constant when $f=0$). In particular\n$\\mathcal L_{\\psi,f}\\otimes\\mathcal L_{\\psi,g}\\cong\\mathcal L_{\\psi,f+g}$, $(\\mathcal L_{\\psi,f})^{-1}\\cong\\mathcal L_{\\psi,-f}$, and $\\mathcal L_{\\psi^{-1},f}\\cong\\mathcal L_{\\psi,-f}$.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-fourier-transform/sk-lem-as-properties/lem-fd-as-characters.md",
+  "place": "node lem-fd-as-characters, order 2682"
+ },
+ "stmt_deps": [
+  "lem-fd-as-cover"
+ ],
+ "proof": [
+  {
+   "text": "*Step 1 (the cover trivializes itself).* By [lem-fd-as-cover],\n$\\pi$ is finite étale of degree $p$ with the $\\mathbf F_p$-action\n$y\\mapsto y+a$, and $Y=\\Spec\\mathcal O_{X_0}[T]/(T^p-T-f)$. In\n$\\mathcal O_Y[T']$ one has the identity\n\n$$\nT'^p-T'-f=\\prod_{a\\in\\mathbf F_p}\\bigl(T'-(T+a)\\bigr),\n$$\n\nbecause the right-hand side equals $(T'-T)^p-(T'-T) =T'^p-T'-(T^p-T)$ and $T^p-T=f$ in $\\mathcal O_Y$; the factors are pairwise\ncomaximal, their differences being the units $a'-a\\in\\mathbf F_p^\\times$.\nThe Chinese remainder theorem therefore gives\n\n$$\n\\mathcal O_Y\\otimes_{\\mathcal O_{X_0}}\\mathcal O_Y\n=\\mathcal O_Y[T']/(T'^p-T'-f)\\xrightarrow{\\ \\sim\\ }\n\\prod_{a\\in\\mathbf F_p}\\mathcal O_Y,\n\\qquad T'\\longmapsto(T+a)_a ,\n$$\n\nthat is $Y\\times_{X_0}Y\\cong\\mathbf F_p\\times Y$ by $(y,y')\\mapsto(y'-y,y)$.\nConsequently the $\\mathbf F_p$-action is simply transitive on the geometric\nfibres of $\\pi$, so $\\pi$ is an $\\mathbf F_p$-torsor and\n$\\underline{\\operatorname{Hom}}_{X_0}(-,Y)$ is a finite locally constant sheaf\nwith simply transitive $\\mathbf F_p$-action in the sense of\n[def-weil-pbc-finite-torsors].\n*Step 2 (the pushforward is lisse of rank $p$).* Pulling back along the\nétale cover $\\pi$ and using Step 1 identifies\n$\\pi^*\\pi_*\\overline{\\mathbf Q}_\\ell$ with the constant sheaf\n$\\overline{\\mathbf Q}_\\ell[\\mathbf F_p]$ carrying the regular representation;\nby [def-weil-pbc-etale-sheaves] a sheaf which becomes constant after an\nétale base change is locally constant, so $\\pi_*\\overline{\\mathbf Q}_\\ell$\nis lisse of rank $p$, its stalk at every geometric point being the regular\nrepresentation.\n*Step 3 (the idempotents split it).* Since $p\\neq\\ell$, the elements\n$e_\\chi=\\frac1p\\sum_{a\\in\\mathbf F_p}\\chi(-a)\\sigma_a$ of the group algebra are\nwell defined; expanding the product and substituting $c=a+b$, the coefficient\nof $\\sigma_c$ in $e_\\chi e_{\\chi'}$ is\n$\\frac1{p^2}\\chi'(-c)\\sum_{a\\in\\mathbf F_p}(\\chi^{-1}\\chi')(a) =\\frac1p\\delta_{\\chi,\\chi'}\\chi(-c)$ by the orthogonality relation\n[lem-fd-character-orthogonality]. Hence\n$e_\\chi e_{\\chi'}=\\delta_{\\chi,\\chi'}e_\\chi$ and $\\sum_\\chi e_\\chi=1$, so\n\n$$\n\\pi_*\\overline{\\mathbf Q}_\\ell=\\bigoplus_{\\chi\\in\\widehat{\\mathbf F}_p}\n\\mathcal L_\\chi,\\qquad \\mathcal L_\\chi=e_\\chi\\,\\pi_*\\overline{\\mathbf Q}_\\ell ,\n$$\n\na direct sum decomposition by idempotents, with no appeal to a splitting\ntheorem for group algebras.\n*Step 4 (each summand is lisse of rank one; $\\mathcal L_0=1$).* Pulling $\\mathcal L_\\chi$ back along $\\pi$ gives the constant\nsubsheaf $e_\\chi\\overline{\\mathbf Q}_\\ell[\\mathbf F_p]$ of the regular\nrepresentation; the rank of an idempotent equals its trace, and\n$\\operatorname{tr}\\sigma_a=p\\delta_{a,0}$, so\n$\\operatorname{tr}e_\\chi=\\chi(0)=1$. Hence $\\pi^*\\mathcal L_\\chi$ is constant\nof rank one, and $\\mathcal L_\\chi$ is lisse of rank one by\n[def-weil-pbc-etale-sheaves]. The summand $\\chi=0$ is the invariant part\n$(\\pi_*\\overline{\\mathbf Q}_\\ell)^{\\mathbf F_p}$, i.e. the invariants of the\npushforward along a torsor, which is the constant sheaf\n$\\overline{\\mathbf Q}_\\ell$; so $\\mathcal L_0=1$.\n*Step 5 (multiplicativity).* By [def-fd-artin-schreier-sheaf],\n$\\mathcal L_{\\psi,f}=e_\\Psi\\pi_*\\overline{\\mathbf Q}_\\ell$ is the summand\n$\\mathcal L_\\chi$ for $\\chi=\\Psi$, so it is lisse of rank one by Step 4. Let\n$f,g\\in\\Gamma(X_0,\\mathcal O_{X_0})$ with covers $\\pi_f:Y_f\\to X_0$,\n$\\pi_g:Y_g\\to X_0$, and put $W=Y_f\\times_{X_0}Y_g$, $\\pi_W:W\\to X_0$. At a\ngeometric point the stalk of $\\pi_{W*}\\overline{\\mathbf Q}_\\ell$ is the space\nof functions on the product of the two fibres, i.e. the tensor product of the\nstalks, so\n$\\pi_{W*}\\overline{\\mathbf Q}_\\ell\\cong\\pi_{f*}\\overline{\\mathbf Q}_\\ell\\otimes\\pi_{g*}\\overline{\\mathbf Q}_\\ell$,\ncompatibly with the action of $\\mathbf F_p\\times\\mathbf F_p$; hence\n$\\mathcal L_{\\psi,f}\\otimes\\mathcal L_{\\psi,g}$ is the rank-one subsheaf on\nwhich $(a,b)$ acts by $\\Psi(a)\\Psi(b)$. Since\n$(T_f+T_g)^p-(T_f+T_g)=f+g$, the element $T_f+T_g$ defines\n$h:W\\to Y_{f+g}$ over $X_0$ with $h\\circ\\sigma_{(a,b)}=\\sigma_{a+b}\\circ h$.\nPullback $h^*:\\pi_{f+g,*}\\overline{\\mathbf Q}_\\ell\\to\\pi_{W*}\\overline{\\mathbf Q}_\\ell$\nis injective on stalks, $h$ being surjective on geometric fibres (the action\non the fibre of $Y_{f+g}$ is transitive), and it carries a section $\\varphi$\nwith $\\sigma_c^*\\varphi=\\Psi(c)\\varphi$ to one with\n$\\sigma_{(a,b)}^*h^*\\varphi=h^*\\sigma_{a+b}^*\\varphi=\\Psi(a)\\Psi(b)\\,h^*\\varphi$.\nSo $h^*$ maps $\\mathcal L_{\\psi,f+g}$ injectively on stalks into\n$\\mathcal L_{\\psi,f}\\otimes\\mathcal L_{\\psi,g}$; both are lisse of rank one,\nso this is an isomorphism\n$\\mathcal L_{\\psi,f}\\otimes\\mathcal L_{\\psi,g}\\cong\\mathcal L_{\\psi,f+g}$.\nFor $f=0$ the covering is the trivial torsor $X_0\\times\\mathbf F_p$ and the\n$\\Psi$-isotypic part of the functions on $\\mathbf F_p$ is spanned by the\nnowhere vanishing function $a\\mapsto\\Psi(a)$, so\n$\\mathcal L_{\\psi,0}\\cong\\overline{\\mathbf Q}_\\ell$; taking $g=-f$ gives\n$\\mathcal L_{\\psi,f}\\otimes\\mathcal L_{\\psi,-f}\\cong\\overline{\\mathbf Q}_\\ell$,\ni.e. $(\\mathcal L_{\\psi,f})^{-1}\\cong\\mathcal L_{\\psi,-f}$.\nFinally, $T\\mapsto-T$ defines an isomorphism $Y_{-f}\\to Y_f$ over $X_0$\n(as $(-T)^p-(-T)=-(T^p-T)$ for $p$ odd, and $-T=T$ for $p=2$) which\nintertwines $\\sigma_a$ on $Y_f$ with $\\sigma_{-a}$ on $Y_{-f}$; it therefore\ncarries the $\\Psi^{-1}$-isotypic part of $\\pi_{f*}\\overline{\\mathbf Q}_\\ell$\nonto the $\\Psi$-isotypic part of $\\pi_{-f,*}\\overline{\\mathbf Q}_\\ell$, i.e.\n$\\mathcal L_{\\psi^{-1},f}\\cong\\mathcal L_{\\psi,-f}$.",
+   "uses": [
     "lem-fd-as-cover",
     "def-weil-pbc-finite-torsors",
     "def-weil-pbc-etale-sheaves",
     "lem-fd-character-orthogonality",
     "def-fd-artin-schreier-sheaf"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/blueprint/master/blueprint/sec-fourier-transform/sk-lem-as-properties/lem-fd-as-characters.md",
-    "place": "## Proof"
-  },
-  "mathlib_searches": [],
-  "mathlib_match": null,
-  "status": "imported",
-  "merged_into": null,
-  "import_flags": [],
-  "blueprint_kind": "lemma",
-  "blueprint_order": 2682,
-  "blueprint_uses": [
-    "def-fd-artin-schreier-sheaf",
-    "def-weil-pbc-etale-sheaves",
-    "def-weil-pbc-finite-torsors",
-    "lem-fd-as-cover",
-    "lem-fd-character-orthogonality"
-  ],
-  "proof_split_by": "paragraphs",
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "closed",
-      "decls": [
-        {
-          "name": "AlgebraicGeometry.Etale.nonempty_iso_artinSchreierSheafOf_neg_inv",
-          "module": "WeilConjectures.FourierTransform.ArtinSchreier",
-          "lines": [
-            1087,
-            1103
-          ],
-          "kind": "theorem",
-          "sorry": false
-        },
-        {
-          "name": "AlgebraicGeometry.Etale.image_ι_artinSchreierIdempotent_mulShift_comp",
-          "module": "WeilConjectures.FourierTransform.ArtinSchreier",
-          "lines": [
-            1129,
-            1147
-          ],
-          "kind": "theorem",
-          "sorry": false
-        },
-        {
-          "name": "AlgebraicGeometry.Etale.sum_artinSchreierIdempotent_mulShift",
-          "module": "WeilConjectures.FourierTransform.ArtinSchreier",
-          "lines": [
-            1150,
-            1162
-          ],
-          "kind": "theorem",
-          "sorry": false
-        },
-        {
-          "name": "AlgebraicGeometry.Etale.artinSchreierPushforwardIsoBiproduct",
-          "module": "WeilConjectures.FourierTransform.ArtinSchreier",
-          "lines": [
-            1165,
-            1191
-          ],
-          "kind": "def",
-          "sorry": false
-        },
-        {
-          "name": "AlgebraicGeometry.Etale.artinSchreierSheafUpperStarIso",
-          "module": "WeilConjectures.FourierTransform.ArtinSchreier",
-          "lines": [
-            681,
-            688
-          ],
-          "kind": "def",
-          "sorry": false,
-          "partial": "`lem-fd-as-characters`, rank one"
-        }
-      ],
-      "missing": [],
-      "open": []
-    }
-  },
-  "chapter": "sec-fourier-transform",
-  "unit": "sk-lem-as-properties",
-  "lean": {
-    "module": "WeilConjectures.FourierTransform.ArtinSchreier",
-    "declaration": "AlgebraicGeometry.Etale.nonempty_iso_artinSchreierSheafOf_neg_inv",
-    "branch": "slopmaster2",
-    "line": 1087,
-    "declarations": [
-      "AlgebraicGeometry.Etale.nonempty_iso_artinSchreierSheafOf_neg_inv",
-      "AlgebraicGeometry.Etale.image_ι_artinSchreierIdempotent_mulShift_comp",
-      "AlgebraicGeometry.Etale.sum_artinSchreierIdempotent_mulShift",
-      "AlgebraicGeometry.Etale.artinSchreierPushforwardIsoBiproduct",
-      "AlgebraicGeometry.Etale.artinSchreierSheafUpperStarIso"
-    ],
-    "sorry_free": true,
-    "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state closed)"
+   ],
+   "elementary": false
   }
+ ],
+ "proof_deps": [
+  "lem-fd-as-cover",
+  "def-weil-pbc-finite-torsors",
+  "def-weil-pbc-etale-sheaves",
+  "lem-fd-character-orthogonality",
+  "def-fd-artin-schreier-sheaf"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-fourier-transform/sk-lem-as-properties/lem-fd-as-characters.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 2682,
+ "blueprint_uses": [
+  "def-fd-artin-schreier-sheaf",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-finite-torsors",
+  "lem-fd-as-cover",
+  "lem-fd-character-orthogonality"
+ ],
+ "proof_split_by": "paragraphs",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.Etale.nonempty_iso_artinSchreierSheafOf_neg_inv",
+    "AlgebraicGeometry.Etale.image_ι_artinSchreierIdempotent_mulShift_comp",
+    "AlgebraicGeometry.Etale.sum_artinSchreierIdempotent_mulShift",
+    "AlgebraicGeometry.Etale.artinSchreierPushforwardIsoBiproduct",
+    "AlgebraicGeometry.Etale.artinSchreierSheafUpperStarIso"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.Etale.nonempty_iso_artinSchreierSheafOf_neg_inv",
+     "module": "WeilConjectures.FourierTransform.ArtinSchreier",
+     "lines": [
+      1397,
+      1413
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.Etale.image_ι_artinSchreierIdempotent_mulShift_comp",
+     "module": "WeilConjectures.FourierTransform.ArtinSchreier",
+     "lines": [
+      1439,
+      1457
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.Etale.sum_artinSchreierIdempotent_mulShift",
+     "module": "WeilConjectures.FourierTransform.ArtinSchreier",
+     "lines": [
+      1460,
+      1472
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.Etale.artinSchreierPushforwardIsoBiproduct",
+     "module": "WeilConjectures.FourierTransform.ArtinSchreier",
+     "lines": [
+      1475,
+      1501
+     ],
+     "kind": "def",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.Etale.artinSchreierSheafUpperStarIso",
+     "module": "WeilConjectures.FourierTransform.ArtinSchreier",
+     "lines": [
+      684,
+      691
+     ],
+     "kind": "def",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
+ "chapter": "sec-fourier-transform",
+ "unit": "sk-lem-as-properties",
+ "lean": {
+  "module": "WeilConjectures.FourierTransform.ArtinSchreier",
+  "declaration": "AlgebraicGeometry.Etale.nonempty_iso_artinSchreierSheafOf_neg_inv",
+  "branch": "slopmaster2",
+  "line": 1087,
+  "declarations": [
+   "AlgebraicGeometry.Etale.nonempty_iso_artinSchreierSheafOf_neg_inv",
+   "AlgebraicGeometry.Etale.image_ι_artinSchreierIdempotent_mulShift_comp",
+   "AlgebraicGeometry.Etale.sum_artinSchreierIdempotent_mulShift",
+   "AlgebraicGeometry.Etale.artinSchreierPushforwardIsoBiproduct",
+   "AlgebraicGeometry.Etale.artinSchreierSheafUpperStarIso"
+  ],
+  "sorry_free": true,
+  "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state closed)"
+ }
 }

@@ -1,113 +1,115 @@
 {
-  "id": "lem-zl-mixed-punctual-cutoff",
-  "blueprint": {
-    "is": "lem-zl-mixed-punctual-cutoff",
-    "from": null,
-    "same_as": null
+ "id": "lem-zl-mixed-punctual-cutoff",
+ "blueprint": {
+  "is": "lem-zl-mixed-punctual-cutoff",
+  "from": null,
+  "same_as": null
+ },
+ "kind": "statement",
+ "title": "Punctual cutoff for an already mixed sheaf",
+ "statement": "Fix the finite field, coefficient field and embedding $\\iota$ of\n[def-weil-punctual-weights].\nLet $\\mathcal G$ be a\nconstructible\n$\\Qlb$-Weil sheaf on a\nseparated finite-type\n$k_0$-scheme $Y_0$. Assume that for some $u\\in\\mathbf R$\nit is $\\iota$-mixed of weights\nat most $u$. Let $v\\in\\mathbf R$, and suppose that at every\nclosed point $y$ every eigenvalue $\\alpha$ of local Frobenius\non $\\mathcal G_{\\bar y}$ satisfies\n$|\\iota(\\alpha)|\\leq q_y^{v/2}$.\nThen $\\mathcal G$ is $\\iota$-mixed of weights at most $v$.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-deligne-laumon-general/sk-p-dl-general-relative-line/lem-zl-mixed-punctual-cutoff.md",
+  "place": "node lem-zl-mixed-punctual-cutoff, order 2842"
+ },
+ "stmt_deps": [
+  "def-weil-punctual-weights",
+  "def-weil-pbc-scheme-conventions"
+ ],
+ "proof": [
+  {
+   "text": "Take a finite filtration by constructible Weil subsheaves supplied\nby the mixedness hypothesis in [def-weil-punctual-weights].\nWrite $\\mathcal Q_r$ for its punctually pure quotients and $u_r$\nfor their weights. Remove zero quotients.",
+   "uses": [
+    "def-weil-punctual-weights"
+   ],
+   "elementary": false
   },
-  "kind": "statement",
-  "title": "Punctual cutoff for an already mixed sheaf",
-  "statement": "Fix the finite field, coefficient field and embedding $\\iota$ of\n[def-weil-punctual-weights].\nLet $\\mathcal G$ be a\nconstructible\n$\\Qlb$-Weil sheaf on a\nseparated finite-type\n$k_0$-scheme $Y_0$. Assume that for some $u\\in\\mathbf R$\nit is $\\iota$-mixed of weights\nat most $u$. Let $v\\in\\mathbf R$, and suppose that at every\nclosed point $y$ every eigenvalue $\\alpha$ of local Frobenius\non $\\mathcal G_{\\bar y}$ satisfies\n$|\\iota(\\alpha)|\\leq q_y^{v/2}$.\nThen $\\mathcal G$ is $\\iota$-mixed of weights at most $v$.",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-deligne-laumon-general/sk-p-dl-general-relative-line/lem-zl-mixed-punctual-cutoff.md",
-    "place": "node lem-zl-mixed-punctual-cutoff, order 2842"
+  {
+   "text": "A nonzero $\\mathcal Q_r$ has a nonzero stalk on some lisse stratum\nof a constructible stratification\n([def-weil-pbc-constructible-complexes]). The locus where the\nlisse rank is nonzero contains a nonempty locally closed piece.\nIt contains a closed geometric point of $Y=Y_0\\times_{k_0}k$:\non a nonempty affine open of that piece, take a maximal ideal;\nthe weak Nullstellensatz gives residue field $k$.\nIts coordinates lie in a finite extension of the finite field\n$k_0$, so its image $y$ in $Y_0$ is a closed point.\nThus $(\\mathcal Q_r)_{\\bar y}\\neq0$ for some such $y$.",
+   "uses": [
+    "def-weil-pbc-constructible-complexes"
+   ],
+   "elementary": false
   },
-  "stmt_deps": [
-    "def-weil-punctual-weights",
-    "def-weil-pbc-scheme-conventions"
-  ],
-  "proof": [
-    {
-      "text": "Take a finite filtration by constructible Weil subsheaves supplied\nby the mixedness hypothesis in [def-weil-punctual-weights].\nWrite $\\mathcal Q_r$ for its punctually pure quotients and $u_r$\nfor their weights. Remove zero quotients.",
-      "uses": [
-        "def-weil-punctual-weights"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "A nonzero $\\mathcal Q_r$ has a nonzero stalk on some lisse stratum\nof a constructible stratification\n([def-weil-pbc-constructible-complexes]). The locus where the\nlisse rank is nonzero contains a nonempty locally closed piece.\nIt contains a closed geometric point of $Y=Y_0\\times_{k_0}k$:\non a nonempty affine open of that piece, take a maximal ideal;\nthe weak Nullstellensatz gives residue field $k$.\nIts coordinates lie in a finite extension of the finite field\n$k_0$, so its image $y$ in $Y_0$ is a closed point.\nThus $(\\mathcal Q_r)_{\\bar y}\\neq0$ for some such $y$.",
-      "uses": [
-        "def-weil-pbc-constructible-complexes"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "Taking stalks of the filtration is exact and respects local\nFrobenius. Choose a basis adapted to it. The Frobenius matrix is\nblock triangular, so its characteristic polynomial is the product ([p-linear-filtration])\nof those on the successive quotients. Each eigenvalue on\n$(\\mathcal Q_r)_{\\bar y}$ is therefore an eigenvalue on\n$\\mathcal G_{\\bar y}$. Choose one; it is nonzero since Frobenius\nacts invertibly. Purity and the assumed bound give\n\n$$\nq_y^{u_r/2}=|\\iota(\\alpha)|\\leq q_y^{v/2}.\n$$",
-      "uses": [
-        "p-linear-filtration"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "Since $q_y>1$, this implies $u_r\\leq v$.\nThe original finite filtration now has all nonzero quotient weights\nat most $v$, which is precisely the required mixedness bound.",
-      "uses": [],
-      "elementary": null
-    }
-  ],
-  "proof_deps": [
-    "def-weil-punctual-weights",
-    "def-weil-pbc-constructible-complexes",
+  {
+   "text": "Taking stalks of the filtration is exact and respects local\nFrobenius. Choose a basis adapted to it. The Frobenius matrix is\nblock triangular, so its characteristic polynomial is the product ([p-linear-filtration])\nof those on the successive quotients. Each eigenvalue on\n$(\\mathcal Q_r)_{\\bar y}$ is therefore an eigenvalue on\n$\\mathcal G_{\\bar y}$. Choose one; it is nonzero since Frobenius\nacts invertibly. Purity and the assumed bound give\n\n$$\nq_y^{u_r/2}=|\\iota(\\alpha)|\\leq q_y^{v/2}.\n$$",
+   "uses": [
     "p-linear-filtration"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/blueprint/master/blueprint/sec-deligne-laumon-general/sk-p-dl-general-relative-line/lem-zl-mixed-punctual-cutoff.md",
-    "place": "## Proof"
+   ],
+   "elementary": false
   },
-  "mathlib_searches": [],
-  "mathlib_match": null,
-  "status": "imported",
-  "merged_into": null,
-  "import_flags": [],
-  "blueprint_kind": "lemma",
-  "blueprint_order": 2842,
-  "blueprint_uses": [
-    "def-weil-pbc-constructible-complexes",
-    "def-weil-pbc-scheme-conventions",
-    "def-weil-punctual-weights",
-    "p-linear-filtration"
-  ],
-  "uses_not_cited": [
-    "def-weil-pbc-scheme-conventions"
-  ],
-  "proof_split_by": "paragraphs",
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "sorry_here",
-      "decls": [
-        {
-          "name": "AlgebraicGeometry.WeilSheaf.IsMixedOfWeightsAtMost.of_hasWeightsAtMost",
-          "module": "WeilConjectures.DeligneLaumon.Reduction.Weights",
-          "lines": [
-            207,
-            218
-          ],
-          "kind": "theorem",
-          "sorry": true
-        }
-      ],
-      "missing": [
-        "AlgebraicGeometry.LAdicWeilSheaf.IsMixedOfWeightsAtMost.of_hasWeightsAtMost"
-      ],
-      "open": []
-    }
-  },
-  "chapter": "sec-deligne-laumon-general",
-  "unit": "sk-p-dl-general-relative-line",
-  "lean": {
-    "module": "WeilConjectures.DeligneLaumon.Reduction.Weights",
-    "declaration": "AlgebraicGeometry.WeilSheaf.IsMixedOfWeightsAtMost.of_hasWeightsAtMost",
-    "branch": "slopmaster2",
-    "line": 207,
-    "declarations": [
-      "AlgebraicGeometry.WeilSheaf.IsMixedOfWeightsAtMost.of_hasWeightsAtMost"
-    ],
-    "sorry_free": false,
-    "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state sorry_here)"
+  {
+   "text": "Since $q_y>1$, this implies $u_r\\leq v$.\nThe original finite filtration now has all nonzero quotient weights\nat most $v$, which is precisely the required mixedness bound.",
+   "uses": [],
+   "elementary": null
   }
+ ],
+ "proof_deps": [
+  "def-weil-punctual-weights",
+  "def-weil-pbc-constructible-complexes",
+  "p-linear-filtration"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-deligne-laumon-general/sk-p-dl-general-relative-line/lem-zl-mixed-punctual-cutoff.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 2842,
+ "blueprint_uses": [
+  "def-weil-pbc-constructible-complexes",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-punctual-weights",
+  "p-linear-filtration"
+ ],
+ "uses_not_cited": [
+  "def-weil-pbc-scheme-conventions"
+ ],
+ "proof_split_by": "paragraphs",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.WeilSheaf.IsMixedOfWeightsAtMost.of_hasWeightsAtMost"
+   ]
+  },
+  "slopmaster2": {
+   "state": "sorry_here",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.WeilSheaf.IsMixedOfWeightsAtMost.of_hasWeightsAtMost",
+     "module": "WeilConjectures.DeligneLaumon.Reduction.Weights",
+     "lines": [
+      207,
+      218
+     ],
+     "kind": "theorem",
+     "sorry": true
+    }
+   ],
+   "missing": [
+    "AlgebraicGeometry.LAdicWeilSheaf.IsMixedOfWeightsAtMost.of_hasWeightsAtMost"
+   ],
+   "open": []
+  }
+ },
+ "chapter": "sec-deligne-laumon-general",
+ "unit": "sk-p-dl-general-relative-line",
+ "lean": {
+  "module": "WeilConjectures.DeligneLaumon.Reduction.Weights",
+  "declaration": "AlgebraicGeometry.WeilSheaf.IsMixedOfWeightsAtMost.of_hasWeightsAtMost",
+  "branch": "slopmaster2",
+  "line": 207,
+  "declarations": [
+   "AlgebraicGeometry.WeilSheaf.IsMixedOfWeightsAtMost.of_hasWeightsAtMost"
+  ],
+  "sorry_free": false,
+  "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state sorry_here)"
+ }
 }

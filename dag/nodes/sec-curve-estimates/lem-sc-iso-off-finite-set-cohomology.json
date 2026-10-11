@@ -1,98 +1,100 @@
 {
-  "id": "lem-sc-iso-off-finite-set-cohomology",
-  "blueprint": {
-    "is": null,
-    "from": {
-      "node": "lem-sc-cohomological-dimension",
-      "place": "## Proof, as a whole (degrees $q>2$): the blueprint proof concludes 'For total degree $q>2$ there are thus no differentials into or out of $H^q(C,\\eta_*M)$. It equals $H^q(k(C),M)=0$'; the split replaces this generic-point assembly by the route of the Lean proof AlgebraicGeometry.IsCurve.subsingleton_sheafH_of_three_le_of_forall (HighDegreeVanishing.lean), and this node is used in step 2 ($H^q(C,F)\\cong H^q(C,j_*j^{-1}F)$ for $q\\ge2$).",
-      "via": []
-    },
-    "same_as": []
+ "id": "lem-sc-iso-off-finite-set-cohomology",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-cohomological-dimension",
+   "place": "## Proof, as a whole (degrees $q>2$): the blueprint proof concludes 'For total degree $q>2$ there are thus no differentials into or out of $H^q(C,\\eta_*M)$. It equals $H^q(k(C),M)=0$'; the split replaces this generic-point assembly by the route of the Lean proof AlgebraicGeometry.IsCurve.subsingleton_sheafH_of_three_le_of_forall (HighDegreeVanishing.lean), and this node is used in step 2 ($H^q(C,F)\\cong H^q(C,j_*j^{-1}F)$ for $q\\ge2$).",
+   "via": []
   },
-  "kind": "statement",
-  "title": "A map of sheaves which is an isomorphism off finitely many closed points is an isomorphism on H^q, q >= 2",
-  "statement": "Let $X$ be a scheme, $U\\subseteq X$ an open subscheme with inclusion $j:U\\to X$, and assume that $X\\setminus U$ is a finite set of closed points [def-weil-closed-points] $x$ each of whose residue fields $\\kappa(x)$ [def-weil-residue-field] is separably closed [def-kun-separably-closed]. Let $\\varphi:F\\to G$ be a morphism of abelian sheaves on $X_{\\Et}$ [def-weil-pbc-abelian-etale-sheaves] such that $j^{-1}\\varphi$ [def-weil-pbc-inverse-image] is an isomorphism. Then $H^q(\\varphi):H^q(X_{\\Et},F)\\to H^q(X_{\\Et},G)$ [def-weil-pbc-etale-cohomology] is bijective for every $q\\ge2$.",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-cd/lem-sc-cohomological-dimension.md (agent-written split, following the Lean)",
-    "place": "Lean: WeilConjectures/AlgebraicGeometry/Sites/FiniteSupport.lean, AlgebraicGeometry.Etale.bijective_H_map_of_isIso_upperStar_map, lines 151-167 (kernel and cokernel of $\\varphi$ vanish over $U$, hence are acyclic)"
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "A map of sheaves which is an isomorphism off finitely many closed points is an isomorphism on H^q, q >= 2",
+ "statement": "Let $X$ be a scheme, $U\\subseteq X$ an open subscheme with inclusion $j:U\\to X$, and assume that $X\\setminus U$ is a finite set of closed points [def-weil-closed-points] $x$ each of whose residue fields $\\kappa(x)$ [def-weil-residue-field] is separably closed [def-kun-separably-closed]. Let $\\varphi:F\\to G$ be a morphism of abelian sheaves on $X_{\\Et}$ [def-weil-pbc-abelian-etale-sheaves] such that $j^{-1}\\varphi$ [def-weil-pbc-inverse-image] is an isomorphism. Then $H^q(\\varphi):H^q(X_{\\Et},F)\\to H^q(X_{\\Et},G)$ [def-weil-pbc-etale-cohomology] is bijective for every $q\\ge2$.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-cd/lem-sc-cohomological-dimension.md (agent-written split, following the Lean)",
+  "place": "Lean: WeilConjectures/AlgebraicGeometry/Sites/FiniteSupport.lean, AlgebraicGeometry.Etale.bijective_H_map_of_isIso_upperStar_map, lines 151-167 (kernel and cokernel of $\\varphi$ vanish over $U$, hence are acyclic)"
+ },
+ "stmt_deps": [
+  "def-weil-closed-points",
+  "def-weil-residue-field",
+  "def-kun-separably-closed",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-etale-cohomology"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "morphism of sheaves isomorphism away from finitely many closed points induces isomorphism on cohomology in degree at least two",
+   "results": "GrothendieckTopology.W_sheafToPreheaf_map_iff_isIso, TopCat.Presheaf.isIso_of_stalkFunctor_map_iso, Sheaf.isLocallyInjective_sheafToPresheaf_map_iff",
+   "date": "2026-10-10",
+   "verdict": "no match"
   },
-  "stmt_deps": [
-    "def-weil-closed-points",
-    "def-weil-residue-field",
-    "def-kun-separably-closed",
-    "def-weil-pbc-abelian-etale-sheaves",
-    "def-weil-pbc-inverse-image",
-    "def-weil-pbc-etale-cohomology"
-  ],
-  "proof": [],
-  "proof_deps": [],
-  "proof_origin": null,
-  "mathlib_searches": [
-    {
-      "tool": "leansearch",
-      "query": "morphism of sheaves isomorphism away from finitely many closed points induces isomorphism on cohomology in degree at least two",
-      "results": "GrothendieckTopology.W_sheafToPreheaf_map_iff_isIso, TopCat.Presheaf.isIso_of_stalkFunctor_map_iso, Sheaf.isLocallyInjective_sheafToPresheaf_map_iff",
-      "date": "2026-10-10",
-      "verdict": "no match"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "cohomology bijective for morphism with kernel and cokernel acyclic in degree at least two",
-      "results": "CochainComplex.HomComplex.CohomologyClass.bijective_toSmallShiftedHom_of_isKInjective, CohomologyClass.toHom_bijective, HomotopyCategory acyclic lemmas",
-      "date": "2026-10-10",
-      "verdict": "no match"
-    },
-    {
-      "tool": "grep",
-      "query": "grep -rln 'smallEtaleTopology' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib; grep -rn 'bijective' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites/SheafCohomology",
-      "results": "no étale cohomology comparison in Mathlib; the project declaration AlgebraicGeometry.Etale.bijective_H_map_of_isIso_upperStar_map (WeilConjectures/AlgebraicGeometry/Sites/FiniteSupport.lean:156) states it",
-      "date": "2026-10-10",
-      "verdict": "no match in Mathlib"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "unsplit",
-  "merged_into": null,
-  "created": {
-    "by": "worker",
-    "item": "lem-sc-cohomological-dimension",
-    "date": "2026-10-10"
+  {
+   "tool": "leanfinder",
+   "query": "cohomology bijective for morphism with kernel and cokernel acyclic in degree at least two",
+   "results": "CochainComplex.HomComplex.CohomologyClass.bijective_toSmallShiftedHom_of_isKInjective, CohomologyClass.toHom_bijective, HomotopyCategory acyclic lemmas",
+   "date": "2026-10-10",
+   "verdict": "no match"
   },
-  "chapter": "sec-curve-estimates",
-  "unit": "sk-prop-cd",
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "closed",
-      "decls": [
-        {
-          "name": "AlgebraicGeometry.Etale.bijective_H_map_of_isIso_upperStar_map",
-          "module": "WeilConjectures.AlgebraicGeometry.Sites.FiniteSupport",
-          "lines": [
-            151,
-            167
-          ],
-          "kind": "theorem",
-          "sorry": false
-        }
-      ],
-      "missing": [],
-      "open": []
-    }
-  },
-  "lean": {
-    "module": "WeilConjectures.AlgebraicGeometry.Sites.FiniteSupport",
-    "declaration": "AlgebraicGeometry.Etale.bijective_H_map_of_isIso_upperStar_map",
-    "branch": "slopmaster2",
-    "line": 151,
-    "declarations": [
-      "AlgebraicGeometry.Etale.bijective_H_map_of_isIso_upperStar_map"
-    ],
-    "sorry_free": true,
-    "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state closed)"
+  {
+   "tool": "grep",
+   "query": "grep -rln 'smallEtaleTopology' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib; grep -rn 'bijective' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites/SheafCohomology",
+   "results": "no étale cohomology comparison in Mathlib; the project declaration AlgebraicGeometry.Etale.bijective_H_map_of_isIso_upperStar_map (WeilConjectures/AlgebraicGeometry/Sites/FiniteSupport.lean:156) states it",
+   "date": "2026-10-10",
+   "verdict": "no match in Mathlib"
   }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-sc-cohomological-dimension",
+  "date": "2026-10-10"
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-cd",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.Etale.bijective_H_map_of_isIso_upperStar_map"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.Etale.bijective_H_map_of_isIso_upperStar_map",
+     "module": "WeilConjectures.AlgebraicGeometry.Sites.FiniteSupport",
+     "lines": [
+      153,
+      169
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
+ "lean": {
+  "module": "WeilConjectures.AlgebraicGeometry.Sites.FiniteSupport",
+  "declaration": "AlgebraicGeometry.Etale.bijective_H_map_of_isIso_upperStar_map",
+  "branch": "slopmaster2",
+  "line": 151,
+  "declarations": [
+   "AlgebraicGeometry.Etale.bijective_H_map_of_isIso_upperStar_map"
+  ],
+  "sorry_free": true,
+  "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state closed)"
+ }
 }

@@ -1,219 +1,221 @@
 {
-  "id": "lem-weil-pbc-etale-section-continuity",
-  "blueprint": {
-    "is": "lem-weil-pbc-etale-section-continuity",
-    "from": null,
-    "same_as": []
-  },
-  "kind": "statement",
-  "title": "Continuity of sections at an inverse limit",
-  "statement": "Let $I$ be a directed set and $(X_j,f_{kj})_{j\\in I}$ an inverse system of schemes [def-pc-scheme] over $I$ whose transition morphisms $f_{kj}:X_k\\to X_j$ ($k\\ge j$) are affine [pqf-def-affine-morphism], every $X_j$ being quasi-compact and quasi-separated [def-weil-pbc-scheme-conventions]; let $X=\\varprojlim_jX_j$ with projections $f_j:X\\to X_j$ [lem-weil-pbc-limit-affine-transition]. Fix $i\\in I$ and an abelian sheaf $F_i$ on $(X_i)_{\\Et}$ [def-weil-pbc-abelian-etale-sheaves], and let $F_j=f_{ji}^{-1}F_i$ ($j\\ge i$) and $F=f_i^{-1}F_i$ be its inverse images [def-weil-pbc-inverse-image]. Let $j_0\\ge i$ and let $W_{j_0}\\to X_{j_0}$ be an etale morphism [def-weil-etale-morphism] of finite presentation [def-weil-pbc-scheme-conventions], an object of $(X_{j_0})_{\\Et}$ [def-weil-pbc-etale-site]; put $W_k=W_{j_0}\\times_{X_{j_0}}X_k$ ($k\\ge j_0$) and $W=W_{j_0}\\times_{X_{j_0}}X$ (fibre products [def-pc-fibre-product]), objects of $(X_k)_{\\Et}$ and $X_{\\Et}$. For $k'\\ge k\\ge j_0$ let $\\rho_{k'k}:F_k(W_k)\\to F_{k'}(W_{k'})$ be the composite of the unit $\\eta_{f_{k'k},F_k}$ of $f_{k'k}^{-1}\\dashv f_{k'k,*}$ on sections over $W_k$, which lands in $(f_{k'k}^{-1}F_k)(W_k\\times_{X_k}X_{k'})$ [def-weil-pbc-direct-image], of the composition isomorphism $c_{f_{ki},f_{k'k},F_i}:f_{k'k}^{-1}f_{ki}^{-1}F_i\\xrightarrow{\\sim}f_{k'i}^{-1}F_i$ [lem-weil-pbc-inverse-image-composition], and of the restriction along the canonical isomorphism $W_{k'}\\xrightarrow{\\sim}W_k\\times_{X_k}X_{k'}$ of iterated fibre products; let $\\rho_k:F_k(W_k)\\to F(W)$ be defined in the same way from the unit of $f_k^{-1}\\dashv f_{k,*}$, the isomorphism $c_{f_{ki},f_k,F_i}:f_k^{-1}f_{ki}^{-1}F_i\\xrightarrow{\\sim}f_i^{-1}F_i$ and the canonical isomorphism $W\\xrightarrow{\\sim}W_k\\times_{X_k}X$. Then $\\rho_{kk}=\\mathrm{id}$, $\\rho_{k''k'}\\circ\\rho_{k'k}=\\rho_{k''k}$, $\\rho_{k'}\\circ\\rho_{k'k}=\\rho_k$, and the induced homomorphism of abelian groups\n$$\n \\varinjlim_{k\\ge j_0}F_k(W_k)\\xrightarrow{\\ \\sim\\ }F(W)\n$$\nis an isomorphism. In particular (take $j_0=i$, $W_i=X_i$ with the identity, and identify $W_k=X_i\\times_{X_i}X_k\\cong X_k$, $W\\cong X$ canonically)\n$$\n \\varinjlim_{j\\ge i}F_j(X_j)\\xrightarrow{\\ \\sim\\ }F(X).\n$$",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lem-weil-pbc-etale-section-continuity.md",
-    "place": "node lem-weil-pbc-etale-section-continuity, order 951"
-  },
-  "stmt_deps": [
-    "def-pc-scheme",
-    "pqf-def-affine-morphism",
-    "def-weil-pbc-scheme-conventions",
-    "lem-weil-pbc-limit-affine-transition",
-    "def-weil-pbc-abelian-etale-sheaves",
-    "def-weil-pbc-inverse-image",
-    "def-weil-etale-morphism",
-    "def-weil-pbc-etale-site",
-    "def-pc-fibre-product",
-    "def-weil-pbc-direct-image",
-    "lem-weil-pbc-inverse-image-composition"
-  ],
-  "proof": [
-    {
-      "text": "*The system $(W_k)$ and its limit.* Write $s:W_{j_0}\\to X_{j_0}$ for the given morphism, $p_k:W_k\\to X_k$, $t_{kj_0}:W_k\\to W_{j_0}$ ($k\\ge j_0$) and $p:W\\to X$, $t_{j_0}:W\\to W_{j_0}$ for the projections. Base changes of etale morphisms are etale [lem-weil-pbc-etale-base-change-finite-limits] (1), so $p_k$, $p$ are etale. Since $s$ is of finite presentation it is quasi-compact and quasi-separated [def-weil-pbc-scheme-conventions]; these properties are stable under base change [lem-weil-pbc-qcqs-morphism-permanence] (3), so every $p_k$ is quasi-compact and quasi-separated, and as $X_k$ is quasi-compact and quasi-separated so is $W_k$ [lem-weil-pbc-qcqs-morphism-permanence] (2). By [lem-weil-pbc-scheme-over-limit] (with $T=W_{j_0}$, $S_j=X_j$, $0=j_0$), $(W_k,t_{k'k}=\\mathrm{id}_{W_{j_0}}\\times f_{k'k})_{k\\ge j_0}$ is an inverse system over the directed set $I_{\\ge j_0}$ with affine transition morphisms and limit $W$, with projections $t_k=\\mathrm{id}_{W_{j_0}}\\times f_k:W\\to W_k$ (the $f_k$ being those of [lem-weil-pbc-limit-affine-transition]). From the definition of fibre products [def-pc-fibre-product]: $p_k\\circ t_{k'k}=f_{k'k}\\circ p_{k'}$ and $p_k\\circ t_k=f_k\\circ p$, and $\\iota_{k'k}=(t_{k'k},p_{k'}):W_{k'}\\to W_k\\times_{X_k}X_{k'}$, $\\iota_k=(t_k,p):W\\to W_k\\times_{X_k}X$ are the canonical isomorphisms of the statement; so these squares are cartesian. Put $w_k=f_{ki}\\circ p_k:W_k\\to X_i$ and $w=f_i\\circ p:W\\to X_i$; then $w_k\\circ t_{k'k}=w_{k'}$ and $w_k\\circ t_k=w$ (as $f_{ki}f_{k'k}=f_{k'i}$, $f_{ki}f_k=f_i$).",
-      "uses": [
-        "lem-weil-pbc-etale-base-change-finite-limits",
-        "def-weil-pbc-scheme-conventions",
-        "lem-weil-pbc-qcqs-morphism-permanence",
-        "lem-weil-pbc-scheme-over-limit",
-        "lem-weil-pbc-limit-affine-transition",
-        "def-pc-fibre-product"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/etale-cohomology.tex",
-        "place": "Theorem 09YQ (theorem-colimit), case p = 0, applied to the system (W_k)"
-      }
-    },
-    {
-      "text": "*A system of sheaves on $(W_k)$ with colimit $w^{-1}F_i$.* Put $H_k=w_k^{-1}F_i$ on $(W_k)_{\\Et}$ and, for $k'\\ge k\\ge j_0$, $\\varphi_{k'k}=c_{w_k,t_{k'k},F_i}:t_{k'k}^{-1}H_k\\xrightarrow{\\sim}(w_k t_{k'k})^{-1}F_i=H_{k'}$ [lem-weil-pbc-inverse-image-composition] (2). Associativity of $c$ ([lem-weil-pbc-derived-inverse-image-composition] (1), with $(u,v,w)=(w_k,t_{k'k},t_{k''k'})$) is the cocycle condition $\\varphi_{k''k}\\circ c_{t_{k'k},t_{k''k'},H_k}=\\varphi_{k''k'}\\circ t_{k''k'}^{-1}\\varphi_{k'k}$, and its unit law gives $\\varphi_{kk}=e_{W_k,H_k}$; so $(H_k,\\varphi_{k'k})$ is a system of abelian sheaves on $(W_k,t_{k'k})$ as in [lem-weil-pbc-etale-cohomology-limit-of-schemes]. Its transition maps on $W$ are $\\psi_{k'k}=t_{k'}^{-1}\\varphi_{k'k}\\circ c_{t_{k'k},t_{k'},H_k}^{-1}:t_k^{-1}H_k\\to t_{k'}^{-1}H_{k'}$. Let $\\gamma_k=c_{w_k,t_k,F_i}:t_k^{-1}H_k\\xrightarrow{\\sim}w^{-1}F_i$; associativity with $(u,v,w)=(w_k,t_{k'k},t_{k'})$ gives $\\gamma_{k'}\\circ\\psi_{k'k}=\\gamma_k$. Thus the $\\gamma_k$ identify the system $(t_k^{-1}H_k,\\psi)$ with the constant system of value $w^{-1}F_i$ and identity transitions; $I_{\\ge j_0}$ is directed, hence connected, so the constant cocone is a colimit [lem-weil-pbc-colimit-constant-connected-diagram], and $(w^{-1}F_i,(\\gamma_k)_k)$ is a colimit of $(t_k^{-1}H_k,\\psi)$ [def-weil-pbc-category-colimit].",
-      "uses": [
-        "lem-weil-pbc-inverse-image-composition",
-        "lem-weil-pbc-derived-inverse-image-composition",
-        "lem-weil-pbc-etale-cohomology-limit-of-schemes",
-        "lem-weil-pbc-colimit-constant-connected-diagram",
-        "def-weil-pbc-category-colimit"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/etale-cohomology.tex",
-        "place": "Theorem 09YQ (theorem-colimit), case p = 0, applied to the system (W_k)"
-      }
-    },
-    {
-      "text": "*Theorem 09YQ in degree $0$.* By step 1 the $W_k$ ($k\\ge j_0$) are quasi-compact and quasi-separated, with affine transition morphisms and limit $W$; so [lem-weil-pbc-etale-cohomology-limit-of-schemes] with $p=0$, applied to the system of step 2 and the colimit $(w^{-1}F_i,\\gamma_k)$, shows that the maps $\\theta_k=H^0(\\gamma_k)\\circ t_k^*$ induce a bijection $\\varinjlim_{k\\ge j_0}H^0((W_k)_{\\Et},H_k)\\to H^0(W_{\\Et},w^{-1}F_i)$, the colimit taken along $H^0(\\varphi_{k'k})\\circ t_{k'k}^*$, which form a directed system by [lem-weil-pbc-cohomology-pullback-functorial] (3),(4) and the cocycle condition of step 2. Translate to sections with [lem-weil-pbc-cohomology-pullback-degree-zero]: the isomorphisms $\\epsilon:\\Gamma(T,-)\\xrightarrow{\\sim}H^0(T_{\\Et},-)$ of its part (1) are natural in the sheaf, and by its part (2) $t^*\\circ\\epsilon=\\epsilon\\circ\\eta_t(\\text{global sections})$ ([def-weil-pbc-cohomology-pullback], [def-weil-pbc-etale-cohomology]). Hence, with $\\sigma_{k'k}=\\varphi_{k'k}(W_{k'})\\circ\\eta_{t_{k'k},H_k}(W_k):H_k(W_k)\\to H_{k'}(W_{k'})$ and $\\sigma_k=\\gamma_k(W)\\circ\\eta_{t_k,H_k}(W_k):H_k(W_k)\\to(w^{-1}F_i)(W)$: $\\sigma_{k''k'}\\sigma_{k'k}=\\sigma_{k''k}$, $\\sigma_{k'}\\sigma_{k'k}=\\sigma_k$, and the induced map $\\varinjlim_{k\\ge j_0}H_k(W_k)\\to(w^{-1}F_i)(W)$ is bijective.",
-      "uses": [
-        "lem-weil-pbc-etale-cohomology-limit-of-schemes",
-        "lem-weil-pbc-cohomology-pullback-functorial",
-        "lem-weil-pbc-cohomology-pullback-degree-zero",
-        "def-weil-pbc-cohomology-pullback",
-        "def-weil-pbc-etale-cohomology"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/etale-cohomology.tex",
-        "place": "Theorem 09YQ (theorem-colimit), case p = 0, applied to the system (W_k)"
-      }
-    },
-    {
-      "text": "*Comparison of the two systems.* Let $\\rho^{\\mathrm{res}}$ be the isomorphisms $q^{-1}G\\xrightarrow{\\sim}G|_{V}$ of [lem-weil-pbc-etale-inverse-image-restriction] (1) for the etale $q=p_k,p$ (natural in $G$), and define the bijections $\\alpha_k=c_{f_{ki},p_k,F_i}(W_k)\\circ\\rho^{\\mathrm{res}}_{F_k}(W_k)^{-1}:F_k(W_k)\\to\\Gamma(W_k,p_k^{-1}F_k)\\to H_k(W_k)$ and $\\alpha=c_{f_i,p,F_i}(W)\\circ\\rho^{\\mathrm{res}}_{F}(W)^{-1}:F(W)\\to(w^{-1}F_i)(W)$ ([lem-weil-pbc-inverse-image-composition]; $w_k=f_{ki}p_k$, $w=f_ip$). Claim: $\\alpha_{k'}\\circ\\rho_{k'k}=\\sigma_{k'k}\\circ\\alpha_k$ and $\\alpha\\circ\\rho_k=\\sigma_k\\circ\\alpha_k$. For the first, let $b\\in F_k(W_k)$, $a=\\rho^{\\mathrm{res}}_{F_k}(W_k)^{-1}(b)$, $t=t_{k'k}$. [lem-weil-pbc-etale-restriction-pullback-unit] for the cartesian square $(g,p,g',p')=(f_{k'k},p_k,t,p_{k'})$ of step 1 and the sheaf $F_k$ gives $(f_{k'k}^{-1}F_k)(\\iota_{k'k})(\\eta_{f_{k'k},F_k}(W_k)(b))=\\rho^{\\mathrm{res}}(W_{k'})(\\kappa(W_{k'})(\\eta_t(W_k)(a)))$ with $\\kappa=c_{f_{k'k},p_{k'}}^{-1}\\circ c_{p_k,t}$ at $F_k$. Apply $c_{f_{ki},f_{k'k},F_i}(W_{k'})$, which commutes with restriction along $\\iota_{k'k}$ (a morphism of sheaves): the left side becomes $\\rho_{k'k}(b)$ by definition; on the right, naturality of $\\rho^{\\mathrm{res}}$ moves it inside as $p_{k'}^{-1}(c_{f_{ki},f_{k'k}})$. So $\\alpha_{k'}(\\rho_{k'k}(b))=[c_{f_{k'i},p_{k'}}\\circ p_{k'}^{-1}c_{f_{ki},f_{k'k}}\\circ c_{f_{k'k},p_{k'}}^{-1}f_{ki}^{-1}\\circ c_{p_k,t}f_{ki}^{-1}](W_{k'})(\\eta_t(W_k)(a))$, which by associativity of $c$ ([lem-weil-pbc-derived-inverse-image-composition] (1), $(u,v,w)=(f_{ki},f_{k'k},p_{k'})$) is $[c_{f_{ki},f_{k'k}p_{k'}}\\circ c_{p_k,t}f_{ki}^{-1}](W_{k'})(\\eta_t(W_k)(a))$. On the other side, naturality of the unit $\\eta_t$ [def-weil-pbc-inverse-image] along $c_{f_{ki},p_k,F_i}$ gives $\\sigma_{k'k}(\\alpha_k(b))=[c_{w_k,t}\\circ t^{-1}c_{f_{ki},p_k}](W_{k'})(\\eta_t(W_k)(a))$, and associativity with $(u,v,w)=(f_{ki},p_k,t)$ turns it into $[c_{f_{ki},p_kt}\\circ c_{p_k,t}f_{ki}^{-1}](W_{k'})(\\eta_t(W_k)(a))$. Since $p_kt=f_{k'k}p_{k'}$ (step 1) the two agree. The second identity is the same computation for the cartesian square $(f_k,p_k,t_k,p)$, with $\\iota_k$, $f_{ki}f_k=f_i$ and $p_kt_k=f_kp$.",
-      "uses": [
-        "lem-weil-pbc-etale-inverse-image-restriction",
-        "lem-weil-pbc-inverse-image-composition",
-        "lem-weil-pbc-etale-restriction-pullback-unit",
-        "lem-weil-pbc-derived-inverse-image-composition",
-        "def-weil-pbc-inverse-image"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/etale-cohomology.tex",
-        "place": "Theorem 09YQ (theorem-colimit), case p = 0, applied to the system (W_k)"
-      }
-    },
-    {
-      "text": "*The system identities.* By step 4, $\\rho_{k'k}=\\alpha_{k'}^{-1}\\sigma_{k'k}\\alpha_k$ and $\\rho_k=\\alpha^{-1}\\sigma_k\\alpha_k$. Hence $\\rho_{k''k'}\\rho_{k'k}=\\alpha_{k''}^{-1}\\sigma_{k''k'}\\sigma_{k'k}\\alpha_k=\\alpha_{k''}^{-1}\\sigma_{k''k}\\alpha_k=\\rho_{k''k}$ and $\\rho_{k'}\\rho_{k'k}=\\alpha^{-1}\\sigma_{k'}\\sigma_{k'k}\\alpha_k=\\rho_k$ by step 3. For $\\rho_{kk}=\\mathrm{id}$: $\\sigma_{kk}=e_{W_k,H_k}(W_k)\\circ\\eta_{\\mathrm{id},H_k}(W_k)$ (step 2), read through $W_k\\cong W_k\\times_{W_k}W_k$, is the identity by [lem-weil-pbc-inverse-image-composition] (3), so $\\rho_{kk}=\\alpha_k^{-1}\\alpha_k=\\mathrm{id}$.",
-      "uses": [
-        "lem-weil-pbc-inverse-image-composition"
-      ],
-      "elementary": true,
-      "source": {
-        "document": "literature/stacks-project/etale-cohomology.tex",
-        "place": "Theorem 09YQ (theorem-colimit), case p = 0, applied to the system (W_k)"
-      }
-    },
-    {
-      "text": "*Conclusion for $W$.* By step 5 the abelian groups $F_k(W_k)$ with the homomorphisms $\\rho_{k'k}$ (all maps involved are maps of abelian sheaves on sections, hence additive) form a directed system with compatible family $(\\rho_k)$, inducing a homomorphism $\\rho:\\varinjlim_{k\\ge j_0}F_k(W_k)\\to F(W)$. By [lem-weil-pbc-filtered-colimit-modules-elementwise] (ring $\\mathbf Z$) the map induced by a compatible family $(\\tau_k)$ out of a directed system $(M_k,\\mu_{k'k})$ of abelian groups is bijective iff (a) every element of the target is some $\\tau_k(x)$ and (b) $\\tau_k(x)=\\tau_k(y)$ implies $\\mu_{k'k}(x)=\\mu_{k'k}(y)$ for some $k'\\ge k$ (use its parts (1), (2) and a common upper bound). Step 3 gives (a), (b) for $(H_k(W_k),\\sigma_{k'k},\\sigma_k)$, and the bijections $\\alpha_k$, $\\alpha$ carry them to $(F_k(W_k),\\rho_{k'k},\\rho_k)$ by step 4. So $\\rho$ is an isomorphism.",
-      "uses": [
-        "lem-weil-pbc-filtered-colimit-modules-elementwise"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/etale-cohomology.tex",
-        "place": "Theorem 09YQ (theorem-colimit), case p = 0, applied to the system (W_k)"
-      }
-    },
-    {
-      "text": "*The case $W=X$.* Take $j_0=i$ and $W_i=X_i$ with $\\mathrm{id}_{X_i}$, which is etale (an isomorphism is locally of finite presentation, flat and unramified [def-weil-etale-morphism]) and of finite presentation (quasi-compact, quasi-separated and locally of finite presentation [def-weil-pbc-scheme-conventions]). The projections $W_k=X_i\\times_{X_i}X_k\\to X_k$ and $W\\to X$ are isomorphisms; restriction along them is an isomorphism $F_k(W_k)\\cong F_k(X_k)$, $F(W)\\cong F(X)$, and transporting the system $\\rho_{k'k}$, $\\rho_k$ along these isomorphisms gives the system of the unit maps on global sections followed by $c$. Hence $\\varinjlim_{j\\ge i}F_j(X_j)\\cong F(X)$ by step 6.",
-      "uses": [
-        "def-weil-etale-morphism",
-        "def-weil-pbc-scheme-conventions"
-      ],
-      "elementary": true,
-      "source": {
-        "document": "literature/stacks-project/etale-cohomology.tex",
-        "place": "Theorem 09YQ (theorem-colimit), case p = 0, applied to the system (W_k)"
-      }
-    }
-  ],
-  "proof_deps": [
+ "id": "lem-weil-pbc-etale-section-continuity",
+ "blueprint": {
+  "is": "lem-weil-pbc-etale-section-continuity",
+  "from": null,
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Continuity of sections at an inverse limit",
+ "statement": "Let $I$ be a directed set and $(X_j,f_{kj})_{j\\in I}$ an inverse system of schemes [def-pc-scheme] over $I$ whose transition morphisms $f_{kj}:X_k\\to X_j$ ($k\\ge j$) are affine [pqf-def-affine-morphism], every $X_j$ being quasi-compact and quasi-separated [def-weil-pbc-scheme-conventions]; let $X=\\varprojlim_jX_j$ with projections $f_j:X\\to X_j$ [lem-weil-pbc-limit-affine-transition]. Fix $i\\in I$ and an abelian sheaf $F_i$ on $(X_i)_{\\Et}$ [def-weil-pbc-abelian-etale-sheaves], and let $F_j=f_{ji}^{-1}F_i$ ($j\\ge i$) and $F=f_i^{-1}F_i$ be its inverse images [def-weil-pbc-inverse-image]. Let $j_0\\ge i$ and let $W_{j_0}\\to X_{j_0}$ be an etale morphism [def-weil-etale-morphism] of finite presentation [def-weil-pbc-scheme-conventions], an object of $(X_{j_0})_{\\Et}$ [def-weil-pbc-etale-site]; put $W_k=W_{j_0}\\times_{X_{j_0}}X_k$ ($k\\ge j_0$) and $W=W_{j_0}\\times_{X_{j_0}}X$ (fibre products [def-pc-fibre-product]), objects of $(X_k)_{\\Et}$ and $X_{\\Et}$. For $k'\\ge k\\ge j_0$ let $\\rho_{k'k}:F_k(W_k)\\to F_{k'}(W_{k'})$ be the composite of the unit $\\eta_{f_{k'k},F_k}$ of $f_{k'k}^{-1}\\dashv f_{k'k,*}$ on sections over $W_k$, which lands in $(f_{k'k}^{-1}F_k)(W_k\\times_{X_k}X_{k'})$ [def-weil-pbc-direct-image], of the composition isomorphism $c_{f_{ki},f_{k'k},F_i}:f_{k'k}^{-1}f_{ki}^{-1}F_i\\xrightarrow{\\sim}f_{k'i}^{-1}F_i$ [lem-weil-pbc-inverse-image-composition], and of the restriction along the canonical isomorphism $W_{k'}\\xrightarrow{\\sim}W_k\\times_{X_k}X_{k'}$ of iterated fibre products; let $\\rho_k:F_k(W_k)\\to F(W)$ be defined in the same way from the unit of $f_k^{-1}\\dashv f_{k,*}$, the isomorphism $c_{f_{ki},f_k,F_i}:f_k^{-1}f_{ki}^{-1}F_i\\xrightarrow{\\sim}f_i^{-1}F_i$ and the canonical isomorphism $W\\xrightarrow{\\sim}W_k\\times_{X_k}X$. Then $\\rho_{kk}=\\mathrm{id}$, $\\rho_{k''k'}\\circ\\rho_{k'k}=\\rho_{k''k}$, $\\rho_{k'}\\circ\\rho_{k'k}=\\rho_k$, and the induced homomorphism of abelian groups\n$$\n \\varinjlim_{k\\ge j_0}F_k(W_k)\\xrightarrow{\\ \\sim\\ }F(W)\n$$\nis an isomorphism. In particular (take $j_0=i$, $W_i=X_i$ with the identity, and identify $W_k=X_i\\times_{X_i}X_k\\cong X_k$, $W\\cong X$ canonically)\n$$\n \\varinjlim_{j\\ge i}F_j(X_j)\\xrightarrow{\\ \\sim\\ }F(X).\n$$",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lem-weil-pbc-etale-section-continuity.md",
+  "place": "node lem-weil-pbc-etale-section-continuity, order 951"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-affine-morphism",
+  "def-weil-pbc-scheme-conventions",
+  "lem-weil-pbc-limit-affine-transition",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-inverse-image",
+  "def-weil-etale-morphism",
+  "def-weil-pbc-etale-site",
+  "def-pc-fibre-product",
+  "def-weil-pbc-direct-image",
+  "lem-weil-pbc-inverse-image-composition"
+ ],
+ "proof": [
+  {
+   "text": "*The system $(W_k)$ and its limit.* Write $s:W_{j_0}\\to X_{j_0}$ for the given morphism, $p_k:W_k\\to X_k$, $t_{kj_0}:W_k\\to W_{j_0}$ ($k\\ge j_0$) and $p:W\\to X$, $t_{j_0}:W\\to W_{j_0}$ for the projections. Base changes of etale morphisms are etale [lem-weil-pbc-etale-base-change-finite-limits] (1), so $p_k$, $p$ are etale. Since $s$ is of finite presentation it is quasi-compact and quasi-separated [def-weil-pbc-scheme-conventions]; these properties are stable under base change [lem-weil-pbc-qcqs-morphism-permanence] (3), so every $p_k$ is quasi-compact and quasi-separated, and as $X_k$ is quasi-compact and quasi-separated so is $W_k$ [lem-weil-pbc-qcqs-morphism-permanence] (2). By [lem-weil-pbc-scheme-over-limit] (with $T=W_{j_0}$, $S_j=X_j$, $0=j_0$), $(W_k,t_{k'k}=\\mathrm{id}_{W_{j_0}}\\times f_{k'k})_{k\\ge j_0}$ is an inverse system over the directed set $I_{\\ge j_0}$ with affine transition morphisms and limit $W$, with projections $t_k=\\mathrm{id}_{W_{j_0}}\\times f_k:W\\to W_k$ (the $f_k$ being those of [lem-weil-pbc-limit-affine-transition]). From the definition of fibre products [def-pc-fibre-product]: $p_k\\circ t_{k'k}=f_{k'k}\\circ p_{k'}$ and $p_k\\circ t_k=f_k\\circ p$, and $\\iota_{k'k}=(t_{k'k},p_{k'}):W_{k'}\\to W_k\\times_{X_k}X_{k'}$, $\\iota_k=(t_k,p):W\\to W_k\\times_{X_k}X$ are the canonical isomorphisms of the statement; so these squares are cartesian. Put $w_k=f_{ki}\\circ p_k:W_k\\to X_i$ and $w=f_i\\circ p:W\\to X_i$; then $w_k\\circ t_{k'k}=w_{k'}$ and $w_k\\circ t_k=w$ (as $f_{ki}f_{k'k}=f_{k'i}$, $f_{ki}f_k=f_i$).",
+   "uses": [
     "lem-weil-pbc-etale-base-change-finite-limits",
     "def-weil-pbc-scheme-conventions",
     "lem-weil-pbc-qcqs-morphism-permanence",
     "lem-weil-pbc-scheme-over-limit",
     "lem-weil-pbc-limit-affine-transition",
-    "def-pc-fibre-product",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Theorem 09YQ (theorem-colimit), case p = 0, applied to the system (W_k)"
+   }
+  },
+  {
+   "text": "*A system of sheaves on $(W_k)$ with colimit $w^{-1}F_i$.* Put $H_k=w_k^{-1}F_i$ on $(W_k)_{\\Et}$ and, for $k'\\ge k\\ge j_0$, $\\varphi_{k'k}=c_{w_k,t_{k'k},F_i}:t_{k'k}^{-1}H_k\\xrightarrow{\\sim}(w_k t_{k'k})^{-1}F_i=H_{k'}$ [lem-weil-pbc-inverse-image-composition] (2). Associativity of $c$ ([lem-weil-pbc-derived-inverse-image-composition] (1), with $(u,v,w)=(w_k,t_{k'k},t_{k''k'})$) is the cocycle condition $\\varphi_{k''k}\\circ c_{t_{k'k},t_{k''k'},H_k}=\\varphi_{k''k'}\\circ t_{k''k'}^{-1}\\varphi_{k'k}$, and its unit law gives $\\varphi_{kk}=e_{W_k,H_k}$; so $(H_k,\\varphi_{k'k})$ is a system of abelian sheaves on $(W_k,t_{k'k})$ as in [lem-weil-pbc-etale-cohomology-limit-of-schemes]. Its transition maps on $W$ are $\\psi_{k'k}=t_{k'}^{-1}\\varphi_{k'k}\\circ c_{t_{k'k},t_{k'},H_k}^{-1}:t_k^{-1}H_k\\to t_{k'}^{-1}H_{k'}$. Let $\\gamma_k=c_{w_k,t_k,F_i}:t_k^{-1}H_k\\xrightarrow{\\sim}w^{-1}F_i$; associativity with $(u,v,w)=(w_k,t_{k'k},t_{k'})$ gives $\\gamma_{k'}\\circ\\psi_{k'k}=\\gamma_k$. Thus the $\\gamma_k$ identify the system $(t_k^{-1}H_k,\\psi)$ with the constant system of value $w^{-1}F_i$ and identity transitions; $I_{\\ge j_0}$ is directed, hence connected, so the constant cocone is a colimit [lem-weil-pbc-colimit-constant-connected-diagram], and $(w^{-1}F_i,(\\gamma_k)_k)$ is a colimit of $(t_k^{-1}H_k,\\psi)$ [def-weil-pbc-category-colimit].",
+   "uses": [
     "lem-weil-pbc-inverse-image-composition",
     "lem-weil-pbc-derived-inverse-image-composition",
     "lem-weil-pbc-etale-cohomology-limit-of-schemes",
     "lem-weil-pbc-colimit-constant-connected-diagram",
-    "def-weil-pbc-category-colimit",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Theorem 09YQ (theorem-colimit), case p = 0, applied to the system (W_k)"
+   }
+  },
+  {
+   "text": "*Theorem 09YQ in degree $0$.* By step 1 the $W_k$ ($k\\ge j_0$) are quasi-compact and quasi-separated, with affine transition morphisms and limit $W$; so [lem-weil-pbc-etale-cohomology-limit-of-schemes] with $p=0$, applied to the system of step 2 and the colimit $(w^{-1}F_i,\\gamma_k)$, shows that the maps $\\theta_k=H^0(\\gamma_k)\\circ t_k^*$ induce a bijection $\\varinjlim_{k\\ge j_0}H^0((W_k)_{\\Et},H_k)\\to H^0(W_{\\Et},w^{-1}F_i)$, the colimit taken along $H^0(\\varphi_{k'k})\\circ t_{k'k}^*$, which form a directed system by [lem-weil-pbc-cohomology-pullback-functorial] (3),(4) and the cocycle condition of step 2. Translate to sections with [lem-weil-pbc-cohomology-pullback-degree-zero]: the isomorphisms $\\epsilon:\\Gamma(T,-)\\xrightarrow{\\sim}H^0(T_{\\Et},-)$ of its part (1) are natural in the sheaf, and by its part (2) $t^*\\circ\\epsilon=\\epsilon\\circ\\eta_t(\\text{global sections})$ ([def-weil-pbc-cohomology-pullback], [def-weil-pbc-etale-cohomology]). Hence, with $\\sigma_{k'k}=\\varphi_{k'k}(W_{k'})\\circ\\eta_{t_{k'k},H_k}(W_k):H_k(W_k)\\to H_{k'}(W_{k'})$ and $\\sigma_k=\\gamma_k(W)\\circ\\eta_{t_k,H_k}(W_k):H_k(W_k)\\to(w^{-1}F_i)(W)$: $\\sigma_{k''k'}\\sigma_{k'k}=\\sigma_{k''k}$, $\\sigma_{k'}\\sigma_{k'k}=\\sigma_k$, and the induced map $\\varinjlim_{k\\ge j_0}H_k(W_k)\\to(w^{-1}F_i)(W)$ is bijective.",
+   "uses": [
+    "lem-weil-pbc-etale-cohomology-limit-of-schemes",
     "lem-weil-pbc-cohomology-pullback-functorial",
     "lem-weil-pbc-cohomology-pullback-degree-zero",
     "def-weil-pbc-cohomology-pullback",
-    "def-weil-pbc-etale-cohomology",
-    "lem-weil-pbc-etale-inverse-image-restriction",
-    "lem-weil-pbc-etale-restriction-pullback-unit",
-    "def-weil-pbc-inverse-image",
-    "lem-weil-pbc-filtered-colimit-modules-elementwise",
-    "def-weil-etale-morphism"
-  ],
-  "proof_origin": {
-    "by": "document",
+    "def-weil-pbc-etale-cohomology"
+   ],
+   "elementary": false,
+   "source": {
     "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Theorem 09YQ (theorem-colimit, line 7400) in degree p = 0, applied to the inverse system (W_k) with limit W; proof proper: Lemma 0EYL (lemma-colimit-affine-sites) and Cohomology on Sites Lemma 09YP / Sites Lemmas 09YM, 09YN, which are the argument of the blueprint's proof; reduction from W to the system on W_k written as in the DAG node lem-weil-pbc-limit-pullback-sections-colimit"
+    "place": "Theorem 09YQ (theorem-colimit), case p = 0, applied to the system (W_k)"
+   }
   },
-  "mathlib_searches": [],
-  "mathlib_match": null,
-  "status": "split",
-  "merged_into": null,
-  "import_flags": [],
-  "blueprint_kind": "lemma",
-  "blueprint_order": 951,
-  "blueprint_uses": [
-    "def-weil-pbc-etale-sheaves",
-    "def-weil-pbc-inverse-image",
-    "def-weil-pbc-scheme-conventions",
-    "lem-weil-pbc-etale-finite-data-descent"
-  ],
-  "proof_split_by": "paragraphs",
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "sorry_here",
-      "decls": [
-        {
-          "name": "AlgebraicGeometry.Etale.unitComparison_app_isColimit_of_isLimit",
-          "module": "WeilConjectures.AlgebraicGeometry.Sites.SectionContinuity",
-          "lines": [
-            74,
-            102
-          ],
-          "kind": "theorem",
-          "sorry": true
-        }
-      ],
-      "missing": [],
-      "open": []
-    }
-  },
-  "chapter": "sec-curve-estimates",
-  "unit": "sk-prop-h2",
-  "split_report": {
-    "date": "2026-10-10",
-    "item": "lem-weil-pbc-etale-section-continuity",
-    "worker": "stage1",
-    "summary": "Lean (slopmaster2 71d63dcf): the only declaration, AlgebraicGeometry.Etale.unitComparison_app_isColimit_of_isLimit (SectionContinuity.lean 74-102), is a single sorry with no decomposition (its two halves unitComparison_app_surjective_of_isLimit / exists_unitComparison_app_eq_zero_of_isLimit are corollaries of it); it states the W-clause with W etale qcqs over the base stage and the base quasi-separated, which agrees with the node. The statement was made self-contained (the system, the indices, the sheaves F_j, the object W_k and the transition maps rho, which the blueprint text left implicit) without changing its content; the X clause is the special case W=X. The blueprint proof (constructing G on a basis of qcqs etale objects by finite-data descent, sheaf axiom, identification with F) is the proof of Stacks Sites 09YM/09YN behind Theorem 09YQ; the split instead cites the existing DAG node of Theorem 09YQ (lem-weil-pbc-etale-cohomology-limit-of-schemes) in degree 0, applied to the system W_k = W_{j0} x X_k (qcqs because W_{j0} -> X_{j0} is of finite presentation), and compares the resulting system with F_k(W_k) via the restriction isomorphism for etale morphisms and the composition isomorphisms of inverse images, exactly as the reviewed-pattern node lem-weil-pbc-limit-pullback-sections-colimit does for affine V_0 (that node could not be cited: it assumes V_0 affine and W_{j0} is only qcqs). lem-weil-pbc-etale-finite-data-descent is no longer used by this node. No new node.",
-    "blueprint": "Steps 1-6 realize the conclusion of the blueprint proof 'Evaluating on X, or on W, gives the asserted formula' for W, step 7 for X; the blueprint's paragraphs 1-4 ('Work on the basis of quasi-compact quasi-separated etale objects ... Define G(W)=colim F_k(W_k)', 'independent of the chosen presentation', 'This presheaf is a sheaf', 'To identify G ...') are the proof of Stacks 09YQ in degree 0 (0EYL with Sites 09YM, 09YN), carried here by the cited node lem-weil-pbc-etale-cohomology-limit-of-schemes (steps 2-3) instead of being re-proved."
-  },
-  "tool_uses": [
-    "lem-weil-pbc-cohomology-pullback-degree-zero",
-    "lem-weil-pbc-cohomology-pullback-functorial",
-    "lem-weil-pbc-derived-inverse-image-composition",
-    "lem-weil-pbc-etale-cohomology-limit-of-schemes",
+  {
+   "text": "*Comparison of the two systems.* Let $\\rho^{\\mathrm{res}}$ be the isomorphisms $q^{-1}G\\xrightarrow{\\sim}G|_{V}$ of [lem-weil-pbc-etale-inverse-image-restriction] (1) for the etale $q=p_k,p$ (natural in $G$), and define the bijections $\\alpha_k=c_{f_{ki},p_k,F_i}(W_k)\\circ\\rho^{\\mathrm{res}}_{F_k}(W_k)^{-1}:F_k(W_k)\\to\\Gamma(W_k,p_k^{-1}F_k)\\to H_k(W_k)$ and $\\alpha=c_{f_i,p,F_i}(W)\\circ\\rho^{\\mathrm{res}}_{F}(W)^{-1}:F(W)\\to(w^{-1}F_i)(W)$ ([lem-weil-pbc-inverse-image-composition]; $w_k=f_{ki}p_k$, $w=f_ip$). Claim: $\\alpha_{k'}\\circ\\rho_{k'k}=\\sigma_{k'k}\\circ\\alpha_k$ and $\\alpha\\circ\\rho_k=\\sigma_k\\circ\\alpha_k$. For the first, let $b\\in F_k(W_k)$, $a=\\rho^{\\mathrm{res}}_{F_k}(W_k)^{-1}(b)$, $t=t_{k'k}$. [lem-weil-pbc-etale-restriction-pullback-unit] for the cartesian square $(g,p,g',p')=(f_{k'k},p_k,t,p_{k'})$ of step 1 and the sheaf $F_k$ gives $(f_{k'k}^{-1}F_k)(\\iota_{k'k})(\\eta_{f_{k'k},F_k}(W_k)(b))=\\rho^{\\mathrm{res}}(W_{k'})(\\kappa(W_{k'})(\\eta_t(W_k)(a)))$ with $\\kappa=c_{f_{k'k},p_{k'}}^{-1}\\circ c_{p_k,t}$ at $F_k$. Apply $c_{f_{ki},f_{k'k},F_i}(W_{k'})$, which commutes with restriction along $\\iota_{k'k}$ (a morphism of sheaves): the left side becomes $\\rho_{k'k}(b)$ by definition; on the right, naturality of $\\rho^{\\mathrm{res}}$ moves it inside as $p_{k'}^{-1}(c_{f_{ki},f_{k'k}})$. So $\\alpha_{k'}(\\rho_{k'k}(b))=[c_{f_{k'i},p_{k'}}\\circ p_{k'}^{-1}c_{f_{ki},f_{k'k}}\\circ c_{f_{k'k},p_{k'}}^{-1}f_{ki}^{-1}\\circ c_{p_k,t}f_{ki}^{-1}](W_{k'})(\\eta_t(W_k)(a))$, which by associativity of $c$ ([lem-weil-pbc-derived-inverse-image-composition] (1), $(u,v,w)=(f_{ki},f_{k'k},p_{k'})$) is $[c_{f_{ki},f_{k'k}p_{k'}}\\circ c_{p_k,t}f_{ki}^{-1}](W_{k'})(\\eta_t(W_k)(a))$. On the other side, naturality of the unit $\\eta_t$ [def-weil-pbc-inverse-image] along $c_{f_{ki},p_k,F_i}$ gives $\\sigma_{k'k}(\\alpha_k(b))=[c_{w_k,t}\\circ t^{-1}c_{f_{ki},p_k}](W_{k'})(\\eta_t(W_k)(a))$, and associativity with $(u,v,w)=(f_{ki},p_k,t)$ turns it into $[c_{f_{ki},p_kt}\\circ c_{p_k,t}f_{ki}^{-1}](W_{k'})(\\eta_t(W_k)(a))$. Since $p_kt=f_{k'k}p_{k'}$ (step 1) the two agree. The second identity is the same computation for the cartesian square $(f_k,p_k,t_k,p)$, with $\\iota_k$, $f_{ki}f_k=f_i$ and $p_kt_k=f_kp$.",
+   "uses": [
+    "lem-weil-pbc-etale-inverse-image-restriction",
+    "lem-weil-pbc-inverse-image-composition",
     "lem-weil-pbc-etale-restriction-pullback-unit",
-    "lem-weil-pbc-limit-affine-transition"
-  ],
-  "reviewed": "2026-10-10 L: 7 steps: 09YQ in degree 0 applied to the system of the etale finitely presented objects (qcqs by finite presentation), the constant system of inverse images, H^0 as sections, the etale restriction isomorphism, the elementwise colimit; statement made self-contained (transition maps written out); 6 tool uses accepted; 0 new nodes",
-  "lean": {
-    "module": "WeilConjectures.AlgebraicGeometry.Sites.SectionContinuity",
-    "declaration": "AlgebraicGeometry.Etale.unitComparison_app_isColimit_of_isLimit",
-    "branch": "slopmaster2",
-    "line": 74,
-    "declarations": [
-      "AlgebraicGeometry.Etale.unitComparison_app_isColimit_of_isLimit"
-    ],
-    "sorry_free": false,
-    "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state sorry_here)"
+    "lem-weil-pbc-derived-inverse-image-composition",
+    "def-weil-pbc-inverse-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Theorem 09YQ (theorem-colimit), case p = 0, applied to the system (W_k)"
+   }
+  },
+  {
+   "text": "*The system identities.* By step 4, $\\rho_{k'k}=\\alpha_{k'}^{-1}\\sigma_{k'k}\\alpha_k$ and $\\rho_k=\\alpha^{-1}\\sigma_k\\alpha_k$. Hence $\\rho_{k''k'}\\rho_{k'k}=\\alpha_{k''}^{-1}\\sigma_{k''k'}\\sigma_{k'k}\\alpha_k=\\alpha_{k''}^{-1}\\sigma_{k''k}\\alpha_k=\\rho_{k''k}$ and $\\rho_{k'}\\rho_{k'k}=\\alpha^{-1}\\sigma_{k'}\\sigma_{k'k}\\alpha_k=\\rho_k$ by step 3. For $\\rho_{kk}=\\mathrm{id}$: $\\sigma_{kk}=e_{W_k,H_k}(W_k)\\circ\\eta_{\\mathrm{id},H_k}(W_k)$ (step 2), read through $W_k\\cong W_k\\times_{W_k}W_k$, is the identity by [lem-weil-pbc-inverse-image-composition] (3), so $\\rho_{kk}=\\alpha_k^{-1}\\alpha_k=\\mathrm{id}$.",
+   "uses": [
+    "lem-weil-pbc-inverse-image-composition"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Theorem 09YQ (theorem-colimit), case p = 0, applied to the system (W_k)"
+   }
+  },
+  {
+   "text": "*Conclusion for $W$.* By step 5 the abelian groups $F_k(W_k)$ with the homomorphisms $\\rho_{k'k}$ (all maps involved are maps of abelian sheaves on sections, hence additive) form a directed system with compatible family $(\\rho_k)$, inducing a homomorphism $\\rho:\\varinjlim_{k\\ge j_0}F_k(W_k)\\to F(W)$. By [lem-weil-pbc-filtered-colimit-modules-elementwise] (ring $\\mathbf Z$) the map induced by a compatible family $(\\tau_k)$ out of a directed system $(M_k,\\mu_{k'k})$ of abelian groups is bijective iff (a) every element of the target is some $\\tau_k(x)$ and (b) $\\tau_k(x)=\\tau_k(y)$ implies $\\mu_{k'k}(x)=\\mu_{k'k}(y)$ for some $k'\\ge k$ (use its parts (1), (2) and a common upper bound). Step 3 gives (a), (b) for $(H_k(W_k),\\sigma_{k'k},\\sigma_k)$, and the bijections $\\alpha_k$, $\\alpha$ carry them to $(F_k(W_k),\\rho_{k'k},\\rho_k)$ by step 4. So $\\rho$ is an isomorphism.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-modules-elementwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Theorem 09YQ (theorem-colimit), case p = 0, applied to the system (W_k)"
+   }
+  },
+  {
+   "text": "*The case $W=X$.* Take $j_0=i$ and $W_i=X_i$ with $\\mathrm{id}_{X_i}$, which is etale (an isomorphism is locally of finite presentation, flat and unramified [def-weil-etale-morphism]) and of finite presentation (quasi-compact, quasi-separated and locally of finite presentation [def-weil-pbc-scheme-conventions]). The projections $W_k=X_i\\times_{X_i}X_k\\to X_k$ and $W\\to X$ are isomorphisms; restriction along them is an isomorphism $F_k(W_k)\\cong F_k(X_k)$, $F(W)\\cong F(X)$, and transporting the system $\\rho_{k'k}$, $\\rho_k$ along these isomorphisms gives the system of the unit maps on global sections followed by $c$. Hence $\\varinjlim_{j\\ge i}F_j(X_j)\\cong F(X)$ by step 6.",
+   "uses": [
+    "def-weil-etale-morphism",
+    "def-weil-pbc-scheme-conventions"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Theorem 09YQ (theorem-colimit), case p = 0, applied to the system (W_k)"
+   }
   }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-etale-base-change-finite-limits",
+  "def-weil-pbc-scheme-conventions",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-scheme-over-limit",
+  "lem-weil-pbc-limit-affine-transition",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-inverse-image-composition",
+  "lem-weil-pbc-derived-inverse-image-composition",
+  "lem-weil-pbc-etale-cohomology-limit-of-schemes",
+  "lem-weil-pbc-colimit-constant-connected-diagram",
+  "def-weil-pbc-category-colimit",
+  "lem-weil-pbc-cohomology-pullback-functorial",
+  "lem-weil-pbc-cohomology-pullback-degree-zero",
+  "def-weil-pbc-cohomology-pullback",
+  "def-weil-pbc-etale-cohomology",
+  "lem-weil-pbc-etale-inverse-image-restriction",
+  "lem-weil-pbc-etale-restriction-pullback-unit",
+  "def-weil-pbc-inverse-image",
+  "lem-weil-pbc-filtered-colimit-modules-elementwise",
+  "def-weil-etale-morphism"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Theorem 09YQ (theorem-colimit, line 7400) in degree p = 0, applied to the inverse system (W_k) with limit W; proof proper: Lemma 0EYL (lemma-colimit-affine-sites) and Cohomology on Sites Lemma 09YP / Sites Lemmas 09YM, 09YN, which are the argument of the blueprint's proof; reduction from W to the system on W_k written as in the DAG node lem-weil-pbc-limit-pullback-sections-colimit"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 951,
+ "blueprint_uses": [
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-scheme-conventions",
+  "lem-weil-pbc-etale-finite-data-descent"
+ ],
+ "proof_split_by": "paragraphs",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.Etale.unitComparison_app_isColimit_of_isLimit"
+   ]
+  },
+  "slopmaster2": {
+   "state": "sorry_here",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.Etale.unitComparison_app_isColimit_of_isLimit",
+     "module": "WeilConjectures.AlgebraicGeometry.Sites.SectionContinuity",
+     "lines": [
+      74,
+      102
+     ],
+     "kind": "theorem",
+     "sorry": true
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-etale-section-continuity",
+  "worker": "stage1",
+  "summary": "Lean (slopmaster2 71d63dcf): the only declaration, AlgebraicGeometry.Etale.unitComparison_app_isColimit_of_isLimit (SectionContinuity.lean 74-102), is a single sorry with no decomposition (its two halves unitComparison_app_surjective_of_isLimit / exists_unitComparison_app_eq_zero_of_isLimit are corollaries of it); it states the W-clause with W etale qcqs over the base stage and the base quasi-separated, which agrees with the node. The statement was made self-contained (the system, the indices, the sheaves F_j, the object W_k and the transition maps rho, which the blueprint text left implicit) without changing its content; the X clause is the special case W=X. The blueprint proof (constructing G on a basis of qcqs etale objects by finite-data descent, sheaf axiom, identification with F) is the proof of Stacks Sites 09YM/09YN behind Theorem 09YQ; the split instead cites the existing DAG node of Theorem 09YQ (lem-weil-pbc-etale-cohomology-limit-of-schemes) in degree 0, applied to the system W_k = W_{j0} x X_k (qcqs because W_{j0} -> X_{j0} is of finite presentation), and compares the resulting system with F_k(W_k) via the restriction isomorphism for etale morphisms and the composition isomorphisms of inverse images, exactly as the reviewed-pattern node lem-weil-pbc-limit-pullback-sections-colimit does for affine V_0 (that node could not be cited: it assumes V_0 affine and W_{j0} is only qcqs). lem-weil-pbc-etale-finite-data-descent is no longer used by this node. No new node.",
+  "blueprint": "Steps 1-6 realize the conclusion of the blueprint proof 'Evaluating on X, or on W, gives the asserted formula' for W, step 7 for X; the blueprint's paragraphs 1-4 ('Work on the basis of quasi-compact quasi-separated etale objects ... Define G(W)=colim F_k(W_k)', 'independent of the chosen presentation', 'This presheaf is a sheaf', 'To identify G ...') are the proof of Stacks 09YQ in degree 0 (0EYL with Sites 09YM, 09YN), carried here by the cited node lem-weil-pbc-etale-cohomology-limit-of-schemes (steps 2-3) instead of being re-proved."
+ },
+ "tool_uses": [
+  "lem-weil-pbc-cohomology-pullback-degree-zero",
+  "lem-weil-pbc-cohomology-pullback-functorial",
+  "lem-weil-pbc-derived-inverse-image-composition",
+  "lem-weil-pbc-etale-cohomology-limit-of-schemes",
+  "lem-weil-pbc-etale-restriction-pullback-unit",
+  "lem-weil-pbc-limit-affine-transition"
+ ],
+ "reviewed": "2026-10-10 L: 7 steps: 09YQ in degree 0 applied to the system of the etale finitely presented objects (qcqs by finite presentation), the constant system of inverse images, H^0 as sections, the etale restriction isomorphism, the elementwise colimit; statement made self-contained (transition maps written out); 6 tool uses accepted; 0 new nodes",
+ "lean": {
+  "module": "WeilConjectures.AlgebraicGeometry.Sites.SectionContinuity",
+  "declaration": "AlgebraicGeometry.Etale.unitComparison_app_isColimit_of_isLimit",
+  "branch": "slopmaster2",
+  "line": 74,
+  "declarations": [
+   "AlgebraicGeometry.Etale.unitComparison_app_isColimit_of_isLimit"
+  ],
+  "sorry_free": false,
+  "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state sorry_here)"
+ }
 }

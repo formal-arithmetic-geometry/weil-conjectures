@@ -1,136 +1,148 @@
 {
-  "id": "lem-pc-zero-scheme-locally-principal",
-  "blueprint": {
-    "is": null,
-    "from": {
-      "node": "lem-pc-zero-scheme-properties",
-      "place": "proof part (1), locally principal conclusion",
-      "via": []
-    },
-    "same_as": []
+ "id": "lem-pc-zero-scheme-locally-principal",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-zero-scheme-properties",
+   "place": "proof part (1), locally principal conclusion",
+   "via": []
   },
-  "kind": "statement",
-  "title": "The zero locus is locally principal",
-  "statement": "Let $X$ be a scheme [def-pc-scheme], let $M$ and $N$ be invertible $\\mathcal O_X$-modules [def-sc-invertible-module], and let $\\varphi:M\\to N$ be an $\\mathcal O_X$-linear morphism. Then the zero locus $\\varphi.zeroLocus$ is locally principal: $\\varphi.zeroLocus.IsLocallyPrincipal$.",
-  "source": {
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "The zero locus is locally principal",
+ "statement": "Let $X$ be a scheme [def-pc-scheme], let $M$ and $N$ be invertible $\\mathcal O_X$-modules [def-sc-invertible-module], and let $\\varphi:M\\to N$ be an $\\mathcal O_X$-linear morphism. Then the zero locus $\\varphi.zeroLocus$ is locally principal: $\\varphi.zeroLocus.IsLocallyPrincipal$.",
+ "source": {
+  "document": "WeilConjectures/AlgebraicGeometry/Modules/ZeroLocus.lean",
+  "place": "theorem Hom.isLocallyPrincipal_zeroLocus, lines 570-576"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sc-invertible-module",
+  "def-pc-zero-scheme"
+ ],
+ "proof": [
+  {
+   "text": "Use the bridge from module-level invertibility to SheafOfModules.IsInvertible for both M and N. This supplies exactly the typeclass hypotheses of the common-trivialization lemma and of the zero-locus local-ideal theorem.",
+   "uses": [
+    "lem-pc-invertible-sheaf-instance"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "WeilConjectures/AlgebraicGeometry/Modules/ProjectionFormula.lean",
+    "place": "lemma IsInvertible.sheafOfModules_isInvertible, lines 122-124"
+   }
+  },
+  {
+   "text": "For each point x, apply the common affine-trivialization lemma with W = X to obtain an affine open U containing x and free generators eM and eN for M and N. Since eN is a free generator, there is a section b of the structure sheaf on U with φ(eM) = b • eN.",
+   "uses": [
+    "lem-pc-invertible-common-free-generator"
+   ],
+   "elementary": true,
+   "source": {
     "document": "WeilConjectures/AlgebraicGeometry/Modules/ZeroLocus.lean",
-    "place": "theorem Hom.isLocallyPrincipal_zeroLocus, lines 570-576"
+    "place": "theorem Hom.isLocallyPrincipal_zeroLocus, lines 571-575"
+   }
   },
-  "stmt_deps": [
-    "def-pc-scheme",
-    "def-sc-invertible-module",
-    "def-pc-zero-scheme"
-  ],
-  "proof": [
-    {
-      "text": "Use the bridge from module-level invertibility to SheafOfModules.IsInvertible for both M and N. This supplies exactly the typeclass hypotheses of the common-trivialization lemma and of the zero-locus local-ideal theorem.",
-      "uses": [
-        "lem-pc-invertible-sheaf-instance"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "WeilConjectures/AlgebraicGeometry/Modules/ProjectionFormula.lean",
-        "place": "lemma IsInvertible.sheafOfModules_isInvertible, lines 122-124"
-      }
-    },
-    {
-      "text": "For each point x, apply the common affine-trivialization lemma with W = X to obtain an affine open U containing x and free generators eM and eN for M and N. Since eN is a free generator, there is a section b of the structure sheaf on U with φ(eM) = b • eN.",
-      "uses": [
-        "lem-pc-invertible-common-free-generator"
-      ],
-      "elementary": true,
-      "source": {
-        "document": "WeilConjectures/AlgebraicGeometry/Modules/ZeroLocus.lean",
-        "place": "theorem Hom.isLocallyPrincipal_zeroLocus, lines 571-575"
-      }
-    },
-    {
-      "text": "The affine-local ideal theorem gives φ.zeroLocus.ideal U = Ideal.span {b}. Thus U and b witness the definition of IsLocallyPrincipal at x. Since x was arbitrary, φ.zeroLocus.IsLocallyPrincipal.",
-      "uses": [
-        "lem-pc-zero-scheme-ideal-local"
-      ],
-      "elementary": true,
-      "source": {
-        "document": "WeilConjectures/AlgebraicGeometry/Modules/ZeroLocus.lean",
-        "place": "theorem Hom.isLocallyPrincipal_zeroLocus, lines 571-576"
-      }
-    }
-  ],
-  "proof_deps": [
-    "lem-pc-invertible-sheaf-instance",
-    "lem-pc-invertible-common-free-generator",
+  {
+   "text": "The affine-local ideal theorem gives φ.zeroLocus.ideal U = Ideal.span {b}. Thus U and b witness the definition of IsLocallyPrincipal at x. Since x was arbitrary, φ.zeroLocus.IsLocallyPrincipal.",
+   "uses": [
     "lem-pc-zero-scheme-ideal-local"
-  ],
-  "proof_origin": {
-    "by": "document",
+   ],
+   "elementary": true,
+   "source": {
     "document": "WeilConjectures/AlgebraicGeometry/Modules/ZeroLocus.lean",
-    "place": "theorem Hom.isLocallyPrincipal_zeroLocus, lines 570-576"
-  },
-  "mathlib_searches": [
-    {
-      "tool": "leanfinder",
-      "query": "zero locus of a morphism of invertible modules is locally principal",
-      "results": "No exact match; lower-level IdealSheafData declarations only",
-      "date": "2026-10-11",
-      "verdict": "no match"
-    },
-    {
-      "tool": "loogle",
-      "query": "IsLocallyPrincipal zeroLocus",
-      "results": "0 hits; unknown identifier IsLocallyPrincipal",
-      "date": "2026-10-11",
-      "verdict": "no match"
-    },
-    {
-      "tool": "grep",
-      "query": "isLocallyPrincipal_zeroLocus AlgebraicGeometry",
-      "results": "No Mathlib matches",
-      "date": "2026-10-11",
-      "verdict": "no match"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "chapter": "sec-picard-framework",
-  "unit": "sk-lem-picard-zero-dictionary",
-  "created": {
-    "item": "lem-pc-zero-scheme-properties",
-    "by": "worker",
-    "date": "2026-10-10"
-  },
-  "split_report": {
-    "date": "2026-10-11",
-    "item": "lem-pc-zero-scheme-locally-principal",
-    "worker": "stage1",
-    "summary": "The prior attachment had a typeclass mismatch: the theorem assumes SheafOfModules.IsInvertible while the item hypotheses use the project module-level IsInvertible. Added closed nodes for the conversion theorem and the common affine trivialization lemma, then followed the source theorem using the existing affine ideal node.",
-    "blueprint": "Realizes lem-pc-zero-scheme-properties proof part (1), locally principal conclusion.",
-    "tool_uses": []
-  },
-  "reviewed": {
-    "date": "2026-10-10",
-    "by": "L",
-    "reviewer": "R-zlp1824",
-    "group": "F1",
-    "result": "pass",
-    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-zlp1824 (reviewer sub-agent of L); spot-checked: PASS. Read packet whole. Step 1/2 new nodes match slopmaster2 sorry-free decls IsInvertible.sheafOfModules_isInvertible (ProjectionFormula.lean 119-128) and exists_isFreeGenerator2 (ZeroLocus.lean 89-97) exactly, hypotheses included (two SheafOfModules.IsInvertible instances, x in W); both statement-only, cite only defs, no duplicate in DAG (grep). Step 3 cites lem-pc-zero-scheme-ideal-local rather than restating it; its hypotheses (affine U, free generators, phi(eM)=b eN) are supplied by step 2. No cycle: new nodes created from this item cite only def-pc-scheme/def-sc-invertible-module; ideal-local does not cite the item; lem-pc-zero-scheme-properties cites item as consumer only. Common-free-generator is near-elementary but kept as a Lean-attachable leaf. Second reading: no missed fault."
-  },
-  "lean": {
-    "module": "Sheaf.AlgebraicGeometry.Modules.ZeroLocusLocallyPrincipal",
-    "declaration": "AlgebraicGeometry.Scheme.Modules.Hom.isLocallyPrincipal_zeroLocus_of_isInvertible",
-    "file": "lean/Sheaf/AlgebraicGeometry/Modules/ZeroLocusLocallyPrincipal.lean",
-    "statement": "theorem Hom.isLocallyPrincipal_zeroLocus_of_isInvertible {X : Scheme.{u}} {M N : X.Modules} [M.IsInvertible] [N.IsInvertible] (φ : M ⟶ N) : φ.zeroLocus.IsLocallyPrincipal",
-    "branch": "sheaf-dag",
-    "by": "E1",
-    "date": "2026-10-11",
-    "existing": false,
-    "note": "The source theorem uses SheafOfModules.IsInvertible hypotheses; this statement uses the recorded Scheme.Modules.IsInvertible notion, as required by the node. The bridge is a theorem, not a global instance."
-  },
-  "reviewed_lean": {
-    "date": "2026-10-11",
-    "by": "L",
-    "reviewer": "R-zlp0915",
-    "group": "E1",
-    "result": "pass",
-    "note": "X:Scheme.{u}, M N:X.Modules with recorded Scheme.Modules.IsInvertible (as J1 pic-of-field), phi:M⟶N, conclusion phi.zeroLocus (recorded def-pc-zero-scheme Hom.zeroLocus : IdealSheafData).IsLocallyPrincipal (source predicate, as C1); source thm 570-576 binds SheafOfModules.IsInvertible (section line 481) so existing:false is right; no Mathlib zeroLocus/IsLocallyPrincipal for ideal sheaves; docstring carries all 3 proof steps; conventions OK"
+    "place": "theorem Hom.isLocallyPrincipal_zeroLocus, lines 571-576"
+   }
   }
+ ],
+ "proof_deps": [
+  "lem-pc-invertible-sheaf-instance",
+  "lem-pc-invertible-common-free-generator",
+  "lem-pc-zero-scheme-ideal-local"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "WeilConjectures/AlgebraicGeometry/Modules/ZeroLocus.lean",
+  "place": "theorem Hom.isLocallyPrincipal_zeroLocus, lines 570-576"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "zero locus of a morphism of invertible modules is locally principal",
+   "results": "No exact match; lower-level IdealSheafData declarations only",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocallyPrincipal zeroLocus",
+   "results": "0 hits; unknown identifier IsLocallyPrincipal",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "isLocallyPrincipal_zeroLocus AlgebraicGeometry",
+   "results": "No Mathlib matches",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "chapter": "sec-picard-framework",
+ "unit": "sk-lem-picard-zero-dictionary",
+ "created": {
+  "item": "lem-pc-zero-scheme-properties",
+  "by": "worker",
+  "date": "2026-10-10"
+ },
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-zero-scheme-locally-principal",
+  "worker": "stage1",
+  "summary": "The prior attachment had a typeclass mismatch: the theorem assumes SheafOfModules.IsInvertible while the item hypotheses use the project module-level IsInvertible. Added closed nodes for the conversion theorem and the common affine trivialization lemma, then followed the source theorem using the existing affine ideal node.",
+  "blueprint": "Realizes lem-pc-zero-scheme-properties proof part (1), locally principal conclusion.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-zlp1824",
+  "group": "F1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-zlp1824 (reviewer sub-agent of L); spot-checked: PASS. Read packet whole. Step 1/2 new nodes match slopmaster2 sorry-free decls IsInvertible.sheafOfModules_isInvertible (ProjectionFormula.lean 119-128) and exists_isFreeGenerator2 (ZeroLocus.lean 89-97) exactly, hypotheses included (two SheafOfModules.IsInvertible instances, x in W); both statement-only, cite only defs, no duplicate in DAG (grep). Step 3 cites lem-pc-zero-scheme-ideal-local rather than restating it; its hypotheses (affine U, free generators, phi(eM)=b eN) are supplied by step 2. No cycle: new nodes created from this item cite only def-pc-scheme/def-sc-invertible-module; ideal-local does not cite the item; lem-pc-zero-scheme-properties cites item as consumer only. Common-free-generator is near-elementary but kept as a Lean-attachable leaf. Second reading: no missed fault."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.Modules.ZeroLocusLocallyPrincipal",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.Hom.isLocallyPrincipal_zeroLocus_of_isInvertible",
+  "file": "lean/Sheaf/AlgebraicGeometry/Modules/ZeroLocusLocallyPrincipal.lean",
+  "statement": "theorem Hom.isLocallyPrincipal_zeroLocus_of_isInvertible {X : Scheme.{u}} {M N : X.Modules} [M.IsInvertible] [N.IsInvertible] (φ : M ⟶ N) : φ.zeroLocus.IsLocallyPrincipal",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": false,
+  "note": "The source theorem uses SheafOfModules.IsInvertible hypotheses; this statement uses the recorded Scheme.Modules.IsInvertible notion, as required by the node. The bridge is a theorem, not a global instance."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-zlp0915",
+  "group": "E1",
+  "result": "pass",
+  "note": "X:Scheme.{u}, M N:X.Modules with recorded Scheme.Modules.IsInvertible (as J1 pic-of-field), phi:M⟶N, conclusion phi.zeroLocus (recorded def-pc-zero-scheme Hom.zeroLocus : IdealSheafData).IsLocallyPrincipal (source predicate, as C1); source thm 570-576 binds SheafOfModules.IsInvertible (section line 481) so existing:false is right; no Mathlib zeroLocus/IsLocallyPrincipal for ideal sheaves; docstring carries all 3 proof steps; conventions OK"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

@@ -1,126 +1,128 @@
 {
-  "id": "thm-sp-double-complex-spectral-sequences",
-  "blueprint": {
-    "is": "thm-sp-double-complex-spectral-sequences",
-    "from": null,
-    "same_as": []
-  },
-  "kind": "statement",
-  "title": "The two spectral sequences of a first-quadrant double complex",
-  "statement": "Let $D^{\\bullet,\\bullet}$ be a first-quadrant double complex in an abelian\ncategory, with total complex $\\operatorname{Tot}(D)$ and first and second\nfiltrations ${}'F$, ${}''F$ as in [def-sp-double-complex-total]. Each\nfiltration determines, as the spectral sequence of a filtered complex\nbounded in each degree, a first-quadrant spectral sequence:\n\n- (I) the *first spectral sequence* ${}'E$, of the filtration ${}'F$, with\n  $$\n   {}'E_1^{p,q}=H^q_{II}(D^{p,\\bullet}),\\qquad\n   {}'E_2^{p,q}=H^p_IH^q_{II}(D),\n  $$\n  $d_1$ being induced by $d_I$;\n- (II) the *second spectral sequence* ${}''E$, of the filtration ${}''F$,\n  indexed by the filtration degree $q$ first, with\n  $$\n   {}''E_1^{q,p}=H^p_{I}(D^{\\bullet,q}),\\qquad\n   {}''E_2^{q,p}=H^q_{II}H^p_I(D),\n  $$\n  $d_1$ being induced by $d_{II}$.\n\nBoth abut to $H^\\bullet(\\operatorname{Tot}D)$: for $F$ either of the two\nfiltrations, the image filtration [def-sp-image-filtration]\n\n$$\n F^pH^n=\\operatorname{im}\\bigl(H^n(F^p\\operatorname{Tot}D)\n \\longrightarrow H^n(\\operatorname{Tot}D)\\bigr)\n$$\n\nsatisfies $F^0H^n=H^n(\\operatorname{Tot}D)$ and $F^{n+1}H^n=0$, so it is\nfinite in each degree, and $E_\\infty^{p,q}\\cong\n\\operatorname{gr}^pH^{p+q}(\\operatorname{Tot}D)$ in the sense of\n[def-sp-convergence]; moreover each entry stabilizes, $E_r^{p,q}=\nE_\\infty^{p,q}$ for $r>\\max(p,q+1)$. Convergence is thus automatic. Both\nspectral sequences are functorial for morphisms of double complexes.",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-pqf-finite/thm-sp-double-complex-spectral-sequences.md",
-    "place": "node thm-sp-double-complex-spectral-sequences, order 518"
-  },
-  "stmt_deps": [
-    "def-sp-double-complex-total",
-    "def-sp-image-filtration",
-    "def-sp-convergence"
-  ],
-  "proof": [
-    {
-      "text": "By [def-sp-double-complex-total], ${}'F$ and ${}''F$ are decreasing\nfiltrations of $\\operatorname{Tot}(D)$ by subcomplexes with\n$F^0\\operatorname{Tot}(D)^n=\\operatorname{Tot}(D)^n$ and\n$F^{n+1}\\operatorname{Tot}(D)^n=0$, hence bounded in each degree. So\n[thm-sp-spectral-object-yields] applies to each of them: item (a) of that\ntheorem gives a spectral sequence with\n$E_1^{p,q}=H^{p+q}(\\operatorname{gr}^p\\operatorname{Tot}D)$, $d_1$ the\nboundary map of $0\\to\\operatorname{gr}^{p+1}\\to F^p/F^{p+2}\\to\n\\operatorname{gr}^p\\to0$, and $E_{r+1}\\cong\\mathcal H(E_r,d_r)$; item (b) of\nthat theorem gives convergence to $H^\\bullet(\\operatorname{Tot}D)$ with the\ndisplayed image filtration, which is finite and separated, and item (c)\ngives functoriality in the filtered complex, hence in $D$ (a morphism of\ndouble complexes preserves both filtrations).",
-      "uses": [
-        "def-sp-double-complex-total",
-        "thm-sp-spectral-object-yields"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "*The first sequence.* The graded piece $\\operatorname{gr}^p_{'F}$ is the\ncolumn $D^{p,\\bullet}$ placed in total degrees $p+\\bullet$, with\ndifferential $(-1)^pd_{II}$; a sign does not change kernels or images, so\n${}'E_1^{p,q}=H^{p+q}(\\operatorname{gr}^p_{'F})=H^q_{II}(D^{p,\\bullet})$.\nFor $d_1$: a class in ${}'E_1^{p,q}$ is represented by $x\\in D^{p,q}$ with\n$d_{II}x=0$; viewed in $F^p/F^{p+2}$ its total differential is\n$dx=d_Ix+(-1)^pd_{II}x=d_Ix\\in D^{p+1,q}=\\operatorname{gr}^{p+1}$, so the\nboundary map sends $[x]$ to $[d_Ix]$. Hence $d_1$ is the map induced by\n$d_I$ on $H^q_{II}$, and ${}'E_2^{p,q}=\\mathcal H({}'E_1,d_1)^{p,q}=\nH^p_IH^q_{II}(D)$.",
-      "uses": [],
-      "elementary": true
-    },
-    {
-      "text": "*The second sequence.* The graded piece $\\operatorname{gr}^q_{''F}$ is the\nrow $D^{\\bullet,q}$ placed in total degrees $\\bullet+q$, with differential\n$d_I$, so ${}''E_1^{q,p}=H^{p+q}(\\operatorname{gr}^q_{''F})=\nH^p_I(D^{\\bullet,q})$. A class is represented by $y\\in D^{p,q}$ with\n$d_Iy=0$; in ${}''F^q/{}''F^{q+2}$ one has $dy=(-1)^pd_{II}y\\in\nD^{p,q+1}=\\operatorname{gr}^{q+1}$, so $d_1[y]=(-1)^p[d_{II}y]$. The sign\ndepends only on $p$, which is constant along the complex\n$\\bigl(H^p_I(D^{\\bullet,q})\\bigr)_q$ being formed, so it changes neither\nkernels nor images, and ${}''E_2^{q,p}=H^q_{II}H^p_I(D)$.",
-      "uses": [],
-      "elementary": true
-    },
-    {
-      "text": "*Bounds.* In both cases the $E_1$-terms vanish outside the first quadrant\n(${}'E_1^{p,q}$ is a subquotient of $D^{p,q}$, ${}''E_1^{q,p}$ one of\n$D^{p,q}$), and so do all later pages, which are subquotients of $E_1$. On\npage $r$ the differential leaving $(p,q)$ lands in $(p+r,q-r+1)$, outside\nthe quadrant once $r>q+1$, and the one arriving comes from $(p-r,q+r-1)$,\noutside once $r>p$; for $r>\\max(p,q+1)$ the page identification\n$E_{r+1}\\cong\\mathcal H(E_r)$ from [thm-sp-spectral-object-yields]\nidentifies the entry $(p,q)$ with its successor, which is the stated\nstabilization. For the second sequence the same argument is applied to its\nindices $(q,p)$, so the displayed bound is read in that sequence's own\nindexing. Finally $F^0H^n=H^n$ and $F^{n+1}H^n=0$ because\n$F^0\\operatorname{Tot}(D)=\\operatorname{Tot}(D)$ and\n$F^{n+1}\\operatorname{Tot}(D)^m=0$ for $m\\leq n$, so that\n$H^n(F^{n+1}\\operatorname{Tot}D)$ is the cohomology of a complex whose\ndegree-$n$ term vanishes.\n\n(*References: Stacks Project, Homological Algebra, the spectral sequences of\na double complex; Weibel, An Introduction to Homological Algebra, 5.6.*)",
-      "uses": [
-        "thm-sp-spectral-object-yields"
-      ],
-      "elementary": false
-    }
-  ],
-  "proof_deps": [
+ "id": "thm-sp-double-complex-spectral-sequences",
+ "blueprint": {
+  "is": "thm-sp-double-complex-spectral-sequences",
+  "from": null,
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "The two spectral sequences of a first-quadrant double complex",
+ "statement": "Let $D^{\\bullet,\\bullet}$ be a first-quadrant double complex in an abelian\ncategory, with total complex $\\operatorname{Tot}(D)$ and first and second\nfiltrations ${}'F$, ${}''F$ as in [def-sp-double-complex-total]. Each\nfiltration determines, as the spectral sequence of a filtered complex\nbounded in each degree, a first-quadrant spectral sequence:\n\n- (I) the *first spectral sequence* ${}'E$, of the filtration ${}'F$, with\n  $$\n   {}'E_1^{p,q}=H^q_{II}(D^{p,\\bullet}),\\qquad\n   {}'E_2^{p,q}=H^p_IH^q_{II}(D),\n  $$\n  $d_1$ being induced by $d_I$;\n- (II) the *second spectral sequence* ${}''E$, of the filtration ${}''F$,\n  indexed by the filtration degree $q$ first, with\n  $$\n   {}''E_1^{q,p}=H^p_{I}(D^{\\bullet,q}),\\qquad\n   {}''E_2^{q,p}=H^q_{II}H^p_I(D),\n  $$\n  $d_1$ being induced by $d_{II}$.\n\nBoth abut to $H^\\bullet(\\operatorname{Tot}D)$: for $F$ either of the two\nfiltrations, the image filtration [def-sp-image-filtration]\n\n$$\n F^pH^n=\\operatorname{im}\\bigl(H^n(F^p\\operatorname{Tot}D)\n \\longrightarrow H^n(\\operatorname{Tot}D)\\bigr)\n$$\n\nsatisfies $F^0H^n=H^n(\\operatorname{Tot}D)$ and $F^{n+1}H^n=0$, so it is\nfinite in each degree, and $E_\\infty^{p,q}\\cong\n\\operatorname{gr}^pH^{p+q}(\\operatorname{Tot}D)$ in the sense of\n[def-sp-convergence]; moreover each entry stabilizes, $E_r^{p,q}=\nE_\\infty^{p,q}$ for $r>\\max(p,q+1)$. Convergence is thus automatic. Both\nspectral sequences are functorial for morphisms of double complexes.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-pqf-finite/thm-sp-double-complex-spectral-sequences.md",
+  "place": "node thm-sp-double-complex-spectral-sequences, order 518"
+ },
+ "stmt_deps": [
+  "def-sp-double-complex-total",
+  "def-sp-image-filtration",
+  "def-sp-convergence"
+ ],
+ "proof": [
+  {
+   "text": "By [def-sp-double-complex-total], ${}'F$ and ${}''F$ are decreasing\nfiltrations of $\\operatorname{Tot}(D)$ by subcomplexes with\n$F^0\\operatorname{Tot}(D)^n=\\operatorname{Tot}(D)^n$ and\n$F^{n+1}\\operatorname{Tot}(D)^n=0$, hence bounded in each degree. So\n[thm-sp-spectral-object-yields] applies to each of them: item (a) of that\ntheorem gives a spectral sequence with\n$E_1^{p,q}=H^{p+q}(\\operatorname{gr}^p\\operatorname{Tot}D)$, $d_1$ the\nboundary map of $0\\to\\operatorname{gr}^{p+1}\\to F^p/F^{p+2}\\to\n\\operatorname{gr}^p\\to0$, and $E_{r+1}\\cong\\mathcal H(E_r,d_r)$; item (b) of\nthat theorem gives convergence to $H^\\bullet(\\operatorname{Tot}D)$ with the\ndisplayed image filtration, which is finite and separated, and item (c)\ngives functoriality in the filtered complex, hence in $D$ (a morphism of\ndouble complexes preserves both filtrations).",
+   "uses": [
     "def-sp-double-complex-total",
     "thm-sp-spectral-object-yields"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-pqf-finite/thm-sp-double-complex-spectral-sequences.md",
-    "place": "## Proof"
+   ],
+   "elementary": false
   },
-  "mathlib_searches": [],
-  "mathlib_match": null,
-  "status": "split",
-  "merged_into": null,
-  "import_flags": [
-    "proof_cites_literature",
-    "long_proof_few_deps"
-  ],
-  "blueprint_kind": "theorem",
-  "blueprint_order": 518,
-  "blueprint_uses": [
-    "def-sp-convergence",
-    "def-sp-double-complex-total",
-    "def-sp-image-filtration",
+  {
+   "text": "*The first sequence.* The graded piece $\\operatorname{gr}^p_{'F}$ is the\ncolumn $D^{p,\\bullet}$ placed in total degrees $p+\\bullet$, with\ndifferential $(-1)^pd_{II}$; a sign does not change kernels or images, so\n${}'E_1^{p,q}=H^{p+q}(\\operatorname{gr}^p_{'F})=H^q_{II}(D^{p,\\bullet})$.\nFor $d_1$: a class in ${}'E_1^{p,q}$ is represented by $x\\in D^{p,q}$ with\n$d_{II}x=0$; viewed in $F^p/F^{p+2}$ its total differential is\n$dx=d_Ix+(-1)^pd_{II}x=d_Ix\\in D^{p+1,q}=\\operatorname{gr}^{p+1}$, so the\nboundary map sends $[x]$ to $[d_Ix]$. Hence $d_1$ is the map induced by\n$d_I$ on $H^q_{II}$, and ${}'E_2^{p,q}=\\mathcal H({}'E_1,d_1)^{p,q}=\nH^p_IH^q_{II}(D)$.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "*The second sequence.* The graded piece $\\operatorname{gr}^q_{''F}$ is the\nrow $D^{\\bullet,q}$ placed in total degrees $\\bullet+q$, with differential\n$d_I$, so ${}''E_1^{q,p}=H^{p+q}(\\operatorname{gr}^q_{''F})=\nH^p_I(D^{\\bullet,q})$. A class is represented by $y\\in D^{p,q}$ with\n$d_Iy=0$; in ${}''F^q/{}''F^{q+2}$ one has $dy=(-1)^pd_{II}y\\in\nD^{p,q+1}=\\operatorname{gr}^{q+1}$, so $d_1[y]=(-1)^p[d_{II}y]$. The sign\ndepends only on $p$, which is constant along the complex\n$\\bigl(H^p_I(D^{\\bullet,q})\\bigr)_q$ being formed, so it changes neither\nkernels nor images, and ${}''E_2^{q,p}=H^q_{II}H^p_I(D)$.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "*Bounds.* In both cases the $E_1$-terms vanish outside the first quadrant\n(${}'E_1^{p,q}$ is a subquotient of $D^{p,q}$, ${}''E_1^{q,p}$ one of\n$D^{p,q}$), and so do all later pages, which are subquotients of $E_1$. On\npage $r$ the differential leaving $(p,q)$ lands in $(p+r,q-r+1)$, outside\nthe quadrant once $r>q+1$, and the one arriving comes from $(p-r,q+r-1)$,\noutside once $r>p$; for $r>\\max(p,q+1)$ the page identification\n$E_{r+1}\\cong\\mathcal H(E_r)$ from [thm-sp-spectral-object-yields]\nidentifies the entry $(p,q)$ with its successor, which is the stated\nstabilization. For the second sequence the same argument is applied to its\nindices $(q,p)$, so the displayed bound is read in that sequence's own\nindexing. Finally $F^0H^n=H^n$ and $F^{n+1}H^n=0$ because\n$F^0\\operatorname{Tot}(D)=\\operatorname{Tot}(D)$ and\n$F^{n+1}\\operatorname{Tot}(D)^m=0$ for $m\\leq n$, so that\n$H^n(F^{n+1}\\operatorname{Tot}D)$ is the cohomology of a complex whose\ndegree-$n$ term vanishes.\n\n(*References: Stacks Project, Homological Algebra, the spectral sequences of\na double complex; Weibel, An Introduction to Homological Algebra, 5.6.*)",
+   "uses": [
     "thm-sp-spectral-object-yields"
-  ],
-  "proof_split_by": "labels",
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "sorry_here",
-      "decls": [
-        {
-          "name": "HomologicalComplex₂.exists_spectralSequence",
-          "module": "WeilConjectures.Mathlib.Algebra.Homology.TotalComplex",
-          "lines": [
-            47,
-            64
-          ],
-          "kind": "theorem",
-          "sorry": true
-        }
-      ],
-      "missing": [],
-      "open": []
-    }
-  },
-  "chapter": "sec-abelian-varieties",
-  "unit": "sk-prop-av-pqf-finite",
-  "split_report": {
-    "date": "2026-10-11",
-    "item": "thm-sp-double-complex-spectral-sequences",
-    "worker": "stage1",
-    "summary": "Checked the imported statement against the blueprint and the slopmaster2 declaration HomologicalComplex₂.exists_spectralSequence. That declaration is still sorry and covers only the first spectral sequence, so this item is not attachable. The proof was retained: Step 1 uses the existing filtered-complex spectral-sequence theorem and the total-complex definition; Steps 2 and 3 are direct graded-piece and sign calculations; Step 4 uses the theorem for first-quadrant stabilization and writes out the finite-filtration bounds. No new DAG nodes were needed.",
-    "blueprint": "node thm-sp-double-complex-spectral-sequences, order 518; the four steps realize its proof paragraphs and use existing def-sp-double-complex-total and thm-sp-spectral-object-yields",
-    "tool_uses": []
-  },
-  "reviewed": {
-    "date": "2026-10-10",
-    "by": "L",
-    "reviewer": "R-dcs2037",
-    "group": "E1",
-    "result": "pass",
-    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-dcs2037 (reviewer sub-agent of L); spot-checked: Read the packet whole. Checked: E_1/E_2 identifications and d_1 signs in Steps 2-3 against the total differential d_I+(-1)^p d_II; Step 4 bidegree bound r>max(p,q+1) and F^0H^n=H^n, F^{n+1}H^n=0 (F^{n+1}Tot^m=0 for m<=n); the statement supplies the hypotheses of lem-weil-pbc-first-quadrant-row-collapse used by thm-sp-grothendieck (first-quadrant pages, finite image filtration F^0..F^{n+1}, E_inf~gr in the sense of def-sp-convergence, E_r=E_inf for r>max(p,q+1)). FIX more, RETURN less: (1) C4: Step 1 said thm-sp-spectral-object-yields builds the bigraded exact couple of the filtration and its derived couples; that statement builds the sequence from the spectral object X^[p,q] and states no exact couple, and the DAG exact-couple nodes (def-sp-exact-couple, lem-sp-derived-couple-exact) are of E_2 type with d of bidegree (s+2,-s-1), so they cannot carry an E_1 filtered couple. Step 1 now cites items (a)-(c) only; E7: the statement's phrase 'through its bigraded exact couple and the derived couples' is replaced by 'as the spectral sequence of a filtered complex bounded in each degree' for the same reason (no other content changed; downstream citers use only E_1/E_2, convergence, stabilization). Missed by the Second reading.; 1 file(s) fixed by the reviewer"
-  },
-  "lean": {
-    "module": "WeilConjectures.Mathlib.Algebra.Homology.TotalComplex",
-    "declaration": "HomologicalComplex₂.exists_spectralSequence",
-    "branch": "slopmaster2",
-    "line": 47,
-    "declarations": [
-      "HomologicalComplex₂.exists_spectralSequence"
-    ],
-    "sorry_free": false,
-    "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state sorry_here)"
+   ],
+   "elementary": false
   }
+ ],
+ "proof_deps": [
+  "def-sp-double-complex-total",
+  "thm-sp-spectral-object-yields"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-pqf-finite/thm-sp-double-complex-spectral-sequences.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [
+  "proof_cites_literature",
+  "long_proof_few_deps"
+ ],
+ "blueprint_kind": "theorem",
+ "blueprint_order": 518,
+ "blueprint_uses": [
+  "def-sp-convergence",
+  "def-sp-double-complex-total",
+  "def-sp-image-filtration",
+  "thm-sp-spectral-object-yields"
+ ],
+ "proof_split_by": "labels",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "HomologicalComplex₂.exists_spectralSequence"
+   ]
+  },
+  "slopmaster2": {
+   "state": "sorry_here",
+   "decls": [
+    {
+     "name": "HomologicalComplex₂.exists_spectralSequence",
+     "module": "WeilConjectures.Mathlib.Algebra.Homology.TotalComplex",
+     "lines": [
+      47,
+      64
+     ],
+     "kind": "theorem",
+     "sorry": true
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-pqf-finite",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "thm-sp-double-complex-spectral-sequences",
+  "worker": "stage1",
+  "summary": "Checked the imported statement against the blueprint and the slopmaster2 declaration HomologicalComplex₂.exists_spectralSequence. That declaration is still sorry and covers only the first spectral sequence, so this item is not attachable. The proof was retained: Step 1 uses the existing filtered-complex spectral-sequence theorem and the total-complex definition; Steps 2 and 3 are direct graded-piece and sign calculations; Step 4 uses the theorem for first-quadrant stabilization and writes out the finite-filtration bounds. No new DAG nodes were needed.",
+  "blueprint": "node thm-sp-double-complex-spectral-sequences, order 518; the four steps realize its proof paragraphs and use existing def-sp-double-complex-total and thm-sp-spectral-object-yields",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-dcs2037",
+  "group": "E1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-dcs2037 (reviewer sub-agent of L); spot-checked: Read the packet whole. Checked: E_1/E_2 identifications and d_1 signs in Steps 2-3 against the total differential d_I+(-1)^p d_II; Step 4 bidegree bound r>max(p,q+1) and F^0H^n=H^n, F^{n+1}H^n=0 (F^{n+1}Tot^m=0 for m<=n); the statement supplies the hypotheses of lem-weil-pbc-first-quadrant-row-collapse used by thm-sp-grothendieck (first-quadrant pages, finite image filtration F^0..F^{n+1}, E_inf~gr in the sense of def-sp-convergence, E_r=E_inf for r>max(p,q+1)). FIX more, RETURN less: (1) C4: Step 1 said thm-sp-spectral-object-yields builds the bigraded exact couple of the filtration and its derived couples; that statement builds the sequence from the spectral object X^[p,q] and states no exact couple, and the DAG exact-couple nodes (def-sp-exact-couple, lem-sp-derived-couple-exact) are of E_2 type with d of bidegree (s+2,-s-1), so they cannot carry an E_1 filtered couple. Step 1 now cites items (a)-(c) only; E7: the statement's phrase 'through its bigraded exact couple and the derived couples' is replaced by 'as the spectral sequence of a filtered complex bounded in each degree' for the same reason (no other content changed; downstream citers use only E_1/E_2, convergence, stabilization). Missed by the Second reading.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "WeilConjectures.Mathlib.Algebra.Homology.TotalComplex",
+  "declaration": "HomologicalComplex₂.exists_spectralSequence",
+  "branch": "slopmaster2",
+  "line": 47,
+  "declarations": [
+   "HomologicalComplex₂.exists_spectralSequence"
+  ],
+  "sorry_free": false,
+  "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state sorry_here)"
+ }
 }

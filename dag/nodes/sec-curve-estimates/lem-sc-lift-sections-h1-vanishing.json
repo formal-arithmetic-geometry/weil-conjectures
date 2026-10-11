@@ -1,96 +1,98 @@
 {
-  "id": "lem-sc-lift-sections-h1-vanishing",
-  "blueprint": {
-    "is": null,
-    "from": {
-      "node": "lem-sc-cohomological-dimension",
-      "place": "## Proof, as a whole (degrees $q>2$): the blueprint proof concludes 'For total degree $q>2$ there are thus no differentials into or out of $H^q(C,\\eta_*M)$. It equals $H^q(k(C),M)=0$'; the split replaces this generic-point assembly by the route of the Lean proof AlgebraicGeometry.IsCurve.subsingleton_sheafH_of_three_le_of_forall (HighDegreeVanishing.lean), and this node is used in step 5 (the map $j_*J'\\to j_*G''$ is an epimorphism).",
-      "via": []
-    },
-    "same_as": []
+ "id": "lem-sc-lift-sections-h1-vanishing",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-cohomological-dimension",
+   "place": "## Proof, as a whole (degrees $q>2$): the blueprint proof concludes 'For total degree $q>2$ there are thus no differentials into or out of $H^q(C,\\eta_*M)$. It equals $H^q(k(C),M)=0$'; the split replaces this generic-point assembly by the route of the Lean proof AlgebraicGeometry.IsCurve.subsingleton_sheafH_of_three_le_of_forall (HighDegreeVanishing.lean), and this node is used in step 5 (the map $j_*J'\\to j_*G''$ is an epimorphism).",
+   "via": []
   },
-  "kind": "statement",
-  "title": "Sections lift along a surjection whose kernel has no H^1 on the test object",
-  "statement": "Let $X$ be a scheme, $0\\to S_1\\to S_2\\xrightarrow{g}S_3\\to0$ a short exact sequence of abelian sheaves on $X_{\\Et}$ [def-weil-pbc-abelian-etale-sheaves], and $w:W\\to X$ an object of $X_{\\Et}$ [def-weil-pbc-etale-site] such that $H^1(W_{\\Et},w^{-1}S_1)=0$, with $w^{-1}$ the inverse image [def-weil-pbc-inverse-image] and cohomology as in [def-weil-pbc-etale-cohomology]. Then $g_W:S_2(W)\\to S_3(W)$ is surjective.",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-cd/lem-sc-cohomological-dimension.md (agent-written split, following the Lean)",
-    "place": "Lean: WeilConjectures/AlgebraicGeometry/Sites/TorsionAcyclic.lean, AlgebraicGeometry.Etale.surjective_app_of_subsingleton_H_one, lines 116-164 (long exact sequence on $W_{\\Et}$ in degree zero)"
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Sections lift along a surjection whose kernel has no H^1 on the test object",
+ "statement": "Let $X$ be a scheme, $0\\to S_1\\to S_2\\xrightarrow{g}S_3\\to0$ a short exact sequence of abelian sheaves on $X_{\\Et}$ [def-weil-pbc-abelian-etale-sheaves], and $w:W\\to X$ an object of $X_{\\Et}$ [def-weil-pbc-etale-site] such that $H^1(W_{\\Et},w^{-1}S_1)=0$, with $w^{-1}$ the inverse image [def-weil-pbc-inverse-image] and cohomology as in [def-weil-pbc-etale-cohomology]. Then $g_W:S_2(W)\\to S_3(W)$ is surjective.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-cd/lem-sc-cohomological-dimension.md (agent-written split, following the Lean)",
+  "place": "Lean: WeilConjectures/AlgebraicGeometry/Sites/TorsionAcyclic.lean, AlgebraicGeometry.Etale.surjective_app_of_subsingleton_H_one, lines 116-164 (long exact sequence on $W_{\\Et}$ in degree zero)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-etale-cohomology"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "short exact sequence of sheaves, H^1 of kernel vanishes implies sections of quotient lift",
+   "results": "ShortComplex.exact_of_f_is_kernel, ShortComplex.Exact.epi_kernelLift, ShortComplex.ShortExact.mk (Mathlib.Algebra.Homology.ShortComplex.*)",
+   "date": "2026-10-10",
+   "verdict": "no match"
   },
-  "stmt_deps": [
-    "def-weil-pbc-abelian-etale-sheaves",
-    "def-weil-pbc-etale-site",
-    "def-weil-pbc-inverse-image",
-    "def-weil-pbc-etale-cohomology"
-  ],
-  "proof": [],
-  "proof_deps": [],
-  "proof_origin": null,
-  "mathlib_searches": [
-    {
-      "tool": "leansearch",
-      "query": "short exact sequence of sheaves, H^1 of kernel vanishes implies sections of quotient lift",
-      "results": "ShortComplex.exact_of_f_is_kernel, ShortComplex.Exact.epi_kernelLift, ShortComplex.ShortExact.mk (Mathlib.Algebra.Homology.ShortComplex.*)",
-      "date": "2026-10-10",
-      "verdict": "no match"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "long exact sequence sheaf cohomology: if H^1 of first term vanishes then global sections map onto third term",
-      "results": "groupCohomology.epi_δ_of_isZero, groupCohomology.mapShortComplex₂_exact (group cohomology only)",
-      "date": "2026-10-10",
-      "verdict": "no match"
-    },
-    {
-      "tool": "grep",
-      "query": "grep -rln 'smallEtaleTopology' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib; grep -rn 'Sheaf.H' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean",
-      "results": "only the definition of Sheaf.H and its group structure; the project declaration AlgebraicGeometry.Etale.surjective_app_of_subsingleton_H_one (WeilConjectures/AlgebraicGeometry/Sites/TorsionAcyclic.lean:120) states it",
-      "date": "2026-10-10",
-      "verdict": "no match in Mathlib"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "unsplit",
-  "merged_into": null,
-  "created": {
-    "by": "worker",
-    "item": "lem-sc-cohomological-dimension",
-    "date": "2026-10-10"
+  {
+   "tool": "leanfinder",
+   "query": "long exact sequence sheaf cohomology: if H^1 of first term vanishes then global sections map onto third term",
+   "results": "groupCohomology.epi_δ_of_isZero, groupCohomology.mapShortComplex₂_exact (group cohomology only)",
+   "date": "2026-10-10",
+   "verdict": "no match"
   },
-  "chapter": "sec-curve-estimates",
-  "unit": "sk-prop-cd",
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "closed",
-      "decls": [
-        {
-          "name": "AlgebraicGeometry.Etale.surjective_app_of_subsingleton_H_one",
-          "module": "WeilConjectures.AlgebraicGeometry.Sites.TorsionAcyclic",
-          "lines": [
-            116,
-            164
-          ],
-          "kind": "theorem",
-          "sorry": false
-        }
-      ],
-      "missing": [],
-      "open": []
-    }
-  },
-  "lean": {
-    "module": "WeilConjectures.AlgebraicGeometry.Sites.TorsionAcyclic",
-    "declaration": "AlgebraicGeometry.Etale.surjective_app_of_subsingleton_H_one",
-    "branch": "slopmaster2",
-    "line": 116,
-    "declarations": [
-      "AlgebraicGeometry.Etale.surjective_app_of_subsingleton_H_one"
-    ],
-    "sorry_free": true,
-    "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state closed)"
+  {
+   "tool": "grep",
+   "query": "grep -rln 'smallEtaleTopology' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib; grep -rn 'Sheaf.H' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean",
+   "results": "only the definition of Sheaf.H and its group structure; the project declaration AlgebraicGeometry.Etale.surjective_app_of_subsingleton_H_one (WeilConjectures/AlgebraicGeometry/Sites/TorsionAcyclic.lean:120) states it",
+   "date": "2026-10-10",
+   "verdict": "no match in Mathlib"
   }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-sc-cohomological-dimension",
+  "date": "2026-10-10"
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-cd",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.Etale.surjective_app_of_subsingleton_H_one"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.Etale.surjective_app_of_subsingleton_H_one",
+     "module": "WeilConjectures.AlgebraicGeometry.Sites.TorsionAcyclic",
+     "lines": [
+      116,
+      164
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
+ "lean": {
+  "module": "WeilConjectures.AlgebraicGeometry.Sites.TorsionAcyclic",
+  "declaration": "AlgebraicGeometry.Etale.surjective_app_of_subsingleton_H_one",
+  "branch": "slopmaster2",
+  "line": 116,
+  "declarations": [
+   "AlgebraicGeometry.Etale.surjective_app_of_subsingleton_H_one"
+  ],
+  "sorry_free": true,
+  "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state closed)"
+ }
 }

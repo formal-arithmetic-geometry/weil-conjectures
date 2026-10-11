@@ -1,165 +1,167 @@
 {
-  "id": "lem-sc-p1-hi-vanishing",
-  "blueprint": {
-    "is": "lem-sc-p1-hi-vanishing",
-    "from": null,
-    "same_as": []
-  },
-  "kind": "statement",
-  "title": "Vanishing above the dimension on $\\mathbf P^1_k$",
-  "statement": "Let $k$ be a field and $\\mathcal F$ a quasi-coherent\n$\\mathcal O_{\\mathbf P^1_k}$-module. Then\n$H^q(\\mathbf P^1_k,\\mathcal F)=0$ for all $q\\geq2$.",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-coherence/lem-sc-p1-hi-vanishing.md",
-    "place": "node lem-sc-p1-hi-vanishing, order 640"
-  },
-  "stmt_deps": [
-    "def-sc-p1-standard",
-    "pqf-def-coherent",
-    "pqf-def-cohomology",
-    "lem-pc-projective-space-cohomology-bound"
-  ],
-  "proof": [
-    {
-      "text": "Use [lem-pc-projective-space-cohomology-bound] with the commutative ring $A=k$, the two-element index type (so $n=1$), and the given quasi-coherent module $\\mathcal F$. The projective-space construction in that node is the same $\\mathbf P^1_k$ defined by [def-sc-p1-standard], and its cohomology is the functor of [pqf-def-cohomology]. Since $2\\le q$ implies $1<q$, the bound gives $H^q(\\mathbf P^1_k,\\mathcal F)=0$. A zero cohomology object is subsingleton, yielding the stated conclusion.",
-      "uses": [
-        "lem-pc-projective-space-cohomology-bound",
-        "def-sc-p1-standard",
-        "pqf-def-cohomology"
-      ],
-      "elementary": true,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-coherence/lem-sc-p1-hi-vanishing.md",
-        "place": "## Proof"
-      }
-    }
-  ],
-  "proof_deps": [
+ "id": "lem-sc-p1-hi-vanishing",
+ "blueprint": {
+  "is": "lem-sc-p1-hi-vanishing",
+  "from": null,
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Vanishing above the dimension on $\\mathbf P^1_k$",
+ "statement": "Let $k$ be a field and $\\mathcal F$ a quasi-coherent\n$\\mathcal O_{\\mathbf P^1_k}$-module. Then\n$H^q(\\mathbf P^1_k,\\mathcal F)=0$ for all $q\\geq2$.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-coherence/lem-sc-p1-hi-vanishing.md",
+  "place": "node lem-sc-p1-hi-vanishing, order 640"
+ },
+ "stmt_deps": [
+  "def-sc-p1-standard",
+  "pqf-def-coherent",
+  "pqf-def-cohomology",
+  "lem-pc-projective-space-cohomology-bound"
+ ],
+ "proof": [
+  {
+   "text": "Use [lem-pc-projective-space-cohomology-bound] with the commutative ring $A=k$, the two-element index type (so $n=1$), and the given quasi-coherent module $\\mathcal F$. The projective-space construction in that node is the same $\\mathbf P^1_k$ defined by [def-sc-p1-standard], and its cohomology is the functor of [pqf-def-cohomology]. Since $2\\le q$ implies $1<q$, the bound gives $H^q(\\mathbf P^1_k,\\mathcal F)=0$. A zero cohomology object is subsingleton, yielding the stated conclusion.",
+   "uses": [
     "lem-pc-projective-space-cohomology-bound",
     "def-sc-p1-standard",
     "pqf-def-cohomology"
-  ],
-  "proof_origin": {
-    "by": "agent",
+   ],
+   "elementary": true,
+   "source": {
     "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-coherence/lem-sc-p1-hi-vanishing.md",
     "place": "## Proof"
-  },
-  "mathlib_searches": [
-    {
-      "tool": "leanfinder",
-      "query": "cohomology of quasi-coherent sheaf on projective line over field vanishes in degrees at least two",
-      "results": "Generic derived-category and projective-dimension declarations; no projective-space cohomology bound.",
-      "date": "2026-10-11",
-      "verdict": "no match"
-    },
-    {
-      "tool": "loogle",
-      "query": "ProjectiveSpace.subsingleton_H_of_lt, Subsingleton H q",
-      "results": "0 hits; unknown identifier ProjectiveSpace.subsingleton_H_of_lt.",
-      "date": "2026-10-11",
-      "verdict": "no match"
-    },
-    {
-      "tool": "grep",
-      "query": "subsingleton_H_of_two_le|subsingleton_H_of_lt|cohomology.*vanish Mathlib",
-      "results": "0 hits in Mathlib source.",
-      "date": "2026-10-11",
-      "verdict": "no match"
-    },
-    {
-      "tool": "leansearch",
-      "query": "higher cohomology of quasi-coherent sheaf on projective line vanishes above dimension",
-      "results": "service unavailable: Internal Server Error",
-      "date": "2026-10-11",
-      "verdict": "unavailable"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "merged_into": null,
-  "import_flags": [],
-  "blueprint_kind": "lemma",
-  "blueprint_order": 640,
-  "blueprint_uses": [
-    "def-sc-p1-standard",
-    "lem-sc-cech-spectral",
-    "lem-sc-p1-monomial",
-    "pqf-lem-affine-vanishing"
-  ],
-  "proof_split_by": "paragraphs",
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "rests_on_sorry",
-      "decls": [
-        {
-          "name": "AlgebraicGeometry.ProjectiveLine.subsingleton_H_of_two_le",
-          "module": "WeilConjectures.AlgebraicGeometry.Cohomology.ProjectiveLine",
-          "lines": [
-            245,
-            254
-          ],
-          "kind": "theorem",
-          "sorry": false
-        }
-      ],
-      "missing": [],
-      "open": [
-        {
-          "name": "AlgebraicGeometry.ProjectiveSpace.subsingleton_H_of_lt",
-          "module": "WeilConjectures.AlgebraicGeometry.Cohomology.Serre",
-          "lines": [
-            116,
-            127
-          ],
-          "kind": "theorem",
-          "nodes": [
-            "lem-pc-projective-space-cohomology-bound"
-          ],
-          "below": false
-        }
-      ]
-    }
-  },
-  "chapter": "sec-picard-framework",
-  "unit": "sk-thm-picard-coherence",
-  "split_report": {
-    "date": "2026-10-11",
-    "item": "lem-sc-p1-hi-vanishing",
-    "worker": "stage1",
-    "summary": "The imported Cech proof was replaced by a specialization of the existing projective-space cohomology bound: take A = k and n = 1, identify the resulting projective space with P^1_k, and use 2 <= q to obtain 1 < q. No new nodes were needed; the Lean declaration was not attached because its transitive dependency rests on a sorry.",
-    "blueprint": "Realizes the blueprint proof's Cech vanishing argument through the existing general projective-space bound, specialized to the two standard affine coordinates of P^1.",
-    "tool_uses": [
-      {
-        "node": "lem-pc-projective-space-cohomology-bound",
-        "why": "The general projective-space cohomology bound supplies the Cech truncation conclusion for P^1, while the imported unit route only records the same argument through the two-open cover."
-      }
-    ]
-  },
-  "tool_uses": [
-    "lem-pc-projective-space-cohomology-bound",
-    "lem-pc-projective-space-cohomology-bound"
-  ],
-  "reviewed": {
-    "date": "2026-10-10",
-    "by": "L",
-    "reviewer": "R-phv3030",
-    "group": "M1",
-    "result": "pass",
-    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-phv3030 (reviewer sub-agent of L); spot-checked: Statement vs blueprint (field k, qcoh F, q>=2). Step 1 C4: lem-pc-projective-space-cohomology-bound with A=k, n=1 gives H^q=0 for q>1; its P^n_A = Proj A[x0..xn] (def-pc-projective-space-twist) is the Proj k[x0,x1] of def-sc-p1-standard. Cech input is carried by the bound node's own cited statements lem-pc-cech-computes and lem-pc-alternating-cech-computes (only needs affine finite intersections D_+(prod x_i), no separatedness), so C1 holds via a statement, not a proof (C5). No cycle: the bound node does not depend on the item. Tool use accepted (generic P^n bound from sk-thm-picard-pn, C7/C8). Mathlib grep ProjectiveSpace+cohomolog in slopmaster2 mathlib: no match. No new nodes. Second reading by M1: no missed fault found. Start 'Sat Oct 10 11:08 PM UTC 2026', end 'Sat Oct 10 11:10:30 PM UTC 2026'."
-  },
-  "lean": {
-    "module": "WeilConjectures.AlgebraicGeometry.Cohomology.ProjectiveLine",
-    "declaration": "AlgebraicGeometry.ProjectiveLine.subsingleton_H_of_two_le",
-    "branch": "slopmaster2",
-    "line": 245,
-    "declarations": [
-      "AlgebraicGeometry.ProjectiveLine.subsingleton_H_of_two_le"
-    ],
-    "sorry_free": false,
-    "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state rests_on_sorry)"
+   }
   }
+ ],
+ "proof_deps": [
+  "lem-pc-projective-space-cohomology-bound",
+  "def-sc-p1-standard",
+  "pqf-def-cohomology"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-coherence/lem-sc-p1-hi-vanishing.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "cohomology of quasi-coherent sheaf on projective line over field vanishes in degrees at least two",
+   "results": "Generic derived-category and projective-dimension declarations; no projective-space cohomology bound.",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "ProjectiveSpace.subsingleton_H_of_lt, Subsingleton H q",
+   "results": "0 hits; unknown identifier ProjectiveSpace.subsingleton_H_of_lt.",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "subsingleton_H_of_two_le|subsingleton_H_of_lt|cohomology.*vanish Mathlib",
+   "results": "0 hits in Mathlib source.",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "higher cohomology of quasi-coherent sheaf on projective line vanishes above dimension",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 640,
+ "blueprint_uses": [
+  "def-sc-p1-standard",
+  "lem-sc-cech-spectral",
+  "lem-sc-p1-monomial",
+  "pqf-lem-affine-vanishing"
+ ],
+ "proof_split_by": "paragraphs",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.ProjectiveLine.subsingleton_H_of_two_le"
+   ]
+  },
+  "slopmaster2": {
+   "state": "rests_on_sorry",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.ProjectiveLine.subsingleton_H_of_two_le",
+     "module": "WeilConjectures.AlgebraicGeometry.Cohomology.ProjectiveLine",
+     "lines": [
+      245,
+      254
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": [
+    {
+     "name": "AlgebraicGeometry.ProjectiveSpace.subsingleton_H_of_lt",
+     "module": "WeilConjectures.AlgebraicGeometry.Cohomology.Serre",
+     "lines": [
+      116,
+      127
+     ],
+     "kind": "theorem",
+     "nodes": [
+      "lem-pc-projective-space-cohomology-bound"
+     ],
+     "below": true
+    }
+   ]
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-coherence",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-p1-hi-vanishing",
+  "worker": "stage1",
+  "summary": "The imported Cech proof was replaced by a specialization of the existing projective-space cohomology bound: take A = k and n = 1, identify the resulting projective space with P^1_k, and use 2 <= q to obtain 1 < q. No new nodes were needed; the Lean declaration was not attached because its transitive dependency rests on a sorry.",
+  "blueprint": "Realizes the blueprint proof's Cech vanishing argument through the existing general projective-space bound, specialized to the two standard affine coordinates of P^1.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-projective-space-cohomology-bound",
+    "why": "The general projective-space cohomology bound supplies the Cech truncation conclusion for P^1, while the imported unit route only records the same argument through the two-open cover."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-projective-space-cohomology-bound",
+  "lem-pc-projective-space-cohomology-bound"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-phv3030",
+  "group": "M1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-phv3030 (reviewer sub-agent of L); spot-checked: Statement vs blueprint (field k, qcoh F, q>=2). Step 1 C4: lem-pc-projective-space-cohomology-bound with A=k, n=1 gives H^q=0 for q>1; its P^n_A = Proj A[x0..xn] (def-pc-projective-space-twist) is the Proj k[x0,x1] of def-sc-p1-standard. Cech input is carried by the bound node's own cited statements lem-pc-cech-computes and lem-pc-alternating-cech-computes (only needs affine finite intersections D_+(prod x_i), no separatedness), so C1 holds via a statement, not a proof (C5). No cycle: the bound node does not depend on the item. Tool use accepted (generic P^n bound from sk-thm-picard-pn, C7/C8). Mathlib grep ProjectiveSpace+cohomolog in slopmaster2 mathlib: no match. No new nodes. Second reading by M1: no missed fault found. Start 'Sat Oct 10 11:08 PM UTC 2026', end 'Sat Oct 10 11:10:30 PM UTC 2026'."
+ },
+ "lean": {
+  "module": "WeilConjectures.AlgebraicGeometry.Cohomology.ProjectiveLine",
+  "declaration": "AlgebraicGeometry.ProjectiveLine.subsingleton_H_of_two_le",
+  "branch": "slopmaster2",
+  "line": 245,
+  "declarations": [
+   "AlgebraicGeometry.ProjectiveLine.subsingleton_H_of_two_le"
+  ],
+  "sorry_free": false,
+  "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state rests_on_sorry)"
+ }
 }

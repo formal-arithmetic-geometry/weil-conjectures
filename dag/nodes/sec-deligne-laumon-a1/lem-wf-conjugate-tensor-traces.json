@@ -1,98 +1,100 @@
 {
-  "id": "lem-wf-conjugate-tensor-traces",
-  "blueprint": {
-    "is": "lem-wf-conjugate-tensor-traces",
-    "from": null,
-    "same_as": null
-  },
-  "kind": "statement",
-  "title": "The conjugate-tensor trace identity",
-  "statement": "Let $X_0$ be a smooth geometrically connected affine curve over\n$k_0=\\mathbf F_q$ (the separated finite-type conventions of\n[def-weil-pbc-scheme-conventions]), let $\\mathcal F$ be a lisse\nWeil sheaf in the coefficient category of\n[def-weil-pbc-qbar-category], and let\n$\\bar{\\mathcal F}$ be the sheaf of the complex-conjugate\n($\\iota$-conjugate) local Frobenius eigenvalues. Then for every\n$y\\in X_0(k_m)$,\n\n$$\n\\operatorname{Tr}\\bigl(F_y\\mid\n(\\mathcal F\\otimes\\bar{\\mathcal F})_{\\bar y}\\bigr)\n=\n\\bigl|\\iota\\operatorname{Tr}(F_y\\mid\\mathcal F_{\\bar y})\\bigr|^2\n\\in\\mathbf R_{\\ge0},\n$$\n\nand consequently the $L^2$-series of the trace function,\n\n$$\n\\varphi_{\\mathcal F}(t):=\\sum_{m\\ge1}\\Bigl(\\sum_{y\\in X_0(k_m)}\n\\bigl|\\iota\\operatorname{Tr}(F_y\\mid\\mathcal F_{\\bar y})\\bigr|^2\\Bigr)t^{m-1},\n$$\n\nis the logarithmic derivative $L'/L$ of the $L$-series\n\n$$\nL(t):=L(X_0,\\mathcal F\\otimes\\bar{\\mathcal F},t)\n=\\prod_{x\\in|X_0|}\n\\det\\bigl(1-F_xt^{d(x)},(\\mathcal F\\otimes\\bar{\\mathcal F})_{\\bar x}\\bigr)^{-1},\n$$\n\nthe factorization being the Euler-product form of the\nGrothendieck–Lefschetz trace formula on the affine curve.",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-deligne-laumon-a1/sk-l-dl-a1-energy/lem-wf-conjugate-tensor-traces.md",
-    "place": "node lem-wf-conjugate-tensor-traces, order 2761"
-  },
-  "stmt_deps": [
-    "def-weil-pbc-scheme-conventions",
-    "def-weil-pbc-qbar-category",
-    "def-weil-punctual-weights"
-  ],
-  "proof": [
-    {
-      "text": "At a closed point $x$ the eigenvalue multiset of\n$\\mathcal F\\otimes\\bar{\\mathcal F}$ in the coefficient category of\n[def-weil-pbc-qbar-category] at $\\bar x$ is the set of\nproducts $\\alpha_i\\bar\\alpha_j$ of the $\\iota$-images of the\neigenvalues of $F_x$ on $\\mathcal F_{\\bar x}$, hence at a point\n$y\\in X_0(k_m)$ the trace of the tensor is\n$\\sum_i|\\iota(\\alpha_i^m)|^2=|\\iota\\operatorname{Tr}(F_y)|^2\\ge0$.\nThe regrouping of the closed points over the $k_m$-points therefore\ngives the logarithmic derivative of the Euler product: the coefficient\nof $t^{m-1}$ in $L'/L$ is\n$\\sum_{y\\in X_0(k_m)}\\operatorname{Tr}(F_y\\mid(\\mathcal F\\otimes\\bar{\\mathcal F})_{\\bar y})$,\nthe same point-counting step as in the graded Euler-product identity\n[cor-rp-euler-product], with the logarithm of the Frobenius determinant\n[lem-zl-log-det-identity] carrying the logarithmic derivative of\nthe factors: for the Frobenius module\n$(\\mathcal F\\otimes\\bar{\\mathcal F})_{\\bar x}$ with $F=F_x$ it gives\n$\\log\\det(1-TF)^{-1}=\\sum_{n\\ge1}\\Tr(F^n)T^n/n$ in $\\Qlb[[T]]$;\nsubstituting $T\\mapsto t^{d(x)}$ and applying $t\\,\\frac{d}{dt}$ gives\n$t\\,\\frac{d}{dt}\\log\\det(1-F t^{d(x)})^{-1}\n=\\sum_{n\\ge1}d(x)\\Tr(F^n)t^{d(x)n}$, and applying the field\nisomorphism $\\iota$ coefficientwise transports this identity of formal\npower series from $\\Qlb[[t]]$ to $\\mathbf C[[t]]$. The displayed identity follows, and the coefficients of\n$\\varphi_{\\mathcal F}$ are nonnegative reals.",
-      "uses": [
-        "def-weil-pbc-qbar-category",
-        "cor-rp-euler-product",
-        "lem-zl-log-det-identity"
-      ],
-      "elementary": false
-    }
-  ],
-  "proof_deps": [
+ "id": "lem-wf-conjugate-tensor-traces",
+ "blueprint": {
+  "is": "lem-wf-conjugate-tensor-traces",
+  "from": null,
+  "same_as": null
+ },
+ "kind": "statement",
+ "title": "The conjugate-tensor trace identity",
+ "statement": "Let $X_0$ be a smooth geometrically connected affine curve over\n$k_0=\\mathbf F_q$ (the separated finite-type conventions of\n[def-weil-pbc-scheme-conventions]), let $\\mathcal F$ be a lisse\nWeil sheaf in the coefficient category of\n[def-weil-pbc-qbar-category], and let\n$\\bar{\\mathcal F}$ be the sheaf of the complex-conjugate\n($\\iota$-conjugate) local Frobenius eigenvalues. Then for every\n$y\\in X_0(k_m)$,\n\n$$\n\\operatorname{Tr}\\bigl(F_y\\mid\n(\\mathcal F\\otimes\\bar{\\mathcal F})_{\\bar y}\\bigr)\n=\n\\bigl|\\iota\\operatorname{Tr}(F_y\\mid\\mathcal F_{\\bar y})\\bigr|^2\n\\in\\mathbf R_{\\ge0},\n$$\n\nand consequently the $L^2$-series of the trace function,\n\n$$\n\\varphi_{\\mathcal F}(t):=\\sum_{m\\ge1}\\Bigl(\\sum_{y\\in X_0(k_m)}\n\\bigl|\\iota\\operatorname{Tr}(F_y\\mid\\mathcal F_{\\bar y})\\bigr|^2\\Bigr)t^{m-1},\n$$\n\nis the logarithmic derivative $L'/L$ of the $L$-series\n\n$$\nL(t):=L(X_0,\\mathcal F\\otimes\\bar{\\mathcal F},t)\n=\\prod_{x\\in|X_0|}\n\\det\\bigl(1-F_xt^{d(x)},(\\mathcal F\\otimes\\bar{\\mathcal F})_{\\bar x}\\bigr)^{-1},\n$$\n\nthe factorization being the Euler-product form of the\nGrothendieck–Lefschetz trace formula on the affine curve.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-deligne-laumon-a1/sk-l-dl-a1-energy/lem-wf-conjugate-tensor-traces.md",
+  "place": "node lem-wf-conjugate-tensor-traces, order 2761"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-qbar-category",
+  "def-weil-punctual-weights"
+ ],
+ "proof": [
+  {
+   "text": "At a closed point $x$ the eigenvalue multiset of\n$\\mathcal F\\otimes\\bar{\\mathcal F}$ in the coefficient category of\n[def-weil-pbc-qbar-category] at $\\bar x$ is the set of\nproducts $\\alpha_i\\bar\\alpha_j$ of the $\\iota$-images of the\neigenvalues of $F_x$ on $\\mathcal F_{\\bar x}$, hence at a point\n$y\\in X_0(k_m)$ the trace of the tensor is\n$\\sum_i|\\iota(\\alpha_i^m)|^2=|\\iota\\operatorname{Tr}(F_y)|^2\\ge0$.\nThe regrouping of the closed points over the $k_m$-points therefore\ngives the logarithmic derivative of the Euler product: the coefficient\nof $t^{m-1}$ in $L'/L$ is\n$\\sum_{y\\in X_0(k_m)}\\operatorname{Tr}(F_y\\mid(\\mathcal F\\otimes\\bar{\\mathcal F})_{\\bar y})$,\nthe same point-counting step as in the graded Euler-product identity\n[cor-rp-euler-product], with the logarithm of the Frobenius determinant\n[lem-zl-log-det-identity] carrying the logarithmic derivative of\nthe factors: for the Frobenius module\n$(\\mathcal F\\otimes\\bar{\\mathcal F})_{\\bar x}$ with $F=F_x$ it gives\n$\\log\\det(1-TF)^{-1}=\\sum_{n\\ge1}\\Tr(F^n)T^n/n$ in $\\Qlb[[T]]$;\nsubstituting $T\\mapsto t^{d(x)}$ and applying $t\\,\\frac{d}{dt}$ gives\n$t\\,\\frac{d}{dt}\\log\\det(1-F t^{d(x)})^{-1}\n=\\sum_{n\\ge1}d(x)\\Tr(F^n)t^{d(x)n}$, and applying the field\nisomorphism $\\iota$ coefficientwise transports this identity of formal\npower series from $\\Qlb[[t]]$ to $\\mathbf C[[t]]$. The displayed identity follows, and the coefficients of\n$\\varphi_{\\mathcal F}$ are nonnegative reals.",
+   "uses": [
     "def-weil-pbc-qbar-category",
     "cor-rp-euler-product",
     "lem-zl-log-det-identity"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/blueprint/master/blueprint/sec-deligne-laumon-a1/sk-l-dl-a1-energy/lem-wf-conjugate-tensor-traces.md",
-    "place": "## Proof"
-  },
-  "mathlib_searches": [],
-  "mathlib_match": null,
-  "status": "imported",
-  "merged_into": null,
-  "import_flags": [],
-  "blueprint_kind": "lemma",
-  "blueprint_order": 2761,
-  "blueprint_uses": [
-    "cor-rp-euler-product",
-    "def-weil-pbc-qbar-category",
-    "def-weil-pbc-scheme-conventions",
-    "def-weil-punctual-weights",
-    "lem-zl-log-det-identity"
-  ],
-  "uses_not_cited": [
-    "def-weil-punctual-weights"
-  ],
-  "proof_split_by": "paragraphs",
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "sorry_here",
-      "decls": [
-        {
-          "name": "AlgebraicGeometry.WeilSheaf.traceFunction_tensorObj_and_l2Series_mul_lSeries",
-          "module": "WeilConjectures.DeligneLaumon.AffineLine.TraceEnergy",
-          "lines": [
-            511,
-            535
-          ],
-          "kind": "theorem",
-          "sorry": true
-        }
-      ],
-      "missing": [
-        "AlgebraicGeometry.LAdicWeilSheaf.traceFunction_tensorObj_and_l2Series_mul_lSeries"
-      ],
-      "open": []
-    }
-  },
-  "chapter": "sec-deligne-laumon-a1",
-  "unit": "sk-l-dl-a1-energy",
-  "lean": {
-    "module": "WeilConjectures.DeligneLaumon.AffineLine.TraceEnergy",
-    "declaration": "AlgebraicGeometry.WeilSheaf.traceFunction_tensorObj_and_l2Series_mul_lSeries",
-    "branch": "slopmaster2",
-    "line": 511,
-    "declarations": [
-      "AlgebraicGeometry.WeilSheaf.traceFunction_tensorObj_and_l2Series_mul_lSeries"
-    ],
-    "sorry_free": false,
-    "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state sorry_here)"
+   ],
+   "elementary": false
   }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-qbar-category",
+  "cor-rp-euler-product",
+  "lem-zl-log-det-identity"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-deligne-laumon-a1/sk-l-dl-a1-energy/lem-wf-conjugate-tensor-traces.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 2761,
+ "blueprint_uses": [
+  "cor-rp-euler-product",
+  "def-weil-pbc-qbar-category",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-punctual-weights",
+  "lem-zl-log-det-identity"
+ ],
+ "uses_not_cited": [
+  "def-weil-punctual-weights"
+ ],
+ "proof_split_by": "paragraphs",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.WeilSheaf.traceFunction_tensorObj_and_l2Series_mul_lSeries"
+   ]
+  },
+  "slopmaster2": {
+   "state": "sorry_here",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.WeilSheaf.traceFunction_tensorObj_and_l2Series_mul_lSeries",
+     "module": "WeilConjectures.DeligneLaumon.AffineLine.TraceEnergy",
+     "lines": [
+      513,
+      537
+     ],
+     "kind": "theorem",
+     "sorry": true
+    }
+   ],
+   "missing": [
+    "AlgebraicGeometry.LAdicWeilSheaf.traceFunction_tensorObj_and_l2Series_mul_lSeries"
+   ],
+   "open": []
+  }
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-l-dl-a1-energy",
+ "lean": {
+  "module": "WeilConjectures.DeligneLaumon.AffineLine.TraceEnergy",
+  "declaration": "AlgebraicGeometry.WeilSheaf.traceFunction_tensorObj_and_l2Series_mul_lSeries",
+  "branch": "slopmaster2",
+  "line": 511,
+  "declarations": [
+   "AlgebraicGeometry.WeilSheaf.traceFunction_tensorObj_and_l2Series_mul_lSeries"
+  ],
+  "sorry_free": false,
+  "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state sorry_here)"
+ }
 }

@@ -1,119 +1,131 @@
 {
-  "id": "lem-sc-finite-twisted-inverse-bounded-below",
-  "blueprint": {
-    "is": null,
-    "from": {
-      "node": "lem-sc-finite-duality",
-      "place": "proof, finite twisted inverse image preserves bounded-below quasi-coherent complexes",
-      "via": [
-        "lem-sc-finite-duality-derived-hom"
-      ]
-    },
-    "same_as": []
+ "id": "lem-sc-finite-twisted-inverse-bounded-below",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "proof, finite twisted inverse image preserves bounded-below quasi-coherent complexes",
+   "via": [
+    "lem-sc-finite-duality-derived-hom"
+   ]
   },
-  "kind": "statement",
-  "title": "Finite twisted inverse image is bounded below",
-  "statement": "Let $f:X\\to Y$ be a finite morphism [def-weil-finite-integral-morphism] of Noetherian schemes [def-pc-scheme] and let $f^!$ be the right adjoint of $Rf_*$ [def-pc-derived-direct-image]. For every $K\\in D^+_{\\mathrm{QCoh}}(Y)$ [def-pc-derived-category], the object $f^!K$ belongs to $D^+_{\\mathrm{QCoh}}(X)$ [def-pc-derived-category].",
-  "source": {
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Finite twisted inverse image is bounded below",
+ "statement": "Let $f:X\\to Y$ be a finite morphism [def-weil-finite-integral-morphism] of Noetherian schemes [def-pc-scheme] and let $f^!$ be the right adjoint of $Rf_*$ [def-pc-derived-direct-image]. For every $K\\in D^+_{\\mathrm{QCoh}}(Y)$ [def-pc-derived-category], the object $f^!K$ belongs to $D^+_{\\mathrm{QCoh}}(X)$ [def-pc-derived-category].",
+ "source": {
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Tag 0A9I, lemma-twisted-inverse-image-bounded-below (duality.tex); the finite case is Tag 0AX2, duality-lemma-finite-twisted"
+ },
+ "stmt_deps": [
+  "def-weil-finite-integral-morphism",
+  "def-pc-scheme",
+  "def-pc-derived-direct-image",
+  "def-pc-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "A finite morphism of Noetherian schemes is quasi-compact and quasi-separated, and its target is quasi-compact. Apply the existing uniform truncation-bound statement [lem-pc-derived-direct-image-uniform-truncation-bound] to a shift of any L\\in D_{\\mathrm{QCoh}}(X): shifting reduces the case H^i(L)=0 for i>r to the stated case H^i(E)=0 for i>0, and shifting back gives an integer N, independent of r, with Rf_*D^{\\le r}_{\\mathrm{QCoh}}(X)\\subseteq D^{\\le r+N}_{\\mathrm{QCoh}}(Y).",
+   "uses": [
+    "lem-pc-derived-direct-image-uniform-truncation-bound"
+   ],
+   "elementary": false,
+   "source": {
     "document": "literature/stacks-project/duality.tex",
-    "place": "Tag 0A9I, lemma-twisted-inverse-image-bounded-below (duality.tex); the finite case is Tag 0AX2, duality-lemma-finite-twisted"
+    "place": "Tag 0AX2, proof of lemma-twisted-inverse-image-bounded-below, first paragraph"
+   }
   },
-  "stmt_deps": [
-    "def-weil-finite-integral-morphism",
-    "def-pc-scheme",
-    "def-pc-derived-direct-image",
-    "def-pc-derived-category"
-  ],
-  "proof": [
-    {
-      "text": "A finite morphism of Noetherian schemes is quasi-compact and quasi-separated, and its target is quasi-compact. Apply the existing uniform truncation-bound statement [lem-pc-derived-direct-image-uniform-truncation-bound] to a shift of any L\\in D_{\\mathrm{QCoh}}(X): shifting reduces the case H^i(L)=0 for i>r to the stated case H^i(E)=0 for i>0, and shifting back gives an integer N, independent of r, with Rf_*D^{\\le r}_{\\mathrm{QCoh}}(X)\\subseteq D^{\\le r+N}_{\\mathrm{QCoh}}(Y).",
-      "uses": [
-        "lem-pc-derived-direct-image-uniform-truncation-bound"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/duality.tex",
-        "place": "Tag 0AX2, proof of lemma-twisted-inverse-image-bounded-below, first paragraph"
-      }
-    },
-    {
-      "text": "Choose an integer c with H^i(K)=0 for i\\le c, and put A=\\tau_{\\le c-N}f^!K. By the standard truncation triangle, A lies in D^{\\le c-N}_{\\mathrm{QCoh}}(X), so Step 1 gives Rf_*A\\in D^{\\le c}_{\\mathrm{QCoh}}(Y), while K lies in D^{\\ge c+1}_{\\mathrm{QCoh}}(Y). The defining right-adjunction bijection for f^! identifies Hom_X(A,f^!K) with Hom_Y(Rf_*A,K), and this group is zero by [lem-pc-derived-tstructure-orthogonality].",
-      "uses": [
-        "lem-pc-derived-direct-image-uniform-truncation-bound",
-        "lem-pc-derived-tstructure-orthogonality"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/duality.tex",
-        "place": "Tag 0AX2, proof of lemma-twisted-inverse-image-bounded-below, displayed Hom computation"
-      }
-    },
-    {
-      "text": "The canonical truncation map \\tau_{\\le c-N}f^!K\\to f^!K induces the identity on cohomology in degrees \\le c-N. Since the map is zero by Step 2, all cohomology sheaves H^i(f^!K) vanish for i\\le c-N. Thus f^!K is bounded below and remains quasi-coherent, so it belongs to D^+_{\\mathrm{QCoh}}(X).",
-      "uses": [],
-      "elementary": true,
-      "source": {
-        "document": "literature/stacks-project/duality.tex",
-        "place": "Tag 0AX2, proof of lemma-twisted-inverse-image-bounded-below, final sentence"
-      }
-    }
-  ],
-  "proof_deps": [
+  {
+   "text": "Choose an integer c with H^i(K)=0 for i\\le c, and put A=\\tau_{\\le c-N}f^!K. By the standard truncation triangle, A lies in D^{\\le c-N}_{\\mathrm{QCoh}}(X), so Step 1 gives Rf_*A\\in D^{\\le c}_{\\mathrm{QCoh}}(Y), while K lies in D^{\\ge c+1}_{\\mathrm{QCoh}}(Y). The defining right-adjunction bijection for f^! identifies Hom_X(A,f^!K) with Hom_Y(Rf_*A,K), and this group is zero by [lem-pc-derived-tstructure-orthogonality].",
+   "uses": [
     "lem-pc-derived-direct-image-uniform-truncation-bound",
     "lem-pc-derived-tstructure-orthogonality"
-  ],
-  "proof_origin": {
-    "by": "document",
+   ],
+   "elementary": false,
+   "source": {
     "document": "literature/stacks-project/duality.tex",
-    "place": "Tag 0AX2, lemma-twisted-inverse-image-bounded-below"
+    "place": "Tag 0AX2, proof of lemma-twisted-inverse-image-bounded-below, displayed Hom computation"
+   }
   },
-  "mathlib_searches": [
-    {
-      "tool": "leanfinder",
-      "query": "finite morphism twisted inverse image f shriek bounded below quasi coherent",
-      "results": "8 unrelated sheaf/module declarations; no declaration for finite-scheme f^! boundedness",
-      "date": "2026-10-11",
-      "verdict": "no match"
-    },
-    {
-      "tool": "loogle",
-      "query": "DerivedCategory, IsBoundedBelow",
-      "results": "Loogle reports unknown identifier IsBoundedBelow",
-      "date": "2026-10-11",
-      "verdict": "unavailable: no matching bounded-below predicate"
-    },
-    {
-      "tool": "grep",
-      "query": "upperShriek|boundedBelow [Mathlib/AlgebraicGeometry]",
-      "results": "No hits",
-      "date": "2026-10-11",
-      "verdict": "no match"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "created": {
-    "item": "lem-sc-finite-duality-derived-hom",
-    "by": "worker",
-    "date": "2026-10-10"
+  {
+   "text": "The canonical truncation map \\tau_{\\le c-N}f^!K\\to f^!K induces the identity on cohomology in degrees \\le c-N. Since the map is zero by Step 2, all cohomology sheaves H^i(f^!K) vanish for i\\le c-N. Thus f^!K is bounded below and remains quasi-coherent, so it belongs to D^+_{\\mathrm{QCoh}}(X).",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0AX2, proof of lemma-twisted-inverse-image-bounded-below, final sentence"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-derived-direct-image-uniform-truncation-bound",
+  "lem-pc-derived-tstructure-orthogonality"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Tag 0AX2, lemma-twisted-inverse-image-bounded-below"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "finite morphism twisted inverse image f shriek bounded below quasi coherent",
+   "results": "8 unrelated sheaf/module declarations; no declaration for finite-scheme f^! boundedness",
+   "date": "2026-10-11",
+   "verdict": "no match"
   },
-  "chapter": "sec-picard-framework",
-  "unit": "sk-thm-picard-duality",
-  "split_report": {
-    "date": "2026-10-11",
-    "item": "lem-sc-finite-twisted-inverse-bounded-below",
-    "worker": "stage1",
-    "summary": "Split the Stacks Tag 0AX2 bounded-below argument into the finite cohomological-amplitude input for Rf_* and the standard derived t-structure orthogonality leaf. The three item steps now explicitly choose a lower cohomology bound, apply adjunction to a truncation, and read vanishing of the truncation map as bounded-below cohomology.",
-    "blueprint": "The steps realize the finite twisted inverse image boundedness proof: finite cohomological dimension of direct image, the displayed truncation-and-adjunction Hom vanishing, and the final truncation criterion.",
-    "tool_uses": []
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory, IsBoundedBelow",
+   "results": "Loogle reports unknown identifier IsBoundedBelow",
+   "date": "2026-10-11",
+   "verdict": "unavailable: no matching bounded-below predicate"
   },
-  "reviewed": {
-    "date": "2026-10-10",
-    "by": "L",
-    "reviewer": "R-tib1818",
-    "group": "G1",
-    "result": "pass",
-    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-tib1818 (reviewer sub-agent of L); spot-checked: Steps 1-3 checked: finite Noetherian => qcqs with quasi-compact target, so 08D5 uniform bound node applies (shifted, Rf_* D^{<=r} in D^{<=r+N}); A=tau_{<=c-N}f^!K, adjunction + orthogonality (Rf_*A in D^{<=c}, K in D^{>=c+1}) gives zero map, truncation iso in degrees <=c-N gives vanishing. Leaf read at TStructure/Basic.lean:250-252, one-line specialization to DerivedCategory.TStructure.t (the def node's leaf); no duplicate in dag. No cycle: cited nodes are the 08D5 bound node (proof_deps empty) and the new leaf; proof uses adjunction, not RHom(f_*O_X,-), so lem-sc-finite-duality-derived-hom / affine-derived-equivalence / sheafhom-affine-adjoint not cited. Second reading's removal of duplicate rfstar node confirmed."
+  {
+   "tool": "grep",
+   "query": "upperShriek|boundedBelow [Mathlib/AlgebraicGeometry]",
+   "results": "No hits",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "item": "lem-sc-finite-duality-derived-hom",
+  "by": "worker",
+  "date": "2026-10-10"
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-finite-twisted-inverse-bounded-below",
+  "worker": "stage1",
+  "summary": "Split the Stacks Tag 0AX2 bounded-below argument into the finite cohomological-amplitude input for Rf_* and the standard derived t-structure orthogonality leaf. The three item steps now explicitly choose a lower cohomology bound, apply adjunction to a truncation, and read vanishing of the truncation map as bounded-below cohomology.",
+  "blueprint": "The steps realize the finite twisted inverse image boundedness proof: finite cohomological dimension of direct image, the displayed truncation-and-adjunction Hom vanishing, and the final truncation criterion.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-tib1818",
+  "group": "G1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-tib1818 (reviewer sub-agent of L); spot-checked: Steps 1-3 checked: finite Noetherian => qcqs with quasi-compact target, so 08D5 uniform bound node applies (shifted, Rf_* D^{<=r} in D^{<=r+N}); A=tau_{<=c-N}f^!K, adjunction + orthogonality (Rf_*A in D^{<=c}, K in D^{>=c+1}) gives zero map, truncation iso in degrees <=c-N gives vanishing. Leaf read at TStructure/Basic.lean:250-252, one-line specialization to DerivedCategory.TStructure.t (the def node's leaf); no duplicate in dag. No cycle: cited nodes are the 08D5 bound node (proof_deps empty) and the new leaf; proof uses adjunction, not RHom(f_*O_X,-), so lem-sc-finite-duality-derived-hom / affine-derived-equivalence / sheafhom-affine-adjoint not cited. Second reading's removal of duplicate rfstar node confirmed."
+ },
+ "lead_note": " source.place tag corrected by L (18:19 UTC) per reviewer R-tib1818: the label lemma-twisted-inverse-image-bounded-below is Tag 0A9I, not 0AX2 (duality-lemma-finite-twisted).",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
   },
-  "lead_note": " source.place tag corrected by L (18:19 UTC) per reviewer R-tib1818: the label lemma-twisted-inverse-image-bounded-below is Tag 0A9I, not 0AX2 (duality-lemma-finite-twisted)."
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

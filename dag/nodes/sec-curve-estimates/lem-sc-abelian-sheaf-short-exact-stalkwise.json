@@ -126,5 +126,17 @@
   "group": "H1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ses (reviewer sub-agent of L); spot-checked: Source: Modules 01AG (lemma-abelian) and Sheaves 007S/007T (lemma-points-exactness, stated for sheaves of sets; 01AG gives the abelian case): short exactness in Ab(X) iff stalkwise short exact, hypotheses agree (any topological space). Mathlib verified: TopCat.Sheaf.exact_iff_stalkFunctor_map_exact Abelian.lean:103 (S.Exact iff every stalk short complex exact) = exact-iff-stalk-exact; TopCat.Presheaf.mono_iff_stalk_mono Stalks.lean:582 (Mono f iff Mono of every stalk map, C = AddCommGrpCat) = mono-iff-stalk-mono; TopCat.Sheaf.isLocallySurjective_iff_epi LocallySurjective.lean:125 + TopCat.Presheaf.locally_surjective_iff_surjective_on_stalks line 80, instances for AddCommGrpCat confirmed by Mathlib's own use in Flasque.lean:129. No exact ShortExact-stalk declaration in Mathlib or slopmaster2 (grep); blueprint search 'stalk epimorphism'/'short exact stalks' found nothing relevant. Steps: 1 definition of short exact sequence; 2 the three criteria forward; 3 the three criteria backward. Small cases: zero sequence, F'=0 (g iso iff stalk isos). FIX more, RETURN less: (a) C4: step 1 cited def-sc-topological-abelian-cohomology for the definition of short exact sequence, which it does not state; now cites def-weil-pbc-exact-sequence (added to proof_deps). (b) C1: step 3 applied the exactness criterion to a 'sequence' without showing g o f = 0; added the argument (germs of g f s vanish, so g f s = 0 by def-weil-pbc-module-stalk and the sheaf axiom), step 2 likewise notes g_x f_x = (g f)_x via def-weil-pbc-module-stalk (added to uses/proof_deps). Fixes: dag/nodes/sec-curve-estimates/lem-sc-abelian-sheaf-epi-iff-stalk-epi.json: status, mathlib_match: unsplit -> Mathlib leaf (TopCat.Sheaf.isLocallySurjective_iff_epi + TopCat.Presheaf.locally_surjective_iff_surjective_on_stalks, the same two-lemma chain accepted for lem-weil-pbc-sets-sheaf-epi-iff-stalks), statement: TeX delimiters; lem-sc-abelian-sheaf-exact-iff-stalk-exact.json and lem-sc-abelian-sheaf-mono-iff-stalk-mono.json: statement: B4 TeX delimiters ($, $\\varphi$, x\\in X), the short complex written out; item: proof step sources/proof_origin.place 'Lemma 007S' -> 'Section 007S', split_report.summary updated for the epi leaf. Start 2026-10-10 16:09:42 UTC; end see date -u at merge.; 4 file(s) fixed by the reviewer"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
  }
 }

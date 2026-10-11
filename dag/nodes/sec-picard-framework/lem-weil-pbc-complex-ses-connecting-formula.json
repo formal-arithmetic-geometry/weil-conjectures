@@ -1,83 +1,95 @@
 {
-  "id": "lem-weil-pbc-complex-ses-connecting-formula",
-  "blueprint": {
-    "is": null,
-    "from": {
-      "node": "thm-sc-p1-duality",
-      "place": "proof, Step 2: identify the homology connecting map of the horseshoe complexes",
-      "via": [
-        "lem-sc-p1-right-derived-triangle-connecting"
-      ]
-    },
-    "same_as": []
+ "id": "lem-weil-pbc-complex-ses-connecting-formula",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-p1-duality",
+   "place": "proof, Step 2: identify the homology connecting map of the horseshoe complexes",
+   "via": [
+    "lem-sc-p1-right-derived-triangle-connecting"
+   ]
   },
-  "kind": "statement",
-  "title": "Formula for the connecting morphism of a split short exact sequence of complexes",
-  "statement": "Let 0 \\to K_1^\\bullet \\to K_2^\\bullet \\to K_3^\\bullet \\to 0 be a degreewise split short exact sequence of cochain complexes in an abelian category [def-sp-abelian], with degreewise sections s from K_3 to K_2 and retractions pi from K_2 to K_1. The connecting morphism from H n of K_3 to H n+1 of K_1 in the long exact homology sequence [lem-weil-pbc-complex-ses-homology-long-exact] sends a cocycle represented by z in K_3 in degree n to the cohomology class represented by pi in degree n+1 applied to the differential in K_2 of s in degree n applied to z.",
-  "source": {
-    "document": "literature/stacks-project/homology.tex",
-    "place": "Tag 011J (lemma-ses-termwise-split-cochain), line 3520, with Tag 0117 for the induced long exact sequence"
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Formula for the connecting morphism of a split short exact sequence of complexes",
+ "statement": "Let 0 \\to K_1^\\bullet \\to K_2^\\bullet \\to K_3^\\bullet \\to 0 be a degreewise split short exact sequence of cochain complexes in an abelian category [def-sp-abelian], with degreewise sections s from K_3 to K_2 and retractions pi from K_2 to K_1. The connecting morphism from H n of K_3 to H n+1 of K_1 in the long exact homology sequence [lem-weil-pbc-complex-ses-homology-long-exact] sends a cocycle represented by z in K_3 in degree n to the cohomology class represented by pi in degree n+1 applied to the differential in K_2 of s in degree n applied to z.",
+ "source": {
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Tag 011J (lemma-ses-termwise-split-cochain), line 3520, with Tag 0117 for the induced long exact sequence"
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "lem-weil-pbc-complex-ses-homology-long-exact"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "connecting morphism in homology is induced by section differential projection",
+   "results": "CategoryTheory.ShortComplex.ShortExact.δ; CategoryTheory.ShortComplex.ShortExact.δ_eq'; HomologicalComplex.HomologySequence.snakeInput_v₂₃",
+   "date": "2026-10-11",
+   "verdict": "generalization: Mathlib has the abstract snake connecting morphism, not this element formula"
   },
-  "stmt_deps": [
-    "def-sp-abelian",
-    "lem-weil-pbc-complex-ses-homology-long-exact"
-  ],
-  "proof": [],
-  "proof_deps": [],
-  "proof_origin": null,
-  "mathlib_searches": [
-    {
-      "tool": "leanfinder",
-      "query": "connecting morphism in homology is induced by section differential projection",
-      "results": "CategoryTheory.ShortComplex.ShortExact.δ; CategoryTheory.ShortComplex.ShortExact.δ_eq'; HomologicalComplex.HomologySequence.snakeInput_v₂₃",
-      "date": "2026-10-11",
-      "verdict": "generalization: Mathlib has the abstract snake connecting morphism, not this element formula"
-    },
-    {
-      "tool": "loogle",
-      "query": "homology connecting morphism section differential projection",
-      "results": "no match",
-      "date": "2026-10-11",
-      "verdict": "no match"
-    },
-    {
-      "tool": "grep",
-      "query": "homology.*connecting|connecting.*homology in Mathlib/Algebra/Homology",
-      "results": "0 hits from msearch grep",
-      "date": "2026-10-11",
-      "verdict": "no match"
-    },
-    {
-      "tool": "leansearch",
-      "query": "snake lemma connecting map formula for short exact sequence of complexes",
-      "results": "service unavailable: Internal Server Error",
-      "date": "2026-10-11",
-      "verdict": "unavailable"
-    }
-  ],
-  "mathlib_match": {
-    "declaration": "CategoryTheory.ShortComplex.ShortExact.δ_eq",
-    "file": "Mathlib/Algebra/Homology/HomologySequence.lean",
-    "line": 334,
-    "how": "exact as the degreewise-split case, read with sed by L (21:49 UTC) after reviewer R-ccf2658 (H1 delivery 8c1d905b6): δ_eq says that for a cocycle x₃ in degree i, any lift x₂ with x₂ ≫ g = x₃ and any x₁ with x₁ ≫ f = x₂ ≫ d, the class [x₃] ≫ δ equals [x₁]; here hS.δ is the connecting morphism of the long exact sequence (the match of lem-weil-pbc-complex-ses-homology-long-exact, line 292). With the degreewise splitting take x₂ = s(z) and x₁ = π(d(s z)): g(d(s z)) = d(z) = 0 so d(s z) = f(π(d(s z))) because π f = 1 and f π + s g = 1, which is the lift condition; the formula δ[z] = [π d s z] follows."
+  {
+   "tool": "loogle",
+   "query": "homology connecting morphism section differential projection",
+   "results": "no match",
+   "date": "2026-10-11",
+   "verdict": "no match"
   },
-  "status": "mathlib",
-  "created": {
-    "item": "lem-sc-p1-right-derived-triangle-connecting",
-    "by": "worker",
-    "date": "2026-10-10"
+  {
+   "tool": "grep",
+   "query": "homology.*connecting|connecting.*homology in Mathlib/Algebra/Homology",
+   "results": "0 hits from msearch grep",
+   "date": "2026-10-11",
+   "verdict": "no match"
   },
-  "chapter": "sec-picard-framework",
-  "unit": "sk-thm-picard-duality",
-  "reviewed": {
-    "date": "2026-10-10",
-    "by": "L",
-    "reviewer": "R-ccf2658",
-    "group": "H1",
-    "result": "pass",
-    "note": "Mathlib leaf found by the packet reviewer; L read HomologySequence.lean:326-340 with sed; the H1 split (8c1d905b6, whose new node restated the item) is not merged because nothing remains to split."
+  {
+   "tool": "leansearch",
+   "query": "snake lemma connecting map formula for short exact sequence of complexes",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.ShortComplex.ShortExact.δ_eq",
+  "file": "Mathlib/Algebra/Homology/HomologySequence.lean",
+  "line": 334,
+  "how": "exact as the degreewise-split case, read with sed by L (21:49 UTC) after reviewer R-ccf2658 (H1 delivery 8c1d905b6): δ_eq says that for a cocycle x₃ in degree i, any lift x₂ with x₂ ≫ g = x₃ and any x₁ with x₁ ≫ f = x₂ ≫ d, the class [x₃] ≫ δ equals [x₁]; here hS.δ is the connecting morphism of the long exact sequence (the match of lem-weil-pbc-complex-ses-homology-long-exact, line 292). With the degreewise splitting take x₂ = s(z) and x₁ = π(d(s z)): g(d(s z)) = d(z) = 0 so d(s z) = f(π(d(s z))) because π f = 1 and f π + s g = 1, which is the lift condition; the formula δ[z] = [π d s z] follows."
+ },
+ "status": "mathlib",
+ "created": {
+  "item": "lem-sc-p1-right-derived-triangle-connecting",
+  "by": "worker",
+  "date": "2026-10-10"
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-ccf2658",
+  "group": "H1",
+  "result": "pass",
+  "note": "Mathlib leaf found by the packet reviewer; L read HomologySequence.lean:326-340 with sed; the H1 split (8c1d905b6, whose new node restated the item) is not merged because nothing remains to split."
+ },
+ "lead_notes": [
+  "2026-10-10 21:49 UTC L: matched to Mathlib (ShortComplex.ShortExact.δ_eq) on R-ccf2658's finding; H1 delivery returned as unneeded, not for a fault."
+ ],
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
   },
-  "lead_notes": [
-    "2026-10-10 21:49 UTC L: matched to Mathlib (ShortComplex.ShortExact.δ_eq) on R-ccf2658's finding; H1 delivery returned as unneeded, not for a fault."
-  ]
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

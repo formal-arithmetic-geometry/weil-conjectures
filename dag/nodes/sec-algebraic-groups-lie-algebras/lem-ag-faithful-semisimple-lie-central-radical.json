@@ -1,120 +1,122 @@
 {
-  "id": "lem-ag-faithful-semisimple-lie-central-radical",
-  "blueprint": {
-    "is": "lem-ag-faithful-semisimple-lie-central-radical",
-    "from": null,
-    "same_as": null
-  },
-  "kind": "statement",
-  "title": "A faithful semisimple Lie representation forces a central radical",
-  "statement": "Let $L$ be a finite-dimensional Lie algebra over\n$\\overline{\\mathbf Q}_\\ell$, and let $\\rho:L\\to\\operatorname{End}(V)$ be\na Lie representation on a finite-dimensional vector space $V$, i.e. a\nlinear map with $\\rho([x,y])=\\rho(x)\\rho(y)-\\rho(y)\\rho(x)$. Assume that\n$\\rho$ is faithful ($\\ker\\rho=0$) and semisimple: $V=\\bigoplus_iM_i$ is a\ndirect sum of nonzero $\\rho(L)$-stable subspaces $M_i$, each having no\n$\\rho(L)$-stable subspaces other than $0$ and $M_i$. Then, in the notation\nof [def-wf-lie-radical-centre], $L$ has central radical and\n\n$$\n\\operatorname{rad}L=Z(L),\\qquad L=Z(L)+[L,L],\n$$\n\nwhere the plus sign denotes a sum of subspaces.",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-algebraic-groups-lie-algebras/sk-p-lie/lem-ag-faithful-semisimple-lie-central-radical.md",
-    "place": "node lem-ag-faithful-semisimple-lie-central-radical, order 2474"
-  },
-  "stmt_deps": [
-    "def-wf-lie-radical-centre"
-  ],
-  "proof": [
-    {
-      "text": "Put $\\mathfrak r=\\operatorname{rad}L$, the sum of all solvable ideals\nof [def-wf-lie-radical-centre]. As $L$ is finite-dimensional, this is\na finite sum of solvable ideals, so it is a solvable ideal by\n[lem-wf-sum-of-solvable-ideals] and induction on the number of summands.\nWrite $xv$ for $\\rho(x)v$. Fix one\nsummand $M=M_i$. The solvable Lie algebra $\\mathfrak r$ acts on\n$M\\ne0$ through $\\rho$, so [lem-wf-solvable-common-eigenvector] gives\na linear form $\\lambda:\\mathfrak r\\to\\overline{\\mathbf Q}_\\ell$ for which\n\n$$\nM_\\lambda=\\{v\\in M:av=\\lambda(a)v\\text{ for all }a\\in\\mathfrak r\\}\n$$\n\nis nonzero.",
-      "uses": [
-        "def-wf-lie-radical-centre",
-        "lem-wf-sum-of-solvable-ideals",
-        "lem-wf-solvable-common-eigenvector"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "We show that $M_\\lambda$ is $\\rho(L)$-stable. Let $x\\in L$ and\n$0\\ne v\\in M_\\lambda$, and put $U_j=\\operatorname{span}\\{v,xv,\\ldots,\nx^{j-1}v\\}$ and $U=\\bigcup_jU_j$, a finite-dimensional $x$-stable\nsubspace of $M$. From\n\n$$\nax^jv=x\\,(ax^{j-1}v)+[a,x]x^{j-1}v\n$$\n\nand $[a,x]\\in\\mathfrak r$ (as $\\mathfrak r$ is an ideal), induction on\n$j$ shows that for every $a\\in\\mathfrak r$,\n\n$$\nax^jv\\equiv\\lambda(a)x^jv\\pmod{U_j}.\n$$",
-      "uses": [],
-      "elementary": null
-    },
-    {
-      "text": "Hence $U$ is $\\mathfrak r$-stable and each $a\\in\\mathfrak r$ acts on $U$\nby an upper-triangular matrix, in the ordered basis extracted from\n$v,xv,x^2v,\\ldots$, with constant diagonal entry $\\lambda(a)$. For\n$a\\in\\mathfrak r$, the element $[x,a]\\in\\mathfrak r$ acts on $U$ as the\ncommutator of the two endomorphisms $x|_U$ and $a|_U$, so\n\n$$\n0=\\operatorname{tr}_U\\bigl([x|_U,a|_U]\\bigr)=(\\dim U)\\,\\lambda([x,a]),\n$$\n\nand characteristic zero gives $\\lambda([x,a])=0$. Consequently\n\n$$\na(xv)=x(av)+[a,x]v=\\lambda(a)\\,xv+\\lambda([a,x])\\,v=\\lambda(a)\\,xv,\n$$\n\nso $xv\\in M_\\lambda$. Thus $M_\\lambda$ is a nonzero\n$\\rho(L)$-stable subspace of $M$, and the simplicity of $M$ gives\n$M_\\lambda=M$. Moreover the computation shows that every $[x,a]$ with\n$x\\in L$, $a\\in\\mathfrak r$ acts on $M$ by the scalar\n$\\lambda([x,a])=0$.",
-      "uses": [],
-      "elementary": null
-    },
-    {
-      "text": "Applying this to every summand $M_i$, the subspace $[L,\\mathfrak r]$ acts\nas zero on $V=\\bigoplus_iM_i$. Faithfulness of $\\rho$ gives\n$[L,\\mathfrak r]=0$, that is, $\\mathfrak r\\subseteq Z(L)$. Conversely,\n$Z(L)$ is an ideal with $[Z(L),Z(L)]=0$, so it is solvable and is\ncontained in the sum of all solvable ideals: $Z(L)\\subseteq\\mathfrak r$.\nHence $\\operatorname{rad}L=Z(L)$. The radical being central,\n[lem-ag-central-radical-quotient] gives $L=Z(L)+[L,L]$.",
-      "uses": [
-        "lem-ag-central-radical-quotient"
-      ],
-      "elementary": false
-    }
-  ],
-  "proof_deps": [
+ "id": "lem-ag-faithful-semisimple-lie-central-radical",
+ "blueprint": {
+  "is": "lem-ag-faithful-semisimple-lie-central-radical",
+  "from": null,
+  "same_as": null
+ },
+ "kind": "statement",
+ "title": "A faithful semisimple Lie representation forces a central radical",
+ "statement": "Let $L$ be a finite-dimensional Lie algebra over\n$\\overline{\\mathbf Q}_\\ell$, and let $\\rho:L\\to\\operatorname{End}(V)$ be\na Lie representation on a finite-dimensional vector space $V$, i.e. a\nlinear map with $\\rho([x,y])=\\rho(x)\\rho(y)-\\rho(y)\\rho(x)$. Assume that\n$\\rho$ is faithful ($\\ker\\rho=0$) and semisimple: $V=\\bigoplus_iM_i$ is a\ndirect sum of nonzero $\\rho(L)$-stable subspaces $M_i$, each having no\n$\\rho(L)$-stable subspaces other than $0$ and $M_i$. Then, in the notation\nof [def-wf-lie-radical-centre], $L$ has central radical and\n\n$$\n\\operatorname{rad}L=Z(L),\\qquad L=Z(L)+[L,L],\n$$\n\nwhere the plus sign denotes a sum of subspaces.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-algebraic-groups-lie-algebras/sk-p-lie/lem-ag-faithful-semisimple-lie-central-radical.md",
+  "place": "node lem-ag-faithful-semisimple-lie-central-radical, order 2474"
+ },
+ "stmt_deps": [
+  "def-wf-lie-radical-centre"
+ ],
+ "proof": [
+  {
+   "text": "Put $\\mathfrak r=\\operatorname{rad}L$, the sum of all solvable ideals\nof [def-wf-lie-radical-centre]. As $L$ is finite-dimensional, this is\na finite sum of solvable ideals, so it is a solvable ideal by\n[lem-wf-sum-of-solvable-ideals] and induction on the number of summands.\nWrite $xv$ for $\\rho(x)v$. Fix one\nsummand $M=M_i$. The solvable Lie algebra $\\mathfrak r$ acts on\n$M\\ne0$ through $\\rho$, so [lem-wf-solvable-common-eigenvector] gives\na linear form $\\lambda:\\mathfrak r\\to\\overline{\\mathbf Q}_\\ell$ for which\n\n$$\nM_\\lambda=\\{v\\in M:av=\\lambda(a)v\\text{ for all }a\\in\\mathfrak r\\}\n$$\n\nis nonzero.",
+   "uses": [
     "def-wf-lie-radical-centre",
     "lem-wf-sum-of-solvable-ideals",
-    "lem-wf-solvable-common-eigenvector",
+    "lem-wf-solvable-common-eigenvector"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "We show that $M_\\lambda$ is $\\rho(L)$-stable. Let $x\\in L$ and\n$0\\ne v\\in M_\\lambda$, and put $U_j=\\operatorname{span}\\{v,xv,\\ldots,\nx^{j-1}v\\}$ and $U=\\bigcup_jU_j$, a finite-dimensional $x$-stable\nsubspace of $M$. From\n\n$$\nax^jv=x\\,(ax^{j-1}v)+[a,x]x^{j-1}v\n$$\n\nand $[a,x]\\in\\mathfrak r$ (as $\\mathfrak r$ is an ideal), induction on\n$j$ shows that for every $a\\in\\mathfrak r$,\n\n$$\nax^jv\\equiv\\lambda(a)x^jv\\pmod{U_j}.\n$$",
+   "uses": [],
+   "elementary": null
+  },
+  {
+   "text": "Hence $U$ is $\\mathfrak r$-stable and each $a\\in\\mathfrak r$ acts on $U$\nby an upper-triangular matrix, in the ordered basis extracted from\n$v,xv,x^2v,\\ldots$, with constant diagonal entry $\\lambda(a)$. For\n$a\\in\\mathfrak r$, the element $[x,a]\\in\\mathfrak r$ acts on $U$ as the\ncommutator of the two endomorphisms $x|_U$ and $a|_U$, so\n\n$$\n0=\\operatorname{tr}_U\\bigl([x|_U,a|_U]\\bigr)=(\\dim U)\\,\\lambda([x,a]),\n$$\n\nand characteristic zero gives $\\lambda([x,a])=0$. Consequently\n\n$$\na(xv)=x(av)+[a,x]v=\\lambda(a)\\,xv+\\lambda([a,x])\\,v=\\lambda(a)\\,xv,\n$$\n\nso $xv\\in M_\\lambda$. Thus $M_\\lambda$ is a nonzero\n$\\rho(L)$-stable subspace of $M$, and the simplicity of $M$ gives\n$M_\\lambda=M$. Moreover the computation shows that every $[x,a]$ with\n$x\\in L$, $a\\in\\mathfrak r$ acts on $M$ by the scalar\n$\\lambda([x,a])=0$.",
+   "uses": [],
+   "elementary": null
+  },
+  {
+   "text": "Applying this to every summand $M_i$, the subspace $[L,\\mathfrak r]$ acts\nas zero on $V=\\bigoplus_iM_i$. Faithfulness of $\\rho$ gives\n$[L,\\mathfrak r]=0$, that is, $\\mathfrak r\\subseteq Z(L)$. Conversely,\n$Z(L)$ is an ideal with $[Z(L),Z(L)]=0$, so it is solvable and is\ncontained in the sum of all solvable ideals: $Z(L)\\subseteq\\mathfrak r$.\nHence $\\operatorname{rad}L=Z(L)$. The radical being central,\n[lem-ag-central-radical-quotient] gives $L=Z(L)+[L,L]$.",
+   "uses": [
     "lem-ag-central-radical-quotient"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/blueprint/master/blueprint/sec-algebraic-groups-lie-algebras/sk-p-lie/lem-ag-faithful-semisimple-lie-central-radical.md",
-    "place": "## Proof"
-  },
-  "mathlib_searches": [],
-  "mathlib_match": null,
-  "status": "imported",
-  "merged_into": null,
-  "import_flags": [],
-  "blueprint_kind": "lemma",
-  "blueprint_order": 2474,
-  "blueprint_uses": [
-    "def-wf-lie-radical-centre",
-    "lem-ag-central-radical-quotient",
-    "lem-wf-solvable-common-eigenvector",
-    "lem-wf-sum-of-solvable-ideals"
-  ],
-  "proof_split_by": "paragraphs",
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "closed",
-      "decls": [
-        {
-          "name": "LieAlgebra.hasCentralRadical_of_isFaithful",
-          "module": "WeilConjectures.Mathlib.Algebra.Lie.Semisimple.Lemmas",
-          "lines": [
-            97,
-            121
-          ],
-          "kind": "theorem",
-          "sorry": false
-        },
-        {
-          "name": "LieModule.toEnd_lie_eq_zero_of_mem_radical",
-          "module": "WeilConjectures.Mathlib.Algebra.Lie.Semisimple.Lemmas",
-          "lines": [
-            69,
-            91
-          ],
-          "kind": "theorem",
-          "sorry": false,
-          "partial": "part of `lem-ag-faithful-semisimple-lie-central-radical`"
-        }
-      ],
-      "missing": [],
-      "open": []
-    }
-  },
-  "chapter": "sec-algebraic-groups-lie-algebras",
-  "unit": "sk-p-lie",
-  "lean": {
-    "module": "WeilConjectures.Mathlib.Algebra.Lie.Semisimple.Lemmas",
-    "declaration": "LieAlgebra.hasCentralRadical_of_isFaithful",
-    "branch": "slopmaster2",
-    "line": 97,
-    "declarations": [
-      "LieAlgebra.hasCentralRadical_of_isFaithful",
-      "LieModule.toEnd_lie_eq_zero_of_mem_radical"
-    ],
-    "sorry_free": true,
-    "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state closed)"
+   ],
+   "elementary": false
   }
+ ],
+ "proof_deps": [
+  "def-wf-lie-radical-centre",
+  "lem-wf-sum-of-solvable-ideals",
+  "lem-wf-solvable-common-eigenvector",
+  "lem-ag-central-radical-quotient"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-algebraic-groups-lie-algebras/sk-p-lie/lem-ag-faithful-semisimple-lie-central-radical.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 2474,
+ "blueprint_uses": [
+  "def-wf-lie-radical-centre",
+  "lem-ag-central-radical-quotient",
+  "lem-wf-solvable-common-eigenvector",
+  "lem-wf-sum-of-solvable-ideals"
+ ],
+ "proof_split_by": "paragraphs",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "LieAlgebra.hasCentralRadical_of_isFaithful",
+    "LieModule.toEnd_lie_eq_zero_of_mem_radical"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "LieAlgebra.hasCentralRadical_of_isFaithful",
+     "module": "WeilConjectures.Mathlib.Algebra.Lie.Semisimple.Lemmas",
+     "lines": [
+      97,
+      121
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "LieModule.toEnd_lie_eq_zero_of_mem_radical",
+     "module": "WeilConjectures.Mathlib.Algebra.Lie.Semisimple.Lemmas",
+     "lines": [
+      69,
+      91
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
+ "chapter": "sec-algebraic-groups-lie-algebras",
+ "unit": "sk-p-lie",
+ "lean": {
+  "module": "WeilConjectures.Mathlib.Algebra.Lie.Semisimple.Lemmas",
+  "declaration": "LieAlgebra.hasCentralRadical_of_isFaithful",
+  "branch": "slopmaster2",
+  "line": 97,
+  "declarations": [
+   "LieAlgebra.hasCentralRadical_of_isFaithful",
+   "LieModule.toEnd_lie_eq_zero_of_mem_radical"
+  ],
+  "sorry_free": true,
+  "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state closed)"
+ }
 }

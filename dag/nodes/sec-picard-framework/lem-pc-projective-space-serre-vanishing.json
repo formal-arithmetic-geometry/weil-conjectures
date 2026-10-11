@@ -1,162 +1,166 @@
 {
-  "id": "lem-pc-projective-space-serre-vanishing",
-  "blueprint": {
-    "is": "lem-pc-projective-space-serre-vanishing",
-    "from": null,
-    "same_as": []
-  },
-  "kind": "statement",
-  "title": "Serre vanishing on projective space over a Noetherian ring",
-  "statement": "Let $A$ be Noetherian and $\\mathcal F$ a\ncoherent module on\n$P=\\hyperref[def-pc-projective-space-twist]{\\mathbf P^n_A}$.\nThere is $d_0\\ge0$ such that $H^q(P,\\mathcal F(d))=0$ for\nall $d\\ge d_0$ and all $q>0$.",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-serre-b/lem-pc-projective-space-serre-vanishing.md",
-    "place": "node lem-pc-projective-space-serre-vanishing, order 627"
-  },
-  "stmt_deps": [
-    "def-pc-projective-space-twist",
-    "pqf-def-coherent",
-    "def-sc-invertible-module"
-  ],
-  "proof": [
-    {
-      "text": "Proceed by descending induction on the cohomological degree q, simultaneously for all coherent modules. If q>n, the cohomology-bound node gives H^q(P, G)=0 for every quasi-coherent G, hence also after twisting. For q<=n, choose a short exact sequence 0 \\to K \\to direct sum_j O_P(-m_j) \\to F \\to 0 from the finite quotient-by-twists node. Since O_P(d) is invertible, tensoring this sequence with O_P(d) remains exact: locally the invertible module is free of rank one, so the tensor sequence is a copy of the original exact sequence. By the twist-tensor node, O_P(-m_j)\\otimes O_P(d)\\cong O_P(d-m_j), so the twisted middle term is direct sum_j O_P(d-m_j). The long exact cohomology sequence supplied by the cohomology-definition node then has consecutive terms direct sum_j H^q(P, O_P(d-m_j)) \\to H^q(P, F(d)) \\to H^{q+1}(P, K(d)).",
-      "uses": [
-        "lem-pc-projective-space-cohomology-bound",
-        "lem-pc-projective-space-twist-quotient",
-        "pqf-def-cohomology",
-        "def-pc-projective-space-twist",
-        "def-sc-invertible-module",
-        "lem-pc-twist-tensor"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-serre-b/lem-pc-projective-space-serre-vanishing.md",
-        "place": "Proof, first paragraph"
-      }
-    },
-    {
-      "text": "For q>0, the left term vanishes once d >= max_j m_j by the positive-degree twisting-cohomology clause, because each d-m_j is nonnegative. The right term vanishes for all sufficiently large d by the descending induction hypothesis applied to the coherent kernel K. Thus a bound for degree q is the maximum of 0, the finitely many m_j, and the induction bound for K in degree q+1. Taking the maximum over q=1,...,n gives one bound d_0; when n=0 the cohomology-bound node already gives the result.",
-      "uses": [
-        "lem-pc-projective-space-twist-cohomology",
-        "lem-pc-projective-space-cohomology-bound"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-serre-b/lem-pc-projective-space-serre-vanishing.md",
-        "place": "Proof, second paragraph"
-      }
-    }
-  ],
-  "proof_deps": [
+ "id": "lem-pc-projective-space-serre-vanishing",
+ "blueprint": {
+  "is": "lem-pc-projective-space-serre-vanishing",
+  "from": null,
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Serre vanishing on projective space over a Noetherian ring",
+ "statement": "Let $A$ be Noetherian and $\\mathcal F$ a\ncoherent module on\n$P=\\hyperref[def-pc-projective-space-twist]{\\mathbf P^n_A}$.\nThere is $d_0\\ge0$ such that $H^q(P,\\mathcal F(d))=0$ for\nall $d\\ge d_0$ and all $q>0$.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-serre-b/lem-pc-projective-space-serre-vanishing.md",
+  "place": "node lem-pc-projective-space-serre-vanishing, order 627"
+ },
+ "stmt_deps": [
+  "def-pc-projective-space-twist",
+  "pqf-def-coherent",
+  "def-sc-invertible-module"
+ ],
+ "proof": [
+  {
+   "text": "Proceed by descending induction on the cohomological degree q, simultaneously for all coherent modules. If q>n, the cohomology-bound node gives H^q(P, G)=0 for every quasi-coherent G, hence also after twisting. For q<=n, choose a short exact sequence 0 \\to K \\to direct sum_j O_P(-m_j) \\to F \\to 0 from the finite quotient-by-twists node. Since O_P(d) is invertible, tensoring this sequence with O_P(d) remains exact: locally the invertible module is free of rank one, so the tensor sequence is a copy of the original exact sequence. By the twist-tensor node, O_P(-m_j)\\otimes O_P(d)\\cong O_P(d-m_j), so the twisted middle term is direct sum_j O_P(d-m_j). The long exact cohomology sequence supplied by the cohomology-definition node then has consecutive terms direct sum_j H^q(P, O_P(d-m_j)) \\to H^q(P, F(d)) \\to H^{q+1}(P, K(d)).",
+   "uses": [
+    "lem-pc-projective-space-cohomology-bound",
+    "lem-pc-projective-space-twist-quotient",
+    "pqf-def-cohomology",
     "def-pc-projective-space-twist",
     "def-sc-invertible-module",
-    "lem-pc-projective-space-cohomology-bound",
-    "lem-pc-projective-space-twist-cohomology",
-    "lem-pc-projective-space-twist-quotient",
-    "lem-pc-twist-tensor",
-    "pqf-def-cohomology"
-  ],
-  "proof_origin": {
-    "by": "agent",
+    "lem-pc-twist-tensor"
+   ],
+   "elementary": false,
+   "source": {
     "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-serre-b/lem-pc-projective-space-serre-vanishing.md",
-    "place": "Proof"
+    "place": "Proof, first paragraph"
+   }
   },
-  "mathlib_searches": [],
-  "mathlib_match": null,
-  "status": "split",
-  "merged_into": null,
-  "import_flags": [],
-  "blueprint_kind": "lemma",
-  "blueprint_order": 627,
-  "blueprint_uses": [
-    "def-pc-projective-space-twist",
-    "lem-pc-projective-space-cohomology-bound",
+  {
+   "text": "For q>0, the left term vanishes once d >= max_j m_j by the positive-degree twisting-cohomology clause, because each d-m_j is nonnegative. The right term vanishes for all sufficiently large d by the descending induction hypothesis applied to the coherent kernel K. Thus a bound for degree q is the maximum of 0, the finitely many m_j, and the induction bound for K in degree q+1. Taking the maximum over q=1,...,n gives one bound d_0; when n=0 the cohomology-bound node already gives the result.",
+   "uses": [
     "lem-pc-projective-space-twist-cohomology",
-    "lem-pc-projective-space-twist-quotient",
-    "pqf-def-coherent",
-    "pqf-def-cohomology"
-  ],
-  "uses_not_cited": [
-    "pqf-def-coherent"
-  ],
-  "proof_split_by": "paragraphs",
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "rests_on_sorry",
-      "decls": [
-        {
-          "name": "AlgebraicGeometry.ProjectiveSpace.exists_subsingleton_H_tensor_twist",
-          "module": "WeilConjectures.AlgebraicGeometry.Cohomology.Serre",
-          "lines": [
-            320,
-            394
-          ],
-          "kind": "theorem",
-          "sorry": false
-        }
-      ],
-      "missing": [],
-      "open": [
-        {
-          "name": "AlgebraicGeometry.ProjectiveSpace.subsingleton_H_of_lt",
-          "module": "WeilConjectures.AlgebraicGeometry.Cohomology.Serre",
-          "lines": [
-            116,
-            127
-          ],
-          "kind": "theorem",
-          "nodes": [],
-          "below": false
-        }
-      ]
-    }
-  },
-  "chapter": "sec-picard-framework",
-  "unit": "sk-thm-picard-serre-b",
-  "split_report": {
-    "date": "2026-10-11",
-    "item": "lem-pc-projective-space-serre-vanishing",
-    "worker": "stage1",
-    "summary": "Checked the Noetherian-ring Serre-vanishing statement against the blueprint proof and the Lean source. No new nodes were needed: the two proof steps cite the existing cohomology bound, finite quotient by twists, cohomology long exact sequence, and twisting cohomology nodes; invertible tensor exactness is written out locally from the invertible-module definition. The field-valued Lean declaration has the same induction shape but is narrower than this item and is not an attachment.",
-    "blueprint": "Realizes the item proof paragraphs 1 and 2: descending induction, the finite twist quotient and long exact sequence, then vanishing of the two adjacent terms and a uniform maximum bound.",
-    "tool_uses": [
-      {
-        "node": "lem-pc-projective-space-cohomology-bound",
-        "why": "The induction base and q>n vanishing use the cohomological-dimension result supplied by the neighboring projective-space unit."
-      },
-      {
-        "node": "lem-pc-projective-space-twist-cohomology",
-        "why": "The vanishing of the twisting-sheaf term uses the explicit projective-space twist calculation supplied by the neighboring projective-space unit."
-      }
-    ]
-  },
-  "tool_uses": [
-    "lem-pc-twist-tensor",
-    "lem-pc-projective-space-cohomology-bound",
-    "lem-pc-projective-space-twist-cohomology"
-  ],
-  "reviewed": {
-    "date": "2026-10-10",
-    "by": "L",
-    "reviewer": "R-psv2218",
-    "group": "H1",
-    "result": "pass",
-    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-psv2218 (reviewer sub-agent of L); spot-checked: Descending induction checked: q>n base and n=0 from cohomology-bound; finite twist quotient with coherent kernel (m_j>=0, so d>=max m_j gives d-m_j>=0) and LES from pqf-def-cohomology; twist-cohomology (iii) positive-degree vanishing for d>=0 applies for n>=1; finite maximum bound OK; tensor exactness via local rank-one from invertible-module def. FIX more, RETURN less: C1 step 1 used O_P(-m_j) tensor O_P(d) = O_P(d-m_j) without citation (missed by the Second reading); cited existing lem-pc-twist-tensor in step 1 uses and proof_deps, declared as tool use (generic, unit sk-thm-picard-pn).; 1 file(s) fixed by the reviewer"
-  },
-  "lean": {
-    "module": "WeilConjectures.AlgebraicGeometry.Cohomology.Serre",
-    "declaration": "AlgebraicGeometry.ProjectiveSpace.exists_subsingleton_H_tensor_twist",
-    "branch": "slopmaster2",
-    "line": 320,
-    "declarations": [
-      "AlgebraicGeometry.ProjectiveSpace.exists_subsingleton_H_tensor_twist"
-    ],
-    "sorry_free": false,
-    "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state rests_on_sorry)"
+    "lem-pc-projective-space-cohomology-bound"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-serre-b/lem-pc-projective-space-serre-vanishing.md",
+    "place": "Proof, second paragraph"
+   }
   }
+ ],
+ "proof_deps": [
+  "def-pc-projective-space-twist",
+  "def-sc-invertible-module",
+  "lem-pc-projective-space-cohomology-bound",
+  "lem-pc-projective-space-twist-cohomology",
+  "lem-pc-projective-space-twist-quotient",
+  "lem-pc-twist-tensor",
+  "pqf-def-cohomology"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-serre-b/lem-pc-projective-space-serre-vanishing.md",
+  "place": "Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 627,
+ "blueprint_uses": [
+  "def-pc-projective-space-twist",
+  "lem-pc-projective-space-cohomology-bound",
+  "lem-pc-projective-space-twist-cohomology",
+  "lem-pc-projective-space-twist-quotient",
+  "pqf-def-coherent",
+  "pqf-def-cohomology"
+ ],
+ "uses_not_cited": [
+  "pqf-def-coherent"
+ ],
+ "proof_split_by": "paragraphs",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.ProjectiveSpace.exists_subsingleton_H_tensor_twist"
+   ]
+  },
+  "slopmaster2": {
+   "state": "rests_on_sorry",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.ProjectiveSpace.exists_subsingleton_H_tensor_twist",
+     "module": "WeilConjectures.AlgebraicGeometry.Cohomology.Serre",
+     "lines": [
+      320,
+      394
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": [
+    {
+     "name": "AlgebraicGeometry.ProjectiveSpace.subsingleton_H_of_lt",
+     "module": "WeilConjectures.AlgebraicGeometry.Cohomology.Serre",
+     "lines": [
+      116,
+      127
+     ],
+     "kind": "theorem",
+     "nodes": [
+      "lem-pc-projective-space-cohomology-bound"
+     ],
+     "below": true
+    }
+   ]
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-serre-b",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-projective-space-serre-vanishing",
+  "worker": "stage1",
+  "summary": "Checked the Noetherian-ring Serre-vanishing statement against the blueprint proof and the Lean source. No new nodes were needed: the two proof steps cite the existing cohomology bound, finite quotient by twists, cohomology long exact sequence, and twisting cohomology nodes; invertible tensor exactness is written out locally from the invertible-module definition. The field-valued Lean declaration has the same induction shape but is narrower than this item and is not an attachment.",
+  "blueprint": "Realizes the item proof paragraphs 1 and 2: descending induction, the finite twist quotient and long exact sequence, then vanishing of the two adjacent terms and a uniform maximum bound.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-projective-space-cohomology-bound",
+    "why": "The induction base and q>n vanishing use the cohomological-dimension result supplied by the neighboring projective-space unit."
+   },
+   {
+    "node": "lem-pc-projective-space-twist-cohomology",
+    "why": "The vanishing of the twisting-sheaf term uses the explicit projective-space twist calculation supplied by the neighboring projective-space unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-twist-tensor",
+  "lem-pc-projective-space-cohomology-bound",
+  "lem-pc-projective-space-twist-cohomology"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-psv2218",
+  "group": "H1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-psv2218 (reviewer sub-agent of L); spot-checked: Descending induction checked: q>n base and n=0 from cohomology-bound; finite twist quotient with coherent kernel (m_j>=0, so d>=max m_j gives d-m_j>=0) and LES from pqf-def-cohomology; twist-cohomology (iii) positive-degree vanishing for d>=0 applies for n>=1; finite maximum bound OK; tensor exactness via local rank-one from invertible-module def. FIX more, RETURN less: C1 step 1 used O_P(-m_j) tensor O_P(d) = O_P(d-m_j) without citation (missed by the Second reading); cited existing lem-pc-twist-tensor in step 1 uses and proof_deps, declared as tool use (generic, unit sk-thm-picard-pn).; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "WeilConjectures.AlgebraicGeometry.Cohomology.Serre",
+  "declaration": "AlgebraicGeometry.ProjectiveSpace.exists_subsingleton_H_tensor_twist",
+  "branch": "slopmaster2",
+  "line": 320,
+  "declarations": [
+   "AlgebraicGeometry.ProjectiveSpace.exists_subsingleton_H_tensor_twist"
+  ],
+  "sorry_free": false,
+  "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state rests_on_sorry)"
+ }
 }

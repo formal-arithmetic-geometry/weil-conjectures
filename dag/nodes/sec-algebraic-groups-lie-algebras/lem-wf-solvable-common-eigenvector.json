@@ -1,80 +1,82 @@
 {
-  "id": "lem-wf-solvable-common-eigenvector",
-  "blueprint": {
-    "is": "lem-wf-solvable-common-eigenvector",
-    "from": null,
-    "same_as": null
+ "id": "lem-wf-solvable-common-eigenvector",
+ "blueprint": {
+  "is": "lem-wf-solvable-common-eigenvector",
+  "from": null,
+  "same_as": null
+ },
+ "kind": "statement",
+ "title": "Common eigenvector for a solvable Lie algebra",
+ "statement": "Let a finite-dimensional solvable Lie algebra $\\mathfrak r$ over\n$\\Qlb$ act on a nonzero finite-dimensional vector space $M$.\nThen there are $0\\ne v\\in M$ and a linear form\n$\\lambda:\\mathfrak r\\to\\Qlb$ such that\n\n$$\nXv=\\lambda(X)v\\quad(X\\in\\mathfrak r),\n\\qquad \\lambda([\\mathfrak r,\\mathfrak r])=0.\n$$",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-algebraic-groups-lie-algebras/sk-p-lie/lem-wf-solvable-common-eigenvector.md",
+  "place": "node lem-wf-solvable-common-eigenvector, order 2473"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "Induct on $\\dim\\mathfrak r$. If $\\mathfrak r=0$, take any\nnonzero $v\\in M$ and the zero functional $\\lambda=0$. Otherwise\nchoose a codimension-one ideal\n$\\mathfrak a\\supseteq[\\mathfrak r,\\mathfrak r]$ and write\n$\\mathfrak r=\\mathfrak a\\oplus\\Qlb X$. By induction there are\n$0\\ne v\\in M$ and $\\lambda\\in\\mathfrak a^*$ with\n$Av=\\lambda(A)v$ for every $A\\in\\mathfrak a$. Let\n$U=\\operatorname{span}\\{X^jv:j\\ge0\\}$. From\n\n$$\nAX^j=X^jA+\\sum_{i=0}^{j-1}X^i[A,X]X^{j-1-i}\n$$\n\nand $[A,X]\\in\\mathfrak a$, induction on $j$ shows that $U$ is\n$\\mathfrak a$-stable and that, in the ordered spanning sequence\n$v,Xv,X^2v,\\ldots$, every $A\\in\\mathfrak a$ is upper triangular\nwith constant diagonal entry $\\lambda(A)$. The space $U$ is also\n$X$-stable. Therefore\n\n$$\n0=\\operatorname{tr}_U([X,A])=(\\dim U)\\lambda([X,A]),\n$$\n\nand characteristic zero gives $\\lambda([X,A])=0$.",
+   "uses": [],
+   "elementary": null
   },
-  "kind": "statement",
-  "title": "Common eigenvector for a solvable Lie algebra",
-  "statement": "Let a finite-dimensional solvable Lie algebra $\\mathfrak r$ over\n$\\Qlb$ act on a nonzero finite-dimensional vector space $M$.\nThen there are $0\\ne v\\in M$ and a linear form\n$\\lambda:\\mathfrak r\\to\\Qlb$ such that\n\n$$\nXv=\\lambda(X)v\\quad(X\\in\\mathfrak r),\n\\qquad \\lambda([\\mathfrak r,\\mathfrak r])=0.\n$$",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-algebraic-groups-lie-algebras/sk-p-lie/lem-wf-solvable-common-eigenvector.md",
-    "place": "node lem-wf-solvable-common-eigenvector, order 2473"
-  },
-  "stmt_deps": [],
-  "proof": [
-    {
-      "text": "Induct on $\\dim\\mathfrak r$. If $\\mathfrak r=0$, take any\nnonzero $v\\in M$ and the zero functional $\\lambda=0$. Otherwise\nchoose a codimension-one ideal\n$\\mathfrak a\\supseteq[\\mathfrak r,\\mathfrak r]$ and write\n$\\mathfrak r=\\mathfrak a\\oplus\\Qlb X$. By induction there are\n$0\\ne v\\in M$ and $\\lambda\\in\\mathfrak a^*$ with\n$Av=\\lambda(A)v$ for every $A\\in\\mathfrak a$. Let\n$U=\\operatorname{span}\\{X^jv:j\\ge0\\}$. From\n\n$$\nAX^j=X^jA+\\sum_{i=0}^{j-1}X^i[A,X]X^{j-1-i}\n$$\n\nand $[A,X]\\in\\mathfrak a$, induction on $j$ shows that $U$ is\n$\\mathfrak a$-stable and that, in the ordered spanning sequence\n$v,Xv,X^2v,\\ldots$, every $A\\in\\mathfrak a$ is upper triangular\nwith constant diagonal entry $\\lambda(A)$. The space $U$ is also\n$X$-stable. Therefore\n\n$$\n0=\\operatorname{tr}_U([X,A])=(\\dim U)\\lambda([X,A]),\n$$\n\nand characteristic zero gives $\\lambda([X,A])=0$.",
-      "uses": [],
-      "elementary": null
-    },
-    {
-      "text": "The simultaneous $\\lambda$-eigenspace\n$U_\\lambda=\\{u\\in U:Au=\\lambda(A)u\\ (A\\in\\mathfrak a)\\}$ contains\n$v$, and the last equality shows that it is $X$-stable. Since the\nground field is algebraically closed, $X|_{U_\\lambda}$ has an\neigenvector. Extending $\\lambda$ by its corresponding eigenvalue on\n$X$ gives the required common eigenvector; its vanishing on the\nderived algebra follows from\n\n$$\n[\\mathfrak r,\\mathfrak r]\n=[\\mathfrak a,\\mathfrak a]+[X,\\mathfrak a]:\n$$\n\nthe induction hypothesis kills the first summand and the trace\ncalculation above kills the second.",
-      "uses": [],
-      "elementary": null
-    }
-  ],
-  "proof_deps": [],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/blueprint/master/blueprint/sec-algebraic-groups-lie-algebras/sk-p-lie/lem-wf-solvable-common-eigenvector.md",
-    "place": "## Proof"
-  },
-  "mathlib_searches": [],
-  "mathlib_match": null,
-  "status": "imported",
-  "merged_into": null,
-  "import_flags": [],
-  "blueprint_kind": "lemma",
-  "blueprint_order": 2473,
-  "blueprint_uses": [],
-  "proof_split_by": "paragraphs",
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "closed",
-      "decls": [
-        {
-          "name": "LieModule.exists_ne_zero_forall_lie_eq_smul_of_isSolvable",
-          "module": "WeilConjectures.Mathlib.Algebra.Lie.LieTheorem",
-          "lines": [
-            37,
-            57
-          ],
-          "kind": "theorem",
-          "sorry": false
-        }
-      ],
-      "missing": [],
-      "open": []
-    }
-  },
-  "chapter": "sec-algebraic-groups-lie-algebras",
-  "unit": "sk-p-lie",
-  "lean": {
-    "module": "WeilConjectures.Mathlib.Algebra.Lie.LieTheorem",
-    "declaration": "LieModule.exists_ne_zero_forall_lie_eq_smul_of_isSolvable",
-    "branch": "slopmaster2",
-    "line": 37,
-    "declarations": [
-      "LieModule.exists_ne_zero_forall_lie_eq_smul_of_isSolvable"
-    ],
-    "sorry_free": true,
-    "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state closed)"
+  {
+   "text": "The simultaneous $\\lambda$-eigenspace\n$U_\\lambda=\\{u\\in U:Au=\\lambda(A)u\\ (A\\in\\mathfrak a)\\}$ contains\n$v$, and the last equality shows that it is $X$-stable. Since the\nground field is algebraically closed, $X|_{U_\\lambda}$ has an\neigenvector. Extending $\\lambda$ by its corresponding eigenvalue on\n$X$ gives the required common eigenvector; its vanishing on the\nderived algebra follows from\n\n$$\n[\\mathfrak r,\\mathfrak r]\n=[\\mathfrak a,\\mathfrak a]+[X,\\mathfrak a]:\n$$\n\nthe induction hypothesis kills the first summand and the trace\ncalculation above kills the second.",
+   "uses": [],
+   "elementary": null
   }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-algebraic-groups-lie-algebras/sk-p-lie/lem-wf-solvable-common-eigenvector.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 2473,
+ "blueprint_uses": [],
+ "proof_split_by": "paragraphs",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "LieModule.exists_ne_zero_forall_lie_eq_smul_of_isSolvable"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "LieModule.exists_ne_zero_forall_lie_eq_smul_of_isSolvable",
+     "module": "WeilConjectures.Mathlib.Algebra.Lie.LieTheorem",
+     "lines": [
+      37,
+      57
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
+ "chapter": "sec-algebraic-groups-lie-algebras",
+ "unit": "sk-p-lie",
+ "lean": {
+  "module": "WeilConjectures.Mathlib.Algebra.Lie.LieTheorem",
+  "declaration": "LieModule.exists_ne_zero_forall_lie_eq_smul_of_isSolvable",
+  "branch": "slopmaster2",
+  "line": 37,
+  "declarations": [
+   "LieModule.exists_ne_zero_forall_lie_eq_smul_of_isSolvable"
+  ],
+  "sorry_free": true,
+  "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state closed)"
+ }
 }

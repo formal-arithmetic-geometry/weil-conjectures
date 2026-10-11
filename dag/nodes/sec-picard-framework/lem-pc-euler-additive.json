@@ -1,114 +1,116 @@
 {
-  "id": "lem-pc-euler-additive",
-  "blueprint": {
-    "is": "lem-pc-euler-additive",
-    "from": null,
-    "same_as": null
-  },
-  "kind": "statement",
-  "title": "Additivity of the Euler characteristic",
-  "statement": "Let $k$ be a field, $X$ a proper scheme over $k$, and let\n\n$$\n0\\to\\mathcal{F}_1\\to\\mathcal{F}_2\\to\\mathcal{F}_3\\to0\n$$\n\nbe a short exact sequence of coherent $\\mathcal{O}_X$-modules. Then\n\n$$\n\\chi(X,\\mathcal{F}_2)=\\chi(X,\\mathcal{F}_1)+\\chi(X,\\mathcal{F}_3).\n$$\n\nMoreover, for a morphism $f:Y\\to X$ of proper $k$-schemes and a\ncoherent $\\mathcal{O}_Y$-module $\\mathcal{G}$:\n\n$$\n\\chi(Y,\\mathcal{G})=\\sum_{i\\ge0}(-1)^i\\chi(X,R^if_*\\mathcal{G}).\n$$",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-pc-euler-additive.md",
-    "place": "node lem-pc-euler-additive, order 739",
-    "external": [
-      {
-        "document": "Stacks Project",
-        "place": "Tag 08AA"
-      },
-      {
-        "document": "Stacks Project",
-        "place": "Tag 0BEK"
-      }
-    ]
-  },
-  "stmt_deps": [
-    "def-pc-derived-direct-image",
-    "def-pc-morphism-conventions"
-  ],
-  "proof": [
-    {
-      "text": "The long exact cohomology sequence of the short exact sequence is\n\n$$\n0\\to H^0(\\mathcal{F}_1)\\to H^0(\\mathcal{F}_2)\\to H^0(\\mathcal{F}_3)\\to H^1(\\mathcal{F}_1)\\to H^1(\\mathcal{F}_2)\n\\to H^1(\\mathcal{F}_3)\\to\\cdots,\n$$\n\nexact, terminates at both ends (finite support,\n[lem-pc-coherent-hi] via the properness of $f$, and finite\ndimensionality of the terms, [lem-pc-coherent-hi]), and the\nalternating sum of the dimensions in an exact sequence of finite\ndimensional vector spaces vanishes (rank–nullity, applied inductively\nto the decompositions $0\\to\\operatorname{im}\\to V\\to\\operatorname{im}'\\to0$). Summing the\nalternative signs over the long exact sequence gives\n\n$$\n0=\\sum_i(-1)^i\\bigl(\\dim H^i(\\mathcal{F}_1)-\\dim H^i(\\mathcal{F}_2)+\\dim H^i(\\mathcal{F}_3)\\bigr),\n$$\n\nwhich is exactly $\\chi(\\mathcal{F}_1)-\\chi(\\mathcal{F}_2)+\\chi(\\mathcal{F}_3)=0$; this is the\nfirst statement (Varieties, Lemma 33.33.2, Tag\n[08AA](https://stacks.math.columbia.edu/tag/08AA)).",
-      "uses": [
-        "lem-pc-coherent-hi"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "For the second statement, consider the Leray spectral sequence of $f$\n(Cohomology, Lemma 20.13.4)\n\n$$\nE_2^{p,q}=H^p(X,R^qf_*\\mathcal{G})\\Longrightarrow H^{p+q}(Y,\\mathcal{G}).\n$$",
-      "uses": [],
-      "elementary": null
-    },
-    {
-      "text": "All $R^qf_*\\mathcal{G}$ are coherent ([lem-pc-coherent-hi]) and only\nfinitely many are nonzero, so each $E_2^{p,q}$ is finite dimensional\nover $k$ and $E_2$ has finite support; the spectral sequence converges\nto finite dimensional $H^n(Y,\\mathcal{G})$ and the alternating sum over the\ntotal degree equals the alternating sum of the $E_2$-terms (each\n$E_r$-page's alternating total sum is invariant under the differentials\nof the spectral sequence, as the pages are finite dimensional and the\ndifferentials are the quotients with the same alternating total sum:\nthe standard invariance of the Euler characteristic in a spectral\nsequence; Varieties, Lemma 33.33.5, Tag\n[0BEK](https://stacks.math.columbia.edu/tag/0BEK)):\n\n$$\n\\chi(Y,\\mathcal{G})=\\sum_{p,q}(-1)^{p+q}\\dim_kE_2^{p,q}\n=\\sum_{q\\ge0}(-1)^q\\Bigl(\\sum_p(-1)^p\\dim_kH^p(X,R^qf_*\\mathcal{G})\\Bigr)\n=\\sum_{q\\ge0}(-1)^q\\chi(X,R^qf_*\\mathcal{G}),\n$$\n\nas claimed.",
-      "uses": [
-        "lem-pc-coherent-hi"
-      ],
-      "elementary": false
-    }
-  ],
-  "proof_deps": [
+ "id": "lem-pc-euler-additive",
+ "blueprint": {
+  "is": "lem-pc-euler-additive",
+  "from": null,
+  "same_as": null
+ },
+ "kind": "statement",
+ "title": "Additivity of the Euler characteristic",
+ "statement": "Let $k$ be a field, $X$ a proper scheme over $k$, and let\n\n$$\n0\\to\\mathcal{F}_1\\to\\mathcal{F}_2\\to\\mathcal{F}_3\\to0\n$$\n\nbe a short exact sequence of coherent $\\mathcal{O}_X$-modules. Then\n\n$$\n\\chi(X,\\mathcal{F}_2)=\\chi(X,\\mathcal{F}_1)+\\chi(X,\\mathcal{F}_3).\n$$\n\nMoreover, for a morphism $f:Y\\to X$ of proper $k$-schemes and a\ncoherent $\\mathcal{O}_Y$-module $\\mathcal{G}$:\n\n$$\n\\chi(Y,\\mathcal{G})=\\sum_{i\\ge0}(-1)^i\\chi(X,R^if_*\\mathcal{G}).\n$$",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-pc-euler-additive.md",
+  "place": "node lem-pc-euler-additive, order 739",
+  "external": [
+   {
+    "document": "Stacks Project",
+    "place": "Tag 08AA"
+   },
+   {
+    "document": "Stacks Project",
+    "place": "Tag 0BEK"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-pc-derived-direct-image",
+  "def-pc-morphism-conventions"
+ ],
+ "proof": [
+  {
+   "text": "The long exact cohomology sequence of the short exact sequence is\n\n$$\n0\\to H^0(\\mathcal{F}_1)\\to H^0(\\mathcal{F}_2)\\to H^0(\\mathcal{F}_3)\\to H^1(\\mathcal{F}_1)\\to H^1(\\mathcal{F}_2)\n\\to H^1(\\mathcal{F}_3)\\to\\cdots,\n$$\n\nexact, terminates at both ends (finite support,\n[lem-pc-coherent-hi] via the properness of $f$, and finite\ndimensionality of the terms, [lem-pc-coherent-hi]), and the\nalternating sum of the dimensions in an exact sequence of finite\ndimensional vector spaces vanishes (rank–nullity, applied inductively\nto the decompositions $0\\to\\operatorname{im}\\to V\\to\\operatorname{im}'\\to0$). Summing the\nalternative signs over the long exact sequence gives\n\n$$\n0=\\sum_i(-1)^i\\bigl(\\dim H^i(\\mathcal{F}_1)-\\dim H^i(\\mathcal{F}_2)+\\dim H^i(\\mathcal{F}_3)\\bigr),\n$$\n\nwhich is exactly $\\chi(\\mathcal{F}_1)-\\chi(\\mathcal{F}_2)+\\chi(\\mathcal{F}_3)=0$; this is the\nfirst statement (Varieties, Lemma 33.33.2, Tag\n[08AA](https://stacks.math.columbia.edu/tag/08AA)).",
+   "uses": [
     "lem-pc-coherent-hi"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-pc-euler-additive.md",
-    "place": "## Proof"
+   ],
+   "elementary": false
   },
-  "mathlib_searches": [],
-  "mathlib_match": null,
-  "status": "imported",
-  "merged_into": null,
-  "import_flags": [
-    "proof_cites_literature"
-  ],
-  "blueprint_kind": "lemma",
-  "blueprint_order": 739,
-  "blueprint_uses": [
-    "def-pc-derived-direct-image",
-    "def-pc-morphism-conventions",
+  {
+   "text": "For the second statement, consider the Leray spectral sequence of $f$\n(Cohomology, Lemma 20.13.4)\n\n$$\nE_2^{p,q}=H^p(X,R^qf_*\\mathcal{G})\\Longrightarrow H^{p+q}(Y,\\mathcal{G}).\n$$",
+   "uses": [],
+   "elementary": null
+  },
+  {
+   "text": "All $R^qf_*\\mathcal{G}$ are coherent ([lem-pc-coherent-hi]) and only\nfinitely many are nonzero, so each $E_2^{p,q}$ is finite dimensional\nover $k$ and $E_2$ has finite support; the spectral sequence converges\nto finite dimensional $H^n(Y,\\mathcal{G})$ and the alternating sum over the\ntotal degree equals the alternating sum of the $E_2$-terms (each\n$E_r$-page's alternating total sum is invariant under the differentials\nof the spectral sequence, as the pages are finite dimensional and the\ndifferentials are the quotients with the same alternating total sum:\nthe standard invariance of the Euler characteristic in a spectral\nsequence; Varieties, Lemma 33.33.5, Tag\n[0BEK](https://stacks.math.columbia.edu/tag/0BEK)):\n\n$$\n\\chi(Y,\\mathcal{G})=\\sum_{p,q}(-1)^{p+q}\\dim_kE_2^{p,q}\n=\\sum_{q\\ge0}(-1)^q\\Bigl(\\sum_p(-1)^p\\dim_kH^p(X,R^qf_*\\mathcal{G})\\Bigr)\n=\\sum_{q\\ge0}(-1)^q\\chi(X,R^qf_*\\mathcal{G}),\n$$\n\nas claimed.",
+   "uses": [
     "lem-pc-coherent-hi"
-  ],
-  "uses_not_cited": [
-    "def-pc-derived-direct-image",
-    "def-pc-morphism-conventions"
-  ],
-  "proof_split_by": "paragraphs",
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "closed",
-      "decls": [
-        {
-          "name": "AlgebraicGeometry.Scheme.Modules.eulerChar_eq_add_of_shortExact",
-          "module": "WeilConjectures.AlgebraicGeometry.Cohomology.LongExact",
-          "lines": [
-            151,
-            229
-          ],
-          "kind": "theorem",
-          "sorry": false
-        }
-      ],
-      "missing": [],
-      "open": []
-    }
-  },
-  "chapter": "sec-picard-framework",
-  "unit": "sk-thm-picard-rr",
-  "lean": {
-    "module": "WeilConjectures.AlgebraicGeometry.Cohomology.LongExact",
-    "declaration": "AlgebraicGeometry.Scheme.Modules.eulerChar_eq_add_of_shortExact",
-    "branch": "slopmaster2",
-    "line": 151,
-    "declarations": [
-      "AlgebraicGeometry.Scheme.Modules.eulerChar_eq_add_of_shortExact"
-    ],
-    "sorry_free": true,
-    "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state closed)"
+   ],
+   "elementary": false
   }
+ ],
+ "proof_deps": [
+  "lem-pc-coherent-hi"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-pc-euler-additive.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [
+  "proof_cites_literature"
+ ],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 739,
+ "blueprint_uses": [
+  "def-pc-derived-direct-image",
+  "def-pc-morphism-conventions",
+  "lem-pc-coherent-hi"
+ ],
+ "uses_not_cited": [
+  "def-pc-derived-direct-image",
+  "def-pc-morphism-conventions"
+ ],
+ "proof_split_by": "paragraphs",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.Scheme.Modules.eulerChar_eq_add_of_shortExact"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.Scheme.Modules.eulerChar_eq_add_of_shortExact",
+     "module": "WeilConjectures.AlgebraicGeometry.Cohomology.LongExact",
+     "lines": [
+      151,
+      229
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-rr",
+ "lean": {
+  "module": "WeilConjectures.AlgebraicGeometry.Cohomology.LongExact",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.eulerChar_eq_add_of_shortExact",
+  "branch": "slopmaster2",
+  "line": 151,
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.eulerChar_eq_add_of_shortExact"
+  ],
+  "sorry_free": true,
+  "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state closed)"
+ }
 }

@@ -1,145 +1,157 @@
 {
-  "id": "lem-sc-boundary-cech-compatibility",
-  "blueprint": {
-    "is": null,
-    "from": {
-      "node": "lem-sc-pic-proper-ntorsion",
-      "place": "Cohomology of Schemes Lemma 09MS square-zero proof: the boundary map is a derivation by Cohomology Lemma 0B8S; compatibility of the Cech representative with the connecting homomorphism",
-      "via": [
-        "lem-sc-ample-square-zero-thickening",
-        "lem-sc-boundary-derivation-square-zero",
-        "lem-sc-boundary-cech-local-lifts"
-      ]
-    },
-    "same_as": []
+ "id": "lem-sc-boundary-cech-compatibility",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-pic-proper-ntorsion",
+   "place": "Cohomology of Schemes Lemma 09MS square-zero proof: the boundary map is a derivation by Cohomology Lemma 0B8S; compatibility of the Cech representative with the connecting homomorphism",
+   "via": [
+    "lem-sc-ample-square-zero-thickening",
+    "lem-sc-boundary-derivation-square-zero",
+    "lem-sc-boundary-cech-local-lifts"
+   ]
   },
-  "kind": "statement",
-  "title": "Cech local-lift representative computes the connecting boundary",
-  "statement": "Let X be a scheme [def-pc-scheme], let 0 \\to A \\to B \\to C \\to 0 be a short exact sequence of sheaves of O_X-modules, let U = {U_i} be an open covering of X, let s in H^0(X,C), and choose lifts t_i in B(U_i) of s|_{U_i}. Then the differences t_{i_1}|_{U_{i_0} cap U_{i_1}} - t_{i_0}|_{U_{i_0} cap U_{i_1}} are sections of A and form a Cech 1-cocycle; under the canonical homomorphism c_A from the first Cech cohomology group of U with values in A to H^1(X,A), its class maps to the connecting class partial(s) in the long exact cohomology sequence.",
-  "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Cohomology, Lemma 0B8S (cohomology-lemma-cech-h1), local-lift description of the boundary; compatibility of the Cech-to-cohomology map with the connecting homomorphism"
-  },
-  "stmt_deps": [
-    "def-pc-scheme",
-    "pqf-def-cohomology",
-    "def-weil-pbc-site-cech-complex",
-    "lem-weil-pbc-scheme-modules-enough-injectives",
-    "lem-weil-pbc-right-derived-universal-delta-functor",
-    "lem-sc-boundary-cech-injective-middle"
-  ],
-  "proof": [
-    {
-      "text": "Choose a monomorphism A \\to I into an injective O_X-module by [lem-weil-pbc-scheme-modules-enough-injectives]. Injectivity extends this map across A \\to B to a morphism phi:B \\to I. With Q = coker(A \\to I), the map B \\to I induces psi:C \\to Q and (id_A, phi, psi) is a morphism from 0 \\to A \\to B \\to C \\to 0 to 0 \\to A \\to I \\to Q \\to 0. Naturality of the connecting maps in the universal delta-functor [lem-weil-pbc-right-derived-universal-delta-functor] gives partial_B(s) = partial_I(psi(s)).",
-      "uses": [
-        "lem-weil-pbc-scheme-modules-enough-injectives",
-        "lem-weil-pbc-right-derived-universal-delta-functor"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/derived.tex",
-        "place": "Lemma 015B (lemma-higher-derived-functors), naturality of the connecting morphisms; Cohomology of Schemes Lemma 09MS setup"
-      }
-    },
-    {
-      "text": "The sections phi(t_i) are local lifts of psi(s) in I. Since phi restricts to the chosen inclusion A \\to I, their pairwise differences are the image in I of t_{i_1}-t_{i_0}; hence the A-valued Cech cocycle for the original sequence and the one for the injective sequence are the same under A \\to I. This uses only restriction compatibility and subtraction of sections.",
-      "uses": [
-        "def-weil-pbc-site-cech-complex"
-      ],
-      "elementary": true,
-      "source": {
-        "document": "literature/stacks-project/cohomology.tex",
-        "place": "Cohomology, Lemma 0B8S (cohomology-lemma-boundary-derivation-over-cup-product), local-lift paragraph"
-      }
-    },
-    {
-      "text": "Apply the injective-middle comparison statement [lem-sc-boundary-cech-injective-middle] to 0 \\to A \\to I \\to Q \\to 0, q = psi(s), and the local lifts phi(t_i). It identifies c_A([t_{i_1}-t_{i_0}]) with partial_I(psi(s)). Step 1 identifies this class with partial_B(s), so c_A([t_{i_1}-t_{i_0}]) = partial_B(s), with the positive sign fixed by the differential convention in [def-weil-pbc-site-cech-complex].",
-      "uses": [
-        "lem-sc-boundary-cech-injective-middle",
-        "lem-weil-pbc-right-derived-universal-delta-functor",
-        "def-weil-pbc-site-cech-complex"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/cohomology.tex",
-        "place": "Cohomology, Lemma 01EQ (cohomology-lemma-cech-cohomology), proof via beta followed by alpha^{-1}; Lemma 0B8S (cohomology-lemma-boundary-derivation-over-cup-product), local-lift paragraph"
-      }
-    }
-  ],
-  "proof_deps": [
-    "def-weil-pbc-site-cech-complex",
-    "lem-weil-pbc-scheme-modules-enough-injectives",
-    "lem-weil-pbc-right-derived-universal-delta-functor",
-    "lem-sc-boundary-cech-injective-middle"
-  ],
-  "proof_origin": {
-    "by": "document",
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Lemma 0B8S (cohomology-lemma-boundary-derivation-over-cup-product), local-lift paragraph, with the injective reduction and comparison map from Lemmas 01EQ and 01EP"
-  },
-  "mathlib_searches": [
-    {
-      "tool": "leansearch",
-      "query": "Cech class local lift differences connecting homomorphism short exact sheaves modules",
-      "results": "service unavailable: Internal Server Error",
-      "date": "2026-10-11",
-      "verdict": "unavailable"
-    },
-    {
-      "tool": "loogle",
-      "query": "Cech connecting homomorphism sheaf cohomology",
-      "results": "none; loogle reported unknown identifier Cech",
-      "date": "2026-10-11",
-      "verdict": "no match"
-    },
-    {
-      "tool": "grep",
-      "query": "Cech.*connecting|connecting.*Cech",
-      "results": "no relevant Mathlib theorem",
-      "date": "2026-10-11",
-      "verdict": "no match"
-    }
-  ],
-  "mathlib_match": null,
-  "created": {
-    "item": "lem-sc-boundary-cech-local-lifts",
-    "by": "worker",
-    "date": "2026-10-10"
-  },
-  "chapter": "sec-curve-estimates",
-  "unit": "sk-thm-curveestimate",
-  "status": "split",
-  "split_report": {
-    "date": "2026-10-11",
-    "item": "lem-sc-boundary-cech-compatibility",
-    "worker": "stage1",
-    "summary": "Repaired the returned proof by reducing to an injective middle term using enough injectives and naturality of the universal derived delta-functor, then citing a new statement-only injective-middle Cech comparison node. Corrected the source tags to 0B8S, 01EQ, and 01EP and verified the positive sign from the Stacks differential convention.",
-    "blueprint": "Realizes the ancestor lem-sc-pic-proper-ntorsion proof clause invoking Cohomology Lemma 0B8S for compatibility of the Cech representative with the connecting homomorphism.",
-    "tool_uses": [
-      {
-        "node": "lem-weil-pbc-scheme-modules-enough-injectives",
-        "why": "The unit route requires an injective embedding of A to reduce the boundary calculation to an injective middle term."
-      },
-      {
-        "node": "lem-weil-pbc-right-derived-universal-delta-functor",
-        "why": "The unit route does not replace the general naturality theorem for connecting morphisms in right derived functors."
-      }
-    ],
-    "review": "The returned E5/C4 gap is repaired: no naturality claim is used to identify a connecting map; Step 1 explicitly invokes naturality of derived connecting morphisms, and Step 3 invokes the dedicated injective-middle statement. The Cech complex is not treated as a resolution of B. Step 1 uses exactly the enough-injectives and universal-delta statements quoted above; Step 2 is the sectionwise elementary comparison; Step 3 uses exactly the injective-middle statement and the same naturality statement. The actual cohomology.tex source was read at Lemma 01EQ (comparison construction), Lemma 01EP (injective Cech acyclicity), and Lemma 0B8S (local-lift formula). The sign is positive because 0B8S writes alpha_{i_0 i_1}=f_{i_0}-f_{i_1}, while the Cech differential is d^0(t)_{i_0 i_1}=t_{i_1}-t_{i_0}; the comparison map conventions identify the former with the boundary as written. No cyclic citation to lem-sc-boundary-cech-local-lifts remains."
-  },
-  "tool_uses": [
-    "lem-weil-pbc-scheme-modules-enough-injectives",
-    "lem-weil-pbc-right-derived-universal-delta-functor",
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Cech local-lift representative computes the connecting boundary",
+ "statement": "Let X be a scheme [def-pc-scheme], let 0 \\to A \\to B \\to C \\to 0 be a short exact sequence of sheaves of O_X-modules, let U = {U_i} be an open covering of X, let s in H^0(X,C), and choose lifts t_i in B(U_i) of s|_{U_i}. Then the differences t_{i_1}|_{U_{i_0} cap U_{i_1}} - t_{i_0}|_{U_{i_0} cap U_{i_1}} are sections of A and form a Cech 1-cocycle; under the canonical homomorphism c_A from the first Cech cohomology group of U with values in A to H^1(X,A), its class maps to the connecting class partial(s) in the long exact cohomology sequence.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Cohomology, Lemma 0B8S (cohomology-lemma-cech-h1), local-lift description of the boundary; compatibility of the Cech-to-cohomology map with the connecting homomorphism"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-cohomology",
+  "def-weil-pbc-site-cech-complex",
+  "lem-weil-pbc-scheme-modules-enough-injectives",
+  "lem-weil-pbc-right-derived-universal-delta-functor",
+  "lem-sc-boundary-cech-injective-middle"
+ ],
+ "proof": [
+  {
+   "text": "Choose a monomorphism A \\to I into an injective O_X-module by [lem-weil-pbc-scheme-modules-enough-injectives]. Injectivity extends this map across A \\to B to a morphism phi:B \\to I. With Q = coker(A \\to I), the map B \\to I induces psi:C \\to Q and (id_A, phi, psi) is a morphism from 0 \\to A \\to B \\to C \\to 0 to 0 \\to A \\to I \\to Q \\to 0. Naturality of the connecting maps in the universal delta-functor [lem-weil-pbc-right-derived-universal-delta-functor] gives partial_B(s) = partial_I(psi(s)).",
+   "uses": [
     "lem-weil-pbc-scheme-modules-enough-injectives",
     "lem-weil-pbc-right-derived-universal-delta-functor"
-  ],
-  "reviewed": {
-    "date": "2026-10-10",
-    "by": "L",
-    "reviewer": "R-bcc1727",
-    "group": "H1",
-    "result": "pass",
-    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-bcc1727 (reviewer sub-agent of L); spot-checked: Earlier return points: 1 (E5/C4/D3) repaired by the suggested route: Step 1 enough injectives + extension to phi:B->I + naturality clause of the universal delta-functor with (id,phi,psi) gives partial_B(s)=partial_I(psi(s)); Step 2 elementary, same cocycle; Step 3 new injective-middle node. 2 (sign): checked by hand: alpha=x_{i0}-x_{i1}=-d_cech(x) in C^1(U,I^0); adding D(x) in Tot (bidegree (0,0), sign +) leaves d_I(x)=q|_{U_i}=alpha-image of q, and partial_I(q)=[q] for a resolution starting I->J; so positive, statement true as written. 3 (tags): places now 0B8S/01EQ/01EP, verified against the packet text. 4 (review per step): done. No citation of lem-sc-boundary-cech-local-lifts (no cycle). New node lem-sc-boundary-cech-injective-middle: strictly smaller injective case of 01EQ+01EP, not a duplicate of the seven 01EQ/01EP nodes (none relates c to connecting maps), not Mathlib (searches recorded 2026-10-11), not elementary (needs the double-complex argument). tool_uses accepted: enough injectives and universal derived delta-functor are generic tools. FIX more, RETURN less: no repair needed."
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Lemma 015B (lemma-higher-derived-functors), naturality of the connecting morphisms; Cohomology of Schemes Lemma 09MS setup"
+   }
   },
-  "lead_note": "2026-10-10 L (R-bcc1727): Report section still lists a citations.json that is not in the delivery (harmless). Item and new node say 'canonical map c_A' without citing the node that defines the 01EQ comparison map (e.g. lem-sc-cech-h1-map-natural); the item's wording was accepted earlier, so left as is. SIGN (17:54 UTC, reviewer R-bim1752 while returning M1's lem-sc-boundary-cech-injective-middle): with the repository's horseshoe/snake connecting map (lem-weil-pbc-horseshoe-delta-functor), c_A sends the class of (x_i0 - x_i1) to -delta(q), not +delta(q); the + sign of Stacks 0B8S fails under these conventions. The statement of this node carries the same + sign; it holds up to sign and must be corrected (or the sign convention fixed in the definition of the connecting map) when the child is re-pushed. Stage-3 item; the citing nodes use the compatibility only up to sign. SIGN CORRECTED by L (18:26 UTC, E7): the cocycle is now t_{i_1} - t_{i_0} (as in the child lem-sc-boundary-cech-injective-middle after its re-push 254f59ca8, reviewer R-bim1824); with the repository's horseshoe connecting map this is the cocycle whose class maps to +partial(s). Steps 2 and 3 adjusted to the same cocycle; the mathematics of the steps is unchanged."
+  {
+   "text": "The sections phi(t_i) are local lifts of psi(s) in I. Since phi restricts to the chosen inclusion A \\to I, their pairwise differences are the image in I of t_{i_1}-t_{i_0}; hence the A-valued Cech cocycle for the original sequence and the one for the injective sequence are the same under A \\to I. This uses only restriction compatibility and subtraction of sections.",
+   "uses": [
+    "def-weil-pbc-site-cech-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Cohomology, Lemma 0B8S (cohomology-lemma-boundary-derivation-over-cup-product), local-lift paragraph"
+   }
+  },
+  {
+   "text": "Apply the injective-middle comparison statement [lem-sc-boundary-cech-injective-middle] to 0 \\to A \\to I \\to Q \\to 0, q = psi(s), and the local lifts phi(t_i). It identifies c_A([t_{i_1}-t_{i_0}]) with partial_I(psi(s)). Step 1 identifies this class with partial_B(s), so c_A([t_{i_1}-t_{i_0}]) = partial_B(s), with the positive sign fixed by the differential convention in [def-weil-pbc-site-cech-complex].",
+   "uses": [
+    "lem-sc-boundary-cech-injective-middle",
+    "lem-weil-pbc-right-derived-universal-delta-functor",
+    "def-weil-pbc-site-cech-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Cohomology, Lemma 01EQ (cohomology-lemma-cech-cohomology), proof via beta followed by alpha^{-1}; Lemma 0B8S (cohomology-lemma-boundary-derivation-over-cup-product), local-lift paragraph"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-site-cech-complex",
+  "lem-weil-pbc-scheme-modules-enough-injectives",
+  "lem-weil-pbc-right-derived-universal-delta-functor",
+  "lem-sc-boundary-cech-injective-middle"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Lemma 0B8S (cohomology-lemma-boundary-derivation-over-cup-product), local-lift paragraph, with the injective reduction and comparison map from Lemmas 01EQ and 01EP"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Cech class local lift differences connecting homomorphism short exact sheaves modules",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "Cech connecting homomorphism sheaf cohomology",
+   "results": "none; loogle reported unknown identifier Cech",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Cech.*connecting|connecting.*Cech",
+   "results": "no relevant Mathlib theorem",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "created": {
+  "item": "lem-sc-boundary-cech-local-lifts",
+  "by": "worker",
+  "date": "2026-10-10"
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-curveestimate",
+ "status": "split",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-boundary-cech-compatibility",
+  "worker": "stage1",
+  "summary": "Repaired the returned proof by reducing to an injective middle term using enough injectives and naturality of the universal derived delta-functor, then citing a new statement-only injective-middle Cech comparison node. Corrected the source tags to 0B8S, 01EQ, and 01EP and verified the positive sign from the Stacks differential convention.",
+  "blueprint": "Realizes the ancestor lem-sc-pic-proper-ntorsion proof clause invoking Cohomology Lemma 0B8S for compatibility of the Cech representative with the connecting homomorphism.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-scheme-modules-enough-injectives",
+    "why": "The unit route requires an injective embedding of A to reduce the boundary calculation to an injective middle term."
+   },
+   {
+    "node": "lem-weil-pbc-right-derived-universal-delta-functor",
+    "why": "The unit route does not replace the general naturality theorem for connecting morphisms in right derived functors."
+   }
+  ],
+  "review": "The returned E5/C4 gap is repaired: no naturality claim is used to identify a connecting map; Step 1 explicitly invokes naturality of derived connecting morphisms, and Step 3 invokes the dedicated injective-middle statement. The Cech complex is not treated as a resolution of B. Step 1 uses exactly the enough-injectives and universal-delta statements quoted above; Step 2 is the sectionwise elementary comparison; Step 3 uses exactly the injective-middle statement and the same naturality statement. The actual cohomology.tex source was read at Lemma 01EQ (comparison construction), Lemma 01EP (injective Cech acyclicity), and Lemma 0B8S (local-lift formula). The sign is positive because 0B8S writes alpha_{i_0 i_1}=f_{i_0}-f_{i_1}, while the Cech differential is d^0(t)_{i_0 i_1}=t_{i_1}-t_{i_0}; the comparison map conventions identify the former with the boundary as written. No cyclic citation to lem-sc-boundary-cech-local-lifts remains."
+ },
+ "tool_uses": [
+  "lem-weil-pbc-scheme-modules-enough-injectives",
+  "lem-weil-pbc-right-derived-universal-delta-functor",
+  "lem-weil-pbc-scheme-modules-enough-injectives",
+  "lem-weil-pbc-right-derived-universal-delta-functor"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-bcc1727",
+  "group": "H1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-bcc1727 (reviewer sub-agent of L); spot-checked: Earlier return points: 1 (E5/C4/D3) repaired by the suggested route: Step 1 enough injectives + extension to phi:B->I + naturality clause of the universal delta-functor with (id,phi,psi) gives partial_B(s)=partial_I(psi(s)); Step 2 elementary, same cocycle; Step 3 new injective-middle node. 2 (sign): checked by hand: alpha=x_{i0}-x_{i1}=-d_cech(x) in C^1(U,I^0); adding D(x) in Tot (bidegree (0,0), sign +) leaves d_I(x)=q|_{U_i}=alpha-image of q, and partial_I(q)=[q] for a resolution starting I->J; so positive, statement true as written. 3 (tags): places now 0B8S/01EQ/01EP, verified against the packet text. 4 (review per step): done. No citation of lem-sc-boundary-cech-local-lifts (no cycle). New node lem-sc-boundary-cech-injective-middle: strictly smaller injective case of 01EQ+01EP, not a duplicate of the seven 01EQ/01EP nodes (none relates c to connecting maps), not Mathlib (searches recorded 2026-10-11), not elementary (needs the double-complex argument). tool_uses accepted: enough injectives and universal derived delta-functor are generic tools. FIX more, RETURN less: no repair needed."
+ },
+ "lead_note": "2026-10-10 L (R-bcc1727): Report section still lists a citations.json that is not in the delivery (harmless). Item and new node say 'canonical map c_A' without citing the node that defines the 01EQ comparison map (e.g. lem-sc-cech-h1-map-natural); the item's wording was accepted earlier, so left as is. SIGN (17:54 UTC, reviewer R-bim1752 while returning M1's lem-sc-boundary-cech-injective-middle): with the repository's horseshoe/snake connecting map (lem-weil-pbc-horseshoe-delta-functor), c_A sends the class of (x_i0 - x_i1) to -delta(q), not +delta(q); the + sign of Stacks 0B8S fails under these conventions. The statement of this node carries the same + sign; it holds up to sign and must be corrected (or the sign convention fixed in the definition of the connecting map) when the child is re-pushed. Stage-3 item; the citing nodes use the compatibility only up to sign. SIGN CORRECTED by L (18:26 UTC, E7): the cocycle is now t_{i_1} - t_{i_0} (as in the child lem-sc-boundary-cech-injective-middle after its re-push 254f59ca8, reviewer R-bim1824); with the repository's horseshoe connecting map this is the cocycle whose class maps to +partial(s). Steps 2 and 3 adjusted to the same cocycle; the mathematics of the steps is unchanged.",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

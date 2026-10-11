@@ -1,167 +1,179 @@
 {
-  "id": "lem-sc-field-artin-schreier-sequence",
-  "blueprint": {
-    "is": null,
-    "from": {
-      "node": "lem-sc-function-field-cd-one",
-      "place": "Proof, step 3 (blueprint proof, fourth paragraph): in characteristic p the polynomial T^p-T-u gives the Artin-Schreier exact sequence on Spec E.",
-      "via": []
-    },
-    "same_as": []
+ "id": "lem-sc-field-artin-schreier-sequence",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-function-field-cd-one",
+   "place": "Proof, step 3 (blueprint proof, fourth paragraph): in characteristic p the polynomial T^p-T-u gives the Artin-Schreier exact sequence on Spec E.",
+   "via": []
   },
-  "kind": "statement",
-  "title": "Artin-Schreier exact sequence over a field",
-  "statement": "Let E be a field [def-pc-field-extension] of characteristic $p>0$. On the small etale site of $\\operatorname{Spec}E$, let $\\mathbf F_p$ be the constant sheaf with value $\\mathbf Z/p\\mathbf Z$ as in [def-weil-pbc-constant-sheaf], and let $\\mathbf G_a=(\\mathcal O_{\\operatorname{Spec}E})_{\\mathrm{et}}$ as in [def-sc-etale-qcoherent-module]. Define $\\iota: \\mathbf F_p\\to\\mathbf G_a$ by the canonical inclusion of constants and define $\\wp:\\mathbf G_a\\to\\mathbf G_a$ by $x\\mapsto x^p-x$. Then $0\\to\\mathbf F_p\\xrightarrow{\\iota}\\mathbf G_a\\xrightarrow{\\wp}\\mathbf G_a\\to0$ is short exact, with etale sheaves as in [def-weil-pbc-etale-sheaves].",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lem-sc-function-field-cd-one.md",
-    "place": "## Proof, fourth paragraph"
-  },
-  "stmt_deps": [
-    "def-pc-field-extension",
-    "def-weil-pbc-etale-sheaves",
-    "def-weil-pbc-constant-sheaf",
-    "def-sc-etale-qcoherent-module"
-  ],
-  "proof": [
-    {
-      "text": "For every etale E-scheme U, the ring of sections defining G_a has characteristic p, so x \\mapsto x^p-x is additive and functorial in U. The map iota is induced by the inclusion of the constant F_p into each such ring. Since c^p=c in F_p, wp composed with iota is zero. These are morphisms of abelian etale sheaves by the definitions of the structure and constant sheaves.",
-      "uses": [
-        "def-sc-etale-qcoherent-module",
-        "def-weil-pbc-constant-sheaf",
-        "def-weil-pbc-abelian-etale-sheaves"
-      ],
-      "elementary": true,
-      "source": {
-        "document": "literature/stacks-project/etale-cohomology.tex",
-        "place": "Tag 0A3J, section-artin-schreier, definition of the maps in the Artin-Schreier sequence"
-      }
-    },
-    {
-      "text": "To prove that wp is an epimorphism, use the locally-surjective criterion for epimorphisms of etale sheaves. For an object U and f in Gamma(U,O_U), cover U by affine opens Spec A_i. On Spec A_i form B_i=A_i[T]/(T^p-T-f_i). The derivative is -1, hence a unit, so Spec B_i \\to Spec A_i is etale by the standard-etale derivative lemma; it is finite type and every geometric fibre is nonempty, hence surjective. The maps Spec B_i \\to U form an etale covering, and the class y_i of T satisfies y_i^p-y_i=f_i. Thus wp is locally surjective and therefore epi.",
-      "uses": [
-        "lem-weil-pbc-abelian-sheaf-epi-locally-surjective",
-        "lem-weil-pbc-standard-etale-monic-derivative",
-        "lem-weil-pbc-surjective-nonempty-fibres",
-        "lem-weil-pbc-open-immersion-etale",
-        "lem-weil-pbc-etale-composition-cancellation",
-        "def-weil-pbc-etale-site"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/etale-cohomology.tex",
-        "place": "Tag 0A3J, section-artin-schreier; the covering construction follows Tag 03PL, proof of the Kummer sequence"
-      }
-    },
-    {
-      "text": "Ab of the etale site of Spec E is abelian [def-weil-pbc-abelian-etale-sheaves]; let k: K \\to G_a be the kernel of wp. By Step 1, wp iota = 0, so iota = k j for a unique j: F_p \\to K. Fix a geometric point t of Spec E. By exactness of geometric stalks, K_t \\to (G_a)_t is injective with image {x : x^p = x}, and by the constant-sheaf stalk lemma (F_p)_t = Z/p, so j_t is identified with the map Z/p \\to (G_a)_t, c \\mapsto c*1. This map is injective: (G_a)_t is the filtered colimit of the rings Gamma(V,O_V) over pointed etale neighbourhoods V of t, each nonzero because V is nonempty, so (G_a)_t is a nonzero F_p-algebra and Z/p, a field, injects. It is surjective onto {x : x^p = x}: if the germ x is represented by s in Gamma(V,O_V) with s^p = s (after shrinking V), then the elements e_c = 1 - (s-c)^{p-1}, c in F_p, are orthogonal idempotents with sum 1 and s e_c = c e_c (from T^p - T = prod_c (T-c) in F_p[T]), so V is the disjoint union of the open and closed subschemes V_c where e_c = 1 and s = c; the lift of t lies in one V_c, which is a pointed etale neighbourhood by the open-immersion lemma, and there the germ of s equals c. Hence j_t is an isomorphism for every t, so j is an isomorphism by the geometric-stalk conservativity lemma. Thus iota is a kernel of wp: iota is a monomorphism and Im(iota) = Ker(wp). With wp an epimorphism (Step 2) and wp iota = 0 (Step 1), the sequence is short exact by the definition of a short exact sequence.",
-      "uses": [
-        "def-weil-pbc-abelian-etale-sheaves",
-        "prop-weil-pbc-geometric-stalks-exact",
-        "def-weil-pbc-geometric-stalks",
-        "lem-weil-pbc-constant-sheaf-geometric-stalk",
-        "lem-weil-pbc-open-immersion-etale",
-        "lemma-weil-pbc-geometric-stalk-conservative",
-        "def-weil-pbc-exact-sequence"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/etale-cohomology.tex",
-        "place": "Tag 0A3J, section-artin-schreier: exactness checked on geometric stalks"
-      }
-    }
-  ],
-  "proof_deps": [
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Artin-Schreier exact sequence over a field",
+ "statement": "Let E be a field [def-pc-field-extension] of characteristic $p>0$. On the small etale site of $\\operatorname{Spec}E$, let $\\mathbf F_p$ be the constant sheaf with value $\\mathbf Z/p\\mathbf Z$ as in [def-weil-pbc-constant-sheaf], and let $\\mathbf G_a=(\\mathcal O_{\\operatorname{Spec}E})_{\\mathrm{et}}$ as in [def-sc-etale-qcoherent-module]. Define $\\iota: \\mathbf F_p\\to\\mathbf G_a$ by the canonical inclusion of constants and define $\\wp:\\mathbf G_a\\to\\mathbf G_a$ by $x\\mapsto x^p-x$. Then $0\\to\\mathbf F_p\\xrightarrow{\\iota}\\mathbf G_a\\xrightarrow{\\wp}\\mathbf G_a\\to0$ is short exact, with etale sheaves as in [def-weil-pbc-etale-sheaves].",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lem-sc-function-field-cd-one.md",
+  "place": "## Proof, fourth paragraph"
+ },
+ "stmt_deps": [
+  "def-pc-field-extension",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-constant-sheaf",
+  "def-sc-etale-qcoherent-module"
+ ],
+ "proof": [
+  {
+   "text": "For every etale E-scheme U, the ring of sections defining G_a has characteristic p, so x \\mapsto x^p-x is additive and functorial in U. The map iota is induced by the inclusion of the constant F_p into each such ring. Since c^p=c in F_p, wp composed with iota is zero. These are morphisms of abelian etale sheaves by the definitions of the structure and constant sheaves.",
+   "uses": [
     "def-sc-etale-qcoherent-module",
     "def-weil-pbc-constant-sheaf",
-    "def-weil-pbc-abelian-etale-sheaves",
+    "def-weil-pbc-abelian-etale-sheaves"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0A3J, section-artin-schreier, definition of the maps in the Artin-Schreier sequence"
+   }
+  },
+  {
+   "text": "To prove that wp is an epimorphism, use the locally-surjective criterion for epimorphisms of etale sheaves. For an object U and f in Gamma(U,O_U), cover U by affine opens Spec A_i. On Spec A_i form B_i=A_i[T]/(T^p-T-f_i). The derivative is -1, hence a unit, so Spec B_i \\to Spec A_i is etale by the standard-etale derivative lemma; it is finite type and every geometric fibre is nonempty, hence surjective. The maps Spec B_i \\to U form an etale covering, and the class y_i of T satisfies y_i^p-y_i=f_i. Thus wp is locally surjective and therefore epi.",
+   "uses": [
     "lem-weil-pbc-abelian-sheaf-epi-locally-surjective",
     "lem-weil-pbc-standard-etale-monic-derivative",
     "lem-weil-pbc-surjective-nonempty-fibres",
     "lem-weil-pbc-open-immersion-etale",
     "lem-weil-pbc-etale-composition-cancellation",
-    "def-weil-pbc-etale-site",
+    "def-weil-pbc-etale-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0A3J, section-artin-schreier; the covering construction follows Tag 03PL, proof of the Kummer sequence"
+   }
+  },
+  {
+   "text": "Ab of the etale site of Spec E is abelian [def-weil-pbc-abelian-etale-sheaves]; let k: K \\to G_a be the kernel of wp. By Step 1, wp iota = 0, so iota = k j for a unique j: F_p \\to K. Fix a geometric point t of Spec E. By exactness of geometric stalks, K_t \\to (G_a)_t is injective with image {x : x^p = x}, and by the constant-sheaf stalk lemma (F_p)_t = Z/p, so j_t is identified with the map Z/p \\to (G_a)_t, c \\mapsto c*1. This map is injective: (G_a)_t is the filtered colimit of the rings Gamma(V,O_V) over pointed etale neighbourhoods V of t, each nonzero because V is nonempty, so (G_a)_t is a nonzero F_p-algebra and Z/p, a field, injects. It is surjective onto {x : x^p = x}: if the germ x is represented by s in Gamma(V,O_V) with s^p = s (after shrinking V), then the elements e_c = 1 - (s-c)^{p-1}, c in F_p, are orthogonal idempotents with sum 1 and s e_c = c e_c (from T^p - T = prod_c (T-c) in F_p[T]), so V is the disjoint union of the open and closed subschemes V_c where e_c = 1 and s = c; the lift of t lies in one V_c, which is a pointed etale neighbourhood by the open-immersion lemma, and there the germ of s equals c. Hence j_t is an isomorphism for every t, so j is an isomorphism by the geometric-stalk conservativity lemma. Thus iota is a kernel of wp: iota is a monomorphism and Im(iota) = Ker(wp). With wp an epimorphism (Step 2) and wp iota = 0 (Step 1), the sequence is short exact by the definition of a short exact sequence.",
+   "uses": [
+    "def-weil-pbc-abelian-etale-sheaves",
     "prop-weil-pbc-geometric-stalks-exact",
     "def-weil-pbc-geometric-stalks",
     "lem-weil-pbc-constant-sheaf-geometric-stalk",
+    "lem-weil-pbc-open-immersion-etale",
     "lemma-weil-pbc-geometric-stalk-conservative",
     "def-weil-pbc-exact-sequence"
-  ],
-  "proof_origin": {
-    "by": "document",
-    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lem-sc-function-field-cd-one.md",
-    "place": "## Proof, fourth paragraph"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0A3J, section-artin-schreier: exactness checked on geometric stalks"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-etale-qcoherent-module",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "lem-weil-pbc-abelian-sheaf-epi-locally-surjective",
+  "lem-weil-pbc-standard-etale-monic-derivative",
+  "lem-weil-pbc-surjective-nonempty-fibres",
+  "lem-weil-pbc-open-immersion-etale",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "def-weil-pbc-etale-site",
+  "prop-weil-pbc-geometric-stalks-exact",
+  "def-weil-pbc-geometric-stalks",
+  "lem-weil-pbc-constant-sheaf-geometric-stalk",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "def-weil-pbc-exact-sequence"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lem-sc-function-field-cd-one.md",
+  "place": "## Proof, fourth paragraph"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Artin-Schreier short exact sequence on the etale site of a field",
+   "results": "HTTP 500 from LeanSearch; no result available",
+   "date": "2026-10-10",
+   "verdict": "no match"
   },
-  "mathlib_searches": [
-    {
-      "tool": "leansearch",
-      "query": "Artin-Schreier short exact sequence on the etale site of a field",
-      "results": "HTTP 500 from LeanSearch; no result available",
-      "date": "2026-10-10",
-      "verdict": "no match"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "Artin Schreier exact sequence x^p - x for a field in etale cohomology",
-      "results": "No relevant result; returned unrelated etale-locus declarations",
-      "date": "2026-10-10",
-      "verdict": "no match"
-    },
-    {
-      "tool": "loogle",
-      "query": "x ^ p - x",
-      "results": "No matching Mathlib declaration for etale sheaf exactness",
-      "date": "2026-10-10",
-      "verdict": "no match"
-    },
-    {
-      "tool": "grep",
-      "query": "rg -n -i 'Artin.?Schreier|x\\^p.?-.?x' /home/ubuntu/weil-src-slopmaster2/WeilConjectures and Mathlib sources",
-      "results": "Only curve-level lem-sc-as-sequence; no field-level declaration",
-      "date": "2026-10-10",
-      "verdict": "no match"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "created": {
-    "item": "lem-sc-function-field-cd-one",
-    "by": "worker",
-    "date": "2026-10-10"
+  {
+   "tool": "leanfinder",
+   "query": "Artin Schreier exact sequence x^p - x for a field in etale cohomology",
+   "results": "No relevant result; returned unrelated etale-locus declarations",
+   "date": "2026-10-10",
+   "verdict": "no match"
   },
-  "chapter": "sec-curve-estimates",
-  "unit": "sk-prop-h2",
-  "split_report": {
-    "date": "2026-10-11",
-    "item": "lem-sc-field-artin-schreier-sequence",
-    "worker": "stage1",
-    "summary": "Split the field-level Artin-Schreier exact sequence into map construction, local etale surjectivity of x^p-x, and the kernel calculation on geometric stalks. All supporting facts already existed in the DAG; no new nodes were needed.",
-    "blueprint": "Step 1 realizes the maps and zero composite implicit in the fourth blueprint paragraph; step 2 realizes the polynomial covering argument for local surjectivity; step 3 realizes the assertion that the field Artin-Schreier polynomial gives the exact sequence.",
-    "tool_uses": [
-      {
-        "node": "lem-weil-pbc-constant-sheaf-geometric-stalk",
-        "why": "The field-level kernel calculation needs the existing identification of a constant etale sheaf with its geometric stalk; no node in sk-prop-h2 supplies this generic sheaf tool."
-      },
-      {
-        "node": "lemma-weil-pbc-geometric-stalk-conservative",
-        "why": "Reviewer repair: generic etale-site criterion (iso on geometric stalks implies iso) replacing the topological-space stalk criteria cited in Step 3."
-      }
-    ]
+  {
+   "tool": "loogle",
+   "query": "x ^ p - x",
+   "results": "No matching Mathlib declaration for etale sheaf exactness",
+   "date": "2026-10-10",
+   "verdict": "no match"
   },
+  {
+   "tool": "grep",
+   "query": "rg -n -i 'Artin.?Schreier|x\\^p.?-.?x' /home/ubuntu/weil-src-slopmaster2/WeilConjectures and Mathlib sources",
+   "results": "Only curve-level lem-sc-as-sequence; no field-level declaration",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "item": "lem-sc-function-field-cd-one",
+  "by": "worker",
+  "date": "2026-10-10"
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-field-artin-schreier-sequence",
+  "worker": "stage1",
+  "summary": "Split the field-level Artin-Schreier exact sequence into map construction, local etale surjectivity of x^p-x, and the kernel calculation on geometric stalks. All supporting facts already existed in the DAG; no new nodes were needed.",
+  "blueprint": "Step 1 realizes the maps and zero composite implicit in the fourth blueprint paragraph; step 2 realizes the polynomial covering argument for local surjectivity; step 3 realizes the assertion that the field Artin-Schreier polynomial gives the exact sequence.",
   "tool_uses": [
-    "lem-weil-pbc-constant-sheaf-geometric-stalk",
-    "lemma-weil-pbc-geometric-stalk-conservative",
-    "lem-weil-pbc-constant-sheaf-geometric-stalk",
-    "lemma-weil-pbc-geometric-stalk-conservative"
-  ],
-  "reviewed": {
-    "date": "2026-10-10",
-    "by": "L",
-    "reviewer": "R-ass1750",
-    "group": "K1",
-    "result": "pass",
-    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ass1750 (reviewer sub-agent of L); spot-checked: Steps 1-2 checked (char p additivity, wp iota=0; T^p-T-f standard etale with Q'=-1, surjective via nonempty geometric fibres, covering by composition with open immersions, locally-surjective epi criterion). FIX more, RETURN less: (1) C4 Step 3 cited lem-sc-abelian-sheaf-{mono,exact,epi}-iff-stalk-* which are for sheaves on a topological space, not the etale site; replaced by kernel factorization j:F_p->Ker(wp), iso on geometric stalks, and lemma-weil-pbc-geometric-stalk-conservative (generic tool, declared). (2) C1 Step 3 asserted uncited that the geometric stalk of G_a is a separably closed field; replaced by an elementary germ argument (stalk nonzero F_p-algebra; idempotents e_c=1-(s-c)^{p-1} split a neighbourhood into opens where s=c, open-immersion lemma), dropping lem-sc-field-artin-schreier-kernel from Step 3; proof_deps recomputed.; 1 file(s) fixed by the reviewer"
-  },
-  "import_flags": [
-    "unreachable"
+   {
+    "node": "lem-weil-pbc-constant-sheaf-geometric-stalk",
+    "why": "The field-level kernel calculation needs the existing identification of a constant etale sheaf with its geometric stalk; no node in sk-prop-h2 supplies this generic sheaf tool."
+   },
+   {
+    "node": "lemma-weil-pbc-geometric-stalk-conservative",
+    "why": "Reviewer repair: generic etale-site criterion (iso on geometric stalks implies iso) replacing the topological-space stalk criteria cited in Step 3."
+   }
   ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-constant-sheaf-geometric-stalk",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "lem-weil-pbc-constant-sheaf-geometric-stalk",
+  "lemma-weil-pbc-geometric-stalk-conservative"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-ass1750",
+  "group": "K1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ass1750 (reviewer sub-agent of L); spot-checked: Steps 1-2 checked (char p additivity, wp iota=0; T^p-T-f standard etale with Q'=-1, surjective via nonempty geometric fibres, covering by composition with open immersions, locally-surjective epi criterion). FIX more, RETURN less: (1) C4 Step 3 cited lem-sc-abelian-sheaf-{mono,exact,epi}-iff-stalk-* which are for sheaves on a topological space, not the etale site; replaced by kernel factorization j:F_p->Ker(wp), iso on geometric stalks, and lemma-weil-pbc-geometric-stalk-conservative (generic tool, declared). (2) C1 Step 3 asserted uncited that the geometric stalk of G_a is a separably closed field; replaced by an elementary germ argument (stalk nonzero F_p-algebra; idempotents e_c=1-(s-c)^{p-1} split a neighbourhood into opens where s=c, open-immersion lemma), dropping lem-sc-field-artin-schreier-kernel from Step 3; proof_deps recomputed.; 1 file(s) fixed by the reviewer"
+ },
+ "import_flags": [
+  "unreachable"
+ ],
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

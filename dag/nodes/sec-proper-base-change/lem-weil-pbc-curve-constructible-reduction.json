@@ -1,258 +1,260 @@
 {
-  "id": "lem-weil-pbc-curve-constructible-reduction",
-  "blueprint": {
-    "is": "lem-weil-pbc-curve-constructible-reduction",
-    "from": null,
-    "same_as": null
-  },
-  "kind": "statement",
-  "title": "Reduction to constructible prime torsion",
-  "statement": "Let $k$ be an algebraically closed field, let $C$ be a scheme proper over $k$ [def-weil-proper-morphism] of dimension at most one, and let $F$ be a torsion abelian sheaf on $C_{\\Et}$ [def-weil-pbc-torsion-etale-sheaf], so that $(C,F)$ is a curve coefficient pair [def-weil-pbc-curve-setting] with $C$ proper. Let $i:C_{\\mathrm{red}}\\to C$ be the reduction of $C$ [def-weil-pbc-scheme-reduction], and fix an algebraically closed extension $k'/k$. For a curve coefficient pair $(D,G)$ over $k$ write $\\rho^q_{k'/k}(D,G):H^q(D_{\\Et},G)\\to H^q((D_{k'})_{\\Et},G_{k'})$ for the pullback map [def-weil-pbc-extension-pullback] along the projection $D_{k'}=D\\times_kk'\\to D$, i.e. the pullback map of [def-weil-pbc-cohomology-pullback] for that morphism.\n\nAssume: for every prime number $r$ and every constructible sheaf $G$ of $\\mathbf F_r$-modules on $(C_{\\mathrm{red}})_{\\Et}$ (constructible in the sense of [def-weil-pbc-etale-constructible-sheaf] with $\\Lambda=\\mathbf F_r$; such a $G$ is killed by $r$, hence torsion, and $(C_{\\mathrm{red}},G)$ is a curve coefficient pair with $C_{\\mathrm{red}}$ reduced [def-pc-reduced-scheme] and proper), the map $\\rho^q_{k'/k}(C_{\\mathrm{red}},G)$ is bijective for every $q\\ge0$.\n\nThen $\\rho^q_{k'/k}(C,F)$ is bijective for every $q\\ge0$. In particular, if the hypothesis holds for every algebraically closed extension $k'/k$, then assertion $\\mathcal C_7(C,F)$ [def-weil-pbc-C7] (the seventh of the eight curve assertions) holds.\n\nThe coefficient passage runs through filtered colimits of constructible sheaves, the primary decomposition of a constructible sheaf killed by an integer, and the exact sequences $0\\to G[r]\\to G\\to G/G[r]\\to0$.",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-p1/lem-weil-pbc-curve-constructible-reduction.md",
-    "place": "node lem-weil-pbc-curve-constructible-reduction, order 1153"
-  },
-  "stmt_deps": [
-    "def-weil-proper-morphism",
-    "def-weil-pbc-torsion-etale-sheaf",
-    "def-weil-pbc-curve-setting",
-    "def-weil-pbc-scheme-reduction",
-    "def-weil-pbc-extension-pullback",
-    "def-weil-pbc-cohomology-pullback",
-    "def-weil-pbc-etale-constructible-sheaf",
-    "def-pc-reduced-scheme",
-    "def-weil-pbc-C7"
-  ],
-  "proof": [
-    {
-      "text": "(Reduction to $C_{\\mathrm{red}}$.) Write $C_0=C_{\\mathrm{red}}$ and $F_0=i^{-1}F$ [def-weil-pbc-inverse-image]. By [lem-weil-pbc-reduction-universal-homeomorphism], $C_0$ is reduced and $i$ is a surjective closed immersion and a universal homeomorphism. $C_0$ is proper over $k$ (a closed immersion followed by a proper morphism [lem-weil-pbc-closed-immersion-proper]) and has the same underlying space as $C$, so $\\dim C_0\\le1$. $F_0$ is torsion: $i^{-1}$ is exact [prop-weil-pbc-inverse-image-exact], so $i^{-1}(F[n])=\\ker(n:F_0\\to F_0)=F_0[n]$, and $i^{-1}$ preserves colimits [lem-weil-pbc-inverse-image-preserves-colimits], so $i^{-1}(c_F)$ is the map $c_{F_0}:\\varinjlim_nF_0[n]\\to F_0$ of [def-weil-pbc-torsion-etale-sheaf], an isomorphism since $c_F$ is. Hence $(C_0,F_0)$ is a curve coefficient pair with $C_0$ proper and reduced.",
-      "uses": [
-        "lem-weil-pbc-reduction-universal-homeomorphism",
-        "lem-weil-pbc-closed-immersion-proper",
-        "prop-weil-pbc-inverse-image-exact",
-        "lem-weil-pbc-inverse-image-preserves-colimits",
-        "def-weil-pbc-torsion-etale-sheaf",
-        "def-weil-pbc-inverse-image"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/etale-cohomology.tex",
-        "place": "Theorem 03SC (theorem-vanishing-affine-curves), proof, first sentence: 'replace X by its reduction, which is permissible by Proposition 03SI'"
-      }
-    },
-    {
-      "text": "(The comparison square.) Let $\\pi:C_{k'}\\to C$ and $\\pi_0:(C_0)_{k'}\\to C_0$ be the projections and $i'=i\\times_kk':(C_0)_{k'}\\to C_{k'}$, so that $i\\circ\\pi_0=\\pi\\circ i'$. The morphism $i'$ is a universal homeomorphism: for a morphism $Y'\\to C_{k'}$, $(C_0)_{k'}\\times_{C_{k'}}Y'\\cong C_0\\times_CY'$ over $Y'$ [def-pc-fibre-product], and the projection of the latter to $Y'$ is a homeomorphism because $i$ is a universal homeomorphism [def-weil-universal-homeomorphism]. By [prop-weil-pbc-universal-homeomorphism-topos] (Stacks 03SI) the pullback maps $i^*:H^q(C,F)\\to H^q(C_0,F_0)$ and $i'^*:H^q(C_{k'},\\pi^{-1}F)\\to H^q((C_0)_{k'},i'^{-1}\\pi^{-1}F)$ are bijective. By the composition rule of [lem-weil-pbc-cohomology-pullback-functorial] (item 4), with the isomorphisms $c:\\pi_0^{-1}i^{-1}\\cong(i\\pi_0)^{-1}$ and $c':i'^{-1}\\pi^{-1}\\cong(\\pi i')^{-1}$ of [lem-weil-pbc-inverse-image-composition], both composites equal $(i\\pi_0)^*=(\\pi i')^*$:\n$$H^q(c_F)\\circ\\rho^q_{k'/k}(C_0,F_0)\\circ i^*=H^q(c'_F)\\circ i'^*\\circ\\rho^q_{k'/k}(C,F).$$\nHere $H^q(c_F)$ and $H^q(c'_F)$ are bijective, being $H^q$ of isomorphisms of sheaves (functoriality of $H^q$ [def-weil-pbc-etale-cohomology]). Hence $\\rho^q_{k'/k}(C,F)$ is bijective as soon as $\\rho^q_{k'/k}(C_0,F_0)$ is. From now on replace $(C,F)$ by $(C_0,F_0)$: $C$ is reduced, and it remains to show that $\\rho^q_{k'/k}(C,F)$ is bijective for every torsion $F$ on $C$ and every $q$.",
-      "uses": [
-        "def-pc-fibre-product",
-        "def-weil-universal-homeomorphism",
-        "prop-weil-pbc-universal-homeomorphism-topos",
-        "lem-weil-pbc-cohomology-pullback-functorial",
-        "lem-weil-pbc-inverse-image-composition",
-        "def-weil-pbc-extension-pullback",
-        "def-weil-pbc-etale-cohomology"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/etale-cohomology.tex",
-        "place": "Theorem 03SC (theorem-vanishing-affine-curves), proof, first sentence, with Proposition 03SI (proposition-topological-invariance); the square is written out by the agent"
-      }
-    },
-    {
-      "text": "(Two out of three.) Let $u:Y\\to X$ be a morphism of schemes and $0\\to G_1\\to G\\to G_2\\to0$ a short exact sequence of abelian sheaves on $X_{\\Et}$. If $u^*:H^q(X,G_j)\\to H^q(Y,u^{-1}G_j)$ is bijective for $j=1,2$ and every $q\\ge0$, then $u^*:H^q(X,G)\\to H^q(Y,u^{-1}G)$ is bijective for every $q\\ge0$. Indeed, by [lem-weil-pbc-pullback-cohomology-long-exact-ladder] the maps $u^*$ form a commutative diagram between the exact rows\n$$H^{q-1}(X,G_2)\\xrightarrow{\\delta}H^q(X,G_1)\\to H^q(X,G)\\to H^q(X,G_2)\\xrightarrow{\\delta}H^{q+1}(X,G_1)$$\nand the corresponding row on $Y$ (for $q=0$ the first group is replaced by $0$ on both rows), whose four outer vertical maps are bijective; the five lemma in abelian groups [lem-weil-pbc-five-lemma] gives the middle one. Applied to the split sequences $0\\to G_1\\to G_1\\oplus G_2\\to G_2\\to0$ and by induction on the number of summands, the same holds for finite direct sums. This is the part of Stacks Lemma 0A5C (lemma-ses-statements) concerning statement (7), proved there by the long exact sequence.",
-      "uses": [
-        "lem-weil-pbc-pullback-cohomology-long-exact-ladder",
-        "lem-weil-pbc-five-lemma"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/etale-cohomology.tex",
-        "place": "Lemma 0A5C (lemma-ses-statements), proof ('immediate from the definitions and the long exact sequence of cohomology'), for statement (7)"
-      }
-    },
-    {
-      "text": "(Filtered colimits.) Let $(G_a)_{a\\in A}$ be a filtered system of torsion abelian sheaves on $C_{\\Et}$ with colimit $G$ in $\\Ab(C_{\\Et})$. If $\\rho^q_{k'/k}(C,G_a)$ is bijective for every $a$ and $q$, so is $\\rho^q_{k'/k}(C,G)$. Indeed $\\pi^{-1}$ preserves colimits [lem-weil-pbc-inverse-image-preserves-colimits], so $\\pi^{-1}G=\\varinjlim_a\\pi^{-1}G_a$ with coprojections $\\pi^{-1}$ of those of $G$, and the $\\pi^{-1}G_a$ are torsion (as in step 1). $C$ and $C_{k'}$ are quasi-compact and quasi-separated curves (of finite type over a field), so by [lemma-weil-pbc-curve-filtered-cohomology] the maps $\\kappa:\\varinjlim_aH^q(C,G_a)\\to H^q(C,G)$ and $\\kappa':\\varinjlim_aH^q(C_{k'},\\pi^{-1}G_a)\\to H^q(C_{k'},\\pi^{-1}G)$ induced by $H^q$ of the coprojections are bijective. Naturality of $\\pi^*$ in the sheaf [lem-weil-pbc-cohomology-pullback-functorial] (item 3), applied to the coprojections $G_a\\to G$, gives $\\rho^q(C,G)\\circ\\kappa=\\kappa'\\circ\\varinjlim_a\\rho^q(C,G_a)$; a filtered colimit of bijections is bijective, so $\\rho^q(C,G)$ is bijective.",
-      "uses": [
-        "lem-weil-pbc-inverse-image-preserves-colimits",
-        "lemma-weil-pbc-curve-filtered-cohomology",
-        "lem-weil-pbc-cohomology-pullback-functorial"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/etale-cohomology.tex",
-        "place": "Theorem 03SC (theorem-vanishing-affine-curves), proof, first paragraph: 'Taking cohomology commutes with colimits, see Lemma 03Q5. Moreover, pullback via X_{k'} -> X commutes with colimits as a left adjoint'"
-      }
-    },
-    {
-      "text": "(Reduction to constructible sheaves killed by an integer.) $F$ is torsion, so $F=\\varinjlim_nF[n]$ over the positive integers ordered by divisibility, a filtered colimit [def-weil-pbc-torsion-etale-sheaf]; each $F[n]$ is killed by $n$, hence torsion. By step 4 it suffices to treat an abelian sheaf $H$ with $nH=0$. Such an $H$ is a sheaf of $\\mathbf Z/n$-modules, $\\mathbf Z/n$ a finite ring, on the scheme $C$ of finite type over $k$, so by [lem-kun-03sa] (Stacks 03SA(3)) $H=\\varinjlim_bH_b$ is a filtered colimit of constructible sheaves of $\\mathbf Z/n$-modules [def-weil-pbc-etale-constructible-sheaf]. Sheaves of $\\mathbf Z/n$-modules are the abelian sheaves killed by $n$, a full subcategory of $\\Ab(C_{\\Et})$ closed under colimits (multiplication by $n$ on a colimit is the colimit of the zero maps), so this is also a filtered colimit in $\\Ab(C_{\\Et})$, of torsion sheaves. By step 4 again it suffices to show that $\\rho^q_{k'/k}(C,G)$ is bijective for every $n\\ge1$ and every constructible sheaf $G$ of $\\mathbf Z/n$-modules. (Stacks applies 03SA(2), whose proof is exactly this passage $F=\\bigcup F[n]$ followed by 03SA(3); taking the two colimits one after the other avoids assembling one index category.)",
-      "uses": [
-        "def-weil-pbc-torsion-etale-sheaf",
-        "lem-kun-03sa",
-        "def-weil-pbc-etale-constructible-sheaf"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/etale-cohomology.tex",
-        "place": "Theorem 03SC (theorem-vanishing-affine-curves), proof, first paragraph, with Lemma 03SA (lemma-torsion-colimit-constructible), parts (2) and (3) and the proof of (2)"
-      }
-    },
-    {
-      "text": "(Primary decomposition.) Let $G$ be a constructible sheaf of $\\mathbf Z/n$-modules and $n=\\prod_{\\ell\\mid n}\\ell^{e_\\ell}$. By the Chinese remainder theorem there are $\\epsilon_\\ell\\in\\mathbf Z/n$ with $\\epsilon_\\ell\\equiv1\\bmod\\ell^{e_\\ell}$ and $\\epsilon_\\ell\\equiv0\\bmod\\ell'^{e_{\\ell'}}$ for $\\ell'\\ne\\ell$; they are orthogonal idempotents with sum $1$, so $G=\\bigoplus_\\ell\\epsilon_\\ell G$ and $\\epsilon_\\ell G=G[\\ell^{e_\\ell}]=\\ker(\\ell^{e_\\ell}:G\\to G)$. Each $G[\\ell^{e_\\ell}]$, the kernel of an endomorphism of a constructible $\\mathbf Z/n$-module sheaf, is constructible by [thm-constructible-serre] ($\\Lambda=\\mathbf Z/n$). A sheaf of $\\mathbf Z/n$-modules killed by a divisor $m$ of $n$ is a sheaf of $\\mathbf Z/m$-modules, and it is constructible as a $\\mathbf Z/m$-module sheaf iff it is as a $\\mathbf Z/n$-module sheaf: the strata are the same, and on a stratum a local isomorphism with a constant sheaf $\\underline M$ of $\\mathbf Z/n$-modules is one of $\\mathbf Z/m$-modules, $M$ being killed by $m$ [def-weil-pbc-etale-constructible-sheaf], [def-constructible-finite-locally-constant]. By step 3 (finite direct sums, with $u=\\pi$) it suffices to treat a constructible sheaf of $\\mathbf Z/\\ell^e$-modules, $\\ell$ prime, $e\\ge1$.",
-      "uses": [
-        "thm-constructible-serre",
-        "def-weil-pbc-etale-constructible-sheaf",
-        "def-constructible-finite-locally-constant"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/etale-cohomology.tex",
-        "place": "Theorem 03SC (theorem-vanishing-affine-curves), proof, second paragraph: 'Writing F = F_1 + ... + F_r where F_i is l_i-primary ... we may assume that l^n kills F'"
-      }
-    },
-    {
-      "text": "(Induction on the exponent.) Let $G$ be a constructible sheaf of $\\mathbf Z/\\ell^e$-modules; we show by induction on $e\\ge1$ that $\\rho^q_{k'/k}(C,G)$ is bijective for all $q$. For $e=1$, $G$ is a constructible sheaf of $\\mathbf F_\\ell$-modules on the reduced proper curve $C=C_{\\mathrm{red}}$ and this is the hypothesis. For $e\\ge2$ consider $0\\to G[\\ell]\\to G\\to G/G[\\ell]\\to0$, exact in $\\Ab(C_{\\Et})$ (kernels and cokernels of sheaves of $\\mathbf Z/\\ell^e$-modules are computed in abelian sheaves). $G[\\ell]=\\ker(\\ell:G\\to G)$ and $G/G[\\ell]=\\operatorname{coker}(G[\\ell]\\to G)$ are constructible sheaves of $\\mathbf Z/\\ell^e$-modules by [thm-constructible-serre] ($\\Lambda=\\mathbf Z/\\ell^e$). $G[\\ell]$ is killed by $\\ell$, and $G/G[\\ell]$ is killed by $\\ell^{e-1}$, since for a local section $s$ one has $\\ell\\cdot\\ell^{e-1}s=\\ell^es=0$, i.e. $\\ell^{e-1}s\\in G[\\ell]$. By the change of rings in step 6 they are constructible sheaves of $\\mathbf F_\\ell$-modules, resp. of $\\mathbf Z/\\ell^{e-1}$-modules, so $\\rho^q$ is bijective for both (hypothesis, resp. induction), and step 3 with $u=\\pi$ gives it for $G$.",
-      "uses": [
-        "thm-constructible-serre",
-        "def-weil-pbc-etale-constructible-sheaf"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/etale-cohomology.tex",
-        "place": "Theorem 03SC (theorem-vanishing-affine-curves), proof, second paragraph: 'consider the exact sequence 0 -> F[l] -> F -> F/F[l] -> 0. Thus we see that it suffices to assume that F is l-torsion'"
-      }
-    },
-    {
-      "text": "(Conclusion.) Steps 6 and 7 give the bijectivity of $\\rho^q_{k'/k}(C_{\\mathrm{red}},G)$ for every constructible sheaf of $\\mathbf Z/n$-modules $G$; steps 4 and 5 extend it to every torsion sheaf on $C_{\\mathrm{red}}$, in particular to $i^{-1}F$; step 2 transfers it to $\\rho^q_{k'/k}(C,F)$, for every $q\\ge0$. If this holds for every algebraically closed $k'/k$, it is assertion $\\mathcal C_7(C,F)$ by the definition [def-weil-pbc-C7].",
-      "uses": [
-        "def-weil-pbc-C7"
-      ],
-      "elementary": true,
-      "source": {
-        "document": "literature/stacks-project/etale-cohomology.tex",
-        "place": "Theorem 03SC (theorem-vanishing-affine-curves), proof, first two paragraphs"
-      }
-    }
-  ],
-  "proof_deps": [
+ "id": "lem-weil-pbc-curve-constructible-reduction",
+ "blueprint": {
+  "is": "lem-weil-pbc-curve-constructible-reduction",
+  "from": null,
+  "same_as": null
+ },
+ "kind": "statement",
+ "title": "Reduction to constructible prime torsion",
+ "statement": "Let $k$ be an algebraically closed field, let $C$ be a scheme proper over $k$ [def-weil-proper-morphism] of dimension at most one, and let $F$ be a torsion abelian sheaf on $C_{\\Et}$ [def-weil-pbc-torsion-etale-sheaf], so that $(C,F)$ is a curve coefficient pair [def-weil-pbc-curve-setting] with $C$ proper. Let $i:C_{\\mathrm{red}}\\to C$ be the reduction of $C$ [def-weil-pbc-scheme-reduction], and fix an algebraically closed extension $k'/k$. For a curve coefficient pair $(D,G)$ over $k$ write $\\rho^q_{k'/k}(D,G):H^q(D_{\\Et},G)\\to H^q((D_{k'})_{\\Et},G_{k'})$ for the pullback map [def-weil-pbc-extension-pullback] along the projection $D_{k'}=D\\times_kk'\\to D$, i.e. the pullback map of [def-weil-pbc-cohomology-pullback] for that morphism.\n\nAssume: for every prime number $r$ and every constructible sheaf $G$ of $\\mathbf F_r$-modules on $(C_{\\mathrm{red}})_{\\Et}$ (constructible in the sense of [def-weil-pbc-etale-constructible-sheaf] with $\\Lambda=\\mathbf F_r$; such a $G$ is killed by $r$, hence torsion, and $(C_{\\mathrm{red}},G)$ is a curve coefficient pair with $C_{\\mathrm{red}}$ reduced [def-pc-reduced-scheme] and proper), the map $\\rho^q_{k'/k}(C_{\\mathrm{red}},G)$ is bijective for every $q\\ge0$.\n\nThen $\\rho^q_{k'/k}(C,F)$ is bijective for every $q\\ge0$. In particular, if the hypothesis holds for every algebraically closed extension $k'/k$, then assertion $\\mathcal C_7(C,F)$ [def-weil-pbc-C7] (the seventh of the eight curve assertions) holds.\n\nThe coefficient passage runs through filtered colimits of constructible sheaves, the primary decomposition of a constructible sheaf killed by an integer, and the exact sequences $0\\to G[r]\\to G\\to G/G[r]\\to0$.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-p1/lem-weil-pbc-curve-constructible-reduction.md",
+  "place": "node lem-weil-pbc-curve-constructible-reduction, order 1153"
+ },
+ "stmt_deps": [
+  "def-weil-proper-morphism",
+  "def-weil-pbc-torsion-etale-sheaf",
+  "def-weil-pbc-curve-setting",
+  "def-weil-pbc-scheme-reduction",
+  "def-weil-pbc-extension-pullback",
+  "def-weil-pbc-cohomology-pullback",
+  "def-weil-pbc-etale-constructible-sheaf",
+  "def-pc-reduced-scheme",
+  "def-weil-pbc-C7"
+ ],
+ "proof": [
+  {
+   "text": "(Reduction to $C_{\\mathrm{red}}$.) Write $C_0=C_{\\mathrm{red}}$ and $F_0=i^{-1}F$ [def-weil-pbc-inverse-image]. By [lem-weil-pbc-reduction-universal-homeomorphism], $C_0$ is reduced and $i$ is a surjective closed immersion and a universal homeomorphism. $C_0$ is proper over $k$ (a closed immersion followed by a proper morphism [lem-weil-pbc-closed-immersion-proper]) and has the same underlying space as $C$, so $\\dim C_0\\le1$. $F_0$ is torsion: $i^{-1}$ is exact [prop-weil-pbc-inverse-image-exact], so $i^{-1}(F[n])=\\ker(n:F_0\\to F_0)=F_0[n]$, and $i^{-1}$ preserves colimits [lem-weil-pbc-inverse-image-preserves-colimits], so $i^{-1}(c_F)$ is the map $c_{F_0}:\\varinjlim_nF_0[n]\\to F_0$ of [def-weil-pbc-torsion-etale-sheaf], an isomorphism since $c_F$ is. Hence $(C_0,F_0)$ is a curve coefficient pair with $C_0$ proper and reduced.",
+   "uses": [
     "lem-weil-pbc-reduction-universal-homeomorphism",
     "lem-weil-pbc-closed-immersion-proper",
     "prop-weil-pbc-inverse-image-exact",
     "lem-weil-pbc-inverse-image-preserves-colimits",
     "def-weil-pbc-torsion-etale-sheaf",
-    "def-weil-pbc-inverse-image",
+    "def-weil-pbc-inverse-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Theorem 03SC (theorem-vanishing-affine-curves), proof, first sentence: 'replace X by its reduction, which is permissible by Proposition 03SI'"
+   }
+  },
+  {
+   "text": "(The comparison square.) Let $\\pi:C_{k'}\\to C$ and $\\pi_0:(C_0)_{k'}\\to C_0$ be the projections and $i'=i\\times_kk':(C_0)_{k'}\\to C_{k'}$, so that $i\\circ\\pi_0=\\pi\\circ i'$. The morphism $i'$ is a universal homeomorphism: for a morphism $Y'\\to C_{k'}$, $(C_0)_{k'}\\times_{C_{k'}}Y'\\cong C_0\\times_CY'$ over $Y'$ [def-pc-fibre-product], and the projection of the latter to $Y'$ is a homeomorphism because $i$ is a universal homeomorphism [def-weil-universal-homeomorphism]. By [prop-weil-pbc-universal-homeomorphism-topos] (Stacks 03SI) the pullback maps $i^*:H^q(C,F)\\to H^q(C_0,F_0)$ and $i'^*:H^q(C_{k'},\\pi^{-1}F)\\to H^q((C_0)_{k'},i'^{-1}\\pi^{-1}F)$ are bijective. By the composition rule of [lem-weil-pbc-cohomology-pullback-functorial] (item 4), with the isomorphisms $c:\\pi_0^{-1}i^{-1}\\cong(i\\pi_0)^{-1}$ and $c':i'^{-1}\\pi^{-1}\\cong(\\pi i')^{-1}$ of [lem-weil-pbc-inverse-image-composition], both composites equal $(i\\pi_0)^*=(\\pi i')^*$:\n$$H^q(c_F)\\circ\\rho^q_{k'/k}(C_0,F_0)\\circ i^*=H^q(c'_F)\\circ i'^*\\circ\\rho^q_{k'/k}(C,F).$$\nHere $H^q(c_F)$ and $H^q(c'_F)$ are bijective, being $H^q$ of isomorphisms of sheaves (functoriality of $H^q$ [def-weil-pbc-etale-cohomology]). Hence $\\rho^q_{k'/k}(C,F)$ is bijective as soon as $\\rho^q_{k'/k}(C_0,F_0)$ is. From now on replace $(C,F)$ by $(C_0,F_0)$: $C$ is reduced, and it remains to show that $\\rho^q_{k'/k}(C,F)$ is bijective for every torsion $F$ on $C$ and every $q$.",
+   "uses": [
     "def-pc-fibre-product",
     "def-weil-universal-homeomorphism",
     "prop-weil-pbc-universal-homeomorphism-topos",
     "lem-weil-pbc-cohomology-pullback-functorial",
     "lem-weil-pbc-inverse-image-composition",
     "def-weil-pbc-extension-pullback",
-    "def-weil-pbc-etale-cohomology",
-    "lem-weil-pbc-pullback-cohomology-long-exact-ladder",
-    "lem-weil-pbc-five-lemma",
-    "lemma-weil-pbc-curve-filtered-cohomology",
-    "lem-kun-03sa",
-    "def-weil-pbc-etale-constructible-sheaf",
-    "thm-constructible-serre",
-    "def-constructible-finite-locally-constant",
-    "def-weil-pbc-C7"
-  ],
-  "proof_origin": {
-    "by": "document",
+    "def-weil-pbc-etale-cohomology"
+   ],
+   "elementary": false,
+   "source": {
     "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "proof of Theorem 03SC (theorem-vanishing-affine-curves), first two paragraphs, with Lemma 0A5C (lemma-ses-statements), Lemma 03SA (lemma-torsion-colimit-constructible), Lemma 03Q5 (lemma-colimit) and Proposition 03SI (proposition-topological-invariance)"
+    "place": "Theorem 03SC (theorem-vanishing-affine-curves), proof, first sentence, with Proposition 03SI (proposition-topological-invariance); the square is written out by the agent"
+   }
   },
-  "mathlib_searches": [
-    {
-      "tool": "leansearch",
-      "query": "etale cohomology of a curve invariant under extension of algebraically closed base field, reduction to constructible coefficients",
-      "results": "Algebra.Etale.baseChange (Mathlib.RingTheory.Etale.Basic), IsEtale.instIsStableUnderBaseChangeScheme, IsEtale (Mathlib.AlgebraicGeometry.Morphisms.Etale), RingHom.Etale.isStableUnderBaseChange, Scheme.etaleTopology (Mathlib.AlgebraicGeometry.Sites.Etale), Scheme.Etale",
-      "date": "2026-10-09",
-      "verdict": "no match"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "etale cohomology of a proper curve does not change under extension of algebraically closed field for torsion sheaves",
-      "results": "Algebra.FormallyEtale.subsingleton_h1Cotangent, Algebra.etaleLocus_eq_compl_support, Algebra.FormallyEtale.iff_exists_algEquiv_prod, FormallyEtale.of_restrictScalars, Algebra.Etale.iff_exists_algEquiv_prod (Mathlib.RingTheory.Etale.*): etale algebras only",
-      "date": "2026-10-09",
-      "verdict": "no match"
-    },
-    {
-      "tool": "grep",
-      "query": "grep -rln 'Sheaf.H\\b\\|SheafCohomology' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib; grep -rn 'constructible\\|IsTorsion' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Sites/",
-      "results": "Mathlib/CategoryTheory/Sites/SheafCohomology/{Basic,Cech,MayerVietoris}.lean (Ext-defined Sheaf.H on one site, functorial in the sheaf only) and Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean; no pullback map along a morphism of schemes, no constructible etale sheaves, no curve cohomology",
-      "date": "2026-10-09",
-      "verdict": "no match"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "merged_into": null,
-  "import_flags": [],
-  "blueprint_kind": "lemma",
-  "blueprint_order": 1153,
-  "blueprint_uses": [
-    "def-weil-pbc-eight-curve-assertions",
-    "def-weil-pbc-etale-sheaves",
-    "lemma-weil-pbc-curve-filtered-cohomology",
-    "lemma-weil-pbc-eight-curve-devissage",
-    "thm-weil-pbc-universal-homeomorphism-invariance"
-  ],
-  "uses_not_cited": [
-    "def-weil-pbc-etale-sheaves",
-    "thm-weil-pbc-universal-homeomorphism-invariance"
-  ],
-  "proof_split_by": "paragraphs",
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "sorry_here",
-      "decls": [
-        {
-          "name": "AlgebraicGeometry.IsCurve.bijective_cohomologyMap_of_forall_isReduced",
-          "module": "WeilConjectures.AlgebraicGeometry.Curve.Reductions",
-          "lines": [
-            135,
-            164
-          ],
-          "kind": "theorem",
-          "sorry": true
-        }
-      ],
-      "missing": [],
-      "open": []
-    }
+  {
+   "text": "(Two out of three.) Let $u:Y\\to X$ be a morphism of schemes and $0\\to G_1\\to G\\to G_2\\to0$ a short exact sequence of abelian sheaves on $X_{\\Et}$. If $u^*:H^q(X,G_j)\\to H^q(Y,u^{-1}G_j)$ is bijective for $j=1,2$ and every $q\\ge0$, then $u^*:H^q(X,G)\\to H^q(Y,u^{-1}G)$ is bijective for every $q\\ge0$. Indeed, by [lem-weil-pbc-pullback-cohomology-long-exact-ladder] the maps $u^*$ form a commutative diagram between the exact rows\n$$H^{q-1}(X,G_2)\\xrightarrow{\\delta}H^q(X,G_1)\\to H^q(X,G)\\to H^q(X,G_2)\\xrightarrow{\\delta}H^{q+1}(X,G_1)$$\nand the corresponding row on $Y$ (for $q=0$ the first group is replaced by $0$ on both rows), whose four outer vertical maps are bijective; the five lemma in abelian groups [lem-weil-pbc-five-lemma] gives the middle one. Applied to the split sequences $0\\to G_1\\to G_1\\oplus G_2\\to G_2\\to0$ and by induction on the number of summands, the same holds for finite direct sums. This is the part of Stacks Lemma 0A5C (lemma-ses-statements) concerning statement (7), proved there by the long exact sequence.",
+   "uses": [
+    "lem-weil-pbc-pullback-cohomology-long-exact-ladder",
+    "lem-weil-pbc-five-lemma"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma 0A5C (lemma-ses-statements), proof ('immediate from the definitions and the long exact sequence of cohomology'), for statement (7)"
+   }
   },
-  "chapter": "sec-proper-base-change",
-  "unit": "sk-thm-p1",
-  "split_report": {
-    "date": "2026-10-09",
-    "item": "lem-weil-pbc-curve-constructible-reduction",
-    "worker": "stage1",
-    "summary": "Statement made precise against Stacks 03SC: a fixed algebraically closed k'/k, the pullback rho^q_{k'/k} of def-weil-pbc-extension-pullback / def-weil-pbc-cohomology-pullback, hypothesis on all constructible F_r-module sheaves on C_red for all primes r, conclusion rho^q(C,F) bijective for all q, hence C_7(C,F) [def-weil-pbc-C7] when it holds for all k'. stmt_deps: grab-bag def-weil-pbc-etale-sheaves replaced by def-weil-pbc-torsion-etale-sheaf (torsion) and def-weil-pbc-etale-constructible-sheaf (constructible, Lambda = F_r); def-weil-pbc-eight-curve-assertions replaced by its component def-weil-pbc-C7; added def-weil-pbc-curve-setting, def-weil-proper-morphism, def-pc-reduced-scheme, def-weil-pbc-extension-pullback, def-weil-pbc-cohomology-pullback and the new Mathlib leaf def-weil-pbc-scheme-reduction (X.nilradical.subscheme). The imported one-paragraph proof is replaced by eight steps following the first two paragraphs of the proof of 03SC: (1)-(2) reduction to C_red via the new lem-weil-pbc-reduction-universal-homeomorphism (Stacks 054M) and prop-weil-pbc-universal-homeomorphism-topos (03SI, same unit, Lean closed) instead of thm-weil-pbc-universal-homeomorphism-invariance (other unit), with the comparison square written out through the composition rule of lem-weil-pbc-cohomology-pullback-functorial; (3) two-out-of-three for pullback isomorphisms through the new lem-weil-pbc-pullback-cohomology-long-exact-ladder (pullback maps commute with the connecting maps; no node existed) and lem-weil-pbc-five-lemma: this replaces lemma-weil-pbc-eight-curve-devissage, whose statement concerns the conjunction of all eight assertions and cannot be applied to C_7 alone; (4) filtered colimits through lemma-weil-pbc-curve-filtered-cohomology (used only for its first sentence; the compatibility with the ground-field extension is derived from naturality and lem-weil-pbc-inverse-image-preserves-colimits); (5) F = colim F[n] and lem-kun-03sa (03SA(3), Lambda = Z/n) taken one after the other; (6) primary decomposition with thm-constructible-serre; (7) induction on the exponent with 0 -> G[l] -> G -> G/G[l] -> 0; (8) conclusion. The unreachable lemma-weil-pbc-curve-constructible-primary-reduction states the same reduction (for separated curves, extension invariance in general) with an uncited proof: it duplicates this node and is not cited; lemma-weil-pbc-curve-dense-open-reduction is the next reduction of 03SC (constructible F_l-sheaves to j_!G) and belongs to the parent's split, not to this statement."
-  },
-  "tool_uses": [
-    "lem-kun-03sa",
+  {
+   "text": "(Filtered colimits.) Let $(G_a)_{a\\in A}$ be a filtered system of torsion abelian sheaves on $C_{\\Et}$ with colimit $G$ in $\\Ab(C_{\\Et})$. If $\\rho^q_{k'/k}(C,G_a)$ is bijective for every $a$ and $q$, so is $\\rho^q_{k'/k}(C,G)$. Indeed $\\pi^{-1}$ preserves colimits [lem-weil-pbc-inverse-image-preserves-colimits], so $\\pi^{-1}G=\\varinjlim_a\\pi^{-1}G_a$ with coprojections $\\pi^{-1}$ of those of $G$, and the $\\pi^{-1}G_a$ are torsion (as in step 1). $C$ and $C_{k'}$ are quasi-compact and quasi-separated curves (of finite type over a field), so by [lemma-weil-pbc-curve-filtered-cohomology] the maps $\\kappa:\\varinjlim_aH^q(C,G_a)\\to H^q(C,G)$ and $\\kappa':\\varinjlim_aH^q(C_{k'},\\pi^{-1}G_a)\\to H^q(C_{k'},\\pi^{-1}G)$ induced by $H^q$ of the coprojections are bijective. Naturality of $\\pi^*$ in the sheaf [lem-weil-pbc-cohomology-pullback-functorial] (item 3), applied to the coprojections $G_a\\to G$, gives $\\rho^q(C,G)\\circ\\kappa=\\kappa'\\circ\\varinjlim_a\\rho^q(C,G_a)$; a filtered colimit of bijections is bijective, so $\\rho^q(C,G)$ is bijective.",
+   "uses": [
     "lem-weil-pbc-inverse-image-preserves-colimits",
-    "prop-weil-pbc-inverse-image-exact"
-  ],
-  "reviewed": {
-    "date": "2026-10-09",
-    "by": "L",
-    "result": "pass",
-    "note": "statement made precise for (C_7) with a fixed k'; Stacks 03SC first paragraphs; 3 new nodes (1 Mathlib leaf); three generic lemmas accepted as tool uses; lemma-weil-pbc-curve-constructible-primary-reduction stays unreached as a less precise duplicate (merge in stage 3)"
+    "lemma-weil-pbc-curve-filtered-cohomology",
+    "lem-weil-pbc-cohomology-pullback-functorial"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Theorem 03SC (theorem-vanishing-affine-curves), proof, first paragraph: 'Taking cohomology commutes with colimits, see Lemma 03Q5. Moreover, pullback via X_{k'} -> X commutes with colimits as a left adjoint'"
+   }
   },
-  "lean": {
-    "module": "WeilConjectures.AlgebraicGeometry.Curve.Reductions",
-    "declaration": "AlgebraicGeometry.IsCurve.bijective_cohomologyMap_of_forall_isReduced",
-    "branch": "slopmaster2",
-    "line": 135,
-    "declarations": [
-      "AlgebraicGeometry.IsCurve.bijective_cohomologyMap_of_forall_isReduced"
-    ],
-    "sorry_free": false,
-    "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state sorry_here)"
+  {
+   "text": "(Reduction to constructible sheaves killed by an integer.) $F$ is torsion, so $F=\\varinjlim_nF[n]$ over the positive integers ordered by divisibility, a filtered colimit [def-weil-pbc-torsion-etale-sheaf]; each $F[n]$ is killed by $n$, hence torsion. By step 4 it suffices to treat an abelian sheaf $H$ with $nH=0$. Such an $H$ is a sheaf of $\\mathbf Z/n$-modules, $\\mathbf Z/n$ a finite ring, on the scheme $C$ of finite type over $k$, so by [lem-kun-03sa] (Stacks 03SA(3)) $H=\\varinjlim_bH_b$ is a filtered colimit of constructible sheaves of $\\mathbf Z/n$-modules [def-weil-pbc-etale-constructible-sheaf]. Sheaves of $\\mathbf Z/n$-modules are the abelian sheaves killed by $n$, a full subcategory of $\\Ab(C_{\\Et})$ closed under colimits (multiplication by $n$ on a colimit is the colimit of the zero maps), so this is also a filtered colimit in $\\Ab(C_{\\Et})$, of torsion sheaves. By step 4 again it suffices to show that $\\rho^q_{k'/k}(C,G)$ is bijective for every $n\\ge1$ and every constructible sheaf $G$ of $\\mathbf Z/n$-modules. (Stacks applies 03SA(2), whose proof is exactly this passage $F=\\bigcup F[n]$ followed by 03SA(3); taking the two colimits one after the other avoids assembling one index category.)",
+   "uses": [
+    "def-weil-pbc-torsion-etale-sheaf",
+    "lem-kun-03sa",
+    "def-weil-pbc-etale-constructible-sheaf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Theorem 03SC (theorem-vanishing-affine-curves), proof, first paragraph, with Lemma 03SA (lemma-torsion-colimit-constructible), parts (2) and (3) and the proof of (2)"
+   }
+  },
+  {
+   "text": "(Primary decomposition.) Let $G$ be a constructible sheaf of $\\mathbf Z/n$-modules and $n=\\prod_{\\ell\\mid n}\\ell^{e_\\ell}$. By the Chinese remainder theorem there are $\\epsilon_\\ell\\in\\mathbf Z/n$ with $\\epsilon_\\ell\\equiv1\\bmod\\ell^{e_\\ell}$ and $\\epsilon_\\ell\\equiv0\\bmod\\ell'^{e_{\\ell'}}$ for $\\ell'\\ne\\ell$; they are orthogonal idempotents with sum $1$, so $G=\\bigoplus_\\ell\\epsilon_\\ell G$ and $\\epsilon_\\ell G=G[\\ell^{e_\\ell}]=\\ker(\\ell^{e_\\ell}:G\\to G)$. Each $G[\\ell^{e_\\ell}]$, the kernel of an endomorphism of a constructible $\\mathbf Z/n$-module sheaf, is constructible by [thm-constructible-serre] ($\\Lambda=\\mathbf Z/n$). A sheaf of $\\mathbf Z/n$-modules killed by a divisor $m$ of $n$ is a sheaf of $\\mathbf Z/m$-modules, and it is constructible as a $\\mathbf Z/m$-module sheaf iff it is as a $\\mathbf Z/n$-module sheaf: the strata are the same, and on a stratum a local isomorphism with a constant sheaf $\\underline M$ of $\\mathbf Z/n$-modules is one of $\\mathbf Z/m$-modules, $M$ being killed by $m$ [def-weil-pbc-etale-constructible-sheaf], [def-constructible-finite-locally-constant]. By step 3 (finite direct sums, with $u=\\pi$) it suffices to treat a constructible sheaf of $\\mathbf Z/\\ell^e$-modules, $\\ell$ prime, $e\\ge1$.",
+   "uses": [
+    "thm-constructible-serre",
+    "def-weil-pbc-etale-constructible-sheaf",
+    "def-constructible-finite-locally-constant"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Theorem 03SC (theorem-vanishing-affine-curves), proof, second paragraph: 'Writing F = F_1 + ... + F_r where F_i is l_i-primary ... we may assume that l^n kills F'"
+   }
+  },
+  {
+   "text": "(Induction on the exponent.) Let $G$ be a constructible sheaf of $\\mathbf Z/\\ell^e$-modules; we show by induction on $e\\ge1$ that $\\rho^q_{k'/k}(C,G)$ is bijective for all $q$. For $e=1$, $G$ is a constructible sheaf of $\\mathbf F_\\ell$-modules on the reduced proper curve $C=C_{\\mathrm{red}}$ and this is the hypothesis. For $e\\ge2$ consider $0\\to G[\\ell]\\to G\\to G/G[\\ell]\\to0$, exact in $\\Ab(C_{\\Et})$ (kernels and cokernels of sheaves of $\\mathbf Z/\\ell^e$-modules are computed in abelian sheaves). $G[\\ell]=\\ker(\\ell:G\\to G)$ and $G/G[\\ell]=\\operatorname{coker}(G[\\ell]\\to G)$ are constructible sheaves of $\\mathbf Z/\\ell^e$-modules by [thm-constructible-serre] ($\\Lambda=\\mathbf Z/\\ell^e$). $G[\\ell]$ is killed by $\\ell$, and $G/G[\\ell]$ is killed by $\\ell^{e-1}$, since for a local section $s$ one has $\\ell\\cdot\\ell^{e-1}s=\\ell^es=0$, i.e. $\\ell^{e-1}s\\in G[\\ell]$. By the change of rings in step 6 they are constructible sheaves of $\\mathbf F_\\ell$-modules, resp. of $\\mathbf Z/\\ell^{e-1}$-modules, so $\\rho^q$ is bijective for both (hypothesis, resp. induction), and step 3 with $u=\\pi$ gives it for $G$.",
+   "uses": [
+    "thm-constructible-serre",
+    "def-weil-pbc-etale-constructible-sheaf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Theorem 03SC (theorem-vanishing-affine-curves), proof, second paragraph: 'consider the exact sequence 0 -> F[l] -> F -> F/F[l] -> 0. Thus we see that it suffices to assume that F is l-torsion'"
+   }
+  },
+  {
+   "text": "(Conclusion.) Steps 6 and 7 give the bijectivity of $\\rho^q_{k'/k}(C_{\\mathrm{red}},G)$ for every constructible sheaf of $\\mathbf Z/n$-modules $G$; steps 4 and 5 extend it to every torsion sheaf on $C_{\\mathrm{red}}$, in particular to $i^{-1}F$; step 2 transfers it to $\\rho^q_{k'/k}(C,F)$, for every $q\\ge0$. If this holds for every algebraically closed $k'/k$, it is assertion $\\mathcal C_7(C,F)$ by the definition [def-weil-pbc-C7].",
+   "uses": [
+    "def-weil-pbc-C7"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Theorem 03SC (theorem-vanishing-affine-curves), proof, first two paragraphs"
+   }
   }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-reduction-universal-homeomorphism",
+  "lem-weil-pbc-closed-immersion-proper",
+  "prop-weil-pbc-inverse-image-exact",
+  "lem-weil-pbc-inverse-image-preserves-colimits",
+  "def-weil-pbc-torsion-etale-sheaf",
+  "def-weil-pbc-inverse-image",
+  "def-pc-fibre-product",
+  "def-weil-universal-homeomorphism",
+  "prop-weil-pbc-universal-homeomorphism-topos",
+  "lem-weil-pbc-cohomology-pullback-functorial",
+  "lem-weil-pbc-inverse-image-composition",
+  "def-weil-pbc-extension-pullback",
+  "def-weil-pbc-etale-cohomology",
+  "lem-weil-pbc-pullback-cohomology-long-exact-ladder",
+  "lem-weil-pbc-five-lemma",
+  "lemma-weil-pbc-curve-filtered-cohomology",
+  "lem-kun-03sa",
+  "def-weil-pbc-etale-constructible-sheaf",
+  "thm-constructible-serre",
+  "def-constructible-finite-locally-constant",
+  "def-weil-pbc-C7"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "proof of Theorem 03SC (theorem-vanishing-affine-curves), first two paragraphs, with Lemma 0A5C (lemma-ses-statements), Lemma 03SA (lemma-torsion-colimit-constructible), Lemma 03Q5 (lemma-colimit) and Proposition 03SI (proposition-topological-invariance)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "etale cohomology of a curve invariant under extension of algebraically closed base field, reduction to constructible coefficients",
+   "results": "Algebra.Etale.baseChange (Mathlib.RingTheory.Etale.Basic), IsEtale.instIsStableUnderBaseChangeScheme, IsEtale (Mathlib.AlgebraicGeometry.Morphisms.Etale), RingHom.Etale.isStableUnderBaseChange, Scheme.etaleTopology (Mathlib.AlgebraicGeometry.Sites.Etale), Scheme.Etale",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "etale cohomology of a proper curve does not change under extension of algebraically closed field for torsion sheaves",
+   "results": "Algebra.FormallyEtale.subsingleton_h1Cotangent, Algebra.etaleLocus_eq_compl_support, Algebra.FormallyEtale.iff_exists_algEquiv_prod, FormallyEtale.of_restrictScalars, Algebra.Etale.iff_exists_algEquiv_prod (Mathlib.RingTheory.Etale.*): etale algebras only",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln 'Sheaf.H\\b\\|SheafCohomology' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib; grep -rn 'constructible\\|IsTorsion' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Sites/",
+   "results": "Mathlib/CategoryTheory/Sites/SheafCohomology/{Basic,Cech,MayerVietoris}.lean (Ext-defined Sheaf.H on one site, functorial in the sheaf only) and Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean; no pullback map along a morphism of schemes, no constructible etale sheaves, no curve cohomology",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 1153,
+ "blueprint_uses": [
+  "def-weil-pbc-eight-curve-assertions",
+  "def-weil-pbc-etale-sheaves",
+  "lemma-weil-pbc-curve-filtered-cohomology",
+  "lemma-weil-pbc-eight-curve-devissage",
+  "thm-weil-pbc-universal-homeomorphism-invariance"
+ ],
+ "uses_not_cited": [
+  "def-weil-pbc-etale-sheaves",
+  "thm-weil-pbc-universal-homeomorphism-invariance"
+ ],
+ "proof_split_by": "paragraphs",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.IsCurve.bijective_cohomologyMap_of_forall_isReduced"
+   ]
+  },
+  "slopmaster2": {
+   "state": "sorry_here",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.IsCurve.bijective_cohomologyMap_of_forall_isReduced",
+     "module": "WeilConjectures.AlgebraicGeometry.Curve.Reductions",
+     "lines": [
+      135,
+      164
+     ],
+     "kind": "theorem",
+     "sorry": true
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-09",
+  "item": "lem-weil-pbc-curve-constructible-reduction",
+  "worker": "stage1",
+  "summary": "Statement made precise against Stacks 03SC: a fixed algebraically closed k'/k, the pullback rho^q_{k'/k} of def-weil-pbc-extension-pullback / def-weil-pbc-cohomology-pullback, hypothesis on all constructible F_r-module sheaves on C_red for all primes r, conclusion rho^q(C,F) bijective for all q, hence C_7(C,F) [def-weil-pbc-C7] when it holds for all k'. stmt_deps: grab-bag def-weil-pbc-etale-sheaves replaced by def-weil-pbc-torsion-etale-sheaf (torsion) and def-weil-pbc-etale-constructible-sheaf (constructible, Lambda = F_r); def-weil-pbc-eight-curve-assertions replaced by its component def-weil-pbc-C7; added def-weil-pbc-curve-setting, def-weil-proper-morphism, def-pc-reduced-scheme, def-weil-pbc-extension-pullback, def-weil-pbc-cohomology-pullback and the new Mathlib leaf def-weil-pbc-scheme-reduction (X.nilradical.subscheme). The imported one-paragraph proof is replaced by eight steps following the first two paragraphs of the proof of 03SC: (1)-(2) reduction to C_red via the new lem-weil-pbc-reduction-universal-homeomorphism (Stacks 054M) and prop-weil-pbc-universal-homeomorphism-topos (03SI, same unit, Lean closed) instead of thm-weil-pbc-universal-homeomorphism-invariance (other unit), with the comparison square written out through the composition rule of lem-weil-pbc-cohomology-pullback-functorial; (3) two-out-of-three for pullback isomorphisms through the new lem-weil-pbc-pullback-cohomology-long-exact-ladder (pullback maps commute with the connecting maps; no node existed) and lem-weil-pbc-five-lemma: this replaces lemma-weil-pbc-eight-curve-devissage, whose statement concerns the conjunction of all eight assertions and cannot be applied to C_7 alone; (4) filtered colimits through lemma-weil-pbc-curve-filtered-cohomology (used only for its first sentence; the compatibility with the ground-field extension is derived from naturality and lem-weil-pbc-inverse-image-preserves-colimits); (5) F = colim F[n] and lem-kun-03sa (03SA(3), Lambda = Z/n) taken one after the other; (6) primary decomposition with thm-constructible-serre; (7) induction on the exponent with 0 -> G[l] -> G -> G/G[l] -> 0; (8) conclusion. The unreachable lemma-weil-pbc-curve-constructible-primary-reduction states the same reduction (for separated curves, extension invariance in general) with an uncited proof: it duplicates this node and is not cited; lemma-weil-pbc-curve-dense-open-reduction is the next reduction of 03SC (constructible F_l-sheaves to j_!G) and belongs to the parent's split, not to this statement."
+ },
+ "tool_uses": [
+  "lem-kun-03sa",
+  "lem-weil-pbc-inverse-image-preserves-colimits",
+  "prop-weil-pbc-inverse-image-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-09",
+  "by": "L",
+  "result": "pass",
+  "note": "statement made precise for (C_7) with a fixed k'; Stacks 03SC first paragraphs; 3 new nodes (1 Mathlib leaf); three generic lemmas accepted as tool uses; lemma-weil-pbc-curve-constructible-primary-reduction stays unreached as a less precise duplicate (merge in stage 3)"
+ },
+ "lean": {
+  "module": "WeilConjectures.AlgebraicGeometry.Curve.Reductions",
+  "declaration": "AlgebraicGeometry.IsCurve.bijective_cohomologyMap_of_forall_isReduced",
+  "branch": "slopmaster2",
+  "line": 135,
+  "declarations": [
+   "AlgebraicGeometry.IsCurve.bijective_cohomologyMap_of_forall_isReduced"
+  ],
+  "sorry_free": false,
+  "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state sorry_here)"
+ }
 }

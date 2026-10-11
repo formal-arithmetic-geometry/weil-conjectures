@@ -1,156 +1,158 @@
 {
-  "id": "lem-pc-projective-space-canonical",
-  "blueprint": {
-    "is": "lem-pc-projective-space-canonical",
-    "from": null,
-    "same_as": []
-  },
-  "kind": "statement",
-  "title": "The canonical sheaf of projective space",
-  "statement": "Let $A$ be a commutative ring, $n\\ge1$, and $P=\\mathbf P^n_A$ with\nstandard opens $U_i=D_+(x_i)=\\operatorname{Spec}R_i$, where\n$R_i=A[x_k/x_i:k\\ne i]$ is a polynomial ring in $n$ variables\n([def-pc-proj]). Let $\\Omega^1_{P/A}$ be the sheaf of relative\ndifferentials: the $\\mathcal O_P$-module whose restriction to $U_i$ is\nassociated with the module $\\Omega^1_{R_i/A}$ of Kähler differentials,\nglued along the canonical isomorphisms\n$\\Omega^1_{R_i/A}\\otimes_{R_i}R_{ij}\\cong\\Omega^1_{R_{ij}/A}\\cong\n\\Omega^1_{R_j/A}\\otimes_{R_j}R_{ij}$, where\n$R_{ij}=\\Gamma(U_i\\cap U_j,\\mathcal O_P)$ is a localization of both\n$R_i$ and $R_j$. Put\n$\\omega_P:=\\Lambda^n\\Omega^1_{P/A}$ and, on $U_i$,\n\n$$\n\\eta_i:=(-1)^i\\bigwedge_{k\\ne i}d(x_k/x_i)\n$$\n\n(wedge over $k\\in\\{0,\\ldots,n\\}\\smallsetminus\\{i\\}$ in increasing\norder). Then $\\Omega^1_{P/A}$ is locally free of rank $n$, $\\omega_P$ is\nan invertible module ([def-sc-invertible-module]) with basis $\\eta_i$\non $U_i$, and there is an isomorphism\n\n$$\n\\omega_P\\;\\xrightarrow{\\ \\sim\\ }\\;\\mathcal O_P(-n-1)\n$$\n\nonto the twist of [def-pc-projective-space-twist], sending $\\eta_i$ to\n$e_i^{(-n-1)}$ on each $U_i$. In particular\n$H^n(P,\\omega_P)\\cong A$\n([lem-pc-projective-space-twist-cohomology] (ii)). For $n=1$ and\n$A=k$, with $t=x_1/x_0$ and $s=x_0/x_1$, this is\n$\\omega_{\\mathbf P^1}\\cong\\mathcal O(-2)$ with $\\eta_0=dt$,\n$\\eta_1=-ds$ and $dt=-t^2ds$.",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-pn/lem-pc-projective-space-canonical.md",
-    "place": "node lem-pc-projective-space-canonical, order 620"
-  },
-  "stmt_deps": [
-    "def-pc-proj",
-    "def-sc-invertible-module",
-    "def-pc-projective-space-twist",
-    "lem-pc-projective-space-twist-cohomology"
-  ],
-  "proof": [
-    {
-      "text": "Kähler differentials commute with localization, which gives the\ncanonical isomorphisms used for the gluing; they are compatible on\ntriple intersections because all of them are the canonical\nidentifications with the differentials of the common localization\n$\\Gamma(U_i\\cap U_j\\cap U_l,\\mathcal O_P)$. For the polynomial ring\n$R_i$, $\\Omega^1_{R_i/A}$ is free with basis $d(x_k/x_i)$, $k\\ne i$, so\n$\\Omega^1_{P/A}$ is locally free of rank $n$, and\n$\\Lambda^n\\Omega^1_{R_i/A}$ is free of rank one with basis $\\eta_i$.",
-      "uses": [
-        "lem-weil-pbc-kahler-differentials-localization",
-        "lem-weil-pbc-polynomial-ring-kahler-basis-any-variables"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "Fix $i\\ne j$ and write $t_k=x_k/x_j$ ($k\\ne j$) for the coordinates of\n$U_j$; on $U_i\\cap U_j$ the element $t_i$ is a unit, and\n$x_j/x_i=t_i^{-1}$, $x_k/x_i=t_k/t_i$ for $k\\notin\\{i,j\\}$. Hence\n\n$$\nd(x_j/x_i)=-t_i^{-2}\\,dt_i,\\qquad\nd(x_k/x_i)=t_i^{-1}dt_k-t_kt_i^{-2}\\,dt_i\\quad(k\\notin\\{i,j\\}).\n$$",
-      "uses": [],
-      "elementary": true
-    },
-    {
-      "text": "In the wedge $\\bigwedge_{k\\ne i}d(x_k/x_i)$ the factor in position $j$\nis a multiple of $dt_i$, so the $dt_i$-terms of the other factors\ncontribute zero ($dt_i\\wedge dt_i=0$). The wedge equals\n$-t_i^{-2}\\cdot t_i^{-(n-1)}$ times the wedge of the $dt_k$, $k\\ne j$,\ntaken in the order of the indices $\\{0,\\ldots,n\\}\\smallsetminus\\{i\\}$\nwith $dt_i$ in the slot of $j$. Moving $dt_i$ to its increasing\nposition passes the $|i-j|-1$ factors $dt_k$ with $k$ strictly between\n$i$ and $j$, so\n\n$$\n\\bigwedge_{k\\ne i}d(x_k/x_i)=(-1)^{|i-j|}\\,t_i^{-(n+1)}\n\\bigwedge_{k\\ne j}dt_k,\n\\qquad\\text{i.e.}\\qquad\n\\eta_i=(-1)^i(-1)^{i+j}(x_i/x_j)^{-(n+1)}(-1)^j\\eta_j\n=(x_i/x_j)^{-(n+1)}\\eta_j .\n$$",
-      "uses": [],
-      "elementary": true
-    },
-    {
-      "text": "This is exactly the transition rule\n$e_i^{(-n-1)}=(x_i/x_j)^{-n-1}e_j^{(-n-1)}$ of\n[def-pc-projective-space-twist]. Hence the isomorphisms\n$\\omega_P|_{U_i}\\to\\mathcal O_P(-n-1)|_{U_i}$, $\\eta_i\\mapsto\ne_i^{(-n-1)}$, agree on the overlaps, and they glue to an isomorphism\nof $\\mathcal O_P$-modules (the sheaf axiom on the cover by the $U_i$;\nthe glued map is an isomorphism because it is one locally). The\nstatement on $H^n$ follows from the rank-one basis of\n$H^n(P,\\mathcal O_P(-n-1))$. For $n=1$: $\\eta_0=d(x_1/x_0)=dt$,\n$\\eta_1=-d(x_0/x_1)=-ds$, and the rule reads\n$dt=(x_0/x_1)^{-2}(-ds)=-t^2ds$, in accordance with $s=t^{-1}$.",
-      "uses": [
-        "def-pc-projective-space-twist",
-        "lem-pc-projective-space-twist-cohomology"
-      ],
-      "elementary": false
-    }
-  ],
-  "proof_deps": [
-    "def-pc-projective-space-twist",
-    "lem-pc-projective-space-twist-cohomology",
+ "id": "lem-pc-projective-space-canonical",
+ "blueprint": {
+  "is": "lem-pc-projective-space-canonical",
+  "from": null,
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "The canonical sheaf of projective space",
+ "statement": "Let $A$ be a commutative ring, $n\\ge1$, and $P=\\mathbf P^n_A$ with\nstandard opens $U_i=D_+(x_i)=\\operatorname{Spec}R_i$, where\n$R_i=A[x_k/x_i:k\\ne i]$ is a polynomial ring in $n$ variables\n([def-pc-proj]). Let $\\Omega^1_{P/A}$ be the sheaf of relative\ndifferentials: the $\\mathcal O_P$-module whose restriction to $U_i$ is\nassociated with the module $\\Omega^1_{R_i/A}$ of Kähler differentials,\nglued along the canonical isomorphisms\n$\\Omega^1_{R_i/A}\\otimes_{R_i}R_{ij}\\cong\\Omega^1_{R_{ij}/A}\\cong\n\\Omega^1_{R_j/A}\\otimes_{R_j}R_{ij}$, where\n$R_{ij}=\\Gamma(U_i\\cap U_j,\\mathcal O_P)$ is a localization of both\n$R_i$ and $R_j$. Put\n$\\omega_P:=\\Lambda^n\\Omega^1_{P/A}$ and, on $U_i$,\n\n$$\n\\eta_i:=(-1)^i\\bigwedge_{k\\ne i}d(x_k/x_i)\n$$\n\n(wedge over $k\\in\\{0,\\ldots,n\\}\\smallsetminus\\{i\\}$ in increasing\norder). Then $\\Omega^1_{P/A}$ is locally free of rank $n$, $\\omega_P$ is\nan invertible module ([def-sc-invertible-module]) with basis $\\eta_i$\non $U_i$, and there is an isomorphism\n\n$$\n\\omega_P\\;\\xrightarrow{\\ \\sim\\ }\\;\\mathcal O_P(-n-1)\n$$\n\nonto the twist of [def-pc-projective-space-twist], sending $\\eta_i$ to\n$e_i^{(-n-1)}$ on each $U_i$. In particular\n$H^n(P,\\omega_P)\\cong A$\n([lem-pc-projective-space-twist-cohomology] (ii)). For $n=1$ and\n$A=k$, with $t=x_1/x_0$ and $s=x_0/x_1$, this is\n$\\omega_{\\mathbf P^1}\\cong\\mathcal O(-2)$ with $\\eta_0=dt$,\n$\\eta_1=-ds$ and $dt=-t^2ds$.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-pn/lem-pc-projective-space-canonical.md",
+  "place": "node lem-pc-projective-space-canonical, order 620"
+ },
+ "stmt_deps": [
+  "def-pc-proj",
+  "def-sc-invertible-module",
+  "def-pc-projective-space-twist",
+  "lem-pc-projective-space-twist-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "Kähler differentials commute with localization, which gives the\ncanonical isomorphisms used for the gluing; they are compatible on\ntriple intersections because all of them are the canonical\nidentifications with the differentials of the common localization\n$\\Gamma(U_i\\cap U_j\\cap U_l,\\mathcal O_P)$. For the polynomial ring\n$R_i$, $\\Omega^1_{R_i/A}$ is free with basis $d(x_k/x_i)$, $k\\ne i$, so\n$\\Omega^1_{P/A}$ is locally free of rank $n$, and\n$\\Lambda^n\\Omega^1_{R_i/A}$ is free of rank one with basis $\\eta_i$.",
+   "uses": [
     "lem-weil-pbc-kahler-differentials-localization",
     "lem-weil-pbc-polynomial-ring-kahler-basis-any-variables"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-pn/lem-pc-projective-space-canonical.md",
-    "place": "## Proof"
+   ],
+   "elementary": false
   },
-  "mathlib_searches": [
-    {
-      "tool": "leanfinder",
-      "query": "canonical sheaf of projective space exterior power differentials twist O(-n-1)",
-      "results": "AlgebraicGeometry.ProjectiveSpectrum.Proj.structureSheaf; AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.structurePresheafInCommRing; AlgebraicGeometry.Proj.toSheafedSpace; AlgebraicGeometry.Proj.awayToSection (projective spectrum structure only)",
-      "date": "2026-10-11",
-      "verdict": "no match"
-    },
-    {
-      "tool": "loogle",
-      "query": "KaehlerDifferential, exterior power, projective space, twist",
-      "results": "0 hits; loogle reports Unknown identifier `exterior`",
-      "date": "2026-10-11",
-      "verdict": "no match"
-    },
-    {
-      "tool": "grep",
-      "query": "relativeDifferentials|KaehlerDifferential|canonical sheaf|exterior.*power in Mathlib",
-      "results": "no matching declarations in Mathlib",
-      "date": "2026-10-11",
-      "verdict": "no match"
-    },
-    {
-      "tool": "leansearch",
-      "query": "canonical sheaf of projective space is O(-n-1)",
-      "results": "service unavailable: Internal Server Error",
-      "date": "2026-10-11",
-      "verdict": "unavailable"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "merged_into": null,
-  "import_flags": [],
-  "blueprint_kind": "lemma",
-  "blueprint_order": 620,
-  "blueprint_uses": [
-    "def-pc-proj",
+  {
+   "text": "Fix $i\\ne j$ and write $t_k=x_k/x_j$ ($k\\ne j$) for the coordinates of\n$U_j$; on $U_i\\cap U_j$ the element $t_i$ is a unit, and\n$x_j/x_i=t_i^{-1}$, $x_k/x_i=t_k/t_i$ for $k\\notin\\{i,j\\}$. Hence\n\n$$\nd(x_j/x_i)=-t_i^{-2}\\,dt_i,\\qquad\nd(x_k/x_i)=t_i^{-1}dt_k-t_kt_i^{-2}\\,dt_i\\quad(k\\notin\\{i,j\\}).\n$$",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "In the wedge $\\bigwedge_{k\\ne i}d(x_k/x_i)$ the factor in position $j$\nis a multiple of $dt_i$, so the $dt_i$-terms of the other factors\ncontribute zero ($dt_i\\wedge dt_i=0$). The wedge equals\n$-t_i^{-2}\\cdot t_i^{-(n-1)}$ times the wedge of the $dt_k$, $k\\ne j$,\ntaken in the order of the indices $\\{0,\\ldots,n\\}\\smallsetminus\\{i\\}$\nwith $dt_i$ in the slot of $j$. Moving $dt_i$ to its increasing\nposition passes the $|i-j|-1$ factors $dt_k$ with $k$ strictly between\n$i$ and $j$, so\n\n$$\n\\bigwedge_{k\\ne i}d(x_k/x_i)=(-1)^{|i-j|}\\,t_i^{-(n+1)}\n\\bigwedge_{k\\ne j}dt_k,\n\\qquad\\text{i.e.}\\qquad\n\\eta_i=(-1)^i(-1)^{i+j}(x_i/x_j)^{-(n+1)}(-1)^j\\eta_j\n=(x_i/x_j)^{-(n+1)}\\eta_j .\n$$",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "This is exactly the transition rule\n$e_i^{(-n-1)}=(x_i/x_j)^{-n-1}e_j^{(-n-1)}$ of\n[def-pc-projective-space-twist]. Hence the isomorphisms\n$\\omega_P|_{U_i}\\to\\mathcal O_P(-n-1)|_{U_i}$, $\\eta_i\\mapsto\ne_i^{(-n-1)}$, agree on the overlaps, and they glue to an isomorphism\nof $\\mathcal O_P$-modules (the sheaf axiom on the cover by the $U_i$;\nthe glued map is an isomorphism because it is one locally). The\nstatement on $H^n$ follows from the rank-one basis of\n$H^n(P,\\mathcal O_P(-n-1))$. For $n=1$: $\\eta_0=d(x_1/x_0)=dt$,\n$\\eta_1=-d(x_0/x_1)=-ds$, and the rule reads\n$dt=(x_0/x_1)^{-2}(-ds)=-t^2ds$, in accordance with $s=t^{-1}$.",
+   "uses": [
     "def-pc-projective-space-twist",
-    "def-sc-invertible-module",
     "lem-pc-projective-space-twist-cohomology"
-  ],
-  "proof_split_by": "paragraphs",
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "sorry_here",
-      "decls": [
-        {
-          "name": "AlgebraicGeometry.ProjectiveSpace.isFiniteLocallyFreeOfRank_relativeDifferentials",
-          "module": "WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Differentials",
-          "lines": [
-            40,
-            52
-          ],
-          "kind": "theorem",
-          "sorry": true
-        }
-      ],
-      "missing": [],
-      "open": []
-    }
-  },
-  "chapter": "sec-picard-framework",
-  "unit": "sk-thm-picard-pn",
-  "split_report": {
-    "date": "2026-10-11",
-    "item": "lem-pc-projective-space-canonical",
-    "worker": "stage1",
-    "summary": "Checked the imported statement against the projective-space blueprint and the slopmaster2 module. The existing Lean declaration is only a sorry for local freeness and explicitly leaves the canonical-sheaf construction as TODO, so the item is not attached. Split the proof into local affine differential/gluing, coordinate change, wedge determinant, and twist gluing/cohomology steps. Reused the existing polynomial Kähler-basis and localization nodes; no new nodes were needed.",
-    "blueprint": "Realizes the proof paragraphs computing affine differentials, the overlap transition formula, and the gluing to O_P(-n-1), including the n=1 check.",
-    "tool_uses": []
-  },
-  "reviewed": {
-    "date": "2026-10-10",
-    "by": "L",
-    "reviewer": "R-psk2324",
-    "group": "M1",
-    "result": "pass",
-    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-psk2324 (reviewer sub-agent of L); spot-checked: Recomputed steps 2-3 by hand: d(x_j/x_i)=-t_i^{-2}dt_i, coefficient -t_i^{-(n+1)}, sign (-1)^{|i-j|} from moving dt_i past |i-j|-1 factors, (-1)^{i+j+|i-j|}=1, so eta_i=(x_i/x_j)^{-(n+1)}eta_j, matching the twist rule e_i^{(d)}=(x_i/x_j)^d e_j^{(d)} at d=-n-1 (C4 OK); n=1 check dt=-t^2ds verified. Proof is the direct chart computation, not the Euler sequence: no determinant-of-SES step, so no det node needed (C1 n/a) and no new node restates the Euler-sequence node (class b n/a). Step 1 citations (00RT localization, 00RX polynomial basis) say what is used; Lambda^n of a free rank-n module / compatibility with localization taken as elementary. H^n clause cites twist-cohomology (ii) verbatim. No new nodes, no tool_uses. FIX more, RETURN less: nothing to repair."
-  },
-  "lean": {
-    "module": "WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Differentials",
-    "declaration": "AlgebraicGeometry.ProjectiveSpace.isFiniteLocallyFreeOfRank_relativeDifferentials",
-    "branch": "slopmaster2",
-    "line": 40,
-    "declarations": [
-      "AlgebraicGeometry.ProjectiveSpace.isFiniteLocallyFreeOfRank_relativeDifferentials"
-    ],
-    "sorry_free": false,
-    "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state sorry_here)"
+   ],
+   "elementary": false
   }
+ ],
+ "proof_deps": [
+  "def-pc-projective-space-twist",
+  "lem-pc-projective-space-twist-cohomology",
+  "lem-weil-pbc-kahler-differentials-localization",
+  "lem-weil-pbc-polynomial-ring-kahler-basis-any-variables"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-pn/lem-pc-projective-space-canonical.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "canonical sheaf of projective space exterior power differentials twist O(-n-1)",
+   "results": "AlgebraicGeometry.ProjectiveSpectrum.Proj.structureSheaf; AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.structurePresheafInCommRing; AlgebraicGeometry.Proj.toSheafedSpace; AlgebraicGeometry.Proj.awayToSection (projective spectrum structure only)",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "KaehlerDifferential, exterior power, projective space, twist",
+   "results": "0 hits; loogle reports Unknown identifier `exterior`",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "relativeDifferentials|KaehlerDifferential|canonical sheaf|exterior.*power in Mathlib",
+   "results": "no matching declarations in Mathlib",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "canonical sheaf of projective space is O(-n-1)",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 620,
+ "blueprint_uses": [
+  "def-pc-proj",
+  "def-pc-projective-space-twist",
+  "def-sc-invertible-module",
+  "lem-pc-projective-space-twist-cohomology"
+ ],
+ "proof_split_by": "paragraphs",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.ProjectiveSpace.isFiniteLocallyFreeOfRank_relativeDifferentials"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.ProjectiveSpace.isFiniteLocallyFreeOfRank_relativeDifferentials",
+     "module": "WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Differentials",
+     "lines": [
+      70,
+      84
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-pn",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-projective-space-canonical",
+  "worker": "stage1",
+  "summary": "Checked the imported statement against the projective-space blueprint and the slopmaster2 module. The existing Lean declaration is only a sorry for local freeness and explicitly leaves the canonical-sheaf construction as TODO, so the item is not attached. Split the proof into local affine differential/gluing, coordinate change, wedge determinant, and twist gluing/cohomology steps. Reused the existing polynomial Kähler-basis and localization nodes; no new nodes were needed.",
+  "blueprint": "Realizes the proof paragraphs computing affine differentials, the overlap transition formula, and the gluing to O_P(-n-1), including the n=1 check.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-psk2324",
+  "group": "M1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-psk2324 (reviewer sub-agent of L); spot-checked: Recomputed steps 2-3 by hand: d(x_j/x_i)=-t_i^{-2}dt_i, coefficient -t_i^{-(n+1)}, sign (-1)^{|i-j|} from moving dt_i past |i-j|-1 factors, (-1)^{i+j+|i-j|}=1, so eta_i=(x_i/x_j)^{-(n+1)}eta_j, matching the twist rule e_i^{(d)}=(x_i/x_j)^d e_j^{(d)} at d=-n-1 (C4 OK); n=1 check dt=-t^2ds verified. Proof is the direct chart computation, not the Euler sequence: no determinant-of-SES step, so no det node needed (C1 n/a) and no new node restates the Euler-sequence node (class b n/a). Step 1 citations (00RT localization, 00RX polynomial basis) say what is used; Lambda^n of a free rank-n module / compatibility with localization taken as elementary. H^n clause cites twist-cohomology (ii) verbatim. No new nodes, no tool_uses. FIX more, RETURN less: nothing to repair."
+ },
+ "lean": {
+  "module": "WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Differentials",
+  "declaration": "AlgebraicGeometry.ProjectiveSpace.isFiniteLocallyFreeOfRank_relativeDifferentials",
+  "branch": "slopmaster2",
+  "line": 40,
+  "declarations": [
+   "AlgebraicGeometry.ProjectiveSpace.isFiniteLocallyFreeOfRank_relativeDifferentials"
+  ],
+  "sorry_free": false,
+  "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state sorry_here)"
+ }
 }

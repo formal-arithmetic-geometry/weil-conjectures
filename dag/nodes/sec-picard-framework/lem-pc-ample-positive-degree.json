@@ -1,410 +1,346 @@
 {
-  "id": "lem-pc-ample-positive-degree",
-  "blueprint": {
-    "is": "lem-pc-ample-positive-degree",
-    "from": null,
-    "same_as": []
-  },
-  "kind": "statement",
-  "title": "Positive degree is equivalent to ampleness",
-  "statement": "Let $k$ be a field [def-weil-field], $X$ a smooth projective curve over $k$ [def-pc-smooth-projective-curve] (an integral scheme of dimension one, smooth and projective over $k$; in particular proper over $k$) and $\\mathcal L$ an invertible $\\mathcal O_X$-module [def-sc-invertible-module]. Then $\\mathcal L$ is ample on the proper $k$-scheme $X$ in the sense of [def-sc-ample] (some tensor power $\\mathcal L^{\\otimes m}$, $m\\geq1$, is very ample) if and only if its degree $\\deg(\\mathcal L)=\\chi(X,\\mathcal L)-\\chi(X,\\mathcal O_X)$ [def-pc-degree-line-bundle] is positive.",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-pc-ample-positive-degree.md",
-    "place": "node lem-pc-ample-positive-degree, order 743",
-    "external": [
-      {
-        "document": "literature/stacks-project/varieties.tex",
-        "place": "Varieties, Lemma 0B5X (lemma-ample-curve): 'Let $k$ be a field. Let $X$ be a proper curve over $k$. Let $\\mathcal{L}$ be an invertible $\\mathcal{O}_X$-module. Then $\\mathcal{L}$ is ample if and only if $\\deg(\\mathcal{L}) > 0$.' (The import recorded Tag 01IQ, which is Schemes, Lemma lemma-immersion-when-closed, a fact the blueprint proof uses in passing, not the source of the statement.)"
-      }
-    ]
-  },
-  "stmt_deps": [
-    "def-weil-field",
-    "def-pc-smooth-projective-curve",
-    "def-sc-invertible-module",
-    "def-sc-ample",
-    "def-pc-degree-line-bundle"
-  ],
-  "proof": [
-    {
-      "text": "*(⇒), the base change.* Assume $\\mathcal L$ ample. Let $\\Omega$ be an algebraic closure of $k$ [def-weil-algebraic-closure], $X_\\Omega:=X\\times_{\\operatorname{Spec}k}\\operatorname{Spec}\\Omega$ with projection $p:X_\\Omega\\to X$ [def-pc-base-change], and $\\mathcal L_\\Omega:=p^*\\mathcal L$ [def-pc-module-pullback], an invertible $\\mathcal O_{X_\\Omega}$-module. $X$ is proper over $k$ [lem-pc-projective-proper], so $X_\\Omega$ is proper over $\\Omega$ [lem-pc-proper-base-change](1), in particular separated and of finite type; and $X$ is a curve over $k$, so $\\dim X_\\Omega=1$ [lem-pc-dim-base-change]. Hence $X_\\Omega$ is a proper curve over the algebraically closed field $\\Omega$ of dimension one in the sense of [def-sc-curves] (possibly disconnected).",
-      "uses": [
-        "def-weil-algebraic-closure",
-        "def-pc-base-change",
-        "def-pc-module-pullback",
-        "lem-pc-projective-proper",
-        "lem-pc-proper-base-change",
-        "lem-pc-dim-base-change",
-        "def-sc-curves"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "Lean slopmaster2 AlgebraicGeometry.Scheme.isAmple_iff_degree_pos (WeilConjectures/AlgebraicGeometry/Curve/RiemannRoch.lean 1582-1605)",
-        "place": "proof of the forward direction: the base change XK to K = AlgebraicClosure k, SmoothOfRelativeDimension 1 and IsProper by base change, topologicalKrullDim_eq_of_smoothOfRelativeDimension"
-      }
-    },
-    {
-      "text": "*(⇒), ampleness survives the base change.* By [def-sc-ample] there are $m\\geq1$ and a closed immersion $i:X\\to\\mathbf P^N_k$ with $i^*\\mathcal O(1)\\cong\\mathcal L^{\\otimes m}$. By [lem-pc-very-ample-ample] applied to $i$ and the extension $\\Omega/k$, the base change $p^*(\\mathcal L^{\\otimes m})$ is ample on $X_\\Omega$, so some power $(p^*(\\mathcal L^{\\otimes m}))^{\\otimes m'}$, $m'\\geq1$, is very ample. Pullback commutes with tensor products [lem-weil-pbc-module-pullback-tensor], so $(p^*(\\mathcal L^{\\otimes m}))^{\\otimes m'}\\cong\\mathcal L_\\Omega^{\\otimes mm'}$ with $mm'\\geq1$; hence $\\mathcal L_\\Omega$ is ample on $X_\\Omega$ [def-sc-ample].",
-      "uses": [
-        "def-sc-ample",
-        "lem-pc-very-ample-ample",
-        "lem-weil-pbc-module-pullback-tensor"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "Lean slopmaster2 AlgebraicGeometry.Scheme.isAmple_iff_degree_pos (WeilConjectures/AlgebraicGeometry/Curve/RiemannRoch.lean 1582-1605)",
-        "place": "h.pullback_of_field K, i.e. AlgebraicGeometry.IsAmple.pullback_of_field (Modules/Ample.lean 455-466) from IsVeryAmple.pullback_of_field and Scheme.Modules.nonempty_pullback_tensorPow_iso"
-      }
-    },
-    {
-      "text": "*(⇒), positivity over $\\Omega$.* By [lem-sc-hilbert-polynomial] (the proper $\\Omega$-scheme $X_\\Omega$ has dimension $1$ and $\\mathcal L_\\Omega$ is ample invertible by step 2) there is a polynomial $P(n)=an+b$ with $P(n)=\\chi(X_\\Omega,\\mathcal L_\\Omega^{\\otimes n})$ for all $n\\geq0$, and by [lem-sc-ample-positive-degree] (applied to the proper curve $X_\\Omega$ of dimension one of step 1 over the algebraically closed $\\Omega$) its coefficient of $n$ is positive: $a>0$. Since $\\mathcal L_\\Omega^{\\otimes0}=\\mathcal O_{X_\\Omega}$ and $\\mathcal L_\\Omega^{\\otimes1}=\\mathcal L_\\Omega$, $b=P(0)=\\chi(\\mathcal O_{X_\\Omega})$ and $a=P(1)-P(0)=\\chi(\\mathcal L_\\Omega)-\\chi(\\mathcal O_{X_\\Omega})=\\deg_{X_\\Omega}(\\mathcal L_\\Omega)$ [def-pc-degree-line-bundle]. So $\\deg_{X_\\Omega}(\\mathcal L_\\Omega)>0$.",
-      "uses": [
-        "lem-sc-hilbert-polynomial",
-        "lem-sc-ample-positive-degree",
-        "def-pc-degree-line-bundle"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "Lean slopmaster2 AlgebraicGeometry.Scheme.isAmple_iff_degree_pos (WeilConjectures/AlgebraicGeometry/Curve/RiemannRoch.lean 1582-1605)",
-        "place": "Scheme.Hom.degree_pos_of_isAmple (Modules/Ample.lean 526-591) and Scheme.Hom.degree_eq_degree_of_topologicalKrullDim_eq_one (Modules/Ample.lean 224-236)"
-      }
-    },
-    {
-      "text": "*(⇒), descent of the degree.* $X$ is proper over $k$ of dimension $1$, so [lem-pc-degree-base-change](1) gives $\\deg_X(\\mathcal L)=\\deg_{X_\\Omega}(\\mathcal L_\\Omega)>0$ by step 3.",
-      "uses": [
-        "lem-pc-degree-base-change"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "Lean slopmaster2 AlgebraicGeometry.Scheme.isAmple_iff_degree_pos (WeilConjectures/AlgebraicGeometry/Curve/RiemannRoch.lean 1582-1605)",
-        "place": "rw [← Modules.degree_pullback k K ℒ]"
-      }
-    },
-    {
-      "text": "*(⇐), the components over $\\Omega$.* Assume $\\deg_X(\\mathcal L)>0$, and let $\\Omega$, $X_\\Omega$, $p$ be as in step 1. By [lem-pc-base-change-closure-components], with $r:=[\\Gamma(X,\\mathcal O_X):k]\\geq1$, $X_\\Omega=X_1\\amalg\\cdots\\amalg X_r$ with each $X_j$ an open and closed subscheme which is a proper smooth connected curve over $\\Omega$, and $\\mathcal L_j:=(p^*\\mathcal L)|_{X_j}$ satisfies $r\\deg_{X_j}(\\mathcal L_j)=\\deg_X(\\mathcal L)>0$, so $\\deg_{X_j}(\\mathcal L_j)>0$ for every $j$. (When $\\Gamma(X,\\mathcal O_X)=k$, the hypothesis of the unit and of the Lean, $r=1$ and $X_\\Omega$ is connected.)",
-      "uses": [
-        "lem-pc-base-change-closure-components"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/_section.md",
-        "place": "unit sk-thm-picard-rr, proof, (G): 'deg is preserved by flat base change, and $X_{\\bar k}$ is again a smooth proper connected curve of genus $g$ with $H^0=\\bar k$' (stated there under the standing hypothesis $H^0(X,\\mathcal O_X)=k$); Lean: Modules.degree_pullback in isAmple_of_degree_pos (RiemannRoch.lean 1557-1578)"
-      }
-    },
-    {
-      "text": "*(⇐), the two degrees agree on each component.* Fix $j$ and let $g_j:=\\dim_\\Omega H^1(X_j,\\mathcal O_{X_j})$ be the genus of the proper smooth connected curve $X_j$ [def-sc-genus]. By Riemann–Roch [lem-sc-riemann-roch](1), $\\chi(X_j,\\mathcal L_j)=\\deg\\mathcal L_j+1-g_j$ and $\\chi(X_j,\\mathcal O_{X_j})=1-g_j$, where $\\deg\\mathcal L_j$ is the degree of [def-sc-pic0]. Subtracting, $\\deg\\mathcal L_j=\\chi(\\mathcal L_j)-\\chi(\\mathcal O_{X_j})=\\deg_{X_j}(\\mathcal L_j)>0$ by step 5.",
-      "uses": [
-        "def-sc-genus",
-        "lem-sc-riemann-roch",
-        "def-sc-pic0"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/_section.md",
-        "place": "unit sk-thm-picard-rr, statement (RR): 'for every line bundle $\\deg\\cL=\\chi(\\cL)-\\chi(\\cO_X)$, i.e. the divisor degree agrees with the $\\chi$-degree'"
-      }
-    },
-    {
-      "text": "*(⇐), a common very ample power.* Put $m:=\\max_j(2g_j+1)\\geq1$. For each $j$, $[\\mathcal L_j^{\\otimes m}]=m[\\mathcal L_j]$ in the Picard group, whose law is $\\otimes$ [def-sc-picard-group] [lem-sc-pic-group], and the degree of [def-sc-pic0] is a homomorphism, so $\\deg(\\mathcal L_j^{\\otimes m})=m\\deg\\mathcal L_j\\geq m\\geq2g_j+1$ (step 6: $\\deg\\mathcal L_j\\geq1$ is a positive integer). By [lem-sc-degree-2g1-very-ample] applied to the proper smooth connected curve $X_j$ of genus $g_j$ over the algebraically closed field $\\Omega$, $\\mathcal L_j^{\\otimes m}$ is very ample on $X_j$.",
-      "uses": [
-        "def-sc-picard-group",
-        "lem-sc-pic-group",
-        "def-sc-pic0",
-        "lem-sc-degree-2g1-very-ample"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "Lean slopmaster2 AlgebraicGeometry.Scheme.isAmple_of_degree_pos_of_isAlgClosed (RiemannRoch.lean 1544-1555)",
-        "place": "the choice m = 2g+1, Modules.degree_tensorPow and isVeryAmple_of_degree; here taken as the maximum over the components"
-      }
-    },
-    {
-      "text": "*(⇐), very ample over $\\Omega$.* Pullback commutes with tensor products [lem-weil-pbc-module-pullback-tensor], so $p^*(\\mathcal L^{\\otimes m})\\cong(p^*\\mathcal L)^{\\otimes m}$, and its restriction to $X_j$ (the pullback along the open immersion $X_j\\to X_\\Omega$) is $\\mathcal L_j^{\\otimes m}$, very ample by step 7. $X_\\Omega$ is proper over $\\Omega$ (step 1), so [lem-pc-very-ample-disjoint-union] applied to the decomposition $X_\\Omega=X_1\\amalg\\cdots\\amalg X_r$ shows that $p^*(\\mathcal L^{\\otimes m})$ is very ample on $X_\\Omega$.",
-      "uses": [
-        "lem-weil-pbc-module-pullback-tensor",
-        "lem-pc-very-ample-disjoint-union"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "Lean slopmaster2 AlgebraicGeometry.Scheme.isAmple_of_degree_pos (RiemannRoch.lean 1557-1578)",
-        "place": "hv.of_iso (Modules.nonempty_pullback_tensorPow_iso _ ℒ m); the decomposition into components is not in the Lean, which assumes H^0(X,O_X)=k"
-      }
-    },
-    {
-      "text": "*(⇐), descent.* $X$ is of finite type over $k$ and $\\mathcal L^{\\otimes m}$ is invertible; its base change to $\\Omega$ is very ample by step 8, so $\\mathcal L^{\\otimes m}$ is very ample on $X$ [lem-pc-very-ample-descends]. As $m\\geq1$, $\\mathcal L$ is ample [def-sc-ample].",
-      "uses": [
-        "lem-pc-very-ample-descends",
-        "def-sc-ample"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "Lean slopmaster2 AlgebraicGeometry.Scheme.isAmple_of_degree_pos (RiemannRoch.lean 1557-1578)",
-        "place": "IsVeryAmple.of_pullback _ K _ (Modules/Ample.lean 468-482)"
-      }
-    }
-  ],
-  "proof_deps": [
+ "id": "lem-pc-ample-positive-degree",
+ "blueprint": {
+  "is": "lem-pc-ample-positive-degree",
+  "from": null,
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Positive degree is equivalent to ampleness",
+ "statement": "Let $k$ be a field [def-weil-field], $X$ a smooth projective curve over $k$ [def-pc-smooth-projective-curve] (an integral scheme of dimension one, smooth and projective over $k$; in particular proper over $k$) and $\\mathcal L$ an invertible $\\mathcal O_X$-module [def-sc-invertible-module]. Then $\\mathcal L$ is ample on the proper $k$-scheme $X$ in the sense of [def-sc-ample] (some tensor power $\\mathcal L^{\\otimes m}$, $m\\geq1$, is very ample) if and only if its degree $\\deg(\\mathcal L)=\\chi(X,\\mathcal L)-\\chi(X,\\mathcal O_X)$ [def-pc-degree-line-bundle] is positive.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-pc-ample-positive-degree.md",
+  "place": "node lem-pc-ample-positive-degree, order 743",
+  "external": [
+   {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Varieties, Lemma 0B5X (lemma-ample-curve): 'Let $k$ be a field. Let $X$ be a proper curve over $k$. Let $\\mathcal{L}$ be an invertible $\\mathcal{O}_X$-module. Then $\\mathcal{L}$ is ample if and only if $\\deg(\\mathcal{L}) > 0$.' (The import recorded Tag 01IQ, which is Schemes, Lemma lemma-immersion-when-closed, a fact the blueprint proof uses in passing, not the source of the statement.)"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-smooth-projective-curve",
+  "def-sc-invertible-module",
+  "def-sc-ample",
+  "def-pc-degree-line-bundle"
+ ],
+ "proof": [
+  {
+   "text": "*(⇒), the base change.* Assume $\\mathcal L$ ample. Let $\\Omega$ be an algebraic closure of $k$ [def-weil-algebraic-closure], $X_\\Omega:=X\\times_{\\operatorname{Spec}k}\\operatorname{Spec}\\Omega$ with projection $p:X_\\Omega\\to X$ [def-pc-base-change], and $\\mathcal L_\\Omega:=p^*\\mathcal L$ [def-pc-module-pullback], an invertible $\\mathcal O_{X_\\Omega}$-module. $X$ is proper over $k$ [lem-pc-projective-proper], so $X_\\Omega$ is proper over $\\Omega$ [lem-pc-proper-base-change](1), in particular separated and of finite type; and $X$ is a curve over $k$, so $\\dim X_\\Omega=1$ [lem-pc-dim-base-change]. Hence $X_\\Omega$ is a proper curve over the algebraically closed field $\\Omega$ of dimension one in the sense of [def-sc-curves] (possibly disconnected).",
+   "uses": [
     "def-weil-algebraic-closure",
     "def-pc-base-change",
     "def-pc-module-pullback",
     "lem-pc-projective-proper",
     "lem-pc-proper-base-change",
     "lem-pc-dim-base-change",
-    "def-sc-curves",
+    "def-sc-curves"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Lean slopmaster2 AlgebraicGeometry.Scheme.isAmple_iff_degree_pos (WeilConjectures/AlgebraicGeometry/Curve/RiemannRoch.lean 1582-1605)",
+    "place": "proof of the forward direction: the base change XK to K = AlgebraicClosure k, SmoothOfRelativeDimension 1 and IsProper by base change, topologicalKrullDim_eq_of_smoothOfRelativeDimension"
+   }
+  },
+  {
+   "text": "*(⇒), ampleness survives the base change.* By [def-sc-ample] there are $m\\geq1$ and a closed immersion $i:X\\to\\mathbf P^N_k$ with $i^*\\mathcal O(1)\\cong\\mathcal L^{\\otimes m}$. By [lem-pc-very-ample-ample] applied to $i$ and the extension $\\Omega/k$, the base change $p^*(\\mathcal L^{\\otimes m})$ is ample on $X_\\Omega$, so some power $(p^*(\\mathcal L^{\\otimes m}))^{\\otimes m'}$, $m'\\geq1$, is very ample. Pullback commutes with tensor products [lem-weil-pbc-module-pullback-tensor], so $(p^*(\\mathcal L^{\\otimes m}))^{\\otimes m'}\\cong\\mathcal L_\\Omega^{\\otimes mm'}$ with $mm'\\geq1$; hence $\\mathcal L_\\Omega$ is ample on $X_\\Omega$ [def-sc-ample].",
+   "uses": [
     "def-sc-ample",
     "lem-pc-very-ample-ample",
-    "lem-weil-pbc-module-pullback-tensor",
+    "lem-weil-pbc-module-pullback-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Lean slopmaster2 AlgebraicGeometry.Scheme.isAmple_iff_degree_pos (WeilConjectures/AlgebraicGeometry/Curve/RiemannRoch.lean 1582-1605)",
+    "place": "h.pullback_of_field K, i.e. AlgebraicGeometry.IsAmple.pullback_of_field (Modules/Ample.lean 455-466) from IsVeryAmple.pullback_of_field and Scheme.Modules.nonempty_pullback_tensorPow_iso"
+   }
+  },
+  {
+   "text": "*(⇒), positivity over $\\Omega$.* By [lem-sc-hilbert-polynomial] (the proper $\\Omega$-scheme $X_\\Omega$ has dimension $1$ and $\\mathcal L_\\Omega$ is ample invertible by step 2) there is a polynomial $P(n)=an+b$ with $P(n)=\\chi(X_\\Omega,\\mathcal L_\\Omega^{\\otimes n})$ for all $n\\geq0$, and by [lem-sc-ample-positive-degree] (applied to the proper curve $X_\\Omega$ of dimension one of step 1 over the algebraically closed $\\Omega$) its coefficient of $n$ is positive: $a>0$. Since $\\mathcal L_\\Omega^{\\otimes0}=\\mathcal O_{X_\\Omega}$ and $\\mathcal L_\\Omega^{\\otimes1}=\\mathcal L_\\Omega$, $b=P(0)=\\chi(\\mathcal O_{X_\\Omega})$ and $a=P(1)-P(0)=\\chi(\\mathcal L_\\Omega)-\\chi(\\mathcal O_{X_\\Omega})=\\deg_{X_\\Omega}(\\mathcal L_\\Omega)$ [def-pc-degree-line-bundle]. So $\\deg_{X_\\Omega}(\\mathcal L_\\Omega)>0$.",
+   "uses": [
     "lem-sc-hilbert-polynomial",
     "lem-sc-ample-positive-degree",
-    "def-pc-degree-line-bundle",
-    "lem-pc-degree-base-change",
-    "lem-pc-base-change-closure-components",
+    "def-pc-degree-line-bundle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Lean slopmaster2 AlgebraicGeometry.Scheme.isAmple_iff_degree_pos (WeilConjectures/AlgebraicGeometry/Curve/RiemannRoch.lean 1582-1605)",
+    "place": "Scheme.Hom.degree_pos_of_isAmple (Modules/Ample.lean 526-591) and Scheme.Hom.degree_eq_degree_of_topologicalKrullDim_eq_one (Modules/Ample.lean 224-236)"
+   }
+  },
+  {
+   "text": "*(⇒), descent of the degree.* $X$ is proper over $k$ of dimension $1$, so [lem-pc-degree-base-change](1) gives $\\deg_X(\\mathcal L)=\\deg_{X_\\Omega}(\\mathcal L_\\Omega)>0$ by step 3.",
+   "uses": [
+    "lem-pc-degree-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Lean slopmaster2 AlgebraicGeometry.Scheme.isAmple_iff_degree_pos (WeilConjectures/AlgebraicGeometry/Curve/RiemannRoch.lean 1582-1605)",
+    "place": "rw [← Modules.degree_pullback k K ℒ]"
+   }
+  },
+  {
+   "text": "*(⇐), the components over $\\Omega$.* Assume $\\deg_X(\\mathcal L)>0$, and let $\\Omega$, $X_\\Omega$, $p$ be as in step 1. By [lem-pc-base-change-closure-components], with $r:=[\\Gamma(X,\\mathcal O_X):k]\\geq1$, $X_\\Omega=X_1\\amalg\\cdots\\amalg X_r$ with each $X_j$ an open and closed subscheme which is a proper smooth connected curve over $\\Omega$, and $\\mathcal L_j:=(p^*\\mathcal L)|_{X_j}$ satisfies $r\\deg_{X_j}(\\mathcal L_j)=\\deg_X(\\mathcal L)>0$, so $\\deg_{X_j}(\\mathcal L_j)>0$ for every $j$. (When $\\Gamma(X,\\mathcal O_X)=k$, the hypothesis of the unit and of the Lean, $r=1$ and $X_\\Omega$ is connected.)",
+   "uses": [
+    "lem-pc-base-change-closure-components"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/_section.md",
+    "place": "unit sk-thm-picard-rr, proof, (G): 'deg is preserved by flat base change, and $X_{\\bar k}$ is again a smooth proper connected curve of genus $g$ with $H^0=\\bar k$' (stated there under the standing hypothesis $H^0(X,\\mathcal O_X)=k$); Lean: Modules.degree_pullback in isAmple_of_degree_pos (RiemannRoch.lean 1557-1578)"
+   }
+  },
+  {
+   "text": "*(⇐), the two degrees agree on each component.* Fix $j$ and let $g_j:=\\dim_\\Omega H^1(X_j,\\mathcal O_{X_j})$ be the genus of the proper smooth connected curve $X_j$ [def-sc-genus]. By Riemann–Roch [lem-sc-riemann-roch](1), $\\chi(X_j,\\mathcal L_j)=\\deg\\mathcal L_j+1-g_j$ and $\\chi(X_j,\\mathcal O_{X_j})=1-g_j$, where $\\deg\\mathcal L_j$ is the degree of [def-sc-pic0]. Subtracting, $\\deg\\mathcal L_j=\\chi(\\mathcal L_j)-\\chi(\\mathcal O_{X_j})=\\deg_{X_j}(\\mathcal L_j)>0$ by step 5.",
+   "uses": [
     "def-sc-genus",
     "lem-sc-riemann-roch",
-    "def-sc-pic0",
+    "def-sc-pic0"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/_section.md",
+    "place": "unit sk-thm-picard-rr, statement (RR): 'for every line bundle $\\deg\\cL=\\chi(\\cL)-\\chi(\\cO_X)$, i.e. the divisor degree agrees with the $\\chi$-degree'"
+   }
+  },
+  {
+   "text": "*(⇐), a common very ample power.* Put $m:=\\max_j(2g_j+1)\\geq1$. For each $j$, $[\\mathcal L_j^{\\otimes m}]=m[\\mathcal L_j]$ in the Picard group, whose law is $\\otimes$ [def-sc-picard-group] [lem-sc-pic-group], and the degree of [def-sc-pic0] is a homomorphism, so $\\deg(\\mathcal L_j^{\\otimes m})=m\\deg\\mathcal L_j\\geq m\\geq2g_j+1$ (step 6: $\\deg\\mathcal L_j\\geq1$ is a positive integer). By [lem-sc-degree-2g1-very-ample] applied to the proper smooth connected curve $X_j$ of genus $g_j$ over the algebraically closed field $\\Omega$, $\\mathcal L_j^{\\otimes m}$ is very ample on $X_j$.",
+   "uses": [
     "def-sc-picard-group",
     "lem-sc-pic-group",
-    "lem-sc-degree-2g1-very-ample",
-    "lem-pc-very-ample-disjoint-union",
-    "lem-pc-very-ample-descends"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/_section.md",
-    "place": "unit sk-thm-picard-rr, proof of (G), and the Lean proof of AlgebraicGeometry.Scheme.isAmple_iff_degree_pos (WeilConjectures/AlgebraicGeometry/Curve/RiemannRoch.lean 1582-1605) with isAmple_of_degree_pos (1557-1578); generalized by the agent from H^0(X,O_X)=k to an arbitrary smooth projective curve through the components of X_Omega (steps 5, 8). The source of the statement, Stacks Varieties Lemma 0B5X, proves it by another route (sections with affine nonvanishing locus and the cohomological criterion of ampleness)"
+    "def-sc-pic0",
+    "lem-sc-degree-2g1-very-ample"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Lean slopmaster2 AlgebraicGeometry.Scheme.isAmple_of_degree_pos_of_isAlgClosed (RiemannRoch.lean 1544-1555)",
+    "place": "the choice m = 2g+1, Modules.degree_tensorPow and isVeryAmple_of_degree; here taken as the maximum over the components"
+   }
   },
-  "mathlib_searches": [],
-  "mathlib_match": null,
-  "status": "split",
-  "merged_into": null,
-  "import_flags": [
-    "cites_outside_uses",
-    "cites_remark",
-    "proof_cites_literature"
-  ],
-  "blueprint_kind": "lemma",
-  "blueprint_order": 743,
-  "blueprint_uses": [
-    "def-pc-base-change",
-    "def-pc-curve",
-    "def-pc-dimension",
-    "def-pc-geometrically-irreducible",
-    "def-pc-zero-scheme",
-    "def-sc-ample",
-    "def-sc-divisor",
-    "def-sc-effective-cartier-divisor",
-    "lem-pc-degree-base-change",
-    "lem-pc-dim-base-change",
-    "lem-pc-genus-base-change",
-    "lem-pc-genus-well-defined",
-    "lem-pc-h0-geom-connected",
-    "lem-pc-h0-proper-variety",
-    "lem-pc-proper-base-change",
+  {
+   "text": "*(⇐), very ample over $\\Omega$.* Pullback commutes with tensor products [lem-weil-pbc-module-pullback-tensor], so $p^*(\\mathcal L^{\\otimes m})\\cong(p^*\\mathcal L)^{\\otimes m}$, and its restriction to $X_j$ (the pullback along the open immersion $X_j\\to X_\\Omega$) is $\\mathcal L_j^{\\otimes m}$, very ample by step 7. $X_\\Omega$ is proper over $\\Omega$ (step 1), so [lem-pc-very-ample-disjoint-union] applied to the decomposition $X_\\Omega=X_1\\amalg\\cdots\\amalg X_r$ shows that $p^*(\\mathcal L^{\\otimes m})$ is very ample on $X_\\Omega$.",
+   "uses": [
+    "lem-weil-pbc-module-pullback-tensor",
+    "lem-pc-very-ample-disjoint-union"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Lean slopmaster2 AlgebraicGeometry.Scheme.isAmple_of_degree_pos (RiemannRoch.lean 1557-1578)",
+    "place": "hv.of_iso (Modules.nonempty_pullback_tensorPow_iso _ ℒ m); the decomposition into components is not in the Lean, which assumes H^0(X,O_X)=k"
+   }
+  },
+  {
+   "text": "*(⇐), descent.* $X$ is of finite type over $k$ and $\\mathcal L^{\\otimes m}$ is invertible; its base change to $\\Omega$ is very ample by step 8, so $\\mathcal L^{\\otimes m}$ is very ample on $X$ [lem-pc-very-ample-descends]. As $m\\geq1$, $\\mathcal L$ is ample [def-sc-ample].",
+   "uses": [
     "lem-pc-very-ample-descends",
-    "lem-sc-positive-degree-ample",
-    "rem-pc-regularity-sc"
-  ],
-  "uses_not_cited": [
-    "def-pc-base-change",
-    "def-pc-curve",
-    "def-pc-dimension",
-    "def-pc-geometrically-irreducible",
-    "def-sc-divisor",
-    "def-sc-effective-cartier-divisor"
-  ],
-  "proof_split_by": "labels",
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "rests_on_sorry",
-      "decls": [
-        {
-          "name": "AlgebraicGeometry.Scheme.isAmple_iff_degree_pos",
-          "module": "WeilConjectures.AlgebraicGeometry.Curve.RiemannRoch",
-          "lines": [
-            1582,
-            1605
-          ],
-          "kind": "theorem",
-          "sorry": false
-        }
-      ],
-      "missing": [],
-      "open": [
-        {
-          "name": "AlgebraicGeometry.IsVeryAmple.of_pullback",
-          "module": "WeilConjectures.AlgebraicGeometry.Modules.Ample",
-          "lines": [
-            468,
-            482
-          ],
-          "kind": "theorem",
-          "nodes": [],
-          "below": false
-        },
-        {
-          "name": "AlgebraicGeometry.IsVeryAmple.pullback_of_field",
-          "module": "WeilConjectures.AlgebraicGeometry.Modules.Ample",
-          "lines": [
-            442,
-            453
-          ],
-          "kind": "theorem",
-          "nodes": [],
-          "below": false
-        },
-        {
-          "name": "AlgebraicGeometry.ProjectiveSpace.subsingleton_H_of_lt",
-          "module": "WeilConjectures.AlgebraicGeometry.Cohomology.Serre",
-          "lines": [
-            116,
-            127
-          ],
-          "kind": "theorem",
-          "nodes": [],
-          "below": false
-        },
-        {
-          "name": "AlgebraicGeometry.Scheme.Hom.degree_pos_of_isAmple_of_connectedSpace",
-          "module": "WeilConjectures.AlgebraicGeometry.Modules.Ample",
-          "lines": [
-            501,
-            511
-          ],
-          "kind": "theorem",
-          "nodes": [],
-          "below": false
-        },
-        {
-          "name": "AlgebraicGeometry.Scheme.Modules.IsFiniteLocallyFree.dual",
-          "module": "WeilConjectures.AlgebraicGeometry.Modules.Dual",
-          "lines": [
-            178,
-            182
-          ],
-          "kind": "theorem",
-          "nodes": [],
-          "below": false
-        },
-        {
-          "name": "AlgebraicGeometry.Scheme.Modules.IsFiniteLocallyFree.tensorObj",
-          "module": "WeilConjectures.AlgebraicGeometry.Modules.Dual",
-          "lines": [
-            184,
-            188
-          ],
-          "kind": "theorem",
-          "nodes": [],
-          "below": false
-        },
-        {
-          "name": "AlgebraicGeometry.Scheme.Modules.exists_addEquiv_sections_higherDirectImage_H",
-          "module": "WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage",
-          "lines": [
-            307,
-            324
-          ],
-          "kind": "theorem",
-          "nodes": [],
-          "below": false
-        },
-        {
-          "name": "AlgebraicGeometry.Scheme.Modules.finite_sections_higherDirectImage",
-          "module": "WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage",
-          "lines": [
-            617,
-            632
-          ],
-          "kind": "theorem",
-          "nodes": [],
-          "below": false
-        },
-        {
-          "name": "AlgebraicGeometry.Scheme.Modules.isQuasicoherent_higherDirectImage",
-          "module": "WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage",
-          "lines": [
-            467,
-            474
-          ],
-          "kind": "theorem",
-          "nodes": [],
-          "below": false
-        },
-        {
-          "name": "AlgebraicGeometry.Scheme.Modules.nonempty_H_pullback_linearEquiv",
-          "module": "WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar",
-          "lines": [
-            100,
-            116
-          ],
-          "kind": "theorem",
-          "nodes": [],
-          "below": false
-        },
-        {
-          "name": "AlgebraicGeometry.Scheme.Modules.nonempty_iso_dual_tensorObj_dual_tensorObj",
-          "module": "WeilConjectures.AlgebraicGeometry.Modules.Dual",
-          "lines": [
-            204,
-            214
-          ],
-          "kind": "theorem",
-          "nodes": [],
-          "below": false
-        },
-        {
-          "name": "AlgebraicGeometry.Scheme.Modules.subsingleton_H_of_topologicalKrullDim_lt",
-          "module": "WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar",
-          "lines": [
-            64,
-            73
-          ],
-          "kind": "theorem",
-          "nodes": [],
-          "below": false
-        },
-        {
-          "name": "AlgebraicGeometry.Scheme.exists_isIso_pushforwardHomObjComparison_unit",
-          "module": "WeilConjectures.AlgebraicGeometry.Curve.SerreDuality",
-          "lines": [
-            527,
-            541
-          ],
-          "kind": "theorem",
-          "nodes": [],
-          "below": false
-        }
-      ]
-    }
-  },
-  "chapter": "sec-picard-framework",
-  "unit": "sk-thm-picard-rr",
-  "split_report": {
-    "date": "2026-10-10",
-    "item": "lem-pc-ample-positive-degree",
-    "worker": "stage1",
-    "summary": "Statement made self-contained (smooth projective curve, invertible module, ample of def-sc-ample, chi-degree of def-pc-degree-line-bundle); stmt_deps replaced (the old ones, base change, dimension, divisors, were not used by the statement). External source corrected from Tag 01IQ (Schemes, immersion-when-closed) to Varieties Lemma 0B5X. Proof rewritten along the Lean route of isAmple_iff_degree_pos: (⇒) base change to an algebraic closure, ampleness survives (lem-pc-very-ample-ample), the ample degree on the proper curve over Omega is positive (lem-sc-ample-positive-degree, a tool of unit sk-prop-av-ample-positive), and the degree is invariant (lem-pc-degree-base-change(1)); (⇐) the unit's step (G): over Omega each component of X_Omega has positive degree, a common power 2g+1 is very ample (lem-sc-degree-2g1-very-ample), very ample on the disjoint union, and very ampleness descends (lem-pc-very-ample-descends). The imported (⇐) proof claimed X_{bar k} integral, which is false unless H^0(X,O_X)=k (X = P^1_{k'} over k with k'/k separable of degree 2 gives two copies of P^1); the Lean and the unit assume H^0(X,O_X)=k. Two new nodes: lem-pc-base-change-closure-components (components of X_Omega and their degrees) and lem-pc-very-ample-disjoint-union.",
-    "blueprint": "Steps 1-4 replace the blueprint's (⇒) paragraph (zero scheme of a section of the very ample power, Tag 01IQ, chi-additivity) by the Lean's base-change route; steps 5-9 realize the blueprint's (⇐) paragraph: 'By [lem-pc-degree-base-change](1), deg(L_{bar k}) = deg L > 0, and X_{bar k} is a smooth projective curve over ... bar k' (steps 1, 5, corrected: X_{bar k} is a disjoint union of r such curves), 'By ... [lem-sc-positive-degree-ample], applied to ... X_{bar k} of genus g ... L_{bar k} is ample' (steps 6-8, with the argument of lem-sc-positive-degree-ample done per component with a common power), 'by [lem-pc-very-ample-descends] L^m is very ample over k, hence L is ample' (step 9)."
-  },
-  "tool_uses": [
-    "lem-sc-ample-positive-degree",
-    "lem-sc-hilbert-polynomial",
-    "lem-weil-pbc-module-pullback-tensor"
-  ],
-  "reviewed": "2026-10-10 L: 9 steps along the Lean route checked ((=>): base change to an algebraic closure, ample preserved, degree positive by lem-sc-ample-positive-degree with the Hilbert polynomial, degree invariant under base change; (<=): each piece of X over Omega has positive degree by the new components node, Riemann-Roch identifies the degrees, L^m very ample on every piece for m = max(2g_j+1), very ample on the disjoint union by the new node, descends to X). tool_uses lem-sc-ample-positive-degree, lem-sc-hilbert-polynomial, lem-weil-pbc-module-pullback-tensor. The imported (<=) proof assumed X geometrically connected (false without H^0 = k: P^1 over a quadratic k'); the general statement (0B5X) kept, two new unsplit nodes (base-change closure components with the degree relation; very ample on a finite clopen decomposition). External tag corrected 01IQ -> 0B5X. HUMAN.md entry for the proof error.",
-  "lean": {
-    "module": "WeilConjectures.AlgebraicGeometry.Curve.RiemannRoch",
-    "declaration": "AlgebraicGeometry.Scheme.isAmple_iff_degree_pos",
-    "branch": "slopmaster2",
-    "line": 1582,
-    "declarations": [
-      "AlgebraicGeometry.Scheme.isAmple_iff_degree_pos"
-    ],
-    "sorry_free": false,
-    "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state rests_on_sorry)"
+    "def-sc-ample"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Lean slopmaster2 AlgebraicGeometry.Scheme.isAmple_of_degree_pos (RiemannRoch.lean 1557-1578)",
+    "place": "IsVeryAmple.of_pullback _ K _ (Modules/Ample.lean 468-482)"
+   }
   }
+ ],
+ "proof_deps": [
+  "def-weil-algebraic-closure",
+  "def-pc-base-change",
+  "def-pc-module-pullback",
+  "lem-pc-projective-proper",
+  "lem-pc-proper-base-change",
+  "lem-pc-dim-base-change",
+  "def-sc-curves",
+  "def-sc-ample",
+  "lem-pc-very-ample-ample",
+  "lem-weil-pbc-module-pullback-tensor",
+  "lem-sc-hilbert-polynomial",
+  "lem-sc-ample-positive-degree",
+  "def-pc-degree-line-bundle",
+  "lem-pc-degree-base-change",
+  "lem-pc-base-change-closure-components",
+  "def-sc-genus",
+  "lem-sc-riemann-roch",
+  "def-sc-pic0",
+  "def-sc-picard-group",
+  "lem-sc-pic-group",
+  "lem-sc-degree-2g1-very-ample",
+  "lem-pc-very-ample-disjoint-union",
+  "lem-pc-very-ample-descends"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/_section.md",
+  "place": "unit sk-thm-picard-rr, proof of (G), and the Lean proof of AlgebraicGeometry.Scheme.isAmple_iff_degree_pos (WeilConjectures/AlgebraicGeometry/Curve/RiemannRoch.lean 1582-1605) with isAmple_of_degree_pos (1557-1578); generalized by the agent from H^0(X,O_X)=k to an arbitrary smooth projective curve through the components of X_Omega (steps 5, 8). The source of the statement, Stacks Varieties Lemma 0B5X, proves it by another route (sections with affine nonvanishing locus and the cohomological criterion of ampleness)"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [
+  "cites_outside_uses",
+  "cites_remark",
+  "proof_cites_literature"
+ ],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 743,
+ "blueprint_uses": [
+  "def-pc-base-change",
+  "def-pc-curve",
+  "def-pc-dimension",
+  "def-pc-geometrically-irreducible",
+  "def-pc-zero-scheme",
+  "def-sc-ample",
+  "def-sc-divisor",
+  "def-sc-effective-cartier-divisor",
+  "lem-pc-degree-base-change",
+  "lem-pc-dim-base-change",
+  "lem-pc-genus-base-change",
+  "lem-pc-genus-well-defined",
+  "lem-pc-h0-geom-connected",
+  "lem-pc-h0-proper-variety",
+  "lem-pc-proper-base-change",
+  "lem-pc-very-ample-descends",
+  "lem-sc-positive-degree-ample",
+  "rem-pc-regularity-sc"
+ ],
+ "uses_not_cited": [
+  "def-pc-base-change",
+  "def-pc-curve",
+  "def-pc-dimension",
+  "def-pc-geometrically-irreducible",
+  "def-sc-divisor",
+  "def-sc-effective-cartier-divisor"
+ ],
+ "proof_split_by": "labels",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.Scheme.isAmple_iff_degree_pos"
+   ]
+  },
+  "slopmaster2": {
+   "state": "rests_on_sorry",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.Scheme.isAmple_iff_degree_pos",
+     "module": "WeilConjectures.AlgebraicGeometry.Curve.RiemannRoch",
+     "lines": [
+      1513,
+      1536
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": [
+    {
+     "name": "AlgebraicGeometry.ProjectiveSpace.subsingleton_H_of_lt",
+     "module": "WeilConjectures.AlgebraicGeometry.Cohomology.Serre",
+     "lines": [
+      116,
+      127
+     ],
+     "kind": "theorem",
+     "nodes": [
+      "lem-pc-projective-space-cohomology-bound"
+     ],
+     "below": true
+    },
+    {
+     "name": "AlgebraicGeometry.Scheme.Modules.exists_addEquiv_sections_higherDirectImage_H",
+     "module": "WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Sections",
+     "lines": [
+      31,
+      48
+     ],
+     "kind": "theorem",
+     "nodes": [
+      "lem-pc-cohomology-sections-affine-base"
+     ],
+     "below": true
+    },
+    {
+     "name": "AlgebraicGeometry.Scheme.Modules.finite_sections_higherDirectImage",
+     "module": "WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.FiniteFreeComplex",
+     "lines": [
+      137,
+      152
+     ],
+     "kind": "theorem",
+     "nodes": [],
+     "below": false
+    },
+    {
+     "name": "AlgebraicGeometry.Scheme.Modules.nonempty_H_pullback_linearEquiv",
+     "module": "WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar",
+     "lines": [
+      100,
+      116
+     ],
+     "kind": "theorem",
+     "nodes": [
+      "lem-sc-flat-base-change-coherent"
+     ],
+     "below": true
+    },
+    {
+     "name": "AlgebraicGeometry.Scheme.Modules.subsingleton_H_of_topologicalKrullDim_lt",
+     "module": "WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar",
+     "lines": [
+      64,
+      73
+     ],
+     "kind": "theorem",
+     "nodes": [
+      "lem-sc-noetherian-cohomology-above-dimension"
+     ],
+     "below": true
+    },
+    {
+     "name": "AlgebraicGeometry.Scheme.exists_isIso_pushforwardHomObjComparison_unit",
+     "module": "WeilConjectures.AlgebraicGeometry.Curve.SerreDuality",
+     "lines": [
+      527,
+      541
+     ],
+     "kind": "theorem",
+     "nodes": [
+      "lem-sc-finite-duality",
+      "lem-sc-finite-duality-trace"
+     ],
+     "below": true
+    }
+   ]
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-rr",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-pc-ample-positive-degree",
+  "worker": "stage1",
+  "summary": "Statement made self-contained (smooth projective curve, invertible module, ample of def-sc-ample, chi-degree of def-pc-degree-line-bundle); stmt_deps replaced (the old ones, base change, dimension, divisors, were not used by the statement). External source corrected from Tag 01IQ (Schemes, immersion-when-closed) to Varieties Lemma 0B5X. Proof rewritten along the Lean route of isAmple_iff_degree_pos: (⇒) base change to an algebraic closure, ampleness survives (lem-pc-very-ample-ample), the ample degree on the proper curve over Omega is positive (lem-sc-ample-positive-degree, a tool of unit sk-prop-av-ample-positive), and the degree is invariant (lem-pc-degree-base-change(1)); (⇐) the unit's step (G): over Omega each component of X_Omega has positive degree, a common power 2g+1 is very ample (lem-sc-degree-2g1-very-ample), very ample on the disjoint union, and very ampleness descends (lem-pc-very-ample-descends). The imported (⇐) proof claimed X_{bar k} integral, which is false unless H^0(X,O_X)=k (X = P^1_{k'} over k with k'/k separable of degree 2 gives two copies of P^1); the Lean and the unit assume H^0(X,O_X)=k. Two new nodes: lem-pc-base-change-closure-components (components of X_Omega and their degrees) and lem-pc-very-ample-disjoint-union.",
+  "blueprint": "Steps 1-4 replace the blueprint's (⇒) paragraph (zero scheme of a section of the very ample power, Tag 01IQ, chi-additivity) by the Lean's base-change route; steps 5-9 realize the blueprint's (⇐) paragraph: 'By [lem-pc-degree-base-change](1), deg(L_{bar k}) = deg L > 0, and X_{bar k} is a smooth projective curve over ... bar k' (steps 1, 5, corrected: X_{bar k} is a disjoint union of r such curves), 'By ... [lem-sc-positive-degree-ample], applied to ... X_{bar k} of genus g ... L_{bar k} is ample' (steps 6-8, with the argument of lem-sc-positive-degree-ample done per component with a common power), 'by [lem-pc-very-ample-descends] L^m is very ample over k, hence L is ample' (step 9)."
+ },
+ "tool_uses": [
+  "lem-sc-ample-positive-degree",
+  "lem-sc-hilbert-polynomial",
+  "lem-weil-pbc-module-pullback-tensor"
+ ],
+ "reviewed": "2026-10-10 L: 9 steps along the Lean route checked ((=>): base change to an algebraic closure, ample preserved, degree positive by lem-sc-ample-positive-degree with the Hilbert polynomial, degree invariant under base change; (<=): each piece of X over Omega has positive degree by the new components node, Riemann-Roch identifies the degrees, L^m very ample on every piece for m = max(2g_j+1), very ample on the disjoint union by the new node, descends to X). tool_uses lem-sc-ample-positive-degree, lem-sc-hilbert-polynomial, lem-weil-pbc-module-pullback-tensor. The imported (<=) proof assumed X geometrically connected (false without H^0 = k: P^1 over a quadratic k'); the general statement (0B5X) kept, two new unsplit nodes (base-change closure components with the degree relation; very ample on a finite clopen decomposition). External tag corrected 01IQ -> 0B5X. HUMAN.md entry for the proof error.",
+ "lean": {
+  "module": "WeilConjectures.AlgebraicGeometry.Curve.RiemannRoch",
+  "declaration": "AlgebraicGeometry.Scheme.isAmple_iff_degree_pos",
+  "branch": "slopmaster2",
+  "line": 1582,
+  "declarations": [
+   "AlgebraicGeometry.Scheme.isAmple_iff_degree_pos"
+  ],
+  "sorry_free": false,
+  "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state rests_on_sorry)"
+ }
 }

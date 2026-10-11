@@ -1,105 +1,43 @@
 {
-  "id": "thm-a1-fourier-t-exact",
-  "blueprint": {
-    "is": "thm-a1-fourier-t-exact",
-    "from": null,
-    "same_as": null
-  },
-  "kind": "statement",
-  "title": "The Fourier transform is perverse t-exact on the line",
-  "statement": "In the conventions of [rem-dl-a1-conventions], let\n$\\operatorname{FT}_\\psi$ be the Fourier–Deligne transform of\n[def-fd-transform] from the line $A_0$ to the dual line $A'_0$, and\nwrite $\\mathrm{Perv}(A_0)$, $\\mathrm{Perv}(A'_0)$ for the hearts of the\nperverse t-structure of [thm-a1-curve-perverse-heart], built from the\nclasses ${}^pD^{\\le0}$, ${}^pD^{\\ge0}$ of\n[def-per-perverse-subcategories]. Then $\\operatorname{FT}_\\psi$ is\nt-exact:\n\n$$\n\\operatorname{FT}_\\psi\\bigl({}^pD^{\\le0}(A_0)\\bigr)\\subset{}^pD^{\\le0}(A'_0),\n\\qquad\n\\operatorname{FT}_\\psi\\bigl({}^pD^{\\ge0}(A_0)\\bigr)\\subset{}^pD^{\\ge0}(A'_0),\n$$\n\nso it sends $\\mathrm{Perv}(A_0)$ into $\\mathrm{Perv}(A'_0)$, and\nlikewise $\\operatorname{FT}_{\\psi^{-1}}$ (from $A'_0$ to $A_0$) is\nt-exact and sends $\\mathrm{Perv}(A'_0)$ into $\\mathrm{Perv}(A_0)$. This\nsharpens the amplitude bound $[-1,1]$ of [thm-fd-fourier-perverse] to\namplitude $0$. Moreover, with the Tate twist of [def-wf-tate-twist],\nthe functors\n\n$$\n\\operatorname{FT}_\\psi:\\mathrm{Perv}(A_0)\\rightleftarrows\\mathrm{Perv}(A'_0):\nG:=\\operatorname{FT}_{\\psi^{-1}}(-)(1)\n$$\n\nare mutually quasi-inverse exact equivalences of abelian categories.",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-perverse/thm-a1-fourier-t-exact.md",
-    "place": "node thm-a1-fourier-t-exact, order 2749"
-  },
-  "stmt_deps": [
-    "def-fd-transform",
-    "thm-a1-curve-perverse-heart",
-    "def-per-perverse-subcategories",
-    "thm-fd-fourier-perverse",
-    "def-wf-tate-twist"
-  ],
-  "proof": [
-    {
-      "text": "Throughout, a class is tested after the geometric base change to $k$:\ncohomology sheaves commute with this pullback, supports and their\ndimensions are unchanged, and the transform commutes with it by\n[lem-fd-base-change]. By [thm-fd-transform-well-defined] the transform\nis an exact triangulated functor with values in $D^b_c$.",
-      "uses": [
-        "lem-fd-base-change",
-        "thm-fd-transform-well-defined"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "*Step 0: the upper class on a curve.* On a curve every support has\ndimension $\\le1$, so the support condition of\n[def-per-support-condition] says exactly: $K\\in{}^pD^{\\le0}$ if and\nonly if $\\mathcal H^aK=0$ for $a>0$ and $\\mathcal H^0K$ has finite\nsupport. This class is stable under the shifts $[n]$, $n\\ge0$, and under\nextensions: for a triangle $K'\\to K\\to K''\\to$ the long exact sequence\nof cohomology sheaves gives\n$\\operatorname{Supp}\\mathcal H^aK\\subset\n\\operatorname{Supp}\\mathcal H^aK'\\cup\\operatorname{Supp}\\mathcal H^aK''$.\nIt is also stable under the twist $(1)$, which is the tensor with a\nlisse sheaf of rank one and so preserves each cohomology sheaf's support.",
-      "uses": [
-        "def-per-support-condition"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "*Step 1: $\\operatorname{FT}_\\psi$ preserves the upper class.* Let\n$K\\in{}^pD^{\\le0}(A)$. The ordinary truncation triangles exhibit $K$ as\nan iterated extension of $\\mathcal H^0K$ (finite support, degree $0$)\nand of objects $\\mathcal G[m]$ with $\\mathcal G=\\mathcal H^{-m}K$ a\nconstructible sheaf and $m\\ge1$. By Step 0 and exactness of the\ntransform it suffices to treat (a) $\\mathcal G[1]$ for an arbitrary\nconstructible sheaf $\\mathcal G$ (then $\\mathcal G[m]=\\mathcal G[1][m-1]$\nfollows), and (b) a sheaf $\\mathcal G$ of finite support in degree $0$.\n\nFor a geometric point $\\xi$ of $A'$ the stalk formula\n[lem-fd-stalk-formula] (with $r=1$) gives\n\n$$\n\\operatorname{FT}_\\psi(\\mathcal G)_{\\xi}\\cong\nR\\Gamma_c\\bigl(A,\\mathcal G\\otimes\\mathcal L_{\\psi(\\xi x)}\\bigr)[1].\n$$\n\n(b) If $\\mathcal G$ has finite support, so has\n$\\mathcal G\\otimes\\mathcal L_{\\psi(\\xi x)}$, whose compact-support\ncohomology is the direct sum of its stalks, in degree $0$ (a\nzero-dimensional scheme over $k$ has no higher cohomology). So every\nstalk of $\\operatorname{FT}_\\psi(\\mathcal G)$ is concentrated in degree\n$-1$, and $\\operatorname{FT}_\\psi(\\mathcal G)\\in{}^pD^{\\le0}(A')$ by\nStep 0.\n\n(a) For a constructible sheaf $\\mathcal G$ the twisted groups\n$H^i_c(A,\\mathcal G\\otimes\\mathcal L_{\\psi(\\xi x)})$ vanish for\n$i\\notin\\{0,1,2\\}$ by [lem-zl-affine-curve-range], so the stalks of\n$\\operatorname{FT}_\\psi(\\mathcal G[1])$ live in degrees $-2,-1,0$, and\n\n$$\n\\mathcal H^0\\bigl(\\operatorname{FT}_\\psi(\\mathcal G[1])\\bigr)_{\\xi}\n\\cong H^2_c\\bigl(A,\\mathcal G\\otimes\\mathcal L_{\\psi(\\xi x)}\\bigr).\n$$\n\nIt remains to see that this is nonzero for only finitely many $\\xi$ (the\nsheaf $\\mathcal H^0$ being constructible, its support is then finite).\nLet $j:U\\hookrightarrow A$ be a dense open on which $\\mathcal G$ is\nlisse, with finite complement $Z$. In the sequence\n$0\\to j_!j^*\\mathcal G\\to\\mathcal G\\to i_*i^*\\mathcal G\\to0$, tensored\nwith the lisse $\\mathcal L_{\\psi(\\xi x)}$, the third term has no\n$H^1_c$ or $H^2_c$ (finite support, as in (b)), so\n\n$$\nH^2_c\\bigl(A,\\mathcal G\\otimes\\mathcal L_{\\psi(\\xi x)}\\bigr)\\cong\nH^2_c\\bigl(U,\\mathcal G|_U\\otimes\\mathcal L_{\\psi(\\xi x)}|_U\\bigr)\n\\cong\\bigl(V\\otimes\\chi_\\xi\\bigr)_{\\pi_1(U)}(-1)\n$$\n\nby [lem-a1-affine-hc2], where $V=\\mathcal G_{\\bar\\eta}$ and $\\chi_\\xi$ is\nthe rank-one character of $\\mathcal L_{\\psi(\\xi x)}|_U$. These\ncoinvariants are nonzero exactly when $V$ has a quotient isomorphic to\n$\\chi_\\xi^{-1}=\\chi_{-\\xi}$ ([lem-fd-as-characters]:\n$\\mathcal L_{\\psi(\\xi x)}^{-1}\\cong\\mathcal L_{\\psi(-\\xi x)}$). The\ncharacters $\\chi_a$ are pairwise distinct: if $\\chi_a=\\chi_b$ with\n$a\\neq b$, then by [lem-fd-as-characters]\n$\\mathcal L_{\\psi((a-b)x)}$ is trivial on $U$, hence on $A$ (a rank-one\nlisse sheaf on the normal connected $A$ that is trivial on a dense open\nis trivial, its global section extending), contradicting\n$H^0(A,\\mathcal L_{\\psi((a-b)x)})=0$ from\n[lem-fd-cohomology-affine-line-character]. If $\\chi_{a_1},\\dots,\\chi_{a_n}$\nare pairwise distinct quotients of $V$, the combined map\n$V\\to\\bigoplus_i\\chi_{a_i}$ is surjective (its image is a submodule of a\nsum of pairwise non-isomorphic simple modules projecting onto each\nsummand, hence the whole sum), so $n\\le\\dim V=\\operatorname{rank}\\mathcal G|_U$.\nHence $\\mathcal H^0\\operatorname{FT}_\\psi(\\mathcal G[1])$ has finite\nsupport, and $\\operatorname{FT}_\\psi(\\mathcal G[1])\\in{}^pD^{\\le0}(A')$ by\nStep 0. This proves\n$\\operatorname{FT}_\\psi({}^pD^{\\le0}(A))\\subset{}^pD^{\\le0}(A')$. The\nargument uses nothing about $\\psi$ beyond its nontriviality, so it\napplies equally to $\\operatorname{FT}_{\\psi^{-1}}$ from $A'$ to $A$, and\nby Step 0 also to $G=\\operatorname{FT}_{\\psi^{-1}}(-)(1)$.\n\n*Step 2: $\\operatorname{FT}_\\psi$ is an equivalence with quasi-inverse\n$G$.* Fourier inversion [lem-fd-inversion] with $r=1$ gives\n$\\operatorname{FT}_{\\psi^{-1}}\\operatorname{FT}_\\psi(K)\\cong K(-1)$, hence\n$G\\circ\\operatorname{FT}_\\psi\\cong\\mathrm{id}$; applied to the character\n$\\psi^{-1}$ it gives\n$\\operatorname{FT}_\\psi\\operatorname{FT}_{\\psi^{-1}}(M)\\cong M(-1)$, and\nsince the twist is the pullback of a sheaf on the base, linearity over the\nbase [prop-base-linear] gives\n$\\operatorname{FT}_\\psi(M(1))\\cong\\operatorname{FT}_\\psi(M)(1)$, so\n$\\operatorname{FT}_\\psi\\circ G\\cong\\mathrm{id}$.",
-      "uses": [
-        "lem-fd-stalk-formula",
-        "lem-zl-affine-curve-range",
-        "lem-a1-affine-hc2",
-        "lem-fd-as-characters",
-        "lem-fd-cohomology-affine-line-character",
-        "lem-fd-inversion",
-        "prop-base-linear"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "*Step 3: the lower class.* In a t-structure, as provided by\n[thm-a1-curve-perverse-heart], one has\n${}^pD^{\\ge0}=\\{K:\\operatorname{Hom}(M,K)=0\\ \\text{for all}\\ M\\in{}^pD^{\\le-1}\\}$.\nIndeed $\\subset$ is the orthogonality axiom; conversely, if $K$ is\nright orthogonal to ${}^pD^{\\le-1}$, the map\n$\\tau^{\\le-1}K\\to K$ in the truncation triangle\n$\\tau^{\\le-1}K\\to K\\to\\tau^{\\ge0}K\\to$ vanishes, so the triangle splits\nand $\\tau^{\\le-1}K[1]$ is a direct summand of $\\tau^{\\ge0}K$; it\ntherefore lies in ${}^pD^{\\le-2}\\cap{}^pD^{\\ge0}$, which is zero by\northogonality, so $K\\cong\\tau^{\\ge0}K$. Now let $K\\in{}^pD^{\\ge0}(A)$\nand $M\\in{}^pD^{\\le-1}(A')$. By Step 2,\n\n$$\n\\operatorname{Hom}\\bigl(M,\\operatorname{FT}_\\psi K\\bigr)\\cong\n\\operatorname{Hom}\\bigl(GM,K\\bigr),\n$$\n\nand $GM=G(M[-1])[1]\\in{}^pD^{\\le-1}(A)$ by Step 1 (the classes are\ncompatible with shifts), so the right-hand side vanishes. Hence\n$\\operatorname{FT}_\\psi K\\in{}^pD^{\\ge0}(A')$. The same argument with\nthe roles of $\\psi,\\psi^{-1}$ and of the two lines exchanged (and the\ntwist, which preserves ${}^pD^{\\ge0}$ by the same orthogonality since\n$(-1)$ is its inverse) shows that $\\operatorname{FT}_{\\psi^{-1}}$ and $G$\npreserve ${}^pD^{\\ge0}$.",
-      "uses": [
-        "thm-a1-curve-perverse-heart"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "*Step 4: the hearts.* By Steps 1 and 3, $\\operatorname{FT}_\\psi$ and $G$\nare t-exact, hence restrict to functors between $\\mathrm{Perv}(A_0)$ and\n$\\mathrm{Perv}(A'_0)$, which are quasi-inverse by Step 2. A t-exact\ntriangulated functor induces an exact functor on the abelian hearts of\n[thm-a1-curve-perverse-heart], the short exact sequences of a heart\nbeing the distinguished triangles with all three vertices in it. So\n$\\operatorname{FT}_\\psi$ is an exact equivalence\n$\\mathrm{Perv}(A_0)\\simeq\\mathrm{Perv}(A'_0)$ with quasi-inverse $G$.",
-      "uses": [
-        "thm-a1-curve-perverse-heart"
-      ],
-      "elementary": false
-    }
-  ],
-  "proof_deps": [
+ "id": "thm-a1-fourier-t-exact",
+ "blueprint": {
+  "is": "thm-a1-fourier-t-exact",
+  "from": null,
+  "same_as": null
+ },
+ "kind": "statement",
+ "title": "The Fourier transform is perverse t-exact on the line",
+ "statement": "In the conventions of [rem-dl-a1-conventions], let\n$\\operatorname{FT}_\\psi$ be the Fourier–Deligne transform of\n[def-fd-transform] from the line $A_0$ to the dual line $A'_0$, and\nwrite $\\mathrm{Perv}(A_0)$, $\\mathrm{Perv}(A'_0)$ for the hearts of the\nperverse t-structure of [thm-a1-curve-perverse-heart], built from the\nclasses ${}^pD^{\\le0}$, ${}^pD^{\\ge0}$ of\n[def-per-perverse-subcategories]. Then $\\operatorname{FT}_\\psi$ is\nt-exact:\n\n$$\n\\operatorname{FT}_\\psi\\bigl({}^pD^{\\le0}(A_0)\\bigr)\\subset{}^pD^{\\le0}(A'_0),\n\\qquad\n\\operatorname{FT}_\\psi\\bigl({}^pD^{\\ge0}(A_0)\\bigr)\\subset{}^pD^{\\ge0}(A'_0),\n$$\n\nso it sends $\\mathrm{Perv}(A_0)$ into $\\mathrm{Perv}(A'_0)$, and\nlikewise $\\operatorname{FT}_{\\psi^{-1}}$ (from $A'_0$ to $A_0$) is\nt-exact and sends $\\mathrm{Perv}(A'_0)$ into $\\mathrm{Perv}(A_0)$. This\nsharpens the amplitude bound $[-1,1]$ of [thm-fd-fourier-perverse] to\namplitude $0$. Moreover, with the Tate twist of [def-wf-tate-twist],\nthe functors\n\n$$\n\\operatorname{FT}_\\psi:\\mathrm{Perv}(A_0)\\rightleftarrows\\mathrm{Perv}(A'_0):\nG:=\\operatorname{FT}_{\\psi^{-1}}(-)(1)\n$$\n\nare mutually quasi-inverse exact equivalences of abelian categories.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-perverse/thm-a1-fourier-t-exact.md",
+  "place": "node thm-a1-fourier-t-exact, order 2749"
+ },
+ "stmt_deps": [
+  "def-fd-transform",
+  "thm-a1-curve-perverse-heart",
+  "def-per-perverse-subcategories",
+  "thm-fd-fourier-perverse",
+  "def-wf-tate-twist"
+ ],
+ "proof": [
+  {
+   "text": "Throughout, a class is tested after the geometric base change to $k$:\ncohomology sheaves commute with this pullback, supports and their\ndimensions are unchanged, and the transform commutes with it by\n[lem-fd-base-change]. By [thm-fd-transform-well-defined] the transform\nis an exact triangulated functor with values in $D^b_c$.",
+   "uses": [
     "lem-fd-base-change",
-    "thm-fd-transform-well-defined",
-    "def-per-support-condition",
-    "lem-fd-stalk-formula",
-    "lem-zl-affine-curve-range",
-    "lem-a1-affine-hc2",
-    "lem-fd-as-characters",
-    "lem-fd-cohomology-affine-line-character",
-    "lem-fd-inversion",
-    "prop-base-linear",
-    "thm-a1-curve-perverse-heart"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/blueprint/master/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-perverse/thm-a1-fourier-t-exact.md",
-    "place": "## Proof"
+    "thm-fd-transform-well-defined"
+   ],
+   "elementary": false
   },
-  "mathlib_searches": [],
-  "mathlib_match": null,
-  "status": "imported",
-  "merged_into": null,
-  "import_flags": [
-    "cites_remark"
-  ],
-  "blueprint_kind": "theorem",
-  "blueprint_order": 2749,
-  "blueprint_uses": [
-    "def-per-perverse-subcategories",
-    "def-per-support-condition",
-    "def-fd-transform",
-    "def-wf-tate-twist",
-    "rem-dl-a1-conventions",
-    "thm-a1-curve-perverse-heart",
-    "thm-fd-fourier-perverse",
-    "thm-fd-transform-well-defined",
-    "lem-fd-base-change",
+  {
+   "text": "*Step 0: the upper class on a curve.* On a curve every support has\ndimension $\\le1$, so the support condition of\n[def-per-support-condition] says exactly: $K\\in{}^pD^{\\le0}$ if and\nonly if $\\mathcal H^aK=0$ for $a>0$ and $\\mathcal H^0K$ has finite\nsupport. This class is stable under the shifts $[n]$, $n\\ge0$, and under\nextensions: for a triangle $K'\\to K\\to K''\\to$ the long exact sequence\nof cohomology sheaves gives\n$\\operatorname{Supp}\\mathcal H^aK\\subset\n\\operatorname{Supp}\\mathcal H^aK'\\cup\\operatorname{Supp}\\mathcal H^aK''$.\nIt is also stable under the twist $(1)$, which is the tensor with a\nlisse sheaf of rank one and so preserves each cohomology sheaf's support.",
+   "uses": [
+    "def-per-support-condition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*Step 1: $\\operatorname{FT}_\\psi$ preserves the upper class.* Let\n$K\\in{}^pD^{\\le0}(A)$. The ordinary truncation triangles exhibit $K$ as\nan iterated extension of $\\mathcal H^0K$ (finite support, degree $0$)\nand of objects $\\mathcal G[m]$ with $\\mathcal G=\\mathcal H^{-m}K$ a\nconstructible sheaf and $m\\ge1$. By Step 0 and exactness of the\ntransform it suffices to treat (a) $\\mathcal G[1]$ for an arbitrary\nconstructible sheaf $\\mathcal G$ (then $\\mathcal G[m]=\\mathcal G[1][m-1]$\nfollows), and (b) a sheaf $\\mathcal G$ of finite support in degree $0$.\n\nFor a geometric point $\\xi$ of $A'$ the stalk formula\n[lem-fd-stalk-formula] (with $r=1$) gives\n\n$$\n\\operatorname{FT}_\\psi(\\mathcal G)_{\\xi}\\cong\nR\\Gamma_c\\bigl(A,\\mathcal G\\otimes\\mathcal L_{\\psi(\\xi x)}\\bigr)[1].\n$$\n\n(b) If $\\mathcal G$ has finite support, so has\n$\\mathcal G\\otimes\\mathcal L_{\\psi(\\xi x)}$, whose compact-support\ncohomology is the direct sum of its stalks, in degree $0$ (a\nzero-dimensional scheme over $k$ has no higher cohomology). So every\nstalk of $\\operatorname{FT}_\\psi(\\mathcal G)$ is concentrated in degree\n$-1$, and $\\operatorname{FT}_\\psi(\\mathcal G)\\in{}^pD^{\\le0}(A')$ by\nStep 0.\n\n(a) For a constructible sheaf $\\mathcal G$ the twisted groups\n$H^i_c(A,\\mathcal G\\otimes\\mathcal L_{\\psi(\\xi x)})$ vanish for\n$i\\notin\\{0,1,2\\}$ by [lem-zl-affine-curve-range], so the stalks of\n$\\operatorname{FT}_\\psi(\\mathcal G[1])$ live in degrees $-2,-1,0$, and\n\n$$\n\\mathcal H^0\\bigl(\\operatorname{FT}_\\psi(\\mathcal G[1])\\bigr)_{\\xi}\n\\cong H^2_c\\bigl(A,\\mathcal G\\otimes\\mathcal L_{\\psi(\\xi x)}\\bigr).\n$$\n\nIt remains to see that this is nonzero for only finitely many $\\xi$ (the\nsheaf $\\mathcal H^0$ being constructible, its support is then finite).\nLet $j:U\\hookrightarrow A$ be a dense open on which $\\mathcal G$ is\nlisse, with finite complement $Z$. In the sequence\n$0\\to j_!j^*\\mathcal G\\to\\mathcal G\\to i_*i^*\\mathcal G\\to0$, tensored\nwith the lisse $\\mathcal L_{\\psi(\\xi x)}$, the third term has no\n$H^1_c$ or $H^2_c$ (finite support, as in (b)), so\n\n$$\nH^2_c\\bigl(A,\\mathcal G\\otimes\\mathcal L_{\\psi(\\xi x)}\\bigr)\\cong\nH^2_c\\bigl(U,\\mathcal G|_U\\otimes\\mathcal L_{\\psi(\\xi x)}|_U\\bigr)\n\\cong\\bigl(V\\otimes\\chi_\\xi\\bigr)_{\\pi_1(U)}(-1)\n$$\n\nby [lem-a1-affine-hc2], where $V=\\mathcal G_{\\bar\\eta}$ and $\\chi_\\xi$ is\nthe rank-one character of $\\mathcal L_{\\psi(\\xi x)}|_U$. These\ncoinvariants are nonzero exactly when $V$ has a quotient isomorphic to\n$\\chi_\\xi^{-1}=\\chi_{-\\xi}$ ([lem-fd-as-characters]:\n$\\mathcal L_{\\psi(\\xi x)}^{-1}\\cong\\mathcal L_{\\psi(-\\xi x)}$). The\ncharacters $\\chi_a$ are pairwise distinct: if $\\chi_a=\\chi_b$ with\n$a\\neq b$, then by [lem-fd-as-characters]\n$\\mathcal L_{\\psi((a-b)x)}$ is trivial on $U$, hence on $A$ (a rank-one\nlisse sheaf on the normal connected $A$ that is trivial on a dense open\nis trivial, its global section extending), contradicting\n$H^0(A,\\mathcal L_{\\psi((a-b)x)})=0$ from\n[lem-fd-cohomology-affine-line-character]. If $\\chi_{a_1},\\dots,\\chi_{a_n}$\nare pairwise distinct quotients of $V$, the combined map\n$V\\to\\bigoplus_i\\chi_{a_i}$ is surjective (its image is a submodule of a\nsum of pairwise non-isomorphic simple modules projecting onto each\nsummand, hence the whole sum), so $n\\le\\dim V=\\operatorname{rank}\\mathcal G|_U$.\nHence $\\mathcal H^0\\operatorname{FT}_\\psi(\\mathcal G[1])$ has finite\nsupport, and $\\operatorname{FT}_\\psi(\\mathcal G[1])\\in{}^pD^{\\le0}(A')$ by\nStep 0. This proves\n$\\operatorname{FT}_\\psi({}^pD^{\\le0}(A))\\subset{}^pD^{\\le0}(A')$. The\nargument uses nothing about $\\psi$ beyond its nontriviality, so it\napplies equally to $\\operatorname{FT}_{\\psi^{-1}}$ from $A'$ to $A$, and\nby Step 0 also to $G=\\operatorname{FT}_{\\psi^{-1}}(-)(1)$.\n\n*Step 2: $\\operatorname{FT}_\\psi$ is an equivalence with quasi-inverse\n$G$.* Fourier inversion [lem-fd-inversion] with $r=1$ gives\n$\\operatorname{FT}_{\\psi^{-1}}\\operatorname{FT}_\\psi(K)\\cong K(-1)$, hence\n$G\\circ\\operatorname{FT}_\\psi\\cong\\mathrm{id}$; applied to the character\n$\\psi^{-1}$ it gives\n$\\operatorname{FT}_\\psi\\operatorname{FT}_{\\psi^{-1}}(M)\\cong M(-1)$, and\nsince the twist is the pullback of a sheaf on the base, linearity over the\nbase [prop-base-linear] gives\n$\\operatorname{FT}_\\psi(M(1))\\cong\\operatorname{FT}_\\psi(M)(1)$, so\n$\\operatorname{FT}_\\psi\\circ G\\cong\\mathrm{id}$.",
+   "uses": [
     "lem-fd-stalk-formula",
     "lem-zl-affine-curve-range",
     "lem-a1-affine-hc2",
@@ -107,54 +45,119 @@
     "lem-fd-cohomology-affine-line-character",
     "lem-fd-inversion",
     "prop-base-linear"
-  ],
-  "proof_split_by": "labels",
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "sorry_here",
-      "decls": [
-        {
-          "name": "AlgebraicGeometry.isCurvePerverseLE_fourierTransform_obj",
-          "module": "WeilConjectures.DeligneLaumon.AffineLine.Perverse",
-          "lines": [
-            281,
-            292
-          ],
-          "kind": "theorem",
-          "sorry": true
-        },
-        {
-          "name": "AlgebraicGeometry.isCurvePerverseLE_fourierTransform_inv_obj",
-          "module": "WeilConjectures.DeligneLaumon.AffineLine.Perverse",
-          "lines": [
-            294,
-            303
-          ],
-          "kind": "theorem",
-          "sorry": true
-        }
-      ],
-      "missing": [],
-      "open": []
-    }
+   ],
+   "elementary": false
   },
-  "chapter": "sec-deligne-laumon-a1",
-  "unit": "sk-p-dl-a1-perverse",
-  "lean": {
-    "module": "WeilConjectures.DeligneLaumon.AffineLine.Perverse",
-    "declaration": "AlgebraicGeometry.isCurvePerverseLE_fourierTransform_obj",
-    "branch": "slopmaster2",
-    "line": 281,
-    "declarations": [
-      "AlgebraicGeometry.isCurvePerverseLE_fourierTransform_obj",
-      "AlgebraicGeometry.isCurvePerverseLE_fourierTransform_inv_obj"
-    ],
-    "sorry_free": false,
-    "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state sorry_here)"
+  {
+   "text": "*Step 3: the lower class.* In a t-structure, as provided by\n[thm-a1-curve-perverse-heart], one has\n${}^pD^{\\ge0}=\\{K:\\operatorname{Hom}(M,K)=0\\ \\text{for all}\\ M\\in{}^pD^{\\le-1}\\}$.\nIndeed $\\subset$ is the orthogonality axiom; conversely, if $K$ is\nright orthogonal to ${}^pD^{\\le-1}$, the map\n$\\tau^{\\le-1}K\\to K$ in the truncation triangle\n$\\tau^{\\le-1}K\\to K\\to\\tau^{\\ge0}K\\to$ vanishes, so the triangle splits\nand $\\tau^{\\le-1}K[1]$ is a direct summand of $\\tau^{\\ge0}K$; it\ntherefore lies in ${}^pD^{\\le-2}\\cap{}^pD^{\\ge0}$, which is zero by\northogonality, so $K\\cong\\tau^{\\ge0}K$. Now let $K\\in{}^pD^{\\ge0}(A)$\nand $M\\in{}^pD^{\\le-1}(A')$. By Step 2,\n\n$$\n\\operatorname{Hom}\\bigl(M,\\operatorname{FT}_\\psi K\\bigr)\\cong\n\\operatorname{Hom}\\bigl(GM,K\\bigr),\n$$\n\nand $GM=G(M[-1])[1]\\in{}^pD^{\\le-1}(A)$ by Step 1 (the classes are\ncompatible with shifts), so the right-hand side vanishes. Hence\n$\\operatorname{FT}_\\psi K\\in{}^pD^{\\ge0}(A')$. The same argument with\nthe roles of $\\psi,\\psi^{-1}$ and of the two lines exchanged (and the\ntwist, which preserves ${}^pD^{\\ge0}$ by the same orthogonality since\n$(-1)$ is its inverse) shows that $\\operatorname{FT}_{\\psi^{-1}}$ and $G$\npreserve ${}^pD^{\\ge0}$.",
+   "uses": [
+    "thm-a1-curve-perverse-heart"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*Step 4: the hearts.* By Steps 1 and 3, $\\operatorname{FT}_\\psi$ and $G$\nare t-exact, hence restrict to functors between $\\mathrm{Perv}(A_0)$ and\n$\\mathrm{Perv}(A'_0)$, which are quasi-inverse by Step 2. A t-exact\ntriangulated functor induces an exact functor on the abelian hearts of\n[thm-a1-curve-perverse-heart], the short exact sequences of a heart\nbeing the distinguished triangles with all three vertices in it. So\n$\\operatorname{FT}_\\psi$ is an exact equivalence\n$\\mathrm{Perv}(A_0)\\simeq\\mathrm{Perv}(A'_0)$ with quasi-inverse $G$.",
+   "uses": [
+    "thm-a1-curve-perverse-heart"
+   ],
+   "elementary": false
   }
+ ],
+ "proof_deps": [
+  "lem-fd-base-change",
+  "thm-fd-transform-well-defined",
+  "def-per-support-condition",
+  "lem-fd-stalk-formula",
+  "lem-zl-affine-curve-range",
+  "lem-a1-affine-hc2",
+  "lem-fd-as-characters",
+  "lem-fd-cohomology-affine-line-character",
+  "lem-fd-inversion",
+  "prop-base-linear",
+  "thm-a1-curve-perverse-heart"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-perverse/thm-a1-fourier-t-exact.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [
+  "cites_remark"
+ ],
+ "blueprint_kind": "theorem",
+ "blueprint_order": 2749,
+ "blueprint_uses": [
+  "def-per-perverse-subcategories",
+  "def-per-support-condition",
+  "def-fd-transform",
+  "def-wf-tate-twist",
+  "rem-dl-a1-conventions",
+  "thm-a1-curve-perverse-heart",
+  "thm-fd-fourier-perverse",
+  "thm-fd-transform-well-defined",
+  "lem-fd-base-change",
+  "lem-fd-stalk-formula",
+  "lem-zl-affine-curve-range",
+  "lem-a1-affine-hc2",
+  "lem-fd-as-characters",
+  "lem-fd-cohomology-affine-line-character",
+  "lem-fd-inversion",
+  "prop-base-linear"
+ ],
+ "proof_split_by": "labels",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.isCurvePerverseLE_fourierTransform_obj",
+    "AlgebraicGeometry.isCurvePerverseLE_fourierTransform_inv_obj"
+   ]
+  },
+  "slopmaster2": {
+   "state": "sorry_here",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.isCurvePerverseLE_fourierTransform_obj",
+     "module": "WeilConjectures.DeligneLaumon.AffineLine.Perverse",
+     "lines": [
+      281,
+      292
+     ],
+     "kind": "theorem",
+     "sorry": true
+    },
+    {
+     "name": "AlgebraicGeometry.isCurvePerverseLE_fourierTransform_inv_obj",
+     "module": "WeilConjectures.DeligneLaumon.AffineLine.Perverse",
+     "lines": [
+      294,
+      303
+     ],
+     "kind": "theorem",
+     "sorry": true
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "lean": {
+  "module": "WeilConjectures.DeligneLaumon.AffineLine.Perverse",
+  "declaration": "AlgebraicGeometry.isCurvePerverseLE_fourierTransform_obj",
+  "branch": "slopmaster2",
+  "line": 281,
+  "declarations": [
+   "AlgebraicGeometry.isCurvePerverseLE_fourierTransform_obj",
+   "AlgebraicGeometry.isCurvePerverseLE_fourierTransform_inv_obj"
+  ],
+  "sorry_free": false,
+  "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state sorry_here)"
+ }
 }

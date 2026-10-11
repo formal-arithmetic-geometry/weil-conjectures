@@ -1,131 +1,133 @@
 {
-  "id": "lem-weil-pbc-flat-variant-local-criterion",
-  "blueprint": {
-    "is": null,
-    "from": {
-      "node": "thm-weil-pbc-finite-etale-lifting",
-      "place": "step 7 of its split (source: Lemma 0GS2, proof: the essential-surjectivity paragraphs)",
-      "via": [
-        "lem-weil-pbc-flat-module-powers",
-        "lem-weil-pbc-flat-completion",
-        "lem-weil-pbc-g-ring-maximal-ideal-criterion",
-        "lem-weil-pbc-henselization-pair-g-ring",
-        "lem-weil-pbc-finite-etale-lifting-limit-descent",
-        "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
-      ]
-    },
-    "same_as": null
+ "id": "lem-weil-pbc-flat-variant-local-criterion",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "step 7 of its split (source: Lemma 0GS2, proof: the essential-surjectivity paragraphs)",
+   "via": [
+    "lem-weil-pbc-flat-module-powers",
+    "lem-weil-pbc-flat-completion",
+    "lem-weil-pbc-g-ring-maximal-ideal-criterion",
+    "lem-weil-pbc-henselization-pair-g-ring",
+    "lem-weil-pbc-finite-etale-lifting-limit-descent",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
   },
-  "kind": "statement",
-  "title": "Variant of the local criterion of flatness",
-  "statement": "Let $\\varphi:R\\to S$ be a local homomorphism of Noetherian local rings [def-weil-pbc-noetherian-ring] ($\\varphi(\\mathfrak m_R)\\subseteq\\mathfrak m_S$), let $I\\subsetneq R$ be a proper ideal and let $M$ be a finitely generated $S$-module [def-weil-finitely-generated-module], regarded as an $R$-module via $\\varphi$. Assume (1) the $R$-linear multiplication map $I\\otimes_RM\\to M$, $a\\otimes x\\mapsto\\varphi(a)x$, is injective (by Stacks, Remark 00M6, its kernel is $\\mathrm{Tor}_1^R(M,R/I)$, so this is the hypothesis $\\mathrm{Tor}_1^R(M,R/I)=0$), and (2) $M/IM$ is a flat $R/I$-module [def-weil-pbc-flat-ring-map]. Then $M$ is a flat $R$-module.",
-  "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 00ML (lemma-variant-local-criterion-flatness, line 23751), with the hypothesis Tor_1^R(M,R/I)=0 rewritten by Remark Tag 00M6 (remark-Tor-ring-mod-ideal, line 18690: Tor_1^R(M,R/I) = Ker(I (x)_R M -> M)); its proofs use Lemma 051C (lemma-what-does-it-mean), Lemma 00MK (lemma-local-criterion-flatness) and Lemma 00HK (lemma-flat-eq)"
+  "same_as": null
+ },
+ "kind": "statement",
+ "title": "Variant of the local criterion of flatness",
+ "statement": "Let $\\varphi:R\\to S$ be a local homomorphism of Noetherian local rings [def-weil-pbc-noetherian-ring] ($\\varphi(\\mathfrak m_R)\\subseteq\\mathfrak m_S$), let $I\\subsetneq R$ be a proper ideal and let $M$ be a finitely generated $S$-module [def-weil-finitely-generated-module], regarded as an $R$-module via $\\varphi$. Assume (1) the $R$-linear multiplication map $I\\otimes_RM\\to M$, $a\\otimes x\\mapsto\\varphi(a)x$, is injective (by Stacks, Remark 00M6, its kernel is $\\mathrm{Tor}_1^R(M,R/I)$, so this is the hypothesis $\\mathrm{Tor}_1^R(M,R/I)=0$), and (2) $M/IM$ is a flat $R/I$-module [def-weil-pbc-flat-ring-map]. Then $M$ is a flat $R$-module.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 00ML (lemma-variant-local-criterion-flatness, line 23751), with the hypothesis Tor_1^R(M,R/I)=0 rewritten by Remark Tag 00M6 (remark-Tor-ring-mod-ideal, line 18690: Tor_1^R(M,R/I) = Ker(I (x)_R M -> M)); its proofs use Lemma 051C (lemma-what-does-it-mean), Lemma 00MK (lemma-local-criterion-flatness) and Lemma 00HK (lemma-flat-eq)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-finitely-generated-module",
+  "def-weil-pbc-flat-ring-map"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "local criterion for flatness: local homomorphism of Noetherian local rings, finite module M, I tensor M to M injective and M/IM flat over R/I implies M flat",
+   "results": "Module.flat_of_isLocalized_span, Module.Flat.iff_rTensor_injective', Module.flat_of_isLocalized_maximal, RingHom.Flat.propertyIsLocal, Module.Flat.iff_lTensor_preserves_injective_linearMap, Module.Flat.iff_rTensor_injective, Module.Flat.iff_lift_lsmul_comp_subtype_injective, Module.Flat.mk (Mathlib.RingTheory.Flat.*)",
+   "verdict": "no match",
+   "date": "2026-10-10"
   },
-  "stmt_deps": [
-    "def-weil-pbc-noetherian-ring",
-    "def-weil-finitely-generated-module",
-    "def-weil-pbc-flat-ring-map"
-  ],
-  "proof": [],
-  "proof_deps": [],
-  "proof_origin": null,
-  "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "variant of the local flatness criterion: Tor_1(M, R/I) = 0 and M/IM flat over R/I implies M flat over Noetherian local ring",
+   "results": "Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing, Algebra.Smooth.flat_of_isNoetherianRing, AdicCompletion.flat_of_isNoetherian, Module.flat_of_localized_span, Module.flat_of_localized_maximal, Module.Flat.flat_iff_torsion_eq_bot_of_valuationRing_localization_isMaximal, Module.flat_of_isLocalized_span, Module.Flat.iff_lift_lsmul_comp_subtype_injective",
+   "verdict": "no match",
+   "date": "2026-10-10"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Flat, IsLocalRing, IsLocalHom, Module.Finite",
+   "results": "none",
+   "verdict": "no match",
+   "date": "2026-10-10"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln 'local criterion\\|localCriterion\\|local_criterion' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/; grep -n Flat ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/LocalRing/Module.lean; ls ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Flat/",
+   "results": "no file mentions a local criterion; LocalRing/Module.lean has only freeness of finite flat modules over local rings (free_of_flat_of_isLocalRing, IsLocalRing.linearIndependent_of_flat); RingTheory/Flat/ (Basic, CategoryTheory, Domain, Equalizer, EquationalCriterion, FaithfullyFlat, IsBaseChange, Localization, LocallyFree, Rank, Stability, Tensor, TorsionFree) has no local criterion",
+   "verdict": "no match",
+   "date": "2026-10-10"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Module.Flat over local ring iff Tor_1 with residue field vanishes, finite module over Noetherian local ring",
+   "results": "Module.flat_of_isLocalized_span, IsDedekindDomain.flat_iff_torsion_eq_bot, Module.Flat.tfae_equational_criterion, Module.Flat.iff_lTensor_exact, Module.Flat.iff_flat_tensorProduct, Module.Flat.mk (Mathlib.RingTheory.Flat.*)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Flat, IsLocalRing, IsNoetherianRing, Ideal",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln 'Tor' Mathlib/RingTheory/Flat/; grep -rln 'iff_tor\\|Tor.*Flat\\|Flat.*Tor' Mathlib/",
+   "results": "only RingTheory/Flat/CategoryTheory.lean and TorsionFree.lean (torsion, not Tor functor); no Tor-based flatness criterion anywhere in Mathlib",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-flat-module-powers",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "Module.Flat.of_flat_quotient_of_lTensor_injective"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
     {
-      "tool": "leansearch",
-      "query": "local criterion for flatness: local homomorphism of Noetherian local rings, finite module M, I tensor M to M injective and M/IM flat over R/I implies M flat",
-      "results": "Module.flat_of_isLocalized_span, Module.Flat.iff_rTensor_injective', Module.flat_of_isLocalized_maximal, RingHom.Flat.propertyIsLocal, Module.Flat.iff_lTensor_preserves_injective_linearMap, Module.Flat.iff_rTensor_injective, Module.Flat.iff_lift_lsmul_comp_subtype_injective, Module.Flat.mk (Mathlib.RingTheory.Flat.*)",
-      "verdict": "no match",
-      "date": "2026-10-10"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "variant of the local flatness criterion: Tor_1(M, R/I) = 0 and M/IM flat over R/I implies M flat over Noetherian local ring",
-      "results": "Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing, Algebra.Smooth.flat_of_isNoetherianRing, AdicCompletion.flat_of_isNoetherian, Module.flat_of_localized_span, Module.flat_of_localized_maximal, Module.Flat.flat_iff_torsion_eq_bot_of_valuationRing_localization_isMaximal, Module.flat_of_isLocalized_span, Module.Flat.iff_lift_lsmul_comp_subtype_injective",
-      "verdict": "no match",
-      "date": "2026-10-10"
-    },
-    {
-      "tool": "loogle",
-      "query": "Module.Flat, IsLocalRing, IsLocalHom, Module.Finite",
-      "results": "none",
-      "verdict": "no match",
-      "date": "2026-10-10"
-    },
-    {
-      "tool": "grep",
-      "query": "grep -rln 'local criterion\\|localCriterion\\|local_criterion' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/; grep -n Flat ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/LocalRing/Module.lean; ls ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Flat/",
-      "results": "no file mentions a local criterion; LocalRing/Module.lean has only freeness of finite flat modules over local rings (free_of_flat_of_isLocalRing, IsLocalRing.linearIndependent_of_flat); RingTheory/Flat/ (Basic, CategoryTheory, Domain, Equalizer, EquationalCriterion, FaithfullyFlat, IsBaseChange, Localization, LocallyFree, Rank, Stability, Tensor, TorsionFree) has no local criterion",
-      "verdict": "no match",
-      "date": "2026-10-10"
-    },
-    {
-      "tool": "leansearch",
-      "query": "Module.Flat over local ring iff Tor_1 with residue field vanishes, finite module over Noetherian local ring",
-      "results": "Module.flat_of_isLocalized_span, IsDedekindDomain.flat_iff_torsion_eq_bot, Module.Flat.tfae_equational_criterion, Module.Flat.iff_lTensor_exact, Module.Flat.iff_flat_tensorProduct, Module.Flat.mk (Mathlib.RingTheory.Flat.*)",
-      "date": "2026-10-10",
-      "verdict": "no match"
-    },
-    {
-      "tool": "loogle",
-      "query": "Module.Flat, IsLocalRing, IsNoetherianRing, Ideal",
-      "results": "none",
-      "date": "2026-10-10",
-      "verdict": "no match"
-    },
-    {
-      "tool": "grep",
-      "query": "grep -rln 'Tor' Mathlib/RingTheory/Flat/; grep -rln 'iff_tor\\|Tor.*Flat\\|Flat.*Tor' Mathlib/",
-      "results": "only RingTheory/Flat/CategoryTheory.lean and TorsionFree.lean (torsion, not Tor functor); no Tor-based flatness criterion anywhere in Mathlib",
-      "date": "2026-10-10",
-      "verdict": "no match"
+     "name": "Module.Flat.of_flat_quotient_of_lTensor_injective",
+     "module": "WeilConjectures.Mathlib.RingTheory.Filtration",
+     "lines": [
+      528,
+      538
+     ],
+     "kind": "theorem",
+     "sorry": false
     }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "module": "WeilConjectures.Mathlib.RingTheory.Filtration",
+  "declaration": "Module.Flat.of_flat_quotient_of_lTensor_injective",
+  "branch": "slopmaster2",
+  "line": 528,
+  "declarations": [
+   "Module.Flat.of_flat_quotient_of_lTensor_injective"
   ],
-  "mathlib_match": null,
-  "status": "unsplit",
-  "merged_into": null,
-  "created": {
-    "by": "worker",
-    "item": "lem-weil-pbc-flat-module-powers",
-    "date": "2026-10-10"
-  },
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "closed",
-      "decls": [
-        {
-          "name": "Module.Flat.of_flat_quotient_of_lTensor_injective",
-          "module": "WeilConjectures.Mathlib.RingTheory.Filtration",
-          "lines": [
-            528,
-            538
-          ],
-          "kind": "theorem",
-          "sorry": false
-        }
-      ],
-      "missing": [],
-      "open": []
-    }
-  },
-  "chapter": "sec-proper-base-change",
-  "unit": "sk-thm-p1",
-  "lean": {
-    "module": "WeilConjectures.Mathlib.RingTheory.Filtration",
-    "declaration": "Module.Flat.of_flat_quotient_of_lTensor_injective",
-    "branch": "slopmaster2",
-    "line": 528,
-    "declarations": [
-      "Module.Flat.of_flat_quotient_of_lTensor_injective"
-    ],
-    "sorry_free": true,
-    "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state closed)"
-  },
-  "reviewed": "2026-10-10 L: finished on slopmaster2 by Module.Flat.of_flat_quotient_of_lTensor_injective (verified sorry-free; the node is a two-line specialization: local R -> S and I proper give IS in m_S = Jac(S)); G1 had delivered a split (4 steps via 00MK and 051C, mathematically right per the reviewer) which is not merged, the node being closed (rule 0)."
+  "sorry_free": true,
+  "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state closed)"
+ },
+ "reviewed": "2026-10-10 L: finished on slopmaster2 by Module.Flat.of_flat_quotient_of_lTensor_injective (verified sorry-free; the node is a two-line specialization: local R -> S and I proper give IS in m_S = Jac(S)); G1 had delivered a split (4 steps via 00MK and 051C, mathematically right per the reviewer) which is not merged, the node being closed (rule 0)."
 }

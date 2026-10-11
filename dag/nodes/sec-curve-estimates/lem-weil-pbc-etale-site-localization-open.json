@@ -1,144 +1,154 @@
 {
-  "id": "lem-weil-pbc-etale-site-localization-open",
-  "blueprint": {
-    "is": null,
-    "from": {
-      "node": "lem-sc-artin-schreier-dimension",
-      "place": "proof, proper case: the equivalence of the localized small etale site at an open object with the small etale site of the open",
-      "via": [
-        "lem-sc-etale-zariski-qcoh-comparison"
-      ]
-    },
-    "same_as": []
+ "id": "lem-weil-pbc-etale-site-localization-open",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-artin-schreier-dimension",
+   "place": "proof, proper case: the equivalence of the localized small etale site at an open object with the small etale site of the open",
+   "via": [
+    "lem-sc-etale-zariski-qcoh-comparison"
+   ]
   },
-  "kind": "statement",
-  "title": "The localized small etale site at an etale open is the small etale site of the open",
-  "statement": "Let $X$ be a scheme [def-pc-scheme] and let $U\\to X$ be an etale $X$-scheme [def-weil-pbc-etale-site]. Let $X_{\\Et}/U$ be the localized site: the slice category of $X_{\\Et}$ over the object $U\\to X$ (objects are $X_{\\Et}$-morphisms $V\\to U$, morphisms are $X_{\\Et}$-morphisms commuting with the maps to $U$), in which a family of morphisms covers precisely when its underlying family covers in $X_{\\Et}$. The localized site $X_{\\Et}/U$ is equivalent to the small etale site $U_{\\Et}$: an etale $X$-scheme over $U$ is sent to its underlying etale $U$-scheme, and the inverse sends an etale $U$-scheme $V\\to U$ to $V\\to U\\to X$. The equivalence identifies the localized Grothendieck topology with the small etale topology, and induces an equivalence of categories of sheaves of abelian groups [def-weil-pbc-abelian-etale-sheaves].",
-  "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Sites, Section 00XZ (section-localize); etale-site specialization verified by project declarations Scheme.Etale.overEquiv and overSheafEquiv"
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "The localized small etale site at an etale open is the small etale site of the open",
+ "statement": "Let $X$ be a scheme [def-pc-scheme] and let $U\\to X$ be an etale $X$-scheme [def-weil-pbc-etale-site]. Let $X_{\\Et}/U$ be the localized site: the slice category of $X_{\\Et}$ over the object $U\\to X$ (objects are $X_{\\Et}$-morphisms $V\\to U$, morphisms are $X_{\\Et}$-morphisms commuting with the maps to $U$), in which a family of morphisms covers precisely when its underlying family covers in $X_{\\Et}$. The localized site $X_{\\Et}/U$ is equivalent to the small etale site $U_{\\Et}$: an etale $X$-scheme over $U$ is sent to its underlying etale $U$-scheme, and the inverse sends an etale $U$-scheme $V\\to U$ to $V\\to U\\to X$. The equivalence identifies the localized Grothendieck topology with the small etale topology, and induces an equivalence of categories of sheaves of abelian groups [def-weil-pbc-abelian-etale-sheaves].",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Sites, Section 00XZ (section-localize); etale-site specialization verified by project declarations Scheme.Etale.overEquiv and overSheafEquiv"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-abelian-etale-sheaves"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "equivalence between the localized small etale site at U and the small etale site of U",
+   "results": "AlgebraicGeometry.Scheme.Etale.overEquiv and overSheafEquiv",
+   "date": "2026-10-10",
+   "verdict": "match"
   },
-  "stmt_deps": [
-    "def-pc-scheme",
-    "def-weil-pbc-etale-site",
-    "def-weil-pbc-abelian-etale-sheaves"
-  ],
-  "proof": [],
-  "proof_deps": [],
-  "proof_origin": null,
-  "mathlib_searches": [
-    {
-      "tool": "leansearch",
-      "query": "equivalence between the localized small etale site at U and the small etale site of U",
-      "results": "AlgebraicGeometry.Scheme.Etale.overEquiv and overSheafEquiv",
-      "date": "2026-10-10",
-      "verdict": "match"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "localized etale site over an etale scheme equivalent to the etale site of the underlying scheme",
-      "results": "Scheme.Etale.overEquiv; overToEtale_isCocontinuous; etaleToOver_isCocontinuous; overSheafEquiv",
-      "date": "2026-10-10",
-      "verdict": "match"
-    },
-    {
-      "tool": "grep",
-      "query": "rg -n 'overEquiv|overSheafEquiv|overToEtale_isCocontinuous|etaleToOver_isCocontinuous' WeilConjectures/Mathlib/AlgebraicGeometry/Sites/EtaleOver.lean",
-      "results": "Project EtaleOver.lean:66 overEquiv, :93 and :123 cocontinuity instances, :176 overSheafEquiv; no corresponding pinned Mathlib file",
-      "date": "2026-10-10",
-      "verdict": "no Mathlib match; project attachment"
-    }
-  ],
-  "mathlib_match": null,
-  "lean_candidates": [
-    {
-      "name": "AlgebraicGeometry.Scheme.Etale.overEquiv",
-      "module": "WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtaleOver",
-      "lines": [
-        64,
-        80
-      ],
-      "note": "Sorry-free project declaration of the category equivalence; cocontinuity of both functors is at lines 93-154."
-    },
-    {
-      "name": "AlgebraicGeometry.Scheme.Etale.overSheafEquiv",
-      "module": "WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtaleOver",
-      "lines": [
-        174,
-        178
-      ],
-      "note": "Sorry-free project declaration for sheaves valued in any category A; specialize A to abelian groups."
-    }
-  ],
-  "status": "unsplit",
-  "created": {
-    "item": "lem-weil-pbc-etale-cohomology-over-open",
-    "by": "worker",
-    "date": "2026-10-10"
+  {
+   "tool": "leanfinder",
+   "query": "localized etale site over an etale scheme equivalent to the etale site of the underlying scheme",
+   "results": "Scheme.Etale.overEquiv; overToEtale_isCocontinuous; etaleToOver_isCocontinuous; overSheafEquiv",
+   "date": "2026-10-10",
+   "verdict": "match"
   },
-  "chapter": "sec-curve-estimates",
-  "unit": "sk-prop-cd",
-  "lean": {
-    "module": "WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtaleOver",
-    "declaration": "AlgebraicGeometry.Scheme.Etale.overEquiv",
-    "branch": "slopmaster2",
-    "line": 64,
-    "declarations": [
-      "AlgebraicGeometry.Scheme.Etale.overEquiv",
-      "AlgebraicGeometry.Scheme.Etale.overToEtale_isCocontinuous",
-      "AlgebraicGeometry.Scheme.Etale.etaleToOver_isCocontinuous",
-      "AlgebraicGeometry.Scheme.Etale.overSheafEquiv"
-    ],
-    "sorry_free": true,
-    "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state closed)"
-  },
-  "lean_audit": {
-    "slopmaster2": {
-      "state": "closed",
-      "decls": [
-        {
-          "name": "AlgebraicGeometry.Scheme.Etale.overEquiv",
-          "module": "WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtaleOver",
-          "lines": [
-            64,
-            80
-          ],
-          "kind": "def",
-          "sorry": false
-        },
-        {
-          "name": "AlgebraicGeometry.Scheme.Etale.overToEtale_isCocontinuous",
-          "module": "WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtaleOver",
-          "lines": [
-            92,
-            119
-          ],
-          "kind": "theorem",
-          "sorry": false
-        },
-        {
-          "name": "AlgebraicGeometry.Scheme.Etale.etaleToOver_isCocontinuous",
-          "module": "WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtaleOver",
-          "lines": [
-            122,
-            146
-          ],
-          "kind": "theorem",
-          "sorry": false
-        },
-        {
-          "name": "AlgebraicGeometry.Scheme.Etale.overSheafEquiv",
-          "module": "WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtaleOver",
-          "lines": [
-            174,
-            178
-          ],
-          "kind": "def",
-          "sorry": false
-        }
-      ],
-      "missing": [],
-      "open": []
-    }
+  {
+   "tool": "grep",
+   "query": "rg -n 'overEquiv|overSheafEquiv|overToEtale_isCocontinuous|etaleToOver_isCocontinuous' WeilConjectures/Mathlib/AlgebraicGeometry/Sites/EtaleOver.lean",
+   "results": "Project EtaleOver.lean:66 overEquiv, :93 and :123 cocontinuity instances, :176 overSheafEquiv; no corresponding pinned Mathlib file",
+   "date": "2026-10-10",
+   "verdict": "no Mathlib match; project attachment"
   }
+ ],
+ "mathlib_match": null,
+ "lean_candidates": [
+  {
+   "name": "AlgebraicGeometry.Scheme.Etale.overEquiv",
+   "module": "WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtaleOver",
+   "lines": [
+    64,
+    80
+   ],
+   "note": "Sorry-free project declaration of the category equivalence; cocontinuity of both functors is at lines 93-154."
+  },
+  {
+   "name": "AlgebraicGeometry.Scheme.Etale.overSheafEquiv",
+   "module": "WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtaleOver",
+   "lines": [
+    174,
+    178
+   ],
+   "note": "Sorry-free project declaration for sheaves valued in any category A; specialize A to abelian groups."
+  }
+ ],
+ "status": "unsplit",
+ "created": {
+  "item": "lem-weil-pbc-etale-cohomology-over-open",
+  "by": "worker",
+  "date": "2026-10-10"
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-cd",
+ "lean": {
+  "module": "WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtaleOver",
+  "declaration": "AlgebraicGeometry.Scheme.Etale.overEquiv",
+  "branch": "slopmaster2",
+  "line": 64,
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Etale.overEquiv",
+   "AlgebraicGeometry.Scheme.Etale.overToEtale_isCocontinuous",
+   "AlgebraicGeometry.Scheme.Etale.etaleToOver_isCocontinuous",
+   "AlgebraicGeometry.Scheme.Etale.overSheafEquiv"
+  ],
+  "sorry_free": true,
+  "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state closed)"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.Scheme.Etale.overEquiv",
+    "AlgebraicGeometry.Scheme.Etale.overToEtale_isCocontinuous",
+    "AlgebraicGeometry.Scheme.Etale.etaleToOver_isCocontinuous",
+    "AlgebraicGeometry.Scheme.Etale.overSheafEquiv"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.Scheme.Etale.overEquiv",
+     "module": "WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtaleOver",
+     "lines": [
+      64,
+      80
+     ],
+     "kind": "def",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.Scheme.Etale.overToEtale_isCocontinuous",
+     "module": "WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtaleOver",
+     "lines": [
+      92,
+      119
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.Scheme.Etale.etaleToOver_isCocontinuous",
+     "module": "WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtaleOver",
+     "lines": [
+      122,
+      146
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.Scheme.Etale.overSheafEquiv",
+     "module": "WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtaleOver",
+     "lines": [
+      174,
+      178
+     ],
+     "kind": "def",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ }
 }
