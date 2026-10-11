@@ -15,18 +15,74 @@
  },
  "kind": "statement",
  "title": "Balanced K-flat model for a derived tensor",
- "statement": "Let $R$ be a commutative ring, let $A$ and $R'$ be commutative $R$-algebras, and let $M$ be a complex of $A$-modules [def-pc-derived-category]. If $P\\to M$ is a K-flat resolution in $A$-modules and $F\\to R'$ is a K-flat resolution in $R$-modules [def-pc-kflat-complex], then the total complex $P\\otimes_R F$ represents $M\\otimes_R^{\\mathbf L}R'$ in $D(A)$. Multiplication by elements of $R'$ gives commuting endomorphisms in $D(A)$ and hence an $A\\otimes_R R'$-module structure on cohomology. The construction is independent of the chosen resolutions up to the canonical isomorphism in the derived category and is functorial in $M$.",
+ "statement": "Let $R$ be a commutative ring, let $A$ and $R'$ be commutative $R$-algebras, and let $M$ be a complex of $A$-modules, viewed on the one-point ringed site and in the derived category of $A$-modules [def-weil-abstract-derived-category]. If $P\\to M$ is a K-flat resolution in $A$-modules and $F\\to R'$ is a K-flat resolution in $R$-modules [def-pc-kflat-complex], then the total complex $P\\otimes_R F$ represents $M\\otimes_R^{\\mathbf L}R'$ in the derived category of $A$-modules. Multiplication by elements of $R'$ gives commuting endomorphisms in that derived category and hence an $A\\otimes_R R'$-module structure on cohomology. The construction is independent of the chosen resolutions up to the canonical isomorphism in the derived category and is functorial in $M$.",
  "source": {
   "document": "literature/stacks-project/more-algebra.tex",
   "place": "Tags 064K and 06Y6 (lemma-derived-tor-quasi-isomorphism, lemma-derived-base-change), balanced derived tensor via K-flat resolutions"
  },
  "stmt_deps": [
-  "def-pc-derived-category",
+  "def-weil-abstract-derived-category",
   "def-pc-kflat-complex"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Regard each commutative ring as the sheaf of rings on the one-point site. Applying [lem-pc-kflat-resolution] to the complex M over A (and, after restriction of scalars, to R' over R) supplies K-flat resolutions $P\\to M$ and $F\\to R'$. The hypotheses already specify such P and F, so the chosen resolutions fit the one-point specialization of the K-flat definitions.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "def-pc-kflat-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tags 064K and 06Y6, existence and choice of K-flat resolutions"
+   }
+  },
+  {
+   "text": "Apply [lem-pc-derived-tensor-second-factor-functor] to the ring map $R\\to A$ and the complex $N=M$ of $A$-modules: by its clause (2) with $E=R'$, the derived tensor $M\\otimes_R^{\\mathbf L}R'$ (the value $R'\\otimes_R^{\\mathbf L}M$ of that functor, the factors written in the other order) is represented in $D(A)$ by $\\operatorname{Tot}(F\\otimes_R M)$, the total complex of [def-pc-tensor-complex-sheaves] on the one-point site, with $A$ acting through $M$. By its clause (3) for the quasi-isomorphism $u:P\\to M$ of complexes of $A$-modules, $\\operatorname{Tot}(1_F\\otimes u):\\operatorname{Tot}(F\\otimes_R P)\\to\\operatorname{Tot}(F\\otimes_R M)$ is an $A$-linear quasi-isomorphism. The symmetry $x\\otimes y\\mapsto(-1)^{pq}y\\otimes x$ on $F^p\\otimes_R P^q$ is an $A$-linear chain isomorphism $\\operatorname{Tot}(F\\otimes_R P)\\cong\\operatorname{Tot}(P\\otimes_R F)$. Hence $P\\otimes_R F$ represents $M\\otimes_R^{\\mathbf L}R'$ in $D(A)$, with $A$ acting through $P$.",
+   "uses": [
+    "lem-pc-derived-tensor-second-factor-functor",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 06Y6 (lemma-derived-base-change) with N=M and E=R', and lemma-derived-tor-quasi-isomorphism-other-side"
+   }
+  },
+  {
+   "text": "For $b\\in R'$, multiplication $\\mu_b:R'\\to R'$ is an $R$-linear map, hence an endomorphism of $R'$ in $D(R)$, and $b\\mapsto\\mu_b$ is a ring map $R'\\to\\operatorname{End}_{D(R)}(R')$. The functor $-\\otimes_R^{\\mathbf L}M:D(R)\\to D(A)$ of [lem-pc-derived-tensor-second-factor-functor] (2) sends it to a ring map $R'\\to\\operatorname{End}_{D(A)}(M\\otimes_R^{\\mathbf L}R')$. For $a\\in A$, multiplication by $a$ is a morphism $M\\to M$ of complexes of $A$-modules ($A$ is commutative), and clause (3) gives the induced natural transformation, represented on the model of Step 2 by multiplication by $a$ on $P$; its naturality with respect to $\\mu_b$ says that the endomorphisms induced by $a$ and by $b$ commute in $D(A)$. Applying $H^i$ gives commuting actions of $A$ and $R'$ on every cohomology module, agreeing on $R$, hence an $A\\otimes_R R'$-module structure.",
+   "uses": [
+    "lem-pc-derived-tensor-second-factor-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 06Y6, functoriality of the derived tensor in both variables"
+   }
+  },
+  {
+   "text": "Independence of $F$ is the canonical-comparison part of [lem-pc-derived-tensor-second-factor-functor] (2); independence of $P$ holds because for two K-flat resolutions $P\\to M$, $P'\\to M$ Step 2 gives quasi-isomorphisms from both models to $\\operatorname{Tot}(F\\otimes_R M)$ (up to the symmetry isomorphism), whence a canonical isomorphism in $D(A)$, compatible with a third choice. Functoriality in $M$: a morphism $M\\to M'$ of complexes of $A$-modules induces by clause (3) a morphism $M\\otimes_R^{\\mathbf L}R'\\to M'\\otimes_R^{\\mathbf L}R'$ compatible with composition, an isomorphism when $M\\to M'$ is a quasi-isomorphism, so the construction descends to $D(A)$. The comparison isomorphisms and these morphisms commute with the actions of Step 3 by naturality of the functor and of the transformations of clause (3), so the $A\\otimes_R R'$-module structures on cohomology are canonical.",
+   "uses": [
+    "lem-pc-derived-tensor-second-factor-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 06Y6, independence of K-flat resolutions and functoriality"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-kflat-resolution",
+  "def-pc-kflat-complex",
+  "def-pc-tensor-complex-sheaves",
+  "lem-pc-derived-tensor-second-factor-functor"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tags 064K and 06Y6"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -51,10 +107,26 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pc-derived-tensor-localization-cohomology",
   "by": "worker",
   "date": "2026-10-11"
+ },
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-balanced-derived-tensor-model",
+  "worker": "stage1",
+  "summary": "No exact declaration exists in the Lean source. The proof is split into one-point-site K-flat model selection, computation of the balanced total tensor using the K-flat second factor, the commuting A and R' actions on cohomology, and canonical resolution independence and functoriality. The generic change-of-rings lemma is used as an off-unit tool because it states the required derived-functor invariance for arbitrary ringed sites.",
+  "blueprint": "Realizes the proof place 'choose K-flat models for the derived tensor over R' and the Tag 06Y6 clauses on actions, canonical comparison, and functoriality.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-bdt0223",
+  "group": "J1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-bdt0223 (reviewer sub-agent of L); spot-checked: Read Tags 064K, 06Y6 and lemma-derived-tor-quasi-isomorphism-other-side; parent lem-pc-derived-tensor-localization-cohomology step 1 cites exactly the model, A'-action on cohomology (not a strict complex) and same-lemma-over-R_p clauses. Math: model correct (only K-flatness of F needed; P K-flat over A is not K-flat over R in general and is not used so). Checked R=A=R', zero complex. Nearby nodes lem-pc-kflat-derived-tensor-associator, lem-pc-derived-tensor-flat-second-localization do not restate the item; lem-pc-derived-tensor-action-naturality (existing, cites the item) overlaps the action clauses but adds the comparison-map clause. FIX more, RETURN less: dag/nodes/sec-picard-framework/lem-pc-balanced-derived-tensor-model.json steps 2-4: cited lem-pur-derived-change-of-rings states only -tensor_O O' along a ring map (N=A), not the derived tensor over R with a complex M of A-modules, its functoriality in R' or independence of F (C4, missed by the Second reading); added statement-only node lem-pc-derived-tensor-second-factor-functor (Tag 06Y6 with general N, 064L, functoriality in N; Mathlib grep recorded) and rewrote steps 2-4 from it (step 2: clause (2) with E=R', clause (3) for P to M, symmetry iso; step 3: functor on mu_b, naturality for a, elementary false; step 4: independence of F by (2), of P via step 2, functoriality by (3)); dropped tool use lem-pur-derived-change-of-rings; step 1 plain-text arrows to TeX (B4); proof_deps updated. Start 02:16 UTC, end 02:24 UTC.; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
  }
 }

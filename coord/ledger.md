@@ -3288,3 +3288,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 02:18 L: review queue still empty; claimed lem-weil-tower-split-envelope for L and launched worker W-env0220 (brief-common.md)
 - 02:22 L: accepted lem-weil-tower-split-envelope (own item, writer W-env0220, reviewer R-env0222 PASS; 6 elementary steps, 0 new nodes; statement clarified ('additive' spelled out, statement_change); cosmetic DOUBTFUL (pr_n reused at every level, e'_m undefined) left as is)
 - 02:22 L: claimed lem-sc-base-change-curve for L (next stage-1 item) and launched worker W-bcc0224 (brief-common.md); one reviewer in flight (J1 balanced-derived-tensor-model)
+- 02:24 L: merged deliver/J1/lem-pc-balanced-derived-tensor-model (reviewer FIX+NODE(1); first push; new nodes: 1)
