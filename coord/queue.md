@@ -1,11 +1,11 @@
 # Work queue
 
-837 items; claim with `tools/claim.py next <group> [--stage N]`.
+834 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (837)
+## Stage 2: nodes to state (834)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -50,17 +50,14 @@
 | `lem-weil-pbc-charpoly-locally-free-direct-sum` | 1 | state |
 | `lem-weil-pbc-cohen-power-series-presentation` | 1 | state |
 | `lem-weil-pbc-colimit-category-fp-algebras` | 1 | state |
-| `lem-weil-pbc-colimit-flat-ring-map` | 1 | state |
 | `lem-weil-pbc-colimit-surjective-ring-map` | 1 | state |
 | `lem-weil-pbc-complete-local-domain-finite-over-regular` | 1 | state |
 | `lem-weil-pbc-completion-at-quasi-finite-prime` | 1 | state |
 | `lem-weil-pbc-complex-spectral-sequence-comparison` | 1 | state |
 | `lem-weil-pbc-constant-sheaf-sections-locally-constant` | 1 | state |
 | `lem-weil-pbc-constant-sheaf-set-sections-connected-natural` | 1 | state |
-| `lem-weil-pbc-constructible-intersection-in-constructible` | 1 | state |
 | `lem-weil-pbc-constructible-module-finite-presentation` | 1 | state |
 | `lem-weil-pbc-constructible-module-finite-stalks` | 1 | state |
-| `lem-weil-pbc-constructible-noetherian-finite-selection` | 1 | state |
 | `lem-weil-pbc-coskeleton-free-homology-comparison` | 1 | state |
 | `lem-weil-pbc-coskeleton-matching-tuples` | 1 | state |
 | `lem-weil-pbc-cotangent-complex-symmetric-algebra` | 1 | state |
