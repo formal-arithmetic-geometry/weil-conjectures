@@ -27,10 +27,25 @@ zeta series are integral by the Euler product (`AlgebraicGeometry.Scheme.Hom.zet
 `AlgebraicGeometry.Scheme.Hom.exists_int_zetaSeries`) while the factorization is `ℓ`-adic by
 construction; the two meet in the rationality descent and in the realization independence of the
 integral factors (blueprint remarks `rem-zeta-where-this-feeds` and
-`rationality-the-criterion-and-the-descent--remark-1`).
+`sk-the-five-assembled-theorems--remark-1`, and
+`rationality-the-criterion-and-the-descent--remark-1` and
+`sk-rationality-the-criterion-and-the-descent--remark-1`: the trace-to-determinant identity is
+produced by one chosen `ℓ` and only exhibits `Z ∈ ℚ_ℓ(T)`; rationality over `ℚ` uses only that the
+coefficients are integers, while the independence of `ℓ` of the factors is the separate
+statement `prop-integral-recovery`).
+
+As the blueprint remarks `audit-what-is-elementary-in-this-layer-and-what-is-not--remark-1` and
+`sk-audit-what-is-elementary-in-this-layer-and-what-is-not--remark-1` record, this layer is
+elementary apart from four points, which are the geometric inputs used here: the alternating
+middle pairing (`AlgebraicGeometry.Scheme.even_finrank_cohomology_middle`), the two endpoint
+computations (`AlgebraicGeometry.Scheme.exists_linearEquiv_cohomology_endpoints`), the embedding
+extension (`PadicAlgCl.exists_ringHom_complex_apply_eq`) and the intrinsic weights and
+integrality of the factors (`AlgebraicGeometry.Scheme.realizationIndependence`).
 
 ## Main statements
 
+- `AlgebraicGeometry.Scheme.Hom.constantCoeff_zetaSeries_and_X_mul_derivative`: `sk-def-zeta`.
+- `AlgebraicGeometry.Scheme.Hom.eulerProduct`: `sk-prop-euler`, `prop-euler-product`.
 - `AlgebraicGeometry.Scheme.Hom.weilRationality`: `sk-thm-weil1`, `thm-weil-final-rationality`.
 - `AlgebraicGeometry.Scheme.weilIntegralFactors`: `sk-thm-weil2`, `thm-weil-final-integrality`.
 - `AlgebraicGeometry.Scheme.riemannHypothesis`: `sk-thm-rh`, `prop-arithmetic-roots`,
@@ -49,6 +64,18 @@ open CategoryTheory Limits Polynomial
 namespace AlgebraicGeometry
 
 namespace Scheme
+
+/-- Blueprint `sk-def-zeta` (the point-count zeta series): for a scheme `X₀` over a field `k`,
+the zeta series `Z(X₀, T) = exp(∑_{n ≥ 1} Nₙ Tⁿ / n)` (`AlgebraicGeometry.Scheme.Hom.zetaSeries`,
+with `Nₙ = #X₀(𝔽_{qⁿ})` the point counts `AlgebraicGeometry.Scheme.Hom.pointCount`) lies in
+`1 + T ℚ⟦T⟧`, and the point counts are recovered from it by the logarithmic derivative
+`T Z' = (∑_{n ≥ 1} Nₙ Tⁿ) Z`. -/
+theorem Hom.constantCoeff_zetaSeries_and_X_mul_derivative {k : Type u} [Field k] {X : Scheme.{u}}
+    (f : X ⟶ Spec (.of k)) :
+    PowerSeries.constantCoeff f.zetaSeries = 1 ∧
+      PowerSeries.X * PowerSeries.derivative ℚ f.zetaSeries =
+        PowerSeries.mk (fun n ↦ if n = 0 then (0 : ℚ) else f.pointCount n) * f.zetaSeries :=
+  ⟨f.constantCoeff_zetaSeries, f.X_mul_derivative_zetaSeries⟩
 
 open scoped PowerSeries.WithPiTopology in
 /-- Blueprint `sk-prop-euler` and `prop-euler-product` (closed-point Euler product and
