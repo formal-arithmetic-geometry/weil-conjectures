@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "prop-av-tate-rank",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "The $\\ell$-adic Tate module is free of rank $2g$",
@@ -13,15 +13,18 @@
   "place": "node prop-av-tate-rank, order 591"
  },
  "stmt_deps": [
-  "def-sc-abelian-variety"
+  "def-sc-abelian-variety",
+  "def-wf-abelian-tate-module"
  ],
  "proof": [
   {
-   "text": "By [lem-sc-ntorsion-etale] each level is\n$A[\\ell^n](k)\\cong(\\Z/\\ell^n\\Z)^{2g}$, and the transition map $[\\ell]:A[\\ell^{n+1}](k)\\to A[\\ell^n](k)$ is\nsurjective, since $A(k)$ is divisible by [lem-sc-isogeny-surjective]\n(an $\\ell$-th root of a point of $A[\\ell^n](k)$ lies in $A[\\ell^{n+1}](k)$). Choosing compatible bases through these surjections\nidentifies the inverse system defining $T_\\ell A$\n([def-wf-abelian-tate-module]) with the system\n$(\\Z/\\ell^n\\Z)^{2g}$ under reduction, whose limit is $\\Z_\\ell^{2g}$;\ntensoring with $\\Q_\\ell$ gives $V_\\ell A\\cong\\Q_\\ell^{2g}$.",
+   "text": "Put $M=A(k)$. Since [lem-sc-isogeny-surjective] gives surjectivity of $[n]:A(k)\\to A(k)$ for every $n\\ge 1$, multiplication by $\\ell$ on $M$ is surjective. Applying [lem-sc-ntorsion-etale] with $n=\\ell$ (allowed because $\\ell\\ne\\operatorname{char}k$) and using the kernel definition identifies $M[\\ell]$ with $A[\\ell](k)\\cong(\\mathbf Z/\\ell\\mathbf Z)^{2g}$, so $\\operatorname{Nat.card}(M[\\ell])=\\ell^{2g}$. The hypotheses of [lem-av-tate-module-group-rank] therefore give a linear equivalence $T_\\ell M\\simeq (\\mathbf Z_\\ell)^{2g}$; by [def-wf-abelian-tate-module], $T_\\ell M$ is the module denoted $T_\\ell A$. The rational conclusion follows from [lem-av-rational-tate-module-group-rank] with the same divisibility and cardinality hypotheses, giving $V_\\ell A\\simeq (\\mathbf Q_\\ell)^{2g}$.",
    "uses": [
     "lem-sc-ntorsion-etale",
     "lem-sc-isogeny-surjective",
-    "def-wf-abelian-tate-module"
+    "def-wf-abelian-tate-module",
+    "lem-av-tate-module-group-rank",
+    "lem-av-rational-tate-module-group-rank"
    ],
    "elementary": false
   }
@@ -29,7 +32,9 @@
  "proof_deps": [
   "lem-sc-ntorsion-etale",
   "lem-sc-isogeny-surjective",
-  "def-wf-abelian-tate-module"
+  "def-wf-abelian-tate-module",
+  "lem-av-tate-module-group-rank",
+  "lem-av-rational-tate-module-group-rank"
  ],
  "proof_origin": {
   "by": "agent",
@@ -38,14 +43,57 @@
  },
  "mathlib_searches": [
   {
-   "tool": "text search of the local Mathlib checkout (0df444a360)",
-   "query": "AlgebraicGeometry.IsAbelianScheme.nonempty_linearEquiv_tateModule",
-   "results": [],
-   "date": "2026-10-08"
+   "tool": "leanfinder",
+   "query": "the l-adic Tate module of an abelian variety over an algebraically closed field is free of rank 2g",
+   "results": "No exact abelian-variety result; unrelated generic free-module results",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AddCommGroup.tateModule, nonempty_linearEquiv_of_natCard_eq",
+   "results": "unknown identifier AddCommGroup.tateModule; no match",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "nonempty_linearEquiv_of_natCard_eq|tateModule in Mathlib",
+   "results": "no matches",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tate module of abelian variety is free of rank twice the dimension",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "inverse limit of n-torsion points of an abelian variety over an algebraically closed field",
+   "results": "No exact result; unrelated field and elliptic-curve declarations",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "nonempty_linearEquiv_of_natCard_eq",
+   "results": "unknown identifier; no match",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "TateModule|tateModule|rationalTateModule in Mathlib",
+   "results": "no matches",
+   "date": "2026-10-11",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "lean_not_found"
@@ -228,5 +276,21 @@
   }
  },
  "chapter": "sec-abelian-varieties",
- "unit": "sk-prop-av-tate-rank"
+ "unit": "sk-prop-av-tate-rank",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "prop-av-tate-rank",
+  "worker": "stage1",
+  "summary": "The imported proof was checked against the Tate-module source. It uses the existing torsion-etale and isogeny-surjectivity nodes for the finite-level torsion and divisibility, and two attached generic Tate-module rank declarations for the integral and rational conclusions. The abelian-variety declarations in slopmaster2 are transitively rests_on_sorry and therefore are not attachments.",
+  "blueprint": "Realizes the sole blueprint proof paragraph: torsion levels and divisibility supply the hypotheses for the generic Tate-module basis theorem, followed by rational base change.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-atr0306",
+  "group": "K1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-atr0306 (reviewer sub-agent of L); spot-checked: Step 1 C4/E: lem-sc-isogeny-surjective gives ell-divisibility of A(k); lem-sc-ntorsion-etale at n=ell (ell != char k) gives A[ell](k)=(Z/ell)^{2g} so Nat.card M[ell]=ell^{2g}; def-wf-abelian-tate-module identifies T_ell A, V_ell A with T_ell(A(k)), V_ell(A(k)) (k alg. closed); the two new group-rank nodes match AddCommGroup.tateModule/rationalTateModule.nonempty_linearEquiv_of_natCard_eq (prime ell, hdiv, Nat.card torsionBy = ell^r), both sorry-free per sorryfree.py; mathematics true (induction M[ell^n]=(Z/ell^n)^r, surjective transitions). No duplicate (only def nodes and no-fixed lemmas cite def-tate-module-abelian-group). FIX more, RETURN less: B10 the two new nodes are stated exactly by sorry-free slopmaster2 declarations but carried no lean_audit record; added lean_audit.slopmaster2.decls (closed) to lem-av-tate-module-group-rank and lem-av-rational-tate-module-group-rank.; 2 file(s) fixed by the reviewer"
+ }
 }
