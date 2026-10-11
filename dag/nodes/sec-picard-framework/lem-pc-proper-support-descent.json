@@ -162,5 +162,23 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-psd2548 (reviewer sub-agent of L); spot-checked: Stacks 081G/081F text; def-weil-pbc-closed-subset-proper-over-base is set-theoretic support with reduced structure (C4 ok). FIX more, RETURN less: (1) B class b/d: helper lem-pc-support-closed-subscheme-descent dropped (holds at j=i from 05JU + 056J; proper hypothesis idle); cited lem-weil-pbc-scheme-theoretic-support and lem-weil-pbc-support-pullback-finite-type(3) instead. (2) C1: step 2's 'base change to S is proper' and step 3's structure-independence now cite lem-weil-pbc-closed-subset-proper-over-base-properties(1) (0CYL). (3) E: 081F qcqs hypotheses on Z_i, S_i checked in step 1; tool_uses declared for the four sk-thm-p1 generic nodes.; 1 file(s) fixed by the reviewer"
  },
- "lead_note": "2026-10-10 L (R-psd2548): Second reading by G1 claimed the helper was removed and the proof rewritten, but the head 89628e729 still carried both; the claimed citations.json does not exist."
+ "lead_note": "2026-10-10 L (R-psd2548): Second reading by G1 claimed the helper was removed and the proof rewritten, but the head 89628e729 still carried both; the claimed citations.json does not exist.",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProperSupportDescent",
+  "declaration": "AlgebraicGeometry.exists_hasSupportProperOver_baseChange_of_isLimit",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProperSupportDescent.lean",
+  "statement": "theorem exists_hasSupportProperOver_baseChange_of_isLimit {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] (R : I ⥤ CommRingCat.{u}) [∀ k : I, IsNoetherianRing (R.obj k)] (c : Cone (R.op ⋙ Scheme.Spec)) (hc : IsLimit c) [IsAffine c.pt] (i : I) {Xi : Scheme.{u}} (f : Xi ⟶ Spec (R.obj i)) [LocallyOfFinitePresentation f] [QuasiCompact f] [QuasiSeparated f] (Fi : Xi.Modules) [Fi.IsFinitePresentation] (hF : Scheme.Modules.HasSupportProperOver (pullback.snd f (c.π.app (op i))) ((Scheme.Modules.tensorPullback (pullback.fst f (c.π.app (op i)))).obj Fi)) : ∃ (j : I) (hij : i ≤ j), Scheme.Modules.HasSupportProperOver (pullback.snd f (Spec.map (R.map (homOfLE hij)))) ((Scheme.Modules.tensorPullback (pullback.fst f (Spec.map (R.map (homOfLE hij))))).obj Fi)",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-psd",
+  "group": "H1",
+  "result": "pass",
+  "note": "directed I preorder (stage i gives nonempty); R : I ⥤ CommRingCat Noetherian stages, Spec system affine/qcqs; limit cone+IsLimit, IsAffine c.pt = S=Spec R; f lfp+qc+qs = finitely presented; Fi IsFinitePresentation; X, X_j via pullback f, module via tensorPullback of fst; HasSupportProperOver (inline Subsingleton-stalk support, landed be3acebf2) over snd in hypothesis and at j≥i"
+ }
 }
