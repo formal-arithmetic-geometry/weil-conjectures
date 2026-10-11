@@ -115,5 +115,23 @@
   "group": "C1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-pec2004 (reviewer sub-agent of L); spot-checked: Read packet whole; checked horseshoe node, single-identification, ext-via-injective-resolution, def-weil-abstract-derived-category (cone triangle with -p, Stacks 0152 -p q^-1: snake-lemma boundaries without sign; third map of A[0]->B[0]->C[0]->A[0][1] unique since Hom(A[1],C)=0), def-sc-ext-sheaf and lem-weil-pbc-derived-functor-long-exact (no sign stated; consistent); Mathlib grep: RightDerived.lean has no delta/triangle comparison. FIX more, RETURN less: (1) C1 missed by the second reading: the bridge gives the connecting map of the triangle Rv(A)->Rv(B)->Rv(C) in D(Ab), but the item's derived side is Hom_{D(A)}(M[0],-) (postcomposition with w[n], as the consumer lem-sc-p1-ext-connecting-yoneda/derived-connecting-extclass reads it); the compatibility H^n(RHom(M,X)) = Hom_D(M[0],X[n]) with connecting maps was uncited -> new statement-only node lem-sc-p1-rhom-hom-derived-connecting, Step 2 rewritten to use it and to show psi∘theta^-1 is the ext-via-injective-resolution comparison; (2) C1/B3: the triangle and its third map w were uncited in item and bridge -> cite lem-sf-derived-ses-triangle; E7: item statement changed only to name w and make 'homology connecting morphism' explicit (Hom_D(M[0],-) via lem-sp-long-exact-of-triangle, xi -> w[n]∘xi), reason: pin the sign/meaning used downstream.; 3 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.Abelian.ExtResolutionDerivedConnecting",
+  "declaration": "CategoryTheory.InjectiveResolution.extMk_resolution_connecting_eq_triangle",
+  "file": "lean/Sheaf/CategoryTheory/Abelian/ExtResolutionDerivedConnecting.lean",
+  "statement": "theorem extMk_resolution_connecting_eq_triangle {C : Type u} [Category.{v} C] [Abelian C] [EnoughInjectives C] {S : ShortComplex C} (hS : S.ShortExact) (M : C) (RA : InjectiveResolution S.X₁) (RB : InjectiveResolution S.X₂) (RC : InjectiveResolution S.X₃) (i : RA.cocomplex ⟶ RB.cocomplex) (p : RB.cocomplex ⟶ RC.cocomplex) (hip : i ≫ p = 0) (hιi : RA.ι ≫ i = (CochainComplex.single₀ C).map S.f ≫ RB.ι) (hιp : RB.ι ≫ p = (CochainComplex.single₀ C).map S.g ≫ RC.ι) (hexact : ∀ k : ℕ, ((ShortComplex.mk i p hip).map (HomologicalComplex.eval C (ComplexShape.up ℕ) k)).ShortExact) (n : ℕ) (c : M ⟶ RC.cocomplex.X n) (hc : c ≫ RC.cocomplex.d n (n + 1) = 0) (b : M ⟶ RB.cocomplex.X n) (hb : b ≫ p.f n = c) (a : M ⟶ RA.cocomplex.X (n + 1)) (ha : a ≫ RA.cocomplex.d (n + 1) (n + 1 + 1) = 0) (hba : b ≫ RB.cocomplex.d n (n + 1) = a ≫ i.f (n + 1)) : letI := HasExt.standard C letI := HasDerivedCategory.standard C (preadditiveCoyoneda.obj (op ((DerivedCategory.singleFunctor C 0).obj M))).homologySequenceδ hS.singleTriangle (n : ℤ) ((n + 1 : ℕ) : ℤ) (by omega) (RC.extMk c (n + 1) rfl hc).hom = (RA.extMk a (n + 1 + 1) rfl ha).hom",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-per1207",
+  "group": "H1",
+  "result": "pass",
+  "note": "Matched C/Abelian/EnoughInjectives, M, S+hS (SES), triangle = hS.singleTriangle (w = singleδ), RA/RB/RC + i,p,hip,hιi,hιp,hexact = arbitrary horseshoe, c/b/a/hba = snake boundary on representatives, extMk = inverse of extAddEquivCohomologyClass (lem-weil-pbc-ext-via-injective-resolution), LHS = homologySequenceδ of preadditiveCoyoneda(M[0]) = xi -> w[n]∘xi; n=0 included, ha derivable. Sign checked: Mathlib homOfDegreewiseSplit is +s≫d≫r and trianglehOfDegreewiseSplit is distinguished; Hom(A[0][1],C[0])=0 makes w unique, so w corresponds to +s≫d≫r and extMk of the lifted-differential class matches with no sign; rightShift/equivHomShift and cochain shiftFunctorAdd' carry no sign."
  }
 }
