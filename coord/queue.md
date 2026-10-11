@@ -1,11 +1,11 @@
 # Work queue
 
-790 items; claim with `tools/claim.py next <group> [--stage N]`.
+786 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (790)
+## Stage 2: nodes to state (786)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -22,22 +22,18 @@
 | `lem-sc-p1-rhom-hom-derived-connecting` | 1 | state |
 | `lem-sc-product-tangent-space-direct-sum` | 1 | state |
 | `lem-sc-rational-unramified-cotangent-criterion` | 1 | state |
-| `lem-sc-separated-affine-function-field-surjective` | 1 | state |
 | `lem-sc-vector-bundle-line-subbundle` | 1 | state |
 | `lem-sp-kinjective-computes` | 1 | state |
 | `lem-sp-shift-identification` | 1 | state |
 | `lem-weil-derived-limit-roos-complex` | 1 | state |
-| `lem-weil-pbc-charpoly-locally-free-direct-sum` | 1 | state |
 | `lem-weil-pbc-complex-spectral-sequence-comparison` | 1 | state |
 | `lem-weil-pbc-cotangent-complex-symmetric-algebra` | 1 | state |
 | `lem-weil-pbc-criterion-flatness-fibre-noetherian` | 1 | state |
-| `lem-weil-pbc-curve-assertions-finite-pushforward` | 1 | state |
 | `lem-weil-pbc-depth-in-ses` | 1 | state |
 | `lem-weil-pbc-derivation-extends-finite-type-extension` | 1 | state |
 | `lem-weil-pbc-derived-adjunction-commshift` | 1 | state |
 | `lem-weil-pbc-derived-exchange-termwise` | 1 | state |
 | `lem-weil-pbc-derived-finite-product` | 1 | state |
-| `lem-weil-pbc-derived-functor-long-exact` | 1 | state |
 | `lem-weil-pbc-derived-functor-truncation-iso` | 1 | state |
 | `lem-weil-pbc-derived-inverse-image-composition` | 1 | state |
 | `lem-weil-pbc-derived-square-iso-commshift` | 1 | state |
