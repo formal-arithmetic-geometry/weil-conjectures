@@ -188,5 +188,24 @@
   "group": "K1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-shd1911 (reviewer sub-agent of L); spot-checked: Steps 1-4 against 04HX/07QM/0AP3/06LJ/06LK/06LN/00PD and every cited statement; leaf IsDiscreteValuationRing.ringKrullDim_eq_one read at TFAE.lean:244 (exact; project DVR def = IsDomain+IsDiscreteValuationRing); grep Henseliz in Mathlib/RingTheory: no henselization in Mathlib, so the three 06LJ/06LK/06LN nodes are real unsplit lemmas, not duplicates; no cycle with J1 parent (only lem-sc-open-curve-boundary-higher-direct-image-vanishing cites the item, cited nodes are older); four declared tool_uses accepted as generic. FIX more, RETURN less: (1) C4 Step 2: strict-henselization-triples applied to (A,p) gives a filtered colimit of etale A-algebras, not etale A_p-algebras, so the step only gave flatness over A; rewritten to obtain flatness over A, the factorization through A_p and locality from the maximal-ideal clause, and flatness over A_p by C(x)_{A_p}M = C(x)_A M (elementary). Second reading by K1 missed this.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.StrictHenselizationDVR",
+  "declaration": "AlgebraicGeometry.Scheme.strictHenselization_dvr",
+  "file": "lean/Sheaf/AlgebraicGeometry/StrictHenselizationDVR.lean",
+  "statement": "theorem strictHenselization_dvr {Y : Scheme.{v}} {Ω : Type v} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ Y) (x : Spec (.of Ω)) [IsNoetherianRing (Y.presheaf.stalk (s.base x)).1] : ∃ ι : Y.presheaf.stalk (s.base x) ⟶ strictHenselizationRing s, (∀ (U : Y.Opens) (_ : IsAffineOpen U) (hx : s.base x ∈ U) (n : SmallModel.{v} (strictHenselizationNeighbourhoods s)) (h : ⊤ ≤ ((AffineEtale.Spec Y).obj (((equivSmallModel.{v} (strictHenselizationNeighbourhoods s)).inverse.obj n).1)).hom ⁻¹ᵁ U), Y.presheaf.germ U (s.base x) hx ≫ ι = Scheme.Hom.appLE (((AffineEtale.Spec Y).obj (((equivSmallModel.{v} (strictHenselizationNeighbourhoods s)).inverse.obj n).1)).hom) U ⊤ h ≫ colimit.ι (strictHenselizationDiagram s) (op n)) ∧ RingHom.Flat ι.hom ∧ IsLocalHom ι.hom ∧ Function.Injective ι.hom ∧ ((∃ _ : IsDomain (Y.presheaf.stalk (s.base x)).1, IsDiscreteValuationRing (Y.presheaf.stalk (s.base x)).1) ↔ (∃ _ : IsDomain (strictHenselizationRing s).1, IsDiscreteValuationRing (strictHenselizationRing s).1))",
+  "branch": "sheaf-dag",
+  "by": "P1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-shd"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-shd",
+  "group": "P1",
+  "result": "fix",
+  "note": "Y scheme, geometric point s with IsAlgClosed Ω, y = s.base x, Noetherian stalk, recorded strictHenselizationRing; ι existential tied by germ/appLE/colimit.ι compatibility on every affine U and every small-model neighbourhood mapping into U (determines ι); RingHom.Flat, IsLocalHom, Injective (node's 'hence injective'); DVR iff per Mathlib with ∃ _ : IsDomain binder (inline @-instance removed, CohenRing form)"
  }
 }
