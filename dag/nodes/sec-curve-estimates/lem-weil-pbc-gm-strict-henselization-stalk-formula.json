@@ -27,7 +27,8 @@
   "def-weil-pbc-geometric-stalks",
   "def-weil-pbc-strict-henselization-limit",
   "def-weil-pbc-etale-cohomology",
-  "def-sc-gm-torsor"
+  "def-sc-gm-torsor",
+  "def-weil-pbc-strict-henselization-restriction"
  ],
  "proof": [
   {
@@ -128,5 +129,24 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GmStrictHenselizationStalkFormula",
+  "declaration": "AlgebraicGeometry.Etale.gm_strictHenselization_stalk_formula",
+  "file": "lean/Sheaf/AlgebraicGeometry/GmStrictHenselizationStalkFormula.lean",
+  "statement": "theorem gm_strictHenselization_stalk_formula {X S : Scheme.{w}} (f : X ⟶ S) [QuasiCompact f] [QuasiSeparated f] {Ω : Type w} [Field Ω] [IsAlgClosed Ω] (xbar : Spec (.of Ω) ⟶ S) (q : ℕ) : ∃ r : (Scheme.pointSmallEtale xbar).sheafFiber.obj ((DerivedCategory.Plus.homologyFunctor _ (q : ℤ)).obj ((rightDerivedLowerStarPlus AddCommGrpCat.{w + 1} f).obj ((DerivedCategory.Plus.singleFunctor _ 0).obj X.gmSheaf))) ⟶ (Sheaf.Γ (Scheme.strictHenselizationScheme xbar).smallEtaleTopology AddCommGrpCat.{w + 1}).obj ((upperStar AddCommGrpCat.{w + 1} (Scheme.strictHenselizationStructuralMap xbar)).obj ((DerivedCategory.Plus.homologyFunctor _ (q : ℤ)).obj ((rightDerivedLowerStarPlus AddCommGrpCat.{w + 1} f).obj ((DerivedCategory.Plus.singleFunctor _ 0).obj X.gmSheaf)))), IsStrictHenselizationStalkRestriction xbar ((DerivedCategory.Plus.homologyFunctor _ (q : ℤ)).obj ((rightDerivedLowerStarPlus AddCommGrpCat.{w + 1} f).obj ((DerivedCategory.Plus.singleFunctor _ 0).obj X.gmSheaf))) r ∧ IsIso (r ≫ strictHenselizationCohomologyComparison xbar f X.gmSheaf q) ∧ IsIso (Scheme.upperStarGmSheafToGmSheaf (pullback.fst f (Scheme.strictHenselizationStructuralMap xbar))) ∧ IsIso (r ≫ strictHenselizationCohomologyComparison xbar f X.gmSheaf q ≫ (cohomology AddCommGrpCat.{w + 1} (pullback f (Scheme.strictHenselizationStructuralMap xbar)) (q : ℤ)).map (DerivedCategory.Plus.ι.map ((DerivedCategory.Plus.singleFunctor _ 0).map (Scheme.upperStarGmSheafToGmSheaf (pullback.fst f (Scheme.strictHenselizationStructuralMap xbar))))))",
+  "branch": "sheaf-dag",
+  "by": "Q1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-gsf"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-gsf",
+  "group": "Q1",
+  "result": "fix",
+  "note": "qcqs f, geometric point (Omega alg. closed), S_(s)=strictHenselizationScheme, g = landed strictHenselizationStructuralMap (delivered strictHenselizationToBase/extended cone = second spelling + choice via sorried initiality, reverted), p = pullback.fst, (R^q f_* Gm)_s = sheafFiber of H^q(rightDerivedLowerStarPlus f), H^q(X',p^-1 Gm) = Etale.cohomology of upperStar p; r_G now tied by IsStrictHenselizationStalkRestriction + existsUnique theorem, rho^q = r >> strictHenselizationCohomologyComparison (mate + Leray); units clause = upstream upperStarGmSheafToGmSheaf p; final clause composite; check_dag clean; reverted the delivery's change of existing node(s) def-weil-pbc-strict-henselization-limit (--revert-nodes; kept as on sheaf-dag)"
  }
 }

@@ -1,0 +1,120 @@
+{
+ "id": "def-weil-pbc-strict-henselization-restriction",
+ "kind": "definition",
+ "title": "Canonical restriction from a higher-direct-image stalk to strict-local cohomology",
+ "status": "split",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], $\\bar s:\\operatorname{Spec}\\Omega\\to S$ a geometric point [def-weil-geometric-point], and $g:S_{(\\bar s)}\\to S$ the structural morphism [def-weil-pbc-strict-henselization-structural-map] of the strict henselization, the limit of the pointed affine etale neighbourhoods [def-weil-pbc-strict-henselization-limit]. For an abelian etale sheaf $G$ on $S$ [def-weil-pbc-abelian-etale-sheaves], the restriction $r_G:G_{\\bar s}\\to\\Gamma(S_{(\\bar s)},g^{-1}G)$ is the map induced from the restrictions over pointed etale neighbourhoods [def-weil-pbc-geometric-stalks], [def-weil-pbc-inverse-image], [def-weil-pbc-global-sections-functor]: for an affine pointed etale neighbourhood $(V,\\bar v)$ of the chosen representative category, apply the inverse-image unit on sections over $V$ and restrict along the section $S_{(\\bar s)}\\to V\\times_S S_{(\\bar s)}$ given by the limit leg $S_{(\\bar s)}\\to V$. These maps are compatible with pointed morphisms, and the affine pointed neighbourhoods are cofinal [lemma-weil-pbc-affine-neighbourhood-cofinal], so there is exactly one map $r_G$ out of the stalk colimit whose composite with the germ map of every such $(V,\\bar v)$ is the given restriction; $r_G$ is defined as this map. Global sections on $S_{(\\bar s)}$ are exact, as on every strictly henselian local scheme.\n\nFor any morphism $f:X\\to S$ [def-weil-pbc-direct-image], any abelian etale sheaf $F$ on $X$, and $q\\in\\mathbf N$, put $X'=X\\times_S S_{(\\bar s)}$, with projections $p:X'\\to X$ and $f':X'\\to S_{(\\bar s)}$ [def-pc-fibre-product]. Define the canonical restriction\n$$\\rho^q_{f,F,\\bar s}:(R^qf_*F)_{\\bar s}\\longrightarrow H^q(X'_{\\mathrm{Et}},p^{-1}F)$$\n[def-weil-pbc-etale-cohomology] as follows: apply $r$ to $R^qf_*F$; commute exact derived inverse image [def-weil-pbc-derived-inverse-image] with cohomology; apply the degree-$q$ cohomology of the derived base-change mate $g^{-1}Rf_*F\\to Rf'_*p^{-1}F$ (the mate of the canonical pullback-composition isomorphism under the derived adjunctions of inverse and direct image [prop-weil-pbc-derived-inverse-image-adjunction]); then identify $\\Gamma(S_{(\\bar s)},\\mathcal H^q(Rf'_*p^{-1}F))$ with $H^q(X'_{\\mathrm{Et}},p^{-1}F)$ using exactness of global sections and the canonical Leray composition isomorphism. This defines a specific map, with no isomorphism assertion for $\\rho$ built into its definition.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-geometric-point",
+  "def-weil-pbc-strict-henselization-limit",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-geometric-stalks",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-global-sections-functor",
+  "def-weil-pbc-direct-image",
+  "def-pc-fibre-product",
+  "def-weil-pbc-etale-cohomology",
+  "def-weil-pbc-derived-inverse-image",
+  "prop-weil-pbc-derived-inverse-image-adjunction",
+  "def-weil-pbc-strict-henselization-structural-map",
+  "lemma-weil-pbc-affine-neighbourhood-cofinal"
+ ],
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Theorem Tag 03Q9 (theorem-higher-direct-images), final paragraph of its proof constructing restriction from germs; Lemma Tag 03QO (lemma-vanishing-etale-cohomology-strictly-henselian) for exact global sections on the strict local base"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "canonical restriction of geometric germs to cohomology of a strict local base change",
+   "results": "Service unavailable: Internal Server Error (recorded by msearch.py).",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "canonical restriction of geometric germs to cohomology of a strict local base change",
+   "results": "Only TopCat.Presheaf germ restriction formulas and ModuleCat.Tilde.toOpen_germ_apply; no etale strict-local restriction map.",
+   "date": "2026-10-11",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "hensel.*cohomology|stalk.*restriction|stalk.*direct.*image",
+   "results": "Mathlib gives topological/ringed-space stalk restrictions, not this map. Separate rg of WeilConjectures and lean/Sheaf finds the existing generic pullback, stalk, Leray and strict-henselization ring construction, but no map from a higher-direct-image stalk to strict-local cohomology. DAG searches distinguish general cohomology pullback and strictly henselian sections/stalk and acyclicity statements, none defining this restriction.",
+   "date": "2026-10-11",
+   "verdict": "no exact match"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-gm-strict-henselization-stalk-formula",
+  "date": "2026-10-11",
+  "group": "Q1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-brauer-zero",
+   "place": "the canonical stalk restriction used in the strict-henselization formula before Tag 03RM",
+   "via": [
+    "lem-weil-pbc-gm-strict-henselization-stalk-formula",
+    "lem-sc-open-curve-boundary-higher-direct-image-vanishing",
+    "lem-sc-open-curve-gm-direct-image-cohomology"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-br",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.StrictHenselizationRestriction",
+  "declaration": "AlgebraicGeometry.Etale.strictHenselizationCohomologyComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/StrictHenselizationRestriction.lean",
+  "statement": "def strictHenselizationCohomologyComparison {X : Scheme.{v}} (f : X ⟶ S) (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{v + 1}) (q : ℕ) : (Sheaf.Γ (Scheme.strictHenselizationScheme s).smallEtaleTopology AddCommGrpCat.{v + 1}).obj ((upperStar AddCommGrpCat.{v + 1} (Scheme.strictHenselizationStructuralMap s)).obj ((DerivedCategory.Plus.homologyFunctor _ (q : ℤ)).obj ((rightDerivedLowerStarPlus AddCommGrpCat.{v + 1} f).obj ((DerivedCategory.Plus.singleFunctor _ 0).obj F)))) ⟶ (cohomology AddCommGrpCat.{v + 1} (pullback f (Scheme.strictHenselizationStructuralMap s)) (q : ℤ)).obj ((DerivedCategory.Plus.ι).obj ((DerivedCategory.Plus.singleFunctor _ 0).obj ((upperStar AddCommGrpCat.{v + 1} (pullback.fst f (Scheme.strictHenselizationStructuralMap s))).obj F)))",
+  "branch": "sheaf-dag",
+  "by": "Q1",
+  "date": "2026-10-11",
+  "existing": false,
+  "declarations": [
+   "AlgebraicGeometry.Etale.strictHenselizationNeighbourhoodSection",
+   "AlgebraicGeometry.Etale.strictHenselizationSectionRestriction",
+   "AlgebraicGeometry.Etale.IsStrictHenselizationStalkRestriction",
+   "AlgebraicGeometry.Etale.existsUnique_strictHenselizationStalkRestriction",
+   "AlgebraicGeometry.Etale.strictHenselization_globalSections_preservesFiniteColimits",
+   "AlgebraicGeometry.Etale.strictHenselizationLerayHomologyIso",
+   "AlgebraicGeometry.Etale.strictHenselizationCohomologyComparison"
+  ],
+  "note": "g = the landed strictHenselizationStructuralMap s (def-weil-pbc-strict-henselization-structural-map); r_G is characterised, not chosen: IsStrictHenselizationStalkRestriction s G r (components at the representative affine pointed neighbourhoods of strictHenselizationCone s) with existsUnique_strictHenselizationStalkRestriction; rho^q = r ≫ strictHenselizationCohomologyComparison s f F q for that unique r.",
+  "fixed_by": "R-gsf"
+ },
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-gsf",
+  "group": "Q1",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-gsf",
+  "group": "Q1",
+  "result": "fix",
+  "note": "qcqs f, geometric point (Omega alg. closed), S_(s)=strictHenselizationScheme, g = landed strictHenselizationStructuralMap (delivered strictHenselizationToBase/extended cone = second spelling + choice via sorried initiality, reverted), p = pullback.fst, (R^q f_* Gm)_s = sheafFiber of H^q(rightDerivedLowerStarPlus f), H^q(X',p^-1 Gm) = Etale.cohomology of upperStar p; r_G now tied by IsStrictHenselizationStalkRestriction + existsUnique theorem, rho^q = r >> strictHenselizationCohomologyComparison (mate + Leray); units clause = upstream upperStarGmSheafToGmSheaf p; final clause composite; check_dag clean; reverted the delivery's change of existing node(s) def-weil-pbc-strict-henselization-limit (--revert-nodes; kept as on sheaf-dag)"
+ }
+}
