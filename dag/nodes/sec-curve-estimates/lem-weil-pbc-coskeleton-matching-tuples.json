@@ -121,5 +121,23 @@
   "group": "E1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-cmt (reviewer sub-agent of L); spot-checked: Repaired re-push after the 14:09 return; both points repaired. (1) C3: Step 1 no longer takes eps_k = p_{k,id} from the proof of lem-weil-pbc-truncated-coskeleton-finite-limits; it uses only statement (1) of that node (L_j = lim U(j), L(phi) induced by alpha -> phi o alpha, giving p_{k,id} o L(alpha) = p_{n,alpha}; eps an isomorphism), the elementary fact that id_[k] is terminal in (Delta/[k])_{<=n-1} so p_{k,id} is an isomorphism, the cone equation for psi -> id giving p_{k',id} o L(psi) = p_{k,psi} = K(psi) o p_{k,id}, and a = eps o p^{-1} a natural automorphism of V; Step 2 composes the limit bijection (def-galois-finite-limits-colimits) with postcomposition by a, which preserves compatible families by naturality of a, natural in W; the Review-by-E1 sentence is corrected. (2) F1/E7: split_report.summary now names only the statement change (alpha, psi order-preserving, reason: lead note) and the report says source.place should read Lemma 0183 and is left to the maintainer; source and other maintainer fields unchanged (diff only statement, proof, proof_deps, proof_origin, status, split_report). Statement agrees with Stacks 0183 (lemma-existence-cosk): finite limits, m=n-1>=0. Step 3 from eps o sk_{n-1}c = id (def-weil-pbc-simplicial-coskeleton) and naturality (def-weil-pbc-simplicial-object). Small case n=1: L_1 = K_0 x K_0 over the two vertices, no relation, matches. No new nodes, no Mathlib leaves. 14:34-14:38 UTC."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.CoskeletonMatchingTuples",
+  "declaration": "CategoryTheory.SimplicialObject.exists_coskeleton_matching_tuples",
+  "file": "lean/Sheaf/CategoryTheory/CoskeletonMatchingTuples.lean",
+  "statement": "theorem exists_coskeleton_matching_tuples {C : Type u} [Category.{v} C] [HasFiniteLimits C] (K : SimplicialObject C) (n : ℕ) (_hn : 1 ≤ n) : let m := n - 1 let i := SimplexCategory.Truncated.inclusion m let V := (truncation m).obj K let F := fun W : C ↦ {x : ∀ (k : SimplexCategory.Truncated m), (i.obj k ⟶ SimplexCategory.mk n) → (W ⟶ K.obj (op (i.obj k))) // ∀ (k' k : SimplexCategory.Truncated m) (ψ : k' ⟶ k) (α : i.obj k ⟶ SimplexCategory.mk n), x k α ≫ K.map (i.map ψ).op = x k' (i.map ψ ≫ α)} ∃ (L : SimplicialObject C) (ε : (truncation m).obj L ⟶ V), L.IsRightKanExtension ε ∧ ∃ (c : K ⟶ L), (truncation m).map c ≫ ε = 𝟙 V ∧ ∃ (e : ∀ W : C, (W ⟶ L _⦋n⦌) ≃ F W), (∀ (W : C) (h : W ⟶ L _⦋n⦌) (k : SimplexCategory.Truncated m) (α : i.obj k ⟶ SimplexCategory.mk n), (e W h).val k α = h ≫ L.map α.op ≫ ε.app (op k)) ∧ (∀ (W' W : C) (g : W' ⟶ W) (h : W ⟶ L _⦋n⦌) (k : SimplexCategory.Truncated m) (α : i.obj k ⟶ SimplexCategory.mk n), (e W' (g ≫ h)).val k α = g ≫ (e W h).val k α) ∧ (∀ (k : SimplexCategory.Truncated m) (α : i.obj k ⟶ SimplexCategory.mk n), (e (K _⦋n⦌) (c.app (op (SimplexCategory.mk n)))).val k α = K.map α.op)",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-cmt1542",
+  "group": "K1",
+  "result": "pass",
+  "note": "C,[Category.{v}],[HasFiniteLimits] = def-galois mathlib_match; K : SimplicialObject C; n, 1<=n, m=n-1; V=(truncation m).obj K = sk_{n-1}K; ∃(L,ε) L.IsRightKanExtension ε along (inclusion m).op (Iff.rfl checked) = dep mathlib_match coskeleton (existence, no HasRightKanExtension assumed so Truncated.cosk not usable); c with sk(c)≫ε=id = canonical morphism (unique by RKE); F W = all α:[k]->[n], k<=n-1, compat x_α≫K(ψ)=x_{α∘ψ} for all ψ in truncation; e W bijection with forward h≫L(α)≫ε_k, naturality in W, c_n ↦ K(α); 0183 form, no δ/matching-object needed"
  }
 }
