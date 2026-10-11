@@ -3247,3 +3247,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 01:42 UTC L: K1 picard-kunneth-qcoh FIX c6920c975 third push (R-kun0138; the dropped functoriality clause restored by the reviewer and proved in a new step 8; a Mathlib leaf for affine diagonals isAffineHom_diagonal_iff); returned: G1 derived-tensor-localization-cohomology 08a035602 (R-dtl0141: same fault as F1's version, P K-flat only over A; counterexample R=k[t], A=R'=R/t).
 - 01:43 L: merged deliver/C1/lem-sc-coherent-ring-fp-kernel-cokernel (reviewer FIX; first push; new nodes: 0)
 - 01:43 UTC L: C1 coherent-ring-fp-kernel-cokernel FIX 86a9662ae (R-ckc0142).
+- 01:44 L: merged deliver/E1/pqf-lem-serre-criterion (reviewer FIX; first push; new nodes: 1)

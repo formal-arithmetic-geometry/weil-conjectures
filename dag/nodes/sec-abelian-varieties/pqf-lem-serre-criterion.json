@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "pqf-lem-serre-criterion",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Serre's criterion for affineness",
@@ -19,15 +19,70 @@
   ]
  },
  "stmt_deps": [
+  "def-pc-scheme",
   "pqf-def-coherent",
   "pqf-def-cohomology"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
- "mathlib_searches": [],
+ "proof": [
+  {
+   "text": "Let $\\mathcal I\\subseteq\\mathcal O_X$ be a quasi-coherent sheaf of ideals. Since $X$ is quasi-compact and quasi-separated, by [lemma-nagata-ideal-directed-union-finite-type] (first paragraph; Properties, Tag 01PG) the quasi-coherent subideals $\\mathcal K\\subseteq\\mathcal I$ of finite type form a family directed under inclusion whose union is $\\mathcal I$; with the inclusions as transition maps, $\\mathcal I$ together with the inclusions $\\mathcal K\\hookrightarrow\\mathcal I$ is therefore a colimit of this directed system in the category of $\\mathcal O_X$-modules (a directed union of subsheaves is their colimit). The hypotheses of [lem-weil-pbc-qs-scheme-cohomology-directed-colimit] hold for $X$: the affine opens, which are quasi-compact, form a basis of the topology, and the intersection of two quasi-compact opens is a finite union of intersections of two affine opens, hence quasi-compact by quasi-separatedness. Applying it with $U=X$ and $q=1$, every class in $H^1(X,\\mathcal I)$ comes from some $H^1(X,\\mathcal K)$ with $\\mathcal K$ of finite type, which is zero by hypothesis. Hence $H^1(X,\\mathcal I)=0$ for every quasi-coherent sheaf of ideals $\\mathcal I$.",
+   "uses": [
+    "lemma-nagata-ideal-directed-union-finite-type",
+    "lem-weil-pbc-qs-scheme-cohomology-directed-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, Lemma Tag 01XG, proof lines 410-417"
+   }
+  },
+  {
+   "text": "The hypotheses of the quasi-compact vanishing criterion (Tag 01XF) now hold: $X$ is quasi-compact by assumption and $H^1(X,\\mathcal I)=0$ for every quasi-coherent sheaf of ideals by step 1. Therefore $X$ is affine.",
+   "uses": [
+    "lem-pqf-quasicompact-h1-zero"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, Lemma Tag 01XG, proof lines 410-417"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lemma-nagata-ideal-directed-union-finite-type",
+  "lem-weil-pbc-qs-scheme-cohomology-directed-colimit",
+  "lem-pqf-quasicompact-h1-zero"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Cohomology of Schemes, Lemma Tag 01XG (label lemma-quasi-separated-h1-zero-covering), proof lines 410-417"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Serre criterion: a quasi-compact quasi-separated scheme is affine if H^1 vanishes for every quasi-coherent finite type ideal",
+   "results": "AlgebraicGeometry.Scheme.IsQuasiAffine.of_forall_exists_mem_basicOpen; no H^1/cohomological Serre criterion",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsAffine, H1, QuasiSeparated, QuasiCompact",
+   "results": "unknown identifier 'IsAffine' (0 hits)",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Serre|quasi-separated.*affine|H\\^1 in Mathlib/AlgebraicGeometry",
+   "results": "no matching declaration",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "undischarged_input",
@@ -64,5 +119,36 @@
   }
  },
  "chapter": "sec-abelian-varieties",
- "unit": "sk-prop-av-pqf-finite"
+ "unit": "sk-prop-av-pqf-finite",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "pqf-lem-serre-criterion",
+  "worker": "stage1",
+  "summary": "Expanded the imported Tag 01XG proof into two steps. The first uses the directed-colimit decomposition of quasi-coherent ideal sheaves (Tag 01PG) and the existing quasi-compact/quasi-separated cohomology-colimit node to extend H^1-vanishing from finite-type ideals to all ideals. The second applies the quasi-compact Serre criterion (Tag 01XF). Added two unsplit statement-only children and verified that no sorry-free Lean declaration states the item or either child.",
+  "blueprint": "The two steps realize the sole blueprint proof sentence: the 01PG colimit reduction and the application of the quasi-compact vanishing criterion are the omitted proof behind the recorded Tag 01XG input.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-qs-scheme-cohomology-directed-colimit",
+    "why": "Step 1 uses its statement that cohomology on a quasi-compact open of a quasi-separated scheme commutes with directed colimits of sheaves of modules."
+   },
+   {
+    "node": "lemma-nagata-ideal-directed-union-finite-type",
+    "why": "Step 1 uses its first paragraph (Tag 01PG for ideals on a qcqs scheme) as a generic tool; reviewer R-psc0143 replaced the duplicate new node lem-pqf-qcoherent-ideal-colimit by it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-qs-scheme-cohomology-directed-colimit",
+  "lemma-nagata-ideal-directed-union-finite-type",
+  "lem-weil-pbc-qs-scheme-cohomology-directed-colimit",
+  "lemma-nagata-ideal-directed-union-finite-type"
+ ],
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-psc0143",
+  "group": "E1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-psc0143 (reviewer sub-agent of L); spot-checked: Read Stacks 01XG/01XF/01PG; steps follow 01XG proof exactly; 01XF child is a real lemma (unsplit, deferred), statement matches Tag 01XF; item statement = blueprint, sole citer thm-pqf-finite-iff-proper-finite-fibres does not use it in a proof step; Mathlib has no Serre criterion (grep isAffine_of). FIX more, RETURN less: (1) class (b) duplicate: lem-pqf-qcoherent-ideal-colimit restates the first paragraph of existing lemma-nagata-ideal-directed-union-finite-type; dropped it and cited the existing node as a generic tool use in step 1; (2) C1/E: step 1 now states the elementary bridges (directed union of subsheaves is their colimit in Mod(O_X); qcqs gives the colimit node's hypotheses (1),(2)) and applies it with U=X, q=1.; 1 file(s) fixed by the reviewer"
+ }
 }
