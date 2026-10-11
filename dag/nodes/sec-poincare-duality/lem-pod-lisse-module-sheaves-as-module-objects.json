@@ -119,5 +119,39 @@
   "group": "E1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-lmo2654 (reviewer sub-agent of L); spot-checked: Statement vs Stacks 0DV5/093S and vs its only citer cor-galois-lisse-representations step 1 (uses exactly (2), with the citer's parenthetical 'etale locally isomorphic to the constant sheaf of a finite Lambda-module' = the item's lisse): C4 OK. Module-object notion is the same inline definition as lem-pod-equivalence-induces-module-objects (which has no def node, stmt_deps []), so no def node to cite. Inline 'lisse' for left Lambda-module sheaves: def-weil-pbc-etale-sheaves defines lisse only for sheaves of sets (=FLC) and Mod only for commutative R; lem-weil-pbc-finite-locally-constant-module-values is commutative-only; the item's (1) proves agreement with the set-level def, so no clash, no class b. Noncommutative Lambda: left modules throughout, no tensor over Lambda. Steps 1-3 checked: step 2's local constancy of image sections is the elementary sheafification fact (093S(1)), common refinement finite because Lambda finite; step 3 inverse on objects and morphisms. No fault found beyond the second reading."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.LisseModuleSheaves",
+  "declaration": "AlgebraicGeometry.Scheme.lisseModuleSheaf_iff_underlying_finiteLocallyConstant",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.IsLisseModuleSheaf",
+   "AlgebraicGeometry.Scheme.ModuleObjectStruct",
+   "AlgebraicGeometry.Scheme.LambdaModuleObject",
+   "AlgebraicGeometry.Scheme.LambdaModuleObject.Hom",
+   "AlgebraicGeometry.Scheme.LisseModuleSheafCategory",
+   "AlgebraicGeometry.Scheme.ModuleObjectStruct.IsUnderlying",
+   "AlgebraicGeometry.Scheme.lisseModuleSheaf_iff_underlying_finiteLocallyConstant",
+   "AlgebraicGeometry.Scheme.existsUnique_moduleObjectStruct_isUnderlying",
+   "AlgebraicGeometry.Scheme.underlyingModuleObjectStruct",
+   "AlgebraicGeometry.Scheme.underlyingModuleObjectStruct_map",
+   "AlgebraicGeometry.Scheme.lisseToModuleObject",
+   "AlgebraicGeometry.Scheme.lisseToModuleObject_isIso_of_categories"
+  ],
+  "file": "lean/Sheaf/Paper/LisseModuleSheaves.lean",
+  "statement": "theorem lisseModuleSheaf_iff_underlying_finiteLocallyConstant [Finite Λ] (F : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)) : IsLisseModuleSheaf F ↔ IsFiniteLocallyConstantEtaleSheafOfSets ((sheafForget Y.smallEtaleTopology).obj F)",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-11",
+  "existing": false,
+  "note": "Clause (1) is the main declaration; clause (2) is lisseToModuleObject_isIso_of_categories (IsEquivalence and bijective on objects). Lisse is the node's own definition (cover, finite M_i, F.over U_i iso to the constant sheaf of M_i); over a finite ring it agrees with the recorded IsFiniteLocallyConstantSheaf at ModuleCat Λ, but not by definition. Λ : Type (u+1) per the STATE encoding of Sheaf … (ModuleCat.{u+1} Λ).",
+  "fixed_by": "R-lms1119"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-lms1119",
+  "group": "M1",
+  "result": "fix",
+  "note": "Y any scheme; Λ : Type (u+1) Ring+Finite (not comm.); F : Sheaf Y_et (ModuleCat Λ); lisse = cover + finite M_i + F.over U_i ≅ constantSheaf M_i; FLC = recorded IsFiniteLocallyConstantEtaleSheafOfSets of sheafForget F; module object = +,0 from final object,-,λ· with all 10 module axioms as morphism equalities; Hom commutes with all ops; (2) the underlying-with-operations functor (ops pinned sectionwise) is IsEquivalence + bijective on objects"
  }
 }

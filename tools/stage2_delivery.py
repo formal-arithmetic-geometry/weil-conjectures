@@ -577,13 +577,18 @@ def module_path(rec: dict) -> str | None:
 
 
 def read_delivery(git: Git, ref: str, base: str, group: str, item: str, max_commits: int = 1,
-                  overrides: dict | None = None, drop=()) -> dict:
+                  overrides: dict | None = None, drop=(), revert=(), drop_files=()) -> dict:
     """Checks (a), (b), (c) without the compile, (d), (e) of the delivery `ref` against `base`.
     `overrides` {path: text} replaces the text of a delivered file (a reviewer's fix, merge_delivery.py).
     `drop` (merge_delivery.py --stage 2 --drop-nodes, lead 2026-10-11): ids of NEW nodes of the delivery that are left
     out (a duplicate of a landed node): the node file and every module whose only owner is that node are not part of
     the delivery read; the item's stmt_deps / proof_deps lose the id; a kept module importing a dropped module fails
     (c); an id that is not a new node of the delivery fails (b). D["dropped"] = {id: {path, file}}.
+    `revert` (--revert-nodes, 2026-10-11): ids of EXISTING nodes (on the base) whose change by the delivery is left out:
+    the node stays as it is on sheaf-dag, its delivered module is left out as for a dropped node; an id the delivery
+    does not change, or the item, fails (b). D["reverted"] = {id: {path, file, module}}.
+    `drop_files` (--drop-files): NEW modules lean/Sheaf/... of the delivery left out (the fix no longer uses them); a
+    kept module importing one, or a kept record with it as lean.file, fails (c). D["dropped_files"] = [path].
     Returns {fails: [(letter, text)], notes, node_path, node, base_node, rec, lean_path, lean_text, report, decl,
     commits, base, new: {id: {path, node}}, deps: {id: {path, node, base_node}}, modules: [{file, node, role, rec,
     text, decl, module, siblings}] in dependency order (a module after the sibling modules it imports), roles,
@@ -592,7 +597,7 @@ def read_delivery(git: Git, ref: str, base: str, group: str, item: str, max_comm
     D = {"fails": [], "notes": [], "node_path": None, "node": None, "base_node": None, "rec": None,
          "lean_path": None, "lean_text": None, "report": None, "decl": None, "commits": [],
          "new": {}, "deps": {}, "modules": [], "roles": [], "report_path": f"coord/reports/{group}/{item}.md",
-         "corrected": False, "citers": [], "citer_marks": [], "dropped": {}}
+         "corrected": False, "citers": [], "citer_marks": [], "dropped": {}, "reverted": {}, "dropped_files": []}
     fails = D["fails"]
     over = overrides or {}
     f = lambda L, s: fails.append((L, s))  # noqa: E731
@@ -626,7 +631,7 @@ def read_delivery(git: Git, ref: str, base: str, group: str, item: str, max_comm
     base_paths = {pathlib.PurePosixPath(p).stem: p for p in
                   git.run("ls-tree", "-r", "--name-only", base, "--", "dag/nodes", check=False).splitlines() if p.endswith(".json")}
     status = [l.split("\t") for l in git.run("diff", "--name-status", base, ref).splitlines() if l] if commits else []
-    lean_files, node_files = [], []
+    lean_files, node_files, added_files = [], [], set()
     for st in status:
         code, p = st[0], st[-1]
         if code.startswith("D"):
@@ -639,6 +644,8 @@ def read_delivery(git: Git, ref: str, base: str, group: str, item: str, max_comm
             node_files.append((code, p)); continue
         if p.startswith("lean/Sheaf/") and p.endswith(".lean"):
             lean_files.append(p)
+            if code.startswith("A"):
+                added_files.add(p)
             if not code.startswith("A"):
                 D["notes"].append(f"{p} exists on the base: the delivery changes a module of the library")
             continue
@@ -666,10 +673,24 @@ def read_delivery(git: Git, ref: str, base: str, group: str, item: str, max_comm
     base_deps = list(bnode.get("stmt_deps") or [])
     # classify the other node files: new definition nodes and dependency nodes
     drop = set(drop or ())
+    revert = set(revert or ())
+    if item in revert:
+        f("b", f"--revert-nodes {item}: the item itself is not reverted (RETURN the delivery instead)")
     for code, p in node_files:
         if p == node_path:
             continue
         nid = pathlib.PurePosixPath(p).stem
+        if nid in revert and nid in base_paths and base_paths[nid] == p:
+            # --revert-nodes: the delivery's change of an existing node is left out (the node stays as on the base);
+            # its delivered module (lean.file) is left out below when no kept node owns it
+            try:
+                dn = json.loads(git.show(ref, p) or "")
+            except ValueError:
+                dn = {}
+            r = dn.get("lean") if isinstance(dn, dict) else None
+            D["reverted"][nid] = {"path": p, "file": r.get("file") if isinstance(r, dict) else None,
+                                  "module": r.get("module") if isinstance(r, dict) else None}
+            continue
         if nid in drop and nid not in base_paths:
             # --drop-nodes: left out; its module (lean.file) is left out below when no kept node owns it
             try:
@@ -697,6 +718,11 @@ def read_delivery(git: Git, ref: str, base: str, group: str, item: str, max_comm
             D["new"][nid] = {"path": p, "node": nd}
     for nid in sorted(drop - set(D["dropped"])):
         f("b", f"--drop-nodes {nid}: not a new node of this delivery (only a node file the delivery creates is dropped)")
+    for nid in sorted(revert - set(D["reverted"]) - {item}):
+        f("b", f"--revert-nodes {nid}: not an existing node changed by this delivery (a new node is left out with --drop-nodes)")
+    for nid, x in D["reverted"].items():
+        D["roles"].append(f"REVERTED dependency node {nid} ({x['path']} stays as on sheaf-dag"
+                          + (f"; delivered module {x['file']}" if x["file"] else "") + ")")
     for nid, x in D["dropped"].items():
         D["roles"].append(f"DROPPED new node {nid} ({x['path']}" + (f", module {x['file']}" if x["file"] else "") + ")")
     if D["dropped"]:
@@ -830,11 +856,25 @@ def read_delivery(git: Git, ref: str, base: str, group: str, item: str, max_comm
     # --drop-nodes: a module whose only owner is a dropped node is left out of the delivery
     kept_files = {r.get("file") for _, _, r in recs if isinstance(r, dict) and r.get("existing") is not True}
     dropped_mods = set()
-    for x in D["dropped"].values():
-        if x["file"] and x["file"] in lean_files and x["file"] not in kept_files:
-            lean_files.remove(x["file"])
-            dropped_mods.add(x["module"])
-            D["notes"].append(f"{x['file']}: the module of a dropped node, left out")
+    for why, xs in (("dropped", D["dropped"]), ("reverted", D["reverted"])):
+        for x in xs.values():
+            if x["file"] and x["file"] in lean_files and x["file"] not in kept_files:
+                lean_files.remove(x["file"])
+                if x["module"]:
+                    dropped_mods.add(x["module"])
+                D["notes"].append(f"{x['file']}: the module of a {why} node, left out")
+    # --drop-files: new modules of the delivery the fix no longer uses
+    gone_files = set()
+    for lf in dict.fromkeys(drop_files or ()):
+        if lf not in added_files:
+            f("c", f"--drop-files {lf}: not a new module lean/Sheaf/<...>.lean of this delivery")
+            continue
+        if lf in lean_files:
+            lean_files.remove(lf)
+        gone_files.add(lf)
+        D["dropped_files"].append(lf)
+        dropped_mods.add(lf[len("lean/"):-len(".lean")].replace("/", "."))
+        D["roles"].append(f"DROPPED module {lf} (--drop-files)")
     for nid, role, r in recs:
         if not isinstance(r, dict):
             continue
@@ -847,6 +887,10 @@ def read_delivery(git: Git, ref: str, base: str, group: str, item: str, max_comm
             D["notes"] += [x if role == "item" else f"{who}: {x}" for x in notes]
             continue
         lf = r.get("file")
+        if lf and lf in gone_files:
+            f("c", f"{who}: lean.file {lf} is left out by --drop-files (point the record at a kept module or a landed "
+                   "declaration)")
+            continue
         if not lf:
             if role == "item" and lean_files and not D["new"] and not D["deps"]:
                 f("c", f"the commit has {lean_files[0]} but lean.file is not set")
@@ -868,8 +912,8 @@ def read_delivery(git: Git, ref: str, base: str, group: str, item: str, max_comm
     for m in mods:
         bad = [i for i in imports(m["text"]) if i in dropped_mods]
         if bad:
-            f("c", f"{m['file']} ({m['node']}): imports the dropped module(s) {', '.join(bad)} (fix it to import the "
-                   "landed declaration's module)")
+            f("c", f"{m['file']} ({m['node']}): imports the dropped/reverted module(s) {', '.join(bad)} (fix it to "
+                   "import the landed declaration's module)")
     for lf in lean_files:
         o = owners.get(lf, [])
         if not o:
