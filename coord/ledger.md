@@ -4952,3 +4952,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 14:28 L: merged deliver/K1/lem-weil-pbc-horseshoe-delta-functor (stage 2; reviewer PASS; first push; Sheaf.CategoryTheory.Abelian.HorseshoeDeltaFunctor CategoryTheory.exists_horseshoe_rightDerived_deltaFunctor)
 - 14:28 L: merged deliver/F1/lem-weil-pbc-smooth-conormal-sequence-exact (stage 2; reviewer PASS; first push; Sheaf.RingTheory.SmoothConormalSequenceExact Algebra.Extension.smooth_conormal_sequence_exact)
 - 14:29 L: merged deliver/C1/lem-pc-coherent-property-irreducible (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.CoherentPropertyIrreducible AlgebraicGeometry.Scheme.Modules.coherent_property_irreducible)
+- 14:29 L: merged deliver/G1/lem-weil-pbc-sheaf-isomorphism-local-open-cover (stage 2; reviewer PASS; first push; Sheaf.Topology.SheafIsomorphismLocalOpenCover AlgebraicGeometry.sheaf_module_isIso_iff_isIso_over_open_cover)
