@@ -1,8 +1,8 @@
 # Work queue
 
-866 items; claim with `tools/claim.py next <group> [--stage N]`.
+869 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (25)
+## Stage 1: nodes to split (28)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -17,9 +17,12 @@
 | `lem-pc-derived-tensor-transitivity` | 5015 | none |
 | `lem-pc-derived-tensor-localization-cohomology` | 5017 | none |
 | `pqf-lem-serre-criterion` | 6013 | none |
-| `lem-sc-picard-kunneth-qcoh` | 6014 | none |
-| `lem-sc-perfect-local-pseudocoherent-free-model` | 6015 | none |
+| `lem-sc-picard-cech-cup-pullback-compat` | 6015 | none |
+| `lem-sc-picard-qcoh-finite-cd` | 6015 | none |
+| `lem-sc-picard-qcoh-universal-delta-embedding` | 6015 | none |
+| `lem-sc-qcoh-cech-total-tensor-iso` | 6015 | none |
 | `lem-sc-valuation-limit-qcoh-section-descent` | 6015 | none |
+| `lem-sc-pseudo-coherent-lift-stably-free-complex` | 6016 | none |
 | `lem-pc-derived-splitting-unique` | 6017 | none |
 | `lem-pc-finite-projective-cokernel-localization` | 6017 | none |
 | `lem-sc-coherent-ring-fp-kernel-cokernel` | 6017 | none |
@@ -878,7 +881,7 @@
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 1756 nodes that wait for a statement dependency, 66 nodes that wait for stage 1.
+Not open yet: 1758 nodes that wait for a statement dependency, 69 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
