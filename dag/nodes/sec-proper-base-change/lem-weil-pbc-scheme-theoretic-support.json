@@ -204,5 +204,23 @@
   "by": "L",
   "result": "pass",
   "note": "Reviewed by the lead (opus-relaunch6). Seven steps along Stacks 05JU: Ann(F) a sheaf of ideals, affine sections, compatibility with principal opens via the omitted algebra fact 07T8 (new unsplit node: Ann_{A_f}(M_f) = Ann_A(M) A_f for finite M), the closed subscheme from affine-local compatible ideals (new Mathlib leaf of several IdealSheafData declarations under the DAG convention of def-sbc-closed-immersion-ideal-sheaf, as for the product node; accepted), its ideal sheaf is Ann(F), clause (3) from the finite-type-support node, clauses (4) and (5). Statement narrower than 05JU (no G with i_*G = F); kept, the citer uses only what is stated. Tags verified by the worker (05JU, 05JV, 07T8, 01QQ, 01IN, 01I3, 01HS, 00HT, 0BBY)."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.SchemeTheoreticSupport",
+  "declaration": "AlgebraicGeometry.Scheme.schemeTheoreticSupport",
+  "statement": "theorem schemeTheoreticSupport (X : Scheme.{u}) (F : X.Modules) [F.IsQuasicoherent] [F.IsFiniteType] : ∃ (I : X.IdealSheafData), (∀ (U : X.affineOpens), I.ideal U = Module.annihilator (X.presheaf.obj (Opposite.op U.1)) (F.presheaf.obj (Opposite.op U.1))) ∧ IsClosedImmersion I.subschemeι ∧ I.subschemeι.ker = I ∧ (∀ (U : X.Opens) (a : X.presheaf.obj (Opposite.op U)), a ∈ RingHom.ker (I.subschemeι.app U).hom ↔ ∀ (V : X.Opens) (h : V ≤ U) (s : F.presheaf.obj (Opposite.op V)), X.presheaf.map (homOfLE h).op a • s = 0) ∧ (∀ (U : X.affineOpens), IsPullback (I.subschemeCover.f U) (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (I.ideal U)))) I.subschemeι U.2.fromSpec) ∧ Set.range I.subschemeι = {x : X | ¬ Subsingleton (F.presheaf.stalk x)} ∧ (∀ (V : X.Opens) (a : RingHom.ker (I.subschemeι.app V).hom) (s : F.presheaf.obj (Opposite.op V)), a • s = 0) ∧ (∀ (Z' : Scheme.{u}) (i' : Z' ⟶ X), IsClosedImmersion i' → (∀ (V : X.Opens) (a : RingHom.ker (i'.app V).hom) (s : F.presheaf.obj (Opposite.op V)), a • s = 0) → ∀ (U : X.Opens), RingHom.ker (i'.app U).hom ≤ RingHom.ker (I.subschemeι.app U).hom)",
+  "by": "G1",
+  "date": "2026-10-11",
+  "file": "lean/Sheaf/Paper/SchemeTheoreticSupport.lean",
+  "branch": "sheaf-dag",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "G1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }
