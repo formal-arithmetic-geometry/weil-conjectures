@@ -4382,3 +4382,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 11:06 L: merged deliver/E1/lem-weil-pbc-inverse-image-module-adjunction (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.EtaleInverseImageModuleAdjunction AlgebraicGeometry.etaleInverseImageModuleAdjunction)
 - 11:06 L: merged deliver/G1/lem-weil-pbc-inverse-image-preserves-colimits (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.EtaleInverseImageColimits AlgebraicGeometry.Etale.inverseImage_preservesColimits)
 - 11:06 L: merged deliver/E1/pqf-def-locnoeth (stage 2; reviewer PASS; first push; Mathlib.AlgebraicGeometry.Noetherian AlgebraicGeometry.IsLocallyNoetherian; existing declaration)
+- 11:06 L: merged deliver/F1/lem-weil-pbc-henselian-etale-retraction (stage 2; reviewer PASS; first push; Sheaf.RingTheory.HenselianEtaleRetraction existsUnique_algHom_of_henselianLocalRing_etale)

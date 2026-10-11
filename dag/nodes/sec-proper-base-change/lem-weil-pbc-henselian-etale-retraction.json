@@ -197,5 +197,24 @@
   "by": "L",
   "result": "pass",
   "note": "six steps along Stacks 04GG (1)⇒(8) (the residue map and its kernel; standard etale presentation 00UE; the reduction to C written out; the residue root with f̄′(a_0) ≠ 0 from the pair condition; existence by root lifting and the universal property; uniqueness by 06RR); 3 new Mathlib leaves verified by the lead (LocalStructure.lean:372 @[stacks 00UE], StandardEtale.lean:143, Henselian.lean:265 @[stacks 06RR]); the brief guessed uniqueness from sections of unramified morphisms, Stacks uses 06RR"
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.HenselianEtaleRetraction",
+  "declaration": "existsUnique_algHom_of_henselianLocalRing_etale",
+  "file": "lean/Sheaf/RingTheory/HenselianEtaleRetraction.lean",
+  "statement": "theorem existsUnique_algHom_of_henselianLocalRing_etale {S B : Type u} [CommRing S] [CommRing B] [HenselianLocalRing S] (φ : S →+* B) [AlgebraicGeometry.Etale (Scheme.Spec.map (CommRingCat.ofHom φ).op)] (q' : Ideal B) [q'.IsPrime] (hq : q'.comap φ = IsLocalRing.maximalIdeal S) (hres : Function.Bijective (Ideal.ResidueField.map (IsLocalRing.maximalIdeal S) q' φ hq.symm)) : letI : Algebra S B := φ.toAlgebra ∃! σ : B →ₐ[S] S, (IsLocalRing.maximalIdeal S).comap σ.toRingHom = q'",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": false,
+  "note": "The S-algebra structure on B is φ.toAlgebra, so the algebra retraction is of the same map used for étaleness and the induced residue-field map. HenselianLocalRing is the equivalent root-lifting notion recorded by the terminology dependency; Ideal.ResidueField is the canonical affine-scheme residue field."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-her1106",
+  "group": "F1",
+  "result": "pass",
+  "note": "HenselianLocalRing S (local node, recorded dep); phi : S ->+* B with Etale (Spec.map phi) = node's Spec B -> Spec S (rfl to Spec.map, not inferInstance); q' prime, comap = m; Ideal.ResidueField.map bijective = kappa -> kappa(q') iso; letI phi.toAlgebra so AlgHom = retraction of phi; ExistsUnique with comap m = q'"
  }
 }
