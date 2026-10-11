@@ -143,5 +143,23 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-pct2644 (reviewer sub-agent of L); spot-checked: Statement vs Tag 08CD(2) all m: agrees (one of three cases, as cited by the Noetherian D^b_Coh induction). Step 1 locality matches def-pur-pseudo-coherent-complex (C4 ok). No Mathlib pseudo-coherence (recorded greps). FIX more, RETURN less: C1 in Step 2 -- 'replacing representatives along quasi-isomorphisms gives a chain map' was uncited and on D(O_U) not automatic (Stacks needs the local lift lemma, which fails degreewise for unbounded complexes); rewrote Steps 1-3 to refine to affine U=Spec R, transfer via the existing equivalence D(R)=D_QCoh(O_U) [lem-pc-affine-qcoh-derived-equivalence, Tag 06Z0, generic tool use], lift by K-projectivity [lem-sc-bounded-above-projective-kprojective], cone and compare third terms by TR3; proof_deps updated. No new node needed.; 1 file(s) fixed by the reviewer"
  },
- "lead_note": "2026-10-10 L (R-pct2644): Second reading by E1 missed a C1 gap in Step 2 (lifting the D-morphism C[-1]->A to a chain map between finite-free models was asserted, uncited); repaired via existing nodes; lem-pc-affine-qcoh-derived-equivalence (Tag 06Z0) used as a generic tool (C7/C8)."
+ "lead_note": "2026-10-10 L (R-pct2644): Second reading by E1 missed a C1 gap in Step 2 (lifting the D-morphism C[-1]->A to a chain map between finite-free models was asserted, uncited); repaired via existing nodes; lem-pc-affine-qcoh-derived-equivalence (Tag 06Z0) used as a generic tool (C7/C8).",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.PseudoCoherentDistinguishedTriangle",
+  "declaration": "AlgebraicGeometry.Scheme.isPseudoCoherent_of_distinguished_triangle",
+  "file": "lean/Sheaf/AlgebraicGeometry/PseudoCoherentDistinguishedTriangle.lean",
+  "statement": "theorem isPseudoCoherent_of_distinguished_triangle (Y : Scheme.{u}) [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))] [∀ U : Y.Opens, HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings Y.toRingedSpace).over U))] (T : Triangle (schemeDerivedCategory Y)) (hT : T ∈ distTriang (schemeDerivedCategory Y)) (hA : IsPseudoCoherent Y T.obj₁) (hC : IsPseudoCoherent Y T.obj₃) : IsPseudoCoherent Y T.obj₂",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-pdt1310",
+  "group": "C1",
+  "result": "pass",
+  "note": "Y:Scheme.{u}; D(O_Y)=schemeDerivedCategory Y with recorded HasDerivedCategory.{w} binders for Y and every open (exactly IsPseudoCoherent's); triangle A->B->C->A[1] = Pretriangulated.Triangle with mor3 to obj1⟦1⟧, hT ∈ distTriang; hA/hC on obj1/obj3, conclusion obj2, all via recorded Scheme.IsPseudoCoherent; no hollow/let/extra hypotheses; #check resolves; only ring-level triangle lemmas exist, no scheme duplicate"
+ }
 }
