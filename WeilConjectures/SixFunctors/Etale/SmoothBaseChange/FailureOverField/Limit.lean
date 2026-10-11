@@ -129,20 +129,6 @@ variable {C D E : Type*} [Category C] [Category D] [Category E]
 
 attribute [local instance] comp_preservesFiniteLimits comp_preservesFiniteColimits
 
-@[simp]
-lemma ι_map_mapDerivedCategoryPlusSingleFunctor_hom_app (F : C ⥤ D) [F.Additive]
-    [PreservesFiniteLimits F] [PreservesFiniteColimits F] (n : ℤ) (X : C) :
-    DerivedCategory.Plus.ι.map ((F.mapDerivedCategoryPlusSingleFunctor n).hom.app X) =
-      (F.mapDerivedCategorySingleFunctor n).hom.app X := by
-  rw [mapDerivedCategoryPlusSingleFunctor, Functor.fullyFaithfulCancelRight_hom_app,
-    Functor.map_preimage]
-  simp only [comp_obj, ObjectProperty.ι_obj, mapDerivedCategoryPlusCompatibility,
-    isoWhiskerLeft_refl, DerivedCategory.Plus.singleFunctorιIso, isoWhiskerRight_refl,
-    Iso.refl_symm, Iso.refl_trans, Iso.trans_hom, Iso.symm_hom, isoWhiskerLeft_hom, Iso.refl_hom,
-    NatTrans.comp_app, associator_hom_app, associator_inv_app, whiskerLeft_app, NatTrans.id_app,
-    Category.comp_id, Category.id_comp]
-  erw [Category.id_comp, Category.comp_id]
-
 lemma mapDerivedCategoryPlusNatIso_hom_app_singleFunctor {F G : C ⥤ D} [F.Additive]
     [G.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F]
     [PreservesFiniteLimits G] [PreservesFiniteColimits G] (e : F ≅ G) (X : C) :
