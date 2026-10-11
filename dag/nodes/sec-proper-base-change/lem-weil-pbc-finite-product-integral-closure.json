@@ -134,5 +134,23 @@
   "group": "E1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of E1; spot-checked by L: L: 0CY9 by the componentwise monic polynomials, padded to a common degree; 0 new"
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.IntegralClosureFinitePi",
+  "declaration": "integralClosure_finite_pi",
+  "file": "lean/Sheaf/RingTheory/IntegralClosureFinitePi.lean",
+  "statement": "theorem integralClosure_finite_pi {I : Type w} [Finite I] (R : I → Type u) (S : I → Type v) [∀ i, CommRing (R i)] [∀ i, CommRing (S i)] (φ : ∀ i, R i →+* S i) : letI : ∀ i, Algebra (R i) (S i) := fun i ↦ (φ i).toAlgebra (integralClosure (∀ i, R i) (∀ i, S i)).toSubring = ⨅ i, (integralClosure (R i) (S i)).toSubring.comap (Pi.evalRingHom S i) ∧ ((∀ i, Function.Injective (φ i)) → (IsIntegrallyClosedIn (∀ i, R i) (∀ i, S i) ↔ ∀ i, IsIntegrallyClosedIn (R i) (S i)))",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-fpi1021",
+  "group": "C1",
+  "result": "pass",
+  "note": "Finite I + R,S : I → CommRing + φ via letI toAlgebra (Pi algebraMap = fun r i ↦ φ i (r i) by rfl); clause 1 = subring equality with ⨅ comap evalRingHom (probe: .1 extracts it, so ∧ is outside ⨅; membership ↔ ∀ i IsIntegral); clause 2 under component injectivity IsIntegrallyClosedIn iff; no Mathlib pi lemma; empty I ok"
  }
 }
