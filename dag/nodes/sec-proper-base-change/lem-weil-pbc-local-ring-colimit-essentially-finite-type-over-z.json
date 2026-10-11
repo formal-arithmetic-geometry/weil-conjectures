@@ -163,5 +163,23 @@
   "worker": "stage1",
   "summary": "Checked the base-ring construction in Tag 00QU and its companion 00QT against the source. Expanded finite-subset directedness, finite type, local fraction transition maps, local maps to R, injectivity even for rings with zero divisors, and the full universal property in commutative rings. Added only the unit criterion Mathlib leaf (00E9). Statement preserved. Searched slopmaster2: its filtered-colimit file proves the finite-subalgebra colimit and prime-localization colimit separately, but contains no declaration for this local-ring system.",
   "blueprint": "thm-weil-pbc-finite-etale-lifting, step 7 (0GS2 essential-surjectivity approximation), through the existing via-chain ending in lem-weil-pbc-limit-tower-essentially-finite-presentation. The four steps expand its base-ring approximation by the finite-subset construction of 00QU; they do not replace the blueprint route. Whole-blueprint searches for local colimit and local unit found no same-statement node for the item or the new unit-criterion leaf."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.LocalRingColimitEssentiallyFiniteType",
+  "declaration": "CommRingCat.exists_local_essFiniteType_colimit",
+  "file": "lean/Sheaf/RingTheory/LocalRingColimitEssentiallyFiniteType.lean",
+  "statement": "theorem exists_local_essFiniteType_colimit (R : Type u) [CommRing R] [IsLocalRing R] : ∃ (I : Type u) (_ : Preorder I) (_ : Nonempty I) (_ : IsDirected I (· ≤ ·)) (F : I ⥤ CommRingCat.{u}) (π : F ⟶ (Functor.const I).obj (CommRingCat.of R)), (∀ i : I, IsLocalRing (F.obj i)) ∧ (∀ (i j : I) (f : i ⟶ j), IsLocalHom (F.map f).hom) ∧ (∀ i : I, IsLocalHom (π.app i).hom) ∧ Nonempty (IsColimit (Cocone.mk (CommRingCat.of R) π)) ∧ (∀ i : I, Algebra.EssFiniteType ℤ (F.obj i))",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-lrc1114",
+  "group": "F1",
+  "result": "pass",
+  "note": "R:Type u CommRing IsLocalRing; ∃ I:Type u Preorder+Nonempty+IsDirected (directed set); F:I⥤CommRingCat.{u} stages IsLocalRing, transitions IsLocalHom (map_id/map_comp = identity/composition); π natural = compatibility, IsLocalHom; (1) IsColimit of the cocone with point R (specified π, as node); (2) Algebra.EssFiniteType ℤ; #check ok"
  }
 }
