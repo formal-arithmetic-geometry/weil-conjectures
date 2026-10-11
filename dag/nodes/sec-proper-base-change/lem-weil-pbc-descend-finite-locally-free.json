@@ -183,5 +183,24 @@
   "group": "F1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of F1; spot-checked by L: L read the four steps (06AC): finite and flat descend to a stage (existing finite-descent node, new unsplit 04AI node), common stage by square pasting, degree locus clopen hence constructible, 05F4 limit lemma."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.DescendFiniteLocallyFree",
+  "declaration": "AlgebraicGeometry.descend_finite_locally_free",
+  "file": "lean/Sheaf/AlgebraicGeometry/DescendFiniteLocallyFree.lean",
+  "statement": "theorem descend_finite_locally_free {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] (D : Iᵒᵖ ⥤ Scheme.{u}) [∀ {i j : Iᵒᵖ} (g : i ⟶ j), IsAffineHom (D.map g)] (c : Cone D) (hc : IsLimit c) (i₀ : I) [CompactSpace (D.obj (op i₀))] [QuasiSeparatedSpace (D.obj (op i₀))] (X₀ Y₀ : Over (D.obj (op i₀))) (f₀ : X₀ ⟶ Y₀) [CompactSpace X₀.left] [QuasiSeparatedSpace X₀.left] [CompactSpace Y₀.left] [QuasiSeparatedSpace Y₀.left] [LocallyOfFinitePresentation f₀.left] (hf : Scheme.Hom.IsFiniteLocallyFree (((Over.pullback (c.π.app (op i₀))).map f₀).left)) : (∃ (i : I) (hi : i₀ ≤ i), Scheme.Hom.IsFiniteLocallyFree (((Over.pullback (D.map (homOfLE hi).op)).map f₀).left)) ∧ (∀ d : ℕ, Scheme.Hom.IsFiniteLocallyFreeOfDegree (((Over.pullback (c.π.app (op i₀))).map f₀).left) d → ∃ (i : I) (hi : i₀ ≤ i), Scheme.Hom.IsFiniteLocallyFreeOfDegree (((Over.pullback (D.map (homOfLE hi).op)).map f₀).left) d)",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-dfl1154"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-dfl1154",
+  "group": "C1",
+  "result": "fix",
+  "note": "directed I : Type u, affine transitions, limit cone, qcqs S0/X0/Y0, f0 over S0 lfp, limit base change finite locally free (Over.pullback form), conclusion exists i>=i0 FLF, degree d clause via IsFiniteLocallyFreeOfDegree"
  }
 }

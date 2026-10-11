@@ -4525,3 +4525,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 11:54 L: merged deliver/E1/lem-weil-pbc-n2-char-p-purely-inseparable-criterion (stage 2; reviewer FIX; first push; Sheaf.RingTheory.N2CharPPurelyInseparableCriterion isN2_of_finite_purelyInseparable_integralClosure)
 - 11:54 L: merged deliver/C1/lem-pqf-leray-five-term (stage 2; reviewer FIX; first push; Sheaf.CategoryTheory.LerayFiveTerm CategoryTheory.BigradedExactCouple.lerayFiveTerm)
 - 11:55 L: merged deliver/K1/lem-weil-pbc-n1-local-characterization (stage 2; reviewer PASS; first push; Sheaf.RingTheory.IsN1OfLocalCharacterization isN1_of_local_characterization)
+- 11:55 L: merged deliver/C1/lem-weil-pbc-descend-finite-locally-free (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.DescendFiniteLocallyFree AlgebraicGeometry.descend_finite_locally_free)
