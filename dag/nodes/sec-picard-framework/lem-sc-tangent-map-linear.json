@@ -169,5 +169,23 @@
   "group": "K1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-tml1710 (reviewer sub-agent of L); spot-checked: Source: Stacks 0B2F (varieties.tex lemma-map-tangent-spaces, proof omitted), read locally; the item's statement is 0B2F with S=Spec k, the condition kappa(y)=kappa(x) as an isomorphism with chosen identification, minus the dual-to-Omega clause; agrees hypothesis by hypothesis. The tangent space rests on the dual-number construction of lem-sc-tangent-space-vector-space (def-sc-dual-numbers), the same as def-sc-scheme-tangent-space (merged 16:54), not an ad hoc Hom(m/m^2,k); the item cannot cite def-sc-scheme-tangent-space, which cites it. Step 1 carried by lem-weil-pbc-residue-field-point-naturality (Mathlib leaf, Hom.SpecMap_residueFieldMap_fromSpecResidueField, ResidueField.lean line 261 verified with sed; off-unit leaf used as a generic tool, C8 fine) plus associativity; step 2 by the scalar formula of lem-sc-tangent-space-vector-space (b); step 3 by its pushout uniqueness (a) applied in Y to f o Theta, then precomposition with s. Hypotheses: f over k so composites are k-morphisms; residue-field iso used in step 1 and for kappa-structure of T_Y. Small cases: Spec k -> Spec k (zero map), t->t^2 and t->ct on A^1 at 0 (zero, multiplication by c). No new nodes; Mathlib searches logged on the item. FIX: dag/nodes/sec-picard-framework/lem-sc-tangent-map-linear.json: proof[0].text: c was written as Spec k[eps] -> Spec k 'reduction modulo eps', wrong direction for theta o c; corrected to c: Spec kappa -> Spec kappa[eps], Spec of eps->0 as in lem-sc-tangent-space-vector-space; proof[0].uses: added lem-sc-tangent-space-vector-space (already in proof_deps). Start Sat Oct 10 05:03:23 PM UTC 2026, end Sat Oct 10 05:03:53 PM UTC 2026.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.TangentMapLinear",
+  "declaration": "AlgebraicGeometry.exists_tangentMap_linear",
+  "file": "lean/Sheaf/AlgebraicGeometry/TangentMapLinear.lean",
+  "statement": "theorem exists_tangentMap_linear (k : Type u) [Field k] (X Y : Scheme.{u}) (pX : X ⟶ Spec (.of k)) (pY : Y ⟶ Spec (.of k)) (f : X ⟶ Y) (hf : f ≫ pY = pX) (x : X) (he : Function.Bijective (f.residueFieldMap x).hom) : let KX := X.residueField x let KY := Y.residueField (f x) let DX := Spec (.of (DualNumber KX)) let DY := Spec (.of (DualNumber KY)) let cX : Spec KX ⟶ DX := Spec.map (CommRingCat.ofHom (TrivSqZeroExt.fstHom KX KX KX).toRingHom) let cY : Spec KY ⟶ DY := Spec.map (CommRingCat.ofHom (TrivSqZeroExt.fstHom KY KY KY).toRingHom) let qX : DX ⟶ Spec KX := Spec.map (CommRingCat.ofHom (TrivSqZeroExt.inlHom KX KX)) let qY : DY ⟶ Spec KY := Spec.map (CommRingCat.ofHom (TrivSqZeroExt.inlHom KY KY)) let bX := X.fromSpecResidueField x let bY := Y.fromSpecResidueField (f x) let TX := {θ : DX ⟶ X // cX ≫ θ = bX ∧ θ ≫ pX = qX ≫ bX ≫ pX} let TY := {θ : DY ⟶ Y // cY ≫ θ = bY ∧ θ ≫ pY = qY ≫ bY ≫ pY} let hX := (exists_tangentVectors_vectorSpace k X pX x).2.2.2 let hY := (exists_tangentVectors_vectorSpace k Y pY (f x)).2.2.2 letI : AddCommGroup TX := Classical.choose hX letI : AddCommGroup TY := Classical.choose hY letI : Module KX TX := Classical.choose (Classical.choose_spec hX) letI : Module KY TY := Classical.choose (Classical.choose_spec hY) let e : KY ≃+* KX := RingEquiv.ofBijective (f.residueFieldMap x).hom he letI : Module KX TY := Module.compHom TY e.symm.toRingHom let d : DY ⟶ DX := Spec.map (CommRingCat.ofHom (DualNumber.mapRingHom e.symm.toRingHom)) ∃ L : TX →ₗ[KX] TY, ∀ θ : TX, (L θ).val = d ≫ θ.val ≫ f",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-tml1356",
+  "group": "C1",
+  "result": "pass",
+  "note": "k field; X,Y with explicit pX,pY to Spec k (as dep); f with hf: f≫pY=pX; x, y=f x; residue iso = bijective f.residueFieldMap x, e:KY≃+*KX from it; TX/TY verbatim the dep subtype; AddCommGroup/Module chosen from dep's 4th conjunct (pinned uniquely by zero/sum/scaling clauses); KX-action on TY via compHom e.symm; d=Spec(DualNumber.mapRingHom e.symm) DY→DX (#print: coefficientwise, eps↦eps); conclusion ∃ KX-linear L with (L θ).val = d≫θ≫f gives membership in TY and linearity"
  }
 }
