@@ -5687,3 +5687,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 19:54 L: merged deliver/F1/lem-weil-pbc-colimit-of-sites-injective-system (stage 2; reviewer PASS; after a return; Sheaf.Paper.ColimitSitesInjectiveSystem CategoryTheory.exists_compatible_injective_system)
 - 19:55 L: merged deliver/C1/lem-sc-cech-comparison-map-naturality (stage 2; reviewer PASS; after a return; Sheaf.Paper.CechComparisonMapNaturality AlgebraicGeometry.Scheme.Modules.cechComparisonMapNaturality)
 - 19:56 L: returned deliver/V1/lem-sc-flat-precompose-pus (reviewer RETURN: (reviewer R-sub-D, head 8a39e9f68) The three points of R-fpp2 are repaired in the item's statement: c is dualityEquation)
+- 19:57 L: returned deliver/K1/lem-weil-pbc-hypercover-free-resolution (reviewer RETURN: (reviewer X-18205, head 1820555c4) H3: In lean/Sheaf/Paper/HypercoverFreeResolution.lean, in all four theorem signatures)
