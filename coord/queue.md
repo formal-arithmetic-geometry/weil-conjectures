@@ -1,16 +1,16 @@
 # Work queue
 
-862 items; claim with `tools/claim.py next <group> [--stage N]`.
+861 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (30)
+## Stage 1: nodes to split (29)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
 | `lem-weil-derived-limit-roos-complex` | 15 | none |
 | `lem-pc-ringed-space-module-stalk-tensor` | 3013 | none |
 | `lem-pc-ring-derived-map-lift` | 3018 | none |
-| `lem-sc-affine-koszul-hom-alternating-cech` | 3022 | none |
 | `lem-pc-termwise-tor-acyclic-derived-tensor` | 3023 | none |
+| `lem-sc-module-localization-filtered-colimit` | 3023 | none |
 | `lem-pc-genus-agrees-sc` | 4007 | rests_on_sorry |
 | `prop-av-tate-rank` | 4008 | rests_on_sorry |
 | `cor-pc-sigma-pic-iso` | 4009 | rests_on_sorry |
@@ -24,7 +24,6 @@
 | `pqf-lem-serre-criterion` | 6013 | none |
 | `lem-sc-picard-kunneth-qcoh` | 6014 | none |
 | `lem-sc-valuation-closed-fibre-section-vanishing` | 6014 | none |
-| `lem-pc-recd-fibre-cartier-local` | 6015 | none |
 | `lem-sc-perfect-local-pseudocoherent-free-model` | 6015 | none |
 | `lem-sc-perfect-pullback-perfect-residue` | 6015 | none |
 | `lem-pc-affine-perfect-cut-degree-zero` | 6016 | none |
@@ -874,7 +873,7 @@
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 1743 nodes that wait for a statement dependency, 71 nodes that wait for stage 1.
+Not open yet: 1745 nodes that wait for a statement dependency, 70 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
