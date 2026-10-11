@@ -149,5 +149,24 @@
   "item": "lem-weil-pbc-module-directed-colimit-underlying-sets",
   "worker": "stage1",
   "summary": "Split the statement along Modules 01AH(2), Sheaves 007O(7), 0087(1), and 009E(3). The proof forms the sectionwise presheaf module colimit, uses the filtered-colimit module element and equality description to identify its underlying presheaf of sets, applies the new Mathlib leaf for module sheafification and underlying sheafification, and concludes with the new Mathlib leaf that sheafifies objectwise colimits of sheaves. Created lem-weil-pbc-module-sheafification-underlying-sets and lem-weil-pbc-sheaves-colimit-sheafification; both are direct Mathlib matches. Existing target statement and source were correct."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.ModuleDirectedColimitUnderlyingSets",
+  "declaration": "SheafOfModules.underlying_directed_colimit_isColimit",
+  "file": "lean/Sheaf/CategoryTheory/ModuleDirectedColimitUnderlyingSets.lean",
+  "statement": "theorem underlying_directed_colimit_isColimit (O : Sheaf (Opens.grothendieckTopology X) RingCat.{r}) {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I] (F : I ⥤ SheafOfModules.{u} O) (c : Cocone F) (_hc : IsColimit c) : Nonempty (IsColimit (((toSheaf O ⋙ sheafCompose (Opens.grothendieckTopology X) (CategoryTheory.forget AddCommGrpCat.{u}))).mapCocone c))",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-mdc1142"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-mdc1142",
+  "group": "E1",
+  "result": "fix",
+  "note": "X topological space, O sheaf of rings, Mod(O)=SheafOfModules, directed set Preorder+IsDirected+Nonempty, given cocone with IsColimit, conclusion IsColimit of mapCocone under toSheaf⋙forget to sets; index/module universes unified to u"
  }
 }
