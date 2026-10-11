@@ -269,5 +269,29 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.DerivedMayerVietorisFunctorial",
+  "declaration": "AlgebraicGeometry.schemeDerived_mayerVietoris_naturality",
+  "declarations": [
+   "AlgebraicGeometry.schemeDerived_mayerVietoris_naturality",
+   "AlgebraicGeometry.schemeDerived_mayerVietoris_directImage"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/DerivedMayerVietorisFunctorial.lean",
+  "statement": "theorem schemeDerived_mayerVietoris_naturality (X : Scheme.{u}) [CompactSpace X] [QuasiSeparatedSpace X] (U V : X.Opens) (hU : IsCompact (U : Set X)) (hV : IsCompact (V : Set X)) (hcover : U ⊔ V = ⊤) [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))] [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings V.toScheme.toRingedSpace))] [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings (U ⊓ V).toScheme.toRingedSpace))] : ∃ (adjU : (schemeOpenRestriction X U).mapDerivedCategory ⊣ schemeDerivedDirectImage U.ι) (adjV : (schemeOpenRestriction X V).mapDerivedCategory ⊣ schemeDerivedDirectImage V.ι) (adjUV : (schemeOpenRestriction X (U ⊓ V)).mapDerivedCategory ⊣ schemeDerivedDirectImage (U ⊓ V).ι) (δ : ∀ E : schemeDerivedCategory X, (schemeDerivedDirectImage (U ⊓ V).ι).obj ((schemeOpenRestriction X (U ⊓ V)).mapDerivedCategory.obj E) ⟶ E⟦(1 : ℤ)⟧), (∀ (E : schemeDerivedCategory X), schemeDerivedQCohProperty X E → Triangle.mk (biprod.lift (adjU.unit.app E) (adjV.unit.app E)) (biprod.desc (schemeDerivedOpenDirectImageRestriction X (homOfLE inf_le_left) adjU adjUV E) (-(schemeDerivedOpenDirectImageRestriction X (homOfLE inf_le_right) adjV adjUV E))) (δ E) ∈ distTriang (schemeDerivedCategory X)) ∧ ∀ (E F : schemeDerivedCategory X), schemeDerivedQCohProperty X E → schemeDerivedQCohProperty X F → ∀ φ : E ⟶ F, ∃ m : (Triangle.mk (biprod.lift (adjU.unit.app E) (adjV.unit.app E)) (biprod.desc (schemeDerivedOpenDirectImageRestriction X (homOfLE inf_le_left) adjU adjUV E) (-(schemeDerivedOpenDirectImageRestriction X (homOfLE inf_le_right) adjV adjUV E))) (δ E)) ⟶ (Triangle.mk (biprod.lift (adjU.unit.app F) (adjV.unit.app F)) (biprod.desc (schemeDerivedOpenDirectImageRestriction X (homOfLE inf_le_left) adjU adjUV F) (-(schemeDerivedOpenDirectImageRestriction X (homOfLE inf_le_right) adjV adjUV F))) (δ F)), m.hom₁ = φ ∧ m.hom₂ = biprod.map ((schemeDerivedDirectImage U.ι).map ((schemeOpenRestriction X U).mapDerivedCategory.map φ)) ((schemeDerivedDirectImage V.ι).map ((schemeOpenRestriction X V).mapDerivedCategory.map φ)) ∧ m.hom₃ = (schemeDerivedDirectImage (U ⊓ V).ι).map ((schemeOpenRestriction X (U ⊓ V)).mapDerivedCategory.map φ)",
+  "branch": "sheaf-dag",
+  "by": "V1",
+  "date": "2026-10-12",
+  "existing": false,
+  "note": "The two declarations render clauses (1) and (2). Adjunctions and natural boundary families use the existential interface of the Mayer--Vietoris dependency. The composition and open-restriction comparisons in clause (2) are the recorded ones, Classical.choice of derivedDirectImageComposition and schemeDerivedDirectImage_openRestriction (reviewer R-dmf fix: the nine free comparison iso binders were untied); their components are explicitly composed to give the triangle isomorphism.",
+  "fixed_by": "R-dmf"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-dmf",
+  "group": "V1",
+  "result": "fix",
+  "note": "qcqs W, qc opens U V cover, QCoh E F, MV triangle maps = units/rho of landed triangle, clause (1) triangle morphism with three components, clause (2) h qcqs, qc preimages, Rh_* QCoh, distinguished image, triangle iso with id first component; fixed: nine free comparison iso binders tied to Classical.choice of the recorded composition/open-restriction declarations"
  }
 }
