@@ -177,5 +177,27 @@
   "group": "H1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-cre1905 (reviewer sub-agent of L); spot-checked: Step 1 local insertion homotopy elementary (Stacks 01X9); no cycle: affine-morphism-hi -> affine-vanishing -> affine-cech-complex, none reaches the item or lem-pc-cech-computes; new node lem-pc-derived-acyclic-resolution is a real generic lemma (05TA), not a duplicate of lem-sp-derived-functor-single-identification or lem-weil-pbc-leray-acyclicity-quasi-iso. FIX more, RETURN less: (1) C1 step 2 used an uncited Leray spectral sequence for j_J; (2) C1 step 3 used the uncited fact that R^q f_* is the sheafification of V -> H^q(f^{-1}V,-) ('affine opens form a basis'). Repair: step 2 now gets U_J affine and j_J, f.j_J affine from lem-weil-pbc-separated-affine-open-intersection and both vanishings from lem-pc-affine-morphism-hi; new step 3 applies thm-sp-grothendieck to (j_J*, f_*) (j_J* preserves injectives: exact left adjoint restriction; Grothendieck abelian by prop-pur-kinjective-resolutions-exist) and collapses the single-row spectral sequence to R^p f_* j_J* = R^p (f j_J)_* = 0; step 4 cites lem-pc-derived-acyclic-resolution. lem-pc-affine-vanishing no longer cited (dropped tool use, moved to uses_not_cited). Second reading by H1 missed both C1 faults.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CechResolution",
+  "declaration": "AlgebraicGeometry.cech_resolution_derived_direct_image",
+  "declarations": [
+   "AlgebraicGeometry.cech_resolution_derived_direct_image"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/CechResolution.lean",
+  "statement": "theorem cech_resolution_derived_direct_image {A : CommRingCat.{u}} {X : Scheme.{u}} (f : X ⟶ Spec A) [IsSeparated f] [QuasiCompact f] {ι : Type u} [Finite ι] (U : ι → X.Opens) (hU : iSup U = ⊤) (haffine : ∀ i : ι, IsAffineOpen (U i)) (F : X.Modules) [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) F] [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings (Spec A).toRingedSpace))] : ∃ (D : CochainComplex X.Modules ℕ) (ε : (CochainComplex.single₀ X.Modules).obj F ⟶ D) (e : ∀ p : ℕ, (PresheafOfModules.forgetToPresheafModuleCat (op ⊤) isTerminalTop.op).obj (D.X p).val ≅ ((cechComplexFunctor U).obj ((prod.functor (C := X.Opens)).op ⋙ Functor.opHom _ _ ⋙ (Functor.whiskeringRight _ _ _).obj F.presheafModuleCat)).X p), (∀ p : ℕ, (PresheafOfModules.forgetToPresheafModuleCat (op ⊤) isTerminalTop.op).map (D.d p (p + 1)).val ≫ (e (p + 1)).hom = (e p).hom ≫ ((cechComplexFunctor U).obj ((prod.functor (C := X.Opens)).op ⋙ Functor.opHom _ _ ⋙ (Functor.whiskeringRight _ _ _).obj F.presheafModuleCat)).d p (p + 1)) ∧ (∀ (y : Fin 1 → ι) (V : X.Opens), ((PresheafOfModules.forgetToPresheafModuleCat (op ⊤) isTerminalTop.op).map ((HomologicalComplex.singleObjXSelf (ComplexShape.up ℕ) 0 F).inv ≫ ε.f 0).val ≫ (e 0).hom ≫ Pi.π (fun y : Fin 1 → ι => ((prod.functor (C := X.Opens)).op ⋙ Functor.opHom _ _ ⋙ (Functor.whiskeringRight _ _ _).obj F.presheafModuleCat).obj (op (∏ᶜ fun l => U (y l)))) y).app (op V) = F.presheafModuleCat.map (prod.snd : (∏ᶜ fun l => U (y l)) ⨯ V ⟶ V).op) ∧ (∀ p : ℕ, Nonempty (D.X p ≅ ∏ᶜ fun y : Fin (p + 1) → ι => (Scheme.Modules.pushforward (⨅ l, U (y l)).ι).obj (F.restrict (⨅ l, U (y l)).ι))) ∧ QuasiIso ε ∧ (∀ p q : ℕ, 0 < q → IsZero ((schemeModuleHigherDirectImage f (q : ℤ)).obj (D.X p))) ∧ Nonempty ((schemeDerivedDirectImage f).obj ((DerivedCategory.singleFunctor (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).obj F) ≅ DerivedCategory.Q.obj (((RingedSpace.moduleDirectImage f.toLRSHom.toShHom).mapHomologicalComplex (ComplexShape.up ℤ)).obj (D.extend ComplexShape.embeddingUpNat)))",
+  "branch": "sheaf-dag",
+  "by": "P1",
+  "date": "2026-10-12",
+  "existing": false,
+  "fixed_by": "R-cre"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-cre",
+  "group": "P1",
+  "result": "fix",
+  "note": "statement correction reverted (named a Lean fault, not a node error; dropped D^0 acyclicity and Rf_* iso in D(O_S)); restated: S=Spec A, separated+qc f, finite affine cover (Finite ι, iSup U = ⊤, IsAffineOpen), quasi-coherent F; D tied to upstream cechComplexFunctor sectionwise with differentials and augmentation, O_X terms ∏ j_* F|U_J; QuasiIso ε; all terms f_*-acyclic; Rf_*F ≅ Q(f_*D); reverted the delivery's statement correction of the item (statement, statement_change kept as on sheaf-dag; --revert-statement)"
  }
 }
