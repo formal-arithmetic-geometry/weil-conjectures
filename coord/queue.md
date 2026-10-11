@@ -1,11 +1,11 @@
 # Work queue
 
-664 items; claim with `tools/claim.py next <group> [--stage N]`.
+660 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (664)
+## Stage 2: nodes to state (660)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -37,13 +37,9 @@
 | `lem-weil-pbc-finite-over-nagata-nagata` | 1 | state |
 | `lem-weil-pbc-finite-product-functor-left-exact` | 1 | state |
 | `lem-weil-pbc-finite-product-injective-resolutions` | 1 | state |
-| `lem-weil-pbc-finite-product-integral-closure` | 1 | state |
 | `lem-weil-pbc-finite-projective-prime-local-free` | 1 | state |
-| `lem-weil-pbc-finite-projective-standard-free-cover` | 1 | state |
-| `lem-weil-pbc-finite-purely-inseparable-scalar-descent` | 1 | state |
 | `lem-weil-pbc-finite-pushforward-constructible-noetherian` | 1 | state |
 | `lem-weil-pbc-finite-pushforward-generic-constructible` | 1 | state |
-| `lem-weil-pbc-finite-ring-map-quasi-finite` | 1 | state |
 | `lem-weil-pbc-finite-separable-multiplication-etale` | 1 | state |
 | `lem-weil-pbc-finite-separable-tensor-field-reduced` | 1 | state |
 | `lem-weil-pbc-finite-subalgebra-fraction-field` | 1 | state |
