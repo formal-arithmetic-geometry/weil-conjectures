@@ -25,7 +25,8 @@
   "def-weil-pbc-etale-site",
   "def-weil-open-immersion",
   "def-weil-closed-immersion",
-  "def-weil-pbc-constant-group-scheme"
+  "def-weil-pbc-constant-group-scheme",
+  "lem-galois-coproduct-copies-morphisms-clopen"
  ],
  "proof": [
   {
@@ -190,5 +191,23 @@
   "result": "pass",
   "note": "Seven steps: clopen components of the coproduct (new leaf: coproducts of families of schemes, Limits.lean:187/241/202 verified), U_e = f^{-1}(V_e), restriction to U_e is the structure map composed with iota_e, gluing (existing leaves), maps |U| -> E with clopen fibres, canonical points, group law from the new definition node of the constant group scheme (unsplit, 03YW). Correct. Statement made explicit (bijection, canonical map, group law) and generalized to every T-scheme U (etale not used)."
  },
- "lead_note": " L 2026-10-10: step 7 now cites lem-weil-pbc-constant-group-scheme-multiplication for the properties of m (moved out of the definition when it was split)."
+ "lead_note": " L 2026-10-10: step 7 now cites lem-weil-pbc-constant-group-scheme-multiplication for the properties of m (moved out of the definition when it was split).",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ConstantGroupSchemeMorphismsClopen",
+  "declaration": "AlgebraicGeometry.constantGroupSchemeMorphismsClopen",
+  "file": "lean/Sheaf/AlgebraicGeometry/ConstantGroupSchemeMorphismsClopen.lean",
+  "statement": "theorem constantGroupSchemeMorphismsClopen (T U : Scheme.{u}) (E : Type v) [Small.{u} E] [AddCommGroup E] (s : U ⟶ T) : (∃ b : ConstantGroupSchemePoint T E s ≃ {P : E → U.Opens // IsClopenDecomposition U E P}, (∀ f e, ((b f).1 e : Set U) = f.1 ⁻¹' constantGroupSchemeComponent T E e) ∧ (∀ (P : {P : E → U.Opens // IsClopenDecomposition U E P}) (e : E), (P.1 e).ι ≫ (b.symm P).1 = ((P.1 e).ι ≫ s) ≫ constantGroupSchemeIncl T E e) ∧ (∀ (P : {P : E → U.Opens // IsClopenDecomposition U E P}) (e : E), IsClopen (P.1 e : Set U)) ∧ (∀ P : {P : E → U.Opens // IsClopenDecomposition U E P}, IsCompact (Set.univ : Set U) → Set.Finite {e : E | (P.1 e : Set U).Nonempty}) ∧ (∀ e₀ e, (b (constantGroupSchemeCanonicalMap T E s e₀)).1 e = if e = e₀ then ⊤ else ⊥) ∧ (∀ P : {P : E → U.Opens // IsClopenDecomposition U E P}, ∃! f : ConstantGroupSchemePoint T E s, ∀ e, (P.1 e).ι ≫ f.1 = ((P.1 e).ι ≫ s) ≫ constantGroupSchemeIncl T E e)) ∧ (∀ φ : U → E, (∀ e, IsOpen (φ ⁻¹' {e})) ↔ (∀ e, IsClopen (φ ⁻¹' {e}))) ∧ (∃ a : AddCommGroup (ConstantGroupSchemePoint T E s), letI := a (∀ f g : ConstantGroupSchemePoint T E s, f + g = constantGroupSchemePointAdd T E s f g) ∧ ∃ Φ : ConstantGroupSchemePoint T E s ≃+ LocallyConstant U E, (∀ f x e, Φ f x = e ↔ f.1 x ∈ constantGroupSchemeComponent T E e) ∧ (∀ e, Φ (constantGroupSchemeCanonicalMap T E s e) = LocallyConstant.const U e) ∧ (∀ f g x, Φ (constantGroupSchemePointAdd T E s f g) x = Φ f x + Φ g x) ∧ ∃ c : E →+ ConstantGroupSchemePoint T E s, ∀ e, c e = constantGroupSchemeCanonicalMap T E s e)",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-cgc1517",
+  "group": "K1",
+  "result": "pass",
+  "note": "T,U schemes + s:U->T (node's every-T-scheme clause), E AddCommGroup Small.{u} per recorded constantGroupScheme; b: points ≃ IsClopenDecomposition with forward f⁻¹(V_e), inverse restriction ι_e∘s, ∃! uniqueness, IsClopen pieces, quasi-compact finiteness; open↔clopen fibres; canonical point ↦ ⊤/⊥ and const; ∃ AddCommGroup with + = constantGroupSchemePointAdd, Φ ≃+ LocallyConstant tied by φ_f(x)=e ↔ f x ∈ V_e, pointwise sum, c : E →+ canonical map"
+ }
 }

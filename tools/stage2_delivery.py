@@ -18,8 +18,8 @@ and, by the rule STAGE 2 EXTRA NODES (decision of the human, 2026-10-11 05:55 UT
   (A) NEW DEFINITION NODES dag/nodes/<chapter of the item>/<id>.json, absent on the base, with the fields of
       check_new_node (kind definition, status split, created.item = the item, created.group = G, ...), each with its
       own module and `lean` record (or `existing: true` and no module), cited by the item;
-  (B) DEPENDENCY MODULES: for a node in the item's stmt_deps on the base (or added by its statement correction), its node file changed only in `lean` (the
-      module's record, with `lean.note` saying why the recorded declaration or mathlib_match was unusable) and its
+  (B) DEPENDENCY MODULES: for a node in the item's stmt_deps on the base (or added to them by the item's statement
+      correction), its node file changed only in `lean` (the module's record, with `lean.note` saying why the recorded declaration or mathlib_match was unusable) and its
       module.
 Every module is the lean.file of exactly one of these nodes; a module may import a sibling module of the delivery
 (compile_modules defers it until the sibling is in the library; the merge lands the modules in dependency order).
