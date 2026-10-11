@@ -126,5 +126,24 @@
   "group": "E1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of E1; spot-checked by L: 3 steps: the projector identities give R^n = Im p + Im(1-p) with Im(1-p) = ker p; tensoring the split decomposition with S and identifying the map by the base-change universal property; the base-changed matrix is rho(X). Correct."
+ },
+ "lean": {
+  "module": "Sheaf.LinearAlgebra.IdempotentImageBaseChange",
+  "declaration": "LinearMap.idempotent_image_baseChange",
+  "file": "lean/Sheaf/LinearAlgebra/IdempotentImageBaseChange.lean",
+  "statement": "theorem idempotent_image_baseChange {R : Type u} [CommRing R] (n : ℕ) (p : Module.End R (Fin n → R)) (hp : IsIdempotentElem p) {S : Type v} [CommRing S] (ρ : R →+* S) : letI : Algebra R S := ρ.toAlgebra let pS : Module.End S (Fin n → S) := Matrix.toLin' ((LinearMap.toMatrix' p).map ρ) IsCompl p.range (1 - p).range ∧ (1 - p).range = p.ker ∧ Module.Finite R p.range ∧ Module.Projective R p.range ∧ IsIdempotentElem pS ∧ ∃ f : S ⊗[R] p.range →ₗ[S] (Fin n → S), (∀ (s : S) (x : p.range), f (s ⊗ₜ[R] x) = fun i ↦ s * ρ (x.val i)) ∧ Function.Injective f ∧ f.range = pS.range ∧ ∃ e : S ⊗[R] p.range ≃ₗ[S] pS.range, pS.range.subtype.comp e.toLinearMap = f",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-iib1058"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-iib1058",
+  "group": "C1",
+  "result": "fix",
+  "note": "CommRing R, n:ℕ, p : Module.End R (Fin n → R) + IsIdempotentElem p (was p.comp p = p); (i) IsCompl range p/range(1-p), range(1-p)=ker p, Finite+Projective range p; (ii) ρ:R→+*S via ρ.toAlgebra, pS = toLin' (toMatrix' p).map ρ entrywise, IsIdempotentElem pS (was comp), f : S⊗[R] range p →ₗ[S] S^n fixed on pure tensors s⊗x ↦ s·ρ(x) (commutor of node's order), injective, range f = range pS, e with subtype∘e = f; no hollow hyps, u/v independent with no test-object quantifier"
  }
 }
