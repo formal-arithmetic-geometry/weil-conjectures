@@ -3039,3 +3039,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 00:00 L: merged deliver/H1/lem-sc-perfect-ext-bounded-qcoh-vanishing (reviewer FIX; first push; new nodes: 1)
 - 00:01 L: merged deliver/H1/lem-pc-sites-sheafification-underlying-sets (reviewer PASS; first push; new nodes: 0)
 - 00:01 UTC L: merged H1 lem-pc-sites-sheafification-underlying-sets ebb6aa02c as a Mathlib leaf (sheafifyComposeIso + sheafComposeIso_hom_fac, read by L) after R-sus0000's MATHLIB answer; C1 derived-hom-tensor-total FIX 24d48a73b (R-dht0000; site version of tensor-Hom cited); returned: H1 qcoh-complex-alternating-cech-derived-sections 6cdf2a866 (R-qcs3156: unbounded case via an unstated hypercohomology spectral sequence).
+- 00:01 L: merged deliver/G1/lem-sc-perfect-jump-loci (reviewer FIX; first push; new nodes: 1)

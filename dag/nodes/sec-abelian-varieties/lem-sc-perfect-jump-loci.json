@@ -14,19 +14,64 @@
  },
  "kind": "statement",
  "title": "Jump loci of fibre cohomology of a perfect complex",
- "statement": "Let $X$ be a scheme [def-pc-scheme] and let $E$ be a pseudo-coherent complex [def-pc-derived-category] (in particular, a perfect complex [def-pc-perfect-complex]). For each integer $i$ define $\\beta_i(x)=\\dim_{\\kappa(x)}H^i(Li_x^*E)$ for $x\\in X$. Then formation of $\\beta_i$ commutes with arbitrary base change, each $\\beta_i$ is upper semicontinuous, and every level set of $\\beta_i$ is locally constructible.",
+ "statement": "Let $X$ be a scheme [def-pc-scheme] and let $E$ be a pseudo-coherent complex [def-pur-pseudo-coherent-complex] in $D(\\mathcal O_X)$ [def-pc-derived-category] (for example, a perfect complex [def-pc-perfect-complex]). For each integer $i$ define $\\beta_i(x)=\\dim_{\\kappa(x)}H^i(Li_x^*E)$ for $x\\in X$. Then formation of $\\beta_i$ commutes with arbitrary base change, each $\\beta_i$ is upper semicontinuous, and every level set of $\\beta_i$ is locally constructible.",
  "source": {
   "document": "literature/stacks-project/perfect.tex",
   "place": "Derived Categories of Schemes, Lemma jump-loci, Tag 0BDI"
  },
  "stmt_deps": [
   "def-pc-scheme",
+  "def-pur-pseudo-coherent-complex",
   "def-pc-derived-category",
   "def-pc-perfect-complex"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix a point $x\\in X$ and choose an affine neighbourhood $U=\\operatorname{Spec}(A)$ of $x$. By the local bounded-above finite-free characterization in [def-pur-pseudo-coherent-complex], represent $E|_U$ by a bounded-above complex $F^\\bullet$ of finite free $A$-modules. Replace $F^\\bullet$ by the stupid truncation $K=\\sigma_{\\ge i-1}F^\\bullet$; it is bounded and finite free, and for every $y\\in U$ the complexes $K\\otimes_A\\kappa(y)$ and $F^\\bullet\\otimes_A\\kappa(y)$ have the same degree-$i$ cohomology. By [lem-pc-flat-complex-derived-pullback], termwise pullback computes the derived fibre, so $\\beta_i(y)=\\dim_{\\kappa(y)}H^i(K\\otimes_A\\kappa(y))$.",
+   "uses": [
+    "def-pur-pseudo-coherent-complex",
+    "lem-pc-flat-complex-derived-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Derived Categories of Schemes, Lemma jump-loci, Tag 0BDI, affine reduction and truncation"
+   }
+  },
+  {
+   "text": "Apply [lem-sc-finite-free-complex-homology-upper-semicontinuous] to $K$ in degree $i$. It gives upper semicontinuity on $U$; since such affine neighbourhoods cover $X$, $\\beta_i$ is upper semicontinuous on $X$.",
+   "uses": [
+    "lem-sc-finite-free-complex-homology-upper-semicontinuous"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Derived Categories of Schemes, Lemma jump-loci, Tag 0BDI"
+   }
+  },
+  {
+   "text": "For any morphism $g:Y\\to X$ and $y\\in Y$ over $x=g(y)\\in U$, pulling the same model back computes $Lg^*E$ on $g^{-1}U$ and then $Li_y^*Lg^*E$ termwise by [lem-pc-flat-complex-derived-pullback], giving $K\\otimes_A\\kappa(y)=(K\\otimes_A\\kappa(x))\\otimes_{\\kappa(x)}\\kappa(y)$; since $\\kappa(y)$ is flat over the field $\\kappa(x)$, its degree-$i$ cohomology has $\\kappa(y)$-dimension $\\beta_i(x)$, so the fibre dimensions of $Lg^*E$ are $\\beta_i\\circ g$ and formation commutes with base change. Finally, on $U$ each level set is $\\{y: \\beta_i(y)<r+1\\}\\setminus\\{y: \\beta_i(y)<r\\}$; by [lem-sc-finite-free-complex-homology-upper-semicontinuous] both sets are quasi-compact opens of the affine $U$, hence retrocompact in $U$ (Stacks Tag 054D), so their difference is constructible in $U$ by the definition of constructible sets (Stacks Tag 005G); as such $U$ cover $X$, the level sets are locally constructible.",
+   "uses": [
+    "lem-pc-flat-complex-derived-pullback",
+    "lem-sc-finite-free-complex-homology-upper-semicontinuous"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Derived Categories of Schemes, Lemma jump-loci, Tag 0BDI"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-pseudo-coherent-complex",
+  "lem-pc-flat-complex-derived-pullback",
+  "lem-sc-finite-free-complex-homology-upper-semicontinuous"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Derived Categories of Schemes, Lemma jump-loci, Tag 0BDI"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -45,7 +90,7 @@
   {
    "tool": "grep",
    "query": "grep -rn 'jump loci|upper semicontinuous|constructible.*cohomology' Mathlib/AlgebraicGeometry",
-   "results": "Only generic topology upper-semicontinuity declarations; no derived jump-locus result",
+   "results": "Only generic topology declarations; no derived jump-locus result",
    "date": "2026-10-11",
    "verdict": "no match"
   },
@@ -58,12 +103,37 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-perfect-h0-locally-closed",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-abelian-varieties",
- "unit": "sk-prop-av-cube"
+ "unit": "sk-prop-av-cube",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-perfect-jump-loci",
+  "worker": "stage1",
+  "summary": "Split Tag 0BDI into a finite-free affine homology upper-semicontinuity auxiliary statement and three steps for the local model, upper semicontinuity, base change, and constructibility.",
+  "blueprint": "Realizes the theorem-of-the-cube proof clause constructing locally closed loci from fibre dimensions.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-flat-complex-derived-pullback",
+    "why": "The unit's cube route needs the generic fact that derived pullback of a bounded finite-free complex is computed termwise; no node of this unit states it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-flat-complex-derived-pullback",
+  "lem-pc-flat-complex-derived-pullback"
+ ],
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-pjl0000",
+  "group": "G1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-pjl0000 (reviewer sub-agent of L); spot-checked: Statement vs Tag 0BDI (pseudo-coherent hypothesis, 3 clauses) OK; Step 1 truncation sigma_{>=i-1} preserves H^i of fibres, termwise pullback cite OK; tool_use lem-pc-flat-complex-derived-pullback accepted as generic; no duplicate (grep jump/semicontin/rank/minor/0BDI; lem-pc-perfect-locus, residue-model 0BCD are different); LeanFinder minors-locus query: no match. FIX more, RETURN less: (1) C4: Step 3 derived local constructibility of level sets from mere openness of {b_i<r}, which fails on non-Noetherian affines (opens need not be retrocompact); strengthened the new unsplit node to say {b_i<r} is a finite union of principal opens D(f) (true by minors), and Step 3 now cites it, with Stacks 054D (qc opens of affine retrocompact) and 005G, elementary:false; (2) E: base-change clause now states the field-extension flatness argument giving dim over kappa(y) = beta_i(x).; 2 file(s) fixed by the reviewer"
+ }
 }
