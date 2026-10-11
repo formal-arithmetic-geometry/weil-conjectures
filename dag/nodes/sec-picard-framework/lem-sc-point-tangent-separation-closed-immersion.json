@@ -23,7 +23,10 @@
   "def-weil-pbc-generating-sections",
   "def-weil-pbc-morphism-to-projective-space-by-sections",
   "def-pc-projective-space-twist",
-  "def-sc-ample"
+  "def-sc-ample",
+  "def-sc-scheme-tangent-space",
+  "def-weil-pbc-ample-invertible-module",
+  "lem-pc-module-pullback-adjunction"
  ],
  "proof": [
   {
@@ -218,5 +221,23 @@
   "group": "J1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-pt4 (reviewer sub-agent of L); spot-checked: Repaired re-push after returns 15:10 and 15:42; return 15:42 points: 1 repaired (new statement node lem-sc-point-tangent-closed-fibre-singleton, true: fibre over closed p is closed, contains a closed point of X by Jacobson/quasi-compactness, and a nonclosed point would have infinitely many closed specializations by lem-sc-finite-type-nonclosed-closure-closed-points (Tags 0478/0A21, true: closure irreducible of dim >=1, a f.g. k-domain of dim >=1 has infinitely many maximal ideals); cited in steps 4 and 6); 2 repaired (new node thm-sc-proper-finite-fibre-finite-neighbourhood agrees with Tag 02OH coherent.tex lemma-proper-finite-fibre-finite-in-neighbourhood hypothesis by hypothesis: S locally Noetherian, f proper, f^{-1}(s) finite; applied at closed points, complement of the union handled by lem-sc-quasi-compact-kolmogorov-closed-point; thm-pqf-finite-iff-proper-finite-fibres dropped); 3 repaired (lem-weil-pbc-closed-point-residue-field-base cited in step 6); 4 moot (created.by/date is the maintainer's, filled at merge). Source Tag 0E8S varieties.tex lemma-separate-points-tangent-vectors read; statement agrees with it plus the named hypothesis (0) (E7, unchanged). 0B2E (varieties lemma-tangent-space-rational-point, S=Spec k) gives the cotangent node via duality; 0E8M node (algebra lemma-when-surjective-local) drops 'm_B finitely generated', still true (B/m_A B Artinian, n=m_A B+n^2 forces n=m_A B, Nakayama). Small cases: X=Spec k with V=0 excluded by (0); X=P^1, L=O(1), V=H^0 gives the identity. FIX more, RETURN less / FIX: item step 5: text+uses: added the locally Noetherian hypothesis of 02OH for P(V^vee) via [pqf-lem-locnoeth-lft] (C4); item step 6: text+uses: wrote the reduction to closed points (cokernel finite type [def-weil-finite-integral-morphism], support closed [lem-weil-pbc-finite-type-module-support-closed], closed point [lem-sc-quasi-compact-kolmogorov-closed-point]), the empty-fibre case, and the closedness of phi for the stalk identification (C1); item step 8: text+uses: closed immersion from surjectivity on affine opens via [def-weil-closed-immersion] (C1); item steps 7,8: source: document corrected to varieties.tex / algebra.tex; item: proof_deps = union of uses; item: stmt_deps: removed lem-pc-coherent-hi (not cited by the statement); item: split_report.tool_uses: removed thm-sc-proper-finite-fibre-finite-neighbourhood (a new node of the item's own unit, not a tool); thm-sc-proper-finite-fibre-finite-neighbourhood: statement/stmt_deps: locally Noetherian cites [pqf-def-locnoeth], stmt_deps were empty; lem-sc-point-tangent-closed-fibre-singleton: stmt_deps: the definitions the statement cites instead of two lemmas; lem-sc-point-tangent-cotangent-surjective: statement/source: Varieties, varieties.tex; lem-sc-point-tangent-finite-local-cotangent-surjective: statement/stmt_deps/source: local homomorphism cites [def-weil-locally-ringed-space-morphism] instead of the scheme conventions, Algebra/algebra.tex. Report lists a citations.json that is not in the commit (F, noted). Tool uses: lem-pc-coherent-hi, pqf-lem-locnoeth-lft, lem-weil-pbc-finite-type-module-support-closed as generic black boxes. Start Sat Oct 10 04:06:08 PM UTC 2026, end Sat Oct 10 04:09:14 PM UTC 2026.; 5 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.PointTangentSeparationClosedImmersion",
+  "declaration": "AlgebraicGeometry.point_tangent_separation_closed_immersion",
+  "file": "lean/Sheaf/AlgebraicGeometry/PointTangentSeparationClosedImmersion.lean",
+  "statement": "theorem point_tangent_separation_closed_immersion (k : Type u) [Field k] [IsAlgClosed k] (X : Scheme.{u}) (f : X ⟶ Spec (.of k)) [IsProper f] (L : X.Modules) [L.IsInvertible] (V : Submodule k ((ModuleCat.restrictScalars ((Scheme.ΓSpecIso (.of k)).inv ≫ f.appTop).hom).obj (L.val.obj (Opposite.op ⊤)))) (hgen : ∀ x : X, IsClosed ({x} : Set X) → ∃ s : V, x ∈ Scheme.Modules.nonvanishingLocus L s.val) (hpoint : ∀ x y : X, IsClosed ({x} : Set X) → IsClosed ({y} : Set X) → x ≠ y → ∃ s : V, x ∉ Scheme.Modules.nonvanishingLocus L s.val ∧ y ∈ Scheme.Modules.nonvanishingLocus L s.val) (htangent : ∀ x : X, IsClosed ({x} : Set X) → ∀ θ : schemeTangentSpace k X f x, θ ≠ 0 → ∃ s : V, x ∉ Scheme.Modules.nonvanishingLocus L s.val ∧ ((Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction θ.val)).unit.app L).val.app (Opposite.op ⊤) s.val ≠ 0) : FiniteDimensional k V ∧ (∀ (I : Type u) [Finite I] (b : Module.Basis I k V), ∃ s : I → L.sections, (∀ i, (s i).val (Opposite.op ⊤) = (b i).val) ∧ ∃ hs : Epi (L.freeHomEquiv.symm s), IsClosedImmersion (ProjectiveSpace.homOfGeneratingSections I f L s hs) ∧ Nonempty (ProjectiveSpace.twistRestrict (ProjectiveSpace.homOfGeneratingSections I f L s hs) 1 ≅ L)) ∧ (V = ⊤ → IsVeryAmple f L)",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": false,
+  "note": "Second reader restored the arbitrary subspace, genuine closed-point tangent pullback, finite-dimensionality, basis-defined closed immersion and twist pullback. Added three already-landed dependencies; node statement unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-pts",
+  "group": "H1",
+  "result": "pass"
  }
 }
