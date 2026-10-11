@@ -248,6 +248,7 @@ public import WeilConjectures.AlgebraicGeometry.Modules.PullbackMonoidal
 public import WeilConjectures.AlgebraicGeometry.Modules.PullbackTilde
 public import WeilConjectures.AlgebraicGeometry.Modules.PullbackUnit
 public import WeilConjectures.AlgebraicGeometry.Modules.PushforwardHom
+public import WeilConjectures.AlgebraicGeometry.Modules.QcqsSections
 public import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentCokernel
 public import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
 public import WeilConjectures.AlgebraicGeometry.Modules.Rigidification
