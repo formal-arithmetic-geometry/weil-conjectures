@@ -297,10 +297,7 @@ theorem eulerChar_sub_eulerChar_eq {M N : X.Modules}
     [SheafOfModules.IsFinitePresentation (R := X.ringCatSheaf) N] (φ : M ⟶ N) :
     N.eulerChar K - M.eulerChar K = (cokernel φ).eulerChar K - (kernel φ).eulerChar K := by
   have := isNoetherian_of_isProper K (X := X)
-  have : IsSeparated (terminal.from X) := by
-    rw [← terminal.comp_from (X ↘ Spec (.of K))]
-    infer_instance
-  obtain ⟨D, hD⟩ := exists_forall_subsingleton_H_of_isQuasicoherent (X := X)
+  obtain ⟨D, hD⟩ := exists_forall_subsingleton_H K (X := X)
   have := isQuasicoherent_kernel φ
   have := isFinitePresentation_kernel φ
   have := isQuasicoherent_cokernel φ
