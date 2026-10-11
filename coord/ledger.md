@@ -4625,3 +4625,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 12:29 L: merged deliver/M1/lem-pc-module-tor-amplitude-flat-model (stage 2; reviewer FIX; first push; Sheaf.Algebra.Homology.TorAmplitudeFlatModel DerivedCategory.module_torAmplitudeIn_iff_exists_flat_model)
 - 12:29 L: merged deliver/K1/lem-weil-pbc-openness-of-flatness (stage 2; reviewer PASS; first push; Sheaf.RingTheory.OpenFlatLocus Module.isOpen_setOf_flat_localizedModule)
 - 12:29 L: merged deliver/M1/def-pur-pseudo-coherent-complex (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.PseudoCoherentComplex AlgebraicGeometry.Scheme.IsPseudoCoherent)
+- 12:29 L: merged deliver/J1/lem-pc-qcoh-truncation-derived-limit (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.QCohTruncationDerivedLimit AlgebraicGeometry.qcoh_truncation_isDerivedLimitTriangle)

@@ -156,5 +156,28 @@
   "group": "J1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-qtd2213 (reviewer sub-agent of L); spot-checked: Read packet; Stacks 08D3/08D4/08U1/0D64 text; searched DAG for existing 08D3/0D64/08U1 nodes (none) and the Milnor/ML nodes (not restated; ML step lives in lem-pc-unbounded-derived-functor-cohomological-bound, not here). FIX more, RETURN less: (1) C1/D2 Step 1 proved clause 1 by invoking 'the truncation-tower theorem of Tag 08D3', which is the item's own first clause, with only definitions cited (degreewise eventual constancy does not suffice for unbounded E); replaced by the 08D3 proof: affine vanishing [pqf-lem-affine-vanishing, generic tool from another unit, tool_uses] on the affine basis plus a new statement-only node lem-pc-ringed-space-truncation-derived-limit (Stacks 0D64, d=0, specialized to schemes; grep search recorded). (2) C4/E7 the derived limit and its product were said to live in D_QCoh(O_X), where countable products need not agree with those of D(O_X) (08D5); statement and Steps 1-2 now say R lim is taken in D(O_X) (statement change named here: 'in the derived category' -> 'in D(O_X)', reason C4). (3) C4 new node lem-pc-derived-functor-commutes-derived-limit: made explicit that RF of a Roos triangle in D(O_X) is a Roos triangle in D(Ab) (Mod(O_X) Grothendieck, Ab exact products, per 08U1). Second reading by J1 missed (1) and (2).; 3 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.QCohTruncationDerivedLimit",
+  "declaration": "AlgebraicGeometry.qcoh_truncation_isDerivedLimitTriangle",
+  "declarations": [
+   "AlgebraicGeometry.qcoh_truncation_isDerivedLimitTriangle",
+   "AlgebraicGeometry.rightDerivedFunctor_qcoh_truncation_isDerivedLimitTriangle"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/QCohTruncationDerivedLimit.lean",
+  "statement": "theorem qcoh_truncation_isDerivedLimitTriangle (X : Scheme.{u}) [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] [Abelian.HasKInjectiveResolutions (SheafOfModules.{u} (moduleRings X.toRingedSpace))] (E : schemeDerivedCategory X) (hE : schemeDerivedQCohProperty X E) : ∃ δ : (∏ᶜ (fun n : ℕ => ((DerivedCategory.TStructure.t (C := SheafOfModules.{u} (moduleRings X.toRingedSpace))).truncGE (-(n : ℤ))).obj E)) ⟶ E⟦(1 : ℤ)⟧, IsDerivedLimitTriangle (fun n : ℕ => ((DerivedCategory.TStructure.t (C := SheafOfModules.{u} (moduleRings X.toRingedSpace))).natTransTruncGEOfLE (-((n + 1 : ℕ) : ℤ)) (-(n : ℤ)) (by omega)).app E) E (Pi.lift (fun n : ℕ => ((DerivedCategory.TStructure.t (C := SheafOfModules.{u} (moduleRings X.toRingedSpace))).truncGEπ (-(n : ℤ))).app E)) δ",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-11",
+  "existing": false,
+  "note": "The two clauses are stated as specified Roos triangles with their first arrows fixed to the canonical truncation projections, following def-weil-derived-limit (which chooses no limit object). The second declaration gives the RF clause. Shared SheafOfModules category and localization as in def-pc-derived-category."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-qtd1251",
+  "group": "J1",
+  "result": "pass",
+  "note": "X:Scheme arbitrary; E in D_QCoh as schemeDerivedCategory X + schemeDerivedQCohProperty (E1 form, moduleRings carrier); E_n = t.truncGE (-n) for n:N incl. n=0, transitions natTransTruncGEOfLE (-(n+1)) (-n) as G1/H1; clause 1 = exists delta, IsDerivedLimitTriangle with p = Pi.lift truncGEpi, product in D(O_X) not D_QCoh; clause 2: F additive + PreservesLimitsOfShape (Discrete N), RF = Functor.rightDerivedFunctor, triangle with p = Pi.lift RF(truncGEpi) in D(Ab); HasKInjectiveResolutions/HasDerivedCategory binders not inferInstance-derivable (infrastructure, as landed 08U1 sibling); no let, no new defs, compile clean"
  }
 }
