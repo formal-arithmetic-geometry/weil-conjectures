@@ -127,5 +127,23 @@
   "group": "M1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-kht2103 (reviewer sub-agent of L); spot-checked: Step 1: new telescope node lem-pc-complex-hocolim-colimit true on any ringed site (1-shift injective with cokernel the colimit, cone of a mono qis to its cokernel), not a special case of etale-only lem-kun-complex-colimit-hocolim; d^2=0 automatic for a cone. Step 3 tool use prop-pur-kinjective-resolutions-exist accepted (exact filtered colimits). FIX more, RETURN less: (1) Step 2 false at N=i: (tau_{<=N}G)^N=ker d^N, so terms equal G^i only for N>=i+1; text corrected (E/elementary step repaired). (2) C4: prop-pur-kinjective-resolutions-exist requires a small site, the item says 'a site'; Step 3 now notes the site is small or essentially so as presupposed for Mod(O) abelian [def-weil-sheaf-of-modules-category] and replaces it by an equivalent small site; uses/proof_deps updated. K-flatness is not claimed by this item (it is in lem-pc-kflat-resolution, which cites lem-pc-kflat-closure).; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.TruncationTelescope",
+  "declaration": "CochainComplex.quasiIso_hocolim_truncLE_and_filtered_colimit",
+  "file": "lean/Sheaf/Algebra/Homology/TruncationTelescope.lean",
+  "statement": "theorem quasiIso_hocolim_truncLE_and_filtered_colimit {S : Type u} [Category.{u} S] {J : GrothendieckTopology S} (R : Sheaf J CommRingCat.{u}) (K : CochainComplex (SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) ℤ) : (let E : ℕ → CochainComplex (SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) ℤ := fun n => K.truncLE (n : ℤ) let A := ∐ E ∃ t : ∀ n : ℕ, E n ⟶ E (n + 1), (∀ n, t n ≫ K.ιTruncLE ((n + 1 : ℕ) : ℤ) = K.ιTruncLE (n : ℤ)) ∧ ∃ f : mappingCone (𝟙 A - Sigma.desc (fun n => t n ≫ Sigma.ι E (n + 1))) ⟶ K, mappingCone.inr _ ≫ f = Sigma.desc (fun n : ℕ => (K.ιTruncLE (n : ℤ) : E n ⟶ K)) ∧ (mappingCone.inl _).comp (HomComplex.Cochain.ofHom f) (add_zero _) = 0 ∧ QuasiIso f) ∧ (∀ (I : Type u) [SmallCategory I] [IsFiltered I] (F G : I ⥤ CochainComplex (SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) ℤ) (α : F ⟶ G), (∀ i : I, QuasiIso (α.app i)) → QuasiIso (colim.map α))",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-kht0905",
+  "group": "J1",
+  "result": "pass",
+  "note": "site S:Type u small + R CommRingCat sheaf (as K1); K unbounded Z-complex; E n = truncLE n over N cofinal; t pinned by ιTruncLE mono, existence true; cone of 1-shift equals K1 telescopeShift form; f pinned on inl (0) and inr (sum ιTruncLE), chain-map consistent; QuasiIso f; clause 2 small filtered I:Type u, QuasiIso app -> QuasiIso colim.map (Mathlib isStableUnderColimitsOfShape_quasiIso needs AB5, absent for SheafOfModules, so existing false right)"
  }
 }
