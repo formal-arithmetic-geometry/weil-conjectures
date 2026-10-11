@@ -1,11 +1,11 @@
 # Work queue
 
-568 items; claim with `tools/claim.py next <group> [--stage N]`.
+566 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (568)
+## Stage 2: nodes to state (566)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -30,14 +30,12 @@
 | `lem-weil-pbc-fs-adic-lift-over-finite-coefficient-map` | 1 | state |
 | `lem-weil-pbc-g-ring-maximal-ideal-criterion` | 1 | state |
 | `lem-weil-pbc-gabber-h0-etale-criterion` | 1 | state |
-| `lem-weil-pbc-galois-base-change-qc-open-descends` | 1 | state |
 | `lem-weil-pbc-galois-invariant-closed-subset-descends` | 1 | state |
 | `lem-weil-pbc-generic-finite-algebra-splitting` | 1 | state |
 | `lem-weil-pbc-generic-separable-algebra-splitting` | 1 | state |
 | `lem-weil-pbc-geometric-point-morphism-stalk-bijection` | 1 | state |
 | `lem-weil-pbc-geometrically-connected-finite-separable-test` | 1 | state |
 | `lem-weil-pbc-geometrically-reduced-extension-separable` | 1 | state |
-| `lem-weil-pbc-geometrically-regular-finitely-generated-extensions` | 1 | state |
 | `lem-weil-pbc-geometrically-regular-h1-injective` | 1 | state |
 | `lem-weil-pbc-geometrically-regular-over-field-flat` | 1 | state |
 | `lem-weil-pbc-geometrically-regular-over-subfields` | 1 | state |
