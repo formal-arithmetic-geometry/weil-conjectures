@@ -4380,3 +4380,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 11:05 L: merged deliver/M1/lem-weil-pbc-jacobi-zariski-regular-sequence-left-injective (stage 2; reviewer PASS; first push; Sheaf.RingTheory.JacobiZariskiRegularSequenceLeftInjective Algebra.jacobiZariski_left_injective_of_regularSequence)
 - 11:05 L: merged deliver/K1/lem-weil-pbc-kollar-local-dichotomy (stage 2; reviewer PASS; first push; Sheaf.RingTheory.KollarLocalDichotomy IsLocalRing.kollar_local_dichotomy)
 - 11:06 L: merged deliver/E1/lem-weil-pbc-inverse-image-module-adjunction (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.EtaleInverseImageModuleAdjunction AlgebraicGeometry.etaleInverseImageModuleAdjunction)
+- 11:06 L: merged deliver/G1/lem-weil-pbc-inverse-image-preserves-colimits (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.EtaleInverseImageColimits AlgebraicGeometry.Etale.inverseImage_preservesColimits)
