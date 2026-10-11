@@ -1,11 +1,11 @@
 # Work queue
 
-160 items; claim with `tools/claim.py next <group> [--stage N]`.
+156 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (160)
+## Stage 2: nodes to state (156)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
@@ -18,7 +18,6 @@
 | `def-pc-derived-rhom-algebra-module` | 1 | state | 2 |
 | `def-weil-pbc-hypercohomology-filtrations` | 1 | state | 2 |
 | `lem-pc-module-pullback-identity-composition` | 1 | state | 10 |
-| `lemma-nagata-qc-open-descends` | 1 | state | 10 |
 | `lem-weil-pbc-cohomology-pullback-functorial` | 1 | state | 8 |
 | `lemma-nagata-affine-fp-descends` | 3 | state | 8 |
 | `lem-pc-affine-qcoh-derived-equivalence` | 1 | state | 6 |
@@ -28,7 +27,6 @@
 | `lem-pc-derived-direct-image-composition` | 1 | state | 4 |
 | `lem-sc-derived-internal-hom-adjunction` | 1 | state | 4 |
 | `lem-pc-derived-direct-image-preserves-qcoh` | 1 | state | 3 |
-| `lem-pc-ringed-spaces-derived-adjoint-general` | 1 | state | 3 |
 | `lem-weil-pbc-etale-graph-section-extension-map-linear` | 1 | state | 3 |
 | `lem-weil-pbc-truncation-couple-morphism` | 1 | state | 3 |
 | `lem-pc-noetherian-derived-direct-image-right-adjoint` | 1 | state | 2 |
@@ -69,8 +67,8 @@
 | `lem-pc-rf-single-complex-relative-mayer-vietoris` | 1 | state | 0 |
 | `lem-pc-ringed-space-derived-limit-stalk-injective` | 1 | state | 0 |
 | `lem-pc-ringed-space-pointwise-truncation-limit` | 1 | state | 0 |
-| `lem-pc-ringed-space-sheafification-cohomology` | 1 | state | 0 |
 | `lem-pc-ringed-space-truncation-derived-limit` | 1 | state | 0 |
+| `lem-pc-sheaf-rhom-projection-formula` | 1 | state | 0 |
 | `lem-pc-tor-independent-perfect-tensor-base-change` | 1 | state | 0 |
 | `lem-pqf-quasicompact-h1-zero` | 1 | state | 0 |
 | `lem-sc-affine-derived-cohomology` | 1 | state | 0 |
@@ -147,8 +145,6 @@
 | `lem-weil-pbc-qs-scheme-cohomology-directed-colimit` | 1 | state | 0 |
 | `lem-weil-pbc-sets-pushforward-stalk-strict-henselization` | 1 | state | 0 |
 | `lem-weil-pbc-strict-henselization-functoriality` | 1 | state | 0 |
-| `lem-weil-pbc-symmetric-degree-exact` | 1 | state | 0 |
-| `lem-weil-pbc-symmetric-product-finite` | 1 | state | 0 |
 | `lem-weil-pbc-symmetric-product-over-base` | 1 | state | 0 |
 | `lem-weil-pbc-symmetric-product-surjective` | 1 | state | 0 |
 | `lem-weil-pbc-theorem-formal-functions` | 1 | state | 0 |
@@ -170,7 +166,7 @@
 | `lem-sp-derived-couple-functoriality` | 2 | state | 0 |
 | `pqf-lem-affine-vanishing` | 2 | state | 0 |
 
-Not open yet: 40 nodes that wait for stage 1, 222 nodes that wait for a statement dependency.
+Not open yet: 40 nodes that wait for stage 1, 221 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
