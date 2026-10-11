@@ -229,5 +229,23 @@
   "by": "L",
   "result": "pass",
   "note": "six steps (components, normalization of the 1-dimensional ones with lem-sc-normalization-properties, the 0-dimensional ones are Spec k, the disjoint union is finite/separated/finite type/smooth, the dense open from a normal open of each component minus the other components, isomorphism over it); 5 new nodes, 4 Mathlib leaves verified by the lead (Morphisms/Finite.lean:84/120/159, Basic.lean:305 sigmaDesc, Separated.lean:71/119, Affine.lean:58, QuasiCompact.lean:69, FiniteType.lean:68); Mathlib Smooth accepted as the notion of def-sbc-smooth-morphisms via the match recorded there; lem-fin-dense-normal-open and lem-weil-pbc-noetherian-finite-components (generic) accepted as tool uses"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ReducedCurveNormalization",
+  "declaration": "AlgebraicGeometry.exists_finite_smooth_modification_of_reduced_curve",
+  "file": "lean/Sheaf/AlgebraicGeometry/ReducedCurveNormalization.lean",
+  "statement": "theorem exists_finite_smooth_modification_of_reduced_curve {k : Type u} [Field k] [IsAlgClosed k] (X : Scheme.{u}) [X.Over (Spec (.of k))] [IsReduced X] [IsSeparated (X ↘ Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))] (h_dim : topologicalKrullDim X ≤ 1) : ∃ (Y : Scheme.{u}) (ν : Y ⟶ X), IsSeparated (ν ≫ (X ↘ Spec (.of k))) ∧ LocallyOfFiniteType (ν ≫ (X ↘ Spec (.of k))) ∧ QuasiCompact (ν ≫ (X ↘ Spec (.of k))) ∧ topologicalKrullDim Y ≤ 1 ∧ Smooth (ν ≫ (X ↘ Spec (.of k))) ∧ IsFinite ν ∧ ∃ U : X.Opens, Dense (U : Set X) ∧ IsIso (ν ∣_ U)",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-rcn1348",
+  "group": "H1",
+  "result": "pass",
+  "note": "k alg closed {k:Type u}[Field][IsAlgClosed]; X Scheme.{u} over Spec k reduced (IsReduced), separated, finite type (LFT+QC on X↘Spec k), topologicalKrullDim X ≤ 1; ∃ Y:Scheme.{u}, ν:Y⟶X with k-structure the composite (ν a k-morphism by construction), separated/LFT/QC/Smooth composite, dim Y ≤ 1, IsFinite ν, ∃ dense U:X.Opens with IsIso (ν ∣_ U) : ν⁻¹ᵁU ⟶ U (#check); single universe, no hollow hypotheses, no let/show; parenthetical normalization is witness remark (docstring)"
  }
 }
