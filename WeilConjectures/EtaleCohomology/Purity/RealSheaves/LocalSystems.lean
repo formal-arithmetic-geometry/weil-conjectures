@@ -243,6 +243,30 @@ theorem Scheme.exists_equivalence_isFiniteLocallyConstantSheaf_of_isFundamentalG
         ObjectProperty.ι _ ⋙ (Scheme.pointSmallEtale s).sheafFiber) := by
   sorry
 
+
+section BiprodAux
+
+variable {C : Type*} [Category C] [Preadditive C] [Limits.HasBinaryBiproducts C]
+  {R : Type*} [Ring R] (H : C ⥤ ModuleCat R) [H.Additive] {X : C}
+
+lemma _root_.CategoryTheory.Functor.map_biprod_fst_inl_add_inr (a b : H.obj X) :
+    H.map Limits.biprod.fst (H.map Limits.biprod.inl a + H.map Limits.biprod.inr b) = a := by
+  simp [← ConcreteCategory.comp_apply, ← H.map_comp]
+
+lemma _root_.CategoryTheory.Functor.map_biprod_snd_inl_add_inr (a b : H.obj X) :
+    H.map Limits.biprod.snd (H.map Limits.biprod.inl a + H.map Limits.biprod.inr b) = b := by
+  simp [← ConcreteCategory.comp_apply, ← H.map_comp]
+
+lemma _root_.CategoryTheory.Functor.map_biprod_desc_id_id (w : H.obj (X ⊞ X)) :
+    H.map (Limits.biprod.desc (𝟙 X) (𝟙 X)) w =
+      H.map Limits.biprod.fst w + H.map Limits.biprod.snd w := by
+  have : Limits.biprod.desc (𝟙 X) (𝟙 X) = Limits.biprod.fst + Limits.biprod.snd := by
+    apply Limits.biprod.hom_ext' <;> simp
+  rw [this, H.map_add]
+  rfl
+
+end BiprodAux
+
 section GaloisAction
 
 /-! ### The Galois action on stalks of finite locally constant sheaves -/
@@ -350,6 +374,18 @@ instance : ((Scheme.pointSmallEtale s).sheafFiber (A := ModuleCat.{u + 1} Λ)).A
     Limits.preservesBinaryBiproducts_of_preservesBinaryCoproducts _
   Functor.additive_of_preservesBinaryBiproducts _
 
+
+lemma Scheme.sheafFiber_map_smul_id (F : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (c : Λ)
+    (w : ((Scheme.pointSmallEtale s).sheafFiber (A := ModuleCat.{u + 1} Λ)).obj F) :
+    ((Scheme.pointSmallEtale s).sheafFiber (A := ModuleCat.{u + 1} Λ)).map (c • 𝟙 F) w = c • w := by
+  have : Limits.PreservesFilteredColimitsOfSize.{u, u}
+      (CategoryTheory.forget (ModuleCat.{u + 1} Λ)) :=
+    Limits.preservesFilteredColimitsOfSize_shrink.{u, u + 1, u, u + 1} _
+  obtain ⟨V, v, σ, rfl⟩ := (Scheme.pointSmallEtale s).toPresheafFiber_jointly_surjective w
+  change ((Scheme.pointSmallEtale s).toPresheafFiber V v F.obj ≫
+    (Scheme.pointSmallEtale s).presheafFiber.map (c • 𝟙 F).hom) σ = _
+  rw [(Scheme.pointSmallEtale s).toPresheafFiber_naturality, ConcreteCategory.comp_apply]
+  exact map_smul _ c σ
 
 /-- The stalk of a finite locally constant sheaf of `Λ`-modules is that of its underlying sheaf
 of sets. -/
@@ -470,11 +506,11 @@ noncomputable def Scheme.IsFiniteLocallyConstantSheaf.galoisRep
     simp [galoisAct, Scheme.FiniteLocallyConstant.galoisSMul_mul]
 
 
-variable [PreGaloisCategory.IsNaturalSMul (Scheme.FiniteEtale.fiber s) G]
 
 /-- **The geometric stalk as a representation of `G`**, on finite locally constant sheaves of
 `Λ`-modules. -/
-noncomputable def Scheme.galoisRepFunctor :
+noncomputable def Scheme.galoisRepFunctor
+    [PreGaloisCategory.IsNaturalSMul (Scheme.FiniteEtale.fiber s) G] :
     ObjectProperty.FullSubcategory
         (fun F : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ) ↦
           IsFiniteLocallyConstantSheaf F) ⥤ Rep.{u + 1} Λ G where
@@ -491,7 +527,8 @@ noncomputable def Scheme.galoisRepFunctor :
     simp
 
 /-- The underlying `Λ`-module of `AlgebraicGeometry.Scheme.galoisRepFunctor` is the stalk. -/
-noncomputable def Scheme.galoisRepFunctorCompForget₂Iso :
+noncomputable def Scheme.galoisRepFunctorCompForget₂Iso
+    [PreGaloisCategory.IsNaturalSMul (Scheme.FiniteEtale.fiber s) G] :
     Scheme.galoisRepFunctor (s := s) (G := G) (Λ := Λ) ⋙ forget₂ (Rep.{u + 1} Λ G) (ModuleCat.{u + 1} Λ) ≅
       ObjectProperty.ι _ ⋙ (Scheme.pointSmallEtale s).sheafFiber :=
   NatIso.ofComponents (fun F ↦ Iso.refl _) fun f ↦ by
@@ -499,7 +536,6 @@ noncomputable def Scheme.galoisRepFunctorCompForget₂Iso :
     rfl
 
 
-omit [PreGaloisCategory.IsNaturalSMul (Scheme.FiniteEtale.fiber s) G] in
 /-- On a connected scheme, morphisms of finite locally constant sheaves of sets are determined
 by their stalks at a geometric point. -/
 lemma Scheme.FiniteLocallyConstant.hom_ext_of_sheafFiber [ConnectedSpace Y]
@@ -516,7 +552,8 @@ lemma Scheme.FiniteLocallyConstant.hom_ext_of_sheafFiber [ConnectedSpace Y]
   rw [hx] at h₂
   exact congrArg ULift.down (h₁.symm.trans h₂)
 
-instance [ConnectedSpace Y] : (Scheme.galoisRepFunctor (s := s) (G := G) (Λ := Λ)).Faithful where
+instance [ConnectedSpace Y] [PreGaloisCategory.IsNaturalSMul (Scheme.FiniteEtale.fiber s) G] :
+    (Scheme.galoisRepFunctor (s := s) (G := G) (Λ := Λ)).Faithful where
   map_injective {F F'} f g h := by
     have hfg (x) : ((Scheme.pointSmallEtale s).sheafFiber (A := ModuleCat.{u + 1} Λ)).map f.hom x =
         ((Scheme.pointSmallEtale s).sheafFiber (A := ModuleCat.{u + 1} Λ)).map g.hom x :=
@@ -534,7 +571,6 @@ instance [ConnectedSpace Y] : (Scheme.galoisRepFunctor (s := s) (G := G) (Λ := 
     exact congr(($h').hom.hom.app V v)
 
 
-omit [PreGaloisCategory.IsNaturalSMul (Scheme.FiniteEtale.fiber s) G] in
 /-- **Equivariant maps of stalks come from morphisms of sheaves.** On a connected scheme, a
 `G`-equivariant map between the stalks of finite locally constant sheaves of sets is the stalk of
 a morphism of sheaves. -/
@@ -571,6 +607,148 @@ lemma Scheme.FiniteLocallyConstant.exists_hom_of_equivariant [ConnectedSpace Y]
   rw [show (⟨(stalkEquiv s S x).down⟩ : ULift _) = stalkEquiv s S x from rfl,
     Equiv.symm_apply_apply]
   rfl
+
+
+lemma Scheme.IsFiniteLocallyConstantSheaf.sheafFiber_map_stalkEquiv
+    {F F' : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)} (hF : IsFiniteLocallyConstantSheaf F)
+    (hF' : IsFiniteLocallyConstantSheaf F') (f : F ⟶ F')
+    (x : ((Scheme.pointSmallEtale s).sheafFiber (A := ModuleCat.{u + 1} Λ)).obj F) :
+    (Scheme.pointSmallEtale s).sheafFiber.map
+        ((sheafCompose _ (CategoryTheory.forget (ModuleCat.{u + 1} Λ))).map f) (hF.stalkEquiv s x) =
+      hF'.stalkEquiv s (((Scheme.pointSmallEtale s).sheafFiber (A := ModuleCat.{u + 1} Λ)).map f x) := by
+  have h := stalkEquiv_symm_naturality s hF hF' f (hF.stalkEquiv s x)
+  rw [Equiv.symm_apply_apply] at h
+  rw [h, Equiv.apply_symm_apply]
+
+lemma Scheme.IsFiniteLocallyConstantSheaf.galoisAct_eq
+    {F : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)} (hF : IsFiniteLocallyConstantSheaf F)
+    (g : G) (z : (Scheme.pointSmallEtale s).sheafFiber.obj hF.toFLC.obj) :
+    hF.galoisAct s G g ((hF.stalkEquiv s).symm z) =
+      (hF.stalkEquiv s).symm (Scheme.FiniteLocallyConstant.galoisSMul s G g hF.toFLC z) := by
+  simp [galoisAct]
+
+/-- An equivariant linear map of stalks is the stalk of a morphism of the underlying sheaves of
+sets. -/
+lemma Scheme.IsFiniteLocallyConstantSheaf.exists_hom_of_equivariant [ConnectedSpace Y]
+    [TopologicalSpace G] [IsTopologicalGroup G] [CompactSpace G]
+    [PreGaloisCategory.IsFundamentalGroup (Scheme.FiniteEtale.fiber s) G]
+    {F F' : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)} (hF : IsFiniteLocallyConstantSheaf F)
+    (hF' : IsFiniteLocallyConstantSheaf F')
+    (φ : ((Scheme.pointSmallEtale s).sheafFiber (A := ModuleCat.{u + 1} Λ)).obj F →
+      ((Scheme.pointSmallEtale s).sheafFiber (A := ModuleCat.{u + 1} Λ)).obj F')
+    (hφ : ∀ g x, φ (hF.galoisAct s G g x) = hF'.galoisAct s G g (φ x)) :
+    ∃ ψ : hF.toFLC ⟶ hF'.toFLC, ∀ x, (Scheme.pointSmallEtale s).sheafFiber.map ψ.hom
+      (hF.stalkEquiv s x) = hF'.stalkEquiv s (φ x) := by
+  obtain ⟨ψ, hψ⟩ := Scheme.FiniteLocallyConstant.exists_hom_of_equivariant s G
+    (fun z ↦ hF'.stalkEquiv s (φ ((hF.stalkEquiv s).symm z))) fun g z ↦ by
+      rw [← galoisAct_eq s G hF g z, hφ]
+      simp only [galoisAct, Equiv.apply_symm_apply]
+  exact ⟨ψ, fun x ↦ by rw [hψ, Equiv.symm_apply_apply]⟩
+
+instance [ConnectedSpace Y] [TopologicalSpace G] [IsTopologicalGroup G] [CompactSpace G]
+    [PreGaloisCategory.IsFundamentalGroup (Scheme.FiniteEtale.fiber s) G] :
+    (Scheme.galoisRepFunctor (s := s) (G := G) (Λ := Λ)).Full where
+  map_surjective {F F'} φ := by
+    let St := (Scheme.pointSmallEtale s).sheafFiber (A := ModuleCat.{u + 1} Λ)
+    let fl {A B : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)}
+        (hA : Scheme.IsFiniteLocallyConstantSheaf A) (hB : Scheme.IsFiniteLocallyConstantSheaf B)
+        (f : A ⟶ B) :
+        hA.toFLC ⟶ hB.toFLC :=
+      ObjectProperty.homMk ((sheafCompose _ (CategoryTheory.forget (ModuleCat.{u + 1} Λ))).map f)
+    let φ0 : St.obj F.obj → St.obj F'.obj := fun v ↦ φ.hom v
+    have hφ0 (g : G) (x) : φ0 (F.2.galoisAct s G g x) = F'.2.galoisAct s G g (φ0 x) :=
+      LinearMap.congr_fun (φ.hom.isIntertwining' g) x
+    have hadd (x y) : φ0 (x + y) = φ0 x + φ0 y := map_add φ.hom x y
+    have hsmul (c : Λ) (x) : φ0 (c • x) = c • φ0 x := map_smul φ.hom c x
+    obtain ⟨ψ, hψ⟩ := F.2.exists_hom_of_equivariant s G F'.2 φ0 hφ0
+    have := F.2
+    have := F'.2
+    have hB : Scheme.IsFiniteLocallyConstantSheaf (F.obj ⊞ F.obj) :=
+      Scheme.IsFiniteLocallyConstantSheaf.biprod _ _
+    have hB' : Scheme.IsFiniteLocallyConstantSheaf (F'.obj ⊞ F'.obj) :=
+      Scheme.IsFiniteLocallyConstantSheaf.biprod _ _
+    let μ : St.obj (F.obj ⊞ F.obj) → St.obj (F'.obj ⊞ F'.obj) := fun w ↦
+      St.map Limits.biprod.inl (φ0 (St.map Limits.biprod.fst w)) +
+        St.map Limits.biprod.inr (φ0 (St.map Limits.biprod.snd w))
+    have hμ (g : G) (w) : μ (hB.galoisAct s G g w) = hB'.galoisAct s G g (μ w) := by
+      simp only [μ]
+      rw [Scheme.IsFiniteLocallyConstantSheaf.galoisAct_add,
+        ← Scheme.IsFiniteLocallyConstantSheaf.galoisAct_naturality s G g F'.2 hB',
+        ← Scheme.IsFiniteLocallyConstantSheaf.galoisAct_naturality s G g F'.2 hB', ← hφ0, ← hφ0,
+        Scheme.IsFiniteLocallyConstantSheaf.galoisAct_naturality s G g hB F.2,
+        Scheme.IsFiniteLocallyConstantSheaf.galoisAct_naturality s G g hB F.2]
+    obtain ⟨Ψ, hΨ⟩ := hB.exists_hom_of_equivariant s G hB' μ hμ
+    -- identities of morphisms of sheaves of sets, checked on stalks
+    have key {A B A' B' : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)}
+        (hA : Scheme.IsFiniteLocallyConstantSheaf A) (hB : Scheme.IsFiniteLocallyConstantSheaf B)
+        (hA' : Scheme.IsFiniteLocallyConstantSheaf A')
+        (hB' : Scheme.IsFiniteLocallyConstantSheaf B') (α : hA.toFLC ⟶ hA'.toFLC)
+        (β : hB.toFLC ⟶ hB'.toFLC) (a : A ⟶ B) (a' : A' ⟶ B')
+        (αs : St.obj A → St.obj A') (βs : St.obj B → St.obj B')
+        (hα : ∀ x, (Scheme.pointSmallEtale s).sheafFiber.map α.hom (hA.stalkEquiv s x) =
+          hA'.stalkEquiv s (αs x))
+        (hβ : ∀ x, (Scheme.pointSmallEtale s).sheafFiber.map β.hom (hB.stalkEquiv s x) =
+          hB'.stalkEquiv s (βs x))
+        (h : ∀ x, St.map a' (αs x) = βs (St.map a x)) :
+        α ≫ fl hA' hB' a' = fl hA hB a ≫ β :=
+      Scheme.FiniteLocallyConstant.hom_ext_of_sheafFiber s fun z ↦ by
+        obtain ⟨x, rfl⟩ := (hA.stalkEquiv s).surjective z
+        simp only [ObjectProperty.FullSubcategory.comp_hom, Functor.map_comp,
+          ConcreteCategory.comp_apply]
+        rw [hα]
+        erw [Scheme.IsFiniteLocallyConstantSheaf.sheafFiber_map_stalkEquiv s hA' hB',
+          Scheme.IsFiniteLocallyConstantSheaf.sheafFiber_map_stalkEquiv s hA hB]
+        rw [hβ, h]
+    have i₁ := key hB F.2 hB' F'.2 Ψ ψ Limits.biprod.fst Limits.biprod.fst μ φ0 hΨ hψ
+      fun w ↦ St.map_biprod_fst_inl_add_inr _ _
+    have i₂ := key hB F.2 hB' F'.2 Ψ ψ Limits.biprod.snd Limits.biprod.snd μ φ0 hΨ hψ
+      fun w ↦ St.map_biprod_snd_inl_add_inr _ _
+    have i₃ := key hB F.2 hB' F'.2 Ψ ψ (Limits.biprod.desc (𝟙 _) (𝟙 _))
+      (Limits.biprod.desc (𝟙 _) (𝟙 _)) μ φ0 hΨ hψ fun w ↦ by
+        rw [St.map_biprod_desc_id_id, St.map_biprod_desc_id_id, St.map_biprod_fst_inl_add_inr,
+          St.map_biprod_snd_inl_add_inr, hadd]
+    have i₄ (c : Λ) := key F.2 F.2 F'.2 F'.2 ψ ψ (c • 𝟙 _) (c • 𝟙 _) φ0 φ0 hψ hψ fun x ↦ by
+      rw [Scheme.sheafFiber_map_smul_id, Scheme.sheafFiber_map_smul_id, hsmul]
+    -- `ψ` is linear on sections
+    let ψV (V : Y.Etale) : F.obj.obj.obj (Opposite.op V) → F'.obj.obj.obj (Opposite.op V) :=
+      fun a ↦ ψ.hom.hom.app (Opposite.op V) a
+    have happ (V : Y.Etale) (a b : F.obj.obj.obj (Opposite.op V)) :
+        ψV V (a + b) = ψV V a + ψV V b := by
+      let Sec := sheafToPresheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ) ⋙
+        (evaluation _ _).obj (Opposite.op V)
+      let c := Sec.map Limits.biprod.inl a + Sec.map Limits.biprod.inr b
+      have k₁ := congr($(i₁).hom.hom.app (Opposite.op V) c)
+      have k₂ := congr($(i₂).hom.hom.app (Opposite.op V) c)
+      have k₃ := congr($(i₃).hom.hom.app (Opposite.op V) c)
+      change Sec.map Limits.biprod.fst (Ψ.hom.hom.app (Opposite.op V) c) =
+        ψ.hom.hom.app (Opposite.op V) (Sec.map Limits.biprod.fst c) at k₁
+      change Sec.map Limits.biprod.snd (Ψ.hom.hom.app (Opposite.op V) c) =
+        ψ.hom.hom.app (Opposite.op V) (Sec.map Limits.biprod.snd c) at k₂
+      change Sec.map (Limits.biprod.desc (𝟙 _) (𝟙 _)) (Ψ.hom.hom.app (Opposite.op V) c) =
+        ψ.hom.hom.app (Opposite.op V) (Sec.map (Limits.biprod.desc (𝟙 _) (𝟙 _)) c) at k₃
+      rw [Sec.map_biprod_fst_inl_add_inr] at k₁
+      rw [Sec.map_biprod_snd_inl_add_inr] at k₂
+      rw [Sec.map_biprod_desc_id_id, Sec.map_biprod_desc_id_id, Sec.map_biprod_fst_inl_add_inr,
+        Sec.map_biprod_snd_inl_add_inr, k₁, k₂] at k₃
+      exact k₃.symm
+    have hsm (V : Y.Etale) (c : Λ) (a : F.obj.obj.obj (Opposite.op V)) :
+        ψV V (c • a) = c • ψV V a := by
+      have k := congr($(i₄ c).hom.hom.app (Opposite.op V) a)
+      exact k.symm
+    let f : F.obj ⟶ F'.obj :=
+      ⟨{ app V := ModuleCat.ofHom
+          { toFun := ψV V.unop
+            map_add' := happ V.unop
+            map_smul' := hsm V.unop }
+         naturality V W h := by
+          ext a
+          exact ConcreteCategory.congr_hom (ψ.hom.hom.naturality h) a }⟩
+    refine ⟨ObjectProperty.homMk f, ?_⟩
+    ext v
+    change St.map f v = φ0 v
+    apply (F'.2.stalkEquiv s).injective
+    rw [← Scheme.IsFiniteLocallyConstantSheaf.sheafFiber_map_stalkEquiv s F.2 F'.2 f v, ← hψ]
+    rfl
 
 end Linear
 
