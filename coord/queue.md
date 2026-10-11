@@ -1,11 +1,11 @@
 # Work queue
 
-50 items; claim with `tools/claim.py next <group> [--stage N]`.
+47 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (50)
+## Stage 2: nodes to state (47)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
@@ -51,14 +51,11 @@
 | `lem-sc-smooth-proper-diagonal-basechange-upper-shriek` | 1 | state | 0 |
 | `lem-sc-smooth-proper-relative-dualizing-general` | 1 | state | 0 |
 | `lem-weil-pbc-etale-mayer-vietoris-pullback` | 1 | state | 0 |
-| `lem-weil-pbc-formal-functions-complete-base` | 1 | state | 0 |
-| `lem-weil-pbc-formal-functions-stalk` | 1 | state | 0 |
 | `lem-weil-pbc-projective-space-twisting-sheaf-charts` | 1 | state | 0 |
 | `lem-weil-pbc-unrestricted-strict-henselization-stalk` | 1 | state | 0 |
 | `prop-weil-pbc-strict-henselization-stalk-formula` | 1 | state | 0 |
 | `lem-pc-rf-single-complex-inherited-tensor-condition` | 2 | state | 0 |
 | `lem-sc-p1-proj-shifted-free-twist` | 2 | state | 0 |
-| `lem-sc-units-quotient-base-change` | 2 | state | 0 |
 
 Not open yet: 40 nodes that wait for stage 1, 176 nodes that wait for a statement dependency.
 
