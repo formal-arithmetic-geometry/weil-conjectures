@@ -223,5 +223,23 @@
   "summary": "Proof written from Stacks 0333 (lemma-characterize-N-1), implication (1)+(2) => N-1, in eight steps: the class C of finite A-subalgebras of the integral closure A'; B_f = A_f for B in C (0307 plus normality of A_f); the closed set Z_B (0332 for B, closedness of Spec B -> Spec A for integral maps); for each maximal m a B with m not in Z_B (N-1 of A_m, 0307 with B = K, generators x_j in A', localization of the normal domain (A_m)'); quasi-compactness of Spec A (with every prime in a maximal ideal) giving finitely many B_i with empty intersection of the Z_{B_i}; the compositum B in C; normality of each B_q via 0307 for B_i -> B and localization of a normal domain (the source's equality R'_{p'} = (R'_i)_{p'_i} is replaced by the weaker fact actually needed, that B_q is a localization of the normal domain (B_i)_{q_i}); B normal hence B = A'. The source's 'it is clear that m not in Z_{R'}' is written out in step 4. Statement kept; 'A_f normal' (normal ring) is converted to normal domain in step 1 via 030B. Two new nodes: 0307 (Mathlib leaf IsLocalization.integralClosure) and 0332 (unsplit). Tags verified in tags/tags: 0333 algebra-lemma-characterize-N-1, 0332 algebra-lemma-openness-normal-locus, 0307 algebra-lemma-integral-closure-localize. Tools from other units: lem-weil-pbc-finite-of-integral-generators (sk-thm-reduction, a Mathlib leaf).",
   "blueprint": "No blueprint node states 0333 or its ingredients (searched: 'normal locus open', 'normal locus', 'N-1', 'integral closure localization', 'integral closure commutes', '0332', '0307', '0333'; same_as = []). The steps realize the place of the blueprint ancestor lem-weil-pbc-normal-constant-generic recorded in from.place (step 4 of its split, through the via chain lem-weil-pbc-normal-nagata-monogenic-n1 -> ... ), namely the use of Lemma 0333 in Stacks 0334 Step 5: all eight steps together give the implication (1)+(2) => N-1 that the citer lem-weil-pbc-normal-nagata-monogenic-n1 takes from 0333."
  },
- "reviewed": "2026-10-10 L: 8 steps checked against 0333: finite intermediate rings B with B_f = A_f (0307), closed non-normal loci Z_B (0332, new node) with closed images, for each maximal m some B with m not in Z_B (written out from N-1 of A_m), quasi-compactness gives finitely many, their compositum is normal at every prime, hence B = A'"
+ "reviewed": "2026-10-10 L: 8 steps checked against 0333: finite intermediate rings B with B_f = A_f (0307), closed non-normal loci Z_B (0332, new node) with closed images, for each maximal m some B with m not in Z_B (written out from N-1 of A_m), quasi-compactness gives finitely many, their compositum is normal at every prime, hence B = A'",
+ "lean": {
+  "module": "Sheaf.RingTheory.IsN1OfLocalCharacterization",
+  "declaration": "isN1_of_local_characterization",
+  "file": "lean/Sheaf/RingTheory/IsN1OfLocalCharacterization.lean",
+  "statement": "theorem isN1_of_local_characterization (A : Type u) (K : Type v) [CommRing A] [IsDomain A] [IsNoetherianRing A] [Field K] [Algebra A K] [IsFractionRing A K] (hAway : ∃ f : A, f ≠ 0 ∧ ∀ (p : Ideal (Localization.Away f)) [p.IsPrime], IsDomain (Localization.AtPrime p) ∧ IsIntegrallyClosed (Localization.AtPrime p)) (hMaximal : ∀ (m : Ideal A) [m.IsMaximal], IsN1 (Localization.AtPrime m) (FractionRing (Localization.AtPrime m))) : IsN1 A K",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-nlc1154",
+  "group": "K1",
+  "result": "pass",
+  "note": "A Noetherian domain (IsDomain, IsNoetherianRing), K = IsFractionRing A K; ∃ f ≠ 0 with A_f = Localization.Away f normal ring in the recorded inline form; ∀ maximal m, IsN1 (A_m) (FractionRing A_m); conclusion IsN1 A K = Module.Finite A (integralClosure A K); root IsN1 from JapaneseDomain; no hollow hypotheses, no universe issue; record-only node diff"
+ }
 }
