@@ -73,5 +73,30 @@
   "group": "F1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-dqa2014 (reviewer sub-agent of L); spot-checked: Diff vs base touches only blueprint.place, stmt_deps (+def-weil-abstract-derived-category, +def-weil-sheaf-of-modules-category, both generic mathlib-status definitions: D(A) of an abelian category, Mod(O) for any sheaf of rings, so D(B) is well defined), status split, split_report. Source field unchanged from sheaf-dag (0BV0/0AX2, set at G1 merge 3f07d4810), so the G1 source correction is kept (B3); checked against duality.tex section-duality-finite, where Mod(f_*O_Y) and D(f_*O_Y), D^+_QCoh(f_*O_Y) are used. Consistent with sibling def-pc-derived-rhom-algebra-module: D(B) = derived category of Mod(B), with forgetful image in D(O_Y). Definition node, no proof steps; no repairs. Second reading's claims of having changed created.item/source are not in the diff and it mislabels 0BV0 as lemma-sheafhom-affine-ext (that is 0BV1); no mathematical fault."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.DerivedCategoryQCoherentAlgebra",
+  "declaration": "AlgebraicGeometry.sheafAlgebraDerivedCategory",
+  "declarations": [
+   "AlgebraicGeometry.sheafAlgebraDerivedCategory",
+   "AlgebraicGeometry.sheafAlgebraModuleIsQuasiCoherent",
+   "AlgebraicGeometry.sheafAlgebraDerivedQCohProperty",
+   "AlgebraicGeometry.sheafAlgebraDerivedQCohCategory"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/DerivedCategoryQCoherentAlgebra.lean",
+  "statement": "abbrev sheafAlgebraDerivedCategory (Y : Scheme.{u}) (B : Y.CommAlgebraSheaf) (_hB : B.toModule.IsQuasicoherent) [HasDerivedCategory.{w} (SheafOfModules.{u} ((sheafCompose (Opens.grothendieckTopology Y) (forget₂ CommRingCat RingCat)).obj B.right))] : Type _",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-dqa1300"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-dqa1300",
+  "group": "F1",
+  "result": "fix",
+  "note": "Y scheme; B quasi-coherent O_Y-algebra as recorded (B : Y.CommAlgebraSheaf, B.toModule.IsQuasicoherent; delivered QuasiCoherentSheafAlgebra node dropped as duplicate of landed H1 def-weil-pbc-quasi-coherent-algebra); D(B)=DerivedCategory of SheafOfModules over the ring sheaf of B (K1 carrier); qc B-module = restrictScalars to O_Y qc; D+_QCoh(B) full subcategory, H^m=0 for m<n and all H^m qc; HasDerivedCategory.{w} binder non-vacuous (standard); no let; dropped duplicate new node(s) def-pc-qcoherent-sheaf-algebra (--drop-nodes; not merged, the item points at the landed declaration)"
  }
 }
