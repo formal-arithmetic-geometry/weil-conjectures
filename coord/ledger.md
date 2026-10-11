@@ -4304,3 +4304,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 10:45 L: merged deliver/F1/lem-weil-pbc-fs-adic-complete-source-target (stage 2; reviewer PASS; first push; Sheaf.RingTheory.FormallySmoothAdicCompleteSourceTarget Algebra.exists_formallySmoothAdic_completeSourceTarget)
 - 10:45 L: merged deliver/G1/lem-weil-pbc-fs-adic-field-differentials-injective (stage 2; reviewer PASS; first push; Sheaf.RingTheory.AdicFieldDifferentialsInjective KaehlerDifferential.residueField_mapBaseChange_injective_of_formallySmoothAdic)
 - 10:45 L: merged deliver/H1/lem-weil-pbc-g-ring-check-pairs-of-primes (stage 2; reviewer FIX; first push; Sheaf.RingTheory.GRingPairsOfPrimes isGRing_iff_pairsOfPrimes)
+- 10:46 L: merged deliver/E1/lem-weil-pbc-gabber-finite-etale-section (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.FiniteEtaleClosedSubschemeSection AlgebraicGeometry.Etale.exists_finite_clopen_opens_and_section_of_closedImmersion)

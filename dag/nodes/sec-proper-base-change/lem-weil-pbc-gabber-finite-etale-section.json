@@ -193,5 +193,23 @@
   "by": "L",
   "result": "accepted",
   "note": "5 steps following Stacks 09ZA: affine description; lift of the etale R/I-algebra to an etale R-algebra (04D1, recorded by L as the tool use lem-exc-etale-algebra-lift from unit sk-prop-sf-open-closed-triangle; Mathlib has no lifting of etale algebras along surjections); 09Z9 (1) for U -> X (sbc-lem-etale-over-normal, Lean closed), with separatedness via the new 01SH leaf (Affine.lean:181 verified) and finiteness via quasi-compactness; restriction to Z via the new 01JY leaf (OpenImmersion.lean:842 verified); the section via the existing clopen-open-cover-section node, whose stale unreachable flag L cleared. Statement spelled out (normal, disjoint union as open immersions), stmt_deps gained def-pc-scheme and def-pc-integral-scheme."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteEtaleClosedSubschemeSection",
+  "declaration": "AlgebraicGeometry.Etale.exists_finite_clopen_opens_and_section_of_closedImmersion",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteEtaleClosedSubschemeSection.lean",
+  "statement": "theorem Etale.exists_finite_clopen_opens_and_section_of_closedImmersion {X Z V : Scheme.{u}} [IsAffine X] [IsIntegral X] (hX : ∀ x : X, IsDomain (X.presheaf.stalk x) ∧ IsIntegrallyClosed (X.presheaf.stalk x)) [IsSepClosed X.functionField] (i : Z ⟶ X) [IsClosedImmersion i] (p : V ⟶ Z) [Etale p] [IsAffine V] : (∃ (n : ℕ) (W : Fin n → V.Opens), (∀ j, IsClosed (W j : Set V)) ∧ (∀ j k, j ≠ k → Disjoint (W j) (W k)) ∧ (⨆ j, W j) = ⊤ ∧ ∀ j, IsOpenImmersion ((W j).ι ≫ p)) ∧ (Surjective p → IsFinite p → ∃ s : Z ⟶ V, s ≫ p = 𝟙 Z)",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-gfs1045",
+  "group": "E1",
+  "result": "pass",
+  "note": "X affine/integral (AlgebraicGeometry.IsIntegral by #check)/stalks normal domains inline per NORMAL RING (as NormalScheme, 09Z9 source); IsSepClosed X.functionField; Z closed immersion; p Etale, V affine; Fin n clopen pairwise disjoint opens covering V, each (W j).ι ≫ p open immersion; Surjective → IsFinite → section s ≫ p = 𝟙 Z; n=0/empty V,Z edge cases ok"
  }
 }
