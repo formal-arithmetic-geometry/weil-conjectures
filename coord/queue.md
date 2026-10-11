@@ -1,11 +1,11 @@
 # Work queue
 
-423 items; claim with `tools/claim.py next <group> [--stage N]`.
+421 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (423)
+## Stage 2: nodes to state (421)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -51,6 +51,7 @@
 | `lem-sc-koszul-regular-closed-immersion-perfect` | 1 | state |
 | `lem-sc-koszul-regular-sequence-dual-complex` | 1 | state |
 | `lem-sc-module-extension-by-zero-stalk-maps` | 1 | state |
+| `lem-sc-p1-ext-pushout-postcompose` | 1 | state |
 | `lem-sc-perfect-cut-complex-degree-zero` | 1 | state |
 | `lem-sc-perfect-degree-zero-fibre-criterion` | 1 | state |
 | `lem-sc-perfect-derived-tensor-perfect` | 1 | state |
@@ -72,15 +73,12 @@
 | `lem-weil-pbc-popescu-enlarge-solution-modulo` | 1 | state |
 | `lem-weil-pbc-popescu-solution-modulo-choose` | 1 | state |
 | `lem-weil-pbc-power-series-parameter-quotient` | 1 | state |
-| `lem-weil-pbc-presheaf-module-stalk-filtered-colimit` | 1 | state |
-| `lem-weil-pbc-principal-localization-naive-cotangent` | 1 | state |
 | `lem-weil-pbc-projective-dimension-well-defined` | 1 | state |
 | `lem-weil-pbc-projective-space-functor-of-points` | 1 | state |
 | `lem-weil-pbc-proper-limit-noetherian` | 1 | state |
 | `lem-weil-pbc-purely-inseparable-base-change-local-ring` | 1 | state |
 | `lem-weil-pbc-purely-inseparable-integral-prime-unique` | 1 | state |
 | `lem-weil-pbc-purely-inseparable-pth-root-tower` | 1 | state |
-| `lem-weil-pbc-pushout-short-exact-sequence` | 1 | state |
 | `lem-weil-pbc-qcqs-higher-direct-image` | 1 | state |
 | `lem-weil-pbc-quasi-coherence-scalar-restriction` | 1 | state |
 | `lem-weil-pbc-quasi-coherent-affine-section-base-change` | 1 | state |
@@ -433,7 +431,7 @@
 | `lem-pc-essentially-constant-pro-hom-colimit` | 4 | state |
 | `lem-pur-essential-constant-pro-criterion-05py` | 4 | state |
 
-Not open yet: 40 nodes that wait for stage 1, 522 nodes that wait for a statement dependency.
+Not open yet: 40 nodes that wait for stage 1, 521 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
