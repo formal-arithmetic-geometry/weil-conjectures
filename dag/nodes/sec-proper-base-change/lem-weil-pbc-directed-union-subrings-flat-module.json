@@ -167,5 +167,23 @@
   "worker": "stage1",
   "summary": "Split Stacks 05UU(2) into the finitely generated ideal criterion, descent of the ideal to a cofinal upper set, elementwise verification that conditions (i) and (ii) give the abelian-group colimit, the varying-ring tensor comparison, and injectivity after filtered colimits. Reused existing DAG nodes for every non-elementary ingredient; no new nodes or statement changes.",
   "blueprint": "The five steps make explicit the flatness input in the approximation chain serving step 7 (essential surjectivity) of thm-weil-pbc-finite-etale-lifting; the imported blueprint gives that route but does not state the 05UU(2) sublemma."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.DirectedUnionSubringsFlatModule",
+  "declaration": "RingTheory.directedUnionSubrings_flat_module",
+  "file": "lean/Sheaf/RingTheory/DirectedUnionSubringsFlatModule.lean",
+  "statement": "theorem directedUnionSubrings_flat_module {R : Type u} [CommRing R] {Λ : Type v} [PartialOrder Λ] [Nonempty Λ] [IsDirected Λ (· ≤ ·)] (Rsub : Λ → Subring R) (hR : ∀ {i j : Λ}, i ≤ j → Rsub i ≤ Rsub j) (hUnion : (Set.univ : Set R) = ⋃ i, (Rsub i : Set R)) {M : Type w} [AddCommMonoid M] [Module R M] (Mstage : ∀ i : Λ, Type x) (instAdd : ∀ i : Λ, AddCommMonoid (Mstage i)) (instMod : ∀ i : Λ, Module (Rsub i) (Mstage i)) (ι : ∀ i : Λ, letI : Module (Rsub i) M := Module.compHom M (Rsub i).subtype Mstage i →ₗ[Rsub i] M) (t : ∀ {i j : Λ} (h : i ≤ j), letI : Module (Rsub i) (Mstage j) := Module.compHom (Mstage j) (Subring.inclusion (hR h)) Mstage i →ₗ[Rsub i] Mstage j) (t_id : ∀ (i : Λ) (x : Mstage i), t (le_refl i) x = x) (t_comp : ∀ {i j k : Λ} (h₁ : i ≤ j) (h₂ : j ≤ k) (x : Mstage i), t h₂ (t h₁ x) = t (h₁.trans h₂) x) (ι_naturality : ∀ {i j : Λ} (h : i ≤ j) (x : Mstage i), ι j (t h x) = ι i x) (h_repr : ∀ m : M, ∃ (i : Λ) (x : Mstage i), ι i x = m) (h_zero : ∀ {i : Λ} (x : Mstage i), ι i x = 0 → ∃ j : Λ, ∃ h : i ≤ j, t h x = 0) (hflat : ∀ i : Λ, Module.Flat (Rsub i) (Mstage i)) : Module.Flat R M",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-dus0955",
+  "group": "J1",
+  "result": "pass",
+  "note": "R CommRing; Λ PartialOrder+Nonempty+IsDirected; Rsub: Λ→Subring R monotone; hUnion Set.univ = ⋃ coe; M R-module; Mstage R_λ-modules; ι R_λ-linear via compHom subtype; t R_λ-linear via compHom inclusion; t_id, t_comp, ι naturality pointwise; (i) h_repr; (ii) h_zero eventual vanishing; hflat Module.Flat stages; concl Module.Flat R M; not Mathlib (varying rings), distinct from landed part (1) FlatColimitRings"
  }
 }
