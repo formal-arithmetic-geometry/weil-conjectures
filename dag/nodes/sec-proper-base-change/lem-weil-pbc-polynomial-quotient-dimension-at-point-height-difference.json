@@ -228,5 +228,24 @@
   "item": "lem-weil-pbc-polynomial-quotient-dimension-at-point-height-difference",
   "worker": "stage1",
   "summary": "Not a Mathlib leaf (Mathlib has no Krull dimension of a space at a point; searches by LeanSearch, LeanFinder, Loogle and grep recorded). Split along Algebra 00P2, whose proof is 'immediate from 00P1': step 1 the setting (P, S of finite type, P a domain with unique minimal prime 0); step 2 applies the 00P1 node at q in S and at q' in P and identifies dim S_q, dim P_q' with the heights (so both are finite integers); step 3 identifies kappa(q') with kappa(q) as k-extensions via the surjection P_q' -> S_q (written out); step 4 subtracts (00P2); step 5 dim_q' Spec P = n via 00OT (only minimal prime 0), 00OS and 00OP; step 6 the formula and ht(q') <= n (trdeg >= 0); step 7 ht(q) <= ht(q') by lifting chains along the surjection. All clauses used by the five citers (integrality, 0 <= ht q <= ht q' <= n, the formula) are proved. No new node; all cited nodes are in unit sk-thm-p1."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.PolynomialQuotientDimensionAtPointHeightDifference",
+  "declaration": "AlgebraicGeometry.topologicalKrullDimAt_polynomial_quotient_eq_height_difference",
+  "file": "lean/Sheaf/RingTheory/PolynomialQuotientDimensionAtPointHeightDifference.lean",
+  "statement": "theorem topologicalKrullDimAt_polynomial_quotient_eq_height_difference {k : Type u} [Field k] (n : ℕ) (I : Ideal (MvPolynomial (Fin n) k)) (q : Ideal (MvPolynomial (Fin n) k ⧸ I)) [q.IsPrime] : ∃ h h' : ℕ, q.height = (h : ℕ∞) ∧ (q.comap (Ideal.Quotient.mk I)).height = (h' : ℕ∞) ∧ h ≤ h' ∧ h' ≤ n ∧ topologicalKrullDimAt (⟨q, inferInstance⟩ : Spec (CommRingCat.of (MvPolynomial (Fin n) k ⧸ I))) = ((n - h' + h : ℕ) : WithBot ℕ∞)",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-pqh1336"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-pqh1336",
+  "group": "C1",
+  "result": "fix",
+  "note": "k field {k:Type u}[Field k]; n:ℕ incl 0; P=MvPolynomial (Fin n) k; I arbitrary ideal; S=P⧸I, π=Ideal.Quotient.mk I; q prime of S; q'=q.comap π; heights Ideal.height (=primeHeight for primes) as ℕ witnesses h,h'; h≤h'≤n; topologicalKrullDimAt (root ns, #check; = def-kun-topological-dimension-at-point decl) at ⟨q,_⟩:Spec(of S) = ((n-h'+h:ℕ):WithBot ℕ∞) sibling coercion; ℕ-subtraction faithful since h'≤n; fix: dropped tautological 0≤h on ℕ"
  }
 }
