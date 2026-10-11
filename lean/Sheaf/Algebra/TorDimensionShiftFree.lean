@@ -1,0 +1,58 @@
+/-
+Copyright (c) 2026 The SHEAF contributors. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: SHEAF group S1
+-/
+import Mathlib.CategoryTheory.Monoidal.Tor
+import Mathlib.Algebra.Category.ModuleCat.Monoidal.Basic
+import Mathlib.Algebra.Category.ModuleCat.Projective
+import Mathlib.Algebra.Category.ModuleCat.Abelian
+import Mathlib.Algebra.Homology.ShortComplex.ShortExact
+
+/-!
+# Dimension shifting for Tor along a free presentation
+
+Source: Stacks Project, Algebra, proof of Tag 00S2, and Tags 00LY and 00LZ
+(blueprint: lem-weil-pbc-tor-dimension-shift-free).
+-/
+
+universe u
+
+namespace CategoryTheory
+
+/-- Dimension shifting for Tor along `0 → K → F → M → 0`, with `F` free.
+The objects `S.X₁`, `S.X₂`, `S.X₃` represent `K`, `F`, `M`, respectively,
+and `S.f`, `S.g` represent the maps `j`, `p`. Tor is derived in its first variable.
+
+Source: Stacks Project, Algebra, proof of Tag 00S2, and Tags 00LY and 00LZ
+(blueprint: lem-weil-pbc-tor-dimension-shift-free).
+
+1. Apply `lem-weil-pbc-free-resolution-ses-split` to `0 → K → K → 0 → 0`
+   with identity first map, obtaining an augmented free resolution `G` of `K`.
+2. Splice this resolution with the given presentation: take `P₀ = F`,
+   `Pₙ₊₁ = Gₙ`, first differential `jη`, and augmentation `p : F → M`.
+   All terms are free (`def-weil-pbc-free-module`). Surjectivity of `η`
+   gives `image (jη) = image j = kernel p`; injectivity of `j` gives
+   `kernel (jη) = kernel η = image e₁`. All higher exactness conditions
+   come from `G` (`def-weil-pbc-exact-sequence`). Thus `P` resolves `M`.
+3. Compute Tor by these resolutions (`def-weil-pbc-tor-modules`, Tags 00LY,
+   00LZ). For `i ≥ 1`, the terms and differentials around degree `i+1`
+   of `P ⊗ N` agree with those around degree `i` of `G ⊗ N`:
+   `Gᵢ₊₁ ⊗ N → Gᵢ ⊗ N → Gᵢ₋₁ ⊗ N`. Their cycles and boundaries,
+   hence their homology modules, agree. Compose with the canonical resolution
+   identifications to obtain the isomorphism. At `i = 1`, this identifies
+   `Tor₂(M,N)` and `Tor₁(K,N)`, so one vanishes if and only if the other does.
+   The comparison does not hold at `i = 0`, where the first differential is `jη`.
+-/
+theorem tor_dimension_shift_free
+    {R : Type u} [CommRing R]
+    (S : ShortComplex (ModuleCat.{u} R)) (hS : S.ShortExact)
+    [Module.Free R S.X₂] (N : ModuleCat.{u} R) :
+    (∀ (i : ℕ), 1 ≤ i →
+      Nonempty ((((Tor' (ModuleCat.{u} R) (i + 1)).obj S.X₃).obj N) ≅
+        (((Tor' (ModuleCat.{u} R) i).obj S.X₁).obj N))) ∧
+    (Limits.IsZero (((Tor' (ModuleCat.{u} R) 2).obj S.X₃).obj N) ↔
+      Limits.IsZero (((Tor' (ModuleCat.{u} R) 1).obj S.X₁).obj N)) := by
+  sorry
+
+end CategoryTheory

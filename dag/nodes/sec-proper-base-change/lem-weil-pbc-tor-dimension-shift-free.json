@@ -181,5 +181,23 @@
   "worker": "stage1",
   "summary": "Not a Mathlib leaf: Tor of [def-weil-pbc-tor-modules] is Mathlib's Tor' (left derived functor of - (x) N in the first variable), and Mathlib has for it only vanishing on projectives (isZero_Tor'_succ_of_projective) and no long exact sequence or dimension shift for left derived functors (dimension shifting exists only for Ext); searches recorded. Statement checked against Stacks 00S2 (lines 35476--35477, stated without proof there) and kept. Proof written by the agent from the definition (Section 00LY, Lemma 00LZ): (1) a free resolution G of K, obtained from [lem-weil-pbc-free-resolution-ses-split] applied to 0 -> K -> K -> 0 -> 0; (2) splicing G with 0 -> K -> F -> M -> 0 gives a free resolution F' of M with F'_{n+1} = G_n, d'_1 = j eta, d'_{n+1} = e_n for n >= 1 (exactness checked degree by degree); (3) for i >= 1 the complexes F' (x) N and G (x) N agree around degrees i+1 and i, so the homologies are equal and the definition's independence of the resolution gives the isomorphism. The long exact Tor node [lem-weil-pbc-tor-long-exact-first-variable] only reaches degree 1 and is not used. No new nodes."
  },
- "reviewed": "pass (L, 2026-10-10): 3 steps by agent: a free resolution of K (from the ses-split node applied to 0 -> K -> K -> 0), spliced with F to a free resolution of M, and the tensored complexes agree in degrees >= 2, giving Tor_{i+1}(M,N) = Tor_i(K,N) for i >= 1 by independence of the resolution."
+ "reviewed": "pass (L, 2026-10-10): 3 steps by agent: a free resolution of K (from the ses-split node applied to 0 -> K -> K -> 0), spliced with F to a free resolution of M, and the tensored complexes agree in degrees >= 2, giving Tor_{i+1}(M,N) = Tor_i(K,N) for i >= 1 by independence of the resolution.",
+ "lean": {
+  "module": "Sheaf.Algebra.TorDimensionShiftFree",
+  "declaration": "CategoryTheory.tor_dimension_shift_free",
+  "file": "lean/Sheaf/Algebra/TorDimensionShiftFree.lean",
+  "statement": "theorem tor_dimension_shift_free {R : Type u} [CommRing R] (S : ShortComplex (ModuleCat.{u} R)) (hS : S.ShortExact) [Module.Free R S.X₂] (N : ModuleCat.{u} R) : (∀ (i : ℕ), 1 ≤ i → Nonempty ((((Tor' (ModuleCat.{u} R) (i + 1)).obj S.X₃).obj N) ≅ (((Tor' (ModuleCat.{u} R) i).obj S.X₁).obj N))) ∧ (Limits.IsZero (((Tor' (ModuleCat.{u} R) 2).obj S.X₃).obj N) ↔ Limits.IsZero (((Tor' (ModuleCat.{u} R) 1).obj S.X₁).obj N))",
+  "branch": "sheaf-dag",
+  "by": "S1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "S1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ }
 }
