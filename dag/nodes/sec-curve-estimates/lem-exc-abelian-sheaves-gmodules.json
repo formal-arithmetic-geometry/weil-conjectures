@@ -11,7 +11,7 @@
  },
  "kind": "statement",
  "title": "Abelian etale sheaves on a field and discrete G-modules",
- "statement": "Let K be a field [def-pc-field-extension], K^sep a separable closure, and G=Gal(K^sep/K). Taking the geometric stalk [def-weil-pbc-geometric-stalks] at Spec K^sep induces an equivalence between abelian sheaves [def-weil-pbc-etale-sheaves] on the small etale site of Spec K and discrete G-modules. The equivalence is compatible with the underlying sheaf-of-sets/G-set equivalence and with the abelian group operations.",
+ "statement": "Let $K$ be a field [def-pc-field-extension], $K^{\\rm sep}$ a separable closure [def-pd-separable-closure], and $\\Omega$ an algebraically closed field containing $K^{\\rm sep}$ over $K$. Put $G=\\operatorname{Gal}(K^{\\rm sep}/K)$ with its Krull topology and let $\\bar s:\\operatorname{Spec}\\Omega\\to\\operatorname{Spec}K$ be the induced geometric point [def-weil-geometric-point]. Taking the geometric stalk [def-weil-pbc-geometric-stalks] at $\\bar s$, with the action induced by changing pointed etale lifts, induces an equivalence between abelian sheaves [def-weil-pbc-etale-sheaves] on the small etale site of $\\operatorname{Spec}K$ and discrete $G$-modules [def-exc-discrete-modules-category] (abelian groups with a $G$-action by group automorphisms and open stabilizers). The equivalence is compatible with the underlying sheaf-of-sets/discrete $G$-set equivalence and with addition, zero, and inverse. Discrete $G$-sets use the discrete continuous-action category as in [lem-exc-etale-field-gsets].",
  "source": {
   "document": "literature/stacks-project/etale-cohomology.tex",
   "place": "Tag 04JQ, Lemma lemma-equivalence-abelian-sheaves-point, deduced from Tag 03QT"
@@ -19,11 +19,15 @@
  "stmt_deps": [
   "def-pc-field-extension",
   "def-weil-pbc-geometric-stalks",
-  "def-weil-pbc-etale-sheaves"
+  "def-weil-pbc-etale-sheaves",
+  "def-pd-separable-closure",
+  "def-weil-geometric-point",
+  "def-exc-discrete-modules-category",
+  "lem-exc-etale-field-gsets"
  ],
  "proof": [
   {
-   "text": "By the sheaf-of-sets point equivalence, taking the geometric stalk at Spec K^sep identifies sheaves of sets on the small etale site of Spec K with discrete G-sets, where G = Gal(K^sep/K), and the identification is the stalk functor used in the statement.",
+   "text": "By the sheaf-of-sets point equivalence, taking the geometric stalk at Spec Ω identifies sheaves of sets on the small etale site of Spec K with discrete G-sets, where G = Gal(K^sep/K), and the identification is the stalk functor used in the statement.",
    "uses": [
     "lem-exc-etale-sheaves-gsets-point",
     "def-weil-pbc-geometric-stalks",
@@ -115,5 +119,75 @@
   "group": "M1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-asg (reviewer sub-agent of L); spot-checked: Source: Stacks Tag 04JQ (etale-cohomology.tex lemma-equivalence-abelian-sheaves-point, l.9078): S=Spec K, geometric point, G absolute Galois group, stalk functor Ab(S_et)->Mod_G an equivalence; the node's statement agrees hypothesis by hypothesis (K field, K^sep, G=Gal(K^sep/K), discrete G-modules = Mod_G). Only fields proof, proof_deps, proof_origin, status, split_report changed. Step 1 is carried by lem-exc-etale-sheaves-gsets-point (i): stalk functor is an equivalence Sh(Spec K_et) -> G-sets with open stabilizers (= discrete G-sets), with the stalk of def-weil-pbc-geometric-stalks. Step 2 is carried by lem-pod-equivalence-induces-module-objects part 1 with Lambda=Z (any equivalence between categories with finite products induces an equivalence of module objects with underlying functor Phi); identifying Z-module objects of Sh(Spec K_et) with abelian sheaves (def-weil-pbc-etale-sheaves; products of sheaves are sectionwise) and of discrete G-sets with discrete G-modules is elementary (C2); part 2 of that node (finite sets only) is not used. tool_uses lem-pod-equivalence-induces-module-objects (unit sk-lem-finite) accepted: generic categorical black box, does not replace a step of the unit's route (C7/C8). No new nodes, no Mathlib leaf. Small cases: K separably closed gives G trivial and the equivalence is evaluation at Spec K; K finite gives G=Zhat and discrete Zhat-modules (torsion orbits finite). Start Sat Oct 10 03:25:58 PM UTC 2026, end Sat Oct 10 03:26:13 PM UTC 2026."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AbelianSheavesGModules",
+  "declaration": "AlgebraicGeometry.Scheme.abelianSheaves_equiv_discreteGModules",
+  "file": "lean/Sheaf/AlgebraicGeometry/AbelianSheavesGModules.lean",
+  "statement": "theorem abelianSheaves_equiv_discreteGModules (K Ks Ω : Type u) [Field K] [Field Ks] [Field Ω] [Algebra K Ks] [IsSepClosure K Ks] [Algebra Ks Ω] [Algebra K Ω] [IsScalarTower K Ks Ω] [IsAlgClosed Ω] : let S := Spec (.of K) let J := S.smallEtaleTopology let s := Spec.map (CommRingCat.ofHom (algebraMap K Ω)) let p := pointSmallEtale s let G := Gal(Ks/K) let D := Rep.DiscreteContinuousRep.{0, u, max (u + 1) v} ℤ G let U : D ⥤ Rep.{max (u + 1) v} ℤ G := ObjectProperty.ι _ let V := ObjectProperty.ι (ContAction.IsDiscrete (V := Type (max (u + 1) v)) (G := G)) ⋙ ObjectProperty.ι (Action.IsContinuous (V := Type (max (u + 1) v)) (G := G)) ∃ (E : Sheaf J AddCommGrpCat.{max (u + 1) v} ≌ D) (Eset : Sheaf J (Type (max (u + 1) v)) ≌ DiscreteContAction (Type (max (u + 1) v)) G) (i : E.functor ⋙ U ⋙ Rep.RepToAction ℤ G ⋙ Action.forget (ModuleCat.{max (u + 1) v} ℤ) G ⋙ forget₂ (ModuleCat.{max (u + 1) v} ℤ) AddCommGrpCat ≅ p.sheafFiber) (j : Eset.functor ⋙ V ⋙ Action.forget (Type (max (u + 1) v)) G ≅ p.sheafFiber), Nonempty (E.functor ⋙ U ⋙ Rep.RepToAction ℤ G ⋙ (CategoryTheory.forget (ModuleCat.{max (u + 1) v} ℤ)).mapAction G ≅ sheafCompose J (CategoryTheory.forget AddCommGrpCat.{max (u + 1) v}) ⋙ Eset.functor ⋙ V) ∧ (∀ (F : Sheaf J AddCommGrpCat.{max (u + 1) v}) (g : G) (τ : Ω ≃ₐ[K] Ω) (hτ : (algebraMap Ks Ω).comp g.toRingHom = τ.toRingHom.comp (algebraMap Ks Ω)) (X : S.Etale) (x x' : p.fiber.obj X) (hx : x'.left = Spec.map (CommRingCat.ofHom τ.toRingHom) ≫ x.left) (z : F.obj.obj (op X)), (i.hom.app F) ((E.functor.obj F).obj.ρ g ((i.inv.app F) (p.toPresheafFiber X x F.obj z))) = p.toPresheafFiber X x' F.obj z) ∧ (∀ (F : Sheaf J (Type (max (u + 1) v))) (g : G) (τ : Ω ≃ₐ[K] Ω) (hτ : (algebraMap Ks Ω).comp g.toRingHom = τ.toRingHom.comp (algebraMap Ks Ω)) (X : S.Etale) (x x' : p.fiber.obj X) (hx : x'.left = Spec.map (CommRingCat.ofHom τ.toRingHom) ≫ x.left) (z : F.obj.obj (op X)), (j.hom.app F) ((Eset.functor.obj F).obj.obj.ρ g ((j.inv.app F) (p.toPresheafFiber X x F.obj z))) = p.toPresheafFiber X x' F.obj z)",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-asg1118"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-asg1118",
+  "group": "J1",
+  "result": "fix",
+  "note": "Corrected statement (Omega alg. closed over Ks, Stacks 04JQ/03QW) checked vs source, not easier; K Field, Ks IsSepClosure, Omega IsAlgClosed with IsScalarTower K Ks Omega, G=Gal(Ks/K) Krull; all Sheaf J AddCommGrpCat equiv Rep.DiscreteContinuousRep Z G; i: underlying group functor iso pointSmallEtale.sheafFiber (group isos give +,0,-); Nonempty square with Eset: Sheaf J Type equiv DiscreteContAction; action clauses x' = Spec tau >> x for tau extending g (left action of 03QW, tau always exists); FIX: U now the inclusion of the landed Rep.DiscreteContinuousRep (was an inline restatement of its open-stabilizer predicate, H4)",
+  "statement_corrected": true
+ },
+ "statement_change": {
+  "date": "2026-10-11",
+  "by": "J1 stage 2",
+  "old_statement": "Let K be a field [def-pc-field-extension], K^sep a separable closure, and G=Gal(K^sep/K). Taking the geometric stalk [def-weil-pbc-geometric-stalks] at Spec K^sep induces an equivalence between abelian sheaves [def-weil-pbc-etale-sheaves] on the small etale site of Spec K and discrete G-modules. The equivalence is compatible with the underlying sheaf-of-sets/G-set equivalence and with the abelian group operations.",
+  "what": "Spec K^sep is not a geometric point under the project definition for an imperfect field: for K = F_p(t), the separable closure has no p-th root of t and is not algebraically closed. Use an algebraically closed extension Ω containing K^sep, as in Stacks 04JQ and 03QW; specify the canonical action by extensions of elements of Gal(K^sep/K).",
+  "source": {
+   "document": "literature/stacks-project/etale-cohomology.tex",
+   "place": "Tag 04JQ, Lemma lemma-equivalence-abelian-sheaves-point, deduced from Tag 03QT"
+  },
+  "citers": [
+   {
+    "id": "lem-exc-field-discrete-modules",
+    "holds": true,
+    "note": "The abelian enhancement, scalar-action transport, underlying G-set comparison, and exact-equivalence argument still hold; replace the informal Spec K^sep geometric-point notation by Spec Ω, whose etale stalk has the same separable fibre."
+   }
+  ],
+  "old_stmt_deps": [
+   "def-pc-field-extension",
+   "def-weil-pbc-geometric-stalks",
+   "def-weil-pbc-etale-sheaves"
+  ],
+  "old_proof": [
+   {
+    "text": "By the sheaf-of-sets point equivalence, taking the geometric stalk at Spec K^sep identifies sheaves of sets on the small etale site of Spec K with discrete G-sets, where G = Gal(K^sep/K), and the identification is the stalk functor used in the statement.",
+    "uses": [
+     "lem-exc-etale-sheaves-gsets-point",
+     "def-weil-pbc-geometric-stalks",
+     "def-weil-pbc-etale-sheaves"
+    ],
+    "elementary": false,
+    "source": {
+     "document": "literature/stacks-project/etale-cohomology.tex",
+     "place": "Tag 03QT, Theorem theorem-equivalence-sheaves-point"
+    }
+   },
+   {
+    "text": "An abelian sheaf is a sheaf of sets equipped with a commutative group law, and a discrete G-module is a discrete G-set equipped with a commutative group law whose operations are G-equivariant. The product-preserving equivalence therefore transports the addition, zero, and inverse operations and their morphisms, giving an equivalence of the corresponding abelian categories, compatible with the underlying sheaf-of-sets/G-set equivalence and with all abelian group operations.",
+    "uses": [
+     "lem-pod-equivalence-induces-module-objects",
+     "lem-exc-etale-sheaves-gsets-point",
+     "def-weil-pbc-etale-sheaves"
+    ],
+    "elementary": false,
+    "source": {
+     "document": "literature/stacks-project/etale-cohomology.tex",
+     "place": "Tag 04JQ, Lemma lemma-equivalence-abelian-sheaves-point and its proof"
+    }
+   }
+  ]
  }
 }
