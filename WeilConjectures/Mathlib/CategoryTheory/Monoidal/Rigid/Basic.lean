@@ -29,6 +29,10 @@ two-sided tensor inverse (`CategoryTheory.IsInvertible.isDualizable`).
   internal hom `ihom X` is `Y ⊗ -`.
 - `CategoryTheory.MonoidalClosed.ihomUnitTensorToIhom`: the canonical comparison map
   `(ihom X).obj (𝟙_ C) ⊗ Z ⟶ (ihom X).obj Z`.
+- `CategoryTheory.tensorRightEquivalenceOfTensorIso`: tensoring on the right with an object
+  with a two-sided tensor inverse is an equivalence.
+- `CategoryTheory.MonoidalClosed.ihomTensorToIhom`: the canonical comparison map
+  `(ihom X).obj Z ⊗ N ⟶ (ihom X).obj (Z ⊗ N)`.
 
 ## Main statements
 
@@ -41,6 +45,8 @@ two-sided tensor inverse (`CategoryTheory.IsInvertible.isDualizable`).
 - `CategoryTheory.MonoidalClosed.exactPairingOfIsIso`: conversely, if the comparison map
   `(ihom X).obj (𝟙_ C) ⊗ X ⟶ (ihom X).obj X` is an isomorphism, `(ihom X).obj (𝟙_ C)` is a
   left dual of `X`.
+- `CategoryTheory.MonoidalClosed.isIso_ihomTensorToIhom`: the comparison map
+  `(ihom X).obj Z ⊗ N ⟶ (ihom X).obj (Z ⊗ N)` is an isomorphism when `N` is invertible.
 
 -/
 
@@ -138,6 +144,35 @@ theorem isDualizable_of_tensorIso {X Y : C} (e : X ⊗ Y ≅ 𝟙_ C) (e' : Y �
 theorem IsInvertible.isDualizable {X : C} (hX : IsInvertible X) : IsDualizable X := by
   obtain ⟨Y, ⟨e⟩, ⟨e'⟩⟩ := hX
   exact isDualizable_of_tensorIso e e'
+
+section
+
+universe v u
+
+variable {D : Type u} [Category.{v} D] [MonoidalCategory D]
+
+/-- Tensoring on the right with an object `N` with a two-sided tensor inverse `N'` is an
+equivalence of categories, with quasi-inverse tensoring on the right with `N'`. -/
+@[simps! functor_obj inverse_obj]
+noncomputable def tensorRightEquivalenceOfTensorIso {N N' : D} (e : N ⊗ N' ≅ 𝟙_ D)
+    (e' : N' ⊗ N ≅ 𝟙_ D) : D ≌ D :=
+  Equivalence.mk (tensorRight N) (tensorRight N')
+    (NatIso.ofComponents (fun Z ↦ (ρ_ Z).symm ≪≫ whiskerLeftIso Z e.symm ≪≫ (α_ Z N N').symm)
+      (fun f ↦ by
+        simp only [Iso.trans_hom, Iso.symm_hom, whiskerLeftIso_hom, Functor.id_map,
+          Functor.comp_map, Category.assoc]
+        erw [rightUnitor_inv_naturality_assoc, ← whisker_exchange_assoc,
+          associator_inv_naturality_left]
+        rfl))
+    (NatIso.ofComponents (fun Z ↦ α_ Z N' N ≪≫ whiskerLeftIso Z e' ≪≫ ρ_ Z)
+      (fun f ↦ by
+        simp only [Iso.trans_hom, whiskerLeftIso_hom, Functor.id_map,
+          Functor.comp_map, Category.assoc]
+        change (f ▷ N') ▷ N ≫ _ = _
+        erw [associator_naturality_left_assoc, ← whisker_exchange_assoc,
+          rightUnitor_naturality]))
+
+end
 
 /-- The counit of `tensorLeftAdjunction Y X : tensorLeft X ⊣ tensorLeft Y` at `Z` is the composite
 ```
@@ -238,6 +273,62 @@ lemma whiskerLeft_ihomUnitTensorToIhom_ev (X Z : C) :
     X ◁ ihomUnitTensorToIhom X Z ≫ (ihom.ev X).app Z =
       (α_ _ _ _).inv ≫ (ihom.ev X).app (𝟙_ C) ▷ Z ≫ (λ_ Z).hom := by
   rw [← uncurry_eq, ihomUnitTensorToIhom, uncurry_curry]
+
+/-- The canonical comparison map `(ihom X).obj Z ⊗ N ⟶ (ihom X).obj (Z ⊗ N)`: the transpose of
+`X ⊗ ((ihom X).obj Z ⊗ N) ≅ (X ⊗ (ihom X).obj Z) ⊗ N ⟶ Z ⊗ N`, built from the evaluation
+`X ⊗ (ihom X).obj Z ⟶ Z`. -/
+noncomputable def ihomTensorToIhom (X Z N : C) : (ihom X).obj Z ⊗ N ⟶ (ihom X).obj (Z ⊗ N) :=
+  curry ((α_ _ _ _).inv ≫ (ihom.ev X).app Z ▷ N)
+
+/-- The transpose of `ihomTensorToIhom X Z N` is evaluation of the first factor. -/
+lemma whiskerLeft_ihomTensorToIhom_ev (X Z N : C) :
+    X ◁ ihomTensorToIhom X Z N ≫ (ihom.ev X).app (Z ⊗ N) =
+      (α_ _ _ _).inv ≫ (ihom.ev X).app Z ▷ N := by
+  rw [← uncurry_eq, ihomTensorToIhom, uncurry_curry]
+
+/-- Precomposing `ihomTensorToIhom X Z N` with `f ▷ N` transposes to `uncurry f ▷ N`. -/
+lemma uncurry_whiskerRight_comp_ihomTensorToIhom {X Z N T : C} (f : T ⟶ (ihom X).obj Z) :
+    uncurry (f ▷ N ≫ ihomTensorToIhom X Z N) = (α_ _ _ _).inv ≫ uncurry f ▷ N := by
+  rw [uncurry_eq, uncurry_eq, MonoidalCategory.whiskerLeft_comp_assoc,
+    whiskerLeft_ihomTensorToIhom_ev, associator_inv_naturality_middle_assoc, comp_whiskerRight]
+
+/-- Blueprint `sk-lem-sf-twist-interchange`: Internal Hom with an invertible twist (the
+categorical core).
+
+In a monoidal closed category, for every invertible object `N` the canonical map
+`(ihom X).obj Z ⊗ N ⟶ (ihom X).obj (Z ⊗ N)` is an isomorphism, for all `X` and `Z`. Since
+`- ⊗ N` is an autoequivalence, both sides corepresent the same functor
+`T ↦ (X ⊗ T ⊗ N⁻¹ ⟶ Z)`, and the canonical map induces this identification (Yoneda). No
+hypothesis on `X` is needed. -/
+theorem isIso_ihomTensorToIhom (X Z : C) {N : C} (hN : IsInvertible N) :
+    IsIso (ihomTensorToIhom X Z N) := by
+  obtain ⟨N', ⟨e⟩, ⟨e'⟩⟩ := hN
+  let E := tensorRightEquivalenceOfTensorIso e e'
+  have inj {T : C} (a a' : T ⟶ (ihom X).obj Z)
+      (h : a ▷ N ≫ ihomTensorToIhom X Z N = a' ▷ N ≫ ihomTensorToIhom X Z N) : a = a' := by
+    apply uncurry_injective
+    apply whiskerRight_injective_of_tensorIso e
+    rw [← cancel_epi (α_ _ _ _).inv, ← uncurry_whiskerRight_comp_ihomTensorToIhom,
+      ← uncurry_whiskerRight_comp_ihomTensorToIhom, h]
+  have surj {T : C} (g : T ⊗ N ⟶ (ihom X).obj (Z ⊗ N)) :
+      ∃ a : T ⟶ (ihom X).obj Z, a ▷ N ≫ ihomTensorToIhom X Z N = g := by
+    let b : X ⊗ T ⟶ Z := E.functor.preimage ((α_ _ _ _).hom ≫ uncurry g)
+    have hb : b ▷ N = (α_ _ _ _).hom ≫ uncurry g := E.functor.map_preimage _
+    refine ⟨curry b, uncurry_injective ?_⟩
+    rw [uncurry_whiskerRight_comp_ihomTensorToIhom, uncurry_curry, hb, Iso.inv_hom_id_assoc]
+  refine isIso_of_yoneda_map_bijective _ (fun T ↦ ⟨fun x x' h ↦ ?_, fun g ↦ ?_⟩)
+  · let ι := E.counitIso.app T
+    let a : E.inverse.obj T ⟶ (ihom X).obj Z := E.functor.preimage (ι.hom ≫ x)
+    let a' : E.inverse.obj T ⟶ (ihom X).obj Z := E.functor.preimage (ι.hom ≫ x')
+    have ha : a ▷ N = ι.hom ≫ x := E.functor.map_preimage _
+    have ha' : a' ▷ N = ι.hom ≫ x' := E.functor.map_preimage _
+    have h : x ≫ ihomTensorToIhom X Z N = x' ≫ ihomTensorToIhom X Z N := h
+    rw [← cancel_epi ι.hom, ← ha, ← ha', inj a a' (by rw [ha, ha', Category.assoc,
+      Category.assoc, h])]
+  · obtain ⟨a, ha⟩ := surj ((E.counitIso.app T).hom ≫ g)
+    refine ⟨(E.counitIso.app T).inv ≫ a ▷ N, ?_⟩
+    dsimp only
+    rw [Category.assoc, ha, Iso.inv_hom_id_assoc]
 
 variable (X : C) [IsIso (ihomUnitTensorToIhom X X)]
 
