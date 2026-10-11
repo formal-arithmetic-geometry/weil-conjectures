@@ -13,7 +13,8 @@
   "place": "node lem-sc-p1-twist-exists, order 636"
  },
  "stmt_deps": [
-  "def-sc-p1-standard"
+  "def-sc-p1-standard",
+  "def-sc-invertible-module"
  ],
  "proof": [
   {
@@ -150,5 +151,23 @@
   "group": "K1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-pte3052 (reviewer sub-agent of L); spot-checked: Step 1 transition g_0->t^{-d}g_1 orientation checked against def-sc-p1-standard (glued phi_01∘phi_0=phi_1 yields g_0=t^{-d}g_1); Step 2 two-chart cocycle elementary (C1 ok); Steps 3-4 cite lem-weil-pbc-glue-sheaves-of-modules clauses (2),(1) with matching hypotheses (C4 ok), tool use accepted; invertibility via def-sc-invertible-module; no Proj-twist identification claimed (that is lem-sc-p1-proj-shifted-free-twist, E ok); citers (graded-resolution, monomial, proj-shifted-free-twist, duality) use only existence/uniqueness. No repairs."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProjectiveLineTwistExists",
+  "declaration": "AlgebraicGeometry.ProjectiveLine.exists_twistData_unique_iso",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjectiveLineTwistExists.lean",
+  "statement": "theorem exists_twistData_unique_iso (k : Type u) [Field k] (d : ℤ) : ∃ (L : (ProjectiveLine (Spec (.of k))).Modules) (T : TwistData (Spec (.of k)) d L), Scheme.Modules.IsInvertible L ∧ ∀ (L' : (ProjectiveLine (Spec (.of k))).Modules) (T' : TwistData (Spec (.of k)) d L'), ∃! e : L ≅ L', e.hom.app (ProjectiveSpace.standardOpen _ (Spec (.of k)) ⟨0⟩) T.g₀ = T'.g₀ ∧ e.hom.app (ProjectiveSpace.standardOpen _ (Spec (.of k)) ⟨1⟩) T.g₁ = T'.g₁",
+  "branch": "sheaf-dag",
+  "by": "R1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-pte",
+  "group": "R1",
+  "result": "pass",
+  "note": "field k Type u, d : ℤ, P1 = ProjectiveLine (Spec k) with recorded TwistData (g0,g1 trivializing on all subopens of U0/U1, g0 = t^-d g1 via transitionUnit), invertible = recorded Scheme.Modules.IsInvertible (stmt_dep added: node text says invertible O-module), uniqueness ∀ L' T', ∃! iso preserving both generators; no inline instances, no let, no hand-built maps; Proj identification is lem-sc-p1-proj-shifted-free-twist, not this node"
  }
 }
