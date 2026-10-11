@@ -1,0 +1,109 @@
+{
+ "id": "def-pc-ring-pseudo-coherent-complex",
+ "kind": "definition",
+ "title": "Pseudo-coherent derived objects over a ring",
+ "status": "split",
+ "statement": "Let $A$ be a commutative ring and let $C$ be an object of the derived category $D(A)$ of $A$-modules [def-weil-abstract-derived-category]. Call $C$ pseudo-coherent if there exists a bounded-above complex $E^\\bullet$ of finite free $A$-modules whose image in $D(A)$ is isomorphic to $C$, that is, $C$ is quasi-isomorphic to a bounded-above complex of finite free $A$-modules.",
+ "stmt_deps": [
+  "def-weil-abstract-derived-category"
+ ],
+ "source": {
+  "document": "Stacks Project, More on Algebra",
+  "place": "Definition 15.66.1 (Tag 064P), clause (2), Section 064N; https://stacks.math.columbia.edu/tag/064P"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Pseudo.?Coherent|pseudo.?coherent",
+   "results": "No matches.",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "pseudo-coherent complex finite free bounded above localization gluing",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"pseudo\", \"coherent\"",
+   "results": "No matches.",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "m-pseudo-coherent object of derived category bounded finite free approximation",
+   "results": "8 hits: DerivedCategory.exists_iso_Q_obj_of_isGE, DerivedCategory.exists_iso_Q_obj_of_isLE, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE, DerivedCategory.isGE_Q_obj_iff, DerivedCategory.IsGE, DerivedCategory.isLE_Q_obj_iff; only general derived-category/cohomological-support results, no pseudo-coherence notion.",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-pc-ring-pseudo-coherent-localization-glue",
+  "date": "2026-10-11",
+  "group": "C1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "set-of-representatives proof, affine case: the ring pseudo-coherence notions in the local-to-global assertion for localized module complexes",
+   "via": [
+    "lem-pc-ring-pseudo-coherent-localization-glue",
+    "lem-pc-affine-pseudo-coherent-criterion",
+    "lem-pc-perfect-affine-bounded-projective",
+    "lem-pc-perfect-complexes-compact-set",
+    "lem-pc-derived-qcoh-compact-generation",
+    "lem-pc-noetherian-derived-direct-image-right-adjoint",
+    "lem-sc-proper-upper-shriek-composition",
+    "lem-sc-finite-duality-trace"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "module": "Sheaf.RingTheory.RingPseudoCoherent",
+  "declaration": "DerivedCategory.IsPseudoCoherent",
+  "file": "lean/Sheaf/RingTheory/RingPseudoCoherent.lean",
+  "statement": "def IsPseudoCoherent {A : Type u} [CommRing A] [HasDerivedCategory.{w} (ModuleCat.{v} A)] (C : DerivedCategory (ModuleCat.{v} A)) : Prop",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-pcg0900"
+ },
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-pcg0900",
+  "group": "C1",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-pcg0900",
+  "group": "C1",
+  "result": "fix",
+  "note": "A commutative ring A, m : ℤ, arbitrary M : CochainComplex (ModuleCat A) ℤ, f : Fin r → A with Ideal.span (Set.range f) = ⊤, localization by extendScalars to Localization.Away (f i) degreewise, Q.obj; clause 1 m-pseudo-coherent local→global now through the landed IsMPseudoCoherent (duplicate IsRingMPseudoCoherent removed, H12/H4); clause 2 pseudo-coherent (new node reduced to Stacks 064P (2), IsPseudoCoherent); universes max u₁ v₁ for extendScalars, separate w₁ w₂; r = 0 ok"
+ }
+}

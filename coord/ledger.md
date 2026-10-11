@@ -3583,3 +3583,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 06:57 L: merged deliver/J1/lem-pc-ring-derived-map-lift (stage 2; reviewer FIX; first push; Sheaf.RingTheory.DerivedMapLift RingTheory.derived_map_lift)
 - 06:58 L: merged deliver/C1/lem-pc-proper-geometrically-reduced-global-sections-separable (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.ProperGeometricallyReducedGlobalSectionsSeparable AlgebraicGeometry.proper_geometricallyReduced_globalSections_isSeparable)
 - 06:58 L: merged deliver/K1/def-sp-double-complex-total (stage 2; reviewer PASS; after a return; Sheaf.CategoryTheory.DoubleComplexTotal HomologicalComplex₂.firstFiltration)
+- 06:59 L: merged deliver/C1/lem-pc-ring-pseudo-coherent-localization-glue (stage 2; reviewer FIX; first push; Sheaf.RingTheory.RingPseudoCoherentLocalizationGlue DerivedCategory.ringPseudoCoherent_localization_glue; new nodes: def-pc-ring-pseudo-coherent-complex)

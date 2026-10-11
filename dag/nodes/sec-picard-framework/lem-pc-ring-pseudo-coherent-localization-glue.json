@@ -20,7 +20,8 @@
   "place": "More on Algebra, Lemma 15.76.4 (Tag 066D, more-algebra-lemma-glue-pseudo-coherent), pseudo-coherent clause, read through Lemma 064Z (more-algebra-lemma-pseudo-coherent)"
  },
  "stmt_deps": [
-  "def-weil-abstract-derived-category"
+  "def-weil-abstract-derived-category",
+  "def-pc-ring-pseudo-coherent-complex"
  ],
  "proof": [
   {
@@ -143,5 +144,24 @@
   "group": "E1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-pcg0034 (reviewer sub-agent of L); spot-checked: Checked head b29cc41e5 against R-pcg0010's four points. (1) def node gone; both new nodes state Tag 064N word for word as the merged triangle/finite-cohomology/cone nodes; iff-all-m is true Tag 064U (1)<=>(2); vanishing base is Tag 064W(1); no duplicates (only 064U-related nodes are bounded-finite-free-model and summand, different statements). (2)(3) mathematically repaired but Step 1 and Step 2 duplicated the induction and Step 1 ended vaguely. (4) NOT repaired: source.place still read 064Z. Citer lem-pc-affine-pseudo-coherent-criterion uses the pseudo-coherent clause in the stated finite-free form (C4 ok). FIX more, RETURN less: rewrote the item proof as Step 1 setup (fixed arbitrary m, existence of n from bounded witnesses, unit-ideal vanishing, base case via the 064W node), Step 2 (m-pc => n-pc, lem-sc-finite-cohomology over A_{f_i}, localization-span leaf, lift alpha), Step 3 (cone vanishing, localized triangle, E[-n] (m+1)-pc, clause 1 locally, induction, clause 2 globally), Step 4 (pseudo-coherent clause via iff-all-m 1=>2 locally and 2=>1 globally), all in TeX with no plain-text arrows (B4); source.place corrected to Tag 064U; stale split_report summary (064N def node, 064S/064R nodes) corrected; both new node statements put in TeX with $ delimiters, iff-all-m ring renamed R to match the reference wording. Both Second readings missed the unrepaired 064Z source and the duplicated Step 1/Step 2.; 3 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.RingPseudoCoherentLocalizationGlue",
+  "declaration": "DerivedCategory.ringPseudoCoherent_localization_glue",
+  "file": "lean/Sheaf/RingTheory/RingPseudoCoherentLocalizationGlue.lean",
+  "statement": "theorem ringPseudoCoherent_localization_glue {A : Type u₁} [CommRing A] [HasDerivedCategory.{w₁} (ModuleCat.{max u₁ v₁} A)] (m : ℤ) (M : CochainComplex (ModuleCat.{max u₁ v₁} A) ℤ) (r : ℕ) (f : Fin r → A) [∀ i : Fin r, HasDerivedCategory.{w₂} (ModuleCat.{max u₁ v₁} (Localization.Away (f i)))] (hf : Ideal.span (Set.range f) = ⊤) : ((∀ i : Fin r, IsMPseudoCoherent m (Q.obj ((Functor.mapHomologicalComplex (ModuleCat.extendScalars (algebraMap A (Localization.Away (f i)))) (ComplexShape.up ℤ)).obj M))) → IsMPseudoCoherent m (Q.obj M)) ∧ ((∀ i : Fin r, IsPseudoCoherent (Q.obj ((Functor.mapHomologicalComplex (ModuleCat.extendScalars (algebraMap A (Localization.Away (f i)))) (ComplexShape.up ℤ)).obj M))) → IsPseudoCoherent (Q.obj M))",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-pcg0900"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-pcg0900",
+  "group": "C1",
+  "result": "fix",
+  "note": "A commutative ring A, m : ℤ, arbitrary M : CochainComplex (ModuleCat A) ℤ, f : Fin r → A with Ideal.span (Set.range f) = ⊤, localization by extendScalars to Localization.Away (f i) degreewise, Q.obj; clause 1 m-pseudo-coherent local→global now through the landed IsMPseudoCoherent (duplicate IsRingMPseudoCoherent removed, H12/H4); clause 2 pseudo-coherent (new node reduced to Stacks 064P (2), IsPseudoCoherent); universes max u₁ v₁ for extendScalars, separate w₁ w₂; r = 0 ok"
  }
 }
