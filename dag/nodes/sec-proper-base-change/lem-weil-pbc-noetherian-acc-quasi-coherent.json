@@ -168,5 +168,24 @@
   "by": "L",
   "result": "pass",
   "note": "Reviewed by the lead (opus-relaunch6). Five steps along Stacks 01Y8 with Algebra 00IK: finite affine cover by Noetherian rings, F(U_i) finitely generated, a quasi-coherent submodule determined by its sections on the cover (restriction and tilde-gamma adjunction nodes), ACC piecewise (new Mathlib leaf of one declaration per clause: isNoetherian_of_isNoetherianRing_of_finite Noetherian/Basic.lean:324, monotone_stabilizes_iff_noetherian Defs.lean:160, set_has_maximal_iff_noetherian Defs.lean:155; verified), maximal elements piecewise without dependent choice (agent-written). Statement reworded: the maximal-element clause now covers quasi-coherent submodules of F and ideal sheaves of O_X without assuming O_X coherent. Stage-3 overlap: lem-weil-pbc-noetherian-ideal-set-maximal is the case M = A. Tag corrected: 00IK, not 00FM."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.NoetherianQuasicoherentSubmodules",
+  "declaration": "AlgebraicGeometry.noetherian_quasicoherent_submodules",
+  "file": "lean/Sheaf/AlgebraicGeometry/NoetherianQuasicoherentSubmodules.lean",
+  "statement": "theorem noetherian_quasicoherent_submodules (X : Scheme.{u}) [IsNoetherian X] (F : SheafOfModules.{u} (moduleRings X.toRingedSpace)) (hF : RingedSpace.IsCoherent X.toRingedSpace F) : (∀ (G : ℕ → Subobject F), Monotone G → (∀ n, (G n : SheafOfModules.{u} (moduleRings X.toRingedSpace)).IsQuasicoherent) → ∃ n, ∀ m, n ≤ m → G m = G n) ∧ (∀ S : Set (Subobject F), S.Nonempty → (∀ G ∈ S, (G : SheafOfModules.{u} (moduleRings X.toRingedSpace)).IsQuasicoherent) → ∃ G ∈ S, ∀ H ∈ S, G ≤ H → H = G) ∧ (∀ S : Set X.IdealSheafData, S.Nonempty → ∃ I ∈ S, ∀ J ∈ S, I ≤ J → J = I)",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-nac1253"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-nac1253",
+  "group": "J1",
+  "result": "fix",
+  "note": "X Scheme.{u} + [AlgebraicGeometry.IsNoetherian X] (#check) = Noetherian; F on moduleRings with RingedSpace.IsCoherent; chains Monotone ℕ → Subobject F with IsQuasicoherent members, stabilisation ∃ n ∀ m ≥ n; maximal element in nonempty sets of qc Subobject F; ideal clause FIXED to Set X.IdealSheafData (STATE QUASI-COHERENT IDEAL SHEAVES); no hollow hypotheses, no let, single universe"
  }
 }

@@ -4672,3 +4672,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 12:54 L: merged deliver/G1/lem-weil-pbc-popescu-resolve-separable (stage 2; reviewer PASS; first push; Sheaf.RingTheory.PopescuResolveSeparable Algebra.canBePopescuResolved_of_regularLocalRing_separable)
 - 12:54 L: merged deliver/M1/lem-weil-pbc-polynomial-ring-maximal-localization-dimension (stage 2; reviewer PASS; first push; Sheaf.RingTheory.PolynomialRingMaximalLocalizationDimension MvPolynomial.ringKrullDim_localizationAtMaximal)
 - 12:54 L: merged deliver/C1/lem-weil-pbc-popescu-final-solve (stage 2; reviewer PASS; first push; Sheaf.RingTheory.PopescuFinalSolve Algebra.exists_smooth_factorization_of_singularIdeal_map_eq_top)
+- 12:54 L: merged deliver/J1/lem-weil-pbc-noetherian-acc-quasi-coherent (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.NoetherianQuasicoherentSubmodules AlgebraicGeometry.noetherian_quasicoherent_submodules)
