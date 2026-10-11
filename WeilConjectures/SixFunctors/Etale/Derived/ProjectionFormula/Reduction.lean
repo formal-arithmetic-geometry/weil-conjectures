@@ -386,12 +386,7 @@ noncomputable def leftDerivedUpperStarReductionModIdealIso (f : X ⟶ Y) :
   leftDerivedUpperStarDerivedTensorRightIso _ f
     (leftDerivedUpperStarConstantSingleIso _ f (ModuleCat.of Λ (Λ ⧸ J)))
 
-/-- The small étale site of a scheme is essentially small. Instance search does not find this
-in the presence of the imports of this file. -/
-local instance (X : Scheme.{u}) : EssentiallySmall.{u + 1} X.Etale :=
-  have : LocallySmall.{u + 1} X.Etale :=
-    @locallySmall_of_univLE X.Etale _ (@univLE_of_max.{u, u + 1} UnivLE.self)
-  essentiallySmall_of_small_of_locallySmall _
+attribute [local instance] Scheme.Etale.essentiallySmall
 
 /-- The comparison of `Rg_*` with the reduction of the coefficients,
 `ρ(Rg_*M) = Rg_*M ⊗ᴸ (Λ/J)_Y ⟶ Rg_*(M ⊗ᴸ (Λ/J)_Z) = Rg_*(ρM)`, natural in `M`: the projection
