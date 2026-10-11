@@ -196,5 +196,24 @@
   "by": "L",
   "result": "accepted",
   "note": "6 steps following the last paragraph of More on Algebra 07PE: generators and the injective maps into the fractions; D extended to R_g by part (2) of the existing derivation-extends node and moved across R_g = R'_g; g^N x_i in R (justified via surjectivity and the nonzerodivisor); the formula g^{N+1} delta(x_i) in R; the subring of elements preserved by Delta = g^{N+1} delta contains R and the x_i; the restriction D'. Statement unchanged (the statement's N is the source's N+1)."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.DerivationExtendsFiniteType",
+  "declaration": "RingTheory.derivation_extends_finite_type_extension",
+  "file": "lean/Sheaf/Paper/DerivationExtendsFiniteType.lean",
+  "statement": "theorem derivation_extends_finite_type_extension (R : Type u) (R' : Type v) [CommRing R] [CommRing R'] [Algebra R R'] (hfinite : Algebra.FiniteType R R') (hinj : Function.Injective (algebraMap R R')) (g : R) (hreg : algebraMap R R' g ∈ nonZeroDivisors R') (hiso : Function.Bijective (IsLocalization.Away.map (Localization.Away g) (Localization.Away (algebraMap R R' g)) (algebraMap R R') g)) (D : Derivation ℤ R R) : ∃ N : ℕ, ∃ D' : Derivation ℤ R' R', ∀ r : R, D' (algebraMap R R' r) = algebraMap R R' (g ^ N * D r)",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-dft0942"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-dft0942",
+  "group": "J1",
+  "result": "fix",
+  "note": "R,R' CommRing + Algebra + injective algebraMap (R ⊆ R'); Algebra.FiniteType; g nonzerodivisor in R'; Localization.Away map bijective; D, D' Derivation ℤ; D' ∘ algebraMap = algebraMap ∘ g^N D; N=0, empty generators, universes"
  }
 }
