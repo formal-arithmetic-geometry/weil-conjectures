@@ -205,5 +205,23 @@
   "by": "L",
   "result": "accepted",
   "note": "8 steps (agent proof; Stacks Remark 032C states the facts without proof): the base ring; R_0 Noetherian (existing leaf) and a domain (new leaf, NoZeroDivisors.lean:141 verified by L); local with the stated maximal ideal (new leaf Inverse.lean:138/152 verified; new unsplit node on the quotient by variables, Mathlib candidate killCompl); residue field; completeness (new exact leaf Completeness.lean:214 verified for the field case; new unsplit node for a complete Noetherian base); dim = d or d+1 by the generator bound and a chain of primes; regularity by definition. New unsplit definition def-weil-pbc-cohen-ring (0327; not made a leaf since Stacks' DVR notion differs by a theorem). Statement now cites the Cohen-ring and Krull-dimension definitions. Stage 3: lem-weil-pbc-cohen-rings-exist and the citer define Cohen rings inline and could cite the new definition."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.PowerSeriesFieldCohenRegularComplete",
+  "declaration": "MvPowerSeries.power_series_field_cohen_regular_complete",
+  "file": "lean/Sheaf/RingTheory/PowerSeriesFieldCohenRegularComplete.lean",
+  "statement": "theorem power_series_field_cohen_regular_complete {Λ : Type u} [CommRing Λ] (d : ℕ) (hΛ : IsField Λ ∨ (∃ p : ℕ, IsCohenRing p Λ)) : ((IsField Λ ∧ ∃ (_ : IsNoetherianRing (MvPowerSeries (Fin d) Λ)) (_ : IsDomain (MvPowerSeries (Fin d) Λ)) (_ : IsLocalRing (MvPowerSeries (Fin d) Λ)), IsLocalRing.maximalIdeal (MvPowerSeries (Fin d) Λ) = Ideal.span (Set.range (fun i : Fin d ↦ (MvPowerSeries.X i : (MvPowerSeries (Fin d) Λ)))) ∧ ∃ e : (Λ ⧸ (⊥ : Ideal Λ)) ≃+* ((MvPowerSeries (Fin d) Λ) ⧸ IsLocalRing.maximalIdeal (MvPowerSeries (Fin d) Λ)), (∀ a : Λ, e (Ideal.Quotient.mk _ a) = Ideal.Quotient.mk _ (MvPowerSeries.C a)) ∧ IsAdicComplete (IsLocalRing.maximalIdeal (MvPowerSeries (Fin d) Λ)) (MvPowerSeries (Fin d) Λ) ∧ IsRegularLocalRing (MvPowerSeries (Fin d) Λ) ∧ ringKrullDim (MvPowerSeries (Fin d) Λ) = (d : WithBot ℕ∞)) ∨ (∃ p : ℕ, IsCohenRing p Λ ∧ ∃ (_ : IsNoetherianRing (MvPowerSeries (Fin d) Λ)) (_ : IsDomain (MvPowerSeries (Fin d) Λ)) (_ : IsLocalRing (MvPowerSeries (Fin d) Λ)), IsLocalRing.maximalIdeal (MvPowerSeries (Fin d) Λ) = Ideal.span (insert (MvPowerSeries.C (p : Λ)) (Set.range (fun i : Fin d ↦ (MvPowerSeries.X i : (MvPowerSeries (Fin d) Λ))))) ∧ ∃ e : (Λ ⧸ Ideal.span {(p : Λ)}) ≃+* ((MvPowerSeries (Fin d) Λ) ⧸ IsLocalRing.maximalIdeal (MvPowerSeries (Fin d) Λ)), (∀ a : Λ, e (Ideal.Quotient.mk _ a) = Ideal.Quotient.mk _ (MvPowerSeries.C a)) ∧ IsAdicComplete (IsLocalRing.maximalIdeal (MvPowerSeries (Fin d) Λ)) (MvPowerSeries (Fin d) Λ) ∧ IsRegularLocalRing (MvPowerSeries (Fin d) Λ) ∧ ringKrullDim (MvPowerSeries (Fin d) Λ) = ((d + 1 : ℕ) : WithBot ℕ∞)))",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-pfr1329",
+  "group": "M1",
+  "result": "pass",
+  "note": "Λ CommRing u + IsField ∨ ∃p IsCohenRing p; R0 = MvPowerSeries (Fin d) Λ; (1) Noetherian/IsDomain/IsLocalRing, m0 = span(range X) resp. insert (C p); (2) e : Λ⧸m_Λ ≃+* R0⧸m0 pinned by e(mk a)=mk(C a); (3) IsAdicComplete m0; (4) IsRegularLocalRing, ringKrullDim = d resp. d+1; names resolve to _root_ by rfl inside namespace MvPowerSeries; d=0 ok"
  }
 }
