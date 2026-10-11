@@ -301,12 +301,20 @@ quasi-compact and quasi-separated the converse holds, so this global definition 
 cover, whose members are retrocompact, have a common refinement by constructible locally closed
 subsets of `X`. For a general `X` the present definition is stronger: it asks for a single
 finite stratification of all of `X`, whereas loc. cit. lets the decomposition depend on the
-affine open (on an infinite disjoint union of points, a sheaf with finite stalks of unbounded
-size is constructible in the sense of loc. cit. but not in the present one). For sheaves of
-modules over a noetherian ring, the pullbacks to the strata being locally constant of finite
-type, it is the constructibility of sheaves of modules of the Stacks project. In the `ℓ`-adic
-formalism it is applied with `A = ModuleCat Λ` for the coefficient stages `Λ` of
-`def-sf-setting`.
+affine open. For instance let `Λ` be a nonzero coefficient ring, let `X` be the disjoint union
+over `n` of the affine spaces `𝔸ⁿ` over a field, each with a flag `𝔸ⁿ = Z₀ ⊃ Z₁ ⊃ ⋯ ⊃ Zₙ` of
+irreducible closed subsets, and let `F` be on `𝔸ⁿ` the direct sum of the pushforwards of the
+constant sheaf `Λ` from the `Zᵢ`, so that the stalk of `F` at the generic point of `Zᵢ` is
+free of rank `i + 1` over `Λ`. A subset of `X` on
+which `F` is locally constant cannot contain the generic points of two members of a flag (the
+later one is a specialization of the earlier one, so every neighbourhood of it in the subset
+contains the earlier one, where the rank differs), so a stratification trivializing `F` has at
+least `n + 1` strata meeting `𝔸ⁿ` for every `n`, and there is no finite one; whereas every
+affine open of `X` meets finitely many `𝔸ⁿ` and `F` is constructible on it in the sense of
+loc. cit. For sheaves of modules over a noetherian ring, the pullbacks to the strata being
+locally constant of finite type, it is the constructibility of sheaves of modules of the Stacks
+project. In the `ℓ`-adic formalism it is applied with `A = ModuleCat Λ` for the coefficient
+stages `Λ` of `def-sf-setting`.
 
 Over a scheme with Noetherian underlying space the constructibility of the strata is automatic,
 see `IsConstructibleSheaf.of_noetherianSpace`. -/

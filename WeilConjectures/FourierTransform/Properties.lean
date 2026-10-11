@@ -77,16 +77,12 @@ with the *chosen* compactification of the base changed projection
 quasi-compact: it is a base change of `π`, resp. of `pullback.snd π π'`, which are assumed
 quasi-compact.
 
-Base linearity is the base linearity of kernel transforms
-(`AlgebraicGeometry.Etale.nonempty_iso_kernelTransform_tensor`), that is, the projection
-formula for `Rp₂,!`. The statement is over the whole unbounded derived categories, while the
-project's projection formula
-`AlgebraicGeometry.Etale.nonempty_iso_derivedTensor_rightDerivedLowerShriek` only covers a
-bounded constructible `K` and an `N` of finite Tor amplitude. It therefore uses the unbounded
-projection formula `AlgebraicGeometry.Etale.isIso_projectionMap_of_finite`, which holds for
-all finite `Λ` (SGA 4 XVII 5.2.9): the projection map is an isomorphism for `j_!` of an open
-immersion formally, and for a proper morphism because its direct image then has finite
-cohomological dimension and so commutes with the colimits reducing to bounded complexes.
+Base linearity is the base linearity of kernel transforms on full subcategories
+(`AlgebraicGeometry.Etale.nonempty_iso_kernelTransform_tensor_of_hasProjectionFormula`), that
+is, the projection formula for `Rp₂,!`. As in the blueprint it is stated for `K` bounded
+constructible and `N` in `Dᵇctf`, where the projection formula of `sk-thm-sf-pf-finite`
+(`AlgebraicGeometry.Etale.hasProjectionFormula_of_boundedConstructible`) applies to
+`p₁^* K ⊗ᴸ 𝒦_ψ[r]` and `π'^* N`.
 
 TODO: upgrade these back to `Iso` constructions once the exchange isomorphisms they are
 built from exist as data.

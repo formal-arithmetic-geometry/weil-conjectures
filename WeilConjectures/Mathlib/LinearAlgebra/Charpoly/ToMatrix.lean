@@ -8,6 +8,7 @@ module
 public import Mathlib.LinearAlgebra.Charpoly.BaseChange
 public import Mathlib.LinearAlgebra.Charpoly.ToMatrix
 public import Mathlib.LinearAlgebra.Matrix.Dual
+public import Mathlib.LinearAlgebra.Trace
 public import WeilConjectures.Mathlib.LinearAlgebra.Matrix.Charpoly.Coeff
 
 /-!
@@ -46,6 +47,13 @@ free module, defined as the reverse of the characteristic polynomial. -/
 noncomputable def charpolyRev (f : M →ₗ[R] M) : R[X] := f.charpoly.reverse
 
 theorem charpolyRev_def (f : M →ₗ[R] M) : f.charpolyRev = f.charpoly.reverse := rfl
+
+/-- The trace of an endomorphism of a finite free module is minus the next-to-leading coefficient
+of its characteristic polynomial. -/
+theorem trace_eq_neg_charpoly_nextCoeff (f : M →ₗ[R] M) :
+    trace R M f = -f.charpoly.nextCoeff := by
+  rw [trace_eq_matrix_trace R (Module.Free.chooseBasis R M),
+    ← charpoly_toMatrix f (Module.Free.chooseBasis R M), Matrix.trace_eq_neg_charpoly_nextCoeff]
 
 theorem charpolyRev_toMatrix {ι : Type*} [DecidableEq ι] [Fintype ι] (b : Basis ι R M)
     (f : M →ₗ[R] M) : (toMatrix b b f).charpolyRev = f.charpolyRev := by

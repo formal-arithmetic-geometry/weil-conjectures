@@ -59,6 +59,11 @@ noncomputable def morphismRestrictArrowIso (f : X ⟶ Y) {e : Z ⟶ X} {j : Z' �
     IsOpenImmersion.isoOfRangeEq_hom_fac_assoc,
     IsOpenImmersion.isoOfRangeEq_hom_fac, morphismRestrict_ι]
 
+/-- An open immersion with image `U` has the same range as the inclusion of `U`. -/
+lemma Scheme.Hom.range_eq_range_ι_of_opensRange_eq (f : X ⟶ Y) [IsOpenImmersion f] {U : Y.Opens}
+    (h : f.opensRange = U) : Set.range f = Set.range U.ι :=
+  (coe_opensRange f).symm.trans ((congrArg SetLike.coe h).trans (Scheme.Opens.range_ι U).symm)
+
 /-- Membership in the range of the inclusion of a smaller open. -/
 lemma mem_opensRange_homOfLE {X : Scheme.{u}} {U V : X.Opens} (hUV : U ≤ V)
     (x : V.toScheme) : x ∈ (X.homOfLE hUV).opensRange ↔ x.1 ∈ U := by

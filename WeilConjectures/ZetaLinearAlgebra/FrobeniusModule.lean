@@ -118,6 +118,24 @@ theorem Equiv.hasEigenvalue {M N : FrobeniusModule.{u, v} K} (e : M.Equiv N) {α
     exact congrArg e.toLinearEquiv hx.1
   · exact (map_ne_zero_iff _ e.toLinearEquiv.injective).2 hx.2
 
+/-- The isomorphism of Frobenius modules given by a linear isomorphism `e` with
+`e ∘ F_M = F_N ∘ e`. -/
+def Equiv.ofComp {M N : FrobeniusModule.{u, v} K} (e : M.carrier ≃ₗ[K] N.carrier)
+    (h : e.toLinearMap ∘ₗ M.frobeniusEnd = N.frobeniusEnd ∘ₗ e.toLinearMap) : M.Equiv N :=
+  ⟨e, fun x ↦ LinearMap.congr_fun h x⟩
+
+/-- An isomorphism of Frobenius modules conjugates the two Frobenius endomorphisms. -/
+theorem Equiv.frobeniusEnd_eq_conj {M N : FrobeniusModule.{u, v} K} (e : M.Equiv N) :
+    N.frobeniusEnd = e.toLinearEquiv.conj M.frobeniusEnd := by
+  ext x
+  change N.frobenius x = e.toLinearEquiv (M.frobenius (e.toLinearEquiv.symm x))
+  rw [e.map_frobenius, LinearEquiv.apply_symm_apply]
+
+/-- Isomorphic Frobenius modules have the same characteristic polynomial of the Frobenius. -/
+theorem Equiv.charpoly_frobeniusEnd {M N : FrobeniusModule.{u, v} K} (e : M.Equiv N) :
+    N.frobeniusEnd.charpoly = M.frobeniusEnd.charpoly := by
+  rw [e.frobeniusEnd_eq_conj, LinearEquiv.charpoly_conj]
+
 /-- A Frobenius module isomorphic to one with weights at most `w` has weights at most `w`. -/
 theorem HasWeightsAtMost.of_equiv {ι : K →+* ℂ} {q : ℕ} {M N : FrobeniusModule.{u, v} K}
     (e : M.Equiv N) {w : ℝ} (h : N.HasWeightsAtMost ι q w) : M.HasWeightsAtMost ι q w :=

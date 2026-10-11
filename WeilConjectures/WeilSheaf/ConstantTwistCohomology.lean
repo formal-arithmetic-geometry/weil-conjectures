@@ -25,6 +25,8 @@ with constant twists, and so do their right derived functors. Hence the cohomolo
 
 - `AlgebraicGeometry.WeilSheaf.nonempty_equiv_cohomology_constantTwist`:
   `Hʳ(X ⊗ k̄, F ⊗ 𝓑_b) ≅ Hʳ(X ⊗ k̄, F)` with the Frobenius multiplied by `b`.
+- `AlgebraicGeometry.WeilSheaf.nonempty_higherLowerShriek_constantTwist_iso`:
+  `Rⁱf₀!(F ⊗ 𝓑_b) ≅ Rⁱf₀!F ⊗ 𝓑_b` (blueprint: `lem-wf-constant-twist-cohomology`).
 -/
 
 @[expose] public section
@@ -405,6 +407,37 @@ theorem nonempty_equiv_compactlySupportedCohomology_constantTwist (F : WeilSheaf
     (globalSectionsConstantTwistEquiv _ b)⟩
 
 end CompactSupport
+
+section HigherLowerShriek
+
+variable {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
+
+/-- **Constant twists and higher direct images with compact support**: for a morphism
+`f : X ⟶ Y` of `k₀`-schemes as in `AlgebraicGeometry.WeilSheaf.higherLowerShriek` and a unit
+`b ∈ ℚ̄_ℓˣ`, `Rⁱf₀!(F ⊗ 𝓑_b) ≅ Rⁱf₀!F ⊗ 𝓑_b`. The direct image with compact support of
+pro-étale Weil sheaves commutes with constant twists, its constituents being `ℚ̄_ℓ`-linear.
+(blueprint: `lem-wf-constant-twist-cohomology`) -/
+theorem nonempty_higherLowerShriek_constantTwist_iso (f : X ⟶ Y)
+    [f.IsOver (Spec (CommRingCat.of k₀))] [IsSeparated f] [LocallyOfFiniteType f]
+    [QuasiCompact f] (F : WeilSheaf k₀ l X) (b : (PadicAlgCl l)ˣ) (i : ℕ) :
+    Nonempty ((higherLowerShriek k₀ l f i).obj (F.constantTwist b) ≅
+      ((higherLowerShriek k₀ l f i).obj F).constantTwist b) :=
+  ⟨ObjectProperty.isoMk _
+    ((_root_.DerivedCategory.homologyFunctor _ i).mapIso
+        ((ProEtaleWeilSheaf.rightDerivedLowerShriek k₀ l f
+            (HasCompactification.compactification _
+              (hf := hasCompactification_of_over (k₀ := k₀) _))).mapIso
+          ((_root_.DerivedCategory.singleFunctor _ 0).mapIso (F.constantTwistObjIso b) ≪≫
+            ((ProEtaleWeilSheaf.constantTwist k₀ l X b).mapDerivedCategorySingleFunctor 0).symm.app
+              F.obj) ≪≫
+          (ProEtaleWeilSheaf.mapDerivedCategoryConstantTwistCompRightDerivedLowerShriekIso k₀ l
+            f b _).app _) ≪≫
+      ((ProEtaleWeilSheaf.constantTwist k₀ l _ b).mapDerivedCategoryHomologyFunctorIso i).symm.app
+        _ ≪≫
+      (ProEtaleWeilSheaf.mkConstantTwistIso k₀ l _ _ b).symm)⟩
+
+end HigherLowerShriek
+
 end WeilSheaf
 
 end AlgebraicGeometry

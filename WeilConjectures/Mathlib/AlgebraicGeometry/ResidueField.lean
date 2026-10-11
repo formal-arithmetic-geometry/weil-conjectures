@@ -63,4 +63,12 @@ lemma Hom.etale_residueFieldMap_congr {X Y : Scheme.{u}} {g h : X ⟶ Y} (e : g 
   subst e
   rfl
 
+/-- A morphism `p : Spec K ⟶ X` from the spectrum of a field factors through `Spec κ(x)` for its
+image point `x`, through a field embedding `κ(x) ⟶ K`. -/
+lemma exists_eq_spec_map_comp_fromSpecResidueField {K : Type u} [Field K] {X : Scheme.{u}}
+    (p : Spec (.of K) ⟶ X) (x : X) (hx : p.base (IsLocalRing.closedPoint K) = x) :
+    ∃ ι : X.residueField x ⟶ .of K, p = Spec.map ι ≫ X.fromSpecResidueField x := by
+  subst hx
+  exact ⟨_, ((SpecToEquivOfField K X).left_inv p).symm⟩
+
 end AlgebraicGeometry.Scheme
