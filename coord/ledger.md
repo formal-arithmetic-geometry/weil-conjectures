@@ -3108,3 +3108,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 00:30 UTC L: E1 site-restriction-module-adjunction-exact FIX 17342f3e0 (R-sra0028).
 - 00:30 UTC L: M1 finite-affine-fibre-sections FIX 91d2dc71a (R-ffs0029).
 - 00:30 L: merged deliver/E1/lem-weil-pbc-arbitrary-ring-torsion-sheaf-base-change (reviewer FIX; after a return; new nodes: 0)
+- 00:30 L: returned deliver/C1/lem-sc-etale-triple-strict-henselization-identification (reviewer RETURN: Reviewer R-shi0029. 1 (D1 relabelling; missed by the Second reading): the new node lem-sc-localized-triple-colimit is th)
