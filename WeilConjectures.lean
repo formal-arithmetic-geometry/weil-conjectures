@@ -36,6 +36,7 @@ public import WeilConjectures.AlgebraicGeometry.AbelianVariety.Final
 public import WeilConjectures.AlgebraicGeometry.AbelianVariety.GeometricPoints
 public import WeilConjectures.AlgebraicGeometry.AbelianVariety.Isogeny
 public import WeilConjectures.AlgebraicGeometry.AbelianVariety.Jacobian
+public import WeilConjectures.AlgebraicGeometry.AbelianVariety.KummerCover
 public import WeilConjectures.AlgebraicGeometry.AbelianVariety.Projective
 public import WeilConjectures.AlgebraicGeometry.AbelianVariety.Rigidity
 public import WeilConjectures.AlgebraicGeometry.AbelianVariety.TateModule
@@ -1270,6 +1271,7 @@ public import WeilConjectures.Mathlib.RingTheory.Ideal.Pure
 public import WeilConjectures.Mathlib.RingTheory.Ideal.Quotient.Operations
 public import WeilConjectures.Mathlib.RingTheory.Ideal.RegularPrincipal
 public import WeilConjectures.Mathlib.RingTheory.Idempotents
+public import WeilConjectures.Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
 public import WeilConjectures.Mathlib.RingTheory.IntegralClosure.IsIntegralClosure.Basic
 public import WeilConjectures.Mathlib.RingTheory.Invariant.Profinite
 public import WeilConjectures.Mathlib.RingTheory.IsTensorProduct
