@@ -1,0 +1,124 @@
+{
+ "id": "def-sc-module-total-hom-complex",
+ "kind": "definition",
+ "title": "A-module-valued total Hom complex",
+ "status": "split",
+ "statement": "Let $A$ be a commutative ring and $L^\\bullet,M^\\bullet$ cochain complexes of $A$-modules [def-weil-abstract-derived-category]. Define $\\operatorname{Hom}_A^n(L^\\bullet,M^\\bullet)=\\prod_{p\\in\\mathbb Z}\\operatorname{Hom}_A(L^p,M^{p+n})$, with its componentwise $A$-module structure and differential $d(z)=d_Mz-(-1)^nzd_L$. This is the $A$-module-valued total Hom complex; its terms and differential use the existing homogeneous cochains and linear Hom differential, without forgetting the $A$-action.",
+ "stmt_deps": [
+  "def-weil-abstract-derived-category"
+ ],
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Section 15.73, Tag 0A8H, section-hom-complexes"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A linear total Hom complex of cochain complexes of modules",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable (no mathematical verdict)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A module valued total Hom complex for unbounded cochain complexes of A modules",
+   "results": "8 hits: CochainComplex.ConnectData.cochainComplex, CochainComplex.HomComplex, CochainComplex.HomComplex.instModuleCochain, ChainComplex.linearYonedaObj, CochainComplex.ConnectData.X, HomologicalComplex.instModuleHom, CochainComplex.ConnectData.cochainComplex_X, CochainComplex.HomComplex_X",
+   "date": "2026-10-11",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.HomComplex.δ_hom",
+   "results": "2 hits: CochainComplex.HomComplex.δ_hom, CochainComplex.HomComplex.δ_hom_apply",
+   "date": "2026-10-11",
+   "verdict": "existing linear cochain differential reused; no ModuleCat-valued total complex"
+  },
+  {
+   "tool": "grep",
+   "query": "HomComplex|δ_hom",
+   "results": "25 hits: Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean, Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean, Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean, Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean, Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean, Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean, Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean, Mathlib/Algebra/Homology/HomotopyCategory/HomComplexShift.lean",
+   "date": "2026-10-11",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg moduleHomComplex|principalCechTotal|koszulCechComparison in WeilConjectures and lean/Sheaf; rg HomComplex.*ModuleCat; blueprint_refs.py search alternating Cech / module Hom complex / Koszul Cech; rg titles in dag/nodes",
+   "results": "No named module-valued total Hom complex or principal-cover unbounded alternating total/comparison construction. Existing generic group-valued HomComplex and linear cochains are reused. DAG has first-quadrant totalizations, single-module Čech comparisons, and the two comparison theorem nodes, not these construction definitions. Existing KoszulOpenSystem supplies tails and power maps and is reused.",
+   "date": "2026-10-11",
+   "verdict": "no exact definition match"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sc-affine-koszul-cech-derived-comparison",
+  "date": "2026-10-11",
+  "group": "T1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "proper-flat support proof: compare the Koszul Hom complexes with the alternating Cech complex and derived sections on the principal-open cover",
+   "via": [
+    "lem-sc-affine-koszul-cech-derived-comparison",
+    "lem-sc-affine-perfect-open-represent-cohomology",
+    "lem-sc-affine-perfect-map-lift",
+    "lem-sc-perfect-support-map-lift",
+    "lem-sc-proper-flat-right-adjoint-open-support",
+    "lem-sc-proper-flat-right-adjoint-restriction-open",
+    "lem-sc-proper-flat-right-adjoint-basechange",
+    "lem-sc-smooth-proper-diagonal-basechange-upper-shriek",
+    "lem-sc-smooth-proper-diagonal-pushforward-structure",
+    "lem-sc-smooth-proper-relative-dualizing-general",
+    "lem-sc-smooth-proper-curve-dualizing",
+    "lem-sc-finite-duality-trace"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.ModuleHomComplex",
+  "declaration": "CochainComplex.moduleHomComplex",
+  "declarations": [
+   "CochainComplex.moduleHom_shape",
+   "CochainComplex.moduleHom_square",
+   "CochainComplex.moduleHomComplex"
+  ],
+  "file": "lean/Sheaf/Algebra/Homology/ModuleHomComplex.lean",
+  "statement": "def moduleHomComplex (L M : CochainComplex (ModuleCat.{uH} A) ℤ) : CochainComplex (ModuleCat.{uH} A) ℤ",
+  "branch": "sheaf-dag",
+  "by": "T1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-sub-C",
+  "group": "T1",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-sub-C",
+  "group": "T1",
+  "result": "pass",
+  "note": "A CommRing, r:Nat incl 0, f, U=koszulOpen=sup D(f_i), F complex with all terms quasi-coherent, E in D_QCoh with e: Q F iso E; M=Gamma(X,F) with A-action; diagram e -> Hom_A(I_(e+1) tail, M) by precomposition with koszulOpenTransition; cocone pinned by (prod f_j)^(e+1) x image_J = (-1)^(pq+p(p-1)/2) z(e_J)|D_J, checked by hand to be a chain map for d_I=-d_K, delta of Mathlib and Cech total d_1+(-1)^p d_2; beta pinned by every K-injective resolution; conclusion IsIso in D(A); 3 new def nodes read against 0A8H, 08C2, 08D0-08D2, no existing def (grep of lean/Sheaf, upstream)"
+ }
+}

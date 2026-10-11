@@ -1,0 +1,140 @@
+{
+ "id": "def-sc-principal-open-alternating-total",
+ "kind": "definition",
+ "title": "Alternating Čech totalization and derived comparison for a finite principal cover",
+ "status": "split",
+ "statement": "Let $A$ be a commutative ring, $X=\\operatorname{Spec}(A)$ [def-pc-scheme], $f_1,\\ldots,f_r\\in A$, $U=\\bigcup_iD(f_i)$, and $F^\\bullet$ a cochain complex of $\\mathcal O_X$-modules [def-pc-cochain-complex-modules]. For a nonempty subset $J\\subseteq\\{1,\\ldots,r\\}$ put $D_J=D(\\prod_{j\\in J}f_j)$ and $p_J=|J|-1$. Sections $S_V(F)=F(V)$ carry the $A$-action induced by $A\\to\\Gamma(V,\\mathcal O_X)$. Define $C(F)^n=\\prod_{\\varnothing\\ne J}\\Gamma(D_J,F^{n-p_J})$. The total differential has vertical term $(-1)^{p_J}d_F$ and horizontal term the signed sum of restrictions from $D_{J\\setminus\\{j\\}}$, with sign $(-1)^{|\\{i\\in J:i<j\\}|}$; empty deleted subsets contribute zero. Chain maps act componentwise. Define $\\alpha_F:S_U(F^\\bullet)\\to C(F)$ by restriction to singleton subsets and zero on larger subsets. With the derived categories of [def-weil-abstract-derived-category] and [def-pc-derived-category], define $\\beta_F:Q C(F)\\to R S_U(QF)$ by its K-injective-resolution roof [def-pur-kinjective-complex]: for every quasi-isomorphism $i:F\\to I$ into a K-injective complex, $\\beta_F$ followed by $R S_U(Qi)$, the standard identification with $Q S_U(I)$, and $Q\\alpha_I$ equals $Q C(i)$. The augmentation $Q\\alpha_I$ is invertible, so this specifies the canonical derived Čech comparison. The empty cover has zero total complex.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-cochain-complex-modules",
+  "def-weil-abstract-derived-category",
+  "def-pc-derived-category",
+  "def-pur-kinjective-complex"
+ ],
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Sections 20.25 and 20.40, Tag 08C2; Perfect, Tag 08D2"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "alternating Cech total complex finite open cover",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable (no mathematical verdict)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "alternating Cech total complex for a finite principal open cover and Koszul Hom comparison",
+   "results": "8 hits: Rep.standardComplex.compForgetAugmentedIso, AlgebraicTopology.alternatingFaceMapComplexConst, AlgebraicTopology.DoldKan.Γ₀NondegComplexIso, Rep.standardComplex.εToSingle₀_comp_eq, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_f, Rep.standardComplex.quasiIso_forget₂_εToSingle₀, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_g, SimplicialObject.Splitting.toKaroubiNondegComplexIsoN₁_hom_f_f",
+   "date": "2026-10-11",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "moduleHomComplex|principalCechTotal|koszulCechComparison|alternating.*Cech",
+   "results": "0 hits: ",
+   "date": "2026-10-11",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg moduleHomComplex|principalCechTotal|koszulCechComparison in WeilConjectures and lean/Sheaf; rg HomComplex.*ModuleCat; blueprint_refs.py search alternating Cech / module Hom complex / Koszul Cech; rg titles in dag/nodes",
+   "results": "No named module-valued total Hom complex or principal-cover unbounded alternating total/comparison construction. Existing generic group-valued HomComplex and linear cochains are reused. DAG has first-quadrant totalizations, single-module Čech comparisons, and the two comparison theorem nodes, not these construction definitions. Existing KoszulOpenSystem supplies tails and power maps and is reused.",
+   "date": "2026-10-11",
+   "verdict": "no exact definition match"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sc-affine-koszul-cech-derived-comparison",
+  "date": "2026-10-11",
+  "group": "T1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "proper-flat support proof: compare the Koszul Hom complexes with the alternating Cech complex and derived sections on the principal-open cover",
+   "via": [
+    "lem-sc-affine-koszul-cech-derived-comparison",
+    "lem-sc-affine-perfect-open-represent-cohomology",
+    "lem-sc-affine-perfect-map-lift",
+    "lem-sc-perfect-support-map-lift",
+    "lem-sc-proper-flat-right-adjoint-open-support",
+    "lem-sc-proper-flat-right-adjoint-restriction-open",
+    "lem-sc-proper-flat-right-adjoint-basechange",
+    "lem-sc-smooth-proper-diagonal-basechange-upper-shriek",
+    "lem-sc-smooth-proper-diagonal-pushforward-structure",
+    "lem-sc-smooth-proper-relative-dualizing-general",
+    "lem-sc-smooth-proper-curve-dualizing",
+    "lem-sc-finite-duality-trace"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.PrincipalOpenCechTotal",
+  "declaration": "AlgebraicGeometry.principalCechTotal",
+  "declarations": [
+   "AlgebraicGeometry.affineOpenSections",
+   "AlgebraicGeometry.affineOpenSections_additive_proof",
+   "AlgebraicGeometry.affineOpenSections_additive",
+   "AlgebraicGeometry.principalCechIntersection",
+   "AlgebraicGeometry.principalCechIntersection_erase_le",
+   "AlgebraicGeometry.principalCechIntersection_singleton_le",
+   "AlgebraicGeometry.principalCech_erase_degree",
+   "AlgebraicGeometry.principalCechTerms",
+   "AlgebraicGeometry.principalCechDifferentialValue",
+   "AlgebraicGeometry.principalCechDifferential_exists",
+   "AlgebraicGeometry.principalCechDifferential",
+   "AlgebraicGeometry.principalCechDifferential_square",
+   "AlgebraicGeometry.principalCechTotal",
+   "AlgebraicGeometry.principalCechFunctor_exists",
+   "AlgebraicGeometry.principalCechFunctor",
+   "AlgebraicGeometry.principalCechObjIso",
+   "AlgebraicGeometry.principalCech_singleton_degree",
+   "AlgebraicGeometry.principalCechAugmentation_exists",
+   "AlgebraicGeometry.principalCechAugmentation",
+   "AlgebraicGeometry.principalCechAugmentation_quasiIso",
+   "AlgebraicGeometry.principalCechDerivedComparison_exists",
+   "AlgebraicGeometry.principalCechDerivedComparison"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/PrincipalOpenCechTotal.lean",
+  "statement": "def principalCechTotal : CochainComplex (ModuleCat.{uC} A) ℤ",
+  "branch": "sheaf-dag",
+  "by": "T1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-sub-C",
+  "group": "T1",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-sub-C",
+  "group": "T1",
+  "result": "pass",
+  "note": "A CommRing, r:Nat incl 0, f, U=koszulOpen=sup D(f_i), F complex with all terms quasi-coherent, E in D_QCoh with e: Q F iso E; M=Gamma(X,F) with A-action; diagram e -> Hom_A(I_(e+1) tail, M) by precomposition with koszulOpenTransition; cocone pinned by (prod f_j)^(e+1) x image_J = (-1)^(pq+p(p-1)/2) z(e_J)|D_J, checked by hand to be a chain map for d_I=-d_K, delta of Mathlib and Cech total d_1+(-1)^p d_2; beta pinned by every K-injective resolution; conclusion IsIso in D(A); 3 new def nodes read against 0A8H, 08C2, 08D0-08D2, no existing def (grep of lean/Sheaf, upstream)"
+ }
+}

@@ -22,7 +22,10 @@
   "def-pc-scheme",
   "def-pc-derived-category",
   "def-weil-pbc-koszul-complex",
-  "def-pur-hom-complex"
+  "def-pur-hom-complex",
+  "def-sc-module-total-hom-complex",
+  "def-sc-principal-open-alternating-total",
+  "def-sc-koszul-cech-comparison-construction"
  ],
  "proof": [
   {
@@ -125,5 +128,26 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AffineKoszulCechDerivedComparison",
+  "declaration": "AlgebraicGeometry.affine_koszul_cech_derived_comparison",
+  "declarations": [
+   "AlgebraicGeometry.affine_koszul_cech_derived_comparison"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineKoszulCechDerivedComparison.lean",
+  "statement": "theorem affine_koszul_cech_derived_comparison (A : Type uT) [CommRing A] (r : ℕ) (f : Fin r → A) [HasDerivedCategory.{wT} (SheafOfModules.{uT} (moduleRings (Spec (.of A)).toRingedSpace))] [HasDerivedCategory.{vT} (ModuleCat.{uT} A)] (F : CochainComplex (SheafOfModules.{uT} (moduleRings (Spec (.of A)).toRingedSpace)) ℤ) (hF : ∀ n : ℤ, (F.X n).IsQuasicoherent) (E : schemeDerivedQCohCategory (Spec (.of A))) (e : DerivedCategory.Q.obj F ≅ E.obj) : IsIso (koszulCechDerivedComparison A r f F ≫ (affineOpenSections A (koszulOpen A r f)).rightDerivedFunctor.map e.hom)",
+  "branch": "sheaf-dag",
+  "by": "T1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-sub-C",
+  "group": "T1",
+  "result": "pass",
+  "note": "A CommRing, r:Nat incl 0, f, U=koszulOpen=sup D(f_i), F complex with all terms quasi-coherent, E in D_QCoh with e: Q F iso E; M=Gamma(X,F) with A-action; diagram e -> Hom_A(I_(e+1) tail, M) by precomposition with koszulOpenTransition; cocone pinned by (prod f_j)^(e+1) x image_J = (-1)^(pq+p(p-1)/2) z(e_J)|D_J, checked by hand to be a chain map for d_I=-d_K, delta of Mathlib and Cech total d_1+(-1)^p d_2; beta pinned by every K-injective resolution; conclusion IsIso in D(A); 3 new def nodes read against 0A8H, 08C2, 08D0-08D2, no existing def (grep of lean/Sheaf, upstream)"
  }
 }

@@ -1,0 +1,130 @@
+{
+ "id": "def-sc-koszul-cech-comparison-construction",
+ "kind": "definition",
+ "title": "Koszul Hom power colimit and its canonical Čech comparison",
+ "status": "split",
+ "statement": "Let $A$ be a commutative ring, $X=\\operatorname{Spec}(A)$ [def-pc-scheme], and $f_1,\\ldots,f_r\\in A$. Let $I_e$ and $I_b\\to I_a$ be the truncated Koszul tails and power-transition maps of [def-sc-koszul-open-system]. For a cochain complex $M$ of $A$-modules define the directed diagram $e\\ge1\\mapsto\\operatorname{Hom}_A^\\bullet(I_e,M)$ [def-sc-module-total-hom-complex], with transitions by precomposition, and its colimit in complexes. For a complex $F$ of $\\mathcal O_X$-modules [def-pc-cochain-complex-modules], put $M=\\Gamma(X,F)$ and let $C(F)$ be the alternating total complex of [def-sc-principal-open-alternating-total]. Define a cocone from the Hom diagram to $C(F)$ by the following formula. For a nonempty ordered subset $J$, write $p=|J|-1$, $q=n-p$, and let $e_J\\in I_e^{-p}$ be its increasing exterior basis vector. The $J$-component of the image of a degree-$n$ cochain $z$ is the restriction of $z(e_J)$ to $D_J$, divided by $(\\prod_{j\\in J}f_j)^e$, multiplied by $(-1)^{pq+p(p-1)/2}$. The product is invertible on $D_J$, so this uniquely specifies each component. The cocone induces the canonical map $\\gamma_F:\\operatorname{colim}_{e\\ge1}\\operatorname{Hom}_A^\\bullet(I_e,M)\\to C(F)$. Define the canonical derived comparison to $R\\Gamma(U,F)$ as $Q(\\gamma_F)$ followed by the canonical derived Čech comparison of [def-sc-principal-open-alternating-total].",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sc-koszul-open-system",
+  "def-sc-module-total-hom-complex",
+  "def-pc-cochain-complex-modules",
+  "def-sc-principal-open-alternating-total"
+ ],
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tags 08CX, 08D0, 08D1 and 08D2: power transitions, localization cocone, totalization sign, derived comparison"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "filtered colimit Koszul Hom complex canonical localization comparison",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable (no mathematical verdict)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "alternating Cech total complex for a finite principal open cover and Koszul Hom comparison",
+   "results": "8 hits: Rep.standardComplex.compForgetAugmentedIso, AlgebraicTopology.alternatingFaceMapComplexConst, AlgebraicTopology.DoldKan.Γ₀NondegComplexIso, Rep.standardComplex.εToSingle₀_comp_eq, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_f, Rep.standardComplex.quasiIso_forget₂_εToSingle₀, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_g, SimplicialObject.Splitting.toKaroubiNondegComplexIsoN₁_hom_f_f",
+   "date": "2026-10-11",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "moduleHomComplex|principalCechTotal|koszulCechComparison|alternating.*Cech",
+   "results": "0 hits: ",
+   "date": "2026-10-11",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg moduleHomComplex|principalCechTotal|koszulCechComparison in WeilConjectures and lean/Sheaf; rg HomComplex.*ModuleCat; blueprint_refs.py search alternating Cech / module Hom complex / Koszul Cech; rg titles in dag/nodes",
+   "results": "No named module-valued total Hom complex or principal-cover unbounded alternating total/comparison construction. Existing generic group-valued HomComplex and linear cochains are reused. DAG has first-quadrant totalizations, single-module Čech comparisons, and the two comparison theorem nodes, not these construction definitions. Existing KoszulOpenSystem supplies tails and power maps and is reused.",
+   "date": "2026-10-11",
+   "verdict": "no exact definition match"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sc-affine-koszul-cech-derived-comparison",
+  "date": "2026-10-11",
+  "group": "T1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "proper-flat support proof: compare the Koszul Hom complexes with the alternating Cech complex and derived sections on the principal-open cover",
+   "via": [
+    "lem-sc-affine-koszul-cech-derived-comparison",
+    "lem-sc-affine-perfect-open-represent-cohomology",
+    "lem-sc-affine-perfect-map-lift",
+    "lem-sc-perfect-support-map-lift",
+    "lem-sc-proper-flat-right-adjoint-open-support",
+    "lem-sc-proper-flat-right-adjoint-restriction-open",
+    "lem-sc-proper-flat-right-adjoint-basechange",
+    "lem-sc-smooth-proper-diagonal-basechange-upper-shriek",
+    "lem-sc-smooth-proper-diagonal-pushforward-structure",
+    "lem-sc-smooth-proper-relative-dualizing-general",
+    "lem-sc-smooth-proper-curve-dualizing",
+    "lem-sc-finite-duality-trace"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.KoszulCechComparisonConstruction",
+  "declaration": "AlgebraicGeometry.koszulCechDerivedComparison",
+  "declarations": [
+   "AlgebraicGeometry.koszulCechHomDiagram_exists",
+   "AlgebraicGeometry.koszulCechHomDiagram",
+   "AlgebraicGeometry.koszulCechHomObjIso",
+   "AlgebraicGeometry.koszulCechHomColimit",
+   "AlgebraicGeometry.koszulCech_basis_card",
+   "AlgebraicGeometry.koszulCech_basis_degree",
+   "AlgebraicGeometry.koszulCechBasis",
+   "AlgebraicGeometry.koszulCech_evaluation_degree",
+   "AlgebraicGeometry.koszulCechCocone_exists",
+   "AlgebraicGeometry.koszulCechCocone",
+   "AlgebraicGeometry.koszulCechComparison",
+   "AlgebraicGeometry.koszulCechDerivedComparison"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/KoszulCechComparisonConstruction.lean",
+  "statement": "def koszulCechDerivedComparison : DerivedCategory.Q.obj (koszulCechHomColimit A r f (((affineOpenSections A ⊤).mapHomologicalComplex (ComplexShape.up ℤ)).obj F)) ⟶ (affineOpenSections A (koszulOpen A r f)).rightDerivedFunctor.obj (DerivedCategory.Q.obj F)",
+  "branch": "sheaf-dag",
+  "by": "T1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-sub-C",
+  "group": "T1",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-sub-C",
+  "group": "T1",
+  "result": "pass",
+  "note": "A CommRing, r:Nat incl 0, f, U=koszulOpen=sup D(f_i), F complex with all terms quasi-coherent, E in D_QCoh with e: Q F iso E; M=Gamma(X,F) with A-action; diagram e -> Hom_A(I_(e+1) tail, M) by precomposition with koszulOpenTransition; cocone pinned by (prod f_j)^(e+1) x image_J = (-1)^(pq+p(p-1)/2) z(e_J)|D_J, checked by hand to be a chain map for d_I=-d_K, delta of Mathlib and Cech total d_1+(-1)^p d_2; beta pinned by every K-injective resolution; conclusion IsIso in D(A); 3 new def nodes read against 0A8H, 08C2, 08D0-08D2, no existing def (grep of lean/Sheaf, upstream)"
+ }
+}
