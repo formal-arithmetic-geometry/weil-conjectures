@@ -90,5 +90,29 @@
   "group": "G1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-dpc1828 (reviewer sub-agent of L); spot-checked: Statement vs Stacks 08CM/08C4/08EB; stmt_deps def-pc-scheme (mathlib, no deps), def-pc-derived-category (deps def-pc-scheme, def-weil-abstract-derived-category): no cycle with downstream users. FIX more, RETURN less: C4 cited Tag 0BDH (perfect-section-perfect-complexes, jumping loci of Betti numbers) does not contain the definition, missed by the second reading; re-cited to Cohomology Definition 08CM with strictly perfect 08C4 and affine comparison 08EB. Statement made precise: open covering, isomorphism in D(O_{U_i}) of all O-modules, strictly perfect = bounded with terms direct summands of finite free O_U-modules; on affine opens equals bounded complexes of finite projective A-modules.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.PerfectComplex",
+  "declaration": "AlgebraicGeometry.Scheme.IsPerfect",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.IsStrictlyPerfect",
+   "AlgebraicGeometry.Scheme.IsPerfect",
+   "AlgebraicGeometry.Scheme.perfectSubcategory"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/PerfectComplex.lean",
+  "statement": "def IsPerfect (X : Scheme.{u}) [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] [∀ U : X.Opens, HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))] (E : schemeDerivedCategory X) : Prop",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-dpf1302"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-dpf1302",
+  "group": "M1",
+  "result": "fix",
+  "note": "X : Scheme.{u}, E : schemeDerivedCategory X with HasDerivedCategory.{w} binders (global and per-open as IsPseudoCoherent); open covering pointwise; strictly perfect = bounded (a,b) and each term a direct summand ι ≫ π = 𝟙 of SheafOfModules.free (ULift (Fin m)); iso via overFunctor.mapDerivedCategory ≅ Q.obj K; D_perf as ObjectProperty"
  }
 }
