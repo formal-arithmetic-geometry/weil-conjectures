@@ -1,11 +1,11 @@
 # Work queue
 
-548 items; claim with `tools/claim.py next <group> [--stage N]`.
+543 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (548)
+## Stage 2: nodes to state (543)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -71,13 +71,11 @@
 | `lem-weil-pbc-coherent-sheaf-hom-coherent` | 1 | state |
 | `lem-weil-pbc-coherent-stalk-map-extends` | 1 | state |
 | `lem-weil-pbc-coherent-twist-global-generation` | 1 | state |
-| `lem-weil-pbc-constructible-module-noetherian-descent` | 1 | state |
 | `lem-weil-pbc-descend-closed-immersion` | 1 | state |
 | `lem-weil-pbc-descend-finite` | 1 | state |
 | `lem-weil-pbc-descend-finite-locally-free` | 1 | state |
 | `lem-weil-pbc-etale-finite-data-descent` | 1 | state |
 | `lem-weil-pbc-etale-infinitesimal-neighbourhoods` | 1 | state |
-| `lem-weil-pbc-eventually-affine` | 1 | state |
 | `lem-weil-pbc-finite-presentation-kernel-surjection-finite-type` | 1 | state |
 | `lem-weil-pbc-finite-pushforward-coherent` | 1 | state |
 | `lem-weil-pbc-flat-fp-lqf-bounded-stratification` | 1 | state |
@@ -90,8 +88,6 @@
 | `lem-weil-pbc-lift-projective-module-etale` | 1 | state |
 | `lem-weil-pbc-limit-fibre-products` | 1 | state |
 | `lem-weil-pbc-lqf-qc-source-bounded-fibres` | 1 | state |
-| `lem-weil-pbc-lqf-restriction-to-opens` | 1 | state |
-| `lem-weil-pbc-module-base-change-map-pasting` | 1 | state |
 | `lem-weil-pbc-module-directed-colimit-finite-presentation` | 1 | state |
 | `lem-weil-pbc-module-filtered-colimit-finite-presentation` | 1 | state |
 | `lem-weil-pbc-module-finite-presentation-extension` | 1 | state |
@@ -99,7 +95,6 @@
 | `lem-weil-pbc-module-finite-type-image-extension` | 1 | state |
 | `lem-weil-pbc-module-finite-type-submodule-extension` | 1 | state |
 | `lem-weil-pbc-module-finite-type-surjective-on-stalk` | 1 | state |
-| `lem-weil-pbc-module-injects-localizations-associated-primes` | 1 | state |
 | `lem-weil-pbc-module-open-restriction-injectives` | 1 | state |
 | `lem-weil-pbc-module-pullback-affine-sections` | 1 | state |
 | `lem-weil-pbc-module-pullback-finite-type` | 1 | state |
