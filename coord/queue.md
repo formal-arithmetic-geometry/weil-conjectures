@@ -1,31 +1,27 @@
 # Work queue
 
-27 items; claim with `tools/claim.py next <group> [--stage N]`.
+23 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (27)
+## Stage 2: nodes to state (23)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
 | `def-nagata-morphism-equality-stage` | 1 | state | 11 |
-| `lemma-nagata-qc-open-eq-eventually` | 3 | state | 10 |
 | `lem-sc-boundary-cech-injective-middle` | 1 | state | 1 |
 | `cor-galois-lisse-representations` | 1 | state | 0 |
 | `lem-pc-affine-morphism-hom-out-of-perfect` | 1 | state | 0 |
 | `lem-pc-global-hom-pullback-adjunction` | 1 | state | 0 |
-| `lem-pc-twist-cech-monomial-decomposition` | 1 | state | 0 |
 | `lem-sc-affine-koszul-cech-derived-comparison` | 1 | state | 0 |
 | `lem-sc-boundary-cech-local-lifts` | 1 | state | 0 |
 | `lem-sc-closed-pushforward-boundary-naturality` | 1 | state | 0 |
 | `lem-sc-flat-precompose-pus` | 1 | state | 0 |
 | `lem-sc-hilb-dominating-power` | 1 | state | 0 |
-| `lem-sc-noetherian-extension-by-zero-reduction` | 1 | state | 0 |
 | `lem-sc-picard-cech-cup-pullback-compat` | 1 | state | 0 |
 | `lem-sc-picard-h1-restriction-compatibility` | 1 | state | 0 |
 | `lem-sc-qcoh-complex-alternating-cech-derived-sections` | 1 | state | 0 |
-| `lem-sc-zariski-contracted-power-extension` | 1 | state | 0 |
 | `lem-weil-pbc-cohomology-colimit-of-sites` | 1 | state | 0 |
 | `lem-weil-pbc-colimit-of-sites-injective-system` | 1 | state | 0 |
 | `lem-weil-pbc-etale-mayer-vietoris-pullback` | 1 | state | 0 |
