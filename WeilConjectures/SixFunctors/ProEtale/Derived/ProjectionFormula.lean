@@ -79,6 +79,11 @@ constructibility is étale origin); at the `ℓ`-adic stages they are isomorphis
 étale model (`WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula.Rational`), the stage
 `ℚ̄_ℓ` is covered through the finite stages `E` at which its objects are represented: the
 `2`-colimit over `E` and the scalar extensions `E ⟶ E'` are not constructed in the repository.
+The statement cannot be made directly with the discrete coefficients
+`AlgebraicGeometry.WeilCoefficients` (`ℚ̄_ℓ`-modules): there `ν^*` commutes with `Rg_*` on
+bounded below complexes, so the projection formula for objects of étale origin would be the
+étale one with discrete coefficients of characteristic zero, which fails (see the docstring of
+`AlgebraicGeometry.Etale.hasProjectionFormula_field`).
 
 -/
 
