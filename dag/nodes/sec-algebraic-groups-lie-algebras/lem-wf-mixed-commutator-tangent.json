@@ -13,17 +13,61 @@
  },
  "kind": "statement",
  "title": "Mixed commutator coefficient of infinitesimal matrix points",
- "statement": "Let k be a field, let V be a finite-dimensional k-vector space, and let G be a closed subgroup scheme of GL(V). Using the dual-number rings of [def-sc-dual-numbers], set A=k[\\varepsilon,\\delta]/(\\varepsilon^2,\\delta^2). If X,Y\\in\\operatorname{End}_k(V) satisfy 1+\\varepsilon X\\in G(k[\\varepsilon]/\\varepsilon^2) and 1+\\delta Y\\in G(k[\\delta]/\\delta^2), then their base changes to A lie in G(A), and the commutator (1+\\varepsilon X)(1+\\delta Y)(1-\\varepsilon X)(1-\\delta Y) lies in G(A) and equals 1+\\varepsilon\\delta(XY-YX). The inclusion k[\\eta]/(\\eta^2)\\hookrightarrow A given by \\eta\\mapsto\\varepsilon\\delta therefore shows 1+\\eta(XY-YX)\\in G(k[\\eta]/\\eta^2).",
+ "statement": "Let k be a field, let V be a finite-dimensional k-vector space, and let G be a closed subgroup scheme of GL(V) [def-sc-group-scheme-subgroup]. Using the dual-number rings of [def-sc-dual-numbers], let A be the k-algebra k[\\varepsilon,\\delta]/(\\varepsilon^2,\\delta^2), with k-basis 1,\\varepsilon,\\delta,\\varepsilon\\delta. If X,Y\\in\\operatorname{End}_k(V) satisfy 1+\\varepsilon X\\in G(k[\\varepsilon]/\\varepsilon^2) and 1+\\delta Y\\in G(k[\\delta]/\\delta^2), then their base changes to A lie in G(A), and the commutator (1+\\varepsilon X)(1+\\delta Y)(1-\\varepsilon X)(1-\\delta Y) lies in G(A) and equals 1+\\varepsilon\\delta(XY-YX). The k-algebra map k[\\eta]/(\\eta^2)\\hookrightarrow A given by \\eta\\mapsto\\varepsilon\\delta therefore shows 1+\\eta(XY-YX)\\in G(k[\\eta]/\\eta^2).",
  "source": {
   "document": "Milne, Algebraic Groups (2017)",
   "place": "Chapter 10, differential of multiplication and commutator"
  },
  "stmt_deps": [
-  "def-sc-dual-numbers"
+  "def-sc-dual-numbers",
+  "def-sc-group-scheme-subgroup"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The maps k[\\varepsilon]/(\\varepsilon^2) \\to A and k[\\delta]/(\\delta^2) \\to A sending the named nilpotent to \\varepsilon and \\delta are k-algebra maps. Hence the two given points base-change to elements of G(A) by functoriality of the defining equations. By [def-sc-group-scheme-subgroup], G(A) is a subgroup of GL(V\\otimes_k A), so their product with the inverses 1-\\varepsilon X and 1-\\delta Y is again a G(A)-point.",
+   "uses": [
+    "def-sc-dual-numbers",
+    "def-sc-group-scheme-subgroup"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Milne, Algebraic Groups (2017)",
+    "place": "Chapter 10, differential of multiplication and commutator"
+   }
+  },
+  {
+   "text": "Using \\varepsilon^2=\\delta^2=0 and centrality of the scalar nilpotents, direct multiplication gives (1+\\varepsilon X)(1+\\delta Y)(1-\\varepsilon X)(1-\\delta Y)=1+\\varepsilon\\delta(XY-YX): after the first two factors the terms are 1+\\varepsilon X+\\delta Y+\\varepsilon\\delta XY, multiplication by 1-\\varepsilon X cancels the pure \\varepsilon term and changes the mixed term to \\varepsilon\\delta(XY-YX), and multiplication by 1-\\delta Y cancels the pure \\delta term without changing that mixed term.",
+   "uses": [
+    "def-sc-dual-numbers"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "Milne, Algebraic Groups (2017)",
+    "place": "Chapter 10, differential of multiplication and commutator"
+   }
+  },
+  {
+   "text": "Let Z=XY-YX. The displayed matrix is therefore 1+\\varepsilon\\delta Z and is a G(A)-point. To descend this membership, write each defining equation of the closed subgroup G as a polynomial in the matrix entries. Evaluating it at 1+\\varepsilon\\delta Z has the form c+\\varepsilon\\delta d, while evaluating at 1+\\eta Z in k[\\eta]/(\\eta^2) has the same coefficients c and d with \\eta in place of \\varepsilon\\delta. Since 1,\\varepsilon,\\delta,\\varepsilon\\delta are k-linearly independent in A, the vanishing in A forces c=d=0; hence 1+\\eta Z satisfies all defining equations. Its inverse is 1-\\eta Z, so it is an element of G(k[\\eta]/(\\eta^2)).",
+   "uses": [
+    "def-sc-dual-numbers",
+    "def-sc-group-scheme-subgroup"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Milne, Algebraic Groups (2017)",
+    "place": "Chapter 10, differential of multiplication and commutator"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-dual-numbers",
+  "def-sc-group-scheme-subgroup"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "Milne, Algebraic Groups (2017)",
+  "place": "Chapter 10, differential of multiplication and commutator"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -48,12 +92,27 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-wf-lie-algebra-derivation-bracket",
   "by": "worker",
   "date": "2026-10-11"
  },
  "chapter": "sec-algebraic-groups-lie-algebras",
- "unit": "sk-d-tangent"
+ "unit": "sk-d-tangent",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-wf-mixed-commutator-tangent",
+  "worker": "stage1",
+  "summary": "Expanded the item into three proof steps: base change and subgroup closure, the explicit dual-parameter matrix multiplication, and coefficient extraction along eta mapping to epsilon delta. Added the existing subgroup-scheme definition as the only additional statement dependency; no new nodes were needed.",
+  "blueprint": "Realizes the Lie algebra paragraph's commutator calculation underlying closure under [X,Y]=XY-YX in def-wf-lie-algebra-derivation."
+ },
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-mct0024",
+  "group": "C1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-mct0024 (reviewer sub-agent of L); spot-checked: Expanded (1+eX)(1+dY)(1-eX)(1-dY) by hand: 1+eX+dY+edXY, then 1+dY+ed(XY-YX), then 1+ed(XY-YX) (step 2 correct, 1-eX inverse by e^2=0); step 1 base change along k[e],k[d]->A and subgroup closure is exactly def-sc-group-scheme-subgroup (C4 ok); step 3 descends membership via defining equations: entries in k+k*ed with (ed)^2=0 give f=c+ed*d, same c,d for eta, linear independence of 1,e,d,ed forces c=d=0, inverse 1-eta Z: closed-subscheme condition used explicitly; citer lem-wf-lie-algebra-derivation-bracket (0645b5857) uses only G(A) membership, the value 1+ed[X,Y], the eta-preimage in G(k[eta]) and the case GL(M) in GL(M), all stated; no duplicate (lem-ag-closure-commutators is a degree-datum statement). Second reading by C1: no missed fault found. No repairs."
+ }
 }
