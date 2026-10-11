@@ -1,11 +1,11 @@
 # Work queue
 
-321 items; claim with `tools/claim.py next <group> [--stage N]`.
+318 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (321)
+## Stage 2: nodes to state (318)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -48,10 +48,7 @@
 | `lem-weil-pbc-ring-quasi-finite-locus-open` | 1 | state |
 | `lem-weil-pbc-ringed-space-colimit-restriction` | 1 | state |
 | `lem-weil-pbc-ringed-space-module-exactness-local-lifting` | 1 | state |
-| `lem-weil-pbc-ringed-space-open-restriction-adjunction` | 1 | state |
-| `lem-weil-pbc-schanuel` | 1 | state |
 | `lem-weil-pbc-scheme-clopen-idempotent` | 1 | state |
-| `lem-weil-pbc-scheme-modules-functorial-injective-embeddings` | 1 | state |
 | `lem-weil-pbc-scheme-theoretic-support` | 1 | state |
 | `lem-weil-pbc-scheme-theoretic-union` | 1 | state |
 | `lem-weil-pbc-sections-annihilated-by-ideal` | 1 | state |
