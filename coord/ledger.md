@@ -3966,3 +3966,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 09:13 L: merged deliver/E1/lem-weil-pbc-associated-prime-localize-at-prime (stage 2; reviewer PASS; first push; Sheaf.RingTheory.AssociatedPrimeLocalizeAtPrime Module.associated_prime_localize_at_prime)
 - 09:13 L: merged deliver/K1/def-sbc-smooth-morphisms (stage 2; reviewer PASS; first push; Mathlib.AlgebraicGeometry.Morphisms.Smooth AlgebraicGeometry.Smooth; existing declaration)
 - 09:13 L: merged deliver/H1/lem-weil-pbc-basis-sheaf-sections-germs (stage 2; reviewer FIX; first push; Sheaf.Topology.BasisSheafSectionsGerms TopologicalSpace.Opens.sections_eq_locally_germ_families; reverted nodes: def-weil-pbc-basis-presheaf-stalk)
+- 09:14 L: merged deliver/F1/lem-weil-pbc-complete-local-nagata (stage 2; reviewer PASS; first push; Sheaf.RingTheory.NagataOfCompleteLocal isNagataRing_of_complete_local)
