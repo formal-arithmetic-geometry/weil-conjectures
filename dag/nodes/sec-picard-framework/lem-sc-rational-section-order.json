@@ -132,5 +132,23 @@
   "group": "F1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of F1; spot-checked by L: L: reviewed in full by a reviewer sub-agent (PASS): 02SE/02SF/02SG read, 3 steps checked, small cases"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RationalSectionOrder",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.rational_section_order",
+  "file": "lean/Sheaf/AlgebraicGeometry/RationalSectionOrder.lean",
+  "statement": "theorem rational_section_order (k : Type u) [Field k] [IsAlgClosed k] (C : Scheme.{u}) (f : C ⟶ Spec (.of k)) [IsConnectedCurve f] [Smooth f] (L : C.Modules) [L.IsInvertible] : let hC := Classical.choose (C.smooth_connected_curve_local_rings k f) letI := hC let h := Classical.choose_spec (C.smooth_connected_curve_local_rings k f) let η := genericPoint C let lam := fun x : C ↦ TopCat.Presheaf.stalkSpecializes L.val.presheaf ((genericPoint_spec C).specializes (Set.mem_univ x)) let v := fun P : {P : C // P ∈ closedPoints C} ↦ Classical.choose ((h.2.2.2.2.2.2.2.2 P.val P.property).2.2) ∀ (s : ↑(TopCat.Presheaf.stalk L.val.presheaf η)), s ≠ 0 → (∀ (P : {P : C // P ∈ closedPoints C}) (e e' : ↑(TopCat.Presheaf.stalk L.val.presheaf P.val)), Submodule.span (C.presheaf.stalk P.val) {e} = ⊤ → Submodule.span (C.presheaf.stalk P.val) {e'} = ⊤ → ∀ g g' : C.functionFieldˣ, s = (g : C.functionField) • lam P.val e → s = (g' : C.functionField) • lam P.val e' → Multiplicative.toAdd (v P g) = Multiplicative.toAdd (v P g')) ∧ Set.Finite {P : C | ∃ hP : P ∈ closedPoints C, ∃ e : ↑(TopCat.Presheaf.stalk L.val.presheaf P), Submodule.span (C.presheaf.stalk P) {e} = ⊤ ∧ ∃ g : C.functionFieldˣ, s = (g : C.functionField) • lam P e ∧ Multiplicative.toAdd (v ⟨P, hP⟩ g) ≠ 0}",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-rso0940",
+  "group": "F1",
+  "result": "pass",
+  "note": "k alg closed [Field][IsAlgClosed]; C smooth connected curve = IsConnectedCurve f + Smooth f (def-sc-curves record, as landed local-rings dep); integrality/eta/k(C)=C.functionField and v_P chosen from landed smooth_connected_curve_local_rings (projections h.2^8 .2.2 counted; v characterized by unit*t^n exponent = normalized valuation, no second order notion); L IsInvertible; L_x, lam_x = stalkSpecializes as in invertible_module_generic_stalk; s≠0; clause 1 all generators e,e' and units g,g' -> equal orders; clause 2 Set.Finite of closed P with some generator/coefficient of nonzero order (= support by clause 1); #check: names resolve to AlgebraicGeometry.*; compile clean"
  }
 }
