@@ -1,11 +1,11 @@
 # Work queue
 
-911 items; claim with `tools/claim.py next <group> [--stage N]`.
+909 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (911)
+## Stage 2: nodes to state (909)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -28,26 +28,24 @@
 | `lem-sc-base-change-curve` | 1 | state |
 | `lem-sc-bounded-above-finite-free-hom-acyclic` | 1 | state |
 | `lem-sc-derived-hom-tensor-total` | 1 | state |
-| `lem-sc-etale-faithfully-flat-local` | 1 | state |
 | `lem-sc-p1-ext-locally-free-naturality` | 1 | state |
 | `lem-sc-picard-h1-multiple-locus` | 1 | state |
-| `lem-sc-picard-h1-product-injective` | 1 | state |
 | `lem-sc-picard-locus-closed` | 1 | state |
 | `lem-sc-picard-product-open` | 1 | state |
 | `lem-sc-qcoh-cech-total-tensor-iso` | 1 | state |
 | `lem-sc-ringed-space-restrict-injective-resolution` | 1 | state |
 | `lem-sc-smooth-proper-diagonal-conormal-differentials` | 1 | state |
-| `lem-sc-strict-henselization-dimension` | 1 | state |
 | `lem-sc-tangent-map-linear` | 1 | state |
 | `lem-sc-tensor-generating-sections` | 1 | state |
 | `lem-sc-tensor-section-affine-open` | 1 | state |
 | `lem-sc-valuation-zero-section-relative-cartier` | 1 | state |
 | `lem-sp-cart-eilenberg-left-exact-cohomology` | 1 | state |
-| `lem-sp-cartan-eilenberg-exists` | 1 | state |
-| `lem-sp-cartan-eilenberg-properties` | 1 | state |
+| `lem-sp-cartan-eilenberg-comparison-independence` | 1 | state |
+| `lem-sp-cartan-eilenberg-double-complex-homotopy` | 1 | state |
+| `lem-sp-ce-horizontal-lift` | 1 | state |
+| `lem-sp-ce-vertical-nullhomotopy` | 1 | state |
 | `lem-sp-filtered-complex-ZB-description` | 1 | state |
 | `lem-sp-filtered-complex-associated-spectral-sequence-construction` | 1 | state |
-| `lem-sp-finite-filtration-induction` | 1 | state |
 | `lem-weil-derived-limit-existence` | 1 | state |
 | `lem-weil-geometrically-connected-check-after-extension` | 1 | state |
 | `lem-weil-l-adic-extension-integers-dvr` | 1 | state |
@@ -921,7 +919,7 @@
 | `lem-sc-normalization-properties` | 3 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 903 nodes that wait for a statement dependency, 40 nodes that wait for stage 1.
+Not open yet: 899 nodes that wait for a statement dependency, 40 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
