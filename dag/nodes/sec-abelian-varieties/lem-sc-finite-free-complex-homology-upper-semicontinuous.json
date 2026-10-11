@@ -121,5 +121,24 @@
   "group": "M1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-hus0037 (reviewer sub-agent of L); spot-checked: Checked by hand Tag 0BDI bookkeeping: b_i=c-r_i-r_{i-1}; {b_i<r}=union over bounded (a,b), a+b>c-r of {r_i>=a}∩{r_{i-1}>=b}; D(f)∩D(g)=D(fg); r<=0 and empty-minor cases. Citer lem-sc-perfect-jump-loci (a35974ef8) uses exactly upper semicontinuity and quasi-compact open {b_i<r}. Mathlib grep fittingIdeal/rank_le_iff: no matrix-minor-locus declaration. FIX more, RETURN less: (1) B class (d) lem-sc-matrix-rank-minor-locus: two lines from existing leaf def-weil-matrix-rank (rank = largest nonzero minor) plus Laplace expansion and det commuting with A->kappa(p); folded into elementary Step 2, node dropped. (2) B class (d) lem-sc-finite-dimensional-complex-homology-rank: two lines from existing leaf lem-weil-pbc-idempotent-charpoly-rank-nullity; folded into elementary Step 1, node dropped. Both cited leaves are generic linear-algebra tools (C7/C8).; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteFreeComplexHomologyUpperSemicontinuous",
+  "declaration": "ModuleCat.finiteFreeComplex_homology_upperSemicontinuous",
+  "statement": "theorem finiteFreeComplex_homology_upperSemicontinuous (A : Type u) [CommRing A] (K : CochainComplex (ModuleCat.{max u v} A) ℤ) (hbounded : ∃ a b : ℤ, K.IsStrictlyGE a ∧ K.IsStrictlyLE b) (hfree : ∀ n : ℤ, Module.Free A (K.X n) ∧ Module.Finite A (K.X n)) (i : ℤ) : ∃ β : PrimeSpectrum A → ℕ, (∀ p : PrimeSpectrum A, β p = Module.finrank p.asIdeal.ResidueField ((((ModuleCat.extendScalars.{u, u, max u v} (algebraMap A p.asIdeal.ResidueField)).mapHomologicalComplex (ComplexShape.up ℤ)).obj K).homology i)) ∧ UpperSemicontinuous β ∧ (∀ r : ℤ, ∃ s : Finset A, {p : PrimeSpectrum A | (β p : ℤ) < r} = ⋃ f ∈ (s : Set A), (PrimeSpectrum.basicOpen f : Set (PrimeSpectrum A))) ∧ (∀ r : ℤ, IsOpen {p : PrimeSpectrum A | (β p : ℤ) < r} ∧ IsCompact {p : PrimeSpectrum A | (β p : ℤ) < r})",
+  "by": "J1",
+  "date": "2026-10-11",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteFreeComplexHomologyUpperSemicontinuous.lean",
+  "branch": "sheaf-dag",
+  "existing": false,
+  "note": "Second reading: arbitrary integer support bounds and thresholds; ring-module complex and residue-field extension of scalars; explicit openness and compactness."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-ffh1326",
+  "group": "J1",
+  "result": "pass",
+  "note": "A CommRing; K CochainComplex (ModuleCat.{max u v} A) ℤ with IsStrictlyGE/LE a b (arbitrary ints) and Module.Free∧Module.Finite terms = landed MPseudoCoherent/RingPseudoCoherent form; κ(p) = p.asIdeal.ResidueField, fibre via extendScalars.mapHomologicalComplex as landed MinimalFreeModel; β p = finrank H^i; UpperSemicontinuous; ∀ r:ℤ, {β<r} = ⋃ f∈s basicOpen f with s Finset; IsOpen ∧ IsCompact; no let, no hollow binder, node json diff only adds lean record"
  }
 }
