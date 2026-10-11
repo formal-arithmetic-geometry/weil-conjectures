@@ -1,11 +1,11 @@
 # Work queue
 
-111 items; claim with `tools/claim.py next <group> [--stage N]`.
+108 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (111)
+## Stage 2: nodes to state (108)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
@@ -51,8 +51,6 @@
 | `lem-pc-rf-perfect-base-change` | 1 | state | 0 |
 | `lem-pc-rf-single-complex-qcqs-induction` | 1 | state | 0 |
 | `lem-pc-rf-single-complex-relative-mayer-vietoris` | 1 | state | 0 |
-| `lem-pc-ringed-space-pointwise-truncation-limit` | 1 | state | 0 |
-| `lem-pc-sheaf-rhom-projection-formula` | 1 | state | 0 |
 | `lem-pc-tor-independent-perfect-tensor-base-change` | 1 | state | 0 |
 | `lem-pqf-quasicompact-h1-zero` | 1 | state | 0 |
 | `lem-sc-affine-derived-cohomology` | 1 | state | 0 |
@@ -89,7 +87,6 @@
 | `lem-sc-smooth-proper-diagonal-koszul-dual` | 1 | state | 0 |
 | `lem-sc-smooth-proper-diagonal-tensor-formula` | 1 | state | 0 |
 | `lem-sc-smooth-proper-relative-dualizing-general` | 1 | state | 0 |
-| `lem-weil-pbc-cohomology-powers-ideal-application` | 1 | state | 0 |
 | `lem-weil-pbc-etale-mayer-vietoris-pullback` | 1 | state | 0 |
 | `lem-weil-pbc-formal-functions-complete-base` | 1 | state | 0 |
 | `lem-weil-pbc-formal-systems-graded-vanishing` | 1 | state | 0 |
