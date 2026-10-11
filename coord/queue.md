@@ -1,11 +1,11 @@
 # Work queue
 
-537 items; claim with `tools/claim.py next <group> [--stage N]`.
+533 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (537)
+## Stage 2: nodes to state (533)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -49,7 +49,6 @@
 | `lem-sc-snapper-numerical-polynomial` | 1 | state |
 | `lem-sc-torsion-sections-generic` | 1 | state |
 | `lem-sc-torsion-subsheaf-quotient` | 1 | state |
-| `lem-sp-page-induction` | 1 | state |
 | `lem-weil-derived-limit-roos-complex` | 1 | state |
 | `lem-weil-pbc-affine-conormal-sections` | 1 | state |
 | `lem-weil-pbc-affine-finite-type-generating-sections` | 1 | state |
@@ -68,7 +67,6 @@
 | `lem-weil-pbc-coherent-sheaf-hom-coherent` | 1 | state |
 | `lem-weil-pbc-coherent-stalk-map-extends` | 1 | state |
 | `lem-weil-pbc-coherent-twist-global-generation` | 1 | state |
-| `lem-weil-pbc-descend-closed-immersion` | 1 | state |
 | `lem-weil-pbc-descend-finite-locally-free` | 1 | state |
 | `lem-weil-pbc-etale-finite-data-descent` | 1 | state |
 | `lem-weil-pbc-etale-infinitesimal-neighbourhoods` | 1 | state |
@@ -96,7 +94,6 @@
 | `lem-weil-pbc-module-pushforward-injectives-sections-quasi-iso` | 1 | state |
 | `lem-weil-pbc-module-sheaf-colimit-constructible` | 1 | state |
 | `lem-weil-pbc-module-sheaves-colimits-forgetful` | 1 | state |
-| `lem-weil-pbc-module-sheaves-enough-injectives` | 1 | state |
 | `lem-weil-pbc-module-sheaves-grothendieck-abelian` | 1 | state |
 | `lem-weil-pbc-module-skyscraper-stalk-adjunction` | 1 | state |
 | `lem-weil-pbc-module-stalk-exact` | 1 | state |
@@ -104,7 +101,6 @@
 | `lem-weil-pbc-module-stalk-pullback` | 1 | state |
 | `lem-weil-pbc-module-stalk-tensor` | 1 | state |
 | `lem-weil-pbc-module-tensor-hom-adjunction` | 1 | state |
-| `lem-weil-pbc-n1-descends-finite-domain-extension` | 1 | state |
 | `lem-weil-pbc-n1-local-characterization` | 1 | state |
 | `lem-weil-pbc-n2-ascends-finite-domain-extension` | 1 | state |
 | `lem-weil-pbc-n2-char-p-purely-inseparable-criterion` | 1 | state |
