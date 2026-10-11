@@ -183,5 +183,23 @@
   "item": "lem-weil-pbc-closed-pushforward-constant-restriction",
   "worker": "stage1",
   "summary": "Statement kept (correct; the display in the proof of 09ZG). Proof written by the agent in five steps, no new nodes: (1) the sheaf H(U)=LC(U∩Z',S) on Z and the presheaf map ψ:i_pG→H, ι(g)↦g|_{U∩Z'}, from the colimit's universal property; (2) φ:G|_Z→H from the universal property of sheafification, β=φ_Z, and φ(η_V g)=g|_{V∩Z∩Z'}, giving the compatibility; (3) φ injective on stalks, using the reviewed leaf lem-weil-pbc-sets-inverse-image-stalk (every element of (G|_Z)_z is a germ of η_V g) and the stalk computation of Sheaves 00AE (z∉Z': empty map on (V∩V')∖Z'; z∈Z': local constancy); (4) φ injective on sections by lem-weil-pbc-sheaf-sections-determined-by-germs; (5) surjectivity by gluing local preimages η(constant map) / η(empty map). The brief's suggested route through i^{-1} of constant sheaves and closed base change is not needed. Mathlib re-searched (leansearch, loogle, leanfinder, grep): no match."
+ },
+ "lean": {
+  "module": "Sheaf.Topology.ClosedPushforwardConstantRestriction",
+  "declaration": "TopCat.closed_pushforward_constant_restriction",
+  "file": "lean/Sheaf/Topology/ClosedPushforwardConstantRestriction.lean",
+  "statement": "theorem closed_pushforward_constant_restriction (X : TopCat.{u}) (Z Z' : Set X) (hZ : IsClosed Z) (hZ' : IsClosed Z') (S : Type u) : let G : X.Presheaf (Type u) := { obj := fun U ↦ LocallyConstant {x : X // x ∈ unop U ∧ x ∈ Z'} S map := fun {U V} f ↦ TypeCat.ofHom (LocallyConstant.comap ⟨fun x : {x : X // x ∈ unop V ∧ x ∈ Z'} ↦ ⟨x.1, f.unop.le x.2.1, x.2.2⟩, continuous_subtype_val.subtype_mk _⟩) map_id := by intros; rfl map_comp := by intros; rfl } let i : TopCat.of Z ⟶ X := TopCat.ofHom ⟨Subtype.val, continuous_subtype_val⟩ let P := (Presheaf.pullback (Type u) i).obj G let F := (presheafToSheaf (Opens.grothendieckTopology (TopCat.of Z)) (Type u)).obj P let eta := (Presheaf.pullbackPushforwardAdjunction (Type u) i).unit.app G let theta := (sheafificationAdjunction (Opens.grothendieckTopology (TopCat.of Z)) (Type u)).unit.app P ∃ beta : F.obj.obj (op ⊤) ≃ LocallyConstant {x : X // x ∈ Z ∧ x ∈ Z'} S, ∀ g : LocallyConstant Z' S, beta (theta.app (op ⊤) (P.map (homOfLE (show (⊤ : Opens Z) ≤ (Opens.map i).obj ⊤ from fun _ _ ↦ Set.mem_univ _)).op (eta.app (op ⊤) (LocallyConstant.comap ⟨fun x ↦ ⟨x.1, x.2.2⟩, continuous_subtype_val.subtype_mk _⟩ g)))) = LocallyConstant.comap ⟨fun x ↦ ⟨x.1, x.2.2⟩, continuous_subtype_val.subtype_mk _⟩ g",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-cpc1424",
+  "group": "C1",
+  "result": "pass",
+  "note": "X:TopCat, Z,Z' closed (both kept), S:Type u; G = explicit V|->LC(V∩Z',S) with comap restriction; i_p = Presheaf.pullback (Opens.map i).op.lan (CostructuredArrow colimit = V ⊇ i(U)); theta = sheafificationAdjunction unit (CategoryTheory.presheafToSheaf, #check'd); iota^Z_X = lanAdjunction unit at ⊤ then P.map ⊤≤i⁻¹⊤ (same encoding as landed topologicalPullbackSectionMap); beta : Equiv to LC(Z∩Z',S) chosen before ∀g; RHS comap = g|Z∩Z'; Z'=X is the Set.univ specialization; no Inhabited/finite added"
  }
 }
