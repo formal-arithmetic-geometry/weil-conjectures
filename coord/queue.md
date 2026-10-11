@@ -1,28 +1,30 @@
 # Work queue
 
-980 items; claim with `tools/claim.py next <group> [--stage N]`.
+981 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (980)
+## Stage 2: nodes to state (981)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
 | `def-pc-base-change` | 1 | state |
 | `def-pur-sheaf-hom` | 1 | state |
+| `def-weil-derived-tensor` | 1 | state |
 | `def-weil-pbc-derived-categories` | 1 | state |
 | `def-weil-pbc-finite-torsors` | 1 | state |
 | `lem-exc-abelian-sheaves-gmodules` | 1 | state |
 | `lem-exc-cochains-derived-invariants` | 1 | state |
 | `lem-kun-03sa` | 1 | state |
-| `lem-pc-bounded-above-flat-kflat-site` | 1 | state |
 | `lem-pc-bounded-above-flat-tensor-acyclic` | 1 | state |
 | `lem-pc-closed-subscheme-base-change-ideal-image` | 1 | state |
 | `lem-pc-derived-adjoint-functors` | 1 | state |
+| `lem-pc-derived-tensor-second-factor-functor` | 1 | state |
+| `lem-pc-derived-tensor-transitivity` | 1 | state |
 | `lem-pc-kflat-bounded-flat-replacement` | 1 | state |
+| `lem-pc-kflat-derived-tensor-associator` | 1 | state |
 | `lem-pc-kflat-pullback-preservation` | 1 | state |
-| `lem-pc-kflat-resolution` | 1 | state |
 | `lem-pc-module-inverse-image-adjunction` | 1 | state |
 | `lem-pc-module-pullback-adjunction` | 1 | state |
 | `lem-pc-module-pullback-identity-composition` | 1 | state |
@@ -38,8 +40,8 @@
 | `lem-pc-zero-scheme-pullback` | 1 | state |
 | `lem-pc-zero-scheme-pullback-local-coefficient` | 1 | state |
 | `lem-pod-lisse-module-sheaves-as-module-objects` | 1 | state |
+| `lem-pur-derived-change-of-rings` | 1 | state |
 | `lem-sc-affine-cap-section-open` | 1 | state |
-| `lem-sc-ample-finite-affine-cover` | 1 | state |
 | `lem-sc-ample-finite-principal-affine` | 1 | state |
 | `lem-sc-ample-finite-set-affine` | 1 | state |
 | `lem-sc-ample-proj-local-chart` | 1 | state |
@@ -58,7 +60,6 @@
 | `lem-sc-finite-maximals-over-element` | 1 | state |
 | `lem-sc-finite-pushforward-locally-free` | 1 | state |
 | `lem-sc-finite-sections-cover-qc` | 1 | state |
-| `lem-sc-finite-type-nonclosed-closure-closed-points` | 1 | state |
 | `lem-sc-free-prime-membership` | 1 | state |
 | `lem-sc-generic-stalk-finite-length` | 1 | state |
 | `lem-sc-generic-vanishing-kernel-colimit` | 1 | state |
@@ -990,7 +991,7 @@
 | `lem-sc-normalization-properties` | 3 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 978 nodes that wait for a statement dependency, 40 nodes that wait for stage 1.
+Not open yet: 973 nodes that wait for a statement dependency, 40 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
