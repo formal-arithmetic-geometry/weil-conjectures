@@ -4654,3 +4654,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 12:40 L: merged deliver/K1/lem-weil-pbc-popescu-delocalize-base (stage 2; reviewer PASS; first push; Sheaf.RingTheory.PopescuDelocalizeBase Algebra.exists_factorization_isElementaryStandardElement_of_localized_smooth)
 - 12:40 L: merged deliver/J1/lem-sc-finite-free-complex-homology-upper-semicontinuous (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.FiniteFreeComplexHomologyUpperSemicontinuous ModuleCat.finiteFreeComplex_homology_upperSemicontinuous)
 - 12:41 L: merged deliver/F1/lem-weil-pbc-popescu-artinian-flat-subalgebras (stage 2; reviewer PASS; first push; Sheaf.RingTheory.ArtinianFlatSubalgebras Algebra.exists_directed_artinian_flat_subalgebras)
+- 12:41 L: merged deliver/J1/lem-weil-pbc-affine-module-finite-type (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.AffineModuleFiniteType AlgebraicGeometry.Scheme.Modules.affine_module_finite_type)

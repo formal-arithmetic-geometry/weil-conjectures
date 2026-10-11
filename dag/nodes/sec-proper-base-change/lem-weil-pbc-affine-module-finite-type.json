@@ -212,5 +212,23 @@
   "worker": "stage1",
   "summary": "Mathlib leaf decision (B8): not a leaf; Mathlib has SheafOfModules.IsFiniteType and Scheme.Modules.pushforward but no relative affine module correspondence and no finite-type transfer (LeanSearch, LeanFinder twice, grep; Loogle rate-limited). Statement reworded: finite type over the sheaf of algebras A was cited to pqf-def-coherent, which defines finite type only for O_X-modules; it is now defined in the statement and cited to def-weil-pbc-module-finite-type-presentation(1) over the ringed space (X,A); quasi-coherence over A is spelled out; F is introduced with an isomorphism u_*F = M (existence and uniqueness from lem-weil-pbc-affine-module-correspondence) instead of 'the corresponding module'; def-pc-module-pullback (direct image), def-weil-sheaf-of-modules-category added to stmt_deps. Source document corrected from morphisms.tex to coherent.tex (Lemma 0897 is in coherent.tex, line 5247; '(details omitted)' at line 5291). Proof written out (the source omits it), local on X: Step 1 reduces to M = u_*F and reformulates finite type over A as local generation by sections; Step 2 (affine V) generation over A|_V gives F(u^{-1}V)=sum B s_i via the image sheaf of O^n -> F on the affine u^{-1}V; Step 3 the converse via the cokernel-image lemma on affine opens u^{-1}V' (u affine); Steps 4-5 the two implications using lem-weil-pbc-quasi-coherent-finite-type-affine and lem-weil-pbc-affine-finite-type-generating-sections. All cited statements are in unit sk-thm-p1 or are definitions / Mathlib leaves; no new node."
  },
- "reviewed": "pass (L, 2026-10-10): 5 steps by agent (the \"details omitted\" of 0897): on an affine open V with affine preimage, generation of M|_V over A|_V and generation of F on the preimage are both the statement that the sections span F(V_U) over B (image sheaf on affines), so finite type over A and finite type of F coincide via the affine finite-type criteria. Statement reworded to define finite type over the sheaf of algebras A on the ringed space (X, A); source document corrected to coherent.tex."
+ "reviewed": "pass (L, 2026-10-10): 5 steps by agent (the \"details omitted\" of 0897): on an affine open V with affine preimage, generation of M|_V over A|_V and generation of F on the preimage are both the statement that the sections span F(V_U) over B (image sheaf on affines), so finite type over A and finite type of F coincide via the affine finite-type criteria. Statement reworded to define finite type over the sheaf of algebras A on the ringed space (X, A); source document corrected to coherent.tex.",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AffineModuleFiniteType",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.affine_module_finite_type",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineModuleFiniteType.lean",
+  "statement": "theorem affine_module_finite_type [IsAffineHom f] (M : SheafOfModules.{u} AR) (hM : M.IsQuasicoherent) (F : U.Modules) (hF : F.IsQuasicoherent) (e : (R).obj F ≅ M) : M.IsFiniteType ↔ F.IsFiniteType",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-amf1329",
+  "group": "J1",
+  "result": "pass",
+  "note": "IsAffineHom f; A = TopCat.Sheaf.pushforward of U.sheaf (via sheafCompose forget2, as landed correspondence); M : SheafOfModules AR with IsQuasicoherent; F : U.Modules IsQuasicoherent; e : R.obj F ≅ M with R the correspondence's pushforward (𝟙 AR, A-action kept); conclusion M.IsFiniteType ↔ F.IsFiniteType both resolve to SheafOfModules.IsFiniteType/IsQuasicoherent (#check); no new defs, no lets, single universe u"
+ }
 }
