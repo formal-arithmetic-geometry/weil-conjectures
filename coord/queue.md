@@ -1,11 +1,11 @@
 # Work queue
 
-810 items; claim with `tools/claim.py next <group> [--stage N]`.
+804 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (810)
+## Stage 2: nodes to state (804)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -18,14 +18,12 @@
 | `lem-pc-module-pullback-identity-composition` | 1 | state |
 | `lem-pc-pre-derived-adjoint-functors-general` | 1 | state |
 | `lem-pc-ringed-space-product-kinjective` | 1 | state |
-| `lem-pod-adic-limit-finite-modules` | 1 | state |
 | `lem-sc-base-change-curve` | 1 | state |
 | `lem-sc-divisor-module-local` | 1 | state |
 | `lem-sc-finite-flat-unramified-tangent-criterion` | 1 | state |
 | `lem-sc-hilb-dominating-power` | 1 | state |
 | `lem-sc-p1-rhom-hom-derived-connecting` | 1 | state |
 | `lem-sc-product-tangent-space-direct-sum` | 1 | state |
-| `lem-sc-rational-point-tangent-derivation-identification` | 1 | state |
 | `lem-sc-rational-section-order` | 1 | state |
 | `lem-sc-rational-tangent-cotangent-duality` | 1 | state |
 | `lem-sc-rational-unramified-cotangent-criterion` | 1 | state |
@@ -44,16 +42,12 @@
 | `lem-weil-pbc-criterion-flatness-fibre-noetherian` | 1 | state |
 | `lem-weil-pbc-curve-assertions-finite-pushforward` | 1 | state |
 | `lem-weil-pbc-cyclic-extension-cocycle` | 1 | state |
-| `lem-weil-pbc-cyclic-extension-flat-descent` | 1 | state |
 | `lem-weil-pbc-depth-ext` | 1 | state |
 | `lem-weil-pbc-depth-in-ses` | 1 | state |
 | `lem-weil-pbc-depth-le-dim-associated-prime` | 1 | state |
 | `lem-weil-pbc-depth-le-support-dimension` | 1 | state |
 | `lem-weil-pbc-depth-over-quotient-ring` | 1 | state |
-| `lem-weil-pbc-depth-zero-injective-free-map-unit-minor` | 1 | state |
-| `lem-weil-pbc-derivation-extends` | 1 | state |
 | `lem-weil-pbc-derivation-extends-finite-type-extension` | 1 | state |
-| `lem-weil-pbc-derivation-nonzero-on-non-pth-power` | 1 | state |
 | `lem-weil-pbc-derived-adjunction-commshift` | 1 | state |
 | `lem-weil-pbc-derived-exchange-termwise` | 1 | state |
 | `lem-weil-pbc-derived-finite-product` | 1 | state |
