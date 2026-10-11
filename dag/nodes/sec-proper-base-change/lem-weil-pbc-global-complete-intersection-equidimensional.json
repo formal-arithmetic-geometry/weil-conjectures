@@ -181,5 +181,23 @@
   "worker": "stage1",
   "summary": "Read Algebra 00S8/00S9 and the paragraph after 00S9 (lines 35834-35849), 00KW, 00OP, 00OS, 00OT (statement and proof), and the citer lem-weil-pbc-lci-conormal-free-rank-codimension (step 2 uses exactly dim_p Spec T = m - t for T = Q/(f), T != 0, dim T = m - t, which the statement gives). Statement kept. Proof in five steps following the source: setup (T finite type, Q Noetherian, m - t >= 0); upper bound dim_p X <= dim X; every open neighbourhood of p contains a maximal ideal M (Jacobson, 00G1 node), as in the proof of 00OT; dim T_M >= m - t at every maximal M by 00OP (new unsplit node) and 00KW applied t times, written as Krull's height bound ht(M') <= ht(M'/J) + t (new Mathlib leaf Ideal.height_le_height_add_encard_of_subset), converted to dimensions of localizations by the existing leaf for dim R_p = height; lower bound via the existing node 00OU (dim at a closed point = dim of the local ring). Equidimensionality and irreducible components are not needed: only 00OT's direction (1) >= (3) is used, written out. The hypothesis dim T = m - t is used only for the upper bound. New nodes: lem-weil-pbc-polynomial-ring-maximal-localization-dimension (00OP, unsplit, Mathlib has only the global dim k[x_1..x_n] = n; candidate recorded), lem-weil-pbc-noetherian-height-quotient-bound (Mathlib leaf)."
  },
- "reviewed": "Reviewed by L 2026-10-10: faithful to the 00S8 paragraph after 00S9 with the needed direction of 00OT written out (every open neighbourhood contains a closed point by the Jacobson property; dim at a closed point = dim of the local ring by 00OU); dim T_M ≥ m−t from 00OP (new unsplit node, local form) and Krull's height theorem (new exact leaf, 00KW applied t times). No Mathlib match for the item."
+ "reviewed": "Reviewed by L 2026-10-10: faithful to the 00S8 paragraph after 00S9 with the needed direction of 00OT written out (every open neighbourhood contains a closed point by the Jacobson property; dim at a closed point = dim of the local ring by 00OU); dim T_M ≥ m−t from 00OP (new unsplit node, local form) and Krull's height theorem (new exact leaf, 00KW applied t times). No Mathlib match for the item.",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GlobalCompleteIntersectionEquidimensional",
+  "declaration": "AlgebraicGeometry.topologicalKrullDimAt_spec_quotient_mvPolynomial_of_eq",
+  "file": "lean/Sheaf/AlgebraicGeometry/GlobalCompleteIntersectionEquidimensional.lean",
+  "statement": "theorem topologicalKrullDimAt_spec_quotient_mvPolynomial_of_eq (k : Type u) [Field k] (m t : ℕ) (f : Fin t → MvPolynomial (Fin m) k) (hT : Nontrivial (MvPolynomial (Fin m) k ⧸ Ideal.span (Set.range f))) (hDim : t ≤ m ∧ topologicalKrullDim (Spec (CommRingCat.of (MvPolynomial (Fin m) k ⧸ Ideal.span (Set.range f)))) = ((m - t : ℕ) : WithBot ℕ∞)) : ∀ p : PrimeSpectrum (MvPolynomial (Fin m) k ⧸ Ideal.span (Set.range f)), topologicalKrullDimAt (⟨p, inferInstance⟩ : Spec (CommRingCat.of (MvPolynomial (Fin m) k ⧸ Ideal.span (Set.range f)))) = ((m - t : ℕ) : WithBot ℕ∞)",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-gce1100",
+  "group": "H1",
+  "result": "pass",
+  "note": "k field (Type u); m,t:ℕ; f:Fin t→MvPolynomial (Fin m) k; T=Q⧸span(range f); T≠0 as Nontrivial; dim Spec T=m-t as t≤m ∧ topologicalKrullDim(Spec T)=↑(m-t) (equivalent given T≠0); ∀ p, topologicalKrullDimAt at ⟨p,_⟩ (#print: the point p itself in Spec's Zariski space) = m-t; recorded decls of def-kun-topological-krull-dimension/-dimension-at-point and AlgebraicGeometry.Spec used"
+ }
 }
