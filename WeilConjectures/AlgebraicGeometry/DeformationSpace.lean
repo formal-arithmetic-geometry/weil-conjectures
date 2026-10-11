@@ -49,6 +49,27 @@ universe u
 
 open CategoryTheory Limits Polynomial LaurentPolynomial
 
+namespace Polynomial
+
+variable {R S : Type*} [CommRing R] [CommRing S]
+
+lemma span_X_le_ker_mk_comp_evalRingHom_zero (J : Ideal R) :
+    Ideal.span {(X : R[X])} ≤ RingHom.ker ((Ideal.Quotient.mk J).comp (evalRingHom 0)) := by
+  rw [Ideal.span_singleton_le_iff_mem, RingHom.mem_ker]
+  simp
+
+lemma quotientMap_comp_lift_evalRingHom_zero (φ : R →+* S) (J : Ideal R) (J' : Ideal S)
+    (h : J ≤ J'.comap φ)
+    (h' : Ideal.span {(X : R[X])} ≤ (Ideal.span {(X : S[X])}).comap (mapRingHom φ)) :
+    (Ideal.quotientMap J' φ h).comp (Ideal.Quotient.lift _ _
+      (fun _ ha ↦ span_X_le_ker_mk_comp_evalRingHom_zero J ha)) =
+      (Ideal.Quotient.lift _ _ (fun _ ha ↦ span_X_le_ker_mk_comp_evalRingHom_zero J' ha)).comp
+        (Ideal.quotientMap _ (mapRingHom φ) h') := by
+  refine Ideal.Quotient.ringHom_ext (RingHom.ext fun p ↦ ?_)
+  simp [eval_zero_map]
+
+end Polynomial
+
 /-! ### Polynomial and Laurent polynomial functors -/
 
 namespace CommRingCat
@@ -820,6 +841,52 @@ theorem isPullback_quotientPolynomialSpec :
     exact relativeGluingMap_toBase _ _ _ (Category.id_comp _)
   · simp only [Iso.refl_hom, asIso_hom, Category.id_comp]
     exact relativeGluingMap_toBase _ _ _ (Category.id_comp _)
+
+lemma toQuotientPresheaf_comp_normalConeToQuotient :
+    toQuotientPresheaf I.tIdeal I.map_tIdeal ≫ I.normalConeToQuotient =
+      I.reesToQuotientPolynomial ≫ I.quotientPolynomialEvalZero :=
+  rfl
+
+lemma polynomialC_comp_quotientPolynomialEvalZero :
+    I.quotientAlgebra.whiskerLeft CommRingCat.polynomialC ≫ I.quotientPolynomialEvalZero =
+      𝟙 _ := by
+  ext U x
+  exact Polynomial.eval_C
+
+/-- The map `𝒪_X[t] / t ⟶ 𝒪_X / I`, `t ↦ 0`. -/
+noncomputable def polynomialZeroToQuotient : X.polynomialZeroPresheaf ⟶ I.quotientAlgebra where
+  app U := CommRingCat.ofHom (Ideal.Quotient.lift _
+    ((Ideal.Quotient.mk (I.siteIdeal U.unop)).comp (Polynomial.evalRingHom 0))
+    fun _ ha ↦ Polynomial.span_X_le_ker_mk_comp_evalRingHom_zero _ ha)
+  naturality U V i := CommRingCat.hom_ext
+    (Polynomial.quotientMap_comp_lift_evalRingHom_zero _ _ _
+      (le_comap_quotientPresheaf _ I.map_siteIdeal i) (by
+        rw [← Ideal.map_le_iff_le_comap, Ideal.map_span, Set.image_singleton]
+        exact le_of_eq (congrArg (fun p ↦ Ideal.span {p}) (Polynomial.map_X _)))).symm
+
+lemma polynomialToPolynomialZero_comp_polynomialZeroToQuotient :
+    X.polynomialToPolynomialZero ≫ I.polynomialZeroToQuotient =
+      I.polynomialToQuotientPolynomial ≫ I.quotientPolynomialEvalZero := by
+  ext U p
+  change Ideal.Quotient.mk _ (Polynomial.eval 0 p) = Polynomial.eval 0 (Polynomial.map _ p)
+  rw [Polynomial.eval_zero_map]
+  rfl
+
+lemma toPolynomialZeroPresheaf_comp_polynomialZeroToQuotient :
+    X.toPolynomialZeroPresheaf ≫ I.polynomialZeroToQuotient = I.toQuotientAlgebra := by
+  ext U x
+  change Ideal.Quotient.mk _ (Polynomial.eval 0 (Polynomial.C x)) = _
+  rw [Polynomial.eval_C]
+  rfl
+
+lemma toPolynomialZeroPresheaf_comp_polynomialZeroToNormalCone :
+    X.toPolynomialZeroPresheaf ≫ I.polynomialZeroToNormalCone =
+      I.toReesPresheaf ≫ toQuotientPresheaf I.tIdeal I.map_tIdeal := by
+  ext U x
+  change Ideal.Quotient.mk _ ((I.siteIdeal U.unop).toExtendedReesAlgebra (Polynomial.C x)) =
+    Ideal.Quotient.mk _ _
+  rw [Ideal.toExtendedReesAlgebra_C]
+  rfl
 
 end IdealSheafData
 
