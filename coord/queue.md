@@ -1,11 +1,11 @@
 # Work queue
 
-967 items; claim with `tools/claim.py next <group> [--stage N]`.
+964 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (967)
+## Stage 2: nodes to state (964)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -28,7 +28,6 @@
 | `lem-exc-rg-open-stabilizer-adjoint` | 1 | state |
 | `lem-galois-descent` | 1 | state |
 | `lem-galois-descent-datum-diagonal-identity` | 1 | state |
-| `lem-galois-fpqc-morphisms-descend` | 1 | state |
 | `lem-galois-fpqc-pullback-canonical-iso` | 1 | state |
 | `lem-pc-affine-tilde-kflat` | 1 | state |
 | `lem-pc-balanced-derived-tensor-model` | 1 | state |
@@ -51,13 +50,11 @@
 | `lem-pc-module-bounded-flat-kflat` | 1 | state |
 | `lem-pc-monomial-cech-complex-homology` | 1 | state |
 | `lem-pc-nonzero-section-integral-cartier` | 1 | state |
-| `lem-pc-nowhere-dense-dim-zero` | 1 | state |
 | `lem-pc-pic-of-field` | 1 | state |
 | `lem-pc-pre-derived-adjoint-functors-general` | 1 | state |
 | `lem-pc-presheaf-change-of-rings-adjunction` | 1 | state |
 | `lem-pc-presheaf-module-inverse-image-adjunction` | 1 | state |
 | `lem-pc-proper-geometrically-reduced-global-sections-separable` | 1 | state |
-| `lem-pc-recd-fibre-cartier-local` | 1 | state |
 | `lem-pc-right-localization-hom-colimit` | 1 | state |
 | `lem-pc-ring-derived-map-lift` | 1 | state |
 | `lem-pc-ring-m-pseudo-coherent-vanishing-base` | 1 | state |
