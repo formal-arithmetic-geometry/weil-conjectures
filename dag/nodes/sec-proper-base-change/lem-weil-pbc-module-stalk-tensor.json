@@ -182,5 +182,23 @@
   "result": "pass",
   "note": "five steps along Stacks 01CB/008B (stalks as O_x-modules by the new definition leaf (ModuleCat/Stalk.lean:167/176); sheafification keeps the stalk (Sheafify.lean:137); the stalk of the presheaf tensor product as a filtered colimit of tensor products over varying rings (new unsplit node, Stacks 007K whose proof is omitted); the germ formula; naturality); 3 new nodes, two Mathlib leaves verified by the lead; brief mistakes: stalkSheafifyIso does not exist, 00DQ is not the varying-ring colimit lemma"
  },
- "lead_note": " L (19:57 UTC): lem-pc-ringed-space-module-stalk-tensor (any ringed space) now carries the same five steps; this scheme node is its special case (stage-3 dedupe candidate)."
+ "lead_note": " L (19:57 UTC): lem-pc-ringed-space-module-stalk-tensor (any ringed space) now carries the same five steps; this scheme node is its special case (stage-3 dedupe candidate).",
+ "lean": {
+  "module": "Sheaf.Algebra.Category.ModuleCat.Sheaf.StalkTensor",
+  "declaration": "SheafOfModules.stalkTensorIso",
+  "statement": "theorem stalkTensorIso (X : AlgebraicGeometry.RingedSpace.{u}) (x : X) : let R := (sheafCompose (Opens.grothendieckTopology X) (forget₂ CommRingCat.{u} RingCat.{u})).obj X.sheaf letI := monoidalCategory X.sheaf let S := AlgebraicGeometry.RingedSpace.moduleStalkFunctor X x ∃ Φ : ∀ F G : SheafOfModules.{u} R, S.obj (F ⊗ G) ≅ S.obj F ⊗ S.obj G, (∀ (F G : SheafOfModules.{u} R) (U : Opens X) (hx : x ∈ U) (s : F.val.obj (op U)) (t : G.val.obj (op U)), let P := F.val ⊗ G.val let θ := (PresheafOfModules.sheafificationAdjunction (𝟙 R.obj)).unit.app P ≫ (forget R).map (tensorObjIsoSheafification F G).inv (Φ F G).hom (TopCat.Presheaf.germ (F ⊗ G).val.presheaf U x hx ((θ.app (op U)) (s ⊗ₜ[X.presheaf.obj (op U)] t))) = (TopCat.Presheaf.germ F.val.presheaf U x hx s) ⊗ₜ[X.presheaf.stalk x] (TopCat.Presheaf.germ G.val.presheaf U x hx t)) ∧ (∀ (F G F' G' : SheafOfModules.{u} R) (f : F ⟶ F') (g : G ⟶ G'), S.map (f ⊗ₘ g) ≫ (Φ F' G').hom = (Φ F G).hom ≫ (S.map f ⊗ₘ S.map g))",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": true,
+  "note": "Apply SheafOfModules.stalkTensorIso X.toRingedSpace x. Its conclusion is exactly the scheme node, including the sheafification-unit germ formula and naturality in both module sheaves; no new hypothesis is needed. The duplicate scheme-specialized module was removed in the second reading."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-mst1201",
+  "group": "F1",
+  "result": "pass",
+  "note": "scheme X, point x, F G : X.Modules with the source MonoidalCategory X.Modules (= SheafOfModules.monoidalCategory X.sheaf), s⊗t = Scheme.Modules.tmulSection, stalks via RingedSpace.moduleStalkFunctor over O_{X,x}, germ formula and naturality in F,G: the scheme form in X.Modules/Γ/tmulSection is closed by stalkTensorIso X.toRingedSpace x definitionally (sandbox compile); Phi tied by the germ formula; record statement verbatim"
+ }
 }

@@ -4551,3 +4551,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 12:03 L: merged deliver/E1/lem-sc-coherent-free-stalks-locally-free (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.IsFiniteLocallyFreeOfCoherentFreeStalks AlgebraicGeometry.Scheme.Modules.isFiniteLocallyFree_of_coherent_free_stalks)
 - 12:03 L: merged deliver/J1/lem-pc-chi-zero-dim-support (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.EulerCharZeroDimSupport AlgebraicGeometry.Scheme.Modules.eulerChar_zero_dim_support; statement correction reverted (stmt_deps))
 - 12:03 L: merged deliver/H1/lem-weil-pbc-module-stalk-exact (stage 2; reviewer FIX; first push; Sheaf.Algebra.Homology.ModuleStalkExact AlgebraicGeometry.RingedSpace.module_stalk_exact)
+- 12:03 L: merged deliver/F1/lem-weil-pbc-module-stalk-tensor (stage 2; reviewer PASS; first push; Sheaf.Algebra.Category.ModuleCat.Sheaf.StalkTensor SheafOfModules.stalkTensorIso; existing declaration)
