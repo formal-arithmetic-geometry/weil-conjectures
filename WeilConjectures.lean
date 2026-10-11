@@ -1504,6 +1504,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula.Reduct
 public import WeilConjectures.SixFunctors.Etale.Derived.ReductionConservative
 public import WeilConjectures.SixFunctors.Etale.Derived.RefinementLowerShriekBaseChange
 public import WeilConjectures.SixFunctors.Etale.Derived.RefinementLowerShriekProjection
+public import WeilConjectures.SixFunctors.Etale.Derived.ScalarExtension
 public import WeilConjectures.SixFunctors.Etale.Derived.Shift
 public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality
 public import WeilConjectures.SixFunctors.Etale.Derived.Stability

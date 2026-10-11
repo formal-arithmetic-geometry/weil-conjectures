@@ -28,6 +28,20 @@ every morphism from `K` to a restriction of scalars factors uniquely.
 - `AlgebraicGeometry.Etale.nonempty_iso_fromIntegral_of_isDerivedBaseChange`
   (`lem-weil-scalar-extension-well-defined`): the rationalization of the derived base change
   only depends on the rationalization of the integral representative.
+- `AlgebraicGeometry.Etale.isTriangulated_derivedCompleteRationalScalarExtension`
+  (`lem-weil-scalar-extension-exact-triangulated`): the scalar extension
+  `D_comp(Y, E) ⥤ D_comp(Y, L)` is triangulated.
+
+## Implementation notes
+
+The derived extension of scalars of étale sheaves is not constructed in this repository. The
+scalar extension functor is therefore built from the hypotheses that every object of
+`D(Y_ét, 𝒪_E)` has a derived base change and that derived base change preserves derived
+completeness; these are the existence statements contained in the definition of the scalar
+extension in `def-weil-rationalization-karoubi`. The derived base change functor is then the
+left adjoint of restriction of scalars (`AlgebraicGeometry.Etale.derivedBaseChange`), and the
+functor between rationalizations is induced along `𝒪_E ⟶ 𝒪_L`
+(`CategoryTheory.Rationalization.mapOfRingHom`).
 -/
 
 @[expose] public section
@@ -76,6 +90,59 @@ lemma integersShrinkMap_mem_nonZeroDivisors {x : Shrink.{u + 1} (integers l E)}
   exact h0
 
 end PadicAlgCl
+
+namespace CategoryTheory.Rationalization
+
+variable {R R' : Type*} [CommRing R] [CommRing R'] (ψ : R →+* R') {M : Submonoid R}
+  {M' : Submonoid R'} (hM : M ≤ M'.comap ψ)
+  {C : Type*} [Category C] [Preadditive C] [Linear R C] [HasZeroObject C]
+  [HasShift C ℤ] [∀ n : ℤ, (shiftFunctor C n).Additive] [∀ n : ℤ, (shiftFunctor C n).Linear R]
+  [Pretriangulated C] [IsTriangulated C]
+  {D : Type*} [Category D] [Preadditive D] [Linear R' D] [HasZeroObject D]
+  [HasShift D ℤ] [∀ n : ℤ, (shiftFunctor D n).Additive] [∀ n : ℤ, (shiftFunctor D n).Linear R']
+  [Pretriangulated D] [IsTriangulated D]
+  (F : C ⥤ D) [F.CommShift ℤ] [F.IsTriangulated]
+  (hF : ∀ (r : R) {X Y : C} (f : X ⟶ Y), F.map (r • f) = ψ r • F.map f)
+
+omit [∀ n : ℤ, (shiftFunctor C n).Linear R] [IsTriangulated C]
+  [∀ n : ℤ, (shiftFunctor D n).Linear R'] [IsTriangulated D] in
+include hM hF in
+/-- A triangulated functor which is linear along a ring morphism `ψ : R ⟶ R'` carrying `M` into
+`M'` preserves the morphisms with torsion mapping cone. -/
+lemma W_map_of_ringHom {X Y : C} {s : X ⟶ Y} (hs : W M C s) : W M' D (F.map s) := by
+  obtain ⟨Z, g, h, hT, m, hm, hZ⟩ := hs
+  exact ObjectProperty.trW.mk _ (F.map_distinguished _ hT)
+    ⟨ψ m, hM hm, by
+      change ψ m • 𝟙 (F.obj Z) = 0
+      rw [← F.map_id, ← hF, hZ, F.map_zero]⟩
+
+/-- The functor `Rationalization M C ⥤ Rationalization M' D` induced by a triangulated functor
+which is linear along a ring morphism `ψ : R ⟶ R'` carrying `M` into `M'`. -/
+noncomputable def mapOfRingHom : Rationalization M C ⥤ Rationalization M' D :=
+  Localization.lift (F ⋙ Q M' D)
+    (fun _ _ _ hs ↦ Localization.inverts (Q M' D) (W M' D) _ (W_map_of_ringHom ψ hM F hF hs))
+    (Q M C)
+
+noncomputable instance : Localization.Lifting (Q M C) (W M C) (F ⋙ Q M' D)
+    (mapOfRingHom ψ hM F hF) :=
+  ⟨Localization.fac _ _ _⟩
+
+noncomputable instance : (mapOfRingHom ψ hM F hF).CommShift ℤ :=
+  Functor.commShiftOfLocalization (Q M C) (W M C) ℤ (F ⋙ Q M' D) (mapOfRingHom ψ hM F hF)
+
+/-- The functor induced on rationalizations by a triangulated functor linear along a ring
+morphism is triangulated: a distinguished triangle of the rationalization is isomorphic to the
+image of a distinguished triangle of `C`. -/
+instance isTriangulated_mapOfRingHom : (mapOfRingHom ψ hM F hF).IsTriangulated := by
+  have := Localization.essSurj_mapArrow (Q M C) (W M C)
+  refine ⟨fun T hT ↦ ?_⟩
+  obtain ⟨T₀, e, hT₀⟩ := (Functor.distTriang_iff (Q M C) T).1 hT
+  let G := mapOfRingHom ψ hM F hF
+  exact Pretriangulated.isomorphic_distinguished _ ((F ⋙ Q M' D).map_distinguished _ hT₀) _
+    (G.mapTriangle.mapIso e ≪≫ (Functor.mapTriangleCompIso (Q M C) G).symm.app T₀ ≪≫
+      (Functor.mapTriangleIso (Localization.Lifting.iso (Q M C) (W M C) (F ⋙ Q M' D) G)).app T₀)
+
+end CategoryTheory.Rationalization
 
 namespace AlgebraicGeometry
 
@@ -179,6 +246,49 @@ lemma map_smul (h₁ : IsDerivedBaseChange η₁) (r : Λ) (f : K₁ ⟶ K₂) :
     rw [map_fac, derivedRestrictScalars_map_smul, Linear.comp_smul, map_fac, Linear.smul_comp])
 
 end IsDerivedBaseChange
+
+section BaseChangeFunctor
+
+variable {Λ Λ' : Type (u + 1)} [CommRing Λ] [CommRing Λ'] (φ : Λ →+* Λ') (X : Scheme.{u})
+  (h : ∀ K : 𝐃(X, Λ), ∃ (K' : 𝐃(X, Λ')) (η : K ⟶ (derivedRestrictScalars φ X).obj K'),
+    IsDerivedBaseChange η)
+
+/-- The universal property of the derived base changes, as a family of bijections. -/
+noncomputable def derivedBaseChangeHomEquiv (K : 𝐃(X, Λ)) (N : 𝐃(X, Λ')) :
+    ((h K).choose ⟶ N) ≃ (K ⟶ (derivedRestrictScalars φ X).obj N) :=
+  Equiv.ofBijective _ ((h K).choose_spec.choose_spec N)
+
+/-- If every object of `D(X_ét, Λ)` admits a derived base change along `φ : Λ ⟶ Λ'`, the
+derived base change `K ↦ K ⊗ᴸ_Λ Λ'` as a functor `D(X_ét, Λ) ⥤ D(X_ét, Λ')`, left adjoint to
+restriction of scalars. -/
+noncomputable def derivedBaseChange : 𝐃(X, Λ) ⥤ 𝐃(X, Λ') :=
+  Adjunction.leftAdjointOfEquiv (derivedBaseChangeHomEquiv φ X h) fun K N N' g g' ↦ by
+    simp only [derivedBaseChangeHomEquiv, Equiv.ofBijective_apply, Functor.map_comp,
+      Category.assoc]
+
+/-- The derived base change is left adjoint to restriction of scalars. -/
+noncomputable def derivedBaseChangeAdjunction :
+    derivedBaseChange φ X h ⊣ derivedRestrictScalars φ X :=
+  Adjunction.adjunctionOfEquivLeft _ _
+
+noncomputable instance : (derivedBaseChange φ X h).CommShift ℤ :=
+  (derivedBaseChangeAdjunction φ X h).leftAdjointCommShift ℤ
+
+/-- The derived base change is a triangulated functor, being left adjoint to the triangulated
+restriction of scalars. -/
+instance : (derivedBaseChange φ X h).IsTriangulated :=
+  have := (derivedBaseChangeAdjunction φ X h).commShift_of_rightAdjoint ℤ
+  (derivedBaseChangeAdjunction φ X h).isTriangulated_leftAdjoint
+
+/-- The derived base change is linear along `φ`. -/
+lemma derivedBaseChange_map_smul (r : Λ) {K₁ K₂ : 𝐃(X, Λ)} (f : K₁ ⟶ K₂) :
+    (derivedBaseChange φ X h).map (r • f) = φ r • (derivedBaseChange φ X h).map f := by
+  let adj := derivedBaseChangeAdjunction φ X h
+  apply (adj.homEquiv _ _).injective
+  rw [Adjunction.homEquiv_unit, Adjunction.homEquiv_unit, derivedRestrictScalars_map_smul,
+    Linear.comp_smul, adj.unit_naturality, adj.unit_naturality, Linear.smul_comp]
+
+end BaseChangeFunctor
 
 section Rational
 
@@ -292,6 +402,117 @@ theorem nonempty_iso_fromIntegral_of_isDerivedBaseChange
     · rw [← Functor.map_comp, h₂₁]
       exact hφ₂
   exact ⟨asIso (QL.map f')⟩
+
+
+variable {l E L} in
+/-- `derivedCompleteIntegralScalarExtension`, as a functor between the full subcategories of
+derived complete objects. -/
+noncomputable abbrev derivedCompleteIntegralScalarExtensionAux
+    (h : ∀ K : 𝐃(Y, Shrink.{u + 1} (PadicAlgCl.integers l E)),
+      ∃ (K' : 𝐃(Y, Shrink.{u + 1} (PadicAlgCl.integers l L)))
+        (η : K ⟶ (derivedRestrictScalars (PadicAlgCl.integersShrinkMap l E L) Y).obj K'),
+        IsDerivedBaseChange η)
+    (hc : ∀ K, _root_.DerivedCategory.derivedCompleteIntegral Y.smallEtaleTopology l E K →
+      _root_.DerivedCategory.derivedCompleteIntegral Y.smallEtaleTopology l L
+        ((derivedBaseChange (PadicAlgCl.integersShrinkMap l E L) Y h).obj K)) :
+    (_root_.DerivedCategory.derivedCompleteIntegral Y.smallEtaleTopology l E).FullSubcategory ⥤
+      (_root_.DerivedCategory.derivedCompleteIntegral Y.smallEtaleTopology l L).FullSubcategory :=
+  (_root_.DerivedCategory.derivedCompleteIntegral Y.smallEtaleTopology l L).lift
+    ((_root_.DerivedCategory.derivedCompleteIntegral Y.smallEtaleTopology l E).ι ⋙
+      derivedBaseChange (PadicAlgCl.integersShrinkMap l E L) Y h) fun K ↦ hc _ K.property
+
+variable {l E L} in
+/-- The derived base change `D_comp(Y_ét, 𝒪_E) ⥤ D_comp(Y_ét, 𝒪_L)` between the integral stages,
+given the existence of derived base changes (`h`) and their derived completeness (`hc`). -/
+noncomputable def derivedCompleteIntegralScalarExtension
+    (h : ∀ K : 𝐃(Y, Shrink.{u + 1} (PadicAlgCl.integers l E)),
+      ∃ (K' : 𝐃(Y, Shrink.{u + 1} (PadicAlgCl.integers l L)))
+        (η : K ⟶ (derivedRestrictScalars (PadicAlgCl.integersShrinkMap l E L) Y).obj K'),
+        IsDerivedBaseChange η)
+    (hc : ∀ K, _root_.DerivedCategory.derivedCompleteIntegral Y.smallEtaleTopology l E K →
+      _root_.DerivedCategory.derivedCompleteIntegral Y.smallEtaleTopology l L
+        ((derivedBaseChange (PadicAlgCl.integersShrinkMap l E L) Y h).obj K)) :
+    DerivedCategoryDerivedCompleteIntegral Y.smallEtaleTopology l E ⥤
+      DerivedCategoryDerivedCompleteIntegral Y.smallEtaleTopology l L :=
+  derivedCompleteIntegralScalarExtensionAux h hc
+
+section
+
+variable {l E L}
+  {h : ∀ K : 𝐃(Y, Shrink.{u + 1} (PadicAlgCl.integers l E)),
+      ∃ (K' : 𝐃(Y, Shrink.{u + 1} (PadicAlgCl.integers l L)))
+        (η : K ⟶ (derivedRestrictScalars (PadicAlgCl.integersShrinkMap l E L) Y).obj K'),
+        IsDerivedBaseChange η}
+  {hc : ∀ K, _root_.DerivedCategory.derivedCompleteIntegral Y.smallEtaleTopology l E K →
+      _root_.DerivedCategory.derivedCompleteIntegral Y.smallEtaleTopology l L
+        ((derivedBaseChange (PadicAlgCl.integersShrinkMap l E L) Y h).obj K)}
+
+noncomputable instance : (derivedCompleteIntegralScalarExtension h hc).CommShift ℤ :=
+  inferInstanceAs ((derivedCompleteIntegralScalarExtensionAux h hc).CommShift ℤ)
+
+instance : (derivedCompleteIntegralScalarExtension h hc).IsTriangulated :=
+  inferInstanceAs (derivedCompleteIntegralScalarExtensionAux h hc).IsTriangulated
+
+omit [Algebra ℚ_[l] E] [IsScalarTower ℚ_[l] E (PadicAlgCl l)] [FiniteDimensional ℚ_[l] E]
+  [Algebra ℚ_[l] L] [IsScalarTower ℚ_[l] L (PadicAlgCl l)] [FiniteDimensional ℚ_[l] L] in
+lemma derivedCompleteIntegralScalarExtension_map_smul
+    (r : Shrink.{u + 1} (PadicAlgCl.integers l E)) {K₁ K₂} (f : K₁ ⟶ K₂) :
+    (derivedCompleteIntegralScalarExtension h hc).map (r • f) =
+      PadicAlgCl.integersShrinkMap l E L r • (derivedCompleteIntegralScalarExtension h hc).map f :=
+  ObjectProperty.hom_ext _ (derivedBaseChange_map_smul _ Y h r f.hom)
+
+omit [Algebra ℚ_[l] E] [IsScalarTower ℚ_[l] E (PadicAlgCl l)] [FiniteDimensional ℚ_[l] E]
+  [Algebra ℚ_[l] L] [IsScalarTower ℚ_[l] L (PadicAlgCl l)] [FiniteDimensional ℚ_[l] L] in
+lemma integersShrinkMap_nonZeroDivisors_le :
+    nonZeroDivisors (Shrink.{u + 1} (PadicAlgCl.integers l E)) ≤
+      (nonZeroDivisors _).comap (PadicAlgCl.integersShrinkMap l E L) := fun _ hx ↦
+  PadicAlgCl.integersShrinkMap_mem_nonZeroDivisors l E L hx
+
+variable (h hc) in
+/-- The scalar extension `- ⊗_E L : D_comp(Y_ét, E) ⥤ D_comp(Y_ét, L)` of blueprint
+`def-weil-rationalization-karoubi`: the functor induced on the rationalizations by the derived
+base change, given its existence (`h`) and its preservation of derived completeness (`hc`). -/
+noncomputable abbrev derivedCompleteRationalScalarExtension :
+    DerivedCategoryDerivedCompleteRational Y.smallEtaleTopology l E ⥤
+      DerivedCategoryDerivedCompleteRational Y.smallEtaleTopology l L :=
+  Rationalization.mapOfRingHom (PadicAlgCl.integersShrinkMap l E L)
+    integersShrinkMap_nonZeroDivisors_le (derivedCompleteIntegralScalarExtension h hc)
+    derivedCompleteIntegralScalarExtension_map_smul
+
+/-- Blueprint `lem-weil-scalar-extension-exact-triangulated`: Scalar extension is an exact
+triangulated functor.
+
+Let `E ⊆ L` be finite extensions of `ℚ_ℓ` inside `ℚ̄_ℓ`. Assume, as in the definition of the
+scalar extension (`def-weil-rationalization-karoubi`), that the derived base change
+`K ↦ K ⊗ᴸ_{𝒪_E} 𝒪_L` exists on `D(Y_ét, 𝒪_E)` (`h`) and carries derived complete objects to
+derived complete objects (`hc`). Then the scalar extension `- ⊗_E L : D_comp(Y_ét, E) ⥤
+D_comp(Y_ét, L)`, induced on the rationalizations by the derived base change, is a triangulated
+functor: it commutes with shifts and carries distinguished triangles to distinguished triangles.
+
+As in the blueprint, it is the composite of the derived base change, which is triangulated as the
+left adjoint of the triangulated restriction of scalars, and of the rationalization; the induced
+functor on the rationalizations is triangulated
+(`CategoryTheory.Rationalization.isTriangulated_mapOfRingHom`). By
+`AlgebraicGeometry.Etale.nonempty_iso_fromIntegral_of_isDerivedBaseChange` it does not depend on
+the integral representatives. -/
+instance isTriangulated_derivedCompleteRationalScalarExtension :
+    (derivedCompleteRationalScalarExtension h hc).IsTriangulated :=
+  inferInstance
+
+/-- The scalar extension of the rationalization of an integral object `K` is the rationalization
+of its derived base change. -/
+noncomputable def derivedCompleteRationalScalarExtensionFromIntegralIso
+    (K : DerivedCategoryDerivedCompleteIntegral Y.smallEtaleTopology l E) :
+    (derivedCompleteRationalScalarExtension h hc).obj
+        ((DerivedCategoryDerivedCompleteRational.fromIntegral _ l E).obj K) ≅
+      (DerivedCategoryDerivedCompleteRational.fromIntegral _ l L).obj
+        ((derivedCompleteIntegralScalarExtension h hc).obj K) :=
+  (Localization.Lifting.iso (Rationalization.Q _ _)
+    (Rationalization.W (nonZeroDivisors (Shrink.{u + 1} (PadicAlgCl.integers l E))) _)
+    (derivedCompleteIntegralScalarExtension h hc ⋙ Rationalization.Q _ _)
+    (derivedCompleteRationalScalarExtension h hc)).app K
+
+end
 
 end Rational
 
