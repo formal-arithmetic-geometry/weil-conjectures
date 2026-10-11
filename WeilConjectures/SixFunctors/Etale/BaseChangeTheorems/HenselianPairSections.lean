@@ -8,6 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.EtaleFiniteRefinement
 public import WeilConjectures.AlgebraicGeometry.HenselianConnectedness
 public import WeilConjectures.AlgebraicGeometry.Sites.EtaleVanishingLocus
+public import WeilConjectures.SixFunctors.Finite.Descent
 public import WeilConjectures.Topology.SpectralSpace.ShrinkCover
 
 /-!
@@ -261,5 +262,77 @@ lemma restrictAlong_pullSection_eq_restrictAlong {U : Y.Etale} (g : G.obj.obj (o
   exact pullSection_congr _ _ _ (pullback.lift_fst _ _ _).symm _
 
 end ClosedFibre
+
+section Glue
+
+variable {X : Scheme.{u}} (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})
+
+/-- The open immersion of an open subscheme, as a morphism to the terminal étale `X`-scheme. -/
+noncomputable def opensToTerminal (N : X.Opens) :
+    Scheme.Etale.mk N.ι ⟶ Scheme.Etale.mk (𝟙 X) :=
+  MorphismProperty.Over.homMk N.ι (Category.comp_id _)
+
+/-- The inclusion of open subschemes `N ≤ N'`, as a morphism of étale `X`-schemes. -/
+noncomputable def opensHomOfLE {N N' : X.Opens} (h : N ≤ N') :
+    Scheme.Etale.mk N.ι ⟶ Scheme.Etale.mk N'.ι :=
+  MorphismProperty.Over.homMk (X.homOfLE h) (X.homOfLE_ι h)
+
+set_option backward.isDefEq.respectTransparency false in
+/-- **Gluing sections near a closed subset of a spectral scheme.** Let `X` be a quasi-compact
+quasi-separated scheme and `T₀ ⊆ X` a closed subset meeting every irreducible closed subset in
+a nonempty connected set. Let `σ_m` be sections of `F` over finitely many quasi-compact opens
+`N_m` covering `T₀`, any two of which have the same germs along `T₀`. Then there are a global
+section `σ'` and opens `W_m ⊆ N_m` containing `N_m ∩ T₀` on which `σ'` restricts to `σ_m`. -/
+lemma exists_glue_of_isConnected_inter [CompactSpace X] [QuasiSeparatedSpace X] {T₀ : Set X}
+    (hT₀ : IsClosed T₀) (hC : ∀ C : Set X, IsClosed C → IsIrreducible C → IsConnected (C ∩ T₀))
+    {M : Type*} [Finite M] (N : M → X.Opens) (hNc : ∀ m, IsCompact (N m : Set X))
+    (hcov : T₀ ⊆ ⋃ m, (N m : Set X)) (σ : ∀ m, F.obj.obj (op (Scheme.Etale.mk (N m).ι)))
+    (hagree : ∀ m n, (N m : Set X) ∩ N n ∩ T₀ ⊆ germEqLocus F (σ m) (σ n)) :
+    ∃ (σ' : F.obj.obj (op (Scheme.Etale.mk (𝟙 X)))) (W : M → X.Opens) (hW : ∀ m, W m ≤ N m),
+      (∀ m, (N m : Set X) ∩ T₀ ⊆ W m) ∧
+      ∀ m, F.obj.map (opensToTerminal (W m)).op σ' = F.obj.map (opensHomOfLE (hW m)).op (σ m) := by
+  have : SpectralSpace X := {}
+  have : ∀ n, IsOpenImmersion (Scheme.Etale.mk (N n).ι).hom :=
+    fun n ↦ inferInstanceAs (IsOpenImmersion (N n).ι)
+  obtain ⟨W, hWo, hWN, hWcov, hWagree, hNW⟩ := SpectralSpace.exists_shrink_of_isConnected_inter
+    hT₀ hC (fun m ↦ (N m : Set X)) (fun m ↦ (N m).2) hNc hcov
+    (fun m n ↦ germEqLocus F (σ m) (σ n)) (fun m n ↦ isOpen_germEqLocus _ _)
+    (fun m x hx ↦ ⟨Scheme.Etale.mk (N m).ι, 𝟙 _, 𝟙 _, ⟨x, hx⟩, rfl, rfl⟩)
+    (fun m n ↦ germEqLocus_symm _ _) (fun m n k ↦ germEqLocus_trans _ _ _) hagree
+  let W' : M → X.Opens := fun m ↦ ⟨W m, hWo m⟩
+  have hW' : ∀ m, W' m ≤ N m := hWN
+  let σ'' : ∀ m, F.obj.obj (op (Scheme.Etale.mk (W' m).ι)) :=
+    fun m ↦ F.obj.map (opensHomOfLE (hW' m)).op (σ m)
+  obtain ⟨σ', hσ'⟩ := exists_map_eq_of_compatible F (fun m ↦ opensToTerminal (W' m))
+    (fun x ↦ by
+      obtain ⟨m, hm⟩ := hWcov x
+      exact ⟨m, ⟨x, hm⟩, rfl⟩) σ'' (fun m n ↦ by
+      refine eq_of_forall_exists_map_eq F _ _ fun x ↦ ?_
+      let O := overlap (opensToTerminal (W' m)) (opensToTerminal (W' n))
+      have hy : O.hom x ∈ W m ∩ W n := by
+        refine ⟨?_, ?_⟩
+        · change (pullback.fst (W' m).ι (W' n).ι ≫ (W' m).ι) x ∈ W' m
+          rw [Scheme.Hom.comp_apply]
+          exact (pullback.fst (W' m).ι (W' n).ι x).2
+        · change (pullback.fst (W' m).ι (W' n).ι ≫ (W' m).ι) x ∈ W' n
+          rw [pullback.condition, Scheme.Hom.comp_apply]
+          exact (pullback.snd (W' m).ι (W' n).ι x).2
+      obtain ⟨Wt, b₁, b₂, w, hw, hb⟩ := hWagree m n hy
+      let qO : O ⟶ Scheme.Etale.mk (𝟙 X) := MorphismProperty.Over.homMk O.hom (Category.comp_id _)
+      let qW : Wt ⟶ Scheme.Etale.mk (𝟙 X) :=
+        MorphismProperty.Over.homMk Wt.hom (Category.comp_id _)
+      obtain ⟨z, hz₁, hz₂⟩ := Scheme.Pullback.exists_preimage_pullback (f := qO.left)
+        (g := qW.left) x w hw.symm
+      refine ⟨overlap qO qW, overlapFst qO qW, ⟨z, hz₁⟩, ?_⟩
+      simp only [σ'', ← ConcreteCategory.comp_apply, ← Functor.map_comp, ← op_comp]
+      rw [Scheme.Etale.hom_ext_mk_of_mono (N m).ι
+          (overlapFst qO qW ≫ overlapFst _ _ ≫ opensHomOfLE (hW' m)) (overlapSnd qO qW ≫ b₁),
+        Scheme.Etale.hom_ext_mk_of_mono (N n).ι
+          (overlapFst qO qW ≫ overlapSnd _ _ ≫ opensHomOfLE (hW' n)) (overlapSnd qO qW ≫ b₂),
+        op_comp, Functor.map_comp, ConcreteCategory.comp_apply, hb, op_comp, Functor.map_comp,
+        ConcreteCategory.comp_apply])
+  exact ⟨σ', W', hW', hNW, hσ'⟩
+
+end Glue
 
 end AlgebraicGeometry.Etale

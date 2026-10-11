@@ -172,7 +172,8 @@ variable {R T : Scheme.{u}} (t : T ⟶ R) (G : Sheaf R.smallEtaleTopology AddCom
 
 /-- Pulling back sections along a surjective `φ : V ⟶ U` over `t` is injective: if `φ^* g`
 vanishes, then so does `g`. -/
-lemma eq_zero_of_pullSection_eq_zero {V : T.Etale} {U : R.Etale} (φ : V.left ⟶ U.left)
+lemma eq_zero_of_pullSection_eq_zero_of_surjective {V : T.Etale} {U : R.Etale}
+    (φ : V.left ⟶ U.left)
     (hφ : φ ≫ U.hom = V.hom ≫ t) (hsurj : Function.Surjective φ) (g : G.obj.obj (op U))
     (h : pullSection t G φ hφ g = 0) : g = 0 := by
   choose x hx using hsurj
@@ -407,7 +408,7 @@ theorem exists_pullSection_eq_of_isFinite_of_surjective {Y Y' : Scheme.{u}} (r :
   obtain ⟨σ, hσ⟩ := exists_map_eq_of_compatible G (fun y ↦ toEtaleMkId (U y))
     (fun y ↦ ⟨y, hy y⟩) g (fun i j ↦ by
       rw [← sub_eq_zero]
-      refine eq_zero_of_pullSection_eq_zero r G
+      refine eq_zero_of_pullSection_eq_zero_of_surjective r G
         (V := (MorphismProperty.Over.pullback @Etale ⊤ r).obj
           (overlap (toEtaleMkId (U i)) (toEtaleMkId (U j))))
         (pullback.fst _ r) pullback.condition (pullback.fst _ r).surjective _ ?_
