@@ -112,11 +112,11 @@ lemma additive_equivalence_functor : h.equivalence.functor.Additive :=
 variable [IsTopologicalGroup G] [HasSheafify J AddCommGrpCat.{max u' w}]
   [J.WEqualsLocallyBijective AddCommGrpCat.{max u' w}] [LocallySmall.{max u' w} C]
 
-/-- The fibre of the constant sheaf `ℤ` is the trivial module `ℤ`. -/
-noncomputable def functorObjConstantSheafIso :
-    h.functor.obj ((constantSheaf J AddCommGrpCat.{max u' w}).obj
-      (AddCommGrpCat.of (ULift.{max u' w} ℤ))) ≅ DiscreteModule.intTrivial.{w} G :=
-  ObjectProperty.isoMk _ (Φ.sheafFiberActionConstantSheafIso act _)
+/-- The fibre of the constant sheaf with value `A` is the trivial module `A`. -/
+noncomputable def functorObjConstantSheafIso (A : AddCommGrpCat.{max u' w}) :
+    h.functor.obj ((constantSheaf J AddCommGrpCat.{max u' w}).obj A) ≅
+      DiscreteModule.trivial.{w} G A :=
+  ObjectProperty.isoMk _ (Φ.sheafFiberActionConstantSheafIso act A)
 
 variable [HasExt.{w'} (Sheaf J AddCommGrpCat.{max u' w})]
 
@@ -127,13 +127,21 @@ noncomputable def sheafHAddEquiv (F : Sheaf J AddCommGrpCat.{max u' w}) (n : ℕ
   haveI := h.additive_equivalence_functor
   (Abelian.Ext.postcompAddEquiv _ (h.equivalence.unitIso.app F) n).trans <|
     (h.equivalence.toAdjunction.extAddEquiv _ (h.functor.obj F) n).trans <|
-      Abelian.Ext.precompAddEquiv h.functorObjConstantSheafIso.symm _ n
+      Abelian.Ext.precompAddEquiv (h.functorObjConstantSheafIso _).symm _ n
 
 /-- At a Galois point, global sections are the invariants of the fibre:
 `H⁰(C, F) ≃ (F_Φ)ᴳ`. -/
 noncomputable def sheafHZeroAddEquiv (F : Sheaf J AddCommGrpCat.{max u' w}) :
     Sheaf.H F 0 ≃+ (DiscreteModule.invariants G).obj (h.functor.obj F) :=
   (h.sheafHAddEquiv F 0).trans (DiscreteModule.H_zero_addEquiv _)
+
+/-- At a Galois point, the cohomology of the constant sheaf with value `A` is the continuous
+cohomology of the trivial module `A`. -/
+noncomputable def sheafHConstantSheafAddEquiv (A : AddCommGrpCat.{max u' w}) (n : ℕ) :
+    Sheaf.H ((constantSheaf J AddCommGrpCat.{max u' w}).obj A) n ≃+
+      DiscreteModule.H G (DiscreteModule.trivial.{w} G A) n :=
+  (h.sheafHAddEquiv _ n).trans
+    (Abelian.Ext.postcompAddEquiv _ (h.functorObjConstantSheafIso A) n)
 
 end IsGaloisPoint
 

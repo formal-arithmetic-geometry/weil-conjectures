@@ -5,6 +5,8 @@ Authors: Claude
 -/
 module
 
+public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.HasExt
+public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
 public import WeilConjectures.CategoryTheory.Sites.Point.DiscreteModule
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified
@@ -364,5 +366,56 @@ theorem isGaloisPoint_galoisPoint :
   isIso_of_isIso_sheafFiber_map := isIso_of_isIso_galoisPoint_sheafFiber_map K Ω
 
 end galois
+
+section main
+
+/-- **Étale sheaves on a field and discrete Galois modules.** Let `K` be a field with separable
+closure `Ω` and absolute Galois group `G = Gal(Ω/K)`. The geometric fibre functor at
+`Spec Ω ⟶ Spec K`, with the action of `G` by transport of structure, is an equivalence between
+abelian étale sheaves on `Spec K` and discrete `G`-modules. It is exact, being an equivalence
+of abelian categories; global sections correspond to invariants
+(`AlgebraicGeometry.Scheme.sheafHZeroAddEquivInvariants`) and cohomology to continuous
+cohomology (`AlgebraicGeometry.Scheme.sheafHAddEquivGaloisH`). We use `ℤ`-coefficients: an
+étale sheaf of modules over a finite ring `A` is in particular an abelian étale sheaf, and the
+statements needed about such sheaves concern their underlying abelian groups.
+(blueprint: `lem-exc-field-discrete-modules`) -/
+noncomputable def etaleSheafEquivDiscreteModule :
+    Sheaf (Spec (.of K)).smallEtaleTopology AddCommGrpCat.{u + 1} ≌
+      DiscreteModule.{u + 1} Gal(Ω/K) :=
+  (isGaloisPoint_galoisPoint K Ω).equivalence
+
+lemma etaleSheafEquivDiscreteModule_functor_obj_obj
+    (F : Sheaf (Spec (.of K)).smallEtaleTopology AddCommGrpCat.{u + 1}) :
+    ((etaleSheafEquivDiscreteModule K Ω).functor.obj F).obj =
+      ((galoisPoint K Ω).sheafFiberAction (galoisPointAct K Ω)).obj F :=
+  rfl
+
+/-- **Étale cohomology of a field is Galois cohomology**:
+`Hⁿ(Spec K_ét, F) ≃ Hⁿ(Gal(Ω/K), F_Ω)` for every abelian étale sheaf `F` on `Spec K`.
+(blueprint: `lem-exc-field-discrete-modules`) -/
+noncomputable def sheafHAddEquivGaloisH
+    (F : Sheaf (Spec (.of K)).smallEtaleTopology AddCommGrpCat.{u + 1}) (n : ℕ) :
+    (Sheaf.H F n : Type (u + 1)) ≃+
+      DiscreteModule.H Gal(Ω/K) ((etaleSheafEquivDiscreteModule K Ω).functor.obj F) n :=
+  (isGaloisPoint_galoisPoint K Ω).sheafHAddEquiv F n
+
+/-- Global sections of an abelian étale sheaf on `Spec K` are the Galois invariants of its
+geometric fibre. (blueprint: `lem-exc-field-discrete-modules`) -/
+noncomputable def sheafHZeroAddEquivInvariants
+    (F : Sheaf (Spec (.of K)).smallEtaleTopology AddCommGrpCat.{u + 1}) :
+    (Sheaf.H F 0 : Type (u + 1)) ≃+
+      (DiscreteModule.invariants.{u + 1} Gal(Ω/K)).obj
+        ((etaleSheafEquivDiscreteModule K Ω).functor.obj F) :=
+  (isGaloisPoint_galoisPoint K Ω).sheafHZeroAddEquiv F
+
+/-- The étale cohomology of the constant sheaf with value `A` on `Spec K` is the Galois
+cohomology of the trivial module `A`. -/
+noncomputable def sheafHConstantSheafAddEquivGaloisH (A : AddCommGrpCat.{u + 1}) (n : ℕ) :
+    (Sheaf.H ((constantSheaf (Spec (.of K)).smallEtaleTopology AddCommGrpCat.{u + 1}).obj A) n :
+      Type (u + 1)) ≃+
+      DiscreteModule.H Gal(Ω/K) (DiscreteModule.trivial.{u + 1} Gal(Ω/K) A) n :=
+  (isGaloisPoint_galoisPoint K Ω).sheafHConstantSheafAddEquiv A n
+
+end main
 
 end AlgebraicGeometry.Scheme
