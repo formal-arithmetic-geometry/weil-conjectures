@@ -135,5 +135,24 @@
   "group": "C",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of C; spot-checked by L: L read the three steps against lem-weil-pbc-finite-flat-rank-iso (reviewed Mathlib leaf: rank of f_*O_X, locally constant, base change, isomorphism iff rank 1): delta_f = r_f and the clopen decomposition follow; the C review restates the worker's steps rather than checking them against the source, which the new rule for remote groups will return from now on"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteLocallyFreeDegreeLocallyConstant",
+  "declaration": "AlgebraicGeometry.finiteLocallyFree_fiberDimension_isLocallyConstant",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteLocallyFreeDegreeLocallyConstant.lean",
+  "statement": "theorem finiteLocallyFree_fiberDimension_isLocallyConstant {X S : Scheme.{u}} (f : X ⟶ S) [f.IsFiniteLocallyFree] : let δ : S → ℕ := fun s => (f.fiberToSpecResidueField s).finrankΓ (∀ s : S, Module.Finite (S.residueField s) Γ(f.fiber s, ⊤)) ∧ IsLocallyConstant δ ∧ (∀ d : ℕ, IsClopen (δ ⁻¹' {d})) ∧ (∃ U : ℕ → S.Opens, (∀ d : ℕ, ∀ s : S, s ∈ U d ↔ δ s = d) ∧ (∀ d : ℕ, (f ∣_ U d).IsFiniteLocallyFreeOfDegree d))",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-fdl1025"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-fdl1025",
+  "group": "J1",
+  "result": "fix",
+  "note": "[f.IsFiniteLocallyFree] = finite+flat+lfp (upstream class); delta = finrankΓ(fiberToSpecResidueField) rfl-equal to recorded fiberDegree; Module.Finite via upstream fiberAlgebra (rfl); IsLocallyConstant; clopen level sets; U d exact level sets with f ∣_ U d IsFiniteLocallyFreeOfDegree d; no upstream locally-constant fiberDegree lemma (existing:false); fix: dropped ∃ _h, True wrapper"
  }
 }
