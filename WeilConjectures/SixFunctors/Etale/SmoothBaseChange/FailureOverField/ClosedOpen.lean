@@ -11,6 +11,9 @@ public import WeilConjectures.SixFunctors.Finite.BaseChange
 public import WeilConjectures.SixFunctors.OpenClosed.ClosedImmersion
 public import WeilConjectures.SixFunctors.OpenClosed.Supported
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.Comparison
+public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.EpiMono
+public import WeilConjectures.Mathlib.CategoryTheory.Functor.Basic
+public import WeilConjectures.Mathlib.CategoryTheory.Functor.Category
 
 /-!
 # The closed–open step of the detection of a failure of base change
@@ -605,16 +608,6 @@ section Pushforward
 
 variable {X S T Y T' Y' : Scheme.{u}}
 
-omit [CommRing Λ] in
-/-- The naturality of a natural transformation between composites, evaluated at objects, stated
-for abstract functors so that its instances are checked syntactically. -/
-lemma _root_.CategoryTheory.NatTrans.app_comp_map_map_eq
-    {𝒜 ℬ ℬ' 𝒞 : Type*} [Category* 𝒜] [Category* ℬ]
-    [Category* ℬ'] [Category* 𝒞] {F₁ : 𝒜 ⥤ ℬ} {F₂ : ℬ ⥤ 𝒞} {G₁ : 𝒜 ⥤ ℬ'} {G₂ : ℬ' ⥤ 𝒞}
-    (β : F₁ ⋙ F₂ ⟶ G₁ ⋙ G₂) {A A' : 𝒜} (f : A ⟶ A') :
-    β.app A ≫ G₂.map (G₁.map f) = F₂.map (F₁.map f) ≫ β.app A' :=
-  (β.naturality f).symm
-
 /-- The derived base-change maps over `T` and over `T'` commute with the comparison maps of a
 complex `K` on `T` and a complex `L` on `T'` attached to a morphism `ψ : k^* K ⟶ L`. -/
 theorem Etale.baseChange_app_comp_pushforward {p : X ⟶ S} {g : T ⟶ S}
@@ -710,23 +703,6 @@ lemma Etale.baseChangeTargetFunctor_map (e : Y ⟶ T) (h : Y ⟶ X) (q : ℤ)
       (DerivedCategory.Plus.homologyFunctor _ q).map (R+((h)_*[ModuleCat.{u + 1} Λ]).map
         (D+((e)^*[ModuleCat.{u + 1} Λ]).map ((DerivedCategory.Plus.singleFunctor _ 0).map f))) :=
   rfl
-
-omit [CommRing Λ] in
-/-- The naturality of a natural transformation out of a composite, stated for abstract functors
-so that its instances are checked syntactically. -/
-lemma _root_.CategoryTheory.NatTrans.app_comp_map
-    {𝒜 ℬ 𝒞 : Type*} [Category* 𝒜] [Category* ℬ] [Category* 𝒞]
-    {F₁ : 𝒜 ⥤ ℬ} {F₂ : ℬ ⥤ 𝒞} {G : 𝒜 ⥤ 𝒞} (β : F₁ ⋙ F₂ ⟶ G) {A A' : 𝒜} (f : A ⟶ A') :
-    β.app A ≫ G.map f = F₂.map (F₁.map f) ≫ β.app A' :=
-  (β.naturality f).symm
-
-omit [CommRing Λ] in
-/-- Two equal composites stay equal under a functor. -/
-lemma _root_.CategoryTheory.Functor.map_comp_map_eq_map_comp_map
-    {𝒞 𝒟 : Type*} [Category* 𝒞] [Category* 𝒟] (G : 𝒞 ⥤ 𝒟)
-    {A B B' C : 𝒞} {f₁ : A ⟶ B} {f₂ : B ⟶ C} {g₁ : A ⟶ B'} {g₂ : B' ⟶ C}
-    (w : f₁ ≫ f₂ = g₁ ≫ g₂) : G.map f₁ ≫ G.map f₂ = G.map g₁ ≫ G.map g₂ := by
-  rw [← G.map_comp, w, G.map_comp]
 
 /-- The comparison of the targets for a pushed forward sheaf is natural in the sheaf. -/
 lemma Etale.targetPushforward_naturality (e : Y ⟶ T) (h : Y ⟶ X) (k : T' ⟶ T) (a : Y' ⟶ Y)
@@ -863,16 +839,6 @@ lemma Etale.baseChangeTargetTransition_comp_eq {X T Y T₂ Y₂ T₁ Y₁ : Sche
   erw [CategoryTheory.Functor.map_id, CategoryTheory.Functor.map_id, Category.id_comp]
   rw [reassoc_of% hT]
 
-omit [CommRing Λ] in
-/-- Two equal composites stay equal under a functor, followed by a common morphism. -/
-lemma _root_.CategoryTheory.Functor.map_comp_map_comp_map_comp_eq
-    {ℬ 𝒞 𝒟 : Type*} [Category* ℬ] [Category* 𝒞] [Category* 𝒟]
-    (R : ℬ ⥤ 𝒞) (G : 𝒞 ⥤ 𝒟) {A B C B' : 𝒞} {L : ℬ} {E : 𝒟} {a : A ⟶ B} {b : B ⟶ C}
-    {c : C ⟶ R.obj L} {x : A ⟶ B'} {y : B' ⟶ R.obj L} (d : (R ⋙ G).obj L ⟶ E)
-    (w : x ≫ y = a ≫ b ≫ c) :
-    G.map a ≫ G.map b ≫ G.map c ≫ d = G.map x ≫ G.map y ≫ d := by
-  simpa using congrArg (fun f ↦ G.map f ≫ d) w.symm
-
 /-- **Decomposition of the transition maps along a morphism `i : T₁ ⟶ T₂`.** The transition map
 from `T` to `T₁` is the transition map from `T` to `T₂`, followed by `R^q h₂_* e₂⁻¹` of a map
 `β : f₂^* F ⟶ i_*((i ≫ f₂)^* F)` whose adjoint is an isomorphism, followed by the comparison of
@@ -990,20 +956,6 @@ section Summands
 
 variable {X S T Y T₁ Y₁ : Scheme.{u}}
 
-omit [CommRing Λ] in
-/-- On modules: if `b` sends `y` outside the range of `bc₂`, and `bc₂` and `bc₁` are related by
-isomorphisms `τ` and `σ`, then `b ≫ τ` sends `y` outside the range of `bc₁`. -/
-lemma _root_.ModuleCat.notMem_range_of_isIso_comm
-    {R : Type*} [Ring R] {M₂ M₂' S₂ S₁ M₁ : ModuleCat R}
-    (b : M₂ ⟶ M₂') (τ : M₂' ⟶ M₁) (bc₂ : S₂ ⟶ M₂') (σ : S₂ ⟶ S₁) (bc₁ : S₁ ⟶ M₁)
-    [IsIso τ] [IsIso σ] (w : bc₂ ≫ τ = σ ≫ bc₁) (y : M₂) (hB : b.hom y ∉ Set.range bc₂.hom) :
-    τ.hom (b.hom y) ∉ Set.range bc₁.hom := by
-  rintro ⟨s, hs⟩
-  apply hB
-  refine ⟨(inv σ).hom s, ((ConcreteCategory.isIso_iff_bijective τ).1 inferInstance).1 ?_⟩
-  rw [← hs, ← ModuleCat.comp_apply, w, ModuleCat.comp_apply, ← ModuleCat.comp_apply (inv σ),
-    IsIso.inv_hom_id, ModuleCat.id_apply]
-
 variable {X S T Y T₁ Y₁ : Scheme.{u}}
 
 /-- **The closed summand.** For a finite `k : T₁ ⟶ T` and a square over `T₁` obtained by base
@@ -1047,25 +999,6 @@ theorem Etale.notMem_range_of_isFinite {p : X ⟶ S} {g : T ⟶ S} {e : Y ⟶ T}
   rw [(X.uliftPointSmallEtale x).sheafFiber.map_comp,
     (X.uliftPointSmallEtale x).sheafFiber.map_comp] at w
   exact ModuleCat.notMem_range_of_isIso_comm _ _ _ _ _ w y hy
-
-omit [CommRing Λ] in
-/-- On modules: if `b ≫ jι` sends `y` outside the range of `bcJ`, `jι ≫ τJ = τ ≫ ι₁` with `τJ`
-injective and `bc₁ ≫ ι₁ = 0`, then `b ≫ τ` sends `y` outside the range of `bc₁`. -/
-lemma _root_.ModuleCat.notMem_range_of_mono_comm
-    {R : Type*} [Ring R] {M₂ M₂' M₁ M₁' J₂ S₁ SJ : ModuleCat R}
-    (b : M₂ ⟶ M₂') (τ : M₂' ⟶ M₁) (ι₁ : M₁ ⟶ M₁') (jι : M₂' ⟶ J₂) (τJ : J₂ ⟶ M₁')
-    (bc₁ : S₁ ⟶ M₁) (bcJ : SJ ⟶ J₂) [Mono τJ] (wn : jι ≫ τJ = τ ≫ ι₁) (hz : bc₁ ≫ ι₁ = 0)
-    (y : M₂) (hA : jι.hom (b.hom y) ∉ Set.range bcJ.hom) :
-    τ.hom (b.hom y) ∉ Set.range bc₁.hom := by
-  rintro ⟨s, hs⟩
-  apply hA
-  refine ⟨0, ?_⟩
-  rw [map_zero]
-  symm
-  apply (ModuleCat.mono_iff_injective τJ).1 inferInstance
-  rw [map_zero, ← ModuleCat.comp_apply, wn, ModuleCat.comp_apply, ← hs, ← ModuleCat.comp_apply,
-    hz]
-  rfl
 
 /-- **The open summand.** For a quasi-compact quasi-separated `j : T₁ ⟶ T` such that the
 base-change maps of the squares along `j` over `e` are isomorphisms in degrees `< q`, if the

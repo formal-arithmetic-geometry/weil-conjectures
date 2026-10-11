@@ -21,9 +21,6 @@ the limit theorem for higher direct images (`AlgebraicGeometry.Etale.higherDirec
 
 ## Main statements
 
-- `ModuleCat.notMem_range_of_forall_notMem_range`: an element of a colimit of
-  modules that is not in the image of compatible maps at every stage is not in the image of the
-  limit map.
 - `AlgebraicGeometry.Etale.mem_range_baseChangeHomologyMap_iff`: the survival condition written
   with the derived transition maps.
 -/
@@ -521,48 +518,6 @@ lemma Etale.homologyFunctor_map_overTargetTransition {X Y Tᵢ Tⱼ : Scheme.{u}
 
 end Conversion
 
-section Abstract
-
-/-- An element of a module which survives at every stage of a cofiltered system survives at the
-limit, when the sources of the comparison maps form a filtered colimit up to surjectivity and the
-targets are a filtered colimit up to injectivity. -/
-lemma _root_.ModuleCat.notMem_range_of_forall_notMem_range
-    {R : Type*} [Ring R] {I : Type*} [Category I]
-    [IsCofiltered I] (A B : I → ModuleCat R) (Al Bl B₀ : ModuleCat R) (φ : ∀ i, A i ⟶ B i)
-    (φl : Al ⟶ Bl) (tA : ∀ {i j : I}, (j ⟶ i) → (A i ⟶ A j))
-    (tB : ∀ {i j : I}, (j ⟶ i) → (B i ⟶ B j))
-    (sA : ∀ i, A i ⟶ Al) (sB : ∀ i, B i ⟶ Bl) (τ : ∀ i, B₀ ⟶ B i) (τl : B₀ ⟶ Bl)
-    (hτ : ∀ {i j : I} (f : j ⟶ i), τ i ≫ tB f = τ j) (hτl : ∀ i, τ i ≫ sB i = τl)
-    (hφ : ∀ {i j : I} (f : j ⟶ i), φ i ≫ tB f = tA f ≫ φ j)
-    (hφl : ∀ i, φ i ≫ sB i = sA i ≫ φl) (hsA : ∀ {i j : I} (f : j ⟶ i), tA f ≫ sA j = sA i)
-    (hA : ∀ y : Al, y ∈ ⨆ i, LinearMap.range (sA i).hom)
-    (hB : ∀ (i : I) (b : B i), (sB i).hom b = 0 → ∃ (j : I) (f : j ⟶ i), (tB f).hom b = 0)
-    (ξ : B₀) (hξ : ∀ i, (τ i).hom ξ ∉ Set.range (φ i).hom) :
-    (τl).hom ξ ∉ Set.range φl.hom := by
-  rintro ⟨η, hη⟩
-  have key : ∀ y ∈ ⨆ i, LinearMap.range (sA i).hom, ∃ i y', (sA i).hom y' = y := by
-    intro y hy
-    induction hy using Submodule.iSup_induction' with
-    | mem i y hy => obtain ⟨y', rfl⟩ := hy; exact ⟨i, y', rfl⟩
-    | zero => exact ⟨IsCofiltered.nonempty.some, 0, map_zero _⟩
-    | add y z _ _ hy hz =>
-      obtain ⟨i, y', rfl⟩ := hy
-      obtain ⟨j, z', rfl⟩ := hz
-      refine ⟨IsCofiltered.min i j, (tA (IsCofiltered.minToLeft i j)).hom y' +
-        (tA (IsCofiltered.minToRight i j)).hom z', ?_⟩
-      rw [map_add, ← ModuleCat.comp_apply, ← ModuleCat.comp_apply, hsA, hsA]
-  obtain ⟨i, η', rfl⟩ := key η (hA η)
-  have h0 : (sB i).hom ((φ i).hom η' - (τ i).hom ξ) = 0 := by
-    rw [map_sub, ← ModuleCat.comp_apply, ← ModuleCat.comp_apply, hφl, hτl, ModuleCat.comp_apply,
-      hη, sub_self]
-  obtain ⟨j, f, hf⟩ := hB i _ h0
-  apply hξ j
-  refine ⟨(tA f).hom η', ?_⟩
-  rw [map_sub, sub_eq_zero] at hf
-  rw [← ModuleCat.comp_apply, ← hφ, ModuleCat.comp_apply, hf, ← ModuleCat.comp_apply, hτ]
-
-end Abstract
-
 /-- If a family of morphisms `τᵢ : Mᵢ ⟶ N` of sheaves on `S_ét` is jointly surjective on the
 stalks at all geometric points of `S`, then for `p : X ⟶ S` the pullbacks `p^* τᵢ` are jointly
 surjective on the stalk at every geometric point of `X`, in the sense that every element is a
@@ -771,29 +726,6 @@ lemma Etale.sheafFiber_map_overTargetTransition {X Y T Tᵢ Tⱼ : Scheme.{u}} (
     (Etale.homologyFunctor_map_overTargetTransition Λ e h φ eᵢ eⱼ πᵢ πⱼ ρ waᵢ waⱼ wa hπ F q)
   rw [Functor.map_comp, Functor.map_comp] at E
   exact E
-
-omit [CommRing Λ] in
-/-- Transport of membership in a supremum of ranges along compatible isomorphisms. -/
-lemma _root_.ModuleCat.mem_iSup_range_of_comm
-    {R : Type*} [Ring R] {ι : Type*} {A B : ι → ModuleCat R}
-    {Al Bl : ModuleCat R} (s : ∀ i, A i ⟶ Al) (t : ∀ i, B i ⟶ Bl) (θ : ∀ i, A i ⟶ B i)
-    [∀ i, IsIso (θ i)] (θl : Al ≅ Bl) (w : ∀ i, s i ≫ θl.hom = θ i ≫ t i) (y : Al)
-    (hy : θl.hom.hom y ∈ ⨆ i, LinearMap.range (t i).hom) :
-    y ∈ ⨆ i, LinearMap.range (s i).hom := by
-  suffices H : ∀ z ∈ ⨆ i, LinearMap.range (t i).hom,
-      θl.inv.hom z ∈ ⨆ i, LinearMap.range (s i).hom by
-    simpa [← ModuleCat.comp_apply] using H _ hy
-  intro z hz
-  induction hz using Submodule.iSup_induction' with
-  | mem i z hz =>
-    obtain ⟨b, rfl⟩ := hz
-    refine Submodule.mem_iSup_of_mem i ⟨(inv (θ i)).hom b, ?_⟩
-    have hc : inv (θ i) ≫ s i = t i ≫ θl.inv := by
-      rw [← cancel_mono θl.hom, Category.assoc, Category.assoc, Iso.inv_hom_id, Category.comp_id, w,
-        IsIso.inv_hom_id_assoc]
-    rw [← ModuleCat.comp_apply, ← ModuleCat.comp_apply, hc]
-  | zero => simp
-  | add z₁ z₂ _ _ h₁ h₂ => simpa using add_mem h₁ h₂
 
 section Survival
 

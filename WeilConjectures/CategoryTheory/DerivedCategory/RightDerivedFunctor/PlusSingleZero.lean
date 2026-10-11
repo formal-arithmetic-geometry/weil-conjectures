@@ -6,6 +6,7 @@ Authors: Nailin Guan
 module
 
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusSingle
+public import WeilConjectures.Mathlib.CategoryTheory.Comma.Arrow
 
 /-!
 # The degree-zero part of a right derived functor on a single object
@@ -114,21 +115,6 @@ end CategoryTheory.Functor
 namespace CategoryTheory
 
 variable {C D : Type*} [Category* C] [Category* D] [Abelian C] [Abelian D]
-
-/-- If `a ≫ x = b ≫ y ≫ c` with `a`, `b` and `c` isomorphisms, the arrows `x` and `y` are
-isomorphic. The hypothesis says that the two paths from `P` to `B` agree:
-```
-P --a--> A  --x--> B
-P --b--> A' --y--> B' --c--> B
-```
--/
-noncomputable def Arrow.isoOfCompEq {P A B A' B' : C} {x : A ⟶ B} {y : A' ⟶ B'} (a : P ⟶ A)
-    (b : P ⟶ A') (c : B' ⟶ B) [IsIso a] [IsIso b] [IsIso c] (w : a ≫ x = b ≫ y ≫ c) :
-    Arrow.mk x ≅ Arrow.mk y :=
-  Arrow.isoMk (asIso (inv a ≫ b)) (asIso (inv c)) (by
-    dsimp
-    rw [← cancel_epi a, ← cancel_mono c]
-    simp [reassoc_of% w])
 
 set_option linter.flexible false in
 /-- `H⁰` of the map of single complexes induced by a natural transformation `τ` at `X` is
