@@ -201,5 +201,24 @@
   "worker": "stage1",
   "summary": "Read 00SS (line 36640) and its proof, 00SA (line 35852) with the remark after 00S9, the definition 00SP (line 36506); tags verified in tags/tags. Statement kept. Corrected source.place: the proof of 00SS cites 00P3 (lemma-dimension-preserved-field-extension), not 00P4, and only for part (1), which part (2) does not need. Six steps: (1) T' = T_g via the coefficient-map kernel and R[x]/(rx-1) = R_r leaves (route of the merged 00SA node, step 3); (2) the fibre F = T (x) k(p) is k[x]/(f-bar) (polynomial scalar extension, tensor-quotient base change); (3) T' (x) k(p) = F_g (algebra localization base change leaf); (4) a nonzero fibre of T' lies over a nonzero fibre of T, which is equidimensional of dimension n-c (equidimensional node); (5) dim of the nonzero principal localization is n-c (open immersion of D(e), dimension at a point on an open subspace, supremum of local dimensions); (6) conclusion with (n+1)-(c+1). No new nodes. Mathlib searches of the item (all three kinds, recorded at creation) suffice: no relative global complete intersection notion in Mathlib, not a leaf."
  },
- "reviewed": "2026-10-10 L: 6 steps checked against 00SS (2) with the fibre dimensions written out: T' = T_g via polynomial-coefficient-map-kernel and localization-away-polynomial-quotient, fibres by polynomial-scalar-extension and tensor-quotient-base-change, fibre of T' = principal localization of the fibre of T (algebra-localization-away-base-change), dimension n - c by equidimensionality and the open-subspace/supremum nodes; source place corrected (00SS cites 00P3, not 00P4, and only for part (1)); citer syntomic-at-prime step 10 uses both clauses"
+ "reviewed": "2026-10-10 L: 6 steps checked against 00SS (2) with the fibre dimensions written out: T' = T_g via polynomial-coefficient-map-kernel and localization-away-polynomial-quotient, fibres by polynomial-scalar-extension and tensor-quotient-base-change, fibre of T' = principal localization of the fibre of T (algebra-localization-away-base-change), dimension n - c by equidimensionality and the open-subspace/supremum nodes; source place corrected (00SS cites 00P3, not 00P4, and only for part (1)); citer syntomic-at-prime step 10 uses both clauses",
+ "lean": {
+  "module": "Sheaf.RingTheory.RelativeGlobalCompleteIntersectionPrincipalLocalization",
+  "declaration": "Algebra.relativeGlobalCompleteIntersection_principalLocalization",
+  "statement": "theorem relativeGlobalCompleteIntersection_principalLocalization (R : Type u) [CommRing R] (n c : ℕ) (f : Fin c → MvPolynomial (Fin n) R) (hrel : IsRelativeGlobalCompleteIntersectionPresentation f) (h : MvPolynomial (Fin n) R) : IsRelativeGlobalCompleteIntersectionPresentation (Fin.snoc (α := fun _ ↦ MvPolynomial (Fin (n + 1)) R) (fun i ↦ MvPolynomial.rename Fin.castSucc (f i)) (MvPolynomial.rename Fin.castSucc h * MvPolynomial.X (Fin.last n) - 1)) ∧ ∃ e : (MvPolynomial (Fin (n + 1)) R ⧸ Ideal.span (Set.range (Fin.snoc (α := fun _ ↦ MvPolynomial (Fin (n + 1)) R) (fun i ↦ MvPolynomial.rename Fin.castSucc (f i)) (MvPolynomial.rename Fin.castSucc h * MvPolynomial.X (Fin.last n) - 1)))) ≃ₐ[R] Localization.Away (Ideal.Quotient.mk (Ideal.span (Set.range f)) h), (∀ i : Fin n, e (Ideal.Quotient.mk _ (MvPolynomial.X (Fin.castSucc i))) = algebraMap (MvPolynomial (Fin n) R ⧸ Ideal.span (Set.range f)) (Localization.Away (Ideal.Quotient.mk (Ideal.span (Set.range f)) h)) (Ideal.Quotient.mk _ (MvPolynomial.X i))) ∧ e (Ideal.Quotient.mk _ (MvPolynomial.X (Fin.last n))) = IsLocalization.Away.invSelf (Ideal.Quotient.mk (Ideal.span (Set.range f)) h)",
+  "by": "H1",
+  "date": "2026-10-11",
+  "file": "lean/Sheaf/RingTheory/RelativeGlobalCompleteIntersectionPrincipalLocalization.lean",
+  "branch": "sheaf-dag",
+  "existing": false,
+  "fixed_by": "R-gpl"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-gpl",
+  "group": "H1",
+  "result": "fix",
+  "note": "node fixes a presentation f: hypothesis and first conclusion restated with landed IsRelativeGlobalCompleteIntersectionPresentation (n+1 vars Fin.castSucc/Fin.last, c+1 eqs Fin.snoc) instead of ring-map existential; AlgEquiv over R to Localization.Away (mk h) with x_i -> x_i/1, x_{n+1} -> invSelf"
+ }
 }

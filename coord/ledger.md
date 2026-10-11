@@ -4876,3 +4876,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 14:11 L: merged deliver/M1/lem-sc-p1-graded-nakayama-free (stage 2; reviewer FIX; first push; Sheaf.RingTheory.GradedNakayamaFree MvPolynomial.graded_nakayama_free)
 - 14:12 L: merged deliver/F1/lem-sc-coherent-affine-free-resolution (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.CoherentAffineFreeResolution AlgebraicGeometry.coherent_affine_free_resolution)
 - 14:12 L: merged deliver/F1/lem-sc-p1-koszul-resolution (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.ProjectiveSpace.KoszulResolution AlgebraicGeometry.ProjectiveLine.koszul_resolution)
+- 14:12 L: merged deliver/H1/lem-weil-pbc-relative-global-complete-intersection-principal-localization (stage 2; reviewer FIX; first push; Sheaf.RingTheory.RelativeGlobalCompleteIntersectionPrincipalLocalization Algebra.relativeGlobalCompleteIntersection_principalLocalization)
