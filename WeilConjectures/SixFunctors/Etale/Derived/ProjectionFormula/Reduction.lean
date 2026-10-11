@@ -57,12 +57,19 @@ open Scheme
 namespace Etale
 
 section General
-
 variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
   [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
   [Abelian.HasFunctorialFlatResolution A] [Etale.UpperStarPreservesFlat A]
 
 variable {X Y : Scheme.{u}}
+
+/-- The compatibility of `- ⊗ᴸ N` with the derived tensor product: the associator
+`(M ⊗ᴸ L) ⊗ᴸ N ≅ M ⊗ᴸ (L ⊗ᴸ N)`. -/
+noncomputable def derivedTensorRightTensorIso
+    (N M L : DerivedCategory (Sheaf X.smallEtaleTopology A)) :
+    (derivedTensorRight A X N).obj (((-⊗ᴸ-(X)[A]).obj M).obj L) ≅
+      ((-⊗ᴸ-(X)[A]).obj M).obj ((derivedTensorRight A X N).obj L) :=
+  α_ M L N
 
 /-- For `a : Lf^*N_Y ≅ N_X`, the isomorphism `Lf^*(L ⊗ᴸ N_Y) ≅ Lf^*L ⊗ᴸ N_X`, natural in `L`:
 the tensor comparison of `Lf^*` followed by `a`. -/
@@ -113,15 +120,18 @@ lemma rightDerivedLowerShriekDerivedTensorRightMap_app
 /-- **The reduction square of the projection map, for a general coefficient object.** For
 `a : Lf^*N_Y ≅ N_X`, `K` on `X` and `L` on `Y`, the square
 ```
-(Rf_!K ⊗ᴸ L) ⊗ᴸ N_Y ---PF_{K, L} ▷ N_Y---> Rf_!(K ⊗ᴸ Lf^*L) ⊗ᴸ N_Y
-        | α                                            | comparison of Rf_! and - ⊗ᴸ N
+(Rf_!K ⊗ᴸ L) ⊗ᴸ N_Y ---PF_{K, L} ⊗ᴸ N_Y---> Rf_!(K ⊗ᴸ Lf^*L) ⊗ᴸ N_Y
+        | ≅ (associator)                               | comparison of Rf_! and - ⊗ᴸ N
         v                                              v
 Rf_!K ⊗ᴸ (L ⊗ᴸ N_Y)                           Rf_!((K ⊗ᴸ Lf^*L) ⊗ᴸ N_X)
-        | PF_{K, L ⊗ᴸ N_Y}                             ^ Rf_! α⁻¹
+        | PF_{K, L ⊗ᴸ N_Y}                             ^ ≅ Rf_!(associator⁻¹)
         v                                              |
-Rf_!(K ⊗ᴸ Lf^*(L ⊗ᴸ N_Y)) --Rf_!(K ◁ (δ ≫ 1 ◁ a))--> Rf_!(K ⊗ᴸ (Lf^*L ⊗ᴸ N_X))
+Rf_!(K ⊗ᴸ Lf^*(L ⊗ᴸ N_Y)) ---Rf_!(K ⊗ᴸ (δ ≫ 1 ⊗ᴸ a))--> Rf_!(K ⊗ᴸ (Lf^*L ⊗ᴸ N_X))
 ```
-commutes. It follows from the associativity of the projection map
+commutes, where the comparisons are `AlgebraicGeometry.Etale.derivedTensorRightTensorIso`,
+`AlgebraicGeometry.Etale.rightDerivedLowerShriekDerivedTensorRightMap` and
+`AlgebraicGeometry.Etale.leftDerivedUpperStarDerivedTensorRightIso`. It follows from the
+associativity of the projection map
 (`AlgebraicGeometry.Etale.projectionMapOfCompactification_assoc`). -/
 theorem projectionMapOfCompactification_derivedTensorRight
     {NY : DerivedCategory (Sheaf Y.smallEtaleTopology A)}
@@ -131,10 +141,10 @@ theorem projectionMapOfCompactification_derivedTensorRight
     (derivedTensorRight A Y NY).map (((projectionMapOfCompactification A c).app K).app L) ≫
         (rightDerivedLowerShriekDerivedTensorRightMap A c a.hom).app
           (K ⊗ L((f)^*[A]).obj L) =
-      (α_ ((Rf_!(c)[A]).obj K) L NY).hom ≫
+      (derivedTensorRightTensorIso A NY ((Rf_!(c)[A]).obj K) L).hom ≫
         ((projectionMapOfCompactification A c).app K).app (L ⊗ NY) ≫
         Rf_!(c)[A].map (K ◁ (leftDerivedUpperStarDerivedTensorRightIso A f a).hom.app L) ≫
-        Rf_!(c)[A].map (α_ K (L((f)^*[A]).obj L) NX).inv :=
+        Rf_!(c)[A].map (derivedTensorRightTensorIso A NX K (L((f)^*[A]).obj L)).inv :=
   Adjunction.projectionMap_whiskerRight_comp
     (fun K L ↦ ((projectionMapOfCompactification A c).app K).app L)
     (projectionMapOfCompactification_assoc A c) a.hom K L
