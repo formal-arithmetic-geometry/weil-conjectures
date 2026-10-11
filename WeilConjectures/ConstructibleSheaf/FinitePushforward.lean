@@ -231,8 +231,9 @@ theorem Etale.isFinitelyPresentable_of_isConstructibleSheaf [IsNoetherianRing Λ
     IsFinitelyPresentable.{u} F := by
   -- Stacks 095N: sections over affine étale `X`-schemes give an epimorphism from a possibly
   -- infinite sum of `v_! Λ` (093C, `Etale.epi_sigmaDesc_sectionHom`); the supports of the
-  -- cokernels of its finite subsums are constructible (`v_! Λ` is constructible, 03SA) with empty intersection, so one is empty by
-  -- compactness of the constructible topology; likewise for the constructible kernel.
+  -- cokernels of its finite subsums are constructible (`v_! Λ` is constructible, 03SA) with
+  -- empty intersection, so one is empty by compactness of the constructible topology; likewise
+  -- for the constructible kernel.
   obtain ⟨m, n, V, v, hv, hV, U, w, hw, hU, φ, π, hφπ, ⟨hc⟩⟩ :
       ∃ (m n : ℕ) (V : Fin m → Scheme.{u}) (v : ∀ j, V j ⟶ X) (hv : ∀ j, Etale (v j))
         (_ : ∀ j, IsAffine (V j)) (U : Fin n → Scheme.{u}) (w : ∀ i, U i ⟶ X)
