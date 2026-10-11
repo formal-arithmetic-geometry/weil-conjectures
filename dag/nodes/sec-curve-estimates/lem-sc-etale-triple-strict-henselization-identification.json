@@ -159,5 +159,24 @@
   "group": "C1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-shi0047 (reviewer sub-agent of L); spot-checked: Re-push after R-shi0029: (1) D1 repaired: lem-sc-localized-triple-colimit absent from tree; Steps 1-4 build C and D=A^sh from lem-weil-pbc-strict-henselization-triples over (R,m,K) and (A,qA,K) (K separable algebraic over kappa(q) via phi), S->C factors through S_q (preimage of m_C=ker psi is q), f:D->C over A and g:C->D over R from lem-weil-pbc-map-into-henselian-colimit (C4: targets henselian local, sources filtered etale colimits, primes m_D/m_C lie over qA/m, tau=id_K is a kappa-algebra map), f o g=id_C by uniqueness over R, A->C->D = A->D by uniqueness for etale S plus localization, g o f=id_D by uniqueness over A; no cofinality argument needed; (2) def-weil-pbc-adic-completion in Step 5 uses and proof_deps; (3) TeX in Step 2; (4) split_report and tool_uses rewritten. Statement change (residue embedding named phi, completion written inline) is E7-named and harmless; citer lem-sc-etale-triple-to-sh-completion-flat Step 0 uses exactly iso + qA^sh=mC + completion. No duplicate among henselization nodes (functoriality node is scheme-level). Second reading by C1: no missed fault. FIX more, RETURN less: no repairs needed."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.EtaleTripleStrictHenselizationIdentification",
+  "declaration": "AlgebraicGeometry.Scheme.etaleTriple_strictHenselization_identification",
+  "file": "lean/Sheaf/RingTheory/EtaleTripleStrictHenselizationIdentification.lean",
+  "statement": "theorem etaleTriple_strictHenselization_identification (R : CommRingCat.{u}) [IsLocalRing R] (K : Type u) [Field K] [Algebra ((Spec R).residueField (IsLocalRing.closedPoint R)) K] [IsSepClosure ((Spec R).residueField (IsLocalRing.closedPoint R)) K] (c : Cocone (etaleResidueTriplesRingDiagram R (IsLocalRing.closedPoint R) K (CommRingCat.ofHom (algebraMap ((Spec R).residueField (IsLocalRing.closedPoint R)) K)))) (hc : IsColimit c) (ρ : R ⟶ c.pt) (ψ : c.pt →+* K) (hρ : ∀ s, s.α ≫ c.ι.app s = ρ) (hψ : ∀ s, ψ.comp (c.ι.app s).hom = ((ΓSpecIso s.B).inv ≫ (Spec s.B).Γevaluation s.q ≫ s.φ).hom) (t : EtaleResidueTriples R (IsLocalRing.closedPoint R) K (CommRingCat.ofHom (algebraMap ((Spec R).residueField (IsLocalRing.closedPoint R)) K))) (A : CommRingCat.{u}) [Algebra t.B A] [IsLocalization.AtPrime A t.q.asIdeal] [IsLocalRing A] (χA : (Spec A).residueField (IsLocalRing.closedPoint A) ⟶ CommRingCat.of K) (hχA : CommRingCat.ofHom (algebraMap t.B A) ≫ (ΓSpecIso A).inv ≫ (Spec A).Γevaluation (IsLocalRing.closedPoint A) ≫ χA = (ΓSpecIso t.B).inv ≫ (Spec t.B).Γevaluation t.q ≫ t.φ) (d : Cocone (etaleResidueTriplesRingDiagram A (IsLocalRing.closedPoint A) K χA)) (hd : IsColimit d) (δ : A ⟶ d.pt) (ψD : d.pt →+* K) (hδ : ∀ s, s.α ≫ d.ι.app s = δ) (hψD : ∀ s, ψD.comp (d.ι.app s).hom = ((ΓSpecIso s.B).inv ≫ (Spec s.B).Γevaluation s.q ≫ s.φ).hom) : ∃! e : d.pt ≃+* c.pt, e.toRingHom.comp (δ.hom.comp (algebraMap t.B A)) = (c.ι.app t).hom ∧ ψ.comp e.toRingHom = ψD ∧ (t.q.asIdeal.map (δ.hom.comp (algebraMap t.B A))).map e.toRingHom = (IsLocalRing.maximalIdeal R).map ρ.hom ∧ ∃ ê : AdicCompletion (t.q.asIdeal.map (δ.hom.comp (algebraMap t.B A))) d.pt ≃+* AdicCompletion ((IsLocalRing.maximalIdeal R).map ρ.hom) c.pt, ∀ (n : ℕ) (x : AdicCompletion (t.q.asIdeal.map (δ.hom.comp (algebraMap t.B A))) d.pt) (a : d.pt), AdicCompletion.evalₐ (t.q.asIdeal.map (δ.hom.comp (algebraMap t.B A))) n x = Ideal.Quotient.mk ((t.q.asIdeal.map (δ.hom.comp (algebraMap t.B A))) ^ n) a → AdicCompletion.evalₐ ((IsLocalRing.maximalIdeal R).map ρ.hom) n (ê x) = Ideal.Quotient.mk (((IsLocalRing.maximalIdeal R).map ρ.hom) ^ n) (e a)",
+  "branch": "sheaf-dag",
+  "by": "N1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-tsi"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-tsi",
+  "group": "N1",
+  "result": "fix",
+  "note": "R local + IsSepClosure on dep's residue-field encoding; C = colimit cocone c/hc of the dep's triple diagram with rho/psi tied by hrho/hpsi; t a triple; A = S_q via IsLocalization.AtPrime; chiA tied to t.phi by hchiA; D = colimit d/hd over A with delta/psiD tied; conclusion: unique e compatible with S->A->D and S->C and with psi (canonical), q-ideal of D maps to mC, completion equiv induced coordinatewise by e. FIX: dropped derivable conjunct maximalIdeal c.pt = mC (dep clause) and the now-unused [IsLocalRing c.pt]; qD now maps directly to mC."
  }
 }
