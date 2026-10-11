@@ -118,5 +118,23 @@
   "group": "M1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-flf2938 (reviewer sub-agent of L); spot-checked: Mathlib: SheafOfModules.IsLocallyFree (Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean:61) has no rank, no constant-rank-d declaration exists (IsFiniteLocallyFreeOfRank named in the report is absent); not a leaf. No duplicate: def-pc-finite-locally-free is about morphisms, def-weil-pbc-charpoly-locally-free about ring modules, def-asd/def-pur vector-bundle nodes cite or use this notion. Citers: constant-rank users (lem-sc-local-splitting-finite-free, lem-sc-local-section-quotient-finite-free, lem-sc-smooth-omega-finite-locally-free, def-asd-vector-bundle-zero-section) match; varying-rank users (lem-sc-ext-evaluation, lem-sc-ext-tensor-exact, lem-sc-ext-locally-free) cite it only as 'compare' (C4 ok). Definition well-formed, d=0 and empty scheme fine. FIX more, RETURN less: (1) B3/class b: statement used scheme and O_S-module without citing their definition nodes; added [def-pc-scheme], [def-weil-sheaf-of-modules-category] to text and stmt_deps, d>=0 integer made explicit; (2) B3: 'in particular quasi-coherent' was justified only by a forward reference to 'the following vector-bundle definition' (not self-contained); replaced by the elementary affine-local remark citing [pqf-def-coherent] with Stacks Tags 01C6 and 01C7. Second reading by M1 missed both.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree",
+  "declaration": "SheafOfModules.IsFiniteLocallyFreeOfRank",
+  "statement": "class IsFiniteLocallyFreeOfRank (M : SheafOfModules.{u} R) (r : ℕ) : Prop",
+  "branch": "slopmaster2",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": true,
+  "note": "Specialize to C = S.Opens, the Zariski topology, R = S.ringCatSheaf, and M : S.Modules. Scheme.Modules.IsFiniteLocallyFreeOfRank.exists_restrict_iso_free and isFiniteLocallyFreeOfRank_of_restrict_iso_free give exactly the open-cover definition; local freeness implies the existing Mathlib IsQuasicoherent predicate."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-dfl1157",
+  "group": "E1",
+  "result": "pass",
+  "note": "existing source class SheafOfModules.IsFiniteLocallyFreeOfRank (slopmaster2 LocallyFree.lean:128, @[stacks 01C6]) verbatim statement; #print field ∃ q, IsLocallyFreeData, ∀ i, (generators i).I ≃ Fin r; isFiniteLocallyFreeOfRank_iff_exists_over_iso_free = cover + M.over V_a ≅ free (ULift (Fin r)), scheme form via exists_restrict_iso_free/of_restrict_iso_free (⨆ U i = ⊤, ι : Type u); elaborates on E : S.Modules, d=0 free instance by inferInstance; QC via IsLocallyFree -> instIsQuasicoherentOfIsLocallyFree (consequence, not conjunct); one notion: IsFiniteLocallyFreeInDegree (fdbdba3c8) is built on it, landed citer DeterminantShortExact already uses it; varying-rank IsFiniteLocallyFree is a different notion (compare-only citers); node TeX unchanged in diff"
  }
 }
