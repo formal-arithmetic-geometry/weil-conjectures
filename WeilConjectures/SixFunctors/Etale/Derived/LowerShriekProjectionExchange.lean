@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekProjectionBaseChange
+public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekProjectionRefinement
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FlatModuleCat
 
 /-!
@@ -56,8 +57,25 @@ lemma projectionMapOfCompactification_rightDerivedLowerShriekOfCompactificationI
       ((-⊗ᴸ-(Y)[ModuleCat.{u + 1} Λ]).map
           ((rightDerivedLowerShriekOfCompactificationIso Λ c d).hom.app K)).app L ≫
         ((projectionMapOfCompactification _ d).app K).app L := by
-  trace_state
-  sorry
+  have h₁ := projectionMapOfCompactification_comparison _ (Compactification.infFst c d)
+    (Compactification.isPullback_infFst c d) K L
+  have h₂ := projectionMapOfCompactification_comparison _ (Compactification.infSnd c d)
+    (Compactification.isPullback_infSnd c d) K L
+  simp only [rightDerivedLowerShriekOfCompactificationIso, Iso.trans_hom, Iso.symm_hom,
+    asIso_hom, asIso_inv, NatTrans.comp_app, Functor.map_comp, Category.assoc]
+  rw [reassoc_of% h₁]
+  let e := asIso (rightDerivedLowerShriekOfCompactificationComparison (ModuleCat.{u + 1} Λ)
+    (Compactification.infSnd c d) (Compactification.isPullback_infSnd c d))
+  have h₂' : ((projectionMapOfCompactification _ (c.inf d)).app K).app L ≫
+      e.inv.app (((-⊗ᴸ-(X)[ModuleCat.{u + 1} Λ]).obj K).obj (L((f)^*[ModuleCat.{u + 1} Λ]).obj L)) =
+      ((-⊗ᴸ-(Y)[ModuleCat.{u + 1} Λ]).map (e.inv.app K)).app L ≫
+        ((projectionMapOfCompactification _ d).app K).app L := by
+    rw [← Iso.app_inv, Iso.comp_inv_eq, Iso.app_hom, Category.assoc]
+    erw [h₂]
+    rw [← NatTrans.comp_app_assoc, ← Functor.map_comp]
+    erw [Iso.inv_hom_id_app]
+    simp only [CategoryTheory.Functor.map_id, NatTrans.id_app, Category.id_comp]
+  exact congrArg (_ ≫ ·) h₂'
 
 end Independence
 
