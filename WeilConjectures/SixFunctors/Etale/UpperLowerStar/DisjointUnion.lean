@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FiniteEtale
+public import WeilConjectures.ConstructibleSheaf.Pullback
 
 /-!
 # Sections over disjoint unions on the small étale site
@@ -145,5 +146,97 @@ lemma existsUnique_sections_pullback_trivialCoverFold
 
 
 end TrivialCover
+
+section Constant
+
+variable {U : Scheme.{u}} {S : Type u} {Λ : Type (u + 1)} [CommRing Λ]
+
+lemma trivialCoverSectionHom_naturality {W W' : U.Etale} (g : W' ⟶ W) (s : S) :
+    (MorphismProperty.Over.map ⊤ (P := @Etale)
+        (inferInstance : Etale (Sigma.ι (fun _ : S ↦ U) s))).map g ≫
+      trivialCoverSectionHom W s =
+    trivialCoverSectionHom W' s ≫
+      (MorphismProperty.Over.pullback @Etale ⊤ (trivialCoverFold U S)).map g := by
+  ext : 1
+  erw [MorphismProperty.Comma.comp_left, MorphismProperty.Comma.comp_left]
+  apply pullback.hom_ext <;>
+    simp [trivialCoverSectionHom, trivialCoverSection]; rfl
+
+/-- The restriction of the pushforward along the fold map to the `s`-th copy. -/
+noncomputable def lowerStarTrivialCoverFoldToRestriction
+    (F : Sheaf (∐ fun _ : S ↦ U).smallEtaleTopology (ModuleCat.{u + 1} Λ)) (s : S) :
+    (Etale.lowerStar (ModuleCat.{u + 1} Λ) (trivialCoverFold U S)).obj F ⟶
+      (GrothendieckTopology.localizationRestriction (ModuleCat.{u + 1} Λ) @Etale @Etale le_rfl
+        (Sigma.ι (fun _ : S ↦ U) s) inferInstance).obj F :=
+  ⟨{ app W := F.obj.map (trivialCoverSectionHom W.unop s).op
+     naturality W W' g := by
+       change F.obj.map _ ≫ F.obj.map _ = F.obj.map _ ≫ F.obj.map _
+       rw [← F.obj.map_comp, ← F.obj.map_comp]
+       congr 1
+       apply Quiver.Hom.unop_inj
+       simp only [unop_comp, Functor.op_map, Quiver.Hom.unop_op]
+       exact (trivialCoverSectionHom_naturality g.unop s).symm }⟩
+
+/-- Limits of size `u` exist in `ModuleCat.{u + 1} Λ`. -/
+local instance : HasLimitsOfSize.{u, u} (ModuleCat.{u + 1} Λ) :=
+  hasLimitsOfSizeShrink.{u, u, u + 1, u + 1} _
+
+/-- **The pushforward along a trivial cover is the product of the restrictions to the copies.**
+-/
+theorem isIso_pi_lift_lowerStarTrivialCoverFoldToRestriction
+    (F : Sheaf (∐ fun _ : S ↦ U).smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
+    IsIso (Pi.lift (lowerStarTrivialCoverFoldToRestriction (Λ := Λ) F)) := by
+  rw [← isIso_iff_of_reflects_iso _ (sheafToPresheaf _ _), NatTrans.isIso_iff_isIso_app]
+  intro W
+  let E := sheafToPresheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ) ⋙
+    (CategoryTheory.evaluation _ _).obj W
+  change IsIso (E.map _)
+  -- the sections over `W` form a product, by `existsUnique_sections_pullback_trivialCoverFold`
+  let c : Fan fun s ↦ E.obj ((GrothendieckTopology.localizationRestriction
+      (ModuleCat.{u + 1} Λ) @Etale @Etale le_rfl (Sigma.ι (fun _ : S ↦ U) s)
+        inferInstance).obj F) :=
+    Fan.mk (F.obj.obj (op ((MorphismProperty.Over.pullback @Etale ⊤ (trivialCoverFold U S)).obj
+      W.unop))) fun s ↦ F.obj.map (trivialCoverSectionHom W.unop s).op
+  have hc : IsLimit c := Fan.IsLimit.mk _
+    (fun t ↦ (existsUnique_sections_pullback_trivialCoverFold F W.unop t.proj).exists.choose)
+    (fun t s ↦
+      (existsUnique_sections_pullback_trivialCoverFold F W.unop t.proj).exists.choose_spec s)
+    (fun t m hm ↦ (existsUnique_sections_pullback_trivialCoverFold F W.unop t.proj).unique hm
+      (existsUnique_sections_pullback_trivialCoverFold F W.unop t.proj).exists.choose_spec)
+  have h₁ : E.map (Pi.lift (lowerStarTrivialCoverFoldToRestriction F)) ≫ piComparison E _ =
+      Pi.lift c.proj := by
+    rw [map_lift_piComparison]
+    rfl
+  have h₂ : IsIso (Pi.lift c.proj) := by
+    have : Pi.lift c.proj = (hc.conePointUniqueUpToIso (limit.isLimit _)).hom := by
+      ext s
+      simp [Fan.proj]
+    rw [this]
+    infer_instance
+  have : IsIso (E.map (Pi.lift (lowerStarTrivialCoverFoldToRestriction F)) ≫
+    piComparison E _) := h₁ ▸ h₂
+  exact IsIso.of_isIso_comp_right _ (piComparison E _)
+
+/-- **The pushforward of a constant sheaf along a finite trivial cover is constant**: it is the
+product over the copies of the restrictions, each of which is constant. -/
+theorem isConstant_lowerStar_trivialCoverFold [Finite S] (M : ModuleCat.{u + 1} Λ) :
+    ((Etale.lowerStar (ModuleCat.{u + 1} Λ) (trivialCoverFold U S)).obj
+      ((constantSheaf (∐ fun _ : S ↦ U).smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj M)).IsConstant
+        U.smallEtaleTopology := by
+  classical
+  have := Fintype.ofFinite S
+  have := isIso_pi_lift_lowerStarTrivialCoverFoldToRestriction
+    ((constantSheaf (∐ fun _ : S ↦ U).smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj M)
+  refine Sheaf.isConstant_of_iso _ (asIso (Pi.lift (lowerStarTrivialCoverFoldToRestriction
+    ((constantSheaf (∐ fun _ : S ↦ U).smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj M))) ≪≫
+      Pi.mapIso (fun s ↦
+      ((GrothendieckTopology.upperStarIsoLocalizationRestriction (ModuleCat.{u + 1} Λ) @Etale
+        @Etale le_rfl (Sigma.ι (fun _ : S ↦ U) s) inferInstance).app _).symm ≪≫
+      (upperStarConstantSheafIso (ModuleCat.{u + 1} Λ)
+        (Sigma.ι (fun _ : S ↦ U) s)).app M) ≪≫
+    (PreservesProduct.iso (constantSheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ)) _).symm)
+
+
+end Constant
 
 end AlgebraicGeometry.Scheme
