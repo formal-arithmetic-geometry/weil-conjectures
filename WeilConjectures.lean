@@ -581,6 +581,7 @@ public import WeilConjectures.CategoryTheory.Sites.ReductionFlat
 public import WeilConjectures.CategoryTheory.Sites.ReductionFlatModel
 public import WeilConjectures.CategoryTheory.Sites.SheafCohomologyBijective
 public import WeilConjectures.CategoryTheory.Sites.SheafCohomologyTorsion
+public import WeilConjectures.CategoryTheory.Sites.SheafComposeMonoidal
 public import WeilConjectures.CategoryTheory.Sites.SheafifyGrp
 public import WeilConjectures.CategoryTheory.Sites.SigmaPresheaf
 public import WeilConjectures.CategoryTheory.Sites.Torsor
