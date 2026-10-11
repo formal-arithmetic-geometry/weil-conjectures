@@ -25,7 +25,9 @@
   "def-pc-scheme",
   "def-sc-zariski-site",
   "def-sc-gm-torsor",
-  "lem-sc-torsor-h1"
+  "lem-sc-torsor-h1",
+  "def-sc-binary-contracted-product-presentation",
+  "def-sc-coherent-contracted-powers"
  ],
  "proof": [
   {
@@ -138,5 +140,23 @@
   "group": "C1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-cpt1755 (reviewer sub-agent of L); spot-checked: Recomputed coordinates: T^{-1} coord b->b+c and T coord a->a-c under t1=c.t0, so degree-k shift -kc and mu_{m,n} glues; antidiagonal (a,b)~(a+g,b-g) preserves sum; h=a+b matches mu_{1,-1}; assoc/comm/unit on representatives. Statement unchanged. No cycle: lem-sc-torsor-h1 -> lem-sc-ext-torsor (imported, no deps); parent contracted-power-extension cites this item, not conversely; no restatement. Second reading: no missed fault found. No repairs."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.Sites.ZariskiContractedPowerTorsor",
+  "declaration": "CategoryTheory.Sheaf.Torsor.nonempty_coherentContractedPowers",
+  "file": "lean/Sheaf/CategoryTheory/Sites/ZariskiContractedPowerTorsor.lean",
+  "statement": "theorem nonempty_coherentContractedPowers (X : AlgebraicGeometry.Scheme.{uCT}) (G : Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{wCT}) (T : Torsor G) : Nonempty (CoherentContractedPowers X T)",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-zcp1313",
+  "group": "M1",
+  "result": "pass",
+  "note": "X:Scheme, G:Sheaf(Opens.grothendieckTopology X) AddCommGrpCat, T:source Torsor G; power:Z->Torsor G with zero=trivial G, one=T, inverse_sheaf/inverse_vadd (-g); product m n binary sheaf-quotient presentation P_m x P_n -> P_(m+n) (natural, antidiagonal-invariant, first-factor equivariant, universal vs all Type w sheaves) gives T^m wedge T^n ~ T^(m+n) and recursive iterated powers; left/right unit = action (G wedge T = original action via one); assoc cast add_assoc; comm swap cast add_comm n m; cancellation T.vadd q_{1,-1}(t,s) s = t; binary presentation same quotient+universal form as landed ContractedProductPresentation (172d8aaf7), distinct notion (two torsors, Zariski) so no H4/H12"
  }
 }

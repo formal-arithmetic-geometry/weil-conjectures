@@ -1,0 +1,113 @@
+{
+ "id": "def-sc-coherent-contracted-powers",
+ "kind": "definition",
+ "title": "Coherent contracted powers of a Zariski torsor",
+ "status": "split",
+ "statement": "Let $X$ be a scheme [def-pc-scheme], $G$ an abelian sheaf on the small Zariski site [def-sc-zariski-site], and $T$ a $G$-torsor [def-sc-gm-torsor]. A coherent contracted-power system consists of $G$-torsors $P_n$ for $n\\in\\mathbf Z$, with $P_0=G$ (translation), $P_1=T$, and $P_{-1}$ the underlying sheaf of $T$ with action $g\\cdot s=(-g)\\cdot_Ts$, together with binary contracted product presentations [def-sc-binary-contracted-product-presentation] $q_{m,n}:P_m\\times P_n\\to P_{m+n}$. These presentations identify $P_{m+n}$ canonically with $P_m\\wedge P_n$; in particular they recursively give the positive and negative iterated contracted powers of $T$ and its inverse. Require $q_{0,n}(g,t)=g\\cdot t$, $q_{n,0}(t,g)=g\\cdot t$, associativity $q_{l+m,n}(q_{l,m}(x,y),z)=q_{l,m+n}(x,q_{m,n}(y,z))$, commutativity $q_{n,m}(y,x)=q_{m,n}(x,y)$, and the cancellation formula $q_{1,-1}(t,s)\\cdot_Ts=t$. Equal degree indices are identified by the indicated integer equalities.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sc-zariski-site",
+  "def-sc-gm-torsor",
+  "def-sc-binary-contracted-product-presentation"
+ ],
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-hilbert90/lem-sc-torsor-h1.md",
+  "place": "Worker's argument developing the contracted-product group law of node lem-sc-torsor-h1; the coherent integer-power construction is not in Stacks 02FQ"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "integer powers of a sheaf torsor contracted product",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "coherent integer contracted powers of an abelian sheaf torsor",
+   "results": "8 hits: CategoryTheory.Sheaf.H, CategoryTheory.Sheaf.cohomologyPresheaf, SheafOfModules.instAddCommGroupHom, ModuleCat.instAddCommGroupObjOppositeOpensCarrierTopValTildeInType, CategoryTheory.Sheaf.cohomologyPresheafFunctor, CategoryTheory.Presieve.FamilyOfElements.isCompatible_map_smul_aux, SheafOfModules.instPreadditive, PresheafOfModules.Sheafify.SMulCandidate.mk'; none defines this notion.",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Torsor",
+   "results": "12 hits: Torsor, Group.instTorsor, Equiv.constSMul, Torsor.nonempty, Equiv.constSDiv, Equiv.smulConst, Torsor.toSDiv, Torsor.subsingleton_iff; none defines this notion.",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "contracted|inverseTorsor|torsorPow",
+   "results": "2 hits: Mathlib/RingTheory/Polynomial/SeparableDegree.lean, Mathlib/RingTheory/Polynomial/SeparableDegree.lean; none defines this notion.",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sc-zariski-contracted-power-torsor",
+  "date": "2026-10-11",
+  "group": "M1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-pic-proper-ntorsion",
+   "place": "The contracted-product quotient presentations and coherent signed powers used in the integer-power torsor construction.",
+   "via": [
+    "lem-sc-zariski-contracted-power-torsor",
+    "lem-sc-zariski-contracted-power-extension",
+    "lem-sc-zariski-ext-torsor",
+    "lem-sc-torsor-h1-boundary-representative",
+    "lem-sc-torsor-h1-functoriality",
+    "lem-sc-picard-h1-restriction-compatibility",
+    "lem-sc-pic-lift-closed-immersion-dim-le-one",
+    "lem-sc-dim-one-ample-invertible",
+    "lem-sc-dim-one-quasi-projective",
+    "lem-sc-proper-dim-one-projective"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-curveestimate",
+ "lean": {
+  "module": "Sheaf.CategoryTheory.Sites.CoherentContractedPowers",
+  "declaration": "CategoryTheory.Sheaf.Torsor.CoherentContractedPowers",
+  "file": "lean/Sheaf/CategoryTheory/Sites/CoherentContractedPowers.lean",
+  "statement": "structure CoherentContractedPowers (X : AlgebraicGeometry.Scheme.{uCP}) {G : Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{wCP}} (T : Torsor G)",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-zcp1313",
+  "group": "M1",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-zcp1313",
+  "group": "M1",
+  "result": "pass",
+  "note": "X:Scheme, G:Sheaf(Opens.grothendieckTopology X) AddCommGrpCat, T:source Torsor G; power:Z->Torsor G with zero=trivial G, one=T, inverse_sheaf/inverse_vadd (-g); product m n binary sheaf-quotient presentation P_m x P_n -> P_(m+n) (natural, antidiagonal-invariant, first-factor equivariant, universal vs all Type w sheaves) gives T^m wedge T^n ~ T^(m+n) and recursive iterated powers; left/right unit = action (G wedge T = original action via one); assoc cast add_assoc; comm swap cast add_comm n m; cancellation T.vadd q_{1,-1}(t,s) s = t; binary presentation same quotient+universal form as landed ContractedProductPresentation (172d8aaf7), distinct notion (two torsors, Zariski) so no H4/H12"
+ }
+}
