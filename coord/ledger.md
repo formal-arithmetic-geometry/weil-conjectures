@@ -3557,3 +3557,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 06:46 L: merged deliver/E1/lem-pc-nowhere-dense-dim-zero (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.NowhereDenseDimZero AlgebraicGeometry.dim_le_zero_of_isNowhereDense)
 - 06:46 L: merged deliver/E1/lem-galois-fpqc-morphisms-descend (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.FpqcMorphismsDescend AlgebraicGeometry.Scheme.fpqc_morphisms_descend)
 - 06:46 L: merged deliver/C1/lem-pc-recd-fibre-cartier-local (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.FibreCartierLocal AlgebraicGeometry.Scheme.IdealSheafData.fibre_cartier_local)
+- 06:46 L: merged deliver/K1/def-weil-pbc-curve-setting (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.CurveCoefficientPair AlgebraicGeometry.CurveCoefficientPair)
