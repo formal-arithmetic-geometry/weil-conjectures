@@ -179,5 +179,24 @@
   "group": "E1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-tta0103 (reviewer sub-agent of L); spot-checked: Re-push after R-tta0042: stupid-truncation induction now used (E OK: induction on number of nonzero terms, base case one term via projective resolution + Tor def, Q=0 trivial; bicomplex/spectral sequence removed). Citer lem-pc-tor-independent-projective-complex-tensor applies it with Tor-acyclic finite projective terms (C4 OK); no duplicate. FIX more, RETURN less: (1) C4 Steps 2-4 cited def-weil-derived-tensor, the pro-etale A_Y definition, for R-modules -> replaced by lem-pur-derived-change-of-rings on the one-point site (exact functor, left derived of termwise tensor, computed by K-flat resolutions, canonical map tau); (2) C1 Step 3 'ses gives a triangle, tensoring gives the corresponding triangle, naturality gives a morphism of long exact sequences' was uncited -> rewritten citing lem-weil-pbc-complex-ses-triangle (both split sequences), exactness from lem-pur-derived-change-of-rings, shift-compatibility of tau checked inline via K-flat models, lem-weil-pbc-commshift-nattrans-triangle-morphism, lem-weil-pbc-derived-cohomology-ladder, then lem-weil-pbc-five-lemma; (3) dropped the redundant cone alternative citing lem-pc-acyclic-triangle-two-out-of-three (stated for sheaves on a site in K, not needed) and the unused tool use lem-pc-kflat-resolution. The Second reading by E1 missed (1) and (2).; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.TermwiseTorAcyclicDerivedTensor",
+  "declaration": "CochainComplex.quasiIso_tensor_of_termwise_tor_acyclic",
+  "file": "lean/Sheaf/Algebra/Homology/TermwiseTorAcyclicDerivedTensor.lean",
+  "statement": "theorem quasiIso_tensor_of_termwise_tor_acyclic {R : Type u} [CommRing R] {B : Type u} [CommRing B] [Algebra R B] (Q : CochainComplex (ModuleCat.{u} R) ℤ) (hbounded : ∃ a b : ℤ, ∀ n : ℤ, n < a ∨ b < n → IsZero (Q.X n)) (hTor : ∀ (n : ℤ) (i : ℕ), 0 < i → IsZero (((Tor' (ModuleCat.{u} R) i).obj (Q.X n)).obj (ModuleCat.of R B))) (P : CochainComplex.KFlat (ModuleCat.{u} R)) (f : P.obj ⟶ Q) (hf : QuasiIso f) : QuasiIso ((((tensoringRight (ModuleCat.{u} R)).obj (ModuleCat.of R B)).mapHomologicalComplex (ComplexShape.up ℤ)).map f) ∧ ∀ i : ℤ, IsIso (homologyMap ((((tensoringRight (ModuleCat.{u} R)).obj (ModuleCat.of R B)).mapHomologicalComplex (ComplexShape.up ℤ)).map f) i)",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": false,
+  "note": "The canonical map is stated on an arbitrary K-flat resolution P.obj → Q, using the source repository’s CochainComplex.KFlat. Its tensor with B is the derived-to-ordinary comparison, read as complexes of R-modules as in the statement. No additional property of Q, R, or B is assumed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-tta0917",
+  "group": "F1",
+  "result": "pass",
+  "note": "R comm ring, B comm R-algebra (ModuleCat.of R B), Q cochain complex ModuleCat R up Z, finite support as IsZero outside [a,b] (empty allowed), Tor_i(Q^n,B)=0 i>0 via recorded mathlib_match Tor' (resolves first variable, checked Functor.flip), derived tensor as arbitrary source CochainComplex.KFlat resolution f quasi-iso (node proof step 2 convention; source DerivedCategory monoidal needs HasFunctorialFlatResolution, no ModuleCat instance, so K-flat model is right), canonical map = tensoringRight B mapHomologicalComplex .map f, QuasiIso + homologyMap iso each i; universes common u; docstring 4 steps cited; lines<=100; no name clash"
  }
 }
