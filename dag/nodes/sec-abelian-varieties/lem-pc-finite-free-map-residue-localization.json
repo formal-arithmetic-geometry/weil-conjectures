@@ -102,5 +102,23 @@
   "group": "G1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ffr0201 (reviewer sub-agent of L); spot-checked: Statement matches Stacks 00O0 (1),(3) specialized to finite free and parent lem-pc-finite-projective-cokernel-localization step 3's use (C4 ok; finite free -> finite projective in parent). Step 1: nonzero maximal minor over kappa(p), det outside p, invertible over R_Delta, block form [I_m;0] gives left inverse and Coker ~ R^(n-m) (E ok, m=0 fine). Step 2: m=n by dimension, det unit, adjugate inverse (E ok). Definitions: def-weil-pbc-free-module, -projective-module, -module-localization-away correct. No duplicate (grep Coker(u_f)/cokernel-flat: parent, scheme-level lem-sc-finite-locally-free-residue-isomorphism, unrelated). Mathlib grep RingTheory/Localization cokernel and Flat IsLocalizedModule: no Mathlib match. Second reading missed no fault."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.FiniteFreeMapResidueLocalization",
+  "declaration": "Module.finiteFreeMap_residue_localization",
+  "file": "lean/Sheaf/RingTheory/FiniteFreeMapResidueLocalization.lean",
+  "statement": "theorem finiteFreeMap_residue_localization {R : Type*} [CommRing R] (m n : ℕ) (u : (Fin m → R) →ₗ[R] (Fin n → R)) (p : Ideal R) [p.IsPrime] : (Function.Injective (u.baseChange p.ResidueField) → ∃ f : R, f ∉ p ∧ Function.Injective (u.baseChange (Localization.Away f)) ∧ Module.Finite (Localization.Away f) (TensorProduct R (Localization.Away f) (Fin n → R) ⧸ LinearMap.range (u.baseChange (Localization.Away f))) ∧ Module.Free (Localization.Away f) (TensorProduct R (Localization.Away f) (Fin n → R) ⧸ LinearMap.range (u.baseChange (Localization.Away f)))) ∧ (Function.Bijective (u.baseChange p.ResidueField) → ∃ f : R, f ∉ p ∧ Function.Bijective (u.baseChange (Localization.Away f)))",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-ffr0759",
+  "group": "F1",
+  "result": "fix",
+  "note": "CommRing R (no local/Noetherian, as node), m n : N with Fin m -> R, Fin n -> R = R^m, R^n incl. rank 0, p prime, kappa(p) = p.ResidueField via baseChange; (1) Injective over kappa(p) -> exists f notin p, baseChange to Localization.Away f injective and its cokernel (target/range) Module.Finite and Module.Free over R_f; (3) Bijective over kappa(p) -> exists f notin p, Bijective localized; docstring = node proof (minor/Delta, [I_m;0], adjugate); H4 grep RingTheory LocalRing/Module, Unramified, ResidueField: only local-ring or algebra results, no match; FIX dropped unused import Mathlib.Algebra.Module.LocalizedModule.Basic"
  }
 }
