@@ -6,9 +6,9 @@ Authors: Claude
 module
 
 public import WeilConjectures.AlgebraicGeometry.AbelianVariety.Defs
+public import WeilConjectures.CategoryTheory.DerivedCategory.InjectiveCoseparator
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.FullyFaithful
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triangulated
-public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.FullyFaithful
 public import WeilConjectures.RepresentationTheory.GroupCohomology.CupNonvanishing
 public import WeilConjectures.SixFunctors.ProEtale.Derived.ClopenIdempotent
 public import WeilConjectures.SixFunctors.ProEtale.ExceptionalAdjoint
@@ -50,6 +50,9 @@ of `Rf_!` on unbounded (or bounded below) pro-étale complexes does not exist in
 The construction works for abelian varieties of any positive dimension `g`, since then
 `T_r A ≅ ℤ_r^{2g}` surjects onto `ℤ_r`; elliptic curves are the case `IsAbelianVariety.dim E = 1`.
 The statements are made in that generality.
+
+The blueprint construction works for every nonzero coefficient ring `Λ`. The statements here
+take `Λ` to be a field, which suffices for a counterexample.
 
 The chosen compactification of the proper morphism `a_E` need not be the trivial one; it is
 `E ⟶ Z ⟶ Spec k` with `E` clopen in `Z`. Two general facts transport the failure to it:
