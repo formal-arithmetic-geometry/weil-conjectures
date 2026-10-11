@@ -13,7 +13,7 @@
  },
  "kind": "statement",
  "title": "Relative Mayer–Vietoris gluing for the single-complex base-change map",
- "statement": "Let X' \\xrightarrow{g'} X and S' \\xrightarrow{g} S be a cartesian square with f:X\\to S quasi-compact and quasi-separated and f':X'\\to S' its base change [def-pc-scheme, def-pc-base-change]. Assume moreover that S and S' are affine. Let K\\in D_{\\mathrm{QCoh}}(\\mathcal O_X) and let L(g')^*K\\to K' be a map in D_{\\mathrm{QCoh}}(\\mathcal O_{X'}) [def-pc-derived-category]. Suppose X=U\\cup V, where U and V are quasi-compact open subschemes and U\\cap V is quasi-compact. For each W\\in\\{U,V,U\\cap V\\}, let W'=X'\\times_X W and assume that the canonical composite Lg^*Rf_{W,*}(K|_W)\\to Rf'_{W',*}L(g'|_{W'})^*(K|_W)\\to Rf'_{W',*}(K'|_{W'}) is an isomorphism, using derived pullback and direct image [def-pc-derived-pullback, def-pc-derived-direct-image]. Then the canonical composite Lg^*Rf_*K\\to Rf'_*L(g')^*K\\to Rf'_*K' is an isomorphism.",
+ "statement": "Let X' \\xrightarrow{g'} X and S' \\xrightarrow{g} S be a cartesian square with f:X\\to S quasi-compact and quasi-separated and f':X'\\to S' its base change [def-pc-scheme, def-pc-base-change]. Assume moreover that S and S' are affine. Let K\\in D_{\\mathrm{QCoh}}(\\mathcal O_X) and K'\\in D_{\\mathrm{QCoh}}(\\mathcal O_{X'}) and let L(g')^*K\\to K' be a map in D_{\\mathrm{QCoh}}(\\mathcal O_{X'}) [def-pc-derived-category]. Suppose X=U\\cup V, where U and V are quasi-compact open subschemes and U\\cap V is quasi-compact. For each W\\in\\{U,V,U\\cap V\\}, let W'=X'\\times_X W and assume that the canonical composite Lg^*Rf_{W,*}(K|_W)\\to Rf'_{W',*}L(g'|_{W'})^*(K|_W)\\to Rf'_{W',*}(K'|_{W'}) is an isomorphism, using derived pullback and direct image [def-pc-derived-pullback, def-pc-derived-direct-image]. Then the canonical composite Lg^*Rf_*K\\to Rf'_*L(g')^*K\\to Rf'_*K' is an isomorphism. The canonical base-change maps are those of [def-pc-derived-base-change-map]; the map on each open is the restriction of the given map, transported by the canonical derived pullback composition isomorphisms [lem-pc-ringed-spaces-derived-pullback-composition].",
  "source": {
   "document": "literature/stacks-project/perfect.tex",
   "place": "Tag 0DJ9, induction step; relative Mayer--Vietoris triangle from Cohomology, Lemma cohomology-lemma-unbounded-relative-mayer-vietoris"
@@ -23,7 +23,9 @@
   "def-pc-derived-category",
   "def-pc-derived-direct-image",
   "def-pc-derived-pullback",
-  "def-pc-base-change"
+  "def-pc-base-change",
+  "def-pc-derived-base-change-map",
+  "lem-pc-ringed-spaces-derived-pullback-composition"
  ],
  "proof": [
   {
@@ -149,5 +151,52 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RelativeMayerVietoris",
+  "declaration": "AlgebraicGeometry.relativeMayerVietoris",
+  "declarations": [
+   "AlgebraicGeometry.relativeMayerVietoris"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/RelativeMayerVietoris.lean",
+  "statement": "theorem relativeMayerVietoris [∀ Z : Scheme.{um}, HasDerivedCategory.{wm} (SheafOfModules.{um} (moduleRings Z.toRingedSpace))] {X S X' S' : Scheme.{um}} (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (g' : X' ⟶ X) (hpull : IsPullback g' f' f g) [IsAffine S] [IsAffine S'] [QuasiCompact f] [QuasiSeparated f] (K : schemeDerivedCategory X) (hK : schemeDerivedQCohProperty X K) (K' : schemeDerivedCategory X') (hK' : schemeDerivedQCohProperty X' K') (φ : (derivedPullback g').obj K ⟶ K') (U V : X.Opens) (hUqc : IsCompact (U : Set X)) (hVqc : IsCompact (V : Set X)) (hUVqc : IsCompact ((U ⊓ V : X.Opens) : Set X)) (hcover : U ⊔ V = ⊤) (hU : IsIso (schemeDerivedBaseChangeMap (U.ι ≫ f) (pullback.fst g' U.ι ≫ f') g (pullback.snd g' U.ι) (by rw [← pullback.condition_assoc, Category.assoc, hpull.w, ← Category.assoc]) ((derivedPullback U.ι).obj K) ≫ (schemeDerivedDirectImage (pullback.fst g' U.ι ≫ f')).map (((Classical.choose (Classical.choose_spec (Classical.choose_spec (Classical.choose_spec exists_derivedPullbackComposition)))) (pullback.snd g' U.ι) U.ι).hom.app K ≫ eqToHom (congrArg (fun k => (derivedPullback k).obj K) (pullback.condition (f := g') (g := U.ι)).symm) ≫ ((Classical.choose (Classical.choose_spec (Classical.choose_spec (Classical.choose_spec exists_derivedPullbackComposition)))) (pullback.fst g' U.ι) g').inv.app K ≫ (derivedPullback (pullback.fst g' U.ι)).map φ))) (hV : IsIso (schemeDerivedBaseChangeMap (V.ι ≫ f) (pullback.fst g' V.ι ≫ f') g (pullback.snd g' V.ι) (by rw [← pullback.condition_assoc, Category.assoc, hpull.w, ← Category.assoc]) ((derivedPullback V.ι).obj K) ≫ (schemeDerivedDirectImage (pullback.fst g' V.ι ≫ f')).map (((Classical.choose (Classical.choose_spec (Classical.choose_spec (Classical.choose_spec exists_derivedPullbackComposition)))) (pullback.snd g' V.ι) V.ι).hom.app K ≫ eqToHom (congrArg (fun k => (derivedPullback k).obj K) (pullback.condition (f := g') (g := V.ι)).symm) ≫ ((Classical.choose (Classical.choose_spec (Classical.choose_spec (Classical.choose_spec exists_derivedPullbackComposition)))) (pullback.fst g' V.ι) g').inv.app K ≫ (derivedPullback (pullback.fst g' V.ι)).map φ))) (hUV : IsIso (schemeDerivedBaseChangeMap ((U ⊓ V).ι ≫ f) (pullback.fst g' (U ⊓ V).ι ≫ f') g (pullback.snd g' (U ⊓ V).ι) (by rw [← pullback.condition_assoc, Category.assoc, hpull.w, ← Category.assoc]) ((derivedPullback (U ⊓ V).ι).obj K) ≫ (schemeDerivedDirectImage (pullback.fst g' (U ⊓ V).ι ≫ f')).map (((Classical.choose (Classical.choose_spec (Classical.choose_spec (Classical.choose_spec exists_derivedPullbackComposition)))) (pullback.snd g' (U ⊓ V).ι) (U ⊓ V).ι).hom.app K ≫ eqToHom (congrArg (fun k => (derivedPullback k).obj K) (pullback.condition (f := g') (g := (U ⊓ V).ι)).symm) ≫ ((Classical.choose (Classical.choose_spec (Classical.choose_spec (Classical.choose_spec exists_derivedPullbackComposition)))) (pullback.fst g' (U ⊓ V).ι) g').inv.app K ≫ (derivedPullback (pullback.fst g' (U ⊓ V).ι)).map φ))) : IsIso (schemeDerivedBaseChangeMap f f' g g' hpull.w K ≫ (schemeDerivedDirectImage f').map φ)",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-rmv"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-rmv",
+  "group": "F1",
+  "result": "fix",
+  "note": "dependency module DerivedBaseChangeMap.lean was a second spelling of the landed schemeDerivedBaseChangeMap (H4/H13; its derivedBaseChangeMap used an untied Classical.choice adjunction) and re-pointed def-pc-derived-base-change-map: reverted, module left out; item restated on schemeDerivedBaseChangeMap with hpull.w (redundant h binder removed), the restriction of phi on each open written inline via the recorded exists_derivedPullbackComposition comparisons (no helper def); reverted the delivery's change of existing node(s) def-pc-derived-base-change-map (--revert-nodes; kept as on sheaf-dag)",
+  "statement_corrected": true
+ },
+ "statement_change": {
+  "date": "2026-10-11",
+  "by": "F1 stage 2",
+  "old_statement": "Let X' \\xrightarrow{g'} X and S' \\xrightarrow{g} S be a cartesian square with f:X\\to S quasi-compact and quasi-separated and f':X'\\to S' its base change [def-pc-scheme, def-pc-base-change]. Assume moreover that S and S' are affine. Let K\\in D_{\\mathrm{QCoh}}(\\mathcal O_X) and let L(g')^*K\\to K' be a map in D_{\\mathrm{QCoh}}(\\mathcal O_{X'}) [def-pc-derived-category]. Suppose X=U\\cup V, where U and V are quasi-compact open subschemes and U\\cap V is quasi-compact. For each W\\in\\{U,V,U\\cap V\\}, let W'=X'\\times_X W and assume that the canonical composite Lg^*Rf_{W,*}(K|_W)\\to Rf'_{W',*}L(g'|_{W'})^*(K|_W)\\to Rf'_{W',*}(K'|_{W'}) is an isomorphism, using derived pullback and direct image [def-pc-derived-pullback, def-pc-derived-direct-image]. Then the canonical composite Lg^*Rf_*K\\to Rf'_*L(g')^*K\\to Rf'_*K' is an isomorphism.",
+  "what": "K' is not explicitly introduced as an object; typing the comparison on opens also requires specifying that it is the restriction of the one given map, via the canonical composition identifications. The correction makes these implicit source data explicit without changing any hypothesis or conclusion.",
+  "source": {
+   "document": "literature/stacks-project/perfect.tex",
+   "place": "Tag 0DJ9, statement and induction step"
+  },
+  "citers": [
+   {
+    "id": "lem-pc-rf-single-complex-qcqs-induction",
+    "holds": true,
+    "note": "The source use already has K' in D_QCoh and uses the canonical restriction of the same input map; this clarification preserves the gluing step."
+   }
+  ],
+  "old_stmt_deps": [
+   "def-pc-scheme",
+   "def-pc-derived-category",
+   "def-pc-derived-direct-image",
+   "def-pc-derived-pullback",
+   "def-pc-base-change"
+  ]
  }
 }
