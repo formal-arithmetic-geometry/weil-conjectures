@@ -226,5 +226,24 @@
   "worker": "stage1",
   "summary": "Proof written in 6 steps (agent-written; Stacks 07E5 (3)=>(1) states the facts without proof): (1) free of rank d by the free base-change tower leaf, flat (free => flat), finite, Noetherian; closed fibre A'/mA' = K (x)_k k' via the tensor-quotient and cancel-base-change leaves, of K-dimension d by scalar extension of a basis; every element of K (x)_k k' is a unit or nilpotent by the q-th power (Frobenius) computation z^q = c (x) 1 (char 0: k' = k); hence it is local with unique prime the nilradical; primes of A' over mA' correspond to it, and every maximal ideal of the finite A-algebra A' contains mA', so A' is local; K' is a quotient of the d-dimensional K-algebra, a finite extension. No new nodes. Statement made precise: inline definition of local ring, the isomorphism A'/mA' = K (x)_k k' given by its formula and compatibility, dimension d; stmt_deps added: def-pc-field-extension, def-weil-pbc-free-module, def-weil-finitely-generated-module. Mathlib: no match as a whole (candidate PrimeSpectrum.isHomeomorph_comap_of_isPurelyInseparable recorded)."
  },
- "reviewed": "Reviewed by L 2026-10-10: proof by agent (the source uses the facts without proof): freeness and flatness of A⊗_k k' from existing leaves, the closed fibre K⊗_k k' computed by the cancellation/quotient base-change nodes, every element of K⊗k' a unit or nilpotent by the q-th power trick (step 3, checked), locality and the unique prime over m via the finite-algebra radical leaf. Statement made explicit (local ring defined inline, the fibre isomorphism given by its formula). No new nodes; Mathlib candidates recorded (B8)."
+ "reviewed": "Reviewed by L 2026-10-10: proof by agent (the source uses the facts without proof): freeness and flatness of A⊗_k k' from existing leaves, the closed fibre K⊗_k k' computed by the cancellation/quotient base-change nodes, every element of K⊗k' a unit or nilpotent by the q-th power trick (step 3, checked), locality and the unique prime over m via the finite-algebra radical leaf. Statement made explicit (local ring defined inline, the fibre isomorphism given by its formula). No new nodes; Mathlib candidates recorded (B8).",
+ "lean": {
+  "module": "Sheaf.RingTheory.PurelyInseparableBaseChangeLocalRing",
+  "declaration": "Algebra.TensorProduct.purelyInseparable_baseChange_localRing",
+  "file": "lean/Sheaf/RingTheory/PurelyInseparableBaseChangeLocalRing.lean",
+  "statement": "theorem purelyInseparable_baseChange_localRing (k : Type u) (k' : Type v) (A : Type w) [Field k] [Field k'] [CommRing A] [Algebra k k'] [Algebra k A] [IsPurelyInseparable k k'] [Module.Finite k k'] [IsLocalRing A] [IsNoetherianRing A] : Nonempty (Module.Basis (Fin (Module.finrank k k')) A (A ⊗[k] k')) ∧ Module.Free A (A ⊗[k] k') ∧ Module.Finite A (A ⊗[k] k') ∧ RingHom.Flat (algebraMap A (A ⊗[k] k')) ∧ IsNoetherianRing (A ⊗[k] k') ∧ IsLocalRing (A ⊗[k] k') ∧ (∃ m' : Ideal (A ⊗[k] k'), m'.IsMaximal ∧ (∀ P : Ideal (A ⊗[k] k'), P.IsPrime → (Ideal.map (algebraMap A (A ⊗[k] k')) (IsLocalRing.maximalIdeal A) ≤ P ↔ P = m')) ∧ (∃ f : IsLocalRing.ResidueField A →+* ((A ⊗[k] k') ⧸ m'), (∀ a : A, f (IsLocalRing.residue A a) = Ideal.Quotient.mk m' (algebraMap A (A ⊗[k] k') a)) ∧ @Module.Finite (IsLocalRing.ResidueField A) ((A ⊗[k] k') ⧸ m') _ _ (@Algebra.toModule _ _ _ _ f.toAlgebra))) ∧ (∃ e : ((A ⊗[k] k') ⧸ (Ideal.map (algebraMap A (A ⊗[k] k')) (IsLocalRing.maximalIdeal A))) ≃+* ((IsLocalRing.ResidueField A) ⊗[k] k'), (∀ (a : A) (x : k'), e (Ideal.Quotient.mk (Ideal.map (algebraMap A (A ⊗[k] k')) (IsLocalRing.maximalIdeal A)) (a ⊗ₜ[k] x)) = (IsLocalRing.residue A a) ⊗ₜ[k] x) ∧ @Module.finrank (IsLocalRing.ResidueField A) ((A ⊗[k] k') ⧸ (Ideal.map (algebraMap A (A ⊗[k] k')) (IsLocalRing.maximalIdeal A))) _ _ (@Algebra.toModule _ _ _ _ (e.symm.toRingHom.comp (algebraMap (IsLocalRing.ResidueField A) ((IsLocalRing.ResidueField A) ⊗[k] k'))).toAlgebra) = Module.finrank k k')",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-pbl1447"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-pbl1447",
+  "group": "J1",
+  "result": "fix",
+  "note": "k,k' fields, [Algebra k k'] [IsPurelyInseparable k k'] [Module.Finite k k'] (M1 form); A CommRing k-algebra IsLocalRing IsNoetherianRing; A'=A ⊗[k] k' via algebraMap=includeLeft; (1) Fin d basis, Free, Finite, RingHom.Flat, Noetherian; (2) IsLocalRing + maximal m' unique prime over mA'; (3) f:K→A'/m' tied to residue, Module.Finite via f; e:A'/mA'≃+*K⊗k' on pure tensors, finrank d with transported (=canonical, no Mathlib instance) K-action; FIX: dropped extra conjunct finrank K (K⊗k')=d not in the node"
+ }
 }
