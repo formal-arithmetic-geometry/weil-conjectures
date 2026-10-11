@@ -1,23 +1,28 @@
 # Work queue
 
-526 items; claim with `tools/claim.py next <group> [--stage N]`.
+547 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (526)
+## Stage 2: nodes to state (547)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
+| `def-sc-picard-functor` | 1 | state |
 | `pqf-def-coherent` | 1 | state |
 | `def-nagata-final-noetherian-base-system` | 2 | state |
-| `def-pc-smooth-projective-curve` | 2 | state |
 | `def-sc-group-scheme` | 2 | state |
 | `def-sp-convergence` | 2 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 | `cor-galois-lisse-representations` | 1 | state |
+| `lem-pc-arrow-iso-pullback-counit` | 1 | state |
+| `lem-pc-base-change-closure-components` | 1 | state |
+| `lem-pc-curves-are-sc` | 1 | state |
 | `lem-pc-derived-tensor-transitivity` | 1 | state |
+| `lem-pc-global-sections-separable` | 1 | state |
 | `lem-pc-module-pullback-identity-composition` | 1 | state |
+| `lem-pc-zero-scheme-adjunction-base-change` | 1 | state |
 | `lem-sc-affine-complement-finite-on-integral-curve` | 1 | state |
 | `lem-sc-ample-on-reduction-noetherian` | 1 | state |
 | `lem-sc-ample-square-zero-thickening` | 1 | state |
@@ -26,6 +31,7 @@
 | `lem-sc-component-intersections-finite` | 1 | state |
 | `lem-sc-find-globally-generated` | 1 | state |
 | `lem-sc-hilb-dominating-power` | 1 | state |
+| `lem-sc-hilb-to-pic-morphism` | 1 | state |
 | `lem-sc-hilbert-nowhere-dense-dimension-drop` | 1 | state |
 | `lem-sc-integral-dim-one-ample` | 1 | state |
 | `lem-sc-locnoeth-components-locally-finite` | 1 | state |
@@ -38,12 +44,25 @@
 | `lem-sc-zero-dim-noetherian-affine` | 1 | state |
 | `lem-sc-zero-dim-noetherian-finite-discrete` | 1 | state |
 | `lem-weil-derived-limit-roos-complex` | 1 | state |
+| `lem-weil-pbc-constructible-module-limit-descent` | 1 | state |
 | `lem-weil-pbc-constructible-module-noetherian-descent` | 1 | state |
 | `lem-weil-pbc-constructible-torsion-modules-agree` | 1 | state |
 | `lem-weil-pbc-curve-assertions-dense-open` | 1 | state |
 | `lem-weil-pbc-curve-assertions-retract` | 1 | state |
 | `lem-weil-pbc-curve-constructible-sub-quotient` | 1 | state |
+| `lem-weil-pbc-descend-affine` | 1 | state |
+| `lem-weil-pbc-descend-closed-immersion` | 1 | state |
+| `lem-weil-pbc-descend-etale` | 1 | state |
+| `lem-weil-pbc-descend-finite` | 1 | state |
+| `lem-weil-pbc-descend-finite-locally-free` | 1 | state |
+| `lem-weil-pbc-descend-flat-finite-presentation` | 1 | state |
+| `lem-weil-pbc-descend-separated` | 1 | state |
+| `lem-weil-pbc-descend-surjective` | 1 | state |
+| `lem-weil-pbc-etale-finite-data-descent` | 1 | state |
 | `lem-weil-pbc-etale-infinitesimal-neighbourhoods` | 1 | state |
+| `lem-weil-pbc-eventually-affine` | 1 | state |
+| `lem-weil-pbc-eventually-closed-immersion` | 1 | state |
+| `lem-weil-pbc-eventually-proper` | 1 | state |
 | `lem-weil-pbc-finite-etale-trace-degree` | 1 | state |
 | `lem-weil-pbc-finite-pushforward-constructible-descent` | 1 | state |
 | `lem-weil-pbc-finite-surjective-affine-target-noetherian` | 1 | state |
@@ -71,12 +90,12 @@
 | `lem-weil-pbc-lift-idempotent-upstairs` | 1 | state |
 | `lem-weil-pbc-lift-projective-module-etale` | 1 | state |
 | `lem-weil-pbc-lift-to-injective-unique-up-to-homotopy` | 1 | state |
-| `lem-weil-pbc-limit-affine-transition` | 1 | state |
 | `lem-weil-pbc-limit-contained-in-constructible` | 1 | state |
 | `lem-weil-pbc-limit-finite-presentation` | 1 | state |
 | `lem-weil-pbc-limit-flat-modules` | 1 | state |
 | `lem-weil-pbc-limit-module-essentially-finite-presentation-over-system` | 1 | state |
 | `lem-weil-pbc-limit-module-finite-presentation` | 1 | state |
+| `lem-weil-pbc-limit-residue-field` | 1 | state |
 | `lem-weil-pbc-limit-tower-essentially-finite-presentation` | 1 | state |
 | `lem-weil-pbc-linear-equation-localization-polynomial` | 1 | state |
 | `lem-weil-pbc-lisse-generic-kernel` | 1 | state |
@@ -214,7 +233,9 @@
 | `lem-weil-pbc-projective-resolution-kernel-projective` | 1 | state |
 | `lem-weil-pbc-projective-space-functor-of-points` | 1 | state |
 | `lem-weil-pbc-projective-space-standard-charts` | 1 | state |
+| `lem-weil-pbc-proper-closed-in-proper-fp` | 1 | state |
 | `lem-weil-pbc-proper-coproduct` | 1 | state |
+| `lem-weil-pbc-proper-limit-noetherian` | 1 | state |
 | `lem-weil-pbc-property-implies-acyclicity` | 1 | state |
 | `lem-weil-pbc-pth-root-presentation-differentials` | 1 | state |
 | `lem-weil-pbc-pth-roots-extension-degree` | 1 | state |
@@ -536,7 +557,7 @@
 | `lem-pc-essentially-constant-pro-hom-colimit` | 4 | state |
 | `lem-pur-essential-constant-pro-criterion-05py` | 4 | state |
 
-Not open yet: 40 nodes that wait for stage 1, 761 nodes that wait for a statement dependency.
+Not open yet: 40 nodes that wait for stage 1, 738 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
