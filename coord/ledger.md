@@ -4919,3 +4919,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 14:21 L: merged deliver/F1/lem-weil-pbc-geometrically-regular-descent (stage 2; reviewer FIX; first push; Sheaf.RingTheory.GeometricallyRegularDescent Algebra.isGeometricallyRegular_of_faithfullyFlat)
 - 14:21 L: merged deliver/G1/lem-weil-pbc-skyscraper-constant-on-point-closure (stage 2; reviewer PASS; first push; Sheaf.Topology.SkyscraperConstantOnPointClosure TopCat.skyscraper_constant_on_point_closure)
 - 14:21 L: merged deliver/H1/lem-weil-pbc-ring-quasi-finite-locus-open (stage 2; reviewer PASS; first push; Sheaf.RingTheory.QuasiFiniteLocusOpen Algebra.isOpen_isQuasiFiniteAtPrime)
+- 14:21 L: merged deliver/H1/lem-weil-pbc-sections-base-field-extension (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.EtaleSectionsBaseFieldExtension AlgebraicGeometry.etale_sections_base_field_extension)
