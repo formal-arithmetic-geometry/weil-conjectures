@@ -22,9 +22,41 @@
   "def-weil-scheme-morphism-properties",
   "def-sc-invertible-module"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By [def-sc-invertible-module], an invertible module is locally free of rank one. Thus it satisfies the locally-free finite-rank hypothesis of [def-amb-finite-locally-free-module] with d=1, which is the coefficient hypothesis of the valuation-ring coherent higher-direct-image statement.",
+   "uses": [
+    "def-sc-invertible-module",
+    "def-amb-finite-locally-free-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-on-morphisms.tex",
+    "place": "More on Morphisms, Lemma 0EX8, setup of the coherent module F"
+   }
+  },
+  {
+   "text": "Apply [lem-sc-valuation-proper-coherent-higher-direct-images] with q=0. Its conclusion says that H^0(X,F) is a finitely presented A-module, which is the asserted statement.",
+   "uses": [
+    "lem-sc-valuation-proper-coherent-higher-direct-images"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-on-morphisms.tex",
+    "place": "More on Morphisms, Lemma lemma-triviality-generic-fibre-valuation-ring, Tag 0EX8"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-invertible-module",
+  "def-amb-finite-locally-free-module",
+  "lem-sc-valuation-proper-coherent-higher-direct-images"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-on-morphisms.tex",
+  "place": "More on Morphisms, Lemma lemma-triviality-generic-fibre-valuation-ring, Tag 0EX8"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -56,12 +88,29 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-picard-locus-closed-valuation-triviality",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-abelian-varieties",
- "unit": "sk-prop-av-cube"
+ "unit": "sk-prop-av-cube",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-valuation-proper-coherent-sections",
+  "worker": "stage1",
+  "summary": "Split the degree-zero invertible-module case from the stronger valuation-ring coherent higher-direct-image statement. The new child records the non-Mathlib coherent-finiteness input; the item proof checks that invertible modules are finitely presented and specializes the child to q=0.",
+  "blueprint": "Realizes the theorem-of-the-cube proof sentence 'properness over a valuation ring makes global sections of an invertible module finitely presented'.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-vcs0018",
+  "group": "J1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-vcs0018 (reviewer sub-agent of L); spot-checked: Route: 0EX8 general case (valuation ring coherent + perfect-lemma-cohomology-over-coherent-ring). Step 1 invertible => locally free constant rank 1 matches child hypothesis (C4 ok); step 2 q=0 specialization exact. Child true: flat needed so F finite locally free is flat over A and lem-pc-rf-perfect-base-change gives RGamma perfect; over coherent A its cohomology is f.p. Citer lem-sc-picard-locus-closed-valuation-triviality step 1 uses exactly H^0(X,L) f.p. with same hypotheses. No duplicate among the 5 0EX8 nodes or rf-perfect/pseudo-coherent nodes (lem-pc-rf-perfect-base-change is an input, not the statement; noetherian nodes inapplicable). Mathlib searches recorded; no match expected. No fault missed by the second reading (only stale 'every finitely presented quasi-coherent module' wording in the packet's Not-duplicates paragraph, not in any node)."
+ },
+ "lead_note": "2026-10-11 L (R-vcs0018): child lem-sc-valuation-proper-coherent-higher-direct-images is a real lemma, splittable later via lem-pc-rf-perfect-base-change (proper fp, F fp flat over S => Rf_*F perfect; F finite locally free on flat X is flat over A) plus coherence of valuation rings (Stacks 0ASU-area example, perfect complex over coherent ring has f.p. cohomology)"
 }
