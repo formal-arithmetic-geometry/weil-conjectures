@@ -203,5 +203,24 @@
  "reviewed": "2026-10-10 L: 6 steps checked against 0H88 with the omitted details written out: forgetful functor Mod(A) -> Mod(O) preserves direct sums and exactness (tool module-sheaves-colimits-forgetful, recorded), direct sums of copies of A quasi-coherent via the tilde-Gamma adjunction, cokernel of quasi-coherent modules quasi-coherent; converse via the A(U)-module structure on G(U), its free presentation and the adjunction; citer affine-module-correspondence uses both directions",
  "tool_uses": [
   "lem-weil-pbc-module-sheaves-colimits-forgetful"
- ]
+ ],
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.QuasiCoherenceScalarRestriction",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.quasiCoherent_iff_restrictScalars",
+  "file": "lean/Sheaf/AlgebraicGeometry/QuasiCoherenceScalarRestriction.lean",
+  "statement": "theorem quasiCoherent_iff_restrictScalars (S : Scheme.{u}) (A : S.CommAlgebraSheaf) (hA : A.toModule.IsQuasicoherent) (G : SheafOfModules.{u} ((sheafCompose (Opens.grothendieckTopology S) (forget₂ CommRingCat RingCat)).obj A.right)) : G.IsQuasicoherent ↔ ((SheafOfModules.restrictScalars ((sheafCompose (Opens.grothendieckTopology S) (forget₂ CommRingCat RingCat)).map A.hom)).obj G).IsQuasicoherent",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-qsr1450"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-qsr1450",
+  "group": "G1",
+  "result": "fix",
+  "note": "S scheme; A : S.CommAlgebraSheaf + hA : A.toModule.IsQuasicoherent (not inferInstance); G SheafOfModules over A.right; iff of G.IsQuasicoherent with restrictScalars A.hom, as K1 c42e1122f; differs from K1 162f49708 clause (1) (special case A=u_*O_U)"
+ }
 }
