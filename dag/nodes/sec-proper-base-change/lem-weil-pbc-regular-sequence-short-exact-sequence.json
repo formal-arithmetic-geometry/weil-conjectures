@@ -168,5 +168,24 @@
   "by": "L",
   "result": "accepted",
   "note": "4 steps filling the 'details omitted' of Stacks 0F1T: the induced maps and the identification of coker(f_i on N/I_{i-1}N) with N/I_iN (elementary); the inductive claim P_i stated with base P_0; the inductive step by the snake lemma leaf (rows exact, f_i nonzerodivisor on the outer terms gives ker = 0 in the middle and a short exact sequence of cokernels, the injectivity/surjectivity clauses of the leaf used); part (b) from (a) and the surjection onto M_3/I_rM_3 != 0. Hypotheses of the snake node checked against step 3. Citer regular-sequence-powers uses only (a)."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.RegularSequenceShortExactSequence",
+  "declaration": "RingTheory.Sequence.isRegular_of_shortExact",
+  "file": "lean/Sheaf/RingTheory/RegularSequenceShortExactSequence.lean",
+  "statement": "theorem isRegular_of_shortExact (R : Type u) [CommRing R] (M₁ : Type v₁) (M₂ : Type v₂) (M₃ : Type v₃) [AddCommGroup M₁] [AddCommGroup M₂] [AddCommGroup M₃] [Module R M₁] [Module R M₂] [Module R M₃] (α : M₁ →ₗ[R] M₂) (β : M₂ →ₗ[R] M₃) (hα : Function.Injective α) (hβ : Function.Surjective β) (hex : Function.Exact α β) (f : List R) : (((∀ (i : Fin f.length) (x : M₁ ⧸ ((Ideal.ofList (f.take i.1)) • (⊤ : Submodule R M₁))), f.get i • x = 0 → x = 0) ∧ ∀ (i : Fin f.length) (x : M₃ ⧸ ((Ideal.ofList (f.take i.1)) • (⊤ : Submodule R M₃))), f.get i • x = 0 → x = 0) → (∀ (i : Fin f.length) (x : M₂ ⧸ ((Ideal.ofList (f.take i.1)) • (⊤ : Submodule R M₂))), f.get i • x = 0 → x = 0) ∧ ∀ (i : Fin (f.length + 1)), ∃ (a : M₁ ⧸ ((Ideal.ofList (f.take i.1)) • (⊤ : Submodule R M₁)) →ₗ[R] M₂ ⧸ ((Ideal.ofList (f.take i.1)) • (⊤ : Submodule R M₂))) (b : M₂ ⧸ ((Ideal.ofList (f.take i.1)) • (⊤ : Submodule R M₂)) →ₗ[R] M₃ ⧸ ((Ideal.ofList (f.take i.1)) • (⊤ : Submodule R M₃))), Function.Exact a b ∧ Function.Injective a ∧ Function.Surjective b ∧ (∀ x : M₁, a (((Ideal.ofList (f.take i.1)) • (⊤ : Submodule R M₁)).mkQ x) = ((Ideal.ofList (f.take i.1) • (⊤ : Submodule R M₂)).mkQ (α x))) ∧ (∀ x : M₂, b (((Ideal.ofList (f.take i.1)) • (⊤ : Submodule R M₂)).mkQ x) = ((Ideal.ofList (f.take i.1) • (⊤ : Submodule R M₃)).mkQ (β x)))) ∧ ((IsRegular M₁ f ∧ IsRegular M₃ f) → IsRegular M₂ f)",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-sse"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-sse",
+  "group": "K1",
+  "result": "fix",
+  "note": "R CommRing; M1 M2 M3 R-modules (independent universes after fix); SES via Injective alpha, Surjective beta, Function.Exact; I_i = Ideal.ofList (take i); (a) hyp nonzerodivisor on M1,M3 quotients for i<r, concl on M2 and for all i<=r induced quotient maps tied to alpha/beta via mkQ, exact+inj+surj; (b) IsRegular M1, M3 -> IsRegular M2; parse structure verified by #check"
  }
 }
