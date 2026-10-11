@@ -9,7 +9,6 @@
 
 | node | distance to Mathlib | kind |
 |---|---|---|
-| `def-pc-compactly-generated` | 1 | state |
 | `def-pc-field-tower` | 1 | state |
 | `def-pur-sheaf-tensor-product` | 1 | state |
 | `def-sbc-first-order-thickening` | 1 | state |
@@ -97,6 +96,7 @@
 | `lem-pc-algebraic-dim-zero-affine-finite` | 1 | state |
 | `lem-pc-ample-affine-loci-criterion` | 1 | state |
 | `lem-pc-balanced-derived-tensor-model` | 1 | state |
+| `lem-pc-brown-cohomological-representability` | 1 | state |
 | `lem-pc-cartier-divisor-finite-over-field` | 1 | state |
 | `lem-pc-cartier-divisor-nowhere-dense` | 1 | state |
 | `lem-pc-compact-generators-build-objects` | 1 | state |
@@ -827,7 +827,7 @@
 | `lem-sc-normalization-properties` | 3 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 1400 nodes that wait for a statement dependency, 40 nodes that wait for stage 1.
+Not open yet: 1399 nodes that wait for a statement dependency, 40 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
