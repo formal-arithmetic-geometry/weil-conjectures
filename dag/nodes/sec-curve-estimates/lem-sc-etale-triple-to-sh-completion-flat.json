@@ -143,5 +143,23 @@
   "group": "C1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-shc3157 (reviewer sub-agent of L); spot-checked: Read Tag 06LJ(c): item = reduction of S->C-hat to base flatness A->(A^sh)^ for A=S_q, matching 'by a limit argument it suffices ... flat over R'; citer lem-sc-strict-henselization-completion-flat uses exactly this per-triple statement; no cycle (completion-noetherian and completion-flat both depend on this item, so over-base new node cannot be derived from them: real lemma, Stacks completed-direct-sum-flat); identification node true (S_q^sh = R^sh, mS_q=qS_q by unramifiedness), not a duplicate of the triples node (which is for R_p); no Mathlib strict henselization. FIX more, RETURN less: (1) item stmt_deps restored: statement cites lem-weil-pbc-strict-henselization-triples but stmt_deps had dropped it and listed proof-only deps (identification, lfp-affine); (2) Step 2 cites def-weil-etale-morphism for etale => locally finite presentation (C1).; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.EtaleTripleToStrictHenselizationCompletionFlat",
+  "declaration": "AlgebraicGeometry.Scheme.etaleTriple_to_strictHenselization_completion_flat",
+  "file": "lean/Sheaf/RingTheory/EtaleTripleToStrictHenselizationCompletionFlat.lean",
+  "statement": "theorem etaleTriple_to_strictHenselization_completion_flat (R : CommRingCat.{u}) [IsLocalRing R] [IsNoetherianRing R] (K : Type u) [Field K] [Algebra ((Spec R).residueField ⟨IsLocalRing.maximalIdeal R, inferInstance⟩) K] [IsSepClosure ((Spec R).residueField ⟨IsLocalRing.maximalIdeal R, inferInstance⟩) K] (c : Cocone (etaleResidueTriplesRingDiagram R ⟨IsLocalRing.maximalIdeal R, inferInstance⟩ K (CommRingCat.ofHom (algebraMap ((Spec R).residueField ⟨IsLocalRing.maximalIdeal R, inferInstance⟩) K)))) (hc : IsColimit c) (ρ : R ⟶ c.pt) (hρ : ∀ t, t.α ≫ c.ι.app t = ρ) (t : EtaleResidueTriples R ⟨IsLocalRing.maximalIdeal R, inferInstance⟩ K (CommRingCat.ofHom (algebraMap ((Spec R).residueField ⟨IsLocalRing.maximalIdeal R, inferInstance⟩) K))) : ((algebraMap c.pt (AdicCompletion ((IsLocalRing.maximalIdeal R).map ρ.hom) c.pt)).comp (c.ι.app t).hom).Flat",
+  "branch": "sheaf-dag",
+  "by": "P1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "P1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }
