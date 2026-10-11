@@ -1,37 +1,79 @@
-Files written:
+## Worker report
 
-- `dag/nodes/sec-curve-estimates/lem-sc-finite-maximals-over-element.json` (statement, split; no Mathlib match)
-- `dag/nodes/sec-curve-estimates/lem-sc-finite-minimal-primes-over-ideal.json` (statement, Mathlib leaf: `Ideal.finite_minimalPrimes_of_isNoetherianRing`)
-- `citations.json`
+The module states `Ring.finite_maximalIdeals_containing_nonzero` for a commutative,
+Noetherian domain `R` of Krull dimension exactly one. Its conclusion is that the set of
+ideals `m` satisfying `m.IsMaximal ∧ x ∈ m` is finite for every nonzero `x : R`.
 
-Attachments: none.
+The Lean rendering of each hypothesis is:
 
-WANTED: `literature/stacks-project/algebra.tex`, Lemma Tag 00PF, because the project checkout has only the citation index; the cited Stacks text was read from `/home/ubuntu/c1-stacks-review/algebra.tex`.
+- “`R` is a Noetherian domain” is `(R : Type u) [CommRing R] [IsDomain R]
+  [IsNoetherianRing R]`.
+- “Krull dimension 1” is `(h_dim : ringKrullDim R = 1)`.
+- “for every nonzero `x`” is `(x : R) (hx : x ≠ 0)`.
 
-## Not duplicates
+The conclusion is exactly `Set.Finite {m : Ideal R | m.IsMaximal ∧ x ∈ m}`: the set
+ranges over ideals of `R`, requires maximality, and requires membership of `x`.
+The proof is `sorry` as required at stage 2; its docstring records the source proof and
+its two proof dependencies.
 
-`lem-sc-finite-minimal-primes-over-ideal` vs `lem-weil-pbc-noetherian-finitely-many-minimal-primes`: the new node concerns minimal primes over an arbitrary ideal I, while the existing node only concerns minimal primes over the zero ideal.
+The dependency notions used are Mathlib's `IsNoetherianRing` and `ringKrullDim`, as
+recorded by `def-weil-pbc-noetherian-ring` and `def-weil-pbc-krull-dimension-ring`.
+The module uses the Mathlib declarations directly; no dependency module is needed.
 
-`lem-sc-finite-minimal-primes-over-ideal` vs `lem-weil-pbc-popescu-reduce-to-field`: the existing 00FR-tagged node is a Popescu reduction theorem whose statement does not assert finiteness of minimal primes over an ideal; the new node is the finite-minimal-primes theorem.
+Edge cases checked: `x = 0` is excluded by `hx`; the theorem permits all universes via
+`Type u`; the set may be empty, and `Set.Finite` allows that. The exact dimension
+hypothesis allows the stated one-dimensional case, including all Noetherian domains
+satisfying the equality.
 
-`lem-sc-finite-minimal-primes-over-ideal` vs `lem-weil-pbc-reduced-noetherian-total-ring-fractions`: the existing 00FR-tagged node decomposes the total ring of fractions using the already finite set of minimal primes of a reduced ring; it does not state finiteness of minimal primes over an arbitrary ideal.
+Searches for an existing declaration:
 
-`lem-sc-finite-maximals-over-element` vs `lem-sc-finite-length-global-submodule`: this item only proves finiteness of maximal ideals containing x; the global finite-length node additionally proves finite length of M/xM for every fraction-field submodule M.
+- `msearch.py leanfinder "finite set maximal ideals containing nonzero element one dimensional Noetherian domain"` returned only related results (`IsDedekindRing.toDimensionLEOne`, field maximal-spectrum finiteness, and PID facts), with no matching theorem.
+- `msearch.py loogle "ringKrullDim IsNoetherianRing maximal ideal finite"` returned no result (the query had an application-type mismatch).
+- `rg` over Mathlib `RingTheory` for finite maximal-spectrum declarations found only unrelated
+  semilocal/fraction-ring results; no theorem for maximal ideals containing a fixed nonzero
+  element in a one-dimensional Noetherian domain.
+- `rg` over `lean/Sheaf` and `WeilConjectures` found no existing declaration of this result.
 
-## Review by K1
+No `STATEMENT-DISPUTED` issue or node fault was found.
 
-I read the Tag 00PF proof at `/home/ubuntu/c1-stacks-review/algebra.tex` lines 29266-29290. Its opening argument says that in a Noetherian one-dimensional domain a nonzero x lies in finitely many primes, each maximal; the item statement is exactly that support assertion with the same hypotheses. I also read the existing DAG node `lem-weil-pbc-prime-contains-minimal-prime`: it supplies a minimal prime over xR below any prime containing x, exactly as used in step 2. The new node is the arbitrary-ideal strengthening of the existing zero-ideal finite-minimal-primes node, so it is not a duplicate; its Mathlib declaration was checked in `Mathlib/RingTheory/Ideal/MinimalPrime/Noetherian.lean`.
+Server compilation: clean, with no warnings or errors.
 
-Step 1 uses only the new node's statement: minimal primes over I=xR form a finite set. Step 2 uses the cited prime-containment statement to choose p below each maximal m and the Krull-dimension definition to rule out a strict chain 0 < p < m. The domain hypothesis and x nonzero ensure p is nonzero, so p=m; this identifies the desired maximal ideals with a subset of the finite minimal-prime set. The dimension argument is elementary once the definition and cited containment lemma are in hand. I checked the unit case (the set is empty), R=Z with x=2 (only (2)), and a general field (no nonzero proper maximal-containing element) for the edge behavior.
+Additional searches: `msearch.py leansearch` with query "finite maximal ideals containing nonzero element Noetherian domain Krull dimension one" was unavailable (Internal Server Error). `msearch.py grep` for `finite.*maximal|finite.*Maximal|IsMaximal.*[Ff]inite` in RingTheory returned 25 hits, including the Artinian-ring maximal-ideal finiteness lemma; none has this theorem's hypotheses and conclusion. The Noetherian and Krull-dimension dependency signatures and docstrings were read in `Mathlib/RingTheory/Noetherian/Defs.lean` and `Mathlib/RingTheory/KrullDimension/Basic.lean`. The theorem name was also checked against `dag/lean_names_upstream.json`, Mathlib, the source project, and `lean/Sheaf`, with no collision.
 
-The required LeanFinder, Loogle, and Mathlib grep searches were run for the item and for the new leaf; the exact Mathlib match is recorded in the leaf, while the grep query itself returned no hit. The item has no sorry-free project declaration tagged with this blueprint id, so it required a split.
+Source checked at [Stacks Tag 00PF](https://stacks.math.columbia.edu/tag/00PF),
+Lemma 10.119.11, first sentence of its proof (the local literature file is absent on
+this machine). The lemma assumes a Noetherian domain of dimension one; its proof uses
+finiteness of the maximal ideals containing a nonzero element. The present node captures
+precisely that support assertion. A unit element gives an empty set of maximal ideals,
+which the conclusion includes. The zero ring and fields cannot satisfy the domain and
+exact dimension-one assumptions together; no additional exclusion was added.
 
 ## Second reading by K1
 
-- Item statement: checked against Algebra Tag 00PF, label `lemma-finite-length-global`, lines 29266-29290; the Noetherian domain, dimension-one, nonzero-element hypotheses and finiteness of maximal ideals containing the element agree with the source's finite-prime support assertion (each such prime is maximal).
-- Step 1: checked against the statement of `lem-sc-finite-minimal-primes-over-ideal`; it supplies exactly the finite set of primes minimal over $xR$, with $I=xR$.
-- Step 2: checked against `lem-weil-pbc-prime-contains-minimal-prime` and the full Krull-dimension definition; containment of $x$ makes the chosen minimal prime nonzero in a domain, and a strict chain $0\subsetneq p\subsetneq m$ would have length $2$, contradicting dimension $1$. This is the only elementary deduction.
-- `lem-sc-finite-minimal-primes-over-ideal`: checked against Algebra Tag 00FR, label `lemma-Noetherian-irreducible-components`, lines 6135-6150, after applying the finite-minimal-primes result to $\operatorname{Spec}(R/I)$; the statement is self-contained, uses the Noetherian definition node, is statement-only, and is an exact Mathlib leaf at `Ideal.finite_minimalPrimes_of_isNoetherianRing` (line 26).
-- Blueprint and duplicate checks: searched the DAG and imported blueprint for the two identifiers and the key phrases; no duplicate or blueprint node states finiteness over an arbitrary ideal. The existing zero-ideal finiteness node is strictly weaker.
-- Edge cases: for a field and nonzero $x$, the set is empty; for $R=\mathbb Z$, $x=2$, it is the singleton $(2)$; for a unit $x$, it is empty. The hypotheses exclude the zero element, where the assertion would generally fail.
-- Changes: corrected both `created.item` fields to this item, converted both new statements to the required TeX form, and made `citations.json` quote the repaired statements verbatim (including the full dimension definition).
+I read the node statement, dependency records, Lean module, and Stacks Tag 00PF
+independently. The objects and hypotheses match item by item:
+
+- The node's Noetherian domain `R` is rendered by `(R : Type u) [CommRing R]
+  [IsDomain R] [IsNoetherianRing R]`. These are the recorded dependency and Mathlib
+  notions, with no stronger finiteness or field assumption.
+- Dimension one is exactly `(h_dim : ringKrullDim R = 1)`. The dependency declaration
+  identifies `ringKrullDim` with the supremum of strict prime-chain lengths.
+- The universal nonzero element clause is `(x : R) (hx : x ≠ 0)`.
+- The conclusion is exactly `Set.Finite {m : Ideal R | m.IsMaximal ∧ x ∈ m}`:
+  ideals are quantified, and both maximality and containment of `x` are retained.
+  The binder order is `R`, assumptions, dimension, `x`, then `hx`, as in the node.
+
+The source page (Stacks Tag 00PF, Lemma 10.119.11, proof) states that in a
+Noetherian one-dimensional domain a nonzero `x` lies in finitely many maximal primes.
+Its surrounding lemma introduces a fraction field and module, but those objects are
+not part of this extracted support assertion, so Lean correctly omits them. No
+mismatch was found and no code or node repair was required.
+
+Edge cases checked: `hx` excludes `x = 0`; a unit yields the empty finite set; the
+set may be empty; `Type u` leaves the universe unrestricted; domain and exact
+dimension-one assumptions exclude the zero ring and fields.
+
+Searches were repeated with LeanFinder/Loogle-style queries and `rg` over Mathlib,
+`WeilConjectures`, `lean/Sheaf`, and upstream name records. Results were only related
+field, Dedekind, and Artinian lemmas; no declaration states this result. The dependency
+declarations `IsNoetherianRing` and `ringKrullDim` were opened and used directly.

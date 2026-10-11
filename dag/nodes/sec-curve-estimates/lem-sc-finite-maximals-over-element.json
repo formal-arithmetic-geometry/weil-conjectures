@@ -103,5 +103,23 @@
   "group": "K1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-fme2434 (reviewer sub-agent of L); spot-checked: Read packet whole. Step 1: new leaf lem-sc-finite-minimal-primes-over-ideal matches Ideal.finite_minimalPrimes_of_isNoetherianRing (MinimalPrime/Noetherian.lean:26, read with sed) exactly (C1, B8). Step 2: lem-weil-pbc-prime-contains-minimal-prime gives p in minimalPrimes(xR) below m; x in p and domain give p nonzero; dim 1 forbids 0<p<m (C4: dimension-one and domain hypotheses used where needed). D: steps prove statement, no cycle. B: grep of Mathlib RingTheory found no direct 'finitely many maximals over x' statement (only Artinian setOfPred_isMaximal_finite, two steps away), so split not attach; new node is arbitrary-ideal generalization of zero-ideal node lem-weil-pbc-noetherian-finitely-many-minimal-primes, not class (b); grep of dag for the declaration found no other node stating it. Second reading by K1: no missed fault found. No repairs."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.FiniteMaximalsOverElement",
+  "declaration": "Ring.finite_maximalIdeals_containing_nonzero",
+  "file": "lean/Sheaf/RingTheory/FiniteMaximalsOverElement.lean",
+  "statement": "theorem finite_maximalIdeals_containing_nonzero (R : Type u) [CommRing R] [IsDomain R] [IsNoetherianRing R] (h_dim : ringKrullDim R = 1) (x : R) (hx : x ≠ 0) : Set.Finite {m : Ideal R | m.IsMaximal ∧ x ∈ m}",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-fmo1110",
+  "group": "K1",
+  "result": "pass",
+  "note": "R Type u CommRing+IsDomain+IsNoetherianRing = Noetherian domain (IsNoetherianRing, recorded dep); ringKrullDim R = 1 = Krull dim 1 (recorded dep); (x : R) (hx : x ≠ 0) = every nonzero x; Set.Finite {m : Ideal R | m.IsMaximal ∧ x ∈ m} = node set, same form as F1 41b949c48; explicit binders as F1; no Mathlib theorem for non-Dedekind case (H4 existing:false right); docstring has blueprint tag and proof; compile clean"
  }
 }
