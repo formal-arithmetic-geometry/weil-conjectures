@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.AlgebraicGeometry.DeformationSpace.AffineSpace
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.Basic
 
 /-!
@@ -133,6 +134,47 @@ theorem nonempty_iso_leftDerivedUpperStar_puncturedLine_familyObject (hs : s ≫
     (leftDerivedUpperStarComp _ j (𝔸(ULift.{u} (Fin 1); B) ↘ B)).app _⟩
 
 end Construction
+section StandardPair
+
+variable (n : Type u) (B : Scheme.{u}) {d : ℕ} [IsSeparated (𝔸(n; B) ↘ B)]
+  [SmoothOfRelativeDimension d (𝔸(n; B) ↘ B)] [HasCompactification (𝔸(n; B) ↘ B)]
+  [HasInvertibleExponent Λ 𝔸(n; B)]
+
+include d in
+/-- Blueprint `sk-lem-geometry` (4), the family object of the standard pair: for the zero section
+`0` of `𝔸^n_B ⟶ B`, the deformation space is `𝔸^n_{𝔸¹_B}`
+(`AlgebraicGeometry.Scheme.Hom.isIso_deformationSpaceToAffineSpace`), so the family object is
+pulled back from the base,
+
+`ℱ ≃ a^* (0^* ω_{𝔸^n_B / B})`, `a : 𝔸¹_B ⟶ B`. -/
+theorem nonempty_iso_familyObject_standardPair
+    [HasCompactification
+      (Scheme.Hom.deformationSpaceProj (𝔸(n; B) ↘ B) (AffineSpace.zeroSection n B))] :
+    Nonempty (sectionInvariant Λ
+        (Scheme.Hom.deformationSpaceProj (𝔸(n; B) ↘ B) (AffineSpace.zeroSection n B))
+        (AffineSpace.zeroSection n B).deformationSpaceSection ≅
+      (L((𝔸(ULift.{u} (Fin 1); B) ↘ B)^*[ModuleCat.{u + 1} Λ])).obj
+        (sectionInvariant Λ (𝔸(n; B) ↘ B) (AffineSpace.zeroSection n B))) := by
+  set Φ := Scheme.Hom.deformationSpaceToAffineSpace n B
+  set a := 𝔸(ULift.{u} (Fin 1); B) ↘ B
+  have sq : IsPullback (Φ ≫ AffineSpace.map n a)
+      (Scheme.Hom.deformationSpaceProj (𝔸(n; B) ↘ B) (AffineSpace.zeroSection n B))
+      (𝔸(n; B) ↘ B) a := by
+    have := (IsPullback.of_horiz_isIso (g := 𝟙 _)
+      ⟨(Scheme.Hom.deformationSpaceToAffineSpace_over n B).trans
+        (Category.comp_id _).symm⟩).paste_horiz (AffineSpace.isPullback_map (n := n) a)
+    simpa using this
+  obtain ⟨e⟩ := nonempty_iso_leftDerivedUpperStar_dualizingComplex Λ (d := d) (𝔸(n; B) ↘ B) sq
+  have hm : (AffineSpace.zeroSection n B).deformationSpaceSection ≫ Φ ≫ AffineSpace.map n a =
+      a ≫ AffineSpace.zeroSection n B := by
+    rw [reassoc_of% Scheme.Hom.deformationSpaceSection_comp_deformationSpaceToAffineSpace,
+      AffineSpace.zeroSection_comp_map]
+  exact ⟨(L(((AffineSpace.zeroSection n B).deformationSpaceSection)^*[ModuleCat.{u + 1} Λ])).mapIso
+      e.symm ≪≫
+    ((leftDerivedUpperStarComp _ _ (Φ ≫ AffineSpace.map n a)).app _).symm ≪≫
+    (leftDerivedUpperStarComp _ a (AffineSpace.zeroSection n B) _ hm).app _⟩
+
+end StandardPair
 
 end Etale
 
