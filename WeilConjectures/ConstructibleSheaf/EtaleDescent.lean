@@ -68,13 +68,11 @@ variable {FA : A → A → Type (u + 1)} {CA : A → Type (u + 1)}
 to `U`, and the stalk of `u^* G` at the lift is the stalk of `G`. -/
 theorem IsFiniteSheaf.of_upperStar_of_etale (G : Sheaf T.smallEtaleTopology A)
     [IsFiniteSheaf ((Etale.upperStar A u).obj G)] : IsFiniteSheaf G where
-  finite_sheafFiber Ω _ _ s := by
+  isFinitelyGenerated_sheafFiber Ω _ _ s := by
     obtain ⟨s', rfl⟩ := exists_comp_eq_of_etale_of_surjective u s
-    have := IsFiniteSheaf.finite_sheafFiber (FA := FA) (CA := CA)
-      (F := (Etale.upperStar A u).obj G) Ω s'
-    exact Finite.of_equiv
-      (ToType ((pointSmallEtale s').sheafFiber.obj ((Etale.upperStar A u).obj G)))
-      ((CategoryTheory.forget A).mapIso ((Etale.upperStarCompSheafFiberIso A u s').app G)).toEquiv
+    exact (IsFiniteSheaf.isFinitelyGenerated_sheafFiber (FA := FA) (CA := CA)
+      (F := (Etale.upperStar A u).obj G) Ω s').of_iso
+      ((Etale.upperStarCompSheafFiberIso A u s').app G)
 
 /-- **Finite local constancy descends along a surjective étale morphism.** -/
 theorem IsFiniteLocallyConstantSheaf.of_upperStar_of_etale [HasSmallSiteSheafify A]
