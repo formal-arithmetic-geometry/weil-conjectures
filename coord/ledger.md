@@ -5471,3 +5471,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 17:55 L: merged deliver/P1/lem-sc-derived-internal-hom-adjunction (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.DerivedInternalHomAdjunction AlgebraicGeometry.scheme_derivedInternalHom_adjunction)
 - 17:55 L: merged deliver/N1/lem-pc-module-pullback-identity-composition (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.TensorPullback AlgebraicGeometry.Scheme.Modules.nonempty_tensorPullbackId; existing declaration)
 - 17:55 L: merged deliver/T1/lem-sc-finite-twisted-inverse-bounded-below (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.FiniteTwistedInverseBoundedBelow AlgebraicGeometry.finiteTwistedInverse_boundedBelow)
+- 17:56 L: merged deliver/R1/lem-sc-affine-derived-cohomology (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.AffineDerivedCohomology AlgebraicGeometry.schemeHigherDirectImage_of_affine)
