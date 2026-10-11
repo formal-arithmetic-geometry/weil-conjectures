@@ -103,5 +103,32 @@
   "group": "J1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-afd2734 (reviewer sub-agent of L); spot-checked: Read both cited statements, lemma-nagata-directed-finite-upper-bound, def-nagata-basechanged-system, lemma-nagata-affine-fp-descends (sole statement citer) and K1's pushed gluing-datum statement. FIX more, RETURN less: (1) C4/NAGATA(2): lifts are a choice; statement now says the construction depends on the chosen lifts and citers must not assume canonicity (second reading missed this). (2) C4: lambda_B is u(F) with F = {lambda_0} plus the lift stages, and lemma-nagata-directed-finite-upper-bound cited for lambda_k, lambda_0 <= lambda_B (the def leaves this to the lemma); r_{j,lambda_B} defined as transported lifts, beta_B made explicit and checked well defined. (3) C1/NAGATA(3): def-nagata-basechanged-system cited for the system Spec(B_{lambda_B} tensor A_lambda) over S_{lambda_0}, which K1's chart transport uses; stmt_deps updated.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.NagataAffineFpDescent",
+  "declaration": "AlgebraicGeometry.NagataAffineFpDescent",
+  "file": "lean/Sheaf/AlgebraicGeometry/NagataAffineFpDescent.lean",
+  "statement": "structure NagataAffineFpDescent {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] (F : I ⥤ CommRingCat.{u}) (lambda0 : I) (n m : ℕ) (relations : Fin m → MvPolynomial (Fin n) (↑(colimit F)))",
+  "branch": "sheaf-dag",
+  "by": "Q1",
+  "date": "2026-10-11",
+  "existing": false,
+  "declarations": [
+   "AlgebraicGeometry.NagataAffineFpDescent",
+   "AlgebraicGeometry.NagataAffineFpDescent.stageMorphism",
+   "AlgebraicGeometry.NagataAffineFpDescent.baseMorphism",
+   "AlgebraicGeometry.NagataAffineFpDescent.baseChanged",
+   "AlgebraicGeometry.NagataAffineFpDescent.baseChangedCone",
+   "AlgebraicGeometry.NagataAffineFpDescent.baseChangedLimit"
+  ],
+  "fixed_by": "R-afd"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-afd",
+  "group": "Q1",
+  "result": "fix",
+  "note": "directed Preorder index + F : I ⥤ CommRingCat with colimit F (stmt_dep form); lambda0 fixed so [Nonempty I] removed as hollow; coefficients = union of relation coefficients; per-coefficient lifts with colimit equation; stage = directedFiniteUpperBound of insert lambda0 lift stages; transported relations coefficientwise and zero off support; stage quotient and B presentations; tensor identification fixed on variables; beta = presentation.symm ∘ tensorPresentation; Spec stage morphisms; baseChangeDiagram/baseChangeCone of def-nagata-basechanged-system on F.op ⋙ Spec"
  }
 }
