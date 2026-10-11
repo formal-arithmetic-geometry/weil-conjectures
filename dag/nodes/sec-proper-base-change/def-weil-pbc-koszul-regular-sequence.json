@@ -99,5 +99,29 @@
   "summary": "Definition split against Stacks More on Algebra 062E (definition-koszul-regular-sequence, more-algebra.tex line 7217; tag verified in tags/tags). The four clauses are kept verbatim; the statement now cites a node for every notion it uses: the Koszul complex [def-weil-pbc-koszul-complex] (cited as it stands; it is being split by another worker), the tensor product of a chain complex with a module [def-weil-pbc-chain-complex-tensor-module] (new Mathlib leaf, Functor.mapHomologicalComplex of tensorRight), which in turn cites the tensor product of modules [def-weil-pbc-module-tensor-product] (new Mathlib leaf, TensorProduct / LinearMap.rTensor), and homology of a chain complex of modules [def-weil-pbc-module-chain-complex-homology] (new Mathlib leaf, HomologicalComplex.homology with ShortComplex.moduleCatHomologyIso). 'Ring' of Stacks is commutative by its convention, written out. The item itself has no Mathlib counterpart (searches recorded: Mathlib's RegularSequence.lean lists Koszul and H_1-regular sequences as TODO). No slopmaster2 declaration states it (grep for the id, 'KoszulRegular', 'H1Regular', 'Koszul' in WeilConjectures: only the Koszul sequence on P^1 and Koszul sign rules). Whole-blueprint search for 062E, 'Koszul-regular', 'H_1-regular': none, so same_as is [].",
   "blueprint": "The item serves the place recorded in blueprint.from.place of thm-weil-pbc-finite-etale-lifting's split (step 7, the hypothesis 'image in A/I is H_1-regular' of Stacks 0665 and the Koszul-regularity of Stacks 062F); the definition realizes exactly the notions H_1-regular and Koszul-regular named there, with the notions they are built from (homology, tensoring the Koszul complex with a module) now nodes. No proof steps (definition)."
  },
- "reviewed": "2026-10-10 L: definition split against 062E: the Koszul complex node, the complex tensored with M (new leaf mapHomologicalComplex of tensorRight) and chain-complex homology (new leaf); the tensor-product and homology leaves are shared with the Koszul-complex split (both workers wrote them, one version on disk); 3 new nodes"
+ "reviewed": "2026-10-10 L: definition split against 062E: the Koszul complex node, the complex tensored with M (new leaf mapHomologicalComplex of tensorRight) and chain-complex homology (new leaf); the tensor-product and homology leaves are shared with the Koszul-complex split (both workers wrote them, one version on disk); 3 new nodes",
+ "lean": {
+  "module": "Sheaf.RingTheory.KoszulRegularSequence",
+  "declaration": "RingTheory.Sequence.IsKoszulRegularOn",
+  "declarations": [
+   "RingTheory.Sequence.IsKoszulRegularOn",
+   "RingTheory.Sequence.IsH1RegularOn",
+   "RingTheory.Sequence.IsKoszulRegular",
+   "RingTheory.Sequence.IsH1Regular"
+  ],
+  "file": "lean/Sheaf/RingTheory/KoszulRegularSequence.lean",
+  "statement": "def IsKoszulRegularOn {R : Type u} [CommRing R] (M : Type v) [AddCommGroup M] [Module R M] {r : ℕ} (f : Fin r → R) : Prop",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-dkr1326",
+  "group": "J1",
+  "result": "pass",
+  "note": "R comm ring, r:ℕ, f:Fin r→R, M arbitrary (Type v); clauses (1)-(4) as ∀ i:ℕ, i≠0 / i=1 IsZero of .homology of landed ExteriorAlgebra.koszulComplex / koszulComplexTensor (ℕ-indexed, negatives zero by convention); no let, no second complex; edge r=0, M=0"
+ }
 }
