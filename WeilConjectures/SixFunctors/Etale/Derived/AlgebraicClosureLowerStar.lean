@@ -226,6 +226,40 @@ noncomputable def rationalLowerStarTransitionIso {E L : FiniteSubext l} (h : E �
     (Rationalization.mapOfTorsionCompIso _ _ (torsion_integralLowerStarTransition f h)
       (Iso.refl _)).symm
 
+-- The derived complete categories make the unification of the composites expensive.
+set_option maxHeartbeats 3200000 in
+/-- The hexagon for the rational compatibility isomorphisms. -/
+lemma rationalLowerStarTransitionIso_hexagon {E L L' : FiniteSubext l} (h : E ≤ L)
+    (h' : L ≤ L') :
+    Functor.whiskerLeft (rationalStageLowerStar f E) (rationalStageTransitionComp X h h').hom ≫
+      (rationalLowerStarTransitionIso f (h.trans h')).hom =
+    Functor.whiskerRight (rationalLowerStarTransitionIso f h).hom (rationalStageTransition X h') ≫
+      Functor.whiskerLeft (rationalStageTransition Z h) (rationalLowerStarTransitionIso f h').hom ≫
+        Functor.whiskerRight (rationalStageTransitionComp Z h h').hom
+          (rationalStageLowerStar f L') := by
+  let dI : (integralStageTransition Z h ⋙ integralStageLowerStar f L) ⋙
+      integralStageTransition X h' ≅ integralStageTransition Z (h.trans h') ⋙
+        integralStageLowerStar f L' :=
+    Functor.associator _ _ _ ≪≫
+      Functor.isoWhiskerLeft (integralStageTransition Z h) (integralLowerStarTransitionIso f h') ≪≫
+      (Functor.associator _ _ _).symm ≪≫
+      Functor.isoWhiskerRight (integralStageTransitionComp Z h h') (integralStageLowerStar f L')
+  let d'I : integralStageTransition Z h ⋙ (integralStageTransition Z h' ⋙
+      integralStageLowerStar f L') ≅ integralStageTransition Z (h.trans h') ⋙
+        integralStageLowerStar f L' :=
+    (Functor.associator _ _ _).symm ≪≫
+      Functor.isoWhiskerRight (integralStageTransitionComp Z h h') (integralStageLowerStar f L')
+  exact Functor.hexagon_of_cocycles _ _ _ _ _ _ _ _
+    (Rationalization.mapOfTorsionCompIso _ _ (torsion_integralLowerStarTransition f (h.trans h'))
+      dI)
+    (Rationalization.mapOfTorsionCompIso _ _ (torsion_integralLowerStarTransition f (h.trans h'))
+      d'I)
+    (Rationalization.mapOfTorsionCompIso_cocycle _ _ _ _ (by
+      ext K
+      simpa [dI] using (congr_app (integralLowerStarTransitionIso_hexagon f h h') K).symm))
+    (Rationalization.mapOfTorsionCompIso_cocycle _ _ _ _ (by ext K; simp [d'I]))
+    (Rationalization.mapOfTorsionCompIso_cocycle _ _ _ _ (by ext K; simp [dI, d'I]))
+
 end Integral
 
 end AlgebraicGeometry.Etale
