@@ -4375,3 +4375,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 11:03 L: merged deliver/H1/lem-weil-pbc-integral-over-henselian-pair (stage 2; reviewer FIX; first push; Sheaf.RingTheory.IntegralOverHenselianPair henselianRing_of_isIntegral)
 - 11:04 L: merged deliver/F1/lem-weil-pbc-kahler-differentials-polynomial-extension (stage 2; reviewer PASS; first push; Sheaf.RingTheory.KaehlerDifferentialsPolynomialExtension KaehlerDifferential.exists_polynomial_extension_equiv)
 - 11:04 L: merged deliver/M1/lem-weil-pbc-isolated-prime-finite-type-algebra-residue-finite (stage 2; reviewer PASS; first push; Sheaf.RingTheory.IsolatedPrimeResidueFinite isolatedPrime_finiteType_residueField)
+- 11:04 L: merged deliver/K1/lem-weil-pbc-integral-closure-zariski-main-away (stage 2; reviewer PASS; first push; Sheaf.RingTheory.ZariskisMainAway Algebra.zariskisMainProperty_of_isQuasiFiniteAtPrime)

@@ -328,5 +328,23 @@
   "item": "lem-weil-pbc-integral-closure-zariski-main-away",
   "worker": "stage1",
   "summary": "Split along the proof of Stacks Algebra 00Q9 in 15 steps: the claim P(n) (S finite over R[x_1..x_n]) proved by induction; step 2 (an integral closure is integrally closed: 02JJ/00GK/00GN leaves) and step 3 (localization bookkeeping) are used throughout; n = 0 by 00GK; n = 1 by reduction to R integrally closed via 0C6H, the conductor J and 00PY (Mathlib leaf) making the image of x strongly transcendental (00PZ, Mathlib leaf) over R/(R∩√J) in S/√J, 00Q2 and 00PN giving s ∈ J \\ q, 077H transferring quasi-finiteness to C = R[x] ≅ R[X]/I, 00Q8 giving h, and the final principal-localization identification written out (the source's one-line 'isomorphic to a principal localization R_{h'}'); n ≥ 2 by R' = integral closure of R[x_1..x_{n-1}], 0C6H, P(1), the finite subalgebra R'' (00GM), quasi-finiteness of R → R'' at q'' (via 077H instead of the source's 00PK; same conclusion), P(n-1) and the localization identities. New nodes: def-weil-pbc-strongly-transcendental (00PZ, leaf IsStronglyTranscendental), lem-weil-pbc-conductor-radical-coefficients (00PY, leaf exists_leadingCoeff_pow_smul_mem_radical_conductor), and unsplit lem-weil-pbc-reduced-strongly-transcendental-not-quasi-finite (00Q2), lem-weil-pbc-quasi-finite-four-rings (00PN), lem-weil-pbc-quasi-finite-at-prime-principal-localization (077H), lem-weil-pbc-quasi-finite-at-prime-permanence (0C6H), lem-weil-pbc-quasi-finite-monogenic-integral-closure (00Q8), each with Mathlib candidates recorded (B8). Statement unchanged in meaning: wording tidied ('q prime with q prime'), the localization map and finite type now cite def-weil-ring-localization-away and def-weil-pbc-finite-type-algebra; source moved to Algebra 00Q9 (the theorem itself), the 09XH use kept in the place."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.ZariskisMainAway",
+  "declaration": "Algebra.zariskisMainProperty_of_isQuasiFiniteAtPrime",
+  "file": "lean/Sheaf/RingTheory/ZariskisMainAway.lean",
+  "statement": "theorem zariskisMainProperty_of_isQuasiFiniteAtPrime (R : Type u) (S : Type v) [CommRing R] [CommRing S] [Algebra R S] [Algebra.FiniteType R S] (q : Ideal S) [q.IsPrime] (hq : IsQuasiFiniteAtPrime R S ⟨q, inferInstance⟩) : ∃ h : integralClosure R S, h.1 ∉ q ∧ Function.Bijective (Localization.awayMap (integralClosure R S).val.toRingHom h)",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-izm1104",
+  "group": "K1",
+  "result": "pass",
+  "note": "R,S CommRing + Algebra + FiniteType = finite-type A->B; q : Ideal S [IsPrime] = prime q; hq IsQuasiFiniteAtPrime (J1 fibre-isolated-point def, not hollow) = quasi-finite at q; ∃ h : integralClosure R S, h.1 ∉ q = h in B' outside q; Bijective awayMap (integralClosure R S).val = B'_h -> B_h iso; conclusion is Mathlib ZariskisMainProperty unfolded; truth checked by deriving it from ZariskisMainProperty.of_finiteType via QuasiFiniteAt.of_isOpen_singleton_fiber (standard axioms)"
  }
 }
