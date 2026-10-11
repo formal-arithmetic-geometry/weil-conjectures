@@ -95,5 +95,37 @@
   "group": "E1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-des1853 (reviewer sub-agent of L); spot-checked: Return R-des1828 points 1,2,3,5,6 repaired (five cyclic citations gone; locally constant/finite locally constant/lisse inline with sheaf-of-sets, geometric point/stalk citations; constructible cites stratification, constructible-subset, sheafification; torsion cohomology cites def-weil-derived-cohomology-sheaves; stmt_deps deduplicated). C7/C8: cited other-unit nodes (constructible-stratification, constant-sheaf, sp-grothendieck-abelian, scheme-conventions) are generic tools. FIX more, RETURN less: (1) C4/point 4 not done though the second reading claims it: dropped the Q/Z infinite-coproduct remark from the definition; (2) C1/E: constructible restriction still said pullback along (Z_k)_Et -> T_Et, ill-typed for an immersion; replaced by the base-change functor T_Et -> (Z_k)_Et, V -> V x_T Z_k, with the presheaf colimit written out; (3) metadata: def-weil-pbc-scheme-conventions was a stmt_dep never cited; cited it for 'scheme'.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleSheaves",
+  "declaration": "AlgebraicGeometry.Scheme.IsLocallyConstantEtaleSheafOfSets",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.IsLocallyConstantEtaleSheafOfSets",
+   "AlgebraicGeometry.Scheme.IsFiniteLocallyConstantEtaleSheafOfSets",
+   "AlgebraicGeometry.Scheme.IsLisseEtaleSheafOfSets",
+   "AlgebraicGeometry.Scheme.etaleSetPullback",
+   "AlgebraicGeometry.Scheme.IsConstructibleEtaleSheafOfSets",
+   "AlgebraicGeometry.Scheme.HasTorsionEtaleCohomology",
+   "CategoryTheory.Sheaf.IsTorsion",
+   "CategoryTheory.Sheaf",
+   "CategoryTheory.constantSheaf",
+   "SheafOfModules"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleSheaves.lean",
+  "statement": "def IsLocallyConstantEtaleSheafOfSets {T : Scheme.{u}} (F : Sheaf T.smallEtaleTopology (Type (u + 1))) : Prop",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": false,
+  "note": "Mixed record. Existing: Ab(T_et) is Mathlib's Sheaf T.smallEtaleTopology AddCommGrpCat.{u+1} (abelian and Grothendieck abelian by the source instance isGrothendieckAbelian_sheaf_smallEtaleTopology), Sh(T_et) is Sheaf T.smallEtaleTopology (Type (u+1)), R_T is (constantSheaf T.smallEtaleTopology RingCat).obj (RingCat.of R) and Mod(T_et,R) is SheafOfModules of it (the notions of the cited nodes def-weil-pbc-abelian-etale-sheaves, def-weil-pbc-etale-sheaf-of-sets, def-weil-pbc-constant-sheaf, def-weil-sheaf-of-modules-category); a torsion sheaf is the source's CategoryTheory.Sheaf.IsTorsion (WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Basic: every section locally of finite additive order on a covering sieve), not redefined. New: the set-valued predicates (the source's IsLocallyConstantSheaf / IsFiniteLocallyConstantSheaf / IsConstructibleSheaf and Etale.upperStar need an abelian value category, unusable for Type), etaleSetPullback (the source's upperStar body at A = Type (u+1)), and HasTorsionEtaleCohomology on the derived category of abelian etale sheaves with the source's global HasDerivedCategory.ofIsGrothendieckAbelian instance (the delivery's local HasDerivedCategory.standard was replaced by R-ets0928 so that K is the D(X_et) of the source and of the citers). A citer with K in D(T_et, Lambda) applies it to the underlying abelian complex.",
+  "fixed_by": "R-ets0928"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-ets0928",
+  "group": "E1",
+  "result": "fix",
+  "note": "arbitrary T, T.smallEtaleTopology; Sh/Ab/Mod/R_T via the deps' Mathlib names; torsion = source Sheaf.IsTorsion (recorded); locally constant = cover + F.over IsConstant (no resheafification); finite stalks at all IsAlgClosed geometric points via pointSmallEtale.sheafFiber; lisse = FLC; constructible = source Scheme.Stratification (constructible locally closed strata, immersions) + sheafified Kan-extension pullback; torsion cohomology for all r in Z; D(X_et) with the source's global HasDerivedCategory instance"
  }
 }
