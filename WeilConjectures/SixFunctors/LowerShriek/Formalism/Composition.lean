@@ -145,4 +145,28 @@ theorem compIso_naturality {T' T : Compactification.Triangle f g} (φ : T'.Hom T
   rw [← reassoc_of% hεQ, hP₁, reassoc_of% hG', hP₂, ← reassoc_of% hεB,
     ← reassoc_of% hId, ← F.pfComp'_id_right_hom_app, Functor.map_comp_assoc]
 
+
+/-- **Independence of the triangle of compactifications**: the composition isomorphisms of two
+triangles `T₁` and `T₂` agree up to the comparison isomorphisms `F.shriekIso` of their
+compactifications. The proof compares both with the common refinement `T₁.inf T₂`.
+(blueprint: `sk-thm-sf-comp-composition`, independence of all compactification choices) -/
+theorem compIso_hom_eq [QuasiCompact f] [QuasiCompact g] [QuasiCompact (f ≫ g)]
+    (T₁ T₂ : Compactification.Triangle f g) :
+    (F.compIso T₁).hom =
+      NatTrans.hcomp (F.shriekIso T₁.cf T₂.cf).hom (F.shriekIso T₁.cg T₂.cg).hom ≫
+        (F.compIso T₂).hom ≫ (F.shriekIso T₂.cfg T₁.cfg).hom := by
+  set φ₁ := T₁.infFst T₂
+  set φ₂ := T₁.infSnd T₂
+  rw [F.shriekIso_eq φ₁.rf φ₂.rf φ₁.isPullback_rf φ₂.isPullback_rf,
+    F.shriekIso_eq φ₁.rg φ₂.rg φ₁.isPullback_rg φ₂.isPullback_rg,
+    F.shriekIso_eq φ₂.rfg φ₁.rfg φ₂.isPullback_rfg φ₁.isPullback_rfg]
+  simp only [Iso.trans_hom, asIso_hom, Iso.symm_hom, asIso_inv, NatTrans.exchange]
+  have h₁ := F.compIso_naturality φ₁
+  have h₂ := F.compIso_naturality φ₂
+  rw [reassoc_of% h₂, Category.assoc, ← Category.assoc (NatTrans.hcomp (inv _) (inv _)),
+    ← NatTrans.exchange, IsIso.inv_hom_id, IsIso.inv_hom_id]
+  have hid : NatTrans.hcomp (𝟙 (F.shriek (T₁.inf T₂).cf)) (𝟙 (F.shriek (T₁.inf T₂).cg)) = 𝟙 _ := by
+    ext; simp
+  rw [hid, Category.id_comp, ← reassoc_of% h₁, IsIso.hom_inv_id, Category.comp_id]
+
 end AlgebraicGeometry.CompactSupportFormalism
