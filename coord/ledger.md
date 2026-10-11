@@ -5646,3 +5646,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 19:30 L: merged deliver/E1/lem-weil-pbc-colimit-of-sites-sections (stage 2; reviewer PASS; first push; Sheaf.CategoryTheory.ColimitSiteSections CategoryTheory.colimitSite_sections_bijective)
 - 19:30 L: merged deliver/G1/lem-weil-pbc-module-injective-open-cover-cech-acyclic (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.ModuleInjectiveOpenCoverCechAcyclic AlgebraicGeometry.Scheme.Modules.module_injective_open_cover_cech_acyclic)
 - 19:30 L: merged deliver/F1/lem-sc-topological-flasque-acyclic (stage 2; reviewer PASS; first push; Sheaf.Topology.FlasqueZariskiAcyclic TopCat.Sheaf.IsFlasque.subsingleton_H'_top; existing declaration)
+- 19:30 L: returned deliver/F1/lem-weil-pbc-colimit-of-sites-injective-system (reviewer RETURN: (reviewer R-h4bfd5, head 4bfd5e70f) H3+H4 (lean/Sheaf/Paper/ColimitSitesInjectiveSystem.lean, theorem exists_compatible_)
