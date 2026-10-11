@@ -157,5 +157,23 @@
   "summary": "Rule-0 search: no single sorry-free slopmaster2 declaration states the item (grep by id, by IsPurelyInseparable and universal homeomorphism in ~/weil-conjectures-slopmaster2/WeilConjectures); Mathlib has only the affine case PrimeSpectrum.isHomeomorph_comap_of_isPurelyInseparable. The item is the base change along X -> Spec k of the universal homeomorphism Spec k' -> Spec k. Split into: (1) new node lem-pc-spec-pure-insep-integral-radicial-surjective (Spec k' -> Spec k integral, universally injective, surjective; closed in slopmaster2 by Algebra.IsUniversalHomeomorphism.of_isPurelyInseparable), (2) new node lem-pc-integral-radicial-surjective-universal-homeomorphism (Stacks 04DF (2)=>(1); closed in slopmaster2 by AlgebraicGeometry.isUniversalHomeomorphism_le_universally_isHomeomorph), (3) an elementary instance of def-weil-universal-homeomorphism through def-pc-base-change. Statement unchanged; def-weil-scheme-over-base added to stmt_deps ('scheme over k'). The imported proof cited Stacks tags with no nodes and had no uses; replaced.",
   "blueprint": "The blueprint proof reduces Zariski-locally to X = Spec A and applies Algebra 0BRA to A -> A tensor_k k'. Steps 1-2 realize 'By Algebra, Lemma 10.46.7 the induced map on spectra is a homeomorphism' at the level of Spec k' -> Spec k as a universal homeomorphism (Stacks 0BR5 opening paragraph: for any k-algebra R, R -> k' tensor_k R induces a homeomorphism); step 3 replaces the Zariski-local reduction ('It is enough to prove the statement Zariski-locally') by the definition of universal homeomorphism applied to X -> Spec k, so no gluing of local homeomorphisms is needed. The verification of (a), (b) of 0BRA and the sub-algebra argument with Lemma 0545 are not used."
  },
- "reviewed": "2026-10-10 L: 3 steps (Spec k' -> Spec k integral, universally injective and surjective; such a morphism is a universal homeomorphism; the base change); the two new nodes are closed on slopmaster2 (attachments verified); the blueprint's affine route replaced below unit level"
+ "reviewed": "2026-10-10 L: 3 steps (Spec k' -> Spec k integral, universally injective and surjective; such a morphism is a universal homeomorphism; the base change); the two new nodes are closed on slopmaster2 (attachments verified); the blueprint's affine route replaced below unit level",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.HomeomorphPurelyInseparableBaseChange",
+  "declaration": "AlgebraicGeometry.isHomeomorph_baseChange_of_isPurelyInseparable",
+  "file": "lean/Sheaf/AlgebraicGeometry/HomeomorphPurelyInseparableBaseChange.lean",
+  "statement": "theorem isHomeomorph_baseChange_of_isPurelyInseparable (k K : Type u) [Field k] [Field K] [Algebra k K] [IsPurelyInseparable k K] (X : Scheme.{u}) [X.Over (Spec (CommRingCat.of k))] : IsHomeomorph (pullback.fst (X ↘ Spec (CommRingCat.of k)) (Spec.map (CommRingCat.ofHom (algebraMap k K)))).base",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-hpi1227",
+  "group": "G1",
+  "result": "pass",
+  "note": "k K Type u fields, Algebra k K = k subset k', IsPurelyInseparable k K (char 0 forces K=k as in def-pc-field-tower), X.Over Spec k = scheme over k, X_K = pullback (X ↘ Spec k) (Spec.map algebraMap) per BASE CHANGE X_T, canonical map = pullback.fst = f_T, IsHomeomorph .base = homeomorphism of spaces; docstring has blueprint tag and node's 3-step proof"
+ }
 }
