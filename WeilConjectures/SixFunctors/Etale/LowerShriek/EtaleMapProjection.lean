@@ -11,6 +11,7 @@ public import Mathlib.CategoryTheory.Localization.Adjunction
 public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar
 public import WeilConjectures.CategoryTheory.Functor.KanExtension.ProjectionFormula
+public import WeilConjectures.CategoryTheory.Abelian.Flat.PreservesFlat
 
 /-!
 # Extension by zero along an étale morphism: derived adjunction and projection formula
@@ -208,6 +209,37 @@ lemma Etale.etaleLowerShriekTensorIso_hom_naturality {F F' : Sheaf V.smallEtaleT
     rfl
   erw [fin]
   rfl
+
+/-- The projection isomorphism `j_!F ⊗ G ≅ j_!(F ⊗ f^*G)` as a natural isomorphism of functors
+of `G`. -/
+noncomputable def Etale.tensorLeftEtaleLowerShriekIso (F : Sheaf V.smallEtaleTopology A) :
+    tensorLeft ((Etale.etaleLowerShriek A f h).obj F) ≅
+      (f)^*[A] ⋙ tensorLeft F ⋙ Etale.etaleLowerShriek A f h :=
+  NatIso.ofComponents (fun G ↦ (Etale.etaleLowerShriekTensorIso A h F G).symm) fun {G G'} ψ ↦ by
+    have := Etale.etaleLowerShriekTensorIso_hom_naturality A h (𝟙 F) ψ
+    rw [CategoryTheory.Functor.map_id] at this
+    dsimp
+    rw [Iso.comp_inv_eq, Category.assoc, Iso.eq_inv_comp, ← id_tensorHom, ← id_tensorHom]
+    exact this.symm
+
+attribute [local instance] Sheaf.braidedCategory in
+/-- **Extension by zero along an étale morphism preserves flat sheaves**: for flat `F`, the
+functor `j_!F ⊗ -` is isomorphic to `j_!(F ⊗ f^*(-))`, a composite of exact functors. -/
+instance Etale.preservesFlat_etaleLowerShriek :
+    (Etale.etaleLowerShriek A f h).PreservesFlat where
+  flat_obj {F} hF := by
+    have := hF.tensorLeft.preservesFiniteColimits
+    have := hF.tensorLeft.preservesFiniteLimits
+    have hl : exactFunctor _ _
+        (tensorLeft ((Etale.etaleLowerShriek A f h).obj F)) :=
+      (exactFunctor_iff _).2
+        ⟨preservesFiniteLimits_of_natIso (Etale.tensorLeftEtaleLowerShriekIso A h F).symm,
+          preservesFiniteColimits_of_natIso (Etale.tensorLeftEtaleLowerShriekIso A h F).symm⟩
+    have := hl.preservesFiniteColimits
+    have := hl.preservesFiniteLimits
+    exact ⟨hl, (exactFunctor_iff _).2
+      ⟨preservesFiniteLimits_of_natIso (BraidedCategory.tensorLeftIsoTensorRight _),
+        preservesFiniteColimits_of_natIso (BraidedCategory.tensorLeftIsoTensorRight _)⟩⟩
 
 end Projection
 
