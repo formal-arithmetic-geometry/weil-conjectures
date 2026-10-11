@@ -44,6 +44,10 @@ adjunction is the restriction of any ambient one.
   restriction to `Dctf`.
 - `HasAmbientExceptionalRightAdjoint.ofNatIsoLeft_ofNatIsoRight_conjugateIsoEquiv` (in the
   namespace `AlgebraicGeometry.ProEtale`): clause (a), the ambient form.
+- `HasAmbientExceptionalRightAdjoint.compIso`: clause (a), the isomorphism of ambient functors
+  `Rg^× ⋙ Rf^× ≅ R(f ≫ g)^×` mate to an ambient composition isomorphism, with its unit and counit
+  lemmas; `HasAmbientExceptionalRightAdjoint.nonempty_iso_comp_iff`: it exists exactly when the
+  ambient composition law does.
 - `HasAmbientExceptionalRightAdjoint.nonempty_iso_comp_yoneda_comp_whiskeringLeft`: clause (a)
   with the composition law of `sk-thm-sf-comp-composition`.
 - `AlgebraicGeometry.ProEtale.exists_bijective_comp_and_homEquiv_symm_comp_eq`: under the ambient
@@ -355,6 +359,65 @@ theorem HasAmbientExceptionalRightAdjoint.ofNatIsoLeft_ofNatIsoRight_conjugateIs
         (conjugateIsoEquiv (hf.adjunction.comp hg.adjunction) hfg.adjunction e).symm =
       hf.adjunction.comp hg.adjunction :=
   Adjunction.ofNatIsoLeft_ofNatIsoRight_conjugateIsoEquiv _ _ e
+
+/-- Blueprint `sk-lem-sf-mate`, clause (a): the isomorphism of ambient functors
+`Rg^× ⋙ Rf^× ≅ R(f ≫ g)^× : D(Z_proét) ⥤ D(X_proét)`. If `f`, `g` and `f ≫ g` carry the ambient
+exceptional right adjoint datum, it is the mate of a composition isomorphism
+`e : R(f ≫ g)_! ≅ Rf_! ⋙ Rg_!` of the ambient functors under the ambient adjunctions
+`R(f ≫ g)_! ⊣ R(f ≫ g)^×` and `Rf_! ⋙ Rg_! ⊣ Rg^× ⋙ Rf^×`. The second adjunction is the composite
+one, whose unit and counit are the pasted ones. -/
+noncomputable def HasAmbientExceptionalRightAdjoint.compIso {f : X ⟶ Y} {g : Y ⟶ Z}
+    [HasCompactification f] [HasCompactification g] [HasCompactification (f ≫ g)]
+    (hf : HasAmbientExceptionalRightAdjoint A f) (hg : HasAmbientExceptionalRightAdjoint A g)
+    (hfg : HasAmbientExceptionalRightAdjoint A (f ≫ g))
+    (e : R(f ≫ g)_![A] ≅ R(f)_![A] ⋙ R(g)_![A]) :
+    @Functor.rightAdjoint _ _ _ _ (R(g)_![A]) hg.isLeftAdjoint ⋙
+        @Functor.rightAdjoint _ _ _ _ (R(f)_![A]) hf.isLeftAdjoint ≅
+      @Functor.rightAdjoint _ _ _ _ (R(f ≫ g)_![A]) hfg.isLeftAdjoint :=
+  conjugateIsoEquiv (hf.adjunction.comp hg.adjunction) hfg.adjunction e
+
+/-- Blueprint `sk-lem-sf-mate`, clause (a), units: under the isomorphism
+`HasAmbientExceptionalRightAdjoint.compIso`, the pasted unit `K ⟶ Rf^× Rg^× Rg_! Rf_! K` of
+`Rf_! ⋙ Rg_! ⊣ Rg^× ⋙ Rf^×` corresponds to the unit of `R(f ≫ g)_! ⊣ R(f ≫ g)^×`. -/
+lemma HasAmbientExceptionalRightAdjoint.unit_comp_compIso_hom_app {f : X ⟶ Y} {g : Y ⟶ Z}
+    [HasCompactification f] [HasCompactification g] [HasCompactification (f ≫ g)]
+    (hf : HasAmbientExceptionalRightAdjoint A f) (hg : HasAmbientExceptionalRightAdjoint A g)
+    (hfg : HasAmbientExceptionalRightAdjoint A (f ≫ g))
+    (e : R(f ≫ g)_![A] ≅ R(f)_![A] ⋙ R(g)_![A])
+    (K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)) :
+    (hf.adjunction.comp hg.adjunction).unit.app K ≫ (hf.compIso hg hfg e).hom.app _ =
+      hfg.adjunction.unit.app K ≫
+        (@Functor.rightAdjoint _ _ _ _ (R(f ≫ g)_![A]) hfg.isLeftAdjoint).map (e.hom.app K) :=
+  unit_conjugateEquiv _ _ e.hom K
+
+/-- Blueprint `sk-lem-sf-mate`, clause (a), counits: under the isomorphism
+`HasAmbientExceptionalRightAdjoint.compIso`, the counit of `R(f ≫ g)_! ⊣ R(f ≫ g)^×` corresponds
+to the pasted counit `Rg_! Rf_! Rf^× Rg^× L ⟶ L` of `Rf_! ⋙ Rg_! ⊣ Rg^× ⋙ Rf^×`. -/
+lemma HasAmbientExceptionalRightAdjoint.map_compIso_hom_app_counit {f : X ⟶ Y} {g : Y ⟶ Z}
+    [HasCompactification f] [HasCompactification g] [HasCompactification (f ≫ g)]
+    (hf : HasAmbientExceptionalRightAdjoint A f) (hg : HasAmbientExceptionalRightAdjoint A g)
+    (hfg : HasAmbientExceptionalRightAdjoint A (f ≫ g))
+    (e : R(f ≫ g)_![A] ≅ R(f)_![A] ⋙ R(g)_![A])
+    (L : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology Z) A)) :
+    (R(f ≫ g)_![A]).map ((hf.compIso hg hfg e).hom.app L) ≫ hfg.adjunction.counit.app L =
+      e.hom.app _ ≫ (hf.adjunction.comp hg.adjunction).counit.app L :=
+  conjugateEquiv_counit _ _ e.hom L
+
+/-- Blueprint `sk-lem-sf-mate`, clause (a): if `f`, `g` and `f ≫ g` carry the ambient exceptional
+right adjoint datum, the ambient right adjoints satisfy `R(f ≫ g)^× ≅ Rg^× ⋙ Rf^×` exactly when the
+ambient left adjoints satisfy the composition law `R(f ≫ g)_! ≅ Rf_! ⋙ Rg_!`. The forward
+direction is `HasAmbientExceptionalRightAdjoint.compIso`, the mate of the composition
+isomorphism. -/
+theorem HasAmbientExceptionalRightAdjoint.nonempty_iso_comp_iff {f : X ⟶ Y} {g : Y ⟶ Z}
+    [HasCompactification f] [HasCompactification g] [HasCompactification (f ≫ g)]
+    (hf : HasAmbientExceptionalRightAdjoint A f) (hg : HasAmbientExceptionalRightAdjoint A g)
+    (hfg : HasAmbientExceptionalRightAdjoint A (f ≫ g)) :
+    Nonempty (R(f ≫ g)_![A] ≅ R(f)_![A] ⋙ R(g)_![A]) ↔
+      Nonempty (@Functor.rightAdjoint _ _ _ _ (R(f ≫ g)_![A]) hfg.isLeftAdjoint ≅
+        @Functor.rightAdjoint _ _ _ _ (R(g)_![A]) hg.isLeftAdjoint ⋙
+          @Functor.rightAdjoint _ _ _ _ (R(f)_![A]) hf.isLeftAdjoint) :=
+  ⟨fun ⟨e⟩ ↦ ⟨(hf.compIso hg hfg e).symm⟩,
+    fun ⟨r⟩ ↦ ⟨(conjugateIsoEquiv (hf.adjunction.comp hg.adjunction) hfg.adjunction).symm r.symm⟩⟩
 
 variable [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
   [Abelian.HasFunctorialFlatResolution A]
