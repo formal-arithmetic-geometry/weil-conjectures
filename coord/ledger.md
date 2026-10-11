@@ -3074,3 +3074,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 00:14 UTC L: returned: M1 ce-vertical-nullhomotopy ada4de874 (R-cvn0013: assembly node false as stated, the 0->B->Z->H->0 compatibility never built; needs Weibel's induction on p).
 - 00:16 L: merged deliver/F1/lem-pur-kinjective-degreewise-existence (reviewer FIX; after a return; new nodes: 7)
 - 00:16 UTC L: F1 kinjective-degreewise-existence FIX ccabf2a3f third push (R-kde0014; seven Tag 079P-area nodes restated in TeX, kappa >= aleph_0 added). Second reading missed the cofinality gap.
+- 00:16 L: merged deliver/M1/lem-pc-coherent-property-devissage (reviewer FIX; after a return; new nodes: 1)

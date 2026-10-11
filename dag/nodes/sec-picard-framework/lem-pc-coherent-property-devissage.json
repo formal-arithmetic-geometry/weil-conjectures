@@ -4,7 +4,7 @@
   "is": null,
   "from": {
    "node": "lem-pc-coherent-hi",
-   "place": "proof of Proposition 30.19.1 (Tag 02O5): 'We are going to use the result of Lemma lemma-property'",
+   "place": "proof of Proposition 30.19.1 (Tag 02O5): use Lemma 01YI (lemma-property), whose proof invokes 01YH after Noetherian induction",
    "via": []
   },
   "same_as": []
@@ -27,23 +27,132 @@
   "def-weil-pbc-module-stalk",
   "def-weil-residue-field"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Property P is invariant under isomorphism by applying (1) to $0\\to0\\to F'\\to F\\to0$ and using (0). A finite filtration by coherent submodules whose successive quotients have P therefore has P on its total module by induction; the empty filtration is covered by (0).",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Lemma 01YI proof after the statement; finite-filtration induction"
+   }
+  },
+  {
+   "text": "For every coherent $\\mathcal F$, [lem-weil-pbc-coherent-filtration-integral-subschemes] supplies a finite filtration $0=\\mathcal F_0\\subseteq\\dots\\subseteq\\mathcal F_m=\\mathcal F$ by coherent submodules with $\\mathcal F_j/\\mathcal F_{j-1}\\cong(i_j)_*\\mathcal I_j$ for closed immersions $i_j:Z_j\\to X$ with $Z_j$ integral and nonzero coherent ideals $\\mathcal I_j\\subseteq\\mathcal O_{Z_j}$. Let $\\eta_j$ be the generic point of $Z_j$. Since $i_j$ is a homeomorphism onto the closed set $i_j(Z_j)$, the stalk of $(i_j)_*\\mathcal I_j$ at $i_j(\\eta_j)$ is $(\\mathcal I_j)_{\\eta_j}$, which is nonzero by [lem-weil-pbc-integral-scheme-ideal-generic-stalk] (a)$\\Rightarrow$(c). As $\\operatorname{Supp}(\\mathcal F_j/\\mathcal F_{j-1})\\subseteq\\operatorname{Supp}(\\mathcal F)$ (stalks of subquotients), every closed set containing $\\operatorname{Supp}(\\mathcal F)$ contains $i_j(\\eta_j)$ and hence its closure $i_j(Z_j)$, an irreducible closed subset of $X$.",
+   "uses": [
+    "lem-weil-pbc-coherent-filtration-integral-subschemes",
+    "lem-weil-pbc-integral-scheme-ideal-generic-stalk"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Lemma 01YI proof using Lemma 01YF"
+   }
+  },
+  {
+   "text": "Call an irreducible closed subset $T\\subseteq X$ good when $\\mathcal P$ holds for $i_*\\mathcal I$ for every closed immersion $i:Z\\to X$ with $Z$ integral and $i(Z)=T$ and every quasi-coherent ideal $\\mathcal I\\subseteq\\mathcal O_Z$. Suppose some irreducible closed subset is bad. By [lem-weil-pbc-noetherian-scheme-closed-subsets-minimal] applied to the set of bad irreducible closed subsets there is a minimal bad $T_0$, together with an integral $i_0:Z_0\\to X$, $i_0(Z_0)=T_0$, and an ideal $\\mathcal I_0$ such that $\\mathcal P$ fails for $(i_0)_*\\mathcal I_0$; every irreducible closed subset strictly contained in $T_0$ is good.",
+   "uses": [
+    "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Lemma 01YI proof ('If this fails, then since X is Noetherian there is a minimal integral closed subscheme Z_0')"
+   }
+  },
+  {
+   "text": "Apply [lem-pc-coherent-property-irreducible] with $T=T_0$ to the restriction of $\\mathcal P$ to coherent modules with support in $T_0$. Its (1) is the item's (1) for sequences whose terms are supported in $T_0$; its (2) holds because for integral $i:Z\\to X$ with $i(Z)\\subsetneq T_0$ the set $i(Z)$ is irreducible closed and good by minimality (step 3); its (3) is the item's (2) applied to the integral closed subscheme $Z_0$, whose generic point is that of $T_0$. The lemma gives $\\mathcal P$ for every coherent module supported in $T_0$, in particular for $(i_0)_*\\mathcal I_0$, whose support lies in $i_0(Z_0)=T_0$: a contradiction. Thus every irreducible closed subset is good.",
+   "uses": [
+    "lem-pc-coherent-property-irreducible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Lemma 01YH (label lemma-property-irreducible, coherent.tex line 3179), invoked in the proof of Lemma 01YI"
+   }
+  },
+  {
+   "text": "Filter an arbitrary coherent $\\mathcal F$ as in step 2. Each quotient $(i_j)_*\\mathcal I_j$ has $\\mathcal P$ because $i_j(Z_j)$ is good (step 4), so $\\mathcal F$ has $\\mathcal P$ by step 1 (for $m=0$, i.e. $\\mathcal F=0$, by (0)).",
+   "uses": [
+    "lem-weil-pbc-coherent-filtration-integral-subschemes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Lemma 01YI conclusion"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-coherent-filtration-integral-subschemes",
+  "lem-weil-pbc-integral-scheme-ideal-generic-stalk",
+  "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+  "lem-pc-coherent-property-irreducible"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Lemmas 01YI and 01YH and the proof of 01YI"
+ },
  "mathlib_searches": [
   {
+   "tool": "leanfinder",
+   "query": "Noetherian induction coherent sheaf property devissage integral closed subset",
+   "results": "Noetherian predicates only; no sheaf devissage declaration",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "NoetherianSpace WellFoundedLT Closeds",
+   "results": "0 hits; unknown identifier NoetherianSpace",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
    "tool": "grep",
-   "query": "Coherent in Mathlib/AlgebraicGeometry (slopmaster2 .lake mathlib)",
-   "results": "no files; Mathlib has no coherent sheaves on schemes",
-   "date": "2026-10-10",
+   "query": "NoetherianSpace|WellFoundedLT.*Closeds|property-irreducible in Mathlib/AlgebraicGeometry",
+   "results": "no matching coherent-sheaf theorem",
+   "date": "2026-10-11",
    "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pc-coherent-hi"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-coherence"
+ "unit": "sk-thm-picard-coherence",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-coherent-property-devissage",
+  "worker": "stage1",
+  "summary": "Repaired the returned 01YI split by replacing the invalid direct application of hypothesis (2) to every filtration quotient with Noetherian minimal-support induction and the 01YH irreducible-support comparison lemma; preserved the item statement and hypothesis (0).",
+  "blueprint": "Realizes the 01YI proof in the blueprint node lem-pc-coherent-hi: finite filtration, minimal bad irreducible support, invocation of 01YH, and final filtration induction.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-coherent-filtration-integral-subschemes",
+    "why": "The 01YI route requires the general coherent filtration by integral closed-subscheme ideal quotients."
+   },
+   {
+    "node": "lem-weil-pbc-integral-scheme-ideal-generic-stalk",
+    "why": "The quotient support and generic-stalk calculation uses the integral-scheme ideal lemma."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-coherent-filtration-integral-subschemes",
+  "lem-weil-pbc-integral-scheme-ideal-generic-stalk",
+  "lem-weil-pbc-coherent-filtration-integral-subschemes",
+  "lem-weil-pbc-integral-scheme-ideal-generic-stalk"
+ ],
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-cpd0015",
+  "group": "M1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-cpd0015 (reviewer sub-agent of L); spot-checked: Return R-cpd3148 repaired: steps follow 01YI proof (minimal bad irreducible support via lem-weil-pbc-noetherian-scheme-closed-subsets-minimal, 01YH node with its (2) from minimality and its (3) from item (2) applied to Z_0, final filtration via 01YF node); new node compared with 01YH clause by clause; lem-pc-coherent-hi uses (0),(1),(2) as stated; not a duplicate of 01YM node. FIX more, RETURN less: (1) B3/E7: item statement had been silently rewritten to plain text, restored the TeX statement of ada4de874 unchanged; (2) B4/B3: new node statement TeX-ified (plain-text arrow Z -> X removed), its (1) restricted to sequences supported in T as in 01YH, stmt_deps corrected (pqf-lem-locnoeth-lft -> pqf-def-locnoeth; added def-weil-closed-immersion, def-pc-integral-scheme, def-pc-module-pullback); (3) C1: step 2 dropped the uncited closed-pushforward generic-stalk/dimension claim (unused) and states the support containment actually used; steps 3-5 rewritten so step 4 supplies 01YH (2),(3) explicitly, step 5 marked non-elementary.; 2 file(s) fixed by the reviewer"
+ }
 }
