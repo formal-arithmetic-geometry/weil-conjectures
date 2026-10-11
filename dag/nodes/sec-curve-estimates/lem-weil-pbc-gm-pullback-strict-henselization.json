@@ -24,7 +24,8 @@
   "def-weil-pbc-strict-henselization-limit",
   "def-pc-fibre-product",
   "def-sc-gm-torsor",
-  "def-weil-pbc-inverse-image"
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-strict-henselization-structural-map"
  ],
  "proof": [
   {
@@ -165,5 +166,25 @@
   "group": "E1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-gps2441 (reviewer sub-agent of L); spot-checked: All four R-gps2124 points repaired: Step 1 reindexes via lem-weil-pbc-cofiltered-limit-directed-reindex and marks fibre-product/limit commutation elementary; Step 2 descends each affine test object U by finite-data-descent (1), uses inverse-image-composition and etale-section-continuity (not 'sectionwise definition'), no units node. FIX more, RETURN less: (1) C1: Step 2 read sections of f_{VV0}^{-1}G_{m,X_V0} on U_V as units 'by definition'; added lem-weil-pbc-etale-inverse-image-restriction (1) for q_V^{-1}G_{m,X} = G_{m,X_V}. (2) C1: colim O(U_V)^x = O(U)^x was asserted with U_V only qcqs (the second reading had dropped affineness); added lem-weil-pbc-descend-affine (U -> S_(x) affine) so U_V affine for V>=V1, then affine clause of lem-weil-pbc-limit-affine-transition and units elementary. (3) C4: qcqs of X_V (permanence (2), V affine), finite presentation of U -> X x_S S_(x) (permanence (1)) and qcqs of U_0 made explicit; comparison with the canonical map spelled out. Both new citations declared as tool_uses (sk-thm-p1 general etale/limit tools).; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GmStrictHenselizationPullback",
+  "declaration": "AlgebraicGeometry.Scheme.isIso_upperStarGmSheafToGmSheaf_strictHenselization",
+  "file": "lean/Sheaf/AlgebraicGeometry/GmStrictHenselizationPullback.lean",
+  "statement": "theorem isIso_upperStarGmSheafToGmSheaf_strictHenselization {X S : Scheme.{u}} (f : X ⟶ S) [QuasiCompact f] [QuasiSeparated f] {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S) : IsIso (upperStarGmSheafToGmSheaf (pullback.fst f (strictHenselizationStructuralMap s)))",
+  "branch": "sheaf-dag",
+  "by": "P1",
+  "date": "2026-10-11",
+  "existing": false,
+  "note": "The base change is along the structural morphism strictHenselizationStructuralMap s (def-weil-pbc-strict-henselization-structural-map); p = pullback.fst; the comparison is the upstream upperStarGmSheafToGmSheaf p (adjoint of gmSheafToLowerStarGmSheaf, via Etale.upperStar).",
+  "fixed_by": "R-gps"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-gps",
+  "group": "P1",
+  "result": "fix",
+  "note": "qcqs f, geometric point (Ω alg. closed), S_(s)=strictHenselizationScheme, p=pullback.fst f (structural map), canonical p^{-1}Gm->Gm = upstream upperStarGmSheafToGmSheaf (adjoint of units pullback, Etale.upperStar), IsIso; new node = canonical S_(s)->S, absent in Mathlib/slopmaster2 7d675a263/landed; fixed its module (import after docstring did not compile), node statement/citations, stale ρ/hρ docstring and record note"
  }
 }

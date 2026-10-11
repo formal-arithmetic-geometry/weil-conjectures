@@ -1,0 +1,105 @@
+{
+ "id": "def-weil-pbc-strict-henselization-structural-map",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-brauer-zero",
+   "place": "the canonical structural map in the strict henselization limit used in the proof of Tag 03Q9",
+   "via": [
+    "lem-weil-pbc-gm-pullback-strict-henselization",
+    "lem-weil-pbc-gm-strict-henselization-stalk-formula",
+    "lem-sc-open-curve-boundary-higher-direct-image-vanishing",
+    "lem-sc-open-curve-gm-direct-image-cohomology"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "definition",
+ "title": "Structural map of the strict henselization",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], let $\\bar s:\\operatorname{Spec}\\Omega\\to S$ be a geometric point [def-weil-geometric-point], and let $S_{(\\bar s)}=\\lim_{(V,\\bar v)}V$ be the strict henselization, with limit projections $\\pi_V:S_{(\\bar s)}\\to V$ over the affine pointed etale neighbourhoods $(V,\\bar v)$ of $\\bar s$ [def-weil-pbc-strict-henselization-limit]. The *structural morphism* $\\rho_{\\bar s}:S_{(\\bar s)}\\to S$ is the composite of $\\pi_V$ with the structure morphism $V\\to S$, for any $(V,\\bar v)$. It does not depend on $(V,\\bar v)$: the projections are compatible with the pointed morphisms of neighbourhoods, which are morphisms over $S$, and the category of affine pointed neighbourhoods is cofiltered, hence nonempty and connected [def-weil-pbc-strict-henselization-limit].",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Theorem Tag 03Q9 proof, strict henselization inverse limit structural map"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-geometric-point",
+  "def-weil-pbc-strict-henselization-limit"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "canonical structural map strict henselization scheme to base",
+   "results": "no exact match",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "strictHenselization structural map Scheme",
+   "results": "no exact match",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "strictHenselizationStructuralMap strict henselization map",
+   "results": "no declaration in Mathlib, upstream or project",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "item": "lem-weil-pbc-gm-pullback-strict-henselization",
+  "by": "worker",
+  "date": "2026-10-11",
+  "group": "P1"
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-br",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.StrictHenselizationStructuralMap",
+  "declaration": "AlgebraicGeometry.Scheme.strictHenselizationStructuralMap",
+  "statement": "def strictHenselizationStructuralMap {S : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S) : strictHenselizationScheme s ⟶ S",
+  "branch": "sheaf-dag",
+  "by": "P1",
+  "date": "2026-10-11",
+  "existing": false,
+  "file": "lean/Sheaf/AlgebraicGeometry/StrictHenselizationStructuralMap.lean",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.strictHenselizationStructuralMap",
+   "AlgebraicGeometry.Scheme.exists_strictHenselizationStructuralMap"
+  ],
+  "note": "Classical.choose of exists_strictHenselizationStructuralMap, whose spec ties the map to every leg of strictHenselizationCone composed with Spec Γ(V) ≅ V and the structure morphism V ⟶ S (as DERIVED PULLBACK / TENSOR-PULLBACK UNIT); uses go through Classical.choose_spec.",
+  "fixed_by": "R-gps"
+ },
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-gps",
+  "group": "P1",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-gps",
+  "group": "P1",
+  "result": "fix",
+  "note": "qcqs f, geometric point (Ω alg. closed), S_(s)=strictHenselizationScheme, p=pullback.fst f (structural map), canonical p^{-1}Gm->Gm = upstream upperStarGmSheafToGmSheaf (adjoint of units pullback, Etale.upperStar), IsIso; new node = canonical S_(s)->S, absent in Mathlib/slopmaster2 7d675a263/landed; fixed its module (import after docstring did not compile), node statement/citations, stale ρ/hρ docstring and record note"
+ }
+}
