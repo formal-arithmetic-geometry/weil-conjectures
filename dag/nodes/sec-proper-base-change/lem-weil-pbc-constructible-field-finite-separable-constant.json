@@ -233,5 +233,23 @@
   "by": "L",
   "result": "accepted",
   "note": "Split reviewed: 7 steps (one nonempty stratum whose immersion is an isomorphism; residue field of a point of an etale cover is finite separable, 02GL(2) via the reviewed leaf; pi factors through U_i; restriction = inverse image along u_i, Lambda-linearly; composition of inverse images; inverse image of a constant sheaf is constant). Statement: the parenthetical proof sketch removed. Correct; no new nodes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ConstructibleFieldFiniteSeparableConstant",
+  "declaration": "AlgebraicGeometry.constructible_field_finite_separable_constant",
+  "file": "lean/Sheaf/AlgebraicGeometry/ConstructibleFieldFiniteSeparableConstant.lean",
+  "statement": "theorem constructible_field_finite_separable_constant (k : Type u) [Field k] (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] (G : Sheaf (Spec (CommRingCat.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ)) (hG : Scheme.IsConstructibleEtaleModuleSheaf G) : ∃ (K : Type u), ∃ (_ : Field K), ∃ (_ : Algebra k K), FiniteDimensional k K ∧ Algebra.IsSeparable k K ∧ ∃ (M : ModuleCat.{u + 1} Λ), Finite M ∧ Nonempty ((Etale.upperStar (ModuleCat.{u + 1} Λ) (Spec.map (CommRingCat.ofHom (algebraMap k K)))).obj G ≅ (constantSheaf (Spec (CommRingCat.of K)).smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj M)",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-cfs1527",
+  "group": "K1",
+  "result": "pass",
+  "note": "k Field Type u; Λ CommRing+Finite (u+1); G Sheaf smallEtale (ModuleCat Λ); hG = recorded Scheme.IsConstructibleEtaleModuleSheaf; ∃K Field+Algebra k K, FiniteDimensional ∧ Algebra.IsSeparable; ∃M ModuleCat Λ, Finite carrier; Etale.upperStar along Spec.map (algebraMap k K) ≅ constantSheaf.obj M; #check'd upperStar/constantSheaf/IsConstructibleEtaleModuleSheaf; compile clean"
  }
 }
