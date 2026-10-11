@@ -1,18 +1,17 @@
 # Work queue
 
-811 items; claim with `tools/claim.py next <group> [--stage N]`.
+810 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (811)
+## Stage 2: nodes to state (810)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
 | `def-pc-compactly-generated` | 1 | state |
 | `def-pc-field-tower` | 1 | state |
 | `def-pc-kflat-complex` | 1 | state |
-| `def-pc-representable-functor` | 1 | state |
 | `def-pur-sheaf-modules-hom-module` | 1 | state |
 | `def-pur-sheaf-tensor-product` | 1 | state |
 | `def-sbc-first-order-thickening` | 1 | state |
