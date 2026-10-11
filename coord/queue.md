@@ -1,8 +1,8 @@
 # Work queue
 
-859 items; claim with `tools/claim.py next <group> [--stage N]`.
+866 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (46)
+## Stage 1: nodes to split (52)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -11,12 +11,12 @@
 | `lem-pc-ringed-space-module-stalk-tensor` | 3013 | none |
 | `lem-pc-ring-pseudo-coherent-localization-glue` | 3016 | none |
 | `lem-pc-module-opcycles-tor-surjection` | 3018 | none |
+| `lem-pc-ring-pseudo-coherent-distinguished-triangle` | 3018 | none |
 | `lem-sc-module-extension-by-zero-stalk-maps` | 3018 | none |
 | `lem-pc-tor-independent-projective-complex-tensor` | 3022 | none |
 | `lem-sc-affine-koszul-hom-alternating-cech` | 3022 | none |
 | `lem-sc-qcoh-complex-alternating-cech-derived-sections` | 3022 | none |
 | `lem-sc-perfect-hypercohomology-gap` | 3023 | none |
-| `lem-pc-ring-pseudo-coherent-distinguished-triangle` | 3024 | none |
 | `lem-pc-genus-agrees-sc` | 4007 | rests_on_sorry |
 | `prop-av-tate-rank` | 4008 | rests_on_sorry |
 | `cor-pc-sigma-pic-iso` | 4009 | rests_on_sorry |
@@ -30,9 +30,7 @@
 | `lem-pc-affine-flat-module-local-criterion` | 5017 | none |
 | `lem-pc-derived-mayer-vietoris-functorial` | 5017 | none |
 | `lem-sp-ce-vertical-nullhomotopy` | 6008 | none |
-| `lem-sp-filtered-complex-associated-spectral-sequence-construction` | 6008 | none |
 | `pqf-lem-serre-criterion` | 6013 | none |
-| `lem-sc-perfect-degree-zero-fibre-criterion` | 6014 | none |
 | `lem-sc-perfect-finite-free-residue-model` | 6014 | none |
 | `lem-sc-picard-kunneth-qcoh` | 6014 | none |
 | `lem-sc-valuation-closed-fibre-section-vanishing` | 6014 | none |
@@ -40,20 +38,28 @@
 | `lem-sc-valuation-proper-coherent-sections` | 6014 | none |
 | `lem-sc-valuation-zero-section-relative-cartier` | 6014 | none |
 | `lem-sc-finite-free-complex-homology-upper-semicontinuous` | 6015 | none |
+| `lem-sc-finite-locally-free-residue-isomorphism` | 6015 | none |
+| `lem-sc-perfect-cut-complex-degree-zero` | 6015 | none |
 | `lem-sc-base-change-curve` | - | none |
 | `lem-sc-global-functions` | - | rests_on_sorry |
 | `lem-pc-coherent-property-devissage` | - | none |
 | `lem-sc-etale-torsor-h1-functoriality` | - | none |
 | `lem-sc-local-dvr-base-change` | - | none |
 | `lem-sc-pic-restriction-boundary` | - | none |
-| `lem-pur-kinjective-degreewise-existence` | - | none |
+| `lem-pur-kinjective-acyclic-quotient-complexes-bounded-size` | - | none |
+| `lem-pur-kinjective-characterize-K-injective` | - | none |
+| `lem-pur-kinjective-characterize-injective` | - | none |
+| `lem-pur-kinjective-functorial-homotopies` | - | none |
+| `lem-pur-kinjective-functorial-injective` | - | none |
+| `lem-pur-kinjective-set-iso-classes-bounded-size` | - | none |
+| `prop-pur-kinjective-objects-small` | - | none |
 | `lem-pur-left-derived-from-kflat-class` | - | none |
 | `lem-pc-finite-affine-fibre-sections` | - | none |
 | `lem-pc-finite-flat-pushforward-locally-free` | - | none |
 | `lem-wf-mixed-commutator-tangent` | - | none |
 | `lem-pur-site-restriction-module-adjunction-exact` | - | none |
 
-## Stage 2: nodes to state (813)
+## Stage 2: nodes to state (814)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -222,6 +228,7 @@
 | `lem-pod-equivalence-induces-module-objects` | 1 | state |
 | `lem-pod-lisse-tensor-and-scalar-extension` | 1 | state |
 | `lem-pqf-finite-spectrum-maximal-primes` | 1 | state |
+| `lem-pur-kinjective-degreewise-existence` | 1 | state |
 | `lem-sc-affine-cap-section-open-algebra` | 1 | state |
 | `lem-sc-affine-finite-module-free-locus` | 1 | state |
 | `lem-sc-affine-finite-projective-prime-membership` | 1 | state |
@@ -871,7 +878,7 @@
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 1713 nodes that wait for a statement dependency, 87 nodes that wait for stage 1.
+Not open yet: 1715 nodes that wait for a statement dependency, 93 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
