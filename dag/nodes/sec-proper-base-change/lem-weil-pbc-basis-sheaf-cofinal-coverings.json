@@ -173,5 +173,23 @@
   "item": "lem-weil-pbc-basis-sheaf-cofinal-coverings",
   "worker": "stage1",
   "summary": "Read Stacks Sheaves 009H: Definition 009J, Lemma 009K (lemma-cofinal-systems-coverings) with its proof, Lemma 009L (lemma-cofinal-systems-coverings-standard-case), whose proof is 009K with the overlap coverings the single member U_i cap U_j. Statement kept (it is 009L, direction (2)=>(1), with the stronger hypothesis that B is closed under all pairwise intersections, which makes the gluing condition with single overlaps the sheaf condition (**)). Proof written out in five elementary steps following 009K: refinement; uniqueness for every B-covering via the refining member of C(U); the compatible family t_j = s_alpha(j)|V_j (the 'kink' of 009K is a transitivity of restriction here); t|U_i = s_i via the B-covering (U_i cap V_j)_j of U_i and the uniqueness of step 2 for U_i (009K's 'left to the reader' written out); uniqueness. 009K is inlined, so no new node. Mathlib: three kinds of search added; the nearest is CategoryTheory.Presieve.isSheafFor_subsieve (IsSheafFor.lean:787), which needs the sheaf condition for all pullback coverings and so needs this node; no leaf. Source repository: no declaration on sheaves on a basis or cofinal coverings (the only IsBasis declaration is AlgebraicGeometry.isBasis_affineOpens_le_preimage, unrelated, reaches no sorry)."
+ },
+ "lean": {
+  "module": "Sheaf.Topology.BasisSheafCofinalCoverings",
+  "declaration": "TopologicalSpace.Opens.gluing_of_cofinal_coverings",
+  "file": "lean/Sheaf/Topology/BasisSheafCofinalCoverings.lean",
+  "statement": "theorem gluing_of_cofinal_coverings {X : Type u} [TopologicalSpace X] (B : Set (Opens X)) (hB : IsBasis B) (hcap : ∀ U V : B, U.val ⊓ V.val ∈ B) (F : Bᵒᵖ ⥤ Type v) (C : ∀ U : B, ∀ I : Type w, (I → {V : B // V ≤ U}) → Prop) : let meet : B → B → B := fun U V ↦ ⟨U.val ⊓ V.val, hcap U V⟩ let res : ∀ U V : B, V ≤ U → F.obj (op U) → F.obj (op V) := fun _ _ h ↦ F.map (homOfLE h).op (∀ (U : B) (I : Type w) (V : I → {W : B // W ≤ U}), (⨆ i, (V i).val.val) = U.val → ∃ (J : Type w) (W : J → {Z : B // Z ≤ U}), (⨆ j, (W j).val.val) = U.val ∧ C U J W ∧ ∃ α : J → I, ∀ j, (W j).val ≤ (V (α j)).val) → (∀ (U : B) (I : Type w) (V : I → {W : B // W ≤ U}), (⨆ i, (V i).val.val) = U.val → C U I V → ∀ s : ∀ i, F.obj (op (V i).val), (∀ i j, res (V i).val (meet (V i).val (V j).val) (inf_le_left (a := (V i).val.val) (b := (V j).val.val)) (s i) = res (V j).val (meet (V i).val (V j).val) (inf_le_right (a := (V i).val.val) (b := (V j).val.val)) (s j)) → ∃! t : F.obj (op U), ∀ i, res U (V i).val (V i).property t = s i) → ∀ (U : B) (I : Type w) (V : I → {W : B // W ≤ U}), (⨆ i, (V i).val.val) = U.val → ∀ s : ∀ i, F.obj (op (V i).val), (∀ i j, res (V i).val (meet (V i).val (V j).val) (inf_le_left (a := (V i).val.val) (b := (V j).val.val)) (s i) = res (V j).val (meet (V i).val (V j).val) (inf_le_right (a := (V i).val.val) (b := (V j).val.val)) (s j)) → ∃! t : F.obj (op U), ∀ i, res U (V i).val (V i).property t = s i",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-bsc1359",
+  "group": "G1",
+  "result": "pass",
+  "note": "X/[TopologicalSpace]; B : Set (Opens X) with Opens.IsBasis (#check); hcap pairwise inf in B; F : Bᵒᵖ ⥤ Type v = presheaf of sets on B (res = F.map homOfLE.op); coverings I:Type w, V : I → {W // W ≤ U}, iSup = U incl. empty I; C predicate guarded by covering; cofinality with α : J → I, W j ≤ V (α j); gluing ∃! with compatibility on meet via inf_le_left/right; conclusion for all coverings; no landed basis-sheaf Lean notion (def-weil-pbc-basis-presheaf-stalk is status mathlib, no lean record) so no private copy"
  }
 }
