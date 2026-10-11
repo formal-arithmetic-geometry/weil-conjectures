@@ -425,6 +425,87 @@ theorem isFinite_flat_of_hom_projectiveLine_of_functionField [IsIntegral X]
     rfl
   exact key _ Scheme.fromSpecStalk_closedPoint.symm
 
+omit [SmoothOfRelativeDimension 1 (X ↘ Spec (.of k))] [IsProper (X ↘ Spec (.of k))] in
+/-- The rational function `t` lies in the image of the stalk map of `π_t` at the generic point
+of `X`: it is the pullback of the affine coordinate `x₁ / x₀` of `ℙ¹_k`. -/
+theorem mem_range_stalkMap_genericPoint_of_functionField [IsIntegral X] (t : X.functionField)
+    (π : X ⟶ ProjectiveLine (Spec (.of k)))
+    (hπ : ∀ hs, X.fromSpecFunctionField ≫ π = ProjectiveSpace.homOfSections
+      (X.fromSpecFunctionField ≫ X ↘ Spec (.of k)) (functionFieldCoordinates t) hs) :
+    t ∈ Set.range (π.stalkMap (genericPoint X)) := by
+  have hg₀ : X.fromSpecFunctionField ≫ X ↘ Spec (.of k) =
+      Spec.map (CommRingCat.ofHom (functionFieldRingHom k X)) := by
+    refine ext_of_isAffine ?_
+    rw [← cancel_epi (Scheme.ΓSpecIso _).inv, ← Scheme.ΓSpecIso_inv_naturality]
+    ext a
+    simp only [Scheme.Hom.comp_appTop, Scheme.fromSpecStalk_appTop, functionFieldRingHom,
+      globalSectionsRingHom]
+    rfl
+  have hs : Ideal.span (Set.range (functionFieldCoordinates (X := X) t)) = ⊤ :=
+    Ideal.eq_top_of_isUnit_mem _ (Ideal.subset_span ⟨⟨0⟩, rfl⟩) (by simp)
+  let g := X.fromSpecFunctionField
+  have hrange : (Scheme.descResidueField (Scheme.stalkClosedPointTo (g ≫ π))).hom.fieldRange =
+      Subfield.closure (Set.range (functionFieldRingHom k X) ∪ {t}) := by
+    have e := hπ hs
+    rw [hg₀] at e
+    have key' : ∀ h : Spec X.functionField ⟶ ProjectiveLine (Spec (.of k)),
+        h = ProjectiveSpace.homOfSections
+          (Spec.map (CommRingCat.ofHom (functionFieldRingHom k X)))
+          (fun i : ULift.{u} (Fin 2) ↦ (Scheme.ΓSpecIso (.of X.functionField)).inv
+            (![1, t] i.down)) hs →
+          (Scheme.descResidueField (Scheme.stalkClosedPointTo h)).hom.fieldRange =
+            Subfield.closure (Set.range (functionFieldRingHom k X) ∪ {t}) := by
+      rintro h rfl
+      exact ProjectiveLine.fieldRange_descResidueField_homOfSections _ t hs
+    exact key' _ e
+  have htmem : t ∈ (Scheme.descResidueField (Scheme.stalkClosedPointTo (g ≫ π))).hom.fieldRange :=
+    hrange ▸ Subfield.subset_closure (Or.inr rfl)
+  obtain ⟨r, hr⟩ := RingHom.mem_fieldRange.mp htmem
+  obtain ⟨s, rfl⟩ := (ProjectiveLine (Spec (.of k))).residue_surjective _ r
+  rw [← CommRingCat.comp_apply, Scheme.residue_descResidueField, Scheme.stalkClosedPointTo_comp,
+    CommRingCat.comp_apply, Scheme.stalkClosedPointTo_fromSpecStalk] at hr
+  have key (x : X) (h : x = genericPoint X)
+      (s : (ProjectiveLine (Spec (.of k))).presheaf.stalk (π x))
+      (hi : Inseparable x (genericPoint X)) :
+      (X.presheaf.stalkCongr hi).hom (π.stalkMap x s) ∈
+        Set.range (π.stalkMap (genericPoint X)) := by
+    subst h
+    exact ⟨s, by simp⟩
+  exact hr ▸ key _ Scheme.fromSpecStalk_closedPoint s _
+
+/-- **Separating functions give generically unramified morphisms.** Let `X` be a proper smooth
+integral curve over `k`, `t ∈ k(X)` with `dt ≠ 0` in `Ω[k(X)⁄k]`, and `π_t : X ⟶ ℙ¹_k` the
+morphism with `π_t^* (x₁ / x₀) = t`. Then the stalk map of `π_t` at the generic point, the field
+extension `k(t) ⊆ k(X)`, is formally unramified: `Ω[k(X)⁄k]` is spanned by `dt`
+(`finrank_kaehlerDifferential_functionField`), and `t` comes from `k(t)`. -/
+theorem formallyUnramified_stalkMap_genericPoint_of_functionField [IsIntegral X]
+    (t : X.functionField)
+    (ht : letI := ((X ↘ Spec (.of k)).appTop ≫
+        X.presheaf.germ ⊤ (genericPoint X) trivial).hom.toAlgebra
+      KaehlerDifferential.D Γ(Spec (.of k), ⊤) X.functionField t ≠ 0)
+    (π : X ⟶ ProjectiveLine (Spec (.of k))) [π.IsOver (Spec (.of k))]
+    (hπ : ∀ hs, X.fromSpecFunctionField ≫ π = ProjectiveSpace.homOfSections
+      (X.fromSpecFunctionField ≫ X ↘ Spec (.of k)) (functionFieldCoordinates t) hs) :
+    (π.stalkMap (genericPoint X)).hom.FormallyUnramified := by
+  let P := ProjectiveLine (Spec (.of k))
+  let := ((X ↘ Spec (.of k)).appTop ≫
+    X.presheaf.germ ⊤ (genericPoint X) trivial).hom.toAlgebra
+  let := ((P ↘ Spec (.of k)).appTop ≫
+    P.presheaf.germ ⊤ (π (genericPoint X)) trivial).hom.toAlgebra
+  let := (π.stalkMap (genericPoint X)).hom.toAlgebra
+  have : IsScalarTower Γ(Spec (.of k), ⊤) (P.presheaf.stalk (π (genericPoint X)))
+      X.functionField := by
+    refine IsScalarTower.of_algebraMap_eq' ?_
+    change ((X ↘ Spec (.of k)).appTop ≫ X.presheaf.germ ⊤ _ trivial).hom =
+      (((P ↘ Spec (.of k)).appTop ≫ P.presheaf.germ ⊤ _ trivial) ≫ π.stalkMap _).hom
+    congr 1
+    rw [Category.assoc, Scheme.Hom.germ_stalkMap, ← Category.assoc]
+    rw [← HomIsOver.comp_over (f := π) (S := Spec (.of k))]
+    rfl
+  exact Algebra.FormallyUnramified.of_finrank_kaehlerDifferential_eq_one
+    (finrank_kaehlerDifferential_functionField (X ↘ Spec (.of k))) ht
+    (mem_range_stalkMap_genericPoint_of_functionField t π hπ)
+
 /-- **Finite flat morphisms to the projective line.** Every smooth proper curve `X` over `k` has
 a finite flat morphism `X ⟶ ℙ¹_k` over `k`, unramified at the generic points of `X`. Each
 connected component of `X` is integral
