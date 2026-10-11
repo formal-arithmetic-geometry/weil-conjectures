@@ -4637,3 +4637,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 12:34 L: merged deliver/C1/lem-pc-affine-derived-base-change-comparison-map (stage 2; reviewer PASS; first push; Sheaf.Algebra.Homology.AffineDerivedBaseChangeComparison RingTensorCohomology.exists_affineDerivedBaseChangeComparison; statement corrected (1 citers))
 - 12:34 L: merged deliver/K1/def-pc-derived-pullback (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.DerivedPullback AlgebraicGeometry.derivedPullback)
 - 12:34 L: merged deliver/H1/lem-weil-pbc-coherent-stalk-map-extends (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.CoherentStalkMapExtends AlgebraicGeometry.exists_open_hom_of_coherent_stalk_map)
+- 12:35 L: merged deliver/E1/lem-pc-tor-amplitude-qcoh-test (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.TorAmplitudeQCohTest AlgebraicGeometry.torAmplitude_of_quasiCoherent_tests; new nodes: def-pc-derived-tensor-cohomology-vanishes)

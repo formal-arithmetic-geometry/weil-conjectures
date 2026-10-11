@@ -1,0 +1,145 @@
+{
+ "id": "def-pc-derived-tensor-cohomology-vanishes",
+ "kind": "definition",
+ "title": "Vanishing of derived tensor cohomology with an O_X-module",
+ "status": "split",
+ "statement": "Let X be a scheme [def-pc-scheme], E an object of D(\\mathcal O_X) [def-pc-derived-category], F a sheaf of \\mathcal O_X-modules, and i an integer. The predicate H^i(E\\otimes^{\\mathbf L}_{\\mathcal O_X}F)=0 means that there exists a K-flat complex P [def-pc-kflat-complex] of \\mathcal O_X-modules whose image in D(\\mathcal O_X) is isomorphic to E, such that H^i(\\operatorname{Tot}(P\\otimes F[0]))=0. Here F[0] is F placed in degree zero and the total tensor [def-pc-tensor-complex-sheaves] has term \\bigoplus_{p+q=n}P^p\\otimes F[0]^q and differential d_P\\otimes1+(-1)^p1\\otimes d_{F[0]}; K-flat replacement and independence of replacement make this precisely derived tensor cohomology vanishing.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-kflat-complex",
+  "def-pc-tensor-complex-sheaves"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YS and 06YU, K-flat replacement and definition of derived tensor; Tag 08EA, cohomology vanishing test"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "vanishing cohomology derived tensor sheaves of modules K-flat",
+   "results": {
+    "available": false,
+    "hits": 0,
+    "note": "service unavailable: Internal Server Error",
+    "top": []
+   },
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.mapBifunctor",
+   "results": {
+    "available": true,
+    "hits": 12,
+    "note": "",
+    "top": [
+     "CochainComplex.mapBifunctor",
+     "CochainComplex.ιMapBifunctor",
+     "CochainComplex.mapBifunctorShift₁Iso",
+     "CochainComplex.mapBifunctorShift₂Iso",
+     "CochainComplex.ι_mapBifunctorShift₁Iso_hom_f",
+     "CochainComplex.ι_mapBifunctorShift₁Iso_hom_f_assoc",
+     "CategoryTheory.Functor.commShiftIso_map₂CochainComplex_hom_app",
+     "CategoryTheory.Functor.commShiftIso_map₂CochainComplex_inv_app"
+    ]
+   },
+   "date": "2026-10-11",
+   "verdict": "no exact match; reuse total tensor complex"
+  },
+  {
+   "tool": "grep",
+   "query": "derivedTensor|tensor.*[Vv]anish|[Vv]anish.*[Tt]ensor",
+   "results": {
+    "available": true,
+    "hits": 11,
+    "note": "",
+    "top": [
+     "Mathlib/LinearAlgebra/TensorProduct/Vanishing.lean",
+     "Mathlib/LinearAlgebra/TensorProduct/Vanishing.lean",
+     "Mathlib/LinearAlgebra/TensorProduct/Vanishing.lean",
+     "Mathlib/LinearAlgebra/TensorProduct/Vanishing.lean",
+     "Mathlib/LinearAlgebra/TensorProduct/Vanishing.lean",
+     "Mathlib/Geometry/Manifold/VectorBundle/CovariantDerivative/Metric.lean",
+     "Mathlib/RingTheory/Flat/EquationalCriterion.lean",
+     "Mathlib/RingTheory/Flat/EquationalCriterion.lean"
+    ]
+   },
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg schemeDerivedTensor|derivedTensor.*Vanish|Vanish.*derivedTensor in WeilConjectures and lean/Sheaf; rg -l derived tensor.*vanish|vanish.*derived tensor dag/nodes; blueprint_refs.py search tensor cohomology",
+   "results": "No scheme O_X-derived tensor vanishing predicate. Etale/proetale coefficient tensor declarations only; no defining DAG node; blueprint search has 0 matches.",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-pc-tor-amplitude-qcoh-test",
+  "date": "2026-10-11",
+  "group": "E1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Tag 08EV proof invokes Tag 08EA to test derived tensor cohomology on quasi-coherent modules",
+   "via": [
+    "lem-pc-tor-amplitude-qcoh-test",
+    "lem-pc-proper-direct-image-finite-tor",
+    "lem-pc-bounded-coherent-finite-tor-proper-pushforward-perfect",
+    "lem-pc-proper-perfect-direct-image-perfect",
+    "lem-sc-smooth-proper-tensor-direct-sums",
+    "lem-sc-smooth-proper-diagonal-tensor-formula",
+    "lem-sc-smooth-proper-relative-dualizing-general",
+    "lem-sc-smooth-proper-curve-dualizing",
+    "lem-sc-finite-duality-trace"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.DerivedTensorCohomologyVanishes",
+  "declaration": "AlgebraicGeometry.schemeDerivedTensorCohomologyVanishes",
+  "file": "lean/Sheaf/AlgebraicGeometry/DerivedTensorCohomologyVanishes.lean",
+  "statement": "def schemeDerivedTensorCohomologyVanishes (X : Scheme.{u}) [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] (E : schemeDerivedCategory X) (F : SheafOfModules.{u} (moduleRings X.toRingedSpace)) (i : ℤ) : Prop",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-taq1258",
+  "group": "E1",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-taq1258",
+  "group": "E1",
+  "result": "pass",
+  "note": "08EA (2)=>(1): X Scheme.{uT} + [QuasiSeparatedSpace X] (mathlib_match of def-weil-quasi-separated-morphism); E : schemeDerivedCategory X on the moduleRings carrier + schemeDerivedQCohProperty (D_QCoh); a b : Z, hab; h over F.IsQuasicoherent, i<a or b<i; conclusion all O_X-modules G, same degrees, no qcoh premise. New def-pc-derived-tensor-cohomology-vanishes: exists K-flat P (IsKFlat R:=X.sheaf), Q.obj P iso E, IsZero H^i(Tot(P (x) F[0])) with SheafOfModules.monoidalCategory; exists=forall by 06YS/06YT, not hollow; source torAmplitudeIn not instantiable on SheafOfModules (MonoidalPreadditive/MonoidalClosed fail to synthesize, no HasDerivedMonoidalCategory), no O_X derived tensor in DAG/lean/Sheaf. No let in the statement, universes shared."
+ }
+}

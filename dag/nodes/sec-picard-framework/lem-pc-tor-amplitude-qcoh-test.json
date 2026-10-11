@@ -22,7 +22,8 @@
  "stmt_deps": [
   "def-pc-scheme",
   "def-weil-quasi-separated-morphism",
-  "def-pc-derived-category"
+  "def-pc-derived-category",
+  "def-pc-derived-tensor-cohomology-vanishes"
  ],
  "proof": [
   {
@@ -146,5 +147,23 @@
   "group": "K1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-taq2722 (reviewer sub-agent of L); spot-checked: Statement matches Tag 08EA (2)=>(1) and exactly the use in lem-pc-proper-direct-image-finite-tor step 4 (S Noetherian => quasi-separated, Rf_*E in D_QCoh); quasi-separatedness used in step 1 only (j qc+separated for pqf-lem-pushforward-qcoh); no pc/O_X tor-amplitude definition node exists (only etale/proetale defs def-kun-tor-amplitude, def-weil-proetale-tor-amplitude), so spelled-out definition accepted; no existing node states Tag 08E9, new node not a duplicate (real lemma, needs bounded flat replacement), not Mathlib. Tool uses pqf-lem-pushforward-qcoh, lem-pc-affine-qcoh-derived-equivalence, lem-pc-affine-derived-pullback-tensor-tilde accepted as generic. FIX more, RETURN less: (1) C1 steps 1 and 3: restriction of derived tensor to an open was uncited; now cites lem-pc-affine-derived-pullback-tensor-tilde part (1). (2) C1 step 2: passing from vanishing of H^i(E|_U tensor^L N~) to H^i(M tensor_A^L N)=0 needs the tilde-tensor comparison, uncited; now cites the same node part (3) plus exactness/faithfulness of tilde. (3) B3 new node lem-pc-affine-tor-amplitude-criterion: 'E has Tor amplitude' was undefined; now spelled out (vanishing against every O_X-module), E placed in D_QCoh. Edge cases: E=0, a=b, X affine (U=X).; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.TorAmplitudeQCohTest",
+  "declaration": "AlgebraicGeometry.torAmplitude_of_quasiCoherent_tests",
+  "file": "lean/Sheaf/AlgebraicGeometry/TorAmplitudeQCohTest.lean",
+  "statement": "theorem torAmplitude_of_quasiCoherent_tests (X : Scheme.{uT}) [QuasiSeparatedSpace X] [HasDerivedCategory.{wT} (SheafOfModules.{uT} (moduleRings X.toRingedSpace))] (E : schemeDerivedCategory X) (hE : schemeDerivedQCohProperty X E) (a b : ℤ) (hab : a ≤ b) (h : ∀ F : SheafOfModules.{uT} (moduleRings X.toRingedSpace), F.IsQuasicoherent → ∀ i : ℤ, i < a ∨ b < i → schemeDerivedTensorCohomologyVanishes X E F i) : ∀ G : SheafOfModules.{uT} (moduleRings X.toRingedSpace), ∀ i : ℤ, i < a ∨ b < i → schemeDerivedTensorCohomologyVanishes X E G i",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-taq1258",
+  "group": "E1",
+  "result": "pass",
+  "note": "08EA (2)=>(1): X Scheme.{uT} + [QuasiSeparatedSpace X] (mathlib_match of def-weil-quasi-separated-morphism); E : schemeDerivedCategory X on the moduleRings carrier + schemeDerivedQCohProperty (D_QCoh); a b : Z, hab; h over F.IsQuasicoherent, i<a or b<i; conclusion all O_X-modules G, same degrees, no qcoh premise. New def-pc-derived-tensor-cohomology-vanishes: exists K-flat P (IsKFlat R:=X.sheaf), Q.obj P iso E, IsZero H^i(Tot(P (x) F[0])) with SheafOfModules.monoidalCategory; exists=forall by 06YS/06YT, not hollow; source torAmplitudeIn not instantiable on SheafOfModules (MonoidalPreadditive/MonoidalClosed fail to synthesize, no HasDerivedMonoidalCategory), no O_X derived tensor in DAG/lean/Sheaf. No let in the statement, universes shared."
  }
 }
